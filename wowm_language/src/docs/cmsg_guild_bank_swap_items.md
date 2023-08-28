@@ -54,7 +54,7 @@ CMSG have a header of 6 bytes.
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x06 | 8 / Little | [Guid](../spec/packed-guid.md) | bank |  |  |
+| 0x06 | 8 / Little | [Guid](../types/packed-guid.md) | bank |  |  |
 | 0x0E | 1 / - | [BankSwapSource](bankswapsource.md) | source |  |  |
 
 If source is equal to `BANK`:
@@ -145,7 +145,7 @@ CMSG have a header of 6 bytes.
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x06 | 8 / Little | [Guid](../spec/packed-guid.md) | bank |  |  |
+| 0x06 | 8 / Little | [Guid](../types/packed-guid.md) | bank |  |  |
 | 0x0E | 1 / - | [BankSwapSource](bankswapsource.md) | source |  |  |
 
 If source is equal to `BANK`:

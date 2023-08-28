@@ -28,8 +28,8 @@ SMSG have a header of 4 bytes.
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | - / - | [PackedGuid](../spec/packed-guid.md) | victim |  |  |
-| - | - / - | [PackedGuid](../spec/packed-guid.md) | caster |  |  |
+| 0x04 | - / - | [PackedGuid](../types/packed-guid.md) | victim |  |  |
+| - | - / - | [PackedGuid](../types/packed-guid.md) | caster |  |  |
 | - | 4 / Little | u32 | amount_of_spells |  |  |
 | - | ? / - | u32[amount_of_spells] | spells |  |  |
 
@@ -63,8 +63,8 @@ SMSG have a header of 4 bytes.
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | - / - | [PackedGuid](../spec/packed-guid.md) | victim |  |  |
-| - | - / - | [PackedGuid](../spec/packed-guid.md) | caster |  |  |
+| - | - / - | [PackedGuid](../types/packed-guid.md) | victim |  |  |
+| - | - / - | [PackedGuid](../types/packed-guid.md) | caster |  |  |
 | - | 4 / Little | u32 | dispell_spell |  |  |
 | - | 1 / - | u8 | unknown |  | mangosone: unused |
 | - | 4 / Little | u32 | amount_of_spells |  |  |

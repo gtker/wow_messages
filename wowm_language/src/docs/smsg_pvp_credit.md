@@ -28,6 +28,6 @@ SMSG have a header of 4 bytes.
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | 0x04 | 4 / Little | u32 | honor_points |  |  |
-| 0x08 | 8 / Little | [Guid](../spec/packed-guid.md) | victim |  |  |
+| 0x08 | 8 / Little | [Guid](../types/packed-guid.md) | victim |  |  |
 | 0x10 | 4 / - | [PvpRank](pvprank.md) | rank |  |  |
 

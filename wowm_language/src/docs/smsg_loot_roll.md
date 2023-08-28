@@ -32,9 +32,9 @@ SMSG have a header of 4 bytes.
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | 8 / Little | [Guid](../spec/packed-guid.md) | creature |  |  |
+| 0x04 | 8 / Little | [Guid](../types/packed-guid.md) | creature |  |  |
 | 0x0C | 4 / Little | u32 | loot_slot |  |  |
-| 0x10 | 8 / Little | [Guid](../spec/packed-guid.md) | player |  |  |
+| 0x10 | 8 / Little | [Guid](../types/packed-guid.md) | player |  |  |
 | 0x18 | 4 / Little | u32 | item |  |  |
 | 0x1C | 4 / Little | u32 | item_random_suffix |  | vmangos/mangoszero: not used ? |
 | 0x20 | 4 / Little | u32 | item_random_property_id |  |  |
@@ -74,9 +74,9 @@ SMSG have a header of 4 bytes.
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | 8 / Little | [Guid](../spec/packed-guid.md) | creature |  |  |
+| 0x04 | 8 / Little | [Guid](../types/packed-guid.md) | creature |  |  |
 | 0x0C | 4 / Little | u32 | loot_slot |  |  |
-| 0x10 | 8 / Little | [Guid](../spec/packed-guid.md) | player |  |  |
+| 0x10 | 8 / Little | [Guid](../types/packed-guid.md) | player |  |  |
 | 0x18 | 4 / Little | u32 | item |  |  |
 | 0x1C | 4 / Little | u32 | item_random_suffix |  | vmangos/mangoszero: not used ? |
 | 0x20 | 4 / Little | u32 | item_random_property_id |  |  |

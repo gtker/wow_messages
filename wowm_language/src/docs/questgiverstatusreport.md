@@ -15,7 +15,7 @@ struct QuestGiverStatusReport {
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x00 | 8 / Little | [Guid](../spec/packed-guid.md) | npc |  |  |
+| 0x00 | 8 / Little | [Guid](../types/packed-guid.md) | npc |  |  |
 | 0x08 | 1 / - | [QuestGiverStatus](questgiverstatus.md) | dialog_status |  |  |
 
 
@@ -37,7 +37,7 @@ struct QuestGiverStatusReport {
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x00 | 8 / Little | [Guid](../spec/packed-guid.md) | npc |  |  |
+| 0x00 | 8 / Little | [Guid](../types/packed-guid.md) | npc |  |  |
 | 0x08 | 1 / - | [QuestGiverStatus](questgiverstatus.md) | dialog_status |  |  |
 
 

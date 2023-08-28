@@ -25,7 +25,7 @@ struct GuildMember {
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x00 | 8 / Little | [Guid](../spec/packed-guid.md) | guid |  |  |
+| 0x00 | 8 / Little | [Guid](../types/packed-guid.md) | guid |  |  |
 | 0x08 | 1 / - | [GuildMemberStatus](guildmemberstatus.md) | status |  |  |
 | 0x09 | - / - | CString | name |  |  |
 | - | 4 / Little | u32 | rank |  |  |
@@ -71,7 +71,7 @@ struct GuildMember {
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x00 | 8 / Little | [Guid](../spec/packed-guid.md) | guid |  |  |
+| 0x00 | 8 / Little | [Guid](../types/packed-guid.md) | guid |  |  |
 | 0x08 | 1 / - | [GuildMemberStatus](guildmemberstatus.md) | status |  |  |
 | 0x09 | - / - | CString | name |  |  |
 | - | 4 / Little | u32 | rank |  |  |
@@ -119,7 +119,7 @@ struct GuildMember {
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x00 | 8 / Little | [Guid](../spec/packed-guid.md) | guid |  |  |
+| 0x00 | 8 / Little | [Guid](../types/packed-guid.md) | guid |  |  |
 | 0x08 | 4 / Little | u32 | unknown |  | arcemu: high guid |
 | 0x0C | 1 / - | [GuildMemberStatus](guildmemberstatus.md) | status |  |  |
 | 0x0D | - / - | CString | name |  |  |

@@ -29,7 +29,7 @@ SMSG have a header of 4 bytes.
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | 0x04 | 1 / - | u8 | slot |  |  |
-| 0x05 | 8 / Little | [Guid](../spec/packed-guid.md) | totem |  |  |
+| 0x05 | 8 / Little | [Guid](../types/packed-guid.md) | totem |  |  |
 | 0x0D | 4 / Little | u32 | duration |  |  |
 | 0x11 | 4 / Little | u32 | spell |  |  |
 
@@ -62,7 +62,7 @@ SMSG have a header of 4 bytes.
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | 0x04 | 1 / - | u8 | slot |  |  |
-| 0x05 | 8 / Little | [Guid](../spec/packed-guid.md) | totem |  |  |
+| 0x05 | 8 / Little | [Guid](../types/packed-guid.md) | totem |  |  |
 | 0x0D | 4 / Little | u32 | duration |  |  |
 | 0x11 | 4 / Little | u32 | spell |  |  |
 

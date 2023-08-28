@@ -28,6 +28,6 @@ SMSG have a header of 4 bytes.
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | 0x04 | 1 / - | Bool | show_alert |  |  |
-| 0x05 | 8 / Little | [Guid](../spec/packed-guid.md) | event_id |  |  |
+| 0x05 | 8 / Little | [Guid](../types/packed-guid.md) | event_id |  |  |
 | 0x0D | 4 / Little | DateTime | event_time |  |  |
 

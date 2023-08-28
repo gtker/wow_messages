@@ -31,6 +31,6 @@ Optionally the following fields can be present. This can only be detected by loo
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | 8 / Little | [Guid](../spec/packed-guid.md) | guid |  |  |
+| - | 8 / Little | [Guid](../types/packed-guid.md) | guid |  |  |
 | - | 1 / - | u8 | state |  |  |
 

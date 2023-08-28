@@ -26,6 +26,6 @@ SMSG have a header of 4 bytes.
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | - / - | [PackedGuid](../spec/packed-guid.md) | target |  |  |
+| - | - / - | [PackedGuid](../types/packed-guid.md) | target |  |  |
 | - | 4 / Little | u32 | vehicle_id |  |  |
 

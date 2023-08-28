@@ -30,7 +30,7 @@ SMSG have a header of 4 bytes.
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | - / - | [PackedGuid](../spec/packed-guid.md) | guid |  |  |
+| - | - / - | [PackedGuid](../types/packed-guid.md) | guid |  |  |
 | - | 4 / Little | u32 | movement_counter |  | mangoszero: Sequence<br/>mangoszero sets to 0 |
 | - | 4 / Little | f32 | v_cos |  | cmangos/mangoszero/vmangos: x direction |
 | - | 4 / Little | f32 | v_sin |  | cmangos/mangoszero/vmangos: y direction |

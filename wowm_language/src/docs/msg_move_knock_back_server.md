@@ -30,7 +30,7 @@ SMSG have a header of 4 bytes.
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | - / - | [PackedGuid](../spec/packed-guid.md) | player |  |  |
+| 0x04 | - / - | [PackedGuid](../types/packed-guid.md) | player |  |  |
 | - | - / - | [MovementInfo](movementinfo.md) | info |  |  |
 | - | 4 / Little | f32 | sin_angle |  |  |
 | - | 4 / Little | f32 | cos_angle |  |  |
@@ -67,7 +67,7 @@ SMSG have a header of 4 bytes.
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | - / - | [PackedGuid](../spec/packed-guid.md) | player |  |  |
+| - | - / - | [PackedGuid](../types/packed-guid.md) | player |  |  |
 | - | - / - | [MovementInfo](movementinfo.md) | info |  |  |
 | - | 4 / Little | f32 | sin_angle |  |  |
 | - | 4 / Little | f32 | cos_angle |  |  |

@@ -37,12 +37,12 @@ SMSG have a header of 4 bytes.
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | - / - | [PackedGuid](../spec/packed-guid.md) | cast_item |  | cmangos/vmangos/mangoszero: if cast item is used, set this to guid of cast item, otherwise set it to same as caster. |
-| - | - / - | [PackedGuid](../spec/packed-guid.md) | caster |  |  |
+| 0x04 | - / - | [PackedGuid](../types/packed-guid.md) | cast_item |  | cmangos/vmangos/mangoszero: if cast item is used, set this to guid of cast item, otherwise set it to same as caster. |
+| - | - / - | [PackedGuid](../types/packed-guid.md) | caster |  |  |
 | - | 4 / Little | u32 | spell |  |  |
 | - | 2 / - | [CastFlags](castflags.md) | flags |  |  |
 | - | 1 / - | u8 | amount_of_hits |  |  |
-| - | ? / - | [Guid](../spec/packed-guid.md)[amount_of_hits] | hits |  |  |
+| - | ? / - | [Guid](../types/packed-guid.md)[amount_of_hits] | hits |  |  |
 | - | 1 / - | u8 | amount_of_misses |  |  |
 | - | ? / - | [SpellMiss](spellmiss.md)[amount_of_misses] | misses |  |  |
 | - | - / - | [SpellCastTargets](spellcasttargets.md) | targets |  |  |
@@ -92,13 +92,13 @@ SMSG have a header of 4 bytes.
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | - / - | [PackedGuid](../spec/packed-guid.md) | cast_item |  | cmangos/vmangos/mangoszero: if cast item is used, set this to guid of cast item, otherwise set it to same as caster. |
-| - | - / - | [PackedGuid](../spec/packed-guid.md) | caster |  |  |
+| 0x04 | - / - | [PackedGuid](../types/packed-guid.md) | cast_item |  | cmangos/vmangos/mangoszero: if cast item is used, set this to guid of cast item, otherwise set it to same as caster. |
+| - | - / - | [PackedGuid](../types/packed-guid.md) | caster |  |  |
 | - | 4 / Little | u32 | spell |  |  |
 | - | 2 / - | [CastFlags](castflags.md) | flags |  |  |
 | - | 4 / Little | u32 | timestamp |  |  |
 | - | 1 / - | u8 | amount_of_hits |  |  |
-| - | ? / - | [Guid](../spec/packed-guid.md)[amount_of_hits] | hits |  |  |
+| - | ? / - | [Guid](../types/packed-guid.md)[amount_of_hits] | hits |  |  |
 | - | 1 / - | u8 | amount_of_misses |  |  |
 | - | ? / - | [SpellMiss](spellmiss.md)[amount_of_misses] | misses |  |  |
 | - | - / - | [SpellCastTargets](spellcasttargets.md) | targets |  |  |
@@ -164,8 +164,8 @@ SMSG have a header of 4 bytes.
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | - / - | [PackedGuid](../spec/packed-guid.md) | cast_item |  | cmangos/vmangos/mangoszero: if cast item is used, set this to guid of cast item, otherwise set it to same as caster. |
-| - | - / - | [PackedGuid](../spec/packed-guid.md) | caster |  |  |
+| - | - / - | [PackedGuid](../types/packed-guid.md) | cast_item |  | cmangos/vmangos/mangoszero: if cast item is used, set this to guid of cast item, otherwise set it to same as caster. |
+| - | - / - | [PackedGuid](../types/packed-guid.md) | caster |  |  |
 | - | 1 / - | u8 | extra_casts |  |  |
 | - | 4 / Little | u32 | spell |  |  |
 | - | 4 / - | [GameobjectCastFlags](gameobjectcastflags.md) | flags |  |  |

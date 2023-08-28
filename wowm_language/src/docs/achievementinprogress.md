@@ -23,8 +23,8 @@ struct AchievementInProgress {
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | 0x00 | 4 / Little | u32 | achievement |  |  |
-| 0x04 | - / - | [PackedGuid](../spec/packed-guid.md) | counter |  |  |
-| - | - / - | [PackedGuid](../spec/packed-guid.md) | player |  |  |
+| 0x04 | - / - | [PackedGuid](../types/packed-guid.md) | counter |  |  |
+| - | - / - | [PackedGuid](../types/packed-guid.md) | player |  |  |
 | - | 4 / Little | Bool32 | timed_criteria_failed |  |  |
 | - | 4 / Little | DateTime | progress_date |  |  |
 | - | 4 / Little | u32 | time_since_progress |  |  |

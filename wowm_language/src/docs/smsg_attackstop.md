@@ -27,8 +27,8 @@ SMSG have a header of 4 bytes.
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | 8 / Little | [Guid](../spec/packed-guid.md) | player |  |  |
-| 0x0C | 8 / Little | [Guid](../spec/packed-guid.md) | enemy |  |  |
+| 0x04 | 8 / Little | [Guid](../types/packed-guid.md) | player |  |  |
+| 0x0C | 8 / Little | [Guid](../types/packed-guid.md) | enemy |  |  |
 | 0x14 | 4 / Little | u32 | unknown1 |  | vmangos: set to 0 with comment: unk, can be 1 also |
 
 ## Client Version 1.8, Client Version 1.9, Client Version 1.10, Client Version 1.11, Client Version 1.12, Client Version 2, Client Version 3
@@ -58,7 +58,7 @@ SMSG have a header of 4 bytes.
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | - / - | [PackedGuid](../spec/packed-guid.md) | player |  |  |
-| - | - / - | [PackedGuid](../spec/packed-guid.md) | enemy |  |  |
+| - | - / - | [PackedGuid](../types/packed-guid.md) | player |  |  |
+| - | - / - | [PackedGuid](../types/packed-guid.md) | enemy |  |  |
 | - | 4 / Little | u32 | unknown1 |  | cmangos/vmangos/mangoszero/arcemu/azerothcore/mangostwo: set to 0 with comment: unk, can be 1 also |
 

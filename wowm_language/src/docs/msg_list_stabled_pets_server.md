@@ -28,7 +28,7 @@ SMSG have a header of 4 bytes.
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | 8 / Little | [Guid](../spec/packed-guid.md) | npc |  |  |
+| - | 8 / Little | [Guid](../types/packed-guid.md) | npc |  |  |
 | - | 1 / - | u8 | amount_of_pets |  |  |
 | - | 1 / - | u8 | stable_slots |  |  |
 | - | ? / - | [StabledPet](stabledpet.md)[amount_of_pets] | pets |  |  |

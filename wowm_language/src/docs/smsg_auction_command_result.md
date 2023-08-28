@@ -76,7 +76,7 @@ Else If result is equal to `ERR_HIGHER_BID`:
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x15 | 8 / Little | [Guid](../spec/packed-guid.md) | higher_bidder |  |  |
+| 0x15 | 8 / Little | [Guid](../types/packed-guid.md) | higher_bidder |  |  |
 | 0x1D | 4 / Little | u32 | new_bid |  |  |
 | 0x21 | 4 / Little | u32 | auction_outbid2 |  |  |
 
@@ -93,7 +93,7 @@ Else If result2 is equal to `ERR_HIGHER_BID`:
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x2A | 8 / Little | [Guid](../spec/packed-guid.md) | higher_bidder2 |  |  |
+| 0x2A | 8 / Little | [Guid](../types/packed-guid.md) | higher_bidder2 |  |  |
 | 0x32 | 4 / Little | u32 | new_bid2 |  |  |
 | 0x36 | 4 / Little | u32 | auction_outbid3 |  |  |
 
@@ -173,7 +173,7 @@ Else If result is equal to `ERR_HIGHER_BID`:
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x15 | 8 / Little | [Guid](../spec/packed-guid.md) | higher_bidder |  |  |
+| 0x15 | 8 / Little | [Guid](../types/packed-guid.md) | higher_bidder |  |  |
 | 0x1D | 4 / Little | u32 | new_bid |  |  |
 | 0x21 | 4 / Little | u32 | auction_outbid2 |  |  |
 
@@ -190,7 +190,7 @@ Else If result2 is equal to `ERR_HIGHER_BID`:
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x2A | 8 / Little | [Guid](../spec/packed-guid.md) | higher_bidder2 |  |  |
+| 0x2A | 8 / Little | [Guid](../types/packed-guid.md) | higher_bidder2 |  |  |
 | 0x32 | 4 / Little | u32 | new_bid2 |  |  |
 | 0x36 | 4 / Little | u32 | auction_outbid3 |  |  |
 

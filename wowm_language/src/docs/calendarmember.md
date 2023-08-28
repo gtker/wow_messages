@@ -15,7 +15,7 @@ struct CalendarMember {
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x00 | - / - | [PackedGuid](../spec/packed-guid.md) | member |  |  |
+| 0x00 | - / - | [PackedGuid](../types/packed-guid.md) | member |  |  |
 | - | 1 / - | Level | level |  |  |
 
 

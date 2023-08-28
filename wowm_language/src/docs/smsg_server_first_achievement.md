@@ -29,7 +29,7 @@ SMSG have a header of 4 bytes.
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | - | - / - | CString | name |  |  |
-| - | 8 / Little | [Guid](../spec/packed-guid.md) | player |  |  |
+| - | 8 / Little | [Guid](../types/packed-guid.md) | player |  |  |
 | - | 4 / Little | u32 | achievement |  |  |
 | - | 1 / - | [AchievementNameLinkType](achievementnamelinktype.md) | link_type |  |  |
 

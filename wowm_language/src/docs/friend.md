@@ -20,7 +20,7 @@ struct Friend {
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x00 | 8 / Little | [Guid](../spec/packed-guid.md) | guid |  |  |
+| 0x00 | 8 / Little | [Guid](../types/packed-guid.md) | guid |  |  |
 | 0x08 | 1 / - | [FriendStatus](friendstatus.md) | status |  |  |
 
 If status is not equal to `OFFLINE`:

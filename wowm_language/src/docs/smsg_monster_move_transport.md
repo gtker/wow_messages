@@ -41,8 +41,8 @@ SMSG have a header of 4 bytes.
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | - / - | [PackedGuid](../spec/packed-guid.md) | guid |  |  |
-| - | - / - | [PackedGuid](../spec/packed-guid.md) | transport |  |  |
+| 0x04 | - / - | [PackedGuid](../types/packed-guid.md) | guid |  |  |
+| - | - / - | [PackedGuid](../types/packed-guid.md) | transport |  |  |
 | - | 12 / - | [Vector3d](vector3d.md) | spline_point |  |  |
 | - | 4 / Little | u32 | spline_id |  |  |
 | - | 1 / - | [MonsterMoveType](monstermovetype.md) | move_type |  |  |
@@ -51,7 +51,7 @@ If move_type is equal to `FACING_TARGET`:
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | 8 / Little | [Guid](../spec/packed-guid.md) | target |  |  |
+| - | 8 / Little | [Guid](../types/packed-guid.md) | target |  |  |
 
 Else If move_type is equal to `FACING_ANGLE`:
 
@@ -66,7 +66,7 @@ Else If move_type is equal to `FACING_SPOT`:
 | - | 12 / - | [Vector3d](vector3d.md) | position |  |  |
 | - | 4 / - | [SplineFlag](splineflag.md) | spline_flags |  |  |
 | - | 4 / Little | u32 | duration |  |  |
-| - | - / - | [MonsterMoveSpline](../spec/monster-move-spline.md) | splines |  |  |
+| - | - / - | [MonsterMoveSpline](../types/monster-move-spline.md) | splines |  |  |
 
 ## Client Version 3.3.5
 
@@ -118,8 +118,8 @@ SMSG have a header of 4 bytes.
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | - / - | [PackedGuid](../spec/packed-guid.md) | guid |  |  |
-| - | - / - | [PackedGuid](../spec/packed-guid.md) | transport |  |  |
+| - | - / - | [PackedGuid](../types/packed-guid.md) | guid |  |  |
+| - | - / - | [PackedGuid](../types/packed-guid.md) | transport |  |  |
 | - | 1 / - | u8 | unknown |  | cmangos-wotlk sets to 0 |
 | - | 12 / - | [Vector3d](vector3d.md) | spline_point |  |  |
 | - | 4 / Little | u32 | spline_id |  |  |
@@ -129,7 +129,7 @@ If move_type is equal to `FACING_TARGET`:
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | 8 / Little | [Guid](../spec/packed-guid.md) | target |  |  |
+| - | 8 / Little | [Guid](../types/packed-guid.md) | target |  |  |
 
 Else If move_type is equal to `FACING_ANGLE`:
 
@@ -158,5 +158,5 @@ If spline_flags contains `PARABOLIC`:
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | - | 4 / Little | f32 | vertical_acceleration |  |  |
 | - | 4 / Little | u32 | effect_start_time |  |  |
-| - | - / - | [MonsterMoveSpline](../spec/monster-move-spline.md) | splines |  |  |
+| - | - / - | [MonsterMoveSpline](../types/monster-move-spline.md) | splines |  |  |
 

@@ -31,7 +31,7 @@ SMSG have a header of 4 bytes.
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | - / - | [PackedGuid](../spec/packed-guid.md) | guid |  |  |
+| 0x04 | - / - | [PackedGuid](../types/packed-guid.md) | guid |  |  |
 | - | 4 / Little | u32 | movement_counter |  |  |
 | - | - / - | [MovementInfo](movementinfo.md) | info |  |  |
 
@@ -66,7 +66,7 @@ SMSG have a header of 4 bytes.
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | - / - | [PackedGuid](../spec/packed-guid.md) | guid |  |  |
+| 0x04 | - / - | [PackedGuid](../types/packed-guid.md) | guid |  |  |
 | - | 4 / Little | u32 | movement_counter |  |  |
 | - | - / - | [MovementInfo](movementinfo.md) | info |  |  |
 
@@ -101,7 +101,7 @@ SMSG have a header of 4 bytes.
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | - / - | [PackedGuid](../spec/packed-guid.md) | guid |  |  |
+| - | - / - | [PackedGuid](../types/packed-guid.md) | guid |  |  |
 | - | 4 / Little | u32 | movement_counter |  |  |
 | - | - / - | [MovementInfo](movementinfo.md) | info |  |  |
 

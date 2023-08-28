@@ -45,8 +45,8 @@ If result is not equal to `OK`:
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x09 | 8 / Little | [Guid](../spec/packed-guid.md) | item1 |  |  |
-| 0x11 | 8 / Little | [Guid](../spec/packed-guid.md) | item2 |  |  |
+| 0x09 | 8 / Little | [Guid](../types/packed-guid.md) | item1 |  |  |
+| 0x11 | 8 / Little | [Guid](../types/packed-guid.md) | item2 |  |  |
 | 0x19 | 1 / - | u8 | bag_type_subclass |  | cmangos: bag type subclass, used with EQUIP_ERR_EVENT_AUTOEQUIP_BIND_CONFIRM and EQUIP_ERR_ITEM_DOESNT_GO_INTO_BAG2<br/>vmangos sets to 0 |
 
 ## Client Version 2.4.3
@@ -88,8 +88,8 @@ If result is not equal to `OK`:
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x05 | 8 / Little | [Guid](../spec/packed-guid.md) | item1 |  |  |
-| 0x0D | 8 / Little | [Guid](../spec/packed-guid.md) | item2 |  |  |
+| 0x05 | 8 / Little | [Guid](../types/packed-guid.md) | item1 |  |  |
+| 0x0D | 8 / Little | [Guid](../types/packed-guid.md) | item2 |  |  |
 | 0x15 | 1 / - | u8 | bag_type_subclass |  | cmangos: bag type subclass, used with EQUIP_ERR_EVENT_AUTOEQUIP_BIND_CONFIRM and EQUIP_ERR_ITEM_DOESNT_GO_INTO_BAG2<br/>vmangos sets to 0 |
 
 If result is equal to `CANT_EQUIP_LEVEL_I`:
@@ -137,8 +137,8 @@ If result is not equal to `OK`:
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | 8 / Little | [Guid](../spec/packed-guid.md) | item1 |  |  |
-| - | 8 / Little | [Guid](../spec/packed-guid.md) | item2 |  |  |
+| - | 8 / Little | [Guid](../types/packed-guid.md) | item1 |  |  |
+| - | 8 / Little | [Guid](../types/packed-guid.md) | item2 |  |  |
 | - | 1 / - | u8 | bag_type_subclass |  | cmangos: bag type subclass, used with EQUIP_ERR_EVENT_AUTOEQUIP_BIND_CONFIRM and EQUIP_ERR_ITEM_DOESNT_GO_INTO_BAG2<br/>vmangos sets to 0 |
 
 If result is equal to `CANT_EQUIP_LEVEL_I`:

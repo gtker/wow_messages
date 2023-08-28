@@ -17,7 +17,7 @@ struct LfgRole {
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x00 | 8 / Little | [Guid](../spec/packed-guid.md) | guid |  |  |
+| 0x00 | 8 / Little | [Guid](../types/packed-guid.md) | guid |  |  |
 | 0x08 | 1 / - | Bool | ready |  |  |
 | 0x09 | 4 / Little | u32 | roles |  |  |
 | 0x0D | 1 / - | Level | level |  |  |

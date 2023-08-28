@@ -49,7 +49,7 @@ If message_type is equal to `NORMAL`:
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x05 | 8 / Little | [Guid](../spec/packed-guid.md) | sender |  |  |
+| 0x05 | 8 / Little | [Guid](../types/packed-guid.md) | sender |  |  |
 
 Else If message_type is equal to `CREATURE` **or** 
 is equal to `GAMEOBJECT`:
@@ -133,7 +133,7 @@ If message_type is equal to `NORMAL`:
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x07 | 8 / Little | [Guid](../spec/packed-guid.md) | sender |  |  |
+| 0x07 | 8 / Little | [Guid](../types/packed-guid.md) | sender |  |  |
 
 Else If message_type is equal to `CREATURE` **or** 
 is equal to `GAMEOBJECT`:
@@ -217,7 +217,7 @@ If message_type is equal to `NORMAL`:
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x07 | 8 / Little | [Guid](../spec/packed-guid.md) | sender |  |  |
+| 0x07 | 8 / Little | [Guid](../types/packed-guid.md) | sender |  |  |
 
 Else If message_type is equal to `CREATURE` **or** 
 is equal to `GAMEOBJECT`:

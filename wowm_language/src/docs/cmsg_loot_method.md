@@ -28,7 +28,7 @@ CMSG have a header of 6 bytes.
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | 0x06 | 4 / - | [GroupLootSetting](grouplootsetting.md) | loot_setting |  |  |
-| 0x0A | 8 / Little | [Guid](../spec/packed-guid.md) | loot_master |  |  |
+| 0x0A | 8 / Little | [Guid](../types/packed-guid.md) | loot_master |  |  |
 | 0x12 | 4 / - | [ItemQuality](itemquality.md) | loot_threshold |  |  |
 
 ## Client Version 2.4.3
@@ -59,7 +59,7 @@ CMSG have a header of 6 bytes.
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | 0x06 | 4 / - | [GroupLootSetting](grouplootsetting.md) | loot_setting |  |  |
-| 0x0A | 8 / Little | [Guid](../spec/packed-guid.md) | loot_master |  |  |
+| 0x0A | 8 / Little | [Guid](../types/packed-guid.md) | loot_master |  |  |
 | 0x12 | 4 / - | [ItemQuality](itemquality.md) | loot_threshold |  |  |
 
 ## Client Version 3.3.5
@@ -90,6 +90,6 @@ CMSG have a header of 6 bytes.
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | 0x06 | 4 / - | [GroupLootSetting](grouplootsetting.md) | loot_setting |  |  |
-| 0x0A | 8 / Little | [Guid](../spec/packed-guid.md) | loot_master |  |  |
+| 0x0A | 8 / Little | [Guid](../types/packed-guid.md) | loot_master |  |  |
 | 0x12 | 4 / - | [ItemQuality](itemquality.md) | loot_threshold |  |  |
 

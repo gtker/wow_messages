@@ -28,8 +28,8 @@ CMSG have a header of 6 bytes.
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x06 | - / - | [PackedGuid](../spec/packed-guid.md) | vehicle |  |  |
+| 0x06 | - / - | [PackedGuid](../types/packed-guid.md) | vehicle |  |  |
 | - | - / - | [MovementInfo](movementinfo.md) | info |  |  |
-| - | - / - | [PackedGuid](../spec/packed-guid.md) | accessory |  |  |
+| - | - / - | [PackedGuid](../types/packed-guid.md) | accessory |  |  |
 | - | 1 / - | u8 | seat |  |  |
 

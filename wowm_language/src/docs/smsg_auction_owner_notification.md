@@ -35,7 +35,7 @@ SMSG have a header of 4 bytes.
 | 0x04 | 4 / Little | u32 | auction_id |  |  |
 | 0x08 | 4 / Little | u32 | bid |  | vmangos/cmangos/mangoszero: if 0, client shows ERR_AUCTION_EXPIRED_S, else ERR_AUCTION_SOLD_S (works only when guid==0) |
 | 0x0C | 4 / Little | u32 | auction_out_bid |  |  |
-| 0x10 | 8 / Little | [Guid](../spec/packed-guid.md) | bidder |  |  |
+| 0x10 | 8 / Little | [Guid](../types/packed-guid.md) | bidder |  |  |
 | 0x18 | 4 / Little | u32 | item |  |  |
 | 0x1C | 4 / Little | u32 | item_random_property_id |  |  |
 
@@ -75,7 +75,7 @@ SMSG have a header of 4 bytes.
 | 0x04 | 4 / Little | u32 | auction_id |  |  |
 | 0x08 | 4 / Little | u32 | bid |  | vmangos/cmangos/mangoszero: if 0, client shows ERR_AUCTION_EXPIRED_S, else ERR_AUCTION_SOLD_S (works only when guid==0) |
 | 0x0C | 4 / Little | u32 | auction_out_bid |  |  |
-| 0x10 | 8 / Little | [Guid](../spec/packed-guid.md) | bidder |  |  |
+| 0x10 | 8 / Little | [Guid](../types/packed-guid.md) | bidder |  |  |
 | 0x18 | 4 / Little | u32 | item |  |  |
 | 0x1C | 4 / Little | u32 | item_random_property_id |  |  |
 | 0x20 | 4 / Little | f32 | time_left |  |  |

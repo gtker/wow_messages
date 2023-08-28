@@ -63,7 +63,7 @@ struct LfgListPlayer {
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x00 | 8 / Little | [Guid](../spec/packed-guid.md) | player |  |  |
+| 0x00 | 8 / Little | [Guid](../types/packed-guid.md) | player |  |  |
 | 0x08 | 4 / - | [LfgUpdateFlag](lfgupdateflag.md) | flags |  |  |
 
 If flags contains `CHARACTER_INFO`:
@@ -113,7 +113,7 @@ If flags contains `GROUP_GUID`:
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | 8 / Little | [Guid](../spec/packed-guid.md) | group |  |  |
+| - | 8 / Little | [Guid](../types/packed-guid.md) | group |  |  |
 
 If flags contains `ROLES`:
 
@@ -132,7 +132,7 @@ If flags contains `STATUS`:
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | - | 1 / - | u8 | unknown1 |  | Emus set to 0. |
-| - | 8 / Little | [Guid](../spec/packed-guid.md) | instance |  |  |
+| - | 8 / Little | [Guid](../types/packed-guid.md) | instance |  |  |
 | - | 4 / Little | u32 | encounter_mask |  |  |
 
 

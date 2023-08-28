@@ -35,7 +35,7 @@ If flags contains `NOT_CASTER`:
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x08 | - / - | [PackedGuid](../spec/packed-guid.md) | caster |  |  |
+| 0x08 | - / - | [PackedGuid](../types/packed-guid.md) | caster |  |  |
 
 If flags contains `DURATION`:
 

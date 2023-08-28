@@ -18,7 +18,7 @@ struct ReceivedMail {
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x00 | 8 / Little | [Guid](../spec/packed-guid.md) | sender |  |  |
+| 0x00 | 8 / Little | [Guid](../types/packed-guid.md) | sender |  |  |
 | 0x08 | 4 / - | [AuctionHouse](auctionhouse.md) | auction_house |  |  |
 | 0x0C | 4 / - | [MailMessageType](mailmessagetype.md) | message_type |  |  |
 | 0x10 | 4 / Little | u32 | stationery |  |  |

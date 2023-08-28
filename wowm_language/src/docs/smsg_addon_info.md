@@ -55,7 +55,7 @@ SMSG have a header of 4 bytes.
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | - / - | [AddonArray](../spec/addon-array.md) | addons |  |  |
+| 0x04 | - / - | [AddonArray](../types/addon-array.md) | addons |  |  |
 | - | 4 / Little | u32 | number_of_banned_addons |  |  |
 
 ## Client Version 3.3.5
@@ -86,6 +86,6 @@ SMSG have a header of 4 bytes.
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | - / - | [AddonArray](../spec/addon-array.md) | addons |  |  |
+| - | - / - | [AddonArray](../types/addon-array.md) | addons |  |  |
 | - | 4 / Little | u32 | number_of_banned_addons |  |  |
 

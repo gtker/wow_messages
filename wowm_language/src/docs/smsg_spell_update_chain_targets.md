@@ -28,8 +28,8 @@ SMSG have a header of 4 bytes.
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | 8 / Little | [Guid](../spec/packed-guid.md) | caster |  |  |
+| - | 8 / Little | [Guid](../types/packed-guid.md) | caster |  |  |
 | - | 4 / Little | u32 | spell |  |  |
 | - | 4 / Little | u32 | amount_of_targets |  |  |
-| - | ? / - | [Guid](../spec/packed-guid.md)[amount_of_targets] | targets |  |  |
+| - | ? / - | [Guid](../types/packed-guid.md)[amount_of_targets] | targets |  |  |
 

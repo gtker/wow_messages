@@ -29,8 +29,8 @@ CMSG have a header of 6 bytes.
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x06 | 8 / Little | [Guid](../spec/packed-guid.md) | auctioneer |  |  |
-| 0x0E | 8 / Little | [Guid](../spec/packed-guid.md) | item |  |  |
+| 0x06 | 8 / Little | [Guid](../types/packed-guid.md) | auctioneer |  |  |
+| 0x0E | 8 / Little | [Guid](../types/packed-guid.md) | item |  |  |
 | 0x16 | 4 / Little | u32 | starting_bid |  |  |
 | 0x1A | 4 / Little | u32 | buyout |  |  |
 | 0x1E | 4 / Little | u32 | auction_duration_in_minutes |  |  |
@@ -66,9 +66,9 @@ CMSG have a header of 6 bytes.
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x06 | 8 / Little | [Guid](../spec/packed-guid.md) | auctioneer |  |  |
+| 0x06 | 8 / Little | [Guid](../types/packed-guid.md) | auctioneer |  |  |
 | 0x0E | 4 / Little | u32 | unknown1 |  |  |
-| 0x12 | 8 / Little | [Guid](../spec/packed-guid.md) | item |  |  |
+| 0x12 | 8 / Little | [Guid](../types/packed-guid.md) | item |  |  |
 | 0x1A | 4 / Little | u32 | unknown2 |  |  |
 | 0x1E | 4 / Little | u32 | starting_bid |  |  |
 | 0x22 | 4 / Little | u32 | buyout |  |  |

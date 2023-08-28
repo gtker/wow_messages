@@ -29,7 +29,7 @@ SMSG have a header of 4 bytes.
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | 8 / Little | [Guid](../spec/packed-guid.md) | battlemaster |  |  |
+| 0x04 | 8 / Little | [Guid](../types/packed-guid.md) | battlemaster |  |  |
 | 0x0C | 4 / - | [Map](map.md) | map |  |  |
 | 0x10 | 1 / - | [BattlegroundBracket](battlegroundbracket.md) | bracket |  |  |
 | 0x11 | 4 / Little | u32 | number_of_battlegrounds |  |  |
@@ -63,7 +63,7 @@ SMSG have a header of 4 bytes.
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | 8 / Little | [Guid](../spec/packed-guid.md) | battlemaster |  |  |
+| 0x04 | 8 / Little | [Guid](../types/packed-guid.md) | battlemaster |  |  |
 | 0x0C | 4 / - | [BattlegroundType](battlegroundtype.md) | battleground_type |  |  |
 | 0x10 | 4 / Little | u32 | number_of_battlegrounds |  |  |
 | 0x14 | ? / - | u32[number_of_battlegrounds] | battlegrounds |  |  |
@@ -109,7 +109,7 @@ SMSG have a header of 4 bytes.
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | 8 / Little | [Guid](../spec/packed-guid.md) | battlemaster |  |  |
+| - | 8 / Little | [Guid](../types/packed-guid.md) | battlemaster |  |  |
 | - | 4 / - | [BattlegroundType](battlegroundtype.md) | battleground_type |  |  |
 | - | 1 / - | u8 | unknown1 |  |  |
 | - | 1 / - | u8 | unknown2 |  |  |

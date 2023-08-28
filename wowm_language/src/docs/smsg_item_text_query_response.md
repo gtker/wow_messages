@@ -64,6 +64,6 @@ If query is equal to `HAS_TEXT`:
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | 8 / Little | [Guid](../spec/packed-guid.md) | item |  |  |
+| - | 8 / Little | [Guid](../types/packed-guid.md) | item |  |  |
 | - | - / - | CString | text |  |  |
 

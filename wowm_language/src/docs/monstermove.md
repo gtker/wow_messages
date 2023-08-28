@@ -38,7 +38,7 @@ If move_type is equal to `FACING_TARGET`:
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x11 | 8 / Little | [Guid](../spec/packed-guid.md) | target |  |  |
+| 0x11 | 8 / Little | [Guid](../types/packed-guid.md) | target |  |  |
 
 Else If move_type is equal to `FACING_ANGLE`:
 
@@ -58,7 +58,7 @@ If move_type is not equal to `STOP`:
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | 0x29 | 4 / - | [SplineFlag](splineflag.md) | spline_flags |  |  |
 | 0x2D | 4 / Little | u32 | duration |  |  |
-| 0x31 | - / - | [MonsterMoveSpline](../spec/monster-move-spline.md) | splines |  |  |
+| 0x31 | - / - | [MonsterMoveSpline](../types/monster-move-spline.md) | splines |  |  |
 
 
 Used in:

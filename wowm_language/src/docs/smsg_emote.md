@@ -27,7 +27,7 @@ SMSG have a header of 4 bytes.
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | 0x04 | 4 / - | [Emote](emote.md) | emote |  |  |
-| 0x08 | 8 / Little | [Guid](../spec/packed-guid.md) | guid |  |  |
+| 0x08 | 8 / Little | [Guid](../types/packed-guid.md) | guid |  |  |
 
 ## Client Version 2.4.3
 
@@ -56,7 +56,7 @@ SMSG have a header of 4 bytes.
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | 0x04 | 4 / - | [Emote](emote.md) | emote |  |  |
-| 0x08 | 8 / Little | [Guid](../spec/packed-guid.md) | guid |  |  |
+| 0x08 | 8 / Little | [Guid](../types/packed-guid.md) | guid |  |  |
 
 ## Client Version 3.3.5
 
@@ -85,5 +85,5 @@ SMSG have a header of 4 bytes.
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | 0x04 | 4 / - | [Emote](emote.md) | emote |  |  |
-| 0x08 | 8 / Little | [Guid](../spec/packed-guid.md) | guid |  |  |
+| 0x08 | 8 / Little | [Guid](../types/packed-guid.md) | guid |  |  |
 

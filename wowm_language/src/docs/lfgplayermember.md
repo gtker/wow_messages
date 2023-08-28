@@ -15,7 +15,7 @@ struct LfgPlayerMember {
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x00 | - / - | [PackedGuid](../spec/packed-guid.md) | guid |  |  |
+| 0x00 | - / - | [PackedGuid](../types/packed-guid.md) | guid |  |  |
 | - | 4 / Little | Level32 | level |  |  |
 
 

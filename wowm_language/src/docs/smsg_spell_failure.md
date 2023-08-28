@@ -27,7 +27,7 @@ SMSG have a header of 4 bytes.
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | 8 / Little | [Guid](../spec/packed-guid.md) | guid |  |  |
+| 0x04 | 8 / Little | [Guid](../types/packed-guid.md) | guid |  |  |
 | 0x0C | 4 / Little | u32 | spell |  |  |
 | 0x10 | 1 / - | [SpellCastResult](spellcastresult.md) | result |  |  |
 
@@ -58,7 +58,7 @@ SMSG have a header of 4 bytes.
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | 8 / Little | [Guid](../spec/packed-guid.md) | guid |  |  |
+| 0x04 | 8 / Little | [Guid](../types/packed-guid.md) | guid |  |  |
 | 0x0C | 4 / Little | u32 | spell |  |  |
 | 0x10 | 1 / - | [SpellCastResult](spellcastresult.md) | result |  |  |
 
@@ -90,7 +90,7 @@ SMSG have a header of 4 bytes.
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | 8 / Little | [Guid](../spec/packed-guid.md) | guid |  |  |
+| 0x04 | 8 / Little | [Guid](../types/packed-guid.md) | guid |  |  |
 | 0x0C | 1 / - | u8 | extra_casts |  |  |
 | 0x0D | 4 / Little | u32 | spell |  |  |
 | 0x11 | 1 / - | [SpellCastResult](spellcastresult.md) | result |  |  |

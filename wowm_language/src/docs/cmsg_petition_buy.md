@@ -44,9 +44,9 @@ CMSG have a header of 6 bytes.
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x06 | 8 / Little | [Guid](../spec/packed-guid.md) | npc |  |  |
+| 0x06 | 8 / Little | [Guid](../types/packed-guid.md) | npc |  |  |
 | 0x0E | 4 / Little | u32 | unknown1 |  |  |
-| 0x12 | 8 / Little | [Guid](../spec/packed-guid.md) | unknown2 |  |  |
+| 0x12 | 8 / Little | [Guid](../types/packed-guid.md) | unknown2 |  |  |
 | 0x1A | - / - | CString | name |  |  |
 | - | 4 / Little | u32 | unknown3 |  |  |
 | - | 4 / Little | u32 | unknown4 |  |  |
@@ -108,9 +108,9 @@ CMSG have a header of 6 bytes.
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x06 | 8 / Little | [Guid](../spec/packed-guid.md) | npc |  |  |
+| 0x06 | 8 / Little | [Guid](../types/packed-guid.md) | npc |  |  |
 | 0x0E | 4 / Little | u32 | unknown1 |  |  |
-| 0x12 | 8 / Little | [Guid](../spec/packed-guid.md) | unknown2 |  |  |
+| 0x12 | 8 / Little | [Guid](../types/packed-guid.md) | unknown2 |  |  |
 | 0x1A | - / - | CString | name |  |  |
 | - | - / - | CString | unknown3 |  |  |
 | - | 4 / Little | u32 | unknown4 |  |  |

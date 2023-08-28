@@ -30,7 +30,7 @@ SMSG have a header of 4 bytes.
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | - / - | [PackedGuid](../spec/packed-guid.md) | guid |  |  |
+| - | - / - | [PackedGuid](../types/packed-guid.md) | guid |  |  |
 | - | 4 / Little | f32 | speed |  |  |
 
 ### Examples

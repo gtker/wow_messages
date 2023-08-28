@@ -19,12 +19,12 @@ struct SendCalendarInvite {
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x00 | 8 / Little | [Guid](../spec/packed-guid.md) | event_id |  |  |
-| 0x08 | 8 / Little | [Guid](../spec/packed-guid.md) | invite_id |  |  |
+| 0x00 | 8 / Little | [Guid](../types/packed-guid.md) | event_id |  |  |
+| 0x08 | 8 / Little | [Guid](../types/packed-guid.md) | invite_id |  |  |
 | 0x10 | 1 / - | u8 | status |  |  |
 | 0x11 | 1 / - | u8 | rank |  |  |
 | 0x12 | 1 / - | Bool | is_guild_event |  |  |
-| 0x13 | - / - | [PackedGuid](../spec/packed-guid.md) | creator |  |  |
+| 0x13 | - / - | [PackedGuid](../types/packed-guid.md) | creator |  |  |
 
 
 Used in:

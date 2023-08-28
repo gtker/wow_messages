@@ -50,31 +50,31 @@ If target_flags contains `UNIT`:
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x02 | - / - | [PackedGuid](../spec/packed-guid.md) | unit_target |  |  |
+| 0x02 | - / - | [PackedGuid](../types/packed-guid.md) | unit_target |  |  |
 
 If target_flags contains `GAMEOBJECT`:
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | - / - | [PackedGuid](../spec/packed-guid.md) | gameobject |  |  |
+| - | - / - | [PackedGuid](../types/packed-guid.md) | gameobject |  |  |
 
 Else If target_flags contains `OBJECT_UNK`:
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | - / - | [PackedGuid](../spec/packed-guid.md) | object_unk |  |  |
+| - | - / - | [PackedGuid](../types/packed-guid.md) | object_unk |  |  |
 
 If target_flags contains `ITEM`:
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | - / - | [PackedGuid](../spec/packed-guid.md) | item |  |  |
+| - | - / - | [PackedGuid](../types/packed-guid.md) | item |  |  |
 
 Else If target_flags contains `TRADE_ITEM`:
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | - / - | [PackedGuid](../spec/packed-guid.md) | trade_item |  |  |
+| - | - / - | [PackedGuid](../types/packed-guid.md) | trade_item |  |  |
 
 If target_flags contains `SOURCE_LOCATION`:
 
@@ -98,13 +98,13 @@ If target_flags contains `CORPSE`:
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | - / - | [PackedGuid](../spec/packed-guid.md) | corpse |  |  |
+| - | - / - | [PackedGuid](../types/packed-guid.md) | corpse |  |  |
 
 Else If target_flags contains `PVP_CORPSE`:
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | - / - | [PackedGuid](../spec/packed-guid.md) | pvp_corpse |  |  |
+| - | - / - | [PackedGuid](../types/packed-guid.md) | pvp_corpse |  |  |
 
 
 Used in:
@@ -170,43 +170,43 @@ If target_flags contains `UNIT`:
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | - / - | [PackedGuid](../spec/packed-guid.md) | unit_target |  |  |
+| 0x04 | - / - | [PackedGuid](../types/packed-guid.md) | unit_target |  |  |
 
 Else If target_flags contains `UNIT_MINIPET`:
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | - / - | [PackedGuid](../spec/packed-guid.md) | unit_minipet |  |  |
+| - | - / - | [PackedGuid](../types/packed-guid.md) | unit_minipet |  |  |
 
 Else If target_flags contains `UNIT_ENEMY`:
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | - / - | [PackedGuid](../spec/packed-guid.md) | unit_enemy |  |  |
+| - | - / - | [PackedGuid](../types/packed-guid.md) | unit_enemy |  |  |
 
 If target_flags contains `GAMEOBJECT`:
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | - / - | [PackedGuid](../spec/packed-guid.md) | gameobject |  |  |
+| - | - / - | [PackedGuid](../types/packed-guid.md) | gameobject |  |  |
 
 Else If target_flags contains `LOCKED`:
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | - / - | [PackedGuid](../spec/packed-guid.md) | locked |  |  |
+| - | - / - | [PackedGuid](../types/packed-guid.md) | locked |  |  |
 
 If target_flags contains `ITEM`:
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | - / - | [PackedGuid](../spec/packed-guid.md) | item |  |  |
+| - | - / - | [PackedGuid](../types/packed-guid.md) | item |  |  |
 
 Else If target_flags contains `TRADE_ITEM`:
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | - / - | [PackedGuid](../spec/packed-guid.md) | trade_item |  |  |
+| - | - / - | [PackedGuid](../types/packed-guid.md) | trade_item |  |  |
 
 If target_flags contains `SOURCE_LOCATION`:
 
@@ -230,13 +230,13 @@ If target_flags contains `CORPSE_ALLY`:
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | - / - | [PackedGuid](../spec/packed-guid.md) | corpse_ally |  |  |
+| - | - / - | [PackedGuid](../types/packed-guid.md) | corpse_ally |  |  |
 
 Else If target_flags contains `CORPSE_ENEMY`:
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | - / - | [PackedGuid](../spec/packed-guid.md) | corpse_enemy |  |  |
+| - | - / - | [PackedGuid](../types/packed-guid.md) | corpse_enemy |  |  |
 
 
 Used in:
@@ -296,43 +296,43 @@ If target_flags contains `UNIT`:
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | - / - | [PackedGuid](../spec/packed-guid.md) | unit_target |  |  |
+| 0x04 | - / - | [PackedGuid](../types/packed-guid.md) | unit_target |  |  |
 
 Else If target_flags contains `UNIT_MINIPET`:
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | - / - | [PackedGuid](../spec/packed-guid.md) | minipet_target |  |  |
+| - | - / - | [PackedGuid](../types/packed-guid.md) | minipet_target |  |  |
 
 Else If target_flags contains `GAMEOBJECT`:
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | - / - | [PackedGuid](../spec/packed-guid.md) | gameobject_target |  |  |
+| - | - / - | [PackedGuid](../types/packed-guid.md) | gameobject_target |  |  |
 
 Else If target_flags contains `CORPSE_ENEMY`:
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | - / - | [PackedGuid](../spec/packed-guid.md) | enemy_corpse_target |  |  |
+| - | - / - | [PackedGuid](../types/packed-guid.md) | enemy_corpse_target |  |  |
 
 Else If target_flags contains `CORPSE_ALLY`:
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | - / - | [PackedGuid](../spec/packed-guid.md) | ally_corpse_target |  |  |
+| - | - / - | [PackedGuid](../types/packed-guid.md) | ally_corpse_target |  |  |
 
 If target_flags contains `ITEM`:
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | - / - | [PackedGuid](../spec/packed-guid.md) | item_target |  |  |
+| - | - / - | [PackedGuid](../types/packed-guid.md) | item_target |  |  |
 
 Else If target_flags contains `TRADE_ITEM`:
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | - / - | [PackedGuid](../spec/packed-guid.md) | trade_item_target |  |  |
+| - | - / - | [PackedGuid](../types/packed-guid.md) | trade_item_target |  |  |
 
 If target_flags contains `SOURCE_LOCATION`:
 

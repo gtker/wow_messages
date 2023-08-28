@@ -29,9 +29,9 @@ CMSG have a header of 6 bytes.
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x06 | 8 / Little | [Guid](../spec/packed-guid.md) | vendor |  |  |
+| 0x06 | 8 / Little | [Guid](../types/packed-guid.md) | vendor |  |  |
 | 0x0E | 4 / Little | u32 | item |  |  |
-| 0x12 | 8 / Little | [Guid](../spec/packed-guid.md) | bag |  |  |
+| 0x12 | 8 / Little | [Guid](../types/packed-guid.md) | bag |  |  |
 | 0x1A | 1 / - | u8 | bag_slot |  |  |
 | 0x1B | 1 / - | u8 | amount |  |  |
 
@@ -65,10 +65,10 @@ CMSG have a header of 6 bytes.
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x06 | 8 / Little | [Guid](../spec/packed-guid.md) | vendor |  |  |
+| 0x06 | 8 / Little | [Guid](../types/packed-guid.md) | vendor |  |  |
 | 0x0E | 4 / Little | u32 | item |  |  |
 | 0x12 | 4 / Little | u32 | vendor_slot |  | arcemu: VLack: 3.1.2 This is the slot's number on the vendor's panel, starts from 1 |
-| 0x16 | 8 / Little | [Guid](../spec/packed-guid.md) | bag |  |  |
+| 0x16 | 8 / Little | [Guid](../types/packed-guid.md) | bag |  |  |
 | 0x1E | 1 / - | u8 | bag_slot |  |  |
 | 0x1F | 1 / - | u8 | amount |  |  |
 

@@ -33,7 +33,7 @@ CMSG have a header of 6 bytes.
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | 0x06 | 4 / - | [TextEmote](textemote.md) | text_emote |  |  |
 | 0x0A | 4 / Little | u32 | emote |  |  |
-| 0x0E | 8 / Little | [Guid](../spec/packed-guid.md) | target | Guid targeted by the client. |  |
+| 0x0E | 8 / Little | [Guid](../types/packed-guid.md) | target | Guid targeted by the client. |  |
 
 ### Examples
 
@@ -79,7 +79,7 @@ CMSG have a header of 6 bytes.
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | 0x06 | 4 / - | [TextEmote](textemote.md) | text_emote |  |  |
 | 0x0A | 4 / Little | u32 | emote |  |  |
-| 0x0E | 8 / Little | [Guid](../spec/packed-guid.md) | target | Guid targeted by the client. |  |
+| 0x0E | 8 / Little | [Guid](../types/packed-guid.md) | target | Guid targeted by the client. |  |
 
 ## Client Version 3.3.5
 
@@ -114,5 +114,5 @@ CMSG have a header of 6 bytes.
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | 0x06 | 4 / - | [TextEmote](textemote.md) | text_emote |  |  |
 | 0x0A | 4 / Little | u32 | emote |  |  |
-| 0x0E | 8 / Little | [Guid](../spec/packed-guid.md) | target | Guid targeted by the client. |  |
+| 0x0E | 8 / Little | [Guid](../types/packed-guid.md) | target | Guid targeted by the client. |  |
 

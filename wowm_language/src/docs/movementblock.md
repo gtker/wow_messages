@@ -93,7 +93,7 @@ If flags contains `ON_TRANSPORT`:
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x19 | - / - | [PackedGuid](../spec/packed-guid.md) | transport_guid |  |  |
+| 0x19 | - / - | [PackedGuid](../types/packed-guid.md) | transport_guid |  |  |
 | - | 12 / - | [Vector3d](vector3d.md) | transport_position |  |  |
 | - | 4 / Little | f32 | transport_orientation |  |  |
 
@@ -178,7 +178,7 @@ If update_flag contains `MELEE_ATTACKING`:
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | - / - | [PackedGuid](../spec/packed-guid.md) | guid |  |  |
+| - | - / - | [PackedGuid](../types/packed-guid.md) | guid |  |  |
 
 If update_flag contains `TRANSPORT`:
 
@@ -343,7 +343,7 @@ Else If spline_flags contains `FINAL_TARGET`:
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | 8 / Little | [Guid](../spec/packed-guid.md) | target |  |  |
+| - | 8 / Little | [Guid](../types/packed-guid.md) | target |  |  |
 
 Else If spline_flags contains `FINAL_POINT`:
 
@@ -381,7 +381,7 @@ If update_flag contains `MELEE_ATTACKING`:
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | - / - | [PackedGuid](../spec/packed-guid.md) | guid |  |  |
+| - | - / - | [PackedGuid](../types/packed-guid.md) | guid |  |  |
 
 If update_flag contains `TRANSPORT`:
 
@@ -596,7 +596,7 @@ Else If update_flag contains `POSITION`:
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | - / - | [PackedGuid](../spec/packed-guid.md) | transport_guid |  |  |
+| - | - / - | [PackedGuid](../types/packed-guid.md) | transport_guid |  |  |
 | - | 12 / - | [Vector3d](vector3d.md) | position1 |  |  |
 | - | 4 / Little | f32 | orientation1 |  |  |
 | - | 4 / Little | f32 | corpse_orientation |  |  |
@@ -624,7 +624,7 @@ If update_flag contains `HAS_ATTACKING_TARGET`:
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | - / - | [PackedGuid](../spec/packed-guid.md) | guid |  |  |
+| - | - / - | [PackedGuid](../types/packed-guid.md) | guid |  |  |
 
 If update_flag contains `TRANSPORT`:
 

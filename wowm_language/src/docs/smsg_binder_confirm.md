@@ -25,7 +25,7 @@ SMSG have a header of 4 bytes.
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | 8 / Little | [Guid](../spec/packed-guid.md) | guid |  |  |
+| 0x04 | 8 / Little | [Guid](../types/packed-guid.md) | guid |  |  |
 
 ## Client Version 3.3.5
 
@@ -53,6 +53,6 @@ SMSG have a header of 4 bytes.
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | 8 / Little | [Guid](../spec/packed-guid.md) | guid |  |  |
+| 0x04 | 8 / Little | [Guid](../types/packed-guid.md) | guid |  |  |
 | 0x0C | 4 / - | [Area](area.md) | area |  | arcemu has this field while other emus do not. |
 

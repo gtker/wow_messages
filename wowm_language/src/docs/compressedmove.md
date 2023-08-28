@@ -28,7 +28,7 @@ struct CompressedMove {
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | 0x00 | 1 / - | u8 | size |  |  |
 | 0x01 | 2 / - | [CompressedMoveOpcode](compressedmoveopcode.md) | opcode |  |  |
-| 0x03 | - / - | [PackedGuid](../spec/packed-guid.md) | guid |  |  |
+| 0x03 | - / - | [PackedGuid](../types/packed-guid.md) | guid |  |  |
 
 If opcode is equal to `SMSG_SPLINE_SET_RUN_SPEED`:
 
@@ -46,7 +46,7 @@ Else If opcode is equal to `SMSG_MONSTER_MOVE_TRANSPORT`:
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | - / - | [PackedGuid](../spec/packed-guid.md) | transport |  |  |
+| - | - / - | [PackedGuid](../types/packed-guid.md) | transport |  |  |
 | - | - / - | [MonsterMove](monstermove.md) | monster_move_transport |  |  |
 
 

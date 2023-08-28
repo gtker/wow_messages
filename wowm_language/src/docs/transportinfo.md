@@ -17,7 +17,7 @@ struct TransportInfo {
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x00 | - / - | [PackedGuid](../spec/packed-guid.md) | guid |  |  |
+| 0x00 | - / - | [PackedGuid](../types/packed-guid.md) | guid |  |  |
 | - | 12 / - | [Vector3d](vector3d.md) | position |  |  |
 | - | 4 / Little | f32 | orientation |  |  |
 | - | 4 / Little | u32 | timestamp |  |  |
@@ -45,7 +45,7 @@ struct TransportInfo {
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x00 | - / - | [PackedGuid](../spec/packed-guid.md) | guid |  |  |
+| 0x00 | - / - | [PackedGuid](../types/packed-guid.md) | guid |  |  |
 | - | 12 / - | [Vector3d](vector3d.md) | position |  |  |
 | - | 4 / Little | f32 | orientation |  |  |
 | - | 4 / Little | u32 | timestamp |  |  |

@@ -33,7 +33,7 @@ pub(crate) fn update_mask_doc_file() -> PathBuf {
     workspace_directory()
         .join("wowm_language")
         .join("src")
-        .join("spec")
+        .join("types")
         .join("update-mask.md")
 }
 

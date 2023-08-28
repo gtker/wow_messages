@@ -21,12 +21,12 @@ struct CalendarSendInvitee {
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x00 | - / - | [PackedGuid](../spec/packed-guid.md) | invitee |  |  |
+| 0x00 | - / - | [PackedGuid](../types/packed-guid.md) | invitee |  |  |
 | - | 1 / - | Level | level |  |  |
 | - | 1 / - | u8 | status |  |  |
 | - | 1 / - | u8 | rank |  |  |
 | - | 1 / - | u8 | guild_member |  |  |
-| - | 8 / Little | [Guid](../spec/packed-guid.md) | invite_id |  |  |
+| - | 8 / Little | [Guid](../types/packed-guid.md) | invite_id |  |  |
 | - | 4 / Little | DateTime | status_time |  |  |
 | - | - / - | CString | text |  |  |
 

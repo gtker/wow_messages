@@ -36,7 +36,7 @@ SMSG have a header of 4 bytes.
 | - | 1 / - | Bool | vote_in_progress |  |  |
 | - | 1 / - | Bool | did_vote |  |  |
 | - | 1 / - | Bool | agreed_with_kick |  |  |
-| - | 8 / Little | [Guid](../spec/packed-guid.md) | victim |  |  |
+| - | 8 / Little | [Guid](../types/packed-guid.md) | victim |  |  |
 | - | 4 / Little | u32 | total_votes |  |  |
 | - | 4 / Little | u32 | votes_agree |  |  |
 | - | 4 / Little | Seconds | time_left |  |  |

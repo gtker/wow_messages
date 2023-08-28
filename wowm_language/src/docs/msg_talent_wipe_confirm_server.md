@@ -30,6 +30,6 @@ SMSG have a header of 4 bytes.
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | 8 / Little | [Guid](../spec/packed-guid.md) | wiping_npc |  |  |
+| 0x04 | 8 / Little | [Guid](../types/packed-guid.md) | wiping_npc |  |  |
 | 0x0C | 4 / Little | u32 | cost_in_copper |  |  |
 

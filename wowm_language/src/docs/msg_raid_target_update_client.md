@@ -34,5 +34,5 @@ If target_index is not equal to `REQUEST_ICONS`:
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x07 | 8 / Little | [Guid](../spec/packed-guid.md) | target |  |  |
+| 0x07 | 8 / Little | [Guid](../types/packed-guid.md) | target |  |  |
 

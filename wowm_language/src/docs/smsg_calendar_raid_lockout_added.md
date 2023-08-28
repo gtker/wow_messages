@@ -33,5 +33,5 @@ SMSG have a header of 4 bytes.
 | 0x08 | 4 / - | [Map](map.md) | map |  |  |
 | 0x0C | 4 / Little | u32 | difficulty |  |  |
 | 0x10 | 4 / Little | u32 | remaining_time |  |  |
-| 0x14 | 8 / Little | [Guid](../spec/packed-guid.md) | instance_id |  |  |
+| 0x14 | 8 / Little | [Guid](../types/packed-guid.md) | instance_id |  |  |
 

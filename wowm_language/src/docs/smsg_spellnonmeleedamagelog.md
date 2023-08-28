@@ -36,8 +36,8 @@ SMSG have a header of 4 bytes.
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | - / - | [PackedGuid](../spec/packed-guid.md) | target |  |  |
-| - | - / - | [PackedGuid](../spec/packed-guid.md) | attacker |  |  |
+| 0x04 | - / - | [PackedGuid](../types/packed-guid.md) | target |  |  |
+| - | - / - | [PackedGuid](../types/packed-guid.md) | attacker |  |  |
 | - | 4 / Little | u32 | spell |  |  |
 | - | 4 / Little | u32 | damage |  |  |
 | - | 1 / - | [SpellSchool](spellschool.md) | school |  |  |
@@ -85,8 +85,8 @@ SMSG have a header of 4 bytes.
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | - / - | [PackedGuid](../spec/packed-guid.md) | target |  |  |
-| - | - / - | [PackedGuid](../spec/packed-guid.md) | attacker |  |  |
+| 0x04 | - / - | [PackedGuid](../types/packed-guid.md) | target |  |  |
+| - | - / - | [PackedGuid](../types/packed-guid.md) | attacker |  |  |
 | - | 4 / Little | u32 | spell |  |  |
 | - | 4 / Little | u32 | damage |  |  |
 | - | 1 / - | [SpellSchool](spellschool.md) | school |  |  |
@@ -135,8 +135,8 @@ SMSG have a header of 4 bytes.
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | - / - | [PackedGuid](../spec/packed-guid.md) | target |  |  |
-| - | - / - | [PackedGuid](../spec/packed-guid.md) | attacker |  |  |
+| - | - / - | [PackedGuid](../types/packed-guid.md) | target |  |  |
+| - | - / - | [PackedGuid](../types/packed-guid.md) | attacker |  |  |
 | - | 4 / Little | u32 | spell |  |  |
 | - | 4 / Little | u32 | damage |  |  |
 | - | 4 / Little | u32 | overkill |  |  |

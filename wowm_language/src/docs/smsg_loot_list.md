@@ -27,9 +27,9 @@ SMSG have a header of 4 bytes.
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | 8 / Little | [Guid](../spec/packed-guid.md) | creature |  |  |
-| 0x0C | - / - | [PackedGuid](../spec/packed-guid.md) | master_looter |  |  |
-| - | - / - | [PackedGuid](../spec/packed-guid.md) | group_looter |  |  |
+| 0x04 | 8 / Little | [Guid](../types/packed-guid.md) | creature |  |  |
+| 0x0C | - / - | [PackedGuid](../types/packed-guid.md) | master_looter |  |  |
+| - | - / - | [PackedGuid](../types/packed-guid.md) | group_looter |  |  |
 
 ## Client Version 3.3.5
 
@@ -58,7 +58,7 @@ SMSG have a header of 4 bytes.
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | 8 / Little | [Guid](../spec/packed-guid.md) | creature |  |  |
-| - | - / - | [PackedGuid](../spec/packed-guid.md) | master_looter |  |  |
-| - | - / - | [PackedGuid](../spec/packed-guid.md) | group_looter |  |  |
+| - | 8 / Little | [Guid](../types/packed-guid.md) | creature |  |  |
+| - | - / - | [PackedGuid](../types/packed-guid.md) | master_looter |  |  |
+| - | - / - | [PackedGuid](../types/packed-guid.md) | group_looter |  |  |
 

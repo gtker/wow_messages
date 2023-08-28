@@ -23,7 +23,7 @@ struct GuildBankSlot {
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | 0x00 | 1 / - | u8 | slot |  |  |
 | 0x01 | 4 / Little | u32 | item |  |  |
-| 0x05 | - / - | [VariableItemRandomProperty](../spec/variable-item-random-property.md) | item_random_property_id |  |  |
+| 0x05 | - / - | [VariableItemRandomProperty](../types/variable-item-random-property.md) | item_random_property_id |  |  |
 | - | 1 / - | u8 | amount_of_items |  |  |
 | - | 4 / Little | u32 | enchant |  |  |
 | - | 1 / - | u8 | charges |  |  |
@@ -59,7 +59,7 @@ struct GuildBankSlot {
 | 0x00 | 1 / - | u8 | slot |  |  |
 | 0x01 | 4 / Little | u32 | item |  |  |
 | 0x05 | 4 / Little | u32 | unknown1 |  | 3.3.0 (0x8000, 0x8020) |
-| 0x09 | - / - | [VariableItemRandomProperty](../spec/variable-item-random-property.md) | item_random_property_id |  |  |
+| 0x09 | - / - | [VariableItemRandomProperty](../types/variable-item-random-property.md) | item_random_property_id |  |  |
 | - | 4 / Little | u32 | amount_of_items |  |  |
 | - | 4 / Little | u32 | unknown2 |  |  |
 | - | 1 / - | u8 | unknown3 |  |  |

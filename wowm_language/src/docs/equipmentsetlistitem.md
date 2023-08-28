@@ -17,10 +17,10 @@ struct EquipmentSetListItem {
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x00 | 8 / Little | [Guid](../spec/packed-guid.md) | guid |  |  |
+| 0x00 | 8 / Little | [Guid](../types/packed-guid.md) | guid |  |  |
 | 0x08 | - / - | CString | name |  |  |
 | - | - / - | CString | icon_name |  |  |
-| - | 152 / - | [Guid](../spec/packed-guid.md)[19] | equipment |  |  |
+| - | 152 / - | [Guid](../types/packed-guid.md)[19] | equipment |  |  |
 
 
 Used in:

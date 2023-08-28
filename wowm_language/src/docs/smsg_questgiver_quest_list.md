@@ -30,7 +30,7 @@ SMSG have a header of 4 bytes.
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | 8 / Little | [Guid](../spec/packed-guid.md) | npc |  |  |
+| 0x04 | 8 / Little | [Guid](../types/packed-guid.md) | npc |  |  |
 | 0x0C | - / - | CString | title |  |  |
 | - | 4 / Little | u32 | emote_delay |  | mangoszero: player emote |
 | - | 4 / Little | u32 | emote |  | mangoszero: NPC emote |
@@ -67,7 +67,7 @@ SMSG have a header of 4 bytes.
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | 8 / Little | [Guid](../spec/packed-guid.md) | npc |  |  |
+| - | 8 / Little | [Guid](../types/packed-guid.md) | npc |  |  |
 | - | - / - | CString | title |  |  |
 | - | 4 / Little | u32 | emote_delay |  | mangoszero: player emote |
 | - | 4 / Little | u32 | emote |  | mangoszero: NPC emote |

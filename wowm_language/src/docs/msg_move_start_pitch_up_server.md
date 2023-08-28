@@ -26,7 +26,7 @@ SMSG have a header of 4 bytes.
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | - / - | [PackedGuid](../spec/packed-guid.md) | guid |  |  |
+| 0x04 | - / - | [PackedGuid](../types/packed-guid.md) | guid |  |  |
 | - | - / - | [MovementInfo](movementinfo.md) | info |  |  |
 
 ## Client Version 2.4.3
@@ -55,6 +55,6 @@ SMSG have a header of 4 bytes.
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | - / - | [PackedGuid](../spec/packed-guid.md) | guid |  |  |
+| 0x04 | - / - | [PackedGuid](../types/packed-guid.md) | guid |  |  |
 | - | - / - | [MovementInfo](movementinfo.md) | info |  |  |
 

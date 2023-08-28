@@ -18,7 +18,7 @@ struct MoneyLogItem {
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | 0x00 | 1 / - | u8 | action |  |  |
-| 0x01 | 8 / Little | [Guid](../spec/packed-guid.md) | player |  |  |
+| 0x01 | 8 / Little | [Guid](../types/packed-guid.md) | player |  |  |
 | 0x09 | 4 / Little | u32 | entry |  |  |
 | 0x0D | 4 / Little | u32 | timestamp |  |  |
 

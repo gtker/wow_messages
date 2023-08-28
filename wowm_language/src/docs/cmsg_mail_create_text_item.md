@@ -27,7 +27,7 @@ CMSG have a header of 6 bytes.
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x06 | 8 / Little | [Guid](../spec/packed-guid.md) | mailbox |  |  |
+| 0x06 | 8 / Little | [Guid](../types/packed-guid.md) | mailbox |  |  |
 | 0x0E | 4 / Little | u32 | mail_id |  |  |
 | 0x12 | 4 / Little | u32 | mail_template_id |  | mangoszero/cmangos/vmangos: mailTemplateId, non need, Mail store own 100% correct value anyway |
 
@@ -57,6 +57,6 @@ CMSG have a header of 6 bytes.
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x06 | 8 / Little | [Guid](../spec/packed-guid.md) | mailbox |  |  |
+| 0x06 | 8 / Little | [Guid](../types/packed-guid.md) | mailbox |  |  |
 | 0x0E | 4 / Little | u32 | mail_id |  |  |
 

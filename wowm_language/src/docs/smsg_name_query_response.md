@@ -32,7 +32,7 @@ SMSG have a header of 4 bytes.
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | 8 / Little | [Guid](../spec/packed-guid.md) | guid |  |  |
+| 0x04 | 8 / Little | [Guid](../types/packed-guid.md) | guid |  |  |
 | 0x0C | - / - | CString | character_name |  |  |
 | - | - / - | CString | realm_name | Used for showing cross realm realm names. If this is an empty string it is shown like a regular player on the same realm. |  |
 | - | 4 / - | [Race](race.md) | race |  |  |
@@ -101,7 +101,7 @@ SMSG have a header of 4 bytes.
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | - / - | [PackedGuid](../spec/packed-guid.md) | guid |  |  |
+| 0x04 | - / - | [PackedGuid](../types/packed-guid.md) | guid |  |  |
 | - | - / - | CString | character_name |  |  |
 | - | - / - | CString | realm_name | Used for showing cross realm realm names. If this is an empty string it is shown like a regular player on the same realm. |  |
 | - | 4 / - | [Race](race.md) | race |  |  |
@@ -152,7 +152,7 @@ SMSG have a header of 4 bytes.
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | - / - | [PackedGuid](../spec/packed-guid.md) | guid |  |  |
+| - | - / - | [PackedGuid](../types/packed-guid.md) | guid |  |  |
 | - | 1 / - | u8 | early_terminate |  | Added in 3.1<br/>When this is 1, the packet stops early. However, there is as of yet no good reason to ever send 1, so this is const |
 | - | - / - | CString | character_name |  |  |
 | - | - / - | CString | realm_name | Used for showing cross realm realm names. If this is an empty string it is shown like a regular player on the same realm. |  |

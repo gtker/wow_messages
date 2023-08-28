@@ -29,5 +29,5 @@ SMSG have a header of 4 bytes.
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | - | 4 / Little | u32 | quest_id |  |  |
 | - | - / - | CString | quest_title |  |  |
-| - | 8 / Little | [Guid](../spec/packed-guid.md) | guid |  |  |
+| - | 8 / Little | [Guid](../types/packed-guid.md) | guid |  |  |
 

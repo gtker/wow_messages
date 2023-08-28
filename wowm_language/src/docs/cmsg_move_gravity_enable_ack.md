@@ -27,7 +27,7 @@ CMSG have a header of 6 bytes.
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x06 | - / - | [PackedGuid](../spec/packed-guid.md) | guid |  |  |
+| 0x06 | - / - | [PackedGuid](../types/packed-guid.md) | guid |  |  |
 | - | 4 / Little | u32 | unknown |  |  |
 | - | - / - | [MovementInfo](movementinfo.md) | info |  |  |
 

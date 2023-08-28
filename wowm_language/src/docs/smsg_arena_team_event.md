@@ -58,14 +58,14 @@ If event is equal to `JOIN`:
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | - | - / - | CString | joiner_name |  |  |
 | - | - / - | CString | arena_team_name1 |  |  |
-| - | 8 / Little | [Guid](../spec/packed-guid.md) | joiner |  |  |
+| - | 8 / Little | [Guid](../types/packed-guid.md) | joiner |  |  |
 
 Else If event is equal to `LEAVE`:
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | - | - / - | CString | leaver_name |  |  |
-| - | 8 / Little | [Guid](../spec/packed-guid.md) | leaver |  |  |
+| - | 8 / Little | [Guid](../types/packed-guid.md) | leaver |  |  |
 
 Else If event is equal to `REMOVE`:
 

@@ -124,6 +124,6 @@ If movement_data is equal to `PRESENT`:
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | - | 4 / Little | u32 | opcode |  |  |
-| - | - / - | [PackedGuid](../spec/packed-guid.md) | guid |  |  |
+| - | - / - | [PackedGuid](../types/packed-guid.md) | guid |  |  |
 | - | - / - | [MovementInfo](movementinfo.md) | info |  |  |
 

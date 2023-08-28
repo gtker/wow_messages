@@ -27,7 +27,7 @@ SMSG have a header of 4 bytes.
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | 8 / Little | [Guid](../spec/packed-guid.md) | caster |  |  |
+| 0x04 | 8 / Little | [Guid](../types/packed-guid.md) | caster |  |  |
 | 0x0C | 1 / - | u8 | amount_of_casts |  |  |
 | 0x0D | 12 / - | [Vector3d](vector3d.md) | position |  |  |
 

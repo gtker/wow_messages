@@ -26,6 +26,6 @@ SMSG have a header of 4 bytes.
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | - / - | [PackedGuid](../spec/packed-guid.md) | unit |  |  |
+| - | - / - | [PackedGuid](../types/packed-guid.md) | unit |  |  |
 | - | - / - | [AuraUpdate](auraupdate.md) | aura_update |  |  |
 

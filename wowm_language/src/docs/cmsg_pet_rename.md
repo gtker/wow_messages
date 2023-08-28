@@ -26,7 +26,7 @@ CMSG have a header of 6 bytes.
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x06 | 8 / Little | [Guid](../spec/packed-guid.md) | pet |  |  |
+| 0x06 | 8 / Little | [Guid](../types/packed-guid.md) | pet |  |  |
 | 0x0E | - / - | CString | name |  |  |
 
 ## Client Version 2, Client Version 3
@@ -56,7 +56,7 @@ CMSG have a header of 6 bytes.
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x06 | 8 / Little | [Guid](../spec/packed-guid.md) | pet |  |  |
+| 0x06 | 8 / Little | [Guid](../types/packed-guid.md) | pet |  |  |
 | 0x0E | - / - | CString | name |  |  |
 | - | 1 / - | Bool | declined |  |  |
 

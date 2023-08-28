@@ -30,7 +30,7 @@ SMSG have a header of 4 bytes.
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | - | 4 / Little | u32 | id |  |  |
-| - | 8 / Little | [Guid](../spec/packed-guid.md) | caster |  |  |
+| - | 8 / Little | [Guid](../types/packed-guid.md) | caster |  |  |
 | - | 1 / - | u8 | unknown1 |  | cmangos/mangoszero: can be 0 or 1 |
 | - | 4 / Little | u32 | amount_of_targets |  |  |
 | - | ? / - | [SpellLogMiss](spelllogmiss.md)[amount_of_targets] | targets |  |  |

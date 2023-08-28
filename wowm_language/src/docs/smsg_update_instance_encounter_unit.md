@@ -48,7 +48,7 @@ is equal to `UPDATE_PRIORITY`:
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | - / - | [PackedGuid](../spec/packed-guid.md) | guid |  |  |
+| - | - / - | [PackedGuid](../types/packed-guid.md) | guid |  |  |
 | - | 1 / - | u8 | parameter1 |  |  |
 
 Else If frame is equal to `ADD_TIMER` **or** 

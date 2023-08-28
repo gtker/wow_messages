@@ -32,7 +32,7 @@ MSG have a header of either 6 bytes if they are sent from the client (CMSG), or 
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x00 | - / - | [PackedGuid](../spec/packed-guid.md) | player |  |  |
+| 0x00 | - / - | [PackedGuid](../types/packed-guid.md) | player |  |  |
 | - | - / - | [MovementInfo](movementinfo.md) | info |  |  |
 
 ## Client Version 2.4.3
@@ -67,7 +67,7 @@ MSG have a header of either 6 bytes if they are sent from the client (CMSG), or 
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x00 | - / - | [PackedGuid](../spec/packed-guid.md) | player |  |  |
+| 0x00 | - / - | [PackedGuid](../types/packed-guid.md) | player |  |  |
 | - | - / - | [MovementInfo](movementinfo.md) | info |  |  |
 
 ## Client Version 3.3.5
@@ -102,6 +102,6 @@ MSG have a header of either 6 bytes if they are sent from the client (CMSG), or 
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x00 | - / - | [PackedGuid](../spec/packed-guid.md) | player |  |  |
+| 0x00 | - / - | [PackedGuid](../types/packed-guid.md) | player |  |  |
 | - | - / - | [MovementInfo](movementinfo.md) | info |  |  |
 

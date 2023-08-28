@@ -35,7 +35,7 @@ SMSG have a header of 4 bytes.
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | 8 / Little | [Guid](../spec/packed-guid.md) | guid |  |  |
+| 0x04 | 8 / Little | [Guid](../types/packed-guid.md) | guid |  |  |
 | 0x0C | 4 / Little | u32 | display_id |  |  |
 | 0x10 | 1 / - | [Race](race.md) | race |  |  |
 | 0x11 | 1 / - | [Gender](gender.md) | gender |  |  |
@@ -83,7 +83,7 @@ SMSG have a header of 4 bytes.
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | 8 / Little | [Guid](../spec/packed-guid.md) | guid |  |  |
+| 0x04 | 8 / Little | [Guid](../types/packed-guid.md) | guid |  |  |
 | 0x0C | 4 / Little | u32 | display_id |  |  |
 | 0x10 | 1 / - | [Race](race.md) | race |  |  |
 | 0x11 | 1 / - | [Gender](gender.md) | gender |  |  |

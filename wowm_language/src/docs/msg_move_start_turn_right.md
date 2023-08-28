@@ -32,6 +32,6 @@ MSG have a header of either 6 bytes if they are sent from the client (CMSG), or 
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x00 | - / - | [PackedGuid](../spec/packed-guid.md) | guid |  |  |
+| 0x00 | - / - | [PackedGuid](../types/packed-guid.md) | guid |  |  |
 | - | - / - | [MovementInfo](movementinfo.md) | info |  |  |
 

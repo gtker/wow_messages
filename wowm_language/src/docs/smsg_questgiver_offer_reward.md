@@ -38,7 +38,7 @@ SMSG have a header of 4 bytes.
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | 8 / Little | [Guid](../spec/packed-guid.md) | npc |  |  |
+| 0x04 | 8 / Little | [Guid](../types/packed-guid.md) | npc |  |  |
 | 0x0C | 4 / Little | u32 | quest_id |  |  |
 | 0x10 | - / - | CString | title |  |  |
 | - | - / - | CString | offer_reward_text |  |  |
@@ -95,7 +95,7 @@ SMSG have a header of 4 bytes.
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | 8 / Little | [Guid](../spec/packed-guid.md) | npc |  |  |
+| 0x04 | 8 / Little | [Guid](../types/packed-guid.md) | npc |  |  |
 | 0x0C | 4 / Little | u32 | quest_id |  |  |
 | 0x10 | - / - | CString | title |  |  |
 | - | - / - | CString | offer_reward_text |  |  |
@@ -165,7 +165,7 @@ SMSG have a header of 4 bytes.
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | 8 / Little | [Guid](../spec/packed-guid.md) | npc |  |  |
+| - | 8 / Little | [Guid](../types/packed-guid.md) | npc |  |  |
 | - | 4 / Little | u32 | quest_id |  |  |
 | - | - / - | CString | title |  |  |
 | - | - / - | CString | offer_reward_text |  |  |

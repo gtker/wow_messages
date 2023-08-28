@@ -27,7 +27,7 @@ SMSG have a header of 4 bytes.
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | - / - | [PackedGuid](../spec/packed-guid.md) | unit |  |  |
+| - | - / - | [PackedGuid](../types/packed-guid.md) | unit |  |  |
 | - | 1 / - | [Power](power.md) | power |  |  |
 | - | 4 / Little | u32 | amount |  |  |
 

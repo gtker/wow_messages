@@ -29,5 +29,5 @@ CMSG have a header of 6 bytes.
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | 0x06 | 1 / - | [PartyRole](partyrole.md) | role |  |  |
 | 0x07 | 1 / - | Bool | apply |  |  |
-| 0x08 | 8 / Little | [Guid](../spec/packed-guid.md) | player |  |  |
+| 0x08 | 8 / Little | [Guid](../types/packed-guid.md) | player |  |  |
 

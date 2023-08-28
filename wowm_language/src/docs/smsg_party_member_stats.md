@@ -87,7 +87,7 @@ SMSG have a header of 4 bytes.
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | - / - | [PackedGuid](../spec/packed-guid.md) | guid |  |  |
+| 0x04 | - / - | [PackedGuid](../types/packed-guid.md) | guid |  |  |
 | - | 4 / - | [GroupUpdateFlags](groupupdateflags.md) | mask |  |  |
 
 If mask contains `STATUS`:
@@ -149,19 +149,19 @@ If mask contains `AURAS`:
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | - / - | [AuraMask](../spec/aura-mask.md) | auras |  | cmangos: In all checked pre-2.x data of packets included only positive auras |
+| - | - / - | [AuraMask](../types/aura-mask.md) | auras |  | cmangos: In all checked pre-2.x data of packets included only positive auras |
 
 If mask contains `AURAS_2`:
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | - / - | [AuraMask](../spec/aura-mask.md) | negative_auras |  |  |
+| - | - / - | [AuraMask](../types/aura-mask.md) | negative_auras |  |  |
 
 If mask contains `PET_GUID`:
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | 8 / Little | [Guid](../spec/packed-guid.md) | pet |  |  |
+| - | 8 / Little | [Guid](../types/packed-guid.md) | pet |  |  |
 
 If mask contains `PET_NAME`:
 
@@ -209,7 +209,7 @@ If mask contains `PET_AURAS`:
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | - / - | [AuraMask](../spec/aura-mask.md) | pet_auras |  |  |
+| - | - / - | [AuraMask](../types/aura-mask.md) | pet_auras |  |  |
 
 ## Client Version 2.4.3
 
@@ -295,7 +295,7 @@ SMSG have a header of 4 bytes.
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | - / - | [PackedGuid](../spec/packed-guid.md) | guid |  |  |
+| 0x04 | - / - | [PackedGuid](../types/packed-guid.md) | guid |  |  |
 | - | 4 / - | [GroupUpdateFlags](groupupdateflags.md) | mask |  |  |
 
 If mask contains `STATUS`:
@@ -357,13 +357,13 @@ If mask contains `AURAS`:
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | - / - | [AuraMask](../spec/aura-mask.md) | auras |  | cmangos: In all checked pre-2.x data of packets included only positive auras |
+| - | - / - | [AuraMask](../types/aura-mask.md) | auras |  | cmangos: In all checked pre-2.x data of packets included only positive auras |
 
 If mask contains `PET_GUID`:
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | 8 / Little | [Guid](../spec/packed-guid.md) | pet |  |  |
+| - | 8 / Little | [Guid](../types/packed-guid.md) | pet |  |  |
 
 If mask contains `PET_NAME`:
 
@@ -411,7 +411,7 @@ If mask contains `PET_AURAS`:
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | - / - | [AuraMask](../spec/aura-mask.md) | pet_auras |  |  |
+| - | - / - | [AuraMask](../types/aura-mask.md) | pet_auras |  |  |
 
 ## Client Version 3.3.5
 
@@ -500,7 +500,7 @@ SMSG have a header of 4 bytes.
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | - / - | [PackedGuid](../spec/packed-guid.md) | guid |  |  |
+| - | - / - | [PackedGuid](../types/packed-guid.md) | guid |  |  |
 | - | 4 / - | [GroupUpdateFlags](groupupdateflags.md) | mask |  |  |
 
 If mask contains `STATUS`:
@@ -562,13 +562,13 @@ If mask contains `AURAS`:
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | - / - | [AuraMask](../spec/aura-mask.md) | auras |  | cmangos: In all checked pre-2.x data of packets included only positive auras |
+| - | - / - | [AuraMask](../types/aura-mask.md) | auras |  | cmangos: In all checked pre-2.x data of packets included only positive auras |
 
 If mask contains `PET_GUID`:
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | 8 / Little | [Guid](../spec/packed-guid.md) | pet |  |  |
+| - | 8 / Little | [Guid](../types/packed-guid.md) | pet |  |  |
 
 If mask contains `PET_NAME`:
 
@@ -616,7 +616,7 @@ If mask contains `PET_AURAS`:
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | - / - | [AuraMask](../spec/aura-mask.md) | pet_auras |  |  |
+| - | - / - | [AuraMask](../types/aura-mask.md) | pet_auras |  |  |
 
 If mask contains `VEHICLE_SEAT`:
 

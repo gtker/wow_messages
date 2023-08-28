@@ -33,5 +33,5 @@ SMSG have a header of 4 bytes.
 | 0x08 | 4 / Little | u32 | creature_id |  | Unsure of name |
 | 0x0C | 4 / Little | u32 | kill_count |  |  |
 | 0x10 | 4 / Little | u32 | required_kill_count |  |  |
-| 0x14 | 8 / Little | [Guid](../spec/packed-guid.md) | guid |  |  |
+| 0x14 | 8 / Little | [Guid](../types/packed-guid.md) | guid |  |  |
 

@@ -31,7 +31,7 @@ SMSG have a header of 4 bytes.
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | 8 / Little | [Guid](../spec/packed-guid.md) | target |  |  |
+| 0x04 | 8 / Little | [Guid](../types/packed-guid.md) | target |  |  |
 | 0x0C | 4 / Little | u32 | total_exp |  |  |
 | 0x10 | 1 / - | [ExperienceAwardType](experienceawardtype.md) | exp_type |  |  |
 
@@ -74,7 +74,7 @@ SMSG have a header of 4 bytes.
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | 8 / Little | [Guid](../spec/packed-guid.md) | target |  |  |
+| - | 8 / Little | [Guid](../types/packed-guid.md) | target |  |  |
 | - | 4 / Little | u32 | total_exp |  |  |
 | - | 1 / - | [ExperienceAwardType](experienceawardtype.md) | exp_type |  |  |
 

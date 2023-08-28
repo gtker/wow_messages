@@ -42,7 +42,7 @@ SMSG have a header of 4 bytes.
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | 0x04 | 4 / Little | u32 | petition_id |  |  |
-| 0x08 | 8 / Little | [Guid](../spec/packed-guid.md) | charter_owner |  |  |
+| 0x08 | 8 / Little | [Guid](../types/packed-guid.md) | charter_owner |  |  |
 | 0x10 | - / - | CString | guild_name |  |  |
 | - | - / - | CString | body_text |  | cmangos/vmangos/mangoszero: Set to 0, only info is comment from vmangos |
 | - | 4 / Little | u32 | unknown_flags |  | cmangos/vmangos/mangoszero: Set to 1, only info is comment from vmangos |
@@ -101,7 +101,7 @@ SMSG have a header of 4 bytes.
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | 0x04 | 4 / Little | u32 | petition_id |  |  |
-| 0x08 | 8 / Little | [Guid](../spec/packed-guid.md) | charter_owner |  |  |
+| 0x08 | 8 / Little | [Guid](../types/packed-guid.md) | charter_owner |  |  |
 | 0x10 | - / - | CString | guild_name |  |  |
 | - | - / - | CString | body_text |  | cmangos/vmangos/mangoszero: Set to 0, only info is comment from vmangos |
 | - | 4 / Little | u32 | minimum_signatures |  | cmangos/vmangos/mangoszero: Set to 9, only info is comment from vmangos |
@@ -161,7 +161,7 @@ SMSG have a header of 4 bytes.
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | - | 4 / Little | u32 | petition_id |  |  |
-| - | 8 / Little | [Guid](../spec/packed-guid.md) | charter_owner |  |  |
+| - | 8 / Little | [Guid](../types/packed-guid.md) | charter_owner |  |  |
 | - | - / - | CString | guild_name |  |  |
 | - | - / - | CString | body_text |  | cmangos/vmangos/mangoszero: Set to 0, only info is comment from vmangos |
 | - | 4 / Little | u32 | minimum_signatures |  | cmangos/vmangos/mangoszero: Set to 9, only info is comment from vmangos |

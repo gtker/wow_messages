@@ -31,7 +31,7 @@ SMSG have a header of 4 bytes.
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | 8 / Little | [Guid](../spec/packed-guid.md) | item |  |  |
+| 0x04 | 8 / Little | [Guid](../types/packed-guid.md) | item |  |  |
 | 0x0C | 4 / Little | Gold | money_cost |  |  |
 | 0x10 | 4 / Little | u32 | honor_point_cost |  |  |
 | 0x14 | 4 / Little | u32 | arena_point_cost |  |  |

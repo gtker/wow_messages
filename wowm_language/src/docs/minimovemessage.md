@@ -19,7 +19,7 @@ struct MiniMoveMessage {
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | 0x00 | 1 / - | u8 | size |  |  |
 | 0x01 | 2 / - | [MiniMoveOpcode](minimoveopcode.md) | opcode |  |  |
-| 0x03 | - / - | [PackedGuid](../spec/packed-guid.md) | guid |  |  |
+| 0x03 | - / - | [PackedGuid](../types/packed-guid.md) | guid |  |  |
 | - | 4 / Little | u32 | movement_counter |  |  |
 
 

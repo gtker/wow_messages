@@ -15,7 +15,7 @@ struct ThreatUpdateUnit {
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x00 | - / - | [PackedGuid](../spec/packed-guid.md) | unit |  |  |
+| 0x00 | - / - | [PackedGuid](../types/packed-guid.md) | unit |  |  |
 | - | 4 / Little | u32 | threat |  |  |
 
 

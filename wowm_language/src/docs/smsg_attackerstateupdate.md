@@ -35,8 +35,8 @@ SMSG have a header of 4 bytes.
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | 0x04 | 4 / - | [HitInfo](hitinfo.md) | hit_info |  |  |
-| 0x08 | - / - | [PackedGuid](../spec/packed-guid.md) | attacker |  |  |
-| - | - / - | [PackedGuid](../spec/packed-guid.md) | target |  |  |
+| 0x08 | - / - | [PackedGuid](../types/packed-guid.md) | attacker |  |  |
+| - | - / - | [PackedGuid](../types/packed-guid.md) | target |  |  |
 | - | 4 / Little | u32 | total_damage |  |  |
 | - | 1 / - | u8 | amount_of_damages |  |  |
 | - | ? / - | [DamageInfo](damageinfo.md)[amount_of_damages] | damages |  |  |
@@ -80,8 +80,8 @@ SMSG have a header of 4 bytes.
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | 0x04 | 4 / - | [HitInfo](hitinfo.md) | hit_info |  |  |
-| 0x08 | - / - | [PackedGuid](../spec/packed-guid.md) | attacker |  |  |
-| - | - / - | [PackedGuid](../spec/packed-guid.md) | target |  |  |
+| 0x08 | - / - | [PackedGuid](../types/packed-guid.md) | attacker |  |  |
+| - | - / - | [PackedGuid](../types/packed-guid.md) | target |  |  |
 | - | 4 / Little | u32 | total_damage |  |  |
 | - | 1 / - | u8 | amount_of_damages |  |  |
 | - | ? / - | [DamageInfo](damageinfo.md)[amount_of_damages] | damages |  |  |
@@ -151,8 +151,8 @@ SMSG have a header of 4 bytes.
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | - | 4 / - | [HitInfo](hitinfo.md) | hit_info |  |  |
-| - | - / - | [PackedGuid](../spec/packed-guid.md) | attacker |  |  |
-| - | - / - | [PackedGuid](../spec/packed-guid.md) | target |  |  |
+| - | - / - | [PackedGuid](../types/packed-guid.md) | attacker |  |  |
+| - | - / - | [PackedGuid](../types/packed-guid.md) | target |  |  |
 | - | 4 / Little | u32 | total_damage |  |  |
 | - | 4 / Little | u32 | overkill |  |  |
 | - | 1 / - | u8 | amount_of_damages |  |  |

@@ -40,8 +40,8 @@ SMSG have a header of 4 bytes.
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | - | 1 / - | u8 | send_type |  |  |
-| - | - / - | [PackedGuid](../spec/packed-guid.md) | creator |  |  |
-| - | 8 / Little | [Guid](../spec/packed-guid.md) | event_id |  |  |
+| - | - / - | [PackedGuid](../types/packed-guid.md) | creator |  |  |
+| - | 8 / Little | [Guid](../types/packed-guid.md) | event_id |  |  |
 | - | - / - | CString | title |  |  |
 | - | - / - | CString | description |  |  |
 | - | 1 / - | u8 | event_type |  |  |

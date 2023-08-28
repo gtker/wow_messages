@@ -15,7 +15,7 @@ struct ChannelMember {
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x00 | 8 / Little | [Guid](../spec/packed-guid.md) | guid |  |  |
+| 0x00 | 8 / Little | [Guid](../types/packed-guid.md) | guid |  |  |
 | 0x08 | 1 / - | [ChannelMemberFlags](channelmemberflags.md) | member_flags |  |  |
 
 

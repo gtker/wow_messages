@@ -43,7 +43,7 @@ If status is equal to `BEGIN_TRADE`:
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x08 | 8 / Little | [Guid](../spec/packed-guid.md) | unknown1 |  | Set to 0 in vmangos. |
+| 0x08 | 8 / Little | [Guid](../types/packed-guid.md) | unknown1 |  | Set to 0 in vmangos. |
 
 Else If status is equal to `CLOSE_WINDOW`:
 
@@ -103,7 +103,7 @@ If status is equal to `BEGIN_TRADE`:
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x08 | 8 / Little | [Guid](../spec/packed-guid.md) | unknown1 |  | Set to 0 in vmangos. |
+| 0x08 | 8 / Little | [Guid](../types/packed-guid.md) | unknown1 |  | Set to 0 in vmangos. |
 
 Else If status is equal to `CLOSE_WINDOW`:
 
@@ -163,7 +163,7 @@ If status is equal to `BEGIN_TRADE`:
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | 8 / Little | [Guid](../spec/packed-guid.md) | unknown1 |  | Set to 0 in vmangos. |
+| - | 8 / Little | [Guid](../types/packed-guid.md) | unknown1 |  | Set to 0 in vmangos. |
 
 Else If status is equal to `CLOSE_WINDOW`:
 

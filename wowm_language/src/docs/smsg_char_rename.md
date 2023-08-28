@@ -37,7 +37,7 @@ If result is equal to `RESPONSE_SUCCESS`:
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x05 | 8 / Little | [Guid](../spec/packed-guid.md) | character |  |  |
+| 0x05 | 8 / Little | [Guid](../types/packed-guid.md) | character |  |  |
 | 0x0D | - / - | CString | new_name |  |  |
 
 ### Examples
@@ -95,7 +95,7 @@ If result is equal to `RESPONSE_SUCCESS`:
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x05 | 8 / Little | [Guid](../spec/packed-guid.md) | character |  |  |
+| 0x05 | 8 / Little | [Guid](../types/packed-guid.md) | character |  |  |
 | 0x0D | - / - | CString | new_name |  |  |
 
 ## Client Version 3.3.5
@@ -135,6 +135,6 @@ If result is equal to `RESPONSE_SUCCESS`:
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | 8 / Little | [Guid](../spec/packed-guid.md) | character |  |  |
+| - | 8 / Little | [Guid](../types/packed-guid.md) | character |  |  |
 | - | - / - | CString | new_name |  |  |
 

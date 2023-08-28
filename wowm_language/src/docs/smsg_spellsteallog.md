@@ -30,8 +30,8 @@ SMSG have a header of 4 bytes.
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | - / - | [PackedGuid](../spec/packed-guid.md) | victim |  |  |
-| - | - / - | [PackedGuid](../spec/packed-guid.md) | caster |  |  |
+| - | - / - | [PackedGuid](../types/packed-guid.md) | victim |  |  |
+| - | - / - | [PackedGuid](../types/packed-guid.md) | caster |  |  |
 | - | 4 / Little | u32 | spell |  |  |
 | - | 1 / - | u8 | unknown |  |  |
 | - | 4 / Little | u32 | amount_of_spell_steals |  |  |

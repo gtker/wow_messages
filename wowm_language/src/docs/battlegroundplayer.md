@@ -21,7 +21,7 @@ struct BattlegroundPlayer {
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x00 | 8 / Little | [Guid](../spec/packed-guid.md) | player |  |  |
+| 0x00 | 8 / Little | [Guid](../types/packed-guid.md) | player |  |  |
 | 0x08 | 4 / - | [PvpRank](pvprank.md) | rank |  |  |
 | 0x0C | 4 / Little | u32 | killing_blows |  |  |
 | 0x10 | 4 / Little | u32 | honorable_kills |  |  |

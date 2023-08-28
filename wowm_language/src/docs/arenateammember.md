@@ -23,7 +23,7 @@ struct ArenaTeamMember {
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x00 | 8 / Little | [Guid](../spec/packed-guid.md) | guid |  |  |
+| 0x00 | 8 / Little | [Guid](../types/packed-guid.md) | guid |  |  |
 | 0x08 | 1 / - | Bool | online |  |  |
 | 0x09 | - / - | CString | name |  |  |
 | - | 1 / - | Level | level |  |  |
@@ -61,7 +61,7 @@ struct ArenaTeamMember {
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x00 | 8 / Little | [Guid](../spec/packed-guid.md) | guid |  |  |
+| 0x00 | 8 / Little | [Guid](../types/packed-guid.md) | guid |  |  |
 | 0x08 | 1 / - | Bool | online |  |  |
 | 0x09 | - / - | CString | name |  |  |
 | - | 1 / - | Level | level |  |  |

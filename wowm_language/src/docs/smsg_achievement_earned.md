@@ -28,7 +28,7 @@ SMSG have a header of 4 bytes.
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | - / - | [PackedGuid](../spec/packed-guid.md) | player |  |  |
+| - | - / - | [PackedGuid](../types/packed-guid.md) | player |  |  |
 | - | 4 / Little | u32 | achievement |  |  |
 | - | 4 / Little | DateTime | earn_time |  |  |
 | - | 4 / Little | u32 | unknown |  | All emus set to 0. |

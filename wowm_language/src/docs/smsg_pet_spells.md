@@ -37,7 +37,7 @@ SMSG have a header of 4 bytes.
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | 8 / Little | [Guid](../spec/packed-guid.md) | pet |  |  |
+| 0x04 | 8 / Little | [Guid](../types/packed-guid.md) | pet |  |  |
 
 Optionally the following fields can be present. This can only be detected by looking at the size of the message.
 
@@ -92,7 +92,7 @@ SMSG have a header of 4 bytes.
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | 8 / Little | [Guid](../spec/packed-guid.md) | pet |  |  |
+| - | 8 / Little | [Guid](../types/packed-guid.md) | pet |  |  |
 
 Optionally the following fields can be present. This can only be detected by looking at the size of the message.
 

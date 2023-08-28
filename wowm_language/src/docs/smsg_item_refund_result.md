@@ -32,7 +32,7 @@ SMSG have a header of 4 bytes.
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | 8 / Little | [Guid](../spec/packed-guid.md) | item |  |  |
+| - | 8 / Little | [Guid](../types/packed-guid.md) | item |  |  |
 | - | 1 / - | [ItemRefundResult](itemrefundresult.md) | result |  |  |
 
 If result is equal to `SUCCESS`:

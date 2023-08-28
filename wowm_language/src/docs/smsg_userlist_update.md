@@ -29,7 +29,7 @@ SMSG have a header of 4 bytes.
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | 8 / Little | [Guid](../spec/packed-guid.md) | player |  |  |
+| 0x04 | 8 / Little | [Guid](../types/packed-guid.md) | player |  |  |
 | 0x0C | 1 / - | u8 | player_flags |  |  |
 | 0x0D | 1 / - | u8 | flags |  |  |
 | 0x0E | 4 / Little | u32 | amount_of_players |  |  |
@@ -64,7 +64,7 @@ SMSG have a header of 4 bytes.
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | 8 / Little | [Guid](../spec/packed-guid.md) | player |  |  |
+| - | 8 / Little | [Guid](../types/packed-guid.md) | player |  |  |
 | - | 1 / - | u8 | player_flags |  |  |
 | - | 1 / - | u8 | flags |  |  |
 | - | 4 / Little | u32 | amount_of_players |  |  |

@@ -16,7 +16,7 @@ struct CalendarInvitee {
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x00 | - / - | [PackedGuid](../spec/packed-guid.md) | guid |  |  |
+| 0x00 | - / - | [PackedGuid](../types/packed-guid.md) | guid |  |  |
 | - | 1 / - | u8 | status |  |  |
 | - | 1 / - | u8 | rank |  |  |
 

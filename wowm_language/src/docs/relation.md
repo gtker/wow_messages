@@ -24,7 +24,7 @@ struct Relation {
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x00 | 8 / Little | [Guid](../spec/packed-guid.md) | guid |  |  |
+| 0x00 | 8 / Little | [Guid](../types/packed-guid.md) | guid |  |  |
 | 0x08 | 4 / - | [RelationType](relationtype.md) | relation_mask |  |  |
 | 0x0C | - / - | CString | note |  |  |
 
@@ -70,7 +70,7 @@ struct Relation {
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x00 | 8 / Little | [Guid](../spec/packed-guid.md) | guid |  |  |
+| 0x00 | 8 / Little | [Guid](../types/packed-guid.md) | guid |  |  |
 | 0x08 | 4 / - | [RelationType](relationtype.md) | relation_mask |  |  |
 | 0x0C | - / - | CString | note |  |  |
 

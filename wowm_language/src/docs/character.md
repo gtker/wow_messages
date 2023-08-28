@@ -36,7 +36,7 @@ struct Character {
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x00 | 8 / Little | [Guid](../spec/packed-guid.md) | guid |  |  |
+| 0x00 | 8 / Little | [Guid](../types/packed-guid.md) | guid |  |  |
 | 0x08 | - / - | CString | name |  |  |
 | - | 1 / - | [Race](race.md) | race |  |  |
 | - | 1 / - | [Class](class.md) | class |  |  |
@@ -98,7 +98,7 @@ struct Character {
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x00 | 8 / Little | [Guid](../spec/packed-guid.md) | guid |  |  |
+| 0x00 | 8 / Little | [Guid](../types/packed-guid.md) | guid |  |  |
 | 0x08 | - / - | CString | name |  |  |
 | - | 1 / - | [Race](race.md) | race |  |  |
 | - | 1 / - | [Class](class.md) | class |  |  |
@@ -159,7 +159,7 @@ struct Character {
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x00 | 8 / Little | [Guid](../spec/packed-guid.md) | guid |  |  |
+| 0x00 | 8 / Little | [Guid](../types/packed-guid.md) | guid |  |  |
 | 0x08 | - / - | CString | name |  |  |
 | - | 1 / - | [Race](race.md) | race |  |  |
 | - | 1 / - | [Class](class.md) | class |  |  |

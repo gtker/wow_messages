@@ -32,7 +32,7 @@ SMSG have a header of 4 bytes.
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | 8 / Little | [Guid](../spec/packed-guid.md) | player |  |  |
+| 0x04 | 8 / Little | [Guid](../types/packed-guid.md) | player |  |  |
 | 0x0C | 1 / - | u8 | slot |  |  |
 | 0x0D | 4 / Little | u32 | arena_team |  |  |
 | 0x11 | 4 / Little | u32 | rating |  |  |

@@ -27,7 +27,7 @@ SMSG have a header of 4 bytes.
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | 0x04 | 4 / Little | f32 | elapsed_value |  |  |
-| 0x08 | 8 / Little | [Guid](../spec/packed-guid.md) | guid |  |  |
+| 0x08 | 8 / Little | [Guid](../types/packed-guid.md) | guid |  |  |
 
 ## Client Version 3.3.5
 
@@ -56,5 +56,5 @@ SMSG have a header of 4 bytes.
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | - | 4 / Little | f32 | elapsed_value |  |  |
-| - | - / - | [PackedGuid](../spec/packed-guid.md) | guid |  |  |
+| - | - / - | [PackedGuid](../types/packed-guid.md) | guid |  |  |
 

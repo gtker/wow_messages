@@ -41,7 +41,7 @@ If result is equal to `RESPONSE_SUCCESS`:
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | 8 / Little | [Guid](../spec/packed-guid.md) | guid |  |  |
+| - | 8 / Little | [Guid](../types/packed-guid.md) | guid |  |  |
 | - | - / - | CString | name |  |  |
 | - | 1 / - | [Gender](gender.md) | gender |  |  |
 | - | 1 / - | u8 | skin_color |  |  |

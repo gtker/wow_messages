@@ -23,7 +23,7 @@ struct VisibleItem {
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x00 | 8 / Little | [Guid](../spec/packed-guid.md) | creator |  |  |
+| 0x00 | 8 / Little | [Guid](../types/packed-guid.md) | creator |  |  |
 | 0x08 | 4 / Little | u32 | item |  |  |
 | 0x0C | 8 / - | u32[2] | enchants |  |  |
 | 0x14 | 4 / Little | u32 | padding5 |  |  |
@@ -55,7 +55,7 @@ struct VisibleItem {
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x00 | 8 / Little | [Guid](../spec/packed-guid.md) | creator |  |  |
+| 0x00 | 8 / Little | [Guid](../types/packed-guid.md) | creator |  |  |
 | 0x08 | 4 / Little | u32 | item |  |  |
 | 0x0C | 24 / - | u32[6] | enchants |  |  |
 | 0x24 | 4 / Little | u32 | random_property_id |  |  |

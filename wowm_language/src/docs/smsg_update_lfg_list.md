@@ -46,7 +46,7 @@ If update_type is equal to `PARTIAL`:
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | - | 4 / Little | u32 | amount_of_deleted_guids |  |  |
-| - | ? / - | [Guid](../spec/packed-guid.md)[amount_of_deleted_guids] | deleted_guids |  |  |
+| - | ? / - | [Guid](../types/packed-guid.md)[amount_of_deleted_guids] | deleted_guids |  |  |
 | - | 4 / Little | u32 | amount_of_groups |  |  |
 | - | 4 / Little | u32 | unknown1 |  | emus set to 0. |
 | - | ? / - | [LfgListGroup](lfglistgroup.md)[amount_of_groups] | groups |  |  |

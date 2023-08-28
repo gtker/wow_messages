@@ -39,7 +39,7 @@ CMSG have a header of 6 bytes.
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | 0x06 | 1 / - | [SpamType](spamtype.md) | complaint_type |  |  |
-| 0x07 | 8 / Little | [Guid](../spec/packed-guid.md) | offender |  |  |
+| 0x07 | 8 / Little | [Guid](../types/packed-guid.md) | offender |  |  |
 
 If complaint_type is equal to `MAIL`:
 
@@ -98,7 +98,7 @@ CMSG have a header of 6 bytes.
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | 0x06 | 1 / - | [SpamType](spamtype.md) | complaint_type |  |  |
-| 0x07 | 8 / Little | [Guid](../spec/packed-guid.md) | offender |  |  |
+| 0x07 | 8 / Little | [Guid](../types/packed-guid.md) | offender |  |  |
 
 If complaint_type is equal to `MAIL`:
 

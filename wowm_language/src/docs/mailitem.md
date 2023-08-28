@@ -15,7 +15,7 @@ struct MailItem {
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x00 | 8 / Little | [Guid](../spec/packed-guid.md) | item |  |  |
+| 0x00 | 8 / Little | [Guid](../types/packed-guid.md) | item |  |  |
 | 0x08 | 1 / - | u8 | slot |  |  |
 
 

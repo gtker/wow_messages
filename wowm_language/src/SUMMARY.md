@@ -8,15 +8,21 @@
 # Wowm Language
 
 - [Specification](./spec/lang-spec.md)
-    - [AchievementDoneArray](./spec/achievement-done-array.md)
-    - [AchievementInProgressArray](./spec/achievement-in-progress-array.md)
-    - [MonsterMoveSpline](./spec/monster-move-spline.md)
-    - [PackedGuid](./spec/packed-guid.md)
-    - [UpdateMask](./spec/update-mask.md)
-    - [AuraMask](./spec/aura-mask.md)
     - [Commands](./spec/commands.md)
     - [Tags](./spec/tags.md)
     - [Compression](./spec/compression.md)
+
+# Wowm Types
+
+- [AchievementDoneArray](./types/achievement-done-array.md)
+- [AchievementInProgressArray](./types/achievement-in-progress-array.md)
+- [AddonArray](./types/addon-array.md)
+- [AuraMask](./types/aura-mask.md)
+- [MonsterMoveSpline](./types/monster-move-spline.md)
+- [PackedGuid](./types/packed-guid.md)
+- [UpdateMask](./types/update-mask.md)
+- [u48](./types/u48.md)
+- [Variable Item Random Property](./types/variable-item-random-property.md)
 
 # Intermediate Representation
 

@@ -32,9 +32,9 @@ struct TradeSlot {
 | 0x05 | 4 / Little | u32 | display_id |  |  |
 | 0x09 | 4 / Little | u32 | stack_count |  |  |
 | 0x0D | 4 / Little | Bool32 | wrapped |  |  |
-| 0x11 | 8 / Little | [Guid](../spec/packed-guid.md) | gift_wrapper |  |  |
+| 0x11 | 8 / Little | [Guid](../types/packed-guid.md) | gift_wrapper |  |  |
 | 0x19 | 4 / Little | u32 | enchantment |  |  |
-| 0x1D | 8 / Little | [Guid](../spec/packed-guid.md) | item_creator |  |  |
+| 0x1D | 8 / Little | [Guid](../types/packed-guid.md) | item_creator |  |  |
 | 0x25 | 4 / Little | u32 | spell_charges |  |  |
 | 0x29 | 4 / Little | u32 | item_suffix_factor |  |  |
 | 0x2D | 4 / Little | u32 | item_random_properties_id |  |  |
@@ -79,10 +79,10 @@ struct TradeSlot {
 | 0x05 | 4 / Little | u32 | display_id |  |  |
 | 0x09 | 4 / Little | u32 | stack_count |  |  |
 | 0x0D | 4 / Little | Bool32 | wrapped |  |  |
-| 0x11 | 8 / Little | [Guid](../spec/packed-guid.md) | gift_wrapper |  |  |
+| 0x11 | 8 / Little | [Guid](../types/packed-guid.md) | gift_wrapper |  |  |
 | 0x19 | 4 / Little | u32 | enchantment |  |  |
 | 0x1D | 12 / - | u32[3] | enchantments_slots |  |  |
-| 0x29 | 8 / Little | [Guid](../spec/packed-guid.md) | item_creator |  |  |
+| 0x29 | 8 / Little | [Guid](../types/packed-guid.md) | item_creator |  |  |
 | 0x31 | 4 / Little | u32 | spell_charges |  |  |
 | 0x35 | 4 / Little | u32 | item_suffix_factor |  |  |
 | 0x39 | 4 / Little | u32 | item_random_properties_id |  |  |

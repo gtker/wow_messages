@@ -26,6 +26,6 @@ SMSG have a header of 4 bytes.
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | - / - | [AchievementDoneArray](../spec/achievement-done-array.md) | done |  |  |
-| - | - / - | [AchievementInProgressArray](../spec/achievement-in-progress-array.md) | in_progress |  |  |
+| - | - / - | [AchievementDoneArray](../types/achievement-done-array.md) | done |  |  |
+| - | - / - | [AchievementInProgressArray](../types/achievement-in-progress-array.md) | in_progress |  |  |
 

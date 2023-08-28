@@ -557,13 +557,13 @@ fn print_container_field(
                     format!("[{}]({}.md)", d.ty().str(), e.name().to_lowercase())
                 }
                 Type::NamedGuid | Type::PackedGuid | Type::Guid => {
-                    format!("[{}](../spec/packed-guid.md)", d.ty().str())
+                    format!("[{}](../types/packed-guid.md)", d.ty().str())
                 }
                 Type::UpdateMask { .. } => {
-                    format!("[{}](../spec/update-mask.md)", d.ty().str())
+                    format!("[{}](../types/update-mask.md)", d.ty().str())
                 }
                 Type::EnchantMask | Type::InspectTalentGearMask | Type::AuraMask => {
-                    format!("[{}](../spec/aura-mask.md)", d.ty().str())
+                    format!("[{}](../types/aura-mask.md)", d.ty().str())
                 }
                 Type::Array(array) => match array.ty() {
                     ArrayType::CString | ArrayType::Integer(_) => d.ty().str(),
@@ -577,31 +577,31 @@ fn print_container_field(
                     }
                     ArrayType::Guid => {
                         format!(
-                            "[Guid](../spec/packed-guid.md)[{size}]",
+                            "[Guid](../types/packed-guid.md)[{size}]",
                             size = array.size().str()
                         )
                     }
                     ArrayType::PackedGuid => {
                         format!(
-                            "[PackedGuid](../spec/packed-guid.md)[{size}]",
+                            "[PackedGuid](../types/packed-guid.md)[{size}]",
                             size = array.size().str()
                         )
                     }
                 },
-                Type::AddonArray => "[AddonArray](../spec/addon-array.md)".to_string(),
+                Type::AddonArray => "[AddonArray](../types/addon-array.md)".to_string(),
                 Type::AchievementDoneArray => {
-                    "[AchievementDoneArray](../spec/achievement-done-array.md)".to_string()
+                    "[AchievementDoneArray](../types/achievement-done-array.md)".to_string()
                 }
                 Type::AchievementInProgressArray => {
-                    "[AchievementInProgressArray](../spec/achievement-in-progress-array.md)"
+                    "[AchievementInProgressArray](../types/achievement-in-progress-array.md)"
                         .to_string()
                 }
                 Type::VariableItemRandomProperty => {
-                    "[VariableItemRandomProperty](../spec/variable-item-random-property.md)"
+                    "[VariableItemRandomProperty](../types/variable-item-random-property.md)"
                         .to_string()
                 }
                 Type::MonsterMoveSplines => {
-                    "[MonsterMoveSpline](../spec/monster-move-spline.md)".to_string()
+                    "[MonsterMoveSpline](../types/monster-move-spline.md)".to_string()
                 }
                 Type::Population
                 | Type::Seconds
