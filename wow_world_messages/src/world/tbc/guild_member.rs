@@ -50,7 +50,7 @@ impl GuildMember {
 
         // name: CString
         // TODO: Guard against strings that are already null-terminated
-        assert_ne!(self.name.as_bytes().iter().rev().next(), Some(&0_u8), "String `name` must not be null-terminated.");
+        assert_ne!(self.name.as_bytes().iter().next_back(), Some(&0_u8), "String `name` must not be null-terminated.");
         w.write_all(self.name.as_bytes())?;
         // Null terminator
         w.write_all(&[0])?;
@@ -83,14 +83,14 @@ impl GuildMember {
 
         // public_note: CString
         // TODO: Guard against strings that are already null-terminated
-        assert_ne!(self.public_note.as_bytes().iter().rev().next(), Some(&0_u8), "String `public_note` must not be null-terminated.");
+        assert_ne!(self.public_note.as_bytes().iter().next_back(), Some(&0_u8), "String `public_note` must not be null-terminated.");
         w.write_all(self.public_note.as_bytes())?;
         // Null terminator
         w.write_all(&[0])?;
 
         // officer_note: CString
         // TODO: Guard against strings that are already null-terminated
-        assert_ne!(self.officer_note.as_bytes().iter().rev().next(), Some(&0_u8), "String `officer_note` must not be null-terminated.");
+        assert_ne!(self.officer_note.as_bytes().iter().next_back(), Some(&0_u8), "String `officer_note` must not be null-terminated.");
         w.write_all(self.officer_note.as_bytes())?;
         // Null terminator
         w.write_all(&[0])?;

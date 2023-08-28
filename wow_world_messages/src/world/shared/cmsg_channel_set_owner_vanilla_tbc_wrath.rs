@@ -83,14 +83,14 @@ impl crate::Message for CMSG_CHANNEL_SET_OWNER {
     fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
         // channel_name: CString
         // TODO: Guard against strings that are already null-terminated
-        assert_ne!(self.channel_name.as_bytes().iter().rev().next(), Some(&0_u8), "String `channel_name` must not be null-terminated.");
+        assert_ne!(self.channel_name.as_bytes().iter().next_back(), Some(&0_u8), "String `channel_name` must not be null-terminated.");
         w.write_all(self.channel_name.as_bytes())?;
         // Null terminator
         w.write_all(&[0])?;
 
         // new_owner: CString
         // TODO: Guard against strings that are already null-terminated
-        assert_ne!(self.new_owner.as_bytes().iter().rev().next(), Some(&0_u8), "String `new_owner` must not be null-terminated.");
+        assert_ne!(self.new_owner.as_bytes().iter().next_back(), Some(&0_u8), "String `new_owner` must not be null-terminated.");
         w.write_all(self.new_owner.as_bytes())?;
         // Null terminator
         w.write_all(&[0])?;

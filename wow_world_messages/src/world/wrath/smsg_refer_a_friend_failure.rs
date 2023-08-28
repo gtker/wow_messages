@@ -126,7 +126,7 @@ impl crate::Message for SMSG_REFER_A_FRIEND_FAILURE {
             } => {
                 // target_name: CString
                 // TODO: Guard against strings that are already null-terminated
-                assert_ne!(target_name.as_bytes().iter().rev().next(), Some(&0_u8), "String `target_name` must not be null-terminated.");
+                assert_ne!(target_name.as_bytes().iter().next_back(), Some(&0_u8), "String `target_name` must not be null-terminated.");
                 w.write_all(target_name.as_bytes())?;
                 // Null terminator
                 w.write_all(&[0])?;

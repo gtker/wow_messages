@@ -352,14 +352,14 @@ impl crate::Message for SMSG_ARENA_TEAM_EVENT {
             } => {
                 // joiner_name: CString
                 // TODO: Guard against strings that are already null-terminated
-                assert_ne!(joiner_name.as_bytes().iter().rev().next(), Some(&0_u8), "String `joiner_name` must not be null-terminated.");
+                assert_ne!(joiner_name.as_bytes().iter().next_back(), Some(&0_u8), "String `joiner_name` must not be null-terminated.");
                 w.write_all(joiner_name.as_bytes())?;
                 // Null terminator
                 w.write_all(&[0])?;
 
                 // arena_team_name1: CString
                 // TODO: Guard against strings that are already null-terminated
-                assert_ne!(arena_team_name1.as_bytes().iter().rev().next(), Some(&0_u8), "String `arena_team_name1` must not be null-terminated.");
+                assert_ne!(arena_team_name1.as_bytes().iter().next_back(), Some(&0_u8), "String `arena_team_name1` must not be null-terminated.");
                 w.write_all(arena_team_name1.as_bytes())?;
                 // Null terminator
                 w.write_all(&[0])?;
@@ -374,7 +374,7 @@ impl crate::Message for SMSG_ARENA_TEAM_EVENT {
             } => {
                 // leaver_name: CString
                 // TODO: Guard against strings that are already null-terminated
-                assert_ne!(leaver_name.as_bytes().iter().rev().next(), Some(&0_u8), "String `leaver_name` must not be null-terminated.");
+                assert_ne!(leaver_name.as_bytes().iter().next_back(), Some(&0_u8), "String `leaver_name` must not be null-terminated.");
                 w.write_all(leaver_name.as_bytes())?;
                 // Null terminator
                 w.write_all(&[0])?;
@@ -390,21 +390,21 @@ impl crate::Message for SMSG_ARENA_TEAM_EVENT {
             } => {
                 // kicked_player_name: CString
                 // TODO: Guard against strings that are already null-terminated
-                assert_ne!(kicked_player_name.as_bytes().iter().rev().next(), Some(&0_u8), "String `kicked_player_name` must not be null-terminated.");
+                assert_ne!(kicked_player_name.as_bytes().iter().next_back(), Some(&0_u8), "String `kicked_player_name` must not be null-terminated.");
                 w.write_all(kicked_player_name.as_bytes())?;
                 // Null terminator
                 w.write_all(&[0])?;
 
                 // arena_team_name2: CString
                 // TODO: Guard against strings that are already null-terminated
-                assert_ne!(arena_team_name2.as_bytes().iter().rev().next(), Some(&0_u8), "String `arena_team_name2` must not be null-terminated.");
+                assert_ne!(arena_team_name2.as_bytes().iter().next_back(), Some(&0_u8), "String `arena_team_name2` must not be null-terminated.");
                 w.write_all(arena_team_name2.as_bytes())?;
                 // Null terminator
                 w.write_all(&[0])?;
 
                 // kicker_name: CString
                 // TODO: Guard against strings that are already null-terminated
-                assert_ne!(kicker_name.as_bytes().iter().rev().next(), Some(&0_u8), "String `kicker_name` must not be null-terminated.");
+                assert_ne!(kicker_name.as_bytes().iter().next_back(), Some(&0_u8), "String `kicker_name` must not be null-terminated.");
                 w.write_all(kicker_name.as_bytes())?;
                 // Null terminator
                 w.write_all(&[0])?;
@@ -416,14 +416,14 @@ impl crate::Message for SMSG_ARENA_TEAM_EVENT {
             } => {
                 // leader_name: CString
                 // TODO: Guard against strings that are already null-terminated
-                assert_ne!(leader_name.as_bytes().iter().rev().next(), Some(&0_u8), "String `leader_name` must not be null-terminated.");
+                assert_ne!(leader_name.as_bytes().iter().next_back(), Some(&0_u8), "String `leader_name` must not be null-terminated.");
                 w.write_all(leader_name.as_bytes())?;
                 // Null terminator
                 w.write_all(&[0])?;
 
                 // arena_team_name3: CString
                 // TODO: Guard against strings that are already null-terminated
-                assert_ne!(arena_team_name3.as_bytes().iter().rev().next(), Some(&0_u8), "String `arena_team_name3` must not be null-terminated.");
+                assert_ne!(arena_team_name3.as_bytes().iter().next_back(), Some(&0_u8), "String `arena_team_name3` must not be null-terminated.");
                 w.write_all(arena_team_name3.as_bytes())?;
                 // Null terminator
                 w.write_all(&[0])?;
@@ -435,14 +435,14 @@ impl crate::Message for SMSG_ARENA_TEAM_EVENT {
             } => {
                 // old_leader: CString
                 // TODO: Guard against strings that are already null-terminated
-                assert_ne!(old_leader.as_bytes().iter().rev().next(), Some(&0_u8), "String `old_leader` must not be null-terminated.");
+                assert_ne!(old_leader.as_bytes().iter().next_back(), Some(&0_u8), "String `old_leader` must not be null-terminated.");
                 w.write_all(old_leader.as_bytes())?;
                 // Null terminator
                 w.write_all(&[0])?;
 
                 // new_leader: CString
                 // TODO: Guard against strings that are already null-terminated
-                assert_ne!(new_leader.as_bytes().iter().rev().next(), Some(&0_u8), "String `new_leader` must not be null-terminated.");
+                assert_ne!(new_leader.as_bytes().iter().next_back(), Some(&0_u8), "String `new_leader` must not be null-terminated.");
                 w.write_all(new_leader.as_bytes())?;
                 // Null terminator
                 w.write_all(&[0])?;
@@ -454,14 +454,14 @@ impl crate::Message for SMSG_ARENA_TEAM_EVENT {
             } => {
                 // leader_name: CString
                 // TODO: Guard against strings that are already null-terminated
-                assert_ne!(leader_name.as_bytes().iter().rev().next(), Some(&0_u8), "String `leader_name` must not be null-terminated.");
+                assert_ne!(leader_name.as_bytes().iter().next_back(), Some(&0_u8), "String `leader_name` must not be null-terminated.");
                 w.write_all(leader_name.as_bytes())?;
                 // Null terminator
                 w.write_all(&[0])?;
 
                 // arena_team_name3: CString
                 // TODO: Guard against strings that are already null-terminated
-                assert_ne!(arena_team_name3.as_bytes().iter().rev().next(), Some(&0_u8), "String `arena_team_name3` must not be null-terminated.");
+                assert_ne!(arena_team_name3.as_bytes().iter().next_back(), Some(&0_u8), "String `arena_team_name3` must not be null-terminated.");
                 w.write_all(arena_team_name3.as_bytes())?;
                 // Null terminator
                 w.write_all(&[0])?;

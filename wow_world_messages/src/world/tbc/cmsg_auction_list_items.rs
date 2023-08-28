@@ -201,7 +201,7 @@ impl crate::Message for CMSG_AUCTION_LIST_ITEMS {
 
         // searched_name: CString
         // TODO: Guard against strings that are already null-terminated
-        assert_ne!(self.searched_name.as_bytes().iter().rev().next(), Some(&0_u8), "String `searched_name` must not be null-terminated.");
+        assert_ne!(self.searched_name.as_bytes().iter().next_back(), Some(&0_u8), "String `searched_name` must not be null-terminated.");
         w.write_all(self.searched_name.as_bytes())?;
         // Null terminator
         w.write_all(&[0])?;

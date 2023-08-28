@@ -146,7 +146,7 @@ impl Addon {
             } => {
                 // url: CString
                 // TODO: Guard against strings that are already null-terminated
-                assert_ne!(url.as_bytes().iter().rev().next(), Some(&0_u8), "String `url` must not be null-terminated.");
+                assert_ne!(url.as_bytes().iter().next_back(), Some(&0_u8), "String `url` must not be null-terminated.");
                 w.write_all(url.as_bytes())?;
                 // Null terminator
                 w.write_all(&[0])?;

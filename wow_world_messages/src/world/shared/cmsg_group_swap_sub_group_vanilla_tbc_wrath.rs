@@ -83,14 +83,14 @@ impl crate::Message for CMSG_GROUP_SWAP_SUB_GROUP {
     fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
         // name: CString
         // TODO: Guard against strings that are already null-terminated
-        assert_ne!(self.name.as_bytes().iter().rev().next(), Some(&0_u8), "String `name` must not be null-terminated.");
+        assert_ne!(self.name.as_bytes().iter().next_back(), Some(&0_u8), "String `name` must not be null-terminated.");
         w.write_all(self.name.as_bytes())?;
         // Null terminator
         w.write_all(&[0])?;
 
         // swap_with_name: CString
         // TODO: Guard against strings that are already null-terminated
-        assert_ne!(self.swap_with_name.as_bytes().iter().rev().next(), Some(&0_u8), "String `swap_with_name` must not be null-terminated.");
+        assert_ne!(self.swap_with_name.as_bytes().iter().next_back(), Some(&0_u8), "String `swap_with_name` must not be null-terminated.");
         w.write_all(self.swap_with_name.as_bytes())?;
         // Null terminator
         w.write_all(&[0])?;

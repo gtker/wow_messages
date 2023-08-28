@@ -199,21 +199,21 @@ impl crate::Message for CMSG_SEND_MAIL {
 
         // receiver: CString
         // TODO: Guard against strings that are already null-terminated
-        assert_ne!(self.receiver.as_bytes().iter().rev().next(), Some(&0_u8), "String `receiver` must not be null-terminated.");
+        assert_ne!(self.receiver.as_bytes().iter().next_back(), Some(&0_u8), "String `receiver` must not be null-terminated.");
         w.write_all(self.receiver.as_bytes())?;
         // Null terminator
         w.write_all(&[0])?;
 
         // subject: CString
         // TODO: Guard against strings that are already null-terminated
-        assert_ne!(self.subject.as_bytes().iter().rev().next(), Some(&0_u8), "String `subject` must not be null-terminated.");
+        assert_ne!(self.subject.as_bytes().iter().next_back(), Some(&0_u8), "String `subject` must not be null-terminated.");
         w.write_all(self.subject.as_bytes())?;
         // Null terminator
         w.write_all(&[0])?;
 
         // body: CString
         // TODO: Guard against strings that are already null-terminated
-        assert_ne!(self.body.as_bytes().iter().rev().next(), Some(&0_u8), "String `body` must not be null-terminated.");
+        assert_ne!(self.body.as_bytes().iter().next_back(), Some(&0_u8), "String `body` must not be null-terminated.");
         w.write_all(self.body.as_bytes())?;
         // Null terminator
         w.write_all(&[0])?;

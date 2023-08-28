@@ -136,7 +136,7 @@ impl SpellCastTargets {
         if let Some(if_statement) = &self.target_flags.string {
             // target_string: CString
             // TODO: Guard against strings that are already null-terminated
-            assert_ne!(if_statement.target_string.as_bytes().iter().rev().next(), Some(&0_u8), "String `target_string` must not be null-terminated.");
+            assert_ne!(if_statement.target_string.as_bytes().iter().next_back(), Some(&0_u8), "String `target_string` must not be null-terminated.");
             w.write_all(if_statement.target_string.as_bytes())?;
             // Null terminator
             w.write_all(&[0])?;

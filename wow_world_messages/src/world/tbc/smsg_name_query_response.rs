@@ -181,14 +181,14 @@ impl crate::Message for SMSG_NAME_QUERY_RESPONSE {
 
         // character_name: CString
         // TODO: Guard against strings that are already null-terminated
-        assert_ne!(self.character_name.as_bytes().iter().rev().next(), Some(&0_u8), "String `character_name` must not be null-terminated.");
+        assert_ne!(self.character_name.as_bytes().iter().next_back(), Some(&0_u8), "String `character_name` must not be null-terminated.");
         w.write_all(self.character_name.as_bytes())?;
         // Null terminator
         w.write_all(&[0])?;
 
         // realm_name: CString
         // TODO: Guard against strings that are already null-terminated
-        assert_ne!(self.realm_name.as_bytes().iter().rev().next(), Some(&0_u8), "String `realm_name` must not be null-terminated.");
+        assert_ne!(self.realm_name.as_bytes().iter().next_back(), Some(&0_u8), "String `realm_name` must not be null-terminated.");
         w.write_all(self.realm_name.as_bytes())?;
         // Null terminator
         w.write_all(&[0])?;

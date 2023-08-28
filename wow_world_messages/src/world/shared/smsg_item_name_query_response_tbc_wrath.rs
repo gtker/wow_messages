@@ -93,7 +93,7 @@ impl crate::Message for SMSG_ITEM_NAME_QUERY_RESPONSE {
 
         // item_name: CString
         // TODO: Guard against strings that are already null-terminated
-        assert_ne!(self.item_name.as_bytes().iter().rev().next(), Some(&0_u8), "String `item_name` must not be null-terminated.");
+        assert_ne!(self.item_name.as_bytes().iter().next_back(), Some(&0_u8), "String `item_name` must not be null-terminated.");
         w.write_all(self.item_name.as_bytes())?;
         // Null terminator
         w.write_all(&[0])?;

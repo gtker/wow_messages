@@ -233,49 +233,49 @@ impl crate::Message for SMSG_GAMEOBJECT_QUERY_RESPONSE {
 
             // name1: CString
             // TODO: Guard against strings that are already null-terminated
-            assert_ne!(v.name1.as_bytes().iter().rev().next(), Some(&0_u8), "String `name1` must not be null-terminated.");
+            assert_ne!(v.name1.as_bytes().iter().next_back(), Some(&0_u8), "String `name1` must not be null-terminated.");
             w.write_all(v.name1.as_bytes())?;
             // Null terminator
             w.write_all(&[0])?;
 
             // name2: CString
             // TODO: Guard against strings that are already null-terminated
-            assert_ne!(v.name2.as_bytes().iter().rev().next(), Some(&0_u8), "String `name2` must not be null-terminated.");
+            assert_ne!(v.name2.as_bytes().iter().next_back(), Some(&0_u8), "String `name2` must not be null-terminated.");
             w.write_all(v.name2.as_bytes())?;
             // Null terminator
             w.write_all(&[0])?;
 
             // name3: CString
             // TODO: Guard against strings that are already null-terminated
-            assert_ne!(v.name3.as_bytes().iter().rev().next(), Some(&0_u8), "String `name3` must not be null-terminated.");
+            assert_ne!(v.name3.as_bytes().iter().next_back(), Some(&0_u8), "String `name3` must not be null-terminated.");
             w.write_all(v.name3.as_bytes())?;
             // Null terminator
             w.write_all(&[0])?;
 
             // name4: CString
             // TODO: Guard against strings that are already null-terminated
-            assert_ne!(v.name4.as_bytes().iter().rev().next(), Some(&0_u8), "String `name4` must not be null-terminated.");
+            assert_ne!(v.name4.as_bytes().iter().next_back(), Some(&0_u8), "String `name4` must not be null-terminated.");
             w.write_all(v.name4.as_bytes())?;
             // Null terminator
             w.write_all(&[0])?;
 
             // icon_name: CString
             // TODO: Guard against strings that are already null-terminated
-            assert_ne!(v.icon_name.as_bytes().iter().rev().next(), Some(&0_u8), "String `icon_name` must not be null-terminated.");
+            assert_ne!(v.icon_name.as_bytes().iter().next_back(), Some(&0_u8), "String `icon_name` must not be null-terminated.");
             w.write_all(v.icon_name.as_bytes())?;
             // Null terminator
             w.write_all(&[0])?;
 
             // cast_bar_caption: CString
             // TODO: Guard against strings that are already null-terminated
-            assert_ne!(v.cast_bar_caption.as_bytes().iter().rev().next(), Some(&0_u8), "String `cast_bar_caption` must not be null-terminated.");
+            assert_ne!(v.cast_bar_caption.as_bytes().iter().next_back(), Some(&0_u8), "String `cast_bar_caption` must not be null-terminated.");
             w.write_all(v.cast_bar_caption.as_bytes())?;
             // Null terminator
             w.write_all(&[0])?;
 
             // unknown: CString
             // TODO: Guard against strings that are already null-terminated
-            assert_ne!(v.unknown.as_bytes().iter().rev().next(), Some(&0_u8), "String `unknown` must not be null-terminated.");
+            assert_ne!(v.unknown.as_bytes().iter().next_back(), Some(&0_u8), "String `unknown` must not be null-terminated.");
             w.write_all(v.unknown.as_bytes())?;
             // Null terminator
             w.write_all(&[0])?;

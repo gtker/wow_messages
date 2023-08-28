@@ -129,7 +129,7 @@ impl crate::Message for CMSG_GOSSIP_SELECT_OPTION {
         if let Some(v) = &self.unknown {
             // code: CString
             // TODO: Guard against strings that are already null-terminated
-            assert_ne!(v.code.as_bytes().iter().rev().next(), Some(&0_u8), "String `code` must not be null-terminated.");
+            assert_ne!(v.code.as_bytes().iter().next_back(), Some(&0_u8), "String `code` must not be null-terminated.");
             w.write_all(v.code.as_bytes())?;
             // Null terminator
             w.write_all(&[0])?;

@@ -84,14 +84,14 @@ impl crate::Message for CMSG_GUILD_SET_OFFICER_NOTE {
     fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
         // player_name: CString
         // TODO: Guard against strings that are already null-terminated
-        assert_ne!(self.player_name.as_bytes().iter().rev().next(), Some(&0_u8), "String `player_name` must not be null-terminated.");
+        assert_ne!(self.player_name.as_bytes().iter().next_back(), Some(&0_u8), "String `player_name` must not be null-terminated.");
         w.write_all(self.player_name.as_bytes())?;
         // Null terminator
         w.write_all(&[0])?;
 
         // note: CString
         // TODO: Guard against strings that are already null-terminated
-        assert_ne!(self.note.as_bytes().iter().rev().next(), Some(&0_u8), "String `note` must not be null-terminated.");
+        assert_ne!(self.note.as_bytes().iter().next_back(), Some(&0_u8), "String `note` must not be null-terminated.");
         w.write_all(self.note.as_bytes())?;
         // Null terminator
         w.write_all(&[0])?;

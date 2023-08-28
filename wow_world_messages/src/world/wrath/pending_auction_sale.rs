@@ -27,14 +27,14 @@ impl PendingAuctionSale {
     pub(crate) fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
         // string1: CString
         // TODO: Guard against strings that are already null-terminated
-        assert_ne!(self.string1.as_bytes().iter().rev().next(), Some(&0_u8), "String `string1` must not be null-terminated.");
+        assert_ne!(self.string1.as_bytes().iter().next_back(), Some(&0_u8), "String `string1` must not be null-terminated.");
         w.write_all(self.string1.as_bytes())?;
         // Null terminator
         w.write_all(&[0])?;
 
         // string2: CString
         // TODO: Guard against strings that are already null-terminated
-        assert_ne!(self.string2.as_bytes().iter().rev().next(), Some(&0_u8), "String `string2` must not be null-terminated.");
+        assert_ne!(self.string2.as_bytes().iter().next_back(), Some(&0_u8), "String `string2` must not be null-terminated.");
         w.write_all(self.string2.as_bytes())?;
         // Null terminator
         w.write_all(&[0])?;

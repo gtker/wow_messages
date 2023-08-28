@@ -217,7 +217,7 @@ pub(crate) fn print_write_definition(
         Type::CString => {
             s.wln("// TODO: Guard against strings that are already null-terminated");
             s.wln(format!(
-                "assert_ne!({variable_prefix}{name}.as_bytes().iter().rev().next(), Some(&0_u8), \"String `{name}` must not be null-terminated.\");",
+                "assert_ne!({variable_prefix}{name}.as_bytes().iter().next_back(), Some(&0_u8), \"String `{name}` must not be null-terminated.\");",
             ));
             s.wln(format!(
                 "w.write_all({variable_prefix}{name}.as_bytes()){postfix}?;",

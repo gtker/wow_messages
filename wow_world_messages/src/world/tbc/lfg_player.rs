@@ -51,7 +51,7 @@ impl LfgPlayer {
 
         // comment: CString
         // TODO: Guard against strings that are already null-terminated
-        assert_ne!(self.comment.as_bytes().iter().rev().next(), Some(&0_u8), "String `comment` must not be null-terminated.");
+        assert_ne!(self.comment.as_bytes().iter().next_back(), Some(&0_u8), "String `comment` must not be null-terminated.");
         w.write_all(self.comment.as_bytes())?;
         // Null terminator
         w.write_all(&[0])?;

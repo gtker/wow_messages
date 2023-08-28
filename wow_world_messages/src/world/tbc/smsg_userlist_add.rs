@@ -118,7 +118,7 @@ impl crate::Message for SMSG_USERLIST_ADD {
 
         // name: CString
         // TODO: Guard against strings that are already null-terminated
-        assert_ne!(self.name.as_bytes().iter().rev().next(), Some(&0_u8), "String `name` must not be null-terminated.");
+        assert_ne!(self.name.as_bytes().iter().next_back(), Some(&0_u8), "String `name` must not be null-terminated.");
         w.write_all(self.name.as_bytes())?;
         // Null terminator
         w.write_all(&[0])?;

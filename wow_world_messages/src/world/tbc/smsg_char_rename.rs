@@ -218,7 +218,7 @@ impl crate::Message for SMSG_CHAR_RENAME {
 
                 // new_name: CString
                 // TODO: Guard against strings that are already null-terminated
-                assert_ne!(new_name.as_bytes().iter().rev().next(), Some(&0_u8), "String `new_name` must not be null-terminated.");
+                assert_ne!(new_name.as_bytes().iter().next_back(), Some(&0_u8), "String `new_name` must not be null-terminated.");
                 w.write_all(new_name.as_bytes())?;
                 // Null terminator
                 w.write_all(&[0])?;

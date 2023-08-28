@@ -83,14 +83,14 @@ impl crate::Message for SMSG_GUILD_INVITE {
     fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
         // player_name: CString
         // TODO: Guard against strings that are already null-terminated
-        assert_ne!(self.player_name.as_bytes().iter().rev().next(), Some(&0_u8), "String `player_name` must not be null-terminated.");
+        assert_ne!(self.player_name.as_bytes().iter().next_back(), Some(&0_u8), "String `player_name` must not be null-terminated.");
         w.write_all(self.player_name.as_bytes())?;
         // Null terminator
         w.write_all(&[0])?;
 
         // guild_name: CString
         // TODO: Guard against strings that are already null-terminated
-        assert_ne!(self.guild_name.as_bytes().iter().rev().next(), Some(&0_u8), "String `guild_name` must not be null-terminated.");
+        assert_ne!(self.guild_name.as_bytes().iter().next_back(), Some(&0_u8), "String `guild_name` must not be null-terminated.");
         w.write_all(self.guild_name.as_bytes())?;
         // Null terminator
         w.write_all(&[0])?;

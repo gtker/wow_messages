@@ -17,14 +17,14 @@ impl GuildBankTab {
     pub(crate) fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
         // tab_name: CString
         // TODO: Guard against strings that are already null-terminated
-        assert_ne!(self.tab_name.as_bytes().iter().rev().next(), Some(&0_u8), "String `tab_name` must not be null-terminated.");
+        assert_ne!(self.tab_name.as_bytes().iter().next_back(), Some(&0_u8), "String `tab_name` must not be null-terminated.");
         w.write_all(self.tab_name.as_bytes())?;
         // Null terminator
         w.write_all(&[0])?;
 
         // tab_icon: CString
         // TODO: Guard against strings that are already null-terminated
-        assert_ne!(self.tab_icon.as_bytes().iter().rev().next(), Some(&0_u8), "String `tab_icon` must not be null-terminated.");
+        assert_ne!(self.tab_icon.as_bytes().iter().next_back(), Some(&0_u8), "String `tab_icon` must not be null-terminated.");
         w.write_all(self.tab_icon.as_bytes())?;
         // Null terminator
         w.write_all(&[0])?;

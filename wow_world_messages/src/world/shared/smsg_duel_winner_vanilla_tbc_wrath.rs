@@ -96,14 +96,14 @@ impl crate::Message for SMSG_DUEL_WINNER {
 
         // opponent_name: CString
         // TODO: Guard against strings that are already null-terminated
-        assert_ne!(self.opponent_name.as_bytes().iter().rev().next(), Some(&0_u8), "String `opponent_name` must not be null-terminated.");
+        assert_ne!(self.opponent_name.as_bytes().iter().next_back(), Some(&0_u8), "String `opponent_name` must not be null-terminated.");
         w.write_all(self.opponent_name.as_bytes())?;
         // Null terminator
         w.write_all(&[0])?;
 
         // initiator_name: CString
         // TODO: Guard against strings that are already null-terminated
-        assert_ne!(self.initiator_name.as_bytes().iter().rev().next(), Some(&0_u8), "String `initiator_name` must not be null-terminated.");
+        assert_ne!(self.initiator_name.as_bytes().iter().next_back(), Some(&0_u8), "String `initiator_name` must not be null-terminated.");
         w.write_all(self.initiator_name.as_bytes())?;
         // Null terminator
         w.write_all(&[0])?;

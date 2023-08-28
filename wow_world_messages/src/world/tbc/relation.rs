@@ -39,7 +39,7 @@ impl Relation {
 
         // note: CString
         // TODO: Guard against strings that are already null-terminated
-        assert_ne!(self.note.as_bytes().iter().rev().next(), Some(&0_u8), "String `note` must not be null-terminated.");
+        assert_ne!(self.note.as_bytes().iter().next_back(), Some(&0_u8), "String `note` must not be null-terminated.");
         w.write_all(self.note.as_bytes())?;
         // Null terminator
         w.write_all(&[0])?;

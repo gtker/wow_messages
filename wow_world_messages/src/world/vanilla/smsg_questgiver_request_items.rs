@@ -219,14 +219,14 @@ impl crate::Message for SMSG_QUESTGIVER_REQUEST_ITEMS {
 
         // title: CString
         // TODO: Guard against strings that are already null-terminated
-        assert_ne!(self.title.as_bytes().iter().rev().next(), Some(&0_u8), "String `title` must not be null-terminated.");
+        assert_ne!(self.title.as_bytes().iter().next_back(), Some(&0_u8), "String `title` must not be null-terminated.");
         w.write_all(self.title.as_bytes())?;
         // Null terminator
         w.write_all(&[0])?;
 
         // request_items_text: CString
         // TODO: Guard against strings that are already null-terminated
-        assert_ne!(self.request_items_text.as_bytes().iter().rev().next(), Some(&0_u8), "String `request_items_text` must not be null-terminated.");
+        assert_ne!(self.request_items_text.as_bytes().iter().next_back(), Some(&0_u8), "String `request_items_text` must not be null-terminated.");
         w.write_all(self.request_items_text.as_bytes())?;
         // Null terminator
         w.write_all(&[0])?;

@@ -103,7 +103,7 @@ impl crate::Message for CMSG_TEST_ENDLESS_U8 {
     fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
         // c_string: CString
         // TODO: Guard against strings that are already null-terminated
-        assert_ne!(self.c_string.as_bytes().iter().rev().next(), Some(&0_u8), "String `c_string` must not be null-terminated.");
+        assert_ne!(self.c_string.as_bytes().iter().next_back(), Some(&0_u8), "String `c_string` must not be null-terminated.");
         w.write_all(self.c_string.as_bytes())?;
         // Null terminator
         w.write_all(&[0])?;

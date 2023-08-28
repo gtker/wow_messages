@@ -98,7 +98,7 @@ impl crate::Message for SMSG_REALM_SPLIT {
 
         // split_date: CString
         // TODO: Guard against strings that are already null-terminated
-        assert_ne!(self.split_date.as_bytes().iter().rev().next(), Some(&0_u8), "String `split_date` must not be null-terminated.");
+        assert_ne!(self.split_date.as_bytes().iter().next_back(), Some(&0_u8), "String `split_date` must not be null-terminated.");
         w.write_all(self.split_date.as_bytes())?;
         // Null terminator
         w.write_all(&[0])?;
