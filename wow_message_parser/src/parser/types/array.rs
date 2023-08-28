@@ -3,7 +3,7 @@ use crate::parser::types::struct_member::StructMemberDefinition;
 use crate::parser::types::IntegerType;
 use crate::{Container, CSTRING_LARGEST_ALLOWED, CSTRING_SMALLEST_ALLOWED};
 
-#[derive(Debug, Eq, PartialEq, Clone)]
+#[derive(Debug, Eq, PartialEq, Ord, PartialOrd, Clone)]
 pub(crate) enum ArrayType {
     Integer(IntegerType),
     Struct(Box<Container>),
@@ -61,7 +61,7 @@ impl ArrayType {
     }
 }
 
-#[derive(Debug, Eq, PartialEq, Clone)]
+#[derive(Debug, Eq, PartialEq, PartialOrd, Ord, Clone)]
 pub(crate) enum ArraySize {
     Fixed(i128),
     Variable(Box<StructMemberDefinition>),
@@ -78,7 +78,7 @@ impl ArraySize {
     }
 }
 
-#[derive(Debug, Eq, PartialEq, Clone)]
+#[derive(Debug, Eq, PartialEq, Ord, PartialOrd, Clone)]
 pub(crate) struct Array {
     inner: ArrayType,
     size: ArraySize,

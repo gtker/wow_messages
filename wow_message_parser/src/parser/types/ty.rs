@@ -7,7 +7,7 @@ use crate::parser::types::sizes::{
 use crate::parser::types::IntegerType;
 use crate::{Container, CSTRING_LARGEST_ALLOWED, CSTRING_SMALLEST_ALLOWED};
 
-#[derive(Debug, Eq, PartialEq, Clone)]
+#[derive(Debug, Eq, PartialEq, Ord, PartialOrd, Clone)]
 pub(crate) enum Type {
     Integer(IntegerType),
     Bool(IntegerType),

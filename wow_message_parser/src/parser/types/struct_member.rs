@@ -20,7 +20,7 @@ impl StructMember {
     }
 }
 
-#[derive(Debug, Clone, Eq, PartialEq)]
+#[derive(Debug, Clone, Eq, Ord, PartialOrd, PartialEq)]
 pub(crate) struct StructMemberDefinition {
     name: String,
     struct_type: Type,

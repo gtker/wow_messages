@@ -9,11 +9,13 @@ The file must start with all commands.
 A command appearing after a statement is invalid.
 
 Commands take the form
+
 ```ignore
 #<command> <command_parameters>;
 ```
 
 For example:
+
 ```ignore
 #tag_all versions "1.12";
 ```
@@ -25,65 +27,61 @@ The following types are not looked up but are expected to be handled by the comp
 * The basic integer types `u8`, `u16`, `u32`, and `u64` are sent as little endian over the network.
 * The floating point type `f32` is sent as little endian over the network.
 
-The `String` type is the same as a sized `u8` array (`u8[len]`) containing valid UTF-8 values plus a `u8` for the length of the string, although it should be presented in the native string type.
+The `String` type is the same as a sized `u8` array (`u8[len]`) containing valid UTF-8 values plus a `u8` for the length
+of the string, although it should be presented in the native string type.
 
 The `CString` type is an array of valid UTF-8 `u8`s terminated by a null (0) byte.
 
-The `SizedCString` is the same as a `u32` followed by a `CString`, but they are kept in the same type to semantically convey that the `u32` field has no purpose other than to parse the `CString`.
+The `SizedCString` is the same as a `u32` followed by a `CString`, but they are kept in the same type to semantically
+convey that the `u32` field has no purpose other than to parse the `CString`.
 
-| Type                         | Purpose                                                                                                                                                           | C Name                                      |
-|------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------|
-| `u*`                         | Unsigned little endian `*` bit value.                                                                                                                             | `unsigned` `char`/`short`/`int`/`long long` |
-| `u48`                        | A `u32` followed by a `u16`. See [`u48`](u48.md)                                                                                                                  | `unsigned int` + `unsigned short`           |
-| `i*`                         | Signed little endian `*` bit value.                                                                                                                               | `char`/`short`/`int`/`long long`            |
-| `f32`                        | Floating point value of 4 bytes.                                                                                                                                  | `float`/`double`                            |
-| `CString`                    | UTF-8 string type that is terminated by a zero byte value.                                                                                                        | `char*`                                     |
-| `SizedCString`               | A `u32` field that determines the size of the string followed by a UTF-8 string type that is terminated by a zero byte value.                                     | `uint32_t` + `char*`                        |
-| `String`                     | UTF-8 string type of exactly length `len`.                                                                                                                        | -                                           |
-| `PackedGuid`                 | GUID sent in the "packed" format. See [PackedGuid](packed-guid.md).                                                                                               | -                                           |
-| `UpdateMask`                 | Update values sent in a relatively complex format. See [UpdateMask](update-mask.md).                                                                              | -                                           |
-| `AuraMask`                   | Aura values sent using a mask. See [Masks](aura-mask.md).                                                                                                         | -                                           |
-| `EnchantMask`                | Enchant values sent using a mask. See [Masks](aura-mask.md).                                                                                                      | -                                           |
-| `InspectTalentGearMask`      | [InspectTalentGear](../docs/inspecttalentgear.md) values sent using a mask. See [Masks](aura-mask.md).                                                            | -                                           |
-| `Bool`                       | `u8` where `0` is false and any other value is `true`. Can be substituted by a `u8`.                                                                              | -                                           |
-| `Bool16`                     | `u16` where `0` is false and any other value is `true`. Can be substituted by a `u8`.                                                                             | -                                           |
-| `Bool32`                     | `u32` where `0` is false and any other value is `true`. Can be substituted by a `u8`.                                                                             | -                                           |
-| `DateTime`                   | `u32` that represents a custom bitmask for date and time. See [the DateTime section](#datetime)                                                                   | -                                           |
-| `AchievementDoneArray`       | Array that terminates on a sentinel value. See [AchievementDoneArray](achievement-done-array.md)                                                                  | -                                           |
-| `AchievementInProgressArray` | Array that terminates on a sentinel value. See [AchievementInProgressArray](achievement-done-array.md)                                                            | -                                           |
-| `Population`                 | `f32` with the special behavior that a value of `200` always means `GREEN_RECOMMENDED`, `400` always means `RED_FULL`, and `600` always means `BLUE_RECOMMENDED`. | -                                           |
-| `NamedGuid`                  | A `Guid` (`u64`) followed by a `CString` if the value of the `Guid` is not `0`.                                                                                   | -                                           |
+[comment]: # (AUTOGENERATED_FROM_HERE_NEXT_COMMENT)
 
-### DateTime
+| Type                         | Purpose                                                                                                                                                           | C Name                    |
+|------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------|
+| `u8`                         | Unsigned 8 bit integer. Min value 0, max value 256.                                                                                                               | `unsigned char`           |
+| `u16`                        | Unsigned 16 bit integer. Min value 0, max value 65536.                                                                                                            | `unsigned short`          |
+| `u32`                        | Unsigned 32 bit integer. Min value 0, max value 4294967296.                                                                                                       | `unsigned int`            |
+| `u64`                        | Unsigned 64 bit integer. Min value 0, max value 18446744073709551616.                                                                                             | `unsigned long long`      |
+| `i32`                        | Unsigned 32 bit integer. Min value -2147483648, max value 4294967296.                                                                                             | `signed int`              |
+| `Bool`                       | Unsigned 1 bit integer. 0 means `false` and all other values mean `true`.                                                                                         | `unsigned char`           |
+| `Bool32`                     | Unsigned 4 bit integer. 0 means `false` and all other values mean `true`.                                                                                         | `unsigned int`            |
+| `PackedGuid`                 | Guid sent in the "packed" format. See [PackedGuid](../types/packed-guid.md).                                                                                      | -                         |
+| `Guid`                       | Unsigned 8 bit integer. Can be replaced with a `u64`.                                                                                                             | `unsigned long long`      |
+| `NamedGuid`                  | A `Guid` (`u64`) followed by a `CString` if the value of the `Guid` is not `0`.                                                                                   | -                         |
+| `DateTime`                   | `u32` in a special format. See [DateTime](../types/datetime.md).                                                                                                  | `unsigned int`            |
+| `f32`                        | Floating point value of 4 bytes.                                                                                                                                  | `f32`                     |
+| `CString`                    | UTF-8 string type that is terminated by a zero byte value.                                                                                                        | `char*`                   |
+| `SizedCString`               | A `u32` field that determines the size of the string followed by a UTF-8 string type that is terminated by a zero byte value.                                     | `unsigned int` + `char*`  |
+| `String`                     | UTF-8 string type of exactly length `len`.                                                                                                                        | `unsigned char` + `char*` |
+| `UpdateMask`                 | Update values sent in a relatively complex format. See [UpdateMask](../types/update-mask.md).                                                                     | -                         |
+| `MonsterMoveSplines`         | Array of positions. See [MonsterMoveSpline](../types/monster-move-spline).                                                                                        | -                         |
+| `AuraMask`                   | Aura values sent using a mask. See [Masks](../types/aura-mask.md).                                                                                                | -                         |
+| `AchievementDoneArray`       | Array that terminates on a sentinel value. See [AchievementDoneArray](../types/achievement-done-array.md)                                                         | -                         |
+| `AchievementInProgressArray` | Array that terminates on a sentinel value. See [AchievementInProgressArray](../types/achievement-done-array.md)                                                   | -                         |
+| `EnchantMask`                | Enchant values sent using a mask. See [Masks](../types/aura-mask.md).                                                                                             | -                         |
+| `InspectTalentGearMask`      | [InspectTalentGear](../docs/inspecttalentgear.md) values sent using a mask. See [Masks](../types/aura-mask.md).                                                   | -                         |
+| `Gold`                       | Alias for `u32`.                                                                                                                                                  | `unsigned int`            |
+| `Population`                 | `f32` with the special behavior that a value of `200` always means `GREEN_RECOMMENDED`, `400` always means `RED_FULL`, and `600` always means `BLUE_RECOMMENDED`. | `float`                   |
+| `Level`                      | Alias for `u8`.                                                                                                                                                   | `unsigned char`           |
+| `Level16`                    | Alias for `u8`.                                                                                                                                                   | `unsigned short`          |
+| `Level32`                    | Alias for `u32`.                                                                                                                                                  | `unsigned int`            |
+| `VariableItemRandomProperty` | A `u32` followed by another `u32` if the first value is not equal to `0`.                                                                                         | -                         |
+| `AddonArray`                 | Array of [Addon](../docs/addon.md)s for TBC and Wrath that rely on externally knowing the amount of array members. See [AddonArray](../types/addon-array.md).     | -                         |
+| `IpAddress`                  | Alias for **big endian** `u32`.                                                                                                                                   | `unsigned int`            |
+| `Seconds`                    | Alias for `u32`.                                                                                                                                                  | `unsigned int`            |
+| `Milliseconds`               | Alias for `u32`.                                                                                                                                                  | `unsigned int`            |
 
-`u32` in the format of `years_after_2000 << 24 | month << 20 | month_day << 14 | weekday << 11 | hours << 6 | minutes`.
-
-All values start on 0, and `weekday` starts on Sunday.
+[comment]: # (AUTOGENERATED_UNTIL_HERE)
 
 ### Arrays
 
-Arrays are semi-built-in types of the form `<type>[<length>]` where `<type>` is any built-in or user defined type, and `<length>` is either a constant integer value, a previous integer field in the same object, or the character `-` for "endless" arrays.
-
-#### Endless arrays
+Arrays are semi-built-in types of the form `<type>[<length>]` where `<type>` is any built-in or user defined type,
+and `<length>` is either a constant integer value, a previous integer field in the same object, or the character `-`
+for "endless" arrays.
 
 Endless arrays do not have a field that specifies how many items the array contains.
-This information is instead deducted from the total size of the message minus the sizes of any previous fields.
-
-## Alias Types
-
-In order to give semantic type information to languages that can use it, the following aliases can be used in place of the built-in types.
-Codegen units are free to simply substitute for the original built-in type if they want.
-These are often used in places where enums do not make sense since almost every single value is valid, but where extra type information would be nice.
-
-| Alias          | Built-in | Why                                                                                                   |
-|----------------|----------|-------------------------------------------------------------------------------------------------------|
-| `Guid`         | `u64`    | Provides interoperability with [PackedGuid](packed-guid.md).                                          |
-| `Spell`        | `u32`    | Signifies a spell id.                                                                                 |
-| `Seconds`      | `u32`    | Specifies that the time unit is seconds.                                                              |
-| `Milliseconds` | `u32`    | Specifies that the time unit is milliseconds.                                                         |
-| `Gold`         | `u32`    | Specifies that the currency unit is coppers (one silver being 100 copper, one gold being 100 silver). |
-| `Item`         | `u32`    | Specifies an item id.                                                                                 |
-| `IpAddress`    | `u32`    | Specifies a big endian IP address.                                                                    |
+This information is instead deduced from the total size of the message minus the sizes of any previous fields.
 
 ## Statements
 
@@ -99,10 +97,12 @@ Statements start with one of the following keywords:
 * `cmsg`, a _container_, for world messages sent **from** the client.
 * `test`, a description of a full valid message and the expected values.
 
-A definer creates a new type that gives names to basic integer values, like an enum would do in most programming languages.
+A definer creates a new type that gives names to basic integer values, like an enum would do in most programming
+languages.
 A container is a collection of types that describes the order in which they are sent, as well as other information.
 
 All statements can be followed by a tags block of the form
+
 ```ignore
 {
     <tags>
@@ -120,6 +120,7 @@ A list of tags with meaning for the compiler can be found at [Tags](tags.md).
 ### Definer
 
 Definers take the form of
+
 ```ignore
 enum <name> : <basic_type> {
     <enumerators>
@@ -129,14 +130,17 @@ enum <name> : <basic_type> {
 Where `<name>` is a unique identifier, `<basic_type>` is an integer type `u8`, `u16`, `u32`, and `u64`.
 
 `<enumerators>` is one or more enumerators of the form
+
 ```ignore
 <name> = <value>;
 ```
+
 where `<name>` is a unique identifier inside the definer, and `<value>` is a valid value.
 Enums can not have multiple names with the same value, while flags can.
 Flags can not be signed types (`i*`), while enums can.
 
 The allowed number formats in definers and how they are sent over the network are:
+
 ```rust,ignore
 enum EnumAllowedInteger : u32 {
     INTEGER = 22; /* 22, [22, 0, 0, 0]  */
@@ -151,13 +155,15 @@ The string syntax has the special case of `\0` which is replaced with a single z
 ### Container
 
 Containers take the form of
+
 ```ignore
 <keyword> <name> [= <opcode>] {
     <declaration | if_statement | optional_statement>*
 }
 ```
 
-Where `<keyword>` is one of 
+Where `<keyword>` is one of
+
 * `struct`.
 * `clogin`, for a login message sent **from** the client.
 * `slogin`, for a login message sent **from** the server.
@@ -167,7 +173,8 @@ Where `<keyword>` is one of
 
 `<name>` is a valid identifier.
 
-`[= <opcode>]` is an allowed value in the same format as for definer values that defines the unique opcode value for the container.
+`[= <opcode>]` is an allowed value in the same format as for definer values that defines the unique opcode value for the
+container.
 The `<opcode>` is required for every container except for `struct`s, which have no opcodes.
 
 For `msg`, `smsg`, and `cmsg` the size field is implicitly added as part of the message header.
@@ -176,24 +183,29 @@ For `msg`, `smsg`, and `cmsg` the size field is implicitly added as part of the 
 #### Declaration
 
 `<declaration>` is of the form
+
 ```ignore
 [<upcast>]<type> <identifier> [= <constant_value>];
 ```
 
 Where `<type>` is either a built-in or user defined type.
 
-`<identifier>` is a legal identifier. Two declarations or optional statements in the same object must not have identical identifiers, even across if statement blocks.
+`<identifier>` is a legal identifier. Two declarations or optional statements in the same object must not have identical
+identifiers, even across if statement blocks.
 
 The optional `<constant_value>` defines which value this field should always be sent as, used for padding values.
 Fields received with a different value will not lead to failed parsing.
 
-The optional `<upcast>` is used for an enum which should be sent over the network as a different type than it is defined with.
+The optional `<upcast>` is used for an enum which should be sent over the network as a different type than it is defined
+with.
 This is in order to prevent needing multiple enums for the same concept.
-Upcasts have the form `( <integer_type> )` where `integer_type` is an integer type of larger size or different endianness from the type in the original enum.
+Upcasts have the form `( <integer_type> )` where `integer_type` is an integer type of larger size or different
+endianness from the type in the original enum.
 
 #### If Statement
 
 `<if_statement>` is of the form
+
 ```ignore
 if (<variable_name> <operator> <definer_enumerator>
     [|| <variable_name> <operator> <definer_enumerator>]*) {
@@ -207,7 +219,9 @@ if (<variable_name> <operator> <definer_enumerator>
 ```
 
 Where:
-* `<variable_name>` is the name of a variable from a declaration that has previously appeared. The variable name must be the same in all statements.
+
+* `<variable_name>` is the name of a variable from a declaration that has previously appeared. The variable name must be
+  the same in all statements.
 * `<operator>` is either `==`, `&`, or `!=`. Restrictions apply to `!=`.
 * `<definer_enumerator>` is a valid enumerator in the type of `<variable_name>`.
 
@@ -216,6 +230,7 @@ If statements that use `!=` can not have any `else if` or `||` options, but they
 #### Optional Statement
 
 `<optional_statement>` is of the form
+
 ```ignore
 optional <identifier> {
     <declaration | if_statement | optional_statement>*
@@ -223,13 +238,15 @@ optional <identifier> {
 ```
 
 Where `<identifier>` is a legal identifier.
-Two declarations or optional statements in the same object must not have identical identifiers, even across if statement blocks.
+Two declarations or optional statements in the same object must not have identical identifiers, even across if statement
+blocks.
 
 Optional statements can only occur as the last element of a message.
 
 ### Test
 
 Tests take the form of
+
 ```ignore
 test <name> {
     <fields>
@@ -241,9 +258,11 @@ test <name> {
 Where `<name>` is a valid name of an existing container.
 
 `<fields>` is zero or more field definitions of the form
+
 ```ignore
 <name> = <value> | "[" <array_fields>[","] "]" | "{" <subobject_fields> "}" ;
 ```
+
 that describe which value to expect for a specific field.
 
 `<array_fields>` and `<subobject_fields>` consist of 1 or more `<fields>`.

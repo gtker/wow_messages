@@ -1,5 +1,6 @@
 pub mod container;
 pub mod definer;
+mod implementation_types;
 mod update_mask;
 
 use crate::doc_printer::container::print_docs_for_container;
@@ -24,6 +25,8 @@ pub(crate) fn print_docs(o: &Objects) {
     print_update_mask_docs();
 
     print_docs_summary_and_objects(o);
+
+    implementation_types::print_implementation_types(o);
 }
 
 fn common(s: &mut Writer, tags: &ObjectTags, name: &str, print_header: bool) {

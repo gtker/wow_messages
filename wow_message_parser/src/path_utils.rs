@@ -15,6 +15,30 @@ pub(crate) fn parser_test_directory() -> PathBuf {
         .join("tests")
 }
 
+pub(crate) fn doc_impl_world_path() -> PathBuf {
+    workspace_directory()
+        .join("wowm_language")
+        .join("src")
+        .join("ir")
+        .join("implementing_world.md")
+}
+
+pub(crate) fn doc_impl_login_path() -> PathBuf {
+    workspace_directory()
+        .join("wowm_language")
+        .join("src")
+        .join("ir")
+        .join("implementing_login.md")
+}
+
+pub(crate) fn doc_lang_spec_path() -> PathBuf {
+    workspace_directory()
+        .join("wowm_language")
+        .join("src")
+        .join("spec")
+        .join("lang-spec.md")
+}
+
 pub(crate) fn doc_summary_path() -> PathBuf {
     workspace_directory()
         .join("wowm_language")

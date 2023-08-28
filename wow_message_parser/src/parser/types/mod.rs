@@ -67,6 +67,7 @@ impl IntegerType {
             IntegerType::U48 => 6,
         }
     }
+
     pub(crate) fn smallest_value(&self) -> i128 {
         match self {
             IntegerType::U8
@@ -126,6 +127,20 @@ impl IntegerType {
         }
     }
 
+    pub(crate) fn c_str(&self) -> &'static str {
+        match self {
+            IntegerType::U8 => "unsigned char",
+            IntegerType::U16 => "unsigned short",
+            IntegerType::U32 => "unsigned int",
+            IntegerType::U64 => "unsigned long long",
+            IntegerType::I8 => "signed char",
+            IntegerType::I16 => "signed short",
+            IntegerType::I32 => "signed int",
+            IntegerType::I64 => "signed long long",
+            IntegerType::U48 => "unsigned long long",
+        }
+    }
+
     pub(crate) fn doc_endian_str(&self) -> &str {
         match self {
             IntegerType::I8 | IntegerType::U8 => "-",
@@ -164,7 +179,7 @@ impl IntegerType {
     }
 }
 
-#[derive(Debug, Eq, PartialEq, Clone)]
+#[derive(Debug, Eq, PartialEq, Ord, PartialOrd, Clone)]
 pub(crate) struct ContainerValue {
     value: i128,
     original_string: String,

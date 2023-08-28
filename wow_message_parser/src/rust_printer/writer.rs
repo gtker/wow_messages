@@ -472,7 +472,58 @@ impl Writer {
         }
     }
 
+    pub(crate) fn add_table<const N: usize>(&mut self, table: WriterTable<N>) {
+        let mut column_sizes = table.header.iter().map(|a| a.len() + 1).collect::<Vec<_>>();
+
+        for body in &table.body {
+            for (i, column) in body.iter().enumerate() {
+                if column.len() + 1 > column_sizes[i] {
+                    column_sizes[i] = column.len();
+                }
+            }
+        }
+
+        for (i, row) in table.header.iter().enumerate() {
+            let pad = column_sizes[i];
+            self.w_no_indent(format!("| {row: <pad$} ", pad = pad));
+        }
+        self.wln_no_indent("|");
+
+        for (i, _) in table.header.iter().enumerate() {
+            let pad = column_sizes[i];
+            let character = "-";
+            self.w_no_indent(format!("|-{character:-<pad$}-", pad = pad));
+        }
+        self.wln_no_indent("|");
+
+        for body in &table.body {
+            for (i, row) in body.iter().enumerate() {
+                let pad = column_sizes[i];
+                self.w_no_indent(format!("| {row: <pad$} ", pad = pad));
+            }
+            self.wln_no_indent("|");
+        }
+    }
+
     fn write_prefix(&mut self) {
         self.inner.write_str(&self.prefix).unwrap();
+    }
+}
+
+pub(crate) struct WriterTable<const N: usize> {
+    header: [String; N],
+    body: Vec<[String; N]>,
+}
+
+impl<const N: usize> WriterTable<N> {
+    pub(crate) fn new(header: [impl AsRef<str>; N]) -> Self {
+        Self {
+            header: header.map(|a| a.as_ref().to_string()),
+            body: vec![],
+        }
+    }
+
+    pub(crate) fn add_row(&mut self, row: [impl AsRef<str>; N]) {
+        self.body.push(row.map(|a| a.as_ref().to_string()))
     }
 }

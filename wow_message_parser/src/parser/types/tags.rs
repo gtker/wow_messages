@@ -366,7 +366,7 @@ impl TagString {
     }
 }
 
-#[derive(Debug, Eq, PartialEq, Clone, Default)]
+#[derive(Debug, Eq, PartialEq, Ord, PartialOrd, Clone, Default)]
 pub(crate) struct MemberTags {
     description: Option<TagString>,
     comment: Option<TagString>,
