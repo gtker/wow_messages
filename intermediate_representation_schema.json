@@ -332,15 +332,17 @@
         },
         "members": {
           "elements": {
-            "properties": {
-              "member": {
-                "ref": "definition"
-              },
-              "offset": {
-                "type": "int32"
-              },
-              "index": {
-                "type": "int32"
+            "elements": {
+              "properties": {
+                "member": {
+                  "ref": "definition"
+                },
+                "offset": {
+                  "type": "int32"
+                },
+                "size": {
+                  "type": "int32"
+                }
               }
             }
           }

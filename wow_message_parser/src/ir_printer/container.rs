@@ -7,7 +7,7 @@ use crate::parser::types::sizes::Sizes;
 use crate::parser::types::struct_member::{StructMember, StructMemberDefinition};
 use crate::parser::types::test_case::{TestCase, TestCaseMember, TestUpdateMaskValue, TestValue};
 use crate::parser::types::ty::Type;
-use crate::parser::types::{ContainerValue, IntegerType};
+use crate::parser::types::ContainerValue;
 use crate::rust_printer::UpdateMaskObjectType;
 use crate::Objects;
 use serde::Serialize;
@@ -45,140 +45,151 @@ fn container_to_ir_no_tests(e: &Container) -> IrContainer {
 pub(crate) fn container_to_update_mask_ir(e: &Container) -> IrUpdateMaskStruct {
     let mut members = Vec::new();
 
+    let mut temp_definitions = Vec::new();
+
     let mut offset = 0;
-    let mut index = 0;
-
-    fn update(offset: &mut i32, index: &mut i32, size: i32) {
-        if size == 4 {
-            *index = 0;
-            *offset += 1;
-        } else if size == 8 {
-            *index = 0;
-            *offset += 2;
-        } else {
-            *index += size;
-        }
-
-        if *index == 4 {
-            *offset += 1;
-        } else if *index > 4 && *index < 8 {
-            *offset += 1;
-            *index %= 4;
-        }
-    }
 
     for m in e.members() {
         match m {
             StructMember::Definition(d) => {
-                if d.value().is_none() {
-                    members.push(IrUpdateMaskMember {
-                        member: IrStructMemberDefinition::from_definition(d),
-                        offset,
-                        index,
-                    });
+                if d.value().is_some() {
+                    members.push(vec![]);
+
+                    offset = 0;
+                    continue;
                 }
 
                 match d.ty() {
+                    Type::Guid => {
+                        assert_eq!(offset, 0);
+
+                        temp_definitions.push(IrUpdateMaskMember {
+                            member: IrStructMemberDefinition::from_definition(d),
+                            offset: 0,
+                            size: 8,
+                        });
+
+                        members.push(temp_definitions.clone());
+
+                        temp_definitions.clear();
+
+                        // Guids take 8 bytes, so next int is empty
+                        members.push(vec![]);
+                    }
+
+                    Type::FloatingPoint
+                    | Type::DateTime
+                    | Type::Gold
+                    | Type::Level32
+                    | Type::Milliseconds
+                    | Type::Seconds => {
+                        assert_eq!(offset, 0);
+
+                        temp_definitions.push(IrUpdateMaskMember {
+                            member: IrStructMemberDefinition::from_definition(d),
+                            offset: 0,
+                            size: 4,
+                        });
+
+                        members.push(temp_definitions.clone());
+
+                        temp_definitions.clear();
+                    }
+
+                    Type::Bool(i) | Type::Integer(i) => {
+                        temp_definitions.push(IrUpdateMaskMember {
+                            member: IrStructMemberDefinition::from_definition(d),
+                            offset,
+                            size: i.size() as i32,
+                        });
+
+                        offset += i.size() as i32;
+                    }
+
                     Type::Level => {
-                        update(&mut offset, &mut index, 1);
-                    }
+                        temp_definitions.push(IrUpdateMaskMember {
+                            member: IrStructMemberDefinition::from_definition(d),
+                            offset,
+                            size: 1,
+                        });
 
+                        offset += 1;
+                    }
                     Type::Level16 => {
-                        update(&mut offset, &mut index, 2);
+                        temp_definitions.push(IrUpdateMaskMember {
+                            member: IrStructMemberDefinition::from_definition(d),
+                            offset,
+                            size: 2,
+                        });
+
+                        offset += 2;
                     }
 
-                    Type::Integer(i) | Type::Bool(i) => match i {
-                        IntegerType::I8 | IntegerType::U8 => {
-                            update(&mut offset, &mut index, 1);
-                        }
+                    Type::Enum { e, upcast } | Type::Flag { e, upcast } => {
+                        let size = if let Some(i) = upcast {
+                            i.size()
+                        } else {
+                            e.ty().size()
+                        } as i32;
 
-                        IntegerType::I16 | IntegerType::U16 => {
-                            update(&mut offset, &mut index, 2);
-                        }
+                        temp_definitions.push(IrUpdateMaskMember {
+                            member: IrStructMemberDefinition::from_definition(d),
+                            offset,
+                            size,
+                        });
 
-                        IntegerType::I32 | IntegerType::U32 => {
-                            update(&mut offset, &mut index, 4);
-                        }
+                        offset += size;
+                    }
 
-                        IntegerType::U64 | IntegerType::I64 => {
-                            update(&mut offset, &mut index, 8);
-                        }
+                    Type::Array(array) => match array.size() {
+                        ArraySize::Fixed(size) => {
+                            let inner_size = {
+                                let s = array.ty().sizes();
+                                assert!(s.is_constant().is_some());
 
-                        IntegerType::U48 => unimplemented!(),
+                                s.maximum()
+                            };
+
+                            let size = (size * inner_size) as i32;
+
+                            temp_definitions.push(IrUpdateMaskMember {
+                                member: IrStructMemberDefinition::from_definition(d),
+                                offset,
+                                size,
+                            });
+
+                            if size < 4 {
+                                offset += size;
+                            } else if size == 4 {
+                                assert_eq!(offset, 0);
+
+                                members.push(temp_definitions.clone());
+
+                                temp_definitions.clear();
+                            } else {
+                                assert_eq!(size % 4, 0);
+
+                                members.push(temp_definitions.clone());
+                                temp_definitions.clear();
+
+                                for _ in 0..((size / 4) - 1) {
+                                    members.push(vec![]);
+                                }
+
+                                offset = 0;
+                            }
+                        }
+                        ArraySize::Variable(_) | ArraySize::Endless => {
+                            unreachable!("variable and endless array for update mask")
+                        }
                     },
 
-                    Type::Flag { e, upcast } | Type::Enum { e, upcast } => {
-                        let ty = if let Some(upcast) = upcast {
-                            upcast
-                        } else {
-                            e.ty()
-                        };
-
-                        match ty {
-                            IntegerType::I8 | IntegerType::U8 => {
-                                update(&mut offset, &mut index, 1);
-                            }
-
-                            IntegerType::I16 | IntegerType::U16 => {
-                                update(&mut offset, &mut index, 2);
-                            }
-
-                            IntegerType::I32 | IntegerType::U32 => {
-                                update(&mut offset, &mut index, 4);
-                            }
-
-                            IntegerType::U64 | IntegerType::I64 => {
-                                update(&mut offset, &mut index, 8);
-                            }
-
-                            IntegerType::U48 => unimplemented!(),
-                        }
-                    }
-
-                    Type::DateTime | Type::FloatingPoint | Type::Level32 | Type::Gold => {
-                        update(&mut offset, &mut index, 4);
-                    }
-
-                    Type::Guid => {
-                        update(&mut offset, &mut index, 8);
-                    }
-
-                    Type::Array(array) => {
-                        let size = match array.size() {
-                            ArraySize::Fixed(s) => s as i32,
-                            ArraySize::Variable(_) | ArraySize::Endless => {
-                                panic!("type not handled for update mask type")
-                            }
-                        };
-
-                        let inner_size = match array.ty() {
-                            ArrayType::Integer(i) => match i {
-                                IntegerType::I8 | IntegerType::U8 => 1,
-                                IntegerType::I16 | IntegerType::U16 => 2,
-                                IntegerType::I32 | IntegerType::U32 => 4,
-                                IntegerType::U64 | IntegerType::I64 => 8,
-
-                                IntegerType::U48 => unimplemented!(),
-                            },
-                            ArrayType::Struct(_)
-                            | ArrayType::CString
-                            | ArrayType::Guid
-                            | ArrayType::PackedGuid => {
-                                panic!("type not handled for update mask type")
-                            }
-                        };
-
-                        update(&mut offset, &mut index, size * inner_size)
-                    }
-
-                    Type::NamedGuid
+                    Type::IpAddress
                     | Type::PackedGuid
+                    | Type::NamedGuid
                     | Type::CString
                     | Type::SizedCString
                     | Type::String
-                    | Type::Struct { .. }
-                    | Type::UpdateMask { .. }
-                    | Type::MonsterMoveSplines
                     | Type::AuraMask
                     | Type::AchievementDoneArray
                     | Type::AchievementInProgressArray
@@ -187,14 +198,24 @@ pub(crate) fn container_to_update_mask_ir(e: &Container) -> IrUpdateMaskStruct {
                     | Type::Population
                     | Type::VariableItemRandomProperty
                     | Type::AddonArray
-                    | Type::IpAddress
-                    | Type::Seconds
-                    | Type::Milliseconds => unimplemented!("type not handled for update mask type"),
+                    | Type::Struct { .. }
+                    | Type::UpdateMask { .. }
+                    | Type::MonsterMoveSplines => unreachable!("invalid update mask struct member"),
                 }
             }
             StructMember::IfStatement(_) | StructMember::OptionalStatement(_) => {
-                panic!("if/optional not allowed in update mask types")
+                unreachable!("optional or if in update mask struct")
             }
+        }
+
+        if offset >= 4 {
+            members.push(temp_definitions.clone());
+
+            temp_definitions.clear();
+
+            assert_eq!(offset, 4);
+
+            offset = 0;
         }
     }
 
@@ -210,18 +231,14 @@ pub(crate) fn container_to_update_mask_ir(e: &Container) -> IrUpdateMaskStruct {
 pub(crate) fn container_to_ir(e: &Container, o: &Objects) -> IrContainer {
     let mut c = container_to_ir_no_tests(e);
 
-    let tests = e
-        .tests(o)
-        .iter()
-        .map(IrTestCase::from_test_case)
-        .collect();
+    let tests = e.tests(o).iter().map(IrTestCase::from_test_case).collect();
 
     c.tests = tests;
 
     c
 }
 
-#[derive(Debug, Serialize)]
+#[derive(Clone, Copy, Debug, Serialize)]
 #[serde(tag = "container_type_tag", content = "opcode")]
 pub(crate) enum IrContainerType {
     Struct,
@@ -245,7 +262,7 @@ impl IrContainerType {
     }
 }
 
-#[derive(Debug, Serialize)]
+#[derive(Clone, Debug, Serialize)]
 pub(crate) struct IrSizes {
     constant_sized: bool,
     minimum_size: u32,
@@ -262,7 +279,7 @@ impl IrSizes {
     }
 }
 
-#[derive(Debug, Serialize)]
+#[derive(Clone, Debug, Serialize)]
 pub(crate) struct IrContainer {
     name: String,
     object_type: IrContainerType,
@@ -280,19 +297,19 @@ pub(crate) struct IrContainer {
 pub(crate) struct IrUpdateMaskStruct {
     name: String,
     sizes: IrSizes,
-    members: Vec<IrUpdateMaskMember>,
+    members: Vec<Vec<IrUpdateMaskMember>>,
     tags: IrTags,
     file_info: IrFileInfo,
 }
 
-#[derive(Debug, Serialize)]
+#[derive(Clone, Debug, Serialize)]
 pub(crate) struct IrUpdateMaskMember {
     member: IrStructMemberDefinition,
     offset: i32,
-    index: i32,
+    size: i32,
 }
 
-#[derive(Debug, Serialize)]
+#[derive(Clone, Debug, Serialize)]
 pub(crate) struct IrOptionalStatement {
     name: String,
     members: Vec<IrStructMember>,
@@ -313,7 +330,7 @@ impl IrOptionalStatement {
     }
 }
 
-#[derive(Debug, Serialize)]
+#[derive(Clone, Debug, Serialize)]
 #[serde(tag = "struct_member_tag", content = "struct_member_content")]
 pub(crate) enum IrStructMember {
     Definition(Box<IrStructMemberDefinition>),
@@ -337,7 +354,7 @@ impl IrStructMember {
     }
 }
 
-#[derive(Debug, Serialize)]
+#[derive(Clone, Debug, Serialize)]
 #[serde(tag = "equation_tag", content = "values")]
 pub(crate) enum IrEquation {
     Equals { value: Vec<String> },
@@ -361,7 +378,7 @@ impl IrEquation {
     }
 }
 
-#[derive(Debug, Serialize)]
+#[derive(Clone, Debug, Serialize)]
 pub(crate) struct IrConditional {
     variable_name: String,
     equations: IrEquation,
@@ -378,7 +395,7 @@ impl IrConditional {
     }
 }
 
-#[derive(Debug, Serialize)]
+#[derive(Clone, Debug, Serialize)]
 pub(crate) struct IrIfStatement {
     pub conditional: IrConditional,
     members: Vec<IrStructMember>,
@@ -420,7 +437,7 @@ impl IrIfStatement {
     }
 }
 
-#[derive(Debug, Serialize)]
+#[derive(Clone, Debug, Serialize)]
 pub(crate) struct IrStructMemberDefinition {
     name: String,
     data_type: IrType,
@@ -448,7 +465,7 @@ impl IrStructMemberDefinition {
     }
 }
 
-#[derive(Debug, Serialize)]
+#[derive(Clone, Debug, Serialize)]
 #[serde(tag = "data_type_tag", content = "content")]
 pub(crate) enum IrType {
     Integer(IrIntegerType),
@@ -558,7 +575,7 @@ impl IrType {
     }
 }
 
-#[derive(Debug, Serialize)]
+#[derive(Clone, Debug, Serialize)]
 pub(crate) struct IrArray {
     inner_type: IrArrayType,
     size: IrArraySize,
@@ -575,7 +592,7 @@ impl IrArray {
     }
 }
 
-#[derive(Debug, Serialize)]
+#[derive(Clone, Debug, Serialize)]
 #[serde(tag = "array_type_tag", content = "content")]
 pub(crate) enum IrArrayType {
     Integer(IrIntegerType),
@@ -599,7 +616,7 @@ impl IrArrayType {
     }
 }
 
-#[derive(Debug, Serialize)]
+#[derive(Clone, Debug, Serialize)]
 #[serde(tag = "array_size_tag", content = "size")]
 pub(crate) enum IrArraySize {
     Fixed(String),
@@ -617,7 +634,7 @@ impl IrArraySize {
     }
 }
 
-#[derive(Debug, Serialize)]
+#[derive(Clone, Debug, Serialize)]
 pub(crate) struct IrIntegerEnumValue {
     pub value: String,
     pub original_string: String,
@@ -632,7 +649,7 @@ impl IrIntegerEnumValue {
     }
 }
 
-#[derive(Debug, Serialize)]
+#[derive(Clone, Debug, Serialize)]
 pub(crate) struct IrTestCase {
     subject: String,
     members: Vec<IrTestCaseMember>,
@@ -663,7 +680,7 @@ impl IrTestCase {
     }
 }
 
-#[derive(Debug, Serialize)]
+#[derive(Clone, Debug, Serialize)]
 pub(crate) struct IrTestCaseMember {
     variable_name: String,
     value: IrTestValue,
@@ -680,7 +697,7 @@ impl IrTestCaseMember {
     }
 }
 
-#[derive(Debug, Serialize)]
+#[derive(Clone, Debug, Serialize)]
 pub(crate) struct IrTestUpdateMaskValue {
     update_mask_type: IrUpdateMaskType,
     update_mask_name: String,
@@ -697,7 +714,7 @@ impl IrTestUpdateMaskValue {
     }
 }
 
-#[derive(Debug, Serialize)]
+#[derive(Clone, Copy, Debug, Serialize)]
 pub(crate) enum IrUpdateMaskType {
     Object,
     Item,
@@ -724,7 +741,7 @@ impl IrUpdateMaskType {
     }
 }
 
-#[derive(Debug, Serialize)]
+#[derive(Clone, Debug, Serialize)]
 #[serde(tag = "test_value_tag", content = "content")]
 pub(crate) enum IrTestValue {
     Integer(IrIntegerEnumValue),

@@ -22,7 +22,7 @@ use crate::parser::types::IntegerType;
 use crate::path_utils::intermediate_representation;
 use crate::rust_printer::{tbc_fields, vanilla_fields, wrath_fields};
 
-#[derive(Serialize, Debug)]
+#[derive(Serialize, Clone, Debug)]
 struct IrFileInfo {
     file_name: String,
     start_position: u32,
@@ -39,7 +39,7 @@ impl IrFileInfo {
     }
 }
 
-#[derive(Debug, Eq, PartialEq, Ord, PartialOrd, Serialize)]
+#[derive(Clone, Copy, Debug, Eq, PartialEq, Ord, PartialOrd, Serialize)]
 pub(crate) enum IrIntegerType {
     U8,
     I8,
@@ -68,7 +68,7 @@ impl IrIntegerType {
     }
 }
 
-#[derive(Debug, Serialize)]
+#[derive(Clone, Debug, Serialize)]
 #[serde(rename_all = "snake_case")]
 #[serde(tag = "login_version_tag", content = "versions")]
 pub(crate) enum IrLoginVersion {
@@ -93,7 +93,7 @@ impl IrLoginVersion {
         )
     }
 }
-#[derive(Debug, Serialize)]
+#[derive(Clone, Debug, Serialize)]
 #[serde(tag = "world_version_tag", content = "versions")]
 #[serde(rename_all = "snake_case")]
 pub(crate) enum IrWorldVersionOuter {
@@ -116,7 +116,7 @@ impl IrWorldVersionOuter {
     }
 }
 
-#[derive(Debug, Serialize)]
+#[derive(Clone, Debug, Serialize)]
 pub(crate) struct IrWorldVersion {
     major: u8,
     minor: Option<u8>,
@@ -124,7 +124,7 @@ pub(crate) struct IrWorldVersion {
     build: Option<u16>,
 }
 
-#[derive(Debug, Serialize)]
+#[derive(Clone, Debug, Serialize)]
 #[serde(rename_all = "snake_case")]
 #[serde(tag = "version_type_tag", content = "version_type")]
 pub(crate) enum IrVersions {
@@ -151,7 +151,7 @@ impl IrWorldVersion {
     }
 }
 
-#[derive(Debug, Serialize)]
+#[derive(Clone, Debug, Serialize)]
 pub(crate) struct IrTags {
     #[serde(skip_serializing_if = "Option::is_none")]
     description: Option<String>,
