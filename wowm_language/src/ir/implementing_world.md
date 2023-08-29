@@ -22,7 +22,33 @@ If you want to use the Python library then just bypass this and
 
 ## Message Layout
 
-All messages sent from the server start with a 2 byte **big endian** size field,
+For Vanilla and TBC, all messages start with a 2 byte **big endian** size field.
+
+For Wrath, all messages from the client (`CMSG`) start with a 2 byte **big endian** size field,
+but at some unknown point in Wrath the possibility of having `SMSG` with 3 byte opcode was added.
+If the most significant (first) byte of the size field has the most significant bit set
+(that is, `first_size_byte & 0x80 != 0`) the size field is 3 bytes instead of 2.
+When sending messages from the server you must handle this special case for messages that are larger than `0x7FF` bytes.
+
+For all versions, messages sent from the server (`SMSG`) have a 2 byte opcode field and messages sent
+from the client (`CMSG`) have a 4 byte opcode field.
+
+For all versions, the size field contains the size of the opcode field and the size of the remaining message body.
+
+So in the case of the `CMSG_PLAYER_LOGIN` message:
+
+```rust,ignore
+test CMSG_PLAYER_LOGIN {
+    guid = 0xDEADBEEF;
+} [
+    0x00, 0x0C, /* size */
+    0x3D, 0x00, 0x00, 0x00, /* opcode */
+    0xEF, 0xBE, 0xAD, 0xDE, 0x00, 0x00, 0x00, 0x00, /* guid */
+]
+```
+
+Has a single `Guid` field (of 8 bytes), but the reported size is `0x0C`/`12` because it includes the 4 byte opcode
+field.
 
 ## Types used for login messages
 
