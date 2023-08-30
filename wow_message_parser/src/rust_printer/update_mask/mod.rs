@@ -134,8 +134,6 @@ fn print_includes(
 fn print_specific_update_mask_indices(fields: &[UpdateMaskMember]) -> Writer {
     let mut s = Writer::new();
 
-    s.wln("use std::convert::TryFrom;");
-
     for field in fields {
         if let UpdateMaskDataType::ArrayOfStruct { name, size, .. } = field.ty {
             assert_eq!(field.size % size, 0);

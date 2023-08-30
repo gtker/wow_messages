@@ -1,7 +1,6 @@
 use crate::manual::shared::player_race_tbc_wrath::PlayerRace;
 use crate::tbc::Class;
 use crate::tbc::Race;
-use std::convert::TryFrom;
 use std::fmt::{Display, Formatter};
 
 /// Enum containing only the allowed race/class combinations.

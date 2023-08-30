@@ -1,5 +1,4 @@
 use crate::inner::shared::gender_vanilla_tbc_wrath::Gender;
-use std::convert::TryFrom;
 
 /// Enum containing only Male and Female.
 ///

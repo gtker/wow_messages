@@ -1,4 +1,3 @@
-use std::convert::TryFrom;
 use std::fmt::{Display, Formatter};
 
 /// Enum containing only the races players are actually allowed to be.
