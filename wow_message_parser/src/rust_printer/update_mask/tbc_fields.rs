@@ -529,7 +529,7 @@ pub(crate) const FIELDS: &[UpdateMaskMember] = &[
         "TRAINING_POINTS",
         0x00AA,
         1,
-        UpdateMaskDataType::TwoShort,
+        UpdateMaskDataType::two_short(),
     ),
     UpdateMaskMember::new(
         UpdateMaskObjectType::Unit,
@@ -690,7 +690,7 @@ pub(crate) const FIELDS: &[UpdateMaskMember] = &[
         "ATTACK_POWER_MODS",
         0x00D3,
         1,
-        UpdateMaskDataType::TwoShort,
+        UpdateMaskDataType::two_short(),
     ),
     UpdateMaskMember::new(
         UpdateMaskObjectType::Unit,
@@ -711,7 +711,7 @@ pub(crate) const FIELDS: &[UpdateMaskMember] = &[
         "RANGED_ATTACK_POWER_MODS",
         0x00D6,
         1,
-        UpdateMaskDataType::TwoShort,
+        UpdateMaskDataType::two_short(),
     ),
     UpdateMaskMember::new(
         UpdateMaskObjectType::Unit,
@@ -1796,7 +1796,7 @@ pub(crate) const FIELDS: &[UpdateMaskMember] = &[
         "KILLS",
         0x05ea,
         1,
-        UpdateMaskDataType::TwoShort,
+        UpdateMaskDataType::two_short(),
     ),
     UpdateMaskMember::new(
         UpdateMaskObjectType::Player,

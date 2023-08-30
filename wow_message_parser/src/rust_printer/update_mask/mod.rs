@@ -282,8 +282,27 @@ fn print_getter(s: &mut Writer, m: &UpdateMaskMember) {
         UpdateMaskDataType::Float => {
             s.wln(format!("self.get_float({offset})"));
         }
-        UpdateMaskDataType::TwoShort => {
-            s.wln(format!("self.get_shorts({offset})"));
+        UpdateMaskDataType::TwoShort(a, b) => {
+            let shorts = [&a, &b];
+            if shorts.iter().all(|a| matches!(a.ty, ShortInnerTy::Short)) {
+                s.wln(format!("self.get_shorts({offset})"));
+            } else {
+                let f = |short: &ShortType| match short.ty {
+                    ShortInnerTy::Short => short.name.to_string(),
+                    ShortInnerTy::Definer(_) => format!("{}.try_into().uwnrap()", short.name),
+                };
+
+                s.body_closing_with(
+                    format!("self.get_bytes({offset}).map(|{}, {}|", a.name, b.name),
+                    |s| {
+                        let a = f(&a);
+                        let b = f(&b);
+
+                        s.wln(format!("({a}, {b})"))
+                    },
+                    ")",
+                );
+            }
         }
         UpdateMaskDataType::Bytes(a, b, c, d) => {
             let bytes = [&a, &b, &c, &d];
@@ -368,8 +387,20 @@ fn print_setter_internals(s: &mut Writer, m: &UpdateMaskMember) {
         UpdateMaskDataType::Float => {
             s.wln(format!("self.set_float({offset}, v);"));
         }
-        UpdateMaskDataType::TwoShort => {
-            s.wln(format!("self.set_shorts({offset}, a, b);"));
+        UpdateMaskDataType::TwoShort(a, b) => {
+            let name = |short: &ShortType| -> String {
+                match short.ty {
+                    ShortInnerTy::Short => short.name.to_string(),
+                    ShortInnerTy::Definer(_) => {
+                        format!("{}.as_int()", short.name)
+                    }
+                }
+            };
+
+            let a = name(a);
+            let b = name(b);
+
+            s.wln(format!("self.set_shorts({offset}, {a}, {b});"));
         }
         UpdateMaskDataType::Bytes(a, b, c, d) => {
             let get_name = |byte_type: &ByteType| -> String {
@@ -482,39 +513,70 @@ impl ByteType {
 
     pub(crate) const fn ty_str(&self) -> &'static str {
         match self.ty {
-            ByteInnerTy::Byte => "u8",
+            ByteInnerTy::Byte => BYTE_TYPE,
             ByteInnerTy::Definer(s) => s,
         }
     }
 
-    #[allow(unused)]
     pub(crate) const fn a() -> Self {
-        Self {
-            name: "a",
-            ty: ByteInnerTy::Byte,
-        }
+        Self::byte("a")
     }
-    #[allow(unused)]
     pub(crate) const fn b() -> Self {
-        Self {
-            name: "b",
-            ty: ByteInnerTy::Byte,
-        }
+        Self::byte("b")
     }
-    #[allow(unused)]
     pub(crate) const fn c() -> Self {
-        Self {
-            name: "c",
-            ty: ByteInnerTy::Byte,
-        }
+        Self::byte("c")
     }
-    #[allow(unused)]
     pub(crate) const fn d() -> Self {
+        Self::byte("d")
+    }
+}
+
+#[derive(Serialize, Debug, Clone, Ord, PartialOrd, Eq, PartialEq)]
+pub(crate) struct ShortType {
+    pub name: &'static str,
+    #[serde(rename = "inner_type")]
+    pub ty: ShortInnerTy,
+}
+
+impl ShortType {
+    #[allow(unused)]
+    pub(crate) fn new(name: &'static str, ty: &'static str) -> Self {
         Self {
-            name: "d",
-            ty: ByteInnerTy::Byte,
+            name,
+            ty: ShortInnerTy::Definer(ty),
         }
     }
+
+    pub(crate) const fn ty_str(&self) -> &'static str {
+        match self.ty {
+            ShortInnerTy::Short => TWO_SHORT_TYPE,
+            ShortInnerTy::Definer(s) => s,
+        }
+    }
+
+    pub(crate) const fn short(name: &'static str) -> Self {
+        Self {
+            name,
+            ty: ShortInnerTy::Short,
+        }
+    }
+
+    pub(crate) const fn a() -> Self {
+        Self::short("a")
+    }
+
+    pub(crate) const fn b() -> Self {
+        Self::short("b")
+    }
+}
+
+#[derive(Serialize, Debug, Clone, Ord, PartialOrd, Eq, PartialEq)]
+#[serde(tag = "two_short_type_tag", content = "two_short_type")]
+pub(crate) enum ShortInnerTy {
+    Short,
+    #[allow(unused)]
+    Definer(&'static str),
 }
 
 #[derive(Debug, Clone, Ord, PartialOrd, Eq, PartialEq)]
@@ -522,7 +584,7 @@ pub(crate) enum UpdateMaskDataType {
     Guid,
     Int,
     Float,
-    TwoShort,
+    TwoShort(ShortType, ShortType),
     Bytes(ByteType, ByteType, ByteType, ByteType),
     ArrayOfStruct {
         name: &'static str,
@@ -539,12 +601,11 @@ pub(crate) enum UpdateMaskDataType {
 
 impl UpdateMaskDataType {
     pub(crate) const fn bytes() -> Self {
-        Self::Bytes(
-            ByteType::byte("a"),
-            ByteType::byte("b"),
-            ByteType::byte("c"),
-            ByteType::byte("d"),
-        )
+        Self::Bytes(ByteType::a(), ByteType::b(), ByteType::c(), ByteType::d())
+    }
+
+    pub(crate) const fn two_short() -> Self {
+        Self::TwoShort(ShortType::a(), ShortType::b())
     }
 }
 
@@ -552,6 +613,7 @@ const GUID_TYPE: &str = "Guid";
 const INT_TYPE: &str = "i32";
 const FLOAT_TYPE: &str = "f32";
 const TWO_SHORT_TYPE: &str = "u16";
+const BYTE_TYPE: &str = "u8";
 
 impl UpdateMaskDataType {
     pub(crate) fn ty_str(&self) -> String {
@@ -559,7 +621,9 @@ impl UpdateMaskDataType {
             UpdateMaskDataType::Guid => GUID_TYPE.to_string(),
             UpdateMaskDataType::Int => INT_TYPE.to_string(),
             UpdateMaskDataType::Float => FLOAT_TYPE.to_string(),
-            UpdateMaskDataType::TwoShort => format!("({TWO_SHORT_TYPE}, {TWO_SHORT_TYPE})"),
+            UpdateMaskDataType::TwoShort(a, b) => {
+                format!("({}, {})", a.ty_str(), b.ty_str())
+            }
             UpdateMaskDataType::Bytes(a, b, c, d) => format!(
                 "({}, {}, {}, {})",
                 a.ty_str(),
@@ -587,8 +651,8 @@ impl UpdateMaskDataType {
                 UpdateMaskDataType::Guid => GUID_TYPE,
                 UpdateMaskDataType::Int => INT_TYPE,
                 UpdateMaskDataType::Float => FLOAT_TYPE,
-                UpdateMaskDataType::TwoShort =>
-                    return format!("a: {TWO_SHORT_TYPE}, b: {TWO_SHORT_TYPE}"),
+                UpdateMaskDataType::TwoShort(a, b) =>
+                    return format!("{}: {}, {}: {}", a.name, a.ty_str(), b.name, b.ty_str()),
                 UpdateMaskDataType::Bytes(a, b, c, d) => {
                     return format!(
                         "{}: {}, {}: {}, {}: {}, {}: {}",

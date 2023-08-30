@@ -97,7 +97,7 @@ pub(crate) const FIELDS: &[UpdateMaskMember] = &[
         "ENCHANTMENT_1_3",
         0x0018,
         1,
-        UpdateMaskDataType::TwoShort,
+        UpdateMaskDataType::two_short(),
     ),
     UpdateMaskMember::new(
         UpdateMaskObjectType::Item,
@@ -111,7 +111,7 @@ pub(crate) const FIELDS: &[UpdateMaskMember] = &[
         "ENCHANTMENT_2_3",
         0x001b,
         1,
-        UpdateMaskDataType::TwoShort,
+        UpdateMaskDataType::two_short(),
     ),
     UpdateMaskMember::new(
         UpdateMaskObjectType::Item,
@@ -125,7 +125,7 @@ pub(crate) const FIELDS: &[UpdateMaskMember] = &[
         "ENCHANTMENT_3_3",
         0x001e,
         1,
-        UpdateMaskDataType::TwoShort,
+        UpdateMaskDataType::two_short(),
     ),
     UpdateMaskMember::new(
         UpdateMaskObjectType::Item,
@@ -139,7 +139,7 @@ pub(crate) const FIELDS: &[UpdateMaskMember] = &[
         "ENCHANTMENT_4_3",
         0x0021,
         1,
-        UpdateMaskDataType::TwoShort,
+        UpdateMaskDataType::two_short(),
     ),
     UpdateMaskMember::new(
         UpdateMaskObjectType::Item,
@@ -153,7 +153,7 @@ pub(crate) const FIELDS: &[UpdateMaskMember] = &[
         "ENCHANTMENT_5_3",
         0x0024,
         1,
-        UpdateMaskDataType::TwoShort,
+        UpdateMaskDataType::two_short(),
     ),
     UpdateMaskMember::new(
         UpdateMaskObjectType::Item,
@@ -167,7 +167,7 @@ pub(crate) const FIELDS: &[UpdateMaskMember] = &[
         "ENCHANTMENT_6_3",
         0x0027,
         1,
-        UpdateMaskDataType::TwoShort,
+        UpdateMaskDataType::two_short(),
     ),
     UpdateMaskMember::new(
         UpdateMaskObjectType::Item,
@@ -181,7 +181,7 @@ pub(crate) const FIELDS: &[UpdateMaskMember] = &[
         "ENCHANTMENT_7_3",
         0x002a,
         1,
-        UpdateMaskDataType::TwoShort,
+        UpdateMaskDataType::two_short(),
     ),
     UpdateMaskMember::new(
         UpdateMaskObjectType::Item,
@@ -195,7 +195,7 @@ pub(crate) const FIELDS: &[UpdateMaskMember] = &[
         "ENCHANTMENT_8_3",
         0x002d,
         1,
-        UpdateMaskDataType::TwoShort,
+        UpdateMaskDataType::two_short(),
     ),
     UpdateMaskMember::new(
         UpdateMaskObjectType::Item,
@@ -209,7 +209,7 @@ pub(crate) const FIELDS: &[UpdateMaskMember] = &[
         "ENCHANTMENT_9_3",
         0x0030,
         1,
-        UpdateMaskDataType::TwoShort,
+        UpdateMaskDataType::two_short(),
     ),
     UpdateMaskMember::new(
         UpdateMaskObjectType::Item,
@@ -223,7 +223,7 @@ pub(crate) const FIELDS: &[UpdateMaskMember] = &[
         "ENCHANTMENT_10_3",
         0x0033,
         1,
-        UpdateMaskDataType::TwoShort,
+        UpdateMaskDataType::two_short(),
     ),
     UpdateMaskMember::new(
         UpdateMaskObjectType::Item,
@@ -237,7 +237,7 @@ pub(crate) const FIELDS: &[UpdateMaskMember] = &[
         "ENCHANTMENT_11_3",
         0x0036,
         1,
-        UpdateMaskDataType::TwoShort,
+        UpdateMaskDataType::two_short(),
     ),
     UpdateMaskMember::new(
         UpdateMaskObjectType::Item,
@@ -251,7 +251,7 @@ pub(crate) const FIELDS: &[UpdateMaskMember] = &[
         "ENCHANTMENT_12_3",
         0x0039,
         1,
-        UpdateMaskDataType::TwoShort,
+        UpdateMaskDataType::two_short(),
     ),
     UpdateMaskMember::new(
         UpdateMaskObjectType::Item,
@@ -856,7 +856,7 @@ pub(crate) const FIELDS: &[UpdateMaskMember] = &[
         "ATTACK_POWER_MODS",
         0x007c,
         1,
-        UpdateMaskDataType::TwoShort,
+        UpdateMaskDataType::two_short(),
     ),
     UpdateMaskMember::new(
         UpdateMaskObjectType::Unit,
@@ -877,7 +877,7 @@ pub(crate) const FIELDS: &[UpdateMaskMember] = &[
         "RANGED_ATTACK_POWER_MODS",
         0x007f,
         1,
-        UpdateMaskDataType::TwoShort,
+        UpdateMaskDataType::two_short(),
     ),
     UpdateMaskMember::new(
         UpdateMaskObjectType::Unit,
@@ -1010,7 +1010,7 @@ pub(crate) const FIELDS: &[UpdateMaskMember] = &[
         "QUEST_LOG_1_3",
         0x00A0,
         2,
-        UpdateMaskDataType::TwoShort,
+        UpdateMaskDataType::two_short(),
     ),
     UpdateMaskMember::new(
         UpdateMaskObjectType::Player,
@@ -1038,7 +1038,7 @@ pub(crate) const FIELDS: &[UpdateMaskMember] = &[
         "QUEST_LOG_2_3",
         0x00a5,
         2,
-        UpdateMaskDataType::TwoShort,
+        UpdateMaskDataType::two_short(),
     ),
     UpdateMaskMember::new(
         UpdateMaskObjectType::Player,
@@ -1066,7 +1066,7 @@ pub(crate) const FIELDS: &[UpdateMaskMember] = &[
         "QUEST_LOG_3_3",
         0x00aa,
         2,
-        UpdateMaskDataType::TwoShort,
+        UpdateMaskDataType::two_short(),
     ),
     UpdateMaskMember::new(
         UpdateMaskObjectType::Player,
@@ -1094,7 +1094,7 @@ pub(crate) const FIELDS: &[UpdateMaskMember] = &[
         "QUEST_LOG_4_3",
         0x00AF,
         2,
-        UpdateMaskDataType::TwoShort,
+        UpdateMaskDataType::two_short(),
     ),
     UpdateMaskMember::new(
         UpdateMaskObjectType::Player,
@@ -1122,7 +1122,7 @@ pub(crate) const FIELDS: &[UpdateMaskMember] = &[
         "QUEST_LOG_5_3",
         0x00b4,
         2,
-        UpdateMaskDataType::TwoShort,
+        UpdateMaskDataType::two_short(),
     ),
     UpdateMaskMember::new(
         UpdateMaskObjectType::Player,
@@ -1150,7 +1150,7 @@ pub(crate) const FIELDS: &[UpdateMaskMember] = &[
         "QUEST_LOG_6_3",
         0x00b9,
         2,
-        UpdateMaskDataType::TwoShort,
+        UpdateMaskDataType::two_short(),
     ),
     UpdateMaskMember::new(
         UpdateMaskObjectType::Player,
@@ -1178,7 +1178,7 @@ pub(crate) const FIELDS: &[UpdateMaskMember] = &[
         "QUEST_LOG_7_3",
         0x00BE,
         2,
-        UpdateMaskDataType::TwoShort,
+        UpdateMaskDataType::two_short(),
     ),
     UpdateMaskMember::new(
         UpdateMaskObjectType::Player,
@@ -1206,7 +1206,7 @@ pub(crate) const FIELDS: &[UpdateMaskMember] = &[
         "QUEST_LOG_8_3",
         0x00C3,
         2,
-        UpdateMaskDataType::TwoShort,
+        UpdateMaskDataType::two_short(),
     ),
     UpdateMaskMember::new(
         UpdateMaskObjectType::Player,
@@ -1234,7 +1234,7 @@ pub(crate) const FIELDS: &[UpdateMaskMember] = &[
         "QUEST_LOG_9_3",
         0x00c8,
         2,
-        UpdateMaskDataType::TwoShort,
+        UpdateMaskDataType::two_short(),
     ),
     UpdateMaskMember::new(
         UpdateMaskObjectType::Player,
@@ -1262,7 +1262,7 @@ pub(crate) const FIELDS: &[UpdateMaskMember] = &[
         "QUEST_LOG_10_3",
         0x00cd,
         2,
-        UpdateMaskDataType::TwoShort,
+        UpdateMaskDataType::two_short(),
     ),
     UpdateMaskMember::new(
         UpdateMaskObjectType::Player,
@@ -1290,7 +1290,7 @@ pub(crate) const FIELDS: &[UpdateMaskMember] = &[
         "QUEST_LOG_11_3",
         0x00D2,
         2,
-        UpdateMaskDataType::TwoShort,
+        UpdateMaskDataType::two_short(),
     ),
     UpdateMaskMember::new(
         UpdateMaskObjectType::Player,
@@ -1318,7 +1318,7 @@ pub(crate) const FIELDS: &[UpdateMaskMember] = &[
         "QUEST_LOG_12_3",
         0x00d7,
         2,
-        UpdateMaskDataType::TwoShort,
+        UpdateMaskDataType::two_short(),
     ),
     UpdateMaskMember::new(
         UpdateMaskObjectType::Player,
@@ -1346,7 +1346,7 @@ pub(crate) const FIELDS: &[UpdateMaskMember] = &[
         "QUEST_LOG_13_3",
         0x00dc,
         2,
-        UpdateMaskDataType::TwoShort,
+        UpdateMaskDataType::two_short(),
     ),
     UpdateMaskMember::new(
         UpdateMaskObjectType::Player,
@@ -1374,7 +1374,7 @@ pub(crate) const FIELDS: &[UpdateMaskMember] = &[
         "QUEST_LOG_14_3",
         0x00E1,
         2,
-        UpdateMaskDataType::TwoShort,
+        UpdateMaskDataType::two_short(),
     ),
     UpdateMaskMember::new(
         UpdateMaskObjectType::Player,
@@ -1402,7 +1402,7 @@ pub(crate) const FIELDS: &[UpdateMaskMember] = &[
         "QUEST_LOG_15_3",
         0x00e6,
         2,
-        UpdateMaskDataType::TwoShort,
+        UpdateMaskDataType::two_short(),
     ),
     UpdateMaskMember::new(
         UpdateMaskObjectType::Player,
@@ -1430,7 +1430,7 @@ pub(crate) const FIELDS: &[UpdateMaskMember] = &[
         "QUEST_LOG_16_3",
         0x00eb,
         2,
-        UpdateMaskDataType::TwoShort,
+        UpdateMaskDataType::two_short(),
     ),
     UpdateMaskMember::new(
         UpdateMaskObjectType::Player,
@@ -1458,7 +1458,7 @@ pub(crate) const FIELDS: &[UpdateMaskMember] = &[
         "QUEST_LOG_17_3",
         0x00F0,
         2,
-        UpdateMaskDataType::TwoShort,
+        UpdateMaskDataType::two_short(),
     ),
     UpdateMaskMember::new(
         UpdateMaskObjectType::Player,
@@ -1486,7 +1486,7 @@ pub(crate) const FIELDS: &[UpdateMaskMember] = &[
         "QUEST_LOG_18_3",
         0x00f5,
         2,
-        UpdateMaskDataType::TwoShort,
+        UpdateMaskDataType::two_short(),
     ),
     UpdateMaskMember::new(
         UpdateMaskObjectType::Player,
@@ -1514,7 +1514,7 @@ pub(crate) const FIELDS: &[UpdateMaskMember] = &[
         "QUEST_LOG_19_3",
         0x00fa,
         2,
-        UpdateMaskDataType::TwoShort,
+        UpdateMaskDataType::two_short(),
     ),
     UpdateMaskMember::new(
         UpdateMaskObjectType::Player,
@@ -1542,7 +1542,7 @@ pub(crate) const FIELDS: &[UpdateMaskMember] = &[
         "QUEST_LOG_20_3",
         0x00FF,
         2,
-        UpdateMaskDataType::TwoShort,
+        UpdateMaskDataType::two_short(),
     ),
     UpdateMaskMember::new(
         UpdateMaskObjectType::Player,
@@ -1570,7 +1570,7 @@ pub(crate) const FIELDS: &[UpdateMaskMember] = &[
         "QUEST_LOG_21_3",
         0x0104,
         2,
-        UpdateMaskDataType::TwoShort,
+        UpdateMaskDataType::two_short(),
     ),
     UpdateMaskMember::new(
         UpdateMaskObjectType::Player,
@@ -1598,7 +1598,7 @@ pub(crate) const FIELDS: &[UpdateMaskMember] = &[
         "QUEST_LOG_22_3",
         0x0109,
         2,
-        UpdateMaskDataType::TwoShort,
+        UpdateMaskDataType::two_short(),
     ),
     UpdateMaskMember::new(
         UpdateMaskObjectType::Player,
@@ -1626,7 +1626,7 @@ pub(crate) const FIELDS: &[UpdateMaskMember] = &[
         "QUEST_LOG_23_3",
         0x010E,
         2,
-        UpdateMaskDataType::TwoShort,
+        UpdateMaskDataType::two_short(),
     ),
     UpdateMaskMember::new(
         UpdateMaskObjectType::Player,
@@ -1654,7 +1654,7 @@ pub(crate) const FIELDS: &[UpdateMaskMember] = &[
         "QUEST_LOG_24_3",
         0x0113,
         2,
-        UpdateMaskDataType::TwoShort,
+        UpdateMaskDataType::two_short(),
     ),
     UpdateMaskMember::new(
         UpdateMaskObjectType::Player,
@@ -1682,7 +1682,7 @@ pub(crate) const FIELDS: &[UpdateMaskMember] = &[
         "QUEST_LOG_25_3",
         0x0118,
         2,
-        UpdateMaskDataType::TwoShort,
+        UpdateMaskDataType::two_short(),
     ),
     UpdateMaskMember::new(
         UpdateMaskObjectType::Player,
@@ -2018,7 +2018,7 @@ pub(crate) const FIELDS: &[UpdateMaskMember] = &[
         "KILLS",
         0x04c9,
         1,
-        UpdateMaskDataType::TwoShort,
+        UpdateMaskDataType::two_short(),
     ),
     UpdateMaskMember::new(
         UpdateMaskObjectType::Player,
@@ -2172,7 +2172,7 @@ pub(crate) const FIELDS: &[UpdateMaskMember] = &[
         "DYNAMIC",
         0x000e,
         1,
-        UpdateMaskDataType::TwoShort,
+        UpdateMaskDataType::two_short(),
     ),
     UpdateMaskMember::new(
         UpdateMaskObjectType::GameObject,

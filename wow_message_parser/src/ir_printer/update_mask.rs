@@ -2,7 +2,9 @@ use crate::ir_printer::container::{container_to_update_mask_ir, IrUpdateMaskStru
 use crate::ir_printer::definer::{definer_to_ir, IrDefiner};
 use crate::parser::types::objects::Objects;
 use crate::parser::types::version::MajorWorldVersion;
-use crate::rust_printer::{ByteType, UpdateMaskDataType, UpdateMaskMember, UpdateMaskObjectType};
+use crate::rust_printer::{
+    ByteType, ShortType, UpdateMaskDataType, UpdateMaskMember, UpdateMaskObjectType,
+};
 use serde::Serialize;
 
 #[derive(Serialize, Debug)]
@@ -27,7 +29,10 @@ impl IrUpdateMaskMember {
                 UpdateMaskDataType::Guid => IrUpdateMaskType::Guid,
                 UpdateMaskDataType::Int => IrUpdateMaskType::Int,
                 UpdateMaskDataType::Float => IrUpdateMaskType::Float,
-                UpdateMaskDataType::TwoShort => IrUpdateMaskType::TwoShort,
+                UpdateMaskDataType::TwoShort(a, b) => IrUpdateMaskType::TwoShort {
+                    first: a,
+                    second: b,
+                },
                 UpdateMaskDataType::Bytes(first, second, third, fourth) => {
                     IrUpdateMaskType::Bytes {
                         first,
@@ -77,7 +82,10 @@ pub(crate) enum IrUpdateMaskType {
     Guid,
     Int,
     Float,
-    TwoShort,
+    TwoShort {
+        first: ShortType,
+        second: ShortType,
+    },
     Bytes {
         first: ByteType,
         second: ByteType,

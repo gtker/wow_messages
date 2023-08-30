@@ -84,7 +84,18 @@
               "properties": {}
             },
             "TwoShort": {
-              "properties": {}
+              "properties": {
+                "content": {
+                  "properties": {
+                    "first": {
+                      "ref": "two_short_type"
+                    },
+                    "second": {
+                      "ref": "two_short_type"
+                    }
+                  }
+                }
+              }
             },
             "GuidArrayUsingEnum": {
               "properties": {
@@ -155,6 +166,28 @@
             "Definer": {
               "properties": {
                 "byte_type": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "two_short_type": {
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "inner_type": {
+          "discriminator": "two_short_type_tag",
+          "mapping": {
+            "Short": {
+              "properties": {}
+            },
+            "Definer": {
+              "properties": {
+                "two_short_type": {
                   "type": "string"
                 }
               }
