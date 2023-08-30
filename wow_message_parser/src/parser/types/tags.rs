@@ -114,6 +114,13 @@ impl ObjectTags {
         self.main_versions().count() != 1
     }
 
+    pub(crate) fn only_main_world_version(&self) -> MajorWorldVersion {
+        match self.first_and_main_versions().0 {
+            Version::Login(_) => panic!(),
+            Version::World(w) => w,
+        }
+    }
+
     pub(crate) fn all_versions(&self) -> &AllVersions {
         &self.all_versions
     }

@@ -1,6 +1,6 @@
 use crate::ir_printer::{IrFileInfo, IrIntegerType, IrTags};
 use crate::parser::types::array::{Array, ArraySize, ArrayType};
-use crate::parser::types::container::{Container, ContainerType};
+use crate::parser::types::container::{Container, ContainerType, UpdateMaskMember};
 use crate::parser::types::if_statement::{Conditional, Equation, IfStatement};
 use crate::parser::types::optional::OptionalStatement;
 use crate::parser::types::sizes::Sizes;
@@ -43,181 +43,16 @@ fn container_to_ir_no_tests(e: &Container) -> IrContainer {
 }
 
 pub(crate) fn container_to_update_mask_ir(e: &Container) -> IrUpdateMaskStruct {
-    let mut members = Vec::new();
+    let members = e.create_update_mask_members();
 
-    let mut temp_definitions = Vec::new();
-
-    let mut offset = 0;
-
-    for m in e.members() {
-        match m {
-            StructMember::Definition(d) => {
-                if d.value().is_some() {
-                    members.push(vec![]);
-
-                    offset = 0;
-                    continue;
-                }
-
-                match d.ty() {
-                    Type::Guid => {
-                        assert_eq!(offset, 0);
-
-                        temp_definitions.push(IrUpdateMaskMember {
-                            member: IrStructMemberDefinition::from_definition(d),
-                            offset: 0,
-                            size: 8,
-                        });
-
-                        members.push(temp_definitions.clone());
-
-                        temp_definitions.clear();
-
-                        // Guids take 8 bytes, so next int is empty
-                        members.push(vec![]);
-                    }
-
-                    Type::FloatingPoint
-                    | Type::DateTime
-                    | Type::Gold
-                    | Type::Level32
-                    | Type::Milliseconds
-                    | Type::Seconds => {
-                        assert_eq!(offset, 0);
-
-                        temp_definitions.push(IrUpdateMaskMember {
-                            member: IrStructMemberDefinition::from_definition(d),
-                            offset: 0,
-                            size: 4,
-                        });
-
-                        members.push(temp_definitions.clone());
-
-                        temp_definitions.clear();
-                    }
-
-                    Type::Bool(i) | Type::Integer(i) => {
-                        temp_definitions.push(IrUpdateMaskMember {
-                            member: IrStructMemberDefinition::from_definition(d),
-                            offset,
-                            size: i.size() as i32,
-                        });
-
-                        offset += i.size() as i32;
-                    }
-
-                    Type::Level => {
-                        temp_definitions.push(IrUpdateMaskMember {
-                            member: IrStructMemberDefinition::from_definition(d),
-                            offset,
-                            size: 1,
-                        });
-
-                        offset += 1;
-                    }
-                    Type::Level16 => {
-                        temp_definitions.push(IrUpdateMaskMember {
-                            member: IrStructMemberDefinition::from_definition(d),
-                            offset,
-                            size: 2,
-                        });
-
-                        offset += 2;
-                    }
-
-                    Type::Enum { e, upcast } | Type::Flag { e, upcast } => {
-                        let size = if let Some(i) = upcast {
-                            i.size()
-                        } else {
-                            e.ty().size()
-                        } as i32;
-
-                        temp_definitions.push(IrUpdateMaskMember {
-                            member: IrStructMemberDefinition::from_definition(d),
-                            offset,
-                            size,
-                        });
-
-                        offset += size;
-                    }
-
-                    Type::Array(array) => match array.size() {
-                        ArraySize::Fixed(size) => {
-                            let inner_size = {
-                                let s = array.ty().sizes();
-                                assert!(s.is_constant().is_some());
-
-                                s.maximum()
-                            };
-
-                            let size = (size * inner_size) as i32;
-
-                            temp_definitions.push(IrUpdateMaskMember {
-                                member: IrStructMemberDefinition::from_definition(d),
-                                offset,
-                                size,
-                            });
-
-                            if size < 4 {
-                                offset += size;
-                            } else if size == 4 {
-                                assert_eq!(offset, 0);
-
-                                members.push(temp_definitions.clone());
-
-                                temp_definitions.clear();
-                            } else {
-                                assert_eq!(size % 4, 0);
-
-                                members.push(temp_definitions.clone());
-                                temp_definitions.clear();
-
-                                for _ in 0..((size / 4) - 1) {
-                                    members.push(vec![]);
-                                }
-
-                                offset = 0;
-                            }
-                        }
-                        ArraySize::Variable(_) | ArraySize::Endless => {
-                            unreachable!("variable and endless array for update mask")
-                        }
-                    },
-
-                    Type::IpAddress
-                    | Type::PackedGuid
-                    | Type::NamedGuid
-                    | Type::CString
-                    | Type::SizedCString
-                    | Type::String
-                    | Type::AuraMask
-                    | Type::AchievementDoneArray
-                    | Type::AchievementInProgressArray
-                    | Type::EnchantMask
-                    | Type::InspectTalentGearMask
-                    | Type::Population
-                    | Type::VariableItemRandomProperty
-                    | Type::AddonArray
-                    | Type::Struct { .. }
-                    | Type::UpdateMask { .. }
-                    | Type::MonsterMoveSplines => unreachable!("invalid update mask struct member"),
-                }
-            }
-            StructMember::IfStatement(_) | StructMember::OptionalStatement(_) => {
-                unreachable!("optional or if in update mask struct")
-            }
-        }
-
-        if offset >= 4 {
-            members.push(temp_definitions.clone());
-
-            temp_definitions.clear();
-
-            assert_eq!(offset, 4);
-
-            offset = 0;
-        }
-    }
+    let members = members
+        .iter()
+        .map(|a| {
+            a.iter()
+                .map(|a| IrUpdateMaskMember::from_member(a))
+                .collect()
+        })
+        .collect();
 
     IrUpdateMaskStruct {
         name: e.name().to_string(),
@@ -307,6 +142,16 @@ pub(crate) struct IrUpdateMaskMember {
     member: IrStructMemberDefinition,
     offset: i32,
     size: i32,
+}
+
+impl IrUpdateMaskMember {
+    pub(crate) fn from_member(a: &UpdateMaskMember) -> Self {
+        Self {
+            member: IrStructMemberDefinition::from_definition(&a.member),
+            offset: a.offset,
+            size: a.size,
+        }
+    }
 }
 
 #[derive(Clone, Debug, Serialize)]

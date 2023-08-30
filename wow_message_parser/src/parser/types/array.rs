@@ -102,6 +102,13 @@ impl Array {
         self.size.clone()
     }
 
+    pub(crate) fn fixed_size(&self) -> i128 {
+        match self.size() {
+            ArraySize::Fixed(s) => s,
+            ArraySize::Variable(_) | ArraySize::Endless => panic!(),
+        }
+    }
+
     pub(crate) fn str(&self) -> String {
         format!("{}[{}]", self.inner.str(), self.size.str())
     }

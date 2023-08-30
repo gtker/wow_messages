@@ -6,10 +6,8 @@ pub use impls::*;
 pub use indices::*;
 
 use crate::helper::update_mask_common::{
-    skill_info, update_item, update_mask, CONTAINER, CORPSE, DYNAMICOBJECT, GAMEOBJECT, ITEM,
-    PLAYER, UNIT,
+    update_item, update_mask, CONTAINER, CORPSE, DYNAMICOBJECT, GAMEOBJECT, ITEM, PLAYER, UNIT,
 };
-use std::convert::TryFrom;
 
 update_item!(UpdateItem, UpdateItemBuilder, ITEM);
 update_item!(UpdateContainer, UpdateContainerBuilder, ITEM | CONTAINER);
@@ -24,52 +22,6 @@ update_item!(
 update_item!(UpdateCorpse, UpdateCorpseBuilder, CORPSE);
 
 update_mask!();
-
-skill_info!(
-    wow_world_base::vanilla::Skill,
-    indices::SkillInfoIndex,
-    crate::vanilla::SkillInfo
-);
-
-impl crate::vanilla::VisibleItem {
-    pub(crate) const fn mask_values(&self, index: VisibleItemIndex) -> [(u16, u32); 7] {
-        let offset = index.offset();
-
-        let (guid_lower, guid_upper) = self.creator.to_u32s();
-
-        [
-            (offset, guid_lower),
-            (offset + 1, guid_upper),
-            (offset + 2, self.item),
-            (offset + 3, self.enchants[0]),
-            (offset + 4, self.enchants[1]),
-            (offset + 10, self.random_property_id),
-            (offset + 11, self.item_suffix_factor),
-        ]
-    }
-
-    pub(crate) fn from_range<'a>(
-        mut range: impl Iterator<Item = (&'a u16, &'a u32)>,
-    ) -> Option<Self> {
-        let (_, guid_lower) = range.next()?;
-        let (_, guid_upper) = range.next()?;
-        let (_, item) = range.next()?;
-        let (_, first_enchants) = range.next()?;
-        let (_, second_enchants) = range.next()?;
-        let (_, random_property_id) = range.next()?;
-        let (_, item_suffix_factor) = range.next()?;
-
-        let creator = crate::Guid::from_u32s(*guid_lower, *guid_upper);
-
-        Some(Self {
-            creator,
-            item: *item,
-            enchants: [*first_enchants, *second_enchants],
-            random_property_id: *random_property_id,
-            item_suffix_factor: *item_suffix_factor,
-        })
-    }
-}
 
 #[cfg(test)]
 mod test {
@@ -128,7 +80,7 @@ mod test {
             1, // UNIT_FIELD_BYTES[3] // Power (Rage)
             98, 0, 5, 0, // PLAYER_SKILL_INFO_1_1
             44, 1, 46, 1, // PLAYER_SKILL_INFO_1_2
-            10, 0, 7, 0, // PLAYER_SKILL_INFO_1_3
+            7, 0, 10, 0, // PLAYER_SKILL_INFO_1_3
         ];
 
         let skill_info = SkillInfo::new(Skill::LanguageCommon, 5, 300, 302, 7, 10);

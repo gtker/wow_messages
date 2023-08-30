@@ -1,3 +1,6 @@
+mod from_range;
+mod mask_values;
+
 use crate::parser::types::container::Container;
 use crate::parser::types::struct_member::StructMember;
 use crate::rust_printer::writer::Writer;
@@ -5,6 +8,13 @@ use crate::rust_printer::writer::Writer;
 pub(crate) fn impl_update_mask_struct(s: &mut Writer, e: &Container) {
     s.body(format!("impl {}", e.name()), |s| {
         create_new(s, e);
+
+        let members = e.create_update_mask_members();
+
+        from_range::create_from_range(s, &members);
+        s.newline();
+
+        mask_values::create_mask_values(s, e, &members);
     });
 }
 

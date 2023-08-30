@@ -21,4 +21,30 @@ impl VisibleItem {
         }
     }
 
+    pub(crate) fn from_range<'a>(mut range: impl Iterator<Item = (&'a u16, &'a u32)>) -> Option<Self> {
+        // index 0: item
+        let (_, &item) = range.next()?;
+
+        // index 1: enchants
+        let mut enchants = [0; 2];
+        let (_, &enchants_temp) = range.next()?;
+        let (enchants_temp_a, enchants_temp_b) = crate::util::u32_to_u16s(enchants_temp);
+        enchants[0] = enchants_temp_a;
+        enchants[1] = enchants_temp_b;
+
+        Some(Self {
+            item,
+            enchants,
+        })
+    }
+
+    pub(crate) const fn mask_values(&self, index: crate::wrath::VisibleItemIndex) -> [(u16, u32); 2] {
+        let offset = index.offset();
+        [
+            (offset, self.item),
+
+            (offset + 1, crate::util::u16s_to_u32(self.enchants[0], self.enchants[1])),
+
+        ]
+    }
 }
