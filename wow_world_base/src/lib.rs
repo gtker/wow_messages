@@ -25,6 +25,7 @@
 //! * `vanilla`, for client version 1.12.x.
 //! * `tbc`, for client version 2.4.3.8606.
 //! * `wrath`, for client version 3.3.5.x.
+//! * `shared`, for types that are used by more than one version. These are also enabled by any of the other version features, this is specifically if you want only the shared types.
 //! * `extended`, for additional functions and data that is not just simple enums and structs.
 //! * `serde`, for [`serde`](https://docs.rs/serde/latest/serde/) support, namely deriving [`Serialize`](https://docs.rs/serde/latest/serde/trait.Serialize.html) and [`Deserialize`](https://docs.rs/serde/latest/serde/trait.Deserialize.html).
 //!
@@ -68,5 +69,10 @@ pub use inner::*;
 
 pub(crate) mod manual;
 
-#[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
+#[cfg(any(
+    feature = "vanilla",
+    feature = "tbc",
+    feature = "wrath",
+    feature = "shared"
+))]
 pub(crate) mod util;

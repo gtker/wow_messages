@@ -7,7 +7,7 @@ use crate::path_utils::{
     world_directory,
 };
 use crate::rust_printer::writer::Writer;
-use std::collections::BTreeMap;
+use std::collections::{BTreeMap, BTreeSet};
 use std::fs::remove_file;
 use std::path::{Path, PathBuf};
 use walkdir::WalkDir;
@@ -123,7 +123,7 @@ impl ModFiles {
     }
 
     fn insert_shared_base(s: &mut Writer, print_tbc_wrath_only: bool, print_cfg: bool) {
-        let all_cfgs = "#[cfg(any(feature = \"vanilla\", feature = \"tbc\", feature = \"wrath\"))]";
+        let all_cfgs = "#[cfg(any(feature = \"shared\", feature = \"vanilla\", feature = \"tbc\", feature = \"wrath\"))]";
         if print_cfg {
             s.wln(all_cfgs);
         }
@@ -151,7 +151,7 @@ impl ModFiles {
 
         if print_tbc_wrath_only {
             if print_cfg {
-                s.wln(all_cfgs);
+                s.wln("#[cfg(any(feature = \"shared\", feature = \"tbc\", feature = \"wrath\"))]");
             }
             s.wln("pub use crate::manual::shared::player_race_tbc_wrath::*;");
         }
@@ -186,8 +186,9 @@ impl ModFiles {
 
     fn insert_into_shared_base_module(&mut self, versions: &[MajorWorldVersion], text: &str) {
         use std::fmt::Write;
+        let versions: BTreeSet<_> = versions.iter().collect();
 
-        let mut cfgs = "#[cfg(any(".to_string();
+        let mut cfgs = "#[cfg(any(feature = \"shared\", ".to_string();
         for (i, version) in versions.iter().enumerate() {
             if i != 0 {
                 write!(cfgs, ", ").unwrap();

@@ -17,6 +17,7 @@ extended = []
 vanilla = []
 tbc = []
 wrath = []
+shared = []
 print-testcase = []
 
 [dependencies]

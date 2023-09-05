@@ -20,6 +20,7 @@ pub enum PlayerRace {
     Draenei,
 }
 
+#[cfg(any(feature = "tbc", feature = "wrath"))]
 macro_rules! from {
     ($player_race:ty, $race:ty) => {
         impl TryFrom<$race> for $player_race {
