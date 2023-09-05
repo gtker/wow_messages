@@ -45,6 +45,8 @@ impl ModFiles {
         let mut shared_base_modules = Writer::new();
         shared_base_modules.wln("pub use crate::manual::shared::*;");
 
+        Self::insert_shared_base(&mut shared_base_modules, true, true);
+
         let mut shared_world_modules = Writer::new();
         shared_world_modules.wln("pub use crate::manual::shared::*;");
 
@@ -120,6 +122,41 @@ impl ModFiles {
         }
     }
 
+    fn insert_shared_base(s: &mut Writer, print_tbc_wrath_only: bool, print_cfg: bool) {
+        let all_cfgs = "#[cfg(any(feature = \"vanilla\", feature = \"tbc\", feature = \"wrath\"))]";
+        if print_cfg {
+            s.wln(all_cfgs);
+        }
+        s.wln("pub use crate::manual::shared::datetime_vanilla_tbc_wrath::*;");
+
+        if print_cfg {
+            s.wln(all_cfgs);
+        }
+        s.wln("pub use crate::manual::shared::gold_vanilla_tbc_wrath::*;");
+
+        if print_cfg {
+            s.wln(all_cfgs);
+        }
+        s.wln("pub use crate::manual::shared::guid_vanilla_tbc_wrath::*;");
+
+        if print_cfg {
+            s.wln(all_cfgs);
+        }
+        s.wln("pub use crate::manual::shared::level_vanilla_tbc_wrath::*;");
+
+        if print_cfg {
+            s.wln(all_cfgs);
+        }
+        s.wln("pub use crate::manual::shared::player_gender_vanilla_tbc_wrath::*;");
+
+        if print_tbc_wrath_only {
+            if print_cfg {
+                s.wln(all_cfgs);
+            }
+            s.wln("pub use crate::manual::shared::player_race_tbc_wrath::*;");
+        }
+    }
+
     fn insert_into_base_module(&mut self, version: MajorWorldVersion, text: &str) {
         if let Some(s) = self.base_modules.get_mut(&version) {
             s.wln(text);
@@ -130,17 +167,15 @@ impl ModFiles {
             s.wln(format!("pub use crate::manual::{module}::*;"));
             s.wln("#[cfg(feature = \"extended\")]");
             s.wln(format!("pub use crate::extended::{module}::*;"));
-            s.wln("pub use crate::manual::shared::datetime_vanilla_tbc_wrath::*;");
-            s.wln("pub use crate::manual::shared::gold_vanilla_tbc_wrath::*;");
-            s.wln("pub use crate::manual::shared::guid_vanilla_tbc_wrath::*;");
-            s.wln("pub use crate::manual::shared::level_vanilla_tbc_wrath::*;");
-            s.wln("pub use crate::manual::shared::player_gender_vanilla_tbc_wrath::*;");
-            match version {
-                MajorWorldVersion::Vanilla => {}
-                MajorWorldVersion::BurningCrusade | MajorWorldVersion::Wrath => {
-                    s.wln("pub use crate::manual::shared::player_race_tbc_wrath::*;");
-                }
-            }
+
+            Self::insert_shared_base(
+                &mut s,
+                matches!(
+                    version,
+                    MajorWorldVersion::BurningCrusade | MajorWorldVersion::Wrath
+                ),
+                false,
+            );
             s.newline();
 
             s.wln(text);

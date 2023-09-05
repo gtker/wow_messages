@@ -1,4 +1,16 @@
 pub use crate::manual::shared::*;
+#[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
+pub use crate::manual::shared::datetime_vanilla_tbc_wrath::*;
+#[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
+pub use crate::manual::shared::gold_vanilla_tbc_wrath::*;
+#[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
+pub use crate::manual::shared::guid_vanilla_tbc_wrath::*;
+#[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
+pub use crate::manual::shared::level_vanilla_tbc_wrath::*;
+#[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
+pub use crate::manual::shared::player_gender_vanilla_tbc_wrath::*;
+#[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
+pub use crate::manual::shared::player_race_tbc_wrath::*;
 #[cfg(any(feature = "vanilla", feature = "tbc"))]
 pub mod account_data_type_vanilla_tbc;
 #[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
