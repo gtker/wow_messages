@@ -9,7 +9,7 @@ pub use crate::manual::shared::guid_vanilla_tbc_wrath::*;
 pub use crate::manual::shared::level_vanilla_tbc_wrath::*;
 #[cfg(any(feature = "shared", feature = "vanilla", feature = "tbc", feature = "wrath"))]
 pub use crate::manual::shared::player_gender_vanilla_tbc_wrath::*;
-#[cfg(any(feature = "shared", feature = "vanilla", feature = "tbc", feature = "wrath"))]
+#[cfg(any(feature = "shared", feature = "tbc", feature = "wrath"))]
 pub use crate::manual::shared::player_race_tbc_wrath::*;
 #[cfg(any(feature = "shared", feature = "vanilla", feature = "tbc"))]
 pub mod account_data_type_vanilla_tbc;
