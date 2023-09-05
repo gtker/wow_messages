@@ -43,7 +43,7 @@ async fn handle(mut stream: TcpStream, users: Arc<Mutex<HashMap<String, SrpServe
     };
 
     let mut encryption = seed
-        .into_header_crypto(
+        .into_server_header_crypto(
             &NormalizedString::new(&c.username).unwrap(),
             session_key,
             c.client_proof,

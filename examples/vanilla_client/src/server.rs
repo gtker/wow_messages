@@ -21,7 +21,7 @@ pub fn server(
 
     let seed = ProofSeed::new();
     let seed_value = seed.seed();
-    let (client_proof, mut crypto) = seed.into_proof_and_header_crypto(
+    let (client_proof, mut crypto) = seed.into_client_header_crypto(
         &NormalizedString::new(USERNAME).unwrap(),
         session_key,
         s.server_seed,

@@ -28,6 +28,8 @@ workspace = true
 version = "0.6.0"
 default-features = false
 optional = true
+git = "https://github.com/gtker/wow_srp.git"
+rev = "ba56b4564ec9f7baf6bec824e547e9279a0f58ce"
 
 [dependencies.chrono]
 version = "0.4"
