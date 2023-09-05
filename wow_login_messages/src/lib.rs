@@ -140,7 +140,7 @@ pub const DEFAULT_PORT: u16 = 3724;
 /// Do not be alarmed by the excessive boilerplate on the async functions,
 /// it is required for async functions in traits.
 ///
-/// This trait also has a bunch of hidden functions that are necessary for the [`helper`](helper)
+/// This trait also has a bunch of hidden functions that are necessary for the [`helper`]
 /// and [`opcodes`](version_2::opcodes) modules to work.
 pub trait ServerMessage: Sized + private::Sealed {
     #[doc(hidden)]
@@ -205,7 +205,7 @@ pub trait ServerMessage: Sized + private::Sealed {
 /// Do not be alarmed by the excessive boilerplate on the async functions,
 /// it is required for async functions in traits.
 ///
-/// This trait also has a bunch of hidden functions that are necessary for the [`helper`](helper)
+/// This trait also has a bunch of hidden functions that are necessary for the [`helper`]
 /// and [`opcodes`](version_2::opcodes) modules to work.
 pub trait ClientMessage: Sized + private::Sealed {
     #[doc(hidden)]
