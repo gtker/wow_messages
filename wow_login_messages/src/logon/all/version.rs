@@ -36,7 +36,7 @@ impl Version {
 }
 
 impl Version {
-    pub(crate) fn read<R: Read>(mut r: R) -> Result<Self, std::io::Error> {
+    pub(crate) fn read<R: std::io::Read>(mut r: R) -> Result<Self, std::io::Error> {
         // major: u8
         let major = crate::util::read_u8_le(&mut r)?;
 

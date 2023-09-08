@@ -65,7 +65,7 @@ impl CalendarSendInvitee {
 }
 
 impl CalendarSendInvitee {
-    pub(crate) fn read<R: Read>(mut r: R) -> Result<Self, crate::errors::ParseErrorKind> {
+    pub(crate) fn read<R: std::io::Read>(mut r: R) -> Result<Self, crate::errors::ParseErrorKind> {
         // invitee: PackedGuid
         let invitee = crate::util::read_packed_guid(&mut r)?;
 

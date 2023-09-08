@@ -1,7 +1,5 @@
-use std::io::Read;
-
 #[cfg(feature = "sync")]
-pub fn expect_server_message<M: crate::tbc::ServerMessage, R: Read>(
+pub fn expect_server_message<M: crate::tbc::ServerMessage, R: std::io::Read>(
     r: &mut R,
 ) -> Result<M, crate::errors::ExpectedOpcodeError> {
     let mut header = [0_u8; 4];
@@ -15,7 +13,7 @@ pub fn expect_server_message<M: crate::tbc::ServerMessage, R: Read>(
 }
 
 #[cfg(feature = "sync")]
-pub fn expect_client_message<M: crate::tbc::ClientMessage, R: Read>(
+pub fn expect_client_message<M: crate::tbc::ClientMessage, R: std::io::Read>(
     r: &mut R,
 ) -> Result<M, crate::errors::ExpectedOpcodeError> {
     let mut header = [0_u8; 6];
@@ -29,7 +27,7 @@ pub fn expect_client_message<M: crate::tbc::ClientMessage, R: Read>(
 }
 
 #[cfg(all(feature = "sync", feature = "encryption"))]
-pub fn expect_server_message_encryption<M: crate::tbc::ServerMessage, R: Read>(
+pub fn expect_server_message_encryption<M: crate::tbc::ServerMessage, R: std::io::Read>(
     r: &mut R,
     d: &mut wow_srp::tbc_header::DecrypterHalf,
 ) -> Result<M, crate::errors::ExpectedOpcodeError> {
@@ -44,7 +42,7 @@ pub fn expect_server_message_encryption<M: crate::tbc::ServerMessage, R: Read>(
 }
 
 #[cfg(all(feature = "sync", feature = "encryption"))]
-pub fn expect_client_message_encryption<M: crate::tbc::ClientMessage, R: Read>(
+pub fn expect_client_message_encryption<M: crate::tbc::ClientMessage, R: std::io::Read>(
     r: &mut R,
     d: &mut wow_srp::tbc_header::DecrypterHalf,
 ) -> Result<M, crate::errors::ExpectedOpcodeError> {

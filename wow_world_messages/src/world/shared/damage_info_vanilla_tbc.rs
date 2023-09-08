@@ -43,7 +43,7 @@ impl DamageInfo {
 }
 
 impl DamageInfo {
-    pub(crate) fn read<R: Read>(mut r: R) -> Result<Self, std::io::Error> {
+    pub(crate) fn read<R: std::io::Read>(mut r: R) -> Result<Self, std::io::Error> {
         // spell_school_mask: u32
         let spell_school_mask = crate::util::read_u32_le(&mut r)?;
 

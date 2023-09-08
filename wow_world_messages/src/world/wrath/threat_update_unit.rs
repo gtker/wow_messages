@@ -28,7 +28,7 @@ impl ThreatUpdateUnit {
 }
 
 impl ThreatUpdateUnit {
-    pub(crate) fn read<R: Read>(mut r: R) -> Result<Self, std::io::Error> {
+    pub(crate) fn read<R: std::io::Read>(mut r: R) -> Result<Self, std::io::Error> {
         // unit: PackedGuid
         let unit = crate::util::read_packed_guid(&mut r)?;
 

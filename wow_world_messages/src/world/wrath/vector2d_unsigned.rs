@@ -26,7 +26,7 @@ impl Vector2dUnsigned {
 }
 
 impl Vector2dUnsigned {
-    pub(crate) fn read<R: Read>(mut r: R) -> Result<Self, std::io::Error> {
+    pub(crate) fn read<R: std::io::Read>(mut r: R) -> Result<Self, std::io::Error> {
         // x: u32
         let x = crate::util::read_u32_le(&mut r)?;
 

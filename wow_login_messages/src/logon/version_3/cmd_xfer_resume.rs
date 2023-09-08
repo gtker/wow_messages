@@ -28,7 +28,7 @@ impl crate::private::Sealed for CMD_XFER_RESUME {}
 
 impl CMD_XFER_RESUME {
     #[cfg(feature = "sync")]
-    fn read_inner<R: Read>(mut r: R) -> Result<Self, crate::errors::ParseErrorKind> {
+    fn read_inner<R: std::io::Read>(mut r: R) -> Result<Self, crate::errors::ParseErrorKind> {
         // offset: u64
         let offset = crate::util::read_u64_le(&mut r)?;
 
@@ -63,12 +63,12 @@ impl ClientMessage for CMD_XFER_RESUME {
     const OPCODE: u8 = 0x33;
 
     #[cfg(feature = "sync")]
-    fn read<R: Read, I: crate::private::Sealed>(r: R) -> Result<Self, crate::errors::ParseError> {
+    fn read<R: std::io::Read, I: crate::private::Sealed>(r: R) -> Result<Self, crate::errors::ParseError> {
         Self::read_inner(r).map_err(|kind| crate::errors::ParseError::new(51, "CMD_XFER_RESUME", kind))
     }
 
     #[cfg(feature = "sync")]
-    fn write<W: Write>(&self, mut w: W) -> Result<(), std::io::Error> {
+    fn write<W: std::io::Write>(&self, mut w: W) -> Result<(), std::io::Error> {
         let mut v = Vec::with_capacity(9);
         self.write_into_vec(&mut v)?;
         w.write_all(&v)

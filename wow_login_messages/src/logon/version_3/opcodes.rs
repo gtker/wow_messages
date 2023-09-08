@@ -28,7 +28,7 @@ impl ServerOpcodeMessage {
 
 impl ServerOpcodeMessage {
     #[cfg(feature = "sync")]
-    pub fn read<R: Read>(mut r: R) -> Result<Self, crate::errors::ExpectedOpcodeError> {
+    pub fn read<R: std::io::Read>(mut r: R) -> Result<Self, crate::errors::ExpectedOpcodeError> {
         let opcode = crate::util::read_u8_le(&mut r)?;
         match opcode {
             0x00 => Ok(Self::CMD_AUTH_LOGON_CHALLENGE(CMD_AUTH_LOGON_CHALLENGE_Server::read::<R, crate::private::Internal>(r)?)),
@@ -142,7 +142,7 @@ impl ClientOpcodeMessage {
 
 impl ClientOpcodeMessage {
     #[cfg(feature = "sync")]
-    pub fn read<R: Read>(mut r: R) -> Result<Self, crate::errors::ExpectedOpcodeError> {
+    pub fn read<R: std::io::Read>(mut r: R) -> Result<Self, crate::errors::ExpectedOpcodeError> {
         let opcode = crate::util::read_u8_le(&mut r)?;
         match opcode {
             0x00 => Ok(Self::CMD_AUTH_LOGON_CHALLENGE(CMD_AUTH_LOGON_CHALLENGE_Client::read::<R, crate::private::Internal>(r)?)),

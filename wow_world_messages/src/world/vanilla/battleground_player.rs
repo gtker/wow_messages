@@ -63,7 +63,7 @@ impl BattlegroundPlayer {
 }
 
 impl BattlegroundPlayer {
-    pub(crate) fn read<R: Read>(mut r: R) -> Result<Self, crate::errors::ParseErrorKind> {
+    pub(crate) fn read<R: std::io::Read>(mut r: R) -> Result<Self, crate::errors::ParseErrorKind> {
         // player: Guid
         let player = crate::util::read_guid(&mut r)?;
 

@@ -160,7 +160,7 @@ impl Addon {
 }
 
 impl Addon {
-    pub(crate) fn read<R: Read>(mut r: R) -> Result<Self, crate::errors::ParseErrorKind> {
+    pub(crate) fn read<R: std::io::Read>(mut r: R) -> Result<Self, crate::errors::ParseErrorKind> {
         // addon_type: AddonType
         let addon_type = crate::util::read_u8_le(&mut r)?.try_into()?;
 

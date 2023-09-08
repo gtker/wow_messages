@@ -28,7 +28,7 @@ impl ForcedReaction {
 }
 
 impl ForcedReaction {
-    pub(crate) fn read<R: Read>(mut r: R) -> Result<Self, crate::errors::ParseErrorKind> {
+    pub(crate) fn read<R: std::io::Read>(mut r: R) -> Result<Self, crate::errors::ParseErrorKind> {
         // faction: Faction
         let faction = crate::util::read_u16_le(&mut r)?.try_into()?;
 

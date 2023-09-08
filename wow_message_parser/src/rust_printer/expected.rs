@@ -116,9 +116,6 @@ fn print_expected_world_version(version: MajorWorldVersion, server_size_type: &s
     let module = version.module_name();
     let mut s = Writer::new();
 
-    s.wln("use std::io::Read;");
-    s.newline();
-
     for it in ImplType::types() {
         for encrypted in [false, true] {
             for side in MessageSide::values() {

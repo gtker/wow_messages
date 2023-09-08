@@ -48,7 +48,7 @@ impl SendCalendarInvite {
 }
 
 impl SendCalendarInvite {
-    pub(crate) fn read<R: Read>(mut r: R) -> Result<Self, std::io::Error> {
+    pub(crate) fn read<R: std::io::Read>(mut r: R) -> Result<Self, std::io::Error> {
         // event_id: Guid
         let event_id = crate::util::read_guid(&mut r)?;
 

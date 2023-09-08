@@ -48,7 +48,7 @@ impl EquipmentSetListItem {
 }
 
 impl EquipmentSetListItem {
-    pub(crate) fn read<R: Read>(mut r: R) -> Result<Self, crate::errors::ParseErrorKind> {
+    pub(crate) fn read<R: std::io::Read>(mut r: R) -> Result<Self, crate::errors::ParseErrorKind> {
         // guid: Guid
         let guid = crate::util::read_guid(&mut r)?;
 

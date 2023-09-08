@@ -39,7 +39,7 @@ impl LfgRole {
 }
 
 impl LfgRole {
-    pub(crate) fn read<R: Read>(mut r: R) -> Result<Self, std::io::Error> {
+    pub(crate) fn read<R: std::io::Read>(mut r: R) -> Result<Self, std::io::Error> {
         // guid: Guid
         let guid = crate::util::read_guid(&mut r)?;
 

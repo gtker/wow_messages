@@ -265,7 +265,7 @@ impl SpellLog {
 }
 
 impl SpellLog {
-    pub(crate) fn read<R: Read>(mut r: R) -> Result<Self, crate::errors::ParseErrorKind> {
+    pub(crate) fn read<R: std::io::Read>(mut r: R) -> Result<Self, crate::errors::ParseErrorKind> {
         // effect: SpellEffect
         let effect = crate::util::read_u32_le(&mut r)?.try_into()?;
 

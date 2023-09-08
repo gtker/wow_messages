@@ -40,7 +40,7 @@ impl GmSurveyQuestion {
 }
 
 impl GmSurveyQuestion {
-    pub(crate) fn read<R: Read>(mut r: R) -> Result<Self, crate::errors::ParseErrorKind> {
+    pub(crate) fn read<R: std::io::Read>(mut r: R) -> Result<Self, crate::errors::ParseErrorKind> {
         // question_id: u32
         let question_id = crate::util::read_u32_le(&mut r)?;
 

@@ -63,7 +63,7 @@ impl crate::private::Sealed for CMD_AUTH_RECONNECT_PROOF_Client {}
 
 impl CMD_AUTH_RECONNECT_PROOF_Client {
     #[cfg(feature = "sync")]
-    fn read_inner<R: Read>(mut r: R) -> Result<Self, crate::errors::ParseErrorKind> {
+    fn read_inner<R: std::io::Read>(mut r: R) -> Result<Self, crate::errors::ParseErrorKind> {
         // proof_data: u8[16]
         let proof_data = {
             let mut proof_data = [0_u8; 16];
@@ -170,12 +170,12 @@ impl ClientMessage for CMD_AUTH_RECONNECT_PROOF_Client {
     const OPCODE: u8 = 0x03;
 
     #[cfg(feature = "sync")]
-    fn read<R: Read, I: crate::private::Sealed>(r: R) -> Result<Self, crate::errors::ParseError> {
+    fn read<R: std::io::Read, I: crate::private::Sealed>(r: R) -> Result<Self, crate::errors::ParseError> {
         Self::read_inner(r).map_err(|kind| crate::errors::ParseError::new(3, "CMD_AUTH_RECONNECT_PROOF_Client", kind))
     }
 
     #[cfg(feature = "sync")]
-    fn write<W: Write>(&self, mut w: W) -> Result<(), std::io::Error> {
+    fn write<W: std::io::Write>(&self, mut w: W) -> Result<(), std::io::Error> {
         let mut v = Vec::with_capacity(58);
         self.write_into_vec(&mut v)?;
         w.write_all(&v)

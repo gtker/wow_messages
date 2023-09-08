@@ -86,7 +86,7 @@ impl Realm {
 }
 
 impl Realm {
-    pub(crate) fn read<R: Read>(mut r: R) -> Result<Self, crate::errors::ParseErrorKind> {
+    pub(crate) fn read<R: std::io::Read>(mut r: R) -> Result<Self, crate::errors::ParseErrorKind> {
         // realm_type: RealmType
         let realm_type = crate::util::read_u8_le(&mut r)?.try_into()?;
 

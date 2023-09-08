@@ -157,7 +157,7 @@ impl MonsterMove {
 }
 
 impl MonsterMove {
-    pub(crate) fn read<R: Read>(mut r: R) -> Result<Self, crate::errors::ParseErrorKind> {
+    pub(crate) fn read<R: std::io::Read>(mut r: R) -> Result<Self, crate::errors::ParseErrorKind> {
         let mut move_type_if_target = Default::default();
         let mut move_type_if_angle = Default::default();
         let mut move_type_if_position = Default::default();

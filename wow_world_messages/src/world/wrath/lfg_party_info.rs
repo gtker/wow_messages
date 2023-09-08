@@ -35,7 +35,7 @@ impl LfgPartyInfo {
 }
 
 impl LfgPartyInfo {
-    pub(crate) fn read<R: Read>(mut r: R) -> Result<Self, std::io::Error> {
+    pub(crate) fn read<R: std::io::Read>(mut r: R) -> Result<Self, std::io::Error> {
         // player: Guid
         let player = crate::util::read_guid(&mut r)?;
 

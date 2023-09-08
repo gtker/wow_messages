@@ -47,7 +47,7 @@ impl ReceivedMail {
 }
 
 impl ReceivedMail {
-    pub(crate) fn read<R: Read>(mut r: R) -> Result<Self, crate::errors::ParseErrorKind> {
+    pub(crate) fn read<R: std::io::Read>(mut r: R) -> Result<Self, crate::errors::ParseErrorKind> {
         // sender: Guid
         let sender = crate::util::read_guid(&mut r)?;
 

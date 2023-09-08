@@ -37,7 +37,7 @@ impl QuestObjective {
 }
 
 impl QuestObjective {
-    pub(crate) fn read<R: Read>(mut r: R) -> Result<Self, std::io::Error> {
+    pub(crate) fn read<R: std::io::Read>(mut r: R) -> Result<Self, std::io::Error> {
         // creature_id: u32
         let creature_id = crate::util::read_u32_le(&mut r)?;
 

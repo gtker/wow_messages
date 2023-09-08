@@ -50,7 +50,7 @@ impl ItemSpells {
 }
 
 impl ItemSpells {
-    pub fn read<R: Read>(mut r: R) -> Result<Self, crate::errors::ParseErrorKind> {
+    pub fn read<R: std::io::Read>(mut r: R) -> Result<Self, crate::errors::ParseErrorKind> {
         // spell: u32
         let spell = crate::util::read_u32_le(&mut r)?;
 

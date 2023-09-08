@@ -82,7 +82,7 @@ impl ImplType {
 
     pub(crate) fn write(&self) -> &str {
         match self {
-            ImplType::Std => "Write",
+            ImplType::Std => "std::io::Write",
             ImplType::Tokio => "tokio::io::AsyncWriteExt + Unpin + Send",
             ImplType::AsyncStd => "async_std::io::WriteExt + Unpin + Send",
         }
@@ -90,7 +90,7 @@ impl ImplType {
 
     pub(crate) fn read(&self) -> &str {
         match self {
-            ImplType::Std => "Read",
+            ImplType::Std => "std::io::Read",
             ImplType::Tokio => "tokio::io::AsyncReadExt + Unpin + Send",
             ImplType::AsyncStd => "async_std::io::ReadExt + Unpin + Send",
         }

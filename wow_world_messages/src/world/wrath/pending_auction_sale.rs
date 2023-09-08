@@ -53,7 +53,7 @@ impl PendingAuctionSale {
 }
 
 impl PendingAuctionSale {
-    pub(crate) fn read<R: Read>(mut r: R) -> Result<Self, crate::errors::ParseErrorKind> {
+    pub(crate) fn read<R: std::io::Read>(mut r: R) -> Result<Self, crate::errors::ParseErrorKind> {
         // string1: CString
         let string1 = {
             let string1 = crate::util::read_c_string_to_vec(&mut r)?;

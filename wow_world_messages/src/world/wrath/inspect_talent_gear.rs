@@ -44,7 +44,7 @@ impl InspectTalentGear {
 }
 
 impl InspectTalentGear {
-    pub(crate) fn read<R: Read>(mut r: R) -> Result<Self, std::io::Error> {
+    pub(crate) fn read<R: std::io::Read>(mut r: R) -> Result<Self, std::io::Error> {
         // item: u32
         let item = crate::util::read_u32_le(&mut r)?;
 

@@ -67,7 +67,7 @@ impl GuildBankSlot {
 }
 
 impl GuildBankSlot {
-    pub(crate) fn read<R: Read>(mut r: R) -> Result<Self, std::io::Error> {
+    pub(crate) fn read<R: std::io::Read>(mut r: R) -> Result<Self, std::io::Error> {
         // slot: u8
         let slot = crate::util::read_u8_le(&mut r)?;
 

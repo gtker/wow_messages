@@ -41,7 +41,7 @@ impl TelemetryKey {
 }
 
 impl TelemetryKey {
-    pub(crate) fn read<R: Read>(mut r: R) -> Result<Self, std::io::Error> {
+    pub(crate) fn read<R: std::io::Read>(mut r: R) -> Result<Self, std::io::Error> {
         // unknown1: u16
         let unknown1 = crate::util::read_u16_le(&mut r)?;
 
