@@ -21,7 +21,7 @@ shared = []
 print-testcase = []
 
 [dependencies]
-serde = { version = "1", optional = true, features = ["derive"] }
+serde = { version = "1", optional = true, default-features = false, features = ["derive"] }
 
 [package.metadata.docs.rs]
 all-features = true
