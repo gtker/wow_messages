@@ -376,7 +376,7 @@ pub enum Value {
     TbcAllowedRace(tbc_base::AllowedRace),
     WrathAllowedRace(wrath_base::AllowedRace),
 
-    SpellSchool(shared_base::spell_school_vanilla_vanilla_tbc_wrath::SpellSchool),
+    SpellSchool(shared_base::spell_school_vanilla_tbc_wrath::SpellSchool),
 
     VanillaSpellTriggerType(vanilla_base::SpellTriggerType),
     TbcWrathSpellTriggerType(shared_base::spell_trigger_type_tbc_wrath::SpellTriggerType),
@@ -728,9 +728,9 @@ impl Value {
             }
             Value::TbcAllowedRace(_) => Value::TbcAllowedRace(tbc_base::AllowedRace::empty()),
             Value::WrathAllowedRace(_) => Value::WrathAllowedRace(wrath_base::AllowedRace::empty()),
-            Value::SpellSchool(_) => Value::SpellSchool(
-                shared_base::spell_school_vanilla_vanilla_tbc_wrath::SpellSchool::Normal,
-            ),
+            Value::SpellSchool(_) => {
+                Value::SpellSchool(shared_base::spell_school_vanilla_tbc_wrath::SpellSchool::Normal)
+            }
             Value::TbcWrathSpellTriggerType(_) => Value::TbcWrathSpellTriggerType(
                 shared_base::spell_trigger_type_tbc_wrath::SpellTriggerType::OnUse,
             ),

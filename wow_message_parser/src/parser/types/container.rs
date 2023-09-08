@@ -292,28 +292,6 @@ impl Container {
         &self.name
     }
 
-    pub(crate) fn base_read_write_full_import_path(&self) -> String {
-        let versions = self
-            .tags()
-            .versions()
-            .map(|a| a.try_as_major_world().unwrap())
-            .collect::<Vec<_>>();
-
-        if versions.len() == 1 {
-            format!(
-                "wow_world_base::{}::{}",
-                versions[0].module_name(),
-                self.name()
-            )
-        } else {
-            format!(
-                "{}::{}",
-                get_base_shared_path(self.name(), self.tags()),
-                self.name()
-            )
-        }
-    }
-
     pub(crate) fn file_info(&self) -> &FileInfo {
         &self.file_info
     }
@@ -487,7 +465,29 @@ impl Container {
         false
     }
 
-    pub(crate) fn get_import_path(&self) -> String {
+    pub(crate) fn base_read_write_full_import_path(&self) -> String {
+        let versions = self
+            .tags()
+            .world_versions()
+            .map(|a| a.try_as_major_world().unwrap())
+            .collect::<Vec<_>>();
+
+        if versions.len() == 1 {
+            format!(
+                "wow_world_base::{}::{}",
+                versions[0].module_name(),
+                self.name()
+            )
+        } else {
+            format!(
+                "{}::{}",
+                get_base_shared_path(self.name(), self.tags()),
+                self.name()
+            )
+        }
+    }
+
+    pub(crate) fn get_import_path_from_world(&self) -> String {
         let t = self.tags();
 
         if t.has_world_version() && t.shared() {

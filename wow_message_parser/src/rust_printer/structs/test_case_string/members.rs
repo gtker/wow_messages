@@ -90,7 +90,7 @@ pub(crate) fn print_if_statement_flag(
             );
 
         for enumerator in rd.enumerators() {
-            let import_path = e.get_import_path();
+            let import_path = e.get_import_path_from_world();
 
             s.open_curly(format!(
                 "{import_path}::{ty}::{enumerator}",
@@ -156,7 +156,7 @@ pub(crate) fn print_if_statement_enum(
             continue;
         }
 
-        let import_path = e.get_import_path();
+        let import_path = e.get_import_path_from_world();
 
         s.open_curly(format!(
             "{import_path}::{new_enum}::{variant}",

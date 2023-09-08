@@ -287,13 +287,6 @@ impl Version {
         }
     }
 
-    pub(crate) fn as_login(&self) -> LoginVersion {
-        match self {
-            Version::Login(l) => *l,
-            Version::World(_) => panic!(),
-        }
-    }
-
     pub(crate) fn to_module_case(self) -> String {
         match self {
             Version::Login(l) => l.as_module_case(),
@@ -385,6 +378,37 @@ impl MajorWorldVersion {
     const VERSIONS: &'static [Self] = &[Self::Vanilla, Self::BurningCrusade, Self::Wrath];
     pub(crate) const fn versions() -> &'static [Self] {
         Self::VERSIONS
+    }
+}
+
+#[derive(Debug, Ord, PartialOrd, Eq, PartialEq, Clone)]
+pub(crate) enum AllRustVersions {
+    Login(BTreeSet<LoginVersion>),
+    World(BTreeSet<MajorWorldVersion>),
+}
+
+impl AllRustVersions {
+    pub(crate) fn has_world(&self, version: &MajorWorldVersion) -> bool {
+        match self {
+            AllRustVersions::World(l) => l.contains(version),
+            AllRustVersions::Login(_) => false,
+        }
+    }
+
+    pub(crate) fn has_login(&self, version: &LoginVersion) -> bool {
+        match self {
+            AllRustVersions::Login(l) => {
+                if l.contains(version) {
+                    return true;
+                }
+                if matches!(version, LoginVersion::All) {
+                    return true;
+                }
+
+                l.contains(&LoginVersion::All)
+            }
+            AllRustVersions::World(_) => false,
+        }
     }
 }
 

@@ -2,6 +2,7 @@ mod bytes;
 mod members;
 
 use crate::parser::types::container::{Container, ContainerType};
+use crate::parser::types::version::AllVersions;
 use crate::rust_printer::writer::Writer;
 use crate::rust_printer::CFG_TESTCASE;
 
@@ -56,36 +57,38 @@ fn print_inner_function(s: &mut Writer, e: &Container) {
     bytes::print_bytes(s, e);
 
     wln(s, "] {{");
-    if e.tags().has_login_version() {
-        let versions = if let Ok(versions) = std::env::var("WOWM_TEST_CASE_LOGIN_VERSION") {
-            versions
-        } else {
-            e.tags()
-                .logon_versions()
+    match e.tags().all_versions() {
+        AllVersions::Login(l) => {
+            let versions = if let Ok(versions) = std::env::var("WOWM_TEST_CASE_LOGIN_VERSION") {
+                versions
+            } else {
+                l.iter()
+                    .map(|a| a.to_string())
+                    .collect::<Vec<_>>()
+                    .join(" ")
+            };
+
+            wlna(
+                s,
+                "    login_versions = \\\"{}\\\";",
+                format!("std::env::var(\"WOWM_TEST_CASE_LOGIN_VERSION\").unwrap_or(\"{versions}\".to_string())"),
+            );
+        }
+        AllVersions::World(l) => {
+            let versions = l
+                .iter()
                 .map(|a| a.to_string())
                 .collect::<Vec<_>>()
-                .join(" ")
-        };
+                .join(" ");
 
-        wlna(
-            s,
-            "    login_versions = \\\"{}\\\";",
-            format!("std::env::var(\"WOWM_TEST_CASE_LOGIN_VERSION\").unwrap_or(\"{versions}\".to_string())"),
-        );
-    } else {
-        let versions = e
-            .tags()
-            .versions()
-            .map(|a| a.to_string())
-            .collect::<Vec<_>>()
-            .join(" ");
-
-        wlna(
-            s,
-            "    versions = \\\"{}\\\";",
-            format!("std::env::var(\"WOWM_TEST_CASE_WORLD_VERSION\").unwrap_or(\"{versions}\".to_string())"),
-        );
+            wlna(
+                s,
+                "    versions = \\\"{}\\\";",
+                format!("std::env::var(\"WOWM_TEST_CASE_WORLD_VERSION\").unwrap_or(\"{versions}\".to_string())"),
+            );
+        }
     }
+
     wln(s, "}}\\n");
     s.newline();
 

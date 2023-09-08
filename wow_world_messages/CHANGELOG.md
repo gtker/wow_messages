@@ -25,6 +25,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+* BREAKING: Fix some shared types having modules with `vanilla_vanilla` instead of just `vanilla`.
+* BREAKING: Fix some types that were in `shared` when they shouldn't have been.
 * BREAKING: Compressed arrays no longer have a manual decompressed size field.
 * BREAKING: `ParseError` enum has been renamed to `ParseErrorKind`. `ParseError` is now a struct that holds more information about the error, such as opcode and size.
 * BREAKING: `MSG_AUCTION_HELLO_Server`, `SMSG_AUCTION_BIDDER_NOTIFICATION`, and `ReceivedMail` have had the

@@ -58,7 +58,7 @@ pub(crate) fn print_read_write_base_structs(o: &Objects) {
 pub(crate) fn base_struct_read_name(e: &Container) -> String {
     let versions = e
         .tags()
-        .versions()
+        .world_versions()
         .map(|a| a.try_as_major_world().unwrap().module_name())
         .collect::<Vec<_>>()
         .join("_");
@@ -70,7 +70,7 @@ pub(crate) fn base_struct_read_name(e: &Container) -> String {
 pub(crate) fn base_struct_write_name(e: &Container) -> String {
     let versions = e
         .tags()
-        .versions()
+        .world_versions()
         .map(|a| a.try_as_major_world().unwrap().module_name())
         .collect::<Vec<_>>()
         .join("_");

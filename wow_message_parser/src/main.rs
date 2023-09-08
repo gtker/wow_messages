@@ -37,6 +37,7 @@ use crate::ir_printer::write_intermediate_representation;
 use crate::parser::stats::print_message_stats;
 use crate::parser::types::objects::Object;
 use crate::parser::types::sizes::PACKED_GUID_MAX_SIZE;
+use crate::parser::types::version::AllRustVersions;
 use crate::path_utils::{get_login_version_file_path, wowm_directory};
 use crate::rust_printer::{
     print_enum, print_enum_for_base, print_expected, print_flag, print_login_opcodes,
@@ -151,32 +152,30 @@ fn print_main_types(o: &Objects) {
             continue;
         }
 
-        let s = match &e {
-            Object::Container(e) => print_struct(e, o),
-            Object::Enum(e) => print_enum(e, o),
-            Object::Flag(e) => print_flag(e, o),
-        };
+        match e.tags().all_rust_versions() {
+            AllRustVersions::Login(l) => {
+                let s = match &e {
+                    Object::Container(e) => print_struct(e, o),
+                    Object::Enum(e) => print_enum(e, o),
+                    Object::Flag(e) => print_flag(e, o),
+                };
 
-        if e.tags().has_login_version() {
-            let versions = e.tags().main_versions().map(|a| a.as_login());
-            n.add_login_module(e.name(), versions, s.inner())
-        } else {
-            let versions = e
-                .tags()
-                .main_versions()
-                .map(|a| a.as_major_world())
-                .collect::<Vec<_>>();
+                n.add_login_module(e.name(), l.iter().cloned(), s.inner())
+            }
+            AllRustVersions::World(l) => {
+                let versions = l.iter().cloned().collect::<Vec<_>>();
 
-            let s = match &e {
-                Object::Enum(e) => print_enum_for_base(e, o),
-                Object::Container(e) => print_struct(e, o),
-                Object::Flag(e) => print_flag(e, o),
-            };
+                let s = match &e {
+                    Object::Container(e) => print_struct(e, o),
+                    Object::Enum(e) => print_enum_for_base(e, o),
+                    Object::Flag(e) => print_flag(e, o),
+                };
 
-            if e.tags().is_in_base() {
-                n.add_base_module(e.name(), &versions, s.inner());
-            } else {
-                n.add_world_module(e.name(), &versions, s.inner());
+                if e.tags().is_in_base() {
+                    n.add_base_module(e.name(), &versions, s.inner());
+                } else {
+                    n.add_world_module(e.name(), &versions, s.inner());
+                }
             }
         }
     }
@@ -187,7 +186,7 @@ fn print_main_types(o: &Objects) {
 }
 
 fn write_world_opcodes(o: &Objects) {
-    for e in o.get_main_world_versions_with_objects() {
+    for e in o.get_rust_world_versions_with_objects() {
         let mut contents = String::with_capacity(16000);
 
         let mut v = o.get_world_messages_with_versions_and_all(&e);
@@ -267,7 +266,7 @@ fn load_files(dir: &Path, components: &mut ParsedObjects) {
 }
 
 fn should_not_write_object(t: &ObjectTags) -> bool {
-    t.test() || t.skip() || !t.is_main_version()
+    t.test() || t.skip() || !t.has_rust_version()
 }
 
 fn should_not_write_object_docs(t: &ObjectTags) -> bool {

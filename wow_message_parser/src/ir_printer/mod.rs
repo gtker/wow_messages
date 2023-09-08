@@ -386,22 +386,14 @@ impl IrObjects {
         let login = TypeObjects::only_type(o, |a| a.has_login_version());
         let world = TypeObjects::only_type(o, |a| a.has_world_version());
 
-        let distinct_login_versions_other_than_all = {
-            let objects = o.all_objects().filter(|a| a.tags().has_login_version());
-            let mut versions = BTreeSet::new();
-            for o in objects {
-                for v in o.tags().logon_versions() {
-                    match v {
-                        LoginVersion::Specific(s) => {
-                            versions.insert(s);
-                        }
-                        LoginVersion::All => {}
-                    }
-                }
-            }
-
-            versions
-        };
+        let distinct_login_versions_other_than_all = o
+            .get_login_versions_with_objects()
+            .iter()
+            .filter_map(|a| match a {
+                LoginVersion::Specific(v) => Some(*v),
+                LoginVersion::All => None,
+            })
+            .collect();
 
         let login_version_opcodes = {
             let mut v = BTreeMap::new();

@@ -8,8 +8,9 @@ use crate::parser::types::parsed::parsed_definer::ParsedDefiner;
 use crate::parser::types::parsed::parsed_test_case::ParsedTestCase;
 use crate::parser::types::tags::ObjectTags;
 use crate::parser::types::test_case::TestCase;
-use crate::parser::types::version::{LoginVersion, MajorWorldVersion, Version};
+use crate::parser::types::version::{AllRustVersions, LoginVersion, MajorWorldVersion};
 use crate::ContainerType;
+use std::collections::BTreeSet;
 
 #[derive(Debug, Clone)]
 pub(crate) struct Objects {
@@ -62,22 +63,19 @@ impl Objects {
         None
     }
 
-    pub(crate) fn get_main_world_versions_with_objects(&self) -> Vec<MajorWorldVersion> {
-        let mut v = Vec::new();
+    pub(crate) fn get_rust_world_versions_with_objects(&self) -> BTreeSet<MajorWorldVersion> {
+        let mut b = BTreeSet::new();
 
-        for s in self.all_containers() {
-            for l in s.tags().main_versions() {
-                match l {
-                    Version::Login(_) => {}
-                    Version::World(w) => v.push(w),
+        for e in self.all_containers() {
+            match e.tags().try_all_rust_versions() {
+                Some(AllRustVersions::World(w)) => {
+                    b.append(&mut w.clone());
                 }
+                _ => {}
             }
         }
 
-        v.sort();
-        v.dedup();
-
-        v
+        b
     }
 
     pub(crate) fn get_world_messages_with_versions_and_all(
@@ -87,8 +85,13 @@ impl Objects {
         let mut v = Vec::new();
 
         for e in self.all_containers() {
-            let tags = ObjectTags::new_with_version(Version::World(*version_number));
-            if e.tags().fulfills_all(&tags) {
+            let all = if let Some(all) = e.tags().try_all_rust_versions() {
+                all
+            } else {
+                continue;
+            };
+
+            if all.has_world(version_number) {
                 v.push(e);
             }
         }
@@ -96,24 +99,21 @@ impl Objects {
         v
     }
 
-    pub(crate) fn get_login_versions_with_objects(&self) -> Vec<LoginVersion> {
-        let mut v = Vec::new();
+    pub(crate) fn get_login_versions_with_objects(&self) -> BTreeSet<LoginVersion> {
+        let mut b = BTreeSet::new();
 
-        for s in self.all_containers() {
-            for l in s.tags().logon_versions() {
-                v.push(l);
+        for e in self.all_containers() {
+            match e.tags().try_all_rust_versions() {
+                Some(AllRustVersions::Login(l)) => {
+                    b.append(&mut l.clone());
+                }
+                _ => {}
             }
         }
 
-        v.sort();
-        v.dedup();
+        let _ = b.remove(&LoginVersion::All);
 
-        let index = v.iter().position(|a| a.eq(&LoginVersion::All));
-        if let Some(index) = index {
-            v.remove(index);
-        }
-
-        v
+        b
     }
 
     pub(crate) fn get_login_messages_with_versions_and_all(
@@ -123,8 +123,12 @@ impl Objects {
         let mut v = Vec::new();
 
         for s in self.all_containers() {
-            let mut logon = s.tags().logon_versions();
-            if logon.any(|a| a == *version_number || a == LoginVersion::All) {
+            let all = if let Some(all) = s.tags().try_all_rust_versions() {
+                all
+            } else {
+                continue;
+            };
+            if all.has_login(version_number) {
                 v.push(s);
             }
         }

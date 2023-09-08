@@ -11,7 +11,7 @@ use crate::parser::types::container::Container;
 use crate::parser::types::definer::Definer;
 use crate::parser::types::objects::Objects;
 use crate::parser::types::tags::ObjectTags;
-use crate::parser::types::version::{LoginVersion, WorldVersion};
+use crate::parser::types::version::AllVersions;
 use crate::path_utils::{doc_summary_path, docs_directory};
 use crate::rust_printer::writer::Writer;
 use crate::rust_printer::DefinerType;
@@ -35,7 +35,7 @@ fn common(s: &mut Writer, tags: &ObjectTags, name: &str, print_header: bool) {
         s.newline();
     }
 
-    print_versions(s, tags.logon_versions(), tags.versions());
+    print_versions(s, tags);
 
     print_metadata(s, tags);
 }
@@ -56,25 +56,26 @@ fn print_metadata(s: &mut Writer, tags: &ObjectTags) {
     }
 }
 
-fn print_versions(
-    s: &mut Writer,
-    login_versions: impl Iterator<Item = LoginVersion>,
-    world_versions: impl Iterator<Item = WorldVersion>,
-) {
+fn print_versions(s: &mut Writer, tags: &ObjectTags) {
     s.w("## ");
 
-    for (i, l) in login_versions.enumerate() {
-        if i != 0 {
-            s.w(", ");
+    match tags.all_versions() {
+        AllVersions::Login(l) => {
+            for (i, l) in l.iter().enumerate() {
+                if i != 0 {
+                    s.w(", ");
+                }
+                s.w(format!("Protocol Version {l}"));
+            }
         }
-        s.w(format!("Protocol Version {l}"));
-    }
-
-    for (i, l) in world_versions.enumerate() {
-        if i != 0 {
-            s.w(", ");
+        AllVersions::World(l) => {
+            for (i, l) in l.iter().enumerate() {
+                if i != 0 {
+                    s.w(", ");
+                }
+                s.w(format!("Client Version {l}"));
+            }
         }
-        s.w(format!("Client Version {l}"));
     }
 
     s.newline();

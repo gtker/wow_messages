@@ -123,8 +123,6 @@ pub mod item_class_vanilla_tbc;
 pub mod item_quality_vanilla_tbc;
 #[cfg(any(feature = "shared", feature = "tbc", feature = "wrath"))]
 pub mod join_arena_type_tbc_wrath;
-#[cfg(any(feature = "shared", feature = "vanilla"))]
-pub mod language_vanilla_vanilla;
 #[cfg(any(feature = "shared", feature = "tbc", feature = "wrath"))]
 pub mod language_tbc_wrath;
 #[cfg(any(feature = "shared", feature = "vanilla", feature = "tbc", feature = "wrath"))]
@@ -226,9 +224,9 @@ pub mod skill_category_vanilla_tbc_wrath;
 #[cfg(any(feature = "shared", feature = "tbc", feature = "wrath"))]
 pub mod spam_type_tbc_wrath;
 #[cfg(any(feature = "shared", feature = "vanilla", feature = "tbc", feature = "wrath"))]
-pub mod spell_miss_info_vanilla_vanilla_tbc_wrath;
+pub mod spell_miss_info_vanilla_tbc_wrath;
 #[cfg(any(feature = "shared", feature = "vanilla", feature = "tbc", feature = "wrath"))]
-pub mod spell_school_vanilla_vanilla_tbc_wrath;
+pub mod spell_school_vanilla_tbc_wrath;
 #[cfg(any(feature = "shared", feature = "tbc", feature = "wrath"))]
 pub mod spell_steal_action_tbc_wrath;
 #[cfg(any(feature = "shared", feature = "tbc", feature = "wrath"))]
@@ -238,7 +236,7 @@ pub mod stable_result_vanilla_tbc;
 #[cfg(any(feature = "shared", feature = "vanilla", feature = "tbc", feature = "wrath"))]
 pub mod status_id_vanilla_tbc_wrath;
 #[cfg(any(feature = "shared", feature = "vanilla", feature = "tbc", feature = "wrath"))]
-pub mod timer_type_vanilla_vanilla_tbc_wrath;
+pub mod timer_type_vanilla_tbc_wrath;
 #[cfg(any(feature = "shared", feature = "tbc", feature = "wrath"))]
 pub mod title_earn_status_tbc_wrath;
 #[cfg(any(feature = "shared", feature = "vanilla", feature = "tbc", feature = "wrath"))]

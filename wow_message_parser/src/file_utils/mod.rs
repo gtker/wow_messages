@@ -95,6 +95,7 @@ pub(crate) fn get_shared_module_name(e: &str, versions: &[MajorWorldVersion]) ->
 
     let mut versions = versions.to_vec();
     versions.sort();
+    versions.dedup();
 
     for v in versions {
         s += &format!("_{}", v.module_name());

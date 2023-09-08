@@ -2,13 +2,14 @@ use std::collections::BTreeSet;
 use std::fmt::Write;
 
 use crate::file_utils::{get_import_path, get_shared_module_name};
-use crate::parser::types::version::{AllVersions, MajorWorldVersion, Version};
+use crate::parser::types::version::{AllRustVersions, AllVersions, MajorWorldVersion, Version};
 use crate::parser::types::version::{LoginVersion, WorldVersion};
 use crate::Objects;
 
 #[derive(Debug, Eq, PartialEq, Ord, PartialOrd, Clone)]
 pub(crate) struct ObjectTags {
     all_versions: AllVersions,
+    rust_versions: Option<AllRustVersions>,
 
     description: Option<TagString>,
     comment: Option<TagString>,
@@ -37,8 +38,27 @@ impl ObjectTags {
         non_network_type: bool,
         used_in_update_mask: bool,
     ) -> Self {
+        let rust_versions = match &all_versions {
+            AllVersions::Login(l) => Some(AllRustVersions::Login(l.clone())),
+            AllVersions::World(l) => {
+                let mut b = BTreeSet::new();
+                for v in l {
+                    if let Some(v) = v.try_as_major_world() {
+                        b.insert(v);
+                    }
+                }
+
+                if b.is_empty() {
+                    None
+                } else {
+                    Some(AllRustVersions::World(b))
+                }
+            }
+        };
+
         Self {
             all_versions,
+            rust_versions,
             description,
             compressed,
             comment,
@@ -66,19 +86,9 @@ impl ObjectTags {
             }
         };
 
-        Self {
-            all_versions: v.0,
-            description: None,
-            comment: None,
-            compressed: false,
-            is_test: false,
-            skip: false,
-            unimplemented: false,
-            rust_base_ty: false,
-            zero_is_always_valid: false,
-            non_network_type: false,
-            used_in_update_mask: false,
-        }
+        Self::from_parsed(
+            v.0, None, None, false, false, false, false, false, false, false, false,
+        )
     }
 
     pub(crate) fn new_with_world_versions(versions: &[MajorWorldVersion]) -> Self {
@@ -87,19 +97,19 @@ impl ObjectTags {
             s.insert(v.as_world());
         }
 
-        Self {
-            all_versions: AllVersions::World(s),
-            description: None,
-            comment: None,
-            compressed: false,
-            is_test: false,
-            skip: false,
-            unimplemented: false,
-            rust_base_ty: false,
-            zero_is_always_valid: false,
-            non_network_type: false,
-            used_in_update_mask: false,
-        }
+        Self::from_parsed(
+            AllVersions::World(s),
+            None,
+            None,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+        )
     }
 
     pub(crate) fn unimplemented(&self) -> bool {
@@ -125,14 +135,22 @@ impl ObjectTags {
         &self.all_versions
     }
 
+    pub(crate) fn all_rust_versions(&self) -> &AllRustVersions {
+        self.rust_versions.as_ref().unwrap()
+    }
+
+    pub(crate) fn try_all_rust_versions(&self) -> Option<&AllRustVersions> {
+        self.rust_versions.as_ref()
+    }
+
     /// self and tags have any version in common at all
     pub(crate) fn has_version_intersections(&self, tags: &ObjectTags) -> bool {
         self.all_versions
             .has_version_intersections(&tags.all_versions)
     }
 
-    pub(crate) fn is_main_version(&self) -> bool {
-        self.main_versions().next().is_some()
+    pub(crate) fn has_rust_version(&self) -> bool {
+        self.rust_versions.is_some()
     }
 
     pub(crate) fn logon_versions(&self) -> impl Iterator<Item = LoginVersion> {
@@ -142,7 +160,7 @@ impl ObjectTags {
         }
     }
 
-    pub(crate) fn versions(&self) -> impl Iterator<Item = WorldVersion> {
+    pub(crate) fn world_versions(&self) -> impl Iterator<Item = WorldVersion> {
         match &self.all_versions {
             AllVersions::World(w) => w.clone().into_iter(),
             AllVersions::Login(_) => BTreeSet::new().into_iter(),
@@ -155,7 +173,7 @@ impl ObjectTags {
 
     pub(crate) fn main_versions(&self) -> impl Iterator<Item = Version> + '_ {
         let world = self
-            .versions()
+            .world_versions()
             .filter_map(|a| a.try_as_major_world())
             .map(Version::World);
 

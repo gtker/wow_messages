@@ -1,5 +1,5 @@
 use crate::file_info::FileInfo;
-use crate::parser::types::version::MajorWorldVersion;
+use crate::parser::types::version::{AllVersions, MajorWorldVersion};
 use crate::parser::types::IntegerType;
 use crate::path_utils::opcodes_file;
 use crate::{ObjectTags, CONTAINER_SELF_SIZE_FIELD};
@@ -51,19 +51,20 @@ fn wowm_exit(s: ErrorWriter, code: i32) -> ! {
 
 fn print_version_cover(s: &mut ErrorWriter, msg: &str, tags: &ObjectTags) {
     s.wln(msg);
-    if tags.logon_versions().next().is_some() {
-        s.wln("    Login:");
+    match tags.all_versions() {
+        AllVersions::Login(l) => {
+            s.wln("    Login:");
 
-        for t in tags.logon_versions() {
-            s.wln(format!("        {t}"));
+            for t in l {
+                s.wln(format!("        {t}"));
+            }
         }
-    }
+        AllVersions::World(l) => {
+            s.wln("    World:");
 
-    if tags.versions().next().is_some() {
-        s.wln("    World:");
-
-        for t in tags.versions() {
-            s.wln(format!("        {t}"));
+            for t in l {
+                s.wln(format!("        {t}"));
+            }
         }
     }
 }
@@ -269,47 +270,57 @@ fn print_version_overlap(
     other_tags: &ObjectTags,
 ) {
     s.wln(msg);
-    if tags.logon_versions().next().is_some() {
-        s.wln("    Login:");
+    match tags.all_versions() {
+        AllVersions::Login(l) => {
+            s.wln("    Login:");
 
-        for t in tags.logon_versions() {
-            s.w(format!("        {t}"));
+            for t in l {
+                s.w(format!("        {t}"));
 
-            let mut has_overlapped = false;
-            for other_t in other_tags.logon_versions() {
-                if t.overlaps(&other_t) {
-                    if !has_overlapped {
-                        has_overlapped = true;
-                        s.w("    <-- Overlaps with: ");
-                    } else {
-                        s.w(", ");
+                let mut has_overlapped = false;
+                let other_versions = match other_tags.all_versions() {
+                    AllVersions::Login(l) => l,
+                    AllVersions::World(_) => panic!(),
+                };
+
+                for other_t in other_versions {
+                    if t.overlaps(&other_t) {
+                        if !has_overlapped {
+                            has_overlapped = true;
+                            s.w("    <-- Overlaps with: ");
+                        } else {
+                            s.w(", ");
+                        }
+                        s.w(other_t.to_string());
                     }
-                    s.w(other_t.to_string());
                 }
+                s.newline();
             }
-            s.newline();
         }
-    }
+        AllVersions::World(l) => {
+            s.wln("    World:");
 
-    if tags.versions().next().is_some() {
-        s.wln("    World:");
+            for t in l {
+                s.w(format!("        {t}"));
 
-        for t in tags.versions() {
-            s.w(format!("        {t}"));
-
-            let mut has_overlapped = false;
-            for other_t in other_tags.versions() {
-                if t.overlaps(&other_t) {
-                    if !has_overlapped {
-                        has_overlapped = true;
-                        s.w("    <-- Overlaps with: ");
-                    } else {
-                        s.w(", ");
+                let mut has_overlapped = false;
+                let other_versions = match other_tags.all_versions() {
+                    AllVersions::World(l) => l,
+                    AllVersions::Login(_) => panic!(),
+                };
+                for other_t in other_versions {
+                    if t.overlaps(&other_t) {
+                        if !has_overlapped {
+                            has_overlapped = true;
+                            s.w("    <-- Overlaps with: ");
+                        } else {
+                            s.w(", ");
+                        }
+                        s.w(other_t.to_string());
                     }
-                    s.w(other_t.to_string());
                 }
+                s.newline();
             }
-            s.newline();
         }
     }
 }
