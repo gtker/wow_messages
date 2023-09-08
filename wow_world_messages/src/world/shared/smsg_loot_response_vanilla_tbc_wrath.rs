@@ -1,8 +1,8 @@
 use std::io::{Read, Write};
 
 use crate::Guid;
+use crate::shared::gold_vanilla_tbc_wrath::Gold;
 use crate::shared::loot_item_vanilla_tbc_wrath::LootItem;
-use wow_world_base::shared::gold_vanilla_tbc_wrath::Gold;
 use wow_world_base::shared::loot_method_error_vanilla_tbc_wrath::LootMethodError;
 use wow_world_base::shared::loot_method_vanilla_tbc_wrath::LootMethod;
 use wow_world_base::shared::loot_slot_type_vanilla_tbc_wrath::LootSlotType;

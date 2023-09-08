@@ -1,8 +1,8 @@
 use std::io::{Read, Write};
 
 use crate::Guid;
+use crate::shared::gold_vanilla_tbc_wrath::Gold;
 use crate::shared::mail_item_tbc_wrath::MailItem;
-use wow_world_base::shared::gold_vanilla_tbc_wrath::Gold;
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/mail/cmsg_send_mail.wowm:32`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/mail/cmsg_send_mail.wowm#L32):

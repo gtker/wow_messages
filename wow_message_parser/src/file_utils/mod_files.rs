@@ -49,6 +49,7 @@ impl ModFiles {
 
         let mut shared_world_modules = Writer::new();
         shared_world_modules.wln("pub use crate::manual::shared::*;");
+        shared_world_modules.wln("pub use wow_world_base::shared::*;");
 
         Self {
             already_existing_files,

@@ -1,10 +1,10 @@
 use std::io::{Read, Write};
 
 use crate::Guid;
+use crate::shared::level_vanilla_tbc_wrath::Level;
 use crate::wrath::{
     Area, Class, LfgUpdateFlag, Race,
 };
-use wow_world_base::shared::level_vanilla_tbc_wrath::Level;
 
 #[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/lfg/smsg_update_lfg_list.wowm:50`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/lfg/smsg_update_lfg_list.wowm#L50):

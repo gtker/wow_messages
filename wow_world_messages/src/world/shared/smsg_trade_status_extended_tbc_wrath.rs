@@ -1,8 +1,8 @@
 use std::io::{Read, Write};
 
 use crate::Guid;
+use crate::shared::gold_vanilla_tbc_wrath::Gold;
 use crate::shared::trade_slot_tbc_wrath::TradeSlot;
-use wow_world_base::shared::gold_vanilla_tbc_wrath::Gold;
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/trade/smsg_trade_status_extended.wowm:67`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/trade/smsg_trade_status_extended.wowm#L67):

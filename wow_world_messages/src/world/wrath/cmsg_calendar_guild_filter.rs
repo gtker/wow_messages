@@ -1,6 +1,6 @@
 use std::io::{Read, Write};
 
-use wow_world_base::shared::level_vanilla_tbc_wrath::Level;
+use crate::shared::level_vanilla_tbc_wrath::Level;
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/calendar/cmsg_calendar_guild_filter.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/calendar/cmsg_calendar_guild_filter.wowm#L1):

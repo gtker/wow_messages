@@ -1,4 +1,5 @@
 pub use crate::manual::shared::*;
+pub use wow_world_base::shared::*;
 #[cfg(any(feature = "tbc", feature = "wrath"))]
 pub mod addon_tbc_wrath;
 #[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]

@@ -587,21 +587,9 @@ impl Container {
 
                 Type::Population => ("crate::all::population".to_string(), name),
 
-                Type::Gold => {
-                    let pre = if self.tags().is_in_base() {
-                        "crate"
-                    } else {
-                        "wow_world_base"
-                    };
-                    (format!("{pre}::shared::gold_vanilla_tbc_wrath"), name)
-                }
+                Type::Gold => (format!("crate::shared::gold_vanilla_tbc_wrath"), name),
                 Type::Level | Type::Level16 | Type::Level32 => {
-                    let pre = if self.tags().is_in_base() {
-                        "crate"
-                    } else {
-                        "wow_world_base"
-                    };
-                    (format!("{pre}::shared::level_vanilla_tbc_wrath"), name)
+                    (format!("crate::shared::level_vanilla_tbc_wrath"), name)
                 }
 
                 Type::Array(array) => {
