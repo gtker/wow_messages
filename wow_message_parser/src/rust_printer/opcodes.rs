@@ -68,7 +68,7 @@ pub(crate) fn includes(
     version: Version,
 ) {
     match container_type {
-        ContainerType::SLogin(_) => {
+        ContainerType::CLogin(_) => {
             s.wln(format!(
                 "use crate::{{{SERVER_MESSAGE_TRAIT_NAME}, {CLIENT_MESSAGE_TRAIT_NAME}}};"
             ));

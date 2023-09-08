@@ -229,22 +229,22 @@ fn write_login_opcodes(o: &Objects) {
 
         let mut v: Vec<&Container> = o.get_login_messages_with_versions_and_all(&e);
         v.sort_by_key(|a| a.container_type());
-        let slogin: Vec<&Container> = v
-            .clone()
-            .into_iter()
-            .filter(|a| matches!(a.container_type(), ContainerType::SLogin(_)))
-            .collect();
-        if !slogin.is_empty() {
-            let s = print_login_opcodes(&slogin, &e, ContainerType::SLogin(0));
-            contents.write_str(s.inner()).unwrap();
-        }
-
         let clogin: Vec<&Container> = v
+            .clone()
             .into_iter()
             .filter(|a| matches!(a.container_type(), ContainerType::CLogin(_)))
             .collect();
         if !clogin.is_empty() {
             let s = print_login_opcodes(&clogin, &e, ContainerType::CLogin(0));
+            contents.write_str(s.inner()).unwrap();
+        }
+
+        let slogin: Vec<&Container> = v
+            .into_iter()
+            .filter(|a| matches!(a.container_type(), ContainerType::SLogin(_)))
+            .collect();
+        if !slogin.is_empty() {
+            let s = print_login_opcodes(&slogin, &e, ContainerType::SLogin(0));
             contents.write_str(s.inner()).unwrap();
         }
 
