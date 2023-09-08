@@ -2,7 +2,6 @@ use crate::{ServerMessage, ClientMessage};
 use std::io::{Read, Write};
 use super::*;
 use crate::all::*;
-
 #[derive(Debug, Clone, PartialEq)]
 pub enum ClientOpcodeMessage {
     CMD_AUTH_LOGON_CHALLENGE(CMD_AUTH_LOGON_CHALLENGE_Client),
@@ -109,7 +108,6 @@ impl From<CMD_REALM_LIST_Client> for ClientOpcodeMessage {
         Self::CMD_REALM_LIST(c)
     }
 }
-
 
 #[derive(Debug, Clone, PartialEq)]
 pub enum ServerOpcodeMessage {

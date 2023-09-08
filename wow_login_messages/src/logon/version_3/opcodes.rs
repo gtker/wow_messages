@@ -2,7 +2,6 @@ use crate::{ServerMessage, ClientMessage};
 use std::io::{Read, Write};
 use super::*;
 use crate::all::*;
-
 #[derive(Debug, Clone, PartialEq)]
 pub enum ClientOpcodeMessage {
     CMD_AUTH_LOGON_CHALLENGE(CMD_AUTH_LOGON_CHALLENGE_Client),
@@ -145,7 +144,6 @@ impl From<CMD_XFER_CANCEL> for ClientOpcodeMessage {
         Self::CMD_XFER_CANCEL
     }
 }
-
 
 #[derive(Debug, Clone, PartialEq)]
 pub enum ServerOpcodeMessage {

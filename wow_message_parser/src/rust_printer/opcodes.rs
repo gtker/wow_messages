@@ -27,7 +27,7 @@ pub(crate) fn print_world_opcodes(
         _ => unreachable!("invalid type passed to opcode printer"),
     };
 
-    includes(&mut s, v, container_type, Version::World(*version));
+    world_includes(&mut s, v, container_type, Version::World(*version));
 
     definition(&mut s, v, ty, (*version).into());
 
@@ -48,7 +48,7 @@ pub(crate) fn print_login_opcodes(
         _ => unreachable!("invalid type passed to opcode printer"),
     };
 
-    includes(&mut s, v, container_type, Version::Login(*version));
+    login_includes(&mut s, container_type);
 
     definition(&mut s, v, ty, (*version).into());
 
@@ -61,12 +61,7 @@ fn any_container_is_pure_movement_info(v: &[&Container]) -> bool {
     v.iter().any(|a| a.is_pure_movement_info())
 }
 
-pub(crate) fn includes(
-    s: &mut Writer,
-    v: &[&Container],
-    container_type: ContainerType,
-    version: Version,
-) {
+pub(crate) fn login_includes(s: &mut Writer, container_type: ContainerType) {
     match container_type {
         ContainerType::CLogin(_) => {
             s.wln(format!(
@@ -78,6 +73,17 @@ pub(crate) fn includes(
             s.wln("use super::*;");
             s.wln("use crate::all::*;");
         }
+        _ => {}
+    }
+}
+
+pub(crate) fn world_includes(
+    s: &mut Writer,
+    v: &[&Container],
+    container_type: ContainerType,
+    version: Version,
+) {
+    match container_type {
         ContainerType::CMsg(_) => {
             s.wln(format!(
                 "use crate::{}::{{{}, {}}};",
