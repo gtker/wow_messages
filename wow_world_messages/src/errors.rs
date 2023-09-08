@@ -2,8 +2,6 @@ use std::error::Error;
 use std::fmt::{Display, Formatter};
 
 pub use wow_world_base::EnumError;
-pub use wow_world_base::ParseErrorKind;
-use wow_world_base::ParseErrorKind::BufferSizeTooSmall;
 
 #[derive(Debug)]
 pub struct ParseError {
@@ -25,7 +23,7 @@ impl ParseError {
 
     pub(crate) fn opcode_convert(mut self) -> Self {
         if let ParseErrorKind::Io(e) = self.kind {
-            self.kind = BufferSizeTooSmall(e);
+            self.kind = ParseErrorKind::BufferSizeTooSmall(e);
         }
 
         self
@@ -96,6 +94,50 @@ impl From<ParseError> for ExpectedOpcodeError {
 }
 
 impl From<std::io::Error> for ExpectedOpcodeError {
+    fn from(e: std::io::Error) -> Self {
+        Self::Io(e)
+    }
+}
+
+/// Errors that can be encountered while parsing messages.
+#[derive(Debug)]
+pub enum ParseErrorKind {
+    Io(std::io::Error),
+    Enum(EnumError),
+    String(std::string::FromUtf8Error),
+    InvalidSize,
+    BufferSizeTooSmall(std::io::Error),
+}
+
+impl Display for ParseErrorKind {
+    fn fmt(&self, f: &mut Formatter<'_>) -> std::fmt::Result {
+        match self {
+            ParseErrorKind::Io(i) => i.fmt(f),
+            ParseErrorKind::Enum(i) => i.fmt(f),
+            ParseErrorKind::String(i) => i.fmt(f),
+            ParseErrorKind::InvalidSize => f.write_fmt(format_args!("message has invalid size")),
+            ParseErrorKind::BufferSizeTooSmall(io) => {
+                f.write_fmt(format_args!("buffer too small with io error: '{io}'"))
+            }
+        }
+    }
+}
+
+impl std::error::Error for ParseErrorKind {}
+
+impl From<EnumError> for ParseErrorKind {
+    fn from(e: EnumError) -> Self {
+        Self::Enum(e)
+    }
+}
+
+impl From<std::string::FromUtf8Error> for ParseErrorKind {
+    fn from(e: std::string::FromUtf8Error) -> Self {
+        Self::String(e)
+    }
+}
+
+impl From<std::io::Error> for ParseErrorKind {
     fn from(e: std::io::Error) -> Self {
         Self::Io(e)
     }

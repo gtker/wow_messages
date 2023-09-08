@@ -1,6 +1,6 @@
+use crate::errors::ParseErrorKind;
 use std::io::{Read, Write};
 use std::num::NonZeroU64;
-use wow_world_base::ParseErrorKind;
 
 use crate::util::{read_c_string_to_vec, read_u64_le};
 
