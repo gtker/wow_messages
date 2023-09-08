@@ -74,6 +74,15 @@ pub(crate) fn opcodes_file(version: MajorWorldVersion) -> PathBuf {
         .join(format!("{}_messages.rs", version.module_name()))
 }
 
+pub(crate) fn expected_file(version: MajorWorldVersion) -> PathBuf {
+    workspace_directory()
+        .join("wow_world_messages")
+        .join("src")
+        .join("helper")
+        .join(version.module_name())
+        .join("expected.rs")
+}
+
 pub(crate) fn wireshark_directory() -> PathBuf {
     parser_test_directory().join("wireshark")
 }

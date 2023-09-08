@@ -342,6 +342,14 @@ impl MajorWorldVersion {
         self.feature_name()
     }
 
+    pub(crate) fn server_size_type(&self) -> &'static str {
+        match self {
+            MajorWorldVersion::Vanilla => "u16",
+            MajorWorldVersion::BurningCrusade => "u16",
+            MajorWorldVersion::Wrath => "u32",
+        }
+    }
+
     pub(crate) fn feature_name(&self) -> &'static str {
         match self {
             MajorWorldVersion::Vanilla => "vanilla",

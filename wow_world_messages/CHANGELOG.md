@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+* The remaining `expected` functions.
 * BREAKING: `set_player_field_inv` method on `UpdatePlayer` and `UpdatePlayerBuilder` for vanilla that takes
   an `ItemSlot`. This replaces the previously named functions for specific positions.
 * BREAKING: Additional fields for vanilla `ItemSlot`.

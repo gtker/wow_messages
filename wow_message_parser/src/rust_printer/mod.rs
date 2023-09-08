@@ -7,6 +7,7 @@ pub(crate) use opcodes::print_world_opcodes;
 pub(crate) use structs::print_struct;
 
 mod enums;
+mod expected;
 mod flags;
 mod opcode_to_name;
 mod opcodes;
@@ -19,6 +20,7 @@ use crate::parser::types::tags::MemberTags;
 use crate::rust_printer::writer::Writer;
 use crate::{ObjectTags, Objects};
 
+pub(crate) use expected::print_expected;
 pub use opcode_to_name::print_opcode_to_name;
 pub use update_mask::*;
 
@@ -102,6 +104,14 @@ impl ImplType {
         }
     }
 
+    pub(crate) fn cfg_name(&self) -> &str {
+        match self {
+            ImplType::Std => "sync",
+            ImplType::Tokio => "tokio",
+            ImplType::AsyncStd => "async-std",
+        }
+    }
+
     pub(crate) fn cfg_and_encryption(&self) -> &str {
         match self {
             ImplType::Std => CFG_SYNC_AND_ENCRYPTION,
@@ -143,6 +153,56 @@ fn get_optional_type_name(original_ty: &str, optional_name: &str) -> String {
 
 fn get_new_flag_type_name(original_ty: &str, enumerator_name: &str) -> String {
     format!("{original_ty}_{enumerator_name}")
+}
+
+#[derive(Debug, Copy, Clone, Ord, PartialOrd, Eq, PartialEq, Hash)]
+pub(crate) enum MessageSide {
+    Server,
+    Client,
+}
+
+impl MessageSide {
+    pub(crate) fn non_wrath_world_header_size(&self) -> i128 {
+        match self {
+            MessageSide::Server => 4,
+            MessageSide::Client => 6,
+        }
+    }
+
+    pub(crate) fn world_opcode_size(&self) -> i128 {
+        match self {
+            MessageSide::Server => 2,
+            MessageSide::Client => 4,
+        }
+    }
+
+    pub(crate) fn is_server(&self) -> bool {
+        matches!(self, Self::Server)
+    }
+    pub(crate) fn values() -> &'static [Self] {
+        &[Self::Server, Self::Client]
+    }
+
+    pub(crate) fn world_str(&self) -> &'static str {
+        match self {
+            MessageSide::Server => "server",
+            MessageSide::Client => "client",
+        }
+    }
+
+    pub(crate) fn title_world_str(&self) -> &'static str {
+        match self {
+            MessageSide::Server => "Server",
+            MessageSide::Client => "Client",
+        }
+    }
+
+    pub(crate) fn opposite_title_world_str(&self) -> &'static str {
+        match self {
+            MessageSide::Server => "Client",
+            MessageSide::Client => "Server",
+        }
+    }
 }
 
 fn print_member_docc_description_and_comment(

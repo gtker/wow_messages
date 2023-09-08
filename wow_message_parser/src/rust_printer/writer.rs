@@ -380,6 +380,18 @@ impl Writer {
         self.newline();
     }
 
+    pub(crate) fn block<S: AsRef<str>>(&mut self, s: S) {
+        let s = s.as_ref();
+
+        for line in s.lines() {
+            for _ in 0..self.indentation_level {
+                self.w_no_indent(Self::INDENTATION);
+            }
+
+            self.wln_no_indent(line);
+        }
+    }
+
     pub(crate) fn metadata_comment(&mut self, s: impl AsRef<str>) {
         if !Self::METADATA {
             return;
