@@ -195,7 +195,7 @@ impl SMSG_ITEM_QUERY_SINGLE_RESPONSE {
             let stats = {
                 let mut stats = [ItemStat::default(); 10];
                 for i in stats.iter_mut() {
-                    *i = ItemStat::read(&mut r)?;
+                    *i = crate::util::tbc_wrath_itemstat_read(&mut r)?;
                 }
                 stats
             };
@@ -204,7 +204,7 @@ impl SMSG_ITEM_QUERY_SINGLE_RESPONSE {
             let damages = {
                 let mut damages = [ItemDamageType::default(); 5];
                 for i in damages.iter_mut() {
-                    *i = ItemDamageType::read(&mut r)?;
+                    *i = crate::util::vanilla_tbc_wrath_itemdamagetype_read(&mut r)?;
                 }
                 damages
             };
@@ -243,7 +243,7 @@ impl SMSG_ITEM_QUERY_SINGLE_RESPONSE {
             let spells = {
                 let mut spells = [ItemSpells::default(); 5];
                 for i in spells.iter_mut() {
-                    *i = ItemSpells::read(&mut r)?;
+                    *i = crate::util::tbc_wrath_itemspells_read(&mut r)?;
                 }
                 spells
             };
@@ -306,7 +306,7 @@ impl SMSG_ITEM_QUERY_SINGLE_RESPONSE {
             let sockets = {
                 let mut sockets = [ItemSocket::default(); 3];
                 for i in sockets.iter_mut() {
-                    *i = ItemSocket::read(&mut r)?;
+                    *i = crate::util::tbc_wrath_itemsocket_read(&mut r)?;
                 }
                 sockets
             };
@@ -744,12 +744,12 @@ impl crate::Message for SMSG_ITEM_QUERY_SINGLE_RESPONSE {
 
             // stats: ItemStat[10]
             for i in v.stats.iter() {
-                i.write_into_vec(&mut w)?;
+                crate::util::tbc_wrath_itemstat_write_into_vec(i, &mut w)?;
             }
 
             // damages: ItemDamageType[5]
             for i in v.damages.iter() {
-                i.write_into_vec(&mut w)?;
+                crate::util::vanilla_tbc_wrath_itemdamagetype_write_into_vec(i, &mut w)?;
             }
 
             // armor: i32
@@ -784,7 +784,7 @@ impl crate::Message for SMSG_ITEM_QUERY_SINGLE_RESPONSE {
 
             // spells: ItemSpells[5]
             for i in v.spells.iter() {
-                i.write_into_vec(&mut w)?;
+                crate::util::tbc_wrath_itemspells_write_into_vec(i, &mut w)?;
             }
 
             // bonding: Bonding
@@ -844,7 +844,7 @@ impl crate::Message for SMSG_ITEM_QUERY_SINGLE_RESPONSE {
 
             // sockets: ItemSocket[3]
             for i in v.sockets.iter() {
-                i.write_into_vec(&mut w)?;
+                crate::util::tbc_wrath_itemsocket_write_into_vec(i, &mut w)?;
             }
 
             // socket_bonus: u32

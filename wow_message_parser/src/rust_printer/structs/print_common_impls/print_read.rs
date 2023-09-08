@@ -5,6 +5,7 @@ use crate::parser::types::objects::Objects;
 use crate::parser::types::struct_member::{StructMember, StructMemberDefinition};
 use crate::parser::types::ty::Type;
 use crate::parser::types::IntegerType;
+use crate::rust_printer::base_structs::base_struct_read_name;
 use crate::rust_printer::get_optional_type_name;
 use crate::rust_printer::rust_view::rust_definer::RustDefiner;
 use crate::rust_printer::rust_view::rust_type::RustType;
@@ -143,11 +144,18 @@ fn print_array_ty(
                 "{array_prefix}crate::util::read_guid(&mut {reader})?{array_postfix}",
             ));
         }
-        ArrayType::Struct(_) => {
-            s.wln(format!(
-                "{array_prefix}{ty}::{prefix}read(&mut {reader}){postfix}?{array_postfix}",
-                ty = array.ty().rust_str(),
-            ));
+        ArrayType::Struct(e) => {
+            if e.tags().is_in_base() {
+                let f = base_struct_read_name(e);
+                s.wln(format!(
+                    "{array_prefix}crate::util::{f}(&mut {reader}){postfix}?{array_postfix}",
+                ));
+            } else {
+                s.wln(format!(
+                    "{array_prefix}{ty}::{prefix}read(&mut {reader}){postfix}?{array_postfix}",
+                    ty = array.ty().rust_str(),
+                ));
+            }
         }
     }
 }
@@ -374,12 +382,19 @@ fn print_read_definition(
 
         Type::VariableItemRandomProperty
         | Type::NamedGuid
-        | Type::Struct { .. }
         | Type::UpdateMask { .. }
         | Type::AuraMask
         | Type::EnchantMask
         | Type::InspectTalentGearMask => {
             s.wln_no_indent(format!("{type_name}::{prefix}read(&mut r){postfix}?;",));
+        }
+        Type::Struct { e } => {
+            if e.tags().is_in_base() {
+                let f = base_struct_read_name(e);
+                s.wln_no_indent(format!("crate::util::{f}(&mut r)?;",));
+            } else {
+                s.wln_no_indent(format!("{type_name}::{prefix}read(&mut r){postfix}?;",));
+            }
         }
     }
 
@@ -715,7 +730,14 @@ fn print_read_final_enums(s: &mut Writer, rds: &[RustDefiner]) {
     }
 }
 
-pub(crate) fn print_read(s: &mut Writer, e: &Container, o: &Objects, prefix: &str, postfix: &str) {
+pub(crate) fn print_read(
+    s: &mut Writer,
+    e: &Container,
+    o: &Objects,
+    prefix: &str,
+    postfix: &str,
+    object_create_overwrite: Option<&str>,
+) {
     if e.all_definitions()
         .iter()
         .any(|a| matches!(a.ty(), Type::AddonArray))
@@ -750,7 +772,11 @@ pub(crate) fn print_read(s: &mut Writer, e: &Container, o: &Objects, prefix: &st
     print_read_final_flag(s, &rust_definers);
     print_read_final_enums(s, &rust_definers);
 
-    s.open_curly("Ok(Self");
+    if let Some(object_create_overwrite) = object_create_overwrite {
+        s.open_curly(format!("Ok({object_create_overwrite}"));
+    } else {
+        s.open_curly("Ok(Self");
+    }
 
     for f in e.rust_object().members_in_struct() {
         if let RustType::Enum { is_simple, .. } = f.ty() {

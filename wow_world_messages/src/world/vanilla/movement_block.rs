@@ -107,7 +107,7 @@ impl MovementBlock {
                     w.write_all(&timestamp.to_le_bytes())?;
 
                     // living_position: Vector3d
-                    living_position.write_into_vec(&mut w)?;
+crate::util::vanilla_tbc_wrath_vector3d_write_into_vec(&living_position, &mut w)?;
 
                     // living_orientation: f32
                     w.write_all(&living_orientation.to_le_bytes())?;
@@ -117,7 +117,7 @@ impl MovementBlock {
                         crate::util::write_packed_guid(&if_statement.transport_guid, &mut w)?;
 
                         // transport_position: Vector3d
-                        if_statement.transport_position.write_into_vec(&mut w)?;
+crate::util::vanilla_tbc_wrath_vector3d_write_into_vec(&if_statement.transport_position, &mut w)?;
 
                         // transport_orientation: f32
                         w.write_all(&if_statement.transport_orientation.to_le_bytes())?;
@@ -196,7 +196,7 @@ impl MovementBlock {
                                     spline_final_point,
                                 } => {
                                     // spline_final_point: Vector3d
-                                    spline_final_point.write_into_vec(&mut w)?;
+crate::util::vanilla_tbc_wrath_vector3d_write_into_vec(&spline_final_point, &mut w)?;
 
                                 }
                             }
@@ -216,11 +216,11 @@ impl MovementBlock {
 
                         // nodes: Vector3d[amount_of_nodes]
                         for i in if_statement.nodes.iter() {
-                            i.write_into_vec(&mut w)?;
+                            crate::util::vanilla_tbc_wrath_vector3d_write_into_vec(i, &mut w)?;
                         }
 
                         // final_node: Vector3d
-                        if_statement.final_node.write_into_vec(&mut w)?;
+crate::util::vanilla_tbc_wrath_vector3d_write_into_vec(&if_statement.final_node, &mut w)?;
 
                     }
 
@@ -230,7 +230,7 @@ impl MovementBlock {
                     position,
                 } => {
                     // position: Vector3d
-                    position.write_into_vec(&mut w)?;
+crate::util::vanilla_tbc_wrath_vector3d_write_into_vec(&position, &mut w)?;
 
                     // orientation: f32
                     w.write_all(&orientation.to_le_bytes())?;
@@ -280,7 +280,7 @@ impl MovementBlock {
             let timestamp = crate::util::read_u32_le(&mut r)?;
 
             // living_position: Vector3d
-            let living_position = Vector3d::read(&mut r)?;
+            let living_position = crate::util::vanilla_tbc_wrath_vector3d_read(&mut r)?;
 
             // living_orientation: f32
             let living_orientation = crate::util::read_f32_le(&mut r)?;
@@ -290,7 +290,7 @@ impl MovementBlock {
                 let transport_guid = crate::util::read_packed_guid(&mut r)?;
 
                 // transport_position: Vector3d
-                let transport_position = Vector3d::read(&mut r)?;
+                let transport_position = crate::util::vanilla_tbc_wrath_vector3d_read(&mut r)?;
 
                 // transport_orientation: f32
                 let transport_orientation = crate::util::read_f32_le(&mut r)?;
@@ -396,7 +396,7 @@ impl MovementBlock {
                 }
                 else if spline_flags.is_final_point() {
                     // spline_final_point: Vector3d
-                    let spline_final_point = Vector3d::read(&mut r)?;
+                    let spline_final_point = crate::util::vanilla_tbc_wrath_vector3d_read(&mut r)?;
 
                     Some(MovementBlock_SplineFlag_FinalAngle::FinalPoint {
                         spline_final_point,
@@ -422,13 +422,13 @@ impl MovementBlock {
                 let nodes = {
                     let mut nodes = Vec::with_capacity(amount_of_nodes as usize);
                     for _ in 0..amount_of_nodes {
-                        nodes.push(Vector3d::read(&mut r)?);
+                        nodes.push(crate::util::vanilla_tbc_wrath_vector3d_read(&mut r)?);
                     }
                     nodes
                 };
 
                 // final_node: Vector3d
-                let final_node = Vector3d::read(&mut r)?;
+                let final_node = crate::util::vanilla_tbc_wrath_vector3d_read(&mut r)?;
 
                 let spline_flags = MovementBlock_SplineFlag {
                     inner: spline_flags.as_int(),
@@ -473,7 +473,7 @@ impl MovementBlock {
         }
         else if update_flag.is_has_position() {
             // position: Vector3d
-            let position = Vector3d::read(&mut r)?;
+            let position = crate::util::vanilla_tbc_wrath_vector3d_read(&mut r)?;
 
             // orientation: f32
             let orientation = crate::util::read_f32_le(&mut r)?;

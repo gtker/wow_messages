@@ -68,11 +68,3 @@ pub(crate) mod inner;
 pub use inner::*;
 
 pub(crate) mod manual;
-
-#[cfg(any(
-    feature = "vanilla",
-    feature = "tbc",
-    feature = "wrath",
-    feature = "shared"
-))]
-pub(crate) mod util;

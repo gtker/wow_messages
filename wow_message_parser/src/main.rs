@@ -40,7 +40,8 @@ use crate::parser::types::sizes::PACKED_GUID_MAX_SIZE;
 use crate::path_utils::{get_login_version_file_path, wowm_directory};
 use crate::rust_printer::{
     print_enum, print_enum_for_base, print_expected, print_flag, print_login_opcodes,
-    print_opcode_to_name, print_update_mask, print_world_opcodes, DefinerType,
+    print_opcode_to_name, print_read_write_base_structs, print_update_mask, print_world_opcodes,
+    DefinerType,
 };
 use parser::types::container::{Container, ContainerType};
 use parser::types::parsed::parsed_object::ParsedObjects;
@@ -134,6 +135,8 @@ fn load_and_print_wowm_files() {
     print_update_mask();
 
     print_expected();
+
+    print_read_write_base_structs(&o);
 
     print_opcode_to_name();
 

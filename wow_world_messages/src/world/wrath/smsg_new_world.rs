@@ -30,7 +30,7 @@ impl SMSG_NEW_WORLD {
         let map = crate::util::read_u32_le(&mut r)?.try_into()?;
 
         // position: Vector3d
-        let position = Vector3d::read(&mut r)?;
+        let position = crate::util::vanilla_tbc_wrath_vector3d_read(&mut r)?;
 
         // orientation: f32
         let orientation = crate::util::read_f32_le(&mut r)?;
@@ -102,7 +102,7 @@ impl crate::Message for SMSG_NEW_WORLD {
         w.write_all(&(self.map.as_int().to_le_bytes()))?;
 
         // position: Vector3d
-        self.position.write_into_vec(&mut w)?;
+crate::util::vanilla_tbc_wrath_vector3d_write_into_vec(&self.position, &mut w)?;
 
         // orientation: f32
         w.write_all(&self.orientation.to_le_bytes())?;

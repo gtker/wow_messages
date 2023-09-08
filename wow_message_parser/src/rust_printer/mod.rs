@@ -6,6 +6,7 @@ pub(crate) use opcodes::print_login_opcodes;
 pub(crate) use opcodes::print_world_opcodes;
 pub(crate) use structs::print_struct;
 
+mod base_structs;
 mod enums;
 mod expected;
 mod flags;
@@ -20,6 +21,7 @@ use crate::parser::types::tags::MemberTags;
 use crate::rust_printer::writer::Writer;
 use crate::{ObjectTags, Objects};
 
+pub(crate) use base_structs::print_read_write_base_structs;
 pub(crate) use expected::print_expected;
 pub use opcode_to_name::print_opcode_to_name;
 pub use update_mask::*;

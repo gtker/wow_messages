@@ -240,7 +240,7 @@ impl SMSG_QUEST_QUERY_RESPONSE {
         let point_map_id = crate::util::read_u32_le(&mut r)?;
 
         // position: Vector2d
-        let position = Vector2d::read(&mut r)?;
+        let position = crate::util::vanilla_tbc_wrath_vector2d_read(&mut r)?;
 
         // point_opt: u32
         let point_opt = crate::util::read_u32_le(&mut r)?;
@@ -684,7 +684,7 @@ impl crate::Message for SMSG_QUEST_QUERY_RESPONSE {
         w.write_all(&self.point_map_id.to_le_bytes())?;
 
         // position: Vector2d
-        self.position.write_into_vec(&mut w)?;
+crate::util::vanilla_tbc_wrath_vector2d_write_into_vec(&self.position, &mut w)?;
 
         // point_opt: u32
         w.write_all(&self.point_opt.to_le_bytes())?;

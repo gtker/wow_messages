@@ -37,7 +37,7 @@ impl CMSG_UPDATE_PROJECTILE_POSITION {
         let cast_count = crate::util::read_u8_le(&mut r)?;
 
         // position: Vector3d
-        let position = Vector3d::read(&mut r)?;
+        let position = crate::util::vanilla_tbc_wrath_vector3d_read(&mut r)?;
 
         Ok(Self {
             caster,
@@ -115,7 +115,7 @@ impl crate::Message for CMSG_UPDATE_PROJECTILE_POSITION {
         w.write_all(&self.cast_count.to_le_bytes())?;
 
         // position: Vector3d
-        self.position.write_into_vec(&mut w)?;
+crate::util::vanilla_tbc_wrath_vector3d_write_into_vec(&self.position, &mut w)?;
 
         Ok(())
     }

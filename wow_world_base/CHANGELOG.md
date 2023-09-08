@@ -21,6 +21,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Removed
 
+* BREAKING: `read` and `write_into_vec` methods for `shared` types.
 * `write_packed_guid_into_vec`, `size`, `read_packed` methods for `Guid`.
   These were only intended to be used by `wow_world_messages` for reading `Guid`s on the wire and should provide no
   functionality for users for either `wow_world_messages` or `wow_world_base`.

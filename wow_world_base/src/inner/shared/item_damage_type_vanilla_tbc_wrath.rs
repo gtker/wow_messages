@@ -18,38 +18,3 @@ pub struct ItemDamageType {
     pub school: SpellSchool,
 }
 
-impl ItemDamageType {
-    pub fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
-        // damage_minimum: f32
-        w.write_all(&self.damage_minimum.to_le_bytes())?;
-
-        // damage_maximum: f32
-        w.write_all(&self.damage_maximum.to_le_bytes())?;
-
-        // school: SpellSchool
-        w.write_all(&u32::from(self.school.as_int()).to_le_bytes())?;
-
-        Ok(())
-    }
-}
-
-impl ItemDamageType {
-    pub fn read<R: std::io::Read>(mut r: R) -> Result<Self, crate::errors::ParseErrorKind> {
-        // damage_minimum: f32
-        let damage_minimum = crate::util::read_f32_le(&mut r)?;
-
-        // damage_maximum: f32
-        let damage_maximum = crate::util::read_f32_le(&mut r)?;
-
-        // school: SpellSchool
-        let school = (crate::util::read_u32_le(&mut r)? as u8).try_into()?;
-
-        Ok(Self {
-            damage_minimum,
-            damage_maximum,
-            school,
-        })
-    }
-
-}
-

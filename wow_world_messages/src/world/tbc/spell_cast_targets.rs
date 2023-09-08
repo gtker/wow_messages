@@ -123,13 +123,13 @@ impl SpellCastTargets {
 
         if let Some(if_statement) = &self.target_flags.source_location {
             // source: Vector3d
-            if_statement.source.write_into_vec(&mut w)?;
+crate::util::vanilla_tbc_wrath_vector3d_write_into_vec(&if_statement.source, &mut w)?;
 
         }
 
         if let Some(if_statement) = &self.target_flags.dest_location {
             // destination: Vector3d
-            if_statement.destination.write_into_vec(&mut w)?;
+crate::util::vanilla_tbc_wrath_vector3d_write_into_vec(&if_statement.destination, &mut w)?;
 
         }
 
@@ -241,7 +241,7 @@ impl SpellCastTargets {
 
         let target_flags_source_location = if target_flags.is_source_location() {
             // source: Vector3d
-            let source = Vector3d::read(&mut r)?;
+            let source = crate::util::vanilla_tbc_wrath_vector3d_read(&mut r)?;
 
             Some(SpellCastTargets_SpellCastTargetFlags_SourceLocation {
                 source,
@@ -253,7 +253,7 @@ impl SpellCastTargets {
 
         let target_flags_dest_location = if target_flags.is_dest_location() {
             // destination: Vector3d
-            let destination = Vector3d::read(&mut r)?;
+            let destination = crate::util::vanilla_tbc_wrath_vector3d_read(&mut r)?;
 
             Some(SpellCastTargets_SpellCastTargetFlags_DestLocation {
                 destination,

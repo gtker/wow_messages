@@ -26,7 +26,7 @@ pub(crate) fn print_common_impls(s: &mut Writer, e: &Container, o: &Objects) {
         ContainerType::Struct => {
             if e.tags().used_in_update_mask() {
                 impl_update_mask_struct(s, e);
-            } else {
+            } else if !e.tags().is_in_base() {
                 impl_read_write_struct(s, e, o);
             }
         }
@@ -388,7 +388,7 @@ pub(crate) fn impl_world_message(s: &mut Writer, e: &Container, o: &Objects, opc
             ),
             |s| {
                 test_for_invalid_size(s, e);
-                print_read::print_read(s, e, o, ImplType::Std.prefix(), ImplType::Std.postfix());
+                print_read::print_read(s, e, o, ImplType::Std.prefix(), ImplType::Std.postfix(), None);
             },
         );
     });
@@ -410,7 +410,7 @@ pub(crate) fn impl_world_message(s: &mut Writer, e: &Container, o: &Objects, opc
         s.bodyn(
             "fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error>",
             |s| {
-                print_write::print_write(s, e, o, ImplType::Std.prefix(), ImplType::Std.postfix());
+                print_write::print_write(s, e, o, ImplType::Std.prefix(), ImplType::Std.postfix(), "self.");
 
                 s.wln("Ok(())");
             },
@@ -469,7 +469,14 @@ pub(crate) fn impl_read_and_writable_login(
         s.wln("w.write_all(&Self::OPCODE.to_le_bytes())?;");
         s.newline();
 
-        print_write::print_write(s, e, o, ImplType::Std.prefix(), ImplType::Std.postfix());
+        print_write::print_write(
+            s,
+            e,
+            o,
+            ImplType::Std.prefix(),
+            ImplType::Std.postfix(),
+            "self.",
+        );
     };
 
     write_into_vec(s, type_name, write_function, "pub(crate)");
@@ -485,7 +492,7 @@ pub(crate) fn impl_read_and_writable_login(
 
             s.wln(it.cfg());
             s.bodyn(format!("{func}fn {prefix}read_inner<R: {read}>(mut r: R) -> Result<Self, {PARSE_ERROR_KIND}>"), |s| {
-                print_read::print_read(s, e, o, it.prefix(), it.postfix());
+                print_read::print_read(s, e, o, it.prefix(), it.postfix(), None);
             });
         }
     });
@@ -538,7 +545,14 @@ fn impl_read_write_struct(s: &mut Writer, e: &Container, o: &Objects) {
     let ty_name = e.name();
 
     let write_function = |s: &mut Writer| {
-        print_write::print_write(s, e, o, ImplType::Std.prefix(), ImplType::Std.postfix());
+        print_write::print_write(
+            s,
+            e,
+            o,
+            ImplType::Std.prefix(),
+            ImplType::Std.postfix(),
+            "self.",
+        );
     };
     write_into_vec(s, ty_name, write_function, visibility);
 
@@ -564,7 +578,7 @@ fn impl_read_write_struct(s: &mut Writer, e: &Container, o: &Objects) {
             s.bodyn(format!(
                 "{visibility} {func}fn {prefix}read<R: {read}>(mut r: R) -> Result<Self, {error_name}>",
             ), |s| {
-                print_read::print_read(s, e, o, it.prefix(), it.postfix());
+                print_read::print_read(s, e, o, it.prefix(), it.postfix(), None);
             })
         }
     });

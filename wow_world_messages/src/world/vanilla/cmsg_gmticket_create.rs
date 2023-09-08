@@ -44,7 +44,7 @@ impl CMSG_GMTICKET_CREATE {
         let map = crate::util::read_u32_le(&mut r)?.try_into()?;
 
         // position: Vector3d
-        let position = Vector3d::read(&mut r)?;
+        let position = crate::util::vanilla_tbc_wrath_vector3d_read(&mut r)?;
 
         // message: CString
         let message = {
@@ -202,7 +202,7 @@ impl crate::Message for CMSG_GMTICKET_CREATE {
         w.write_all(&(self.map.as_int().to_le_bytes()))?;
 
         // position: Vector3d
-        self.position.write_into_vec(&mut w)?;
+crate::util::vanilla_tbc_wrath_vector3d_write_into_vec(&self.position, &mut w)?;
 
         // message: CString
         // TODO: Guard against strings that are already null-terminated

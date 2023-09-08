@@ -27,7 +27,7 @@ impl SMSG_PET_DISMISS_SOUND {
         let sound_id = crate::util::read_u32_le(&mut r)?;
 
         // position: Vector3d
-        let position = Vector3d::read(&mut r)?;
+        let position = crate::util::vanilla_tbc_wrath_vector3d_read(&mut r)?;
 
         Ok(Self {
             sound_id,
@@ -93,7 +93,7 @@ impl crate::Message for SMSG_PET_DISMISS_SOUND {
         w.write_all(&self.sound_id.to_le_bytes())?;
 
         // position: Vector3d
-        self.position.write_into_vec(&mut w)?;
+crate::util::vanilla_tbc_wrath_vector3d_write_into_vec(&self.position, &mut w)?;
 
         Ok(())
     }

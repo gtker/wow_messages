@@ -28,7 +28,7 @@ impl SMSG_DEATH_RELEASE_LOC {
         let map = crate::util::read_u32_le(&mut r)?.try_into()?;
 
         // position: Vector3d
-        let position = Vector3d::read(&mut r)?;
+        let position = crate::util::vanilla_tbc_wrath_vector3d_read(&mut r)?;
 
         Ok(Self {
             map,
@@ -94,7 +94,7 @@ impl crate::Message for SMSG_DEATH_RELEASE_LOC {
         w.write_all(&(self.map.as_int().to_le_bytes()))?;
 
         // position: Vector3d
-        self.position.write_into_vec(&mut w)?;
+crate::util::vanilla_tbc_wrath_vector3d_write_into_vec(&self.position, &mut w)?;
 
         Ok(())
     }

@@ -83,6 +83,15 @@ pub(crate) fn expected_file(version: MajorWorldVersion) -> PathBuf {
         .join("expected.rs")
 }
 
+pub(crate) fn utils_shared_file() -> PathBuf {
+    workspace_directory()
+        .join("wow_world_messages")
+        .join("src")
+        .join("util")
+        .join("functions")
+        .join("shared.rs")
+}
+
 pub(crate) fn wireshark_directory() -> PathBuf {
     parser_test_directory().join("wireshark")
 }

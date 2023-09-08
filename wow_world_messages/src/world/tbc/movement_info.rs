@@ -56,7 +56,7 @@ impl MovementInfo {
         w.write_all(&self.timestamp.to_le_bytes())?;
 
         // position: Vector3d
-        self.position.write_into_vec(&mut w)?;
+crate::util::vanilla_tbc_wrath_vector3d_write_into_vec(&self.position, &mut w)?;
 
         // orientation: f32
         w.write_all(&self.orientation.to_le_bytes())?;
@@ -126,7 +126,7 @@ impl MovementInfo {
         let timestamp = crate::util::read_u32_le(&mut r)?;
 
         // position: Vector3d
-        let position = Vector3d::read(&mut r)?;
+        let position = crate::util::vanilla_tbc_wrath_vector3d_read(&mut r)?;
 
         // orientation: f32
         let orientation = crate::util::read_f32_le(&mut r)?;

@@ -28,7 +28,7 @@ impl SMSG_BINDPOINTUPDATE {
         }
 
         // position: Vector3d
-        let position = Vector3d::read(&mut r)?;
+        let position = crate::util::vanilla_tbc_wrath_vector3d_read(&mut r)?;
 
         // map: Map
         let map = crate::util::read_u32_le(&mut r)?.try_into()?;
@@ -100,7 +100,7 @@ impl crate::Message for SMSG_BINDPOINTUPDATE {
 
     fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
         // position: Vector3d
-        self.position.write_into_vec(&mut w)?;
+crate::util::vanilla_tbc_wrath_vector3d_write_into_vec(&self.position, &mut w)?;
 
         // map: Map
         w.write_all(&(self.map.as_int().to_le_bytes()))?;

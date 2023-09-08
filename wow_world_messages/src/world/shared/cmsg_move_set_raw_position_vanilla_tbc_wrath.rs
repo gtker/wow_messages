@@ -24,7 +24,7 @@ impl CMSG_MOVE_SET_RAW_POSITION {
         }
 
         // position: Vector3d
-        let position = Vector3d::read(&mut r)?;
+        let position = crate::util::vanilla_tbc_wrath_vector3d_read(&mut r)?;
 
         // orientation: f32
         let orientation = crate::util::read_f32_le(&mut r)?;
@@ -90,7 +90,7 @@ impl crate::Message for CMSG_MOVE_SET_RAW_POSITION {
 
     fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
         // position: Vector3d
-        self.position.write_into_vec(&mut w)?;
+crate::util::vanilla_tbc_wrath_vector3d_write_into_vec(&self.position, &mut w)?;
 
         // orientation: f32
         w.write_all(&self.orientation.to_le_bytes())?;

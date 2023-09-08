@@ -16,38 +16,3 @@ pub struct Vector3d {
     pub z: f32,
 }
 
-impl Vector3d {
-    pub fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
-        // x: f32
-        w.write_all(&self.x.to_le_bytes())?;
-
-        // y: f32
-        w.write_all(&self.y.to_le_bytes())?;
-
-        // z: f32
-        w.write_all(&self.z.to_le_bytes())?;
-
-        Ok(())
-    }
-}
-
-impl Vector3d {
-    pub fn read<R: std::io::Read>(mut r: R) -> Result<Self, std::io::Error> {
-        // x: f32
-        let x = crate::util::read_f32_le(&mut r)?;
-
-        // y: f32
-        let y = crate::util::read_f32_le(&mut r)?;
-
-        // z: f32
-        let z = crate::util::read_f32_le(&mut r)?;
-
-        Ok(Self {
-            x,
-            y,
-            z,
-        })
-    }
-
-}
-

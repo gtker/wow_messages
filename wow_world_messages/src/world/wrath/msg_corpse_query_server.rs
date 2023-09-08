@@ -39,7 +39,7 @@ impl MSG_CORPSE_QUERY_Server {
                 let map = crate::util::read_u32_le(&mut r)?.try_into()?;
 
                 // position: Vector3d
-                let position = Vector3d::read(&mut r)?;
+                let position = crate::util::vanilla_tbc_wrath_vector3d_read(&mut r)?;
 
                 // corpse_map: Map
                 let corpse_map = crate::util::read_u32_le(&mut r)?.try_into()?;
@@ -154,7 +154,7 @@ impl crate::Message for MSG_CORPSE_QUERY_Server {
                 w.write_all(&(map.as_int().to_le_bytes()))?;
 
                 // position: Vector3d
-                position.write_into_vec(&mut w)?;
+crate::util::vanilla_tbc_wrath_vector3d_write_into_vec(&position, &mut w)?;
 
                 // corpse_map: Map
                 w.write_all(&(corpse_map.as_int().to_le_bytes()))?;

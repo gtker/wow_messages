@@ -14,31 +14,3 @@ pub struct Vector2d {
     pub y: f32,
 }
 
-impl Vector2d {
-    pub fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
-        // x: f32
-        w.write_all(&self.x.to_le_bytes())?;
-
-        // y: f32
-        w.write_all(&self.y.to_le_bytes())?;
-
-        Ok(())
-    }
-}
-
-impl Vector2d {
-    pub fn read<R: std::io::Read>(mut r: R) -> Result<Self, std::io::Error> {
-        // x: f32
-        let x = crate::util::read_f32_le(&mut r)?;
-
-        // y: f32
-        let y = crate::util::read_f32_le(&mut r)?;
-
-        Ok(Self {
-            x,
-            y,
-        })
-    }
-
-}
-

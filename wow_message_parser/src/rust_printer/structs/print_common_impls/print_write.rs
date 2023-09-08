@@ -5,6 +5,7 @@ use crate::parser::types::objects::Objects;
 use crate::parser::types::struct_member::{StructMember, StructMemberDefinition};
 use crate::parser::types::ty::Type;
 use crate::parser::types::{ContainerValue, IntegerType};
+use crate::rust_printer::base_structs::base_struct_write_name;
 use crate::rust_printer::writer::Writer;
 use crate::rust_printer::DefinerType;
 
@@ -64,8 +65,13 @@ pub(crate) fn print_write_field_array(
             ArrayType::Integer(_) => {
                 s.wln(format!("{writer}.write_all(&i.to_le_bytes()){postfix}?;",))
             }
-            ArrayType::Struct(_) => {
-                s.wln(format!("i.write_into_vec(&mut {writer})?;"));
+            ArrayType::Struct(e) => {
+                if e.tags().is_in_base() {
+                    let f = base_struct_write_name(e);
+                    s.wln(format!("crate::util::{f}(i, &mut {writer})?;"));
+                } else {
+                    s.wln(format!("i.write_into_vec(&mut {writer})?;"));
+                }
             }
             ArrayType::CString => {
                 s.wln(format!("w.write_all(i.as_bytes()){postfix}?;"));
@@ -111,7 +117,14 @@ pub(crate) fn print_write_field_integer(
     }
 }
 
-pub(crate) fn print_write(s: &mut Writer, e: &Container, o: &Objects, prefix: &str, postfix: &str) {
+pub(crate) fn print_write(
+    s: &mut Writer,
+    e: &Container,
+    o: &Objects,
+    prefix: &str,
+    postfix: &str,
+    variable_prefix: &str,
+) {
     // For fully compressed messages, replace the writer with a ZLibDecoder.
     if e.tags().compressed() {
         // Fully compressed messages include the decompressed size as a u32 at the start of the packet.
@@ -123,7 +136,7 @@ pub(crate) fn print_write(s: &mut Writer, e: &Container, o: &Objects, prefix: &s
     }
 
     for field in e.members() {
-        print_write_field(s, e, o, field, "self.", prefix, postfix);
+        print_write_field(s, e, o, field, variable_prefix, prefix, postfix);
     }
 }
 
@@ -299,7 +312,6 @@ pub(crate) fn print_write_definition(
 
         Type::VariableItemRandomProperty
         | Type::NamedGuid
-        | Type::Struct { .. }
         | Type::EnchantMask
         | Type::InspectTalentGearMask
         | Type::UpdateMask { .. }
@@ -307,6 +319,19 @@ pub(crate) fn print_write_definition(
             s.wln(format!(
                 "{variable_prefix}{name}.write_into_vec(&mut w){postfix}?;",
             ));
+        }
+
+        Type::Struct { e } => {
+            if e.tags().is_in_base() {
+                let f = base_struct_write_name(e);
+                s.wln_no_indent(format!(
+                    "crate::util::{f}(&{variable_prefix}{name}, &mut w)?;",
+                ));
+            } else {
+                s.wln(format!(
+                    "{variable_prefix}{name}.write_into_vec(&mut w){postfix}?;",
+                ));
+            }
         }
     }
 

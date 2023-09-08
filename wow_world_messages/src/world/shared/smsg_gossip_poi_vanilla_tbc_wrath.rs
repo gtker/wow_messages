@@ -32,7 +32,7 @@ impl SMSG_GOSSIP_POI {
         let flags = crate::util::read_u32_le(&mut r)?;
 
         // position: Vector2d
-        let position = Vector2d::read(&mut r)?;
+        let position = crate::util::vanilla_tbc_wrath_vector2d_read(&mut r)?;
 
         // icon: u32
         let icon = crate::util::read_u32_le(&mut r)?;
@@ -117,7 +117,7 @@ impl crate::Message for SMSG_GOSSIP_POI {
         w.write_all(&self.flags.to_le_bytes())?;
 
         // position: Vector2d
-        self.position.write_into_vec(&mut w)?;
+crate::util::vanilla_tbc_wrath_vector2d_write_into_vec(&self.position, &mut w)?;
 
         // icon: u32
         w.write_all(&self.icon.to_le_bytes())?;

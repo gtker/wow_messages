@@ -48,7 +48,7 @@ impl SMSG_MONSTER_MOVE {
         let guid = crate::util::read_packed_guid(&mut r)?;
 
         // spline_point: Vector3d
-        let spline_point = Vector3d::read(&mut r)?;
+        let spline_point = crate::util::vanilla_tbc_wrath_vector3d_read(&mut r)?;
 
         // spline_id: u32
         let spline_id = crate::util::read_u32_le(&mut r)?;
@@ -61,7 +61,7 @@ impl SMSG_MONSTER_MOVE {
             MonsterMoveType::Stop => SMSG_MONSTER_MOVE_MonsterMoveType::Stop,
             MonsterMoveType::FacingSpot => {
                 // position: Vector3d
-                let position = Vector3d::read(&mut r)?;
+                let position = crate::util::vanilla_tbc_wrath_vector3d_read(&mut r)?;
 
                 SMSG_MONSTER_MOVE_MonsterMoveType::FacingSpot {
                     position,
@@ -222,7 +222,7 @@ impl crate::Message for SMSG_MONSTER_MOVE {
         crate::util::write_packed_guid(&self.guid, &mut w)?;
 
         // spline_point: Vector3d
-        self.spline_point.write_into_vec(&mut w)?;
+crate::util::vanilla_tbc_wrath_vector3d_write_into_vec(&self.spline_point, &mut w)?;
 
         // spline_id: u32
         w.write_all(&self.spline_id.to_le_bytes())?;
@@ -235,7 +235,7 @@ impl crate::Message for SMSG_MONSTER_MOVE {
                 position,
             } => {
                 // position: Vector3d
-                position.write_into_vec(&mut w)?;
+crate::util::vanilla_tbc_wrath_vector3d_write_into_vec(&position, &mut w)?;
 
             }
             SMSG_MONSTER_MOVE_MonsterMoveType::FacingTarget {

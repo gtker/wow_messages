@@ -104,7 +104,7 @@ impl Character {
         w.write_all(&(self.map.as_int().to_le_bytes()))?;
 
         // position: Vector3d
-        self.position.write_into_vec(&mut w)?;
+crate::util::vanilla_tbc_wrath_vector3d_write_into_vec(&self.position, &mut w)?;
 
         // guild_id: u32
         w.write_all(&self.guild_id.to_le_bytes())?;
@@ -178,7 +178,7 @@ impl Character {
         let map = crate::util::read_u32_le(&mut r)?.try_into()?;
 
         // position: Vector3d
-        let position = Vector3d::read(&mut r)?;
+        let position = crate::util::vanilla_tbc_wrath_vector3d_read(&mut r)?;
 
         // guild_id: u32
         let guild_id = crate::util::read_u32_le(&mut r)?;
