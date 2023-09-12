@@ -47,41 +47,6 @@ impl MSG_MOVE_TELEPORT_ACK_Client {
 impl crate::Message for MSG_MOVE_TELEPORT_ACK_Client {
     const OPCODE: u32 = 0x00c7;
 
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        use std::fmt::Write;
-        use crate::traits::Message;
-
-        let mut s = String::new();
-
-        writeln!(s, "test MSG_MOVE_TELEPORT_ACK_Client {{").unwrap();
-        // Members
-        writeln!(s, "    guid = {};", self.guid.guid()).unwrap();
-        writeln!(s, "    movement_counter = {};", self.movement_counter).unwrap();
-        writeln!(s, "    time = {};", self.time.as_millis()).unwrap();
-
-        writeln!(s, "}} [").unwrap();
-
-        let [a, b] = (u16::try_from(self.size() + 4).unwrap()).to_be_bytes();
-        writeln!(s, "    {a:#04X}, {b:#04X}, /* size */").unwrap();
-        let [a, b, c, d] = 199_u32.to_le_bytes();
-        writeln!(s, "    {a:#04X}, {b:#04X}, {c:#04X}, {d:#04X}, /* opcode */").unwrap();
-        let mut bytes: Vec<u8> = Vec::new();
-        self.write_into_vec(&mut bytes).unwrap();
-        let mut bytes = bytes.into_iter();
-
-        crate::util::write_bytes(&mut s, &mut bytes, crate::util::packed_guid_size(&self.guid), "guid", "    ");
-        crate::util::write_bytes(&mut s, &mut bytes, 4, "movement_counter", "    ");
-        crate::util::write_bytes(&mut s, &mut bytes, 4, "time", "    ");
-
-
-        writeln!(s, "] {{").unwrap();
-        writeln!(s, "    versions = \"{}\";", std::env::var("WOWM_TEST_CASE_WORLD_VERSION").unwrap_or("1 2 3".to_string())).unwrap();
-        writeln!(s, "}}\n").unwrap();
-
-        Some(s)
-    }
-
     fn size_without_header(&self) -> u32 {
         self.size() as u32
     }
@@ -120,5 +85,278 @@ impl MSG_MOVE_TELEPORT_ACK_Client {
         + 4 // movement_counter: u32
         + 4 // time: Milliseconds
     }
+}
+
+#[cfg(all(feature = "vanilla", test))]
+mod test_vanilla {
+    #![allow(clippy::missing_const_for_fn)]
+    use super::MSG_MOVE_TELEPORT_ACK_Client;
+    use super::*;
+    use super::super::*;
+    use crate::vanilla::opcodes::ClientOpcodeMessage;
+    use crate::Guid;
+    use crate::vanilla::{ClientMessage, ServerMessage};
+
+    const HEADER_SIZE: usize = 2 + 4;
+    fn assert(t: &MSG_MOVE_TELEPORT_ACK_Client, expected: &MSG_MOVE_TELEPORT_ACK_Client) {
+        assert_eq!(t.guid, expected.guid);
+        assert_eq!(t.movement_counter, expected.movement_counter);
+        assert_eq!(t.time, expected.time);
+    }
+
+    const RAW0: [u8; 15] = [ 0x00, 0x0D, 0xC7, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+         0x00, 0x00, 0x00, 0x00, 0x00, 0x26, ];
+
+    pub(crate) fn expected0() -> MSG_MOVE_TELEPORT_ACK_Client {
+        MSG_MOVE_TELEPORT_ACK_Client {
+            guid: Guid::new(0x0),
+            movement_counter: 0x0,
+            time: Duration::from_millis(0x26000000),
+        }
+
+    }
+
+    // Generated from `wow_message_parser/wowm/world/movement/msg/msg_move_teleport_ack.wowm` line 21.
+    #[cfg(feature = "sync")]
+    #[cfg_attr(feature = "sync", test)]
+    fn msg_move_teleport_ack_client0() {
+        let expected = expected0();
+        let t = ClientOpcodeMessage::read_unencrypted(&mut std::io::Cursor::new(&RAW0)).unwrap();
+        let t = match t {
+            ClientOpcodeMessage::MSG_MOVE_TELEPORT_ACK(t) => t,
+            opcode => panic!("incorrect opcode. Expected MSG_MOVE_TELEPORT_ACK, got {opcode:#?}"),
+        };
+
+        assert(&t, &expected);
+        assert_eq!(t.size() + HEADER_SIZE, RAW0.len());
+
+        let mut dest = Vec::with_capacity(RAW0.len());
+        expected.write_unencrypted_client(&mut std::io::Cursor::new(&mut dest)).unwrap();
+
+        assert_eq!(dest, RAW0);
+    }
+
+    // Generated from `wow_message_parser/wowm/world/movement/msg/msg_move_teleport_ack.wowm` line 21.
+    #[cfg(feature = "tokio")]
+    #[cfg_attr(feature = "tokio", tokio::test)]
+    async fn tokio_msg_move_teleport_ack_client0() {
+        let expected = expected0();
+        let t = ClientOpcodeMessage::tokio_read_unencrypted(&mut std::io::Cursor::new(&RAW0)).await.unwrap();
+        let t = match t {
+            ClientOpcodeMessage::MSG_MOVE_TELEPORT_ACK(t) => t,
+            opcode => panic!("incorrect opcode. Expected MSG_MOVE_TELEPORT_ACK, got {opcode:#?}"),
+        };
+
+        assert(&t, &expected);
+        assert_eq!(t.size() + HEADER_SIZE, RAW0.len());
+
+        let mut dest = Vec::with_capacity(RAW0.len());
+        expected.tokio_write_unencrypted_client(&mut std::io::Cursor::new(&mut dest)).await.unwrap();
+
+        assert_eq!(dest, RAW0);
+    }
+
+    // Generated from `wow_message_parser/wowm/world/movement/msg/msg_move_teleport_ack.wowm` line 21.
+    #[cfg(feature = "async-std")]
+    #[cfg_attr(feature = "async-std", async_std::test)]
+    async fn astd_msg_move_teleport_ack_client0() {
+        let expected = expected0();
+        let t = ClientOpcodeMessage::astd_read_unencrypted(&mut async_std::io::Cursor::new(&RAW0)).await.unwrap();
+        let t = match t {
+            ClientOpcodeMessage::MSG_MOVE_TELEPORT_ACK(t) => t,
+            opcode => panic!("incorrect opcode. Expected MSG_MOVE_TELEPORT_ACK, got {opcode:#?}"),
+        };
+
+        assert(&t, &expected);
+        assert_eq!(t.size() + HEADER_SIZE, RAW0.len());
+
+        let mut dest = Vec::with_capacity(RAW0.len());
+        expected.astd_write_unencrypted_client(&mut async_std::io::Cursor::new(&mut dest)).await.unwrap();
+
+        assert_eq!(dest, RAW0);
+    }
+
+}
+
+#[cfg(all(feature = "tbc", test))]
+mod test_tbc {
+    #![allow(clippy::missing_const_for_fn)]
+    use super::MSG_MOVE_TELEPORT_ACK_Client;
+    use super::*;
+    use super::super::*;
+    use crate::tbc::opcodes::ClientOpcodeMessage;
+    use crate::Guid;
+    use crate::tbc::{ClientMessage, ServerMessage};
+
+    const HEADER_SIZE: usize = 2 + 4;
+    fn assert(t: &MSG_MOVE_TELEPORT_ACK_Client, expected: &MSG_MOVE_TELEPORT_ACK_Client) {
+        assert_eq!(t.guid, expected.guid);
+        assert_eq!(t.movement_counter, expected.movement_counter);
+        assert_eq!(t.time, expected.time);
+    }
+
+    const RAW0: [u8; 15] = [ 0x00, 0x0D, 0xC7, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+         0x00, 0x00, 0x00, 0x00, 0x00, 0x26, ];
+
+    pub(crate) fn expected0() -> MSG_MOVE_TELEPORT_ACK_Client {
+        MSG_MOVE_TELEPORT_ACK_Client {
+            guid: Guid::new(0x0),
+            movement_counter: 0x0,
+            time: Duration::from_millis(0x26000000),
+        }
+
+    }
+
+    // Generated from `wow_message_parser/wowm/world/movement/msg/msg_move_teleport_ack.wowm` line 21.
+    #[cfg(feature = "sync")]
+    #[cfg_attr(feature = "sync", test)]
+    fn msg_move_teleport_ack_client0() {
+        let expected = expected0();
+        let t = ClientOpcodeMessage::read_unencrypted(&mut std::io::Cursor::new(&RAW0)).unwrap();
+        let t = match t {
+            ClientOpcodeMessage::MSG_MOVE_TELEPORT_ACK(t) => t,
+            opcode => panic!("incorrect opcode. Expected MSG_MOVE_TELEPORT_ACK, got {opcode:#?}"),
+        };
+
+        assert(&t, &expected);
+        assert_eq!(t.size() + HEADER_SIZE, RAW0.len());
+
+        let mut dest = Vec::with_capacity(RAW0.len());
+        expected.write_unencrypted_client(&mut std::io::Cursor::new(&mut dest)).unwrap();
+
+        assert_eq!(dest, RAW0);
+    }
+
+    // Generated from `wow_message_parser/wowm/world/movement/msg/msg_move_teleport_ack.wowm` line 21.
+    #[cfg(feature = "tokio")]
+    #[cfg_attr(feature = "tokio", tokio::test)]
+    async fn tokio_msg_move_teleport_ack_client0() {
+        let expected = expected0();
+        let t = ClientOpcodeMessage::tokio_read_unencrypted(&mut std::io::Cursor::new(&RAW0)).await.unwrap();
+        let t = match t {
+            ClientOpcodeMessage::MSG_MOVE_TELEPORT_ACK(t) => t,
+            opcode => panic!("incorrect opcode. Expected MSG_MOVE_TELEPORT_ACK, got {opcode:#?}"),
+        };
+
+        assert(&t, &expected);
+        assert_eq!(t.size() + HEADER_SIZE, RAW0.len());
+
+        let mut dest = Vec::with_capacity(RAW0.len());
+        expected.tokio_write_unencrypted_client(&mut std::io::Cursor::new(&mut dest)).await.unwrap();
+
+        assert_eq!(dest, RAW0);
+    }
+
+    // Generated from `wow_message_parser/wowm/world/movement/msg/msg_move_teleport_ack.wowm` line 21.
+    #[cfg(feature = "async-std")]
+    #[cfg_attr(feature = "async-std", async_std::test)]
+    async fn astd_msg_move_teleport_ack_client0() {
+        let expected = expected0();
+        let t = ClientOpcodeMessage::astd_read_unencrypted(&mut async_std::io::Cursor::new(&RAW0)).await.unwrap();
+        let t = match t {
+            ClientOpcodeMessage::MSG_MOVE_TELEPORT_ACK(t) => t,
+            opcode => panic!("incorrect opcode. Expected MSG_MOVE_TELEPORT_ACK, got {opcode:#?}"),
+        };
+
+        assert(&t, &expected);
+        assert_eq!(t.size() + HEADER_SIZE, RAW0.len());
+
+        let mut dest = Vec::with_capacity(RAW0.len());
+        expected.astd_write_unencrypted_client(&mut async_std::io::Cursor::new(&mut dest)).await.unwrap();
+
+        assert_eq!(dest, RAW0);
+    }
+
+}
+
+#[cfg(all(feature = "wrath", test))]
+mod test_wrath {
+    #![allow(clippy::missing_const_for_fn)]
+    use super::MSG_MOVE_TELEPORT_ACK_Client;
+    use super::*;
+    use super::super::*;
+    use crate::wrath::opcodes::ClientOpcodeMessage;
+    use crate::Guid;
+    use crate::wrath::{ClientMessage, ServerMessage};
+
+    const HEADER_SIZE: usize = 2 + 4;
+    fn assert(t: &MSG_MOVE_TELEPORT_ACK_Client, expected: &MSG_MOVE_TELEPORT_ACK_Client) {
+        assert_eq!(t.guid, expected.guid);
+        assert_eq!(t.movement_counter, expected.movement_counter);
+        assert_eq!(t.time, expected.time);
+    }
+
+    const RAW0: [u8; 15] = [ 0x00, 0x0D, 0xC7, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+         0x00, 0x00, 0x00, 0x00, 0x00, 0x26, ];
+
+    pub(crate) fn expected0() -> MSG_MOVE_TELEPORT_ACK_Client {
+        MSG_MOVE_TELEPORT_ACK_Client {
+            guid: Guid::new(0x0),
+            movement_counter: 0x0,
+            time: Duration::from_millis(0x26000000),
+        }
+
+    }
+
+    // Generated from `wow_message_parser/wowm/world/movement/msg/msg_move_teleport_ack.wowm` line 21.
+    #[cfg(feature = "sync")]
+    #[cfg_attr(feature = "sync", test)]
+    fn msg_move_teleport_ack_client0() {
+        let expected = expected0();
+        let t = ClientOpcodeMessage::read_unencrypted(&mut std::io::Cursor::new(&RAW0)).unwrap();
+        let t = match t {
+            ClientOpcodeMessage::MSG_MOVE_TELEPORT_ACK(t) => t,
+            opcode => panic!("incorrect opcode. Expected MSG_MOVE_TELEPORT_ACK, got {opcode:#?}"),
+        };
+
+        assert(&t, &expected);
+        assert_eq!(t.size() + HEADER_SIZE, RAW0.len());
+
+        let mut dest = Vec::with_capacity(RAW0.len());
+        expected.write_unencrypted_client(&mut std::io::Cursor::new(&mut dest)).unwrap();
+
+        assert_eq!(dest, RAW0);
+    }
+
+    // Generated from `wow_message_parser/wowm/world/movement/msg/msg_move_teleport_ack.wowm` line 21.
+    #[cfg(feature = "tokio")]
+    #[cfg_attr(feature = "tokio", tokio::test)]
+    async fn tokio_msg_move_teleport_ack_client0() {
+        let expected = expected0();
+        let t = ClientOpcodeMessage::tokio_read_unencrypted(&mut std::io::Cursor::new(&RAW0)).await.unwrap();
+        let t = match t {
+            ClientOpcodeMessage::MSG_MOVE_TELEPORT_ACK(t) => t,
+            opcode => panic!("incorrect opcode. Expected MSG_MOVE_TELEPORT_ACK, got {opcode:#?}"),
+        };
+
+        assert(&t, &expected);
+        assert_eq!(t.size() + HEADER_SIZE, RAW0.len());
+
+        let mut dest = Vec::with_capacity(RAW0.len());
+        expected.tokio_write_unencrypted_client(&mut std::io::Cursor::new(&mut dest)).await.unwrap();
+
+        assert_eq!(dest, RAW0);
+    }
+
+    // Generated from `wow_message_parser/wowm/world/movement/msg/msg_move_teleport_ack.wowm` line 21.
+    #[cfg(feature = "async-std")]
+    #[cfg_attr(feature = "async-std", async_std::test)]
+    async fn astd_msg_move_teleport_ack_client0() {
+        let expected = expected0();
+        let t = ClientOpcodeMessage::astd_read_unencrypted(&mut async_std::io::Cursor::new(&RAW0)).await.unwrap();
+        let t = match t {
+            ClientOpcodeMessage::MSG_MOVE_TELEPORT_ACK(t) => t,
+            opcode => panic!("incorrect opcode. Expected MSG_MOVE_TELEPORT_ACK, got {opcode:#?}"),
+        };
+
+        assert(&t, &expected);
+        assert_eq!(t.size() + HEADER_SIZE, RAW0.len());
+
+        let mut dest = Vec::with_capacity(RAW0.len());
+        expected.astd_write_unencrypted_client(&mut async_std::io::Cursor::new(&mut dest)).await.unwrap();
+
+        assert_eq!(dest, RAW0);
+    }
+
 }
 

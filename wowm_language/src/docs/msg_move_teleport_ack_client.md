@@ -33,3 +33,14 @@ CMSG have a header of 6 bytes.
 | - | 4 / Little | u32 | movement_counter |  |  |
 | - | 4 / Little | Milliseconds | time |  |  |
 
+### Examples
+
+#### Example 1
+
+```c
+0, 13, // size
+199, 0, 0, 0, // opcode (199)
+0, // guid: PackedGuid
+0, 0, 0, 0, // movement_counter: u32
+0, 0, 0, 38, // time: Milliseconds
+```

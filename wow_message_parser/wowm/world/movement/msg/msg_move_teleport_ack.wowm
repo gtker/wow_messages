@@ -17,3 +17,18 @@ smsg MSG_MOVE_TELEPORT_ACK_Server = 0x00C7 {
     description = "Can also be a response to [MSG_MOVE_TELEPORT_ACK_Client] after being sent.";
 }
 
+
+test MSG_MOVE_TELEPORT_ACK_Client {
+    guid = 0;
+    movement_counter = 0;
+    time = 637534208;
+} [
+    0x00, 0x0D, /* size */
+    0xC7, 0x00, 0x00, 0x00, /* opcode */
+    0x00, /* guid */
+    0x00, 0x00, 0x00, 0x00, /* movement_counter */
+    0x00, 0x00, 0x00, 0x26, /* time */
+] {
+    versions = "1.12";
+}
+

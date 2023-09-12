@@ -33,37 +33,6 @@ impl CMSG_INITIATE_TRADE {
 impl crate::Message for CMSG_INITIATE_TRADE {
     const OPCODE: u32 = 0x0116;
 
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        use std::fmt::Write;
-        use crate::traits::Message;
-
-        let mut s = String::new();
-
-        writeln!(s, "test CMSG_INITIATE_TRADE {{").unwrap();
-        // Members
-        writeln!(s, "    guid = {};", self.guid.guid()).unwrap();
-
-        writeln!(s, "}} [").unwrap();
-
-        let [a, b] = 12_u16.to_be_bytes();
-        writeln!(s, "    {a:#04X}, {b:#04X}, /* size */").unwrap();
-        let [a, b, c, d] = 278_u32.to_le_bytes();
-        writeln!(s, "    {a:#04X}, {b:#04X}, {c:#04X}, {d:#04X}, /* opcode */").unwrap();
-        let mut bytes: Vec<u8> = Vec::new();
-        self.write_into_vec(&mut bytes).unwrap();
-        let mut bytes = bytes.into_iter();
-
-        crate::util::write_bytes(&mut s, &mut bytes, 8, "guid", "    ");
-
-
-        writeln!(s, "] {{").unwrap();
-        writeln!(s, "    versions = \"{}\";", std::env::var("WOWM_TEST_CASE_WORLD_VERSION").unwrap_or("1 2 3".to_string())).unwrap();
-        writeln!(s, "}}\n").unwrap();
-
-        Some(s)
-    }
-
     fn size_without_header(&self) -> u32 {
         8
     }
@@ -89,4 +58,265 @@ impl crate::tbc::ClientMessage for CMSG_INITIATE_TRADE {}
 
 #[cfg(feature = "wrath")]
 impl crate::wrath::ClientMessage for CMSG_INITIATE_TRADE {}
+
+#[cfg(all(feature = "vanilla", test))]
+mod test_vanilla {
+    #![allow(clippy::missing_const_for_fn)]
+    use super::CMSG_INITIATE_TRADE;
+    use super::*;
+    use super::super::*;
+    use crate::vanilla::opcodes::ClientOpcodeMessage;
+    use crate::Guid;
+    use crate::vanilla::{ClientMessage, ServerMessage};
+
+    const HEADER_SIZE: usize = 2 + 4;
+    fn assert(t: &CMSG_INITIATE_TRADE, expected: &CMSG_INITIATE_TRADE) {
+        assert_eq!(t.guid, expected.guid);
+    }
+
+    const RAW0: [u8; 14] = [ 0x00, 0x0C, 0x16, 0x01, 0x00, 0x00, 0x17, 0x00, 0x00,
+         0x00, 0x00, 0x00, 0x00, 0x00, ];
+
+    pub(crate) fn expected0() -> CMSG_INITIATE_TRADE {
+        CMSG_INITIATE_TRADE {
+            guid: Guid::new(0x17),
+        }
+
+    }
+
+    // Generated from `wow_message_parser/wowm/world/trade/cmsg_initiate_trade.wowm` line 8.
+    #[cfg(feature = "sync")]
+    #[cfg_attr(feature = "sync", test)]
+    fn cmsg_initiate_trade0() {
+        let expected = expected0();
+        let t = ClientOpcodeMessage::read_unencrypted(&mut std::io::Cursor::new(&RAW0)).unwrap();
+        let t = match t {
+            ClientOpcodeMessage::CMSG_INITIATE_TRADE(t) => t,
+            opcode => panic!("incorrect opcode. Expected CMSG_INITIATE_TRADE, got {opcode:#?}"),
+        };
+
+        assert(&t, &expected);
+        assert_eq!(8 + HEADER_SIZE, RAW0.len());
+
+        let mut dest = Vec::with_capacity(RAW0.len());
+        expected.write_unencrypted_client(&mut std::io::Cursor::new(&mut dest)).unwrap();
+
+        assert_eq!(dest, RAW0);
+    }
+
+    // Generated from `wow_message_parser/wowm/world/trade/cmsg_initiate_trade.wowm` line 8.
+    #[cfg(feature = "tokio")]
+    #[cfg_attr(feature = "tokio", tokio::test)]
+    async fn tokio_cmsg_initiate_trade0() {
+        let expected = expected0();
+        let t = ClientOpcodeMessage::tokio_read_unencrypted(&mut std::io::Cursor::new(&RAW0)).await.unwrap();
+        let t = match t {
+            ClientOpcodeMessage::CMSG_INITIATE_TRADE(t) => t,
+            opcode => panic!("incorrect opcode. Expected CMSG_INITIATE_TRADE, got {opcode:#?}"),
+        };
+
+        assert(&t, &expected);
+        assert_eq!(8 + HEADER_SIZE, RAW0.len());
+
+        let mut dest = Vec::with_capacity(RAW0.len());
+        expected.tokio_write_unencrypted_client(&mut std::io::Cursor::new(&mut dest)).await.unwrap();
+
+        assert_eq!(dest, RAW0);
+    }
+
+    // Generated from `wow_message_parser/wowm/world/trade/cmsg_initiate_trade.wowm` line 8.
+    #[cfg(feature = "async-std")]
+    #[cfg_attr(feature = "async-std", async_std::test)]
+    async fn astd_cmsg_initiate_trade0() {
+        let expected = expected0();
+        let t = ClientOpcodeMessage::astd_read_unencrypted(&mut async_std::io::Cursor::new(&RAW0)).await.unwrap();
+        let t = match t {
+            ClientOpcodeMessage::CMSG_INITIATE_TRADE(t) => t,
+            opcode => panic!("incorrect opcode. Expected CMSG_INITIATE_TRADE, got {opcode:#?}"),
+        };
+
+        assert(&t, &expected);
+        assert_eq!(8 + HEADER_SIZE, RAW0.len());
+
+        let mut dest = Vec::with_capacity(RAW0.len());
+        expected.astd_write_unencrypted_client(&mut async_std::io::Cursor::new(&mut dest)).await.unwrap();
+
+        assert_eq!(dest, RAW0);
+    }
+
+}
+
+#[cfg(all(feature = "tbc", test))]
+mod test_tbc {
+    #![allow(clippy::missing_const_for_fn)]
+    use super::CMSG_INITIATE_TRADE;
+    use super::*;
+    use super::super::*;
+    use crate::tbc::opcodes::ClientOpcodeMessage;
+    use crate::Guid;
+    use crate::tbc::{ClientMessage, ServerMessage};
+
+    const HEADER_SIZE: usize = 2 + 4;
+    fn assert(t: &CMSG_INITIATE_TRADE, expected: &CMSG_INITIATE_TRADE) {
+        assert_eq!(t.guid, expected.guid);
+    }
+
+    const RAW0: [u8; 14] = [ 0x00, 0x0C, 0x16, 0x01, 0x00, 0x00, 0x17, 0x00, 0x00,
+         0x00, 0x00, 0x00, 0x00, 0x00, ];
+
+    pub(crate) fn expected0() -> CMSG_INITIATE_TRADE {
+        CMSG_INITIATE_TRADE {
+            guid: Guid::new(0x17),
+        }
+
+    }
+
+    // Generated from `wow_message_parser/wowm/world/trade/cmsg_initiate_trade.wowm` line 8.
+    #[cfg(feature = "sync")]
+    #[cfg_attr(feature = "sync", test)]
+    fn cmsg_initiate_trade0() {
+        let expected = expected0();
+        let t = ClientOpcodeMessage::read_unencrypted(&mut std::io::Cursor::new(&RAW0)).unwrap();
+        let t = match t {
+            ClientOpcodeMessage::CMSG_INITIATE_TRADE(t) => t,
+            opcode => panic!("incorrect opcode. Expected CMSG_INITIATE_TRADE, got {opcode:#?}"),
+        };
+
+        assert(&t, &expected);
+        assert_eq!(8 + HEADER_SIZE, RAW0.len());
+
+        let mut dest = Vec::with_capacity(RAW0.len());
+        expected.write_unencrypted_client(&mut std::io::Cursor::new(&mut dest)).unwrap();
+
+        assert_eq!(dest, RAW0);
+    }
+
+    // Generated from `wow_message_parser/wowm/world/trade/cmsg_initiate_trade.wowm` line 8.
+    #[cfg(feature = "tokio")]
+    #[cfg_attr(feature = "tokio", tokio::test)]
+    async fn tokio_cmsg_initiate_trade0() {
+        let expected = expected0();
+        let t = ClientOpcodeMessage::tokio_read_unencrypted(&mut std::io::Cursor::new(&RAW0)).await.unwrap();
+        let t = match t {
+            ClientOpcodeMessage::CMSG_INITIATE_TRADE(t) => t,
+            opcode => panic!("incorrect opcode. Expected CMSG_INITIATE_TRADE, got {opcode:#?}"),
+        };
+
+        assert(&t, &expected);
+        assert_eq!(8 + HEADER_SIZE, RAW0.len());
+
+        let mut dest = Vec::with_capacity(RAW0.len());
+        expected.tokio_write_unencrypted_client(&mut std::io::Cursor::new(&mut dest)).await.unwrap();
+
+        assert_eq!(dest, RAW0);
+    }
+
+    // Generated from `wow_message_parser/wowm/world/trade/cmsg_initiate_trade.wowm` line 8.
+    #[cfg(feature = "async-std")]
+    #[cfg_attr(feature = "async-std", async_std::test)]
+    async fn astd_cmsg_initiate_trade0() {
+        let expected = expected0();
+        let t = ClientOpcodeMessage::astd_read_unencrypted(&mut async_std::io::Cursor::new(&RAW0)).await.unwrap();
+        let t = match t {
+            ClientOpcodeMessage::CMSG_INITIATE_TRADE(t) => t,
+            opcode => panic!("incorrect opcode. Expected CMSG_INITIATE_TRADE, got {opcode:#?}"),
+        };
+
+        assert(&t, &expected);
+        assert_eq!(8 + HEADER_SIZE, RAW0.len());
+
+        let mut dest = Vec::with_capacity(RAW0.len());
+        expected.astd_write_unencrypted_client(&mut async_std::io::Cursor::new(&mut dest)).await.unwrap();
+
+        assert_eq!(dest, RAW0);
+    }
+
+}
+
+#[cfg(all(feature = "wrath", test))]
+mod test_wrath {
+    #![allow(clippy::missing_const_for_fn)]
+    use super::CMSG_INITIATE_TRADE;
+    use super::*;
+    use super::super::*;
+    use crate::wrath::opcodes::ClientOpcodeMessage;
+    use crate::Guid;
+    use crate::wrath::{ClientMessage, ServerMessage};
+
+    const HEADER_SIZE: usize = 2 + 4;
+    fn assert(t: &CMSG_INITIATE_TRADE, expected: &CMSG_INITIATE_TRADE) {
+        assert_eq!(t.guid, expected.guid);
+    }
+
+    const RAW0: [u8; 14] = [ 0x00, 0x0C, 0x16, 0x01, 0x00, 0x00, 0x17, 0x00, 0x00,
+         0x00, 0x00, 0x00, 0x00, 0x00, ];
+
+    pub(crate) fn expected0() -> CMSG_INITIATE_TRADE {
+        CMSG_INITIATE_TRADE {
+            guid: Guid::new(0x17),
+        }
+
+    }
+
+    // Generated from `wow_message_parser/wowm/world/trade/cmsg_initiate_trade.wowm` line 8.
+    #[cfg(feature = "sync")]
+    #[cfg_attr(feature = "sync", test)]
+    fn cmsg_initiate_trade0() {
+        let expected = expected0();
+        let t = ClientOpcodeMessage::read_unencrypted(&mut std::io::Cursor::new(&RAW0)).unwrap();
+        let t = match t {
+            ClientOpcodeMessage::CMSG_INITIATE_TRADE(t) => t,
+            opcode => panic!("incorrect opcode. Expected CMSG_INITIATE_TRADE, got {opcode:#?}"),
+        };
+
+        assert(&t, &expected);
+        assert_eq!(8 + HEADER_SIZE, RAW0.len());
+
+        let mut dest = Vec::with_capacity(RAW0.len());
+        expected.write_unencrypted_client(&mut std::io::Cursor::new(&mut dest)).unwrap();
+
+        assert_eq!(dest, RAW0);
+    }
+
+    // Generated from `wow_message_parser/wowm/world/trade/cmsg_initiate_trade.wowm` line 8.
+    #[cfg(feature = "tokio")]
+    #[cfg_attr(feature = "tokio", tokio::test)]
+    async fn tokio_cmsg_initiate_trade0() {
+        let expected = expected0();
+        let t = ClientOpcodeMessage::tokio_read_unencrypted(&mut std::io::Cursor::new(&RAW0)).await.unwrap();
+        let t = match t {
+            ClientOpcodeMessage::CMSG_INITIATE_TRADE(t) => t,
+            opcode => panic!("incorrect opcode. Expected CMSG_INITIATE_TRADE, got {opcode:#?}"),
+        };
+
+        assert(&t, &expected);
+        assert_eq!(8 + HEADER_SIZE, RAW0.len());
+
+        let mut dest = Vec::with_capacity(RAW0.len());
+        expected.tokio_write_unencrypted_client(&mut std::io::Cursor::new(&mut dest)).await.unwrap();
+
+        assert_eq!(dest, RAW0);
+    }
+
+    // Generated from `wow_message_parser/wowm/world/trade/cmsg_initiate_trade.wowm` line 8.
+    #[cfg(feature = "async-std")]
+    #[cfg_attr(feature = "async-std", async_std::test)]
+    async fn astd_cmsg_initiate_trade0() {
+        let expected = expected0();
+        let t = ClientOpcodeMessage::astd_read_unencrypted(&mut async_std::io::Cursor::new(&RAW0)).await.unwrap();
+        let t = match t {
+            ClientOpcodeMessage::CMSG_INITIATE_TRADE(t) => t,
+            opcode => panic!("incorrect opcode. Expected CMSG_INITIATE_TRADE, got {opcode:#?}"),
+        };
+
+        assert(&t, &expected);
+        assert_eq!(8 + HEADER_SIZE, RAW0.len());
+
+        let mut dest = Vec::with_capacity(RAW0.len());
+        expected.astd_write_unencrypted_client(&mut async_std::io::Cursor::new(&mut dest)).await.unwrap();
+
+        assert_eq!(dest, RAW0);
+    }
+
+}
 

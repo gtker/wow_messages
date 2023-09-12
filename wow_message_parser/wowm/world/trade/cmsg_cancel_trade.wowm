@@ -1,4 +1,14 @@
 #tag_all versions "1.12 2 3.3.5";
 
-cmsg CMSG_CANCEL_TRADE = 0x011C {}
+cmsg CMSG_CANCEL_TRADE = 0x011C {} {
+    comment = "Sent twice by the client when teleporting and logging out.";
+}
+
+test CMSG_CANCEL_TRADE {
+} [
+    0x00, 0x04, /* size */
+    0x1C, 0x01, 0x00, 0x00, /* opcode */
+] {
+    versions = "1.12";
+}
 
