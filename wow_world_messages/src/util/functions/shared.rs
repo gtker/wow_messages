@@ -19,6 +19,7 @@ impl ServerHeader {
         Self { size, opcode }
     }
 
+    #[cfg(feature = "wrath")]
     pub(crate) const fn from_large_array(b: [u8; 5]) -> Self {
         let size = u32::from_be_bytes([0, b[0], b[1], b[2]]);
         let opcode = u16::from_le_bytes([b[3], b[4]]);
