@@ -31,6 +31,7 @@ pub(crate) fn print_read_write_base_structs(o: &Objects) {
         let read_name = base_struct_read_name(e);
         let write_name = base_struct_write_name(e);
 
+        s.wln(e.cfg_guard().unwrap());
         s.bodyn(
             format!(
                 "pub(crate) fn {read_name}<R: std::io::Read>(mut r: R) -> Result<{ty}, {error_name}>"
@@ -40,6 +41,7 @@ pub(crate) fn print_read_write_base_structs(o: &Objects) {
             },
         );
 
+        s.wln(e.cfg_guard().unwrap());
         s.bodyn(
             format!(
                 "pub(crate) fn {write_name}(s: &{ty}, mut w: impl std::io::Write) -> Result<(), std::io::Error>"

@@ -11,7 +11,7 @@ use crate::parser::types::struct_member::{StructMember, StructMemberDefinition};
 use crate::parser::types::tags::ObjectTags;
 use crate::parser::types::test_case::TestCase;
 use crate::parser::types::ty::Type;
-use crate::parser::types::version::{LoginVersion, MajorWorldVersion, Version};
+use crate::parser::types::version::{AllRustVersions, LoginVersion, MajorWorldVersion, Version};
 use crate::rust_printer::rust_view::rust_object::RustObject;
 use crate::rust_printer::{
     DefinerType, LOGIN_CLIENT_MESSAGE_ENUM_NAME, LOGIN_SERVER_MESSAGE_ENUM_NAME,
@@ -463,6 +463,36 @@ impl Container {
         }
 
         false
+    }
+
+    pub(crate) fn cfg_guard(&self) -> Option<String> {
+        match self.tags().all_rust_versions() {
+            AllRustVersions::World(l) => {
+                if l.len() == 1 {
+                    Some(format!(
+                        "#[cfg(feature = \"{}\")]",
+                        l.first().unwrap().module_name()
+                    ))
+                } else {
+                    use std::fmt::Write;
+
+                    let mut s = "#[cfg(any(".to_string();
+
+                    for (i, v) in l.iter().enumerate() {
+                        if i != 0 {
+                            write!(s, ", ").unwrap();
+                        }
+
+                        write!(s, "feature = \"{}\"", v.module_name()).unwrap();
+                    }
+
+                    write!(s, "))]").unwrap();
+
+                    Some(s)
+                }
+            }
+            AllRustVersions::Login(_) => None,
+        }
     }
 
     pub(crate) fn base_read_write_full_import_path(&self) -> String {
