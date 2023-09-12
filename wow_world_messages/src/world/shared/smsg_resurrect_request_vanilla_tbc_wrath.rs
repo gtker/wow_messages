@@ -50,6 +50,11 @@ impl crate::Message for SMSG_RESURRECT_REQUEST {
     const OPCODE: u32 = 0x015b;
 
     #[cfg(feature = "print-testcase")]
+    fn message_name(&self) -> &'static str {
+        "SMSG_RESURRECT_REQUEST"
+    }
+
+    #[cfg(feature = "print-testcase")]
     fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;

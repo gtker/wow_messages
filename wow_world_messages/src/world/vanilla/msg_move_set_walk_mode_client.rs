@@ -33,6 +33,11 @@ impl MSG_MOVE_SET_WALK_MODE_Client {
 impl crate::Message for MSG_MOVE_SET_WALK_MODE_Client {
     const OPCODE: u32 = 0x00c3;
 
+    #[cfg(feature = "print-testcase")]
+    fn message_name(&self) -> &'static str {
+        "MSG_MOVE_SET_WALK_MODE_Client"
+    }
+
     fn size_without_header(&self) -> u32 {
         self.size() as u32
     }

@@ -38,6 +38,11 @@ impl crate::Message for CMSG_BATTLEFIELD_MGR_QUEUE_INVITE_RESPONSE {
     const OPCODE: u32 = 0x04e2;
 
     #[cfg(feature = "print-testcase")]
+    fn message_name(&self) -> &'static str {
+        "CMSG_BATTLEFIELD_MGR_QUEUE_INVITE_RESPONSE"
+    }
+
+    #[cfg(feature = "print-testcase")]
     fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;

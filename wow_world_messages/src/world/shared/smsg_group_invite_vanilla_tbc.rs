@@ -35,6 +35,11 @@ impl crate::Message for SMSG_GROUP_INVITE {
     const OPCODE: u32 = 0x006f;
 
     #[cfg(feature = "print-testcase")]
+    fn message_name(&self) -> &'static str {
+        "SMSG_GROUP_INVITE"
+    }
+
+    #[cfg(feature = "print-testcase")]
     fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;

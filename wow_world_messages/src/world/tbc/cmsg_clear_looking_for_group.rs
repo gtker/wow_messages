@@ -26,6 +26,11 @@ impl crate::Message for CMSG_CLEAR_LOOKING_FOR_GROUP {
     const OPCODE: u32 = 0x0363;
 
     #[cfg(feature = "print-testcase")]
+    fn message_name(&self) -> &'static str {
+        "CMSG_CLEAR_LOOKING_FOR_GROUP"
+    }
+
+    #[cfg(feature = "print-testcase")]
     fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;

@@ -41,6 +41,11 @@ impl crate::Message for CMSG_TIME_SYNC_RESP {
     const OPCODE: u32 = 0x0391;
 
     #[cfg(feature = "print-testcase")]
+    fn message_name(&self) -> &'static str {
+        "CMSG_TIME_SYNC_RESP"
+    }
+
+    #[cfg(feature = "print-testcase")]
     fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;

@@ -34,6 +34,11 @@ impl CMSG_SET_SELECTION {
 impl crate::Message for CMSG_SET_SELECTION {
     const OPCODE: u32 = 0x013d;
 
+    #[cfg(feature = "print-testcase")]
+    fn message_name(&self) -> &'static str {
+        "CMSG_SET_SELECTION"
+    }
+
     fn size_without_header(&self) -> u32 {
         8
     }

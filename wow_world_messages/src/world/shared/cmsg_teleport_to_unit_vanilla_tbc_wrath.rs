@@ -35,6 +35,11 @@ impl CMSG_TELEPORT_TO_UNIT {
 impl crate::Message for CMSG_TELEPORT_TO_UNIT {
     const OPCODE: u32 = 0x0009;
 
+    #[cfg(feature = "print-testcase")]
+    fn message_name(&self) -> &'static str {
+        "CMSG_TELEPORT_TO_UNIT"
+    }
+
     fn size_without_header(&self) -> u32 {
         self.size() as u32
     }

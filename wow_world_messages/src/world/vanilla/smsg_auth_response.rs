@@ -152,6 +152,11 @@ impl SMSG_AUTH_RESPONSE {
 impl crate::Message for SMSG_AUTH_RESPONSE {
     const OPCODE: u32 = 0x01ee;
 
+    #[cfg(feature = "print-testcase")]
+    fn message_name(&self) -> &'static str {
+        "SMSG_AUTH_RESPONSE"
+    }
+
     fn size_without_header(&self) -> u32 {
         self.size() as u32
     }

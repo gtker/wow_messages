@@ -50,6 +50,11 @@ impl CMSG_TEXT_EMOTE {
 impl crate::Message for CMSG_TEXT_EMOTE {
     const OPCODE: u32 = 0x0104;
 
+    #[cfg(feature = "print-testcase")]
+    fn message_name(&self) -> &'static str {
+        "CMSG_TEXT_EMOTE"
+    }
+
     fn size_without_header(&self) -> u32 {
         16
     }

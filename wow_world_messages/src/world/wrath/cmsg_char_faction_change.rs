@@ -88,6 +88,11 @@ impl crate::Message for CMSG_CHAR_FACTION_CHANGE {
     const OPCODE: u32 = 0x04d9;
 
     #[cfg(feature = "print-testcase")]
+    fn message_name(&self) -> &'static str {
+        "CMSG_CHAR_FACTION_CHANGE"
+    }
+
+    #[cfg(feature = "print-testcase")]
     fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;

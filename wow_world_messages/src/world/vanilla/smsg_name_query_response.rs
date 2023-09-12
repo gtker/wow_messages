@@ -74,6 +74,11 @@ impl SMSG_NAME_QUERY_RESPONSE {
 impl crate::Message for SMSG_NAME_QUERY_RESPONSE {
     const OPCODE: u32 = 0x0051;
 
+    #[cfg(feature = "print-testcase")]
+    fn message_name(&self) -> &'static str {
+        "SMSG_NAME_QUERY_RESPONSE"
+    }
+
     fn size_without_header(&self) -> u32 {
         self.size() as u32
     }

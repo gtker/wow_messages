@@ -34,6 +34,11 @@ impl crate::Message for CMSG_AREA_SPIRIT_HEALER_QUEUE {
     const OPCODE: u32 = 0x02e3;
 
     #[cfg(feature = "print-testcase")]
+    fn message_name(&self) -> &'static str {
+        "CMSG_AREA_SPIRIT_HEALER_QUEUE"
+    }
+
+    #[cfg(feature = "print-testcase")]
     fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;

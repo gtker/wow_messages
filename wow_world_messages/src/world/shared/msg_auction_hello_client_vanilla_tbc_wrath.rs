@@ -33,6 +33,11 @@ impl MSG_AUCTION_HELLO_Client {
 impl crate::Message for MSG_AUCTION_HELLO_Client {
     const OPCODE: u32 = 0x0255;
 
+    #[cfg(feature = "print-testcase")]
+    fn message_name(&self) -> &'static str {
+        "MSG_AUCTION_HELLO_Client"
+    }
+
     fn size_without_header(&self) -> u32 {
         8
     }

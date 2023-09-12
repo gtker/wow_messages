@@ -49,6 +49,11 @@ impl crate::Message for CMSG_PET_RENAME {
     const OPCODE: u32 = 0x0177;
 
     #[cfg(feature = "print-testcase")]
+    fn message_name(&self) -> &'static str {
+        "CMSG_PET_RENAME"
+    }
+
+    #[cfg(feature = "print-testcase")]
     fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;

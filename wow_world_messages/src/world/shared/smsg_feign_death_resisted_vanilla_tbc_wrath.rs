@@ -26,6 +26,11 @@ impl crate::Message for SMSG_FEIGN_DEATH_RESISTED {
     const OPCODE: u32 = 0x02b4;
 
     #[cfg(feature = "print-testcase")]
+    fn message_name(&self) -> &'static str {
+        "SMSG_FEIGN_DEATH_RESISTED"
+    }
+
+    #[cfg(feature = "print-testcase")]
     fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;

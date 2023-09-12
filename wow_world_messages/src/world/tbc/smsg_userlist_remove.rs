@@ -55,6 +55,11 @@ impl crate::Message for SMSG_USERLIST_REMOVE {
     const OPCODE: u32 = 0x03f0;
 
     #[cfg(feature = "print-testcase")]
+    fn message_name(&self) -> &'static str {
+        "SMSG_USERLIST_REMOVE"
+    }
+
+    #[cfg(feature = "print-testcase")]
     fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;

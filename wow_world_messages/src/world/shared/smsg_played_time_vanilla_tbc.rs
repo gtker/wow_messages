@@ -38,6 +38,11 @@ impl crate::Message for SMSG_PLAYED_TIME {
     const OPCODE: u32 = 0x01cd;
 
     #[cfg(feature = "print-testcase")]
+    fn message_name(&self) -> &'static str {
+        "SMSG_PLAYED_TIME"
+    }
+
+    #[cfg(feature = "print-testcase")]
     fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;

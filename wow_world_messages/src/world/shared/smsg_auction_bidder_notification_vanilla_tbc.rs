@@ -72,6 +72,11 @@ impl crate::Message for SMSG_AUCTION_BIDDER_NOTIFICATION {
     const OPCODE: u32 = 0x025e;
 
     #[cfg(feature = "print-testcase")]
+    fn message_name(&self) -> &'static str {
+        "SMSG_AUCTION_BIDDER_NOTIFICATION"
+    }
+
+    #[cfg(feature = "print-testcase")]
     fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;

@@ -34,6 +34,11 @@ impl crate::Message for SMSG_LFG_TELEPORT_DENIED {
     const OPCODE: u32 = 0x0200;
 
     #[cfg(feature = "print-testcase")]
+    fn message_name(&self) -> &'static str {
+        "SMSG_LFG_TELEPORT_DENIED"
+    }
+
+    #[cfg(feature = "print-testcase")]
     fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;

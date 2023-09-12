@@ -43,6 +43,11 @@ impl crate::Message for CMSG_MOVE_NOT_ACTIVE_MOVER {
     const OPCODE: u32 = 0x02d1;
 
     #[cfg(feature = "print-testcase")]
+    fn message_name(&self) -> &'static str {
+        "CMSG_MOVE_NOT_ACTIVE_MOVER"
+    }
+
+    #[cfg(feature = "print-testcase")]
     fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;

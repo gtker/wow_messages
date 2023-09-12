@@ -43,6 +43,11 @@ impl crate::Message for MSG_MOVE_STOP_PITCH {
     const OPCODE: u32 = 0x00c1;
 
     #[cfg(feature = "print-testcase")]
+    fn message_name(&self) -> &'static str {
+        "MSG_MOVE_STOP_PITCH"
+    }
+
+    #[cfg(feature = "print-testcase")]
     fn to_test_case_string(&self) -> Option<String> {
         panic!("MSG types not supported");
     }

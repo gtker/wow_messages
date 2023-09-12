@@ -26,6 +26,11 @@ impl crate::Message for CMSG_LFM_CLEAR_AUTOFILL {
     const OPCODE: u32 = 0x035f;
 
     #[cfg(feature = "print-testcase")]
+    fn message_name(&self) -> &'static str {
+        "CMSG_LFM_CLEAR_AUTOFILL"
+    }
+
+    #[cfg(feature = "print-testcase")]
     fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;

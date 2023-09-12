@@ -34,6 +34,11 @@ impl crate::Message for SMSG_CORPSE_RECLAIM_DELAY {
     const OPCODE: u32 = 0x0269;
 
     #[cfg(feature = "print-testcase")]
+    fn message_name(&self) -> &'static str {
+        "SMSG_CORPSE_RECLAIM_DELAY"
+    }
+
+    #[cfg(feature = "print-testcase")]
     fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;

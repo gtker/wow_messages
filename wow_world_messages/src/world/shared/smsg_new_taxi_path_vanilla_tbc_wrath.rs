@@ -26,6 +26,11 @@ impl crate::Message for SMSG_NEW_TAXI_PATH {
     const OPCODE: u32 = 0x01af;
 
     #[cfg(feature = "print-testcase")]
+    fn message_name(&self) -> &'static str {
+        "SMSG_NEW_TAXI_PATH"
+    }
+
+    #[cfg(feature = "print-testcase")]
     fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;

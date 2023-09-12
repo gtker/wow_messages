@@ -26,6 +26,11 @@ impl crate::Message for SMSG_QUESTLOG_FULL {
     const OPCODE: u32 = 0x0195;
 
     #[cfg(feature = "print-testcase")]
+    fn message_name(&self) -> &'static str {
+        "SMSG_QUESTLOG_FULL"
+    }
+
+    #[cfg(feature = "print-testcase")]
     fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;

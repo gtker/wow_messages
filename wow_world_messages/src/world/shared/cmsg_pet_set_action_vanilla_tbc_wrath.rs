@@ -73,6 +73,11 @@ impl crate::Message for CMSG_PET_SET_ACTION {
     const OPCODE: u32 = 0x0174;
 
     #[cfg(feature = "print-testcase")]
+    fn message_name(&self) -> &'static str {
+        "CMSG_PET_SET_ACTION"
+    }
+
+    #[cfg(feature = "print-testcase")]
     fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;

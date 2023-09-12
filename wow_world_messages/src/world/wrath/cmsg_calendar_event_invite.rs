@@ -61,6 +61,11 @@ impl crate::Message for CMSG_CALENDAR_EVENT_INVITE {
     const OPCODE: u32 = 0x0431;
 
     #[cfg(feature = "print-testcase")]
+    fn message_name(&self) -> &'static str {
+        "CMSG_CALENDAR_EVENT_INVITE"
+    }
+
+    #[cfg(feature = "print-testcase")]
     fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;

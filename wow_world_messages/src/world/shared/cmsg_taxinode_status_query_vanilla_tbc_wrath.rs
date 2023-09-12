@@ -34,6 +34,11 @@ impl crate::Message for CMSG_TAXINODE_STATUS_QUERY {
     const OPCODE: u32 = 0x01aa;
 
     #[cfg(feature = "print-testcase")]
+    fn message_name(&self) -> &'static str {
+        "CMSG_TAXINODE_STATUS_QUERY"
+    }
+
+    #[cfg(feature = "print-testcase")]
     fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;

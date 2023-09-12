@@ -26,6 +26,11 @@ impl crate::Message for CMSG_REQUEST_VEHICLE_EXIT {
     const OPCODE: u32 = 0x0476;
 
     #[cfg(feature = "print-testcase")]
+    fn message_name(&self) -> &'static str {
+        "CMSG_REQUEST_VEHICLE_EXIT"
+    }
+
+    #[cfg(feature = "print-testcase")]
     fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;

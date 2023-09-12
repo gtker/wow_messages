@@ -36,6 +36,11 @@ impl SMSG_CHARACTER_LOGIN_FAILED {
 impl crate::Message for SMSG_CHARACTER_LOGIN_FAILED {
     const OPCODE: u32 = 0x0041;
 
+    #[cfg(feature = "print-testcase")]
+    fn message_name(&self) -> &'static str {
+        "SMSG_CHARACTER_LOGIN_FAILED"
+    }
+
     fn size_without_header(&self) -> u32 {
         1
     }

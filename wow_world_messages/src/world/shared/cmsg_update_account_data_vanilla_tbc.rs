@@ -56,6 +56,11 @@ impl CMSG_UPDATE_ACCOUNT_DATA {
 impl crate::Message for CMSG_UPDATE_ACCOUNT_DATA {
     const OPCODE: u32 = 0x020b;
 
+    #[cfg(feature = "print-testcase")]
+    fn message_name(&self) -> &'static str {
+        "CMSG_UPDATE_ACCOUNT_DATA"
+    }
+
     fn size_without_header(&self) -> u32 {
         self.size() as u32
     }

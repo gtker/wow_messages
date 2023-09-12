@@ -143,6 +143,11 @@ impl crate::Message for SMSG_QUESTGIVER_REQUEST_ITEMS {
     const OPCODE: u32 = 0x018b;
 
     #[cfg(feature = "print-testcase")]
+    fn message_name(&self) -> &'static str {
+        "SMSG_QUESTGIVER_REQUEST_ITEMS"
+    }
+
+    #[cfg(feature = "print-testcase")]
     fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;

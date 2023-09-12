@@ -47,6 +47,11 @@ impl MSG_MOVE_TELEPORT_ACK_Client {
 impl crate::Message for MSG_MOVE_TELEPORT_ACK_Client {
     const OPCODE: u32 = 0x00c7;
 
+    #[cfg(feature = "print-testcase")]
+    fn message_name(&self) -> &'static str {
+        "MSG_MOVE_TELEPORT_ACK_Client"
+    }
+
     fn size_without_header(&self) -> u32 {
         self.size() as u32
     }

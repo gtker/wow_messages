@@ -53,6 +53,11 @@ impl crate::Message for CMSG_UPDATE_PROJECTILE_POSITION {
     const OPCODE: u32 = 0x04be;
 
     #[cfg(feature = "print-testcase")]
+    fn message_name(&self) -> &'static str {
+        "CMSG_UPDATE_PROJECTILE_POSITION"
+    }
+
+    #[cfg(feature = "print-testcase")]
     fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;

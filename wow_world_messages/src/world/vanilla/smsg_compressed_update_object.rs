@@ -55,6 +55,11 @@ impl SMSG_COMPRESSED_UPDATE_OBJECT {
 impl crate::Message for SMSG_COMPRESSED_UPDATE_OBJECT {
     const OPCODE: u32 = 0x01f6;
 
+    #[cfg(feature = "print-testcase")]
+    fn message_name(&self) -> &'static str {
+        "SMSG_COMPRESSED_UPDATE_OBJECT"
+    }
+
     fn size_without_header(&self) -> u32 {
         self.size() as u32
     }

@@ -27,6 +27,11 @@ impl crate::Message for SMSG_DURABILITY_DAMAGE_DEATH {
     const OPCODE: u32 = 0x02bd;
 
     #[cfg(feature = "print-testcase")]
+    fn message_name(&self) -> &'static str {
+        "SMSG_DURABILITY_DAMAGE_DEATH"
+    }
+
+    #[cfg(feature = "print-testcase")]
     fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;

@@ -34,6 +34,11 @@ impl CMSG_SETSHEATHED {
 impl crate::Message for CMSG_SETSHEATHED {
     const OPCODE: u32 = 0x01e0;
 
+    #[cfg(feature = "print-testcase")]
+    fn message_name(&self) -> &'static str {
+        "CMSG_SETSHEATHED"
+    }
+
     fn size_without_header(&self) -> u32 {
         4
     }

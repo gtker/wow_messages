@@ -35,6 +35,11 @@ impl crate::Message for SMSG_CHAT_PLAYER_NOT_FOUND {
     const OPCODE: u32 = 0x02a9;
 
     #[cfg(feature = "print-testcase")]
+    fn message_name(&self) -> &'static str {
+        "SMSG_CHAT_PLAYER_NOT_FOUND"
+    }
+
+    #[cfg(feature = "print-testcase")]
     fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;

@@ -41,6 +41,11 @@ impl crate::Message for CMSG_SET_ACTIVE_VOICE_CHANNEL {
     const OPCODE: u32 = 0x03d3;
 
     #[cfg(feature = "print-testcase")]
+    fn message_name(&self) -> &'static str {
+        "CMSG_SET_ACTIVE_VOICE_CHANNEL"
+    }
+
+    #[cfg(feature = "print-testcase")]
     fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;

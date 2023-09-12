@@ -28,6 +28,11 @@ impl CMSG_QUERY_TIME {
 impl crate::Message for CMSG_QUERY_TIME {
     const OPCODE: u32 = 0x01ce;
 
+    #[cfg(feature = "print-testcase")]
+    fn message_name(&self) -> &'static str {
+        "CMSG_QUERY_TIME"
+    }
+
     fn size_without_header(&self) -> u32 {
         0
     }

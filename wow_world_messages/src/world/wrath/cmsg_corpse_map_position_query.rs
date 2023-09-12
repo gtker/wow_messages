@@ -32,6 +32,11 @@ impl crate::Message for CMSG_CORPSE_MAP_POSITION_QUERY {
     const OPCODE: u32 = 0x04b6;
 
     #[cfg(feature = "print-testcase")]
+    fn message_name(&self) -> &'static str {
+        "CMSG_CORPSE_MAP_POSITION_QUERY"
+    }
+
+    #[cfg(feature = "print-testcase")]
     fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;

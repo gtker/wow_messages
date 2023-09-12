@@ -11,7 +11,8 @@ use crate::rust_printer::structs::print_common_impls::print_update_mask_struct::
 use crate::rust_printer::structs::test_case_string::print_to_testcase;
 use crate::rust_printer::writer::Writer;
 use crate::rust_printer::{
-    ImplType, CLIENT_MESSAGE_TRAIT_NAME, PARSE_ERROR, PARSE_ERROR_KIND, SERVER_MESSAGE_TRAIT_NAME,
+    ImplType, CFG_TESTCASE, CLIENT_MESSAGE_TRAIT_NAME, PARSE_ERROR, PARSE_ERROR_KIND,
+    SERVER_MESSAGE_TRAIT_NAME,
 };
 
 pub mod print_read;
@@ -396,6 +397,11 @@ pub(crate) fn impl_world_message(s: &mut Writer, e: &Container, o: &Objects, opc
     s.impl_for("crate::Message", type_name, |s| {
         s.wln(format!("const OPCODE: u32 = {opcode:#06x};"));
         s.newline();
+
+        s.wln(CFG_TESTCASE);
+        s.bodyn("fn message_name(&self) -> &'static str", |s| {
+            s.wln(format!("\"{}\"", e.name()));
+        });
 
         print_to_testcase(s, e, e.should_print_test_case_string(o));
 

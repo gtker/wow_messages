@@ -51,6 +51,11 @@ impl crate::Message for SMSG_LOGIN_VERIFY_WORLD {
     const OPCODE: u32 = 0x0236;
 
     #[cfg(feature = "print-testcase")]
+    fn message_name(&self) -> &'static str {
+        "SMSG_LOGIN_VERIFY_WORLD"
+    }
+
+    #[cfg(feature = "print-testcase")]
     fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;

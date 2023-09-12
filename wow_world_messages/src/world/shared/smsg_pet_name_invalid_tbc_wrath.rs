@@ -73,6 +73,11 @@ impl crate::Message for SMSG_PET_NAME_INVALID {
     const OPCODE: u32 = 0x0178;
 
     #[cfg(feature = "print-testcase")]
+    fn message_name(&self) -> &'static str {
+        "SMSG_PET_NAME_INVALID"
+    }
+
+    #[cfg(feature = "print-testcase")]
     fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;

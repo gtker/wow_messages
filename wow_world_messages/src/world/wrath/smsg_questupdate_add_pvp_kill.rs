@@ -44,6 +44,11 @@ impl crate::Message for SMSG_QUESTUPDATE_ADD_PVP_KILL {
     const OPCODE: u32 = 0x046f;
 
     #[cfg(feature = "print-testcase")]
+    fn message_name(&self) -> &'static str {
+        "SMSG_QUESTUPDATE_ADD_PVP_KILL"
+    }
+
+    #[cfg(feature = "print-testcase")]
     fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;

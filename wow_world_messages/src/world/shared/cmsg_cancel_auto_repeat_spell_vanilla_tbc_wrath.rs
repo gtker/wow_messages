@@ -26,6 +26,11 @@ impl crate::Message for CMSG_CANCEL_AUTO_REPEAT_SPELL {
     const OPCODE: u32 = 0x026d;
 
     #[cfg(feature = "print-testcase")]
+    fn message_name(&self) -> &'static str {
+        "CMSG_CANCEL_AUTO_REPEAT_SPELL"
+    }
+
+    #[cfg(feature = "print-testcase")]
     fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;

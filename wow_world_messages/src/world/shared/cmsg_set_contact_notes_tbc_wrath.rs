@@ -43,6 +43,11 @@ impl crate::Message for CMSG_SET_CONTACT_NOTES {
     const OPCODE: u32 = 0x006b;
 
     #[cfg(feature = "print-testcase")]
+    fn message_name(&self) -> &'static str {
+        "CMSG_SET_CONTACT_NOTES"
+    }
+
+    #[cfg(feature = "print-testcase")]
     fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;

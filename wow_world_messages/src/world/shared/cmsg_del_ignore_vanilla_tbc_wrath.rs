@@ -34,6 +34,11 @@ impl crate::Message for CMSG_DEL_IGNORE {
     const OPCODE: u32 = 0x006d;
 
     #[cfg(feature = "print-testcase")]
+    fn message_name(&self) -> &'static str {
+        "CMSG_DEL_IGNORE"
+    }
+
+    #[cfg(feature = "print-testcase")]
     fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;

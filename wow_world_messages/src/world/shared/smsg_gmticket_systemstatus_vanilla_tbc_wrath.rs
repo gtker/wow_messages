@@ -35,6 +35,11 @@ impl crate::Message for SMSG_GMTICKET_SYSTEMSTATUS {
     const OPCODE: u32 = 0x021b;
 
     #[cfg(feature = "print-testcase")]
+    fn message_name(&self) -> &'static str {
+        "SMSG_GMTICKET_SYSTEMSTATUS"
+    }
+
+    #[cfg(feature = "print-testcase")]
     fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;

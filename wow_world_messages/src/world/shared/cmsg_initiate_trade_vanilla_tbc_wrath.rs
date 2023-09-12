@@ -33,6 +33,11 @@ impl CMSG_INITIATE_TRADE {
 impl crate::Message for CMSG_INITIATE_TRADE {
     const OPCODE: u32 = 0x0116;
 
+    #[cfg(feature = "print-testcase")]
+    fn message_name(&self) -> &'static str {
+        "CMSG_INITIATE_TRADE"
+    }
+
     fn size_without_header(&self) -> u32 {
         8
     }

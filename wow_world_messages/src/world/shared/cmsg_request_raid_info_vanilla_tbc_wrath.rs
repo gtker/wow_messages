@@ -26,6 +26,11 @@ impl CMSG_REQUEST_RAID_INFO {
 impl crate::Message for CMSG_REQUEST_RAID_INFO {
     const OPCODE: u32 = 0x02cd;
 
+    #[cfg(feature = "print-testcase")]
+    fn message_name(&self) -> &'static str {
+        "CMSG_REQUEST_RAID_INFO"
+    }
+
     fn size_without_header(&self) -> u32 {
         0
     }

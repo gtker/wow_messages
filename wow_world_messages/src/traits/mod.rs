@@ -23,6 +23,9 @@ pub trait Message: Sized + private::Sealed {
         None
     }
 
+    #[cfg(feature = "print-testcase")]
+    fn message_name(&self) -> &'static str;
+
     fn size_without_header(&self) -> u32;
 
     fn write_into_vec(&self, w: impl std::io::Write) -> Result<(), std::io::Error>;

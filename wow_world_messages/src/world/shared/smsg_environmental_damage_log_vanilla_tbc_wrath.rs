@@ -59,6 +59,11 @@ impl crate::Message for SMSG_ENVIRONMENTAL_DAMAGE_LOG {
     const OPCODE: u32 = 0x01fc;
 
     #[cfg(feature = "print-testcase")]
+    fn message_name(&self) -> &'static str {
+        "SMSG_ENVIRONMENTAL_DAMAGE_LOG"
+    }
+
+    #[cfg(feature = "print-testcase")]
     fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;

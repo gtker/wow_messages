@@ -39,6 +39,11 @@ impl CMSG_CAST_SPELL {
 impl crate::Message for CMSG_CAST_SPELL {
     const OPCODE: u32 = 0x012e;
 
+    #[cfg(feature = "print-testcase")]
+    fn message_name(&self) -> &'static str {
+        "CMSG_CAST_SPELL"
+    }
+
     fn size_without_header(&self) -> u32 {
         self.size() as u32
     }

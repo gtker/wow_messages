@@ -36,6 +36,11 @@ impl SMSG_DESTROY_OBJECT {
 impl crate::Message for SMSG_DESTROY_OBJECT {
     const OPCODE: u32 = 0x00aa;
 
+    #[cfg(feature = "print-testcase")]
+    fn message_name(&self) -> &'static str {
+        "SMSG_DESTROY_OBJECT"
+    }
+
     fn size_without_header(&self) -> u32 {
         8
     }

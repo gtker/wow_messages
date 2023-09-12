@@ -43,6 +43,11 @@ impl crate::Message for MSG_MOVE_STOP_ASCEND_Server {
     const OPCODE: u32 = 0x035a;
 
     #[cfg(feature = "print-testcase")]
+    fn message_name(&self) -> &'static str {
+        "MSG_MOVE_STOP_ASCEND_Server"
+    }
+
+    #[cfg(feature = "print-testcase")]
     fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;

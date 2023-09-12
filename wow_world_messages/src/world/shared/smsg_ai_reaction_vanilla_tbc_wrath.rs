@@ -41,6 +41,11 @@ impl crate::Message for SMSG_AI_REACTION {
     const OPCODE: u32 = 0x013c;
 
     #[cfg(feature = "print-testcase")]
+    fn message_name(&self) -> &'static str {
+        "SMSG_AI_REACTION"
+    }
+
+    #[cfg(feature = "print-testcase")]
     fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;

@@ -34,6 +34,11 @@ impl crate::Message for SMSG_SPLINE_MOVE_ROOT {
     const OPCODE: u32 = 0x031a;
 
     #[cfg(feature = "print-testcase")]
+    fn message_name(&self) -> &'static str {
+        "SMSG_SPLINE_MOVE_ROOT"
+    }
+
+    #[cfg(feature = "print-testcase")]
     fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;

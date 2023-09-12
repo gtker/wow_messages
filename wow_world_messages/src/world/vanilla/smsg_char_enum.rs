@@ -44,6 +44,11 @@ impl SMSG_CHAR_ENUM {
 impl crate::Message for SMSG_CHAR_ENUM {
     const OPCODE: u32 = 0x003b;
 
+    #[cfg(feature = "print-testcase")]
+    fn message_name(&self) -> &'static str {
+        "SMSG_CHAR_ENUM"
+    }
+
     fn size_without_header(&self) -> u32 {
         self.size() as u32
     }

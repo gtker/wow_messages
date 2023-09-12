@@ -37,6 +37,11 @@ impl crate::Message for MSG_MOVE_FALL_LAND_Client {
     const OPCODE: u32 = 0x00c9;
 
     #[cfg(feature = "print-testcase")]
+    fn message_name(&self) -> &'static str {
+        "MSG_MOVE_FALL_LAND_Client"
+    }
+
+    #[cfg(feature = "print-testcase")]
     fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;

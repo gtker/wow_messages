@@ -37,6 +37,11 @@ impl CMSG_AUTOEQUIP_ITEM {
 impl crate::Message for CMSG_AUTOEQUIP_ITEM {
     const OPCODE: u32 = 0x010a;
 
+    #[cfg(feature = "print-testcase")]
+    fn message_name(&self) -> &'static str {
+        "CMSG_AUTOEQUIP_ITEM"
+    }
+
     fn size_without_header(&self) -> u32 {
         2
     }

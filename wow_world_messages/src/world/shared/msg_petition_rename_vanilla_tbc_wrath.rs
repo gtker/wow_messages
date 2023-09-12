@@ -43,6 +43,11 @@ impl crate::Message for MSG_PETITION_RENAME {
     const OPCODE: u32 = 0x02c1;
 
     #[cfg(feature = "print-testcase")]
+    fn message_name(&self) -> &'static str {
+        "MSG_PETITION_RENAME"
+    }
+
+    #[cfg(feature = "print-testcase")]
     fn to_test_case_string(&self) -> Option<String> {
         panic!("MSG types not supported");
     }

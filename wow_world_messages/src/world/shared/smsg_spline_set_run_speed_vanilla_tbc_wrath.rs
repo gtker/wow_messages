@@ -41,6 +41,11 @@ impl SMSG_SPLINE_SET_RUN_SPEED {
 impl crate::Message for SMSG_SPLINE_SET_RUN_SPEED {
     const OPCODE: u32 = 0x02fe;
 
+    #[cfg(feature = "print-testcase")]
+    fn message_name(&self) -> &'static str {
+        "SMSG_SPLINE_SET_RUN_SPEED"
+    }
+
     fn size_without_header(&self) -> u32 {
         self.size() as u32
     }

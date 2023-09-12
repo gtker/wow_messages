@@ -64,6 +64,11 @@ impl crate::Message for CMSG_GOSSIP_SELECT_OPTION {
     const OPCODE: u32 = 0x017c;
 
     #[cfg(feature = "print-testcase")]
+    fn message_name(&self) -> &'static str {
+        "CMSG_GOSSIP_SELECT_OPTION"
+    }
+
+    #[cfg(feature = "print-testcase")]
     fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;

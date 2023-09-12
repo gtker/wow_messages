@@ -30,6 +30,11 @@ impl SMSG_LOGOUT_COMPLETE {
 impl crate::Message for SMSG_LOGOUT_COMPLETE {
     const OPCODE: u32 = 0x004d;
 
+    #[cfg(feature = "print-testcase")]
+    fn message_name(&self) -> &'static str {
+        "SMSG_LOGOUT_COMPLETE"
+    }
+
     fn size_without_header(&self) -> u32 {
         0
     }

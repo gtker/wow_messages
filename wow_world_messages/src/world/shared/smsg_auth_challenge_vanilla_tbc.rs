@@ -35,6 +35,11 @@ impl SMSG_AUTH_CHALLENGE {
 impl crate::Message for SMSG_AUTH_CHALLENGE {
     const OPCODE: u32 = 0x01ec;
 
+    #[cfg(feature = "print-testcase")]
+    fn message_name(&self) -> &'static str {
+        "SMSG_AUTH_CHALLENGE"
+    }
+
     fn size_without_header(&self) -> u32 {
         4
     }

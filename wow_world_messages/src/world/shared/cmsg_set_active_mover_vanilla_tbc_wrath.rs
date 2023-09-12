@@ -34,6 +34,11 @@ impl CMSG_SET_ACTIVE_MOVER {
 impl crate::Message for CMSG_SET_ACTIVE_MOVER {
     const OPCODE: u32 = 0x026a;
 
+    #[cfg(feature = "print-testcase")]
+    fn message_name(&self) -> &'static str {
+        "CMSG_SET_ACTIVE_MOVER"
+    }
+
     fn size_without_header(&self) -> u32 {
         8
     }

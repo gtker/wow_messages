@@ -39,6 +39,11 @@ impl CMSG_MOVE_TIME_SKIPPED {
 impl crate::Message for CMSG_MOVE_TIME_SKIPPED {
     const OPCODE: u32 = 0x02ce;
 
+    #[cfg(feature = "print-testcase")]
+    fn message_name(&self) -> &'static str {
+        "CMSG_MOVE_TIME_SKIPPED"
+    }
+
     fn size_without_header(&self) -> u32 {
         12
     }

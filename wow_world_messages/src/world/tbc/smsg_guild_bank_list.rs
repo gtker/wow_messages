@@ -95,6 +95,11 @@ impl crate::Message for SMSG_GUILD_BANK_LIST {
     const OPCODE: u32 = 0x03e7;
 
     #[cfg(feature = "print-testcase")]
+    fn message_name(&self) -> &'static str {
+        "SMSG_GUILD_BANK_LIST"
+    }
+
+    #[cfg(feature = "print-testcase")]
     fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;

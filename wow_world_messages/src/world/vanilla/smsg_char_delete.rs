@@ -36,6 +36,11 @@ impl SMSG_CHAR_DELETE {
 impl crate::Message for SMSG_CHAR_DELETE {
     const OPCODE: u32 = 0x003c;
 
+    #[cfg(feature = "print-testcase")]
+    fn message_name(&self) -> &'static str {
+        "SMSG_CHAR_DELETE"
+    }
+
     fn size_without_header(&self) -> u32 {
         1
     }

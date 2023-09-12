@@ -42,6 +42,11 @@ impl crate::Message for SMSG_QUERY_TIME_RESPONSE {
     const OPCODE: u32 = 0x01cf;
 
     #[cfg(feature = "print-testcase")]
+    fn message_name(&self) -> &'static str {
+        "SMSG_QUERY_TIME_RESPONSE"
+    }
+
+    #[cfg(feature = "print-testcase")]
     fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;

@@ -40,6 +40,11 @@ impl MSG_MOVE_FALL_LAND_Server {
 impl crate::Message for MSG_MOVE_FALL_LAND_Server {
     const OPCODE: u32 = 0x00c9;
 
+    #[cfg(feature = "print-testcase")]
+    fn message_name(&self) -> &'static str {
+        "MSG_MOVE_FALL_LAND_Server"
+    }
+
     fn size_without_header(&self) -> u32 {
         self.size() as u32
     }

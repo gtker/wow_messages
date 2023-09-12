@@ -34,6 +34,11 @@ impl crate::Message for SMSG_UPDATE_LAST_INSTANCE {
     const OPCODE: u32 = 0x0320;
 
     #[cfg(feature = "print-testcase")]
+    fn message_name(&self) -> &'static str {
+        "SMSG_UPDATE_LAST_INSTANCE"
+    }
+
+    #[cfg(feature = "print-testcase")]
     fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;

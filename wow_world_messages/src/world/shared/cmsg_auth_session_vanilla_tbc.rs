@@ -94,6 +94,11 @@ impl CMSG_AUTH_SESSION {
 impl crate::Message for CMSG_AUTH_SESSION {
     const OPCODE: u32 = 0x01ed;
 
+    #[cfg(feature = "print-testcase")]
+    fn message_name(&self) -> &'static str {
+        "CMSG_AUTH_SESSION"
+    }
+
     fn size_without_header(&self) -> u32 {
         self.size() as u32
     }

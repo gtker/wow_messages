@@ -67,6 +67,11 @@ impl crate::Message for SMSG_LOG_XPGAIN {
     const OPCODE: u32 = 0x01d0;
 
     #[cfg(feature = "print-testcase")]
+    fn message_name(&self) -> &'static str {
+        "SMSG_LOG_XPGAIN"
+    }
+
+    #[cfg(feature = "print-testcase")]
     fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;

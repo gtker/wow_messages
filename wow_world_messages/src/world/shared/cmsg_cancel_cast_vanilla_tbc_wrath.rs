@@ -31,6 +31,11 @@ impl CMSG_CANCEL_CAST {
 impl crate::Message for CMSG_CANCEL_CAST {
     const OPCODE: u32 = 0x012f;
 
+    #[cfg(feature = "print-testcase")]
+    fn message_name(&self) -> &'static str {
+        "CMSG_CANCEL_CAST"
+    }
+
     fn size_without_header(&self) -> u32 {
         4
     }

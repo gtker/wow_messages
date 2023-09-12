@@ -40,6 +40,11 @@ impl MSG_MOVE_START_TURN_RIGHT_Server {
 impl crate::Message for MSG_MOVE_START_TURN_RIGHT_Server {
     const OPCODE: u32 = 0x00bd;
 
+    #[cfg(feature = "print-testcase")]
+    fn message_name(&self) -> &'static str {
+        "MSG_MOVE_START_TURN_RIGHT_Server"
+    }
+
     fn size_without_header(&self) -> u32 {
         self.size() as u32
     }

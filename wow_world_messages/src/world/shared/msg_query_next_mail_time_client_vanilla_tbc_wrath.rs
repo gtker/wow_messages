@@ -26,6 +26,11 @@ impl MSG_QUERY_NEXT_MAIL_TIME_Client {
 impl crate::Message for MSG_QUERY_NEXT_MAIL_TIME_Client {
     const OPCODE: u32 = 0x0284;
 
+    #[cfg(feature = "print-testcase")]
+    fn message_name(&self) -> &'static str {
+        "MSG_QUERY_NEXT_MAIL_TIME_Client"
+    }
+
     fn size_without_header(&self) -> u32 {
         0
     }

@@ -50,6 +50,11 @@ impl SMSG_FORCE_RUN_SPEED_CHANGE {
 impl crate::Message for SMSG_FORCE_RUN_SPEED_CHANGE {
     const OPCODE: u32 = 0x00e2;
 
+    #[cfg(feature = "print-testcase")]
+    fn message_name(&self) -> &'static str {
+        "SMSG_FORCE_RUN_SPEED_CHANGE"
+    }
+
     fn size_without_header(&self) -> u32 {
         self.size() as u32
     }

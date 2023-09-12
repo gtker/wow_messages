@@ -34,6 +34,11 @@ impl crate::Message for CMSG_REPORT_PVP_AFK {
     const OPCODE: u32 = 0x03e3;
 
     #[cfg(feature = "print-testcase")]
+    fn message_name(&self) -> &'static str {
+        "CMSG_REPORT_PVP_AFK"
+    }
+
+    #[cfg(feature = "print-testcase")]
     fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;

@@ -35,6 +35,11 @@ impl crate::Message for CMSG_GET_CHANNEL_MEMBER_COUNT {
     const OPCODE: u32 = 0x03d4;
 
     #[cfg(feature = "print-testcase")]
+    fn message_name(&self) -> &'static str {
+        "CMSG_GET_CHANNEL_MEMBER_COUNT"
+    }
+
+    #[cfg(feature = "print-testcase")]
     fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;

@@ -45,6 +45,11 @@ impl crate::Message for SMSG_INITIALIZE_FACTIONS {
     const OPCODE: u32 = 0x0122;
 
     #[cfg(feature = "print-testcase")]
+    fn message_name(&self) -> &'static str {
+        "SMSG_INITIALIZE_FACTIONS"
+    }
+
+    #[cfg(feature = "print-testcase")]
     fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;

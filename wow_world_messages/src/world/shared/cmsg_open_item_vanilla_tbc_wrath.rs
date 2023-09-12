@@ -38,6 +38,11 @@ impl crate::Message for CMSG_OPEN_ITEM {
     const OPCODE: u32 = 0x00ac;
 
     #[cfg(feature = "print-testcase")]
+    fn message_name(&self) -> &'static str {
+        "CMSG_OPEN_ITEM"
+    }
+
+    #[cfg(feature = "print-testcase")]
     fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;

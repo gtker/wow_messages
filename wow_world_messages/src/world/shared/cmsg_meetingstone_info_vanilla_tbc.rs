@@ -26,6 +26,11 @@ impl CMSG_MEETINGSTONE_INFO {
 impl crate::Message for CMSG_MEETINGSTONE_INFO {
     const OPCODE: u32 = 0x0296;
 
+    #[cfg(feature = "print-testcase")]
+    fn message_name(&self) -> &'static str {
+        "CMSG_MEETINGSTONE_INFO"
+    }
+
     fn size_without_header(&self) -> u32 {
         0
     }

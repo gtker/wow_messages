@@ -43,6 +43,11 @@ impl CMSG_CHAR_RENAME {
 impl crate::Message for CMSG_CHAR_RENAME {
     const OPCODE: u32 = 0x02c7;
 
+    #[cfg(feature = "print-testcase")]
+    fn message_name(&self) -> &'static str {
+        "CMSG_CHAR_RENAME"
+    }
+
     fn size_without_header(&self) -> u32 {
         self.size() as u32
     }

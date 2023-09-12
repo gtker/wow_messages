@@ -62,6 +62,11 @@ impl crate::Message for CMSG_DESTROYITEM {
     const OPCODE: u32 = 0x0111;
 
     #[cfg(feature = "print-testcase")]
+    fn message_name(&self) -> &'static str {
+        "CMSG_DESTROYITEM"
+    }
+
+    #[cfg(feature = "print-testcase")]
     fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;

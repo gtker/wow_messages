@@ -46,6 +46,11 @@ impl crate::Message for CMSG_PET_LEARN_TALENT {
     const OPCODE: u32 = 0x047a;
 
     #[cfg(feature = "print-testcase")]
+    fn message_name(&self) -> &'static str {
+        "CMSG_PET_LEARN_TALENT"
+    }
+
+    #[cfg(feature = "print-testcase")]
     fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;

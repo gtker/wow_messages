@@ -34,6 +34,11 @@ impl crate::Message for SMSG_CANCEL_AUTO_REPEAT {
     const OPCODE: u32 = 0x029c;
 
     #[cfg(feature = "print-testcase")]
+    fn message_name(&self) -> &'static str {
+        "SMSG_CANCEL_AUTO_REPEAT"
+    }
+
+    #[cfg(feature = "print-testcase")]
     fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;

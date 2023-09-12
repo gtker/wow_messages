@@ -40,6 +40,11 @@ impl crate::Message for SMSG_MOVE_LAND_WALK {
     const OPCODE: u32 = 0x00df;
 
     #[cfg(feature = "print-testcase")]
+    fn message_name(&self) -> &'static str {
+        "SMSG_MOVE_LAND_WALK"
+    }
+
+    #[cfg(feature = "print-testcase")]
     fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;

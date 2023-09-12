@@ -106,6 +106,11 @@ impl CMSG_CHAR_CREATE {
 impl crate::Message for CMSG_CHAR_CREATE {
     const OPCODE: u32 = 0x0036;
 
+    #[cfg(feature = "print-testcase")]
+    fn message_name(&self) -> &'static str {
+        "CMSG_CHAR_CREATE"
+    }
+
     fn size_without_header(&self) -> u32 {
         self.size() as u32
     }

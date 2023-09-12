@@ -34,6 +34,11 @@ impl crate::Message for MSG_PETITION_DECLINE {
     const OPCODE: u32 = 0x01c2;
 
     #[cfg(feature = "print-testcase")]
+    fn message_name(&self) -> &'static str {
+        "MSG_PETITION_DECLINE"
+    }
+
+    #[cfg(feature = "print-testcase")]
     fn to_test_case_string(&self) -> Option<String> {
         panic!("MSG types not supported");
     }

@@ -31,6 +31,11 @@ impl SMSG_PONG {
 impl crate::Message for SMSG_PONG {
     const OPCODE: u32 = 0x01dd;
 
+    #[cfg(feature = "print-testcase")]
+    fn message_name(&self) -> &'static str {
+        "SMSG_PONG"
+    }
+
     fn size_without_header(&self) -> u32 {
         4
     }

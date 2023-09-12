@@ -27,6 +27,11 @@ impl crate::Message for CMSG_CALENDAR_GET_NUM_PENDING {
     const OPCODE: u32 = 0x0447;
 
     #[cfg(feature = "print-testcase")]
+    fn message_name(&self) -> &'static str {
+        "CMSG_CALENDAR_GET_NUM_PENDING"
+    }
+
+    #[cfg(feature = "print-testcase")]
     fn to_test_case_string(&self) -> Option<String> {
         panic!("MSG types not supported");
     }

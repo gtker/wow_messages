@@ -40,6 +40,11 @@ impl crate::Message for CMSG_PET_CANCEL_AURA {
     const OPCODE: u32 = 0x026b;
 
     #[cfg(feature = "print-testcase")]
+    fn message_name(&self) -> &'static str {
+        "CMSG_PET_CANCEL_AURA"
+    }
+
+    #[cfg(feature = "print-testcase")]
     fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;

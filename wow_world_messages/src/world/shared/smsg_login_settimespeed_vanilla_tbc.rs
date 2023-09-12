@@ -49,6 +49,11 @@ impl SMSG_LOGIN_SETTIMESPEED {
 impl crate::Message for SMSG_LOGIN_SETTIMESPEED {
     const OPCODE: u32 = 0x0042;
 
+    #[cfg(feature = "print-testcase")]
+    fn message_name(&self) -> &'static str {
+        "SMSG_LOGIN_SETTIMESPEED"
+    }
+
     fn size_without_header(&self) -> u32 {
         8
     }

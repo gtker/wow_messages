@@ -39,6 +39,11 @@ impl CMSG_PET_NAME_QUERY {
 impl crate::Message for CMSG_PET_NAME_QUERY {
     const OPCODE: u32 = 0x0052;
 
+    #[cfg(feature = "print-testcase")]
+    fn message_name(&self) -> &'static str {
+        "CMSG_PET_NAME_QUERY"
+    }
+
     fn size_without_header(&self) -> u32 {
         12
     }

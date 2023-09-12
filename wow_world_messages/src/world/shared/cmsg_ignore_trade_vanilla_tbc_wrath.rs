@@ -26,6 +26,11 @@ impl crate::Message for CMSG_IGNORE_TRADE {
     const OPCODE: u32 = 0x0119;
 
     #[cfg(feature = "print-testcase")]
+    fn message_name(&self) -> &'static str {
+        "CMSG_IGNORE_TRADE"
+    }
+
+    #[cfg(feature = "print-testcase")]
     fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;

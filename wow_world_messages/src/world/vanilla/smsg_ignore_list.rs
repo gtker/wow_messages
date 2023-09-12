@@ -41,6 +41,11 @@ impl SMSG_IGNORE_LIST {
 impl crate::Message for SMSG_IGNORE_LIST {
     const OPCODE: u32 = 0x006b;
 
+    #[cfg(feature = "print-testcase")]
+    fn message_name(&self) -> &'static str {
+        "SMSG_IGNORE_LIST"
+    }
+
     fn size_without_header(&self) -> u32 {
         self.size() as u32
     }

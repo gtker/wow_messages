@@ -34,6 +34,11 @@ impl SMSG_QUERY_TIME_RESPONSE {
 impl crate::Message for SMSG_QUERY_TIME_RESPONSE {
     const OPCODE: u32 = 0x01cf;
 
+    #[cfg(feature = "print-testcase")]
+    fn message_name(&self) -> &'static str {
+        "SMSG_QUERY_TIME_RESPONSE"
+    }
+
     fn size_without_header(&self) -> u32 {
         4
     }

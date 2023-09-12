@@ -36,6 +36,11 @@ impl CMSG_ZONEUPDATE {
 impl crate::Message for CMSG_ZONEUPDATE {
     const OPCODE: u32 = 0x01f4;
 
+    #[cfg(feature = "print-testcase")]
+    fn message_name(&self) -> &'static str {
+        "CMSG_ZONEUPDATE"
+    }
+
     fn size_without_header(&self) -> u32 {
         4
     }

@@ -52,6 +52,11 @@ impl crate::Message for SMSG_MULTIPLE_MOVES {
     const OPCODE: u32 = 0x051e;
 
     #[cfg(feature = "print-testcase")]
+    fn message_name(&self) -> &'static str {
+        "SMSG_MULTIPLE_MOVES"
+    }
+
+    #[cfg(feature = "print-testcase")]
     fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;

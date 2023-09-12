@@ -36,6 +36,11 @@ impl SMSG_CHAR_CREATE {
 impl crate::Message for SMSG_CHAR_CREATE {
     const OPCODE: u32 = 0x003a;
 
+    #[cfg(feature = "print-testcase")]
+    fn message_name(&self) -> &'static str {
+        "SMSG_CHAR_CREATE"
+    }
+
     fn size_without_header(&self) -> u32 {
         1
     }

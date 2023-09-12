@@ -47,6 +47,11 @@ impl crate::Message for MSG_PARTY_ASSIGNMENT_Client {
     const OPCODE: u32 = 0x038e;
 
     #[cfg(feature = "print-testcase")]
+    fn message_name(&self) -> &'static str {
+        "MSG_PARTY_ASSIGNMENT_Client"
+    }
+
+    #[cfg(feature = "print-testcase")]
     fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;

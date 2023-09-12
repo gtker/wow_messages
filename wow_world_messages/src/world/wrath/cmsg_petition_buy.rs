@@ -156,6 +156,11 @@ impl crate::Message for CMSG_PETITION_BUY {
     const OPCODE: u32 = 0x01bd;
 
     #[cfg(feature = "print-testcase")]
+    fn message_name(&self) -> &'static str {
+        "CMSG_PETITION_BUY"
+    }
+
+    #[cfg(feature = "print-testcase")]
     fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;

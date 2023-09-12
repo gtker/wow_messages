@@ -41,6 +41,11 @@ impl crate::Message for SMSG_PLAY_OBJECT_SOUND {
     const OPCODE: u32 = 0x0278;
 
     #[cfg(feature = "print-testcase")]
+    fn message_name(&self) -> &'static str {
+        "SMSG_PLAY_OBJECT_SOUND"
+    }
+
+    #[cfg(feature = "print-testcase")]
     fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;

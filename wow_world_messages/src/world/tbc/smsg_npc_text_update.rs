@@ -48,6 +48,11 @@ impl crate::Message for SMSG_NPC_TEXT_UPDATE {
     const OPCODE: u32 = 0x0180;
 
     #[cfg(feature = "print-testcase")]
+    fn message_name(&self) -> &'static str {
+        "SMSG_NPC_TEXT_UPDATE"
+    }
+
+    #[cfg(feature = "print-testcase")]
     fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;

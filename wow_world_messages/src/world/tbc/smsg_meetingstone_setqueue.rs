@@ -42,6 +42,11 @@ impl crate::Message for SMSG_MEETINGSTONE_SETQUEUE {
     const OPCODE: u32 = 0x0295;
 
     #[cfg(feature = "print-testcase")]
+    fn message_name(&self) -> &'static str {
+        "SMSG_MEETINGSTONE_SETQUEUE"
+    }
+
+    #[cfg(feature = "print-testcase")]
     fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;

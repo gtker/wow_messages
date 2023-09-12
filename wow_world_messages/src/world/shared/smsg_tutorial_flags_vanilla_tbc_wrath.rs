@@ -41,6 +41,11 @@ impl SMSG_TUTORIAL_FLAGS {
 impl crate::Message for SMSG_TUTORIAL_FLAGS {
     const OPCODE: u32 = 0x00fd;
 
+    #[cfg(feature = "print-testcase")]
+    fn message_name(&self) -> &'static str {
+        "SMSG_TUTORIAL_FLAGS"
+    }
+
     fn size_without_header(&self) -> u32 {
         32
     }

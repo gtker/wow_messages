@@ -32,6 +32,11 @@ impl crate::Message for CMSG_ARENA_TEAM_DISBAND {
     const OPCODE: u32 = 0x0355;
 
     #[cfg(feature = "print-testcase")]
+    fn message_name(&self) -> &'static str {
+        "CMSG_ARENA_TEAM_DISBAND"
+    }
+
+    #[cfg(feature = "print-testcase")]
     fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;

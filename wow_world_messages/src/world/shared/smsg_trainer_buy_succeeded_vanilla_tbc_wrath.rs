@@ -40,6 +40,11 @@ impl crate::Message for SMSG_TRAINER_BUY_SUCCEEDED {
     const OPCODE: u32 = 0x01b3;
 
     #[cfg(feature = "print-testcase")]
+    fn message_name(&self) -> &'static str {
+        "SMSG_TRAINER_BUY_SUCCEEDED"
+    }
+
+    #[cfg(feature = "print-testcase")]
     fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;

@@ -55,6 +55,11 @@ impl CMSG_WORLD_TELEPORT {
 impl crate::Message for CMSG_WORLD_TELEPORT {
     const OPCODE: u32 = 0x0008;
 
+    #[cfg(feature = "print-testcase")]
+    fn message_name(&self) -> &'static str {
+        "CMSG_WORLD_TELEPORT"
+    }
+
     fn size_without_header(&self) -> u32 {
         24
     }

@@ -438,6 +438,11 @@ impl SMSG_MESSAGECHAT {
 impl crate::Message for SMSG_MESSAGECHAT {
     const OPCODE: u32 = 0x0096;
 
+    #[cfg(feature = "print-testcase")]
+    fn message_name(&self) -> &'static str {
+        "SMSG_MESSAGECHAT"
+    }
+
     fn size_without_header(&self) -> u32 {
         self.size() as u32
     }

@@ -50,6 +50,11 @@ impl SMSG_LOGIN_VERIFY_WORLD {
 impl crate::Message for SMSG_LOGIN_VERIFY_WORLD {
     const OPCODE: u32 = 0x0236;
 
+    #[cfg(feature = "print-testcase")]
+    fn message_name(&self) -> &'static str {
+        "SMSG_LOGIN_VERIFY_WORLD"
+    }
+
     fn size_without_header(&self) -> u32 {
         20
     }

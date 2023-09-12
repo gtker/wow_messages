@@ -46,6 +46,11 @@ impl crate::Message for SMSG_INSTANCE_LOCK_WARNING_QUERY {
     const OPCODE: u32 = 0x0147;
 
     #[cfg(feature = "print-testcase")]
+    fn message_name(&self) -> &'static str {
+        "SMSG_INSTANCE_LOCK_WARNING_QUERY"
+    }
+
+    #[cfg(feature = "print-testcase")]
     fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;

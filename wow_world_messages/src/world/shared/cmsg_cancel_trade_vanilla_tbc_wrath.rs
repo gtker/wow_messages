@@ -26,6 +26,11 @@ impl CMSG_CANCEL_TRADE {
 impl crate::Message for CMSG_CANCEL_TRADE {
     const OPCODE: u32 = 0x011c;
 
+    #[cfg(feature = "print-testcase")]
+    fn message_name(&self) -> &'static str {
+        "CMSG_CANCEL_TRADE"
+    }
+
     fn size_without_header(&self) -> u32 {
         0
     }

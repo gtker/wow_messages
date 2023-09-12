@@ -26,6 +26,11 @@ impl CMSG_BATTLEFIELD_STATUS {
 impl crate::Message for CMSG_BATTLEFIELD_STATUS {
     const OPCODE: u32 = 0x02d3;
 
+    #[cfg(feature = "print-testcase")]
+    fn message_name(&self) -> &'static str {
+        "CMSG_BATTLEFIELD_STATUS"
+    }
+
     fn size_without_header(&self) -> u32 {
         0
     }

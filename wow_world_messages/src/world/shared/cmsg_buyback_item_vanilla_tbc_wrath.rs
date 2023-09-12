@@ -41,6 +41,11 @@ impl crate::Message for CMSG_BUYBACK_ITEM {
     const OPCODE: u32 = 0x0290;
 
     #[cfg(feature = "print-testcase")]
+    fn message_name(&self) -> &'static str {
+        "CMSG_BUYBACK_ITEM"
+    }
+
+    #[cfg(feature = "print-testcase")]
     fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;

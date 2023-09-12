@@ -26,6 +26,11 @@ impl CMSG_GMTICKET_GETTICKET {
 impl crate::Message for CMSG_GMTICKET_GETTICKET {
     const OPCODE: u32 = 0x0211;
 
+    #[cfg(feature = "print-testcase")]
+    fn message_name(&self) -> &'static str {
+        "CMSG_GMTICKET_GETTICKET"
+    }
+
     fn size_without_header(&self) -> u32 {
         0
     }

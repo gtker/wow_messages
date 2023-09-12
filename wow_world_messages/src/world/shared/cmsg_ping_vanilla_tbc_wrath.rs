@@ -37,6 +37,11 @@ impl CMSG_PING {
 impl crate::Message for CMSG_PING {
     const OPCODE: u32 = 0x01dc;
 
+    #[cfg(feature = "print-testcase")]
+    fn message_name(&self) -> &'static str {
+        "CMSG_PING"
+    }
+
     fn size_without_header(&self) -> u32 {
         8
     }

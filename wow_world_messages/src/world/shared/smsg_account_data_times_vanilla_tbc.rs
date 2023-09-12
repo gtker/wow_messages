@@ -41,6 +41,11 @@ impl SMSG_ACCOUNT_DATA_TIMES {
 impl crate::Message for SMSG_ACCOUNT_DATA_TIMES {
     const OPCODE: u32 = 0x0209;
 
+    #[cfg(feature = "print-testcase")]
+    fn message_name(&self) -> &'static str {
+        "SMSG_ACCOUNT_DATA_TIMES"
+    }
+
     fn size_without_header(&self) -> u32 {
         128
     }

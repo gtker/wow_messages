@@ -51,6 +51,11 @@ impl CMSG_USE_ITEM {
 impl crate::Message for CMSG_USE_ITEM {
     const OPCODE: u32 = 0x00ab;
 
+    #[cfg(feature = "print-testcase")]
+    fn message_name(&self) -> &'static str {
+        "CMSG_USE_ITEM"
+    }
+
     fn size_without_header(&self) -> u32 {
         self.size() as u32
     }

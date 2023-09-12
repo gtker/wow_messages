@@ -56,6 +56,11 @@ impl crate::Message for CMSG_AUCTION_LIST_BIDDER_ITEMS {
     const OPCODE: u32 = 0x0264;
 
     #[cfg(feature = "print-testcase")]
+    fn message_name(&self) -> &'static str {
+        "CMSG_AUCTION_LIST_BIDDER_ITEMS"
+    }
+
+    #[cfg(feature = "print-testcase")]
     fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;

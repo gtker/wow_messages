@@ -39,6 +39,11 @@ impl CMSG_LEARN_TALENT {
 impl crate::Message for CMSG_LEARN_TALENT {
     const OPCODE: u32 = 0x0251;
 
+    #[cfg(feature = "print-testcase")]
+    fn message_name(&self) -> &'static str {
+        "CMSG_LEARN_TALENT"
+    }
+
     fn size_without_header(&self) -> u32 {
         8
     }

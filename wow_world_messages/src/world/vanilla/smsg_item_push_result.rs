@@ -93,6 +93,11 @@ impl SMSG_ITEM_PUSH_RESULT {
 impl crate::Message for SMSG_ITEM_PUSH_RESULT {
     const OPCODE: u32 = 0x0166;
 
+    #[cfg(feature = "print-testcase")]
+    fn message_name(&self) -> &'static str {
+        "SMSG_ITEM_PUSH_RESULT"
+    }
+
     fn size_without_header(&self) -> u32 {
         41
     }

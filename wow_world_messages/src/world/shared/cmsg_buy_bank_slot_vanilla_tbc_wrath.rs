@@ -34,6 +34,11 @@ impl crate::Message for CMSG_BUY_BANK_SLOT {
     const OPCODE: u32 = 0x01b9;
 
     #[cfg(feature = "print-testcase")]
+    fn message_name(&self) -> &'static str {
+        "CMSG_BUY_BANK_SLOT"
+    }
+
+    #[cfg(feature = "print-testcase")]
     fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;

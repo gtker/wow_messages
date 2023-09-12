@@ -32,6 +32,11 @@ impl crate::Message for SMSG_LFG_UPDATE_QUEUED {
     const OPCODE: u32 = 0x036f;
 
     #[cfg(feature = "print-testcase")]
+    fn message_name(&self) -> &'static str {
+        "SMSG_LFG_UPDATE_QUEUED"
+    }
+
+    #[cfg(feature = "print-testcase")]
     fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;

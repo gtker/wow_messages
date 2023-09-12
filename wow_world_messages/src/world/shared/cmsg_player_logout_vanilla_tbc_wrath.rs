@@ -25,6 +25,11 @@ impl CMSG_PLAYER_LOGOUT {
 impl crate::Message for CMSG_PLAYER_LOGOUT {
     const OPCODE: u32 = 0x004a;
 
+    #[cfg(feature = "print-testcase")]
+    fn message_name(&self) -> &'static str {
+        "CMSG_PLAYER_LOGOUT"
+    }
+
     fn size_without_header(&self) -> u32 {
         0
     }

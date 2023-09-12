@@ -46,6 +46,11 @@ impl crate::Message for SMSG_OVERRIDE_LIGHT {
     const OPCODE: u32 = 0x0412;
 
     #[cfg(feature = "print-testcase")]
+    fn message_name(&self) -> &'static str {
+        "SMSG_OVERRIDE_LIGHT"
+    }
+
+    #[cfg(feature = "print-testcase")]
     fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;

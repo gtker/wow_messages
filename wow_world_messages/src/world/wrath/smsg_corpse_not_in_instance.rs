@@ -26,6 +26,11 @@ impl crate::Message for SMSG_CORPSE_NOT_IN_INSTANCE {
     const OPCODE: u32 = 0x0506;
 
     #[cfg(feature = "print-testcase")]
+    fn message_name(&self) -> &'static str {
+        "SMSG_CORPSE_NOT_IN_INSTANCE"
+    }
+
+    #[cfg(feature = "print-testcase")]
     fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;

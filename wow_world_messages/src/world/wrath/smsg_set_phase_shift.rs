@@ -32,6 +32,11 @@ impl crate::Message for SMSG_SET_PHASE_SHIFT {
     const OPCODE: u32 = 0x047c;
 
     #[cfg(feature = "print-testcase")]
+    fn message_name(&self) -> &'static str {
+        "SMSG_SET_PHASE_SHIFT"
+    }
+
+    #[cfg(feature = "print-testcase")]
     fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;

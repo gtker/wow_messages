@@ -32,6 +32,11 @@ impl crate::Message for MSG_GUILD_BANK_MONEY_WITHDRAWN_Server {
     const OPCODE: u32 = 0x03fe;
 
     #[cfg(feature = "print-testcase")]
+    fn message_name(&self) -> &'static str {
+        "MSG_GUILD_BANK_MONEY_WITHDRAWN_Server"
+    }
+
+    #[cfg(feature = "print-testcase")]
     fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;

@@ -34,6 +34,11 @@ impl crate::Message for CMSG_QUESTGIVER_STATUS_QUERY {
     const OPCODE: u32 = 0x0182;
 
     #[cfg(feature = "print-testcase")]
+    fn message_name(&self) -> &'static str {
+        "CMSG_QUESTGIVER_STATUS_QUERY"
+    }
+
+    #[cfg(feature = "print-testcase")]
     fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;

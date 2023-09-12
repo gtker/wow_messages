@@ -26,6 +26,11 @@ impl crate::Message for SMSG_LOOT_CLEAR_MONEY {
     const OPCODE: u32 = 0x0165;
 
     #[cfg(feature = "print-testcase")]
+    fn message_name(&self) -> &'static str {
+        "SMSG_LOOT_CLEAR_MONEY"
+    }
+
+    #[cfg(feature = "print-testcase")]
     fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;

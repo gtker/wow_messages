@@ -40,6 +40,11 @@ impl crate::Message for SMSG_EXPLORATION_EXPERIENCE {
     const OPCODE: u32 = 0x01f8;
 
     #[cfg(feature = "print-testcase")]
+    fn message_name(&self) -> &'static str {
+        "SMSG_EXPLORATION_EXPERIENCE"
+    }
+
+    #[cfg(feature = "print-testcase")]
     fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;

@@ -43,6 +43,11 @@ impl CMSG_JOIN_CHANNEL {
 impl crate::Message for CMSG_JOIN_CHANNEL {
     const OPCODE: u32 = 0x0097;
 
+    #[cfg(feature = "print-testcase")]
+    fn message_name(&self) -> &'static str {
+        "CMSG_JOIN_CHANNEL"
+    }
+
     fn size_without_header(&self) -> u32 {
         self.size() as u32
     }

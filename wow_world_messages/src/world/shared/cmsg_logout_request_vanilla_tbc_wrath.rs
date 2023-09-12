@@ -29,6 +29,11 @@ impl CMSG_LOGOUT_REQUEST {
 impl crate::Message for CMSG_LOGOUT_REQUEST {
     const OPCODE: u32 = 0x004b;
 
+    #[cfg(feature = "print-testcase")]
+    fn message_name(&self) -> &'static str {
+        "CMSG_LOGOUT_REQUEST"
+    }
+
     fn size_without_header(&self) -> u32 {
         0
     }

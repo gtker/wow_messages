@@ -45,6 +45,11 @@ impl crate::Message for CMSG_GUILD_SET_OFFICER_NOTE {
     const OPCODE: u32 = 0x0235;
 
     #[cfg(feature = "print-testcase")]
+    fn message_name(&self) -> &'static str {
+        "CMSG_GUILD_SET_OFFICER_NOTE"
+    }
+
+    #[cfg(feature = "print-testcase")]
     fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;

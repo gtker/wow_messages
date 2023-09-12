@@ -34,6 +34,11 @@ impl crate::Message for CMSG_RECLAIM_CORPSE {
     const OPCODE: u32 = 0x01d2;
 
     #[cfg(feature = "print-testcase")]
+    fn message_name(&self) -> &'static str {
+        "CMSG_RECLAIM_CORPSE"
+    }
+
+    #[cfg(feature = "print-testcase")]
     fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;

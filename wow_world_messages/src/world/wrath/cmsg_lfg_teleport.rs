@@ -34,6 +34,11 @@ impl crate::Message for CMSG_LFG_TELEPORT {
     const OPCODE: u32 = 0x0370;
 
     #[cfg(feature = "print-testcase")]
+    fn message_name(&self) -> &'static str {
+        "CMSG_LFG_TELEPORT"
+    }
+
+    #[cfg(feature = "print-testcase")]
     fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;

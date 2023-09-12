@@ -35,6 +35,11 @@ impl CMSG_ATTACKSWING {
 impl crate::Message for CMSG_ATTACKSWING {
     const OPCODE: u32 = 0x0141;
 
+    #[cfg(feature = "print-testcase")]
+    fn message_name(&self) -> &'static str {
+        "CMSG_ATTACKSWING"
+    }
+
     fn size_without_header(&self) -> u32 {
         8
     }

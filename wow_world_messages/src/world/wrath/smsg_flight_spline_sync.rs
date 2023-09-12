@@ -40,6 +40,11 @@ impl crate::Message for SMSG_FLIGHT_SPLINE_SYNC {
     const OPCODE: u32 = 0x0388;
 
     #[cfg(feature = "print-testcase")]
+    fn message_name(&self) -> &'static str {
+        "SMSG_FLIGHT_SPLINE_SYNC"
+    }
+
+    #[cfg(feature = "print-testcase")]
     fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;

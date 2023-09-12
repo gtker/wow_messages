@@ -61,6 +61,11 @@ impl crate::Message for MSG_BATTLEGROUND_PLAYER_POSITIONS_Server {
     const OPCODE: u32 = 0x02e9;
 
     #[cfg(feature = "print-testcase")]
+    fn message_name(&self) -> &'static str {
+        "MSG_BATTLEGROUND_PLAYER_POSITIONS_Server"
+    }
+
+    #[cfg(feature = "print-testcase")]
     fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;

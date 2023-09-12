@@ -37,6 +37,11 @@ impl CMSG_PLAYER_LOGIN {
 impl crate::Message for CMSG_PLAYER_LOGIN {
     const OPCODE: u32 = 0x003d;
 
+    #[cfg(feature = "print-testcase")]
+    fn message_name(&self) -> &'static str {
+        "CMSG_PLAYER_LOGIN"
+    }
+
     fn size_without_header(&self) -> u32 {
         8
     }

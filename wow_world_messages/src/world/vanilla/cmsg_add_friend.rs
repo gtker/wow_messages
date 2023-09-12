@@ -35,6 +35,11 @@ impl crate::Message for CMSG_ADD_FRIEND {
     const OPCODE: u32 = 0x0069;
 
     #[cfg(feature = "print-testcase")]
+    fn message_name(&self) -> &'static str {
+        "CMSG_ADD_FRIEND"
+    }
+
+    #[cfg(feature = "print-testcase")]
     fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;

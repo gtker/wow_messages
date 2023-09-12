@@ -41,6 +41,11 @@ impl crate::Message for MSG_QUEST_PUSH_RESULT {
     const OPCODE: u32 = 0x0276;
 
     #[cfg(feature = "print-testcase")]
+    fn message_name(&self) -> &'static str {
+        "MSG_QUEST_PUSH_RESULT"
+    }
+
+    #[cfg(feature = "print-testcase")]
     fn to_test_case_string(&self) -> Option<String> {
         panic!("MSG types not supported");
     }
