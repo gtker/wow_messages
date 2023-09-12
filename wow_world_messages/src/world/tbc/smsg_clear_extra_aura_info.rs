@@ -18,7 +18,7 @@ pub struct SMSG_CLEAR_EXTRA_AURA_INFO {
 impl crate::private::Sealed for SMSG_CLEAR_EXTRA_AURA_INFO {}
 impl SMSG_CLEAR_EXTRA_AURA_INFO {
     fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
-        if !(6..=13).contains(&body_size) {
+        if !(5..=13).contains(&body_size) {
             return Err(crate::errors::ParseErrorKind::InvalidSize);
         }
 

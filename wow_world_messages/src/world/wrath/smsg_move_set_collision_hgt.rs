@@ -20,7 +20,7 @@ pub struct SMSG_MOVE_SET_COLLISION_HGT {
 impl crate::private::Sealed for SMSG_MOVE_SET_COLLISION_HGT {}
 impl SMSG_MOVE_SET_COLLISION_HGT {
     fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
-        if !(10..=17).contains(&body_size) {
+        if !(9..=17).contains(&body_size) {
             return Err(crate::errors::ParseErrorKind::InvalidSize);
         }
 

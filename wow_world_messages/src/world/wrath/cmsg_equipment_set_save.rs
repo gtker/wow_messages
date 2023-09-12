@@ -24,7 +24,7 @@ pub struct CMSG_EQUIPMENT_SET_SAVE {
 impl crate::private::Sealed for CMSG_EQUIPMENT_SET_SAVE {}
 impl CMSG_EQUIPMENT_SET_SAVE {
     fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
-        if !(160..=677).contains(&body_size) {
+        if !(159..=677).contains(&body_size) {
             return Err(crate::errors::ParseErrorKind::InvalidSize);
         }
 

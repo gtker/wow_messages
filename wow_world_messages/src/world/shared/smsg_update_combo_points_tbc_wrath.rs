@@ -18,7 +18,7 @@ pub struct SMSG_UPDATE_COMBO_POINTS {
 impl crate::private::Sealed for SMSG_UPDATE_COMBO_POINTS {}
 impl SMSG_UPDATE_COMBO_POINTS {
     fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
-        if !(3..=10).contains(&body_size) {
+        if !(2..=10).contains(&body_size) {
             return Err(crate::errors::ParseErrorKind::InvalidSize);
         }
 

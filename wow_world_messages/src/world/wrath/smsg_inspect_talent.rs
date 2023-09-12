@@ -31,7 +31,7 @@ pub struct SMSG_INSPECT_TALENT {
 impl crate::private::Sealed for SMSG_INSPECT_TALENT {}
 impl SMSG_INSPECT_TALENT {
     fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
-        if !(13..=330164).contains(&body_size) {
+        if !(12..=330164).contains(&body_size) {
             return Err(crate::errors::ParseErrorKind::InvalidSize);
         }
 

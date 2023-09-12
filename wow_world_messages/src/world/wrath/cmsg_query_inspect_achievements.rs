@@ -16,7 +16,7 @@ pub struct CMSG_QUERY_INSPECT_ACHIEVEMENTS {
 impl crate::private::Sealed for CMSG_QUERY_INSPECT_ACHIEVEMENTS {}
 impl CMSG_QUERY_INSPECT_ACHIEVEMENTS {
     fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
-        if !(2..=9).contains(&body_size) {
+        if !(1..=9).contains(&body_size) {
             return Err(crate::errors::ParseErrorKind::InvalidSize);
         }
 

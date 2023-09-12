@@ -20,7 +20,7 @@ pub struct SMSG_THREAT_UPDATE {
 impl crate::private::Sealed for SMSG_THREAT_UPDATE {}
 impl SMSG_THREAT_UPDATE {
     fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
-        if !(6..=16777215).contains(&body_size) {
+        if !(5..=16777215).contains(&body_size) {
             return Err(crate::errors::ParseErrorKind::InvalidSize);
         }
 

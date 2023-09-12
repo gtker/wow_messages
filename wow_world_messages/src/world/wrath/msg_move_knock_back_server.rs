@@ -29,7 +29,7 @@ pub struct MSG_MOVE_KNOCK_BACK_Server {
 impl crate::private::Sealed for MSG_MOVE_KNOCK_BACK_Server {}
 impl MSG_MOVE_KNOCK_BACK_Server {
     fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
-        if !(48..=113).contains(&body_size) {
+        if !(47..=113).contains(&body_size) {
             return Err(crate::errors::ParseErrorKind::InvalidSize);
         }
 

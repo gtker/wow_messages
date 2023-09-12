@@ -20,7 +20,7 @@ pub struct MSG_CHANNEL_START_Server {
 impl crate::private::Sealed for MSG_CHANNEL_START_Server {}
 impl MSG_CHANNEL_START_Server {
     fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
-        if !(10..=17).contains(&body_size) {
+        if !(9..=17).contains(&body_size) {
             return Err(crate::errors::ParseErrorKind::InvalidSize);
         }
 

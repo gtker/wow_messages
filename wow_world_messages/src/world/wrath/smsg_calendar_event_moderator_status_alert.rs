@@ -22,7 +22,7 @@ pub struct SMSG_CALENDAR_EVENT_MODERATOR_STATUS_ALERT {
 impl crate::private::Sealed for SMSG_CALENDAR_EVENT_MODERATOR_STATUS_ALERT {}
 impl SMSG_CALENDAR_EVENT_MODERATOR_STATUS_ALERT {
     fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
-        if !(12..=19).contains(&body_size) {
+        if !(11..=19).contains(&body_size) {
             return Err(crate::errors::ParseErrorKind::InvalidSize);
         }
 

@@ -20,7 +20,7 @@ pub struct SMSG_LOOT_LIST {
 impl crate::private::Sealed for SMSG_LOOT_LIST {}
 impl SMSG_LOOT_LIST {
     fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
-        if !(12..=26).contains(&body_size) {
+        if !(10..=26).contains(&body_size) {
             return Err(crate::errors::ParseErrorKind::InvalidSize);
         }
 

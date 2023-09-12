@@ -24,7 +24,7 @@ pub struct SMSG_SET_EXTRA_AURA_INFO_NEED_UPDATE {
 impl crate::private::Sealed for SMSG_SET_EXTRA_AURA_INFO_NEED_UPDATE {}
 impl SMSG_SET_EXTRA_AURA_INFO_NEED_UPDATE {
     fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
-        if !(15..=22).contains(&body_size) {
+        if !(14..=22).contains(&body_size) {
             return Err(crate::errors::ParseErrorKind::InvalidSize);
         }
 

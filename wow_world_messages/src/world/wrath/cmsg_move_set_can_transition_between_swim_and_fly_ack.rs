@@ -25,7 +25,7 @@ pub struct CMSG_MOVE_SET_CAN_TRANSITION_BETWEEN_SWIM_AND_FLY_ACK {
 impl crate::private::Sealed for CMSG_MOVE_SET_CAN_TRANSITION_BETWEEN_SWIM_AND_FLY_ACK {}
 impl CMSG_MOVE_SET_CAN_TRANSITION_BETWEEN_SWIM_AND_FLY_ACK {
     fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
-        if !(40..=105).contains(&body_size) {
+        if !(39..=105).contains(&body_size) {
             return Err(crate::errors::ParseErrorKind::InvalidSize);
         }
 

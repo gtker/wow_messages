@@ -25,7 +25,7 @@ pub struct MSG_MOVE_TELEPORT_ACK_Server {
 impl crate::private::Sealed for MSG_MOVE_TELEPORT_ACK_Server {}
 impl MSG_MOVE_TELEPORT_ACK_Server {
     fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
-        if !(35..=95).contains(&body_size) {
+        if !(34..=95).contains(&body_size) {
             return Err(crate::errors::ParseErrorKind::InvalidSize);
         }
 

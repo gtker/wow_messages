@@ -18,7 +18,7 @@ pub struct SMSG_MOVE_WATER_WALK {
 impl crate::private::Sealed for SMSG_MOVE_WATER_WALK {}
 impl SMSG_MOVE_WATER_WALK {
     fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
-        if !(6..=13).contains(&body_size) {
+        if !(5..=13).contains(&body_size) {
             return Err(crate::errors::ParseErrorKind::InvalidSize);
         }
 

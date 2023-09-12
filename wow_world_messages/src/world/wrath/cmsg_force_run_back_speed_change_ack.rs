@@ -25,7 +25,7 @@ pub struct CMSG_FORCE_RUN_BACK_SPEED_CHANGE_ACK {
 impl crate::private::Sealed for CMSG_FORCE_RUN_BACK_SPEED_CHANGE_ACK {}
 impl CMSG_FORCE_RUN_BACK_SPEED_CHANGE_ACK {
     fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
-        if !(40..=105).contains(&body_size) {
+        if !(39..=105).contains(&body_size) {
             return Err(crate::errors::ParseErrorKind::InvalidSize);
         }
 

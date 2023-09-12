@@ -21,7 +21,7 @@ pub struct MSG_MOVE_STOP_ASCEND_Server {
 impl crate::private::Sealed for MSG_MOVE_STOP_ASCEND_Server {}
 impl MSG_MOVE_STOP_ASCEND_Server {
     fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
-        if !(31..=91).contains(&body_size) {
+        if !(30..=91).contains(&body_size) {
             return Err(crate::errors::ParseErrorKind::InvalidSize);
         }
 

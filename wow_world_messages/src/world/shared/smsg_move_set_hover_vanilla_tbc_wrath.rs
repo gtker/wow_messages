@@ -18,7 +18,7 @@ pub struct SMSG_MOVE_SET_HOVER {
 impl crate::private::Sealed for SMSG_MOVE_SET_HOVER {}
 impl SMSG_MOVE_SET_HOVER {
     fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
-        if !(6..=13).contains(&body_size) {
+        if !(5..=13).contains(&body_size) {
             return Err(crate::errors::ParseErrorKind::InvalidSize);
         }
 

@@ -18,7 +18,7 @@ pub struct CMSG_MOVE_TIME_SKIPPED {
 impl crate::private::Sealed for CMSG_MOVE_TIME_SKIPPED {}
 impl CMSG_MOVE_TIME_SKIPPED {
     fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
-        if !(6..=13).contains(&body_size) {
+        if !(5..=13).contains(&body_size) {
             return Err(crate::errors::ParseErrorKind::InvalidSize);
         }
 

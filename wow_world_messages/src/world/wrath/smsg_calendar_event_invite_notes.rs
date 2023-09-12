@@ -23,7 +23,7 @@ pub struct SMSG_CALENDAR_EVENT_INVITE_NOTES {
 impl crate::private::Sealed for SMSG_CALENDAR_EVENT_INVITE_NOTES {}
 impl SMSG_CALENDAR_EVENT_INVITE_NOTES {
     fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
-        if !(12..=274).contains(&body_size) {
+        if !(11..=274).contains(&body_size) {
             return Err(crate::errors::ParseErrorKind::InvalidSize);
         }
 

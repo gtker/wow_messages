@@ -32,7 +32,7 @@ pub struct SMSG_MOVE_KNOCK_BACK {
 impl crate::private::Sealed for SMSG_MOVE_KNOCK_BACK {}
 impl SMSG_MOVE_KNOCK_BACK {
     fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
-        if !(22..=29).contains(&body_size) {
+        if !(21..=29).contains(&body_size) {
             return Err(crate::errors::ParseErrorKind::InvalidSize);
         }
 

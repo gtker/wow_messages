@@ -18,7 +18,7 @@ pub struct SMSG_SPLINE_SET_FLIGHT_BACK_SPEED {
 impl crate::private::Sealed for SMSG_SPLINE_SET_FLIGHT_BACK_SPEED {}
 impl SMSG_SPLINE_SET_FLIGHT_BACK_SPEED {
     fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
-        if !(6..=13).contains(&body_size) {
+        if !(5..=13).contains(&body_size) {
             return Err(crate::errors::ParseErrorKind::InvalidSize);
         }
 

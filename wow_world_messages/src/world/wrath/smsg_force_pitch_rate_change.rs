@@ -22,7 +22,7 @@ pub struct SMSG_FORCE_PITCH_RATE_CHANGE {
 impl crate::private::Sealed for SMSG_FORCE_PITCH_RATE_CHANGE {}
 impl SMSG_FORCE_PITCH_RATE_CHANGE {
     fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
-        if !(10..=17).contains(&body_size) {
+        if !(9..=17).contains(&body_size) {
             return Err(crate::errors::ParseErrorKind::InvalidSize);
         }
 

@@ -20,15 +20,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * `Guid::from_u32s` and `Guid::to_u32s` to create a Guid from high/low `u32`s.
 * `Octal`, `Binary`, `UpperHex`, `LowerHex` for `Guid`.
 * `std::fmt::Display` for new enums.
-* BREAKING: TryFrom for all enums and flags for `u8`, `i8`, `u16`, `i16`, `u32`, `i32`, `u64`, `i64`, and `usize` regardless of underlying type.
+* BREAKING: TryFrom for all enums and flags for `u8`, `i8`, `u16`, `i16`, `u32`, `i32`, `u64`, `i64`, and `usize`
+  regardless of underlying type.
   This may break type deduction and lead to compile errors, so it is breaking.
 
 ### Changed
 
+* BREAKING: Fixed incorrect minimum size for `PackedGuid` leading to correct messages reporting errors.
 * BREAKING: Fix some shared types having modules with `vanilla_vanilla` instead of just `vanilla`.
 * BREAKING: Fix some types that were in `shared` when they shouldn't have been.
 * BREAKING: Compressed arrays no longer have a manual decompressed size field.
-* BREAKING: `ParseError` enum has been renamed to `ParseErrorKind`. `ParseError` is now a struct that holds more information about the error, such as opcode and size.
+* BREAKING: `ParseError` enum has been renamed to `ParseErrorKind`. `ParseError` is now a struct that holds more
+  information about the error, such as opcode and size.
 * BREAKING: `MSG_AUCTION_HELLO_Server`, `SMSG_AUCTION_BIDDER_NOTIFICATION`, and `ReceivedMail` have had the
   variable `auction_house_id` of type `u32` changed to `auction_house` of type `AuctionHouse` enum.
 * BREAKING: Vanilla `UpdatePlayer` methods `VISIBLE_ITEM_*` have been replaced by a single `VISIBLE_ITEM` method.

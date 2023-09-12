@@ -83,7 +83,7 @@ pub struct SMSG_PARTY_MEMBER_STATS {
 impl crate::private::Sealed for SMSG_PARTY_MEMBER_STATS {}
 impl SMSG_PARTY_MEMBER_STATS {
     fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
-        if !(6..=584).contains(&body_size) {
+        if !(5..=584).contains(&body_size) {
             return Err(crate::errors::ParseErrorKind::InvalidSize);
         }
 

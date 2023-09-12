@@ -41,7 +41,7 @@ pub struct SMSG_SPELL_GO {
 impl crate::private::Sealed for SMSG_SPELL_GO {}
 impl SMSG_SPELL_GO {
     fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
-        if !(20..=5734).contains(&body_size) {
+        if !(18..=5734).contains(&body_size) {
             return Err(crate::errors::ParseErrorKind::InvalidSize);
         }
 

@@ -23,7 +23,7 @@ pub struct MSG_MOVE_SET_PITCH_RATE_Server {
 impl crate::private::Sealed for MSG_MOVE_SET_PITCH_RATE_Server {}
 impl MSG_MOVE_SET_PITCH_RATE_Server {
     fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
-        if !(36..=101).contains(&body_size) {
+        if !(35..=101).contains(&body_size) {
             return Err(crate::errors::ParseErrorKind::InvalidSize);
         }
 
