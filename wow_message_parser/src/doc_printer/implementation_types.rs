@@ -183,7 +183,7 @@ fn print_implementation_type(table: &mut WriterTable<3>, ty: &Type) {
             table.add_row([name.as_ref(), "Alias for `u8`.", "`unsigned char`"]);
         }
         Type::Level16 => {
-            table.add_row([name.as_ref(), "Alias for `u8`.", "`unsigned short`"]);
+            table.add_row([name.as_ref(), "Alias for `u16`.", "`unsigned short`"]);
         }
 
         Type::Enum { .. } => {}
