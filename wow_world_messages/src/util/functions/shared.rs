@@ -3,6 +3,47 @@ use crate::util::{read_u32_le, read_u8_le};
 use std::io::{Read, Write};
 use wow_world_base::shared::vector3d_vanilla_tbc_wrath::Vector3d;
 
+#[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
+#[derive(Debug, Clone, Copy, Ord, PartialOrd, Eq, PartialEq, Hash)]
+pub(crate) struct ServerHeader {
+    pub size: u32,
+    pub opcode: u16,
+}
+
+#[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
+impl ServerHeader {
+    pub(crate) const fn from_array(b: [u8; 4]) -> Self {
+        let size = u32::from_be_bytes([0, 0, b[0], b[1]]);
+        let opcode = u16::from_le_bytes([b[2], b[3]]);
+
+        Self { size, opcode }
+    }
+
+    pub(crate) const fn from_large_array(b: [u8; 5]) -> Self {
+        let size = u32::from_be_bytes([0, b[0], b[1], b[2]]);
+        let opcode = u16::from_le_bytes([b[3], b[4]]);
+
+        Self { size, opcode }
+    }
+}
+
+#[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
+#[derive(Debug, Clone, Copy, Ord, PartialOrd, Eq, PartialEq, Hash)]
+pub(crate) struct ClientHeader {
+    pub size: u16,
+    pub opcode: u32,
+}
+
+#[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
+impl ClientHeader {
+    pub(crate) const fn from_array(b: [u8; 6]) -> Self {
+        let size: u16 = u16::from_be_bytes([b[0], b[1]]);
+        let opcode: u32 = u32::from_le_bytes([b[2], b[3], b[4], b[5]]);
+
+        Self { size, opcode }
+    }
+}
+
 #[cfg(any(feature = "wrath", feature = "tbc"))]
 pub(crate) fn write_addon_array(
     addons: &[crate::shared::addon_tbc_wrath::Addon],

@@ -6,7 +6,7 @@ use crate::rust_printer::{ImplType, MessageSide};
 
 pub(crate) fn print_expected() {
     for version in MajorWorldVersion::versions() {
-        print_expected_world_version(*version, version.server_size_type());
+        print_expected_world_version(*version);
     }
 }
 
@@ -63,7 +63,7 @@ fn print_expect_message(
             s.wln(format!("let d = d.decrypt_{side}_header(header);"));
         } else {
             s.wln(format!(
-                "let d = wow_srp::{module}_header::{title_side}Header::from_array(header);"
+                "let d = crate::util::{title_side}Header::from_array(header);"
             ));
         };
     } else {
@@ -83,9 +83,9 @@ let d = if buf[0] & 0x80 != 0 {{
     let mut lsb = [0_u8; 1];
     r.read_exact(&mut lsb){postfix}?;
     let buf = [buf[0], buf[1], buf[2], buf[3], lsb[0]];
-    wow_srp::wrath_header::ServerHeader::from_large_array(buf)
+    crate::util::ServerHeader::from_large_array(buf)
 }} else {{
-    wow_srp::wrath_header::ServerHeader::from_small_array(buf)
+    crate::util::ServerHeader::from_array(buf)
 }};
 ",
             ));
@@ -94,25 +94,20 @@ let d = if buf[0] & 0x80 != 0 {{
     s.newline();
 
     let opcode_size = message_side.world_opcode_size();
-    let cast = if version.wrath_or_greater() && message_side.is_server() {
-        "as usize"
-    } else {
-        ".into()"
-    };
     s.wln(format!(
-        "let mut buf = vec![0_u8; (d.size - {opcode_size}){cast}];"
+        "let mut buf = vec![0_u8; (d.size.saturating_sub({opcode_size})) as usize];"
     ));
     s.wln(format!("r.read_exact(&mut buf){postfix}?;"));
     s.newline();
 
     s.wln(format!(
-        "read_{side}_body(&mut buf.as_slice(), d.size, d.opcode.into())"
+        "read_{side}_body(&mut buf.as_slice(), d.size.into(), d.opcode.into())"
     ));
 
     s.closing_curly_newline(); // ) -> Result<M
 }
 
-fn print_expected_world_version(version: MajorWorldVersion, server_size_type: &str) {
+fn print_expected_world_version(version: MajorWorldVersion) {
     let module = version.module_name();
     let mut s = Writer::new();
 
@@ -129,7 +124,7 @@ fn print_expected_world_version(version: MajorWorldVersion, server_size_type: &s
         "\
 fn read_server_body<M: crate::{module}::ServerMessage>(
     buf: &mut &[u8],
-    size: {server_size_type},
+    size: u32,
     opcode: u32,
 ) -> Result<M, crate::errors::ExpectedOpcodeError> {{
     // Unable to match on associated const M::OPCODE, so we do if
