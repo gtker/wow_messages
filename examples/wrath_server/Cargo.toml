@@ -11,4 +11,4 @@ wow_world_messages = { path = "../../wow_world_messages", features = ["tokio", "
 
 [dependencies.wow_srp]
 git = "https://github.com/gtker/wow_srp.git"
-rev = "ba56b4564ec9f7baf6bec824e547e9279a0f58ce"
+rev = "5b193703a863e8750bdfff449de28ce9d25cd25b"

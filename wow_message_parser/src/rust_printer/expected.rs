@@ -68,12 +68,24 @@ fn print_expect_message(
         };
     } else {
         if encrypted {
-            s.wln("let mut msb = [0_u8; 1];");
-            s.wln(format!("r.read_exact(&mut msb){postfix}?;"));
+            s.wln("let mut buf = [0_u8; 4];");
+            s.wln(format!("r.read_exact(&mut buf){postfix}?;"));
 
-            s.wln("let buf = d.get_header_buffer(msb[0]);");
-            s.wln(format!("r.read_exact(buf){postfix}?;"));
-            s.wln("let d = d.decrypt_internal_server_header();");
+            s.body_closing_with(
+                "let d = match d.attempt_decrypt_server_header(buf)",
+                |s| {
+                    s.wln("wow_srp::wrath_header::WrathServerAttempt::Header(h) => h,");
+                    s.body(
+                        "wow_srp::wrath_header::WrathServerAttempt::AdditionalByteRequired =>",
+                        |s| {
+                            s.wln("let mut lsb = [0_u8; 1];");
+                            s.wln(format!("r.read_exact(&mut lsb){postfix}?;"));
+                            s.wln("d.decrypt_large_server_header(lsb[0])");
+                        },
+                    );
+                },
+                ";",
+            );
         } else {
             s.block(format!(
                 "\

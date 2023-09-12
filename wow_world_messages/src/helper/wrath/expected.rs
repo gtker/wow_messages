@@ -38,11 +38,16 @@ pub fn expect_server_message_encryption<M: crate::wrath::ServerMessage, R: std::
     r: &mut R,
     d: &mut wow_srp::wrath_header::ClientDecrypterHalf,
 ) -> Result<M, crate::errors::ExpectedOpcodeError> {
-    let mut msb = [0_u8; 1];
-    r.read_exact(&mut msb)?;
-    let buf = d.get_header_buffer(msb[0]);
-    r.read_exact(buf)?;
-    let d = d.decrypt_internal_server_header();
+    let mut buf = [0_u8; 4];
+    r.read_exact(&mut buf)?;
+    let d = match d.attempt_decrypt_server_header(buf) {
+        wow_srp::wrath_header::WrathServerAttempt::Header(h) => h,
+        wow_srp::wrath_header::WrathServerAttempt::AdditionalByteRequired => {
+            let mut lsb = [0_u8; 1];
+            r.read_exact(&mut lsb)?;
+            d.decrypt_large_server_header(lsb[0])
+        }
+    };
 
     let mut buf = vec![0_u8; (d.size.saturating_sub(2)) as usize];
     r.read_exact(&mut buf)?;
@@ -105,11 +110,16 @@ pub async fn tokio_expect_server_message_encryption<M: crate::wrath::ServerMessa
     r: &mut R,
     d: &mut wow_srp::wrath_header::ClientDecrypterHalf,
 ) -> Result<M, crate::errors::ExpectedOpcodeError> {
-    let mut msb = [0_u8; 1];
-    r.read_exact(&mut msb).await?;
-    let buf = d.get_header_buffer(msb[0]);
-    r.read_exact(buf).await?;
-    let d = d.decrypt_internal_server_header();
+    let mut buf = [0_u8; 4];
+    r.read_exact(&mut buf).await?;
+    let d = match d.attempt_decrypt_server_header(buf) {
+        wow_srp::wrath_header::WrathServerAttempt::Header(h) => h,
+        wow_srp::wrath_header::WrathServerAttempt::AdditionalByteRequired => {
+            let mut lsb = [0_u8; 1];
+            r.read_exact(&mut lsb).await?;
+            d.decrypt_large_server_header(lsb[0])
+        }
+    };
 
     let mut buf = vec![0_u8; (d.size.saturating_sub(2)) as usize];
     r.read_exact(&mut buf).await?;
@@ -172,11 +182,16 @@ pub async fn astd_expect_server_message_encryption<M: crate::wrath::ServerMessag
     r: &mut R,
     d: &mut wow_srp::wrath_header::ClientDecrypterHalf,
 ) -> Result<M, crate::errors::ExpectedOpcodeError> {
-    let mut msb = [0_u8; 1];
-    r.read_exact(&mut msb).await?;
-    let buf = d.get_header_buffer(msb[0]);
-    r.read_exact(buf).await?;
-    let d = d.decrypt_internal_server_header();
+    let mut buf = [0_u8; 4];
+    r.read_exact(&mut buf).await?;
+    let d = match d.attempt_decrypt_server_header(buf) {
+        wow_srp::wrath_header::WrathServerAttempt::Header(h) => h,
+        wow_srp::wrath_header::WrathServerAttempt::AdditionalByteRequired => {
+            let mut lsb = [0_u8; 1];
+            r.read_exact(&mut lsb).await?;
+            d.decrypt_large_server_header(lsb[0])
+        }
+    };
 
     let mut buf = vec![0_u8; (d.size.saturating_sub(2)) as usize];
     r.read_exact(&mut buf).await?;
