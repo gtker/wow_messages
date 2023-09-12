@@ -14,6 +14,7 @@ use std::io::Read;
 
 pub(crate) const CSTRING_LARGEST_ALLOWED: usize = 256;
 
+#[cfg(feature = "sync")]
 pub fn read_fixed_string_to_vec<R: Read>(
     r: &mut R,
     size: usize,
@@ -62,6 +63,7 @@ pub fn read_u32_le<R: Read>(r: &mut R) -> Result<u32, std::io::Error> {
     Ok(u32::from_le_bytes(v))
 }
 
+#[cfg(feature = "sync")]
 pub fn read_u32_be<R: Read>(r: &mut R) -> Result<u32, std::io::Error> {
     let mut v = [0_u8; 4];
     r.read_exact(&mut v)?;
@@ -75,7 +77,7 @@ pub fn read_f32_le<R: Read>(r: &mut R) -> Result<f32, std::io::Error> {
     Ok(f32::from_le_bytes(v))
 }
 
-// u64
+#[cfg(feature = "sync")]
 pub fn read_u64_le<R: Read>(r: &mut R) -> Result<u64, std::io::Error> {
     let mut v = [0_u8; 8];
     r.read_exact(&mut v)?;
