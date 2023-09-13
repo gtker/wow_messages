@@ -71,10 +71,10 @@ impl CMSG_AUTH_SESSION {
                 + 4 // client_seed: u32
                 + 20 // client_proof: u8[20]
             };
+            current_size += 4; // addon_info_decompressed_size: u32
             let mut addon_info = Vec::with_capacity(body_size as usize - current_size);
             while decoder.total_out() < (addon_info_decompressed_size as u64) {
                 addon_info.push(AddonInfo::read(&mut decoder)?);
-                current_size += 1;
             }
             addon_info
         };

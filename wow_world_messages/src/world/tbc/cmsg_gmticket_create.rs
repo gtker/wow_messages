@@ -78,10 +78,10 @@ impl CMSG_GMTICKET_CREATE {
                         + message.len() + 1 // message: CString
                         + reserved_for_future_use.len() + 1 // reserved_for_future_use: CString
                     };
+                    current_size += 4; // compressed_chat_data_decompressed_size: u32
                     let mut compressed_chat_data = Vec::with_capacity(body_size as usize - current_size);
                     while decoder.total_out() < (compressed_chat_data_decompressed_size as u64) {
                         compressed_chat_data.push(crate::util::read_u8_le(&mut decoder)?);
-                        current_size += 1;
                     }
                     compressed_chat_data
                 };

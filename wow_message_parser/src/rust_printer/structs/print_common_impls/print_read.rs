@@ -2,6 +2,7 @@ use crate::parser::types::array::{Array, ArraySize, ArrayType};
 use crate::parser::types::container::Container;
 use crate::parser::types::if_statement::{Equation, IfStatement};
 use crate::parser::types::objects::Objects;
+use crate::parser::types::sizes::GUID_SIZE;
 use crate::parser::types::struct_member::{StructMember, StructMemberDefinition};
 use crate::parser::types::ty::Type;
 use crate::parser::types::IntegerType;
@@ -58,7 +59,7 @@ fn print_read_array(
             }
 
             s.body(format!("for i in {name}.iter_mut()"), |s| {
-                print_array_ty(s, array, d, prefix, "r", postfix, true);
+                print_array_ty(s, array, d, prefix, "r", postfix, true, None);
             });
         }
         ArraySize::Variable(m) => {
@@ -68,7 +69,7 @@ fn print_read_array(
             ));
 
             s.body(format!("for _ in 0..{length}", length = m.name()), |s| {
-                print_array_ty(s, array, d, prefix, "r", postfix, false);
+                print_array_ty(s, array, d, prefix, "r", postfix, false, None);
             });
         }
         ArraySize::Endless => {
@@ -83,6 +84,9 @@ fn print_read_array(
             }
 
             print_size_before_variable(s, e, d.name());
+            s.wln(format!(
+                "current_size += 4; // {name}_decompressed_size: u32"
+            ));
 
             let reader = if array.compressed() { "decoder" } else { "r" };
             let loop_condition = if array.compressed() {
@@ -94,9 +98,42 @@ fn print_read_array(
             s.wln(format!(
                 "let mut {name} = Vec::with_capacity(body_size as usize - current_size);",
             ));
-            s.body(loop_condition.as_str(), |s| {
-                print_array_ty(s, array, d, prefix, reader, postfix, false);
-                s.wln("current_size += 1;")
+            s.body(loop_condition, |s| {
+                let array_prefix = "let a = ".to_string();
+                let array_postfix = ";".to_string();
+
+                let size = match array.ty() {
+                    ArrayType::Integer(integer_type) => integer_type.size().to_string(),
+                    ArrayType::CString => "a.len() + 1".to_string(),
+                    ArrayType::PackedGuid => "crate::util::packed_guid_size(&a)".to_string(),
+                    ArrayType::Guid => GUID_SIZE.to_string(),
+                    ArrayType::Struct(e) => {
+                        if e.is_constant_sized() {
+                            e.sizes().maximum().to_string()
+                        } else {
+                            "a.size()".to_string()
+                        }
+                    }
+                };
+
+                let static_sized = array.ty().sizes().is_constant().is_some();
+                let intermediate_variable = !static_sized && !array.compressed();
+
+                let array_override = if intermediate_variable {
+                    Some((array_prefix, array_postfix))
+                } else {
+                    None
+                };
+
+                print_array_ty(s, array, d, prefix, reader, postfix, false, array_override);
+
+                if !array.compressed() {
+                    s.wln(format!("current_size += {size};"));
+                }
+
+                if intermediate_variable {
+                    s.wln(format!("{name}.push(a);"));
+                }
             });
         }
     }
@@ -113,10 +150,12 @@ fn print_array_ty(
     reader: &str,
     postfix: &str,
     array_is_fixed: bool,
+    prefix_postfix_override: Option<(String, String)>,
 ) {
-    let (array_prefix, array_postfix) = match array_is_fixed {
-        true => ("*i = ".to_string(), ";"),
-        false => (format!("{name}.push(", name = d.name()), ");"),
+    let (array_prefix, array_postfix) = match (prefix_postfix_override, array_is_fixed) {
+        (None, true) => ("*i = ".to_string(), ";".to_string()),
+        (None, false) => (format!("{name}.push(", name = d.name()), ");".to_string()),
+        (Some((prefix, postfix)), _) => (prefix, postfix),
     };
 
     match array.ty() {

@@ -81,10 +81,10 @@ impl CMSG_GMTICKET_CREATE {
                 + 4 // num_of_times: u32
                 + times.len() * core::mem::size_of::<u32>() // times: u32[num_of_times]
             };
+            current_size += 4; // compressed_data_decompressed_size: u32
             let mut compressed_data = Vec::with_capacity(body_size as usize - current_size);
             while decoder.total_out() < (compressed_data_decompressed_size as u64) {
                 compressed_data.push(crate::util::read_u8_le(&mut decoder)?);
-                current_size += 1;
             }
             compressed_data
         };

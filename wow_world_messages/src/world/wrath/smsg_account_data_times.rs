@@ -46,10 +46,11 @@ impl SMSG_ACCOUNT_DATA_TIMES {
                 + 1 // unknown1: u8
                 + 4 // mask: CacheMask
             };
+            current_size += 4; // data_decompressed_size: u32
             let mut data = Vec::with_capacity(body_size as usize - current_size);
             while current_size < (body_size as usize) {
                 data.push(crate::util::read_u32_le(&mut r)?);
-                current_size += 1;
+                current_size += 4;
             }
             data
         };

@@ -37,6 +37,7 @@ impl CMSG_TEST_ENDLESS_U8 {
                 c_string.len() + 1 // c_string: CString
                 + 1 // b_u8: u8
             };
+            current_size += 4; // endless_decompressed_size: u32
             let mut endless = Vec::with_capacity(body_size as usize - current_size);
             while current_size < (body_size as usize) {
                 endless.push(crate::util::read_u8_le(&mut r)?);

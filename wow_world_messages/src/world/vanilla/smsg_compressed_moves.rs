@@ -34,10 +34,12 @@ impl SMSG_COMPRESSED_MOVES {
             let mut current_size = {
                 0
             };
+            current_size += 4; // moves_decompressed_size: u32
             let mut moves = Vec::with_capacity(body_size as usize - current_size);
             while current_size < (body_size as usize) {
-                moves.push(CompressedMove::read(&mut r)?);
-                current_size += 1;
+                let a = CompressedMove::read(&mut r)?;
+                current_size += a.size();
+                moves.push(a);
             }
             moves
         };

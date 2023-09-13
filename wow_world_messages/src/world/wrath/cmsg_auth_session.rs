@@ -99,10 +99,10 @@ impl CMSG_AUTH_SESSION {
                 + 8 // dos_response: u64
                 + 20 // client_proof: u8[20]
             };
+            current_size += 4; // addon_info_decompressed_size: u32
             let mut addon_info = Vec::with_capacity(body_size as usize - current_size);
             while decoder.total_out() < (addon_info_decompressed_size as u64) {
                 addon_info.push(crate::util::read_u8_le(&mut decoder)?);
-                current_size += 1;
             }
             addon_info
         };
