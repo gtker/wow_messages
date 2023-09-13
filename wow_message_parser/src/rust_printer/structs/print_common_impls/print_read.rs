@@ -73,7 +73,7 @@ fn print_read_array(
             });
         }
         ArraySize::Endless => {
-            if array.compressed() {
+            let reader = if array.compressed() {
                 s.wln(format!(
                     "let {name}_decompressed_size = crate::util::read_u32_le(&mut r)?;"
                 ));
@@ -81,14 +81,16 @@ fn print_read_array(
 
                 s.wln(format!("let mut decoder = &mut flate2::read::ZlibDecoder::new_with_buf(r, vec![0_u8; {name}_decompressed_size as usize]);"));
                 s.newline();
-            }
+                "decoder"
+            } else {
+                "r"
+            };
 
             print_size_before_variable(s, e, d.name());
             s.wln(format!(
                 "current_size += 4; // {name}_decompressed_size: u32"
             ));
 
-            let reader = if array.compressed() { "decoder" } else { "r" };
             let loop_condition = if array.compressed() {
                 format!("while decoder.total_out() < ({name}_decompressed_size as u64)")
             } else {
