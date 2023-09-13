@@ -123,17 +123,17 @@ impl crate::Message for CMSG_WHO {
         writeln!(s, "    race_mask = {};", self.race_mask).unwrap();
         writeln!(s, "    class_mask = {};", self.class_mask).unwrap();
         writeln!(s, "    amount_of_zones = {};", self.zones.len()).unwrap();
-        write!(s, "    zones = [").unwrap();
+        writeln!(s, "    zones = [").unwrap();
         for v in self.zones.as_slice() {
             write!(s, "{v:#04X}, ").unwrap();
         }
-        writeln!(s, "];").unwrap();
+        writeln!(s, "    ];").unwrap();
         writeln!(s, "    amount_of_strings = {};", self.search_strings.len()).unwrap();
-        write!(s, "    search_strings = [").unwrap();
+        writeln!(s, "    search_strings = [").unwrap();
         for v in self.search_strings.as_slice() {
             write!(s, "\"{v}\", ").unwrap();
         }
-        writeln!(s, "];").unwrap();
+        writeln!(s, "    ];").unwrap();
 
         writeln!(s, "}} [").unwrap();
 

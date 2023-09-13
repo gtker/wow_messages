@@ -114,19 +114,19 @@ impl crate::Message for SMSG_ATTACKERSTATEUPDATE {
         writeln!(s, "    target = {};", self.target.guid()).unwrap();
         writeln!(s, "    total_damage = {};", self.total_damage).unwrap();
         writeln!(s, "    amount_of_damages = {};", self.damages.len()).unwrap();
-        write!(s, "    damages = [").unwrap();
+        writeln!(s, "    damages = [").unwrap();
         for v in self.damages.as_slice() {
-            writeln!(s, "{{").unwrap();
+            writeln!(s, "        {{").unwrap();
             // Members
-            writeln!(s, "        spell_school_mask = {};", v.spell_school_mask).unwrap();
-            writeln!(s, "        damage_float = {}", if v.damage_float.to_string().contains('.') { v.damage_float.to_string() } else { format!("{}.0", v.damage_float) }).unwrap();
-            writeln!(s, "        damage_uint = {};", v.damage_uint).unwrap();
-            writeln!(s, "        absorb = {};", v.absorb).unwrap();
-            writeln!(s, "        resist = {};", v.resist).unwrap();
+            writeln!(s, "            spell_school_mask = {};", v.spell_school_mask).unwrap();
+            writeln!(s, "            damage_float = {};", if v.damage_float.to_string().contains('.') { v.damage_float.to_string() } else { format!("{}.0", v.damage_float) }).unwrap();
+            writeln!(s, "            damage_uint = {};", v.damage_uint).unwrap();
+            writeln!(s, "            absorb = {};", v.absorb).unwrap();
+            writeln!(s, "            resist = {};", v.resist).unwrap();
 
-            writeln!(s, "    }},").unwrap();
+            writeln!(s, "        }},").unwrap();
         }
-        writeln!(s, "];").unwrap();
+        writeln!(s, "    ];").unwrap();
         writeln!(s, "    damage_state = {};", self.damage_state).unwrap();
         writeln!(s, "    unknown1 = {};", self.unknown1).unwrap();
         writeln!(s, "    spell_id = {};", self.spell_id).unwrap();

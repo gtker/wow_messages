@@ -32,7 +32,7 @@ impl AreaFlags {
         if self.is_snow() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "SNOW").unwrap();
             first = false;
@@ -40,7 +40,7 @@ impl AreaFlags {
         if self.is_unk() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "UNK").unwrap();
             first = false;
@@ -48,7 +48,7 @@ impl AreaFlags {
         if self.is_development() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "DEVELOPMENT").unwrap();
             first = false;
@@ -56,7 +56,7 @@ impl AreaFlags {
         if self.is_unk2() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "UNK2").unwrap();
             first = false;
@@ -64,7 +64,7 @@ impl AreaFlags {
         if self.is_unk3() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "UNK3").unwrap();
             first = false;
@@ -72,7 +72,7 @@ impl AreaFlags {
         if self.is_city_slave() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "CITY_SLAVE").unwrap();
             first = false;
@@ -80,7 +80,7 @@ impl AreaFlags {
         if self.is_city_allow_duels() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "CITY_ALLOW_DUELS").unwrap();
             first = false;
@@ -88,7 +88,7 @@ impl AreaFlags {
         if self.is_unk4() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "UNK4").unwrap();
             first = false;
@@ -96,7 +96,7 @@ impl AreaFlags {
         if self.is_city() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "CITY").unwrap();
             first = false;
@@ -104,7 +104,7 @@ impl AreaFlags {
         if self.is_test() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "TEST").unwrap();
             first = false;

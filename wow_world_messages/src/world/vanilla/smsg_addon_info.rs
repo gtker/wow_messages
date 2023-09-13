@@ -59,122 +59,122 @@ impl crate::Message for SMSG_ADDON_INFO {
 
         writeln!(s, "test SMSG_ADDON_INFO {{").unwrap();
         // Members
-        write!(s, "    addons = [").unwrap();
+        writeln!(s, "    addons = [").unwrap();
         for v in self.addons.as_slice() {
-            writeln!(s, "{{").unwrap();
+            writeln!(s, "        {{").unwrap();
             // Members
-            writeln!(s, "        addon_type = {};", v.addon_type.as_test_case_value()).unwrap();
-            writeln!(s, "        info_block = {};", InfoBlock::try_from(v.info_block.as_int()).unwrap().as_test_case_value()).unwrap();
+            writeln!(s, "            addon_type = {};", v.addon_type.as_test_case_value()).unwrap();
+            writeln!(s, "            info_block = {};", InfoBlock::try_from(v.info_block.as_int()).unwrap().as_test_case_value()).unwrap();
             match &v.info_block {
                 crate::vanilla::Addon_InfoBlock::Available {
                     key_version,
                     update_available_flag,
                 } => {
-                    writeln!(s, "        key_version = {};", KeyVersion::try_from(key_version.as_int()).unwrap().as_test_case_value()).unwrap();
+                    writeln!(s, "            key_version = {};", KeyVersion::try_from(key_version.as_int()).unwrap().as_test_case_value()).unwrap();
                     match &key_version {
                         crate::vanilla::Addon_KeyVersion::One {
                             public_key,
                         } => {
-                            write!(s, "        public_key = [").unwrap();
+                            writeln!(s, "            public_key = [").unwrap();
                             for v in public_key.as_slice() {
                                 write!(s, "{v:#04X}, ").unwrap();
                             }
-                            writeln!(s, "];").unwrap();
+                            writeln!(s, "            ];").unwrap();
                         }
                         crate::vanilla::Addon_KeyVersion::Two {
                             public_key,
                         } => {
-                            write!(s, "        public_key = [").unwrap();
+                            writeln!(s, "            public_key = [").unwrap();
                             for v in public_key.as_slice() {
                                 write!(s, "{v:#04X}, ").unwrap();
                             }
-                            writeln!(s, "];").unwrap();
+                            writeln!(s, "            ];").unwrap();
                         }
                         crate::vanilla::Addon_KeyVersion::Three {
                             public_key,
                         } => {
-                            write!(s, "        public_key = [").unwrap();
+                            writeln!(s, "            public_key = [").unwrap();
                             for v in public_key.as_slice() {
                                 write!(s, "{v:#04X}, ").unwrap();
                             }
-                            writeln!(s, "];").unwrap();
+                            writeln!(s, "            ];").unwrap();
                         }
                         crate::vanilla::Addon_KeyVersion::Four {
                             public_key,
                         } => {
-                            write!(s, "        public_key = [").unwrap();
+                            writeln!(s, "            public_key = [").unwrap();
                             for v in public_key.as_slice() {
                                 write!(s, "{v:#04X}, ").unwrap();
                             }
-                            writeln!(s, "];").unwrap();
+                            writeln!(s, "            ];").unwrap();
                         }
                         crate::vanilla::Addon_KeyVersion::Five {
                             public_key,
                         } => {
-                            write!(s, "        public_key = [").unwrap();
+                            writeln!(s, "            public_key = [").unwrap();
                             for v in public_key.as_slice() {
                                 write!(s, "{v:#04X}, ").unwrap();
                             }
-                            writeln!(s, "];").unwrap();
+                            writeln!(s, "            ];").unwrap();
                         }
                         crate::vanilla::Addon_KeyVersion::Six {
                             public_key,
                         } => {
-                            write!(s, "        public_key = [").unwrap();
+                            writeln!(s, "            public_key = [").unwrap();
                             for v in public_key.as_slice() {
                                 write!(s, "{v:#04X}, ").unwrap();
                             }
-                            writeln!(s, "];").unwrap();
+                            writeln!(s, "            ];").unwrap();
                         }
                         crate::vanilla::Addon_KeyVersion::Seven {
                             public_key,
                         } => {
-                            write!(s, "        public_key = [").unwrap();
+                            writeln!(s, "            public_key = [").unwrap();
                             for v in public_key.as_slice() {
                                 write!(s, "{v:#04X}, ").unwrap();
                             }
-                            writeln!(s, "];").unwrap();
+                            writeln!(s, "            ];").unwrap();
                         }
                         crate::vanilla::Addon_KeyVersion::Eight {
                             public_key,
                         } => {
-                            write!(s, "        public_key = [").unwrap();
+                            writeln!(s, "            public_key = [").unwrap();
                             for v in public_key.as_slice() {
                                 write!(s, "{v:#04X}, ").unwrap();
                             }
-                            writeln!(s, "];").unwrap();
+                            writeln!(s, "            ];").unwrap();
                         }
                         crate::vanilla::Addon_KeyVersion::Nine {
                             public_key,
                         } => {
-                            write!(s, "        public_key = [").unwrap();
+                            writeln!(s, "            public_key = [").unwrap();
                             for v in public_key.as_slice() {
                                 write!(s, "{v:#04X}, ").unwrap();
                             }
-                            writeln!(s, "];").unwrap();
+                            writeln!(s, "            ];").unwrap();
                         }
                         _ => {}
                     }
 
-                    writeln!(s, "        update_available_flag = {};", update_available_flag).unwrap();
+                    writeln!(s, "            update_available_flag = {};", update_available_flag).unwrap();
                 }
                 _ => {}
             }
 
-            writeln!(s, "        url_info = {};", UrlInfo::try_from(v.url_info.as_int()).unwrap().as_test_case_value()).unwrap();
+            writeln!(s, "            url_info = {};", UrlInfo::try_from(v.url_info.as_int()).unwrap().as_test_case_value()).unwrap();
             match &v.url_info {
                 crate::vanilla::Addon_UrlInfo::Available {
                     url,
                 } => {
-                    writeln!(s, "        url = \"{}\";", url).unwrap();
+                    writeln!(s, "            url = \"{}\";", url).unwrap();
                 }
                 _ => {}
             }
 
 
-            writeln!(s, "    }},").unwrap();
+            writeln!(s, "        }},").unwrap();
         }
-        writeln!(s, "];").unwrap();
+        writeln!(s, "    ];").unwrap();
 
         writeln!(s, "}} [").unwrap();
 

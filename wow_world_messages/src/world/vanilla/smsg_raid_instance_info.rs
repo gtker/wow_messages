@@ -60,17 +60,17 @@ impl crate::Message for SMSG_RAID_INSTANCE_INFO {
         writeln!(s, "test SMSG_RAID_INSTANCE_INFO {{").unwrap();
         // Members
         writeln!(s, "    amount_of_raid_infos = {};", self.raid_infos.len()).unwrap();
-        write!(s, "    raid_infos = [").unwrap();
+        writeln!(s, "    raid_infos = [").unwrap();
         for v in self.raid_infos.as_slice() {
-            writeln!(s, "{{").unwrap();
+            writeln!(s, "        {{").unwrap();
             // Members
-            writeln!(s, "        map = {};", v.map.as_test_case_value()).unwrap();
-            writeln!(s, "        reset_time = {};", v.reset_time).unwrap();
-            writeln!(s, "        instance_id = {};", v.instance_id).unwrap();
+            writeln!(s, "            map = {};", v.map.as_test_case_value()).unwrap();
+            writeln!(s, "            reset_time = {};", v.reset_time).unwrap();
+            writeln!(s, "            instance_id = {};", v.instance_id).unwrap();
 
-            writeln!(s, "    }},").unwrap();
+            writeln!(s, "        }},").unwrap();
         }
-        writeln!(s, "];").unwrap();
+        writeln!(s, "    ];").unwrap();
 
         writeln!(s, "}} [").unwrap();
 

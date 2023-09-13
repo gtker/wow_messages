@@ -104,31 +104,31 @@ impl crate::Message for SMSG_INSPECT_TALENT {
         writeln!(s, "    unspent_talent_points = {};", self.unspent_talent_points).unwrap();
         writeln!(s, "    amount_of_specs = {};", self.specs.len()).unwrap();
         writeln!(s, "    active_spec = {};", self.active_spec).unwrap();
-        write!(s, "    specs = [").unwrap();
+        writeln!(s, "    specs = [").unwrap();
         for v in self.specs.as_slice() {
-            writeln!(s, "{{").unwrap();
+            writeln!(s, "        {{").unwrap();
             // Members
-            writeln!(s, "        amount_of_talents = {};", v.talents.len()).unwrap();
-            write!(s, "        talents = [").unwrap();
+            writeln!(s, "            amount_of_talents = {};", v.talents.len()).unwrap();
+            writeln!(s, "            talents = [").unwrap();
             for v in v.talents.as_slice() {
-                writeln!(s, "{{").unwrap();
+                writeln!(s, "                {{").unwrap();
                 // Members
-                writeln!(s, "            talent = {};", v.talent.as_test_case_value()).unwrap();
-                writeln!(s, "            max_rank = {};", v.max_rank).unwrap();
+                writeln!(s, "                    talent = {};", v.talent.as_test_case_value()).unwrap();
+                writeln!(s, "                    max_rank = {};", v.max_rank).unwrap();
 
-                writeln!(s, "    }},").unwrap();
+                writeln!(s, "                }},").unwrap();
             }
-            writeln!(s, "];").unwrap();
+            writeln!(s, "            ];").unwrap();
 
-            writeln!(s, "    }},").unwrap();
+            writeln!(s, "        }},").unwrap();
         }
-        writeln!(s, "];").unwrap();
+        writeln!(s, "    ];").unwrap();
         writeln!(s, "    amount_of_glyphs = {};", self.glyphs.len()).unwrap();
-        write!(s, "    glyphs = [").unwrap();
+        writeln!(s, "    glyphs = [").unwrap();
         for v in self.glyphs.as_slice() {
             write!(s, "{v:#04X}, ").unwrap();
         }
-        writeln!(s, "];").unwrap();
+        writeln!(s, "    ];").unwrap();
         panic!("unsupported type for test case printing: 'InspectTalentGearMask' for variable 'talent_gear_mask'");
 
         writeln!(s, "}} [").unwrap();

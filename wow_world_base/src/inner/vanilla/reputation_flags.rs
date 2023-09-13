@@ -28,7 +28,7 @@ impl ReputationFlags {
         if self.is_visible_to_client() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "VISIBLE_TO_CLIENT").unwrap();
             first = false;
@@ -36,7 +36,7 @@ impl ReputationFlags {
         if self.is_enable_at_war() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "ENABLE_AT_WAR").unwrap();
             first = false;
@@ -44,7 +44,7 @@ impl ReputationFlags {
         if self.is_hide_in_client() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "HIDE_IN_CLIENT").unwrap();
             first = false;
@@ -52,7 +52,7 @@ impl ReputationFlags {
         if self.is_force_hide_in_client() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "FORCE_HIDE_IN_CLIENT").unwrap();
             first = false;
@@ -60,7 +60,7 @@ impl ReputationFlags {
         if self.is_force_at_peace() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "FORCE_AT_PEACE").unwrap();
             first = false;
@@ -68,7 +68,7 @@ impl ReputationFlags {
         if self.is_faction_inactive() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "FACTION_INACTIVE").unwrap();
             first = false;

@@ -37,7 +37,7 @@ impl AllowedRace {
         if self.is_empty() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "ALL").unwrap();
             first = false;
@@ -45,7 +45,7 @@ impl AllowedRace {
         if self.is_human() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "HUMAN").unwrap();
             first = false;
@@ -53,7 +53,7 @@ impl AllowedRace {
         if self.is_orc() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "ORC").unwrap();
             first = false;
@@ -61,7 +61,7 @@ impl AllowedRace {
         if self.is_dwarf() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "DWARF").unwrap();
             first = false;
@@ -69,7 +69,7 @@ impl AllowedRace {
         if self.is_night_elf() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "NIGHT_ELF").unwrap();
             first = false;
@@ -77,7 +77,7 @@ impl AllowedRace {
         if self.is_undead() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "UNDEAD").unwrap();
             first = false;
@@ -85,7 +85,7 @@ impl AllowedRace {
         if self.is_tauren() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "TAUREN").unwrap();
             first = false;
@@ -93,7 +93,7 @@ impl AllowedRace {
         if self.is_gnome() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "GNOME").unwrap();
             first = false;
@@ -101,7 +101,7 @@ impl AllowedRace {
         if self.is_troll() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "TROLL").unwrap();
             first = false;
@@ -109,7 +109,7 @@ impl AllowedRace {
         if self.is_goblin() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "GOBLIN").unwrap();
             first = false;
@@ -117,7 +117,7 @@ impl AllowedRace {
         if self.is_bloodelf() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "BLOODELF").unwrap();
             first = false;
@@ -125,7 +125,7 @@ impl AllowedRace {
         if self.is_draenei() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "DRAENEI").unwrap();
             first = false;
@@ -133,7 +133,7 @@ impl AllowedRace {
         if self.is_fel_orc() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "FEL_ORC").unwrap();
             first = false;
@@ -141,7 +141,7 @@ impl AllowedRace {
         if self.is_naga() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "NAGA").unwrap();
             first = false;
@@ -149,7 +149,7 @@ impl AllowedRace {
         if self.is_broken() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "BROKEN").unwrap();
             first = false;
@@ -157,7 +157,7 @@ impl AllowedRace {
         if self.is_skeleton() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "SKELETON").unwrap();
             first = false;
@@ -165,7 +165,7 @@ impl AllowedRace {
         if self.is_vrykul() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "VRYKUL").unwrap();
             first = false;
@@ -173,7 +173,7 @@ impl AllowedRace {
         if self.is_tuskarr() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "TUSKARR").unwrap();
             first = false;
@@ -181,7 +181,7 @@ impl AllowedRace {
         if self.is_forest_troll() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "FOREST_TROLL").unwrap();
             first = false;

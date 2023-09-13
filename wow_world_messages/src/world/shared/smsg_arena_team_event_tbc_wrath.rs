@@ -258,11 +258,11 @@ impl crate::Message for SMSG_ARENA_TEAM_EVENT {
         }
 
         writeln!(s, "    amount_of_strings = {};", self.string.len()).unwrap();
-        write!(s, "    string = [").unwrap();
+        writeln!(s, "    string = [").unwrap();
         for v in self.string.as_slice() {
             write!(s, "\"{v}\", ").unwrap();
         }
-        writeln!(s, "];").unwrap();
+        writeln!(s, "    ];").unwrap();
 
         writeln!(s, "}} [").unwrap();
 

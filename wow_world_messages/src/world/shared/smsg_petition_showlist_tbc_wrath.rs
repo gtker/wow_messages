@@ -66,20 +66,20 @@ impl crate::Message for SMSG_PETITION_SHOWLIST {
         // Members
         writeln!(s, "    npc = {};", self.npc.guid()).unwrap();
         writeln!(s, "    amount_of_petitions = {};", self.petitions.len()).unwrap();
-        write!(s, "    petitions = [").unwrap();
+        writeln!(s, "    petitions = [").unwrap();
         for v in self.petitions.as_slice() {
-            writeln!(s, "{{").unwrap();
+            writeln!(s, "        {{").unwrap();
             // Members
-            writeln!(s, "        index = {};", v.index).unwrap();
-            writeln!(s, "        charter_entry = {};", v.charter_entry).unwrap();
-            writeln!(s, "        charter_display_id = {};", v.charter_display_id).unwrap();
-            writeln!(s, "        guild_charter_cost = {};", v.guild_charter_cost).unwrap();
-            writeln!(s, "        unknown1 = {};", v.unknown1).unwrap();
-            writeln!(s, "        signatures_required = {};", v.signatures_required).unwrap();
+            writeln!(s, "            index = {};", v.index).unwrap();
+            writeln!(s, "            charter_entry = {};", v.charter_entry).unwrap();
+            writeln!(s, "            charter_display_id = {};", v.charter_display_id).unwrap();
+            writeln!(s, "            guild_charter_cost = {};", v.guild_charter_cost).unwrap();
+            writeln!(s, "            unknown1 = {};", v.unknown1).unwrap();
+            writeln!(s, "            signatures_required = {};", v.signatures_required).unwrap();
 
-            writeln!(s, "    }},").unwrap();
+            writeln!(s, "        }},").unwrap();
         }
-        writeln!(s, "];").unwrap();
+        writeln!(s, "    ];").unwrap();
 
         writeln!(s, "}} [").unwrap();
 

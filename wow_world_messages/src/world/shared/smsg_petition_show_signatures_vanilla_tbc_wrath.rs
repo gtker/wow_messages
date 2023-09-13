@@ -80,16 +80,16 @@ impl crate::Message for SMSG_PETITION_SHOW_SIGNATURES {
         writeln!(s, "    owner = {};", self.owner.guid()).unwrap();
         writeln!(s, "    petition = {};", self.petition).unwrap();
         writeln!(s, "    amount_of_signatures = {};", self.signatures.len()).unwrap();
-        write!(s, "    signatures = [").unwrap();
+        writeln!(s, "    signatures = [").unwrap();
         for v in self.signatures.as_slice() {
-            writeln!(s, "{{").unwrap();
+            writeln!(s, "        {{").unwrap();
             // Members
-            writeln!(s, "        signer = {};", v.signer.guid()).unwrap();
-            writeln!(s, "        unknown1 = {};", v.unknown1).unwrap();
+            writeln!(s, "            signer = {};", v.signer.guid()).unwrap();
+            writeln!(s, "            unknown1 = {};", v.unknown1).unwrap();
 
-            writeln!(s, "    }},").unwrap();
+            writeln!(s, "        }},").unwrap();
         }
-        writeln!(s, "];").unwrap();
+        writeln!(s, "    ];").unwrap();
 
         writeln!(s, "}} [").unwrap();
 

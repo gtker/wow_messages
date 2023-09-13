@@ -75,26 +75,26 @@ impl crate::Message for SMSG_LFG_JOIN_RESULT {
         // Members
         writeln!(s, "    result = {};", self.result).unwrap();
         writeln!(s, "    state = {};", self.state).unwrap();
-        write!(s, "    players = [").unwrap();
+        writeln!(s, "    players = [").unwrap();
         for v in self.players.as_slice() {
-            writeln!(s, "{{").unwrap();
+            writeln!(s, "        {{").unwrap();
             // Members
-            writeln!(s, "        player = {};", v.player.guid()).unwrap();
-            writeln!(s, "        amount_of_locked_dungeons = {};", v.locked_dungeons.len()).unwrap();
-            write!(s, "        locked_dungeons = [").unwrap();
+            writeln!(s, "            player = {};", v.player.guid()).unwrap();
+            writeln!(s, "            amount_of_locked_dungeons = {};", v.locked_dungeons.len()).unwrap();
+            writeln!(s, "            locked_dungeons = [").unwrap();
             for v in v.locked_dungeons.as_slice() {
-                writeln!(s, "{{").unwrap();
+                writeln!(s, "                {{").unwrap();
                 // Members
-                writeln!(s, "            dungeon_entry = {};", v.dungeon_entry).unwrap();
-                writeln!(s, "            reason = {};", v.reason).unwrap();
+                writeln!(s, "                    dungeon_entry = {};", v.dungeon_entry).unwrap();
+                writeln!(s, "                    reason = {};", v.reason).unwrap();
 
-                writeln!(s, "    }},").unwrap();
+                writeln!(s, "                }},").unwrap();
             }
-            writeln!(s, "];").unwrap();
+            writeln!(s, "            ];").unwrap();
 
-            writeln!(s, "    }},").unwrap();
+            writeln!(s, "        }},").unwrap();
         }
-        writeln!(s, "];").unwrap();
+        writeln!(s, "    ];").unwrap();
 
         writeln!(s, "}} [").unwrap();
 

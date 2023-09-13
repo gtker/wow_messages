@@ -53,7 +53,7 @@ impl AttributesEx2 {
         if self.is_empty() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "NONE").unwrap();
             first = false;
@@ -61,7 +61,7 @@ impl AttributesEx2 {
         if self.is_allow_dead_target() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "ALLOW_DEAD_TARGET").unwrap();
             first = false;
@@ -69,7 +69,7 @@ impl AttributesEx2 {
         if self.is_no_shapeshift_ui() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "NO_SHAPESHIFT_UI").unwrap();
             first = false;
@@ -77,7 +77,7 @@ impl AttributesEx2 {
         if self.is_ignore_line_of_sight() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "IGNORE_LINE_OF_SIGHT").unwrap();
             first = false;
@@ -85,7 +85,7 @@ impl AttributesEx2 {
         if self.is_allow_low_level_buff() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "ALLOW_LOW_LEVEL_BUFF").unwrap();
             first = false;
@@ -93,7 +93,7 @@ impl AttributesEx2 {
         if self.is_use_shapeshift_bar() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "USE_SHAPESHIFT_BAR").unwrap();
             first = false;
@@ -101,7 +101,7 @@ impl AttributesEx2 {
         if self.is_auto_repeat() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "AUTO_REPEAT").unwrap();
             first = false;
@@ -109,7 +109,7 @@ impl AttributesEx2 {
         if self.is_cannot_cast_on_tapped() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "CANNOT_CAST_ON_TAPPED").unwrap();
             first = false;
@@ -117,7 +117,7 @@ impl AttributesEx2 {
         if self.is_do_not_report_spell_failure() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "DO_NOT_REPORT_SPELL_FAILURE").unwrap();
             first = false;
@@ -125,7 +125,7 @@ impl AttributesEx2 {
         if self.is_include_in_advanced_combat_log() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "INCLUDE_IN_ADVANCED_COMBAT_LOG").unwrap();
             first = false;
@@ -133,7 +133,7 @@ impl AttributesEx2 {
         if self.is_always_cast_as_unit() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "ALWAYS_CAST_AS_UNIT").unwrap();
             first = false;
@@ -141,7 +141,7 @@ impl AttributesEx2 {
         if self.is_special_taming_flag() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "SPECIAL_TAMING_FLAG").unwrap();
             first = false;
@@ -149,7 +149,7 @@ impl AttributesEx2 {
         if self.is_no_target_per_second_costs() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "NO_TARGET_PER_SECOND_COSTS").unwrap();
             first = false;
@@ -157,7 +157,7 @@ impl AttributesEx2 {
         if self.is_chain_from_caster() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "CHAIN_FROM_CASTER").unwrap();
             first = false;
@@ -165,7 +165,7 @@ impl AttributesEx2 {
         if self.is_enchant_own_item_only() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "ENCHANT_OWN_ITEM_ONLY").unwrap();
             first = false;
@@ -173,7 +173,7 @@ impl AttributesEx2 {
         if self.is_allow_while_invisible() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "ALLOW_WHILE_INVISIBLE").unwrap();
             first = false;
@@ -181,7 +181,7 @@ impl AttributesEx2 {
         if self.is_unk15() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "UNK15").unwrap();
             first = false;
@@ -189,7 +189,7 @@ impl AttributesEx2 {
         if self.is_no_active_pets() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "NO_ACTIVE_PETS").unwrap();
             first = false;
@@ -197,7 +197,7 @@ impl AttributesEx2 {
         if self.is_do_not_reset_combat_timers() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "DO_NOT_RESET_COMBAT_TIMERS").unwrap();
             first = false;
@@ -205,7 +205,7 @@ impl AttributesEx2 {
         if self.is_req_dead_pet() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "REQ_DEAD_PET").unwrap();
             first = false;
@@ -213,7 +213,7 @@ impl AttributesEx2 {
         if self.is_allow_while_not_shapeshifted() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "ALLOW_WHILE_NOT_SHAPESHIFTED").unwrap();
             first = false;
@@ -221,7 +221,7 @@ impl AttributesEx2 {
         if self.is_initiate_combat_post_cast() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "INITIATE_COMBAT_POST_CAST").unwrap();
             first = false;
@@ -229,7 +229,7 @@ impl AttributesEx2 {
         if self.is_fail_on_all_targets_immune() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "FAIL_ON_ALL_TARGETS_IMMUNE").unwrap();
             first = false;
@@ -237,7 +237,7 @@ impl AttributesEx2 {
         if self.is_no_initial_threat() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "NO_INITIAL_THREAT").unwrap();
             first = false;
@@ -245,7 +245,7 @@ impl AttributesEx2 {
         if self.is_proc_cooldown_on_failure() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "PROC_COOLDOWN_ON_FAILURE").unwrap();
             first = false;
@@ -253,7 +253,7 @@ impl AttributesEx2 {
         if self.is_item_cast_with_owner_skill() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "ITEM_CAST_WITH_OWNER_SKILL").unwrap();
             first = false;
@@ -261,7 +261,7 @@ impl AttributesEx2 {
         if self.is_dont_block_mana_regen() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "DONT_BLOCK_MANA_REGEN").unwrap();
             first = false;
@@ -269,7 +269,7 @@ impl AttributesEx2 {
         if self.is_no_school_immunities() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "NO_SCHOOL_IMMUNITIES").unwrap();
             first = false;
@@ -277,7 +277,7 @@ impl AttributesEx2 {
         if self.is_ignore_weaponskill() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "IGNORE_WEAPONSKILL").unwrap();
             first = false;
@@ -285,7 +285,7 @@ impl AttributesEx2 {
         if self.is_not_an_action() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "NOT_AN_ACTION").unwrap();
             first = false;
@@ -293,7 +293,7 @@ impl AttributesEx2 {
         if self.is_cant_crit() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "CANT_CRIT").unwrap();
             first = false;
@@ -301,7 +301,7 @@ impl AttributesEx2 {
         if self.is_active_threat() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "ACTIVE_THREAT").unwrap();
             first = false;
@@ -309,7 +309,7 @@ impl AttributesEx2 {
         if self.is_retain_item_cast() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "RETAIN_ITEM_CAST").unwrap();
             first = false;

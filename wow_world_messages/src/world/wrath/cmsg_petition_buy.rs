@@ -185,11 +185,11 @@ impl crate::Message for CMSG_PETITION_BUY {
         writeln!(s, "    unknown12 = {};", self.unknown12).unwrap();
         writeln!(s, "    unknown13 = {};", self.unknown13).unwrap();
         writeln!(s, "    unknown14 = {};", self.unknown14).unwrap();
-        write!(s, "    unknown15 = [").unwrap();
+        writeln!(s, "    unknown15 = [").unwrap();
         for v in self.unknown15.as_slice() {
             write!(s, "\"{v}\", ").unwrap();
         }
-        writeln!(s, "];").unwrap();
+        writeln!(s, "    ];").unwrap();
         writeln!(s, "    index = {};", self.index).unwrap();
         writeln!(s, "    unknown16 = {};", self.unknown16).unwrap();
 

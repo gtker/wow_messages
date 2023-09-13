@@ -275,9 +275,9 @@ impl crate::Message for SMSG_SPELL_GO {
             // source: Vector3d
             writeln!(s, "        source = {{").unwrap();
             // Members
-            writeln!(s, "            x = {}", if if_statement.source.x.to_string().contains('.') { if_statement.source.x.to_string() } else { format!("{}.0", if_statement.source.x) }).unwrap();
-            writeln!(s, "            y = {}", if if_statement.source.y.to_string().contains('.') { if_statement.source.y.to_string() } else { format!("{}.0", if_statement.source.y) }).unwrap();
-            writeln!(s, "            z = {}", if if_statement.source.z.to_string().contains('.') { if_statement.source.z.to_string() } else { format!("{}.0", if_statement.source.z) }).unwrap();
+            writeln!(s, "            x = {};", if if_statement.source.x.to_string().contains('.') { if_statement.source.x.to_string() } else { format!("{}.0", if_statement.source.x) }).unwrap();
+            writeln!(s, "            y = {};", if if_statement.source.y.to_string().contains('.') { if_statement.source.y.to_string() } else { format!("{}.0", if_statement.source.y) }).unwrap();
+            writeln!(s, "            z = {};", if if_statement.source.z.to_string().contains('.') { if_statement.source.z.to_string() } else { format!("{}.0", if_statement.source.z) }).unwrap();
 
             writeln!(s, "    }};").unwrap();
         }
@@ -286,9 +286,9 @@ impl crate::Message for SMSG_SPELL_GO {
             // destination: Vector3d
             writeln!(s, "        destination = {{").unwrap();
             // Members
-            writeln!(s, "            x = {}", if if_statement.destination.x.to_string().contains('.') { if_statement.destination.x.to_string() } else { format!("{}.0", if_statement.destination.x) }).unwrap();
-            writeln!(s, "            y = {}", if if_statement.destination.y.to_string().contains('.') { if_statement.destination.y.to_string() } else { format!("{}.0", if_statement.destination.y) }).unwrap();
-            writeln!(s, "            z = {}", if if_statement.destination.z.to_string().contains('.') { if_statement.destination.z.to_string() } else { format!("{}.0", if_statement.destination.z) }).unwrap();
+            writeln!(s, "            x = {};", if if_statement.destination.x.to_string().contains('.') { if_statement.destination.x.to_string() } else { format!("{}.0", if_statement.destination.x) }).unwrap();
+            writeln!(s, "            y = {};", if if_statement.destination.y.to_string().contains('.') { if_statement.destination.y.to_string() } else { format!("{}.0", if_statement.destination.y) }).unwrap();
+            writeln!(s, "            z = {};", if if_statement.destination.z.to_string().contains('.') { if_statement.destination.z.to_string() } else { format!("{}.0", if_statement.destination.z) }).unwrap();
 
             writeln!(s, "    }};").unwrap();
         }
@@ -306,15 +306,15 @@ impl crate::Message for SMSG_SPELL_GO {
         if let Some(if_statement) = &self.flags.get_rune_update() {
             writeln!(s, "    rune_mask_initial = {};", if_statement.rune_mask_initial).unwrap();
             writeln!(s, "    rune_mask_after_cast = {};", if_statement.rune_mask_after_cast).unwrap();
-            write!(s, "    rune_cooldowns = [").unwrap();
+            writeln!(s, "    rune_cooldowns = [").unwrap();
             for v in if_statement.rune_cooldowns.as_slice() {
                 write!(s, "{v:#04X}, ").unwrap();
             }
-            writeln!(s, "];").unwrap();
+            writeln!(s, "    ];").unwrap();
         }
 
         if let Some(if_statement) = &self.flags.get_adjust_missile() {
-            writeln!(s, "    elevation = {}", if if_statement.elevation.to_string().contains('.') { if_statement.elevation.to_string() } else { format!("{}.0", if_statement.elevation) }).unwrap();
+            writeln!(s, "    elevation = {};", if if_statement.elevation.to_string().contains('.') { if_statement.elevation.to_string() } else { format!("{}.0", if_statement.elevation) }).unwrap();
             writeln!(s, "    delay_trajectory = {};", if_statement.delay_trajectory).unwrap();
         }
 

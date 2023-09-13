@@ -25,7 +25,7 @@ impl FactionFlag {
         if self.is_visible() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "VISIBLE").unwrap();
             first = false;
@@ -33,7 +33,7 @@ impl FactionFlag {
         if self.is_at_war() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "AT_WAR").unwrap();
             first = false;
@@ -41,7 +41,7 @@ impl FactionFlag {
         if self.is_hidden() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "HIDDEN").unwrap();
             first = false;
@@ -49,7 +49,7 @@ impl FactionFlag {
         if self.is_invisible_forced() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "INVISIBLE_FORCED").unwrap();
             first = false;
@@ -57,7 +57,7 @@ impl FactionFlag {
         if self.is_peace_forced() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "PEACE_FORCED").unwrap();
             first = false;
@@ -65,7 +65,7 @@ impl FactionFlag {
         if self.is_inactive() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "INACTIVE").unwrap();
             first = false;
@@ -73,7 +73,7 @@ impl FactionFlag {
         if self.is_rival() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "RIVAL").unwrap();
             first = false;

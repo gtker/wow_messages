@@ -53,7 +53,7 @@ impl AttributesEx1 {
         if self.is_empty() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "NONE").unwrap();
             first = false;
@@ -61,7 +61,7 @@ impl AttributesEx1 {
         if self.is_dismiss_pet_first() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "DISMISS_PET_FIRST").unwrap();
             first = false;
@@ -69,7 +69,7 @@ impl AttributesEx1 {
         if self.is_use_all_mana() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "USE_ALL_MANA").unwrap();
             first = false;
@@ -77,7 +77,7 @@ impl AttributesEx1 {
         if self.is_is_channeled() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "IS_CHANNELED").unwrap();
             first = false;
@@ -85,7 +85,7 @@ impl AttributesEx1 {
         if self.is_no_redirection() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "NO_REDIRECTION").unwrap();
             first = false;
@@ -93,7 +93,7 @@ impl AttributesEx1 {
         if self.is_no_skill_increase() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "NO_SKILL_INCREASE").unwrap();
             first = false;
@@ -101,7 +101,7 @@ impl AttributesEx1 {
         if self.is_allow_while_stealthed() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "ALLOW_WHILE_STEALTHED").unwrap();
             first = false;
@@ -109,7 +109,7 @@ impl AttributesEx1 {
         if self.is_is_self_channeled() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "IS_SELF_CHANNELED").unwrap();
             first = false;
@@ -117,7 +117,7 @@ impl AttributesEx1 {
         if self.is_no_reflection() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "NO_REFLECTION").unwrap();
             first = false;
@@ -125,7 +125,7 @@ impl AttributesEx1 {
         if self.is_only_peaceful_targets() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "ONLY_PEACEFUL_TARGETS").unwrap();
             first = false;
@@ -133,7 +133,7 @@ impl AttributesEx1 {
         if self.is_initiates_combat_enables_auto_attack() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "INITIATES_COMBAT_ENABLES_AUTO_ATTACK").unwrap();
             first = false;
@@ -141,7 +141,7 @@ impl AttributesEx1 {
         if self.is_no_threat() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "NO_THREAT").unwrap();
             first = false;
@@ -149,7 +149,7 @@ impl AttributesEx1 {
         if self.is_aura_unique() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "AURA_UNIQUE").unwrap();
             first = false;
@@ -157,7 +157,7 @@ impl AttributesEx1 {
         if self.is_failure_breaks_stealth() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "FAILURE_BREAKS_STEALTH").unwrap();
             first = false;
@@ -165,7 +165,7 @@ impl AttributesEx1 {
         if self.is_toggle_farsight() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "TOGGLE_FARSIGHT").unwrap();
             first = false;
@@ -173,7 +173,7 @@ impl AttributesEx1 {
         if self.is_track_target_in_channel() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "TRACK_TARGET_IN_CHANNEL").unwrap();
             first = false;
@@ -181,7 +181,7 @@ impl AttributesEx1 {
         if self.is_immunity_purges_effect() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "IMMUNITY_PURGES_EFFECT").unwrap();
             first = false;
@@ -189,7 +189,7 @@ impl AttributesEx1 {
         if self.is_immunity_to_hostile_and_friendly_effects() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "IMMUNITY_TO_HOSTILE_AND_FRIENDLY_EFFECTS").unwrap();
             first = false;
@@ -197,7 +197,7 @@ impl AttributesEx1 {
         if self.is_no_autocast_ai() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "NO_AUTOCAST_AI").unwrap();
             first = false;
@@ -205,7 +205,7 @@ impl AttributesEx1 {
         if self.is_prevents_anim() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "PREVENTS_ANIM").unwrap();
             first = false;
@@ -213,7 +213,7 @@ impl AttributesEx1 {
         if self.is_exclude_caster() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "EXCLUDE_CASTER").unwrap();
             first = false;
@@ -221,7 +221,7 @@ impl AttributesEx1 {
         if self.is_finishing_move_damage() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "FINISHING_MOVE_DAMAGE").unwrap();
             first = false;
@@ -229,7 +229,7 @@ impl AttributesEx1 {
         if self.is_threat_only_on_miss() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "THREAT_ONLY_ON_MISS").unwrap();
             first = false;
@@ -237,7 +237,7 @@ impl AttributesEx1 {
         if self.is_finishing_move_duration() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "FINISHING_MOVE_DURATION").unwrap();
             first = false;
@@ -245,7 +245,7 @@ impl AttributesEx1 {
         if self.is_unk23() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "UNK23").unwrap();
             first = false;
@@ -253,7 +253,7 @@ impl AttributesEx1 {
         if self.is_special_skillup() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "SPECIAL_SKILLUP").unwrap();
             first = false;
@@ -261,7 +261,7 @@ impl AttributesEx1 {
         if self.is_aura_stays_after_combat() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "AURA_STAYS_AFTER_COMBAT").unwrap();
             first = false;
@@ -269,7 +269,7 @@ impl AttributesEx1 {
         if self.is_require_all_targets() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "REQUIRE_ALL_TARGETS").unwrap();
             first = false;
@@ -277,7 +277,7 @@ impl AttributesEx1 {
         if self.is_discount_power_on_miss() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "DISCOUNT_POWER_ON_MISS").unwrap();
             first = false;
@@ -285,7 +285,7 @@ impl AttributesEx1 {
         if self.is_no_aura_icon() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "NO_AURA_ICON").unwrap();
             first = false;
@@ -293,7 +293,7 @@ impl AttributesEx1 {
         if self.is_name_in_channel_bar() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "NAME_IN_CHANNEL_BAR").unwrap();
             first = false;
@@ -301,7 +301,7 @@ impl AttributesEx1 {
         if self.is_combo_on_block() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "COMBO_ON_BLOCK").unwrap();
             first = false;
@@ -309,7 +309,7 @@ impl AttributesEx1 {
         if self.is_cast_when_learned() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "CAST_WHEN_LEARNED").unwrap();
             first = false;

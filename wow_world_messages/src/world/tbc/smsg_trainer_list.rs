@@ -84,27 +84,27 @@ impl crate::Message for SMSG_TRAINER_LIST {
         writeln!(s, "    guid = {};", self.guid.guid()).unwrap();
         writeln!(s, "    trainer_type = {};", self.trainer_type).unwrap();
         writeln!(s, "    amount_of_spells = {};", self.spells.len()).unwrap();
-        write!(s, "    spells = [").unwrap();
+        writeln!(s, "    spells = [").unwrap();
         for v in self.spells.as_slice() {
-            writeln!(s, "{{").unwrap();
+            writeln!(s, "        {{").unwrap();
             // Members
-            writeln!(s, "        spell = {};", v.spell).unwrap();
-            writeln!(s, "        state = {};", v.state.as_test_case_value()).unwrap();
-            writeln!(s, "        spell_cost = {};", v.spell_cost).unwrap();
-            writeln!(s, "        talent_point_cost = {};", v.talent_point_cost).unwrap();
-            writeln!(s, "        first_rank = {};", v.first_rank).unwrap();
-            writeln!(s, "        required_level = {};", v.required_level).unwrap();
-            writeln!(s, "        required_skill = {};", v.required_skill.as_test_case_value()).unwrap();
-            writeln!(s, "        required_skill_value = {};", v.required_skill_value).unwrap();
-            write!(s, "        required_spells = [").unwrap();
+            writeln!(s, "            spell = {};", v.spell).unwrap();
+            writeln!(s, "            state = {};", v.state.as_test_case_value()).unwrap();
+            writeln!(s, "            spell_cost = {};", v.spell_cost).unwrap();
+            writeln!(s, "            talent_point_cost = {};", v.talent_point_cost).unwrap();
+            writeln!(s, "            first_rank = {};", v.first_rank).unwrap();
+            writeln!(s, "            required_level = {};", v.required_level).unwrap();
+            writeln!(s, "            required_skill = {};", v.required_skill.as_test_case_value()).unwrap();
+            writeln!(s, "            required_skill_value = {};", v.required_skill_value).unwrap();
+            writeln!(s, "            required_spells = [").unwrap();
             for v in v.required_spells.as_slice() {
                 write!(s, "{v:#04X}, ").unwrap();
             }
-            writeln!(s, "];").unwrap();
+            writeln!(s, "            ];").unwrap();
 
-            writeln!(s, "    }},").unwrap();
+            writeln!(s, "        }},").unwrap();
         }
-        writeln!(s, "];").unwrap();
+        writeln!(s, "    ];").unwrap();
         writeln!(s, "    greeting = \"{}\";", self.greeting).unwrap();
 
         writeln!(s, "}} [").unwrap();

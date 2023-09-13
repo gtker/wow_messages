@@ -95,16 +95,16 @@ impl crate::Message for SMSG_QUESTGIVER_QUEST_COMPLETE {
         writeln!(s, "    money_reward = {};", self.money_reward.as_int()).unwrap();
         writeln!(s, "    honor_reward = {};", self.honor_reward).unwrap();
         writeln!(s, "    amount_of_item_rewards = {};", self.item_rewards.len()).unwrap();
-        write!(s, "    item_rewards = [").unwrap();
+        writeln!(s, "    item_rewards = [").unwrap();
         for v in self.item_rewards.as_slice() {
-            writeln!(s, "{{").unwrap();
+            writeln!(s, "        {{").unwrap();
             // Members
-            writeln!(s, "        item = {};", v.item).unwrap();
-            writeln!(s, "        item_count = {};", v.item_count).unwrap();
+            writeln!(s, "            item = {};", v.item).unwrap();
+            writeln!(s, "            item_count = {};", v.item_count).unwrap();
 
-            writeln!(s, "    }},").unwrap();
+            writeln!(s, "        }},").unwrap();
         }
-        writeln!(s, "];").unwrap();
+        writeln!(s, "    ];").unwrap();
 
         writeln!(s, "}} [").unwrap();
 

@@ -27,7 +27,7 @@ impl LfgUpdateFlag {
         if self.is_empty() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "NONE").unwrap();
             first = false;
@@ -35,7 +35,7 @@ impl LfgUpdateFlag {
         if self.is_character_info() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "CHARACTER_INFO").unwrap();
             first = false;
@@ -43,7 +43,7 @@ impl LfgUpdateFlag {
         if self.is_comment() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "COMMENT").unwrap();
             first = false;
@@ -51,7 +51,7 @@ impl LfgUpdateFlag {
         if self.is_group_leader() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "GROUP_LEADER").unwrap();
             first = false;
@@ -59,7 +59,7 @@ impl LfgUpdateFlag {
         if self.is_group_guid() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "GROUP_GUID").unwrap();
             first = false;
@@ -67,7 +67,7 @@ impl LfgUpdateFlag {
         if self.is_roles() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "ROLES").unwrap();
             first = false;
@@ -75,7 +75,7 @@ impl LfgUpdateFlag {
         if self.is_area() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "AREA").unwrap();
             first = false;
@@ -83,7 +83,7 @@ impl LfgUpdateFlag {
         if self.is_status() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "STATUS").unwrap();
             first = false;
@@ -91,7 +91,7 @@ impl LfgUpdateFlag {
         if self.is_bound() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "BOUND").unwrap();
             first = false;

@@ -55,16 +55,16 @@ impl crate::Message for SMSG_LFG_UPDATE_LFG {
 
         writeln!(s, "test SMSG_LFG_UPDATE_LFG {{").unwrap();
         // Members
-        write!(s, "    data = [").unwrap();
+        writeln!(s, "    data = [").unwrap();
         for v in self.data.as_slice() {
-            writeln!(s, "{{").unwrap();
+            writeln!(s, "        {{").unwrap();
             // Members
-            writeln!(s, "        entry = {};", v.entry).unwrap();
-            writeln!(s, "        lfg_type = {};", v.lfg_type.as_test_case_value()).unwrap();
+            writeln!(s, "            entry = {};", v.entry).unwrap();
+            writeln!(s, "            lfg_type = {};", v.lfg_type.as_test_case_value()).unwrap();
 
-            writeln!(s, "    }},").unwrap();
+            writeln!(s, "        }},").unwrap();
         }
-        writeln!(s, "];").unwrap();
+        writeln!(s, "    ];").unwrap();
 
         writeln!(s, "}} [").unwrap();
 

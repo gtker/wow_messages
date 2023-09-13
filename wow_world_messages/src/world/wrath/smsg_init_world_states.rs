@@ -81,16 +81,16 @@ impl crate::Message for SMSG_INIT_WORLD_STATES {
         writeln!(s, "    area = {};", self.area.as_test_case_value()).unwrap();
         writeln!(s, "    sub_area = {};", self.sub_area.as_test_case_value()).unwrap();
         writeln!(s, "    amount_of_states = {};", self.states.len()).unwrap();
-        write!(s, "    states = [").unwrap();
+        writeln!(s, "    states = [").unwrap();
         for v in self.states.as_slice() {
-            writeln!(s, "{{").unwrap();
+            writeln!(s, "        {{").unwrap();
             // Members
-            writeln!(s, "        state = {};", v.state).unwrap();
-            writeln!(s, "        value = {};", v.value).unwrap();
+            writeln!(s, "            state = {};", v.state).unwrap();
+            writeln!(s, "            value = {};", v.value).unwrap();
 
-            writeln!(s, "    }},").unwrap();
+            writeln!(s, "        }},").unwrap();
         }
-        writeln!(s, "];").unwrap();
+        writeln!(s, "    ];").unwrap();
 
         writeln!(s, "}} [").unwrap();
 

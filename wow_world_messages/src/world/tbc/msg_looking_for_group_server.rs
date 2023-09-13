@@ -84,35 +84,35 @@ impl crate::Message for MSG_LOOKING_FOR_GROUP_Server {
         writeln!(s, "    entry = {};", self.entry).unwrap();
         writeln!(s, "    amount_of_players_displayed = {};", self.players_displayed.len()).unwrap();
         writeln!(s, "    amount_of_players_found = {};", self.amount_of_players_found).unwrap();
-        write!(s, "    players_displayed = [").unwrap();
+        writeln!(s, "    players_displayed = [").unwrap();
         for v in self.players_displayed.as_slice() {
-            writeln!(s, "{{").unwrap();
+            writeln!(s, "        {{").unwrap();
             // Members
-            writeln!(s, "        guid = {};", v.guid.guid()).unwrap();
-            writeln!(s, "        level = {};", v.level.as_int()).unwrap();
-            writeln!(s, "        area = {};", v.area.as_test_case_value()).unwrap();
-            writeln!(s, "        lfg_mode = {};", v.lfg_mode.as_test_case_value()).unwrap();
-            write!(s, "        lfg_slots = [").unwrap();
+            writeln!(s, "            guid = {};", v.guid.guid()).unwrap();
+            writeln!(s, "            level = {};", v.level.as_int()).unwrap();
+            writeln!(s, "            area = {};", v.area.as_test_case_value()).unwrap();
+            writeln!(s, "            lfg_mode = {};", v.lfg_mode.as_test_case_value()).unwrap();
+            writeln!(s, "            lfg_slots = [").unwrap();
             for v in v.lfg_slots.as_slice() {
                 write!(s, "{v:#04X}, ").unwrap();
             }
-            writeln!(s, "];").unwrap();
-            writeln!(s, "        comment = \"{}\";", v.comment).unwrap();
-            writeln!(s, "        amount_of_members = {};", v.members.len()).unwrap();
-            write!(s, "        members = [").unwrap();
+            writeln!(s, "            ];").unwrap();
+            writeln!(s, "            comment = \"{}\";", v.comment).unwrap();
+            writeln!(s, "            amount_of_members = {};", v.members.len()).unwrap();
+            writeln!(s, "            members = [").unwrap();
             for v in v.members.as_slice() {
-                writeln!(s, "{{").unwrap();
+                writeln!(s, "                {{").unwrap();
                 // Members
-                writeln!(s, "            guid = {};", v.guid.guid()).unwrap();
-                writeln!(s, "            level = {};", v.level.as_int()).unwrap();
+                writeln!(s, "                    guid = {};", v.guid.guid()).unwrap();
+                writeln!(s, "                    level = {};", v.level.as_int()).unwrap();
 
-                writeln!(s, "    }},").unwrap();
+                writeln!(s, "                }},").unwrap();
             }
-            writeln!(s, "];").unwrap();
+            writeln!(s, "            ];").unwrap();
 
-            writeln!(s, "    }},").unwrap();
+            writeln!(s, "        }},").unwrap();
         }
-        writeln!(s, "];").unwrap();
+        writeln!(s, "    ];").unwrap();
 
         writeln!(s, "}} [").unwrap();
 

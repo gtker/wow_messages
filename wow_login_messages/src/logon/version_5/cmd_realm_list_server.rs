@@ -183,23 +183,23 @@ impl ServerMessage for CMD_REALM_LIST_Server {
         writeln!(s, "test CMD_REALM_LIST_Server {{").unwrap();
         // Members
         writeln!(s, "    number_of_realms = {};", self.realms.len()).unwrap();
-        write!(s, "    realms = [").unwrap();
+        writeln!(s, "    realms = [").unwrap();
         for v in self.realms.as_slice() {
-            writeln!(s, "{{").unwrap();
+            writeln!(s, "        {{").unwrap();
             // Members
-            writeln!(s, "        realm_type = {};", v.realm_type.as_test_case_value()).unwrap();
-            writeln!(s, "        locked = {};", if v.locked { "TRUE" } else { "FALSE" }).unwrap();
-            writeln!(s, "        flag = {};", v.flag.as_test_case_value()).unwrap();
-            writeln!(s, "        name = \"{}\";", v.name).unwrap();
-            writeln!(s, "        address = \"{}\";", v.address).unwrap();
-            writeln!(s, "        population = {}", if v.population.as_int().to_string().contains('.') { v.population.as_int().to_string() } else { format!("{}.0", v.population.as_int()) }).unwrap();
-            writeln!(s, "        number_of_characters_on_realm = {};", v.number_of_characters_on_realm).unwrap();
-            writeln!(s, "        category = {};", v.category.as_test_case_value()).unwrap();
-            writeln!(s, "        realm_id = {};", v.realm_id).unwrap();
+            writeln!(s, "            realm_type = {};", v.realm_type.as_test_case_value()).unwrap();
+            writeln!(s, "            locked = {};", if v.locked { "TRUE" } else { "FALSE" }).unwrap();
+            writeln!(s, "            flag = {};", v.flag.as_test_case_value()).unwrap();
+            writeln!(s, "            name = \"{}\";", v.name).unwrap();
+            writeln!(s, "            address = \"{}\";", v.address).unwrap();
+            writeln!(s, "            population = {};", if v.population.as_int().to_string().contains('.') { v.population.as_int().to_string() } else { format!("{}.0", v.population.as_int()) }).unwrap();
+            writeln!(s, "            number_of_characters_on_realm = {};", v.number_of_characters_on_realm).unwrap();
+            writeln!(s, "            category = {};", v.category.as_test_case_value()).unwrap();
+            writeln!(s, "            realm_id = {};", v.realm_id).unwrap();
 
-            writeln!(s, "    }},").unwrap();
+            writeln!(s, "        }},").unwrap();
         }
-        writeln!(s, "];").unwrap();
+        writeln!(s, "    ];").unwrap();
 
         writeln!(s, "}} [").unwrap();
 

@@ -146,11 +146,11 @@ impl crate::Message for SMSG_NAME_QUERY_RESPONSE {
             crate::wrath::SMSG_NAME_QUERY_RESPONSE_DeclinedNames::Yes {
                 declined_names,
             } => {
-                write!(s, "    declined_names = [").unwrap();
+                writeln!(s, "    declined_names = [").unwrap();
                 for v in declined_names.as_slice() {
                     write!(s, "\"{v}\", ").unwrap();
                 }
-                writeln!(s, "];").unwrap();
+                writeln!(s, "    ];").unwrap();
             }
             _ => {}
         }

@@ -154,12 +154,12 @@ impl crate::Message for SMSG_GAMEOBJECT_QUERY_RESPONSE {
             writeln!(s, "    icon_name = \"{}\";", found.icon_name).unwrap();
             writeln!(s, "    cast_bar_caption = \"{}\";", found.cast_bar_caption).unwrap();
             writeln!(s, "    unknown = \"{}\";", found.unknown).unwrap();
-            write!(s, "    raw_data = [").unwrap();
+            writeln!(s, "    raw_data = [").unwrap();
             for v in found.raw_data.as_slice() {
                 write!(s, "{v:#04X}, ").unwrap();
             }
-            writeln!(s, "];").unwrap();
-            writeln!(s, "    gameobject_size = {}", if found.gameobject_size.to_string().contains('.') { found.gameobject_size.to_string() } else { format!("{}.0", found.gameobject_size) }).unwrap();
+            writeln!(s, "    ];").unwrap();
+            writeln!(s, "    gameobject_size = {};", if found.gameobject_size.to_string().contains('.') { found.gameobject_size.to_string() } else { format!("{}.0", found.gameobject_size) }).unwrap();
         }
 
         writeln!(s, "}} [").unwrap();

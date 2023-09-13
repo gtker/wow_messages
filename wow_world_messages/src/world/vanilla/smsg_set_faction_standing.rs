@@ -60,16 +60,16 @@ impl crate::Message for SMSG_SET_FACTION_STANDING {
         writeln!(s, "test SMSG_SET_FACTION_STANDING {{").unwrap();
         // Members
         writeln!(s, "    amount_of_faction_standings = {};", self.faction_standings.len()).unwrap();
-        write!(s, "    faction_standings = [").unwrap();
+        writeln!(s, "    faction_standings = [").unwrap();
         for v in self.faction_standings.as_slice() {
-            writeln!(s, "{{").unwrap();
+            writeln!(s, "        {{").unwrap();
             // Members
-            writeln!(s, "        faction = {};", v.faction.as_test_case_value()).unwrap();
-            writeln!(s, "        standing = {};", v.standing).unwrap();
+            writeln!(s, "            faction = {};", v.faction.as_test_case_value()).unwrap();
+            writeln!(s, "            standing = {};", v.standing).unwrap();
 
-            writeln!(s, "    }},").unwrap();
+            writeln!(s, "        }},").unwrap();
         }
-        writeln!(s, "];").unwrap();
+        writeln!(s, "    ];").unwrap();
 
         writeln!(s, "}} [").unwrap();
 

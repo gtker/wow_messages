@@ -93,20 +93,20 @@ impl crate::Message for SMSG_QUESTGIVER_QUEST_LIST {
         writeln!(s, "    emote_delay = {};", self.emote_delay).unwrap();
         writeln!(s, "    emote = {};", self.emote).unwrap();
         writeln!(s, "    amount_of_entries = {};", self.quest_items.len()).unwrap();
-        write!(s, "    quest_items = [").unwrap();
+        writeln!(s, "    quest_items = [").unwrap();
         for v in self.quest_items.as_slice() {
-            writeln!(s, "{{").unwrap();
+            writeln!(s, "        {{").unwrap();
             // Members
-            writeln!(s, "        quest_id = {};", v.quest_id).unwrap();
-            writeln!(s, "        quest_icon = {};", v.quest_icon).unwrap();
-            writeln!(s, "        level = {};", v.level.as_int()).unwrap();
-            writeln!(s, "        flags = {};", v.flags).unwrap();
-            writeln!(s, "        repeatable = {};", if v.repeatable { "TRUE" } else { "FALSE" }).unwrap();
-            writeln!(s, "        title = \"{}\";", v.title).unwrap();
+            writeln!(s, "            quest_id = {};", v.quest_id).unwrap();
+            writeln!(s, "            quest_icon = {};", v.quest_icon).unwrap();
+            writeln!(s, "            level = {};", v.level.as_int()).unwrap();
+            writeln!(s, "            flags = {};", v.flags).unwrap();
+            writeln!(s, "            repeatable = {};", if v.repeatable { "TRUE" } else { "FALSE" }).unwrap();
+            writeln!(s, "            title = \"{}\";", v.title).unwrap();
 
-            writeln!(s, "    }},").unwrap();
+            writeln!(s, "        }},").unwrap();
         }
-        writeln!(s, "];").unwrap();
+        writeln!(s, "    ];").unwrap();
 
         writeln!(s, "}} [").unwrap();
 

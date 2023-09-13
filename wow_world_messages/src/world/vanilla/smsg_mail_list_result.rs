@@ -62,57 +62,57 @@ impl crate::Message for SMSG_MAIL_LIST_RESULT {
         writeln!(s, "test SMSG_MAIL_LIST_RESULT {{").unwrap();
         // Members
         writeln!(s, "    amount_of_mails = {};", self.mails.len()).unwrap();
-        write!(s, "    mails = [").unwrap();
+        writeln!(s, "    mails = [").unwrap();
         for v in self.mails.as_slice() {
-            writeln!(s, "{{").unwrap();
+            writeln!(s, "        {{").unwrap();
             // Members
-            writeln!(s, "        message_id = {};", v.message_id).unwrap();
-            writeln!(s, "        message_type = {};", MailType::try_from(v.message_type.as_int()).unwrap().as_test_case_value()).unwrap();
+            writeln!(s, "            message_id = {};", v.message_id).unwrap();
+            writeln!(s, "            message_type = {};", MailType::try_from(v.message_type.as_int()).unwrap().as_test_case_value()).unwrap();
             match &v.message_type {
                 crate::vanilla::Mail_MailType::Normal {
                     sender,
                 } => {
-                    writeln!(s, "        sender = {};", sender.guid()).unwrap();
+                    writeln!(s, "            sender = {};", sender.guid()).unwrap();
                 }
                 crate::vanilla::Mail_MailType::Auction {
                     auction_id,
                 } => {
-                    writeln!(s, "        auction_id = {};", auction_id).unwrap();
+                    writeln!(s, "            auction_id = {};", auction_id).unwrap();
                 }
                 crate::vanilla::Mail_MailType::Creature {
                     sender_id,
                 } => {
-                    writeln!(s, "        sender_id = {};", sender_id).unwrap();
+                    writeln!(s, "            sender_id = {};", sender_id).unwrap();
                 }
                 crate::vanilla::Mail_MailType::Gameobject {
                     sender_id,
                 } => {
-                    writeln!(s, "        sender_id = {};", sender_id).unwrap();
+                    writeln!(s, "            sender_id = {};", sender_id).unwrap();
                 }
                 _ => {}
             }
 
-            writeln!(s, "        subject = \"{}\";", v.subject).unwrap();
-            writeln!(s, "        item_text_id = {};", v.item_text_id).unwrap();
-            writeln!(s, "        unknown1 = {};", v.unknown1).unwrap();
-            writeln!(s, "        stationery = {};", v.stationery).unwrap();
-            writeln!(s, "        item = {};", v.item).unwrap();
-            writeln!(s, "        item_enchant_id = {};", v.item_enchant_id).unwrap();
-            writeln!(s, "        item_random_property_id = {};", v.item_random_property_id).unwrap();
-            writeln!(s, "        item_suffix_factor = {};", v.item_suffix_factor).unwrap();
-            writeln!(s, "        item_stack_size = {};", v.item_stack_size).unwrap();
-            writeln!(s, "        item_spell_charges = {};", v.item_spell_charges).unwrap();
-            writeln!(s, "        max_durability = {};", v.max_durability).unwrap();
-            writeln!(s, "        durability = {};", v.durability).unwrap();
-            writeln!(s, "        money = {};", v.money.as_int()).unwrap();
-            writeln!(s, "        cash_on_delivery_amount = {};", v.cash_on_delivery_amount).unwrap();
-            writeln!(s, "        checked_timestamp = {};", v.checked_timestamp).unwrap();
-            writeln!(s, "        expiration_time = {}", if v.expiration_time.to_string().contains('.') { v.expiration_time.to_string() } else { format!("{}.0", v.expiration_time) }).unwrap();
-            writeln!(s, "        mail_template_id = {};", v.mail_template_id).unwrap();
+            writeln!(s, "            subject = \"{}\";", v.subject).unwrap();
+            writeln!(s, "            item_text_id = {};", v.item_text_id).unwrap();
+            writeln!(s, "            unknown1 = {};", v.unknown1).unwrap();
+            writeln!(s, "            stationery = {};", v.stationery).unwrap();
+            writeln!(s, "            item = {};", v.item).unwrap();
+            writeln!(s, "            item_enchant_id = {};", v.item_enchant_id).unwrap();
+            writeln!(s, "            item_random_property_id = {};", v.item_random_property_id).unwrap();
+            writeln!(s, "            item_suffix_factor = {};", v.item_suffix_factor).unwrap();
+            writeln!(s, "            item_stack_size = {};", v.item_stack_size).unwrap();
+            writeln!(s, "            item_spell_charges = {};", v.item_spell_charges).unwrap();
+            writeln!(s, "            max_durability = {};", v.max_durability).unwrap();
+            writeln!(s, "            durability = {};", v.durability).unwrap();
+            writeln!(s, "            money = {};", v.money.as_int()).unwrap();
+            writeln!(s, "            cash_on_delivery_amount = {};", v.cash_on_delivery_amount).unwrap();
+            writeln!(s, "            checked_timestamp = {};", v.checked_timestamp).unwrap();
+            writeln!(s, "            expiration_time = {};", if v.expiration_time.to_string().contains('.') { v.expiration_time.to_string() } else { format!("{}.0", v.expiration_time) }).unwrap();
+            writeln!(s, "            mail_template_id = {};", v.mail_template_id).unwrap();
 
-            writeln!(s, "    }},").unwrap();
+            writeln!(s, "        }},").unwrap();
         }
-        writeln!(s, "];").unwrap();
+        writeln!(s, "    ];").unwrap();
 
         writeln!(s, "}} [").unwrap();
 

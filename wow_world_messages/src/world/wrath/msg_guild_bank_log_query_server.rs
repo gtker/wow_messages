@@ -73,18 +73,18 @@ impl crate::Message for MSG_GUILD_BANK_LOG_QUERY_Server {
         writeln!(s, "    unix_time = {};", self.unix_time).unwrap();
         writeln!(s, "    slot = {};", self.slot).unwrap();
         writeln!(s, "    amount_of_money_logs = {};", self.money_logs.len()).unwrap();
-        write!(s, "    money_logs = [").unwrap();
+        writeln!(s, "    money_logs = [").unwrap();
         for v in self.money_logs.as_slice() {
-            writeln!(s, "{{").unwrap();
+            writeln!(s, "        {{").unwrap();
             // Members
-            writeln!(s, "        action = {};", v.action).unwrap();
-            writeln!(s, "        player = {};", v.player.guid()).unwrap();
-            writeln!(s, "        entry = {};", v.entry).unwrap();
-            writeln!(s, "        timestamp = {};", v.timestamp).unwrap();
+            writeln!(s, "            action = {};", v.action).unwrap();
+            writeln!(s, "            player = {};", v.player.guid()).unwrap();
+            writeln!(s, "            entry = {};", v.entry).unwrap();
+            writeln!(s, "            timestamp = {};", v.timestamp).unwrap();
 
-            writeln!(s, "    }},").unwrap();
+            writeln!(s, "        }},").unwrap();
         }
-        writeln!(s, "];").unwrap();
+        writeln!(s, "    ];").unwrap();
 
         writeln!(s, "}} [").unwrap();
 

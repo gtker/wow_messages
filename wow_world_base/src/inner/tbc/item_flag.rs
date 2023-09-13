@@ -40,7 +40,7 @@ impl ItemFlag {
         if self.is_no_pickup() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "NO_PICKUP").unwrap();
             first = false;
@@ -48,7 +48,7 @@ impl ItemFlag {
         if self.is_conjured() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "CONJURED").unwrap();
             first = false;
@@ -56,7 +56,7 @@ impl ItemFlag {
         if self.is_lootable() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "LOOTABLE").unwrap();
             first = false;
@@ -64,7 +64,7 @@ impl ItemFlag {
         if self.is_deprecated() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "DEPRECATED").unwrap();
             first = false;
@@ -72,7 +72,7 @@ impl ItemFlag {
         if self.is_indestructible() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "INDESTRUCTIBLE").unwrap();
             first = false;
@@ -80,7 +80,7 @@ impl ItemFlag {
         if self.is_player_cast() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "PLAYER_CAST").unwrap();
             first = false;
@@ -88,7 +88,7 @@ impl ItemFlag {
         if self.is_no_equip_cooldown() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "NO_EQUIP_COOLDOWN").unwrap();
             first = false;
@@ -96,7 +96,7 @@ impl ItemFlag {
         if self.is_int_bonus_instead() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "INT_BONUS_INSTEAD").unwrap();
             first = false;
@@ -104,7 +104,7 @@ impl ItemFlag {
         if self.is_wrapper() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "WRAPPER").unwrap();
             first = false;
@@ -112,7 +112,7 @@ impl ItemFlag {
         if self.is_ignore_bag_space() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "IGNORE_BAG_SPACE").unwrap();
             first = false;
@@ -120,7 +120,7 @@ impl ItemFlag {
         if self.is_party_loot() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "PARTY_LOOT").unwrap();
             first = false;
@@ -128,7 +128,7 @@ impl ItemFlag {
         if self.is_charter() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "CHARTER").unwrap();
             first = false;
@@ -136,7 +136,7 @@ impl ItemFlag {
         if self.is_letter() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "LETTER").unwrap();
             first = false;
@@ -144,7 +144,7 @@ impl ItemFlag {
         if self.is_no_disenchant() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "NO_DISENCHANT").unwrap();
             first = false;
@@ -152,7 +152,7 @@ impl ItemFlag {
         if self.is_real_duration() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "REAL_DURATION").unwrap();
             first = false;
@@ -160,7 +160,7 @@ impl ItemFlag {
         if self.is_no_creator() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "NO_CREATOR").unwrap();
             first = false;
@@ -168,7 +168,7 @@ impl ItemFlag {
         if self.is_prospectable() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "PROSPECTABLE").unwrap();
             first = false;
@@ -176,7 +176,7 @@ impl ItemFlag {
         if self.is_unique_equipped() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "UNIQUE_EQUIPPED").unwrap();
             first = false;
@@ -184,7 +184,7 @@ impl ItemFlag {
         if self.is_ignore_for_auras() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "IGNORE_FOR_AURAS").unwrap();
             first = false;
@@ -192,7 +192,7 @@ impl ItemFlag {
         if self.is_ignore_default_arena_restrictions() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "IGNORE_DEFAULT_ARENA_RESTRICTIONS").unwrap();
             first = false;
@@ -200,7 +200,7 @@ impl ItemFlag {
         if self.is_no_durability_loss() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "NO_DURABILITY_LOSS").unwrap();
             first = false;
@@ -208,7 +208,7 @@ impl ItemFlag {
         if self.is_special_use() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "SPECIAL_USE").unwrap();
             first = false;

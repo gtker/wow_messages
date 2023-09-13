@@ -49,7 +49,7 @@ impl crate::Message for MSG_QUERY_NEXT_MAIL_TIME_Server {
 
         writeln!(s, "test MSG_QUERY_NEXT_MAIL_TIME_Server {{").unwrap();
         // Members
-        writeln!(s, "    unread_mails = {}", if self.unread_mails.to_string().contains('.') { self.unread_mails.to_string() } else { format!("{}.0", self.unread_mails) }).unwrap();
+        writeln!(s, "    unread_mails = {};", if self.unread_mails.to_string().contains('.') { self.unread_mails.to_string() } else { format!("{}.0", self.unread_mails) }).unwrap();
 
         writeln!(s, "}} [").unwrap();
 

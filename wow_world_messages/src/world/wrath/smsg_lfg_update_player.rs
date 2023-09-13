@@ -117,11 +117,11 @@ impl crate::Message for SMSG_LFG_UPDATE_PLAYER {
                 writeln!(s, "    no_partial_clear = {};", no_partial_clear).unwrap();
                 writeln!(s, "    achievements = {};", achievements).unwrap();
                 writeln!(s, "    amount_of_dungeons = {};", dungeons.len()).unwrap();
-                write!(s, "    dungeons = [").unwrap();
+                writeln!(s, "    dungeons = [").unwrap();
                 for v in dungeons.as_slice() {
                     write!(s, "{v:#04X}, ").unwrap();
                 }
-                writeln!(s, "];").unwrap();
+                writeln!(s, "    ];").unwrap();
                 writeln!(s, "    comment = \"{}\";", comment).unwrap();
             }
             _ => {}

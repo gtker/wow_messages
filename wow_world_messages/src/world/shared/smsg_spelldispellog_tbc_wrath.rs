@@ -89,16 +89,16 @@ impl crate::Message for SMSG_SPELLDISPELLOG {
         writeln!(s, "    dispell_spell = {};", self.dispell_spell).unwrap();
         writeln!(s, "    unknown = {};", self.unknown).unwrap();
         writeln!(s, "    amount_of_spells = {};", self.spells.len()).unwrap();
-        write!(s, "    spells = [").unwrap();
+        writeln!(s, "    spells = [").unwrap();
         for v in self.spells.as_slice() {
-            writeln!(s, "{{").unwrap();
+            writeln!(s, "        {{").unwrap();
             // Members
-            writeln!(s, "        spell = {};", v.spell).unwrap();
-            writeln!(s, "        method = {};", v.method.as_test_case_value()).unwrap();
+            writeln!(s, "            spell = {};", v.spell).unwrap();
+            writeln!(s, "            method = {};", v.method.as_test_case_value()).unwrap();
 
-            writeln!(s, "    }},").unwrap();
+            writeln!(s, "        }},").unwrap();
         }
-        writeln!(s, "];").unwrap();
+        writeln!(s, "    ];").unwrap();
 
         writeln!(s, "}} [").unwrap();
 

@@ -56,11 +56,11 @@ impl crate::Message for CMSG_QUEST_POI_QUERY {
         writeln!(s, "test CMSG_QUEST_POI_QUERY {{").unwrap();
         // Members
         writeln!(s, "    amount_of_pois = {};", self.points_of_interests.len()).unwrap();
-        write!(s, "    points_of_interests = [").unwrap();
+        writeln!(s, "    points_of_interests = [").unwrap();
         for v in self.points_of_interests.as_slice() {
             write!(s, "{v:#04X}, ").unwrap();
         }
-        writeln!(s, "];").unwrap();
+        writeln!(s, "    ];").unwrap();
 
         writeln!(s, "}} [").unwrap();
 

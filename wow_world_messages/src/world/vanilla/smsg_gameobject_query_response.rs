@@ -131,11 +131,11 @@ impl crate::Message for SMSG_GAMEOBJECT_QUERY_RESPONSE {
             writeln!(s, "    name3 = \"{}\";", found.name3).unwrap();
             writeln!(s, "    name4 = \"{}\";", found.name4).unwrap();
             writeln!(s, "    name5 = \"{}\";", found.name5).unwrap();
-            write!(s, "    raw_data = [").unwrap();
+            writeln!(s, "    raw_data = [").unwrap();
             for v in found.raw_data.as_slice() {
                 write!(s, "{v:#04X}, ").unwrap();
             }
-            writeln!(s, "];").unwrap();
+            writeln!(s, "    ];").unwrap();
         }
 
         writeln!(s, "}} [").unwrap();

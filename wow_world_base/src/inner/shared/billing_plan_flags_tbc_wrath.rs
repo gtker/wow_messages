@@ -27,7 +27,7 @@ impl BillingPlanFlags {
         if self.is_empty() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "NONE").unwrap();
             first = false;
@@ -35,7 +35,7 @@ impl BillingPlanFlags {
         if self.is_unused() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "UNUSED").unwrap();
             first = false;
@@ -43,7 +43,7 @@ impl BillingPlanFlags {
         if self.is_recurring_bill() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "RECURRING_BILL").unwrap();
             first = false;
@@ -51,7 +51,7 @@ impl BillingPlanFlags {
         if self.is_free_trial() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "FREE_TRIAL").unwrap();
             first = false;
@@ -59,7 +59,7 @@ impl BillingPlanFlags {
         if self.is_igr() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "IGR").unwrap();
             first = false;
@@ -67,7 +67,7 @@ impl BillingPlanFlags {
         if self.is_usage() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "USAGE").unwrap();
             first = false;
@@ -75,7 +75,7 @@ impl BillingPlanFlags {
         if self.is_time_mixture() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "TIME_MIXTURE").unwrap();
             first = false;
@@ -83,7 +83,7 @@ impl BillingPlanFlags {
         if self.is_restricted() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "RESTRICTED").unwrap();
             first = false;
@@ -91,7 +91,7 @@ impl BillingPlanFlags {
         if self.is_enable_cais() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "ENABLE_CAIS").unwrap();
             first = false;

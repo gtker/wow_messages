@@ -82,11 +82,11 @@ impl crate::Message for SMSG_BATTLEFIELD_LIST {
         writeln!(s, "    map = {};", self.map.as_test_case_value()).unwrap();
         writeln!(s, "    bracket = {};", self.bracket.as_test_case_value()).unwrap();
         writeln!(s, "    number_of_battlegrounds = {};", self.battlegrounds.len()).unwrap();
-        write!(s, "    battlegrounds = [").unwrap();
+        writeln!(s, "    battlegrounds = [").unwrap();
         for v in self.battlegrounds.as_slice() {
             write!(s, "{v:#04X}, ").unwrap();
         }
-        writeln!(s, "];").unwrap();
+        writeln!(s, "    ];").unwrap();
 
         writeln!(s, "}} [").unwrap();
 

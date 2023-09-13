@@ -260,32 +260,32 @@ impl crate::Message for SMSG_QUEST_QUERY_RESPONSE {
         writeln!(s, "    reward_spell = {};", self.reward_spell).unwrap();
         writeln!(s, "    source_item_id = {};", self.source_item_id).unwrap();
         writeln!(s, "    quest_flags = {};", self.quest_flags).unwrap();
-        write!(s, "    rewards = [").unwrap();
+        writeln!(s, "    rewards = [").unwrap();
         for v in self.rewards.as_slice() {
-            writeln!(s, "{{").unwrap();
+            writeln!(s, "        {{").unwrap();
             // Members
-            writeln!(s, "        item = {};", v.item).unwrap();
-            writeln!(s, "        item_count = {};", v.item_count).unwrap();
+            writeln!(s, "            item = {};", v.item).unwrap();
+            writeln!(s, "            item_count = {};", v.item_count).unwrap();
 
-            writeln!(s, "    }},").unwrap();
+            writeln!(s, "        }},").unwrap();
         }
-        writeln!(s, "];").unwrap();
-        write!(s, "    choice_rewards = [").unwrap();
+        writeln!(s, "    ];").unwrap();
+        writeln!(s, "    choice_rewards = [").unwrap();
         for v in self.choice_rewards.as_slice() {
-            writeln!(s, "{{").unwrap();
+            writeln!(s, "        {{").unwrap();
             // Members
-            writeln!(s, "        item = {};", v.item).unwrap();
-            writeln!(s, "        item_count = {};", v.item_count).unwrap();
+            writeln!(s, "            item = {};", v.item).unwrap();
+            writeln!(s, "            item_count = {};", v.item_count).unwrap();
 
-            writeln!(s, "    }},").unwrap();
+            writeln!(s, "        }},").unwrap();
         }
-        writeln!(s, "];").unwrap();
+        writeln!(s, "    ];").unwrap();
         writeln!(s, "    point_map_id = {};", self.point_map_id).unwrap();
         // position: Vector2d
         writeln!(s, "    position = {{").unwrap();
         // Members
-        writeln!(s, "        x = {}", if self.position.x.to_string().contains('.') { self.position.x.to_string() } else { format!("{}.0", self.position.x) }).unwrap();
-        writeln!(s, "        y = {}", if self.position.y.to_string().contains('.') { self.position.y.to_string() } else { format!("{}.0", self.position.y) }).unwrap();
+        writeln!(s, "        x = {};", if self.position.x.to_string().contains('.') { self.position.x.to_string() } else { format!("{}.0", self.position.x) }).unwrap();
+        writeln!(s, "        y = {};", if self.position.y.to_string().contains('.') { self.position.y.to_string() } else { format!("{}.0", self.position.y) }).unwrap();
 
         writeln!(s, "    }};").unwrap();
         writeln!(s, "    point_opt = {};", self.point_opt).unwrap();
@@ -293,23 +293,23 @@ impl crate::Message for SMSG_QUEST_QUERY_RESPONSE {
         writeln!(s, "    objective_text = \"{}\";", self.objective_text).unwrap();
         writeln!(s, "    details = \"{}\";", self.details).unwrap();
         writeln!(s, "    end_text = \"{}\";", self.end_text).unwrap();
-        write!(s, "    objectives = [").unwrap();
+        writeln!(s, "    objectives = [").unwrap();
         for v in self.objectives.as_slice() {
-            writeln!(s, "{{").unwrap();
+            writeln!(s, "        {{").unwrap();
             // Members
-            writeln!(s, "        creature_id = {};", v.creature_id).unwrap();
-            writeln!(s, "        kill_count = {};", v.kill_count).unwrap();
-            writeln!(s, "        required_item_id = {};", v.required_item_id).unwrap();
-            writeln!(s, "        required_item_count = {};", v.required_item_count).unwrap();
+            writeln!(s, "            creature_id = {};", v.creature_id).unwrap();
+            writeln!(s, "            kill_count = {};", v.kill_count).unwrap();
+            writeln!(s, "            required_item_id = {};", v.required_item_id).unwrap();
+            writeln!(s, "            required_item_count = {};", v.required_item_count).unwrap();
 
-            writeln!(s, "    }},").unwrap();
+            writeln!(s, "        }},").unwrap();
         }
-        writeln!(s, "];").unwrap();
-        write!(s, "    objective_texts = [").unwrap();
+        writeln!(s, "    ];").unwrap();
+        writeln!(s, "    objective_texts = [").unwrap();
         for v in self.objective_texts.as_slice() {
             write!(s, "\"{v}\", ").unwrap();
         }
-        writeln!(s, "];").unwrap();
+        writeln!(s, "    ];").unwrap();
 
         writeln!(s, "}} [").unwrap();
 

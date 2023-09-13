@@ -152,17 +152,17 @@ impl crate::Message for SMSG_QUESTGIVER_REQUEST_ITEMS {
         writeln!(s, "    auto_finish = {};", if self.auto_finish { "TRUE" } else { "FALSE" }).unwrap();
         writeln!(s, "    required_money = {};", self.required_money.as_int()).unwrap();
         writeln!(s, "    amount_of_required_items = {};", self.required_items.len()).unwrap();
-        write!(s, "    required_items = [").unwrap();
+        writeln!(s, "    required_items = [").unwrap();
         for v in self.required_items.as_slice() {
-            writeln!(s, "{{").unwrap();
+            writeln!(s, "        {{").unwrap();
             // Members
-            writeln!(s, "        item = {};", v.item).unwrap();
-            writeln!(s, "        item_count = {};", v.item_count).unwrap();
-            writeln!(s, "        item_display_id = {};", v.item_display_id).unwrap();
+            writeln!(s, "            item = {};", v.item).unwrap();
+            writeln!(s, "            item_count = {};", v.item_count).unwrap();
+            writeln!(s, "            item_display_id = {};", v.item_display_id).unwrap();
 
-            writeln!(s, "    }},").unwrap();
+            writeln!(s, "        }},").unwrap();
         }
-        writeln!(s, "];").unwrap();
+        writeln!(s, "    ];").unwrap();
         writeln!(s, "    unknown1 = {};", self.unknown1).unwrap();
         writeln!(s, "    completable = {};", self.completable.as_test_case_value()).unwrap();
         writeln!(s, "    flags2 = {};", self.flags2).unwrap();

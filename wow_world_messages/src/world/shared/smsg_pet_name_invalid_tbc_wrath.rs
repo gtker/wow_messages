@@ -93,11 +93,11 @@ impl crate::Message for SMSG_PET_NAME_INVALID {
             crate::shared::smsg_pet_name_invalid_tbc_wrath::SMSG_PET_NAME_INVALID_DeclinedPetNameIncluded::Included {
                 declined_names,
             } => {
-                write!(s, "    declined_names = [").unwrap();
+                writeln!(s, "    declined_names = [").unwrap();
                 for v in declined_names.as_slice() {
                     write!(s, "\"{v}\", ").unwrap();
                 }
-                writeln!(s, "];").unwrap();
+                writeln!(s, "    ];").unwrap();
             }
             _ => {}
         }

@@ -105,16 +105,16 @@ impl crate::Message for SMSG_ITEM_REFUND_RESULT {
                 writeln!(s, "    cost = {};", cost.as_int()).unwrap();
                 writeln!(s, "    honor_point_cost = {};", honor_point_cost).unwrap();
                 writeln!(s, "    arena_point_cost = {};", arena_point_cost).unwrap();
-                write!(s, "    extra_items = [").unwrap();
+                writeln!(s, "    extra_items = [").unwrap();
                 for v in extra_items.as_slice() {
-                    writeln!(s, "{{").unwrap();
+                    writeln!(s, "        {{").unwrap();
                     // Members
-                    writeln!(s, "        item = {};", v.item).unwrap();
-                    writeln!(s, "        amount = {};", v.amount).unwrap();
+                    writeln!(s, "            item = {};", v.item).unwrap();
+                    writeln!(s, "            amount = {};", v.amount).unwrap();
 
-                    writeln!(s, "    }},").unwrap();
+                    writeln!(s, "        }},").unwrap();
                 }
-                writeln!(s, "];").unwrap();
+                writeln!(s, "    ];").unwrap();
             }
             _ => {}
         }

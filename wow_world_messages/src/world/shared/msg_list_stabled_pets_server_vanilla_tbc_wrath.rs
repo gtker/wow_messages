@@ -74,20 +74,20 @@ impl crate::Message for MSG_LIST_STABLED_PETS_Server {
         writeln!(s, "    npc = {};", self.npc.guid()).unwrap();
         writeln!(s, "    amount_of_pets = {};", self.pets.len()).unwrap();
         writeln!(s, "    stable_slots = {};", self.stable_slots).unwrap();
-        write!(s, "    pets = [").unwrap();
+        writeln!(s, "    pets = [").unwrap();
         for v in self.pets.as_slice() {
-            writeln!(s, "{{").unwrap();
+            writeln!(s, "        {{").unwrap();
             // Members
-            writeln!(s, "        pet_number = {};", v.pet_number).unwrap();
-            writeln!(s, "        entry = {};", v.entry).unwrap();
-            writeln!(s, "        level = {};", v.level.as_int()).unwrap();
-            writeln!(s, "        name = \"{}\";", v.name).unwrap();
-            writeln!(s, "        loyalty = {};", v.loyalty).unwrap();
-            writeln!(s, "        slot = {};", v.slot).unwrap();
+            writeln!(s, "            pet_number = {};", v.pet_number).unwrap();
+            writeln!(s, "            entry = {};", v.entry).unwrap();
+            writeln!(s, "            level = {};", v.level.as_int()).unwrap();
+            writeln!(s, "            name = \"{}\";", v.name).unwrap();
+            writeln!(s, "            loyalty = {};", v.loyalty).unwrap();
+            writeln!(s, "            slot = {};", v.slot).unwrap();
 
-            writeln!(s, "    }},").unwrap();
+            writeln!(s, "        }},").unwrap();
         }
-        writeln!(s, "];").unwrap();
+        writeln!(s, "    ];").unwrap();
 
         writeln!(s, "}} [").unwrap();
 

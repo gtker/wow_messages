@@ -145,31 +145,31 @@ impl crate::Message for SMSG_SPELL_GO {
         writeln!(s, "    flags = {};", CastFlags::new(self.flags.as_int()).as_test_case_value()).unwrap();
         writeln!(s, "    timestamp = {};", self.timestamp).unwrap();
         writeln!(s, "    amount_of_hits = {};", self.hits.len()).unwrap();
-        write!(s, "    hits = [").unwrap();
+        writeln!(s, "    hits = [").unwrap();
         for v in self.hits.as_slice() {
             write!(s, "{v:#08X}, ").unwrap();
         }
-        writeln!(s, "];").unwrap();
+        writeln!(s, "    ];").unwrap();
         writeln!(s, "    amount_of_misses = {};", self.misses.len()).unwrap();
-        write!(s, "    misses = [").unwrap();
+        writeln!(s, "    misses = [").unwrap();
         for v in self.misses.as_slice() {
-            writeln!(s, "{{").unwrap();
+            writeln!(s, "        {{").unwrap();
             // Members
-            writeln!(s, "        target = {};", v.target.guid()).unwrap();
-            writeln!(s, "        miss_info = {};", SpellMissInfo::try_from(v.miss_info.as_int()).unwrap().as_test_case_value()).unwrap();
+            writeln!(s, "            target = {};", v.target.guid()).unwrap();
+            writeln!(s, "            miss_info = {};", SpellMissInfo::try_from(v.miss_info.as_int()).unwrap().as_test_case_value()).unwrap();
             match &v.miss_info {
                 crate::tbc::SpellMiss_SpellMissInfo::Reflect {
                     reflect_result,
                 } => {
-                    writeln!(s, "        reflect_result = {};", reflect_result).unwrap();
+                    writeln!(s, "            reflect_result = {};", reflect_result).unwrap();
                 }
                 _ => {}
             }
 
 
-            writeln!(s, "    }},").unwrap();
+            writeln!(s, "        }},").unwrap();
         }
-        writeln!(s, "];").unwrap();
+        writeln!(s, "    ];").unwrap();
         // targets: SpellCastTargets
         writeln!(s, "    targets = {{").unwrap();
         // Members
@@ -228,9 +228,9 @@ impl crate::Message for SMSG_SPELL_GO {
             // source: Vector3d
             writeln!(s, "        source = {{").unwrap();
             // Members
-            writeln!(s, "            x = {}", if if_statement.source.x.to_string().contains('.') { if_statement.source.x.to_string() } else { format!("{}.0", if_statement.source.x) }).unwrap();
-            writeln!(s, "            y = {}", if if_statement.source.y.to_string().contains('.') { if_statement.source.y.to_string() } else { format!("{}.0", if_statement.source.y) }).unwrap();
-            writeln!(s, "            z = {}", if if_statement.source.z.to_string().contains('.') { if_statement.source.z.to_string() } else { format!("{}.0", if_statement.source.z) }).unwrap();
+            writeln!(s, "            x = {};", if if_statement.source.x.to_string().contains('.') { if_statement.source.x.to_string() } else { format!("{}.0", if_statement.source.x) }).unwrap();
+            writeln!(s, "            y = {};", if if_statement.source.y.to_string().contains('.') { if_statement.source.y.to_string() } else { format!("{}.0", if_statement.source.y) }).unwrap();
+            writeln!(s, "            z = {};", if if_statement.source.z.to_string().contains('.') { if_statement.source.z.to_string() } else { format!("{}.0", if_statement.source.z) }).unwrap();
 
             writeln!(s, "    }};").unwrap();
         }
@@ -239,9 +239,9 @@ impl crate::Message for SMSG_SPELL_GO {
             // destination: Vector3d
             writeln!(s, "        destination = {{").unwrap();
             // Members
-            writeln!(s, "            x = {}", if if_statement.destination.x.to_string().contains('.') { if_statement.destination.x.to_string() } else { format!("{}.0", if_statement.destination.x) }).unwrap();
-            writeln!(s, "            y = {}", if if_statement.destination.y.to_string().contains('.') { if_statement.destination.y.to_string() } else { format!("{}.0", if_statement.destination.y) }).unwrap();
-            writeln!(s, "            z = {}", if if_statement.destination.z.to_string().contains('.') { if_statement.destination.z.to_string() } else { format!("{}.0", if_statement.destination.z) }).unwrap();
+            writeln!(s, "            x = {};", if if_statement.destination.x.to_string().contains('.') { if_statement.destination.x.to_string() } else { format!("{}.0", if_statement.destination.x) }).unwrap();
+            writeln!(s, "            y = {};", if if_statement.destination.y.to_string().contains('.') { if_statement.destination.y.to_string() } else { format!("{}.0", if_statement.destination.y) }).unwrap();
+            writeln!(s, "            z = {};", if if_statement.destination.z.to_string().contains('.') { if_statement.destination.z.to_string() } else { format!("{}.0", if_statement.destination.z) }).unwrap();
 
             writeln!(s, "    }};").unwrap();
         }

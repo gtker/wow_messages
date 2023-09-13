@@ -100,53 +100,53 @@ impl crate::Message for SMSG_GUILD_ROSTER {
         writeln!(s, "    motd = \"{}\";", self.motd).unwrap();
         writeln!(s, "    guild_info = \"{}\";", self.guild_info).unwrap();
         writeln!(s, "    amount_of_rights = {};", self.rights.len()).unwrap();
-        write!(s, "    rights = [").unwrap();
+        writeln!(s, "    rights = [").unwrap();
         for v in self.rights.as_slice() {
-            writeln!(s, "{{").unwrap();
+            writeln!(s, "        {{").unwrap();
             // Members
-            writeln!(s, "        rights = {};", v.rights).unwrap();
-            writeln!(s, "        money_per_day = {};", v.money_per_day.as_int()).unwrap();
-            write!(s, "        bank_tab_rights = [").unwrap();
+            writeln!(s, "            rights = {};", v.rights).unwrap();
+            writeln!(s, "            money_per_day = {};", v.money_per_day.as_int()).unwrap();
+            writeln!(s, "            bank_tab_rights = [").unwrap();
             for v in v.bank_tab_rights.as_slice() {
-                writeln!(s, "{{").unwrap();
+                writeln!(s, "                {{").unwrap();
                 // Members
-                writeln!(s, "            rights = {};", v.rights).unwrap();
-                writeln!(s, "            slots_per_day = {};", v.slots_per_day).unwrap();
+                writeln!(s, "                    rights = {};", v.rights).unwrap();
+                writeln!(s, "                    slots_per_day = {};", v.slots_per_day).unwrap();
 
-                writeln!(s, "    }},").unwrap();
+                writeln!(s, "                }},").unwrap();
             }
-            writeln!(s, "];").unwrap();
+            writeln!(s, "            ];").unwrap();
 
-            writeln!(s, "    }},").unwrap();
+            writeln!(s, "        }},").unwrap();
         }
-        writeln!(s, "];").unwrap();
-        write!(s, "    members = [").unwrap();
+        writeln!(s, "    ];").unwrap();
+        writeln!(s, "    members = [").unwrap();
         for v in self.members.as_slice() {
-            writeln!(s, "{{").unwrap();
+            writeln!(s, "        {{").unwrap();
             // Members
-            writeln!(s, "        guid = {};", v.guid.guid()).unwrap();
-            writeln!(s, "        status = {};", GuildMemberStatus::try_from(v.status.as_int()).unwrap().as_test_case_value()).unwrap();
-            writeln!(s, "        name = \"{}\";", v.name).unwrap();
-            writeln!(s, "        rank = {};", v.rank).unwrap();
-            writeln!(s, "        level = {};", v.level.as_int()).unwrap();
-            writeln!(s, "        class = {};", v.class.as_test_case_value()).unwrap();
-            writeln!(s, "        unknown1 = {};", v.unknown1).unwrap();
-            writeln!(s, "        area = {};", v.area.as_test_case_value()).unwrap();
+            writeln!(s, "            guid = {};", v.guid.guid()).unwrap();
+            writeln!(s, "            status = {};", GuildMemberStatus::try_from(v.status.as_int()).unwrap().as_test_case_value()).unwrap();
+            writeln!(s, "            name = \"{}\";", v.name).unwrap();
+            writeln!(s, "            rank = {};", v.rank).unwrap();
+            writeln!(s, "            level = {};", v.level.as_int()).unwrap();
+            writeln!(s, "            class = {};", v.class.as_test_case_value()).unwrap();
+            writeln!(s, "            unknown1 = {};", v.unknown1).unwrap();
+            writeln!(s, "            area = {};", v.area.as_test_case_value()).unwrap();
             match &v.status {
                 crate::tbc::GuildMember_GuildMemberStatus::Offline {
                     time_offline,
                 } => {
-                    writeln!(s, "        time_offline = {}", if time_offline.to_string().contains('.') { time_offline.to_string() } else { format!("{}.0", time_offline) }).unwrap();
+                    writeln!(s, "            time_offline = {};", if time_offline.to_string().contains('.') { time_offline.to_string() } else { format!("{}.0", time_offline) }).unwrap();
                 }
                 _ => {}
             }
 
-            writeln!(s, "        public_note = \"{}\";", v.public_note).unwrap();
-            writeln!(s, "        officer_note = \"{}\";", v.officer_note).unwrap();
+            writeln!(s, "            public_note = \"{}\";", v.public_note).unwrap();
+            writeln!(s, "            officer_note = \"{}\";", v.officer_note).unwrap();
 
-            writeln!(s, "    }},").unwrap();
+            writeln!(s, "        }},").unwrap();
         }
-        writeln!(s, "];").unwrap();
+        writeln!(s, "    ];").unwrap();
 
         writeln!(s, "}} [").unwrap();
 

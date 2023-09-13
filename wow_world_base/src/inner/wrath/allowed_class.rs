@@ -29,7 +29,7 @@ impl AllowedClass {
         if self.is_empty() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "ALL").unwrap();
             first = false;
@@ -37,7 +37,7 @@ impl AllowedClass {
         if self.is_warrior() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "WARRIOR").unwrap();
             first = false;
@@ -45,7 +45,7 @@ impl AllowedClass {
         if self.is_paladin() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "PALADIN").unwrap();
             first = false;
@@ -53,7 +53,7 @@ impl AllowedClass {
         if self.is_hunter() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "HUNTER").unwrap();
             first = false;
@@ -61,7 +61,7 @@ impl AllowedClass {
         if self.is_rogue() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "ROGUE").unwrap();
             first = false;
@@ -69,7 +69,7 @@ impl AllowedClass {
         if self.is_priest() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "PRIEST").unwrap();
             first = false;
@@ -77,7 +77,7 @@ impl AllowedClass {
         if self.is_death_knight() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "DEATH_KNIGHT").unwrap();
             first = false;
@@ -85,7 +85,7 @@ impl AllowedClass {
         if self.is_shaman() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "SHAMAN").unwrap();
             first = false;
@@ -93,7 +93,7 @@ impl AllowedClass {
         if self.is_mage() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "MAGE").unwrap();
             first = false;
@@ -101,7 +101,7 @@ impl AllowedClass {
         if self.is_warlock() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "WARLOCK").unwrap();
             first = false;
@@ -109,7 +109,7 @@ impl AllowedClass {
         if self.is_druid() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "DRUID").unwrap();
             first = false;

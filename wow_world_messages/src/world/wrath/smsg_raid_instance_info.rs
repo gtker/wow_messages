@@ -60,20 +60,20 @@ impl crate::Message for SMSG_RAID_INSTANCE_INFO {
         writeln!(s, "test SMSG_RAID_INSTANCE_INFO {{").unwrap();
         // Members
         writeln!(s, "    amount_of_raid_infos = {};", self.raid_infos.len()).unwrap();
-        write!(s, "    raid_infos = [").unwrap();
+        writeln!(s, "    raid_infos = [").unwrap();
         for v in self.raid_infos.as_slice() {
-            writeln!(s, "{{").unwrap();
+            writeln!(s, "        {{").unwrap();
             // Members
-            writeln!(s, "        map = {};", v.map.as_test_case_value()).unwrap();
-            writeln!(s, "        difficulty = {};", v.difficulty.as_test_case_value()).unwrap();
-            writeln!(s, "        instance_id = {};", v.instance_id).unwrap();
-            writeln!(s, "        expired = {};", if v.expired { "TRUE" } else { "FALSE" }).unwrap();
-            writeln!(s, "        extended = {};", if v.extended { "TRUE" } else { "FALSE" }).unwrap();
-            writeln!(s, "        time_until_reset = {};", v.time_until_reset).unwrap();
+            writeln!(s, "            map = {};", v.map.as_test_case_value()).unwrap();
+            writeln!(s, "            difficulty = {};", v.difficulty.as_test_case_value()).unwrap();
+            writeln!(s, "            instance_id = {};", v.instance_id).unwrap();
+            writeln!(s, "            expired = {};", if v.expired { "TRUE" } else { "FALSE" }).unwrap();
+            writeln!(s, "            extended = {};", if v.extended { "TRUE" } else { "FALSE" }).unwrap();
+            writeln!(s, "            time_until_reset = {};", v.time_until_reset).unwrap();
 
-            writeln!(s, "    }},").unwrap();
+            writeln!(s, "        }},").unwrap();
         }
-        writeln!(s, "];").unwrap();
+        writeln!(s, "    ];").unwrap();
 
         writeln!(s, "}} [").unwrap();
 

@@ -66,16 +66,16 @@ impl crate::Message for SMSG_THREAT_UPDATE {
         // Members
         writeln!(s, "    unit = {};", self.unit.guid()).unwrap();
         writeln!(s, "    amount_of_units = {};", self.units.len()).unwrap();
-        write!(s, "    units = [").unwrap();
+        writeln!(s, "    units = [").unwrap();
         for v in self.units.as_slice() {
-            writeln!(s, "{{").unwrap();
+            writeln!(s, "        {{").unwrap();
             // Members
-            writeln!(s, "        unit = {};", v.unit.guid()).unwrap();
-            writeln!(s, "        threat = {};", v.threat).unwrap();
+            writeln!(s, "            unit = {};", v.unit.guid()).unwrap();
+            writeln!(s, "            threat = {};", v.threat).unwrap();
 
-            writeln!(s, "    }},").unwrap();
+            writeln!(s, "        }},").unwrap();
         }
-        writeln!(s, "];").unwrap();
+        writeln!(s, "    ];").unwrap();
 
         writeln!(s, "}} [").unwrap();
 

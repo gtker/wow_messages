@@ -145,30 +145,30 @@ impl crate::Message for SMSG_PET_SPELLS {
             writeln!(s, "    command = {};", action_bars.command.as_test_case_value()).unwrap();
             writeln!(s, "    unknown = {};", action_bars.unknown).unwrap();
             writeln!(s, "    pet_enabled = {};", action_bars.pet_enabled.as_test_case_value()).unwrap();
-            write!(s, "    action_bars = [").unwrap();
+            writeln!(s, "    action_bars = [").unwrap();
             for v in action_bars.action_bars.as_slice() {
                 write!(s, "{v:#04X}, ").unwrap();
             }
-            writeln!(s, "];").unwrap();
+            writeln!(s, "    ];").unwrap();
             writeln!(s, "    amount_of_spells = {};", action_bars.spells.len()).unwrap();
-            write!(s, "    spells = [").unwrap();
+            writeln!(s, "    spells = [").unwrap();
             for v in action_bars.spells.as_slice() {
                 write!(s, "{v:#04X}, ").unwrap();
             }
-            writeln!(s, "];").unwrap();
+            writeln!(s, "    ];").unwrap();
             writeln!(s, "    amount_of_cooldowns = {};", action_bars.cooldowns.len()).unwrap();
-            write!(s, "    cooldowns = [").unwrap();
+            writeln!(s, "    cooldowns = [").unwrap();
             for v in action_bars.cooldowns.as_slice() {
-                writeln!(s, "{{").unwrap();
+                writeln!(s, "        {{").unwrap();
                 // Members
-                writeln!(s, "        spell = {};", v.spell).unwrap();
-                writeln!(s, "        spell_category = {};", v.spell_category).unwrap();
-                writeln!(s, "        cooldown = {};", v.cooldown.as_millis()).unwrap();
-                writeln!(s, "        category_cooldown = {};", v.category_cooldown.as_millis()).unwrap();
+                writeln!(s, "            spell = {};", v.spell).unwrap();
+                writeln!(s, "            spell_category = {};", v.spell_category).unwrap();
+                writeln!(s, "            cooldown = {};", v.cooldown.as_millis()).unwrap();
+                writeln!(s, "            category_cooldown = {};", v.category_cooldown.as_millis()).unwrap();
 
-                writeln!(s, "    }},").unwrap();
+                writeln!(s, "        }},").unwrap();
             }
-            writeln!(s, "];").unwrap();
+            writeln!(s, "    ];").unwrap();
         }
 
         writeln!(s, "}} [").unwrap();

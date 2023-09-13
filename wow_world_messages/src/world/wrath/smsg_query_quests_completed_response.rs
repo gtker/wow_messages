@@ -56,11 +56,11 @@ impl crate::Message for SMSG_QUERY_QUESTS_COMPLETED_RESPONSE {
         writeln!(s, "test SMSG_QUERY_QUESTS_COMPLETED_RESPONSE {{").unwrap();
         // Members
         writeln!(s, "    amount_of_reward_quests = {};", self.reward_quests.len()).unwrap();
-        write!(s, "    reward_quests = [").unwrap();
+        writeln!(s, "    reward_quests = [").unwrap();
         for v in self.reward_quests.as_slice() {
             write!(s, "{v:#04X}, ").unwrap();
         }
-        writeln!(s, "];").unwrap();
+        writeln!(s, "    ];").unwrap();
 
         writeln!(s, "}} [").unwrap();
 

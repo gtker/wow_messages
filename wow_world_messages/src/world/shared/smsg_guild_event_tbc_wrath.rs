@@ -66,11 +66,11 @@ impl crate::Message for SMSG_GUILD_EVENT {
         // Members
         writeln!(s, "    event = {};", self.event.as_test_case_value()).unwrap();
         writeln!(s, "    amount_of_events = {};", self.event_descriptions.len()).unwrap();
-        write!(s, "    event_descriptions = [").unwrap();
+        writeln!(s, "    event_descriptions = [").unwrap();
         for v in self.event_descriptions.as_slice() {
             write!(s, "\"{v}\", ").unwrap();
         }
-        writeln!(s, "];").unwrap();
+        writeln!(s, "    ];").unwrap();
 
         writeln!(s, "}} [").unwrap();
 

@@ -43,7 +43,7 @@ impl MovementFlags {
         if self.is_empty() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "NONE").unwrap();
             first = false;
@@ -51,7 +51,7 @@ impl MovementFlags {
         if self.is_forward() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "FORWARD").unwrap();
             first = false;
@@ -59,7 +59,7 @@ impl MovementFlags {
         if self.is_backward() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "BACKWARD").unwrap();
             first = false;
@@ -67,7 +67,7 @@ impl MovementFlags {
         if self.is_strafe_left() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "STRAFE_LEFT").unwrap();
             first = false;
@@ -75,7 +75,7 @@ impl MovementFlags {
         if self.is_strafe_right() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "STRAFE_RIGHT").unwrap();
             first = false;
@@ -83,7 +83,7 @@ impl MovementFlags {
         if self.is_turn_left() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "TURN_LEFT").unwrap();
             first = false;
@@ -91,7 +91,7 @@ impl MovementFlags {
         if self.is_turn_right() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "TURN_RIGHT").unwrap();
             first = false;
@@ -99,7 +99,7 @@ impl MovementFlags {
         if self.is_pitch_up() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "PITCH_UP").unwrap();
             first = false;
@@ -107,7 +107,7 @@ impl MovementFlags {
         if self.is_pitch_down() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "PITCH_DOWN").unwrap();
             first = false;
@@ -115,7 +115,7 @@ impl MovementFlags {
         if self.is_walk_mode() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "WALK_MODE").unwrap();
             first = false;
@@ -123,7 +123,7 @@ impl MovementFlags {
         if self.is_on_transport() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "ON_TRANSPORT").unwrap();
             first = false;
@@ -131,7 +131,7 @@ impl MovementFlags {
         if self.is_levitating() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "LEVITATING").unwrap();
             first = false;
@@ -139,7 +139,7 @@ impl MovementFlags {
         if self.is_fixed_z() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "FIXED_Z").unwrap();
             first = false;
@@ -147,7 +147,7 @@ impl MovementFlags {
         if self.is_root() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "ROOT").unwrap();
             first = false;
@@ -155,7 +155,7 @@ impl MovementFlags {
         if self.is_jumping() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "JUMPING").unwrap();
             first = false;
@@ -163,7 +163,7 @@ impl MovementFlags {
         if self.is_fallingfar() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "FALLINGFAR").unwrap();
             first = false;
@@ -171,7 +171,7 @@ impl MovementFlags {
         if self.is_swimming() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "SWIMMING").unwrap();
             first = false;
@@ -179,7 +179,7 @@ impl MovementFlags {
         if self.is_spline_enabled() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "SPLINE_ENABLED").unwrap();
             first = false;
@@ -187,7 +187,7 @@ impl MovementFlags {
         if self.is_can_fly() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "CAN_FLY").unwrap();
             first = false;
@@ -195,7 +195,7 @@ impl MovementFlags {
         if self.is_flying() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "FLYING").unwrap();
             first = false;
@@ -203,7 +203,7 @@ impl MovementFlags {
         if self.is_ontransport() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "ONTRANSPORT").unwrap();
             first = false;
@@ -211,7 +211,7 @@ impl MovementFlags {
         if self.is_spline_elevation() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "SPLINE_ELEVATION").unwrap();
             first = false;
@@ -219,7 +219,7 @@ impl MovementFlags {
         if self.is_waterwalking() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "WATERWALKING").unwrap();
             first = false;
@@ -227,7 +227,7 @@ impl MovementFlags {
         if self.is_safe_fall() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "SAFE_FALL").unwrap();
             first = false;
@@ -235,7 +235,7 @@ impl MovementFlags {
         if self.is_hover() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "HOVER").unwrap();
             first = false;

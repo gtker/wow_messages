@@ -118,17 +118,17 @@ impl crate::Message for SMSG_LFG_PLAYER_REWARD {
         writeln!(s, "    unknown2 = {};", self.unknown2).unwrap();
         writeln!(s, "    unknown3 = {};", self.unknown3).unwrap();
         writeln!(s, "    amount_of_rewards = {};", self.rewards.len()).unwrap();
-        write!(s, "    rewards = [").unwrap();
+        writeln!(s, "    rewards = [").unwrap();
         for v in self.rewards.as_slice() {
-            writeln!(s, "{{").unwrap();
+            writeln!(s, "        {{").unwrap();
             // Members
-            writeln!(s, "        item = {};", v.item).unwrap();
-            writeln!(s, "        item_count = {};", v.item_count).unwrap();
-            writeln!(s, "        display_id = {};", v.display_id).unwrap();
+            writeln!(s, "            item = {};", v.item).unwrap();
+            writeln!(s, "            item_count = {};", v.item_count).unwrap();
+            writeln!(s, "            display_id = {};", v.display_id).unwrap();
 
-            writeln!(s, "    }},").unwrap();
+            writeln!(s, "        }},").unwrap();
         }
-        writeln!(s, "];").unwrap();
+        writeln!(s, "    ];").unwrap();
 
         writeln!(s, "}} [").unwrap();
 

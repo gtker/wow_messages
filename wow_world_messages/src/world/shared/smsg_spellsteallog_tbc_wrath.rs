@@ -88,16 +88,16 @@ impl crate::Message for SMSG_SPELLSTEALLOG {
         writeln!(s, "    spell = {};", self.spell).unwrap();
         writeln!(s, "    unknown = {};", self.unknown).unwrap();
         writeln!(s, "    amount_of_spell_steals = {};", self.spell_steals.len()).unwrap();
-        write!(s, "    spell_steals = [").unwrap();
+        writeln!(s, "    spell_steals = [").unwrap();
         for v in self.spell_steals.as_slice() {
-            writeln!(s, "{{").unwrap();
+            writeln!(s, "        {{").unwrap();
             // Members
-            writeln!(s, "        spell = {};", v.spell).unwrap();
-            writeln!(s, "        action = {};", v.action.as_test_case_value()).unwrap();
+            writeln!(s, "            spell = {};", v.spell).unwrap();
+            writeln!(s, "            action = {};", v.action.as_test_case_value()).unwrap();
 
-            writeln!(s, "    }},").unwrap();
+            writeln!(s, "        }},").unwrap();
         }
-        writeln!(s, "];").unwrap();
+        writeln!(s, "    ];").unwrap();
 
         writeln!(s, "}} [").unwrap();
 

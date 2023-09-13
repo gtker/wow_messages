@@ -73,16 +73,16 @@ impl crate::Message for SMSG_HIGHEST_THREAT_UPDATE {
         writeln!(s, "    unit = {};", self.unit.guid()).unwrap();
         writeln!(s, "    new_victim = {};", self.new_victim.guid()).unwrap();
         writeln!(s, "    amount_of_units = {};", self.units.len()).unwrap();
-        write!(s, "    units = [").unwrap();
+        writeln!(s, "    units = [").unwrap();
         for v in self.units.as_slice() {
-            writeln!(s, "{{").unwrap();
+            writeln!(s, "        {{").unwrap();
             // Members
-            writeln!(s, "        unit = {};", v.unit.guid()).unwrap();
-            writeln!(s, "        threat = {};", v.threat).unwrap();
+            writeln!(s, "            unit = {};", v.unit.guid()).unwrap();
+            writeln!(s, "            threat = {};", v.threat).unwrap();
 
-            writeln!(s, "    }},").unwrap();
+            writeln!(s, "        }},").unwrap();
         }
-        writeln!(s, "];").unwrap();
+        writeln!(s, "    ];").unwrap();
 
         writeln!(s, "}} [").unwrap();
 

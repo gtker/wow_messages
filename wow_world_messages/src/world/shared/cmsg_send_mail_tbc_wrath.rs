@@ -139,16 +139,16 @@ impl crate::Message for CMSG_SEND_MAIL {
         writeln!(s, "    unknown1 = {};", self.unknown1).unwrap();
         writeln!(s, "    unknown2 = {};", self.unknown2).unwrap();
         writeln!(s, "    amount_of_items = {};", self.items.len()).unwrap();
-        write!(s, "    items = [").unwrap();
+        writeln!(s, "    items = [").unwrap();
         for v in self.items.as_slice() {
-            writeln!(s, "{{").unwrap();
+            writeln!(s, "        {{").unwrap();
             // Members
-            writeln!(s, "        item = {};", v.item.guid()).unwrap();
-            writeln!(s, "        slot = {};", v.slot).unwrap();
+            writeln!(s, "            item = {};", v.item.guid()).unwrap();
+            writeln!(s, "            slot = {};", v.slot).unwrap();
 
-            writeln!(s, "    }},").unwrap();
+            writeln!(s, "        }},").unwrap();
         }
-        writeln!(s, "];").unwrap();
+        writeln!(s, "    ];").unwrap();
         writeln!(s, "    money = {};", self.money.as_int()).unwrap();
         writeln!(s, "    cash_on_delivery_amount = {};", self.cash_on_delivery_amount).unwrap();
         writeln!(s, "    unknown3 = {};", self.unknown3).unwrap();

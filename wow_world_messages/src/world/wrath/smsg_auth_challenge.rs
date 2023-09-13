@@ -66,11 +66,11 @@ impl crate::Message for SMSG_AUTH_CHALLENGE {
         // Members
         writeln!(s, "    unknown1 = {};", self.unknown1).unwrap();
         writeln!(s, "    server_seed = {};", self.server_seed).unwrap();
-        write!(s, "    seed = [").unwrap();
+        writeln!(s, "    seed = [").unwrap();
         for v in self.seed.as_slice() {
             write!(s, "{v:#04X}, ").unwrap();
         }
-        writeln!(s, "];").unwrap();
+        writeln!(s, "    ];").unwrap();
 
         writeln!(s, "}} [").unwrap();
 

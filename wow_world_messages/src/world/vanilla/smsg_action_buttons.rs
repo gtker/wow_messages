@@ -51,11 +51,11 @@ impl crate::Message for SMSG_ACTION_BUTTONS {
 
         writeln!(s, "test SMSG_ACTION_BUTTONS {{").unwrap();
         // Members
-        write!(s, "    data = [").unwrap();
+        writeln!(s, "    data = [").unwrap();
         for v in self.data.as_slice() {
             write!(s, "{v:#04X}, ").unwrap();
         }
-        writeln!(s, "];").unwrap();
+        writeln!(s, "    ];").unwrap();
 
         writeln!(s, "}} [").unwrap();
 

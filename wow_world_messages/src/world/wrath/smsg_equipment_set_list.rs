@@ -59,22 +59,22 @@ impl crate::Message for SMSG_EQUIPMENT_SET_LIST {
         writeln!(s, "test SMSG_EQUIPMENT_SET_LIST {{").unwrap();
         // Members
         writeln!(s, "    amount_of_equipment_sets = {};", self.equipment_sets.len()).unwrap();
-        write!(s, "    equipment_sets = [").unwrap();
+        writeln!(s, "    equipment_sets = [").unwrap();
         for v in self.equipment_sets.as_slice() {
-            writeln!(s, "{{").unwrap();
+            writeln!(s, "        {{").unwrap();
             // Members
-            writeln!(s, "        guid = {};", v.guid.guid()).unwrap();
-            writeln!(s, "        name = \"{}\";", v.name).unwrap();
-            writeln!(s, "        icon_name = \"{}\";", v.icon_name).unwrap();
-            write!(s, "        equipment = [").unwrap();
+            writeln!(s, "            guid = {};", v.guid.guid()).unwrap();
+            writeln!(s, "            name = \"{}\";", v.name).unwrap();
+            writeln!(s, "            icon_name = \"{}\";", v.icon_name).unwrap();
+            writeln!(s, "            equipment = [").unwrap();
             for v in v.equipment.as_slice() {
                 write!(s, "{v:#08X}, ").unwrap();
             }
-            writeln!(s, "];").unwrap();
+            writeln!(s, "            ];").unwrap();
 
-            writeln!(s, "    }},").unwrap();
+            writeln!(s, "        }},").unwrap();
         }
-        writeln!(s, "];").unwrap();
+        writeln!(s, "    ];").unwrap();
 
         writeln!(s, "}} [").unwrap();
 

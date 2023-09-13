@@ -85,16 +85,16 @@ impl crate::Message for CMSG_GUILD_RANK {
         writeln!(s, "    rights = {};", self.rights).unwrap();
         writeln!(s, "    rank_name = \"{}\";", self.rank_name).unwrap();
         writeln!(s, "    money_per_day = {};", self.money_per_day.as_int()).unwrap();
-        write!(s, "    bank_tab_rights = [").unwrap();
+        writeln!(s, "    bank_tab_rights = [").unwrap();
         for v in self.bank_tab_rights.as_slice() {
-            writeln!(s, "{{").unwrap();
+            writeln!(s, "        {{").unwrap();
             // Members
-            writeln!(s, "        rights = {};", v.rights).unwrap();
-            writeln!(s, "        slots_per_day = {};", v.slots_per_day).unwrap();
+            writeln!(s, "            rights = {};", v.rights).unwrap();
+            writeln!(s, "            slots_per_day = {};", v.slots_per_day).unwrap();
 
-            writeln!(s, "    }},").unwrap();
+            writeln!(s, "        }},").unwrap();
         }
-        writeln!(s, "];").unwrap();
+        writeln!(s, "    ];").unwrap();
 
         writeln!(s, "}} [").unwrap();
 

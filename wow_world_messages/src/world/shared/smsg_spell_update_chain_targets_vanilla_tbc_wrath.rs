@@ -72,11 +72,11 @@ impl crate::Message for SMSG_SPELL_UPDATE_CHAIN_TARGETS {
         writeln!(s, "    caster = {};", self.caster.guid()).unwrap();
         writeln!(s, "    spell = {};", self.spell).unwrap();
         writeln!(s, "    amount_of_targets = {};", self.targets.len()).unwrap();
-        write!(s, "    targets = [").unwrap();
+        writeln!(s, "    targets = [").unwrap();
         for v in self.targets.as_slice() {
             write!(s, "{v:#08X}, ").unwrap();
         }
-        writeln!(s, "];").unwrap();
+        writeln!(s, "    ];").unwrap();
 
         writeln!(s, "}} [").unwrap();
 

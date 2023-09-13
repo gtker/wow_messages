@@ -56,11 +56,11 @@ impl crate::Message for SMSG_SEND_UNLEARN_SPELLS {
         writeln!(s, "test SMSG_SEND_UNLEARN_SPELLS {{").unwrap();
         // Members
         writeln!(s, "    amount_of_spells = {};", self.spells.len()).unwrap();
-        write!(s, "    spells = [").unwrap();
+        writeln!(s, "    spells = [").unwrap();
         for v in self.spells.as_slice() {
             write!(s, "{v:#04X}, ").unwrap();
         }
-        writeln!(s, "];").unwrap();
+        writeln!(s, "    ];").unwrap();
 
         writeln!(s, "}} [").unwrap();
 

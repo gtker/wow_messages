@@ -27,7 +27,7 @@ impl VictimState {
         if self.is_empty() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "INTACT").unwrap();
             first = false;
@@ -35,7 +35,7 @@ impl VictimState {
         if self.is_hit() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "HIT").unwrap();
             first = false;
@@ -43,7 +43,7 @@ impl VictimState {
         if self.is_dodge() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "DODGE").unwrap();
             first = false;
@@ -51,7 +51,7 @@ impl VictimState {
         if self.is_parry() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "PARRY").unwrap();
             first = false;
@@ -59,7 +59,7 @@ impl VictimState {
         if self.is_interrupt() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "INTERRUPT").unwrap();
             first = false;
@@ -67,7 +67,7 @@ impl VictimState {
         if self.is_blocks() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "BLOCKS").unwrap();
             first = false;
@@ -75,7 +75,7 @@ impl VictimState {
         if self.is_evades() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "EVADES").unwrap();
             first = false;
@@ -83,7 +83,7 @@ impl VictimState {
         if self.is_is_immune() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "IS_IMMUNE").unwrap();
             first = false;
@@ -91,7 +91,7 @@ impl VictimState {
         if self.is_deflects() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "DEFLECTS").unwrap();
             first = false;

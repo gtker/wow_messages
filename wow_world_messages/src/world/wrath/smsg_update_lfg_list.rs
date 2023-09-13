@@ -143,108 +143,108 @@ impl crate::Message for SMSG_UPDATE_LFG_LIST {
                 deleted_guids,
             } => {
                 writeln!(s, "    amount_of_deleted_guids = {};", deleted_guids.len()).unwrap();
-                write!(s, "    deleted_guids = [").unwrap();
+                writeln!(s, "    deleted_guids = [").unwrap();
                 for v in deleted_guids.as_slice() {
                     write!(s, "{v:#08X}, ").unwrap();
                 }
-                writeln!(s, "];").unwrap();
+                writeln!(s, "    ];").unwrap();
             }
             _ => {}
         }
 
         writeln!(s, "    amount_of_groups = {};", self.groups.len()).unwrap();
         writeln!(s, "    unknown1 = {};", self.unknown1).unwrap();
-        write!(s, "    groups = [").unwrap();
+        writeln!(s, "    groups = [").unwrap();
         for v in self.groups.as_slice() {
-            writeln!(s, "{{").unwrap();
+            writeln!(s, "        {{").unwrap();
             // Members
-            writeln!(s, "        group = {};", v.group.guid()).unwrap();
-            writeln!(s, "        flags = {};", LfgUpdateFlag::new(v.flags.as_int()).as_test_case_value()).unwrap();
+            writeln!(s, "            group = {};", v.group.guid()).unwrap();
+            writeln!(s, "            flags = {};", LfgUpdateFlag::new(v.flags.as_int()).as_test_case_value()).unwrap();
             if let Some(if_statement) = &v.flags.get_comment() {
-                writeln!(s, "        comment = \"{}\";", if_statement.comment).unwrap();
+                writeln!(s, "            comment = \"{}\";", if_statement.comment).unwrap();
             }
 
             if let Some(if_statement) = &v.flags.get_roles() {
-                write!(s, "        roles = [").unwrap();
+                writeln!(s, "            roles = [").unwrap();
                 for v in if_statement.roles.as_slice() {
                     write!(s, "{v:#04X}, ").unwrap();
                 }
-                writeln!(s, "];").unwrap();
+                writeln!(s, "            ];").unwrap();
             }
 
-            writeln!(s, "        instance = {};", v.instance.guid()).unwrap();
-            writeln!(s, "        encounter_mask = {};", v.encounter_mask).unwrap();
+            writeln!(s, "            instance = {};", v.instance.guid()).unwrap();
+            writeln!(s, "            encounter_mask = {};", v.encounter_mask).unwrap();
 
-            writeln!(s, "    }},").unwrap();
+            writeln!(s, "        }},").unwrap();
         }
-        writeln!(s, "];").unwrap();
+        writeln!(s, "    ];").unwrap();
         writeln!(s, "    amount_of_players = {};", self.players.len()).unwrap();
         writeln!(s, "    unknown2 = {};", self.unknown2).unwrap();
-        write!(s, "    players = [").unwrap();
+        writeln!(s, "    players = [").unwrap();
         for v in self.players.as_slice() {
-            writeln!(s, "{{").unwrap();
+            writeln!(s, "        {{").unwrap();
             // Members
-            writeln!(s, "        player = {};", v.player.guid()).unwrap();
-            writeln!(s, "        flags = {};", LfgUpdateFlag::new(v.flags.as_int()).as_test_case_value()).unwrap();
+            writeln!(s, "            player = {};", v.player.guid()).unwrap();
+            writeln!(s, "            flags = {};", LfgUpdateFlag::new(v.flags.as_int()).as_test_case_value()).unwrap();
             if let Some(if_statement) = &v.flags.get_character_info() {
-                writeln!(s, "        level = {};", if_statement.level.as_int()).unwrap();
-                writeln!(s, "        class = {};", if_statement.class.as_test_case_value()).unwrap();
-                writeln!(s, "        race = {};", if_statement.race.as_test_case_value()).unwrap();
-                writeln!(s, "        talents0 = {};", if_statement.talents0).unwrap();
-                writeln!(s, "        talents1 = {};", if_statement.talents1).unwrap();
-                writeln!(s, "        talents2 = {};", if_statement.talents2).unwrap();
-                writeln!(s, "        armor = {};", if_statement.armor).unwrap();
-                writeln!(s, "        spell_damage = {};", if_statement.spell_damage).unwrap();
-                writeln!(s, "        spell_heal = {};", if_statement.spell_heal).unwrap();
-                writeln!(s, "        crit_rating_melee = {};", if_statement.crit_rating_melee).unwrap();
-                writeln!(s, "        crit_rating_ranged = {};", if_statement.crit_rating_ranged).unwrap();
-                writeln!(s, "        crit_rating_spell = {};", if_statement.crit_rating_spell).unwrap();
-                writeln!(s, "        mana_per_5_seconds = {}", if if_statement.mana_per_5_seconds.to_string().contains('.') { if_statement.mana_per_5_seconds.to_string() } else { format!("{}.0", if_statement.mana_per_5_seconds) }).unwrap();
-                writeln!(s, "        mana_per_5_seconds_combat = {}", if if_statement.mana_per_5_seconds_combat.to_string().contains('.') { if_statement.mana_per_5_seconds_combat.to_string() } else { format!("{}.0", if_statement.mana_per_5_seconds_combat) }).unwrap();
-                writeln!(s, "        attack_power = {};", if_statement.attack_power).unwrap();
-                writeln!(s, "        agility = {};", if_statement.agility).unwrap();
-                writeln!(s, "        health = {};", if_statement.health).unwrap();
-                writeln!(s, "        mana = {};", if_statement.mana).unwrap();
-                writeln!(s, "        online = {};", if if_statement.online { "TRUE" } else { "FALSE" }).unwrap();
-                writeln!(s, "        average_item_level = {};", if_statement.average_item_level).unwrap();
-                writeln!(s, "        defense_skill = {};", if_statement.defense_skill).unwrap();
-                writeln!(s, "        dodge_rating = {};", if_statement.dodge_rating).unwrap();
-                writeln!(s, "        block_rating = {};", if_statement.block_rating).unwrap();
-                writeln!(s, "        parry_rating = {};", if_statement.parry_rating).unwrap();
-                writeln!(s, "        haste_rating = {};", if_statement.haste_rating).unwrap();
-                writeln!(s, "        expertise_rating = {};", if_statement.expertise_rating).unwrap();
+                writeln!(s, "            level = {};", if_statement.level.as_int()).unwrap();
+                writeln!(s, "            class = {};", if_statement.class.as_test_case_value()).unwrap();
+                writeln!(s, "            race = {};", if_statement.race.as_test_case_value()).unwrap();
+                writeln!(s, "            talents0 = {};", if_statement.talents0).unwrap();
+                writeln!(s, "            talents1 = {};", if_statement.talents1).unwrap();
+                writeln!(s, "            talents2 = {};", if_statement.talents2).unwrap();
+                writeln!(s, "            armor = {};", if_statement.armor).unwrap();
+                writeln!(s, "            spell_damage = {};", if_statement.spell_damage).unwrap();
+                writeln!(s, "            spell_heal = {};", if_statement.spell_heal).unwrap();
+                writeln!(s, "            crit_rating_melee = {};", if_statement.crit_rating_melee).unwrap();
+                writeln!(s, "            crit_rating_ranged = {};", if_statement.crit_rating_ranged).unwrap();
+                writeln!(s, "            crit_rating_spell = {};", if_statement.crit_rating_spell).unwrap();
+                writeln!(s, "            mana_per_5_seconds = {};", if if_statement.mana_per_5_seconds.to_string().contains('.') { if_statement.mana_per_5_seconds.to_string() } else { format!("{}.0", if_statement.mana_per_5_seconds) }).unwrap();
+                writeln!(s, "            mana_per_5_seconds_combat = {};", if if_statement.mana_per_5_seconds_combat.to_string().contains('.') { if_statement.mana_per_5_seconds_combat.to_string() } else { format!("{}.0", if_statement.mana_per_5_seconds_combat) }).unwrap();
+                writeln!(s, "            attack_power = {};", if_statement.attack_power).unwrap();
+                writeln!(s, "            agility = {};", if_statement.agility).unwrap();
+                writeln!(s, "            health = {};", if_statement.health).unwrap();
+                writeln!(s, "            mana = {};", if_statement.mana).unwrap();
+                writeln!(s, "            online = {};", if if_statement.online { "TRUE" } else { "FALSE" }).unwrap();
+                writeln!(s, "            average_item_level = {};", if_statement.average_item_level).unwrap();
+                writeln!(s, "            defense_skill = {};", if_statement.defense_skill).unwrap();
+                writeln!(s, "            dodge_rating = {};", if_statement.dodge_rating).unwrap();
+                writeln!(s, "            block_rating = {};", if_statement.block_rating).unwrap();
+                writeln!(s, "            parry_rating = {};", if_statement.parry_rating).unwrap();
+                writeln!(s, "            haste_rating = {};", if_statement.haste_rating).unwrap();
+                writeln!(s, "            expertise_rating = {};", if_statement.expertise_rating).unwrap();
             }
 
             if let Some(if_statement) = &v.flags.get_comment() {
-                writeln!(s, "        comment = \"{}\";", if_statement.comment).unwrap();
+                writeln!(s, "            comment = \"{}\";", if_statement.comment).unwrap();
             }
 
             if let Some(if_statement) = &v.flags.get_group_leader() {
-                writeln!(s, "        is_looking_for_more = {};", if if_statement.is_looking_for_more { "TRUE" } else { "FALSE" }).unwrap();
+                writeln!(s, "            is_looking_for_more = {};", if if_statement.is_looking_for_more { "TRUE" } else { "FALSE" }).unwrap();
             }
 
             if let Some(if_statement) = &v.flags.get_group_guid() {
-                writeln!(s, "        group = {};", if_statement.group.guid()).unwrap();
+                writeln!(s, "            group = {};", if_statement.group.guid()).unwrap();
             }
 
             if let Some(if_statement) = &v.flags.get_roles() {
-                writeln!(s, "        roles = {};", if_statement.roles).unwrap();
+                writeln!(s, "            roles = {};", if_statement.roles).unwrap();
             }
 
             if let Some(if_statement) = &v.flags.get_area() {
-                writeln!(s, "        area = {};", if_statement.area.as_test_case_value()).unwrap();
+                writeln!(s, "            area = {};", if_statement.area.as_test_case_value()).unwrap();
             }
 
             if let Some(if_statement) = &v.flags.get_status() {
-                writeln!(s, "        unknown1 = {};", if_statement.unknown1).unwrap();
+                writeln!(s, "            unknown1 = {};", if_statement.unknown1).unwrap();
             }
 
-            writeln!(s, "        instance = {};", v.instance.guid()).unwrap();
-            writeln!(s, "        encounter_mask = {};", v.encounter_mask).unwrap();
+            writeln!(s, "            instance = {};", v.instance.guid()).unwrap();
+            writeln!(s, "            encounter_mask = {};", v.encounter_mask).unwrap();
 
-            writeln!(s, "    }},").unwrap();
+            writeln!(s, "        }},").unwrap();
         }
-        writeln!(s, "];").unwrap();
+        writeln!(s, "    ];").unwrap();
 
         writeln!(s, "}} [").unwrap();
 

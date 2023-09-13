@@ -58,19 +58,19 @@ impl crate::Message for SMSG_AUCTION_LIST_PENDING_SALES {
         writeln!(s, "test SMSG_AUCTION_LIST_PENDING_SALES {{").unwrap();
         // Members
         writeln!(s, "    amount_of_pending_sales = {};", self.pending_sales.len()).unwrap();
-        write!(s, "    pending_sales = [").unwrap();
+        writeln!(s, "    pending_sales = [").unwrap();
         for v in self.pending_sales.as_slice() {
-            writeln!(s, "{{").unwrap();
+            writeln!(s, "        {{").unwrap();
             // Members
-            writeln!(s, "        string1 = \"{}\";", v.string1).unwrap();
-            writeln!(s, "        string2 = \"{}\";", v.string2).unwrap();
-            writeln!(s, "        unknown1 = {};", v.unknown1).unwrap();
-            writeln!(s, "        unknown2 = {};", v.unknown2).unwrap();
-            writeln!(s, "        time_left = {}", if v.time_left.to_string().contains('.') { v.time_left.to_string() } else { format!("{}.0", v.time_left) }).unwrap();
+            writeln!(s, "            string1 = \"{}\";", v.string1).unwrap();
+            writeln!(s, "            string2 = \"{}\";", v.string2).unwrap();
+            writeln!(s, "            unknown1 = {};", v.unknown1).unwrap();
+            writeln!(s, "            unknown2 = {};", v.unknown2).unwrap();
+            writeln!(s, "            time_left = {};", if v.time_left.to_string().contains('.') { v.time_left.to_string() } else { format!("{}.0", v.time_left) }).unwrap();
 
-            writeln!(s, "    }},").unwrap();
+            writeln!(s, "        }},").unwrap();
         }
-        writeln!(s, "];").unwrap();
+        writeln!(s, "    ];").unwrap();
 
         writeln!(s, "}} [").unwrap();
 

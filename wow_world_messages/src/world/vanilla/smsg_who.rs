@@ -68,21 +68,21 @@ impl crate::Message for SMSG_WHO {
         // Members
         writeln!(s, "    listed_players = {};", self.players.len()).unwrap();
         writeln!(s, "    online_players = {};", self.online_players).unwrap();
-        write!(s, "    players = [").unwrap();
+        writeln!(s, "    players = [").unwrap();
         for v in self.players.as_slice() {
-            writeln!(s, "{{").unwrap();
+            writeln!(s, "        {{").unwrap();
             // Members
-            writeln!(s, "        name = \"{}\";", v.name).unwrap();
-            writeln!(s, "        guild = \"{}\";", v.guild).unwrap();
-            writeln!(s, "        level = {};", v.level.as_int()).unwrap();
-            writeln!(s, "        class = {};", v.class.as_test_case_value()).unwrap();
-            writeln!(s, "        race = {};", v.race.as_test_case_value()).unwrap();
-            writeln!(s, "        area = {};", v.area.as_test_case_value()).unwrap();
-            writeln!(s, "        party_status = {};", v.party_status).unwrap();
+            writeln!(s, "            name = \"{}\";", v.name).unwrap();
+            writeln!(s, "            guild = \"{}\";", v.guild).unwrap();
+            writeln!(s, "            level = {};", v.level.as_int()).unwrap();
+            writeln!(s, "            class = {};", v.class.as_test_case_value()).unwrap();
+            writeln!(s, "            race = {};", v.race.as_test_case_value()).unwrap();
+            writeln!(s, "            area = {};", v.area.as_test_case_value()).unwrap();
+            writeln!(s, "            party_status = {};", v.party_status).unwrap();
 
-            writeln!(s, "    }},").unwrap();
+            writeln!(s, "        }},").unwrap();
         }
-        writeln!(s, "];").unwrap();
+        writeln!(s, "    ];").unwrap();
 
         writeln!(s, "}} [").unwrap();
 

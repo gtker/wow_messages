@@ -71,11 +71,11 @@ impl crate::Message for CMSG_SET_PLAYER_DECLINED_NAMES {
         // Members
         writeln!(s, "    player = {};", self.player.guid()).unwrap();
         writeln!(s, "    name = \"{}\";", self.name).unwrap();
-        write!(s, "    declined_names = [").unwrap();
+        writeln!(s, "    declined_names = [").unwrap();
         for v in self.declined_names.as_slice() {
             write!(s, "\"{v}\", ").unwrap();
         }
-        writeln!(s, "];").unwrap();
+        writeln!(s, "    ];").unwrap();
 
         writeln!(s, "}} [").unwrap();
 

@@ -31,7 +31,7 @@ impl DefaultChannelFlags {
         if self.is_empty() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "NONE").unwrap();
             first = false;
@@ -39,7 +39,7 @@ impl DefaultChannelFlags {
         if self.is_initial() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "INITIAL").unwrap();
             first = false;
@@ -47,7 +47,7 @@ impl DefaultChannelFlags {
         if self.is_zone_dependency() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "ZONE_DEPENDENCY").unwrap();
             first = false;
@@ -55,7 +55,7 @@ impl DefaultChannelFlags {
         if self.is_global() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "GLOBAL").unwrap();
             first = false;
@@ -63,7 +63,7 @@ impl DefaultChannelFlags {
         if self.is_trade() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "TRADE").unwrap();
             first = false;
@@ -71,7 +71,7 @@ impl DefaultChannelFlags {
         if self.is_city_only() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "CITY_ONLY").unwrap();
             first = false;
@@ -79,7 +79,7 @@ impl DefaultChannelFlags {
         if self.is_city_only_2() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "CITY_ONLY_2").unwrap();
             first = false;
@@ -87,7 +87,7 @@ impl DefaultChannelFlags {
         if self.is_defence() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "DEFENCE").unwrap();
             first = false;
@@ -95,7 +95,7 @@ impl DefaultChannelFlags {
         if self.is_unselected() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "UNSELECTED").unwrap();
             first = false;

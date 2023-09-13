@@ -35,7 +35,7 @@ impl SpellCastTargetFlags {
         if self.is_empty() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "SELF").unwrap();
             first = false;
@@ -43,7 +43,7 @@ impl SpellCastTargetFlags {
         if self.is_unused1() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "UNUSED1").unwrap();
             first = false;
@@ -51,7 +51,7 @@ impl SpellCastTargetFlags {
         if self.is_unit() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "UNIT").unwrap();
             first = false;
@@ -59,7 +59,7 @@ impl SpellCastTargetFlags {
         if self.is_unused2() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "UNUSED2").unwrap();
             first = false;
@@ -67,7 +67,7 @@ impl SpellCastTargetFlags {
         if self.is_unused3() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "UNUSED3").unwrap();
             first = false;
@@ -75,7 +75,7 @@ impl SpellCastTargetFlags {
         if self.is_item() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "ITEM").unwrap();
             first = false;
@@ -83,7 +83,7 @@ impl SpellCastTargetFlags {
         if self.is_source_location() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "SOURCE_LOCATION").unwrap();
             first = false;
@@ -91,7 +91,7 @@ impl SpellCastTargetFlags {
         if self.is_dest_location() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "DEST_LOCATION").unwrap();
             first = false;
@@ -99,7 +99,7 @@ impl SpellCastTargetFlags {
         if self.is_object_unk() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "OBJECT_UNK").unwrap();
             first = false;
@@ -107,7 +107,7 @@ impl SpellCastTargetFlags {
         if self.is_unit_unk() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "UNIT_UNK").unwrap();
             first = false;
@@ -115,7 +115,7 @@ impl SpellCastTargetFlags {
         if self.is_pvp_corpse() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "PVP_CORPSE").unwrap();
             first = false;
@@ -123,7 +123,7 @@ impl SpellCastTargetFlags {
         if self.is_unit_corpse() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "UNIT_CORPSE").unwrap();
             first = false;
@@ -131,7 +131,7 @@ impl SpellCastTargetFlags {
         if self.is_gameobject() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "GAMEOBJECT").unwrap();
             first = false;
@@ -139,7 +139,7 @@ impl SpellCastTargetFlags {
         if self.is_trade_item() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "TRADE_ITEM").unwrap();
             first = false;
@@ -147,7 +147,7 @@ impl SpellCastTargetFlags {
         if self.is_string() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "STRING").unwrap();
             first = false;
@@ -155,7 +155,7 @@ impl SpellCastTargetFlags {
         if self.is_unk1() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "UNK1").unwrap();
             first = false;
@@ -163,7 +163,7 @@ impl SpellCastTargetFlags {
         if self.is_corpse() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "CORPSE").unwrap();
             first = false;

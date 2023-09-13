@@ -82,11 +82,11 @@ impl crate::Message for SMSG_PERIODICAURALOG {
         writeln!(s, "    caster = {};", self.caster.guid()).unwrap();
         writeln!(s, "    spell = {};", self.spell).unwrap();
         writeln!(s, "    amount_of_auras = {};", self.auras.len()).unwrap();
-        write!(s, "    auras = [").unwrap();
+        writeln!(s, "    auras = [").unwrap();
         for v in self.auras.as_slice() {
-            writeln!(s, "{{").unwrap();
+            writeln!(s, "        {{").unwrap();
             // Members
-            writeln!(s, "        aura_type = {};", AuraType::try_from(v.aura_type.as_int()).unwrap().as_test_case_value()).unwrap();
+            writeln!(s, "            aura_type = {};", AuraType::try_from(v.aura_type.as_int()).unwrap().as_test_case_value()).unwrap();
             match &v.aura_type {
                 crate::wrath::AuraLog_AuraType::PeriodicDamage {
                     absorb1,
@@ -96,12 +96,12 @@ impl crate::Message for SMSG_PERIODICAURALOG {
                     resisted,
                     school,
                 } => {
-                    writeln!(s, "        damage1 = {};", damage1).unwrap();
-                    writeln!(s, "        overkill_damage = {};", overkill_damage).unwrap();
-                    writeln!(s, "        school = {};", school.as_test_case_value()).unwrap();
-                    writeln!(s, "        absorb1 = {};", absorb1).unwrap();
-                    writeln!(s, "        resisted = {};", resisted).unwrap();
-                    writeln!(s, "        critical1 = {};", if *critical1 { "TRUE" } else { "FALSE" }).unwrap();
+                    writeln!(s, "            damage1 = {};", damage1).unwrap();
+                    writeln!(s, "            overkill_damage = {};", overkill_damage).unwrap();
+                    writeln!(s, "            school = {};", school.as_test_case_value()).unwrap();
+                    writeln!(s, "            absorb1 = {};", absorb1).unwrap();
+                    writeln!(s, "            resisted = {};", resisted).unwrap();
+                    writeln!(s, "            critical1 = {};", if *critical1 { "TRUE" } else { "FALSE" }).unwrap();
                 }
                 crate::wrath::AuraLog_AuraType::PeriodicHeal {
                     absorb2,
@@ -109,10 +109,10 @@ impl crate::Message for SMSG_PERIODICAURALOG {
                     damage2,
                     over_damage,
                 } => {
-                    writeln!(s, "        damage2 = {};", damage2).unwrap();
-                    writeln!(s, "        over_damage = {};", over_damage).unwrap();
-                    writeln!(s, "        absorb2 = {};", absorb2).unwrap();
-                    writeln!(s, "        critical2 = {};", if *critical2 { "TRUE" } else { "FALSE" }).unwrap();
+                    writeln!(s, "            damage2 = {};", damage2).unwrap();
+                    writeln!(s, "            over_damage = {};", over_damage).unwrap();
+                    writeln!(s, "            absorb2 = {};", absorb2).unwrap();
+                    writeln!(s, "            critical2 = {};", if *critical2 { "TRUE" } else { "FALSE" }).unwrap();
                 }
                 crate::wrath::AuraLog_AuraType::ObsModHealth {
                     absorb2,
@@ -120,26 +120,26 @@ impl crate::Message for SMSG_PERIODICAURALOG {
                     damage2,
                     over_damage,
                 } => {
-                    writeln!(s, "        damage2 = {};", damage2).unwrap();
-                    writeln!(s, "        over_damage = {};", over_damage).unwrap();
-                    writeln!(s, "        absorb2 = {};", absorb2).unwrap();
-                    writeln!(s, "        critical2 = {};", if *critical2 { "TRUE" } else { "FALSE" }).unwrap();
+                    writeln!(s, "            damage2 = {};", damage2).unwrap();
+                    writeln!(s, "            over_damage = {};", over_damage).unwrap();
+                    writeln!(s, "            absorb2 = {};", absorb2).unwrap();
+                    writeln!(s, "            critical2 = {};", if *critical2 { "TRUE" } else { "FALSE" }).unwrap();
                 }
                 crate::wrath::AuraLog_AuraType::PeriodicEnergize {
                     damage3,
                     misc_value1,
                 } => {
-                    writeln!(s, "        misc_value1 = {};", misc_value1).unwrap();
-                    writeln!(s, "        damage3 = {};", damage3).unwrap();
+                    writeln!(s, "            misc_value1 = {};", misc_value1).unwrap();
+                    writeln!(s, "            damage3 = {};", damage3).unwrap();
                 }
                 crate::wrath::AuraLog_AuraType::PeriodicManaLeech {
                     damage4,
                     gain_multiplier,
                     misc_value2,
                 } => {
-                    writeln!(s, "        misc_value2 = {};", misc_value2).unwrap();
-                    writeln!(s, "        damage4 = {};", damage4).unwrap();
-                    writeln!(s, "        gain_multiplier = {}", if gain_multiplier.to_string().contains('.') { gain_multiplier.to_string() } else { format!("{}.0", gain_multiplier) }).unwrap();
+                    writeln!(s, "            misc_value2 = {};", misc_value2).unwrap();
+                    writeln!(s, "            damage4 = {};", damage4).unwrap();
+                    writeln!(s, "            gain_multiplier = {};", if gain_multiplier.to_string().contains('.') { gain_multiplier.to_string() } else { format!("{}.0", gain_multiplier) }).unwrap();
                 }
                 crate::wrath::AuraLog_AuraType::PeriodicDamagePercent {
                     absorb1,
@@ -149,20 +149,20 @@ impl crate::Message for SMSG_PERIODICAURALOG {
                     resisted,
                     school,
                 } => {
-                    writeln!(s, "        damage1 = {};", damage1).unwrap();
-                    writeln!(s, "        overkill_damage = {};", overkill_damage).unwrap();
-                    writeln!(s, "        school = {};", school.as_test_case_value()).unwrap();
-                    writeln!(s, "        absorb1 = {};", absorb1).unwrap();
-                    writeln!(s, "        resisted = {};", resisted).unwrap();
-                    writeln!(s, "        critical1 = {};", if *critical1 { "TRUE" } else { "FALSE" }).unwrap();
+                    writeln!(s, "            damage1 = {};", damage1).unwrap();
+                    writeln!(s, "            overkill_damage = {};", overkill_damage).unwrap();
+                    writeln!(s, "            school = {};", school.as_test_case_value()).unwrap();
+                    writeln!(s, "            absorb1 = {};", absorb1).unwrap();
+                    writeln!(s, "            resisted = {};", resisted).unwrap();
+                    writeln!(s, "            critical1 = {};", if *critical1 { "TRUE" } else { "FALSE" }).unwrap();
                 }
                 _ => {}
             }
 
 
-            writeln!(s, "    }},").unwrap();
+            writeln!(s, "        }},").unwrap();
         }
-        writeln!(s, "];").unwrap();
+        writeln!(s, "    ];").unwrap();
 
         writeln!(s, "}} [").unwrap();
 

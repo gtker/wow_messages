@@ -59,16 +59,16 @@ impl crate::Message for SMSG_INITIALIZE_FACTIONS {
         writeln!(s, "test SMSG_INITIALIZE_FACTIONS {{").unwrap();
         // Members
         writeln!(s, "    amount_of_factions = {};", self.factions.len()).unwrap();
-        write!(s, "    factions = [").unwrap();
+        writeln!(s, "    factions = [").unwrap();
         for v in self.factions.as_slice() {
-            writeln!(s, "{{").unwrap();
+            writeln!(s, "        {{").unwrap();
             // Members
-            writeln!(s, "        flag = {};", v.flag.as_test_case_value()).unwrap();
-            writeln!(s, "        standing = {};", v.standing).unwrap();
+            writeln!(s, "            flag = {};", v.flag.as_test_case_value()).unwrap();
+            writeln!(s, "            standing = {};", v.standing).unwrap();
 
-            writeln!(s, "    }},").unwrap();
+            writeln!(s, "        }},").unwrap();
         }
-        writeln!(s, "];").unwrap();
+        writeln!(s, "    ];").unwrap();
 
         writeln!(s, "}} [").unwrap();
 

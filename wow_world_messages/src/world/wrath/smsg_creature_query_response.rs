@@ -197,19 +197,19 @@ impl crate::Message for SMSG_CREATURE_QUERY_RESPONSE {
             writeln!(s, "    creature_rank = {};", found.creature_rank).unwrap();
             writeln!(s, "    kill_credit1 = {};", found.kill_credit1).unwrap();
             writeln!(s, "    kill_credit2 = {};", found.kill_credit2).unwrap();
-            write!(s, "    display_ids = [").unwrap();
+            writeln!(s, "    display_ids = [").unwrap();
             for v in found.display_ids.as_slice() {
                 write!(s, "{v:#04X}, ").unwrap();
             }
-            writeln!(s, "];").unwrap();
-            writeln!(s, "    health_multiplier = {}", if found.health_multiplier.to_string().contains('.') { found.health_multiplier.to_string() } else { format!("{}.0", found.health_multiplier) }).unwrap();
-            writeln!(s, "    mana_multiplier = {}", if found.mana_multiplier.to_string().contains('.') { found.mana_multiplier.to_string() } else { format!("{}.0", found.mana_multiplier) }).unwrap();
+            writeln!(s, "    ];").unwrap();
+            writeln!(s, "    health_multiplier = {};", if found.health_multiplier.to_string().contains('.') { found.health_multiplier.to_string() } else { format!("{}.0", found.health_multiplier) }).unwrap();
+            writeln!(s, "    mana_multiplier = {};", if found.mana_multiplier.to_string().contains('.') { found.mana_multiplier.to_string() } else { format!("{}.0", found.mana_multiplier) }).unwrap();
             writeln!(s, "    racial_leader = {};", found.racial_leader).unwrap();
-            write!(s, "    quest_items = [").unwrap();
+            writeln!(s, "    quest_items = [").unwrap();
             for v in found.quest_items.as_slice() {
                 write!(s, "{v:#04X}, ").unwrap();
             }
-            writeln!(s, "];").unwrap();
+            writeln!(s, "    ];").unwrap();
             writeln!(s, "    movement_id = {};", found.movement_id).unwrap();
         }
 

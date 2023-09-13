@@ -22,7 +22,7 @@ impl RollFlags {
         if self.is_pass() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "PASS").unwrap();
             first = false;
@@ -30,7 +30,7 @@ impl RollFlags {
         if self.is_need() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "NEED").unwrap();
             first = false;
@@ -38,7 +38,7 @@ impl RollFlags {
         if self.is_greed() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "GREED").unwrap();
             first = false;
@@ -46,7 +46,7 @@ impl RollFlags {
         if self.is_disenchant() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "DISENCHANT").unwrap();
             first = false;

@@ -244,13 +244,13 @@ fn print_member_definition(
             );
         }
         Type::Population => {
-            test_case_string::wlna(s, format!("{prefix}{name} = {{}}"), format!("if {var_name}.as_int().to_string().contains(\'.\') {{ {var_name}.as_int().to_string() }} else {{ format!(\"{{}}.0\", {var_name}.as_int()) }}"));
+            test_case_string::wlna(s, format!("{prefix}{name} = {{}};"), format!("if {var_name}.as_int().to_string().contains(\'.\') {{ {var_name}.as_int().to_string() }} else {{ format!(\"{{}}.0\", {var_name}.as_int()) }}"));
         }
         Type::String | Type::CString | Type::SizedCString => {
             test_case_string::wlna(s, format!("{prefix}{name} = \\\"{{}}\\\";"), var_name);
         }
         Type::FloatingPoint => {
-            test_case_string::wlna(s, format!("{prefix}{name} = {{}}"), format!("if {var_name}.to_string().contains(\'.\') {{ {var_name}.to_string() }} else {{ format!(\"{{}}.0\", {var_name}) }}"));
+            test_case_string::wlna(s, format!("{prefix}{name} = {{}};"), format!("if {var_name}.to_string().contains(\'.\') {{ {var_name}.to_string() }} else {{ format!(\"{{}}.0\", {var_name}) }}"));
         }
         Type::IpAddress => {
             test_case_string::wlna(
@@ -304,7 +304,7 @@ fn print_member_definition(
         }
 
         Type::Array(array) => {
-            s.wln(format!("write!(s, \"{prefix}{name} = [\").unwrap();"));
+            s.wln(format!("writeln!(s, \"{prefix}{name} = [\").unwrap();"));
 
             s.body(format!("for v in {var_name}.as_slice()"), |s| {
                 match array.ty() {
@@ -318,19 +318,20 @@ fn print_member_definition(
                         s.wln("write!(s, \"\\\"{v}\\\", \").unwrap();");
                     }
                     ArrayType::Struct(e) => {
-                        test_case_string::wln(s, "{{");
+                        let prefix = format!("{prefix}    ");
+                        test_case_string::wln(s, format!("{prefix}{{{{"));
 
                         let variable_prefix = "v.";
 
-                        let prefix = format!("{prefix}    ");
-                        print_members(s, e, variable_prefix, &prefix);
+                        let new_prefix = format!("{prefix}    ");
+                        print_members(s, e, variable_prefix, &new_prefix);
 
-                        test_case_string::wln(s, "    }},");
+                        test_case_string::wln(s, format!("{prefix}}}}},"));
                     }
                 }
             });
 
-            test_case_string::wln(s, "];");
+            test_case_string::wln(s, format!("{prefix}];"));
         }
 
         Type::UpdateMask { .. }

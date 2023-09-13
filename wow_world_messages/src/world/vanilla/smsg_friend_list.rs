@@ -62,56 +62,56 @@ impl crate::Message for SMSG_FRIEND_LIST {
         writeln!(s, "test SMSG_FRIEND_LIST {{").unwrap();
         // Members
         writeln!(s, "    amount_of_friends = {};", self.friends.len()).unwrap();
-        write!(s, "    friends = [").unwrap();
+        writeln!(s, "    friends = [").unwrap();
         for v in self.friends.as_slice() {
-            writeln!(s, "{{").unwrap();
+            writeln!(s, "        {{").unwrap();
             // Members
-            writeln!(s, "        guid = {};", v.guid.guid()).unwrap();
-            writeln!(s, "        status = {};", FriendStatus::try_from(v.status.as_int()).unwrap().as_test_case_value()).unwrap();
+            writeln!(s, "            guid = {};", v.guid.guid()).unwrap();
+            writeln!(s, "            status = {};", FriendStatus::try_from(v.status.as_int()).unwrap().as_test_case_value()).unwrap();
             match &v.status {
                 crate::vanilla::Friend_FriendStatus::Online {
                     area,
                     class,
                     level,
                 } => {
-                    writeln!(s, "        area = {};", area.as_test_case_value()).unwrap();
-                    writeln!(s, "        level = {};", level.as_int()).unwrap();
-                    writeln!(s, "        class = {};", class.as_test_case_value()).unwrap();
+                    writeln!(s, "            area = {};", area.as_test_case_value()).unwrap();
+                    writeln!(s, "            level = {};", level.as_int()).unwrap();
+                    writeln!(s, "            class = {};", class.as_test_case_value()).unwrap();
                 }
                 crate::vanilla::Friend_FriendStatus::Afk {
                     area,
                     class,
                     level,
                 } => {
-                    writeln!(s, "        area = {};", area.as_test_case_value()).unwrap();
-                    writeln!(s, "        level = {};", level.as_int()).unwrap();
-                    writeln!(s, "        class = {};", class.as_test_case_value()).unwrap();
+                    writeln!(s, "            area = {};", area.as_test_case_value()).unwrap();
+                    writeln!(s, "            level = {};", level.as_int()).unwrap();
+                    writeln!(s, "            class = {};", class.as_test_case_value()).unwrap();
                 }
                 crate::vanilla::Friend_FriendStatus::Unknown3 {
                     area,
                     class,
                     level,
                 } => {
-                    writeln!(s, "        area = {};", area.as_test_case_value()).unwrap();
-                    writeln!(s, "        level = {};", level.as_int()).unwrap();
-                    writeln!(s, "        class = {};", class.as_test_case_value()).unwrap();
+                    writeln!(s, "            area = {};", area.as_test_case_value()).unwrap();
+                    writeln!(s, "            level = {};", level.as_int()).unwrap();
+                    writeln!(s, "            class = {};", class.as_test_case_value()).unwrap();
                 }
                 crate::vanilla::Friend_FriendStatus::Dnd {
                     area,
                     class,
                     level,
                 } => {
-                    writeln!(s, "        area = {};", area.as_test_case_value()).unwrap();
-                    writeln!(s, "        level = {};", level.as_int()).unwrap();
-                    writeln!(s, "        class = {};", class.as_test_case_value()).unwrap();
+                    writeln!(s, "            area = {};", area.as_test_case_value()).unwrap();
+                    writeln!(s, "            level = {};", level.as_int()).unwrap();
+                    writeln!(s, "            class = {};", class.as_test_case_value()).unwrap();
                 }
                 _ => {}
             }
 
 
-            writeln!(s, "    }},").unwrap();
+            writeln!(s, "        }},").unwrap();
         }
-        writeln!(s, "];").unwrap();
+        writeln!(s, "    ];").unwrap();
 
         writeln!(s, "}} [").unwrap();
 

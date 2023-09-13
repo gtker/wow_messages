@@ -34,7 +34,7 @@ impl BagFamily {
         if self.is_empty() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "NONE").unwrap();
             first = false;
@@ -42,7 +42,7 @@ impl BagFamily {
         if self.is_arrows() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "ARROWS").unwrap();
             first = false;
@@ -50,7 +50,7 @@ impl BagFamily {
         if self.is_bullets() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "BULLETS").unwrap();
             first = false;
@@ -58,7 +58,7 @@ impl BagFamily {
         if self.is_soul_shards() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "SOUL_SHARDS").unwrap();
             first = false;
@@ -66,7 +66,7 @@ impl BagFamily {
         if self.is_leatherworking_supplies() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "LEATHERWORKING_SUPPLIES").unwrap();
             first = false;
@@ -74,7 +74,7 @@ impl BagFamily {
         if self.is_inscription_supplies() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "INSCRIPTION_SUPPLIES").unwrap();
             first = false;
@@ -82,7 +82,7 @@ impl BagFamily {
         if self.is_herbs() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "HERBS").unwrap();
             first = false;
@@ -90,7 +90,7 @@ impl BagFamily {
         if self.is_enchanting_supplies() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "ENCHANTING_SUPPLIES").unwrap();
             first = false;
@@ -98,7 +98,7 @@ impl BagFamily {
         if self.is_engineering_supplies() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "ENGINEERING_SUPPLIES").unwrap();
             first = false;
@@ -106,7 +106,7 @@ impl BagFamily {
         if self.is_keys() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "KEYS").unwrap();
             first = false;
@@ -114,7 +114,7 @@ impl BagFamily {
         if self.is_gems() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "GEMS").unwrap();
             first = false;
@@ -122,7 +122,7 @@ impl BagFamily {
         if self.is_mining_supplies() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "MINING_SUPPLIES").unwrap();
             first = false;
@@ -130,7 +130,7 @@ impl BagFamily {
         if self.is_soulbound_equipment() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "SOULBOUND_EQUIPMENT").unwrap();
             first = false;
@@ -138,7 +138,7 @@ impl BagFamily {
         if self.is_vanity_pets() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "VANITY_PETS").unwrap();
             first = false;
@@ -146,7 +146,7 @@ impl BagFamily {
         if self.is_currency_tokens() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "CURRENCY_TOKENS").unwrap();
             first = false;
@@ -154,7 +154,7 @@ impl BagFamily {
         if self.is_quest_items() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "QUEST_ITEMS").unwrap();
             first = false;

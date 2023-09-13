@@ -72,11 +72,11 @@ impl crate::Message for SMSG_REDIRECT_CLIENT {
         writeln!(s, "    ip_address = {};", self.ip_address).unwrap();
         writeln!(s, "    port = {};", self.port).unwrap();
         writeln!(s, "    unknown = {};", self.unknown).unwrap();
-        write!(s, "    hash = [").unwrap();
+        writeln!(s, "    hash = [").unwrap();
         for v in self.hash.as_slice() {
             write!(s, "{v:#04X}, ").unwrap();
         }
-        writeln!(s, "];").unwrap();
+        writeln!(s, "    ];").unwrap();
 
         writeln!(s, "}} [").unwrap();
 

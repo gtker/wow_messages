@@ -220,11 +220,11 @@ impl ServerMessage for CMD_AUTH_LOGON_PROOF_Server {
                 server_proof,
                 unknown,
             } => {
-                write!(s, "    server_proof = [").unwrap();
+                writeln!(s, "    server_proof = [").unwrap();
                 for v in server_proof.as_slice() {
                     write!(s, "{v:#04X}, ").unwrap();
                 }
-                writeln!(s, "];").unwrap();
+                writeln!(s, "    ];").unwrap();
                 writeln!(s, "    hardware_survey_id = {};", hardware_survey_id).unwrap();
                 writeln!(s, "    unknown = {};", unknown).unwrap();
             }

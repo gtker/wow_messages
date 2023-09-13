@@ -53,7 +53,7 @@ impl Attributes {
         if self.is_empty() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "NONE").unwrap();
             first = false;
@@ -61,7 +61,7 @@ impl Attributes {
         if self.is_proc_failure_burns_charge() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "PROC_FAILURE_BURNS_CHARGE").unwrap();
             first = false;
@@ -69,7 +69,7 @@ impl Attributes {
         if self.is_uses_ranged_slot() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "USES_RANGED_SLOT").unwrap();
             first = false;
@@ -77,7 +77,7 @@ impl Attributes {
         if self.is_on_next_swing_no_damage() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "ON_NEXT_SWING_NO_DAMAGE").unwrap();
             first = false;
@@ -85,7 +85,7 @@ impl Attributes {
         if self.is_need_exotic_ammo() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "NEED_EXOTIC_AMMO").unwrap();
             first = false;
@@ -93,7 +93,7 @@ impl Attributes {
         if self.is_is_ability() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "IS_ABILITY").unwrap();
             first = false;
@@ -101,7 +101,7 @@ impl Attributes {
         if self.is_is_tradeskill() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "IS_TRADESKILL").unwrap();
             first = false;
@@ -109,7 +109,7 @@ impl Attributes {
         if self.is_passive() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "PASSIVE").unwrap();
             first = false;
@@ -117,7 +117,7 @@ impl Attributes {
         if self.is_do_not_display() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "DO_NOT_DISPLAY").unwrap();
             first = false;
@@ -125,7 +125,7 @@ impl Attributes {
         if self.is_do_not_log() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "DO_NOT_LOG").unwrap();
             first = false;
@@ -133,7 +133,7 @@ impl Attributes {
         if self.is_held_item_only() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "HELD_ITEM_ONLY").unwrap();
             first = false;
@@ -141,7 +141,7 @@ impl Attributes {
         if self.is_on_next_swing() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "ON_NEXT_SWING").unwrap();
             first = false;
@@ -149,7 +149,7 @@ impl Attributes {
         if self.is_wearer_casts_proc_trigger() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "WEARER_CASTS_PROC_TRIGGER").unwrap();
             first = false;
@@ -157,7 +157,7 @@ impl Attributes {
         if self.is_daytime_only() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "DAYTIME_ONLY").unwrap();
             first = false;
@@ -165,7 +165,7 @@ impl Attributes {
         if self.is_night_only() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "NIGHT_ONLY").unwrap();
             first = false;
@@ -173,7 +173,7 @@ impl Attributes {
         if self.is_only_indoors() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "ONLY_INDOORS").unwrap();
             first = false;
@@ -181,7 +181,7 @@ impl Attributes {
         if self.is_only_outdoors() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "ONLY_OUTDOORS").unwrap();
             first = false;
@@ -189,7 +189,7 @@ impl Attributes {
         if self.is_not_shapeshift() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "NOT_SHAPESHIFT").unwrap();
             first = false;
@@ -197,7 +197,7 @@ impl Attributes {
         if self.is_only_stealthed() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "ONLY_STEALTHED").unwrap();
             first = false;
@@ -205,7 +205,7 @@ impl Attributes {
         if self.is_do_not_sheath() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "DO_NOT_SHEATH").unwrap();
             first = false;
@@ -213,7 +213,7 @@ impl Attributes {
         if self.is_scales_with_creature_level() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "SCALES_WITH_CREATURE_LEVEL").unwrap();
             first = false;
@@ -221,7 +221,7 @@ impl Attributes {
         if self.is_cancels_auto_attack_combat() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "CANCELS_AUTO_ATTACK_COMBAT").unwrap();
             first = false;
@@ -229,7 +229,7 @@ impl Attributes {
         if self.is_no_active_defense() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "NO_ACTIVE_DEFENSE").unwrap();
             first = false;
@@ -237,7 +237,7 @@ impl Attributes {
         if self.is_track_target_in_cast_player_only() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "TRACK_TARGET_IN_CAST_PLAYER_ONLY").unwrap();
             first = false;
@@ -245,7 +245,7 @@ impl Attributes {
         if self.is_allow_cast_while_dead() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "ALLOW_CAST_WHILE_DEAD").unwrap();
             first = false;
@@ -253,7 +253,7 @@ impl Attributes {
         if self.is_allow_while_mounted() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "ALLOW_WHILE_MOUNTED").unwrap();
             first = false;
@@ -261,7 +261,7 @@ impl Attributes {
         if self.is_cooldown_on_event() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "COOLDOWN_ON_EVENT").unwrap();
             first = false;
@@ -269,7 +269,7 @@ impl Attributes {
         if self.is_aura_is_debuff() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "AURA_IS_DEBUFF").unwrap();
             first = false;
@@ -277,7 +277,7 @@ impl Attributes {
         if self.is_allow_while_sitting() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "ALLOW_WHILE_SITTING").unwrap();
             first = false;
@@ -285,7 +285,7 @@ impl Attributes {
         if self.is_not_in_combat_only_peaceful() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "NOT_IN_COMBAT_ONLY_PEACEFUL").unwrap();
             first = false;
@@ -293,7 +293,7 @@ impl Attributes {
         if self.is_no_immunities() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "NO_IMMUNITIES").unwrap();
             first = false;
@@ -301,7 +301,7 @@ impl Attributes {
         if self.is_heartbeat_resist() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "HEARTBEAT_RESIST").unwrap();
             first = false;
@@ -309,7 +309,7 @@ impl Attributes {
         if self.is_no_aura_cancel() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "NO_AURA_CANCEL").unwrap();
             first = false;

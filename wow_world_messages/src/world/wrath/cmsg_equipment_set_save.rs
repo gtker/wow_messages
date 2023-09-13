@@ -87,11 +87,11 @@ impl crate::Message for CMSG_EQUIPMENT_SET_SAVE {
         writeln!(s, "    index = {};", self.index).unwrap();
         writeln!(s, "    name = \"{}\";", self.name).unwrap();
         writeln!(s, "    icon_name = \"{}\";", self.icon_name).unwrap();
-        write!(s, "    equipment = [").unwrap();
+        writeln!(s, "    equipment = [").unwrap();
         for v in self.equipment.as_slice() {
             write!(s, "{v:#08X}, ").unwrap();
         }
-        writeln!(s, "];").unwrap();
+        writeln!(s, "    ];").unwrap();
 
         writeln!(s, "}} [").unwrap();
 

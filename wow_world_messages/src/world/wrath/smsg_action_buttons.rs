@@ -89,32 +89,32 @@ impl crate::Message for SMSG_ACTION_BUTTONS {
             crate::wrath::SMSG_ACTION_BUTTONS_ActionBarBehavior::Initial {
                 data,
             } => {
-                write!(s, "    data = [").unwrap();
+                writeln!(s, "    data = [").unwrap();
                 for v in data.as_slice() {
-                    writeln!(s, "{{").unwrap();
+                    writeln!(s, "        {{").unwrap();
                     // Members
-                    writeln!(s, "        action = {};", v.action).unwrap();
-                    writeln!(s, "        action_type = {};", v.action_type).unwrap();
-                    writeln!(s, "        misc = {};", v.misc).unwrap();
+                    writeln!(s, "            action = {};", v.action).unwrap();
+                    writeln!(s, "            action_type = {};", v.action_type).unwrap();
+                    writeln!(s, "            misc = {};", v.misc).unwrap();
 
-                    writeln!(s, "    }},").unwrap();
+                    writeln!(s, "        }},").unwrap();
                 }
-                writeln!(s, "];").unwrap();
+                writeln!(s, "    ];").unwrap();
             }
             crate::wrath::SMSG_ACTION_BUTTONS_ActionBarBehavior::Set {
                 data,
             } => {
-                write!(s, "    data = [").unwrap();
+                writeln!(s, "    data = [").unwrap();
                 for v in data.as_slice() {
-                    writeln!(s, "{{").unwrap();
+                    writeln!(s, "        {{").unwrap();
                     // Members
-                    writeln!(s, "        action = {};", v.action).unwrap();
-                    writeln!(s, "        action_type = {};", v.action_type).unwrap();
-                    writeln!(s, "        misc = {};", v.misc).unwrap();
+                    writeln!(s, "            action = {};", v.action).unwrap();
+                    writeln!(s, "            action_type = {};", v.action_type).unwrap();
+                    writeln!(s, "            misc = {};", v.misc).unwrap();
 
-                    writeln!(s, "    }},").unwrap();
+                    writeln!(s, "        }},").unwrap();
                 }
-                writeln!(s, "];").unwrap();
+                writeln!(s, "    ];").unwrap();
             }
             _ => {}
         }

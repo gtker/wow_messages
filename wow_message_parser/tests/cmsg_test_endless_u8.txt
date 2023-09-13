@@ -73,11 +73,11 @@ impl crate::Message for CMSG_TEST_ENDLESS_U8 {
         // Members
         writeln!(s, "    c_string = \"{}\";", self.c_string).unwrap();
         writeln!(s, "    b_u8 = {};", self.b_u8).unwrap();
-        write!(s, "    endless = [").unwrap();
+        writeln!(s, "    endless = [").unwrap();
         for v in self.endless.as_slice() {
             write!(s, "{v:#04X}, ").unwrap();
         }
-        writeln!(s, "];").unwrap();
+        writeln!(s, "    ];").unwrap();
 
         writeln!(s, "}} [").unwrap();
 

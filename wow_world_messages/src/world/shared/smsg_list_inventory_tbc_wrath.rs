@@ -68,22 +68,22 @@ impl crate::Message for SMSG_LIST_INVENTORY {
         // Members
         writeln!(s, "    vendor = {};", self.vendor.guid()).unwrap();
         writeln!(s, "    amount_of_items = {};", self.items.len()).unwrap();
-        write!(s, "    items = [").unwrap();
+        writeln!(s, "    items = [").unwrap();
         for v in self.items.as_slice() {
-            writeln!(s, "{{").unwrap();
+            writeln!(s, "        {{").unwrap();
             // Members
-            writeln!(s, "        item_stack_count = {};", v.item_stack_count).unwrap();
-            writeln!(s, "        item = {};", v.item).unwrap();
-            writeln!(s, "        item_display_id = {};", v.item_display_id).unwrap();
-            writeln!(s, "        max_items = {};", v.max_items).unwrap();
-            writeln!(s, "        price = {};", v.price.as_int()).unwrap();
-            writeln!(s, "        max_durability = {};", v.max_durability).unwrap();
-            writeln!(s, "        durability = {};", v.durability).unwrap();
-            writeln!(s, "        extended_cost = {};", v.extended_cost).unwrap();
+            writeln!(s, "            item_stack_count = {};", v.item_stack_count).unwrap();
+            writeln!(s, "            item = {};", v.item).unwrap();
+            writeln!(s, "            item_display_id = {};", v.item_display_id).unwrap();
+            writeln!(s, "            max_items = {};", v.max_items).unwrap();
+            writeln!(s, "            price = {};", v.price.as_int()).unwrap();
+            writeln!(s, "            max_durability = {};", v.max_durability).unwrap();
+            writeln!(s, "            durability = {};", v.durability).unwrap();
+            writeln!(s, "            extended_cost = {};", v.extended_cost).unwrap();
 
-            writeln!(s, "    }},").unwrap();
+            writeln!(s, "        }},").unwrap();
         }
-        writeln!(s, "];").unwrap();
+        writeln!(s, "    ];").unwrap();
 
         writeln!(s, "}} [").unwrap();
 

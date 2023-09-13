@@ -76,24 +76,24 @@ impl crate::Message for SMSG_ARENA_TEAM_ROSTER {
         writeln!(s, "    arena_team = {};", self.arena_team).unwrap();
         writeln!(s, "    amount_of_members = {};", self.members.len()).unwrap();
         writeln!(s, "    arena_type = {};", self.arena_type.as_test_case_value()).unwrap();
-        write!(s, "    members = [").unwrap();
+        writeln!(s, "    members = [").unwrap();
         for v in self.members.as_slice() {
-            writeln!(s, "{{").unwrap();
+            writeln!(s, "        {{").unwrap();
             // Members
-            writeln!(s, "        guid = {};", v.guid.guid()).unwrap();
-            writeln!(s, "        online = {};", if v.online { "TRUE" } else { "FALSE" }).unwrap();
-            writeln!(s, "        name = \"{}\";", v.name).unwrap();
-            writeln!(s, "        level = {};", v.level.as_int()).unwrap();
-            writeln!(s, "        class = {};", v.class.as_test_case_value()).unwrap();
-            writeln!(s, "        games_played_this_week = {};", v.games_played_this_week).unwrap();
-            writeln!(s, "        wins_this_week = {};", v.wins_this_week).unwrap();
-            writeln!(s, "        games_played_this_season = {};", v.games_played_this_season).unwrap();
-            writeln!(s, "        wins_this_season = {};", v.wins_this_season).unwrap();
-            writeln!(s, "        personal_rating = {};", v.personal_rating).unwrap();
+            writeln!(s, "            guid = {};", v.guid.guid()).unwrap();
+            writeln!(s, "            online = {};", if v.online { "TRUE" } else { "FALSE" }).unwrap();
+            writeln!(s, "            name = \"{}\";", v.name).unwrap();
+            writeln!(s, "            level = {};", v.level.as_int()).unwrap();
+            writeln!(s, "            class = {};", v.class.as_test_case_value()).unwrap();
+            writeln!(s, "            games_played_this_week = {};", v.games_played_this_week).unwrap();
+            writeln!(s, "            wins_this_week = {};", v.wins_this_week).unwrap();
+            writeln!(s, "            games_played_this_season = {};", v.games_played_this_season).unwrap();
+            writeln!(s, "            wins_this_season = {};", v.wins_this_season).unwrap();
+            writeln!(s, "            personal_rating = {};", v.personal_rating).unwrap();
 
-            writeln!(s, "    }},").unwrap();
+            writeln!(s, "        }},").unwrap();
         }
-        writeln!(s, "];").unwrap();
+        writeln!(s, "    ];").unwrap();
 
         writeln!(s, "}} [").unwrap();
 

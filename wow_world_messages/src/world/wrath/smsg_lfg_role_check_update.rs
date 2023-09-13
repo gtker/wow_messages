@@ -91,24 +91,24 @@ impl crate::Message for SMSG_LFG_ROLE_CHECK_UPDATE {
         writeln!(s, "    rolecheck_state = {};", self.rolecheck_state).unwrap();
         writeln!(s, "    rolecheck_initializing = {};", self.rolecheck_initializing).unwrap();
         writeln!(s, "    amount_of_dungeon_entries = {};", self.dungeon_entries.len()).unwrap();
-        write!(s, "    dungeon_entries = [").unwrap();
+        writeln!(s, "    dungeon_entries = [").unwrap();
         for v in self.dungeon_entries.as_slice() {
             write!(s, "{v:#04X}, ").unwrap();
         }
-        writeln!(s, "];").unwrap();
+        writeln!(s, "    ];").unwrap();
         writeln!(s, "    amount_of_roles = {};", self.roles.len()).unwrap();
-        write!(s, "    roles = [").unwrap();
+        writeln!(s, "    roles = [").unwrap();
         for v in self.roles.as_slice() {
-            writeln!(s, "{{").unwrap();
+            writeln!(s, "        {{").unwrap();
             // Members
-            writeln!(s, "        guid = {};", v.guid.guid()).unwrap();
-            writeln!(s, "        ready = {};", if v.ready { "TRUE" } else { "FALSE" }).unwrap();
-            writeln!(s, "        roles = {};", v.roles).unwrap();
-            writeln!(s, "        level = {};", v.level.as_int()).unwrap();
+            writeln!(s, "            guid = {};", v.guid.guid()).unwrap();
+            writeln!(s, "            ready = {};", if v.ready { "TRUE" } else { "FALSE" }).unwrap();
+            writeln!(s, "            roles = {};", v.roles).unwrap();
+            writeln!(s, "            level = {};", v.level.as_int()).unwrap();
 
-            writeln!(s, "    }},").unwrap();
+            writeln!(s, "        }},").unwrap();
         }
-        writeln!(s, "];").unwrap();
+        writeln!(s, "    ];").unwrap();
 
         writeln!(s, "}} [").unwrap();
 

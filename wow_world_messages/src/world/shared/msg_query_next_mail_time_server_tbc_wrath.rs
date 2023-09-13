@@ -68,19 +68,19 @@ impl crate::Message for MSG_QUERY_NEXT_MAIL_TIME_Server {
         // Members
         writeln!(s, "    float = {};", self.float).unwrap();
         writeln!(s, "    amount_of_mails = {};", self.mails.len()).unwrap();
-        write!(s, "    mails = [").unwrap();
+        writeln!(s, "    mails = [").unwrap();
         for v in self.mails.as_slice() {
-            writeln!(s, "{{").unwrap();
+            writeln!(s, "        {{").unwrap();
             // Members
-            writeln!(s, "        sender = {};", v.sender.guid()).unwrap();
-            writeln!(s, "        auction_house = {};", v.auction_house.as_test_case_value()).unwrap();
-            writeln!(s, "        message_type = {};", v.message_type.as_test_case_value()).unwrap();
-            writeln!(s, "        stationery = {};", v.stationery).unwrap();
-            writeln!(s, "        time = {}", if v.time.to_string().contains('.') { v.time.to_string() } else { format!("{}.0", v.time) }).unwrap();
+            writeln!(s, "            sender = {};", v.sender.guid()).unwrap();
+            writeln!(s, "            auction_house = {};", v.auction_house.as_test_case_value()).unwrap();
+            writeln!(s, "            message_type = {};", v.message_type.as_test_case_value()).unwrap();
+            writeln!(s, "            stationery = {};", v.stationery).unwrap();
+            writeln!(s, "            time = {};", if v.time.to_string().contains('.') { v.time.to_string() } else { format!("{}.0", v.time) }).unwrap();
 
-            writeln!(s, "    }},").unwrap();
+            writeln!(s, "        }},").unwrap();
         }
-        writeln!(s, "];").unwrap();
+        writeln!(s, "    ];").unwrap();
 
         writeln!(s, "}} [").unwrap();
 

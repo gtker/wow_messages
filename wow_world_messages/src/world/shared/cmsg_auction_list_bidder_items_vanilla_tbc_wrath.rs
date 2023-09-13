@@ -72,11 +72,11 @@ impl crate::Message for CMSG_AUCTION_LIST_BIDDER_ITEMS {
         writeln!(s, "    auctioneer = {};", self.auctioneer.guid()).unwrap();
         writeln!(s, "    start_from_page = {};", self.start_from_page).unwrap();
         writeln!(s, "    amount_of_outbid_items = {};", self.outbid_item_ids.len()).unwrap();
-        write!(s, "    outbid_item_ids = [").unwrap();
+        writeln!(s, "    outbid_item_ids = [").unwrap();
         for v in self.outbid_item_ids.as_slice() {
             write!(s, "{v:#04X}, ").unwrap();
         }
-        writeln!(s, "];").unwrap();
+        writeln!(s, "    ];").unwrap();
 
         writeln!(s, "}} [").unwrap();
 

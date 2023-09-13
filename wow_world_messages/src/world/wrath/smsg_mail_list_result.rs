@@ -70,83 +70,83 @@ impl crate::Message for SMSG_MAIL_LIST_RESULT {
         // Members
         writeln!(s, "    real_mail_amount = {};", self.real_mail_amount).unwrap();
         writeln!(s, "    amount_of_mails = {};", self.mails.len()).unwrap();
-        write!(s, "    mails = [").unwrap();
+        writeln!(s, "    mails = [").unwrap();
         for v in self.mails.as_slice() {
-            writeln!(s, "{{").unwrap();
+            writeln!(s, "        {{").unwrap();
             // Members
-            writeln!(s, "        message_id = {};", v.message_id).unwrap();
-            writeln!(s, "        message_type = {};", MailType::try_from(v.message_type.as_int()).unwrap().as_test_case_value()).unwrap();
+            writeln!(s, "            message_id = {};", v.message_id).unwrap();
+            writeln!(s, "            message_type = {};", MailType::try_from(v.message_type.as_int()).unwrap().as_test_case_value()).unwrap();
             match &v.message_type {
                 crate::wrath::Mail_MailType::Normal {
                     sender,
                 } => {
-                    writeln!(s, "        sender = {};", sender.guid()).unwrap();
+                    writeln!(s, "            sender = {};", sender.guid()).unwrap();
                 }
                 crate::wrath::Mail_MailType::Auction {
                     auction_id,
                 } => {
-                    writeln!(s, "        auction_id = {};", auction_id).unwrap();
+                    writeln!(s, "            auction_id = {};", auction_id).unwrap();
                 }
                 crate::wrath::Mail_MailType::Creature {
                     sender_id,
                 } => {
-                    writeln!(s, "        sender_id = {};", sender_id).unwrap();
+                    writeln!(s, "            sender_id = {};", sender_id).unwrap();
                 }
                 crate::wrath::Mail_MailType::Gameobject {
                     sender_id,
                 } => {
-                    writeln!(s, "        sender_id = {};", sender_id).unwrap();
+                    writeln!(s, "            sender_id = {};", sender_id).unwrap();
                 }
                 crate::wrath::Mail_MailType::Item {
                     item,
                 } => {
-                    writeln!(s, "        item = {};", item).unwrap();
+                    writeln!(s, "            item = {};", item).unwrap();
                 }
             }
 
-            writeln!(s, "        cash_on_delivery = {};", v.cash_on_delivery.as_int()).unwrap();
-            writeln!(s, "        unknown = {};", v.unknown).unwrap();
-            writeln!(s, "        stationery = {};", v.stationery).unwrap();
-            writeln!(s, "        money = {};", v.money.as_int()).unwrap();
-            writeln!(s, "        flags = {};", v.flags).unwrap();
-            writeln!(s, "        expiration_time = {}", if v.expiration_time.to_string().contains('.') { v.expiration_time.to_string() } else { format!("{}.0", v.expiration_time) }).unwrap();
-            writeln!(s, "        mail_template_id = {};", v.mail_template_id).unwrap();
-            writeln!(s, "        subject = \"{}\";", v.subject).unwrap();
-            writeln!(s, "        message = \"{}\";", v.message).unwrap();
-            writeln!(s, "        amount_of_items = {};", v.items.len()).unwrap();
-            write!(s, "        items = [").unwrap();
+            writeln!(s, "            cash_on_delivery = {};", v.cash_on_delivery.as_int()).unwrap();
+            writeln!(s, "            unknown = {};", v.unknown).unwrap();
+            writeln!(s, "            stationery = {};", v.stationery).unwrap();
+            writeln!(s, "            money = {};", v.money.as_int()).unwrap();
+            writeln!(s, "            flags = {};", v.flags).unwrap();
+            writeln!(s, "            expiration_time = {};", if v.expiration_time.to_string().contains('.') { v.expiration_time.to_string() } else { format!("{}.0", v.expiration_time) }).unwrap();
+            writeln!(s, "            mail_template_id = {};", v.mail_template_id).unwrap();
+            writeln!(s, "            subject = \"{}\";", v.subject).unwrap();
+            writeln!(s, "            message = \"{}\";", v.message).unwrap();
+            writeln!(s, "            amount_of_items = {};", v.items.len()).unwrap();
+            writeln!(s, "            items = [").unwrap();
             for v in v.items.as_slice() {
-                writeln!(s, "{{").unwrap();
+                writeln!(s, "                {{").unwrap();
                 // Members
-                writeln!(s, "            item_index = {};", v.item_index).unwrap();
-                writeln!(s, "            low_guid = {};", v.low_guid).unwrap();
-                writeln!(s, "            item = {};", v.item).unwrap();
-                write!(s, "            enchants = [").unwrap();
+                writeln!(s, "                    item_index = {};", v.item_index).unwrap();
+                writeln!(s, "                    low_guid = {};", v.low_guid).unwrap();
+                writeln!(s, "                    item = {};", v.item).unwrap();
+                writeln!(s, "                    enchants = [").unwrap();
                 for v in v.enchants.as_slice() {
-                    writeln!(s, "{{").unwrap();
+                    writeln!(s, "                        {{").unwrap();
                     // Members
-                    writeln!(s, "                charges = {};", v.charges).unwrap();
-                    writeln!(s, "                duration = {};", v.duration).unwrap();
-                    writeln!(s, "                enchant_id = {};", v.enchant_id).unwrap();
+                    writeln!(s, "                            charges = {};", v.charges).unwrap();
+                    writeln!(s, "                            duration = {};", v.duration).unwrap();
+                    writeln!(s, "                            enchant_id = {};", v.enchant_id).unwrap();
 
-                    writeln!(s, "    }},").unwrap();
+                    writeln!(s, "                        }},").unwrap();
                 }
-                writeln!(s, "];").unwrap();
-                writeln!(s, "            item_random_property_id = {};", v.item_random_property_id).unwrap();
-                writeln!(s, "            item_suffix_factor = {};", v.item_suffix_factor).unwrap();
-                writeln!(s, "            item_amount = {};", v.item_amount).unwrap();
-                writeln!(s, "            charges = {};", v.charges).unwrap();
-                writeln!(s, "            max_durability = {};", v.max_durability).unwrap();
-                writeln!(s, "            durability = {};", v.durability).unwrap();
-                writeln!(s, "            unknown = {};", v.unknown).unwrap();
+                writeln!(s, "                    ];").unwrap();
+                writeln!(s, "                    item_random_property_id = {};", v.item_random_property_id).unwrap();
+                writeln!(s, "                    item_suffix_factor = {};", v.item_suffix_factor).unwrap();
+                writeln!(s, "                    item_amount = {};", v.item_amount).unwrap();
+                writeln!(s, "                    charges = {};", v.charges).unwrap();
+                writeln!(s, "                    max_durability = {};", v.max_durability).unwrap();
+                writeln!(s, "                    durability = {};", v.durability).unwrap();
+                writeln!(s, "                    unknown = {};", v.unknown).unwrap();
 
-                writeln!(s, "    }},").unwrap();
+                writeln!(s, "                }},").unwrap();
             }
-            writeln!(s, "];").unwrap();
+            writeln!(s, "            ];").unwrap();
 
-            writeln!(s, "    }},").unwrap();
+            writeln!(s, "        }},").unwrap();
         }
-        writeln!(s, "];").unwrap();
+        writeln!(s, "    ];").unwrap();
 
         writeln!(s, "}} [").unwrap();
 

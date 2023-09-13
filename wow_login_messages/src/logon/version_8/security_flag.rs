@@ -21,7 +21,7 @@ impl SecurityFlag {
         if self.is_empty() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "NONE").unwrap();
             first = false;
@@ -29,7 +29,7 @@ impl SecurityFlag {
         if self.is_pin() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "PIN").unwrap();
             first = false;
@@ -37,7 +37,7 @@ impl SecurityFlag {
         if self.is_matrix_card() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "MATRIX_CARD").unwrap();
             first = false;
@@ -45,7 +45,7 @@ impl SecurityFlag {
         if self.is_authenticator() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "AUTHENTICATOR").unwrap();
             first = false;

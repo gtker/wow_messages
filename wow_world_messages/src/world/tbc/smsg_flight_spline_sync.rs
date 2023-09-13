@@ -53,7 +53,7 @@ impl crate::Message for SMSG_FLIGHT_SPLINE_SYNC {
 
         writeln!(s, "test SMSG_FLIGHT_SPLINE_SYNC {{").unwrap();
         // Members
-        writeln!(s, "    elapsed_value = {}", if self.elapsed_value.to_string().contains('.') { self.elapsed_value.to_string() } else { format!("{}.0", self.elapsed_value) }).unwrap();
+        writeln!(s, "    elapsed_value = {};", if self.elapsed_value.to_string().contains('.') { self.elapsed_value.to_string() } else { format!("{}.0", self.elapsed_value) }).unwrap();
         writeln!(s, "    guid = {};", self.guid.guid()).unwrap();
 
         writeln!(s, "}} [").unwrap();

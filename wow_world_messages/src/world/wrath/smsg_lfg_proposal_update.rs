@@ -93,20 +93,20 @@ impl crate::Message for SMSG_LFG_PROPOSAL_UPDATE {
         writeln!(s, "    encounters_finished_mask = {};", self.encounters_finished_mask).unwrap();
         writeln!(s, "    silent = {};", self.silent).unwrap();
         writeln!(s, "    amount_of_proposals = {};", self.proposals.len()).unwrap();
-        write!(s, "    proposals = [").unwrap();
+        writeln!(s, "    proposals = [").unwrap();
         for v in self.proposals.as_slice() {
-            writeln!(s, "{{").unwrap();
+            writeln!(s, "        {{").unwrap();
             // Members
-            writeln!(s, "        role_mask = {};", v.role_mask).unwrap();
-            writeln!(s, "        is_current_player = {};", v.is_current_player).unwrap();
-            writeln!(s, "        in_dungeon = {};", v.in_dungeon).unwrap();
-            writeln!(s, "        in_same_group = {};", v.in_same_group).unwrap();
-            writeln!(s, "        has_answered = {};", v.has_answered).unwrap();
-            writeln!(s, "        has_accepted = {};", v.has_accepted).unwrap();
+            writeln!(s, "            role_mask = {};", v.role_mask).unwrap();
+            writeln!(s, "            is_current_player = {};", v.is_current_player).unwrap();
+            writeln!(s, "            in_dungeon = {};", v.in_dungeon).unwrap();
+            writeln!(s, "            in_same_group = {};", v.in_same_group).unwrap();
+            writeln!(s, "            has_answered = {};", v.has_answered).unwrap();
+            writeln!(s, "            has_accepted = {};", v.has_accepted).unwrap();
 
-            writeln!(s, "    }},").unwrap();
+            writeln!(s, "        }},").unwrap();
         }
-        writeln!(s, "];").unwrap();
+        writeln!(s, "    ];").unwrap();
 
         writeln!(s, "}} [").unwrap();
 

@@ -27,7 +27,7 @@ impl EmoteFlags {
         if self.is_talk() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "TALK").unwrap();
             first = false;
@@ -35,7 +35,7 @@ impl EmoteFlags {
         if self.is_question() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "QUESTION").unwrap();
             first = false;
@@ -43,7 +43,7 @@ impl EmoteFlags {
         if self.is_exclamation() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "EXCLAMATION").unwrap();
             first = false;
@@ -51,7 +51,7 @@ impl EmoteFlags {
         if self.is_shout() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "SHOUT").unwrap();
             first = false;
@@ -59,7 +59,7 @@ impl EmoteFlags {
         if self.is_laugh() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "LAUGH").unwrap();
             first = false;

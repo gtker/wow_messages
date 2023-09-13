@@ -26,7 +26,7 @@ impl WeaponFlags {
         if self.is_empty() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "WEAPON_NOT_AFFECTED_BY_ANIMATION").unwrap();
             first = false;
@@ -34,7 +34,7 @@ impl WeaponFlags {
         if self.is_sheathe_weapons_automatically() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "SHEATHE_WEAPONS_AUTOMATICALLY").unwrap();
             first = false;
@@ -42,7 +42,7 @@ impl WeaponFlags {
         if self.is_sheathe_weapons_automatically_2() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "SHEATHE_WEAPONS_AUTOMATICALLY_2").unwrap();
             first = false;
@@ -50,7 +50,7 @@ impl WeaponFlags {
         if self.is_unsheathe_weapons() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "UNSHEATHE_WEAPONS").unwrap();
             first = false;

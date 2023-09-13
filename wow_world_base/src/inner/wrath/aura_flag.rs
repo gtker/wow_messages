@@ -28,7 +28,7 @@ impl AuraFlag {
         if self.is_empty() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "EMPTY").unwrap();
             first = false;
@@ -36,7 +36,7 @@ impl AuraFlag {
         if self.is_effect_1() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "EFFECT_1").unwrap();
             first = false;
@@ -44,7 +44,7 @@ impl AuraFlag {
         if self.is_effect_2() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "EFFECT_2").unwrap();
             first = false;
@@ -52,7 +52,7 @@ impl AuraFlag {
         if self.is_effect_3() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "EFFECT_3").unwrap();
             first = false;
@@ -60,7 +60,7 @@ impl AuraFlag {
         if self.is_not_caster() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "NOT_CASTER").unwrap();
             first = false;
@@ -68,7 +68,7 @@ impl AuraFlag {
         if self.is_set() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "SET").unwrap();
             first = false;
@@ -76,7 +76,7 @@ impl AuraFlag {
         if self.is_cancellable() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "CANCELLABLE").unwrap();
             first = false;
@@ -84,7 +84,7 @@ impl AuraFlag {
         if self.is_duration() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "DURATION").unwrap();
             first = false;
@@ -92,7 +92,7 @@ impl AuraFlag {
         if self.is_hide() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "HIDE").unwrap();
             first = false;
@@ -100,7 +100,7 @@ impl AuraFlag {
         if self.is_negative() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "NEGATIVE").unwrap();
             first = false;

@@ -62,31 +62,31 @@ impl crate::Message for SMSG_NPC_TEXT_UPDATE {
         writeln!(s, "test SMSG_NPC_TEXT_UPDATE {{").unwrap();
         // Members
         writeln!(s, "    text_id = {};", self.text_id).unwrap();
-        write!(s, "    texts = [").unwrap();
+        writeln!(s, "    texts = [").unwrap();
         for v in self.texts.as_slice() {
-            writeln!(s, "{{").unwrap();
+            writeln!(s, "        {{").unwrap();
             // Members
-            writeln!(s, "        probability = {}", if v.probability.to_string().contains('.') { v.probability.to_string() } else { format!("{}.0", v.probability) }).unwrap();
-            write!(s, "        texts = [").unwrap();
+            writeln!(s, "            probability = {};", if v.probability.to_string().contains('.') { v.probability.to_string() } else { format!("{}.0", v.probability) }).unwrap();
+            writeln!(s, "            texts = [").unwrap();
             for v in v.texts.as_slice() {
                 write!(s, "\"{v}\", ").unwrap();
             }
-            writeln!(s, "];").unwrap();
-            writeln!(s, "        language = {};", v.language.as_test_case_value()).unwrap();
-            write!(s, "        emotes = [").unwrap();
+            writeln!(s, "            ];").unwrap();
+            writeln!(s, "            language = {};", v.language.as_test_case_value()).unwrap();
+            writeln!(s, "            emotes = [").unwrap();
             for v in v.emotes.as_slice() {
-                writeln!(s, "{{").unwrap();
+                writeln!(s, "                {{").unwrap();
                 // Members
-                writeln!(s, "            delay = {};", v.delay).unwrap();
-                writeln!(s, "            emote = {};", v.emote).unwrap();
+                writeln!(s, "                    delay = {};", v.delay).unwrap();
+                writeln!(s, "                    emote = {};", v.emote).unwrap();
 
-                writeln!(s, "    }},").unwrap();
+                writeln!(s, "                }},").unwrap();
             }
-            writeln!(s, "];").unwrap();
+            writeln!(s, "            ];").unwrap();
 
-            writeln!(s, "    }},").unwrap();
+            writeln!(s, "        }},").unwrap();
         }
-        writeln!(s, "];").unwrap();
+        writeln!(s, "    ];").unwrap();
 
         writeln!(s, "}} [").unwrap();
 

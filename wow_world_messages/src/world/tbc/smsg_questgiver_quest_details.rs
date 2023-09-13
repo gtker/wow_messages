@@ -185,43 +185,43 @@ impl crate::Message for SMSG_QUESTGIVER_QUEST_DETAILS {
         writeln!(s, "    auto_finish = {};", if self.auto_finish { "TRUE" } else { "FALSE" }).unwrap();
         writeln!(s, "    suggested_players = {};", self.suggested_players).unwrap();
         writeln!(s, "    amount_of_choice_item_rewards = {};", self.choice_item_rewards.len()).unwrap();
-        write!(s, "    choice_item_rewards = [").unwrap();
+        writeln!(s, "    choice_item_rewards = [").unwrap();
         for v in self.choice_item_rewards.as_slice() {
-            writeln!(s, "{{").unwrap();
+            writeln!(s, "        {{").unwrap();
             // Members
-            writeln!(s, "        item = {};", v.item).unwrap();
-            writeln!(s, "        item_count = {};", v.item_count).unwrap();
+            writeln!(s, "            item = {};", v.item).unwrap();
+            writeln!(s, "            item_count = {};", v.item_count).unwrap();
 
-            writeln!(s, "    }},").unwrap();
+            writeln!(s, "        }},").unwrap();
         }
-        writeln!(s, "];").unwrap();
+        writeln!(s, "    ];").unwrap();
         writeln!(s, "    amount_of_item_rewards = {};", self.item_rewards.len()).unwrap();
-        write!(s, "    item_rewards = [").unwrap();
+        writeln!(s, "    item_rewards = [").unwrap();
         for v in self.item_rewards.as_slice() {
-            writeln!(s, "{{").unwrap();
+            writeln!(s, "        {{").unwrap();
             // Members
-            writeln!(s, "        item = {};", v.item).unwrap();
-            writeln!(s, "        item_count = {};", v.item_count).unwrap();
+            writeln!(s, "            item = {};", v.item).unwrap();
+            writeln!(s, "            item_count = {};", v.item_count).unwrap();
 
-            writeln!(s, "    }},").unwrap();
+            writeln!(s, "        }},").unwrap();
         }
-        writeln!(s, "];").unwrap();
+        writeln!(s, "    ];").unwrap();
         writeln!(s, "    money_reward = {};", self.money_reward.as_int()).unwrap();
         writeln!(s, "    honor_reward = {};", self.honor_reward).unwrap();
         writeln!(s, "    reward_spell = {};", self.reward_spell).unwrap();
         writeln!(s, "    casted_spell = {};", self.casted_spell).unwrap();
         writeln!(s, "    title_reward = {};", self.title_reward).unwrap();
         writeln!(s, "    amount_of_emotes = {};", self.emotes.len()).unwrap();
-        write!(s, "    emotes = [").unwrap();
+        writeln!(s, "    emotes = [").unwrap();
         for v in self.emotes.as_slice() {
-            writeln!(s, "{{").unwrap();
+            writeln!(s, "        {{").unwrap();
             // Members
-            writeln!(s, "        emote = {};", v.emote).unwrap();
-            writeln!(s, "        emote_delay = {};", v.emote_delay.as_millis()).unwrap();
+            writeln!(s, "            emote = {};", v.emote).unwrap();
+            writeln!(s, "            emote_delay = {};", v.emote_delay.as_millis()).unwrap();
 
-            writeln!(s, "    }},").unwrap();
+            writeln!(s, "        }},").unwrap();
         }
-        writeln!(s, "];").unwrap();
+        writeln!(s, "    ];").unwrap();
 
         writeln!(s, "}} [").unwrap();
 

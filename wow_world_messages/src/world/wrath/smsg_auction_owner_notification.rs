@@ -91,7 +91,7 @@ impl crate::Message for SMSG_AUCTION_OWNER_NOTIFICATION {
         writeln!(s, "    bidder = {};", self.bidder.guid()).unwrap();
         writeln!(s, "    item = {};", self.item).unwrap();
         writeln!(s, "    item_random_property_id = {};", self.item_random_property_id).unwrap();
-        writeln!(s, "    time_left = {}", if self.time_left.to_string().contains('.') { self.time_left.to_string() } else { format!("{}.0", self.time_left) }).unwrap();
+        writeln!(s, "    time_left = {};", if self.time_left.to_string().contains('.') { self.time_left.to_string() } else { format!("{}.0", self.time_left) }).unwrap();
 
         writeln!(s, "}} [").unwrap();
 

@@ -64,11 +64,11 @@ impl crate::Message for SMSG_INSPECT_TALENT {
         writeln!(s, "test SMSG_INSPECT_TALENT {{").unwrap();
         // Members
         writeln!(s, "    player = {};", self.player.guid()).unwrap();
-        write!(s, "    talent_data = [").unwrap();
+        writeln!(s, "    talent_data = [").unwrap();
         for v in self.talent_data.as_slice() {
             write!(s, "{v:#04X}, ").unwrap();
         }
-        writeln!(s, "];").unwrap();
+        writeln!(s, "    ];").unwrap();
 
         writeln!(s, "}} [").unwrap();
 

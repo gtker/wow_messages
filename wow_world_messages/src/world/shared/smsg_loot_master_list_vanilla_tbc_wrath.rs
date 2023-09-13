@@ -58,11 +58,11 @@ impl crate::Message for SMSG_LOOT_MASTER_LIST {
         writeln!(s, "test SMSG_LOOT_MASTER_LIST {{").unwrap();
         // Members
         writeln!(s, "    amount_of_players = {};", self.guids.len()).unwrap();
-        write!(s, "    guids = [").unwrap();
+        writeln!(s, "    guids = [").unwrap();
         for v in self.guids.as_slice() {
             write!(s, "{v:#08X}, ").unwrap();
         }
-        writeln!(s, "];").unwrap();
+        writeln!(s, "    ];").unwrap();
 
         writeln!(s, "}} [").unwrap();
 

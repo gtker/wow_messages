@@ -133,16 +133,16 @@ impl crate::Message for SMSG_GUILD_BANK_LIST {
                 tabs,
             } => {
                 writeln!(s, "    amount_of_bank_tabs = {};", tabs.len()).unwrap();
-                write!(s, "    tabs = [").unwrap();
+                writeln!(s, "    tabs = [").unwrap();
                 for v in tabs.as_slice() {
-                    writeln!(s, "{{").unwrap();
+                    writeln!(s, "        {{").unwrap();
                     // Members
-                    writeln!(s, "        tab_name = \"{}\";", v.tab_name).unwrap();
-                    writeln!(s, "        tab_icon = \"{}\";", v.tab_icon).unwrap();
+                    writeln!(s, "            tab_name = \"{}\";", v.tab_name).unwrap();
+                    writeln!(s, "            tab_icon = \"{}\";", v.tab_icon).unwrap();
 
-                    writeln!(s, "    }},").unwrap();
+                    writeln!(s, "        }},").unwrap();
                 }
-                writeln!(s, "];").unwrap();
+                writeln!(s, "    ];").unwrap();
             }
             _ => {}
         }
@@ -153,32 +153,32 @@ impl crate::Message for SMSG_GUILD_BANK_LIST {
                 slot_updates,
             } => {
                 writeln!(s, "    amount_of_slot_updates = {};", slot_updates.len()).unwrap();
-                write!(s, "    slot_updates = [").unwrap();
+                writeln!(s, "    slot_updates = [").unwrap();
                 for v in slot_updates.as_slice() {
-                    writeln!(s, "{{").unwrap();
+                    writeln!(s, "        {{").unwrap();
                     // Members
-                    writeln!(s, "        slot = {};", v.slot).unwrap();
-                    writeln!(s, "        item = {};", v.item).unwrap();
-                    writeln!(s, "        unknown1 = {};", v.unknown1).unwrap();
+                    writeln!(s, "            slot = {};", v.slot).unwrap();
+                    writeln!(s, "            item = {};", v.item).unwrap();
+                    writeln!(s, "            unknown1 = {};", v.unknown1).unwrap();
                     panic!("unsupported type for test case printing: 'VariableItemRandomProperty' for variable 'item_random_property_id'");
-                    writeln!(s, "        amount_of_items = {};", v.amount_of_items).unwrap();
-                    writeln!(s, "        unknown2 = {};", v.unknown2).unwrap();
-                    writeln!(s, "        unknown3 = {};", v.unknown3).unwrap();
-                    writeln!(s, "        amount_of_sockets = {};", v.sockets.len()).unwrap();
-                    write!(s, "        sockets = [").unwrap();
+                    writeln!(s, "            amount_of_items = {};", v.amount_of_items).unwrap();
+                    writeln!(s, "            unknown2 = {};", v.unknown2).unwrap();
+                    writeln!(s, "            unknown3 = {};", v.unknown3).unwrap();
+                    writeln!(s, "            amount_of_sockets = {};", v.sockets.len()).unwrap();
+                    writeln!(s, "            sockets = [").unwrap();
                     for v in v.sockets.as_slice() {
-                        writeln!(s, "{{").unwrap();
+                        writeln!(s, "                {{").unwrap();
                         // Members
-                        writeln!(s, "            socket_index = {};", v.socket_index).unwrap();
-                        writeln!(s, "            gem = {};", v.gem).unwrap();
+                        writeln!(s, "                    socket_index = {};", v.socket_index).unwrap();
+                        writeln!(s, "                    gem = {};", v.gem).unwrap();
 
-                        writeln!(s, "    }},").unwrap();
+                        writeln!(s, "                }},").unwrap();
                     }
-                    writeln!(s, "];").unwrap();
+                    writeln!(s, "            ];").unwrap();
 
-                    writeln!(s, "    }},").unwrap();
+                    writeln!(s, "        }},").unwrap();
                 }
-                writeln!(s, "];").unwrap();
+                writeln!(s, "    ];").unwrap();
             }
             _ => {}
         }

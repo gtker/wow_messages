@@ -331,20 +331,20 @@ impl crate::Message for SMSG_CAST_FAILED {
             crate::tbc::SMSG_CAST_FAILED_SpellCastResult::TotemCategory {
                 totem_categories,
             } => {
-                write!(s, "    totem_categories = [").unwrap();
+                writeln!(s, "    totem_categories = [").unwrap();
                 for v in totem_categories.as_slice() {
                     write!(s, "{v:#04X}, ").unwrap();
                 }
-                writeln!(s, "];").unwrap();
+                writeln!(s, "    ];").unwrap();
             }
             crate::tbc::SMSG_CAST_FAILED_SpellCastResult::Totems {
                 totems,
             } => {
-                write!(s, "    totems = [").unwrap();
+                writeln!(s, "    totems = [").unwrap();
                 for v in totems.as_slice() {
                     write!(s, "{v:#04X}, ").unwrap();
                 }
-                writeln!(s, "];").unwrap();
+                writeln!(s, "    ];").unwrap();
             }
             _ => {}
         }

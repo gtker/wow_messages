@@ -61,26 +61,26 @@ impl crate::Message for SMSG_LFG_PARTY_INFO {
         writeln!(s, "test SMSG_LFG_PARTY_INFO {{").unwrap();
         // Members
         writeln!(s, "    amount_of_infos = {};", self.infos.len()).unwrap();
-        write!(s, "    infos = [").unwrap();
+        writeln!(s, "    infos = [").unwrap();
         for v in self.infos.as_slice() {
-            writeln!(s, "{{").unwrap();
+            writeln!(s, "        {{").unwrap();
             // Members
-            writeln!(s, "        player = {};", v.player.guid()).unwrap();
-            writeln!(s, "        amount_of_dungeons = {};", v.dungeons.len()).unwrap();
-            write!(s, "        dungeons = [").unwrap();
+            writeln!(s, "            player = {};", v.player.guid()).unwrap();
+            writeln!(s, "            amount_of_dungeons = {};", v.dungeons.len()).unwrap();
+            writeln!(s, "            dungeons = [").unwrap();
             for v in v.dungeons.as_slice() {
-                writeln!(s, "{{").unwrap();
+                writeln!(s, "                {{").unwrap();
                 // Members
-                writeln!(s, "            dungeon_entry = {};", v.dungeon_entry).unwrap();
-                writeln!(s, "            reason = {};", v.reason).unwrap();
+                writeln!(s, "                    dungeon_entry = {};", v.dungeon_entry).unwrap();
+                writeln!(s, "                    reason = {};", v.reason).unwrap();
 
-                writeln!(s, "    }},").unwrap();
+                writeln!(s, "                }},").unwrap();
             }
-            writeln!(s, "];").unwrap();
+            writeln!(s, "            ];").unwrap();
 
-            writeln!(s, "    }},").unwrap();
+            writeln!(s, "        }},").unwrap();
         }
-        writeln!(s, "];").unwrap();
+        writeln!(s, "    ];").unwrap();
 
         writeln!(s, "}} [").unwrap();
 

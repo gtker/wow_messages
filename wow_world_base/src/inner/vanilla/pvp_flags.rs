@@ -24,7 +24,7 @@ impl PvpFlags {
         if self.is_pvp_flagged() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "PVP_FLAGGED").unwrap();
             first = false;
@@ -32,7 +32,7 @@ impl PvpFlags {
         if self.is_attack_pvping_players() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "ATTACK_PVPING_PLAYERS").unwrap();
             first = false;

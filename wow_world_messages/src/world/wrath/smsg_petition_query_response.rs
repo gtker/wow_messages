@@ -179,11 +179,11 @@ impl crate::Message for SMSG_PETITION_QUERY_RESPONSE {
         writeln!(s, "    unknown7 = {};", self.unknown7).unwrap();
         writeln!(s, "    unknown8 = {};", self.unknown8).unwrap();
         writeln!(s, "    unknown9 = {};", self.unknown9).unwrap();
-        write!(s, "    unknown10 = [").unwrap();
+        writeln!(s, "    unknown10 = [").unwrap();
         for v in self.unknown10.as_slice() {
             write!(s, "{v:#04X}, ").unwrap();
         }
-        writeln!(s, "];").unwrap();
+        writeln!(s, "    ];").unwrap();
         writeln!(s, "    unknown11 = {};", self.unknown11).unwrap();
         writeln!(s, "    charter_type = {};", self.charter_type.as_test_case_value()).unwrap();
 

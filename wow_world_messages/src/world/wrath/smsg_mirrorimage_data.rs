@@ -134,11 +134,11 @@ impl crate::Message for SMSG_MIRRORIMAGE_DATA {
         writeln!(s, "    hair_color = {};", self.hair_color).unwrap();
         writeln!(s, "    facial_hair = {};", self.facial_hair).unwrap();
         writeln!(s, "    guild_id = {};", self.guild_id).unwrap();
-        write!(s, "    display_ids = [").unwrap();
+        writeln!(s, "    display_ids = [").unwrap();
         for v in self.display_ids.as_slice() {
             write!(s, "{v:#04X}, ").unwrap();
         }
-        writeln!(s, "];").unwrap();
+        writeln!(s, "    ];").unwrap();
 
         writeln!(s, "}} [").unwrap();
 

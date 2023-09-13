@@ -61,16 +61,16 @@ impl crate::Message for SMSG_QUESTGIVER_STATUS_MULTIPLE {
         writeln!(s, "test SMSG_QUESTGIVER_STATUS_MULTIPLE {{").unwrap();
         // Members
         writeln!(s, "    amount_of_statuses = {};", self.statuses.len()).unwrap();
-        write!(s, "    statuses = [").unwrap();
+        writeln!(s, "    statuses = [").unwrap();
         for v in self.statuses.as_slice() {
-            writeln!(s, "{{").unwrap();
+            writeln!(s, "        {{").unwrap();
             // Members
-            writeln!(s, "        npc = {};", v.npc.guid()).unwrap();
-            writeln!(s, "        dialog_status = {};", v.dialog_status.as_test_case_value()).unwrap();
+            writeln!(s, "            npc = {};", v.npc.guid()).unwrap();
+            writeln!(s, "            dialog_status = {};", v.dialog_status.as_test_case_value()).unwrap();
 
-            writeln!(s, "    }},").unwrap();
+            writeln!(s, "        }},").unwrap();
         }
-        writeln!(s, "];").unwrap();
+        writeln!(s, "    ];").unwrap();
 
         writeln!(s, "}} [").unwrap();
 

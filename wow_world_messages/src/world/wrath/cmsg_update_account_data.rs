@@ -79,11 +79,11 @@ impl crate::Message for CMSG_UPDATE_ACCOUNT_DATA {
         // Members
         writeln!(s, "    data_type = {};", self.data_type).unwrap();
         writeln!(s, "    unix_time = {};", self.unix_time).unwrap();
-        write!(s, "    compressed_data = [").unwrap();
+        writeln!(s, "    compressed_data = [").unwrap();
         for v in self.compressed_data.as_slice() {
             write!(s, "{v:#04X}, ").unwrap();
         }
-        writeln!(s, "];").unwrap();
+        writeln!(s, "    ];").unwrap();
 
         writeln!(s, "}} [").unwrap();
 

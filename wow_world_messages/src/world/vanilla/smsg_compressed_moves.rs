@@ -66,29 +66,29 @@ impl crate::Message for SMSG_COMPRESSED_MOVES {
 
         writeln!(s, "test SMSG_COMPRESSED_MOVES {{").unwrap();
         // Members
-        write!(s, "    moves = [").unwrap();
+        writeln!(s, "    moves = [").unwrap();
         for v in self.moves.as_slice() {
-            writeln!(s, "{{").unwrap();
+            writeln!(s, "        {{").unwrap();
             // Members
-            writeln!(s, "        opcode = {};", CompressedMoveOpcode::try_from(v.opcode.as_int()).unwrap().as_test_case_value()).unwrap();
-            writeln!(s, "        guid = {};", v.guid.guid()).unwrap();
+            writeln!(s, "            opcode = {};", CompressedMoveOpcode::try_from(v.opcode.as_int()).unwrap().as_test_case_value()).unwrap();
+            writeln!(s, "            guid = {};", v.guid.guid()).unwrap();
             match &v.opcode {
                 crate::vanilla::CompressedMove_CompressedMoveOpcode::SmsgMonsterMove {
                     monster_move,
                 } => {
                     // monster_move: MonsterMove
-                    writeln!(s, "        monster_move = {{").unwrap();
+                    writeln!(s, "            monster_move = {{").unwrap();
                     // Members
                     // spline_point: Vector3d
-                    writeln!(s, "            spline_point = {{").unwrap();
+                    writeln!(s, "                spline_point = {{").unwrap();
                     // Members
-                    writeln!(s, "                x = {}", if monster_move.spline_point.x.to_string().contains('.') { monster_move.spline_point.x.to_string() } else { format!("{}.0", monster_move.spline_point.x) }).unwrap();
-                    writeln!(s, "                y = {}", if monster_move.spline_point.y.to_string().contains('.') { monster_move.spline_point.y.to_string() } else { format!("{}.0", monster_move.spline_point.y) }).unwrap();
-                    writeln!(s, "                z = {}", if monster_move.spline_point.z.to_string().contains('.') { monster_move.spline_point.z.to_string() } else { format!("{}.0", monster_move.spline_point.z) }).unwrap();
+                    writeln!(s, "                    x = {};", if monster_move.spline_point.x.to_string().contains('.') { monster_move.spline_point.x.to_string() } else { format!("{}.0", monster_move.spline_point.x) }).unwrap();
+                    writeln!(s, "                    y = {};", if monster_move.spline_point.y.to_string().contains('.') { monster_move.spline_point.y.to_string() } else { format!("{}.0", monster_move.spline_point.y) }).unwrap();
+                    writeln!(s, "                    z = {};", if monster_move.spline_point.z.to_string().contains('.') { monster_move.spline_point.z.to_string() } else { format!("{}.0", monster_move.spline_point.z) }).unwrap();
 
                     writeln!(s, "    }};").unwrap();
-                    writeln!(s, "            spline_id = {};", monster_move.spline_id).unwrap();
-                    writeln!(s, "            move_type = {};", MonsterMoveType::try_from(monster_move.move_type.as_int()).unwrap().as_test_case_value()).unwrap();
+                    writeln!(s, "                spline_id = {};", monster_move.spline_id).unwrap();
+                    writeln!(s, "                move_type = {};", MonsterMoveType::try_from(monster_move.move_type.as_int()).unwrap().as_test_case_value()).unwrap();
                     match &monster_move.move_type {
                         crate::vanilla::MonsterMove_MonsterMoveType::Normal {
                             duration,
@@ -103,11 +103,11 @@ impl crate::Message for SMSG_COMPRESSED_MOVES {
                             splines,
                         } => {
                             // position: Vector3d
-                            writeln!(s, "            position = {{").unwrap();
+                            writeln!(s, "                position = {{").unwrap();
                             // Members
-                            writeln!(s, "                x = {}", if position.x.to_string().contains('.') { position.x.to_string() } else { format!("{}.0", position.x) }).unwrap();
-                            writeln!(s, "                y = {}", if position.y.to_string().contains('.') { position.y.to_string() } else { format!("{}.0", position.y) }).unwrap();
-                            writeln!(s, "                z = {}", if position.z.to_string().contains('.') { position.z.to_string() } else { format!("{}.0", position.z) }).unwrap();
+                            writeln!(s, "                    x = {};", if position.x.to_string().contains('.') { position.x.to_string() } else { format!("{}.0", position.x) }).unwrap();
+                            writeln!(s, "                    y = {};", if position.y.to_string().contains('.') { position.y.to_string() } else { format!("{}.0", position.y) }).unwrap();
+                            writeln!(s, "                    z = {};", if position.z.to_string().contains('.') { position.z.to_string() } else { format!("{}.0", position.z) }).unwrap();
 
                             writeln!(s, "    }};").unwrap();
                         }
@@ -117,7 +117,7 @@ impl crate::Message for SMSG_COMPRESSED_MOVES {
                             splines,
                             target,
                         } => {
-                            writeln!(s, "            target = {};", target.guid()).unwrap();
+                            writeln!(s, "                target = {};", target.guid()).unwrap();
                         }
                         crate::vanilla::MonsterMove_MonsterMoveType::FacingAngle {
                             angle,
@@ -125,7 +125,7 @@ impl crate::Message for SMSG_COMPRESSED_MOVES {
                             spline_flags,
                             splines,
                         } => {
-                            writeln!(s, "            angle = {}", if angle.to_string().contains('.') { angle.to_string() } else { format!("{}.0", angle) }).unwrap();
+                            writeln!(s, "                angle = {};", if angle.to_string().contains('.') { angle.to_string() } else { format!("{}.0", angle) }).unwrap();
                         }
                         _ => {}
                     }
@@ -136,8 +136,8 @@ impl crate::Message for SMSG_COMPRESSED_MOVES {
                             spline_flags,
                             splines,
                         } => {
-                            writeln!(s, "            spline_flags = {};", spline_flags.as_test_case_value()).unwrap();
-                            writeln!(s, "            duration = {};", duration).unwrap();
+                            writeln!(s, "                spline_flags = {};", spline_flags.as_test_case_value()).unwrap();
+                            writeln!(s, "                duration = {};", duration).unwrap();
                             panic!("unsupported type for test case printing: 'MonsterMoveSplines' for variable 'splines'");
                         }
                         crate::vanilla::MonsterMove_MonsterMoveType::FacingSpot {
@@ -146,8 +146,8 @@ impl crate::Message for SMSG_COMPRESSED_MOVES {
                             spline_flags,
                             splines,
                         } => {
-                            writeln!(s, "            spline_flags = {};", spline_flags.as_test_case_value()).unwrap();
-                            writeln!(s, "            duration = {};", duration).unwrap();
+                            writeln!(s, "                spline_flags = {};", spline_flags.as_test_case_value()).unwrap();
+                            writeln!(s, "                duration = {};", duration).unwrap();
                             panic!("unsupported type for test case printing: 'MonsterMoveSplines' for variable 'splines'");
                         }
                         crate::vanilla::MonsterMove_MonsterMoveType::FacingTarget {
@@ -156,8 +156,8 @@ impl crate::Message for SMSG_COMPRESSED_MOVES {
                             splines,
                             target,
                         } => {
-                            writeln!(s, "            spline_flags = {};", spline_flags.as_test_case_value()).unwrap();
-                            writeln!(s, "            duration = {};", duration).unwrap();
+                            writeln!(s, "                spline_flags = {};", spline_flags.as_test_case_value()).unwrap();
+                            writeln!(s, "                duration = {};", duration).unwrap();
                             panic!("unsupported type for test case printing: 'MonsterMoveSplines' for variable 'splines'");
                         }
                         crate::vanilla::MonsterMove_MonsterMoveType::FacingAngle {
@@ -166,8 +166,8 @@ impl crate::Message for SMSG_COMPRESSED_MOVES {
                             spline_flags,
                             splines,
                         } => {
-                            writeln!(s, "            spline_flags = {};", spline_flags.as_test_case_value()).unwrap();
-                            writeln!(s, "            duration = {};", duration).unwrap();
+                            writeln!(s, "                spline_flags = {};", spline_flags.as_test_case_value()).unwrap();
+                            writeln!(s, "                duration = {};", duration).unwrap();
                             panic!("unsupported type for test case printing: 'MonsterMoveSplines' for variable 'splines'");
                         }
                         _ => {}
@@ -180,20 +180,20 @@ impl crate::Message for SMSG_COMPRESSED_MOVES {
                     monster_move_transport,
                     transport,
                 } => {
-                    writeln!(s, "        transport = {};", transport.guid()).unwrap();
+                    writeln!(s, "            transport = {};", transport.guid()).unwrap();
                     // monster_move_transport: MonsterMove
-                    writeln!(s, "        monster_move_transport = {{").unwrap();
+                    writeln!(s, "            monster_move_transport = {{").unwrap();
                     // Members
                     // spline_point: Vector3d
-                    writeln!(s, "            spline_point = {{").unwrap();
+                    writeln!(s, "                spline_point = {{").unwrap();
                     // Members
-                    writeln!(s, "                x = {}", if monster_move_transport.spline_point.x.to_string().contains('.') { monster_move_transport.spline_point.x.to_string() } else { format!("{}.0", monster_move_transport.spline_point.x) }).unwrap();
-                    writeln!(s, "                y = {}", if monster_move_transport.spline_point.y.to_string().contains('.') { monster_move_transport.spline_point.y.to_string() } else { format!("{}.0", monster_move_transport.spline_point.y) }).unwrap();
-                    writeln!(s, "                z = {}", if monster_move_transport.spline_point.z.to_string().contains('.') { monster_move_transport.spline_point.z.to_string() } else { format!("{}.0", monster_move_transport.spline_point.z) }).unwrap();
+                    writeln!(s, "                    x = {};", if monster_move_transport.spline_point.x.to_string().contains('.') { monster_move_transport.spline_point.x.to_string() } else { format!("{}.0", monster_move_transport.spline_point.x) }).unwrap();
+                    writeln!(s, "                    y = {};", if monster_move_transport.spline_point.y.to_string().contains('.') { monster_move_transport.spline_point.y.to_string() } else { format!("{}.0", monster_move_transport.spline_point.y) }).unwrap();
+                    writeln!(s, "                    z = {};", if monster_move_transport.spline_point.z.to_string().contains('.') { monster_move_transport.spline_point.z.to_string() } else { format!("{}.0", monster_move_transport.spline_point.z) }).unwrap();
 
                     writeln!(s, "    }};").unwrap();
-                    writeln!(s, "            spline_id = {};", monster_move_transport.spline_id).unwrap();
-                    writeln!(s, "            move_type = {};", MonsterMoveType::try_from(monster_move_transport.move_type.as_int()).unwrap().as_test_case_value()).unwrap();
+                    writeln!(s, "                spline_id = {};", monster_move_transport.spline_id).unwrap();
+                    writeln!(s, "                move_type = {};", MonsterMoveType::try_from(monster_move_transport.move_type.as_int()).unwrap().as_test_case_value()).unwrap();
                     match &monster_move_transport.move_type {
                         crate::vanilla::MonsterMove_MonsterMoveType::Normal {
                             duration,
@@ -208,11 +208,11 @@ impl crate::Message for SMSG_COMPRESSED_MOVES {
                             splines,
                         } => {
                             // position: Vector3d
-                            writeln!(s, "            position = {{").unwrap();
+                            writeln!(s, "                position = {{").unwrap();
                             // Members
-                            writeln!(s, "                x = {}", if position.x.to_string().contains('.') { position.x.to_string() } else { format!("{}.0", position.x) }).unwrap();
-                            writeln!(s, "                y = {}", if position.y.to_string().contains('.') { position.y.to_string() } else { format!("{}.0", position.y) }).unwrap();
-                            writeln!(s, "                z = {}", if position.z.to_string().contains('.') { position.z.to_string() } else { format!("{}.0", position.z) }).unwrap();
+                            writeln!(s, "                    x = {};", if position.x.to_string().contains('.') { position.x.to_string() } else { format!("{}.0", position.x) }).unwrap();
+                            writeln!(s, "                    y = {};", if position.y.to_string().contains('.') { position.y.to_string() } else { format!("{}.0", position.y) }).unwrap();
+                            writeln!(s, "                    z = {};", if position.z.to_string().contains('.') { position.z.to_string() } else { format!("{}.0", position.z) }).unwrap();
 
                             writeln!(s, "    }};").unwrap();
                         }
@@ -222,7 +222,7 @@ impl crate::Message for SMSG_COMPRESSED_MOVES {
                             splines,
                             target,
                         } => {
-                            writeln!(s, "            target = {};", target.guid()).unwrap();
+                            writeln!(s, "                target = {};", target.guid()).unwrap();
                         }
                         crate::vanilla::MonsterMove_MonsterMoveType::FacingAngle {
                             angle,
@@ -230,7 +230,7 @@ impl crate::Message for SMSG_COMPRESSED_MOVES {
                             spline_flags,
                             splines,
                         } => {
-                            writeln!(s, "            angle = {}", if angle.to_string().contains('.') { angle.to_string() } else { format!("{}.0", angle) }).unwrap();
+                            writeln!(s, "                angle = {};", if angle.to_string().contains('.') { angle.to_string() } else { format!("{}.0", angle) }).unwrap();
                         }
                         _ => {}
                     }
@@ -241,8 +241,8 @@ impl crate::Message for SMSG_COMPRESSED_MOVES {
                             spline_flags,
                             splines,
                         } => {
-                            writeln!(s, "            spline_flags = {};", spline_flags.as_test_case_value()).unwrap();
-                            writeln!(s, "            duration = {};", duration).unwrap();
+                            writeln!(s, "                spline_flags = {};", spline_flags.as_test_case_value()).unwrap();
+                            writeln!(s, "                duration = {};", duration).unwrap();
                             panic!("unsupported type for test case printing: 'MonsterMoveSplines' for variable 'splines'");
                         }
                         crate::vanilla::MonsterMove_MonsterMoveType::FacingSpot {
@@ -251,8 +251,8 @@ impl crate::Message for SMSG_COMPRESSED_MOVES {
                             spline_flags,
                             splines,
                         } => {
-                            writeln!(s, "            spline_flags = {};", spline_flags.as_test_case_value()).unwrap();
-                            writeln!(s, "            duration = {};", duration).unwrap();
+                            writeln!(s, "                spline_flags = {};", spline_flags.as_test_case_value()).unwrap();
+                            writeln!(s, "                duration = {};", duration).unwrap();
                             panic!("unsupported type for test case printing: 'MonsterMoveSplines' for variable 'splines'");
                         }
                         crate::vanilla::MonsterMove_MonsterMoveType::FacingTarget {
@@ -261,8 +261,8 @@ impl crate::Message for SMSG_COMPRESSED_MOVES {
                             splines,
                             target,
                         } => {
-                            writeln!(s, "            spline_flags = {};", spline_flags.as_test_case_value()).unwrap();
-                            writeln!(s, "            duration = {};", duration).unwrap();
+                            writeln!(s, "                spline_flags = {};", spline_flags.as_test_case_value()).unwrap();
+                            writeln!(s, "                duration = {};", duration).unwrap();
                             panic!("unsupported type for test case printing: 'MonsterMoveSplines' for variable 'splines'");
                         }
                         crate::vanilla::MonsterMove_MonsterMoveType::FacingAngle {
@@ -271,8 +271,8 @@ impl crate::Message for SMSG_COMPRESSED_MOVES {
                             spline_flags,
                             splines,
                         } => {
-                            writeln!(s, "            spline_flags = {};", spline_flags.as_test_case_value()).unwrap();
-                            writeln!(s, "            duration = {};", duration).unwrap();
+                            writeln!(s, "                spline_flags = {};", spline_flags.as_test_case_value()).unwrap();
+                            writeln!(s, "                duration = {};", duration).unwrap();
                             panic!("unsupported type for test case printing: 'MonsterMoveSplines' for variable 'splines'");
                         }
                         _ => {}
@@ -284,15 +284,15 @@ impl crate::Message for SMSG_COMPRESSED_MOVES {
                 crate::vanilla::CompressedMove_CompressedMoveOpcode::SmsgSplineSetRunSpeed {
                     speed,
                 } => {
-                    writeln!(s, "        speed = {}", if speed.to_string().contains('.') { speed.to_string() } else { format!("{}.0", speed) }).unwrap();
+                    writeln!(s, "            speed = {};", if speed.to_string().contains('.') { speed.to_string() } else { format!("{}.0", speed) }).unwrap();
                 }
                 _ => {}
             }
 
 
-            writeln!(s, "    }},").unwrap();
+            writeln!(s, "        }},").unwrap();
         }
-        writeln!(s, "];").unwrap();
+        writeln!(s, "    ];").unwrap();
 
         writeln!(s, "}} [").unwrap();
 

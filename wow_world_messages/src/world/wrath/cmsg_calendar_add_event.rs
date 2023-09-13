@@ -130,17 +130,17 @@ impl crate::Message for CMSG_CALENDAR_ADD_EVENT {
         writeln!(s, "    time_zone_time = {};", self.time_zone_time.as_int()).unwrap();
         writeln!(s, "    flags = {};", self.flags).unwrap();
         writeln!(s, "    amount_of_invitees = {};", self.invitees.len()).unwrap();
-        write!(s, "    invitees = [").unwrap();
+        writeln!(s, "    invitees = [").unwrap();
         for v in self.invitees.as_slice() {
-            writeln!(s, "{{").unwrap();
+            writeln!(s, "        {{").unwrap();
             // Members
-            writeln!(s, "        guid = {};", v.guid.guid()).unwrap();
-            writeln!(s, "        status = {};", v.status).unwrap();
-            writeln!(s, "        rank = {};", v.rank).unwrap();
+            writeln!(s, "            guid = {};", v.guid.guid()).unwrap();
+            writeln!(s, "            status = {};", v.status).unwrap();
+            writeln!(s, "            rank = {};", v.rank).unwrap();
 
-            writeln!(s, "    }},").unwrap();
+            writeln!(s, "        }},").unwrap();
         }
-        writeln!(s, "];").unwrap();
+        writeln!(s, "    ];").unwrap();
 
         writeln!(s, "}} [").unwrap();
 

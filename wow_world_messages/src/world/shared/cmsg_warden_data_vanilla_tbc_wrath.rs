@@ -55,11 +55,11 @@ impl crate::Message for CMSG_WARDEN_DATA {
 
         writeln!(s, "test CMSG_WARDEN_DATA {{").unwrap();
         // Members
-        write!(s, "    encrypted_data = [").unwrap();
+        writeln!(s, "    encrypted_data = [").unwrap();
         for v in self.encrypted_data.as_slice() {
             write!(s, "{v:#04X}, ").unwrap();
         }
-        writeln!(s, "];").unwrap();
+        writeln!(s, "    ];").unwrap();
 
         writeln!(s, "}} [").unwrap();
 

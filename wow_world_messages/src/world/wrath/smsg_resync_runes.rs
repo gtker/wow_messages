@@ -58,16 +58,16 @@ impl crate::Message for SMSG_RESYNC_RUNES {
         writeln!(s, "test SMSG_RESYNC_RUNES {{").unwrap();
         // Members
         writeln!(s, "    amount_of_runes = {};", self.runes.len()).unwrap();
-        write!(s, "    runes = [").unwrap();
+        writeln!(s, "    runes = [").unwrap();
         for v in self.runes.as_slice() {
-            writeln!(s, "{{").unwrap();
+            writeln!(s, "        {{").unwrap();
             // Members
-            writeln!(s, "        current_rune = {};", v.current_rune).unwrap();
-            writeln!(s, "        rune_cooldown = {};", v.rune_cooldown).unwrap();
+            writeln!(s, "            current_rune = {};", v.current_rune).unwrap();
+            writeln!(s, "            rune_cooldown = {};", v.rune_cooldown).unwrap();
 
-            writeln!(s, "    }},").unwrap();
+            writeln!(s, "        }},").unwrap();
         }
-        writeln!(s, "];").unwrap();
+        writeln!(s, "    ];").unwrap();
 
         writeln!(s, "}} [").unwrap();
 

@@ -82,16 +82,16 @@ impl crate::Message for SMSG_SPELLLOGMISS {
         writeln!(s, "    caster = {};", self.caster.guid()).unwrap();
         writeln!(s, "    unknown1 = {};", self.unknown1).unwrap();
         writeln!(s, "    amount_of_targets = {};", self.targets.len()).unwrap();
-        write!(s, "    targets = [").unwrap();
+        writeln!(s, "    targets = [").unwrap();
         for v in self.targets.as_slice() {
-            writeln!(s, "{{").unwrap();
+            writeln!(s, "        {{").unwrap();
             // Members
-            writeln!(s, "        target = {};", v.target.guid()).unwrap();
-            writeln!(s, "        miss_info = {};", v.miss_info.as_test_case_value()).unwrap();
+            writeln!(s, "            target = {};", v.target.guid()).unwrap();
+            writeln!(s, "            miss_info = {};", v.miss_info.as_test_case_value()).unwrap();
 
-            writeln!(s, "    }},").unwrap();
+            writeln!(s, "        }},").unwrap();
         }
-        writeln!(s, "];").unwrap();
+        writeln!(s, "    ];").unwrap();
 
         writeln!(s, "}} [").unwrap();
 

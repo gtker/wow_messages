@@ -84,30 +84,30 @@ impl crate::Message for SMSG_INITIAL_SPELLS {
         // Members
         writeln!(s, "    unknown1 = {};", self.unknown1).unwrap();
         writeln!(s, "    spell_count = {};", self.initial_spells.len()).unwrap();
-        write!(s, "    initial_spells = [").unwrap();
+        writeln!(s, "    initial_spells = [").unwrap();
         for v in self.initial_spells.as_slice() {
-            writeln!(s, "{{").unwrap();
+            writeln!(s, "        {{").unwrap();
             // Members
-            writeln!(s, "        spell_id = {};", v.spell_id).unwrap();
-            writeln!(s, "        unknown1 = {};", v.unknown1).unwrap();
+            writeln!(s, "            spell_id = {};", v.spell_id).unwrap();
+            writeln!(s, "            unknown1 = {};", v.unknown1).unwrap();
 
-            writeln!(s, "    }},").unwrap();
+            writeln!(s, "        }},").unwrap();
         }
-        writeln!(s, "];").unwrap();
+        writeln!(s, "    ];").unwrap();
         writeln!(s, "    cooldown_count = {};", self.cooldowns.len()).unwrap();
-        write!(s, "    cooldowns = [").unwrap();
+        writeln!(s, "    cooldowns = [").unwrap();
         for v in self.cooldowns.as_slice() {
-            writeln!(s, "{{").unwrap();
+            writeln!(s, "        {{").unwrap();
             // Members
-            writeln!(s, "        spell_id = {};", v.spell_id).unwrap();
-            writeln!(s, "        item_id = {};", v.item_id).unwrap();
-            writeln!(s, "        spell_category = {};", v.spell_category).unwrap();
-            writeln!(s, "        cooldown = {};", v.cooldown.as_millis()).unwrap();
-            writeln!(s, "        category_cooldown = {};", v.category_cooldown.as_millis()).unwrap();
+            writeln!(s, "            spell_id = {};", v.spell_id).unwrap();
+            writeln!(s, "            item_id = {};", v.item_id).unwrap();
+            writeln!(s, "            spell_category = {};", v.spell_category).unwrap();
+            writeln!(s, "            cooldown = {};", v.cooldown.as_millis()).unwrap();
+            writeln!(s, "            category_cooldown = {};", v.category_cooldown.as_millis()).unwrap();
 
-            writeln!(s, "    }},").unwrap();
+            writeln!(s, "        }},").unwrap();
         }
-        writeln!(s, "];").unwrap();
+        writeln!(s, "    ];").unwrap();
 
         writeln!(s, "}} [").unwrap();
 

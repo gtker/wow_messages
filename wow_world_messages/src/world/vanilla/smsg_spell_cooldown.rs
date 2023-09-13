@@ -66,16 +66,16 @@ impl crate::Message for SMSG_SPELL_COOLDOWN {
         writeln!(s, "test SMSG_SPELL_COOLDOWN {{").unwrap();
         // Members
         writeln!(s, "    guid = {};", self.guid.guid()).unwrap();
-        write!(s, "    cooldowns = [").unwrap();
+        writeln!(s, "    cooldowns = [").unwrap();
         for v in self.cooldowns.as_slice() {
-            writeln!(s, "{{").unwrap();
+            writeln!(s, "        {{").unwrap();
             // Members
-            writeln!(s, "        id = {};", v.id).unwrap();
-            writeln!(s, "        cooldown_time = {};", v.cooldown_time.as_millis()).unwrap();
+            writeln!(s, "            id = {};", v.id).unwrap();
+            writeln!(s, "            cooldown_time = {};", v.cooldown_time.as_millis()).unwrap();
 
-            writeln!(s, "    }},").unwrap();
+            writeln!(s, "        }},").unwrap();
         }
-        writeln!(s, "];").unwrap();
+        writeln!(s, "    ];").unwrap();
 
         writeln!(s, "}} [").unwrap();
 

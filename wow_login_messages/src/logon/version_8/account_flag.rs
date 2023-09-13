@@ -21,7 +21,7 @@ impl AccountFlag {
         if self.is_gm() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "GM").unwrap();
             first = false;
@@ -29,7 +29,7 @@ impl AccountFlag {
         if self.is_trial() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "TRIAL").unwrap();
             first = false;
@@ -37,7 +37,7 @@ impl AccountFlag {
         if self.is_propass() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "PROPASS").unwrap();
             first = false;

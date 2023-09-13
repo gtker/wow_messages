@@ -102,17 +102,17 @@ impl crate::Message for CMSG_LFG_JOIN {
         writeln!(s, "    no_partial_clear = {};", if self.no_partial_clear { "TRUE" } else { "FALSE" }).unwrap();
         writeln!(s, "    achievements = {};", if self.achievements { "TRUE" } else { "FALSE" }).unwrap();
         writeln!(s, "    amount_of_slots = {};", self.slots.len()).unwrap();
-        write!(s, "    slots = [").unwrap();
+        writeln!(s, "    slots = [").unwrap();
         for v in self.slots.as_slice() {
             write!(s, "{v:#04X}, ").unwrap();
         }
-        writeln!(s, "];").unwrap();
+        writeln!(s, "    ];").unwrap();
         writeln!(s, "    amount_of_needs = {};", self.needs.len()).unwrap();
-        write!(s, "    needs = [").unwrap();
+        writeln!(s, "    needs = [").unwrap();
         for v in self.needs.as_slice() {
             write!(s, "{v:#04X}, ").unwrap();
         }
-        writeln!(s, "];").unwrap();
+        writeln!(s, "    ];").unwrap();
         writeln!(s, "    comment = \"{}\";", self.comment).unwrap();
 
         writeln!(s, "}} [").unwrap();

@@ -135,64 +135,64 @@ impl crate::Message for SMSG_CALENDAR_SEND_CALENDAR {
         writeln!(s, "test SMSG_CALENDAR_SEND_CALENDAR {{").unwrap();
         // Members
         writeln!(s, "    amount_of_invites = {};", self.invites.len()).unwrap();
-        write!(s, "    invites = [").unwrap();
+        writeln!(s, "    invites = [").unwrap();
         for v in self.invites.as_slice() {
-            writeln!(s, "{{").unwrap();
+            writeln!(s, "        {{").unwrap();
             // Members
-            writeln!(s, "        event_id = {};", v.event_id.guid()).unwrap();
-            writeln!(s, "        invite_id = {};", v.invite_id.guid()).unwrap();
-            writeln!(s, "        status = {};", v.status).unwrap();
-            writeln!(s, "        rank = {};", v.rank).unwrap();
-            writeln!(s, "        is_guild_event = {};", if v.is_guild_event { "TRUE" } else { "FALSE" }).unwrap();
-            writeln!(s, "        creator = {};", v.creator.guid()).unwrap();
+            writeln!(s, "            event_id = {};", v.event_id.guid()).unwrap();
+            writeln!(s, "            invite_id = {};", v.invite_id.guid()).unwrap();
+            writeln!(s, "            status = {};", v.status).unwrap();
+            writeln!(s, "            rank = {};", v.rank).unwrap();
+            writeln!(s, "            is_guild_event = {};", if v.is_guild_event { "TRUE" } else { "FALSE" }).unwrap();
+            writeln!(s, "            creator = {};", v.creator.guid()).unwrap();
 
-            writeln!(s, "    }},").unwrap();
+            writeln!(s, "        }},").unwrap();
         }
-        writeln!(s, "];").unwrap();
+        writeln!(s, "    ];").unwrap();
         writeln!(s, "    amount_of_events = {};", self.events.len()).unwrap();
-        write!(s, "    events = [").unwrap();
+        writeln!(s, "    events = [").unwrap();
         for v in self.events.as_slice() {
-            writeln!(s, "{{").unwrap();
+            writeln!(s, "        {{").unwrap();
             // Members
-            writeln!(s, "        event_id = {};", v.event_id.guid()).unwrap();
-            writeln!(s, "        title = \"{}\";", v.title).unwrap();
-            writeln!(s, "        event_type = {};", v.event_type).unwrap();
-            writeln!(s, "        event_time = {};", v.event_time.as_int()).unwrap();
-            writeln!(s, "        flags = {};", v.flags).unwrap();
-            writeln!(s, "        dungeon_id = {};", v.dungeon_id).unwrap();
-            writeln!(s, "        creator = {};", v.creator.guid()).unwrap();
+            writeln!(s, "            event_id = {};", v.event_id.guid()).unwrap();
+            writeln!(s, "            title = \"{}\";", v.title).unwrap();
+            writeln!(s, "            event_type = {};", v.event_type).unwrap();
+            writeln!(s, "            event_time = {};", v.event_time.as_int()).unwrap();
+            writeln!(s, "            flags = {};", v.flags).unwrap();
+            writeln!(s, "            dungeon_id = {};", v.dungeon_id).unwrap();
+            writeln!(s, "            creator = {};", v.creator.guid()).unwrap();
 
-            writeln!(s, "    }},").unwrap();
+            writeln!(s, "        }},").unwrap();
         }
-        writeln!(s, "];").unwrap();
+        writeln!(s, "    ];").unwrap();
         writeln!(s, "    current_time = {};", self.current_time).unwrap();
         writeln!(s, "    zone_time = {};", self.zone_time.as_int()).unwrap();
         writeln!(s, "    amount_of_instances = {};", self.instances.len()).unwrap();
-        write!(s, "    instances = [").unwrap();
+        writeln!(s, "    instances = [").unwrap();
         for v in self.instances.as_slice() {
-            writeln!(s, "{{").unwrap();
+            writeln!(s, "        {{").unwrap();
             // Members
-            writeln!(s, "        map = {};", v.map.as_test_case_value()).unwrap();
-            writeln!(s, "        difficulty = {};", v.difficulty).unwrap();
-            writeln!(s, "        reset_time = {};", v.reset_time).unwrap();
-            writeln!(s, "        instance_id = {};", v.instance_id.guid()).unwrap();
+            writeln!(s, "            map = {};", v.map.as_test_case_value()).unwrap();
+            writeln!(s, "            difficulty = {};", v.difficulty).unwrap();
+            writeln!(s, "            reset_time = {};", v.reset_time).unwrap();
+            writeln!(s, "            instance_id = {};", v.instance_id.guid()).unwrap();
 
-            writeln!(s, "    }},").unwrap();
+            writeln!(s, "        }},").unwrap();
         }
-        writeln!(s, "];").unwrap();
+        writeln!(s, "    ];").unwrap();
         writeln!(s, "    relative_time = {};", self.relative_time).unwrap();
         writeln!(s, "    amount_of_reset_times = {};", self.reset_times.len()).unwrap();
-        write!(s, "    reset_times = [").unwrap();
+        writeln!(s, "    reset_times = [").unwrap();
         for v in self.reset_times.as_slice() {
-            writeln!(s, "{{").unwrap();
+            writeln!(s, "        {{").unwrap();
             // Members
-            writeln!(s, "        map = {};", v.map.as_test_case_value()).unwrap();
-            writeln!(s, "        period = {};", v.period).unwrap();
-            writeln!(s, "        time_offset = {};", v.time_offset).unwrap();
+            writeln!(s, "            map = {};", v.map.as_test_case_value()).unwrap();
+            writeln!(s, "            period = {};", v.period).unwrap();
+            writeln!(s, "            time_offset = {};", v.time_offset).unwrap();
 
-            writeln!(s, "    }},").unwrap();
+            writeln!(s, "        }},").unwrap();
         }
-        writeln!(s, "];").unwrap();
+        writeln!(s, "    ];").unwrap();
         writeln!(s, "    amount_of_holidays = {};", self.amount_of_holidays).unwrap();
 
         writeln!(s, "}} [").unwrap();

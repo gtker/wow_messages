@@ -78,12 +78,12 @@ impl crate::Message for CMSG_FORCE_SWIM_SPEED_CHANGE_ACK {
         // position: Vector3d
         writeln!(s, "        position = {{").unwrap();
         // Members
-        writeln!(s, "            x = {}", if self.info.position.x.to_string().contains('.') { self.info.position.x.to_string() } else { format!("{}.0", self.info.position.x) }).unwrap();
-        writeln!(s, "            y = {}", if self.info.position.y.to_string().contains('.') { self.info.position.y.to_string() } else { format!("{}.0", self.info.position.y) }).unwrap();
-        writeln!(s, "            z = {}", if self.info.position.z.to_string().contains('.') { self.info.position.z.to_string() } else { format!("{}.0", self.info.position.z) }).unwrap();
+        writeln!(s, "            x = {};", if self.info.position.x.to_string().contains('.') { self.info.position.x.to_string() } else { format!("{}.0", self.info.position.x) }).unwrap();
+        writeln!(s, "            y = {};", if self.info.position.y.to_string().contains('.') { self.info.position.y.to_string() } else { format!("{}.0", self.info.position.y) }).unwrap();
+        writeln!(s, "            z = {};", if self.info.position.z.to_string().contains('.') { self.info.position.z.to_string() } else { format!("{}.0", self.info.position.z) }).unwrap();
 
         writeln!(s, "    }};").unwrap();
-        writeln!(s, "        orientation = {}", if self.info.orientation.to_string().contains('.') { self.info.orientation.to_string() } else { format!("{}.0", self.info.orientation) }).unwrap();
+        writeln!(s, "        orientation = {};", if self.info.orientation.to_string().contains('.') { self.info.orientation.to_string() } else { format!("{}.0", self.info.orientation) }).unwrap();
         if let Some(if_statement) = &self.info.flags.get_on_transport() {
             // transport: TransportInfo
             writeln!(s, "        transport = {{").unwrap();
@@ -92,36 +92,36 @@ impl crate::Message for CMSG_FORCE_SWIM_SPEED_CHANGE_ACK {
             // position: Vector3d
             writeln!(s, "            position = {{").unwrap();
             // Members
-            writeln!(s, "                x = {}", if if_statement.transport.position.x.to_string().contains('.') { if_statement.transport.position.x.to_string() } else { format!("{}.0", if_statement.transport.position.x) }).unwrap();
-            writeln!(s, "                y = {}", if if_statement.transport.position.y.to_string().contains('.') { if_statement.transport.position.y.to_string() } else { format!("{}.0", if_statement.transport.position.y) }).unwrap();
-            writeln!(s, "                z = {}", if if_statement.transport.position.z.to_string().contains('.') { if_statement.transport.position.z.to_string() } else { format!("{}.0", if_statement.transport.position.z) }).unwrap();
+            writeln!(s, "                x = {};", if if_statement.transport.position.x.to_string().contains('.') { if_statement.transport.position.x.to_string() } else { format!("{}.0", if_statement.transport.position.x) }).unwrap();
+            writeln!(s, "                y = {};", if if_statement.transport.position.y.to_string().contains('.') { if_statement.transport.position.y.to_string() } else { format!("{}.0", if_statement.transport.position.y) }).unwrap();
+            writeln!(s, "                z = {};", if if_statement.transport.position.z.to_string().contains('.') { if_statement.transport.position.z.to_string() } else { format!("{}.0", if_statement.transport.position.z) }).unwrap();
 
             writeln!(s, "    }};").unwrap();
-            writeln!(s, "            orientation = {}", if if_statement.transport.orientation.to_string().contains('.') { if_statement.transport.orientation.to_string() } else { format!("{}.0", if_statement.transport.orientation) }).unwrap();
+            writeln!(s, "            orientation = {};", if if_statement.transport.orientation.to_string().contains('.') { if_statement.transport.orientation.to_string() } else { format!("{}.0", if_statement.transport.orientation) }).unwrap();
             writeln!(s, "            timestamp = {};", if_statement.transport.timestamp).unwrap();
 
             writeln!(s, "    }};").unwrap();
         }
 
         if let Some(if_statement) = &self.info.flags.get_swimming() {
-            writeln!(s, "        pitch = {}", if if_statement.pitch.to_string().contains('.') { if_statement.pitch.to_string() } else { format!("{}.0", if_statement.pitch) }).unwrap();
+            writeln!(s, "        pitch = {};", if if_statement.pitch.to_string().contains('.') { if_statement.pitch.to_string() } else { format!("{}.0", if_statement.pitch) }).unwrap();
         }
 
-        writeln!(s, "        fall_time = {}", if self.info.fall_time.to_string().contains('.') { self.info.fall_time.to_string() } else { format!("{}.0", self.info.fall_time) }).unwrap();
+        writeln!(s, "        fall_time = {};", if self.info.fall_time.to_string().contains('.') { self.info.fall_time.to_string() } else { format!("{}.0", self.info.fall_time) }).unwrap();
         if let Some(if_statement) = &self.info.flags.get_jumping() {
-            writeln!(s, "        z_speed = {}", if if_statement.z_speed.to_string().contains('.') { if_statement.z_speed.to_string() } else { format!("{}.0", if_statement.z_speed) }).unwrap();
-            writeln!(s, "        cos_angle = {}", if if_statement.cos_angle.to_string().contains('.') { if_statement.cos_angle.to_string() } else { format!("{}.0", if_statement.cos_angle) }).unwrap();
-            writeln!(s, "        sin_angle = {}", if if_statement.sin_angle.to_string().contains('.') { if_statement.sin_angle.to_string() } else { format!("{}.0", if_statement.sin_angle) }).unwrap();
-            writeln!(s, "        xy_speed = {}", if if_statement.xy_speed.to_string().contains('.') { if_statement.xy_speed.to_string() } else { format!("{}.0", if_statement.xy_speed) }).unwrap();
+            writeln!(s, "        z_speed = {};", if if_statement.z_speed.to_string().contains('.') { if_statement.z_speed.to_string() } else { format!("{}.0", if_statement.z_speed) }).unwrap();
+            writeln!(s, "        cos_angle = {};", if if_statement.cos_angle.to_string().contains('.') { if_statement.cos_angle.to_string() } else { format!("{}.0", if_statement.cos_angle) }).unwrap();
+            writeln!(s, "        sin_angle = {};", if if_statement.sin_angle.to_string().contains('.') { if_statement.sin_angle.to_string() } else { format!("{}.0", if_statement.sin_angle) }).unwrap();
+            writeln!(s, "        xy_speed = {};", if if_statement.xy_speed.to_string().contains('.') { if_statement.xy_speed.to_string() } else { format!("{}.0", if_statement.xy_speed) }).unwrap();
         }
 
         if let Some(if_statement) = &self.info.flags.get_spline_elevation() {
-            writeln!(s, "        spline_elevation = {}", if if_statement.spline_elevation.to_string().contains('.') { if_statement.spline_elevation.to_string() } else { format!("{}.0", if_statement.spline_elevation) }).unwrap();
+            writeln!(s, "        spline_elevation = {};", if if_statement.spline_elevation.to_string().contains('.') { if_statement.spline_elevation.to_string() } else { format!("{}.0", if_statement.spline_elevation) }).unwrap();
         }
 
 
         writeln!(s, "    }};").unwrap();
-        writeln!(s, "    new_speed = {}", if self.new_speed.to_string().contains('.') { self.new_speed.to_string() } else { format!("{}.0", self.new_speed) }).unwrap();
+        writeln!(s, "    new_speed = {};", if self.new_speed.to_string().contains('.') { self.new_speed.to_string() } else { format!("{}.0", self.new_speed) }).unwrap();
 
         writeln!(s, "}} [").unwrap();
 

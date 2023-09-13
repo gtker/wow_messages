@@ -54,17 +54,17 @@ impl crate::Message for CMSG_EQUIPMENT_SET_USE {
 
         writeln!(s, "test CMSG_EQUIPMENT_SET_USE {{").unwrap();
         // Members
-        write!(s, "    sets = [").unwrap();
+        writeln!(s, "    sets = [").unwrap();
         for v in self.sets.as_slice() {
-            writeln!(s, "{{").unwrap();
+            writeln!(s, "        {{").unwrap();
             // Members
-            writeln!(s, "        item = {};", v.item.guid()).unwrap();
-            writeln!(s, "        source_bag = {};", v.source_bag).unwrap();
-            writeln!(s, "        source_slot = {};", v.source_slot).unwrap();
+            writeln!(s, "            item = {};", v.item.guid()).unwrap();
+            writeln!(s, "            source_bag = {};", v.source_bag).unwrap();
+            writeln!(s, "            source_slot = {};", v.source_slot).unwrap();
 
-            writeln!(s, "    }},").unwrap();
+            writeln!(s, "        }},").unwrap();
         }
-        writeln!(s, "];").unwrap();
+        writeln!(s, "    ];").unwrap();
 
         writeln!(s, "}} [").unwrap();
 

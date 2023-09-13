@@ -257,11 +257,11 @@ impl crate::Message for CMSG_GUILD_BANK_SWAP_ITEMS {
             }
         }
 
-        write!(s, "    unknown5 = [").unwrap();
+        writeln!(s, "    unknown5 = [").unwrap();
         for v in self.unknown5.as_slice() {
             write!(s, "{v:#04X}, ").unwrap();
         }
-        writeln!(s, "];").unwrap();
+        writeln!(s, "    ];").unwrap();
 
         writeln!(s, "}} [").unwrap();
 

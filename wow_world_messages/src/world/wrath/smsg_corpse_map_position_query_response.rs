@@ -64,10 +64,10 @@ impl crate::Message for SMSG_CORPSE_MAP_POSITION_QUERY_RESPONSE {
 
         writeln!(s, "test SMSG_CORPSE_MAP_POSITION_QUERY_RESPONSE {{").unwrap();
         // Members
-        writeln!(s, "    unknown1 = {}", if self.unknown1.to_string().contains('.') { self.unknown1.to_string() } else { format!("{}.0", self.unknown1) }).unwrap();
-        writeln!(s, "    unknown2 = {}", if self.unknown2.to_string().contains('.') { self.unknown2.to_string() } else { format!("{}.0", self.unknown2) }).unwrap();
-        writeln!(s, "    unknown3 = {}", if self.unknown3.to_string().contains('.') { self.unknown3.to_string() } else { format!("{}.0", self.unknown3) }).unwrap();
-        writeln!(s, "    unknown4 = {}", if self.unknown4.to_string().contains('.') { self.unknown4.to_string() } else { format!("{}.0", self.unknown4) }).unwrap();
+        writeln!(s, "    unknown1 = {};", if self.unknown1.to_string().contains('.') { self.unknown1.to_string() } else { format!("{}.0", self.unknown1) }).unwrap();
+        writeln!(s, "    unknown2 = {};", if self.unknown2.to_string().contains('.') { self.unknown2.to_string() } else { format!("{}.0", self.unknown2) }).unwrap();
+        writeln!(s, "    unknown3 = {};", if self.unknown3.to_string().contains('.') { self.unknown3.to_string() } else { format!("{}.0", self.unknown3) }).unwrap();
+        writeln!(s, "    unknown4 = {};", if self.unknown4.to_string().contains('.') { self.unknown4.to_string() } else { format!("{}.0", self.unknown4) }).unwrap();
 
         writeln!(s, "}} [").unwrap();
 

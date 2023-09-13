@@ -96,16 +96,16 @@ impl crate::Message for SMSG_ITEM_REFUND_INFO_RESPONSE {
         writeln!(s, "    money_cost = {};", self.money_cost.as_int()).unwrap();
         writeln!(s, "    honor_point_cost = {};", self.honor_point_cost).unwrap();
         writeln!(s, "    arena_point_cost = {};", self.arena_point_cost).unwrap();
-        write!(s, "    extra_items = [").unwrap();
+        writeln!(s, "    extra_items = [").unwrap();
         for v in self.extra_items.as_slice() {
-            writeln!(s, "{{").unwrap();
+            writeln!(s, "        {{").unwrap();
             // Members
-            writeln!(s, "        item = {};", v.item).unwrap();
-            writeln!(s, "        amount = {};", v.amount).unwrap();
+            writeln!(s, "            item = {};", v.item).unwrap();
+            writeln!(s, "            amount = {};", v.amount).unwrap();
 
-            writeln!(s, "    }},").unwrap();
+            writeln!(s, "        }},").unwrap();
         }
-        writeln!(s, "];").unwrap();
+        writeln!(s, "    ];").unwrap();
         writeln!(s, "    unknown1 = {};", self.unknown1).unwrap();
         writeln!(s, "    time_since_loss = {};", self.time_since_loss).unwrap();
 

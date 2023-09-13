@@ -68,28 +68,28 @@ impl crate::Message for SMSG_AURA_UPDATE_ALL {
         writeln!(s, "test SMSG_AURA_UPDATE_ALL {{").unwrap();
         // Members
         writeln!(s, "    unit = {};", self.unit.guid()).unwrap();
-        write!(s, "    aura_updates = [").unwrap();
+        writeln!(s, "    aura_updates = [").unwrap();
         for v in self.aura_updates.as_slice() {
-            writeln!(s, "{{").unwrap();
+            writeln!(s, "        {{").unwrap();
             // Members
-            writeln!(s, "        visual_slot = {};", v.visual_slot).unwrap();
-            writeln!(s, "        spell = {};", v.spell).unwrap();
-            writeln!(s, "        flags = {};", AuraFlag::new(v.flags.as_int()).as_test_case_value()).unwrap();
-            writeln!(s, "        level = {};", v.level.as_int()).unwrap();
-            writeln!(s, "        aura_stack_count = {};", v.aura_stack_count).unwrap();
+            writeln!(s, "            visual_slot = {};", v.visual_slot).unwrap();
+            writeln!(s, "            spell = {};", v.spell).unwrap();
+            writeln!(s, "            flags = {};", AuraFlag::new(v.flags.as_int()).as_test_case_value()).unwrap();
+            writeln!(s, "            level = {};", v.level.as_int()).unwrap();
+            writeln!(s, "            aura_stack_count = {};", v.aura_stack_count).unwrap();
             if let Some(if_statement) = &v.flags.get_not_caster() {
-                writeln!(s, "        caster = {};", if_statement.caster.guid()).unwrap();
+                writeln!(s, "            caster = {};", if_statement.caster.guid()).unwrap();
             }
 
             if let Some(if_statement) = &v.flags.get_duration() {
-                writeln!(s, "        duration = {};", if_statement.duration).unwrap();
-                writeln!(s, "        time_left = {};", if_statement.time_left).unwrap();
+                writeln!(s, "            duration = {};", if_statement.duration).unwrap();
+                writeln!(s, "            time_left = {};", if_statement.time_left).unwrap();
             }
 
 
-            writeln!(s, "    }},").unwrap();
+            writeln!(s, "        }},").unwrap();
         }
-        writeln!(s, "];").unwrap();
+        writeln!(s, "    ];").unwrap();
 
         writeln!(s, "}} [").unwrap();
 

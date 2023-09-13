@@ -78,16 +78,16 @@ impl crate::Message for SMSG_CHANNEL_LIST {
         writeln!(s, "    channel_name = \"{}\";", self.channel_name).unwrap();
         writeln!(s, "    channel_flags = {};", self.channel_flags.as_test_case_value()).unwrap();
         writeln!(s, "    amount_of_members = {};", self.members.len()).unwrap();
-        write!(s, "    members = [").unwrap();
+        writeln!(s, "    members = [").unwrap();
         for v in self.members.as_slice() {
-            writeln!(s, "{{").unwrap();
+            writeln!(s, "        {{").unwrap();
             // Members
-            writeln!(s, "        guid = {};", v.guid.guid()).unwrap();
-            writeln!(s, "        member_flags = {};", v.member_flags.as_test_case_value()).unwrap();
+            writeln!(s, "            guid = {};", v.guid.guid()).unwrap();
+            writeln!(s, "            member_flags = {};", v.member_flags.as_test_case_value()).unwrap();
 
-            writeln!(s, "    }},").unwrap();
+            writeln!(s, "        }},").unwrap();
         }
-        writeln!(s, "];").unwrap();
+        writeln!(s, "    ];").unwrap();
 
         writeln!(s, "}} [").unwrap();
 

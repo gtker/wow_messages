@@ -63,53 +63,53 @@ impl crate::Message for SMSG_CHAR_ENUM {
         writeln!(s, "test SMSG_CHAR_ENUM {{").unwrap();
         // Members
         writeln!(s, "    amount_of_characters = {};", self.characters.len()).unwrap();
-        write!(s, "    characters = [").unwrap();
+        writeln!(s, "    characters = [").unwrap();
         for v in self.characters.as_slice() {
-            writeln!(s, "{{").unwrap();
+            writeln!(s, "        {{").unwrap();
             // Members
-            writeln!(s, "        guid = {};", v.guid.guid()).unwrap();
-            writeln!(s, "        name = \"{}\";", v.name).unwrap();
-            writeln!(s, "        race = {};", v.race.as_test_case_value()).unwrap();
-            writeln!(s, "        class = {};", v.class.as_test_case_value()).unwrap();
-            writeln!(s, "        gender = {};", v.gender.as_test_case_value()).unwrap();
-            writeln!(s, "        skin = {};", v.skin).unwrap();
-            writeln!(s, "        face = {};", v.face).unwrap();
-            writeln!(s, "        hair_style = {};", v.hair_style).unwrap();
-            writeln!(s, "        hair_color = {};", v.hair_color).unwrap();
-            writeln!(s, "        facial_hair = {};", v.facial_hair).unwrap();
-            writeln!(s, "        level = {};", v.level.as_int()).unwrap();
-            writeln!(s, "        area = {};", v.area.as_test_case_value()).unwrap();
-            writeln!(s, "        map = {};", v.map.as_test_case_value()).unwrap();
+            writeln!(s, "            guid = {};", v.guid.guid()).unwrap();
+            writeln!(s, "            name = \"{}\";", v.name).unwrap();
+            writeln!(s, "            race = {};", v.race.as_test_case_value()).unwrap();
+            writeln!(s, "            class = {};", v.class.as_test_case_value()).unwrap();
+            writeln!(s, "            gender = {};", v.gender.as_test_case_value()).unwrap();
+            writeln!(s, "            skin = {};", v.skin).unwrap();
+            writeln!(s, "            face = {};", v.face).unwrap();
+            writeln!(s, "            hair_style = {};", v.hair_style).unwrap();
+            writeln!(s, "            hair_color = {};", v.hair_color).unwrap();
+            writeln!(s, "            facial_hair = {};", v.facial_hair).unwrap();
+            writeln!(s, "            level = {};", v.level.as_int()).unwrap();
+            writeln!(s, "            area = {};", v.area.as_test_case_value()).unwrap();
+            writeln!(s, "            map = {};", v.map.as_test_case_value()).unwrap();
             // position: Vector3d
-            writeln!(s, "        position = {{").unwrap();
+            writeln!(s, "            position = {{").unwrap();
             // Members
-            writeln!(s, "            x = {}", if v.position.x.to_string().contains('.') { v.position.x.to_string() } else { format!("{}.0", v.position.x) }).unwrap();
-            writeln!(s, "            y = {}", if v.position.y.to_string().contains('.') { v.position.y.to_string() } else { format!("{}.0", v.position.y) }).unwrap();
-            writeln!(s, "            z = {}", if v.position.z.to_string().contains('.') { v.position.z.to_string() } else { format!("{}.0", v.position.z) }).unwrap();
+            writeln!(s, "                x = {};", if v.position.x.to_string().contains('.') { v.position.x.to_string() } else { format!("{}.0", v.position.x) }).unwrap();
+            writeln!(s, "                y = {};", if v.position.y.to_string().contains('.') { v.position.y.to_string() } else { format!("{}.0", v.position.y) }).unwrap();
+            writeln!(s, "                z = {};", if v.position.z.to_string().contains('.') { v.position.z.to_string() } else { format!("{}.0", v.position.z) }).unwrap();
 
             writeln!(s, "    }};").unwrap();
-            writeln!(s, "        guild_id = {};", v.guild_id).unwrap();
-            writeln!(s, "        flags = {};", v.flags).unwrap();
-            writeln!(s, "        recustomization_flags = {};", v.recustomization_flags).unwrap();
-            writeln!(s, "        first_login = {};", if v.first_login { "TRUE" } else { "FALSE" }).unwrap();
-            writeln!(s, "        pet_display_id = {};", v.pet_display_id).unwrap();
-            writeln!(s, "        pet_level = {};", v.pet_level.as_int()).unwrap();
-            writeln!(s, "        pet_family = {};", v.pet_family.as_test_case_value()).unwrap();
-            write!(s, "        equipment = [").unwrap();
+            writeln!(s, "            guild_id = {};", v.guild_id).unwrap();
+            writeln!(s, "            flags = {};", v.flags).unwrap();
+            writeln!(s, "            recustomization_flags = {};", v.recustomization_flags).unwrap();
+            writeln!(s, "            first_login = {};", if v.first_login { "TRUE" } else { "FALSE" }).unwrap();
+            writeln!(s, "            pet_display_id = {};", v.pet_display_id).unwrap();
+            writeln!(s, "            pet_level = {};", v.pet_level.as_int()).unwrap();
+            writeln!(s, "            pet_family = {};", v.pet_family.as_test_case_value()).unwrap();
+            writeln!(s, "            equipment = [").unwrap();
             for v in v.equipment.as_slice() {
-                writeln!(s, "{{").unwrap();
+                writeln!(s, "                {{").unwrap();
                 // Members
-                writeln!(s, "            equipment_display_id = {};", v.equipment_display_id).unwrap();
-                writeln!(s, "            inventory_type = {};", v.inventory_type.as_test_case_value()).unwrap();
-                writeln!(s, "            enchantment = {};", v.enchantment).unwrap();
+                writeln!(s, "                    equipment_display_id = {};", v.equipment_display_id).unwrap();
+                writeln!(s, "                    inventory_type = {};", v.inventory_type.as_test_case_value()).unwrap();
+                writeln!(s, "                    enchantment = {};", v.enchantment).unwrap();
 
-                writeln!(s, "    }},").unwrap();
+                writeln!(s, "                }},").unwrap();
             }
-            writeln!(s, "];").unwrap();
+            writeln!(s, "            ];").unwrap();
 
-            writeln!(s, "    }},").unwrap();
+            writeln!(s, "        }},").unwrap();
         }
-        writeln!(s, "];").unwrap();
+        writeln!(s, "    ];").unwrap();
 
         writeln!(s, "}} [").unwrap();
 

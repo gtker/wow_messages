@@ -73,11 +73,11 @@ impl crate::Message for CMSG_ACTIVATETAXIEXPRESS {
         writeln!(s, "    guid = {};", self.guid.guid()).unwrap();
         writeln!(s, "    total_cost = {};", self.total_cost).unwrap();
         writeln!(s, "    node_count = {};", self.nodes.len()).unwrap();
-        write!(s, "    nodes = [").unwrap();
+        writeln!(s, "    nodes = [").unwrap();
         for v in self.nodes.as_slice() {
             write!(s, "{v:#04X}, ").unwrap();
         }
-        writeln!(s, "];").unwrap();
+        writeln!(s, "    ];").unwrap();
 
         writeln!(s, "}} [").unwrap();
 

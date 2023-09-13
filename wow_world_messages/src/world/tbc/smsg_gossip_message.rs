@@ -101,33 +101,33 @@ impl crate::Message for SMSG_GOSSIP_MESSAGE {
         writeln!(s, "    menu_id = {};", self.menu_id).unwrap();
         writeln!(s, "    title_text_id = {};", self.title_text_id).unwrap();
         writeln!(s, "    amount_of_gossip_items = {};", self.gossips.len()).unwrap();
-        write!(s, "    gossips = [").unwrap();
+        writeln!(s, "    gossips = [").unwrap();
         for v in self.gossips.as_slice() {
-            writeln!(s, "{{").unwrap();
+            writeln!(s, "        {{").unwrap();
             // Members
-            writeln!(s, "        id = {};", v.id).unwrap();
-            writeln!(s, "        item_icon = {};", v.item_icon).unwrap();
-            writeln!(s, "        coded = {};", if v.coded { "TRUE" } else { "FALSE" }).unwrap();
-            writeln!(s, "        money_required = {};", v.money_required.as_int()).unwrap();
-            writeln!(s, "        message = \"{}\";", v.message).unwrap();
-            writeln!(s, "        accept_text = \"{}\";", v.accept_text).unwrap();
+            writeln!(s, "            id = {};", v.id).unwrap();
+            writeln!(s, "            item_icon = {};", v.item_icon).unwrap();
+            writeln!(s, "            coded = {};", if v.coded { "TRUE" } else { "FALSE" }).unwrap();
+            writeln!(s, "            money_required = {};", v.money_required.as_int()).unwrap();
+            writeln!(s, "            message = \"{}\";", v.message).unwrap();
+            writeln!(s, "            accept_text = \"{}\";", v.accept_text).unwrap();
 
-            writeln!(s, "    }},").unwrap();
+            writeln!(s, "        }},").unwrap();
         }
-        writeln!(s, "];").unwrap();
+        writeln!(s, "    ];").unwrap();
         writeln!(s, "    amount_of_quests = {};", self.quests.len()).unwrap();
-        write!(s, "    quests = [").unwrap();
+        writeln!(s, "    quests = [").unwrap();
         for v in self.quests.as_slice() {
-            writeln!(s, "{{").unwrap();
+            writeln!(s, "        {{").unwrap();
             // Members
-            writeln!(s, "        quest_id = {};", v.quest_id).unwrap();
-            writeln!(s, "        quest_icon = {};", v.quest_icon).unwrap();
-            writeln!(s, "        level = {};", v.level.as_int()).unwrap();
-            writeln!(s, "        title = \"{}\";", v.title).unwrap();
+            writeln!(s, "            quest_id = {};", v.quest_id).unwrap();
+            writeln!(s, "            quest_icon = {};", v.quest_icon).unwrap();
+            writeln!(s, "            level = {};", v.level.as_int()).unwrap();
+            writeln!(s, "            title = \"{}\";", v.title).unwrap();
 
-            writeln!(s, "    }},").unwrap();
+            writeln!(s, "        }},").unwrap();
         }
-        writeln!(s, "];").unwrap();
+        writeln!(s, "    ];").unwrap();
 
         writeln!(s, "}} [").unwrap();
 

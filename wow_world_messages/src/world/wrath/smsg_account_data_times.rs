@@ -84,11 +84,11 @@ impl crate::Message for SMSG_ACCOUNT_DATA_TIMES {
         writeln!(s, "    unix_time = {};", self.unix_time).unwrap();
         writeln!(s, "    unknown1 = {};", self.unknown1).unwrap();
         writeln!(s, "    mask = {};", self.mask.as_test_case_value()).unwrap();
-        write!(s, "    data = [").unwrap();
+        writeln!(s, "    data = [").unwrap();
         for v in self.data.as_slice() {
             write!(s, "{v:#04X}, ").unwrap();
         }
-        writeln!(s, "];").unwrap();
+        writeln!(s, "    ];").unwrap();
 
         writeln!(s, "}} [").unwrap();
 

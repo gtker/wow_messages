@@ -159,22 +159,22 @@ impl crate::Message for SMSG_CALENDAR_SEND_EVENT {
         writeln!(s, "    time_zone_time = {};", self.time_zone_time.as_int()).unwrap();
         writeln!(s, "    guild_id = {};", self.guild_id).unwrap();
         writeln!(s, "    amount_of_invitees = {};", self.invitees.len()).unwrap();
-        write!(s, "    invitees = [").unwrap();
+        writeln!(s, "    invitees = [").unwrap();
         for v in self.invitees.as_slice() {
-            writeln!(s, "{{").unwrap();
+            writeln!(s, "        {{").unwrap();
             // Members
-            writeln!(s, "        invitee = {};", v.invitee.guid()).unwrap();
-            writeln!(s, "        level = {};", v.level.as_int()).unwrap();
-            writeln!(s, "        status = {};", v.status).unwrap();
-            writeln!(s, "        rank = {};", v.rank).unwrap();
-            writeln!(s, "        guild_member = {};", v.guild_member).unwrap();
-            writeln!(s, "        invite_id = {};", v.invite_id.guid()).unwrap();
-            writeln!(s, "        status_time = {};", v.status_time.as_int()).unwrap();
-            writeln!(s, "        text = \"{}\";", v.text).unwrap();
+            writeln!(s, "            invitee = {};", v.invitee.guid()).unwrap();
+            writeln!(s, "            level = {};", v.level.as_int()).unwrap();
+            writeln!(s, "            status = {};", v.status).unwrap();
+            writeln!(s, "            rank = {};", v.rank).unwrap();
+            writeln!(s, "            guild_member = {};", v.guild_member).unwrap();
+            writeln!(s, "            invite_id = {};", v.invite_id.guid()).unwrap();
+            writeln!(s, "            status_time = {};", v.status_time.as_int()).unwrap();
+            writeln!(s, "            text = \"{}\";", v.text).unwrap();
 
-            writeln!(s, "    }},").unwrap();
+            writeln!(s, "        }},").unwrap();
         }
-        writeln!(s, "];").unwrap();
+        writeln!(s, "    ];").unwrap();
 
         writeln!(s, "}} [").unwrap();
 

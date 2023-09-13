@@ -76,43 +76,43 @@ impl crate::Message for SMSG_LFG_PLAYER_INFO {
         writeln!(s, "test SMSG_LFG_PLAYER_INFO {{").unwrap();
         // Members
         writeln!(s, "    amount_of_available_dungeons = {};", self.available_dungeons.len()).unwrap();
-        write!(s, "    available_dungeons = [").unwrap();
+        writeln!(s, "    available_dungeons = [").unwrap();
         for v in self.available_dungeons.as_slice() {
-            writeln!(s, "{{").unwrap();
+            writeln!(s, "        {{").unwrap();
             // Members
-            writeln!(s, "        dungeon_entry = {};", v.dungeon_entry).unwrap();
-            writeln!(s, "        done = {};", if v.done { "TRUE" } else { "FALSE" }).unwrap();
-            writeln!(s, "        quest_reward = {};", v.quest_reward).unwrap();
-            writeln!(s, "        xp_reward = {};", v.xp_reward).unwrap();
-            writeln!(s, "        unknown1 = {};", v.unknown1).unwrap();
-            writeln!(s, "        unknown2 = {};", v.unknown2).unwrap();
-            writeln!(s, "        amount_of_rewards = {};", v.rewards.len()).unwrap();
-            write!(s, "        rewards = [").unwrap();
+            writeln!(s, "            dungeon_entry = {};", v.dungeon_entry).unwrap();
+            writeln!(s, "            done = {};", if v.done { "TRUE" } else { "FALSE" }).unwrap();
+            writeln!(s, "            quest_reward = {};", v.quest_reward).unwrap();
+            writeln!(s, "            xp_reward = {};", v.xp_reward).unwrap();
+            writeln!(s, "            unknown1 = {};", v.unknown1).unwrap();
+            writeln!(s, "            unknown2 = {};", v.unknown2).unwrap();
+            writeln!(s, "            amount_of_rewards = {};", v.rewards.len()).unwrap();
+            writeln!(s, "            rewards = [").unwrap();
             for v in v.rewards.as_slice() {
-                writeln!(s, "{{").unwrap();
+                writeln!(s, "                {{").unwrap();
                 // Members
-                writeln!(s, "            item = {};", v.item).unwrap();
-                writeln!(s, "            display_id = {};", v.display_id).unwrap();
-                writeln!(s, "            amount_of_rewards = {};", v.amount_of_rewards).unwrap();
+                writeln!(s, "                    item = {};", v.item).unwrap();
+                writeln!(s, "                    display_id = {};", v.display_id).unwrap();
+                writeln!(s, "                    amount_of_rewards = {};", v.amount_of_rewards).unwrap();
 
-                writeln!(s, "    }},").unwrap();
+                writeln!(s, "                }},").unwrap();
             }
-            writeln!(s, "];").unwrap();
+            writeln!(s, "            ];").unwrap();
 
-            writeln!(s, "    }},").unwrap();
+            writeln!(s, "        }},").unwrap();
         }
-        writeln!(s, "];").unwrap();
+        writeln!(s, "    ];").unwrap();
         writeln!(s, "    amount_of_locked_dungeons = {};", self.locked_dungeons.len()).unwrap();
-        write!(s, "    locked_dungeons = [").unwrap();
+        writeln!(s, "    locked_dungeons = [").unwrap();
         for v in self.locked_dungeons.as_slice() {
-            writeln!(s, "{{").unwrap();
+            writeln!(s, "        {{").unwrap();
             // Members
-            writeln!(s, "        dungeon_entry = {};", v.dungeon_entry).unwrap();
-            writeln!(s, "        reason = {};", v.reason).unwrap();
+            writeln!(s, "            dungeon_entry = {};", v.dungeon_entry).unwrap();
+            writeln!(s, "            reason = {};", v.reason).unwrap();
 
-            writeln!(s, "    }},").unwrap();
+            writeln!(s, "        }},").unwrap();
         }
-        writeln!(s, "];").unwrap();
+        writeln!(s, "    ];").unwrap();
 
         writeln!(s, "}} [").unwrap();
 

@@ -44,7 +44,7 @@ fn common_impls(s: &mut Writer, e: &Definer, o: &Objects) {
                 };
                 s.body(conditional, |s| {
                     s.wln("use std::fmt::Write;");
-                    s.body("if !first", |s| s.wln("write!(s, \"| \").unwrap();"));
+                    s.body("if !first", |s| s.wln("write!(s, \" | \").unwrap();"));
                     s.wln(format!("write!(s, \"{}\").unwrap();", field.name()));
                     s.wln("first = false;");
                 });

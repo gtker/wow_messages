@@ -27,7 +27,7 @@ impl GroupMemberOnlineStatus {
         if self.is_empty() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "OFFLINE").unwrap();
             first = false;
@@ -35,7 +35,7 @@ impl GroupMemberOnlineStatus {
         if self.is_online() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "ONLINE").unwrap();
             first = false;
@@ -43,7 +43,7 @@ impl GroupMemberOnlineStatus {
         if self.is_pvp() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "PVP").unwrap();
             first = false;
@@ -51,7 +51,7 @@ impl GroupMemberOnlineStatus {
         if self.is_dead() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "DEAD").unwrap();
             first = false;
@@ -59,7 +59,7 @@ impl GroupMemberOnlineStatus {
         if self.is_ghost() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "GHOST").unwrap();
             first = false;
@@ -67,7 +67,7 @@ impl GroupMemberOnlineStatus {
         if self.is_pvp_ffa() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "PVP_FFA").unwrap();
             first = false;
@@ -75,7 +75,7 @@ impl GroupMemberOnlineStatus {
         if self.is_zone_out() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "ZONE_OUT").unwrap();
             first = false;
@@ -83,7 +83,7 @@ impl GroupMemberOnlineStatus {
         if self.is_afk() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "AFK").unwrap();
             first = false;
@@ -91,7 +91,7 @@ impl GroupMemberOnlineStatus {
         if self.is_dnd() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "DND").unwrap();
             first = false;

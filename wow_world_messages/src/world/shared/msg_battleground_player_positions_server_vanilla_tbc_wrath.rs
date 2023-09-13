@@ -75,29 +75,29 @@ impl crate::Message for MSG_BATTLEGROUND_PLAYER_POSITIONS_Server {
         writeln!(s, "test MSG_BATTLEGROUND_PLAYER_POSITIONS_Server {{").unwrap();
         // Members
         writeln!(s, "    amount_of_teammates = {};", self.teammates.len()).unwrap();
-        write!(s, "    teammates = [").unwrap();
+        writeln!(s, "    teammates = [").unwrap();
         for v in self.teammates.as_slice() {
-            writeln!(s, "{{").unwrap();
+            writeln!(s, "        {{").unwrap();
             // Members
-            writeln!(s, "        player = {};", v.player.guid()).unwrap();
-            writeln!(s, "        position_x = {}", if v.position_x.to_string().contains('.') { v.position_x.to_string() } else { format!("{}.0", v.position_x) }).unwrap();
-            writeln!(s, "        position_y = {}", if v.position_y.to_string().contains('.') { v.position_y.to_string() } else { format!("{}.0", v.position_y) }).unwrap();
+            writeln!(s, "            player = {};", v.player.guid()).unwrap();
+            writeln!(s, "            position_x = {};", if v.position_x.to_string().contains('.') { v.position_x.to_string() } else { format!("{}.0", v.position_x) }).unwrap();
+            writeln!(s, "            position_y = {};", if v.position_y.to_string().contains('.') { v.position_y.to_string() } else { format!("{}.0", v.position_y) }).unwrap();
 
-            writeln!(s, "    }},").unwrap();
+            writeln!(s, "        }},").unwrap();
         }
-        writeln!(s, "];").unwrap();
+        writeln!(s, "    ];").unwrap();
         writeln!(s, "    amount_of_carriers = {};", self.carriers.len()).unwrap();
-        write!(s, "    carriers = [").unwrap();
+        writeln!(s, "    carriers = [").unwrap();
         for v in self.carriers.as_slice() {
-            writeln!(s, "{{").unwrap();
+            writeln!(s, "        {{").unwrap();
             // Members
-            writeln!(s, "        player = {};", v.player.guid()).unwrap();
-            writeln!(s, "        position_x = {}", if v.position_x.to_string().contains('.') { v.position_x.to_string() } else { format!("{}.0", v.position_x) }).unwrap();
-            writeln!(s, "        position_y = {}", if v.position_y.to_string().contains('.') { v.position_y.to_string() } else { format!("{}.0", v.position_y) }).unwrap();
+            writeln!(s, "            player = {};", v.player.guid()).unwrap();
+            writeln!(s, "            position_x = {};", if v.position_x.to_string().contains('.') { v.position_x.to_string() } else { format!("{}.0", v.position_x) }).unwrap();
+            writeln!(s, "            position_y = {};", if v.position_y.to_string().contains('.') { v.position_y.to_string() } else { format!("{}.0", v.position_y) }).unwrap();
 
-            writeln!(s, "    }},").unwrap();
+            writeln!(s, "        }},").unwrap();
         }
-        writeln!(s, "];").unwrap();
+        writeln!(s, "    ];").unwrap();
 
         writeln!(s, "}} [").unwrap();
 

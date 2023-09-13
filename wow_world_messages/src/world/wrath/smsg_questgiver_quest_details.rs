@@ -279,65 +279,65 @@ impl crate::Message for SMSG_QUESTGIVER_QUEST_DETAILS {
         writeln!(s, "    suggested_players = {};", self.suggested_players).unwrap();
         writeln!(s, "    is_finished = {};", self.is_finished).unwrap();
         writeln!(s, "    amount_of_choice_item_rewards = {};", self.choice_item_rewards.len()).unwrap();
-        write!(s, "    choice_item_rewards = [").unwrap();
+        writeln!(s, "    choice_item_rewards = [").unwrap();
         for v in self.choice_item_rewards.as_slice() {
-            writeln!(s, "{{").unwrap();
+            writeln!(s, "        {{").unwrap();
             // Members
-            writeln!(s, "        item = {};", v.item).unwrap();
-            writeln!(s, "        item_count = {};", v.item_count).unwrap();
-            writeln!(s, "        display_id = {};", v.display_id).unwrap();
+            writeln!(s, "            item = {};", v.item).unwrap();
+            writeln!(s, "            item_count = {};", v.item_count).unwrap();
+            writeln!(s, "            display_id = {};", v.display_id).unwrap();
 
-            writeln!(s, "    }},").unwrap();
+            writeln!(s, "        }},").unwrap();
         }
-        writeln!(s, "];").unwrap();
+        writeln!(s, "    ];").unwrap();
         writeln!(s, "    amount_of_item_rewards = {};", self.item_rewards.len()).unwrap();
-        write!(s, "    item_rewards = [").unwrap();
+        writeln!(s, "    item_rewards = [").unwrap();
         for v in self.item_rewards.as_slice() {
-            writeln!(s, "{{").unwrap();
+            writeln!(s, "        {{").unwrap();
             // Members
-            writeln!(s, "        item = {};", v.item).unwrap();
-            writeln!(s, "        item_count = {};", v.item_count).unwrap();
-            writeln!(s, "        display_id = {};", v.display_id).unwrap();
+            writeln!(s, "            item = {};", v.item).unwrap();
+            writeln!(s, "            item_count = {};", v.item_count).unwrap();
+            writeln!(s, "            display_id = {};", v.display_id).unwrap();
 
-            writeln!(s, "    }},").unwrap();
+            writeln!(s, "        }},").unwrap();
         }
-        writeln!(s, "];").unwrap();
+        writeln!(s, "    ];").unwrap();
         writeln!(s, "    money_reward = {};", self.money_reward.as_int()).unwrap();
         writeln!(s, "    experience_reward = {};", self.experience_reward).unwrap();
         writeln!(s, "    honor_reward = {};", self.honor_reward).unwrap();
-        writeln!(s, "    honor_reward_multiplier = {}", if self.honor_reward_multiplier.to_string().contains('.') { self.honor_reward_multiplier.to_string() } else { format!("{}.0", self.honor_reward_multiplier) }).unwrap();
+        writeln!(s, "    honor_reward_multiplier = {};", if self.honor_reward_multiplier.to_string().contains('.') { self.honor_reward_multiplier.to_string() } else { format!("{}.0", self.honor_reward_multiplier) }).unwrap();
         writeln!(s, "    reward_spell = {};", self.reward_spell).unwrap();
         writeln!(s, "    casted_spell = {};", self.casted_spell).unwrap();
         writeln!(s, "    title_reward = {};", self.title_reward).unwrap();
         writeln!(s, "    talent_reward = {};", self.talent_reward).unwrap();
         writeln!(s, "    arena_point_reward = {};", self.arena_point_reward).unwrap();
         writeln!(s, "    unknown2 = {};", self.unknown2).unwrap();
-        write!(s, "    reward_factions = [").unwrap();
+        writeln!(s, "    reward_factions = [").unwrap();
         for v in self.reward_factions.as_slice() {
             write!(s, "{v:#04X}, ").unwrap();
         }
-        writeln!(s, "];").unwrap();
-        write!(s, "    reward_reputations = [").unwrap();
+        writeln!(s, "    ];").unwrap();
+        writeln!(s, "    reward_reputations = [").unwrap();
         for v in self.reward_reputations.as_slice() {
             write!(s, "{v:#04X}, ").unwrap();
         }
-        writeln!(s, "];").unwrap();
-        write!(s, "    reward_reputations_override = [").unwrap();
+        writeln!(s, "    ];").unwrap();
+        writeln!(s, "    reward_reputations_override = [").unwrap();
         for v in self.reward_reputations_override.as_slice() {
             write!(s, "{v:#04X}, ").unwrap();
         }
-        writeln!(s, "];").unwrap();
+        writeln!(s, "    ];").unwrap();
         writeln!(s, "    amount_of_emotes = {};", self.emotes.len()).unwrap();
-        write!(s, "    emotes = [").unwrap();
+        writeln!(s, "    emotes = [").unwrap();
         for v in self.emotes.as_slice() {
-            writeln!(s, "{{").unwrap();
+            writeln!(s, "        {{").unwrap();
             // Members
-            writeln!(s, "        emote = {};", v.emote).unwrap();
-            writeln!(s, "        emote_delay = {};", v.emote_delay.as_millis()).unwrap();
+            writeln!(s, "            emote = {};", v.emote).unwrap();
+            writeln!(s, "            emote_delay = {};", v.emote_delay.as_millis()).unwrap();
 
-            writeln!(s, "    }},").unwrap();
+            writeln!(s, "        }},").unwrap();
         }
-        writeln!(s, "];").unwrap();
+        writeln!(s, "    ];").unwrap();
 
         writeln!(s, "}} [").unwrap();
 

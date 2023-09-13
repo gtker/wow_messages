@@ -116,18 +116,18 @@ impl crate::Message for SMSG_GROUP_LIST {
         writeln!(s, "    group_type = {};", self.group_type.as_test_case_value()).unwrap();
         writeln!(s, "    flags = {};", self.flags).unwrap();
         writeln!(s, "    amount_of_members = {};", self.members.len()).unwrap();
-        write!(s, "    members = [").unwrap();
+        writeln!(s, "    members = [").unwrap();
         for v in self.members.as_slice() {
-            writeln!(s, "{{").unwrap();
+            writeln!(s, "        {{").unwrap();
             // Members
-            writeln!(s, "        name = \"{}\";", v.name).unwrap();
-            writeln!(s, "        guid = {};", v.guid.guid()).unwrap();
-            writeln!(s, "        is_online = {};", if v.is_online { "TRUE" } else { "FALSE" }).unwrap();
-            writeln!(s, "        flags = {};", v.flags).unwrap();
+            writeln!(s, "            name = \"{}\";", v.name).unwrap();
+            writeln!(s, "            guid = {};", v.guid.guid()).unwrap();
+            writeln!(s, "            is_online = {};", if v.is_online { "TRUE" } else { "FALSE" }).unwrap();
+            writeln!(s, "            flags = {};", v.flags).unwrap();
 
-            writeln!(s, "    }},").unwrap();
+            writeln!(s, "        }},").unwrap();
         }
-        writeln!(s, "];").unwrap();
+        writeln!(s, "    ];").unwrap();
         writeln!(s, "    leader = {};", self.leader.guid()).unwrap();
         if let Some(group_not_empty) = &self.group_not_empty {
             writeln!(s, "    loot_setting = {};", group_not_empty.loot_setting.as_test_case_value()).unwrap();

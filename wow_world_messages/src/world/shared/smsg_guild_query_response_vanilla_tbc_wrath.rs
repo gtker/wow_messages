@@ -99,11 +99,11 @@ impl crate::Message for SMSG_GUILD_QUERY_RESPONSE {
         // Members
         writeln!(s, "    id = {};", self.id).unwrap();
         writeln!(s, "    name = \"{}\";", self.name).unwrap();
-        write!(s, "    rank_names = [").unwrap();
+        writeln!(s, "    rank_names = [").unwrap();
         for v in self.rank_names.as_slice() {
             write!(s, "\"{v}\", ").unwrap();
         }
-        writeln!(s, "];").unwrap();
+        writeln!(s, "    ];").unwrap();
         writeln!(s, "    emblem_style = {};", self.emblem_style).unwrap();
         writeln!(s, "    emblem_color = {};", self.emblem_color).unwrap();
         writeln!(s, "    border_style = {};", self.border_style).unwrap();

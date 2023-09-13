@@ -70,24 +70,24 @@ impl crate::Message for SMSG_CONTACT_LIST {
         // Members
         writeln!(s, "    list_mask = {};", self.list_mask.as_test_case_value()).unwrap();
         writeln!(s, "    amount_of_relations = {};", self.relations.len()).unwrap();
-        write!(s, "    relations = [").unwrap();
+        writeln!(s, "    relations = [").unwrap();
         for v in self.relations.as_slice() {
-            writeln!(s, "{{").unwrap();
+            writeln!(s, "        {{").unwrap();
             // Members
-            writeln!(s, "        guid = {};", v.guid.guid()).unwrap();
-            writeln!(s, "        relation_mask = {};", RelationType::new(v.relation_mask.as_int()).as_test_case_value()).unwrap();
-            writeln!(s, "        note = \"{}\";", v.note).unwrap();
+            writeln!(s, "            guid = {};", v.guid.guid()).unwrap();
+            writeln!(s, "            relation_mask = {};", RelationType::new(v.relation_mask.as_int()).as_test_case_value()).unwrap();
+            writeln!(s, "            note = \"{}\";", v.note).unwrap();
             if let Some(if_statement) = &v.relation_mask.get_friend() {
-                writeln!(s, "        status = {};", FriendStatus::try_from(if_statement.status.as_int()).unwrap().as_test_case_value()).unwrap();
+                writeln!(s, "            status = {};", FriendStatus::try_from(if_statement.status.as_int()).unwrap().as_test_case_value()).unwrap();
                 match &if_statement.status {
                     crate::tbc::Relation_FriendStatus::Online {
                         area,
                         class,
                         level,
                     } => {
-                        writeln!(s, "        area = {};", area.as_test_case_value()).unwrap();
-                        writeln!(s, "        level = {};", level.as_int()).unwrap();
-                        writeln!(s, "        class = {};", class.as_test_case_value()).unwrap();
+                        writeln!(s, "            area = {};", area.as_test_case_value()).unwrap();
+                        writeln!(s, "            level = {};", level.as_int()).unwrap();
+                        writeln!(s, "            class = {};", class.as_test_case_value()).unwrap();
                     }
                     _ => {}
                 }
@@ -95,9 +95,9 @@ impl crate::Message for SMSG_CONTACT_LIST {
             }
 
 
-            writeln!(s, "    }},").unwrap();
+            writeln!(s, "        }},").unwrap();
         }
-        writeln!(s, "];").unwrap();
+        writeln!(s, "    ];").unwrap();
 
         writeln!(s, "}} [").unwrap();
 

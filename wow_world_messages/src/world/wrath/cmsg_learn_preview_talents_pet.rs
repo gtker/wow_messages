@@ -68,16 +68,16 @@ impl crate::Message for CMSG_LEARN_PREVIEW_TALENTS_PET {
         // Members
         writeln!(s, "    pet = {};", self.pet.guid()).unwrap();
         writeln!(s, "    amount_of_talents = {};", self.talents.len()).unwrap();
-        write!(s, "    talents = [").unwrap();
+        writeln!(s, "    talents = [").unwrap();
         for v in self.talents.as_slice() {
-            writeln!(s, "{{").unwrap();
+            writeln!(s, "        {{").unwrap();
             // Members
-            writeln!(s, "        talent = {};", v.talent.as_test_case_value()).unwrap();
-            writeln!(s, "        rank = {};", v.rank).unwrap();
+            writeln!(s, "            talent = {};", v.talent.as_test_case_value()).unwrap();
+            writeln!(s, "            rank = {};", v.rank).unwrap();
 
-            writeln!(s, "    }},").unwrap();
+            writeln!(s, "        }},").unwrap();
         }
-        writeln!(s, "];").unwrap();
+        writeln!(s, "    ];").unwrap();
 
         writeln!(s, "}} [").unwrap();
 

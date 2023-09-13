@@ -72,11 +72,11 @@ impl crate::Message for SMSG_SPELLDISPELLOG {
         writeln!(s, "    victim = {};", self.victim.guid()).unwrap();
         writeln!(s, "    caster = {};", self.caster.guid()).unwrap();
         writeln!(s, "    amount_of_spells = {};", self.spells.len()).unwrap();
-        write!(s, "    spells = [").unwrap();
+        writeln!(s, "    spells = [").unwrap();
         for v in self.spells.as_slice() {
             write!(s, "{v:#04X}, ").unwrap();
         }
-        writeln!(s, "];").unwrap();
+        writeln!(s, "    ];").unwrap();
 
         writeln!(s, "}} [").unwrap();
 

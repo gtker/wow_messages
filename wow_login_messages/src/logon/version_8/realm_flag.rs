@@ -24,7 +24,7 @@ impl RealmFlag {
         if self.is_empty() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "NONE").unwrap();
             first = false;
@@ -32,7 +32,7 @@ impl RealmFlag {
         if self.is_invalid() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "INVALID").unwrap();
             first = false;
@@ -40,7 +40,7 @@ impl RealmFlag {
         if self.is_offline() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "OFFLINE").unwrap();
             first = false;
@@ -48,7 +48,7 @@ impl RealmFlag {
         if self.is_specify_build() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "SPECIFY_BUILD").unwrap();
             first = false;
@@ -56,7 +56,7 @@ impl RealmFlag {
         if self.is_force_blue_recommended() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "FORCE_BLUE_RECOMMENDED").unwrap();
             first = false;
@@ -64,7 +64,7 @@ impl RealmFlag {
         if self.is_force_green_recommended() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "FORCE_GREEN_RECOMMENDED").unwrap();
             first = false;
@@ -72,7 +72,7 @@ impl RealmFlag {
         if self.is_force_red_full() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "FORCE_RED_FULL").unwrap();
             first = false;

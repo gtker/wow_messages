@@ -118,9 +118,9 @@ impl crate::Message for SMSG_GMTICKET_GETTICKET {
                 writeln!(s, "    id = {};", id).unwrap();
                 writeln!(s, "    text = \"{}\";", text).unwrap();
                 writeln!(s, "    need_more_help = {};", if *need_more_help { "TRUE" } else { "FALSE" }).unwrap();
-                writeln!(s, "    days_since_ticket_creation = {}", if days_since_ticket_creation.to_string().contains('.') { days_since_ticket_creation.to_string() } else { format!("{}.0", days_since_ticket_creation) }).unwrap();
-                writeln!(s, "    days_since_oldest_ticket_creation = {}", if days_since_oldest_ticket_creation.to_string().contains('.') { days_since_oldest_ticket_creation.to_string() } else { format!("{}.0", days_since_oldest_ticket_creation) }).unwrap();
-                writeln!(s, "    days_since_last_updated = {}", if days_since_last_updated.to_string().contains('.') { days_since_last_updated.to_string() } else { format!("{}.0", days_since_last_updated) }).unwrap();
+                writeln!(s, "    days_since_ticket_creation = {};", if days_since_ticket_creation.to_string().contains('.') { days_since_ticket_creation.to_string() } else { format!("{}.0", days_since_ticket_creation) }).unwrap();
+                writeln!(s, "    days_since_oldest_ticket_creation = {};", if days_since_oldest_ticket_creation.to_string().contains('.') { days_since_oldest_ticket_creation.to_string() } else { format!("{}.0", days_since_oldest_ticket_creation) }).unwrap();
+                writeln!(s, "    days_since_last_updated = {};", if days_since_last_updated.to_string().contains('.') { days_since_last_updated.to_string() } else { format!("{}.0", days_since_last_updated) }).unwrap();
                 writeln!(s, "    escalation_status = {};", escalation_status.as_test_case_value()).unwrap();
                 writeln!(s, "    read_by_gm = {};", if *read_by_gm { "TRUE" } else { "FALSE" }).unwrap();
             }

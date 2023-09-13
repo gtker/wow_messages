@@ -60,11 +60,11 @@ impl crate::Message for CMSG_SOCKET_GEMS {
         writeln!(s, "test CMSG_SOCKET_GEMS {{").unwrap();
         // Members
         writeln!(s, "    item = {};", self.item.guid()).unwrap();
-        write!(s, "    gems = [").unwrap();
+        writeln!(s, "    gems = [").unwrap();
         for v in self.gems.as_slice() {
             write!(s, "{v:#08X}, ").unwrap();
         }
-        writeln!(s, "];").unwrap();
+        writeln!(s, "    ];").unwrap();
 
         writeln!(s, "}} [").unwrap();
 

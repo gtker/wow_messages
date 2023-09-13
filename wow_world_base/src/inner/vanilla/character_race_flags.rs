@@ -27,7 +27,7 @@ impl CharacterRaceFlags {
         if self.is_empty() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "NONE").unwrap();
             first = false;
@@ -35,7 +35,7 @@ impl CharacterRaceFlags {
         if self.is_not_playable() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "NOT_PLAYABLE").unwrap();
             first = false;
@@ -43,7 +43,7 @@ impl CharacterRaceFlags {
         if self.is_bare_feet() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "BARE_FEET").unwrap();
             first = false;
@@ -51,7 +51,7 @@ impl CharacterRaceFlags {
         if self.is_can_current_form_mount() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "CAN_CURRENT_FORM_MOUNT").unwrap();
             first = false;
@@ -59,7 +59,7 @@ impl CharacterRaceFlags {
         if self.is_unknown2() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "UNKNOWN2").unwrap();
             first = false;

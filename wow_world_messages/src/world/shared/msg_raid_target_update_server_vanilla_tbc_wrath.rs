@@ -97,16 +97,16 @@ impl crate::Message for MSG_RAID_TARGET_UPDATE_Server {
             crate::shared::msg_raid_target_update_server_vanilla_tbc_wrath::MSG_RAID_TARGET_UPDATE_Server_RaidTargetUpdateType::Full {
                 raid_targets,
             } => {
-                write!(s, "    raid_targets = [").unwrap();
+                writeln!(s, "    raid_targets = [").unwrap();
                 for v in raid_targets.as_slice() {
-                    writeln!(s, "{{").unwrap();
+                    writeln!(s, "        {{").unwrap();
                     // Members
-                    writeln!(s, "        index = {};", v.index.as_test_case_value()).unwrap();
-                    writeln!(s, "        guid = {};", v.guid.guid()).unwrap();
+                    writeln!(s, "            index = {};", v.index.as_test_case_value()).unwrap();
+                    writeln!(s, "            guid = {};", v.guid.guid()).unwrap();
 
-                    writeln!(s, "    }},").unwrap();
+                    writeln!(s, "        }},").unwrap();
                 }
-                writeln!(s, "];").unwrap();
+                writeln!(s, "    ];").unwrap();
             }
         }
 

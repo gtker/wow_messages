@@ -73,19 +73,19 @@ impl crate::Message for SMSG_SET_FACTION_STANDING {
 
         writeln!(s, "test SMSG_SET_FACTION_STANDING {{").unwrap();
         // Members
-        writeln!(s, "    refer_a_friend_bonus = {}", if self.refer_a_friend_bonus.to_string().contains('.') { self.refer_a_friend_bonus.to_string() } else { format!("{}.0", self.refer_a_friend_bonus) }).unwrap();
+        writeln!(s, "    refer_a_friend_bonus = {};", if self.refer_a_friend_bonus.to_string().contains('.') { self.refer_a_friend_bonus.to_string() } else { format!("{}.0", self.refer_a_friend_bonus) }).unwrap();
         writeln!(s, "    any_rank_increased = {};", if self.any_rank_increased { "TRUE" } else { "FALSE" }).unwrap();
         writeln!(s, "    amount_of_faction_standings = {};", self.faction_standings.len()).unwrap();
-        write!(s, "    faction_standings = [").unwrap();
+        writeln!(s, "    faction_standings = [").unwrap();
         for v in self.faction_standings.as_slice() {
-            writeln!(s, "{{").unwrap();
+            writeln!(s, "        {{").unwrap();
             // Members
-            writeln!(s, "        faction = {};", v.faction.as_test_case_value()).unwrap();
-            writeln!(s, "        standing = {};", v.standing).unwrap();
+            writeln!(s, "            faction = {};", v.faction.as_test_case_value()).unwrap();
+            writeln!(s, "            standing = {};", v.standing).unwrap();
 
-            writeln!(s, "    }},").unwrap();
+            writeln!(s, "        }},").unwrap();
         }
-        writeln!(s, "];").unwrap();
+        writeln!(s, "    ];").unwrap();
 
         writeln!(s, "}} [").unwrap();
 

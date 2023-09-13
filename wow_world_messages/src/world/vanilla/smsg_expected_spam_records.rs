@@ -58,11 +58,11 @@ impl crate::Message for SMSG_EXPECTED_SPAM_RECORDS {
         writeln!(s, "test SMSG_EXPECTED_SPAM_RECORDS {{").unwrap();
         // Members
         writeln!(s, "    amount_of_records = {};", self.records.len()).unwrap();
-        write!(s, "    records = [").unwrap();
+        writeln!(s, "    records = [").unwrap();
         for v in self.records.as_slice() {
             write!(s, "\"{v}\", ").unwrap();
         }
-        writeln!(s, "];").unwrap();
+        writeln!(s, "    ];").unwrap();
 
         writeln!(s, "}} [").unwrap();
 

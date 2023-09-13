@@ -447,27 +447,27 @@ impl crate::Message for SMSG_ITEM_QUERY_SINGLE_RESPONSE {
             writeln!(s, "    max_count = {};", found.max_count).unwrap();
             writeln!(s, "    stackable = {};", found.stackable).unwrap();
             writeln!(s, "    container_slots = {};", found.container_slots).unwrap();
-            write!(s, "    stats = [").unwrap();
+            writeln!(s, "    stats = [").unwrap();
             for v in found.stats.as_slice() {
-                writeln!(s, "{{").unwrap();
+                writeln!(s, "        {{").unwrap();
                 // Members
-                writeln!(s, "        stat_type = {};", v.stat_type).unwrap();
-                writeln!(s, "        value = {};", v.value).unwrap();
+                writeln!(s, "            stat_type = {};", v.stat_type).unwrap();
+                writeln!(s, "            value = {};", v.value).unwrap();
 
-                writeln!(s, "    }},").unwrap();
+                writeln!(s, "        }},").unwrap();
             }
-            writeln!(s, "];").unwrap();
-            write!(s, "    damages = [").unwrap();
+            writeln!(s, "    ];").unwrap();
+            writeln!(s, "    damages = [").unwrap();
             for v in found.damages.as_slice() {
-                writeln!(s, "{{").unwrap();
+                writeln!(s, "        {{").unwrap();
                 // Members
-                writeln!(s, "        damage_minimum = {}", if v.damage_minimum.to_string().contains('.') { v.damage_minimum.to_string() } else { format!("{}.0", v.damage_minimum) }).unwrap();
-                writeln!(s, "        damage_maximum = {}", if v.damage_maximum.to_string().contains('.') { v.damage_maximum.to_string() } else { format!("{}.0", v.damage_maximum) }).unwrap();
-                writeln!(s, "        school = {};", v.school.as_test_case_value()).unwrap();
+                writeln!(s, "            damage_minimum = {};", if v.damage_minimum.to_string().contains('.') { v.damage_minimum.to_string() } else { format!("{}.0", v.damage_minimum) }).unwrap();
+                writeln!(s, "            damage_maximum = {};", if v.damage_maximum.to_string().contains('.') { v.damage_maximum.to_string() } else { format!("{}.0", v.damage_maximum) }).unwrap();
+                writeln!(s, "            school = {};", v.school.as_test_case_value()).unwrap();
 
-                writeln!(s, "    }},").unwrap();
+                writeln!(s, "        }},").unwrap();
             }
-            writeln!(s, "];").unwrap();
+            writeln!(s, "    ];").unwrap();
             writeln!(s, "    armor = {};", found.armor).unwrap();
             writeln!(s, "    holy_resistance = {};", found.holy_resistance).unwrap();
             writeln!(s, "    fire_resistance = {};", found.fire_resistance).unwrap();
@@ -477,21 +477,21 @@ impl crate::Message for SMSG_ITEM_QUERY_SINGLE_RESPONSE {
             writeln!(s, "    arcane_resistance = {};", found.arcane_resistance).unwrap();
             writeln!(s, "    delay = {};", found.delay).unwrap();
             writeln!(s, "    ammo_type = {};", found.ammo_type).unwrap();
-            writeln!(s, "    ranged_range_modification = {}", if found.ranged_range_modification.to_string().contains('.') { found.ranged_range_modification.to_string() } else { format!("{}.0", found.ranged_range_modification) }).unwrap();
-            write!(s, "    spells = [").unwrap();
+            writeln!(s, "    ranged_range_modification = {};", if found.ranged_range_modification.to_string().contains('.') { found.ranged_range_modification.to_string() } else { format!("{}.0", found.ranged_range_modification) }).unwrap();
+            writeln!(s, "    spells = [").unwrap();
             for v in found.spells.as_slice() {
-                writeln!(s, "{{").unwrap();
+                writeln!(s, "        {{").unwrap();
                 // Members
-                writeln!(s, "        spell = {};", v.spell).unwrap();
-                writeln!(s, "        spell_trigger = {};", v.spell_trigger.as_test_case_value()).unwrap();
-                writeln!(s, "        spell_charges = {};", v.spell_charges).unwrap();
-                writeln!(s, "        spell_cooldown = {};", v.spell_cooldown).unwrap();
-                writeln!(s, "        spell_category = {};", v.spell_category).unwrap();
-                writeln!(s, "        spell_category_cooldown = {};", v.spell_category_cooldown).unwrap();
+                writeln!(s, "            spell = {};", v.spell).unwrap();
+                writeln!(s, "            spell_trigger = {};", v.spell_trigger.as_test_case_value()).unwrap();
+                writeln!(s, "            spell_charges = {};", v.spell_charges).unwrap();
+                writeln!(s, "            spell_cooldown = {};", v.spell_cooldown).unwrap();
+                writeln!(s, "            spell_category = {};", v.spell_category).unwrap();
+                writeln!(s, "            spell_category_cooldown = {};", v.spell_category_cooldown).unwrap();
 
-                writeln!(s, "    }},").unwrap();
+                writeln!(s, "        }},").unwrap();
             }
-            writeln!(s, "];").unwrap();
+            writeln!(s, "    ];").unwrap();
             writeln!(s, "    bonding = {};", found.bonding.as_test_case_value()).unwrap();
             writeln!(s, "    description = \"{}\";", found.description).unwrap();
             writeln!(s, "    page_text = {};", found.page_text).unwrap();
@@ -509,20 +509,20 @@ impl crate::Message for SMSG_ITEM_QUERY_SINGLE_RESPONSE {
             writeln!(s, "    map = {};", found.map.as_test_case_value()).unwrap();
             writeln!(s, "    bag_family = {};", found.bag_family.as_test_case_value()).unwrap();
             writeln!(s, "    totem_category = {};", found.totem_category).unwrap();
-            write!(s, "    sockets = [").unwrap();
+            writeln!(s, "    sockets = [").unwrap();
             for v in found.sockets.as_slice() {
-                writeln!(s, "{{").unwrap();
+                writeln!(s, "        {{").unwrap();
                 // Members
-                writeln!(s, "        color = {};", v.color).unwrap();
-                writeln!(s, "        content = {};", v.content).unwrap();
+                writeln!(s, "            color = {};", v.color).unwrap();
+                writeln!(s, "            content = {};", v.content).unwrap();
 
-                writeln!(s, "    }},").unwrap();
+                writeln!(s, "        }},").unwrap();
             }
-            writeln!(s, "];").unwrap();
+            writeln!(s, "    ];").unwrap();
             writeln!(s, "    socket_bonus = {};", found.socket_bonus).unwrap();
             writeln!(s, "    gem_properties = {};", found.gem_properties).unwrap();
             writeln!(s, "    required_disenchant_skill = {};", found.required_disenchant_skill).unwrap();
-            writeln!(s, "    armor_damage_modifier = {}", if found.armor_damage_modifier.to_string().contains('.') { found.armor_damage_modifier.to_string() } else { format!("{}.0", found.armor_damage_modifier) }).unwrap();
+            writeln!(s, "    armor_damage_modifier = {};", if found.armor_damage_modifier.to_string().contains('.') { found.armor_damage_modifier.to_string() } else { format!("{}.0", found.armor_damage_modifier) }).unwrap();
             writeln!(s, "    duration = {};", found.duration.as_secs()).unwrap();
         }
 

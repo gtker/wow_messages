@@ -115,17 +115,17 @@ impl crate::Message for SMSG_LOOT_RESPONSE {
 
         writeln!(s, "    gold = {};", self.gold.as_int()).unwrap();
         writeln!(s, "    amount_of_items = {};", self.items.len()).unwrap();
-        write!(s, "    items = [").unwrap();
+        writeln!(s, "    items = [").unwrap();
         for v in self.items.as_slice() {
-            writeln!(s, "{{").unwrap();
+            writeln!(s, "        {{").unwrap();
             // Members
-            writeln!(s, "        index = {};", v.index).unwrap();
-            writeln!(s, "        item = {};", v.item).unwrap();
-            writeln!(s, "        ty = {};", v.ty.as_test_case_value()).unwrap();
+            writeln!(s, "            index = {};", v.index).unwrap();
+            writeln!(s, "            item = {};", v.item).unwrap();
+            writeln!(s, "            ty = {};", v.ty.as_test_case_value()).unwrap();
 
-            writeln!(s, "    }},").unwrap();
+            writeln!(s, "        }},").unwrap();
         }
-        writeln!(s, "];").unwrap();
+        writeln!(s, "    ];").unwrap();
 
         writeln!(s, "}} [").unwrap();
 

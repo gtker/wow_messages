@@ -72,17 +72,17 @@ impl crate::Message for CMSG_GMSURVEY_SUBMIT {
         writeln!(s, "test CMSG_GMSURVEY_SUBMIT {{").unwrap();
         // Members
         writeln!(s, "    survey_id = {};", self.survey_id).unwrap();
-        write!(s, "    questions = [").unwrap();
+        writeln!(s, "    questions = [").unwrap();
         for v in self.questions.as_slice() {
-            writeln!(s, "{{").unwrap();
+            writeln!(s, "        {{").unwrap();
             // Members
-            writeln!(s, "        question_id = {};", v.question_id).unwrap();
-            writeln!(s, "        answer = {};", v.answer).unwrap();
-            writeln!(s, "        comment = \"{}\";", v.comment).unwrap();
+            writeln!(s, "            question_id = {};", v.question_id).unwrap();
+            writeln!(s, "            answer = {};", v.answer).unwrap();
+            writeln!(s, "            comment = \"{}\";", v.comment).unwrap();
 
-            writeln!(s, "    }},").unwrap();
+            writeln!(s, "        }},").unwrap();
         }
-        writeln!(s, "];").unwrap();
+        writeln!(s, "    ];").unwrap();
         writeln!(s, "    answer_comment = \"{}\";", self.answer_comment).unwrap();
 
         writeln!(s, "}} [").unwrap();

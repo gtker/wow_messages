@@ -26,7 +26,7 @@ impl UpdateFlag {
         if self.is_empty() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "NONE").unwrap();
             first = false;
@@ -34,7 +34,7 @@ impl UpdateFlag {
         if self.is_self() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "SELF").unwrap();
             first = false;
@@ -42,7 +42,7 @@ impl UpdateFlag {
         if self.is_transport() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "TRANSPORT").unwrap();
             first = false;
@@ -50,7 +50,7 @@ impl UpdateFlag {
         if self.is_melee_attacking() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "MELEE_ATTACKING").unwrap();
             first = false;
@@ -58,7 +58,7 @@ impl UpdateFlag {
         if self.is_high_guid() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "HIGH_GUID").unwrap();
             first = false;
@@ -66,7 +66,7 @@ impl UpdateFlag {
         if self.is_all() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "ALL").unwrap();
             first = false;
@@ -74,7 +74,7 @@ impl UpdateFlag {
         if self.is_living() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "LIVING").unwrap();
             first = false;
@@ -82,7 +82,7 @@ impl UpdateFlag {
         if self.is_has_position() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "HAS_POSITION").unwrap();
             first = false;

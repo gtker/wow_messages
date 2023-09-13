@@ -141,16 +141,16 @@ impl crate::Message for CMSG_AUCTION_LIST_ITEMS {
         writeln!(s, "    usable = {};", self.usable).unwrap();
         writeln!(s, "    is_full = {};", self.is_full).unwrap();
         writeln!(s, "    amount_of_sorted_auctions = {};", self.sorted_auctions.len()).unwrap();
-        write!(s, "    sorted_auctions = [").unwrap();
+        writeln!(s, "    sorted_auctions = [").unwrap();
         for v in self.sorted_auctions.as_slice() {
-            writeln!(s, "{{").unwrap();
+            writeln!(s, "        {{").unwrap();
             // Members
-            writeln!(s, "        column = {};", v.column).unwrap();
-            writeln!(s, "        reversed = {};", v.reversed).unwrap();
+            writeln!(s, "            column = {};", v.column).unwrap();
+            writeln!(s, "            reversed = {};", v.reversed).unwrap();
 
-            writeln!(s, "    }},").unwrap();
+            writeln!(s, "        }},").unwrap();
         }
-        writeln!(s, "];").unwrap();
+        writeln!(s, "    ];").unwrap();
 
         writeln!(s, "}} [").unwrap();
 

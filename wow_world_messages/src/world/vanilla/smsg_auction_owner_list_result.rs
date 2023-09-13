@@ -66,28 +66,28 @@ impl crate::Message for SMSG_AUCTION_OWNER_LIST_RESULT {
         writeln!(s, "test SMSG_AUCTION_OWNER_LIST_RESULT {{").unwrap();
         // Members
         writeln!(s, "    count = {};", self.auctions.len()).unwrap();
-        write!(s, "    auctions = [").unwrap();
+        writeln!(s, "    auctions = [").unwrap();
         for v in self.auctions.as_slice() {
-            writeln!(s, "{{").unwrap();
+            writeln!(s, "        {{").unwrap();
             // Members
-            writeln!(s, "        id = {};", v.id).unwrap();
-            writeln!(s, "        item = {};", v.item).unwrap();
-            writeln!(s, "        item_enchantment = {};", v.item_enchantment).unwrap();
-            writeln!(s, "        item_random_property_id = {};", v.item_random_property_id).unwrap();
-            writeln!(s, "        item_suffix_factor = {};", v.item_suffix_factor).unwrap();
-            writeln!(s, "        item_count = {};", v.item_count).unwrap();
-            writeln!(s, "        item_charges = {};", v.item_charges).unwrap();
-            writeln!(s, "        item_owner = {};", v.item_owner.guid()).unwrap();
-            writeln!(s, "        start_bid = {};", v.start_bid).unwrap();
-            writeln!(s, "        minimum_bid = {};", v.minimum_bid).unwrap();
-            writeln!(s, "        buyout_amount = {};", v.buyout_amount).unwrap();
-            writeln!(s, "        time_left = {};", v.time_left.as_millis()).unwrap();
-            writeln!(s, "        highest_bidder = {};", v.highest_bidder.guid()).unwrap();
-            writeln!(s, "        highest_bid = {};", v.highest_bid).unwrap();
+            writeln!(s, "            id = {};", v.id).unwrap();
+            writeln!(s, "            item = {};", v.item).unwrap();
+            writeln!(s, "            item_enchantment = {};", v.item_enchantment).unwrap();
+            writeln!(s, "            item_random_property_id = {};", v.item_random_property_id).unwrap();
+            writeln!(s, "            item_suffix_factor = {};", v.item_suffix_factor).unwrap();
+            writeln!(s, "            item_count = {};", v.item_count).unwrap();
+            writeln!(s, "            item_charges = {};", v.item_charges).unwrap();
+            writeln!(s, "            item_owner = {};", v.item_owner.guid()).unwrap();
+            writeln!(s, "            start_bid = {};", v.start_bid).unwrap();
+            writeln!(s, "            minimum_bid = {};", v.minimum_bid).unwrap();
+            writeln!(s, "            buyout_amount = {};", v.buyout_amount).unwrap();
+            writeln!(s, "            time_left = {};", v.time_left.as_millis()).unwrap();
+            writeln!(s, "            highest_bidder = {};", v.highest_bidder.guid()).unwrap();
+            writeln!(s, "            highest_bid = {};", v.highest_bid).unwrap();
 
-            writeln!(s, "    }},").unwrap();
+            writeln!(s, "        }},").unwrap();
         }
-        writeln!(s, "];").unwrap();
+        writeln!(s, "    ];").unwrap();
         writeln!(s, "    total_amount_of_auctions = {};", self.total_amount_of_auctions).unwrap();
 
         writeln!(s, "}} [").unwrap();

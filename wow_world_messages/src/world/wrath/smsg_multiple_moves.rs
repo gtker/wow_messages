@@ -65,17 +65,17 @@ impl crate::Message for SMSG_MULTIPLE_MOVES {
 
         writeln!(s, "test SMSG_MULTIPLE_MOVES {{").unwrap();
         // Members
-        write!(s, "    moves = [").unwrap();
+        writeln!(s, "    moves = [").unwrap();
         for v in self.moves.as_slice() {
-            writeln!(s, "{{").unwrap();
+            writeln!(s, "        {{").unwrap();
             // Members
-            writeln!(s, "        opcode = {};", v.opcode.as_test_case_value()).unwrap();
-            writeln!(s, "        guid = {};", v.guid.guid()).unwrap();
-            writeln!(s, "        movement_counter = {};", v.movement_counter).unwrap();
+            writeln!(s, "            opcode = {};", v.opcode.as_test_case_value()).unwrap();
+            writeln!(s, "            guid = {};", v.guid.guid()).unwrap();
+            writeln!(s, "            movement_counter = {};", v.movement_counter).unwrap();
 
-            writeln!(s, "    }},").unwrap();
+            writeln!(s, "        }},").unwrap();
         }
-        writeln!(s, "];").unwrap();
+        writeln!(s, "    ];").unwrap();
 
         writeln!(s, "}} [").unwrap();
 

@@ -104,33 +104,33 @@ impl crate::Message for SMSG_TRADE_STATUS_EXTENDED {
         writeln!(s, "    trade_slot_count2 = {};", self.trade_slot_count2).unwrap();
         writeln!(s, "    money_in_trade = {};", self.money_in_trade.as_int()).unwrap();
         writeln!(s, "    spell_on_lowest_slot = {};", self.spell_on_lowest_slot).unwrap();
-        write!(s, "    trade_slots = [").unwrap();
+        writeln!(s, "    trade_slots = [").unwrap();
         for v in self.trade_slots.as_slice() {
-            writeln!(s, "{{").unwrap();
+            writeln!(s, "        {{").unwrap();
             // Members
-            writeln!(s, "        trade_slot_number = {};", v.trade_slot_number).unwrap();
-            writeln!(s, "        item = {};", v.item).unwrap();
-            writeln!(s, "        display_id = {};", v.display_id).unwrap();
-            writeln!(s, "        stack_count = {};", v.stack_count).unwrap();
-            writeln!(s, "        wrapped = {};", if v.wrapped { "TRUE" } else { "FALSE" }).unwrap();
-            writeln!(s, "        gift_wrapper = {};", v.gift_wrapper.guid()).unwrap();
-            writeln!(s, "        enchantment = {};", v.enchantment).unwrap();
-            write!(s, "        enchantments_slots = [").unwrap();
+            writeln!(s, "            trade_slot_number = {};", v.trade_slot_number).unwrap();
+            writeln!(s, "            item = {};", v.item).unwrap();
+            writeln!(s, "            display_id = {};", v.display_id).unwrap();
+            writeln!(s, "            stack_count = {};", v.stack_count).unwrap();
+            writeln!(s, "            wrapped = {};", if v.wrapped { "TRUE" } else { "FALSE" }).unwrap();
+            writeln!(s, "            gift_wrapper = {};", v.gift_wrapper.guid()).unwrap();
+            writeln!(s, "            enchantment = {};", v.enchantment).unwrap();
+            writeln!(s, "            enchantments_slots = [").unwrap();
             for v in v.enchantments_slots.as_slice() {
                 write!(s, "{v:#04X}, ").unwrap();
             }
-            writeln!(s, "];").unwrap();
-            writeln!(s, "        item_creator = {};", v.item_creator.guid()).unwrap();
-            writeln!(s, "        spell_charges = {};", v.spell_charges).unwrap();
-            writeln!(s, "        item_suffix_factor = {};", v.item_suffix_factor).unwrap();
-            writeln!(s, "        item_random_properties_id = {};", v.item_random_properties_id).unwrap();
-            writeln!(s, "        lock_id = {};", v.lock_id).unwrap();
-            writeln!(s, "        max_durability = {};", v.max_durability).unwrap();
-            writeln!(s, "        durability = {};", v.durability).unwrap();
+            writeln!(s, "            ];").unwrap();
+            writeln!(s, "            item_creator = {};", v.item_creator.guid()).unwrap();
+            writeln!(s, "            spell_charges = {};", v.spell_charges).unwrap();
+            writeln!(s, "            item_suffix_factor = {};", v.item_suffix_factor).unwrap();
+            writeln!(s, "            item_random_properties_id = {};", v.item_random_properties_id).unwrap();
+            writeln!(s, "            lock_id = {};", v.lock_id).unwrap();
+            writeln!(s, "            max_durability = {};", v.max_durability).unwrap();
+            writeln!(s, "            durability = {};", v.durability).unwrap();
 
-            writeln!(s, "    }},").unwrap();
+            writeln!(s, "        }},").unwrap();
         }
-        writeln!(s, "];").unwrap();
+        writeln!(s, "    ];").unwrap();
 
         writeln!(s, "}} [").unwrap();
 

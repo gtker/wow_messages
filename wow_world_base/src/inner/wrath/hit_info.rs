@@ -46,7 +46,7 @@ impl HitInfo {
         if self.is_empty() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "NORMALSWING").unwrap();
             first = false;
@@ -54,7 +54,7 @@ impl HitInfo {
         if self.is_unk1() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "UNK1").unwrap();
             first = false;
@@ -62,7 +62,7 @@ impl HitInfo {
         if self.is_affects_victim() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "AFFECTS_VICTIM").unwrap();
             first = false;
@@ -70,7 +70,7 @@ impl HitInfo {
         if self.is_offhand() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "OFFHAND").unwrap();
             first = false;
@@ -78,7 +78,7 @@ impl HitInfo {
         if self.is_unk2() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "UNK2").unwrap();
             first = false;
@@ -86,7 +86,7 @@ impl HitInfo {
         if self.is_miss() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "MISS").unwrap();
             first = false;
@@ -94,7 +94,7 @@ impl HitInfo {
         if self.is_full_absorb() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "FULL_ABSORB").unwrap();
             first = false;
@@ -102,7 +102,7 @@ impl HitInfo {
         if self.is_partial_absorb() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "PARTIAL_ABSORB").unwrap();
             first = false;
@@ -110,7 +110,7 @@ impl HitInfo {
         if self.is_all_absorb() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "ALL_ABSORB").unwrap();
             first = false;
@@ -118,7 +118,7 @@ impl HitInfo {
         if self.is_full_resist() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "FULL_RESIST").unwrap();
             first = false;
@@ -126,7 +126,7 @@ impl HitInfo {
         if self.is_partial_resist() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "PARTIAL_RESIST").unwrap();
             first = false;
@@ -134,7 +134,7 @@ impl HitInfo {
         if self.is_all_resist() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "ALL_RESIST").unwrap();
             first = false;
@@ -142,7 +142,7 @@ impl HitInfo {
         if self.is_criticalhit() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "CRITICALHIT").unwrap();
             first = false;
@@ -150,7 +150,7 @@ impl HitInfo {
         if self.is_unk10() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "UNK10").unwrap();
             first = false;
@@ -158,7 +158,7 @@ impl HitInfo {
         if self.is_unk11() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "UNK11").unwrap();
             first = false;
@@ -166,7 +166,7 @@ impl HitInfo {
         if self.is_unk12() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "UNK12").unwrap();
             first = false;
@@ -174,7 +174,7 @@ impl HitInfo {
         if self.is_block() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "BLOCK").unwrap();
             first = false;
@@ -182,7 +182,7 @@ impl HitInfo {
         if self.is_unk14() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "UNK14").unwrap();
             first = false;
@@ -190,7 +190,7 @@ impl HitInfo {
         if self.is_unk15() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "UNK15").unwrap();
             first = false;
@@ -198,7 +198,7 @@ impl HitInfo {
         if self.is_glancing() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "GLANCING").unwrap();
             first = false;
@@ -206,7 +206,7 @@ impl HitInfo {
         if self.is_crushing() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "CRUSHING").unwrap();
             first = false;
@@ -214,7 +214,7 @@ impl HitInfo {
         if self.is_no_animation() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "NO_ANIMATION").unwrap();
             first = false;
@@ -222,7 +222,7 @@ impl HitInfo {
         if self.is_unk19() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "UNK19").unwrap();
             first = false;
@@ -230,7 +230,7 @@ impl HitInfo {
         if self.is_unk20() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "UNK20").unwrap();
             first = false;
@@ -238,7 +238,7 @@ impl HitInfo {
         if self.is_swingnohitsound() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "SWINGNOHITSOUND").unwrap();
             first = false;
@@ -246,7 +246,7 @@ impl HitInfo {
         if self.is_unk22() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "UNK22").unwrap();
             first = false;
@@ -254,7 +254,7 @@ impl HitInfo {
         if self.is_rage_gain() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "RAGE_GAIN").unwrap();
             first = false;
@@ -262,7 +262,7 @@ impl HitInfo {
         if self.is_fake_damage() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "FAKE_DAMAGE").unwrap();
             first = false;

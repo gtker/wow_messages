@@ -60,16 +60,16 @@ impl crate::Message for SMSG_SET_FORCED_REACTIONS {
         writeln!(s, "test SMSG_SET_FORCED_REACTIONS {{").unwrap();
         // Members
         writeln!(s, "    amount_of_reactions = {};", self.reactions.len()).unwrap();
-        write!(s, "    reactions = [").unwrap();
+        writeln!(s, "    reactions = [").unwrap();
         for v in self.reactions.as_slice() {
-            writeln!(s, "{{").unwrap();
+            writeln!(s, "        {{").unwrap();
             // Members
-            writeln!(s, "        faction = {};", v.faction.as_test_case_value()).unwrap();
-            writeln!(s, "        reputation_rank = {};", v.reputation_rank).unwrap();
+            writeln!(s, "            faction = {};", v.faction.as_test_case_value()).unwrap();
+            writeln!(s, "            reputation_rank = {};", v.reputation_rank).unwrap();
 
-            writeln!(s, "    }},").unwrap();
+            writeln!(s, "        }},").unwrap();
         }
-        writeln!(s, "];").unwrap();
+        writeln!(s, "    ];").unwrap();
 
         writeln!(s, "}} [").unwrap();
 

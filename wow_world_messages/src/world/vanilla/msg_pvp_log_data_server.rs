@@ -92,26 +92,26 @@ impl crate::Message for MSG_PVP_LOG_DATA_Server {
         }
 
         writeln!(s, "    amount_of_players = {};", self.players.len()).unwrap();
-        write!(s, "    players = [").unwrap();
+        writeln!(s, "    players = [").unwrap();
         for v in self.players.as_slice() {
-            writeln!(s, "{{").unwrap();
+            writeln!(s, "        {{").unwrap();
             // Members
-            writeln!(s, "        player = {};", v.player.guid()).unwrap();
-            writeln!(s, "        rank = {};", v.rank.as_test_case_value()).unwrap();
-            writeln!(s, "        killing_blows = {};", v.killing_blows).unwrap();
-            writeln!(s, "        honorable_kills = {};", v.honorable_kills).unwrap();
-            writeln!(s, "        deaths = {};", v.deaths).unwrap();
-            writeln!(s, "        bonus_honor = {};", v.bonus_honor).unwrap();
-            writeln!(s, "        amount_of_extra_fields = {};", v.fields.len()).unwrap();
-            write!(s, "        fields = [").unwrap();
+            writeln!(s, "            player = {};", v.player.guid()).unwrap();
+            writeln!(s, "            rank = {};", v.rank.as_test_case_value()).unwrap();
+            writeln!(s, "            killing_blows = {};", v.killing_blows).unwrap();
+            writeln!(s, "            honorable_kills = {};", v.honorable_kills).unwrap();
+            writeln!(s, "            deaths = {};", v.deaths).unwrap();
+            writeln!(s, "            bonus_honor = {};", v.bonus_honor).unwrap();
+            writeln!(s, "            amount_of_extra_fields = {};", v.fields.len()).unwrap();
+            writeln!(s, "            fields = [").unwrap();
             for v in v.fields.as_slice() {
                 write!(s, "{v:#04X}, ").unwrap();
             }
-            writeln!(s, "];").unwrap();
+            writeln!(s, "            ];").unwrap();
 
-            writeln!(s, "    }},").unwrap();
+            writeln!(s, "        }},").unwrap();
         }
-        writeln!(s, "];").unwrap();
+        writeln!(s, "    ];").unwrap();
 
         writeln!(s, "}} [").unwrap();
 

@@ -150,16 +150,16 @@ impl crate::Message for CMSG_AUTH_SESSION {
         writeln!(s, "    battleground_id = {};", self.battleground_id).unwrap();
         writeln!(s, "    realm_id = {};", self.realm_id).unwrap();
         writeln!(s, "    dos_response = {};", self.dos_response).unwrap();
-        write!(s, "    client_proof = [").unwrap();
+        writeln!(s, "    client_proof = [").unwrap();
         for v in self.client_proof.as_slice() {
             write!(s, "{v:#04X}, ").unwrap();
         }
-        writeln!(s, "];").unwrap();
-        write!(s, "    addon_info = [").unwrap();
+        writeln!(s, "    ];").unwrap();
+        writeln!(s, "    addon_info = [").unwrap();
         for v in self.addon_info.as_slice() {
             write!(s, "{v:#04X}, ").unwrap();
         }
-        writeln!(s, "];").unwrap();
+        writeln!(s, "    ];").unwrap();
 
         writeln!(s, "}} [").unwrap();
 

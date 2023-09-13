@@ -61,31 +61,31 @@ impl crate::Message for MSG_GUILD_EVENT_LOG_QUERY_Server {
         writeln!(s, "test MSG_GUILD_EVENT_LOG_QUERY_Server {{").unwrap();
         // Members
         writeln!(s, "    amount_of_events = {};", self.events.len()).unwrap();
-        write!(s, "    events = [").unwrap();
+        writeln!(s, "    events = [").unwrap();
         for v in self.events.as_slice() {
-            writeln!(s, "{{").unwrap();
+            writeln!(s, "        {{").unwrap();
             // Members
-            writeln!(s, "        event = {};", GuildEvent::try_from(v.event.as_int()).unwrap().as_test_case_value()).unwrap();
-            writeln!(s, "        player1 = {};", v.player1.guid()).unwrap();
+            writeln!(s, "            event = {};", GuildEvent::try_from(v.event.as_int()).unwrap().as_test_case_value()).unwrap();
+            writeln!(s, "            player1 = {};", v.player1.guid()).unwrap();
             match &v.event {
                 crate::shared::guild_log_event_tbc_wrath::GuildLogEvent_GuildEvent::Joined {
                     player2,
                 } => {
-                    writeln!(s, "        player2 = {};", player2.guid()).unwrap();
+                    writeln!(s, "            player2 = {};", player2.guid()).unwrap();
                 }
                 crate::shared::guild_log_event_tbc_wrath::GuildLogEvent_GuildEvent::Left {
                     player2,
                 } => {
-                    writeln!(s, "        player2 = {};", player2.guid()).unwrap();
+                    writeln!(s, "            player2 = {};", player2.guid()).unwrap();
                 }
                 _ => {}
             }
 
-            writeln!(s, "        unix_time = {};", v.unix_time).unwrap();
+            writeln!(s, "            unix_time = {};", v.unix_time).unwrap();
 
-            writeln!(s, "    }},").unwrap();
+            writeln!(s, "        }},").unwrap();
         }
-        writeln!(s, "];").unwrap();
+        writeln!(s, "    ];").unwrap();
 
         writeln!(s, "}} [").unwrap();
 

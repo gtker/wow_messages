@@ -76,11 +76,11 @@ impl crate::Message for SMSG_GMRESPONSE_RECEIVED {
         writeln!(s, "    response_id = {};", self.response_id).unwrap();
         writeln!(s, "    ticket_id = {};", self.ticket_id).unwrap();
         writeln!(s, "    message = \"{}\";", self.message).unwrap();
-        write!(s, "    response = [").unwrap();
+        writeln!(s, "    response = [").unwrap();
         for v in self.response.as_slice() {
             write!(s, "\"{v}\", ").unwrap();
         }
-        writeln!(s, "];").unwrap();
+        writeln!(s, "    ];").unwrap();
 
         writeln!(s, "}} [").unwrap();
 

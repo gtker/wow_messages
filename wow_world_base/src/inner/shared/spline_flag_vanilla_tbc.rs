@@ -51,7 +51,7 @@ impl SplineFlag {
         if self.is_empty() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "NONE").unwrap();
             first = false;
@@ -59,7 +59,7 @@ impl SplineFlag {
         if self.is_done() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "DONE").unwrap();
             first = false;
@@ -67,7 +67,7 @@ impl SplineFlag {
         if self.is_falling() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "FALLING").unwrap();
             first = false;
@@ -75,7 +75,7 @@ impl SplineFlag {
         if self.is_unknown3() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "UNKNOWN3").unwrap();
             first = false;
@@ -83,7 +83,7 @@ impl SplineFlag {
         if self.is_unknown4() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "UNKNOWN4").unwrap();
             first = false;
@@ -91,7 +91,7 @@ impl SplineFlag {
         if self.is_unknown5() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "UNKNOWN5").unwrap();
             first = false;
@@ -99,7 +99,7 @@ impl SplineFlag {
         if self.is_unknown6() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "UNKNOWN6").unwrap();
             first = false;
@@ -107,7 +107,7 @@ impl SplineFlag {
         if self.is_unknown7() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "UNKNOWN7").unwrap();
             first = false;
@@ -115,7 +115,7 @@ impl SplineFlag {
         if self.is_unknown8() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "UNKNOWN8").unwrap();
             first = false;
@@ -123,7 +123,7 @@ impl SplineFlag {
         if self.is_run_mode() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "RUN_MODE").unwrap();
             first = false;
@@ -131,7 +131,7 @@ impl SplineFlag {
         if self.is_flying() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "FLYING").unwrap();
             first = false;
@@ -139,7 +139,7 @@ impl SplineFlag {
         if self.is_no_spline() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "NO_SPLINE").unwrap();
             first = false;
@@ -147,7 +147,7 @@ impl SplineFlag {
         if self.is_unknown12() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "UNKNOWN12").unwrap();
             first = false;
@@ -155,7 +155,7 @@ impl SplineFlag {
         if self.is_unknown13() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "UNKNOWN13").unwrap();
             first = false;
@@ -163,7 +163,7 @@ impl SplineFlag {
         if self.is_unknown14() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "UNKNOWN14").unwrap();
             first = false;
@@ -171,7 +171,7 @@ impl SplineFlag {
         if self.is_unknown15() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "UNKNOWN15").unwrap();
             first = false;
@@ -179,7 +179,7 @@ impl SplineFlag {
         if self.is_unknown16() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "UNKNOWN16").unwrap();
             first = false;
@@ -187,7 +187,7 @@ impl SplineFlag {
         if self.is_final_point() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "FINAL_POINT").unwrap();
             first = false;
@@ -195,7 +195,7 @@ impl SplineFlag {
         if self.is_final_target() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "FINAL_TARGET").unwrap();
             first = false;
@@ -203,7 +203,7 @@ impl SplineFlag {
         if self.is_final_angle() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "FINAL_ANGLE").unwrap();
             first = false;
@@ -211,7 +211,7 @@ impl SplineFlag {
         if self.is_unknown19() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "UNKNOWN19").unwrap();
             first = false;
@@ -219,7 +219,7 @@ impl SplineFlag {
         if self.is_cyclic() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "CYCLIC").unwrap();
             first = false;
@@ -227,7 +227,7 @@ impl SplineFlag {
         if self.is_enter_cycle() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "ENTER_CYCLE").unwrap();
             first = false;
@@ -235,7 +235,7 @@ impl SplineFlag {
         if self.is_frozen() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "FROZEN").unwrap();
             first = false;
@@ -243,7 +243,7 @@ impl SplineFlag {
         if self.is_unknown23() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "UNKNOWN23").unwrap();
             first = false;
@@ -251,7 +251,7 @@ impl SplineFlag {
         if self.is_unknown24() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "UNKNOWN24").unwrap();
             first = false;
@@ -259,7 +259,7 @@ impl SplineFlag {
         if self.is_unknown25() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "UNKNOWN25").unwrap();
             first = false;
@@ -267,7 +267,7 @@ impl SplineFlag {
         if self.is_unknown26() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "UNKNOWN26").unwrap();
             first = false;
@@ -275,7 +275,7 @@ impl SplineFlag {
         if self.is_unknown27() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "UNKNOWN27").unwrap();
             first = false;
@@ -283,7 +283,7 @@ impl SplineFlag {
         if self.is_unknown28() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "UNKNOWN28").unwrap();
             first = false;
@@ -291,7 +291,7 @@ impl SplineFlag {
         if self.is_unknown29() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "UNKNOWN29").unwrap();
             first = false;
@@ -299,7 +299,7 @@ impl SplineFlag {
         if self.is_unknown30() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "UNKNOWN30").unwrap();
             first = false;
@@ -307,7 +307,7 @@ impl SplineFlag {
         if self.is_unknown31() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "UNKNOWN31").unwrap();
             first = false;

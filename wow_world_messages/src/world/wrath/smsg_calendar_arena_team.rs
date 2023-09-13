@@ -60,16 +60,16 @@ impl crate::Message for SMSG_CALENDAR_ARENA_TEAM {
         writeln!(s, "test SMSG_CALENDAR_ARENA_TEAM {{").unwrap();
         // Members
         writeln!(s, "    amount_of_members = {};", self.members.len()).unwrap();
-        write!(s, "    members = [").unwrap();
+        writeln!(s, "    members = [").unwrap();
         for v in self.members.as_slice() {
-            writeln!(s, "{{").unwrap();
+            writeln!(s, "        {{").unwrap();
             // Members
-            writeln!(s, "        member = {};", v.member.guid()).unwrap();
-            writeln!(s, "        level = {};", v.level.as_int()).unwrap();
+            writeln!(s, "            member = {};", v.member.guid()).unwrap();
+            writeln!(s, "            level = {};", v.level.as_int()).unwrap();
 
-            writeln!(s, "    }},").unwrap();
+            writeln!(s, "        }},").unwrap();
         }
-        writeln!(s, "];").unwrap();
+        writeln!(s, "    ];").unwrap();
 
         writeln!(s, "}} [").unwrap();
 

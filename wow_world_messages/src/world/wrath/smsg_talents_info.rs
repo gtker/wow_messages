@@ -114,46 +114,46 @@ impl crate::Message for SMSG_TALENTS_INFO {
             } => {
                 writeln!(s, "    amount_of_specs = {};", specs.len()).unwrap();
                 writeln!(s, "    active_spec = {};", active_spec).unwrap();
-                write!(s, "    specs = [").unwrap();
+                writeln!(s, "    specs = [").unwrap();
                 for v in specs.as_slice() {
-                    writeln!(s, "{{").unwrap();
+                    writeln!(s, "        {{").unwrap();
                     // Members
-                    writeln!(s, "        amount_of_talents = {};", v.talents.len()).unwrap();
-                    write!(s, "        talents = [").unwrap();
+                    writeln!(s, "            amount_of_talents = {};", v.talents.len()).unwrap();
+                    writeln!(s, "            talents = [").unwrap();
                     for v in v.talents.as_slice() {
-                        writeln!(s, "{{").unwrap();
+                        writeln!(s, "                {{").unwrap();
                         // Members
-                        writeln!(s, "            talent = {};", v.talent.as_test_case_value()).unwrap();
-                        writeln!(s, "            max_rank = {};", v.max_rank).unwrap();
+                        writeln!(s, "                    talent = {};", v.talent.as_test_case_value()).unwrap();
+                        writeln!(s, "                    max_rank = {};", v.max_rank).unwrap();
 
-                        writeln!(s, "    }},").unwrap();
+                        writeln!(s, "                }},").unwrap();
                     }
-                    writeln!(s, "];").unwrap();
-                    writeln!(s, "        amount_of_glyphs = {};", v.glyphs.len()).unwrap();
-                    write!(s, "        glyphs = [").unwrap();
+                    writeln!(s, "            ];").unwrap();
+                    writeln!(s, "            amount_of_glyphs = {};", v.glyphs.len()).unwrap();
+                    writeln!(s, "            glyphs = [").unwrap();
                     for v in v.glyphs.as_slice() {
                         write!(s, "{v:#04X}, ").unwrap();
                     }
-                    writeln!(s, "];").unwrap();
+                    writeln!(s, "            ];").unwrap();
 
-                    writeln!(s, "    }},").unwrap();
+                    writeln!(s, "        }},").unwrap();
                 }
-                writeln!(s, "];").unwrap();
+                writeln!(s, "    ];").unwrap();
             }
             crate::wrath::SMSG_TALENTS_INFO_TalentInfoType::Pet {
                 talents,
             } => {
                 writeln!(s, "    amount_of_talents = {};", talents.len()).unwrap();
-                write!(s, "    talents = [").unwrap();
+                writeln!(s, "    talents = [").unwrap();
                 for v in talents.as_slice() {
-                    writeln!(s, "{{").unwrap();
+                    writeln!(s, "        {{").unwrap();
                     // Members
-                    writeln!(s, "        talent = {};", v.talent.as_test_case_value()).unwrap();
-                    writeln!(s, "        max_rank = {};", v.max_rank).unwrap();
+                    writeln!(s, "            talent = {};", v.talent.as_test_case_value()).unwrap();
+                    writeln!(s, "            max_rank = {};", v.max_rank).unwrap();
 
-                    writeln!(s, "    }},").unwrap();
+                    writeln!(s, "        }},").unwrap();
                 }
-                writeln!(s, "];").unwrap();
+                writeln!(s, "    ];").unwrap();
             }
         }
 

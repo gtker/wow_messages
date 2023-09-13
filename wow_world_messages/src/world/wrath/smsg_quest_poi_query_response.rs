@@ -58,16 +58,16 @@ impl crate::Message for SMSG_QUEST_POI_QUERY_RESPONSE {
         writeln!(s, "test SMSG_QUEST_POI_QUERY_RESPONSE {{").unwrap();
         // Members
         writeln!(s, "    amount_of_quests = {};", self.quests.len()).unwrap();
-        write!(s, "    quests = [").unwrap();
+        writeln!(s, "    quests = [").unwrap();
         for v in self.quests.as_slice() {
-            writeln!(s, "{{").unwrap();
+            writeln!(s, "        {{").unwrap();
             // Members
-            writeln!(s, "        quest_id = {};", v.quest_id).unwrap();
-            writeln!(s, "        amount_of_pois = {};", v.amount_of_pois).unwrap();
+            writeln!(s, "            quest_id = {};", v.quest_id).unwrap();
+            writeln!(s, "            amount_of_pois = {};", v.amount_of_pois).unwrap();
 
-            writeln!(s, "    }},").unwrap();
+            writeln!(s, "        }},").unwrap();
         }
-        writeln!(s, "];").unwrap();
+        writeln!(s, "    ];").unwrap();
 
         writeln!(s, "}} [").unwrap();
 

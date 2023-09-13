@@ -60,11 +60,11 @@ impl crate::Message for SMSG_SOCKET_GEMS_RESULT {
         writeln!(s, "test SMSG_SOCKET_GEMS_RESULT {{").unwrap();
         // Members
         writeln!(s, "    item = {};", self.item.guid()).unwrap();
-        write!(s, "    sockets = [").unwrap();
+        writeln!(s, "    sockets = [").unwrap();
         for v in self.sockets.as_slice() {
             write!(s, "{v:#04X}, ").unwrap();
         }
-        writeln!(s, "];").unwrap();
+        writeln!(s, "    ];").unwrap();
 
         writeln!(s, "}} [").unwrap();
 

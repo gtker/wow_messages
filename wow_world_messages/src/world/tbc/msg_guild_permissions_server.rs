@@ -82,16 +82,16 @@ impl crate::Message for MSG_GUILD_PERMISSIONS_Server {
         writeln!(s, "    rights = {};", self.rights).unwrap();
         writeln!(s, "    gold_limit_per_day = {};", self.gold_limit_per_day.as_int()).unwrap();
         writeln!(s, "    purchased_bank_tabs = {};", self.purchased_bank_tabs).unwrap();
-        write!(s, "    bank_tabs = [").unwrap();
+        writeln!(s, "    bank_tabs = [").unwrap();
         for v in self.bank_tabs.as_slice() {
-            writeln!(s, "{{").unwrap();
+            writeln!(s, "        {{").unwrap();
             // Members
-            writeln!(s, "        flags = {};", v.flags).unwrap();
-            writeln!(s, "        stacks_per_day = {};", v.stacks_per_day).unwrap();
+            writeln!(s, "            flags = {};", v.flags).unwrap();
+            writeln!(s, "            stacks_per_day = {};", v.stacks_per_day).unwrap();
 
-            writeln!(s, "    }},").unwrap();
+            writeln!(s, "        }},").unwrap();
         }
-        writeln!(s, "];").unwrap();
+        writeln!(s, "    ];").unwrap();
 
         writeln!(s, "}} [").unwrap();
 

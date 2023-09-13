@@ -38,7 +38,7 @@ impl GroupUpdateFlags {
         if self.is_empty() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "NONE").unwrap();
             first = false;
@@ -46,7 +46,7 @@ impl GroupUpdateFlags {
         if self.is_status() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "STATUS").unwrap();
             first = false;
@@ -54,7 +54,7 @@ impl GroupUpdateFlags {
         if self.is_cur_hp() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "CUR_HP").unwrap();
             first = false;
@@ -62,7 +62,7 @@ impl GroupUpdateFlags {
         if self.is_max_hp() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "MAX_HP").unwrap();
             first = false;
@@ -70,7 +70,7 @@ impl GroupUpdateFlags {
         if self.is_power_type() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "POWER_TYPE").unwrap();
             first = false;
@@ -78,7 +78,7 @@ impl GroupUpdateFlags {
         if self.is_cur_power() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "CUR_POWER").unwrap();
             first = false;
@@ -86,7 +86,7 @@ impl GroupUpdateFlags {
         if self.is_max_power() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "MAX_POWER").unwrap();
             first = false;
@@ -94,7 +94,7 @@ impl GroupUpdateFlags {
         if self.is_level() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "LEVEL").unwrap();
             first = false;
@@ -102,7 +102,7 @@ impl GroupUpdateFlags {
         if self.is_zone() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "ZONE").unwrap();
             first = false;
@@ -110,7 +110,7 @@ impl GroupUpdateFlags {
         if self.is_position() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "POSITION").unwrap();
             first = false;
@@ -118,7 +118,7 @@ impl GroupUpdateFlags {
         if self.is_auras() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "AURAS").unwrap();
             first = false;
@@ -126,7 +126,7 @@ impl GroupUpdateFlags {
         if self.is_pet_guid() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "PET_GUID").unwrap();
             first = false;
@@ -134,7 +134,7 @@ impl GroupUpdateFlags {
         if self.is_pet_name() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "PET_NAME").unwrap();
             first = false;
@@ -142,7 +142,7 @@ impl GroupUpdateFlags {
         if self.is_pet_model_id() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "PET_MODEL_ID").unwrap();
             first = false;
@@ -150,7 +150,7 @@ impl GroupUpdateFlags {
         if self.is_pet_cur_hp() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "PET_CUR_HP").unwrap();
             first = false;
@@ -158,7 +158,7 @@ impl GroupUpdateFlags {
         if self.is_pet_max_hp() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "PET_MAX_HP").unwrap();
             first = false;
@@ -166,7 +166,7 @@ impl GroupUpdateFlags {
         if self.is_pet_power_type() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "PET_POWER_TYPE").unwrap();
             first = false;
@@ -174,7 +174,7 @@ impl GroupUpdateFlags {
         if self.is_pet_cur_power() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "PET_CUR_POWER").unwrap();
             first = false;
@@ -182,7 +182,7 @@ impl GroupUpdateFlags {
         if self.is_pet_max_power() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "PET_MAX_POWER").unwrap();
             first = false;
@@ -190,7 +190,7 @@ impl GroupUpdateFlags {
         if self.is_pet_auras() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "PET_AURAS").unwrap();
             first = false;

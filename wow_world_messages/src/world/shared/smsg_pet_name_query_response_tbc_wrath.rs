@@ -98,11 +98,11 @@ impl crate::Message for SMSG_PET_NAME_QUERY_RESPONSE {
             crate::shared::smsg_pet_name_query_response_tbc_wrath::SMSG_PET_NAME_QUERY_RESPONSE_PetQueryDisabledNames::Present {
                 declined_names,
             } => {
-                write!(s, "    declined_names = [").unwrap();
+                writeln!(s, "    declined_names = [").unwrap();
                 for v in declined_names.as_slice() {
                     write!(s, "\"{v}\", ").unwrap();
                 }
-                writeln!(s, "];").unwrap();
+                writeln!(s, "    ];").unwrap();
             }
             _ => {}
         }

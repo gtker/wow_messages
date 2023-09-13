@@ -24,7 +24,7 @@ impl CharacterFlags {
         if self.is_empty() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "NONE").unwrap();
             first = false;
@@ -32,7 +32,7 @@ impl CharacterFlags {
         if self.is_locked_for_transfer() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "LOCKED_FOR_TRANSFER").unwrap();
             first = false;
@@ -40,7 +40,7 @@ impl CharacterFlags {
         if self.is_hide_helm() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "HIDE_HELM").unwrap();
             first = false;
@@ -48,7 +48,7 @@ impl CharacterFlags {
         if self.is_hide_cloak() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "HIDE_CLOAK").unwrap();
             first = false;
@@ -56,7 +56,7 @@ impl CharacterFlags {
         if self.is_ghost() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "GHOST").unwrap();
             first = false;
@@ -64,7 +64,7 @@ impl CharacterFlags {
         if self.is_rename() {
             use std::fmt::Write;
             if !first {
-                write!(s, "| ").unwrap();
+                write!(s, " | ").unwrap();
             }
             write!(s, "RENAME").unwrap();
             first = false;
