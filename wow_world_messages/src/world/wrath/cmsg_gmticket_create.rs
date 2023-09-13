@@ -70,7 +70,7 @@ impl CMSG_GMTICKET_CREATE {
         let compressed_data = {
             let compressed_data_decompressed_size = crate::util::read_u32_le(&mut r)?;
 
-            let mut decoder = &mut flate2::read::ZlibDecoder::new(r);
+            let mut decoder = &mut flate2::read::ZlibDecoder::new_with_buf(r, vec![0_u8; compressed_data_decompressed_size as usize]);
 
             let mut current_size = {
                 4 // map: Map

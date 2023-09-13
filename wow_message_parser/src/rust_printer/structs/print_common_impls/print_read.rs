@@ -78,7 +78,7 @@ fn print_read_array(
                 ));
                 s.newline();
 
-                s.wln("let mut decoder = &mut flate2::read::ZlibDecoder::new(r);");
+                s.wln(format!("let mut decoder = &mut flate2::read::ZlibDecoder::new_with_buf(r, vec![0_u8; {name}_decompressed_size as usize]);"));
                 s.newline();
             }
 
