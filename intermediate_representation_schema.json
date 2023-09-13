@@ -505,6 +505,9 @@
                       "ref": "test_case_member"
                     }
                   }
+                },
+                "size": {
+                  "ref": "array_size"
                 }
               }
             }
@@ -553,6 +556,20 @@
           }
         },
         "Milliseconds": {
+          "properties": {
+            "content": {
+              "ref": "value"
+            }
+          }
+        },
+        "Gold": {
+          "properties": {
+            "content": {
+              "ref": "value"
+            }
+          }
+        },
+        "Level": {
           "properties": {
             "content": {
               "ref": "value"

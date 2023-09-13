@@ -45,6 +45,29 @@ SMSG have a header of 4 bytes.
 | - | 4 / Little | u32 | spell_id |  | vmangos: spell id, seen with heroic strike and disarm as examples |
 | - | 4 / Little | u32 | blocked_amount |  |  |
 
+### Examples
+
+#### Example 1
+
+```c
+0, 51, // size
+74, 1, // opcode (330)
+128, 0, 0, 0, // hit_info: HitInfo CRITICAL_HIT (0x00000080)
+1, 23, // attacker: PackedGuid
+1, 100, // target: PackedGuid
+57, 5, 0, 0, // total_damage: u32
+1, // amount_of_damages: u8
+0, 0, 0, 0, // [0].DamageInfo.spell_school_mask: u32
+0, 128, 166, 68, // [0].DamageInfo.damage_float: f32
+52, 5, 0, 0, // [0].DamageInfo.damage_uint: u32
+0, 0, 0, 0, // [0].DamageInfo.absorb: u32
+0, 0, 0, 0, // [0].DamageInfo.resist: u32
+// damages: DamageInfo[amount_of_damages]
+0, 0, 0, 0, // damage_state: u32
+0, 0, 0, 0, // unknown1: u32
+0, 0, 0, 0, // spell_id: u32
+0, 0, 0, 0, // blocked_amount: u32
+```
 ## Client Version 2.4.3
 
 ### Wowm Representation

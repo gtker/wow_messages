@@ -62,3 +62,14 @@ SMSG have a header of 4 bytes.
 | - | - / - | [PackedGuid](../types/packed-guid.md) | enemy |  |  |
 | - | 4 / Little | u32 | unknown1 |  | cmangos/vmangos/mangoszero/arcemu/azerothcore/mangostwo: set to 0 with comment: unk, can be 1 also |
 
+### Examples
+
+#### Example 1
+
+```c
+0, 10, // size
+68, 1, // opcode (324)
+1, 23, // player: PackedGuid
+1, 100, // enemy: PackedGuid
+0, 0, 0, 0, // unknown1: u32
+```

@@ -307,6 +307,14 @@ impl RustObject {
             }
         }
 
+        if let Some(optional) = self.optional() {
+            for m in optional.members() {
+                if let Some(m) = inner(m, name) {
+                    return m;
+                }
+            }
+        }
+
         unreachable!()
     }
     pub fn new(

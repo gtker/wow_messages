@@ -29,3 +29,13 @@ SMSG have a header of 4 bytes.
 | 0x04 | 8 / Little | [Guid](../types/packed-guid.md) | attacker |  |  |
 | 0x0C | 8 / Little | [Guid](../types/packed-guid.md) | victim |  |  |
 
+### Examples
+
+#### Example 1
+
+```c
+0, 18, // size
+67, 1, // opcode (323)
+23, 0, 0, 0, 0, 0, 0, 0, // attacker: Guid
+100, 0, 0, 0, 0, 0, 0, 0, // victim: Guid
+```

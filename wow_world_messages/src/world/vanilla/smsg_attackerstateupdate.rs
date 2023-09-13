@@ -100,79 +100,6 @@ impl crate::Message for SMSG_ATTACKERSTATEUPDATE {
         "SMSG_ATTACKERSTATEUPDATE"
     }
 
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        use std::fmt::Write;
-        use crate::traits::Message;
-
-        let mut s = String::new();
-
-        writeln!(s, "test SMSG_ATTACKERSTATEUPDATE {{").unwrap();
-        // Members
-        writeln!(s, "    hit_info = {};", self.hit_info.as_test_case_value()).unwrap();
-        writeln!(s, "    attacker = {};", self.attacker.guid()).unwrap();
-        writeln!(s, "    target = {};", self.target.guid()).unwrap();
-        writeln!(s, "    total_damage = {};", self.total_damage).unwrap();
-        writeln!(s, "    amount_of_damages = {};", self.damages.len()).unwrap();
-        writeln!(s, "    damages = [").unwrap();
-        for v in self.damages.as_slice() {
-            writeln!(s, "        {{").unwrap();
-            // Members
-            writeln!(s, "            spell_school_mask = {};", v.spell_school_mask).unwrap();
-            writeln!(s, "            damage_float = {};", if v.damage_float.to_string().contains('.') { v.damage_float.to_string() } else { format!("{}.0", v.damage_float) }).unwrap();
-            writeln!(s, "            damage_uint = {};", v.damage_uint).unwrap();
-            writeln!(s, "            absorb = {};", v.absorb).unwrap();
-            writeln!(s, "            resist = {};", v.resist).unwrap();
-
-            writeln!(s, "        }},").unwrap();
-        }
-        writeln!(s, "    ];").unwrap();
-        writeln!(s, "    damage_state = {};", self.damage_state).unwrap();
-        writeln!(s, "    unknown1 = {};", self.unknown1).unwrap();
-        writeln!(s, "    spell_id = {};", self.spell_id).unwrap();
-        writeln!(s, "    blocked_amount = {};", self.blocked_amount).unwrap();
-
-        writeln!(s, "}} [").unwrap();
-
-        let [a, b] = (u16::try_from(self.size() + 2).unwrap()).to_be_bytes();
-        writeln!(s, "    {a:#04X}, {b:#04X}, /* size */").unwrap();
-        let [a, b] = 330_u16.to_le_bytes();
-        writeln!(s, "    {a:#04X}, {b:#04X}, /* opcode */").unwrap();
-        let mut bytes: Vec<u8> = Vec::new();
-        self.write_into_vec(&mut bytes).unwrap();
-        let mut bytes = bytes.into_iter();
-
-        crate::util::write_bytes(&mut s, &mut bytes, 4, "hit_info", "    ");
-        crate::util::write_bytes(&mut s, &mut bytes, crate::util::packed_guid_size(&self.attacker), "attacker", "    ");
-        crate::util::write_bytes(&mut s, &mut bytes, crate::util::packed_guid_size(&self.target), "target", "    ");
-        crate::util::write_bytes(&mut s, &mut bytes, 4, "total_damage", "    ");
-        crate::util::write_bytes(&mut s, &mut bytes, 1, "amount_of_damages", "    ");
-        if !self.damages.is_empty() {
-            writeln!(s, "    /* damages: DamageInfo[amount_of_damages] start */").unwrap();
-            for (i, v) in self.damages.iter().enumerate() {
-                writeln!(s, "    /* damages: DamageInfo[amount_of_damages] {i} start */").unwrap();
-                crate::util::write_bytes(&mut s, &mut bytes, 4, "spell_school_mask", "        ");
-                crate::util::write_bytes(&mut s, &mut bytes, 4, "damage_float", "        ");
-                crate::util::write_bytes(&mut s, &mut bytes, 4, "damage_uint", "        ");
-                crate::util::write_bytes(&mut s, &mut bytes, 4, "absorb", "        ");
-                crate::util::write_bytes(&mut s, &mut bytes, 4, "resist", "        ");
-                writeln!(s, "    /* damages: DamageInfo[amount_of_damages] {i} end */").unwrap();
-            }
-            writeln!(s, "    /* damages: DamageInfo[amount_of_damages] end */").unwrap();
-        }
-        crate::util::write_bytes(&mut s, &mut bytes, 4, "damage_state", "    ");
-        crate::util::write_bytes(&mut s, &mut bytes, 4, "unknown1", "    ");
-        crate::util::write_bytes(&mut s, &mut bytes, 4, "spell_id", "    ");
-        crate::util::write_bytes(&mut s, &mut bytes, 4, "blocked_amount", "    ");
-
-
-        writeln!(s, "] {{").unwrap();
-        writeln!(s, "    versions = \"{}\";", std::env::var("WOWM_TEST_CASE_WORLD_VERSION").unwrap_or("1.12".to_string())).unwrap();
-        writeln!(s, "}}\n").unwrap();
-
-        Some(s)
-    }
-
     fn size_without_header(&self) -> u32 {
         self.size() as u32
     }
@@ -235,5 +162,119 @@ impl SMSG_ATTACKERSTATEUPDATE {
         + 4 // spell_id: u32
         + 4 // blocked_amount: u32
     }
+}
+
+#[cfg(test)]
+mod test {
+    #![allow(clippy::missing_const_for_fn)]
+    use super::SMSG_ATTACKERSTATEUPDATE;
+    use super::*;
+    use super::super::*;
+    use crate::vanilla::opcodes::ServerOpcodeMessage;
+    use crate::Guid;
+    use crate::vanilla::{ClientMessage, ServerMessage};
+
+    const HEADER_SIZE: usize = 2 + 2;
+    fn assert(t: &SMSG_ATTACKERSTATEUPDATE, expected: &SMSG_ATTACKERSTATEUPDATE) {
+        assert_eq!(t.hit_info, expected.hit_info);
+        assert_eq!(t.attacker, expected.attacker);
+        assert_eq!(t.target, expected.target);
+        assert_eq!(t.total_damage, expected.total_damage);
+        assert_eq!(t.damages, expected.damages);
+        assert_eq!(t.damage_state, expected.damage_state);
+        assert_eq!(t.unknown1, expected.unknown1);
+        assert_eq!(t.spell_id, expected.spell_id);
+        assert_eq!(t.blocked_amount, expected.blocked_amount);
+    }
+
+    const RAW0: [u8; 53] = [ 0x00, 0x33, 0x4A, 0x01, 0x80, 0x00, 0x00, 0x00, 0x01,
+         0x17, 0x01, 0x64, 0x39, 0x05, 0x00, 0x00, 0x01, 0x00, 0x00, 0x00, 0x00,
+         0x00, 0x80, 0xA6, 0x44, 0x34, 0x05, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+         0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+         0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, ];
+
+    pub(crate) fn expected0() -> SMSG_ATTACKERSTATEUPDATE {
+        SMSG_ATTACKERSTATEUPDATE {
+            hit_info: HitInfo::CriticalHit,
+            attacker: Guid::new(0x17),
+            target: Guid::new(0x64),
+            total_damage: 0x539,
+            damages: vec![
+                DamageInfo {
+                    spell_school_mask: 0x0,
+                    damage_float: 1332_f32,
+                    damage_uint: 0x534,
+                    absorb: 0x0,
+                    resist: 0x0,
+                },
+            ],
+            damage_state: 0x0,
+            unknown1: 0x0,
+            spell_id: 0x0,
+            blocked_amount: 0x0,
+        }
+
+    }
+
+    // Generated from `wow_message_parser/wowm/world/combat/smsg_attackerstateupdate.wowm` line 68.
+    #[cfg(feature = "sync")]
+    #[cfg_attr(feature = "sync", test)]
+    fn smsg_attackerstateupdate0() {
+        let expected = expected0();
+        let t = ServerOpcodeMessage::read_unencrypted(&mut std::io::Cursor::new(&RAW0)).unwrap();
+        let t = match t {
+            ServerOpcodeMessage::SMSG_ATTACKERSTATEUPDATE(t) => t,
+            opcode => panic!("incorrect opcode. Expected SMSG_ATTACKERSTATEUPDATE, got {opcode:#?}"),
+        };
+
+        assert(&t, &expected);
+        assert_eq!(t.size() + HEADER_SIZE, RAW0.len());
+
+        let mut dest = Vec::with_capacity(RAW0.len());
+        expected.write_unencrypted_server(&mut std::io::Cursor::new(&mut dest)).unwrap();
+
+        assert_eq!(dest, RAW0);
+    }
+
+    // Generated from `wow_message_parser/wowm/world/combat/smsg_attackerstateupdate.wowm` line 68.
+    #[cfg(feature = "tokio")]
+    #[cfg_attr(feature = "tokio", tokio::test)]
+    async fn tokio_smsg_attackerstateupdate0() {
+        let expected = expected0();
+        let t = ServerOpcodeMessage::tokio_read_unencrypted(&mut std::io::Cursor::new(&RAW0)).await.unwrap();
+        let t = match t {
+            ServerOpcodeMessage::SMSG_ATTACKERSTATEUPDATE(t) => t,
+            opcode => panic!("incorrect opcode. Expected SMSG_ATTACKERSTATEUPDATE, got {opcode:#?}"),
+        };
+
+        assert(&t, &expected);
+        assert_eq!(t.size() + HEADER_SIZE, RAW0.len());
+
+        let mut dest = Vec::with_capacity(RAW0.len());
+        expected.tokio_write_unencrypted_server(&mut std::io::Cursor::new(&mut dest)).await.unwrap();
+
+        assert_eq!(dest, RAW0);
+    }
+
+    // Generated from `wow_message_parser/wowm/world/combat/smsg_attackerstateupdate.wowm` line 68.
+    #[cfg(feature = "async-std")]
+    #[cfg_attr(feature = "async-std", async_std::test)]
+    async fn astd_smsg_attackerstateupdate0() {
+        let expected = expected0();
+        let t = ServerOpcodeMessage::astd_read_unencrypted(&mut async_std::io::Cursor::new(&RAW0)).await.unwrap();
+        let t = match t {
+            ServerOpcodeMessage::SMSG_ATTACKERSTATEUPDATE(t) => t,
+            opcode => panic!("incorrect opcode. Expected SMSG_ATTACKERSTATEUPDATE, got {opcode:#?}"),
+        };
+
+        assert(&t, &expected);
+        assert_eq!(t.size() + HEADER_SIZE, RAW0.len());
+
+        let mut dest = Vec::with_capacity(RAW0.len());
+        expected.astd_write_unencrypted_server(&mut async_std::io::Cursor::new(&mut dest)).await.unwrap();
+
+        assert_eq!(dest, RAW0);
+    }
+
 }
 

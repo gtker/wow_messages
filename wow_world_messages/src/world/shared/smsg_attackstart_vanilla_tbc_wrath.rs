@@ -44,39 +44,6 @@ impl crate::Message for SMSG_ATTACKSTART {
         "SMSG_ATTACKSTART"
     }
 
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        use std::fmt::Write;
-        use crate::traits::Message;
-
-        let mut s = String::new();
-
-        writeln!(s, "test SMSG_ATTACKSTART {{").unwrap();
-        // Members
-        writeln!(s, "    attacker = {};", self.attacker.guid()).unwrap();
-        writeln!(s, "    victim = {};", self.victim.guid()).unwrap();
-
-        writeln!(s, "}} [").unwrap();
-
-        let [a, b] = 18_u16.to_be_bytes();
-        writeln!(s, "    {a:#04X}, {b:#04X}, /* size */").unwrap();
-        let [a, b] = 323_u16.to_le_bytes();
-        writeln!(s, "    {a:#04X}, {b:#04X}, /* opcode */").unwrap();
-        let mut bytes: Vec<u8> = Vec::new();
-        self.write_into_vec(&mut bytes).unwrap();
-        let mut bytes = bytes.into_iter();
-
-        crate::util::write_bytes(&mut s, &mut bytes, 8, "attacker", "    ");
-        crate::util::write_bytes(&mut s, &mut bytes, 8, "victim", "    ");
-
-
-        writeln!(s, "] {{").unwrap();
-        writeln!(s, "    versions = \"{}\";", std::env::var("WOWM_TEST_CASE_WORLD_VERSION").unwrap_or("1 2 3".to_string())).unwrap();
-        writeln!(s, "}}\n").unwrap();
-
-        Some(s)
-    }
-
     fn size_without_header(&self) -> u32 {
         16
     }
@@ -105,4 +72,271 @@ impl crate::tbc::ServerMessage for SMSG_ATTACKSTART {}
 
 #[cfg(feature = "wrath")]
 impl crate::wrath::ServerMessage for SMSG_ATTACKSTART {}
+
+#[cfg(all(feature = "vanilla", test))]
+mod test_vanilla {
+    #![allow(clippy::missing_const_for_fn)]
+    use super::SMSG_ATTACKSTART;
+    use super::*;
+    use super::super::*;
+    use crate::vanilla::opcodes::ServerOpcodeMessage;
+    use crate::Guid;
+    use crate::vanilla::{ClientMessage, ServerMessage};
+
+    const HEADER_SIZE: usize = 2 + 2;
+    fn assert(t: &SMSG_ATTACKSTART, expected: &SMSG_ATTACKSTART) {
+        assert_eq!(t.attacker, expected.attacker);
+        assert_eq!(t.victim, expected.victim);
+    }
+
+    const RAW0: [u8; 20] = [ 0x00, 0x12, 0x43, 0x01, 0x17, 0x00, 0x00, 0x00, 0x00,
+         0x00, 0x00, 0x00, 0x64, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, ];
+
+    pub(crate) fn expected0() -> SMSG_ATTACKSTART {
+        SMSG_ATTACKSTART {
+            attacker: Guid::new(0x17),
+            victim: Guid::new(0x64),
+        }
+
+    }
+
+    // Generated from `wow_message_parser/wowm/world/combat/smsg_attackstart.wowm` line 9.
+    #[cfg(feature = "sync")]
+    #[cfg_attr(feature = "sync", test)]
+    fn smsg_attackstart0() {
+        let expected = expected0();
+        let t = ServerOpcodeMessage::read_unencrypted(&mut std::io::Cursor::new(&RAW0)).unwrap();
+        let t = match t {
+            ServerOpcodeMessage::SMSG_ATTACKSTART(t) => t,
+            opcode => panic!("incorrect opcode. Expected SMSG_ATTACKSTART, got {opcode:#?}"),
+        };
+
+        assert(&t, &expected);
+        assert_eq!(16 + HEADER_SIZE, RAW0.len());
+
+        let mut dest = Vec::with_capacity(RAW0.len());
+        expected.write_unencrypted_server(&mut std::io::Cursor::new(&mut dest)).unwrap();
+
+        assert_eq!(dest, RAW0);
+    }
+
+    // Generated from `wow_message_parser/wowm/world/combat/smsg_attackstart.wowm` line 9.
+    #[cfg(feature = "tokio")]
+    #[cfg_attr(feature = "tokio", tokio::test)]
+    async fn tokio_smsg_attackstart0() {
+        let expected = expected0();
+        let t = ServerOpcodeMessage::tokio_read_unencrypted(&mut std::io::Cursor::new(&RAW0)).await.unwrap();
+        let t = match t {
+            ServerOpcodeMessage::SMSG_ATTACKSTART(t) => t,
+            opcode => panic!("incorrect opcode. Expected SMSG_ATTACKSTART, got {opcode:#?}"),
+        };
+
+        assert(&t, &expected);
+        assert_eq!(16 + HEADER_SIZE, RAW0.len());
+
+        let mut dest = Vec::with_capacity(RAW0.len());
+        expected.tokio_write_unencrypted_server(&mut std::io::Cursor::new(&mut dest)).await.unwrap();
+
+        assert_eq!(dest, RAW0);
+    }
+
+    // Generated from `wow_message_parser/wowm/world/combat/smsg_attackstart.wowm` line 9.
+    #[cfg(feature = "async-std")]
+    #[cfg_attr(feature = "async-std", async_std::test)]
+    async fn astd_smsg_attackstart0() {
+        let expected = expected0();
+        let t = ServerOpcodeMessage::astd_read_unencrypted(&mut async_std::io::Cursor::new(&RAW0)).await.unwrap();
+        let t = match t {
+            ServerOpcodeMessage::SMSG_ATTACKSTART(t) => t,
+            opcode => panic!("incorrect opcode. Expected SMSG_ATTACKSTART, got {opcode:#?}"),
+        };
+
+        assert(&t, &expected);
+        assert_eq!(16 + HEADER_SIZE, RAW0.len());
+
+        let mut dest = Vec::with_capacity(RAW0.len());
+        expected.astd_write_unencrypted_server(&mut async_std::io::Cursor::new(&mut dest)).await.unwrap();
+
+        assert_eq!(dest, RAW0);
+    }
+
+}
+
+#[cfg(all(feature = "tbc", test))]
+mod test_tbc {
+    #![allow(clippy::missing_const_for_fn)]
+    use super::SMSG_ATTACKSTART;
+    use super::*;
+    use super::super::*;
+    use crate::tbc::opcodes::ServerOpcodeMessage;
+    use crate::Guid;
+    use crate::tbc::{ClientMessage, ServerMessage};
+
+    const HEADER_SIZE: usize = 2 + 2;
+    fn assert(t: &SMSG_ATTACKSTART, expected: &SMSG_ATTACKSTART) {
+        assert_eq!(t.attacker, expected.attacker);
+        assert_eq!(t.victim, expected.victim);
+    }
+
+    const RAW0: [u8; 20] = [ 0x00, 0x12, 0x43, 0x01, 0x17, 0x00, 0x00, 0x00, 0x00,
+         0x00, 0x00, 0x00, 0x64, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, ];
+
+    pub(crate) fn expected0() -> SMSG_ATTACKSTART {
+        SMSG_ATTACKSTART {
+            attacker: Guid::new(0x17),
+            victim: Guid::new(0x64),
+        }
+
+    }
+
+    // Generated from `wow_message_parser/wowm/world/combat/smsg_attackstart.wowm` line 9.
+    #[cfg(feature = "sync")]
+    #[cfg_attr(feature = "sync", test)]
+    fn smsg_attackstart0() {
+        let expected = expected0();
+        let t = ServerOpcodeMessage::read_unencrypted(&mut std::io::Cursor::new(&RAW0)).unwrap();
+        let t = match t {
+            ServerOpcodeMessage::SMSG_ATTACKSTART(t) => t,
+            opcode => panic!("incorrect opcode. Expected SMSG_ATTACKSTART, got {opcode:#?}"),
+        };
+
+        assert(&t, &expected);
+        assert_eq!(16 + HEADER_SIZE, RAW0.len());
+
+        let mut dest = Vec::with_capacity(RAW0.len());
+        expected.write_unencrypted_server(&mut std::io::Cursor::new(&mut dest)).unwrap();
+
+        assert_eq!(dest, RAW0);
+    }
+
+    // Generated from `wow_message_parser/wowm/world/combat/smsg_attackstart.wowm` line 9.
+    #[cfg(feature = "tokio")]
+    #[cfg_attr(feature = "tokio", tokio::test)]
+    async fn tokio_smsg_attackstart0() {
+        let expected = expected0();
+        let t = ServerOpcodeMessage::tokio_read_unencrypted(&mut std::io::Cursor::new(&RAW0)).await.unwrap();
+        let t = match t {
+            ServerOpcodeMessage::SMSG_ATTACKSTART(t) => t,
+            opcode => panic!("incorrect opcode. Expected SMSG_ATTACKSTART, got {opcode:#?}"),
+        };
+
+        assert(&t, &expected);
+        assert_eq!(16 + HEADER_SIZE, RAW0.len());
+
+        let mut dest = Vec::with_capacity(RAW0.len());
+        expected.tokio_write_unencrypted_server(&mut std::io::Cursor::new(&mut dest)).await.unwrap();
+
+        assert_eq!(dest, RAW0);
+    }
+
+    // Generated from `wow_message_parser/wowm/world/combat/smsg_attackstart.wowm` line 9.
+    #[cfg(feature = "async-std")]
+    #[cfg_attr(feature = "async-std", async_std::test)]
+    async fn astd_smsg_attackstart0() {
+        let expected = expected0();
+        let t = ServerOpcodeMessage::astd_read_unencrypted(&mut async_std::io::Cursor::new(&RAW0)).await.unwrap();
+        let t = match t {
+            ServerOpcodeMessage::SMSG_ATTACKSTART(t) => t,
+            opcode => panic!("incorrect opcode. Expected SMSG_ATTACKSTART, got {opcode:#?}"),
+        };
+
+        assert(&t, &expected);
+        assert_eq!(16 + HEADER_SIZE, RAW0.len());
+
+        let mut dest = Vec::with_capacity(RAW0.len());
+        expected.astd_write_unencrypted_server(&mut async_std::io::Cursor::new(&mut dest)).await.unwrap();
+
+        assert_eq!(dest, RAW0);
+    }
+
+}
+
+#[cfg(all(feature = "wrath", test))]
+mod test_wrath {
+    #![allow(clippy::missing_const_for_fn)]
+    use super::SMSG_ATTACKSTART;
+    use super::*;
+    use super::super::*;
+    use crate::wrath::opcodes::ServerOpcodeMessage;
+    use crate::Guid;
+    use crate::wrath::{ClientMessage, ServerMessage};
+
+    const HEADER_SIZE: usize = 2 + 2;
+    fn assert(t: &SMSG_ATTACKSTART, expected: &SMSG_ATTACKSTART) {
+        assert_eq!(t.attacker, expected.attacker);
+        assert_eq!(t.victim, expected.victim);
+    }
+
+    const RAW0: [u8; 20] = [ 0x00, 0x12, 0x43, 0x01, 0x17, 0x00, 0x00, 0x00, 0x00,
+         0x00, 0x00, 0x00, 0x64, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, ];
+
+    pub(crate) fn expected0() -> SMSG_ATTACKSTART {
+        SMSG_ATTACKSTART {
+            attacker: Guid::new(0x17),
+            victim: Guid::new(0x64),
+        }
+
+    }
+
+    // Generated from `wow_message_parser/wowm/world/combat/smsg_attackstart.wowm` line 9.
+    #[cfg(feature = "sync")]
+    #[cfg_attr(feature = "sync", test)]
+    fn smsg_attackstart0() {
+        let expected = expected0();
+        let t = ServerOpcodeMessage::read_unencrypted(&mut std::io::Cursor::new(&RAW0)).unwrap();
+        let t = match t {
+            ServerOpcodeMessage::SMSG_ATTACKSTART(t) => t,
+            opcode => panic!("incorrect opcode. Expected SMSG_ATTACKSTART, got {opcode:#?}"),
+        };
+
+        assert(&t, &expected);
+        assert_eq!(16 + HEADER_SIZE, RAW0.len());
+
+        let mut dest = Vec::with_capacity(RAW0.len());
+        expected.write_unencrypted_server(&mut std::io::Cursor::new(&mut dest)).unwrap();
+
+        assert_eq!(dest, RAW0);
+    }
+
+    // Generated from `wow_message_parser/wowm/world/combat/smsg_attackstart.wowm` line 9.
+    #[cfg(feature = "tokio")]
+    #[cfg_attr(feature = "tokio", tokio::test)]
+    async fn tokio_smsg_attackstart0() {
+        let expected = expected0();
+        let t = ServerOpcodeMessage::tokio_read_unencrypted(&mut std::io::Cursor::new(&RAW0)).await.unwrap();
+        let t = match t {
+            ServerOpcodeMessage::SMSG_ATTACKSTART(t) => t,
+            opcode => panic!("incorrect opcode. Expected SMSG_ATTACKSTART, got {opcode:#?}"),
+        };
+
+        assert(&t, &expected);
+        assert_eq!(16 + HEADER_SIZE, RAW0.len());
+
+        let mut dest = Vec::with_capacity(RAW0.len());
+        expected.tokio_write_unencrypted_server(&mut std::io::Cursor::new(&mut dest)).await.unwrap();
+
+        assert_eq!(dest, RAW0);
+    }
+
+    // Generated from `wow_message_parser/wowm/world/combat/smsg_attackstart.wowm` line 9.
+    #[cfg(feature = "async-std")]
+    #[cfg_attr(feature = "async-std", async_std::test)]
+    async fn astd_smsg_attackstart0() {
+        let expected = expected0();
+        let t = ServerOpcodeMessage::astd_read_unencrypted(&mut async_std::io::Cursor::new(&RAW0)).await.unwrap();
+        let t = match t {
+            ServerOpcodeMessage::SMSG_ATTACKSTART(t) => t,
+            opcode => panic!("incorrect opcode. Expected SMSG_ATTACKSTART, got {opcode:#?}"),
+        };
+
+        assert(&t, &expected);
+        assert_eq!(16 + HEADER_SIZE, RAW0.len());
+
+        let mut dest = Vec::with_capacity(RAW0.len());
+        expected.astd_write_unencrypted_server(&mut async_std::io::Cursor::new(&mut dest)).await.unwrap();
+
+        assert_eq!(dest, RAW0);
+    }
+
+}
 

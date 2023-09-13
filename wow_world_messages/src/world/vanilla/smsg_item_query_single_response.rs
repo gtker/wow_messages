@@ -5,8 +5,7 @@ use crate::shared::level_vanilla_tbc_wrath::Level;
 use crate::vanilla::{
     AllowedClass, AllowedRace, Area, BagFamily, Bonding, Faction, InventoryType, 
     ItemClassAndSubClass, ItemDamageType, ItemFlag, ItemQuality, ItemSet, ItemSpells, 
-    ItemStat, ItemStatType, Language, Map, PageTextMaterial, SheatheType, Skill, 
-    SpellSchool, SpellTriggerType,
+    ItemStat, Language, Map, PageTextMaterial, SheatheType, Skill,
 };
 
 #[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
@@ -363,207 +362,6 @@ impl crate::Message for SMSG_ITEM_QUERY_SINGLE_RESPONSE {
         "SMSG_ITEM_QUERY_SINGLE_RESPONSE"
     }
 
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        use std::fmt::Write;
-        use crate::traits::Message;
-
-        let mut s = String::new();
-
-        writeln!(s, "test SMSG_ITEM_QUERY_SINGLE_RESPONSE {{").unwrap();
-        // Members
-        writeln!(s, "    item = {};", self.item).unwrap();
-        if let Some(found) = &self.found {
-            writeln!(s, "    class_and_sub_class = {};", found.class_and_sub_class.as_test_case_value()).unwrap();
-            writeln!(s, "    name1 = \"{}\";", found.name1).unwrap();
-            writeln!(s, "    name2 = \"{}\";", found.name2).unwrap();
-            writeln!(s, "    name3 = \"{}\";", found.name3).unwrap();
-            writeln!(s, "    name4 = \"{}\";", found.name4).unwrap();
-            writeln!(s, "    display_id = {};", found.display_id).unwrap();
-            writeln!(s, "    quality = {};", found.quality.as_test_case_value()).unwrap();
-            writeln!(s, "    flags = {};", found.flags.as_test_case_value()).unwrap();
-            writeln!(s, "    buy_price = {};", found.buy_price.as_int()).unwrap();
-            writeln!(s, "    sell_price = {};", found.sell_price.as_int()).unwrap();
-            writeln!(s, "    inventory_type = {};", found.inventory_type.as_test_case_value()).unwrap();
-            writeln!(s, "    allowed_class = {};", found.allowed_class.as_test_case_value()).unwrap();
-            writeln!(s, "    allowed_race = {};", found.allowed_race.as_test_case_value()).unwrap();
-            writeln!(s, "    item_level = {};", found.item_level.as_int()).unwrap();
-            writeln!(s, "    required_level = {};", found.required_level.as_int()).unwrap();
-            writeln!(s, "    required_skill = {};", found.required_skill.as_test_case_value()).unwrap();
-            writeln!(s, "    required_skill_rank = {};", found.required_skill_rank).unwrap();
-            writeln!(s, "    required_spell = {};", found.required_spell).unwrap();
-            writeln!(s, "    required_honor_rank = {};", found.required_honor_rank).unwrap();
-            writeln!(s, "    required_city_rank = {};", found.required_city_rank).unwrap();
-            writeln!(s, "    required_faction = {};", found.required_faction.as_test_case_value()).unwrap();
-            writeln!(s, "    required_faction_rank = {};", found.required_faction_rank).unwrap();
-            writeln!(s, "    max_count = {};", found.max_count).unwrap();
-            writeln!(s, "    stackable = {};", found.stackable).unwrap();
-            writeln!(s, "    container_slots = {};", found.container_slots).unwrap();
-            writeln!(s, "    stats = [").unwrap();
-            for v in found.stats.as_slice() {
-                writeln!(s, "        {{").unwrap();
-                // Members
-                writeln!(s, "            stat_type = {};", v.stat_type.as_test_case_value()).unwrap();
-                writeln!(s, "            value = {};", v.value).unwrap();
-
-                writeln!(s, "        }},").unwrap();
-            }
-            writeln!(s, "    ];").unwrap();
-            writeln!(s, "    damages = [").unwrap();
-            for v in found.damages.as_slice() {
-                writeln!(s, "        {{").unwrap();
-                // Members
-                writeln!(s, "            damage_minimum = {};", if v.damage_minimum.to_string().contains('.') { v.damage_minimum.to_string() } else { format!("{}.0", v.damage_minimum) }).unwrap();
-                writeln!(s, "            damage_maximum = {};", if v.damage_maximum.to_string().contains('.') { v.damage_maximum.to_string() } else { format!("{}.0", v.damage_maximum) }).unwrap();
-                writeln!(s, "            school = {};", v.school.as_test_case_value()).unwrap();
-
-                writeln!(s, "        }},").unwrap();
-            }
-            writeln!(s, "    ];").unwrap();
-            writeln!(s, "    armor = {};", found.armor).unwrap();
-            writeln!(s, "    holy_resistance = {};", found.holy_resistance).unwrap();
-            writeln!(s, "    fire_resistance = {};", found.fire_resistance).unwrap();
-            writeln!(s, "    nature_resistance = {};", found.nature_resistance).unwrap();
-            writeln!(s, "    frost_resistance = {};", found.frost_resistance).unwrap();
-            writeln!(s, "    shadow_resistance = {};", found.shadow_resistance).unwrap();
-            writeln!(s, "    arcane_resistance = {};", found.arcane_resistance).unwrap();
-            writeln!(s, "    delay = {};", found.delay).unwrap();
-            writeln!(s, "    ammo_type = {};", found.ammo_type).unwrap();
-            writeln!(s, "    ranged_range_modification = {};", if found.ranged_range_modification.to_string().contains('.') { found.ranged_range_modification.to_string() } else { format!("{}.0", found.ranged_range_modification) }).unwrap();
-            writeln!(s, "    spells = [").unwrap();
-            for v in found.spells.as_slice() {
-                writeln!(s, "        {{").unwrap();
-                // Members
-                writeln!(s, "            spell = {};", v.spell).unwrap();
-                writeln!(s, "            spell_trigger = {};", v.spell_trigger.as_test_case_value()).unwrap();
-                writeln!(s, "            spell_charges = {};", v.spell_charges).unwrap();
-                writeln!(s, "            spell_cooldown = {};", v.spell_cooldown).unwrap();
-                writeln!(s, "            spell_category = {};", v.spell_category).unwrap();
-                writeln!(s, "            spell_category_cooldown = {};", v.spell_category_cooldown).unwrap();
-
-                writeln!(s, "        }},").unwrap();
-            }
-            writeln!(s, "    ];").unwrap();
-            writeln!(s, "    bonding = {};", found.bonding.as_test_case_value()).unwrap();
-            writeln!(s, "    description = \"{}\";", found.description).unwrap();
-            writeln!(s, "    page_text = {};", found.page_text).unwrap();
-            writeln!(s, "    language = {};", found.language.as_test_case_value()).unwrap();
-            writeln!(s, "    page_text_material = {};", found.page_text_material.as_test_case_value()).unwrap();
-            writeln!(s, "    start_quest = {};", found.start_quest).unwrap();
-            writeln!(s, "    lock_id = {};", found.lock_id).unwrap();
-            writeln!(s, "    material = {};", found.material).unwrap();
-            writeln!(s, "    sheathe_type = {};", found.sheathe_type.as_test_case_value()).unwrap();
-            writeln!(s, "    random_property = {};", found.random_property).unwrap();
-            writeln!(s, "    block = {};", found.block).unwrap();
-            writeln!(s, "    item_set = {};", found.item_set.as_test_case_value()).unwrap();
-            writeln!(s, "    max_durability = {};", found.max_durability).unwrap();
-            writeln!(s, "    area = {};", found.area.as_test_case_value()).unwrap();
-            writeln!(s, "    map = {};", found.map.as_test_case_value()).unwrap();
-            writeln!(s, "    bag_family = {};", found.bag_family.as_test_case_value()).unwrap();
-        }
-
-        writeln!(s, "}} [").unwrap();
-
-        let [a, b] = (u16::try_from(self.size() + 2).unwrap()).to_be_bytes();
-        writeln!(s, "    {a:#04X}, {b:#04X}, /* size */").unwrap();
-        let [a, b] = 88_u16.to_le_bytes();
-        writeln!(s, "    {a:#04X}, {b:#04X}, /* opcode */").unwrap();
-        let mut bytes: Vec<u8> = Vec::new();
-        self.write_into_vec(&mut bytes).unwrap();
-        let mut bytes = bytes.into_iter();
-
-        crate::util::write_bytes(&mut s, &mut bytes, 4, "item", "    ");
-        if let Some(found) = &self.found {
-            crate::util::write_bytes(&mut s, &mut bytes, 8, "class_and_sub_class", "    ");
-            crate::util::write_bytes(&mut s, &mut bytes, found.name1.len() + 1, "name1", "    ");
-            crate::util::write_bytes(&mut s, &mut bytes, found.name2.len() + 1, "name2", "    ");
-            crate::util::write_bytes(&mut s, &mut bytes, found.name3.len() + 1, "name3", "    ");
-            crate::util::write_bytes(&mut s, &mut bytes, found.name4.len() + 1, "name4", "    ");
-            crate::util::write_bytes(&mut s, &mut bytes, 4, "display_id", "    ");
-            crate::util::write_bytes(&mut s, &mut bytes, 4, "quality", "    ");
-            crate::util::write_bytes(&mut s, &mut bytes, 4, "flags", "    ");
-            crate::util::write_bytes(&mut s, &mut bytes, 4, "buy_price", "    ");
-            crate::util::write_bytes(&mut s, &mut bytes, 4, "sell_price", "    ");
-            crate::util::write_bytes(&mut s, &mut bytes, 4, "inventory_type", "    ");
-            crate::util::write_bytes(&mut s, &mut bytes, 4, "allowed_class", "    ");
-            crate::util::write_bytes(&mut s, &mut bytes, 4, "allowed_race", "    ");
-            crate::util::write_bytes(&mut s, &mut bytes, 4, "item_level", "    ");
-            crate::util::write_bytes(&mut s, &mut bytes, 4, "required_level", "    ");
-            crate::util::write_bytes(&mut s, &mut bytes, 4, "required_skill", "    ");
-            crate::util::write_bytes(&mut s, &mut bytes, 4, "required_skill_rank", "    ");
-            crate::util::write_bytes(&mut s, &mut bytes, 4, "required_spell", "    ");
-            crate::util::write_bytes(&mut s, &mut bytes, 4, "required_honor_rank", "    ");
-            crate::util::write_bytes(&mut s, &mut bytes, 4, "required_city_rank", "    ");
-            crate::util::write_bytes(&mut s, &mut bytes, 4, "required_faction", "    ");
-            crate::util::write_bytes(&mut s, &mut bytes, 4, "required_faction_rank", "    ");
-            crate::util::write_bytes(&mut s, &mut bytes, 4, "max_count", "    ");
-            crate::util::write_bytes(&mut s, &mut bytes, 4, "stackable", "    ");
-            crate::util::write_bytes(&mut s, &mut bytes, 4, "container_slots", "    ");
-            writeln!(s, "    /* stats: ItemStat[10] start */").unwrap();
-            for (i, v) in found.stats.iter().enumerate() {
-                writeln!(s, "    /* stats: ItemStat[10] {i} start */").unwrap();
-                crate::util::write_bytes(&mut s, &mut bytes, 4, "stat_type", "        ");
-                crate::util::write_bytes(&mut s, &mut bytes, 4, "value", "        ");
-                writeln!(s, "    /* stats: ItemStat[10] {i} end */").unwrap();
-            }
-            writeln!(s, "    /* stats: ItemStat[10] end */").unwrap();
-            writeln!(s, "    /* damages: ItemDamageType[5] start */").unwrap();
-            for (i, v) in found.damages.iter().enumerate() {
-                writeln!(s, "    /* damages: ItemDamageType[5] {i} start */").unwrap();
-                crate::util::write_bytes(&mut s, &mut bytes, 4, "damage_minimum", "        ");
-                crate::util::write_bytes(&mut s, &mut bytes, 4, "damage_maximum", "        ");
-                crate::util::write_bytes(&mut s, &mut bytes, 4, "school", "        ");
-                writeln!(s, "    /* damages: ItemDamageType[5] {i} end */").unwrap();
-            }
-            writeln!(s, "    /* damages: ItemDamageType[5] end */").unwrap();
-            crate::util::write_bytes(&mut s, &mut bytes, 4, "armor", "    ");
-            crate::util::write_bytes(&mut s, &mut bytes, 4, "holy_resistance", "    ");
-            crate::util::write_bytes(&mut s, &mut bytes, 4, "fire_resistance", "    ");
-            crate::util::write_bytes(&mut s, &mut bytes, 4, "nature_resistance", "    ");
-            crate::util::write_bytes(&mut s, &mut bytes, 4, "frost_resistance", "    ");
-            crate::util::write_bytes(&mut s, &mut bytes, 4, "shadow_resistance", "    ");
-            crate::util::write_bytes(&mut s, &mut bytes, 4, "arcane_resistance", "    ");
-            crate::util::write_bytes(&mut s, &mut bytes, 4, "delay", "    ");
-            crate::util::write_bytes(&mut s, &mut bytes, 4, "ammo_type", "    ");
-            crate::util::write_bytes(&mut s, &mut bytes, 4, "ranged_range_modification", "    ");
-            writeln!(s, "    /* spells: ItemSpells[5] start */").unwrap();
-            for (i, v) in found.spells.iter().enumerate() {
-                writeln!(s, "    /* spells: ItemSpells[5] {i} start */").unwrap();
-                crate::util::write_bytes(&mut s, &mut bytes, 4, "spell", "        ");
-                crate::util::write_bytes(&mut s, &mut bytes, 4, "spell_trigger", "        ");
-                crate::util::write_bytes(&mut s, &mut bytes, 4, "spell_charges", "        ");
-                crate::util::write_bytes(&mut s, &mut bytes, 4, "spell_cooldown", "        ");
-                crate::util::write_bytes(&mut s, &mut bytes, 4, "spell_category", "        ");
-                crate::util::write_bytes(&mut s, &mut bytes, 4, "spell_category_cooldown", "        ");
-                writeln!(s, "    /* spells: ItemSpells[5] {i} end */").unwrap();
-            }
-            writeln!(s, "    /* spells: ItemSpells[5] end */").unwrap();
-            crate::util::write_bytes(&mut s, &mut bytes, 4, "bonding", "    ");
-            crate::util::write_bytes(&mut s, &mut bytes, found.description.len() + 1, "description", "    ");
-            crate::util::write_bytes(&mut s, &mut bytes, 4, "page_text", "    ");
-            crate::util::write_bytes(&mut s, &mut bytes, 4, "language", "    ");
-            crate::util::write_bytes(&mut s, &mut bytes, 4, "page_text_material", "    ");
-            crate::util::write_bytes(&mut s, &mut bytes, 4, "start_quest", "    ");
-            crate::util::write_bytes(&mut s, &mut bytes, 4, "lock_id", "    ");
-            crate::util::write_bytes(&mut s, &mut bytes, 4, "material", "    ");
-            crate::util::write_bytes(&mut s, &mut bytes, 4, "sheathe_type", "    ");
-            crate::util::write_bytes(&mut s, &mut bytes, 4, "random_property", "    ");
-            crate::util::write_bytes(&mut s, &mut bytes, 4, "block", "    ");
-            crate::util::write_bytes(&mut s, &mut bytes, 4, "item_set", "    ");
-            crate::util::write_bytes(&mut s, &mut bytes, 4, "max_durability", "    ");
-            crate::util::write_bytes(&mut s, &mut bytes, 4, "area", "    ");
-            crate::util::write_bytes(&mut s, &mut bytes, 4, "map", "    ");
-            crate::util::write_bytes(&mut s, &mut bytes, 4, "bag_family", "    ");
-        }
-
-
-        writeln!(s, "] {{").unwrap();
-        writeln!(s, "    versions = \"{}\";", std::env::var("WOWM_TEST_CASE_WORLD_VERSION").unwrap_or("1.12".to_string())).unwrap();
-        writeln!(s, "}}\n").unwrap();
-
-        Some(s)
-    }
-
     fn size_without_header(&self) -> u32 {
         self.size() as u32
     }
@@ -838,6 +636,316 @@ impl SMSG_ITEM_QUERY_SINGLE_RESPONSE {
             0
         }
     }
+}
+
+#[cfg(test)]
+mod test {
+    #![allow(clippy::missing_const_for_fn)]
+    use super::SMSG_ITEM_QUERY_SINGLE_RESPONSE;
+    use super::*;
+    use super::super::*;
+    use crate::vanilla::opcodes::ServerOpcodeMessage;
+    use crate::vanilla::{ClientMessage, ServerMessage};
+
+    const HEADER_SIZE: usize = 2 + 2;
+    fn assert(t: &SMSG_ITEM_QUERY_SINGLE_RESPONSE, expected: &SMSG_ITEM_QUERY_SINGLE_RESPONSE) {
+        assert_eq!(t.item, expected.item);
+    }
+
+    const RAW0: [u8; 482] = [ 0x01, 0xE0, 0x58, 0x00, 0x3E, 0x1C, 0x00, 0x00, 0x02,
+         0x00, 0x00, 0x00, 0x05, 0x00, 0x00, 0x00, 0x53, 0x6D, 0x69, 0x74, 0x65,
+         0x27, 0x73, 0x20, 0x4D, 0x69, 0x67, 0x68, 0x74, 0x79, 0x20, 0x48, 0x61,
+         0x6D, 0x6D, 0x65, 0x72, 0x00, 0x00, 0x00, 0x00, 0x9A, 0x4C, 0x00, 0x00,
+         0x03, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x9B, 0x3C, 0x00, 0x00,
+         0x1F, 0x0C, 0x00, 0x00, 0x11, 0x00, 0x00, 0x00, 0xDF, 0x05, 0x00, 0x00,
+         0xFF, 0x01, 0x00, 0x00, 0x17, 0x00, 0x00, 0x00, 0x12, 0x00, 0x00, 0x00,
+         0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+         0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+         0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x01, 0x00, 0x00, 0x00,
+         0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+         0x01, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x04, 0x00, 0x00, 0x00,
+         0x0B, 0x00, 0x00, 0x00, 0x03, 0x00, 0x00, 0x00, 0x04, 0x00, 0x00, 0x00,
+         0x07, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x05, 0x00, 0x00, 0x00,
+         0x00, 0x00, 0x00, 0x00, 0x06, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+         0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+         0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+         0x00, 0x00, 0x5C, 0x42, 0x00, 0x00, 0xA6, 0x42, 0x00, 0x00, 0x00, 0x00,
+         0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+         0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+         0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+         0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+         0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+         0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+         0x00, 0x00, 0x00, 0x00, 0xAC, 0x0D, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+         0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+         0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+         0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+         0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+         0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+         0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+         0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+         0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+         0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+         0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+         0x00, 0x00, 0x00, 0x00, 0x01, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+         0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+         0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0x00, 0x00, 0x00, 0x01, 0x00, 0x00,
+         0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+         0x00, 0x50, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+         0x00, 0x00, 0x00, 0x00, 0x00, ];
+
+    pub(crate) fn expected0() -> SMSG_ITEM_QUERY_SINGLE_RESPONSE {
+        SMSG_ITEM_QUERY_SINGLE_RESPONSE {
+            item: 0x1C3E,
+            found: Some(SMSG_ITEM_QUERY_SINGLE_RESPONSE_found {
+                class_and_sub_class: ItemClassAndSubClass::TwoHandedMace,
+                name1: String::from("Smite's Mighty Hammer"),
+                name2: String::from(""),
+                name3: String::from(""),
+                name4: String::from(""),
+                display_id: 0x4C9A,
+                quality: ItemQuality::Rare,
+                flags: ItemFlag::empty()
+                    ,
+                buy_price: Gold::try_from(0x3C9B).unwrap(),
+                sell_price: Gold::try_from(0xC1F).unwrap(),
+                inventory_type: InventoryType::TwoHandedWeapon,
+                allowed_class: AllowedClass::empty()
+                    .set_warrior()
+                    .set_paladin()
+                    .set_hunter()
+                    .set_rogue()
+                    .set_priest()
+                    .set_shaman()
+                    .set_mage()
+                    .set_warlock()
+                    .set_druid()
+                    ,
+                allowed_race: AllowedRace::empty()
+                    .set_human()
+                    .set_orc()
+                    .set_dwarf()
+                    .set_night_elf()
+                    .set_undead()
+                    .set_tauren()
+                    .set_gnome()
+                    .set_troll()
+                    .set_goblin()
+                    ,
+                item_level: Level::try_from(0x17).unwrap(),
+                required_level: Level::try_from(0x12).unwrap(),
+                required_skill: Skill::None,
+                required_skill_rank: 0x0,
+                required_spell: 0x0,
+                required_honor_rank: 0x0,
+                required_city_rank: 0x0,
+                required_faction: Faction::None,
+                required_faction_rank: 0x0,
+                max_count: 0x0,
+                stackable: 0x1,
+                container_slots: 0x0,
+                stats: [
+                    ItemStat {
+                        stat_type: ItemStatType::Mana,
+                        value: 0x0,
+                    },
+                    ItemStat {
+                        stat_type: ItemStatType::Health,
+                        value: 0x0,
+                    },
+                    ItemStat {
+                        stat_type: ItemStatType::Strength,
+                        value: 0xB,
+                    },
+                    ItemStat {
+                        stat_type: ItemStatType::Agility,
+                        value: 0x4,
+                    },
+                    ItemStat {
+                        stat_type: ItemStatType::Stamina,
+                        value: 0x0,
+                    },
+                    ItemStat {
+                        stat_type: ItemStatType::Intellect,
+                        value: 0x0,
+                    },
+                    ItemStat {
+                        stat_type: ItemStatType::Spirit,
+                        value: 0x0,
+                    },
+                    ItemStat {
+                        stat_type: ItemStatType::Mana,
+                        value: 0x0,
+                    },
+                    ItemStat {
+                        stat_type: ItemStatType::Mana,
+                        value: 0x0,
+                    },
+                    ItemStat {
+                        stat_type: ItemStatType::Mana,
+                        value: 0x0,
+                    },
+                ],
+                damages: [
+                    ItemDamageType {
+                        damage_minimum: 55_f32,
+                        damage_maximum: 83_f32,
+                        school: SpellSchool::Normal,
+                    },
+                    ItemDamageType {
+                        damage_minimum: 0_f32,
+                        damage_maximum: 0_f32,
+                        school: SpellSchool::Normal,
+                    },
+                    ItemDamageType {
+                        damage_minimum: 0_f32,
+                        damage_maximum: 0_f32,
+                        school: SpellSchool::Normal,
+                    },
+                    ItemDamageType {
+                        damage_minimum: 0_f32,
+                        damage_maximum: 0_f32,
+                        school: SpellSchool::Normal,
+                    },
+                    ItemDamageType {
+                        damage_minimum: 0_f32,
+                        damage_maximum: 0_f32,
+                        school: SpellSchool::Normal,
+                    },
+                ],
+                armor: 0x0,
+                holy_resistance: 0x0,
+                fire_resistance: 0x0,
+                nature_resistance: 0x0,
+                frost_resistance: 0x0,
+                shadow_resistance: 0x0,
+                arcane_resistance: 0x0,
+                delay: 0xDAC,
+                ammo_type: 0x0,
+                ranged_range_modification: 0_f32,
+                spells: [
+                    ItemSpells {
+                        spell: 0x0,
+                        spell_trigger: SpellTriggerType::OnUse,
+                        spell_charges: 0x0,
+                        spell_cooldown: 0x0,
+                        spell_category: 0x0,
+                        spell_category_cooldown: 0x0,
+                    },
+                    ItemSpells {
+                        spell: 0x0,
+                        spell_trigger: SpellTriggerType::OnUse,
+                        spell_charges: 0x0,
+                        spell_cooldown: 0x0,
+                        spell_category: 0x0,
+                        spell_category_cooldown: 0x0,
+                    },
+                    ItemSpells {
+                        spell: 0x0,
+                        spell_trigger: SpellTriggerType::OnUse,
+                        spell_charges: 0x0,
+                        spell_cooldown: 0x0,
+                        spell_category: 0x0,
+                        spell_category_cooldown: 0x0,
+                    },
+                    ItemSpells {
+                        spell: 0x0,
+                        spell_trigger: SpellTriggerType::OnUse,
+                        spell_charges: 0x0,
+                        spell_cooldown: 0x0,
+                        spell_category: 0x0,
+                        spell_category_cooldown: 0x0,
+                    },
+                    ItemSpells {
+                        spell: 0x0,
+                        spell_trigger: SpellTriggerType::OnUse,
+                        spell_charges: 0x0,
+                        spell_cooldown: 0x0,
+                        spell_category: 0x0,
+                        spell_category_cooldown: 0x0,
+                    },
+                ],
+                bonding: Bonding::PickUp,
+                description: String::from(""),
+                page_text: 0x0,
+                language: Language::Universal,
+                page_text_material: PageTextMaterial::None,
+                start_quest: 0x0,
+                lock_id: 0x0,
+                material: 0x2,
+                sheathe_type: SheatheType::MainHand,
+                random_property: 0x0,
+                block: 0x0,
+                item_set: ItemSet::None,
+                max_durability: 0x50,
+                area: Area::None,
+                map: Map::EasternKingdoms,
+                bag_family: BagFamily::None,
+            })
+        }
+
+    }
+
+    // Generated from `wow_message_parser/wowm/world/queries/smsg_item_query_single_response.wowm` line 259.
+    #[cfg(feature = "sync")]
+    #[cfg_attr(feature = "sync", test)]
+    fn smsg_item_query_single_response0() {
+        let expected = expected0();
+        let t = ServerOpcodeMessage::read_unencrypted(&mut std::io::Cursor::new(&RAW0)).unwrap();
+        let t = match t {
+            ServerOpcodeMessage::SMSG_ITEM_QUERY_SINGLE_RESPONSE(t) => t,
+            opcode => panic!("incorrect opcode. Expected SMSG_ITEM_QUERY_SINGLE_RESPONSE, got {opcode:#?}"),
+        };
+
+        assert(&t, &expected);
+        assert_eq!(t.size() + HEADER_SIZE, RAW0.len());
+
+        let mut dest = Vec::with_capacity(RAW0.len());
+        expected.write_unencrypted_server(&mut std::io::Cursor::new(&mut dest)).unwrap();
+
+        assert_eq!(dest, RAW0);
+    }
+
+    // Generated from `wow_message_parser/wowm/world/queries/smsg_item_query_single_response.wowm` line 259.
+    #[cfg(feature = "tokio")]
+    #[cfg_attr(feature = "tokio", tokio::test)]
+    async fn tokio_smsg_item_query_single_response0() {
+        let expected = expected0();
+        let t = ServerOpcodeMessage::tokio_read_unencrypted(&mut std::io::Cursor::new(&RAW0)).await.unwrap();
+        let t = match t {
+            ServerOpcodeMessage::SMSG_ITEM_QUERY_SINGLE_RESPONSE(t) => t,
+            opcode => panic!("incorrect opcode. Expected SMSG_ITEM_QUERY_SINGLE_RESPONSE, got {opcode:#?}"),
+        };
+
+        assert(&t, &expected);
+        assert_eq!(t.size() + HEADER_SIZE, RAW0.len());
+
+        let mut dest = Vec::with_capacity(RAW0.len());
+        expected.tokio_write_unencrypted_server(&mut std::io::Cursor::new(&mut dest)).await.unwrap();
+
+        assert_eq!(dest, RAW0);
+    }
+
+    // Generated from `wow_message_parser/wowm/world/queries/smsg_item_query_single_response.wowm` line 259.
+    #[cfg(feature = "async-std")]
+    #[cfg_attr(feature = "async-std", async_std::test)]
+    async fn astd_smsg_item_query_single_response0() {
+        let expected = expected0();
+        let t = ServerOpcodeMessage::astd_read_unencrypted(&mut async_std::io::Cursor::new(&RAW0)).await.unwrap();
+        let t = match t {
+            ServerOpcodeMessage::SMSG_ITEM_QUERY_SINGLE_RESPONSE(t) => t,
+            opcode => panic!("incorrect opcode. Expected SMSG_ITEM_QUERY_SINGLE_RESPONSE, got {opcode:#?}"),
+        };
+
+        assert(&t, &expected);
+        assert_eq!(t.size() + HEADER_SIZE, RAW0.len());
+
+        let mut dest = Vec::with_capacity(RAW0.len());
+        expected.astd_write_unencrypted_server(&mut async_std::io::Cursor::new(&mut dest)).await.unwrap();
+
+        assert_eq!(dest, RAW0);
+    }
+
 }
 
 #[derive(Debug, Clone, PartialEq, PartialOrd, Default)]

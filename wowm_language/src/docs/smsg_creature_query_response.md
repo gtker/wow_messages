@@ -62,6 +62,30 @@ Optionally the following fields can be present. This can only be detected by loo
 | - | 1 / - | u8 | civilian |  | cmangos: wdbFeild14 |
 | - | 1 / - | u8 | racial_leader |  |  |
 
+### Examples
+
+#### Example 1
+
+```c
+0, 46, // size
+97, 0, // opcode (97)
+69, 0, 0, 0, // creature_entry: u32
+// Optional found
+84, 104, 105, 110, 103, 0, // name1: CString
+0, // name2: CString
+0, // name3: CString
+0, // name4: CString
+0, // sub_name: CString
+0, 0, 0, 0, // type_flags: u32
+0, 0, 0, 0, // creature_type: u32
+0, 0, 0, 0, // creature_family: CreatureFamily NONE (0)
+0, 0, 0, 0, // creature_rank: u32
+0, 0, 0, 0, // unknown0: u32
+0, 0, 0, 0, // spell_data_id: u32
+0, 0, 0, 0, // display_id: u32
+0, // civilian: u8
+0, // racial_leader: u8
+```
 ## Client Version 2.4.3
 
 ### Wowm Representation

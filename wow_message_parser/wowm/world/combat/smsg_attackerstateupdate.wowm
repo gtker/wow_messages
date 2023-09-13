@@ -64,3 +64,48 @@ smsg SMSG_ATTACKERSTATEUPDATE = 0x014A {
     paste_versions = "1.12 2.4.3";
 }
 
+
+test SMSG_ATTACKERSTATEUPDATE {
+    hit_info = CRITICAL_HIT;
+    attacker = 23;
+    target = 100;
+    total_damage = 1337;
+    amount_of_damages = 1;
+    damages = [
+        {
+            spell_school_mask = 0;
+            damage_float = 1332.0;
+            damage_uint = 1332;
+            absorb = 0;
+            resist = 0;
+        },
+    ];
+    damage_state = 0;
+    unknown1 = 0;
+    spell_id = 0;
+    blocked_amount = 0;
+} [
+    0x00, 0x33, /* size */
+    0x4A, 0x01, /* opcode */
+    0x80, 0x00, 0x00, 0x00, /* hit_info */
+    0x01, 0x17, /* attacker */
+    0x01, 0x64, /* target */
+    0x39, 0x05, 0x00, 0x00, /* total_damage */
+    0x01, /* amount_of_damages */
+    /* damages: DamageInfo[amount_of_damages] start */
+    /* damages: DamageInfo[amount_of_damages] 0 start */
+        0x00, 0x00, 0x00, 0x00, /* spell_school_mask */
+        0x00, 0x80, 0xA6, 0x44, /* damage_float */
+        0x34, 0x05, 0x00, 0x00, /* damage_uint */
+        0x00, 0x00, 0x00, 0x00, /* absorb */
+        0x00, 0x00, 0x00, 0x00, /* resist */
+    /* damages: DamageInfo[amount_of_damages] 0 end */
+    /* damages: DamageInfo[amount_of_damages] end */
+    0x00, 0x00, 0x00, 0x00, /* damage_state */
+    0x00, 0x00, 0x00, 0x00, /* unknown1 */
+    0x00, 0x00, 0x00, 0x00, /* spell_id */
+    0x00, 0x00, 0x00, 0x00, /* blocked_amount */
+] {
+    versions = "1.12";
+}
+

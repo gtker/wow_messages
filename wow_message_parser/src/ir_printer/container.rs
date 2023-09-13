@@ -611,12 +611,15 @@ pub(crate) enum IrTestValue {
     ArrayOfSubObject {
         type_name: String,
         members: Vec<Vec<IrTestCaseMember>>,
+        size: IrArraySize,
     },
     UpdateMask(Vec<IrTestUpdateMaskValue>),
     IpAddress(IrIntegerEnumValue),
     Seconds(IrIntegerEnumValue),
     Milliseconds(IrIntegerEnumValue),
     Population(f32),
+    Gold(IrIntegerEnumValue),
+    Level(IrIntegerEnumValue),
 }
 
 impl IrTestValue {
@@ -650,7 +653,11 @@ impl IrTestValue {
                     .map(IrTestCaseMember::from_test_case_member)
                     .collect(),
             },
-            TestValue::ArrayOfSubObject(e, t) => Self::ArrayOfSubObject {
+            TestValue::ArrayOfSubObject {
+                c: e,
+                members: t,
+                size,
+            } => Self::ArrayOfSubObject {
                 type_name: e.name().to_string(),
                 members: t
                     .iter()
@@ -660,6 +667,7 @@ impl IrTestValue {
                             .collect::<Vec<_>>()
                     })
                     .collect(),
+                size: IrArraySize::from_array_size(size.clone()),
             },
             TestValue::UpdateMask(v) => IrTestValue::UpdateMask(
                 v.iter()
@@ -671,6 +679,8 @@ impl IrTestValue {
                 Self::Milliseconds(IrIntegerEnumValue::from_container_value(i))
             }
             TestValue::Population { value, .. } => Self::Population(*value),
+            TestValue::Gold(i) => Self::Gold(IrIntegerEnumValue::from_container_value(i)),
+            TestValue::Level(i) => Self::Level(IrIntegerEnumValue::from_container_value(i)),
         }
     }
 }

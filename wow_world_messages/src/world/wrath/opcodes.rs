@@ -12134,8 +12134,6 @@ impl ServerOpcodeMessage {
             Self::MSG_CHANNEL_START(c) => crate::Message::to_test_case_string(c),
             Self::MSG_CHANNEL_UPDATE(c) => crate::Message::to_test_case_string(c),
             Self::SMSG_AI_REACTION(c) => crate::Message::to_test_case_string(c),
-            Self::SMSG_ATTACKSTART(c) => crate::Message::to_test_case_string(c),
-            Self::SMSG_ATTACKSTOP(c) => crate::Message::to_test_case_string(c),
             Self::SMSG_ATTACKSWING_NOTINRANGE => crate::Message::to_test_case_string(&SMSG_ATTACKSWING_NOTINRANGE{}),
             Self::SMSG_ATTACKSWING_BADFACING => crate::Message::to_test_case_string(&SMSG_ATTACKSWING_BADFACING{}),
             Self::SMSG_INSTANCE_LOCK_WARNING_QUERY(c) => crate::Message::to_test_case_string(c),

@@ -256,6 +256,341 @@ smsg SMSG_ITEM_QUERY_SINGLE_RESPONSE = 0x0058 {
     versions = "1.12";
 }
 
+test SMSG_ITEM_QUERY_SINGLE_RESPONSE {
+    item = 7230;
+    class_and_sub_class = TWO_HANDED_MACE;
+    name1 = "Smite's Mighty Hammer";
+    name2 = "";
+    name3 = "";
+    name4 = "";
+    display_id = 19610;
+    quality = RARE;
+    flags = NONE;
+    buy_price = 15515;
+    sell_price = 3103;
+    inventory_type = TWO_HANDED_WEAPON;
+    allowed_class = WARRIOR | PALADIN | HUNTER | ROGUE | PRIEST | SHAMAN | MAGE | WARLOCK | DRUID;
+    allowed_race = HUMAN | ORC | DWARF | NIGHT_ELF | UNDEAD | TAUREN | GNOME | TROLL | GOBLIN;
+    item_level = 23;
+    required_level = 18;
+    required_skill = NONE;
+    required_skill_rank = 0;
+    required_spell = 0;
+    required_honor_rank = 0;
+    required_city_rank = 0;
+    required_faction = NONE;
+    required_faction_rank = 0;
+    max_count = 0;
+    stackable = 1;
+    container_slots = 0;
+    stats = [
+        {
+            stat_type = MANA;
+            value = 0;
+        },
+        {
+            stat_type = HEALTH;
+            value = 0;
+        },
+        {
+            stat_type = STRENGTH;
+            value = 11;
+        },
+        {
+            stat_type = AGILITY;
+            value = 4;
+        },
+        {
+            stat_type = STAMINA;
+            value = 0;
+        },
+        {
+            stat_type = INTELLECT;
+            value = 0;
+        },
+        {
+            stat_type = SPIRIT;
+            value = 0;
+        },
+        {
+            stat_type = MANA;
+            value = 0;
+        },
+        {
+            stat_type = MANA;
+            value = 0;
+        },
+        {
+            stat_type = MANA;
+            value = 0;
+        },
+    ];
+    damages = [
+        {
+            damage_minimum = 55.0;
+            damage_maximum = 83.0;
+            school = NORMAL;
+        },
+        {
+            damage_minimum = 0.0;
+            damage_maximum = 0.0;
+            school = NORMAL;
+        },
+        {
+            damage_minimum = 0.0;
+            damage_maximum = 0.0;
+            school = NORMAL;
+        },
+        {
+            damage_minimum = 0.0;
+            damage_maximum = 0.0;
+            school = NORMAL;
+        },
+        {
+            damage_minimum = 0.0;
+            damage_maximum = 0.0;
+            school = NORMAL;
+        },
+    ];
+    armor = 0;
+    holy_resistance = 0;
+    fire_resistance = 0;
+    nature_resistance = 0;
+    frost_resistance = 0;
+    shadow_resistance = 0;
+    arcane_resistance = 0;
+    delay = 3500;
+    ammo_type = 0;
+    ranged_range_modification = 0.0;
+    spells = [
+        {
+            spell = 0;
+            spell_trigger = ON_USE;
+            spell_charges = 0;
+            spell_cooldown = 0;
+            spell_category = 0;
+            spell_category_cooldown = 0;
+        },
+        {
+            spell = 0;
+            spell_trigger = ON_USE;
+            spell_charges = 0;
+            spell_cooldown = 0;
+            spell_category = 0;
+            spell_category_cooldown = 0;
+        },
+        {
+            spell = 0;
+            spell_trigger = ON_USE;
+            spell_charges = 0;
+            spell_cooldown = 0;
+            spell_category = 0;
+            spell_category_cooldown = 0;
+        },
+        {
+            spell = 0;
+            spell_trigger = ON_USE;
+            spell_charges = 0;
+            spell_cooldown = 0;
+            spell_category = 0;
+            spell_category_cooldown = 0;
+        },
+        {
+            spell = 0;
+            spell_trigger = ON_USE;
+            spell_charges = 0;
+            spell_cooldown = 0;
+            spell_category = 0;
+            spell_category_cooldown = 0;
+        },
+    ];
+    bonding = PICK_UP;
+    description = "";
+    page_text = 0;
+    language = UNIVERSAL;
+    page_text_material = NONE;
+    start_quest = 0;
+    lock_id = 0;
+    material = 2;
+    sheathe_type = MAIN_HAND;
+    random_property = 0;
+    block = 0;
+    item_set = NONE;
+    max_durability = 80;
+    area = NONE;
+    map = EASTERN_KINGDOMS;
+    bag_family = NONE;
+} [
+    0x01, 0xE0, /* size */
+    0x58, 0x00, /* opcode */
+    0x3E, 0x1C, 0x00, 0x00, /* item */
+    0x02, 0x00, 0x00, 0x00, 0x05, 0x00, 0x00, 0x00, /* class_and_sub_class */
+    0x53, 0x6D, 0x69, 0x74, 0x65, 0x27, 0x73, 0x20, 0x4D, 0x69, 0x67, 0x68, 0x74, 0x79, 0x20, 0x48, 0x61, 0x6D, 0x6D, 0x65, 0x72, 0x00, /* name1 */
+    0x00, /* name2 */
+    0x00, /* name3 */
+    0x00, /* name4 */
+    0x9A, 0x4C, 0x00, 0x00, /* display_id */
+    0x03, 0x00, 0x00, 0x00, /* quality */
+    0x00, 0x00, 0x00, 0x00, /* flags */
+    0x9B, 0x3C, 0x00, 0x00, /* buy_price */
+    0x1F, 0x0C, 0x00, 0x00, /* sell_price */
+    0x11, 0x00, 0x00, 0x00, /* inventory_type */
+    0xDF, 0x05, 0x00, 0x00, /* allowed_class */
+    0xFF, 0x01, 0x00, 0x00, /* allowed_race */
+    0x17, 0x00, 0x00, 0x00, /* item_level */
+    0x12, 0x00, 0x00, 0x00, /* required_level */
+    0x00, 0x00, 0x00, 0x00, /* required_skill */
+    0x00, 0x00, 0x00, 0x00, /* required_skill_rank */
+    0x00, 0x00, 0x00, 0x00, /* required_spell */
+    0x00, 0x00, 0x00, 0x00, /* required_honor_rank */
+    0x00, 0x00, 0x00, 0x00, /* required_city_rank */
+    0x00, 0x00, 0x00, 0x00, /* required_faction */
+    0x00, 0x00, 0x00, 0x00, /* required_faction_rank */
+    0x00, 0x00, 0x00, 0x00, /* max_count */
+    0x01, 0x00, 0x00, 0x00, /* stackable */
+    0x00, 0x00, 0x00, 0x00, /* container_slots */
+    /* stats: ItemStat[10] start */
+    /* stats: ItemStat[10] 0 start */
+        0x00, 0x00, 0x00, 0x00, /* stat_type */
+        0x00, 0x00, 0x00, 0x00, /* value */
+    /* stats: ItemStat[10] 0 end */
+    /* stats: ItemStat[10] 1 start */
+        0x01, 0x00, 0x00, 0x00, /* stat_type */
+        0x00, 0x00, 0x00, 0x00, /* value */
+    /* stats: ItemStat[10] 1 end */
+    /* stats: ItemStat[10] 2 start */
+        0x04, 0x00, 0x00, 0x00, /* stat_type */
+        0x0B, 0x00, 0x00, 0x00, /* value */
+    /* stats: ItemStat[10] 2 end */
+    /* stats: ItemStat[10] 3 start */
+        0x03, 0x00, 0x00, 0x00, /* stat_type */
+        0x04, 0x00, 0x00, 0x00, /* value */
+    /* stats: ItemStat[10] 3 end */
+    /* stats: ItemStat[10] 4 start */
+        0x07, 0x00, 0x00, 0x00, /* stat_type */
+        0x00, 0x00, 0x00, 0x00, /* value */
+    /* stats: ItemStat[10] 4 end */
+    /* stats: ItemStat[10] 5 start */
+        0x05, 0x00, 0x00, 0x00, /* stat_type */
+        0x00, 0x00, 0x00, 0x00, /* value */
+    /* stats: ItemStat[10] 5 end */
+    /* stats: ItemStat[10] 6 start */
+        0x06, 0x00, 0x00, 0x00, /* stat_type */
+        0x00, 0x00, 0x00, 0x00, /* value */
+    /* stats: ItemStat[10] 6 end */
+    /* stats: ItemStat[10] 7 start */
+        0x00, 0x00, 0x00, 0x00, /* stat_type */
+        0x00, 0x00, 0x00, 0x00, /* value */
+    /* stats: ItemStat[10] 7 end */
+    /* stats: ItemStat[10] 8 start */
+        0x00, 0x00, 0x00, 0x00, /* stat_type */
+        0x00, 0x00, 0x00, 0x00, /* value */
+    /* stats: ItemStat[10] 8 end */
+    /* stats: ItemStat[10] 9 start */
+        0x00, 0x00, 0x00, 0x00, /* stat_type */
+        0x00, 0x00, 0x00, 0x00, /* value */
+    /* stats: ItemStat[10] 9 end */
+    /* stats: ItemStat[10] end */
+    /* damages: ItemDamageType[5] start */
+    /* damages: ItemDamageType[5] 0 start */
+        0x00, 0x00, 0x5C, 0x42, /* damage_minimum */
+        0x00, 0x00, 0xA6, 0x42, /* damage_maximum */
+        0x00, 0x00, 0x00, 0x00, /* school */
+    /* damages: ItemDamageType[5] 0 end */
+    /* damages: ItemDamageType[5] 1 start */
+        0x00, 0x00, 0x00, 0x00, /* damage_minimum */
+        0x00, 0x00, 0x00, 0x00, /* damage_maximum */
+        0x00, 0x00, 0x00, 0x00, /* school */
+    /* damages: ItemDamageType[5] 1 end */
+    /* damages: ItemDamageType[5] 2 start */
+        0x00, 0x00, 0x00, 0x00, /* damage_minimum */
+        0x00, 0x00, 0x00, 0x00, /* damage_maximum */
+        0x00, 0x00, 0x00, 0x00, /* school */
+    /* damages: ItemDamageType[5] 2 end */
+    /* damages: ItemDamageType[5] 3 start */
+        0x00, 0x00, 0x00, 0x00, /* damage_minimum */
+        0x00, 0x00, 0x00, 0x00, /* damage_maximum */
+        0x00, 0x00, 0x00, 0x00, /* school */
+    /* damages: ItemDamageType[5] 3 end */
+    /* damages: ItemDamageType[5] 4 start */
+        0x00, 0x00, 0x00, 0x00, /* damage_minimum */
+        0x00, 0x00, 0x00, 0x00, /* damage_maximum */
+        0x00, 0x00, 0x00, 0x00, /* school */
+    /* damages: ItemDamageType[5] 4 end */
+    /* damages: ItemDamageType[5] end */
+    0x00, 0x00, 0x00, 0x00, /* armor */
+    0x00, 0x00, 0x00, 0x00, /* holy_resistance */
+    0x00, 0x00, 0x00, 0x00, /* fire_resistance */
+    0x00, 0x00, 0x00, 0x00, /* nature_resistance */
+    0x00, 0x00, 0x00, 0x00, /* frost_resistance */
+    0x00, 0x00, 0x00, 0x00, /* shadow_resistance */
+    0x00, 0x00, 0x00, 0x00, /* arcane_resistance */
+    0xAC, 0x0D, 0x00, 0x00, /* delay */
+    0x00, 0x00, 0x00, 0x00, /* ammo_type */
+    0x00, 0x00, 0x00, 0x00, /* ranged_range_modification */
+    /* spells: ItemSpells[5] start */
+    /* spells: ItemSpells[5] 0 start */
+        0x00, 0x00, 0x00, 0x00, /* spell */
+        0x00, 0x00, 0x00, 0x00, /* spell_trigger */
+        0x00, 0x00, 0x00, 0x00, /* spell_charges */
+        0x00, 0x00, 0x00, 0x00, /* spell_cooldown */
+        0x00, 0x00, 0x00, 0x00, /* spell_category */
+        0x00, 0x00, 0x00, 0x00, /* spell_category_cooldown */
+    /* spells: ItemSpells[5] 0 end */
+    /* spells: ItemSpells[5] 1 start */
+        0x00, 0x00, 0x00, 0x00, /* spell */
+        0x00, 0x00, 0x00, 0x00, /* spell_trigger */
+        0x00, 0x00, 0x00, 0x00, /* spell_charges */
+        0x00, 0x00, 0x00, 0x00, /* spell_cooldown */
+        0x00, 0x00, 0x00, 0x00, /* spell_category */
+        0x00, 0x00, 0x00, 0x00, /* spell_category_cooldown */
+    /* spells: ItemSpells[5] 1 end */
+    /* spells: ItemSpells[5] 2 start */
+        0x00, 0x00, 0x00, 0x00, /* spell */
+        0x00, 0x00, 0x00, 0x00, /* spell_trigger */
+        0x00, 0x00, 0x00, 0x00, /* spell_charges */
+        0x00, 0x00, 0x00, 0x00, /* spell_cooldown */
+        0x00, 0x00, 0x00, 0x00, /* spell_category */
+        0x00, 0x00, 0x00, 0x00, /* spell_category_cooldown */
+    /* spells: ItemSpells[5] 2 end */
+    /* spells: ItemSpells[5] 3 start */
+        0x00, 0x00, 0x00, 0x00, /* spell */
+        0x00, 0x00, 0x00, 0x00, /* spell_trigger */
+        0x00, 0x00, 0x00, 0x00, /* spell_charges */
+        0x00, 0x00, 0x00, 0x00, /* spell_cooldown */
+        0x00, 0x00, 0x00, 0x00, /* spell_category */
+        0x00, 0x00, 0x00, 0x00, /* spell_category_cooldown */
+    /* spells: ItemSpells[5] 3 end */
+    /* spells: ItemSpells[5] 4 start */
+        0x00, 0x00, 0x00, 0x00, /* spell */
+        0x00, 0x00, 0x00, 0x00, /* spell_trigger */
+        0x00, 0x00, 0x00, 0x00, /* spell_charges */
+        0x00, 0x00, 0x00, 0x00, /* spell_cooldown */
+        0x00, 0x00, 0x00, 0x00, /* spell_category */
+        0x00, 0x00, 0x00, 0x00, /* spell_category_cooldown */
+    /* spells: ItemSpells[5] 4 end */
+    /* spells: ItemSpells[5] end */
+    0x01, 0x00, 0x00, 0x00, /* bonding */
+    0x00, /* description */
+    0x00, 0x00, 0x00, 0x00, /* page_text */
+    0x00, 0x00, 0x00, 0x00, /* language */
+    0x00, 0x00, 0x00, 0x00, /* page_text_material */
+    0x00, 0x00, 0x00, 0x00, /* start_quest */
+    0x00, 0x00, 0x00, 0x00, /* lock_id */
+    0x02, 0x00, 0x00, 0x00, /* material */
+    0x01, 0x00, 0x00, 0x00, /* sheathe_type */
+    0x00, 0x00, 0x00, 0x00, /* random_property */
+    0x00, 0x00, 0x00, 0x00, /* block */
+    0x00, 0x00, 0x00, 0x00, /* item_set */
+    0x50, 0x00, 0x00, 0x00, /* max_durability */
+    0x00, 0x00, 0x00, 0x00, /* area */
+    0x00, 0x00, 0x00, 0x00, /* map */
+    0x00, 0x00, 0x00, 0x00, /* bag_family */
+] {
+    versions = "1.12";
+}
+
+
 struct ItemStat {
     u32 stat_type;
     i32 value;
@@ -666,3 +1001,4 @@ smsg SMSG_ITEM_QUERY_SINGLE_RESPONSE = 0x0058 {
 } {
     versions = "3.3.5";
 }
+

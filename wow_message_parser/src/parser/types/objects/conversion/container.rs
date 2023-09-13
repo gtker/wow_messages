@@ -540,13 +540,25 @@ fn convert_parsed_test_case_value_to_test_case_value(
                 v.push(members);
             }
 
+            let array = match ty {
+                ParsedType::Array(array) => array,
+                _ => unreachable!(),
+            };
+            let size =
+                parsed_array_to_array(c, array.clone(), containers, definers, c.tags()).size();
+
             let c = if let Some(c) = get_container(containers, ty_name, c.tags()) {
                 parsed_container_to_container(c.clone(), containers, definers)
             } else {
                 let related = get_related(containers, definers, ty_name);
                 complex_not_found(c.name(), c.tags(), &c.file_info, ty_name, &related);
             };
-            return TestValue::ArrayOfSubObject(c, v);
+
+            return TestValue::ArrayOfSubObject {
+                c,
+                members: v,
+                size,
+            };
         }
     };
 
@@ -597,6 +609,13 @@ fn convert_parsed_test_case_value_to_test_case_value(
             parse_value(&value).unwrap(),
             value.clone(),
         )),
+        ParsedType::Level16 | ParsedType::Level32 | ParsedType::Level => TestValue::Level(
+            ContainerValue::new(parse_value(&value).unwrap(), value.clone()),
+        ),
+        ParsedType::Gold => TestValue::Gold(ContainerValue::new(
+            parse_value(&value).unwrap(),
+            value.clone(),
+        )),
         ParsedType::Integer(_) => TestValue::Number(ContainerValue::new(
             parse_value(&value).unwrap(),
             value.clone(),
@@ -627,10 +646,6 @@ fn convert_parsed_test_case_value_to_test_case_value(
         ParsedType::AddonArray
         | ParsedType::VariableItemRandomProperty
         | ParsedType::NamedGuid
-        | ParsedType::Level16
-        | ParsedType::Level32
-        | ParsedType::Level
-        | ParsedType::Gold
         | ParsedType::EnchantMask
         | ParsedType::InspectTalentGearMask
         | ParsedType::MonsterMoveSpline

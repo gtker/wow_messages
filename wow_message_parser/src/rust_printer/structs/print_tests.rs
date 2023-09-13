@@ -86,6 +86,20 @@ pub(super) fn print_tests(s: &mut Writer, e: &Container, o: &Objects) {
                     for m in e.rust_object().members_in_struct() {
                         print_value(s, m, t.members(), e, version);
                     }
+
+                    if let Some(optional) = e.rust_object().optional() {
+                        let name = e.name();
+                        let optional_name = optional.name();
+                        s.body_closing_with(
+                            format!("{optional_name}: Some({name}_{optional_name}"),
+                            |s| {
+                                for m in optional.members_in_struct() {
+                                    print_value(s, m, t.members(), e, version);
+                                }
+                            },
+                            ")",
+                        );
+                    }
                 });
             });
 
@@ -365,6 +379,12 @@ fn print_value(
         TestValue::DateTime(i) => {
             s.wln_no_indent(format!("DateTime::try_from({:#X}).unwrap(),", i.value()));
         }
+        TestValue::Gold(i) => {
+            s.wln_no_indent(format!("Gold::try_from({:#X}).unwrap(),", i.value()));
+        }
+        TestValue::Level(i) => {
+            s.wln_no_indent(format!("Level::try_from({:#X}).unwrap(),", i.value()));
+        }
         TestValue::Bool(b) => {
             s.wln_no_indent(format!("{b}, "));
         }
@@ -402,21 +422,26 @@ fn print_value(
             s.dec_indent();
             s.wln_no_indent(" ],");
         }
-        TestValue::ArrayOfSubObject(array_container, multiples) => {
-            if multiples.is_empty() {
-                s.wln_no_indent("vec![],");
+        TestValue::ArrayOfSubObject { c, members, size } => {
+            let opening = match size {
+                ArraySize::Fixed(_) => "[",
+                ArraySize::Variable(_) | ArraySize::Endless => "vec![",
+            };
+
+            if members.is_empty() {
+                s.wln_no_indent(format!("{opening}],"));
                 return;
             }
 
-            s.wln_no_indent("vec![");
+            s.wln_no_indent(opening);
             s.inc_indent();
 
-            for multiple in multiples {
-                s.wln(format!("{} {{", array_container.name()));
+            for multiple in members {
+                s.wln(format!("{} {{", c.name()));
                 s.inc_indent();
 
-                for m in array_container.rust_object().members_in_struct() {
-                    print_value(s, m, multiple, array_container, version);
+                for m in c.rust_object().members_in_struct() {
+                    print_value(s, m, multiple, c, version);
                 }
 
                 s.closing_curly_with(",");

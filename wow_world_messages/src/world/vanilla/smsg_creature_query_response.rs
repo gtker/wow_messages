@@ -139,69 +139,6 @@ impl crate::Message for SMSG_CREATURE_QUERY_RESPONSE {
         "SMSG_CREATURE_QUERY_RESPONSE"
     }
 
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        use std::fmt::Write;
-        use crate::traits::Message;
-
-        let mut s = String::new();
-
-        writeln!(s, "test SMSG_CREATURE_QUERY_RESPONSE {{").unwrap();
-        // Members
-        writeln!(s, "    creature_entry = {};", self.creature_entry).unwrap();
-        if let Some(found) = &self.found {
-            writeln!(s, "    name1 = \"{}\";", found.name1).unwrap();
-            writeln!(s, "    name2 = \"{}\";", found.name2).unwrap();
-            writeln!(s, "    name3 = \"{}\";", found.name3).unwrap();
-            writeln!(s, "    name4 = \"{}\";", found.name4).unwrap();
-            writeln!(s, "    sub_name = \"{}\";", found.sub_name).unwrap();
-            writeln!(s, "    type_flags = {};", found.type_flags).unwrap();
-            writeln!(s, "    creature_type = {};", found.creature_type).unwrap();
-            writeln!(s, "    creature_family = {};", found.creature_family.as_test_case_value()).unwrap();
-            writeln!(s, "    creature_rank = {};", found.creature_rank).unwrap();
-            writeln!(s, "    unknown0 = {};", found.unknown0).unwrap();
-            writeln!(s, "    spell_data_id = {};", found.spell_data_id).unwrap();
-            writeln!(s, "    display_id = {};", found.display_id).unwrap();
-            writeln!(s, "    civilian = {};", found.civilian).unwrap();
-            writeln!(s, "    racial_leader = {};", found.racial_leader).unwrap();
-        }
-
-        writeln!(s, "}} [").unwrap();
-
-        let [a, b] = (u16::try_from(self.size() + 2).unwrap()).to_be_bytes();
-        writeln!(s, "    {a:#04X}, {b:#04X}, /* size */").unwrap();
-        let [a, b] = 97_u16.to_le_bytes();
-        writeln!(s, "    {a:#04X}, {b:#04X}, /* opcode */").unwrap();
-        let mut bytes: Vec<u8> = Vec::new();
-        self.write_into_vec(&mut bytes).unwrap();
-        let mut bytes = bytes.into_iter();
-
-        crate::util::write_bytes(&mut s, &mut bytes, 4, "creature_entry", "    ");
-        if let Some(found) = &self.found {
-            crate::util::write_bytes(&mut s, &mut bytes, found.name1.len() + 1, "name1", "    ");
-            crate::util::write_bytes(&mut s, &mut bytes, found.name2.len() + 1, "name2", "    ");
-            crate::util::write_bytes(&mut s, &mut bytes, found.name3.len() + 1, "name3", "    ");
-            crate::util::write_bytes(&mut s, &mut bytes, found.name4.len() + 1, "name4", "    ");
-            crate::util::write_bytes(&mut s, &mut bytes, found.sub_name.len() + 1, "sub_name", "    ");
-            crate::util::write_bytes(&mut s, &mut bytes, 4, "type_flags", "    ");
-            crate::util::write_bytes(&mut s, &mut bytes, 4, "creature_type", "    ");
-            crate::util::write_bytes(&mut s, &mut bytes, 4, "creature_family", "    ");
-            crate::util::write_bytes(&mut s, &mut bytes, 4, "creature_rank", "    ");
-            crate::util::write_bytes(&mut s, &mut bytes, 4, "unknown0", "    ");
-            crate::util::write_bytes(&mut s, &mut bytes, 4, "spell_data_id", "    ");
-            crate::util::write_bytes(&mut s, &mut bytes, 4, "display_id", "    ");
-            crate::util::write_bytes(&mut s, &mut bytes, 1, "civilian", "    ");
-            crate::util::write_bytes(&mut s, &mut bytes, 1, "racial_leader", "    ");
-        }
-
-
-        writeln!(s, "] {{").unwrap();
-        writeln!(s, "    versions = \"{}\";", std::env::var("WOWM_TEST_CASE_WORLD_VERSION").unwrap_or("1.12".to_string())).unwrap();
-        writeln!(s, "}}\n").unwrap();
-
-        Some(s)
-    }
-
     fn size_without_header(&self) -> u32 {
         self.size() as u32
     }
@@ -310,6 +247,111 @@ impl SMSG_CREATURE_QUERY_RESPONSE {
             0
         }
     }
+}
+
+#[cfg(test)]
+mod test {
+    #![allow(clippy::missing_const_for_fn)]
+    use super::SMSG_CREATURE_QUERY_RESPONSE;
+    use super::*;
+    use super::super::*;
+    use crate::vanilla::opcodes::ServerOpcodeMessage;
+    use crate::vanilla::{ClientMessage, ServerMessage};
+
+    const HEADER_SIZE: usize = 2 + 2;
+    fn assert(t: &SMSG_CREATURE_QUERY_RESPONSE, expected: &SMSG_CREATURE_QUERY_RESPONSE) {
+        assert_eq!(t.creature_entry, expected.creature_entry);
+    }
+
+    const RAW0: [u8; 48] = [ 0x00, 0x2E, 0x61, 0x00, 0x45, 0x00, 0x00, 0x00, 0x54,
+         0x68, 0x69, 0x6E, 0x67, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+         0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+         0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+         0x00, 0x00, 0x00, ];
+
+    pub(crate) fn expected0() -> SMSG_CREATURE_QUERY_RESPONSE {
+        SMSG_CREATURE_QUERY_RESPONSE {
+            creature_entry: 0x45,
+            found: Some(SMSG_CREATURE_QUERY_RESPONSE_found {
+                name1: String::from("Thing"),
+                name2: String::from(""),
+                name3: String::from(""),
+                name4: String::from(""),
+                sub_name: String::from(""),
+                type_flags: 0x0,
+                creature_type: 0x0,
+                creature_family: CreatureFamily::None,
+                creature_rank: 0x0,
+                unknown0: 0x0,
+                spell_data_id: 0x0,
+                display_id: 0x0,
+                civilian: 0x0,
+                racial_leader: 0x0,
+            })
+        }
+
+    }
+
+    // Generated from `wow_message_parser/wowm/world/queries/smsg_creature_query_response.wowm` line 114.
+    #[cfg(feature = "sync")]
+    #[cfg_attr(feature = "sync", test)]
+    fn smsg_creature_query_response0() {
+        let expected = expected0();
+        let t = ServerOpcodeMessage::read_unencrypted(&mut std::io::Cursor::new(&RAW0)).unwrap();
+        let t = match t {
+            ServerOpcodeMessage::SMSG_CREATURE_QUERY_RESPONSE(t) => t,
+            opcode => panic!("incorrect opcode. Expected SMSG_CREATURE_QUERY_RESPONSE, got {opcode:#?}"),
+        };
+
+        assert(&t, &expected);
+        assert_eq!(t.size() + HEADER_SIZE, RAW0.len());
+
+        let mut dest = Vec::with_capacity(RAW0.len());
+        expected.write_unencrypted_server(&mut std::io::Cursor::new(&mut dest)).unwrap();
+
+        assert_eq!(dest, RAW0);
+    }
+
+    // Generated from `wow_message_parser/wowm/world/queries/smsg_creature_query_response.wowm` line 114.
+    #[cfg(feature = "tokio")]
+    #[cfg_attr(feature = "tokio", tokio::test)]
+    async fn tokio_smsg_creature_query_response0() {
+        let expected = expected0();
+        let t = ServerOpcodeMessage::tokio_read_unencrypted(&mut std::io::Cursor::new(&RAW0)).await.unwrap();
+        let t = match t {
+            ServerOpcodeMessage::SMSG_CREATURE_QUERY_RESPONSE(t) => t,
+            opcode => panic!("incorrect opcode. Expected SMSG_CREATURE_QUERY_RESPONSE, got {opcode:#?}"),
+        };
+
+        assert(&t, &expected);
+        assert_eq!(t.size() + HEADER_SIZE, RAW0.len());
+
+        let mut dest = Vec::with_capacity(RAW0.len());
+        expected.tokio_write_unencrypted_server(&mut std::io::Cursor::new(&mut dest)).await.unwrap();
+
+        assert_eq!(dest, RAW0);
+    }
+
+    // Generated from `wow_message_parser/wowm/world/queries/smsg_creature_query_response.wowm` line 114.
+    #[cfg(feature = "async-std")]
+    #[cfg_attr(feature = "async-std", async_std::test)]
+    async fn astd_smsg_creature_query_response0() {
+        let expected = expected0();
+        let t = ServerOpcodeMessage::astd_read_unencrypted(&mut async_std::io::Cursor::new(&RAW0)).await.unwrap();
+        let t = match t {
+            ServerOpcodeMessage::SMSG_CREATURE_QUERY_RESPONSE(t) => t,
+            opcode => panic!("incorrect opcode. Expected SMSG_CREATURE_QUERY_RESPONSE, got {opcode:#?}"),
+        };
+
+        assert(&t, &expected);
+        assert_eq!(t.size() + HEADER_SIZE, RAW0.len());
+
+        let mut dest = Vec::with_capacity(RAW0.len());
+        expected.astd_write_unencrypted_server(&mut async_std::io::Cursor::new(&mut dest)).await.unwrap();
+
+        assert_eq!(dest, RAW0);
+    }
+
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]

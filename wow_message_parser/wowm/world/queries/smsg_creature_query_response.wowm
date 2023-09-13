@@ -110,3 +110,42 @@ smsg SMSG_CREATURE_QUERY_RESPONSE = 0x61 {
 } {
     versions = "3.3.5";
 }
+
+test SMSG_CREATURE_QUERY_RESPONSE {
+    creature_entry = 69;
+    name1 = "Thing";
+    name2 = "";
+    name3 = "";
+    name4 = "";
+    sub_name = "";
+    type_flags = 0;
+    creature_type = 0;
+    creature_family = NONE;
+    creature_rank = 0;
+    unknown0 = 0;
+    spell_data_id = 0;
+    display_id = 0;
+    civilian = 0;
+    racial_leader = 0;
+} [
+    0x00, 0x2E, /* size */
+    0x61, 0x00, /* opcode */
+    0x45, 0x00, 0x00, 0x00, /* creature_entry */
+    0x54, 0x68, 0x69, 0x6E, 0x67, 0x00, /* name1 */
+    0x00, /* name2 */
+    0x00, /* name3 */
+    0x00, /* name4 */
+    0x00, /* sub_name */
+    0x00, 0x00, 0x00, 0x00, /* type_flags */
+    0x00, 0x00, 0x00, 0x00, /* creature_type */
+    0x00, 0x00, 0x00, 0x00, /* creature_family */
+    0x00, 0x00, 0x00, 0x00, /* creature_rank */
+    0x00, 0x00, 0x00, 0x00, /* unknown0 */
+    0x00, 0x00, 0x00, 0x00, /* spell_data_id */
+    0x00, 0x00, 0x00, 0x00, /* display_id */
+    0x00, /* civilian */
+    0x00, /* racial_leader */
+] {
+    versions = "1.12";
+}
+

@@ -18,3 +18,18 @@ smsg SMSG_ATTACKSTOP = 0x0144 {
     versions = "1.8 1.9 1.10 1.11 1.12 2 3";
 }
 
+
+test SMSG_ATTACKSTOP {
+    player = 23;
+    enemy = 100;
+    unknown1 = 0;
+} [
+    0x00, 0x0A, /* size */
+    0x44, 0x01, /* opcode */
+    0x01, 0x17, /* player */
+    0x01, 0x64, /* enemy */
+    0x00, 0x00, 0x00, 0x00, /* unknown1 */
+] {
+    versions = "1.12";
+}
+
