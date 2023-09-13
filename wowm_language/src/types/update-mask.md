@@ -41,6 +41,80 @@ We then send, in order:
 2. The mask bytes as `u32`s.
 3. The data values as `u32`s.
 
+# Examples
+
+The following Python example uses the `asyncio` module.
+Additionally `read_int` is a function that reads a certain amount of bytes and returns it as an integer.
+So `read_int(reader, 1)` would return a `u8` and `read_int(reader, 4)` would return a `u32`.
+
+The `dict[int, int]` is a dictionary of integers, also called a hash map.
+The keys are the offsets defined below, and the values are `u32` data values.
+
+The write function uses Python's `struct` module to pack the data into a byte array.
+The [reference for `struct`](https://docs.python.org/3/library/struct.html#format-characters) lists the different format characters used.
+
+The Python code below does not have the best API; users will have to fill out the `dict` using the offsets defined as constants without any type safety, merging of fields for Guids, or splitting of fields into smaller types.
+When designing your own `UpdateMask` type consider what API it allows you to expose.
+
+```python
+class UpdateMask:
+    fields: dict[int, int]
+
+    @staticmethod
+    async def read(reader: asyncio.StreamReader):
+        amount_of_blocks = await read_int(reader, 1)
+
+        blocks = []
+        for _ in range(0, amount_of_blocks):
+            blocks.append(await read_int(reader, 4))
+
+        fields = {}
+        for block_index, block in enumerate(blocks):
+            for bit in range(0, 32):
+                if block & 1 << bit:
+                    value = await read_int(reader, 4)
+                    key = block_index * 32 + bit
+                    fields[key] = value
+
+        return UpdateMask(fields=fields)
+
+    def write(self, fmt, data):
+        highest_key = max(self.fields)
+        amount_of_blocks = highest_key // 32
+        if highest_key % 32 != 0:
+            amount_of_blocks += 1
+
+        fmt += 'B'
+        data.append(amount_of_blocks)
+
+        blocks = [0] * amount_of_blocks
+
+        for key in self.fields:
+            block = key // 32
+            index = key % 32
+            blocks[block] |= 1 << index
+
+        fmt += f'{len(blocks)}I'
+        data.extend(blocks)
+
+        for key in sorted(self.fields):
+            fmt += 'I'
+            data.append(self.fields[key])
+
+        return fmt, data
+
+    def size(self):
+        highest_key = max(self.fields)
+        amount_of_blocks = highest_key // 32
+
+        extra = highest_key % 32
+        if extra != 0:
+            extra = 1
+        else:
+            extra = 0
+
+        return 1 + (extra + amount_of_blocks + len(self.fields)) * 4
+```
 
 ## Lookup Table
 ### Version 1.12
