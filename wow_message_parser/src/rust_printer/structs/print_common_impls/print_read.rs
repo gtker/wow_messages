@@ -13,7 +13,7 @@ use crate::rust_printer::structs::print_common_impls::print_size::{
     print_rust_members_sizes, print_size_of_ty_rust_view,
 };
 use crate::rust_printer::writer::Writer;
-use crate::rust_printer::{get_new_flag_type_name, get_new_type_name, DefinerType};
+use crate::rust_printer::{get_new_flag_type_name, DefinerType};
 use crate::UTILITY_PATH;
 
 fn print_read_array(
@@ -435,10 +435,17 @@ fn print_read_if_statement_flag(
             .rust_definers_in_enumerator(&statement.flag_get_enumerator()),
     );
 
-    let new_ty_name = get_new_flag_type_name(
-        &get_new_type_name(e.name(), &statement.original_ty().rust_str()),
-        &statement.flag_get_enumerator_rust_name(),
-    );
+    let rd = e
+        .rust_object()
+        .rust_definer_with_variable_name_and_enumerator(
+            statement.name(),
+            &statement.flag_get_enumerator(),
+        );
+    let new_ty_name = if statement.is_elseif_flag() {
+        rd.ty_name().to_string()
+    } else {
+        get_new_flag_type_name(rd.ty_name(), &statement.flag_get_enumerator_rust_name())
+    };
 
     if statement.else_ifs().is_empty() {
         s.open_curly(format!("Some({new_ty_name}",));
@@ -449,12 +456,6 @@ fn print_read_if_statement_flag(
         ));
     }
 
-    let rd = e
-        .rust_object()
-        .rust_definer_with_variable_name_and_enumerator(
-            statement.name(),
-            &statement.flag_get_enumerator(),
-        );
     let enumerator = rd.get_enumerator(&statement.flag_get_enumerator());
     for m in enumerator.members_in_struct() {
         s.wln(m.struct_initialization_string());
