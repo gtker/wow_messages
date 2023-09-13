@@ -29,7 +29,7 @@ version = "0.6.0"
 default-features = false
 optional = true
 git = "https://github.com/gtker/wow_srp.git"
-rev = "5b193703a863e8750bdfff449de28ce9d25cd25b"
+rev = "9c5382a2915850efc69f05d7985ab06b3ec13163"
 
 [dependencies.chrono]
 version = "0.4"
