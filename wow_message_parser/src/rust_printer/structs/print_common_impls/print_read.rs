@@ -59,7 +59,7 @@ fn print_read_array(
             }
 
             s.body(format!("for i in {name}.iter_mut()"), |s| {
-                print_array_ty(s, array, d, prefix, "r", postfix, true, None);
+                print_array_ty(s, array, d, prefix, postfix, true, None);
             });
         }
         ArraySize::Variable(m) => {
@@ -69,22 +69,28 @@ fn print_read_array(
             ));
 
             s.body(format!("for _ in 0..{length}", length = m.name()), |s| {
-                print_array_ty(s, array, d, prefix, "r", postfix, false, None);
+                print_array_ty(s, array, d, prefix, postfix, false, None);
             });
         }
         ArraySize::Endless => {
-            let reader = if array.compressed() {
+            if array.compressed() {
                 s.wln(format!(
                     "let {name}_decompressed_size = crate::util::read_u32_le(&mut r)?;"
                 ));
                 s.newline();
 
-                s.wln(format!("let mut decoder = &mut flate2::read::ZlibDecoder::new_with_buf(r, vec![0_u8; {name}_decompressed_size as usize]);"));
+                s.wln(format!(
+                    "let mut buf = Vec::with_capacity({name}_decompressed_size as usize);"
+                ));
+
+                s.wln(format!(
+                    "let mut decoder = &mut flate2::read::ZlibDecoder::new(r);"
+                ));
+                // TODO: I want to know if this fails, should this be a separate error mode?
+                s.wln("decoder.read_to_end(&mut buf).unwrap();");
+                s.wln("let mut r = &buf[..];");
                 s.newline();
-                "decoder"
-            } else {
-                "r"
-            };
+            }
 
             print_size_before_variable(s, e, d.name());
             s.wln(format!(
@@ -92,9 +98,9 @@ fn print_read_array(
             ));
 
             let loop_condition = if array.compressed() {
-                format!("while decoder.total_out() < ({name}_decompressed_size as u64)")
+                "while !r.is_empty()"
             } else {
-                "while current_size < (body_size as usize)".to_string()
+                "while current_size < (body_size as usize)"
             };
 
             s.wln(format!(
@@ -127,7 +133,7 @@ fn print_read_array(
                     None
                 };
 
-                print_array_ty(s, array, d, prefix, reader, postfix, false, array_override);
+                print_array_ty(s, array, d, prefix, postfix, false, array_override);
 
                 if !array.compressed() {
                     s.wln(format!("current_size += {size};"));
@@ -149,7 +155,6 @@ fn print_array_ty(
     array: &Array,
     d: &StructMemberDefinition,
     prefix: &str,
-    reader: &str,
     postfix: &str,
     array_is_fixed: bool,
     prefix_postfix_override: Option<(String, String)>,
@@ -163,13 +168,13 @@ fn print_array_ty(
     match array.ty() {
         ArrayType::Integer(integer_type) => {
             s.wln(format!(
-                "{array_prefix}{UTILITY_PATH}::{prefix}read_{int_type}_le(&mut {reader}){postfix}?{array_postfix}",
+                "{array_prefix}{UTILITY_PATH}::{prefix}read_{int_type}_le(&mut r){postfix}?{array_postfix}",
                 int_type = integer_type.rust_str(),
             ));
         }
         ArrayType::CString => {
             s.wln(format!(
-                "let s = crate::util::{prefix}read_c_string_to_vec(&mut {reader}){postfix}?;",
+                "let s = crate::util::{prefix}read_c_string_to_vec(&mut r){postfix}?;",
             ));
             s.wln(format!(
                 "{array_prefix}String::from_utf8(s)?{array_postfix}",
@@ -177,23 +182,23 @@ fn print_array_ty(
         }
         ArrayType::PackedGuid => {
             s.wln(format!(
-                "{array_prefix}crate::util::read_packed_guid(&mut {reader}){postfix}?{array_postfix}",
+                "{array_prefix}crate::util::read_packed_guid(&mut r){postfix}?{array_postfix}",
             ));
         }
         ArrayType::Guid => {
             s.wln(format!(
-                "{array_prefix}crate::util::read_guid(&mut {reader})?{array_postfix}",
+                "{array_prefix}crate::util::read_guid(&mut r)?{array_postfix}",
             ));
         }
         ArrayType::Struct(e) => {
             if e.tags().is_in_base() {
                 let f = base_struct_read_name(e);
                 s.wln(format!(
-                    "{array_prefix}crate::util::{f}(&mut {reader}){postfix}?{array_postfix}",
+                    "{array_prefix}crate::util::{f}(&mut r){postfix}?{array_postfix}",
                 ));
             } else {
                 s.wln(format!(
-                    "{array_prefix}{ty}::{prefix}read(&mut {reader}){postfix}?{array_postfix}",
+                    "{array_prefix}{ty}::{prefix}read(&mut r){postfix}?{array_postfix}",
                     ty = array.ty().rust_str(),
                 ));
             }
