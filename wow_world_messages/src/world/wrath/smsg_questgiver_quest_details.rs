@@ -305,7 +305,7 @@ impl crate::Message for SMSG_QUESTGIVER_QUEST_DETAILS {
         writeln!(s, "    money_reward = {};", self.money_reward.as_int()).unwrap();
         writeln!(s, "    experience_reward = {};", self.experience_reward).unwrap();
         writeln!(s, "    honor_reward = {};", self.honor_reward).unwrap();
-        writeln!(s, "    {}", if self.honor_reward_multiplier.to_string().contains('.') { self.honor_reward_multiplier.to_string() } else { format!("{}.0", self.honor_reward_multiplier) }).unwrap();
+        writeln!(s, "    honor_reward_multiplier = {}", if self.honor_reward_multiplier.to_string().contains('.') { self.honor_reward_multiplier.to_string() } else { format!("{}.0", self.honor_reward_multiplier) }).unwrap();
         writeln!(s, "    reward_spell = {};", self.reward_spell).unwrap();
         writeln!(s, "    casted_spell = {};", self.casted_spell).unwrap();
         writeln!(s, "    title_reward = {};", self.title_reward).unwrap();

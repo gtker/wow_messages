@@ -244,13 +244,13 @@ fn print_member_definition(
             );
         }
         Type::Population => {
-            test_case_string::wlna(s, "    {}", format!("if {var_name}.as_int().to_string().contains(\'.\') {{ {var_name}.as_int().to_string() }} else {{ format!(\"{{}}.0\", {var_name}.as_int()) }}"));
+            test_case_string::wlna(s, format!("{prefix}{name} = {{}}"), format!("if {var_name}.as_int().to_string().contains(\'.\') {{ {var_name}.as_int().to_string() }} else {{ format!(\"{{}}.0\", {var_name}.as_int()) }}"));
         }
         Type::String | Type::CString | Type::SizedCString => {
             test_case_string::wlna(s, format!("{prefix}{name} = \\\"{{}}\\\";"), var_name);
         }
         Type::FloatingPoint => {
-            test_case_string::wlna(s, "    {}", format!("if {var_name}.to_string().contains(\'.\') {{ {var_name}.to_string() }} else {{ format!(\"{{}}.0\", {var_name}) }}"));
+            test_case_string::wlna(s, format!("{prefix}{name} = {{}}"), format!("if {var_name}.to_string().contains(\'.\') {{ {var_name}.to_string() }} else {{ format!(\"{{}}.0\", {var_name}) }}"));
         }
         Type::IpAddress => {
             test_case_string::wlna(

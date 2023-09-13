@@ -80,22 +80,22 @@ impl crate::Message for CMSG_UPDATE_MISSILE_TRAJECTORY {
         // Members
         writeln!(s, "    guid = {};", self.guid.guid()).unwrap();
         writeln!(s, "    spell = {};", self.spell).unwrap();
-        writeln!(s, "    {}", if self.elevation.to_string().contains('.') { self.elevation.to_string() } else { format!("{}.0", self.elevation) }).unwrap();
-        writeln!(s, "    {}", if self.speed.to_string().contains('.') { self.speed.to_string() } else { format!("{}.0", self.speed) }).unwrap();
+        writeln!(s, "    elevation = {}", if self.elevation.to_string().contains('.') { self.elevation.to_string() } else { format!("{}.0", self.elevation) }).unwrap();
+        writeln!(s, "    speed = {}", if self.speed.to_string().contains('.') { self.speed.to_string() } else { format!("{}.0", self.speed) }).unwrap();
         // position: Vector3d
         writeln!(s, "    position = {{").unwrap();
         // Members
-        writeln!(s, "    {}", if self.position.x.to_string().contains('.') { self.position.x.to_string() } else { format!("{}.0", self.position.x) }).unwrap();
-        writeln!(s, "    {}", if self.position.y.to_string().contains('.') { self.position.y.to_string() } else { format!("{}.0", self.position.y) }).unwrap();
-        writeln!(s, "    {}", if self.position.z.to_string().contains('.') { self.position.z.to_string() } else { format!("{}.0", self.position.z) }).unwrap();
+        writeln!(s, "        x = {}", if self.position.x.to_string().contains('.') { self.position.x.to_string() } else { format!("{}.0", self.position.x) }).unwrap();
+        writeln!(s, "        y = {}", if self.position.y.to_string().contains('.') { self.position.y.to_string() } else { format!("{}.0", self.position.y) }).unwrap();
+        writeln!(s, "        z = {}", if self.position.z.to_string().contains('.') { self.position.z.to_string() } else { format!("{}.0", self.position.z) }).unwrap();
 
         writeln!(s, "    }};").unwrap();
         // target: Vector3d
         writeln!(s, "    target = {{").unwrap();
         // Members
-        writeln!(s, "    {}", if self.target.x.to_string().contains('.') { self.target.x.to_string() } else { format!("{}.0", self.target.x) }).unwrap();
-        writeln!(s, "    {}", if self.target.y.to_string().contains('.') { self.target.y.to_string() } else { format!("{}.0", self.target.y) }).unwrap();
-        writeln!(s, "    {}", if self.target.z.to_string().contains('.') { self.target.z.to_string() } else { format!("{}.0", self.target.z) }).unwrap();
+        writeln!(s, "        x = {}", if self.target.x.to_string().contains('.') { self.target.x.to_string() } else { format!("{}.0", self.target.x) }).unwrap();
+        writeln!(s, "        y = {}", if self.target.y.to_string().contains('.') { self.target.y.to_string() } else { format!("{}.0", self.target.y) }).unwrap();
+        writeln!(s, "        z = {}", if self.target.z.to_string().contains('.') { self.target.z.to_string() } else { format!("{}.0", self.target.z) }).unwrap();
 
         writeln!(s, "    }};").unwrap();
 

@@ -115,12 +115,12 @@ impl crate::Message for SMSG_UPDATE_OBJECT {
                                 // living_position: Vector3d
                                 writeln!(s, "            living_position = {{").unwrap();
                                 // Members
-                                writeln!(s, "    {}", if living_position.x.to_string().contains('.') { living_position.x.to_string() } else { format!("{}.0", living_position.x) }).unwrap();
-                                writeln!(s, "    {}", if living_position.y.to_string().contains('.') { living_position.y.to_string() } else { format!("{}.0", living_position.y) }).unwrap();
-                                writeln!(s, "    {}", if living_position.z.to_string().contains('.') { living_position.z.to_string() } else { format!("{}.0", living_position.z) }).unwrap();
+                                writeln!(s, "                x = {}", if living_position.x.to_string().contains('.') { living_position.x.to_string() } else { format!("{}.0", living_position.x) }).unwrap();
+                                writeln!(s, "                y = {}", if living_position.y.to_string().contains('.') { living_position.y.to_string() } else { format!("{}.0", living_position.y) }).unwrap();
+                                writeln!(s, "                z = {}", if living_position.z.to_string().contains('.') { living_position.z.to_string() } else { format!("{}.0", living_position.z) }).unwrap();
 
                                 writeln!(s, "    }};").unwrap();
-                                writeln!(s, "    {}", if living_orientation.to_string().contains('.') { living_orientation.to_string() } else { format!("{}.0", living_orientation) }).unwrap();
+                                writeln!(s, "            living_orientation = {}", if living_orientation.to_string().contains('.') { living_orientation.to_string() } else { format!("{}.0", living_orientation) }).unwrap();
                                 if let Some(if_statement) = &flags.get_on_transport() {
                                     // transport: TransportInfo
                                     writeln!(s, "            transport = {{").unwrap();
@@ -129,12 +129,12 @@ impl crate::Message for SMSG_UPDATE_OBJECT {
                                     // position: Vector3d
                                     writeln!(s, "                position = {{").unwrap();
                                     // Members
-                                    writeln!(s, "    {}", if if_statement.transport.position.x.to_string().contains('.') { if_statement.transport.position.x.to_string() } else { format!("{}.0", if_statement.transport.position.x) }).unwrap();
-                                    writeln!(s, "    {}", if if_statement.transport.position.y.to_string().contains('.') { if_statement.transport.position.y.to_string() } else { format!("{}.0", if_statement.transport.position.y) }).unwrap();
-                                    writeln!(s, "    {}", if if_statement.transport.position.z.to_string().contains('.') { if_statement.transport.position.z.to_string() } else { format!("{}.0", if_statement.transport.position.z) }).unwrap();
+                                    writeln!(s, "                    x = {}", if if_statement.transport.position.x.to_string().contains('.') { if_statement.transport.position.x.to_string() } else { format!("{}.0", if_statement.transport.position.x) }).unwrap();
+                                    writeln!(s, "                    y = {}", if if_statement.transport.position.y.to_string().contains('.') { if_statement.transport.position.y.to_string() } else { format!("{}.0", if_statement.transport.position.y) }).unwrap();
+                                    writeln!(s, "                    z = {}", if if_statement.transport.position.z.to_string().contains('.') { if_statement.transport.position.z.to_string() } else { format!("{}.0", if_statement.transport.position.z) }).unwrap();
 
                                     writeln!(s, "    }};").unwrap();
-                                    writeln!(s, "    {}", if if_statement.transport.orientation.to_string().contains('.') { if_statement.transport.orientation.to_string() } else { format!("{}.0", if_statement.transport.orientation) }).unwrap();
+                                    writeln!(s, "                orientation = {}", if if_statement.transport.orientation.to_string().contains('.') { if_statement.transport.orientation.to_string() } else { format!("{}.0", if_statement.transport.orientation) }).unwrap();
                                     writeln!(s, "                timestamp = {};", if_statement.transport.timestamp).unwrap();
 
                                     writeln!(s, "    }};").unwrap();
@@ -145,36 +145,36 @@ impl crate::Message for SMSG_UPDATE_OBJECT {
                                         crate::tbc::MovementBlock_MovementFlags_Swimming::Swimming {
                                             pitch1,
                                         } => {
-                                            writeln!(s, "    {}", if pitch1.to_string().contains('.') { pitch1.to_string() } else { format!("{}.0", pitch1) }).unwrap();
+                                            writeln!(s, "            pitch1 = {}", if pitch1.to_string().contains('.') { pitch1.to_string() } else { format!("{}.0", pitch1) }).unwrap();
                                         }
                                         crate::tbc::MovementBlock_MovementFlags_Swimming::Ontransport {
                                             pitch2,
                                         } => {
-                                            writeln!(s, "    {}", if pitch2.to_string().contains('.') { pitch2.to_string() } else { format!("{}.0", pitch2) }).unwrap();
+                                            writeln!(s, "            pitch2 = {}", if pitch2.to_string().contains('.') { pitch2.to_string() } else { format!("{}.0", pitch2) }).unwrap();
                                         }
                                     }
                                 }
 
-                                writeln!(s, "    {}", if fall_time.to_string().contains('.') { fall_time.to_string() } else { format!("{}.0", fall_time) }).unwrap();
+                                writeln!(s, "            fall_time = {}", if fall_time.to_string().contains('.') { fall_time.to_string() } else { format!("{}.0", fall_time) }).unwrap();
                                 if let Some(if_statement) = &flags.get_jumping() {
-                                    writeln!(s, "    {}", if if_statement.z_speed.to_string().contains('.') { if_statement.z_speed.to_string() } else { format!("{}.0", if_statement.z_speed) }).unwrap();
-                                    writeln!(s, "    {}", if if_statement.cos_angle.to_string().contains('.') { if_statement.cos_angle.to_string() } else { format!("{}.0", if_statement.cos_angle) }).unwrap();
-                                    writeln!(s, "    {}", if if_statement.sin_angle.to_string().contains('.') { if_statement.sin_angle.to_string() } else { format!("{}.0", if_statement.sin_angle) }).unwrap();
-                                    writeln!(s, "    {}", if if_statement.xy_speed.to_string().contains('.') { if_statement.xy_speed.to_string() } else { format!("{}.0", if_statement.xy_speed) }).unwrap();
+                                    writeln!(s, "            z_speed = {}", if if_statement.z_speed.to_string().contains('.') { if_statement.z_speed.to_string() } else { format!("{}.0", if_statement.z_speed) }).unwrap();
+                                    writeln!(s, "            cos_angle = {}", if if_statement.cos_angle.to_string().contains('.') { if_statement.cos_angle.to_string() } else { format!("{}.0", if_statement.cos_angle) }).unwrap();
+                                    writeln!(s, "            sin_angle = {}", if if_statement.sin_angle.to_string().contains('.') { if_statement.sin_angle.to_string() } else { format!("{}.0", if_statement.sin_angle) }).unwrap();
+                                    writeln!(s, "            xy_speed = {}", if if_statement.xy_speed.to_string().contains('.') { if_statement.xy_speed.to_string() } else { format!("{}.0", if_statement.xy_speed) }).unwrap();
                                 }
 
                                 if let Some(if_statement) = &flags.get_spline_elevation() {
-                                    writeln!(s, "    {}", if if_statement.spline_elevation.to_string().contains('.') { if_statement.spline_elevation.to_string() } else { format!("{}.0", if_statement.spline_elevation) }).unwrap();
+                                    writeln!(s, "            spline_elevation = {}", if if_statement.spline_elevation.to_string().contains('.') { if_statement.spline_elevation.to_string() } else { format!("{}.0", if_statement.spline_elevation) }).unwrap();
                                 }
 
-                                writeln!(s, "    {}", if walking_speed.to_string().contains('.') { walking_speed.to_string() } else { format!("{}.0", walking_speed) }).unwrap();
-                                writeln!(s, "    {}", if running_speed.to_string().contains('.') { running_speed.to_string() } else { format!("{}.0", running_speed) }).unwrap();
-                                writeln!(s, "    {}", if backwards_running_speed.to_string().contains('.') { backwards_running_speed.to_string() } else { format!("{}.0", backwards_running_speed) }).unwrap();
-                                writeln!(s, "    {}", if swimming_speed.to_string().contains('.') { swimming_speed.to_string() } else { format!("{}.0", swimming_speed) }).unwrap();
-                                writeln!(s, "    {}", if flying_speed.to_string().contains('.') { flying_speed.to_string() } else { format!("{}.0", flying_speed) }).unwrap();
-                                writeln!(s, "    {}", if backwards_flying_speed.to_string().contains('.') { backwards_flying_speed.to_string() } else { format!("{}.0", backwards_flying_speed) }).unwrap();
-                                writeln!(s, "    {}", if backwards_swimming_speed.to_string().contains('.') { backwards_swimming_speed.to_string() } else { format!("{}.0", backwards_swimming_speed) }).unwrap();
-                                writeln!(s, "    {}", if turn_rate.to_string().contains('.') { turn_rate.to_string() } else { format!("{}.0", turn_rate) }).unwrap();
+                                writeln!(s, "            walking_speed = {}", if walking_speed.to_string().contains('.') { walking_speed.to_string() } else { format!("{}.0", walking_speed) }).unwrap();
+                                writeln!(s, "            running_speed = {}", if running_speed.to_string().contains('.') { running_speed.to_string() } else { format!("{}.0", running_speed) }).unwrap();
+                                writeln!(s, "            backwards_running_speed = {}", if backwards_running_speed.to_string().contains('.') { backwards_running_speed.to_string() } else { format!("{}.0", backwards_running_speed) }).unwrap();
+                                writeln!(s, "            swimming_speed = {}", if swimming_speed.to_string().contains('.') { swimming_speed.to_string() } else { format!("{}.0", swimming_speed) }).unwrap();
+                                writeln!(s, "            flying_speed = {}", if flying_speed.to_string().contains('.') { flying_speed.to_string() } else { format!("{}.0", flying_speed) }).unwrap();
+                                writeln!(s, "            backwards_flying_speed = {}", if backwards_flying_speed.to_string().contains('.') { backwards_flying_speed.to_string() } else { format!("{}.0", backwards_flying_speed) }).unwrap();
+                                writeln!(s, "            backwards_swimming_speed = {}", if backwards_swimming_speed.to_string().contains('.') { backwards_swimming_speed.to_string() } else { format!("{}.0", backwards_swimming_speed) }).unwrap();
+                                writeln!(s, "            turn_rate = {}", if turn_rate.to_string().contains('.') { turn_rate.to_string() } else { format!("{}.0", turn_rate) }).unwrap();
                                 if let Some(if_statement) = &flags.get_spline_enabled() {
                                     writeln!(s, "            spline_flags = {};", SplineFlag::new(if_statement.spline_flags.as_int()).as_test_case_value()).unwrap();
                                     if let Some(if_statement) = &if_statement.spline_flags.get_final_angle() {
@@ -182,7 +182,7 @@ impl crate::Message for SMSG_UPDATE_OBJECT {
                                             crate::tbc::MovementBlock_SplineFlag_FinalAngle::FinalAngle {
                                                 angle,
                                             } => {
-                                                writeln!(s, "    {}", if angle.to_string().contains('.') { angle.to_string() } else { format!("{}.0", angle) }).unwrap();
+                                                writeln!(s, "            angle = {}", if angle.to_string().contains('.') { angle.to_string() } else { format!("{}.0", angle) }).unwrap();
                                             }
                                             crate::tbc::MovementBlock_SplineFlag_FinalAngle::FinalTarget {
                                                 target,
@@ -195,9 +195,9 @@ impl crate::Message for SMSG_UPDATE_OBJECT {
                                                 // spline_final_point: Vector3d
                                                 writeln!(s, "            spline_final_point = {{").unwrap();
                                                 // Members
-                                                writeln!(s, "    {}", if spline_final_point.x.to_string().contains('.') { spline_final_point.x.to_string() } else { format!("{}.0", spline_final_point.x) }).unwrap();
-                                                writeln!(s, "    {}", if spline_final_point.y.to_string().contains('.') { spline_final_point.y.to_string() } else { format!("{}.0", spline_final_point.y) }).unwrap();
-                                                writeln!(s, "    {}", if spline_final_point.z.to_string().contains('.') { spline_final_point.z.to_string() } else { format!("{}.0", spline_final_point.z) }).unwrap();
+                                                writeln!(s, "                x = {}", if spline_final_point.x.to_string().contains('.') { spline_final_point.x.to_string() } else { format!("{}.0", spline_final_point.x) }).unwrap();
+                                                writeln!(s, "                y = {}", if spline_final_point.y.to_string().contains('.') { spline_final_point.y.to_string() } else { format!("{}.0", spline_final_point.y) }).unwrap();
+                                                writeln!(s, "                z = {}", if spline_final_point.z.to_string().contains('.') { spline_final_point.z.to_string() } else { format!("{}.0", spline_final_point.z) }).unwrap();
 
                                                 writeln!(s, "    }};").unwrap();
                                             }
@@ -212,9 +212,9 @@ impl crate::Message for SMSG_UPDATE_OBJECT {
                                     for v in if_statement.nodes.as_slice() {
                                         writeln!(s, "{{").unwrap();
                                         // Members
-                                        writeln!(s, "    {}", if v.x.to_string().contains('.') { v.x.to_string() } else { format!("{}.0", v.x) }).unwrap();
-                                        writeln!(s, "    {}", if v.y.to_string().contains('.') { v.y.to_string() } else { format!("{}.0", v.y) }).unwrap();
-                                        writeln!(s, "    {}", if v.z.to_string().contains('.') { v.z.to_string() } else { format!("{}.0", v.z) }).unwrap();
+                                        writeln!(s, "                x = {}", if v.x.to_string().contains('.') { v.x.to_string() } else { format!("{}.0", v.x) }).unwrap();
+                                        writeln!(s, "                y = {}", if v.y.to_string().contains('.') { v.y.to_string() } else { format!("{}.0", v.y) }).unwrap();
+                                        writeln!(s, "                z = {}", if v.z.to_string().contains('.') { v.z.to_string() } else { format!("{}.0", v.z) }).unwrap();
 
                                         writeln!(s, "    }},").unwrap();
                                     }
@@ -222,9 +222,9 @@ impl crate::Message for SMSG_UPDATE_OBJECT {
                                     // final_node: Vector3d
                                     writeln!(s, "            final_node = {{").unwrap();
                                     // Members
-                                    writeln!(s, "    {}", if if_statement.final_node.x.to_string().contains('.') { if_statement.final_node.x.to_string() } else { format!("{}.0", if_statement.final_node.x) }).unwrap();
-                                    writeln!(s, "    {}", if if_statement.final_node.y.to_string().contains('.') { if_statement.final_node.y.to_string() } else { format!("{}.0", if_statement.final_node.y) }).unwrap();
-                                    writeln!(s, "    {}", if if_statement.final_node.z.to_string().contains('.') { if_statement.final_node.z.to_string() } else { format!("{}.0", if_statement.final_node.z) }).unwrap();
+                                    writeln!(s, "                x = {}", if if_statement.final_node.x.to_string().contains('.') { if_statement.final_node.x.to_string() } else { format!("{}.0", if_statement.final_node.x) }).unwrap();
+                                    writeln!(s, "                y = {}", if if_statement.final_node.y.to_string().contains('.') { if_statement.final_node.y.to_string() } else { format!("{}.0", if_statement.final_node.y) }).unwrap();
+                                    writeln!(s, "                z = {}", if if_statement.final_node.z.to_string().contains('.') { if_statement.final_node.z.to_string() } else { format!("{}.0", if_statement.final_node.z) }).unwrap();
 
                                     writeln!(s, "    }};").unwrap();
                                 }
@@ -237,12 +237,12 @@ impl crate::Message for SMSG_UPDATE_OBJECT {
                                 // position: Vector3d
                                 writeln!(s, "            position = {{").unwrap();
                                 // Members
-                                writeln!(s, "    {}", if position.x.to_string().contains('.') { position.x.to_string() } else { format!("{}.0", position.x) }).unwrap();
-                                writeln!(s, "    {}", if position.y.to_string().contains('.') { position.y.to_string() } else { format!("{}.0", position.y) }).unwrap();
-                                writeln!(s, "    {}", if position.z.to_string().contains('.') { position.z.to_string() } else { format!("{}.0", position.z) }).unwrap();
+                                writeln!(s, "                x = {}", if position.x.to_string().contains('.') { position.x.to_string() } else { format!("{}.0", position.x) }).unwrap();
+                                writeln!(s, "                y = {}", if position.y.to_string().contains('.') { position.y.to_string() } else { format!("{}.0", position.y) }).unwrap();
+                                writeln!(s, "                z = {}", if position.z.to_string().contains('.') { position.z.to_string() } else { format!("{}.0", position.z) }).unwrap();
 
                                 writeln!(s, "    }};").unwrap();
-                                writeln!(s, "    {}", if orientation.to_string().contains('.') { orientation.to_string() } else { format!("{}.0", orientation) }).unwrap();
+                                writeln!(s, "            orientation = {}", if orientation.to_string().contains('.') { orientation.to_string() } else { format!("{}.0", orientation) }).unwrap();
                             }
                         }
                     }
@@ -303,12 +303,12 @@ impl crate::Message for SMSG_UPDATE_OBJECT {
                                 // living_position: Vector3d
                                 writeln!(s, "            living_position = {{").unwrap();
                                 // Members
-                                writeln!(s, "    {}", if living_position.x.to_string().contains('.') { living_position.x.to_string() } else { format!("{}.0", living_position.x) }).unwrap();
-                                writeln!(s, "    {}", if living_position.y.to_string().contains('.') { living_position.y.to_string() } else { format!("{}.0", living_position.y) }).unwrap();
-                                writeln!(s, "    {}", if living_position.z.to_string().contains('.') { living_position.z.to_string() } else { format!("{}.0", living_position.z) }).unwrap();
+                                writeln!(s, "                x = {}", if living_position.x.to_string().contains('.') { living_position.x.to_string() } else { format!("{}.0", living_position.x) }).unwrap();
+                                writeln!(s, "                y = {}", if living_position.y.to_string().contains('.') { living_position.y.to_string() } else { format!("{}.0", living_position.y) }).unwrap();
+                                writeln!(s, "                z = {}", if living_position.z.to_string().contains('.') { living_position.z.to_string() } else { format!("{}.0", living_position.z) }).unwrap();
 
                                 writeln!(s, "    }};").unwrap();
-                                writeln!(s, "    {}", if living_orientation.to_string().contains('.') { living_orientation.to_string() } else { format!("{}.0", living_orientation) }).unwrap();
+                                writeln!(s, "            living_orientation = {}", if living_orientation.to_string().contains('.') { living_orientation.to_string() } else { format!("{}.0", living_orientation) }).unwrap();
                                 if let Some(if_statement) = &flags.get_on_transport() {
                                     // transport: TransportInfo
                                     writeln!(s, "            transport = {{").unwrap();
@@ -317,12 +317,12 @@ impl crate::Message for SMSG_UPDATE_OBJECT {
                                     // position: Vector3d
                                     writeln!(s, "                position = {{").unwrap();
                                     // Members
-                                    writeln!(s, "    {}", if if_statement.transport.position.x.to_string().contains('.') { if_statement.transport.position.x.to_string() } else { format!("{}.0", if_statement.transport.position.x) }).unwrap();
-                                    writeln!(s, "    {}", if if_statement.transport.position.y.to_string().contains('.') { if_statement.transport.position.y.to_string() } else { format!("{}.0", if_statement.transport.position.y) }).unwrap();
-                                    writeln!(s, "    {}", if if_statement.transport.position.z.to_string().contains('.') { if_statement.transport.position.z.to_string() } else { format!("{}.0", if_statement.transport.position.z) }).unwrap();
+                                    writeln!(s, "                    x = {}", if if_statement.transport.position.x.to_string().contains('.') { if_statement.transport.position.x.to_string() } else { format!("{}.0", if_statement.transport.position.x) }).unwrap();
+                                    writeln!(s, "                    y = {}", if if_statement.transport.position.y.to_string().contains('.') { if_statement.transport.position.y.to_string() } else { format!("{}.0", if_statement.transport.position.y) }).unwrap();
+                                    writeln!(s, "                    z = {}", if if_statement.transport.position.z.to_string().contains('.') { if_statement.transport.position.z.to_string() } else { format!("{}.0", if_statement.transport.position.z) }).unwrap();
 
                                     writeln!(s, "    }};").unwrap();
-                                    writeln!(s, "    {}", if if_statement.transport.orientation.to_string().contains('.') { if_statement.transport.orientation.to_string() } else { format!("{}.0", if_statement.transport.orientation) }).unwrap();
+                                    writeln!(s, "                orientation = {}", if if_statement.transport.orientation.to_string().contains('.') { if_statement.transport.orientation.to_string() } else { format!("{}.0", if_statement.transport.orientation) }).unwrap();
                                     writeln!(s, "                timestamp = {};", if_statement.transport.timestamp).unwrap();
 
                                     writeln!(s, "    }};").unwrap();
@@ -333,36 +333,36 @@ impl crate::Message for SMSG_UPDATE_OBJECT {
                                         crate::tbc::MovementBlock_MovementFlags_Swimming::Swimming {
                                             pitch1,
                                         } => {
-                                            writeln!(s, "    {}", if pitch1.to_string().contains('.') { pitch1.to_string() } else { format!("{}.0", pitch1) }).unwrap();
+                                            writeln!(s, "            pitch1 = {}", if pitch1.to_string().contains('.') { pitch1.to_string() } else { format!("{}.0", pitch1) }).unwrap();
                                         }
                                         crate::tbc::MovementBlock_MovementFlags_Swimming::Ontransport {
                                             pitch2,
                                         } => {
-                                            writeln!(s, "    {}", if pitch2.to_string().contains('.') { pitch2.to_string() } else { format!("{}.0", pitch2) }).unwrap();
+                                            writeln!(s, "            pitch2 = {}", if pitch2.to_string().contains('.') { pitch2.to_string() } else { format!("{}.0", pitch2) }).unwrap();
                                         }
                                     }
                                 }
 
-                                writeln!(s, "    {}", if fall_time.to_string().contains('.') { fall_time.to_string() } else { format!("{}.0", fall_time) }).unwrap();
+                                writeln!(s, "            fall_time = {}", if fall_time.to_string().contains('.') { fall_time.to_string() } else { format!("{}.0", fall_time) }).unwrap();
                                 if let Some(if_statement) = &flags.get_jumping() {
-                                    writeln!(s, "    {}", if if_statement.z_speed.to_string().contains('.') { if_statement.z_speed.to_string() } else { format!("{}.0", if_statement.z_speed) }).unwrap();
-                                    writeln!(s, "    {}", if if_statement.cos_angle.to_string().contains('.') { if_statement.cos_angle.to_string() } else { format!("{}.0", if_statement.cos_angle) }).unwrap();
-                                    writeln!(s, "    {}", if if_statement.sin_angle.to_string().contains('.') { if_statement.sin_angle.to_string() } else { format!("{}.0", if_statement.sin_angle) }).unwrap();
-                                    writeln!(s, "    {}", if if_statement.xy_speed.to_string().contains('.') { if_statement.xy_speed.to_string() } else { format!("{}.0", if_statement.xy_speed) }).unwrap();
+                                    writeln!(s, "            z_speed = {}", if if_statement.z_speed.to_string().contains('.') { if_statement.z_speed.to_string() } else { format!("{}.0", if_statement.z_speed) }).unwrap();
+                                    writeln!(s, "            cos_angle = {}", if if_statement.cos_angle.to_string().contains('.') { if_statement.cos_angle.to_string() } else { format!("{}.0", if_statement.cos_angle) }).unwrap();
+                                    writeln!(s, "            sin_angle = {}", if if_statement.sin_angle.to_string().contains('.') { if_statement.sin_angle.to_string() } else { format!("{}.0", if_statement.sin_angle) }).unwrap();
+                                    writeln!(s, "            xy_speed = {}", if if_statement.xy_speed.to_string().contains('.') { if_statement.xy_speed.to_string() } else { format!("{}.0", if_statement.xy_speed) }).unwrap();
                                 }
 
                                 if let Some(if_statement) = &flags.get_spline_elevation() {
-                                    writeln!(s, "    {}", if if_statement.spline_elevation.to_string().contains('.') { if_statement.spline_elevation.to_string() } else { format!("{}.0", if_statement.spline_elevation) }).unwrap();
+                                    writeln!(s, "            spline_elevation = {}", if if_statement.spline_elevation.to_string().contains('.') { if_statement.spline_elevation.to_string() } else { format!("{}.0", if_statement.spline_elevation) }).unwrap();
                                 }
 
-                                writeln!(s, "    {}", if walking_speed.to_string().contains('.') { walking_speed.to_string() } else { format!("{}.0", walking_speed) }).unwrap();
-                                writeln!(s, "    {}", if running_speed.to_string().contains('.') { running_speed.to_string() } else { format!("{}.0", running_speed) }).unwrap();
-                                writeln!(s, "    {}", if backwards_running_speed.to_string().contains('.') { backwards_running_speed.to_string() } else { format!("{}.0", backwards_running_speed) }).unwrap();
-                                writeln!(s, "    {}", if swimming_speed.to_string().contains('.') { swimming_speed.to_string() } else { format!("{}.0", swimming_speed) }).unwrap();
-                                writeln!(s, "    {}", if flying_speed.to_string().contains('.') { flying_speed.to_string() } else { format!("{}.0", flying_speed) }).unwrap();
-                                writeln!(s, "    {}", if backwards_flying_speed.to_string().contains('.') { backwards_flying_speed.to_string() } else { format!("{}.0", backwards_flying_speed) }).unwrap();
-                                writeln!(s, "    {}", if backwards_swimming_speed.to_string().contains('.') { backwards_swimming_speed.to_string() } else { format!("{}.0", backwards_swimming_speed) }).unwrap();
-                                writeln!(s, "    {}", if turn_rate.to_string().contains('.') { turn_rate.to_string() } else { format!("{}.0", turn_rate) }).unwrap();
+                                writeln!(s, "            walking_speed = {}", if walking_speed.to_string().contains('.') { walking_speed.to_string() } else { format!("{}.0", walking_speed) }).unwrap();
+                                writeln!(s, "            running_speed = {}", if running_speed.to_string().contains('.') { running_speed.to_string() } else { format!("{}.0", running_speed) }).unwrap();
+                                writeln!(s, "            backwards_running_speed = {}", if backwards_running_speed.to_string().contains('.') { backwards_running_speed.to_string() } else { format!("{}.0", backwards_running_speed) }).unwrap();
+                                writeln!(s, "            swimming_speed = {}", if swimming_speed.to_string().contains('.') { swimming_speed.to_string() } else { format!("{}.0", swimming_speed) }).unwrap();
+                                writeln!(s, "            flying_speed = {}", if flying_speed.to_string().contains('.') { flying_speed.to_string() } else { format!("{}.0", flying_speed) }).unwrap();
+                                writeln!(s, "            backwards_flying_speed = {}", if backwards_flying_speed.to_string().contains('.') { backwards_flying_speed.to_string() } else { format!("{}.0", backwards_flying_speed) }).unwrap();
+                                writeln!(s, "            backwards_swimming_speed = {}", if backwards_swimming_speed.to_string().contains('.') { backwards_swimming_speed.to_string() } else { format!("{}.0", backwards_swimming_speed) }).unwrap();
+                                writeln!(s, "            turn_rate = {}", if turn_rate.to_string().contains('.') { turn_rate.to_string() } else { format!("{}.0", turn_rate) }).unwrap();
                                 if let Some(if_statement) = &flags.get_spline_enabled() {
                                     writeln!(s, "            spline_flags = {};", SplineFlag::new(if_statement.spline_flags.as_int()).as_test_case_value()).unwrap();
                                     if let Some(if_statement) = &if_statement.spline_flags.get_final_angle() {
@@ -370,7 +370,7 @@ impl crate::Message for SMSG_UPDATE_OBJECT {
                                             crate::tbc::MovementBlock_SplineFlag_FinalAngle::FinalAngle {
                                                 angle,
                                             } => {
-                                                writeln!(s, "    {}", if angle.to_string().contains('.') { angle.to_string() } else { format!("{}.0", angle) }).unwrap();
+                                                writeln!(s, "            angle = {}", if angle.to_string().contains('.') { angle.to_string() } else { format!("{}.0", angle) }).unwrap();
                                             }
                                             crate::tbc::MovementBlock_SplineFlag_FinalAngle::FinalTarget {
                                                 target,
@@ -383,9 +383,9 @@ impl crate::Message for SMSG_UPDATE_OBJECT {
                                                 // spline_final_point: Vector3d
                                                 writeln!(s, "            spline_final_point = {{").unwrap();
                                                 // Members
-                                                writeln!(s, "    {}", if spline_final_point.x.to_string().contains('.') { spline_final_point.x.to_string() } else { format!("{}.0", spline_final_point.x) }).unwrap();
-                                                writeln!(s, "    {}", if spline_final_point.y.to_string().contains('.') { spline_final_point.y.to_string() } else { format!("{}.0", spline_final_point.y) }).unwrap();
-                                                writeln!(s, "    {}", if spline_final_point.z.to_string().contains('.') { spline_final_point.z.to_string() } else { format!("{}.0", spline_final_point.z) }).unwrap();
+                                                writeln!(s, "                x = {}", if spline_final_point.x.to_string().contains('.') { spline_final_point.x.to_string() } else { format!("{}.0", spline_final_point.x) }).unwrap();
+                                                writeln!(s, "                y = {}", if spline_final_point.y.to_string().contains('.') { spline_final_point.y.to_string() } else { format!("{}.0", spline_final_point.y) }).unwrap();
+                                                writeln!(s, "                z = {}", if spline_final_point.z.to_string().contains('.') { spline_final_point.z.to_string() } else { format!("{}.0", spline_final_point.z) }).unwrap();
 
                                                 writeln!(s, "    }};").unwrap();
                                             }
@@ -400,9 +400,9 @@ impl crate::Message for SMSG_UPDATE_OBJECT {
                                     for v in if_statement.nodes.as_slice() {
                                         writeln!(s, "{{").unwrap();
                                         // Members
-                                        writeln!(s, "    {}", if v.x.to_string().contains('.') { v.x.to_string() } else { format!("{}.0", v.x) }).unwrap();
-                                        writeln!(s, "    {}", if v.y.to_string().contains('.') { v.y.to_string() } else { format!("{}.0", v.y) }).unwrap();
-                                        writeln!(s, "    {}", if v.z.to_string().contains('.') { v.z.to_string() } else { format!("{}.0", v.z) }).unwrap();
+                                        writeln!(s, "                x = {}", if v.x.to_string().contains('.') { v.x.to_string() } else { format!("{}.0", v.x) }).unwrap();
+                                        writeln!(s, "                y = {}", if v.y.to_string().contains('.') { v.y.to_string() } else { format!("{}.0", v.y) }).unwrap();
+                                        writeln!(s, "                z = {}", if v.z.to_string().contains('.') { v.z.to_string() } else { format!("{}.0", v.z) }).unwrap();
 
                                         writeln!(s, "    }},").unwrap();
                                     }
@@ -410,9 +410,9 @@ impl crate::Message for SMSG_UPDATE_OBJECT {
                                     // final_node: Vector3d
                                     writeln!(s, "            final_node = {{").unwrap();
                                     // Members
-                                    writeln!(s, "    {}", if if_statement.final_node.x.to_string().contains('.') { if_statement.final_node.x.to_string() } else { format!("{}.0", if_statement.final_node.x) }).unwrap();
-                                    writeln!(s, "    {}", if if_statement.final_node.y.to_string().contains('.') { if_statement.final_node.y.to_string() } else { format!("{}.0", if_statement.final_node.y) }).unwrap();
-                                    writeln!(s, "    {}", if if_statement.final_node.z.to_string().contains('.') { if_statement.final_node.z.to_string() } else { format!("{}.0", if_statement.final_node.z) }).unwrap();
+                                    writeln!(s, "                x = {}", if if_statement.final_node.x.to_string().contains('.') { if_statement.final_node.x.to_string() } else { format!("{}.0", if_statement.final_node.x) }).unwrap();
+                                    writeln!(s, "                y = {}", if if_statement.final_node.y.to_string().contains('.') { if_statement.final_node.y.to_string() } else { format!("{}.0", if_statement.final_node.y) }).unwrap();
+                                    writeln!(s, "                z = {}", if if_statement.final_node.z.to_string().contains('.') { if_statement.final_node.z.to_string() } else { format!("{}.0", if_statement.final_node.z) }).unwrap();
 
                                     writeln!(s, "    }};").unwrap();
                                 }
@@ -425,12 +425,12 @@ impl crate::Message for SMSG_UPDATE_OBJECT {
                                 // position: Vector3d
                                 writeln!(s, "            position = {{").unwrap();
                                 // Members
-                                writeln!(s, "    {}", if position.x.to_string().contains('.') { position.x.to_string() } else { format!("{}.0", position.x) }).unwrap();
-                                writeln!(s, "    {}", if position.y.to_string().contains('.') { position.y.to_string() } else { format!("{}.0", position.y) }).unwrap();
-                                writeln!(s, "    {}", if position.z.to_string().contains('.') { position.z.to_string() } else { format!("{}.0", position.z) }).unwrap();
+                                writeln!(s, "                x = {}", if position.x.to_string().contains('.') { position.x.to_string() } else { format!("{}.0", position.x) }).unwrap();
+                                writeln!(s, "                y = {}", if position.y.to_string().contains('.') { position.y.to_string() } else { format!("{}.0", position.y) }).unwrap();
+                                writeln!(s, "                z = {}", if position.z.to_string().contains('.') { position.z.to_string() } else { format!("{}.0", position.z) }).unwrap();
 
                                 writeln!(s, "    }};").unwrap();
-                                writeln!(s, "    {}", if orientation.to_string().contains('.') { orientation.to_string() } else { format!("{}.0", orientation) }).unwrap();
+                                writeln!(s, "            orientation = {}", if orientation.to_string().contains('.') { orientation.to_string() } else { format!("{}.0", orientation) }).unwrap();
                             }
                         }
                     }
@@ -492,12 +492,12 @@ impl crate::Message for SMSG_UPDATE_OBJECT {
                                 // living_position: Vector3d
                                 writeln!(s, "            living_position = {{").unwrap();
                                 // Members
-                                writeln!(s, "    {}", if living_position.x.to_string().contains('.') { living_position.x.to_string() } else { format!("{}.0", living_position.x) }).unwrap();
-                                writeln!(s, "    {}", if living_position.y.to_string().contains('.') { living_position.y.to_string() } else { format!("{}.0", living_position.y) }).unwrap();
-                                writeln!(s, "    {}", if living_position.z.to_string().contains('.') { living_position.z.to_string() } else { format!("{}.0", living_position.z) }).unwrap();
+                                writeln!(s, "                x = {}", if living_position.x.to_string().contains('.') { living_position.x.to_string() } else { format!("{}.0", living_position.x) }).unwrap();
+                                writeln!(s, "                y = {}", if living_position.y.to_string().contains('.') { living_position.y.to_string() } else { format!("{}.0", living_position.y) }).unwrap();
+                                writeln!(s, "                z = {}", if living_position.z.to_string().contains('.') { living_position.z.to_string() } else { format!("{}.0", living_position.z) }).unwrap();
 
                                 writeln!(s, "    }};").unwrap();
-                                writeln!(s, "    {}", if living_orientation.to_string().contains('.') { living_orientation.to_string() } else { format!("{}.0", living_orientation) }).unwrap();
+                                writeln!(s, "            living_orientation = {}", if living_orientation.to_string().contains('.') { living_orientation.to_string() } else { format!("{}.0", living_orientation) }).unwrap();
                                 if let Some(if_statement) = &flags.get_on_transport() {
                                     // transport: TransportInfo
                                     writeln!(s, "            transport = {{").unwrap();
@@ -506,12 +506,12 @@ impl crate::Message for SMSG_UPDATE_OBJECT {
                                     // position: Vector3d
                                     writeln!(s, "                position = {{").unwrap();
                                     // Members
-                                    writeln!(s, "    {}", if if_statement.transport.position.x.to_string().contains('.') { if_statement.transport.position.x.to_string() } else { format!("{}.0", if_statement.transport.position.x) }).unwrap();
-                                    writeln!(s, "    {}", if if_statement.transport.position.y.to_string().contains('.') { if_statement.transport.position.y.to_string() } else { format!("{}.0", if_statement.transport.position.y) }).unwrap();
-                                    writeln!(s, "    {}", if if_statement.transport.position.z.to_string().contains('.') { if_statement.transport.position.z.to_string() } else { format!("{}.0", if_statement.transport.position.z) }).unwrap();
+                                    writeln!(s, "                    x = {}", if if_statement.transport.position.x.to_string().contains('.') { if_statement.transport.position.x.to_string() } else { format!("{}.0", if_statement.transport.position.x) }).unwrap();
+                                    writeln!(s, "                    y = {}", if if_statement.transport.position.y.to_string().contains('.') { if_statement.transport.position.y.to_string() } else { format!("{}.0", if_statement.transport.position.y) }).unwrap();
+                                    writeln!(s, "                    z = {}", if if_statement.transport.position.z.to_string().contains('.') { if_statement.transport.position.z.to_string() } else { format!("{}.0", if_statement.transport.position.z) }).unwrap();
 
                                     writeln!(s, "    }};").unwrap();
-                                    writeln!(s, "    {}", if if_statement.transport.orientation.to_string().contains('.') { if_statement.transport.orientation.to_string() } else { format!("{}.0", if_statement.transport.orientation) }).unwrap();
+                                    writeln!(s, "                orientation = {}", if if_statement.transport.orientation.to_string().contains('.') { if_statement.transport.orientation.to_string() } else { format!("{}.0", if_statement.transport.orientation) }).unwrap();
                                     writeln!(s, "                timestamp = {};", if_statement.transport.timestamp).unwrap();
 
                                     writeln!(s, "    }};").unwrap();
@@ -522,36 +522,36 @@ impl crate::Message for SMSG_UPDATE_OBJECT {
                                         crate::tbc::MovementBlock_MovementFlags_Swimming::Swimming {
                                             pitch1,
                                         } => {
-                                            writeln!(s, "    {}", if pitch1.to_string().contains('.') { pitch1.to_string() } else { format!("{}.0", pitch1) }).unwrap();
+                                            writeln!(s, "            pitch1 = {}", if pitch1.to_string().contains('.') { pitch1.to_string() } else { format!("{}.0", pitch1) }).unwrap();
                                         }
                                         crate::tbc::MovementBlock_MovementFlags_Swimming::Ontransport {
                                             pitch2,
                                         } => {
-                                            writeln!(s, "    {}", if pitch2.to_string().contains('.') { pitch2.to_string() } else { format!("{}.0", pitch2) }).unwrap();
+                                            writeln!(s, "            pitch2 = {}", if pitch2.to_string().contains('.') { pitch2.to_string() } else { format!("{}.0", pitch2) }).unwrap();
                                         }
                                     }
                                 }
 
-                                writeln!(s, "    {}", if fall_time.to_string().contains('.') { fall_time.to_string() } else { format!("{}.0", fall_time) }).unwrap();
+                                writeln!(s, "            fall_time = {}", if fall_time.to_string().contains('.') { fall_time.to_string() } else { format!("{}.0", fall_time) }).unwrap();
                                 if let Some(if_statement) = &flags.get_jumping() {
-                                    writeln!(s, "    {}", if if_statement.z_speed.to_string().contains('.') { if_statement.z_speed.to_string() } else { format!("{}.0", if_statement.z_speed) }).unwrap();
-                                    writeln!(s, "    {}", if if_statement.cos_angle.to_string().contains('.') { if_statement.cos_angle.to_string() } else { format!("{}.0", if_statement.cos_angle) }).unwrap();
-                                    writeln!(s, "    {}", if if_statement.sin_angle.to_string().contains('.') { if_statement.sin_angle.to_string() } else { format!("{}.0", if_statement.sin_angle) }).unwrap();
-                                    writeln!(s, "    {}", if if_statement.xy_speed.to_string().contains('.') { if_statement.xy_speed.to_string() } else { format!("{}.0", if_statement.xy_speed) }).unwrap();
+                                    writeln!(s, "            z_speed = {}", if if_statement.z_speed.to_string().contains('.') { if_statement.z_speed.to_string() } else { format!("{}.0", if_statement.z_speed) }).unwrap();
+                                    writeln!(s, "            cos_angle = {}", if if_statement.cos_angle.to_string().contains('.') { if_statement.cos_angle.to_string() } else { format!("{}.0", if_statement.cos_angle) }).unwrap();
+                                    writeln!(s, "            sin_angle = {}", if if_statement.sin_angle.to_string().contains('.') { if_statement.sin_angle.to_string() } else { format!("{}.0", if_statement.sin_angle) }).unwrap();
+                                    writeln!(s, "            xy_speed = {}", if if_statement.xy_speed.to_string().contains('.') { if_statement.xy_speed.to_string() } else { format!("{}.0", if_statement.xy_speed) }).unwrap();
                                 }
 
                                 if let Some(if_statement) = &flags.get_spline_elevation() {
-                                    writeln!(s, "    {}", if if_statement.spline_elevation.to_string().contains('.') { if_statement.spline_elevation.to_string() } else { format!("{}.0", if_statement.spline_elevation) }).unwrap();
+                                    writeln!(s, "            spline_elevation = {}", if if_statement.spline_elevation.to_string().contains('.') { if_statement.spline_elevation.to_string() } else { format!("{}.0", if_statement.spline_elevation) }).unwrap();
                                 }
 
-                                writeln!(s, "    {}", if walking_speed.to_string().contains('.') { walking_speed.to_string() } else { format!("{}.0", walking_speed) }).unwrap();
-                                writeln!(s, "    {}", if running_speed.to_string().contains('.') { running_speed.to_string() } else { format!("{}.0", running_speed) }).unwrap();
-                                writeln!(s, "    {}", if backwards_running_speed.to_string().contains('.') { backwards_running_speed.to_string() } else { format!("{}.0", backwards_running_speed) }).unwrap();
-                                writeln!(s, "    {}", if swimming_speed.to_string().contains('.') { swimming_speed.to_string() } else { format!("{}.0", swimming_speed) }).unwrap();
-                                writeln!(s, "    {}", if flying_speed.to_string().contains('.') { flying_speed.to_string() } else { format!("{}.0", flying_speed) }).unwrap();
-                                writeln!(s, "    {}", if backwards_flying_speed.to_string().contains('.') { backwards_flying_speed.to_string() } else { format!("{}.0", backwards_flying_speed) }).unwrap();
-                                writeln!(s, "    {}", if backwards_swimming_speed.to_string().contains('.') { backwards_swimming_speed.to_string() } else { format!("{}.0", backwards_swimming_speed) }).unwrap();
-                                writeln!(s, "    {}", if turn_rate.to_string().contains('.') { turn_rate.to_string() } else { format!("{}.0", turn_rate) }).unwrap();
+                                writeln!(s, "            walking_speed = {}", if walking_speed.to_string().contains('.') { walking_speed.to_string() } else { format!("{}.0", walking_speed) }).unwrap();
+                                writeln!(s, "            running_speed = {}", if running_speed.to_string().contains('.') { running_speed.to_string() } else { format!("{}.0", running_speed) }).unwrap();
+                                writeln!(s, "            backwards_running_speed = {}", if backwards_running_speed.to_string().contains('.') { backwards_running_speed.to_string() } else { format!("{}.0", backwards_running_speed) }).unwrap();
+                                writeln!(s, "            swimming_speed = {}", if swimming_speed.to_string().contains('.') { swimming_speed.to_string() } else { format!("{}.0", swimming_speed) }).unwrap();
+                                writeln!(s, "            flying_speed = {}", if flying_speed.to_string().contains('.') { flying_speed.to_string() } else { format!("{}.0", flying_speed) }).unwrap();
+                                writeln!(s, "            backwards_flying_speed = {}", if backwards_flying_speed.to_string().contains('.') { backwards_flying_speed.to_string() } else { format!("{}.0", backwards_flying_speed) }).unwrap();
+                                writeln!(s, "            backwards_swimming_speed = {}", if backwards_swimming_speed.to_string().contains('.') { backwards_swimming_speed.to_string() } else { format!("{}.0", backwards_swimming_speed) }).unwrap();
+                                writeln!(s, "            turn_rate = {}", if turn_rate.to_string().contains('.') { turn_rate.to_string() } else { format!("{}.0", turn_rate) }).unwrap();
                                 if let Some(if_statement) = &flags.get_spline_enabled() {
                                     writeln!(s, "            spline_flags = {};", SplineFlag::new(if_statement.spline_flags.as_int()).as_test_case_value()).unwrap();
                                     if let Some(if_statement) = &if_statement.spline_flags.get_final_angle() {
@@ -559,7 +559,7 @@ impl crate::Message for SMSG_UPDATE_OBJECT {
                                             crate::tbc::MovementBlock_SplineFlag_FinalAngle::FinalAngle {
                                                 angle,
                                             } => {
-                                                writeln!(s, "    {}", if angle.to_string().contains('.') { angle.to_string() } else { format!("{}.0", angle) }).unwrap();
+                                                writeln!(s, "            angle = {}", if angle.to_string().contains('.') { angle.to_string() } else { format!("{}.0", angle) }).unwrap();
                                             }
                                             crate::tbc::MovementBlock_SplineFlag_FinalAngle::FinalTarget {
                                                 target,
@@ -572,9 +572,9 @@ impl crate::Message for SMSG_UPDATE_OBJECT {
                                                 // spline_final_point: Vector3d
                                                 writeln!(s, "            spline_final_point = {{").unwrap();
                                                 // Members
-                                                writeln!(s, "    {}", if spline_final_point.x.to_string().contains('.') { spline_final_point.x.to_string() } else { format!("{}.0", spline_final_point.x) }).unwrap();
-                                                writeln!(s, "    {}", if spline_final_point.y.to_string().contains('.') { spline_final_point.y.to_string() } else { format!("{}.0", spline_final_point.y) }).unwrap();
-                                                writeln!(s, "    {}", if spline_final_point.z.to_string().contains('.') { spline_final_point.z.to_string() } else { format!("{}.0", spline_final_point.z) }).unwrap();
+                                                writeln!(s, "                x = {}", if spline_final_point.x.to_string().contains('.') { spline_final_point.x.to_string() } else { format!("{}.0", spline_final_point.x) }).unwrap();
+                                                writeln!(s, "                y = {}", if spline_final_point.y.to_string().contains('.') { spline_final_point.y.to_string() } else { format!("{}.0", spline_final_point.y) }).unwrap();
+                                                writeln!(s, "                z = {}", if spline_final_point.z.to_string().contains('.') { spline_final_point.z.to_string() } else { format!("{}.0", spline_final_point.z) }).unwrap();
 
                                                 writeln!(s, "    }};").unwrap();
                                             }
@@ -589,9 +589,9 @@ impl crate::Message for SMSG_UPDATE_OBJECT {
                                     for v in if_statement.nodes.as_slice() {
                                         writeln!(s, "{{").unwrap();
                                         // Members
-                                        writeln!(s, "    {}", if v.x.to_string().contains('.') { v.x.to_string() } else { format!("{}.0", v.x) }).unwrap();
-                                        writeln!(s, "    {}", if v.y.to_string().contains('.') { v.y.to_string() } else { format!("{}.0", v.y) }).unwrap();
-                                        writeln!(s, "    {}", if v.z.to_string().contains('.') { v.z.to_string() } else { format!("{}.0", v.z) }).unwrap();
+                                        writeln!(s, "                x = {}", if v.x.to_string().contains('.') { v.x.to_string() } else { format!("{}.0", v.x) }).unwrap();
+                                        writeln!(s, "                y = {}", if v.y.to_string().contains('.') { v.y.to_string() } else { format!("{}.0", v.y) }).unwrap();
+                                        writeln!(s, "                z = {}", if v.z.to_string().contains('.') { v.z.to_string() } else { format!("{}.0", v.z) }).unwrap();
 
                                         writeln!(s, "    }},").unwrap();
                                     }
@@ -599,9 +599,9 @@ impl crate::Message for SMSG_UPDATE_OBJECT {
                                     // final_node: Vector3d
                                     writeln!(s, "            final_node = {{").unwrap();
                                     // Members
-                                    writeln!(s, "    {}", if if_statement.final_node.x.to_string().contains('.') { if_statement.final_node.x.to_string() } else { format!("{}.0", if_statement.final_node.x) }).unwrap();
-                                    writeln!(s, "    {}", if if_statement.final_node.y.to_string().contains('.') { if_statement.final_node.y.to_string() } else { format!("{}.0", if_statement.final_node.y) }).unwrap();
-                                    writeln!(s, "    {}", if if_statement.final_node.z.to_string().contains('.') { if_statement.final_node.z.to_string() } else { format!("{}.0", if_statement.final_node.z) }).unwrap();
+                                    writeln!(s, "                x = {}", if if_statement.final_node.x.to_string().contains('.') { if_statement.final_node.x.to_string() } else { format!("{}.0", if_statement.final_node.x) }).unwrap();
+                                    writeln!(s, "                y = {}", if if_statement.final_node.y.to_string().contains('.') { if_statement.final_node.y.to_string() } else { format!("{}.0", if_statement.final_node.y) }).unwrap();
+                                    writeln!(s, "                z = {}", if if_statement.final_node.z.to_string().contains('.') { if_statement.final_node.z.to_string() } else { format!("{}.0", if_statement.final_node.z) }).unwrap();
 
                                     writeln!(s, "    }};").unwrap();
                                 }
@@ -614,12 +614,12 @@ impl crate::Message for SMSG_UPDATE_OBJECT {
                                 // position: Vector3d
                                 writeln!(s, "            position = {{").unwrap();
                                 // Members
-                                writeln!(s, "    {}", if position.x.to_string().contains('.') { position.x.to_string() } else { format!("{}.0", position.x) }).unwrap();
-                                writeln!(s, "    {}", if position.y.to_string().contains('.') { position.y.to_string() } else { format!("{}.0", position.y) }).unwrap();
-                                writeln!(s, "    {}", if position.z.to_string().contains('.') { position.z.to_string() } else { format!("{}.0", position.z) }).unwrap();
+                                writeln!(s, "                x = {}", if position.x.to_string().contains('.') { position.x.to_string() } else { format!("{}.0", position.x) }).unwrap();
+                                writeln!(s, "                y = {}", if position.y.to_string().contains('.') { position.y.to_string() } else { format!("{}.0", position.y) }).unwrap();
+                                writeln!(s, "                z = {}", if position.z.to_string().contains('.') { position.z.to_string() } else { format!("{}.0", position.z) }).unwrap();
 
                                 writeln!(s, "    }};").unwrap();
-                                writeln!(s, "    {}", if orientation.to_string().contains('.') { orientation.to_string() } else { format!("{}.0", orientation) }).unwrap();
+                                writeln!(s, "            orientation = {}", if orientation.to_string().contains('.') { orientation.to_string() } else { format!("{}.0", orientation) }).unwrap();
                             }
                         }
                     }

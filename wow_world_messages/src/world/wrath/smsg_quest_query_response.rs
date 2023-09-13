@@ -384,7 +384,7 @@ impl crate::Message for SMSG_QUEST_QUERY_RESPONSE {
         writeln!(s, "    reward_spell = {};", self.reward_spell).unwrap();
         writeln!(s, "    casted_reward_spell = {};", self.casted_reward_spell).unwrap();
         writeln!(s, "    honor_reward = {};", self.honor_reward).unwrap();
-        writeln!(s, "    {}", if self.honor_reward_multiplier.to_string().contains('.') { self.honor_reward_multiplier.to_string() } else { format!("{}.0", self.honor_reward_multiplier) }).unwrap();
+        writeln!(s, "    honor_reward_multiplier = {}", if self.honor_reward_multiplier.to_string().contains('.') { self.honor_reward_multiplier.to_string() } else { format!("{}.0", self.honor_reward_multiplier) }).unwrap();
         writeln!(s, "    source_item_id = {};", self.source_item_id).unwrap();
         writeln!(s, "    quest_flags = {};", self.quest_flags).unwrap();
         writeln!(s, "    title_reward = {};", self.title_reward).unwrap();
@@ -431,8 +431,8 @@ impl crate::Message for SMSG_QUEST_QUERY_RESPONSE {
         // position: Vector2d
         writeln!(s, "    position = {{").unwrap();
         // Members
-        writeln!(s, "    {}", if self.position.x.to_string().contains('.') { self.position.x.to_string() } else { format!("{}.0", self.position.x) }).unwrap();
-        writeln!(s, "    {}", if self.position.y.to_string().contains('.') { self.position.y.to_string() } else { format!("{}.0", self.position.y) }).unwrap();
+        writeln!(s, "        x = {}", if self.position.x.to_string().contains('.') { self.position.x.to_string() } else { format!("{}.0", self.position.x) }).unwrap();
+        writeln!(s, "        y = {}", if self.position.y.to_string().contains('.') { self.position.y.to_string() } else { format!("{}.0", self.position.y) }).unwrap();
 
         writeln!(s, "    }};").unwrap();
         writeln!(s, "    point_opt = {};", self.point_opt).unwrap();

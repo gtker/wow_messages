@@ -107,7 +107,7 @@ impl crate::Message for SMSG_MAIL_LIST_RESULT {
             writeln!(s, "        money = {};", v.money.as_int()).unwrap();
             writeln!(s, "        cash_on_delivery_amount = {};", v.cash_on_delivery_amount).unwrap();
             writeln!(s, "        checked_timestamp = {};", v.checked_timestamp).unwrap();
-            writeln!(s, "    {}", if v.expiration_time.to_string().contains('.') { v.expiration_time.to_string() } else { format!("{}.0", v.expiration_time) }).unwrap();
+            writeln!(s, "        expiration_time = {}", if v.expiration_time.to_string().contains('.') { v.expiration_time.to_string() } else { format!("{}.0", v.expiration_time) }).unwrap();
             writeln!(s, "        mail_template_id = {};", v.mail_template_id).unwrap();
 
             writeln!(s, "    }},").unwrap();

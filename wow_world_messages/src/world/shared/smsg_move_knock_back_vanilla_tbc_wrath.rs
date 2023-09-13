@@ -85,10 +85,10 @@ impl crate::Message for SMSG_MOVE_KNOCK_BACK {
         // Members
         writeln!(s, "    guid = {};", self.guid.guid()).unwrap();
         writeln!(s, "    movement_counter = {};", self.movement_counter).unwrap();
-        writeln!(s, "    {}", if self.v_cos.to_string().contains('.') { self.v_cos.to_string() } else { format!("{}.0", self.v_cos) }).unwrap();
-        writeln!(s, "    {}", if self.v_sin.to_string().contains('.') { self.v_sin.to_string() } else { format!("{}.0", self.v_sin) }).unwrap();
-        writeln!(s, "    {}", if self.horizontal_speed.to_string().contains('.') { self.horizontal_speed.to_string() } else { format!("{}.0", self.horizontal_speed) }).unwrap();
-        writeln!(s, "    {}", if self.vertical_speed.to_string().contains('.') { self.vertical_speed.to_string() } else { format!("{}.0", self.vertical_speed) }).unwrap();
+        writeln!(s, "    v_cos = {}", if self.v_cos.to_string().contains('.') { self.v_cos.to_string() } else { format!("{}.0", self.v_cos) }).unwrap();
+        writeln!(s, "    v_sin = {}", if self.v_sin.to_string().contains('.') { self.v_sin.to_string() } else { format!("{}.0", self.v_sin) }).unwrap();
+        writeln!(s, "    horizontal_speed = {}", if self.horizontal_speed.to_string().contains('.') { self.horizontal_speed.to_string() } else { format!("{}.0", self.horizontal_speed) }).unwrap();
+        writeln!(s, "    vertical_speed = {}", if self.vertical_speed.to_string().contains('.') { self.vertical_speed.to_string() } else { format!("{}.0", self.vertical_speed) }).unwrap();
 
         writeln!(s, "}} [").unwrap();
 

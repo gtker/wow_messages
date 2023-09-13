@@ -119,7 +119,7 @@ impl crate::Message for SMSG_ATTACKERSTATEUPDATE {
             writeln!(s, "{{").unwrap();
             // Members
             writeln!(s, "        spell_school_mask = {};", v.spell_school_mask).unwrap();
-            writeln!(s, "    {}", if v.damage_float.to_string().contains('.') { v.damage_float.to_string() } else { format!("{}.0", v.damage_float) }).unwrap();
+            writeln!(s, "        damage_float = {}", if v.damage_float.to_string().contains('.') { v.damage_float.to_string() } else { format!("{}.0", v.damage_float) }).unwrap();
             writeln!(s, "        damage_uint = {};", v.damage_uint).unwrap();
             writeln!(s, "        absorb = {};", v.absorb).unwrap();
             writeln!(s, "        resist = {};", v.resist).unwrap();

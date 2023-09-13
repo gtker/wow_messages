@@ -85,9 +85,9 @@ impl crate::Message for MSG_CORPSE_QUERY_Server {
                 // position: Vector3d
                 writeln!(s, "    position = {{").unwrap();
                 // Members
-                writeln!(s, "    {}", if position.x.to_string().contains('.') { position.x.to_string() } else { format!("{}.0", position.x) }).unwrap();
-                writeln!(s, "    {}", if position.y.to_string().contains('.') { position.y.to_string() } else { format!("{}.0", position.y) }).unwrap();
-                writeln!(s, "    {}", if position.z.to_string().contains('.') { position.z.to_string() } else { format!("{}.0", position.z) }).unwrap();
+                writeln!(s, "        x = {}", if position.x.to_string().contains('.') { position.x.to_string() } else { format!("{}.0", position.x) }).unwrap();
+                writeln!(s, "        y = {}", if position.y.to_string().contains('.') { position.y.to_string() } else { format!("{}.0", position.y) }).unwrap();
+                writeln!(s, "        z = {}", if position.z.to_string().contains('.') { position.z.to_string() } else { format!("{}.0", position.z) }).unwrap();
 
                 writeln!(s, "    }};").unwrap();
                 writeln!(s, "    corpse_map = {};", corpse_map.as_test_case_value()).unwrap();

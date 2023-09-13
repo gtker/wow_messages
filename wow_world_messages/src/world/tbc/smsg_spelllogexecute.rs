@@ -90,7 +90,7 @@ impl crate::Message for SMSG_SPELLLOGEXECUTE {
                     writeln!(s, "        target1 = {};", target1.guid()).unwrap();
                     writeln!(s, "        amount = {};", amount).unwrap();
                     writeln!(s, "        power = {};", power.as_test_case_value()).unwrap();
-                    writeln!(s, "    {}", if multiplier.to_string().contains('.') { multiplier.to_string() } else { format!("{}.0", multiplier) }).unwrap();
+                    writeln!(s, "        multiplier = {}", if multiplier.to_string().contains('.') { multiplier.to_string() } else { format!("{}.0", multiplier) }).unwrap();
                 }
                 crate::tbc::SpellLog_SpellEffect::AddExtraAttacks {
                     extra_attacks,

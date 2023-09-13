@@ -182,9 +182,9 @@ impl crate::Message for SMSG_MONSTER_MOVE {
         // spline_point: Vector3d
         writeln!(s, "    spline_point = {{").unwrap();
         // Members
-        writeln!(s, "    {}", if self.spline_point.x.to_string().contains('.') { self.spline_point.x.to_string() } else { format!("{}.0", self.spline_point.x) }).unwrap();
-        writeln!(s, "    {}", if self.spline_point.y.to_string().contains('.') { self.spline_point.y.to_string() } else { format!("{}.0", self.spline_point.y) }).unwrap();
-        writeln!(s, "    {}", if self.spline_point.z.to_string().contains('.') { self.spline_point.z.to_string() } else { format!("{}.0", self.spline_point.z) }).unwrap();
+        writeln!(s, "        x = {}", if self.spline_point.x.to_string().contains('.') { self.spline_point.x.to_string() } else { format!("{}.0", self.spline_point.x) }).unwrap();
+        writeln!(s, "        y = {}", if self.spline_point.y.to_string().contains('.') { self.spline_point.y.to_string() } else { format!("{}.0", self.spline_point.y) }).unwrap();
+        writeln!(s, "        z = {}", if self.spline_point.z.to_string().contains('.') { self.spline_point.z.to_string() } else { format!("{}.0", self.spline_point.z) }).unwrap();
 
         writeln!(s, "    }};").unwrap();
         writeln!(s, "    spline_id = {};", self.spline_id).unwrap();
@@ -196,9 +196,9 @@ impl crate::Message for SMSG_MONSTER_MOVE {
                 // position: Vector3d
                 writeln!(s, "    position = {{").unwrap();
                 // Members
-                writeln!(s, "    {}", if position.x.to_string().contains('.') { position.x.to_string() } else { format!("{}.0", position.x) }).unwrap();
-                writeln!(s, "    {}", if position.y.to_string().contains('.') { position.y.to_string() } else { format!("{}.0", position.y) }).unwrap();
-                writeln!(s, "    {}", if position.z.to_string().contains('.') { position.z.to_string() } else { format!("{}.0", position.z) }).unwrap();
+                writeln!(s, "        x = {}", if position.x.to_string().contains('.') { position.x.to_string() } else { format!("{}.0", position.x) }).unwrap();
+                writeln!(s, "        y = {}", if position.y.to_string().contains('.') { position.y.to_string() } else { format!("{}.0", position.y) }).unwrap();
+                writeln!(s, "        z = {}", if position.z.to_string().contains('.') { position.z.to_string() } else { format!("{}.0", position.z) }).unwrap();
 
                 writeln!(s, "    }};").unwrap();
             }
@@ -210,7 +210,7 @@ impl crate::Message for SMSG_MONSTER_MOVE {
             crate::wrath::SMSG_MONSTER_MOVE_MonsterMoveType::FacingAngle {
                 angle,
             } => {
-                writeln!(s, "    {}", if angle.to_string().contains('.') { angle.to_string() } else { format!("{}.0", angle) }).unwrap();
+                writeln!(s, "    angle = {}", if angle.to_string().contains('.') { angle.to_string() } else { format!("{}.0", angle) }).unwrap();
             }
             _ => {}
         }
@@ -223,7 +223,7 @@ impl crate::Message for SMSG_MONSTER_MOVE {
 
         writeln!(s, "    duration = {};", self.duration).unwrap();
         if let Some(if_statement) = &self.spline_flags.get_parabolic() {
-            writeln!(s, "    {}", if if_statement.vertical_acceleration.to_string().contains('.') { if_statement.vertical_acceleration.to_string() } else { format!("{}.0", if_statement.vertical_acceleration) }).unwrap();
+            writeln!(s, "    vertical_acceleration = {}", if if_statement.vertical_acceleration.to_string().contains('.') { if_statement.vertical_acceleration.to_string() } else { format!("{}.0", if_statement.vertical_acceleration) }).unwrap();
             writeln!(s, "    effect_start_time = {};", if_statement.effect_start_time).unwrap();
         }
 

@@ -192,7 +192,7 @@ impl ServerMessage for CMD_REALM_LIST_Server {
             writeln!(s, "        flag = {};", v.flag.as_test_case_value()).unwrap();
             writeln!(s, "        name = \"{}\";", v.name).unwrap();
             writeln!(s, "        address = \"{}\";", v.address).unwrap();
-            writeln!(s, "    {}", if v.population.as_int().to_string().contains('.') { v.population.as_int().to_string() } else { format!("{}.0", v.population.as_int()) }).unwrap();
+            writeln!(s, "        population = {}", if v.population.as_int().to_string().contains('.') { v.population.as_int().to_string() } else { format!("{}.0", v.population.as_int()) }).unwrap();
             writeln!(s, "        number_of_characters_on_realm = {};", v.number_of_characters_on_realm).unwrap();
             writeln!(s, "        category = {};", v.category.as_test_case_value()).unwrap();
             writeln!(s, "        realm_id = {};", v.realm_id).unwrap();

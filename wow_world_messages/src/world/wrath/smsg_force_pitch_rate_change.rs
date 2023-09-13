@@ -63,7 +63,7 @@ impl crate::Message for SMSG_FORCE_PITCH_RATE_CHANGE {
         // Members
         writeln!(s, "    guid = {};", self.guid.guid()).unwrap();
         writeln!(s, "    move_event = {};", self.move_event).unwrap();
-        writeln!(s, "    {}", if self.speed.to_string().contains('.') { self.speed.to_string() } else { format!("{}.0", self.speed) }).unwrap();
+        writeln!(s, "    speed = {}", if self.speed.to_string().contains('.') { self.speed.to_string() } else { format!("{}.0", self.speed) }).unwrap();
 
         writeln!(s, "}} [").unwrap();
 
