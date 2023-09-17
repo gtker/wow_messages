@@ -87,7 +87,7 @@ impl crate::Message for SMSG_CHAR_ENUM {
             writeln!(s, "                y = {};", if v.position.y.to_string().contains('.') { v.position.y.to_string() } else { format!("{}.0", v.position.y) }).unwrap();
             writeln!(s, "                z = {};", if v.position.z.to_string().contains('.') { v.position.z.to_string() } else { format!("{}.0", v.position.z) }).unwrap();
 
-            writeln!(s, "    }};").unwrap();
+            writeln!(s, "            }};").unwrap();
             writeln!(s, "            guild_id = {};", v.guild_id).unwrap();
             writeln!(s, "            flags = {};", v.flags).unwrap();
             writeln!(s, "            first_login = {};", if v.first_login { "TRUE" } else { "FALSE" }).unwrap();

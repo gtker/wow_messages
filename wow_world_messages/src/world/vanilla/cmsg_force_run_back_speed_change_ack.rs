@@ -82,7 +82,7 @@ impl crate::Message for CMSG_FORCE_RUN_BACK_SPEED_CHANGE_ACK {
         writeln!(s, "            y = {};", if self.info.position.y.to_string().contains('.') { self.info.position.y.to_string() } else { format!("{}.0", self.info.position.y) }).unwrap();
         writeln!(s, "            z = {};", if self.info.position.z.to_string().contains('.') { self.info.position.z.to_string() } else { format!("{}.0", self.info.position.z) }).unwrap();
 
-        writeln!(s, "    }};").unwrap();
+        writeln!(s, "        }};").unwrap();
         writeln!(s, "        orientation = {};", if self.info.orientation.to_string().contains('.') { self.info.orientation.to_string() } else { format!("{}.0", self.info.orientation) }).unwrap();
         if let Some(if_statement) = &self.info.flags.get_on_transport() {
             // transport: TransportInfo
@@ -96,11 +96,11 @@ impl crate::Message for CMSG_FORCE_RUN_BACK_SPEED_CHANGE_ACK {
             writeln!(s, "                y = {};", if if_statement.transport.position.y.to_string().contains('.') { if_statement.transport.position.y.to_string() } else { format!("{}.0", if_statement.transport.position.y) }).unwrap();
             writeln!(s, "                z = {};", if if_statement.transport.position.z.to_string().contains('.') { if_statement.transport.position.z.to_string() } else { format!("{}.0", if_statement.transport.position.z) }).unwrap();
 
-            writeln!(s, "    }};").unwrap();
+            writeln!(s, "            }};").unwrap();
             writeln!(s, "            orientation = {};", if if_statement.transport.orientation.to_string().contains('.') { if_statement.transport.orientation.to_string() } else { format!("{}.0", if_statement.transport.orientation) }).unwrap();
             writeln!(s, "            timestamp = {};", if_statement.transport.timestamp).unwrap();
 
-            writeln!(s, "    }};").unwrap();
+            writeln!(s, "        }};").unwrap();
         }
 
         if let Some(if_statement) = &self.info.flags.get_swimming() {

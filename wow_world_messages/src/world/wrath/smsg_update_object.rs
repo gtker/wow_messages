@@ -111,7 +111,7 @@ impl crate::Message for SMSG_UPDATE_OBJECT {
                                 writeln!(s, "                    y = {};", if position.y.to_string().contains('.') { position.y.to_string() } else { format!("{}.0", position.y) }).unwrap();
                                 writeln!(s, "                    z = {};", if position.z.to_string().contains('.') { position.z.to_string() } else { format!("{}.0", position.z) }).unwrap();
 
-                                writeln!(s, "    }};").unwrap();
+                                writeln!(s, "                }};").unwrap();
                                 writeln!(s, "                orientation = {};", if orientation.to_string().contains('.') { orientation.to_string() } else { format!("{}.0", orientation) }).unwrap();
                                 if let Some(if_statement) = &flags.get_on_transport_and_interpolated_movement() {
                                     match if_statement {
@@ -130,12 +130,12 @@ impl crate::Message for SMSG_UPDATE_OBJECT {
                                             writeln!(s, "                        y = {};", if transport_info.position.y.to_string().contains('.') { transport_info.position.y.to_string() } else { format!("{}.0", transport_info.position.y) }).unwrap();
                                             writeln!(s, "                        z = {};", if transport_info.position.z.to_string().contains('.') { transport_info.position.z.to_string() } else { format!("{}.0", transport_info.position.z) }).unwrap();
 
-                                            writeln!(s, "    }};").unwrap();
+                                            writeln!(s, "                    }};").unwrap();
                                             writeln!(s, "                    orientation = {};", if transport_info.orientation.to_string().contains('.') { transport_info.orientation.to_string() } else { format!("{}.0", transport_info.orientation) }).unwrap();
                                             writeln!(s, "                    timestamp = {};", transport_info.timestamp).unwrap();
                                             writeln!(s, "                    seat = {};", transport_info.seat).unwrap();
 
-                                            writeln!(s, "    }};").unwrap();
+                                            writeln!(s, "                }};").unwrap();
                                             writeln!(s, "                transport_time = {};", transport_time).unwrap();
                                         }
                                         crate::wrath::MovementBlock_MovementFlags_OnTransportAndInterpolatedMovement::OnTransport {
@@ -152,12 +152,12 @@ impl crate::Message for SMSG_UPDATE_OBJECT {
                                             writeln!(s, "                        y = {};", if transport.position.y.to_string().contains('.') { transport.position.y.to_string() } else { format!("{}.0", transport.position.y) }).unwrap();
                                             writeln!(s, "                        z = {};", if transport.position.z.to_string().contains('.') { transport.position.z.to_string() } else { format!("{}.0", transport.position.z) }).unwrap();
 
-                                            writeln!(s, "    }};").unwrap();
+                                            writeln!(s, "                    }};").unwrap();
                                             writeln!(s, "                    orientation = {};", if transport.orientation.to_string().contains('.') { transport.orientation.to_string() } else { format!("{}.0", transport.orientation) }).unwrap();
                                             writeln!(s, "                    timestamp = {};", transport.timestamp).unwrap();
                                             writeln!(s, "                    seat = {};", transport.seat).unwrap();
 
-                                            writeln!(s, "    }};").unwrap();
+                                            writeln!(s, "                }};").unwrap();
                                         }
                                     }
                                 }
@@ -227,7 +227,7 @@ impl crate::Message for SMSG_UPDATE_OBJECT {
                                                 writeln!(s, "                    y = {};", if spline_final_point.y.to_string().contains('.') { spline_final_point.y.to_string() } else { format!("{}.0", spline_final_point.y) }).unwrap();
                                                 writeln!(s, "                    z = {};", if spline_final_point.z.to_string().contains('.') { spline_final_point.z.to_string() } else { format!("{}.0", spline_final_point.z) }).unwrap();
 
-                                                writeln!(s, "    }};").unwrap();
+                                                writeln!(s, "                }};").unwrap();
                                             }
                                         }
                                     }
@@ -254,7 +254,7 @@ impl crate::Message for SMSG_UPDATE_OBJECT {
                                     writeln!(s, "                    y = {};", if if_statement.final_node.y.to_string().contains('.') { if_statement.final_node.y.to_string() } else { format!("{}.0", if_statement.final_node.y) }).unwrap();
                                     writeln!(s, "                    z = {};", if if_statement.final_node.z.to_string().contains('.') { if_statement.final_node.z.to_string() } else { format!("{}.0", if_statement.final_node.z) }).unwrap();
 
-                                    writeln!(s, "    }};").unwrap();
+                                    writeln!(s, "                }};").unwrap();
                                 }
 
                             }
@@ -272,7 +272,7 @@ impl crate::Message for SMSG_UPDATE_OBJECT {
                                 writeln!(s, "                    y = {};", if position1.y.to_string().contains('.') { position1.y.to_string() } else { format!("{}.0", position1.y) }).unwrap();
                                 writeln!(s, "                    z = {};", if position1.z.to_string().contains('.') { position1.z.to_string() } else { format!("{}.0", position1.z) }).unwrap();
 
-                                writeln!(s, "    }};").unwrap();
+                                writeln!(s, "                }};").unwrap();
                                 writeln!(s, "                orientation1 = {};", if orientation1.to_string().contains('.') { orientation1.to_string() } else { format!("{}.0", orientation1) }).unwrap();
                                 writeln!(s, "                corpse_orientation = {};", if corpse_orientation.to_string().contains('.') { corpse_orientation.to_string() } else { format!("{}.0", corpse_orientation) }).unwrap();
                             }
@@ -287,7 +287,7 @@ impl crate::Message for SMSG_UPDATE_OBJECT {
                                 writeln!(s, "                    y = {};", if position2.y.to_string().contains('.') { position2.y.to_string() } else { format!("{}.0", position2.y) }).unwrap();
                                 writeln!(s, "                    z = {};", if position2.z.to_string().contains('.') { position2.z.to_string() } else { format!("{}.0", position2.z) }).unwrap();
 
-                                writeln!(s, "    }};").unwrap();
+                                writeln!(s, "                }};").unwrap();
                                 writeln!(s, "                orientation2 = {};", if orientation2.to_string().contains('.') { orientation2.to_string() } else { format!("{}.0", orientation2) }).unwrap();
                             }
                         }
@@ -319,7 +319,7 @@ impl crate::Message for SMSG_UPDATE_OBJECT {
                     }
 
 
-                    writeln!(s, "    }};").unwrap();
+                    writeln!(s, "            }};").unwrap();
                 }
                 crate::wrath::Object_UpdateType::CreateObject {
                     guid3,
@@ -360,7 +360,7 @@ impl crate::Message for SMSG_UPDATE_OBJECT {
                                 writeln!(s, "                    y = {};", if position.y.to_string().contains('.') { position.y.to_string() } else { format!("{}.0", position.y) }).unwrap();
                                 writeln!(s, "                    z = {};", if position.z.to_string().contains('.') { position.z.to_string() } else { format!("{}.0", position.z) }).unwrap();
 
-                                writeln!(s, "    }};").unwrap();
+                                writeln!(s, "                }};").unwrap();
                                 writeln!(s, "                orientation = {};", if orientation.to_string().contains('.') { orientation.to_string() } else { format!("{}.0", orientation) }).unwrap();
                                 if let Some(if_statement) = &flags.get_on_transport_and_interpolated_movement() {
                                     match if_statement {
@@ -379,12 +379,12 @@ impl crate::Message for SMSG_UPDATE_OBJECT {
                                             writeln!(s, "                        y = {};", if transport_info.position.y.to_string().contains('.') { transport_info.position.y.to_string() } else { format!("{}.0", transport_info.position.y) }).unwrap();
                                             writeln!(s, "                        z = {};", if transport_info.position.z.to_string().contains('.') { transport_info.position.z.to_string() } else { format!("{}.0", transport_info.position.z) }).unwrap();
 
-                                            writeln!(s, "    }};").unwrap();
+                                            writeln!(s, "                    }};").unwrap();
                                             writeln!(s, "                    orientation = {};", if transport_info.orientation.to_string().contains('.') { transport_info.orientation.to_string() } else { format!("{}.0", transport_info.orientation) }).unwrap();
                                             writeln!(s, "                    timestamp = {};", transport_info.timestamp).unwrap();
                                             writeln!(s, "                    seat = {};", transport_info.seat).unwrap();
 
-                                            writeln!(s, "    }};").unwrap();
+                                            writeln!(s, "                }};").unwrap();
                                             writeln!(s, "                transport_time = {};", transport_time).unwrap();
                                         }
                                         crate::wrath::MovementBlock_MovementFlags_OnTransportAndInterpolatedMovement::OnTransport {
@@ -401,12 +401,12 @@ impl crate::Message for SMSG_UPDATE_OBJECT {
                                             writeln!(s, "                        y = {};", if transport.position.y.to_string().contains('.') { transport.position.y.to_string() } else { format!("{}.0", transport.position.y) }).unwrap();
                                             writeln!(s, "                        z = {};", if transport.position.z.to_string().contains('.') { transport.position.z.to_string() } else { format!("{}.0", transport.position.z) }).unwrap();
 
-                                            writeln!(s, "    }};").unwrap();
+                                            writeln!(s, "                    }};").unwrap();
                                             writeln!(s, "                    orientation = {};", if transport.orientation.to_string().contains('.') { transport.orientation.to_string() } else { format!("{}.0", transport.orientation) }).unwrap();
                                             writeln!(s, "                    timestamp = {};", transport.timestamp).unwrap();
                                             writeln!(s, "                    seat = {};", transport.seat).unwrap();
 
-                                            writeln!(s, "    }};").unwrap();
+                                            writeln!(s, "                }};").unwrap();
                                         }
                                     }
                                 }
@@ -476,7 +476,7 @@ impl crate::Message for SMSG_UPDATE_OBJECT {
                                                 writeln!(s, "                    y = {};", if spline_final_point.y.to_string().contains('.') { spline_final_point.y.to_string() } else { format!("{}.0", spline_final_point.y) }).unwrap();
                                                 writeln!(s, "                    z = {};", if spline_final_point.z.to_string().contains('.') { spline_final_point.z.to_string() } else { format!("{}.0", spline_final_point.z) }).unwrap();
 
-                                                writeln!(s, "    }};").unwrap();
+                                                writeln!(s, "                }};").unwrap();
                                             }
                                         }
                                     }
@@ -503,7 +503,7 @@ impl crate::Message for SMSG_UPDATE_OBJECT {
                                     writeln!(s, "                    y = {};", if if_statement.final_node.y.to_string().contains('.') { if_statement.final_node.y.to_string() } else { format!("{}.0", if_statement.final_node.y) }).unwrap();
                                     writeln!(s, "                    z = {};", if if_statement.final_node.z.to_string().contains('.') { if_statement.final_node.z.to_string() } else { format!("{}.0", if_statement.final_node.z) }).unwrap();
 
-                                    writeln!(s, "    }};").unwrap();
+                                    writeln!(s, "                }};").unwrap();
                                 }
 
                             }
@@ -521,7 +521,7 @@ impl crate::Message for SMSG_UPDATE_OBJECT {
                                 writeln!(s, "                    y = {};", if position1.y.to_string().contains('.') { position1.y.to_string() } else { format!("{}.0", position1.y) }).unwrap();
                                 writeln!(s, "                    z = {};", if position1.z.to_string().contains('.') { position1.z.to_string() } else { format!("{}.0", position1.z) }).unwrap();
 
-                                writeln!(s, "    }};").unwrap();
+                                writeln!(s, "                }};").unwrap();
                                 writeln!(s, "                orientation1 = {};", if orientation1.to_string().contains('.') { orientation1.to_string() } else { format!("{}.0", orientation1) }).unwrap();
                                 writeln!(s, "                corpse_orientation = {};", if corpse_orientation.to_string().contains('.') { corpse_orientation.to_string() } else { format!("{}.0", corpse_orientation) }).unwrap();
                             }
@@ -536,7 +536,7 @@ impl crate::Message for SMSG_UPDATE_OBJECT {
                                 writeln!(s, "                    y = {};", if position2.y.to_string().contains('.') { position2.y.to_string() } else { format!("{}.0", position2.y) }).unwrap();
                                 writeln!(s, "                    z = {};", if position2.z.to_string().contains('.') { position2.z.to_string() } else { format!("{}.0", position2.z) }).unwrap();
 
-                                writeln!(s, "    }};").unwrap();
+                                writeln!(s, "                }};").unwrap();
                                 writeln!(s, "                orientation2 = {};", if orientation2.to_string().contains('.') { orientation2.to_string() } else { format!("{}.0", orientation2) }).unwrap();
                             }
                         }
@@ -568,7 +568,7 @@ impl crate::Message for SMSG_UPDATE_OBJECT {
                     }
 
 
-                    writeln!(s, "    }};").unwrap();
+                    writeln!(s, "            }};").unwrap();
                     panic!("unsupported type for test case printing: 'UpdateMask' for variable 'mask2'");
                 }
                 crate::wrath::Object_UpdateType::CreateObject2 {
@@ -610,7 +610,7 @@ impl crate::Message for SMSG_UPDATE_OBJECT {
                                 writeln!(s, "                    y = {};", if position.y.to_string().contains('.') { position.y.to_string() } else { format!("{}.0", position.y) }).unwrap();
                                 writeln!(s, "                    z = {};", if position.z.to_string().contains('.') { position.z.to_string() } else { format!("{}.0", position.z) }).unwrap();
 
-                                writeln!(s, "    }};").unwrap();
+                                writeln!(s, "                }};").unwrap();
                                 writeln!(s, "                orientation = {};", if orientation.to_string().contains('.') { orientation.to_string() } else { format!("{}.0", orientation) }).unwrap();
                                 if let Some(if_statement) = &flags.get_on_transport_and_interpolated_movement() {
                                     match if_statement {
@@ -629,12 +629,12 @@ impl crate::Message for SMSG_UPDATE_OBJECT {
                                             writeln!(s, "                        y = {};", if transport_info.position.y.to_string().contains('.') { transport_info.position.y.to_string() } else { format!("{}.0", transport_info.position.y) }).unwrap();
                                             writeln!(s, "                        z = {};", if transport_info.position.z.to_string().contains('.') { transport_info.position.z.to_string() } else { format!("{}.0", transport_info.position.z) }).unwrap();
 
-                                            writeln!(s, "    }};").unwrap();
+                                            writeln!(s, "                    }};").unwrap();
                                             writeln!(s, "                    orientation = {};", if transport_info.orientation.to_string().contains('.') { transport_info.orientation.to_string() } else { format!("{}.0", transport_info.orientation) }).unwrap();
                                             writeln!(s, "                    timestamp = {};", transport_info.timestamp).unwrap();
                                             writeln!(s, "                    seat = {};", transport_info.seat).unwrap();
 
-                                            writeln!(s, "    }};").unwrap();
+                                            writeln!(s, "                }};").unwrap();
                                             writeln!(s, "                transport_time = {};", transport_time).unwrap();
                                         }
                                         crate::wrath::MovementBlock_MovementFlags_OnTransportAndInterpolatedMovement::OnTransport {
@@ -651,12 +651,12 @@ impl crate::Message for SMSG_UPDATE_OBJECT {
                                             writeln!(s, "                        y = {};", if transport.position.y.to_string().contains('.') { transport.position.y.to_string() } else { format!("{}.0", transport.position.y) }).unwrap();
                                             writeln!(s, "                        z = {};", if transport.position.z.to_string().contains('.') { transport.position.z.to_string() } else { format!("{}.0", transport.position.z) }).unwrap();
 
-                                            writeln!(s, "    }};").unwrap();
+                                            writeln!(s, "                    }};").unwrap();
                                             writeln!(s, "                    orientation = {};", if transport.orientation.to_string().contains('.') { transport.orientation.to_string() } else { format!("{}.0", transport.orientation) }).unwrap();
                                             writeln!(s, "                    timestamp = {};", transport.timestamp).unwrap();
                                             writeln!(s, "                    seat = {};", transport.seat).unwrap();
 
-                                            writeln!(s, "    }};").unwrap();
+                                            writeln!(s, "                }};").unwrap();
                                         }
                                     }
                                 }
@@ -726,7 +726,7 @@ impl crate::Message for SMSG_UPDATE_OBJECT {
                                                 writeln!(s, "                    y = {};", if spline_final_point.y.to_string().contains('.') { spline_final_point.y.to_string() } else { format!("{}.0", spline_final_point.y) }).unwrap();
                                                 writeln!(s, "                    z = {};", if spline_final_point.z.to_string().contains('.') { spline_final_point.z.to_string() } else { format!("{}.0", spline_final_point.z) }).unwrap();
 
-                                                writeln!(s, "    }};").unwrap();
+                                                writeln!(s, "                }};").unwrap();
                                             }
                                         }
                                     }
@@ -753,7 +753,7 @@ impl crate::Message for SMSG_UPDATE_OBJECT {
                                     writeln!(s, "                    y = {};", if if_statement.final_node.y.to_string().contains('.') { if_statement.final_node.y.to_string() } else { format!("{}.0", if_statement.final_node.y) }).unwrap();
                                     writeln!(s, "                    z = {};", if if_statement.final_node.z.to_string().contains('.') { if_statement.final_node.z.to_string() } else { format!("{}.0", if_statement.final_node.z) }).unwrap();
 
-                                    writeln!(s, "    }};").unwrap();
+                                    writeln!(s, "                }};").unwrap();
                                 }
 
                             }
@@ -771,7 +771,7 @@ impl crate::Message for SMSG_UPDATE_OBJECT {
                                 writeln!(s, "                    y = {};", if position1.y.to_string().contains('.') { position1.y.to_string() } else { format!("{}.0", position1.y) }).unwrap();
                                 writeln!(s, "                    z = {};", if position1.z.to_string().contains('.') { position1.z.to_string() } else { format!("{}.0", position1.z) }).unwrap();
 
-                                writeln!(s, "    }};").unwrap();
+                                writeln!(s, "                }};").unwrap();
                                 writeln!(s, "                orientation1 = {};", if orientation1.to_string().contains('.') { orientation1.to_string() } else { format!("{}.0", orientation1) }).unwrap();
                                 writeln!(s, "                corpse_orientation = {};", if corpse_orientation.to_string().contains('.') { corpse_orientation.to_string() } else { format!("{}.0", corpse_orientation) }).unwrap();
                             }
@@ -786,7 +786,7 @@ impl crate::Message for SMSG_UPDATE_OBJECT {
                                 writeln!(s, "                    y = {};", if position2.y.to_string().contains('.') { position2.y.to_string() } else { format!("{}.0", position2.y) }).unwrap();
                                 writeln!(s, "                    z = {};", if position2.z.to_string().contains('.') { position2.z.to_string() } else { format!("{}.0", position2.z) }).unwrap();
 
-                                writeln!(s, "    }};").unwrap();
+                                writeln!(s, "                }};").unwrap();
                                 writeln!(s, "                orientation2 = {};", if orientation2.to_string().contains('.') { orientation2.to_string() } else { format!("{}.0", orientation2) }).unwrap();
                             }
                         }
@@ -818,7 +818,7 @@ impl crate::Message for SMSG_UPDATE_OBJECT {
                     }
 
 
-                    writeln!(s, "    }};").unwrap();
+                    writeln!(s, "            }};").unwrap();
                     panic!("unsupported type for test case printing: 'UpdateMask' for variable 'mask2'");
                 }
                 crate::wrath::Object_UpdateType::OutOfRangeObjects {

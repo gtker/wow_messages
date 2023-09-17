@@ -119,7 +119,7 @@ impl crate::Message for CMSG_CAST_SPELL {
             writeln!(s, "            y = {};", if if_statement.source.y.to_string().contains('.') { if_statement.source.y.to_string() } else { format!("{}.0", if_statement.source.y) }).unwrap();
             writeln!(s, "            z = {};", if if_statement.source.z.to_string().contains('.') { if_statement.source.z.to_string() } else { format!("{}.0", if_statement.source.z) }).unwrap();
 
-            writeln!(s, "    }};").unwrap();
+            writeln!(s, "        }};").unwrap();
         }
 
         if let Some(if_statement) = &self.targets.target_flags.get_dest_location() {
@@ -130,7 +130,7 @@ impl crate::Message for CMSG_CAST_SPELL {
             writeln!(s, "            y = {};", if if_statement.destination.y.to_string().contains('.') { if_statement.destination.y.to_string() } else { format!("{}.0", if_statement.destination.y) }).unwrap();
             writeln!(s, "            z = {};", if if_statement.destination.z.to_string().contains('.') { if_statement.destination.z.to_string() } else { format!("{}.0", if_statement.destination.z) }).unwrap();
 
-            writeln!(s, "    }};").unwrap();
+            writeln!(s, "        }};").unwrap();
         }
 
         if let Some(if_statement) = &self.targets.target_flags.get_string() {

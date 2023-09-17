@@ -82,7 +82,7 @@ impl crate::Message for CMSG_MOVE_HOVER_ACK {
         writeln!(s, "            y = {};", if self.info.position.y.to_string().contains('.') { self.info.position.y.to_string() } else { format!("{}.0", self.info.position.y) }).unwrap();
         writeln!(s, "            z = {};", if self.info.position.z.to_string().contains('.') { self.info.position.z.to_string() } else { format!("{}.0", self.info.position.z) }).unwrap();
 
-        writeln!(s, "    }};").unwrap();
+        writeln!(s, "        }};").unwrap();
         writeln!(s, "        orientation = {};", if self.info.orientation.to_string().contains('.') { self.info.orientation.to_string() } else { format!("{}.0", self.info.orientation) }).unwrap();
         if let Some(if_statement) = &self.info.flags.get_on_transport_and_interpolated_movement() {
             match if_statement {
@@ -101,12 +101,12 @@ impl crate::Message for CMSG_MOVE_HOVER_ACK {
                     writeln!(s, "                y = {};", if transport_info.position.y.to_string().contains('.') { transport_info.position.y.to_string() } else { format!("{}.0", transport_info.position.y) }).unwrap();
                     writeln!(s, "                z = {};", if transport_info.position.z.to_string().contains('.') { transport_info.position.z.to_string() } else { format!("{}.0", transport_info.position.z) }).unwrap();
 
-                    writeln!(s, "    }};").unwrap();
+                    writeln!(s, "            }};").unwrap();
                     writeln!(s, "            orientation = {};", if transport_info.orientation.to_string().contains('.') { transport_info.orientation.to_string() } else { format!("{}.0", transport_info.orientation) }).unwrap();
                     writeln!(s, "            timestamp = {};", transport_info.timestamp).unwrap();
                     writeln!(s, "            seat = {};", transport_info.seat).unwrap();
 
-                    writeln!(s, "    }};").unwrap();
+                    writeln!(s, "        }};").unwrap();
                     writeln!(s, "        transport_time = {};", transport_time).unwrap();
                 }
                 crate::wrath::MovementInfo_MovementFlags_OnTransportAndInterpolatedMovement::OnTransport {
@@ -123,12 +123,12 @@ impl crate::Message for CMSG_MOVE_HOVER_ACK {
                     writeln!(s, "                y = {};", if transport.position.y.to_string().contains('.') { transport.position.y.to_string() } else { format!("{}.0", transport.position.y) }).unwrap();
                     writeln!(s, "                z = {};", if transport.position.z.to_string().contains('.') { transport.position.z.to_string() } else { format!("{}.0", transport.position.z) }).unwrap();
 
-                    writeln!(s, "    }};").unwrap();
+                    writeln!(s, "            }};").unwrap();
                     writeln!(s, "            orientation = {};", if transport.orientation.to_string().contains('.') { transport.orientation.to_string() } else { format!("{}.0", transport.orientation) }).unwrap();
                     writeln!(s, "            timestamp = {};", transport.timestamp).unwrap();
                     writeln!(s, "            seat = {};", transport.seat).unwrap();
 
-                    writeln!(s, "    }};").unwrap();
+                    writeln!(s, "        }};").unwrap();
                 }
             }
         }

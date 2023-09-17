@@ -297,10 +297,10 @@ fn print_member_definition(
 
             let variable_prefix = format!("{var_name}.");
 
-            let prefix = format!("{prefix}    ");
-            print_members(s, e, &variable_prefix, &prefix);
+            let new_prefix = format!("{prefix}    ");
+            print_members(s, e, &variable_prefix, &new_prefix);
 
-            test_case_string::wln(s, "    }};");
+            test_case_string::wln(s, format!("{prefix}}}}};"));
         }
 
         Type::Array(array) => {
