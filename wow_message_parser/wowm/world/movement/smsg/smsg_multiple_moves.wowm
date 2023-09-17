@@ -31,3 +31,4 @@ smsg SMSG_COMPRESSED_MOVES = 0x2FB {
     versions = "3.3.5";
     compressed = "true";
 }
+

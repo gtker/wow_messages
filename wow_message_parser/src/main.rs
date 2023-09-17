@@ -272,3 +272,12 @@ fn should_not_write_object(t: &ObjectTags) -> bool {
 fn should_not_write_object_docs(t: &ObjectTags) -> bool {
     t.test() || t.skip()
 }
+
+pub(crate) fn float_format(v: f32) -> String {
+    let s = format!("{v}");
+    if s.contains('.') {
+        s
+    } else {
+        format!("{s}.0")
+    }
+}

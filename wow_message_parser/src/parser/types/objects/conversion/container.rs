@@ -24,7 +24,9 @@ use crate::parser::types::parsed::parsed_test_case::{
 use crate::parser::types::parsed::parsed_ty::ParsedType;
 use crate::parser::types::sizes::update_mask_max;
 use crate::parser::types::struct_member::{StructMember, StructMemberDefinition};
-use crate::parser::types::test_case::{TestCase, TestCaseMember, TestUpdateMaskValue, TestValue};
+use crate::parser::types::test_case::{
+    TestCase, TestCaseMember, TestUpdateMaskValue, TestValue, TestVector3d,
+};
 use crate::parser::types::ty::Type;
 use crate::parser::types::ContainerValue;
 use crate::parser::utility::parse_value;
@@ -524,6 +526,31 @@ fn convert_parsed_test_case_value_to_test_case_value(
                     ParsedArrayType::Guid => "Guid",
                     ParsedArrayType::PackedGuid => "Guid",
                 },
+                ParsedType::MonsterMoveSpline => {
+                    let mut v = Vec::new();
+
+                    for multiple in array {
+                        let f = |x: &ParsedTestCaseMember| match &x.value {
+                            ParsedTestValue::Single(v) => v.parse::<f32>().unwrap(),
+                            ParsedTestValue::Multiple(_) | ParsedTestValue::ArrayOfMultiple(_) => {
+                                unreachable!()
+                            }
+                        };
+
+                        let x = multiple.iter().find(|a| a.variable_name == "x").unwrap();
+                        let x = f(x);
+
+                        let y = multiple.iter().find(|a| a.variable_name == "y").unwrap();
+                        let y = f(y);
+
+                        let z = multiple.iter().find(|a| a.variable_name == "z").unwrap();
+                        let z = f(z);
+
+                        v.push(TestVector3d { x, y, z })
+                    }
+
+                    return TestValue::MonsterMoveSpline(v);
+                }
                 _ => unimplemented!(),
             };
 

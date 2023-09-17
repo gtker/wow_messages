@@ -1,5 +1,5 @@
 use crate::errors::{ExpectedOpcodeError, ParseError};
-use crate::util::{read_u32_le, read_u8_le};
+use crate::util::{read_i32_le, read_u32_le, read_u8_le};
 use std::io::{Read, Write};
 use wow_world_base::shared::vector3d_vanilla_tbc_wrath::Vector3d;
 
@@ -57,17 +57,17 @@ pub(crate) fn write_addon_array(
     Ok(())
 }
 
-pub(crate) fn vector3d_to_packed(v: &Vector3d) -> u32 {
+pub(crate) fn vector3d_to_packed(v: &Vector3d) -> i32 {
     let mut packed = 0;
 
-    packed |= (v.x / 0.25) as u32 & 0x7FF;
-    packed |= ((v.y / 0.25) as u32 & 0x7FF) << 11;
-    packed |= ((v.z / 0.25) as u32 & 0x3FF) << 22;
+    packed |= (v.x / 0.25) as i32 & 0x7FF;
+    packed |= ((v.y / 0.25) as i32 & 0x7FF) << 11;
+    packed |= ((v.z / 0.25) as i32 & 0x3FF) << 22;
 
     packed
 }
 
-pub(crate) const fn packed_to_vector3d(p: u32) -> Vector3d {
+pub(crate) const fn packed_to_vector3d(p: i32) -> Vector3d {
     let x = ((p & 0x7FF) / 4) as f32;
     let y = (((p >> 11) & 0x7FF) / 4) as f32;
     let z = (((p >> 22) & 0x3FF) / 4) as f32;
@@ -86,7 +86,7 @@ pub(crate) fn read_monster_move_spline(
             let vec = vanilla_tbc_wrath_vector3d_read(&mut r)?;
             splines.push(vec);
         } else {
-            let packed = read_u32_le(&mut r)?;
+            let packed = read_i32_le(&mut r)?;
             splines.push(packed_to_vector3d(packed));
         }
     }

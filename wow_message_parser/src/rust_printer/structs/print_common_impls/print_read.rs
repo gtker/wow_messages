@@ -97,7 +97,8 @@ fn print_read_array(
                 "current_size += 4; // {name}_decompressed_size: u32"
             ));
 
-            let loop_condition = if array.compressed() {
+            let use_decoder = array.compressed() || e.tags().compressed() && array.is_endless();
+            let loop_condition = if use_decoder {
                 "while !r.is_empty()"
             } else {
                 "while current_size < (body_size as usize)"
@@ -808,6 +809,13 @@ pub(crate) fn print_read(
         s.wln("let decompressed_size = crate::util::read_u32_le(r)?;;");
         s.wln("let decompressed_buffer = vec![0; decompressed_size as usize];");
         s.wln("let mut r = &mut flate2::read::ZlibDecoder::new_with_buf(r, decompressed_buffer);");
+
+        s.wln(format!(
+            "let mut buf = Vec::with_capacity(decompressed_size as usize);"
+        ));
+        // TODO: I want to know if this fails, should this be a separate error mode?
+        s.wln("r.read_to_end(&mut buf).unwrap();");
+        s.wln("let mut r = &buf[..];");
         s.newline();
     }
 

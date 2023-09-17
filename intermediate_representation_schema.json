@@ -575,6 +575,25 @@
               "ref": "value"
             }
           }
+        },
+        "MonsterMoveSpline": {
+          "properties": {
+            "content": {
+              "elements": {
+                "properties": {
+                  "x": {
+                    "type": "float32"
+                  },
+                  "y": {
+                    "type": "float32"
+                  },
+                  "z": {
+                    "type": "float32"
+                  }
+                }
+              }
+            }
+          }
         }
       }
     },

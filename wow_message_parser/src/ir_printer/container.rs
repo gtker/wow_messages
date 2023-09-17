@@ -5,7 +5,9 @@ use crate::parser::types::if_statement::{Conditional, Equation, IfStatement};
 use crate::parser::types::optional::OptionalStatement;
 use crate::parser::types::sizes::Sizes;
 use crate::parser::types::struct_member::{StructMember, StructMemberDefinition};
-use crate::parser::types::test_case::{TestCase, TestCaseMember, TestUpdateMaskValue, TestValue};
+use crate::parser::types::test_case::{
+    TestCase, TestCaseMember, TestUpdateMaskValue, TestValue, TestVector3d,
+};
 use crate::parser::types::ty::Type;
 use crate::parser::types::ContainerValue;
 use crate::rust_printer::UpdateMaskObjectType;
@@ -613,6 +615,7 @@ pub(crate) enum IrTestValue {
         members: Vec<Vec<IrTestCaseMember>>,
         size: IrArraySize,
     },
+    MonsterMoveSpline(Vec<TestVector3d>),
     UpdateMask(Vec<IrTestUpdateMaskValue>),
     IpAddress(IrIntegerEnumValue),
     Seconds(IrIntegerEnumValue),
@@ -681,6 +684,7 @@ impl IrTestValue {
             TestValue::Population { value, .. } => Self::Population(*value),
             TestValue::Gold(i) => Self::Gold(IrIntegerEnumValue::from_container_value(i)),
             TestValue::Level(i) => Self::Level(IrIntegerEnumValue::from_container_value(i)),
+            TestValue::MonsterMoveSpline(v) => Self::MonsterMoveSpline(v.clone()),
         }
     }
 }

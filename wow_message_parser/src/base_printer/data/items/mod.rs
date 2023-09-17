@@ -10,6 +10,8 @@ pub mod vanilla;
 pub mod wrath;
 
 use crate::base_printer::write::items::GenericThing;
+
+use crate::float_format;
 use wow_world_base::shared as shared_base;
 use wow_world_base::tbc as tbc_base;
 use wow_world_base::vanilla as vanilla_base;
@@ -562,15 +564,6 @@ impl Value {
     }
 
     pub fn to_string_value(&self) -> String {
-        fn float_format(v: f32) -> String {
-            let s = format!("{v}");
-            if s.contains('.') {
-                s
-            } else {
-                format!("{s}.0")
-            }
-        }
-
         match self {
             Value::String(v) => format!("\"{}\"", v.replace('"', "\\\"")),
             Value::Int(v) => (*v).to_string(),

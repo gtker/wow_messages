@@ -116,6 +116,10 @@ impl Array {
     pub(crate) fn compressed(&self) -> bool {
         self.compressed
     }
+
+    pub(crate) fn is_endless(&self) -> bool {
+        matches!(self.size(), ArraySize::Endless)
+    }
     pub(crate) fn rust_str(&self) -> String {
         match &self.size {
             ArraySize::Fixed(i) => format!("[{}; {}]", self.inner.rust_str(), i),

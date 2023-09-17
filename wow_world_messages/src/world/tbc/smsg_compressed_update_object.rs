@@ -32,6 +32,9 @@ impl SMSG_COMPRESSED_UPDATE_OBJECT {
         let decompressed_size = crate::util::read_u32_le(r)?;;
         let decompressed_buffer = vec![0; decompressed_size as usize];
         let mut r = &mut flate2::read::ZlibDecoder::new_with_buf(r, decompressed_buffer);
+        let mut buf = Vec::with_capacity(decompressed_size as usize);
+        r.read_to_end(&mut buf).unwrap();
+        let mut r = &buf[..];
 
         // amount_of_objects: u32
         let amount_of_objects = crate::util::read_u32_le(&mut r)?;

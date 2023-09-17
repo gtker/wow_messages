@@ -4,6 +4,14 @@ use crate::parser::types::tags::{MemberTags, ObjectTags};
 use crate::parser::types::ContainerValue;
 use crate::rust_printer::UpdateMaskObjectType;
 use crate::Container;
+use serde::Serialize;
+
+#[derive(Clone, Debug, Serialize)]
+pub(crate) struct TestVector3d {
+    pub x: f32,
+    pub y: f32,
+    pub z: f32,
+}
 
 #[derive(Debug, Clone)]
 pub(crate) struct TestCase {
@@ -138,6 +146,7 @@ pub(crate) enum TestValue {
         members: Vec<Vec<TestCaseMember>>,
         size: ArraySize,
     },
+    MonsterMoveSpline(Vec<TestVector3d>),
     UpdateMask(Vec<TestUpdateMaskValue>),
     IpAddress(ContainerValue),
     Seconds(ContainerValue),

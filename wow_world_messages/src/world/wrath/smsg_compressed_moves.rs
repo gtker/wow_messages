@@ -28,6 +28,9 @@ impl SMSG_COMPRESSED_MOVES {
         let decompressed_size = crate::util::read_u32_le(r)?;;
         let decompressed_buffer = vec![0; decompressed_size as usize];
         let mut r = &mut flate2::read::ZlibDecoder::new_with_buf(r, decompressed_buffer);
+        let mut buf = Vec::with_capacity(decompressed_size as usize);
+        r.read_to_end(&mut buf).unwrap();
+        let mut r = &buf[..];
 
         // size: u32
         let _size = crate::util::read_u32_le(&mut r)?;
@@ -40,7 +43,7 @@ impl SMSG_COMPRESSED_MOVES {
             };
             current_size += 4; // moves_decompressed_size: u32
             let mut moves = Vec::with_capacity(body_size as usize - current_size);
-            while current_size < (body_size as usize) {
+            while !r.is_empty() {
                 let a = MiniMoveMessage::read(&mut r)?;
                 current_size += a.size();
                 moves.push(a);

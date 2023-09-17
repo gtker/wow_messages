@@ -1,4 +1,5 @@
 use crate::file_utils::{get_import_path, major_version_to_string};
+use crate::float_format;
 use crate::parser::types::array::ArraySize;
 use crate::parser::types::container::{Container, ContainerType};
 use crate::parser::types::objects::Objects;
@@ -445,6 +446,25 @@ fn print_value(
                 }
 
                 s.closing_curly_with(",");
+            }
+
+            s.dec_indent();
+            s.wln("],");
+        }
+        TestValue::MonsterMoveSpline(values) => {
+            s.wln_no_indent("vec![");
+            s.inc_indent();
+
+            for v in values {
+                s.body_closing_with(
+                    "Vector3d",
+                    |s| {
+                        s.wln(format!("x: {},", float_format(v.x)));
+                        s.wln(format!("y: {},", float_format(v.y)));
+                        s.wln(format!("z: {},", float_format(v.z)));
+                    },
+                    ",",
+                );
             }
 
             s.dec_indent();
