@@ -95,21 +95,12 @@ impl crate::Message for SMSG_COMPRESSED_MOVES {
         writeln!(s, "    {a:#04X}, {b:#04X}, /* opcode */").unwrap();
         let mut bytes: Vec<u8> = Vec::new();
         self.write_into_vec(&mut bytes).unwrap();
+        let compressed_bytes_len = bytes.len() - 4;
         let mut bytes = bytes.into_iter();
 
-        crate::util::write_bytes(&mut s, &mut bytes, 4, "size", "    ");
-        if !self.moves.is_empty() {
-            writeln!(s, "    /* moves: MiniMoveMessage[-] start */").unwrap();
-            for (i, v) in self.moves.iter().enumerate() {
-                writeln!(s, "    /* moves: MiniMoveMessage[-] {i} start */").unwrap();
-                crate::util::write_bytes(&mut s, &mut bytes, 1, "size", "        ");
-                crate::util::write_bytes(&mut s, &mut bytes, 2, "opcode", "        ");
-                crate::util::write_bytes(&mut s, &mut bytes, crate::util::packed_guid_size(&v.guid), "guid", "        ");
-                crate::util::write_bytes(&mut s, &mut bytes, 4, "movement_counter", "        ");
-                writeln!(s, "    /* moves: MiniMoveMessage[-] {i} end */").unwrap();
-            }
-            writeln!(s, "    /* moves: MiniMoveMessage[-] end */").unwrap();
-        }
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "decompressed_size", "    ");
+        /* Compressed bytes */
+        crate::util::write_bytes(&mut s, &mut bytes, compressed_bytes_len, "compressed_data", "    ");
 
 
         writeln!(s, "] {{").unwrap();
