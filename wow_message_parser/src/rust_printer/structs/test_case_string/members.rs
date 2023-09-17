@@ -304,7 +304,7 @@ fn print_member_definition(
         }
 
         Type::Array(array) => {
-            s.wln(format!("writeln!(s, \"{prefix}{name} = [\").unwrap();"));
+            test_case_string::wln(s, format!("{prefix}{name} = ["));
 
             s.body(format!("for v in {var_name}.as_slice()"), |s| {
                 match array.ty() {
