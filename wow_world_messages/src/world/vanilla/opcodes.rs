@@ -2681,7 +2681,6 @@ impl ClientOpcodeMessage {
             Self::CMSG_TUTORIAL_FLAG(c) => crate::Message::to_test_case_string(c),
             Self::CMSG_TUTORIAL_CLEAR => crate::Message::to_test_case_string(&CMSG_TUTORIAL_CLEAR{}),
             Self::CMSG_TUTORIAL_RESET => crate::Message::to_test_case_string(&CMSG_TUTORIAL_RESET{}),
-            Self::CMSG_STANDSTATECHANGE(c) => crate::Message::to_test_case_string(c),
             Self::CMSG_EMOTE(c) => crate::Message::to_test_case_string(c),
             Self::CMSG_AUTOSTORE_LOOT_ITEM(c) => crate::Message::to_test_case_string(c),
             Self::CMSG_AUTOSTORE_BAG_ITEM(c) => crate::Message::to_test_case_string(c),
