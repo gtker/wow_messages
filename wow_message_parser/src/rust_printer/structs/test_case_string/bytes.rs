@@ -262,8 +262,32 @@ fn print_bytes_definition(
             }
         }
 
+        Type::MonsterMoveSplines => {
+            s.wln(format!("crate::util::write_bytes(&mut s, &mut bytes, 4, \"{name}_length\", {prefix_text});"));
+            s.open_curly(format!("if !{var_name}.is_empty()"));
+            wln(s, format!("    /* {name}: {ty_name} start */"));
+
+            s.wln(format!("let mut v = {var_name}.iter();"));
+            s.wln("let _ = v.next().unwrap();");
+            s.wln(format!(
+                "crate::util::write_bytes(&mut s, &mut bytes, 4, \"{name}_x\", {prefix_text});"
+            ));
+            s.wln(format!(
+                "crate::util::write_bytes(&mut s, &mut bytes, 4, \"{name}_y\", {prefix_text});"
+            ));
+            s.wln(format!(
+                "crate::util::write_bytes(&mut s, &mut bytes, 4, \"{name}_z\", {prefix_text});"
+            ));
+
+            s.bodyn(format!("for v in v"), |s| {
+                s.wln(format!("crate::util::write_bytes(&mut s, &mut bytes, 4, \"{name}_packed\", {prefix_text});"));
+            });
+
+            wln(s, format!("    /* {name}: {ty_name} end */"));
+            s.closing_curly(); // if !is empty
+        }
+
         Type::UpdateMask { .. }
-        | Type::MonsterMoveSplines
         | Type::AuraMask
         | Type::AchievementDoneArray
         | Type::AchievementInProgressArray

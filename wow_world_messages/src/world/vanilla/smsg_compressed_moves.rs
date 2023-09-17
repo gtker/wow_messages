@@ -140,7 +140,16 @@ impl crate::Message for SMSG_COMPRESSED_MOVES {
                         } => {
                             writeln!(s, "                spline_flags = {};", spline_flags.as_test_case_value()).unwrap();
                             writeln!(s, "                duration = {};", duration).unwrap();
-                            panic!("unsupported type for test case printing: 'MonsterMoveSplines' for variable 'splines'");
+                            writeln!(s, "                splines = [").unwrap();
+                            for v in splines.as_slice() {
+                                writeln!(s, "                    {{").unwrap();
+                                writeln!(s, "                        x = {};", if v.x.to_string().contains('.') { v.x.to_string() } else { format!("{}.0", v.x) }).unwrap();
+                                writeln!(s, "                        y = {};", if v.y.to_string().contains('.') { v.y.to_string() } else { format!("{}.0", v.y) }).unwrap();
+                                writeln!(s, "                        z = {};", if v.z.to_string().contains('.') { v.z.to_string() } else { format!("{}.0", v.z) }).unwrap();
+                                writeln!(s, "                    }},").unwrap();
+                            }
+
+                            writeln!(s, "                ];").unwrap();
                         }
                         crate::vanilla::MonsterMove_MonsterMoveType::FacingSpot {
                             duration,
@@ -150,7 +159,16 @@ impl crate::Message for SMSG_COMPRESSED_MOVES {
                         } => {
                             writeln!(s, "                spline_flags = {};", spline_flags.as_test_case_value()).unwrap();
                             writeln!(s, "                duration = {};", duration).unwrap();
-                            panic!("unsupported type for test case printing: 'MonsterMoveSplines' for variable 'splines'");
+                            writeln!(s, "                splines = [").unwrap();
+                            for v in splines.as_slice() {
+                                writeln!(s, "                    {{").unwrap();
+                                writeln!(s, "                        x = {};", if v.x.to_string().contains('.') { v.x.to_string() } else { format!("{}.0", v.x) }).unwrap();
+                                writeln!(s, "                        y = {};", if v.y.to_string().contains('.') { v.y.to_string() } else { format!("{}.0", v.y) }).unwrap();
+                                writeln!(s, "                        z = {};", if v.z.to_string().contains('.') { v.z.to_string() } else { format!("{}.0", v.z) }).unwrap();
+                                writeln!(s, "                    }},").unwrap();
+                            }
+
+                            writeln!(s, "                ];").unwrap();
                         }
                         crate::vanilla::MonsterMove_MonsterMoveType::FacingTarget {
                             duration,
@@ -160,7 +178,16 @@ impl crate::Message for SMSG_COMPRESSED_MOVES {
                         } => {
                             writeln!(s, "                spline_flags = {};", spline_flags.as_test_case_value()).unwrap();
                             writeln!(s, "                duration = {};", duration).unwrap();
-                            panic!("unsupported type for test case printing: 'MonsterMoveSplines' for variable 'splines'");
+                            writeln!(s, "                splines = [").unwrap();
+                            for v in splines.as_slice() {
+                                writeln!(s, "                    {{").unwrap();
+                                writeln!(s, "                        x = {};", if v.x.to_string().contains('.') { v.x.to_string() } else { format!("{}.0", v.x) }).unwrap();
+                                writeln!(s, "                        y = {};", if v.y.to_string().contains('.') { v.y.to_string() } else { format!("{}.0", v.y) }).unwrap();
+                                writeln!(s, "                        z = {};", if v.z.to_string().contains('.') { v.z.to_string() } else { format!("{}.0", v.z) }).unwrap();
+                                writeln!(s, "                    }},").unwrap();
+                            }
+
+                            writeln!(s, "                ];").unwrap();
                         }
                         crate::vanilla::MonsterMove_MonsterMoveType::FacingAngle {
                             angle,
@@ -170,7 +197,16 @@ impl crate::Message for SMSG_COMPRESSED_MOVES {
                         } => {
                             writeln!(s, "                spline_flags = {};", spline_flags.as_test_case_value()).unwrap();
                             writeln!(s, "                duration = {};", duration).unwrap();
-                            panic!("unsupported type for test case printing: 'MonsterMoveSplines' for variable 'splines'");
+                            writeln!(s, "                splines = [").unwrap();
+                            for v in splines.as_slice() {
+                                writeln!(s, "                    {{").unwrap();
+                                writeln!(s, "                        x = {};", if v.x.to_string().contains('.') { v.x.to_string() } else { format!("{}.0", v.x) }).unwrap();
+                                writeln!(s, "                        y = {};", if v.y.to_string().contains('.') { v.y.to_string() } else { format!("{}.0", v.y) }).unwrap();
+                                writeln!(s, "                        z = {};", if v.z.to_string().contains('.') { v.z.to_string() } else { format!("{}.0", v.z) }).unwrap();
+                                writeln!(s, "                    }},").unwrap();
+                            }
+
+                            writeln!(s, "                ];").unwrap();
                         }
                         _ => {}
                     }
@@ -245,7 +281,16 @@ impl crate::Message for SMSG_COMPRESSED_MOVES {
                         } => {
                             writeln!(s, "                spline_flags = {};", spline_flags.as_test_case_value()).unwrap();
                             writeln!(s, "                duration = {};", duration).unwrap();
-                            panic!("unsupported type for test case printing: 'MonsterMoveSplines' for variable 'splines'");
+                            writeln!(s, "                splines = [").unwrap();
+                            for v in splines.as_slice() {
+                                writeln!(s, "                    {{").unwrap();
+                                writeln!(s, "                        x = {};", if v.x.to_string().contains('.') { v.x.to_string() } else { format!("{}.0", v.x) }).unwrap();
+                                writeln!(s, "                        y = {};", if v.y.to_string().contains('.') { v.y.to_string() } else { format!("{}.0", v.y) }).unwrap();
+                                writeln!(s, "                        z = {};", if v.z.to_string().contains('.') { v.z.to_string() } else { format!("{}.0", v.z) }).unwrap();
+                                writeln!(s, "                    }},").unwrap();
+                            }
+
+                            writeln!(s, "                ];").unwrap();
                         }
                         crate::vanilla::MonsterMove_MonsterMoveType::FacingSpot {
                             duration,
@@ -255,7 +300,16 @@ impl crate::Message for SMSG_COMPRESSED_MOVES {
                         } => {
                             writeln!(s, "                spline_flags = {};", spline_flags.as_test_case_value()).unwrap();
                             writeln!(s, "                duration = {};", duration).unwrap();
-                            panic!("unsupported type for test case printing: 'MonsterMoveSplines' for variable 'splines'");
+                            writeln!(s, "                splines = [").unwrap();
+                            for v in splines.as_slice() {
+                                writeln!(s, "                    {{").unwrap();
+                                writeln!(s, "                        x = {};", if v.x.to_string().contains('.') { v.x.to_string() } else { format!("{}.0", v.x) }).unwrap();
+                                writeln!(s, "                        y = {};", if v.y.to_string().contains('.') { v.y.to_string() } else { format!("{}.0", v.y) }).unwrap();
+                                writeln!(s, "                        z = {};", if v.z.to_string().contains('.') { v.z.to_string() } else { format!("{}.0", v.z) }).unwrap();
+                                writeln!(s, "                    }},").unwrap();
+                            }
+
+                            writeln!(s, "                ];").unwrap();
                         }
                         crate::vanilla::MonsterMove_MonsterMoveType::FacingTarget {
                             duration,
@@ -265,7 +319,16 @@ impl crate::Message for SMSG_COMPRESSED_MOVES {
                         } => {
                             writeln!(s, "                spline_flags = {};", spline_flags.as_test_case_value()).unwrap();
                             writeln!(s, "                duration = {};", duration).unwrap();
-                            panic!("unsupported type for test case printing: 'MonsterMoveSplines' for variable 'splines'");
+                            writeln!(s, "                splines = [").unwrap();
+                            for v in splines.as_slice() {
+                                writeln!(s, "                    {{").unwrap();
+                                writeln!(s, "                        x = {};", if v.x.to_string().contains('.') { v.x.to_string() } else { format!("{}.0", v.x) }).unwrap();
+                                writeln!(s, "                        y = {};", if v.y.to_string().contains('.') { v.y.to_string() } else { format!("{}.0", v.y) }).unwrap();
+                                writeln!(s, "                        z = {};", if v.z.to_string().contains('.') { v.z.to_string() } else { format!("{}.0", v.z) }).unwrap();
+                                writeln!(s, "                    }},").unwrap();
+                            }
+
+                            writeln!(s, "                ];").unwrap();
                         }
                         crate::vanilla::MonsterMove_MonsterMoveType::FacingAngle {
                             angle,
@@ -275,7 +338,16 @@ impl crate::Message for SMSG_COMPRESSED_MOVES {
                         } => {
                             writeln!(s, "                spline_flags = {};", spline_flags.as_test_case_value()).unwrap();
                             writeln!(s, "                duration = {};", duration).unwrap();
-                            panic!("unsupported type for test case printing: 'MonsterMoveSplines' for variable 'splines'");
+                            writeln!(s, "                splines = [").unwrap();
+                            for v in splines.as_slice() {
+                                writeln!(s, "                    {{").unwrap();
+                                writeln!(s, "                        x = {};", if v.x.to_string().contains('.') { v.x.to_string() } else { format!("{}.0", v.x) }).unwrap();
+                                writeln!(s, "                        y = {};", if v.y.to_string().contains('.') { v.y.to_string() } else { format!("{}.0", v.y) }).unwrap();
+                                writeln!(s, "                        z = {};", if v.z.to_string().contains('.') { v.z.to_string() } else { format!("{}.0", v.z) }).unwrap();
+                                writeln!(s, "                    }},").unwrap();
+                            }
+
+                            writeln!(s, "                ];").unwrap();
                         }
                         _ => {}
                     }
@@ -371,7 +443,20 @@ impl crate::Message for SMSG_COMPRESSED_MOVES {
                             } => {
                                 crate::util::write_bytes(&mut s, &mut bytes, 4, "spline_flags", "            ");
                                 crate::util::write_bytes(&mut s, &mut bytes, 4, "duration", "            ");
-                                panic!("unsupported type Vec<Vector3d> for variable 'splines'");
+                                crate::util::write_bytes(&mut s, &mut bytes, 4, "splines_length", "            ");
+                                if !splines.is_empty() {
+                                    writeln!(s, "    /* splines: MonsterMoveSplines start */").unwrap();
+                                    let mut v = splines.iter();
+                                    let _ = v.next().unwrap();
+                                    crate::util::write_bytes(&mut s, &mut bytes, 4, "splines_x", "            ");
+                                    crate::util::write_bytes(&mut s, &mut bytes, 4, "splines_y", "            ");
+                                    crate::util::write_bytes(&mut s, &mut bytes, 4, "splines_z", "            ");
+                                    for v in v {
+                                        crate::util::write_bytes(&mut s, &mut bytes, 4, "splines_packed", "            ");
+                                    }
+
+                                    writeln!(s, "    /* splines: MonsterMoveSplines end */").unwrap();
+                                }
                             }
                             crate::vanilla::MonsterMove_MonsterMoveType::FacingSpot {
                                 duration,
@@ -381,7 +466,20 @@ impl crate::Message for SMSG_COMPRESSED_MOVES {
                             } => {
                                 crate::util::write_bytes(&mut s, &mut bytes, 4, "spline_flags", "            ");
                                 crate::util::write_bytes(&mut s, &mut bytes, 4, "duration", "            ");
-                                panic!("unsupported type Vec<Vector3d> for variable 'splines'");
+                                crate::util::write_bytes(&mut s, &mut bytes, 4, "splines_length", "            ");
+                                if !splines.is_empty() {
+                                    writeln!(s, "    /* splines: MonsterMoveSplines start */").unwrap();
+                                    let mut v = splines.iter();
+                                    let _ = v.next().unwrap();
+                                    crate::util::write_bytes(&mut s, &mut bytes, 4, "splines_x", "            ");
+                                    crate::util::write_bytes(&mut s, &mut bytes, 4, "splines_y", "            ");
+                                    crate::util::write_bytes(&mut s, &mut bytes, 4, "splines_z", "            ");
+                                    for v in v {
+                                        crate::util::write_bytes(&mut s, &mut bytes, 4, "splines_packed", "            ");
+                                    }
+
+                                    writeln!(s, "    /* splines: MonsterMoveSplines end */").unwrap();
+                                }
                             }
                             crate::vanilla::MonsterMove_MonsterMoveType::FacingTarget {
                                 duration,
@@ -391,7 +489,20 @@ impl crate::Message for SMSG_COMPRESSED_MOVES {
                             } => {
                                 crate::util::write_bytes(&mut s, &mut bytes, 4, "spline_flags", "            ");
                                 crate::util::write_bytes(&mut s, &mut bytes, 4, "duration", "            ");
-                                panic!("unsupported type Vec<Vector3d> for variable 'splines'");
+                                crate::util::write_bytes(&mut s, &mut bytes, 4, "splines_length", "            ");
+                                if !splines.is_empty() {
+                                    writeln!(s, "    /* splines: MonsterMoveSplines start */").unwrap();
+                                    let mut v = splines.iter();
+                                    let _ = v.next().unwrap();
+                                    crate::util::write_bytes(&mut s, &mut bytes, 4, "splines_x", "            ");
+                                    crate::util::write_bytes(&mut s, &mut bytes, 4, "splines_y", "            ");
+                                    crate::util::write_bytes(&mut s, &mut bytes, 4, "splines_z", "            ");
+                                    for v in v {
+                                        crate::util::write_bytes(&mut s, &mut bytes, 4, "splines_packed", "            ");
+                                    }
+
+                                    writeln!(s, "    /* splines: MonsterMoveSplines end */").unwrap();
+                                }
                             }
                             crate::vanilla::MonsterMove_MonsterMoveType::FacingAngle {
                                 angle,
@@ -401,7 +512,20 @@ impl crate::Message for SMSG_COMPRESSED_MOVES {
                             } => {
                                 crate::util::write_bytes(&mut s, &mut bytes, 4, "spline_flags", "            ");
                                 crate::util::write_bytes(&mut s, &mut bytes, 4, "duration", "            ");
-                                panic!("unsupported type Vec<Vector3d> for variable 'splines'");
+                                crate::util::write_bytes(&mut s, &mut bytes, 4, "splines_length", "            ");
+                                if !splines.is_empty() {
+                                    writeln!(s, "    /* splines: MonsterMoveSplines start */").unwrap();
+                                    let mut v = splines.iter();
+                                    let _ = v.next().unwrap();
+                                    crate::util::write_bytes(&mut s, &mut bytes, 4, "splines_x", "            ");
+                                    crate::util::write_bytes(&mut s, &mut bytes, 4, "splines_y", "            ");
+                                    crate::util::write_bytes(&mut s, &mut bytes, 4, "splines_z", "            ");
+                                    for v in v {
+                                        crate::util::write_bytes(&mut s, &mut bytes, 4, "splines_packed", "            ");
+                                    }
+
+                                    writeln!(s, "    /* splines: MonsterMoveSplines end */").unwrap();
+                                }
                             }
                             _ => {}
                         }
@@ -467,7 +591,20 @@ impl crate::Message for SMSG_COMPRESSED_MOVES {
                             } => {
                                 crate::util::write_bytes(&mut s, &mut bytes, 4, "spline_flags", "            ");
                                 crate::util::write_bytes(&mut s, &mut bytes, 4, "duration", "            ");
-                                panic!("unsupported type Vec<Vector3d> for variable 'splines'");
+                                crate::util::write_bytes(&mut s, &mut bytes, 4, "splines_length", "            ");
+                                if !splines.is_empty() {
+                                    writeln!(s, "    /* splines: MonsterMoveSplines start */").unwrap();
+                                    let mut v = splines.iter();
+                                    let _ = v.next().unwrap();
+                                    crate::util::write_bytes(&mut s, &mut bytes, 4, "splines_x", "            ");
+                                    crate::util::write_bytes(&mut s, &mut bytes, 4, "splines_y", "            ");
+                                    crate::util::write_bytes(&mut s, &mut bytes, 4, "splines_z", "            ");
+                                    for v in v {
+                                        crate::util::write_bytes(&mut s, &mut bytes, 4, "splines_packed", "            ");
+                                    }
+
+                                    writeln!(s, "    /* splines: MonsterMoveSplines end */").unwrap();
+                                }
                             }
                             crate::vanilla::MonsterMove_MonsterMoveType::FacingSpot {
                                 duration,
@@ -477,7 +614,20 @@ impl crate::Message for SMSG_COMPRESSED_MOVES {
                             } => {
                                 crate::util::write_bytes(&mut s, &mut bytes, 4, "spline_flags", "            ");
                                 crate::util::write_bytes(&mut s, &mut bytes, 4, "duration", "            ");
-                                panic!("unsupported type Vec<Vector3d> for variable 'splines'");
+                                crate::util::write_bytes(&mut s, &mut bytes, 4, "splines_length", "            ");
+                                if !splines.is_empty() {
+                                    writeln!(s, "    /* splines: MonsterMoveSplines start */").unwrap();
+                                    let mut v = splines.iter();
+                                    let _ = v.next().unwrap();
+                                    crate::util::write_bytes(&mut s, &mut bytes, 4, "splines_x", "            ");
+                                    crate::util::write_bytes(&mut s, &mut bytes, 4, "splines_y", "            ");
+                                    crate::util::write_bytes(&mut s, &mut bytes, 4, "splines_z", "            ");
+                                    for v in v {
+                                        crate::util::write_bytes(&mut s, &mut bytes, 4, "splines_packed", "            ");
+                                    }
+
+                                    writeln!(s, "    /* splines: MonsterMoveSplines end */").unwrap();
+                                }
                             }
                             crate::vanilla::MonsterMove_MonsterMoveType::FacingTarget {
                                 duration,
@@ -487,7 +637,20 @@ impl crate::Message for SMSG_COMPRESSED_MOVES {
                             } => {
                                 crate::util::write_bytes(&mut s, &mut bytes, 4, "spline_flags", "            ");
                                 crate::util::write_bytes(&mut s, &mut bytes, 4, "duration", "            ");
-                                panic!("unsupported type Vec<Vector3d> for variable 'splines'");
+                                crate::util::write_bytes(&mut s, &mut bytes, 4, "splines_length", "            ");
+                                if !splines.is_empty() {
+                                    writeln!(s, "    /* splines: MonsterMoveSplines start */").unwrap();
+                                    let mut v = splines.iter();
+                                    let _ = v.next().unwrap();
+                                    crate::util::write_bytes(&mut s, &mut bytes, 4, "splines_x", "            ");
+                                    crate::util::write_bytes(&mut s, &mut bytes, 4, "splines_y", "            ");
+                                    crate::util::write_bytes(&mut s, &mut bytes, 4, "splines_z", "            ");
+                                    for v in v {
+                                        crate::util::write_bytes(&mut s, &mut bytes, 4, "splines_packed", "            ");
+                                    }
+
+                                    writeln!(s, "    /* splines: MonsterMoveSplines end */").unwrap();
+                                }
                             }
                             crate::vanilla::MonsterMove_MonsterMoveType::FacingAngle {
                                 angle,
@@ -497,7 +660,20 @@ impl crate::Message for SMSG_COMPRESSED_MOVES {
                             } => {
                                 crate::util::write_bytes(&mut s, &mut bytes, 4, "spline_flags", "            ");
                                 crate::util::write_bytes(&mut s, &mut bytes, 4, "duration", "            ");
-                                panic!("unsupported type Vec<Vector3d> for variable 'splines'");
+                                crate::util::write_bytes(&mut s, &mut bytes, 4, "splines_length", "            ");
+                                if !splines.is_empty() {
+                                    writeln!(s, "    /* splines: MonsterMoveSplines start */").unwrap();
+                                    let mut v = splines.iter();
+                                    let _ = v.next().unwrap();
+                                    crate::util::write_bytes(&mut s, &mut bytes, 4, "splines_x", "            ");
+                                    crate::util::write_bytes(&mut s, &mut bytes, 4, "splines_y", "            ");
+                                    crate::util::write_bytes(&mut s, &mut bytes, 4, "splines_z", "            ");
+                                    for v in v {
+                                        crate::util::write_bytes(&mut s, &mut bytes, 4, "splines_packed", "            ");
+                                    }
+
+                                    writeln!(s, "    /* splines: MonsterMoveSplines end */").unwrap();
+                                }
                             }
                             _ => {}
                         }

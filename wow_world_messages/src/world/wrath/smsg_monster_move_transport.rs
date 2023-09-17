@@ -234,7 +234,16 @@ impl crate::Message for SMSG_MONSTER_MOVE_TRANSPORT {
             writeln!(s, "    effect_start_time = {};", if_statement.effect_start_time).unwrap();
         }
 
-        panic!("unsupported type for test case printing: 'MonsterMoveSplines' for variable 'splines'");
+        writeln!(s, "    splines = [").unwrap();
+        for v in self.splines.as_slice() {
+            writeln!(s, "        {{").unwrap();
+            writeln!(s, "            x = {};", if v.x.to_string().contains('.') { v.x.to_string() } else { format!("{}.0", v.x) }).unwrap();
+            writeln!(s, "            y = {};", if v.y.to_string().contains('.') { v.y.to_string() } else { format!("{}.0", v.y) }).unwrap();
+            writeln!(s, "            z = {};", if v.z.to_string().contains('.') { v.z.to_string() } else { format!("{}.0", v.z) }).unwrap();
+            writeln!(s, "        }},").unwrap();
+        }
+
+        writeln!(s, "    ];").unwrap();
 
         writeln!(s, "}} [").unwrap();
 
@@ -291,7 +300,20 @@ impl crate::Message for SMSG_MONSTER_MOVE_TRANSPORT {
             crate::util::write_bytes(&mut s, &mut bytes, 4, "effect_start_time", "    ");
         }
 
-        panic!("unsupported type Vec<Vector3d> for variable 'splines'");
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "splines_length", "    ");
+        if !self.splines.is_empty() {
+            writeln!(s, "    /* splines: MonsterMoveSplines start */").unwrap();
+            let mut v = self.splines.iter();
+            let _ = v.next().unwrap();
+            crate::util::write_bytes(&mut s, &mut bytes, 4, "splines_x", "    ");
+            crate::util::write_bytes(&mut s, &mut bytes, 4, "splines_y", "    ");
+            crate::util::write_bytes(&mut s, &mut bytes, 4, "splines_z", "    ");
+            for v in v {
+                crate::util::write_bytes(&mut s, &mut bytes, 4, "splines_packed", "    ");
+            }
+
+            writeln!(s, "    /* splines: MonsterMoveSplines end */").unwrap();
+        }
 
 
         writeln!(s, "] {{").unwrap();

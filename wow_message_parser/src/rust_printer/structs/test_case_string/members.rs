@@ -334,8 +334,27 @@ fn print_member_definition(
             test_case_string::wln(s, format!("{prefix}];"));
         }
 
+        Type::MonsterMoveSplines => {
+            test_case_string::wln(s, format!("{prefix}{name} = ["));
+
+            s.bodyn(format!("for v in {var_name}.as_slice()"), |s| {
+                let prefix = format!("{prefix}    ");
+                test_case_string::wln(s, format!("{prefix}{{{{"));
+
+                let new_prefix = format!("{prefix}    ");
+
+                for var_name in ["v.x", "v.y", "v.z"] {
+                    let name = var_name.strip_prefix("v.").unwrap();
+                    test_case_string::wlna(s, format!("{new_prefix}{name} = {{}};"), format!("if {var_name}.to_string().contains(\'.\') {{ {var_name}.to_string() }} else {{ format!(\"{{}}.0\", {var_name}) }}"));
+                }
+
+                test_case_string::wln(s, format!("{prefix}}}}},"));
+            });
+
+            test_case_string::wln(s, format!("{prefix}];"));
+        }
+
         Type::UpdateMask { .. }
-        | Type::MonsterMoveSplines
         | Type::AuraMask
         | Type::AchievementDoneArray
         | Type::AchievementInProgressArray
