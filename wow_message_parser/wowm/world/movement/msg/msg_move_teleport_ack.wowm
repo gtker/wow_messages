@@ -32,3 +32,38 @@ test MSG_MOVE_TELEPORT_ACK_Client {
     versions = "1.12";
 }
 
+
+test MSG_MOVE_TELEPORT_ACK_Server {
+    guid = 23;
+    movement_counter = 0;
+    info = {
+        flags = NONE;
+        timestamp = 0;
+        position = {
+            x = 4320.0;
+            y = -2650.0;
+            z = 0.0;
+    };
+        orientation = 0.0;
+        fall_time = 0.0;
+    };
+} [
+    0x00, 0x24, /* size */
+    0xC7, 0x00, /* opcode */
+    0x01, 0x17, /* guid */
+    0x00, 0x00, 0x00, 0x00, /* movement_counter */
+    /* info: MovementInfo start */
+        0x00, 0x00, 0x00, 0x00, /* flags */
+        0x00, 0x00, 0x00, 0x00, /* timestamp */
+    /* position: Vector3d start */
+            0x00, 0x00, 0x87, 0x45, /* x */
+            0x00, 0xA0, 0x25, 0xC5, /* y */
+            0x00, 0x00, 0x00, 0x00, /* z */
+    /* position: Vector3d end */
+        0x00, 0x00, 0x00, 0x00, /* orientation */
+        0x00, 0x00, 0x00, 0x00, /* fall_time */
+    /* info: MovementInfo end */
+] {
+    versions = "1.12";
+}
+

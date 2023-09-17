@@ -8276,7 +8276,6 @@ impl ServerOpcodeMessage {
             Self::MSG_MOVE_START_PITCH_UP(c) => crate::Message::to_test_case_string(c),
             Self::MSG_MOVE_START_PITCH_DOWN(c) => crate::Message::to_test_case_string(c),
             Self::MSG_MOVE_STOP_PITCH(c) => crate::Message::to_test_case_string(c),
-            Self::MSG_MOVE_TELEPORT_ACK(c) => crate::Message::to_test_case_string(c),
             Self::MSG_MOVE_START_SWIM(c) => crate::Message::to_test_case_string(c),
             Self::MSG_MOVE_STOP_SWIM(c) => crate::Message::to_test_case_string(c),
             Self::MSG_MOVE_SET_PITCH(c) => crate::Message::to_test_case_string(c),

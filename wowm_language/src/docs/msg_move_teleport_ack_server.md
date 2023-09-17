@@ -35,6 +35,23 @@ SMSG have a header of 4 bytes.
 | - | 4 / Little | u32 | movement_counter |  |  |
 | - | - / - | [MovementInfo](movementinfo.md) | info |  |  |
 
+### Examples
+
+#### Example 1
+
+```c
+0, 36, // size
+199, 0, // opcode (199)
+1, 23, // guid: PackedGuid
+0, 0, 0, 0, // movement_counter: u32
+0, 0, 0, 0, // MovementInfo.flags: MovementFlags  NONE (0)
+0, 0, 0, 0, // MovementInfo.timestamp: u32
+0, 0, 135, 69, // Vector3d.x: f32
+0, 160, 37, 197, // Vector3d.y: f32
+0, 0, 0, 0, // Vector3d.z: f32
+0, 0, 0, 0, // MovementInfo.orientation: f32
+0, 0, 0, 0, // MovementInfo.fall_time: f32
+```
 ## Client Version 2.4.3
 
 Can be response to [CMSG_TELEPORT_TO_UNIT](./cmsg_teleport_to_unit.md).
