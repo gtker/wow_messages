@@ -8505,7 +8505,6 @@ impl ServerOpcodeMessage {
             Self::SMSG_PARTY_MEMBER_STATS_FULL(c) => crate::Message::to_test_case_string(c),
             Self::SMSG_WEATHER(c) => crate::Message::to_test_case_string(c),
             Self::SMSG_RAID_INSTANCE_MESSAGE(c) => crate::Message::to_test_case_string(c),
-            Self::SMSG_COMPRESSED_MOVES(c) => crate::Message::to_test_case_string(c),
             Self::SMSG_CHAT_RESTRICTED => crate::Message::to_test_case_string(&SMSG_CHAT_RESTRICTED{}),
             Self::SMSG_SPLINE_SET_RUN_BACK_SPEED(c) => crate::Message::to_test_case_string(c),
             Self::SMSG_SPLINE_SET_SWIM_SPEED(c) => crate::Message::to_test_case_string(c),

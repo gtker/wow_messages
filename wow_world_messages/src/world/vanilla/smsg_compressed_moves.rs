@@ -1,11 +1,7 @@
 use crate::Message;
 use std::io::{Read, Write};
 
-use crate::Guid;
-use crate::vanilla::{
-    CompressedMove, CompressedMoveOpcode, MonsterMove, MonsterMoveType, SplineFlag, 
-    Vector3d,
-};
+use crate::vanilla::CompressedMove;
 
 #[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/movement/smsg/smsg_compressed_moves.wowm:48`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/movement/smsg/smsg_compressed_moves.wowm#L48):
@@ -60,340 +56,6 @@ impl crate::Message for SMSG_COMPRESSED_MOVES {
     #[cfg(feature = "print-testcase")]
     fn message_name(&self) -> &'static str {
         "SMSG_COMPRESSED_MOVES"
-    }
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        use std::fmt::Write;
-        use crate::traits::Message;
-
-        let mut s = String::new();
-
-        writeln!(s, "test SMSG_COMPRESSED_MOVES {{").unwrap();
-        // Members
-        writeln!(s, "    moves = [").unwrap();
-        for v in self.moves.as_slice() {
-            writeln!(s, "        {{").unwrap();
-            // Members
-            writeln!(s, "            opcode = {};", CompressedMoveOpcode::try_from(v.opcode.as_int()).unwrap().as_test_case_value()).unwrap();
-            writeln!(s, "            guid = {};", v.guid.guid()).unwrap();
-            match &v.opcode {
-                crate::vanilla::CompressedMove_CompressedMoveOpcode::SmsgMonsterMove {
-                    monster_move,
-                } => {
-                    // monster_move: MonsterMove
-                    writeln!(s, "            monster_move = {{").unwrap();
-                    // Members
-                    // spline_point: Vector3d
-                    writeln!(s, "                spline_point = {{").unwrap();
-                    // Members
-                    writeln!(s, "                    x = {};", if monster_move.spline_point.x.to_string().contains('.') { monster_move.spline_point.x.to_string() } else { format!("{}.0", monster_move.spline_point.x) }).unwrap();
-                    writeln!(s, "                    y = {};", if monster_move.spline_point.y.to_string().contains('.') { monster_move.spline_point.y.to_string() } else { format!("{}.0", monster_move.spline_point.y) }).unwrap();
-                    writeln!(s, "                    z = {};", if monster_move.spline_point.z.to_string().contains('.') { monster_move.spline_point.z.to_string() } else { format!("{}.0", monster_move.spline_point.z) }).unwrap();
-
-                    writeln!(s, "                }};").unwrap();
-                    writeln!(s, "                spline_id = {};", monster_move.spline_id).unwrap();
-                    writeln!(s, "                move_type = {};", MonsterMoveType::try_from(monster_move.move_type.as_int()).unwrap().as_test_case_value()).unwrap();
-                    match &monster_move.move_type {
-                        crate::vanilla::MonsterMove_MonsterMoveType::Normal {
-                            duration,
-                            spline_flags,
-                            splines,
-                        } => {
-                        }
-                        crate::vanilla::MonsterMove_MonsterMoveType::FacingSpot {
-                            duration,
-                            position,
-                            spline_flags,
-                            splines,
-                        } => {
-                            // position: Vector3d
-                            writeln!(s, "                position = {{").unwrap();
-                            // Members
-                            writeln!(s, "                    x = {};", if position.x.to_string().contains('.') { position.x.to_string() } else { format!("{}.0", position.x) }).unwrap();
-                            writeln!(s, "                    y = {};", if position.y.to_string().contains('.') { position.y.to_string() } else { format!("{}.0", position.y) }).unwrap();
-                            writeln!(s, "                    z = {};", if position.z.to_string().contains('.') { position.z.to_string() } else { format!("{}.0", position.z) }).unwrap();
-
-                            writeln!(s, "                }};").unwrap();
-                        }
-                        crate::vanilla::MonsterMove_MonsterMoveType::FacingTarget {
-                            duration,
-                            spline_flags,
-                            splines,
-                            target,
-                        } => {
-                            writeln!(s, "                target = {};", target.guid()).unwrap();
-                        }
-                        crate::vanilla::MonsterMove_MonsterMoveType::FacingAngle {
-                            angle,
-                            duration,
-                            spline_flags,
-                            splines,
-                        } => {
-                            writeln!(s, "                angle = {};", if angle.to_string().contains('.') { angle.to_string() } else { format!("{}.0", angle) }).unwrap();
-                        }
-                        _ => {}
-                    }
-
-                    match &monster_move.move_type {
-                        crate::vanilla::MonsterMove_MonsterMoveType::Normal {
-                            duration,
-                            spline_flags,
-                            splines,
-                        } => {
-                            writeln!(s, "                spline_flags = {};", spline_flags.as_test_case_value()).unwrap();
-                            writeln!(s, "                duration = {};", duration).unwrap();
-                            writeln!(s, "                splines = [").unwrap();
-                            for v in splines.as_slice() {
-                                writeln!(s, "                    {{").unwrap();
-                                writeln!(s, "                        x = {};", if v.x.to_string().contains('.') { v.x.to_string() } else { format!("{}.0", v.x) }).unwrap();
-                                writeln!(s, "                        y = {};", if v.y.to_string().contains('.') { v.y.to_string() } else { format!("{}.0", v.y) }).unwrap();
-                                writeln!(s, "                        z = {};", if v.z.to_string().contains('.') { v.z.to_string() } else { format!("{}.0", v.z) }).unwrap();
-                                writeln!(s, "                    }},").unwrap();
-                            }
-
-                            writeln!(s, "                ];").unwrap();
-                        }
-                        crate::vanilla::MonsterMove_MonsterMoveType::FacingSpot {
-                            duration,
-                            position,
-                            spline_flags,
-                            splines,
-                        } => {
-                            writeln!(s, "                spline_flags = {};", spline_flags.as_test_case_value()).unwrap();
-                            writeln!(s, "                duration = {};", duration).unwrap();
-                            writeln!(s, "                splines = [").unwrap();
-                            for v in splines.as_slice() {
-                                writeln!(s, "                    {{").unwrap();
-                                writeln!(s, "                        x = {};", if v.x.to_string().contains('.') { v.x.to_string() } else { format!("{}.0", v.x) }).unwrap();
-                                writeln!(s, "                        y = {};", if v.y.to_string().contains('.') { v.y.to_string() } else { format!("{}.0", v.y) }).unwrap();
-                                writeln!(s, "                        z = {};", if v.z.to_string().contains('.') { v.z.to_string() } else { format!("{}.0", v.z) }).unwrap();
-                                writeln!(s, "                    }},").unwrap();
-                            }
-
-                            writeln!(s, "                ];").unwrap();
-                        }
-                        crate::vanilla::MonsterMove_MonsterMoveType::FacingTarget {
-                            duration,
-                            spline_flags,
-                            splines,
-                            target,
-                        } => {
-                            writeln!(s, "                spline_flags = {};", spline_flags.as_test_case_value()).unwrap();
-                            writeln!(s, "                duration = {};", duration).unwrap();
-                            writeln!(s, "                splines = [").unwrap();
-                            for v in splines.as_slice() {
-                                writeln!(s, "                    {{").unwrap();
-                                writeln!(s, "                        x = {};", if v.x.to_string().contains('.') { v.x.to_string() } else { format!("{}.0", v.x) }).unwrap();
-                                writeln!(s, "                        y = {};", if v.y.to_string().contains('.') { v.y.to_string() } else { format!("{}.0", v.y) }).unwrap();
-                                writeln!(s, "                        z = {};", if v.z.to_string().contains('.') { v.z.to_string() } else { format!("{}.0", v.z) }).unwrap();
-                                writeln!(s, "                    }},").unwrap();
-                            }
-
-                            writeln!(s, "                ];").unwrap();
-                        }
-                        crate::vanilla::MonsterMove_MonsterMoveType::FacingAngle {
-                            angle,
-                            duration,
-                            spline_flags,
-                            splines,
-                        } => {
-                            writeln!(s, "                spline_flags = {};", spline_flags.as_test_case_value()).unwrap();
-                            writeln!(s, "                duration = {};", duration).unwrap();
-                            writeln!(s, "                splines = [").unwrap();
-                            for v in splines.as_slice() {
-                                writeln!(s, "                    {{").unwrap();
-                                writeln!(s, "                        x = {};", if v.x.to_string().contains('.') { v.x.to_string() } else { format!("{}.0", v.x) }).unwrap();
-                                writeln!(s, "                        y = {};", if v.y.to_string().contains('.') { v.y.to_string() } else { format!("{}.0", v.y) }).unwrap();
-                                writeln!(s, "                        z = {};", if v.z.to_string().contains('.') { v.z.to_string() } else { format!("{}.0", v.z) }).unwrap();
-                                writeln!(s, "                    }},").unwrap();
-                            }
-
-                            writeln!(s, "                ];").unwrap();
-                        }
-                        _ => {}
-                    }
-
-
-                    writeln!(s, "            }};").unwrap();
-                }
-                crate::vanilla::CompressedMove_CompressedMoveOpcode::SmsgMonsterMoveTransport {
-                    monster_move_transport,
-                    transport,
-                } => {
-                    writeln!(s, "            transport = {};", transport.guid()).unwrap();
-                    // monster_move_transport: MonsterMove
-                    writeln!(s, "            monster_move_transport = {{").unwrap();
-                    // Members
-                    // spline_point: Vector3d
-                    writeln!(s, "                spline_point = {{").unwrap();
-                    // Members
-                    writeln!(s, "                    x = {};", if monster_move_transport.spline_point.x.to_string().contains('.') { monster_move_transport.spline_point.x.to_string() } else { format!("{}.0", monster_move_transport.spline_point.x) }).unwrap();
-                    writeln!(s, "                    y = {};", if monster_move_transport.spline_point.y.to_string().contains('.') { monster_move_transport.spline_point.y.to_string() } else { format!("{}.0", monster_move_transport.spline_point.y) }).unwrap();
-                    writeln!(s, "                    z = {};", if monster_move_transport.spline_point.z.to_string().contains('.') { monster_move_transport.spline_point.z.to_string() } else { format!("{}.0", monster_move_transport.spline_point.z) }).unwrap();
-
-                    writeln!(s, "                }};").unwrap();
-                    writeln!(s, "                spline_id = {};", monster_move_transport.spline_id).unwrap();
-                    writeln!(s, "                move_type = {};", MonsterMoveType::try_from(monster_move_transport.move_type.as_int()).unwrap().as_test_case_value()).unwrap();
-                    match &monster_move_transport.move_type {
-                        crate::vanilla::MonsterMove_MonsterMoveType::Normal {
-                            duration,
-                            spline_flags,
-                            splines,
-                        } => {
-                        }
-                        crate::vanilla::MonsterMove_MonsterMoveType::FacingSpot {
-                            duration,
-                            position,
-                            spline_flags,
-                            splines,
-                        } => {
-                            // position: Vector3d
-                            writeln!(s, "                position = {{").unwrap();
-                            // Members
-                            writeln!(s, "                    x = {};", if position.x.to_string().contains('.') { position.x.to_string() } else { format!("{}.0", position.x) }).unwrap();
-                            writeln!(s, "                    y = {};", if position.y.to_string().contains('.') { position.y.to_string() } else { format!("{}.0", position.y) }).unwrap();
-                            writeln!(s, "                    z = {};", if position.z.to_string().contains('.') { position.z.to_string() } else { format!("{}.0", position.z) }).unwrap();
-
-                            writeln!(s, "                }};").unwrap();
-                        }
-                        crate::vanilla::MonsterMove_MonsterMoveType::FacingTarget {
-                            duration,
-                            spline_flags,
-                            splines,
-                            target,
-                        } => {
-                            writeln!(s, "                target = {};", target.guid()).unwrap();
-                        }
-                        crate::vanilla::MonsterMove_MonsterMoveType::FacingAngle {
-                            angle,
-                            duration,
-                            spline_flags,
-                            splines,
-                        } => {
-                            writeln!(s, "                angle = {};", if angle.to_string().contains('.') { angle.to_string() } else { format!("{}.0", angle) }).unwrap();
-                        }
-                        _ => {}
-                    }
-
-                    match &monster_move_transport.move_type {
-                        crate::vanilla::MonsterMove_MonsterMoveType::Normal {
-                            duration,
-                            spline_flags,
-                            splines,
-                        } => {
-                            writeln!(s, "                spline_flags = {};", spline_flags.as_test_case_value()).unwrap();
-                            writeln!(s, "                duration = {};", duration).unwrap();
-                            writeln!(s, "                splines = [").unwrap();
-                            for v in splines.as_slice() {
-                                writeln!(s, "                    {{").unwrap();
-                                writeln!(s, "                        x = {};", if v.x.to_string().contains('.') { v.x.to_string() } else { format!("{}.0", v.x) }).unwrap();
-                                writeln!(s, "                        y = {};", if v.y.to_string().contains('.') { v.y.to_string() } else { format!("{}.0", v.y) }).unwrap();
-                                writeln!(s, "                        z = {};", if v.z.to_string().contains('.') { v.z.to_string() } else { format!("{}.0", v.z) }).unwrap();
-                                writeln!(s, "                    }},").unwrap();
-                            }
-
-                            writeln!(s, "                ];").unwrap();
-                        }
-                        crate::vanilla::MonsterMove_MonsterMoveType::FacingSpot {
-                            duration,
-                            position,
-                            spline_flags,
-                            splines,
-                        } => {
-                            writeln!(s, "                spline_flags = {};", spline_flags.as_test_case_value()).unwrap();
-                            writeln!(s, "                duration = {};", duration).unwrap();
-                            writeln!(s, "                splines = [").unwrap();
-                            for v in splines.as_slice() {
-                                writeln!(s, "                    {{").unwrap();
-                                writeln!(s, "                        x = {};", if v.x.to_string().contains('.') { v.x.to_string() } else { format!("{}.0", v.x) }).unwrap();
-                                writeln!(s, "                        y = {};", if v.y.to_string().contains('.') { v.y.to_string() } else { format!("{}.0", v.y) }).unwrap();
-                                writeln!(s, "                        z = {};", if v.z.to_string().contains('.') { v.z.to_string() } else { format!("{}.0", v.z) }).unwrap();
-                                writeln!(s, "                    }},").unwrap();
-                            }
-
-                            writeln!(s, "                ];").unwrap();
-                        }
-                        crate::vanilla::MonsterMove_MonsterMoveType::FacingTarget {
-                            duration,
-                            spline_flags,
-                            splines,
-                            target,
-                        } => {
-                            writeln!(s, "                spline_flags = {};", spline_flags.as_test_case_value()).unwrap();
-                            writeln!(s, "                duration = {};", duration).unwrap();
-                            writeln!(s, "                splines = [").unwrap();
-                            for v in splines.as_slice() {
-                                writeln!(s, "                    {{").unwrap();
-                                writeln!(s, "                        x = {};", if v.x.to_string().contains('.') { v.x.to_string() } else { format!("{}.0", v.x) }).unwrap();
-                                writeln!(s, "                        y = {};", if v.y.to_string().contains('.') { v.y.to_string() } else { format!("{}.0", v.y) }).unwrap();
-                                writeln!(s, "                        z = {};", if v.z.to_string().contains('.') { v.z.to_string() } else { format!("{}.0", v.z) }).unwrap();
-                                writeln!(s, "                    }},").unwrap();
-                            }
-
-                            writeln!(s, "                ];").unwrap();
-                        }
-                        crate::vanilla::MonsterMove_MonsterMoveType::FacingAngle {
-                            angle,
-                            duration,
-                            spline_flags,
-                            splines,
-                        } => {
-                            writeln!(s, "                spline_flags = {};", spline_flags.as_test_case_value()).unwrap();
-                            writeln!(s, "                duration = {};", duration).unwrap();
-                            writeln!(s, "                splines = [").unwrap();
-                            for v in splines.as_slice() {
-                                writeln!(s, "                    {{").unwrap();
-                                writeln!(s, "                        x = {};", if v.x.to_string().contains('.') { v.x.to_string() } else { format!("{}.0", v.x) }).unwrap();
-                                writeln!(s, "                        y = {};", if v.y.to_string().contains('.') { v.y.to_string() } else { format!("{}.0", v.y) }).unwrap();
-                                writeln!(s, "                        z = {};", if v.z.to_string().contains('.') { v.z.to_string() } else { format!("{}.0", v.z) }).unwrap();
-                                writeln!(s, "                    }},").unwrap();
-                            }
-
-                            writeln!(s, "                ];").unwrap();
-                        }
-                        _ => {}
-                    }
-
-
-                    writeln!(s, "            }};").unwrap();
-                }
-                crate::vanilla::CompressedMove_CompressedMoveOpcode::SmsgSplineSetRunSpeed {
-                    speed,
-                } => {
-                    writeln!(s, "            speed = {};", if speed.to_string().contains('.') { speed.to_string() } else { format!("{}.0", speed) }).unwrap();
-                }
-                _ => {}
-            }
-
-
-            writeln!(s, "        }},").unwrap();
-        }
-        writeln!(s, "    ];").unwrap();
-
-        writeln!(s, "}} [").unwrap();
-
-        let [a, b] = (u16::try_from(self.size() + 2).unwrap()).to_be_bytes();
-        writeln!(s, "    {a:#04X}, {b:#04X}, /* size */").unwrap();
-        let [a, b] = 763_u16.to_le_bytes();
-        writeln!(s, "    {a:#04X}, {b:#04X}, /* opcode */").unwrap();
-        let mut bytes: Vec<u8> = Vec::new();
-        self.write_into_vec(&mut bytes).unwrap();
-        let mut bytes = bytes.into_iter();
-
-        crate::util::write_bytes(&mut s, &mut bytes, 4, "decompressed_size", "    ");
-        /* Compressed bytes */
-        while bytes.len() != 0 {
-            crate::util::write_bytes(&mut s, &mut bytes, 8, "compressed_data", "    ");
-        }
-
-
-
-        writeln!(s, "] {{").unwrap();
-        writeln!(s, "    versions = \"{}\";", std::env::var("WOWM_TEST_CASE_WORLD_VERSION").unwrap_or("1.12".to_string())).unwrap();
-        writeln!(s, "}}\n").unwrap();
-
-        Some(s)
     }
 
     fn size_without_header(&self) -> u32 {
@@ -572,5 +234,257 @@ impl SMSG_COMPRESSED_MOVES {
     pub(crate) fn size_uncompressed(&self) -> usize {
         self.moves.iter().fold(0, |acc, x| acc + x.size()) // moves: CompressedMove[-]
     }
+}
+
+#[cfg(test)]
+mod test {
+    #![allow(clippy::missing_const_for_fn)]
+    use super::SMSG_COMPRESSED_MOVES;
+    use super::*;
+    use super::super::*;
+    use crate::vanilla::opcodes::ServerOpcodeMessage;
+    use crate::Guid;
+    use crate::vanilla::{ClientMessage, ServerMessage};
+
+    const HEADER_SIZE: usize = 2 + 2;
+    fn assert(t: &SMSG_COMPRESSED_MOVES, expected: &SMSG_COMPRESSED_MOVES) {
+        assert_eq!(t.moves, expected.moves);
+    }
+
+    const RAW0: [u8; 52] = [ 0x00, 0x32, 0xFB, 0x02, 0x2E, 0x00, 0x00, 0x00, 0x78,
+         0x01, 0xD3, 0xBD, 0xCB, 0xC0, 0x28, 0x91, 0xB7, 0x9A, 0xFB, 0xD8, 0xBA,
+         0x58, 0xE6, 0xC3, 0x2B, 0xD4, 0x97, 0x3B, 0x31, 0x20, 0x03, 0x46, 0x20,
+         0xA7, 0x64, 0x39, 0xF7, 0xB1, 0xF5, 0xEF, 0x5F, 0x1D, 0x3A, 0x79, 0x66,
+         0x89, 0x13, 0x00, 0x26, 0x1E, 0x0E, 0x49, ];
+
+    pub(crate) fn expected0() -> SMSG_COMPRESSED_MOVES {
+        SMSG_COMPRESSED_MOVES {
+            moves: vec![
+                CompressedMove {
+                    opcode: CompressedMove_CompressedMoveOpcode::SmsgMonsterMove {
+                        monster_move: MonsterMove {
+                            spline_point: Vector3d {
+                                x: -8938.857_f32,
+                                y: -131.36594_f32,
+                                z: 83.57745_f32,
+                            },
+                            spline_id: 0x0,
+                            move_type: MonsterMove_MonsterMoveType::Normal {
+                                duration: 0x0,
+                                spline_flags: SplineFlag::empty()
+                                    ,
+                                splines: vec![
+                                    Vector3d {
+                                        x: -8937.863,
+                                        y: -117.46813,
+                                        z: 82.39997,
+                                    },
+                                ],
+                            },
+                        },
+                    },
+                    guid: Guid::new(0x18),
+                },
+            ],
+        }
+
+    }
+
+    // Generated from `wow_message_parser/wowm/world/movement/smsg/smsg_multiple_moves.wowm` line 35.
+    #[cfg(feature = "sync")]
+    #[cfg_attr(feature = "sync", test)]
+    fn smsg_compressed_moves0() {
+        let expected = expected0();
+        let t = ServerOpcodeMessage::read_unencrypted(&mut std::io::Cursor::new(&RAW0)).unwrap();
+        let t = match t {
+            ServerOpcodeMessage::SMSG_COMPRESSED_MOVES(t) => t,
+            opcode => panic!("incorrect opcode. Expected SMSG_COMPRESSED_MOVES, got {opcode:#?}"),
+        };
+
+        assert(&t, &expected);
+        let mut dest = Vec::with_capacity(RAW0.len());
+        expected.write_unencrypted_server(&mut std::io::Cursor::new(&mut dest)).unwrap();
+
+        let s = ServerOpcodeMessage::read_unencrypted(&mut std::io::Cursor::new(&dest)).unwrap();
+        let s = match s {
+            ServerOpcodeMessage::SMSG_COMPRESSED_MOVES(s) => s,
+            opcode => panic!("incorrect opcode. Expected SMSG_COMPRESSED_MOVES, got {opcode:#?}", opcode = opcode),
+        };
+
+        assert_eq!(t, s);
+    }
+
+    // Generated from `wow_message_parser/wowm/world/movement/smsg/smsg_multiple_moves.wowm` line 35.
+    #[cfg(feature = "tokio")]
+    #[cfg_attr(feature = "tokio", tokio::test)]
+    async fn tokio_smsg_compressed_moves0() {
+        let expected = expected0();
+        let t = ServerOpcodeMessage::tokio_read_unencrypted(&mut std::io::Cursor::new(&RAW0)).await.unwrap();
+        let t = match t {
+            ServerOpcodeMessage::SMSG_COMPRESSED_MOVES(t) => t,
+            opcode => panic!("incorrect opcode. Expected SMSG_COMPRESSED_MOVES, got {opcode:#?}"),
+        };
+
+        assert(&t, &expected);
+        let mut dest = Vec::with_capacity(RAW0.len());
+        expected.tokio_write_unencrypted_server(&mut std::io::Cursor::new(&mut dest)).await.unwrap();
+
+        let s = ServerOpcodeMessage::tokio_read_unencrypted(&mut std::io::Cursor::new(&dest)).await.unwrap();
+        let s = match s {
+            ServerOpcodeMessage::SMSG_COMPRESSED_MOVES(s) => s,
+            opcode => panic!("incorrect opcode. Expected SMSG_COMPRESSED_MOVES, got {opcode:#?}", opcode = opcode),
+        };
+
+        assert_eq!(t, s);
+    }
+
+    // Generated from `wow_message_parser/wowm/world/movement/smsg/smsg_multiple_moves.wowm` line 35.
+    #[cfg(feature = "async-std")]
+    #[cfg_attr(feature = "async-std", async_std::test)]
+    async fn astd_smsg_compressed_moves0() {
+        let expected = expected0();
+        let t = ServerOpcodeMessage::astd_read_unencrypted(&mut async_std::io::Cursor::new(&RAW0)).await.unwrap();
+        let t = match t {
+            ServerOpcodeMessage::SMSG_COMPRESSED_MOVES(t) => t,
+            opcode => panic!("incorrect opcode. Expected SMSG_COMPRESSED_MOVES, got {opcode:#?}"),
+        };
+
+        assert(&t, &expected);
+        let mut dest = Vec::with_capacity(RAW0.len());
+        expected.astd_write_unencrypted_server(&mut async_std::io::Cursor::new(&mut dest)).await.unwrap();
+
+        let s = ServerOpcodeMessage::astd_read_unencrypted(&mut async_std::io::Cursor::new(&dest)).await.unwrap();
+        let s = match s {
+            ServerOpcodeMessage::SMSG_COMPRESSED_MOVES(s) => s,
+            opcode => panic!("incorrect opcode. Expected SMSG_COMPRESSED_MOVES, got {opcode:#?}", opcode = opcode),
+        };
+
+        assert_eq!(t, s);
+    }
+
+    const RAW1: [u8; 72] = [ 0x00, 0x46, 0xFB, 0x02, 0x3B, 0x00, 0x00, 0x00, 0x78,
+         0x01, 0xB3, 0xBA, 0xCB, 0x70, 0x3B, 0x5F, 0xC6, 0x41, 0xDC, 0xE0, 0x63,
+         0xF5, 0x1B, 0xB1, 0x23, 0xD7, 0x17, 0x37, 0x1F, 0x6D, 0x50, 0x94, 0x71,
+         0xD2, 0x57, 0x64, 0x00, 0x02, 0x46, 0x06, 0x86, 0x63, 0x1C, 0x0C, 0x0C,
+         0xCC, 0x40, 0x66, 0xEB, 0x6B, 0xB1, 0x23, 0x5C, 0xE5, 0xCD, 0x47, 0x15,
+         0xB7, 0xCB, 0x3A, 0x31, 0x14, 0x00, 0x05, 0x0C, 0x18, 0x18, 0x00, 0x58,
+         0xE3, 0x11, 0x04, ];
+
+    pub(crate) fn expected1() -> SMSG_COMPRESSED_MOVES {
+        SMSG_COMPRESSED_MOVES {
+            moves: vec![
+                CompressedMove {
+                    opcode: CompressedMove_CompressedMoveOpcode::SmsgMonsterMove {
+                        monster_move: MonsterMove {
+                            spline_point: Vector3d {
+                                x: -603.695_f32,
+                                y: -4212.48_f32,
+                                z: 39.032715_f32,
+                            },
+                            spline_id: 0x212F,
+                            move_type: MonsterMove_MonsterMoveType::Normal {
+                                duration: 0x8C6,
+                                spline_flags: SplineFlag::empty()
+                                    .set_run_mode()
+                                    ,
+                                splines: vec![
+                                    Vector3d {
+                                        x: -603.68,
+                                        y: -4206.88,
+                                        z: 39.428837,
+                                    },
+                                    Vector3d {
+                                        x: 0.0,
+                                        y: 3.0,
+                                        z: 0.0,
+                                    },
+                                    Vector3d {
+                                        x: 0.0,
+                                        y: 1.0,
+                                        z: 0.0,
+                                    },
+                                ],
+                            },
+                        },
+                    },
+                    guid: Guid::new(0xF130001740001C6F),
+                },
+            ],
+        }
+
+    }
+
+    // Generated from `wow_message_parser/wowm/world/movement/smsg/smsg_multiple_moves.wowm` line 74.
+    #[cfg(feature = "sync")]
+    #[cfg_attr(feature = "sync", test)]
+    fn smsg_compressed_moves1() {
+        let expected = expected1();
+        let t = ServerOpcodeMessage::read_unencrypted(&mut std::io::Cursor::new(&RAW1)).unwrap();
+        let t = match t {
+            ServerOpcodeMessage::SMSG_COMPRESSED_MOVES(t) => t,
+            opcode => panic!("incorrect opcode. Expected SMSG_COMPRESSED_MOVES, got {opcode:#?}"),
+        };
+
+        assert(&t, &expected);
+        let mut dest = Vec::with_capacity(RAW1.len());
+        expected.write_unencrypted_server(&mut std::io::Cursor::new(&mut dest)).unwrap();
+
+        let s = ServerOpcodeMessage::read_unencrypted(&mut std::io::Cursor::new(&dest)).unwrap();
+        let s = match s {
+            ServerOpcodeMessage::SMSG_COMPRESSED_MOVES(s) => s,
+            opcode => panic!("incorrect opcode. Expected SMSG_COMPRESSED_MOVES, got {opcode:#?}", opcode = opcode),
+        };
+
+        assert_eq!(t, s);
+    }
+
+    // Generated from `wow_message_parser/wowm/world/movement/smsg/smsg_multiple_moves.wowm` line 74.
+    #[cfg(feature = "tokio")]
+    #[cfg_attr(feature = "tokio", tokio::test)]
+    async fn tokio_smsg_compressed_moves1() {
+        let expected = expected1();
+        let t = ServerOpcodeMessage::tokio_read_unencrypted(&mut std::io::Cursor::new(&RAW1)).await.unwrap();
+        let t = match t {
+            ServerOpcodeMessage::SMSG_COMPRESSED_MOVES(t) => t,
+            opcode => panic!("incorrect opcode. Expected SMSG_COMPRESSED_MOVES, got {opcode:#?}"),
+        };
+
+        assert(&t, &expected);
+        let mut dest = Vec::with_capacity(RAW1.len());
+        expected.tokio_write_unencrypted_server(&mut std::io::Cursor::new(&mut dest)).await.unwrap();
+
+        let s = ServerOpcodeMessage::tokio_read_unencrypted(&mut std::io::Cursor::new(&dest)).await.unwrap();
+        let s = match s {
+            ServerOpcodeMessage::SMSG_COMPRESSED_MOVES(s) => s,
+            opcode => panic!("incorrect opcode. Expected SMSG_COMPRESSED_MOVES, got {opcode:#?}", opcode = opcode),
+        };
+
+        assert_eq!(t, s);
+    }
+
+    // Generated from `wow_message_parser/wowm/world/movement/smsg/smsg_multiple_moves.wowm` line 74.
+    #[cfg(feature = "async-std")]
+    #[cfg_attr(feature = "async-std", async_std::test)]
+    async fn astd_smsg_compressed_moves1() {
+        let expected = expected1();
+        let t = ServerOpcodeMessage::astd_read_unencrypted(&mut async_std::io::Cursor::new(&RAW1)).await.unwrap();
+        let t = match t {
+            ServerOpcodeMessage::SMSG_COMPRESSED_MOVES(t) => t,
+            opcode => panic!("incorrect opcode. Expected SMSG_COMPRESSED_MOVES, got {opcode:#?}"),
+        };
+
+        assert(&t, &expected);
+        let mut dest = Vec::with_capacity(RAW1.len());
+        expected.astd_write_unencrypted_server(&mut async_std::io::Cursor::new(&mut dest)).await.unwrap();
+
+        let s = ServerOpcodeMessage::astd_read_unencrypted(&mut async_std::io::Cursor::new(&dest)).await.unwrap();
+        let s = match s {
+            ServerOpcodeMessage::SMSG_COMPRESSED_MOVES(s) => s,
+            opcode => panic!("incorrect opcode. Expected SMSG_COMPRESSED_MOVES, got {opcode:#?}", opcode = opcode),
+        };
+
+        assert_eq!(t, s);
+    }
+
 }
 
