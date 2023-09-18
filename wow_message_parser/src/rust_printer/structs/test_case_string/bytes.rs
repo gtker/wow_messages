@@ -59,10 +59,6 @@ fn print_bytes_members(s: &mut Writer, e: &Container) {
     s.wln("let mut bytes: Vec<u8> = Vec::new();");
     s.wln("self.write_into_vec(&mut bytes).unwrap();");
 
-    if e.tags().compressed() {
-        s.wln("let compressed_bytes_len = bytes.len() - 4;");
-    }
-
     s.wln("let mut bytes = bytes.into_iter();");
     s.newline();
 
@@ -71,9 +67,11 @@ fn print_bytes_members(s: &mut Writer, e: &Container) {
             "crate::util::write_bytes(&mut s, &mut bytes, 4, \"decompressed_size\", \"    \");"
         ));
         s.wln("/* Compressed bytes */");
-        s.wln(format!(
-            "crate::util::write_bytes(&mut s, &mut bytes, compressed_bytes_len, \"compressed_data\", \"    \");"
-        ));
+        s.bodyn("while bytes.len() != 0", |s| {
+            s.wln(format!(
+                "crate::util::write_bytes(&mut s, &mut bytes, 8, \"compressed_data\", \"    \");"
+            ));
+        });
 
         s.newline();
         return;

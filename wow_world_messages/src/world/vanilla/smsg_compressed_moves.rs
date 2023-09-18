@@ -379,12 +379,14 @@ impl crate::Message for SMSG_COMPRESSED_MOVES {
         writeln!(s, "    {a:#04X}, {b:#04X}, /* opcode */").unwrap();
         let mut bytes: Vec<u8> = Vec::new();
         self.write_into_vec(&mut bytes).unwrap();
-        let compressed_bytes_len = bytes.len() - 4;
         let mut bytes = bytes.into_iter();
 
         crate::util::write_bytes(&mut s, &mut bytes, 4, "decompressed_size", "    ");
         /* Compressed bytes */
-        crate::util::write_bytes(&mut s, &mut bytes, compressed_bytes_len, "compressed_data", "    ");
+        while bytes.len() != 0 {
+            crate::util::write_bytes(&mut s, &mut bytes, 8, "compressed_data", "    ");
+        }
+
 
 
         writeln!(s, "] {{").unwrap();
