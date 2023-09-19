@@ -35,6 +35,99 @@ SMSG have a header of 4 bytes.
 | - | 2 / Little | u16 | cooldown_count |  |  |
 | - | ? / - | [CooldownSpell](cooldownspell.md)[cooldown_count] | cooldowns |  |  |
 
+### Examples
+
+#### Example 1
+
+```c
+0, 167, // size
+42, 1, // opcode (298)
+0, // unknown1: u8
+40, 0, // spell_count: u16
+78, 0, // [0].InitialSpell.spell_id: u16
+0, 0, // [0].InitialSpell.unknown1: u16
+81, 0, // [1].InitialSpell.spell_id: u16
+0, 0, // [1].InitialSpell.unknown1: u16
+107, 0, // [2].InitialSpell.spell_id: u16
+0, 0, // [2].InitialSpell.unknown1: u16
+196, 0, // [3].InitialSpell.spell_id: u16
+0, 0, // [3].InitialSpell.unknown1: u16
+198, 0, // [4].InitialSpell.spell_id: u16
+0, 0, // [4].InitialSpell.unknown1: u16
+201, 0, // [5].InitialSpell.spell_id: u16
+0, 0, // [5].InitialSpell.unknown1: u16
+203, 0, // [6].InitialSpell.spell_id: u16
+0, 0, // [6].InitialSpell.unknown1: u16
+204, 0, // [7].InitialSpell.spell_id: u16
+0, 0, // [7].InitialSpell.unknown1: u16
+10, 2, // [8].InitialSpell.spell_id: u16
+0, 0, // [8].InitialSpell.unknown1: u16
+156, 2, // [9].InitialSpell.spell_id: u16
+0, 0, // [9].InitialSpell.unknown1: u16
+78, 9, // [10].InitialSpell.spell_id: u16
+0, 0, // [10].InitialSpell.unknown1: u16
+153, 9, // [11].InitialSpell.spell_id: u16
+0, 0, // [11].InitialSpell.unknown1: u16
+175, 9, // [12].InitialSpell.spell_id: u16
+0, 0, // [12].InitialSpell.unknown1: u16
+234, 11, // [13].InitialSpell.spell_id: u16
+0, 0, // [13].InitialSpell.unknown1: u16
+37, 13, // [14].InitialSpell.spell_id: u16
+0, 0, // [14].InitialSpell.unknown1: u16
+181, 20, // [15].InitialSpell.spell_id: u16
+0, 0, // [15].InitialSpell.unknown1: u16
+89, 24, // [16].InitialSpell.spell_id: u16
+0, 0, // [16].InitialSpell.unknown1: u16
+102, 24, // [17].InitialSpell.spell_id: u16
+0, 0, // [17].InitialSpell.unknown1: u16
+103, 24, // [18].InitialSpell.spell_id: u16
+0, 0, // [18].InitialSpell.unknown1: u16
+77, 25, // [19].InitialSpell.spell_id: u16
+0, 0, // [19].InitialSpell.unknown1: u16
+78, 25, // [20].InitialSpell.spell_id: u16
+0, 0, // [20].InitialSpell.unknown1: u16
+203, 25, // [21].InitialSpell.spell_id: u16
+0, 0, // [21].InitialSpell.unknown1: u16
+98, 28, // [22].InitialSpell.spell_id: u16
+0, 0, // [22].InitialSpell.unknown1: u16
+99, 28, // [23].InitialSpell.spell_id: u16
+0, 0, // [23].InitialSpell.unknown1: u16
+187, 28, // [24].InitialSpell.spell_id: u16
+0, 0, // [24].InitialSpell.unknown1: u16
+194, 32, // [25].InitialSpell.spell_id: u16
+0, 0, // [25].InitialSpell.unknown1: u16
+33, 34, // [26].InitialSpell.spell_id: u16
+0, 0, // [26].InitialSpell.unknown1: u16
+117, 35, // [27].InitialSpell.spell_id: u16
+0, 0, // [27].InitialSpell.unknown1: u16
+118, 35, // [28].InitialSpell.spell_id: u16
+0, 0, // [28].InitialSpell.unknown1: u16
+156, 35, // [29].InitialSpell.spell_id: u16
+0, 0, // [29].InitialSpell.unknown1: u16
+165, 35, // [30].InitialSpell.spell_id: u16
+0, 0, // [30].InitialSpell.unknown1: u16
+117, 80, // [31].InitialSpell.spell_id: u16
+0, 0, // [31].InitialSpell.unknown1: u16
+118, 80, // [32].InitialSpell.spell_id: u16
+0, 0, // [32].InitialSpell.unknown1: u16
+119, 80, // [33].InitialSpell.spell_id: u16
+0, 0, // [33].InitialSpell.unknown1: u16
+120, 80, // [34].InitialSpell.spell_id: u16
+0, 0, // [34].InitialSpell.unknown1: u16
+128, 81, // [35].InitialSpell.spell_id: u16
+0, 0, // [35].InitialSpell.unknown1: u16
+147, 84, // [36].InitialSpell.spell_id: u16
+0, 0, // [36].InitialSpell.unknown1: u16
+148, 84, // [37].InitialSpell.spell_id: u16
+0, 0, // [37].InitialSpell.unknown1: u16
+11, 86, // [38].InitialSpell.spell_id: u16
+0, 0, // [38].InitialSpell.unknown1: u16
+26, 89, // [39].InitialSpell.spell_id: u16
+0, 0, // [39].InitialSpell.unknown1: u16
+// initial_spells: InitialSpell[spell_count]
+0, 0, // cooldown_count: u16
+// cooldowns: CooldownSpell[cooldown_count]
+```
 ## Client Version 3.3.5
 
 ### Wowm Representation

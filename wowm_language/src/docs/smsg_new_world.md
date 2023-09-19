@@ -31,6 +31,19 @@ SMSG have a header of 4 bytes.
 | 0x08 | 12 / - | [Vector3d](vector3d.md) | position |  |  |
 | 0x14 | 4 / Little | f32 | orientation |  |  |
 
+### Examples
+
+#### Example 1
+
+```c
+0, 22, // size
+62, 0, // opcode (62)
+1, 0, 0, 0, // map: Map KALIMDOR (1)
+0, 160, 186, 68, // Vector3d.x: f32
+0, 236, 137, 197, // Vector3d.y: f32
+205, 204, 184, 65, // Vector3d.z: f32
+205, 204, 76, 62, // orientation: f32
+```
 ## Client Version 2.4.3
 
 ### Wowm Representation

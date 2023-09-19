@@ -6,3 +6,26 @@ smsg SMSG_NEW_WORLD = 0x003E {
     paste_versions = "1.12 2.4.3 3.3.5";
 }
 
+
+test SMSG_NEW_WORLD {
+    map = KALIMDOR;
+    position = {
+        x = 1493.0;
+        y = -4413.5;
+        z = 23.1;
+    };
+    orientation = 0.2;
+} [
+    0x00, 0x16, /* size */
+    0x3E, 0x00, /* opcode */
+    0x01, 0x00, 0x00, 0x00, /* map */
+    /* position: Vector3d start */
+        0x00, 0xA0, 0xBA, 0x44, /* x */
+        0x00, 0xEC, 0x89, 0xC5, /* y */
+        0xCD, 0xCC, 0xB8, 0x41, /* z */
+    /* position: Vector3d end */
+    0xCD, 0xCC, 0x4C, 0x3E, /* orientation */
+] {
+    versions = "1.12";
+}
+

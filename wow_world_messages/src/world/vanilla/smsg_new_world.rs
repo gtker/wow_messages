@@ -52,52 +52,6 @@ impl crate::Message for SMSG_NEW_WORLD {
         "SMSG_NEW_WORLD"
     }
 
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        use std::fmt::Write;
-        use crate::traits::Message;
-
-        let mut s = String::new();
-
-        writeln!(s, "test SMSG_NEW_WORLD {{").unwrap();
-        // Members
-        writeln!(s, "    map = {};", self.map.as_test_case_value()).unwrap();
-        // position: Vector3d
-        writeln!(s, "    position = {{").unwrap();
-        // Members
-        writeln!(s, "        x = {};", if self.position.x.to_string().contains('.') { self.position.x.to_string() } else { format!("{}.0", self.position.x) }).unwrap();
-        writeln!(s, "        y = {};", if self.position.y.to_string().contains('.') { self.position.y.to_string() } else { format!("{}.0", self.position.y) }).unwrap();
-        writeln!(s, "        z = {};", if self.position.z.to_string().contains('.') { self.position.z.to_string() } else { format!("{}.0", self.position.z) }).unwrap();
-
-        writeln!(s, "    }};").unwrap();
-        writeln!(s, "    orientation = {};", if self.orientation.to_string().contains('.') { self.orientation.to_string() } else { format!("{}.0", self.orientation) }).unwrap();
-
-        writeln!(s, "}} [").unwrap();
-
-        let [a, b] = 22_u16.to_be_bytes();
-        writeln!(s, "    {a:#04X}, {b:#04X}, /* size */").unwrap();
-        let [a, b] = 62_u16.to_le_bytes();
-        writeln!(s, "    {a:#04X}, {b:#04X}, /* opcode */").unwrap();
-        let mut bytes: Vec<u8> = Vec::new();
-        self.write_into_vec(&mut bytes).unwrap();
-        let mut bytes = bytes.into_iter();
-
-        crate::util::write_bytes(&mut s, &mut bytes, 4, "map", "    ");
-        writeln!(s, "    /* position: Vector3d start */").unwrap();
-        crate::util::write_bytes(&mut s, &mut bytes, 4, "x", "        ");
-        crate::util::write_bytes(&mut s, &mut bytes, 4, "y", "        ");
-        crate::util::write_bytes(&mut s, &mut bytes, 4, "z", "        ");
-        writeln!(s, "    /* position: Vector3d end */").unwrap();
-        crate::util::write_bytes(&mut s, &mut bytes, 4, "orientation", "    ");
-
-
-        writeln!(s, "] {{").unwrap();
-        writeln!(s, "    versions = \"{}\";", std::env::var("WOWM_TEST_CASE_WORLD_VERSION").unwrap_or("1.12".to_string())).unwrap();
-        writeln!(s, "}}\n").unwrap();
-
-        Some(s)
-    }
-
     fn size_without_header(&self) -> u32 {
         20
     }
@@ -123,4 +77,99 @@ crate::util::vanilla_tbc_wrath_vector3d_write_into_vec(&self.position, &mut w)?;
 
 #[cfg(feature = "vanilla")]
 impl crate::vanilla::ServerMessage for SMSG_NEW_WORLD {}
+
+#[cfg(test)]
+mod test {
+    #![allow(clippy::missing_const_for_fn)]
+    use super::SMSG_NEW_WORLD;
+    use super::*;
+    use super::super::*;
+    use crate::vanilla::opcodes::ServerOpcodeMessage;
+    use crate::vanilla::{ClientMessage, ServerMessage};
+
+    const HEADER_SIZE: usize = 2 + 2;
+    fn assert(t: &SMSG_NEW_WORLD, expected: &SMSG_NEW_WORLD) {
+        assert_eq!(t.map, expected.map);
+        assert_eq!(t.position, expected.position);
+        assert_eq!(t.orientation, expected.orientation);
+    }
+
+    const RAW0: [u8; 24] = [ 0x00, 0x16, 0x3E, 0x00, 0x01, 0x00, 0x00, 0x00, 0x00,
+         0xA0, 0xBA, 0x44, 0x00, 0xEC, 0x89, 0xC5, 0xCD, 0xCC, 0xB8, 0x41, 0xCD,
+         0xCC, 0x4C, 0x3E, ];
+
+    pub(crate) fn expected0() -> SMSG_NEW_WORLD {
+        SMSG_NEW_WORLD {
+            map: Map::Kalimdor,
+            position: Vector3d {
+                x: 1493_f32,
+                y: -4413.5_f32,
+                z: 23.1_f32,
+            },
+            orientation: 0.2_f32,
+        }
+
+    }
+
+    // Generated from `wow_message_parser/wowm/world/movement/smsg/smsg_new_world.wowm` line 10.
+    #[cfg(feature = "sync")]
+    #[cfg_attr(feature = "sync", test)]
+    fn smsg_new_world0() {
+        let expected = expected0();
+        let t = ServerOpcodeMessage::read_unencrypted(&mut std::io::Cursor::new(&RAW0)).unwrap();
+        let t = match t {
+            ServerOpcodeMessage::SMSG_NEW_WORLD(t) => t,
+            opcode => panic!("incorrect opcode. Expected SMSG_NEW_WORLD, got {opcode:#?}"),
+        };
+
+        assert(&t, &expected);
+        assert_eq!(20 + HEADER_SIZE, RAW0.len());
+
+        let mut dest = Vec::with_capacity(RAW0.len());
+        expected.write_unencrypted_server(&mut std::io::Cursor::new(&mut dest)).unwrap();
+
+        assert_eq!(dest, RAW0);
+    }
+
+    // Generated from `wow_message_parser/wowm/world/movement/smsg/smsg_new_world.wowm` line 10.
+    #[cfg(feature = "tokio")]
+    #[cfg_attr(feature = "tokio", tokio::test)]
+    async fn tokio_smsg_new_world0() {
+        let expected = expected0();
+        let t = ServerOpcodeMessage::tokio_read_unencrypted(&mut std::io::Cursor::new(&RAW0)).await.unwrap();
+        let t = match t {
+            ServerOpcodeMessage::SMSG_NEW_WORLD(t) => t,
+            opcode => panic!("incorrect opcode. Expected SMSG_NEW_WORLD, got {opcode:#?}"),
+        };
+
+        assert(&t, &expected);
+        assert_eq!(20 + HEADER_SIZE, RAW0.len());
+
+        let mut dest = Vec::with_capacity(RAW0.len());
+        expected.tokio_write_unencrypted_server(&mut std::io::Cursor::new(&mut dest)).await.unwrap();
+
+        assert_eq!(dest, RAW0);
+    }
+
+    // Generated from `wow_message_parser/wowm/world/movement/smsg/smsg_new_world.wowm` line 10.
+    #[cfg(feature = "async-std")]
+    #[cfg_attr(feature = "async-std", async_std::test)]
+    async fn astd_smsg_new_world0() {
+        let expected = expected0();
+        let t = ServerOpcodeMessage::astd_read_unencrypted(&mut async_std::io::Cursor::new(&RAW0)).await.unwrap();
+        let t = match t {
+            ServerOpcodeMessage::SMSG_NEW_WORLD(t) => t,
+            opcode => panic!("incorrect opcode. Expected SMSG_NEW_WORLD, got {opcode:#?}"),
+        };
+
+        assert(&t, &expected);
+        assert_eq!(20 + HEADER_SIZE, RAW0.len());
+
+        let mut dest = Vec::with_capacity(RAW0.len());
+        expected.astd_write_unencrypted_server(&mut async_std::io::Cursor::new(&mut dest)).await.unwrap();
+
+        assert_eq!(dest, RAW0);
+    }
+
+}
 

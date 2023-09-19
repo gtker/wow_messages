@@ -10175,7 +10175,6 @@ impl ServerOpcodeMessage {
             Self::SMSG_SET_FACTION_STANDING(c) => crate::Message::to_test_case_string(c),
             Self::SMSG_SET_PROFICIENCY(c) => crate::Message::to_test_case_string(c),
             Self::SMSG_ACTION_BUTTONS(c) => crate::Message::to_test_case_string(c),
-            Self::SMSG_INITIAL_SPELLS(c) => crate::Message::to_test_case_string(c),
             Self::SMSG_LEARNED_SPELL(c) => crate::Message::to_test_case_string(c),
             Self::SMSG_SUPERCEDED_SPELL(c) => crate::Message::to_test_case_string(c),
             Self::SMSG_CAST_FAILED(c) => crate::Message::to_test_case_string(c),

@@ -57,3 +57,344 @@ smsg SMSG_INITIAL_SPELLS = 0x012A {
 } {
     versions = "3.3.5";
 }
+
+test SMSG_INITIAL_SPELLS {
+    unknown1 = 0;
+    spell_count = 40;
+    initial_spells = [
+        {
+            spell_id = 78;
+            unknown1 = 0;
+        },
+        {
+            spell_id = 81;
+            unknown1 = 0;
+        },
+        {
+            spell_id = 107;
+            unknown1 = 0;
+        },
+        {
+            spell_id = 196;
+            unknown1 = 0;
+        },
+        {
+            spell_id = 198;
+            unknown1 = 0;
+        },
+        {
+            spell_id = 201;
+            unknown1 = 0;
+        },
+        {
+            spell_id = 203;
+            unknown1 = 0;
+        },
+        {
+            spell_id = 204;
+            unknown1 = 0;
+        },
+        {
+            spell_id = 522;
+            unknown1 = 0;
+        },
+        {
+            spell_id = 668;
+            unknown1 = 0;
+        },
+        {
+            spell_id = 2382;
+            unknown1 = 0;
+        },
+        {
+            spell_id = 2457;
+            unknown1 = 0;
+        },
+        {
+            spell_id = 2479;
+            unknown1 = 0;
+        },
+        {
+            spell_id = 3050;
+            unknown1 = 0;
+        },
+        {
+            spell_id = 3365;
+            unknown1 = 0;
+        },
+        {
+            spell_id = 5301;
+            unknown1 = 0;
+        },
+        {
+            spell_id = 6233;
+            unknown1 = 0;
+        },
+        {
+            spell_id = 6246;
+            unknown1 = 0;
+        },
+        {
+            spell_id = 6247;
+            unknown1 = 0;
+        },
+        {
+            spell_id = 6477;
+            unknown1 = 0;
+        },
+        {
+            spell_id = 6478;
+            unknown1 = 0;
+        },
+        {
+            spell_id = 6603;
+            unknown1 = 0;
+        },
+        {
+            spell_id = 7266;
+            unknown1 = 0;
+        },
+        {
+            spell_id = 7267;
+            unknown1 = 0;
+        },
+        {
+            spell_id = 7355;
+            unknown1 = 0;
+        },
+        {
+            spell_id = 8386;
+            unknown1 = 0;
+        },
+        {
+            spell_id = 8737;
+            unknown1 = 0;
+        },
+        {
+            spell_id = 9077;
+            unknown1 = 0;
+        },
+        {
+            spell_id = 9078;
+            unknown1 = 0;
+        },
+        {
+            spell_id = 9116;
+            unknown1 = 0;
+        },
+        {
+            spell_id = 9125;
+            unknown1 = 0;
+        },
+        {
+            spell_id = 20597;
+            unknown1 = 0;
+        },
+        {
+            spell_id = 20598;
+            unknown1 = 0;
+        },
+        {
+            spell_id = 20599;
+            unknown1 = 0;
+        },
+        {
+            spell_id = 20600;
+            unknown1 = 0;
+        },
+        {
+            spell_id = 20864;
+            unknown1 = 0;
+        },
+        {
+            spell_id = 21651;
+            unknown1 = 0;
+        },
+        {
+            spell_id = 21652;
+            unknown1 = 0;
+        },
+        {
+            spell_id = 22027;
+            unknown1 = 0;
+        },
+        {
+            spell_id = 22810;
+            unknown1 = 0;
+        },
+    ];
+    cooldown_count = 0;
+    cooldowns = [
+    ];
+} [
+    0x00, 0xA7, /* size */
+    0x2A, 0x01, /* opcode */
+    0x00, /* unknown1 */
+    0x28, 0x00, /* spell_count */
+    /* initial_spells: InitialSpell[spell_count] start */
+    /* initial_spells: InitialSpell[spell_count] 0 start */
+        0x4E, 0x00, /* spell_id */
+        0x00, 0x00, /* unknown1 */
+    /* initial_spells: InitialSpell[spell_count] 0 end */
+    /* initial_spells: InitialSpell[spell_count] 1 start */
+        0x51, 0x00, /* spell_id */
+        0x00, 0x00, /* unknown1 */
+    /* initial_spells: InitialSpell[spell_count] 1 end */
+    /* initial_spells: InitialSpell[spell_count] 2 start */
+        0x6B, 0x00, /* spell_id */
+        0x00, 0x00, /* unknown1 */
+    /* initial_spells: InitialSpell[spell_count] 2 end */
+    /* initial_spells: InitialSpell[spell_count] 3 start */
+        0xC4, 0x00, /* spell_id */
+        0x00, 0x00, /* unknown1 */
+    /* initial_spells: InitialSpell[spell_count] 3 end */
+    /* initial_spells: InitialSpell[spell_count] 4 start */
+        0xC6, 0x00, /* spell_id */
+        0x00, 0x00, /* unknown1 */
+    /* initial_spells: InitialSpell[spell_count] 4 end */
+    /* initial_spells: InitialSpell[spell_count] 5 start */
+        0xC9, 0x00, /* spell_id */
+        0x00, 0x00, /* unknown1 */
+    /* initial_spells: InitialSpell[spell_count] 5 end */
+    /* initial_spells: InitialSpell[spell_count] 6 start */
+        0xCB, 0x00, /* spell_id */
+        0x00, 0x00, /* unknown1 */
+    /* initial_spells: InitialSpell[spell_count] 6 end */
+    /* initial_spells: InitialSpell[spell_count] 7 start */
+        0xCC, 0x00, /* spell_id */
+        0x00, 0x00, /* unknown1 */
+    /* initial_spells: InitialSpell[spell_count] 7 end */
+    /* initial_spells: InitialSpell[spell_count] 8 start */
+        0x0A, 0x02, /* spell_id */
+        0x00, 0x00, /* unknown1 */
+    /* initial_spells: InitialSpell[spell_count] 8 end */
+    /* initial_spells: InitialSpell[spell_count] 9 start */
+        0x9C, 0x02, /* spell_id */
+        0x00, 0x00, /* unknown1 */
+    /* initial_spells: InitialSpell[spell_count] 9 end */
+    /* initial_spells: InitialSpell[spell_count] 10 start */
+        0x4E, 0x09, /* spell_id */
+        0x00, 0x00, /* unknown1 */
+    /* initial_spells: InitialSpell[spell_count] 10 end */
+    /* initial_spells: InitialSpell[spell_count] 11 start */
+        0x99, 0x09, /* spell_id */
+        0x00, 0x00, /* unknown1 */
+    /* initial_spells: InitialSpell[spell_count] 11 end */
+    /* initial_spells: InitialSpell[spell_count] 12 start */
+        0xAF, 0x09, /* spell_id */
+        0x00, 0x00, /* unknown1 */
+    /* initial_spells: InitialSpell[spell_count] 12 end */
+    /* initial_spells: InitialSpell[spell_count] 13 start */
+        0xEA, 0x0B, /* spell_id */
+        0x00, 0x00, /* unknown1 */
+    /* initial_spells: InitialSpell[spell_count] 13 end */
+    /* initial_spells: InitialSpell[spell_count] 14 start */
+        0x25, 0x0D, /* spell_id */
+        0x00, 0x00, /* unknown1 */
+    /* initial_spells: InitialSpell[spell_count] 14 end */
+    /* initial_spells: InitialSpell[spell_count] 15 start */
+        0xB5, 0x14, /* spell_id */
+        0x00, 0x00, /* unknown1 */
+    /* initial_spells: InitialSpell[spell_count] 15 end */
+    /* initial_spells: InitialSpell[spell_count] 16 start */
+        0x59, 0x18, /* spell_id */
+        0x00, 0x00, /* unknown1 */
+    /* initial_spells: InitialSpell[spell_count] 16 end */
+    /* initial_spells: InitialSpell[spell_count] 17 start */
+        0x66, 0x18, /* spell_id */
+        0x00, 0x00, /* unknown1 */
+    /* initial_spells: InitialSpell[spell_count] 17 end */
+    /* initial_spells: InitialSpell[spell_count] 18 start */
+        0x67, 0x18, /* spell_id */
+        0x00, 0x00, /* unknown1 */
+    /* initial_spells: InitialSpell[spell_count] 18 end */
+    /* initial_spells: InitialSpell[spell_count] 19 start */
+        0x4D, 0x19, /* spell_id */
+        0x00, 0x00, /* unknown1 */
+    /* initial_spells: InitialSpell[spell_count] 19 end */
+    /* initial_spells: InitialSpell[spell_count] 20 start */
+        0x4E, 0x19, /* spell_id */
+        0x00, 0x00, /* unknown1 */
+    /* initial_spells: InitialSpell[spell_count] 20 end */
+    /* initial_spells: InitialSpell[spell_count] 21 start */
+        0xCB, 0x19, /* spell_id */
+        0x00, 0x00, /* unknown1 */
+    /* initial_spells: InitialSpell[spell_count] 21 end */
+    /* initial_spells: InitialSpell[spell_count] 22 start */
+        0x62, 0x1C, /* spell_id */
+        0x00, 0x00, /* unknown1 */
+    /* initial_spells: InitialSpell[spell_count] 22 end */
+    /* initial_spells: InitialSpell[spell_count] 23 start */
+        0x63, 0x1C, /* spell_id */
+        0x00, 0x00, /* unknown1 */
+    /* initial_spells: InitialSpell[spell_count] 23 end */
+    /* initial_spells: InitialSpell[spell_count] 24 start */
+        0xBB, 0x1C, /* spell_id */
+        0x00, 0x00, /* unknown1 */
+    /* initial_spells: InitialSpell[spell_count] 24 end */
+    /* initial_spells: InitialSpell[spell_count] 25 start */
+        0xC2, 0x20, /* spell_id */
+        0x00, 0x00, /* unknown1 */
+    /* initial_spells: InitialSpell[spell_count] 25 end */
+    /* initial_spells: InitialSpell[spell_count] 26 start */
+        0x21, 0x22, /* spell_id */
+        0x00, 0x00, /* unknown1 */
+    /* initial_spells: InitialSpell[spell_count] 26 end */
+    /* initial_spells: InitialSpell[spell_count] 27 start */
+        0x75, 0x23, /* spell_id */
+        0x00, 0x00, /* unknown1 */
+    /* initial_spells: InitialSpell[spell_count] 27 end */
+    /* initial_spells: InitialSpell[spell_count] 28 start */
+        0x76, 0x23, /* spell_id */
+        0x00, 0x00, /* unknown1 */
+    /* initial_spells: InitialSpell[spell_count] 28 end */
+    /* initial_spells: InitialSpell[spell_count] 29 start */
+        0x9C, 0x23, /* spell_id */
+        0x00, 0x00, /* unknown1 */
+    /* initial_spells: InitialSpell[spell_count] 29 end */
+    /* initial_spells: InitialSpell[spell_count] 30 start */
+        0xA5, 0x23, /* spell_id */
+        0x00, 0x00, /* unknown1 */
+    /* initial_spells: InitialSpell[spell_count] 30 end */
+    /* initial_spells: InitialSpell[spell_count] 31 start */
+        0x75, 0x50, /* spell_id */
+        0x00, 0x00, /* unknown1 */
+    /* initial_spells: InitialSpell[spell_count] 31 end */
+    /* initial_spells: InitialSpell[spell_count] 32 start */
+        0x76, 0x50, /* spell_id */
+        0x00, 0x00, /* unknown1 */
+    /* initial_spells: InitialSpell[spell_count] 32 end */
+    /* initial_spells: InitialSpell[spell_count] 33 start */
+        0x77, 0x50, /* spell_id */
+        0x00, 0x00, /* unknown1 */
+    /* initial_spells: InitialSpell[spell_count] 33 end */
+    /* initial_spells: InitialSpell[spell_count] 34 start */
+        0x78, 0x50, /* spell_id */
+        0x00, 0x00, /* unknown1 */
+    /* initial_spells: InitialSpell[spell_count] 34 end */
+    /* initial_spells: InitialSpell[spell_count] 35 start */
+        0x80, 0x51, /* spell_id */
+        0x00, 0x00, /* unknown1 */
+    /* initial_spells: InitialSpell[spell_count] 35 end */
+    /* initial_spells: InitialSpell[spell_count] 36 start */
+        0x93, 0x54, /* spell_id */
+        0x00, 0x00, /* unknown1 */
+    /* initial_spells: InitialSpell[spell_count] 36 end */
+    /* initial_spells: InitialSpell[spell_count] 37 start */
+        0x94, 0x54, /* spell_id */
+        0x00, 0x00, /* unknown1 */
+    /* initial_spells: InitialSpell[spell_count] 37 end */
+    /* initial_spells: InitialSpell[spell_count] 38 start */
+        0x0B, 0x56, /* spell_id */
+        0x00, 0x00, /* unknown1 */
+    /* initial_spells: InitialSpell[spell_count] 38 end */
+    /* initial_spells: InitialSpell[spell_count] 39 start */
+        0x1A, 0x59, /* spell_id */
+        0x00, 0x00, /* unknown1 */
+    /* initial_spells: InitialSpell[spell_count] 39 end */
+    /* initial_spells: InitialSpell[spell_count] end */
+    0x00, 0x00, /* cooldown_count */
+] {
+    versions = "1.12";
+}
+

@@ -2,7 +2,6 @@ use std::io::{Read, Write};
 
 use crate::shared::cooldown_spell_vanilla_tbc_wrath::CooldownSpell;
 use crate::shared::initial_spell_vanilla_tbc::InitialSpell;
-use std::time::Duration;
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/spell/smsg_initial_spells.wowm:25`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/spell/smsg_initial_spells.wowm#L25):
@@ -73,87 +72,6 @@ impl crate::Message for SMSG_INITIAL_SPELLS {
         "SMSG_INITIAL_SPELLS"
     }
 
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        use std::fmt::Write;
-        use crate::traits::Message;
-
-        let mut s = String::new();
-
-        writeln!(s, "test SMSG_INITIAL_SPELLS {{").unwrap();
-        // Members
-        writeln!(s, "    unknown1 = {};", self.unknown1).unwrap();
-        writeln!(s, "    spell_count = {};", self.initial_spells.len()).unwrap();
-        writeln!(s, "    initial_spells = [").unwrap();
-        for v in self.initial_spells.as_slice() {
-            writeln!(s, "        {{").unwrap();
-            // Members
-            writeln!(s, "            spell_id = {};", v.spell_id).unwrap();
-            writeln!(s, "            unknown1 = {};", v.unknown1).unwrap();
-
-            writeln!(s, "        }},").unwrap();
-        }
-        writeln!(s, "    ];").unwrap();
-        writeln!(s, "    cooldown_count = {};", self.cooldowns.len()).unwrap();
-        writeln!(s, "    cooldowns = [").unwrap();
-        for v in self.cooldowns.as_slice() {
-            writeln!(s, "        {{").unwrap();
-            // Members
-            writeln!(s, "            spell_id = {};", v.spell_id).unwrap();
-            writeln!(s, "            item_id = {};", v.item_id).unwrap();
-            writeln!(s, "            spell_category = {};", v.spell_category).unwrap();
-            writeln!(s, "            cooldown = {};", v.cooldown.as_millis()).unwrap();
-            writeln!(s, "            category_cooldown = {};", v.category_cooldown.as_millis()).unwrap();
-
-            writeln!(s, "        }},").unwrap();
-        }
-        writeln!(s, "    ];").unwrap();
-
-        writeln!(s, "}} [").unwrap();
-
-        let [a, b] = (u16::try_from(self.size() + 2).unwrap()).to_be_bytes();
-        writeln!(s, "    {a:#04X}, {b:#04X}, /* size */").unwrap();
-        let [a, b] = 298_u16.to_le_bytes();
-        writeln!(s, "    {a:#04X}, {b:#04X}, /* opcode */").unwrap();
-        let mut bytes: Vec<u8> = Vec::new();
-        self.write_into_vec(&mut bytes).unwrap();
-        let mut bytes = bytes.into_iter();
-
-        crate::util::write_bytes(&mut s, &mut bytes, 1, "unknown1", "    ");
-        crate::util::write_bytes(&mut s, &mut bytes, 2, "spell_count", "    ");
-        if !self.initial_spells.is_empty() {
-            writeln!(s, "    /* initial_spells: InitialSpell[spell_count] start */").unwrap();
-            for (i, v) in self.initial_spells.iter().enumerate() {
-                writeln!(s, "    /* initial_spells: InitialSpell[spell_count] {i} start */").unwrap();
-                crate::util::write_bytes(&mut s, &mut bytes, 2, "spell_id", "        ");
-                crate::util::write_bytes(&mut s, &mut bytes, 2, "unknown1", "        ");
-                writeln!(s, "    /* initial_spells: InitialSpell[spell_count] {i} end */").unwrap();
-            }
-            writeln!(s, "    /* initial_spells: InitialSpell[spell_count] end */").unwrap();
-        }
-        crate::util::write_bytes(&mut s, &mut bytes, 2, "cooldown_count", "    ");
-        if !self.cooldowns.is_empty() {
-            writeln!(s, "    /* cooldowns: CooldownSpell[cooldown_count] start */").unwrap();
-            for (i, v) in self.cooldowns.iter().enumerate() {
-                writeln!(s, "    /* cooldowns: CooldownSpell[cooldown_count] {i} start */").unwrap();
-                crate::util::write_bytes(&mut s, &mut bytes, 2, "spell_id", "        ");
-                crate::util::write_bytes(&mut s, &mut bytes, 2, "item_id", "        ");
-                crate::util::write_bytes(&mut s, &mut bytes, 2, "spell_category", "        ");
-                crate::util::write_bytes(&mut s, &mut bytes, 4, "cooldown", "        ");
-                crate::util::write_bytes(&mut s, &mut bytes, 4, "category_cooldown", "        ");
-                writeln!(s, "    /* cooldowns: CooldownSpell[cooldown_count] {i} end */").unwrap();
-            }
-            writeln!(s, "    /* cooldowns: CooldownSpell[cooldown_count] end */").unwrap();
-        }
-
-
-        writeln!(s, "] {{").unwrap();
-        writeln!(s, "    versions = \"{}\";", std::env::var("WOWM_TEST_CASE_WORLD_VERSION").unwrap_or("1 2".to_string())).unwrap();
-        writeln!(s, "}}\n").unwrap();
-
-        Some(s)
-    }
-
     fn size_without_header(&self) -> u32 {
         self.size() as u32
     }
@@ -201,5 +119,533 @@ impl SMSG_INITIAL_SPELLS {
         + 2 // cooldown_count: u16
         + self.cooldowns.len() * 14 // cooldowns: CooldownSpell[cooldown_count]
     }
+}
+
+#[cfg(all(feature = "vanilla", test))]
+mod test_vanilla {
+    #![allow(clippy::missing_const_for_fn)]
+    use super::SMSG_INITIAL_SPELLS;
+    use super::*;
+    use super::super::*;
+    use crate::vanilla::opcodes::ServerOpcodeMessage;
+    use crate::vanilla::{ClientMessage, ServerMessage};
+
+    const HEADER_SIZE: usize = 2 + 2;
+    fn assert(t: &SMSG_INITIAL_SPELLS, expected: &SMSG_INITIAL_SPELLS) {
+        assert_eq!(t.unknown1, expected.unknown1);
+        assert_eq!(t.initial_spells, expected.initial_spells);
+        assert_eq!(t.cooldowns, expected.cooldowns);
+    }
+
+    const RAW0: [u8; 169] = [ 0x00, 0xA7, 0x2A, 0x01, 0x00, 0x28, 0x00, 0x4E, 0x00,
+         0x00, 0x00, 0x51, 0x00, 0x00, 0x00, 0x6B, 0x00, 0x00, 0x00, 0xC4, 0x00,
+         0x00, 0x00, 0xC6, 0x00, 0x00, 0x00, 0xC9, 0x00, 0x00, 0x00, 0xCB, 0x00,
+         0x00, 0x00, 0xCC, 0x00, 0x00, 0x00, 0x0A, 0x02, 0x00, 0x00, 0x9C, 0x02,
+         0x00, 0x00, 0x4E, 0x09, 0x00, 0x00, 0x99, 0x09, 0x00, 0x00, 0xAF, 0x09,
+         0x00, 0x00, 0xEA, 0x0B, 0x00, 0x00, 0x25, 0x0D, 0x00, 0x00, 0xB5, 0x14,
+         0x00, 0x00, 0x59, 0x18, 0x00, 0x00, 0x66, 0x18, 0x00, 0x00, 0x67, 0x18,
+         0x00, 0x00, 0x4D, 0x19, 0x00, 0x00, 0x4E, 0x19, 0x00, 0x00, 0xCB, 0x19,
+         0x00, 0x00, 0x62, 0x1C, 0x00, 0x00, 0x63, 0x1C, 0x00, 0x00, 0xBB, 0x1C,
+         0x00, 0x00, 0xC2, 0x20, 0x00, 0x00, 0x21, 0x22, 0x00, 0x00, 0x75, 0x23,
+         0x00, 0x00, 0x76, 0x23, 0x00, 0x00, 0x9C, 0x23, 0x00, 0x00, 0xA5, 0x23,
+         0x00, 0x00, 0x75, 0x50, 0x00, 0x00, 0x76, 0x50, 0x00, 0x00, 0x77, 0x50,
+         0x00, 0x00, 0x78, 0x50, 0x00, 0x00, 0x80, 0x51, 0x00, 0x00, 0x93, 0x54,
+         0x00, 0x00, 0x94, 0x54, 0x00, 0x00, 0x0B, 0x56, 0x00, 0x00, 0x1A, 0x59,
+         0x00, 0x00, 0x00, 0x00, ];
+
+    pub(crate) fn expected0() -> SMSG_INITIAL_SPELLS {
+        SMSG_INITIAL_SPELLS {
+            unknown1: 0x0,
+            initial_spells: vec![
+                InitialSpell {
+                    spell_id: 0x4E,
+                    unknown1: 0x0,
+                },
+                InitialSpell {
+                    spell_id: 0x51,
+                    unknown1: 0x0,
+                },
+                InitialSpell {
+                    spell_id: 0x6B,
+                    unknown1: 0x0,
+                },
+                InitialSpell {
+                    spell_id: 0xC4,
+                    unknown1: 0x0,
+                },
+                InitialSpell {
+                    spell_id: 0xC6,
+                    unknown1: 0x0,
+                },
+                InitialSpell {
+                    spell_id: 0xC9,
+                    unknown1: 0x0,
+                },
+                InitialSpell {
+                    spell_id: 0xCB,
+                    unknown1: 0x0,
+                },
+                InitialSpell {
+                    spell_id: 0xCC,
+                    unknown1: 0x0,
+                },
+                InitialSpell {
+                    spell_id: 0x20A,
+                    unknown1: 0x0,
+                },
+                InitialSpell {
+                    spell_id: 0x29C,
+                    unknown1: 0x0,
+                },
+                InitialSpell {
+                    spell_id: 0x94E,
+                    unknown1: 0x0,
+                },
+                InitialSpell {
+                    spell_id: 0x999,
+                    unknown1: 0x0,
+                },
+                InitialSpell {
+                    spell_id: 0x9AF,
+                    unknown1: 0x0,
+                },
+                InitialSpell {
+                    spell_id: 0xBEA,
+                    unknown1: 0x0,
+                },
+                InitialSpell {
+                    spell_id: 0xD25,
+                    unknown1: 0x0,
+                },
+                InitialSpell {
+                    spell_id: 0x14B5,
+                    unknown1: 0x0,
+                },
+                InitialSpell {
+                    spell_id: 0x1859,
+                    unknown1: 0x0,
+                },
+                InitialSpell {
+                    spell_id: 0x1866,
+                    unknown1: 0x0,
+                },
+                InitialSpell {
+                    spell_id: 0x1867,
+                    unknown1: 0x0,
+                },
+                InitialSpell {
+                    spell_id: 0x194D,
+                    unknown1: 0x0,
+                },
+                InitialSpell {
+                    spell_id: 0x194E,
+                    unknown1: 0x0,
+                },
+                InitialSpell {
+                    spell_id: 0x19CB,
+                    unknown1: 0x0,
+                },
+                InitialSpell {
+                    spell_id: 0x1C62,
+                    unknown1: 0x0,
+                },
+                InitialSpell {
+                    spell_id: 0x1C63,
+                    unknown1: 0x0,
+                },
+                InitialSpell {
+                    spell_id: 0x1CBB,
+                    unknown1: 0x0,
+                },
+                InitialSpell {
+                    spell_id: 0x20C2,
+                    unknown1: 0x0,
+                },
+                InitialSpell {
+                    spell_id: 0x2221,
+                    unknown1: 0x0,
+                },
+                InitialSpell {
+                    spell_id: 0x2375,
+                    unknown1: 0x0,
+                },
+                InitialSpell {
+                    spell_id: 0x2376,
+                    unknown1: 0x0,
+                },
+                InitialSpell {
+                    spell_id: 0x239C,
+                    unknown1: 0x0,
+                },
+                InitialSpell {
+                    spell_id: 0x23A5,
+                    unknown1: 0x0,
+                },
+                InitialSpell {
+                    spell_id: 0x5075,
+                    unknown1: 0x0,
+                },
+                InitialSpell {
+                    spell_id: 0x5076,
+                    unknown1: 0x0,
+                },
+                InitialSpell {
+                    spell_id: 0x5077,
+                    unknown1: 0x0,
+                },
+                InitialSpell {
+                    spell_id: 0x5078,
+                    unknown1: 0x0,
+                },
+                InitialSpell {
+                    spell_id: 0x5180,
+                    unknown1: 0x0,
+                },
+                InitialSpell {
+                    spell_id: 0x5493,
+                    unknown1: 0x0,
+                },
+                InitialSpell {
+                    spell_id: 0x5494,
+                    unknown1: 0x0,
+                },
+                InitialSpell {
+                    spell_id: 0x560B,
+                    unknown1: 0x0,
+                },
+                InitialSpell {
+                    spell_id: 0x591A,
+                    unknown1: 0x0,
+                },
+            ],
+            cooldowns: vec![ ],
+        }
+
+    }
+
+    // Generated from `wow_message_parser/wowm/world/spell/smsg_initial_spells.wowm` line 61.
+    #[cfg(feature = "sync")]
+    #[cfg_attr(feature = "sync", test)]
+    fn smsg_initial_spells0() {
+        let expected = expected0();
+        let t = ServerOpcodeMessage::read_unencrypted(&mut std::io::Cursor::new(&RAW0)).unwrap();
+        let t = match t {
+            ServerOpcodeMessage::SMSG_INITIAL_SPELLS(t) => t,
+            opcode => panic!("incorrect opcode. Expected SMSG_INITIAL_SPELLS, got {opcode:#?}"),
+        };
+
+        assert(&t, &expected);
+        assert_eq!(t.size() + HEADER_SIZE, RAW0.len());
+
+        let mut dest = Vec::with_capacity(RAW0.len());
+        expected.write_unencrypted_server(&mut std::io::Cursor::new(&mut dest)).unwrap();
+
+        assert_eq!(dest, RAW0);
+    }
+
+    // Generated from `wow_message_parser/wowm/world/spell/smsg_initial_spells.wowm` line 61.
+    #[cfg(feature = "tokio")]
+    #[cfg_attr(feature = "tokio", tokio::test)]
+    async fn tokio_smsg_initial_spells0() {
+        let expected = expected0();
+        let t = ServerOpcodeMessage::tokio_read_unencrypted(&mut std::io::Cursor::new(&RAW0)).await.unwrap();
+        let t = match t {
+            ServerOpcodeMessage::SMSG_INITIAL_SPELLS(t) => t,
+            opcode => panic!("incorrect opcode. Expected SMSG_INITIAL_SPELLS, got {opcode:#?}"),
+        };
+
+        assert(&t, &expected);
+        assert_eq!(t.size() + HEADER_SIZE, RAW0.len());
+
+        let mut dest = Vec::with_capacity(RAW0.len());
+        expected.tokio_write_unencrypted_server(&mut std::io::Cursor::new(&mut dest)).await.unwrap();
+
+        assert_eq!(dest, RAW0);
+    }
+
+    // Generated from `wow_message_parser/wowm/world/spell/smsg_initial_spells.wowm` line 61.
+    #[cfg(feature = "async-std")]
+    #[cfg_attr(feature = "async-std", async_std::test)]
+    async fn astd_smsg_initial_spells0() {
+        let expected = expected0();
+        let t = ServerOpcodeMessage::astd_read_unencrypted(&mut async_std::io::Cursor::new(&RAW0)).await.unwrap();
+        let t = match t {
+            ServerOpcodeMessage::SMSG_INITIAL_SPELLS(t) => t,
+            opcode => panic!("incorrect opcode. Expected SMSG_INITIAL_SPELLS, got {opcode:#?}"),
+        };
+
+        assert(&t, &expected);
+        assert_eq!(t.size() + HEADER_SIZE, RAW0.len());
+
+        let mut dest = Vec::with_capacity(RAW0.len());
+        expected.astd_write_unencrypted_server(&mut async_std::io::Cursor::new(&mut dest)).await.unwrap();
+
+        assert_eq!(dest, RAW0);
+    }
+
+}
+
+#[cfg(all(feature = "tbc", test))]
+mod test_tbc {
+    #![allow(clippy::missing_const_for_fn)]
+    use super::SMSG_INITIAL_SPELLS;
+    use super::*;
+    use super::super::*;
+    use crate::tbc::opcodes::ServerOpcodeMessage;
+    use crate::tbc::{ClientMessage, ServerMessage};
+
+    const HEADER_SIZE: usize = 2 + 2;
+    fn assert(t: &SMSG_INITIAL_SPELLS, expected: &SMSG_INITIAL_SPELLS) {
+        assert_eq!(t.unknown1, expected.unknown1);
+        assert_eq!(t.initial_spells, expected.initial_spells);
+        assert_eq!(t.cooldowns, expected.cooldowns);
+    }
+
+    const RAW0: [u8; 169] = [ 0x00, 0xA7, 0x2A, 0x01, 0x00, 0x28, 0x00, 0x4E, 0x00,
+         0x00, 0x00, 0x51, 0x00, 0x00, 0x00, 0x6B, 0x00, 0x00, 0x00, 0xC4, 0x00,
+         0x00, 0x00, 0xC6, 0x00, 0x00, 0x00, 0xC9, 0x00, 0x00, 0x00, 0xCB, 0x00,
+         0x00, 0x00, 0xCC, 0x00, 0x00, 0x00, 0x0A, 0x02, 0x00, 0x00, 0x9C, 0x02,
+         0x00, 0x00, 0x4E, 0x09, 0x00, 0x00, 0x99, 0x09, 0x00, 0x00, 0xAF, 0x09,
+         0x00, 0x00, 0xEA, 0x0B, 0x00, 0x00, 0x25, 0x0D, 0x00, 0x00, 0xB5, 0x14,
+         0x00, 0x00, 0x59, 0x18, 0x00, 0x00, 0x66, 0x18, 0x00, 0x00, 0x67, 0x18,
+         0x00, 0x00, 0x4D, 0x19, 0x00, 0x00, 0x4E, 0x19, 0x00, 0x00, 0xCB, 0x19,
+         0x00, 0x00, 0x62, 0x1C, 0x00, 0x00, 0x63, 0x1C, 0x00, 0x00, 0xBB, 0x1C,
+         0x00, 0x00, 0xC2, 0x20, 0x00, 0x00, 0x21, 0x22, 0x00, 0x00, 0x75, 0x23,
+         0x00, 0x00, 0x76, 0x23, 0x00, 0x00, 0x9C, 0x23, 0x00, 0x00, 0xA5, 0x23,
+         0x00, 0x00, 0x75, 0x50, 0x00, 0x00, 0x76, 0x50, 0x00, 0x00, 0x77, 0x50,
+         0x00, 0x00, 0x78, 0x50, 0x00, 0x00, 0x80, 0x51, 0x00, 0x00, 0x93, 0x54,
+         0x00, 0x00, 0x94, 0x54, 0x00, 0x00, 0x0B, 0x56, 0x00, 0x00, 0x1A, 0x59,
+         0x00, 0x00, 0x00, 0x00, ];
+
+    pub(crate) fn expected0() -> SMSG_INITIAL_SPELLS {
+        SMSG_INITIAL_SPELLS {
+            unknown1: 0x0,
+            initial_spells: vec![
+                InitialSpell {
+                    spell_id: 0x4E,
+                    unknown1: 0x0,
+                },
+                InitialSpell {
+                    spell_id: 0x51,
+                    unknown1: 0x0,
+                },
+                InitialSpell {
+                    spell_id: 0x6B,
+                    unknown1: 0x0,
+                },
+                InitialSpell {
+                    spell_id: 0xC4,
+                    unknown1: 0x0,
+                },
+                InitialSpell {
+                    spell_id: 0xC6,
+                    unknown1: 0x0,
+                },
+                InitialSpell {
+                    spell_id: 0xC9,
+                    unknown1: 0x0,
+                },
+                InitialSpell {
+                    spell_id: 0xCB,
+                    unknown1: 0x0,
+                },
+                InitialSpell {
+                    spell_id: 0xCC,
+                    unknown1: 0x0,
+                },
+                InitialSpell {
+                    spell_id: 0x20A,
+                    unknown1: 0x0,
+                },
+                InitialSpell {
+                    spell_id: 0x29C,
+                    unknown1: 0x0,
+                },
+                InitialSpell {
+                    spell_id: 0x94E,
+                    unknown1: 0x0,
+                },
+                InitialSpell {
+                    spell_id: 0x999,
+                    unknown1: 0x0,
+                },
+                InitialSpell {
+                    spell_id: 0x9AF,
+                    unknown1: 0x0,
+                },
+                InitialSpell {
+                    spell_id: 0xBEA,
+                    unknown1: 0x0,
+                },
+                InitialSpell {
+                    spell_id: 0xD25,
+                    unknown1: 0x0,
+                },
+                InitialSpell {
+                    spell_id: 0x14B5,
+                    unknown1: 0x0,
+                },
+                InitialSpell {
+                    spell_id: 0x1859,
+                    unknown1: 0x0,
+                },
+                InitialSpell {
+                    spell_id: 0x1866,
+                    unknown1: 0x0,
+                },
+                InitialSpell {
+                    spell_id: 0x1867,
+                    unknown1: 0x0,
+                },
+                InitialSpell {
+                    spell_id: 0x194D,
+                    unknown1: 0x0,
+                },
+                InitialSpell {
+                    spell_id: 0x194E,
+                    unknown1: 0x0,
+                },
+                InitialSpell {
+                    spell_id: 0x19CB,
+                    unknown1: 0x0,
+                },
+                InitialSpell {
+                    spell_id: 0x1C62,
+                    unknown1: 0x0,
+                },
+                InitialSpell {
+                    spell_id: 0x1C63,
+                    unknown1: 0x0,
+                },
+                InitialSpell {
+                    spell_id: 0x1CBB,
+                    unknown1: 0x0,
+                },
+                InitialSpell {
+                    spell_id: 0x20C2,
+                    unknown1: 0x0,
+                },
+                InitialSpell {
+                    spell_id: 0x2221,
+                    unknown1: 0x0,
+                },
+                InitialSpell {
+                    spell_id: 0x2375,
+                    unknown1: 0x0,
+                },
+                InitialSpell {
+                    spell_id: 0x2376,
+                    unknown1: 0x0,
+                },
+                InitialSpell {
+                    spell_id: 0x239C,
+                    unknown1: 0x0,
+                },
+                InitialSpell {
+                    spell_id: 0x23A5,
+                    unknown1: 0x0,
+                },
+                InitialSpell {
+                    spell_id: 0x5075,
+                    unknown1: 0x0,
+                },
+                InitialSpell {
+                    spell_id: 0x5076,
+                    unknown1: 0x0,
+                },
+                InitialSpell {
+                    spell_id: 0x5077,
+                    unknown1: 0x0,
+                },
+                InitialSpell {
+                    spell_id: 0x5078,
+                    unknown1: 0x0,
+                },
+                InitialSpell {
+                    spell_id: 0x5180,
+                    unknown1: 0x0,
+                },
+                InitialSpell {
+                    spell_id: 0x5493,
+                    unknown1: 0x0,
+                },
+                InitialSpell {
+                    spell_id: 0x5494,
+                    unknown1: 0x0,
+                },
+                InitialSpell {
+                    spell_id: 0x560B,
+                    unknown1: 0x0,
+                },
+                InitialSpell {
+                    spell_id: 0x591A,
+                    unknown1: 0x0,
+                },
+            ],
+            cooldowns: vec![ ],
+        }
+
+    }
+
+    // Generated from `wow_message_parser/wowm/world/spell/smsg_initial_spells.wowm` line 61.
+    #[cfg(feature = "sync")]
+    #[cfg_attr(feature = "sync", test)]
+    fn smsg_initial_spells0() {
+        let expected = expected0();
+        let t = ServerOpcodeMessage::read_unencrypted(&mut std::io::Cursor::new(&RAW0)).unwrap();
+        let t = match t {
+            ServerOpcodeMessage::SMSG_INITIAL_SPELLS(t) => t,
+            opcode => panic!("incorrect opcode. Expected SMSG_INITIAL_SPELLS, got {opcode:#?}"),
+        };
+
+        assert(&t, &expected);
+        assert_eq!(t.size() + HEADER_SIZE, RAW0.len());
+
+        let mut dest = Vec::with_capacity(RAW0.len());
+        expected.write_unencrypted_server(&mut std::io::Cursor::new(&mut dest)).unwrap();
+
+        assert_eq!(dest, RAW0);
+    }
+
+    // Generated from `wow_message_parser/wowm/world/spell/smsg_initial_spells.wowm` line 61.
+    #[cfg(feature = "tokio")]
+    #[cfg_attr(feature = "tokio", tokio::test)]
+    async fn tokio_smsg_initial_spells0() {
+        let expected = expected0();
+        let t = ServerOpcodeMessage::tokio_read_unencrypted(&mut std::io::Cursor::new(&RAW0)).await.unwrap();
+        let t = match t {
+            ServerOpcodeMessage::SMSG_INITIAL_SPELLS(t) => t,
+            opcode => panic!("incorrect opcode. Expected SMSG_INITIAL_SPELLS, got {opcode:#?}"),
+        };
+
+        assert(&t, &expected);
+        assert_eq!(t.size() + HEADER_SIZE, RAW0.len());
+
+        let mut dest = Vec::with_capacity(RAW0.len());
+        expected.tokio_write_unencrypted_server(&mut std::io::Cursor::new(&mut dest)).await.unwrap();
+
+        assert_eq!(dest, RAW0);
+    }
+
+    // Generated from `wow_message_parser/wowm/world/spell/smsg_initial_spells.wowm` line 61.
+    #[cfg(feature = "async-std")]
+    #[cfg_attr(feature = "async-std", async_std::test)]
+    async fn astd_smsg_initial_spells0() {
+        let expected = expected0();
+        let t = ServerOpcodeMessage::astd_read_unencrypted(&mut async_std::io::Cursor::new(&RAW0)).await.unwrap();
+        let t = match t {
+            ServerOpcodeMessage::SMSG_INITIAL_SPELLS(t) => t,
+            opcode => panic!("incorrect opcode. Expected SMSG_INITIAL_SPELLS, got {opcode:#?}"),
+        };
+
+        assert(&t, &expected);
+        assert_eq!(t.size() + HEADER_SIZE, RAW0.len());
+
+        let mut dest = Vec::with_capacity(RAW0.len());
+        expected.astd_write_unencrypted_server(&mut async_std::io::Cursor::new(&mut dest)).await.unwrap();
+
+        assert_eq!(dest, RAW0);
+    }
+
 }
 
