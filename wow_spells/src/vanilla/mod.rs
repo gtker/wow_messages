@@ -32,6 +32,29 @@ pub const fn all_spells() -> &'static [Spell] {
     data::Z________DATA
 }
 
+/// Returns all spells that contain `needle` in the name. The search is case insensitive.
+pub fn lookup_spells_by_name(needle: &str) -> impl Iterator<Item = &'static Spell> + '_ {
+    all_spells().iter().filter(move |spell| {
+        let lower = spell.spell_name().to_ascii_lowercase();
+        lower.contains(needle)
+    })
+}
+
+/// Returns the first spell that contains `needle` in the name. The search is case insensitive.
+pub fn lookup_spell_by_name(needle: &str) -> Option<&'static Spell> {
+    let needle = needle.to_ascii_lowercase();
+
+    for spell in all_spells() {
+        let lower = spell.spell_name().to_ascii_lowercase();
+        if lower.contains(&needle) {
+            return Some(spell)
+        }
+
+    }
+
+    None
+}
+
 #[cfg(test)]
 mod test {
     use super::lookup_spell;

@@ -34,6 +34,29 @@ pub const fn all_items() -> &'static [Item] {
     data::Z________DATA
 }
 
+/// Returns all items that contain `needle` in the name. The search is case insensitive.
+pub fn lookup_items_by_name(needle: &str) -> impl Iterator<Item = &'static Item> + '_ {
+    all_items().iter().filter(move |item| {
+        let lower = item.name().to_ascii_lowercase();
+        lower.contains(needle)
+    })
+}
+
+/// Returns the first item that contains `needle` in the name. The search is case insensitive.
+pub fn lookup_item_by_name(needle: &str) -> Option<&'static Item> {
+    let needle = needle.to_ascii_lowercase();
+
+    for item in all_items() {
+        let lower = item.name().to_ascii_lowercase();
+        if lower.contains(&needle) {
+            return Some(item)
+        }
+
+    }
+
+    None
+}
+
 #[cfg(test)]
 mod test {
     use super::lookup_item;

@@ -1,3 +1,4 @@
+use crate::base_printer::data::items::vanilla::assertions;
 use crate::base_printer::data::items::{
     process_extra_flags, Array, ArrayField, ArrayInstance, ArrayInstances, Field, Optimizations,
     Value,
@@ -667,6 +668,8 @@ impl WrathItem {
 }
 
 pub fn wrath(conn: &Connection) -> (Vec<GenericThing>, Optimizations) {
+    assertions(conn);
+
     let mut s = conn
         .prepare(
             "SELECT

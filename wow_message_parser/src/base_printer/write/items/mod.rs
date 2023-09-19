@@ -176,6 +176,45 @@ fn lib_functions(s: &mut Writer, ty_name: &str, things: &[GenericThing]) {
         },
     );
 
+    let name_function = match ty_lower.as_str() {
+        "item" => "name",
+        "spell" => "spell_name",
+        _ => unreachable!(),
+    };
+
+    s.wln(format!(
+        "/// Returns all {ty_lower}s that contain `needle` in the name. The search is case insensitive."
+    ));
+    s.bodyn(format!("pub fn lookup_{ty_lower}s_by_name(needle: &str) -> impl Iterator<Item = &'static {ty_name}> + '_"), |s| {
+        s.body_closing_with(format!("all_{ty_lower}s().iter().filter(move |{ty_lower}|"), |s| {
+            s.wln(format!("let lower = {ty_lower}.{name_function}().to_ascii_lowercase();", ty_lower = ty_lower));
+            s.wln(format!("lower.contains(needle)"));
+        }, ")");
+    });
+
+    s.wln(format!(
+        "/// Returns the first {ty_lower} that contains `needle` in the name. The search is case insensitive."
+    ));
+    s.bodyn(
+        format!("pub fn lookup_{ty_lower}_by_name(needle: &str) -> Option<&'static {ty_name}>"),
+        |s| {
+            s.wln("let needle = needle.to_ascii_lowercase();");
+            s.newline();
+
+            s.bodyn(format!("for {ty_lower} in all_{ty_lower}s()"), |s| {
+                s.wln(format!(
+                    "let lower = {ty_lower}.{name_function}().to_ascii_lowercase();"
+                ));
+
+                s.bodyn("if lower.contains(&needle)", |s| {
+                    s.wln(format!("return Some({ty_lower})"));
+                });
+            });
+
+            s.wln("None");
+        },
+    );
+
     s.wln("#[cfg(test)]");
     s.body("mod test", |s| {
         s.wln(format!("use super::lookup_{ty_lower};"));

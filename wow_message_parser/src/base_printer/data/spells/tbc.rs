@@ -833,6 +833,15 @@ pub(crate) fn assertions(conn: &Connection) {
         .unwrap();
 
     assert!(!s.exists([]).unwrap(), "The SpellName* and Rank* are assumed to be either an empty string or null. These fields are not included at all.");
+
+    let mut s = conn
+        .prepare("SELECT SpellName FROM spell_template;")
+        .unwrap();
+    let rows = s
+        .query_map([], |row| Ok(row.get::<usize, String>(0).unwrap()))
+        .unwrap();
+    let no_name_has_non_ascii_char = rows.map(|a| a.unwrap()).all(|a| a.is_ascii());
+    assert!(no_name_has_non_ascii_char);
 }
 
 pub(crate) fn tbc(conn: &Connection) -> (Vec<GenericThing>, Optimizations) {

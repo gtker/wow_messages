@@ -526,7 +526,18 @@ impl VanillaItem {
     }
 }
 
+pub(crate) fn assertions(conn: &Connection) {
+    let mut s = conn.prepare("SELECT name FROM item_template;").unwrap();
+    let rows = s
+        .query_map([], |row| Ok(row.get::<usize, String>(0).unwrap()))
+        .unwrap();
+    let no_name_has_non_ascii_char = rows.map(|a| a.unwrap()).all(|a| a.is_ascii());
+    assert!(no_name_has_non_ascii_char);
+}
+
 pub fn vanilla(conn: &Connection) -> (Vec<GenericThing>, Optimizations) {
+    assertions(conn);
+
     let mut s = conn
         .prepare(
             "SELECT
