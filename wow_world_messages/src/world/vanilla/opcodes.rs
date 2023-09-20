@@ -8241,7 +8241,6 @@ impl ServerOpcodeMessage {
             Self::MSG_QUEST_PUSH_RESULT(c) => crate::Message::to_test_case_string(c),
             Self::MSG_MOVE_WATER_WALK(c) => crate::Message::to_test_case_string(c),
             Self::MSG_PETITION_RENAME(c) => crate::Message::to_test_case_string(c),
-            Self::SMSG_TRANSFER_PENDING(c) => crate::Message::to_test_case_string(c),
             Self::SMSG_TRANSFER_ABORTED(c) => crate::Message::to_test_case_string(c),
             Self::SMSG_LOGOUT_CANCEL_ACK => crate::Message::to_test_case_string(&SMSG_LOGOUT_CANCEL_ACK{}),
             Self::SMSG_GUILD_QUERY_RESPONSE(c) => crate::Message::to_test_case_string(c),

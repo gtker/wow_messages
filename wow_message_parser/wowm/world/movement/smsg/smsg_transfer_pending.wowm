@@ -8,3 +8,13 @@ smsg SMSG_TRANSFER_PENDING = 0x003F {
     paste_versions = "1.12 2.4.3 3.3.5";
 }
 
+test SMSG_TRANSFER_PENDING {
+    map = KALIMDOR;
+} [
+    0x00, 0x06, /* size */
+    0x3F, 0x00, /* opcode */
+    0x01, 0x00, 0x00, 0x00, /* map */
+] {
+    versions = "1.12";
+}
+

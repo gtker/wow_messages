@@ -38,6 +38,15 @@ Optionally the following fields can be present. This can only be detected by loo
 | 0x08 | 4 / Little | u32 | transport |  |  |
 | 0x0C | 4 / - | [Map](map.md) | transport_map |  |  |
 
+### Examples
+
+#### Example 1
+
+```c
+0, 6, // size
+63, 0, // opcode (63)
+1, 0, 0, 0, // map: Map KALIMDOR (1)
+```
 ## Client Version 2.4.3
 
 ### Wowm Representation

@@ -63,45 +63,6 @@ impl crate::Message for SMSG_TRANSFER_PENDING {
         "SMSG_TRANSFER_PENDING"
     }
 
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        use std::fmt::Write;
-        use crate::traits::Message;
-
-        let mut s = String::new();
-
-        writeln!(s, "test SMSG_TRANSFER_PENDING {{").unwrap();
-        // Members
-        writeln!(s, "    map = {};", self.map.as_test_case_value()).unwrap();
-        if let Some(has_transport) = &self.has_transport {
-            writeln!(s, "    transport = {};", has_transport.transport).unwrap();
-            writeln!(s, "    transport_map = {};", has_transport.transport_map.as_test_case_value()).unwrap();
-        }
-
-        writeln!(s, "}} [").unwrap();
-
-        let [a, b] = (u16::try_from(self.size() + 2).unwrap()).to_be_bytes();
-        writeln!(s, "    {a:#04X}, {b:#04X}, /* size */").unwrap();
-        let [a, b] = 63_u16.to_le_bytes();
-        writeln!(s, "    {a:#04X}, {b:#04X}, /* opcode */").unwrap();
-        let mut bytes: Vec<u8> = Vec::new();
-        self.write_into_vec(&mut bytes).unwrap();
-        let mut bytes = bytes.into_iter();
-
-        crate::util::write_bytes(&mut s, &mut bytes, 4, "map", "    ");
-        if let Some(has_transport) = &self.has_transport {
-            crate::util::write_bytes(&mut s, &mut bytes, 4, "transport", "    ");
-            crate::util::write_bytes(&mut s, &mut bytes, 4, "transport_map", "    ");
-        }
-
-
-        writeln!(s, "] {{").unwrap();
-        writeln!(s, "    versions = \"{}\";", std::env::var("WOWM_TEST_CASE_WORLD_VERSION").unwrap_or("1.12".to_string())).unwrap();
-        writeln!(s, "}}\n").unwrap();
-
-        Some(s)
-    }
-
     fn size_without_header(&self) -> u32 {
         self.size() as u32
     }
@@ -142,6 +103,92 @@ impl SMSG_TRANSFER_PENDING {
             0
         }
     }
+}
+
+#[cfg(test)]
+mod test {
+    #![allow(clippy::missing_const_for_fn)]
+    use super::SMSG_TRANSFER_PENDING;
+    use super::*;
+    use super::super::*;
+    use crate::vanilla::opcodes::ServerOpcodeMessage;
+    use crate::vanilla::{ClientMessage, ServerMessage};
+
+    const HEADER_SIZE: usize = 2 + 2;
+    fn assert(t: &SMSG_TRANSFER_PENDING, expected: &SMSG_TRANSFER_PENDING) {
+        assert_eq!(t.map, expected.map);
+    }
+
+    const RAW0: [u8; 8] = [ 0x00, 0x06, 0x3F, 0x00, 0x01, 0x00, 0x00, 0x00, ];
+
+    pub(crate) fn expected0() -> SMSG_TRANSFER_PENDING {
+        SMSG_TRANSFER_PENDING {
+            map: Map::Kalimdor,
+            has_transport: None,
+        }
+
+    }
+
+    // Generated from `wow_message_parser/wowm/world/movement/smsg/smsg_transfer_pending.wowm` line 11.
+    #[cfg(feature = "sync")]
+    #[cfg_attr(feature = "sync", test)]
+    fn smsg_transfer_pending0() {
+        let expected = expected0();
+        let t = ServerOpcodeMessage::read_unencrypted(&mut std::io::Cursor::new(&RAW0)).unwrap();
+        let t = match t {
+            ServerOpcodeMessage::SMSG_TRANSFER_PENDING(t) => t,
+            opcode => panic!("incorrect opcode. Expected SMSG_TRANSFER_PENDING, got {opcode:#?}"),
+        };
+
+        assert(&t, &expected);
+        assert_eq!(t.size() + HEADER_SIZE, RAW0.len());
+
+        let mut dest = Vec::with_capacity(RAW0.len());
+        expected.write_unencrypted_server(&mut std::io::Cursor::new(&mut dest)).unwrap();
+
+        assert_eq!(dest, RAW0);
+    }
+
+    // Generated from `wow_message_parser/wowm/world/movement/smsg/smsg_transfer_pending.wowm` line 11.
+    #[cfg(feature = "tokio")]
+    #[cfg_attr(feature = "tokio", tokio::test)]
+    async fn tokio_smsg_transfer_pending0() {
+        let expected = expected0();
+        let t = ServerOpcodeMessage::tokio_read_unencrypted(&mut std::io::Cursor::new(&RAW0)).await.unwrap();
+        let t = match t {
+            ServerOpcodeMessage::SMSG_TRANSFER_PENDING(t) => t,
+            opcode => panic!("incorrect opcode. Expected SMSG_TRANSFER_PENDING, got {opcode:#?}"),
+        };
+
+        assert(&t, &expected);
+        assert_eq!(t.size() + HEADER_SIZE, RAW0.len());
+
+        let mut dest = Vec::with_capacity(RAW0.len());
+        expected.tokio_write_unencrypted_server(&mut std::io::Cursor::new(&mut dest)).await.unwrap();
+
+        assert_eq!(dest, RAW0);
+    }
+
+    // Generated from `wow_message_parser/wowm/world/movement/smsg/smsg_transfer_pending.wowm` line 11.
+    #[cfg(feature = "async-std")]
+    #[cfg_attr(feature = "async-std", async_std::test)]
+    async fn astd_smsg_transfer_pending0() {
+        let expected = expected0();
+        let t = ServerOpcodeMessage::astd_read_unencrypted(&mut async_std::io::Cursor::new(&RAW0)).await.unwrap();
+        let t = match t {
+            ServerOpcodeMessage::SMSG_TRANSFER_PENDING(t) => t,
+            opcode => panic!("incorrect opcode. Expected SMSG_TRANSFER_PENDING, got {opcode:#?}"),
+        };
+
+        assert(&t, &expected);
+        assert_eq!(t.size() + HEADER_SIZE, RAW0.len());
+
+        let mut dest = Vec::with_capacity(RAW0.len());
+        expected.astd_write_unencrypted_server(&mut async_std::io::Cursor::new(&mut dest)).await.unwrap();
+
+        assert_eq!(dest, RAW0);
+    }
+
 }
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
