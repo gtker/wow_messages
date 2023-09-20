@@ -58,8 +58,15 @@ impl TestCase {
         &self.members
     }
 
+    pub(crate) fn try_get_member<'a>(
+        t: &'a [TestCaseMember],
+        member: &str,
+    ) -> Option<&'a TestCaseMember> {
+        t.iter().find(|a| a.name() == member)
+    }
+
     pub(crate) fn get_member<'a>(t: &'a [TestCaseMember], member: &str) -> &'a TestCaseMember {
-        t.iter().find(|a| a.name() == member).unwrap_or_else(|| {
+        Self::try_get_member(t, member).unwrap_or_else(|| {
             panic!("variable '{member}' not found in list of variables with values")
         })
     }

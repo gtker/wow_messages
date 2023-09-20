@@ -91,15 +91,24 @@ pub(super) fn print_tests(s: &mut Writer, e: &Container, o: &Objects) {
                     if let Some(optional) = e.rust_object().optional() {
                         let name = e.name();
                         let optional_name = optional.name();
-                        s.body_closing_with(
-                            format!("{optional_name}: Some({name}_{optional_name}"),
-                            |s| {
-                                for m in optional.members_in_struct() {
-                                    print_value(s, m, t.members(), e, version);
-                                }
-                            },
-                            ")",
-                        );
+
+                        if !optional
+                            .members_in_struct()
+                            .iter()
+                            .any(|a| TestCase::try_get_member(t.members(), a.name()).is_none())
+                        {
+                            s.body_closing_with(
+                                format!("{optional_name}: Some({name}_{optional_name}"),
+                                |s| {
+                                    for m in optional.members_in_struct() {
+                                        print_value(s, m, t.members(), e, version);
+                                    }
+                                },
+                                ")",
+                            );
+                        } else {
+                            s.wln(format!("{optional_name}: None,"))
+                        }
                     }
                 });
             });
