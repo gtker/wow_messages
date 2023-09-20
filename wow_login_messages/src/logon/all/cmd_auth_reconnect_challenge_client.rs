@@ -9,7 +9,7 @@ use std::net::Ipv4Addr;
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord)]
 /// First message sent by the client when attempting to reconnect. The server will respond with [`CMD_AUTH_RECONNECT_CHALLENGE_Server`](crate::logon::version_2::CMD_AUTH_RECONNECT_CHALLENGE_Server).
 /// Has the exact same layout as [`CMD_AUTH_LOGON_CHALLENGE_Client`](crate::logon::all::CMD_AUTH_LOGON_CHALLENGE_Client).
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/login/cmd_auth_reconnect/challenge_client.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/login/cmd_auth_reconnect/challenge_client.wowm#L3):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/login/cmd_auth_reconnect/challenge_client.wowm:5`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/login/cmd_auth_reconnect/challenge_client.wowm#L5):
 /// ```text
 /// clogin CMD_AUTH_RECONNECT_CHALLENGE_Client = 0x02 {
 ///     ProtocolVersion protocol_version;
@@ -390,7 +390,7 @@ mod test {
 
     }
 
-    // Generated from `wow_message_parser/wowm/login/cmd_auth_reconnect/challenge_client.wowm` line 27.
+    // Generated from `wow_message_parser/wowm/login/cmd_auth_reconnect/challenge_client.wowm` line 23.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn cmd_auth_reconnect_challenge_client0() {
@@ -410,7 +410,7 @@ mod test {
         assert_eq!(dest, RAW0);
     }
 
-    // Generated from `wow_message_parser/wowm/login/cmd_auth_reconnect/challenge_client.wowm` line 27.
+    // Generated from `wow_message_parser/wowm/login/cmd_auth_reconnect/challenge_client.wowm` line 23.
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_cmd_auth_reconnect_challenge_client0() {
@@ -430,7 +430,7 @@ mod test {
         assert_eq!(dest, RAW0);
     }
 
-    // Generated from `wow_message_parser/wowm/login/cmd_auth_reconnect/challenge_client.wowm` line 27.
+    // Generated from `wow_message_parser/wowm/login/cmd_auth_reconnect/challenge_client.wowm` line 23.
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_cmd_auth_reconnect_challenge_client0() {
@@ -475,7 +475,7 @@ mod test {
 
     }
 
-    // Generated from `wow_message_parser/wowm/login/cmd_auth_reconnect/challenge_client.wowm` line 58.
+    // Generated from `wow_message_parser/wowm/login/cmd_auth_reconnect/challenge_client.wowm` line 54.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn cmd_auth_reconnect_challenge_client1() {
@@ -495,7 +495,7 @@ mod test {
         assert_eq!(dest, RAW1);
     }
 
-    // Generated from `wow_message_parser/wowm/login/cmd_auth_reconnect/challenge_client.wowm` line 58.
+    // Generated from `wow_message_parser/wowm/login/cmd_auth_reconnect/challenge_client.wowm` line 54.
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_cmd_auth_reconnect_challenge_client1() {
@@ -515,7 +515,7 @@ mod test {
         assert_eq!(dest, RAW1);
     }
 
-    // Generated from `wow_message_parser/wowm/login/cmd_auth_reconnect/challenge_client.wowm` line 58.
+    // Generated from `wow_message_parser/wowm/login/cmd_auth_reconnect/challenge_client.wowm` line 54.
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_cmd_auth_reconnect_challenge_client1() {

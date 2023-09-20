@@ -57,6 +57,22 @@ impl ParsedTags {
         self.used_in_update_mask.append(t.used_in_update_mask)
     }
 
+    pub(crate) fn add_descriptive_comments(&mut self, comments: &[&str]) {
+        if let Some(v) = &mut self.comment {
+            for c in comments {
+                v.add(c);
+            }
+        } else if comments.len() != 0 {
+            let mut t = TagString::new();
+
+            for c in comments {
+                t.add(c);
+            }
+
+            self.comment = Some(t);
+        }
+    }
+
     pub(crate) fn compressed(&self) -> bool {
         if let Some(c) = &self.compressed {
             c == "true"

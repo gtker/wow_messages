@@ -23,12 +23,15 @@ array = { "[" ~ raw_values* ~ "]" }
 
 identifier_and_value = { identifier ~ "=" ~ value }
 
-basic_definer_item = { identifier_and_value ~ ";" }
+basic_definer_item = { descriptive_comment* ~ identifier_and_value ~ ";" }
 
 definer_keyword = { ( "enum" | "flag" ) }
 
+comment_text = { (!NEWLINE ~ ANY)+ }
+descriptive_comment = ${ "///" ~ comment_text ~ NEWLINE }
+
 complex_key_value_pair = { identifier ~ "=" ~ QUOTATION_MARK ~ text ~ (QUOTATION_MARK ~ ";") }
-complex_definer_item = { identifier_and_value ~ "{" ~
+complex_definer_item = { descriptive_comment* ~ identifier_and_value ~ "{" ~
                              complex_key_value_pair+ ~
                             "}"}
 definer_members = { (basic_definer_item | complex_definer_item)+ }
@@ -67,7 +70,7 @@ optional_statement = { "optional" ~ identifier ~ "{" ~
 unimplemented = { "unimplemented" }
 
 container_members = { container_member* }
-container_member = { ( if_statement
+container_member = { descriptive_comment* ~ (if_statement
                     | basic_container_item
                     | complex_container_item
                     | optional_statement
@@ -94,6 +97,6 @@ test = {"test" ~ identifier ~ "{" ~
         ~ "]" ~
         object_key_values? }
 
-statements = { (definer | container | test)+ }
+statements = { (definer | container | test | descriptive_comment)+ }
 
 file = { SOI ~ commands ~ statements ~ EOI }

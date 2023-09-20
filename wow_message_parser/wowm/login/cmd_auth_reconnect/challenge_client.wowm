@@ -1,27 +1,23 @@
 #tag_all login_versions "*";
 
+/// First message sent by the client when attempting to reconnect. The server will respond with [CMD_AUTH_RECONNECT_CHALLENGE_Server].
+/// Has the exact same layout as [CMD_AUTH_LOGON_CHALLENGE_Client].
 clogin CMD_AUTH_RECONNECT_CHALLENGE_Client = 0x02 {
-    ProtocolVersion protocol_version {
-        comment = "Determines which version of messages are used for further communication.";
-    }
+    /// Determines which version of messages are used for further communication.
+    ProtocolVersion protocol_version;
     u16 size = self.size;
     u32 game_name = "\0WoW";
     Version version;
     Platform platform;
     Os os;
     Locale locale;
-    u32 utc_timezone_offset {
-        comment = "Offset in minutes from UTC time. 180 would be UTC+3";
-    }
+    /// Offset in minutes from UTC time. 180 would be UTC+3
+    u32 utc_timezone_offset;
     IpAddress client_ip_address;
-    String account_name {
-        comment = "Real clients can send a maximum of 16 UTF-8 characters. This is not necessarily 16 bytes since one character can be more than one byte.";
-        comment = "Real clients will send a fully uppercased username, and will perform authentication calculations on the uppercased version.";
-        comment = "Uppercasing in regards to non-ASCII values is little weird. See `https://docs.rs/wow_srp/latest/wow_srp/normalized_string/index.html` for more info.";
-    }
-} {
-    comment = "First message sent by the client when attempting to reconnect. The server will respond with [CMD_AUTH_RECONNECT_CHALLENGE_Server].";
-    comment = "Has the exact same layout as [CMD_AUTH_LOGON_CHALLENGE_Client].";
+    /// Real clients can send a maximum of 16 UTF-8 characters. This is not necessarily 16 bytes since one character can be more than one byte.
+    /// Real clients will send a fully uppercased username, and will perform authentication calculations on the uppercased version.
+    /// Uppercasing in regards to non-ASCII values is little weird. See `https://docs.rs/wow_srp/latest/wow_srp/normalized_string/index.html` for more info.
+    String account_name;
 }
 
 test CMD_AUTH_RECONNECT_CHALLENGE_Client {

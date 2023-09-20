@@ -5,6 +5,7 @@
 The following tags have compiler defined meaning.
 
 ## For Objects, Definer Enumerators, and Object Declarations
+
 ### `comment`
 
 Used to provide description, or describe quirks and non-obvious information regarding something.
@@ -35,6 +36,30 @@ smsg SMSG_TEST = 0x00 {
     }
 }
 ```
+
+The descriptive comment version of this can also be used.
+Any line that starts with three forward slashes (`///`) will be interpreted as a comment on the item below.
+
+So the above two examples would be:
+
+```rust,ignore
+/// Spell id 1337 prevents this from being sent.
+smsg SMSG_TEST = 0x00 {
+    u8 basic;
+}
+```
+
+And
+
+```rust,ignore
+smsg SMSG_TEST = 0x00 {
+    /// This is one thing to say.
+    /// This is something else.
+    u8 basic;
+}
+```
+
+This is the preferred way of adding comments.
 
 #### Linking
 
@@ -216,7 +241,8 @@ smsg SMSG_TEST = 0x00 {
 
 Used on `flag`s when a zero value implicitly also means that any specific enumerator is valid.
 
-For example on `AllowedRace`, a 0 value means that all races are allowed, but a 0xFFFFFFFF value also means that all races are allowed.
+For example on `AllowedRace`, a 0 value means that all races are allowed, but a 0xFFFFFFFF value also means that all
+races are allowed.
 
 ## For Definer Enumerators
 

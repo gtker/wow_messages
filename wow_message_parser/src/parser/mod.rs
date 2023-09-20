@@ -112,12 +112,18 @@ fn parse_statements(statements: &mut Pairs<Rule>, tags: &ParsedTags, path: &Path
     let mut structs = Vec::new();
     let mut messages = Vec::new();
     let mut tests = Vec::new();
+    let mut descriptive_comments = Vec::new();
 
     for statement in statements {
         let start_pos = statement.as_span().start_pos().line_col();
         let end_pos = statement.as_span().end_pos().line_col().0;
         let file_info = FileInfo::new(path.to_owned(), start_pos.0, end_pos);
         match statement.as_rule() {
+            Rule::descriptive_comment => {
+                let mut statement = statement.into_inner();
+                let comment = statement.next().unwrap().as_str().trim();
+                descriptive_comments.push(comment);
+            }
             Rule::definer => {
                 let mut statement = statement.into_inner();
                 let keyword = statement.next().unwrap().as_str();
@@ -128,15 +134,19 @@ fn parse_statements(statements: &mut Pairs<Rule>, tags: &ParsedTags, path: &Path
                         tags,
                         file_info,
                         DefinerType::Enum,
+                        &descriptive_comments,
                     )),
                     "flag" => flags.push(parse_enum(
                         &mut statement,
                         tags,
                         file_info,
                         DefinerType::Flag,
+                        &descriptive_comments,
                     )),
                     _ => unreachable!("invalid keyword for definer"),
                 }
+
+                descriptive_comments.clear();
             }
             Rule::container => {
                 let mut statement = statement.into_inner();
@@ -151,11 +161,27 @@ fn parse_statements(statements: &mut Pairs<Rule>, tags: &ParsedTags, path: &Path
                     "msg" => (ContainerType::Msg(0), &mut messages),
                     keyword => unreachable!("invalid keyword for container: '{}'", keyword),
                 };
-                parse_struct(&mut statement, tags, ty, file_info, objects);
+                parse_struct(
+                    &mut statement,
+                    tags,
+                    ty,
+                    file_info,
+                    objects,
+                    &descriptive_comments,
+                );
+
+                descriptive_comments.clear();
             }
             Rule::test => {
                 let mut statement = statement.into_inner();
-                tests.push(parse_test(&mut statement, tags, file_info));
+                tests.push(parse_test(
+                    &mut statement,
+                    tags,
+                    file_info,
+                    &descriptive_comments,
+                ));
+
+                descriptive_comments.clear();
             }
             _ => unreachable!("statements should only have definers or containers"),
         }
@@ -208,7 +234,12 @@ fn parse_test_values(m: Pair<Rule>, test_members: &mut Vec<ParsedTestCaseMember>
     ));
 }
 
-fn parse_test(t: &mut Pairs<Rule>, tags: &ParsedTags, file_info: FileInfo) -> ParsedTestCase {
+fn parse_test(
+    t: &mut Pairs<Rule>,
+    tags: &ParsedTags,
+    file_info: FileInfo,
+    descriptive_comments: &[&str],
+) -> ParsedTestCase {
     let name = t.next().unwrap().as_str();
     let members = t.next().unwrap().into_inner();
 
@@ -224,7 +255,8 @@ fn parse_test(t: &mut Pairs<Rule>, tags: &ParsedTags, file_info: FileInfo) -> Pa
     }
 
     let mut extra_kvs = t.find(|a| a.as_rule() == Rule::object_key_values);
-    let kvs = parse_object_key_values(&mut extra_kvs, tags);
+    let mut kvs = parse_object_key_values(&mut extra_kvs, tags);
+    kvs.add_descriptive_comments(descriptive_comments);
 
     ParsedTestCase::new(
         name,
@@ -241,6 +273,7 @@ fn parse_struct(
     container_type: ContainerType,
     file_info: FileInfo,
     objects: &mut Vec<ParsedContainer>,
+    descriptive_comments: &[&str],
 ) {
     let identifier = t.next().unwrap().as_str();
 
@@ -276,8 +309,12 @@ fn parse_struct(
     let mut members = Vec::new();
 
     for member in container_members {
-        let member = member.into_inner().next().unwrap();
-        if matches!(member.as_rule(), Rule::unimplemented) {
+        let unimplemented = member
+            .clone()
+            .into_inner()
+            .any(|a| a.as_rule() == Rule::unimplemented);
+
+        if unimplemented {
             let mut extra_kvs = t.find(|a| a.as_rule() == Rule::object_key_values);
             let mut kvs = parse_object_key_values(&mut extra_kvs, tags);
             kvs.insert(UNIMPLEMENTED, "true");
@@ -286,11 +323,13 @@ fn parse_struct(
             apply_tags(identifier, v, kvs, file_info, container_type, objects);
             return;
         }
+
         members.push(parse_struct_member(member, identifier, &file_info));
     }
 
     let mut extra_kvs = t.find(|a| a.as_rule() == Rule::object_key_values);
-    let kvs = parse_object_key_values(&mut extra_kvs, tags);
+    let mut kvs = parse_object_key_values(&mut extra_kvs, tags);
+    kvs.add_descriptive_comments(descriptive_comments);
 
     apply_tags(identifier, members, kvs, file_info, container_type, objects);
 }
@@ -336,14 +375,19 @@ fn unimplemented_member() -> ParsedStructMember {
     )))
 }
 
-fn parse_struct_member(
-    mut t: Pair<Rule>,
-    ty_name: &str,
-    file_info: &FileInfo,
-) -> ParsedStructMember {
-    if t.as_rule() == Rule::container_member {
-        t = t.into_inner().next().unwrap();
+fn parse_struct_member(ts: Pair<Rule>, ty_name: &str, file_info: &FileInfo) -> ParsedStructMember {
+    assert_eq!(ts.as_rule(), Rule::container_member);
+
+    let mut ts = ts.into_inner();
+
+    let mut descriptive_comments = Vec::new();
+
+    let mut t = ts.next().unwrap();
+    while matches!(t.as_rule(), Rule::descriptive_comment) {
+        descriptive_comments.push(t.into_inner().as_str().trim());
+        t = ts.next().unwrap();
     }
+
     match t.as_rule() {
         Rule::basic_container_item | Rule::complex_container_item => {
             let mut t = t.into_inner();
@@ -373,6 +417,7 @@ fn parse_struct_member(
                 let text = kv.find(|a| a.as_rule() == Rule::text).unwrap();
                 kvs.insert(identifier.as_str(), text.as_str());
             }
+            kvs.add_descriptive_comments(&descriptive_comments);
 
             let mut container_type = identifier_and_value
                 .find(|a| a.as_rule() == Rule::container_type)
@@ -517,6 +562,7 @@ pub(crate) fn parse_enum(
     tags: &ParsedTags,
     file_info: FileInfo,
     definer_ty: DefinerType,
+    descriptive_comments: &[&str],
 ) -> ParsedDefiner {
     let ident = t.next().unwrap();
     assert_eq!(ident.as_rule(), Rule::identifier);
@@ -530,23 +576,31 @@ pub(crate) fn parse_enum(
     for item in definer_members {
         let item_rule = item.as_rule();
         assert!(item_rule == Rule::basic_definer_item || item_rule == Rule::complex_definer_item);
-        let mut complex_key_values = item.clone().into_inner();
-        let mut item = item.into_inner().next().unwrap().into_inner();
-        let identifier = item.next().unwrap();
-        let value = item.next().unwrap();
+
+        let mut item = item.into_inner();
+
+        let mut first = item.next().unwrap();
+
+        let mut comments = Vec::new();
+
+        while matches!(first.as_rule(), Rule::descriptive_comment) {
+            comments.push(first.into_inner().as_str().trim());
+            first = item.next().unwrap();
+        }
+
+        let mut identifier_and_value = first.into_inner();
+
+        let identifier = identifier_and_value.next().unwrap();
+        let value = identifier_and_value.next().unwrap();
 
         let mut kvs = ParsedTags::new();
-        if item_rule == Rule::complex_definer_item {
-            let _ = complex_key_values.next().unwrap();
-            let item = complex_key_values;
-            for kv in item {
-                let mut inner = kv.into_inner();
-                let ident = inner.next().unwrap().as_str();
-                let text = inner.next().unwrap().as_str();
-
-                kvs.insert(ident, text);
-            }
+        while let Some(complex_key_value_pair) = item.next() {
+            let mut complex_key_value_pair = complex_key_value_pair.into_inner();
+            let identifier = complex_key_value_pair.next().unwrap();
+            let text = complex_key_value_pair.next().unwrap();
+            kvs.insert(identifier.as_str(), text.as_str());
         }
+        kvs.add_descriptive_comments(&comments);
 
         fields.push(DefinerField::new(
             identifier.as_str(),
@@ -563,6 +617,7 @@ pub(crate) fn parse_enum(
     let mut extra_key_values = t.next();
     let mut extras = parse_object_key_values(&mut extra_key_values, tags);
     extras.append(tags.clone());
+    extras.add_descriptive_comments(descriptive_comments);
 
     let basic_type = IntegerType::from_str(basic_type.as_str(), ident.as_str(), &file_info);
 
