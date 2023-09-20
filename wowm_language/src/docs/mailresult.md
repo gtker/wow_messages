@@ -28,21 +28,21 @@ enum MailResult : u32 {
 ### Type
 The basic type is `u32`, a 4 byte (32 bit) little endian integer.
 ### Enumerators
-| Enumerator | Value  | Description | Comment |
-| --------- | -------- | ----------- | ------- |
-| `OK` | 0 (0x00) |  |  |
-| `ERR_EQUIP_ERROR` | 1 (0x01) |  |  |
-| `ERR_CANNOT_SEND_TO_SELF` | 2 (0x02) |  |  |
-| `ERR_NOT_ENOUGH_MONEY` | 3 (0x03) |  |  |
-| `ERR_RECIPIENT_NOT_FOUND` | 4 (0x04) |  |  |
-| `ERR_NOT_YOUR_TEAM` | 5 (0x05) |  |  |
-| `ERR_INTERNAL_ERROR` | 6 (0x06) |  |  |
-| `ERR_DISABLED_FOR_TRIAL_ACC` | 14 (0x0E) |  |  |
-| `ERR_RECIPIENT_CAP_REACHED` | 15 (0x0F) |  |  |
-| `ERR_CANT_SEND_WRAPPED_COD` | 16 (0x10) |  |  |
-| `ERR_MAIL_AND_CHAT_SUSPENDED` | 17 (0x11) |  |  |
-| `ERR_TOO_MANY_ATTACHMENTS` | 18 (0x12) |  |  |
-| `ERR_MAIL_ATTACHMENT_INVALID` | 19 (0x13) |  |  |
+| Enumerator | Value  | Comment |
+| --------- | -------- | ------- |
+| `OK` | 0 (0x00) |  |
+| `ERR_EQUIP_ERROR` | 1 (0x01) |  |
+| `ERR_CANNOT_SEND_TO_SELF` | 2 (0x02) |  |
+| `ERR_NOT_ENOUGH_MONEY` | 3 (0x03) |  |
+| `ERR_RECIPIENT_NOT_FOUND` | 4 (0x04) |  |
+| `ERR_NOT_YOUR_TEAM` | 5 (0x05) |  |
+| `ERR_INTERNAL_ERROR` | 6 (0x06) |  |
+| `ERR_DISABLED_FOR_TRIAL_ACC` | 14 (0x0E) |  |
+| `ERR_RECIPIENT_CAP_REACHED` | 15 (0x0F) |  |
+| `ERR_CANT_SEND_WRAPPED_COD` | 16 (0x10) |  |
+| `ERR_MAIL_AND_CHAT_SUSPENDED` | 17 (0x11) |  |
+| `ERR_TOO_MANY_ATTACHMENTS` | 18 (0x12) |  |
+| `ERR_MAIL_ATTACHMENT_INVALID` | 19 (0x13) |  |
 
 Used in:
 * [SMSG_SEND_MAIL_RESULT](smsg_send_mail_result.md)
@@ -77,22 +77,22 @@ enum MailResult : u32 {
 ### Type
 The basic type is `u32`, a 4 byte (32 bit) little endian integer.
 ### Enumerators
-| Enumerator | Value  | Description | Comment |
-| --------- | -------- | ----------- | ------- |
-| `OK` | 0 (0x00) |  |  |
-| `ERR_EQUIP_ERROR` | 1 (0x01) |  |  |
-| `ERR_CANNOT_SEND_TO_SELF` | 2 (0x02) |  |  |
-| `ERR_NOT_ENOUGH_MONEY` | 3 (0x03) |  |  |
-| `ERR_RECIPIENT_NOT_FOUND` | 4 (0x04) |  |  |
-| `ERR_NOT_YOUR_TEAM` | 5 (0x05) |  |  |
-| `ERR_INTERNAL_ERROR` | 6 (0x06) |  |  |
-| `ERR_DISABLED_FOR_TRIAL_ACC` | 14 (0x0E) |  |  |
-| `ERR_RECIPIENT_CAP_REACHED` | 15 (0x0F) |  |  |
-| `ERR_CANT_SEND_WRAPPED_COD` | 16 (0x10) |  |  |
-| `ERR_MAIL_AND_CHAT_SUSPENDED` | 17 (0x11) |  |  |
-| `ERR_TOO_MANY_ATTACHMENTS` | 18 (0x12) |  |  |
-| `ERR_MAIL_ATTACHMENT_INVALID` | 19 (0x13) |  |  |
-| `ERR_ITEM_HAS_EXPIRED` | 21 (0x15) |  |  |
+| Enumerator | Value  | Comment |
+| --------- | -------- | ------- |
+| `OK` | 0 (0x00) |  |
+| `ERR_EQUIP_ERROR` | 1 (0x01) |  |
+| `ERR_CANNOT_SEND_TO_SELF` | 2 (0x02) |  |
+| `ERR_NOT_ENOUGH_MONEY` | 3 (0x03) |  |
+| `ERR_RECIPIENT_NOT_FOUND` | 4 (0x04) |  |
+| `ERR_NOT_YOUR_TEAM` | 5 (0x05) |  |
+| `ERR_INTERNAL_ERROR` | 6 (0x06) |  |
+| `ERR_DISABLED_FOR_TRIAL_ACC` | 14 (0x0E) |  |
+| `ERR_RECIPIENT_CAP_REACHED` | 15 (0x0F) |  |
+| `ERR_CANT_SEND_WRAPPED_COD` | 16 (0x10) |  |
+| `ERR_MAIL_AND_CHAT_SUSPENDED` | 17 (0x11) |  |
+| `ERR_TOO_MANY_ATTACHMENTS` | 18 (0x12) |  |
+| `ERR_MAIL_ATTACHMENT_INVALID` | 19 (0x13) |  |
+| `ERR_ITEM_HAS_EXPIRED` | 21 (0x15) |  |
 
 Used in:
 * [SMSG_SEND_MAIL_RESULT](smsg_send_mail_result.md)

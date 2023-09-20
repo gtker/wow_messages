@@ -28,10 +28,10 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | 4 / - | [LogoutResult](logoutresult.md) | result |  |  |
-| 0x08 | 1 / - | [LogoutSpeed](logoutspeed.md) | speed |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x04 | 4 / - | [LogoutResult](logoutresult.md) | result |  |
+| 0x08 | 1 / - | [LogoutSpeed](logoutspeed.md) | speed |  |
 
 ### Examples
 

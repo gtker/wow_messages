@@ -25,11 +25,11 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | 4 / Little | u32 | count |  |  |
-| 0x08 | ? / - | [AuctionListItem](auctionlistitem.md)[count] | auctions |  |  |
-| - | 4 / Little | u32 | total_amount_of_auctions |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x04 | 4 / Little | u32 | count |  |
+| 0x08 | ? / - | [AuctionListItem](auctionlistitem.md)[count] | auctions |  |
+| - | 4 / Little | u32 | total_amount_of_auctions |  |
 
 ## Client Version 2.4.3
 
@@ -57,12 +57,12 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | 4 / Little | u32 | count |  |  |
-| 0x08 | ? / - | [AuctionListItem](auctionlistitem.md)[count] | auctions |  |  |
-| - | 4 / Little | u32 | total_amount_of_auctions |  |  |
-| - | 4 / Little | Milliseconds | auction_search_delay |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x04 | 4 / Little | u32 | count |  |
+| 0x08 | ? / - | [AuctionListItem](auctionlistitem.md)[count] | auctions |  |
+| - | 4 / Little | u32 | total_amount_of_auctions |  |
+| - | 4 / Little | Milliseconds | auction_search_delay |  |
 
 ## Client Version 3.3.5
 
@@ -90,10 +90,10 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | 4 / Little | u32 | count |  |  |
-| - | ? / - | [AuctionListItem](auctionlistitem.md)[count] | auctions |  |  |
-| - | 4 / Little | u32 | total_amount_of_auctions |  |  |
-| - | 4 / Little | Milliseconds | auction_search_delay |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| - | 4 / Little | u32 | count |  |
+| - | ? / - | [AuctionListItem](auctionlistitem.md)[count] | auctions |  |
+| - | 4 / Little | u32 | total_amount_of_auctions |  |
+| - | 4 / Little | Milliseconds | auction_search_delay |  |
 

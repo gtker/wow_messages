@@ -28,23 +28,23 @@ enum ArenaTeamCommandError : u32 {
 ### Type
 The basic type is `u32`, a 4 byte (32 bit) little endian integer.
 ### Enumerators
-| Enumerator | Value  | Description | Comment |
-| --------- | -------- | ----------- | ------- |
-| `ARENA_TEAM_INTERNAL` | 1 (0x01) |  |  |
-| `ALREADY_IN_ARENA_TEAM` | 2 (0x02) |  |  |
-| `ALREADY_IN_ARENA_TEAM_S` | 3 (0x03) |  |  |
-| `INVITED_TO_ARENA_TEAM` | 4 (0x04) |  |  |
-| `ALREADY_INVITED_TO_ARENA_TEAM_S` | 5 (0x05) |  |  |
-| `ARENA_TEAM_NAME_INVALID` | 6 (0x06) |  |  |
-| `ARENA_TEAM_NAME_EXISTS_S` | 7 (0x07) |  |  |
-| `ARENA_TEAM_LEADER_LEAVE_S` | 8 (0x08) |  | This value also has the name `ARENA_TEAM_PERMISSIONS`. |
-| `ARENA_TEAM_PLAYER_NOT_IN_TEAM` | 9 (0x09) |  |  |
-| `ARENA_TEAM_PLAYER_NOT_IN_TEAM_SS` | 10 (0x0A) |  |  |
-| `ARENA_TEAM_PLAYER_NOT_FOUND_S` | 11 (0x0B) |  |  |
-| `ARENA_TEAM_NOT_ALLIED` | 12 (0x0C) |  |  |
-| `ARENA_TEAM_IGNORING_YOU_S` | 19 (0x13) |  |  |
-| `ARENA_TEAM_TARGET_TOO_LOW_S` | 21 (0x15) |  |  |
-| `ARENA_TEAM_TOO_MANY_MEMBERS_S` | 22 (0x16) |  |  |
+| Enumerator | Value  | Comment |
+| --------- | -------- | ------- |
+| `ARENA_TEAM_INTERNAL` | 1 (0x01) |  |
+| `ALREADY_IN_ARENA_TEAM` | 2 (0x02) |  |
+| `ALREADY_IN_ARENA_TEAM_S` | 3 (0x03) |  |
+| `INVITED_TO_ARENA_TEAM` | 4 (0x04) |  |
+| `ALREADY_INVITED_TO_ARENA_TEAM_S` | 5 (0x05) |  |
+| `ARENA_TEAM_NAME_INVALID` | 6 (0x06) |  |
+| `ARENA_TEAM_NAME_EXISTS_S` | 7 (0x07) |  |
+| `ARENA_TEAM_LEADER_LEAVE_S` | 8 (0x08) | This value also has the name `ARENA_TEAM_PERMISSIONS`. |
+| `ARENA_TEAM_PLAYER_NOT_IN_TEAM` | 9 (0x09) |  |
+| `ARENA_TEAM_PLAYER_NOT_IN_TEAM_SS` | 10 (0x0A) |  |
+| `ARENA_TEAM_PLAYER_NOT_FOUND_S` | 11 (0x0B) |  |
+| `ARENA_TEAM_NOT_ALLIED` | 12 (0x0C) |  |
+| `ARENA_TEAM_IGNORING_YOU_S` | 19 (0x13) |  |
+| `ARENA_TEAM_TARGET_TOO_LOW_S` | 21 (0x15) |  |
+| `ARENA_TEAM_TOO_MANY_MEMBERS_S` | 22 (0x16) |  |
 
 Used in:
 * [SMSG_ARENA_TEAM_COMMAND_RESULT](smsg_arena_team_command_result.md)

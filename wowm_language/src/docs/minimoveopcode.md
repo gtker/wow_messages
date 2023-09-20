@@ -17,12 +17,12 @@ enum MiniMoveOpcode : u16 {
 ### Type
 The basic type is `u16`, a 2 byte (16 bit) little endian integer.
 ### Enumerators
-| Enumerator | Value  | Description | Comment |
-| --------- | -------- | ----------- | ------- |
-| `SMSG_FORCE_MOVE_ROOT` | 232 (0xE8) |  |  |
-| `SMSG_MOVE_FEATHER_FALL` | 242 (0xF2) |  |  |
-| `SMSG_MOVE_WATER_WALK` | 222 (0xDE) |  |  |
-| `SMSG_MOVE_SET_HOVER` | 244 (0xF4) |  |  |
+| Enumerator | Value  | Comment |
+| --------- | -------- | ------- |
+| `SMSG_FORCE_MOVE_ROOT` | 232 (0xE8) |  |
+| `SMSG_MOVE_FEATHER_FALL` | 242 (0xF2) |  |
+| `SMSG_MOVE_WATER_WALK` | 222 (0xDE) |  |
+| `SMSG_MOVE_SET_HOVER` | 244 (0xF4) |  |
 
 Used in:
 * [MiniMoveMessage](minimovemessage.md)

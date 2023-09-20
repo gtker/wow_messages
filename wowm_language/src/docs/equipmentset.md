@@ -14,11 +14,11 @@ struct EquipmentSet {
 ```
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x00 | 8 / Little | [Guid](../types/packed-guid.md) | item |  |  |
-| 0x08 | 1 / - | u8 | source_bag |  |  |
-| 0x09 | 1 / - | u8 | source_slot |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x00 | 8 / Little | [Guid](../types/packed-guid.md) | item |  |
+| 0x08 | 1 / - | u8 | source_bag |  |
+| 0x09 | 1 / - | u8 | source_slot |  |
 
 
 Used in:

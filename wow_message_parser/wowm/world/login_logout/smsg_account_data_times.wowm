@@ -38,7 +38,7 @@ test SMSG_ACCOUNT_DATA_TIMES {
   0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
   0x00, 0x00, 0x00, 0x00
 ] {
-    description = "Zeroed out message needed for showing chat box.";
+    comment = "Zeroed out message needed for showing chat box.";
     versions = "1.12";
 }
 

@@ -23,7 +23,7 @@ CMSG have a header of 6 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x06 | 190 / - | [EquipmentSet](equipmentset.md)[19] | sets |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x06 | 190 / - | [EquipmentSet](equipmentset.md)[19] | sets |  |
 

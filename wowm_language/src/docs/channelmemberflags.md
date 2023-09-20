@@ -20,15 +20,15 @@ flag ChannelMemberFlags : u8 {
 ### Type
 The basic type is `u8`, a 1 byte (8 bit) integer.
 ### Enumerators
-| Enumerator | Value  | Description | Comment |
-| --------- | -------- | ----------- | ------- |
-| `NONE` | 0 (0x00) |  |  |
-| `OWNER` | 1 (0x01) |  |  |
-| `MODERATOR` | 4 (0x04) |  |  |
-| `VOICED` | 8 (0x08) |  |  |
-| `MUTED` | 16 (0x10) |  |  |
-| `CUSTOM` | 32 (0x20) |  |  |
-| `MICROPHONE_MUTE` | 64 (0x40) |  |  |
+| Enumerator | Value  | Comment |
+| --------- | -------- | ------- |
+| `NONE` | 0 (0x00) |  |
+| `OWNER` | 1 (0x01) |  |
+| `MODERATOR` | 4 (0x04) |  |
+| `VOICED` | 8 (0x08) |  |
+| `MUTED` | 16 (0x10) |  |
+| `CUSTOM` | 32 (0x20) |  |
+| `MICROPHONE_MUTE` | 64 (0x40) |  |
 
 Used in:
 * [ChannelMember](channelmember.md)

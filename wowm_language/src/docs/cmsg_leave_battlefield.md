@@ -23,9 +23,9 @@ CMSG have a header of 6 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x06 | 4 / - | [Map](map.md) | map |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x06 | 4 / - | [Map](map.md) | map |  |
 
 ## Client Version 2.4.3
 
@@ -53,12 +53,12 @@ CMSG have a header of 6 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x06 | 1 / - | u8 | unknown1 |  |  |
-| 0x07 | 1 / - | u8 | unknown2 |  |  |
-| 0x08 | 4 / - | [Map](map.md) | map |  |  |
-| 0x0C | 2 / Little | u16 | unknown3 |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x06 | 1 / - | u8 | unknown1 |  |
+| 0x07 | 1 / - | u8 | unknown2 |  |
+| 0x08 | 4 / - | [Map](map.md) | map |  |
+| 0x0C | 2 / Little | u16 | unknown3 |  |
 
 ## Client Version 3.3.5
 
@@ -86,10 +86,10 @@ CMSG have a header of 6 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x06 | 1 / - | u8 | unknown1 |  |  |
-| 0x07 | 1 / - | u8 | unknown2 |  |  |
-| 0x08 | 4 / - | [Map](map.md) | map |  |  |
-| 0x0C | 2 / Little | u16 | unknown3 |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x06 | 1 / - | u8 | unknown1 |  |
+| 0x07 | 1 / - | u8 | unknown2 |  |
+| 0x08 | 4 / - | [Map](map.md) | map |  |
+| 0x0C | 2 / Little | u16 | unknown3 |  |
 

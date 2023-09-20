@@ -28,14 +28,14 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | 4 / Little | u32 | quest_id |  |  |
-| 0x08 | 4 / Little | u32 | unknown |  | cmangos/vmangos/mangoszero: set to 0x03 |
-| 0x0C | 4 / Little | u32 | experience_reward |  |  |
-| 0x10 | 4 / Little | Gold | money_reward |  |  |
-| 0x14 | 4 / Little | u32 | amount_of_item_rewards |  |  |
-| 0x18 | ? / - | [QuestItemReward](questitemreward.md)[amount_of_item_rewards] | item_rewards |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x04 | 4 / Little | u32 | quest_id |  |
+| 0x08 | 4 / Little | u32 | unknown | cmangos/vmangos/mangoszero: set to 0x03 |
+| 0x0C | 4 / Little | u32 | experience_reward |  |
+| 0x10 | 4 / Little | Gold | money_reward |  |
+| 0x14 | 4 / Little | u32 | amount_of_item_rewards |  |
+| 0x18 | ? / - | [QuestItemReward](questitemreward.md)[amount_of_item_rewards] | item_rewards |  |
 
 ## Client Version 2.4.3
 
@@ -66,15 +66,15 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | 4 / Little | u32 | quest_id |  |  |
-| 0x08 | 4 / Little | u32 | unknown |  | cmangos/vmangos/mangoszero: set to 0x03 |
-| 0x0C | 4 / Little | u32 | experience_reward |  |  |
-| 0x10 | 4 / Little | Gold | money_reward |  |  |
-| 0x14 | 4 / Little | u32 | honor_reward |  |  |
-| 0x18 | 4 / Little | u32 | amount_of_item_rewards |  |  |
-| 0x1C | ? / - | [QuestItemReward](questitemreward.md)[amount_of_item_rewards] | item_rewards |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x04 | 4 / Little | u32 | quest_id |  |
+| 0x08 | 4 / Little | u32 | unknown | cmangos/vmangos/mangoszero: set to 0x03 |
+| 0x0C | 4 / Little | u32 | experience_reward |  |
+| 0x10 | 4 / Little | Gold | money_reward |  |
+| 0x14 | 4 / Little | u32 | honor_reward |  |
+| 0x18 | 4 / Little | u32 | amount_of_item_rewards |  |
+| 0x1C | ? / - | [QuestItemReward](questitemreward.md)[amount_of_item_rewards] | item_rewards |  |
 
 ## Client Version 3.3.5
 
@@ -107,15 +107,15 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | 4 / Little | u32 | quest_id |  |  |
-| - | 4 / Little | u32 | unknown |  | cmangos/vmangos/mangoszero: set to 0x03 |
-| - | 4 / Little | u32 | experience_reward |  |  |
-| - | 4 / Little | Gold | money_reward |  |  |
-| - | 4 / Little | u32 | honor_reward |  |  |
-| - | 4 / Little | u32 | talent_reward |  |  |
-| - | 4 / Little | u32 | arena_point_reward |  |  |
-| - | 4 / Little | u32 | amount_of_item_rewards |  |  |
-| - | ? / - | [QuestItemReward](questitemreward.md)[amount_of_item_rewards] | item_rewards |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| - | 4 / Little | u32 | quest_id |  |
+| - | 4 / Little | u32 | unknown | cmangos/vmangos/mangoszero: set to 0x03 |
+| - | 4 / Little | u32 | experience_reward |  |
+| - | 4 / Little | Gold | money_reward |  |
+| - | 4 / Little | u32 | honor_reward |  |
+| - | 4 / Little | u32 | talent_reward |  |
+| - | 4 / Little | u32 | arena_point_reward |  |
+| - | 4 / Little | u32 | amount_of_item_rewards |  |
+| - | ? / - | [QuestItemReward](questitemreward.md)[amount_of_item_rewards] | item_rewards |  |
 

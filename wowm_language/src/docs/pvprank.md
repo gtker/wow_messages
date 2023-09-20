@@ -33,28 +33,28 @@ enum PvpRank : u8 {
 ### Type
 The basic type is `u8`, a 1 byte (8 bit) integer.
 ### Enumerators
-| Enumerator | Value  | Description | Comment |
-| --------- | -------- | ----------- | ------- |
-| `NO_RANK` | 0 (0x00) |  |  |
-| `PARIAH` | 1 (0x01) |  |  |
-| `OUTLAW` | 2 (0x02) |  |  |
-| `EXILED` | 3 (0x03) |  |  |
-| `DISHONORED` | 4 (0x04) |  |  |
-| `RANK1` | 5 (0x05) |  | Alliance name: Private<br/>Horde name: Scout |
-| `RANK2` | 6 (0x06) |  | Alliance name: Corporal<br/>Horde name: Grunt |
-| `RANK3` | 7 (0x07) |  | Alliance name: Sergeant<br/>Horde name: Sergeant |
-| `RANK4` | 8 (0x08) |  | Alliance name: Master Sergeant<br/>Horde name: Senior Sergeatn |
-| `RANK5` | 9 (0x09) |  | Alliance name: Sergeant Major<br/>Horde name: First Sergeant |
-| `RANK6` | 10 (0x0A) |  | Alliance name: Knight<br/>Horde name: Stone Guard |
-| `RANK7` | 11 (0x0B) |  | Alliance name: Knight Lieutenant<br/>Horde name: Blood Guard |
-| `RANK8` | 12 (0x0C) |  | Alliance name: Knight Captain<br/>Horde name: Legionnare |
-| `RANK9` | 13 (0x0D) |  | Alliance name: Kngith Champion<br/>Horde name: Centurion |
-| `RANK10` | 14 (0x0E) |  | Alliance name: Liuetenant Commander<br/>Horde name: Champion |
-| `RANK11` | 15 (0x0F) |  | Alliance name: Commander<br/>Horde name: Lieutenant General |
-| `RANK12` | 16 (0x10) |  | Alliance name: Marshal<br/>Horde name: General |
-| `RANK13` | 17 (0x11) |  | Alliance name: Field Marshal<br/>Horde name: Warlord |
-| `RANK14` | 18 (0x12) |  | Alliance name: Grand Marshal<br/>Horde name: High Warlord |
-| `FACTION_LEADER` | 19 (0x13) |  |  |
+| Enumerator | Value  | Comment |
+| --------- | -------- | ------- |
+| `NO_RANK` | 0 (0x00) |  |
+| `PARIAH` | 1 (0x01) |  |
+| `OUTLAW` | 2 (0x02) |  |
+| `EXILED` | 3 (0x03) |  |
+| `DISHONORED` | 4 (0x04) |  |
+| `RANK1` | 5 (0x05) | Alliance name: Private<br/>Horde name: Scout |
+| `RANK2` | 6 (0x06) | Alliance name: Corporal<br/>Horde name: Grunt |
+| `RANK3` | 7 (0x07) | Alliance name: Sergeant<br/>Horde name: Sergeant |
+| `RANK4` | 8 (0x08) | Alliance name: Master Sergeant<br/>Horde name: Senior Sergeatn |
+| `RANK5` | 9 (0x09) | Alliance name: Sergeant Major<br/>Horde name: First Sergeant |
+| `RANK6` | 10 (0x0A) | Alliance name: Knight<br/>Horde name: Stone Guard |
+| `RANK7` | 11 (0x0B) | Alliance name: Knight Lieutenant<br/>Horde name: Blood Guard |
+| `RANK8` | 12 (0x0C) | Alliance name: Knight Captain<br/>Horde name: Legionnare |
+| `RANK9` | 13 (0x0D) | Alliance name: Kngith Champion<br/>Horde name: Centurion |
+| `RANK10` | 14 (0x0E) | Alliance name: Liuetenant Commander<br/>Horde name: Champion |
+| `RANK11` | 15 (0x0F) | Alliance name: Commander<br/>Horde name: Lieutenant General |
+| `RANK12` | 16 (0x10) | Alliance name: Marshal<br/>Horde name: General |
+| `RANK13` | 17 (0x11) | Alliance name: Field Marshal<br/>Horde name: Warlord |
+| `RANK14` | 18 (0x12) | Alliance name: Grand Marshal<br/>Horde name: High Warlord |
+| `FACTION_LEADER` | 19 (0x13) |  |
 
 Used in:
 * [BattlegroundPlayer](battlegroundplayer.md)

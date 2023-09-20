@@ -55,10 +55,10 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | 1 / - | [ChatType](chattype.md) | chat_type |  |  |
-| 0x05 | 4 / - | [Language](language.md) | language |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x04 | 1 / - | [ChatType](chattype.md) | chat_type |  |
+| 0x05 | 4 / - | [Language](language.md) | language |  |
 
 If chat_type is equal to `MONSTER_SAY` **or** 
 is equal to `MONSTER_PARTY` **or** 
@@ -68,37 +68,37 @@ is equal to `RAID_BOSS_WHISPER` **or**
 is equal to `RAID_BOSS_EMOTE` **or** 
 is equal to `MONSTER_EMOTE`:
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x09 | - / - | SizedCString | sender |  |  |
-| - | - / - | [NamedGuid](../types/packed-guid.md) | target1 |  |  |
-| - | - / - | SizedCString | message1 |  |  |
-| - | 1 / - | [PlayerChatTag](playerchattag.md) | chat_tag1 |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x09 | - / - | SizedCString | sender |  |
+| - | - / - | [NamedGuid](../types/packed-guid.md) | target1 |  |
+| - | - / - | SizedCString | message1 |  |
+| - | 1 / - | [PlayerChatTag](playerchattag.md) | chat_tag1 |  |
 
 Else If chat_type is equal to `BG_SYSTEM_NEUTRAL` **or** 
 is equal to `BG_SYSTEM_ALLIANCE` **or** 
 is equal to `BG_SYSTEM_HORDE`:
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | - / - | [NamedGuid](../types/packed-guid.md) | target2 |  |  |
-| - | - / - | SizedCString | message2 |  |  |
-| - | 1 / - | [PlayerChatTag](playerchattag.md) | chat_tag2 |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| - | - / - | [NamedGuid](../types/packed-guid.md) | target2 |  |
+| - | - / - | SizedCString | message2 |  |
+| - | 1 / - | [PlayerChatTag](playerchattag.md) | chat_tag2 |  |
 
 Else If chat_type is equal to `CHANNEL`:
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | - / - | CString | channel_name |  |  |
-| - | 8 / Little | [Guid](../types/packed-guid.md) | target4 |  |  |
-| - | - / - | SizedCString | message3 |  |  |
-| - | 1 / - | [PlayerChatTag](playerchattag.md) | chat_tag3 |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| - | - / - | CString | channel_name |  |
+| - | 8 / Little | [Guid](../types/packed-guid.md) | target4 |  |
+| - | - / - | SizedCString | message3 |  |
+| - | 1 / - | [PlayerChatTag](playerchattag.md) | chat_tag3 |  |
 
 Else: 
-| - | 8 / Little | [Guid](../types/packed-guid.md) | target5 |  |  |
-| - | - / - | SizedCString | message4 |  |  |
-| - | 1 / - | [PlayerChatTag](playerchattag.md) | chat_tag4 |  |  |
-| - | - / - | SizedCString | sender_name |  |  |
+| - | 8 / Little | [Guid](../types/packed-guid.md) | target5 |  |
+| - | - / - | SizedCString | message4 |  |
+| - | 1 / - | [PlayerChatTag](playerchattag.md) | chat_tag4 |  |
+| - | - / - | SizedCString | sender_name |  |
 
 ## Client Version 3.3.5
 
@@ -164,12 +164,12 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | 1 / - | [ChatType](chattype.md) | chat_type |  |  |
-| - | 4 / - | [Language](language.md) | language |  |  |
-| - | 8 / Little | [Guid](../types/packed-guid.md) | sender |  |  |
-| - | 4 / Little | u32 | flags |  | azerothcore sets to 0. |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| - | 1 / - | [ChatType](chattype.md) | chat_type |  |
+| - | 4 / - | [Language](language.md) | language |  |
+| - | 8 / Little | [Guid](../types/packed-guid.md) | sender |  |
+| - | 4 / Little | u32 | flags | azerothcore sets to 0. |
 
 If chat_type is equal to `MONSTER_SAY` **or** 
 is equal to `MONSTER_PARTY` **or** 
@@ -180,50 +180,50 @@ is equal to `RAID_BOSS_EMOTE` **or**
 is equal to `MONSTER_EMOTE` **or** 
 is equal to `BATTLENET`:
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | - / - | SizedCString | sender1 |  |  |
-| - | - / - | [NamedGuid](../types/packed-guid.md) | target1 |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| - | - / - | SizedCString | sender1 |  |
+| - | - / - | [NamedGuid](../types/packed-guid.md) | target1 |  |
 
 Else If chat_type is equal to `WHISPER_FOREIGN`:
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | - / - | SizedCString | sender2 |  |  |
-| - | 8 / Little | [Guid](../types/packed-guid.md) | target2 |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| - | - / - | SizedCString | sender2 |  |
+| - | 8 / Little | [Guid](../types/packed-guid.md) | target2 |  |
 
 Else If chat_type is equal to `BG_SYSTEM_NEUTRAL` **or** 
 is equal to `BG_SYSTEM_ALLIANCE` **or** 
 is equal to `BG_SYSTEM_HORDE`:
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | - / - | [NamedGuid](../types/packed-guid.md) | target3 |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| - | - / - | [NamedGuid](../types/packed-guid.md) | target3 |  |
 
 Else If chat_type is equal to `ACHIEVEMENT` **or** 
 is equal to `GUILD_ACHIEVEMENT`:
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | 8 / Little | [Guid](../types/packed-guid.md) | target4 |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| - | 8 / Little | [Guid](../types/packed-guid.md) | target4 |  |
 
 Else If chat_type is equal to `CHANNEL`:
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | - / - | CString | channel_name |  |  |
-| - | 8 / Little | [Guid](../types/packed-guid.md) | target5 |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| - | - / - | CString | channel_name |  |
+| - | 8 / Little | [Guid](../types/packed-guid.md) | target5 |  |
 
 Else: 
-| - | - / - | SizedCString | sender_name |  |  |
-| - | 8 / Little | [Guid](../types/packed-guid.md) | target6 |  |  |
-| - | - / - | SizedCString | message |  |  |
-| - | 1 / - | [PlayerChatTag](playerchattag.md) | chat_tag |  |  |
+| - | - / - | SizedCString | sender_name |  |
+| - | 8 / Little | [Guid](../types/packed-guid.md) | target6 |  |
+| - | - / - | SizedCString | message |  |
+| - | 1 / - | [PlayerChatTag](playerchattag.md) | chat_tag |  |
 
 If chat_type is equal to `ACHIEVEMENT` **or** 
 is equal to `GUILD_ACHIEVEMENT`:
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | 4 / Little | u32 | achievement_id |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| - | 4 / Little | u32 | achievement_id |  |
 

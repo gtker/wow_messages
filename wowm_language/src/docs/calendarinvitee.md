@@ -14,11 +14,11 @@ struct CalendarInvitee {
 ```
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x00 | - / - | [PackedGuid](../types/packed-guid.md) | guid |  |  |
-| - | 1 / - | u8 | status |  |  |
-| - | 1 / - | u8 | rank |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x00 | - / - | [PackedGuid](../types/packed-guid.md) | guid |  |
+| - | 1 / - | u8 | status |  |
+| - | 1 / - | u8 | rank |  |
 
 
 Used in:

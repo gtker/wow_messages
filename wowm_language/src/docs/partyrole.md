@@ -15,10 +15,10 @@ enum PartyRole : u8 {
 ### Type
 The basic type is `u8`, a 1 byte (8 bit) integer.
 ### Enumerators
-| Enumerator | Value  | Description | Comment |
-| --------- | -------- | ----------- | ------- |
-| `MAIN_TANK` | 0 (0x00) |  |  |
-| `ASSISTANT` | 1 (0x01) |  |  |
+| Enumerator | Value  | Comment |
+| --------- | -------- | ------- |
+| `MAIN_TANK` | 0 (0x00) |  |
+| `ASSISTANT` | 1 (0x01) |  |
 
 Used in:
 * [MSG_PARTY_ASSIGNMENT_Client](msg_party_assignment_client.md)

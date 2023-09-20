@@ -19,14 +19,14 @@ enum LfgType : u8 {
 ### Type
 The basic type is `u8`, a 1 byte (8 bit) integer.
 ### Enumerators
-| Enumerator | Value  | Description | Comment |
-| --------- | -------- | ----------- | ------- |
-| `NONE` | 0 (0x00) |  |  |
-| `DUNGEON` | 1 (0x01) |  |  |
-| `RAID` | 2 (0x02) |  |  |
-| `QUEST` | 3 (0x03) |  |  |
-| `ZONE` | 4 (0x04) |  |  |
-| `HEROIC_DUNGEON` | 5 (0x05) |  |  |
+| Enumerator | Value  | Comment |
+| --------- | -------- | ------- |
+| `NONE` | 0 (0x00) |  |
+| `DUNGEON` | 1 (0x01) |  |
+| `RAID` | 2 (0x02) |  |
+| `QUEST` | 3 (0x03) |  |
+| `ZONE` | 4 (0x04) |  |
+| `HEROIC_DUNGEON` | 5 (0x05) |  |
 
 Used in:
 * [LfgData](lfgdata.md)
@@ -52,14 +52,14 @@ enum LfgType : u8 {
 ### Type
 The basic type is `u8`, a 1 byte (8 bit) integer.
 ### Enumerators
-| Enumerator | Value  | Description | Comment |
-| --------- | -------- | ----------- | ------- |
-| `NONE` | 0 (0x00) |  |  |
-| `DUNGEON` | 1 (0x01) |  |  |
-| `RAID` | 2 (0x02) |  |  |
-| `ZONE` | 4 (0x04) |  |  |
-| `HEROIC` | 5 (0x05) |  |  |
-| `RANDOM` | 6 (0x06) |  |  |
+| Enumerator | Value  | Comment |
+| --------- | -------- | ------- |
+| `NONE` | 0 (0x00) |  |
+| `DUNGEON` | 1 (0x01) |  |
+| `RAID` | 2 (0x02) |  |
+| `ZONE` | 4 (0x04) |  |
+| `HEROIC` | 5 (0x05) |  |
+| `RANDOM` | 6 (0x06) |  |
 
 Used in:
 * [SMSG_UPDATE_LFG_LIST](smsg_update_lfg_list.md)

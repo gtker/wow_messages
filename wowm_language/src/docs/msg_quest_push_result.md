@@ -30,10 +30,10 @@ MSG have a header of either 6 bytes if they are sent from the client (CMSG), or 
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x00 | 8 / Little | [Guid](../types/packed-guid.md) | guid |  |  |
-| 0x08 | 1 / - | [QuestPartyMessage](questpartymessage.md) | message |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x00 | 8 / Little | [Guid](../types/packed-guid.md) | guid |  |
+| 0x08 | 1 / - | [QuestPartyMessage](questpartymessage.md) | message |  |
 
 ## Client Version 3.3.5
 
@@ -65,8 +65,8 @@ MSG have a header of either 6 bytes if they are sent from the client (CMSG), or 
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x00 | 8 / Little | [Guid](../types/packed-guid.md) | guid |  |  |
-| 0x08 | 1 / - | [QuestPartyMessage](questpartymessage.md) | message |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x00 | 8 / Little | [Guid](../types/packed-guid.md) | guid |  |
+| 0x08 | 1 / - | [QuestPartyMessage](questpartymessage.md) | message |  |
 

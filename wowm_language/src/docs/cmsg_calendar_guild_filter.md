@@ -25,9 +25,9 @@ CMSG have a header of 6 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x06 | 4 / Little | Level32 | minimum_level |  |  |
-| 0x0A | 4 / Little | Level32 | maximum_level |  |  |
-| 0x0E | 4 / Little | u32 | minimum_rank |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x06 | 4 / Little | Level32 | minimum_level |  |
+| 0x0A | 4 / Little | Level32 | maximum_level |  |
+| 0x0E | 4 / Little | u32 | minimum_rank |  |
 

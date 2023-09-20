@@ -24,10 +24,10 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | 4 / Little | u32 | amount_of_statuses |  |  |
-| 0x08 | ? / - | [QuestGiverStatusReport](questgiverstatusreport.md)[amount_of_statuses] | statuses |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x04 | 4 / Little | u32 | amount_of_statuses |  |
+| 0x08 | ? / - | [QuestGiverStatusReport](questgiverstatusreport.md)[amount_of_statuses] | statuses |  |
 
 ## Client Version 3.3.5
 
@@ -53,8 +53,8 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | 4 / Little | u32 | amount_of_statuses |  |  |
-| - | ? / - | [QuestGiverStatusReport](questgiverstatusreport.md)[amount_of_statuses] | statuses |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| - | 4 / Little | u32 | amount_of_statuses |  |
+| - | ? / - | [QuestGiverStatusReport](questgiverstatusreport.md)[amount_of_statuses] | statuses |  |
 

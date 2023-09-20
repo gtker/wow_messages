@@ -13,10 +13,10 @@ struct Vector2dUnsigned {
 ```
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x00 | 4 / Little | u32 | x |  |  |
-| 0x04 | 4 / Little | u32 | y |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x00 | 4 / Little | u32 | x |  |
+| 0x04 | 4 / Little | u32 | y |  |
 
 
 Used in:

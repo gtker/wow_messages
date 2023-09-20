@@ -17,12 +17,12 @@ enum TimerType : u32 {
 ### Type
 The basic type is `u32`, a 4 byte (32 bit) little endian integer.
 ### Enumerators
-| Enumerator | Value  | Description | Comment |
-| --------- | -------- | ----------- | ------- |
-| `FATIGUE` | 0 (0x00) |  |  |
-| `BREATH` | 1 (0x01) |  |  |
-| `FEIGN_DEATH` | 2 (0x02) |  |  |
-| `ENVIRONMENTAL` | 3 (0x03) |  | Might be a mangos only thing. |
+| Enumerator | Value  | Comment |
+| --------- | -------- | ------- |
+| `FATIGUE` | 0 (0x00) |  |
+| `BREATH` | 1 (0x01) |  |
+| `FEIGN_DEATH` | 2 (0x02) |  |
+| `ENVIRONMENTAL` | 3 (0x03) | Might be a mangos only thing. |
 
 Used in:
 * [SMSG_PAUSE_MIRROR_TIMER](smsg_pause_mirror_timer.md)

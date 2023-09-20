@@ -30,14 +30,14 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | 4 / Little | u32 | id |  |  |
-| - | - / - | CString | name |  |  |
-| - | ? / - | CString[10] | rank_names |  |  |
-| - | 4 / Little | u32 | emblem_style |  |  |
-| - | 4 / Little | u32 | emblem_color |  |  |
-| - | 4 / Little | u32 | border_style |  |  |
-| - | 4 / Little | u32 | border_color |  |  |
-| - | 4 / Little | u32 | background_color |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| - | 4 / Little | u32 | id |  |
+| - | - / - | CString | name |  |
+| - | ? / - | CString[10] | rank_names |  |
+| - | 4 / Little | u32 | emblem_style |  |
+| - | 4 / Little | u32 | emblem_color |  |
+| - | 4 / Little | u32 | border_style |  |
+| - | 4 / Little | u32 | border_color |  |
+| - | 4 / Little | u32 | background_color |  |
 

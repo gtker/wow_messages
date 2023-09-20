@@ -23,9 +23,9 @@ CMSG have a header of 6 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x06 | 8 / Little | [Guid](../types/packed-guid.md) | summoner |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x06 | 8 / Little | [Guid](../types/packed-guid.md) | summoner |  |
 
 ## Client Version 2.4.3, Client Version 3
 
@@ -51,8 +51,8 @@ CMSG have a header of 6 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x06 | 8 / Little | [Guid](../types/packed-guid.md) | summoner |  |  |
-| 0x0E | 1 / - | Bool | agree |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x06 | 8 / Little | [Guid](../types/packed-guid.md) | summoner |  |
+| 0x0E | 1 / - | Bool | agree |  |
 

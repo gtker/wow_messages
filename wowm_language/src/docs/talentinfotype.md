@@ -15,10 +15,10 @@ enum TalentInfoType : u8 {
 ### Type
 The basic type is `u8`, a 1 byte (8 bit) integer.
 ### Enumerators
-| Enumerator | Value  | Description | Comment |
-| --------- | -------- | ----------- | ------- |
-| `PLAYER` | 0 (0x00) |  |  |
-| `PET` | 1 (0x01) |  |  |
+| Enumerator | Value  | Comment |
+| --------- | -------- | ------- |
+| `PLAYER` | 0 (0x00) |  |
+| `PET` | 1 (0x01) |  |
 
 Used in:
 * [SMSG_TALENTS_INFO](smsg_talents_info.md)

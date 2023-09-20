@@ -24,10 +24,10 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | 1 / - | u8 | unknown |  | All emulators set to 0. |
-| 0x05 | 1 / - | [ComplainResultWindow](complainresultwindow.md) | window_result |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x04 | 1 / - | u8 | unknown | All emulators set to 0. |
+| 0x05 | 1 / - | [ComplainResultWindow](complainresultwindow.md) | window_result |  |
 
 ## Client Version 3.3.5
 
@@ -53,8 +53,8 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | 1 / - | u8 | unknown |  | All emulators set to 0. |
-| 0x05 | 1 / - | [ComplainResultWindow](complainresultwindow.md) | window_result |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x04 | 1 / - | u8 | unknown | All emulators set to 0. |
+| 0x05 | 1 / - | [ComplainResultWindow](complainresultwindow.md) | window_result |  |
 

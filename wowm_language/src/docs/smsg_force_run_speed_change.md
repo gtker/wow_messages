@@ -31,17 +31,17 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | - / - | [PackedGuid](../types/packed-guid.md) | guid |  |  |
-| - | 4 / Little | u32 | move_event |  | cmangos/mangoszero/vmangos: set to 0<br/>cmangos/mangoszero/vmangos: moveEvent, NUM_PMOVE_EVTS = 0x39 |
-| - | 4 / Little | f32 | speed |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x04 | - / - | [PackedGuid](../types/packed-guid.md) | guid |  |
+| - | 4 / Little | u32 | move_event | cmangos/mangoszero/vmangos: set to 0<br/>cmangos/mangoszero/vmangos: moveEvent, NUM_PMOVE_EVTS = 0x39 |
+| - | 4 / Little | f32 | speed |  |
 
 ### Examples
 
 #### Example 1
 
-##### Description
+##### Comment
 
 Force speed to 7
 
@@ -84,10 +84,10 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | - / - | [PackedGuid](../types/packed-guid.md) | guid |  |  |
-| - | 4 / Little | u32 | move_event |  | cmangos/mangoszero/vmangos: set to 0<br/>cmangos/mangoszero/vmangos: moveEvent, NUM_PMOVE_EVTS = 0x39 |
-| - | 1 / - | u8 | unknown |  | mangosone sets to 0<br/>mangosone: new 2.1.0 |
-| - | 4 / Little | f32 | speed |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| - | - / - | [PackedGuid](../types/packed-guid.md) | guid |  |
+| - | 4 / Little | u32 | move_event | cmangos/mangoszero/vmangos: set to 0<br/>cmangos/mangoszero/vmangos: moveEvent, NUM_PMOVE_EVTS = 0x39 |
+| - | 1 / - | u8 | unknown | mangosone sets to 0<br/>mangosone: new 2.1.0 |
+| - | 4 / Little | f32 | speed |  |
 

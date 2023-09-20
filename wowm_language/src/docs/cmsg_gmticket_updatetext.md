@@ -24,10 +24,10 @@ CMSG have a header of 6 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x06 | 1 / - | [GmTicketType](gmtickettype.md) | ticket_type |  | cmangos does not have this field, vmangos does. |
-| 0x07 | - / - | CString | message |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x06 | 1 / - | [GmTicketType](gmtickettype.md) | ticket_type | cmangos does not have this field, vmangos does. |
+| 0x07 | - / - | CString | message |  |
 
 ## Client Version 2, Client Version 3
 
@@ -54,7 +54,7 @@ CMSG have a header of 6 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x06 | - / - | CString | message |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x06 | - / - | CString | message |  |
 

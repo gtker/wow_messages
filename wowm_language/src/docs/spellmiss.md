@@ -13,10 +13,10 @@ struct SpellMiss {
 ```
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x00 | 8 / Little | [Guid](../types/packed-guid.md) | target |  |  |
-| 0x08 | 4 / - | [SpellMissInfo](spellmissinfo.md) | miss_info |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x00 | 8 / Little | [Guid](../types/packed-guid.md) | target |  |
+| 0x08 | 4 / - | [SpellMissInfo](spellmissinfo.md) | miss_info |  |
 
 
 Used in:
@@ -38,16 +38,16 @@ struct SpellMiss {
 ```
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x00 | 8 / Little | [Guid](../types/packed-guid.md) | target |  |  |
-| 0x08 | 4 / - | [SpellMissInfo](spellmissinfo.md) | miss_info |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x00 | 8 / Little | [Guid](../types/packed-guid.md) | target |  |
+| 0x08 | 4 / - | [SpellMissInfo](spellmissinfo.md) | miss_info |  |
 
 If miss_info is equal to `REFLECT`:
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x0C | 1 / - | u8 | reflect_result |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x0C | 1 / - | u8 | reflect_result |  |
 
 
 Used in:

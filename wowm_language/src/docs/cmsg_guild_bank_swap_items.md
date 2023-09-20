@@ -52,44 +52,44 @@ CMSG have a header of 6 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x06 | 8 / Little | [Guid](../types/packed-guid.md) | bank |  |  |
-| 0x0E | 1 / - | [BankSwapSource](bankswapsource.md) | source |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x06 | 8 / Little | [Guid](../types/packed-guid.md) | bank |  |
+| 0x0E | 1 / - | [BankSwapSource](bankswapsource.md) | source |  |
 
 If source is equal to `BANK`:
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x0F | 1 / - | u8 | bank_destination_tab |  |  |
-| 0x10 | 1 / - | u8 | bank_destination_slot |  |  |
-| 0x11 | 4 / Little | u32 | unknown1 |  |  |
-| 0x15 | 1 / - | u8 | bank_source_tab |  |  |
-| 0x16 | 1 / - | u8 | bank_source_slot |  |  |
-| 0x17 | 4 / Little | u32 | item1 |  |  |
-| 0x1B | 1 / - | u8 | unknown2 |  |  |
-| 0x1C | 1 / - | u8 | amount |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x0F | 1 / - | u8 | bank_destination_tab |  |
+| 0x10 | 1 / - | u8 | bank_destination_slot |  |
+| 0x11 | 4 / Little | u32 | unknown1 |  |
+| 0x15 | 1 / - | u8 | bank_source_tab |  |
+| 0x16 | 1 / - | u8 | bank_source_slot |  |
+| 0x17 | 4 / Little | u32 | item1 |  |
+| 0x1B | 1 / - | u8 | unknown2 |  |
+| 0x1C | 1 / - | u8 | amount |  |
 
 Else: 
-| 0x1D | 1 / - | u8 | bank_tab |  |  |
-| 0x1E | 1 / - | u8 | bank_slot |  |  |
-| 0x1F | 4 / Little | u32 | item2 |  |  |
-| 0x23 | 1 / - | [BankSwapStoreMode](bankswapstoremode.md) | mode |  |  |
+| 0x1D | 1 / - | u8 | bank_tab |  |
+| 0x1E | 1 / - | u8 | bank_slot |  |
+| 0x1F | 4 / Little | u32 | item2 |  |
+| 0x23 | 1 / - | [BankSwapStoreMode](bankswapstoremode.md) | mode |  |
 
 If mode is equal to `AUTOMATIC`:
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x24 | 4 / Little | u32 | auto_count |  |  |
-| 0x28 | 1 / - | u8 | unknown3 |  |  |
-| 0x29 | 1 / - | u8 | unknown4 |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x24 | 4 / Little | u32 | auto_count |  |
+| 0x28 | 1 / - | u8 | unknown3 |  |
+| 0x29 | 1 / - | u8 | unknown4 |  |
 
 Else: 
-| 0x2A | 1 / - | u8 | player_bag |  |  |
-| 0x2B | 1 / - | u8 | player_bag_slot |  |  |
-| 0x2C | 1 / - | Bool | bank_to_character_transfer |  |  |
-| 0x2D | 1 / - | u8 | split_amount |  |  |
-| 0x2E | ? / - | u8[-] | unknown5 |  | cmangos-tbc/mangosone has extra |
+| 0x2A | 1 / - | u8 | player_bag |  |
+| 0x2B | 1 / - | u8 | player_bag_slot |  |
+| 0x2C | 1 / - | Bool | bank_to_character_transfer |  |
+| 0x2D | 1 / - | u8 | split_amount |  |
+| 0x2E | ? / - | u8[-] | unknown5 | cmangos-tbc/mangosone has extra |
 
 ## Client Version 3.3.5
 
@@ -143,42 +143,42 @@ CMSG have a header of 6 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x06 | 8 / Little | [Guid](../types/packed-guid.md) | bank |  |  |
-| 0x0E | 1 / - | [BankSwapSource](bankswapsource.md) | source |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x06 | 8 / Little | [Guid](../types/packed-guid.md) | bank |  |
+| 0x0E | 1 / - | [BankSwapSource](bankswapsource.md) | source |  |
 
 If source is equal to `BANK`:
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x0F | 1 / - | u8 | bank_destination_tab |  |  |
-| 0x10 | 1 / - | u8 | bank_destination_slot |  |  |
-| 0x11 | 4 / Little | u32 | unknown1 |  |  |
-| 0x15 | 1 / - | u8 | bank_source_tab |  |  |
-| 0x16 | 1 / - | u8 | bank_source_slot |  |  |
-| 0x17 | 4 / Little | u32 | item1 |  |  |
-| 0x1B | 1 / - | u8 | unknown2 |  |  |
-| 0x1C | 4 / Little | u32 | amount |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x0F | 1 / - | u8 | bank_destination_tab |  |
+| 0x10 | 1 / - | u8 | bank_destination_slot |  |
+| 0x11 | 4 / Little | u32 | unknown1 |  |
+| 0x15 | 1 / - | u8 | bank_source_tab |  |
+| 0x16 | 1 / - | u8 | bank_source_slot |  |
+| 0x17 | 4 / Little | u32 | item1 |  |
+| 0x1B | 1 / - | u8 | unknown2 |  |
+| 0x1C | 4 / Little | u32 | amount |  |
 
 Else: 
-| 0x20 | 1 / - | u8 | bank_tab |  |  |
-| 0x21 | 1 / - | u8 | bank_slot |  |  |
-| 0x22 | 4 / Little | u32 | item2 |  |  |
-| 0x26 | 1 / - | [BankSwapStoreMode](bankswapstoremode.md) | mode |  |  |
+| 0x20 | 1 / - | u8 | bank_tab |  |
+| 0x21 | 1 / - | u8 | bank_slot |  |
+| 0x22 | 4 / Little | u32 | item2 |  |
+| 0x26 | 1 / - | [BankSwapStoreMode](bankswapstoremode.md) | mode |  |
 
 If mode is equal to `AUTOMATIC`:
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x27 | 4 / Little | u32 | auto_count |  |  |
-| 0x2B | 1 / - | u8 | unknown3 |  |  |
-| 0x2C | 4 / Little | u32 | unknown4 |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x27 | 4 / Little | u32 | auto_count |  |
+| 0x2B | 1 / - | u8 | unknown3 |  |
+| 0x2C | 4 / Little | u32 | unknown4 |  |
 
 Else: 
-| 0x30 | 1 / - | u8 | player_bag |  |  |
-| 0x31 | 1 / - | u8 | player_bag_slot |  |  |
-| 0x32 | 1 / - | Bool | bank_to_character_transfer |  |  |
-| 0x33 | 4 / Little | u32 | split_amount |  |  |
-| 0x37 | ? / - | u8[-] | unknown5 |  | cmangos-tbc/mangosone has extra |
+| 0x30 | 1 / - | u8 | player_bag |  |
+| 0x31 | 1 / - | u8 | player_bag_slot |  |
+| 0x32 | 1 / - | Bool | bank_to_character_transfer |  |
+| 0x33 | 4 / Little | u32 | split_amount |  |
+| 0x37 | ? / - | u8[-] | unknown5 | cmangos-tbc/mangosone has extra |
 

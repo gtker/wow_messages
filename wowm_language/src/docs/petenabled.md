@@ -15,10 +15,10 @@ enum PetEnabled : u8 {
 ### Type
 The basic type is `u8`, a 1 byte (8 bit) integer.
 ### Enumerators
-| Enumerator | Value  | Description | Comment |
-| --------- | -------- | ----------- | ------- |
-| `ENABLED` | 8 (0x08) |  |  |
-| `DISABLED` | 0 (0x00) |  |  |
+| Enumerator | Value  | Comment |
+| --------- | -------- | ------- |
+| `ENABLED` | 8 (0x08) |  |
+| `DISABLED` | 0 (0x00) |  |
 
 Used in:
 * [SMSG_PET_MODE](smsg_pet_mode.md)

@@ -1,237 +1,237 @@
 enum WorldResult : u8 {
     RESPONSE_SUCCESS = 0x00 {
-        description = "Shows `Success` with `Okay` button.";
+        comment = "Shows `Success` with `Okay` button.";
     }
     RESPONSE_FAILURE = 0x01 {
-        description = "Shows `Failure` with `Okay` button.";
+        comment = "Shows `Failure` with `Okay` button.";
     }
     RESPONSE_CANCELLED = 0x02 {
-        description = "Shows `Cancelled` with `Okay` button.";
+        comment = "Shows `Cancelled` with `Okay` button.";
     }
     RESPONSE_DISCONNECTED = 0x03 {
-        description = "Shows `Disconnected from server` with `Okay` button.";
+        comment = "Shows `Disconnected from server` with `Okay` button.";
     }
     RESPONSE_FAILED_TO_CONNECT = 0x04 {
-        description = "Shows `Failed to connect. Please be sure that your computer is currently connected to the internet, and that no security features on your system might be blocking traffic. See www.wow-europe.com/en/support for more information.` with `Okay` button.";
+        comment = "Shows `Failed to connect. Please be sure that your computer is currently connected to the internet, and that no security features on your system might be blocking traffic. See www.wow-europe.com/en/support for more information.` with `Okay` button.";
     }
     RESPONSE_CONNECTED = 0x05 {
-        description = "Shows `Connected` with `Okay` button.";
+        comment = "Shows `Connected` with `Okay` button.";
     }
     RESPONSE_VERSION_MISMATCH = 0x06 {
-        description = "Shows `Wrong client version` with `Okay` button.";
+        comment = "Shows `Wrong client version` with `Okay` button.";
     }
     CSTATUS_CONNECTING = 0x07 {
-        description = "Shows `Connecting to server...` with `Okay` button.";
+        comment = "Shows `Connecting to server...` with `Okay` button.";
     }
     CSTATUS_NEGOTIATING_SECURITY = 0x08 {
-        description = "Shows `Negotiating security` with `Okay` button.";
+        comment = "Shows `Negotiating security` with `Okay` button.";
     }
     CSTATUS_NEGOTIATION_COMPLETE = 0x09 {
-        description = "Shows `Security negotiation complete` with `Okay` button.";
+        comment = "Shows `Security negotiation complete` with `Okay` button.";
     }
     CSTATUS_NEGOTIATION_FAILED = 0x0A {
-        description = "Shows `Security negotiation failed` with `Okay` button.";
+        comment = "Shows `Security negotiation failed` with `Okay` button.";
     }
     CSTATUS_AUTHENTICATING = 0x0B {
-        description = "Shows `Authenticating` with `Okay` button.";
+        comment = "Shows `Authenticating` with `Okay` button.";
     }
     AUTH_OK = 0x0C {
-        description = "Shows `Authentication Successful` with `Okay` button.";
+        comment = "Shows `Authentication Successful` with `Okay` button.";
     }
     AUTH_FAILED = 0x0D {
-        description = "Shows `Authentication failed` with `Okay` button.";
+        comment = "Shows `Authentication failed` with `Okay` button.";
     }
     AUTH_REJECT = 0x0E {
-        description = "Shows `Login unavailable - Please contact Technical Support at http://www.wow-europe.com/en/support/` with `Okay` button.";
+        comment = "Shows `Login unavailable - Please contact Technical Support at http://www.wow-europe.com/en/support/` with `Okay` button.";
     }
     AUTH_BAD_SERVER_PROOF = 0x0F {
-        description = "Shows `Server is not valid` with `Okay` button.";
+        comment = "Shows `Server is not valid` with `Okay` button.";
     }
     AUTH_UNAVAILABLE = 0x10 {
-        description = "Shows `System unavailable - Please try again later` with `Okay` button.";
+        comment = "Shows `System unavailable - Please try again later` with `Okay` button.";
     }
     AUTH_SYSTEM_ERROR = 0x11; 
     AUTH_BILLING_ERROR = 0x12 {
-        description = "Shows `Billing system error` with `Okay` button.";
+        comment = "Shows `Billing system error` with `Okay` button.";
     }
     AUTH_BILLING_EXPIRED = 0x13 {
-        description = "Shows `Account billing has expired` with `Okay` button.";
+        comment = "Shows `Account billing has expired` with `Okay` button.";
     }
     AUTH_VERSION_MISMATCH = 0x14 {
-        description = "Shows `Wrong client version` with `Okay` button.";
+        comment = "Shows `Wrong client version` with `Okay` button.";
     }
     AUTH_UNKNOWN_ACCOUNT = 0x15 {
-        description = "Shows `Unknown account` with `Okay` button.";
+        comment = "Shows `Unknown account` with `Okay` button.";
     }
     AUTH_INCORRECT_PASSWORD = 0x16 {
-        description = "Shows `Incorrect Password` with `Okay` button.";
+        comment = "Shows `Incorrect Password` with `Okay` button.";
     }
     AUTH_SESSION_EXPIRED = 0x17 {
-        description = "Shows `Session Expired` with `Okay` button.";
+        comment = "Shows `Session Expired` with `Okay` button.";
     }
     AUTH_SERVER_SHUTTING_DOWN = 0x18;
     AUTH_ALREADY_LOGGING_IN = 0x19 {
-        description = "Shows `Already Logging In` with `Okay` button.";
+        comment = "Shows `Already Logging In` with `Okay` button.";
     }
     AUTH_LOGIN_SERVER_NOT_FOUND = 0x1A {
-        description = "Shows `Invalid Login Server` with `Okay` button.";
+        comment = "Shows `Invalid Login Server` with `Okay` button.";
     }
     AUTH_WAIT_QUEUE = 0x1B {
         comment = "If this is sent without a `queue_position` field it will either reuse the one from before or use 0.";
     }
     AUTH_BANNED = 0x1C {
-        description = "Shows `This account has been banned for violating the Terms of Use Agreement- http://www.wow-europe.com/en/lega. Please contact our GM department at http://www.wow-europe.com/en/support/ for more information.` with `Okay` button.";
+        comment = "Shows `This account has been banned for violating the Terms of Use Agreement- http://www.wow-europe.com/en/lega. Please contact our GM department at http://www.wow-europe.com/en/support/ for more information.` with `Okay` button.";
     }
     AUTH_ALREADY_ONLINE = 0x1D {
-        description = "Shows `This character is still logged on. If this character is not logged in and you continue to experience this issue for more than 15 minutes, please contact our Technical Support Department at http://www.wow-europe.com/en/support/` with `Okay` button.";
+        comment = "Shows `This character is still logged on. If this character is not logged in and you continue to experience this issue for more than 15 minutes, please contact our Technical Support Department at http://www.wow-europe.com/en/support/` with `Okay` button.";
     }
     AUTH_NO_TIME = 0x1E {
-        description = "Shows `Your World of Warcraft subscription has expired. You will need to reactivate your account. To do so, please visit http://signup.wow-europe.com/ for more information.` with `Okay` button.";
+        comment = "Shows `Your World of Warcraft subscription has expired. You will need to reactivate your account. To do so, please visit http://signup.wow-europe.com/ for more information.` with `Okay` button.";
     }
     AUTH_DB_BUSY = 0x1F {
-        description = "Shows `This session has timed out. Please try again at a later time or check the status of our WoW realms at http://www.wow-europe.com/en/serverstatus` with `Okay` button.";
+        comment = "Shows `This session has timed out. Please try again at a later time or check the status of our WoW realms at http://www.wow-europe.com/en/serverstatus` with `Okay` button.";
     }
     AUTH_SUSPENDED = 0x20 {
-        description = "Shows 'This account has been temporarily suspended for violating the Terms of Use Agreement - `http://www.wow-europe.com/en/legal`. Please contact our GM department at `http://www.wow-europe.com/en/support/` for more information.' with 'Okay' button.";
+        comment = "Shows 'This account has been temporarily suspended for violating the Terms of Use Agreement - `http://www.wow-europe.com/en/legal`. Please contact our GM department at `http://www.wow-europe.com/en/support/` for more information.' with 'Okay' button.";
     }
     AUTH_PARENTAL_CONTROL = 0x21 {
-        description = "Shows 'Access to this account has been blocked by parental controls. Your settings may be changed in your preferences at `http://www.worldofwarcraft.com`.' with 'Okay' button.";
+        comment = "Shows 'Access to this account has been blocked by parental controls. Your settings may be changed in your preferences at `http://www.worldofwarcraft.com`.' with 'Okay' button.";
     }
     REALM_LIST_IN_PROGRESS = 0x22 {
-        description = "Shows 'Retrieving realm list' with 'Okay' button.";
+        comment = "Shows 'Retrieving realm list' with 'Okay' button.";
     }
     REALM_LIST_SUCCESS = 0x23 {
-        description = "Shows 'Realm list retrieved' with 'Okay' button.";
+        comment = "Shows 'Realm list retrieved' with 'Okay' button.";
     }
     REALM_LIST_FAILED = 0x24 {
-        description = "Shows 'Unable to connect to realm list server' with 'Okay' button.";
+        comment = "Shows 'Unable to connect to realm list server' with 'Okay' button.";
     }
     REALM_LIST_INVALID = 0x25 {
-        description = "Shows 'Invalid realm list' with 'Okay' button.";
+        comment = "Shows 'Invalid realm list' with 'Okay' button.";
     }
     REALM_LIST_REALM_NOT_FOUND = 0x26 {
-        description = "Shows 'The game server you have chosen is currently down. Use the Change Realm button to choose another Realm. Check `http://www.wow-europe.com/en/serverstatus` for current server status.' with 'Okay' button.";
+        comment = "Shows 'The game server you have chosen is currently down. Use the Change Realm button to choose another Realm. Check `http://www.wow-europe.com/en/serverstatus` for current server status.' with 'Okay' button.";
     }
     ACCOUNT_CREATE_IN_PROGRESS = 0x27 {
-        description = "Shows 'Creating account' with 'Okay' button.";
+        comment = "Shows 'Creating account' with 'Okay' button.";
     }
     ACCOUNT_CREATE_SUCCESS = 0x28 {
-        description = "Shows 'Account created' with 'Okay' button.";
+        comment = "Shows 'Account created' with 'Okay' button.";
     }
     ACCOUNT_CREATE_FAILED = 0x29 {
-        description = "Shows 'Account creation failed' with 'Okay' button.";
+        comment = "Shows 'Account creation failed' with 'Okay' button.";
     }
     CHAR_LIST_RETRIEVING = 0x2A {
-        description = "Shows 'Retrieving character list' with 'Okay' button.";
+        comment = "Shows 'Retrieving character list' with 'Okay' button.";
     }
     CHAR_LIST_RETRIEVED = 0x2B {
-        description = "Shows 'Character list retrieved' with 'Okay' button.";
+        comment = "Shows 'Character list retrieved' with 'Okay' button.";
     }
     CHAR_LIST_FAILED = 0x2C {
-        description = "Shows 'Error retrieving character list' with 'Okay' button.";
+        comment = "Shows 'Error retrieving character list' with 'Okay' button.";
     }
     CHAR_CREATE_IN_PROGRESS = 0x2D {
-        description = "Shows 'Creating character' with 'Okay' button.";
+        comment = "Shows 'Creating character' with 'Okay' button.";
     }
     CHAR_CREATE_SUCCESS = 0x2E;
     CHAR_CREATE_ERROR = 0x2F;
     CHAR_CREATE_FAILED = 0x30 {
-        description = "Shows 'Character creation failed' with 'Okay' button.";
+        comment = "Shows 'Character creation failed' with 'Okay' button.";
     }
     CHAR_CREATE_NAME_IN_USE = 0x31 {
-        description = "Shows 'That name is unavailable' with 'Okay' button.";
+        comment = "Shows 'That name is unavailable' with 'Okay' button.";
     }
     CHAR_CREATE_DISABLED = 0x32 {
-        description = "Shows 'Creation of that race and/or class is currently disabled.' with 'Okay' button.";
+        comment = "Shows 'Creation of that race and/or class is currently disabled.' with 'Okay' button.";
     }
     CHAR_CREATE_PVP_TEAMS_VIOLATION = 0x33 {
-        description = "Shows 'You cannot have both a Horde and an Alliance character on the same PvP realm' with 'Okay' button.";
+        comment = "Shows 'You cannot have both a Horde and an Alliance character on the same PvP realm' with 'Okay' button.";
     }
     CHAR_CREATE_SERVER_LIMIT = 0x34;
     CHAR_CREATE_ACCOUNT_LIMIT = 0x35 {
-        description = "Shows 'You already have the maximum number of characters allowed on this account.' with 'Okay' button.";
+        comment = "Shows 'You already have the maximum number of characters allowed on this account.' with 'Okay' button.";
     }
     CHAR_CREATE_SERVER_QUEUE = 0x36;
     CHAR_CREATE_ONLY_EXISTING = 0x37 {
-        description = "Shows 'Only players who already have characters on this realm are currently allowed to create characters.' with 'Okay' button.";
+        comment = "Shows 'Only players who already have characters on this realm are currently allowed to create characters.' with 'Okay' button.";
     }
     CHAR_DELETE_IN_PROGRESS = 0x38 {
-        description = "Shows 'Deleting character' with 'Okay' button.";
+        comment = "Shows 'Deleting character' with 'Okay' button.";
     }
     CHAR_DELETE_SUCCESS = 0x39 {
-        description = "Shows 'Character deleted' with 'Okay' button.";
+        comment = "Shows 'Character deleted' with 'Okay' button.";
     }
     CHAR_DELETE_FAILED = 0x3A {
-        description = "Shows 'Character deletion failed' with 'Okay' button.";
+        comment = "Shows 'Character deletion failed' with 'Okay' button.";
     }
     CHAR_DELETE_FAILED_LOCKED_FOR_TRANSFER = 0x3B {
-        description = "Shows 'Your character is currently locked as part of the paid character transfer process.' with 'Okay' button.";
+        comment = "Shows 'Your character is currently locked as part of the paid character transfer process.' with 'Okay' button.";
     }
     CHAR_LOGIN_IN_PROGRESS = 0x3C {
-        description = "Shows 'Entering the World of Warcraft' with 'Okay' button.";
+        comment = "Shows 'Entering the World of Warcraft' with 'Okay' button.";
     }
     CHAR_LOGIN_SUCCESS = 0x3D {
-        description = "Shows 'Login successful' with 'Okay' button.";
+        comment = "Shows 'Login successful' with 'Okay' button.";
     }
     CHAR_LOGIN_NO_WORLD = 0x3E {
-        description = "Shows 'World server is down' with 'Okay' button.";
+        comment = "Shows 'World server is down' with 'Okay' button.";
     }
     CHAR_LOGIN_DUPLICATE_CHARACTER = 0x3F {
-        description = "Shows 'A character with that name already exists' with 'Okay' button.";
+        comment = "Shows 'A character with that name already exists' with 'Okay' button.";
     }
     CHAR_LOGIN_NO_INSTANCES = 0x40 {
-        description = "Shows 'No instance servers are available' with 'Okay' button.";
+        comment = "Shows 'No instance servers are available' with 'Okay' button.";
     }
     CHAR_LOGIN_FAILED = 0x41 {
-        description = "Shows 'Login failed' with 'Okay' button.";
+        comment = "Shows 'Login failed' with 'Okay' button.";
     }
     CHAR_LOGIN_DISABLED = 0x42 {
-        description = "Shows 'Login for that race, class or character is currently disabled.' with 'Okay' button.";
+        comment = "Shows 'Login for that race, class or character is currently disabled.' with 'Okay' button.";
     }
     CHAR_LOGIN_NO_CHARACTER = 0x43 {
-        description = "Shows 'Character not found' with 'Okay' button.";
+        comment = "Shows 'Character not found' with 'Okay' button.";
     }
     CHAR_LOGIN_LOCKED_FOR_TRANSFER = 0x44 {
-        description = "Shows 'Your character is currently locked as part of the paid character transfer process.' with 'Okay' button.";
+        comment = "Shows 'Your character is currently locked as part of the paid character transfer process.' with 'Okay' button.";
     }
     CHAR_NAME_NO_NAME = 0x45 {
-        description = "Shows 'Enter a name for your character' with 'Okay' button.";
+        comment = "Shows 'Enter a name for your character' with 'Okay' button.";
     }
     CHAR_NAME_TOO_SHORT = 0x46 {
-        description = "Shows 'Names must be at least 2 characters' with 'Okay' button.";
+        comment = "Shows 'Names must be at least 2 characters' with 'Okay' button.";
     }
     CHAR_NAME_TOO_LONG = 0x47 {
-        description = "Shows 'Names must be no more than 12 characters' with 'Okay' button.";
+        comment = "Shows 'Names must be no more than 12 characters' with 'Okay' button.";
     }
     CHAR_NAME_ONLY_LETTERS = 0x48 {
-        description = "Shows 'Names can only contain letters' with 'Okay' button.";
+        comment = "Shows 'Names can only contain letters' with 'Okay' button.";
     }
     CHAR_NAME_MIXED_LANGUAGES = 0x49 {
-        description = "Shows 'Names must contain only one language' with 'Okay' button.";
+        comment = "Shows 'Names must contain only one language' with 'Okay' button.";
     }
     CHAR_NAME_PROFANE = 0x4A {
-        description = "Shows 'That name contains profanity' with 'Okay' button.";
+        comment = "Shows 'That name contains profanity' with 'Okay' button.";
     }
     CHAR_NAME_RESERVED = 0x4B {
-        description = "Shows 'That name is unavailable' with 'Okay' button.";
+        comment = "Shows 'That name is unavailable' with 'Okay' button.";
     }
     CHAR_NAME_INVALID_APOSTROPHE = 0x4C {
-        description = "Shows 'You cannot use an apostrophe as the first or last character of your name' with 'Okay' button.";
+        comment = "Shows 'You cannot use an apostrophe as the first or last character of your name' with 'Okay' button.";
     }
     CHAR_NAME_MULTIPLE_APOSTROPHES = 0x4D {
-        description = "Shows 'You can only have one apostrophe' with 'Okay' button.";
+        comment = "Shows 'You can only have one apostrophe' with 'Okay' button.";
     }
     CHAR_NAME_THREE_CONSECUTIVE = 0x4E {
-        description = "Shows 'You cannot use the same letter three times consecutively' with 'Okay' button.";
+        comment = "Shows 'You cannot use the same letter three times consecutively' with 'Okay' button.";
     }
     CHAR_NAME_INVALID_SPACE = 0x4F {
-        description = "Shows 'You cannot use a space as the first or last character of your name' with 'Okay' button.";
+        comment = "Shows 'You cannot use a space as the first or last character of your name' with 'Okay' button.";
     }
     CHAR_NAME_SUCCESS = 0x50 {
-        description = "Shows an empty box with 'Okay' button.";
+        comment = "Shows an empty box with 'Okay' button.";
     }
     CHAR_NAME_FAILURE = 0x51 {
-        description = "Shows 'Invalid character name' with 'Okay' button.";
+        comment = "Shows 'Invalid character name' with 'Okay' button.";
     }
 } {
     versions = "1";

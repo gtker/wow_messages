@@ -42,69 +42,69 @@ struct SpellCastTargets {
 ```
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x00 | 2 / - | [SpellCastTargetFlags](spellcasttargetflags.md) | target_flags |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x00 | 2 / - | [SpellCastTargetFlags](spellcasttargetflags.md) | target_flags |  |
 
 If target_flags contains `UNIT`:
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x02 | - / - | [PackedGuid](../types/packed-guid.md) | unit_target |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x02 | - / - | [PackedGuid](../types/packed-guid.md) | unit_target |  |
 
 If target_flags contains `GAMEOBJECT`:
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | - / - | [PackedGuid](../types/packed-guid.md) | gameobject |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| - | - / - | [PackedGuid](../types/packed-guid.md) | gameobject |  |
 
 Else If target_flags contains `OBJECT_UNK`:
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | - / - | [PackedGuid](../types/packed-guid.md) | object_unk |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| - | - / - | [PackedGuid](../types/packed-guid.md) | object_unk |  |
 
 If target_flags contains `ITEM`:
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | - / - | [PackedGuid](../types/packed-guid.md) | item |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| - | - / - | [PackedGuid](../types/packed-guid.md) | item |  |
 
 Else If target_flags contains `TRADE_ITEM`:
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | - / - | [PackedGuid](../types/packed-guid.md) | trade_item |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| - | - / - | [PackedGuid](../types/packed-guid.md) | trade_item |  |
 
 If target_flags contains `SOURCE_LOCATION`:
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | 12 / - | [Vector3d](vector3d.md) | source |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| - | 12 / - | [Vector3d](vector3d.md) | source |  |
 
 If target_flags contains `DEST_LOCATION`:
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | 12 / - | [Vector3d](vector3d.md) | destination |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| - | 12 / - | [Vector3d](vector3d.md) | destination |  |
 
 If target_flags contains `STRING`:
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | - / - | CString | target_string |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| - | - / - | CString | target_string |  |
 
 If target_flags contains `CORPSE`:
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | - / - | [PackedGuid](../types/packed-guid.md) | corpse |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| - | - / - | [PackedGuid](../types/packed-guid.md) | corpse |  |
 
 Else If target_flags contains `PVP_CORPSE`:
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | - / - | [PackedGuid](../types/packed-guid.md) | pvp_corpse |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| - | - / - | [PackedGuid](../types/packed-guid.md) | pvp_corpse |  |
 
 
 Used in:
@@ -162,81 +162,81 @@ struct SpellCastTargets {
 ```
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x00 | 4 / - | [SpellCastTargetFlags](spellcasttargetflags.md) | target_flags |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x00 | 4 / - | [SpellCastTargetFlags](spellcasttargetflags.md) | target_flags |  |
 
 If target_flags contains `UNIT`:
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | - / - | [PackedGuid](../types/packed-guid.md) | unit_target |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x04 | - / - | [PackedGuid](../types/packed-guid.md) | unit_target |  |
 
 Else If target_flags contains `UNIT_MINIPET`:
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | - / - | [PackedGuid](../types/packed-guid.md) | unit_minipet |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| - | - / - | [PackedGuid](../types/packed-guid.md) | unit_minipet |  |
 
 Else If target_flags contains `UNIT_ENEMY`:
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | - / - | [PackedGuid](../types/packed-guid.md) | unit_enemy |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| - | - / - | [PackedGuid](../types/packed-guid.md) | unit_enemy |  |
 
 If target_flags contains `GAMEOBJECT`:
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | - / - | [PackedGuid](../types/packed-guid.md) | gameobject |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| - | - / - | [PackedGuid](../types/packed-guid.md) | gameobject |  |
 
 Else If target_flags contains `LOCKED`:
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | - / - | [PackedGuid](../types/packed-guid.md) | locked |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| - | - / - | [PackedGuid](../types/packed-guid.md) | locked |  |
 
 If target_flags contains `ITEM`:
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | - / - | [PackedGuid](../types/packed-guid.md) | item |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| - | - / - | [PackedGuid](../types/packed-guid.md) | item |  |
 
 Else If target_flags contains `TRADE_ITEM`:
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | - / - | [PackedGuid](../types/packed-guid.md) | trade_item |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| - | - / - | [PackedGuid](../types/packed-guid.md) | trade_item |  |
 
 If target_flags contains `SOURCE_LOCATION`:
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | 12 / - | [Vector3d](vector3d.md) | source |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| - | 12 / - | [Vector3d](vector3d.md) | source |  |
 
 If target_flags contains `DEST_LOCATION`:
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | 12 / - | [Vector3d](vector3d.md) | destination |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| - | 12 / - | [Vector3d](vector3d.md) | destination |  |
 
 If target_flags contains `STRING`:
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | - / - | CString | target_string |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| - | - / - | CString | target_string |  |
 
 If target_flags contains `CORPSE_ALLY`:
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | - / - | [PackedGuid](../types/packed-guid.md) | corpse_ally |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| - | - / - | [PackedGuid](../types/packed-guid.md) | corpse_ally |  |
 
 Else If target_flags contains `CORPSE_ENEMY`:
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | - / - | [PackedGuid](../types/packed-guid.md) | corpse_enemy |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| - | - / - | [PackedGuid](../types/packed-guid.md) | corpse_enemy |  |
 
 
 Used in:
@@ -288,69 +288,69 @@ struct SpellCastTargets {
 ```
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x00 | 4 / - | [SpellCastTargetFlags](spellcasttargetflags.md) | target_flags |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x00 | 4 / - | [SpellCastTargetFlags](spellcasttargetflags.md) | target_flags |  |
 
 If target_flags contains `UNIT`:
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | - / - | [PackedGuid](../types/packed-guid.md) | unit_target |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x04 | - / - | [PackedGuid](../types/packed-guid.md) | unit_target |  |
 
 Else If target_flags contains `UNIT_MINIPET`:
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | - / - | [PackedGuid](../types/packed-guid.md) | minipet_target |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| - | - / - | [PackedGuid](../types/packed-guid.md) | minipet_target |  |
 
 Else If target_flags contains `GAMEOBJECT`:
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | - / - | [PackedGuid](../types/packed-guid.md) | gameobject_target |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| - | - / - | [PackedGuid](../types/packed-guid.md) | gameobject_target |  |
 
 Else If target_flags contains `CORPSE_ENEMY`:
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | - / - | [PackedGuid](../types/packed-guid.md) | enemy_corpse_target |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| - | - / - | [PackedGuid](../types/packed-guid.md) | enemy_corpse_target |  |
 
 Else If target_flags contains `CORPSE_ALLY`:
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | - / - | [PackedGuid](../types/packed-guid.md) | ally_corpse_target |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| - | - / - | [PackedGuid](../types/packed-guid.md) | ally_corpse_target |  |
 
 If target_flags contains `ITEM`:
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | - / - | [PackedGuid](../types/packed-guid.md) | item_target |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| - | - / - | [PackedGuid](../types/packed-guid.md) | item_target |  |
 
 Else If target_flags contains `TRADE_ITEM`:
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | - / - | [PackedGuid](../types/packed-guid.md) | trade_item_target |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| - | - / - | [PackedGuid](../types/packed-guid.md) | trade_item_target |  |
 
 If target_flags contains `SOURCE_LOCATION`:
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | 12 / - | [Vector3d](vector3d.md) | source |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| - | 12 / - | [Vector3d](vector3d.md) | source |  |
 
 If target_flags contains `DEST_LOCATION`:
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | 12 / - | [Vector3d](vector3d.md) | destination |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| - | 12 / - | [Vector3d](vector3d.md) | destination |  |
 
 If target_flags contains `STRING`:
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | - / - | CString | target_string |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| - | - / - | CString | target_string |  |
 
 
 Used in:

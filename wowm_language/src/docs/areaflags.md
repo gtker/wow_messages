@@ -25,17 +25,17 @@ flag AreaFlags : u16 {
 ### Type
 The basic type is `u16`, a 2 byte (16 bit) little endian integer.
 ### Enumerators
-| Enumerator | Value  | Description | Comment |
-| --------- | -------- | ----------- | ------- |
-| `SNOW` | 1 (0x01) |  |  |
-| `UNK` | 2 (0x02) |  |  |
-| `DEVELOPMENT` | 4 (0x04) |  |  |
-| `UNK2` | 8 (0x08) |  |  |
-| `UNK3` | 16 (0x10) |  |  |
-| `CITY_SLAVE` | 32 (0x20) |  |  |
-| `CITY_ALLOW_DUELS` | 64 (0x40) |  |  |
-| `UNK4` | 128 (0x80) |  |  |
-| `CITY` | 256 (0x100) |  |  |
-| `TEST` | 512 (0x200) |  |  |
+| Enumerator | Value  | Comment |
+| --------- | -------- | ------- |
+| `SNOW` | 1 (0x01) |  |
+| `UNK` | 2 (0x02) |  |
+| `DEVELOPMENT` | 4 (0x04) |  |
+| `UNK2` | 8 (0x08) |  |
+| `UNK3` | 16 (0x10) |  |
+| `CITY_SLAVE` | 32 (0x20) |  |
+| `CITY_ALLOW_DUELS` | 64 (0x40) |  |
+| `UNK4` | 128 (0x80) |  |
+| `CITY` | 256 (0x100) |  |
+| `TEST` | 512 (0x200) |  |
 
 Used in:

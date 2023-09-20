@@ -30,16 +30,16 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | 8 / Little | [Guid](../types/packed-guid.md) | looted_target |  |  |
-| 0x0C | 4 / Little | u32 | loot_slot |  |  |
-| 0x10 | 4 / Little | u32 | item |  |  |
-| 0x14 | 4 / Little | u32 | item_random_suffix |  | vmangos/mangoszero: not used ? |
-| 0x18 | 4 / Little | u32 | item_random_property_id |  |  |
-| 0x1C | 8 / Little | [Guid](../types/packed-guid.md) | winning_player |  |  |
-| 0x24 | 1 / - | u8 | winning_roll |  | rollnumber related to SMSG_LOOT_ROLL |
-| 0x25 | 1 / - | [RollVote](rollvote.md) | vote |  | Rolltype related to SMSG_LOOT_ROLL |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x04 | 8 / Little | [Guid](../types/packed-guid.md) | looted_target |  |
+| 0x0C | 4 / Little | u32 | loot_slot |  |
+| 0x10 | 4 / Little | u32 | item |  |
+| 0x14 | 4 / Little | u32 | item_random_suffix | vmangos/mangoszero: not used ? |
+| 0x18 | 4 / Little | u32 | item_random_property_id |  |
+| 0x1C | 8 / Little | [Guid](../types/packed-guid.md) | winning_player |  |
+| 0x24 | 1 / - | u8 | winning_roll | rollnumber related to SMSG_LOOT_ROLL |
+| 0x25 | 1 / - | [RollVote](rollvote.md) | vote | Rolltype related to SMSG_LOOT_ROLL |
 
 ## Client Version 2, Client Version 3
 
@@ -71,14 +71,14 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | 8 / Little | [Guid](../types/packed-guid.md) | looted_target |  |  |
-| 0x0C | 4 / Little | u32 | loot_slot |  |  |
-| 0x10 | 4 / Little | u32 | item |  |  |
-| 0x14 | 4 / Little | u32 | item_random_suffix |  | vmangos/mangoszero: not used ? |
-| 0x18 | 4 / Little | u32 | item_random_property_id |  |  |
-| 0x1C | 8 / Little | [Guid](../types/packed-guid.md) | winning_player |  |  |
-| 0x24 | 1 / - | u8 | winning_roll |  | rollnumber related to SMSG_LOOT_ROLL |
-| 0x25 | 1 / - | [RollVote](rollvote.md) | vote |  | Rolltype related to SMSG_LOOT_ROLL |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x04 | 8 / Little | [Guid](../types/packed-guid.md) | looted_target |  |
+| 0x0C | 4 / Little | u32 | loot_slot |  |
+| 0x10 | 4 / Little | u32 | item |  |
+| 0x14 | 4 / Little | u32 | item_random_suffix | vmangos/mangoszero: not used ? |
+| 0x18 | 4 / Little | u32 | item_random_property_id |  |
+| 0x1C | 8 / Little | [Guid](../types/packed-guid.md) | winning_player |  |
+| 0x24 | 1 / - | u8 | winning_roll | rollnumber related to SMSG_LOOT_ROLL |
+| 0x25 | 1 / - | [RollVote](rollvote.md) | vote | Rolltype related to SMSG_LOOT_ROLL |
 

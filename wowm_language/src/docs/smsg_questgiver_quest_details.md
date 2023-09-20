@@ -36,22 +36,22 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | 8 / Little | [Guid](../types/packed-guid.md) | guid |  |  |
-| 0x0C | 4 / Little | u32 | quest_id |  |  |
-| 0x10 | - / - | CString | title |  |  |
-| - | - / - | CString | details |  |  |
-| - | - / - | CString | objectives |  |  |
-| - | 4 / Little | Bool32 | auto_finish |  |  |
-| - | 4 / Little | u32 | amount_of_choice_item_rewards |  |  |
-| - | ? / - | [QuestItemReward](questitemreward.md)[amount_of_choice_item_rewards] | choice_item_rewards |  |  |
-| - | 4 / Little | u32 | amount_of_item_rewards |  |  |
-| - | ? / - | [QuestItemReward](questitemreward.md)[amount_of_item_rewards] | item_rewards |  |  |
-| - | 4 / Little | Gold | money_reward |  |  |
-| - | 4 / Little | u32 | reward_spell |  |  |
-| - | 4 / Little | u32 | amount_of_emotes |  |  |
-| - | ? / - | [QuestDetailsEmote](questdetailsemote.md)[amount_of_emotes] | emotes |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x04 | 8 / Little | [Guid](../types/packed-guid.md) | guid |  |
+| 0x0C | 4 / Little | u32 | quest_id |  |
+| 0x10 | - / - | CString | title |  |
+| - | - / - | CString | details |  |
+| - | - / - | CString | objectives |  |
+| - | 4 / Little | Bool32 | auto_finish |  |
+| - | 4 / Little | u32 | amount_of_choice_item_rewards |  |
+| - | ? / - | [QuestItemReward](questitemreward.md)[amount_of_choice_item_rewards] | choice_item_rewards |  |
+| - | 4 / Little | u32 | amount_of_item_rewards |  |
+| - | ? / - | [QuestItemReward](questitemreward.md)[amount_of_item_rewards] | item_rewards |  |
+| - | 4 / Little | Gold | money_reward |  |
+| - | 4 / Little | u32 | reward_spell |  |
+| - | 4 / Little | u32 | amount_of_emotes |  |
+| - | ? / - | [QuestDetailsEmote](questdetailsemote.md)[amount_of_emotes] | emotes |  |
 
 ## Client Version 2.4.3
 
@@ -93,26 +93,26 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | 8 / Little | [Guid](../types/packed-guid.md) | guid |  |  |
-| 0x0C | 4 / Little | u32 | quest_id |  |  |
-| 0x10 | - / - | CString | title |  |  |
-| - | - / - | CString | details |  |  |
-| - | - / - | CString | objectives |  |  |
-| - | 4 / Little | Bool32 | auto_finish |  |  |
-| - | 4 / Little | u32 | suggested_players |  |  |
-| - | 4 / Little | u32 | amount_of_choice_item_rewards |  |  |
-| - | ? / - | [QuestItemReward](questitemreward.md)[amount_of_choice_item_rewards] | choice_item_rewards |  |  |
-| - | 4 / Little | u32 | amount_of_item_rewards |  |  |
-| - | ? / - | [QuestItemReward](questitemreward.md)[amount_of_item_rewards] | item_rewards |  |  |
-| - | 4 / Little | Gold | money_reward |  |  |
-| - | 4 / Little | u32 | honor_reward |  |  |
-| - | 4 / Little | u32 | reward_spell |  | mangosone: reward spell, this spell will display (icon) (casted if RewSpellCast==0) |
-| - | 4 / Little | u32 | casted_spell |  |  |
-| - | 4 / Little | u32 | title_reward |  | mangosone: CharTitle, new 2.4.0, player gets this title (bit index from CharTitles) |
-| - | 4 / Little | u32 | amount_of_emotes |  |  |
-| - | ? / - | [QuestDetailsEmote](questdetailsemote.md)[amount_of_emotes] | emotes |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x04 | 8 / Little | [Guid](../types/packed-guid.md) | guid |  |
+| 0x0C | 4 / Little | u32 | quest_id |  |
+| 0x10 | - / - | CString | title |  |
+| - | - / - | CString | details |  |
+| - | - / - | CString | objectives |  |
+| - | 4 / Little | Bool32 | auto_finish |  |
+| - | 4 / Little | u32 | suggested_players |  |
+| - | 4 / Little | u32 | amount_of_choice_item_rewards |  |
+| - | ? / - | [QuestItemReward](questitemreward.md)[amount_of_choice_item_rewards] | choice_item_rewards |  |
+| - | 4 / Little | u32 | amount_of_item_rewards |  |
+| - | ? / - | [QuestItemReward](questitemreward.md)[amount_of_item_rewards] | item_rewards |  |
+| - | 4 / Little | Gold | money_reward |  |
+| - | 4 / Little | u32 | honor_reward |  |
+| - | 4 / Little | u32 | reward_spell | mangosone: reward spell, this spell will display (icon) (casted if RewSpellCast==0) |
+| - | 4 / Little | u32 | casted_spell |  |
+| - | 4 / Little | u32 | title_reward | mangosone: CharTitle, new 2.4.0, player gets this title (bit index from CharTitles) |
+| - | 4 / Little | u32 | amount_of_emotes |  |
+| - | ? / - | [QuestDetailsEmote](questdetailsemote.md)[amount_of_emotes] | emotes |  |
 
 ## Client Version 3.3.5
 
@@ -165,35 +165,35 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | 8 / Little | [Guid](../types/packed-guid.md) | guid |  |  |
-| - | 8 / Little | [Guid](../types/packed-guid.md) | guid2 |  | arcemu also sends guid2 if guid is a player. Otherwise sends 0. |
-| - | 4 / Little | u32 | quest_id |  |  |
-| - | - / - | CString | title |  |  |
-| - | - / - | CString | details |  |  |
-| - | - / - | CString | objectives |  |  |
-| - | 1 / - | Bool | auto_finish |  |  |
-| - | 4 / Little | u32 | quest_flags |  |  |
-| - | 4 / Little | u32 | suggested_players |  |  |
-| - | 1 / - | u8 | is_finished |  | arcemu: MANGOS: IsFinished? value is sent back to server in quest accept packet |
-| - | 4 / Little | u32 | amount_of_choice_item_rewards |  |  |
-| - | ? / - | [QuestGiverReward](questgiverreward.md)[amount_of_choice_item_rewards] | choice_item_rewards |  |  |
-| - | 4 / Little | u32 | amount_of_item_rewards |  |  |
-| - | ? / - | [QuestGiverReward](questgiverreward.md)[amount_of_item_rewards] | item_rewards |  |  |
-| - | 4 / Little | Gold | money_reward |  |  |
-| - | 4 / Little | u32 | experience_reward |  | arcemu: New 3.3 - this is the XP you'll see on the quest reward panel too, but I think it is fine not to show it, because it can change if the player levels up before completing the quest. |
-| - | 4 / Little | u32 | honor_reward |  |  |
-| - | 4 / Little | f32 | honor_reward_multiplier |  | arcemu: new 3.3 |
-| - | 4 / Little | u32 | reward_spell |  | mangosone: reward spell, this spell will display (icon) (casted if RewSpellCast==0) |
-| - | 4 / Little | u32 | casted_spell |  |  |
-| - | 4 / Little | u32 | title_reward |  | mangosone: CharTitle, new 2.4.0, player gets this title (bit index from CharTitles) |
-| - | 4 / Little | u32 | talent_reward |  |  |
-| - | 4 / Little | u32 | arena_point_reward |  |  |
-| - | 4 / Little | u32 | unknown2 |  | arcemu: new 3.3.0 |
-| - | 20 / - | u32[5] | reward_factions |  |  |
-| - | 20 / - | u32[5] | reward_reputations |  | mangostwo: columnid in QuestFactionReward.dbc (if negative, from second row) |
-| - | 20 / - | u32[5] | reward_reputations_override |  | mangostwo: reward reputation override. No diplomacy bonus is expected given, reward also does not display in chat window |
-| - | 4 / Little | u32 | amount_of_emotes |  |  |
-| - | ? / - | [QuestDetailsEmote](questdetailsemote.md)[amount_of_emotes] | emotes |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| - | 8 / Little | [Guid](../types/packed-guid.md) | guid |  |
+| - | 8 / Little | [Guid](../types/packed-guid.md) | guid2 | arcemu also sends guid2 if guid is a player. Otherwise sends 0. |
+| - | 4 / Little | u32 | quest_id |  |
+| - | - / - | CString | title |  |
+| - | - / - | CString | details |  |
+| - | - / - | CString | objectives |  |
+| - | 1 / - | Bool | auto_finish |  |
+| - | 4 / Little | u32 | quest_flags |  |
+| - | 4 / Little | u32 | suggested_players |  |
+| - | 1 / - | u8 | is_finished | arcemu: MANGOS: IsFinished? value is sent back to server in quest accept packet |
+| - | 4 / Little | u32 | amount_of_choice_item_rewards |  |
+| - | ? / - | [QuestGiverReward](questgiverreward.md)[amount_of_choice_item_rewards] | choice_item_rewards |  |
+| - | 4 / Little | u32 | amount_of_item_rewards |  |
+| - | ? / - | [QuestGiverReward](questgiverreward.md)[amount_of_item_rewards] | item_rewards |  |
+| - | 4 / Little | Gold | money_reward |  |
+| - | 4 / Little | u32 | experience_reward | arcemu: New 3.3 - this is the XP you'll see on the quest reward panel too, but I think it is fine not to show it, because it can change if the player levels up before completing the quest. |
+| - | 4 / Little | u32 | honor_reward |  |
+| - | 4 / Little | f32 | honor_reward_multiplier | arcemu: new 3.3 |
+| - | 4 / Little | u32 | reward_spell | mangosone: reward spell, this spell will display (icon) (casted if RewSpellCast==0) |
+| - | 4 / Little | u32 | casted_spell |  |
+| - | 4 / Little | u32 | title_reward | mangosone: CharTitle, new 2.4.0, player gets this title (bit index from CharTitles) |
+| - | 4 / Little | u32 | talent_reward |  |
+| - | 4 / Little | u32 | arena_point_reward |  |
+| - | 4 / Little | u32 | unknown2 | arcemu: new 3.3.0 |
+| - | 20 / - | u32[5] | reward_factions |  |
+| - | 20 / - | u32[5] | reward_reputations | mangostwo: columnid in QuestFactionReward.dbc (if negative, from second row) |
+| - | 20 / - | u32[5] | reward_reputations_override | mangostwo: reward reputation override. No diplomacy bonus is expected given, reward also does not display in chat window |
+| - | 4 / Little | u32 | amount_of_emotes |  |
+| - | ? / - | [QuestDetailsEmote](questdetailsemote.md)[amount_of_emotes] | emotes |  |
 

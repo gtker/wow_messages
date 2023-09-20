@@ -25,11 +25,11 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | - / - | CString | channel |  |  |
-| - | 1 / - | u8 | flags |  |  |
-| - | 4 / Little | u32 | amount_of_members |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x04 | - / - | CString | channel |  |
+| - | 1 / - | u8 | flags |  |
+| - | 4 / Little | u32 | amount_of_members |  |
 
 ## Client Version 3.3.5
 
@@ -56,9 +56,9 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | - / - | CString | channel |  |  |
-| - | 1 / - | u8 | flags |  |  |
-| - | 4 / Little | u32 | amount_of_members |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| - | - / - | CString | channel |  |
+| - | 1 / - | u8 | flags |  |
+| - | 4 / Little | u32 | amount_of_members |  |
 

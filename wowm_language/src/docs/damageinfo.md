@@ -16,13 +16,13 @@ struct DamageInfo {
 ```
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x00 | 4 / Little | u32 | spell_school_mask |  |  |
-| 0x04 | 4 / Little | f32 | damage_float |  | vmangos sends the same data in `damage_uint`. |
-| 0x08 | 4 / Little | u32 | damage_uint |  | vmangos sends the same data in `damage_float`. |
-| 0x0C | 4 / Little | u32 | absorb |  |  |
-| 0x10 | 4 / Little | u32 | resist |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x00 | 4 / Little | u32 | spell_school_mask |  |
+| 0x04 | 4 / Little | f32 | damage_float | vmangos sends the same data in `damage_uint`. |
+| 0x08 | 4 / Little | u32 | damage_uint | vmangos sends the same data in `damage_float`. |
+| 0x0C | 4 / Little | u32 | absorb |  |
+| 0x10 | 4 / Little | u32 | resist |  |
 
 
 Used in:
@@ -42,11 +42,11 @@ struct DamageInfo {
 ```
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x00 | 4 / Little | u32 | spell_school_mask |  |  |
-| 0x04 | 4 / Little | f32 | damage_float |  | arcemu sends the same data in `damage_uint`. |
-| 0x08 | 4 / Little | u32 | damage_uint |  | arcemu sends the same data in `damage_float`. |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x00 | 4 / Little | u32 | spell_school_mask |  |
+| 0x04 | 4 / Little | f32 | damage_float | arcemu sends the same data in `damage_uint`. |
+| 0x08 | 4 / Little | u32 | damage_uint | arcemu sends the same data in `damage_float`. |
 
 
 Used in:

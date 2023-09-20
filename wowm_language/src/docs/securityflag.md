@@ -15,10 +15,10 @@ enum SecurityFlag : u8 {
 ### Type
 The basic type is `u8`, a 1 byte (8 bit) integer.
 ### Enumerators
-| Enumerator | Value  | Description | Comment |
-| --------- | -------- | ----------- | ------- |
-| `NONE` | 0 (0x00) |  |  |
-| `PIN` | 1 (0x01) |  |  |
+| Enumerator | Value  | Comment |
+| --------- | -------- | ------- |
+| `NONE` | 0 (0x00) |  |
+| `PIN` | 1 (0x01) |  |
 
 Used in:
 * [CMD_AUTH_LOGON_CHALLENGE_Server](cmd_auth_logon_challenge_server.md)
@@ -41,12 +41,12 @@ flag SecurityFlag : u8 {
 ### Type
 The basic type is `u8`, a 1 byte (8 bit) integer.
 ### Enumerators
-| Enumerator | Value  | Description | Comment |
-| --------- | -------- | ----------- | ------- |
-| `NONE` | 0 (0x00) |  |  |
-| `PIN` | 1 (0x01) |  |  |
-| `MATRIX_CARD` | 2 (0x02) |  | Matrix Card 2FA which requires a matrix card.<br/>`https://forum.xentax.com/viewtopic.php?f=13&p=186022` |
-| `AUTHENTICATOR` | 4 (0x04) |  |  |
+| Enumerator | Value  | Comment |
+| --------- | -------- | ------- |
+| `NONE` | 0 (0x00) |  |
+| `PIN` | 1 (0x01) |  |
+| `MATRIX_CARD` | 2 (0x02) | Matrix Card 2FA which requires a matrix card.<br/>`https://forum.xentax.com/viewtopic.php?f=13&p=186022` |
+| `AUTHENTICATOR` | 4 (0x04) |  |
 
 Used in:
 * [CMD_AUTH_LOGON_CHALLENGE_Server](cmd_auth_logon_challenge_server.md)

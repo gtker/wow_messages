@@ -32,19 +32,19 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | - / - | [PackedGuid](../types/packed-guid.md) | invitee |  |  |
-| - | 8 / Little | [Guid](../types/packed-guid.md) | event_id |  |  |
-| - | 8 / Little | [Guid](../types/packed-guid.md) | invite_id |  |  |
-| - | 1 / - | Level | level |  |  |
-| - | 1 / - | u8 | invite_status |  |  |
-| - | 1 / - | [CalendarStatusTime](calendarstatustime.md) | time |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| - | - / - | [PackedGuid](../types/packed-guid.md) | invitee |  |
+| - | 8 / Little | [Guid](../types/packed-guid.md) | event_id |  |
+| - | 8 / Little | [Guid](../types/packed-guid.md) | invite_id |  |
+| - | 1 / - | Level | level |  |
+| - | 1 / - | u8 | invite_status |  |
+| - | 1 / - | [CalendarStatusTime](calendarstatustime.md) | time |  |
 
 If time is equal to `PRESENT`:
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | 4 / Little | DateTime | status_time |  |  |
-| - | 1 / - | Bool | is_sign_up |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| - | 4 / Little | DateTime | status_time |  |
+| - | 1 / - | Bool | is_sign_up |  |
 

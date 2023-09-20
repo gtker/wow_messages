@@ -24,10 +24,10 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | 8 / Little | [Guid](../types/packed-guid.md) | auctioneer |  |  |
-| 0x0C | 4 / Little | u32 | auction_house_id |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x04 | 8 / Little | [Guid](../types/packed-guid.md) | auctioneer |  |
+| 0x0C | 4 / Little | u32 | auction_house_id |  |
 
 ## Client Version 1.12, Client Version 2, Client Version 3.0, Client Version 3.1, Client Version 3.2, Client Version 3.3.0, Client Version 3.3.1, Client Version 3.3.2
 
@@ -53,10 +53,10 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | 8 / Little | [Guid](../types/packed-guid.md) | auctioneer |  |  |
-| 0x0C | 4 / - | [AuctionHouse](auctionhouse.md) | auction_house |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x04 | 8 / Little | [Guid](../types/packed-guid.md) | auctioneer |  |
+| 0x0C | 4 / - | [AuctionHouse](auctionhouse.md) | auction_house |  |
 
 ## Client Version 3.3.3, Client Version 3.3.4, Client Version 3.3.5
 
@@ -83,9 +83,9 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | 8 / Little | [Guid](../types/packed-guid.md) | auctioneer |  |  |
-| 0x0C | 4 / - | [AuctionHouse](auctionhouse.md) | auction_house |  |  |
-| 0x10 | 1 / - | Bool | auction_house_enabled |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x04 | 8 / Little | [Guid](../types/packed-guid.md) | auctioneer |  |
+| 0x0C | 4 / - | [AuctionHouse](auctionhouse.md) | auction_house |  |
+| 0x10 | 1 / - | Bool | auction_house_enabled |  |
 

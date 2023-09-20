@@ -130,125 +130,125 @@ enum Emote : u32 {
 ### Type
 The basic type is `u32`, a 4 byte (32 bit) little endian integer.
 ### Enumerators
-| Enumerator | Value  | Description | Comment |
-| --------- | -------- | ----------- | ------- |
-| `ONESHOT_NONE` | 0 (0x00) |  |  |
-| `ONESHOT_TALK` | 1 (0x01) |  |  |
-| `ONESHOT_BOW` | 2 (0x02) |  |  |
-| `ONESHOT_WAVE` | 3 (0x03) |  |  |
-| `ONESHOT_CHEER` | 4 (0x04) |  |  |
-| `ONESHOT_EXCLAMATION` | 5 (0x05) |  |  |
-| `ONESHOT_QUESTION` | 6 (0x06) |  |  |
-| `ONESHOT_EAT` | 7 (0x07) |  |  |
-| `STATE_DANCE` | 10 (0x0A) |  |  |
-| `ONESHOT_LAUGH` | 11 (0x0B) |  |  |
-| `STATE_SLEEP` | 12 (0x0C) |  |  |
-| `STATE_SIT` | 13 (0x0D) |  |  |
-| `ONESHOT_RUDE` | 14 (0x0E) |  |  |
-| `ONESHOT_ROAR` | 15 (0x0F) |  |  |
-| `ONESHOT_KNEEL` | 16 (0x10) |  |  |
-| `ONESHOT_KISS` | 17 (0x11) |  |  |
-| `ONESHOT_CRY` | 18 (0x12) |  |  |
-| `ONESHOT_CHICKEN` | 19 (0x13) |  |  |
-| `ONESHOT_BEG` | 20 (0x14) |  |  |
-| `ONESHOT_APPLAUD` | 21 (0x15) |  |  |
-| `ONESHOT_SHOUT` | 22 (0x16) |  |  |
-| `ONESHOT_FLEX` | 23 (0x17) |  |  |
-| `ONESHOT_SHY` | 24 (0x18) |  |  |
-| `ONESHOT_POINT` | 25 (0x19) |  |  |
-| `STATE_STAND` | 26 (0x1A) |  |  |
-| `STATE_READYUNARMED` | 27 (0x1B) |  |  |
-| `STATE_WORK_SHEATHED` | 28 (0x1C) |  |  |
-| `STATE_POINT` | 29 (0x1D) |  |  |
-| `STATE_NONE` | 30 (0x1E) |  |  |
-| `ONESHOT_WOUND` | 33 (0x21) |  |  |
-| `ONESHOT_WOUNDCRITICAL` | 34 (0x22) |  |  |
-| `ONESHOT_ATTACKUNARMED` | 35 (0x23) |  |  |
-| `ONESHOT_ATTACK1H` | 36 (0x24) |  |  |
-| `ONESHOT_ATTACK2HTIGHT` | 37 (0x25) |  |  |
-| `ONESHOT_ATTACK2HLOOSE` | 38 (0x26) |  |  |
-| `ONESHOT_PARRYUNARMED` | 39 (0x27) |  |  |
-| `ONESHOT_PARRYSHIELD` | 43 (0x2B) |  |  |
-| `ONESHOT_READYUNARMED` | 44 (0x2C) |  |  |
-| `ONESHOT_READY1H` | 45 (0x2D) |  |  |
-| `ONESHOT_READYBOW` | 48 (0x30) |  |  |
-| `ONESHOT_SPELLPRECAST` | 50 (0x32) |  |  |
-| `ONESHOT_SPELLCAST` | 51 (0x33) |  |  |
-| `ONESHOT_BATTLEROAR` | 53 (0x35) |  |  |
-| `ONESHOT_SPECIALATTACK1H` | 54 (0x36) |  |  |
-| `ONESHOT_KICK` | 60 (0x3C) |  |  |
-| `ONESHOT_ATTACKTHROWN` | 61 (0x3D) |  |  |
-| `STATE_STUN` | 64 (0x40) |  |  |
-| `STATE_DEAD` | 65 (0x41) |  |  |
-| `ONESHOT_SALUTE` | 66 (0x42) |  |  |
-| `STATE_KNEEL` | 68 (0x44) |  |  |
-| `STATE_USESTANDING` | 69 (0x45) |  |  |
-| `ONESHOT_WAVE_NOSHEATHE` | 70 (0x46) |  |  |
-| `ONESHOT_CHEER_NOSHEATHE` | 71 (0x47) |  |  |
-| `ONESHOT_EAT_NOSHEATHE` | 92 (0x5C) |  |  |
-| `STATE_STUN_NOSHEATHE` | 93 (0x5D) |  |  |
-| `ONESHOT_DANCE` | 94 (0x5E) |  |  |
-| `ONESHOT_SALUTE_NOSHEATH` | 113 (0x71) |  |  |
-| `STATE_USESTANDING_NOSHEATHE` | 133 (0x85) |  |  |
-| `ONESHOT_LAUGH_NOSHEATHE` | 153 (0x99) |  |  |
-| `STATE_WORK` | 173 (0xAD) |  |  |
-| `STATE_SPELLPRECAST` | 193 (0xC1) |  |  |
-| `ONESHOT_READYRIFLE` | 213 (0xD5) |  |  |
-| `STATE_READYRIFLE` | 214 (0xD6) |  |  |
-| `STATE_WORK_MINING` | 233 (0xE9) |  |  |
-| `STATE_WORK_CHOPWOOD` | 234 (0xEA) |  |  |
-| `STATE_APPLAUD` | 253 (0xFD) |  |  |
-| `ONESHOT_LIFTOFF` | 254 (0xFE) |  |  |
-| `ONESHOT_YES` | 273 (0x111) |  |  |
-| `ONESHOT_NO` | 274 (0x112) |  |  |
-| `ONESHOT_TRAIN` | 275 (0x113) |  |  |
-| `ONESHOT_LAND` | 293 (0x125) |  |  |
-| `STATE_AT_EASE` | 313 (0x139) |  |  |
-| `STATE_READY1H` | 333 (0x14D) |  |  |
-| `STATE_SPELLKNEELSTART` | 353 (0x161) |  |  |
-| `STATE_SUBMERGED` | 373 (0x175) |  |  |
-| `ONESHOT_SUBMERGE` | 374 (0x176) |  |  |
-| `STATE_READY2H` | 375 (0x177) |  |  |
-| `STATE_READYBOW` | 376 (0x178) |  |  |
-| `ONESHOT_MOUNTSPECIAL` | 377 (0x179) |  |  |
-| `STATE_TALK` | 378 (0x17A) |  |  |
-| `STATE_FISHING` | 379 (0x17B) |  |  |
-| `ONESHOT_FISHING` | 380 (0x17C) |  |  |
-| `ONESHOT_LOOT` | 381 (0x17D) |  |  |
-| `STATE_WHIRLWIND` | 382 (0x17E) |  |  |
-| `STATE_DROWNED` | 383 (0x17F) |  |  |
-| `STATE_HOLD_BOW` | 384 (0x180) |  |  |
-| `STATE_HOLD_RIFLE` | 385 (0x181) |  |  |
-| `STATE_HOLD_THROWN` | 386 (0x182) |  |  |
-| `ONESHOT_DROWN` | 387 (0x183) |  |  |
-| `ONESHOT_STOMP` | 388 (0x184) |  |  |
-| `ONESHOT_ATTACKOFF` | 389 (0x185) |  |  |
-| `ONESHOT_ATTACKOFFPIERCE` | 390 (0x186) |  |  |
-| `STATE_ROAR` | 391 (0x187) |  |  |
-| `STATE_LAUGH` | 392 (0x188) |  |  |
-| `ONESHOT_CREATURE_SPECIAL` | 393 (0x189) |  |  |
-| `ONESHOT_JUMPLANDRUN` | 394 (0x18A) |  |  |
-| `ONESHOT_JUMPEND` | 395 (0x18B) |  |  |
-| `ONESHOT_TALK_NOSHEATHE` | 396 (0x18C) |  |  |
-| `ONESHOT_POINT_NOSHEATHE` | 397 (0x18D) |  |  |
-| `STATE_CANNIBALIZE` | 398 (0x18E) |  |  |
-| `ONESHOT_JUMPSTART` | 399 (0x18F) |  |  |
-| `STATE_DANCESPECIAL` | 400 (0x190) |  |  |
-| `ONESHOT_DANCESPECIAL` | 401 (0x191) |  |  |
-| `ONESHOT_CUSTOMSPELL01` | 402 (0x192) |  |  |
-| `ONESHOT_CUSTOMSPELL02` | 403 (0x193) |  |  |
-| `ONESHOT_CUSTOMSPELL03` | 404 (0x194) |  |  |
-| `ONESHOT_CUSTOMSPELL04` | 405 (0x195) |  |  |
-| `ONESHOT_CUSTOMSPELL05` | 406 (0x196) |  |  |
-| `ONESHOT_CUSTOMSPELL06` | 407 (0x197) |  |  |
-| `ONESHOT_CUSTOMSPELL07` | 408 (0x198) |  |  |
-| `ONESHOT_CUSTOMSPELL08` | 409 (0x199) |  |  |
-| `ONESHOT_CUSTOMSPELL09` | 410 (0x19A) |  |  |
-| `ONESHOT_CUSTOMSPELL10` | 411 (0x19B) |  |  |
-| `STATE_EXCLAIM` | 412 (0x19C) |  |  |
-| `STATE_SIT_CHAIR_MED` | 415 (0x19F) |  |  |
-| `STATE_SPELLEFFECT_HOLD` | 422 (0x1A6) |  |  |
-| `STATE_EAT_NO_SHEATHE` | 423 (0x1A7) |  |  |
+| Enumerator | Value  | Comment |
+| --------- | -------- | ------- |
+| `ONESHOT_NONE` | 0 (0x00) |  |
+| `ONESHOT_TALK` | 1 (0x01) |  |
+| `ONESHOT_BOW` | 2 (0x02) |  |
+| `ONESHOT_WAVE` | 3 (0x03) |  |
+| `ONESHOT_CHEER` | 4 (0x04) |  |
+| `ONESHOT_EXCLAMATION` | 5 (0x05) |  |
+| `ONESHOT_QUESTION` | 6 (0x06) |  |
+| `ONESHOT_EAT` | 7 (0x07) |  |
+| `STATE_DANCE` | 10 (0x0A) |  |
+| `ONESHOT_LAUGH` | 11 (0x0B) |  |
+| `STATE_SLEEP` | 12 (0x0C) |  |
+| `STATE_SIT` | 13 (0x0D) |  |
+| `ONESHOT_RUDE` | 14 (0x0E) |  |
+| `ONESHOT_ROAR` | 15 (0x0F) |  |
+| `ONESHOT_KNEEL` | 16 (0x10) |  |
+| `ONESHOT_KISS` | 17 (0x11) |  |
+| `ONESHOT_CRY` | 18 (0x12) |  |
+| `ONESHOT_CHICKEN` | 19 (0x13) |  |
+| `ONESHOT_BEG` | 20 (0x14) |  |
+| `ONESHOT_APPLAUD` | 21 (0x15) |  |
+| `ONESHOT_SHOUT` | 22 (0x16) |  |
+| `ONESHOT_FLEX` | 23 (0x17) |  |
+| `ONESHOT_SHY` | 24 (0x18) |  |
+| `ONESHOT_POINT` | 25 (0x19) |  |
+| `STATE_STAND` | 26 (0x1A) |  |
+| `STATE_READYUNARMED` | 27 (0x1B) |  |
+| `STATE_WORK_SHEATHED` | 28 (0x1C) |  |
+| `STATE_POINT` | 29 (0x1D) |  |
+| `STATE_NONE` | 30 (0x1E) |  |
+| `ONESHOT_WOUND` | 33 (0x21) |  |
+| `ONESHOT_WOUNDCRITICAL` | 34 (0x22) |  |
+| `ONESHOT_ATTACKUNARMED` | 35 (0x23) |  |
+| `ONESHOT_ATTACK1H` | 36 (0x24) |  |
+| `ONESHOT_ATTACK2HTIGHT` | 37 (0x25) |  |
+| `ONESHOT_ATTACK2HLOOSE` | 38 (0x26) |  |
+| `ONESHOT_PARRYUNARMED` | 39 (0x27) |  |
+| `ONESHOT_PARRYSHIELD` | 43 (0x2B) |  |
+| `ONESHOT_READYUNARMED` | 44 (0x2C) |  |
+| `ONESHOT_READY1H` | 45 (0x2D) |  |
+| `ONESHOT_READYBOW` | 48 (0x30) |  |
+| `ONESHOT_SPELLPRECAST` | 50 (0x32) |  |
+| `ONESHOT_SPELLCAST` | 51 (0x33) |  |
+| `ONESHOT_BATTLEROAR` | 53 (0x35) |  |
+| `ONESHOT_SPECIALATTACK1H` | 54 (0x36) |  |
+| `ONESHOT_KICK` | 60 (0x3C) |  |
+| `ONESHOT_ATTACKTHROWN` | 61 (0x3D) |  |
+| `STATE_STUN` | 64 (0x40) |  |
+| `STATE_DEAD` | 65 (0x41) |  |
+| `ONESHOT_SALUTE` | 66 (0x42) |  |
+| `STATE_KNEEL` | 68 (0x44) |  |
+| `STATE_USESTANDING` | 69 (0x45) |  |
+| `ONESHOT_WAVE_NOSHEATHE` | 70 (0x46) |  |
+| `ONESHOT_CHEER_NOSHEATHE` | 71 (0x47) |  |
+| `ONESHOT_EAT_NOSHEATHE` | 92 (0x5C) |  |
+| `STATE_STUN_NOSHEATHE` | 93 (0x5D) |  |
+| `ONESHOT_DANCE` | 94 (0x5E) |  |
+| `ONESHOT_SALUTE_NOSHEATH` | 113 (0x71) |  |
+| `STATE_USESTANDING_NOSHEATHE` | 133 (0x85) |  |
+| `ONESHOT_LAUGH_NOSHEATHE` | 153 (0x99) |  |
+| `STATE_WORK` | 173 (0xAD) |  |
+| `STATE_SPELLPRECAST` | 193 (0xC1) |  |
+| `ONESHOT_READYRIFLE` | 213 (0xD5) |  |
+| `STATE_READYRIFLE` | 214 (0xD6) |  |
+| `STATE_WORK_MINING` | 233 (0xE9) |  |
+| `STATE_WORK_CHOPWOOD` | 234 (0xEA) |  |
+| `STATE_APPLAUD` | 253 (0xFD) |  |
+| `ONESHOT_LIFTOFF` | 254 (0xFE) |  |
+| `ONESHOT_YES` | 273 (0x111) |  |
+| `ONESHOT_NO` | 274 (0x112) |  |
+| `ONESHOT_TRAIN` | 275 (0x113) |  |
+| `ONESHOT_LAND` | 293 (0x125) |  |
+| `STATE_AT_EASE` | 313 (0x139) |  |
+| `STATE_READY1H` | 333 (0x14D) |  |
+| `STATE_SPELLKNEELSTART` | 353 (0x161) |  |
+| `STATE_SUBMERGED` | 373 (0x175) |  |
+| `ONESHOT_SUBMERGE` | 374 (0x176) |  |
+| `STATE_READY2H` | 375 (0x177) |  |
+| `STATE_READYBOW` | 376 (0x178) |  |
+| `ONESHOT_MOUNTSPECIAL` | 377 (0x179) |  |
+| `STATE_TALK` | 378 (0x17A) |  |
+| `STATE_FISHING` | 379 (0x17B) |  |
+| `ONESHOT_FISHING` | 380 (0x17C) |  |
+| `ONESHOT_LOOT` | 381 (0x17D) |  |
+| `STATE_WHIRLWIND` | 382 (0x17E) |  |
+| `STATE_DROWNED` | 383 (0x17F) |  |
+| `STATE_HOLD_BOW` | 384 (0x180) |  |
+| `STATE_HOLD_RIFLE` | 385 (0x181) |  |
+| `STATE_HOLD_THROWN` | 386 (0x182) |  |
+| `ONESHOT_DROWN` | 387 (0x183) |  |
+| `ONESHOT_STOMP` | 388 (0x184) |  |
+| `ONESHOT_ATTACKOFF` | 389 (0x185) |  |
+| `ONESHOT_ATTACKOFFPIERCE` | 390 (0x186) |  |
+| `STATE_ROAR` | 391 (0x187) |  |
+| `STATE_LAUGH` | 392 (0x188) |  |
+| `ONESHOT_CREATURE_SPECIAL` | 393 (0x189) |  |
+| `ONESHOT_JUMPLANDRUN` | 394 (0x18A) |  |
+| `ONESHOT_JUMPEND` | 395 (0x18B) |  |
+| `ONESHOT_TALK_NOSHEATHE` | 396 (0x18C) |  |
+| `ONESHOT_POINT_NOSHEATHE` | 397 (0x18D) |  |
+| `STATE_CANNIBALIZE` | 398 (0x18E) |  |
+| `ONESHOT_JUMPSTART` | 399 (0x18F) |  |
+| `STATE_DANCESPECIAL` | 400 (0x190) |  |
+| `ONESHOT_DANCESPECIAL` | 401 (0x191) |  |
+| `ONESHOT_CUSTOMSPELL01` | 402 (0x192) |  |
+| `ONESHOT_CUSTOMSPELL02` | 403 (0x193) |  |
+| `ONESHOT_CUSTOMSPELL03` | 404 (0x194) |  |
+| `ONESHOT_CUSTOMSPELL04` | 405 (0x195) |  |
+| `ONESHOT_CUSTOMSPELL05` | 406 (0x196) |  |
+| `ONESHOT_CUSTOMSPELL06` | 407 (0x197) |  |
+| `ONESHOT_CUSTOMSPELL07` | 408 (0x198) |  |
+| `ONESHOT_CUSTOMSPELL08` | 409 (0x199) |  |
+| `ONESHOT_CUSTOMSPELL09` | 410 (0x19A) |  |
+| `ONESHOT_CUSTOMSPELL10` | 411 (0x19B) |  |
+| `STATE_EXCLAIM` | 412 (0x19C) |  |
+| `STATE_SIT_CHAIR_MED` | 415 (0x19F) |  |
+| `STATE_SPELLEFFECT_HOLD` | 422 (0x1A6) |  |
+| `STATE_EAT_NO_SHEATHE` | 423 (0x1A7) |  |
 
 Used in:
 * [CMSG_EMOTE](cmsg_emote.md)
@@ -384,125 +384,125 @@ enum Emote : u32 {
 ### Type
 The basic type is `u32`, a 4 byte (32 bit) little endian integer.
 ### Enumerators
-| Enumerator | Value  | Description | Comment |
-| --------- | -------- | ----------- | ------- |
-| `ONESHOT_NONE` | 0 (0x00) |  |  |
-| `ONESHOT_TALK` | 1 (0x01) |  |  |
-| `ONESHOT_BOW` | 2 (0x02) |  |  |
-| `ONESHOT_WAVE` | 3 (0x03) |  |  |
-| `ONESHOT_CHEER` | 4 (0x04) |  |  |
-| `ONESHOT_EXCLAMATION` | 5 (0x05) |  |  |
-| `ONESHOT_QUESTION` | 6 (0x06) |  |  |
-| `ONESHOT_EAT` | 7 (0x07) |  |  |
-| `STATE_DANCE` | 10 (0x0A) |  |  |
-| `ONESHOT_LAUGH` | 11 (0x0B) |  |  |
-| `STATE_SLEEP` | 12 (0x0C) |  |  |
-| `STATE_SIT` | 13 (0x0D) |  |  |
-| `ONESHOT_RUDE` | 14 (0x0E) |  |  |
-| `ONESHOT_ROAR` | 15 (0x0F) |  |  |
-| `ONESHOT_KNEEL` | 16 (0x10) |  |  |
-| `ONESHOT_KISS` | 17 (0x11) |  |  |
-| `ONESHOT_CRY` | 18 (0x12) |  |  |
-| `ONESHOT_CHICKEN` | 19 (0x13) |  |  |
-| `ONESHOT_BEG` | 20 (0x14) |  |  |
-| `ONESHOT_APPLAUD` | 21 (0x15) |  |  |
-| `ONESHOT_SHOUT` | 22 (0x16) |  |  |
-| `ONESHOT_FLEX` | 23 (0x17) |  |  |
-| `ONESHOT_SHY` | 24 (0x18) |  |  |
-| `ONESHOT_POINT` | 25 (0x19) |  |  |
-| `STATE_STAND` | 26 (0x1A) |  |  |
-| `STATE_READYUNARMED` | 27 (0x1B) |  |  |
-| `STATE_WORK_SHEATHED` | 28 (0x1C) |  |  |
-| `STATE_POINT` | 29 (0x1D) |  |  |
-| `STATE_NONE` | 30 (0x1E) |  |  |
-| `ONESHOT_WOUND` | 33 (0x21) |  |  |
-| `ONESHOT_WOUNDCRITICAL` | 34 (0x22) |  |  |
-| `ONESHOT_ATTACKUNARMED` | 35 (0x23) |  |  |
-| `ONESHOT_ATTACK1H` | 36 (0x24) |  |  |
-| `ONESHOT_ATTACK2HTIGHT` | 37 (0x25) |  |  |
-| `ONESHOT_ATTACK2HLOOSE` | 38 (0x26) |  |  |
-| `ONESHOT_PARRYUNARMED` | 39 (0x27) |  |  |
-| `ONESHOT_PARRYSHIELD` | 43 (0x2B) |  |  |
-| `ONESHOT_READYUNARMED` | 44 (0x2C) |  |  |
-| `ONESHOT_READY1H` | 45 (0x2D) |  |  |
-| `ONESHOT_READYBOW` | 48 (0x30) |  |  |
-| `ONESHOT_SPELLPRECAST` | 50 (0x32) |  |  |
-| `ONESHOT_SPELLCAST` | 51 (0x33) |  |  |
-| `ONESHOT_BATTLEROAR` | 53 (0x35) |  |  |
-| `ONESHOT_SPECIALATTACK1H` | 54 (0x36) |  |  |
-| `ONESHOT_KICK` | 60 (0x3C) |  |  |
-| `ONESHOT_ATTACKTHROWN` | 61 (0x3D) |  |  |
-| `STATE_STUN` | 64 (0x40) |  |  |
-| `STATE_DEAD` | 65 (0x41) |  |  |
-| `ONESHOT_SALUTE` | 66 (0x42) |  |  |
-| `STATE_KNEEL` | 68 (0x44) |  |  |
-| `STATE_USESTANDING` | 69 (0x45) |  |  |
-| `ONESHOT_WAVE_NOSHEATHE` | 70 (0x46) |  |  |
-| `ONESHOT_CHEER_NOSHEATHE` | 71 (0x47) |  |  |
-| `ONESHOT_EAT_NOSHEATHE` | 92 (0x5C) |  |  |
-| `STATE_STUN_NOSHEATHE` | 93 (0x5D) |  |  |
-| `ONESHOT_DANCE` | 94 (0x5E) |  |  |
-| `ONESHOT_SALUTE_NOSHEATH` | 113 (0x71) |  |  |
-| `STATE_USESTANDING_NOSHEATHE` | 133 (0x85) |  |  |
-| `ONESHOT_LAUGH_NOSHEATHE` | 153 (0x99) |  |  |
-| `STATE_WORK` | 173 (0xAD) |  |  |
-| `STATE_SPELLPRECAST` | 193 (0xC1) |  |  |
-| `ONESHOT_READYRIFLE` | 213 (0xD5) |  |  |
-| `STATE_READYRIFLE` | 214 (0xD6) |  |  |
-| `STATE_WORK_MINING` | 233 (0xE9) |  |  |
-| `STATE_WORK_CHOPWOOD` | 234 (0xEA) |  |  |
-| `STATE_APPLAUD` | 253 (0xFD) |  |  |
-| `ONESHOT_LIFTOFF` | 254 (0xFE) |  |  |
-| `ONESHOT_YES` | 273 (0x111) |  |  |
-| `ONESHOT_NO` | 274 (0x112) |  |  |
-| `ONESHOT_TRAIN` | 275 (0x113) |  |  |
-| `ONESHOT_LAND` | 293 (0x125) |  |  |
-| `STATE_AT_EASE` | 313 (0x139) |  |  |
-| `STATE_READY1H` | 333 (0x14D) |  |  |
-| `STATE_SPELLKNEELSTART` | 353 (0x161) |  |  |
-| `STATE_SUBMERGED` | 373 (0x175) |  |  |
-| `ONESHOT_SUBMERGE` | 374 (0x176) |  |  |
-| `STATE_READY2H` | 375 (0x177) |  |  |
-| `STATE_READYBOW` | 376 (0x178) |  |  |
-| `ONESHOT_MOUNTSPECIAL` | 377 (0x179) |  |  |
-| `STATE_TALK` | 378 (0x17A) |  |  |
-| `STATE_FISHING` | 379 (0x17B) |  |  |
-| `ONESHOT_FISHING` | 380 (0x17C) |  |  |
-| `ONESHOT_LOOT` | 381 (0x17D) |  |  |
-| `STATE_WHIRLWIND` | 382 (0x17E) |  |  |
-| `STATE_DROWNED` | 383 (0x17F) |  |  |
-| `STATE_HOLD_BOW` | 384 (0x180) |  |  |
-| `STATE_HOLD_RIFLE` | 385 (0x181) |  |  |
-| `STATE_HOLD_THROWN` | 386 (0x182) |  |  |
-| `ONESHOT_DROWN` | 387 (0x183) |  |  |
-| `ONESHOT_STOMP` | 388 (0x184) |  |  |
-| `ONESHOT_ATTACKOFF` | 389 (0x185) |  |  |
-| `ONESHOT_ATTACKOFFPIERCE` | 390 (0x186) |  |  |
-| `STATE_ROAR` | 391 (0x187) |  |  |
-| `STATE_LAUGH` | 392 (0x188) |  |  |
-| `ONESHOT_CREATURE_SPECIAL` | 393 (0x189) |  |  |
-| `ONESHOT_JUMPLANDRUN` | 394 (0x18A) |  |  |
-| `ONESHOT_JUMPEND` | 395 (0x18B) |  |  |
-| `ONESHOT_TALK_NOSHEATHE` | 396 (0x18C) |  |  |
-| `ONESHOT_POINT_NOSHEATHE` | 397 (0x18D) |  |  |
-| `STATE_CANNIBALIZE` | 398 (0x18E) |  |  |
-| `ONESHOT_JUMPSTART` | 399 (0x18F) |  |  |
-| `STATE_DANCESPECIAL` | 400 (0x190) |  |  |
-| `ONESHOT_DANCESPECIAL` | 401 (0x191) |  |  |
-| `ONESHOT_CUSTOMSPELL01` | 402 (0x192) |  |  |
-| `ONESHOT_CUSTOMSPELL02` | 403 (0x193) |  |  |
-| `ONESHOT_CUSTOMSPELL03` | 404 (0x194) |  |  |
-| `ONESHOT_CUSTOMSPELL04` | 405 (0x195) |  |  |
-| `ONESHOT_CUSTOMSPELL05` | 406 (0x196) |  |  |
-| `ONESHOT_CUSTOMSPELL06` | 407 (0x197) |  |  |
-| `ONESHOT_CUSTOMSPELL07` | 408 (0x198) |  |  |
-| `ONESHOT_CUSTOMSPELL08` | 409 (0x199) |  |  |
-| `ONESHOT_CUSTOMSPELL09` | 410 (0x19A) |  |  |
-| `ONESHOT_CUSTOMSPELL10` | 411 (0x19B) |  |  |
-| `STATE_EXCLAIM` | 412 (0x19C) |  |  |
-| `STATE_SIT_CHAIR_MED` | 415 (0x19F) |  |  |
-| `STATE_SPELLEFFECT_HOLD` | 422 (0x1A6) |  |  |
-| `STATE_EAT_NO_SHEATHE` | 423 (0x1A7) |  |  |
+| Enumerator | Value  | Comment |
+| --------- | -------- | ------- |
+| `ONESHOT_NONE` | 0 (0x00) |  |
+| `ONESHOT_TALK` | 1 (0x01) |  |
+| `ONESHOT_BOW` | 2 (0x02) |  |
+| `ONESHOT_WAVE` | 3 (0x03) |  |
+| `ONESHOT_CHEER` | 4 (0x04) |  |
+| `ONESHOT_EXCLAMATION` | 5 (0x05) |  |
+| `ONESHOT_QUESTION` | 6 (0x06) |  |
+| `ONESHOT_EAT` | 7 (0x07) |  |
+| `STATE_DANCE` | 10 (0x0A) |  |
+| `ONESHOT_LAUGH` | 11 (0x0B) |  |
+| `STATE_SLEEP` | 12 (0x0C) |  |
+| `STATE_SIT` | 13 (0x0D) |  |
+| `ONESHOT_RUDE` | 14 (0x0E) |  |
+| `ONESHOT_ROAR` | 15 (0x0F) |  |
+| `ONESHOT_KNEEL` | 16 (0x10) |  |
+| `ONESHOT_KISS` | 17 (0x11) |  |
+| `ONESHOT_CRY` | 18 (0x12) |  |
+| `ONESHOT_CHICKEN` | 19 (0x13) |  |
+| `ONESHOT_BEG` | 20 (0x14) |  |
+| `ONESHOT_APPLAUD` | 21 (0x15) |  |
+| `ONESHOT_SHOUT` | 22 (0x16) |  |
+| `ONESHOT_FLEX` | 23 (0x17) |  |
+| `ONESHOT_SHY` | 24 (0x18) |  |
+| `ONESHOT_POINT` | 25 (0x19) |  |
+| `STATE_STAND` | 26 (0x1A) |  |
+| `STATE_READYUNARMED` | 27 (0x1B) |  |
+| `STATE_WORK_SHEATHED` | 28 (0x1C) |  |
+| `STATE_POINT` | 29 (0x1D) |  |
+| `STATE_NONE` | 30 (0x1E) |  |
+| `ONESHOT_WOUND` | 33 (0x21) |  |
+| `ONESHOT_WOUNDCRITICAL` | 34 (0x22) |  |
+| `ONESHOT_ATTACKUNARMED` | 35 (0x23) |  |
+| `ONESHOT_ATTACK1H` | 36 (0x24) |  |
+| `ONESHOT_ATTACK2HTIGHT` | 37 (0x25) |  |
+| `ONESHOT_ATTACK2HLOOSE` | 38 (0x26) |  |
+| `ONESHOT_PARRYUNARMED` | 39 (0x27) |  |
+| `ONESHOT_PARRYSHIELD` | 43 (0x2B) |  |
+| `ONESHOT_READYUNARMED` | 44 (0x2C) |  |
+| `ONESHOT_READY1H` | 45 (0x2D) |  |
+| `ONESHOT_READYBOW` | 48 (0x30) |  |
+| `ONESHOT_SPELLPRECAST` | 50 (0x32) |  |
+| `ONESHOT_SPELLCAST` | 51 (0x33) |  |
+| `ONESHOT_BATTLEROAR` | 53 (0x35) |  |
+| `ONESHOT_SPECIALATTACK1H` | 54 (0x36) |  |
+| `ONESHOT_KICK` | 60 (0x3C) |  |
+| `ONESHOT_ATTACKTHROWN` | 61 (0x3D) |  |
+| `STATE_STUN` | 64 (0x40) |  |
+| `STATE_DEAD` | 65 (0x41) |  |
+| `ONESHOT_SALUTE` | 66 (0x42) |  |
+| `STATE_KNEEL` | 68 (0x44) |  |
+| `STATE_USESTANDING` | 69 (0x45) |  |
+| `ONESHOT_WAVE_NOSHEATHE` | 70 (0x46) |  |
+| `ONESHOT_CHEER_NOSHEATHE` | 71 (0x47) |  |
+| `ONESHOT_EAT_NOSHEATHE` | 92 (0x5C) |  |
+| `STATE_STUN_NOSHEATHE` | 93 (0x5D) |  |
+| `ONESHOT_DANCE` | 94 (0x5E) |  |
+| `ONESHOT_SALUTE_NOSHEATH` | 113 (0x71) |  |
+| `STATE_USESTANDING_NOSHEATHE` | 133 (0x85) |  |
+| `ONESHOT_LAUGH_NOSHEATHE` | 153 (0x99) |  |
+| `STATE_WORK` | 173 (0xAD) |  |
+| `STATE_SPELLPRECAST` | 193 (0xC1) |  |
+| `ONESHOT_READYRIFLE` | 213 (0xD5) |  |
+| `STATE_READYRIFLE` | 214 (0xD6) |  |
+| `STATE_WORK_MINING` | 233 (0xE9) |  |
+| `STATE_WORK_CHOPWOOD` | 234 (0xEA) |  |
+| `STATE_APPLAUD` | 253 (0xFD) |  |
+| `ONESHOT_LIFTOFF` | 254 (0xFE) |  |
+| `ONESHOT_YES` | 273 (0x111) |  |
+| `ONESHOT_NO` | 274 (0x112) |  |
+| `ONESHOT_TRAIN` | 275 (0x113) |  |
+| `ONESHOT_LAND` | 293 (0x125) |  |
+| `STATE_AT_EASE` | 313 (0x139) |  |
+| `STATE_READY1H` | 333 (0x14D) |  |
+| `STATE_SPELLKNEELSTART` | 353 (0x161) |  |
+| `STATE_SUBMERGED` | 373 (0x175) |  |
+| `ONESHOT_SUBMERGE` | 374 (0x176) |  |
+| `STATE_READY2H` | 375 (0x177) |  |
+| `STATE_READYBOW` | 376 (0x178) |  |
+| `ONESHOT_MOUNTSPECIAL` | 377 (0x179) |  |
+| `STATE_TALK` | 378 (0x17A) |  |
+| `STATE_FISHING` | 379 (0x17B) |  |
+| `ONESHOT_FISHING` | 380 (0x17C) |  |
+| `ONESHOT_LOOT` | 381 (0x17D) |  |
+| `STATE_WHIRLWIND` | 382 (0x17E) |  |
+| `STATE_DROWNED` | 383 (0x17F) |  |
+| `STATE_HOLD_BOW` | 384 (0x180) |  |
+| `STATE_HOLD_RIFLE` | 385 (0x181) |  |
+| `STATE_HOLD_THROWN` | 386 (0x182) |  |
+| `ONESHOT_DROWN` | 387 (0x183) |  |
+| `ONESHOT_STOMP` | 388 (0x184) |  |
+| `ONESHOT_ATTACKOFF` | 389 (0x185) |  |
+| `ONESHOT_ATTACKOFFPIERCE` | 390 (0x186) |  |
+| `STATE_ROAR` | 391 (0x187) |  |
+| `STATE_LAUGH` | 392 (0x188) |  |
+| `ONESHOT_CREATURE_SPECIAL` | 393 (0x189) |  |
+| `ONESHOT_JUMPLANDRUN` | 394 (0x18A) |  |
+| `ONESHOT_JUMPEND` | 395 (0x18B) |  |
+| `ONESHOT_TALK_NOSHEATHE` | 396 (0x18C) |  |
+| `ONESHOT_POINT_NOSHEATHE` | 397 (0x18D) |  |
+| `STATE_CANNIBALIZE` | 398 (0x18E) |  |
+| `ONESHOT_JUMPSTART` | 399 (0x18F) |  |
+| `STATE_DANCESPECIAL` | 400 (0x190) |  |
+| `ONESHOT_DANCESPECIAL` | 401 (0x191) |  |
+| `ONESHOT_CUSTOMSPELL01` | 402 (0x192) |  |
+| `ONESHOT_CUSTOMSPELL02` | 403 (0x193) |  |
+| `ONESHOT_CUSTOMSPELL03` | 404 (0x194) |  |
+| `ONESHOT_CUSTOMSPELL04` | 405 (0x195) |  |
+| `ONESHOT_CUSTOMSPELL05` | 406 (0x196) |  |
+| `ONESHOT_CUSTOMSPELL06` | 407 (0x197) |  |
+| `ONESHOT_CUSTOMSPELL07` | 408 (0x198) |  |
+| `ONESHOT_CUSTOMSPELL08` | 409 (0x199) |  |
+| `ONESHOT_CUSTOMSPELL09` | 410 (0x19A) |  |
+| `ONESHOT_CUSTOMSPELL10` | 411 (0x19B) |  |
+| `STATE_EXCLAIM` | 412 (0x19C) |  |
+| `STATE_SIT_CHAIR_MED` | 415 (0x19F) |  |
+| `STATE_SPELLEFFECT_HOLD` | 422 (0x1A6) |  |
+| `STATE_EAT_NO_SHEATHE` | 423 (0x1A7) |  |
 
 Used in:
 * [CMSG_EMOTE](cmsg_emote.md)
@@ -696,183 +696,183 @@ enum Emote : u32 {
 ### Type
 The basic type is `u32`, a 4 byte (32 bit) little endian integer.
 ### Enumerators
-| Enumerator | Value  | Description | Comment |
-| --------- | -------- | ----------- | ------- |
-| `ONESHOT_NONE` | 0 (0x00) |  |  |
-| `ONESHOT_TALK` | 1 (0x01) |  |  |
-| `ONESHOT_BOW` | 2 (0x02) |  |  |
-| `ONESHOT_WAVE` | 3 (0x03) |  |  |
-| `ONESHOT_CHEER` | 4 (0x04) |  |  |
-| `ONESHOT_EXCLAMATION` | 5 (0x05) |  |  |
-| `ONESHOT_QUESTION` | 6 (0x06) |  |  |
-| `ONESHOT_EAT` | 7 (0x07) |  |  |
-| `STATE_DANCE` | 10 (0x0A) |  |  |
-| `ONESHOT_LAUGH` | 11 (0x0B) |  |  |
-| `STATE_SLEEP` | 12 (0x0C) |  |  |
-| `STATE_SIT` | 13 (0x0D) |  |  |
-| `ONESHOT_RUDE` | 14 (0x0E) |  |  |
-| `ONESHOT_ROAR` | 15 (0x0F) |  |  |
-| `ONESHOT_KNEEL` | 16 (0x10) |  |  |
-| `ONESHOT_KISS` | 17 (0x11) |  |  |
-| `ONESHOT_CRY` | 18 (0x12) |  |  |
-| `ONESHOT_CHICKEN` | 19 (0x13) |  |  |
-| `ONESHOT_BEG` | 20 (0x14) |  |  |
-| `ONESHOT_APPLAUD` | 21 (0x15) |  |  |
-| `ONESHOT_SHOUT` | 22 (0x16) |  |  |
-| `ONESHOT_FLEX` | 23 (0x17) |  |  |
-| `ONESHOT_SHY` | 24 (0x18) |  |  |
-| `ONESHOT_POINT` | 25 (0x19) |  |  |
-| `STATE_STAND` | 26 (0x1A) |  |  |
-| `STATE_READY_UNARMED` | 27 (0x1B) |  |  |
-| `STATE_WORK_SHEATHED` | 28 (0x1C) |  |  |
-| `STATE_POINT` | 29 (0x1D) |  |  |
-| `STATE_NONE` | 30 (0x1E) |  |  |
-| `ONESHOT_WOUND` | 33 (0x21) |  |  |
-| `ONESHOT_WOUND_CRITICAL` | 34 (0x22) |  |  |
-| `ONESHOT_ATTACK_UNARMED` | 35 (0x23) |  |  |
-| `ONESHOT_ATTACK1H` | 36 (0x24) |  |  |
-| `ONESHOT_ATTACK2HTIGHT` | 37 (0x25) |  |  |
-| `ONESHOT_ATTACK2H_LOOSE` | 38 (0x26) |  |  |
-| `ONESHOT_PARRY_UNARMED` | 39 (0x27) |  |  |
-| `ONESHOT_PARRY_SHIELD` | 43 (0x2B) |  |  |
-| `ONESHOT_READY_UNARMED` | 44 (0x2C) |  |  |
-| `ONESHOT_READY1H` | 45 (0x2D) |  |  |
-| `ONESHOT_READY_BOW` | 48 (0x30) |  |  |
-| `ONESHOT_SPELL_PRECAST` | 50 (0x32) |  |  |
-| `ONESHOT_SPELL_CAST` | 51 (0x33) |  |  |
-| `ONESHOT_BATTLE_ROAR` | 53 (0x35) |  |  |
-| `ONESHOT_SPECIALATTACK1H` | 54 (0x36) |  |  |
-| `ONESHOT_KICK` | 60 (0x3C) |  |  |
-| `ONESHOT_ATTACK_THROWN` | 61 (0x3D) |  |  |
-| `STATE_STUN` | 64 (0x40) |  |  |
-| `STATE_DEAD` | 65 (0x41) |  |  |
-| `ONESHOT_SALUTE` | 66 (0x42) |  |  |
-| `STATE_KNEEL` | 68 (0x44) |  |  |
-| `STATE_USE_STANDING` | 69 (0x45) |  |  |
-| `ONESHOT_WAVE_NO_SHEATHE` | 70 (0x46) |  |  |
-| `ONESHOT_CHEER_NO_SHEATHE` | 71 (0x47) |  |  |
-| `ONESHOT_EAT_NO_SHEATHE` | 92 (0x5C) |  |  |
-| `STATE_STUN_NO_SHEATHE` | 93 (0x5D) |  |  |
-| `ONESHOT_DANCE` | 94 (0x5E) |  |  |
-| `ONESHOT_SALUTE_NO_SHEATH` | 113 (0x71) |  |  |
-| `STATE_USE_STANDING_NO_SHEATHE` | 133 (0x85) |  |  |
-| `ONESHOT_LAUGH_NO_SHEATHE` | 153 (0x99) |  |  |
-| `STATE_WORK` | 173 (0xAD) |  |  |
-| `STATE_SPELL_PRECAST` | 193 (0xC1) |  |  |
-| `ONESHOT_READY_RIFLE` | 213 (0xD5) |  |  |
-| `STATE_READY_RIFLE` | 214 (0xD6) |  |  |
-| `STATE_WORK_MINING` | 233 (0xE9) |  |  |
-| `STATE_WORK_CHOPWOOD` | 234 (0xEA) |  |  |
-| `STATE_APPLAUD` | 253 (0xFD) |  |  |
-| `ONESHOT_LIFTOFF` | 254 (0xFE) |  |  |
-| `ONESHOT_YES` | 273 (0x111) |  |  |
-| `ONESHOT_NO` | 274 (0x112) |  |  |
-| `ONESHOT_TRAIN` | 275 (0x113) |  |  |
-| `ONESHOT_LAND` | 293 (0x125) |  |  |
-| `STATE_AT_EASE` | 313 (0x139) |  |  |
-| `STATE_READY1H` | 333 (0x14D) |  |  |
-| `STATE_SPELL_KNEEL_START` | 353 (0x161) |  |  |
-| `STATE_SUBMERGED` | 373 (0x175) |  |  |
-| `ONESHOT_SUBMERGE` | 374 (0x176) |  |  |
-| `STATE_READY2H` | 375 (0x177) |  |  |
-| `STATE_READY_BOW` | 376 (0x178) |  |  |
-| `ONESHOT_MOUNT_SPECIAL` | 377 (0x179) |  |  |
-| `STATE_TALK` | 378 (0x17A) |  |  |
-| `STATE_FISHING` | 379 (0x17B) |  |  |
-| `ONESHOT_FISHING` | 380 (0x17C) |  |  |
-| `ONESHOT_LOOT` | 381 (0x17D) |  |  |
-| `STATE_WHIRLWIND` | 382 (0x17E) |  |  |
-| `STATE_DROWNED` | 383 (0x17F) |  |  |
-| `STATE_HOLD_BOW` | 384 (0x180) |  |  |
-| `STATE_HOLD_RIFLE` | 385 (0x181) |  |  |
-| `STATE_HOLD_THROWN` | 386 (0x182) |  |  |
-| `ONESHOT_DROWN` | 387 (0x183) |  |  |
-| `ONESHOT_STOMP` | 388 (0x184) |  |  |
-| `ONESHOT_ATTACK_OFF` | 389 (0x185) |  |  |
-| `ONESHOT_ATTACK_OFF_PIERCE` | 390 (0x186) |  |  |
-| `STATE_ROAR` | 391 (0x187) |  |  |
-| `STATE_LAUGH` | 392 (0x188) |  |  |
-| `ONESHOT_CREATURE_SPECIAL` | 393 (0x189) |  |  |
-| `ONESHOT_JUMPLANDRUN` | 394 (0x18A) |  |  |
-| `ONESHOT_JUMPEND` | 395 (0x18B) |  |  |
-| `ONESHOT_TALK_NO_SHEATHE` | 396 (0x18C) |  |  |
-| `ONESHOT_POINT_NO_SHEATHE` | 397 (0x18D) |  |  |
-| `STATE_CANNIBALIZE` | 398 (0x18E) |  |  |
-| `ONESHOT_JUMPSTART` | 399 (0x18F) |  |  |
-| `STATE_DANCESPECIAL` | 400 (0x190) |  |  |
-| `ONESHOT_DANCESPECIAL` | 401 (0x191) |  |  |
-| `ONESHOT_CUSTOM_SPELL_01` | 402 (0x192) |  |  |
-| `ONESHOT_CUSTOM_SPELL_02` | 403 (0x193) |  |  |
-| `ONESHOT_CUSTOM_SPELL_03` | 404 (0x194) |  |  |
-| `ONESHOT_CUSTOM_SPELL_04` | 405 (0x195) |  |  |
-| `ONESHOT_CUSTOM_SPELL_05` | 406 (0x196) |  |  |
-| `ONESHOT_CUSTOM_SPELL_06` | 407 (0x197) |  |  |
-| `ONESHOT_CUSTOM_SPELL_07` | 408 (0x198) |  |  |
-| `ONESHOT_CUSTOM_SPELL_08` | 409 (0x199) |  |  |
-| `ONESHOT_CUSTOM_SPELL_09` | 410 (0x19A) |  |  |
-| `ONESHOT_CUSTOM_SPELL_10` | 411 (0x19B) |  |  |
-| `STATE_EXCLAIM` | 412 (0x19C) |  |  |
-| `STATE_DANCE_CUSTOM` | 413 (0x19D) |  |  |
-| `STATE_SIT_CHAIR_MED` | 415 (0x19F) |  |  |
-| `STATE_CUSTOM_SPELL_01` | 416 (0x1A0) |  |  |
-| `STATE_CUSTOM_SPELL_02` | 417 (0x1A1) |  |  |
-| `STATE_EAT` | 418 (0x1A2) |  |  |
-| `STATE_CUSTOM_SPELL_04` | 419 (0x1A3) |  |  |
-| `STATE_CUSTOM_SPELL_03` | 420 (0x1A4) |  |  |
-| `STATE_CUSTOM_SPELL_05` | 421 (0x1A5) |  |  |
-| `STATE_SPELLEFFECT_HOLD` | 422 (0x1A6) |  |  |
-| `STATE_EAT_NO_SHEATHE` | 423 (0x1A7) |  |  |
-| `STATE_MOUNT` | 424 (0x1A8) |  |  |
-| `STATE_READY2HL` | 425 (0x1A9) |  |  |
-| `STATE_SIT_CHAIR_HIGH` | 426 (0x1AA) |  |  |
-| `STATE_FALL` | 427 (0x1AB) |  |  |
-| `STATE_LOOT` | 428 (0x1AC) |  |  |
-| `STATE_SUBMERGED_NEW` | 429 (0x1AD) |  |  |
-| `ONESHOT_COWER` | 430 (0x1AE) |  |  |
-| `STATE_COWER` | 431 (0x1AF) |  |  |
-| `ONESHOT_USE_STANDING` | 432 (0x1B0) |  |  |
-| `STATE_STEALTH_STAND` | 433 (0x1B1) |  |  |
-| `ONESHOT_OMNICAST_GHOUL` | 434 (0x1B2) |  |  |
-| `ONESHOT_ATTACK_BOW` | 435 (0x1B3) |  |  |
-| `ONESHOT_ATTACK_RIFLE` | 436 (0x1B4) |  |  |
-| `STATE_SWIM_IDLE` | 437 (0x1B5) |  |  |
-| `STATE_ATTACK_UNARMED` | 438 (0x1B6) |  |  |
-| `ONESHOT_SPELL_CAST_W_SOUND` | 439 (0x1B7) |  |  |
-| `ONESHOT_DODGE` | 440 (0x1B8) |  |  |
-| `ONESHOT_PARRY1H` | 441 (0x1B9) |  |  |
-| `ONESHOT_PARRY2H` | 442 (0x1BA) |  |  |
-| `ONESHOT_PARRY2HL` | 443 (0x1BB) |  |  |
-| `STATE_FLYFALL` | 444 (0x1BC) |  |  |
-| `ONESHOT_FLYDEATH` | 445 (0x1BD) |  |  |
-| `STATE_FLY_FALL` | 446 (0x1BE) |  |  |
-| `ONESHOT_FLY_SIT_GROUND_DOWN` | 447 (0x1BF) |  |  |
-| `ONESHOT_FLY_SIT_GROUND_UP` | 448 (0x1C0) |  |  |
-| `ONESHOT_EMERGE` | 449 (0x1C1) |  |  |
-| `ONESHOT_DRAGON_SPIT` | 450 (0x1C2) |  |  |
-| `STATE_SPECIAL_UNARMED` | 451 (0x1C3) |  |  |
-| `ONESHOT_FLYGRAB` | 452 (0x1C4) |  |  |
-| `STATE_FLYGRABCLOSED` | 453 (0x1C5) |  |  |
-| `ONESHOT_FLYGRABTHROWN` | 454 (0x1C6) |  |  |
-| `STATE_FLY_SIT_GROUND` | 455 (0x1C7) |  |  |
-| `STATE_WALK_BACKWARDS` | 456 (0x1C8) |  |  |
-| `ONESHOT_FLYTALK` | 457 (0x1C9) |  |  |
-| `ONESHOT_FLYATTACK1H` | 458 (0x1CA) |  |  |
-| `STATE_CUSTOM_SPELL_08` | 459 (0x1CB) |  |  |
-| `ONESHOT_FLY_DRAGON_SPIT` | 460 (0x1CC) |  |  |
-| `STATE_SIT_CHAIR_LOW` | 461 (0x1CD) |  |  |
-| `ONESHOT_STUN` | 462 (0x1CE) |  |  |
-| `ONESHOT_SPELL_CAST_OMNI` | 463 (0x1CF) |  |  |
-| `STATE_READY_THROWN` | 465 (0x1D1) |  |  |
-| `ONESHOT_WORK_CHOPWOOD` | 466 (0x1D2) |  |  |
-| `ONESHOT_WORK_MINING` | 467 (0x1D3) |  |  |
-| `STATE_SPELL_CHANNEL_OMNI` | 468 (0x1D4) |  |  |
-| `STATE_SPELL_CHANNEL_DIRECTED` | 469 (0x1D5) |  |  |
-| `STAND_STATE_NONE` | 470 (0x1D6) |  |  |
-| `STATE_READYJOUST` | 471 (0x1D7) |  |  |
-| `STATE_STRANGULATE` | 473 (0x1D9) |  |  |
-| `STATE_READY_SPELL_OMNI` | 474 (0x1DA) |  |  |
-| `STATE_HOLD_JOUST` | 475 (0x1DB) |  |  |
-| `ONESHOT_CRY_JAINA` | 476 (0x1DC) |  |  |
+| Enumerator | Value  | Comment |
+| --------- | -------- | ------- |
+| `ONESHOT_NONE` | 0 (0x00) |  |
+| `ONESHOT_TALK` | 1 (0x01) |  |
+| `ONESHOT_BOW` | 2 (0x02) |  |
+| `ONESHOT_WAVE` | 3 (0x03) |  |
+| `ONESHOT_CHEER` | 4 (0x04) |  |
+| `ONESHOT_EXCLAMATION` | 5 (0x05) |  |
+| `ONESHOT_QUESTION` | 6 (0x06) |  |
+| `ONESHOT_EAT` | 7 (0x07) |  |
+| `STATE_DANCE` | 10 (0x0A) |  |
+| `ONESHOT_LAUGH` | 11 (0x0B) |  |
+| `STATE_SLEEP` | 12 (0x0C) |  |
+| `STATE_SIT` | 13 (0x0D) |  |
+| `ONESHOT_RUDE` | 14 (0x0E) |  |
+| `ONESHOT_ROAR` | 15 (0x0F) |  |
+| `ONESHOT_KNEEL` | 16 (0x10) |  |
+| `ONESHOT_KISS` | 17 (0x11) |  |
+| `ONESHOT_CRY` | 18 (0x12) |  |
+| `ONESHOT_CHICKEN` | 19 (0x13) |  |
+| `ONESHOT_BEG` | 20 (0x14) |  |
+| `ONESHOT_APPLAUD` | 21 (0x15) |  |
+| `ONESHOT_SHOUT` | 22 (0x16) |  |
+| `ONESHOT_FLEX` | 23 (0x17) |  |
+| `ONESHOT_SHY` | 24 (0x18) |  |
+| `ONESHOT_POINT` | 25 (0x19) |  |
+| `STATE_STAND` | 26 (0x1A) |  |
+| `STATE_READY_UNARMED` | 27 (0x1B) |  |
+| `STATE_WORK_SHEATHED` | 28 (0x1C) |  |
+| `STATE_POINT` | 29 (0x1D) |  |
+| `STATE_NONE` | 30 (0x1E) |  |
+| `ONESHOT_WOUND` | 33 (0x21) |  |
+| `ONESHOT_WOUND_CRITICAL` | 34 (0x22) |  |
+| `ONESHOT_ATTACK_UNARMED` | 35 (0x23) |  |
+| `ONESHOT_ATTACK1H` | 36 (0x24) |  |
+| `ONESHOT_ATTACK2HTIGHT` | 37 (0x25) |  |
+| `ONESHOT_ATTACK2H_LOOSE` | 38 (0x26) |  |
+| `ONESHOT_PARRY_UNARMED` | 39 (0x27) |  |
+| `ONESHOT_PARRY_SHIELD` | 43 (0x2B) |  |
+| `ONESHOT_READY_UNARMED` | 44 (0x2C) |  |
+| `ONESHOT_READY1H` | 45 (0x2D) |  |
+| `ONESHOT_READY_BOW` | 48 (0x30) |  |
+| `ONESHOT_SPELL_PRECAST` | 50 (0x32) |  |
+| `ONESHOT_SPELL_CAST` | 51 (0x33) |  |
+| `ONESHOT_BATTLE_ROAR` | 53 (0x35) |  |
+| `ONESHOT_SPECIALATTACK1H` | 54 (0x36) |  |
+| `ONESHOT_KICK` | 60 (0x3C) |  |
+| `ONESHOT_ATTACK_THROWN` | 61 (0x3D) |  |
+| `STATE_STUN` | 64 (0x40) |  |
+| `STATE_DEAD` | 65 (0x41) |  |
+| `ONESHOT_SALUTE` | 66 (0x42) |  |
+| `STATE_KNEEL` | 68 (0x44) |  |
+| `STATE_USE_STANDING` | 69 (0x45) |  |
+| `ONESHOT_WAVE_NO_SHEATHE` | 70 (0x46) |  |
+| `ONESHOT_CHEER_NO_SHEATHE` | 71 (0x47) |  |
+| `ONESHOT_EAT_NO_SHEATHE` | 92 (0x5C) |  |
+| `STATE_STUN_NO_SHEATHE` | 93 (0x5D) |  |
+| `ONESHOT_DANCE` | 94 (0x5E) |  |
+| `ONESHOT_SALUTE_NO_SHEATH` | 113 (0x71) |  |
+| `STATE_USE_STANDING_NO_SHEATHE` | 133 (0x85) |  |
+| `ONESHOT_LAUGH_NO_SHEATHE` | 153 (0x99) |  |
+| `STATE_WORK` | 173 (0xAD) |  |
+| `STATE_SPELL_PRECAST` | 193 (0xC1) |  |
+| `ONESHOT_READY_RIFLE` | 213 (0xD5) |  |
+| `STATE_READY_RIFLE` | 214 (0xD6) |  |
+| `STATE_WORK_MINING` | 233 (0xE9) |  |
+| `STATE_WORK_CHOPWOOD` | 234 (0xEA) |  |
+| `STATE_APPLAUD` | 253 (0xFD) |  |
+| `ONESHOT_LIFTOFF` | 254 (0xFE) |  |
+| `ONESHOT_YES` | 273 (0x111) |  |
+| `ONESHOT_NO` | 274 (0x112) |  |
+| `ONESHOT_TRAIN` | 275 (0x113) |  |
+| `ONESHOT_LAND` | 293 (0x125) |  |
+| `STATE_AT_EASE` | 313 (0x139) |  |
+| `STATE_READY1H` | 333 (0x14D) |  |
+| `STATE_SPELL_KNEEL_START` | 353 (0x161) |  |
+| `STATE_SUBMERGED` | 373 (0x175) |  |
+| `ONESHOT_SUBMERGE` | 374 (0x176) |  |
+| `STATE_READY2H` | 375 (0x177) |  |
+| `STATE_READY_BOW` | 376 (0x178) |  |
+| `ONESHOT_MOUNT_SPECIAL` | 377 (0x179) |  |
+| `STATE_TALK` | 378 (0x17A) |  |
+| `STATE_FISHING` | 379 (0x17B) |  |
+| `ONESHOT_FISHING` | 380 (0x17C) |  |
+| `ONESHOT_LOOT` | 381 (0x17D) |  |
+| `STATE_WHIRLWIND` | 382 (0x17E) |  |
+| `STATE_DROWNED` | 383 (0x17F) |  |
+| `STATE_HOLD_BOW` | 384 (0x180) |  |
+| `STATE_HOLD_RIFLE` | 385 (0x181) |  |
+| `STATE_HOLD_THROWN` | 386 (0x182) |  |
+| `ONESHOT_DROWN` | 387 (0x183) |  |
+| `ONESHOT_STOMP` | 388 (0x184) |  |
+| `ONESHOT_ATTACK_OFF` | 389 (0x185) |  |
+| `ONESHOT_ATTACK_OFF_PIERCE` | 390 (0x186) |  |
+| `STATE_ROAR` | 391 (0x187) |  |
+| `STATE_LAUGH` | 392 (0x188) |  |
+| `ONESHOT_CREATURE_SPECIAL` | 393 (0x189) |  |
+| `ONESHOT_JUMPLANDRUN` | 394 (0x18A) |  |
+| `ONESHOT_JUMPEND` | 395 (0x18B) |  |
+| `ONESHOT_TALK_NO_SHEATHE` | 396 (0x18C) |  |
+| `ONESHOT_POINT_NO_SHEATHE` | 397 (0x18D) |  |
+| `STATE_CANNIBALIZE` | 398 (0x18E) |  |
+| `ONESHOT_JUMPSTART` | 399 (0x18F) |  |
+| `STATE_DANCESPECIAL` | 400 (0x190) |  |
+| `ONESHOT_DANCESPECIAL` | 401 (0x191) |  |
+| `ONESHOT_CUSTOM_SPELL_01` | 402 (0x192) |  |
+| `ONESHOT_CUSTOM_SPELL_02` | 403 (0x193) |  |
+| `ONESHOT_CUSTOM_SPELL_03` | 404 (0x194) |  |
+| `ONESHOT_CUSTOM_SPELL_04` | 405 (0x195) |  |
+| `ONESHOT_CUSTOM_SPELL_05` | 406 (0x196) |  |
+| `ONESHOT_CUSTOM_SPELL_06` | 407 (0x197) |  |
+| `ONESHOT_CUSTOM_SPELL_07` | 408 (0x198) |  |
+| `ONESHOT_CUSTOM_SPELL_08` | 409 (0x199) |  |
+| `ONESHOT_CUSTOM_SPELL_09` | 410 (0x19A) |  |
+| `ONESHOT_CUSTOM_SPELL_10` | 411 (0x19B) |  |
+| `STATE_EXCLAIM` | 412 (0x19C) |  |
+| `STATE_DANCE_CUSTOM` | 413 (0x19D) |  |
+| `STATE_SIT_CHAIR_MED` | 415 (0x19F) |  |
+| `STATE_CUSTOM_SPELL_01` | 416 (0x1A0) |  |
+| `STATE_CUSTOM_SPELL_02` | 417 (0x1A1) |  |
+| `STATE_EAT` | 418 (0x1A2) |  |
+| `STATE_CUSTOM_SPELL_04` | 419 (0x1A3) |  |
+| `STATE_CUSTOM_SPELL_03` | 420 (0x1A4) |  |
+| `STATE_CUSTOM_SPELL_05` | 421 (0x1A5) |  |
+| `STATE_SPELLEFFECT_HOLD` | 422 (0x1A6) |  |
+| `STATE_EAT_NO_SHEATHE` | 423 (0x1A7) |  |
+| `STATE_MOUNT` | 424 (0x1A8) |  |
+| `STATE_READY2HL` | 425 (0x1A9) |  |
+| `STATE_SIT_CHAIR_HIGH` | 426 (0x1AA) |  |
+| `STATE_FALL` | 427 (0x1AB) |  |
+| `STATE_LOOT` | 428 (0x1AC) |  |
+| `STATE_SUBMERGED_NEW` | 429 (0x1AD) |  |
+| `ONESHOT_COWER` | 430 (0x1AE) |  |
+| `STATE_COWER` | 431 (0x1AF) |  |
+| `ONESHOT_USE_STANDING` | 432 (0x1B0) |  |
+| `STATE_STEALTH_STAND` | 433 (0x1B1) |  |
+| `ONESHOT_OMNICAST_GHOUL` | 434 (0x1B2) |  |
+| `ONESHOT_ATTACK_BOW` | 435 (0x1B3) |  |
+| `ONESHOT_ATTACK_RIFLE` | 436 (0x1B4) |  |
+| `STATE_SWIM_IDLE` | 437 (0x1B5) |  |
+| `STATE_ATTACK_UNARMED` | 438 (0x1B6) |  |
+| `ONESHOT_SPELL_CAST_W_SOUND` | 439 (0x1B7) |  |
+| `ONESHOT_DODGE` | 440 (0x1B8) |  |
+| `ONESHOT_PARRY1H` | 441 (0x1B9) |  |
+| `ONESHOT_PARRY2H` | 442 (0x1BA) |  |
+| `ONESHOT_PARRY2HL` | 443 (0x1BB) |  |
+| `STATE_FLYFALL` | 444 (0x1BC) |  |
+| `ONESHOT_FLYDEATH` | 445 (0x1BD) |  |
+| `STATE_FLY_FALL` | 446 (0x1BE) |  |
+| `ONESHOT_FLY_SIT_GROUND_DOWN` | 447 (0x1BF) |  |
+| `ONESHOT_FLY_SIT_GROUND_UP` | 448 (0x1C0) |  |
+| `ONESHOT_EMERGE` | 449 (0x1C1) |  |
+| `ONESHOT_DRAGON_SPIT` | 450 (0x1C2) |  |
+| `STATE_SPECIAL_UNARMED` | 451 (0x1C3) |  |
+| `ONESHOT_FLYGRAB` | 452 (0x1C4) |  |
+| `STATE_FLYGRABCLOSED` | 453 (0x1C5) |  |
+| `ONESHOT_FLYGRABTHROWN` | 454 (0x1C6) |  |
+| `STATE_FLY_SIT_GROUND` | 455 (0x1C7) |  |
+| `STATE_WALK_BACKWARDS` | 456 (0x1C8) |  |
+| `ONESHOT_FLYTALK` | 457 (0x1C9) |  |
+| `ONESHOT_FLYATTACK1H` | 458 (0x1CA) |  |
+| `STATE_CUSTOM_SPELL_08` | 459 (0x1CB) |  |
+| `ONESHOT_FLY_DRAGON_SPIT` | 460 (0x1CC) |  |
+| `STATE_SIT_CHAIR_LOW` | 461 (0x1CD) |  |
+| `ONESHOT_STUN` | 462 (0x1CE) |  |
+| `ONESHOT_SPELL_CAST_OMNI` | 463 (0x1CF) |  |
+| `STATE_READY_THROWN` | 465 (0x1D1) |  |
+| `ONESHOT_WORK_CHOPWOOD` | 466 (0x1D2) |  |
+| `ONESHOT_WORK_MINING` | 467 (0x1D3) |  |
+| `STATE_SPELL_CHANNEL_OMNI` | 468 (0x1D4) |  |
+| `STATE_SPELL_CHANNEL_DIRECTED` | 469 (0x1D5) |  |
+| `STAND_STATE_NONE` | 470 (0x1D6) |  |
+| `STATE_READYJOUST` | 471 (0x1D7) |  |
+| `STATE_STRANGULATE` | 473 (0x1D9) |  |
+| `STATE_READY_SPELL_OMNI` | 474 (0x1DA) |  |
+| `STATE_HOLD_JOUST` | 475 (0x1DB) |  |
+| `ONESHOT_CRY_JAINA` | 476 (0x1DC) |  |
 
 Used in:
 * [CMSG_EMOTE](cmsg_emote.md)

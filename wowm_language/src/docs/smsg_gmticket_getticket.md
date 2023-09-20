@@ -32,21 +32,21 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | 4 / - | [GmTicketStatus](gmticketstatus.md) | status |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x04 | 4 / - | [GmTicketStatus](gmticketstatus.md) | status |  |
 
 If status is equal to `HAS_TEXT`:
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x08 | - / - | CString | text |  | cmangos: Ticket text: data, should never exceed 1999 bytes |
-| - | 1 / - | [GmTicketType](gmtickettype.md) | ticket_type |  |  |
-| - | 4 / Little | f32 | days_since_ticket_creation |  |  |
-| - | 4 / Little | f32 | days_since_oldest_ticket_creation |  |  |
-| - | 4 / Little | f32 | days_since_last_updated |  |  |
-| - | 1 / - | [GmTicketEscalationStatus](gmticketescalationstatus.md) | escalation_status |  |  |
-| - | 1 / - | Bool | read_by_gm |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x08 | - / - | CString | text | cmangos: Ticket text: data, should never exceed 1999 bytes |
+| - | 1 / - | [GmTicketType](gmtickettype.md) | ticket_type |  |
+| - | 4 / Little | f32 | days_since_ticket_creation |  |
+| - | 4 / Little | f32 | days_since_oldest_ticket_creation |  |
+| - | 4 / Little | f32 | days_since_last_updated |  |
+| - | 1 / - | [GmTicketEscalationStatus](gmticketescalationstatus.md) | escalation_status |  |
+| - | 1 / - | Bool | read_by_gm |  |
 
 ## Client Version 2.4.3
 
@@ -80,21 +80,21 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | 4 / - | [GmTicketStatus](gmticketstatus.md) | status |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x04 | 4 / - | [GmTicketStatus](gmticketstatus.md) | status |  |
 
 If status is equal to `HAS_TEXT`:
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x08 | - / - | CString | text |  | cmangos: Ticket text: data, should never exceed 1999 bytes |
-| - | 1 / - | [GmTicketType](gmtickettype.md) | ticket_type |  |  |
-| - | 4 / Little | f32 | days_since_ticket_creation |  |  |
-| - | 4 / Little | f32 | days_since_oldest_ticket_creation |  |  |
-| - | 4 / Little | f32 | days_since_last_updated |  |  |
-| - | 1 / - | [GmTicketEscalationStatus](gmticketescalationstatus.md) | escalation_status |  |  |
-| - | 1 / - | Bool | read_by_gm |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x08 | - / - | CString | text | cmangos: Ticket text: data, should never exceed 1999 bytes |
+| - | 1 / - | [GmTicketType](gmtickettype.md) | ticket_type |  |
+| - | 4 / Little | f32 | days_since_ticket_creation |  |
+| - | 4 / Little | f32 | days_since_oldest_ticket_creation |  |
+| - | 4 / Little | f32 | days_since_last_updated |  |
+| - | 1 / - | [GmTicketEscalationStatus](gmticketescalationstatus.md) | escalation_status |  |
+| - | 1 / - | Bool | read_by_gm |  |
 
 ## Client Version 3
 
@@ -129,20 +129,20 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | 4 / - | [GmTicketStatus](gmticketstatus.md) | status |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| - | 4 / - | [GmTicketStatus](gmticketstatus.md) | status |  |
 
 If status is equal to `HAS_TEXT`:
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | 4 / Little | u32 | id |  |  |
-| - | - / - | CString | text |  | cmangos: Ticket text: data, should never exceed 1999 bytes |
-| - | 1 / - | Bool | need_more_help |  |  |
-| - | 4 / Little | f32 | days_since_ticket_creation |  |  |
-| - | 4 / Little | f32 | days_since_oldest_ticket_creation |  |  |
-| - | 4 / Little | f32 | days_since_last_updated |  |  |
-| - | 1 / - | [GmTicketEscalationStatus](gmticketescalationstatus.md) | escalation_status |  |  |
-| - | 1 / - | Bool | read_by_gm |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| - | 4 / Little | u32 | id |  |
+| - | - / - | CString | text | cmangos: Ticket text: data, should never exceed 1999 bytes |
+| - | 1 / - | Bool | need_more_help |  |
+| - | 4 / Little | f32 | days_since_ticket_creation |  |
+| - | 4 / Little | f32 | days_since_oldest_ticket_creation |  |
+| - | 4 / Little | f32 | days_since_last_updated |  |
+| - | 1 / - | [GmTicketEscalationStatus](gmticketescalationstatus.md) | escalation_status |  |
+| - | 1 / - | Bool | read_by_gm |  |
 

@@ -15,10 +15,10 @@ enum ItemTextQuery : u8 {
 ### Type
 The basic type is `u8`, a 1 byte (8 bit) integer.
 ### Enumerators
-| Enumerator | Value  | Description | Comment |
-| --------- | -------- | ----------- | ------- |
-| `HAS_TEXT` | 0 (0x00) |  |  |
-| `NO_TEXT` | 1 (0x01) |  |  |
+| Enumerator | Value  | Comment |
+| --------- | -------- | ------- |
+| `HAS_TEXT` | 0 (0x00) |  |
+| `NO_TEXT` | 1 (0x01) |  |
 
 Used in:
 * [SMSG_ITEM_TEXT_QUERY_RESPONSE](smsg_item_text_query_response.md)

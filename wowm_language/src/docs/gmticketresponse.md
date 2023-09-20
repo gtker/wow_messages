@@ -20,15 +20,15 @@ enum GmTicketResponse : u32 {
 ### Type
 The basic type is `u32`, a 4 byte (32 bit) little endian integer.
 ### Enumerators
-| Enumerator | Value  | Description | Comment |
-| --------- | -------- | ----------- | ------- |
-| `NOT_EXIST` | 0 (0x00) |  |  |
-| `ALREADY_EXIST` | 1 (0x01) |  |  |
-| `CREATE_SUCCESS` | 2 (0x02) |  |  |
-| `CREATE_ERROR` | 3 (0x03) |  |  |
-| `UPDATE_SUCCESS` | 4 (0x04) |  |  |
-| `UPDATE_ERROR` | 5 (0x05) |  |  |
-| `TICKET_DELETED` | 9 (0x09) |  |  |
+| Enumerator | Value  | Comment |
+| --------- | -------- | ------- |
+| `NOT_EXIST` | 0 (0x00) |  |
+| `ALREADY_EXIST` | 1 (0x01) |  |
+| `CREATE_SUCCESS` | 2 (0x02) |  |
+| `CREATE_ERROR` | 3 (0x03) |  |
+| `UPDATE_SUCCESS` | 4 (0x04) |  |
+| `UPDATE_ERROR` | 5 (0x05) |  |
+| `TICKET_DELETED` | 9 (0x09) |  |
 
 Used in:
 * [SMSG_GMTICKET_CREATE](smsg_gmticket_create.md)

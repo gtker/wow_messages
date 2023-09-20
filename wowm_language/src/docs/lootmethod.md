@@ -22,17 +22,17 @@ enum LootMethod : u8 {
 ### Type
 The basic type is `u8`, a 1 byte (8 bit) integer.
 ### Enumerators
-| Enumerator | Value  | Description | Comment |
-| --------- | -------- | ----------- | ------- |
-| `ERROR` | 0 (0x00) |  |  |
-| `CORPSE` | 1 (0x01) |  |  |
-| `PICKPOCKETING` | 2 (0x02) |  |  |
-| `FISHING` | 3 (0x03) |  |  |
-| `DISENCHANTING` | 4 (0x04) |  |  |
-| `SKINNING` | 6 (0x06) |  | unsupported by client, send LOOT_PICKPOCKETING instead |
-| `FISHINGHOLE` | 20 (0x14) |  | unsupported by client, send LOOT_FISHING instead |
-| `FISHING_FAIL` | 21 (0x15) |  | unsupported by client, send LOOT_FISHING instead |
-| `INSIGNIA` | 22 (0x16) |  | unsupported by client, send LOOT_CORPSE instead |
+| Enumerator | Value  | Comment |
+| --------- | -------- | ------- |
+| `ERROR` | 0 (0x00) |  |
+| `CORPSE` | 1 (0x01) |  |
+| `PICKPOCKETING` | 2 (0x02) |  |
+| `FISHING` | 3 (0x03) |  |
+| `DISENCHANTING` | 4 (0x04) |  |
+| `SKINNING` | 6 (0x06) | unsupported by client, send LOOT_PICKPOCKETING instead |
+| `FISHINGHOLE` | 20 (0x14) | unsupported by client, send LOOT_FISHING instead |
+| `FISHING_FAIL` | 21 (0x15) | unsupported by client, send LOOT_FISHING instead |
+| `INSIGNIA` | 22 (0x16) | unsupported by client, send LOOT_CORPSE instead |
 
 Used in:
 * [SMSG_LOOT_RESPONSE](smsg_loot_response.md)

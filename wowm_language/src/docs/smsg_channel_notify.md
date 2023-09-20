@@ -24,10 +24,10 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | 1 / - | [ChatNotify](chatnotify.md) | notify_type |  |  |
-| 0x05 | - / - | CString | channel_name |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x04 | 1 / - | [ChatNotify](chatnotify.md) | notify_type |  |
+| 0x05 | - / - | CString | channel_name |  |
 
 ## Client Version 2.4.3, Client Version 3
 
@@ -57,15 +57,15 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | 1 / - | [ChatNotify](chatnotify.md) | notify_type |  |  |
-| - | - / - | CString | channel_name |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| - | 1 / - | [ChatNotify](chatnotify.md) | notify_type |  |
+| - | - / - | CString | channel_name |  |
 
 Optionally the following fields can be present. This can only be detected by looking at the size of the message.
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | 4 / Little | u32 | unknown2 |  |  |
-| - | 4 / Little | u32 | unkwown3 |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| - | 4 / Little | u32 | unknown2 |  |
+| - | 4 / Little | u32 | unkwown3 |  |
 

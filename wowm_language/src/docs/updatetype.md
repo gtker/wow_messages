@@ -19,14 +19,14 @@ enum UpdateType : u8 {
 ### Type
 The basic type is `u8`, a 1 byte (8 bit) integer.
 ### Enumerators
-| Enumerator | Value  | Description | Comment |
-| --------- | -------- | ----------- | ------- |
-| `VALUES` | 0 (0x00) |  |  |
-| `MOVEMENT` | 1 (0x01) |  |  |
-| `CREATE_OBJECT` | 2 (0x02) |  |  |
-| `CREATE_OBJECT2` | 3 (0x03) |  |  |
-| `OUT_OF_RANGE_OBJECTS` | 4 (0x04) |  |  |
-| `NEAR_OBJECTS` | 5 (0x05) |  |  |
+| Enumerator | Value  | Comment |
+| --------- | -------- | ------- |
+| `VALUES` | 0 (0x00) |  |
+| `MOVEMENT` | 1 (0x01) |  |
+| `CREATE_OBJECT` | 2 (0x02) |  |
+| `CREATE_OBJECT2` | 3 (0x03) |  |
+| `OUT_OF_RANGE_OBJECTS` | 4 (0x04) |  |
+| `NEAR_OBJECTS` | 5 (0x05) |  |
 
 Used in:
 * [Object](object.md)
@@ -51,14 +51,14 @@ enum UpdateType : u8 {
 ### Type
 The basic type is `u8`, a 1 byte (8 bit) integer.
 ### Enumerators
-| Enumerator | Value  | Description | Comment |
-| --------- | -------- | ----------- | ------- |
-| `VALUES` | 0 (0x00) |  |  |
-| `MOVEMENT` | 1 (0x01) |  |  |
-| `CREATE_OBJECT` | 2 (0x02) |  |  |
-| `CREATE_OBJECT2` | 3 (0x03) |  |  |
-| `OUT_OF_RANGE_OBJECTS` | 4 (0x04) |  |  |
-| `NEAR_OBJECTS` | 5 (0x05) |  |  |
+| Enumerator | Value  | Comment |
+| --------- | -------- | ------- |
+| `VALUES` | 0 (0x00) |  |
+| `MOVEMENT` | 1 (0x01) |  |
+| `CREATE_OBJECT` | 2 (0x02) |  |
+| `CREATE_OBJECT2` | 3 (0x03) |  |
+| `OUT_OF_RANGE_OBJECTS` | 4 (0x04) |  |
+| `NEAR_OBJECTS` | 5 (0x05) |  |
 
 Used in:
 * [Object](object.md)

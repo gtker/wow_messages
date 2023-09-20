@@ -32,16 +32,16 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | 4 / Little | u32 | random_dungeon_entry |  |  |
-| - | 4 / Little | u32 | dungeon_finished_entry |  |  |
-| - | 1 / - | Bool | done |  |  |
-| - | 4 / Little | u32 | unknown1 |  | emus set to 1. |
-| - | 4 / Little | Gold | money_reward |  |  |
-| - | 4 / Little | u32 | experience_reward |  |  |
-| - | 4 / Little | u32 | unknown2 |  | emus set to 0. |
-| - | 4 / Little | u32 | unknown3 |  | emus set to 0. |
-| - | 1 / - | u8 | amount_of_rewards |  |  |
-| - | ? / - | [QuestGiverReward](questgiverreward.md)[amount_of_rewards] | rewards |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| - | 4 / Little | u32 | random_dungeon_entry |  |
+| - | 4 / Little | u32 | dungeon_finished_entry |  |
+| - | 1 / - | Bool | done |  |
+| - | 4 / Little | u32 | unknown1 | emus set to 1. |
+| - | 4 / Little | Gold | money_reward |  |
+| - | 4 / Little | u32 | experience_reward |  |
+| - | 4 / Little | u32 | unknown2 | emus set to 0. |
+| - | 4 / Little | u32 | unknown3 | emus set to 0. |
+| - | 1 / - | u8 | amount_of_rewards |  |
+| - | ? / - | [QuestGiverReward](questgiverreward.md)[amount_of_rewards] | rewards |  |
 

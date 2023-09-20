@@ -126,121 +126,121 @@ enum ItemSlot : u8 {
 ### Type
 The basic type is `u8`, a 1 byte (8 bit) integer.
 ### Enumerators
-| Enumerator | Value  | Description | Comment |
-| --------- | -------- | ----------- | ------- |
-| `HEAD` | 0 (0x00) |  |  |
-| `NECK` | 1 (0x01) |  |  |
-| `SHOULDERS` | 2 (0x02) |  |  |
-| `SHIRT` | 3 (0x03) |  |  |
-| `CHEST` | 4 (0x04) |  |  |
-| `WAIST` | 5 (0x05) |  |  |
-| `LEGS` | 6 (0x06) |  |  |
-| `BOOTS` | 7 (0x07) |  |  |
-| `WRIST` | 8 (0x08) |  |  |
-| `HANDS` | 9 (0x09) |  |  |
-| `RING1` | 10 (0x0A) |  |  |
-| `RING2` | 11 (0x0B) |  |  |
-| `TRINKET1` | 12 (0x0C) |  |  |
-| `TRINKET2` | 13 (0x0D) |  |  |
-| `BACK` | 14 (0x0E) |  |  |
-| `MAIN_HAND` | 15 (0x0F) |  |  |
-| `OFF_HAND` | 16 (0x10) |  |  |
-| `RANGED_OR_RELIC` | 17 (0x11) |  |  |
-| `TABARD` | 18 (0x12) |  |  |
-| `BAG1` | 19 (0x13) |  |  |
-| `BAG2` | 20 (0x14) |  |  |
-| `BAG3` | 21 (0x15) |  |  |
-| `BAG4` | 22 (0x16) |  |  |
-| `INVENTORY_0` | 23 (0x17) |  |  |
-| `INVENTORY_1` | 24 (0x18) |  |  |
-| `INVENTORY_2` | 25 (0x19) |  |  |
-| `INVENTORY_3` | 26 (0x1A) |  |  |
-| `INVENTORY_4` | 27 (0x1B) |  |  |
-| `INVENTORY_5` | 28 (0x1C) |  |  |
-| `INVENTORY_6` | 29 (0x1D) |  |  |
-| `INVENTORY_7` | 30 (0x1E) |  |  |
-| `INVENTORY_8` | 31 (0x1F) |  |  |
-| `INVENTORY_9` | 32 (0x20) |  |  |
-| `INVENTORY_10` | 33 (0x21) |  |  |
-| `INVENTORY_11` | 34 (0x22) |  |  |
-| `INVENTORY_12` | 35 (0x23) |  |  |
-| `INVENTORY_13` | 36 (0x24) |  |  |
-| `INVENTORY_14` | 37 (0x25) |  |  |
-| `INVENTORY_15` | 38 (0x26) |  |  |
-| `BANK_1` | 39 (0x27) |  |  |
-| `BANK_2` | 40 (0x28) |  |  |
-| `BANK_3` | 41 (0x29) |  |  |
-| `BANK_4` | 42 (0x2A) |  |  |
-| `BANK_5` | 43 (0x2B) |  |  |
-| `BANK_6` | 44 (0x2C) |  |  |
-| `BANK_7` | 45 (0x2D) |  |  |
-| `BANK_8` | 46 (0x2E) |  |  |
-| `BANK_9` | 47 (0x2F) |  |  |
-| `BANK_10` | 48 (0x30) |  |  |
-| `BANK_11` | 49 (0x31) |  |  |
-| `BANK_12` | 50 (0x32) |  |  |
-| `BANK_13` | 51 (0x33) |  |  |
-| `BANK_14` | 52 (0x34) |  |  |
-| `BANK_15` | 53 (0x35) |  |  |
-| `BANK_16` | 54 (0x36) |  |  |
-| `BANK_17` | 55 (0x37) |  |  |
-| `BANK_18` | 56 (0x38) |  |  |
-| `BANK_19` | 57 (0x39) |  |  |
-| `BANK_20` | 58 (0x3A) |  |  |
-| `BANK_21` | 59 (0x3B) |  |  |
-| `BANK_22` | 60 (0x3C) |  |  |
-| `BANK_23` | 61 (0x3D) |  |  |
-| `BANK_24` | 62 (0x3E) |  |  |
-| `BANK_BAG_SLOT_1` | 63 (0x3F) |  |  |
-| `BANK_BAG_SLOT_2` | 64 (0x40) |  |  |
-| `BANK_BAG_SLOT_3` | 65 (0x41) |  |  |
-| `BANK_BAG_SLOT_4` | 66 (0x42) |  |  |
-| `BANK_BAG_SLOT_5` | 67 (0x43) |  |  |
-| `BANK_BAG_SLOT_6` | 68 (0x44) |  |  |
-| `VENDOR_BUYBACK_1` | 69 (0x45) |  |  |
-| `VENDOR_BUYBACK_2` | 70 (0x46) |  |  |
-| `VENDOR_BUYBACK_3` | 71 (0x47) |  |  |
-| `VENDOR_BUYBACK_4` | 72 (0x48) |  |  |
-| `VENDOR_BUYBACK_5` | 73 (0x49) |  |  |
-| `VENDOR_BUYBACK_6` | 74 (0x4A) |  |  |
-| `VENDOR_BUYBACK_7` | 75 (0x4B) |  |  |
-| `VENDOR_BUYBACK_8` | 76 (0x4C) |  |  |
-| `VENDOR_BUYBACK_9` | 77 (0x4D) |  |  |
-| `VENDOR_BUYBACK_10` | 78 (0x4E) |  |  |
-| `VENDOR_BUYBACK_11` | 79 (0x4F) |  |  |
-| `VENDOR_BUYBACK_12` | 80 (0x50) |  |  |
-| `KEYRING_1` | 81 (0x51) |  |  |
-| `KEYRING_2` | 82 (0x52) |  |  |
-| `KEYRING_3` | 83 (0x53) |  |  |
-| `KEYRING_4` | 84 (0x54) |  |  |
-| `KEYRING_5` | 85 (0x55) |  |  |
-| `KEYRING_6` | 86 (0x56) |  |  |
-| `KEYRING_7` | 87 (0x57) |  |  |
-| `KEYRING_8` | 88 (0x58) |  |  |
-| `KEYRING_9` | 89 (0x59) |  |  |
-| `KEYRING_10` | 90 (0x5A) |  |  |
-| `KEYRING_11` | 91 (0x5B) |  |  |
-| `KEYRING_12` | 92 (0x5C) |  |  |
-| `KEYRING_13` | 93 (0x5D) |  |  |
-| `KEYRING_14` | 94 (0x5E) |  |  |
-| `KEYRING_15` | 95 (0x5F) |  |  |
-| `KEYRING_16` | 96 (0x60) |  |  |
-| `KEYRING_17` | 97 (0x61) |  |  |
-| `KEYRING_18` | 98 (0x62) |  |  |
-| `KEYRING_19` | 99 (0x63) |  |  |
-| `KEYRING_20` | 100 (0x64) |  |  |
-| `KEYRING_21` | 101 (0x65) |  |  |
-| `KEYRING_22` | 102 (0x66) |  |  |
-| `KEYRING_23` | 103 (0x67) |  |  |
-| `KEYRING_24` | 104 (0x68) |  |  |
-| `KEYRING_25` | 105 (0x69) |  |  |
-| `KEYRING_26` | 106 (0x6A) |  |  |
-| `KEYRING_27` | 107 (0x6B) |  |  |
-| `KEYRING_28` | 108 (0x6C) |  |  |
-| `KEYRING_29` | 109 (0x6D) |  |  |
-| `KEYRING_30` | 110 (0x6E) |  |  |
-| `KEYRING_31` | 111 (0x6F) |  |  |
-| `KEYRING_32` | 112 (0x70) |  |  |
+| Enumerator | Value  | Comment |
+| --------- | -------- | ------- |
+| `HEAD` | 0 (0x00) |  |
+| `NECK` | 1 (0x01) |  |
+| `SHOULDERS` | 2 (0x02) |  |
+| `SHIRT` | 3 (0x03) |  |
+| `CHEST` | 4 (0x04) |  |
+| `WAIST` | 5 (0x05) |  |
+| `LEGS` | 6 (0x06) |  |
+| `BOOTS` | 7 (0x07) |  |
+| `WRIST` | 8 (0x08) |  |
+| `HANDS` | 9 (0x09) |  |
+| `RING1` | 10 (0x0A) |  |
+| `RING2` | 11 (0x0B) |  |
+| `TRINKET1` | 12 (0x0C) |  |
+| `TRINKET2` | 13 (0x0D) |  |
+| `BACK` | 14 (0x0E) |  |
+| `MAIN_HAND` | 15 (0x0F) |  |
+| `OFF_HAND` | 16 (0x10) |  |
+| `RANGED_OR_RELIC` | 17 (0x11) |  |
+| `TABARD` | 18 (0x12) |  |
+| `BAG1` | 19 (0x13) |  |
+| `BAG2` | 20 (0x14) |  |
+| `BAG3` | 21 (0x15) |  |
+| `BAG4` | 22 (0x16) |  |
+| `INVENTORY_0` | 23 (0x17) |  |
+| `INVENTORY_1` | 24 (0x18) |  |
+| `INVENTORY_2` | 25 (0x19) |  |
+| `INVENTORY_3` | 26 (0x1A) |  |
+| `INVENTORY_4` | 27 (0x1B) |  |
+| `INVENTORY_5` | 28 (0x1C) |  |
+| `INVENTORY_6` | 29 (0x1D) |  |
+| `INVENTORY_7` | 30 (0x1E) |  |
+| `INVENTORY_8` | 31 (0x1F) |  |
+| `INVENTORY_9` | 32 (0x20) |  |
+| `INVENTORY_10` | 33 (0x21) |  |
+| `INVENTORY_11` | 34 (0x22) |  |
+| `INVENTORY_12` | 35 (0x23) |  |
+| `INVENTORY_13` | 36 (0x24) |  |
+| `INVENTORY_14` | 37 (0x25) |  |
+| `INVENTORY_15` | 38 (0x26) |  |
+| `BANK_1` | 39 (0x27) |  |
+| `BANK_2` | 40 (0x28) |  |
+| `BANK_3` | 41 (0x29) |  |
+| `BANK_4` | 42 (0x2A) |  |
+| `BANK_5` | 43 (0x2B) |  |
+| `BANK_6` | 44 (0x2C) |  |
+| `BANK_7` | 45 (0x2D) |  |
+| `BANK_8` | 46 (0x2E) |  |
+| `BANK_9` | 47 (0x2F) |  |
+| `BANK_10` | 48 (0x30) |  |
+| `BANK_11` | 49 (0x31) |  |
+| `BANK_12` | 50 (0x32) |  |
+| `BANK_13` | 51 (0x33) |  |
+| `BANK_14` | 52 (0x34) |  |
+| `BANK_15` | 53 (0x35) |  |
+| `BANK_16` | 54 (0x36) |  |
+| `BANK_17` | 55 (0x37) |  |
+| `BANK_18` | 56 (0x38) |  |
+| `BANK_19` | 57 (0x39) |  |
+| `BANK_20` | 58 (0x3A) |  |
+| `BANK_21` | 59 (0x3B) |  |
+| `BANK_22` | 60 (0x3C) |  |
+| `BANK_23` | 61 (0x3D) |  |
+| `BANK_24` | 62 (0x3E) |  |
+| `BANK_BAG_SLOT_1` | 63 (0x3F) |  |
+| `BANK_BAG_SLOT_2` | 64 (0x40) |  |
+| `BANK_BAG_SLOT_3` | 65 (0x41) |  |
+| `BANK_BAG_SLOT_4` | 66 (0x42) |  |
+| `BANK_BAG_SLOT_5` | 67 (0x43) |  |
+| `BANK_BAG_SLOT_6` | 68 (0x44) |  |
+| `VENDOR_BUYBACK_1` | 69 (0x45) |  |
+| `VENDOR_BUYBACK_2` | 70 (0x46) |  |
+| `VENDOR_BUYBACK_3` | 71 (0x47) |  |
+| `VENDOR_BUYBACK_4` | 72 (0x48) |  |
+| `VENDOR_BUYBACK_5` | 73 (0x49) |  |
+| `VENDOR_BUYBACK_6` | 74 (0x4A) |  |
+| `VENDOR_BUYBACK_7` | 75 (0x4B) |  |
+| `VENDOR_BUYBACK_8` | 76 (0x4C) |  |
+| `VENDOR_BUYBACK_9` | 77 (0x4D) |  |
+| `VENDOR_BUYBACK_10` | 78 (0x4E) |  |
+| `VENDOR_BUYBACK_11` | 79 (0x4F) |  |
+| `VENDOR_BUYBACK_12` | 80 (0x50) |  |
+| `KEYRING_1` | 81 (0x51) |  |
+| `KEYRING_2` | 82 (0x52) |  |
+| `KEYRING_3` | 83 (0x53) |  |
+| `KEYRING_4` | 84 (0x54) |  |
+| `KEYRING_5` | 85 (0x55) |  |
+| `KEYRING_6` | 86 (0x56) |  |
+| `KEYRING_7` | 87 (0x57) |  |
+| `KEYRING_8` | 88 (0x58) |  |
+| `KEYRING_9` | 89 (0x59) |  |
+| `KEYRING_10` | 90 (0x5A) |  |
+| `KEYRING_11` | 91 (0x5B) |  |
+| `KEYRING_12` | 92 (0x5C) |  |
+| `KEYRING_13` | 93 (0x5D) |  |
+| `KEYRING_14` | 94 (0x5E) |  |
+| `KEYRING_15` | 95 (0x5F) |  |
+| `KEYRING_16` | 96 (0x60) |  |
+| `KEYRING_17` | 97 (0x61) |  |
+| `KEYRING_18` | 98 (0x62) |  |
+| `KEYRING_19` | 99 (0x63) |  |
+| `KEYRING_20` | 100 (0x64) |  |
+| `KEYRING_21` | 101 (0x65) |  |
+| `KEYRING_22` | 102 (0x66) |  |
+| `KEYRING_23` | 103 (0x67) |  |
+| `KEYRING_24` | 104 (0x68) |  |
+| `KEYRING_25` | 105 (0x69) |  |
+| `KEYRING_26` | 106 (0x6A) |  |
+| `KEYRING_27` | 107 (0x6B) |  |
+| `KEYRING_28` | 108 (0x6C) |  |
+| `KEYRING_29` | 109 (0x6D) |  |
+| `KEYRING_30` | 110 (0x6E) |  |
+| `KEYRING_31` | 111 (0x6F) |  |
+| `KEYRING_32` | 112 (0x70) |  |
 
 Used in:
 * [CMSG_SWAP_INV_ITEM](cmsg_swap_inv_item.md)
@@ -394,144 +394,144 @@ enum ItemSlot : u8 {
 ### Type
 The basic type is `u8`, a 1 byte (8 bit) integer.
 ### Enumerators
-| Enumerator | Value  | Description | Comment |
-| --------- | -------- | ----------- | ------- |
-| `HEAD` | 0 (0x00) |  |  |
-| `NECK` | 1 (0x01) |  |  |
-| `SHOULDERS` | 2 (0x02) |  |  |
-| `SHIRT` | 3 (0x03) |  |  |
-| `CHEST` | 4 (0x04) |  |  |
-| `WAIST` | 5 (0x05) |  |  |
-| `LEGS` | 6 (0x06) |  |  |
-| `BOOTS` | 7 (0x07) |  |  |
-| `WRIST` | 8 (0x08) |  |  |
-| `HANDS` | 9 (0x09) |  |  |
-| `RING1` | 10 (0x0A) |  |  |
-| `RING2` | 11 (0x0B) |  |  |
-| `TRINKET1` | 12 (0x0C) |  |  |
-| `TRINKET2` | 13 (0x0D) |  |  |
-| `BACK` | 14 (0x0E) |  |  |
-| `MAIN_HAND` | 15 (0x0F) |  |  |
-| `OFF_HAND` | 16 (0x10) |  |  |
-| `RANGED_OR_RELIC` | 17 (0x11) |  |  |
-| `TABARD` | 18 (0x12) |  |  |
-| `BAG1` | 19 (0x13) |  |  |
-| `BAG2` | 20 (0x14) |  |  |
-| `BAG3` | 21 (0x15) |  |  |
-| `BAG4` | 22 (0x16) |  |  |
-| `INVENTORY_0` | 23 (0x17) |  |  |
-| `INVENTORY_1` | 24 (0x18) |  |  |
-| `INVENTORY_2` | 25 (0x19) |  |  |
-| `INVENTORY_3` | 26 (0x1A) |  |  |
-| `INVENTORY_4` | 27 (0x1B) |  |  |
-| `INVENTORY_5` | 28 (0x1C) |  |  |
-| `INVENTORY_6` | 29 (0x1D) |  |  |
-| `INVENTORY_7` | 30 (0x1E) |  |  |
-| `INVENTORY_8` | 31 (0x1F) |  |  |
-| `INVENTORY_9` | 32 (0x20) |  |  |
-| `INVENTORY_10` | 33 (0x21) |  |  |
-| `INVENTORY_11` | 34 (0x22) |  |  |
-| `INVENTORY_12` | 35 (0x23) |  |  |
-| `INVENTORY_13` | 36 (0x24) |  |  |
-| `INVENTORY_14` | 37 (0x25) |  |  |
-| `INVENTORY_15` | 38 (0x26) |  |  |
-| `BANK_1` | 39 (0x27) |  |  |
-| `BANK_2` | 40 (0x28) |  |  |
-| `BANK_3` | 41 (0x29) |  |  |
-| `BANK_4` | 42 (0x2A) |  |  |
-| `BANK_5` | 43 (0x2B) |  |  |
-| `BANK_6` | 44 (0x2C) |  |  |
-| `BANK_7` | 45 (0x2D) |  |  |
-| `BANK_8` | 46 (0x2E) |  |  |
-| `BANK_9` | 47 (0x2F) |  |  |
-| `BANK_10` | 48 (0x30) |  |  |
-| `BANK_11` | 49 (0x31) |  |  |
-| `BANK_12` | 50 (0x32) |  |  |
-| `BANK_13` | 51 (0x33) |  |  |
-| `BANK_14` | 52 (0x34) |  |  |
-| `BANK_15` | 53 (0x35) |  |  |
-| `BANK_16` | 54 (0x36) |  |  |
-| `BANK_17` | 55 (0x37) |  |  |
-| `BANK_18` | 56 (0x38) |  |  |
-| `BANK_19` | 57 (0x39) |  |  |
-| `BANK_20` | 58 (0x3A) |  |  |
-| `BANK_21` | 59 (0x3B) |  |  |
-| `BANK_22` | 60 (0x3C) |  |  |
-| `BANK_23` | 61 (0x3D) |  |  |
-| `BANK_24` | 62 (0x3E) |  |  |
-| `BANK_25` | 63 (0x3F) |  |  |
-| `BANK_26` | 64 (0x40) |  |  |
-| `BANK_27` | 65 (0x41) |  |  |
-| `BANK_28` | 66 (0x42) |  |  |
-| `BANK_BAG_SLOT_1` | 67 (0x43) |  |  |
-| `BANK_BAG_SLOT_2` | 68 (0x44) |  |  |
-| `BANK_BAG_SLOT_3` | 69 (0x45) |  |  |
-| `BANK_BAG_SLOT_4` | 70 (0x46) |  |  |
-| `BANK_BAG_SLOT_5` | 71 (0x47) |  |  |
-| `BANK_BAG_SLOT_6` | 72 (0x48) |  |  |
-| `BANK_BAG_SLOT_7` | 73 (0x49) |  |  |
-| `VENDOR_BUYBACK_1` | 74 (0x4A) |  |  |
-| `VENDOR_BUYBACK_2` | 75 (0x4B) |  |  |
-| `VENDOR_BUYBACK_3` | 76 (0x4C) |  |  |
-| `VENDOR_BUYBACK_4` | 77 (0x4D) |  |  |
-| `VENDOR_BUYBACK_5` | 78 (0x4E) |  |  |
-| `VENDOR_BUYBACK_6` | 79 (0x4F) |  |  |
-| `VENDOR_BUYBACK_7` | 80 (0x50) |  |  |
-| `VENDOR_BUYBACK_8` | 81 (0x51) |  |  |
-| `VENDOR_BUYBACK_9` | 82 (0x52) |  |  |
-| `VENDOR_BUYBACK_10` | 83 (0x53) |  |  |
-| `VENDOR_BUYBACK_11` | 84 (0x54) |  |  |
-| `VENDOR_BUYBACK_12` | 85 (0x55) |  |  |
-| `KEYRING_1` | 86 (0x56) |  |  |
-| `KEYRING_2` | 87 (0x57) |  |  |
-| `KEYRING_3` | 88 (0x58) |  |  |
-| `KEYRING_4` | 89 (0x59) |  |  |
-| `KEYRING_5` | 90 (0x5A) |  |  |
-| `KEYRING_6` | 91 (0x5B) |  |  |
-| `KEYRING_7` | 92 (0x5C) |  |  |
-| `KEYRING_8` | 93 (0x5D) |  |  |
-| `KEYRING_9` | 94 (0x5E) |  |  |
-| `KEYRING_10` | 95 (0x5F) |  |  |
-| `KEYRING_11` | 96 (0x60) |  |  |
-| `KEYRING_12` | 97 (0x61) |  |  |
-| `KEYRING_13` | 98 (0x62) |  |  |
-| `KEYRING_14` | 99 (0x63) |  |  |
-| `KEYRING_15` | 100 (0x64) |  |  |
-| `KEYRING_16` | 101 (0x65) |  |  |
-| `KEYRING_17` | 102 (0x66) |  |  |
-| `KEYRING_18` | 103 (0x67) |  |  |
-| `KEYRING_19` | 104 (0x68) |  |  |
-| `KEYRING_20` | 105 (0x69) |  |  |
-| `KEYRING_21` | 106 (0x6A) |  |  |
-| `KEYRING_22` | 107 (0x6B) |  |  |
-| `KEYRING_23` | 108 (0x6C) |  |  |
-| `KEYRING_24` | 109 (0x6D) |  |  |
-| `KEYRING_25` | 110 (0x6E) |  |  |
-| `KEYRING_26` | 111 (0x6F) |  |  |
-| `KEYRING_27` | 112 (0x70) |  |  |
-| `KEYRING_28` | 113 (0x71) |  |  |
-| `KEYRING_29` | 114 (0x72) |  |  |
-| `KEYRING_30` | 115 (0x73) |  |  |
-| `KEYRING_31` | 116 (0x74) |  |  |
-| `KEYRING_32` | 117 (0x75) |  |  |
-| `VANITY_PET_1` | 118 (0x76) |  |  |
-| `VANITY_PET_2` | 119 (0x77) |  |  |
-| `VANITY_PET_3` | 120 (0x78) |  |  |
-| `VANITY_PET_4` | 121 (0x79) |  |  |
-| `VANITY_PET_5` | 122 (0x7A) |  |  |
-| `VANITY_PET_6` | 123 (0x7B) |  |  |
-| `VANITY_PET_7` | 124 (0x7C) |  |  |
-| `VANITY_PET_8` | 125 (0x7D) |  |  |
-| `VANITY_PET_9` | 126 (0x7E) |  |  |
-| `VANITY_PET_10` | 127 (0x7F) |  |  |
-| `VANITY_PET_11` | 128 (0x80) |  |  |
-| `VANITY_PET_12` | 129 (0x81) |  |  |
-| `VANITY_PET_13` | 130 (0x82) |  |  |
-| `VANITY_PET_14` | 131 (0x83) |  |  |
-| `VANITY_PET_15` | 132 (0x84) |  |  |
-| `VANITY_PET_16` | 133 (0x85) |  |  |
-| `VANITY_PET_17` | 134 (0x86) |  |  |
-| `VANITY_PET_18` | 135 (0x87) |  |  |
+| Enumerator | Value  | Comment |
+| --------- | -------- | ------- |
+| `HEAD` | 0 (0x00) |  |
+| `NECK` | 1 (0x01) |  |
+| `SHOULDERS` | 2 (0x02) |  |
+| `SHIRT` | 3 (0x03) |  |
+| `CHEST` | 4 (0x04) |  |
+| `WAIST` | 5 (0x05) |  |
+| `LEGS` | 6 (0x06) |  |
+| `BOOTS` | 7 (0x07) |  |
+| `WRIST` | 8 (0x08) |  |
+| `HANDS` | 9 (0x09) |  |
+| `RING1` | 10 (0x0A) |  |
+| `RING2` | 11 (0x0B) |  |
+| `TRINKET1` | 12 (0x0C) |  |
+| `TRINKET2` | 13 (0x0D) |  |
+| `BACK` | 14 (0x0E) |  |
+| `MAIN_HAND` | 15 (0x0F) |  |
+| `OFF_HAND` | 16 (0x10) |  |
+| `RANGED_OR_RELIC` | 17 (0x11) |  |
+| `TABARD` | 18 (0x12) |  |
+| `BAG1` | 19 (0x13) |  |
+| `BAG2` | 20 (0x14) |  |
+| `BAG3` | 21 (0x15) |  |
+| `BAG4` | 22 (0x16) |  |
+| `INVENTORY_0` | 23 (0x17) |  |
+| `INVENTORY_1` | 24 (0x18) |  |
+| `INVENTORY_2` | 25 (0x19) |  |
+| `INVENTORY_3` | 26 (0x1A) |  |
+| `INVENTORY_4` | 27 (0x1B) |  |
+| `INVENTORY_5` | 28 (0x1C) |  |
+| `INVENTORY_6` | 29 (0x1D) |  |
+| `INVENTORY_7` | 30 (0x1E) |  |
+| `INVENTORY_8` | 31 (0x1F) |  |
+| `INVENTORY_9` | 32 (0x20) |  |
+| `INVENTORY_10` | 33 (0x21) |  |
+| `INVENTORY_11` | 34 (0x22) |  |
+| `INVENTORY_12` | 35 (0x23) |  |
+| `INVENTORY_13` | 36 (0x24) |  |
+| `INVENTORY_14` | 37 (0x25) |  |
+| `INVENTORY_15` | 38 (0x26) |  |
+| `BANK_1` | 39 (0x27) |  |
+| `BANK_2` | 40 (0x28) |  |
+| `BANK_3` | 41 (0x29) |  |
+| `BANK_4` | 42 (0x2A) |  |
+| `BANK_5` | 43 (0x2B) |  |
+| `BANK_6` | 44 (0x2C) |  |
+| `BANK_7` | 45 (0x2D) |  |
+| `BANK_8` | 46 (0x2E) |  |
+| `BANK_9` | 47 (0x2F) |  |
+| `BANK_10` | 48 (0x30) |  |
+| `BANK_11` | 49 (0x31) |  |
+| `BANK_12` | 50 (0x32) |  |
+| `BANK_13` | 51 (0x33) |  |
+| `BANK_14` | 52 (0x34) |  |
+| `BANK_15` | 53 (0x35) |  |
+| `BANK_16` | 54 (0x36) |  |
+| `BANK_17` | 55 (0x37) |  |
+| `BANK_18` | 56 (0x38) |  |
+| `BANK_19` | 57 (0x39) |  |
+| `BANK_20` | 58 (0x3A) |  |
+| `BANK_21` | 59 (0x3B) |  |
+| `BANK_22` | 60 (0x3C) |  |
+| `BANK_23` | 61 (0x3D) |  |
+| `BANK_24` | 62 (0x3E) |  |
+| `BANK_25` | 63 (0x3F) |  |
+| `BANK_26` | 64 (0x40) |  |
+| `BANK_27` | 65 (0x41) |  |
+| `BANK_28` | 66 (0x42) |  |
+| `BANK_BAG_SLOT_1` | 67 (0x43) |  |
+| `BANK_BAG_SLOT_2` | 68 (0x44) |  |
+| `BANK_BAG_SLOT_3` | 69 (0x45) |  |
+| `BANK_BAG_SLOT_4` | 70 (0x46) |  |
+| `BANK_BAG_SLOT_5` | 71 (0x47) |  |
+| `BANK_BAG_SLOT_6` | 72 (0x48) |  |
+| `BANK_BAG_SLOT_7` | 73 (0x49) |  |
+| `VENDOR_BUYBACK_1` | 74 (0x4A) |  |
+| `VENDOR_BUYBACK_2` | 75 (0x4B) |  |
+| `VENDOR_BUYBACK_3` | 76 (0x4C) |  |
+| `VENDOR_BUYBACK_4` | 77 (0x4D) |  |
+| `VENDOR_BUYBACK_5` | 78 (0x4E) |  |
+| `VENDOR_BUYBACK_6` | 79 (0x4F) |  |
+| `VENDOR_BUYBACK_7` | 80 (0x50) |  |
+| `VENDOR_BUYBACK_8` | 81 (0x51) |  |
+| `VENDOR_BUYBACK_9` | 82 (0x52) |  |
+| `VENDOR_BUYBACK_10` | 83 (0x53) |  |
+| `VENDOR_BUYBACK_11` | 84 (0x54) |  |
+| `VENDOR_BUYBACK_12` | 85 (0x55) |  |
+| `KEYRING_1` | 86 (0x56) |  |
+| `KEYRING_2` | 87 (0x57) |  |
+| `KEYRING_3` | 88 (0x58) |  |
+| `KEYRING_4` | 89 (0x59) |  |
+| `KEYRING_5` | 90 (0x5A) |  |
+| `KEYRING_6` | 91 (0x5B) |  |
+| `KEYRING_7` | 92 (0x5C) |  |
+| `KEYRING_8` | 93 (0x5D) |  |
+| `KEYRING_9` | 94 (0x5E) |  |
+| `KEYRING_10` | 95 (0x5F) |  |
+| `KEYRING_11` | 96 (0x60) |  |
+| `KEYRING_12` | 97 (0x61) |  |
+| `KEYRING_13` | 98 (0x62) |  |
+| `KEYRING_14` | 99 (0x63) |  |
+| `KEYRING_15` | 100 (0x64) |  |
+| `KEYRING_16` | 101 (0x65) |  |
+| `KEYRING_17` | 102 (0x66) |  |
+| `KEYRING_18` | 103 (0x67) |  |
+| `KEYRING_19` | 104 (0x68) |  |
+| `KEYRING_20` | 105 (0x69) |  |
+| `KEYRING_21` | 106 (0x6A) |  |
+| `KEYRING_22` | 107 (0x6B) |  |
+| `KEYRING_23` | 108 (0x6C) |  |
+| `KEYRING_24` | 109 (0x6D) |  |
+| `KEYRING_25` | 110 (0x6E) |  |
+| `KEYRING_26` | 111 (0x6F) |  |
+| `KEYRING_27` | 112 (0x70) |  |
+| `KEYRING_28` | 113 (0x71) |  |
+| `KEYRING_29` | 114 (0x72) |  |
+| `KEYRING_30` | 115 (0x73) |  |
+| `KEYRING_31` | 116 (0x74) |  |
+| `KEYRING_32` | 117 (0x75) |  |
+| `VANITY_PET_1` | 118 (0x76) |  |
+| `VANITY_PET_2` | 119 (0x77) |  |
+| `VANITY_PET_3` | 120 (0x78) |  |
+| `VANITY_PET_4` | 121 (0x79) |  |
+| `VANITY_PET_5` | 122 (0x7A) |  |
+| `VANITY_PET_6` | 123 (0x7B) |  |
+| `VANITY_PET_7` | 124 (0x7C) |  |
+| `VANITY_PET_8` | 125 (0x7D) |  |
+| `VANITY_PET_9` | 126 (0x7E) |  |
+| `VANITY_PET_10` | 127 (0x7F) |  |
+| `VANITY_PET_11` | 128 (0x80) |  |
+| `VANITY_PET_12` | 129 (0x81) |  |
+| `VANITY_PET_13` | 130 (0x82) |  |
+| `VANITY_PET_14` | 131 (0x83) |  |
+| `VANITY_PET_15` | 132 (0x84) |  |
+| `VANITY_PET_16` | 133 (0x85) |  |
+| `VANITY_PET_17` | 134 (0x86) |  |
+| `VANITY_PET_18` | 135 (0x87) |  |
 
 Used in:
 * [CMSG_SWAP_INV_ITEM](cmsg_swap_inv_item.md)
@@ -699,158 +699,158 @@ enum ItemSlot : u8 {
 ### Type
 The basic type is `u8`, a 1 byte (8 bit) integer.
 ### Enumerators
-| Enumerator | Value  | Description | Comment |
-| --------- | -------- | ----------- | ------- |
-| `HEAD` | 0 (0x00) |  |  |
-| `NECK` | 1 (0x01) |  |  |
-| `SHOULDERS` | 2 (0x02) |  |  |
-| `SHIRT` | 3 (0x03) |  |  |
-| `CHEST` | 4 (0x04) |  |  |
-| `WAIST` | 5 (0x05) |  |  |
-| `LEGS` | 6 (0x06) |  |  |
-| `BOOTS` | 7 (0x07) |  |  |
-| `WRIST` | 8 (0x08) |  |  |
-| `HANDS` | 9 (0x09) |  |  |
-| `RING1` | 10 (0x0A) |  |  |
-| `RING2` | 11 (0x0B) |  |  |
-| `TRINKET1` | 12 (0x0C) |  |  |
-| `TRINKET2` | 13 (0x0D) |  |  |
-| `BACK` | 14 (0x0E) |  |  |
-| `MAIN_HAND` | 15 (0x0F) |  |  |
-| `OFF_HAND` | 16 (0x10) |  |  |
-| `RANGED_OR_RELIC` | 17 (0x11) |  |  |
-| `TABARD` | 18 (0x12) |  |  |
-| `BAG1` | 19 (0x13) |  |  |
-| `BAG2` | 20 (0x14) |  |  |
-| `BAG3` | 21 (0x15) |  |  |
-| `BAG4` | 22 (0x16) |  |  |
-| `INVENTORY_0` | 23 (0x17) |  |  |
-| `INVENTORY_1` | 24 (0x18) |  |  |
-| `INVENTORY_2` | 25 (0x19) |  |  |
-| `INVENTORY_3` | 26 (0x1A) |  |  |
-| `INVENTORY_4` | 27 (0x1B) |  |  |
-| `INVENTORY_5` | 28 (0x1C) |  |  |
-| `INVENTORY_6` | 29 (0x1D) |  |  |
-| `INVENTORY_7` | 30 (0x1E) |  |  |
-| `INVENTORY_8` | 31 (0x1F) |  |  |
-| `INVENTORY_9` | 32 (0x20) |  |  |
-| `INVENTORY_10` | 33 (0x21) |  |  |
-| `INVENTORY_11` | 34 (0x22) |  |  |
-| `INVENTORY_12` | 35 (0x23) |  |  |
-| `INVENTORY_13` | 36 (0x24) |  |  |
-| `INVENTORY_14` | 37 (0x25) |  |  |
-| `INVENTORY_15` | 38 (0x26) |  |  |
-| `BANK_1` | 39 (0x27) |  |  |
-| `BANK_2` | 40 (0x28) |  |  |
-| `BANK_3` | 41 (0x29) |  |  |
-| `BANK_4` | 42 (0x2A) |  |  |
-| `BANK_5` | 43 (0x2B) |  |  |
-| `BANK_6` | 44 (0x2C) |  |  |
-| `BANK_7` | 45 (0x2D) |  |  |
-| `BANK_8` | 46 (0x2E) |  |  |
-| `BANK_9` | 47 (0x2F) |  |  |
-| `BANK_10` | 48 (0x30) |  |  |
-| `BANK_11` | 49 (0x31) |  |  |
-| `BANK_12` | 50 (0x32) |  |  |
-| `BANK_13` | 51 (0x33) |  |  |
-| `BANK_14` | 52 (0x34) |  |  |
-| `BANK_15` | 53 (0x35) |  |  |
-| `BANK_16` | 54 (0x36) |  |  |
-| `BANK_17` | 55 (0x37) |  |  |
-| `BANK_18` | 56 (0x38) |  |  |
-| `BANK_19` | 57 (0x39) |  |  |
-| `BANK_20` | 58 (0x3A) |  |  |
-| `BANK_21` | 59 (0x3B) |  |  |
-| `BANK_22` | 60 (0x3C) |  |  |
-| `BANK_23` | 61 (0x3D) |  |  |
-| `BANK_24` | 62 (0x3E) |  |  |
-| `BANK_25` | 63 (0x3F) |  |  |
-| `BANK_26` | 64 (0x40) |  |  |
-| `BANK_27` | 65 (0x41) |  |  |
-| `BANK_28` | 66 (0x42) |  |  |
-| `BANK_BAG_SLOT_1` | 67 (0x43) |  |  |
-| `BANK_BAG_SLOT_2` | 68 (0x44) |  |  |
-| `BANK_BAG_SLOT_3` | 69 (0x45) |  |  |
-| `BANK_BAG_SLOT_4` | 70 (0x46) |  |  |
-| `BANK_BAG_SLOT_5` | 71 (0x47) |  |  |
-| `BANK_BAG_SLOT_6` | 72 (0x48) |  |  |
-| `BANK_BAG_SLOT_7` | 73 (0x49) |  |  |
-| `VENDOR_BUYBACK_1` | 74 (0x4A) |  |  |
-| `VENDOR_BUYBACK_2` | 75 (0x4B) |  |  |
-| `VENDOR_BUYBACK_3` | 76 (0x4C) |  |  |
-| `VENDOR_BUYBACK_4` | 77 (0x4D) |  |  |
-| `VENDOR_BUYBACK_5` | 78 (0x4E) |  |  |
-| `VENDOR_BUYBACK_6` | 79 (0x4F) |  |  |
-| `VENDOR_BUYBACK_7` | 80 (0x50) |  |  |
-| `VENDOR_BUYBACK_8` | 81 (0x51) |  |  |
-| `VENDOR_BUYBACK_9` | 82 (0x52) |  |  |
-| `VENDOR_BUYBACK_10` | 83 (0x53) |  |  |
-| `VENDOR_BUYBACK_11` | 84 (0x54) |  |  |
-| `VENDOR_BUYBACK_12` | 85 (0x55) |  |  |
-| `KEYRING_1` | 86 (0x56) |  |  |
-| `KEYRING_2` | 87 (0x57) |  |  |
-| `KEYRING_3` | 88 (0x58) |  |  |
-| `KEYRING_4` | 89 (0x59) |  |  |
-| `KEYRING_5` | 90 (0x5A) |  |  |
-| `KEYRING_6` | 91 (0x5B) |  |  |
-| `KEYRING_7` | 92 (0x5C) |  |  |
-| `KEYRING_8` | 93 (0x5D) |  |  |
-| `KEYRING_9` | 94 (0x5E) |  |  |
-| `KEYRING_10` | 95 (0x5F) |  |  |
-| `KEYRING_11` | 96 (0x60) |  |  |
-| `KEYRING_12` | 97 (0x61) |  |  |
-| `KEYRING_13` | 98 (0x62) |  |  |
-| `KEYRING_14` | 99 (0x63) |  |  |
-| `KEYRING_15` | 100 (0x64) |  |  |
-| `KEYRING_16` | 101 (0x65) |  |  |
-| `KEYRING_17` | 102 (0x66) |  |  |
-| `KEYRING_18` | 103 (0x67) |  |  |
-| `KEYRING_19` | 104 (0x68) |  |  |
-| `KEYRING_20` | 105 (0x69) |  |  |
-| `KEYRING_21` | 106 (0x6A) |  |  |
-| `KEYRING_22` | 107 (0x6B) |  |  |
-| `KEYRING_23` | 108 (0x6C) |  |  |
-| `KEYRING_24` | 109 (0x6D) |  |  |
-| `KEYRING_25` | 110 (0x6E) |  |  |
-| `KEYRING_26` | 111 (0x6F) |  |  |
-| `KEYRING_27` | 112 (0x70) |  |  |
-| `KEYRING_28` | 113 (0x71) |  |  |
-| `KEYRING_29` | 114 (0x72) |  |  |
-| `KEYRING_30` | 115 (0x73) |  |  |
-| `KEYRING_31` | 116 (0x74) |  |  |
-| `KEYRING_32` | 117 (0x75) |  |  |
-| `CURRENCY_TOKEN_1` | 118 (0x76) |  |  |
-| `CURRENCY_TOKEN_2` | 119 (0x77) |  |  |
-| `CURRENCY_TOKEN_3` | 120 (0x78) |  |  |
-| `CURRENCY_TOKEN_4` | 121 (0x79) |  |  |
-| `CURRENCY_TOKEN_5` | 122 (0x7A) |  |  |
-| `CURRENCY_TOKEN_6` | 123 (0x7B) |  |  |
-| `CURRENCY_TOKEN_7` | 124 (0x7C) |  |  |
-| `CURRENCY_TOKEN_8` | 125 (0x7D) |  |  |
-| `CURRENCY_TOKEN_9` | 126 (0x7E) |  |  |
-| `CURRENCY_TOKEN_10` | 127 (0x7F) |  |  |
-| `CURRENCY_TOKEN_11` | 128 (0x80) |  |  |
-| `CURRENCY_TOKEN_12` | 129 (0x81) |  |  |
-| `CURRENCY_TOKEN_13` | 130 (0x82) |  |  |
-| `CURRENCY_TOKEN_14` | 131 (0x83) |  |  |
-| `CURRENCY_TOKEN_15` | 132 (0x84) |  |  |
-| `CURRENCY_TOKEN_16` | 133 (0x85) |  |  |
-| `CURRENCY_TOKEN_17` | 134 (0x86) |  |  |
-| `CURRENCY_TOKEN_18` | 135 (0x87) |  |  |
-| `CURRENCY_TOKEN_19` | 136 (0x88) |  |  |
-| `CURRENCY_TOKEN_20` | 137 (0x89) |  |  |
-| `CURRENCY_TOKEN_21` | 138 (0x8A) |  |  |
-| `CURRENCY_TOKEN_22` | 139 (0x8B) |  |  |
-| `CURRENCY_TOKEN_23` | 140 (0x8C) |  |  |
-| `CURRENCY_TOKEN_24` | 141 (0x8D) |  |  |
-| `CURRENCY_TOKEN_25` | 142 (0x8E) |  |  |
-| `CURRENCY_TOKEN_26` | 143 (0x8F) |  |  |
-| `CURRENCY_TOKEN_27` | 144 (0x90) |  |  |
-| `CURRENCY_TOKEN_28` | 145 (0x91) |  |  |
-| `CURRENCY_TOKEN_29` | 146 (0x92) |  |  |
-| `CURRENCY_TOKEN_30` | 147 (0x93) |  |  |
-| `CURRENCY_TOKEN_31` | 148 (0x94) |  |  |
-| `CURRENCY_TOKEN_32` | 149 (0x95) |  |  |
+| Enumerator | Value  | Comment |
+| --------- | -------- | ------- |
+| `HEAD` | 0 (0x00) |  |
+| `NECK` | 1 (0x01) |  |
+| `SHOULDERS` | 2 (0x02) |  |
+| `SHIRT` | 3 (0x03) |  |
+| `CHEST` | 4 (0x04) |  |
+| `WAIST` | 5 (0x05) |  |
+| `LEGS` | 6 (0x06) |  |
+| `BOOTS` | 7 (0x07) |  |
+| `WRIST` | 8 (0x08) |  |
+| `HANDS` | 9 (0x09) |  |
+| `RING1` | 10 (0x0A) |  |
+| `RING2` | 11 (0x0B) |  |
+| `TRINKET1` | 12 (0x0C) |  |
+| `TRINKET2` | 13 (0x0D) |  |
+| `BACK` | 14 (0x0E) |  |
+| `MAIN_HAND` | 15 (0x0F) |  |
+| `OFF_HAND` | 16 (0x10) |  |
+| `RANGED_OR_RELIC` | 17 (0x11) |  |
+| `TABARD` | 18 (0x12) |  |
+| `BAG1` | 19 (0x13) |  |
+| `BAG2` | 20 (0x14) |  |
+| `BAG3` | 21 (0x15) |  |
+| `BAG4` | 22 (0x16) |  |
+| `INVENTORY_0` | 23 (0x17) |  |
+| `INVENTORY_1` | 24 (0x18) |  |
+| `INVENTORY_2` | 25 (0x19) |  |
+| `INVENTORY_3` | 26 (0x1A) |  |
+| `INVENTORY_4` | 27 (0x1B) |  |
+| `INVENTORY_5` | 28 (0x1C) |  |
+| `INVENTORY_6` | 29 (0x1D) |  |
+| `INVENTORY_7` | 30 (0x1E) |  |
+| `INVENTORY_8` | 31 (0x1F) |  |
+| `INVENTORY_9` | 32 (0x20) |  |
+| `INVENTORY_10` | 33 (0x21) |  |
+| `INVENTORY_11` | 34 (0x22) |  |
+| `INVENTORY_12` | 35 (0x23) |  |
+| `INVENTORY_13` | 36 (0x24) |  |
+| `INVENTORY_14` | 37 (0x25) |  |
+| `INVENTORY_15` | 38 (0x26) |  |
+| `BANK_1` | 39 (0x27) |  |
+| `BANK_2` | 40 (0x28) |  |
+| `BANK_3` | 41 (0x29) |  |
+| `BANK_4` | 42 (0x2A) |  |
+| `BANK_5` | 43 (0x2B) |  |
+| `BANK_6` | 44 (0x2C) |  |
+| `BANK_7` | 45 (0x2D) |  |
+| `BANK_8` | 46 (0x2E) |  |
+| `BANK_9` | 47 (0x2F) |  |
+| `BANK_10` | 48 (0x30) |  |
+| `BANK_11` | 49 (0x31) |  |
+| `BANK_12` | 50 (0x32) |  |
+| `BANK_13` | 51 (0x33) |  |
+| `BANK_14` | 52 (0x34) |  |
+| `BANK_15` | 53 (0x35) |  |
+| `BANK_16` | 54 (0x36) |  |
+| `BANK_17` | 55 (0x37) |  |
+| `BANK_18` | 56 (0x38) |  |
+| `BANK_19` | 57 (0x39) |  |
+| `BANK_20` | 58 (0x3A) |  |
+| `BANK_21` | 59 (0x3B) |  |
+| `BANK_22` | 60 (0x3C) |  |
+| `BANK_23` | 61 (0x3D) |  |
+| `BANK_24` | 62 (0x3E) |  |
+| `BANK_25` | 63 (0x3F) |  |
+| `BANK_26` | 64 (0x40) |  |
+| `BANK_27` | 65 (0x41) |  |
+| `BANK_28` | 66 (0x42) |  |
+| `BANK_BAG_SLOT_1` | 67 (0x43) |  |
+| `BANK_BAG_SLOT_2` | 68 (0x44) |  |
+| `BANK_BAG_SLOT_3` | 69 (0x45) |  |
+| `BANK_BAG_SLOT_4` | 70 (0x46) |  |
+| `BANK_BAG_SLOT_5` | 71 (0x47) |  |
+| `BANK_BAG_SLOT_6` | 72 (0x48) |  |
+| `BANK_BAG_SLOT_7` | 73 (0x49) |  |
+| `VENDOR_BUYBACK_1` | 74 (0x4A) |  |
+| `VENDOR_BUYBACK_2` | 75 (0x4B) |  |
+| `VENDOR_BUYBACK_3` | 76 (0x4C) |  |
+| `VENDOR_BUYBACK_4` | 77 (0x4D) |  |
+| `VENDOR_BUYBACK_5` | 78 (0x4E) |  |
+| `VENDOR_BUYBACK_6` | 79 (0x4F) |  |
+| `VENDOR_BUYBACK_7` | 80 (0x50) |  |
+| `VENDOR_BUYBACK_8` | 81 (0x51) |  |
+| `VENDOR_BUYBACK_9` | 82 (0x52) |  |
+| `VENDOR_BUYBACK_10` | 83 (0x53) |  |
+| `VENDOR_BUYBACK_11` | 84 (0x54) |  |
+| `VENDOR_BUYBACK_12` | 85 (0x55) |  |
+| `KEYRING_1` | 86 (0x56) |  |
+| `KEYRING_2` | 87 (0x57) |  |
+| `KEYRING_3` | 88 (0x58) |  |
+| `KEYRING_4` | 89 (0x59) |  |
+| `KEYRING_5` | 90 (0x5A) |  |
+| `KEYRING_6` | 91 (0x5B) |  |
+| `KEYRING_7` | 92 (0x5C) |  |
+| `KEYRING_8` | 93 (0x5D) |  |
+| `KEYRING_9` | 94 (0x5E) |  |
+| `KEYRING_10` | 95 (0x5F) |  |
+| `KEYRING_11` | 96 (0x60) |  |
+| `KEYRING_12` | 97 (0x61) |  |
+| `KEYRING_13` | 98 (0x62) |  |
+| `KEYRING_14` | 99 (0x63) |  |
+| `KEYRING_15` | 100 (0x64) |  |
+| `KEYRING_16` | 101 (0x65) |  |
+| `KEYRING_17` | 102 (0x66) |  |
+| `KEYRING_18` | 103 (0x67) |  |
+| `KEYRING_19` | 104 (0x68) |  |
+| `KEYRING_20` | 105 (0x69) |  |
+| `KEYRING_21` | 106 (0x6A) |  |
+| `KEYRING_22` | 107 (0x6B) |  |
+| `KEYRING_23` | 108 (0x6C) |  |
+| `KEYRING_24` | 109 (0x6D) |  |
+| `KEYRING_25` | 110 (0x6E) |  |
+| `KEYRING_26` | 111 (0x6F) |  |
+| `KEYRING_27` | 112 (0x70) |  |
+| `KEYRING_28` | 113 (0x71) |  |
+| `KEYRING_29` | 114 (0x72) |  |
+| `KEYRING_30` | 115 (0x73) |  |
+| `KEYRING_31` | 116 (0x74) |  |
+| `KEYRING_32` | 117 (0x75) |  |
+| `CURRENCY_TOKEN_1` | 118 (0x76) |  |
+| `CURRENCY_TOKEN_2` | 119 (0x77) |  |
+| `CURRENCY_TOKEN_3` | 120 (0x78) |  |
+| `CURRENCY_TOKEN_4` | 121 (0x79) |  |
+| `CURRENCY_TOKEN_5` | 122 (0x7A) |  |
+| `CURRENCY_TOKEN_6` | 123 (0x7B) |  |
+| `CURRENCY_TOKEN_7` | 124 (0x7C) |  |
+| `CURRENCY_TOKEN_8` | 125 (0x7D) |  |
+| `CURRENCY_TOKEN_9` | 126 (0x7E) |  |
+| `CURRENCY_TOKEN_10` | 127 (0x7F) |  |
+| `CURRENCY_TOKEN_11` | 128 (0x80) |  |
+| `CURRENCY_TOKEN_12` | 129 (0x81) |  |
+| `CURRENCY_TOKEN_13` | 130 (0x82) |  |
+| `CURRENCY_TOKEN_14` | 131 (0x83) |  |
+| `CURRENCY_TOKEN_15` | 132 (0x84) |  |
+| `CURRENCY_TOKEN_16` | 133 (0x85) |  |
+| `CURRENCY_TOKEN_17` | 134 (0x86) |  |
+| `CURRENCY_TOKEN_18` | 135 (0x87) |  |
+| `CURRENCY_TOKEN_19` | 136 (0x88) |  |
+| `CURRENCY_TOKEN_20` | 137 (0x89) |  |
+| `CURRENCY_TOKEN_21` | 138 (0x8A) |  |
+| `CURRENCY_TOKEN_22` | 139 (0x8B) |  |
+| `CURRENCY_TOKEN_23` | 140 (0x8C) |  |
+| `CURRENCY_TOKEN_24` | 141 (0x8D) |  |
+| `CURRENCY_TOKEN_25` | 142 (0x8E) |  |
+| `CURRENCY_TOKEN_26` | 143 (0x8F) |  |
+| `CURRENCY_TOKEN_27` | 144 (0x90) |  |
+| `CURRENCY_TOKEN_28` | 145 (0x91) |  |
+| `CURRENCY_TOKEN_29` | 146 (0x92) |  |
+| `CURRENCY_TOKEN_30` | 147 (0x93) |  |
+| `CURRENCY_TOKEN_31` | 148 (0x94) |  |
+| `CURRENCY_TOKEN_32` | 149 (0x95) |  |
 
 Used in:
 * [CMSG_SWAP_INV_ITEM](cmsg_swap_inv_item.md)

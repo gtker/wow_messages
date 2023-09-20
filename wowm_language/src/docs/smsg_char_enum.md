@@ -26,16 +26,16 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | 1 / - | u8 | amount_of_characters |  | Client can not handle values larger than 10 |
-| 0x05 | ? / - | [Character](character.md)[amount_of_characters] | characters |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x04 | 1 / - | u8 | amount_of_characters | Client can not handle values larger than 10 |
+| 0x05 | ? / - | [Character](character.md)[amount_of_characters] | characters |  |
 
 ### Examples
 
 #### Example 1
 
-##### Description
+##### Comment
 
 Empty character list.
 
@@ -69,10 +69,10 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | 1 / - | u8 | amount_of_characters |  |  |
-| 0x05 | ? / - | [Character](character.md)[amount_of_characters] | characters |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x04 | 1 / - | u8 | amount_of_characters |  |
+| 0x05 | ? / - | [Character](character.md)[amount_of_characters] | characters |  |
 
 ## Client Version 3.3.5
 
@@ -98,8 +98,8 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | 1 / - | u8 | amount_of_characters |  |  |
-| - | ? / - | [Character](character.md)[amount_of_characters] | characters |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| - | 1 / - | u8 | amount_of_characters |  |
+| - | ? / - | [Character](character.md)[amount_of_characters] | characters |  |
 

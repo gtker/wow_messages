@@ -19,14 +19,14 @@ enum Bonding : u8 {
 ### Type
 The basic type is `u8`, a 1 byte (8 bit) integer.
 ### Enumerators
-| Enumerator | Value  | Description | Comment | Display |
-| --------- | -------- | ----------- | ------- | ------- |
-| `NO_BIND` | 0 (0x00) |  |  |  |
-| `PICK_UP` | 1 (0x01) |  |  | Binds when picked up |
-| `EQUIP` | 2 (0x02) |  |  | Binds when equipped |
-| `USE` | 3 (0x03) |  |  | Binds on use |
-| `QUEST_ITEM` | 4 (0x04) |  |  | Quest Item |
-| `QUEST_ITEM1` | 5 (0x05) |  | Not used in game according to all emulators. | Quest Item |
+| Enumerator | Value  | Comment | Display |
+| --------- | -------- | ------- | ------- |
+| `NO_BIND` | 0 (0x00) |  |  |
+| `PICK_UP` | 1 (0x01) |  | Binds when picked up |
+| `EQUIP` | 2 (0x02) |  | Binds when equipped |
+| `USE` | 3 (0x03) |  | Binds on use |
+| `QUEST_ITEM` | 4 (0x04) |  | Quest Item |
+| `QUEST_ITEM1` | 5 (0x05) | Not used in game according to all emulators. | Quest Item |
 
 Used in:
 * [SMSG_ITEM_QUERY_SINGLE_RESPONSE](smsg_item_query_single_response.md)

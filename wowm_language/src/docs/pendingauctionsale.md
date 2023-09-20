@@ -16,13 +16,13 @@ struct PendingAuctionSale {
 ```
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x00 | - / - | CString | string1 |  | mangostwo: string '%d:%d:%d:%d:%d' -> itemId, ItemRandomPropertyId, 2, auctionId, unk1 (stack size?, unused) |
-| - | - / - | CString | string2 |  | mangostwo: string '%16I64X:%d:%d:%d:%d' -> bidderGuid, bid, buyout, deposit, auctionCut |
-| - | 4 / Little | u32 | unknown1 |  | mangostwo sets to 97250. |
-| - | 4 / Little | u32 | unknown2 |  | mangostwo sets to 68. |
-| - | 4 / Little | f32 | time_left |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x00 | - / - | CString | string1 | mangostwo: string '%d:%d:%d:%d:%d' -> itemId, ItemRandomPropertyId, 2, auctionId, unk1 (stack size?, unused) |
+| - | - / - | CString | string2 | mangostwo: string '%16I64X:%d:%d:%d:%d' -> bidderGuid, bid, buyout, deposit, auctionCut |
+| - | 4 / Little | u32 | unknown1 | mangostwo sets to 97250. |
+| - | 4 / Little | u32 | unknown2 | mangostwo sets to 68. |
+| - | 4 / Little | f32 | time_left |  |
 
 
 Used in:

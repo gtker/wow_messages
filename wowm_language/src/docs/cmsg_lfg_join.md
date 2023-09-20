@@ -30,14 +30,14 @@ CMSG have a header of 6 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x06 | 4 / Little | u32 | roles |  |  |
-| 0x0A | 1 / - | Bool | no_partial_clear |  |  |
-| 0x0B | 1 / - | Bool | achievements |  |  |
-| 0x0C | 1 / - | u8 | amount_of_slots |  |  |
-| 0x0D | ? / - | u32[amount_of_slots] | slots |  |  |
-| - | 1 / - | u8 | amount_of_needs |  |  |
-| - | ? / - | u8[amount_of_needs] | needs |  |  |
-| - | - / - | CString | comment |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x06 | 4 / Little | u32 | roles |  |
+| 0x0A | 1 / - | Bool | no_partial_clear |  |
+| 0x0B | 1 / - | Bool | achievements |  |
+| 0x0C | 1 / - | u8 | amount_of_slots |  |
+| 0x0D | ? / - | u32[amount_of_slots] | slots |  |
+| - | 1 / - | u8 | amount_of_needs |  |
+| - | ? / - | u8[amount_of_needs] | needs |  |
+| - | - / - | CString | comment |  |
 

@@ -41,13 +41,6 @@ fn common(s: &mut Writer, tags: &ObjectTags, name: &str, print_header: bool) {
 }
 
 fn print_metadata(s: &mut Writer, tags: &ObjectTags) {
-    if let Some(description) = tags.description() {
-        for l in description.as_doc_lines() {
-            s.wln(l);
-            s.newline();
-        }
-    }
-
     if let Some(comment) = tags.comment() {
         for l in comment.as_doc_lines() {
             s.wln(l);

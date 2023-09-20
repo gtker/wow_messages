@@ -640,9 +640,6 @@
         }
       },
       "optionalProperties": {
-        "description": {
-          "type": "string"
-        },
         "comment": {
           "type": "string"
         },
@@ -662,9 +659,6 @@
     },
     "member_tags": {
       "optionalProperties": {
-        "description": {
-          "type": "string"
-        },
         "comment": {
           "type": "string"
         },

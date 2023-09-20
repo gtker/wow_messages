@@ -17,10 +17,10 @@ enum CacheMask : u32 {
 ### Type
 The basic type is `u32`, a 4 byte (32 bit) little endian integer.
 ### Enumerators
-| Enumerator | Value  | Description | Comment | Display |
-| --------- | -------- | ----------- | ------- | ------- |
-| `GLOBAL_CACHE` | 21 (0x15) |  | Values that are shared between all characters, such as account-wide macros |  |
-| `PER_CHARACTER_CACHE` | 234 (0xEA) |  | Values that are stored per character | Per-Character Cache |
+| Enumerator | Value  | Comment | Display |
+| --------- | -------- | ------- | ------- |
+| `GLOBAL_CACHE` | 21 (0x15) | Values that are shared between all characters, such as account-wide macros |  |
+| `PER_CHARACTER_CACHE` | 234 (0xEA) | Values that are stored per character | Per-Character Cache |
 
 Used in:
 * [SMSG_ACCOUNT_DATA_TIMES](smsg_account_data_times.md)

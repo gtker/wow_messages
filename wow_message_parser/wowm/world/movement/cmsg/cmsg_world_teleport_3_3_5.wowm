@@ -7,7 +7,7 @@ cmsg CMSG_WORLD_TELEPORT = 0x08 {
     Vector3d position;
     f32 orientation;
 } {
-    description = "Sent when using the `worldport` console command.";
+    comment = "Sent when using the `worldport` console command.";
     comment = "The 3.3.5 client includes some extra padding.";
 }
 

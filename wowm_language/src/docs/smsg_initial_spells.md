@@ -27,13 +27,13 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | 1 / - | u8 | unknown1 |  | cmangos/mangoszero: sets to 0 |
-| 0x05 | 2 / Little | u16 | spell_count |  |  |
-| 0x07 | ? / - | [InitialSpell](initialspell.md)[spell_count] | initial_spells |  |  |
-| - | 2 / Little | u16 | cooldown_count |  |  |
-| - | ? / - | [CooldownSpell](cooldownspell.md)[cooldown_count] | cooldowns |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x04 | 1 / - | u8 | unknown1 | cmangos/mangoszero: sets to 0 |
+| 0x05 | 2 / Little | u16 | spell_count |  |
+| 0x07 | ? / - | [InitialSpell](initialspell.md)[spell_count] | initial_spells |  |
+| - | 2 / Little | u16 | cooldown_count |  |
+| - | ? / - | [CooldownSpell](cooldownspell.md)[cooldown_count] | cooldowns |  |
 
 ### Examples
 
@@ -155,11 +155,11 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | 1 / - | u8 | unknown1 |  | cmangos/mangoszero: sets to 0 |
-| - | 2 / Little | u16 | spell_count |  |  |
-| - | ? / - | [InitialSpell](initialspell.md)[spell_count] | initial_spells |  |  |
-| - | 2 / Little | u16 | cooldown_count |  |  |
-| - | ? / - | [CooldownSpell](cooldownspell.md)[cooldown_count] | cooldowns |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| - | 1 / - | u8 | unknown1 | cmangos/mangoszero: sets to 0 |
+| - | 2 / Little | u16 | spell_count |  |
+| - | ? / - | [InitialSpell](initialspell.md)[spell_count] | initial_spells |  |
+| - | 2 / Little | u16 | cooldown_count |  |
+| - | ? / - | [CooldownSpell](cooldownspell.md)[cooldown_count] | cooldowns |  |
 

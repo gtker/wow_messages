@@ -24,17 +24,17 @@ enum QuestPartyMessage : u8 {
 ### Type
 The basic type is `u8`, a 1 byte (8 bit) integer.
 ### Enumerators
-| Enumerator | Value  | Description | Comment |
-| --------- | -------- | ----------- | ------- |
-| `SHARING_QUEST` | 0 (0x00) |  | ERR_QUEST_PUSH_SUCCESS_S |
-| `CANT_TAKE_QUEST` | 1 (0x01) |  | ERR_QUEST_PUSH_INVALID_S |
-| `ACCEPT_QUEST` | 2 (0x02) |  | ERR_QUEST_PUSH_ACCEPTED_S |
-| `DECLINE_QUEST` | 3 (0x03) |  | ERR_QUEST_PUSH_DECLINED_S |
-| `TOO_FAR` | 4 (0x04) |  | removed in 3.x |
-| `BUSY` | 5 (0x05) |  | ERR_QUEST_PUSH_BUSY_S |
-| `LOG_FULL` | 6 (0x06) |  | ERR_QUEST_PUSH_LOG_FULL_S |
-| `HAVE_QUEST` | 7 (0x07) |  | ERR_QUEST_PUSH_ONQUEST_S |
-| `FINISH_QUEST` | 8 (0x08) |  | ERR_QUEST_PUSH_ALREADY_DONE_S |
+| Enumerator | Value  | Comment |
+| --------- | -------- | ------- |
+| `SHARING_QUEST` | 0 (0x00) | ERR_QUEST_PUSH_SUCCESS_S |
+| `CANT_TAKE_QUEST` | 1 (0x01) | ERR_QUEST_PUSH_INVALID_S |
+| `ACCEPT_QUEST` | 2 (0x02) | ERR_QUEST_PUSH_ACCEPTED_S |
+| `DECLINE_QUEST` | 3 (0x03) | ERR_QUEST_PUSH_DECLINED_S |
+| `TOO_FAR` | 4 (0x04) | removed in 3.x |
+| `BUSY` | 5 (0x05) | ERR_QUEST_PUSH_BUSY_S |
+| `LOG_FULL` | 6 (0x06) | ERR_QUEST_PUSH_LOG_FULL_S |
+| `HAVE_QUEST` | 7 (0x07) | ERR_QUEST_PUSH_ONQUEST_S |
+| `FINISH_QUEST` | 8 (0x08) | ERR_QUEST_PUSH_ALREADY_DONE_S |
 
 Used in:
 * [MSG_QUEST_PUSH_RESULT](msg_quest_push_result.md)
@@ -64,20 +64,20 @@ enum QuestPartyMessage : u8 {
 ### Type
 The basic type is `u8`, a 1 byte (8 bit) integer.
 ### Enumerators
-| Enumerator | Value  | Description | Comment |
-| --------- | -------- | ----------- | ------- |
-| `MSG_SHARING_QUEST` | 0 (0x00) |  |  |
-| `MSG_CANT_TAKE_QUEST` | 1 (0x01) |  |  |
-| `MSG_ACCEPT_QUEST` | 2 (0x02) |  |  |
-| `MSG_REFUSE_QUEST` | 3 (0x03) |  |  |
-| `MSG_BUSY` | 4 (0x04) |  |  |
-| `MSG_LOG_FULL` | 5 (0x05) |  |  |
-| `MSG_HAVE_QUEST` | 6 (0x06) |  |  |
-| `MSG_FINISH_QUEST` | 7 (0x07) |  |  |
-| `MSG_CANT_BE_SHARED_TODAY` | 8 (0x08) |  |  |
-| `MSG_SHARING_TIMER_EXPIRED` | 9 (0x09) |  |  |
-| `MSG_NOT_IN_PARTY` | 10 (0x0A) |  |  |
-| `MSG_DIFFERENT_SERVER_DAILY` | 11 (0x0B) |  |  |
+| Enumerator | Value  | Comment |
+| --------- | -------- | ------- |
+| `MSG_SHARING_QUEST` | 0 (0x00) |  |
+| `MSG_CANT_TAKE_QUEST` | 1 (0x01) |  |
+| `MSG_ACCEPT_QUEST` | 2 (0x02) |  |
+| `MSG_REFUSE_QUEST` | 3 (0x03) |  |
+| `MSG_BUSY` | 4 (0x04) |  |
+| `MSG_LOG_FULL` | 5 (0x05) |  |
+| `MSG_HAVE_QUEST` | 6 (0x06) |  |
+| `MSG_FINISH_QUEST` | 7 (0x07) |  |
+| `MSG_CANT_BE_SHARED_TODAY` | 8 (0x08) |  |
+| `MSG_SHARING_TIMER_EXPIRED` | 9 (0x09) |  |
+| `MSG_NOT_IN_PARTY` | 10 (0x0A) |  |
+| `MSG_DIFFERENT_SERVER_DAILY` | 11 (0x0B) |  |
 
 Used in:
 * [MSG_QUEST_PUSH_RESULT](msg_quest_push_result.md)

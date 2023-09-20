@@ -26,10 +26,10 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | 4 / Little | u32 | amount_of_teammates |  |  |
-| - | ? / - | [BattlegroundPlayerPosition](battlegroundplayerposition.md)[amount_of_teammates] | teammates |  |  |
-| - | 1 / - | u8 | amount_of_carriers |  | vmangos only sends the carrier of the player team. No emu ever sends more than 2. |
-| - | ? / - | [BattlegroundPlayerPosition](battlegroundplayerposition.md)[amount_of_carriers] | carriers |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| - | 4 / Little | u32 | amount_of_teammates |  |
+| - | ? / - | [BattlegroundPlayerPosition](battlegroundplayerposition.md)[amount_of_teammates] | teammates |  |
+| - | 1 / - | u8 | amount_of_carriers | vmangos only sends the carrier of the player team. No emu ever sends more than 2. |
+| - | ? / - | [BattlegroundPlayerPosition](battlegroundplayerposition.md)[amount_of_carriers] | carriers |  |
 

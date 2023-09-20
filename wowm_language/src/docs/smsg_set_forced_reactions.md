@@ -24,10 +24,10 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | 4 / Little | u32 | amount_of_reactions |  |  |
-| 0x08 | ? / - | [ForcedReaction](forcedreaction.md)[amount_of_reactions] | reactions |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x04 | 4 / Little | u32 | amount_of_reactions |  |
+| 0x08 | ? / - | [ForcedReaction](forcedreaction.md)[amount_of_reactions] | reactions |  |
 
 ## Client Version 2.4.3
 
@@ -53,10 +53,10 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | 4 / Little | u32 | amount_of_reactions |  |  |
-| 0x08 | ? / - | [ForcedReaction](forcedreaction.md)[amount_of_reactions] | reactions |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x04 | 4 / Little | u32 | amount_of_reactions |  |
+| 0x08 | ? / - | [ForcedReaction](forcedreaction.md)[amount_of_reactions] | reactions |  |
 
 ## Client Version 3.3.5
 
@@ -82,8 +82,8 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | 4 / Little | u32 | amount_of_reactions |  |  |
-| - | ? / - | [ForcedReaction](forcedreaction.md)[amount_of_reactions] | reactions |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| - | 4 / Little | u32 | amount_of_reactions |  |
+| - | ? / - | [ForcedReaction](forcedreaction.md)[amount_of_reactions] | reactions |  |
 

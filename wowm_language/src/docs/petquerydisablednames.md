@@ -15,10 +15,10 @@ enum PetQueryDisabledNames : u8 {
 ### Type
 The basic type is `u8`, a 1 byte (8 bit) integer.
 ### Enumerators
-| Enumerator | Value  | Description | Comment |
-| --------- | -------- | ----------- | ------- |
-| `PRESENT` | 1 (0x01) |  |  |
-| `NOT_PRESENT` | 0 (0x00) |  |  |
+| Enumerator | Value  | Comment |
+| --------- | -------- | ------- |
+| `PRESENT` | 1 (0x01) |  |
+| `NOT_PRESENT` | 0 (0x00) |  |
 
 Used in:
 * [SMSG_PET_NAME_QUERY_RESPONSE](smsg_pet_name_query_response.md)

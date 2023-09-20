@@ -17,12 +17,12 @@ enum ArenaTeamCommand : u32 {
 ### Type
 The basic type is `u32`, a 4 byte (32 bit) little endian integer.
 ### Enumerators
-| Enumerator | Value  | Description | Comment |
-| --------- | -------- | ----------- | ------- |
-| `TEAM_CREATE_S` | 0 (0x00) |  |  |
-| `TEAM_INVITE_SS` | 1 (0x01) |  |  |
-| `TEAM_QUIT_S` | 3 (0x03) |  |  |
-| `TEAM_FOUNDER_S` | 14 (0x0E) |  |  |
+| Enumerator | Value  | Comment |
+| --------- | -------- | ------- |
+| `TEAM_CREATE_S` | 0 (0x00) |  |
+| `TEAM_INVITE_SS` | 1 (0x01) |  |
+| `TEAM_QUIT_S` | 3 (0x03) |  |
+| `TEAM_FOUNDER_S` | 14 (0x0E) |  |
 
 Used in:
 * [SMSG_ARENA_TEAM_COMMAND_RESULT](smsg_arena_team_command_result.md)

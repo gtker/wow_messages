@@ -25,11 +25,11 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | 8 / Little | [Guid](../types/packed-guid.md) | summoner |  |  |
-| 0x0C | 4 / - | [Area](area.md) | area |  |  |
-| 0x10 | 4 / Little | Milliseconds | auto_decline_time |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x04 | 8 / Little | [Guid](../types/packed-guid.md) | summoner |  |
+| 0x0C | 4 / - | [Area](area.md) | area |  |
+| 0x10 | 4 / Little | Milliseconds | auto_decline_time |  |
 
 ## Client Version 2.4.3
 
@@ -56,11 +56,11 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | 8 / Little | [Guid](../types/packed-guid.md) | summoner |  |  |
-| 0x0C | 4 / - | [Area](area.md) | area |  |  |
-| 0x10 | 4 / Little | Milliseconds | auto_decline_time |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x04 | 8 / Little | [Guid](../types/packed-guid.md) | summoner |  |
+| 0x0C | 4 / - | [Area](area.md) | area |  |
+| 0x10 | 4 / Little | Milliseconds | auto_decline_time |  |
 
 ## Client Version 3.3.5
 
@@ -87,9 +87,9 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | 8 / Little | [Guid](../types/packed-guid.md) | summoner |  |  |
-| 0x0C | 4 / - | [Area](area.md) | area |  |  |
-| 0x10 | 4 / Little | Milliseconds | auto_decline_time |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x04 | 8 / Little | [Guid](../types/packed-guid.md) | summoner |  |
+| 0x0C | 4 / - | [Area](area.md) | area |  |
+| 0x10 | 4 / Little | Milliseconds | auto_decline_time |  |
 

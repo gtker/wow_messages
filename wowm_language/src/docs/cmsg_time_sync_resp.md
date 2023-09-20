@@ -24,8 +24,8 @@ CMSG have a header of 6 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x06 | 4 / Little | u32 | time_sync |  | Can be used to check if the client is still properly in sync<br/>This should be the same as the counter sent in [SMSG_TIME_SYNC_REQ](./smsg_time_sync_req.md). |
-| 0x0A | 4 / Little | u32 | client_ticks |  | You can check this against expected values to estimate client latency |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x06 | 4 / Little | u32 | time_sync | Can be used to check if the client is still properly in sync<br/>This should be the same as the counter sent in [SMSG_TIME_SYNC_REQ](./smsg_time_sync_req.md). |
+| 0x0A | 4 / Little | u32 | client_ticks | You can check this against expected values to estimate client latency |
 

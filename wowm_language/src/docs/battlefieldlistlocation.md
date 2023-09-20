@@ -15,10 +15,10 @@ enum BattlefieldListLocation : u8 {
 ### Type
 The basic type is `u8`, a 1 byte (8 bit) integer.
 ### Enumerators
-| Enumerator | Value  | Description | Comment |
-| --------- | -------- | ----------- | ------- |
-| `BATTLEMASTER` | 0 (0x00) |  | lua: ShowBattlefieldList |
-| `UI` | 1 (0x01) |  | lua: RequestBattlegroundInstanceInfo |
+| Enumerator | Value  | Comment |
+| --------- | -------- | ------- |
+| `BATTLEMASTER` | 0 (0x00) | lua: ShowBattlefieldList |
+| `UI` | 1 (0x01) | lua: RequestBattlegroundInstanceInfo |
 
 Used in:
 * [CMSG_BATTLEFIELD_LIST](cmsg_battlefield_list.md)

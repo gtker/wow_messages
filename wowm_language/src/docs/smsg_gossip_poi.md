@@ -27,11 +27,11 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | 4 / Little | u32 | flags |  |  |
-| - | 8 / - | [Vector2d](vector2d.md) | position |  |  |
-| - | 4 / Little | u32 | icon |  |  |
-| - | 4 / Little | u32 | data |  |  |
-| - | - / - | CString | location_name |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| - | 4 / Little | u32 | flags |  |
+| - | 8 / - | [Vector2d](vector2d.md) | position |  |
+| - | 4 / Little | u32 | icon |  |
+| - | 4 / Little | u32 | data |  |
+| - | - / - | CString | location_name |  |
 

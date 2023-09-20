@@ -22,25 +22,25 @@ struct GuildLogEvent {
 ```
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x00 | 1 / - | [GuildEvent](guildevent.md) | event |  |  |
-| 0x01 | 8 / Little | [Guid](../types/packed-guid.md) | player1 |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x00 | 1 / - | [GuildEvent](guildevent.md) | event |  |
+| 0x01 | 8 / Little | [Guid](../types/packed-guid.md) | player1 |  |
 
 If event is equal to `JOINED` **or** 
 is equal to `LEFT`:
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x09 | 8 / Little | [Guid](../types/packed-guid.md) | player2 |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x09 | 8 / Little | [Guid](../types/packed-guid.md) | player2 |  |
 
 Else If event is equal to `PROMOTE_PLAYER` **or** 
 is equal to `DEMOTE_PLAYER`:
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x11 | 1 / - | u8 | new_rank |  |  |
-| 0x12 | 4 / Little | u32 | unix_time |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x11 | 1 / - | u8 | new_rank |  |
+| 0x12 | 4 / Little | u32 | unix_time |  |
 
 
 Used in:

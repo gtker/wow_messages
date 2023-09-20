@@ -21,16 +21,16 @@ enum SkillCategory : u8 {
 ### Type
 The basic type is `u8`, a 1 byte (8 bit) integer.
 ### Enumerators
-| Enumerator | Value  | Description | Comment |
-| --------- | -------- | ----------- | ------- |
-| `ATTRIBUTE` | 5 (0x05) |  | Not used for anything in Vanilla and TBC, only used for `Pet - Exotic Spirit Beast` in Wrath. |
-| `WEAPON` | 6 (0x06) |  |  |
-| `CLASS` | 7 (0x07) |  |  |
-| `ARMOR` | 8 (0x08) |  |  |
-| `SECONDARY_PROFESSION` | 9 (0x09) |  |  |
-| `LANGUAGE` | 10 (0x0A) |  |  |
-| `PRIMARY_PROFESSION` | 11 (0x0B) |  |  |
-| `GENERIC` | 12 (0x0C) |  |  |
+| Enumerator | Value  | Comment |
+| --------- | -------- | ------- |
+| `ATTRIBUTE` | 5 (0x05) | Not used for anything in Vanilla and TBC, only used for `Pet - Exotic Spirit Beast` in Wrath. |
+| `WEAPON` | 6 (0x06) |  |
+| `CLASS` | 7 (0x07) |  |
+| `ARMOR` | 8 (0x08) |  |
+| `SECONDARY_PROFESSION` | 9 (0x09) |  |
+| `LANGUAGE` | 10 (0x0A) |  |
+| `PRIMARY_PROFESSION` | 11 (0x0B) |  |
+| `GENERIC` | 12 (0x0C) |  |
 
 Used in:
 

@@ -15,10 +15,10 @@ enum TitleEarnStatus : u32 {
 ### Type
 The basic type is `u32`, a 4 byte (32 bit) little endian integer.
 ### Enumerators
-| Enumerator | Value  | Description | Comment |
-| --------- | -------- | ----------- | ------- |
-| `LOST` | 0 (0x00) |  |  |
-| `EARNED` | 1 (0x01) |  |  |
+| Enumerator | Value  | Comment |
+| --------- | -------- | ------- |
+| `LOST` | 0 (0x00) |  |
+| `EARNED` | 1 (0x01) |  |
 
 Used in:
 * [SMSG_TITLE_EARNED](smsg_title_earned.md)

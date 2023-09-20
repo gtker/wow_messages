@@ -14,11 +14,11 @@ struct RaidInfo {
 ```
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x00 | 4 / - | [Map](map.md) | map |  |  |
-| 0x04 | 4 / Little | u32 | reset_time |  |  |
-| 0x08 | 4 / Little | u32 | instance_id |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x00 | 4 / - | [Map](map.md) | map |  |
+| 0x04 | 4 / Little | u32 | reset_time |  |
+| 0x08 | 4 / Little | u32 | instance_id |  |
 
 
 Used in:
@@ -39,12 +39,12 @@ struct RaidInfo {
 ```
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x00 | 4 / - | [Map](map.md) | map |  |  |
-| 0x04 | 4 / Little | u32 | reset_time |  |  |
-| 0x08 | 4 / Little | u32 | instance_id |  |  |
-| 0x0C | 4 / Little | u32 | index |  | Neither 1.12 nor 3.3.5 have an index field so this might not be accurate. |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x00 | 4 / - | [Map](map.md) | map |  |
+| 0x04 | 4 / Little | u32 | reset_time |  |
+| 0x08 | 4 / Little | u32 | instance_id |  |
+| 0x0C | 4 / Little | u32 | index | Neither 1.12 nor 3.3.5 have an index field so this might not be accurate. |
 
 
 Used in:
@@ -67,14 +67,14 @@ struct RaidInfo {
 ```
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x00 | 4 / - | [Map](map.md) | map |  |  |
-| 0x04 | 4 / - | [DungeonDifficulty](dungeondifficulty.md) | difficulty |  |  |
-| 0x08 | 8 / Little | u64 | instance_id |  |  |
-| 0x10 | 1 / - | Bool | expired |  |  |
-| 0x11 | 1 / - | Bool | extended |  |  |
-| 0x12 | 4 / Little | u32 | time_until_reset |  | Seems to be in seconds |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x00 | 4 / - | [Map](map.md) | map |  |
+| 0x04 | 4 / - | [DungeonDifficulty](dungeondifficulty.md) | difficulty |  |
+| 0x08 | 8 / Little | u64 | instance_id |  |
+| 0x10 | 1 / - | Bool | expired |  |
+| 0x11 | 1 / - | Bool | extended |  |
+| 0x12 | 4 / Little | u32 | time_until_reset | Seems to be in seconds |
 
 
 Used in:

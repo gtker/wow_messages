@@ -30,14 +30,14 @@ CMSG have a header of 6 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x06 | 8 / Little | [Guid](../types/packed-guid.md) | player |  |  |
-| 0x0E | - / - | CString | new_name |  |  |
-| - | 1 / - | [Gender](gender.md) | gender |  |  |
-| - | 1 / - | u8 | skin_color |  |  |
-| - | 1 / - | u8 | hair_color |  |  |
-| - | 1 / - | u8 | hair_style |  |  |
-| - | 1 / - | u8 | facial_hair |  |  |
-| - | 1 / - | u8 | face |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x06 | 8 / Little | [Guid](../types/packed-guid.md) | player |  |
+| 0x0E | - / - | CString | new_name |  |
+| - | 1 / - | [Gender](gender.md) | gender |  |
+| - | 1 / - | u8 | skin_color |  |
+| - | 1 / - | u8 | hair_color |  |
+| - | 1 / - | u8 | hair_style |  |
+| - | 1 / - | u8 | facial_hair |  |
+| - | 1 / - | u8 | face |  |
 

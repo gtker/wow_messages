@@ -25,11 +25,11 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | 4 / Little | u32 | pet_number |  |  |
-| 0x08 | - / - | CString | name |  |  |
-| - | 4 / Little | u32 | pet_name_timestamp |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x04 | 4 / Little | u32 | pet_number |  |
+| 0x08 | - / - | CString | name |  |
+| - | 4 / Little | u32 | pet_name_timestamp |  |
 
 ### Examples
 
@@ -71,16 +71,16 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | 4 / Little | u32 | pet_number |  |  |
-| - | - / - | CString | name |  |  |
-| - | 4 / Little | u32 | pet_name_timestamp |  |  |
-| - | 1 / - | [PetQueryDisabledNames](petquerydisablednames.md) | names |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| - | 4 / Little | u32 | pet_number |  |
+| - | - / - | CString | name |  |
+| - | 4 / Little | u32 | pet_name_timestamp |  |
+| - | 1 / - | [PetQueryDisabledNames](petquerydisablednames.md) | names |  |
 
 If names is equal to `PRESENT`:
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | ? / - | CString[5] | declined_names |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| - | ? / - | CString[5] | declined_names |  |
 

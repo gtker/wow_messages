@@ -27,16 +27,16 @@ CMSG have a header of 6 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x06 | 8 / Little | [Guid](../types/packed-guid.md) | guid |  |  |
-| 0x0E | 4 / Little | u32 | gossip_list_id |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x06 | 8 / Little | [Guid](../types/packed-guid.md) | guid |  |
+| 0x0E | 4 / Little | u32 | gossip_list_id |  |
 
 Optionally the following fields can be present. This can only be detected by looking at the size of the message.
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x12 | - / - | CString | code |  | vmangos: if (_player->PlayerTalkClass->GossipOptionCoded(gossipListId)) |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x12 | - / - | CString | code | vmangos: if (_player->PlayerTalkClass->GossipOptionCoded(gossipListId)) |
 
 ## Client Version 2, Client Version 3
 
@@ -66,15 +66,15 @@ CMSG have a header of 6 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x06 | 8 / Little | [Guid](../types/packed-guid.md) | guid |  |  |
-| 0x0E | 4 / Little | u32 | menu_id |  |  |
-| 0x12 | 4 / Little | u32 | gossip_list_id |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x06 | 8 / Little | [Guid](../types/packed-guid.md) | guid |  |
+| 0x0E | 4 / Little | u32 | menu_id |  |
+| 0x12 | 4 / Little | u32 | gossip_list_id |  |
 
 Optionally the following fields can be present. This can only be detected by looking at the size of the message.
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x16 | - / - | CString | code |  | vmangos: if (_player->PlayerTalkClass->GossipOptionCoded(gossipListId)) |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x16 | - / - | CString | code | vmangos: if (_player->PlayerTalkClass->GossipOptionCoded(gossipListId)) |
 

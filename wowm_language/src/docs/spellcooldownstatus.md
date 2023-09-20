@@ -13,10 +13,10 @@ struct SpellCooldownStatus {
 ```
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x00 | 4 / Little | u32 | id |  |  |
-| 0x04 | 4 / Little | Milliseconds | cooldown_time |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x00 | 4 / Little | u32 | id |  |
+| 0x04 | 4 / Little | Milliseconds | cooldown_time |  |
 
 
 Used in:

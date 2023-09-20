@@ -17,12 +17,12 @@ enum ArenaType : u8 {
 ### Type
 The basic type is `u8`, a 1 byte (8 bit) integer.
 ### Enumerators
-| Enumerator | Value  | Description | Comment |
-| --------- | -------- | ----------- | ------- |
-| `NOT_ARENA` | 0 (0x00) |  |  |
-| `TWO_VS_TWO` | 2 (0x02) |  |  |
-| `THREE_VS_THREE` | 3 (0x03) |  |  |
-| `FIVE_VS_FIVE` | 5 (0x05) |  |  |
+| Enumerator | Value  | Comment |
+| --------- | -------- | ------- |
+| `NOT_ARENA` | 0 (0x00) |  |
+| `TWO_VS_TWO` | 2 (0x02) |  |
+| `THREE_VS_THREE` | 3 (0x03) |  |
+| `FIVE_VS_FIVE` | 5 (0x05) |  |
 
 Used in:
 * [SMSG_ARENA_ERROR](smsg_arena_error.md)

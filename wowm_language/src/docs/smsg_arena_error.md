@@ -24,8 +24,8 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | 4 / Little | u32 | unknown |  |  |
-| 0x08 | 1 / - | [ArenaType](arenatype.md) | arena_type |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x04 | 4 / Little | u32 | unknown |  |
+| 0x08 | 1 / - | [ArenaType](arenatype.md) | arena_type |  |
 

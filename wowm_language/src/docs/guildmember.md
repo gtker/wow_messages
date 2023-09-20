@@ -23,23 +23,23 @@ struct GuildMember {
 ```
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x00 | 8 / Little | [Guid](../types/packed-guid.md) | guid |  |  |
-| 0x08 | 1 / - | [GuildMemberStatus](guildmemberstatus.md) | status |  |  |
-| 0x09 | - / - | CString | name |  |  |
-| - | 4 / Little | u32 | rank |  |  |
-| - | 1 / - | Level | level |  |  |
-| - | 1 / - | [Class](class.md) | class |  |  |
-| - | 4 / - | [Area](area.md) | area |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x00 | 8 / Little | [Guid](../types/packed-guid.md) | guid |  |
+| 0x08 | 1 / - | [GuildMemberStatus](guildmemberstatus.md) | status |  |
+| 0x09 | - / - | CString | name |  |
+| - | 4 / Little | u32 | rank |  |
+| - | 1 / - | Level | level |  |
+| - | 1 / - | [Class](class.md) | class |  |
+| - | 4 / - | [Area](area.md) | area |  |
 
 If status is equal to `OFFLINE`:
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | 4 / Little | f32 | time_offline |  |  |
-| - | - / - | CString | public_note |  |  |
-| - | - / - | CString | officer_note |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| - | 4 / Little | f32 | time_offline |  |
+| - | - / - | CString | public_note |  |
+| - | - / - | CString | officer_note |  |
 
 
 Used in:
@@ -69,24 +69,24 @@ struct GuildMember {
 ```
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x00 | 8 / Little | [Guid](../types/packed-guid.md) | guid |  |  |
-| 0x08 | 1 / - | [GuildMemberStatus](guildmemberstatus.md) | status |  |  |
-| 0x09 | - / - | CString | name |  |  |
-| - | 4 / Little | u32 | rank |  |  |
-| - | 1 / - | Level | level |  |  |
-| - | 1 / - | [Class](class.md) | class |  |  |
-| - | 1 / - | u8 | unknown1 |  | mangosone: new 2.4.0<br/>Possibly gender |
-| - | 4 / - | [Area](area.md) | area |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x00 | 8 / Little | [Guid](../types/packed-guid.md) | guid |  |
+| 0x08 | 1 / - | [GuildMemberStatus](guildmemberstatus.md) | status |  |
+| 0x09 | - / - | CString | name |  |
+| - | 4 / Little | u32 | rank |  |
+| - | 1 / - | Level | level |  |
+| - | 1 / - | [Class](class.md) | class |  |
+| - | 1 / - | u8 | unknown1 | mangosone: new 2.4.0<br/>Possibly gender |
+| - | 4 / - | [Area](area.md) | area |  |
 
 If status is equal to `OFFLINE`:
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | 4 / Little | f32 | time_offline |  |  |
-| - | - / - | CString | public_note |  |  |
-| - | - / - | CString | officer_note |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| - | 4 / Little | f32 | time_offline |  |
+| - | - / - | CString | public_note |  |
+| - | - / - | CString | officer_note |  |
 
 
 Used in:
@@ -117,25 +117,25 @@ struct GuildMember {
 ```
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x00 | 8 / Little | [Guid](../types/packed-guid.md) | guid |  |  |
-| 0x08 | 4 / Little | u32 | unknown |  | arcemu: high guid |
-| 0x0C | 1 / - | [GuildMemberStatus](guildmemberstatus.md) | status |  |  |
-| 0x0D | - / - | CString | name |  |  |
-| - | 4 / Little | u32 | rank |  |  |
-| - | 1 / - | Level | level |  |  |
-| - | 1 / - | [Class](class.md) | class |  |  |
-| - | 1 / - | [Gender](gender.md) | gender |  |  |
-| - | 4 / - | [Area](area.md) | area |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x00 | 8 / Little | [Guid](../types/packed-guid.md) | guid |  |
+| 0x08 | 4 / Little | u32 | unknown | arcemu: high guid |
+| 0x0C | 1 / - | [GuildMemberStatus](guildmemberstatus.md) | status |  |
+| 0x0D | - / - | CString | name |  |
+| - | 4 / Little | u32 | rank |  |
+| - | 1 / - | Level | level |  |
+| - | 1 / - | [Class](class.md) | class |  |
+| - | 1 / - | [Gender](gender.md) | gender |  |
+| - | 4 / - | [Area](area.md) | area |  |
 
 If status is equal to `OFFLINE`:
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | 4 / Little | f32 | time_offline |  |  |
-| - | - / - | CString | public_note |  |  |
-| - | - / - | CString | officer_note |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| - | 4 / Little | f32 | time_offline |  |
+| - | - / - | CString | public_note |  |
+| - | - / - | CString | officer_note |  |
 
 
 Used in:

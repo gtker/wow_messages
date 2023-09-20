@@ -48,43 +48,43 @@ enum ChatType : u8 {
 ### Type
 The basic type is `u8`, a 1 byte (8 bit) integer.
 ### Enumerators
-| Enumerator | Value  | Description | Comment |
-| --------- | -------- | ----------- | ------- |
-| `SAY` | 0 (0x00) |  |  |
-| `PARTY` | 1 (0x01) |  |  |
-| `RAID` | 2 (0x02) |  |  |
-| `GUILD` | 3 (0x03) |  |  |
-| `OFFICER` | 4 (0x04) |  |  |
-| `YELL` | 5 (0x05) |  |  |
-| `WHISPER` | 6 (0x06) |  |  |
-| `WHISPER_INFORM` | 7 (0x07) |  |  |
-| `EMOTE` | 8 (0x08) |  |  |
-| `TEXT_EMOTE` | 9 (0x09) |  |  |
-| `SYSTEM` | 10 (0x0A) |  |  |
-| `MONSTER_SAY` | 11 (0x0B) |  |  |
-| `MONSTER_YELL` | 12 (0x0C) |  |  |
-| `MONSTER_EMOTE` | 13 (0x0D) |  |  |
-| `CHANNEL` | 14 (0x0E) |  |  |
-| `CHANNEL_JOIN` | 15 (0x0F) |  |  |
-| `CHANNEL_LEAVE` | 16 (0x10) |  |  |
-| `CHANNEL_LIST` | 17 (0x11) |  |  |
-| `CHANNEL_NOTICE` | 18 (0x12) |  |  |
-| `CHANNEL_NOTICE_USER` | 19 (0x13) |  |  |
-| `AFK` | 20 (0x14) |  |  |
-| `DND` | 21 (0x15) |  |  |
-| `IGNORED` | 22 (0x16) |  |  |
-| `SKILL` | 23 (0x17) |  |  |
-| `LOOT` | 24 (0x18) |  |  |
-| `MONSTER_WHISPER` | 26 (0x1A) |  |  |
-| `BG_SYSTEM_NEUTRAL` | 82 (0x52) |  |  |
-| `BG_SYSTEM_ALLIANCE` | 83 (0x53) |  |  |
-| `BG_SYSTEM_HORDE` | 84 (0x54) |  |  |
-| `RAID_LEADER` | 87 (0x57) |  |  |
-| `RAID_WARNING` | 88 (0x58) |  |  |
-| `RAID_BOSS_WHISPER` | 89 (0x59) |  |  |
-| `RAID_BOSS_EMOTE` | 90 (0x5A) |  |  |
-| `BATTLEGROUND` | 92 (0x5C) |  |  |
-| `BATTLEGROUND_LEADER` | 93 (0x5D) |  |  |
+| Enumerator | Value  | Comment |
+| --------- | -------- | ------- |
+| `SAY` | 0 (0x00) |  |
+| `PARTY` | 1 (0x01) |  |
+| `RAID` | 2 (0x02) |  |
+| `GUILD` | 3 (0x03) |  |
+| `OFFICER` | 4 (0x04) |  |
+| `YELL` | 5 (0x05) |  |
+| `WHISPER` | 6 (0x06) |  |
+| `WHISPER_INFORM` | 7 (0x07) |  |
+| `EMOTE` | 8 (0x08) |  |
+| `TEXT_EMOTE` | 9 (0x09) |  |
+| `SYSTEM` | 10 (0x0A) |  |
+| `MONSTER_SAY` | 11 (0x0B) |  |
+| `MONSTER_YELL` | 12 (0x0C) |  |
+| `MONSTER_EMOTE` | 13 (0x0D) |  |
+| `CHANNEL` | 14 (0x0E) |  |
+| `CHANNEL_JOIN` | 15 (0x0F) |  |
+| `CHANNEL_LEAVE` | 16 (0x10) |  |
+| `CHANNEL_LIST` | 17 (0x11) |  |
+| `CHANNEL_NOTICE` | 18 (0x12) |  |
+| `CHANNEL_NOTICE_USER` | 19 (0x13) |  |
+| `AFK` | 20 (0x14) |  |
+| `DND` | 21 (0x15) |  |
+| `IGNORED` | 22 (0x16) |  |
+| `SKILL` | 23 (0x17) |  |
+| `LOOT` | 24 (0x18) |  |
+| `MONSTER_WHISPER` | 26 (0x1A) |  |
+| `BG_SYSTEM_NEUTRAL` | 82 (0x52) |  |
+| `BG_SYSTEM_ALLIANCE` | 83 (0x53) |  |
+| `BG_SYSTEM_HORDE` | 84 (0x54) |  |
+| `RAID_LEADER` | 87 (0x57) |  |
+| `RAID_WARNING` | 88 (0x58) |  |
+| `RAID_BOSS_WHISPER` | 89 (0x59) |  |
+| `RAID_BOSS_EMOTE` | 90 (0x5A) |  |
+| `BATTLEGROUND` | 92 (0x5C) |  |
+| `BATTLEGROUND_LEADER` | 93 (0x5D) |  |
 
 Used in:
 * [CMSG_MESSAGECHAT](cmsg_messagechat.md)
@@ -150,55 +150,55 @@ enum ChatType : u8 {
 ### Type
 The basic type is `u8`, a 1 byte (8 bit) integer.
 ### Enumerators
-| Enumerator | Value  | Description | Comment |
-| --------- | -------- | ----------- | ------- |
-| `SYSTEM` | 0 (0x00) |  |  |
-| `SAY` | 1 (0x01) |  |  |
-| `PARTY` | 2 (0x02) |  |  |
-| `RAID` | 3 (0x03) |  |  |
-| `GUILD` | 4 (0x04) |  |  |
-| `OFFICER` | 5 (0x05) |  |  |
-| `YELL` | 6 (0x06) |  |  |
-| `WHISPER` | 7 (0x07) |  |  |
-| `WHISPER_INFORM` | 8 (0x08) |  |  |
-| `REPLY` | 9 (0x09) |  |  |
-| `EMOTE` | 10 (0x0A) |  |  |
-| `TEXT_EMOTE` | 11 (0x0B) |  |  |
-| `MONSTER_SAY` | 12 (0x0C) |  |  |
-| `MONSTER_PARTY` | 13 (0x0D) |  |  |
-| `MONSTER_YELL` | 14 (0x0E) |  |  |
-| `MONSTER_WHISPER` | 15 (0x0F) |  |  |
-| `MONSTER_EMOTE` | 16 (0x10) |  |  |
-| `CHANNEL` | 17 (0x11) |  |  |
-| `CHANNEL_JOIN` | 18 (0x12) |  |  |
-| `CHANNEL_LEAVE` | 19 (0x13) |  |  |
-| `CHANNEL_LIST` | 20 (0x14) |  |  |
-| `CHANNEL_NOTICE` | 21 (0x15) |  |  |
-| `CHANNEL_NOTICE_USER` | 22 (0x16) |  |  |
-| `AFK` | 23 (0x17) |  |  |
-| `DND` | 24 (0x18) |  |  |
-| `IGNORED` | 25 (0x19) |  |  |
-| `SKILL` | 26 (0x1A) |  |  |
-| `LOOT` | 27 (0x1B) |  |  |
-| `MONEY` | 28 (0x1C) |  |  |
-| `OPENING` | 29 (0x1D) |  |  |
-| `TRADESKILLS` | 30 (0x1E) |  |  |
-| `PET_INFO` | 31 (0x1F) |  |  |
-| `COMBAT_MISC_INFO` | 32 (0x20) |  |  |
-| `COMBAT_XP_GAIN` | 33 (0x21) |  |  |
-| `COMBAT_HONOR_GAIN` | 34 (0x22) |  |  |
-| `COMBAT_FACTION_CHANGE` | 35 (0x23) |  |  |
-| `BG_SYSTEM_NEUTRAL` | 36 (0x24) |  |  |
-| `BG_SYSTEM_ALLIANCE` | 37 (0x25) |  |  |
-| `BG_SYSTEM_HORDE` | 38 (0x26) |  |  |
-| `RAID_LEADER` | 39 (0x27) |  |  |
-| `RAID_WARNING` | 40 (0x28) |  |  |
-| `RAID_BOSS_WHISPER` | 41 (0x29) |  |  |
-| `RAID_BOSS_EMOTE` | 42 (0x2A) |  |  |
-| `FILTERED` | 43 (0x2B) |  |  |
-| `BATTLEGROUND` | 44 (0x2C) |  |  |
-| `BATTLEGROUND_LEADER` | 45 (0x2D) |  |  |
-| `RESTRICTED` | 46 (0x2E) |  |  |
+| Enumerator | Value  | Comment |
+| --------- | -------- | ------- |
+| `SYSTEM` | 0 (0x00) |  |
+| `SAY` | 1 (0x01) |  |
+| `PARTY` | 2 (0x02) |  |
+| `RAID` | 3 (0x03) |  |
+| `GUILD` | 4 (0x04) |  |
+| `OFFICER` | 5 (0x05) |  |
+| `YELL` | 6 (0x06) |  |
+| `WHISPER` | 7 (0x07) |  |
+| `WHISPER_INFORM` | 8 (0x08) |  |
+| `REPLY` | 9 (0x09) |  |
+| `EMOTE` | 10 (0x0A) |  |
+| `TEXT_EMOTE` | 11 (0x0B) |  |
+| `MONSTER_SAY` | 12 (0x0C) |  |
+| `MONSTER_PARTY` | 13 (0x0D) |  |
+| `MONSTER_YELL` | 14 (0x0E) |  |
+| `MONSTER_WHISPER` | 15 (0x0F) |  |
+| `MONSTER_EMOTE` | 16 (0x10) |  |
+| `CHANNEL` | 17 (0x11) |  |
+| `CHANNEL_JOIN` | 18 (0x12) |  |
+| `CHANNEL_LEAVE` | 19 (0x13) |  |
+| `CHANNEL_LIST` | 20 (0x14) |  |
+| `CHANNEL_NOTICE` | 21 (0x15) |  |
+| `CHANNEL_NOTICE_USER` | 22 (0x16) |  |
+| `AFK` | 23 (0x17) |  |
+| `DND` | 24 (0x18) |  |
+| `IGNORED` | 25 (0x19) |  |
+| `SKILL` | 26 (0x1A) |  |
+| `LOOT` | 27 (0x1B) |  |
+| `MONEY` | 28 (0x1C) |  |
+| `OPENING` | 29 (0x1D) |  |
+| `TRADESKILLS` | 30 (0x1E) |  |
+| `PET_INFO` | 31 (0x1F) |  |
+| `COMBAT_MISC_INFO` | 32 (0x20) |  |
+| `COMBAT_XP_GAIN` | 33 (0x21) |  |
+| `COMBAT_HONOR_GAIN` | 34 (0x22) |  |
+| `COMBAT_FACTION_CHANGE` | 35 (0x23) |  |
+| `BG_SYSTEM_NEUTRAL` | 36 (0x24) |  |
+| `BG_SYSTEM_ALLIANCE` | 37 (0x25) |  |
+| `BG_SYSTEM_HORDE` | 38 (0x26) |  |
+| `RAID_LEADER` | 39 (0x27) |  |
+| `RAID_WARNING` | 40 (0x28) |  |
+| `RAID_BOSS_WHISPER` | 41 (0x29) |  |
+| `RAID_BOSS_EMOTE` | 42 (0x2A) |  |
+| `FILTERED` | 43 (0x2B) |  |
+| `BATTLEGROUND` | 44 (0x2C) |  |
+| `BATTLEGROUND_LEADER` | 45 (0x2D) |  |
+| `RESTRICTED` | 46 (0x2E) |  |
 
 Used in:
 * [CMSG_MESSAGECHAT](cmsg_messagechat.md)
@@ -270,60 +270,60 @@ enum ChatType : u8 {
 ### Type
 The basic type is `u8`, a 1 byte (8 bit) integer.
 ### Enumerators
-| Enumerator | Value  | Description | Comment |
-| --------- | -------- | ----------- | ------- |
-| `SYSTEM` | 0 (0x00) |  |  |
-| `SAY` | 1 (0x01) |  |  |
-| `PARTY` | 2 (0x02) |  |  |
-| `RAID` | 3 (0x03) |  |  |
-| `GUILD` | 4 (0x04) |  |  |
-| `OFFICER` | 5 (0x05) |  |  |
-| `YELL` | 6 (0x06) |  |  |
-| `WHISPER` | 7 (0x07) |  |  |
-| `WHISPER_FOREIGN` | 8 (0x08) |  |  |
-| `WHISPER_INFORM` | 9 (0x09) |  |  |
-| `EMOTE` | 10 (0x0A) |  |  |
-| `TEXT_EMOTE` | 11 (0x0B) |  |  |
-| `MONSTER_SAY` | 12 (0x0C) |  |  |
-| `MONSTER_PARTY` | 13 (0x0D) |  |  |
-| `MONSTER_YELL` | 14 (0x0E) |  |  |
-| `MONSTER_WHISPER` | 15 (0x0F) |  |  |
-| `MONSTER_EMOTE` | 16 (0x10) |  |  |
-| `CHANNEL` | 17 (0x11) |  |  |
-| `CHANNEL_JOIN` | 18 (0x12) |  |  |
-| `CHANNEL_LEAVE` | 19 (0x13) |  |  |
-| `CHANNEL_LIST` | 20 (0x14) |  |  |
-| `CHANNEL_NOTICE` | 21 (0x15) |  |  |
-| `CHANNEL_NOTICE_USER` | 22 (0x16) |  |  |
-| `AFK` | 23 (0x17) |  |  |
-| `DND` | 24 (0x18) |  |  |
-| `IGNORED` | 25 (0x19) |  |  |
-| `SKILL` | 26 (0x1A) |  |  |
-| `LOOT` | 27 (0x1B) |  |  |
-| `MONEY` | 28 (0x1C) |  |  |
-| `OPENING` | 29 (0x1D) |  |  |
-| `TRADESKILLS` | 30 (0x1E) |  |  |
-| `PET_INFO` | 31 (0x1F) |  |  |
-| `COMBAT_MISC_INFO` | 32 (0x20) |  |  |
-| `COMBAT_XP_GAIN` | 33 (0x21) |  |  |
-| `COMBAT_HONOR_GAIN` | 34 (0x22) |  |  |
-| `COMBAT_FACTION_CHANGE` | 35 (0x23) |  |  |
-| `BG_SYSTEM_NEUTRAL` | 36 (0x24) |  |  |
-| `BG_SYSTEM_ALLIANCE` | 37 (0x25) |  |  |
-| `BG_SYSTEM_HORDE` | 38 (0x26) |  |  |
-| `RAID_LEADER` | 39 (0x27) |  |  |
-| `RAID_WARNING` | 40 (0x28) |  |  |
-| `RAID_BOSS_EMOTE` | 41 (0x29) |  |  |
-| `RAID_BOSS_WHISPER` | 42 (0x2A) |  |  |
-| `FILTERED` | 43 (0x2B) |  |  |
-| `BATTLEGROUND` | 44 (0x2C) |  |  |
-| `BATTLEGROUND_LEADER` | 45 (0x2D) |  |  |
-| `RESTRICTED` | 46 (0x2E) |  |  |
-| `BATTLENET` | 47 (0x2F) |  |  |
-| `ACHIEVEMENT` | 48 (0x30) |  |  |
-| `GUILD_ACHIEVEMENT` | 49 (0x31) |  |  |
-| `ARENA_POINTS` | 50 (0x32) |  |  |
-| `PARTY_LEADER` | 51 (0x33) |  |  |
+| Enumerator | Value  | Comment |
+| --------- | -------- | ------- |
+| `SYSTEM` | 0 (0x00) |  |
+| `SAY` | 1 (0x01) |  |
+| `PARTY` | 2 (0x02) |  |
+| `RAID` | 3 (0x03) |  |
+| `GUILD` | 4 (0x04) |  |
+| `OFFICER` | 5 (0x05) |  |
+| `YELL` | 6 (0x06) |  |
+| `WHISPER` | 7 (0x07) |  |
+| `WHISPER_FOREIGN` | 8 (0x08) |  |
+| `WHISPER_INFORM` | 9 (0x09) |  |
+| `EMOTE` | 10 (0x0A) |  |
+| `TEXT_EMOTE` | 11 (0x0B) |  |
+| `MONSTER_SAY` | 12 (0x0C) |  |
+| `MONSTER_PARTY` | 13 (0x0D) |  |
+| `MONSTER_YELL` | 14 (0x0E) |  |
+| `MONSTER_WHISPER` | 15 (0x0F) |  |
+| `MONSTER_EMOTE` | 16 (0x10) |  |
+| `CHANNEL` | 17 (0x11) |  |
+| `CHANNEL_JOIN` | 18 (0x12) |  |
+| `CHANNEL_LEAVE` | 19 (0x13) |  |
+| `CHANNEL_LIST` | 20 (0x14) |  |
+| `CHANNEL_NOTICE` | 21 (0x15) |  |
+| `CHANNEL_NOTICE_USER` | 22 (0x16) |  |
+| `AFK` | 23 (0x17) |  |
+| `DND` | 24 (0x18) |  |
+| `IGNORED` | 25 (0x19) |  |
+| `SKILL` | 26 (0x1A) |  |
+| `LOOT` | 27 (0x1B) |  |
+| `MONEY` | 28 (0x1C) |  |
+| `OPENING` | 29 (0x1D) |  |
+| `TRADESKILLS` | 30 (0x1E) |  |
+| `PET_INFO` | 31 (0x1F) |  |
+| `COMBAT_MISC_INFO` | 32 (0x20) |  |
+| `COMBAT_XP_GAIN` | 33 (0x21) |  |
+| `COMBAT_HONOR_GAIN` | 34 (0x22) |  |
+| `COMBAT_FACTION_CHANGE` | 35 (0x23) |  |
+| `BG_SYSTEM_NEUTRAL` | 36 (0x24) |  |
+| `BG_SYSTEM_ALLIANCE` | 37 (0x25) |  |
+| `BG_SYSTEM_HORDE` | 38 (0x26) |  |
+| `RAID_LEADER` | 39 (0x27) |  |
+| `RAID_WARNING` | 40 (0x28) |  |
+| `RAID_BOSS_EMOTE` | 41 (0x29) |  |
+| `RAID_BOSS_WHISPER` | 42 (0x2A) |  |
+| `FILTERED` | 43 (0x2B) |  |
+| `BATTLEGROUND` | 44 (0x2C) |  |
+| `BATTLEGROUND_LEADER` | 45 (0x2D) |  |
+| `RESTRICTED` | 46 (0x2E) |  |
+| `BATTLENET` | 47 (0x2F) |  |
+| `ACHIEVEMENT` | 48 (0x30) |  |
+| `GUILD_ACHIEVEMENT` | 49 (0x31) |  |
+| `ARENA_POINTS` | 50 (0x32) |  |
+| `PARTY_LEADER` | 51 (0x33) |  |
 
 Used in:
 * [CMSG_MESSAGECHAT](cmsg_messagechat.md)

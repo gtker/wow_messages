@@ -18,15 +18,15 @@ struct WhoPlayer {
 ```
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x00 | - / - | CString | name |  |  |
-| - | - / - | CString | guild |  |  |
-| - | 4 / Little | Level32 | level |  |  |
-| - | 1 / - | [Class](class.md) | class |  |  |
-| - | 1 / - | [Race](race.md) | race |  |  |
-| - | 4 / - | [Area](area.md) | area |  |  |
-| - | 4 / Little | u32 | party_status |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x00 | - / - | CString | name |  |
+| - | - / - | CString | guild |  |
+| - | 4 / Little | Level32 | level |  |
+| - | 1 / - | [Class](class.md) | class |  |
+| - | 1 / - | [Race](race.md) | race |  |
+| - | 4 / - | [Area](area.md) | area |  |
+| - | 4 / Little | u32 | party_status |  |
 
 
 Used in:
@@ -50,15 +50,15 @@ struct WhoPlayer {
 ```
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x00 | - / - | CString | name |  |  |
-| - | - / - | CString | guild |  |  |
-| - | 4 / Little | Level32 | level |  |  |
-| - | 1 / - | [Class](class.md) | class |  |  |
-| - | 1 / - | [Race](race.md) | race |  |  |
-| - | 1 / - | [Gender](gender.md) | gender |  |  |
-| - | 4 / - | [Area](area.md) | area |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x00 | - / - | CString | name |  |
+| - | - / - | CString | guild |  |
+| - | 4 / Little | Level32 | level |  |
+| - | 1 / - | [Class](class.md) | class |  |
+| - | 1 / - | [Race](race.md) | race |  |
+| - | 1 / - | [Gender](gender.md) | gender |  |
+| - | 4 / - | [Area](area.md) | area |  |
 
 
 Used in:
@@ -82,15 +82,15 @@ struct WhoPlayer {
 ```
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x00 | - / - | CString | name |  |  |
-| - | - / - | CString | guild |  |  |
-| - | 4 / Little | Level32 | level |  |  |
-| - | 1 / - | [Class](class.md) | class |  |  |
-| - | 1 / - | [Race](race.md) | race |  |  |
-| - | 1 / - | [Gender](gender.md) | gender |  |  |
-| - | 4 / - | [Area](area.md) | area |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x00 | - / - | CString | name |  |
+| - | - / - | CString | guild |  |
+| - | 4 / Little | Level32 | level |  |
+| - | 1 / - | [Class](class.md) | class |  |
+| - | 1 / - | [Race](race.md) | race |  |
+| - | 1 / - | [Gender](gender.md) | gender |  |
+| - | 4 / - | [Area](area.md) | area |  |
 
 
 Used in:

@@ -15,10 +15,10 @@ enum ClientMovementData : u8 {
 ### Type
 The basic type is `u8`, a 1 byte (8 bit) integer.
 ### Enumerators
-| Enumerator | Value  | Description | Comment |
-| --------- | -------- | ----------- | ------- |
-| `NOT_PRESENT` | 0 (0x00) |  |  |
-| `PRESENT` | 1 (0x01) |  |  |
+| Enumerator | Value  | Comment |
+| --------- | -------- | ------- |
+| `NOT_PRESENT` | 0 (0x00) |  |
+| `PRESENT` | 1 (0x01) |  |
 
 Used in:
 * [CMSG_CAST_SPELL](cmsg_cast_spell.md)

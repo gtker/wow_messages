@@ -40,38 +40,38 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | 4 / Little | u32 | queue_slot |  | vmangos: players can be in 3 queues at the same time (0..2) |
-| 0x08 | 4 / - | [Map](map.md) | map |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x04 | 4 / Little | u32 | queue_slot | vmangos: players can be in 3 queues at the same time (0..2) |
+| 0x08 | 4 / - | [Map](map.md) | map |  |
 
 If map is not equal to `EASTERN_KINGDOMS`:
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x0C | 1 / - | [BattlegroundBracket](battlegroundbracket.md) | bracket |  |  |
-| 0x0D | 4 / Little | u32 | client_instance_id |  |  |
-| 0x11 | 1 / - | [StatusId](statusid.md) | status_id |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x0C | 1 / - | [BattlegroundBracket](battlegroundbracket.md) | bracket |  |
+| 0x0D | 4 / Little | u32 | client_instance_id |  |
+| 0x11 | 1 / - | [StatusId](statusid.md) | status_id |  |
 
 If status_id is equal to `WAIT_QUEUE`:
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x12 | 4 / Little | u32 | average_wait_time_in_ms |  |  |
-| 0x16 | 4 / Little | u32 | time_in_queue_in_ms |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x12 | 4 / Little | u32 | average_wait_time_in_ms |  |
+| 0x16 | 4 / Little | u32 | time_in_queue_in_ms |  |
 
 Else If status_id is equal to `WAIT_JOIN`:
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x1A | 4 / Little | u32 | time_to_remove_in_queue_in_ms |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x1A | 4 / Little | u32 | time_to_remove_in_queue_in_ms |  |
 
 Else If status_id is equal to `IN_PROGRESS`:
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x1E | 4 / Little | u32 | time_to_bg_autoleave_in_ms |  |  |
-| 0x22 | 4 / Little | u32 | time_to_bg_start_in_ms |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x1E | 4 / Little | u32 | time_to_bg_autoleave_in_ms |  |
+| 0x22 | 4 / Little | u32 | time_to_bg_start_in_ms |  |
 
 ## Client Version 2.4.3
 
@@ -116,36 +116,36 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | 4 / Little | u32 | queue_slot |  | vmangos: players can be in 3 queues at the same time (0..2) |
-| 0x08 | 1 / - | [ArenaType](arenatype.md) | arena_type |  |  |
-| 0x09 | 1 / - | u8 | unknown1 |  | mangosone sets to 0x0D. |
-| 0x0A | 4 / - | [BattlegroundType](battlegroundtype.md) | battleground_type |  |  |
-| 0x0E | 2 / Little | u16 | unknown2 |  | mangosone sets to 0x1F90 |
-| 0x10 | 4 / Little | u32 | client_instance_id |  |  |
-| 0x14 | 1 / - | Bool | rated |  |  |
-| 0x15 | 1 / - | [StatusId](statusid.md) | status_id |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x04 | 4 / Little | u32 | queue_slot | vmangos: players can be in 3 queues at the same time (0..2) |
+| 0x08 | 1 / - | [ArenaType](arenatype.md) | arena_type |  |
+| 0x09 | 1 / - | u8 | unknown1 | mangosone sets to 0x0D. |
+| 0x0A | 4 / - | [BattlegroundType](battlegroundtype.md) | battleground_type |  |
+| 0x0E | 2 / Little | u16 | unknown2 | mangosone sets to 0x1F90 |
+| 0x10 | 4 / Little | u32 | client_instance_id |  |
+| 0x14 | 1 / - | Bool | rated |  |
+| 0x15 | 1 / - | [StatusId](statusid.md) | status_id |  |
 
 If status_id is equal to `WAIT_QUEUE`:
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x16 | 4 / Little | u32 | average_wait_time_in_ms |  |  |
-| 0x1A | 4 / Little | u32 | time_in_queue_in_ms |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x16 | 4 / Little | u32 | average_wait_time_in_ms |  |
+| 0x1A | 4 / Little | u32 | time_in_queue_in_ms |  |
 
 Else If status_id is equal to `WAIT_JOIN`:
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x1E | 4 / Little | u32 | time_to_remove_in_queue_in_ms |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x1E | 4 / Little | u32 | time_to_remove_in_queue_in_ms |  |
 
 Else If status_id is equal to `IN_PROGRESS`:
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x22 | 4 / Little | u32 | time_to_bg_autoleave_in_ms |  |  |
-| 0x26 | 4 / Little | u32 | time_to_bg_start_in_ms |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x22 | 4 / Little | u32 | time_to_bg_autoleave_in_ms |  |
+| 0x26 | 4 / Little | u32 | time_to_bg_start_in_ms |  |
 
 ## Client Version 3.3.5
 
@@ -197,41 +197,41 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | 4 / Little | u32 | queue_slot |  | vmangos: players can be in 3 queues at the same time (0..2) |
-| - | 1 / - | [ArenaType](arenatype.md) | arena_type |  |  |
-| - | 1 / - | u8 | is_arena |  | azerothcore sets to 0x0E if it is arena, 0 otherwise. |
-| - | 4 / - | [BattlegroundType](battlegroundtype.md) | battleground_type |  |  |
-| - | 2 / Little | u16 | unknown1 |  | azerothcore sets to 0x1F90 |
-| - | 1 / - | u8 | minimum_level |  |  |
-| - | 1 / - | u8 | maximum_level |  |  |
-| - | 4 / Little | u32 | client_instance_id |  |  |
-| - | 1 / - | Bool | rated |  |  |
-| - | 1 / - | [StatusId](statusid.md) | status_id |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| - | 4 / Little | u32 | queue_slot | vmangos: players can be in 3 queues at the same time (0..2) |
+| - | 1 / - | [ArenaType](arenatype.md) | arena_type |  |
+| - | 1 / - | u8 | is_arena | azerothcore sets to 0x0E if it is arena, 0 otherwise. |
+| - | 4 / - | [BattlegroundType](battlegroundtype.md) | battleground_type |  |
+| - | 2 / Little | u16 | unknown1 | azerothcore sets to 0x1F90 |
+| - | 1 / - | u8 | minimum_level |  |
+| - | 1 / - | u8 | maximum_level |  |
+| - | 4 / Little | u32 | client_instance_id |  |
+| - | 1 / - | Bool | rated |  |
+| - | 1 / - | [StatusId](statusid.md) | status_id |  |
 
 If status_id is equal to `WAIT_QUEUE`:
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | 4 / Little | u32 | average_wait_time_in_ms |  |  |
-| - | 4 / Little | u32 | time_in_queue_in_ms |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| - | 4 / Little | u32 | average_wait_time_in_ms |  |
+| - | 4 / Little | u32 | time_in_queue_in_ms |  |
 
 Else If status_id is equal to `WAIT_JOIN`:
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | 4 / - | [Map](map.md) | map1 |  |  |
-| - | 8 / Little | u64 | unknown2 |  | azerothcore: 3.3.5 unknown |
-| - | 4 / Little | u32 | time_to_remove_in_queue_in_ms |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| - | 4 / - | [Map](map.md) | map1 |  |
+| - | 8 / Little | u64 | unknown2 | azerothcore: 3.3.5 unknown |
+| - | 4 / Little | u32 | time_to_remove_in_queue_in_ms |  |
 
 Else If status_id is equal to `IN_PROGRESS`:
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | 4 / - | [Map](map.md) | map2 |  |  |
-| - | 8 / Little | u64 | unknown3 |  | azerothcore: 3.3.5 unknown |
-| - | 4 / Little | u32 | time_to_bg_autoleave_in_ms |  |  |
-| - | 4 / Little | u32 | time_to_bg_start_in_ms |  |  |
-| - | 1 / - | [ArenaFaction](arenafaction.md) | faction |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| - | 4 / - | [Map](map.md) | map2 |  |
+| - | 8 / Little | u64 | unknown3 | azerothcore: 3.3.5 unknown |
+| - | 4 / Little | u32 | time_to_bg_autoleave_in_ms |  |
+| - | 4 / Little | u32 | time_to_bg_start_in_ms |  |
+| - | 1 / - | [ArenaFaction](arenafaction.md) | faction |  |
 

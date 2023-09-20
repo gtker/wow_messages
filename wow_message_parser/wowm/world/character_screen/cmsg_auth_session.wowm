@@ -10,7 +10,7 @@ struct AddonInfo {
 cmsg CMSG_AUTH_SESSION = 0x1ED {
     u32 build;
     u32 server_id {
-        description = "This is sent to the client in [CMD_REALM_LIST_Server].";
+        comment = "This is sent to the client in [CMD_REALM_LIST_Server].";
     }
     CString username;
     u32 client_seed;
@@ -19,8 +19,8 @@ cmsg CMSG_AUTH_SESSION = 0x1ED {
         compressed = "true";
     }
 } {
-    description = "Sent after receiving [SMSG_AUTH_CHALLENGE].";
-    description = "Followed by [SMSG_AUTH_RESPONSE].";
+    comment = "Sent after receiving [SMSG_AUTH_CHALLENGE].";
+    comment = "Followed by [SMSG_AUTH_RESPONSE].";
     comment = "This message is never encrypted.";
     versions = "1 2";
 }
@@ -158,7 +158,7 @@ cmsg CMSG_AUTH_SESSION = 0x1ED {
         compressed = "true";
     }
 } {
-    description = "Sent after receiving [SMSG_AUTH_CHALLENGE].";
+    comment = "Sent after receiving [SMSG_AUTH_CHALLENGE].";
     comment = "This message is never encrypted.";
     versions = "3.3.5";
 }

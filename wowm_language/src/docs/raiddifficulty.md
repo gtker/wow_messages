@@ -17,12 +17,12 @@ enum RaidDifficulty : u8 {
 ### Type
 The basic type is `u8`, a 1 byte (8 bit) integer.
 ### Enumerators
-| Enumerator | Value  | Description | Comment |
-| --------- | -------- | ----------- | ------- |
-| `TEN_MAN_NORMAL` | 0 (0x00) |  |  |
-| `TWENTY_FIVE_MAN_NORMAL` | 1 (0x01) |  |  |
-| `TEN_MAN_HEROIC` | 2 (0x02) |  |  |
-| `TWENTY_FIVE_MAN_HEROIC` | 3 (0x03) |  |  |
+| Enumerator | Value  | Comment |
+| --------- | -------- | ------- |
+| `TEN_MAN_NORMAL` | 0 (0x00) |  |
+| `TWENTY_FIVE_MAN_NORMAL` | 1 (0x01) |  |
+| `TEN_MAN_HEROIC` | 2 (0x02) |  |
+| `TWENTY_FIVE_MAN_HEROIC` | 3 (0x03) |  |
 
 Used in:
 * [CMSG_SET_SAVED_INSTANCE_EXTEND](cmsg_set_saved_instance_extend.md)

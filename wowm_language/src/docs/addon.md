@@ -24,30 +24,30 @@ struct Addon {
 ```
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x00 | 1 / - | [AddonType](addontype.md) | addon_type |  |  |
-| 0x01 | 1 / - | [InfoBlock](infoblock.md) | info_block |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x00 | 1 / - | [AddonType](addontype.md) | addon_type |  |
+| 0x01 | 1 / - | [InfoBlock](infoblock.md) | info_block |  |
 
 If info_block is equal to `AVAILABLE`:
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x02 | 1 / - | [KeyVersion](keyversion.md) | key_version |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x02 | 1 / - | [KeyVersion](keyversion.md) | key_version |  |
 
 If key_version is not equal to `ZERO`:
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x03 | 256 / - | u8[256] | public_key |  |  |
-| 0x103 | 4 / Little | u32 | update_available_flag |  |  |
-| 0x107 | 1 / - | [UrlInfo](urlinfo.md) | url_info |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x03 | 256 / - | u8[256] | public_key |  |
+| 0x103 | 4 / Little | u32 | update_available_flag |  |
+| 0x107 | 1 / - | [UrlInfo](urlinfo.md) | url_info |  |
 
 If url_info is equal to `AVAILABLE`:
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x108 | - / - | CString | url |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x108 | - / - | CString | url |  |
 
 
 Used in:
@@ -69,13 +69,13 @@ struct Addon {
 ```
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x00 | 1 / - | u8 | addon_type |  | Other emus hardcode this to 2. More research is required |
-| 0x01 | 1 / - | u8 | uses_crc |  | Other emus hardcode this to 1. |
-| 0x02 | 1 / - | Bool | uses_diffent_public_key |  |  |
-| 0x03 | 4 / Little | u32 | unknown1 |  | Other emus hardcode this to 0 |
-| 0x07 | 1 / - | u8 | unknown2 |  | Other emus hardcode this to 0 |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x00 | 1 / - | u8 | addon_type | Other emus hardcode this to 2. More research is required |
+| 0x01 | 1 / - | u8 | uses_crc | Other emus hardcode this to 1. |
+| 0x02 | 1 / - | Bool | uses_diffent_public_key |  |
+| 0x03 | 4 / Little | u32 | unknown1 | Other emus hardcode this to 0 |
+| 0x07 | 1 / - | u8 | unknown2 | Other emus hardcode this to 0 |
 
 
 Used in:

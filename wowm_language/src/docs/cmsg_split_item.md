@@ -27,13 +27,13 @@ CMSG have a header of 6 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x06 | 1 / - | u8 | source_bag |  |  |
-| 0x07 | 1 / - | u8 | source_slot |  |  |
-| 0x08 | 1 / - | u8 | destination_bag |  |  |
-| 0x09 | 1 / - | u8 | destination_slot |  |  |
-| 0x0A | 1 / - | u8 | amount |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x06 | 1 / - | u8 | source_bag |  |
+| 0x07 | 1 / - | u8 | source_slot |  |
+| 0x08 | 1 / - | u8 | destination_bag |  |
+| 0x09 | 1 / - | u8 | destination_slot |  |
+| 0x0A | 1 / - | u8 | amount |  |
 
 ## Client Version 3.3.5
 
@@ -62,11 +62,11 @@ CMSG have a header of 6 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x06 | 1 / - | u8 | source_bag |  |  |
-| 0x07 | 1 / - | u8 | source_slot |  |  |
-| 0x08 | 1 / - | u8 | destination_bag |  |  |
-| 0x09 | 1 / - | u8 | destination_slot |  |  |
-| 0x0A | 4 / Little | u32 | amount |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x06 | 1 / - | u8 | source_bag |  |
+| 0x07 | 1 / - | u8 | source_slot |  |
+| 0x08 | 1 / - | u8 | destination_bag |  |
+| 0x09 | 1 / - | u8 | destination_slot |  |
+| 0x0A | 4 / Little | u32 | amount |  |
 

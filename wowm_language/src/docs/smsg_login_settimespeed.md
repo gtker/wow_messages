@@ -30,16 +30,16 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | 4 / Little | DateTime | datetime | Current server datetime. | Running the client with `-console` verifies that this message in this format sets the correct datetime. [SMSG_QUERY_TIME_RESPONSE](./smsg_query_time_response.md) will not set this. |
-| 0x08 | 4 / Little | f32 | timescale | How many minutes should pass by every second. | vmangos/cmangos/mangoszero set this to 0.01666667. This means that 1/60 minutes pass every second (one second passes every second). Setting this to 1.0 will make the client advance one minute every second. |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x04 | 4 / Little | DateTime | datetime | Current server datetime.<br/>Running the client with `-console` verifies that this message in this format sets the correct datetime. [SMSG_QUERY_TIME_RESPONSE](./smsg_query_time_response.md) will not set this. |
+| 0x08 | 4 / Little | f32 | timescale | How many minutes should pass by every second.<br/>vmangos/cmangos/mangoszero set this to 0.01666667. This means that 1/60 minutes pass every second (one second passes every second). Setting this to 1.0 will make the client advance one minute every second. |
 
 ### Examples
 
 #### Example 1
 
-##### Description
+##### Comment
 
 Set time to 2022-08-13 (Wednesday) 08:10 and timescale 0.016666668 (1/60).
 
@@ -74,9 +74,9 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | 4 / Little | DateTime | datetime | Current server datetime. | Running the client with `-console` verifies that this message in this format sets the correct datetime. [SMSG_QUERY_TIME_RESPONSE](./smsg_query_time_response.md) will not set this. |
-| 0x08 | 4 / Little | f32 | timescale | How many minutes should pass by every second. | vmangos/cmangos/mangoszero set this to 0.01666667. This means that 1/60 minutes pass every second (one second passes every second). Setting this to 1.0 will make the client advance one minute every second. |
-| 0x0C | 4 / Little | u32 | unknown1 |  | arcemu/azerothcore/mangostwo: Set to 0. |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x04 | 4 / Little | DateTime | datetime | Current server datetime.<br/>Running the client with `-console` verifies that this message in this format sets the correct datetime. [SMSG_QUERY_TIME_RESPONSE](./smsg_query_time_response.md) will not set this. |
+| 0x08 | 4 / Little | f32 | timescale | How many minutes should pass by every second.<br/>vmangos/cmangos/mangoszero set this to 0.01666667. This means that 1/60 minutes pass every second (one second passes every second). Setting this to 1.0 will make the client advance one minute every second. |
+| 0x0C | 4 / Little | u32 | unknown1 | arcemu/azerothcore/mangostwo: Set to 0. |
 

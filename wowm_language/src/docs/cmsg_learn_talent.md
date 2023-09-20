@@ -24,10 +24,10 @@ CMSG have a header of 6 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x06 | 4 / - | [Talent](talent.md) | talent |  |  |
-| 0x0A | 4 / Little | u32 | requested_rank |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x06 | 4 / - | [Talent](talent.md) | talent |  |
+| 0x0A | 4 / Little | u32 | requested_rank |  |
 
 ### Examples
 
@@ -63,10 +63,10 @@ CMSG have a header of 6 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x06 | 4 / - | [Talent](talent.md) | talent |  |  |
-| 0x0A | 4 / Little | u32 | requested_rank |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x06 | 4 / - | [Talent](talent.md) | talent |  |
+| 0x0A | 4 / Little | u32 | requested_rank |  |
 
 ## Client Version 3.3.5
 
@@ -92,8 +92,8 @@ CMSG have a header of 6 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x06 | 4 / - | [Talent](talent.md) | talent |  |  |
-| 0x0A | 4 / Little | u32 | requested_rank |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x06 | 4 / - | [Talent](talent.md) | talent |  |
+| 0x0A | 4 / Little | u32 | requested_rank |  |
 

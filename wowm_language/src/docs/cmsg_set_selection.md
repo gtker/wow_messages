@@ -25,15 +25,15 @@ CMSG have a header of 6 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x06 | 8 / Little | [Guid](../types/packed-guid.md) | target |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x06 | 8 / Little | [Guid](../types/packed-guid.md) | target |  |
 
 ### Examples
 
 #### Example 1
 
-##### Description
+##### Comment
 
 Client sets target to GUID 6.
 

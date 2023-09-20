@@ -37,32 +37,32 @@ enum CreatureFamily : u8 {
 ### Type
 The basic type is `u8`, a 1 byte (8 bit) integer.
 ### Enumerators
-| Enumerator | Value  | Description | Comment |
-| --------- | -------- | ----------- | ------- |
-| `NONE` | 0 (0x00) |  |  |
-| `WOLF` | 1 (0x01) |  |  |
-| `CAT` | 2 (0x02) |  |  |
-| `SPIDER` | 3 (0x03) |  |  |
-| `BEAR` | 4 (0x04) |  |  |
-| `BOAR` | 5 (0x05) |  |  |
-| `CROCOLISK` | 6 (0x06) |  |  |
-| `CARRION_BIRD` | 7 (0x07) |  |  |
-| `CRAB` | 8 (0x08) |  |  |
-| `GORILLA` | 9 (0x09) |  |  |
-| `RAPTOR` | 11 (0x0B) |  |  |
-| `TALLSTRIDER` | 12 (0x0C) |  |  |
-| `FELHUNTER` | 15 (0x0F) |  |  |
-| `VOIDWALKER` | 16 (0x10) |  |  |
-| `SUCCUBUS` | 17 (0x11) |  |  |
-| `DOOMGUARD` | 19 (0x13) |  |  |
-| `SCORPID` | 20 (0x14) |  |  |
-| `TURTLE` | 21 (0x15) |  |  |
-| `IMP` | 23 (0x17) |  |  |
-| `BAT` | 24 (0x18) |  |  |
-| `HYENA` | 25 (0x19) |  |  |
-| `OWL` | 26 (0x1A) |  |  |
-| `WIND_SERPENT` | 27 (0x1B) |  |  |
-| `REMOTE_CONTROL` | 28 (0x1C) |  |  |
+| Enumerator | Value  | Comment |
+| --------- | -------- | ------- |
+| `NONE` | 0 (0x00) |  |
+| `WOLF` | 1 (0x01) |  |
+| `CAT` | 2 (0x02) |  |
+| `SPIDER` | 3 (0x03) |  |
+| `BEAR` | 4 (0x04) |  |
+| `BOAR` | 5 (0x05) |  |
+| `CROCOLISK` | 6 (0x06) |  |
+| `CARRION_BIRD` | 7 (0x07) |  |
+| `CRAB` | 8 (0x08) |  |
+| `GORILLA` | 9 (0x09) |  |
+| `RAPTOR` | 11 (0x0B) |  |
+| `TALLSTRIDER` | 12 (0x0C) |  |
+| `FELHUNTER` | 15 (0x0F) |  |
+| `VOIDWALKER` | 16 (0x10) |  |
+| `SUCCUBUS` | 17 (0x11) |  |
+| `DOOMGUARD` | 19 (0x13) |  |
+| `SCORPID` | 20 (0x14) |  |
+| `TURTLE` | 21 (0x15) |  |
+| `IMP` | 23 (0x17) |  |
+| `BAT` | 24 (0x18) |  |
+| `HYENA` | 25 (0x19) |  |
+| `OWL` | 26 (0x1A) |  |
+| `WIND_SERPENT` | 27 (0x1B) |  |
+| `REMOTE_CONTROL` | 28 (0x1C) |  |
 
 Used in:
 * [Character](character.md)
@@ -113,40 +113,40 @@ enum CreatureFamily : u8 {
 ### Type
 The basic type is `u8`, a 1 byte (8 bit) integer.
 ### Enumerators
-| Enumerator | Value  | Description | Comment |
-| --------- | -------- | ----------- | ------- |
-| `NONE` | 0 (0x00) |  |  |
-| `WOLF` | 1 (0x01) |  |  |
-| `CAT` | 2 (0x02) |  |  |
-| `SPIDER` | 3 (0x03) |  |  |
-| `BEAR` | 4 (0x04) |  |  |
-| `BOAR` | 5 (0x05) |  |  |
-| `CROCOLISK` | 6 (0x06) |  |  |
-| `CARRION_BIRD` | 7 (0x07) |  |  |
-| `CRAB` | 8 (0x08) |  |  |
-| `GORILLA` | 9 (0x09) |  |  |
-| `RAPTOR` | 11 (0x0B) |  |  |
-| `TALLSTRIDER` | 12 (0x0C) |  |  |
-| `FELHUNTER` | 15 (0x0F) |  |  |
-| `VOIDWALKER` | 16 (0x10) |  |  |
-| `SUCCUBUS` | 17 (0x11) |  |  |
-| `DOOMGUARD` | 19 (0x13) |  |  |
-| `SCORPID` | 20 (0x14) |  |  |
-| `TURTLE` | 21 (0x15) |  |  |
-| `IMP` | 23 (0x17) |  |  |
-| `BAT` | 24 (0x18) |  |  |
-| `HYENA` | 25 (0x19) |  |  |
-| `OWL` | 26 (0x1A) |  |  |
-| `WIND_SERPENT` | 27 (0x1B) |  |  |
-| `REMOTE_CONTROL` | 28 (0x1C) |  |  |
-| `FELGUARD` | 29 (0x1D) |  |  |
-| `DRAGONHAWK` | 30 (0x1E) |  |  |
-| `RAVAGER` | 31 (0x1F) |  |  |
-| `WARP_STALKER` | 32 (0x20) |  |  |
-| `SPOREBAT` | 33 (0x21) |  |  |
-| `NETHER_RAY` | 34 (0x22) |  |  |
-| `SERPENT` | 35 (0x23) |  |  |
-| `SEA_LION` | 36 (0x24) |  |  |
+| Enumerator | Value  | Comment |
+| --------- | -------- | ------- |
+| `NONE` | 0 (0x00) |  |
+| `WOLF` | 1 (0x01) |  |
+| `CAT` | 2 (0x02) |  |
+| `SPIDER` | 3 (0x03) |  |
+| `BEAR` | 4 (0x04) |  |
+| `BOAR` | 5 (0x05) |  |
+| `CROCOLISK` | 6 (0x06) |  |
+| `CARRION_BIRD` | 7 (0x07) |  |
+| `CRAB` | 8 (0x08) |  |
+| `GORILLA` | 9 (0x09) |  |
+| `RAPTOR` | 11 (0x0B) |  |
+| `TALLSTRIDER` | 12 (0x0C) |  |
+| `FELHUNTER` | 15 (0x0F) |  |
+| `VOIDWALKER` | 16 (0x10) |  |
+| `SUCCUBUS` | 17 (0x11) |  |
+| `DOOMGUARD` | 19 (0x13) |  |
+| `SCORPID` | 20 (0x14) |  |
+| `TURTLE` | 21 (0x15) |  |
+| `IMP` | 23 (0x17) |  |
+| `BAT` | 24 (0x18) |  |
+| `HYENA` | 25 (0x19) |  |
+| `OWL` | 26 (0x1A) |  |
+| `WIND_SERPENT` | 27 (0x1B) |  |
+| `REMOTE_CONTROL` | 28 (0x1C) |  |
+| `FELGUARD` | 29 (0x1D) |  |
+| `DRAGONHAWK` | 30 (0x1E) |  |
+| `RAVAGER` | 31 (0x1F) |  |
+| `WARP_STALKER` | 32 (0x20) |  |
+| `SPOREBAT` | 33 (0x21) |  |
+| `NETHER_RAY` | 34 (0x22) |  |
+| `SERPENT` | 35 (0x23) |  |
+| `SEA_LION` | 36 (0x24) |  |
 
 Used in:
 * [Character](character.md)
@@ -206,49 +206,49 @@ enum CreatureFamily : u8 {
 ### Type
 The basic type is `u8`, a 1 byte (8 bit) integer.
 ### Enumerators
-| Enumerator | Value  | Description | Comment |
-| --------- | -------- | ----------- | ------- |
-| `NONE` | 0 (0x00) |  |  |
-| `WOLF` | 1 (0x01) |  |  |
-| `CAT` | 2 (0x02) |  |  |
-| `SPIDER` | 3 (0x03) |  |  |
-| `BEAR` | 4 (0x04) |  |  |
-| `BOAR` | 5 (0x05) |  |  |
-| `CROCOLISK` | 6 (0x06) |  |  |
-| `CARRION_BIRD` | 7 (0x07) |  |  |
-| `CRAB` | 8 (0x08) |  |  |
-| `GORILLA` | 9 (0x09) |  |  |
-| `RAPTOR` | 11 (0x0B) |  |  |
-| `TALLSTRIDER` | 12 (0x0C) |  |  |
-| `FELHUNTER` | 15 (0x0F) |  |  |
-| `VOIDWALKER` | 16 (0x10) |  |  |
-| `SUCCUBUS` | 17 (0x11) |  |  |
-| `DOOMGUARD` | 19 (0x13) |  |  |
-| `SCORPID` | 20 (0x14) |  |  |
-| `TURTLE` | 21 (0x15) |  |  |
-| `IMP` | 23 (0x17) |  |  |
-| `BAT` | 24 (0x18) |  |  |
-| `HYENA` | 25 (0x19) |  |  |
-| `BIRD_OF_PREY` | 26 (0x1A) |  |  |
-| `WIND_SERPENT` | 27 (0x1B) |  |  |
-| `REMOTE_CONTROL` | 28 (0x1C) |  |  |
-| `FELGUARD` | 29 (0x1D) |  |  |
-| `DRAGONHAWK` | 30 (0x1E) |  |  |
-| `RAVAGER` | 31 (0x1F) |  |  |
-| `WARP_STALKER` | 32 (0x20) |  |  |
-| `SPOREBAT` | 33 (0x21) |  |  |
-| `NETHER_RAY` | 34 (0x22) |  |  |
-| `SERPENT` | 35 (0x23) |  |  |
-| `MOTH` | 37 (0x25) |  |  |
-| `CHIMAERA` | 38 (0x26) |  |  |
-| `DEVILSAUR` | 39 (0x27) |  |  |
-| `GHOUL` | 40 (0x28) |  |  |
-| `SILITHID` | 41 (0x29) |  |  |
-| `WORM` | 42 (0x2A) |  |  |
-| `RHINO` | 43 (0x2B) |  |  |
-| `WASP` | 44 (0x2C) |  |  |
-| `CORE_HOUND` | 45 (0x2D) |  |  |
-| `SPIRIT_BEAST` | 46 (0x2E) |  |  |
+| Enumerator | Value  | Comment |
+| --------- | -------- | ------- |
+| `NONE` | 0 (0x00) |  |
+| `WOLF` | 1 (0x01) |  |
+| `CAT` | 2 (0x02) |  |
+| `SPIDER` | 3 (0x03) |  |
+| `BEAR` | 4 (0x04) |  |
+| `BOAR` | 5 (0x05) |  |
+| `CROCOLISK` | 6 (0x06) |  |
+| `CARRION_BIRD` | 7 (0x07) |  |
+| `CRAB` | 8 (0x08) |  |
+| `GORILLA` | 9 (0x09) |  |
+| `RAPTOR` | 11 (0x0B) |  |
+| `TALLSTRIDER` | 12 (0x0C) |  |
+| `FELHUNTER` | 15 (0x0F) |  |
+| `VOIDWALKER` | 16 (0x10) |  |
+| `SUCCUBUS` | 17 (0x11) |  |
+| `DOOMGUARD` | 19 (0x13) |  |
+| `SCORPID` | 20 (0x14) |  |
+| `TURTLE` | 21 (0x15) |  |
+| `IMP` | 23 (0x17) |  |
+| `BAT` | 24 (0x18) |  |
+| `HYENA` | 25 (0x19) |  |
+| `BIRD_OF_PREY` | 26 (0x1A) |  |
+| `WIND_SERPENT` | 27 (0x1B) |  |
+| `REMOTE_CONTROL` | 28 (0x1C) |  |
+| `FELGUARD` | 29 (0x1D) |  |
+| `DRAGONHAWK` | 30 (0x1E) |  |
+| `RAVAGER` | 31 (0x1F) |  |
+| `WARP_STALKER` | 32 (0x20) |  |
+| `SPOREBAT` | 33 (0x21) |  |
+| `NETHER_RAY` | 34 (0x22) |  |
+| `SERPENT` | 35 (0x23) |  |
+| `MOTH` | 37 (0x25) |  |
+| `CHIMAERA` | 38 (0x26) |  |
+| `DEVILSAUR` | 39 (0x27) |  |
+| `GHOUL` | 40 (0x28) |  |
+| `SILITHID` | 41 (0x29) |  |
+| `WORM` | 42 (0x2A) |  |
+| `RHINO` | 43 (0x2B) |  |
+| `WASP` | 44 (0x2C) |  |
+| `CORE_HOUND` | 45 (0x2D) |  |
+| `SPIRIT_BEAST` | 46 (0x2E) |  |
 
 Used in:
 * [Character](character.md)

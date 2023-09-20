@@ -23,18 +23,18 @@ enum BagFamily : u8 {
 ### Type
 The basic type is `u8`, a 1 byte (8 bit) integer.
 ### Enumerators
-| Enumerator | Value  | Description | Comment |
-| --------- | -------- | ----------- | ------- |
-| `NONE` | 0 (0x00) |  |  |
-| `ARROWS` | 1 (0x01) |  |  |
-| `BULLETS` | 2 (0x02) |  |  |
-| `SOUL_SHARDS` | 3 (0x03) |  |  |
-| `UNKNOWN4` | 4 (0x04) |  |  |
-| `UNKNOWN5` | 5 (0x05) |  |  |
-| `HERBS` | 6 (0x06) |  |  |
-| `ENCHANTING_SUPPLIES` | 7 (0x07) |  |  |
-| `ENGINEERING_SUPPLIES` | 8 (0x08) |  |  |
-| `KEYS` | 9 (0x09) |  |  |
+| Enumerator | Value  | Comment |
+| --------- | -------- | ------- |
+| `NONE` | 0 (0x00) |  |
+| `ARROWS` | 1 (0x01) |  |
+| `BULLETS` | 2 (0x02) |  |
+| `SOUL_SHARDS` | 3 (0x03) |  |
+| `UNKNOWN4` | 4 (0x04) |  |
+| `UNKNOWN5` | 5 (0x05) |  |
+| `HERBS` | 6 (0x06) |  |
+| `ENCHANTING_SUPPLIES` | 7 (0x07) |  |
+| `ENGINEERING_SUPPLIES` | 8 (0x08) |  |
+| `KEYS` | 9 (0x09) |  |
 
 Used in:
 * [SMSG_ITEM_QUERY_SINGLE_RESPONSE](smsg_item_query_single_response.md)
@@ -68,24 +68,24 @@ flag BagFamily : u32 {
 ### Type
 The basic type is `u32`, a 4 byte (32 bit) little endian integer.
 ### Enumerators
-| Enumerator | Value  | Description | Comment |
-| --------- | -------- | ----------- | ------- |
-| `NONE` | 0 (0x00) |  |  |
-| `ARROWS` | 1 (0x01) |  |  |
-| `BULLETS` | 2 (0x02) |  |  |
-| `SOUL_SHARDS` | 4 (0x04) |  |  |
-| `LEATHERWORKING_SUPPLIES` | 8 (0x08) |  |  |
-| `INSCRIPTION_SUPPLIES` | 16 (0x10) |  |  |
-| `HERBS` | 32 (0x20) |  |  |
-| `ENCHANTING_SUPPLIES` | 64 (0x40) |  |  |
-| `ENGINEERING_SUPPLIES` | 128 (0x80) |  |  |
-| `KEYS` | 256 (0x100) |  |  |
-| `GEMS` | 512 (0x200) |  |  |
-| `MINING_SUPPLIES` | 1024 (0x400) |  |  |
-| `SOULBOUND_EQUIPMENT` | 2048 (0x800) |  |  |
-| `VANITY_PETS` | 4096 (0x1000) |  |  |
-| `CURRENCY_TOKENS` | 8192 (0x2000) |  |  |
-| `QUEST_ITEMS` | 16384 (0x4000) |  |  |
+| Enumerator | Value  | Comment |
+| --------- | -------- | ------- |
+| `NONE` | 0 (0x00) |  |
+| `ARROWS` | 1 (0x01) |  |
+| `BULLETS` | 2 (0x02) |  |
+| `SOUL_SHARDS` | 4 (0x04) |  |
+| `LEATHERWORKING_SUPPLIES` | 8 (0x08) |  |
+| `INSCRIPTION_SUPPLIES` | 16 (0x10) |  |
+| `HERBS` | 32 (0x20) |  |
+| `ENCHANTING_SUPPLIES` | 64 (0x40) |  |
+| `ENGINEERING_SUPPLIES` | 128 (0x80) |  |
+| `KEYS` | 256 (0x100) |  |
+| `GEMS` | 512 (0x200) |  |
+| `MINING_SUPPLIES` | 1024 (0x400) |  |
+| `SOULBOUND_EQUIPMENT` | 2048 (0x800) |  |
+| `VANITY_PETS` | 4096 (0x1000) |  |
+| `CURRENCY_TOKENS` | 8192 (0x2000) |  |
+| `QUEST_ITEMS` | 16384 (0x4000) |  |
 
 Used in:
 * [SMSG_ITEM_QUERY_SINGLE_RESPONSE](smsg_item_query_single_response.md)

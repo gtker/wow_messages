@@ -24,10 +24,10 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | 1 / - | u8 | amount_of_events |  |  |
-| 0x05 | ? / - | [GuildLogEvent](guildlogevent.md)[amount_of_events] | events |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x04 | 1 / - | u8 | amount_of_events |  |
+| 0x05 | ? / - | [GuildLogEvent](guildlogevent.md)[amount_of_events] | events |  |
 
 ## Client Version 3.3.5
 
@@ -53,8 +53,8 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | 1 / - | u8 | amount_of_events |  |  |
-| - | ? / - | [GuildLogEvent](guildlogevent.md)[amount_of_events] | events |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| - | 1 / - | u8 | amount_of_events |  |
+| - | ? / - | [GuildLogEvent](guildlogevent.md)[amount_of_events] | events |  |
 

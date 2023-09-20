@@ -14,11 +14,11 @@ struct SendCalendarResetTime {
 ```
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x00 | 4 / - | [Map](map.md) | map |  |  |
-| 0x04 | 4 / Little | u32 | period |  |  |
-| 0x08 | 4 / Little | u32 | time_offset |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x00 | 4 / - | [Map](map.md) | map |  |
+| 0x04 | 4 / Little | u32 | period |  |
+| 0x08 | 4 / Little | u32 | time_offset |  |
 
 
 Used in:

@@ -29,24 +29,24 @@ enum ItemClass : u8 {
 ### Type
 The basic type is `u8`, a 1 byte (8 bit) integer.
 ### Enumerators
-| Enumerator | Value  | Description | Comment |
-| --------- | -------- | ----------- | ------- |
-| `CONSUMABLE` | 0 (0x00) |  |  |
-| `CONTAINER` | 1 (0x01) |  |  |
-| `WEAPON` | 2 (0x02) |  |  |
-| `GEM` | 3 (0x03) |  |  |
-| `ARMOR` | 4 (0x04) |  |  |
-| `REAGENT` | 5 (0x05) |  |  |
-| `PROJECTILE` | 6 (0x06) |  |  |
-| `TRADE_GOODS` | 7 (0x07) |  |  |
-| `GENERIC` | 8 (0x08) |  |  |
-| `RECIPE` | 9 (0x09) |  |  |
-| `MONEY` | 10 (0x0A) |  |  |
-| `QUIVER` | 11 (0x0B) |  |  |
-| `QUEST` | 12 (0x0C) |  |  |
-| `KEY` | 13 (0x0D) |  |  |
-| `PERMANENT` | 14 (0x0E) |  |  |
-| `MISC` | 15 (0x0F) |  |  |
+| Enumerator | Value  | Comment |
+| --------- | -------- | ------- |
+| `CONSUMABLE` | 0 (0x00) |  |
+| `CONTAINER` | 1 (0x01) |  |
+| `WEAPON` | 2 (0x02) |  |
+| `GEM` | 3 (0x03) |  |
+| `ARMOR` | 4 (0x04) |  |
+| `REAGENT` | 5 (0x05) |  |
+| `PROJECTILE` | 6 (0x06) |  |
+| `TRADE_GOODS` | 7 (0x07) |  |
+| `GENERIC` | 8 (0x08) |  |
+| `RECIPE` | 9 (0x09) |  |
+| `MONEY` | 10 (0x0A) |  |
+| `QUIVER` | 11 (0x0B) |  |
+| `QUEST` | 12 (0x0C) |  |
+| `KEY` | 13 (0x0D) |  |
+| `PERMANENT` | 14 (0x0E) |  |
+| `MISC` | 15 (0x0F) |  |
 
 Used in:
 * [SMSG_SET_PROFICIENCY](smsg_set_proficiency.md)
@@ -82,25 +82,25 @@ enum ItemClass : u8 {
 ### Type
 The basic type is `u8`, a 1 byte (8 bit) integer.
 ### Enumerators
-| Enumerator | Value  | Description | Comment |
-| --------- | -------- | ----------- | ------- |
-| `CONSUMABLE` | 0 (0x00) |  |  |
-| `CONTAINER` | 1 (0x01) |  |  |
-| `WEAPON` | 2 (0x02) |  |  |
-| `GEM` | 3 (0x03) |  |  |
-| `ARMOR` | 4 (0x04) |  |  |
-| `REAGENT` | 5 (0x05) |  |  |
-| `PROJECTILE` | 6 (0x06) |  |  |
-| `TRADE_GOODS` | 7 (0x07) |  |  |
-| `GENERIC` | 8 (0x08) |  |  |
-| `RECIPE` | 9 (0x09) |  |  |
-| `MONEY` | 10 (0x0A) |  |  |
-| `QUIVER` | 11 (0x0B) |  |  |
-| `QUEST` | 12 (0x0C) |  |  |
-| `KEY` | 13 (0x0D) |  |  |
-| `PERMANENT` | 14 (0x0E) |  |  |
-| `MISC` | 15 (0x0F) |  |  |
-| `GLYPH` | 16 (0x10) |  |  |
+| Enumerator | Value  | Comment |
+| --------- | -------- | ------- |
+| `CONSUMABLE` | 0 (0x00) |  |
+| `CONTAINER` | 1 (0x01) |  |
+| `WEAPON` | 2 (0x02) |  |
+| `GEM` | 3 (0x03) |  |
+| `ARMOR` | 4 (0x04) |  |
+| `REAGENT` | 5 (0x05) |  |
+| `PROJECTILE` | 6 (0x06) |  |
+| `TRADE_GOODS` | 7 (0x07) |  |
+| `GENERIC` | 8 (0x08) |  |
+| `RECIPE` | 9 (0x09) |  |
+| `MONEY` | 10 (0x0A) |  |
+| `QUIVER` | 11 (0x0B) |  |
+| `QUEST` | 12 (0x0C) |  |
+| `KEY` | 13 (0x0D) |  |
+| `PERMANENT` | 14 (0x0E) |  |
+| `MISC` | 15 (0x0F) |  |
+| `GLYPH` | 16 (0x10) |  |
 
 Used in:
 * [SMSG_SET_PROFICIENCY](smsg_set_proficiency.md)

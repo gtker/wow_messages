@@ -15,10 +15,10 @@ enum ItemRefundResult : u8 {
 ### Type
 The basic type is `u8`, a 1 byte (8 bit) integer.
 ### Enumerators
-| Enumerator | Value  | Description | Comment |
-| --------- | -------- | ----------- | ------- |
-| `SUCCESS` | 0 (0x00) |  |  |
-| `FAILURE` | 10 (0x0A) |  |  |
+| Enumerator | Value  | Comment |
+| --------- | -------- | ------- |
+| `SUCCESS` | 0 (0x00) |  |
+| `FAILURE` | 10 (0x0A) |  |
 
 Used in:
 * [SMSG_ITEM_REFUND_RESULT](smsg_item_refund_result.md)

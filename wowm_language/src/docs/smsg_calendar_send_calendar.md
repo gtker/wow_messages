@@ -34,18 +34,18 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | 4 / Little | u32 | amount_of_invites |  |  |
-| - | ? / - | [SendCalendarInvite](sendcalendarinvite.md)[amount_of_invites] | invites |  |  |
-| - | 4 / Little | u32 | amount_of_events |  |  |
-| - | ? / - | [SendCalendarEvent](sendcalendarevent.md)[amount_of_events] | events |  |  |
-| - | 4 / Little | u32 | current_time |  |  |
-| - | 4 / Little | DateTime | zone_time |  |  |
-| - | 4 / Little | u32 | amount_of_instances |  |  |
-| - | ? / - | [SendCalendarInstance](sendcalendarinstance.md)[amount_of_instances] | instances |  |  |
-| - | 4 / Little | u32 | relative_time |  |  |
-| - | 4 / Little | u32 | amount_of_reset_times |  |  |
-| - | ? / - | [SendCalendarResetTime](sendcalendarresettime.md)[amount_of_reset_times] | reset_times |  |  |
-| - | 4 / Little | u32 | amount_of_holidays |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| - | 4 / Little | u32 | amount_of_invites |  |
+| - | ? / - | [SendCalendarInvite](sendcalendarinvite.md)[amount_of_invites] | invites |  |
+| - | 4 / Little | u32 | amount_of_events |  |
+| - | ? / - | [SendCalendarEvent](sendcalendarevent.md)[amount_of_events] | events |  |
+| - | 4 / Little | u32 | current_time |  |
+| - | 4 / Little | DateTime | zone_time |  |
+| - | 4 / Little | u32 | amount_of_instances |  |
+| - | ? / - | [SendCalendarInstance](sendcalendarinstance.md)[amount_of_instances] | instances |  |
+| - | 4 / Little | u32 | relative_time |  |
+| - | 4 / Little | u32 | amount_of_reset_times |  |
+| - | ? / - | [SendCalendarResetTime](sendcalendarresettime.md)[amount_of_reset_times] | reset_times |  |
+| - | 4 / Little | u32 | amount_of_holidays |  |
 

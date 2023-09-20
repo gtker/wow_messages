@@ -4,7 +4,7 @@ cmsg CMSG_WORLD_TELEPORT = 0x08 {
     Vector3d position;
     f32 orientation;
 } {
-    description = "Sent when using the `worldport` console command.";
+    comment = "Sent when using the `worldport` console command.";
     paste_versions = "1.12 2.4.3";
 }
 

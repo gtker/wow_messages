@@ -30,16 +30,16 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | 8 / Little | [Guid](../types/packed-guid.md) | creature |  |  |
-| 0x0C | 4 / Little | u32 | loot_slot |  |  |
-| 0x10 | 8 / Little | [Guid](../types/packed-guid.md) | player |  |  |
-| 0x18 | 4 / Little | u32 | item |  |  |
-| 0x1C | 4 / Little | u32 | item_random_suffix |  | vmangos/mangoszero: not used ? |
-| 0x20 | 4 / Little | u32 | item_random_property_id |  |  |
-| 0x24 | 1 / - | u8 | roll_number |  | vmangos/cmangos/mangoszero: 0: Need for: `item_name` > 127: you passed on: `item_name`      Roll number |
-| 0x25 | 1 / - | [RollVote](rollvote.md) | vote |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x04 | 8 / Little | [Guid](../types/packed-guid.md) | creature |  |
+| 0x0C | 4 / Little | u32 | loot_slot |  |
+| 0x10 | 8 / Little | [Guid](../types/packed-guid.md) | player |  |
+| 0x18 | 4 / Little | u32 | item |  |
+| 0x1C | 4 / Little | u32 | item_random_suffix | vmangos/mangoszero: not used ? |
+| 0x20 | 4 / Little | u32 | item_random_property_id |  |
+| 0x24 | 1 / - | u8 | roll_number | vmangos/cmangos/mangoszero: 0: Need for: `item_name` > 127: you passed on: `item_name`      Roll number |
+| 0x25 | 1 / - | [RollVote](rollvote.md) | vote |  |
 
 ## Client Version 2.4.3, Client Version 3
 
@@ -72,15 +72,15 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | 8 / Little | [Guid](../types/packed-guid.md) | creature |  |  |
-| 0x0C | 4 / Little | u32 | loot_slot |  |  |
-| 0x10 | 8 / Little | [Guid](../types/packed-guid.md) | player |  |  |
-| 0x18 | 4 / Little | u32 | item |  |  |
-| 0x1C | 4 / Little | u32 | item_random_suffix |  | vmangos/mangoszero: not used ? |
-| 0x20 | 4 / Little | u32 | item_random_property_id |  |  |
-| 0x24 | 1 / - | u8 | roll_number |  | vmangos/cmangos/mangoszero: 0: Need for: `item_name` > 127: you passed on: `item_name`      Roll number |
-| 0x25 | 1 / - | [RollVote](rollvote.md) | vote |  |  |
-| 0x26 | 1 / - | u8 | auto_pass |  | mangosone/arcemu sets to 0.<br/>mangosone: auto pass on loot<br/>arcemu: possibly related to disenchanting of loot<br/>azerothcore: 1: 'You automatically passed on: %s because you cannot loot that item.' - Possibly used in need before greed |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x04 | 8 / Little | [Guid](../types/packed-guid.md) | creature |  |
+| 0x0C | 4 / Little | u32 | loot_slot |  |
+| 0x10 | 8 / Little | [Guid](../types/packed-guid.md) | player |  |
+| 0x18 | 4 / Little | u32 | item |  |
+| 0x1C | 4 / Little | u32 | item_random_suffix | vmangos/mangoszero: not used ? |
+| 0x20 | 4 / Little | u32 | item_random_property_id |  |
+| 0x24 | 1 / - | u8 | roll_number | vmangos/cmangos/mangoszero: 0: Need for: `item_name` > 127: you passed on: `item_name`      Roll number |
+| 0x25 | 1 / - | [RollVote](rollvote.md) | vote |  |
+| 0x26 | 1 / - | u8 | auto_pass | mangosone/arcemu sets to 0.<br/>mangosone: auto pass on loot<br/>arcemu: possibly related to disenchanting of loot<br/>azerothcore: 1: 'You automatically passed on: %s because you cannot loot that item.' - Possibly used in need before greed |
 

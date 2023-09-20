@@ -31,15 +31,15 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | 1 / - | Bool | vote_in_progress |  |  |
-| - | 1 / - | Bool | did_vote |  |  |
-| - | 1 / - | Bool | agreed_with_kick |  |  |
-| - | 8 / Little | [Guid](../types/packed-guid.md) | victim |  |  |
-| - | 4 / Little | u32 | total_votes |  |  |
-| - | 4 / Little | u32 | votes_agree |  |  |
-| - | 4 / Little | Seconds | time_left |  |  |
-| - | 4 / Little | u32 | votes_needed |  |  |
-| - | - / - | CString | reason |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| - | 1 / - | Bool | vote_in_progress |  |
+| - | 1 / - | Bool | did_vote |  |
+| - | 1 / - | Bool | agreed_with_kick |  |
+| - | 8 / Little | [Guid](../types/packed-guid.md) | victim |  |
+| - | 4 / Little | u32 | total_votes |  |
+| - | 4 / Little | u32 | votes_agree |  |
+| - | 4 / Little | Seconds | time_left |  |
+| - | 4 / Little | u32 | votes_needed |  |
+| - | - / - | CString | reason |  |
 

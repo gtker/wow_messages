@@ -25,9 +25,9 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | 4 / Little | u32 | realm_id |  | ArcEmu/TrinityCore/mangosthree send realm_id from [CMSG_REALM_SPLIT](./cmsg_realm_split.md) back. |
-| - | 4 / - | [RealmSplitState](realmsplitstate.md) | state |  |  |
-| - | - / - | CString | split_date |  | Seems to be slash separated string, like '01/01/01'. |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| - | 4 / Little | u32 | realm_id | ArcEmu/TrinityCore/mangosthree send realm_id from [CMSG_REALM_SPLIT](./cmsg_realm_split.md) back. |
+| - | 4 / - | [RealmSplitState](realmsplitstate.md) | state |  |
+| - | - / - | CString | split_date | Seems to be slash separated string, like '01/01/01'. |
 

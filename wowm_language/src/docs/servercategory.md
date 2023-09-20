@@ -19,12 +19,12 @@ enum ServerCategory : u8 {
 ### Type
 The basic type is `u8`, a 1 byte (8 bit) integer.
 ### Enumerators
-| Enumerator | Value  | Description | Comment |
-| --------- | -------- | ----------- | ------- |
-| `ONE` | 1 (0x01) |  |  |
-| `TWO` | 2 (0x02) |  |  |
-| `THREE` | 3 (0x03) |  |  |
-| `FIVE` | 5 (0x05) |  |  |
+| Enumerator | Value  | Comment |
+| --------- | -------- | ------- |
+| `ONE` | 1 (0x01) |  |
+| `TWO` | 2 (0x02) |  |
+| `THREE` | 3 (0x03) |  |
+| `FIVE` | 5 (0x05) |  |
 
 Used in:
 

@@ -23,9 +23,9 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | 4 / Little | u32 | amount |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x04 | 4 / Little | u32 | amount |  |
 
 ## Client Version 3.3.5
 
@@ -51,8 +51,8 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | 4 / Little | u32 | amount |  |  |
-| 0x08 | 1 / - | Bool | alone |  | Controls the text displayed in chat. False is 'Your share is...' and true is 'You loot...' |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x04 | 4 / Little | u32 | amount |  |
+| 0x08 | 1 / - | Bool | alone | Controls the text displayed in chat. False is 'Your share is...' and true is 'You loot...' |
 

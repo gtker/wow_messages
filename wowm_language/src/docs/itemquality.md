@@ -20,15 +20,15 @@ enum ItemQuality : u8 {
 ### Type
 The basic type is `u8`, a 1 byte (8 bit) integer.
 ### Enumerators
-| Enumerator | Value  | Description | Comment |
-| --------- | -------- | ----------- | ------- |
-| `POOR` | 0 (0x00) |  |  |
-| `NORMAL` | 1 (0x01) |  |  |
-| `UNCOMMON` | 2 (0x02) |  |  |
-| `RARE` | 3 (0x03) |  |  |
-| `EPIC` | 4 (0x04) |  |  |
-| `LEGENDARY` | 5 (0x05) |  |  |
-| `ARTIFACT` | 6 (0x06) |  |  |
+| Enumerator | Value  | Comment |
+| --------- | -------- | ------- |
+| `POOR` | 0 (0x00) |  |
+| `NORMAL` | 1 (0x01) |  |
+| `UNCOMMON` | 2 (0x02) |  |
+| `RARE` | 3 (0x03) |  |
+| `EPIC` | 4 (0x04) |  |
+| `LEGENDARY` | 5 (0x05) |  |
+| `ARTIFACT` | 6 (0x06) |  |
 
 Used in:
 * [CMSG_AUCTION_LIST_ITEMS](cmsg_auction_list_items.md)
@@ -61,16 +61,16 @@ enum ItemQuality : u8 {
 ### Type
 The basic type is `u8`, a 1 byte (8 bit) integer.
 ### Enumerators
-| Enumerator | Value  | Description | Comment |
-| --------- | -------- | ----------- | ------- |
-| `POOR` | 0 (0x00) |  |  |
-| `NORMAL` | 1 (0x01) |  |  |
-| `UNCOMMON` | 2 (0x02) |  |  |
-| `RARE` | 3 (0x03) |  |  |
-| `EPIC` | 4 (0x04) |  |  |
-| `LEGENDARY` | 5 (0x05) |  |  |
-| `ARTIFACT` | 6 (0x06) |  |  |
-| `HEIRLOOM` | 7 (0x07) |  |  |
+| Enumerator | Value  | Comment |
+| --------- | -------- | ------- |
+| `POOR` | 0 (0x00) |  |
+| `NORMAL` | 1 (0x01) |  |
+| `UNCOMMON` | 2 (0x02) |  |
+| `RARE` | 3 (0x03) |  |
+| `EPIC` | 4 (0x04) |  |
+| `LEGENDARY` | 5 (0x05) |  |
+| `ARTIFACT` | 6 (0x06) |  |
+| `HEIRLOOM` | 7 (0x07) |  |
 
 Used in:
 * [CMSG_AUCTION_LIST_ITEMS](cmsg_auction_list_items.md)

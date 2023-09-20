@@ -16,13 +16,13 @@ struct ReceivedMail {
 ```
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x00 | 8 / Little | [Guid](../types/packed-guid.md) | sender |  |  |
-| 0x08 | 4 / - | [AuctionHouse](auctionhouse.md) | auction_house |  |  |
-| 0x0C | 4 / - | [MailMessageType](mailmessagetype.md) | message_type |  |  |
-| 0x10 | 4 / Little | u32 | stationery |  |  |
-| 0x14 | 4 / Little | f32 | time |  | mangosone sets to `0xC6000000`<br/>mangosone: float unk, time or something |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x00 | 8 / Little | [Guid](../types/packed-guid.md) | sender |  |
+| 0x08 | 4 / - | [AuctionHouse](auctionhouse.md) | auction_house |  |
+| 0x0C | 4 / - | [MailMessageType](mailmessagetype.md) | message_type |  |
+| 0x10 | 4 / Little | u32 | stationery |  |
+| 0x14 | 4 / Little | f32 | time | mangosone sets to `0xC6000000`<br/>mangosone: float unk, time or something |
 
 
 Used in:

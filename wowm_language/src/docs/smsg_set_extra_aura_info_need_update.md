@@ -27,11 +27,11 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | - / - | [PackedGuid](../types/packed-guid.md) | unit |  |  |
-| - | 1 / - | u8 | slot |  |  |
-| - | 4 / Little | u32 | spell |  |  |
-| - | 4 / Little | u32 | max_duration |  |  |
-| - | 4 / Little | u32 | remaining_duration |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x04 | - / - | [PackedGuid](../types/packed-guid.md) | unit |  |
+| - | 1 / - | u8 | slot |  |
+| - | 4 / Little | u32 | spell |  |
+| - | 4 / Little | u32 | max_duration |  |
+| - | 4 / Little | u32 | remaining_duration |  |
 

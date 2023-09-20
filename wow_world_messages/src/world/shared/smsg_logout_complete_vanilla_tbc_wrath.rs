@@ -3,7 +3,6 @@ use std::io::{Read, Write};
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Immediately logs out the client of the world and makes it send [`CMSG_CHAR_ENUM`](crate::vanilla::CMSG_CHAR_ENUM).
 /// Normally the client will send [`CMSG_LOGOUT_REQUEST`](crate::vanilla::CMSG_LOGOUT_REQUEST) and the server will reply with an [`SMSG_LOGOUT_RESPONSE`](crate::vanilla::SMSG_LOGOUT_RESPONSE) before this message, but sending it unprompted will also immediately send the client to the character screen.
-///
 /// The client always seems to send 2 [`CMSG_CANCEL_TRADE`](crate::vanilla::CMSG_CANCEL_TRADE) immediately after receiving this mesage, but before sending [`CMSG_CHAR_ENUM`](crate::vanilla::CMSG_CHAR_ENUM).
 /// Even if 'Exit Game' is selected the client will still send a [`CMSG_CHAR_ENUM`](crate::vanilla::CMSG_CHAR_ENUM) immediately before closing the connection, despite it not needing to see the character list.
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/login_logout/smsg_logout_complete.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/login_logout/smsg_logout_complete.wowm#L3):

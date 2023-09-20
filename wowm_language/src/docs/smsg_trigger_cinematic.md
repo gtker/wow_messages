@@ -23,9 +23,9 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | 4 / - | [CinematicSequenceId](cinematicsequenceid.md) | cinematic_sequence_id |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x04 | 4 / - | [CinematicSequenceId](cinematicsequenceid.md) | cinematic_sequence_id |  |
 
 ## Client Version 2.4.3
 
@@ -50,9 +50,9 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | 4 / - | [CinematicSequenceId](cinematicsequenceid.md) | cinematic_sequence_id |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x04 | 4 / - | [CinematicSequenceId](cinematicsequenceid.md) | cinematic_sequence_id |  |
 
 ## Client Version 3.3.5
 
@@ -77,7 +77,7 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | 4 / - | [CinematicSequenceId](cinematicsequenceid.md) | cinematic_sequence_id |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x04 | 4 / - | [CinematicSequenceId](cinematicsequenceid.md) | cinematic_sequence_id |  |
 

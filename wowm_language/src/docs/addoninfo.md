@@ -15,12 +15,12 @@ struct AddonInfo {
 ```
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x00 | - / - | CString | addon_name |  |  |
-| - | 1 / - | u8 | addon_has_signature |  |  |
-| - | 4 / Little | u32 | addon_crc |  |  |
-| - | 4 / Little | u32 | addon_extra_crc |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x00 | - / - | CString | addon_name |  |
+| - | 1 / - | u8 | addon_has_signature |  |
+| - | 4 / Little | u32 | addon_crc |  |
+| - | 4 / Little | u32 | addon_extra_crc |  |
 
 
 Used in:

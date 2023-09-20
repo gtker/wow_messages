@@ -17,14 +17,14 @@ struct StabledPet {
 ```
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x00 | 4 / Little | u32 | pet_number |  |  |
-| 0x04 | 4 / Little | u32 | entry |  |  |
-| 0x08 | 4 / Little | Level32 | level |  |  |
-| 0x0C | - / - | CString | name |  |  |
-| - | 4 / Little | u32 | loyalty |  |  |
-| - | 1 / - | u8 | slot |  | vmangos/mangoszero/cmangos: client slot 1 == current pet (0) |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x00 | 4 / Little | u32 | pet_number |  |
+| 0x04 | 4 / Little | u32 | entry |  |
+| 0x08 | 4 / Little | Level32 | level |  |
+| 0x0C | - / - | CString | name |  |
+| - | 4 / Little | u32 | loyalty |  |
+| - | 1 / - | u8 | slot | vmangos/mangoszero/cmangos: client slot 1 == current pet (0) |
 
 
 Used in:

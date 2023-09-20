@@ -15,12 +15,12 @@ struct GossipItem {
 ```
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x00 | 4 / Little | u32 | id |  | vmangos: sets to loop index |
-| 0x04 | 1 / - | u8 | item_icon |  |  |
-| 0x05 | 1 / - | Bool | coded |  | vmangos: makes pop up box password |
-| 0x06 | - / - | CString | message |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x00 | 4 / Little | u32 | id | vmangos: sets to loop index |
+| 0x04 | 1 / - | u8 | item_icon |  |
+| 0x05 | 1 / - | Bool | coded | vmangos: makes pop up box password |
+| 0x06 | - / - | CString | message |  |
 
 
 Used in:
@@ -43,14 +43,14 @@ struct GossipItem {
 ```
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x00 | 4 / Little | u32 | id |  | vmangos: sets to loop index |
-| 0x04 | 1 / - | u8 | item_icon |  |  |
-| 0x05 | 1 / - | Bool | coded |  | vmangos: makes pop up box password |
-| 0x06 | 4 / Little | Gold | money_required |  | mangosone: 2.0.3 |
-| 0x0A | - / - | CString | message |  |  |
-| - | - / - | CString | accept_text |  | mangosone: related to money pop up box, 2.0.3, max 0x800 |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x00 | 4 / Little | u32 | id | vmangos: sets to loop index |
+| 0x04 | 1 / - | u8 | item_icon |  |
+| 0x05 | 1 / - | Bool | coded | vmangos: makes pop up box password |
+| 0x06 | 4 / Little | Gold | money_required | mangosone: 2.0.3 |
+| 0x0A | - / - | CString | message |  |
+| - | - / - | CString | accept_text | mangosone: related to money pop up box, 2.0.3, max 0x800 |
 
 
 Used in:

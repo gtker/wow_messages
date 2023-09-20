@@ -18,7 +18,7 @@ smsg SMSG_LOGOUT_RESPONSE = 0x4C {
     LogoutResult result;
     LogoutSpeed speed;
 } {
-    description = "Reply to [CMSG_LOGOUT_REQUEST].";
+    comment = "Reply to [CMSG_LOGOUT_REQUEST].";
     comment = "The client expects to get an [SMSG_LOGOUT_COMPLETE] when logout is complete.";
 }
 

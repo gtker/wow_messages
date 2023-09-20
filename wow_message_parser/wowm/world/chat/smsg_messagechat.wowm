@@ -20,12 +20,12 @@ smsg SMSG_MESSAGECHAT = 0x0096 {
           || chat_type == PARTY
           || chat_type == YELL) {
         Guid speech_bubble_credit {
-            description = "This character will have the speech bubble above their head.";
+            comment = "This character will have the speech bubble above their head.";
             comment = "0 value credits same as `chat_credit`. Invalid value credits no one.";
             comment = "cmangos/vmangos/mangoszero: `chat_credit` and `speech_bubble_credit` are the same";
         }
         Guid chat_credit {
-            description = "This character will be appear to say this in the chat box.";
+            comment = "This character will be appear to say this in the chat box.";
             comment = "0 value credits no name.";
             comment = "cmangos/vmangos/mangoszero: `chat_credit` and `speech_bubble_credit` are the same";
         }

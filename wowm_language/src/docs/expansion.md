@@ -15,10 +15,10 @@ enum Expansion : u8 {
 ### Type
 The basic type is `u8`, a 1 byte (8 bit) integer.
 ### Enumerators
-| Enumerator | Value  | Description | Comment |
-| --------- | -------- | ----------- | ------- |
-| `VANILLA` | 0 (0x00) |  |  |
-| `THE_BURNING_CRUSADE` | 1 (0x01) |  |  |
+| Enumerator | Value  | Comment |
+| --------- | -------- | ------- |
+| `VANILLA` | 0 (0x00) |  |
+| `THE_BURNING_CRUSADE` | 1 (0x01) |  |
 
 Used in:
 * [SMSG_AUTH_RESPONSE](smsg_auth_response.md)
@@ -39,11 +39,11 @@ enum Expansion : u8 {
 ### Type
 The basic type is `u8`, a 1 byte (8 bit) integer.
 ### Enumerators
-| Enumerator | Value  | Description | Comment |
-| --------- | -------- | ----------- | ------- |
-| `VANILLA` | 0 (0x00) |  |  |
-| `THE_BURNING_CRUSADE` | 1 (0x01) |  |  |
-| `WRATH_OF_THE_LICH_LING` | 2 (0x02) |  |  |
+| Enumerator | Value  | Comment |
+| --------- | -------- | ------- |
+| `VANILLA` | 0 (0x00) |  |
+| `THE_BURNING_CRUSADE` | 1 (0x01) |  |
+| `WRATH_OF_THE_LICH_LING` | 2 (0x02) |  |
 
 Used in:
 * [SMSG_AUTH_RESPONSE](smsg_auth_response.md)

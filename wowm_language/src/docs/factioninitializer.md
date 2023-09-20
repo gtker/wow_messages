@@ -13,10 +13,10 @@ struct FactionInitializer {
 ```
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x00 | 1 / - | [FactionFlag](factionflag.md) | flag |  |  |
-| 0x01 | 4 / Little | u32 | standing |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x00 | 1 / - | [FactionFlag](factionflag.md) | flag |  |
+| 0x01 | 4 / Little | u32 | standing |  |
 
 
 Used in:
@@ -35,10 +35,10 @@ struct FactionInitializer {
 ```
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x00 | 1 / - | [FactionFlag](factionflag.md) | flag |  |  |
-| 0x01 | 4 / Little | u32 | standing |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x00 | 1 / - | [FactionFlag](factionflag.md) | flag |  |
+| 0x01 | 4 / Little | u32 | standing |  |
 
 
 Used in:

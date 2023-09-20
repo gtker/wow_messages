@@ -13,10 +13,10 @@ struct NpcTextUpdateEmote {
 ```
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x00 | 4 / Little | u32 | delay |  |  |
-| 0x04 | 4 / Little | u32 | emote |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x00 | 4 / Little | u32 | delay |  |
+| 0x04 | 4 / Little | u32 | emote |  |
 
 
 Used in:

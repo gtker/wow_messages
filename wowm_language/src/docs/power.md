@@ -19,14 +19,14 @@ enum Power : u8 {
 ### Type
 The basic type is `u8`, a 1 byte (8 bit) integer.
 ### Enumerators
-| Enumerator | Value  | Description | Comment |
-| --------- | -------- | ----------- | ------- |
-| `MANA` | 0 (0x00) |  | mangoszero: The most common one, mobs usually have this or rage |
-| `RAGE` | 1 (0x01) |  | mangoszero: This is what warriors use to cast their spells |
-| `FOCUS` | 2 (0x02) |  | mangoszero: Used by hunters after Cataclysm (4.x) |
-| `ENERGY` | 3 (0x03) |  | mangoszero: Used by rouges to do their spells |
-| `HAPPINESS` | 4 (0x04) |  | mangoszero: Hunter's pet's happiness affect their damage |
-| `HEALTH` | 254 (0xFE) |  | mangoszero: Health, everyone has this (-2 as signed value)<br/>This might not actually be sent to the client. |
+| Enumerator | Value  | Comment |
+| --------- | -------- | ------- |
+| `MANA` | 0 (0x00) | mangoszero: The most common one, mobs usually have this or rage |
+| `RAGE` | 1 (0x01) | mangoszero: This is what warriors use to cast their spells |
+| `FOCUS` | 2 (0x02) | mangoszero: Used by hunters after Cataclysm (4.x) |
+| `ENERGY` | 3 (0x03) | mangoszero: Used by rouges to do their spells |
+| `HAPPINESS` | 4 (0x04) | mangoszero: Hunter's pet's happiness affect their damage |
+| `HEALTH` | 254 (0xFE) | mangoszero: Health, everyone has this (-2 as signed value)<br/>This might not actually be sent to the client. |
 
 Used in:
 * [SMSG_PARTY_MEMBER_STATS](smsg_party_member_stats.md)
@@ -58,16 +58,16 @@ enum Power : u8 {
 ### Type
 The basic type is `u8`, a 1 byte (8 bit) integer.
 ### Enumerators
-| Enumerator | Value  | Description | Comment |
-| --------- | -------- | ----------- | ------- |
-| `MANA` | 0 (0x00) |  |  |
-| `RAGE` | 1 (0x01) |  |  |
-| `FOCUS` | 2 (0x02) |  |  |
-| `ENERGY` | 3 (0x03) |  |  |
-| `HAPPINESS` | 4 (0x04) |  |  |
-| `RUNE` | 5 (0x05) |  |  |
-| `RUNIC_POWER` | 6 (0x06) |  |  |
-| `HEALTH` | 254 (0xFE) |  |  |
+| Enumerator | Value  | Comment |
+| --------- | -------- | ------- |
+| `MANA` | 0 (0x00) |  |
+| `RAGE` | 1 (0x01) |  |
+| `FOCUS` | 2 (0x02) |  |
+| `ENERGY` | 3 (0x03) |  |
+| `HAPPINESS` | 4 (0x04) |  |
+| `RUNE` | 5 (0x05) |  |
+| `RUNIC_POWER` | 6 (0x06) |  |
+| `HEALTH` | 254 (0xFE) |  |
 
 Used in:
 * [SMSG_PARTY_MEMBER_STATS](smsg_party_member_stats.md)

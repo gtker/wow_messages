@@ -26,10 +26,10 @@ CMSG have a header of 6 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x06 | 8 / Little | [Guid](../types/packed-guid.md) | caster |  |  |
-| 0x0E | 4 / Little | u32 | spell |  |  |
-| 0x12 | 1 / - | u8 | cast_count |  |  |
-| 0x13 | 12 / - | [Vector3d](vector3d.md) | position |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x06 | 8 / Little | [Guid](../types/packed-guid.md) | caster |  |
+| 0x0E | 4 / Little | u32 | spell |  |
+| 0x12 | 1 / - | u8 | cast_count |  |
+| 0x13 | 12 / - | [Vector3d](vector3d.md) | position |  |
 

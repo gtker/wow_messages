@@ -22,9 +22,9 @@ Login messages have a header of 1 byte with an opcode. Some messages also have a
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x01 | 4 / Little | u32 | padding |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x01 | 4 / Little | u32 | padding |  |
 
 ### Examples
 

@@ -36,22 +36,22 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | 8 / Little | [Guid](../types/packed-guid.md) | npc |  |  |
-| 0x0C | 4 / Little | u32 | quest_id |  |  |
-| 0x10 | - / - | CString | title |  |  |
-| - | - / - | CString | offer_reward_text |  |  |
-| - | 4 / Little | Bool32 | auto_finish |  |  |
-| - | 4 / Little | u32 | amount_of_emotes |  |  |
-| - | ? / - | [NpcTextUpdateEmote](npctextupdateemote.md)[amount_of_emotes] | emotes |  |  |
-| - | 4 / Little | u32 | amount_of_choice_item_rewards |  |  |
-| - | ? / - | [QuestItemRequirement](questitemrequirement.md)[amount_of_choice_item_rewards] | choice_item_rewards |  |  |
-| - | 4 / Little | u32 | amount_of_item_rewards |  |  |
-| - | ? / - | [QuestItemRequirement](questitemrequirement.md)[amount_of_item_rewards] | item_rewards |  |  |
-| - | 4 / Little | Gold | money_reward |  |  |
-| - | 4 / Little | u32 | reward_spell |  |  |
-| - | 4 / Little | u32 | reward_spell_cast |  | mangoszero and cmangos disagree about which field is _cast, although they both agree that the _cast field should not be in zero (vanilla). They still both include both fields in the code though. |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x04 | 8 / Little | [Guid](../types/packed-guid.md) | npc |  |
+| 0x0C | 4 / Little | u32 | quest_id |  |
+| 0x10 | - / - | CString | title |  |
+| - | - / - | CString | offer_reward_text |  |
+| - | 4 / Little | Bool32 | auto_finish |  |
+| - | 4 / Little | u32 | amount_of_emotes |  |
+| - | ? / - | [NpcTextUpdateEmote](npctextupdateemote.md)[amount_of_emotes] | emotes |  |
+| - | 4 / Little | u32 | amount_of_choice_item_rewards |  |
+| - | ? / - | [QuestItemRequirement](questitemrequirement.md)[amount_of_choice_item_rewards] | choice_item_rewards |  |
+| - | 4 / Little | u32 | amount_of_item_rewards |  |
+| - | ? / - | [QuestItemRequirement](questitemrequirement.md)[amount_of_item_rewards] | item_rewards |  |
+| - | 4 / Little | Gold | money_reward |  |
+| - | 4 / Little | u32 | reward_spell |  |
+| - | 4 / Little | u32 | reward_spell_cast | mangoszero and cmangos disagree about which field is _cast, although they both agree that the _cast field should not be in zero (vanilla). They still both include both fields in the code though. |
 
 ## Client Version 2.4.3
 
@@ -93,26 +93,26 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | 8 / Little | [Guid](../types/packed-guid.md) | npc |  |  |
-| 0x0C | 4 / Little | u32 | quest_id |  |  |
-| 0x10 | - / - | CString | title |  |  |
-| - | - / - | CString | offer_reward_text |  |  |
-| - | 4 / Little | Bool32 | auto_finish |  |  |
-| - | 4 / Little | u32 | suggested_players |  |  |
-| - | 4 / Little | u32 | amount_of_emotes |  |  |
-| - | ? / - | [NpcTextUpdateEmote](npctextupdateemote.md)[amount_of_emotes] | emotes |  |  |
-| - | 4 / Little | u32 | amount_of_choice_item_rewards |  |  |
-| - | ? / - | [QuestItemRequirement](questitemrequirement.md)[amount_of_choice_item_rewards] | choice_item_rewards |  |  |
-| - | 4 / Little | u32 | amount_of_item_rewards |  |  |
-| - | ? / - | [QuestItemRequirement](questitemrequirement.md)[amount_of_item_rewards] | item_rewards |  |  |
-| - | 4 / Little | Gold | money_reward |  |  |
-| - | 4 / Little | u32 | honor_reward |  |  |
-| - | 4 / Little | u32 | unknown1 |  | mangostwo: unused by client?<br/>mangostwo sets to 0x08. |
-| - | 4 / Little | u32 | reward_spell |  |  |
-| - | 4 / Little | u32 | reward_spell_cast |  | mangoszero and cmangos disagree about which field is _cast, although they both agree that the _cast field should not be in zero (vanilla). They still both include both fields in the code though. |
-| - | 4 / Little | u32 | title_reward |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x04 | 8 / Little | [Guid](../types/packed-guid.md) | npc |  |
+| 0x0C | 4 / Little | u32 | quest_id |  |
+| 0x10 | - / - | CString | title |  |
+| - | - / - | CString | offer_reward_text |  |
+| - | 4 / Little | Bool32 | auto_finish |  |
+| - | 4 / Little | u32 | suggested_players |  |
+| - | 4 / Little | u32 | amount_of_emotes |  |
+| - | ? / - | [NpcTextUpdateEmote](npctextupdateemote.md)[amount_of_emotes] | emotes |  |
+| - | 4 / Little | u32 | amount_of_choice_item_rewards |  |
+| - | ? / - | [QuestItemRequirement](questitemrequirement.md)[amount_of_choice_item_rewards] | choice_item_rewards |  |
+| - | 4 / Little | u32 | amount_of_item_rewards |  |
+| - | ? / - | [QuestItemRequirement](questitemrequirement.md)[amount_of_item_rewards] | item_rewards |  |
+| - | 4 / Little | Gold | money_reward |  |
+| - | 4 / Little | u32 | honor_reward |  |
+| - | 4 / Little | u32 | unknown1 | mangostwo: unused by client?<br/>mangostwo sets to 0x08. |
+| - | 4 / Little | u32 | reward_spell |  |
+| - | 4 / Little | u32 | reward_spell_cast | mangoszero and cmangos disagree about which field is _cast, although they both agree that the _cast field should not be in zero (vanilla). They still both include both fields in the code though. |
+| - | 4 / Little | u32 | title_reward |  |
 
 ## Client Version 3.3.5
 
@@ -163,33 +163,33 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | 8 / Little | [Guid](../types/packed-guid.md) | npc |  |  |
-| - | 4 / Little | u32 | quest_id |  |  |
-| - | - / - | CString | title |  |  |
-| - | - / - | CString | offer_reward_text |  |  |
-| - | 4 / Little | Bool32 | auto_finish |  |  |
-| - | 4 / Little | u32 | flags1 |  |  |
-| - | 4 / Little | u32 | suggested_players |  |  |
-| - | 4 / Little | u32 | amount_of_emotes |  |  |
-| - | ? / - | [NpcTextUpdateEmote](npctextupdateemote.md)[amount_of_emotes] | emotes |  |  |
-| - | 4 / Little | u32 | amount_of_choice_item_rewards |  |  |
-| - | ? / - | [QuestItemRequirement](questitemrequirement.md)[amount_of_choice_item_rewards] | choice_item_rewards |  |  |
-| - | 4 / Little | u32 | amount_of_item_rewards |  |  |
-| - | ? / - | [QuestItemRequirement](questitemrequirement.md)[amount_of_item_rewards] | item_rewards |  |  |
-| - | 4 / Little | Gold | money_reward |  |  |
-| - | 4 / Little | u32 | experience_reward |  |  |
-| - | 4 / Little | u32 | honor_reward |  |  |
-| - | 4 / Little | f32 | honor_reward_multiplier |  |  |
-| - | 4 / Little | u32 | unknown1 |  | mangostwo: unused by client?<br/>mangostwo sets to 0x08. |
-| - | 4 / Little | u32 | reward_spell |  |  |
-| - | 4 / Little | u32 | reward_spell_cast |  | mangoszero and cmangos disagree about which field is _cast, although they both agree that the _cast field should not be in zero (vanilla). They still both include both fields in the code though. |
-| - | 4 / Little | u32 | title_reward |  |  |
-| - | 4 / Little | u32 | reward_talents |  |  |
-| - | 4 / Little | u32 | reward_arena_points |  |  |
-| - | 4 / Little | u32 | reward_reputation_mask |  |  |
-| - | 20 / - | u32[5] | reward_factions |  |  |
-| - | 20 / - | u32[5] | reward_reputations |  | mangostwo: columnid in QuestFactionReward.dbc (if negative, from second row) |
-| - | 20 / - | u32[5] | reward_reputations_override |  | mangostwo: reward reputation override. No diplomacy bonus is expected given, reward also does not display in chat window |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| - | 8 / Little | [Guid](../types/packed-guid.md) | npc |  |
+| - | 4 / Little | u32 | quest_id |  |
+| - | - / - | CString | title |  |
+| - | - / - | CString | offer_reward_text |  |
+| - | 4 / Little | Bool32 | auto_finish |  |
+| - | 4 / Little | u32 | flags1 |  |
+| - | 4 / Little | u32 | suggested_players |  |
+| - | 4 / Little | u32 | amount_of_emotes |  |
+| - | ? / - | [NpcTextUpdateEmote](npctextupdateemote.md)[amount_of_emotes] | emotes |  |
+| - | 4 / Little | u32 | amount_of_choice_item_rewards |  |
+| - | ? / - | [QuestItemRequirement](questitemrequirement.md)[amount_of_choice_item_rewards] | choice_item_rewards |  |
+| - | 4 / Little | u32 | amount_of_item_rewards |  |
+| - | ? / - | [QuestItemRequirement](questitemrequirement.md)[amount_of_item_rewards] | item_rewards |  |
+| - | 4 / Little | Gold | money_reward |  |
+| - | 4 / Little | u32 | experience_reward |  |
+| - | 4 / Little | u32 | honor_reward |  |
+| - | 4 / Little | f32 | honor_reward_multiplier |  |
+| - | 4 / Little | u32 | unknown1 | mangostwo: unused by client?<br/>mangostwo sets to 0x08. |
+| - | 4 / Little | u32 | reward_spell |  |
+| - | 4 / Little | u32 | reward_spell_cast | mangoszero and cmangos disagree about which field is _cast, although they both agree that the _cast field should not be in zero (vanilla). They still both include both fields in the code though. |
+| - | 4 / Little | u32 | title_reward |  |
+| - | 4 / Little | u32 | reward_talents |  |
+| - | 4 / Little | u32 | reward_arena_points |  |
+| - | 4 / Little | u32 | reward_reputation_mask |  |
+| - | 20 / - | u32[5] | reward_factions |  |
+| - | 20 / - | u32[5] | reward_reputations | mangostwo: columnid in QuestFactionReward.dbc (if negative, from second row) |
+| - | 20 / - | u32[5] | reward_reputations_override | mangostwo: reward reputation override. No diplomacy bonus is expected given, reward also does not display in chat window |
 

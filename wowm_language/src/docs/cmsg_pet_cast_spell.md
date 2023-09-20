@@ -25,11 +25,11 @@ CMSG have a header of 6 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x06 | 8 / Little | [Guid](../types/packed-guid.md) | guid |  |  |
-| 0x0E | 4 / Little | u32 | id |  |  |
-| 0x12 | - / - | [SpellCastTargets](spellcasttargets.md) | targets |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x06 | 8 / Little | [Guid](../types/packed-guid.md) | guid |  |
+| 0x0E | 4 / Little | u32 | id |  |
+| 0x12 | - / - | [SpellCastTargets](spellcasttargets.md) | targets |  |
 
 ## Client Version 2.4.3
 
@@ -56,11 +56,11 @@ CMSG have a header of 6 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x06 | 8 / Little | [Guid](../types/packed-guid.md) | guid |  |  |
-| 0x0E | 4 / Little | u32 | id |  |  |
-| 0x12 | - / - | [SpellCastTargets](spellcasttargets.md) | targets |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x06 | 8 / Little | [Guid](../types/packed-guid.md) | guid |  |
+| 0x0E | 4 / Little | u32 | id |  |
+| 0x12 | - / - | [SpellCastTargets](spellcasttargets.md) | targets |  |
 
 ## Client Version 3.3.5
 
@@ -99,27 +99,27 @@ CMSG have a header of 6 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x06 | 8 / Little | [Guid](../types/packed-guid.md) | guid |  |  |
-| 0x0E | 1 / - | u8 | cast_count |  |  |
-| 0x0F | 4 / Little | u32 | id |  |  |
-| 0x13 | 1 / - | [ClientCastFlags](clientcastflags.md) | cast_flags |  |  |
-| 0x14 | - / - | [SpellCastTargets](spellcasttargets.md) | targets |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x06 | 8 / Little | [Guid](../types/packed-guid.md) | guid |  |
+| 0x0E | 1 / - | u8 | cast_count |  |
+| 0x0F | 4 / Little | u32 | id |  |
+| 0x13 | 1 / - | [ClientCastFlags](clientcastflags.md) | cast_flags |  |
+| 0x14 | - / - | [SpellCastTargets](spellcasttargets.md) | targets |  |
 
 If cast_flags is equal to `EXTRA`:
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | 4 / Little | f32 | elevation |  |  |
-| - | 4 / Little | f32 | speed |  |  |
-| - | 1 / - | [ClientMovementData](clientmovementdata.md) | movement_data |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| - | 4 / Little | f32 | elevation |  |
+| - | 4 / Little | f32 | speed |  |
+| - | 1 / - | [ClientMovementData](clientmovementdata.md) | movement_data |  |
 
 If movement_data is equal to `PRESENT`:
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | 4 / Little | u32 | opcode |  |  |
-| - | - / - | [PackedGuid](../types/packed-guid.md) | movement |  |  |
-| - | - / - | [MovementInfo](movementinfo.md) | info |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| - | 4 / Little | u32 | opcode |  |
+| - | - / - | [PackedGuid](../types/packed-guid.md) | movement |  |
+| - | - / - | [MovementInfo](movementinfo.md) | info |  |
 

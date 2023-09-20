@@ -24,8 +24,8 @@ CMSG have a header of 6 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x06 | 1 / - | Bool | voice_enabled |  |  |
-| 0x07 | 1 / - | Bool | microphone_enabled |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x06 | 1 / - | Bool | voice_enabled |  |
+| 0x07 | 1 / - | Bool | microphone_enabled |  |
 

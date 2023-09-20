@@ -29,13 +29,13 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | 4 / Little | u32 | achievement |  |  |
-| - | - / - | [PackedGuid](../types/packed-guid.md) | progress_counter |  | trinitycore/azerothcore: This is a u32 passed to the `appendPackGUID` function which promotes it to u64. |
-| - | - / - | [PackedGuid](../types/packed-guid.md) | player |  |  |
-| - | 4 / Little | u32 | flags |  | trinitycore: this are some flags, 1 is for keeping the counter at 0 in client |
-| - | 4 / Little | DateTime | time |  |  |
-| - | 4 / Little | Seconds | time_elapsed |  |  |
-| - | 4 / Little | u32 | unknown |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| - | 4 / Little | u32 | achievement |  |
+| - | - / - | [PackedGuid](../types/packed-guid.md) | progress_counter | trinitycore/azerothcore: This is a u32 passed to the `appendPackGUID` function which promotes it to u64. |
+| - | - / - | [PackedGuid](../types/packed-guid.md) | player |  |
+| - | 4 / Little | u32 | flags | trinitycore: this are some flags, 1 is for keeping the counter at 0 in client |
+| - | 4 / Little | DateTime | time |  |
+| - | 4 / Little | Seconds | time_elapsed |  |
+| - | 4 / Little | u32 | unknown |  |
 

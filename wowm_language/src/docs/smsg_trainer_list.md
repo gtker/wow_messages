@@ -27,13 +27,13 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | 8 / Little | [Guid](../types/packed-guid.md) | guid |  |  |
-| 0x0C | 4 / Little | u32 | trainer_type |  |  |
-| 0x10 | 4 / Little | u32 | amount_of_spells |  |  |
-| 0x14 | ? / - | [TrainerSpell](trainerspell.md)[amount_of_spells] | spells |  |  |
-| - | - / - | CString | greeting |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x04 | 8 / Little | [Guid](../types/packed-guid.md) | guid |  |
+| 0x0C | 4 / Little | u32 | trainer_type |  |
+| 0x10 | 4 / Little | u32 | amount_of_spells |  |
+| 0x14 | ? / - | [TrainerSpell](trainerspell.md)[amount_of_spells] | spells |  |
+| - | - / - | CString | greeting |  |
 
 ## Client Version 2.4.3
 
@@ -62,13 +62,13 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | 8 / Little | [Guid](../types/packed-guid.md) | guid |  |  |
-| 0x0C | 4 / Little | u32 | trainer_type |  |  |
-| 0x10 | 4 / Little | u32 | amount_of_spells |  |  |
-| 0x14 | ? / - | [TrainerSpell](trainerspell.md)[amount_of_spells] | spells |  |  |
-| - | - / - | CString | greeting |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x04 | 8 / Little | [Guid](../types/packed-guid.md) | guid |  |
+| 0x0C | 4 / Little | u32 | trainer_type |  |
+| 0x10 | 4 / Little | u32 | amount_of_spells |  |
+| 0x14 | ? / - | [TrainerSpell](trainerspell.md)[amount_of_spells] | spells |  |
+| - | - / - | CString | greeting |  |
 
 ## Client Version 3.3.5
 
@@ -97,11 +97,11 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | 8 / Little | [Guid](../types/packed-guid.md) | guid |  |  |
-| - | 4 / Little | u32 | trainer_type |  |  |
-| - | 4 / Little | u32 | amount_of_spells |  |  |
-| - | ? / - | [TrainerSpell](trainerspell.md)[amount_of_spells] | spells |  |  |
-| - | - / - | CString | greeting |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| - | 8 / Little | [Guid](../types/packed-guid.md) | guid |  |
+| - | 4 / Little | u32 | trainer_type |  |
+| - | 4 / Little | u32 | amount_of_spells |  |
+| - | ? / - | [TrainerSpell](trainerspell.md)[amount_of_spells] | spells |  |
+| - | - / - | CString | greeting |  |
 

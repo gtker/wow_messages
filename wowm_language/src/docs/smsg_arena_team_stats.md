@@ -29,13 +29,13 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | 4 / Little | u32 | arena_team |  |  |
-| 0x08 | 4 / Little | u32 | rating |  |  |
-| 0x0C | 4 / Little | u32 | games_played_this_week |  |  |
-| 0x10 | 4 / Little | u32 | games_won_this_week |  |  |
-| 0x14 | 4 / Little | u32 | games_played_this_season |  |  |
-| 0x18 | 4 / Little | u32 | games_won_this_season |  |  |
-| 0x1C | 4 / Little | u32 | ranking |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x04 | 4 / Little | u32 | arena_team |  |
+| 0x08 | 4 / Little | u32 | rating |  |
+| 0x0C | 4 / Little | u32 | games_played_this_week |  |
+| 0x10 | 4 / Little | u32 | games_won_this_week |  |
+| 0x14 | 4 / Little | u32 | games_played_this_season |  |
+| 0x18 | 4 / Little | u32 | games_won_this_season |  |
+| 0x1C | 4 / Little | u32 | ranking |  |
 

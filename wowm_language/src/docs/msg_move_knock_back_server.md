@@ -28,14 +28,14 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | - / - | [PackedGuid](../types/packed-guid.md) | player |  |  |
-| - | - / - | [MovementInfo](movementinfo.md) | info |  |  |
-| - | 4 / Little | f32 | sin_angle |  |  |
-| - | 4 / Little | f32 | cos_angle |  |  |
-| - | 4 / Little | f32 | x_y_speed |  |  |
-| - | 4 / Little | f32 | velocity |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x04 | - / - | [PackedGuid](../types/packed-guid.md) | player |  |
+| - | - / - | [MovementInfo](movementinfo.md) | info |  |
+| - | 4 / Little | f32 | sin_angle |  |
+| - | 4 / Little | f32 | cos_angle |  |
+| - | 4 / Little | f32 | x_y_speed |  |
+| - | 4 / Little | f32 | velocity |  |
 
 ## Client Version 3.3.5
 
@@ -65,12 +65,12 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | - / - | [PackedGuid](../types/packed-guid.md) | player |  |  |
-| - | - / - | [MovementInfo](movementinfo.md) | info |  |  |
-| - | 4 / Little | f32 | sin_angle |  |  |
-| - | 4 / Little | f32 | cos_angle |  |  |
-| - | 4 / Little | f32 | x_y_speed |  |  |
-| - | 4 / Little | f32 | velocity |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| - | - / - | [PackedGuid](../types/packed-guid.md) | player |  |
+| - | - / - | [MovementInfo](movementinfo.md) | info |  |
+| - | 4 / Little | f32 | sin_angle |  |
+| - | 4 / Little | f32 | cos_angle |  |
+| - | 4 / Little | f32 | x_y_speed |  |
+| - | 4 / Little | f32 | velocity |  |
 

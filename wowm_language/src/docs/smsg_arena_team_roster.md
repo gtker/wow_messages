@@ -26,12 +26,12 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | 4 / Little | u32 | arena_team |  |  |
-| 0x08 | 4 / Little | u32 | amount_of_members |  |  |
-| 0x0C | 1 / - | [ArenaType](arenatype.md) | arena_type |  |  |
-| 0x0D | ? / - | [ArenaTeamMember](arenateammember.md)[amount_of_members] | members |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x04 | 4 / Little | u32 | arena_team |  |
+| 0x08 | 4 / Little | u32 | amount_of_members |  |
+| 0x0C | 1 / - | [ArenaType](arenatype.md) | arena_type |  |
+| 0x0D | ? / - | [ArenaTeamMember](arenateammember.md)[amount_of_members] | members |  |
 
 ## Client Version 3.3.5
 
@@ -60,11 +60,11 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | 4 / Little | u32 | arena_team |  |  |
-| - | 1 / - | u8 | unknown |  | arcemu: new 3.0.8.<br/>arcemu sets to 0. |
-| - | 4 / Little | u32 | amount_of_members |  |  |
-| - | 1 / - | [ArenaType](arenatype.md) | arena_type |  |  |
-| - | ? / - | [ArenaTeamMember](arenateammember.md)[amount_of_members] | members |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| - | 4 / Little | u32 | arena_team |  |
+| - | 1 / - | u8 | unknown | arcemu: new 3.0.8.<br/>arcemu sets to 0. |
+| - | 4 / Little | u32 | amount_of_members |  |
+| - | 1 / - | [ArenaType](arenatype.md) | arena_type |  |
+| - | ? / - | [ArenaTeamMember](arenateammember.md)[amount_of_members] | members |  |
 

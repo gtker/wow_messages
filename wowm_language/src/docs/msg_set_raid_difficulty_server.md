@@ -25,9 +25,9 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | 4 / - | [RaidDifficulty](raiddifficulty.md) | difficulty |  |  |
-| 0x08 | 4 / Little | u32 | unknown1 |  | Emus set to 1. |
-| 0x0C | 4 / Little | Bool32 | in_group |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x04 | 4 / - | [RaidDifficulty](raiddifficulty.md) | difficulty |  |
+| 0x08 | 4 / Little | u32 | unknown1 | Emus set to 1. |
+| 0x0C | 4 / Little | Bool32 | in_group |  |
 

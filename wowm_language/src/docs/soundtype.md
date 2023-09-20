@@ -41,34 +41,34 @@ enum SoundType : u8 {
 ### Type
 The basic type is `u8`, a 1 byte (8 bit) integer.
 ### Enumerators
-| Enumerator | Value  | Description | Comment |
-| --------- | -------- | ----------- | ------- |
-| `UNUSED` | 0 (0x00) |  |  |
-| `SPELLS` | 1 (0x01) |  |  |
-| `UI` | 2 (0x02) |  |  |
-| `FOOTSTEPS` | 3 (0x03) |  |  |
-| `WEAPON_IMPACT` | 4 (0x04) |  |  |
-| `WEAPON_MISS` | 6 (0x06) |  |  |
-| `PICK_UP_PUT_DOWN` | 9 (0x09) |  |  |
-| `NPC_COMBAT` | 10 (0x0A) |  |  |
-| `ERRORS` | 12 (0x0C) |  |  |
-| `OBJECTS` | 14 (0x0E) |  |  |
-| `DEATH` | 16 (0x10) |  |  |
-| `NPC_GREETINGS` | 17 (0x11) |  |  |
-| `TEST` | 18 (0x12) |  |  |
-| `ARMOUR_FOLEY` | 19 (0x13) |  |  |
-| `FOOTSTEPS_2` | 20 (0x14) |  |  |
-| `WATER_CHARACTER` | 21 (0x15) |  |  |
-| `WATER_LIQUID` | 22 (0x16) |  |  |
-| `TRADESKILLS` | 23 (0x17) |  |  |
-| `DOODADS` | 25 (0x19) |  |  |
-| `SPELL_FIZZLE` | 26 (0x1A) |  |  |
-| `NPC_LOOPS` | 27 (0x1B) |  |  |
-| `ZONE_MUSIC` | 28 (0x1C) |  |  |
-| `EMOTES` | 29 (0x1D) |  |  |
-| `NARRATION_MUSIC` | 30 (0x1E) |  |  |
-| `NARRATION` | 31 (0x1F) |  |  |
-| `ZONE_AMBIENCE` | 50 (0x32) |  |  |
+| Enumerator | Value  | Comment |
+| --------- | -------- | ------- |
+| `UNUSED` | 0 (0x00) |  |
+| `SPELLS` | 1 (0x01) |  |
+| `UI` | 2 (0x02) |  |
+| `FOOTSTEPS` | 3 (0x03) |  |
+| `WEAPON_IMPACT` | 4 (0x04) |  |
+| `WEAPON_MISS` | 6 (0x06) |  |
+| `PICK_UP_PUT_DOWN` | 9 (0x09) |  |
+| `NPC_COMBAT` | 10 (0x0A) |  |
+| `ERRORS` | 12 (0x0C) |  |
+| `OBJECTS` | 14 (0x0E) |  |
+| `DEATH` | 16 (0x10) |  |
+| `NPC_GREETINGS` | 17 (0x11) |  |
+| `TEST` | 18 (0x12) |  |
+| `ARMOUR_FOLEY` | 19 (0x13) |  |
+| `FOOTSTEPS_2` | 20 (0x14) |  |
+| `WATER_CHARACTER` | 21 (0x15) |  |
+| `WATER_LIQUID` | 22 (0x16) |  |
+| `TRADESKILLS` | 23 (0x17) |  |
+| `DOODADS` | 25 (0x19) |  |
+| `SPELL_FIZZLE` | 26 (0x1A) |  |
+| `NPC_LOOPS` | 27 (0x1B) |  |
+| `ZONE_MUSIC` | 28 (0x1C) |  |
+| `EMOTES` | 29 (0x1D) |  |
+| `NARRATION_MUSIC` | 30 (0x1E) |  |
+| `NARRATION` | 31 (0x1F) |  |
+| `ZONE_AMBIENCE` | 50 (0x32) |  |
 
 Used in:
 

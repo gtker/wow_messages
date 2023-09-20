@@ -154,149 +154,149 @@ enum SpellCastResult : u8 {
 ### Type
 The basic type is `u8`, a 1 byte (8 bit) integer.
 ### Enumerators
-| Enumerator | Value  | Description | Comment |
-| --------- | -------- | ----------- | ------- |
-| `AFFECTING_COMBAT` | 0 (0x00) |  |  |
-| `ALREADY_AT_FULL_HEALTH` | 1 (0x01) |  |  |
-| `ALREADY_AT_FULL_MANA` | 2 (0x02) |  |  |
-| `ALREADY_BEING_TAMED` | 3 (0x03) |  |  |
-| `ALREADY_HAVE_CHARM` | 4 (0x04) |  |  |
-| `ALREADY_HAVE_SUMMON` | 5 (0x05) |  |  |
-| `ALREADY_OPEN` | 6 (0x06) |  |  |
-| `MORE_POWERFUL_SPELL_ACTIVE` | 7 (0x07) |  |  |
-| `BAD_IMPLICIT_TARGETS` | 9 (0x09) |  |  |
-| `BAD_TARGETS` | 10 (0x0A) |  |  |
-| `CANT_BE_CHARMED` | 11 (0x0B) |  |  |
-| `CANT_BE_DISENCHANTED` | 12 (0x0C) |  |  |
-| `CANT_BE_PROSPECTED` | 13 (0x0D) |  |  |
-| `CANT_CAST_ON_TAPPED` | 14 (0x0E) |  |  |
-| `CANT_DUEL_WHILE_INVISIBLE` | 15 (0x0F) |  |  |
-| `CANT_DUEL_WHILE_STEALTHED` | 16 (0x10) |  |  |
-| `CANT_TOO_CLOSE_TO_ENEMY` | 17 (0x11) |  |  |
-| `CANT_DO_THAT_YET` | 18 (0x12) |  |  |
-| `CASTER_DEAD` | 19 (0x13) |  |  |
-| `CHARMED` | 20 (0x14) |  |  |
-| `CHEST_IN_USE` | 21 (0x15) |  |  |
-| `CONFUSED` | 22 (0x16) |  |  |
-| `DONT_REPORT` | 23 (0x17) |  |  |
-| `EQUIPPED_ITEM` | 24 (0x18) |  |  |
-| `EQUIPPED_ITEM_CLASS` | 25 (0x19) |  |  |
-| `EQUIPPED_ITEM_CLASS_MAINHAND` | 26 (0x1A) |  |  |
-| `EQUIPPED_ITEM_CLASS_OFFHAND` | 27 (0x1B) |  |  |
-| `ERROR` | 28 (0x1C) |  |  |
-| `FIZZLE` | 29 (0x1D) |  |  |
-| `FLEEING` | 30 (0x1E) |  |  |
-| `FOOD_LOWLEVEL` | 31 (0x1F) |  |  |
-| `HIGHLEVEL` | 32 (0x20) |  |  |
-| `IMMUNE` | 34 (0x22) |  |  |
-| `INTERRUPTED` | 35 (0x23) |  |  |
-| `INTERRUPTED_COMBAT` | 36 (0x24) |  |  |
-| `ITEM_ALREADY_ENCHANTED` | 37 (0x25) |  |  |
-| `ITEM_GONE` | 38 (0x26) |  |  |
-| `ENCHANT_NOT_EXISTING_ITEM` | 39 (0x27) |  |  |
-| `ITEM_NOT_READY` | 40 (0x28) |  |  |
-| `LEVEL_REQUIREMENT` | 41 (0x29) |  |  |
-| `LINE_OF_SIGHT` | 42 (0x2A) |  |  |
-| `LOWLEVEL` | 43 (0x2B) |  |  |
-| `SKILL_NOT_HIGH_ENOUGH` | 44 (0x2C) |  |  |
-| `MAINHAND_EMPTY` | 45 (0x2D) |  |  |
-| `MOVING` | 46 (0x2E) |  |  |
-| `NEED_AMMO` | 47 (0x2F) |  |  |
-| `NEED_REQUIRES_SOMETHING` | 48 (0x30) |  |  |
-| `NEED_EXOTIC_AMMO` | 49 (0x31) |  |  |
-| `NOPATH` | 50 (0x32) |  |  |
-| `NOT_BEHIND` | 51 (0x33) |  |  |
-| `NOT_FISHABLE` | 52 (0x34) |  |  |
-| `NOT_HERE` | 53 (0x35) |  |  |
-| `NOT_INFRONT` | 54 (0x36) |  |  |
-| `NOT_IN_CONTROL` | 55 (0x37) |  |  |
-| `NOT_KNOWN` | 56 (0x38) |  |  |
-| `NOT_MOUNTED` | 57 (0x39) |  |  |
-| `NOT_ON_TAXI` | 58 (0x3A) |  |  |
-| `NOT_ON_TRANSPORT` | 59 (0x3B) |  |  |
-| `NOT_READY` | 60 (0x3C) |  |  |
-| `NOT_SHAPESHIFT` | 61 (0x3D) |  |  |
-| `NOT_STANDING` | 62 (0x3E) |  |  |
-| `NOT_TRADEABLE` | 63 (0x3F) |  | rogues trying 'enchant' other's weapon with poison |
-| `NOT_TRADING` | 64 (0x40) |  |  |
-| `NOT_UNSHEATHED` | 65 (0x41) |  |  |
-| `NOT_WHILE_GHOST` | 66 (0x42) |  |  |
-| `NO_AMMO` | 67 (0x43) |  |  |
-| `NO_CHARGES_REMAIN` | 68 (0x44) |  |  |
-| `NO_CHAMPION` | 69 (0x45) |  |  |
-| `NO_COMBO_POINTS` | 70 (0x46) |  |  |
-| `NO_DUELING` | 71 (0x47) |  |  |
-| `NO_ENDURANCE` | 72 (0x48) |  |  |
-| `NO_FISH` | 73 (0x49) |  |  |
-| `NO_ITEMS_WHILE_SHAPESHIFTED` | 74 (0x4A) |  |  |
-| `NO_MOUNTS_ALLOWED` | 75 (0x4B) |  |  |
-| `NO_PET` | 76 (0x4C) |  |  |
-| `NO_POWER` | 77 (0x4D) |  |  |
-| `NOTHING_TO_DISPEL` | 78 (0x4E) |  |  |
-| `NOTHING_TO_STEAL` | 79 (0x4F) |  |  |
-| `ONLY_ABOVEWATER` | 80 (0x50) |  |  |
-| `ONLY_DAYTIME` | 81 (0x51) |  |  |
-| `ONLY_INDOORS` | 82 (0x52) |  |  |
-| `ONLY_MOUNTED` | 83 (0x53) |  |  |
-| `ONLY_NIGHTTIME` | 84 (0x54) |  |  |
-| `ONLY_OUTDOORS` | 85 (0x55) |  |  |
-| `ONLY_SHAPESHIFT` | 86 (0x56) |  |  |
-| `ONLY_STEALTHED` | 87 (0x57) |  |  |
-| `ONLY_UNDERWATER` | 88 (0x58) |  |  |
-| `OUT_OF_RANGE` | 89 (0x59) |  |  |
-| `PACIFIED` | 90 (0x5A) |  |  |
-| `POSSESSED` | 91 (0x5B) |  |  |
-| `REQUIRES_AREA` | 93 (0x5D) |  |  |
-| `REQUIRES_SPELL_FOCUS` | 94 (0x5E) |  |  |
-| `ROOTED` | 95 (0x5F) |  |  |
-| `SILENCED` | 96 (0x60) |  |  |
-| `SPELL_IN_PROGRESS` | 97 (0x61) |  |  |
-| `SPELL_LEARNED` | 98 (0x62) |  |  |
-| `SPELL_UNAVAILABLE` | 99 (0x63) |  |  |
-| `STUNNED` | 100 (0x64) |  |  |
-| `TARGETS_DEAD` | 101 (0x65) |  |  |
-| `TARGET_AFFECTING_COMBAT` | 102 (0x66) |  |  |
-| `TARGET_AURASTATE` | 103 (0x67) |  |  |
-| `TARGET_DUELING` | 104 (0x68) |  |  |
-| `TARGET_ENEMY` | 105 (0x69) |  |  |
-| `TARGET_ENRAGED` | 106 (0x6A) |  |  |
-| `TARGET_FRIENDLY` | 107 (0x6B) |  |  |
-| `TARGET_IN_COMBAT` | 108 (0x6C) |  |  |
-| `TARGET_IS_PLAYER` | 109 (0x6D) |  |  |
-| `TARGET_NOT_DEAD` | 110 (0x6E) |  |  |
-| `TARGET_NOT_IN_PARTY` | 111 (0x6F) |  |  |
-| `TARGET_NOT_LOOTED` | 112 (0x70) |  |  |
-| `TARGET_NOT_PLAYER` | 113 (0x71) |  |  |
-| `TARGET_NO_POCKETS` | 114 (0x72) |  |  |
-| `TARGET_NO_WEAPONS` | 115 (0x73) |  |  |
-| `TARGET_UNSKINNABLE` | 116 (0x74) |  |  |
-| `THIRST_SATIATED` | 117 (0x75) |  |  |
-| `TOO_CLOSE` | 118 (0x76) |  |  |
-| `TOO_MANY_OF_ITEM` | 119 (0x77) |  |  |
-| `TRAINING_POINTS` | 121 (0x79) |  |  |
-| `TRY_AGAIN` | 122 (0x7A) |  |  |
-| `UNIT_NOT_BEHIND` | 123 (0x7B) |  |  |
-| `UNIT_NOT_INFRONT` | 124 (0x7C) |  |  |
-| `WRONG_PET_FOOD` | 125 (0x7D) |  |  |
-| `NOT_WHILE_FATIGUED` | 126 (0x7E) |  |  |
-| `TARGET_NOT_IN_INSTANCE` | 127 (0x7F) |  |  |
-| `NOT_WHILE_TRADING` | 128 (0x80) |  |  |
-| `TARGET_NOT_IN_RAID` | 129 (0x81) |  |  |
-| `DISENCHANT_WHILE_LOOTING` | 130 (0x82) |  |  |
-| `PROSPECT_WHILE_LOOTING` | 131 (0x83) |  |  |
-| `TARGET_FREEFORALL` | 133 (0x85) |  |  |
-| `NO_EDIBLE_CORPSES` | 134 (0x86) |  |  |
-| `ONLY_BATTLEGROUNDS` | 135 (0x87) |  |  |
-| `TARGET_NOT_GHOST` | 136 (0x88) |  |  |
-| `TOO_MANY_SKILLS` | 137 (0x89) |  |  |
-| `CANT_USE_NEW_ITEM` | 138 (0x8A) |  |  |
-| `WRONG_WEATHER` | 139 (0x8B) |  |  |
-| `DAMAGE_IMMUNE` | 140 (0x8C) |  |  |
-| `PREVENTED_BY_MECHANIC` | 141 (0x8D) |  |  |
-| `PLAY_TIME` | 142 (0x8E) |  |  |
-| `REPUTATION` | 143 (0x8F) |  |  |
-| `MIN_SKILL` | 144 (0x90) |  |  |
-| `UNKNOWN` | 145 (0x91) |  |  |
+| Enumerator | Value  | Comment |
+| --------- | -------- | ------- |
+| `AFFECTING_COMBAT` | 0 (0x00) |  |
+| `ALREADY_AT_FULL_HEALTH` | 1 (0x01) |  |
+| `ALREADY_AT_FULL_MANA` | 2 (0x02) |  |
+| `ALREADY_BEING_TAMED` | 3 (0x03) |  |
+| `ALREADY_HAVE_CHARM` | 4 (0x04) |  |
+| `ALREADY_HAVE_SUMMON` | 5 (0x05) |  |
+| `ALREADY_OPEN` | 6 (0x06) |  |
+| `MORE_POWERFUL_SPELL_ACTIVE` | 7 (0x07) |  |
+| `BAD_IMPLICIT_TARGETS` | 9 (0x09) |  |
+| `BAD_TARGETS` | 10 (0x0A) |  |
+| `CANT_BE_CHARMED` | 11 (0x0B) |  |
+| `CANT_BE_DISENCHANTED` | 12 (0x0C) |  |
+| `CANT_BE_PROSPECTED` | 13 (0x0D) |  |
+| `CANT_CAST_ON_TAPPED` | 14 (0x0E) |  |
+| `CANT_DUEL_WHILE_INVISIBLE` | 15 (0x0F) |  |
+| `CANT_DUEL_WHILE_STEALTHED` | 16 (0x10) |  |
+| `CANT_TOO_CLOSE_TO_ENEMY` | 17 (0x11) |  |
+| `CANT_DO_THAT_YET` | 18 (0x12) |  |
+| `CASTER_DEAD` | 19 (0x13) |  |
+| `CHARMED` | 20 (0x14) |  |
+| `CHEST_IN_USE` | 21 (0x15) |  |
+| `CONFUSED` | 22 (0x16) |  |
+| `DONT_REPORT` | 23 (0x17) |  |
+| `EQUIPPED_ITEM` | 24 (0x18) |  |
+| `EQUIPPED_ITEM_CLASS` | 25 (0x19) |  |
+| `EQUIPPED_ITEM_CLASS_MAINHAND` | 26 (0x1A) |  |
+| `EQUIPPED_ITEM_CLASS_OFFHAND` | 27 (0x1B) |  |
+| `ERROR` | 28 (0x1C) |  |
+| `FIZZLE` | 29 (0x1D) |  |
+| `FLEEING` | 30 (0x1E) |  |
+| `FOOD_LOWLEVEL` | 31 (0x1F) |  |
+| `HIGHLEVEL` | 32 (0x20) |  |
+| `IMMUNE` | 34 (0x22) |  |
+| `INTERRUPTED` | 35 (0x23) |  |
+| `INTERRUPTED_COMBAT` | 36 (0x24) |  |
+| `ITEM_ALREADY_ENCHANTED` | 37 (0x25) |  |
+| `ITEM_GONE` | 38 (0x26) |  |
+| `ENCHANT_NOT_EXISTING_ITEM` | 39 (0x27) |  |
+| `ITEM_NOT_READY` | 40 (0x28) |  |
+| `LEVEL_REQUIREMENT` | 41 (0x29) |  |
+| `LINE_OF_SIGHT` | 42 (0x2A) |  |
+| `LOWLEVEL` | 43 (0x2B) |  |
+| `SKILL_NOT_HIGH_ENOUGH` | 44 (0x2C) |  |
+| `MAINHAND_EMPTY` | 45 (0x2D) |  |
+| `MOVING` | 46 (0x2E) |  |
+| `NEED_AMMO` | 47 (0x2F) |  |
+| `NEED_REQUIRES_SOMETHING` | 48 (0x30) |  |
+| `NEED_EXOTIC_AMMO` | 49 (0x31) |  |
+| `NOPATH` | 50 (0x32) |  |
+| `NOT_BEHIND` | 51 (0x33) |  |
+| `NOT_FISHABLE` | 52 (0x34) |  |
+| `NOT_HERE` | 53 (0x35) |  |
+| `NOT_INFRONT` | 54 (0x36) |  |
+| `NOT_IN_CONTROL` | 55 (0x37) |  |
+| `NOT_KNOWN` | 56 (0x38) |  |
+| `NOT_MOUNTED` | 57 (0x39) |  |
+| `NOT_ON_TAXI` | 58 (0x3A) |  |
+| `NOT_ON_TRANSPORT` | 59 (0x3B) |  |
+| `NOT_READY` | 60 (0x3C) |  |
+| `NOT_SHAPESHIFT` | 61 (0x3D) |  |
+| `NOT_STANDING` | 62 (0x3E) |  |
+| `NOT_TRADEABLE` | 63 (0x3F) | rogues trying 'enchant' other's weapon with poison |
+| `NOT_TRADING` | 64 (0x40) |  |
+| `NOT_UNSHEATHED` | 65 (0x41) |  |
+| `NOT_WHILE_GHOST` | 66 (0x42) |  |
+| `NO_AMMO` | 67 (0x43) |  |
+| `NO_CHARGES_REMAIN` | 68 (0x44) |  |
+| `NO_CHAMPION` | 69 (0x45) |  |
+| `NO_COMBO_POINTS` | 70 (0x46) |  |
+| `NO_DUELING` | 71 (0x47) |  |
+| `NO_ENDURANCE` | 72 (0x48) |  |
+| `NO_FISH` | 73 (0x49) |  |
+| `NO_ITEMS_WHILE_SHAPESHIFTED` | 74 (0x4A) |  |
+| `NO_MOUNTS_ALLOWED` | 75 (0x4B) |  |
+| `NO_PET` | 76 (0x4C) |  |
+| `NO_POWER` | 77 (0x4D) |  |
+| `NOTHING_TO_DISPEL` | 78 (0x4E) |  |
+| `NOTHING_TO_STEAL` | 79 (0x4F) |  |
+| `ONLY_ABOVEWATER` | 80 (0x50) |  |
+| `ONLY_DAYTIME` | 81 (0x51) |  |
+| `ONLY_INDOORS` | 82 (0x52) |  |
+| `ONLY_MOUNTED` | 83 (0x53) |  |
+| `ONLY_NIGHTTIME` | 84 (0x54) |  |
+| `ONLY_OUTDOORS` | 85 (0x55) |  |
+| `ONLY_SHAPESHIFT` | 86 (0x56) |  |
+| `ONLY_STEALTHED` | 87 (0x57) |  |
+| `ONLY_UNDERWATER` | 88 (0x58) |  |
+| `OUT_OF_RANGE` | 89 (0x59) |  |
+| `PACIFIED` | 90 (0x5A) |  |
+| `POSSESSED` | 91 (0x5B) |  |
+| `REQUIRES_AREA` | 93 (0x5D) |  |
+| `REQUIRES_SPELL_FOCUS` | 94 (0x5E) |  |
+| `ROOTED` | 95 (0x5F) |  |
+| `SILENCED` | 96 (0x60) |  |
+| `SPELL_IN_PROGRESS` | 97 (0x61) |  |
+| `SPELL_LEARNED` | 98 (0x62) |  |
+| `SPELL_UNAVAILABLE` | 99 (0x63) |  |
+| `STUNNED` | 100 (0x64) |  |
+| `TARGETS_DEAD` | 101 (0x65) |  |
+| `TARGET_AFFECTING_COMBAT` | 102 (0x66) |  |
+| `TARGET_AURASTATE` | 103 (0x67) |  |
+| `TARGET_DUELING` | 104 (0x68) |  |
+| `TARGET_ENEMY` | 105 (0x69) |  |
+| `TARGET_ENRAGED` | 106 (0x6A) |  |
+| `TARGET_FRIENDLY` | 107 (0x6B) |  |
+| `TARGET_IN_COMBAT` | 108 (0x6C) |  |
+| `TARGET_IS_PLAYER` | 109 (0x6D) |  |
+| `TARGET_NOT_DEAD` | 110 (0x6E) |  |
+| `TARGET_NOT_IN_PARTY` | 111 (0x6F) |  |
+| `TARGET_NOT_LOOTED` | 112 (0x70) |  |
+| `TARGET_NOT_PLAYER` | 113 (0x71) |  |
+| `TARGET_NO_POCKETS` | 114 (0x72) |  |
+| `TARGET_NO_WEAPONS` | 115 (0x73) |  |
+| `TARGET_UNSKINNABLE` | 116 (0x74) |  |
+| `THIRST_SATIATED` | 117 (0x75) |  |
+| `TOO_CLOSE` | 118 (0x76) |  |
+| `TOO_MANY_OF_ITEM` | 119 (0x77) |  |
+| `TRAINING_POINTS` | 121 (0x79) |  |
+| `TRY_AGAIN` | 122 (0x7A) |  |
+| `UNIT_NOT_BEHIND` | 123 (0x7B) |  |
+| `UNIT_NOT_INFRONT` | 124 (0x7C) |  |
+| `WRONG_PET_FOOD` | 125 (0x7D) |  |
+| `NOT_WHILE_FATIGUED` | 126 (0x7E) |  |
+| `TARGET_NOT_IN_INSTANCE` | 127 (0x7F) |  |
+| `NOT_WHILE_TRADING` | 128 (0x80) |  |
+| `TARGET_NOT_IN_RAID` | 129 (0x81) |  |
+| `DISENCHANT_WHILE_LOOTING` | 130 (0x82) |  |
+| `PROSPECT_WHILE_LOOTING` | 131 (0x83) |  |
+| `TARGET_FREEFORALL` | 133 (0x85) |  |
+| `NO_EDIBLE_CORPSES` | 134 (0x86) |  |
+| `ONLY_BATTLEGROUNDS` | 135 (0x87) |  |
+| `TARGET_NOT_GHOST` | 136 (0x88) |  |
+| `TOO_MANY_SKILLS` | 137 (0x89) |  |
+| `CANT_USE_NEW_ITEM` | 138 (0x8A) |  |
+| `WRONG_WEATHER` | 139 (0x8B) |  |
+| `DAMAGE_IMMUNE` | 140 (0x8C) |  |
+| `PREVENTED_BY_MECHANIC` | 141 (0x8D) |  |
+| `PLAY_TIME` | 142 (0x8E) |  |
+| `REPUTATION` | 143 (0x8F) |  |
+| `MIN_SKILL` | 144 (0x90) |  |
+| `UNKNOWN` | 145 (0x91) |  |
 
 Used in:
 * [SMSG_PET_CAST_FAILED](smsg_pet_cast_failed.md)
@@ -484,177 +484,177 @@ enum SpellCastResult : u8 {
 ### Type
 The basic type is `u8`, a 1 byte (8 bit) integer.
 ### Enumerators
-| Enumerator | Value  | Description | Comment |
-| --------- | -------- | ----------- | ------- |
-| `AFFECTING_COMBAT` | 0 (0x00) |  |  |
-| `ALREADY_AT_FULL_HEALTH` | 1 (0x01) |  |  |
-| `ALREADY_AT_FULL_MANA` | 2 (0x02) |  |  |
-| `ALREADY_AT_FULL_POWER` | 3 (0x03) |  |  |
-| `ALREADY_BEING_TAMED` | 4 (0x04) |  |  |
-| `ALREADY_HAVE_CHARM` | 5 (0x05) |  |  |
-| `ALREADY_HAVE_SUMMON` | 6 (0x06) |  |  |
-| `ALREADY_OPEN` | 7 (0x07) |  |  |
-| `AURA_BOUNCED` | 8 (0x08) |  |  |
-| `AUTOTRACK_INTERRUPTED` | 9 (0x09) |  |  |
-| `BAD_IMPLICIT_TARGETS` | 10 (0x0A) |  |  |
-| `BAD_TARGETS` | 11 (0x0B) |  |  |
-| `CANT_BE_CHARMED` | 12 (0x0C) |  |  |
-| `CANT_BE_DISENCHANTED` | 13 (0x0D) |  |  |
-| `CANT_BE_DISENCHANTED_SKILL` | 14 (0x0E) |  |  |
-| `CANT_BE_PROSPECTED` | 15 (0x0F) |  |  |
-| `CANT_CAST_ON_TAPPED` | 16 (0x10) |  |  |
-| `CANT_DUEL_WHILE_INVISIBLE` | 17 (0x11) |  |  |
-| `CANT_DUEL_WHILE_STEALTHED` | 18 (0x12) |  |  |
-| `CANT_STEALTH` | 19 (0x13) |  |  |
-| `CASTER_AURASTATE` | 20 (0x14) |  |  |
-| `CASTER_DEAD` | 21 (0x15) |  |  |
-| `CHARMED` | 22 (0x16) |  |  |
-| `CHEST_IN_USE` | 23 (0x17) |  |  |
-| `CONFUSED` | 24 (0x18) |  |  |
-| `DONT_REPORT` | 25 (0x19) |  |  |
-| `EQUIPPED_ITEM` | 26 (0x1A) |  |  |
-| `EQUIPPED_ITEM_CLASS` | 27 (0x1B) |  |  |
-| `EQUIPPED_ITEM_CLASS_MAINHAND` | 28 (0x1C) |  |  |
-| `EQUIPPED_ITEM_CLASS_OFFHAND` | 29 (0x1D) |  |  |
-| `ERROR` | 30 (0x1E) |  |  |
-| `FIZZLE` | 31 (0x1F) |  |  |
-| `FLEEING` | 32 (0x20) |  |  |
-| `FOOD_LOWLEVEL` | 33 (0x21) |  |  |
-| `HIGHLEVEL` | 34 (0x22) |  |  |
-| `HUNGER_SATIATED` | 35 (0x23) |  |  |
-| `IMMUNE` | 36 (0x24) |  |  |
-| `INTERRUPTED` | 37 (0x25) |  |  |
-| `INTERRUPTED_COMBAT` | 38 (0x26) |  |  |
-| `ITEM_ALREADY_ENCHANTED` | 39 (0x27) |  |  |
-| `ITEM_GONE` | 40 (0x28) |  |  |
-| `ITEM_NOT_FOUND` | 41 (0x29) |  |  |
-| `ITEM_NOT_READY` | 42 (0x2A) |  |  |
-| `LEVEL_REQUIREMENT` | 43 (0x2B) |  |  |
-| `LINE_OF_SIGHT` | 44 (0x2C) |  |  |
-| `LOWLEVEL` | 45 (0x2D) |  |  |
-| `LOW_CASTLEVEL` | 46 (0x2E) |  |  |
-| `MAINHAND_EMPTY` | 47 (0x2F) |  |  |
-| `MOVING` | 48 (0x30) |  |  |
-| `NEED_AMMO` | 49 (0x31) |  |  |
-| `NEED_AMMO_POUCH` | 50 (0x32) |  |  |
-| `NEED_EXOTIC_AMMO` | 51 (0x33) |  |  |
-| `NOPATH` | 52 (0x34) |  |  |
-| `NOT_BEHIND` | 53 (0x35) |  |  |
-| `NOT_FISHABLE` | 54 (0x36) |  |  |
-| `NOT_FLYING` | 55 (0x37) |  |  |
-| `NOT_HERE` | 56 (0x38) |  |  |
-| `NOT_INFRONT` | 57 (0x39) |  |  |
-| `NOT_IN_CONTROL` | 58 (0x3A) |  |  |
-| `NOT_KNOWN` | 59 (0x3B) |  |  |
-| `NOT_MOUNTED` | 60 (0x3C) |  |  |
-| `NOT_ON_TAXI` | 61 (0x3D) |  |  |
-| `NOT_ON_TRANSPORT` | 62 (0x3E) |  |  |
-| `NOT_READY` | 63 (0x3F) |  |  |
-| `NOT_SHAPESHIFT` | 64 (0x40) |  |  |
-| `NOT_STANDING` | 65 (0x41) |  |  |
-| `NOT_TRADEABLE` | 66 (0x42) |  |  |
-| `NOT_TRADING` | 67 (0x43) |  |  |
-| `NOT_UNSHEATHED` | 68 (0x44) |  |  |
-| `NOT_WHILE_GHOST` | 69 (0x45) |  |  |
-| `NO_AMMO` | 70 (0x46) |  |  |
-| `NO_CHARGES_REMAIN` | 71 (0x47) |  |  |
-| `NO_CHAMPION` | 72 (0x48) |  |  |
-| `NO_COMBO_POINTS` | 73 (0x49) |  |  |
-| `NO_DUELING` | 74 (0x4A) |  |  |
-| `NO_ENDURANCE` | 75 (0x4B) |  |  |
-| `NO_FISH` | 76 (0x4C) |  |  |
-| `NO_ITEMS_WHILE_SHAPESHIFTED` | 77 (0x4D) |  |  |
-| `NO_MOUNTS_ALLOWED` | 78 (0x4E) |  |  |
-| `NO_PET` | 79 (0x4F) |  |  |
-| `NO_POWER` | 80 (0x50) |  |  |
-| `NOTHING_TO_DISPEL` | 81 (0x51) |  |  |
-| `NOTHING_TO_STEAL` | 82 (0x52) |  |  |
-| `ONLY_ABOVEWATER` | 83 (0x53) |  |  |
-| `ONLY_DAYTIME` | 84 (0x54) |  |  |
-| `ONLY_INDOORS` | 85 (0x55) |  |  |
-| `ONLY_MOUNTED` | 86 (0x56) |  |  |
-| `ONLY_NIGHTTIME` | 87 (0x57) |  |  |
-| `ONLY_OUTDOORS` | 88 (0x58) |  |  |
-| `ONLY_SHAPESHIFT` | 89 (0x59) |  |  |
-| `ONLY_STEALTHED` | 90 (0x5A) |  |  |
-| `ONLY_UNDERWATER` | 91 (0x5B) |  |  |
-| `OUT_OF_RANGE` | 92 (0x5C) |  |  |
-| `PACIFIED` | 93 (0x5D) |  |  |
-| `POSSESSED` | 94 (0x5E) |  |  |
-| `REAGENTS` | 95 (0x5F) |  |  |
-| `REQUIRES_AREA` | 96 (0x60) |  |  |
-| `REQUIRES_SPELL_FOCUS` | 97 (0x61) |  |  |
-| `ROOTED` | 98 (0x62) |  |  |
-| `SILENCED` | 99 (0x63) |  |  |
-| `SPELL_IN_PROGRESS` | 100 (0x64) |  |  |
-| `SPELL_LEARNED` | 101 (0x65) |  |  |
-| `SPELL_UNAVAILABLE` | 102 (0x66) |  |  |
-| `STUNNED` | 103 (0x67) |  |  |
-| `TARGETS_DEAD` | 104 (0x68) |  |  |
-| `TARGET_AFFECTING_COMBAT` | 105 (0x69) |  |  |
-| `TARGET_AURASTATE` | 106 (0x6A) |  |  |
-| `TARGET_DUELING` | 107 (0x6B) |  |  |
-| `TARGET_ENEMY` | 108 (0x6C) |  |  |
-| `TARGET_ENRAGED` | 109 (0x6D) |  |  |
-| `TARGET_FRIENDLY` | 110 (0x6E) |  |  |
-| `TARGET_IN_COMBAT` | 111 (0x6F) |  |  |
-| `TARGET_IS_PLAYER` | 112 (0x70) |  |  |
-| `TARGET_IS_PLAYER_CONTROLLED` | 113 (0x71) |  |  |
-| `TARGET_NOT_DEAD` | 114 (0x72) |  |  |
-| `TARGET_NOT_IN_PARTY` | 115 (0x73) |  |  |
-| `TARGET_NOT_LOOTED` | 116 (0x74) |  |  |
-| `TARGET_NOT_PLAYER` | 117 (0x75) |  |  |
-| `TARGET_NO_POCKETS` | 118 (0x76) |  |  |
-| `TARGET_NO_WEAPONS` | 119 (0x77) |  |  |
-| `TARGET_UNSKINNABLE` | 120 (0x78) |  |  |
-| `THIRST_SATIATED` | 121 (0x79) |  |  |
-| `TOO_CLOSE` | 122 (0x7A) |  |  |
-| `TOO_MANY_OF_ITEM` | 123 (0x7B) |  |  |
-| `TOTEM_CATEGORY` | 124 (0x7C) |  |  |
-| `TOTEMS` | 125 (0x7D) |  |  |
-| `TRAINING_POINTS` | 126 (0x7E) |  |  |
-| `TRY_AGAIN` | 127 (0x7F) |  |  |
-| `UNIT_NOT_BEHIND` | 128 (0x80) |  |  |
-| `UNIT_NOT_INFRONT` | 129 (0x81) |  |  |
-| `WRONG_PET_FOOD` | 130 (0x82) |  |  |
-| `NOT_WHILE_FATIGUED` | 131 (0x83) |  |  |
-| `TARGET_NOT_IN_INSTANCE` | 132 (0x84) |  |  |
-| `NOT_WHILE_TRADING` | 133 (0x85) |  |  |
-| `TARGET_NOT_IN_RAID` | 134 (0x86) |  |  |
-| `DISENCHANT_WHILE_LOOTING` | 135 (0x87) |  |  |
-| `PROSPECT_WHILE_LOOTING` | 136 (0x88) |  |  |
-| `PROSPECT_NEED_MORE` | 137 (0x89) |  |  |
-| `TARGET_FREEFORALL` | 138 (0x8A) |  |  |
-| `NO_EDIBLE_CORPSES` | 139 (0x8B) |  |  |
-| `ONLY_BATTLEGROUNDS` | 140 (0x8C) |  |  |
-| `TARGET_NOT_GHOST` | 141 (0x8D) |  |  |
-| `TOO_MANY_SKILLS` | 142 (0x8E) |  |  |
-| `TRANSFORM_UNUSABLE` | 143 (0x8F) |  |  |
-| `WRONG_WEATHER` | 144 (0x90) |  |  |
-| `DAMAGE_IMMUNE` | 145 (0x91) |  |  |
-| `PREVENTED_BY_MECHANIC` | 146 (0x92) |  |  |
-| `PLAY_TIME` | 147 (0x93) |  |  |
-| `REPUTATION` | 148 (0x94) |  |  |
-| `MIN_SKILL` | 149 (0x95) |  |  |
-| `NOT_IN_ARENA` | 150 (0x96) |  |  |
-| `NOT_ON_SHAPESHIFT` | 151 (0x97) |  |  |
-| `NOT_ON_STEALTHED` | 152 (0x98) |  |  |
-| `NOT_ON_DAMAGE_IMMUNE` | 153 (0x99) |  |  |
-| `NOT_ON_MOUNTED` | 154 (0x9A) |  |  |
-| `TOO_SHALLOW` | 155 (0x9B) |  |  |
-| `TARGET_NOT_IN_SANCTUARY` | 156 (0x9C) |  |  |
-| `TARGET_IS_TRIVIAL` | 157 (0x9D) |  |  |
-| `BM_OR_INVISGOD` | 158 (0x9E) |  |  |
-| `EXPERT_RIDING_REQUIREMENT` | 159 (0x9F) |  |  |
-| `ARTISAN_RIDING_REQUIREMENT` | 160 (0xA0) |  |  |
-| `NOT_IDLE` | 161 (0xA1) |  |  |
-| `NOT_INACTIVE` | 162 (0xA2) |  |  |
-| `PARTIAL_PLAYTIME` | 163 (0xA3) |  |  |
-| `NO_PLAYTIME` | 164 (0xA4) |  |  |
-| `NOT_IN_BATTLEGROUND` | 165 (0xA5) |  |  |
-| `ONLY_IN_ARENA` | 166 (0xA6) |  |  |
-| `TARGET_LOCKED_TO_RAID_INSTANCE` | 167 (0xA7) |  |  |
-| `UNKNOWN` | 168 (0xA8) |  |  |
+| Enumerator | Value  | Comment |
+| --------- | -------- | ------- |
+| `AFFECTING_COMBAT` | 0 (0x00) |  |
+| `ALREADY_AT_FULL_HEALTH` | 1 (0x01) |  |
+| `ALREADY_AT_FULL_MANA` | 2 (0x02) |  |
+| `ALREADY_AT_FULL_POWER` | 3 (0x03) |  |
+| `ALREADY_BEING_TAMED` | 4 (0x04) |  |
+| `ALREADY_HAVE_CHARM` | 5 (0x05) |  |
+| `ALREADY_HAVE_SUMMON` | 6 (0x06) |  |
+| `ALREADY_OPEN` | 7 (0x07) |  |
+| `AURA_BOUNCED` | 8 (0x08) |  |
+| `AUTOTRACK_INTERRUPTED` | 9 (0x09) |  |
+| `BAD_IMPLICIT_TARGETS` | 10 (0x0A) |  |
+| `BAD_TARGETS` | 11 (0x0B) |  |
+| `CANT_BE_CHARMED` | 12 (0x0C) |  |
+| `CANT_BE_DISENCHANTED` | 13 (0x0D) |  |
+| `CANT_BE_DISENCHANTED_SKILL` | 14 (0x0E) |  |
+| `CANT_BE_PROSPECTED` | 15 (0x0F) |  |
+| `CANT_CAST_ON_TAPPED` | 16 (0x10) |  |
+| `CANT_DUEL_WHILE_INVISIBLE` | 17 (0x11) |  |
+| `CANT_DUEL_WHILE_STEALTHED` | 18 (0x12) |  |
+| `CANT_STEALTH` | 19 (0x13) |  |
+| `CASTER_AURASTATE` | 20 (0x14) |  |
+| `CASTER_DEAD` | 21 (0x15) |  |
+| `CHARMED` | 22 (0x16) |  |
+| `CHEST_IN_USE` | 23 (0x17) |  |
+| `CONFUSED` | 24 (0x18) |  |
+| `DONT_REPORT` | 25 (0x19) |  |
+| `EQUIPPED_ITEM` | 26 (0x1A) |  |
+| `EQUIPPED_ITEM_CLASS` | 27 (0x1B) |  |
+| `EQUIPPED_ITEM_CLASS_MAINHAND` | 28 (0x1C) |  |
+| `EQUIPPED_ITEM_CLASS_OFFHAND` | 29 (0x1D) |  |
+| `ERROR` | 30 (0x1E) |  |
+| `FIZZLE` | 31 (0x1F) |  |
+| `FLEEING` | 32 (0x20) |  |
+| `FOOD_LOWLEVEL` | 33 (0x21) |  |
+| `HIGHLEVEL` | 34 (0x22) |  |
+| `HUNGER_SATIATED` | 35 (0x23) |  |
+| `IMMUNE` | 36 (0x24) |  |
+| `INTERRUPTED` | 37 (0x25) |  |
+| `INTERRUPTED_COMBAT` | 38 (0x26) |  |
+| `ITEM_ALREADY_ENCHANTED` | 39 (0x27) |  |
+| `ITEM_GONE` | 40 (0x28) |  |
+| `ITEM_NOT_FOUND` | 41 (0x29) |  |
+| `ITEM_NOT_READY` | 42 (0x2A) |  |
+| `LEVEL_REQUIREMENT` | 43 (0x2B) |  |
+| `LINE_OF_SIGHT` | 44 (0x2C) |  |
+| `LOWLEVEL` | 45 (0x2D) |  |
+| `LOW_CASTLEVEL` | 46 (0x2E) |  |
+| `MAINHAND_EMPTY` | 47 (0x2F) |  |
+| `MOVING` | 48 (0x30) |  |
+| `NEED_AMMO` | 49 (0x31) |  |
+| `NEED_AMMO_POUCH` | 50 (0x32) |  |
+| `NEED_EXOTIC_AMMO` | 51 (0x33) |  |
+| `NOPATH` | 52 (0x34) |  |
+| `NOT_BEHIND` | 53 (0x35) |  |
+| `NOT_FISHABLE` | 54 (0x36) |  |
+| `NOT_FLYING` | 55 (0x37) |  |
+| `NOT_HERE` | 56 (0x38) |  |
+| `NOT_INFRONT` | 57 (0x39) |  |
+| `NOT_IN_CONTROL` | 58 (0x3A) |  |
+| `NOT_KNOWN` | 59 (0x3B) |  |
+| `NOT_MOUNTED` | 60 (0x3C) |  |
+| `NOT_ON_TAXI` | 61 (0x3D) |  |
+| `NOT_ON_TRANSPORT` | 62 (0x3E) |  |
+| `NOT_READY` | 63 (0x3F) |  |
+| `NOT_SHAPESHIFT` | 64 (0x40) |  |
+| `NOT_STANDING` | 65 (0x41) |  |
+| `NOT_TRADEABLE` | 66 (0x42) |  |
+| `NOT_TRADING` | 67 (0x43) |  |
+| `NOT_UNSHEATHED` | 68 (0x44) |  |
+| `NOT_WHILE_GHOST` | 69 (0x45) |  |
+| `NO_AMMO` | 70 (0x46) |  |
+| `NO_CHARGES_REMAIN` | 71 (0x47) |  |
+| `NO_CHAMPION` | 72 (0x48) |  |
+| `NO_COMBO_POINTS` | 73 (0x49) |  |
+| `NO_DUELING` | 74 (0x4A) |  |
+| `NO_ENDURANCE` | 75 (0x4B) |  |
+| `NO_FISH` | 76 (0x4C) |  |
+| `NO_ITEMS_WHILE_SHAPESHIFTED` | 77 (0x4D) |  |
+| `NO_MOUNTS_ALLOWED` | 78 (0x4E) |  |
+| `NO_PET` | 79 (0x4F) |  |
+| `NO_POWER` | 80 (0x50) |  |
+| `NOTHING_TO_DISPEL` | 81 (0x51) |  |
+| `NOTHING_TO_STEAL` | 82 (0x52) |  |
+| `ONLY_ABOVEWATER` | 83 (0x53) |  |
+| `ONLY_DAYTIME` | 84 (0x54) |  |
+| `ONLY_INDOORS` | 85 (0x55) |  |
+| `ONLY_MOUNTED` | 86 (0x56) |  |
+| `ONLY_NIGHTTIME` | 87 (0x57) |  |
+| `ONLY_OUTDOORS` | 88 (0x58) |  |
+| `ONLY_SHAPESHIFT` | 89 (0x59) |  |
+| `ONLY_STEALTHED` | 90 (0x5A) |  |
+| `ONLY_UNDERWATER` | 91 (0x5B) |  |
+| `OUT_OF_RANGE` | 92 (0x5C) |  |
+| `PACIFIED` | 93 (0x5D) |  |
+| `POSSESSED` | 94 (0x5E) |  |
+| `REAGENTS` | 95 (0x5F) |  |
+| `REQUIRES_AREA` | 96 (0x60) |  |
+| `REQUIRES_SPELL_FOCUS` | 97 (0x61) |  |
+| `ROOTED` | 98 (0x62) |  |
+| `SILENCED` | 99 (0x63) |  |
+| `SPELL_IN_PROGRESS` | 100 (0x64) |  |
+| `SPELL_LEARNED` | 101 (0x65) |  |
+| `SPELL_UNAVAILABLE` | 102 (0x66) |  |
+| `STUNNED` | 103 (0x67) |  |
+| `TARGETS_DEAD` | 104 (0x68) |  |
+| `TARGET_AFFECTING_COMBAT` | 105 (0x69) |  |
+| `TARGET_AURASTATE` | 106 (0x6A) |  |
+| `TARGET_DUELING` | 107 (0x6B) |  |
+| `TARGET_ENEMY` | 108 (0x6C) |  |
+| `TARGET_ENRAGED` | 109 (0x6D) |  |
+| `TARGET_FRIENDLY` | 110 (0x6E) |  |
+| `TARGET_IN_COMBAT` | 111 (0x6F) |  |
+| `TARGET_IS_PLAYER` | 112 (0x70) |  |
+| `TARGET_IS_PLAYER_CONTROLLED` | 113 (0x71) |  |
+| `TARGET_NOT_DEAD` | 114 (0x72) |  |
+| `TARGET_NOT_IN_PARTY` | 115 (0x73) |  |
+| `TARGET_NOT_LOOTED` | 116 (0x74) |  |
+| `TARGET_NOT_PLAYER` | 117 (0x75) |  |
+| `TARGET_NO_POCKETS` | 118 (0x76) |  |
+| `TARGET_NO_WEAPONS` | 119 (0x77) |  |
+| `TARGET_UNSKINNABLE` | 120 (0x78) |  |
+| `THIRST_SATIATED` | 121 (0x79) |  |
+| `TOO_CLOSE` | 122 (0x7A) |  |
+| `TOO_MANY_OF_ITEM` | 123 (0x7B) |  |
+| `TOTEM_CATEGORY` | 124 (0x7C) |  |
+| `TOTEMS` | 125 (0x7D) |  |
+| `TRAINING_POINTS` | 126 (0x7E) |  |
+| `TRY_AGAIN` | 127 (0x7F) |  |
+| `UNIT_NOT_BEHIND` | 128 (0x80) |  |
+| `UNIT_NOT_INFRONT` | 129 (0x81) |  |
+| `WRONG_PET_FOOD` | 130 (0x82) |  |
+| `NOT_WHILE_FATIGUED` | 131 (0x83) |  |
+| `TARGET_NOT_IN_INSTANCE` | 132 (0x84) |  |
+| `NOT_WHILE_TRADING` | 133 (0x85) |  |
+| `TARGET_NOT_IN_RAID` | 134 (0x86) |  |
+| `DISENCHANT_WHILE_LOOTING` | 135 (0x87) |  |
+| `PROSPECT_WHILE_LOOTING` | 136 (0x88) |  |
+| `PROSPECT_NEED_MORE` | 137 (0x89) |  |
+| `TARGET_FREEFORALL` | 138 (0x8A) |  |
+| `NO_EDIBLE_CORPSES` | 139 (0x8B) |  |
+| `ONLY_BATTLEGROUNDS` | 140 (0x8C) |  |
+| `TARGET_NOT_GHOST` | 141 (0x8D) |  |
+| `TOO_MANY_SKILLS` | 142 (0x8E) |  |
+| `TRANSFORM_UNUSABLE` | 143 (0x8F) |  |
+| `WRONG_WEATHER` | 144 (0x90) |  |
+| `DAMAGE_IMMUNE` | 145 (0x91) |  |
+| `PREVENTED_BY_MECHANIC` | 146 (0x92) |  |
+| `PLAY_TIME` | 147 (0x93) |  |
+| `REPUTATION` | 148 (0x94) |  |
+| `MIN_SKILL` | 149 (0x95) |  |
+| `NOT_IN_ARENA` | 150 (0x96) |  |
+| `NOT_ON_SHAPESHIFT` | 151 (0x97) |  |
+| `NOT_ON_STEALTHED` | 152 (0x98) |  |
+| `NOT_ON_DAMAGE_IMMUNE` | 153 (0x99) |  |
+| `NOT_ON_MOUNTED` | 154 (0x9A) |  |
+| `TOO_SHALLOW` | 155 (0x9B) |  |
+| `TARGET_NOT_IN_SANCTUARY` | 156 (0x9C) |  |
+| `TARGET_IS_TRIVIAL` | 157 (0x9D) |  |
+| `BM_OR_INVISGOD` | 158 (0x9E) |  |
+| `EXPERT_RIDING_REQUIREMENT` | 159 (0x9F) |  |
+| `ARTISAN_RIDING_REQUIREMENT` | 160 (0xA0) |  |
+| `NOT_IDLE` | 161 (0xA1) |  |
+| `NOT_INACTIVE` | 162 (0xA2) |  |
+| `PARTIAL_PLAYTIME` | 163 (0xA3) |  |
+| `NO_PLAYTIME` | 164 (0xA4) |  |
+| `NOT_IN_BATTLEGROUND` | 165 (0xA5) |  |
+| `ONLY_IN_ARENA` | 166 (0xA6) |  |
+| `TARGET_LOCKED_TO_RAID_INSTANCE` | 167 (0xA7) |  |
+| `UNKNOWN` | 168 (0xA8) |  |
 
 Used in:
 * [SMSG_CAST_FAILED](smsg_cast_failed.md)
@@ -862,196 +862,196 @@ enum SpellCastResult : u8 {
 ### Type
 The basic type is `u8`, a 1 byte (8 bit) integer.
 ### Enumerators
-| Enumerator | Value  | Description | Comment |
-| --------- | -------- | ----------- | ------- |
-| `SUCCESS` | 0 (0x00) |  |  |
-| `AFFECTING_COMBAT` | 1 (0x01) |  |  |
-| `ALREADY_AT_FULL_HEALTH` | 2 (0x02) |  |  |
-| `ALREADY_AT_FULL_MANA` | 3 (0x03) |  |  |
-| `ALREADY_AT_FULL_POWER` | 4 (0x04) |  |  |
-| `ALREADY_BEING_TAMED` | 5 (0x05) |  |  |
-| `ALREADY_HAVE_CHARM` | 6 (0x06) |  |  |
-| `ALREADY_HAVE_SUMMON` | 7 (0x07) |  |  |
-| `ALREADY_OPEN` | 8 (0x08) |  |  |
-| `AURA_BOUNCED` | 9 (0x09) |  |  |
-| `AUTOTRACK_INTERRUPTED` | 10 (0x0A) |  |  |
-| `BAD_IMPLICIT_TARGETS` | 11 (0x0B) |  |  |
-| `BAD_TARGETS` | 12 (0x0C) |  |  |
-| `CANT_BE_CHARMED` | 13 (0x0D) |  |  |
-| `CANT_BE_DISENCHANTED` | 14 (0x0E) |  |  |
-| `CANT_BE_DISENCHANTED_SKILL` | 15 (0x0F) |  |  |
-| `CANT_BE_MILLED` | 16 (0x10) |  |  |
-| `CANT_BE_PROSPECTED` | 17 (0x11) |  |  |
-| `CANT_CAST_ON_TAPPED` | 18 (0x12) |  |  |
-| `CANT_DUEL_WHILE_INVISIBLE` | 19 (0x13) |  |  |
-| `CANT_DUEL_WHILE_STEALTHED` | 20 (0x14) |  |  |
-| `CANT_STEALTH` | 21 (0x15) |  |  |
-| `CASTER_AURASTATE` | 22 (0x16) |  |  |
-| `CASTER_DEAD` | 23 (0x17) |  |  |
-| `CHARMED` | 24 (0x18) |  |  |
-| `CHEST_IN_USE` | 25 (0x19) |  |  |
-| `CONFUSED` | 26 (0x1A) |  |  |
-| `DONT_REPORT` | 27 (0x1B) |  |  |
-| `EQUIPPED_ITEM` | 28 (0x1C) |  |  |
-| `EQUIPPED_ITEM_CLASS` | 29 (0x1D) |  |  |
-| `EQUIPPED_ITEM_CLASS_MAINHAND` | 30 (0x1E) |  |  |
-| `EQUIPPED_ITEM_CLASS_OFFHAND` | 31 (0x1F) |  |  |
-| `ERROR` | 32 (0x20) |  |  |
-| `FIZZLE` | 33 (0x21) |  |  |
-| `FLEEING` | 34 (0x22) |  |  |
-| `FOOD_LOWLEVEL` | 35 (0x23) |  |  |
-| `HIGHLEVEL` | 36 (0x24) |  |  |
-| `HUNGER_SATIATED` | 37 (0x25) |  |  |
-| `IMMUNE` | 38 (0x26) |  |  |
-| `INCORRECT_AREA` | 39 (0x27) |  |  |
-| `INTERRUPTED` | 40 (0x28) |  |  |
-| `INTERRUPTED_COMBAT` | 41 (0x29) |  |  |
-| `ITEM_ALREADY_ENCHANTED` | 42 (0x2A) |  |  |
-| `ITEM_GONE` | 43 (0x2B) |  |  |
-| `ITEM_NOT_FOUND` | 44 (0x2C) |  |  |
-| `ITEM_NOT_READY` | 45 (0x2D) |  |  |
-| `LEVEL_REQUIREMENT` | 46 (0x2E) |  |  |
-| `LINE_OF_SIGHT` | 47 (0x2F) |  |  |
-| `LOWLEVEL` | 48 (0x30) |  |  |
-| `LOW_CASTLEVEL` | 49 (0x31) |  |  |
-| `MAINHAND_EMPTY` | 50 (0x32) |  |  |
-| `MOVING` | 51 (0x33) |  |  |
-| `NEED_AMMO` | 52 (0x34) |  |  |
-| `NEED_AMMO_POUCH` | 53 (0x35) |  |  |
-| `NEED_EXOTIC_AMMO` | 54 (0x36) |  |  |
-| `NEED_MORE_ITEMS` | 55 (0x37) |  |  |
-| `NOPATH` | 56 (0x38) |  |  |
-| `NOT_BEHIND` | 57 (0x39) |  |  |
-| `NOT_FISHABLE` | 58 (0x3A) |  |  |
-| `NOT_FLYING` | 59 (0x3B) |  |  |
-| `NOT_HERE` | 60 (0x3C) |  |  |
-| `NOT_INFRONT` | 61 (0x3D) |  |  |
-| `NOT_IN_CONTROL` | 62 (0x3E) |  |  |
-| `NOT_KNOWN` | 63 (0x3F) |  |  |
-| `NOT_MOUNTED` | 64 (0x40) |  |  |
-| `NOT_ON_TAXI` | 65 (0x41) |  |  |
-| `NOT_ON_TRANSPORT` | 66 (0x42) |  |  |
-| `NOT_READY` | 67 (0x43) |  |  |
-| `NOT_SHAPESHIFT` | 68 (0x44) |  |  |
-| `NOT_STANDING` | 69 (0x45) |  |  |
-| `NOT_TRADEABLE` | 70 (0x46) |  |  |
-| `NOT_TRADING` | 71 (0x47) |  |  |
-| `NOT_UNSHEATHED` | 72 (0x48) |  |  |
-| `NOT_WHILE_GHOST` | 73 (0x49) |  |  |
-| `NOT_WHILE_LOOTING` | 74 (0x4A) |  |  |
-| `NO_AMMO` | 75 (0x4B) |  |  |
-| `NO_CHARGES_REMAIN` | 76 (0x4C) |  |  |
-| `NO_CHAMPION` | 77 (0x4D) |  |  |
-| `NO_COMBO_POINTS` | 78 (0x4E) |  |  |
-| `NO_DUELING` | 79 (0x4F) |  |  |
-| `NO_ENDURANCE` | 80 (0x50) |  |  |
-| `NO_FISH` | 81 (0x51) |  |  |
-| `NO_ITEMS_WHILE_SHAPESHIFTED` | 82 (0x52) |  |  |
-| `NO_MOUNTS_ALLOWED` | 83 (0x53) |  |  |
-| `NO_PET` | 84 (0x54) |  |  |
-| `NO_POWER` | 85 (0x55) |  |  |
-| `NOTHING_TO_DISPEL` | 86 (0x56) |  |  |
-| `NOTHING_TO_STEAL` | 87 (0x57) |  |  |
-| `ONLY_ABOVEWATER` | 88 (0x58) |  |  |
-| `ONLY_DAYTIME` | 89 (0x59) |  |  |
-| `ONLY_INDOORS` | 90 (0x5A) |  |  |
-| `ONLY_MOUNTED` | 91 (0x5B) |  |  |
-| `ONLY_NIGHTTIME` | 92 (0x5C) |  |  |
-| `ONLY_OUTDOORS` | 93 (0x5D) |  |  |
-| `ONLY_SHAPESHIFT` | 94 (0x5E) |  |  |
-| `ONLY_STEALTHED` | 95 (0x5F) |  |  |
-| `ONLY_UNDERWATER` | 96 (0x60) |  |  |
-| `OUT_OF_RANGE` | 97 (0x61) |  |  |
-| `PACIFIED` | 98 (0x62) |  |  |
-| `POSSESSED` | 99 (0x63) |  |  |
-| `REAGENTS` | 100 (0x64) |  |  |
-| `REQUIRES_AREA` | 101 (0x65) |  |  |
-| `REQUIRES_SPELL_FOCUS` | 102 (0x66) |  |  |
-| `ROOTED` | 103 (0x67) |  |  |
-| `SILENCED` | 104 (0x68) |  |  |
-| `SPELL_IN_PROGRESS` | 105 (0x69) |  |  |
-| `SPELL_LEARNED` | 106 (0x6A) |  |  |
-| `SPELL_UNAVAILABLE` | 107 (0x6B) |  |  |
-| `STUNNED` | 108 (0x6C) |  |  |
-| `TARGETS_DEAD` | 109 (0x6D) |  |  |
-| `TARGET_AFFECTING_COMBAT` | 110 (0x6E) |  |  |
-| `TARGET_AURASTATE` | 111 (0x6F) |  |  |
-| `TARGET_DUELING` | 112 (0x70) |  |  |
-| `TARGET_ENEMY` | 113 (0x71) |  |  |
-| `TARGET_ENRAGED` | 114 (0x72) |  |  |
-| `TARGET_FRIENDLY` | 115 (0x73) |  |  |
-| `TARGET_IN_COMBAT` | 116 (0x74) |  |  |
-| `TARGET_IS_PLAYER` | 117 (0x75) |  |  |
-| `TARGET_IS_PLAYER_CONTROLLED` | 118 (0x76) |  |  |
-| `TARGET_NOT_DEAD` | 119 (0x77) |  |  |
-| `TARGET_NOT_IN_PARTY` | 120 (0x78) |  |  |
-| `TARGET_NOT_LOOTED` | 121 (0x79) |  |  |
-| `TARGET_NOT_PLAYER` | 122 (0x7A) |  |  |
-| `TARGET_NO_POCKETS` | 123 (0x7B) |  |  |
-| `TARGET_NO_WEAPONS` | 124 (0x7C) |  |  |
-| `TARGET_NO_RANGED_WEAPONS` | 125 (0x7D) |  |  |
-| `TARGET_UNSKINNABLE` | 126 (0x7E) |  |  |
-| `THIRST_SATIATED` | 127 (0x7F) |  |  |
-| `TOO_CLOSE` | 128 (0x80) |  |  |
-| `TOO_MANY_OF_ITEM` | 129 (0x81) |  |  |
-| `TOTEM_CATEGORY` | 130 (0x82) |  |  |
-| `TOTEMS` | 131 (0x83) |  |  |
-| `TRY_AGAIN` | 132 (0x84) |  |  |
-| `UNIT_NOT_BEHIND` | 133 (0x85) |  |  |
-| `UNIT_NOT_INFRONT` | 134 (0x86) |  |  |
-| `WRONG_PET_FOOD` | 135 (0x87) |  |  |
-| `NOT_WHILE_FATIGUED` | 136 (0x88) |  |  |
-| `TARGET_NOT_IN_INSTANCE` | 137 (0x89) |  |  |
-| `NOT_WHILE_TRADING` | 138 (0x8A) |  |  |
-| `TARGET_NOT_IN_RAID` | 139 (0x8B) |  |  |
-| `TARGET_FREEFORALL` | 140 (0x8C) |  |  |
-| `NO_EDIBLE_CORPSES` | 141 (0x8D) |  |  |
-| `ONLY_BATTLEGROUNDS` | 142 (0x8E) |  |  |
-| `TARGET_NOT_GHOST` | 143 (0x8F) |  |  |
-| `TRANSFORM_UNUSABLE` | 144 (0x90) |  |  |
-| `WRONG_WEATHER` | 145 (0x91) |  |  |
-| `DAMAGE_IMMUNE` | 146 (0x92) |  |  |
-| `PREVENTED_BY_MECHANIC` | 147 (0x93) |  |  |
-| `PLAY_TIME` | 148 (0x94) |  |  |
-| `REPUTATION` | 149 (0x95) |  |  |
-| `MIN_SKILL` | 150 (0x96) |  |  |
-| `NOT_IN_ARENA` | 151 (0x97) |  |  |
-| `NOT_ON_SHAPESHIFT` | 152 (0x98) |  |  |
-| `NOT_ON_STEALTHED` | 153 (0x99) |  |  |
-| `NOT_ON_DAMAGE_IMMUNE` | 154 (0x9A) |  |  |
-| `NOT_ON_MOUNTED` | 155 (0x9B) |  |  |
-| `TOO_SHALLOW` | 156 (0x9C) |  |  |
-| `TARGET_NOT_IN_SANCTUARY` | 157 (0x9D) |  |  |
-| `TARGET_IS_TRIVIAL` | 158 (0x9E) |  |  |
-| `BM_OR_INVISGOD` | 159 (0x9F) |  |  |
-| `EXPERT_RIDING_REQUIREMENT` | 160 (0xA0) |  |  |
-| `ARTISAN_RIDING_REQUIREMENT` | 161 (0xA1) |  |  |
-| `NOT_IDLE` | 162 (0xA2) |  |  |
-| `NOT_INACTIVE` | 163 (0xA3) |  |  |
-| `PARTIAL_PLAYTIME` | 164 (0xA4) |  |  |
-| `NO_PLAYTIME` | 165 (0xA5) |  |  |
-| `NOT_IN_BATTLEGROUND` | 166 (0xA6) |  |  |
-| `NOT_IN_RAID_INSTANCE` | 167 (0xA7) |  |  |
-| `ONLY_IN_ARENA` | 168 (0xA8) |  |  |
-| `TARGET_LOCKED_TO_RAID_INSTANCE` | 169 (0xA9) |  |  |
-| `ON_USE_ENCHANT` | 170 (0xAA) |  |  |
-| `NOT_ON_GROUND` | 171 (0xAB) |  |  |
-| `CUSTOM_ERROR` | 172 (0xAC) |  |  |
-| `CANT_DO_THAT_RIGHT_NOW` | 173 (0xAD) |  |  |
-| `TOO_MANY_SOCKETS` | 174 (0xAE) |  |  |
-| `INVALID_GLYPH` | 175 (0xAF) |  |  |
-| `UNIQUE_GLYPH` | 176 (0xB0) |  |  |
-| `GLYPH_SOCKET_LOCKED` | 177 (0xB1) |  |  |
-| `NO_VALID_TARGETS` | 178 (0xB2) |  |  |
-| `ITEM_AT_MAX_CHARGES` | 179 (0xB3) |  |  |
-| `NOT_IN_BARBERSHOP` | 180 (0xB4) |  |  |
-| `FISHING_TOO_LOW` | 181 (0xB5) |  |  |
-| `ITEM_ENCHANT_TRADE_WINDOW` | 182 (0xB6) |  |  |
-| `SUMMON_PENDING` | 183 (0xB7) |  |  |
-| `MAX_SOCKETS` | 184 (0xB8) |  |  |
-| `PET_CAN_RENAME` | 185 (0xB9) |  |  |
-| `TARGET_CANNOT_BE_RESURRECTED` | 186 (0xBA) |  |  |
-| `UNKNOWN` | 187 (0xBB) |  |  |
+| Enumerator | Value  | Comment |
+| --------- | -------- | ------- |
+| `SUCCESS` | 0 (0x00) |  |
+| `AFFECTING_COMBAT` | 1 (0x01) |  |
+| `ALREADY_AT_FULL_HEALTH` | 2 (0x02) |  |
+| `ALREADY_AT_FULL_MANA` | 3 (0x03) |  |
+| `ALREADY_AT_FULL_POWER` | 4 (0x04) |  |
+| `ALREADY_BEING_TAMED` | 5 (0x05) |  |
+| `ALREADY_HAVE_CHARM` | 6 (0x06) |  |
+| `ALREADY_HAVE_SUMMON` | 7 (0x07) |  |
+| `ALREADY_OPEN` | 8 (0x08) |  |
+| `AURA_BOUNCED` | 9 (0x09) |  |
+| `AUTOTRACK_INTERRUPTED` | 10 (0x0A) |  |
+| `BAD_IMPLICIT_TARGETS` | 11 (0x0B) |  |
+| `BAD_TARGETS` | 12 (0x0C) |  |
+| `CANT_BE_CHARMED` | 13 (0x0D) |  |
+| `CANT_BE_DISENCHANTED` | 14 (0x0E) |  |
+| `CANT_BE_DISENCHANTED_SKILL` | 15 (0x0F) |  |
+| `CANT_BE_MILLED` | 16 (0x10) |  |
+| `CANT_BE_PROSPECTED` | 17 (0x11) |  |
+| `CANT_CAST_ON_TAPPED` | 18 (0x12) |  |
+| `CANT_DUEL_WHILE_INVISIBLE` | 19 (0x13) |  |
+| `CANT_DUEL_WHILE_STEALTHED` | 20 (0x14) |  |
+| `CANT_STEALTH` | 21 (0x15) |  |
+| `CASTER_AURASTATE` | 22 (0x16) |  |
+| `CASTER_DEAD` | 23 (0x17) |  |
+| `CHARMED` | 24 (0x18) |  |
+| `CHEST_IN_USE` | 25 (0x19) |  |
+| `CONFUSED` | 26 (0x1A) |  |
+| `DONT_REPORT` | 27 (0x1B) |  |
+| `EQUIPPED_ITEM` | 28 (0x1C) |  |
+| `EQUIPPED_ITEM_CLASS` | 29 (0x1D) |  |
+| `EQUIPPED_ITEM_CLASS_MAINHAND` | 30 (0x1E) |  |
+| `EQUIPPED_ITEM_CLASS_OFFHAND` | 31 (0x1F) |  |
+| `ERROR` | 32 (0x20) |  |
+| `FIZZLE` | 33 (0x21) |  |
+| `FLEEING` | 34 (0x22) |  |
+| `FOOD_LOWLEVEL` | 35 (0x23) |  |
+| `HIGHLEVEL` | 36 (0x24) |  |
+| `HUNGER_SATIATED` | 37 (0x25) |  |
+| `IMMUNE` | 38 (0x26) |  |
+| `INCORRECT_AREA` | 39 (0x27) |  |
+| `INTERRUPTED` | 40 (0x28) |  |
+| `INTERRUPTED_COMBAT` | 41 (0x29) |  |
+| `ITEM_ALREADY_ENCHANTED` | 42 (0x2A) |  |
+| `ITEM_GONE` | 43 (0x2B) |  |
+| `ITEM_NOT_FOUND` | 44 (0x2C) |  |
+| `ITEM_NOT_READY` | 45 (0x2D) |  |
+| `LEVEL_REQUIREMENT` | 46 (0x2E) |  |
+| `LINE_OF_SIGHT` | 47 (0x2F) |  |
+| `LOWLEVEL` | 48 (0x30) |  |
+| `LOW_CASTLEVEL` | 49 (0x31) |  |
+| `MAINHAND_EMPTY` | 50 (0x32) |  |
+| `MOVING` | 51 (0x33) |  |
+| `NEED_AMMO` | 52 (0x34) |  |
+| `NEED_AMMO_POUCH` | 53 (0x35) |  |
+| `NEED_EXOTIC_AMMO` | 54 (0x36) |  |
+| `NEED_MORE_ITEMS` | 55 (0x37) |  |
+| `NOPATH` | 56 (0x38) |  |
+| `NOT_BEHIND` | 57 (0x39) |  |
+| `NOT_FISHABLE` | 58 (0x3A) |  |
+| `NOT_FLYING` | 59 (0x3B) |  |
+| `NOT_HERE` | 60 (0x3C) |  |
+| `NOT_INFRONT` | 61 (0x3D) |  |
+| `NOT_IN_CONTROL` | 62 (0x3E) |  |
+| `NOT_KNOWN` | 63 (0x3F) |  |
+| `NOT_MOUNTED` | 64 (0x40) |  |
+| `NOT_ON_TAXI` | 65 (0x41) |  |
+| `NOT_ON_TRANSPORT` | 66 (0x42) |  |
+| `NOT_READY` | 67 (0x43) |  |
+| `NOT_SHAPESHIFT` | 68 (0x44) |  |
+| `NOT_STANDING` | 69 (0x45) |  |
+| `NOT_TRADEABLE` | 70 (0x46) |  |
+| `NOT_TRADING` | 71 (0x47) |  |
+| `NOT_UNSHEATHED` | 72 (0x48) |  |
+| `NOT_WHILE_GHOST` | 73 (0x49) |  |
+| `NOT_WHILE_LOOTING` | 74 (0x4A) |  |
+| `NO_AMMO` | 75 (0x4B) |  |
+| `NO_CHARGES_REMAIN` | 76 (0x4C) |  |
+| `NO_CHAMPION` | 77 (0x4D) |  |
+| `NO_COMBO_POINTS` | 78 (0x4E) |  |
+| `NO_DUELING` | 79 (0x4F) |  |
+| `NO_ENDURANCE` | 80 (0x50) |  |
+| `NO_FISH` | 81 (0x51) |  |
+| `NO_ITEMS_WHILE_SHAPESHIFTED` | 82 (0x52) |  |
+| `NO_MOUNTS_ALLOWED` | 83 (0x53) |  |
+| `NO_PET` | 84 (0x54) |  |
+| `NO_POWER` | 85 (0x55) |  |
+| `NOTHING_TO_DISPEL` | 86 (0x56) |  |
+| `NOTHING_TO_STEAL` | 87 (0x57) |  |
+| `ONLY_ABOVEWATER` | 88 (0x58) |  |
+| `ONLY_DAYTIME` | 89 (0x59) |  |
+| `ONLY_INDOORS` | 90 (0x5A) |  |
+| `ONLY_MOUNTED` | 91 (0x5B) |  |
+| `ONLY_NIGHTTIME` | 92 (0x5C) |  |
+| `ONLY_OUTDOORS` | 93 (0x5D) |  |
+| `ONLY_SHAPESHIFT` | 94 (0x5E) |  |
+| `ONLY_STEALTHED` | 95 (0x5F) |  |
+| `ONLY_UNDERWATER` | 96 (0x60) |  |
+| `OUT_OF_RANGE` | 97 (0x61) |  |
+| `PACIFIED` | 98 (0x62) |  |
+| `POSSESSED` | 99 (0x63) |  |
+| `REAGENTS` | 100 (0x64) |  |
+| `REQUIRES_AREA` | 101 (0x65) |  |
+| `REQUIRES_SPELL_FOCUS` | 102 (0x66) |  |
+| `ROOTED` | 103 (0x67) |  |
+| `SILENCED` | 104 (0x68) |  |
+| `SPELL_IN_PROGRESS` | 105 (0x69) |  |
+| `SPELL_LEARNED` | 106 (0x6A) |  |
+| `SPELL_UNAVAILABLE` | 107 (0x6B) |  |
+| `STUNNED` | 108 (0x6C) |  |
+| `TARGETS_DEAD` | 109 (0x6D) |  |
+| `TARGET_AFFECTING_COMBAT` | 110 (0x6E) |  |
+| `TARGET_AURASTATE` | 111 (0x6F) |  |
+| `TARGET_DUELING` | 112 (0x70) |  |
+| `TARGET_ENEMY` | 113 (0x71) |  |
+| `TARGET_ENRAGED` | 114 (0x72) |  |
+| `TARGET_FRIENDLY` | 115 (0x73) |  |
+| `TARGET_IN_COMBAT` | 116 (0x74) |  |
+| `TARGET_IS_PLAYER` | 117 (0x75) |  |
+| `TARGET_IS_PLAYER_CONTROLLED` | 118 (0x76) |  |
+| `TARGET_NOT_DEAD` | 119 (0x77) |  |
+| `TARGET_NOT_IN_PARTY` | 120 (0x78) |  |
+| `TARGET_NOT_LOOTED` | 121 (0x79) |  |
+| `TARGET_NOT_PLAYER` | 122 (0x7A) |  |
+| `TARGET_NO_POCKETS` | 123 (0x7B) |  |
+| `TARGET_NO_WEAPONS` | 124 (0x7C) |  |
+| `TARGET_NO_RANGED_WEAPONS` | 125 (0x7D) |  |
+| `TARGET_UNSKINNABLE` | 126 (0x7E) |  |
+| `THIRST_SATIATED` | 127 (0x7F) |  |
+| `TOO_CLOSE` | 128 (0x80) |  |
+| `TOO_MANY_OF_ITEM` | 129 (0x81) |  |
+| `TOTEM_CATEGORY` | 130 (0x82) |  |
+| `TOTEMS` | 131 (0x83) |  |
+| `TRY_AGAIN` | 132 (0x84) |  |
+| `UNIT_NOT_BEHIND` | 133 (0x85) |  |
+| `UNIT_NOT_INFRONT` | 134 (0x86) |  |
+| `WRONG_PET_FOOD` | 135 (0x87) |  |
+| `NOT_WHILE_FATIGUED` | 136 (0x88) |  |
+| `TARGET_NOT_IN_INSTANCE` | 137 (0x89) |  |
+| `NOT_WHILE_TRADING` | 138 (0x8A) |  |
+| `TARGET_NOT_IN_RAID` | 139 (0x8B) |  |
+| `TARGET_FREEFORALL` | 140 (0x8C) |  |
+| `NO_EDIBLE_CORPSES` | 141 (0x8D) |  |
+| `ONLY_BATTLEGROUNDS` | 142 (0x8E) |  |
+| `TARGET_NOT_GHOST` | 143 (0x8F) |  |
+| `TRANSFORM_UNUSABLE` | 144 (0x90) |  |
+| `WRONG_WEATHER` | 145 (0x91) |  |
+| `DAMAGE_IMMUNE` | 146 (0x92) |  |
+| `PREVENTED_BY_MECHANIC` | 147 (0x93) |  |
+| `PLAY_TIME` | 148 (0x94) |  |
+| `REPUTATION` | 149 (0x95) |  |
+| `MIN_SKILL` | 150 (0x96) |  |
+| `NOT_IN_ARENA` | 151 (0x97) |  |
+| `NOT_ON_SHAPESHIFT` | 152 (0x98) |  |
+| `NOT_ON_STEALTHED` | 153 (0x99) |  |
+| `NOT_ON_DAMAGE_IMMUNE` | 154 (0x9A) |  |
+| `NOT_ON_MOUNTED` | 155 (0x9B) |  |
+| `TOO_SHALLOW` | 156 (0x9C) |  |
+| `TARGET_NOT_IN_SANCTUARY` | 157 (0x9D) |  |
+| `TARGET_IS_TRIVIAL` | 158 (0x9E) |  |
+| `BM_OR_INVISGOD` | 159 (0x9F) |  |
+| `EXPERT_RIDING_REQUIREMENT` | 160 (0xA0) |  |
+| `ARTISAN_RIDING_REQUIREMENT` | 161 (0xA1) |  |
+| `NOT_IDLE` | 162 (0xA2) |  |
+| `NOT_INACTIVE` | 163 (0xA3) |  |
+| `PARTIAL_PLAYTIME` | 164 (0xA4) |  |
+| `NO_PLAYTIME` | 165 (0xA5) |  |
+| `NOT_IN_BATTLEGROUND` | 166 (0xA6) |  |
+| `NOT_IN_RAID_INSTANCE` | 167 (0xA7) |  |
+| `ONLY_IN_ARENA` | 168 (0xA8) |  |
+| `TARGET_LOCKED_TO_RAID_INSTANCE` | 169 (0xA9) |  |
+| `ON_USE_ENCHANT` | 170 (0xAA) |  |
+| `NOT_ON_GROUND` | 171 (0xAB) |  |
+| `CUSTOM_ERROR` | 172 (0xAC) |  |
+| `CANT_DO_THAT_RIGHT_NOW` | 173 (0xAD) |  |
+| `TOO_MANY_SOCKETS` | 174 (0xAE) |  |
+| `INVALID_GLYPH` | 175 (0xAF) |  |
+| `UNIQUE_GLYPH` | 176 (0xB0) |  |
+| `GLYPH_SOCKET_LOCKED` | 177 (0xB1) |  |
+| `NO_VALID_TARGETS` | 178 (0xB2) |  |
+| `ITEM_AT_MAX_CHARGES` | 179 (0xB3) |  |
+| `NOT_IN_BARBERSHOP` | 180 (0xB4) |  |
+| `FISHING_TOO_LOW` | 181 (0xB5) |  |
+| `ITEM_ENCHANT_TRADE_WINDOW` | 182 (0xB6) |  |
+| `SUMMON_PENDING` | 183 (0xB7) |  |
+| `MAX_SOCKETS` | 184 (0xB8) |  |
+| `PET_CAN_RENAME` | 185 (0xB9) |  |
+| `TARGET_CANNOT_BE_RESURRECTED` | 186 (0xBA) |  |
+| `UNKNOWN` | 187 (0xBB) |  |
 
 Used in:
 * [SMSG_CAST_FAILED](smsg_cast_failed.md)

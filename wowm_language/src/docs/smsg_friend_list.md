@@ -24,8 +24,8 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | 1 / - | u8 | amount_of_friends |  |  |
-| 0x05 | ? / - | [Friend](friend.md)[amount_of_friends] | friends |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x04 | 1 / - | u8 | amount_of_friends |  |
+| 0x05 | ? / - | [Friend](friend.md)[amount_of_friends] | friends |  |
 

@@ -18,13 +18,13 @@ enum LootSlotType : u8 {
 ### Type
 The basic type is `u8`, a 1 byte (8 bit) integer.
 ### Enumerators
-| Enumerator | Value  | Description | Comment |
-| --------- | -------- | ----------- | ------- |
-| `TYPE_ALLOW_LOOT` | 0 (0x00) |  | player can loot the item. |
-| `TYPE_ROLL_ONGOING` | 1 (0x01) |  | roll is ongoing. player cannot loot. |
-| `TYPE_MASTER` | 2 (0x02) |  | item can only be distributed by group loot master. |
-| `TYPE_LOCKED` | 3 (0x03) |  | item is shown in red. player cannot loot. |
-| `TYPE_OWNER` | 4 (0x04) |  | ignore binding confirmation and etc, for single player looting |
+| Enumerator | Value  | Comment |
+| --------- | -------- | ------- |
+| `TYPE_ALLOW_LOOT` | 0 (0x00) | player can loot the item. |
+| `TYPE_ROLL_ONGOING` | 1 (0x01) | roll is ongoing. player cannot loot. |
+| `TYPE_MASTER` | 2 (0x02) | item can only be distributed by group loot master. |
+| `TYPE_LOCKED` | 3 (0x03) | item is shown in red. player cannot loot. |
+| `TYPE_OWNER` | 4 (0x04) | ignore binding confirmation and etc, for single player looting |
 
 Used in:
 * [LootItem](lootitem.md)

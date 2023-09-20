@@ -21,16 +21,16 @@ enum EncounterFrame : u32 {
 ### Type
 The basic type is `u32`, a 4 byte (32 bit) little endian integer.
 ### Enumerators
-| Enumerator | Value  | Description | Comment |
-| --------- | -------- | ----------- | ------- |
-| `ENGAGE` | 0 (0x00) |  |  |
-| `DISENGAGE` | 1 (0x01) |  |  |
-| `UPDATE_PRIORITY` | 2 (0x02) |  |  |
-| `ADD_TIMER` | 3 (0x03) |  |  |
-| `ENABLE_OBJECTIVE` | 4 (0x04) |  |  |
-| `UPDATE_OBJECTIVE` | 5 (0x05) |  |  |
-| `DISABLE_OBJECTIVE` | 6 (0x06) |  |  |
-| `REFRESH_FRAMES` | 7 (0x07) |  | azerothcore: can be used to refresh frames after unit was destroyed from client and send back (phase changes) |
+| Enumerator | Value  | Comment |
+| --------- | -------- | ------- |
+| `ENGAGE` | 0 (0x00) |  |
+| `DISENGAGE` | 1 (0x01) |  |
+| `UPDATE_PRIORITY` | 2 (0x02) |  |
+| `ADD_TIMER` | 3 (0x03) |  |
+| `ENABLE_OBJECTIVE` | 4 (0x04) |  |
+| `UPDATE_OBJECTIVE` | 5 (0x05) |  |
+| `DISABLE_OBJECTIVE` | 6 (0x06) |  |
+| `REFRESH_FRAMES` | 7 (0x07) | azerothcore: can be used to refresh frames after unit was destroyed from client and send back (phase changes) |
 
 Used in:
 * [SMSG_UPDATE_INSTANCE_ENCOUNTER_UNIT](smsg_update_instance_encounter_unit.md)

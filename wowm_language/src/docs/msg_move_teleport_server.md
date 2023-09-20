@@ -26,10 +26,10 @@ CMSG have a header of 6 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x06 | - / - | [PackedGuid](../types/packed-guid.md) | player |  |  |
-| - | - / - | [MovementInfo](movementinfo.md) | info |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x06 | - / - | [PackedGuid](../types/packed-guid.md) | player |  |
+| - | - / - | [MovementInfo](movementinfo.md) | info |  |
 
 ## Client Version 3.3.5
 
@@ -57,8 +57,8 @@ CMSG have a header of 6 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x06 | - / - | [PackedGuid](../types/packed-guid.md) | player |  |  |
-| - | - / - | [MovementInfo](movementinfo.md) | info |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x06 | - / - | [PackedGuid](../types/packed-guid.md) | player |  |
+| - | - / - | [MovementInfo](movementinfo.md) | info |  |
 

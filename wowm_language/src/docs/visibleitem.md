@@ -21,18 +21,18 @@ struct VisibleItem {
 ```
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x00 | 8 / Little | [Guid](../types/packed-guid.md) | creator |  |  |
-| 0x08 | 4 / Little | u32 | item |  |  |
-| 0x0C | 8 / - | u32[2] | enchants |  |  |
-| 0x14 | 4 / Little | u32 | padding5 |  |  |
-| 0x18 | 4 / Little | u32 | padding6 |  |  |
-| 0x1C | 4 / Little | u32 | padding7 |  |  |
-| 0x20 | 4 / Little | u32 | padding8 |  |  |
-| 0x24 | 4 / Little | u32 | padding9 |  |  |
-| 0x28 | 4 / Little | u32 | random_property_id |  |  |
-| 0x2C | 4 / Little | u32 | item_suffix_factor |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x00 | 8 / Little | [Guid](../types/packed-guid.md) | creator |  |
+| 0x08 | 4 / Little | u32 | item |  |
+| 0x0C | 8 / - | u32[2] | enchants |  |
+| 0x14 | 4 / Little | u32 | padding5 |  |
+| 0x18 | 4 / Little | u32 | padding6 |  |
+| 0x1C | 4 / Little | u32 | padding7 |  |
+| 0x20 | 4 / Little | u32 | padding8 |  |
+| 0x24 | 4 / Little | u32 | padding9 |  |
+| 0x28 | 4 / Little | u32 | random_property_id |  |
+| 0x2C | 4 / Little | u32 | item_suffix_factor |  |
 
 
 Used in:
@@ -53,13 +53,13 @@ struct VisibleItem {
 ```
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x00 | 8 / Little | [Guid](../types/packed-guid.md) | creator |  |  |
-| 0x08 | 4 / Little | u32 | item |  |  |
-| 0x0C | 24 / - | u32[6] | enchants |  |  |
-| 0x24 | 4 / Little | u32 | random_property_id |  |  |
-| 0x28 | 4 / Little | u32 | item_suffix_factor |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x00 | 8 / Little | [Guid](../types/packed-guid.md) | creator |  |
+| 0x08 | 4 / Little | u32 | item |  |
+| 0x0C | 24 / - | u32[6] | enchants |  |
+| 0x24 | 4 / Little | u32 | random_property_id |  |
+| 0x28 | 4 / Little | u32 | item_suffix_factor |  |
 
 
 Used in:
@@ -77,10 +77,10 @@ struct VisibleItem {
 ```
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x00 | 4 / Little | u32 | item |  |  |
-| 0x04 | 4 / - | u16[2] | enchants |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x00 | 4 / Little | u32 | item |  |
+| 0x04 | 4 / - | u16[2] | enchants |  |
 
 
 Used in:

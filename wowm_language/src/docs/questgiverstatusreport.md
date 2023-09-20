@@ -13,10 +13,10 @@ struct QuestGiverStatusReport {
 ```
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x00 | 8 / Little | [Guid](../types/packed-guid.md) | npc |  |  |
-| 0x08 | 1 / - | [QuestGiverStatus](questgiverstatus.md) | dialog_status |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x00 | 8 / Little | [Guid](../types/packed-guid.md) | npc |  |
+| 0x08 | 1 / - | [QuestGiverStatus](questgiverstatus.md) | dialog_status |  |
 
 
 Used in:
@@ -35,10 +35,10 @@ struct QuestGiverStatusReport {
 ```
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x00 | 8 / Little | [Guid](../types/packed-guid.md) | npc |  |  |
-| 0x08 | 1 / - | [QuestGiverStatus](questgiverstatus.md) | dialog_status |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x00 | 8 / Little | [Guid](../types/packed-guid.md) | npc |  |
+| 0x08 | 1 / - | [QuestGiverStatus](questgiverstatus.md) | dialog_status |  |
 
 
 Used in:

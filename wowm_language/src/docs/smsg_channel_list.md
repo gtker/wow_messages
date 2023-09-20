@@ -26,10 +26,10 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | - / - | CString | channel_name |  |  |
-| - | 1 / - | [ChannelFlags](channelflags.md) | channel_flags |  |  |
-| - | 4 / Little | u32 | amount_of_members |  |  |
-| - | ? / - | [ChannelMember](channelmember.md)[amount_of_members] | members |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| - | - / - | CString | channel_name |  |
+| - | 1 / - | [ChannelFlags](channelflags.md) | channel_flags |  |
+| - | 4 / Little | u32 | amount_of_members |  |
+| - | ? / - | [ChannelMember](channelmember.md)[amount_of_members] | members |  |
 

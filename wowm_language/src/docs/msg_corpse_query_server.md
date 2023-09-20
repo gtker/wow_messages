@@ -28,17 +28,17 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | 1 / - | [CorpseQueryResult](corpsequeryresult.md) | result |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x04 | 1 / - | [CorpseQueryResult](corpsequeryresult.md) | result |  |
 
 If result is equal to `FOUND`:
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x05 | 4 / - | [Map](map.md) | map |  |  |
-| 0x09 | 12 / - | [Vector3d](vector3d.md) | position |  |  |
-| 0x15 | 4 / - | [Map](map.md) | corpse_map |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x05 | 4 / - | [Map](map.md) | map |  |
+| 0x09 | 12 / - | [Vector3d](vector3d.md) | position |  |
+| 0x15 | 4 / - | [Map](map.md) | corpse_map |  |
 
 ## Client Version 2.4.3
 
@@ -68,17 +68,17 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | 1 / - | [CorpseQueryResult](corpsequeryresult.md) | result |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x04 | 1 / - | [CorpseQueryResult](corpsequeryresult.md) | result |  |
 
 If result is equal to `FOUND`:
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x05 | 4 / - | [Map](map.md) | map |  |  |
-| 0x09 | 12 / - | [Vector3d](vector3d.md) | position |  |  |
-| 0x15 | 4 / - | [Map](map.md) | corpse_map |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x05 | 4 / - | [Map](map.md) | map |  |
+| 0x09 | 12 / - | [Vector3d](vector3d.md) | position |  |
+| 0x15 | 4 / - | [Map](map.md) | corpse_map |  |
 
 ## Client Version 3.3.5
 
@@ -109,16 +109,16 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | 1 / - | [CorpseQueryResult](corpsequeryresult.md) | result |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| - | 1 / - | [CorpseQueryResult](corpsequeryresult.md) | result |  |
 
 If result is equal to `FOUND`:
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | 4 / - | [Map](map.md) | map |  |  |
-| - | 12 / - | [Vector3d](vector3d.md) | position |  |  |
-| - | 4 / - | [Map](map.md) | corpse_map |  |  |
-| - | 4 / Little | u32 | unknown |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| - | 4 / - | [Map](map.md) | map |  |
+| - | 12 / - | [Vector3d](vector3d.md) | position |  |
+| - | 4 / - | [Map](map.md) | corpse_map |  |
+| - | 4 / Little | u32 | unknown |  |
 

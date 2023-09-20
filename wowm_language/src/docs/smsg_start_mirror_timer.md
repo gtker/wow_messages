@@ -28,12 +28,12 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | 4 / - | [TimerType](timertype.md) | timer |  |  |
-| 0x08 | 4 / Little | u32 | time_remaining |  |  |
-| 0x0C | 4 / Little | u32 | duration |  |  |
-| 0x10 | 4 / Little | u32 | scale |  |  |
-| 0x14 | 1 / - | Bool | is_frozen |  |  |
-| 0x15 | 4 / Little | u32 | id |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x04 | 4 / - | [TimerType](timertype.md) | timer |  |
+| 0x08 | 4 / Little | u32 | time_remaining |  |
+| 0x0C | 4 / Little | u32 | duration |  |
+| 0x10 | 4 / Little | u32 | scale |  |
+| 0x14 | 1 / - | Bool | is_frozen |  |
+| 0x15 | 4 / Little | u32 | id |  |
 

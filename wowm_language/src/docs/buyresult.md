@@ -22,17 +22,17 @@ enum BuyResult : u8 {
 ### Type
 The basic type is `u8`, a 1 byte (8 bit) integer.
 ### Enumerators
-| Enumerator | Value  | Description | Comment |
-| --------- | -------- | ----------- | ------- |
-| `CANT_FIND_ITEM` | 0 (0x00) |  |  |
-| `ITEM_ALREADY_SOLD` | 1 (0x01) |  |  |
-| `NOT_ENOUGHT_MONEY` | 2 (0x02) |  |  |
-| `SELLER_DONT_LIKE_YOU` | 4 (0x04) |  |  |
-| `DISTANCE_TOO_FAR` | 5 (0x05) |  |  |
-| `ITEM_SOLD_OUT` | 7 (0x07) |  |  |
-| `CANT_CARRY_MORE` | 8 (0x08) |  |  |
-| `RANK_REQUIRE` | 11 (0x0B) |  |  |
-| `REPUTATION_REQUIRE` | 12 (0x0C) |  |  |
+| Enumerator | Value  | Comment |
+| --------- | -------- | ------- |
+| `CANT_FIND_ITEM` | 0 (0x00) |  |
+| `ITEM_ALREADY_SOLD` | 1 (0x01) |  |
+| `NOT_ENOUGHT_MONEY` | 2 (0x02) |  |
+| `SELLER_DONT_LIKE_YOU` | 4 (0x04) |  |
+| `DISTANCE_TOO_FAR` | 5 (0x05) |  |
+| `ITEM_SOLD_OUT` | 7 (0x07) |  |
+| `CANT_CARRY_MORE` | 8 (0x08) |  |
+| `RANK_REQUIRE` | 11 (0x0B) |  |
+| `REPUTATION_REQUIRE` | 12 (0x0C) |  |
 
 Used in:
 * [SMSG_BUY_FAILED](smsg_buy_failed.md)

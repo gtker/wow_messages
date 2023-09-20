@@ -18,11 +18,11 @@ enum EmoteSpecProc : u8 {
 ### Type
 The basic type is `u8`, a 1 byte (8 bit) integer.
 ### Enumerators
-| Enumerator | Value  | Description | Comment |
-| --------- | -------- | ----------- | ------- |
-| `NO_LOOP` | 0 (0x00) |  |  |
-| `LOOP` | 1 (0x01) |  |  |
-| `LOOP_WITH_SOUND` | 2 (0x02) |  |  |
+| Enumerator | Value  | Comment |
+| --------- | -------- | ------- |
+| `NO_LOOP` | 0 (0x00) |  |
+| `LOOP` | 1 (0x01) |  |
+| `LOOP_WITH_SOUND` | 2 (0x02) |  |
 
 Used in:
 

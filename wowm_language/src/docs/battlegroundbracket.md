@@ -19,14 +19,14 @@ enum BattlegroundBracket : u8 {
 ### Type
 The basic type is `u8`, a 1 byte (8 bit) integer.
 ### Enumerators
-| Enumerator | Value  | Description | Comment |
-| --------- | -------- | ----------- | ------- |
-| `TENS` | 0 (0x00) |  | 10-19 |
-| `TWENTIES` | 1 (0x01) |  | 20-29 |
-| `THIRTIES` | 2 (0x02) |  | 30-39 |
-| `FOURTIES` | 3 (0x03) |  | 40-49 |
-| `FIFTIES` | 4 (0x04) |  | 50-59 |
-| `SIXTY` | 5 (0x05) |  | 60 |
+| Enumerator | Value  | Comment |
+| --------- | -------- | ------- |
+| `TENS` | 0 (0x00) | 10-19 |
+| `TWENTIES` | 1 (0x01) | 20-29 |
+| `THIRTIES` | 2 (0x02) | 30-39 |
+| `FOURTIES` | 3 (0x03) | 40-49 |
+| `FIFTIES` | 4 (0x04) | 50-59 |
+| `SIXTY` | 5 (0x05) | 60 |
 
 Used in:
 * [SMSG_BATTLEFIELD_LIST](smsg_battlefield_list.md)

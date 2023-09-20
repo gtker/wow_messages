@@ -23,7 +23,7 @@ CMSG have a header of 6 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x06 | 4 / Little | u32 | unknown1 |  | Skipped in vmangos and set to 1 for bots |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x06 | 4 / Little | u32 | unknown1 | Skipped in vmangos and set to 1 for bots |
 

@@ -33,17 +33,17 @@ CMSG have a header of 6 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x06 | - / - | CString | title |  |  |
-| - | - / - | CString | description |  |  |
-| - | 1 / - | u8 | event_type |  |  |
-| - | 1 / - | Bool | repeatable |  |  |
-| - | 4 / Little | u32 | maximum_invites |  |  |
-| - | 4 / Little | u32 | dungeon_id |  |  |
-| - | 4 / Little | DateTime | event_time |  |  |
-| - | 4 / Little | DateTime | time_zone_time |  |  |
-| - | 4 / Little | u32 | flags |  |  |
-| - | 4 / Little | u32 | amount_of_invitees |  |  |
-| - | ? / - | [CalendarInvitee](calendarinvitee.md)[amount_of_invitees] | invitees |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x06 | - / - | CString | title |  |
+| - | - / - | CString | description |  |
+| - | 1 / - | u8 | event_type |  |
+| - | 1 / - | Bool | repeatable |  |
+| - | 4 / Little | u32 | maximum_invites |  |
+| - | 4 / Little | u32 | dungeon_id |  |
+| - | 4 / Little | DateTime | event_time |  |
+| - | 4 / Little | DateTime | time_zone_time |  |
+| - | 4 / Little | u32 | flags |  |
+| - | 4 / Little | u32 | amount_of_invitees |  |
+| - | ? / - | [CalendarInvitee](calendarinvitee.md)[amount_of_invitees] | invitees |  |
 

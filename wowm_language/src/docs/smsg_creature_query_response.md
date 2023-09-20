@@ -39,28 +39,28 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | 4 / Little | u32 | creature_entry |  | When the `found` optional is not present all emulators bitwise OR the entry with `0x80000000`.`` |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x04 | 4 / Little | u32 | creature_entry | When the `found` optional is not present all emulators bitwise OR the entry with `0x80000000`.`` |
 
 Optionally the following fields can be present. This can only be detected by looking at the size of the message.
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x08 | - / - | CString | name1 |  |  |
-| - | - / - | CString | name2 |  |  |
-| - | - / - | CString | name3 |  |  |
-| - | - / - | CString | name4 |  |  |
-| - | - / - | CString | sub_name |  |  |
-| - | 4 / Little | u32 | type_flags |  |  |
-| - | 4 / Little | u32 | creature_type |  | cmangos: CreatureType.dbc   wdbFeild8 |
-| - | 4 / - | [CreatureFamily](creaturefamily.md) | creature_family |  |  |
-| - | 4 / Little | u32 | creature_rank |  | cmangos: Creature Rank (elite, boss, etc) |
-| - | 4 / Little | u32 | unknown0 |  | cmangos: wdbFeild11 |
-| - | 4 / Little | u32 | spell_data_id |  | cmangos: Id from CreatureSpellData.dbc wdbField12 |
-| - | 4 / Little | u32 | display_id |  | cmangos: DisplayID      wdbFeild13 and workaround, way to manage models must be fixed |
-| - | 1 / - | u8 | civilian |  | cmangos: wdbFeild14 |
-| - | 1 / - | u8 | racial_leader |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x08 | - / - | CString | name1 |  |
+| - | - / - | CString | name2 |  |
+| - | - / - | CString | name3 |  |
+| - | - / - | CString | name4 |  |
+| - | - / - | CString | sub_name |  |
+| - | 4 / Little | u32 | type_flags |  |
+| - | 4 / Little | u32 | creature_type | cmangos: CreatureType.dbc   wdbFeild8 |
+| - | 4 / - | [CreatureFamily](creaturefamily.md) | creature_family |  |
+| - | 4 / Little | u32 | creature_rank | cmangos: Creature Rank (elite, boss, etc) |
+| - | 4 / Little | u32 | unknown0 | cmangos: wdbFeild11 |
+| - | 4 / Little | u32 | spell_data_id | cmangos: Id from CreatureSpellData.dbc wdbField12 |
+| - | 4 / Little | u32 | display_id | cmangos: DisplayID      wdbFeild13 and workaround, way to manage models must be fixed |
+| - | 1 / - | u8 | civilian | cmangos: wdbFeild14 |
+| - | 1 / - | u8 | racial_leader |  |
 
 ### Examples
 
@@ -127,30 +127,30 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | 4 / Little | u32 | creature_entry |  | When the `found` optional is not present all emulators bitwise OR the entry with `0x80000000`.`` |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x04 | 4 / Little | u32 | creature_entry | When the `found` optional is not present all emulators bitwise OR the entry with `0x80000000`.`` |
 
 Optionally the following fields can be present. This can only be detected by looking at the size of the message.
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x08 | - / - | CString | name1 |  |  |
-| - | - / - | CString | name2 |  |  |
-| - | - / - | CString | name3 |  |  |
-| - | - / - | CString | name4 |  |  |
-| - | - / - | CString | sub_name |  |  |
-| - | - / - | CString | description |  | mangosone: 'Directions' for guard, string for Icons 2.3.0 |
-| - | 4 / Little | u32 | type_flags |  |  |
-| - | 4 / Little | u32 | creature_type |  | mangosone: CreatureType.dbc   wdbFeild8 |
-| - | 4 / - | [CreatureFamily](creaturefamily.md) | creature_family |  |  |
-| - | 4 / Little | u32 | creature_rank |  | mangosone: Creature Rank (elite, boss, etc) |
-| - | 4 / Little | u32 | unknown0 |  | mangosone: wdbFeild11 |
-| - | 4 / Little | u32 | spell_data_id |  | mangosone: Id from CreatureSpellData.dbc wdbField12 |
-| - | 16 / - | u32[4] | display_ids |  |  |
-| - | 4 / Little | f32 | health_multiplier |  |  |
-| - | 4 / Little | f32 | mana_multiplier |  |  |
-| - | 1 / - | u8 | racial_leader |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x08 | - / - | CString | name1 |  |
+| - | - / - | CString | name2 |  |
+| - | - / - | CString | name3 |  |
+| - | - / - | CString | name4 |  |
+| - | - / - | CString | sub_name |  |
+| - | - / - | CString | description | mangosone: 'Directions' for guard, string for Icons 2.3.0 |
+| - | 4 / Little | u32 | type_flags |  |
+| - | 4 / Little | u32 | creature_type | mangosone: CreatureType.dbc   wdbFeild8 |
+| - | 4 / - | [CreatureFamily](creaturefamily.md) | creature_family |  |
+| - | 4 / Little | u32 | creature_rank | mangosone: Creature Rank (elite, boss, etc) |
+| - | 4 / Little | u32 | unknown0 | mangosone: wdbFeild11 |
+| - | 4 / Little | u32 | spell_data_id | mangosone: Id from CreatureSpellData.dbc wdbField12 |
+| - | 16 / - | u32[4] | display_ids |  |
+| - | 4 / Little | f32 | health_multiplier |  |
+| - | 4 / Little | f32 | mana_multiplier |  |
+| - | 1 / - | u8 | racial_leader |  |
 
 ## Client Version 3.3.5
 
@@ -195,30 +195,30 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | 4 / Little | u32 | creature_entry |  | When the `found` optional is not present all emulators bitwise OR the entry with `0x80000000`.`` |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| - | 4 / Little | u32 | creature_entry | When the `found` optional is not present all emulators bitwise OR the entry with `0x80000000`.`` |
 
 Optionally the following fields can be present. This can only be detected by looking at the size of the message.
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | - / - | CString | name1 |  |  |
-| - | - / - | CString | name2 |  |  |
-| - | - / - | CString | name3 |  |  |
-| - | - / - | CString | name4 |  |  |
-| - | - / - | CString | sub_name |  |  |
-| - | - / - | CString | description |  | mangosone: 'Directions' for guard, string for Icons 2.3.0 |
-| - | 4 / Little | u32 | type_flags |  |  |
-| - | 4 / Little | u32 | creature_type |  | mangosone: CreatureType.dbc   wdbFeild8 |
-| - | 4 / - | [CreatureFamily](creaturefamily.md) | creature_family |  |  |
-| - | 4 / Little | u32 | creature_rank |  | mangosone: Creature Rank (elite, boss, etc) |
-| - | 4 / Little | u32 | kill_credit1 |  | mangosone: new in 3.1 |
-| - | 4 / Little | u32 | kill_credit2 |  | mangosone: new in 3.1 |
-| - | 16 / - | u32[4] | display_ids |  |  |
-| - | 4 / Little | f32 | health_multiplier |  |  |
-| - | 4 / Little | f32 | mana_multiplier |  |  |
-| - | 1 / - | u8 | racial_leader |  |  |
-| - | 24 / - | u32[6] | quest_items |  |  |
-| - | 4 / Little | u32 | movement_id |  | mangosone: CreatureMovementInfo.dbc |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| - | - / - | CString | name1 |  |
+| - | - / - | CString | name2 |  |
+| - | - / - | CString | name3 |  |
+| - | - / - | CString | name4 |  |
+| - | - / - | CString | sub_name |  |
+| - | - / - | CString | description | mangosone: 'Directions' for guard, string for Icons 2.3.0 |
+| - | 4 / Little | u32 | type_flags |  |
+| - | 4 / Little | u32 | creature_type | mangosone: CreatureType.dbc   wdbFeild8 |
+| - | 4 / - | [CreatureFamily](creaturefamily.md) | creature_family |  |
+| - | 4 / Little | u32 | creature_rank | mangosone: Creature Rank (elite, boss, etc) |
+| - | 4 / Little | u32 | kill_credit1 | mangosone: new in 3.1 |
+| - | 4 / Little | u32 | kill_credit2 | mangosone: new in 3.1 |
+| - | 16 / - | u32[4] | display_ids |  |
+| - | 4 / Little | f32 | health_multiplier |  |
+| - | 4 / Little | f32 | mana_multiplier |  |
+| - | 1 / - | u8 | racial_leader |  |
+| - | 24 / - | u32[6] | quest_items |  |
+| - | 4 / Little | u32 | movement_id | mangosone: CreatureMovementInfo.dbc |
 

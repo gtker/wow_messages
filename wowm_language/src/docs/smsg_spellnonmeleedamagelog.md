@@ -34,20 +34,20 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | - / - | [PackedGuid](../types/packed-guid.md) | target |  |  |
-| - | - / - | [PackedGuid](../types/packed-guid.md) | attacker |  |  |
-| - | 4 / Little | u32 | spell |  |  |
-| - | 4 / Little | u32 | damage |  |  |
-| - | 1 / - | [SpellSchool](spellschool.md) | school |  |  |
-| - | 4 / Little | u32 | absorbed_damage |  |  |
-| - | 4 / Little | u32 | resisted |  | cmangos/mangoszero/vmangos: sent as int32 |
-| - | 1 / - | Bool | periodic_log |  | cmangos/mangoszero/vmangos: if 1, then client show spell name (example: %s's ranged shot hit %s for %u school or %s suffers %u school damage from %s's spell_name |
-| - | 1 / - | u8 | unused |  |  |
-| - | 4 / Little | u32 | blocked |  |  |
-| - | 4 / - | [HitInfo](hitinfo.md) | hit_info |  |  |
-| - | 1 / - | u8 | extend_flag |  | cmangos has some that might be correct `https://github.com/cmangos/mangos-classic/blob/524a39412dae7946d06e4b8f319f45b615075815/src/game/Entities/Unit.cpp#L5497`. |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x04 | - / - | [PackedGuid](../types/packed-guid.md) | target |  |
+| - | - / - | [PackedGuid](../types/packed-guid.md) | attacker |  |
+| - | 4 / Little | u32 | spell |  |
+| - | 4 / Little | u32 | damage |  |
+| - | 1 / - | [SpellSchool](spellschool.md) | school |  |
+| - | 4 / Little | u32 | absorbed_damage |  |
+| - | 4 / Little | u32 | resisted | cmangos/mangoszero/vmangos: sent as int32 |
+| - | 1 / - | Bool | periodic_log | cmangos/mangoszero/vmangos: if 1, then client show spell name (example: %s's ranged shot hit %s for %u school or %s suffers %u school damage from %s's spell_name |
+| - | 1 / - | u8 | unused |  |
+| - | 4 / Little | u32 | blocked |  |
+| - | 4 / - | [HitInfo](hitinfo.md) | hit_info |  |
+| - | 1 / - | u8 | extend_flag | cmangos has some that might be correct `https://github.com/cmangos/mangos-classic/blob/524a39412dae7946d06e4b8f319f45b615075815/src/game/Entities/Unit.cpp#L5497`. |
 
 ## Client Version 2.4.3
 
@@ -83,20 +83,20 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | - / - | [PackedGuid](../types/packed-guid.md) | target |  |  |
-| - | - / - | [PackedGuid](../types/packed-guid.md) | attacker |  |  |
-| - | 4 / Little | u32 | spell |  |  |
-| - | 4 / Little | u32 | damage |  |  |
-| - | 1 / - | [SpellSchool](spellschool.md) | school |  |  |
-| - | 4 / Little | u32 | absorbed_damage |  |  |
-| - | 4 / Little | u32 | resisted |  | cmangos/mangoszero/vmangos: sent as int32 |
-| - | 1 / - | Bool | periodic_log |  | cmangos/mangoszero/vmangos: if 1, then client show spell name (example: %s's ranged shot hit %s for %u school or %s suffers %u school damage from %s's spell_name |
-| - | 1 / - | u8 | unused |  |  |
-| - | 4 / Little | u32 | blocked |  |  |
-| - | 4 / - | [HitInfo](hitinfo.md) | hit_info |  |  |
-| - | 1 / - | u8 | extend_flag |  | cmangos has some that might be correct `https://github.com/cmangos/mangos-classic/blob/524a39412dae7946d06e4b8f319f45b615075815/src/game/Entities/Unit.cpp#L5497`. |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x04 | - / - | [PackedGuid](../types/packed-guid.md) | target |  |
+| - | - / - | [PackedGuid](../types/packed-guid.md) | attacker |  |
+| - | 4 / Little | u32 | spell |  |
+| - | 4 / Little | u32 | damage |  |
+| - | 1 / - | [SpellSchool](spellschool.md) | school |  |
+| - | 4 / Little | u32 | absorbed_damage |  |
+| - | 4 / Little | u32 | resisted | cmangos/mangoszero/vmangos: sent as int32 |
+| - | 1 / - | Bool | periodic_log | cmangos/mangoszero/vmangos: if 1, then client show spell name (example: %s's ranged shot hit %s for %u school or %s suffers %u school damage from %s's spell_name |
+| - | 1 / - | u8 | unused |  |
+| - | 4 / Little | u32 | blocked |  |
+| - | 4 / - | [HitInfo](hitinfo.md) | hit_info |  |
+| - | 1 / - | u8 | extend_flag | cmangos has some that might be correct `https://github.com/cmangos/mangos-classic/blob/524a39412dae7946d06e4b8f319f45b615075815/src/game/Entities/Unit.cpp#L5497`. |
 
 ## Client Version 3.3.5
 
@@ -133,19 +133,19 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | - / - | [PackedGuid](../types/packed-guid.md) | target |  |  |
-| - | - / - | [PackedGuid](../types/packed-guid.md) | attacker |  |  |
-| - | 4 / Little | u32 | spell |  |  |
-| - | 4 / Little | u32 | damage |  |  |
-| - | 4 / Little | u32 | overkill |  |  |
-| - | 1 / - | [SpellSchool](spellschool.md) | school |  |  |
-| - | 4 / Little | u32 | absorbed_damage |  |  |
-| - | 4 / Little | u32 | resisted |  | cmangos/mangoszero/vmangos: sent as int32 |
-| - | 1 / - | Bool | periodic_log |  | cmangos/mangoszero/vmangos: if 1, then client show spell name (example: %s's ranged shot hit %s for %u school or %s suffers %u school damage from %s's spell_name |
-| - | 1 / - | u8 | unused |  |  |
-| - | 4 / Little | u32 | blocked |  |  |
-| - | 4 / - | [HitInfo](hitinfo.md) | hit_info |  |  |
-| - | 1 / - | u8 | extend_flag |  | cmangos has some that might be correct `https://github.com/cmangos/mangos-classic/blob/524a39412dae7946d06e4b8f319f45b615075815/src/game/Entities/Unit.cpp#L5497`. |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| - | - / - | [PackedGuid](../types/packed-guid.md) | target |  |
+| - | - / - | [PackedGuid](../types/packed-guid.md) | attacker |  |
+| - | 4 / Little | u32 | spell |  |
+| - | 4 / Little | u32 | damage |  |
+| - | 4 / Little | u32 | overkill |  |
+| - | 1 / - | [SpellSchool](spellschool.md) | school |  |
+| - | 4 / Little | u32 | absorbed_damage |  |
+| - | 4 / Little | u32 | resisted | cmangos/mangoszero/vmangos: sent as int32 |
+| - | 1 / - | Bool | periodic_log | cmangos/mangoszero/vmangos: if 1, then client show spell name (example: %s's ranged shot hit %s for %u school or %s suffers %u school damage from %s's spell_name |
+| - | 1 / - | u8 | unused |  |
+| - | 4 / Little | u32 | blocked |  |
+| - | 4 / - | [HitInfo](hitinfo.md) | hit_info |  |
+| - | 1 / - | u8 | extend_flag | cmangos has some that might be correct `https://github.com/cmangos/mangos-classic/blob/524a39412dae7946d06e4b8f319f45b615075815/src/game/Entities/Unit.cpp#L5497`. |
 

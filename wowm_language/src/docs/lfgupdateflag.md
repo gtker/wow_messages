@@ -22,17 +22,17 @@ flag LfgUpdateFlag : u32 {
 ### Type
 The basic type is `u32`, a 4 byte (32 bit) little endian integer.
 ### Enumerators
-| Enumerator | Value  | Description | Comment |
-| --------- | -------- | ----------- | ------- |
-| `NONE` | 0 (0x00) |  |  |
-| `CHARACTER_INFO` | 1 (0x01) |  |  |
-| `COMMENT` | 2 (0x02) |  |  |
-| `GROUP_LEADER` | 4 (0x04) |  |  |
-| `GROUP_GUID` | 8 (0x08) |  |  |
-| `ROLES` | 16 (0x10) |  |  |
-| `AREA` | 32 (0x20) |  |  |
-| `STATUS` | 64 (0x40) |  |  |
-| `BOUND` | 128 (0x80) |  |  |
+| Enumerator | Value  | Comment |
+| --------- | -------- | ------- |
+| `NONE` | 0 (0x00) |  |
+| `CHARACTER_INFO` | 1 (0x01) |  |
+| `COMMENT` | 2 (0x02) |  |
+| `GROUP_LEADER` | 4 (0x04) |  |
+| `GROUP_GUID` | 8 (0x08) |  |
+| `ROLES` | 16 (0x10) |  |
+| `AREA` | 32 (0x20) |  |
+| `STATUS` | 64 (0x40) |  |
+| `BOUND` | 128 (0x80) |  |
 
 Used in:
 * [LfgListGroup](lfglistgroup.md)

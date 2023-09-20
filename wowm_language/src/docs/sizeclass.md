@@ -21,14 +21,14 @@ enum SizeClass : i8 {
 ### Type
 The basic type is `i8`, a 1 byte (8 bit) integer.
 ### Enumerators
-| Enumerator | Value  | Description | Comment |
-| --------- | -------- | ----------- | ------- |
-| `NONE` | -1 (0xFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF) |  |  |
-| `SMALL` | 0 (0x00) |  |  |
-| `MEDIUM` | 1 (0x01) |  |  |
-| `LARGE` | 2 (0x02) |  |  |
-| `GIANT` | 3 (0x03) |  |  |
-| `COLOSSAL` | 4 (0x04) |  |  |
+| Enumerator | Value  | Comment |
+| --------- | -------- | ------- |
+| `NONE` | -1 (0xFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF) |  |
+| `SMALL` | 0 (0x00) |  |
+| `MEDIUM` | 1 (0x01) |  |
+| `LARGE` | 2 (0x02) |  |
+| `GIANT` | 3 (0x03) |  |
+| `COLOSSAL` | 4 (0x04) |  |
 
 Used in:
 

@@ -25,22 +25,22 @@ struct AuctionListItem {
 ```
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x00 | 4 / Little | u32 | id |  |  |
-| 0x04 | 4 / Little | u32 | item |  |  |
-| 0x08 | 4 / Little | u32 | item_enchantment |  |  |
-| 0x0C | 4 / Little | u32 | item_random_property_id |  |  |
-| 0x10 | 4 / Little | u32 | item_suffix_factor |  |  |
-| 0x14 | 4 / Little | u32 | item_count |  |  |
-| 0x18 | 4 / Little | u32 | item_charges |  |  |
-| 0x1C | 8 / Little | [Guid](../types/packed-guid.md) | item_owner |  |  |
-| 0x24 | 4 / Little | u32 | start_bid |  |  |
-| 0x28 | 4 / Little | u32 | minimum_bid |  |  |
-| 0x2C | 4 / Little | u32 | buyout_amount |  |  |
-| 0x30 | 4 / Little | Milliseconds | time_left |  |  |
-| 0x34 | 8 / Little | [Guid](../types/packed-guid.md) | highest_bidder |  |  |
-| 0x3C | 4 / Little | u32 | highest_bid |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x00 | 4 / Little | u32 | id |  |
+| 0x04 | 4 / Little | u32 | item |  |
+| 0x08 | 4 / Little | u32 | item_enchantment |  |
+| 0x0C | 4 / Little | u32 | item_random_property_id |  |
+| 0x10 | 4 / Little | u32 | item_suffix_factor |  |
+| 0x14 | 4 / Little | u32 | item_count |  |
+| 0x18 | 4 / Little | u32 | item_charges |  |
+| 0x1C | 8 / Little | [Guid](../types/packed-guid.md) | item_owner |  |
+| 0x24 | 4 / Little | u32 | start_bid |  |
+| 0x28 | 4 / Little | u32 | minimum_bid |  |
+| 0x2C | 4 / Little | u32 | buyout_amount |  |
+| 0x30 | 4 / Little | Milliseconds | time_left |  |
+| 0x34 | 8 / Little | [Guid](../types/packed-guid.md) | highest_bidder |  |
+| 0x3C | 4 / Little | u32 | highest_bid |  |
 
 
 Used in:
@@ -74,23 +74,23 @@ struct AuctionListItem {
 ```
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x00 | 4 / Little | u32 | id |  |  |
-| 0x04 | 4 / Little | u32 | item |  |  |
-| 0x08 | 72 / - | [AuctionEnchantment](auctionenchantment.md)[6] | enchantments |  |  |
-| 0x50 | 4 / Little | u32 | item_random_property_id |  |  |
-| 0x54 | 4 / Little | u32 | item_suffix_factor |  |  |
-| 0x58 | 4 / Little | u32 | item_count |  |  |
-| 0x5C | 4 / Little | u32 | item_charges |  |  |
-| 0x60 | 4 / Little | u32 | item_flags |  | mangosone: item flags (dynamic?) (0x04 no lockId?) |
-| 0x64 | 8 / Little | [Guid](../types/packed-guid.md) | item_owner |  |  |
-| 0x6C | 4 / Little | u32 | start_bid |  |  |
-| 0x70 | 4 / Little | u32 | minimum_bid |  |  |
-| 0x74 | 4 / Little | u32 | buyout_amount |  |  |
-| 0x78 | 4 / Little | Milliseconds | time_left |  |  |
-| 0x7C | 8 / Little | [Guid](../types/packed-guid.md) | highest_bidder |  |  |
-| 0x84 | 4 / Little | u32 | highest_bid |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x00 | 4 / Little | u32 | id |  |
+| 0x04 | 4 / Little | u32 | item |  |
+| 0x08 | 72 / - | [AuctionEnchantment](auctionenchantment.md)[6] | enchantments |  |
+| 0x50 | 4 / Little | u32 | item_random_property_id |  |
+| 0x54 | 4 / Little | u32 | item_suffix_factor |  |
+| 0x58 | 4 / Little | u32 | item_count |  |
+| 0x5C | 4 / Little | u32 | item_charges |  |
+| 0x60 | 4 / Little | u32 | item_flags | mangosone: item flags (dynamic?) (0x04 no lockId?) |
+| 0x64 | 8 / Little | [Guid](../types/packed-guid.md) | item_owner |  |
+| 0x6C | 4 / Little | u32 | start_bid |  |
+| 0x70 | 4 / Little | u32 | minimum_bid |  |
+| 0x74 | 4 / Little | u32 | buyout_amount |  |
+| 0x78 | 4 / Little | Milliseconds | time_left |  |
+| 0x7C | 8 / Little | [Guid](../types/packed-guid.md) | highest_bidder |  |
+| 0x84 | 4 / Little | u32 | highest_bid |  |
 
 
 Used in:
@@ -124,23 +124,23 @@ struct AuctionListItem {
 ```
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x00 | 4 / Little | u32 | id |  |  |
-| 0x04 | 4 / Little | u32 | item |  |  |
-| 0x08 | 84 / - | [AuctionEnchantment](auctionenchantment.md)[7] | enchantments |  |  |
-| 0x5C | 4 / Little | u32 | item_random_property_id |  |  |
-| 0x60 | 4 / Little | u32 | item_suffix_factor |  |  |
-| 0x64 | 4 / Little | u32 | item_count |  |  |
-| 0x68 | 4 / Little | u32 | item_charges |  |  |
-| 0x6C | 4 / Little | u32 | item_flags |  | mangosone: item flags (dynamic?) (0x04 no lockId?) |
-| 0x70 | 8 / Little | [Guid](../types/packed-guid.md) | item_owner |  |  |
-| 0x78 | 4 / Little | u32 | start_bid |  |  |
-| 0x7C | 4 / Little | u32 | minimum_bid |  |  |
-| 0x80 | 4 / Little | u32 | buyout_amount |  |  |
-| 0x84 | 4 / Little | Milliseconds | time_left |  |  |
-| 0x88 | 8 / Little | [Guid](../types/packed-guid.md) | highest_bidder |  |  |
-| 0x90 | 4 / Little | u32 | highest_bid |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x00 | 4 / Little | u32 | id |  |
+| 0x04 | 4 / Little | u32 | item |  |
+| 0x08 | 84 / - | [AuctionEnchantment](auctionenchantment.md)[7] | enchantments |  |
+| 0x5C | 4 / Little | u32 | item_random_property_id |  |
+| 0x60 | 4 / Little | u32 | item_suffix_factor |  |
+| 0x64 | 4 / Little | u32 | item_count |  |
+| 0x68 | 4 / Little | u32 | item_charges |  |
+| 0x6C | 4 / Little | u32 | item_flags | mangosone: item flags (dynamic?) (0x04 no lockId?) |
+| 0x70 | 8 / Little | [Guid](../types/packed-guid.md) | item_owner |  |
+| 0x78 | 4 / Little | u32 | start_bid |  |
+| 0x7C | 4 / Little | u32 | minimum_bid |  |
+| 0x80 | 4 / Little | u32 | buyout_amount |  |
+| 0x84 | 4 / Little | Milliseconds | time_left |  |
+| 0x88 | 8 / Little | [Guid](../types/packed-guid.md) | highest_bidder |  |
+| 0x90 | 4 / Little | u32 | highest_bid |  |
 
 
 Used in:

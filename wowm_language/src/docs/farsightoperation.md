@@ -15,10 +15,10 @@ enum FarSightOperation : u8 {
 ### Type
 The basic type is `u8`, a 1 byte (8 bit) integer.
 ### Enumerators
-| Enumerator | Value  | Description | Comment |
-| --------- | -------- | ----------- | ------- |
-| `REMOVE` | 0 (0x00) |  |  |
-| `ADD` | 1 (0x01) |  |  |
+| Enumerator | Value  | Comment |
+| --------- | -------- | ------- |
+| `REMOVE` | 0 (0x00) |  |
+| `ADD` | 1 (0x01) |  |
 
 Used in:
 * [CMSG_FAR_SIGHT](cmsg_far_sight.md)

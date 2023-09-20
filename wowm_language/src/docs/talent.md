@@ -445,440 +445,440 @@ enum Talent : u32 {
 ### Type
 The basic type is `u32`, a 4 byte (32 bit) little endian integer.
 ### Enumerators
-| Enumerator | Value  | Description | Comment | Display |
-| --------- | -------- | ----------- | ------- | ------- |
-| `BURNING_SOUL` | 23 (0x17) |  |  |  |
-| `IMPROVED_FIRE_WARD` | 24 (0x18) |  |  |  |
-| `IMPROVED_SCORCH` | 25 (0x19) |  |  |  |
-| `IMPROVED_FIREBALL` | 26 (0x1A) |  |  |  |
-| `IMPROVED_FIRE_BLAST` | 27 (0x1B) |  |  |  |
-| `FLAME_THROWING` | 28 (0x1C) |  |  |  |
-| `PYROBLAST` | 29 (0x1D) |  |  |  |
-| `IMPACT` | 30 (0x1E) |  |  |  |
-| `IMPROVED_FLAMESTRIKE` | 31 (0x1F) |  |  |  |
-| `BLAST_WAVE` | 32 (0x20) |  |  |  |
-| `CRITICAL_MASS` | 33 (0x21) |  |  |  |
-| `IGNITE` | 34 (0x22) |  |  |  |
-| `FIRE_POWER` | 35 (0x23) |  |  |  |
-| `COMBUSTION` | 36 (0x24) |  |  |  |
-| `IMPROVED_FROSTBOLT` | 37 (0x25) |  |  |  |
-| `FROSTBITE` | 38 (0x26) |  |  |  |
-| `PIERCING_ICE` | 61 (0x3D) |  |  |  |
-| `IMPROVED_FROST_NOVA` | 62 (0x3E) |  |  |  |
-| `IMPROVED_BLIZZARD` | 63 (0x3F) |  |  |  |
-| `IMPROVED_CONE_OF_COLD` | 64 (0x40) |  |  |  |
-| `PERMAFROST` | 65 (0x41) |  |  |  |
-| `FROST_CHANNELING` | 66 (0x42) |  |  |  |
-| `SHATTER` | 67 (0x43) |  |  |  |
-| `WINTERS_CHILL` | 68 (0x44) |  |  | Winter's Chill |
-| `COLD_SNAP` | 69 (0x45) |  |  |  |
-| `FROST_WARDING` | 70 (0x46) |  |  |  |
-| `ICE_BARRIER` | 71 (0x47) |  |  |  |
-| `ICE_BLOCK` | 72 (0x48) |  |  |  |
-| `ICE_SHARDS` | 73 (0x49) |  |  |  |
-| `ARCANE_SUBTLETY` | 74 (0x4A) |  |  |  |
-| `ARCANE_CONCENTRATION` | 75 (0x4B) |  |  |  |
-| `ARCANE_FOCUS` | 76 (0x4C) |  |  |  |
-| `ARCANE_MIND` | 77 (0x4D) |  |  |  |
-| `MAGE_WAND_SPECIALIZATION` | 78 (0x4E) |  |  |  |
-| `IMPROVED_ARCANE_MISSILES` | 80 (0x50) |  |  |  |
-| `IMPROVED_ARCANE_EXPLOSION` | 81 (0x51) |  |  |  |
-| `MAGIC_ATTUNEMENT` | 82 (0x52) |  |  |  |
-| `IMPROVED_MANA_SHIELD` | 83 (0x53) |  |  |  |
-| `ARCANE_RESILIENCE` | 85 (0x55) |  |  |  |
-| `PRESENCE_OF_MIND` | 86 (0x56) |  |  |  |
-| `ARCANE_POWER` | 87 (0x57) |  |  |  |
-| `IMPROVED_COUNTERSPELL` | 88 (0x58) |  |  |  |
-| `DEEP_WOUNDS` | 121 (0x79) |  |  |  |
-| `WARRIOR_SWORD_SPECIALIZATION` | 123 (0x7B) |  |  |  |
-| `IMPROVED_HEROIC_STRIKE` | 124 (0x7C) |  |  |  |
-| `WARRIOR_MACE_SPECIALIZATION` | 125 (0x7D) |  |  |  |
-| `IMPROVED_CHARGE` | 126 (0x7E) |  |  |  |
-| `IMPROVED_REND` | 127 (0x7F) |  |  |  |
-| `IMPROVED_THUNDER_CLAP` | 128 (0x80) |  |  |  |
-| `IMPROVED_HAMSTRING` | 129 (0x81) |  |  |  |
-| `WARRIOR_DEFLECTION` | 130 (0x82) |  |  |  |
-| `IMPROVED_OVERPOWER` | 131 (0x83) |  |  |  |
-| `AXE_SPECIALIZATION` | 132 (0x84) |  |  |  |
-| `SWEEPING_STRIKES` | 133 (0x85) |  |  |  |
-| `POLEARM_SPECIALIZATION` | 134 (0x86) |  |  |  |
-| `MORTAL_STRIKE` | 135 (0x87) |  |  |  |
-| `WARRIOR_TWO_HANDED_WEAPON_SPECIALIZATION` | 136 (0x88) |  |  |  |
-| `ANGER_MANAGEMENT` | 137 (0x89) |  |  |  |
-| `WARRIOR_ANTICIPATION` | 138 (0x8A) |  |  |  |
-| `WARRIOR_TOUGHNESS` | 140 (0x8C) |  |  |  |
-| `IRON_WILL` | 141 (0x8D) |  |  |  |
-| `IMPROVED_BLOODRAGE` | 142 (0x8E) |  |  |  |
-| `IMPROVED_TAUNT` | 143 (0x8F) |  |  |  |
-| `DEFIANCE` | 144 (0x90) |  |  |  |
-| `IMPROVED_SHIELD_BLOCK` | 145 (0x91) |  |  |  |
-| `IMPROVED_SUNDER_ARMOR` | 146 (0x92) |  |  |  |
-| `IMPROVED_REVENGE` | 147 (0x93) |  |  |  |
-| `SHIELD_SLAM` | 148 (0x94) |  |  |  |
-| `IMPROVED_SHIELD_BASH` | 149 (0x95) |  |  |  |
-| `IMPROVED_SHIELD_WALL` | 150 (0x96) |  |  |  |
-| `IMPROVED_DISARM` | 151 (0x97) |  |  |  |
-| `CONCUSSION_BLOW` | 152 (0x98) |  |  |  |
-| `LAST_STAND` | 153 (0x99) |  |  |  |
-| `IMPROVED_BATTLE_SHOUT` | 154 (0x9A) |  |  |  |
-| `ENRAGE` | 155 (0x9B) |  |  |  |
-| `WARRIOR_FLURRY` | 156 (0x9C) |  |  |  |
-| `CRUELTY` | 157 (0x9D) |  |  |  |
-| `BOOMING_VOICE` | 158 (0x9E) |  |  |  |
-| `UNBRIDLED_WRATH` | 159 (0x9F) |  |  |  |
-| `PIERCING_HOWL` | 160 (0xA0) |  |  |  |
-| `IMPROVED_DEMORALIZING_SHOUT` | 161 (0xA1) |  |  |  |
-| `DEATH_WISH` | 165 (0xA5) |  |  |  |
-| `IMPROVED_CLEAVE` | 166 (0xA6) |  |  |  |
-| `BLOODTHIRST` | 167 (0xA7) |  |  |  |
-| `IMPROVED_SLAM` | 168 (0xA8) |  |  |  |
-| `ROGUE_PRECISION` | 181 (0xB5) |  |  |  |
-| `DAGGER_SPECIALIZATION` | 182 (0xB6) |  |  |  |
-| `FIST_WEAPON_SPECIALIZATION` | 183 (0xB7) |  |  |  |
-| `ROGUE_MACE_SPECIALIZATION` | 184 (0xB8) |  |  |  |
-| `ROGUE_LIGHTNING_REFLEXES` | 186 (0xBA) |  |  |  |
-| `ROGUE_DEFLECTION` | 187 (0xBB) |  |  |  |
-| `IMPROVED_SINISTER_STRIKE` | 201 (0xC9) |  |  |  |
-| `IMPROVED_BACKSTAB` | 202 (0xCA) |  |  |  |
-| `IMPROVED_GOUGE` | 203 (0xCB) |  |  |  |
-| `ENDURANCE` | 204 (0xCC) |  |  |  |
-| `ADRENALINE_RUSH` | 205 (0xCD) |  |  |  |
-| `IMPROVED_KICK` | 206 (0xCE) |  |  |  |
-| `ROGUE_DUAL_WIELD_SPECIALIZATION` | 221 (0xDD) |  |  |  |
-| `IMPROVED_SPRINT` | 222 (0xDE) |  |  |  |
-| `BLADE_FLURRY` | 223 (0xDF) |  |  |  |
-| `MASTER_OF_DECEPTION` | 241 (0xF1) |  |  |  |
-| `ROGUE_SWORD_SPECIALIZATION` | 242 (0xF2) |  |  |  |
-| `CAMOUFLAGE` | 244 (0xF4) |  |  |  |
-| `INITIATIVE` | 245 (0xF5) |  |  |  |
-| `SETUP` | 246 (0xF6) |  |  |  |
-| `ELUSIVENESS` | 247 (0xF7) |  |  |  |
-| `OPPORTUNITY` | 261 (0x105) |  |  |  |
-| `IMPROVED_SAP` | 262 (0x106) |  |  |  |
-| `IMPROVED_AMBUSH` | 263 (0x107) |  |  |  |
-| `DIRTY_DEEDS` | 265 (0x109) |  |  |  |
-| `IMPROVED_POISONS` | 268 (0x10C) |  |  |  |
-| `LETHALITY` | 269 (0x10D) |  |  |  |
-| `MALICE` | 270 (0x10E) |  |  |  |
-| `REMORSELESS_ATTACKS` | 272 (0x110) |  |  |  |
-| `RUTHLESSNESS` | 273 (0x111) |  |  |  |
-| `MURDER` | 274 (0x112) |  |  |  |
-| `IMPROVED_EVISCERATE` | 276 (0x114) |  |  |  |
-| `IMPROVED_SLICE_AND_DICE` | 277 (0x115) |  |  |  |
-| `IMPROVED_EXPOSE_ARMOR` | 278 (0x116) |  |  |  |
-| `IMPROVED_KIDNEY_SHOT` | 279 (0x117) |  |  |  |
-| `COLD_BLOOD` | 280 (0x118) |  |  |  |
-| `RELENTLESS_STRIKES` | 281 (0x119) |  |  |  |
-| `SEAL_FATE` | 283 (0x11B) |  |  |  |
-| `PREPARATION` | 284 (0x11C) |  |  |  |
-| `RIPOSTE` | 301 (0x12D) |  |  |  |
-| `GHOSTLY_STRIKE` | 303 (0x12F) |  |  |  |
-| `MARTYRDOM` | 321 (0x141) |  |  |  |
-| `POWER_INFUSION` | 322 (0x142) |  |  |  |
-| `MENTAL_AGILITY` | 341 (0x155) |  |  |  |
-| `UNBREAKABLE_WILL` | 342 (0x156) |  |  |  |
-| `IMPROVED_POWER_WORD_SHIELD` | 343 (0x157) |  |  |  |
-| `IMPROVED_POWER_WORD_FORTITUDE` | 344 (0x158) |  |  |  |
-| `PRIEST_WAND_SPECIALIZATION` | 345 (0x159) |  |  |  |
-| `IMPROVED_INNER_FIRE` | 346 (0x15A) |  |  |  |
-| `MEDITATION` | 347 (0x15B) |  |  |  |
-| `INNER_FOCUS` | 348 (0x15C) |  |  |  |
-| `IMPROVED_MANA_BURN` | 350 (0x15E) |  |  |  |
-| `DIVINE_SPIRIT` | 351 (0x15F) |  |  |  |
-| `SILENT_RESOLVE` | 352 (0x160) |  |  |  |
-| `INSPIRATION` | 361 (0x169) |  |  |  |
-| `PREMEDITATION` | 381 (0x17D) |  |  |  |
-| `VIGOR` | 382 (0x17E) |  |  |  |
-| `HOLY_SPECIALIZATION` | 401 (0x191) |  |  |  |
-| `SPIRITUAL_GUIDANCE` | 402 (0x192) |  |  |  |
-| `SEARING_LIGHT` | 403 (0x193) |  |  |  |
-| `SPIRITUAL_HEALING` | 404 (0x194) |  |  |  |
-| `IMPROVED_RENEW` | 406 (0x196) |  |  |  |
-| `IMPROVED_HEALING` | 408 (0x198) |  |  |  |
-| `PRIEST_HEALING_FOCUS` | 410 (0x19A) |  |  |  |
-| `SPELL_WARDING` | 411 (0x19B) |  |  |  |
-| `IMPROVED_PRAYER_OF_HEALING` | 413 (0x19D) |  |  |  |
-| `ARCANE_INSTABILITY` | 421 (0x1A5) |  |  |  |
-| `HOLY_NOVA` | 442 (0x1BA) |  |  |  |
-| `SHADOW_WEAVING` | 461 (0x1CD) |  |  |  |
-| `DARKNESS` | 462 (0x1CE) |  |  |  |
-| `SHADOW_FOCUS` | 463 (0x1CF) |  |  |  |
-| `BLACKOUT` | 464 (0x1D0) |  |  |  |
-| `SPIRIT_TAP` | 465 (0x1D1) |  |  |  |
-| `SHADOW_AFFINITY` | 466 (0x1D2) |  |  |  |
-| `IMPROVED_MIND_BLAST` | 481 (0x1E1) |  |  |  |
-| `IMPROVED_SHADOW_WORD_PAIN` | 482 (0x1E2) |  |  |  |
-| `IMPROVED_FADE` | 483 (0x1E3) |  |  |  |
-| `VAMPIRIC_EMBRACE` | 484 (0x1E4) |  |  |  |
-| `MIND_FLAY` | 501 (0x1F5) |  |  |  |
-| `SHADOWFORM` | 521 (0x209) |  |  |  |
-| `SILENCE` | 541 (0x21D) |  |  |  |
-| `IMPROVED_PSYCHIC_SCREAM` | 542 (0x21E) |  |  |  |
-| `CALL_OF_FLAME` | 561 (0x231) |  |  |  |
-| `CALL_OF_THUNDER` | 562 (0x232) |  |  |  |
-| `CONCUSSION` | 563 (0x233) |  |  |  |
-| `CONVECTION` | 564 (0x234) |  |  |  |
-| `ELEMENTAL_FURY` | 565 (0x235) |  |  |  |
-| `IMPROVED_FIRE_TOTEMS` | 567 (0x237) |  |  |  |
-| `EARTHS_GRASP` | 572 (0x23C) |  |  | Earth's Grasp |
-| `ELEMENTAL_MASTERY` | 573 (0x23D) |  |  |  |
-| `ELEMENTAL_FOCUS` | 574 (0x23E) |  |  |  |
-| `REVERBERATION` | 575 (0x23F) |  |  |  |
-| `ANCESTRAL_HEALING` | 581 (0x245) |  |  |  |
-| `TOTEMIC_MASTERY` | 582 (0x246) |  |  |  |
-| `NATURES_GUIDANCE` | 583 (0x247) |  |  | Nature's Guidance |
-| `IMPROVED_HEALING_WAVE` | 586 (0x24A) |  |  |  |
-| `SHAMAN_HEALING_FOCUS` | 587 (0x24B) |  |  |  |
-| `RESTORATIVE_TOTEMS` | 588 (0x24C) |  |  |  |
-| `IMPROVED_REINCARNATION` | 589 (0x24D) |  |  |  |
-| `MANA_TIDE_TOTEM` | 590 (0x24E) |  |  |  |
-| `SHAMAN_NATURES_SWIFTNESS` | 591 (0x24F) |  |  | Nature's Swiftness |
-| `PURIFICATION` | 592 (0x250) |  |  |  |
-| `TIDAL_FOCUS` | 593 (0x251) |  |  |  |
-| `TIDAL_MASTERY` | 594 (0x252) |  |  |  |
-| `TOTEMIC_FOCUS` | 595 (0x253) |  |  |  |
-| `SHAMAN_ANTICIPATION` | 601 (0x259) |  |  |  |
-| `SHAMAN_FLURRY` | 602 (0x25A) |  |  |  |
-| `IMPROVED_GHOST_WOLF` | 605 (0x25D) |  |  |  |
-| `IMPROVED_LIGHTNING_SHIELD` | 607 (0x25F) |  |  |  |
-| `GUARDIAN_TOTEMS` | 609 (0x261) |  |  |  |
-| `ENHANCING_TOTEMS` | 610 (0x262) |  |  |  |
-| `ELEMENTAL_WEAPONS` | 611 (0x263) |  |  |  |
-| `SHAMAN_SHIELD_SPECIALIZATION` | 612 (0x264) |  |  |  |
-| `THUNDERING_STRIKES` | 613 (0x265) |  |  |  |
-| `ANCESTRAL_KNOWLEDGE` | 614 (0x266) |  |  |  |
-| `SHAMAN_TOUGHNESS` | 615 (0x267) |  |  |  |
-| `PARRY` | 616 (0x268) |  |  |  |
-| `TWO_HANDED_AXES_AND_MACES` | 617 (0x269) |  |  |  |
-| `TACTICAL_MASTERY` | 641 (0x281) |  |  |  |
-| `BLOOD_CRAZE` | 661 (0x295) |  |  |  |
-| `IMPALE` | 662 (0x296) |  |  |  |
-| `HEMORRHAGE` | 681 (0x2A9) |  |  |  |
-| `VILE_POISONS` | 682 (0x2AA) |  |  |  |
-| `WARRIOR_ONE_HANDED_WEAPON_SPECIALIZATION` | 702 (0x2BE) |  |  |  |
-| `LIGHTNING_MASTERY` | 721 (0x2D1) |  |  |  |
-| `ARCTIC_REACH` | 741 (0x2E5) |  |  |  |
-| `NATURES_GRASP` | 761 (0x2F9) |  |  | Nature's Grasp |
-| `IMPROVED_WRATH` | 762 (0x2FA) |  |  |  |
-| `IMPROVED_MOONFIRE` | 763 (0x2FB) |  |  |  |
-| `NATURES_REACH` | 764 (0x2FC) |  |  | Nature's Reach |
-| `NATURAL_SHAPESHIFTER` | 781 (0x30D) |  |  |  |
-| `IMPROVED_THORNS` | 782 (0x30E) |  |  |  |
-| `MOONGLOW` | 783 (0x30F) |  |  |  |
-| `IMPROVED_STARFIRE` | 784 (0x310) |  |  |  |
-| `IMPROVED_ENTANGLING_ROOTS` | 787 (0x313) |  |  |  |
-| `OMEN_OF_CLARITY` | 788 (0x314) |  |  |  |
-| `NATURES_GRACE` | 789 (0x315) |  |  | Nature's Grace |
-| `MOONFURY` | 790 (0x316) |  |  |  |
-| `NATURAL_WEAPONS` | 791 (0x317) |  |  |  |
-| `DRUID_VENGEANCE` | 792 (0x318) |  |  |  |
-| `MOONKIN_FORM` | 793 (0x319) |  |  |  |
-| `DRUID_THICK_HIDE` | 794 (0x31A) |  |  |  |
-| `FERAL_AGGRESSION` | 795 (0x31B) |  |  |  |
-| `DRUID_FEROCITY` | 796 (0x31C) |  |  |  |
-| `BRUTAL_IMPACT` | 797 (0x31D) |  |  |  |
-| `SHARPENED_CLAWS` | 798 (0x31E) |  |  |  |
-| `FERAL_INSTINCT` | 799 (0x31F) |  |  |  |
-| `BLOOD_FRENZY` | 800 (0x320) |  |  |  |
-| `PRIMAL_FURY` | 801 (0x321) |  |  |  |
-| `IMPROVED_SHRED` | 802 (0x322) |  |  |  |
-| `PREDATORY_STRIKES` | 803 (0x323) |  |  |  |
-| `FERAL_CHARGE` | 804 (0x324) |  |  |  |
-| `SAVAGE_FURY` | 805 (0x325) |  |  |  |
-| `FELINE_SWIFTNESS` | 807 (0x327) |  |  |  |
-| `HEART_OF_THE_WILD` | 808 (0x328) |  |  |  |
-| `LEADER_OF_THE_PACK` | 809 (0x329) |  |  |  |
-| `IMPROVED_MARK_OF_THE_WILD` | 821 (0x335) |  |  |  |
-| `FUROR` | 822 (0x336) |  |  |  |
-| `NATURES_FOCUS` | 823 (0x337) |  |  | Nature's Focus |
-| `IMPROVED_HEALING_TOUCH` | 824 (0x338) |  |  |  |
-| `IMPROVED_REGROWTH` | 825 (0x339) |  |  |  |
-| `IMPROVED_ENRAGE` | 826 (0x33A) |  |  |  |
-| `INSECT_SWARM` | 827 (0x33B) |  |  |  |
-| `GIFT_OF_NATURE` | 828 (0x33C) |  |  |  |
-| `REFLECTION` | 829 (0x33D) |  |  |  |
-| `IMPROVED_REJUVENATION` | 830 (0x33E) |  |  |  |
-| `DRUID_NATURES_SWIFTNESS` | 831 (0x33F) |  |  | Nature's Swiftness |
-| `SUBTLETY` | 841 (0x349) |  |  |  |
-| `IMPROVED_TRANQUILITY` | 842 (0x34A) |  |  |  |
-| `TRANQUIL_SPIRIT` | 843 (0x34B) |  |  |  |
-| `SWIFTMEND` | 844 (0x34C) |  |  |  |
-| `SHADOW_REACH` | 881 (0x371) |  |  |  |
-| `STORMSTRIKE` | 901 (0x385) |  |  |  |
-| `IMPROVED_NATURES_GRASP` | 921 (0x399) |  |  | Improved Nature's Grasp |
-| `CATACLYSM` | 941 (0x3AD) |  |  |  |
-| `BANE` | 943 (0x3AF) |  |  |  |
-| `IMPROVED_SHADOW_BOLT` | 944 (0x3B0) |  |  |  |
-| `IMPROVED_IMMOLATE` | 961 (0x3C1) |  |  |  |
-| `SHADOWBURN` | 963 (0x3C3) |  |  |  |
-| `DESTRUCTIVE_REACH` | 964 (0x3C4) |  |  |  |
-| `IMPROVED_SEARING_PAIN` | 965 (0x3C5) |  |  |  |
-| `EMBERSTORM` | 966 (0x3C6) |  |  |  |
-| `RUIN` | 967 (0x3C7) |  |  |  |
-| `CONFLAGRATE` | 968 (0x3C8) |  |  |  |
-| `DEVASTATION` | 981 (0x3D5) |  |  |  |
-| `AFTERMATH` | 982 (0x3D6) |  |  |  |
-| `IMPROVED_FIREBOLT` | 983 (0x3D7) |  |  |  |
-| `IMPROVED_LASH_OF_PAIN` | 984 (0x3D8) |  |  |  |
-| `INTENSITY` | 985 (0x3D9) |  |  |  |
-| `PYROCLASM` | 986 (0x3DA) |  |  |  |
-| `FEL_CONCENTRATION` | 1001 (0x3E9) |  |  |  |
-| `NIGHTFALL` | 1002 (0x3EA) |  |  |  |
-| `IMPROVED_CORRUPTION` | 1003 (0x3EB) |  |  |  |
-| `IMPROVED_DRAIN_LIFE` | 1004 (0x3EC) |  |  |  |
-| `SUPPRESSION` | 1005 (0x3ED) |  |  |  |
-| `IMPROVED_CURSE_OF_WEAKNESS` | 1006 (0x3EE) |  |  |  |
-| `IMPROVED_LIFE_TAP` | 1007 (0x3EF) |  |  |  |
-| `GRIM_REACH` | 1021 (0x3FD) |  |  |  |
-| `DARK_PACT` | 1022 (0x3FE) |  |  |  |
-| `SIPHON_LIFE` | 1041 (0x411) |  |  |  |
-| `SHADOW_MASTERY` | 1042 (0x412) |  |  |  |
-| `AMPLIFY_CURSE` | 1061 (0x425) |  |  |  |
-| `CURSE_OF_EXHAUSTION` | 1081 (0x439) |  |  |  |
-| `IMPROVED_CURSE_OF_EXHAUSTION` | 1082 (0x43A) |  |  |  |
-| `IMPROVED_DRAIN_SOUL` | 1101 (0x44D) |  |  |  |
-| `IMPROVED_DRAIN_MANA` | 1121 (0x461) |  |  |  |
-| `AGGRESSION` | 1122 (0x462) |  |  |  |
-| `SERRATED_BLADES` | 1123 (0x463) |  |  |  |
-| `INCINERATE` | 1141 (0x475) |  |  |  |
-| `ARCANE_MEDITATION` | 1142 (0x476) |  |  |  |
-| `FAERIE_FIRE_FERAL` | 1162 (0x48A) |  |  |  |
-| `DIVINE_FURY` | 1181 (0x49D) |  |  |  |
-| `MENTAL_STRENGTH` | 1201 (0x4B1) |  |  |  |
-| `FORCE_OF_WILL` | 1202 (0x4B2) |  |  |  |
-| `IMPROVED_HEALTHSTONE` | 1221 (0x4C5) |  |  |  |
-| `IMPROVED_IMP` | 1222 (0x4C6) |  |  |  |
-| `DEMONIC_EMBRACE` | 1223 (0x4C7) |  |  |  |
-| `IMPROVED_HEALTH_FUNNEL` | 1224 (0x4C8) |  |  |  |
-| `IMPROVED_VOIDWALKER` | 1225 (0x4C9) |  |  |  |
-| `FEL_DOMINATION` | 1226 (0x4CA) |  |  |  |
-| `MASTER_SUMMONER` | 1227 (0x4CB) |  |  |  |
-| `FEL_STAMINA` | 1241 (0x4D9) |  |  |  |
-| `FEL_INTELLECT` | 1242 (0x4DA) |  |  |  |
-| `IMPROVED_SUCCUBUS` | 1243 (0x4DB) |  |  |  |
-| `MASTER_DEMONOLOGIST` | 1244 (0x4DC) |  |  |  |
-| `IMPROVED_FIRESTONE` | 1261 (0x4ED) |  |  |  |
-| `UNHOLY_POWER` | 1262 (0x4EE) |  |  |  |
-| `IMPROVED_SPELLSTONE` | 1263 (0x4EF) |  |  |  |
-| `DEMONIC_SACRIFICE` | 1281 (0x501) |  |  |  |
-| `SOUL_LINK` | 1282 (0x502) |  |  |  |
-| `IMPROVED_ENSLAVE_DEMON` | 1283 (0x503) |  |  |  |
-| `IMPROVED_CURSE_OF_AGONY` | 1284 (0x504) |  |  |  |
-| `HUMANOID_SLAYING` | 1301 (0x515) |  |  |  |
-| `HUNTER_LIGHTNING_REFLEXES` | 1303 (0x517) |  |  |  |
-| `ENTRAPMENT` | 1304 (0x518) |  |  |  |
-| `IMPROVED_WING_CLIP` | 1305 (0x519) |  |  |  |
-| `CLEVER_TRAPS` | 1306 (0x51A) |  |  |  |
-| `DETERRENCE` | 1308 (0x51C) |  |  |  |
-| `IMPROVED_FEIGN_DEATH` | 1309 (0x51D) |  |  |  |
-| `SUREFOOTED` | 1310 (0x51E) |  |  |  |
-| `HUNTER_DEFLECTION` | 1311 (0x51F) |  |  |  |
-| `COUNTERATTACK` | 1312 (0x520) |  |  |  |
-| `KILLER_INSTINCT` | 1321 (0x529) |  |  |  |
-| `TRAP_MASTERY` | 1322 (0x52A) |  |  |  |
-| `WYVERN_STING` | 1325 (0x52D) |  |  |  |
-| `IMPROVED_CONCUSSIVE_SHOT` | 1341 (0x53D) |  |  |  |
-| `EFFICIENCY` | 1342 (0x53E) |  |  |  |
-| `IMPROVED_HUNTERS_MARK` | 1343 (0x53F) |  |  | Improved Hunter's Mark |
-| `LETHAL_SHOTS` | 1344 (0x540) |  |  |  |
-| `AIMED_SHOT` | 1345 (0x541) |  |  |  |
-| `IMPROVED_ARCANE_SHOT` | 1346 (0x542) |  |  |  |
-| `BARRAGE` | 1347 (0x543) |  |  |  |
-| `IMPROVED_SERPENT_STING` | 1348 (0x544) |  |  |  |
-| `MORTAL_SHOTS` | 1349 (0x545) |  |  |  |
-| `IMPROVED_SCORPID_STING` | 1351 (0x547) |  |  |  |
-| `HAWK_EYE` | 1352 (0x548) |  |  |  |
-| `SCATTER_SHOT` | 1353 (0x549) |  |  |  |
-| `TRUESHOT_AURA` | 1361 (0x551) |  |  |  |
-| `RANGED_WEAPON_SPECIALIZATION` | 1362 (0x552) |  |  |  |
-| `IMPROVED_ASPECT_OF_THE_MONKEY` | 1381 (0x565) |  |  |  |
-| `IMPROVED_ASPECT_OF_THE_HAWK` | 1382 (0x566) |  |  |  |
-| `PATHFINDING` | 1384 (0x568) |  |  |  |
-| `IMPROVED_MEND_PET` | 1385 (0x569) |  |  |  |
-| `BESTIAL_WRATH` | 1386 (0x56A) |  |  |  |
-| `INTIMIDATION` | 1387 (0x56B) |  |  |  |
-| `SPIRIT_BOND` | 1388 (0x56C) |  |  |  |
-| `ENDURANCE_TRAINING` | 1389 (0x56D) |  |  |  |
-| `BESTIAL_DISCIPLINE` | 1390 (0x56E) |  |  |  |
-| `BESTIAL_SWIFTNESS` | 1391 (0x56F) |  |  |  |
-| `HUNTER_FEROCITY` | 1393 (0x571) |  |  |  |
-| `HUNTER_THICK_HIDE` | 1395 (0x573) |  |  |  |
-| `UNLEASHED_FURY` | 1396 (0x574) |  |  |  |
-| `FRENZY` | 1397 (0x575) |  |  |  |
-| `IMPROVED_BLESSING_OF_MIGHT` | 1401 (0x579) |  |  |  |
-| `PALADIN_VENGEANCE` | 1402 (0x57A) |  |  |  |
-| `PALADIN_DEFLECTION` | 1403 (0x57B) |  |  |  |
-| `IMPROVED_RETRIBUTION_AURA` | 1405 (0x57D) |  |  |  |
-| `BENEDICTION` | 1407 (0x57F) |  |  |  |
-| `SANCTITY_AURA` | 1409 (0x581) |  |  |  |
-| `PALADIN_TWO_HANDED_WEAPON_SPECIALIZATION` | 1410 (0x582) |  |  |  |
-| `CONVICTION` | 1411 (0x583) |  |  |  |
-| `REDOUBT` | 1421 (0x58D) |  |  |  |
-| `IMPROVED_DEVOTION_AURA` | 1422 (0x58E) |  |  |  |
-| `PALADIN_TOUGHNESS` | 1423 (0x58F) |  |  |  |
-| `PALADIN_SHIELD_SPECIALIZATION` | 1424 (0x590) |  |  |  |
-| `GUARDIANS_FAVOR` | 1425 (0x591) |  |  | Guardian's Favor |
-| `RECKONING` | 1426 (0x592) |  |  |  |
-| `PALADIN_ONE_HANDED_WEAPON_SPECIALIZATION` | 1429 (0x595) |  |  |  |
-| `HOLY_SHIELD` | 1430 (0x596) |  |  |  |
-| `BLESSING_OF_SANCTUARY` | 1431 (0x597) |  |  |  |
-| `SPIRITUAL_FOCUS` | 1432 (0x598) |  |  |  |
-| `DIVINE_FAVOR` | 1433 (0x599) |  |  |  |
-| `CONSECRATION` | 1435 (0x59B) |  |  |  |
-| `REPENTANCE` | 1441 (0x5A1) |  |  |  |
-| `BLESSING_OF_KINGS` | 1442 (0x5A2) |  |  |  |
-| `IMPROVED_LAY_ON_HANDS` | 1443 (0x5A3) |  |  |  |
-| `HEALING_LIGHT` | 1444 (0x5A4) |  |  |  |
-| `IMPROVED_BLESSING_OF_WISDOM` | 1446 (0x5A6) |  |  |  |
-| `DIVINE_INTELLECT` | 1449 (0x5A9) |  |  |  |
-| `DIVINE_STRENGTH` | 1450 (0x5AA) |  |  |  |
-| `ILLUMINATION` | 1461 (0x5B5) |  |  |  |
-| `IMPROVED_SEAL_OF_RIGHTEOUSNESS` | 1463 (0x5B7) |  |  |  |
-| `IMPROVED_SEAL_OF_THE_CRUSADER` | 1464 (0x5B8) |  |  |  |
-| `LASTING_JUDGEMENT` | 1465 (0x5B9) |  |  |  |
-| `SEAL_OF_COMMAND` | 1481 (0x5C9) |  |  |  |
-| `IMPROVED_RIGHTEOUS_FURY` | 1501 (0x5DD) |  |  |  |
-| `HOLY_SHOCK` | 1502 (0x5DE) |  |  |  |
-| `IMPROVED_HAMMER_OF_JUSTICE` | 1521 (0x5F1) |  |  |  |
-| `IMPROVED_BERSERKER_RAGE` | 1541 (0x605) |  |  |  |
-| `IMPROVED_EXECUTE` | 1542 (0x606) |  |  |  |
-| `IMPROVED_INTERCEPT` | 1543 (0x607) |  |  |  |
-| `SPIRIT_OF_REDEMPTION` | 1561 (0x619) |  |  |  |
-| `WARRIOR_DUAL_WIELD_SPECIALIZATION` | 1581 (0x62D) |  |  |  |
-| `WARRIOR_SHIELD_SPECIALIZATION` | 1601 (0x641) |  |  |  |
-| `SAVAGE_STRIKES` | 1621 (0x655) |  |  |  |
-| `SURVIVALIST` | 1622 (0x656) |  |  |  |
-| `MONSTER_SLAYING` | 1623 (0x657) |  |  |  |
-| `IMPROVED_EYES_OF_THE_BEAST` | 1624 (0x658) |  |  |  |
-| `IMPROVED_REVIVE_PET` | 1625 (0x659) |  |  |  |
-| `IMPROVED_CONCENTRATION_AURA` | 1626 (0x65A) |  |  |  |
-| `HOLY_POWER` | 1627 (0x65B) |  |  |  |
-| `UNYIELDING_FAITH` | 1628 (0x65C) |  |  |  |
-| `PALADIN_ANTICIPATION` | 1629 (0x65D) |  |  |  |
-| `PALADIN_PRECISION` | 1630 (0x65E) |  |  |  |
-| `IMPROVED_JUDGEMENT` | 1631 (0x65F) |  |  |  |
-| `EYE_FOR_AN_EYE` | 1632 (0x660) |  |  |  |
-| `VINDICATION` | 1633 (0x661) |  |  |  |
-| `PURSUIT_OF_JUSTICE` | 1634 (0x662) |  |  |  |
-| `HOLY_REACH` | 1635 (0x663) |  |  |  |
-| `BLESSED_RECOVERY` | 1636 (0x664) |  |  |  |
-| `LIGHTWELL` | 1637 (0x665) |  |  |  |
-| `IMPROVED_VAMPIRIC_EMBRACE` | 1638 (0x666) |  |  |  |
-| `MASTER_OF_ELEMENTS` | 1639 (0x667) |  |  |  |
-| `ELEMENTAL_WARDING` | 1640 (0x668) |  |  |  |
-| `STORM_REACH` | 1641 (0x669) |  |  |  |
-| `EYE_OF_THE_STORM` | 1642 (0x66A) |  |  |  |
-| `WEAPON_MASTERY` | 1643 (0x66B) |  |  |  |
-| `ELEMENTAL_DEVASTATION` | 1645 (0x66D) |  |  |  |
-| `HEALING_GRACE` | 1646 (0x66E) |  |  |  |
-| `IMPROVED_WEAPON_TOTEMS` | 1647 (0x66F) |  |  |  |
-| `HEALING_WAY` | 1648 (0x670) |  |  |  |
-| `ELEMENTAL_PRECISION` | 1649 (0x671) |  |  |  |
-| `MAGIC_ABSORPTION` | 1650 (0x672) |  |  |  |
-| `SLEIGHT_OF_HAND` | 1700 (0x6A4) |  |  |  |
-| `HEIGHTENED_SENSES` | 1701 (0x6A5) |  |  |  |
-| `DEADLINESS` | 1702 (0x6A6) |  |  |  |
-| `WEAPON_EXPERTISE` | 1703 (0x6A7) |  |  |  |
+| Enumerator | Value  | Comment | Display |
+| --------- | -------- | ------- | ------- |
+| `BURNING_SOUL` | 23 (0x17) |  |  |
+| `IMPROVED_FIRE_WARD` | 24 (0x18) |  |  |
+| `IMPROVED_SCORCH` | 25 (0x19) |  |  |
+| `IMPROVED_FIREBALL` | 26 (0x1A) |  |  |
+| `IMPROVED_FIRE_BLAST` | 27 (0x1B) |  |  |
+| `FLAME_THROWING` | 28 (0x1C) |  |  |
+| `PYROBLAST` | 29 (0x1D) |  |  |
+| `IMPACT` | 30 (0x1E) |  |  |
+| `IMPROVED_FLAMESTRIKE` | 31 (0x1F) |  |  |
+| `BLAST_WAVE` | 32 (0x20) |  |  |
+| `CRITICAL_MASS` | 33 (0x21) |  |  |
+| `IGNITE` | 34 (0x22) |  |  |
+| `FIRE_POWER` | 35 (0x23) |  |  |
+| `COMBUSTION` | 36 (0x24) |  |  |
+| `IMPROVED_FROSTBOLT` | 37 (0x25) |  |  |
+| `FROSTBITE` | 38 (0x26) |  |  |
+| `PIERCING_ICE` | 61 (0x3D) |  |  |
+| `IMPROVED_FROST_NOVA` | 62 (0x3E) |  |  |
+| `IMPROVED_BLIZZARD` | 63 (0x3F) |  |  |
+| `IMPROVED_CONE_OF_COLD` | 64 (0x40) |  |  |
+| `PERMAFROST` | 65 (0x41) |  |  |
+| `FROST_CHANNELING` | 66 (0x42) |  |  |
+| `SHATTER` | 67 (0x43) |  |  |
+| `WINTERS_CHILL` | 68 (0x44) |  | Winter's Chill |
+| `COLD_SNAP` | 69 (0x45) |  |  |
+| `FROST_WARDING` | 70 (0x46) |  |  |
+| `ICE_BARRIER` | 71 (0x47) |  |  |
+| `ICE_BLOCK` | 72 (0x48) |  |  |
+| `ICE_SHARDS` | 73 (0x49) |  |  |
+| `ARCANE_SUBTLETY` | 74 (0x4A) |  |  |
+| `ARCANE_CONCENTRATION` | 75 (0x4B) |  |  |
+| `ARCANE_FOCUS` | 76 (0x4C) |  |  |
+| `ARCANE_MIND` | 77 (0x4D) |  |  |
+| `MAGE_WAND_SPECIALIZATION` | 78 (0x4E) |  |  |
+| `IMPROVED_ARCANE_MISSILES` | 80 (0x50) |  |  |
+| `IMPROVED_ARCANE_EXPLOSION` | 81 (0x51) |  |  |
+| `MAGIC_ATTUNEMENT` | 82 (0x52) |  |  |
+| `IMPROVED_MANA_SHIELD` | 83 (0x53) |  |  |
+| `ARCANE_RESILIENCE` | 85 (0x55) |  |  |
+| `PRESENCE_OF_MIND` | 86 (0x56) |  |  |
+| `ARCANE_POWER` | 87 (0x57) |  |  |
+| `IMPROVED_COUNTERSPELL` | 88 (0x58) |  |  |
+| `DEEP_WOUNDS` | 121 (0x79) |  |  |
+| `WARRIOR_SWORD_SPECIALIZATION` | 123 (0x7B) |  |  |
+| `IMPROVED_HEROIC_STRIKE` | 124 (0x7C) |  |  |
+| `WARRIOR_MACE_SPECIALIZATION` | 125 (0x7D) |  |  |
+| `IMPROVED_CHARGE` | 126 (0x7E) |  |  |
+| `IMPROVED_REND` | 127 (0x7F) |  |  |
+| `IMPROVED_THUNDER_CLAP` | 128 (0x80) |  |  |
+| `IMPROVED_HAMSTRING` | 129 (0x81) |  |  |
+| `WARRIOR_DEFLECTION` | 130 (0x82) |  |  |
+| `IMPROVED_OVERPOWER` | 131 (0x83) |  |  |
+| `AXE_SPECIALIZATION` | 132 (0x84) |  |  |
+| `SWEEPING_STRIKES` | 133 (0x85) |  |  |
+| `POLEARM_SPECIALIZATION` | 134 (0x86) |  |  |
+| `MORTAL_STRIKE` | 135 (0x87) |  |  |
+| `WARRIOR_TWO_HANDED_WEAPON_SPECIALIZATION` | 136 (0x88) |  |  |
+| `ANGER_MANAGEMENT` | 137 (0x89) |  |  |
+| `WARRIOR_ANTICIPATION` | 138 (0x8A) |  |  |
+| `WARRIOR_TOUGHNESS` | 140 (0x8C) |  |  |
+| `IRON_WILL` | 141 (0x8D) |  |  |
+| `IMPROVED_BLOODRAGE` | 142 (0x8E) |  |  |
+| `IMPROVED_TAUNT` | 143 (0x8F) |  |  |
+| `DEFIANCE` | 144 (0x90) |  |  |
+| `IMPROVED_SHIELD_BLOCK` | 145 (0x91) |  |  |
+| `IMPROVED_SUNDER_ARMOR` | 146 (0x92) |  |  |
+| `IMPROVED_REVENGE` | 147 (0x93) |  |  |
+| `SHIELD_SLAM` | 148 (0x94) |  |  |
+| `IMPROVED_SHIELD_BASH` | 149 (0x95) |  |  |
+| `IMPROVED_SHIELD_WALL` | 150 (0x96) |  |  |
+| `IMPROVED_DISARM` | 151 (0x97) |  |  |
+| `CONCUSSION_BLOW` | 152 (0x98) |  |  |
+| `LAST_STAND` | 153 (0x99) |  |  |
+| `IMPROVED_BATTLE_SHOUT` | 154 (0x9A) |  |  |
+| `ENRAGE` | 155 (0x9B) |  |  |
+| `WARRIOR_FLURRY` | 156 (0x9C) |  |  |
+| `CRUELTY` | 157 (0x9D) |  |  |
+| `BOOMING_VOICE` | 158 (0x9E) |  |  |
+| `UNBRIDLED_WRATH` | 159 (0x9F) |  |  |
+| `PIERCING_HOWL` | 160 (0xA0) |  |  |
+| `IMPROVED_DEMORALIZING_SHOUT` | 161 (0xA1) |  |  |
+| `DEATH_WISH` | 165 (0xA5) |  |  |
+| `IMPROVED_CLEAVE` | 166 (0xA6) |  |  |
+| `BLOODTHIRST` | 167 (0xA7) |  |  |
+| `IMPROVED_SLAM` | 168 (0xA8) |  |  |
+| `ROGUE_PRECISION` | 181 (0xB5) |  |  |
+| `DAGGER_SPECIALIZATION` | 182 (0xB6) |  |  |
+| `FIST_WEAPON_SPECIALIZATION` | 183 (0xB7) |  |  |
+| `ROGUE_MACE_SPECIALIZATION` | 184 (0xB8) |  |  |
+| `ROGUE_LIGHTNING_REFLEXES` | 186 (0xBA) |  |  |
+| `ROGUE_DEFLECTION` | 187 (0xBB) |  |  |
+| `IMPROVED_SINISTER_STRIKE` | 201 (0xC9) |  |  |
+| `IMPROVED_BACKSTAB` | 202 (0xCA) |  |  |
+| `IMPROVED_GOUGE` | 203 (0xCB) |  |  |
+| `ENDURANCE` | 204 (0xCC) |  |  |
+| `ADRENALINE_RUSH` | 205 (0xCD) |  |  |
+| `IMPROVED_KICK` | 206 (0xCE) |  |  |
+| `ROGUE_DUAL_WIELD_SPECIALIZATION` | 221 (0xDD) |  |  |
+| `IMPROVED_SPRINT` | 222 (0xDE) |  |  |
+| `BLADE_FLURRY` | 223 (0xDF) |  |  |
+| `MASTER_OF_DECEPTION` | 241 (0xF1) |  |  |
+| `ROGUE_SWORD_SPECIALIZATION` | 242 (0xF2) |  |  |
+| `CAMOUFLAGE` | 244 (0xF4) |  |  |
+| `INITIATIVE` | 245 (0xF5) |  |  |
+| `SETUP` | 246 (0xF6) |  |  |
+| `ELUSIVENESS` | 247 (0xF7) |  |  |
+| `OPPORTUNITY` | 261 (0x105) |  |  |
+| `IMPROVED_SAP` | 262 (0x106) |  |  |
+| `IMPROVED_AMBUSH` | 263 (0x107) |  |  |
+| `DIRTY_DEEDS` | 265 (0x109) |  |  |
+| `IMPROVED_POISONS` | 268 (0x10C) |  |  |
+| `LETHALITY` | 269 (0x10D) |  |  |
+| `MALICE` | 270 (0x10E) |  |  |
+| `REMORSELESS_ATTACKS` | 272 (0x110) |  |  |
+| `RUTHLESSNESS` | 273 (0x111) |  |  |
+| `MURDER` | 274 (0x112) |  |  |
+| `IMPROVED_EVISCERATE` | 276 (0x114) |  |  |
+| `IMPROVED_SLICE_AND_DICE` | 277 (0x115) |  |  |
+| `IMPROVED_EXPOSE_ARMOR` | 278 (0x116) |  |  |
+| `IMPROVED_KIDNEY_SHOT` | 279 (0x117) |  |  |
+| `COLD_BLOOD` | 280 (0x118) |  |  |
+| `RELENTLESS_STRIKES` | 281 (0x119) |  |  |
+| `SEAL_FATE` | 283 (0x11B) |  |  |
+| `PREPARATION` | 284 (0x11C) |  |  |
+| `RIPOSTE` | 301 (0x12D) |  |  |
+| `GHOSTLY_STRIKE` | 303 (0x12F) |  |  |
+| `MARTYRDOM` | 321 (0x141) |  |  |
+| `POWER_INFUSION` | 322 (0x142) |  |  |
+| `MENTAL_AGILITY` | 341 (0x155) |  |  |
+| `UNBREAKABLE_WILL` | 342 (0x156) |  |  |
+| `IMPROVED_POWER_WORD_SHIELD` | 343 (0x157) |  |  |
+| `IMPROVED_POWER_WORD_FORTITUDE` | 344 (0x158) |  |  |
+| `PRIEST_WAND_SPECIALIZATION` | 345 (0x159) |  |  |
+| `IMPROVED_INNER_FIRE` | 346 (0x15A) |  |  |
+| `MEDITATION` | 347 (0x15B) |  |  |
+| `INNER_FOCUS` | 348 (0x15C) |  |  |
+| `IMPROVED_MANA_BURN` | 350 (0x15E) |  |  |
+| `DIVINE_SPIRIT` | 351 (0x15F) |  |  |
+| `SILENT_RESOLVE` | 352 (0x160) |  |  |
+| `INSPIRATION` | 361 (0x169) |  |  |
+| `PREMEDITATION` | 381 (0x17D) |  |  |
+| `VIGOR` | 382 (0x17E) |  |  |
+| `HOLY_SPECIALIZATION` | 401 (0x191) |  |  |
+| `SPIRITUAL_GUIDANCE` | 402 (0x192) |  |  |
+| `SEARING_LIGHT` | 403 (0x193) |  |  |
+| `SPIRITUAL_HEALING` | 404 (0x194) |  |  |
+| `IMPROVED_RENEW` | 406 (0x196) |  |  |
+| `IMPROVED_HEALING` | 408 (0x198) |  |  |
+| `PRIEST_HEALING_FOCUS` | 410 (0x19A) |  |  |
+| `SPELL_WARDING` | 411 (0x19B) |  |  |
+| `IMPROVED_PRAYER_OF_HEALING` | 413 (0x19D) |  |  |
+| `ARCANE_INSTABILITY` | 421 (0x1A5) |  |  |
+| `HOLY_NOVA` | 442 (0x1BA) |  |  |
+| `SHADOW_WEAVING` | 461 (0x1CD) |  |  |
+| `DARKNESS` | 462 (0x1CE) |  |  |
+| `SHADOW_FOCUS` | 463 (0x1CF) |  |  |
+| `BLACKOUT` | 464 (0x1D0) |  |  |
+| `SPIRIT_TAP` | 465 (0x1D1) |  |  |
+| `SHADOW_AFFINITY` | 466 (0x1D2) |  |  |
+| `IMPROVED_MIND_BLAST` | 481 (0x1E1) |  |  |
+| `IMPROVED_SHADOW_WORD_PAIN` | 482 (0x1E2) |  |  |
+| `IMPROVED_FADE` | 483 (0x1E3) |  |  |
+| `VAMPIRIC_EMBRACE` | 484 (0x1E4) |  |  |
+| `MIND_FLAY` | 501 (0x1F5) |  |  |
+| `SHADOWFORM` | 521 (0x209) |  |  |
+| `SILENCE` | 541 (0x21D) |  |  |
+| `IMPROVED_PSYCHIC_SCREAM` | 542 (0x21E) |  |  |
+| `CALL_OF_FLAME` | 561 (0x231) |  |  |
+| `CALL_OF_THUNDER` | 562 (0x232) |  |  |
+| `CONCUSSION` | 563 (0x233) |  |  |
+| `CONVECTION` | 564 (0x234) |  |  |
+| `ELEMENTAL_FURY` | 565 (0x235) |  |  |
+| `IMPROVED_FIRE_TOTEMS` | 567 (0x237) |  |  |
+| `EARTHS_GRASP` | 572 (0x23C) |  | Earth's Grasp |
+| `ELEMENTAL_MASTERY` | 573 (0x23D) |  |  |
+| `ELEMENTAL_FOCUS` | 574 (0x23E) |  |  |
+| `REVERBERATION` | 575 (0x23F) |  |  |
+| `ANCESTRAL_HEALING` | 581 (0x245) |  |  |
+| `TOTEMIC_MASTERY` | 582 (0x246) |  |  |
+| `NATURES_GUIDANCE` | 583 (0x247) |  | Nature's Guidance |
+| `IMPROVED_HEALING_WAVE` | 586 (0x24A) |  |  |
+| `SHAMAN_HEALING_FOCUS` | 587 (0x24B) |  |  |
+| `RESTORATIVE_TOTEMS` | 588 (0x24C) |  |  |
+| `IMPROVED_REINCARNATION` | 589 (0x24D) |  |  |
+| `MANA_TIDE_TOTEM` | 590 (0x24E) |  |  |
+| `SHAMAN_NATURES_SWIFTNESS` | 591 (0x24F) |  | Nature's Swiftness |
+| `PURIFICATION` | 592 (0x250) |  |  |
+| `TIDAL_FOCUS` | 593 (0x251) |  |  |
+| `TIDAL_MASTERY` | 594 (0x252) |  |  |
+| `TOTEMIC_FOCUS` | 595 (0x253) |  |  |
+| `SHAMAN_ANTICIPATION` | 601 (0x259) |  |  |
+| `SHAMAN_FLURRY` | 602 (0x25A) |  |  |
+| `IMPROVED_GHOST_WOLF` | 605 (0x25D) |  |  |
+| `IMPROVED_LIGHTNING_SHIELD` | 607 (0x25F) |  |  |
+| `GUARDIAN_TOTEMS` | 609 (0x261) |  |  |
+| `ENHANCING_TOTEMS` | 610 (0x262) |  |  |
+| `ELEMENTAL_WEAPONS` | 611 (0x263) |  |  |
+| `SHAMAN_SHIELD_SPECIALIZATION` | 612 (0x264) |  |  |
+| `THUNDERING_STRIKES` | 613 (0x265) |  |  |
+| `ANCESTRAL_KNOWLEDGE` | 614 (0x266) |  |  |
+| `SHAMAN_TOUGHNESS` | 615 (0x267) |  |  |
+| `PARRY` | 616 (0x268) |  |  |
+| `TWO_HANDED_AXES_AND_MACES` | 617 (0x269) |  |  |
+| `TACTICAL_MASTERY` | 641 (0x281) |  |  |
+| `BLOOD_CRAZE` | 661 (0x295) |  |  |
+| `IMPALE` | 662 (0x296) |  |  |
+| `HEMORRHAGE` | 681 (0x2A9) |  |  |
+| `VILE_POISONS` | 682 (0x2AA) |  |  |
+| `WARRIOR_ONE_HANDED_WEAPON_SPECIALIZATION` | 702 (0x2BE) |  |  |
+| `LIGHTNING_MASTERY` | 721 (0x2D1) |  |  |
+| `ARCTIC_REACH` | 741 (0x2E5) |  |  |
+| `NATURES_GRASP` | 761 (0x2F9) |  | Nature's Grasp |
+| `IMPROVED_WRATH` | 762 (0x2FA) |  |  |
+| `IMPROVED_MOONFIRE` | 763 (0x2FB) |  |  |
+| `NATURES_REACH` | 764 (0x2FC) |  | Nature's Reach |
+| `NATURAL_SHAPESHIFTER` | 781 (0x30D) |  |  |
+| `IMPROVED_THORNS` | 782 (0x30E) |  |  |
+| `MOONGLOW` | 783 (0x30F) |  |  |
+| `IMPROVED_STARFIRE` | 784 (0x310) |  |  |
+| `IMPROVED_ENTANGLING_ROOTS` | 787 (0x313) |  |  |
+| `OMEN_OF_CLARITY` | 788 (0x314) |  |  |
+| `NATURES_GRACE` | 789 (0x315) |  | Nature's Grace |
+| `MOONFURY` | 790 (0x316) |  |  |
+| `NATURAL_WEAPONS` | 791 (0x317) |  |  |
+| `DRUID_VENGEANCE` | 792 (0x318) |  |  |
+| `MOONKIN_FORM` | 793 (0x319) |  |  |
+| `DRUID_THICK_HIDE` | 794 (0x31A) |  |  |
+| `FERAL_AGGRESSION` | 795 (0x31B) |  |  |
+| `DRUID_FEROCITY` | 796 (0x31C) |  |  |
+| `BRUTAL_IMPACT` | 797 (0x31D) |  |  |
+| `SHARPENED_CLAWS` | 798 (0x31E) |  |  |
+| `FERAL_INSTINCT` | 799 (0x31F) |  |  |
+| `BLOOD_FRENZY` | 800 (0x320) |  |  |
+| `PRIMAL_FURY` | 801 (0x321) |  |  |
+| `IMPROVED_SHRED` | 802 (0x322) |  |  |
+| `PREDATORY_STRIKES` | 803 (0x323) |  |  |
+| `FERAL_CHARGE` | 804 (0x324) |  |  |
+| `SAVAGE_FURY` | 805 (0x325) |  |  |
+| `FELINE_SWIFTNESS` | 807 (0x327) |  |  |
+| `HEART_OF_THE_WILD` | 808 (0x328) |  |  |
+| `LEADER_OF_THE_PACK` | 809 (0x329) |  |  |
+| `IMPROVED_MARK_OF_THE_WILD` | 821 (0x335) |  |  |
+| `FUROR` | 822 (0x336) |  |  |
+| `NATURES_FOCUS` | 823 (0x337) |  | Nature's Focus |
+| `IMPROVED_HEALING_TOUCH` | 824 (0x338) |  |  |
+| `IMPROVED_REGROWTH` | 825 (0x339) |  |  |
+| `IMPROVED_ENRAGE` | 826 (0x33A) |  |  |
+| `INSECT_SWARM` | 827 (0x33B) |  |  |
+| `GIFT_OF_NATURE` | 828 (0x33C) |  |  |
+| `REFLECTION` | 829 (0x33D) |  |  |
+| `IMPROVED_REJUVENATION` | 830 (0x33E) |  |  |
+| `DRUID_NATURES_SWIFTNESS` | 831 (0x33F) |  | Nature's Swiftness |
+| `SUBTLETY` | 841 (0x349) |  |  |
+| `IMPROVED_TRANQUILITY` | 842 (0x34A) |  |  |
+| `TRANQUIL_SPIRIT` | 843 (0x34B) |  |  |
+| `SWIFTMEND` | 844 (0x34C) |  |  |
+| `SHADOW_REACH` | 881 (0x371) |  |  |
+| `STORMSTRIKE` | 901 (0x385) |  |  |
+| `IMPROVED_NATURES_GRASP` | 921 (0x399) |  | Improved Nature's Grasp |
+| `CATACLYSM` | 941 (0x3AD) |  |  |
+| `BANE` | 943 (0x3AF) |  |  |
+| `IMPROVED_SHADOW_BOLT` | 944 (0x3B0) |  |  |
+| `IMPROVED_IMMOLATE` | 961 (0x3C1) |  |  |
+| `SHADOWBURN` | 963 (0x3C3) |  |  |
+| `DESTRUCTIVE_REACH` | 964 (0x3C4) |  |  |
+| `IMPROVED_SEARING_PAIN` | 965 (0x3C5) |  |  |
+| `EMBERSTORM` | 966 (0x3C6) |  |  |
+| `RUIN` | 967 (0x3C7) |  |  |
+| `CONFLAGRATE` | 968 (0x3C8) |  |  |
+| `DEVASTATION` | 981 (0x3D5) |  |  |
+| `AFTERMATH` | 982 (0x3D6) |  |  |
+| `IMPROVED_FIREBOLT` | 983 (0x3D7) |  |  |
+| `IMPROVED_LASH_OF_PAIN` | 984 (0x3D8) |  |  |
+| `INTENSITY` | 985 (0x3D9) |  |  |
+| `PYROCLASM` | 986 (0x3DA) |  |  |
+| `FEL_CONCENTRATION` | 1001 (0x3E9) |  |  |
+| `NIGHTFALL` | 1002 (0x3EA) |  |  |
+| `IMPROVED_CORRUPTION` | 1003 (0x3EB) |  |  |
+| `IMPROVED_DRAIN_LIFE` | 1004 (0x3EC) |  |  |
+| `SUPPRESSION` | 1005 (0x3ED) |  |  |
+| `IMPROVED_CURSE_OF_WEAKNESS` | 1006 (0x3EE) |  |  |
+| `IMPROVED_LIFE_TAP` | 1007 (0x3EF) |  |  |
+| `GRIM_REACH` | 1021 (0x3FD) |  |  |
+| `DARK_PACT` | 1022 (0x3FE) |  |  |
+| `SIPHON_LIFE` | 1041 (0x411) |  |  |
+| `SHADOW_MASTERY` | 1042 (0x412) |  |  |
+| `AMPLIFY_CURSE` | 1061 (0x425) |  |  |
+| `CURSE_OF_EXHAUSTION` | 1081 (0x439) |  |  |
+| `IMPROVED_CURSE_OF_EXHAUSTION` | 1082 (0x43A) |  |  |
+| `IMPROVED_DRAIN_SOUL` | 1101 (0x44D) |  |  |
+| `IMPROVED_DRAIN_MANA` | 1121 (0x461) |  |  |
+| `AGGRESSION` | 1122 (0x462) |  |  |
+| `SERRATED_BLADES` | 1123 (0x463) |  |  |
+| `INCINERATE` | 1141 (0x475) |  |  |
+| `ARCANE_MEDITATION` | 1142 (0x476) |  |  |
+| `FAERIE_FIRE_FERAL` | 1162 (0x48A) |  |  |
+| `DIVINE_FURY` | 1181 (0x49D) |  |  |
+| `MENTAL_STRENGTH` | 1201 (0x4B1) |  |  |
+| `FORCE_OF_WILL` | 1202 (0x4B2) |  |  |
+| `IMPROVED_HEALTHSTONE` | 1221 (0x4C5) |  |  |
+| `IMPROVED_IMP` | 1222 (0x4C6) |  |  |
+| `DEMONIC_EMBRACE` | 1223 (0x4C7) |  |  |
+| `IMPROVED_HEALTH_FUNNEL` | 1224 (0x4C8) |  |  |
+| `IMPROVED_VOIDWALKER` | 1225 (0x4C9) |  |  |
+| `FEL_DOMINATION` | 1226 (0x4CA) |  |  |
+| `MASTER_SUMMONER` | 1227 (0x4CB) |  |  |
+| `FEL_STAMINA` | 1241 (0x4D9) |  |  |
+| `FEL_INTELLECT` | 1242 (0x4DA) |  |  |
+| `IMPROVED_SUCCUBUS` | 1243 (0x4DB) |  |  |
+| `MASTER_DEMONOLOGIST` | 1244 (0x4DC) |  |  |
+| `IMPROVED_FIRESTONE` | 1261 (0x4ED) |  |  |
+| `UNHOLY_POWER` | 1262 (0x4EE) |  |  |
+| `IMPROVED_SPELLSTONE` | 1263 (0x4EF) |  |  |
+| `DEMONIC_SACRIFICE` | 1281 (0x501) |  |  |
+| `SOUL_LINK` | 1282 (0x502) |  |  |
+| `IMPROVED_ENSLAVE_DEMON` | 1283 (0x503) |  |  |
+| `IMPROVED_CURSE_OF_AGONY` | 1284 (0x504) |  |  |
+| `HUMANOID_SLAYING` | 1301 (0x515) |  |  |
+| `HUNTER_LIGHTNING_REFLEXES` | 1303 (0x517) |  |  |
+| `ENTRAPMENT` | 1304 (0x518) |  |  |
+| `IMPROVED_WING_CLIP` | 1305 (0x519) |  |  |
+| `CLEVER_TRAPS` | 1306 (0x51A) |  |  |
+| `DETERRENCE` | 1308 (0x51C) |  |  |
+| `IMPROVED_FEIGN_DEATH` | 1309 (0x51D) |  |  |
+| `SUREFOOTED` | 1310 (0x51E) |  |  |
+| `HUNTER_DEFLECTION` | 1311 (0x51F) |  |  |
+| `COUNTERATTACK` | 1312 (0x520) |  |  |
+| `KILLER_INSTINCT` | 1321 (0x529) |  |  |
+| `TRAP_MASTERY` | 1322 (0x52A) |  |  |
+| `WYVERN_STING` | 1325 (0x52D) |  |  |
+| `IMPROVED_CONCUSSIVE_SHOT` | 1341 (0x53D) |  |  |
+| `EFFICIENCY` | 1342 (0x53E) |  |  |
+| `IMPROVED_HUNTERS_MARK` | 1343 (0x53F) |  | Improved Hunter's Mark |
+| `LETHAL_SHOTS` | 1344 (0x540) |  |  |
+| `AIMED_SHOT` | 1345 (0x541) |  |  |
+| `IMPROVED_ARCANE_SHOT` | 1346 (0x542) |  |  |
+| `BARRAGE` | 1347 (0x543) |  |  |
+| `IMPROVED_SERPENT_STING` | 1348 (0x544) |  |  |
+| `MORTAL_SHOTS` | 1349 (0x545) |  |  |
+| `IMPROVED_SCORPID_STING` | 1351 (0x547) |  |  |
+| `HAWK_EYE` | 1352 (0x548) |  |  |
+| `SCATTER_SHOT` | 1353 (0x549) |  |  |
+| `TRUESHOT_AURA` | 1361 (0x551) |  |  |
+| `RANGED_WEAPON_SPECIALIZATION` | 1362 (0x552) |  |  |
+| `IMPROVED_ASPECT_OF_THE_MONKEY` | 1381 (0x565) |  |  |
+| `IMPROVED_ASPECT_OF_THE_HAWK` | 1382 (0x566) |  |  |
+| `PATHFINDING` | 1384 (0x568) |  |  |
+| `IMPROVED_MEND_PET` | 1385 (0x569) |  |  |
+| `BESTIAL_WRATH` | 1386 (0x56A) |  |  |
+| `INTIMIDATION` | 1387 (0x56B) |  |  |
+| `SPIRIT_BOND` | 1388 (0x56C) |  |  |
+| `ENDURANCE_TRAINING` | 1389 (0x56D) |  |  |
+| `BESTIAL_DISCIPLINE` | 1390 (0x56E) |  |  |
+| `BESTIAL_SWIFTNESS` | 1391 (0x56F) |  |  |
+| `HUNTER_FEROCITY` | 1393 (0x571) |  |  |
+| `HUNTER_THICK_HIDE` | 1395 (0x573) |  |  |
+| `UNLEASHED_FURY` | 1396 (0x574) |  |  |
+| `FRENZY` | 1397 (0x575) |  |  |
+| `IMPROVED_BLESSING_OF_MIGHT` | 1401 (0x579) |  |  |
+| `PALADIN_VENGEANCE` | 1402 (0x57A) |  |  |
+| `PALADIN_DEFLECTION` | 1403 (0x57B) |  |  |
+| `IMPROVED_RETRIBUTION_AURA` | 1405 (0x57D) |  |  |
+| `BENEDICTION` | 1407 (0x57F) |  |  |
+| `SANCTITY_AURA` | 1409 (0x581) |  |  |
+| `PALADIN_TWO_HANDED_WEAPON_SPECIALIZATION` | 1410 (0x582) |  |  |
+| `CONVICTION` | 1411 (0x583) |  |  |
+| `REDOUBT` | 1421 (0x58D) |  |  |
+| `IMPROVED_DEVOTION_AURA` | 1422 (0x58E) |  |  |
+| `PALADIN_TOUGHNESS` | 1423 (0x58F) |  |  |
+| `PALADIN_SHIELD_SPECIALIZATION` | 1424 (0x590) |  |  |
+| `GUARDIANS_FAVOR` | 1425 (0x591) |  | Guardian's Favor |
+| `RECKONING` | 1426 (0x592) |  |  |
+| `PALADIN_ONE_HANDED_WEAPON_SPECIALIZATION` | 1429 (0x595) |  |  |
+| `HOLY_SHIELD` | 1430 (0x596) |  |  |
+| `BLESSING_OF_SANCTUARY` | 1431 (0x597) |  |  |
+| `SPIRITUAL_FOCUS` | 1432 (0x598) |  |  |
+| `DIVINE_FAVOR` | 1433 (0x599) |  |  |
+| `CONSECRATION` | 1435 (0x59B) |  |  |
+| `REPENTANCE` | 1441 (0x5A1) |  |  |
+| `BLESSING_OF_KINGS` | 1442 (0x5A2) |  |  |
+| `IMPROVED_LAY_ON_HANDS` | 1443 (0x5A3) |  |  |
+| `HEALING_LIGHT` | 1444 (0x5A4) |  |  |
+| `IMPROVED_BLESSING_OF_WISDOM` | 1446 (0x5A6) |  |  |
+| `DIVINE_INTELLECT` | 1449 (0x5A9) |  |  |
+| `DIVINE_STRENGTH` | 1450 (0x5AA) |  |  |
+| `ILLUMINATION` | 1461 (0x5B5) |  |  |
+| `IMPROVED_SEAL_OF_RIGHTEOUSNESS` | 1463 (0x5B7) |  |  |
+| `IMPROVED_SEAL_OF_THE_CRUSADER` | 1464 (0x5B8) |  |  |
+| `LASTING_JUDGEMENT` | 1465 (0x5B9) |  |  |
+| `SEAL_OF_COMMAND` | 1481 (0x5C9) |  |  |
+| `IMPROVED_RIGHTEOUS_FURY` | 1501 (0x5DD) |  |  |
+| `HOLY_SHOCK` | 1502 (0x5DE) |  |  |
+| `IMPROVED_HAMMER_OF_JUSTICE` | 1521 (0x5F1) |  |  |
+| `IMPROVED_BERSERKER_RAGE` | 1541 (0x605) |  |  |
+| `IMPROVED_EXECUTE` | 1542 (0x606) |  |  |
+| `IMPROVED_INTERCEPT` | 1543 (0x607) |  |  |
+| `SPIRIT_OF_REDEMPTION` | 1561 (0x619) |  |  |
+| `WARRIOR_DUAL_WIELD_SPECIALIZATION` | 1581 (0x62D) |  |  |
+| `WARRIOR_SHIELD_SPECIALIZATION` | 1601 (0x641) |  |  |
+| `SAVAGE_STRIKES` | 1621 (0x655) |  |  |
+| `SURVIVALIST` | 1622 (0x656) |  |  |
+| `MONSTER_SLAYING` | 1623 (0x657) |  |  |
+| `IMPROVED_EYES_OF_THE_BEAST` | 1624 (0x658) |  |  |
+| `IMPROVED_REVIVE_PET` | 1625 (0x659) |  |  |
+| `IMPROVED_CONCENTRATION_AURA` | 1626 (0x65A) |  |  |
+| `HOLY_POWER` | 1627 (0x65B) |  |  |
+| `UNYIELDING_FAITH` | 1628 (0x65C) |  |  |
+| `PALADIN_ANTICIPATION` | 1629 (0x65D) |  |  |
+| `PALADIN_PRECISION` | 1630 (0x65E) |  |  |
+| `IMPROVED_JUDGEMENT` | 1631 (0x65F) |  |  |
+| `EYE_FOR_AN_EYE` | 1632 (0x660) |  |  |
+| `VINDICATION` | 1633 (0x661) |  |  |
+| `PURSUIT_OF_JUSTICE` | 1634 (0x662) |  |  |
+| `HOLY_REACH` | 1635 (0x663) |  |  |
+| `BLESSED_RECOVERY` | 1636 (0x664) |  |  |
+| `LIGHTWELL` | 1637 (0x665) |  |  |
+| `IMPROVED_VAMPIRIC_EMBRACE` | 1638 (0x666) |  |  |
+| `MASTER_OF_ELEMENTS` | 1639 (0x667) |  |  |
+| `ELEMENTAL_WARDING` | 1640 (0x668) |  |  |
+| `STORM_REACH` | 1641 (0x669) |  |  |
+| `EYE_OF_THE_STORM` | 1642 (0x66A) |  |  |
+| `WEAPON_MASTERY` | 1643 (0x66B) |  |  |
+| `ELEMENTAL_DEVASTATION` | 1645 (0x66D) |  |  |
+| `HEALING_GRACE` | 1646 (0x66E) |  |  |
+| `IMPROVED_WEAPON_TOTEMS` | 1647 (0x66F) |  |  |
+| `HEALING_WAY` | 1648 (0x670) |  |  |
+| `ELEMENTAL_PRECISION` | 1649 (0x671) |  |  |
+| `MAGIC_ABSORPTION` | 1650 (0x672) |  |  |
+| `SLEIGHT_OF_HAND` | 1700 (0x6A4) |  |  |
+| `HEIGHTENED_SENSES` | 1701 (0x6A5) |  |  |
+| `DEADLINESS` | 1702 (0x6A6) |  |  |
+| `WEAPON_EXPERTISE` | 1703 (0x6A7) |  |  |
 
 Used in:
 * [CMSG_LEARN_TALENT](cmsg_learn_talent.md)
@@ -1475,587 +1475,587 @@ enum Talent : u32 {
 ### Type
 The basic type is `u32`, a 4 byte (32 bit) little endian integer.
 ### Enumerators
-| Enumerator | Value  | Description | Comment | Display |
-| --------- | -------- | ----------- | ------- | ------- |
-| `BURNING_SOUL` | 23 (0x17) |  |  |  |
-| `MOLTEN_SHIELDS` | 24 (0x18) |  |  |  |
-| `IMPROVED_SCORCH` | 25 (0x19) |  |  |  |
-| `IMPROVED_FIREBALL` | 26 (0x1A) |  |  |  |
-| `IMPROVED_FIRE_BLAST` | 27 (0x1B) |  |  |  |
-| `FLAME_THROWING` | 28 (0x1C) |  |  |  |
-| `PYROBLAST` | 29 (0x1D) |  |  |  |
-| `IMPACT` | 30 (0x1E) |  |  |  |
-| `IMPROVED_FLAMESTRIKE` | 31 (0x1F) |  |  |  |
-| `BLAST_WAVE` | 32 (0x20) |  |  |  |
-| `CRITICAL_MASS` | 33 (0x21) |  |  |  |
-| `IGNITE` | 34 (0x22) |  |  |  |
-| `FIRE_POWER` | 35 (0x23) |  |  |  |
-| `COMBUSTION` | 36 (0x24) |  |  |  |
-| `IMPROVED_FROSTBOLT` | 37 (0x25) |  |  |  |
-| `FROSTBITE` | 38 (0x26) |  |  |  |
-| `PIERCING_ICE` | 61 (0x3D) |  |  |  |
-| `IMPROVED_FROST_NOVA` | 62 (0x3E) |  |  |  |
-| `IMPROVED_BLIZZARD` | 63 (0x3F) |  |  |  |
-| `IMPROVED_CONE_OF_COLD` | 64 (0x40) |  |  |  |
-| `PERMAFROST` | 65 (0x41) |  |  |  |
-| `FROST_CHANNELING` | 66 (0x42) |  |  |  |
-| `SHATTER` | 67 (0x43) |  |  |  |
-| `WINTERS_CHILL` | 68 (0x44) |  |  | Winter's Chill |
-| `ICY_VEINS` | 69 (0x45) |  |  |  |
-| `FROST_WARDING` | 70 (0x46) |  |  |  |
-| `ICE_BARRIER` | 71 (0x47) |  |  |  |
-| `COLD_SNAP` | 72 (0x48) |  |  |  |
-| `ICE_SHARDS` | 73 (0x49) |  |  |  |
-| `ARCANE_SUBTLETY` | 74 (0x4A) |  |  |  |
-| `ARCANE_CONCENTRATION` | 75 (0x4B) |  |  |  |
-| `ARCANE_FOCUS` | 76 (0x4C) |  |  |  |
-| `ARCANE_MIND` | 77 (0x4D) |  |  |  |
-| `MAGE_WAND_SPECIALIZATION` | 78 (0x4E) |  |  |  |
-| `IMPROVED_ARCANE_MISSILES` | 80 (0x50) |  |  |  |
-| `ARCANE_IMPACT` | 81 (0x51) |  |  |  |
-| `MAGIC_ATTUNEMENT` | 82 (0x52) |  |  |  |
-| `IMPROVED_MANA_SHIELD` | 83 (0x53) |  |  |  |
-| `ARCANE_FORTITUDE` | 85 (0x55) |  |  |  |
-| `PRESENCE_OF_MIND` | 86 (0x56) |  |  |  |
-| `ARCANE_POWER` | 87 (0x57) |  |  |  |
-| `IMPROVED_COUNTERSPELL` | 88 (0x58) |  |  |  |
-| `DEEP_WOUNDS` | 121 (0x79) |  |  |  |
-| `WARRIOR_SWORD_SPECIALIZATION` | 123 (0x7B) |  |  |  |
-| `IMPROVED_HEROIC_STRIKE` | 124 (0x7C) |  |  |  |
-| `WARRIOR_MACE_SPECIALIZATION` | 125 (0x7D) |  |  |  |
-| `IMPROVED_CHARGE` | 126 (0x7E) |  |  |  |
-| `IMPROVED_REND` | 127 (0x7F) |  |  |  |
-| `IMPROVED_THUNDER_CLAP` | 128 (0x80) |  |  |  |
-| `IMPROVED_HAMSTRING` | 129 (0x81) |  |  |  |
-| `WARRIOR_DEFLECTION` | 130 (0x82) |  |  |  |
-| `IMPROVED_OVERPOWER` | 131 (0x83) |  |  |  |
-| `POLEAXE_SPECIALIZATION` | 132 (0x84) |  |  |  |
-| `DEATH_WISH` | 133 (0x85) |  |  |  |
-| `IMPROVED_INTERCEPT` | 134 (0x86) |  |  |  |
-| `MORTAL_STRIKE` | 135 (0x87) |  |  |  |
-| `WARRIOR_TWO_HANDED_WEAPON_SPECIALIZATION` | 136 (0x88) |  |  |  |
-| `ANGER_MANAGEMENT` | 137 (0x89) |  |  |  |
-| `WARRIOR_ANTICIPATION` | 138 (0x8A) |  |  |  |
-| `WARRIOR_TOUGHNESS` | 140 (0x8C) |  |  |  |
-| `TACTICAL_MASTERY` | 141 (0x8D) |  |  |  |
-| `IMPROVED_BLOODRAGE` | 142 (0x8E) |  |  |  |
-| `IMPROVED_TAUNT` | 143 (0x8F) |  |  |  |
-| `DEFIANCE` | 144 (0x90) |  |  |  |
-| `IMPROVED_SHIELD_BLOCK` | 145 (0x91) |  |  |  |
-| `IMPROVED_SUNDER_ARMOR` | 146 (0x92) |  |  |  |
-| `IMPROVED_REVENGE` | 147 (0x93) |  |  |  |
-| `SHIELD_SLAM` | 148 (0x94) |  |  |  |
-| `IMPROVED_SHIELD_BASH` | 149 (0x95) |  |  |  |
-| `IMPROVED_SHIELD_WALL` | 150 (0x96) |  |  |  |
-| `IMPROVED_DISARM` | 151 (0x97) |  |  |  |
-| `CONCUSSION_BLOW` | 152 (0x98) |  |  |  |
-| `LAST_STAND` | 153 (0x99) |  |  |  |
-| `COMMANDING_PRESENCE` | 154 (0x9A) |  |  |  |
-| `ENRAGE` | 155 (0x9B) |  |  |  |
-| `WARRIOR_FLURRY` | 156 (0x9C) |  |  |  |
-| `CRUELTY` | 157 (0x9D) |  |  |  |
-| `BOOMING_VOICE` | 158 (0x9E) |  |  |  |
-| `UNBRIDLED_WRATH` | 159 (0x9F) |  |  |  |
-| `PIERCING_HOWL` | 160 (0xA0) |  |  |  |
-| `IMPROVED_DEMORALIZING_SHOUT` | 161 (0xA1) |  |  |  |
-| `SWEEPING_STRIKES` | 165 (0xA5) |  |  |  |
-| `IMPROVED_CLEAVE` | 166 (0xA6) |  |  |  |
-| `BLOODTHIRST` | 167 (0xA7) |  |  |  |
-| `IMPROVED_SLAM` | 168 (0xA8) |  |  |  |
-| `ROGUE_PRECISION` | 181 (0xB5) |  |  |  |
-| `DAGGER_SPECIALIZATION` | 182 (0xB6) |  |  |  |
-| `FIST_WEAPON_SPECIALIZATION` | 183 (0xB7) |  |  |  |
-| `ROGUE_MACE_SPECIALIZATION` | 184 (0xB8) |  |  |  |
-| `ROGUE_LIGHTNING_REFLEXES` | 186 (0xBA) |  |  |  |
-| `ROGUE_DEFLECTION` | 187 (0xBB) |  |  |  |
-| `IMPROVED_SINISTER_STRIKE` | 201 (0xC9) |  |  |  |
-| `IMPROVED_GOUGE` | 203 (0xCB) |  |  |  |
-| `ENDURANCE` | 204 (0xCC) |  |  |  |
-| `ADRENALINE_RUSH` | 205 (0xCD) |  |  |  |
-| `IMPROVED_KICK` | 206 (0xCE) |  |  |  |
-| `ROGUE_DUAL_WIELD_SPECIALIZATION` | 221 (0xDD) |  |  |  |
-| `IMPROVED_SPRINT` | 222 (0xDE) |  |  |  |
-| `BLADE_FLURRY` | 223 (0xDF) |  |  |  |
-| `MASTER_OF_DECEPTION` | 241 (0xF1) |  |  |  |
-| `ROGUE_SWORD_SPECIALIZATION` | 242 (0xF2) |  |  |  |
-| `CAMOUFLAGE` | 244 (0xF4) |  |  |  |
-| `INITIATIVE` | 245 (0xF5) |  |  |  |
-| `SETUP` | 246 (0xF6) |  |  |  |
-| `ELUSIVENESS` | 247 (0xF7) |  |  |  |
-| `OPPORTUNITY` | 261 (0x105) |  |  |  |
-| `DIRTY_TRICKS` | 262 (0x106) |  |  |  |
-| `IMPROVED_AMBUSH` | 263 (0x107) |  |  |  |
-| `DIRTY_DEEDS` | 265 (0x109) |  |  |  |
-| `IMPROVED_POISONS` | 268 (0x10C) |  |  |  |
-| `LETHALITY` | 269 (0x10D) |  |  |  |
-| `MALICE` | 270 (0x10E) |  |  |  |
-| `REMORSELESS_ATTACKS` | 272 (0x110) |  |  |  |
-| `RUTHLESSNESS` | 273 (0x111) |  |  |  |
-| `MURDER` | 274 (0x112) |  |  |  |
-| `IMPROVED_EVISCERATE` | 276 (0x114) |  |  |  |
-| `PUNCTURING_WOUNDS` | 277 (0x115) |  |  |  |
-| `IMPROVED_EXPOSE_ARMOR` | 278 (0x116) |  |  |  |
-| `IMPROVED_KIDNEY_SHOT` | 279 (0x117) |  |  |  |
-| `COLD_BLOOD` | 280 (0x118) |  |  |  |
-| `RELENTLESS_STRIKES` | 281 (0x119) |  |  |  |
-| `SEAL_FATE` | 283 (0x11B) |  |  |  |
-| `PREPARATION` | 284 (0x11C) |  |  |  |
-| `RIPOSTE` | 301 (0x12D) |  |  |  |
-| `GHOSTLY_STRIKE` | 303 (0x12F) |  |  |  |
-| `MARTYRDOM` | 321 (0x141) |  |  |  |
-| `POWER_INFUSION` | 322 (0x142) |  |  |  |
-| `MENTAL_AGILITY` | 341 (0x155) |  |  |  |
-| `UNBREAKABLE_WILL` | 342 (0x156) |  |  |  |
-| `IMPROVED_POWER_WORD_SHIELD` | 343 (0x157) |  |  |  |
-| `IMPROVED_POWER_WORD_FORTITUDE` | 344 (0x158) |  |  |  |
-| `PRIEST_WAND_SPECIALIZATION` | 345 (0x159) |  |  |  |
-| `IMPROVED_INNER_FIRE` | 346 (0x15A) |  |  |  |
-| `MEDITATION` | 347 (0x15B) |  |  |  |
-| `INNER_FOCUS` | 348 (0x15C) |  |  |  |
-| `IMPROVED_MANA_BURN` | 350 (0x15E) |  |  |  |
-| `DIVINE_SPIRIT` | 351 (0x15F) |  |  |  |
-| `SILENT_RESOLVE` | 352 (0x160) |  |  |  |
-| `INSPIRATION` | 361 (0x169) |  |  |  |
-| `PREMEDITATION` | 381 (0x17D) |  |  |  |
-| `VIGOR` | 382 (0x17E) |  |  |  |
-| `HOLY_SPECIALIZATION` | 401 (0x191) |  |  |  |
-| `SPIRITUAL_GUIDANCE` | 402 (0x192) |  |  |  |
-| `SEARING_LIGHT` | 403 (0x193) |  |  |  |
-| `SPIRITUAL_HEALING` | 404 (0x194) |  |  |  |
-| `IMPROVED_RENEW` | 406 (0x196) |  |  |  |
-| `IMPROVED_HEALING` | 408 (0x198) |  |  |  |
-| `PRIEST_HEALING_FOCUS` | 410 (0x19A) |  |  |  |
-| `PRIEST_SPELL_WARDING` | 411 (0x19B) |  |  |  |
-| `HEALING_PRAYERS` | 413 (0x19D) |  |  |  |
-| `ARCANE_INSTABILITY` | 421 (0x1A5) |  |  |  |
-| `HOLY_NOVA` | 442 (0x1BA) |  |  |  |
-| `SHADOW_WEAVING` | 461 (0x1CD) |  |  |  |
-| `DARKNESS` | 462 (0x1CE) |  |  |  |
-| `SHADOW_FOCUS` | 463 (0x1CF) |  |  |  |
-| `BLACKOUT` | 464 (0x1D0) |  |  |  |
-| `SPIRIT_TAP` | 465 (0x1D1) |  |  |  |
-| `SHADOW_AFFINITY` | 466 (0x1D2) |  |  |  |
-| `IMPROVED_MIND_BLAST` | 481 (0x1E1) |  |  |  |
-| `IMPROVED_SHADOW_WORD_PAIN` | 482 (0x1E2) |  |  |  |
-| `IMPROVED_FADE` | 483 (0x1E3) |  |  |  |
-| `VAMPIRIC_EMBRACE` | 484 (0x1E4) |  |  |  |
-| `MIND_FLAY` | 501 (0x1F5) |  |  |  |
-| `SHADOWFORM` | 521 (0x209) |  |  |  |
-| `SILENCE` | 541 (0x21D) |  |  |  |
-| `IMPROVED_PSYCHIC_SCREAM` | 542 (0x21E) |  |  |  |
-| `CALL_OF_FLAME` | 561 (0x231) |  |  |  |
-| `CALL_OF_THUNDER` | 562 (0x232) |  |  |  |
-| `CONCUSSION` | 563 (0x233) |  |  |  |
-| `CONVECTION` | 564 (0x234) |  |  |  |
-| `ELEMENTAL_FURY` | 565 (0x235) |  |  |  |
-| `IMPROVED_FIRE_TOTEMS` | 567 (0x237) |  |  |  |
-| `EARTHS_GRASP` | 572 (0x23C) |  |  | Earth's Grasp |
-| `ELEMENTAL_MASTERY` | 573 (0x23D) |  |  |  |
-| `ELEMENTAL_FOCUS` | 574 (0x23E) |  |  |  |
-| `REVERBERATION` | 575 (0x23F) |  |  |  |
-| `ANCESTRAL_HEALING` | 581 (0x245) |  |  |  |
-| `TOTEMIC_MASTERY` | 582 (0x246) |  |  |  |
-| `NATURES_GUIDANCE` | 583 (0x247) |  |  | Nature's Guidance |
-| `IMPROVED_HEALING_WAVE` | 586 (0x24A) |  |  |  |
-| `SHAMAN_HEALING_FOCUS` | 587 (0x24B) |  |  |  |
-| `RESTORATIVE_TOTEMS` | 588 (0x24C) |  |  |  |
-| `IMPROVED_REINCARNATION` | 589 (0x24D) |  |  |  |
-| `MANA_TIDE_TOTEM` | 590 (0x24E) |  |  |  |
-| `SHAMAN_NATURES_SWIFTNESS` | 591 (0x24F) |  |  | Nature's Swiftness |
-| `PURIFICATION` | 592 (0x250) |  |  |  |
-| `TIDAL_FOCUS` | 593 (0x251) |  |  |  |
-| `TIDAL_MASTERY` | 594 (0x252) |  |  |  |
-| `TOTEMIC_FOCUS` | 595 (0x253) |  |  |  |
-| `SHAMAN_ANTICIPATION` | 601 (0x259) |  |  |  |
-| `SHAMAN_FLURRY` | 602 (0x25A) |  |  |  |
-| `IMPROVED_GHOST_WOLF` | 605 (0x25D) |  |  |  |
-| `IMPROVED_LIGHTNING_SHIELD` | 607 (0x25F) |  |  |  |
-| `GUARDIAN_TOTEMS` | 609 (0x261) |  |  |  |
-| `ENHANCING_TOTEMS` | 610 (0x262) |  |  |  |
-| `ELEMENTAL_WEAPONS` | 611 (0x263) |  |  |  |
-| `SHAMAN_SHIELD_SPECIALIZATION` | 612 (0x264) |  |  |  |
-| `THUNDERING_STRIKES` | 613 (0x265) |  |  |  |
-| `ANCESTRAL_KNOWLEDGE` | 614 (0x266) |  |  |  |
-| `SHAMAN_TOUGHNESS` | 615 (0x267) |  |  |  |
-| `SPIRIT_WEAPONS` | 616 (0x268) |  |  |  |
-| `SHAMANISTIC_FOCUS` | 617 (0x269) |  |  |  |
-| `IRON_WILL` | 641 (0x281) |  |  |  |
-| `BLOOD_CRAZE` | 661 (0x295) |  |  |  |
-| `IMPALE` | 662 (0x296) |  |  |  |
-| `HEMORRHAGE` | 681 (0x2A9) |  |  |  |
-| `VILE_POISONS` | 682 (0x2AA) |  |  |  |
-| `WARRIOR_ONE_HANDED_WEAPON_SPECIALIZATION` | 702 (0x2BE) |  |  |  |
-| `LIGHTNING_MASTERY` | 721 (0x2D1) |  |  |  |
-| `ARCTIC_REACH` | 741 (0x2E5) |  |  |  |
-| `NATURES_GRASP` | 761 (0x2F9) |  |  | Nature's Grasp |
-| `STARLIGHT_WRATH` | 762 (0x2FA) |  |  |  |
-| `IMPROVED_MOONFIRE` | 763 (0x2FB) |  |  |  |
-| `NATURES_REACH` | 764 (0x2FC) |  |  | Nature's Reach |
-| `BRAMBLES` | 782 (0x30E) |  |  |  |
-| `MOONGLOW` | 783 (0x30F) |  |  |  |
-| `CELESTIAL_FOCUS` | 784 (0x310) |  |  |  |
-| `CONTROL_OF_NATURE` | 787 (0x313) |  |  |  |
-| `INSECT_SWARM` | 788 (0x314) |  |  |  |
-| `NATURES_GRACE` | 789 (0x315) |  |  | Nature's Grace |
-| `MOONFURY` | 790 (0x316) |  |  |  |
-| `DRUID_VENGEANCE` | 792 (0x318) |  |  |  |
-| `MOONKIN_FORM` | 793 (0x319) |  |  |  |
-| `DRUID_THICK_HIDE` | 794 (0x31A) |  |  |  |
-| `FERAL_AGGRESSION` | 795 (0x31B) |  |  |  |
-| `DRUID_FEROCITY` | 796 (0x31C) |  |  |  |
-| `BRUTAL_IMPACT` | 797 (0x31D) |  |  |  |
-| `SHARPENED_CLAWS` | 798 (0x31E) |  |  |  |
-| `FERAL_INSTINCT` | 799 (0x31F) |  |  |  |
-| `PRIMAL_FURY` | 801 (0x321) |  |  |  |
-| `SHREDDING_ATTACKS` | 802 (0x322) |  |  |  |
-| `PREDATORY_STRIKES` | 803 (0x323) |  |  |  |
-| `FERAL_CHARGE` | 804 (0x324) |  |  |  |
-| `SAVAGE_FURY` | 805 (0x325) |  |  |  |
-| `FERAL_SWIFTNESS` | 807 (0x327) |  |  |  |
-| `HEART_OF_THE_WILD` | 808 (0x328) |  |  |  |
-| `LEADER_OF_THE_PACK` | 809 (0x329) |  |  |  |
-| `IMPROVED_MARK_OF_THE_WILD` | 821 (0x335) |  |  |  |
-| `FUROR` | 822 (0x336) |  |  |  |
-| `NATURES_FOCUS` | 823 (0x337) |  |  | Nature's Focus |
-| `NATURALIST` | 824 (0x338) |  |  |  |
-| `IMPROVED_REGROWTH` | 825 (0x339) |  |  |  |
-| `NATURAL_SHAPESHIFTER` | 826 (0x33A) |  |  |  |
-| `OMEN_OF_CLARITY` | 827 (0x33B) |  |  |  |
-| `GIFT_OF_NATURE` | 828 (0x33C) |  |  |  |
-| `DRUID_INTENSITY` | 829 (0x33D) |  |  |  |
-| `IMPROVED_REJUVENATION` | 830 (0x33E) |  |  |  |
-| `DRUID_NATURES_SWIFTNESS` | 831 (0x33F) |  |  | Nature's Swiftness |
-| `SUBTLETY` | 841 (0x349) |  |  |  |
-| `IMPROVED_TRANQUILITY` | 842 (0x34A) |  |  |  |
-| `TRANQUIL_SPIRIT` | 843 (0x34B) |  |  |  |
-| `SWIFTMEND` | 844 (0x34C) |  |  |  |
-| `SHADOW_REACH` | 881 (0x371) |  |  |  |
-| `STORMSTRIKE` | 901 (0x385) |  |  |  |
-| `IMPROVED_NATURES_GRASP` | 921 (0x399) |  |  | Improved Nature's Grasp |
-| `CATACLYSM` | 941 (0x3AD) |  |  |  |
-| `BANE` | 943 (0x3AF) |  |  |  |
-| `IMPROVED_SHADOW_BOLT` | 944 (0x3B0) |  |  |  |
-| `IMPROVED_IMMOLATE` | 961 (0x3C1) |  |  |  |
-| `SHADOWBURN` | 963 (0x3C3) |  |  |  |
-| `DESTRUCTIVE_REACH` | 964 (0x3C4) |  |  |  |
-| `IMPROVED_SEARING_PAIN` | 965 (0x3C5) |  |  |  |
-| `EMBERSTORM` | 966 (0x3C6) |  |  |  |
-| `RUIN` | 967 (0x3C7) |  |  |  |
-| `CONFLAGRATE` | 968 (0x3C8) |  |  |  |
-| `DEVASTATION` | 981 (0x3D5) |  |  |  |
-| `AFTERMATH` | 982 (0x3D6) |  |  |  |
-| `IMPROVED_FIREBOLT` | 983 (0x3D7) |  |  |  |
-| `IMPROVED_LASH_OF_PAIN` | 984 (0x3D8) |  |  |  |
-| `WARLOCK_INTENSITY` | 985 (0x3D9) |  |  |  |
-| `PYROCLASM` | 986 (0x3DA) |  |  |  |
-| `FEL_CONCENTRATION` | 1001 (0x3E9) |  |  |  |
-| `NIGHTFALL` | 1002 (0x3EA) |  |  |  |
-| `IMPROVED_CORRUPTION` | 1003 (0x3EB) |  |  |  |
-| `SOUL_SIPHON` | 1004 (0x3EC) |  |  |  |
-| `SUPPRESSION` | 1005 (0x3ED) |  |  |  |
-| `IMPROVED_CURSE_OF_WEAKNESS` | 1006 (0x3EE) |  |  |  |
-| `IMPROVED_LIFE_TAP` | 1007 (0x3EF) |  |  |  |
-| `GRIM_REACH` | 1021 (0x3FD) |  |  |  |
-| `DARK_PACT` | 1022 (0x3FE) |  |  |  |
-| `SIPHON_LIFE` | 1041 (0x411) |  |  |  |
-| `SHADOW_MASTERY` | 1042 (0x412) |  |  |  |
-| `AMPLIFY_CURSE` | 1061 (0x425) |  |  |  |
-| `CURSE_OF_EXHAUSTION` | 1081 (0x439) |  |  |  |
-| `IMPROVED_DRAIN_SOUL` | 1101 (0x44D) |  |  |  |
-| `AGGRESSION` | 1122 (0x462) |  |  |  |
-| `SERRATED_BLADES` | 1123 (0x463) |  |  |  |
-| `INCINERATION` | 1141 (0x475) |  |  |  |
-| `ARCANE_MEDITATION` | 1142 (0x476) |  |  |  |
-| `FAERIE_FIRE_FERAL` | 1162 (0x48A) |  |  |  |
-| `DIVINE_FURY` | 1181 (0x49D) |  |  |  |
-| `MENTAL_STRENGTH` | 1201 (0x4B1) |  |  |  |
-| `FORCE_OF_WILL` | 1202 (0x4B2) |  |  |  |
-| `IMPROVED_HEALTHSTONE` | 1221 (0x4C5) |  |  |  |
-| `IMPROVED_IMP` | 1222 (0x4C6) |  |  |  |
-| `DEMONIC_EMBRACE` | 1223 (0x4C7) |  |  |  |
-| `IMPROVED_HEALTH_FUNNEL` | 1224 (0x4C8) |  |  |  |
-| `IMPROVED_VOIDWALKER` | 1225 (0x4C9) |  |  |  |
-| `FEL_DOMINATION` | 1226 (0x4CA) |  |  |  |
-| `MASTER_SUMMONER` | 1227 (0x4CB) |  |  |  |
-| `FEL_STAMINA` | 1241 (0x4D9) |  |  |  |
-| `FEL_INTELLECT` | 1242 (0x4DA) |  |  |  |
-| `IMPROVED_SUCCUBUS` | 1243 (0x4DB) |  |  |  |
-| `MASTER_DEMONOLOGIST` | 1244 (0x4DC) |  |  |  |
-| `MASTER_CONJUROR` | 1261 (0x4ED) |  |  |  |
-| `UNHOLY_POWER` | 1262 (0x4EE) |  |  |  |
-| `DEMONIC_KNOWLEDGE` | 1263 (0x4EF) |  |  |  |
-| `DEMONIC_SACRIFICE` | 1281 (0x501) |  |  |  |
-| `SOUL_LINK` | 1282 (0x502) |  |  |  |
-| `IMPROVED_ENSLAVE_DEMON` | 1283 (0x503) |  |  |  |
-| `IMPROVED_CURSE_OF_AGONY` | 1284 (0x504) |  |  |  |
-| `HUMANOID_SLAYING` | 1301 (0x515) |  |  |  |
-| `HUNTER_LIGHTNING_REFLEXES` | 1303 (0x517) |  |  |  |
-| `ENTRAPMENT` | 1304 (0x518) |  |  |  |
-| `IMPROVED_WING_CLIP` | 1305 (0x519) |  |  |  |
-| `CLEVER_TRAPS` | 1306 (0x51A) |  |  |  |
-| `DETERRENCE` | 1308 (0x51C) |  |  |  |
-| `IMPROVED_FEIGN_DEATH` | 1309 (0x51D) |  |  |  |
-| `SUREFOOTED` | 1310 (0x51E) |  |  |  |
-| `HUNTER_DEFLECTION` | 1311 (0x51F) |  |  |  |
-| `COUNTERATTACK` | 1312 (0x520) |  |  |  |
-| `KILLER_INSTINCT` | 1321 (0x529) |  |  |  |
-| `TRAP_MASTERY` | 1322 (0x52A) |  |  |  |
-| `WYVERN_STING` | 1325 (0x52D) |  |  |  |
-| `IMPROVED_CONCUSSIVE_SHOT` | 1341 (0x53D) |  |  |  |
-| `EFFICIENCY` | 1342 (0x53E) |  |  |  |
-| `IMPROVED_HUNTERS_MARK` | 1343 (0x53F) |  |  | Improved Hunter's Mark |
-| `LETHAL_SHOTS` | 1344 (0x540) |  |  |  |
-| `AIMED_SHOT` | 1345 (0x541) |  |  |  |
-| `IMPROVED_ARCANE_SHOT` | 1346 (0x542) |  |  |  |
-| `BARRAGE` | 1347 (0x543) |  |  |  |
-| `IMPROVED_STINGS` | 1348 (0x544) |  |  |  |
-| `MORTAL_SHOTS` | 1349 (0x545) |  |  |  |
-| `CONCUSSIVE_BARRAGE` | 1351 (0x547) |  |  |  |
-| `SCATTER_SHOT` | 1353 (0x549) |  |  |  |
-| `TRUESHOT_AURA` | 1361 (0x551) |  |  |  |
-| `RANGED_WEAPON_SPECIALIZATION` | 1362 (0x552) |  |  |  |
-| `IMPROVED_ASPECT_OF_THE_MONKEY` | 1381 (0x565) |  |  |  |
-| `IMPROVED_ASPECT_OF_THE_HAWK` | 1382 (0x566) |  |  |  |
-| `PATHFINDING` | 1384 (0x568) |  |  |  |
-| `IMPROVED_MEND_PET` | 1385 (0x569) |  |  |  |
-| `BESTIAL_WRATH` | 1386 (0x56A) |  |  |  |
-| `INTIMIDATION` | 1387 (0x56B) |  |  |  |
-| `SPIRIT_BOND` | 1388 (0x56C) |  |  |  |
-| `ENDURANCE_TRAINING` | 1389 (0x56D) |  |  |  |
-| `BESTIAL_DISCIPLINE` | 1390 (0x56E) |  |  |  |
-| `BESTIAL_SWIFTNESS` | 1391 (0x56F) |  |  |  |
-| `HUNTER_FEROCITY` | 1393 (0x571) |  |  |  |
-| `HUNTER_THICK_HIDE` | 1395 (0x573) |  |  |  |
-| `UNLEASHED_FURY` | 1396 (0x574) |  |  |  |
-| `FRENZY` | 1397 (0x575) |  |  |  |
-| `IMPROVED_BLESSING_OF_MIGHT` | 1401 (0x579) |  |  |  |
-| `PALADIN_VENGEANCE` | 1402 (0x57A) |  |  |  |
-| `PALADIN_DEFLECTION` | 1403 (0x57B) |  |  |  |
-| `IMPROVED_RETRIBUTION_AURA` | 1405 (0x57D) |  |  |  |
-| `BENEDICTION` | 1407 (0x57F) |  |  |  |
-| `SANCTITY_AURA` | 1409 (0x581) |  |  |  |
-| `PALADIN_TWO_HANDED_WEAPON_SPECIALIZATION` | 1410 (0x582) |  |  |  |
-| `CONVICTION` | 1411 (0x583) |  |  |  |
-| `REDOUBT` | 1421 (0x58D) |  |  |  |
-| `IMPROVED_DEVOTION_AURA` | 1422 (0x58E) |  |  |  |
-| `PALADIN_TOUGHNESS` | 1423 (0x58F) |  |  |  |
-| `PALADIN_SHIELD_SPECIALIZATION` | 1424 (0x590) |  |  |  |
-| `GUARDIANS_FAVOR` | 1425 (0x591) |  |  | Guardian's Favor |
-| `RECKONING` | 1426 (0x592) |  |  |  |
-| `PALADIN_ONE_HANDED_WEAPON_SPECIALIZATION` | 1429 (0x595) |  |  |  |
-| `HOLY_SHIELD` | 1430 (0x596) |  |  |  |
-| `BLESSING_OF_SANCTUARY` | 1431 (0x597) |  |  |  |
-| `SPIRITUAL_FOCUS` | 1432 (0x598) |  |  |  |
-| `DIVINE_FAVOR` | 1433 (0x599) |  |  |  |
-| `AURA_MASTERY` | 1435 (0x59B) |  |  |  |
-| `REPENTANCE` | 1441 (0x5A1) |  |  |  |
-| `BLESSING_OF_KINGS` | 1442 (0x5A2) |  |  |  |
-| `IMPROVED_LAY_ON_HANDS` | 1443 (0x5A3) |  |  |  |
-| `HEALING_LIGHT` | 1444 (0x5A4) |  |  |  |
-| `IMPROVED_BLESSING_OF_WISDOM` | 1446 (0x5A6) |  |  |  |
-| `DIVINE_INTELLECT` | 1449 (0x5A9) |  |  |  |
-| `DIVINE_STRENGTH` | 1450 (0x5AA) |  |  |  |
-| `ILLUMINATION` | 1461 (0x5B5) |  |  |  |
-| `IMPROVED_SEAL_OF_RIGHTEOUSNESS` | 1463 (0x5B7) |  |  |  |
-| `IMPROVED_SEAL_OF_THE_CRUSADER` | 1464 (0x5B8) |  |  |  |
-| `SANCTIFIED_LIGHT` | 1465 (0x5B9) |  |  |  |
-| `SEAL_OF_COMMAND` | 1481 (0x5C9) |  |  |  |
-| `IMPROVED_RIGHTEOUS_FURY` | 1501 (0x5DD) |  |  |  |
-| `HOLY_SHOCK` | 1502 (0x5DE) |  |  |  |
-| `IMPROVED_HAMMER_OF_JUSTICE` | 1521 (0x5F1) |  |  |  |
-| `IMPROVED_BERSERKER_RAGE` | 1541 (0x605) |  |  |  |
-| `IMPROVED_EXECUTE` | 1542 (0x606) |  |  |  |
-| `WARRIOR_WEAPON_MASTERY` | 1543 (0x607) |  |  |  |
-| `SPIRIT_OF_REDEMPTION` | 1561 (0x619) |  |  |  |
-| `WARRIOR_DUAL_WIELD_SPECIALIZATION` | 1581 (0x62D) |  |  |  |
-| `WARRIOR_SHIELD_SPECIALIZATION` | 1601 (0x641) |  |  |  |
-| `SAVAGE_STRIKES` | 1621 (0x655) |  |  |  |
-| `SURVIVALIST` | 1622 (0x656) |  |  |  |
-| `MONSTER_SLAYING` | 1623 (0x657) |  |  |  |
-| `FOCUSED_FIRE` | 1624 (0x658) |  |  |  |
-| `IMPROVED_REVIVE_PET` | 1625 (0x659) |  |  |  |
-| `IMPROVED_CONCENTRATION_AURA` | 1626 (0x65A) |  |  |  |
-| `HOLY_POWER` | 1627 (0x65B) |  |  |  |
-| `UNYIELDING_FAITH` | 1628 (0x65C) |  |  |  |
-| `PALADIN_ANTICIPATION` | 1629 (0x65D) |  |  |  |
-| `PALADIN_PRECISION` | 1630 (0x65E) |  |  |  |
-| `IMPROVED_JUDGEMENT` | 1631 (0x65F) |  |  |  |
-| `EYE_FOR_AN_EYE` | 1632 (0x660) |  |  |  |
-| `VINDICATION` | 1633 (0x661) |  |  |  |
-| `PURSUIT_OF_JUSTICE` | 1634 (0x662) |  |  |  |
-| `HOLY_REACH` | 1635 (0x663) |  |  |  |
-| `BLESSED_RECOVERY` | 1636 (0x664) |  |  |  |
-| `LIGHTWELL` | 1637 (0x665) |  |  |  |
-| `IMPROVED_VAMPIRIC_EMBRACE` | 1638 (0x666) |  |  |  |
-| `MASTER_OF_ELEMENTS` | 1639 (0x667) |  |  |  |
-| `ELEMENTAL_WARDING` | 1640 (0x668) |  |  |  |
-| `STORM_REACH` | 1641 (0x669) |  |  |  |
-| `EYE_OF_THE_STORM` | 1642 (0x66A) |  |  |  |
-| `SHAMAN_WEAPON_MASTERY` | 1643 (0x66B) |  |  |  |
-| `ELEMENTAL_DEVASTATION` | 1645 (0x66D) |  |  |  |
-| `HEALING_GRACE` | 1646 (0x66E) |  |  |  |
-| `IMPROVED_WEAPON_TOTEMS` | 1647 (0x66F) |  |  |  |
-| `HEALING_WAY` | 1648 (0x670) |  |  |  |
-| `MAGE_ELEMENTAL_PRECISION` | 1649 (0x671) |  |  |  |
-| `MAGIC_ABSORPTION` | 1650 (0x672) |  |  |  |
-| `IMPROVED_DEFENSIVE_STANCE` | 1652 (0x674) |  |  |  |
-| `WARRIOR_VITALITY` | 1653 (0x675) |  |  |  |
-| `SHIELD_MASTERY` | 1654 (0x676) |  |  |  |
-| `IMPROVED_WHIRLWIND` | 1655 (0x677) |  |  |  |
-| `WARRIOR_PRECISION` | 1657 (0x679) |  |  |  |
-| `IMPROVED_BERSERKER_STANCE` | 1658 (0x67A) |  |  |  |
-| `RAMPAGE` | 1659 (0x67B) |  |  |  |
-| `FOCUSED_RAGE` | 1660 (0x67C) |  |  |  |
-| `ENDLESS_RAGE` | 1661 (0x67D) |  |  |  |
-| `IMPROVED_DISCIPLINES` | 1662 (0x67E) |  |  |  |
-| `SECOND_WIND` | 1663 (0x67F) |  |  |  |
-| `BLOOD_FRENZY` | 1664 (0x680) |  |  |  |
-| `DEVASTATE` | 1666 (0x682) |  |  |  |
-| `MALEDICTION` | 1667 (0x683) |  |  |  |
-| `IMPROVED_HOWL_OF_TERROR` | 1668 (0x684) |  |  |  |
-| `CONTAGION` | 1669 (0x685) |  |  |  |
-| `UNSTABLE_AFFLICTION` | 1670 (0x686) |  |  |  |
-| `DEMONIC_AEGIS` | 1671 (0x687) |  |  |  |
-| `SUMMON_FELGUARD` | 1672 (0x688) |  |  |  |
-| `DEMONIC_TACTICS` | 1673 (0x689) |  |  |  |
-| `SHADOWFURY` | 1676 (0x68C) |  |  |  |
-| `SHADOW_AND_FLAME` | 1677 (0x68D) |  |  |  |
-| `SOUL_LEECH` | 1678 (0x68E) |  |  |  |
-| `NETHER_PROTECTION` | 1679 (0x68F) |  |  |  |
-| `DEMONIC_RESILIENCE` | 1680 (0x690) |  |  |  |
-| `MANA_FEED` | 1681 (0x691) |  |  |  |
-| `UNRELENTING_STORM` | 1682 (0x692) |  |  |  |
-| `ELEMENTAL_SHIELDS` | 1683 (0x693) |  |  |  |
-| `SHAMAN_ELEMENTAL_PRECISION` | 1685 (0x695) |  |  |  |
-| `LIGHTNING_OVERLOAD` | 1686 (0x696) |  |  |  |
-| `TOTEM_OF_WRATH` | 1687 (0x697) |  |  |  |
-| `UNLEASHED_RAGE` | 1689 (0x699) |  |  |  |
-| `DUAL_WIELD` | 1690 (0x69A) |  |  |  |
-| `MENTAL_QUICKNESS` | 1691 (0x69B) |  |  |  |
-| `SHAMAN_DUAL_WIELD_SPECIALIZATION` | 1692 (0x69C) |  |  |  |
-| `SHAMANISTIC_RAGE` | 1693 (0x69D) |  |  |  |
-| `SHAMAN_FOCUSED_MIND` | 1695 (0x69F) |  |  |  |
-| `NATURES_BLESSING` | 1696 (0x6A0) |  |  | Nature's Blessing |
-| `IMPROVED_CHAIN_HEAL` | 1697 (0x6A1) |  |  |  |
-| `EARTH_SHIELD` | 1698 (0x6A2) |  |  |  |
-| `NATURES_GUARDIAN` | 1699 (0x6A3) |  |  | Nature's Guardian |
-| `SLEIGHT_OF_HAND` | 1700 (0x6A4) |  |  |  |
-| `HEIGHTENED_SENSES` | 1701 (0x6A5) |  |  |  |
-| `DEADLINESS` | 1702 (0x6A6) |  |  |  |
-| `WEAPON_EXPERTISE` | 1703 (0x6A7) |  |  |  |
-| `ROGUE_VITALITY` | 1705 (0x6A9) |  |  |  |
-| `BLADE_TWISTING` | 1706 (0x6AA) |  |  |  |
-| `NERVES_OF_STEEL` | 1707 (0x6AB) |  |  |  |
-| `SURPRISE_ATTACKS` | 1709 (0x6AD) |  |  |  |
-| `ENVELOPING_SHADOWS` | 1711 (0x6AF) |  |  |  |
-| `SINISTER_CALLING` | 1712 (0x6B0) |  |  |  |
-| `MASTER_OF_SUBTLETY` | 1713 (0x6B1) |  |  |  |
-| `SHADOWSTEP` | 1714 (0x6B2) |  |  |  |
-| `MASTER_POISONER` | 1715 (0x6B3) |  |  |  |
-| `FIND_WEAKNESS` | 1718 (0x6B6) |  |  |  |
-| `MUTILATE` | 1719 (0x6B7) |  |  |  |
-| `FLEET_FOOTED` | 1721 (0x6B9) |  |  |  |
-| `CHEAT_DEATH` | 1722 (0x6BA) |  |  |  |
-| `DEADENED_NERVES` | 1723 (0x6BB) |  |  |  |
-| `IMPROVED_BLINK` | 1724 (0x6BC) |  |  |  |
-| `ARCANE_POTENCY` | 1725 (0x6BD) |  |  |  |
-| `PRISMATIC_CLOAK` | 1726 (0x6BE) |  |  |  |
-| `EMPOWERED_ARCANE_MISSILES` | 1727 (0x6BF) |  |  |  |
-| `MIND_MASTERY` | 1728 (0x6C0) |  |  |  |
-| `SLOW` | 1729 (0x6C1) |  |  |  |
-| `PLAYING_WITH_FIRE` | 1730 (0x6C2) |  |  |  |
-| `BLAZING_SPEED` | 1731 (0x6C3) |  |  |  |
-| `MOLTEN_FURY` | 1732 (0x6C4) |  |  |  |
-| `PYROMANIAC` | 1733 (0x6C5) |  |  |  |
-| `EMPOWERED_FIREBALL` | 1734 (0x6C6) |  |  |  |
-| `DRAGONS_BREATH` | 1735 (0x6C7) |  |  | Dragon's Breath |
-| `FROZEN_CORE` | 1736 (0x6C8) |  |  |  |
-| `ICE_FLOES` | 1737 (0x6C9) |  |  |  |
-| `ARCTIC_WINDS` | 1738 (0x6CA) |  |  |  |
-| `EMPOWERED_FROSTBOLT` | 1740 (0x6CC) |  |  |  |
-| `SUMMON_WATER_ELEMENTAL` | 1741 (0x6CD) |  |  |  |
-| `PURE_OF_HEART` | 1742 (0x6CE) |  |  |  |
-| `PURIFYING_POWER` | 1743 (0x6CF) |  |  |  |
-| `BLESSED_LIFE` | 1744 (0x6D0) |  |  |  |
-| `LIGHTS_GRACE` | 1745 (0x6D1) |  |  | Light's Grace |
-| `HOLY_GUIDANCE` | 1746 (0x6D2) |  |  |  |
-| `DIVINE_ILLUMINATION` | 1747 (0x6D3) |  |  |  |
-| `STOICISM` | 1748 (0x6D4) |  |  |  |
-| `PALADIN_SPELL_WARDING` | 1749 (0x6D5) |  |  |  |
-| `SACRED_DUTY` | 1750 (0x6D6) |  |  |  |
-| `ARDENT_DEFENDER` | 1751 (0x6D7) |  |  |  |
-| `COMBAT_EXPERTISE` | 1753 (0x6D9) |  |  |  |
-| `AVENGERS_SHIELD` | 1754 (0x6DA) |  |  | Avenger's Shield |
-| `CRUSADE` | 1755 (0x6DB) |  |  |  |
-| `IMPROVED_SANCTITY_AURA` | 1756 (0x6DC) |  |  |  |
-| `DIVINE_PURPOSE` | 1757 (0x6DD) |  |  |  |
-| `SANCTIFIED_JUDGEMENT` | 1758 (0x6DE) |  |  |  |
-| `FANATICISM` | 1759 (0x6DF) |  |  |  |
-| `SANCTIFIED_SEALS` | 1761 (0x6E1) |  |  |  |
-| `QUICK_RECOVERY` | 1762 (0x6E2) |  |  |  |
-| `SHADOW_EMBRACE` | 1763 (0x6E3) |  |  |  |
-| `EMPOWERED_CORRUPTION` | 1764 (0x6E4) |  |  |  |
-| `BLESSED_RESILIENCE` | 1765 (0x6E5) |  |  |  |
-| `SURGE_OF_LIGHT` | 1766 (0x6E6) |  |  |  |
-| `EMPOWERED_HEALING` | 1767 (0x6E7) |  |  |  |
-| `HOLY_CONCENTRATION` | 1768 (0x6E8) |  |  |  |
-| `ABSOLUTION` | 1769 (0x6E9) |  |  |  |
-| `IMPROVED_DIVINE_SPIRIT` | 1770 (0x6EA) |  |  |  |
-| `FOCUSED_POWER` | 1771 (0x6EB) |  |  |  |
-| `ENLIGHTENMENT` | 1772 (0x6EC) |  |  |  |
-| `REFLECTIVE_SHIELD` | 1773 (0x6ED) |  |  |  |
-| `PAIN_SUPPRESSION` | 1774 (0x6EE) |  |  |  |
-| `PRIEST_FOCUSED_MIND` | 1777 (0x6F1) |  |  |  |
-| `SHADOW_POWER` | 1778 (0x6F2) |  |  |  |
-| `VAMPIRIC_TOUCH` | 1779 (0x6F3) |  |  |  |
-| `SHADOW_RESILIENCE` | 1781 (0x6F5) |  |  |  |
-| `LUNAR_GUIDANCE` | 1782 (0x6F6) |  |  |  |
-| `BALANCE_OF_POWER` | 1783 (0x6F7) |  |  |  |
-| `DREAMSTATE` | 1784 (0x6F8) |  |  |  |
-| `IMPROVED_FAERIE_FIRE` | 1785 (0x6F9) |  |  |  |
-| `WRATH_OF_CENARIUS` | 1786 (0x6FA) |  |  |  |
-| `FORCE_OF_NATURE` | 1787 (0x6FB) |  |  |  |
-| `EMPOWERED_TOUCH` | 1788 (0x6FC) |  |  |  |
-| `EMPOWERED_REJUVENATION` | 1789 (0x6FD) |  |  |  |
-| `NATURAL_PERFECTION` | 1790 (0x6FE) |  |  |  |
-| `TREE_OF_LIFE` | 1791 (0x6FF) |  |  |  |
-| `NURTURING_INSTINCT` | 1792 (0x700) |  |  |  |
-| `PRIMAL_TENACITY` | 1793 (0x701) |  |  |  |
-| `SURVIVAL_OF_THE_FITTEST` | 1794 (0x702) |  |  |  |
-| `PREDATORY_INSTINCTS` | 1795 (0x703) |  |  |  |
-| `MANGLE` | 1796 (0x704) |  |  |  |
-| `LIVING_SPIRIT` | 1797 (0x705) |  |  |  |
-| `IMPROVED_LEADER_OF_THE_PACK` | 1798 (0x706) |  |  |  |
-| `ANIMAL_HANDLER` | 1799 (0x707) |  |  |  |
-| `FEROCIOUS_INSPIRATION` | 1800 (0x708) |  |  |  |
-| `CATLIKE_REFLEXES` | 1801 (0x709) |  |  |  |
-| `SERPENTS_SWIFTNESS` | 1802 (0x70A) |  |  | Serpent's Swiftness |
-| `THE_BEAST_WITHIN` | 1803 (0x70B) |  |  |  |
-| `COMBAT_EXPERIENCE` | 1804 (0x70C) |  |  |  |
-| `CAREFUL_AIM` | 1806 (0x70E) |  |  |  |
-| `MASTER_MARKSMAN` | 1807 (0x70F) |  |  |  |
-| `SILENCING_SHOT` | 1808 (0x710) |  |  |  |
-| `RESOURCEFULNESS` | 1809 (0x711) |  |  |  |
-| `SURVIVAL_INSTINCTS` | 1810 (0x712) |  |  |  |
-| `THRILL_OF_THE_HUNT` | 1811 (0x713) |  |  |  |
-| `EXPOSE_WEAKNESS` | 1812 (0x714) |  |  |  |
-| `MASTER_TACTICIAN` | 1813 (0x715) |  |  |  |
-| `READINESS` | 1814 (0x716) |  |  |  |
-| `CIRCLE_OF_HEALING` | 1815 (0x717) |  |  |  |
-| `MISERY` | 1816 (0x718) |  |  |  |
-| `BACKLASH` | 1817 (0x719) |  |  |  |
-| `GO_FOR_THE_THROAT` | 1818 (0x71A) |  |  |  |
-| `RAPID_KILLING` | 1819 (0x71B) |  |  |  |
-| `HAWK_EYE` | 1820 (0x71C) |  |  |  |
-| `IMPROVED_BARRAGE` | 1821 (0x71D) |  |  |  |
-| `FOCUSED_STARLIGHT` | 1822 (0x71E) |  |  |  |
-| `CRUSADER_STRIKE` | 1823 (0x71F) |  |  |  |
-| `IMPROVED_MORTAL_STRIKE` | 1824 (0x720) |  |  |  |
-| `COMBAT_POTENCY` | 1825 (0x721) |  |  |  |
-| `SPELL_POWER` | 1826 (0x722) |  |  |  |
-| `IMPROVED_SLICE_AND_DICE` | 1827 (0x723) |  |  |  |
-| `IMPROVED_HOLY_SHIELD` | 1829 (0x725) |  |  |  |
-| `FOCUSED_WILL` | 1858 (0x742) |  |  |  |
+| Enumerator | Value  | Comment | Display |
+| --------- | -------- | ------- | ------- |
+| `BURNING_SOUL` | 23 (0x17) |  |  |
+| `MOLTEN_SHIELDS` | 24 (0x18) |  |  |
+| `IMPROVED_SCORCH` | 25 (0x19) |  |  |
+| `IMPROVED_FIREBALL` | 26 (0x1A) |  |  |
+| `IMPROVED_FIRE_BLAST` | 27 (0x1B) |  |  |
+| `FLAME_THROWING` | 28 (0x1C) |  |  |
+| `PYROBLAST` | 29 (0x1D) |  |  |
+| `IMPACT` | 30 (0x1E) |  |  |
+| `IMPROVED_FLAMESTRIKE` | 31 (0x1F) |  |  |
+| `BLAST_WAVE` | 32 (0x20) |  |  |
+| `CRITICAL_MASS` | 33 (0x21) |  |  |
+| `IGNITE` | 34 (0x22) |  |  |
+| `FIRE_POWER` | 35 (0x23) |  |  |
+| `COMBUSTION` | 36 (0x24) |  |  |
+| `IMPROVED_FROSTBOLT` | 37 (0x25) |  |  |
+| `FROSTBITE` | 38 (0x26) |  |  |
+| `PIERCING_ICE` | 61 (0x3D) |  |  |
+| `IMPROVED_FROST_NOVA` | 62 (0x3E) |  |  |
+| `IMPROVED_BLIZZARD` | 63 (0x3F) |  |  |
+| `IMPROVED_CONE_OF_COLD` | 64 (0x40) |  |  |
+| `PERMAFROST` | 65 (0x41) |  |  |
+| `FROST_CHANNELING` | 66 (0x42) |  |  |
+| `SHATTER` | 67 (0x43) |  |  |
+| `WINTERS_CHILL` | 68 (0x44) |  | Winter's Chill |
+| `ICY_VEINS` | 69 (0x45) |  |  |
+| `FROST_WARDING` | 70 (0x46) |  |  |
+| `ICE_BARRIER` | 71 (0x47) |  |  |
+| `COLD_SNAP` | 72 (0x48) |  |  |
+| `ICE_SHARDS` | 73 (0x49) |  |  |
+| `ARCANE_SUBTLETY` | 74 (0x4A) |  |  |
+| `ARCANE_CONCENTRATION` | 75 (0x4B) |  |  |
+| `ARCANE_FOCUS` | 76 (0x4C) |  |  |
+| `ARCANE_MIND` | 77 (0x4D) |  |  |
+| `MAGE_WAND_SPECIALIZATION` | 78 (0x4E) |  |  |
+| `IMPROVED_ARCANE_MISSILES` | 80 (0x50) |  |  |
+| `ARCANE_IMPACT` | 81 (0x51) |  |  |
+| `MAGIC_ATTUNEMENT` | 82 (0x52) |  |  |
+| `IMPROVED_MANA_SHIELD` | 83 (0x53) |  |  |
+| `ARCANE_FORTITUDE` | 85 (0x55) |  |  |
+| `PRESENCE_OF_MIND` | 86 (0x56) |  |  |
+| `ARCANE_POWER` | 87 (0x57) |  |  |
+| `IMPROVED_COUNTERSPELL` | 88 (0x58) |  |  |
+| `DEEP_WOUNDS` | 121 (0x79) |  |  |
+| `WARRIOR_SWORD_SPECIALIZATION` | 123 (0x7B) |  |  |
+| `IMPROVED_HEROIC_STRIKE` | 124 (0x7C) |  |  |
+| `WARRIOR_MACE_SPECIALIZATION` | 125 (0x7D) |  |  |
+| `IMPROVED_CHARGE` | 126 (0x7E) |  |  |
+| `IMPROVED_REND` | 127 (0x7F) |  |  |
+| `IMPROVED_THUNDER_CLAP` | 128 (0x80) |  |  |
+| `IMPROVED_HAMSTRING` | 129 (0x81) |  |  |
+| `WARRIOR_DEFLECTION` | 130 (0x82) |  |  |
+| `IMPROVED_OVERPOWER` | 131 (0x83) |  |  |
+| `POLEAXE_SPECIALIZATION` | 132 (0x84) |  |  |
+| `DEATH_WISH` | 133 (0x85) |  |  |
+| `IMPROVED_INTERCEPT` | 134 (0x86) |  |  |
+| `MORTAL_STRIKE` | 135 (0x87) |  |  |
+| `WARRIOR_TWO_HANDED_WEAPON_SPECIALIZATION` | 136 (0x88) |  |  |
+| `ANGER_MANAGEMENT` | 137 (0x89) |  |  |
+| `WARRIOR_ANTICIPATION` | 138 (0x8A) |  |  |
+| `WARRIOR_TOUGHNESS` | 140 (0x8C) |  |  |
+| `TACTICAL_MASTERY` | 141 (0x8D) |  |  |
+| `IMPROVED_BLOODRAGE` | 142 (0x8E) |  |  |
+| `IMPROVED_TAUNT` | 143 (0x8F) |  |  |
+| `DEFIANCE` | 144 (0x90) |  |  |
+| `IMPROVED_SHIELD_BLOCK` | 145 (0x91) |  |  |
+| `IMPROVED_SUNDER_ARMOR` | 146 (0x92) |  |  |
+| `IMPROVED_REVENGE` | 147 (0x93) |  |  |
+| `SHIELD_SLAM` | 148 (0x94) |  |  |
+| `IMPROVED_SHIELD_BASH` | 149 (0x95) |  |  |
+| `IMPROVED_SHIELD_WALL` | 150 (0x96) |  |  |
+| `IMPROVED_DISARM` | 151 (0x97) |  |  |
+| `CONCUSSION_BLOW` | 152 (0x98) |  |  |
+| `LAST_STAND` | 153 (0x99) |  |  |
+| `COMMANDING_PRESENCE` | 154 (0x9A) |  |  |
+| `ENRAGE` | 155 (0x9B) |  |  |
+| `WARRIOR_FLURRY` | 156 (0x9C) |  |  |
+| `CRUELTY` | 157 (0x9D) |  |  |
+| `BOOMING_VOICE` | 158 (0x9E) |  |  |
+| `UNBRIDLED_WRATH` | 159 (0x9F) |  |  |
+| `PIERCING_HOWL` | 160 (0xA0) |  |  |
+| `IMPROVED_DEMORALIZING_SHOUT` | 161 (0xA1) |  |  |
+| `SWEEPING_STRIKES` | 165 (0xA5) |  |  |
+| `IMPROVED_CLEAVE` | 166 (0xA6) |  |  |
+| `BLOODTHIRST` | 167 (0xA7) |  |  |
+| `IMPROVED_SLAM` | 168 (0xA8) |  |  |
+| `ROGUE_PRECISION` | 181 (0xB5) |  |  |
+| `DAGGER_SPECIALIZATION` | 182 (0xB6) |  |  |
+| `FIST_WEAPON_SPECIALIZATION` | 183 (0xB7) |  |  |
+| `ROGUE_MACE_SPECIALIZATION` | 184 (0xB8) |  |  |
+| `ROGUE_LIGHTNING_REFLEXES` | 186 (0xBA) |  |  |
+| `ROGUE_DEFLECTION` | 187 (0xBB) |  |  |
+| `IMPROVED_SINISTER_STRIKE` | 201 (0xC9) |  |  |
+| `IMPROVED_GOUGE` | 203 (0xCB) |  |  |
+| `ENDURANCE` | 204 (0xCC) |  |  |
+| `ADRENALINE_RUSH` | 205 (0xCD) |  |  |
+| `IMPROVED_KICK` | 206 (0xCE) |  |  |
+| `ROGUE_DUAL_WIELD_SPECIALIZATION` | 221 (0xDD) |  |  |
+| `IMPROVED_SPRINT` | 222 (0xDE) |  |  |
+| `BLADE_FLURRY` | 223 (0xDF) |  |  |
+| `MASTER_OF_DECEPTION` | 241 (0xF1) |  |  |
+| `ROGUE_SWORD_SPECIALIZATION` | 242 (0xF2) |  |  |
+| `CAMOUFLAGE` | 244 (0xF4) |  |  |
+| `INITIATIVE` | 245 (0xF5) |  |  |
+| `SETUP` | 246 (0xF6) |  |  |
+| `ELUSIVENESS` | 247 (0xF7) |  |  |
+| `OPPORTUNITY` | 261 (0x105) |  |  |
+| `DIRTY_TRICKS` | 262 (0x106) |  |  |
+| `IMPROVED_AMBUSH` | 263 (0x107) |  |  |
+| `DIRTY_DEEDS` | 265 (0x109) |  |  |
+| `IMPROVED_POISONS` | 268 (0x10C) |  |  |
+| `LETHALITY` | 269 (0x10D) |  |  |
+| `MALICE` | 270 (0x10E) |  |  |
+| `REMORSELESS_ATTACKS` | 272 (0x110) |  |  |
+| `RUTHLESSNESS` | 273 (0x111) |  |  |
+| `MURDER` | 274 (0x112) |  |  |
+| `IMPROVED_EVISCERATE` | 276 (0x114) |  |  |
+| `PUNCTURING_WOUNDS` | 277 (0x115) |  |  |
+| `IMPROVED_EXPOSE_ARMOR` | 278 (0x116) |  |  |
+| `IMPROVED_KIDNEY_SHOT` | 279 (0x117) |  |  |
+| `COLD_BLOOD` | 280 (0x118) |  |  |
+| `RELENTLESS_STRIKES` | 281 (0x119) |  |  |
+| `SEAL_FATE` | 283 (0x11B) |  |  |
+| `PREPARATION` | 284 (0x11C) |  |  |
+| `RIPOSTE` | 301 (0x12D) |  |  |
+| `GHOSTLY_STRIKE` | 303 (0x12F) |  |  |
+| `MARTYRDOM` | 321 (0x141) |  |  |
+| `POWER_INFUSION` | 322 (0x142) |  |  |
+| `MENTAL_AGILITY` | 341 (0x155) |  |  |
+| `UNBREAKABLE_WILL` | 342 (0x156) |  |  |
+| `IMPROVED_POWER_WORD_SHIELD` | 343 (0x157) |  |  |
+| `IMPROVED_POWER_WORD_FORTITUDE` | 344 (0x158) |  |  |
+| `PRIEST_WAND_SPECIALIZATION` | 345 (0x159) |  |  |
+| `IMPROVED_INNER_FIRE` | 346 (0x15A) |  |  |
+| `MEDITATION` | 347 (0x15B) |  |  |
+| `INNER_FOCUS` | 348 (0x15C) |  |  |
+| `IMPROVED_MANA_BURN` | 350 (0x15E) |  |  |
+| `DIVINE_SPIRIT` | 351 (0x15F) |  |  |
+| `SILENT_RESOLVE` | 352 (0x160) |  |  |
+| `INSPIRATION` | 361 (0x169) |  |  |
+| `PREMEDITATION` | 381 (0x17D) |  |  |
+| `VIGOR` | 382 (0x17E) |  |  |
+| `HOLY_SPECIALIZATION` | 401 (0x191) |  |  |
+| `SPIRITUAL_GUIDANCE` | 402 (0x192) |  |  |
+| `SEARING_LIGHT` | 403 (0x193) |  |  |
+| `SPIRITUAL_HEALING` | 404 (0x194) |  |  |
+| `IMPROVED_RENEW` | 406 (0x196) |  |  |
+| `IMPROVED_HEALING` | 408 (0x198) |  |  |
+| `PRIEST_HEALING_FOCUS` | 410 (0x19A) |  |  |
+| `PRIEST_SPELL_WARDING` | 411 (0x19B) |  |  |
+| `HEALING_PRAYERS` | 413 (0x19D) |  |  |
+| `ARCANE_INSTABILITY` | 421 (0x1A5) |  |  |
+| `HOLY_NOVA` | 442 (0x1BA) |  |  |
+| `SHADOW_WEAVING` | 461 (0x1CD) |  |  |
+| `DARKNESS` | 462 (0x1CE) |  |  |
+| `SHADOW_FOCUS` | 463 (0x1CF) |  |  |
+| `BLACKOUT` | 464 (0x1D0) |  |  |
+| `SPIRIT_TAP` | 465 (0x1D1) |  |  |
+| `SHADOW_AFFINITY` | 466 (0x1D2) |  |  |
+| `IMPROVED_MIND_BLAST` | 481 (0x1E1) |  |  |
+| `IMPROVED_SHADOW_WORD_PAIN` | 482 (0x1E2) |  |  |
+| `IMPROVED_FADE` | 483 (0x1E3) |  |  |
+| `VAMPIRIC_EMBRACE` | 484 (0x1E4) |  |  |
+| `MIND_FLAY` | 501 (0x1F5) |  |  |
+| `SHADOWFORM` | 521 (0x209) |  |  |
+| `SILENCE` | 541 (0x21D) |  |  |
+| `IMPROVED_PSYCHIC_SCREAM` | 542 (0x21E) |  |  |
+| `CALL_OF_FLAME` | 561 (0x231) |  |  |
+| `CALL_OF_THUNDER` | 562 (0x232) |  |  |
+| `CONCUSSION` | 563 (0x233) |  |  |
+| `CONVECTION` | 564 (0x234) |  |  |
+| `ELEMENTAL_FURY` | 565 (0x235) |  |  |
+| `IMPROVED_FIRE_TOTEMS` | 567 (0x237) |  |  |
+| `EARTHS_GRASP` | 572 (0x23C) |  | Earth's Grasp |
+| `ELEMENTAL_MASTERY` | 573 (0x23D) |  |  |
+| `ELEMENTAL_FOCUS` | 574 (0x23E) |  |  |
+| `REVERBERATION` | 575 (0x23F) |  |  |
+| `ANCESTRAL_HEALING` | 581 (0x245) |  |  |
+| `TOTEMIC_MASTERY` | 582 (0x246) |  |  |
+| `NATURES_GUIDANCE` | 583 (0x247) |  | Nature's Guidance |
+| `IMPROVED_HEALING_WAVE` | 586 (0x24A) |  |  |
+| `SHAMAN_HEALING_FOCUS` | 587 (0x24B) |  |  |
+| `RESTORATIVE_TOTEMS` | 588 (0x24C) |  |  |
+| `IMPROVED_REINCARNATION` | 589 (0x24D) |  |  |
+| `MANA_TIDE_TOTEM` | 590 (0x24E) |  |  |
+| `SHAMAN_NATURES_SWIFTNESS` | 591 (0x24F) |  | Nature's Swiftness |
+| `PURIFICATION` | 592 (0x250) |  |  |
+| `TIDAL_FOCUS` | 593 (0x251) |  |  |
+| `TIDAL_MASTERY` | 594 (0x252) |  |  |
+| `TOTEMIC_FOCUS` | 595 (0x253) |  |  |
+| `SHAMAN_ANTICIPATION` | 601 (0x259) |  |  |
+| `SHAMAN_FLURRY` | 602 (0x25A) |  |  |
+| `IMPROVED_GHOST_WOLF` | 605 (0x25D) |  |  |
+| `IMPROVED_LIGHTNING_SHIELD` | 607 (0x25F) |  |  |
+| `GUARDIAN_TOTEMS` | 609 (0x261) |  |  |
+| `ENHANCING_TOTEMS` | 610 (0x262) |  |  |
+| `ELEMENTAL_WEAPONS` | 611 (0x263) |  |  |
+| `SHAMAN_SHIELD_SPECIALIZATION` | 612 (0x264) |  |  |
+| `THUNDERING_STRIKES` | 613 (0x265) |  |  |
+| `ANCESTRAL_KNOWLEDGE` | 614 (0x266) |  |  |
+| `SHAMAN_TOUGHNESS` | 615 (0x267) |  |  |
+| `SPIRIT_WEAPONS` | 616 (0x268) |  |  |
+| `SHAMANISTIC_FOCUS` | 617 (0x269) |  |  |
+| `IRON_WILL` | 641 (0x281) |  |  |
+| `BLOOD_CRAZE` | 661 (0x295) |  |  |
+| `IMPALE` | 662 (0x296) |  |  |
+| `HEMORRHAGE` | 681 (0x2A9) |  |  |
+| `VILE_POISONS` | 682 (0x2AA) |  |  |
+| `WARRIOR_ONE_HANDED_WEAPON_SPECIALIZATION` | 702 (0x2BE) |  |  |
+| `LIGHTNING_MASTERY` | 721 (0x2D1) |  |  |
+| `ARCTIC_REACH` | 741 (0x2E5) |  |  |
+| `NATURES_GRASP` | 761 (0x2F9) |  | Nature's Grasp |
+| `STARLIGHT_WRATH` | 762 (0x2FA) |  |  |
+| `IMPROVED_MOONFIRE` | 763 (0x2FB) |  |  |
+| `NATURES_REACH` | 764 (0x2FC) |  | Nature's Reach |
+| `BRAMBLES` | 782 (0x30E) |  |  |
+| `MOONGLOW` | 783 (0x30F) |  |  |
+| `CELESTIAL_FOCUS` | 784 (0x310) |  |  |
+| `CONTROL_OF_NATURE` | 787 (0x313) |  |  |
+| `INSECT_SWARM` | 788 (0x314) |  |  |
+| `NATURES_GRACE` | 789 (0x315) |  | Nature's Grace |
+| `MOONFURY` | 790 (0x316) |  |  |
+| `DRUID_VENGEANCE` | 792 (0x318) |  |  |
+| `MOONKIN_FORM` | 793 (0x319) |  |  |
+| `DRUID_THICK_HIDE` | 794 (0x31A) |  |  |
+| `FERAL_AGGRESSION` | 795 (0x31B) |  |  |
+| `DRUID_FEROCITY` | 796 (0x31C) |  |  |
+| `BRUTAL_IMPACT` | 797 (0x31D) |  |  |
+| `SHARPENED_CLAWS` | 798 (0x31E) |  |  |
+| `FERAL_INSTINCT` | 799 (0x31F) |  |  |
+| `PRIMAL_FURY` | 801 (0x321) |  |  |
+| `SHREDDING_ATTACKS` | 802 (0x322) |  |  |
+| `PREDATORY_STRIKES` | 803 (0x323) |  |  |
+| `FERAL_CHARGE` | 804 (0x324) |  |  |
+| `SAVAGE_FURY` | 805 (0x325) |  |  |
+| `FERAL_SWIFTNESS` | 807 (0x327) |  |  |
+| `HEART_OF_THE_WILD` | 808 (0x328) |  |  |
+| `LEADER_OF_THE_PACK` | 809 (0x329) |  |  |
+| `IMPROVED_MARK_OF_THE_WILD` | 821 (0x335) |  |  |
+| `FUROR` | 822 (0x336) |  |  |
+| `NATURES_FOCUS` | 823 (0x337) |  | Nature's Focus |
+| `NATURALIST` | 824 (0x338) |  |  |
+| `IMPROVED_REGROWTH` | 825 (0x339) |  |  |
+| `NATURAL_SHAPESHIFTER` | 826 (0x33A) |  |  |
+| `OMEN_OF_CLARITY` | 827 (0x33B) |  |  |
+| `GIFT_OF_NATURE` | 828 (0x33C) |  |  |
+| `DRUID_INTENSITY` | 829 (0x33D) |  |  |
+| `IMPROVED_REJUVENATION` | 830 (0x33E) |  |  |
+| `DRUID_NATURES_SWIFTNESS` | 831 (0x33F) |  | Nature's Swiftness |
+| `SUBTLETY` | 841 (0x349) |  |  |
+| `IMPROVED_TRANQUILITY` | 842 (0x34A) |  |  |
+| `TRANQUIL_SPIRIT` | 843 (0x34B) |  |  |
+| `SWIFTMEND` | 844 (0x34C) |  |  |
+| `SHADOW_REACH` | 881 (0x371) |  |  |
+| `STORMSTRIKE` | 901 (0x385) |  |  |
+| `IMPROVED_NATURES_GRASP` | 921 (0x399) |  | Improved Nature's Grasp |
+| `CATACLYSM` | 941 (0x3AD) |  |  |
+| `BANE` | 943 (0x3AF) |  |  |
+| `IMPROVED_SHADOW_BOLT` | 944 (0x3B0) |  |  |
+| `IMPROVED_IMMOLATE` | 961 (0x3C1) |  |  |
+| `SHADOWBURN` | 963 (0x3C3) |  |  |
+| `DESTRUCTIVE_REACH` | 964 (0x3C4) |  |  |
+| `IMPROVED_SEARING_PAIN` | 965 (0x3C5) |  |  |
+| `EMBERSTORM` | 966 (0x3C6) |  |  |
+| `RUIN` | 967 (0x3C7) |  |  |
+| `CONFLAGRATE` | 968 (0x3C8) |  |  |
+| `DEVASTATION` | 981 (0x3D5) |  |  |
+| `AFTERMATH` | 982 (0x3D6) |  |  |
+| `IMPROVED_FIREBOLT` | 983 (0x3D7) |  |  |
+| `IMPROVED_LASH_OF_PAIN` | 984 (0x3D8) |  |  |
+| `WARLOCK_INTENSITY` | 985 (0x3D9) |  |  |
+| `PYROCLASM` | 986 (0x3DA) |  |  |
+| `FEL_CONCENTRATION` | 1001 (0x3E9) |  |  |
+| `NIGHTFALL` | 1002 (0x3EA) |  |  |
+| `IMPROVED_CORRUPTION` | 1003 (0x3EB) |  |  |
+| `SOUL_SIPHON` | 1004 (0x3EC) |  |  |
+| `SUPPRESSION` | 1005 (0x3ED) |  |  |
+| `IMPROVED_CURSE_OF_WEAKNESS` | 1006 (0x3EE) |  |  |
+| `IMPROVED_LIFE_TAP` | 1007 (0x3EF) |  |  |
+| `GRIM_REACH` | 1021 (0x3FD) |  |  |
+| `DARK_PACT` | 1022 (0x3FE) |  |  |
+| `SIPHON_LIFE` | 1041 (0x411) |  |  |
+| `SHADOW_MASTERY` | 1042 (0x412) |  |  |
+| `AMPLIFY_CURSE` | 1061 (0x425) |  |  |
+| `CURSE_OF_EXHAUSTION` | 1081 (0x439) |  |  |
+| `IMPROVED_DRAIN_SOUL` | 1101 (0x44D) |  |  |
+| `AGGRESSION` | 1122 (0x462) |  |  |
+| `SERRATED_BLADES` | 1123 (0x463) |  |  |
+| `INCINERATION` | 1141 (0x475) |  |  |
+| `ARCANE_MEDITATION` | 1142 (0x476) |  |  |
+| `FAERIE_FIRE_FERAL` | 1162 (0x48A) |  |  |
+| `DIVINE_FURY` | 1181 (0x49D) |  |  |
+| `MENTAL_STRENGTH` | 1201 (0x4B1) |  |  |
+| `FORCE_OF_WILL` | 1202 (0x4B2) |  |  |
+| `IMPROVED_HEALTHSTONE` | 1221 (0x4C5) |  |  |
+| `IMPROVED_IMP` | 1222 (0x4C6) |  |  |
+| `DEMONIC_EMBRACE` | 1223 (0x4C7) |  |  |
+| `IMPROVED_HEALTH_FUNNEL` | 1224 (0x4C8) |  |  |
+| `IMPROVED_VOIDWALKER` | 1225 (0x4C9) |  |  |
+| `FEL_DOMINATION` | 1226 (0x4CA) |  |  |
+| `MASTER_SUMMONER` | 1227 (0x4CB) |  |  |
+| `FEL_STAMINA` | 1241 (0x4D9) |  |  |
+| `FEL_INTELLECT` | 1242 (0x4DA) |  |  |
+| `IMPROVED_SUCCUBUS` | 1243 (0x4DB) |  |  |
+| `MASTER_DEMONOLOGIST` | 1244 (0x4DC) |  |  |
+| `MASTER_CONJUROR` | 1261 (0x4ED) |  |  |
+| `UNHOLY_POWER` | 1262 (0x4EE) |  |  |
+| `DEMONIC_KNOWLEDGE` | 1263 (0x4EF) |  |  |
+| `DEMONIC_SACRIFICE` | 1281 (0x501) |  |  |
+| `SOUL_LINK` | 1282 (0x502) |  |  |
+| `IMPROVED_ENSLAVE_DEMON` | 1283 (0x503) |  |  |
+| `IMPROVED_CURSE_OF_AGONY` | 1284 (0x504) |  |  |
+| `HUMANOID_SLAYING` | 1301 (0x515) |  |  |
+| `HUNTER_LIGHTNING_REFLEXES` | 1303 (0x517) |  |  |
+| `ENTRAPMENT` | 1304 (0x518) |  |  |
+| `IMPROVED_WING_CLIP` | 1305 (0x519) |  |  |
+| `CLEVER_TRAPS` | 1306 (0x51A) |  |  |
+| `DETERRENCE` | 1308 (0x51C) |  |  |
+| `IMPROVED_FEIGN_DEATH` | 1309 (0x51D) |  |  |
+| `SUREFOOTED` | 1310 (0x51E) |  |  |
+| `HUNTER_DEFLECTION` | 1311 (0x51F) |  |  |
+| `COUNTERATTACK` | 1312 (0x520) |  |  |
+| `KILLER_INSTINCT` | 1321 (0x529) |  |  |
+| `TRAP_MASTERY` | 1322 (0x52A) |  |  |
+| `WYVERN_STING` | 1325 (0x52D) |  |  |
+| `IMPROVED_CONCUSSIVE_SHOT` | 1341 (0x53D) |  |  |
+| `EFFICIENCY` | 1342 (0x53E) |  |  |
+| `IMPROVED_HUNTERS_MARK` | 1343 (0x53F) |  | Improved Hunter's Mark |
+| `LETHAL_SHOTS` | 1344 (0x540) |  |  |
+| `AIMED_SHOT` | 1345 (0x541) |  |  |
+| `IMPROVED_ARCANE_SHOT` | 1346 (0x542) |  |  |
+| `BARRAGE` | 1347 (0x543) |  |  |
+| `IMPROVED_STINGS` | 1348 (0x544) |  |  |
+| `MORTAL_SHOTS` | 1349 (0x545) |  |  |
+| `CONCUSSIVE_BARRAGE` | 1351 (0x547) |  |  |
+| `SCATTER_SHOT` | 1353 (0x549) |  |  |
+| `TRUESHOT_AURA` | 1361 (0x551) |  |  |
+| `RANGED_WEAPON_SPECIALIZATION` | 1362 (0x552) |  |  |
+| `IMPROVED_ASPECT_OF_THE_MONKEY` | 1381 (0x565) |  |  |
+| `IMPROVED_ASPECT_OF_THE_HAWK` | 1382 (0x566) |  |  |
+| `PATHFINDING` | 1384 (0x568) |  |  |
+| `IMPROVED_MEND_PET` | 1385 (0x569) |  |  |
+| `BESTIAL_WRATH` | 1386 (0x56A) |  |  |
+| `INTIMIDATION` | 1387 (0x56B) |  |  |
+| `SPIRIT_BOND` | 1388 (0x56C) |  |  |
+| `ENDURANCE_TRAINING` | 1389 (0x56D) |  |  |
+| `BESTIAL_DISCIPLINE` | 1390 (0x56E) |  |  |
+| `BESTIAL_SWIFTNESS` | 1391 (0x56F) |  |  |
+| `HUNTER_FEROCITY` | 1393 (0x571) |  |  |
+| `HUNTER_THICK_HIDE` | 1395 (0x573) |  |  |
+| `UNLEASHED_FURY` | 1396 (0x574) |  |  |
+| `FRENZY` | 1397 (0x575) |  |  |
+| `IMPROVED_BLESSING_OF_MIGHT` | 1401 (0x579) |  |  |
+| `PALADIN_VENGEANCE` | 1402 (0x57A) |  |  |
+| `PALADIN_DEFLECTION` | 1403 (0x57B) |  |  |
+| `IMPROVED_RETRIBUTION_AURA` | 1405 (0x57D) |  |  |
+| `BENEDICTION` | 1407 (0x57F) |  |  |
+| `SANCTITY_AURA` | 1409 (0x581) |  |  |
+| `PALADIN_TWO_HANDED_WEAPON_SPECIALIZATION` | 1410 (0x582) |  |  |
+| `CONVICTION` | 1411 (0x583) |  |  |
+| `REDOUBT` | 1421 (0x58D) |  |  |
+| `IMPROVED_DEVOTION_AURA` | 1422 (0x58E) |  |  |
+| `PALADIN_TOUGHNESS` | 1423 (0x58F) |  |  |
+| `PALADIN_SHIELD_SPECIALIZATION` | 1424 (0x590) |  |  |
+| `GUARDIANS_FAVOR` | 1425 (0x591) |  | Guardian's Favor |
+| `RECKONING` | 1426 (0x592) |  |  |
+| `PALADIN_ONE_HANDED_WEAPON_SPECIALIZATION` | 1429 (0x595) |  |  |
+| `HOLY_SHIELD` | 1430 (0x596) |  |  |
+| `BLESSING_OF_SANCTUARY` | 1431 (0x597) |  |  |
+| `SPIRITUAL_FOCUS` | 1432 (0x598) |  |  |
+| `DIVINE_FAVOR` | 1433 (0x599) |  |  |
+| `AURA_MASTERY` | 1435 (0x59B) |  |  |
+| `REPENTANCE` | 1441 (0x5A1) |  |  |
+| `BLESSING_OF_KINGS` | 1442 (0x5A2) |  |  |
+| `IMPROVED_LAY_ON_HANDS` | 1443 (0x5A3) |  |  |
+| `HEALING_LIGHT` | 1444 (0x5A4) |  |  |
+| `IMPROVED_BLESSING_OF_WISDOM` | 1446 (0x5A6) |  |  |
+| `DIVINE_INTELLECT` | 1449 (0x5A9) |  |  |
+| `DIVINE_STRENGTH` | 1450 (0x5AA) |  |  |
+| `ILLUMINATION` | 1461 (0x5B5) |  |  |
+| `IMPROVED_SEAL_OF_RIGHTEOUSNESS` | 1463 (0x5B7) |  |  |
+| `IMPROVED_SEAL_OF_THE_CRUSADER` | 1464 (0x5B8) |  |  |
+| `SANCTIFIED_LIGHT` | 1465 (0x5B9) |  |  |
+| `SEAL_OF_COMMAND` | 1481 (0x5C9) |  |  |
+| `IMPROVED_RIGHTEOUS_FURY` | 1501 (0x5DD) |  |  |
+| `HOLY_SHOCK` | 1502 (0x5DE) |  |  |
+| `IMPROVED_HAMMER_OF_JUSTICE` | 1521 (0x5F1) |  |  |
+| `IMPROVED_BERSERKER_RAGE` | 1541 (0x605) |  |  |
+| `IMPROVED_EXECUTE` | 1542 (0x606) |  |  |
+| `WARRIOR_WEAPON_MASTERY` | 1543 (0x607) |  |  |
+| `SPIRIT_OF_REDEMPTION` | 1561 (0x619) |  |  |
+| `WARRIOR_DUAL_WIELD_SPECIALIZATION` | 1581 (0x62D) |  |  |
+| `WARRIOR_SHIELD_SPECIALIZATION` | 1601 (0x641) |  |  |
+| `SAVAGE_STRIKES` | 1621 (0x655) |  |  |
+| `SURVIVALIST` | 1622 (0x656) |  |  |
+| `MONSTER_SLAYING` | 1623 (0x657) |  |  |
+| `FOCUSED_FIRE` | 1624 (0x658) |  |  |
+| `IMPROVED_REVIVE_PET` | 1625 (0x659) |  |  |
+| `IMPROVED_CONCENTRATION_AURA` | 1626 (0x65A) |  |  |
+| `HOLY_POWER` | 1627 (0x65B) |  |  |
+| `UNYIELDING_FAITH` | 1628 (0x65C) |  |  |
+| `PALADIN_ANTICIPATION` | 1629 (0x65D) |  |  |
+| `PALADIN_PRECISION` | 1630 (0x65E) |  |  |
+| `IMPROVED_JUDGEMENT` | 1631 (0x65F) |  |  |
+| `EYE_FOR_AN_EYE` | 1632 (0x660) |  |  |
+| `VINDICATION` | 1633 (0x661) |  |  |
+| `PURSUIT_OF_JUSTICE` | 1634 (0x662) |  |  |
+| `HOLY_REACH` | 1635 (0x663) |  |  |
+| `BLESSED_RECOVERY` | 1636 (0x664) |  |  |
+| `LIGHTWELL` | 1637 (0x665) |  |  |
+| `IMPROVED_VAMPIRIC_EMBRACE` | 1638 (0x666) |  |  |
+| `MASTER_OF_ELEMENTS` | 1639 (0x667) |  |  |
+| `ELEMENTAL_WARDING` | 1640 (0x668) |  |  |
+| `STORM_REACH` | 1641 (0x669) |  |  |
+| `EYE_OF_THE_STORM` | 1642 (0x66A) |  |  |
+| `SHAMAN_WEAPON_MASTERY` | 1643 (0x66B) |  |  |
+| `ELEMENTAL_DEVASTATION` | 1645 (0x66D) |  |  |
+| `HEALING_GRACE` | 1646 (0x66E) |  |  |
+| `IMPROVED_WEAPON_TOTEMS` | 1647 (0x66F) |  |  |
+| `HEALING_WAY` | 1648 (0x670) |  |  |
+| `MAGE_ELEMENTAL_PRECISION` | 1649 (0x671) |  |  |
+| `MAGIC_ABSORPTION` | 1650 (0x672) |  |  |
+| `IMPROVED_DEFENSIVE_STANCE` | 1652 (0x674) |  |  |
+| `WARRIOR_VITALITY` | 1653 (0x675) |  |  |
+| `SHIELD_MASTERY` | 1654 (0x676) |  |  |
+| `IMPROVED_WHIRLWIND` | 1655 (0x677) |  |  |
+| `WARRIOR_PRECISION` | 1657 (0x679) |  |  |
+| `IMPROVED_BERSERKER_STANCE` | 1658 (0x67A) |  |  |
+| `RAMPAGE` | 1659 (0x67B) |  |  |
+| `FOCUSED_RAGE` | 1660 (0x67C) |  |  |
+| `ENDLESS_RAGE` | 1661 (0x67D) |  |  |
+| `IMPROVED_DISCIPLINES` | 1662 (0x67E) |  |  |
+| `SECOND_WIND` | 1663 (0x67F) |  |  |
+| `BLOOD_FRENZY` | 1664 (0x680) |  |  |
+| `DEVASTATE` | 1666 (0x682) |  |  |
+| `MALEDICTION` | 1667 (0x683) |  |  |
+| `IMPROVED_HOWL_OF_TERROR` | 1668 (0x684) |  |  |
+| `CONTAGION` | 1669 (0x685) |  |  |
+| `UNSTABLE_AFFLICTION` | 1670 (0x686) |  |  |
+| `DEMONIC_AEGIS` | 1671 (0x687) |  |  |
+| `SUMMON_FELGUARD` | 1672 (0x688) |  |  |
+| `DEMONIC_TACTICS` | 1673 (0x689) |  |  |
+| `SHADOWFURY` | 1676 (0x68C) |  |  |
+| `SHADOW_AND_FLAME` | 1677 (0x68D) |  |  |
+| `SOUL_LEECH` | 1678 (0x68E) |  |  |
+| `NETHER_PROTECTION` | 1679 (0x68F) |  |  |
+| `DEMONIC_RESILIENCE` | 1680 (0x690) |  |  |
+| `MANA_FEED` | 1681 (0x691) |  |  |
+| `UNRELENTING_STORM` | 1682 (0x692) |  |  |
+| `ELEMENTAL_SHIELDS` | 1683 (0x693) |  |  |
+| `SHAMAN_ELEMENTAL_PRECISION` | 1685 (0x695) |  |  |
+| `LIGHTNING_OVERLOAD` | 1686 (0x696) |  |  |
+| `TOTEM_OF_WRATH` | 1687 (0x697) |  |  |
+| `UNLEASHED_RAGE` | 1689 (0x699) |  |  |
+| `DUAL_WIELD` | 1690 (0x69A) |  |  |
+| `MENTAL_QUICKNESS` | 1691 (0x69B) |  |  |
+| `SHAMAN_DUAL_WIELD_SPECIALIZATION` | 1692 (0x69C) |  |  |
+| `SHAMANISTIC_RAGE` | 1693 (0x69D) |  |  |
+| `SHAMAN_FOCUSED_MIND` | 1695 (0x69F) |  |  |
+| `NATURES_BLESSING` | 1696 (0x6A0) |  | Nature's Blessing |
+| `IMPROVED_CHAIN_HEAL` | 1697 (0x6A1) |  |  |
+| `EARTH_SHIELD` | 1698 (0x6A2) |  |  |
+| `NATURES_GUARDIAN` | 1699 (0x6A3) |  | Nature's Guardian |
+| `SLEIGHT_OF_HAND` | 1700 (0x6A4) |  |  |
+| `HEIGHTENED_SENSES` | 1701 (0x6A5) |  |  |
+| `DEADLINESS` | 1702 (0x6A6) |  |  |
+| `WEAPON_EXPERTISE` | 1703 (0x6A7) |  |  |
+| `ROGUE_VITALITY` | 1705 (0x6A9) |  |  |
+| `BLADE_TWISTING` | 1706 (0x6AA) |  |  |
+| `NERVES_OF_STEEL` | 1707 (0x6AB) |  |  |
+| `SURPRISE_ATTACKS` | 1709 (0x6AD) |  |  |
+| `ENVELOPING_SHADOWS` | 1711 (0x6AF) |  |  |
+| `SINISTER_CALLING` | 1712 (0x6B0) |  |  |
+| `MASTER_OF_SUBTLETY` | 1713 (0x6B1) |  |  |
+| `SHADOWSTEP` | 1714 (0x6B2) |  |  |
+| `MASTER_POISONER` | 1715 (0x6B3) |  |  |
+| `FIND_WEAKNESS` | 1718 (0x6B6) |  |  |
+| `MUTILATE` | 1719 (0x6B7) |  |  |
+| `FLEET_FOOTED` | 1721 (0x6B9) |  |  |
+| `CHEAT_DEATH` | 1722 (0x6BA) |  |  |
+| `DEADENED_NERVES` | 1723 (0x6BB) |  |  |
+| `IMPROVED_BLINK` | 1724 (0x6BC) |  |  |
+| `ARCANE_POTENCY` | 1725 (0x6BD) |  |  |
+| `PRISMATIC_CLOAK` | 1726 (0x6BE) |  |  |
+| `EMPOWERED_ARCANE_MISSILES` | 1727 (0x6BF) |  |  |
+| `MIND_MASTERY` | 1728 (0x6C0) |  |  |
+| `SLOW` | 1729 (0x6C1) |  |  |
+| `PLAYING_WITH_FIRE` | 1730 (0x6C2) |  |  |
+| `BLAZING_SPEED` | 1731 (0x6C3) |  |  |
+| `MOLTEN_FURY` | 1732 (0x6C4) |  |  |
+| `PYROMANIAC` | 1733 (0x6C5) |  |  |
+| `EMPOWERED_FIREBALL` | 1734 (0x6C6) |  |  |
+| `DRAGONS_BREATH` | 1735 (0x6C7) |  | Dragon's Breath |
+| `FROZEN_CORE` | 1736 (0x6C8) |  |  |
+| `ICE_FLOES` | 1737 (0x6C9) |  |  |
+| `ARCTIC_WINDS` | 1738 (0x6CA) |  |  |
+| `EMPOWERED_FROSTBOLT` | 1740 (0x6CC) |  |  |
+| `SUMMON_WATER_ELEMENTAL` | 1741 (0x6CD) |  |  |
+| `PURE_OF_HEART` | 1742 (0x6CE) |  |  |
+| `PURIFYING_POWER` | 1743 (0x6CF) |  |  |
+| `BLESSED_LIFE` | 1744 (0x6D0) |  |  |
+| `LIGHTS_GRACE` | 1745 (0x6D1) |  | Light's Grace |
+| `HOLY_GUIDANCE` | 1746 (0x6D2) |  |  |
+| `DIVINE_ILLUMINATION` | 1747 (0x6D3) |  |  |
+| `STOICISM` | 1748 (0x6D4) |  |  |
+| `PALADIN_SPELL_WARDING` | 1749 (0x6D5) |  |  |
+| `SACRED_DUTY` | 1750 (0x6D6) |  |  |
+| `ARDENT_DEFENDER` | 1751 (0x6D7) |  |  |
+| `COMBAT_EXPERTISE` | 1753 (0x6D9) |  |  |
+| `AVENGERS_SHIELD` | 1754 (0x6DA) |  | Avenger's Shield |
+| `CRUSADE` | 1755 (0x6DB) |  |  |
+| `IMPROVED_SANCTITY_AURA` | 1756 (0x6DC) |  |  |
+| `DIVINE_PURPOSE` | 1757 (0x6DD) |  |  |
+| `SANCTIFIED_JUDGEMENT` | 1758 (0x6DE) |  |  |
+| `FANATICISM` | 1759 (0x6DF) |  |  |
+| `SANCTIFIED_SEALS` | 1761 (0x6E1) |  |  |
+| `QUICK_RECOVERY` | 1762 (0x6E2) |  |  |
+| `SHADOW_EMBRACE` | 1763 (0x6E3) |  |  |
+| `EMPOWERED_CORRUPTION` | 1764 (0x6E4) |  |  |
+| `BLESSED_RESILIENCE` | 1765 (0x6E5) |  |  |
+| `SURGE_OF_LIGHT` | 1766 (0x6E6) |  |  |
+| `EMPOWERED_HEALING` | 1767 (0x6E7) |  |  |
+| `HOLY_CONCENTRATION` | 1768 (0x6E8) |  |  |
+| `ABSOLUTION` | 1769 (0x6E9) |  |  |
+| `IMPROVED_DIVINE_SPIRIT` | 1770 (0x6EA) |  |  |
+| `FOCUSED_POWER` | 1771 (0x6EB) |  |  |
+| `ENLIGHTENMENT` | 1772 (0x6EC) |  |  |
+| `REFLECTIVE_SHIELD` | 1773 (0x6ED) |  |  |
+| `PAIN_SUPPRESSION` | 1774 (0x6EE) |  |  |
+| `PRIEST_FOCUSED_MIND` | 1777 (0x6F1) |  |  |
+| `SHADOW_POWER` | 1778 (0x6F2) |  |  |
+| `VAMPIRIC_TOUCH` | 1779 (0x6F3) |  |  |
+| `SHADOW_RESILIENCE` | 1781 (0x6F5) |  |  |
+| `LUNAR_GUIDANCE` | 1782 (0x6F6) |  |  |
+| `BALANCE_OF_POWER` | 1783 (0x6F7) |  |  |
+| `DREAMSTATE` | 1784 (0x6F8) |  |  |
+| `IMPROVED_FAERIE_FIRE` | 1785 (0x6F9) |  |  |
+| `WRATH_OF_CENARIUS` | 1786 (0x6FA) |  |  |
+| `FORCE_OF_NATURE` | 1787 (0x6FB) |  |  |
+| `EMPOWERED_TOUCH` | 1788 (0x6FC) |  |  |
+| `EMPOWERED_REJUVENATION` | 1789 (0x6FD) |  |  |
+| `NATURAL_PERFECTION` | 1790 (0x6FE) |  |  |
+| `TREE_OF_LIFE` | 1791 (0x6FF) |  |  |
+| `NURTURING_INSTINCT` | 1792 (0x700) |  |  |
+| `PRIMAL_TENACITY` | 1793 (0x701) |  |  |
+| `SURVIVAL_OF_THE_FITTEST` | 1794 (0x702) |  |  |
+| `PREDATORY_INSTINCTS` | 1795 (0x703) |  |  |
+| `MANGLE` | 1796 (0x704) |  |  |
+| `LIVING_SPIRIT` | 1797 (0x705) |  |  |
+| `IMPROVED_LEADER_OF_THE_PACK` | 1798 (0x706) |  |  |
+| `ANIMAL_HANDLER` | 1799 (0x707) |  |  |
+| `FEROCIOUS_INSPIRATION` | 1800 (0x708) |  |  |
+| `CATLIKE_REFLEXES` | 1801 (0x709) |  |  |
+| `SERPENTS_SWIFTNESS` | 1802 (0x70A) |  | Serpent's Swiftness |
+| `THE_BEAST_WITHIN` | 1803 (0x70B) |  |  |
+| `COMBAT_EXPERIENCE` | 1804 (0x70C) |  |  |
+| `CAREFUL_AIM` | 1806 (0x70E) |  |  |
+| `MASTER_MARKSMAN` | 1807 (0x70F) |  |  |
+| `SILENCING_SHOT` | 1808 (0x710) |  |  |
+| `RESOURCEFULNESS` | 1809 (0x711) |  |  |
+| `SURVIVAL_INSTINCTS` | 1810 (0x712) |  |  |
+| `THRILL_OF_THE_HUNT` | 1811 (0x713) |  |  |
+| `EXPOSE_WEAKNESS` | 1812 (0x714) |  |  |
+| `MASTER_TACTICIAN` | 1813 (0x715) |  |  |
+| `READINESS` | 1814 (0x716) |  |  |
+| `CIRCLE_OF_HEALING` | 1815 (0x717) |  |  |
+| `MISERY` | 1816 (0x718) |  |  |
+| `BACKLASH` | 1817 (0x719) |  |  |
+| `GO_FOR_THE_THROAT` | 1818 (0x71A) |  |  |
+| `RAPID_KILLING` | 1819 (0x71B) |  |  |
+| `HAWK_EYE` | 1820 (0x71C) |  |  |
+| `IMPROVED_BARRAGE` | 1821 (0x71D) |  |  |
+| `FOCUSED_STARLIGHT` | 1822 (0x71E) |  |  |
+| `CRUSADER_STRIKE` | 1823 (0x71F) |  |  |
+| `IMPROVED_MORTAL_STRIKE` | 1824 (0x720) |  |  |
+| `COMBAT_POTENCY` | 1825 (0x721) |  |  |
+| `SPELL_POWER` | 1826 (0x722) |  |  |
+| `IMPROVED_SLICE_AND_DICE` | 1827 (0x723) |  |  |
+| `IMPROVED_HOLY_SHIELD` | 1829 (0x725) |  |  |
+| `FOCUSED_WILL` | 1858 (0x742) |  |  |
 
 Used in:
 * [CMSG_LEARN_TALENT](cmsg_learn_talent.md)
@@ -2965,900 +2965,900 @@ enum Talent : u32 {
 ### Type
 The basic type is `u32`, a 4 byte (32 bit) little endian integer.
 ### Enumerators
-| Enumerator | Value  | Description | Comment | Display |
-| --------- | -------- | ----------- | ------- | ------- |
-| `BURNING_SOUL` | 23 (0x17) |  |  |  |
-| `MOLTEN_SHIELDS` | 24 (0x18) |  |  |  |
-| `IMPROVED_SCORCH` | 25 (0x19) |  |  |  |
-| `IMPROVED_FIREBALL` | 26 (0x1A) |  |  |  |
-| `IMPROVED_FIRE_BLAST` | 27 (0x1B) |  |  |  |
-| `FLAME_THROWING` | 28 (0x1C) |  |  |  |
-| `PYROBLAST` | 29 (0x1D) |  |  |  |
-| `IMPACT` | 30 (0x1E) |  |  |  |
-| `WORLD_IN_FLAMES` | 31 (0x1F) |  |  |  |
-| `BLAST_WAVE` | 32 (0x20) |  |  |  |
-| `CRITICAL_MASS` | 33 (0x21) |  |  |  |
-| `IGNITE` | 34 (0x22) |  |  |  |
-| `FIRE_POWER` | 35 (0x23) |  |  |  |
-| `COMBUSTION` | 36 (0x24) |  |  |  |
-| `IMPROVED_FROSTBOLT` | 37 (0x25) |  |  |  |
-| `FROSTBITE` | 38 (0x26) |  |  |  |
-| `PIERCING_ICE` | 61 (0x3D) |  |  |  |
-| `ICE_FLOES` | 62 (0x3E) |  |  |  |
-| `IMPROVED_BLIZZARD` | 63 (0x3F) |  |  |  |
-| `IMPROVED_CONE_OF_COLD` | 64 (0x40) |  |  |  |
-| `PERMAFROST` | 65 (0x41) |  |  |  |
-| `FROST_CHANNELING` | 66 (0x42) |  |  |  |
-| `SHATTER` | 67 (0x43) |  |  |  |
-| `WINTERS_CHILL` | 68 (0x44) |  |  | Winter's Chill |
-| `ICY_VEINS` | 69 (0x45) |  |  |  |
-| `FROST_WARDING` | 70 (0x46) |  |  |  |
-| `ICE_BARRIER` | 71 (0x47) |  |  |  |
-| `COLD_SNAP` | 72 (0x48) |  |  |  |
-| `ICE_SHARDS` | 73 (0x49) |  |  |  |
-| `ARCANE_SUBTLETY` | 74 (0x4A) |  |  |  |
-| `ARCANE_CONCENTRATION` | 75 (0x4B) |  |  |  |
-| `ARCANE_FOCUS` | 76 (0x4C) |  |  |  |
-| `ARCANE_MIND` | 77 (0x4D) |  |  |  |
-| `ARCANE_STABILITY` | 80 (0x50) |  |  |  |
-| `SPELL_IMPACT` | 81 (0x51) |  |  |  |
-| `MAGIC_ATTUNEMENT` | 82 (0x52) |  |  |  |
-| `ARCANE_SHIELDING` | 83 (0x53) |  |  |  |
-| `ARCANE_FORTITUDE` | 85 (0x55) |  |  |  |
-| `PRESENCE_OF_MIND` | 86 (0x56) |  |  |  |
-| `ARCANE_POWER` | 87 (0x57) |  |  |  |
-| `IMPROVED_COUNTERSPELL` | 88 (0x58) |  |  |  |
-| `DEEP_WOUNDS` | 121 (0x79) |  |  |  |
-| `SWORD_SPECIALIZATION` | 123 (0x7B) |  |  |  |
-| `IMPROVED_HEROIC_STRIKE` | 124 (0x7C) |  |  |  |
-| `WARRIOR_MACE_SPECIALIZATION` | 125 (0x7D) |  |  |  |
-| `IMPROVED_CHARGE` | 126 (0x7E) |  |  |  |
-| `IMPROVED_REND` | 127 (0x7F) |  |  |  |
-| `TACTICAL_MASTERY` | 128 (0x80) |  |  |  |
-| `IMPROVED_HAMSTRING` | 129 (0x81) |  |  |  |
-| `WARRIOR_DEFLECTION` | 130 (0x82) |  |  |  |
-| `IMPROVED_OVERPOWER` | 131 (0x83) |  |  |  |
-| `POLEAXE_SPECIALIZATION` | 132 (0x84) |  |  |  |
-| `SWEEPING_STRIKES` | 133 (0x85) |  |  |  |
-| `WARRIOR_WEAPON_MASTERY` | 134 (0x86) |  |  |  |
-| `MORTAL_STRIKE` | 135 (0x87) |  |  |  |
-| `WARRIOR_TWO_HANDED_WEAPON_SPECIALIZATION` | 136 (0x88) |  |  |  |
-| `ANGER_MANAGEMENT` | 137 (0x89) |  |  |  |
-| `WARRIOR_ANTICIPATION` | 138 (0x8A) |  |  |  |
-| `WARRIOR_TOUGHNESS` | 140 (0x8C) |  |  |  |
-| `IMPROVED_THUNDER_CLAP` | 141 (0x8D) |  |  |  |
-| `IMPROVED_BLOODRAGE` | 142 (0x8E) |  |  |  |
-| `INCITE` | 144 (0x90) |  |  |  |
-| `PUNCTURE` | 146 (0x92) |  |  |  |
-| `IMPROVED_REVENGE` | 147 (0x93) |  |  |  |
-| `VIGILANCE` | 148 (0x94) |  |  |  |
-| `GAG_ORDER` | 149 (0x95) |  |  |  |
-| `IMPROVED_DISCIPLINES` | 150 (0x96) |  |  |  |
-| `IMPROVED_DISARM` | 151 (0x97) |  |  |  |
-| `CONCUSSION_BLOW` | 152 (0x98) |  |  |  |
-| `WARRIOR_LAST_STAND` | 153 (0x99) |  |  |  |
-| `COMMANDING_PRESENCE` | 154 (0x9A) |  |  |  |
-| `ENRAGE` | 155 (0x9B) |  |  |  |
-| `WARRIOR_FLURRY` | 156 (0x9C) |  |  |  |
-| `CRUELTY` | 157 (0x9D) |  |  |  |
-| `BOOMING_VOICE` | 158 (0x9E) |  |  |  |
-| `UNBRIDLED_WRATH` | 159 (0x9F) |  |  |  |
-| `PIERCING_HOWL` | 160 (0xA0) |  |  |  |
-| `IMPROVED_DEMORALIZING_SHOUT` | 161 (0xA1) |  |  |  |
-| `DEATH_WISH` | 165 (0xA5) |  |  |  |
-| `IMPROVED_CLEAVE` | 166 (0xA6) |  |  |  |
-| `BLOODTHIRST` | 167 (0xA7) |  |  |  |
-| `ROGUE_PRECISION` | 181 (0xB5) |  |  |  |
-| `CLOSE_QUARTERS_COMBAT` | 182 (0xB6) |  |  |  |
-| `ROGUE_MACE_SPECIALIZATION` | 184 (0xB8) |  |  |  |
-| `ROGUE_LIGHTNING_REFLEXES` | 186 (0xBA) |  |  |  |
-| `ROGUE_DEFLECTION` | 187 (0xBB) |  |  |  |
-| `IMPROVED_SINISTER_STRIKE` | 201 (0xC9) |  |  |  |
-| `IMPROVED_GOUGE` | 203 (0xCB) |  |  |  |
-| `ENDURANCE` | 204 (0xCC) |  |  |  |
-| `ADRENALINE_RUSH` | 205 (0xCD) |  |  |  |
-| `IMPROVED_KICK` | 206 (0xCE) |  |  |  |
-| `ROGUE_DUAL_WIELD_SPECIALIZATION` | 221 (0xDD) |  |  |  |
-| `IMPROVED_SPRINT` | 222 (0xDE) |  |  |  |
-| `BLADE_FLURRY` | 223 (0xDF) |  |  |  |
-| `MASTER_OF_DECEPTION` | 241 (0xF1) |  |  |  |
-| `HACK_AND_SLASH` | 242 (0xF2) |  |  |  |
-| `CAMOUFLAGE` | 244 (0xF4) |  |  |  |
-| `INITIATIVE` | 245 (0xF5) |  |  |  |
-| `SETUP` | 246 (0xF6) |  |  |  |
-| `ELUSIVENESS` | 247 (0xF7) |  |  |  |
-| `OPPORTUNITY` | 261 (0x105) |  |  |  |
-| `DIRTY_TRICKS` | 262 (0x106) |  |  |  |
-| `IMPROVED_AMBUSH` | 263 (0x107) |  |  |  |
-| `DIRTY_DEEDS` | 265 (0x109) |  |  |  |
-| `IMPROVED_POISONS` | 268 (0x10C) |  |  |  |
-| `LETHALITY` | 269 (0x10D) |  |  |  |
-| `MALICE` | 270 (0x10E) |  |  |  |
-| `REMORSELESS_ATTACKS` | 272 (0x110) |  |  |  |
-| `RUTHLESSNESS` | 273 (0x111) |  |  |  |
-| `MURDER` | 274 (0x112) |  |  |  |
-| `IMPROVED_EVISCERATE` | 276 (0x114) |  |  |  |
-| `PUNCTURING_WOUNDS` | 277 (0x115) |  |  |  |
-| `IMPROVED_EXPOSE_ARMOR` | 278 (0x116) |  |  |  |
-| `IMPROVED_KIDNEY_SHOT` | 279 (0x117) |  |  |  |
-| `COLD_BLOOD` | 280 (0x118) |  |  |  |
-| `OVERKILL` | 281 (0x119) |  |  |  |
-| `SEAL_FATE` | 283 (0x11B) |  |  |  |
-| `PREPARATION` | 284 (0x11C) |  |  |  |
-| `RIPOSTE` | 301 (0x12D) |  |  |  |
-| `GHOSTLY_STRIKE` | 303 (0x12F) |  |  |  |
-| `MARTYRDOM` | 321 (0x141) |  |  |  |
-| `POWER_INFUSION` | 322 (0x142) |  |  |  |
-| `MENTAL_AGILITY` | 341 (0x155) |  |  |  |
-| `UNBREAKABLE_WILL` | 342 (0x156) |  |  |  |
-| `IMPROVED_POWER_WORD_SHIELD` | 343 (0x157) |  |  |  |
-| `IMPROVED_POWER_WORD_FORTITUDE` | 344 (0x158) |  |  |  |
-| `IMPROVED_INNER_FIRE` | 346 (0x15A) |  |  |  |
-| `MEDITATION` | 347 (0x15B) |  |  |  |
-| `INNER_FOCUS` | 348 (0x15C) |  |  |  |
-| `IMPROVED_MANA_BURN` | 350 (0x15E) |  |  |  |
-| `SOUL_WARDING` | 351 (0x15F) |  |  |  |
-| `SILENT_RESOLVE` | 352 (0x160) |  |  |  |
-| `INSPIRATION` | 361 (0x169) |  |  |  |
-| `PREMEDITATION` | 381 (0x17D) |  |  |  |
-| `VIGOR` | 382 (0x17E) |  |  |  |
-| `HOLY_SPECIALIZATION` | 401 (0x191) |  |  |  |
-| `SPIRITUAL_GUIDANCE` | 402 (0x192) |  |  |  |
-| `SEARING_LIGHT` | 403 (0x193) |  |  |  |
-| `SPIRITUAL_HEALING` | 404 (0x194) |  |  |  |
-| `IMPROVED_RENEW` | 406 (0x196) |  |  |  |
-| `IMPROVED_HEALING` | 408 (0x198) |  |  |  |
-| `PRIEST_HEALING_FOCUS` | 410 (0x19A) |  |  |  |
-| `SPELL_WARDING` | 411 (0x19B) |  |  |  |
-| `HEALING_PRAYERS` | 413 (0x19D) |  |  |  |
-| `ARCANE_INSTABILITY` | 421 (0x1A5) |  |  |  |
-| `DESPERATE_PRAYER` | 442 (0x1BA) |  |  |  |
-| `SHADOW_WEAVING` | 461 (0x1CD) |  |  |  |
-| `DARKNESS` | 462 (0x1CE) |  |  |  |
-| `SHADOW_FOCUS` | 463 (0x1CF) |  |  |  |
-| `SPIRIT_TAP` | 465 (0x1D1) |  |  |  |
-| `SHADOW_AFFINITY` | 466 (0x1D2) |  |  |  |
-| `IMPROVED_MIND_BLAST` | 481 (0x1E1) |  |  |  |
-| `IMPROVED_SHADOW_WORD_PAIN` | 482 (0x1E2) |  |  |  |
-| `VEILED_SHADOWS` | 483 (0x1E3) |  |  |  |
-| `VAMPIRIC_EMBRACE` | 484 (0x1E4) |  |  |  |
-| `MIND_FLAY` | 501 (0x1F5) |  |  |  |
-| `SHADOWFORM` | 521 (0x209) |  |  |  |
-| `SILENCE` | 541 (0x21D) |  |  |  |
-| `IMPROVED_PSYCHIC_SCREAM` | 542 (0x21E) |  |  |  |
-| `CALL_OF_FLAME` | 561 (0x231) |  |  |  |
-| `CALL_OF_THUNDER` | 562 (0x232) |  |  |  |
-| `CONCUSSION` | 563 (0x233) |  |  |  |
-| `CONVECTION` | 564 (0x234) |  |  |  |
-| `ELEMENTAL_FURY` | 565 (0x235) |  |  |  |
-| `IMPROVED_FIRE_NOVA` | 567 (0x237) |  |  |  |
-| `ELEMENTAL_MASTERY` | 573 (0x23D) |  |  |  |
-| `ELEMENTAL_FOCUS` | 574 (0x23E) |  |  |  |
-| `REVERBERATION` | 575 (0x23F) |  |  |  |
-| `ANCESTRAL_HEALING` | 581 (0x245) |  |  |  |
-| `TIDAL_FORCE` | 582 (0x246) |  |  |  |
-| `IMPROVED_WATER_SHIELD` | 583 (0x247) |  |  |  |
-| `IMPROVED_HEALING_WAVE` | 586 (0x24A) |  |  |  |
-| `SHAMAN_HEALING_FOCUS` | 587 (0x24B) |  |  |  |
-| `RESTORATIVE_TOTEMS` | 588 (0x24C) |  |  |  |
-| `IMPROVED_REINCARNATION` | 589 (0x24D) |  |  |  |
-| `MANA_TIDE_TOTEM` | 590 (0x24E) |  |  |  |
-| `SHAMAN_NATURES_SWIFTNESS` | 591 (0x24F) |  |  | Nature's Swiftness |
-| `PURIFICATION` | 592 (0x250) |  |  |  |
-| `TIDAL_FOCUS` | 593 (0x251) |  |  |  |
-| `TIDAL_MASTERY` | 594 (0x252) |  |  |  |
-| `TOTEMIC_FOCUS` | 595 (0x253) |  |  |  |
-| `SHAMAN_ANTICIPATION` | 601 (0x259) |  |  |  |
-| `SHAMAN_FLURRY` | 602 (0x25A) |  |  |  |
-| `IMPROVED_GHOST_WOLF` | 605 (0x25D) |  |  |  |
-| `IMPROVED_SHIELDS` | 607 (0x25F) |  |  |  |
-| `GUARDIAN_TOTEMS` | 609 (0x261) |  |  |  |
-| `ENHANCING_TOTEMS` | 610 (0x262) |  |  |  |
-| `ELEMENTAL_WEAPONS` | 611 (0x263) |  |  |  |
-| `THUNDERING_STRIKES` | 613 (0x265) |  |  |  |
-| `ANCESTRAL_KNOWLEDGE` | 614 (0x266) |  |  |  |
-| `SHAMAN_TOUGHNESS` | 615 (0x267) |  |  |  |
-| `SPIRIT_WEAPONS` | 616 (0x268) |  |  |  |
-| `SHAMANISTIC_FOCUS` | 617 (0x269) |  |  |  |
-| `IRON_WILL` | 641 (0x281) |  |  |  |
-| `BLOOD_CRAZE` | 661 (0x295) |  |  |  |
-| `IMPALE` | 662 (0x296) |  |  |  |
-| `HEMORRHAGE` | 681 (0x2A9) |  |  |  |
-| `VILE_POISONS` | 682 (0x2AA) |  |  |  |
-| `WARRIOR_ONE_HANDED_WEAPON_SPECIALIZATION` | 702 (0x2BE) |  |  |  |
-| `LIGHTNING_MASTERY` | 721 (0x2D1) |  |  |  |
-| `ARCTIC_REACH` | 741 (0x2E5) |  |  |  |
-| `STARLIGHT_WRATH` | 762 (0x2FA) |  |  |  |
-| `IMPROVED_MOONFIRE` | 763 (0x2FB) |  |  |  |
-| `NATURES_REACH` | 764 (0x2FC) |  |  | Nature's Reach |
-| `BRAMBLES` | 782 (0x30E) |  |  |  |
-| `MOONGLOW` | 783 (0x30F) |  |  |  |
-| `CELESTIAL_FOCUS` | 784 (0x310) |  |  |  |
-| `INSECT_SWARM` | 788 (0x314) |  |  |  |
-| `NATURES_GRACE` | 789 (0x315) |  |  | Nature's Grace |
-| `MOONFURY` | 790 (0x316) |  |  |  |
-| `DRUID_VENGEANCE` | 792 (0x318) |  |  |  |
-| `MOONKIN_FORM` | 793 (0x319) |  |  |  |
-| `DRUID_THICK_HIDE` | 794 (0x31A) |  |  |  |
-| `FERAL_AGGRESSION` | 795 (0x31B) |  |  |  |
-| `DRUID_FEROCITY` | 796 (0x31C) |  |  |  |
-| `BRUTAL_IMPACT` | 797 (0x31D) |  |  |  |
-| `SHARPENED_CLAWS` | 798 (0x31E) |  |  |  |
-| `FERAL_INSTINCT` | 799 (0x31F) |  |  |  |
-| `PRIMAL_FURY` | 801 (0x321) |  |  |  |
-| `SHREDDING_ATTACKS` | 802 (0x322) |  |  |  |
-| `PREDATORY_STRIKES` | 803 (0x323) |  |  |  |
-| `FERAL_CHARGE` | 804 (0x324) |  |  |  |
-| `SAVAGE_FURY` | 805 (0x325) |  |  |  |
-| `FERAL_SWIFTNESS` | 807 (0x327) |  |  |  |
-| `HEART_OF_THE_WILD` | 808 (0x328) |  |  |  |
-| `LEADER_OF_THE_PACK` | 809 (0x329) |  |  |  |
-| `IMPROVED_MARK_OF_THE_WILD` | 821 (0x335) |  |  |  |
-| `FUROR` | 822 (0x336) |  |  |  |
-| `NATURES_FOCUS` | 823 (0x337) |  |  | Nature's Focus |
-| `NATURALIST` | 824 (0x338) |  |  |  |
-| `NATURES_BOUNTY` | 825 (0x339) |  |  | Nature's Bounty |
-| `NATURAL_SHAPESHIFTER` | 826 (0x33A) |  |  |  |
-| `OMEN_OF_CLARITY` | 827 (0x33B) |  |  |  |
-| `GIFT_OF_NATURE` | 828 (0x33C) |  |  |  |
-| `DRUID_INTENSITY` | 829 (0x33D) |  |  |  |
-| `IMPROVED_REJUVENATION` | 830 (0x33E) |  |  |  |
-| `DRUID_NATURES_SWIFTNESS` | 831 (0x33F) |  |  | Nature's Swiftness |
-| `SUBTLETY` | 841 (0x349) |  |  |  |
-| `IMPROVED_TRANQUILITY` | 842 (0x34A) |  |  |  |
-| `TRANQUIL_SPIRIT` | 843 (0x34B) |  |  |  |
-| `SWIFTMEND` | 844 (0x34C) |  |  |  |
-| `SHADOW_REACH` | 881 (0x371) |  |  |  |
-| `STORMSTRIKE` | 901 (0x385) |  |  |  |
-| `CATACLYSM` | 941 (0x3AD) |  |  |  |
-| `BANE` | 943 (0x3AF) |  |  |  |
-| `IMPROVED_SHADOW_BOLT` | 944 (0x3B0) |  |  |  |
-| `IMPROVED_IMMOLATE` | 961 (0x3C1) |  |  |  |
-| `SHADOWBURN` | 963 (0x3C3) |  |  |  |
-| `DESTRUCTIVE_REACH` | 964 (0x3C4) |  |  |  |
-| `IMPROVED_SEARING_PAIN` | 965 (0x3C5) |  |  |  |
-| `EMBERSTORM` | 966 (0x3C6) |  |  |  |
-| `RUIN` | 967 (0x3C7) |  |  |  |
-| `CONFLAGRATE` | 968 (0x3C8) |  |  |  |
-| `DEVASTATION` | 981 (0x3D5) |  |  |  |
-| `AFTERMATH` | 982 (0x3D6) |  |  |  |
-| `DEMONIC_POWER` | 983 (0x3D7) |  |  |  |
-| `WARLOCK_INTENSITY` | 985 (0x3D9) |  |  |  |
-| `PYROCLASM` | 986 (0x3DA) |  |  |  |
-| `FEL_CONCENTRATION` | 1001 (0x3E9) |  |  |  |
-| `NIGHTFALL` | 1002 (0x3EA) |  |  |  |
-| `IMPROVED_CORRUPTION` | 1003 (0x3EB) |  |  |  |
-| `SOUL_SIPHON` | 1004 (0x3EC) |  |  |  |
-| `SUPPRESSION` | 1005 (0x3ED) |  |  |  |
-| `IMPROVED_CURSE_OF_WEAKNESS` | 1006 (0x3EE) |  |  |  |
-| `IMPROVED_LIFE_TAP` | 1007 (0x3EF) |  |  |  |
-| `GRIM_REACH` | 1021 (0x3FD) |  |  |  |
-| `DARK_PACT` | 1022 (0x3FE) |  |  |  |
-| `SIPHON_LIFE` | 1041 (0x411) |  |  |  |
-| `SHADOW_MASTERY` | 1042 (0x412) |  |  |  |
-| `AMPLIFY_CURSE` | 1061 (0x425) |  |  |  |
-| `CURSE_OF_EXHAUSTION` | 1081 (0x439) |  |  |  |
-| `IMPROVED_DRAIN_SOUL` | 1101 (0x44D) |  |  |  |
-| `AGGRESSION` | 1122 (0x462) |  |  |  |
-| `SERRATED_BLADES` | 1123 (0x463) |  |  |  |
-| `INCINERATION` | 1141 (0x475) |  |  |  |
-| `ARCANE_MEDITATION` | 1142 (0x476) |  |  |  |
-| `DRUID_SURVIVAL_INSTINCTS` | 1162 (0x48A) |  |  |  |
-| `DIVINE_FURY` | 1181 (0x49D) |  |  |  |
-| `MENTAL_STRENGTH` | 1201 (0x4B1) |  |  |  |
-| `BORROWED_TIME` | 1202 (0x4B2) |  |  |  |
-| `IMPROVED_HEALTHSTONE` | 1221 (0x4C5) |  |  |  |
-| `IMPROVED_IMP` | 1222 (0x4C6) |  |  |  |
-| `DEMONIC_EMBRACE` | 1223 (0x4C7) |  |  |  |
-| `IMPROVED_HEALTH_FUNNEL` | 1224 (0x4C8) |  |  |  |
-| `DEMONIC_BRUTALITY` | 1225 (0x4C9) |  |  |  |
-| `FEL_DOMINATION` | 1226 (0x4CA) |  |  |  |
-| `MASTER_SUMMONER` | 1227 (0x4CB) |  |  |  |
-| `FEL_VITALITY` | 1242 (0x4DA) |  |  |  |
-| `IMPROVED_SUCCUBUS` | 1243 (0x4DB) |  |  |  |
-| `MASTER_DEMONOLOGIST` | 1244 (0x4DC) |  |  |  |
-| `MASTER_CONJUROR` | 1261 (0x4ED) |  |  |  |
-| `UNHOLY_POWER` | 1262 (0x4EE) |  |  |  |
-| `DEMONIC_KNOWLEDGE` | 1263 (0x4EF) |  |  |  |
-| `MANA_FEED` | 1281 (0x501) |  |  |  |
-| `SOUL_LINK` | 1282 (0x502) |  |  |  |
-| `MOLTEN_CORE` | 1283 (0x503) |  |  |  |
-| `IMPROVED_CURSE_OF_AGONY` | 1284 (0x504) |  |  |  |
-| `HUNTER_LIGHTNING_REFLEXES` | 1303 (0x517) |  |  |  |
-| `ENTRAPMENT` | 1304 (0x518) |  |  |  |
-| `TRAP_MASTERY` | 1305 (0x519) |  |  |  |
-| `LOCK_AND_LOAD` | 1306 (0x51A) |  |  |  |
-| `SURVIVAL_TACTICS` | 1309 (0x51D) |  |  |  |
-| `SUREFOOTED` | 1310 (0x51E) |  |  |  |
-| `HUNTER_DEFLECTION` | 1311 (0x51F) |  |  |  |
-| `COUNTERATTACK` | 1312 (0x520) |  |  |  |
-| `KILLER_INSTINCT` | 1321 (0x529) |  |  |  |
-| `BLACK_ARROW` | 1322 (0x52A) |  |  |  |
-| `WYVERN_STING` | 1325 (0x52D) |  |  |  |
-| `IMPROVED_CONCUSSIVE_SHOT` | 1341 (0x53D) |  |  |  |
-| `EFFICIENCY` | 1342 (0x53E) |  |  |  |
-| `IMPROVED_HUNTERS_MARK` | 1343 (0x53F) |  |  | Improved Hunter's Mark |
-| `LETHAL_SHOTS` | 1344 (0x540) |  |  |  |
-| `AIMED_SHOT` | 1345 (0x541) |  |  |  |
-| `IMPROVED_ARCANE_SHOT` | 1346 (0x542) |  |  |  |
-| `BARRAGE` | 1347 (0x543) |  |  |  |
-| `IMPROVED_STINGS` | 1348 (0x544) |  |  |  |
-| `MORTAL_SHOTS` | 1349 (0x545) |  |  |  |
-| `CONCUSSIVE_BARRAGE` | 1351 (0x547) |  |  |  |
-| `READINESS` | 1353 (0x549) |  |  |  |
-| `TRUESHOT_AURA` | 1361 (0x551) |  |  |  |
-| `RANGED_WEAPON_SPECIALIZATION` | 1362 (0x552) |  |  |  |
-| `IMPROVED_ASPECT_OF_THE_MONKEY` | 1381 (0x565) |  |  |  |
-| `IMPROVED_ASPECT_OF_THE_HAWK` | 1382 (0x566) |  |  |  |
-| `PATHFINDING` | 1384 (0x568) |  |  |  |
-| `IMPROVED_MEND_PET` | 1385 (0x569) |  |  |  |
-| `BESTIAL_WRATH` | 1386 (0x56A) |  |  |  |
-| `INTIMIDATION` | 1387 (0x56B) |  |  |  |
-| `SPIRIT_BOND` | 1388 (0x56C) |  |  |  |
-| `ENDURANCE_TRAINING` | 1389 (0x56D) |  |  |  |
-| `BESTIAL_DISCIPLINE` | 1390 (0x56E) |  |  |  |
-| `HUNTER_FEROCITY` | 1393 (0x571) |  |  |  |
-| `HUNTER_THICK_HIDE` | 1395 (0x573) |  |  |  |
-| `UNLEASHED_FURY` | 1396 (0x574) |  |  |  |
-| `FRENZY` | 1397 (0x575) |  |  |  |
-| `IMPROVED_BLESSING_OF_MIGHT` | 1401 (0x579) |  |  |  |
-| `PALADIN_VENGEANCE` | 1402 (0x57A) |  |  |  |
-| `PALADIN_DEFLECTION` | 1403 (0x57B) |  |  |  |
-| `BENEDICTION` | 1407 (0x57F) |  |  |  |
-| `PALADIN_TWO_HANDED_WEAPON_SPECIALIZATION` | 1410 (0x582) |  |  |  |
-| `CONVICTION` | 1411 (0x583) |  |  |  |
-| `REDOUBT` | 1421 (0x58D) |  |  |  |
-| `IMPROVED_DEVOTION_AURA` | 1422 (0x58E) |  |  |  |
-| `PALADIN_TOUGHNESS` | 1423 (0x58F) |  |  |  |
-| `GUARDIANS_FAVOR` | 1425 (0x591) |  |  | Guardian's Favor |
-| `RECKONING` | 1426 (0x592) |  |  |  |
-| `PALADIN_ONE_HANDED_WEAPON_SPECIALIZATION` | 1429 (0x595) |  |  |  |
-| `HOLY_SHIELD` | 1430 (0x596) |  |  |  |
-| `BLESSING_OF_SANCTUARY` | 1431 (0x597) |  |  |  |
-| `SPIRITUAL_FOCUS` | 1432 (0x598) |  |  |  |
-| `DIVINE_FAVOR` | 1433 (0x599) |  |  |  |
-| `AURA_MASTERY` | 1435 (0x59B) |  |  |  |
-| `REPENTANCE` | 1441 (0x5A1) |  |  |  |
-| `DIVINITY` | 1442 (0x5A2) |  |  |  |
-| `IMPROVED_LAY_ON_HANDS` | 1443 (0x5A3) |  |  |  |
-| `HEALING_LIGHT` | 1444 (0x5A4) |  |  |  |
-| `IMPROVED_BLESSING_OF_WISDOM` | 1446 (0x5A6) |  |  |  |
-| `DIVINE_INTELLECT` | 1449 (0x5A9) |  |  |  |
-| `IMPROVED_CONCENTRATION_AURA` | 1450 (0x5AA) |  |  |  |
-| `ILLUMINATION` | 1461 (0x5B5) |  |  |  |
-| `SEALS_OF_THE_PURE` | 1463 (0x5B7) |  |  |  |
-| `HEART_OF_THE_CRUSADER` | 1464 (0x5B8) |  |  |  |
-| `SANCTIFIED_LIGHT` | 1465 (0x5B9) |  |  |  |
-| `SEAL_OF_COMMAND` | 1481 (0x5C9) |  |  |  |
-| `IMPROVED_RIGHTEOUS_FURY` | 1501 (0x5DD) |  |  |  |
-| `HOLY_SHOCK` | 1502 (0x5DE) |  |  |  |
-| `IMPROVED_HAMMER_OF_JUSTICE` | 1521 (0x5F1) |  |  |  |
-| `IMPROVED_BERSERKER_RAGE` | 1541 (0x605) |  |  |  |
-| `IMPROVED_EXECUTE` | 1542 (0x606) |  |  |  |
-| `IMPROVED_INTERCEPT` | 1543 (0x607) |  |  |  |
-| `SPIRIT_OF_REDEMPTION` | 1561 (0x619) |  |  |  |
-| `WARRIOR_DUAL_WIELD_SPECIALIZATION` | 1581 (0x62D) |  |  |  |
-| `SHIELD_SPECIALIZATION` | 1601 (0x641) |  |  |  |
-| `SAVAGE_STRIKES` | 1621 (0x655) |  |  |  |
-| `SURVIVALIST` | 1622 (0x656) |  |  |  |
-| `IMPROVED_TRACKING` | 1623 (0x657) |  |  |  |
-| `FOCUSED_FIRE` | 1624 (0x658) |  |  |  |
-| `IMPROVED_REVIVE_PET` | 1625 (0x659) |  |  |  |
-| `HOLY_POWER` | 1627 (0x65B) |  |  |  |
-| `UNYIELDING_FAITH` | 1628 (0x65C) |  |  |  |
-| `PALADIN_ANTICIPATION` | 1629 (0x65D) |  |  |  |
-| `IMPROVED_JUDGEMENTS` | 1631 (0x65F) |  |  |  |
-| `EYE_FOR_AN_EYE` | 1632 (0x660) |  |  |  |
-| `VINDICATION` | 1633 (0x661) |  |  |  |
-| `PURSUIT_OF_JUSTICE` | 1634 (0x662) |  |  |  |
-| `HOLY_REACH` | 1635 (0x663) |  |  |  |
-| `BLESSED_RECOVERY` | 1636 (0x664) |  |  |  |
-| `LIGHTWELL` | 1637 (0x665) |  |  |  |
-| `IMPROVED_VAMPIRIC_EMBRACE` | 1638 (0x666) |  |  |  |
-| `MASTER_OF_ELEMENTS` | 1639 (0x667) |  |  |  |
-| `ELEMENTAL_WARDING` | 1640 (0x668) |  |  |  |
-| `ELEMENTAL_REACH` | 1641 (0x669) |  |  |  |
-| `EYE_OF_THE_STORM` | 1642 (0x66A) |  |  |  |
-| `SHAMAN_WEAPON_MASTERY` | 1643 (0x66B) |  |  |  |
-| `ELEMENTAL_DEVASTATION` | 1645 (0x66D) |  |  |  |
-| `HEALING_GRACE` | 1646 (0x66E) |  |  |  |
-| `IMPROVED_WINDFURY_TOTEM` | 1647 (0x66F) |  |  |  |
-| `HEALING_WAY` | 1648 (0x670) |  |  |  |
-| `MAGE_PRECISION` | 1649 (0x671) |  |  |  |
-| `MAGIC_ABSORPTION` | 1650 (0x672) |  |  |  |
-| `IMPROVED_DEFENSIVE_STANCE` | 1652 (0x674) |  |  |  |
-| `WARRIOR_VITALITY` | 1653 (0x675) |  |  |  |
-| `SHIELD_MASTERY` | 1654 (0x676) |  |  |  |
-| `IMPROVED_WHIRLWIND` | 1655 (0x677) |  |  |  |
-| `WARRIOR_PRECISION` | 1657 (0x679) |  |  |  |
-| `IMPROVED_BERSERKER_STANCE` | 1658 (0x67A) |  |  |  |
-| `RAMPAGE` | 1659 (0x67B) |  |  |  |
-| `FOCUSED_RAGE` | 1660 (0x67C) |  |  |  |
-| `ENDLESS_RAGE` | 1661 (0x67D) |  |  |  |
-| `SUDDEN_DEATH` | 1662 (0x67E) |  |  |  |
-| `SECOND_WIND` | 1663 (0x67F) |  |  |  |
-| `BLOOD_FRENZY` | 1664 (0x680) |  |  |  |
-| `DEVASTATE` | 1666 (0x682) |  |  |  |
-| `MALEDICTION` | 1667 (0x683) |  |  |  |
-| `IMPROVED_HOWL_OF_TERROR` | 1668 (0x684) |  |  |  |
-| `CONTAGION` | 1669 (0x685) |  |  |  |
-| `UNSTABLE_AFFLICTION` | 1670 (0x686) |  |  |  |
-| `DEMONIC_AEGIS` | 1671 (0x687) |  |  |  |
-| `SUMMON_FELGUARD` | 1672 (0x688) |  |  |  |
-| `DEMONIC_TACTICS` | 1673 (0x689) |  |  |  |
-| `SHADOWFURY` | 1676 (0x68C) |  |  |  |
-| `SHADOW_AND_FLAME` | 1677 (0x68D) |  |  |  |
-| `SOUL_LEECH` | 1678 (0x68E) |  |  |  |
-| `NETHER_PROTECTION` | 1679 (0x68F) |  |  |  |
-| `DEMONIC_RESILIENCE` | 1680 (0x690) |  |  |  |
-| `UNRELENTING_STORM` | 1682 (0x692) |  |  |  |
-| `ELEMENTAL_PRECISION` | 1685 (0x695) |  |  |  |
-| `LIGHTNING_OVERLOAD` | 1686 (0x696) |  |  |  |
-| `TOTEM_OF_WRATH` | 1687 (0x697) |  |  |  |
-| `UNLEASHED_RAGE` | 1689 (0x699) |  |  |  |
-| `DUAL_WIELD` | 1690 (0x69A) |  |  |  |
-| `MENTAL_QUICKNESS` | 1691 (0x69B) |  |  |  |
-| `SHAMAN_DUAL_WIELD_SPECIALIZATION` | 1692 (0x69C) |  |  |  |
-| `SHAMANISTIC_RAGE` | 1693 (0x69D) |  |  |  |
-| `SHAMAN_FOCUSED_MIND` | 1695 (0x69F) |  |  |  |
-| `NATURES_BLESSING` | 1696 (0x6A0) |  |  | Nature's Blessing |
-| `IMPROVED_CHAIN_HEAL` | 1697 (0x6A1) |  |  |  |
-| `EARTH_SHIELD` | 1698 (0x6A2) |  |  |  |
-| `NATURES_GUARDIAN` | 1699 (0x6A3) |  |  | Nature's Guardian |
-| `SLEIGHT_OF_HAND` | 1700 (0x6A4) |  |  |  |
-| `HEIGHTENED_SENSES` | 1701 (0x6A5) |  |  |  |
-| `DEADLINESS` | 1702 (0x6A6) |  |  |  |
-| `WEAPON_EXPERTISE` | 1703 (0x6A7) |  |  |  |
-| `ROGUE_VITALITY` | 1705 (0x6A9) |  |  |  |
-| `BLADE_TWISTING` | 1706 (0x6AA) |  |  |  |
-| `NERVES_OF_STEEL` | 1707 (0x6AB) |  |  |  |
-| `SURPRISE_ATTACKS` | 1709 (0x6AD) |  |  |  |
-| `ENVELOPING_SHADOWS` | 1711 (0x6AF) |  |  |  |
-| `SINISTER_CALLING` | 1712 (0x6B0) |  |  |  |
-| `MASTER_OF_SUBTLETY` | 1713 (0x6B1) |  |  |  |
-| `SHADOWSTEP` | 1714 (0x6B2) |  |  |  |
-| `MASTER_POISONER` | 1715 (0x6B3) |  |  |  |
-| `FIND_WEAKNESS` | 1718 (0x6B6) |  |  |  |
-| `MUTILATE` | 1719 (0x6B7) |  |  |  |
-| `FLEET_FOOTED` | 1721 (0x6B9) |  |  |  |
-| `CHEAT_DEATH` | 1722 (0x6BA) |  |  |  |
-| `DEADENED_NERVES` | 1723 (0x6BB) |  |  |  |
-| `IMPROVED_BLINK` | 1724 (0x6BC) |  |  |  |
-| `ARCANE_POTENCY` | 1725 (0x6BD) |  |  |  |
-| `PRISMATIC_CLOAK` | 1726 (0x6BE) |  |  |  |
-| `ARCANE_EMPOWERMENT` | 1727 (0x6BF) |  |  |  |
-| `MIND_MASTERY` | 1728 (0x6C0) |  |  |  |
-| `SLOW` | 1729 (0x6C1) |  |  |  |
-| `PLAYING_WITH_FIRE` | 1730 (0x6C2) |  |  |  |
-| `BLAZING_SPEED` | 1731 (0x6C3) |  |  |  |
-| `MOLTEN_FURY` | 1732 (0x6C4) |  |  |  |
-| `PYROMANIAC` | 1733 (0x6C5) |  |  |  |
-| `EMPOWERED_FIRE` | 1734 (0x6C6) |  |  |  |
-| `DRAGONS_BREATH` | 1735 (0x6C7) |  |  | Dragon's Breath |
-| `FROZEN_CORE` | 1736 (0x6C8) |  |  |  |
-| `COLD_AS_ICE` | 1737 (0x6C9) |  |  |  |
-| `ARCTIC_WINDS` | 1738 (0x6CA) |  |  |  |
-| `EMPOWERED_FROSTBOLT` | 1740 (0x6CC) |  |  |  |
-| `SUMMON_WATER_ELEMENTAL` | 1741 (0x6CD) |  |  |  |
-| `PURE_OF_HEART` | 1742 (0x6CE) |  |  |  |
-| `PURIFYING_POWER` | 1743 (0x6CF) |  |  |  |
-| `BLESSED_LIFE` | 1744 (0x6D0) |  |  |  |
-| `LIGHTS_GRACE` | 1745 (0x6D1) |  |  | Light's Grace |
-| `HOLY_GUIDANCE` | 1746 (0x6D2) |  |  |  |
-| `DIVINE_ILLUMINATION` | 1747 (0x6D3) |  |  |  |
-| `STOICISM` | 1748 (0x6D4) |  |  |  |
-| `SACRED_DUTY` | 1750 (0x6D6) |  |  |  |
-| `ARDENT_DEFENDER` | 1751 (0x6D7) |  |  |  |
-| `COMBAT_EXPERTISE` | 1753 (0x6D9) |  |  |  |
-| `AVENGERS_SHIELD` | 1754 (0x6DA) |  |  | Avenger's Shield |
-| `CRUSADE` | 1755 (0x6DB) |  |  |  |
-| `SANCTIFIED_RETRIBUTION` | 1756 (0x6DC) |  |  |  |
-| `DIVINE_PURPOSE` | 1757 (0x6DD) |  |  |  |
-| `JUDGEMENTS_OF_THE_WISE` | 1758 (0x6DE) |  |  |  |
-| `FANATICISM` | 1759 (0x6DF) |  |  |  |
-| `SANCTITY_OF_BATTLE` | 1761 (0x6E1) |  |  |  |
-| `QUICK_RECOVERY` | 1762 (0x6E2) |  |  |  |
-| `SHADOW_EMBRACE` | 1763 (0x6E3) |  |  |  |
-| `EMPOWERED_CORRUPTION` | 1764 (0x6E4) |  |  |  |
-| `BLESSED_RESILIENCE` | 1765 (0x6E5) |  |  |  |
-| `SURGE_OF_LIGHT` | 1766 (0x6E6) |  |  |  |
-| `EMPOWERED_HEALING` | 1767 (0x6E7) |  |  |  |
-| `HOLY_CONCENTRATION` | 1768 (0x6E8) |  |  |  |
-| `ABSOLUTION` | 1769 (0x6E9) |  |  |  |
-| `FOCUSED_POWER` | 1771 (0x6EB) |  |  |  |
-| `ENLIGHTENMENT` | 1772 (0x6EC) |  |  |  |
-| `IMPROVED_FLASH_HEAL` | 1773 (0x6ED) |  |  |  |
-| `PAIN_SUPPRESSION` | 1774 (0x6EE) |  |  |  |
-| `PRIEST_FOCUSED_MIND` | 1777 (0x6F1) |  |  |  |
-| `SHADOW_POWER` | 1778 (0x6F2) |  |  |  |
-| `VAMPIRIC_TOUCH` | 1779 (0x6F3) |  |  |  |
-| `MIND_MELT` | 1781 (0x6F5) |  |  |  |
-| `LUNAR_GUIDANCE` | 1782 (0x6F6) |  |  |  |
-| `BALANCE_OF_POWER` | 1783 (0x6F7) |  |  |  |
-| `DREAMSTATE` | 1784 (0x6F8) |  |  |  |
-| `IMPROVED_FAERIE_FIRE` | 1785 (0x6F9) |  |  |  |
-| `WRATH_OF_CENARIUS` | 1786 (0x6FA) |  |  |  |
-| `FORCE_OF_NATURE` | 1787 (0x6FB) |  |  |  |
-| `EMPOWERED_TOUCH` | 1788 (0x6FC) |  |  |  |
-| `EMPOWERED_REJUVENATION` | 1789 (0x6FD) |  |  |  |
-| `NATURAL_PERFECTION` | 1790 (0x6FE) |  |  |  |
-| `TREE_OF_LIFE` | 1791 (0x6FF) |  |  |  |
-| `NURTURING_INSTINCT` | 1792 (0x700) |  |  |  |
-| `PRIMAL_TENACITY` | 1793 (0x701) |  |  |  |
-| `SURVIVAL_OF_THE_FITTEST` | 1794 (0x702) |  |  |  |
-| `PREDATORY_INSTINCTS` | 1795 (0x703) |  |  |  |
-| `MANGLE` | 1796 (0x704) |  |  |  |
-| `LIVING_SPIRIT` | 1797 (0x705) |  |  |  |
-| `IMPROVED_LEADER_OF_THE_PACK` | 1798 (0x706) |  |  |  |
-| `ANIMAL_HANDLER` | 1799 (0x707) |  |  |  |
-| `FEROCIOUS_INSPIRATION` | 1800 (0x708) |  |  |  |
-| `CATLIKE_REFLEXES` | 1801 (0x709) |  |  |  |
-| `SERPENTS_SWIFTNESS` | 1802 (0x70A) |  |  | Serpent's Swiftness |
-| `THE_BEAST_WITHIN` | 1803 (0x70B) |  |  |  |
-| `COMBAT_EXPERIENCE` | 1804 (0x70C) |  |  |  |
-| `CAREFUL_AIM` | 1806 (0x70E) |  |  |  |
-| `MASTER_MARKSMAN` | 1807 (0x70F) |  |  |  |
-| `SILENCING_SHOT` | 1808 (0x710) |  |  |  |
-| `RESOURCEFULNESS` | 1809 (0x711) |  |  |  |
-| `HUNTER_SURVIVAL_INSTINCTS` | 1810 (0x712) |  |  |  |
-| `THRILL_OF_THE_HUNT` | 1811 (0x713) |  |  |  |
-| `EXPOSE_WEAKNESS` | 1812 (0x714) |  |  |  |
-| `MASTER_TACTICIAN` | 1813 (0x715) |  |  |  |
-| `SCATTER_SHOT` | 1814 (0x716) |  |  |  |
-| `CIRCLE_OF_HEALING` | 1815 (0x717) |  |  |  |
-| `MISERY` | 1816 (0x718) |  |  |  |
-| `BACKLASH` | 1817 (0x719) |  |  |  |
-| `GO_FOR_THE_THROAT` | 1818 (0x71A) |  |  |  |
-| `RAPID_KILLING` | 1819 (0x71B) |  |  |  |
-| `HAWK_EYE` | 1820 (0x71C) |  |  |  |
-| `IMPROVED_BARRAGE` | 1821 (0x71D) |  |  |  |
-| `NATURES_MAJESTY` | 1822 (0x71E) |  |  | Nature's Majesty |
-| `CRUSADER_STRIKE` | 1823 (0x71F) |  |  |  |
-| `IMPROVED_MORTAL_STRIKE` | 1824 (0x720) |  |  |  |
-| `COMBAT_POTENCY` | 1825 (0x721) |  |  |  |
-| `SPELL_POWER` | 1826 (0x722) |  |  |  |
-| `IMPROVED_SLICE_AND_DICE` | 1827 (0x723) |  |  |  |
-| `ARCANE_FLOWS` | 1843 (0x733) |  |  |  |
-| `INCANTERS_ABSORPTION` | 1844 (0x734) |  |  | Incanter's Absorption |
-| `STUDENT_OF_THE_MIND` | 1845 (0x735) |  |  |  |
-| `NETHERWIND_PRESENCE` | 1846 (0x736) |  |  |  |
-| `ARCANE_BARRAGE` | 1847 (0x737) |  |  |  |
-| `FIERY_PAYBACK` | 1848 (0x738) |  |  |  |
-| `FIRESTARTER` | 1849 (0x739) |  |  |  |
-| `HOT_STREAK` | 1850 (0x73A) |  |  |  |
-| `BURNOUT` | 1851 (0x73B) |  |  |  |
-| `LIVING_BOMB` | 1852 (0x73C) |  |  |  |
-| `FINGERS_OF_FROST` | 1853 (0x73D) |  |  |  |
-| `BRAIN_FREEZE` | 1854 (0x73E) |  |  |  |
-| `ENDURING_WINTER` | 1855 (0x73F) |  |  |  |
-| `CHILLED_TO_THE_BONE` | 1856 (0x740) |  |  |  |
-| `DEEP_FREEZE` | 1857 (0x741) |  |  |  |
-| `FOCUSED_WILL` | 1858 (0x742) |  |  |  |
-| `TRAUMA` | 1859 (0x743) |  |  |  |
-| `UNRELENTING_ASSAULT` | 1860 (0x744) |  |  |  |
-| `STRENGTH_OF_ARMS` | 1862 (0x746) |  |  |  |
-| `BLADESTORM` | 1863 (0x747) |  |  |  |
-| `INTENSIFY_RAGE` | 1864 (0x748) |  |  |  |
-| `FURIOUS_ATTACKS` | 1865 (0x749) |  |  |  |
-| `BLOODSURGE` | 1866 (0x74A) |  |  |  |
-| `TITANS_GRIP` | 1867 (0x74B) |  |  | Titan's Grip |
-| `HEROIC_FURY` | 1868 (0x74C) |  |  |  |
-| `SAFEGUARD` | 1870 (0x74E) |  |  |  |
-| `SWORD_AND_BOARD` | 1871 (0x74F) |  |  |  |
-| `SHOCKWAVE` | 1872 (0x750) |  |  |  |
-| `IMPROVED_FELHUNTER` | 1873 (0x751) |  |  |  |
-| `DEATHS_EMBRACE` | 1875 (0x753) |  |  | Death's Embrace |
-| `EVERLASTING_AFFLICTION` | 1876 (0x754) |  |  |  |
-| `ERADICATION` | 1878 (0x756) |  |  |  |
-| `DEMONIC_EMPOWERMENT` | 1880 (0x758) |  |  |  |
-| `IMPROVED_DEMONIC_TACTICS` | 1882 (0x75A) |  |  |  |
-| `FEL_SYNERGY` | 1883 (0x75B) |  |  |  |
-| `NEMESIS` | 1884 (0x75C) |  |  |  |
-| `DEMONIC_PACT` | 1885 (0x75D) |  |  |  |
-| `METAMORPHOSIS` | 1886 (0x75E) |  |  |  |
-| `MOLTEN_SKIN` | 1887 (0x75F) |  |  |  |
-| `BACKDRAFT` | 1888 (0x760) |  |  |  |
-| `IMPROVED_SOUL_LEECH` | 1889 (0x761) |  |  |  |
-| `FIRE_AND_BRIMSTONE` | 1890 (0x762) |  |  |  |
-| `CHAOS_BOLT` | 1891 (0x763) |  |  |  |
-| `CRITICAL_BLOCK` | 1893 (0x765) |  |  |  |
-| `ASPIRATION` | 1894 (0x766) |  |  |  |
-| `DIVINE_AEGIS` | 1895 (0x767) |  |  |  |
-| `RAPTURE` | 1896 (0x768) |  |  |  |
-| `PENANCE` | 1897 (0x769) |  |  |  |
-| `TWIN_DISCIPLINES` | 1898 (0x76A) |  |  |  |
-| `GRACE` | 1901 (0x76D) |  |  |  |
-| `EMPOWERED_RENEW` | 1902 (0x76E) |  |  |  |
-| `TEST_OF_FAITH` | 1903 (0x76F) |  |  |  |
-| `SERENDIPITY` | 1904 (0x770) |  |  |  |
-| `DIVINE_PROVIDENCE` | 1905 (0x771) |  |  |  |
-| `IMPROVED_SHADOWFORM` | 1906 (0x772) |  |  |  |
-| `TWISTED_FAITH` | 1907 (0x773) |  |  |  |
-| `PSYCHIC_HORROR` | 1908 (0x774) |  |  |  |
-| `PAIN_AND_SUFFERING` | 1909 (0x775) |  |  |  |
-| `DISPERSION` | 1910 (0x776) |  |  |  |
-| `GUARDIAN_SPIRIT` | 1911 (0x777) |  |  |  |
-| `IMPROVED_MOONKIN_FORM` | 1912 (0x778) |  |  |  |
-| `OWLKIN_FRENZY` | 1913 (0x779) |  |  |  |
-| `PRIMAL_PRECISION` | 1914 (0x77A) |  |  |  |
-| `MASTER_SHAPESHIFTER` | 1915 (0x77B) |  |  |  |
-| `GIFT_OF_THE_EARTHMOTHER` | 1916 (0x77C) |  |  |  |
-| `WILD_GROWTH` | 1917 (0x77D) |  |  |  |
-| `REND_AND_TEAR` | 1918 (0x77E) |  |  |  |
-| `INFECTED_WOUNDS` | 1919 (0x77F) |  |  |  |
-| `IMPROVED_MANGLE` | 1920 (0x780) |  |  |  |
-| `KING_OF_THE_JUNGLE` | 1921 (0x781) |  |  |  |
-| `LIVING_SEED` | 1922 (0x782) |  |  |  |
-| `TYPHOON` | 1923 (0x783) |  |  |  |
-| `ECLIPSE` | 1924 (0x784) |  |  |  |
-| `GALE_WINDS` | 1925 (0x785) |  |  |  |
-| `STARFALL` | 1926 (0x786) |  |  |  |
-| `BERSERK` | 1927 (0x787) |  |  |  |
-| `EARTH_AND_MOON` | 1928 (0x788) |  |  |  |
-| `REVITALIZE` | 1929 (0x789) |  |  |  |
-| `IMPROVED_TREE_OF_LIFE` | 1930 (0x78A) |  |  |  |
-| `VIRULENCE` | 1932 (0x78C) |  |  |  |
-| `MORBIDITY` | 1933 (0x78D) |  |  |  |
-| `RAVENOUS_DEAD` | 1934 (0x78E) |  |  |  |
-| `IMPROVED_BLOOD_PRESENCE` | 1936 (0x790) |  |  |  |
-| `BLADED_ARMOR` | 1938 (0x792) |  |  |  |
-| `BUTCHERY` | 1939 (0x793) |  |  |  |
-| `RUNE_TAP` | 1941 (0x795) |  |  |  |
-| `IMPROVED_RUNE_TAP` | 1942 (0x796) |  |  |  |
-| `DARK_CONVICTION` | 1943 (0x797) |  |  |  |
-| `BLOODY_VENGEANCE` | 1944 (0x798) |  |  |  |
-| `SUBVERSION` | 1945 (0x799) |  |  |  |
-| `SCENT_OF_BLOOD` | 1948 (0x79C) |  |  |  |
-| `MARK_OF_BLOOD` | 1949 (0x79D) |  |  |  |
-| `VETERAN_OF_THE_THIRD_WAR` | 1950 (0x79E) |  |  |  |
-| `VENDETTA` | 1953 (0x7A1) |  |  |  |
-| `HYSTERIA` | 1954 (0x7A2) |  |  |  |
-| `SUDDEN_DOOM` | 1955 (0x7A3) |  |  |  |
-| `HEART_STRIKE` | 1957 (0x7A5) |  |  |  |
-| `MIGHT_OF_MOGRAINE` | 1958 (0x7A6) |  |  |  |
-| `WILL_OF_THE_NECROPOLIS` | 1959 (0x7A7) |  |  |  |
-| `BLOODWORMS` | 1960 (0x7A8) |  |  |  |
-| `DANCING_RUNE_WEAPON` | 1961 (0x7A9) |  |  |  |
-| `CRYPT_FEVER` | 1962 (0x7AA) |  |  |  |
-| `EPIDEMIC` | 1963 (0x7AB) |  |  |  |
-| `DEATH_KNIGHT_TOUGHNESS` | 1968 (0x7B0) |  |  |  |
-| `ENDLESS_WINTER` | 1971 (0x7B3) |  |  |  |
-| `BLACK_ICE` | 1973 (0x7B5) |  |  |  |
-| `FROST_STRIKE` | 1975 (0x7B7) |  |  |  |
-| `UNBREAKABLE_ARMOR` | 1979 (0x7BB) |  |  |  |
-| `DEATHCHILL` | 1980 (0x7BC) |  |  |  |
-| `CHILL_OF_THE_GRAVE` | 1981 (0x7BD) |  |  |  |
-| `MASTER_OF_GHOULS` | 1984 (0x7C0) |  |  |  |
-| `CORPSE_EXPLOSION` | 1985 (0x7C1) |  |  |  |
-| `HOWLING_BLAST` | 1989 (0x7C5) |  |  |  |
-| `FRIGID_DREADPLATE` | 1990 (0x7C6) |  |  |  |
-| `RIME` | 1992 (0x7C8) |  |  |  |
-| `MERCILESS_COMBAT` | 1993 (0x7C9) |  |  |  |
-| `UNHOLY_BLIGHT` | 1996 (0x7CC) |  |  |  |
-| `ACCLIMATION` | 1997 (0x7CD) |  |  |  |
-| `TUNDRA_STALKER` | 1998 (0x7CE) |  |  |  |
-| `HUNGERING_COLD` | 1999 (0x7CF) |  |  |  |
-| `SUMMON_GARGOYLE` | 2000 (0x7D0) |  |  |  |
-| `REAPING` | 2001 (0x7D1) |  |  |  |
-| `WANDERING_PLAGUE` | 2003 (0x7D3) |  |  |  |
-| `BLOOD_CAKED_BLADE` | 2004 (0x7D4) |  |  |  |
-| `IMPURITY` | 2005 (0x7D5) |  |  |  |
-| `BONE_SHIELD` | 2007 (0x7D7) |  |  |  |
-| `OUTBREAK` | 2008 (0x7D8) |  |  |  |
-| `MAGIC_SUPPRESSION` | 2009 (0x7D9) |  |  |  |
-| `DIRGE` | 2011 (0x7DB) |  |  |  |
-| `IMPROVED_UNHOLY_PRESENCE` | 2013 (0x7DD) |  |  |  |
-| `BLOODY_STRIKES` | 2015 (0x7DF) |  |  |  |
-| `BLADE_BARRIER` | 2017 (0x7E1) |  |  |  |
-| `SPELL_DEFLECTION` | 2018 (0x7E2) |  |  |  |
-| `VAMPIRIC_BLOOD` | 2019 (0x7E3) |  |  |  |
-| `RUNIC_POWER_MASTERY` | 2020 (0x7E4) |  |  |  |
-| `NERVES_OF_COLD_STEEL` | 2022 (0x7E6) |  |  |  |
-| `UNHOLY_COMMAND` | 2025 (0x7E9) |  |  |  |
-| `IMPROVED_SPIRIT_TAP` | 2027 (0x7EB) |  |  |  |
-| `IMPROVED_FROST_PRESENCE` | 2029 (0x7ED) |  |  |  |
-| `GLACIER_ROT` | 2030 (0x7EE) |  |  |  |
-| `IMPROVED_ICY_TOUCH` | 2031 (0x7EF) |  |  |  |
-| `BLOOD_GORGED` | 2034 (0x7F2) |  |  |  |
-| `ICY_REACH` | 2035 (0x7F3) |  |  |  |
-| `RAGE_OF_RIVENDARE` | 2036 (0x7F4) |  |  |  |
-| `ON_A_PALE_HORSE` | 2039 (0x7F7) |  |  |  |
-| `GUILE_OF_GOREFIEND` | 2040 (0x7F8) |  |  |  |
-| `HAUNT` | 2041 (0x7F9) |  |  |  |
-| `ICY_TALONS` | 2042 (0x7FA) |  |  |  |
-| `EBON_PLAGUEBRINGER` | 2043 (0x7FB) |  |  |  |
-| `KILLING_MACHINE` | 2044 (0x7FC) |  |  |  |
-| `EMPOWERED_IMP` | 2045 (0x7FD) |  |  |  |
-| `NECROSIS` | 2047 (0x7FF) |  |  |  |
-| `ANNIHILATION` | 2048 (0x800) |  |  |  |
-| `ELEMENTAL_OATH` | 2049 (0x801) |  |  |  |
-| `ASTRAL_SHIFT` | 2050 (0x802) |  |  |  |
-| `LAVA_FLOWS` | 2051 (0x803) |  |  |  |
-| `STORM_EARTH_AND_FIRE` | 2052 (0x804) |  |  |  |
-| `THUNDERSTORM` | 2053 (0x805) |  |  |  |
-| `IMPROVED_STORMSTRIKE` | 2054 (0x806) |  |  |  |
-| `STATIC_SHOCK` | 2055 (0x807) |  |  |  |
-| `EARTHEN_POWER` | 2056 (0x808) |  |  |  |
-| `MAELSTROM_WEAPON` | 2057 (0x809) |  |  |  |
-| `FERAL_SPIRIT` | 2058 (0x80A) |  |  |  |
-| `IMPROVED_EARTH_SHIELD` | 2059 (0x80B) |  |  |  |
-| `BLESSING_OF_THE_ETERNALS` | 2060 (0x80C) |  |  |  |
-| `ANCESTRAL_AWAKENING` | 2061 (0x80D) |  |  |  |
-| `TIDAL_WAVES` | 2063 (0x80F) |  |  |  |
-| `RIPTIDE` | 2064 (0x810) |  |  |  |
-| `DEADLY_BREW` | 2065 (0x811) |  |  |  |
-| `TURN_THE_TABLES` | 2066 (0x812) |  |  |  |
-| `BLOOD_SPATTER` | 2068 (0x814) |  |  |  |
-| `FOCUSED_ATTACKS` | 2069 (0x815) |  |  |  |
-| `CUT_TO_THE_CHASE` | 2070 (0x816) |  |  |  |
-| `HUNGER_FOR_BLOOD` | 2071 (0x817) |  |  |  |
-| `THROWING_SPECIALIZATION` | 2072 (0x818) |  |  |  |
-| `UNFAIR_ADVANTAGE` | 2073 (0x819) |  |  |  |
-| `SAVAGE_COMBAT` | 2074 (0x81A) |  |  |  |
-| `PREY_ON_THE_WEAK` | 2075 (0x81B) |  |  |  |
-| `KILLING_SPREE` | 2076 (0x81C) |  |  |  |
-| `WAYLAY` | 2077 (0x81D) |  |  |  |
-| `HONOR_AMONG_THIEVES` | 2078 (0x81E) |  |  |  |
-| `FILTHY_TRICKS` | 2079 (0x81F) |  |  |  |
-| `SLAUGHTER_FROM_THE_SHADOWS` | 2080 (0x820) |  |  |  |
-| `SHADOW_DANCE` | 2081 (0x821) |  |  |  |
-| `VICIOUS_STRIKES` | 2082 (0x822) |  |  |  |
-| `MENTAL_DEXTERITY` | 2083 (0x823) |  |  |  |
-| `CLEANSE_SPIRIT` | 2084 (0x824) |  |  |  |
-| `GHOUL_FRENZY` | 2085 (0x825) |  |  |  |
-| `DEATH_RUNE_MASTERY` | 2086 (0x826) |  |  |  |
-| `EARTHS_GRASP` | 2101 (0x835) |  |  | Earth's Grasp |
-| `ABOMINATIONS_MIGHT` | 2105 (0x839) |  |  | Abomination's Might |
-| `HUNTER_CULLING_THE_HERD` | 2106 (0x83A) |  |  |  |
-| `HUNTER_COBRA_REFLEXES` | 2107 (0x83B) |  |  |  |
-| `HUNTER_DASH` | 2109 (0x83D) |  |  |  |
-| `HUNTER_CULLING_THE_HERD2` | 2110 (0x83E) |  |  |  |
-| `HUNTER_CHARGE` | 2111 (0x83F) |  |  |  |
-| `HUNTER_GREAT_STAMINA` | 2112 (0x840) |  |  |  |
-| `HUNTER_NATURAL_ARMOR` | 2113 (0x841) |  |  |  |
-| `HUNTER_COBRA_REFLEXES2` | 2114 (0x842) |  |  |  |
-| `HUNTER_GREAT_STAMINA2` | 2116 (0x844) |  |  |  |
-| `HUNTER_NATURAL_ARMOR2` | 2117 (0x845) |  |  |  |
-| `HUNTER_COBRA_REFLEXES3` | 2118 (0x846) |  |  |  |
-| `HUNTER_DASH2` | 2119 (0x847) |  |  |  |
-| `HUNTER_GREAT_STAMINA3` | 2120 (0x848) |  |  |  |
-| `HUNTER_NATURAL_ARMOR3` | 2121 (0x849) |  |  |  |
-| `PET_BARDING` | 2122 (0x84A) |  |  |  |
-| `GUARD_DOG` | 2123 (0x84B) |  |  |  |
-| `IMPROVED_COWER` | 2124 (0x84C) |  |  |  |
-| `HUNTER_SPIKED_COLLAR` | 2125 (0x84D) |  |  |  |
-| `HUNTER_SPIKED_COLLAR2` | 2126 (0x84E) |  |  |  |
-| `HUNTER_SPIKED_COLLAR3` | 2127 (0x84F) |  |  |  |
-| `BLOODTHIRSTY` | 2128 (0x850) |  |  |  |
-| `SPIDERS_BITE` | 2129 (0x851) |  |  | Spider's Bite |
-| `PIERCING_SHOTS` | 2130 (0x852) |  |  |  |
-| `RAPID_RECUPERATION` | 2131 (0x853) |  |  |  |
-| `WILD_QUIVER` | 2132 (0x854) |  |  |  |
-| `IMPROVED_STEADY_SHOT` | 2133 (0x855) |  |  |  |
-| `MARKED_FOR_DEATH` | 2134 (0x856) |  |  |  |
-| `CHIMERA_SHOT` | 2135 (0x857) |  |  |  |
-| `INVIGORATION` | 2136 (0x858) |  |  |  |
-| `COBRA_STRIKES` | 2137 (0x859) |  |  |  |
-| `ASPECT_MASTERY` | 2138 (0x85A) |  |  |  |
-| `BEAST_MASTERY` | 2139 (0x85B) |  |  |  |
-| `LONGEVITY` | 2140 (0x85C) |  |  |  |
-| `NOXIOUS_STINGS` | 2141 (0x85D) |  |  |  |
-| `POINT_OF_NO_ESCAPE` | 2142 (0x85E) |  |  |  |
-| `SNIPER_TRAINING` | 2143 (0x85F) |  |  |  |
-| `HUNTING_PARTY` | 2144 (0x860) |  |  |  |
-| `EXPLOSIVE_SHOT` | 2145 (0x861) |  |  |  |
-| `SANCTIFIED_WRATH` | 2147 (0x863) |  |  |  |
-| `SWIFT_RETRIBUTION` | 2148 (0x864) |  |  |  |
-| `RIGHTEOUS_VENGEANCE` | 2149 (0x865) |  |  |  |
-| `DIVINE_STORM` | 2150 (0x866) |  |  |  |
-| `HUNTER_BOARS_SPEED` | 2151 (0x867) |  |  | Boar's Speed |
-| `HUNTER_LIONHEARTED` | 2152 (0x868) |  |  |  |
-| `LICK_YOUR_WOUNDS` | 2153 (0x869) |  |  |  |
-| `HUNTER_GREAT_RESISTANCE` | 2154 (0x86A) |  |  |  |
-| `RABID` | 2155 (0x86B) |  |  |  |
-| `HEART_OF_THE_PHOENIX` | 2156 (0x86C) |  |  |  |
-| `CALL_OF_THE_WILD` | 2157 (0x86D) |  |  |  |
-| `HUNTER_BOARS_SPEED2` | 2160 (0x870) |  |  | Boar's Speed |
-| `HUNTER_GREAT_RESISTANCE2` | 2161 (0x871) |  |  |  |
-| `HUNTER_LIONHEARTED2` | 2162 (0x872) |  |  |  |
-| `HUNTER_GRACE_OF_THE_MANTIS` | 2163 (0x873) |  |  |  |
-| `HUNTER_BOARS_SPEED3` | 2165 (0x875) |  |  | Boar's Speed |
-| `HUNTER_CULLING_THE_HERD3` | 2166 (0x876) |  |  |  |
-| `HUNTER_LIONHEARTED3` | 2167 (0x877) |  |  |  |
-| `HUNTER_GREAT_RESISTANCE3` | 2168 (0x878) |  |  |  |
-| `INTERVENE` | 2169 (0x879) |  |  |  |
-| `TAUNT` | 2170 (0x87A) |  |  |  |
-| `HUNTER_LAST_STAND` | 2171 (0x87B) |  |  |  |
-| `HUNTER_ROAR_OF_SACRIFICE` | 2172 (0x87C) |  |  |  |
-| `BLOOD_OF_THE_RHINO` | 2173 (0x87D) |  |  |  |
-| `BULLHEADED` | 2175 (0x87F) |  |  |  |
-| `THE_ART_OF_WAR` | 2176 (0x880) |  |  |  |
-| `CORNERED` | 2177 (0x881) |  |  |  |
-| `SHEATH_OF_LIGHT` | 2179 (0x883) |  |  |  |
-| `WOLVERINE_BITE` | 2181 (0x885) |  |  |  |
-| `OWLS_FOCUS` | 2182 (0x886) |  |  | Owl's Focus |
-| `FEEDING_FRENZY` | 2183 (0x887) |  |  |  |
-| `ROAR_OF_RECOVERY` | 2184 (0x888) |  |  |  |
-| `DIVINE_STRENGTH` | 2185 (0x889) |  |  |  |
-| `SACRED_CLEANSING` | 2190 (0x88E) |  |  |  |
-| `ENLIGHTENED_JUDGEMENTS` | 2191 (0x88F) |  |  |  |
-| `BEACON_OF_LIGHT` | 2192 (0x890) |  |  |  |
-| `INFUSION_OF_LIGHT` | 2193 (0x891) |  |  |  |
-| `GUARDED_BY_THE_LIGHT` | 2194 (0x892) |  |  |  |
-| `TOUCHED_BY_THE_LIGHT` | 2195 (0x893) |  |  |  |
-| `HAMMER_OF_THE_RIGHTEOUS` | 2196 (0x894) |  |  |  |
-| `FOCUSED_AIM` | 2197 (0x895) |  |  |  |
-| `BLESSED_HANDS` | 2198 (0x896) |  |  |  |
-| `JUDGEMENTS_OF_THE_PURE` | 2199 (0x897) |  |  |  |
-| `JUDGEMENTS_OF_THE_JUST` | 2200 (0x898) |  |  |  |
-| `HUNTER_DIVE` | 2201 (0x899) |  |  |  |
-| `HUNTER_DIVE2` | 2203 (0x89B) |  |  |  |
-| `SHIELD_OF_THE_TEMPLAR` | 2204 (0x89C) |  |  |  |
-| `IMPROVED_FEAR` | 2205 (0x89D) |  |  |  |
-| `CARRION_FEEDER` | 2206 (0x89E) |  |  |  |
-| `HUNTER_MOBILITY` | 2207 (0x89F) |  |  |  |
-| `HUNTER_MOBILITY2` | 2208 (0x8A0) |  |  |  |
-| `MISSILE_BARRAGE` | 2209 (0x8A1) |  |  |  |
-| `BLOOD_OF_THE_NORTH` | 2210 (0x8A2) |  |  |  |
-| `FOCUS_MAGIC` | 2211 (0x8A3) |  |  |  |
-| `BURNING_DETERMINATION` | 2212 (0x8A4) |  |  |  |
-| `SHATTERED_BARRIER` | 2214 (0x8A6) |  |  |  |
-| `LICHBORNE` | 2215 (0x8A7) |  |  |  |
-| `SCOURGE_STRIKE` | 2216 (0x8A8) |  |  |  |
-| `DEATH_KNIGHT_TWO_HANDED_WEAPON_SPECIALIZATION` | 2217 (0x8A9) |  |  |  |
-| `DEATH_KNIGHT_ANTICIPATION` | 2218 (0x8AA) |  |  |  |
-| `SWOOP` | 2219 (0x8AB) |  |  |  |
-| `ANTI_MAGIC_ZONE` | 2221 (0x8AD) |  |  |  |
-| `TORMENT_THE_WEAK` | 2222 (0x8AE) |  |  |  |
-| `IMPROVED_ICY_TALONS` | 2223 (0x8AF) |  |  |  |
-| `NIGHT_OF_THE_DEAD` | 2225 (0x8B1) |  |  |  |
-| `DESECRATION` | 2226 (0x8B2) |  |  |  |
-| `KINDRED_SPIRITS` | 2227 (0x8B3) |  |  |  |
-| `HUNTER_VS_WILD` | 2228 (0x8B4) |  |  |  |
-| `T_N_T` | 2229 (0x8B5) |  |  |  |
-| `WRECKING_CREW` | 2231 (0x8B7) |  |  |  |
-| `TASTE_FOR_BLOOD` | 2232 (0x8B8) |  |  |  |
-| `IMPROVED_SLAM` | 2233 (0x8B9) |  |  |  |
-| `UNENDING_FURY` | 2234 (0x8BA) |  |  |  |
-| `RENEWED_HOPE` | 2235 (0x8BB) |  |  |  |
-| `WARBRINGER` | 2236 (0x8BC) |  |  |  |
-| `HUNTER_CHARGE2` | 2237 (0x8BD) |  |  |  |
-| `GENESIS` | 2238 (0x8BE) |  |  |  |
-| `IMPROVED_INSECT_SWARM` | 2239 (0x8BF) |  |  |  |
-| `NATURES_SPLENDOR` | 2240 (0x8C0) |  |  | Nature's Splendor |
-| `PROTECTOR_OF_THE_PACK` | 2241 (0x8C1) |  |  |  |
-| `NATURAL_REACTION` | 2242 (0x8C2) |  |  |  |
-| `RELENTLESS_STRIKES` | 2244 (0x8C4) |  |  |  |
-| `PANDEMIC` | 2245 (0x8C5) |  |  |  |
-| `DAMAGE_SHIELD` | 2246 (0x8C6) |  |  |  |
-| `IMPROVED_SPELL_REFLECTION` | 2247 (0x8C7) |  |  |  |
-| `LAVA_LASH` | 2249 (0x8C9) |  |  |  |
-| `ARMORED_TO_THE_TEETH` | 2250 (0x8CA) |  |  |  |
-| `SHAMANISM` | 2252 (0x8CC) |  |  |  |
-| `HUNTER_WILD_HUNT` | 2253 (0x8CD) |  |  |  |
-| `SHARK_ATTACK` | 2254 (0x8CE) |  |  |  |
-| `HUNTER_WILD_HUNT2` | 2255 (0x8CF) |  |  |  |
-| `HUNTER_WILD_HUNT3` | 2256 (0x8D0) |  |  |  |
-| `HUNTER_GRACE_OF_THE_MANTIS2` | 2257 (0x8D1) |  |  |  |
-| `SILVERBACK` | 2258 (0x8D2) |  |  |  |
-| `IMPROVED_DEATH_STRIKE` | 2259 (0x8D3) |  |  |  |
-| `CHILBLAINS` | 2260 (0x8D4) |  |  |  |
-| `DECIMATION` | 2261 (0x8D5) |  |  |  |
-| `BOOMING_ECHOES` | 2262 (0x8D6) |  |  |  |
-| `FROZEN_POWER` | 2263 (0x8D7) |  |  |  |
-| `IMPROVED_BARKSKIN` | 2264 (0x8D8) |  |  |  |
-| `PRIMAL_GORE` | 2266 (0x8DA) |  |  |  |
-| `IMPROVED_DEVOURING_PLAGUE` | 2267 (0x8DB) |  |  |  |
-| `REFLECTIVE_SHIELD` | 2268 (0x8DC) |  |  |  |
-| `THUNDERSTOMP` | 2277 (0x8E5) |  |  |  |
-| `HUNTER_ROAR_OF_SACRIFICE2` | 2278 (0x8E6) |  |  |  |
-| `BODY_AND_SOUL` | 2279 (0x8E7) |  |  |  |
-| `DIVINE_SACRIFICE` | 2280 (0x8E8) |  |  |  |
-| `DIVINE_GUARDIAN` | 2281 (0x8E9) |  |  |  |
-| `SPIRITUAL_ATTUNEMENT` | 2282 (0x8EA) |  |  |  |
-| `JUGGERNAUT` | 2283 (0x8EB) |  |  |  |
-| `THREAT_OF_THASSARIAN` | 2284 (0x8EC) |  |  |  |
-| `DESOLATION` | 2285 (0x8ED) |  |  |  |
+| Enumerator | Value  | Comment | Display |
+| --------- | -------- | ------- | ------- |
+| `BURNING_SOUL` | 23 (0x17) |  |  |
+| `MOLTEN_SHIELDS` | 24 (0x18) |  |  |
+| `IMPROVED_SCORCH` | 25 (0x19) |  |  |
+| `IMPROVED_FIREBALL` | 26 (0x1A) |  |  |
+| `IMPROVED_FIRE_BLAST` | 27 (0x1B) |  |  |
+| `FLAME_THROWING` | 28 (0x1C) |  |  |
+| `PYROBLAST` | 29 (0x1D) |  |  |
+| `IMPACT` | 30 (0x1E) |  |  |
+| `WORLD_IN_FLAMES` | 31 (0x1F) |  |  |
+| `BLAST_WAVE` | 32 (0x20) |  |  |
+| `CRITICAL_MASS` | 33 (0x21) |  |  |
+| `IGNITE` | 34 (0x22) |  |  |
+| `FIRE_POWER` | 35 (0x23) |  |  |
+| `COMBUSTION` | 36 (0x24) |  |  |
+| `IMPROVED_FROSTBOLT` | 37 (0x25) |  |  |
+| `FROSTBITE` | 38 (0x26) |  |  |
+| `PIERCING_ICE` | 61 (0x3D) |  |  |
+| `ICE_FLOES` | 62 (0x3E) |  |  |
+| `IMPROVED_BLIZZARD` | 63 (0x3F) |  |  |
+| `IMPROVED_CONE_OF_COLD` | 64 (0x40) |  |  |
+| `PERMAFROST` | 65 (0x41) |  |  |
+| `FROST_CHANNELING` | 66 (0x42) |  |  |
+| `SHATTER` | 67 (0x43) |  |  |
+| `WINTERS_CHILL` | 68 (0x44) |  | Winter's Chill |
+| `ICY_VEINS` | 69 (0x45) |  |  |
+| `FROST_WARDING` | 70 (0x46) |  |  |
+| `ICE_BARRIER` | 71 (0x47) |  |  |
+| `COLD_SNAP` | 72 (0x48) |  |  |
+| `ICE_SHARDS` | 73 (0x49) |  |  |
+| `ARCANE_SUBTLETY` | 74 (0x4A) |  |  |
+| `ARCANE_CONCENTRATION` | 75 (0x4B) |  |  |
+| `ARCANE_FOCUS` | 76 (0x4C) |  |  |
+| `ARCANE_MIND` | 77 (0x4D) |  |  |
+| `ARCANE_STABILITY` | 80 (0x50) |  |  |
+| `SPELL_IMPACT` | 81 (0x51) |  |  |
+| `MAGIC_ATTUNEMENT` | 82 (0x52) |  |  |
+| `ARCANE_SHIELDING` | 83 (0x53) |  |  |
+| `ARCANE_FORTITUDE` | 85 (0x55) |  |  |
+| `PRESENCE_OF_MIND` | 86 (0x56) |  |  |
+| `ARCANE_POWER` | 87 (0x57) |  |  |
+| `IMPROVED_COUNTERSPELL` | 88 (0x58) |  |  |
+| `DEEP_WOUNDS` | 121 (0x79) |  |  |
+| `SWORD_SPECIALIZATION` | 123 (0x7B) |  |  |
+| `IMPROVED_HEROIC_STRIKE` | 124 (0x7C) |  |  |
+| `WARRIOR_MACE_SPECIALIZATION` | 125 (0x7D) |  |  |
+| `IMPROVED_CHARGE` | 126 (0x7E) |  |  |
+| `IMPROVED_REND` | 127 (0x7F) |  |  |
+| `TACTICAL_MASTERY` | 128 (0x80) |  |  |
+| `IMPROVED_HAMSTRING` | 129 (0x81) |  |  |
+| `WARRIOR_DEFLECTION` | 130 (0x82) |  |  |
+| `IMPROVED_OVERPOWER` | 131 (0x83) |  |  |
+| `POLEAXE_SPECIALIZATION` | 132 (0x84) |  |  |
+| `SWEEPING_STRIKES` | 133 (0x85) |  |  |
+| `WARRIOR_WEAPON_MASTERY` | 134 (0x86) |  |  |
+| `MORTAL_STRIKE` | 135 (0x87) |  |  |
+| `WARRIOR_TWO_HANDED_WEAPON_SPECIALIZATION` | 136 (0x88) |  |  |
+| `ANGER_MANAGEMENT` | 137 (0x89) |  |  |
+| `WARRIOR_ANTICIPATION` | 138 (0x8A) |  |  |
+| `WARRIOR_TOUGHNESS` | 140 (0x8C) |  |  |
+| `IMPROVED_THUNDER_CLAP` | 141 (0x8D) |  |  |
+| `IMPROVED_BLOODRAGE` | 142 (0x8E) |  |  |
+| `INCITE` | 144 (0x90) |  |  |
+| `PUNCTURE` | 146 (0x92) |  |  |
+| `IMPROVED_REVENGE` | 147 (0x93) |  |  |
+| `VIGILANCE` | 148 (0x94) |  |  |
+| `GAG_ORDER` | 149 (0x95) |  |  |
+| `IMPROVED_DISCIPLINES` | 150 (0x96) |  |  |
+| `IMPROVED_DISARM` | 151 (0x97) |  |  |
+| `CONCUSSION_BLOW` | 152 (0x98) |  |  |
+| `WARRIOR_LAST_STAND` | 153 (0x99) |  |  |
+| `COMMANDING_PRESENCE` | 154 (0x9A) |  |  |
+| `ENRAGE` | 155 (0x9B) |  |  |
+| `WARRIOR_FLURRY` | 156 (0x9C) |  |  |
+| `CRUELTY` | 157 (0x9D) |  |  |
+| `BOOMING_VOICE` | 158 (0x9E) |  |  |
+| `UNBRIDLED_WRATH` | 159 (0x9F) |  |  |
+| `PIERCING_HOWL` | 160 (0xA0) |  |  |
+| `IMPROVED_DEMORALIZING_SHOUT` | 161 (0xA1) |  |  |
+| `DEATH_WISH` | 165 (0xA5) |  |  |
+| `IMPROVED_CLEAVE` | 166 (0xA6) |  |  |
+| `BLOODTHIRST` | 167 (0xA7) |  |  |
+| `ROGUE_PRECISION` | 181 (0xB5) |  |  |
+| `CLOSE_QUARTERS_COMBAT` | 182 (0xB6) |  |  |
+| `ROGUE_MACE_SPECIALIZATION` | 184 (0xB8) |  |  |
+| `ROGUE_LIGHTNING_REFLEXES` | 186 (0xBA) |  |  |
+| `ROGUE_DEFLECTION` | 187 (0xBB) |  |  |
+| `IMPROVED_SINISTER_STRIKE` | 201 (0xC9) |  |  |
+| `IMPROVED_GOUGE` | 203 (0xCB) |  |  |
+| `ENDURANCE` | 204 (0xCC) |  |  |
+| `ADRENALINE_RUSH` | 205 (0xCD) |  |  |
+| `IMPROVED_KICK` | 206 (0xCE) |  |  |
+| `ROGUE_DUAL_WIELD_SPECIALIZATION` | 221 (0xDD) |  |  |
+| `IMPROVED_SPRINT` | 222 (0xDE) |  |  |
+| `BLADE_FLURRY` | 223 (0xDF) |  |  |
+| `MASTER_OF_DECEPTION` | 241 (0xF1) |  |  |
+| `HACK_AND_SLASH` | 242 (0xF2) |  |  |
+| `CAMOUFLAGE` | 244 (0xF4) |  |  |
+| `INITIATIVE` | 245 (0xF5) |  |  |
+| `SETUP` | 246 (0xF6) |  |  |
+| `ELUSIVENESS` | 247 (0xF7) |  |  |
+| `OPPORTUNITY` | 261 (0x105) |  |  |
+| `DIRTY_TRICKS` | 262 (0x106) |  |  |
+| `IMPROVED_AMBUSH` | 263 (0x107) |  |  |
+| `DIRTY_DEEDS` | 265 (0x109) |  |  |
+| `IMPROVED_POISONS` | 268 (0x10C) |  |  |
+| `LETHALITY` | 269 (0x10D) |  |  |
+| `MALICE` | 270 (0x10E) |  |  |
+| `REMORSELESS_ATTACKS` | 272 (0x110) |  |  |
+| `RUTHLESSNESS` | 273 (0x111) |  |  |
+| `MURDER` | 274 (0x112) |  |  |
+| `IMPROVED_EVISCERATE` | 276 (0x114) |  |  |
+| `PUNCTURING_WOUNDS` | 277 (0x115) |  |  |
+| `IMPROVED_EXPOSE_ARMOR` | 278 (0x116) |  |  |
+| `IMPROVED_KIDNEY_SHOT` | 279 (0x117) |  |  |
+| `COLD_BLOOD` | 280 (0x118) |  |  |
+| `OVERKILL` | 281 (0x119) |  |  |
+| `SEAL_FATE` | 283 (0x11B) |  |  |
+| `PREPARATION` | 284 (0x11C) |  |  |
+| `RIPOSTE` | 301 (0x12D) |  |  |
+| `GHOSTLY_STRIKE` | 303 (0x12F) |  |  |
+| `MARTYRDOM` | 321 (0x141) |  |  |
+| `POWER_INFUSION` | 322 (0x142) |  |  |
+| `MENTAL_AGILITY` | 341 (0x155) |  |  |
+| `UNBREAKABLE_WILL` | 342 (0x156) |  |  |
+| `IMPROVED_POWER_WORD_SHIELD` | 343 (0x157) |  |  |
+| `IMPROVED_POWER_WORD_FORTITUDE` | 344 (0x158) |  |  |
+| `IMPROVED_INNER_FIRE` | 346 (0x15A) |  |  |
+| `MEDITATION` | 347 (0x15B) |  |  |
+| `INNER_FOCUS` | 348 (0x15C) |  |  |
+| `IMPROVED_MANA_BURN` | 350 (0x15E) |  |  |
+| `SOUL_WARDING` | 351 (0x15F) |  |  |
+| `SILENT_RESOLVE` | 352 (0x160) |  |  |
+| `INSPIRATION` | 361 (0x169) |  |  |
+| `PREMEDITATION` | 381 (0x17D) |  |  |
+| `VIGOR` | 382 (0x17E) |  |  |
+| `HOLY_SPECIALIZATION` | 401 (0x191) |  |  |
+| `SPIRITUAL_GUIDANCE` | 402 (0x192) |  |  |
+| `SEARING_LIGHT` | 403 (0x193) |  |  |
+| `SPIRITUAL_HEALING` | 404 (0x194) |  |  |
+| `IMPROVED_RENEW` | 406 (0x196) |  |  |
+| `IMPROVED_HEALING` | 408 (0x198) |  |  |
+| `PRIEST_HEALING_FOCUS` | 410 (0x19A) |  |  |
+| `SPELL_WARDING` | 411 (0x19B) |  |  |
+| `HEALING_PRAYERS` | 413 (0x19D) |  |  |
+| `ARCANE_INSTABILITY` | 421 (0x1A5) |  |  |
+| `DESPERATE_PRAYER` | 442 (0x1BA) |  |  |
+| `SHADOW_WEAVING` | 461 (0x1CD) |  |  |
+| `DARKNESS` | 462 (0x1CE) |  |  |
+| `SHADOW_FOCUS` | 463 (0x1CF) |  |  |
+| `SPIRIT_TAP` | 465 (0x1D1) |  |  |
+| `SHADOW_AFFINITY` | 466 (0x1D2) |  |  |
+| `IMPROVED_MIND_BLAST` | 481 (0x1E1) |  |  |
+| `IMPROVED_SHADOW_WORD_PAIN` | 482 (0x1E2) |  |  |
+| `VEILED_SHADOWS` | 483 (0x1E3) |  |  |
+| `VAMPIRIC_EMBRACE` | 484 (0x1E4) |  |  |
+| `MIND_FLAY` | 501 (0x1F5) |  |  |
+| `SHADOWFORM` | 521 (0x209) |  |  |
+| `SILENCE` | 541 (0x21D) |  |  |
+| `IMPROVED_PSYCHIC_SCREAM` | 542 (0x21E) |  |  |
+| `CALL_OF_FLAME` | 561 (0x231) |  |  |
+| `CALL_OF_THUNDER` | 562 (0x232) |  |  |
+| `CONCUSSION` | 563 (0x233) |  |  |
+| `CONVECTION` | 564 (0x234) |  |  |
+| `ELEMENTAL_FURY` | 565 (0x235) |  |  |
+| `IMPROVED_FIRE_NOVA` | 567 (0x237) |  |  |
+| `ELEMENTAL_MASTERY` | 573 (0x23D) |  |  |
+| `ELEMENTAL_FOCUS` | 574 (0x23E) |  |  |
+| `REVERBERATION` | 575 (0x23F) |  |  |
+| `ANCESTRAL_HEALING` | 581 (0x245) |  |  |
+| `TIDAL_FORCE` | 582 (0x246) |  |  |
+| `IMPROVED_WATER_SHIELD` | 583 (0x247) |  |  |
+| `IMPROVED_HEALING_WAVE` | 586 (0x24A) |  |  |
+| `SHAMAN_HEALING_FOCUS` | 587 (0x24B) |  |  |
+| `RESTORATIVE_TOTEMS` | 588 (0x24C) |  |  |
+| `IMPROVED_REINCARNATION` | 589 (0x24D) |  |  |
+| `MANA_TIDE_TOTEM` | 590 (0x24E) |  |  |
+| `SHAMAN_NATURES_SWIFTNESS` | 591 (0x24F) |  | Nature's Swiftness |
+| `PURIFICATION` | 592 (0x250) |  |  |
+| `TIDAL_FOCUS` | 593 (0x251) |  |  |
+| `TIDAL_MASTERY` | 594 (0x252) |  |  |
+| `TOTEMIC_FOCUS` | 595 (0x253) |  |  |
+| `SHAMAN_ANTICIPATION` | 601 (0x259) |  |  |
+| `SHAMAN_FLURRY` | 602 (0x25A) |  |  |
+| `IMPROVED_GHOST_WOLF` | 605 (0x25D) |  |  |
+| `IMPROVED_SHIELDS` | 607 (0x25F) |  |  |
+| `GUARDIAN_TOTEMS` | 609 (0x261) |  |  |
+| `ENHANCING_TOTEMS` | 610 (0x262) |  |  |
+| `ELEMENTAL_WEAPONS` | 611 (0x263) |  |  |
+| `THUNDERING_STRIKES` | 613 (0x265) |  |  |
+| `ANCESTRAL_KNOWLEDGE` | 614 (0x266) |  |  |
+| `SHAMAN_TOUGHNESS` | 615 (0x267) |  |  |
+| `SPIRIT_WEAPONS` | 616 (0x268) |  |  |
+| `SHAMANISTIC_FOCUS` | 617 (0x269) |  |  |
+| `IRON_WILL` | 641 (0x281) |  |  |
+| `BLOOD_CRAZE` | 661 (0x295) |  |  |
+| `IMPALE` | 662 (0x296) |  |  |
+| `HEMORRHAGE` | 681 (0x2A9) |  |  |
+| `VILE_POISONS` | 682 (0x2AA) |  |  |
+| `WARRIOR_ONE_HANDED_WEAPON_SPECIALIZATION` | 702 (0x2BE) |  |  |
+| `LIGHTNING_MASTERY` | 721 (0x2D1) |  |  |
+| `ARCTIC_REACH` | 741 (0x2E5) |  |  |
+| `STARLIGHT_WRATH` | 762 (0x2FA) |  |  |
+| `IMPROVED_MOONFIRE` | 763 (0x2FB) |  |  |
+| `NATURES_REACH` | 764 (0x2FC) |  | Nature's Reach |
+| `BRAMBLES` | 782 (0x30E) |  |  |
+| `MOONGLOW` | 783 (0x30F) |  |  |
+| `CELESTIAL_FOCUS` | 784 (0x310) |  |  |
+| `INSECT_SWARM` | 788 (0x314) |  |  |
+| `NATURES_GRACE` | 789 (0x315) |  | Nature's Grace |
+| `MOONFURY` | 790 (0x316) |  |  |
+| `DRUID_VENGEANCE` | 792 (0x318) |  |  |
+| `MOONKIN_FORM` | 793 (0x319) |  |  |
+| `DRUID_THICK_HIDE` | 794 (0x31A) |  |  |
+| `FERAL_AGGRESSION` | 795 (0x31B) |  |  |
+| `DRUID_FEROCITY` | 796 (0x31C) |  |  |
+| `BRUTAL_IMPACT` | 797 (0x31D) |  |  |
+| `SHARPENED_CLAWS` | 798 (0x31E) |  |  |
+| `FERAL_INSTINCT` | 799 (0x31F) |  |  |
+| `PRIMAL_FURY` | 801 (0x321) |  |  |
+| `SHREDDING_ATTACKS` | 802 (0x322) |  |  |
+| `PREDATORY_STRIKES` | 803 (0x323) |  |  |
+| `FERAL_CHARGE` | 804 (0x324) |  |  |
+| `SAVAGE_FURY` | 805 (0x325) |  |  |
+| `FERAL_SWIFTNESS` | 807 (0x327) |  |  |
+| `HEART_OF_THE_WILD` | 808 (0x328) |  |  |
+| `LEADER_OF_THE_PACK` | 809 (0x329) |  |  |
+| `IMPROVED_MARK_OF_THE_WILD` | 821 (0x335) |  |  |
+| `FUROR` | 822 (0x336) |  |  |
+| `NATURES_FOCUS` | 823 (0x337) |  | Nature's Focus |
+| `NATURALIST` | 824 (0x338) |  |  |
+| `NATURES_BOUNTY` | 825 (0x339) |  | Nature's Bounty |
+| `NATURAL_SHAPESHIFTER` | 826 (0x33A) |  |  |
+| `OMEN_OF_CLARITY` | 827 (0x33B) |  |  |
+| `GIFT_OF_NATURE` | 828 (0x33C) |  |  |
+| `DRUID_INTENSITY` | 829 (0x33D) |  |  |
+| `IMPROVED_REJUVENATION` | 830 (0x33E) |  |  |
+| `DRUID_NATURES_SWIFTNESS` | 831 (0x33F) |  | Nature's Swiftness |
+| `SUBTLETY` | 841 (0x349) |  |  |
+| `IMPROVED_TRANQUILITY` | 842 (0x34A) |  |  |
+| `TRANQUIL_SPIRIT` | 843 (0x34B) |  |  |
+| `SWIFTMEND` | 844 (0x34C) |  |  |
+| `SHADOW_REACH` | 881 (0x371) |  |  |
+| `STORMSTRIKE` | 901 (0x385) |  |  |
+| `CATACLYSM` | 941 (0x3AD) |  |  |
+| `BANE` | 943 (0x3AF) |  |  |
+| `IMPROVED_SHADOW_BOLT` | 944 (0x3B0) |  |  |
+| `IMPROVED_IMMOLATE` | 961 (0x3C1) |  |  |
+| `SHADOWBURN` | 963 (0x3C3) |  |  |
+| `DESTRUCTIVE_REACH` | 964 (0x3C4) |  |  |
+| `IMPROVED_SEARING_PAIN` | 965 (0x3C5) |  |  |
+| `EMBERSTORM` | 966 (0x3C6) |  |  |
+| `RUIN` | 967 (0x3C7) |  |  |
+| `CONFLAGRATE` | 968 (0x3C8) |  |  |
+| `DEVASTATION` | 981 (0x3D5) |  |  |
+| `AFTERMATH` | 982 (0x3D6) |  |  |
+| `DEMONIC_POWER` | 983 (0x3D7) |  |  |
+| `WARLOCK_INTENSITY` | 985 (0x3D9) |  |  |
+| `PYROCLASM` | 986 (0x3DA) |  |  |
+| `FEL_CONCENTRATION` | 1001 (0x3E9) |  |  |
+| `NIGHTFALL` | 1002 (0x3EA) |  |  |
+| `IMPROVED_CORRUPTION` | 1003 (0x3EB) |  |  |
+| `SOUL_SIPHON` | 1004 (0x3EC) |  |  |
+| `SUPPRESSION` | 1005 (0x3ED) |  |  |
+| `IMPROVED_CURSE_OF_WEAKNESS` | 1006 (0x3EE) |  |  |
+| `IMPROVED_LIFE_TAP` | 1007 (0x3EF) |  |  |
+| `GRIM_REACH` | 1021 (0x3FD) |  |  |
+| `DARK_PACT` | 1022 (0x3FE) |  |  |
+| `SIPHON_LIFE` | 1041 (0x411) |  |  |
+| `SHADOW_MASTERY` | 1042 (0x412) |  |  |
+| `AMPLIFY_CURSE` | 1061 (0x425) |  |  |
+| `CURSE_OF_EXHAUSTION` | 1081 (0x439) |  |  |
+| `IMPROVED_DRAIN_SOUL` | 1101 (0x44D) |  |  |
+| `AGGRESSION` | 1122 (0x462) |  |  |
+| `SERRATED_BLADES` | 1123 (0x463) |  |  |
+| `INCINERATION` | 1141 (0x475) |  |  |
+| `ARCANE_MEDITATION` | 1142 (0x476) |  |  |
+| `DRUID_SURVIVAL_INSTINCTS` | 1162 (0x48A) |  |  |
+| `DIVINE_FURY` | 1181 (0x49D) |  |  |
+| `MENTAL_STRENGTH` | 1201 (0x4B1) |  |  |
+| `BORROWED_TIME` | 1202 (0x4B2) |  |  |
+| `IMPROVED_HEALTHSTONE` | 1221 (0x4C5) |  |  |
+| `IMPROVED_IMP` | 1222 (0x4C6) |  |  |
+| `DEMONIC_EMBRACE` | 1223 (0x4C7) |  |  |
+| `IMPROVED_HEALTH_FUNNEL` | 1224 (0x4C8) |  |  |
+| `DEMONIC_BRUTALITY` | 1225 (0x4C9) |  |  |
+| `FEL_DOMINATION` | 1226 (0x4CA) |  |  |
+| `MASTER_SUMMONER` | 1227 (0x4CB) |  |  |
+| `FEL_VITALITY` | 1242 (0x4DA) |  |  |
+| `IMPROVED_SUCCUBUS` | 1243 (0x4DB) |  |  |
+| `MASTER_DEMONOLOGIST` | 1244 (0x4DC) |  |  |
+| `MASTER_CONJUROR` | 1261 (0x4ED) |  |  |
+| `UNHOLY_POWER` | 1262 (0x4EE) |  |  |
+| `DEMONIC_KNOWLEDGE` | 1263 (0x4EF) |  |  |
+| `MANA_FEED` | 1281 (0x501) |  |  |
+| `SOUL_LINK` | 1282 (0x502) |  |  |
+| `MOLTEN_CORE` | 1283 (0x503) |  |  |
+| `IMPROVED_CURSE_OF_AGONY` | 1284 (0x504) |  |  |
+| `HUNTER_LIGHTNING_REFLEXES` | 1303 (0x517) |  |  |
+| `ENTRAPMENT` | 1304 (0x518) |  |  |
+| `TRAP_MASTERY` | 1305 (0x519) |  |  |
+| `LOCK_AND_LOAD` | 1306 (0x51A) |  |  |
+| `SURVIVAL_TACTICS` | 1309 (0x51D) |  |  |
+| `SUREFOOTED` | 1310 (0x51E) |  |  |
+| `HUNTER_DEFLECTION` | 1311 (0x51F) |  |  |
+| `COUNTERATTACK` | 1312 (0x520) |  |  |
+| `KILLER_INSTINCT` | 1321 (0x529) |  |  |
+| `BLACK_ARROW` | 1322 (0x52A) |  |  |
+| `WYVERN_STING` | 1325 (0x52D) |  |  |
+| `IMPROVED_CONCUSSIVE_SHOT` | 1341 (0x53D) |  |  |
+| `EFFICIENCY` | 1342 (0x53E) |  |  |
+| `IMPROVED_HUNTERS_MARK` | 1343 (0x53F) |  | Improved Hunter's Mark |
+| `LETHAL_SHOTS` | 1344 (0x540) |  |  |
+| `AIMED_SHOT` | 1345 (0x541) |  |  |
+| `IMPROVED_ARCANE_SHOT` | 1346 (0x542) |  |  |
+| `BARRAGE` | 1347 (0x543) |  |  |
+| `IMPROVED_STINGS` | 1348 (0x544) |  |  |
+| `MORTAL_SHOTS` | 1349 (0x545) |  |  |
+| `CONCUSSIVE_BARRAGE` | 1351 (0x547) |  |  |
+| `READINESS` | 1353 (0x549) |  |  |
+| `TRUESHOT_AURA` | 1361 (0x551) |  |  |
+| `RANGED_WEAPON_SPECIALIZATION` | 1362 (0x552) |  |  |
+| `IMPROVED_ASPECT_OF_THE_MONKEY` | 1381 (0x565) |  |  |
+| `IMPROVED_ASPECT_OF_THE_HAWK` | 1382 (0x566) |  |  |
+| `PATHFINDING` | 1384 (0x568) |  |  |
+| `IMPROVED_MEND_PET` | 1385 (0x569) |  |  |
+| `BESTIAL_WRATH` | 1386 (0x56A) |  |  |
+| `INTIMIDATION` | 1387 (0x56B) |  |  |
+| `SPIRIT_BOND` | 1388 (0x56C) |  |  |
+| `ENDURANCE_TRAINING` | 1389 (0x56D) |  |  |
+| `BESTIAL_DISCIPLINE` | 1390 (0x56E) |  |  |
+| `HUNTER_FEROCITY` | 1393 (0x571) |  |  |
+| `HUNTER_THICK_HIDE` | 1395 (0x573) |  |  |
+| `UNLEASHED_FURY` | 1396 (0x574) |  |  |
+| `FRENZY` | 1397 (0x575) |  |  |
+| `IMPROVED_BLESSING_OF_MIGHT` | 1401 (0x579) |  |  |
+| `PALADIN_VENGEANCE` | 1402 (0x57A) |  |  |
+| `PALADIN_DEFLECTION` | 1403 (0x57B) |  |  |
+| `BENEDICTION` | 1407 (0x57F) |  |  |
+| `PALADIN_TWO_HANDED_WEAPON_SPECIALIZATION` | 1410 (0x582) |  |  |
+| `CONVICTION` | 1411 (0x583) |  |  |
+| `REDOUBT` | 1421 (0x58D) |  |  |
+| `IMPROVED_DEVOTION_AURA` | 1422 (0x58E) |  |  |
+| `PALADIN_TOUGHNESS` | 1423 (0x58F) |  |  |
+| `GUARDIANS_FAVOR` | 1425 (0x591) |  | Guardian's Favor |
+| `RECKONING` | 1426 (0x592) |  |  |
+| `PALADIN_ONE_HANDED_WEAPON_SPECIALIZATION` | 1429 (0x595) |  |  |
+| `HOLY_SHIELD` | 1430 (0x596) |  |  |
+| `BLESSING_OF_SANCTUARY` | 1431 (0x597) |  |  |
+| `SPIRITUAL_FOCUS` | 1432 (0x598) |  |  |
+| `DIVINE_FAVOR` | 1433 (0x599) |  |  |
+| `AURA_MASTERY` | 1435 (0x59B) |  |  |
+| `REPENTANCE` | 1441 (0x5A1) |  |  |
+| `DIVINITY` | 1442 (0x5A2) |  |  |
+| `IMPROVED_LAY_ON_HANDS` | 1443 (0x5A3) |  |  |
+| `HEALING_LIGHT` | 1444 (0x5A4) |  |  |
+| `IMPROVED_BLESSING_OF_WISDOM` | 1446 (0x5A6) |  |  |
+| `DIVINE_INTELLECT` | 1449 (0x5A9) |  |  |
+| `IMPROVED_CONCENTRATION_AURA` | 1450 (0x5AA) |  |  |
+| `ILLUMINATION` | 1461 (0x5B5) |  |  |
+| `SEALS_OF_THE_PURE` | 1463 (0x5B7) |  |  |
+| `HEART_OF_THE_CRUSADER` | 1464 (0x5B8) |  |  |
+| `SANCTIFIED_LIGHT` | 1465 (0x5B9) |  |  |
+| `SEAL_OF_COMMAND` | 1481 (0x5C9) |  |  |
+| `IMPROVED_RIGHTEOUS_FURY` | 1501 (0x5DD) |  |  |
+| `HOLY_SHOCK` | 1502 (0x5DE) |  |  |
+| `IMPROVED_HAMMER_OF_JUSTICE` | 1521 (0x5F1) |  |  |
+| `IMPROVED_BERSERKER_RAGE` | 1541 (0x605) |  |  |
+| `IMPROVED_EXECUTE` | 1542 (0x606) |  |  |
+| `IMPROVED_INTERCEPT` | 1543 (0x607) |  |  |
+| `SPIRIT_OF_REDEMPTION` | 1561 (0x619) |  |  |
+| `WARRIOR_DUAL_WIELD_SPECIALIZATION` | 1581 (0x62D) |  |  |
+| `SHIELD_SPECIALIZATION` | 1601 (0x641) |  |  |
+| `SAVAGE_STRIKES` | 1621 (0x655) |  |  |
+| `SURVIVALIST` | 1622 (0x656) |  |  |
+| `IMPROVED_TRACKING` | 1623 (0x657) |  |  |
+| `FOCUSED_FIRE` | 1624 (0x658) |  |  |
+| `IMPROVED_REVIVE_PET` | 1625 (0x659) |  |  |
+| `HOLY_POWER` | 1627 (0x65B) |  |  |
+| `UNYIELDING_FAITH` | 1628 (0x65C) |  |  |
+| `PALADIN_ANTICIPATION` | 1629 (0x65D) |  |  |
+| `IMPROVED_JUDGEMENTS` | 1631 (0x65F) |  |  |
+| `EYE_FOR_AN_EYE` | 1632 (0x660) |  |  |
+| `VINDICATION` | 1633 (0x661) |  |  |
+| `PURSUIT_OF_JUSTICE` | 1634 (0x662) |  |  |
+| `HOLY_REACH` | 1635 (0x663) |  |  |
+| `BLESSED_RECOVERY` | 1636 (0x664) |  |  |
+| `LIGHTWELL` | 1637 (0x665) |  |  |
+| `IMPROVED_VAMPIRIC_EMBRACE` | 1638 (0x666) |  |  |
+| `MASTER_OF_ELEMENTS` | 1639 (0x667) |  |  |
+| `ELEMENTAL_WARDING` | 1640 (0x668) |  |  |
+| `ELEMENTAL_REACH` | 1641 (0x669) |  |  |
+| `EYE_OF_THE_STORM` | 1642 (0x66A) |  |  |
+| `SHAMAN_WEAPON_MASTERY` | 1643 (0x66B) |  |  |
+| `ELEMENTAL_DEVASTATION` | 1645 (0x66D) |  |  |
+| `HEALING_GRACE` | 1646 (0x66E) |  |  |
+| `IMPROVED_WINDFURY_TOTEM` | 1647 (0x66F) |  |  |
+| `HEALING_WAY` | 1648 (0x670) |  |  |
+| `MAGE_PRECISION` | 1649 (0x671) |  |  |
+| `MAGIC_ABSORPTION` | 1650 (0x672) |  |  |
+| `IMPROVED_DEFENSIVE_STANCE` | 1652 (0x674) |  |  |
+| `WARRIOR_VITALITY` | 1653 (0x675) |  |  |
+| `SHIELD_MASTERY` | 1654 (0x676) |  |  |
+| `IMPROVED_WHIRLWIND` | 1655 (0x677) |  |  |
+| `WARRIOR_PRECISION` | 1657 (0x679) |  |  |
+| `IMPROVED_BERSERKER_STANCE` | 1658 (0x67A) |  |  |
+| `RAMPAGE` | 1659 (0x67B) |  |  |
+| `FOCUSED_RAGE` | 1660 (0x67C) |  |  |
+| `ENDLESS_RAGE` | 1661 (0x67D) |  |  |
+| `SUDDEN_DEATH` | 1662 (0x67E) |  |  |
+| `SECOND_WIND` | 1663 (0x67F) |  |  |
+| `BLOOD_FRENZY` | 1664 (0x680) |  |  |
+| `DEVASTATE` | 1666 (0x682) |  |  |
+| `MALEDICTION` | 1667 (0x683) |  |  |
+| `IMPROVED_HOWL_OF_TERROR` | 1668 (0x684) |  |  |
+| `CONTAGION` | 1669 (0x685) |  |  |
+| `UNSTABLE_AFFLICTION` | 1670 (0x686) |  |  |
+| `DEMONIC_AEGIS` | 1671 (0x687) |  |  |
+| `SUMMON_FELGUARD` | 1672 (0x688) |  |  |
+| `DEMONIC_TACTICS` | 1673 (0x689) |  |  |
+| `SHADOWFURY` | 1676 (0x68C) |  |  |
+| `SHADOW_AND_FLAME` | 1677 (0x68D) |  |  |
+| `SOUL_LEECH` | 1678 (0x68E) |  |  |
+| `NETHER_PROTECTION` | 1679 (0x68F) |  |  |
+| `DEMONIC_RESILIENCE` | 1680 (0x690) |  |  |
+| `UNRELENTING_STORM` | 1682 (0x692) |  |  |
+| `ELEMENTAL_PRECISION` | 1685 (0x695) |  |  |
+| `LIGHTNING_OVERLOAD` | 1686 (0x696) |  |  |
+| `TOTEM_OF_WRATH` | 1687 (0x697) |  |  |
+| `UNLEASHED_RAGE` | 1689 (0x699) |  |  |
+| `DUAL_WIELD` | 1690 (0x69A) |  |  |
+| `MENTAL_QUICKNESS` | 1691 (0x69B) |  |  |
+| `SHAMAN_DUAL_WIELD_SPECIALIZATION` | 1692 (0x69C) |  |  |
+| `SHAMANISTIC_RAGE` | 1693 (0x69D) |  |  |
+| `SHAMAN_FOCUSED_MIND` | 1695 (0x69F) |  |  |
+| `NATURES_BLESSING` | 1696 (0x6A0) |  | Nature's Blessing |
+| `IMPROVED_CHAIN_HEAL` | 1697 (0x6A1) |  |  |
+| `EARTH_SHIELD` | 1698 (0x6A2) |  |  |
+| `NATURES_GUARDIAN` | 1699 (0x6A3) |  | Nature's Guardian |
+| `SLEIGHT_OF_HAND` | 1700 (0x6A4) |  |  |
+| `HEIGHTENED_SENSES` | 1701 (0x6A5) |  |  |
+| `DEADLINESS` | 1702 (0x6A6) |  |  |
+| `WEAPON_EXPERTISE` | 1703 (0x6A7) |  |  |
+| `ROGUE_VITALITY` | 1705 (0x6A9) |  |  |
+| `BLADE_TWISTING` | 1706 (0x6AA) |  |  |
+| `NERVES_OF_STEEL` | 1707 (0x6AB) |  |  |
+| `SURPRISE_ATTACKS` | 1709 (0x6AD) |  |  |
+| `ENVELOPING_SHADOWS` | 1711 (0x6AF) |  |  |
+| `SINISTER_CALLING` | 1712 (0x6B0) |  |  |
+| `MASTER_OF_SUBTLETY` | 1713 (0x6B1) |  |  |
+| `SHADOWSTEP` | 1714 (0x6B2) |  |  |
+| `MASTER_POISONER` | 1715 (0x6B3) |  |  |
+| `FIND_WEAKNESS` | 1718 (0x6B6) |  |  |
+| `MUTILATE` | 1719 (0x6B7) |  |  |
+| `FLEET_FOOTED` | 1721 (0x6B9) |  |  |
+| `CHEAT_DEATH` | 1722 (0x6BA) |  |  |
+| `DEADENED_NERVES` | 1723 (0x6BB) |  |  |
+| `IMPROVED_BLINK` | 1724 (0x6BC) |  |  |
+| `ARCANE_POTENCY` | 1725 (0x6BD) |  |  |
+| `PRISMATIC_CLOAK` | 1726 (0x6BE) |  |  |
+| `ARCANE_EMPOWERMENT` | 1727 (0x6BF) |  |  |
+| `MIND_MASTERY` | 1728 (0x6C0) |  |  |
+| `SLOW` | 1729 (0x6C1) |  |  |
+| `PLAYING_WITH_FIRE` | 1730 (0x6C2) |  |  |
+| `BLAZING_SPEED` | 1731 (0x6C3) |  |  |
+| `MOLTEN_FURY` | 1732 (0x6C4) |  |  |
+| `PYROMANIAC` | 1733 (0x6C5) |  |  |
+| `EMPOWERED_FIRE` | 1734 (0x6C6) |  |  |
+| `DRAGONS_BREATH` | 1735 (0x6C7) |  | Dragon's Breath |
+| `FROZEN_CORE` | 1736 (0x6C8) |  |  |
+| `COLD_AS_ICE` | 1737 (0x6C9) |  |  |
+| `ARCTIC_WINDS` | 1738 (0x6CA) |  |  |
+| `EMPOWERED_FROSTBOLT` | 1740 (0x6CC) |  |  |
+| `SUMMON_WATER_ELEMENTAL` | 1741 (0x6CD) |  |  |
+| `PURE_OF_HEART` | 1742 (0x6CE) |  |  |
+| `PURIFYING_POWER` | 1743 (0x6CF) |  |  |
+| `BLESSED_LIFE` | 1744 (0x6D0) |  |  |
+| `LIGHTS_GRACE` | 1745 (0x6D1) |  | Light's Grace |
+| `HOLY_GUIDANCE` | 1746 (0x6D2) |  |  |
+| `DIVINE_ILLUMINATION` | 1747 (0x6D3) |  |  |
+| `STOICISM` | 1748 (0x6D4) |  |  |
+| `SACRED_DUTY` | 1750 (0x6D6) |  |  |
+| `ARDENT_DEFENDER` | 1751 (0x6D7) |  |  |
+| `COMBAT_EXPERTISE` | 1753 (0x6D9) |  |  |
+| `AVENGERS_SHIELD` | 1754 (0x6DA) |  | Avenger's Shield |
+| `CRUSADE` | 1755 (0x6DB) |  |  |
+| `SANCTIFIED_RETRIBUTION` | 1756 (0x6DC) |  |  |
+| `DIVINE_PURPOSE` | 1757 (0x6DD) |  |  |
+| `JUDGEMENTS_OF_THE_WISE` | 1758 (0x6DE) |  |  |
+| `FANATICISM` | 1759 (0x6DF) |  |  |
+| `SANCTITY_OF_BATTLE` | 1761 (0x6E1) |  |  |
+| `QUICK_RECOVERY` | 1762 (0x6E2) |  |  |
+| `SHADOW_EMBRACE` | 1763 (0x6E3) |  |  |
+| `EMPOWERED_CORRUPTION` | 1764 (0x6E4) |  |  |
+| `BLESSED_RESILIENCE` | 1765 (0x6E5) |  |  |
+| `SURGE_OF_LIGHT` | 1766 (0x6E6) |  |  |
+| `EMPOWERED_HEALING` | 1767 (0x6E7) |  |  |
+| `HOLY_CONCENTRATION` | 1768 (0x6E8) |  |  |
+| `ABSOLUTION` | 1769 (0x6E9) |  |  |
+| `FOCUSED_POWER` | 1771 (0x6EB) |  |  |
+| `ENLIGHTENMENT` | 1772 (0x6EC) |  |  |
+| `IMPROVED_FLASH_HEAL` | 1773 (0x6ED) |  |  |
+| `PAIN_SUPPRESSION` | 1774 (0x6EE) |  |  |
+| `PRIEST_FOCUSED_MIND` | 1777 (0x6F1) |  |  |
+| `SHADOW_POWER` | 1778 (0x6F2) |  |  |
+| `VAMPIRIC_TOUCH` | 1779 (0x6F3) |  |  |
+| `MIND_MELT` | 1781 (0x6F5) |  |  |
+| `LUNAR_GUIDANCE` | 1782 (0x6F6) |  |  |
+| `BALANCE_OF_POWER` | 1783 (0x6F7) |  |  |
+| `DREAMSTATE` | 1784 (0x6F8) |  |  |
+| `IMPROVED_FAERIE_FIRE` | 1785 (0x6F9) |  |  |
+| `WRATH_OF_CENARIUS` | 1786 (0x6FA) |  |  |
+| `FORCE_OF_NATURE` | 1787 (0x6FB) |  |  |
+| `EMPOWERED_TOUCH` | 1788 (0x6FC) |  |  |
+| `EMPOWERED_REJUVENATION` | 1789 (0x6FD) |  |  |
+| `NATURAL_PERFECTION` | 1790 (0x6FE) |  |  |
+| `TREE_OF_LIFE` | 1791 (0x6FF) |  |  |
+| `NURTURING_INSTINCT` | 1792 (0x700) |  |  |
+| `PRIMAL_TENACITY` | 1793 (0x701) |  |  |
+| `SURVIVAL_OF_THE_FITTEST` | 1794 (0x702) |  |  |
+| `PREDATORY_INSTINCTS` | 1795 (0x703) |  |  |
+| `MANGLE` | 1796 (0x704) |  |  |
+| `LIVING_SPIRIT` | 1797 (0x705) |  |  |
+| `IMPROVED_LEADER_OF_THE_PACK` | 1798 (0x706) |  |  |
+| `ANIMAL_HANDLER` | 1799 (0x707) |  |  |
+| `FEROCIOUS_INSPIRATION` | 1800 (0x708) |  |  |
+| `CATLIKE_REFLEXES` | 1801 (0x709) |  |  |
+| `SERPENTS_SWIFTNESS` | 1802 (0x70A) |  | Serpent's Swiftness |
+| `THE_BEAST_WITHIN` | 1803 (0x70B) |  |  |
+| `COMBAT_EXPERIENCE` | 1804 (0x70C) |  |  |
+| `CAREFUL_AIM` | 1806 (0x70E) |  |  |
+| `MASTER_MARKSMAN` | 1807 (0x70F) |  |  |
+| `SILENCING_SHOT` | 1808 (0x710) |  |  |
+| `RESOURCEFULNESS` | 1809 (0x711) |  |  |
+| `HUNTER_SURVIVAL_INSTINCTS` | 1810 (0x712) |  |  |
+| `THRILL_OF_THE_HUNT` | 1811 (0x713) |  |  |
+| `EXPOSE_WEAKNESS` | 1812 (0x714) |  |  |
+| `MASTER_TACTICIAN` | 1813 (0x715) |  |  |
+| `SCATTER_SHOT` | 1814 (0x716) |  |  |
+| `CIRCLE_OF_HEALING` | 1815 (0x717) |  |  |
+| `MISERY` | 1816 (0x718) |  |  |
+| `BACKLASH` | 1817 (0x719) |  |  |
+| `GO_FOR_THE_THROAT` | 1818 (0x71A) |  |  |
+| `RAPID_KILLING` | 1819 (0x71B) |  |  |
+| `HAWK_EYE` | 1820 (0x71C) |  |  |
+| `IMPROVED_BARRAGE` | 1821 (0x71D) |  |  |
+| `NATURES_MAJESTY` | 1822 (0x71E) |  | Nature's Majesty |
+| `CRUSADER_STRIKE` | 1823 (0x71F) |  |  |
+| `IMPROVED_MORTAL_STRIKE` | 1824 (0x720) |  |  |
+| `COMBAT_POTENCY` | 1825 (0x721) |  |  |
+| `SPELL_POWER` | 1826 (0x722) |  |  |
+| `IMPROVED_SLICE_AND_DICE` | 1827 (0x723) |  |  |
+| `ARCANE_FLOWS` | 1843 (0x733) |  |  |
+| `INCANTERS_ABSORPTION` | 1844 (0x734) |  | Incanter's Absorption |
+| `STUDENT_OF_THE_MIND` | 1845 (0x735) |  |  |
+| `NETHERWIND_PRESENCE` | 1846 (0x736) |  |  |
+| `ARCANE_BARRAGE` | 1847 (0x737) |  |  |
+| `FIERY_PAYBACK` | 1848 (0x738) |  |  |
+| `FIRESTARTER` | 1849 (0x739) |  |  |
+| `HOT_STREAK` | 1850 (0x73A) |  |  |
+| `BURNOUT` | 1851 (0x73B) |  |  |
+| `LIVING_BOMB` | 1852 (0x73C) |  |  |
+| `FINGERS_OF_FROST` | 1853 (0x73D) |  |  |
+| `BRAIN_FREEZE` | 1854 (0x73E) |  |  |
+| `ENDURING_WINTER` | 1855 (0x73F) |  |  |
+| `CHILLED_TO_THE_BONE` | 1856 (0x740) |  |  |
+| `DEEP_FREEZE` | 1857 (0x741) |  |  |
+| `FOCUSED_WILL` | 1858 (0x742) |  |  |
+| `TRAUMA` | 1859 (0x743) |  |  |
+| `UNRELENTING_ASSAULT` | 1860 (0x744) |  |  |
+| `STRENGTH_OF_ARMS` | 1862 (0x746) |  |  |
+| `BLADESTORM` | 1863 (0x747) |  |  |
+| `INTENSIFY_RAGE` | 1864 (0x748) |  |  |
+| `FURIOUS_ATTACKS` | 1865 (0x749) |  |  |
+| `BLOODSURGE` | 1866 (0x74A) |  |  |
+| `TITANS_GRIP` | 1867 (0x74B) |  | Titan's Grip |
+| `HEROIC_FURY` | 1868 (0x74C) |  |  |
+| `SAFEGUARD` | 1870 (0x74E) |  |  |
+| `SWORD_AND_BOARD` | 1871 (0x74F) |  |  |
+| `SHOCKWAVE` | 1872 (0x750) |  |  |
+| `IMPROVED_FELHUNTER` | 1873 (0x751) |  |  |
+| `DEATHS_EMBRACE` | 1875 (0x753) |  | Death's Embrace |
+| `EVERLASTING_AFFLICTION` | 1876 (0x754) |  |  |
+| `ERADICATION` | 1878 (0x756) |  |  |
+| `DEMONIC_EMPOWERMENT` | 1880 (0x758) |  |  |
+| `IMPROVED_DEMONIC_TACTICS` | 1882 (0x75A) |  |  |
+| `FEL_SYNERGY` | 1883 (0x75B) |  |  |
+| `NEMESIS` | 1884 (0x75C) |  |  |
+| `DEMONIC_PACT` | 1885 (0x75D) |  |  |
+| `METAMORPHOSIS` | 1886 (0x75E) |  |  |
+| `MOLTEN_SKIN` | 1887 (0x75F) |  |  |
+| `BACKDRAFT` | 1888 (0x760) |  |  |
+| `IMPROVED_SOUL_LEECH` | 1889 (0x761) |  |  |
+| `FIRE_AND_BRIMSTONE` | 1890 (0x762) |  |  |
+| `CHAOS_BOLT` | 1891 (0x763) |  |  |
+| `CRITICAL_BLOCK` | 1893 (0x765) |  |  |
+| `ASPIRATION` | 1894 (0x766) |  |  |
+| `DIVINE_AEGIS` | 1895 (0x767) |  |  |
+| `RAPTURE` | 1896 (0x768) |  |  |
+| `PENANCE` | 1897 (0x769) |  |  |
+| `TWIN_DISCIPLINES` | 1898 (0x76A) |  |  |
+| `GRACE` | 1901 (0x76D) |  |  |
+| `EMPOWERED_RENEW` | 1902 (0x76E) |  |  |
+| `TEST_OF_FAITH` | 1903 (0x76F) |  |  |
+| `SERENDIPITY` | 1904 (0x770) |  |  |
+| `DIVINE_PROVIDENCE` | 1905 (0x771) |  |  |
+| `IMPROVED_SHADOWFORM` | 1906 (0x772) |  |  |
+| `TWISTED_FAITH` | 1907 (0x773) |  |  |
+| `PSYCHIC_HORROR` | 1908 (0x774) |  |  |
+| `PAIN_AND_SUFFERING` | 1909 (0x775) |  |  |
+| `DISPERSION` | 1910 (0x776) |  |  |
+| `GUARDIAN_SPIRIT` | 1911 (0x777) |  |  |
+| `IMPROVED_MOONKIN_FORM` | 1912 (0x778) |  |  |
+| `OWLKIN_FRENZY` | 1913 (0x779) |  |  |
+| `PRIMAL_PRECISION` | 1914 (0x77A) |  |  |
+| `MASTER_SHAPESHIFTER` | 1915 (0x77B) |  |  |
+| `GIFT_OF_THE_EARTHMOTHER` | 1916 (0x77C) |  |  |
+| `WILD_GROWTH` | 1917 (0x77D) |  |  |
+| `REND_AND_TEAR` | 1918 (0x77E) |  |  |
+| `INFECTED_WOUNDS` | 1919 (0x77F) |  |  |
+| `IMPROVED_MANGLE` | 1920 (0x780) |  |  |
+| `KING_OF_THE_JUNGLE` | 1921 (0x781) |  |  |
+| `LIVING_SEED` | 1922 (0x782) |  |  |
+| `TYPHOON` | 1923 (0x783) |  |  |
+| `ECLIPSE` | 1924 (0x784) |  |  |
+| `GALE_WINDS` | 1925 (0x785) |  |  |
+| `STARFALL` | 1926 (0x786) |  |  |
+| `BERSERK` | 1927 (0x787) |  |  |
+| `EARTH_AND_MOON` | 1928 (0x788) |  |  |
+| `REVITALIZE` | 1929 (0x789) |  |  |
+| `IMPROVED_TREE_OF_LIFE` | 1930 (0x78A) |  |  |
+| `VIRULENCE` | 1932 (0x78C) |  |  |
+| `MORBIDITY` | 1933 (0x78D) |  |  |
+| `RAVENOUS_DEAD` | 1934 (0x78E) |  |  |
+| `IMPROVED_BLOOD_PRESENCE` | 1936 (0x790) |  |  |
+| `BLADED_ARMOR` | 1938 (0x792) |  |  |
+| `BUTCHERY` | 1939 (0x793) |  |  |
+| `RUNE_TAP` | 1941 (0x795) |  |  |
+| `IMPROVED_RUNE_TAP` | 1942 (0x796) |  |  |
+| `DARK_CONVICTION` | 1943 (0x797) |  |  |
+| `BLOODY_VENGEANCE` | 1944 (0x798) |  |  |
+| `SUBVERSION` | 1945 (0x799) |  |  |
+| `SCENT_OF_BLOOD` | 1948 (0x79C) |  |  |
+| `MARK_OF_BLOOD` | 1949 (0x79D) |  |  |
+| `VETERAN_OF_THE_THIRD_WAR` | 1950 (0x79E) |  |  |
+| `VENDETTA` | 1953 (0x7A1) |  |  |
+| `HYSTERIA` | 1954 (0x7A2) |  |  |
+| `SUDDEN_DOOM` | 1955 (0x7A3) |  |  |
+| `HEART_STRIKE` | 1957 (0x7A5) |  |  |
+| `MIGHT_OF_MOGRAINE` | 1958 (0x7A6) |  |  |
+| `WILL_OF_THE_NECROPOLIS` | 1959 (0x7A7) |  |  |
+| `BLOODWORMS` | 1960 (0x7A8) |  |  |
+| `DANCING_RUNE_WEAPON` | 1961 (0x7A9) |  |  |
+| `CRYPT_FEVER` | 1962 (0x7AA) |  |  |
+| `EPIDEMIC` | 1963 (0x7AB) |  |  |
+| `DEATH_KNIGHT_TOUGHNESS` | 1968 (0x7B0) |  |  |
+| `ENDLESS_WINTER` | 1971 (0x7B3) |  |  |
+| `BLACK_ICE` | 1973 (0x7B5) |  |  |
+| `FROST_STRIKE` | 1975 (0x7B7) |  |  |
+| `UNBREAKABLE_ARMOR` | 1979 (0x7BB) |  |  |
+| `DEATHCHILL` | 1980 (0x7BC) |  |  |
+| `CHILL_OF_THE_GRAVE` | 1981 (0x7BD) |  |  |
+| `MASTER_OF_GHOULS` | 1984 (0x7C0) |  |  |
+| `CORPSE_EXPLOSION` | 1985 (0x7C1) |  |  |
+| `HOWLING_BLAST` | 1989 (0x7C5) |  |  |
+| `FRIGID_DREADPLATE` | 1990 (0x7C6) |  |  |
+| `RIME` | 1992 (0x7C8) |  |  |
+| `MERCILESS_COMBAT` | 1993 (0x7C9) |  |  |
+| `UNHOLY_BLIGHT` | 1996 (0x7CC) |  |  |
+| `ACCLIMATION` | 1997 (0x7CD) |  |  |
+| `TUNDRA_STALKER` | 1998 (0x7CE) |  |  |
+| `HUNGERING_COLD` | 1999 (0x7CF) |  |  |
+| `SUMMON_GARGOYLE` | 2000 (0x7D0) |  |  |
+| `REAPING` | 2001 (0x7D1) |  |  |
+| `WANDERING_PLAGUE` | 2003 (0x7D3) |  |  |
+| `BLOOD_CAKED_BLADE` | 2004 (0x7D4) |  |  |
+| `IMPURITY` | 2005 (0x7D5) |  |  |
+| `BONE_SHIELD` | 2007 (0x7D7) |  |  |
+| `OUTBREAK` | 2008 (0x7D8) |  |  |
+| `MAGIC_SUPPRESSION` | 2009 (0x7D9) |  |  |
+| `DIRGE` | 2011 (0x7DB) |  |  |
+| `IMPROVED_UNHOLY_PRESENCE` | 2013 (0x7DD) |  |  |
+| `BLOODY_STRIKES` | 2015 (0x7DF) |  |  |
+| `BLADE_BARRIER` | 2017 (0x7E1) |  |  |
+| `SPELL_DEFLECTION` | 2018 (0x7E2) |  |  |
+| `VAMPIRIC_BLOOD` | 2019 (0x7E3) |  |  |
+| `RUNIC_POWER_MASTERY` | 2020 (0x7E4) |  |  |
+| `NERVES_OF_COLD_STEEL` | 2022 (0x7E6) |  |  |
+| `UNHOLY_COMMAND` | 2025 (0x7E9) |  |  |
+| `IMPROVED_SPIRIT_TAP` | 2027 (0x7EB) |  |  |
+| `IMPROVED_FROST_PRESENCE` | 2029 (0x7ED) |  |  |
+| `GLACIER_ROT` | 2030 (0x7EE) |  |  |
+| `IMPROVED_ICY_TOUCH` | 2031 (0x7EF) |  |  |
+| `BLOOD_GORGED` | 2034 (0x7F2) |  |  |
+| `ICY_REACH` | 2035 (0x7F3) |  |  |
+| `RAGE_OF_RIVENDARE` | 2036 (0x7F4) |  |  |
+| `ON_A_PALE_HORSE` | 2039 (0x7F7) |  |  |
+| `GUILE_OF_GOREFIEND` | 2040 (0x7F8) |  |  |
+| `HAUNT` | 2041 (0x7F9) |  |  |
+| `ICY_TALONS` | 2042 (0x7FA) |  |  |
+| `EBON_PLAGUEBRINGER` | 2043 (0x7FB) |  |  |
+| `KILLING_MACHINE` | 2044 (0x7FC) |  |  |
+| `EMPOWERED_IMP` | 2045 (0x7FD) |  |  |
+| `NECROSIS` | 2047 (0x7FF) |  |  |
+| `ANNIHILATION` | 2048 (0x800) |  |  |
+| `ELEMENTAL_OATH` | 2049 (0x801) |  |  |
+| `ASTRAL_SHIFT` | 2050 (0x802) |  |  |
+| `LAVA_FLOWS` | 2051 (0x803) |  |  |
+| `STORM_EARTH_AND_FIRE` | 2052 (0x804) |  |  |
+| `THUNDERSTORM` | 2053 (0x805) |  |  |
+| `IMPROVED_STORMSTRIKE` | 2054 (0x806) |  |  |
+| `STATIC_SHOCK` | 2055 (0x807) |  |  |
+| `EARTHEN_POWER` | 2056 (0x808) |  |  |
+| `MAELSTROM_WEAPON` | 2057 (0x809) |  |  |
+| `FERAL_SPIRIT` | 2058 (0x80A) |  |  |
+| `IMPROVED_EARTH_SHIELD` | 2059 (0x80B) |  |  |
+| `BLESSING_OF_THE_ETERNALS` | 2060 (0x80C) |  |  |
+| `ANCESTRAL_AWAKENING` | 2061 (0x80D) |  |  |
+| `TIDAL_WAVES` | 2063 (0x80F) |  |  |
+| `RIPTIDE` | 2064 (0x810) |  |  |
+| `DEADLY_BREW` | 2065 (0x811) |  |  |
+| `TURN_THE_TABLES` | 2066 (0x812) |  |  |
+| `BLOOD_SPATTER` | 2068 (0x814) |  |  |
+| `FOCUSED_ATTACKS` | 2069 (0x815) |  |  |
+| `CUT_TO_THE_CHASE` | 2070 (0x816) |  |  |
+| `HUNGER_FOR_BLOOD` | 2071 (0x817) |  |  |
+| `THROWING_SPECIALIZATION` | 2072 (0x818) |  |  |
+| `UNFAIR_ADVANTAGE` | 2073 (0x819) |  |  |
+| `SAVAGE_COMBAT` | 2074 (0x81A) |  |  |
+| `PREY_ON_THE_WEAK` | 2075 (0x81B) |  |  |
+| `KILLING_SPREE` | 2076 (0x81C) |  |  |
+| `WAYLAY` | 2077 (0x81D) |  |  |
+| `HONOR_AMONG_THIEVES` | 2078 (0x81E) |  |  |
+| `FILTHY_TRICKS` | 2079 (0x81F) |  |  |
+| `SLAUGHTER_FROM_THE_SHADOWS` | 2080 (0x820) |  |  |
+| `SHADOW_DANCE` | 2081 (0x821) |  |  |
+| `VICIOUS_STRIKES` | 2082 (0x822) |  |  |
+| `MENTAL_DEXTERITY` | 2083 (0x823) |  |  |
+| `CLEANSE_SPIRIT` | 2084 (0x824) |  |  |
+| `GHOUL_FRENZY` | 2085 (0x825) |  |  |
+| `DEATH_RUNE_MASTERY` | 2086 (0x826) |  |  |
+| `EARTHS_GRASP` | 2101 (0x835) |  | Earth's Grasp |
+| `ABOMINATIONS_MIGHT` | 2105 (0x839) |  | Abomination's Might |
+| `HUNTER_CULLING_THE_HERD` | 2106 (0x83A) |  |  |
+| `HUNTER_COBRA_REFLEXES` | 2107 (0x83B) |  |  |
+| `HUNTER_DASH` | 2109 (0x83D) |  |  |
+| `HUNTER_CULLING_THE_HERD2` | 2110 (0x83E) |  |  |
+| `HUNTER_CHARGE` | 2111 (0x83F) |  |  |
+| `HUNTER_GREAT_STAMINA` | 2112 (0x840) |  |  |
+| `HUNTER_NATURAL_ARMOR` | 2113 (0x841) |  |  |
+| `HUNTER_COBRA_REFLEXES2` | 2114 (0x842) |  |  |
+| `HUNTER_GREAT_STAMINA2` | 2116 (0x844) |  |  |
+| `HUNTER_NATURAL_ARMOR2` | 2117 (0x845) |  |  |
+| `HUNTER_COBRA_REFLEXES3` | 2118 (0x846) |  |  |
+| `HUNTER_DASH2` | 2119 (0x847) |  |  |
+| `HUNTER_GREAT_STAMINA3` | 2120 (0x848) |  |  |
+| `HUNTER_NATURAL_ARMOR3` | 2121 (0x849) |  |  |
+| `PET_BARDING` | 2122 (0x84A) |  |  |
+| `GUARD_DOG` | 2123 (0x84B) |  |  |
+| `IMPROVED_COWER` | 2124 (0x84C) |  |  |
+| `HUNTER_SPIKED_COLLAR` | 2125 (0x84D) |  |  |
+| `HUNTER_SPIKED_COLLAR2` | 2126 (0x84E) |  |  |
+| `HUNTER_SPIKED_COLLAR3` | 2127 (0x84F) |  |  |
+| `BLOODTHIRSTY` | 2128 (0x850) |  |  |
+| `SPIDERS_BITE` | 2129 (0x851) |  | Spider's Bite |
+| `PIERCING_SHOTS` | 2130 (0x852) |  |  |
+| `RAPID_RECUPERATION` | 2131 (0x853) |  |  |
+| `WILD_QUIVER` | 2132 (0x854) |  |  |
+| `IMPROVED_STEADY_SHOT` | 2133 (0x855) |  |  |
+| `MARKED_FOR_DEATH` | 2134 (0x856) |  |  |
+| `CHIMERA_SHOT` | 2135 (0x857) |  |  |
+| `INVIGORATION` | 2136 (0x858) |  |  |
+| `COBRA_STRIKES` | 2137 (0x859) |  |  |
+| `ASPECT_MASTERY` | 2138 (0x85A) |  |  |
+| `BEAST_MASTERY` | 2139 (0x85B) |  |  |
+| `LONGEVITY` | 2140 (0x85C) |  |  |
+| `NOXIOUS_STINGS` | 2141 (0x85D) |  |  |
+| `POINT_OF_NO_ESCAPE` | 2142 (0x85E) |  |  |
+| `SNIPER_TRAINING` | 2143 (0x85F) |  |  |
+| `HUNTING_PARTY` | 2144 (0x860) |  |  |
+| `EXPLOSIVE_SHOT` | 2145 (0x861) |  |  |
+| `SANCTIFIED_WRATH` | 2147 (0x863) |  |  |
+| `SWIFT_RETRIBUTION` | 2148 (0x864) |  |  |
+| `RIGHTEOUS_VENGEANCE` | 2149 (0x865) |  |  |
+| `DIVINE_STORM` | 2150 (0x866) |  |  |
+| `HUNTER_BOARS_SPEED` | 2151 (0x867) |  | Boar's Speed |
+| `HUNTER_LIONHEARTED` | 2152 (0x868) |  |  |
+| `LICK_YOUR_WOUNDS` | 2153 (0x869) |  |  |
+| `HUNTER_GREAT_RESISTANCE` | 2154 (0x86A) |  |  |
+| `RABID` | 2155 (0x86B) |  |  |
+| `HEART_OF_THE_PHOENIX` | 2156 (0x86C) |  |  |
+| `CALL_OF_THE_WILD` | 2157 (0x86D) |  |  |
+| `HUNTER_BOARS_SPEED2` | 2160 (0x870) |  | Boar's Speed |
+| `HUNTER_GREAT_RESISTANCE2` | 2161 (0x871) |  |  |
+| `HUNTER_LIONHEARTED2` | 2162 (0x872) |  |  |
+| `HUNTER_GRACE_OF_THE_MANTIS` | 2163 (0x873) |  |  |
+| `HUNTER_BOARS_SPEED3` | 2165 (0x875) |  | Boar's Speed |
+| `HUNTER_CULLING_THE_HERD3` | 2166 (0x876) |  |  |
+| `HUNTER_LIONHEARTED3` | 2167 (0x877) |  |  |
+| `HUNTER_GREAT_RESISTANCE3` | 2168 (0x878) |  |  |
+| `INTERVENE` | 2169 (0x879) |  |  |
+| `TAUNT` | 2170 (0x87A) |  |  |
+| `HUNTER_LAST_STAND` | 2171 (0x87B) |  |  |
+| `HUNTER_ROAR_OF_SACRIFICE` | 2172 (0x87C) |  |  |
+| `BLOOD_OF_THE_RHINO` | 2173 (0x87D) |  |  |
+| `BULLHEADED` | 2175 (0x87F) |  |  |
+| `THE_ART_OF_WAR` | 2176 (0x880) |  |  |
+| `CORNERED` | 2177 (0x881) |  |  |
+| `SHEATH_OF_LIGHT` | 2179 (0x883) |  |  |
+| `WOLVERINE_BITE` | 2181 (0x885) |  |  |
+| `OWLS_FOCUS` | 2182 (0x886) |  | Owl's Focus |
+| `FEEDING_FRENZY` | 2183 (0x887) |  |  |
+| `ROAR_OF_RECOVERY` | 2184 (0x888) |  |  |
+| `DIVINE_STRENGTH` | 2185 (0x889) |  |  |
+| `SACRED_CLEANSING` | 2190 (0x88E) |  |  |
+| `ENLIGHTENED_JUDGEMENTS` | 2191 (0x88F) |  |  |
+| `BEACON_OF_LIGHT` | 2192 (0x890) |  |  |
+| `INFUSION_OF_LIGHT` | 2193 (0x891) |  |  |
+| `GUARDED_BY_THE_LIGHT` | 2194 (0x892) |  |  |
+| `TOUCHED_BY_THE_LIGHT` | 2195 (0x893) |  |  |
+| `HAMMER_OF_THE_RIGHTEOUS` | 2196 (0x894) |  |  |
+| `FOCUSED_AIM` | 2197 (0x895) |  |  |
+| `BLESSED_HANDS` | 2198 (0x896) |  |  |
+| `JUDGEMENTS_OF_THE_PURE` | 2199 (0x897) |  |  |
+| `JUDGEMENTS_OF_THE_JUST` | 2200 (0x898) |  |  |
+| `HUNTER_DIVE` | 2201 (0x899) |  |  |
+| `HUNTER_DIVE2` | 2203 (0x89B) |  |  |
+| `SHIELD_OF_THE_TEMPLAR` | 2204 (0x89C) |  |  |
+| `IMPROVED_FEAR` | 2205 (0x89D) |  |  |
+| `CARRION_FEEDER` | 2206 (0x89E) |  |  |
+| `HUNTER_MOBILITY` | 2207 (0x89F) |  |  |
+| `HUNTER_MOBILITY2` | 2208 (0x8A0) |  |  |
+| `MISSILE_BARRAGE` | 2209 (0x8A1) |  |  |
+| `BLOOD_OF_THE_NORTH` | 2210 (0x8A2) |  |  |
+| `FOCUS_MAGIC` | 2211 (0x8A3) |  |  |
+| `BURNING_DETERMINATION` | 2212 (0x8A4) |  |  |
+| `SHATTERED_BARRIER` | 2214 (0x8A6) |  |  |
+| `LICHBORNE` | 2215 (0x8A7) |  |  |
+| `SCOURGE_STRIKE` | 2216 (0x8A8) |  |  |
+| `DEATH_KNIGHT_TWO_HANDED_WEAPON_SPECIALIZATION` | 2217 (0x8A9) |  |  |
+| `DEATH_KNIGHT_ANTICIPATION` | 2218 (0x8AA) |  |  |
+| `SWOOP` | 2219 (0x8AB) |  |  |
+| `ANTI_MAGIC_ZONE` | 2221 (0x8AD) |  |  |
+| `TORMENT_THE_WEAK` | 2222 (0x8AE) |  |  |
+| `IMPROVED_ICY_TALONS` | 2223 (0x8AF) |  |  |
+| `NIGHT_OF_THE_DEAD` | 2225 (0x8B1) |  |  |
+| `DESECRATION` | 2226 (0x8B2) |  |  |
+| `KINDRED_SPIRITS` | 2227 (0x8B3) |  |  |
+| `HUNTER_VS_WILD` | 2228 (0x8B4) |  |  |
+| `T_N_T` | 2229 (0x8B5) |  |  |
+| `WRECKING_CREW` | 2231 (0x8B7) |  |  |
+| `TASTE_FOR_BLOOD` | 2232 (0x8B8) |  |  |
+| `IMPROVED_SLAM` | 2233 (0x8B9) |  |  |
+| `UNENDING_FURY` | 2234 (0x8BA) |  |  |
+| `RENEWED_HOPE` | 2235 (0x8BB) |  |  |
+| `WARBRINGER` | 2236 (0x8BC) |  |  |
+| `HUNTER_CHARGE2` | 2237 (0x8BD) |  |  |
+| `GENESIS` | 2238 (0x8BE) |  |  |
+| `IMPROVED_INSECT_SWARM` | 2239 (0x8BF) |  |  |
+| `NATURES_SPLENDOR` | 2240 (0x8C0) |  | Nature's Splendor |
+| `PROTECTOR_OF_THE_PACK` | 2241 (0x8C1) |  |  |
+| `NATURAL_REACTION` | 2242 (0x8C2) |  |  |
+| `RELENTLESS_STRIKES` | 2244 (0x8C4) |  |  |
+| `PANDEMIC` | 2245 (0x8C5) |  |  |
+| `DAMAGE_SHIELD` | 2246 (0x8C6) |  |  |
+| `IMPROVED_SPELL_REFLECTION` | 2247 (0x8C7) |  |  |
+| `LAVA_LASH` | 2249 (0x8C9) |  |  |
+| `ARMORED_TO_THE_TEETH` | 2250 (0x8CA) |  |  |
+| `SHAMANISM` | 2252 (0x8CC) |  |  |
+| `HUNTER_WILD_HUNT` | 2253 (0x8CD) |  |  |
+| `SHARK_ATTACK` | 2254 (0x8CE) |  |  |
+| `HUNTER_WILD_HUNT2` | 2255 (0x8CF) |  |  |
+| `HUNTER_WILD_HUNT3` | 2256 (0x8D0) |  |  |
+| `HUNTER_GRACE_OF_THE_MANTIS2` | 2257 (0x8D1) |  |  |
+| `SILVERBACK` | 2258 (0x8D2) |  |  |
+| `IMPROVED_DEATH_STRIKE` | 2259 (0x8D3) |  |  |
+| `CHILBLAINS` | 2260 (0x8D4) |  |  |
+| `DECIMATION` | 2261 (0x8D5) |  |  |
+| `BOOMING_ECHOES` | 2262 (0x8D6) |  |  |
+| `FROZEN_POWER` | 2263 (0x8D7) |  |  |
+| `IMPROVED_BARKSKIN` | 2264 (0x8D8) |  |  |
+| `PRIMAL_GORE` | 2266 (0x8DA) |  |  |
+| `IMPROVED_DEVOURING_PLAGUE` | 2267 (0x8DB) |  |  |
+| `REFLECTIVE_SHIELD` | 2268 (0x8DC) |  |  |
+| `THUNDERSTOMP` | 2277 (0x8E5) |  |  |
+| `HUNTER_ROAR_OF_SACRIFICE2` | 2278 (0x8E6) |  |  |
+| `BODY_AND_SOUL` | 2279 (0x8E7) |  |  |
+| `DIVINE_SACRIFICE` | 2280 (0x8E8) |  |  |
+| `DIVINE_GUARDIAN` | 2281 (0x8E9) |  |  |
+| `SPIRITUAL_ATTUNEMENT` | 2282 (0x8EA) |  |  |
+| `JUGGERNAUT` | 2283 (0x8EB) |  |  |
+| `THREAT_OF_THASSARIAN` | 2284 (0x8EC) |  |  |
+| `DESOLATION` | 2285 (0x8ED) |  |  |
 
 Used in:
 * [CMSG_LEARN_TALENT](cmsg_learn_talent.md)

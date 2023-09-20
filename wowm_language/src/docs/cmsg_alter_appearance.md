@@ -25,9 +25,9 @@ CMSG have a header of 6 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x06 | 4 / Little | u32 | hair |  |  |
-| 0x0A | 4 / Little | u32 | hair_color |  |  |
-| 0x0E | 4 / Little | u32 | facial_hair |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x06 | 4 / Little | u32 | hair |  |
+| 0x0A | 4 / Little | u32 | hair_color |  |
+| 0x0E | 4 / Little | u32 | facial_hair |  |
 

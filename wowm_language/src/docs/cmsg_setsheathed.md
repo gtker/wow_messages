@@ -25,15 +25,15 @@ CMSG have a header of 6 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x06 | 4 / - | [SheathState](sheathstate.md) | sheathed |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x06 | 4 / - | [SheathState](sheathstate.md) | sheathed |  |
 
 ### Examples
 
 #### Example 1
 
-##### Description
+##### Comment
 
 Client takes out melee weapon.
 

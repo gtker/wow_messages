@@ -20,15 +20,15 @@ enum SpellSchool : u8 {
 ### Type
 The basic type is `u8`, a 1 byte (8 bit) integer.
 ### Enumerators
-| Enumerator | Value  | Description | Comment |
-| --------- | -------- | ----------- | ------- |
-| `NORMAL` | 0 (0x00) |  | Physical, Armor |
-| `HOLY` | 1 (0x01) |  |  |
-| `FIRE` | 2 (0x02) |  |  |
-| `NATURE` | 3 (0x03) |  |  |
-| `FROST` | 4 (0x04) |  |  |
-| `SHADOW` | 5 (0x05) |  |  |
-| `ARCANE` | 6 (0x06) |  |  |
+| Enumerator | Value  | Comment |
+| --------- | -------- | ------- |
+| `NORMAL` | 0 (0x00) | Physical, Armor |
+| `HOLY` | 1 (0x01) |  |
+| `FIRE` | 2 (0x02) |  |
+| `NATURE` | 3 (0x03) |  |
+| `FROST` | 4 (0x04) |  |
+| `SHADOW` | 5 (0x05) |  |
+| `ARCANE` | 6 (0x06) |  |
 
 Used in:
 * [AuraLog](auralog.md)

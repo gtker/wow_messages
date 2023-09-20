@@ -13,10 +13,10 @@ struct CalendarMember {
 ```
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x00 | - / - | [PackedGuid](../types/packed-guid.md) | member |  |  |
-| - | 1 / - | Level | level |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x00 | - / - | [PackedGuid](../types/packed-guid.md) | member |  |
+| - | 1 / - | Level | level |  |
 
 
 Used in:

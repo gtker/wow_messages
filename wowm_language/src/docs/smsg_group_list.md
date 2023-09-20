@@ -32,21 +32,21 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | 1 / - | [GroupType](grouptype.md) | group_type |  |  |
-| 0x05 | 1 / - | u8 | flags |  | mangoszero/cmangos/vmangos: own flags (groupid | (assistant?0x80:0)) |
-| 0x06 | 4 / Little | u32 | amount_of_members |  |  |
-| 0x0A | ? / - | [GroupListMember](grouplistmember.md)[amount_of_members] | members |  |  |
-| - | 8 / Little | [Guid](../types/packed-guid.md) | leader |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x04 | 1 / - | [GroupType](grouptype.md) | group_type |  |
+| 0x05 | 1 / - | u8 | flags | mangoszero/cmangos/vmangos: own flags (groupid | (assistant?0x80:0)) |
+| 0x06 | 4 / Little | u32 | amount_of_members |  |
+| 0x0A | ? / - | [GroupListMember](grouplistmember.md)[amount_of_members] | members |  |
+| - | 8 / Little | [Guid](../types/packed-guid.md) | leader |  |
 
 Optionally the following fields can be present. This can only be detected by looking at the size of the message.
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | 1 / - | [GroupLootSetting](grouplootsetting.md) | loot_setting |  |  |
-| - | 8 / Little | [Guid](../types/packed-guid.md) | master_loot |  | Zero if loot_setting is not MASTER_LOOT |
-| - | 1 / - | [ItemQuality](itemquality.md) | loot_threshold |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| - | 1 / - | [GroupLootSetting](grouplootsetting.md) | loot_setting |  |
+| - | 8 / Little | [Guid](../types/packed-guid.md) | master_loot | Zero if loot_setting is not MASTER_LOOT |
+| - | 1 / - | [ItemQuality](itemquality.md) | loot_threshold |  |
 
 ## Client Version 2.4.3
 
@@ -84,25 +84,25 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | 1 / - | [GroupType](grouptype.md) | group_type |  |  |
-| 0x05 | 1 / - | Bool | battleground_group |  |  |
-| 0x06 | 1 / - | u8 | group_id |  |  |
-| 0x07 | 1 / - | u8 | flags |  | mangoszero/cmangos/vmangos: own flags (groupid | (assistant?0x80:0)) |
-| 0x08 | 8 / Little | [Guid](../types/packed-guid.md) | group |  |  |
-| 0x10 | 4 / Little | u32 | amount_of_members |  |  |
-| 0x14 | ? / - | [GroupListMember](grouplistmember.md)[amount_of_members] | members |  |  |
-| - | 8 / Little | [Guid](../types/packed-guid.md) | leader |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x04 | 1 / - | [GroupType](grouptype.md) | group_type |  |
+| 0x05 | 1 / - | Bool | battleground_group |  |
+| 0x06 | 1 / - | u8 | group_id |  |
+| 0x07 | 1 / - | u8 | flags | mangoszero/cmangos/vmangos: own flags (groupid | (assistant?0x80:0)) |
+| 0x08 | 8 / Little | [Guid](../types/packed-guid.md) | group |  |
+| 0x10 | 4 / Little | u32 | amount_of_members |  |
+| 0x14 | ? / - | [GroupListMember](grouplistmember.md)[amount_of_members] | members |  |
+| - | 8 / Little | [Guid](../types/packed-guid.md) | leader |  |
 
 Optionally the following fields can be present. This can only be detected by looking at the size of the message.
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | 1 / - | [GroupLootSetting](grouplootsetting.md) | loot_setting |  |  |
-| - | 8 / Little | [Guid](../types/packed-guid.md) | master_loot |  | Zero if loot_setting is not MASTER_LOOT |
-| - | 1 / - | [ItemQuality](itemquality.md) | loot_threshold |  |  |
-| - | 1 / - | [DungeonDifficulty](dungeondifficulty.md) | difficulty |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| - | 1 / - | [GroupLootSetting](grouplootsetting.md) | loot_setting |  |
+| - | 8 / Little | [Guid](../types/packed-guid.md) | master_loot | Zero if loot_setting is not MASTER_LOOT |
+| - | 1 / - | [ItemQuality](itemquality.md) | loot_threshold |  |
+| - | 1 / - | [DungeonDifficulty](dungeondifficulty.md) | difficulty |  |
 
 ## Client Version 3.3.5
 
@@ -143,26 +143,26 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | 1 / - | u8 | group_type |  |  |
-| - | 1 / - | u8 | group_id |  |  |
-| - | 1 / - | u8 | flags |  | mangoszero/cmangos/vmangos: own flags (groupid | (assistant?0x80:0)) |
-| - | 1 / - | u8 | roles |  |  |
-| - | 8 / Little | [Guid](../types/packed-guid.md) | group |  |  |
-| - | 4 / Little | u32 | counter |  | azerothcore: 3.3, value increases every time this packet gets sent |
-| - | 4 / Little | u32 | amount_of_members |  |  |
-| - | ? / - | [GroupListMember](grouplistmember.md)[amount_of_members] | members |  |  |
-| - | 8 / Little | [Guid](../types/packed-guid.md) | leader |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| - | 1 / - | u8 | group_type |  |
+| - | 1 / - | u8 | group_id |  |
+| - | 1 / - | u8 | flags | mangoszero/cmangos/vmangos: own flags (groupid | (assistant?0x80:0)) |
+| - | 1 / - | u8 | roles |  |
+| - | 8 / Little | [Guid](../types/packed-guid.md) | group |  |
+| - | 4 / Little | u32 | counter | azerothcore: 3.3, value increases every time this packet gets sent |
+| - | 4 / Little | u32 | amount_of_members |  |
+| - | ? / - | [GroupListMember](grouplistmember.md)[amount_of_members] | members |  |
+| - | 8 / Little | [Guid](../types/packed-guid.md) | leader |  |
 
 Optionally the following fields can be present. This can only be detected by looking at the size of the message.
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | 1 / - | [GroupLootSetting](grouplootsetting.md) | loot_setting |  |  |
-| - | 8 / Little | [Guid](../types/packed-guid.md) | master_loot |  | Zero if loot_setting is not MASTER_LOOT |
-| - | 1 / - | [ItemQuality](itemquality.md) | loot_threshold |  |  |
-| - | 1 / - | [DungeonDifficulty](dungeondifficulty.md) | difficulty |  |  |
-| - | 1 / - | [RaidDifficulty](raiddifficulty.md) | raid_difficulty |  |  |
-| - | 1 / - | Bool | heroic |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| - | 1 / - | [GroupLootSetting](grouplootsetting.md) | loot_setting |  |
+| - | 8 / Little | [Guid](../types/packed-guid.md) | master_loot | Zero if loot_setting is not MASTER_LOOT |
+| - | 1 / - | [ItemQuality](itemquality.md) | loot_threshold |  |
+| - | 1 / - | [DungeonDifficulty](dungeondifficulty.md) | difficulty |  |
+| - | 1 / - | [RaidDifficulty](raiddifficulty.md) | raid_difficulty |  |
+| - | 1 / - | Bool | heroic |  |
 

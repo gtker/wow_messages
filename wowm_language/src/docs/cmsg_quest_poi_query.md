@@ -24,8 +24,8 @@ CMSG have a header of 6 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x06 | 4 / Little | u32 | amount_of_pois |  |  |
-| 0x0A | ? / - | u32[amount_of_pois] | points_of_interests |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x06 | 4 / Little | u32 | amount_of_pois |  |
+| 0x0A | ? / - | u32[amount_of_pois] | points_of_interests |  |
 

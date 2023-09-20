@@ -186,181 +186,181 @@ enum ItemSet : u16 {
 ### Type
 The basic type is `u16`, a 2 byte (16 bit) little endian integer.
 ### Enumerators
-| Enumerator | Value  | Description | Comment | Display |
-| --------- | -------- | ----------- | ------- | ------- |
-| `NONE` | 0 (0x00) |  |  |  |
-| `THE_GLADIATOR` | 1 (0x01) |  |  |  |
-| `DAL_RENDS_ARMS` | 41 (0x29) |  |  | Dal'Rend's Arms |
-| `SPIDERS_KISS` | 65 (0x41) |  |  | Spider's Kiss |
-| `THE_POSTMASTER` | 81 (0x51) |  |  |  |
-| `CADAVEROUS_GARB` | 121 (0x79) |  |  |  |
-| `NECROPILE_RAIMENT` | 122 (0x7A) |  |  |  |
-| `BLOODMAIL_REGALIA` | 123 (0x7B) |  |  |  |
-| `DEATHBONE_GUARDIAN` | 124 (0x7C) |  |  |  |
-| `VOLCANIC_ARMOR` | 141 (0x8D) |  |  |  |
-| `STORMSHROUD_ARMOR` | 142 (0x8E) |  |  |  |
-| `DEVILSAUR_ARMOR` | 143 (0x8F) |  |  |  |
-| `IRONFEATHER_ARMOR` | 144 (0x90) |  |  |  |
-| `DEFIAS_LEATHER` | 161 (0xA1) |  |  |  |
-| `EMBRACE_OF_THE_VIPER` | 162 (0xA2) |  |  |  |
-| `CHAIN_OF_THE_SCARLET_CRUSADE` | 163 (0xA3) |  |  |  |
-| `MAGISTERS_REGALIA` | 181 (0xB5) |  |  | Magister's Regalia |
-| `VESTMENTS_OF_THE_DEVOUT` | 182 (0xB6) |  |  |  |
-| `DREADMIST_RAIMENT` | 183 (0xB7) |  |  |  |
-| `SHADOWCRAFT_ARMOR` | 184 (0xB8) |  |  |  |
-| `WILDHEART_RAIMENT` | 185 (0xB9) |  |  |  |
-| `BEASTSTALKER_ARMOR` | 186 (0xBA) |  |  |  |
-| `THE_ELEMENTS` | 187 (0xBB) |  |  |  |
-| `LIGHTFORGE_ARMOR` | 188 (0xBC) |  |  |  |
-| `BATTLEGEAR_OF_VALOR` | 189 (0xBD) |  |  |  |
-| `ARCANIST_REGALIA` | 201 (0xC9) |  |  |  |
-| `VESTMENTS_OF_PROPHECY` | 202 (0xCA) |  |  |  |
-| `FELHEART_RAIMENT` | 203 (0xCB) |  |  |  |
-| `NIGHTSLAYER_ARMOR` | 204 (0xCC) |  |  |  |
-| `CENARION_RAIMENT` | 205 (0xCD) |  |  |  |
-| `GIANTSTALKER_ARMOR` | 206 (0xCE) |  |  |  |
-| `THE_EARTHFURY` | 207 (0xCF) |  |  |  |
-| `LAWBRINGER_ARMOR` | 208 (0xD0) |  |  |  |
-| `BATTLEGEAR_OF_MIGHT` | 209 (0xD1) |  |  |  |
-| `NETHERWIND_REGALIA` | 210 (0xD2) |  |  |  |
-| `VESTMENTS_OF_TRANSCENDENCE` | 211 (0xD3) |  |  |  |
-| `NEMESIS_RAIMENT` | 212 (0xD4) |  |  |  |
-| `BLOODFANG_ARMOR` | 213 (0xD5) |  |  |  |
-| `STORMRAGE_RAIMENT` | 214 (0xD6) |  |  |  |
-| `DRAGONSTALKER_ARMOR` | 215 (0xD7) |  |  |  |
-| `THE_TEN_STORMS` | 216 (0xD8) |  |  |  |
-| `JUDGEMENT_ARMOR` | 217 (0xD9) |  |  |  |
-| `BATTLEGEAR_OF_WRATH` | 218 (0xDA) |  |  |  |
-| `GARB_OF_THERO_SHAN` | 221 (0xDD) |  |  | Garb of Thero-shan |
-| `SHARD_OF_THE_GODS` | 241 (0xF1) |  |  |  |
-| `SPIRIT_OF_ESKHANDAR` | 261 (0x105) |  |  |  |
-| `CHAMPIONS_BATTLEGEAR` | 281 (0x119) |  |  | Champion's Battlegear |
-| `LIEUTENANT_COMMANDERS_BATTLEGEAR` | 282 (0x11A) |  |  | Lieutenant Commander's Battlegear |
-| `CHAMPIONS_EARTHSHAKER` | 301 (0x12D) |  |  | Champion's Earthshaker |
-| `IMPERIAL_PLATE` | 321 (0x141) |  |  |  |
-| `CHAMPIONS_REGALIA` | 341 (0x155) |  |  | Champion's Regalia |
-| `CHAMPIONS_RAIMENT` | 342 (0x156) |  |  | Champion's Raiment |
-| `LIEUTENANT_COMMANDERS_REGALIA` | 343 (0x157) |  |  | Lieutenant Commander's Regalia |
-| `LIEUTENANT_COMMANDERS_RAIMENT` | 344 (0x158) |  |  | Lieutenant Commander's Raiment |
-| `CHAMPIONS_THREADS` | 345 (0x159) |  |  | Champion's Threads |
-| `LIEUTENANT_COMMANDERS_THREADS` | 346 (0x15A) |  |  | Lieutenant Commander's Threads |
-| `CHAMPIONS_VESTMENTS` | 347 (0x15B) |  |  | Champion's Vestments |
-| `LIEUTENANT_COMMANDERS_VESTMENTS` | 348 (0x15C) |  |  | Lieutenant Commander's Vestments |
-| `CHAMPIONS_PURSUIT` | 361 (0x169) |  |  | Champion's Pursuit |
-| `LIEUTENANT_COMMANDERS_PURSUIT` | 362 (0x16A) |  |  | Lieutenant Commander's Pursuit |
-| `LIEUTENANT_COMMANDERS_SANCTUARY` | 381 (0x17D) |  |  | Lieutenant Commander's Sanctuary |
-| `CHAMPIONS_SANCTUARY` | 382 (0x17E) |  |  | Champion's Sanctuary |
-| `WARLORDS_BATTLEGEAR` | 383 (0x17F) |  |  | Warlord's Battlegear |
-| `FIELD_MARSHALS_BATTLEGEAR` | 384 (0x180) |  |  | Field Marshal's Battlegear |
-| `WARLORDS_EARTHSHAKER` | 386 (0x182) |  |  | Warlord's Earthshaker |
-| `WARLORDS_REGALIA` | 387 (0x183) |  |  | Warlord's Regalia |
-| `FIELD_MARSHALS_REGALIA` | 388 (0x184) |  |  | Field Marshal's Regalia |
-| `FIELD_MARSHALS_RAIMENT` | 389 (0x185) |  |  | Field Marshal's Raiment |
-| `WARLORDS_RAIMENT` | 390 (0x186) |  |  | Warlord's Raiment |
-| `WARLORDS_THREADS` | 391 (0x187) |  |  | Warlord's Threads |
-| `FIELD_MARSHALS_THREADS` | 392 (0x188) |  |  | Field Marshal's Threads |
-| `WARLORDS_VESTMENTS` | 393 (0x189) |  |  | Warlord's Vestments |
-| `FIELD_MARSHALS_VESTMENTS` | 394 (0x18A) |  |  | Field Marshal's Vestments |
-| `FIELD_MARSHALS_PURSUIT` | 395 (0x18B) |  |  | Field Marshal's Pursuit |
-| `WARLORDS_PURSUIT` | 396 (0x18C) |  |  | Warlord's Pursuit |
-| `FIELD_MARSHALS_SANCTUARY` | 397 (0x18D) |  |  | Field Marshal's Sanctuary |
-| `WARLORDS_SANCTUARY` | 398 (0x18E) |  |  | Warlord's Sanctuary |
-| `LIEUTENANT_COMMANDERS_AEGIS` | 401 (0x191) |  |  | Lieutenant Commander's Aegis |
-| `FIELD_MARSHALS_AEGIS` | 402 (0x192) |  |  | Field Marshal's Aegis |
-| `BLOODVINE_GARB` | 421 (0x1A5) |  |  |  |
-| `PRIMAL_BATSKIN` | 441 (0x1B9) |  |  |  |
-| `BLOOD_TIGER_HARNESS` | 442 (0x1BA) |  |  |  |
-| `BLOODSOUL_EMBRACE` | 443 (0x1BB) |  |  |  |
-| `THE_DARKSOUL` | 444 (0x1BC) |  |  |  |
-| `THE_TWIN_BLADES_OF_HAKKARI` | 461 (0x1CD) |  |  |  |
-| `ZANZILS_CONCENTRATION` | 462 (0x1CE) |  |  | Zanzil's Concentration |
-| `PRIMAL_BLESSING` | 463 (0x1CF) |  |  |  |
-| `OVERLORDS_RESOLUTION` | 464 (0x1D0) |  |  | Overlord's Resolution |
-| `PRAYER_OF_THE_PRIMAL` | 465 (0x1D1) |  |  |  |
-| `MAJOR_MOJO_INFUSION` | 466 (0x1D2) |  |  |  |
-| `THE_HIGHLANDERS_RESOLUTION` | 467 (0x1D3) |  |  | The Highlander's Resolution |
-| `THE_HIGHLANDERS_RESOLVE` | 468 (0x1D4) |  |  | The Highlander's Resolve |
-| `THE_HIGHLANDERS_DETERMINATION` | 469 (0x1D5) |  |  | The Highlander's Determination |
-| `THE_HIGHLANDERS_FORTITUDE` | 470 (0x1D6) |  |  | The Highlander's Fortitude |
-| `THE_HIGHLANDERS_PURPOSE` | 471 (0x1D7) |  |  | The Highlander's Purpose |
-| `THE_HIGHLANDERS_WILL` | 472 (0x1D8) |  |  | The Highlander's Will |
-| `THE_HIGHLANDERS_INTENT` | 473 (0x1D9) |  |  | The Highlander's Intent |
-| `VINDICATORS_BATTLEGEAR` | 474 (0x1DA) |  |  | Vindicator's Battlegear |
-| `FREETHINKERS_ARMOR` | 475 (0x1DB) |  |  | Freethinker's Armor |
-| `AUGURS_REGALIA` | 476 (0x1DC) |  |  | Augur's Regalia |
-| `PREDATORS_ARMOR` | 477 (0x1DD) |  |  | Predator's Armor |
-| `MADCAPS_OUTFIT` | 478 (0x1DE) |  |  | Madcap's Outfit |
-| `HARUSPEXS_GARB` | 479 (0x1DF) |  |  | Haruspex's Garb |
-| `CONFESSORS_RAIMENT` | 480 (0x1E0) |  |  | Confessor's Raiment |
-| `DEMONIACS_THREADS` | 481 (0x1E1) |  |  | Demoniac's Threads |
-| `ILLUSIONISTS_ATTIRE` | 482 (0x1E2) |  |  | Illusionist's Attire |
-| `THE_DEFILERS_DETERMINATION` | 483 (0x1E3) |  |  | The Defiler's Determination |
-| `THE_DEFILERS_FORTITUDE` | 484 (0x1E4) |  |  | The Defiler's Fortitude |
-| `THE_DEFILERS_INTENT` | 485 (0x1E5) |  |  | The Defiler's Intent |
-| `THE_DEFILERS_PURPOSE` | 486 (0x1E6) |  |  | The Defiler's Purpose |
-| `THE_DEFILERS_RESOLUTION` | 487 (0x1E7) |  |  | The Defiler's Resolution |
-| `THE_DEFILERS_WILL` | 488 (0x1E8) |  |  | The Defiler's Will |
-| `BLACK_DRAGON_MAIL` | 489 (0x1E9) |  |  |  |
-| `GREEN_DRAGON_MAIL` | 490 (0x1EA) |  |  |  |
-| `BLUE_DRAGON_MAIL` | 491 (0x1EB) |  |  |  |
-| `TWILIGHT_TRAPPINGS` | 492 (0x1EC) |  |  |  |
-| `GENESIS_RAIMENT` | 493 (0x1ED) |  |  |  |
-| `SYMBOLS_OF_UNENDING_LIFE` | 494 (0x1EE) |  |  |  |
-| `BATTLEGEAR_OF_UNYIELDING_STRENGTH` | 495 (0x1EF) |  |  |  |
-| `CONQUERORS_BATTLEGEAR` | 496 (0x1F0) |  |  | Conqueror's Battlegear |
-| `DEATHDEALERS_EMBRACE` | 497 (0x1F1) |  |  | Deathdealer's Embrace |
-| `EMBLEMS_OF_VEILED_SHADOWS` | 498 (0x1F2) |  |  |  |
-| `DOOMCALLERS_ATTIRE` | 499 (0x1F3) |  |  | Doomcaller's Attire |
-| `IMPLEMENTS_OF_UNSPOKEN_NAMES` | 500 (0x1F4) |  |  |  |
-| `STORMCALLERS_GARB` | 501 (0x1F5) |  |  | Stormcaller's Garb |
-| `GIFT_OF_THE_GATHERING_STORM` | 502 (0x1F6) |  |  |  |
-| `ENIGMA_VESTMENTS` | 503 (0x1F7) |  |  |  |
-| `TRAPPINGS_OF_VAULTED_SECRETS` | 504 (0x1F8) |  |  |  |
-| `AVENGERS_BATTLEGEAR` | 505 (0x1F9) |  |  | Avenger's Battlegear |
-| `BATTLEGEAR_OF_ETERNAL_JUSTICE` | 506 (0x1FA) |  |  |  |
-| `GARMENTS_OF_THE_ORACLE` | 507 (0x1FB) |  |  |  |
-| `FINERY_OF_INFINITE_WISDOM` | 508 (0x1FC) |  |  |  |
-| `STRIKERS_GARB` | 509 (0x1FD) |  |  | Striker's Garb |
-| `TRAPPINGS_OF_THE_UNSEEN_PATH` | 510 (0x1FE) |  |  |  |
-| `BATTLEGEAR_OF_HEROISM` | 511 (0x1FF) |  |  |  |
-| `DARKMANTLE_ARMOR` | 512 (0x200) |  |  |  |
-| `FERALHEART_RAIMENT` | 513 (0x201) |  |  |  |
-| `VESTMENTS_OF_THE_VIRTUOUS` | 514 (0x202) |  |  |  |
-| `BEASTMASTER_ARMOR` | 515 (0x203) |  |  |  |
-| `SOULFORGE_ARMOR` | 516 (0x204) |  |  |  |
-| `SORCERERS_REGALIA` | 517 (0x205) |  |  | Sorcerer's Regalia |
-| `DEATHMIST_RAIMENT` | 518 (0x206) |  |  |  |
-| `THE_FIVE_THUNDERS` | 519 (0x207) |  |  |  |
-| `IRONWEAVE_BATTLESUIT` | 520 (0x208) |  |  |  |
-| `DREAMWALKER_RAIMENT` | 521 (0x209) |  |  |  |
-| `CHAMPIONS_GUARD` | 522 (0x20A) |  |  | Champion's Guard |
-| `DREADNAUGHTS_BATTLEGEAR` | 523 (0x20B) |  |  | Dreadnaught's Battlegear |
-| `BONESCYTHE_ARMOR` | 524 (0x20C) |  |  |  |
-| `VESTMENTS_OF_FAITH` | 525 (0x20D) |  |  |  |
-| `FROSTFIRE_REGALIA` | 526 (0x20E) |  |  |  |
-| `THE_EARTHSHATTERER` | 527 (0x20F) |  |  |  |
-| `REDEMPTION_ARMOR` | 528 (0x210) |  |  |  |
-| `PLAGUEHEART_RAIMENT` | 529 (0x211) |  |  |  |
-| `CRYPTSTALKER_ARMOR` | 530 (0x212) |  |  |  |
-| `BATTLEGEAR_OF_UNDEAD_SLAYING` | 533 (0x215) |  |  |  |
-| `UNDEAD_SLAYERS_ARMOR` | 534 (0x216) |  |  | Undead Slayer's Armor |
-| `GARB_OF_THE_UNDEAD_SLAYER` | 535 (0x217) |  |  |  |
-| `REGALIA_OF_UNDEAD_CLEANSING` | 536 (0x218) |  |  |  |
-| `CHAMPIONS_BATTLEARMOR` | 537 (0x219) |  |  | Champion's Battlearmor |
-| `CHAMPIONS_STORMCALLER` | 538 (0x21A) |  |  | Champion's Stormcaller |
-| `CHAMPIONS_REFUGE` | 539 (0x21B) |  |  | Champion's Refuge |
-| `CHAMPIONS_INVESTITURE` | 540 (0x21C) |  |  | Champion's Investiture |
-| `CHAMPIONS_DREADGEAR` | 541 (0x21D) |  |  | Champion's Dreadgear |
-| `CHAMPIONS_ARCANUM` | 542 (0x21E) |  |  | Champion's Arcanum |
-| `CHAMPIONS_PURSUANCE` | 543 (0x21F) |  |  | Champion's Pursuance |
-| `LIEUTENANT_COMMANDERS_REDOUBT` | 544 (0x220) |  |  | Lieutenant Commander's Redoubt |
-| `LIEUTENANT_COMMANDERS_BATTLEARMOR` | 545 (0x221) |  |  | Lieutenant Commander's Battlearmor |
-| `LIEUTENANT_COMMANDERS_ARCANUM` | 546 (0x222) |  |  | Lieutenant Commander's Arcanum |
-| `LIEUTENANT_COMMANDERS_DREADGEAR` | 547 (0x223) |  |  | Lieutenant Commander's Dreadgear |
-| `LIEUTENANT_COMMANDERS_GUARD` | 548 (0x224) |  |  | Lieutenant Commander's Guard |
-| `LIEUTENANT_COMMANDERS_INVESTITURE` | 549 (0x225) |  |  | Lieutenant Commander's Investiture |
-| `LIEUTENANT_COMMANDERS_PURSUANCE` | 550 (0x226) |  |  | Lieutenant Commander's Pursuance |
-| `LIEUTENANT_COMMANDERS_REFUGE` | 551 (0x227) |  |  | Lieutenant Commander's Refuge |
+| Enumerator | Value  | Comment | Display |
+| --------- | -------- | ------- | ------- |
+| `NONE` | 0 (0x00) |  |  |
+| `THE_GLADIATOR` | 1 (0x01) |  |  |
+| `DAL_RENDS_ARMS` | 41 (0x29) |  | Dal'Rend's Arms |
+| `SPIDERS_KISS` | 65 (0x41) |  | Spider's Kiss |
+| `THE_POSTMASTER` | 81 (0x51) |  |  |
+| `CADAVEROUS_GARB` | 121 (0x79) |  |  |
+| `NECROPILE_RAIMENT` | 122 (0x7A) |  |  |
+| `BLOODMAIL_REGALIA` | 123 (0x7B) |  |  |
+| `DEATHBONE_GUARDIAN` | 124 (0x7C) |  |  |
+| `VOLCANIC_ARMOR` | 141 (0x8D) |  |  |
+| `STORMSHROUD_ARMOR` | 142 (0x8E) |  |  |
+| `DEVILSAUR_ARMOR` | 143 (0x8F) |  |  |
+| `IRONFEATHER_ARMOR` | 144 (0x90) |  |  |
+| `DEFIAS_LEATHER` | 161 (0xA1) |  |  |
+| `EMBRACE_OF_THE_VIPER` | 162 (0xA2) |  |  |
+| `CHAIN_OF_THE_SCARLET_CRUSADE` | 163 (0xA3) |  |  |
+| `MAGISTERS_REGALIA` | 181 (0xB5) |  | Magister's Regalia |
+| `VESTMENTS_OF_THE_DEVOUT` | 182 (0xB6) |  |  |
+| `DREADMIST_RAIMENT` | 183 (0xB7) |  |  |
+| `SHADOWCRAFT_ARMOR` | 184 (0xB8) |  |  |
+| `WILDHEART_RAIMENT` | 185 (0xB9) |  |  |
+| `BEASTSTALKER_ARMOR` | 186 (0xBA) |  |  |
+| `THE_ELEMENTS` | 187 (0xBB) |  |  |
+| `LIGHTFORGE_ARMOR` | 188 (0xBC) |  |  |
+| `BATTLEGEAR_OF_VALOR` | 189 (0xBD) |  |  |
+| `ARCANIST_REGALIA` | 201 (0xC9) |  |  |
+| `VESTMENTS_OF_PROPHECY` | 202 (0xCA) |  |  |
+| `FELHEART_RAIMENT` | 203 (0xCB) |  |  |
+| `NIGHTSLAYER_ARMOR` | 204 (0xCC) |  |  |
+| `CENARION_RAIMENT` | 205 (0xCD) |  |  |
+| `GIANTSTALKER_ARMOR` | 206 (0xCE) |  |  |
+| `THE_EARTHFURY` | 207 (0xCF) |  |  |
+| `LAWBRINGER_ARMOR` | 208 (0xD0) |  |  |
+| `BATTLEGEAR_OF_MIGHT` | 209 (0xD1) |  |  |
+| `NETHERWIND_REGALIA` | 210 (0xD2) |  |  |
+| `VESTMENTS_OF_TRANSCENDENCE` | 211 (0xD3) |  |  |
+| `NEMESIS_RAIMENT` | 212 (0xD4) |  |  |
+| `BLOODFANG_ARMOR` | 213 (0xD5) |  |  |
+| `STORMRAGE_RAIMENT` | 214 (0xD6) |  |  |
+| `DRAGONSTALKER_ARMOR` | 215 (0xD7) |  |  |
+| `THE_TEN_STORMS` | 216 (0xD8) |  |  |
+| `JUDGEMENT_ARMOR` | 217 (0xD9) |  |  |
+| `BATTLEGEAR_OF_WRATH` | 218 (0xDA) |  |  |
+| `GARB_OF_THERO_SHAN` | 221 (0xDD) |  | Garb of Thero-shan |
+| `SHARD_OF_THE_GODS` | 241 (0xF1) |  |  |
+| `SPIRIT_OF_ESKHANDAR` | 261 (0x105) |  |  |
+| `CHAMPIONS_BATTLEGEAR` | 281 (0x119) |  | Champion's Battlegear |
+| `LIEUTENANT_COMMANDERS_BATTLEGEAR` | 282 (0x11A) |  | Lieutenant Commander's Battlegear |
+| `CHAMPIONS_EARTHSHAKER` | 301 (0x12D) |  | Champion's Earthshaker |
+| `IMPERIAL_PLATE` | 321 (0x141) |  |  |
+| `CHAMPIONS_REGALIA` | 341 (0x155) |  | Champion's Regalia |
+| `CHAMPIONS_RAIMENT` | 342 (0x156) |  | Champion's Raiment |
+| `LIEUTENANT_COMMANDERS_REGALIA` | 343 (0x157) |  | Lieutenant Commander's Regalia |
+| `LIEUTENANT_COMMANDERS_RAIMENT` | 344 (0x158) |  | Lieutenant Commander's Raiment |
+| `CHAMPIONS_THREADS` | 345 (0x159) |  | Champion's Threads |
+| `LIEUTENANT_COMMANDERS_THREADS` | 346 (0x15A) |  | Lieutenant Commander's Threads |
+| `CHAMPIONS_VESTMENTS` | 347 (0x15B) |  | Champion's Vestments |
+| `LIEUTENANT_COMMANDERS_VESTMENTS` | 348 (0x15C) |  | Lieutenant Commander's Vestments |
+| `CHAMPIONS_PURSUIT` | 361 (0x169) |  | Champion's Pursuit |
+| `LIEUTENANT_COMMANDERS_PURSUIT` | 362 (0x16A) |  | Lieutenant Commander's Pursuit |
+| `LIEUTENANT_COMMANDERS_SANCTUARY` | 381 (0x17D) |  | Lieutenant Commander's Sanctuary |
+| `CHAMPIONS_SANCTUARY` | 382 (0x17E) |  | Champion's Sanctuary |
+| `WARLORDS_BATTLEGEAR` | 383 (0x17F) |  | Warlord's Battlegear |
+| `FIELD_MARSHALS_BATTLEGEAR` | 384 (0x180) |  | Field Marshal's Battlegear |
+| `WARLORDS_EARTHSHAKER` | 386 (0x182) |  | Warlord's Earthshaker |
+| `WARLORDS_REGALIA` | 387 (0x183) |  | Warlord's Regalia |
+| `FIELD_MARSHALS_REGALIA` | 388 (0x184) |  | Field Marshal's Regalia |
+| `FIELD_MARSHALS_RAIMENT` | 389 (0x185) |  | Field Marshal's Raiment |
+| `WARLORDS_RAIMENT` | 390 (0x186) |  | Warlord's Raiment |
+| `WARLORDS_THREADS` | 391 (0x187) |  | Warlord's Threads |
+| `FIELD_MARSHALS_THREADS` | 392 (0x188) |  | Field Marshal's Threads |
+| `WARLORDS_VESTMENTS` | 393 (0x189) |  | Warlord's Vestments |
+| `FIELD_MARSHALS_VESTMENTS` | 394 (0x18A) |  | Field Marshal's Vestments |
+| `FIELD_MARSHALS_PURSUIT` | 395 (0x18B) |  | Field Marshal's Pursuit |
+| `WARLORDS_PURSUIT` | 396 (0x18C) |  | Warlord's Pursuit |
+| `FIELD_MARSHALS_SANCTUARY` | 397 (0x18D) |  | Field Marshal's Sanctuary |
+| `WARLORDS_SANCTUARY` | 398 (0x18E) |  | Warlord's Sanctuary |
+| `LIEUTENANT_COMMANDERS_AEGIS` | 401 (0x191) |  | Lieutenant Commander's Aegis |
+| `FIELD_MARSHALS_AEGIS` | 402 (0x192) |  | Field Marshal's Aegis |
+| `BLOODVINE_GARB` | 421 (0x1A5) |  |  |
+| `PRIMAL_BATSKIN` | 441 (0x1B9) |  |  |
+| `BLOOD_TIGER_HARNESS` | 442 (0x1BA) |  |  |
+| `BLOODSOUL_EMBRACE` | 443 (0x1BB) |  |  |
+| `THE_DARKSOUL` | 444 (0x1BC) |  |  |
+| `THE_TWIN_BLADES_OF_HAKKARI` | 461 (0x1CD) |  |  |
+| `ZANZILS_CONCENTRATION` | 462 (0x1CE) |  | Zanzil's Concentration |
+| `PRIMAL_BLESSING` | 463 (0x1CF) |  |  |
+| `OVERLORDS_RESOLUTION` | 464 (0x1D0) |  | Overlord's Resolution |
+| `PRAYER_OF_THE_PRIMAL` | 465 (0x1D1) |  |  |
+| `MAJOR_MOJO_INFUSION` | 466 (0x1D2) |  |  |
+| `THE_HIGHLANDERS_RESOLUTION` | 467 (0x1D3) |  | The Highlander's Resolution |
+| `THE_HIGHLANDERS_RESOLVE` | 468 (0x1D4) |  | The Highlander's Resolve |
+| `THE_HIGHLANDERS_DETERMINATION` | 469 (0x1D5) |  | The Highlander's Determination |
+| `THE_HIGHLANDERS_FORTITUDE` | 470 (0x1D6) |  | The Highlander's Fortitude |
+| `THE_HIGHLANDERS_PURPOSE` | 471 (0x1D7) |  | The Highlander's Purpose |
+| `THE_HIGHLANDERS_WILL` | 472 (0x1D8) |  | The Highlander's Will |
+| `THE_HIGHLANDERS_INTENT` | 473 (0x1D9) |  | The Highlander's Intent |
+| `VINDICATORS_BATTLEGEAR` | 474 (0x1DA) |  | Vindicator's Battlegear |
+| `FREETHINKERS_ARMOR` | 475 (0x1DB) |  | Freethinker's Armor |
+| `AUGURS_REGALIA` | 476 (0x1DC) |  | Augur's Regalia |
+| `PREDATORS_ARMOR` | 477 (0x1DD) |  | Predator's Armor |
+| `MADCAPS_OUTFIT` | 478 (0x1DE) |  | Madcap's Outfit |
+| `HARUSPEXS_GARB` | 479 (0x1DF) |  | Haruspex's Garb |
+| `CONFESSORS_RAIMENT` | 480 (0x1E0) |  | Confessor's Raiment |
+| `DEMONIACS_THREADS` | 481 (0x1E1) |  | Demoniac's Threads |
+| `ILLUSIONISTS_ATTIRE` | 482 (0x1E2) |  | Illusionist's Attire |
+| `THE_DEFILERS_DETERMINATION` | 483 (0x1E3) |  | The Defiler's Determination |
+| `THE_DEFILERS_FORTITUDE` | 484 (0x1E4) |  | The Defiler's Fortitude |
+| `THE_DEFILERS_INTENT` | 485 (0x1E5) |  | The Defiler's Intent |
+| `THE_DEFILERS_PURPOSE` | 486 (0x1E6) |  | The Defiler's Purpose |
+| `THE_DEFILERS_RESOLUTION` | 487 (0x1E7) |  | The Defiler's Resolution |
+| `THE_DEFILERS_WILL` | 488 (0x1E8) |  | The Defiler's Will |
+| `BLACK_DRAGON_MAIL` | 489 (0x1E9) |  |  |
+| `GREEN_DRAGON_MAIL` | 490 (0x1EA) |  |  |
+| `BLUE_DRAGON_MAIL` | 491 (0x1EB) |  |  |
+| `TWILIGHT_TRAPPINGS` | 492 (0x1EC) |  |  |
+| `GENESIS_RAIMENT` | 493 (0x1ED) |  |  |
+| `SYMBOLS_OF_UNENDING_LIFE` | 494 (0x1EE) |  |  |
+| `BATTLEGEAR_OF_UNYIELDING_STRENGTH` | 495 (0x1EF) |  |  |
+| `CONQUERORS_BATTLEGEAR` | 496 (0x1F0) |  | Conqueror's Battlegear |
+| `DEATHDEALERS_EMBRACE` | 497 (0x1F1) |  | Deathdealer's Embrace |
+| `EMBLEMS_OF_VEILED_SHADOWS` | 498 (0x1F2) |  |  |
+| `DOOMCALLERS_ATTIRE` | 499 (0x1F3) |  | Doomcaller's Attire |
+| `IMPLEMENTS_OF_UNSPOKEN_NAMES` | 500 (0x1F4) |  |  |
+| `STORMCALLERS_GARB` | 501 (0x1F5) |  | Stormcaller's Garb |
+| `GIFT_OF_THE_GATHERING_STORM` | 502 (0x1F6) |  |  |
+| `ENIGMA_VESTMENTS` | 503 (0x1F7) |  |  |
+| `TRAPPINGS_OF_VAULTED_SECRETS` | 504 (0x1F8) |  |  |
+| `AVENGERS_BATTLEGEAR` | 505 (0x1F9) |  | Avenger's Battlegear |
+| `BATTLEGEAR_OF_ETERNAL_JUSTICE` | 506 (0x1FA) |  |  |
+| `GARMENTS_OF_THE_ORACLE` | 507 (0x1FB) |  |  |
+| `FINERY_OF_INFINITE_WISDOM` | 508 (0x1FC) |  |  |
+| `STRIKERS_GARB` | 509 (0x1FD) |  | Striker's Garb |
+| `TRAPPINGS_OF_THE_UNSEEN_PATH` | 510 (0x1FE) |  |  |
+| `BATTLEGEAR_OF_HEROISM` | 511 (0x1FF) |  |  |
+| `DARKMANTLE_ARMOR` | 512 (0x200) |  |  |
+| `FERALHEART_RAIMENT` | 513 (0x201) |  |  |
+| `VESTMENTS_OF_THE_VIRTUOUS` | 514 (0x202) |  |  |
+| `BEASTMASTER_ARMOR` | 515 (0x203) |  |  |
+| `SOULFORGE_ARMOR` | 516 (0x204) |  |  |
+| `SORCERERS_REGALIA` | 517 (0x205) |  | Sorcerer's Regalia |
+| `DEATHMIST_RAIMENT` | 518 (0x206) |  |  |
+| `THE_FIVE_THUNDERS` | 519 (0x207) |  |  |
+| `IRONWEAVE_BATTLESUIT` | 520 (0x208) |  |  |
+| `DREAMWALKER_RAIMENT` | 521 (0x209) |  |  |
+| `CHAMPIONS_GUARD` | 522 (0x20A) |  | Champion's Guard |
+| `DREADNAUGHTS_BATTLEGEAR` | 523 (0x20B) |  | Dreadnaught's Battlegear |
+| `BONESCYTHE_ARMOR` | 524 (0x20C) |  |  |
+| `VESTMENTS_OF_FAITH` | 525 (0x20D) |  |  |
+| `FROSTFIRE_REGALIA` | 526 (0x20E) |  |  |
+| `THE_EARTHSHATTERER` | 527 (0x20F) |  |  |
+| `REDEMPTION_ARMOR` | 528 (0x210) |  |  |
+| `PLAGUEHEART_RAIMENT` | 529 (0x211) |  |  |
+| `CRYPTSTALKER_ARMOR` | 530 (0x212) |  |  |
+| `BATTLEGEAR_OF_UNDEAD_SLAYING` | 533 (0x215) |  |  |
+| `UNDEAD_SLAYERS_ARMOR` | 534 (0x216) |  | Undead Slayer's Armor |
+| `GARB_OF_THE_UNDEAD_SLAYER` | 535 (0x217) |  |  |
+| `REGALIA_OF_UNDEAD_CLEANSING` | 536 (0x218) |  |  |
+| `CHAMPIONS_BATTLEARMOR` | 537 (0x219) |  | Champion's Battlearmor |
+| `CHAMPIONS_STORMCALLER` | 538 (0x21A) |  | Champion's Stormcaller |
+| `CHAMPIONS_REFUGE` | 539 (0x21B) |  | Champion's Refuge |
+| `CHAMPIONS_INVESTITURE` | 540 (0x21C) |  | Champion's Investiture |
+| `CHAMPIONS_DREADGEAR` | 541 (0x21D) |  | Champion's Dreadgear |
+| `CHAMPIONS_ARCANUM` | 542 (0x21E) |  | Champion's Arcanum |
+| `CHAMPIONS_PURSUANCE` | 543 (0x21F) |  | Champion's Pursuance |
+| `LIEUTENANT_COMMANDERS_REDOUBT` | 544 (0x220) |  | Lieutenant Commander's Redoubt |
+| `LIEUTENANT_COMMANDERS_BATTLEARMOR` | 545 (0x221) |  | Lieutenant Commander's Battlearmor |
+| `LIEUTENANT_COMMANDERS_ARCANUM` | 546 (0x222) |  | Lieutenant Commander's Arcanum |
+| `LIEUTENANT_COMMANDERS_DREADGEAR` | 547 (0x223) |  | Lieutenant Commander's Dreadgear |
+| `LIEUTENANT_COMMANDERS_GUARD` | 548 (0x224) |  | Lieutenant Commander's Guard |
+| `LIEUTENANT_COMMANDERS_INVESTITURE` | 549 (0x225) |  | Lieutenant Commander's Investiture |
+| `LIEUTENANT_COMMANDERS_PURSUANCE` | 550 (0x226) |  | Lieutenant Commander's Pursuance |
+| `LIEUTENANT_COMMANDERS_REFUGE` | 551 (0x227) |  | Lieutenant Commander's Refuge |
 
 Used in:
 * [SMSG_ITEM_QUERY_SINGLE_RESPONSE](smsg_item_query_single_response.md)
@@ -752,382 +752,382 @@ enum ItemSet : u16 {
 ### Type
 The basic type is `u16`, a 2 byte (16 bit) little endian integer.
 ### Enumerators
-| Enumerator | Value  | Description | Comment | Display |
-| --------- | -------- | ----------- | ------- | ------- |
-| `NONE` | 0 (0x00) |  |  |  |
-| `THE_GLADIATOR` | 1 (0x01) |  |  |  |
-| `DAL_RENDS_ARMS` | 41 (0x29) |  |  | Dal'Rend's Arms |
-| `SPIDERS_KISS` | 65 (0x41) |  |  | Spider's Kiss |
-| `THE_POSTMASTER` | 81 (0x51) |  |  |  |
-| `CADAVEROUS_GARB` | 121 (0x79) |  |  |  |
-| `NECROPILE_RAIMENT` | 122 (0x7A) |  |  |  |
-| `BLOODMAIL_REGALIA` | 123 (0x7B) |  |  |  |
-| `DEATHBONE_GUARDIAN` | 124 (0x7C) |  |  |  |
-| `VOLCANIC_ARMOR` | 141 (0x8D) |  |  |  |
-| `STORMSHROUD_ARMOR` | 142 (0x8E) |  |  |  |
-| `DEVILSAUR_ARMOR` | 143 (0x8F) |  |  |  |
-| `IRONFEATHER_ARMOR` | 144 (0x90) |  |  |  |
-| `DEFIAS_LEATHER` | 161 (0xA1) |  |  |  |
-| `EMBRACE_OF_THE_VIPER` | 162 (0xA2) |  |  |  |
-| `CHAIN_OF_THE_SCARLET_CRUSADE` | 163 (0xA3) |  |  |  |
-| `MAGISTERS_REGALIA` | 181 (0xB5) |  |  | Magister's Regalia |
-| `VESTMENTS_OF_THE_DEVOUT` | 182 (0xB6) |  |  |  |
-| `DREADMIST_RAIMENT` | 183 (0xB7) |  |  |  |
-| `SHADOWCRAFT_ARMOR` | 184 (0xB8) |  |  |  |
-| `WILDHEART_RAIMENT` | 185 (0xB9) |  |  |  |
-| `BEASTSTALKER_ARMOR` | 186 (0xBA) |  |  |  |
-| `THE_ELEMENTS` | 187 (0xBB) |  |  |  |
-| `LIGHTFORGE_ARMOR` | 188 (0xBC) |  |  |  |
-| `BATTLEGEAR_OF_VALOR` | 189 (0xBD) |  |  |  |
-| `ARCANIST_REGALIA` | 201 (0xC9) |  |  |  |
-| `VESTMENTS_OF_PROPHECY` | 202 (0xCA) |  |  |  |
-| `FELHEART_RAIMENT` | 203 (0xCB) |  |  |  |
-| `NIGHTSLAYER_ARMOR` | 204 (0xCC) |  |  |  |
-| `CENARION_RAIMENT` | 205 (0xCD) |  |  |  |
-| `GIANTSTALKER_ARMOR` | 206 (0xCE) |  |  |  |
-| `THE_EARTHFURY` | 207 (0xCF) |  |  |  |
-| `LAWBRINGER_ARMOR` | 208 (0xD0) |  |  |  |
-| `BATTLEGEAR_OF_MIGHT` | 209 (0xD1) |  |  |  |
-| `NETHERWIND_REGALIA` | 210 (0xD2) |  |  |  |
-| `VESTMENTS_OF_TRANSCENDENCE` | 211 (0xD3) |  |  |  |
-| `NEMESIS_RAIMENT` | 212 (0xD4) |  |  |  |
-| `BLOODFANG_ARMOR` | 213 (0xD5) |  |  |  |
-| `STORMRAGE_RAIMENT` | 214 (0xD6) |  |  |  |
-| `DRAGONSTALKER_ARMOR` | 215 (0xD7) |  |  |  |
-| `THE_TEN_STORMS` | 216 (0xD8) |  |  |  |
-| `JUDGEMENT_ARMOR` | 217 (0xD9) |  |  |  |
-| `BATTLEGEAR_OF_WRATH` | 218 (0xDA) |  |  |  |
-| `GARB_OF_THERO_SHAN` | 221 (0xDD) |  |  | Garb of Thero-shan |
-| `SHARD_OF_THE_GODS` | 241 (0xF1) |  |  |  |
-| `SPIRIT_OF_ESKHANDAR` | 261 (0x105) |  |  |  |
-| `CHAMPIONS_BATTLEGEAR` | 281 (0x119) |  |  | Champion's Battlegear |
-| `LIEUTENANT_COMMANDERS_BATTLEGEAR` | 282 (0x11A) |  |  | Lieutenant Commander's Battlegear |
-| `CHAMPIONS_EARTHSHAKER` | 301 (0x12D) |  |  | Champion's Earthshaker |
-| `IMPERIAL_PLATE` | 321 (0x141) |  |  |  |
-| `CHAMPIONS_REGALIA` | 341 (0x155) |  |  | Champion's Regalia |
-| `CHAMPIONS_RAIMENT` | 342 (0x156) |  |  | Champion's Raiment |
-| `LIEUTENANT_COMMANDERS_REGALIA` | 343 (0x157) |  |  | Lieutenant Commander's Regalia |
-| `LIEUTENANT_COMMANDERS_RAIMENT` | 344 (0x158) |  |  | Lieutenant Commander's Raiment |
-| `CHAMPIONS_THREADS` | 345 (0x159) |  |  | Champion's Threads |
-| `LIEUTENANT_COMMANDERS_THREADS` | 346 (0x15A) |  |  | Lieutenant Commander's Threads |
-| `CHAMPIONS_VESTMENTS` | 347 (0x15B) |  |  | Champion's Vestments |
-| `LIEUTENANT_COMMANDERS_VESTMENTS` | 348 (0x15C) |  |  | Lieutenant Commander's Vestments |
-| `CHAMPIONS_PURSUIT` | 361 (0x169) |  |  | Champion's Pursuit |
-| `LIEUTENANT_COMMANDERS_PURSUIT` | 362 (0x16A) |  |  | Lieutenant Commander's Pursuit |
-| `LIEUTENANT_COMMANDERS_SANCTUARY` | 381 (0x17D) |  |  | Lieutenant Commander's Sanctuary |
-| `CHAMPIONS_SANCTUARY` | 382 (0x17E) |  |  | Champion's Sanctuary |
-| `WARLORDS_BATTLEGEAR` | 383 (0x17F) |  |  | Warlord's Battlegear |
-| `FIELD_MARSHALS_BATTLEGEAR` | 384 (0x180) |  |  | Field Marshal's Battlegear |
-| `WARLORDS_EARTHSHAKER` | 386 (0x182) |  |  | Warlord's Earthshaker |
-| `WARLORDS_REGALIA` | 387 (0x183) |  |  | Warlord's Regalia |
-| `FIELD_MARSHALS_REGALIA` | 388 (0x184) |  |  | Field Marshal's Regalia |
-| `FIELD_MARSHALS_RAIMENT` | 389 (0x185) |  |  | Field Marshal's Raiment |
-| `WARLORDS_RAIMENT` | 390 (0x186) |  |  | Warlord's Raiment |
-| `WARLORDS_THREADS` | 391 (0x187) |  |  | Warlord's Threads |
-| `FIELD_MARSHALS_THREADS` | 392 (0x188) |  |  | Field Marshal's Threads |
-| `WARLORDS_VESTMENTS` | 393 (0x189) |  |  | Warlord's Vestments |
-| `FIELD_MARSHALS_VESTMENTS` | 394 (0x18A) |  |  | Field Marshal's Vestments |
-| `FIELD_MARSHALS_PURSUIT` | 395 (0x18B) |  |  | Field Marshal's Pursuit |
-| `WARLORDS_PURSUIT` | 396 (0x18C) |  |  | Warlord's Pursuit |
-| `FIELD_MARSHALS_SANCTUARY` | 397 (0x18D) |  |  | Field Marshal's Sanctuary |
-| `WARLORDS_SANCTUARY` | 398 (0x18E) |  |  | Warlord's Sanctuary |
-| `LIEUTENANT_COMMANDERS_AEGIS` | 401 (0x191) |  |  | Lieutenant Commander's Aegis |
-| `FIELD_MARSHALS_AEGIS` | 402 (0x192) |  |  | Field Marshal's Aegis |
-| `BLOODVINE_GARB` | 421 (0x1A5) |  |  |  |
-| `PRIMAL_BATSKIN` | 441 (0x1B9) |  |  |  |
-| `BLOOD_TIGER_HARNESS` | 442 (0x1BA) |  |  |  |
-| `BLOODSOUL_EMBRACE` | 443 (0x1BB) |  |  |  |
-| `THE_DARKSOUL` | 444 (0x1BC) |  |  |  |
-| `THE_TWIN_BLADES_OF_HAKKARI` | 461 (0x1CD) |  |  |  |
-| `ZANZILS_CONCENTRATION` | 462 (0x1CE) |  |  | Zanzil's Concentration |
-| `PRIMAL_BLESSING` | 463 (0x1CF) |  |  |  |
-| `OVERLORDS_RESOLUTION` | 464 (0x1D0) |  |  | Overlord's Resolution |
-| `PRAYER_OF_THE_PRIMAL` | 465 (0x1D1) |  |  |  |
-| `MAJOR_MOJO_INFUSION` | 466 (0x1D2) |  |  |  |
-| `THE_HIGHLANDERS_RESOLUTION` | 467 (0x1D3) |  |  | The Highlander's Resolution |
-| `THE_HIGHLANDERS_RESOLVE` | 468 (0x1D4) |  |  | The Highlander's Resolve |
-| `THE_HIGHLANDERS_DETERMINATION` | 469 (0x1D5) |  |  | The Highlander's Determination |
-| `THE_HIGHLANDERS_FORTITUDE` | 470 (0x1D6) |  |  | The Highlander's Fortitude |
-| `THE_HIGHLANDERS_PURPOSE` | 471 (0x1D7) |  |  | The Highlander's Purpose |
-| `THE_HIGHLANDERS_WILL` | 472 (0x1D8) |  |  | The Highlander's Will |
-| `THE_HIGHLANDERS_INTENT` | 473 (0x1D9) |  |  | The Highlander's Intent |
-| `VINDICATORS_BATTLEGEAR` | 474 (0x1DA) |  |  | Vindicator's Battlegear |
-| `FREETHINKERS_ARMOR` | 475 (0x1DB) |  |  | Freethinker's Armor |
-| `AUGURS_REGALIA` | 476 (0x1DC) |  |  | Augur's Regalia |
-| `PREDATORS_ARMOR` | 477 (0x1DD) |  |  | Predator's Armor |
-| `MADCAPS_OUTFIT` | 478 (0x1DE) |  |  | Madcap's Outfit |
-| `HARUSPEXS_GARB` | 479 (0x1DF) |  |  | Haruspex's Garb |
-| `CONFESSORS_RAIMENT` | 480 (0x1E0) |  |  | Confessor's Raiment |
-| `DEMONIACS_THREADS` | 481 (0x1E1) |  |  | Demoniac's Threads |
-| `ILLUSIONISTS_ATTIRE` | 482 (0x1E2) |  |  | Illusionist's Attire |
-| `THE_DEFILERS_DETERMINATION` | 483 (0x1E3) |  |  | The Defiler's Determination |
-| `THE_DEFILERS_FORTITUDE` | 484 (0x1E4) |  |  | The Defiler's Fortitude |
-| `THE_DEFILERS_INTENT` | 485 (0x1E5) |  |  | The Defiler's Intent |
-| `THE_DEFILERS_PURPOSE` | 486 (0x1E6) |  |  | The Defiler's Purpose |
-| `THE_DEFILERS_RESOLUTION` | 487 (0x1E7) |  |  | The Defiler's Resolution |
-| `THE_DEFILERS_WILL` | 488 (0x1E8) |  |  | The Defiler's Will |
-| `BLACK_DRAGON_MAIL` | 489 (0x1E9) |  |  |  |
-| `GREEN_DRAGON_MAIL` | 490 (0x1EA) |  |  |  |
-| `BLUE_DRAGON_MAIL` | 491 (0x1EB) |  |  |  |
-| `TWILIGHT_TRAPPINGS` | 492 (0x1EC) |  |  |  |
-| `GENESIS_RAIMENT` | 493 (0x1ED) |  |  |  |
-| `SYMBOLS_OF_UNENDING_LIFE` | 494 (0x1EE) |  |  |  |
-| `BATTLEGEAR_OF_UNYIELDING_STRENGTH` | 495 (0x1EF) |  |  |  |
-| `CONQUERORS_BATTLEGEAR` | 496 (0x1F0) |  |  | Conqueror's Battlegear |
-| `DEATHDEALERS_EMBRACE` | 497 (0x1F1) |  |  | Deathdealer's Embrace |
-| `EMBLEMS_OF_VEILED_SHADOWS` | 498 (0x1F2) |  |  |  |
-| `DOOMCALLERS_ATTIRE` | 499 (0x1F3) |  |  | Doomcaller's Attire |
-| `IMPLEMENTS_OF_UNSPOKEN_NAMES` | 500 (0x1F4) |  |  |  |
-| `STORMCALLERS_GARB` | 501 (0x1F5) |  |  | Stormcaller's Garb |
-| `GIFT_OF_THE_GATHERING_STORM` | 502 (0x1F6) |  |  |  |
-| `ENIGMA_VESTMENTS` | 503 (0x1F7) |  |  |  |
-| `TRAPPINGS_OF_VAULTED_SECRETS` | 504 (0x1F8) |  |  |  |
-| `AVENGERS_BATTLEGEAR` | 505 (0x1F9) |  |  | Avenger's Battlegear |
-| `BATTLEGEAR_OF_ETERNAL_JUSTICE` | 506 (0x1FA) |  |  |  |
-| `GARMENTS_OF_THE_ORACLE` | 507 (0x1FB) |  |  |  |
-| `FINERY_OF_INFINITE_WISDOM` | 508 (0x1FC) |  |  |  |
-| `STRIKERS_GARB` | 509 (0x1FD) |  |  | Striker's Garb |
-| `TRAPPINGS_OF_THE_UNSEEN_PATH` | 510 (0x1FE) |  |  |  |
-| `BATTLEGEAR_OF_HEROISM` | 511 (0x1FF) |  |  |  |
-| `DARKMANTLE_ARMOR` | 512 (0x200) |  |  |  |
-| `FERALHEART_RAIMENT` | 513 (0x201) |  |  |  |
-| `VESTMENTS_OF_THE_VIRTUOUS` | 514 (0x202) |  |  |  |
-| `BEASTMASTER_ARMOR` | 515 (0x203) |  |  |  |
-| `SOULFORGE_ARMOR` | 516 (0x204) |  |  |  |
-| `SORCERERS_REGALIA` | 517 (0x205) |  |  | Sorcerer's Regalia |
-| `DEATHMIST_RAIMENT` | 518 (0x206) |  |  |  |
-| `THE_FIVE_THUNDERS` | 519 (0x207) |  |  |  |
-| `IRONWEAVE_BATTLESUIT` | 520 (0x208) |  |  |  |
-| `DREAMWALKER_RAIMENT` | 521 (0x209) |  |  |  |
-| `CHAMPIONS_GUARD` | 522 (0x20A) |  |  | Champion's Guard |
-| `DREADNAUGHTS_BATTLEGEAR` | 523 (0x20B) |  |  | Dreadnaught's Battlegear |
-| `BONESCYTHE_ARMOR` | 524 (0x20C) |  |  |  |
-| `VESTMENTS_OF_FAITH` | 525 (0x20D) |  |  |  |
-| `FROSTFIRE_REGALIA` | 526 (0x20E) |  |  |  |
-| `THE_EARTHSHATTERER` | 527 (0x20F) |  |  |  |
-| `REDEMPTION_ARMOR` | 528 (0x210) |  |  |  |
-| `PLAGUEHEART_RAIMENT` | 529 (0x211) |  |  |  |
-| `CRYPTSTALKER_ARMOR` | 530 (0x212) |  |  |  |
-| `BATTLEGEAR_OF_UNDEAD_SLAYING` | 533 (0x215) |  |  |  |
-| `UNDEAD_SLAYERS_ARMOR` | 534 (0x216) |  |  | Undead Slayer's Armor |
-| `GARB_OF_THE_UNDEAD_SLAYER` | 535 (0x217) |  |  |  |
-| `REGALIA_OF_UNDEAD_CLEANSING` | 536 (0x218) |  |  |  |
-| `CHAMPIONS_BATTLEARMOR` | 537 (0x219) |  |  | Champion's Battlearmor |
-| `CHAMPIONS_STORMCALLER` | 538 (0x21A) |  |  | Champion's Stormcaller |
-| `CHAMPIONS_REFUGE` | 539 (0x21B) |  |  | Champion's Refuge |
-| `CHAMPIONS_INVESTITURE` | 540 (0x21C) |  |  | Champion's Investiture |
-| `CHAMPIONS_DREADGEAR` | 541 (0x21D) |  |  | Champion's Dreadgear |
-| `CHAMPIONS_ARCANUM` | 542 (0x21E) |  |  | Champion's Arcanum |
-| `CHAMPIONS_PURSUANCE` | 543 (0x21F) |  |  | Champion's Pursuance |
-| `LIEUTENANT_COMMANDERS_REDOUBT` | 544 (0x220) |  |  | Lieutenant Commander's Redoubt |
-| `LIEUTENANT_COMMANDERS_BATTLEARMOR` | 545 (0x221) |  |  | Lieutenant Commander's Battlearmor |
-| `LIEUTENANT_COMMANDERS_ARCANUM` | 546 (0x222) |  |  | Lieutenant Commander's Arcanum |
-| `LIEUTENANT_COMMANDERS_DREADGEAR` | 547 (0x223) |  |  | Lieutenant Commander's Dreadgear |
-| `LIEUTENANT_COMMANDERS_GUARD` | 548 (0x224) |  |  | Lieutenant Commander's Guard |
-| `LIEUTENANT_COMMANDERS_INVESTITURE` | 549 (0x225) |  |  | Lieutenant Commander's Investiture |
-| `LIEUTENANT_COMMANDERS_PURSUANCE` | 550 (0x226) |  |  | Lieutenant Commander's Pursuance |
-| `LIEUTENANT_COMMANDERS_REFUGE` | 551 (0x227) |  |  | Lieutenant Commander's Refuge |
-| `WRATH_OF_SPELLFIRE` | 552 (0x228) |  |  |  |
-| `SHADOWS_EMBRACE` | 553 (0x229) |  |  | Shadow's Embrace |
-| `PRIMAL_MOONCLOTH` | 554 (0x22A) |  |  |  |
-| `NETHERWEAVE_VESTMENTS` | 555 (0x22B) |  |  |  |
-| `IMBUED_NETHERWEAVE` | 556 (0x22C) |  |  |  |
-| `SOULCLOTH_EMBRACE` | 557 (0x22D) |  |  |  |
-| `ARCANOWEAVE_VESTMENTS` | 558 (0x22E) |  |  |  |
-| `SPELLSTRIKE_INFUSION` | 559 (0x22F) |  |  |  |
-| `FEL_IRON_PLATE` | 560 (0x230) |  |  |  |
-| `FEL_IRON_CHAIN` | 561 (0x231) |  |  |  |
-| `ADAMANTITE_BATTLEGEAR` | 562 (0x232) |  |  |  |
-| `ENCHANTED_ADAMANTITE_ARMOR` | 563 (0x233) |  |  |  |
-| `FLAME_GUARD` | 564 (0x234) |  |  |  |
-| `KHORIUM_WARD` | 565 (0x235) |  |  |  |
-| `BURNING_RAGE` | 566 (0x236) |  |  |  |
-| `GLADIATORS_BATTLEGEAR` | 567 (0x237) |  |  | Gladiator's Battlegear |
-| `GLADIATORS_DREADGEAR` | 568 (0x238) |  |  | Gladiator's Dreadgear |
-| `FAITH_IN_FELSTEEL` | 569 (0x239) |  |  |  |
-| `THE_UNYIELDING` | 570 (0x23A) |  |  |  |
-| `WHITEMEND_WISDOM` | 571 (0x23B) |  |  |  |
-| `BATTLECAST_GARB` | 572 (0x23C) |  |  |  |
-| `FEL_SKIN` | 573 (0x23D) |  |  |  |
-| `STRENGTH_OF_THE_CLEFTHOOF` | 574 (0x23E) |  |  |  |
-| `FELSTALKER_ARMOR` | 575 (0x23F) |  |  |  |
-| `FURY_OF_THE_NETHER` | 576 (0x240) |  |  |  |
-| `GLADIATORS_VESTMENTS` | 577 (0x241) |  |  | Gladiator's Vestments |
-| `GLADIATORS_EARTHSHAKER` | 578 (0x242) |  |  | Gladiator's Earthshaker |
-| `GLADIATORS_REGALIA` | 579 (0x243) |  |  | Gladiator's Regalia |
-| `GLADIATORS_THUNDERFIST` | 580 (0x244) |  |  | Gladiator's Thunderfist |
-| `GLADIATORS_RAIMENT` | 581 (0x245) |  |  | Gladiator's Raiment |
-| `GLADIATORS_AEGIS` | 582 (0x246) |  |  | Gladiator's Aegis |
-| `GLADIATORS_VINDICATION` | 583 (0x247) |  |  | Gladiator's Vindication |
-| `GLADIATORS_SANCTUARY` | 584 (0x248) |  |  | Gladiator's Sanctuary |
-| `GLADIATORS_WILDHIDE` | 585 (0x249) |  |  | Gladiator's Wildhide |
-| `GLADIATORS_PURSUIT` | 586 (0x24A) |  |  | Gladiator's Pursuit |
-| `HIGH_WARLORDS_AEGIS` | 587 (0x24B) |  |  | High Warlord's Aegis |
-| `HIGH_WARLORDS_BATTLEGEAR` | 588 (0x24C) |  |  | High Warlord's Battlegear |
-| `GRAND_MARSHALS_AEGIS` | 589 (0x24D) |  |  | Grand Marshal's Aegis |
-| `GRAND_MARSHALS_BATTLEGEAR` | 590 (0x24E) |  |  | Grand Marshal's Battlegear |
-| `GRAND_MARSHALS_DREADGEAR` | 591 (0x24F) |  |  | Grand Marshal's Dreadgear |
-| `HIGH_WARLORDS_DREADGEAR` | 592 (0x250) |  |  | High Warlord's Dreadgear |
-| `GRAND_MARSHALS_EARTHSHAKER` | 593 (0x251) |  |  | Grand Marshal's Earthshaker |
-| `HIGH_WARLORDS_EARTHSHAKER` | 594 (0x252) |  |  | High Warlord's Earthshaker |
-| `GRAND_MARSHALS_PURSUIT` | 595 (0x253) |  |  | Grand Marshal's Pursuit |
-| `HIGH_WARLORDS_PURSUIT` | 596 (0x254) |  |  | High Warlord's Pursuit |
-| `GRAND_MARSHALS_RAIMENT` | 597 (0x255) |  |  | Grand Marshal's Raiment |
-| `HIGH_WARLORDS_RAIMENT` | 598 (0x256) |  |  | High Warlord's Raiment |
-| `GRAND_MARSHALS_REGALIA` | 599 (0x257) |  |  | Grand Marshal's Regalia |
-| `HIGH_WARLORDS_REGALIA` | 600 (0x258) |  |  | High Warlord's Regalia |
-| `GRAND_MARSHALS_SANCTUARY` | 601 (0x259) |  |  | Grand Marshal's Sanctuary |
-| `HIGH_WARLORDS_SANCTUARY` | 602 (0x25A) |  |  | High Warlord's Sanctuary |
-| `GRAND_MARSHALS_THUNDERFIST` | 603 (0x25B) |  |  | Grand Marshal's Thunderfist |
-| `HIGH_WARLORDS_THUNDERFIST` | 604 (0x25C) |  |  | High Warlord's Thunderfist |
-| `GRAND_MARSHALS_VESTMENTS` | 605 (0x25D) |  |  | Grand Marshal's Vestments |
-| `HIGH_WARLORDS_VESTMENTS` | 606 (0x25E) |  |  | High Warlord's Vestments |
-| `GRAND_MARSHALS_VINDICATION` | 607 (0x25F) |  |  | Grand Marshal's Vindication |
-| `HIGH_WARLORDS_VINDICATION` | 608 (0x260) |  |  | High Warlord's Vindication |
-| `GRAND_MARSHALS_WILDHIDE` | 609 (0x261) |  |  | Grand Marshal's Wildhide |
-| `HIGH_WARLORDS_WILDHIDE` | 610 (0x262) |  |  | High Warlord's Wildhide |
-| `FELSCALE_ARMOR` | 611 (0x263) |  |  |  |
-| `SCALED_DRAENIC_ARMOR` | 612 (0x264) |  |  |  |
-| `THICK_DRAENIC_ARMOR` | 613 (0x265) |  |  |  |
-| `WILD_DRAENISH_ARMOR` | 614 (0x266) |  |  |  |
-| `GLADIATORS_FELSHROUD` | 615 (0x267) |  |  | Gladiator's Felshroud |
-| `NETHERSCALE_ARMOR` | 616 (0x268) |  |  |  |
-| `NETHERSTRIKE_ARMOR` | 617 (0x269) |  |  |  |
-| `WINDHAWK_ARMOR` | 618 (0x26A) |  |  |  |
-| `PRIMAL_INTENT` | 619 (0x26B) |  |  |  |
-| `ASSASSINATION_ARMOR` | 620 (0x26C) |  |  |  |
-| `NETHERBLADE` | 621 (0x26D) |  |  |  |
-| `DEATHMANTLE` | 622 (0x26E) |  |  |  |
-| `RIGHTEOUS_ARMOR` | 623 (0x26F) |  |  |  |
-| `JUSTICAR_RAIMENT` | 624 (0x270) |  |  |  |
-| `JUSTICAR_ARMOR` | 625 (0x271) |  |  |  |
-| `JUSTICAR_BATTLEGEAR` | 626 (0x272) |  |  |  |
-| `CRYSTALFORGE_RAIMENT` | 627 (0x273) |  |  |  |
-| `CRYSTALFORGE_ARMOR` | 628 (0x274) |  |  |  |
-| `CRYSTALFORGE_BATTLEGEAR` | 629 (0x275) |  |  |  |
-| `TIDEFURY_RAIMENT` | 630 (0x276) |  |  |  |
-| `CYCLONE_RAIMENT` | 631 (0x277) |  |  |  |
-| `CYCLONE_REGALIA` | 632 (0x278) |  |  |  |
-| `CYCLONE_HARNESS` | 633 (0x279) |  |  |  |
-| `CATACLYSM_RAIMENT` | 634 (0x27A) |  |  |  |
-| `CATACLYSM_REGALIA` | 635 (0x27B) |  |  |  |
-| `CATACLYSM_HARNESS` | 636 (0x27C) |  |  |  |
-| `MOONGLADE_RAIMENT` | 637 (0x27D) |  |  |  |
-| `MALORNE_RAIMENT` | 638 (0x27E) |  |  |  |
-| `MALORNE_REGALIA` | 639 (0x27F) |  |  |  |
-| `MALORNE_HARNESS` | 640 (0x280) |  |  |  |
-| `NORDRASSIL_HARNESS` | 641 (0x281) |  |  |  |
-| `NORDRASSIL_RAIMENT` | 642 (0x282) |  |  |  |
-| `NORDRASSIL_REGALIA` | 643 (0x283) |  |  |  |
-| `OBLIVION_RAIMENT` | 644 (0x284) |  |  |  |
-| `VOIDHEART_RAIMENT` | 645 (0x285) |  |  |  |
-| `CORRUPTOR_RAIMENT` | 646 (0x286) |  |  |  |
-| `INCANTERS_REGALIA` | 647 (0x287) |  |  | Incanter's Regalia |
-| `ALDOR_REGALIA` | 648 (0x288) |  |  |  |
-| `TIRISFAL_REGALIA` | 649 (0x289) |  |  |  |
-| `BEAST_LORD_ARMOR` | 650 (0x28A) |  |  |  |
-| `DEMON_STALKER_ARMOR` | 651 (0x28B) |  |  |  |
-| `RIFT_STALKER_ARMOR` | 652 (0x28C) |  |  |  |
-| `BOLD_ARMOR` | 653 (0x28D) |  |  |  |
-| `WARBRINGER_ARMOR` | 654 (0x28E) |  |  |  |
-| `WARBRINGER_BATTLEGEAR` | 655 (0x28F) |  |  |  |
-| `DESTROYER_ARMOR` | 656 (0x290) |  |  |  |
-| `DESTROYER_BATTLEGEAR` | 657 (0x291) |  |  |  |
-| `MANA_ETCHED_REGALIA` | 658 (0x292) |  |  | Mana-Etched Regalia |
-| `WASTEWALKER_ARMOR` | 659 (0x293) |  |  |  |
-| `DESOLATION_BATTLEGEAR` | 660 (0x294) |  |  |  |
-| `DOOMPLATE_BATTLEGEAR` | 661 (0x295) |  |  |  |
-| `HALLOWED_RAIMENT` | 662 (0x296) |  |  |  |
-| `INCARNATE_RAIMENT` | 663 (0x297) |  |  |  |
-| `INCARNATE_REGALIA` | 664 (0x298) |  |  |  |
-| `AVATAR_RAIMENT` | 665 (0x299) |  |  |  |
-| `AVATAR_REGALIA` | 666 (0x29A) |  |  |  |
-| `THE_TWIN_STARS` | 667 (0x29B) |  |  |  |
-| `SLAYERS_ARMOR` | 668 (0x29C) |  |  | Slayer's Armor |
-| `GRONNSTALKERS_ARMOR` | 669 (0x29D) |  |  | Gronnstalker's Armor |
-| `MALEFIC_RAIMENT` | 670 (0x29E) |  |  |  |
-| `TEMPEST_REGALIA` | 671 (0x29F) |  |  |  |
-| `ONSLAUGHT_BATTLEGEAR` | 672 (0x2A0) |  |  |  |
-| `ONSLAUGHT_ARMOR` | 673 (0x2A1) |  |  |  |
-| `ABSOLUTION_REGALIA` | 674 (0x2A2) |  |  |  |
-| `VESTMENTS_OF_ABSOLUTION` | 675 (0x2A3) |  |  |  |
-| `THUNDERHEART_HARNESS` | 676 (0x2A4) |  |  |  |
-| `THUNDERHEART_REGALIA` | 677 (0x2A5) |  |  |  |
-| `THUNDERHEART_RAIMENT` | 678 (0x2A6) |  |  |  |
-| `LIGHTBRINGER_ARMOR` | 679 (0x2A7) |  |  |  |
-| `LIGHTBRINGER_BATTLEGEAR` | 680 (0x2A8) |  |  |  |
-| `LIGHTBRINGER_RAIMENT` | 681 (0x2A9) |  |  |  |
-| `SKYSHATTER_HARNESS` | 682 (0x2AA) |  |  |  |
-| `SKYSHATTER_RAIMENT` | 683 (0x2AB) |  |  |  |
-| `SKYSHATTER_REGALIA` | 684 (0x2AC) |  |  |  |
-| `GLADIATORS_REFUGE` | 685 (0x2AD) |  |  | Gladiator's Refuge |
-| `GLADIATORS_WARTIDE` | 686 (0x2AE) |  |  | Gladiator's Wartide |
-| `GLADIATORS_INVESTITURE` | 687 (0x2AF) |  |  | Gladiator's Investiture |
-| `GRAND_MARSHALS_REFUGE` | 688 (0x2B0) |  |  | Grand Marshal's Refuge |
-| `HIGH_WARLORDS_REFUGE` | 689 (0x2B1) |  |  | High Warlord's Refuge |
-| `GLADIATORS_REDEMPTION` | 690 (0x2B2) |  |  | Gladiator's Redemption |
-| `GRAND_MARSHALS_INVESTITURE` | 691 (0x2B3) |  |  | Grand Marshal's Investiture |
-| `HIGH_WARLORDS_INVESTITURE` | 692 (0x2B4) |  |  | High Warlord's Investiture |
-| `GRAND_MARSHALS_REDEMPTION` | 693 (0x2B5) |  |  | Grand Marshal's Redemption |
-| `HIGH_WARLORDS_REDEMPTION` | 694 (0x2B6) |  |  | High Warlord's Redemption |
-| `GRAND_MARSHALS_WARTIDE` | 695 (0x2B7) |  |  | Grand Marshal's Wartide |
-| `HIGH_WARLORDS_WARTIDE` | 696 (0x2B8) |  |  | High Warlord's Wartide |
-| `CHAMPIONS_REDOUBT` | 697 (0x2B9) |  |  | Champion's Redoubt |
-| `WARLORDS_AEGIS` | 698 (0x2BA) |  |  | Warlord's Aegis |
-| `THE_TWIN_BLADES_OF_AZZINOTH` | 699 (0x2BB) |  |  |  |
-| `MERCILESS_GLADIATORS_AEGIS` | 700 (0x2BC) |  |  | Merciless Gladiator's Aegis |
-| `MERCILESS_GLADIATORS_BATTLEGEAR` | 701 (0x2BD) |  |  | Merciless Gladiator's Battlegear |
-| `MERCILESS_GLADIATORS_DREADGEAR` | 702 (0x2BE) |  |  | Merciless Gladiator's Dreadgear |
-| `MERCILESS_GLADIATORS_EARTHSHAKER` | 703 (0x2BF) |  |  | Merciless Gladiator's Earthshaker |
-| `MERCILESS_GLADIATORS_FELSHROUD` | 704 (0x2C0) |  |  | Merciless Gladiator's Felshroud |
-| `MERCILESS_GLADIATORS_INVESTITURE` | 705 (0x2C1) |  |  | Merciless Gladiator's Investiture |
-| `MERCILESS_GLADIATORS_PURSUIT` | 706 (0x2C2) |  |  | Merciless Gladiator's Pursuit |
-| `MERCILESS_GLADIATORS_RAIMENT` | 707 (0x2C3) |  |  | Merciless Gladiator's Raiment |
-| `MERCILESS_GLADIATORS_REDEMPTION` | 708 (0x2C4) |  |  | Merciless Gladiator's Redemption |
-| `MERCILESS_GLADIATORS_REFUGE` | 709 (0x2C5) |  |  | Merciless Gladiator's Refuge |
-| `MERCILESS_GLADIATORS_REGALIA` | 710 (0x2C6) |  |  | Merciless Gladiator's Regalia |
-| `MERCILESS_GLADIATORS_SANCTUARY` | 711 (0x2C7) |  |  | Merciless Gladiator's Sanctuary |
-| `MERCILESS_GLADIATORS_THUNDERFIST` | 712 (0x2C8) |  |  | Merciless Gladiator's Thunderfist |
-| `MERCILESS_GLADIATORS_VESTMENTS` | 713 (0x2C9) |  |  | Merciless Gladiator's Vestments |
-| `MERCILESS_GLADIATORS_VINDICATION` | 714 (0x2CA) |  |  | Merciless Gladiator's Vindication |
-| `MERCILESS_GLADIATORS_WARTIDE` | 715 (0x2CB) |  |  | Merciless Gladiator's Wartide |
-| `MERCILESS_GLADIATORS_WILDHIDE` | 716 (0x2CC) |  |  | Merciless Gladiator's Wildhide |
-| `FIELD_MARSHALS_EARTHSHAKER` | 717 (0x2CD) |  |  | Field Marshal's Earthshaker |
-| `LIEUTENANT_COMMANDERS_EARTHSHAKER` | 718 (0x2CE) |  |  | Lieutenant Commander's Earthshaker |
-| `THE_FISTS_OF_FURY` | 719 (0x2CF) |  |  |  |
-| `VENGEFUL_GLADIATORS_REFUGE` | 720 (0x2D0) |  |  | Vengeful Gladiator's Refuge |
-| `VENGEFUL_GLADIATORS_SANCTUARY` | 721 (0x2D1) |  |  | Vengeful Gladiator's Sanctuary |
-| `VENGEFUL_GLADIATORS_WILDHIDE` | 722 (0x2D2) |  |  | Vengeful Gladiator's Wildhide |
-| `VENGEFUL_GLADIATORS_PURSUIT` | 723 (0x2D3) |  |  | Vengeful Gladiator's Pursuit |
-| `VENGEFUL_GLADIATORS_REGALIA` | 724 (0x2D4) |  |  | Vengeful Gladiator's Regalia |
-| `VENGEFUL_GLADIATORS_REDEMPTION` | 725 (0x2D5) |  |  | Vengeful Gladiator's Redemption |
-| `VENGEFUL_GLADIATORS_VINDICATION` | 726 (0x2D6) |  |  | Vengeful Gladiator's Vindication |
-| `VENGEFUL_GLADIATORS_AEGIS` | 727 (0x2D7) |  |  | Vengeful Gladiator's Aegis |
-| `VENGEFUL_GLADIATORS_INVESTITURE` | 728 (0x2D8) |  |  | Vengeful Gladiator's Investiture |
-| `VENGEFUL_GLADIATORS_RAIMENT` | 729 (0x2D9) |  |  | Vengeful Gladiator's Raiment |
-| `VENGEFUL_GLADIATORS_VESTMENTS` | 730 (0x2DA) |  |  | Vengeful Gladiator's Vestments |
-| `VENGEFUL_GLADIATORS_WARTIDE` | 731 (0x2DB) |  |  | Vengeful Gladiator's Wartide |
-| `VENGEFUL_GLADIATORS_EARTHSHAKER` | 732 (0x2DC) |  |  | Vengeful Gladiator's Earthshaker |
-| `VENGEFUL_GLADIATORS_THUNDERFIST` | 733 (0x2DD) |  |  | Vengeful Gladiator's Thunderfist |
-| `VENGEFUL_GLADIATORS_DREADGEAR` | 734 (0x2DE) |  |  | Vengeful Gladiator's Dreadgear |
-| `VENGEFUL_GLADIATORS_FELSHROUD` | 735 (0x2DF) |  |  | Vengeful Gladiator's Felshroud |
-| `VENGEFUL_GLADIATORS_BATTLEGEAR` | 736 (0x2E0) |  |  | Vengeful Gladiator's Battlegear |
-| `LATROS_FLURRY` | 737 (0x2E1) |  |  | Latro's Flurry |
-| `DREADWEAVE_BATTLEGEAR` | 738 (0x2E2) |  |  |  |
-| `MOONCLOTH_BATTLEGEAR` | 739 (0x2E3) |  |  |  |
-| `SATIN_BATTLEGEAR` | 740 (0x2E4) |  |  |  |
-| `EVOKERS_SILK_BATTLEGEAR` | 741 (0x2E5) |  |  | Evoker's Silk Battlegear |
-| `DRAGONHIDE_BATTLEGEAR` | 742 (0x2E6) |  |  |  |
-| `WYRMHIDE_BATTLEGEAR` | 743 (0x2E7) |  |  |  |
-| `KODOHIDE_BATTLEGEAR` | 744 (0x2E8) |  |  |  |
-| `OPPORTUNISTS_BATTLEGEAR` | 745 (0x2E9) |  |  | Opportunist's Battlegear |
-| `SEERS_MAIL_BATTLEGEAR` | 746 (0x2EA) |  |  | Seer's Mail Battlegear |
-| `SEERS_RINGMAIL_BATTLEGEAR` | 747 (0x2EB) |  |  | Seer's Ringmail Battlegear |
-| `SEERS_LINKED_BATTLEGEAR` | 748 (0x2EC) |  |  | Seer's Linked Battlegear |
-| `STALKERS_CHAIN_BATTLEGEAR` | 749 (0x2ED) |  |  | Stalker's Chain Battlegear |
-| `SAVAGE_PLATE_BATTLEGEAR` | 750 (0x2EE) |  |  |  |
-| `CRUSADERS_ORNAMENTED_BATTLEGEAR` | 751 (0x2EF) |  |  | Crusader's Ornamented Battlegear |
-| `CRUSADERS_SCALED_BATTLEGEAR` | 752 (0x2F0) |  |  | Crusader's Scaled Battlegear |
+| Enumerator | Value  | Comment | Display |
+| --------- | -------- | ------- | ------- |
+| `NONE` | 0 (0x00) |  |  |
+| `THE_GLADIATOR` | 1 (0x01) |  |  |
+| `DAL_RENDS_ARMS` | 41 (0x29) |  | Dal'Rend's Arms |
+| `SPIDERS_KISS` | 65 (0x41) |  | Spider's Kiss |
+| `THE_POSTMASTER` | 81 (0x51) |  |  |
+| `CADAVEROUS_GARB` | 121 (0x79) |  |  |
+| `NECROPILE_RAIMENT` | 122 (0x7A) |  |  |
+| `BLOODMAIL_REGALIA` | 123 (0x7B) |  |  |
+| `DEATHBONE_GUARDIAN` | 124 (0x7C) |  |  |
+| `VOLCANIC_ARMOR` | 141 (0x8D) |  |  |
+| `STORMSHROUD_ARMOR` | 142 (0x8E) |  |  |
+| `DEVILSAUR_ARMOR` | 143 (0x8F) |  |  |
+| `IRONFEATHER_ARMOR` | 144 (0x90) |  |  |
+| `DEFIAS_LEATHER` | 161 (0xA1) |  |  |
+| `EMBRACE_OF_THE_VIPER` | 162 (0xA2) |  |  |
+| `CHAIN_OF_THE_SCARLET_CRUSADE` | 163 (0xA3) |  |  |
+| `MAGISTERS_REGALIA` | 181 (0xB5) |  | Magister's Regalia |
+| `VESTMENTS_OF_THE_DEVOUT` | 182 (0xB6) |  |  |
+| `DREADMIST_RAIMENT` | 183 (0xB7) |  |  |
+| `SHADOWCRAFT_ARMOR` | 184 (0xB8) |  |  |
+| `WILDHEART_RAIMENT` | 185 (0xB9) |  |  |
+| `BEASTSTALKER_ARMOR` | 186 (0xBA) |  |  |
+| `THE_ELEMENTS` | 187 (0xBB) |  |  |
+| `LIGHTFORGE_ARMOR` | 188 (0xBC) |  |  |
+| `BATTLEGEAR_OF_VALOR` | 189 (0xBD) |  |  |
+| `ARCANIST_REGALIA` | 201 (0xC9) |  |  |
+| `VESTMENTS_OF_PROPHECY` | 202 (0xCA) |  |  |
+| `FELHEART_RAIMENT` | 203 (0xCB) |  |  |
+| `NIGHTSLAYER_ARMOR` | 204 (0xCC) |  |  |
+| `CENARION_RAIMENT` | 205 (0xCD) |  |  |
+| `GIANTSTALKER_ARMOR` | 206 (0xCE) |  |  |
+| `THE_EARTHFURY` | 207 (0xCF) |  |  |
+| `LAWBRINGER_ARMOR` | 208 (0xD0) |  |  |
+| `BATTLEGEAR_OF_MIGHT` | 209 (0xD1) |  |  |
+| `NETHERWIND_REGALIA` | 210 (0xD2) |  |  |
+| `VESTMENTS_OF_TRANSCENDENCE` | 211 (0xD3) |  |  |
+| `NEMESIS_RAIMENT` | 212 (0xD4) |  |  |
+| `BLOODFANG_ARMOR` | 213 (0xD5) |  |  |
+| `STORMRAGE_RAIMENT` | 214 (0xD6) |  |  |
+| `DRAGONSTALKER_ARMOR` | 215 (0xD7) |  |  |
+| `THE_TEN_STORMS` | 216 (0xD8) |  |  |
+| `JUDGEMENT_ARMOR` | 217 (0xD9) |  |  |
+| `BATTLEGEAR_OF_WRATH` | 218 (0xDA) |  |  |
+| `GARB_OF_THERO_SHAN` | 221 (0xDD) |  | Garb of Thero-shan |
+| `SHARD_OF_THE_GODS` | 241 (0xF1) |  |  |
+| `SPIRIT_OF_ESKHANDAR` | 261 (0x105) |  |  |
+| `CHAMPIONS_BATTLEGEAR` | 281 (0x119) |  | Champion's Battlegear |
+| `LIEUTENANT_COMMANDERS_BATTLEGEAR` | 282 (0x11A) |  | Lieutenant Commander's Battlegear |
+| `CHAMPIONS_EARTHSHAKER` | 301 (0x12D) |  | Champion's Earthshaker |
+| `IMPERIAL_PLATE` | 321 (0x141) |  |  |
+| `CHAMPIONS_REGALIA` | 341 (0x155) |  | Champion's Regalia |
+| `CHAMPIONS_RAIMENT` | 342 (0x156) |  | Champion's Raiment |
+| `LIEUTENANT_COMMANDERS_REGALIA` | 343 (0x157) |  | Lieutenant Commander's Regalia |
+| `LIEUTENANT_COMMANDERS_RAIMENT` | 344 (0x158) |  | Lieutenant Commander's Raiment |
+| `CHAMPIONS_THREADS` | 345 (0x159) |  | Champion's Threads |
+| `LIEUTENANT_COMMANDERS_THREADS` | 346 (0x15A) |  | Lieutenant Commander's Threads |
+| `CHAMPIONS_VESTMENTS` | 347 (0x15B) |  | Champion's Vestments |
+| `LIEUTENANT_COMMANDERS_VESTMENTS` | 348 (0x15C) |  | Lieutenant Commander's Vestments |
+| `CHAMPIONS_PURSUIT` | 361 (0x169) |  | Champion's Pursuit |
+| `LIEUTENANT_COMMANDERS_PURSUIT` | 362 (0x16A) |  | Lieutenant Commander's Pursuit |
+| `LIEUTENANT_COMMANDERS_SANCTUARY` | 381 (0x17D) |  | Lieutenant Commander's Sanctuary |
+| `CHAMPIONS_SANCTUARY` | 382 (0x17E) |  | Champion's Sanctuary |
+| `WARLORDS_BATTLEGEAR` | 383 (0x17F) |  | Warlord's Battlegear |
+| `FIELD_MARSHALS_BATTLEGEAR` | 384 (0x180) |  | Field Marshal's Battlegear |
+| `WARLORDS_EARTHSHAKER` | 386 (0x182) |  | Warlord's Earthshaker |
+| `WARLORDS_REGALIA` | 387 (0x183) |  | Warlord's Regalia |
+| `FIELD_MARSHALS_REGALIA` | 388 (0x184) |  | Field Marshal's Regalia |
+| `FIELD_MARSHALS_RAIMENT` | 389 (0x185) |  | Field Marshal's Raiment |
+| `WARLORDS_RAIMENT` | 390 (0x186) |  | Warlord's Raiment |
+| `WARLORDS_THREADS` | 391 (0x187) |  | Warlord's Threads |
+| `FIELD_MARSHALS_THREADS` | 392 (0x188) |  | Field Marshal's Threads |
+| `WARLORDS_VESTMENTS` | 393 (0x189) |  | Warlord's Vestments |
+| `FIELD_MARSHALS_VESTMENTS` | 394 (0x18A) |  | Field Marshal's Vestments |
+| `FIELD_MARSHALS_PURSUIT` | 395 (0x18B) |  | Field Marshal's Pursuit |
+| `WARLORDS_PURSUIT` | 396 (0x18C) |  | Warlord's Pursuit |
+| `FIELD_MARSHALS_SANCTUARY` | 397 (0x18D) |  | Field Marshal's Sanctuary |
+| `WARLORDS_SANCTUARY` | 398 (0x18E) |  | Warlord's Sanctuary |
+| `LIEUTENANT_COMMANDERS_AEGIS` | 401 (0x191) |  | Lieutenant Commander's Aegis |
+| `FIELD_MARSHALS_AEGIS` | 402 (0x192) |  | Field Marshal's Aegis |
+| `BLOODVINE_GARB` | 421 (0x1A5) |  |  |
+| `PRIMAL_BATSKIN` | 441 (0x1B9) |  |  |
+| `BLOOD_TIGER_HARNESS` | 442 (0x1BA) |  |  |
+| `BLOODSOUL_EMBRACE` | 443 (0x1BB) |  |  |
+| `THE_DARKSOUL` | 444 (0x1BC) |  |  |
+| `THE_TWIN_BLADES_OF_HAKKARI` | 461 (0x1CD) |  |  |
+| `ZANZILS_CONCENTRATION` | 462 (0x1CE) |  | Zanzil's Concentration |
+| `PRIMAL_BLESSING` | 463 (0x1CF) |  |  |
+| `OVERLORDS_RESOLUTION` | 464 (0x1D0) |  | Overlord's Resolution |
+| `PRAYER_OF_THE_PRIMAL` | 465 (0x1D1) |  |  |
+| `MAJOR_MOJO_INFUSION` | 466 (0x1D2) |  |  |
+| `THE_HIGHLANDERS_RESOLUTION` | 467 (0x1D3) |  | The Highlander's Resolution |
+| `THE_HIGHLANDERS_RESOLVE` | 468 (0x1D4) |  | The Highlander's Resolve |
+| `THE_HIGHLANDERS_DETERMINATION` | 469 (0x1D5) |  | The Highlander's Determination |
+| `THE_HIGHLANDERS_FORTITUDE` | 470 (0x1D6) |  | The Highlander's Fortitude |
+| `THE_HIGHLANDERS_PURPOSE` | 471 (0x1D7) |  | The Highlander's Purpose |
+| `THE_HIGHLANDERS_WILL` | 472 (0x1D8) |  | The Highlander's Will |
+| `THE_HIGHLANDERS_INTENT` | 473 (0x1D9) |  | The Highlander's Intent |
+| `VINDICATORS_BATTLEGEAR` | 474 (0x1DA) |  | Vindicator's Battlegear |
+| `FREETHINKERS_ARMOR` | 475 (0x1DB) |  | Freethinker's Armor |
+| `AUGURS_REGALIA` | 476 (0x1DC) |  | Augur's Regalia |
+| `PREDATORS_ARMOR` | 477 (0x1DD) |  | Predator's Armor |
+| `MADCAPS_OUTFIT` | 478 (0x1DE) |  | Madcap's Outfit |
+| `HARUSPEXS_GARB` | 479 (0x1DF) |  | Haruspex's Garb |
+| `CONFESSORS_RAIMENT` | 480 (0x1E0) |  | Confessor's Raiment |
+| `DEMONIACS_THREADS` | 481 (0x1E1) |  | Demoniac's Threads |
+| `ILLUSIONISTS_ATTIRE` | 482 (0x1E2) |  | Illusionist's Attire |
+| `THE_DEFILERS_DETERMINATION` | 483 (0x1E3) |  | The Defiler's Determination |
+| `THE_DEFILERS_FORTITUDE` | 484 (0x1E4) |  | The Defiler's Fortitude |
+| `THE_DEFILERS_INTENT` | 485 (0x1E5) |  | The Defiler's Intent |
+| `THE_DEFILERS_PURPOSE` | 486 (0x1E6) |  | The Defiler's Purpose |
+| `THE_DEFILERS_RESOLUTION` | 487 (0x1E7) |  | The Defiler's Resolution |
+| `THE_DEFILERS_WILL` | 488 (0x1E8) |  | The Defiler's Will |
+| `BLACK_DRAGON_MAIL` | 489 (0x1E9) |  |  |
+| `GREEN_DRAGON_MAIL` | 490 (0x1EA) |  |  |
+| `BLUE_DRAGON_MAIL` | 491 (0x1EB) |  |  |
+| `TWILIGHT_TRAPPINGS` | 492 (0x1EC) |  |  |
+| `GENESIS_RAIMENT` | 493 (0x1ED) |  |  |
+| `SYMBOLS_OF_UNENDING_LIFE` | 494 (0x1EE) |  |  |
+| `BATTLEGEAR_OF_UNYIELDING_STRENGTH` | 495 (0x1EF) |  |  |
+| `CONQUERORS_BATTLEGEAR` | 496 (0x1F0) |  | Conqueror's Battlegear |
+| `DEATHDEALERS_EMBRACE` | 497 (0x1F1) |  | Deathdealer's Embrace |
+| `EMBLEMS_OF_VEILED_SHADOWS` | 498 (0x1F2) |  |  |
+| `DOOMCALLERS_ATTIRE` | 499 (0x1F3) |  | Doomcaller's Attire |
+| `IMPLEMENTS_OF_UNSPOKEN_NAMES` | 500 (0x1F4) |  |  |
+| `STORMCALLERS_GARB` | 501 (0x1F5) |  | Stormcaller's Garb |
+| `GIFT_OF_THE_GATHERING_STORM` | 502 (0x1F6) |  |  |
+| `ENIGMA_VESTMENTS` | 503 (0x1F7) |  |  |
+| `TRAPPINGS_OF_VAULTED_SECRETS` | 504 (0x1F8) |  |  |
+| `AVENGERS_BATTLEGEAR` | 505 (0x1F9) |  | Avenger's Battlegear |
+| `BATTLEGEAR_OF_ETERNAL_JUSTICE` | 506 (0x1FA) |  |  |
+| `GARMENTS_OF_THE_ORACLE` | 507 (0x1FB) |  |  |
+| `FINERY_OF_INFINITE_WISDOM` | 508 (0x1FC) |  |  |
+| `STRIKERS_GARB` | 509 (0x1FD) |  | Striker's Garb |
+| `TRAPPINGS_OF_THE_UNSEEN_PATH` | 510 (0x1FE) |  |  |
+| `BATTLEGEAR_OF_HEROISM` | 511 (0x1FF) |  |  |
+| `DARKMANTLE_ARMOR` | 512 (0x200) |  |  |
+| `FERALHEART_RAIMENT` | 513 (0x201) |  |  |
+| `VESTMENTS_OF_THE_VIRTUOUS` | 514 (0x202) |  |  |
+| `BEASTMASTER_ARMOR` | 515 (0x203) |  |  |
+| `SOULFORGE_ARMOR` | 516 (0x204) |  |  |
+| `SORCERERS_REGALIA` | 517 (0x205) |  | Sorcerer's Regalia |
+| `DEATHMIST_RAIMENT` | 518 (0x206) |  |  |
+| `THE_FIVE_THUNDERS` | 519 (0x207) |  |  |
+| `IRONWEAVE_BATTLESUIT` | 520 (0x208) |  |  |
+| `DREAMWALKER_RAIMENT` | 521 (0x209) |  |  |
+| `CHAMPIONS_GUARD` | 522 (0x20A) |  | Champion's Guard |
+| `DREADNAUGHTS_BATTLEGEAR` | 523 (0x20B) |  | Dreadnaught's Battlegear |
+| `BONESCYTHE_ARMOR` | 524 (0x20C) |  |  |
+| `VESTMENTS_OF_FAITH` | 525 (0x20D) |  |  |
+| `FROSTFIRE_REGALIA` | 526 (0x20E) |  |  |
+| `THE_EARTHSHATTERER` | 527 (0x20F) |  |  |
+| `REDEMPTION_ARMOR` | 528 (0x210) |  |  |
+| `PLAGUEHEART_RAIMENT` | 529 (0x211) |  |  |
+| `CRYPTSTALKER_ARMOR` | 530 (0x212) |  |  |
+| `BATTLEGEAR_OF_UNDEAD_SLAYING` | 533 (0x215) |  |  |
+| `UNDEAD_SLAYERS_ARMOR` | 534 (0x216) |  | Undead Slayer's Armor |
+| `GARB_OF_THE_UNDEAD_SLAYER` | 535 (0x217) |  |  |
+| `REGALIA_OF_UNDEAD_CLEANSING` | 536 (0x218) |  |  |
+| `CHAMPIONS_BATTLEARMOR` | 537 (0x219) |  | Champion's Battlearmor |
+| `CHAMPIONS_STORMCALLER` | 538 (0x21A) |  | Champion's Stormcaller |
+| `CHAMPIONS_REFUGE` | 539 (0x21B) |  | Champion's Refuge |
+| `CHAMPIONS_INVESTITURE` | 540 (0x21C) |  | Champion's Investiture |
+| `CHAMPIONS_DREADGEAR` | 541 (0x21D) |  | Champion's Dreadgear |
+| `CHAMPIONS_ARCANUM` | 542 (0x21E) |  | Champion's Arcanum |
+| `CHAMPIONS_PURSUANCE` | 543 (0x21F) |  | Champion's Pursuance |
+| `LIEUTENANT_COMMANDERS_REDOUBT` | 544 (0x220) |  | Lieutenant Commander's Redoubt |
+| `LIEUTENANT_COMMANDERS_BATTLEARMOR` | 545 (0x221) |  | Lieutenant Commander's Battlearmor |
+| `LIEUTENANT_COMMANDERS_ARCANUM` | 546 (0x222) |  | Lieutenant Commander's Arcanum |
+| `LIEUTENANT_COMMANDERS_DREADGEAR` | 547 (0x223) |  | Lieutenant Commander's Dreadgear |
+| `LIEUTENANT_COMMANDERS_GUARD` | 548 (0x224) |  | Lieutenant Commander's Guard |
+| `LIEUTENANT_COMMANDERS_INVESTITURE` | 549 (0x225) |  | Lieutenant Commander's Investiture |
+| `LIEUTENANT_COMMANDERS_PURSUANCE` | 550 (0x226) |  | Lieutenant Commander's Pursuance |
+| `LIEUTENANT_COMMANDERS_REFUGE` | 551 (0x227) |  | Lieutenant Commander's Refuge |
+| `WRATH_OF_SPELLFIRE` | 552 (0x228) |  |  |
+| `SHADOWS_EMBRACE` | 553 (0x229) |  | Shadow's Embrace |
+| `PRIMAL_MOONCLOTH` | 554 (0x22A) |  |  |
+| `NETHERWEAVE_VESTMENTS` | 555 (0x22B) |  |  |
+| `IMBUED_NETHERWEAVE` | 556 (0x22C) |  |  |
+| `SOULCLOTH_EMBRACE` | 557 (0x22D) |  |  |
+| `ARCANOWEAVE_VESTMENTS` | 558 (0x22E) |  |  |
+| `SPELLSTRIKE_INFUSION` | 559 (0x22F) |  |  |
+| `FEL_IRON_PLATE` | 560 (0x230) |  |  |
+| `FEL_IRON_CHAIN` | 561 (0x231) |  |  |
+| `ADAMANTITE_BATTLEGEAR` | 562 (0x232) |  |  |
+| `ENCHANTED_ADAMANTITE_ARMOR` | 563 (0x233) |  |  |
+| `FLAME_GUARD` | 564 (0x234) |  |  |
+| `KHORIUM_WARD` | 565 (0x235) |  |  |
+| `BURNING_RAGE` | 566 (0x236) |  |  |
+| `GLADIATORS_BATTLEGEAR` | 567 (0x237) |  | Gladiator's Battlegear |
+| `GLADIATORS_DREADGEAR` | 568 (0x238) |  | Gladiator's Dreadgear |
+| `FAITH_IN_FELSTEEL` | 569 (0x239) |  |  |
+| `THE_UNYIELDING` | 570 (0x23A) |  |  |
+| `WHITEMEND_WISDOM` | 571 (0x23B) |  |  |
+| `BATTLECAST_GARB` | 572 (0x23C) |  |  |
+| `FEL_SKIN` | 573 (0x23D) |  |  |
+| `STRENGTH_OF_THE_CLEFTHOOF` | 574 (0x23E) |  |  |
+| `FELSTALKER_ARMOR` | 575 (0x23F) |  |  |
+| `FURY_OF_THE_NETHER` | 576 (0x240) |  |  |
+| `GLADIATORS_VESTMENTS` | 577 (0x241) |  | Gladiator's Vestments |
+| `GLADIATORS_EARTHSHAKER` | 578 (0x242) |  | Gladiator's Earthshaker |
+| `GLADIATORS_REGALIA` | 579 (0x243) |  | Gladiator's Regalia |
+| `GLADIATORS_THUNDERFIST` | 580 (0x244) |  | Gladiator's Thunderfist |
+| `GLADIATORS_RAIMENT` | 581 (0x245) |  | Gladiator's Raiment |
+| `GLADIATORS_AEGIS` | 582 (0x246) |  | Gladiator's Aegis |
+| `GLADIATORS_VINDICATION` | 583 (0x247) |  | Gladiator's Vindication |
+| `GLADIATORS_SANCTUARY` | 584 (0x248) |  | Gladiator's Sanctuary |
+| `GLADIATORS_WILDHIDE` | 585 (0x249) |  | Gladiator's Wildhide |
+| `GLADIATORS_PURSUIT` | 586 (0x24A) |  | Gladiator's Pursuit |
+| `HIGH_WARLORDS_AEGIS` | 587 (0x24B) |  | High Warlord's Aegis |
+| `HIGH_WARLORDS_BATTLEGEAR` | 588 (0x24C) |  | High Warlord's Battlegear |
+| `GRAND_MARSHALS_AEGIS` | 589 (0x24D) |  | Grand Marshal's Aegis |
+| `GRAND_MARSHALS_BATTLEGEAR` | 590 (0x24E) |  | Grand Marshal's Battlegear |
+| `GRAND_MARSHALS_DREADGEAR` | 591 (0x24F) |  | Grand Marshal's Dreadgear |
+| `HIGH_WARLORDS_DREADGEAR` | 592 (0x250) |  | High Warlord's Dreadgear |
+| `GRAND_MARSHALS_EARTHSHAKER` | 593 (0x251) |  | Grand Marshal's Earthshaker |
+| `HIGH_WARLORDS_EARTHSHAKER` | 594 (0x252) |  | High Warlord's Earthshaker |
+| `GRAND_MARSHALS_PURSUIT` | 595 (0x253) |  | Grand Marshal's Pursuit |
+| `HIGH_WARLORDS_PURSUIT` | 596 (0x254) |  | High Warlord's Pursuit |
+| `GRAND_MARSHALS_RAIMENT` | 597 (0x255) |  | Grand Marshal's Raiment |
+| `HIGH_WARLORDS_RAIMENT` | 598 (0x256) |  | High Warlord's Raiment |
+| `GRAND_MARSHALS_REGALIA` | 599 (0x257) |  | Grand Marshal's Regalia |
+| `HIGH_WARLORDS_REGALIA` | 600 (0x258) |  | High Warlord's Regalia |
+| `GRAND_MARSHALS_SANCTUARY` | 601 (0x259) |  | Grand Marshal's Sanctuary |
+| `HIGH_WARLORDS_SANCTUARY` | 602 (0x25A) |  | High Warlord's Sanctuary |
+| `GRAND_MARSHALS_THUNDERFIST` | 603 (0x25B) |  | Grand Marshal's Thunderfist |
+| `HIGH_WARLORDS_THUNDERFIST` | 604 (0x25C) |  | High Warlord's Thunderfist |
+| `GRAND_MARSHALS_VESTMENTS` | 605 (0x25D) |  | Grand Marshal's Vestments |
+| `HIGH_WARLORDS_VESTMENTS` | 606 (0x25E) |  | High Warlord's Vestments |
+| `GRAND_MARSHALS_VINDICATION` | 607 (0x25F) |  | Grand Marshal's Vindication |
+| `HIGH_WARLORDS_VINDICATION` | 608 (0x260) |  | High Warlord's Vindication |
+| `GRAND_MARSHALS_WILDHIDE` | 609 (0x261) |  | Grand Marshal's Wildhide |
+| `HIGH_WARLORDS_WILDHIDE` | 610 (0x262) |  | High Warlord's Wildhide |
+| `FELSCALE_ARMOR` | 611 (0x263) |  |  |
+| `SCALED_DRAENIC_ARMOR` | 612 (0x264) |  |  |
+| `THICK_DRAENIC_ARMOR` | 613 (0x265) |  |  |
+| `WILD_DRAENISH_ARMOR` | 614 (0x266) |  |  |
+| `GLADIATORS_FELSHROUD` | 615 (0x267) |  | Gladiator's Felshroud |
+| `NETHERSCALE_ARMOR` | 616 (0x268) |  |  |
+| `NETHERSTRIKE_ARMOR` | 617 (0x269) |  |  |
+| `WINDHAWK_ARMOR` | 618 (0x26A) |  |  |
+| `PRIMAL_INTENT` | 619 (0x26B) |  |  |
+| `ASSASSINATION_ARMOR` | 620 (0x26C) |  |  |
+| `NETHERBLADE` | 621 (0x26D) |  |  |
+| `DEATHMANTLE` | 622 (0x26E) |  |  |
+| `RIGHTEOUS_ARMOR` | 623 (0x26F) |  |  |
+| `JUSTICAR_RAIMENT` | 624 (0x270) |  |  |
+| `JUSTICAR_ARMOR` | 625 (0x271) |  |  |
+| `JUSTICAR_BATTLEGEAR` | 626 (0x272) |  |  |
+| `CRYSTALFORGE_RAIMENT` | 627 (0x273) |  |  |
+| `CRYSTALFORGE_ARMOR` | 628 (0x274) |  |  |
+| `CRYSTALFORGE_BATTLEGEAR` | 629 (0x275) |  |  |
+| `TIDEFURY_RAIMENT` | 630 (0x276) |  |  |
+| `CYCLONE_RAIMENT` | 631 (0x277) |  |  |
+| `CYCLONE_REGALIA` | 632 (0x278) |  |  |
+| `CYCLONE_HARNESS` | 633 (0x279) |  |  |
+| `CATACLYSM_RAIMENT` | 634 (0x27A) |  |  |
+| `CATACLYSM_REGALIA` | 635 (0x27B) |  |  |
+| `CATACLYSM_HARNESS` | 636 (0x27C) |  |  |
+| `MOONGLADE_RAIMENT` | 637 (0x27D) |  |  |
+| `MALORNE_RAIMENT` | 638 (0x27E) |  |  |
+| `MALORNE_REGALIA` | 639 (0x27F) |  |  |
+| `MALORNE_HARNESS` | 640 (0x280) |  |  |
+| `NORDRASSIL_HARNESS` | 641 (0x281) |  |  |
+| `NORDRASSIL_RAIMENT` | 642 (0x282) |  |  |
+| `NORDRASSIL_REGALIA` | 643 (0x283) |  |  |
+| `OBLIVION_RAIMENT` | 644 (0x284) |  |  |
+| `VOIDHEART_RAIMENT` | 645 (0x285) |  |  |
+| `CORRUPTOR_RAIMENT` | 646 (0x286) |  |  |
+| `INCANTERS_REGALIA` | 647 (0x287) |  | Incanter's Regalia |
+| `ALDOR_REGALIA` | 648 (0x288) |  |  |
+| `TIRISFAL_REGALIA` | 649 (0x289) |  |  |
+| `BEAST_LORD_ARMOR` | 650 (0x28A) |  |  |
+| `DEMON_STALKER_ARMOR` | 651 (0x28B) |  |  |
+| `RIFT_STALKER_ARMOR` | 652 (0x28C) |  |  |
+| `BOLD_ARMOR` | 653 (0x28D) |  |  |
+| `WARBRINGER_ARMOR` | 654 (0x28E) |  |  |
+| `WARBRINGER_BATTLEGEAR` | 655 (0x28F) |  |  |
+| `DESTROYER_ARMOR` | 656 (0x290) |  |  |
+| `DESTROYER_BATTLEGEAR` | 657 (0x291) |  |  |
+| `MANA_ETCHED_REGALIA` | 658 (0x292) |  | Mana-Etched Regalia |
+| `WASTEWALKER_ARMOR` | 659 (0x293) |  |  |
+| `DESOLATION_BATTLEGEAR` | 660 (0x294) |  |  |
+| `DOOMPLATE_BATTLEGEAR` | 661 (0x295) |  |  |
+| `HALLOWED_RAIMENT` | 662 (0x296) |  |  |
+| `INCARNATE_RAIMENT` | 663 (0x297) |  |  |
+| `INCARNATE_REGALIA` | 664 (0x298) |  |  |
+| `AVATAR_RAIMENT` | 665 (0x299) |  |  |
+| `AVATAR_REGALIA` | 666 (0x29A) |  |  |
+| `THE_TWIN_STARS` | 667 (0x29B) |  |  |
+| `SLAYERS_ARMOR` | 668 (0x29C) |  | Slayer's Armor |
+| `GRONNSTALKERS_ARMOR` | 669 (0x29D) |  | Gronnstalker's Armor |
+| `MALEFIC_RAIMENT` | 670 (0x29E) |  |  |
+| `TEMPEST_REGALIA` | 671 (0x29F) |  |  |
+| `ONSLAUGHT_BATTLEGEAR` | 672 (0x2A0) |  |  |
+| `ONSLAUGHT_ARMOR` | 673 (0x2A1) |  |  |
+| `ABSOLUTION_REGALIA` | 674 (0x2A2) |  |  |
+| `VESTMENTS_OF_ABSOLUTION` | 675 (0x2A3) |  |  |
+| `THUNDERHEART_HARNESS` | 676 (0x2A4) |  |  |
+| `THUNDERHEART_REGALIA` | 677 (0x2A5) |  |  |
+| `THUNDERHEART_RAIMENT` | 678 (0x2A6) |  |  |
+| `LIGHTBRINGER_ARMOR` | 679 (0x2A7) |  |  |
+| `LIGHTBRINGER_BATTLEGEAR` | 680 (0x2A8) |  |  |
+| `LIGHTBRINGER_RAIMENT` | 681 (0x2A9) |  |  |
+| `SKYSHATTER_HARNESS` | 682 (0x2AA) |  |  |
+| `SKYSHATTER_RAIMENT` | 683 (0x2AB) |  |  |
+| `SKYSHATTER_REGALIA` | 684 (0x2AC) |  |  |
+| `GLADIATORS_REFUGE` | 685 (0x2AD) |  | Gladiator's Refuge |
+| `GLADIATORS_WARTIDE` | 686 (0x2AE) |  | Gladiator's Wartide |
+| `GLADIATORS_INVESTITURE` | 687 (0x2AF) |  | Gladiator's Investiture |
+| `GRAND_MARSHALS_REFUGE` | 688 (0x2B0) |  | Grand Marshal's Refuge |
+| `HIGH_WARLORDS_REFUGE` | 689 (0x2B1) |  | High Warlord's Refuge |
+| `GLADIATORS_REDEMPTION` | 690 (0x2B2) |  | Gladiator's Redemption |
+| `GRAND_MARSHALS_INVESTITURE` | 691 (0x2B3) |  | Grand Marshal's Investiture |
+| `HIGH_WARLORDS_INVESTITURE` | 692 (0x2B4) |  | High Warlord's Investiture |
+| `GRAND_MARSHALS_REDEMPTION` | 693 (0x2B5) |  | Grand Marshal's Redemption |
+| `HIGH_WARLORDS_REDEMPTION` | 694 (0x2B6) |  | High Warlord's Redemption |
+| `GRAND_MARSHALS_WARTIDE` | 695 (0x2B7) |  | Grand Marshal's Wartide |
+| `HIGH_WARLORDS_WARTIDE` | 696 (0x2B8) |  | High Warlord's Wartide |
+| `CHAMPIONS_REDOUBT` | 697 (0x2B9) |  | Champion's Redoubt |
+| `WARLORDS_AEGIS` | 698 (0x2BA) |  | Warlord's Aegis |
+| `THE_TWIN_BLADES_OF_AZZINOTH` | 699 (0x2BB) |  |  |
+| `MERCILESS_GLADIATORS_AEGIS` | 700 (0x2BC) |  | Merciless Gladiator's Aegis |
+| `MERCILESS_GLADIATORS_BATTLEGEAR` | 701 (0x2BD) |  | Merciless Gladiator's Battlegear |
+| `MERCILESS_GLADIATORS_DREADGEAR` | 702 (0x2BE) |  | Merciless Gladiator's Dreadgear |
+| `MERCILESS_GLADIATORS_EARTHSHAKER` | 703 (0x2BF) |  | Merciless Gladiator's Earthshaker |
+| `MERCILESS_GLADIATORS_FELSHROUD` | 704 (0x2C0) |  | Merciless Gladiator's Felshroud |
+| `MERCILESS_GLADIATORS_INVESTITURE` | 705 (0x2C1) |  | Merciless Gladiator's Investiture |
+| `MERCILESS_GLADIATORS_PURSUIT` | 706 (0x2C2) |  | Merciless Gladiator's Pursuit |
+| `MERCILESS_GLADIATORS_RAIMENT` | 707 (0x2C3) |  | Merciless Gladiator's Raiment |
+| `MERCILESS_GLADIATORS_REDEMPTION` | 708 (0x2C4) |  | Merciless Gladiator's Redemption |
+| `MERCILESS_GLADIATORS_REFUGE` | 709 (0x2C5) |  | Merciless Gladiator's Refuge |
+| `MERCILESS_GLADIATORS_REGALIA` | 710 (0x2C6) |  | Merciless Gladiator's Regalia |
+| `MERCILESS_GLADIATORS_SANCTUARY` | 711 (0x2C7) |  | Merciless Gladiator's Sanctuary |
+| `MERCILESS_GLADIATORS_THUNDERFIST` | 712 (0x2C8) |  | Merciless Gladiator's Thunderfist |
+| `MERCILESS_GLADIATORS_VESTMENTS` | 713 (0x2C9) |  | Merciless Gladiator's Vestments |
+| `MERCILESS_GLADIATORS_VINDICATION` | 714 (0x2CA) |  | Merciless Gladiator's Vindication |
+| `MERCILESS_GLADIATORS_WARTIDE` | 715 (0x2CB) |  | Merciless Gladiator's Wartide |
+| `MERCILESS_GLADIATORS_WILDHIDE` | 716 (0x2CC) |  | Merciless Gladiator's Wildhide |
+| `FIELD_MARSHALS_EARTHSHAKER` | 717 (0x2CD) |  | Field Marshal's Earthshaker |
+| `LIEUTENANT_COMMANDERS_EARTHSHAKER` | 718 (0x2CE) |  | Lieutenant Commander's Earthshaker |
+| `THE_FISTS_OF_FURY` | 719 (0x2CF) |  |  |
+| `VENGEFUL_GLADIATORS_REFUGE` | 720 (0x2D0) |  | Vengeful Gladiator's Refuge |
+| `VENGEFUL_GLADIATORS_SANCTUARY` | 721 (0x2D1) |  | Vengeful Gladiator's Sanctuary |
+| `VENGEFUL_GLADIATORS_WILDHIDE` | 722 (0x2D2) |  | Vengeful Gladiator's Wildhide |
+| `VENGEFUL_GLADIATORS_PURSUIT` | 723 (0x2D3) |  | Vengeful Gladiator's Pursuit |
+| `VENGEFUL_GLADIATORS_REGALIA` | 724 (0x2D4) |  | Vengeful Gladiator's Regalia |
+| `VENGEFUL_GLADIATORS_REDEMPTION` | 725 (0x2D5) |  | Vengeful Gladiator's Redemption |
+| `VENGEFUL_GLADIATORS_VINDICATION` | 726 (0x2D6) |  | Vengeful Gladiator's Vindication |
+| `VENGEFUL_GLADIATORS_AEGIS` | 727 (0x2D7) |  | Vengeful Gladiator's Aegis |
+| `VENGEFUL_GLADIATORS_INVESTITURE` | 728 (0x2D8) |  | Vengeful Gladiator's Investiture |
+| `VENGEFUL_GLADIATORS_RAIMENT` | 729 (0x2D9) |  | Vengeful Gladiator's Raiment |
+| `VENGEFUL_GLADIATORS_VESTMENTS` | 730 (0x2DA) |  | Vengeful Gladiator's Vestments |
+| `VENGEFUL_GLADIATORS_WARTIDE` | 731 (0x2DB) |  | Vengeful Gladiator's Wartide |
+| `VENGEFUL_GLADIATORS_EARTHSHAKER` | 732 (0x2DC) |  | Vengeful Gladiator's Earthshaker |
+| `VENGEFUL_GLADIATORS_THUNDERFIST` | 733 (0x2DD) |  | Vengeful Gladiator's Thunderfist |
+| `VENGEFUL_GLADIATORS_DREADGEAR` | 734 (0x2DE) |  | Vengeful Gladiator's Dreadgear |
+| `VENGEFUL_GLADIATORS_FELSHROUD` | 735 (0x2DF) |  | Vengeful Gladiator's Felshroud |
+| `VENGEFUL_GLADIATORS_BATTLEGEAR` | 736 (0x2E0) |  | Vengeful Gladiator's Battlegear |
+| `LATROS_FLURRY` | 737 (0x2E1) |  | Latro's Flurry |
+| `DREADWEAVE_BATTLEGEAR` | 738 (0x2E2) |  |  |
+| `MOONCLOTH_BATTLEGEAR` | 739 (0x2E3) |  |  |
+| `SATIN_BATTLEGEAR` | 740 (0x2E4) |  |  |
+| `EVOKERS_SILK_BATTLEGEAR` | 741 (0x2E5) |  | Evoker's Silk Battlegear |
+| `DRAGONHIDE_BATTLEGEAR` | 742 (0x2E6) |  |  |
+| `WYRMHIDE_BATTLEGEAR` | 743 (0x2E7) |  |  |
+| `KODOHIDE_BATTLEGEAR` | 744 (0x2E8) |  |  |
+| `OPPORTUNISTS_BATTLEGEAR` | 745 (0x2E9) |  | Opportunist's Battlegear |
+| `SEERS_MAIL_BATTLEGEAR` | 746 (0x2EA) |  | Seer's Mail Battlegear |
+| `SEERS_RINGMAIL_BATTLEGEAR` | 747 (0x2EB) |  | Seer's Ringmail Battlegear |
+| `SEERS_LINKED_BATTLEGEAR` | 748 (0x2EC) |  | Seer's Linked Battlegear |
+| `STALKERS_CHAIN_BATTLEGEAR` | 749 (0x2ED) |  | Stalker's Chain Battlegear |
+| `SAVAGE_PLATE_BATTLEGEAR` | 750 (0x2EE) |  |  |
+| `CRUSADERS_ORNAMENTED_BATTLEGEAR` | 751 (0x2EF) |  | Crusader's Ornamented Battlegear |
+| `CRUSADERS_SCALED_BATTLEGEAR` | 752 (0x2F0) |  | Crusader's Scaled Battlegear |
 
 Used in:
 * [SMSG_ITEM_QUERY_SINGLE_RESPONSE](smsg_item_query_single_response.md)
@@ -1655,518 +1655,518 @@ enum ItemSet : u16 {
 ### Type
 The basic type is `u16`, a 2 byte (16 bit) little endian integer.
 ### Enumerators
-| Enumerator | Value  | Description | Comment | Display |
-| --------- | -------- | ----------- | ------- | ------- |
-| `NONE` | 0 (0x00) |  |  |  |
-| `THE_GLADIATOR` | 1 (0x01) |  |  |  |
-| `DAL_RENDS_ARMS` | 41 (0x29) |  |  | Dal'Rend's Arms |
-| `SPIDERS_KISS` | 65 (0x41) |  |  | Spider's Kiss |
-| `THE_POSTMASTER` | 81 (0x51) |  |  |  |
-| `CADAVEROUS_GARB` | 121 (0x79) |  |  |  |
-| `NECROPILE_RAIMENT` | 122 (0x7A) |  |  |  |
-| `BLOODMAIL_REGALIA` | 123 (0x7B) |  |  |  |
-| `DEATHBONE_GUARDIAN` | 124 (0x7C) |  |  |  |
-| `VOLCANIC_ARMOR` | 141 (0x8D) |  |  |  |
-| `STORMSHROUD_ARMOR` | 142 (0x8E) |  |  |  |
-| `DEVILSAUR_ARMOR` | 143 (0x8F) |  |  |  |
-| `IRONFEATHER_ARMOR` | 144 (0x90) |  |  |  |
-| `DEFIAS_LEATHER` | 161 (0xA1) |  |  |  |
-| `EMBRACE_OF_THE_VIPER` | 162 (0xA2) |  |  |  |
-| `CHAIN_OF_THE_SCARLET_CRUSADE` | 163 (0xA3) |  |  |  |
-| `MAGISTERS_REGALIA` | 181 (0xB5) |  |  | Magister's Regalia |
-| `VESTMENTS_OF_THE_DEVOUT` | 182 (0xB6) |  |  |  |
-| `DREADMIST_RAIMENT` | 183 (0xB7) |  |  |  |
-| `SHADOWCRAFT_ARMOR` | 184 (0xB8) |  |  |  |
-| `WILDHEART_RAIMENT` | 185 (0xB9) |  |  |  |
-| `BEASTSTALKER_ARMOR` | 186 (0xBA) |  |  |  |
-| `THE_ELEMENTS` | 187 (0xBB) |  |  |  |
-| `LIGHTFORGE_ARMOR` | 188 (0xBC) |  |  |  |
-| `BATTLEGEAR_OF_VALOR` | 189 (0xBD) |  |  |  |
-| `ARCANIST_REGALIA` | 201 (0xC9) |  |  |  |
-| `VESTMENTS_OF_PROPHECY` | 202 (0xCA) |  |  |  |
-| `FELHEART_RAIMENT` | 203 (0xCB) |  |  |  |
-| `NIGHTSLAYER_ARMOR` | 204 (0xCC) |  |  |  |
-| `CENARION_RAIMENT` | 205 (0xCD) |  |  |  |
-| `GIANTSTALKER_ARMOR` | 206 (0xCE) |  |  |  |
-| `THE_EARTHFURY` | 207 (0xCF) |  |  |  |
-| `LAWBRINGER_ARMOR` | 208 (0xD0) |  |  |  |
-| `BATTLEGEAR_OF_MIGHT` | 209 (0xD1) |  |  |  |
-| `NETHERWIND_REGALIA` | 210 (0xD2) |  |  |  |
-| `VESTMENTS_OF_TRANSCENDENCE` | 211 (0xD3) |  |  |  |
-| `NEMESIS_RAIMENT` | 212 (0xD4) |  |  |  |
-| `BLOODFANG_ARMOR` | 213 (0xD5) |  |  |  |
-| `STORMRAGE_RAIMENT` | 214 (0xD6) |  |  |  |
-| `DRAGONSTALKER_ARMOR` | 215 (0xD7) |  |  |  |
-| `THE_TEN_STORMS` | 216 (0xD8) |  |  |  |
-| `JUDGEMENT_ARMOR` | 217 (0xD9) |  |  |  |
-| `BATTLEGEAR_OF_WRATH` | 218 (0xDA) |  |  |  |
-| `GARB_OF_THERO_SHAN` | 221 (0xDD) |  |  | Garb of Thero-shan |
-| `SHARD_OF_THE_GODS` | 241 (0xF1) |  |  |  |
-| `SPIRIT_OF_ESKHANDAR` | 261 (0x105) |  |  |  |
-| `CHAMPIONS_BATTLEGEAR` | 281 (0x119) |  |  | Champion's Battlegear |
-| `LIEUTENANT_COMMANDERS_BATTLEGEAR` | 282 (0x11A) |  |  | Lieutenant Commander's Battlegear |
-| `CHAMPIONS_EARTHSHAKER` | 301 (0x12D) |  |  | Champion's Earthshaker |
-| `IMPERIAL_PLATE` | 321 (0x141) |  |  |  |
-| `CHAMPIONS_REGALIA` | 341 (0x155) |  |  | Champion's Regalia |
-| `CHAMPIONS_RAIMENT` | 342 (0x156) |  |  | Champion's Raiment |
-| `LIEUTENANT_COMMANDERS_REGALIA` | 343 (0x157) |  |  | Lieutenant Commander's Regalia |
-| `LIEUTENANT_COMMANDERS_RAIMENT` | 344 (0x158) |  |  | Lieutenant Commander's Raiment |
-| `CHAMPIONS_THREADS` | 345 (0x159) |  |  | Champion's Threads |
-| `LIEUTENANT_COMMANDERS_THREADS` | 346 (0x15A) |  |  | Lieutenant Commander's Threads |
-| `CHAMPIONS_VESTMENTS` | 347 (0x15B) |  |  | Champion's Vestments |
-| `LIEUTENANT_COMMANDERS_VESTMENTS` | 348 (0x15C) |  |  | Lieutenant Commander's Vestments |
-| `CHAMPIONS_PURSUIT` | 361 (0x169) |  |  | Champion's Pursuit |
-| `LIEUTENANT_COMMANDERS_PURSUIT` | 362 (0x16A) |  |  | Lieutenant Commander's Pursuit |
-| `LIEUTENANT_COMMANDERS_SANCTUARY` | 381 (0x17D) |  |  | Lieutenant Commander's Sanctuary |
-| `CHAMPIONS_SANCTUARY` | 382 (0x17E) |  |  | Champion's Sanctuary |
-| `WARLORDS_BATTLEGEAR` | 383 (0x17F) |  |  | Warlord's Battlegear |
-| `FIELD_MARSHALS_BATTLEGEAR` | 384 (0x180) |  |  | Field Marshal's Battlegear |
-| `WARLORDS_EARTHSHAKER` | 386 (0x182) |  |  | Warlord's Earthshaker |
-| `WARLORDS_REGALIA` | 387 (0x183) |  |  | Warlord's Regalia |
-| `FIELD_MARSHALS_REGALIA` | 388 (0x184) |  |  | Field Marshal's Regalia |
-| `FIELD_MARSHALS_RAIMENT` | 389 (0x185) |  |  | Field Marshal's Raiment |
-| `WARLORDS_RAIMENT` | 390 (0x186) |  |  | Warlord's Raiment |
-| `WARLORDS_THREADS` | 391 (0x187) |  |  | Warlord's Threads |
-| `FIELD_MARSHALS_THREADS` | 392 (0x188) |  |  | Field Marshal's Threads |
-| `WARLORDS_VESTMENTS` | 393 (0x189) |  |  | Warlord's Vestments |
-| `FIELD_MARSHALS_VESTMENTS` | 394 (0x18A) |  |  | Field Marshal's Vestments |
-| `FIELD_MARSHALS_PURSUIT` | 395 (0x18B) |  |  | Field Marshal's Pursuit |
-| `WARLORDS_PURSUIT` | 396 (0x18C) |  |  | Warlord's Pursuit |
-| `FIELD_MARSHALS_SANCTUARY` | 397 (0x18D) |  |  | Field Marshal's Sanctuary |
-| `WARLORDS_SANCTUARY` | 398 (0x18E) |  |  | Warlord's Sanctuary |
-| `LIEUTENANT_COMMANDERS_AEGIS` | 401 (0x191) |  |  | Lieutenant Commander's Aegis |
-| `FIELD_MARSHALS_AEGIS` | 402 (0x192) |  |  | Field Marshal's Aegis |
-| `BLOODVINE_GARB` | 421 (0x1A5) |  |  |  |
-| `PRIMAL_BATSKIN` | 441 (0x1B9) |  |  |  |
-| `BLOOD_TIGER_HARNESS` | 442 (0x1BA) |  |  |  |
-| `BLOODSOUL_EMBRACE` | 443 (0x1BB) |  |  |  |
-| `THE_DARKSOUL` | 444 (0x1BC) |  |  |  |
-| `THE_TWIN_BLADES_OF_HAKKARI` | 461 (0x1CD) |  |  |  |
-| `ZANZILS_CONCENTRATION` | 462 (0x1CE) |  |  | Zanzil's Concentration |
-| `PRIMAL_BLESSING` | 463 (0x1CF) |  |  |  |
-| `OVERLORDS_RESOLUTION` | 464 (0x1D0) |  |  | Overlord's Resolution |
-| `PRAYER_OF_THE_PRIMAL` | 465 (0x1D1) |  |  |  |
-| `MAJOR_MOJO_INFUSION` | 466 (0x1D2) |  |  |  |
-| `THE_HIGHLANDERS_RESOLUTION` | 467 (0x1D3) |  |  | The Highlander's Resolution |
-| `THE_HIGHLANDERS_RESOLVE` | 468 (0x1D4) |  |  | The Highlander's Resolve |
-| `THE_HIGHLANDERS_DETERMINATION` | 469 (0x1D5) |  |  | The Highlander's Determination |
-| `THE_HIGHLANDERS_FORTITUDE` | 470 (0x1D6) |  |  | The Highlander's Fortitude |
-| `THE_HIGHLANDERS_PURPOSE` | 471 (0x1D7) |  |  | The Highlander's Purpose |
-| `THE_HIGHLANDERS_WILL` | 472 (0x1D8) |  |  | The Highlander's Will |
-| `THE_HIGHLANDERS_INTENT` | 473 (0x1D9) |  |  | The Highlander's Intent |
-| `VINDICATORS_BATTLEGEAR` | 474 (0x1DA) |  |  | Vindicator's Battlegear |
-| `FREETHINKERS_ARMOR` | 475 (0x1DB) |  |  | Freethinker's Armor |
-| `AUGURS_REGALIA` | 476 (0x1DC) |  |  | Augur's Regalia |
-| `PREDATORS_ARMOR` | 477 (0x1DD) |  |  | Predator's Armor |
-| `MADCAPS_OUTFIT` | 478 (0x1DE) |  |  | Madcap's Outfit |
-| `HARUSPEXS_GARB` | 479 (0x1DF) |  |  | Haruspex's Garb |
-| `CONFESSORS_RAIMENT` | 480 (0x1E0) |  |  | Confessor's Raiment |
-| `DEMONIACS_THREADS` | 481 (0x1E1) |  |  | Demoniac's Threads |
-| `ILLUSIONISTS_ATTIRE` | 482 (0x1E2) |  |  | Illusionist's Attire |
-| `THE_DEFILERS_DETERMINATION` | 483 (0x1E3) |  |  | The Defiler's Determination |
-| `THE_DEFILERS_FORTITUDE` | 484 (0x1E4) |  |  | The Defiler's Fortitude |
-| `THE_DEFILERS_INTENT` | 485 (0x1E5) |  |  | The Defiler's Intent |
-| `THE_DEFILERS_PURPOSE` | 486 (0x1E6) |  |  | The Defiler's Purpose |
-| `THE_DEFILERS_RESOLUTION` | 487 (0x1E7) |  |  | The Defiler's Resolution |
-| `THE_DEFILERS_WILL` | 488 (0x1E8) |  |  | The Defiler's Will |
-| `BLACK_DRAGON_MAIL` | 489 (0x1E9) |  |  |  |
-| `GREEN_DRAGON_MAIL` | 490 (0x1EA) |  |  |  |
-| `BLUE_DRAGON_MAIL` | 491 (0x1EB) |  |  |  |
-| `TWILIGHT_TRAPPINGS` | 492 (0x1EC) |  |  |  |
-| `GENESIS_RAIMENT` | 493 (0x1ED) |  |  |  |
-| `SYMBOLS_OF_UNENDING_LIFE` | 494 (0x1EE) |  |  |  |
-| `BATTLEGEAR_OF_UNYIELDING_STRENGTH` | 495 (0x1EF) |  |  |  |
-| `CONQUERORS_BATTLEGEAR` | 496 (0x1F0) |  |  | Conqueror's Battlegear |
-| `DEATHDEALERS_EMBRACE` | 497 (0x1F1) |  |  | Deathdealer's Embrace |
-| `EMBLEMS_OF_VEILED_SHADOWS` | 498 (0x1F2) |  |  |  |
-| `DOOMCALLERS_ATTIRE` | 499 (0x1F3) |  |  | Doomcaller's Attire |
-| `IMPLEMENTS_OF_UNSPOKEN_NAMES` | 500 (0x1F4) |  |  |  |
-| `STORMCALLERS_GARB` | 501 (0x1F5) |  |  | Stormcaller's Garb |
-| `GIFT_OF_THE_GATHERING_STORM` | 502 (0x1F6) |  |  |  |
-| `ENIGMA_VESTMENTS` | 503 (0x1F7) |  |  |  |
-| `TRAPPINGS_OF_VAULTED_SECRETS` | 504 (0x1F8) |  |  |  |
-| `AVENGERS_BATTLEGEAR` | 505 (0x1F9) |  |  | Avenger's Battlegear |
-| `BATTLEGEAR_OF_ETERNAL_JUSTICE` | 506 (0x1FA) |  |  |  |
-| `GARMENTS_OF_THE_ORACLE` | 507 (0x1FB) |  |  |  |
-| `FINERY_OF_INFINITE_WISDOM` | 508 (0x1FC) |  |  |  |
-| `STRIKERS_GARB` | 509 (0x1FD) |  |  | Striker's Garb |
-| `TRAPPINGS_OF_THE_UNSEEN_PATH` | 510 (0x1FE) |  |  |  |
-| `BATTLEGEAR_OF_HEROISM` | 511 (0x1FF) |  |  |  |
-| `DARKMANTLE_ARMOR` | 512 (0x200) |  |  |  |
-| `FERALHEART_RAIMENT` | 513 (0x201) |  |  |  |
-| `VESTMENTS_OF_THE_VIRTUOUS` | 514 (0x202) |  |  |  |
-| `BEASTMASTER_ARMOR` | 515 (0x203) |  |  |  |
-| `SOULFORGE_ARMOR` | 516 (0x204) |  |  |  |
-| `SORCERERS_REGALIA` | 517 (0x205) |  |  | Sorcerer's Regalia |
-| `DEATHMIST_RAIMENT` | 518 (0x206) |  |  |  |
-| `THE_FIVE_THUNDERS` | 519 (0x207) |  |  |  |
-| `IRONWEAVE_BATTLESUIT` | 520 (0x208) |  |  |  |
-| `DREAMWALKER_RAIMENT` | 521 (0x209) |  |  |  |
-| `CHAMPIONS_GUARD` | 522 (0x20A) |  |  | Champion's Guard |
-| `DREADNAUGHTS_BATTLEGEAR` | 523 (0x20B) |  |  | Dreadnaught's Battlegear |
-| `BONESCYTHE_ARMOR` | 524 (0x20C) |  |  |  |
-| `VESTMENTS_OF_FAITH` | 525 (0x20D) |  |  |  |
-| `FROSTFIRE_REGALIA` | 526 (0x20E) |  |  |  |
-| `THE_EARTHSHATTERER` | 527 (0x20F) |  |  |  |
-| `REDEMPTION_ARMOR` | 528 (0x210) |  |  |  |
-| `PLAGUEHEART_RAIMENT` | 529 (0x211) |  |  |  |
-| `CRYPTSTALKER_ARMOR` | 530 (0x212) |  |  |  |
-| `BATTLEGEAR_OF_UNDEAD_SLAYING` | 533 (0x215) |  |  |  |
-| `UNDEAD_SLAYERS_ARMOR` | 534 (0x216) |  |  | Undead Slayer's Armor |
-| `GARB_OF_THE_UNDEAD_SLAYER` | 535 (0x217) |  |  |  |
-| `REGALIA_OF_UNDEAD_CLEANSING` | 536 (0x218) |  |  |  |
-| `CHAMPIONS_BATTLEARMOR` | 537 (0x219) |  |  | Champion's Battlearmor |
-| `CHAMPIONS_STORMCALLER` | 538 (0x21A) |  |  | Champion's Stormcaller |
-| `CHAMPIONS_REFUGE` | 539 (0x21B) |  |  | Champion's Refuge |
-| `CHAMPIONS_INVESTITURE` | 540 (0x21C) |  |  | Champion's Investiture |
-| `CHAMPIONS_DREADGEAR` | 541 (0x21D) |  |  | Champion's Dreadgear |
-| `CHAMPIONS_ARCANUM` | 542 (0x21E) |  |  | Champion's Arcanum |
-| `CHAMPIONS_PURSUANCE` | 543 (0x21F) |  |  | Champion's Pursuance |
-| `LIEUTENANT_COMMANDERS_REDOUBT` | 544 (0x220) |  |  | Lieutenant Commander's Redoubt |
-| `LIEUTENANT_COMMANDERS_BATTLEARMOR` | 545 (0x221) |  |  | Lieutenant Commander's Battlearmor |
-| `LIEUTENANT_COMMANDERS_ARCANUM` | 546 (0x222) |  |  | Lieutenant Commander's Arcanum |
-| `LIEUTENANT_COMMANDERS_DREADGEAR` | 547 (0x223) |  |  | Lieutenant Commander's Dreadgear |
-| `LIEUTENANT_COMMANDERS_GUARD` | 548 (0x224) |  |  | Lieutenant Commander's Guard |
-| `LIEUTENANT_COMMANDERS_INVESTITURE` | 549 (0x225) |  |  | Lieutenant Commander's Investiture |
-| `LIEUTENANT_COMMANDERS_PURSUANCE` | 550 (0x226) |  |  | Lieutenant Commander's Pursuance |
-| `LIEUTENANT_COMMANDERS_REFUGE` | 551 (0x227) |  |  | Lieutenant Commander's Refuge |
-| `WRATH_OF_SPELLFIRE` | 552 (0x228) |  |  |  |
-| `SHADOWS_EMBRACE` | 553 (0x229) |  |  | Shadow's Embrace |
-| `PRIMAL_MOONCLOTH` | 554 (0x22A) |  |  |  |
-| `NETHERWEAVE_VESTMENTS` | 555 (0x22B) |  |  |  |
-| `IMBUED_NETHERWEAVE` | 556 (0x22C) |  |  |  |
-| `SOULCLOTH_EMBRACE` | 557 (0x22D) |  |  |  |
-| `ARCANOWEAVE_VESTMENTS` | 558 (0x22E) |  |  |  |
-| `SPELLSTRIKE_INFUSION` | 559 (0x22F) |  |  |  |
-| `FEL_IRON_PLATE` | 560 (0x230) |  |  |  |
-| `FEL_IRON_CHAIN` | 561 (0x231) |  |  |  |
-| `ADAMANTITE_BATTLEGEAR` | 562 (0x232) |  |  |  |
-| `ENCHANTED_ADAMANTITE_ARMOR` | 563 (0x233) |  |  |  |
-| `FLAME_GUARD` | 564 (0x234) |  |  |  |
-| `KHORIUM_WARD` | 565 (0x235) |  |  |  |
-| `BURNING_RAGE` | 566 (0x236) |  |  |  |
-| `GLADIATORS_BATTLEGEAR` | 567 (0x237) |  |  | Gladiator's Battlegear |
-| `GLADIATORS_DREADGEAR` | 568 (0x238) |  |  | Gladiator's Dreadgear |
-| `FAITH_IN_FELSTEEL` | 569 (0x239) |  |  |  |
-| `THE_UNYIELDING` | 570 (0x23A) |  |  |  |
-| `WHITEMEND_WISDOM` | 571 (0x23B) |  |  |  |
-| `BATTLECAST_GARB` | 572 (0x23C) |  |  |  |
-| `FEL_SKIN` | 573 (0x23D) |  |  |  |
-| `STRENGTH_OF_THE_CLEFTHOOF` | 574 (0x23E) |  |  |  |
-| `FELSTALKER_ARMOR` | 575 (0x23F) |  |  |  |
-| `FURY_OF_THE_NETHER` | 576 (0x240) |  |  |  |
-| `GLADIATORS_VESTMENTS` | 577 (0x241) |  |  | Gladiator's Vestments |
-| `GLADIATORS_EARTHSHAKER` | 578 (0x242) |  |  | Gladiator's Earthshaker |
-| `GLADIATORS_REGALIA` | 579 (0x243) |  |  | Gladiator's Regalia |
-| `GLADIATORS_THUNDERFIST` | 580 (0x244) |  |  | Gladiator's Thunderfist |
-| `GLADIATORS_RAIMENT` | 581 (0x245) |  |  | Gladiator's Raiment |
-| `GLADIATORS_AEGIS` | 582 (0x246) |  |  | Gladiator's Aegis |
-| `GLADIATORS_VINDICATION` | 583 (0x247) |  |  | Gladiator's Vindication |
-| `GLADIATORS_SANCTUARY` | 584 (0x248) |  |  | Gladiator's Sanctuary |
-| `GLADIATORS_WILDHIDE` | 585 (0x249) |  |  | Gladiator's Wildhide |
-| `GLADIATORS_PURSUIT` | 586 (0x24A) |  |  | Gladiator's Pursuit |
-| `HIGH_WARLORDS_AEGIS` | 587 (0x24B) |  |  | High Warlord's Aegis |
-| `HIGH_WARLORDS_BATTLEGEAR` | 588 (0x24C) |  |  | High Warlord's Battlegear |
-| `GRAND_MARSHALS_AEGIS` | 589 (0x24D) |  |  | Grand Marshal's Aegis |
-| `GRAND_MARSHALS_BATTLEGEAR` | 590 (0x24E) |  |  | Grand Marshal's Battlegear |
-| `GRAND_MARSHALS_DREADGEAR` | 591 (0x24F) |  |  | Grand Marshal's Dreadgear |
-| `HIGH_WARLORDS_DREADGEAR` | 592 (0x250) |  |  | High Warlord's Dreadgear |
-| `GRAND_MARSHALS_EARTHSHAKER` | 593 (0x251) |  |  | Grand Marshal's Earthshaker |
-| `HIGH_WARLORDS_EARTHSHAKER` | 594 (0x252) |  |  | High Warlord's Earthshaker |
-| `GRAND_MARSHALS_PURSUIT` | 595 (0x253) |  |  | Grand Marshal's Pursuit |
-| `HIGH_WARLORDS_PURSUIT` | 596 (0x254) |  |  | High Warlord's Pursuit |
-| `GRAND_MARSHALS_RAIMENT` | 597 (0x255) |  |  | Grand Marshal's Raiment |
-| `HIGH_WARLORDS_RAIMENT` | 598 (0x256) |  |  | High Warlord's Raiment |
-| `GRAND_MARSHALS_REGALIA` | 599 (0x257) |  |  | Grand Marshal's Regalia |
-| `HIGH_WARLORDS_REGALIA` | 600 (0x258) |  |  | High Warlord's Regalia |
-| `GRAND_MARSHALS_SANCTUARY` | 601 (0x259) |  |  | Grand Marshal's Sanctuary |
-| `HIGH_WARLORDS_SANCTUARY` | 602 (0x25A) |  |  | High Warlord's Sanctuary |
-| `GRAND_MARSHALS_THUNDERFIST` | 603 (0x25B) |  |  | Grand Marshal's Thunderfist |
-| `HIGH_WARLORDS_THUNDERFIST` | 604 (0x25C) |  |  | High Warlord's Thunderfist |
-| `GRAND_MARSHALS_VESTMENTS` | 605 (0x25D) |  |  | Grand Marshal's Vestments |
-| `HIGH_WARLORDS_VESTMENTS` | 606 (0x25E) |  |  | High Warlord's Vestments |
-| `GRAND_MARSHALS_VINDICATION` | 607 (0x25F) |  |  | Grand Marshal's Vindication |
-| `HIGH_WARLORDS_VINDICATION` | 608 (0x260) |  |  | High Warlord's Vindication |
-| `GRAND_MARSHALS_WILDHIDE` | 609 (0x261) |  |  | Grand Marshal's Wildhide |
-| `HIGH_WARLORDS_WILDHIDE` | 610 (0x262) |  |  | High Warlord's Wildhide |
-| `FELSCALE_ARMOR` | 611 (0x263) |  |  |  |
-| `SCALED_DRAENIC_ARMOR` | 612 (0x264) |  |  |  |
-| `THICK_DRAENIC_ARMOR` | 613 (0x265) |  |  |  |
-| `WILD_DRAENISH_ARMOR` | 614 (0x266) |  |  |  |
-| `GLADIATORS_FELSHROUD` | 615 (0x267) |  |  | Gladiator's Felshroud |
-| `NETHERSCALE_ARMOR` | 616 (0x268) |  |  |  |
-| `NETHERSTRIKE_ARMOR` | 617 (0x269) |  |  |  |
-| `WINDHAWK_ARMOR` | 618 (0x26A) |  |  |  |
-| `PRIMAL_INTENT` | 619 (0x26B) |  |  |  |
-| `ASSASSINATION_ARMOR` | 620 (0x26C) |  |  |  |
-| `NETHERBLADE` | 621 (0x26D) |  |  |  |
-| `DEATHMANTLE` | 622 (0x26E) |  |  |  |
-| `RIGHTEOUS_ARMOR` | 623 (0x26F) |  |  |  |
-| `JUSTICAR_RAIMENT` | 624 (0x270) |  |  |  |
-| `JUSTICAR_ARMOR` | 625 (0x271) |  |  |  |
-| `JUSTICAR_BATTLEGEAR` | 626 (0x272) |  |  |  |
-| `CRYSTALFORGE_RAIMENT` | 627 (0x273) |  |  |  |
-| `CRYSTALFORGE_ARMOR` | 628 (0x274) |  |  |  |
-| `CRYSTALFORGE_BATTLEGEAR` | 629 (0x275) |  |  |  |
-| `TIDEFURY_RAIMENT` | 630 (0x276) |  |  |  |
-| `CYCLONE_RAIMENT` | 631 (0x277) |  |  |  |
-| `CYCLONE_REGALIA` | 632 (0x278) |  |  |  |
-| `CYCLONE_HARNESS` | 633 (0x279) |  |  |  |
-| `CATACLYSM_RAIMENT` | 634 (0x27A) |  |  |  |
-| `CATACLYSM_REGALIA` | 635 (0x27B) |  |  |  |
-| `CATACLYSM_HARNESS` | 636 (0x27C) |  |  |  |
-| `MOONGLADE_RAIMENT` | 637 (0x27D) |  |  |  |
-| `MALORNE_RAIMENT` | 638 (0x27E) |  |  |  |
-| `MALORNE_REGALIA` | 639 (0x27F) |  |  |  |
-| `MALORNE_HARNESS` | 640 (0x280) |  |  |  |
-| `NORDRASSIL_HARNESS` | 641 (0x281) |  |  |  |
-| `NORDRASSIL_RAIMENT` | 642 (0x282) |  |  |  |
-| `NORDRASSIL_REGALIA` | 643 (0x283) |  |  |  |
-| `OBLIVION_RAIMENT` | 644 (0x284) |  |  |  |
-| `VOIDHEART_RAIMENT` | 645 (0x285) |  |  |  |
-| `CORRUPTOR_RAIMENT` | 646 (0x286) |  |  |  |
-| `INCANTERS_REGALIA` | 647 (0x287) |  |  | Incanter's Regalia |
-| `ALDOR_REGALIA` | 648 (0x288) |  |  |  |
-| `TIRISFAL_REGALIA` | 649 (0x289) |  |  |  |
-| `BEAST_LORD_ARMOR` | 650 (0x28A) |  |  |  |
-| `DEMON_STALKER_ARMOR` | 651 (0x28B) |  |  |  |
-| `RIFT_STALKER_ARMOR` | 652 (0x28C) |  |  |  |
-| `BOLD_ARMOR` | 653 (0x28D) |  |  |  |
-| `WARBRINGER_ARMOR` | 654 (0x28E) |  |  |  |
-| `WARBRINGER_BATTLEGEAR` | 655 (0x28F) |  |  |  |
-| `DESTROYER_ARMOR` | 656 (0x290) |  |  |  |
-| `DESTROYER_BATTLEGEAR` | 657 (0x291) |  |  |  |
-| `MANA_ETCHED_REGALIA` | 658 (0x292) |  |  | Mana-Etched Regalia |
-| `WASTEWALKER_ARMOR` | 659 (0x293) |  |  |  |
-| `DESOLATION_BATTLEGEAR` | 660 (0x294) |  |  |  |
-| `DOOMPLATE_BATTLEGEAR` | 661 (0x295) |  |  |  |
-| `HALLOWED_RAIMENT` | 662 (0x296) |  |  |  |
-| `INCARNATE_RAIMENT` | 663 (0x297) |  |  |  |
-| `INCARNATE_REGALIA` | 664 (0x298) |  |  |  |
-| `AVATAR_RAIMENT` | 665 (0x299) |  |  |  |
-| `AVATAR_REGALIA` | 666 (0x29A) |  |  |  |
-| `THE_TWIN_STARS` | 667 (0x29B) |  |  |  |
-| `SLAYERS_ARMOR` | 668 (0x29C) |  |  | Slayer's Armor |
-| `GRONNSTALKERS_ARMOR` | 669 (0x29D) |  |  | Gronnstalker's Armor |
-| `MALEFIC_RAIMENT` | 670 (0x29E) |  |  |  |
-| `TEMPEST_REGALIA` | 671 (0x29F) |  |  |  |
-| `ONSLAUGHT_BATTLEGEAR` | 672 (0x2A0) |  |  |  |
-| `ONSLAUGHT_ARMOR` | 673 (0x2A1) |  |  |  |
-| `ABSOLUTION_REGALIA` | 674 (0x2A2) |  |  |  |
-| `VESTMENTS_OF_ABSOLUTION` | 675 (0x2A3) |  |  |  |
-| `THUNDERHEART_HARNESS` | 676 (0x2A4) |  |  |  |
-| `THUNDERHEART_REGALIA` | 677 (0x2A5) |  |  |  |
-| `THUNDERHEART_RAIMENT` | 678 (0x2A6) |  |  |  |
-| `LIGHTBRINGER_ARMOR` | 679 (0x2A7) |  |  |  |
-| `LIGHTBRINGER_BATTLEGEAR` | 680 (0x2A8) |  |  |  |
-| `LIGHTBRINGER_RAIMENT` | 681 (0x2A9) |  |  |  |
-| `SKYSHATTER_HARNESS` | 682 (0x2AA) |  |  |  |
-| `SKYSHATTER_RAIMENT` | 683 (0x2AB) |  |  |  |
-| `SKYSHATTER_REGALIA` | 684 (0x2AC) |  |  |  |
-| `GLADIATORS_REFUGE` | 685 (0x2AD) |  |  | Gladiator's Refuge |
-| `GLADIATORS_WARTIDE` | 686 (0x2AE) |  |  | Gladiator's Wartide |
-| `GLADIATORS_INVESTITURE` | 687 (0x2AF) |  |  | Gladiator's Investiture |
-| `GRAND_MARSHALS_REFUGE` | 688 (0x2B0) |  |  | Grand Marshal's Refuge |
-| `HIGH_WARLORDS_REFUGE` | 689 (0x2B1) |  |  | High Warlord's Refuge |
-| `GLADIATORS_REDEMPTION` | 690 (0x2B2) |  |  | Gladiator's Redemption |
-| `GRAND_MARSHALS_INVESTITURE` | 691 (0x2B3) |  |  | Grand Marshal's Investiture |
-| `HIGH_WARLORDS_INVESTITURE` | 692 (0x2B4) |  |  | High Warlord's Investiture |
-| `GRAND_MARSHALS_REDEMPTION` | 693 (0x2B5) |  |  | Grand Marshal's Redemption |
-| `HIGH_WARLORDS_REDEMPTION` | 694 (0x2B6) |  |  | High Warlord's Redemption |
-| `GRAND_MARSHALS_WARTIDE` | 695 (0x2B7) |  |  | Grand Marshal's Wartide |
-| `HIGH_WARLORDS_WARTIDE` | 696 (0x2B8) |  |  | High Warlord's Wartide |
-| `CHAMPIONS_REDOUBT` | 697 (0x2B9) |  |  | Champion's Redoubt |
-| `WARLORDS_AEGIS` | 698 (0x2BA) |  |  | Warlord's Aegis |
-| `THE_TWIN_BLADES_OF_AZZINOTH` | 699 (0x2BB) |  |  |  |
-| `MERCILESS_GLADIATORS_AEGIS` | 700 (0x2BC) |  |  | Merciless Gladiator's Aegis |
-| `MERCILESS_GLADIATORS_BATTLEGEAR` | 701 (0x2BD) |  |  | Merciless Gladiator's Battlegear |
-| `MERCILESS_GLADIATORS_DREADGEAR` | 702 (0x2BE) |  |  | Merciless Gladiator's Dreadgear |
-| `MERCILESS_GLADIATORS_EARTHSHAKER` | 703 (0x2BF) |  |  | Merciless Gladiator's Earthshaker |
-| `MERCILESS_GLADIATORS_FELSHROUD` | 704 (0x2C0) |  |  | Merciless Gladiator's Felshroud |
-| `MERCILESS_GLADIATORS_INVESTITURE` | 705 (0x2C1) |  |  | Merciless Gladiator's Investiture |
-| `MERCILESS_GLADIATORS_PURSUIT` | 706 (0x2C2) |  |  | Merciless Gladiator's Pursuit |
-| `MERCILESS_GLADIATORS_RAIMENT` | 707 (0x2C3) |  |  | Merciless Gladiator's Raiment |
-| `MERCILESS_GLADIATORS_REDEMPTION` | 708 (0x2C4) |  |  | Merciless Gladiator's Redemption |
-| `MERCILESS_GLADIATORS_REFUGE` | 709 (0x2C5) |  |  | Merciless Gladiator's Refuge |
-| `MERCILESS_GLADIATORS_REGALIA` | 710 (0x2C6) |  |  | Merciless Gladiator's Regalia |
-| `MERCILESS_GLADIATORS_SANCTUARY` | 711 (0x2C7) |  |  | Merciless Gladiator's Sanctuary |
-| `MERCILESS_GLADIATORS_THUNDERFIST` | 712 (0x2C8) |  |  | Merciless Gladiator's Thunderfist |
-| `MERCILESS_GLADIATORS_VESTMENTS` | 713 (0x2C9) |  |  | Merciless Gladiator's Vestments |
-| `MERCILESS_GLADIATORS_VINDICATION` | 714 (0x2CA) |  |  | Merciless Gladiator's Vindication |
-| `MERCILESS_GLADIATORS_WARTIDE` | 715 (0x2CB) |  |  | Merciless Gladiator's Wartide |
-| `MERCILESS_GLADIATORS_WILDHIDE` | 716 (0x2CC) |  |  | Merciless Gladiator's Wildhide |
-| `FIELD_MARSHALS_EARTHSHAKER` | 717 (0x2CD) |  |  | Field Marshal's Earthshaker |
-| `LIEUTENANT_COMMANDERS_EARTHSHAKER` | 718 (0x2CE) |  |  | Lieutenant Commander's Earthshaker |
-| `THE_FISTS_OF_FURY` | 719 (0x2CF) |  |  |  |
-| `VENGEFUL_GLADIATORS_REFUGE` | 720 (0x2D0) |  |  | Vengeful Gladiator's Refuge |
-| `VENGEFUL_GLADIATORS_SANCTUARY` | 721 (0x2D1) |  |  | Vengeful Gladiator's Sanctuary |
-| `VENGEFUL_GLADIATORS_WILDHIDE` | 722 (0x2D2) |  |  | Vengeful Gladiator's Wildhide |
-| `VENGEFUL_GLADIATORS_PURSUIT` | 723 (0x2D3) |  |  | Vengeful Gladiator's Pursuit |
-| `VENGEFUL_GLADIATORS_REGALIA` | 724 (0x2D4) |  |  | Vengeful Gladiator's Regalia |
-| `VENGEFUL_GLADIATORS_REDEMPTION` | 725 (0x2D5) |  |  | Vengeful Gladiator's Redemption |
-| `VENGEFUL_GLADIATORS_VINDICATION` | 726 (0x2D6) |  |  | Vengeful Gladiator's Vindication |
-| `VENGEFUL_GLADIATORS_AEGIS` | 727 (0x2D7) |  |  | Vengeful Gladiator's Aegis |
-| `VENGEFUL_GLADIATORS_INVESTITURE` | 728 (0x2D8) |  |  | Vengeful Gladiator's Investiture |
-| `VENGEFUL_GLADIATORS_RAIMENT` | 729 (0x2D9) |  |  | Vengeful Gladiator's Raiment |
-| `VENGEFUL_GLADIATORS_VESTMENTS` | 730 (0x2DA) |  |  | Vengeful Gladiator's Vestments |
-| `VENGEFUL_GLADIATORS_WARTIDE` | 731 (0x2DB) |  |  | Vengeful Gladiator's Wartide |
-| `VENGEFUL_GLADIATORS_EARTHSHAKER` | 732 (0x2DC) |  |  | Vengeful Gladiator's Earthshaker |
-| `VENGEFUL_GLADIATORS_THUNDERFIST` | 733 (0x2DD) |  |  | Vengeful Gladiator's Thunderfist |
-| `VENGEFUL_GLADIATORS_DREADGEAR` | 734 (0x2DE) |  |  | Vengeful Gladiator's Dreadgear |
-| `VENGEFUL_GLADIATORS_FELSHROUD` | 735 (0x2DF) |  |  | Vengeful Gladiator's Felshroud |
-| `VENGEFUL_GLADIATORS_BATTLEGEAR` | 736 (0x2E0) |  |  | Vengeful Gladiator's Battlegear |
-| `LATROS_FLURRY` | 737 (0x2E1) |  |  | Latro's Flurry |
-| `DREADWEAVE_BATTLEGEAR` | 738 (0x2E2) |  |  |  |
-| `MOONCLOTH_BATTLEGEAR` | 739 (0x2E3) |  |  |  |
-| `SATIN_BATTLEGEAR` | 740 (0x2E4) |  |  |  |
-| `EVOKERS_SILK_BATTLEGEAR` | 741 (0x2E5) |  |  | Evoker's Silk Battlegear |
-| `DRAGONHIDE_BATTLEGEAR` | 742 (0x2E6) |  |  |  |
-| `WYRMHIDE_BATTLEGEAR` | 743 (0x2E7) |  |  |  |
-| `KODOHIDE_BATTLEGEAR` | 744 (0x2E8) |  |  |  |
-| `OPPORTUNISTS_BATTLEGEAR` | 745 (0x2E9) |  |  | Opportunist's Battlegear |
-| `SEERS_MAIL_BATTLEGEAR` | 746 (0x2EA) |  |  | Seer's Mail Battlegear |
-| `SEERS_RINGMAIL_BATTLEGEAR` | 747 (0x2EB) |  |  | Seer's Ringmail Battlegear |
-| `SEERS_LINKED_BATTLEGEAR` | 748 (0x2EC) |  |  | Seer's Linked Battlegear |
-| `STALKERS_CHAIN_BATTLEGEAR` | 749 (0x2ED) |  |  | Stalker's Chain Battlegear |
-| `SAVAGE_PLATE_BATTLEGEAR` | 750 (0x2EE) |  |  |  |
-| `CRUSADERS_ORNAMENTED_BATTLEGEAR` | 751 (0x2EF) |  |  | Crusader's Ornamented Battlegear |
-| `CRUSADERS_SCALED_BATTLEGEAR` | 752 (0x2F0) |  |  | Crusader's Scaled Battlegear |
-| `BOREAN_EMBRACE` | 754 (0x2F2) |  |  |  |
-| `NERUBIAN_HIVE` | 755 (0x2F3) |  |  |  |
-| `FROSTSCALE_BINDING` | 756 (0x2F4) |  |  |  |
-| `ICEBORNE_EMBRACE` | 757 (0x2F5) |  |  |  |
-| `RAINES_REVENGE` | 759 (0x2F7) |  |  | Raine's Revenge |
-| `GLADIATORS_DREADPLATE` | 760 (0x2F8) |  |  | Gladiator's Dreadplate |
-| `WINTER_GARB` | 761 (0x2F9) |  |  |  |
-| `BREWFEST_GARB` | 762 (0x2FA) |  |  |  |
-| `FROSTWOVEN_POWER` | 763 (0x2FB) |  |  |  |
-| `DUSKWEAVER` | 764 (0x2FC) |  |  |  |
-| `GLADIATORS_BATTLEGEAR2` | 765 (0x2FD) |  |  | Gladiator's Battlegear |
-| `GLADIATORS_VINDICATION2` | 766 (0x2FE) |  |  | Gladiator's Vindication |
-| `GLADIATORS_REDEMPTION2` | 767 (0x2FF) |  |  | Gladiator's Redemption |
-| `GLADIATORS_DESECRATION` | 768 (0x300) |  |  | Gladiator's Desecration |
-| `GLADIATORS_THUNDERFIST2` | 769 (0x301) |  |  | Gladiator's Thunderfist |
-| `GLADIATORS_EARTHSHAKER2` | 770 (0x302) |  |  | Gladiator's Earthshaker |
-| `GLADIATORS_WARTIDE2` | 771 (0x303) |  |  | Gladiator's Wartide |
-| `GLADIATORS_PURSUIT2` | 772 (0x304) |  |  | Gladiator's Pursuit |
-| `GLADIATORS_REFUGE2` | 773 (0x305) |  |  | Gladiator's Refuge |
-| `GLADIATORS_WILDHIDE2` | 774 (0x306) |  |  | Gladiator's Wildhide |
-| `GLADIATORS_SANCTUARY2` | 775 (0x307) |  |  | Gladiator's Sanctuary |
-| `GLADIATORS_VESTMENTS2` | 776 (0x308) |  |  | Gladiator's Vestments |
-| `GLADIATORS_INVESTITURE2` | 777 (0x309) |  |  | Gladiator's Investiture |
-| `GLADIATORS_RAIMENT2` | 778 (0x30A) |  |  | Gladiator's Raiment |
-| `GLADIATORS_REGALIA2` | 779 (0x30B) |  |  | Gladiator's Regalia |
-| `GLADIATORS_FELSHROUD2` | 780 (0x30C) |  |  | Gladiator's Felshroud |
-| `BLESSED_REGALIA_OF_UNDEAD_CLEANSING` | 781 (0x30D) |  |  |  |
-| `UNDEAD_SLAYERS_BLESSED_ARMOR` | 782 (0x30E) |  |  | Undead Slayer's Blessed Armor |
-| `BLESSED_GARB_OF_THE_UNDEAD_SLAYER` | 783 (0x30F) |  |  |  |
-| `BLESSED_BATTLEGEAR_OF_UNDEAD_SLAYING` | 784 (0x310) |  |  |  |
-| `MIDSUMMER_REVELER` | 785 (0x311) |  |  |  |
-| `DREADNAUGHT_PLATE` | 787 (0x313) |  |  |  |
-| `DREADNAUGHT_BATTLEGEAR` | 788 (0x314) |  |  |  |
-| `REDEMPTION_BATTLEGEAR` | 789 (0x315) |  |  |  |
-| `REDEMPTION_REGALIA` | 790 (0x316) |  |  |  |
-| `REDEMPTION_PLATE` | 791 (0x317) |  |  |  |
-| `SCOURGEBORNE_BATTLEGEAR` | 792 (0x318) |  |  |  |
-| `SCOURGEBORNE_PLATE` | 793 (0x319) |  |  |  |
-| `CRYPTSTALKER_BATTLEGEAR` | 794 (0x31A) |  |  |  |
-| `EARTHSHATTER_BATTLEGEAR` | 795 (0x31B) |  |  |  |
-| `EARTHSHATTER_GARB` | 796 (0x31C) |  |  |  |
-| `EARTHSHATTER_REGALIA` | 797 (0x31D) |  |  |  |
-| `DREAMWALKER_BATTLEGEAR` | 798 (0x31E) |  |  |  |
-| `DREAMWALKER_REGALIA` | 799 (0x31F) |  |  |  |
-| `DREAMWALKER_GARB` | 800 (0x320) |  |  |  |
-| `BONESCYTHE_BATTLEGEAR` | 801 (0x321) |  |  |  |
-| `PLAGUEHEART_GARB` | 802 (0x322) |  |  |  |
-| `FROSTFIRE_GARB` | 803 (0x323) |  |  |  |
-| `REGALIA_OF_FAITH` | 804 (0x324) |  |  |  |
-| `GARB_OF_FAITH` | 805 (0x325) |  |  |  |
-| `SPRING_TUXEDO` | 812 (0x32C) |  |  |  |
-| `EVISCERATORS_BATTLEGEAR` | 813 (0x32D) |  |  | Eviscerator's Battlegear |
-| `ORNATE_SARONITE_BATTLEGEAR` | 814 (0x32E) |  |  |  |
-| `OVERCASTER_BATTLEGEAR` | 815 (0x32F) |  |  |  |
-| `SAVAGE_SARONITE_BATTLEGEAR` | 816 (0x330) |  |  |  |
-| `STORMHIDE_BATTLEGEAR` | 817 (0x331) |  |  |  |
-| `SWIFTARROW_BATTLEGEAR` | 818 (0x332) |  |  |  |
-| `FROSTSAVAGE_BATTLEGEAR` | 819 (0x333) |  |  |  |
-| `AEGIS_BATTLEGEAR` | 820 (0x334) |  |  |  |
-| `AEGIS_PLATE` | 821 (0x335) |  |  |  |
-| `AEGIS_REGALIA` | 822 (0x336) |  |  |  |
-| `WORLDBREAKER_BATTLEGEAR` | 823 (0x337) |  |  |  |
-| `WORLDBREAKER_GARB` | 824 (0x338) |  |  |  |
-| `WORLDBREAKER_REGALIA` | 825 (0x339) |  |  |  |
-| `TERRORBLADE_BATTLEGEAR` | 826 (0x33A) |  |  |  |
-| `NIGHTSONG_BATTLEGEAR` | 827 (0x33B) |  |  |  |
-| `NIGHTSONG_GARB` | 828 (0x33C) |  |  |  |
-| `NIGHTSONG_REGALIA` | 829 (0x33D) |  |  |  |
-| `SIEGEBREAKER_BATTLEGEAR` | 830 (0x33E) |  |  |  |
-| `SIEGEBREAKER_PLATE` | 831 (0x33F) |  |  |  |
-| `SANCTIFICATION_GARB` | 832 (0x340) |  |  |  |
-| `SANCTIFICATION_REGALIA` | 833 (0x341) |  |  |  |
-| `DARKRUNED_BATTLEGEAR` | 834 (0x342) |  |  |  |
-| `DARKRUNED_PLATE` | 835 (0x343) |  |  |  |
-| `KIRIN_TOR_GARB` | 836 (0x344) |  |  |  |
-| `DEATHBRINGER_GARB` | 837 (0x345) |  |  |  |
-| `SCOURGESTALKER_BATTLEGEAR` | 838 (0x346) |  |  |  |
-| `KHADGARS_REGALIA` | 843 (0x34B) |  |  | Khadgar's Regalia |
-| `SUNSTRIDERS_REGALIA` | 844 (0x34C) |  |  | Sunstrider's Regalia |
-| `GUL_DANS_REGALIA` | 845 (0x34D) |  |  | Gul'dan's Regalia |
-| `KEL_THUZADS_REGALIA` | 846 (0x34E) |  |  | Kel'Thuzad's Regalia |
-| `VELENS_RAIMENT` | 847 (0x34F) |  |  | Velen's Raiment |
-| `ZABRAS_RAIMENT` | 848 (0x350) |  |  | Zabra's Raiment |
-| `VELENS_REGALIA` | 849 (0x351) |  |  | Velen's Regalia |
-| `ZABRAS_REGALIA` | 850 (0x352) |  |  | Zabra's Regalia |
-| `MALFURIONS_GARB` | 851 (0x353) |  |  | Malfurion's Garb |
-| `RUNETOTEMS_GARB` | 852 (0x354) |  |  | Runetotem's Garb |
-| `MALFURIONS_REGALIA` | 853 (0x355) |  |  | Malfurion's Regalia |
-| `RUNETOTEMS_REGALIA` | 854 (0x356) |  |  | Runetotem's Regalia |
-| `MALFURIONS_BATTLEGEAR` | 855 (0x357) |  |  | Malfurion's Battlegear |
-| `RUNETOTEMS_BATTLEGEAR` | 856 (0x358) |  |  | Runetotem's Battlegear |
-| `VANCLEEFS_BATTLEGEAR` | 857 (0x359) |  |  | VanCleef's Battlegear |
-| `GARONAS_BATTLEGEAR` | 858 (0x35A) |  |  | Garona's Battlegear |
-| `WINDRUNNERS_BATTLEGEAR` | 859 (0x35B) |  |  | Windrunner's Battlegear |
-| `WINDRUNNERS_PURSUIT` | 860 (0x35C) |  |  | Windrunner's Pursuit |
-| `NOBUNDOS_GARB` | 861 (0x35D) |  |  | Nobundo's Garb |
-| `THRALLS_GARB` | 862 (0x35E) |  |  | Thrall's Garb |
-| `THRALLS_REGALIA` | 863 (0x35F) |  |  | Thrall's Regalia |
-| `NOBUNDOS_REGALIA` | 864 (0x360) |  |  | Nobundo's Regalia |
-| `NOBUNDOS_BATTLEGEAR` | 865 (0x361) |  |  | Nobundo's Battlegear |
-| `THRALLS_BATTLEGEAR` | 866 (0x362) |  |  | Thrall's Battlegear |
-| `WRYNNS_BATTLEGEAR` | 867 (0x363) |  |  | Wrynn's Battlegear |
-| `HELLSCREAMS_BATTLEGEAR` | 868 (0x364) |  |  | Hellscream's Battlegear |
-| `WRYNNS_PLATE` | 869 (0x365) |  |  | Wrynn's Plate |
-| `HELLSCREAMS_PLATE` | 870 (0x366) |  |  | Hellscream's Plate |
-| `THASSARIANS_BATTLEGEAR` | 871 (0x367) |  |  | Thassarian's Battlegear |
-| `KOLTIRAS_BATTLEGEAR` | 872 (0x368) |  |  | Koltira's Battlegear |
-| `THASSARIANS_PLATE` | 873 (0x369) |  |  | Thassarian's Plate |
-| `KOLTIRAS_PLATE` | 874 (0x36A) |  |  | Koltira's Plate |
-| `TURALYONS_GARB` | 875 (0x36B) |  |  | Turalyon's Garb |
-| `LIADRINS_GARB` | 876 (0x36C) |  |  | Liadrin's Garb |
-| `TURALYONS_BATTLEGEAR` | 877 (0x36D) |  |  | Turalyon's Battlegear |
-| `LIADRINS_BATTLEGEAR` | 878 (0x36E) |  |  | Liadrin's Battlegear |
-| `TURALYONS_PLATE` | 879 (0x36F) |  |  | Turalyon's Plate |
-| `LIADRINS_PLATE` | 880 (0x370) |  |  | Liadrin's Plate |
-| `PURIFIED_SHARD_OF_THE_GODS` | 881 (0x371) |  |  |  |
-| `SHINY_SHARD_OF_THE_GODS` | 882 (0x372) |  |  |  |
-| `BLOODMAGES_REGALIA` | 883 (0x373) |  |  | Bloodmage's Regalia |
-| `DARK_COVENS_REGALIA` | 884 (0x374) |  |  | Dark Coven's Regalia |
-| `CRIMSON_ACOLYTES_RAIMENT` | 885 (0x375) |  |  | Crimson Acolyte's Raiment |
-| `CRIMSON_ACOLYTES_REGALIA` | 886 (0x376) |  |  | Crimson Acolyte's Regalia |
-| `LASHERWEAVE_GARB` | 887 (0x377) |  |  |  |
-| `LASHERWEAVE_REGALIA` | 888 (0x378) |  |  |  |
-| `LASHERWEAVE_BATTLEGEAR` | 889 (0x379) |  |  |  |
-| `SHADOWBLADES_BATTLEGEAR` | 890 (0x37A) |  |  | Shadowblade's Battlegear |
-| `AHN_KAHAR_BLOOD_HUNTERS_BATTLEGEAR` | 891 (0x37B) |  |  | Ahn'Kahar Blood Hunter's Battlegear |
-| `FROST_WITCHS_GARB` | 892 (0x37C) |  |  | Frost Witch's Garb |
-| `FROST_WITCHS_REGALIA` | 893 (0x37D) |  |  | Frost Witch's Regalia |
-| `FROST_WITCHS_BATTLEGEAR` | 894 (0x37E) |  |  | Frost Witch's Battlegear |
-| `YMIRJAR_LORDS_BATTLEGEAR` | 895 (0x37F) |  |  | Ymirjar Lord's Battlegear |
-| `YMIRJAR_LORDS_PLATE` | 896 (0x380) |  |  | Ymirjar Lord's Plate |
-| `SCOURGELORDS_BATTLEGEAR` | 897 (0x381) |  |  | Scourgelord's Battlegear |
-| `SCOURGELORDS_PLATE` | 898 (0x382) |  |  | Scourgelord's Plate |
-| `LIGHTSWORN_GARB` | 899 (0x383) |  |  |  |
-| `LIGHTSWORN_BATTLEGEAR` | 900 (0x384) |  |  |  |
-| `LIGHTSWORN_PLATE` | 901 (0x385) |  |  |  |
+| Enumerator | Value  | Comment | Display |
+| --------- | -------- | ------- | ------- |
+| `NONE` | 0 (0x00) |  |  |
+| `THE_GLADIATOR` | 1 (0x01) |  |  |
+| `DAL_RENDS_ARMS` | 41 (0x29) |  | Dal'Rend's Arms |
+| `SPIDERS_KISS` | 65 (0x41) |  | Spider's Kiss |
+| `THE_POSTMASTER` | 81 (0x51) |  |  |
+| `CADAVEROUS_GARB` | 121 (0x79) |  |  |
+| `NECROPILE_RAIMENT` | 122 (0x7A) |  |  |
+| `BLOODMAIL_REGALIA` | 123 (0x7B) |  |  |
+| `DEATHBONE_GUARDIAN` | 124 (0x7C) |  |  |
+| `VOLCANIC_ARMOR` | 141 (0x8D) |  |  |
+| `STORMSHROUD_ARMOR` | 142 (0x8E) |  |  |
+| `DEVILSAUR_ARMOR` | 143 (0x8F) |  |  |
+| `IRONFEATHER_ARMOR` | 144 (0x90) |  |  |
+| `DEFIAS_LEATHER` | 161 (0xA1) |  |  |
+| `EMBRACE_OF_THE_VIPER` | 162 (0xA2) |  |  |
+| `CHAIN_OF_THE_SCARLET_CRUSADE` | 163 (0xA3) |  |  |
+| `MAGISTERS_REGALIA` | 181 (0xB5) |  | Magister's Regalia |
+| `VESTMENTS_OF_THE_DEVOUT` | 182 (0xB6) |  |  |
+| `DREADMIST_RAIMENT` | 183 (0xB7) |  |  |
+| `SHADOWCRAFT_ARMOR` | 184 (0xB8) |  |  |
+| `WILDHEART_RAIMENT` | 185 (0xB9) |  |  |
+| `BEASTSTALKER_ARMOR` | 186 (0xBA) |  |  |
+| `THE_ELEMENTS` | 187 (0xBB) |  |  |
+| `LIGHTFORGE_ARMOR` | 188 (0xBC) |  |  |
+| `BATTLEGEAR_OF_VALOR` | 189 (0xBD) |  |  |
+| `ARCANIST_REGALIA` | 201 (0xC9) |  |  |
+| `VESTMENTS_OF_PROPHECY` | 202 (0xCA) |  |  |
+| `FELHEART_RAIMENT` | 203 (0xCB) |  |  |
+| `NIGHTSLAYER_ARMOR` | 204 (0xCC) |  |  |
+| `CENARION_RAIMENT` | 205 (0xCD) |  |  |
+| `GIANTSTALKER_ARMOR` | 206 (0xCE) |  |  |
+| `THE_EARTHFURY` | 207 (0xCF) |  |  |
+| `LAWBRINGER_ARMOR` | 208 (0xD0) |  |  |
+| `BATTLEGEAR_OF_MIGHT` | 209 (0xD1) |  |  |
+| `NETHERWIND_REGALIA` | 210 (0xD2) |  |  |
+| `VESTMENTS_OF_TRANSCENDENCE` | 211 (0xD3) |  |  |
+| `NEMESIS_RAIMENT` | 212 (0xD4) |  |  |
+| `BLOODFANG_ARMOR` | 213 (0xD5) |  |  |
+| `STORMRAGE_RAIMENT` | 214 (0xD6) |  |  |
+| `DRAGONSTALKER_ARMOR` | 215 (0xD7) |  |  |
+| `THE_TEN_STORMS` | 216 (0xD8) |  |  |
+| `JUDGEMENT_ARMOR` | 217 (0xD9) |  |  |
+| `BATTLEGEAR_OF_WRATH` | 218 (0xDA) |  |  |
+| `GARB_OF_THERO_SHAN` | 221 (0xDD) |  | Garb of Thero-shan |
+| `SHARD_OF_THE_GODS` | 241 (0xF1) |  |  |
+| `SPIRIT_OF_ESKHANDAR` | 261 (0x105) |  |  |
+| `CHAMPIONS_BATTLEGEAR` | 281 (0x119) |  | Champion's Battlegear |
+| `LIEUTENANT_COMMANDERS_BATTLEGEAR` | 282 (0x11A) |  | Lieutenant Commander's Battlegear |
+| `CHAMPIONS_EARTHSHAKER` | 301 (0x12D) |  | Champion's Earthshaker |
+| `IMPERIAL_PLATE` | 321 (0x141) |  |  |
+| `CHAMPIONS_REGALIA` | 341 (0x155) |  | Champion's Regalia |
+| `CHAMPIONS_RAIMENT` | 342 (0x156) |  | Champion's Raiment |
+| `LIEUTENANT_COMMANDERS_REGALIA` | 343 (0x157) |  | Lieutenant Commander's Regalia |
+| `LIEUTENANT_COMMANDERS_RAIMENT` | 344 (0x158) |  | Lieutenant Commander's Raiment |
+| `CHAMPIONS_THREADS` | 345 (0x159) |  | Champion's Threads |
+| `LIEUTENANT_COMMANDERS_THREADS` | 346 (0x15A) |  | Lieutenant Commander's Threads |
+| `CHAMPIONS_VESTMENTS` | 347 (0x15B) |  | Champion's Vestments |
+| `LIEUTENANT_COMMANDERS_VESTMENTS` | 348 (0x15C) |  | Lieutenant Commander's Vestments |
+| `CHAMPIONS_PURSUIT` | 361 (0x169) |  | Champion's Pursuit |
+| `LIEUTENANT_COMMANDERS_PURSUIT` | 362 (0x16A) |  | Lieutenant Commander's Pursuit |
+| `LIEUTENANT_COMMANDERS_SANCTUARY` | 381 (0x17D) |  | Lieutenant Commander's Sanctuary |
+| `CHAMPIONS_SANCTUARY` | 382 (0x17E) |  | Champion's Sanctuary |
+| `WARLORDS_BATTLEGEAR` | 383 (0x17F) |  | Warlord's Battlegear |
+| `FIELD_MARSHALS_BATTLEGEAR` | 384 (0x180) |  | Field Marshal's Battlegear |
+| `WARLORDS_EARTHSHAKER` | 386 (0x182) |  | Warlord's Earthshaker |
+| `WARLORDS_REGALIA` | 387 (0x183) |  | Warlord's Regalia |
+| `FIELD_MARSHALS_REGALIA` | 388 (0x184) |  | Field Marshal's Regalia |
+| `FIELD_MARSHALS_RAIMENT` | 389 (0x185) |  | Field Marshal's Raiment |
+| `WARLORDS_RAIMENT` | 390 (0x186) |  | Warlord's Raiment |
+| `WARLORDS_THREADS` | 391 (0x187) |  | Warlord's Threads |
+| `FIELD_MARSHALS_THREADS` | 392 (0x188) |  | Field Marshal's Threads |
+| `WARLORDS_VESTMENTS` | 393 (0x189) |  | Warlord's Vestments |
+| `FIELD_MARSHALS_VESTMENTS` | 394 (0x18A) |  | Field Marshal's Vestments |
+| `FIELD_MARSHALS_PURSUIT` | 395 (0x18B) |  | Field Marshal's Pursuit |
+| `WARLORDS_PURSUIT` | 396 (0x18C) |  | Warlord's Pursuit |
+| `FIELD_MARSHALS_SANCTUARY` | 397 (0x18D) |  | Field Marshal's Sanctuary |
+| `WARLORDS_SANCTUARY` | 398 (0x18E) |  | Warlord's Sanctuary |
+| `LIEUTENANT_COMMANDERS_AEGIS` | 401 (0x191) |  | Lieutenant Commander's Aegis |
+| `FIELD_MARSHALS_AEGIS` | 402 (0x192) |  | Field Marshal's Aegis |
+| `BLOODVINE_GARB` | 421 (0x1A5) |  |  |
+| `PRIMAL_BATSKIN` | 441 (0x1B9) |  |  |
+| `BLOOD_TIGER_HARNESS` | 442 (0x1BA) |  |  |
+| `BLOODSOUL_EMBRACE` | 443 (0x1BB) |  |  |
+| `THE_DARKSOUL` | 444 (0x1BC) |  |  |
+| `THE_TWIN_BLADES_OF_HAKKARI` | 461 (0x1CD) |  |  |
+| `ZANZILS_CONCENTRATION` | 462 (0x1CE) |  | Zanzil's Concentration |
+| `PRIMAL_BLESSING` | 463 (0x1CF) |  |  |
+| `OVERLORDS_RESOLUTION` | 464 (0x1D0) |  | Overlord's Resolution |
+| `PRAYER_OF_THE_PRIMAL` | 465 (0x1D1) |  |  |
+| `MAJOR_MOJO_INFUSION` | 466 (0x1D2) |  |  |
+| `THE_HIGHLANDERS_RESOLUTION` | 467 (0x1D3) |  | The Highlander's Resolution |
+| `THE_HIGHLANDERS_RESOLVE` | 468 (0x1D4) |  | The Highlander's Resolve |
+| `THE_HIGHLANDERS_DETERMINATION` | 469 (0x1D5) |  | The Highlander's Determination |
+| `THE_HIGHLANDERS_FORTITUDE` | 470 (0x1D6) |  | The Highlander's Fortitude |
+| `THE_HIGHLANDERS_PURPOSE` | 471 (0x1D7) |  | The Highlander's Purpose |
+| `THE_HIGHLANDERS_WILL` | 472 (0x1D8) |  | The Highlander's Will |
+| `THE_HIGHLANDERS_INTENT` | 473 (0x1D9) |  | The Highlander's Intent |
+| `VINDICATORS_BATTLEGEAR` | 474 (0x1DA) |  | Vindicator's Battlegear |
+| `FREETHINKERS_ARMOR` | 475 (0x1DB) |  | Freethinker's Armor |
+| `AUGURS_REGALIA` | 476 (0x1DC) |  | Augur's Regalia |
+| `PREDATORS_ARMOR` | 477 (0x1DD) |  | Predator's Armor |
+| `MADCAPS_OUTFIT` | 478 (0x1DE) |  | Madcap's Outfit |
+| `HARUSPEXS_GARB` | 479 (0x1DF) |  | Haruspex's Garb |
+| `CONFESSORS_RAIMENT` | 480 (0x1E0) |  | Confessor's Raiment |
+| `DEMONIACS_THREADS` | 481 (0x1E1) |  | Demoniac's Threads |
+| `ILLUSIONISTS_ATTIRE` | 482 (0x1E2) |  | Illusionist's Attire |
+| `THE_DEFILERS_DETERMINATION` | 483 (0x1E3) |  | The Defiler's Determination |
+| `THE_DEFILERS_FORTITUDE` | 484 (0x1E4) |  | The Defiler's Fortitude |
+| `THE_DEFILERS_INTENT` | 485 (0x1E5) |  | The Defiler's Intent |
+| `THE_DEFILERS_PURPOSE` | 486 (0x1E6) |  | The Defiler's Purpose |
+| `THE_DEFILERS_RESOLUTION` | 487 (0x1E7) |  | The Defiler's Resolution |
+| `THE_DEFILERS_WILL` | 488 (0x1E8) |  | The Defiler's Will |
+| `BLACK_DRAGON_MAIL` | 489 (0x1E9) |  |  |
+| `GREEN_DRAGON_MAIL` | 490 (0x1EA) |  |  |
+| `BLUE_DRAGON_MAIL` | 491 (0x1EB) |  |  |
+| `TWILIGHT_TRAPPINGS` | 492 (0x1EC) |  |  |
+| `GENESIS_RAIMENT` | 493 (0x1ED) |  |  |
+| `SYMBOLS_OF_UNENDING_LIFE` | 494 (0x1EE) |  |  |
+| `BATTLEGEAR_OF_UNYIELDING_STRENGTH` | 495 (0x1EF) |  |  |
+| `CONQUERORS_BATTLEGEAR` | 496 (0x1F0) |  | Conqueror's Battlegear |
+| `DEATHDEALERS_EMBRACE` | 497 (0x1F1) |  | Deathdealer's Embrace |
+| `EMBLEMS_OF_VEILED_SHADOWS` | 498 (0x1F2) |  |  |
+| `DOOMCALLERS_ATTIRE` | 499 (0x1F3) |  | Doomcaller's Attire |
+| `IMPLEMENTS_OF_UNSPOKEN_NAMES` | 500 (0x1F4) |  |  |
+| `STORMCALLERS_GARB` | 501 (0x1F5) |  | Stormcaller's Garb |
+| `GIFT_OF_THE_GATHERING_STORM` | 502 (0x1F6) |  |  |
+| `ENIGMA_VESTMENTS` | 503 (0x1F7) |  |  |
+| `TRAPPINGS_OF_VAULTED_SECRETS` | 504 (0x1F8) |  |  |
+| `AVENGERS_BATTLEGEAR` | 505 (0x1F9) |  | Avenger's Battlegear |
+| `BATTLEGEAR_OF_ETERNAL_JUSTICE` | 506 (0x1FA) |  |  |
+| `GARMENTS_OF_THE_ORACLE` | 507 (0x1FB) |  |  |
+| `FINERY_OF_INFINITE_WISDOM` | 508 (0x1FC) |  |  |
+| `STRIKERS_GARB` | 509 (0x1FD) |  | Striker's Garb |
+| `TRAPPINGS_OF_THE_UNSEEN_PATH` | 510 (0x1FE) |  |  |
+| `BATTLEGEAR_OF_HEROISM` | 511 (0x1FF) |  |  |
+| `DARKMANTLE_ARMOR` | 512 (0x200) |  |  |
+| `FERALHEART_RAIMENT` | 513 (0x201) |  |  |
+| `VESTMENTS_OF_THE_VIRTUOUS` | 514 (0x202) |  |  |
+| `BEASTMASTER_ARMOR` | 515 (0x203) |  |  |
+| `SOULFORGE_ARMOR` | 516 (0x204) |  |  |
+| `SORCERERS_REGALIA` | 517 (0x205) |  | Sorcerer's Regalia |
+| `DEATHMIST_RAIMENT` | 518 (0x206) |  |  |
+| `THE_FIVE_THUNDERS` | 519 (0x207) |  |  |
+| `IRONWEAVE_BATTLESUIT` | 520 (0x208) |  |  |
+| `DREAMWALKER_RAIMENT` | 521 (0x209) |  |  |
+| `CHAMPIONS_GUARD` | 522 (0x20A) |  | Champion's Guard |
+| `DREADNAUGHTS_BATTLEGEAR` | 523 (0x20B) |  | Dreadnaught's Battlegear |
+| `BONESCYTHE_ARMOR` | 524 (0x20C) |  |  |
+| `VESTMENTS_OF_FAITH` | 525 (0x20D) |  |  |
+| `FROSTFIRE_REGALIA` | 526 (0x20E) |  |  |
+| `THE_EARTHSHATTERER` | 527 (0x20F) |  |  |
+| `REDEMPTION_ARMOR` | 528 (0x210) |  |  |
+| `PLAGUEHEART_RAIMENT` | 529 (0x211) |  |  |
+| `CRYPTSTALKER_ARMOR` | 530 (0x212) |  |  |
+| `BATTLEGEAR_OF_UNDEAD_SLAYING` | 533 (0x215) |  |  |
+| `UNDEAD_SLAYERS_ARMOR` | 534 (0x216) |  | Undead Slayer's Armor |
+| `GARB_OF_THE_UNDEAD_SLAYER` | 535 (0x217) |  |  |
+| `REGALIA_OF_UNDEAD_CLEANSING` | 536 (0x218) |  |  |
+| `CHAMPIONS_BATTLEARMOR` | 537 (0x219) |  | Champion's Battlearmor |
+| `CHAMPIONS_STORMCALLER` | 538 (0x21A) |  | Champion's Stormcaller |
+| `CHAMPIONS_REFUGE` | 539 (0x21B) |  | Champion's Refuge |
+| `CHAMPIONS_INVESTITURE` | 540 (0x21C) |  | Champion's Investiture |
+| `CHAMPIONS_DREADGEAR` | 541 (0x21D) |  | Champion's Dreadgear |
+| `CHAMPIONS_ARCANUM` | 542 (0x21E) |  | Champion's Arcanum |
+| `CHAMPIONS_PURSUANCE` | 543 (0x21F) |  | Champion's Pursuance |
+| `LIEUTENANT_COMMANDERS_REDOUBT` | 544 (0x220) |  | Lieutenant Commander's Redoubt |
+| `LIEUTENANT_COMMANDERS_BATTLEARMOR` | 545 (0x221) |  | Lieutenant Commander's Battlearmor |
+| `LIEUTENANT_COMMANDERS_ARCANUM` | 546 (0x222) |  | Lieutenant Commander's Arcanum |
+| `LIEUTENANT_COMMANDERS_DREADGEAR` | 547 (0x223) |  | Lieutenant Commander's Dreadgear |
+| `LIEUTENANT_COMMANDERS_GUARD` | 548 (0x224) |  | Lieutenant Commander's Guard |
+| `LIEUTENANT_COMMANDERS_INVESTITURE` | 549 (0x225) |  | Lieutenant Commander's Investiture |
+| `LIEUTENANT_COMMANDERS_PURSUANCE` | 550 (0x226) |  | Lieutenant Commander's Pursuance |
+| `LIEUTENANT_COMMANDERS_REFUGE` | 551 (0x227) |  | Lieutenant Commander's Refuge |
+| `WRATH_OF_SPELLFIRE` | 552 (0x228) |  |  |
+| `SHADOWS_EMBRACE` | 553 (0x229) |  | Shadow's Embrace |
+| `PRIMAL_MOONCLOTH` | 554 (0x22A) |  |  |
+| `NETHERWEAVE_VESTMENTS` | 555 (0x22B) |  |  |
+| `IMBUED_NETHERWEAVE` | 556 (0x22C) |  |  |
+| `SOULCLOTH_EMBRACE` | 557 (0x22D) |  |  |
+| `ARCANOWEAVE_VESTMENTS` | 558 (0x22E) |  |  |
+| `SPELLSTRIKE_INFUSION` | 559 (0x22F) |  |  |
+| `FEL_IRON_PLATE` | 560 (0x230) |  |  |
+| `FEL_IRON_CHAIN` | 561 (0x231) |  |  |
+| `ADAMANTITE_BATTLEGEAR` | 562 (0x232) |  |  |
+| `ENCHANTED_ADAMANTITE_ARMOR` | 563 (0x233) |  |  |
+| `FLAME_GUARD` | 564 (0x234) |  |  |
+| `KHORIUM_WARD` | 565 (0x235) |  |  |
+| `BURNING_RAGE` | 566 (0x236) |  |  |
+| `GLADIATORS_BATTLEGEAR` | 567 (0x237) |  | Gladiator's Battlegear |
+| `GLADIATORS_DREADGEAR` | 568 (0x238) |  | Gladiator's Dreadgear |
+| `FAITH_IN_FELSTEEL` | 569 (0x239) |  |  |
+| `THE_UNYIELDING` | 570 (0x23A) |  |  |
+| `WHITEMEND_WISDOM` | 571 (0x23B) |  |  |
+| `BATTLECAST_GARB` | 572 (0x23C) |  |  |
+| `FEL_SKIN` | 573 (0x23D) |  |  |
+| `STRENGTH_OF_THE_CLEFTHOOF` | 574 (0x23E) |  |  |
+| `FELSTALKER_ARMOR` | 575 (0x23F) |  |  |
+| `FURY_OF_THE_NETHER` | 576 (0x240) |  |  |
+| `GLADIATORS_VESTMENTS` | 577 (0x241) |  | Gladiator's Vestments |
+| `GLADIATORS_EARTHSHAKER` | 578 (0x242) |  | Gladiator's Earthshaker |
+| `GLADIATORS_REGALIA` | 579 (0x243) |  | Gladiator's Regalia |
+| `GLADIATORS_THUNDERFIST` | 580 (0x244) |  | Gladiator's Thunderfist |
+| `GLADIATORS_RAIMENT` | 581 (0x245) |  | Gladiator's Raiment |
+| `GLADIATORS_AEGIS` | 582 (0x246) |  | Gladiator's Aegis |
+| `GLADIATORS_VINDICATION` | 583 (0x247) |  | Gladiator's Vindication |
+| `GLADIATORS_SANCTUARY` | 584 (0x248) |  | Gladiator's Sanctuary |
+| `GLADIATORS_WILDHIDE` | 585 (0x249) |  | Gladiator's Wildhide |
+| `GLADIATORS_PURSUIT` | 586 (0x24A) |  | Gladiator's Pursuit |
+| `HIGH_WARLORDS_AEGIS` | 587 (0x24B) |  | High Warlord's Aegis |
+| `HIGH_WARLORDS_BATTLEGEAR` | 588 (0x24C) |  | High Warlord's Battlegear |
+| `GRAND_MARSHALS_AEGIS` | 589 (0x24D) |  | Grand Marshal's Aegis |
+| `GRAND_MARSHALS_BATTLEGEAR` | 590 (0x24E) |  | Grand Marshal's Battlegear |
+| `GRAND_MARSHALS_DREADGEAR` | 591 (0x24F) |  | Grand Marshal's Dreadgear |
+| `HIGH_WARLORDS_DREADGEAR` | 592 (0x250) |  | High Warlord's Dreadgear |
+| `GRAND_MARSHALS_EARTHSHAKER` | 593 (0x251) |  | Grand Marshal's Earthshaker |
+| `HIGH_WARLORDS_EARTHSHAKER` | 594 (0x252) |  | High Warlord's Earthshaker |
+| `GRAND_MARSHALS_PURSUIT` | 595 (0x253) |  | Grand Marshal's Pursuit |
+| `HIGH_WARLORDS_PURSUIT` | 596 (0x254) |  | High Warlord's Pursuit |
+| `GRAND_MARSHALS_RAIMENT` | 597 (0x255) |  | Grand Marshal's Raiment |
+| `HIGH_WARLORDS_RAIMENT` | 598 (0x256) |  | High Warlord's Raiment |
+| `GRAND_MARSHALS_REGALIA` | 599 (0x257) |  | Grand Marshal's Regalia |
+| `HIGH_WARLORDS_REGALIA` | 600 (0x258) |  | High Warlord's Regalia |
+| `GRAND_MARSHALS_SANCTUARY` | 601 (0x259) |  | Grand Marshal's Sanctuary |
+| `HIGH_WARLORDS_SANCTUARY` | 602 (0x25A) |  | High Warlord's Sanctuary |
+| `GRAND_MARSHALS_THUNDERFIST` | 603 (0x25B) |  | Grand Marshal's Thunderfist |
+| `HIGH_WARLORDS_THUNDERFIST` | 604 (0x25C) |  | High Warlord's Thunderfist |
+| `GRAND_MARSHALS_VESTMENTS` | 605 (0x25D) |  | Grand Marshal's Vestments |
+| `HIGH_WARLORDS_VESTMENTS` | 606 (0x25E) |  | High Warlord's Vestments |
+| `GRAND_MARSHALS_VINDICATION` | 607 (0x25F) |  | Grand Marshal's Vindication |
+| `HIGH_WARLORDS_VINDICATION` | 608 (0x260) |  | High Warlord's Vindication |
+| `GRAND_MARSHALS_WILDHIDE` | 609 (0x261) |  | Grand Marshal's Wildhide |
+| `HIGH_WARLORDS_WILDHIDE` | 610 (0x262) |  | High Warlord's Wildhide |
+| `FELSCALE_ARMOR` | 611 (0x263) |  |  |
+| `SCALED_DRAENIC_ARMOR` | 612 (0x264) |  |  |
+| `THICK_DRAENIC_ARMOR` | 613 (0x265) |  |  |
+| `WILD_DRAENISH_ARMOR` | 614 (0x266) |  |  |
+| `GLADIATORS_FELSHROUD` | 615 (0x267) |  | Gladiator's Felshroud |
+| `NETHERSCALE_ARMOR` | 616 (0x268) |  |  |
+| `NETHERSTRIKE_ARMOR` | 617 (0x269) |  |  |
+| `WINDHAWK_ARMOR` | 618 (0x26A) |  |  |
+| `PRIMAL_INTENT` | 619 (0x26B) |  |  |
+| `ASSASSINATION_ARMOR` | 620 (0x26C) |  |  |
+| `NETHERBLADE` | 621 (0x26D) |  |  |
+| `DEATHMANTLE` | 622 (0x26E) |  |  |
+| `RIGHTEOUS_ARMOR` | 623 (0x26F) |  |  |
+| `JUSTICAR_RAIMENT` | 624 (0x270) |  |  |
+| `JUSTICAR_ARMOR` | 625 (0x271) |  |  |
+| `JUSTICAR_BATTLEGEAR` | 626 (0x272) |  |  |
+| `CRYSTALFORGE_RAIMENT` | 627 (0x273) |  |  |
+| `CRYSTALFORGE_ARMOR` | 628 (0x274) |  |  |
+| `CRYSTALFORGE_BATTLEGEAR` | 629 (0x275) |  |  |
+| `TIDEFURY_RAIMENT` | 630 (0x276) |  |  |
+| `CYCLONE_RAIMENT` | 631 (0x277) |  |  |
+| `CYCLONE_REGALIA` | 632 (0x278) |  |  |
+| `CYCLONE_HARNESS` | 633 (0x279) |  |  |
+| `CATACLYSM_RAIMENT` | 634 (0x27A) |  |  |
+| `CATACLYSM_REGALIA` | 635 (0x27B) |  |  |
+| `CATACLYSM_HARNESS` | 636 (0x27C) |  |  |
+| `MOONGLADE_RAIMENT` | 637 (0x27D) |  |  |
+| `MALORNE_RAIMENT` | 638 (0x27E) |  |  |
+| `MALORNE_REGALIA` | 639 (0x27F) |  |  |
+| `MALORNE_HARNESS` | 640 (0x280) |  |  |
+| `NORDRASSIL_HARNESS` | 641 (0x281) |  |  |
+| `NORDRASSIL_RAIMENT` | 642 (0x282) |  |  |
+| `NORDRASSIL_REGALIA` | 643 (0x283) |  |  |
+| `OBLIVION_RAIMENT` | 644 (0x284) |  |  |
+| `VOIDHEART_RAIMENT` | 645 (0x285) |  |  |
+| `CORRUPTOR_RAIMENT` | 646 (0x286) |  |  |
+| `INCANTERS_REGALIA` | 647 (0x287) |  | Incanter's Regalia |
+| `ALDOR_REGALIA` | 648 (0x288) |  |  |
+| `TIRISFAL_REGALIA` | 649 (0x289) |  |  |
+| `BEAST_LORD_ARMOR` | 650 (0x28A) |  |  |
+| `DEMON_STALKER_ARMOR` | 651 (0x28B) |  |  |
+| `RIFT_STALKER_ARMOR` | 652 (0x28C) |  |  |
+| `BOLD_ARMOR` | 653 (0x28D) |  |  |
+| `WARBRINGER_ARMOR` | 654 (0x28E) |  |  |
+| `WARBRINGER_BATTLEGEAR` | 655 (0x28F) |  |  |
+| `DESTROYER_ARMOR` | 656 (0x290) |  |  |
+| `DESTROYER_BATTLEGEAR` | 657 (0x291) |  |  |
+| `MANA_ETCHED_REGALIA` | 658 (0x292) |  | Mana-Etched Regalia |
+| `WASTEWALKER_ARMOR` | 659 (0x293) |  |  |
+| `DESOLATION_BATTLEGEAR` | 660 (0x294) |  |  |
+| `DOOMPLATE_BATTLEGEAR` | 661 (0x295) |  |  |
+| `HALLOWED_RAIMENT` | 662 (0x296) |  |  |
+| `INCARNATE_RAIMENT` | 663 (0x297) |  |  |
+| `INCARNATE_REGALIA` | 664 (0x298) |  |  |
+| `AVATAR_RAIMENT` | 665 (0x299) |  |  |
+| `AVATAR_REGALIA` | 666 (0x29A) |  |  |
+| `THE_TWIN_STARS` | 667 (0x29B) |  |  |
+| `SLAYERS_ARMOR` | 668 (0x29C) |  | Slayer's Armor |
+| `GRONNSTALKERS_ARMOR` | 669 (0x29D) |  | Gronnstalker's Armor |
+| `MALEFIC_RAIMENT` | 670 (0x29E) |  |  |
+| `TEMPEST_REGALIA` | 671 (0x29F) |  |  |
+| `ONSLAUGHT_BATTLEGEAR` | 672 (0x2A0) |  |  |
+| `ONSLAUGHT_ARMOR` | 673 (0x2A1) |  |  |
+| `ABSOLUTION_REGALIA` | 674 (0x2A2) |  |  |
+| `VESTMENTS_OF_ABSOLUTION` | 675 (0x2A3) |  |  |
+| `THUNDERHEART_HARNESS` | 676 (0x2A4) |  |  |
+| `THUNDERHEART_REGALIA` | 677 (0x2A5) |  |  |
+| `THUNDERHEART_RAIMENT` | 678 (0x2A6) |  |  |
+| `LIGHTBRINGER_ARMOR` | 679 (0x2A7) |  |  |
+| `LIGHTBRINGER_BATTLEGEAR` | 680 (0x2A8) |  |  |
+| `LIGHTBRINGER_RAIMENT` | 681 (0x2A9) |  |  |
+| `SKYSHATTER_HARNESS` | 682 (0x2AA) |  |  |
+| `SKYSHATTER_RAIMENT` | 683 (0x2AB) |  |  |
+| `SKYSHATTER_REGALIA` | 684 (0x2AC) |  |  |
+| `GLADIATORS_REFUGE` | 685 (0x2AD) |  | Gladiator's Refuge |
+| `GLADIATORS_WARTIDE` | 686 (0x2AE) |  | Gladiator's Wartide |
+| `GLADIATORS_INVESTITURE` | 687 (0x2AF) |  | Gladiator's Investiture |
+| `GRAND_MARSHALS_REFUGE` | 688 (0x2B0) |  | Grand Marshal's Refuge |
+| `HIGH_WARLORDS_REFUGE` | 689 (0x2B1) |  | High Warlord's Refuge |
+| `GLADIATORS_REDEMPTION` | 690 (0x2B2) |  | Gladiator's Redemption |
+| `GRAND_MARSHALS_INVESTITURE` | 691 (0x2B3) |  | Grand Marshal's Investiture |
+| `HIGH_WARLORDS_INVESTITURE` | 692 (0x2B4) |  | High Warlord's Investiture |
+| `GRAND_MARSHALS_REDEMPTION` | 693 (0x2B5) |  | Grand Marshal's Redemption |
+| `HIGH_WARLORDS_REDEMPTION` | 694 (0x2B6) |  | High Warlord's Redemption |
+| `GRAND_MARSHALS_WARTIDE` | 695 (0x2B7) |  | Grand Marshal's Wartide |
+| `HIGH_WARLORDS_WARTIDE` | 696 (0x2B8) |  | High Warlord's Wartide |
+| `CHAMPIONS_REDOUBT` | 697 (0x2B9) |  | Champion's Redoubt |
+| `WARLORDS_AEGIS` | 698 (0x2BA) |  | Warlord's Aegis |
+| `THE_TWIN_BLADES_OF_AZZINOTH` | 699 (0x2BB) |  |  |
+| `MERCILESS_GLADIATORS_AEGIS` | 700 (0x2BC) |  | Merciless Gladiator's Aegis |
+| `MERCILESS_GLADIATORS_BATTLEGEAR` | 701 (0x2BD) |  | Merciless Gladiator's Battlegear |
+| `MERCILESS_GLADIATORS_DREADGEAR` | 702 (0x2BE) |  | Merciless Gladiator's Dreadgear |
+| `MERCILESS_GLADIATORS_EARTHSHAKER` | 703 (0x2BF) |  | Merciless Gladiator's Earthshaker |
+| `MERCILESS_GLADIATORS_FELSHROUD` | 704 (0x2C0) |  | Merciless Gladiator's Felshroud |
+| `MERCILESS_GLADIATORS_INVESTITURE` | 705 (0x2C1) |  | Merciless Gladiator's Investiture |
+| `MERCILESS_GLADIATORS_PURSUIT` | 706 (0x2C2) |  | Merciless Gladiator's Pursuit |
+| `MERCILESS_GLADIATORS_RAIMENT` | 707 (0x2C3) |  | Merciless Gladiator's Raiment |
+| `MERCILESS_GLADIATORS_REDEMPTION` | 708 (0x2C4) |  | Merciless Gladiator's Redemption |
+| `MERCILESS_GLADIATORS_REFUGE` | 709 (0x2C5) |  | Merciless Gladiator's Refuge |
+| `MERCILESS_GLADIATORS_REGALIA` | 710 (0x2C6) |  | Merciless Gladiator's Regalia |
+| `MERCILESS_GLADIATORS_SANCTUARY` | 711 (0x2C7) |  | Merciless Gladiator's Sanctuary |
+| `MERCILESS_GLADIATORS_THUNDERFIST` | 712 (0x2C8) |  | Merciless Gladiator's Thunderfist |
+| `MERCILESS_GLADIATORS_VESTMENTS` | 713 (0x2C9) |  | Merciless Gladiator's Vestments |
+| `MERCILESS_GLADIATORS_VINDICATION` | 714 (0x2CA) |  | Merciless Gladiator's Vindication |
+| `MERCILESS_GLADIATORS_WARTIDE` | 715 (0x2CB) |  | Merciless Gladiator's Wartide |
+| `MERCILESS_GLADIATORS_WILDHIDE` | 716 (0x2CC) |  | Merciless Gladiator's Wildhide |
+| `FIELD_MARSHALS_EARTHSHAKER` | 717 (0x2CD) |  | Field Marshal's Earthshaker |
+| `LIEUTENANT_COMMANDERS_EARTHSHAKER` | 718 (0x2CE) |  | Lieutenant Commander's Earthshaker |
+| `THE_FISTS_OF_FURY` | 719 (0x2CF) |  |  |
+| `VENGEFUL_GLADIATORS_REFUGE` | 720 (0x2D0) |  | Vengeful Gladiator's Refuge |
+| `VENGEFUL_GLADIATORS_SANCTUARY` | 721 (0x2D1) |  | Vengeful Gladiator's Sanctuary |
+| `VENGEFUL_GLADIATORS_WILDHIDE` | 722 (0x2D2) |  | Vengeful Gladiator's Wildhide |
+| `VENGEFUL_GLADIATORS_PURSUIT` | 723 (0x2D3) |  | Vengeful Gladiator's Pursuit |
+| `VENGEFUL_GLADIATORS_REGALIA` | 724 (0x2D4) |  | Vengeful Gladiator's Regalia |
+| `VENGEFUL_GLADIATORS_REDEMPTION` | 725 (0x2D5) |  | Vengeful Gladiator's Redemption |
+| `VENGEFUL_GLADIATORS_VINDICATION` | 726 (0x2D6) |  | Vengeful Gladiator's Vindication |
+| `VENGEFUL_GLADIATORS_AEGIS` | 727 (0x2D7) |  | Vengeful Gladiator's Aegis |
+| `VENGEFUL_GLADIATORS_INVESTITURE` | 728 (0x2D8) |  | Vengeful Gladiator's Investiture |
+| `VENGEFUL_GLADIATORS_RAIMENT` | 729 (0x2D9) |  | Vengeful Gladiator's Raiment |
+| `VENGEFUL_GLADIATORS_VESTMENTS` | 730 (0x2DA) |  | Vengeful Gladiator's Vestments |
+| `VENGEFUL_GLADIATORS_WARTIDE` | 731 (0x2DB) |  | Vengeful Gladiator's Wartide |
+| `VENGEFUL_GLADIATORS_EARTHSHAKER` | 732 (0x2DC) |  | Vengeful Gladiator's Earthshaker |
+| `VENGEFUL_GLADIATORS_THUNDERFIST` | 733 (0x2DD) |  | Vengeful Gladiator's Thunderfist |
+| `VENGEFUL_GLADIATORS_DREADGEAR` | 734 (0x2DE) |  | Vengeful Gladiator's Dreadgear |
+| `VENGEFUL_GLADIATORS_FELSHROUD` | 735 (0x2DF) |  | Vengeful Gladiator's Felshroud |
+| `VENGEFUL_GLADIATORS_BATTLEGEAR` | 736 (0x2E0) |  | Vengeful Gladiator's Battlegear |
+| `LATROS_FLURRY` | 737 (0x2E1) |  | Latro's Flurry |
+| `DREADWEAVE_BATTLEGEAR` | 738 (0x2E2) |  |  |
+| `MOONCLOTH_BATTLEGEAR` | 739 (0x2E3) |  |  |
+| `SATIN_BATTLEGEAR` | 740 (0x2E4) |  |  |
+| `EVOKERS_SILK_BATTLEGEAR` | 741 (0x2E5) |  | Evoker's Silk Battlegear |
+| `DRAGONHIDE_BATTLEGEAR` | 742 (0x2E6) |  |  |
+| `WYRMHIDE_BATTLEGEAR` | 743 (0x2E7) |  |  |
+| `KODOHIDE_BATTLEGEAR` | 744 (0x2E8) |  |  |
+| `OPPORTUNISTS_BATTLEGEAR` | 745 (0x2E9) |  | Opportunist's Battlegear |
+| `SEERS_MAIL_BATTLEGEAR` | 746 (0x2EA) |  | Seer's Mail Battlegear |
+| `SEERS_RINGMAIL_BATTLEGEAR` | 747 (0x2EB) |  | Seer's Ringmail Battlegear |
+| `SEERS_LINKED_BATTLEGEAR` | 748 (0x2EC) |  | Seer's Linked Battlegear |
+| `STALKERS_CHAIN_BATTLEGEAR` | 749 (0x2ED) |  | Stalker's Chain Battlegear |
+| `SAVAGE_PLATE_BATTLEGEAR` | 750 (0x2EE) |  |  |
+| `CRUSADERS_ORNAMENTED_BATTLEGEAR` | 751 (0x2EF) |  | Crusader's Ornamented Battlegear |
+| `CRUSADERS_SCALED_BATTLEGEAR` | 752 (0x2F0) |  | Crusader's Scaled Battlegear |
+| `BOREAN_EMBRACE` | 754 (0x2F2) |  |  |
+| `NERUBIAN_HIVE` | 755 (0x2F3) |  |  |
+| `FROSTSCALE_BINDING` | 756 (0x2F4) |  |  |
+| `ICEBORNE_EMBRACE` | 757 (0x2F5) |  |  |
+| `RAINES_REVENGE` | 759 (0x2F7) |  | Raine's Revenge |
+| `GLADIATORS_DREADPLATE` | 760 (0x2F8) |  | Gladiator's Dreadplate |
+| `WINTER_GARB` | 761 (0x2F9) |  |  |
+| `BREWFEST_GARB` | 762 (0x2FA) |  |  |
+| `FROSTWOVEN_POWER` | 763 (0x2FB) |  |  |
+| `DUSKWEAVER` | 764 (0x2FC) |  |  |
+| `GLADIATORS_BATTLEGEAR2` | 765 (0x2FD) |  | Gladiator's Battlegear |
+| `GLADIATORS_VINDICATION2` | 766 (0x2FE) |  | Gladiator's Vindication |
+| `GLADIATORS_REDEMPTION2` | 767 (0x2FF) |  | Gladiator's Redemption |
+| `GLADIATORS_DESECRATION` | 768 (0x300) |  | Gladiator's Desecration |
+| `GLADIATORS_THUNDERFIST2` | 769 (0x301) |  | Gladiator's Thunderfist |
+| `GLADIATORS_EARTHSHAKER2` | 770 (0x302) |  | Gladiator's Earthshaker |
+| `GLADIATORS_WARTIDE2` | 771 (0x303) |  | Gladiator's Wartide |
+| `GLADIATORS_PURSUIT2` | 772 (0x304) |  | Gladiator's Pursuit |
+| `GLADIATORS_REFUGE2` | 773 (0x305) |  | Gladiator's Refuge |
+| `GLADIATORS_WILDHIDE2` | 774 (0x306) |  | Gladiator's Wildhide |
+| `GLADIATORS_SANCTUARY2` | 775 (0x307) |  | Gladiator's Sanctuary |
+| `GLADIATORS_VESTMENTS2` | 776 (0x308) |  | Gladiator's Vestments |
+| `GLADIATORS_INVESTITURE2` | 777 (0x309) |  | Gladiator's Investiture |
+| `GLADIATORS_RAIMENT2` | 778 (0x30A) |  | Gladiator's Raiment |
+| `GLADIATORS_REGALIA2` | 779 (0x30B) |  | Gladiator's Regalia |
+| `GLADIATORS_FELSHROUD2` | 780 (0x30C) |  | Gladiator's Felshroud |
+| `BLESSED_REGALIA_OF_UNDEAD_CLEANSING` | 781 (0x30D) |  |  |
+| `UNDEAD_SLAYERS_BLESSED_ARMOR` | 782 (0x30E) |  | Undead Slayer's Blessed Armor |
+| `BLESSED_GARB_OF_THE_UNDEAD_SLAYER` | 783 (0x30F) |  |  |
+| `BLESSED_BATTLEGEAR_OF_UNDEAD_SLAYING` | 784 (0x310) |  |  |
+| `MIDSUMMER_REVELER` | 785 (0x311) |  |  |
+| `DREADNAUGHT_PLATE` | 787 (0x313) |  |  |
+| `DREADNAUGHT_BATTLEGEAR` | 788 (0x314) |  |  |
+| `REDEMPTION_BATTLEGEAR` | 789 (0x315) |  |  |
+| `REDEMPTION_REGALIA` | 790 (0x316) |  |  |
+| `REDEMPTION_PLATE` | 791 (0x317) |  |  |
+| `SCOURGEBORNE_BATTLEGEAR` | 792 (0x318) |  |  |
+| `SCOURGEBORNE_PLATE` | 793 (0x319) |  |  |
+| `CRYPTSTALKER_BATTLEGEAR` | 794 (0x31A) |  |  |
+| `EARTHSHATTER_BATTLEGEAR` | 795 (0x31B) |  |  |
+| `EARTHSHATTER_GARB` | 796 (0x31C) |  |  |
+| `EARTHSHATTER_REGALIA` | 797 (0x31D) |  |  |
+| `DREAMWALKER_BATTLEGEAR` | 798 (0x31E) |  |  |
+| `DREAMWALKER_REGALIA` | 799 (0x31F) |  |  |
+| `DREAMWALKER_GARB` | 800 (0x320) |  |  |
+| `BONESCYTHE_BATTLEGEAR` | 801 (0x321) |  |  |
+| `PLAGUEHEART_GARB` | 802 (0x322) |  |  |
+| `FROSTFIRE_GARB` | 803 (0x323) |  |  |
+| `REGALIA_OF_FAITH` | 804 (0x324) |  |  |
+| `GARB_OF_FAITH` | 805 (0x325) |  |  |
+| `SPRING_TUXEDO` | 812 (0x32C) |  |  |
+| `EVISCERATORS_BATTLEGEAR` | 813 (0x32D) |  | Eviscerator's Battlegear |
+| `ORNATE_SARONITE_BATTLEGEAR` | 814 (0x32E) |  |  |
+| `OVERCASTER_BATTLEGEAR` | 815 (0x32F) |  |  |
+| `SAVAGE_SARONITE_BATTLEGEAR` | 816 (0x330) |  |  |
+| `STORMHIDE_BATTLEGEAR` | 817 (0x331) |  |  |
+| `SWIFTARROW_BATTLEGEAR` | 818 (0x332) |  |  |
+| `FROSTSAVAGE_BATTLEGEAR` | 819 (0x333) |  |  |
+| `AEGIS_BATTLEGEAR` | 820 (0x334) |  |  |
+| `AEGIS_PLATE` | 821 (0x335) |  |  |
+| `AEGIS_REGALIA` | 822 (0x336) |  |  |
+| `WORLDBREAKER_BATTLEGEAR` | 823 (0x337) |  |  |
+| `WORLDBREAKER_GARB` | 824 (0x338) |  |  |
+| `WORLDBREAKER_REGALIA` | 825 (0x339) |  |  |
+| `TERRORBLADE_BATTLEGEAR` | 826 (0x33A) |  |  |
+| `NIGHTSONG_BATTLEGEAR` | 827 (0x33B) |  |  |
+| `NIGHTSONG_GARB` | 828 (0x33C) |  |  |
+| `NIGHTSONG_REGALIA` | 829 (0x33D) |  |  |
+| `SIEGEBREAKER_BATTLEGEAR` | 830 (0x33E) |  |  |
+| `SIEGEBREAKER_PLATE` | 831 (0x33F) |  |  |
+| `SANCTIFICATION_GARB` | 832 (0x340) |  |  |
+| `SANCTIFICATION_REGALIA` | 833 (0x341) |  |  |
+| `DARKRUNED_BATTLEGEAR` | 834 (0x342) |  |  |
+| `DARKRUNED_PLATE` | 835 (0x343) |  |  |
+| `KIRIN_TOR_GARB` | 836 (0x344) |  |  |
+| `DEATHBRINGER_GARB` | 837 (0x345) |  |  |
+| `SCOURGESTALKER_BATTLEGEAR` | 838 (0x346) |  |  |
+| `KHADGARS_REGALIA` | 843 (0x34B) |  | Khadgar's Regalia |
+| `SUNSTRIDERS_REGALIA` | 844 (0x34C) |  | Sunstrider's Regalia |
+| `GUL_DANS_REGALIA` | 845 (0x34D) |  | Gul'dan's Regalia |
+| `KEL_THUZADS_REGALIA` | 846 (0x34E) |  | Kel'Thuzad's Regalia |
+| `VELENS_RAIMENT` | 847 (0x34F) |  | Velen's Raiment |
+| `ZABRAS_RAIMENT` | 848 (0x350) |  | Zabra's Raiment |
+| `VELENS_REGALIA` | 849 (0x351) |  | Velen's Regalia |
+| `ZABRAS_REGALIA` | 850 (0x352) |  | Zabra's Regalia |
+| `MALFURIONS_GARB` | 851 (0x353) |  | Malfurion's Garb |
+| `RUNETOTEMS_GARB` | 852 (0x354) |  | Runetotem's Garb |
+| `MALFURIONS_REGALIA` | 853 (0x355) |  | Malfurion's Regalia |
+| `RUNETOTEMS_REGALIA` | 854 (0x356) |  | Runetotem's Regalia |
+| `MALFURIONS_BATTLEGEAR` | 855 (0x357) |  | Malfurion's Battlegear |
+| `RUNETOTEMS_BATTLEGEAR` | 856 (0x358) |  | Runetotem's Battlegear |
+| `VANCLEEFS_BATTLEGEAR` | 857 (0x359) |  | VanCleef's Battlegear |
+| `GARONAS_BATTLEGEAR` | 858 (0x35A) |  | Garona's Battlegear |
+| `WINDRUNNERS_BATTLEGEAR` | 859 (0x35B) |  | Windrunner's Battlegear |
+| `WINDRUNNERS_PURSUIT` | 860 (0x35C) |  | Windrunner's Pursuit |
+| `NOBUNDOS_GARB` | 861 (0x35D) |  | Nobundo's Garb |
+| `THRALLS_GARB` | 862 (0x35E) |  | Thrall's Garb |
+| `THRALLS_REGALIA` | 863 (0x35F) |  | Thrall's Regalia |
+| `NOBUNDOS_REGALIA` | 864 (0x360) |  | Nobundo's Regalia |
+| `NOBUNDOS_BATTLEGEAR` | 865 (0x361) |  | Nobundo's Battlegear |
+| `THRALLS_BATTLEGEAR` | 866 (0x362) |  | Thrall's Battlegear |
+| `WRYNNS_BATTLEGEAR` | 867 (0x363) |  | Wrynn's Battlegear |
+| `HELLSCREAMS_BATTLEGEAR` | 868 (0x364) |  | Hellscream's Battlegear |
+| `WRYNNS_PLATE` | 869 (0x365) |  | Wrynn's Plate |
+| `HELLSCREAMS_PLATE` | 870 (0x366) |  | Hellscream's Plate |
+| `THASSARIANS_BATTLEGEAR` | 871 (0x367) |  | Thassarian's Battlegear |
+| `KOLTIRAS_BATTLEGEAR` | 872 (0x368) |  | Koltira's Battlegear |
+| `THASSARIANS_PLATE` | 873 (0x369) |  | Thassarian's Plate |
+| `KOLTIRAS_PLATE` | 874 (0x36A) |  | Koltira's Plate |
+| `TURALYONS_GARB` | 875 (0x36B) |  | Turalyon's Garb |
+| `LIADRINS_GARB` | 876 (0x36C) |  | Liadrin's Garb |
+| `TURALYONS_BATTLEGEAR` | 877 (0x36D) |  | Turalyon's Battlegear |
+| `LIADRINS_BATTLEGEAR` | 878 (0x36E) |  | Liadrin's Battlegear |
+| `TURALYONS_PLATE` | 879 (0x36F) |  | Turalyon's Plate |
+| `LIADRINS_PLATE` | 880 (0x370) |  | Liadrin's Plate |
+| `PURIFIED_SHARD_OF_THE_GODS` | 881 (0x371) |  |  |
+| `SHINY_SHARD_OF_THE_GODS` | 882 (0x372) |  |  |
+| `BLOODMAGES_REGALIA` | 883 (0x373) |  | Bloodmage's Regalia |
+| `DARK_COVENS_REGALIA` | 884 (0x374) |  | Dark Coven's Regalia |
+| `CRIMSON_ACOLYTES_RAIMENT` | 885 (0x375) |  | Crimson Acolyte's Raiment |
+| `CRIMSON_ACOLYTES_REGALIA` | 886 (0x376) |  | Crimson Acolyte's Regalia |
+| `LASHERWEAVE_GARB` | 887 (0x377) |  |  |
+| `LASHERWEAVE_REGALIA` | 888 (0x378) |  |  |
+| `LASHERWEAVE_BATTLEGEAR` | 889 (0x379) |  |  |
+| `SHADOWBLADES_BATTLEGEAR` | 890 (0x37A) |  | Shadowblade's Battlegear |
+| `AHN_KAHAR_BLOOD_HUNTERS_BATTLEGEAR` | 891 (0x37B) |  | Ahn'Kahar Blood Hunter's Battlegear |
+| `FROST_WITCHS_GARB` | 892 (0x37C) |  | Frost Witch's Garb |
+| `FROST_WITCHS_REGALIA` | 893 (0x37D) |  | Frost Witch's Regalia |
+| `FROST_WITCHS_BATTLEGEAR` | 894 (0x37E) |  | Frost Witch's Battlegear |
+| `YMIRJAR_LORDS_BATTLEGEAR` | 895 (0x37F) |  | Ymirjar Lord's Battlegear |
+| `YMIRJAR_LORDS_PLATE` | 896 (0x380) |  | Ymirjar Lord's Plate |
+| `SCOURGELORDS_BATTLEGEAR` | 897 (0x381) |  | Scourgelord's Battlegear |
+| `SCOURGELORDS_PLATE` | 898 (0x382) |  | Scourgelord's Plate |
+| `LIGHTSWORN_GARB` | 899 (0x383) |  |  |
+| `LIGHTSWORN_BATTLEGEAR` | 900 (0x384) |  |  |
+| `LIGHTSWORN_PLATE` | 901 (0x385) |  |  |
 
 Used in:
 * [SMSG_ITEM_QUERY_SINGLE_RESPONSE](smsg_item_query_single_response.md)

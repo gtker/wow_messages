@@ -2,13 +2,13 @@ smsg SMSG_NAME_QUERY_RESPONSE = 0x51 {
     Guid guid;
     CString character_name;
     CString realm_name {
-        description = "Used for showing cross realm realm names. If this is an empty string it is shown like a regular player on the same realm.";
+        comment = "Used for showing cross realm realm names. If this is an empty string it is shown like a regular player on the same realm.";
     }
     (u32)Race race;
     (u32)Gender gender;
     (u32)Class class;
 } {
-    description = "Response to [CMSG_NAME_QUERY].";
+    comment = "Response to [CMSG_NAME_QUERY].";
     versions = "1.12";
 }
 
@@ -23,7 +23,7 @@ smsg SMSG_NAME_QUERY_RESPONSE = 0x51 {
     PackedGuid guid;
     CString character_name;
     CString realm_name {
-        description = "Used for showing cross realm realm names. If this is an empty string it is shown like a regular player on the same realm.";
+        comment = "Used for showing cross realm realm names. If this is an empty string it is shown like a regular player on the same realm.";
     }
     (u32)Race race;
     (u32)Gender gender;
@@ -33,7 +33,7 @@ smsg SMSG_NAME_QUERY_RESPONSE = 0x51 {
         CString[5] declined_names;
     }
 } {
-    description = "Response to [CMSG_NAME_QUERY].";
+    comment = "Response to [CMSG_NAME_QUERY].";
     versions = "2.4.3";
 }
 
@@ -45,7 +45,7 @@ smsg SMSG_NAME_QUERY_RESPONSE = 0x51 {
     }
     CString character_name;
     CString realm_name {
-        description = "Used for showing cross realm realm names. If this is an empty string it is shown like a regular player on the same realm.";
+        comment = "Used for showing cross realm realm names. If this is an empty string it is shown like a regular player on the same realm.";
     }
     Race race;
     Gender gender;
@@ -55,7 +55,7 @@ smsg SMSG_NAME_QUERY_RESPONSE = 0x51 {
         CString[5] declined_names;
     }
 } {
-    description = "Response to [CMSG_NAME_QUERY].";
+    comment = "Response to [CMSG_NAME_QUERY].";
     versions = "3.3.5";
 }
 

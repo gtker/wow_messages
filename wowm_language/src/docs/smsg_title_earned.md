@@ -24,8 +24,8 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | 4 / Little | u32 | title |  |  |
-| 0x08 | 4 / - | [TitleEarnStatus](titleearnstatus.md) | status |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x04 | 4 / Little | u32 | title |  |
+| 0x08 | 4 / - | [TitleEarnStatus](titleearnstatus.md) | status |  |
 

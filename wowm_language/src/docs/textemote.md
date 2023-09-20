@@ -182,177 +182,177 @@ enum TextEmote : u32 {
 ### Type
 The basic type is `u32`, a 4 byte (32 bit) little endian integer.
 ### Enumerators
-| Enumerator | Value  | Description | Comment |
-| --------- | -------- | ----------- | ------- |
-| `AGREE` | 1 (0x01) |  |  |
-| `AMAZE` | 2 (0x02) |  |  |
-| `ANGRY` | 3 (0x03) |  |  |
-| `APOLOGIZE` | 4 (0x04) |  |  |
-| `APPLAUD` | 5 (0x05) |  |  |
-| `BASHFUL` | 6 (0x06) |  |  |
-| `BECKON` | 7 (0x07) |  |  |
-| `BEG` | 8 (0x08) |  |  |
-| `BITE` | 9 (0x09) |  |  |
-| `BLEED` | 10 (0x0A) |  |  |
-| `BLINK` | 11 (0x0B) |  |  |
-| `BLUSH` | 12 (0x0C) |  |  |
-| `BONK` | 13 (0x0D) |  |  |
-| `BORED` | 14 (0x0E) |  |  |
-| `BOUNCE` | 15 (0x0F) |  |  |
-| `BRB` | 16 (0x10) |  |  |
-| `BOW` | 17 (0x11) |  |  |
-| `BURP` | 18 (0x12) |  |  |
-| `BYE` | 19 (0x13) |  |  |
-| `CACKLE` | 20 (0x14) |  |  |
-| `CHEER` | 21 (0x15) |  |  |
-| `CHICKEN` | 22 (0x16) |  |  |
-| `CHUCKLE` | 23 (0x17) |  |  |
-| `CLAP` | 24 (0x18) |  |  |
-| `CONFUSED` | 25 (0x19) |  |  |
-| `CONGRATULATE` | 26 (0x1A) |  |  |
-| `COUGH` | 27 (0x1B) |  |  |
-| `COWER` | 28 (0x1C) |  |  |
-| `CRACK` | 29 (0x1D) |  |  |
-| `CRINGE` | 30 (0x1E) |  |  |
-| `CRY` | 31 (0x1F) |  |  |
-| `CURIOUS` | 32 (0x20) |  |  |
-| `CURTSEY` | 33 (0x21) |  |  |
-| `DANCE` | 34 (0x22) |  |  |
-| `DRINK` | 35 (0x23) |  |  |
-| `DROOL` | 36 (0x24) |  |  |
-| `EAT` | 37 (0x25) |  |  |
-| `EYE` | 38 (0x26) |  |  |
-| `FART` | 39 (0x27) |  |  |
-| `FIDGET` | 40 (0x28) |  |  |
-| `FLEX` | 41 (0x29) |  |  |
-| `FROWN` | 42 (0x2A) |  |  |
-| `GASP` | 43 (0x2B) |  |  |
-| `GAZE` | 44 (0x2C) |  |  |
-| `GIGGLE` | 45 (0x2D) |  |  |
-| `GLARE` | 46 (0x2E) |  |  |
-| `GLOAT` | 47 (0x2F) |  |  |
-| `GREET` | 48 (0x30) |  |  |
-| `GRIN` | 49 (0x31) |  |  |
-| `GROAN` | 50 (0x32) |  |  |
-| `GROVEL` | 51 (0x33) |  |  |
-| `GUFFAW` | 52 (0x34) |  |  |
-| `HAIL` | 53 (0x35) |  |  |
-| `HAPPY` | 54 (0x36) |  |  |
-| `HELLO` | 55 (0x37) |  |  |
-| `HUG` | 56 (0x38) |  |  |
-| `HUNGRY` | 57 (0x39) |  |  |
-| `KISS` | 58 (0x3A) |  |  |
-| `KNEEL` | 59 (0x3B) |  |  |
-| `LAUGH` | 60 (0x3C) |  |  |
-| `LAYDOWN` | 61 (0x3D) |  |  |
-| `MASSAGE` | 62 (0x3E) |  |  |
-| `MOAN` | 63 (0x3F) |  |  |
-| `MOON` | 64 (0x40) |  |  |
-| `MOURN` | 65 (0x41) |  |  |
-| `NO` | 66 (0x42) |  |  |
-| `NOD` | 67 (0x43) |  |  |
-| `NOSE_PICK` | 68 (0x44) |  |  |
-| `PANIC` | 69 (0x45) |  |  |
-| `PEER` | 70 (0x46) |  |  |
-| `PLEAD` | 71 (0x47) |  |  |
-| `POINT` | 72 (0x48) |  |  |
-| `POKE` | 73 (0x49) |  |  |
-| `PRAY` | 74 (0x4A) |  |  |
-| `ROAR` | 75 (0x4B) |  |  |
-| `ROFL` | 76 (0x4C) |  |  |
-| `RUDE` | 77 (0x4D) |  |  |
-| `SALUTE` | 78 (0x4E) |  |  |
-| `SCRATCH` | 79 (0x4F) |  |  |
-| `SEXY` | 80 (0x50) |  |  |
-| `SHAKE` | 81 (0x51) |  |  |
-| `SHOUT` | 82 (0x52) |  |  |
-| `SHRUG` | 83 (0x53) |  |  |
-| `SHY` | 84 (0x54) |  |  |
-| `SIGH` | 85 (0x55) |  |  |
-| `SIT` | 86 (0x56) |  |  |
-| `SLEEP` | 87 (0x57) |  |  |
-| `SNARL` | 88 (0x58) |  |  |
-| `SPIT` | 89 (0x59) |  |  |
-| `STARE` | 90 (0x5A) |  |  |
-| `SURPRISED` | 91 (0x5B) |  |  |
-| `SURRENDER` | 92 (0x5C) |  |  |
-| `TALK` | 93 (0x5D) |  |  |
-| `TALK_EX` | 94 (0x5E) |  |  |
-| `TALK_Q` | 95 (0x5F) |  |  |
-| `TAP` | 96 (0x60) |  |  |
-| `THANK` | 97 (0x61) |  |  |
-| `THREATEN` | 98 (0x62) |  |  |
-| `TIRED` | 99 (0x63) |  |  |
-| `VICTORY` | 100 (0x64) |  |  |
-| `WAVE` | 101 (0x65) |  |  |
-| `WELCOME` | 102 (0x66) |  |  |
-| `WHINE` | 103 (0x67) |  |  |
-| `WHISTLE` | 104 (0x68) |  |  |
-| `WORK` | 105 (0x69) |  |  |
-| `YAWN` | 106 (0x6A) |  |  |
-| `BOGGLE` | 107 (0x6B) |  |  |
-| `CALM` | 108 (0x6C) |  |  |
-| `COLD` | 109 (0x6D) |  |  |
-| `COMFORT` | 110 (0x6E) |  |  |
-| `CUDDLE` | 111 (0x6F) |  |  |
-| `DUCK` | 112 (0x70) |  |  |
-| `INSULT` | 113 (0x71) |  |  |
-| `INTRODUCE` | 114 (0x72) |  |  |
-| `JK` | 115 (0x73) |  |  |
-| `LICK` | 116 (0x74) |  |  |
-| `LISTEN` | 117 (0x75) |  |  |
-| `LOST` | 118 (0x76) |  |  |
-| `MOCK` | 119 (0x77) |  |  |
-| `PONDER` | 120 (0x78) |  |  |
-| `POUNCE` | 121 (0x79) |  |  |
-| `PRAISE` | 122 (0x7A) |  |  |
-| `PURR` | 123 (0x7B) |  |  |
-| `PUZZLE` | 124 (0x7C) |  |  |
-| `RAISE` | 125 (0x7D) |  |  |
-| `READY` | 126 (0x7E) |  |  |
-| `SHIMMY` | 127 (0x7F) |  |  |
-| `SHIVER` | 128 (0x80) |  |  |
-| `SHOO` | 129 (0x81) |  |  |
-| `SLAP` | 130 (0x82) |  |  |
-| `SMIRK` | 131 (0x83) |  |  |
-| `SNIFF` | 132 (0x84) |  |  |
-| `SNUB` | 133 (0x85) |  |  |
-| `SOOTHE` | 134 (0x86) |  |  |
-| `STINK` | 135 (0x87) |  |  |
-| `TAUNT` | 136 (0x88) |  |  |
-| `TEASE` | 137 (0x89) |  |  |
-| `THIRSTY` | 138 (0x8A) |  |  |
-| `VETO` | 139 (0x8B) |  |  |
-| `SNICKER` | 140 (0x8C) |  |  |
-| `STAND` | 141 (0x8D) |  |  |
-| `TICKLE` | 142 (0x8E) |  |  |
-| `VIOLIN` | 143 (0x8F) |  |  |
-| `SMILE` | 163 (0xA3) |  |  |
-| `RASP` | 183 (0xB7) |  |  |
-| `PITY` | 203 (0xCB) |  |  |
-| `GROWL` | 204 (0xCC) |  |  |
-| `BARK` | 205 (0xCD) |  |  |
-| `SCARED` | 223 (0xDF) |  |  |
-| `FLOP` | 224 (0xE0) |  |  |
-| `LOVE` | 225 (0xE1) |  |  |
-| `MOO` | 226 (0xE2) |  |  |
-| `COMMEND` | 243 (0xF3) |  |  |
-| `TRAIN` | 264 (0x108) |  |  |
-| `HELPME` | 303 (0x12F) |  |  |
-| `INCOMING` | 304 (0x130) |  |  |
-| `CHARGE` | 305 (0x131) |  |  |
-| `FLEE` | 306 (0x132) |  |  |
-| `ATTACK_MY_TARGET` | 307 (0x133) |  |  |
-| `OOM` | 323 (0x143) |  |  |
-| `FOLLOW` | 324 (0x144) |  |  |
-| `WAIT` | 325 (0x145) |  |  |
-| `HEAL_ME` | 326 (0x146) |  |  |
-| `OPEN_FIRE` | 327 (0x147) |  |  |
-| `FLIRT` | 328 (0x148) |  |  |
-| `JOKE` | 329 (0x149) |  |  |
-| `GOLF_CLAP` | 343 (0x157) |  |  |
-| `WINK` | 363 (0x16B) |  |  |
-| `PAT` | 364 (0x16C) |  |  |
+| Enumerator | Value  | Comment |
+| --------- | -------- | ------- |
+| `AGREE` | 1 (0x01) |  |
+| `AMAZE` | 2 (0x02) |  |
+| `ANGRY` | 3 (0x03) |  |
+| `APOLOGIZE` | 4 (0x04) |  |
+| `APPLAUD` | 5 (0x05) |  |
+| `BASHFUL` | 6 (0x06) |  |
+| `BECKON` | 7 (0x07) |  |
+| `BEG` | 8 (0x08) |  |
+| `BITE` | 9 (0x09) |  |
+| `BLEED` | 10 (0x0A) |  |
+| `BLINK` | 11 (0x0B) |  |
+| `BLUSH` | 12 (0x0C) |  |
+| `BONK` | 13 (0x0D) |  |
+| `BORED` | 14 (0x0E) |  |
+| `BOUNCE` | 15 (0x0F) |  |
+| `BRB` | 16 (0x10) |  |
+| `BOW` | 17 (0x11) |  |
+| `BURP` | 18 (0x12) |  |
+| `BYE` | 19 (0x13) |  |
+| `CACKLE` | 20 (0x14) |  |
+| `CHEER` | 21 (0x15) |  |
+| `CHICKEN` | 22 (0x16) |  |
+| `CHUCKLE` | 23 (0x17) |  |
+| `CLAP` | 24 (0x18) |  |
+| `CONFUSED` | 25 (0x19) |  |
+| `CONGRATULATE` | 26 (0x1A) |  |
+| `COUGH` | 27 (0x1B) |  |
+| `COWER` | 28 (0x1C) |  |
+| `CRACK` | 29 (0x1D) |  |
+| `CRINGE` | 30 (0x1E) |  |
+| `CRY` | 31 (0x1F) |  |
+| `CURIOUS` | 32 (0x20) |  |
+| `CURTSEY` | 33 (0x21) |  |
+| `DANCE` | 34 (0x22) |  |
+| `DRINK` | 35 (0x23) |  |
+| `DROOL` | 36 (0x24) |  |
+| `EAT` | 37 (0x25) |  |
+| `EYE` | 38 (0x26) |  |
+| `FART` | 39 (0x27) |  |
+| `FIDGET` | 40 (0x28) |  |
+| `FLEX` | 41 (0x29) |  |
+| `FROWN` | 42 (0x2A) |  |
+| `GASP` | 43 (0x2B) |  |
+| `GAZE` | 44 (0x2C) |  |
+| `GIGGLE` | 45 (0x2D) |  |
+| `GLARE` | 46 (0x2E) |  |
+| `GLOAT` | 47 (0x2F) |  |
+| `GREET` | 48 (0x30) |  |
+| `GRIN` | 49 (0x31) |  |
+| `GROAN` | 50 (0x32) |  |
+| `GROVEL` | 51 (0x33) |  |
+| `GUFFAW` | 52 (0x34) |  |
+| `HAIL` | 53 (0x35) |  |
+| `HAPPY` | 54 (0x36) |  |
+| `HELLO` | 55 (0x37) |  |
+| `HUG` | 56 (0x38) |  |
+| `HUNGRY` | 57 (0x39) |  |
+| `KISS` | 58 (0x3A) |  |
+| `KNEEL` | 59 (0x3B) |  |
+| `LAUGH` | 60 (0x3C) |  |
+| `LAYDOWN` | 61 (0x3D) |  |
+| `MASSAGE` | 62 (0x3E) |  |
+| `MOAN` | 63 (0x3F) |  |
+| `MOON` | 64 (0x40) |  |
+| `MOURN` | 65 (0x41) |  |
+| `NO` | 66 (0x42) |  |
+| `NOD` | 67 (0x43) |  |
+| `NOSE_PICK` | 68 (0x44) |  |
+| `PANIC` | 69 (0x45) |  |
+| `PEER` | 70 (0x46) |  |
+| `PLEAD` | 71 (0x47) |  |
+| `POINT` | 72 (0x48) |  |
+| `POKE` | 73 (0x49) |  |
+| `PRAY` | 74 (0x4A) |  |
+| `ROAR` | 75 (0x4B) |  |
+| `ROFL` | 76 (0x4C) |  |
+| `RUDE` | 77 (0x4D) |  |
+| `SALUTE` | 78 (0x4E) |  |
+| `SCRATCH` | 79 (0x4F) |  |
+| `SEXY` | 80 (0x50) |  |
+| `SHAKE` | 81 (0x51) |  |
+| `SHOUT` | 82 (0x52) |  |
+| `SHRUG` | 83 (0x53) |  |
+| `SHY` | 84 (0x54) |  |
+| `SIGH` | 85 (0x55) |  |
+| `SIT` | 86 (0x56) |  |
+| `SLEEP` | 87 (0x57) |  |
+| `SNARL` | 88 (0x58) |  |
+| `SPIT` | 89 (0x59) |  |
+| `STARE` | 90 (0x5A) |  |
+| `SURPRISED` | 91 (0x5B) |  |
+| `SURRENDER` | 92 (0x5C) |  |
+| `TALK` | 93 (0x5D) |  |
+| `TALK_EX` | 94 (0x5E) |  |
+| `TALK_Q` | 95 (0x5F) |  |
+| `TAP` | 96 (0x60) |  |
+| `THANK` | 97 (0x61) |  |
+| `THREATEN` | 98 (0x62) |  |
+| `TIRED` | 99 (0x63) |  |
+| `VICTORY` | 100 (0x64) |  |
+| `WAVE` | 101 (0x65) |  |
+| `WELCOME` | 102 (0x66) |  |
+| `WHINE` | 103 (0x67) |  |
+| `WHISTLE` | 104 (0x68) |  |
+| `WORK` | 105 (0x69) |  |
+| `YAWN` | 106 (0x6A) |  |
+| `BOGGLE` | 107 (0x6B) |  |
+| `CALM` | 108 (0x6C) |  |
+| `COLD` | 109 (0x6D) |  |
+| `COMFORT` | 110 (0x6E) |  |
+| `CUDDLE` | 111 (0x6F) |  |
+| `DUCK` | 112 (0x70) |  |
+| `INSULT` | 113 (0x71) |  |
+| `INTRODUCE` | 114 (0x72) |  |
+| `JK` | 115 (0x73) |  |
+| `LICK` | 116 (0x74) |  |
+| `LISTEN` | 117 (0x75) |  |
+| `LOST` | 118 (0x76) |  |
+| `MOCK` | 119 (0x77) |  |
+| `PONDER` | 120 (0x78) |  |
+| `POUNCE` | 121 (0x79) |  |
+| `PRAISE` | 122 (0x7A) |  |
+| `PURR` | 123 (0x7B) |  |
+| `PUZZLE` | 124 (0x7C) |  |
+| `RAISE` | 125 (0x7D) |  |
+| `READY` | 126 (0x7E) |  |
+| `SHIMMY` | 127 (0x7F) |  |
+| `SHIVER` | 128 (0x80) |  |
+| `SHOO` | 129 (0x81) |  |
+| `SLAP` | 130 (0x82) |  |
+| `SMIRK` | 131 (0x83) |  |
+| `SNIFF` | 132 (0x84) |  |
+| `SNUB` | 133 (0x85) |  |
+| `SOOTHE` | 134 (0x86) |  |
+| `STINK` | 135 (0x87) |  |
+| `TAUNT` | 136 (0x88) |  |
+| `TEASE` | 137 (0x89) |  |
+| `THIRSTY` | 138 (0x8A) |  |
+| `VETO` | 139 (0x8B) |  |
+| `SNICKER` | 140 (0x8C) |  |
+| `STAND` | 141 (0x8D) |  |
+| `TICKLE` | 142 (0x8E) |  |
+| `VIOLIN` | 143 (0x8F) |  |
+| `SMILE` | 163 (0xA3) |  |
+| `RASP` | 183 (0xB7) |  |
+| `PITY` | 203 (0xCB) |  |
+| `GROWL` | 204 (0xCC) |  |
+| `BARK` | 205 (0xCD) |  |
+| `SCARED` | 223 (0xDF) |  |
+| `FLOP` | 224 (0xE0) |  |
+| `LOVE` | 225 (0xE1) |  |
+| `MOO` | 226 (0xE2) |  |
+| `COMMEND` | 243 (0xF3) |  |
+| `TRAIN` | 264 (0x108) |  |
+| `HELPME` | 303 (0x12F) |  |
+| `INCOMING` | 304 (0x130) |  |
+| `CHARGE` | 305 (0x131) |  |
+| `FLEE` | 306 (0x132) |  |
+| `ATTACK_MY_TARGET` | 307 (0x133) |  |
+| `OOM` | 323 (0x143) |  |
+| `FOLLOW` | 324 (0x144) |  |
+| `WAIT` | 325 (0x145) |  |
+| `HEAL_ME` | 326 (0x146) |  |
+| `OPEN_FIRE` | 327 (0x147) |  |
+| `FLIRT` | 328 (0x148) |  |
+| `JOKE` | 329 (0x149) |  |
+| `GOLF_CLAP` | 343 (0x157) |  |
+| `WINK` | 363 (0x16B) |  |
+| `PAT` | 364 (0x16C) |  |
 
 Used in:
 * [CMSG_TEXT_EMOTE](cmsg_text_emote.md)
@@ -554,191 +554,191 @@ enum TextEmote : u32 {
 ### Type
 The basic type is `u32`, a 4 byte (32 bit) little endian integer.
 ### Enumerators
-| Enumerator | Value  | Description | Comment |
-| --------- | -------- | ----------- | ------- |
-| `AGREE` | 1 (0x01) |  |  |
-| `AMAZE` | 2 (0x02) |  |  |
-| `ANGRY` | 3 (0x03) |  |  |
-| `APOLOGIZE` | 4 (0x04) |  |  |
-| `APPLAUD` | 5 (0x05) |  |  |
-| `BASHFUL` | 6 (0x06) |  |  |
-| `BECKON` | 7 (0x07) |  |  |
-| `BEG` | 8 (0x08) |  |  |
-| `BITE` | 9 (0x09) |  |  |
-| `BLEED` | 10 (0x0A) |  |  |
-| `BLINK` | 11 (0x0B) |  |  |
-| `BLUSH` | 12 (0x0C) |  |  |
-| `BONK` | 13 (0x0D) |  |  |
-| `BORED` | 14 (0x0E) |  |  |
-| `BOUNCE` | 15 (0x0F) |  |  |
-| `BRB` | 16 (0x10) |  |  |
-| `BOW` | 17 (0x11) |  |  |
-| `BURP` | 18 (0x12) |  |  |
-| `BYE` | 19 (0x13) |  |  |
-| `CACKLE` | 20 (0x14) |  |  |
-| `CHEER` | 21 (0x15) |  |  |
-| `CHICKEN` | 22 (0x16) |  |  |
-| `CHUCKLE` | 23 (0x17) |  |  |
-| `CLAP` | 24 (0x18) |  |  |
-| `CONFUSED` | 25 (0x19) |  |  |
-| `CONGRATULATE` | 26 (0x1A) |  |  |
-| `COUGH` | 27 (0x1B) |  |  |
-| `COWER` | 28 (0x1C) |  |  |
-| `CRACK` | 29 (0x1D) |  |  |
-| `CRINGE` | 30 (0x1E) |  |  |
-| `CRY` | 31 (0x1F) |  |  |
-| `CURIOUS` | 32 (0x20) |  |  |
-| `CURTSEY` | 33 (0x21) |  |  |
-| `DANCE` | 34 (0x22) |  |  |
-| `DRINK` | 35 (0x23) |  |  |
-| `DROOL` | 36 (0x24) |  |  |
-| `EAT` | 37 (0x25) |  |  |
-| `EYE` | 38 (0x26) |  |  |
-| `FART` | 39 (0x27) |  |  |
-| `FIDGET` | 40 (0x28) |  |  |
-| `FLEX` | 41 (0x29) |  |  |
-| `FROWN` | 42 (0x2A) |  |  |
-| `GASP` | 43 (0x2B) |  |  |
-| `GAZE` | 44 (0x2C) |  |  |
-| `GIGGLE` | 45 (0x2D) |  |  |
-| `GLARE` | 46 (0x2E) |  |  |
-| `GLOAT` | 47 (0x2F) |  |  |
-| `GREET` | 48 (0x30) |  |  |
-| `GRIN` | 49 (0x31) |  |  |
-| `GROAN` | 50 (0x32) |  |  |
-| `GROVEL` | 51 (0x33) |  |  |
-| `GUFFAW` | 52 (0x34) |  |  |
-| `HAIL` | 53 (0x35) |  |  |
-| `HAPPY` | 54 (0x36) |  |  |
-| `HELLO` | 55 (0x37) |  |  |
-| `HUG` | 56 (0x38) |  |  |
-| `HUNGRY` | 57 (0x39) |  |  |
-| `KISS` | 58 (0x3A) |  |  |
-| `KNEEL` | 59 (0x3B) |  |  |
-| `LAUGH` | 60 (0x3C) |  |  |
-| `LAYDOWN` | 61 (0x3D) |  |  |
-| `MASSAGE` | 62 (0x3E) |  |  |
-| `MOAN` | 63 (0x3F) |  |  |
-| `MOON` | 64 (0x40) |  |  |
-| `MOURN` | 65 (0x41) |  |  |
-| `NO` | 66 (0x42) |  |  |
-| `NOD` | 67 (0x43) |  |  |
-| `NOSE_PICK` | 68 (0x44) |  |  |
-| `PANIC` | 69 (0x45) |  |  |
-| `PEER` | 70 (0x46) |  |  |
-| `PLEAD` | 71 (0x47) |  |  |
-| `POINT` | 72 (0x48) |  |  |
-| `POKE` | 73 (0x49) |  |  |
-| `PRAY` | 74 (0x4A) |  |  |
-| `ROAR` | 75 (0x4B) |  |  |
-| `ROFL` | 76 (0x4C) |  |  |
-| `RUDE` | 77 (0x4D) |  |  |
-| `SALUTE` | 78 (0x4E) |  |  |
-| `SCRATCH` | 79 (0x4F) |  |  |
-| `SEXY` | 80 (0x50) |  |  |
-| `SHAKE` | 81 (0x51) |  |  |
-| `SHOUT` | 82 (0x52) |  |  |
-| `SHRUG` | 83 (0x53) |  |  |
-| `SHY` | 84 (0x54) |  |  |
-| `SIGH` | 85 (0x55) |  |  |
-| `SIT` | 86 (0x56) |  |  |
-| `SLEEP` | 87 (0x57) |  |  |
-| `SNARL` | 88 (0x58) |  |  |
-| `SPIT` | 89 (0x59) |  |  |
-| `STARE` | 90 (0x5A) |  |  |
-| `SURPRISED` | 91 (0x5B) |  |  |
-| `SURRENDER` | 92 (0x5C) |  |  |
-| `TALK` | 93 (0x5D) |  |  |
-| `TALK_EX` | 94 (0x5E) |  |  |
-| `TALK_Q` | 95 (0x5F) |  |  |
-| `TAP` | 96 (0x60) |  |  |
-| `THANK` | 97 (0x61) |  |  |
-| `THREATEN` | 98 (0x62) |  |  |
-| `TIRED` | 99 (0x63) |  |  |
-| `VICTORY` | 100 (0x64) |  |  |
-| `WAVE` | 101 (0x65) |  |  |
-| `WELCOME` | 102 (0x66) |  |  |
-| `WHINE` | 103 (0x67) |  |  |
-| `WHISTLE` | 104 (0x68) |  |  |
-| `WORK` | 105 (0x69) |  |  |
-| `YAWN` | 106 (0x6A) |  |  |
-| `BOGGLE` | 107 (0x6B) |  |  |
-| `CALM` | 108 (0x6C) |  |  |
-| `COLD` | 109 (0x6D) |  |  |
-| `COMFORT` | 110 (0x6E) |  |  |
-| `CUDDLE` | 111 (0x6F) |  |  |
-| `DUCK` | 112 (0x70) |  |  |
-| `INSULT` | 113 (0x71) |  |  |
-| `INTRODUCE` | 114 (0x72) |  |  |
-| `JK` | 115 (0x73) |  |  |
-| `LICK` | 116 (0x74) |  |  |
-| `LISTEN` | 117 (0x75) |  |  |
-| `LOST` | 118 (0x76) |  |  |
-| `MOCK` | 119 (0x77) |  |  |
-| `PONDER` | 120 (0x78) |  |  |
-| `POUNCE` | 121 (0x79) |  |  |
-| `PRAISE` | 122 (0x7A) |  |  |
-| `PURR` | 123 (0x7B) |  |  |
-| `PUZZLE` | 124 (0x7C) |  |  |
-| `RAISE` | 125 (0x7D) |  |  |
-| `READY` | 126 (0x7E) |  |  |
-| `SHIMMY` | 127 (0x7F) |  |  |
-| `SHIVER` | 128 (0x80) |  |  |
-| `SHOO` | 129 (0x81) |  |  |
-| `SLAP` | 130 (0x82) |  |  |
-| `SMIRK` | 131 (0x83) |  |  |
-| `SNIFF` | 132 (0x84) |  |  |
-| `SNUB` | 133 (0x85) |  |  |
-| `SOOTHE` | 134 (0x86) |  |  |
-| `STINK` | 135 (0x87) |  |  |
-| `TAUNT` | 136 (0x88) |  |  |
-| `TEASE` | 137 (0x89) |  |  |
-| `THIRSTY` | 138 (0x8A) |  |  |
-| `VETO` | 139 (0x8B) |  |  |
-| `SNICKER` | 140 (0x8C) |  |  |
-| `STAND` | 141 (0x8D) |  |  |
-| `TICKLE` | 142 (0x8E) |  |  |
-| `VIOLIN` | 143 (0x8F) |  |  |
-| `SMILE` | 163 (0xA3) |  |  |
-| `RASP` | 183 (0xB7) |  |  |
-| `PITY` | 203 (0xCB) |  |  |
-| `GROWL` | 204 (0xCC) |  |  |
-| `BARK` | 205 (0xCD) |  |  |
-| `SCARED` | 223 (0xDF) |  |  |
-| `FLOP` | 224 (0xE0) |  |  |
-| `LOVE` | 225 (0xE1) |  |  |
-| `MOO` | 226 (0xE2) |  |  |
-| `COMMEND` | 243 (0xF3) |  |  |
-| `TRAIN` | 264 (0x108) |  |  |
-| `HELPME` | 303 (0x12F) |  |  |
-| `INCOMING` | 304 (0x130) |  |  |
-| `CHARGE` | 305 (0x131) |  |  |
-| `FLEE` | 306 (0x132) |  |  |
-| `ATTACK_MY_TARGET` | 307 (0x133) |  |  |
-| `OOM` | 323 (0x143) |  |  |
-| `FOLLOW` | 324 (0x144) |  |  |
-| `WAIT` | 325 (0x145) |  |  |
-| `HEAL_ME` | 326 (0x146) |  |  |
-| `OPEN_FIRE` | 327 (0x147) |  |  |
-| `FLIRT` | 328 (0x148) |  |  |
-| `JOKE` | 329 (0x149) |  |  |
-| `GOLF_CLAP` | 343 (0x157) |  |  |
-| `WINK` | 363 (0x16B) |  |  |
-| `PAT` | 364 (0x16C) |  |  |
-| `SERIOUS` | 365 (0x16D) |  |  |
-| `MOUNT_SPECIAL` | 366 (0x16E) |  |  |
-| `GOOD_LUCK` | 367 (0x16F) |  |  |
-| `BLAME` | 368 (0x170) |  |  |
-| `BLANK` | 369 (0x171) |  |  |
-| `BRANDISH` | 370 (0x172) |  |  |
-| `BREATH` | 371 (0x173) |  |  |
-| `DISAGREE` | 372 (0x174) |  |  |
-| `DOUBT` | 373 (0x175) |  |  |
-| `EMBARRASS` | 374 (0x176) |  |  |
-| `ENCOURAGE` | 375 (0x177) |  |  |
-| `ENEMY` | 376 (0x178) |  |  |
-| `EYE_BROW` | 377 (0x179) |  |  |
-| `TOAST` | 378 (0x17A) |  |  |
+| Enumerator | Value  | Comment |
+| --------- | -------- | ------- |
+| `AGREE` | 1 (0x01) |  |
+| `AMAZE` | 2 (0x02) |  |
+| `ANGRY` | 3 (0x03) |  |
+| `APOLOGIZE` | 4 (0x04) |  |
+| `APPLAUD` | 5 (0x05) |  |
+| `BASHFUL` | 6 (0x06) |  |
+| `BECKON` | 7 (0x07) |  |
+| `BEG` | 8 (0x08) |  |
+| `BITE` | 9 (0x09) |  |
+| `BLEED` | 10 (0x0A) |  |
+| `BLINK` | 11 (0x0B) |  |
+| `BLUSH` | 12 (0x0C) |  |
+| `BONK` | 13 (0x0D) |  |
+| `BORED` | 14 (0x0E) |  |
+| `BOUNCE` | 15 (0x0F) |  |
+| `BRB` | 16 (0x10) |  |
+| `BOW` | 17 (0x11) |  |
+| `BURP` | 18 (0x12) |  |
+| `BYE` | 19 (0x13) |  |
+| `CACKLE` | 20 (0x14) |  |
+| `CHEER` | 21 (0x15) |  |
+| `CHICKEN` | 22 (0x16) |  |
+| `CHUCKLE` | 23 (0x17) |  |
+| `CLAP` | 24 (0x18) |  |
+| `CONFUSED` | 25 (0x19) |  |
+| `CONGRATULATE` | 26 (0x1A) |  |
+| `COUGH` | 27 (0x1B) |  |
+| `COWER` | 28 (0x1C) |  |
+| `CRACK` | 29 (0x1D) |  |
+| `CRINGE` | 30 (0x1E) |  |
+| `CRY` | 31 (0x1F) |  |
+| `CURIOUS` | 32 (0x20) |  |
+| `CURTSEY` | 33 (0x21) |  |
+| `DANCE` | 34 (0x22) |  |
+| `DRINK` | 35 (0x23) |  |
+| `DROOL` | 36 (0x24) |  |
+| `EAT` | 37 (0x25) |  |
+| `EYE` | 38 (0x26) |  |
+| `FART` | 39 (0x27) |  |
+| `FIDGET` | 40 (0x28) |  |
+| `FLEX` | 41 (0x29) |  |
+| `FROWN` | 42 (0x2A) |  |
+| `GASP` | 43 (0x2B) |  |
+| `GAZE` | 44 (0x2C) |  |
+| `GIGGLE` | 45 (0x2D) |  |
+| `GLARE` | 46 (0x2E) |  |
+| `GLOAT` | 47 (0x2F) |  |
+| `GREET` | 48 (0x30) |  |
+| `GRIN` | 49 (0x31) |  |
+| `GROAN` | 50 (0x32) |  |
+| `GROVEL` | 51 (0x33) |  |
+| `GUFFAW` | 52 (0x34) |  |
+| `HAIL` | 53 (0x35) |  |
+| `HAPPY` | 54 (0x36) |  |
+| `HELLO` | 55 (0x37) |  |
+| `HUG` | 56 (0x38) |  |
+| `HUNGRY` | 57 (0x39) |  |
+| `KISS` | 58 (0x3A) |  |
+| `KNEEL` | 59 (0x3B) |  |
+| `LAUGH` | 60 (0x3C) |  |
+| `LAYDOWN` | 61 (0x3D) |  |
+| `MASSAGE` | 62 (0x3E) |  |
+| `MOAN` | 63 (0x3F) |  |
+| `MOON` | 64 (0x40) |  |
+| `MOURN` | 65 (0x41) |  |
+| `NO` | 66 (0x42) |  |
+| `NOD` | 67 (0x43) |  |
+| `NOSE_PICK` | 68 (0x44) |  |
+| `PANIC` | 69 (0x45) |  |
+| `PEER` | 70 (0x46) |  |
+| `PLEAD` | 71 (0x47) |  |
+| `POINT` | 72 (0x48) |  |
+| `POKE` | 73 (0x49) |  |
+| `PRAY` | 74 (0x4A) |  |
+| `ROAR` | 75 (0x4B) |  |
+| `ROFL` | 76 (0x4C) |  |
+| `RUDE` | 77 (0x4D) |  |
+| `SALUTE` | 78 (0x4E) |  |
+| `SCRATCH` | 79 (0x4F) |  |
+| `SEXY` | 80 (0x50) |  |
+| `SHAKE` | 81 (0x51) |  |
+| `SHOUT` | 82 (0x52) |  |
+| `SHRUG` | 83 (0x53) |  |
+| `SHY` | 84 (0x54) |  |
+| `SIGH` | 85 (0x55) |  |
+| `SIT` | 86 (0x56) |  |
+| `SLEEP` | 87 (0x57) |  |
+| `SNARL` | 88 (0x58) |  |
+| `SPIT` | 89 (0x59) |  |
+| `STARE` | 90 (0x5A) |  |
+| `SURPRISED` | 91 (0x5B) |  |
+| `SURRENDER` | 92 (0x5C) |  |
+| `TALK` | 93 (0x5D) |  |
+| `TALK_EX` | 94 (0x5E) |  |
+| `TALK_Q` | 95 (0x5F) |  |
+| `TAP` | 96 (0x60) |  |
+| `THANK` | 97 (0x61) |  |
+| `THREATEN` | 98 (0x62) |  |
+| `TIRED` | 99 (0x63) |  |
+| `VICTORY` | 100 (0x64) |  |
+| `WAVE` | 101 (0x65) |  |
+| `WELCOME` | 102 (0x66) |  |
+| `WHINE` | 103 (0x67) |  |
+| `WHISTLE` | 104 (0x68) |  |
+| `WORK` | 105 (0x69) |  |
+| `YAWN` | 106 (0x6A) |  |
+| `BOGGLE` | 107 (0x6B) |  |
+| `CALM` | 108 (0x6C) |  |
+| `COLD` | 109 (0x6D) |  |
+| `COMFORT` | 110 (0x6E) |  |
+| `CUDDLE` | 111 (0x6F) |  |
+| `DUCK` | 112 (0x70) |  |
+| `INSULT` | 113 (0x71) |  |
+| `INTRODUCE` | 114 (0x72) |  |
+| `JK` | 115 (0x73) |  |
+| `LICK` | 116 (0x74) |  |
+| `LISTEN` | 117 (0x75) |  |
+| `LOST` | 118 (0x76) |  |
+| `MOCK` | 119 (0x77) |  |
+| `PONDER` | 120 (0x78) |  |
+| `POUNCE` | 121 (0x79) |  |
+| `PRAISE` | 122 (0x7A) |  |
+| `PURR` | 123 (0x7B) |  |
+| `PUZZLE` | 124 (0x7C) |  |
+| `RAISE` | 125 (0x7D) |  |
+| `READY` | 126 (0x7E) |  |
+| `SHIMMY` | 127 (0x7F) |  |
+| `SHIVER` | 128 (0x80) |  |
+| `SHOO` | 129 (0x81) |  |
+| `SLAP` | 130 (0x82) |  |
+| `SMIRK` | 131 (0x83) |  |
+| `SNIFF` | 132 (0x84) |  |
+| `SNUB` | 133 (0x85) |  |
+| `SOOTHE` | 134 (0x86) |  |
+| `STINK` | 135 (0x87) |  |
+| `TAUNT` | 136 (0x88) |  |
+| `TEASE` | 137 (0x89) |  |
+| `THIRSTY` | 138 (0x8A) |  |
+| `VETO` | 139 (0x8B) |  |
+| `SNICKER` | 140 (0x8C) |  |
+| `STAND` | 141 (0x8D) |  |
+| `TICKLE` | 142 (0x8E) |  |
+| `VIOLIN` | 143 (0x8F) |  |
+| `SMILE` | 163 (0xA3) |  |
+| `RASP` | 183 (0xB7) |  |
+| `PITY` | 203 (0xCB) |  |
+| `GROWL` | 204 (0xCC) |  |
+| `BARK` | 205 (0xCD) |  |
+| `SCARED` | 223 (0xDF) |  |
+| `FLOP` | 224 (0xE0) |  |
+| `LOVE` | 225 (0xE1) |  |
+| `MOO` | 226 (0xE2) |  |
+| `COMMEND` | 243 (0xF3) |  |
+| `TRAIN` | 264 (0x108) |  |
+| `HELPME` | 303 (0x12F) |  |
+| `INCOMING` | 304 (0x130) |  |
+| `CHARGE` | 305 (0x131) |  |
+| `FLEE` | 306 (0x132) |  |
+| `ATTACK_MY_TARGET` | 307 (0x133) |  |
+| `OOM` | 323 (0x143) |  |
+| `FOLLOW` | 324 (0x144) |  |
+| `WAIT` | 325 (0x145) |  |
+| `HEAL_ME` | 326 (0x146) |  |
+| `OPEN_FIRE` | 327 (0x147) |  |
+| `FLIRT` | 328 (0x148) |  |
+| `JOKE` | 329 (0x149) |  |
+| `GOLF_CLAP` | 343 (0x157) |  |
+| `WINK` | 363 (0x16B) |  |
+| `PAT` | 364 (0x16C) |  |
+| `SERIOUS` | 365 (0x16D) |  |
+| `MOUNT_SPECIAL` | 366 (0x16E) |  |
+| `GOOD_LUCK` | 367 (0x16F) |  |
+| `BLAME` | 368 (0x170) |  |
+| `BLANK` | 369 (0x171) |  |
+| `BRANDISH` | 370 (0x172) |  |
+| `BREATH` | 371 (0x173) |  |
+| `DISAGREE` | 372 (0x174) |  |
+| `DOUBT` | 373 (0x175) |  |
+| `EMBARRASS` | 374 (0x176) |  |
+| `ENCOURAGE` | 375 (0x177) |  |
+| `ENEMY` | 376 (0x178) |  |
+| `EYE_BROW` | 377 (0x179) |  |
+| `TOAST` | 378 (0x17A) |  |
 
 Used in:
 * [CMSG_TEXT_EMOTE](cmsg_text_emote.md)
@@ -1009,260 +1009,260 @@ enum TextEmote : u32 {
 ### Type
 The basic type is `u32`, a 4 byte (32 bit) little endian integer.
 ### Enumerators
-| Enumerator | Value  | Description | Comment |
-| --------- | -------- | ----------- | ------- |
-| `AGREE` | 1 (0x01) |  |  |
-| `AMAZE` | 2 (0x02) |  |  |
-| `ANGRY` | 3 (0x03) |  |  |
-| `APOLOGIZE` | 4 (0x04) |  |  |
-| `APPLAUD` | 5 (0x05) |  |  |
-| `BASHFUL` | 6 (0x06) |  |  |
-| `BECKON` | 7 (0x07) |  |  |
-| `BEG` | 8 (0x08) |  |  |
-| `BITE` | 9 (0x09) |  |  |
-| `BLEED` | 10 (0x0A) |  |  |
-| `BLINK` | 11 (0x0B) |  |  |
-| `BLUSH` | 12 (0x0C) |  |  |
-| `BONK` | 13 (0x0D) |  |  |
-| `BORED` | 14 (0x0E) |  |  |
-| `BOUNCE` | 15 (0x0F) |  |  |
-| `BRB` | 16 (0x10) |  |  |
-| `BOW` | 17 (0x11) |  |  |
-| `BURP` | 18 (0x12) |  |  |
-| `BYE` | 19 (0x13) |  |  |
-| `CACKLE` | 20 (0x14) |  |  |
-| `CHEER` | 21 (0x15) |  |  |
-| `CHICKEN` | 22 (0x16) |  |  |
-| `CHUCKLE` | 23 (0x17) |  |  |
-| `CLAP` | 24 (0x18) |  |  |
-| `CONFUSED` | 25 (0x19) |  |  |
-| `CONGRATULATE` | 26 (0x1A) |  |  |
-| `COUGH` | 27 (0x1B) |  |  |
-| `COWER` | 28 (0x1C) |  |  |
-| `CRACK` | 29 (0x1D) |  |  |
-| `CRINGE` | 30 (0x1E) |  |  |
-| `CRY` | 31 (0x1F) |  |  |
-| `CURIOUS` | 32 (0x20) |  |  |
-| `CURTSEY` | 33 (0x21) |  |  |
-| `DANCE` | 34 (0x22) |  |  |
-| `DRINK` | 35 (0x23) |  |  |
-| `DROOL` | 36 (0x24) |  |  |
-| `EAT` | 37 (0x25) |  |  |
-| `EYE` | 38 (0x26) |  |  |
-| `FART` | 39 (0x27) |  |  |
-| `FIDGET` | 40 (0x28) |  |  |
-| `FLEX` | 41 (0x29) |  |  |
-| `FROWN` | 42 (0x2A) |  |  |
-| `GASP` | 43 (0x2B) |  |  |
-| `GAZE` | 44 (0x2C) |  |  |
-| `GIGGLE` | 45 (0x2D) |  |  |
-| `GLARE` | 46 (0x2E) |  |  |
-| `GLOAT` | 47 (0x2F) |  |  |
-| `GREET` | 48 (0x30) |  |  |
-| `GRIN` | 49 (0x31) |  |  |
-| `GROAN` | 50 (0x32) |  |  |
-| `GROVEL` | 51 (0x33) |  |  |
-| `GUFFAW` | 52 (0x34) |  |  |
-| `HAIL` | 53 (0x35) |  |  |
-| `HAPPY` | 54 (0x36) |  |  |
-| `HELLO` | 55 (0x37) |  |  |
-| `HUG` | 56 (0x38) |  |  |
-| `HUNGRY` | 57 (0x39) |  |  |
-| `KISS` | 58 (0x3A) |  |  |
-| `KNEEL` | 59 (0x3B) |  |  |
-| `LAUGH` | 60 (0x3C) |  |  |
-| `LAYDOWN` | 61 (0x3D) |  |  |
-| `MASSAGE` | 62 (0x3E) |  |  |
-| `MOAN` | 63 (0x3F) |  |  |
-| `MOON` | 64 (0x40) |  |  |
-| `MOURN` | 65 (0x41) |  |  |
-| `NO` | 66 (0x42) |  |  |
-| `NOD` | 67 (0x43) |  |  |
-| `NOSE_PICK` | 68 (0x44) |  |  |
-| `PANIC` | 69 (0x45) |  |  |
-| `PEER` | 70 (0x46) |  |  |
-| `PLEAD` | 71 (0x47) |  |  |
-| `POINT` | 72 (0x48) |  |  |
-| `POKE` | 73 (0x49) |  |  |
-| `PRAY` | 74 (0x4A) |  |  |
-| `ROAR` | 75 (0x4B) |  |  |
-| `ROFL` | 76 (0x4C) |  |  |
-| `RUDE` | 77 (0x4D) |  |  |
-| `SALUTE` | 78 (0x4E) |  |  |
-| `SCRATCH` | 79 (0x4F) |  |  |
-| `SEXY` | 80 (0x50) |  |  |
-| `SHAKE` | 81 (0x51) |  |  |
-| `SHOUT` | 82 (0x52) |  |  |
-| `SHRUG` | 83 (0x53) |  |  |
-| `SHY` | 84 (0x54) |  |  |
-| `SIGH` | 85 (0x55) |  |  |
-| `SIT` | 86 (0x56) |  |  |
-| `SLEEP` | 87 (0x57) |  |  |
-| `SNARL` | 88 (0x58) |  |  |
-| `SPIT` | 89 (0x59) |  |  |
-| `STARE` | 90 (0x5A) |  |  |
-| `SURPRISED` | 91 (0x5B) |  |  |
-| `SURRENDER` | 92 (0x5C) |  |  |
-| `TALK` | 93 (0x5D) |  |  |
-| `TALK_EX` | 94 (0x5E) |  |  |
-| `TALK_Q` | 95 (0x5F) |  |  |
-| `TAP` | 96 (0x60) |  |  |
-| `THANK` | 97 (0x61) |  |  |
-| `THREATEN` | 98 (0x62) |  |  |
-| `TIRED` | 99 (0x63) |  |  |
-| `VICTORY` | 100 (0x64) |  |  |
-| `WAVE` | 101 (0x65) |  |  |
-| `WELCOME` | 102 (0x66) |  |  |
-| `WHINE` | 103 (0x67) |  |  |
-| `WHISTLE` | 104 (0x68) |  |  |
-| `WORK` | 105 (0x69) |  |  |
-| `YAWN` | 106 (0x6A) |  |  |
-| `BOGGLE` | 107 (0x6B) |  |  |
-| `CALM` | 108 (0x6C) |  |  |
-| `COLD` | 109 (0x6D) |  |  |
-| `COMFORT` | 110 (0x6E) |  |  |
-| `CUDDLE` | 111 (0x6F) |  |  |
-| `DUCK` | 112 (0x70) |  |  |
-| `INSULT` | 113 (0x71) |  |  |
-| `INTRODUCE` | 114 (0x72) |  |  |
-| `JK` | 115 (0x73) |  |  |
-| `LICK` | 116 (0x74) |  |  |
-| `LISTEN` | 117 (0x75) |  |  |
-| `LOST` | 118 (0x76) |  |  |
-| `MOCK` | 119 (0x77) |  |  |
-| `PONDER` | 120 (0x78) |  |  |
-| `POUNCE` | 121 (0x79) |  |  |
-| `PRAISE` | 122 (0x7A) |  |  |
-| `PURR` | 123 (0x7B) |  |  |
-| `PUZZLE` | 124 (0x7C) |  |  |
-| `RAISE` | 125 (0x7D) |  |  |
-| `READY` | 126 (0x7E) |  |  |
-| `SHIMMY` | 127 (0x7F) |  |  |
-| `SHIVER` | 128 (0x80) |  |  |
-| `SHOO` | 129 (0x81) |  |  |
-| `SLAP` | 130 (0x82) |  |  |
-| `SMIRK` | 131 (0x83) |  |  |
-| `SNIFF` | 132 (0x84) |  |  |
-| `SNUB` | 133 (0x85) |  |  |
-| `SOOTHE` | 134 (0x86) |  |  |
-| `STINK` | 135 (0x87) |  |  |
-| `TAUNT` | 136 (0x88) |  |  |
-| `TEASE` | 137 (0x89) |  |  |
-| `THIRSTY` | 138 (0x8A) |  |  |
-| `VETO` | 139 (0x8B) |  |  |
-| `SNICKER` | 140 (0x8C) |  |  |
-| `STAND` | 141 (0x8D) |  |  |
-| `TICKLE` | 142 (0x8E) |  |  |
-| `VIOLIN` | 143 (0x8F) |  |  |
-| `SMILE` | 163 (0xA3) |  |  |
-| `RASP` | 183 (0xB7) |  |  |
-| `PITY` | 203 (0xCB) |  |  |
-| `GROWL` | 204 (0xCC) |  |  |
-| `BARK` | 205 (0xCD) |  |  |
-| `SCARED` | 223 (0xDF) |  |  |
-| `FLOP` | 224 (0xE0) |  |  |
-| `LOVE` | 225 (0xE1) |  |  |
-| `MOO` | 226 (0xE2) |  |  |
-| `COMMEND` | 243 (0xF3) |  |  |
-| `TRAIN` | 264 (0x108) |  |  |
-| `HELPME` | 303 (0x12F) |  |  |
-| `INCOMING` | 304 (0x130) |  |  |
-| `CHARGE` | 305 (0x131) |  |  |
-| `FLEE` | 306 (0x132) |  |  |
-| `ATTACK_MY_TARGET` | 307 (0x133) |  |  |
-| `OOM` | 323 (0x143) |  |  |
-| `FOLLOW` | 324 (0x144) |  |  |
-| `WAIT` | 325 (0x145) |  |  |
-| `HEAL_ME` | 326 (0x146) |  |  |
-| `OPEN_FIRE` | 327 (0x147) |  |  |
-| `FLIRT` | 328 (0x148) |  |  |
-| `JOKE` | 329 (0x149) |  |  |
-| `GOLF_CLAP` | 343 (0x157) |  |  |
-| `WINK` | 363 (0x16B) |  |  |
-| `PAT` | 364 (0x16C) |  |  |
-| `SERIOUS` | 365 (0x16D) |  |  |
-| `MOUNT_SPECIAL` | 366 (0x16E) |  |  |
-| `GOOD_LUCK` | 367 (0x16F) |  |  |
-| `BLAME` | 368 (0x170) |  |  |
-| `BLANK` | 369 (0x171) |  |  |
-| `BRANDISH` | 370 (0x172) |  |  |
-| `BREATH` | 371 (0x173) |  |  |
-| `DISAGREE` | 372 (0x174) |  |  |
-| `DOUBT` | 373 (0x175) |  |  |
-| `EMBARRASS` | 374 (0x176) |  |  |
-| `ENCOURAGE` | 375 (0x177) |  |  |
-| `ENEMY` | 376 (0x178) |  |  |
-| `EYE_BROW` | 377 (0x179) |  |  |
-| `TOAST` | 378 (0x17A) |  |  |
-| `FAIL` | 379 (0x17B) |  |  |
-| `HIGH_FIVE` | 380 (0x17C) |  |  |
-| `ABSENT` | 381 (0x17D) |  |  |
-| `ARM` | 382 (0x17E) |  |  |
-| `AWE` | 383 (0x17F) |  |  |
-| `BACKPACK` | 384 (0x180) |  |  |
-| `BAD_FEELING` | 385 (0x181) |  |  |
-| `CHALLENGE` | 386 (0x182) |  |  |
-| `CHUG` | 387 (0x183) |  |  |
-| `DING` | 389 (0x185) |  |  |
-| `FACE_PALM` | 390 (0x186) |  |  |
-| `FAINT` | 391 (0x187) |  |  |
-| `GO` | 392 (0x188) |  |  |
-| `GOING` | 393 (0x189) |  |  |
-| `GLOWER` | 394 (0x18A) |  |  |
-| `HEADACHE` | 395 (0x18B) |  |  |
-| `HICCUP` | 396 (0x18C) |  |  |
-| `HISS` | 398 (0x18E) |  |  |
-| `HOLD_HAND` | 399 (0x18F) |  |  |
-| `HURRY` | 401 (0x191) |  |  |
-| `IDEA` | 402 (0x192) |  |  |
-| `JEALOUS` | 403 (0x193) |  |  |
-| `LUCK` | 404 (0x194) |  |  |
-| `MAP` | 405 (0x195) |  |  |
-| `MERCY` | 406 (0x196) |  |  |
-| `MUTTER` | 407 (0x197) |  |  |
-| `NERVOUS` | 408 (0x198) |  |  |
-| `OFFER` | 409 (0x199) |  |  |
-| `PET` | 410 (0x19A) |  |  |
-| `PINCH` | 411 (0x19B) |  |  |
-| `PROUD` | 413 (0x19D) |  |  |
-| `PROMISE` | 414 (0x19E) |  |  |
-| `PULSE` | 415 (0x19F) |  |  |
-| `PUNCH` | 416 (0x1A0) |  |  |
-| `POUT` | 417 (0x1A1) |  |  |
-| `REGRET` | 418 (0x1A2) |  |  |
-| `REVENGE` | 420 (0x1A4) |  |  |
-| `ROLL_EYES` | 421 (0x1A5) |  |  |
-| `RUFFLE` | 422 (0x1A6) |  |  |
-| `SAD` | 423 (0x1A7) |  |  |
-| `SCOFF` | 424 (0x1A8) |  |  |
-| `SCOLD` | 425 (0x1A9) |  |  |
-| `SCOWL` | 426 (0x1AA) |  |  |
-| `SEARCH` | 427 (0x1AB) |  |  |
-| `SHAKEFIST` | 428 (0x1AC) |  |  |
-| `SHIFTY` | 429 (0x1AD) |  |  |
-| `SHUDDER` | 430 (0x1AE) |  |  |
-| `SIGNAL` | 431 (0x1AF) |  |  |
-| `SILENCE` | 432 (0x1B0) |  |  |
-| `SING` | 433 (0x1B1) |  |  |
-| `SMACK` | 434 (0x1B2) |  |  |
-| `SNEAK` | 435 (0x1B3) |  |  |
-| `SNEEZE` | 436 (0x1B4) |  |  |
-| `SNORT` | 437 (0x1B5) |  |  |
-| `SQUEAL` | 438 (0x1B6) |  |  |
-| `STOP_ATTACK` | 439 (0x1B7) |  |  |
-| `SUSPICIOUS` | 440 (0x1B8) |  |  |
-| `THINK` | 441 (0x1B9) |  |  |
-| `TRUCE` | 442 (0x1BA) |  |  |
-| `TWIDDLE` | 443 (0x1BB) |  |  |
-| `WARN` | 444 (0x1BC) |  |  |
-| `SNAP` | 445 (0x1BD) |  |  |
-| `CHARM` | 446 (0x1BE) |  |  |
-| `COVER_EARS` | 447 (0x1BF) |  |  |
-| `CROSS_ARMS` | 448 (0x1C0) |  |  |
-| `LOOK` | 449 (0x1C1) |  |  |
-| `OBJECT` | 450 (0x1C2) |  |  |
-| `SWEAT` | 451 (0x1C3) |  |  |
-| `YW` | 453 (0x1C5) |  |  |
+| Enumerator | Value  | Comment |
+| --------- | -------- | ------- |
+| `AGREE` | 1 (0x01) |  |
+| `AMAZE` | 2 (0x02) |  |
+| `ANGRY` | 3 (0x03) |  |
+| `APOLOGIZE` | 4 (0x04) |  |
+| `APPLAUD` | 5 (0x05) |  |
+| `BASHFUL` | 6 (0x06) |  |
+| `BECKON` | 7 (0x07) |  |
+| `BEG` | 8 (0x08) |  |
+| `BITE` | 9 (0x09) |  |
+| `BLEED` | 10 (0x0A) |  |
+| `BLINK` | 11 (0x0B) |  |
+| `BLUSH` | 12 (0x0C) |  |
+| `BONK` | 13 (0x0D) |  |
+| `BORED` | 14 (0x0E) |  |
+| `BOUNCE` | 15 (0x0F) |  |
+| `BRB` | 16 (0x10) |  |
+| `BOW` | 17 (0x11) |  |
+| `BURP` | 18 (0x12) |  |
+| `BYE` | 19 (0x13) |  |
+| `CACKLE` | 20 (0x14) |  |
+| `CHEER` | 21 (0x15) |  |
+| `CHICKEN` | 22 (0x16) |  |
+| `CHUCKLE` | 23 (0x17) |  |
+| `CLAP` | 24 (0x18) |  |
+| `CONFUSED` | 25 (0x19) |  |
+| `CONGRATULATE` | 26 (0x1A) |  |
+| `COUGH` | 27 (0x1B) |  |
+| `COWER` | 28 (0x1C) |  |
+| `CRACK` | 29 (0x1D) |  |
+| `CRINGE` | 30 (0x1E) |  |
+| `CRY` | 31 (0x1F) |  |
+| `CURIOUS` | 32 (0x20) |  |
+| `CURTSEY` | 33 (0x21) |  |
+| `DANCE` | 34 (0x22) |  |
+| `DRINK` | 35 (0x23) |  |
+| `DROOL` | 36 (0x24) |  |
+| `EAT` | 37 (0x25) |  |
+| `EYE` | 38 (0x26) |  |
+| `FART` | 39 (0x27) |  |
+| `FIDGET` | 40 (0x28) |  |
+| `FLEX` | 41 (0x29) |  |
+| `FROWN` | 42 (0x2A) |  |
+| `GASP` | 43 (0x2B) |  |
+| `GAZE` | 44 (0x2C) |  |
+| `GIGGLE` | 45 (0x2D) |  |
+| `GLARE` | 46 (0x2E) |  |
+| `GLOAT` | 47 (0x2F) |  |
+| `GREET` | 48 (0x30) |  |
+| `GRIN` | 49 (0x31) |  |
+| `GROAN` | 50 (0x32) |  |
+| `GROVEL` | 51 (0x33) |  |
+| `GUFFAW` | 52 (0x34) |  |
+| `HAIL` | 53 (0x35) |  |
+| `HAPPY` | 54 (0x36) |  |
+| `HELLO` | 55 (0x37) |  |
+| `HUG` | 56 (0x38) |  |
+| `HUNGRY` | 57 (0x39) |  |
+| `KISS` | 58 (0x3A) |  |
+| `KNEEL` | 59 (0x3B) |  |
+| `LAUGH` | 60 (0x3C) |  |
+| `LAYDOWN` | 61 (0x3D) |  |
+| `MASSAGE` | 62 (0x3E) |  |
+| `MOAN` | 63 (0x3F) |  |
+| `MOON` | 64 (0x40) |  |
+| `MOURN` | 65 (0x41) |  |
+| `NO` | 66 (0x42) |  |
+| `NOD` | 67 (0x43) |  |
+| `NOSE_PICK` | 68 (0x44) |  |
+| `PANIC` | 69 (0x45) |  |
+| `PEER` | 70 (0x46) |  |
+| `PLEAD` | 71 (0x47) |  |
+| `POINT` | 72 (0x48) |  |
+| `POKE` | 73 (0x49) |  |
+| `PRAY` | 74 (0x4A) |  |
+| `ROAR` | 75 (0x4B) |  |
+| `ROFL` | 76 (0x4C) |  |
+| `RUDE` | 77 (0x4D) |  |
+| `SALUTE` | 78 (0x4E) |  |
+| `SCRATCH` | 79 (0x4F) |  |
+| `SEXY` | 80 (0x50) |  |
+| `SHAKE` | 81 (0x51) |  |
+| `SHOUT` | 82 (0x52) |  |
+| `SHRUG` | 83 (0x53) |  |
+| `SHY` | 84 (0x54) |  |
+| `SIGH` | 85 (0x55) |  |
+| `SIT` | 86 (0x56) |  |
+| `SLEEP` | 87 (0x57) |  |
+| `SNARL` | 88 (0x58) |  |
+| `SPIT` | 89 (0x59) |  |
+| `STARE` | 90 (0x5A) |  |
+| `SURPRISED` | 91 (0x5B) |  |
+| `SURRENDER` | 92 (0x5C) |  |
+| `TALK` | 93 (0x5D) |  |
+| `TALK_EX` | 94 (0x5E) |  |
+| `TALK_Q` | 95 (0x5F) |  |
+| `TAP` | 96 (0x60) |  |
+| `THANK` | 97 (0x61) |  |
+| `THREATEN` | 98 (0x62) |  |
+| `TIRED` | 99 (0x63) |  |
+| `VICTORY` | 100 (0x64) |  |
+| `WAVE` | 101 (0x65) |  |
+| `WELCOME` | 102 (0x66) |  |
+| `WHINE` | 103 (0x67) |  |
+| `WHISTLE` | 104 (0x68) |  |
+| `WORK` | 105 (0x69) |  |
+| `YAWN` | 106 (0x6A) |  |
+| `BOGGLE` | 107 (0x6B) |  |
+| `CALM` | 108 (0x6C) |  |
+| `COLD` | 109 (0x6D) |  |
+| `COMFORT` | 110 (0x6E) |  |
+| `CUDDLE` | 111 (0x6F) |  |
+| `DUCK` | 112 (0x70) |  |
+| `INSULT` | 113 (0x71) |  |
+| `INTRODUCE` | 114 (0x72) |  |
+| `JK` | 115 (0x73) |  |
+| `LICK` | 116 (0x74) |  |
+| `LISTEN` | 117 (0x75) |  |
+| `LOST` | 118 (0x76) |  |
+| `MOCK` | 119 (0x77) |  |
+| `PONDER` | 120 (0x78) |  |
+| `POUNCE` | 121 (0x79) |  |
+| `PRAISE` | 122 (0x7A) |  |
+| `PURR` | 123 (0x7B) |  |
+| `PUZZLE` | 124 (0x7C) |  |
+| `RAISE` | 125 (0x7D) |  |
+| `READY` | 126 (0x7E) |  |
+| `SHIMMY` | 127 (0x7F) |  |
+| `SHIVER` | 128 (0x80) |  |
+| `SHOO` | 129 (0x81) |  |
+| `SLAP` | 130 (0x82) |  |
+| `SMIRK` | 131 (0x83) |  |
+| `SNIFF` | 132 (0x84) |  |
+| `SNUB` | 133 (0x85) |  |
+| `SOOTHE` | 134 (0x86) |  |
+| `STINK` | 135 (0x87) |  |
+| `TAUNT` | 136 (0x88) |  |
+| `TEASE` | 137 (0x89) |  |
+| `THIRSTY` | 138 (0x8A) |  |
+| `VETO` | 139 (0x8B) |  |
+| `SNICKER` | 140 (0x8C) |  |
+| `STAND` | 141 (0x8D) |  |
+| `TICKLE` | 142 (0x8E) |  |
+| `VIOLIN` | 143 (0x8F) |  |
+| `SMILE` | 163 (0xA3) |  |
+| `RASP` | 183 (0xB7) |  |
+| `PITY` | 203 (0xCB) |  |
+| `GROWL` | 204 (0xCC) |  |
+| `BARK` | 205 (0xCD) |  |
+| `SCARED` | 223 (0xDF) |  |
+| `FLOP` | 224 (0xE0) |  |
+| `LOVE` | 225 (0xE1) |  |
+| `MOO` | 226 (0xE2) |  |
+| `COMMEND` | 243 (0xF3) |  |
+| `TRAIN` | 264 (0x108) |  |
+| `HELPME` | 303 (0x12F) |  |
+| `INCOMING` | 304 (0x130) |  |
+| `CHARGE` | 305 (0x131) |  |
+| `FLEE` | 306 (0x132) |  |
+| `ATTACK_MY_TARGET` | 307 (0x133) |  |
+| `OOM` | 323 (0x143) |  |
+| `FOLLOW` | 324 (0x144) |  |
+| `WAIT` | 325 (0x145) |  |
+| `HEAL_ME` | 326 (0x146) |  |
+| `OPEN_FIRE` | 327 (0x147) |  |
+| `FLIRT` | 328 (0x148) |  |
+| `JOKE` | 329 (0x149) |  |
+| `GOLF_CLAP` | 343 (0x157) |  |
+| `WINK` | 363 (0x16B) |  |
+| `PAT` | 364 (0x16C) |  |
+| `SERIOUS` | 365 (0x16D) |  |
+| `MOUNT_SPECIAL` | 366 (0x16E) |  |
+| `GOOD_LUCK` | 367 (0x16F) |  |
+| `BLAME` | 368 (0x170) |  |
+| `BLANK` | 369 (0x171) |  |
+| `BRANDISH` | 370 (0x172) |  |
+| `BREATH` | 371 (0x173) |  |
+| `DISAGREE` | 372 (0x174) |  |
+| `DOUBT` | 373 (0x175) |  |
+| `EMBARRASS` | 374 (0x176) |  |
+| `ENCOURAGE` | 375 (0x177) |  |
+| `ENEMY` | 376 (0x178) |  |
+| `EYE_BROW` | 377 (0x179) |  |
+| `TOAST` | 378 (0x17A) |  |
+| `FAIL` | 379 (0x17B) |  |
+| `HIGH_FIVE` | 380 (0x17C) |  |
+| `ABSENT` | 381 (0x17D) |  |
+| `ARM` | 382 (0x17E) |  |
+| `AWE` | 383 (0x17F) |  |
+| `BACKPACK` | 384 (0x180) |  |
+| `BAD_FEELING` | 385 (0x181) |  |
+| `CHALLENGE` | 386 (0x182) |  |
+| `CHUG` | 387 (0x183) |  |
+| `DING` | 389 (0x185) |  |
+| `FACE_PALM` | 390 (0x186) |  |
+| `FAINT` | 391 (0x187) |  |
+| `GO` | 392 (0x188) |  |
+| `GOING` | 393 (0x189) |  |
+| `GLOWER` | 394 (0x18A) |  |
+| `HEADACHE` | 395 (0x18B) |  |
+| `HICCUP` | 396 (0x18C) |  |
+| `HISS` | 398 (0x18E) |  |
+| `HOLD_HAND` | 399 (0x18F) |  |
+| `HURRY` | 401 (0x191) |  |
+| `IDEA` | 402 (0x192) |  |
+| `JEALOUS` | 403 (0x193) |  |
+| `LUCK` | 404 (0x194) |  |
+| `MAP` | 405 (0x195) |  |
+| `MERCY` | 406 (0x196) |  |
+| `MUTTER` | 407 (0x197) |  |
+| `NERVOUS` | 408 (0x198) |  |
+| `OFFER` | 409 (0x199) |  |
+| `PET` | 410 (0x19A) |  |
+| `PINCH` | 411 (0x19B) |  |
+| `PROUD` | 413 (0x19D) |  |
+| `PROMISE` | 414 (0x19E) |  |
+| `PULSE` | 415 (0x19F) |  |
+| `PUNCH` | 416 (0x1A0) |  |
+| `POUT` | 417 (0x1A1) |  |
+| `REGRET` | 418 (0x1A2) |  |
+| `REVENGE` | 420 (0x1A4) |  |
+| `ROLL_EYES` | 421 (0x1A5) |  |
+| `RUFFLE` | 422 (0x1A6) |  |
+| `SAD` | 423 (0x1A7) |  |
+| `SCOFF` | 424 (0x1A8) |  |
+| `SCOLD` | 425 (0x1A9) |  |
+| `SCOWL` | 426 (0x1AA) |  |
+| `SEARCH` | 427 (0x1AB) |  |
+| `SHAKEFIST` | 428 (0x1AC) |  |
+| `SHIFTY` | 429 (0x1AD) |  |
+| `SHUDDER` | 430 (0x1AE) |  |
+| `SIGNAL` | 431 (0x1AF) |  |
+| `SILENCE` | 432 (0x1B0) |  |
+| `SING` | 433 (0x1B1) |  |
+| `SMACK` | 434 (0x1B2) |  |
+| `SNEAK` | 435 (0x1B3) |  |
+| `SNEEZE` | 436 (0x1B4) |  |
+| `SNORT` | 437 (0x1B5) |  |
+| `SQUEAL` | 438 (0x1B6) |  |
+| `STOP_ATTACK` | 439 (0x1B7) |  |
+| `SUSPICIOUS` | 440 (0x1B8) |  |
+| `THINK` | 441 (0x1B9) |  |
+| `TRUCE` | 442 (0x1BA) |  |
+| `TWIDDLE` | 443 (0x1BB) |  |
+| `WARN` | 444 (0x1BC) |  |
+| `SNAP` | 445 (0x1BD) |  |
+| `CHARM` | 446 (0x1BE) |  |
+| `COVER_EARS` | 447 (0x1BF) |  |
+| `CROSS_ARMS` | 448 (0x1C0) |  |
+| `LOOK` | 449 (0x1C1) |  |
+| `OBJECT` | 450 (0x1C2) |  |
+| `SWEAT` | 451 (0x1C3) |  |
+| `YW` | 453 (0x1C5) |  |
 
 Used in:
 * [CMSG_TEXT_EMOTE](cmsg_text_emote.md)

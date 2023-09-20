@@ -48,47 +48,47 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | 1 / - | [ArenaTeamEvent](arenateamevent.md) | event |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| - | 1 / - | [ArenaTeamEvent](arenateamevent.md) | event |  |
 
 If event is equal to `JOIN`:
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | - / - | CString | joiner_name |  |  |
-| - | - / - | CString | arena_team_name1 |  |  |
-| - | 8 / Little | [Guid](../types/packed-guid.md) | joiner |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| - | - / - | CString | joiner_name |  |
+| - | - / - | CString | arena_team_name1 |  |
+| - | 8 / Little | [Guid](../types/packed-guid.md) | joiner |  |
 
 Else If event is equal to `LEAVE`:
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | - / - | CString | leaver_name |  |  |
-| - | 8 / Little | [Guid](../types/packed-guid.md) | leaver |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| - | - / - | CString | leaver_name |  |
+| - | 8 / Little | [Guid](../types/packed-guid.md) | leaver |  |
 
 Else If event is equal to `REMOVE`:
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | - / - | CString | kicked_player_name |  |  |
-| - | - / - | CString | arena_team_name2 |  |  |
-| - | - / - | CString | kicker_name |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| - | - / - | CString | kicked_player_name |  |
+| - | - / - | CString | arena_team_name2 |  |
+| - | - / - | CString | kicker_name |  |
 
 Else If event is equal to `LEADER_IS` **or** 
 is equal to `DISBANDED`:
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | - / - | CString | leader_name |  |  |
-| - | - / - | CString | arena_team_name3 |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| - | - / - | CString | leader_name |  |
+| - | - / - | CString | arena_team_name3 |  |
 
 Else If event is equal to `LEADER_CHANGED`:
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | - / - | CString | old_leader |  |  |
-| - | - / - | CString | new_leader |  |  |
-| - | 1 / - | u8 | amount_of_strings |  |  |
-| - | ? / - | CString[amount_of_strings] | string |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| - | - / - | CString | old_leader |  |
+| - | - / - | CString | new_leader |  |
+| - | 1 / - | u8 | amount_of_strings |  |
+| - | ? / - | CString[amount_of_strings] | string |  |
 

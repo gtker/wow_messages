@@ -15,10 +15,10 @@ enum ClientCastFlags : u8 {
 ### Type
 The basic type is `u8`, a 1 byte (8 bit) integer.
 ### Enumerators
-| Enumerator | Value  | Description | Comment |
-| --------- | -------- | ----------- | ------- |
-| `NONE` | 0 (0x00) |  |  |
-| `EXTRA` | 2 (0x02) |  |  |
+| Enumerator | Value  | Comment |
+| --------- | -------- | ------- |
+| `NONE` | 0 (0x00) |  |
+| `EXTRA` | 2 (0x02) |  |
 
 Used in:
 * [CMSG_CAST_SPELL](cmsg_cast_spell.md)

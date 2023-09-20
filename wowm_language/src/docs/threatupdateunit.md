@@ -13,10 +13,10 @@ struct ThreatUpdateUnit {
 ```
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x00 | - / - | [PackedGuid](../types/packed-guid.md) | unit |  |  |
-| - | 4 / Little | u32 | threat |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x00 | - / - | [PackedGuid](../types/packed-guid.md) | unit |  |
+| - | 4 / Little | u32 | threat |  |
 
 
 Used in:

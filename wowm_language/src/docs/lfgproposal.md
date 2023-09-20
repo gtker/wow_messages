@@ -17,14 +17,14 @@ struct LfgProposal {
 ```
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x00 | 4 / Little | u32 | role_mask |  |  |
-| 0x04 | 1 / - | u8 | is_current_player |  |  |
-| 0x05 | 1 / - | u8 | in_dungeon |  |  |
-| 0x06 | 1 / - | u8 | in_same_group |  |  |
-| 0x07 | 1 / - | u8 | has_answered |  |  |
-| 0x08 | 1 / - | u8 | has_accepted |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x00 | 4 / Little | u32 | role_mask |  |
+| 0x04 | 1 / - | u8 | is_current_player |  |
+| 0x05 | 1 / - | u8 | in_dungeon |  |
+| 0x06 | 1 / - | u8 | in_same_group |  |
+| 0x07 | 1 / - | u8 | has_answered |  |
+| 0x08 | 1 / - | u8 | has_accepted |  |
 
 
 Used in:

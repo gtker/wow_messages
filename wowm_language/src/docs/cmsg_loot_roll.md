@@ -25,11 +25,11 @@ CMSG have a header of 6 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x06 | 8 / Little | [Guid](../types/packed-guid.md) | item |  |  |
-| 0x0E | 4 / Little | u32 | item_slot |  |  |
-| 0x12 | 1 / - | [RollVote](rollvote.md) | vote |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x06 | 8 / Little | [Guid](../types/packed-guid.md) | item |  |
+| 0x0E | 4 / Little | u32 | item_slot |  |
+| 0x12 | 1 / - | [RollVote](rollvote.md) | vote |  |
 
 ## Client Version 2, Client Version 3
 
@@ -56,9 +56,9 @@ CMSG have a header of 6 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x06 | 8 / Little | [Guid](../types/packed-guid.md) | item |  |  |
-| 0x0E | 4 / Little | u32 | item_slot |  |  |
-| 0x12 | 1 / - | [RollVote](rollvote.md) | vote |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x06 | 8 / Little | [Guid](../types/packed-guid.md) | item |  |
+| 0x0E | 4 / Little | u32 | item_slot |  |
+| 0x12 | 1 / - | [RollVote](rollvote.md) | vote |  |
 

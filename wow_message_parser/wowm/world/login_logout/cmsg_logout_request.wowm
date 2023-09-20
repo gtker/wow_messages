@@ -1,8 +1,8 @@
 #tag_all versions "1 2 3";
 
 cmsg CMSG_LOGOUT_REQUEST = 0x4B { } {
-    description = "Sent by client after pressing 'Logout' or 'Exit Game'.";
-    description = "Server should reply with [SMSG_LOGOUT_RESPONSE].";
+    comment = "Sent by client after pressing 'Logout' or 'Exit Game'.";
+    comment = "Server should reply with [SMSG_LOGOUT_RESPONSE].";
     comment = "Spamming the 'Logout' and 'Exit Game' buttons does not send multiple messages.";
 }
 

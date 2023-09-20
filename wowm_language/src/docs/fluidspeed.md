@@ -18,11 +18,11 @@ enum FluidSpeed : u8 {
 ### Type
 The basic type is `u8`, a 1 byte (8 bit) integer.
 ### Enumerators
-| Enumerator | Value  | Description | Comment |
-| --------- | -------- | ----------- | ------- |
-| `STILL` | 0 (0x00) |  |  |
-| `SLOW` | 4 (0x04) |  |  |
-| `RAPID` | 8 (0x08) |  |  |
+| Enumerator | Value  | Comment |
+| --------- | -------- | ------- |
+| `STILL` | 0 (0x00) |  |
+| `SLOW` | 4 (0x04) |  |
+| `RAPID` | 8 (0x08) |  |
 
 Used in:
 

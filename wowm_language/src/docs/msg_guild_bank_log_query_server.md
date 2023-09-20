@@ -26,12 +26,12 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | 4 / Little | u32 | unix_time |  |  |
-| 0x08 | 1 / - | u8 | slot |  |  |
-| 0x09 | 1 / - | u8 | amount_of_money_logs |  |  |
-| 0x0A | ? / - | [MoneyLogItem](moneylogitem.md)[amount_of_money_logs] | money_logs |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x04 | 4 / Little | u32 | unix_time |  |
+| 0x08 | 1 / - | u8 | slot |  |
+| 0x09 | 1 / - | u8 | amount_of_money_logs |  |
+| 0x0A | ? / - | [MoneyLogItem](moneylogitem.md)[amount_of_money_logs] | money_logs |  |
 
 ## Client Version 3.3.5
 
@@ -59,10 +59,10 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | 4 / Little | u32 | unix_time |  |  |
-| - | 1 / - | u8 | slot |  |  |
-| - | 1 / - | u8 | amount_of_money_logs |  |  |
-| - | ? / - | [MoneyLogItem](moneylogitem.md)[amount_of_money_logs] | money_logs |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| - | 4 / Little | u32 | unix_time |  |
+| - | 1 / - | u8 | slot |  |
+| - | 1 / - | u8 | amount_of_money_logs |  |
+| - | ? / - | [MoneyLogItem](moneylogitem.md)[amount_of_money_logs] | money_logs |  |
 

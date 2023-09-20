@@ -28,12 +28,12 @@ CMSG have a header of 6 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x06 | 1 / - | u8 | bag |  |  |
-| 0x07 | 1 / - | u8 | slot |  |  |
-| 0x08 | 1 / - | u8 | amount |  |  |
-| 0x09 | 1 / - | u8 | unknown1 |  |  |
-| 0x0A | 1 / - | u8 | unknown2 |  |  |
-| 0x0B | 1 / - | u8 | unknown3 |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x06 | 1 / - | u8 | bag |  |
+| 0x07 | 1 / - | u8 | slot |  |
+| 0x08 | 1 / - | u8 | amount |  |
+| 0x09 | 1 / - | u8 | unknown1 |  |
+| 0x0A | 1 / - | u8 | unknown2 |  |
+| 0x0B | 1 / - | u8 | unknown3 |  |
 

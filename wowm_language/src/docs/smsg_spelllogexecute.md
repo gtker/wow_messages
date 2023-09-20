@@ -26,12 +26,12 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | - / - | [PackedGuid](../types/packed-guid.md) | caster |  |  |
-| - | 4 / Little | u32 | spell |  |  |
-| - | 4 / Little | u32 | amount_of_effects |  |  |
-| - | ? / - | [SpellLog](spelllog.md)[amount_of_effects] | logs |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x04 | - / - | [PackedGuid](../types/packed-guid.md) | caster |  |
+| - | 4 / Little | u32 | spell |  |
+| - | 4 / Little | u32 | amount_of_effects |  |
+| - | ? / - | [SpellLog](spelllog.md)[amount_of_effects] | logs |  |
 
 ## Client Version 2.4.3
 
@@ -59,12 +59,12 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | - / - | [PackedGuid](../types/packed-guid.md) | caster |  |  |
-| - | 4 / Little | u32 | spell |  |  |
-| - | 4 / Little | u32 | amount_of_effects |  |  |
-| - | ? / - | [SpellLog](spelllog.md)[amount_of_effects] | logs |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x04 | - / - | [PackedGuid](../types/packed-guid.md) | caster |  |
+| - | 4 / Little | u32 | spell |  |
+| - | 4 / Little | u32 | amount_of_effects |  |
+| - | ? / - | [SpellLog](spelllog.md)[amount_of_effects] | logs |  |
 
 ## Client Version 3.3.5
 
@@ -92,10 +92,10 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | - / - | [PackedGuid](../types/packed-guid.md) | caster |  |  |
-| - | 4 / Little | u32 | spell |  |  |
-| - | 4 / Little | u32 | amount_of_effects |  |  |
-| - | ? / - | [SpellLog](spelllog.md)[amount_of_effects] | logs |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| - | - / - | [PackedGuid](../types/packed-guid.md) | caster |  |
+| - | 4 / Little | u32 | spell |  |
+| - | 4 / Little | u32 | amount_of_effects |  |
+| - | ? / - | [SpellLog](spelllog.md)[amount_of_effects] | logs |  |
 

@@ -13,10 +13,10 @@ struct GuildBankRights {
 ```
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x00 | 4 / Little | u32 | rights |  |  |
-| 0x04 | 4 / Little | u32 | slots_per_day |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x00 | 4 / Little | u32 | rights |  |
+| 0x04 | 4 / Little | u32 | slots_per_day |  |
 
 
 Used in:

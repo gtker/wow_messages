@@ -24,10 +24,10 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | 1 / - | u8 | amount_of_mails |  |  |
-| 0x05 | ? / - | [Mail](mail.md)[amount_of_mails] | mails |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x04 | 1 / - | u8 | amount_of_mails |  |
+| 0x05 | ? / - | [Mail](mail.md)[amount_of_mails] | mails |  |
 
 ## Client Version 2.4.3
 
@@ -53,10 +53,10 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | 1 / - | u8 | amount_of_mails |  |  |
-| 0x05 | ? / - | [Mail](mail.md)[amount_of_mails] | mails |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x04 | 1 / - | u8 | amount_of_mails |  |
+| 0x05 | ? / - | [Mail](mail.md)[amount_of_mails] | mails |  |
 
 ## Client Version 3.3.5
 
@@ -83,9 +83,9 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | 4 / Little | u32 | real_mail_amount |  | azerothcore: this will display warning about undelivered mail to player if realCount > mailsCount |
-| - | 1 / - | u8 | amount_of_mails |  |  |
-| - | ? / - | [Mail](mail.md)[amount_of_mails] | mails |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| - | 4 / Little | u32 | real_mail_amount | azerothcore: this will display warning about undelivered mail to player if realCount > mailsCount |
+| - | 1 / - | u8 | amount_of_mails |  |
+| - | ? / - | [Mail](mail.md)[amount_of_mails] | mails |  |
 

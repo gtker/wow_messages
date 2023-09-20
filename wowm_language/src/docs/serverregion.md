@@ -22,15 +22,15 @@ enum ServerRegion : u8 {
 ### Type
 The basic type is `u8`, a 1 byte (8 bit) integer.
 ### Enumerators
-| Enumerator | Value  | Description | Comment |
-| --------- | -------- | ----------- | ------- |
-| `UNITED_STATES` | 1 (0x01) |  |  |
-| `KOREA` | 2 (0x02) |  |  |
-| `EUROPE` | 3 (0x03) |  |  |
-| `TAIWAN` | 4 (0x04) |  |  |
-| `CHINA` | 5 (0x05) |  |  |
-| `TEST_SERVER` | 99 (0x63) |  |  |
-| `QA_SERVER` | 101 (0x65) |  |  |
+| Enumerator | Value  | Comment |
+| --------- | -------- | ------- |
+| `UNITED_STATES` | 1 (0x01) |  |
+| `KOREA` | 2 (0x02) |  |
+| `EUROPE` | 3 (0x03) |  |
+| `TAIWAN` | 4 (0x04) |  |
+| `CHINA` | 5 (0x05) |  |
+| `TEST_SERVER` | 99 (0x63) |  |
+| `QA_SERVER` | 101 (0x65) |  |
 
 Used in:
 

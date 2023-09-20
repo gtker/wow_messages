@@ -13,10 +13,10 @@ struct GuildBankSocket {
 ```
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x00 | 1 / - | u8 | socket_index |  |  |
-| 0x01 | 4 / Little | u32 | gem |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x00 | 1 / - | u8 | socket_index |  |
+| 0x01 | 4 / Little | u32 | gem |  |
 
 
 Used in:

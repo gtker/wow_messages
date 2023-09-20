@@ -56,15 +56,15 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | 4 / - | [PetNameInvalidReason](petnameinvalidreason.md) | reason |  |  |
-| - | - / - | CString | name |  |  |
-| - | 1 / - | [DeclinedPetNameIncluded](declinedpetnameincluded.md) | included |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| - | 4 / - | [PetNameInvalidReason](petnameinvalidreason.md) | reason |  |
+| - | - / - | CString | name |  |
+| - | 1 / - | [DeclinedPetNameIncluded](declinedpetnameincluded.md) | included |  |
 
 If included is equal to `INCLUDED`:
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | ? / - | CString[5] | declined_names |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| - | ? / - | CString[5] | declined_names |  |
 

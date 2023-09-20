@@ -23,18 +23,18 @@ enum CalendarStatus : u8 {
 ### Type
 The basic type is `u8`, a 1 byte (8 bit) integer.
 ### Enumerators
-| Enumerator | Value  | Description | Comment |
-| --------- | -------- | ----------- | ------- |
-| `INVITED` | 0 (0x00) |  |  |
-| `ACCEPTED` | 1 (0x01) |  |  |
-| `DECLINED` | 2 (0x02) |  |  |
-| `CONFIRMED` | 3 (0x03) |  |  |
-| `OUT` | 4 (0x04) |  |  |
-| `STANDBY` | 5 (0x05) |  |  |
-| `SIGNED_UP` | 6 (0x06) |  |  |
-| `NOT_SIGNED_UP` | 7 (0x07) |  |  |
-| `TENTATIVE` | 8 (0x08) |  |  |
-| `REMOVED` | 9 (0x09) |  |  |
+| Enumerator | Value  | Comment |
+| --------- | -------- | ------- |
+| `INVITED` | 0 (0x00) |  |
+| `ACCEPTED` | 1 (0x01) |  |
+| `DECLINED` | 2 (0x02) |  |
+| `CONFIRMED` | 3 (0x03) |  |
+| `OUT` | 4 (0x04) |  |
+| `STANDBY` | 5 (0x05) |  |
+| `SIGNED_UP` | 6 (0x06) |  |
+| `NOT_SIGNED_UP` | 7 (0x07) |  |
+| `TENTATIVE` | 8 (0x08) |  |
+| `REMOVED` | 9 (0x09) |  |
 
 Used in:
 * [CMSG_CALENDAR_EVENT_RSVP](cmsg_calendar_event_rsvp.md)

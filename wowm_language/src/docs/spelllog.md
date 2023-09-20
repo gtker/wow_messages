@@ -85,70 +85,70 @@ struct SpellLog {
 ```
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x00 | 4 / - | [SpellEffect](spelleffect.md) | effect |  |  |
-| 0x04 | 4 / Little | u32 | amount_of_logs |  | vmangos/cmangos/mangoszero: Can be variable but all use constant 1 |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x00 | 4 / - | [SpellEffect](spelleffect.md) | effect |  |
+| 0x04 | 4 / Little | u32 | amount_of_logs | vmangos/cmangos/mangoszero: Can be variable but all use constant 1 |
 
 If effect is equal to `POWER_DRAIN`:
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x08 | 8 / Little | [Guid](../types/packed-guid.md) | target1 |  |  |
-| 0x10 | 4 / Little | u32 | amount |  |  |
-| 0x14 | 4 / - | [Power](power.md) | power |  |  |
-| 0x18 | 4 / Little | f32 | multiplier |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x08 | 8 / Little | [Guid](../types/packed-guid.md) | target1 |  |
+| 0x10 | 4 / Little | u32 | amount |  |
+| 0x14 | 4 / - | [Power](power.md) | power |  |
+| 0x18 | 4 / Little | f32 | multiplier |  |
 
 Else If effect is equal to `HEAL` **or** 
 is equal to `HEAL_MAX_HEALTH`:
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x1C | 8 / Little | [Guid](../types/packed-guid.md) | target2 |  |  |
-| 0x24 | 4 / Little | u32 | heal_amount |  |  |
-| 0x28 | 4 / Little | u32 | heal_critical |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x1C | 8 / Little | [Guid](../types/packed-guid.md) | target2 |  |
+| 0x24 | 4 / Little | u32 | heal_amount |  |
+| 0x28 | 4 / Little | u32 | heal_critical |  |
 
 Else If effect is equal to `ENERGIZE`:
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x2C | 8 / Little | [Guid](../types/packed-guid.md) | target3 |  |  |
-| 0x34 | 4 / Little | u32 | energize_amount |  |  |
-| 0x38 | 4 / Little | u32 | energize_power |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x2C | 8 / Little | [Guid](../types/packed-guid.md) | target3 |  |
+| 0x34 | 4 / Little | u32 | energize_amount |  |
+| 0x38 | 4 / Little | u32 | energize_power |  |
 
 Else If effect is equal to `ADD_EXTRA_ATTACKS`:
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x3C | 8 / Little | [Guid](../types/packed-guid.md) | target4 |  |  |
-| 0x44 | 4 / Little | u32 | extra_attacks |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x3C | 8 / Little | [Guid](../types/packed-guid.md) | target4 |  |
+| 0x44 | 4 / Little | u32 | extra_attacks |  |
 
 Else If effect is equal to `CREATE_ITEM`:
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x48 | 4 / Little | u32 | item |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x48 | 4 / Little | u32 | item |  |
 
 Else If effect is equal to `INTERRUPT_CAST`:
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x4C | 8 / Little | [Guid](../types/packed-guid.md) | target5 |  |  |
-| 0x54 | 4 / Little | u32 | interrupted_spell |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x4C | 8 / Little | [Guid](../types/packed-guid.md) | target5 |  |
+| 0x54 | 4 / Little | u32 | interrupted_spell |  |
 
 Else If effect is equal to `DURABILITY_DAMAGE`:
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x58 | 8 / Little | [Guid](../types/packed-guid.md) | target6 |  |  |
-| 0x60 | 4 / Little | u32 | item_to_damage |  |  |
-| 0x64 | 4 / Little | u32 | unknown5 |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x58 | 8 / Little | [Guid](../types/packed-guid.md) | target6 |  |
+| 0x60 | 4 / Little | u32 | item_to_damage |  |
+| 0x64 | 4 / Little | u32 | unknown5 |  |
 
 Else If effect is equal to `FEED_PET`:
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x68 | 4 / Little | u32 | feed_pet_item |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x68 | 4 / Little | u32 | feed_pet_item |  |
 
 Else If effect is equal to `INSTAKILL` **or** 
 is equal to `RESURRECT` **or** 
@@ -185,9 +185,9 @@ is equal to `SUMMON_OBJECT_SLOT3` **or**
 is equal to `SUMMON_OBJECT_SLOT4` **or** 
 is equal to `SUMMON_DEMON`:
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x6C | 8 / Little | [Guid](../types/packed-guid.md) | target7 |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x6C | 8 / Little | [Guid](../types/packed-guid.md) | target7 |  |
 
 
 Used in:
@@ -250,54 +250,54 @@ struct SpellLog {
 ```
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x00 | 4 / - | [SpellEffect](spelleffect.md) | effect |  |  |
-| 0x04 | 4 / Little | u32 | amount_of_logs |  | vmangos/cmangos/mangoszero: Can be variable but all use constant 1 |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x00 | 4 / - | [SpellEffect](spelleffect.md) | effect |  |
+| 0x04 | 4 / Little | u32 | amount_of_logs | vmangos/cmangos/mangoszero: Can be variable but all use constant 1 |
 
 If effect is equal to `POWER_DRAIN`:
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x08 | - / - | [PackedGuid](../types/packed-guid.md) | target1 |  |  |
-| - | 4 / Little | u32 | amount |  |  |
-| - | 4 / - | [Power](power.md) | power |  |  |
-| - | 4 / Little | f32 | multiplier |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x08 | - / - | [PackedGuid](../types/packed-guid.md) | target1 |  |
+| - | 4 / Little | u32 | amount |  |
+| - | 4 / - | [Power](power.md) | power |  |
+| - | 4 / Little | f32 | multiplier |  |
 
 Else If effect is equal to `ADD_EXTRA_ATTACKS`:
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | - / - | [PackedGuid](../types/packed-guid.md) | target4 |  |  |
-| - | 4 / Little | u32 | extra_attacks |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| - | - / - | [PackedGuid](../types/packed-guid.md) | target4 |  |
+| - | 4 / Little | u32 | extra_attacks |  |
 
 Else If effect is equal to `INTERRUPT_CAST`:
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | - / - | [PackedGuid](../types/packed-guid.md) | target5 |  |  |
-| - | 4 / Little | u32 | interrupted_spell |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| - | - / - | [PackedGuid](../types/packed-guid.md) | target5 |  |
+| - | 4 / Little | u32 | interrupted_spell |  |
 
 Else If effect is equal to `DURABILITY_DAMAGE`:
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | - / - | [PackedGuid](../types/packed-guid.md) | target6 |  |  |
-| - | 4 / Little | u32 | item_to_damage |  |  |
-| - | 4 / Little | u32 | unknown5 |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| - | - / - | [PackedGuid](../types/packed-guid.md) | target6 |  |
+| - | 4 / Little | u32 | item_to_damage |  |
+| - | 4 / Little | u32 | unknown5 |  |
 
 Else If effect is equal to `OPEN_LOCK` **or** 
 is equal to `OPEN_LOCK_ITEM`:
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | - / - | [PackedGuid](../types/packed-guid.md) | lock_target |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| - | - / - | [PackedGuid](../types/packed-guid.md) | lock_target |  |
 
 Else If effect is equal to `CREATE_ITEM`:
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | 4 / Little | u32 | item |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| - | 4 / Little | u32 | item |  |
 
 Else If effect is equal to `SUMMON` **or** 
 is equal to `TRANS_DOOR` **or** 
@@ -310,21 +310,21 @@ is equal to `SUMMON_OBJECT_SLOT2` **or**
 is equal to `SUMMON_OBJECT_SLOT3` **or** 
 is equal to `SUMMON_OBJECT_SLOT4`:
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | - / - | [PackedGuid](../types/packed-guid.md) | summon_target |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| - | - / - | [PackedGuid](../types/packed-guid.md) | summon_target |  |
 
 Else If effect is equal to `FEED_PET`:
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | - / - | [PackedGuid](../types/packed-guid.md) | pet_feed_guid |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| - | - / - | [PackedGuid](../types/packed-guid.md) | pet_feed_guid |  |
 
 Else If effect is equal to `DISMISS_PET`:
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | - / - | [PackedGuid](../types/packed-guid.md) | pet_dismiss_guid |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| - | - / - | [PackedGuid](../types/packed-guid.md) | pet_dismiss_guid |  |
 
 
 Used in:
@@ -392,55 +392,55 @@ struct SpellLog {
 ```
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x00 | 4 / - | [SpellEffect](spelleffect.md) | effect |  |  |
-| 0x04 | 4 / Little | u32 | amount_of_logs |  | vmangos/cmangos/mangoszero: Can be variable but all use constant 1 |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x00 | 4 / - | [SpellEffect](spelleffect.md) | effect |  |
+| 0x04 | 4 / Little | u32 | amount_of_logs | vmangos/cmangos/mangoszero: Can be variable but all use constant 1 |
 
 If effect is equal to `POWER_DRAIN`:
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x08 | - / - | [PackedGuid](../types/packed-guid.md) | target1 |  |  |
-| - | 4 / Little | u32 | amount |  |  |
-| - | 4 / - | [Power](power.md) | power |  |  |
-| - | 4 / Little | f32 | multiplier |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x08 | - / - | [PackedGuid](../types/packed-guid.md) | target1 |  |
+| - | 4 / Little | u32 | amount |  |
+| - | 4 / - | [Power](power.md) | power |  |
+| - | 4 / Little | f32 | multiplier |  |
 
 Else If effect is equal to `ADD_EXTRA_ATTACKS`:
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | - / - | [PackedGuid](../types/packed-guid.md) | target4 |  |  |
-| - | 4 / Little | u32 | extra_attacks |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| - | - / - | [PackedGuid](../types/packed-guid.md) | target4 |  |
+| - | 4 / Little | u32 | extra_attacks |  |
 
 Else If effect is equal to `INTERRUPT_CAST`:
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | - / - | [PackedGuid](../types/packed-guid.md) | target5 |  |  |
-| - | 4 / Little | u32 | interrupted_spell |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| - | - / - | [PackedGuid](../types/packed-guid.md) | target5 |  |
+| - | 4 / Little | u32 | interrupted_spell |  |
 
 Else If effect is equal to `DURABILITY_DAMAGE`:
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | - / - | [PackedGuid](../types/packed-guid.md) | target6 |  |  |
-| - | 4 / Little | u32 | item_to_damage |  |  |
-| - | 4 / Little | u32 | unknown5 |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| - | - / - | [PackedGuid](../types/packed-guid.md) | target6 |  |
+| - | 4 / Little | u32 | item_to_damage |  |
+| - | 4 / Little | u32 | unknown5 |  |
 
 Else If effect is equal to `OPEN_LOCK` **or** 
 is equal to `OPEN_LOCK_ITEM`:
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | - / - | [PackedGuid](../types/packed-guid.md) | lock_target |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| - | - / - | [PackedGuid](../types/packed-guid.md) | lock_target |  |
 
 Else If effect is equal to `CREATE_ITEM` **or** 
 is equal to `CREATE_ITEM2`:
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | 4 / Little | u32 | item |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| - | 4 / Little | u32 | item |  |
 
 Else If effect is equal to `SUMMON` **or** 
 is equal to `TRANS_DOOR` **or** 
@@ -453,28 +453,28 @@ is equal to `SUMMON_OBJECT_SLOT2` **or**
 is equal to `SUMMON_OBJECT_SLOT3` **or** 
 is equal to `SUMMON_OBJECT_SLOT4`:
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | - / - | [PackedGuid](../types/packed-guid.md) | summon_target |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| - | - / - | [PackedGuid](../types/packed-guid.md) | summon_target |  |
 
 Else If effect is equal to `FEED_PET`:
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | - / - | [PackedGuid](../types/packed-guid.md) | pet_feed_guid |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| - | - / - | [PackedGuid](../types/packed-guid.md) | pet_feed_guid |  |
 
 Else If effect is equal to `DISMISS_PET`:
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | - / - | [PackedGuid](../types/packed-guid.md) | pet_dismiss_guid |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| - | - / - | [PackedGuid](../types/packed-guid.md) | pet_dismiss_guid |  |
 
 Else If effect is equal to `RESURRECT` **or** 
 is equal to `RESURRECT_NEW`:
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | - / - | [PackedGuid](../types/packed-guid.md) | resurrect_guid |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| - | - / - | [PackedGuid](../types/packed-guid.md) | resurrect_guid |  |
 
 
 Used in:

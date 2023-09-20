@@ -13,10 +13,10 @@ struct CharacterGear {
 ```
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x00 | 4 / Little | u32 | equipment_display_id |  |  |
-| 0x04 | 1 / - | [InventoryType](inventorytype.md) | inventory_type |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x00 | 4 / Little | u32 | equipment_display_id |  |
+| 0x04 | 1 / - | [InventoryType](inventorytype.md) | inventory_type |  |
 
 
 Used in:
@@ -36,11 +36,11 @@ struct CharacterGear {
 ```
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x00 | 4 / Little | u32 | equipment_display_id |  |  |
-| 0x04 | 1 / - | [InventoryType](inventorytype.md) | inventory_type |  |  |
-| 0x05 | 4 / Little | u32 | enchantment |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x00 | 4 / Little | u32 | equipment_display_id |  |
+| 0x04 | 1 / - | [InventoryType](inventorytype.md) | inventory_type |  |
+| 0x05 | 4 / Little | u32 | enchantment |  |
 
 
 Used in:
@@ -60,11 +60,11 @@ struct CharacterGear {
 ```
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x00 | 4 / Little | u32 | equipment_display_id |  |  |
-| 0x04 | 1 / - | [InventoryType](inventorytype.md) | inventory_type |  |  |
-| 0x05 | 4 / Little | u32 | enchantment |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x00 | 4 / Little | u32 | equipment_display_id |  |
+| 0x04 | 1 / - | [InventoryType](inventorytype.md) | inventory_type |  |
+| 0x05 | 4 / Little | u32 | enchantment |  |
 
 
 Used in:

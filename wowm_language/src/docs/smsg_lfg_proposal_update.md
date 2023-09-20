@@ -29,13 +29,13 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | 4 / Little | u32 | dungeon_id |  |  |
-| - | 1 / - | u8 | proposal_state |  |  |
-| - | 4 / Little | u32 | proposal_id |  |  |
-| - | 4 / Little | u32 | encounters_finished_mask |  |  |
-| - | 1 / - | u8 | silent |  |  |
-| - | 1 / - | u8 | amount_of_proposals |  |  |
-| - | ? / - | [LfgProposal](lfgproposal.md)[amount_of_proposals] | proposals |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| - | 4 / Little | u32 | dungeon_id |  |
+| - | 1 / - | u8 | proposal_state |  |
+| - | 4 / Little | u32 | proposal_id |  |
+| - | 4 / Little | u32 | encounters_finished_mask |  |
+| - | 1 / - | u8 | silent |  |
+| - | 1 / - | u8 | amount_of_proposals |  |
+| - | ? / - | [LfgProposal](lfgproposal.md)[amount_of_proposals] | proposals |  |
 

@@ -24,8 +24,8 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | 4 / Little | u32 | amount_of_quests |  |  |
-| - | ? / - | [QuestPoiList](questpoilist.md)[amount_of_quests] | quests |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| - | 4 / Little | u32 | amount_of_quests |  |
+| - | ? / - | [QuestPoiList](questpoilist.md)[amount_of_quests] | quests |  |
 

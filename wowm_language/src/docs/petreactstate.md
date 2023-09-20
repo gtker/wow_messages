@@ -16,11 +16,11 @@ enum PetReactState : u8 {
 ### Type
 The basic type is `u8`, a 1 byte (8 bit) integer.
 ### Enumerators
-| Enumerator | Value  | Description | Comment |
-| --------- | -------- | ----------- | ------- |
-| `PASSIVE` | 0 (0x00) |  |  |
-| `DEFENSIVE` | 1 (0x01) |  |  |
-| `AGGRESSIVE` | 2 (0x02) |  |  |
+| Enumerator | Value  | Comment |
+| --------- | -------- | ------- |
+| `PASSIVE` | 0 (0x00) |  |
+| `DEFENSIVE` | 1 (0x01) |  |
+| `AGGRESSIVE` | 2 (0x02) |  |
 
 Used in:
 * [SMSG_PET_MODE](smsg_pet_mode.md)

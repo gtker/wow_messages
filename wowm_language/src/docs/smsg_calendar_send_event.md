@@ -37,21 +37,21 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | 1 / - | u8 | send_type |  |  |
-| - | - / - | [PackedGuid](../types/packed-guid.md) | creator |  |  |
-| - | 8 / Little | [Guid](../types/packed-guid.md) | event_id |  |  |
-| - | - / - | CString | title |  |  |
-| - | - / - | CString | description |  |  |
-| - | 1 / - | u8 | event_type |  |  |
-| - | 1 / - | u8 | repeatable |  |  |
-| - | 4 / Little | u32 | max_invitees |  |  |
-| - | 4 / Little | u32 | dungeon_id |  |  |
-| - | 4 / Little | u32 | flags |  |  |
-| - | 4 / Little | DateTime | event_time |  |  |
-| - | 4 / Little | DateTime | time_zone_time |  |  |
-| - | 4 / Little | u32 | guild_id |  |  |
-| - | 4 / Little | u32 | amount_of_invitees |  |  |
-| - | ? / - | [CalendarSendInvitee](calendarsendinvitee.md)[amount_of_invitees] | invitees |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| - | 1 / - | u8 | send_type |  |
+| - | - / - | [PackedGuid](../types/packed-guid.md) | creator |  |
+| - | 8 / Little | [Guid](../types/packed-guid.md) | event_id |  |
+| - | - / - | CString | title |  |
+| - | - / - | CString | description |  |
+| - | 1 / - | u8 | event_type |  |
+| - | 1 / - | u8 | repeatable |  |
+| - | 4 / Little | u32 | max_invitees |  |
+| - | 4 / Little | u32 | dungeon_id |  |
+| - | 4 / Little | u32 | flags |  |
+| - | 4 / Little | DateTime | event_time |  |
+| - | 4 / Little | DateTime | time_zone_time |  |
+| - | 4 / Little | u32 | guild_id |  |
+| - | 4 / Little | u32 | amount_of_invitees |  |
+| - | ? / - | [CalendarSendInvitee](calendarsendinvitee.md)[amount_of_invitees] | invitees |  |
 

@@ -35,22 +35,22 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | 4 / - | [LfgType](lfgtype.md) | lfg_type |  |  |
-| - | 4 / Little | u32 | dungeon_id |  |  |
-| - | 1 / - | [LfgListUpdateType](lfglistupdatetype.md) | update_type |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| - | 4 / - | [LfgType](lfgtype.md) | lfg_type |  |
+| - | 4 / Little | u32 | dungeon_id |  |
+| - | 1 / - | [LfgListUpdateType](lfglistupdatetype.md) | update_type |  |
 
 If update_type is equal to `PARTIAL`:
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | 4 / Little | u32 | amount_of_deleted_guids |  |  |
-| - | ? / - | [Guid](../types/packed-guid.md)[amount_of_deleted_guids] | deleted_guids |  |  |
-| - | 4 / Little | u32 | amount_of_groups |  |  |
-| - | 4 / Little | u32 | unknown1 |  | emus set to 0. |
-| - | ? / - | [LfgListGroup](lfglistgroup.md)[amount_of_groups] | groups |  |  |
-| - | 4 / Little | u32 | amount_of_players |  |  |
-| - | 4 / Little | u32 | unknown2 |  | emus set to 0. |
-| - | ? / - | [LfgListPlayer](lfglistplayer.md)[amount_of_players] | players |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| - | 4 / Little | u32 | amount_of_deleted_guids |  |
+| - | ? / - | [Guid](../types/packed-guid.md)[amount_of_deleted_guids] | deleted_guids |  |
+| - | 4 / Little | u32 | amount_of_groups |  |
+| - | 4 / Little | u32 | unknown1 | emus set to 0. |
+| - | ? / - | [LfgListGroup](lfglistgroup.md)[amount_of_groups] | groups |  |
+| - | 4 / Little | u32 | amount_of_players |  |
+| - | 4 / Little | u32 | unknown2 | emus set to 0. |
+| - | ? / - | [LfgListPlayer](lfglistplayer.md)[amount_of_players] | players |  |
 

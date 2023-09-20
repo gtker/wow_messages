@@ -18,11 +18,11 @@ enum LfgFaction : i8 {
 ### Type
 The basic type is `i8`, a 1 byte (8 bit) integer.
 ### Enumerators
-| Enumerator | Value  | Description | Comment |
-| --------- | -------- | ----------- | ------- |
-| `NEUTRAL` | -1 (0xFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF) |  |  |
-| `HORDE` | 0 (0x00) |  |  |
-| `ALLIANCE` | 1 (0x01) |  |  |
+| Enumerator | Value  | Comment |
+| --------- | -------- | ------- |
+| `NEUTRAL` | -1 (0xFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF) |  |
+| `HORDE` | 0 (0x00) |  |
+| `ALLIANCE` | 1 (0x01) |  |
 
 Used in:
 

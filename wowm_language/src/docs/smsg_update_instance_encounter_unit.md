@@ -38,31 +38,31 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | 4 / - | [EncounterFrame](encounterframe.md) | frame |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| - | 4 / - | [EncounterFrame](encounterframe.md) | frame |  |
 
 If frame is equal to `ENGAGE` **or** 
 is equal to `DISENGAGE` **or** 
 is equal to `UPDATE_PRIORITY`:
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | - / - | [PackedGuid](../types/packed-guid.md) | guid |  |  |
-| - | 1 / - | u8 | parameter1 |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| - | - / - | [PackedGuid](../types/packed-guid.md) | guid |  |
+| - | 1 / - | u8 | parameter1 |  |
 
 Else If frame is equal to `ADD_TIMER` **or** 
 is equal to `ENABLE_OBJECTIVE` **or** 
 is equal to `DISABLE_OBJECTIVE`:
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | 1 / - | u8 | parameter2 |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| - | 1 / - | u8 | parameter2 |  |
 
 Else If frame is equal to `UPDATE_OBJECTIVE`:
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | 1 / - | u8 | parameter3 |  |  |
-| - | 1 / - | u8 | parameter4 |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| - | 1 / - | u8 | parameter3 |  |
+| - | 1 / - | u8 | parameter4 |  |
 

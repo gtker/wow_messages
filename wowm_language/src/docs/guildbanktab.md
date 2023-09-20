@@ -13,10 +13,10 @@ struct GuildBankTab {
 ```
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x00 | - / - | CString | tab_name |  |  |
-| - | - / - | CString | tab_icon |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x00 | - / - | CString | tab_name |  |
+| - | - / - | CString | tab_icon |  |
 
 
 Used in:

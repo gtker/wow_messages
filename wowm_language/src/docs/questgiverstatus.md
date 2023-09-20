@@ -21,16 +21,16 @@ enum QuestGiverStatus : u8 {
 ### Type
 The basic type is `u8`, a 1 byte (8 bit) integer.
 ### Enumerators
-| Enumerator | Value  | Description | Comment |
-| --------- | -------- | ----------- | ------- |
-| `NONE` | 0 (0x00) |  |  |
-| `UNAVAILABLE` | 1 (0x01) |  |  |
-| `CHAT` | 2 (0x02) |  |  |
-| `INCOMPLETE` | 3 (0x03) |  |  |
-| `REWARD_REP` | 4 (0x04) |  |  |
-| `AVAILABLE` | 5 (0x05) |  |  |
-| `REWARD_OLD` | 6 (0x06) |  | red dot on minimap |
-| `REWARD2` | 7 (0x07) |  | yellow dot on minimap |
+| Enumerator | Value  | Comment |
+| --------- | -------- | ------- |
+| `NONE` | 0 (0x00) |  |
+| `UNAVAILABLE` | 1 (0x01) |  |
+| `CHAT` | 2 (0x02) |  |
+| `INCOMPLETE` | 3 (0x03) |  |
+| `REWARD_REP` | 4 (0x04) |  |
+| `AVAILABLE` | 5 (0x05) |  |
+| `REWARD_OLD` | 6 (0x06) | red dot on minimap |
+| `REWARD2` | 7 (0x07) | yellow dot on minimap |
 
 Used in:
 * [SMSG_QUESTGIVER_STATUS](smsg_questgiver_status.md)
@@ -57,17 +57,17 @@ enum QuestGiverStatus : u8 {
 ### Type
 The basic type is `u8`, a 1 byte (8 bit) integer.
 ### Enumerators
-| Enumerator | Value  | Description | Comment |
-| --------- | -------- | ----------- | ------- |
-| `NONE` | 0 (0x00) |  |  |
-| `UNAVAILABLE` | 1 (0x01) |  |  |
-| `CHAT` | 2 (0x02) |  |  |
-| `INCOMPLETE` | 3 (0x03) |  |  |
-| `REWARD_REP` | 4 (0x04) |  |  |
-| `AVAILABLE_REP` | 5 (0x05) |  |  |
-| `AVAILABLE` | 6 (0x06) |  |  |
-| `REWARD_OLD` | 7 (0x07) |  | red dot on minimap |
-| `REWARD2` | 8 (0x08) |  | yellow dot on minimap |
+| Enumerator | Value  | Comment |
+| --------- | -------- | ------- |
+| `NONE` | 0 (0x00) |  |
+| `UNAVAILABLE` | 1 (0x01) |  |
+| `CHAT` | 2 (0x02) |  |
+| `INCOMPLETE` | 3 (0x03) |  |
+| `REWARD_REP` | 4 (0x04) |  |
+| `AVAILABLE_REP` | 5 (0x05) |  |
+| `AVAILABLE` | 6 (0x06) |  |
+| `REWARD_OLD` | 7 (0x07) | red dot on minimap |
+| `REWARD2` | 8 (0x08) | yellow dot on minimap |
 
 Used in:
 * [QuestGiverStatusReport](questgiverstatusreport.md)
@@ -97,19 +97,19 @@ enum QuestGiverStatus : u8 {
 ### Type
 The basic type is `u8`, a 1 byte (8 bit) integer.
 ### Enumerators
-| Enumerator | Value  | Description | Comment |
-| --------- | -------- | ----------- | ------- |
-| `NONE` | 0 (0x00) |  |  |
-| `UNAVAILABLE` | 1 (0x01) |  |  |
-| `LOW_LEVEL_AVAILABLE` | 2 (0x02) |  |  |
-| `LOW_LEVEL_REWARD_REP` | 3 (0x03) |  |  |
-| `LOW_LEVEL_AVAILABLE_REP` | 4 (0x04) |  |  |
-| `INCOMPLETE` | 5 (0x05) |  |  |
-| `REWARD_REP` | 6 (0x06) |  |  |
-| `AVAILABLE_REP` | 7 (0x07) |  |  |
-| `AVAILABLE` | 8 (0x08) |  |  |
-| `REWARD2` | 9 (0x09) |  | no yellow dot on minimap |
-| `REWARD` | 10 (0x0A) |  | yellow dot on minimap |
+| Enumerator | Value  | Comment |
+| --------- | -------- | ------- |
+| `NONE` | 0 (0x00) |  |
+| `UNAVAILABLE` | 1 (0x01) |  |
+| `LOW_LEVEL_AVAILABLE` | 2 (0x02) |  |
+| `LOW_LEVEL_REWARD_REP` | 3 (0x03) |  |
+| `LOW_LEVEL_AVAILABLE_REP` | 4 (0x04) |  |
+| `INCOMPLETE` | 5 (0x05) |  |
+| `REWARD_REP` | 6 (0x06) |  |
+| `AVAILABLE_REP` | 7 (0x07) |  |
+| `AVAILABLE` | 8 (0x08) |  |
+| `REWARD2` | 9 (0x09) | no yellow dot on minimap |
+| `REWARD` | 10 (0x0A) | yellow dot on minimap |
 
 Used in:
 * [QuestGiverStatusReport](questgiverstatusreport.md)

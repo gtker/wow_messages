@@ -27,13 +27,13 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | 4 / Little | u32 | id |  |  |
-| 0x08 | 4 / Little | u32 | rights |  |  |
-| 0x0C | 4 / Little | Gold | gold_limit_per_day |  |  |
-| 0x10 | 1 / - | u8 | purchased_bank_tabs |  |  |
-| 0x11 | 48 / - | [BankTab](banktab.md)[6] | bank_tabs |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x04 | 4 / Little | u32 | id |  |
+| 0x08 | 4 / Little | u32 | rights |  |
+| 0x0C | 4 / Little | Gold | gold_limit_per_day |  |
+| 0x10 | 1 / - | u8 | purchased_bank_tabs |  |
+| 0x11 | 48 / - | [BankTab](banktab.md)[6] | bank_tabs |  |
 
 ## Client Version 3.3.5
 
@@ -62,11 +62,11 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | 4 / Little | u32 | id |  |  |
-| 0x08 | 4 / Little | u32 | rights |  |  |
-| 0x0C | 4 / Little | Gold | gold_limit_per_day |  |  |
-| 0x10 | 1 / - | u8 | purchased_bank_tabs |  |  |
-| 0x11 | 48 / - | [BankTab](banktab.md)[6] | bank_tabs |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x04 | 4 / Little | u32 | id |  |
+| 0x08 | 4 / Little | u32 | rights |  |
+| 0x0C | 4 / Little | Gold | gold_limit_per_day |  |
+| 0x10 | 1 / - | u8 | purchased_bank_tabs |  |
+| 0x11 | 48 / - | [BankTab](banktab.md)[6] | bank_tabs |  |
 

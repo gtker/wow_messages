@@ -23,9 +23,9 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | ? / - | [Addon](addon.md)[-] | addons |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x04 | ? / - | [Addon](addon.md)[-] | addons |  |
 
 ## Client Version 2.4.3
 
@@ -53,10 +53,10 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | - / - | [AddonArray](../types/addon-array.md) | addons |  |  |
-| - | 4 / Little | u32 | number_of_banned_addons |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x04 | - / - | [AddonArray](../types/addon-array.md) | addons |  |
+| - | 4 / Little | u32 | number_of_banned_addons |  |
 
 ## Client Version 3.3.5
 
@@ -84,8 +84,8 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | - / - | [AddonArray](../types/addon-array.md) | addons |  |  |
-| - | 4 / Little | u32 | number_of_banned_addons |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| - | - / - | [AddonArray](../types/addon-array.md) | addons |  |
+| - | 4 / Little | u32 | number_of_banned_addons |  |
 

@@ -21,16 +21,16 @@ flag UpdateFlag : u8 {
 ### Type
 The basic type is `u8`, a 1 byte (8 bit) integer.
 ### Enumerators
-| Enumerator | Value  | Description | Comment |
-| --------- | -------- | ----------- | ------- |
-| `NONE` | 0 (0x00) |  |  |
-| `SELF` | 1 (0x01) |  |  |
-| `TRANSPORT` | 2 (0x02) |  |  |
-| `MELEE_ATTACKING` | 4 (0x04) |  |  |
-| `HIGH_GUID` | 8 (0x08) |  |  |
-| `ALL` | 16 (0x10) |  |  |
-| `LIVING` | 32 (0x20) |  |  |
-| `HAS_POSITION` | 64 (0x40) |  |  |
+| Enumerator | Value  | Comment |
+| --------- | -------- | ------- |
+| `NONE` | 0 (0x00) |  |
+| `SELF` | 1 (0x01) |  |
+| `TRANSPORT` | 2 (0x02) |  |
+| `MELEE_ATTACKING` | 4 (0x04) |  |
+| `HIGH_GUID` | 8 (0x08) |  |
+| `ALL` | 16 (0x10) |  |
+| `LIVING` | 32 (0x20) |  |
+| `HAS_POSITION` | 64 (0x40) |  |
 
 Used in:
 * [MovementBlock](movementblock.md)
@@ -59,19 +59,19 @@ flag UpdateFlag : u16 {
 ### Type
 The basic type is `u16`, a 2 byte (16 bit) little endian integer.
 ### Enumerators
-| Enumerator | Value  | Description | Comment |
-| --------- | -------- | ----------- | ------- |
-| `NONE` | 0 (0x00) |  |  |
-| `SELF` | 1 (0x01) |  |  |
-| `TRANSPORT` | 2 (0x02) |  |  |
-| `HAS_ATTACKING_TARGET` | 4 (0x04) |  |  |
-| `LOW_GUID` | 8 (0x08) |  |  |
-| `HIGH_GUID` | 16 (0x10) |  |  |
-| `LIVING` | 32 (0x20) |  |  |
-| `HAS_POSITION` | 64 (0x40) |  |  |
-| `VEHICLE` | 128 (0x80) |  |  |
-| `POSITION` | 256 (0x100) |  |  |
-| `ROTATION` | 512 (0x200) |  |  |
+| Enumerator | Value  | Comment |
+| --------- | -------- | ------- |
+| `NONE` | 0 (0x00) |  |
+| `SELF` | 1 (0x01) |  |
+| `TRANSPORT` | 2 (0x02) |  |
+| `HAS_ATTACKING_TARGET` | 4 (0x04) |  |
+| `LOW_GUID` | 8 (0x08) |  |
+| `HIGH_GUID` | 16 (0x10) |  |
+| `LIVING` | 32 (0x20) |  |
+| `HAS_POSITION` | 64 (0x40) |  |
+| `VEHICLE` | 128 (0x80) |  |
+| `POSITION` | 256 (0x100) |  |
+| `ROTATION` | 512 (0x200) |  |
 
 Used in:
 * [MovementBlock](movementblock.md)

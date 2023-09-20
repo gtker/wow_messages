@@ -23,18 +23,18 @@ flag CastFlags : u16 {
 ### Type
 The basic type is `u16`, a 2 byte (16 bit) little endian integer.
 ### Enumerators
-| Enumerator | Value  | Description | Comment |
-| --------- | -------- | ----------- | ------- |
-| `NONE` | 0 (0x00) |  |  |
-| `HIDDEN_COMBATLOG` | 1 (0x01) |  | mangoszero/cmangos/vmangos: hide in combat log? |
-| `UNKNOWN2` | 2 (0x02) |  |  |
-| `UNKNOWN3` | 4 (0x04) |  |  |
-| `UNKNOWN4` | 8 (0x08) |  |  |
-| `UNKNOWN5` | 16 (0x10) |  |  |
-| `AMMO` | 32 (0x20) |  | cmangos/vmangos/mangoszero: Projectiles visual |
-| `UNKNOWN7` | 64 (0x40) |  | cmangos/vmangos/mangoszero: !0x41 mask used to call `CGTradeSkillInfo::DoRecast` |
-| `UNKNOWN8` | 128 (0x80) |  |  |
-| `UNKNOWN9` | 256 (0x100) |  |  |
+| Enumerator | Value  | Comment |
+| --------- | -------- | ------- |
+| `NONE` | 0 (0x00) |  |
+| `HIDDEN_COMBATLOG` | 1 (0x01) | mangoszero/cmangos/vmangos: hide in combat log? |
+| `UNKNOWN2` | 2 (0x02) |  |
+| `UNKNOWN3` | 4 (0x04) |  |
+| `UNKNOWN4` | 8 (0x08) |  |
+| `UNKNOWN5` | 16 (0x10) |  |
+| `AMMO` | 32 (0x20) | cmangos/vmangos/mangoszero: Projectiles visual |
+| `UNKNOWN7` | 64 (0x40) | cmangos/vmangos/mangoszero: !0x41 mask used to call `CGTradeSkillInfo::DoRecast` |
+| `UNKNOWN8` | 128 (0x80) |  |
+| `UNKNOWN9` | 256 (0x100) |  |
 
 Used in:
 * [SMSG_SPELL_GO](smsg_spell_go.md)
@@ -87,41 +87,41 @@ flag CastFlags : u32 {
 ### Type
 The basic type is `u32`, a 4 byte (32 bit) little endian integer.
 ### Enumerators
-| Enumerator | Value  | Description | Comment |
-| --------- | -------- | ----------- | ------- |
-| `NONE` | 0 (0x00) |  |  |
-| `PENDING` | 1 (0x01) |  | aoe combat log? |
-| `HAS_TRAJECTORY` | 2 (0x02) |  |  |
-| `UNKNOWN_3` | 4 (0x04) |  |  |
-| `UNKNOWN_4` | 8 (0x08) |  | ignore AOE visual |
-| `UNKNOWN_5` | 16 (0x10) |  |  |
-| `AMMO` | 32 (0x20) |  | Projectiles visual |
-| `UNKNOWN_7` | 64 (0x40) |  |  |
-| `UNKNOWN_8` | 128 (0x80) |  |  |
-| `UNKNOWN_9` | 256 (0x100) |  |  |
-| `UNKNOWN_10` | 512 (0x200) |  |  |
-| `UNKNOWN_11` | 1024 (0x400) |  |  |
-| `POWER_LEFT_SELF` | 2048 (0x800) |  |  |
-| `UNKNOWN_13` | 4096 (0x1000) |  |  |
-| `UNKNOWN_14` | 8192 (0x2000) |  |  |
-| `UNKNOWN_15` | 16384 (0x4000) |  |  |
-| `UNKNOWN_16` | 32768 (0x8000) |  |  |
-| `UNKNOWN_17` | 65536 (0x10000) |  |  |
-| `ADJUST_MISSILE` | 131072 (0x20000) |  |  |
-| `NO_GCD` | 262144 (0x40000) |  | no GCD for spell casts from charm/summon (vehicle spells is an example) |
-| `VISUAL_CHAIN` | 524288 (0x80000) |  |  |
-| `UNKNOWN_21` | 1048576 (0x100000) |  |  |
-| `RUNE_LIST` | 2097152 (0x200000) |  |  |
-| `UNKNOWN_23` | 4194304 (0x400000) |  |  |
-| `UNKNOWN_24` | 8388608 (0x800000) |  |  |
-| `UNKNOWN_25` | 16777216 (0x1000000) |  |  |
-| `UNKNOWN_26` | 33554432 (0x2000000) |  |  |
-| `IMMUNITY` | 67108864 (0x4000000) |  |  |
-| `UNKNOWN_28` | 134217728 (0x8000000) |  |  |
-| `UNKNOWN_29` | 268435456 (0x10000000) |  |  |
-| `UNKNOWN_30` | 536870912 (0x20000000) |  |  |
-| `HEAL_PREDICTION` | 1073741824 (0x40000000) |  | Unused on TC 3.3.5a. Defined from TC Master. |
-| `UNKNOWN_32` | 2147483648 (0x80000000) |  |  |
+| Enumerator | Value  | Comment |
+| --------- | -------- | ------- |
+| `NONE` | 0 (0x00) |  |
+| `PENDING` | 1 (0x01) | aoe combat log? |
+| `HAS_TRAJECTORY` | 2 (0x02) |  |
+| `UNKNOWN_3` | 4 (0x04) |  |
+| `UNKNOWN_4` | 8 (0x08) | ignore AOE visual |
+| `UNKNOWN_5` | 16 (0x10) |  |
+| `AMMO` | 32 (0x20) | Projectiles visual |
+| `UNKNOWN_7` | 64 (0x40) |  |
+| `UNKNOWN_8` | 128 (0x80) |  |
+| `UNKNOWN_9` | 256 (0x100) |  |
+| `UNKNOWN_10` | 512 (0x200) |  |
+| `UNKNOWN_11` | 1024 (0x400) |  |
+| `POWER_LEFT_SELF` | 2048 (0x800) |  |
+| `UNKNOWN_13` | 4096 (0x1000) |  |
+| `UNKNOWN_14` | 8192 (0x2000) |  |
+| `UNKNOWN_15` | 16384 (0x4000) |  |
+| `UNKNOWN_16` | 32768 (0x8000) |  |
+| `UNKNOWN_17` | 65536 (0x10000) |  |
+| `ADJUST_MISSILE` | 131072 (0x20000) |  |
+| `NO_GCD` | 262144 (0x40000) | no GCD for spell casts from charm/summon (vehicle spells is an example) |
+| `VISUAL_CHAIN` | 524288 (0x80000) |  |
+| `UNKNOWN_21` | 1048576 (0x100000) |  |
+| `RUNE_LIST` | 2097152 (0x200000) |  |
+| `UNKNOWN_23` | 4194304 (0x400000) |  |
+| `UNKNOWN_24` | 8388608 (0x800000) |  |
+| `UNKNOWN_25` | 16777216 (0x1000000) |  |
+| `UNKNOWN_26` | 33554432 (0x2000000) |  |
+| `IMMUNITY` | 67108864 (0x4000000) |  |
+| `UNKNOWN_28` | 134217728 (0x8000000) |  |
+| `UNKNOWN_29` | 268435456 (0x10000000) |  |
+| `UNKNOWN_30` | 536870912 (0x20000000) |  |
+| `HEAL_PREDICTION` | 1073741824 (0x40000000) | Unused on TC 3.3.5a. Defined from TC Master. |
+| `UNKNOWN_32` | 2147483648 (0x80000000) |  |
 
 Used in:
 * [SMSG_SPELL_START](smsg_spell_start.md)

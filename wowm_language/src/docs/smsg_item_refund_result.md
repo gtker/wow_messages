@@ -30,17 +30,17 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | 8 / Little | [Guid](../types/packed-guid.md) | item |  |  |
-| - | 1 / - | [ItemRefundResult](itemrefundresult.md) | result |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| - | 8 / Little | [Guid](../types/packed-guid.md) | item |  |
+| - | 1 / - | [ItemRefundResult](itemrefundresult.md) | result |  |
 
 If result is equal to `SUCCESS`:
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | 4 / Little | Gold | cost |  |  |
-| - | 4 / Little | u32 | honor_point_cost |  |  |
-| - | 4 / Little | u32 | arena_point_cost |  |  |
-| - | 40 / - | [ItemRefundExtra](itemrefundextra.md)[5] | extra_items |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| - | 4 / Little | Gold | cost |  |
+| - | 4 / Little | u32 | honor_point_cost |  |
+| - | 4 / Little | u32 | arena_point_cost |  |
+| - | 40 / - | [ItemRefundExtra](itemrefundextra.md)[5] | extra_items |  |
 

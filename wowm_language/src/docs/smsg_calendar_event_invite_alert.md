@@ -33,17 +33,17 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | 8 / Little | [Guid](../types/packed-guid.md) | event_id |  |  |
-| - | - / - | CString | title |  |  |
-| - | 4 / Little | DateTime | event_time |  |  |
-| - | 4 / Little | u32 | flags |  |  |
-| - | 4 / Little | u32 | event_type |  |  |
-| - | 4 / Little | u32 | dungeon_id |  |  |
-| - | 8 / Little | [Guid](../types/packed-guid.md) | invite_id |  |  |
-| - | 1 / - | u8 | status |  |  |
-| - | 1 / - | u8 | rank |  |  |
-| - | - / - | [PackedGuid](../types/packed-guid.md) | event_creator |  |  |
-| - | - / - | [PackedGuid](../types/packed-guid.md) | invite_sender |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| - | 8 / Little | [Guid](../types/packed-guid.md) | event_id |  |
+| - | - / - | CString | title |  |
+| - | 4 / Little | DateTime | event_time |  |
+| - | 4 / Little | u32 | flags |  |
+| - | 4 / Little | u32 | event_type |  |
+| - | 4 / Little | u32 | dungeon_id |  |
+| - | 8 / Little | [Guid](../types/packed-guid.md) | invite_id |  |
+| - | 1 / - | u8 | status |  |
+| - | 1 / - | u8 | rank |  |
+| - | - / - | [PackedGuid](../types/packed-guid.md) | event_creator |  |
+| - | - / - | [PackedGuid](../types/packed-guid.md) | invite_sender |  |
 

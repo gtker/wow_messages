@@ -13,10 +13,10 @@ struct AuctionSort {
 ```
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x00 | 1 / - | u8 | column |  |  |
-| 0x01 | 1 / - | u8 | reversed |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x00 | 1 / - | u8 | column |  |
+| 0x01 | 1 / - | u8 | reversed |  |
 
 
 Used in:

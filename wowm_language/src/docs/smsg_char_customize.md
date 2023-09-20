@@ -33,20 +33,20 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | 1 / - | [WorldResult](worldresult.md) | result |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| - | 1 / - | [WorldResult](worldresult.md) | result |  |
 
 If result is equal to `RESPONSE_SUCCESS`:
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | 8 / Little | [Guid](../types/packed-guid.md) | guid |  |  |
-| - | - / - | CString | name |  |  |
-| - | 1 / - | [Gender](gender.md) | gender |  |  |
-| - | 1 / - | u8 | skin_color |  |  |
-| - | 1 / - | u8 | face |  |  |
-| - | 1 / - | u8 | hair_style |  |  |
-| - | 1 / - | u8 | hair_color |  |  |
-| - | 1 / - | u8 | facial_hair |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| - | 8 / Little | [Guid](../types/packed-guid.md) | guid |  |
+| - | - / - | CString | name |  |
+| - | 1 / - | [Gender](gender.md) | gender |  |
+| - | 1 / - | u8 | skin_color |  |
+| - | 1 / - | u8 | face |  |
+| - | 1 / - | u8 | hair_style |  |
+| - | 1 / - | u8 | hair_color |  |
+| - | 1 / - | u8 | facial_hair |  |
 

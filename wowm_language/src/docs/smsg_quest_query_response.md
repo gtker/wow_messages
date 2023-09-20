@@ -48,34 +48,34 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | 4 / Little | u32 | quest_id |  |  |
-| 0x08 | 4 / Little | u32 | quest_method |  | Accepted values: 0, 1 or 2. 0==IsAutoComplete() (skip objectives/details) |
-| 0x0C | 4 / Little | Level32 | quest_level |  |  |
-| 0x10 | 4 / Little | u32 | zone_or_sort |  |  |
-| 0x14 | 4 / Little | u32 | quest_type |  |  |
-| 0x18 | 2 / - | [Faction](faction.md) | reputation_objective_faction |  | cmangos: shown in quest log as part of quest objective |
-| 0x1A | 4 / Little | u32 | reputation_objective_value |  | cmangos: shown in quest log as part of quest objective |
-| 0x1E | 2 / - | [Faction](faction.md) | required_opposite_faction |  | cmangos: RequiredOpositeRepFaction, required faction value with another (oposite) faction (objective). cmangos sets to 0 |
-| 0x20 | 4 / Little | u32 | required_opposite_reputation_value |  | cmangos: RequiredOpositeRepValue, required faction value with another (oposite) faction (objective). cmangos sets to 0 |
-| 0x24 | 4 / Little | u32 | next_quest_in_chain |  |  |
-| 0x28 | 4 / Little | Gold | money_reward |  |  |
-| 0x2C | 4 / Little | Gold | max_level_money_reward |  | cmangos: used in XP calculation at client |
-| 0x30 | 4 / Little | u32 | reward_spell |  | cmangos: reward spell, this spell will display (icon) (casted if RewSpellCast==0) |
-| 0x34 | 4 / Little | u32 | source_item_id |  |  |
-| 0x38 | 4 / Little | u32 | quest_flags |  |  |
-| 0x3C | 32 / - | [QuestItemReward](questitemreward.md)[4] | rewards |  |  |
-| 0x5C | 48 / - | [QuestItemReward](questitemreward.md)[6] | choice_rewards |  |  |
-| 0x8C | 4 / Little | u32 | point_map_id |  |  |
-| 0x90 | 8 / - | [Vector2d](vector2d.md) | position |  |  |
-| 0x98 | 4 / Little | u32 | point_opt |  |  |
-| 0x9C | - / - | CString | title |  |  |
-| - | - / - | CString | objective_text |  |  |
-| - | - / - | CString | details |  |  |
-| - | - / - | CString | end_text |  |  |
-| - | 64 / - | [QuestObjective](questobjective.md)[4] | objectives |  |  |
-| - | ? / - | CString[4] | objective_texts |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x04 | 4 / Little | u32 | quest_id |  |
+| 0x08 | 4 / Little | u32 | quest_method | Accepted values: 0, 1 or 2. 0==IsAutoComplete() (skip objectives/details) |
+| 0x0C | 4 / Little | Level32 | quest_level |  |
+| 0x10 | 4 / Little | u32 | zone_or_sort |  |
+| 0x14 | 4 / Little | u32 | quest_type |  |
+| 0x18 | 2 / - | [Faction](faction.md) | reputation_objective_faction | cmangos: shown in quest log as part of quest objective |
+| 0x1A | 4 / Little | u32 | reputation_objective_value | cmangos: shown in quest log as part of quest objective |
+| 0x1E | 2 / - | [Faction](faction.md) | required_opposite_faction | cmangos: RequiredOpositeRepFaction, required faction value with another (oposite) faction (objective). cmangos sets to 0 |
+| 0x20 | 4 / Little | u32 | required_opposite_reputation_value | cmangos: RequiredOpositeRepValue, required faction value with another (oposite) faction (objective). cmangos sets to 0 |
+| 0x24 | 4 / Little | u32 | next_quest_in_chain |  |
+| 0x28 | 4 / Little | Gold | money_reward |  |
+| 0x2C | 4 / Little | Gold | max_level_money_reward | cmangos: used in XP calculation at client |
+| 0x30 | 4 / Little | u32 | reward_spell | cmangos: reward spell, this spell will display (icon) (casted if RewSpellCast==0) |
+| 0x34 | 4 / Little | u32 | source_item_id |  |
+| 0x38 | 4 / Little | u32 | quest_flags |  |
+| 0x3C | 32 / - | [QuestItemReward](questitemreward.md)[4] | rewards |  |
+| 0x5C | 48 / - | [QuestItemReward](questitemreward.md)[6] | choice_rewards |  |
+| 0x8C | 4 / Little | u32 | point_map_id |  |
+| 0x90 | 8 / - | [Vector2d](vector2d.md) | position |  |
+| 0x98 | 4 / Little | u32 | point_opt |  |
+| 0x9C | - / - | CString | title |  |
+| - | - / - | CString | objective_text |  |
+| - | - / - | CString | details |  |
+| - | - / - | CString | end_text |  |
+| - | 64 / - | [QuestObjective](questobjective.md)[4] | objectives |  |
+| - | ? / - | CString[4] | objective_texts |  |
 
 ## Client Version 2.4.3
 
@@ -129,38 +129,38 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | 4 / Little | u32 | quest_id |  |  |
-| 0x08 | 4 / Little | u32 | quest_method |  | Accepted values: 0, 1 or 2. 0==IsAutoComplete() (skip objectives/details) |
-| 0x0C | 4 / Little | Level32 | quest_level |  |  |
-| 0x10 | 4 / Little | u32 | zone_or_sort |  |  |
-| 0x14 | 4 / Little | u32 | quest_type |  |  |
-| 0x18 | 4 / Little | u32 | suggest_player_amount |  |  |
-| 0x1C | 2 / - | [Faction](faction.md) | reputation_objective_faction |  | cmangos: shown in quest log as part of quest objective |
-| 0x1E | 4 / Little | u32 | reputation_objective_value |  | cmangos: shown in quest log as part of quest objective |
-| 0x22 | 2 / - | [Faction](faction.md) | required_opposite_faction |  | cmangos: RequiredOpositeRepFaction, required faction value with another (oposite) faction (objective). cmangos sets to 0 |
-| 0x24 | 4 / Little | u32 | required_opposite_reputation_value |  | cmangos: RequiredOpositeRepValue, required faction value with another (oposite) faction (objective). cmangos sets to 0 |
-| 0x28 | 4 / Little | u32 | next_quest_in_chain |  |  |
-| 0x2C | 4 / Little | Gold | money_reward |  |  |
-| 0x30 | 4 / Little | Gold | max_level_money_reward |  | cmangos: used in XP calculation at client |
-| 0x34 | 4 / Little | u32 | reward_spell |  | cmangos: reward spell, this spell will display (icon) (casted if RewSpellCast==0) |
-| 0x38 | 4 / Little | u32 | casted_reward_spell |  | mangosone: casted spell |
-| 0x3C | 4 / Little | u32 | honor_reward |  |  |
-| 0x40 | 4 / Little | u32 | source_item_id |  |  |
-| 0x44 | 4 / Little | u32 | quest_flags |  |  |
-| 0x48 | 4 / Little | u32 | title_reward |  | CharTitleId, new 2.4.0, player gets this title (id from CharTitles) |
-| 0x4C | 32 / - | [QuestItemReward](questitemreward.md)[4] | rewards |  |  |
-| 0x6C | 48 / - | [QuestItemReward](questitemreward.md)[6] | choice_rewards |  |  |
-| 0x9C | 4 / Little | u32 | point_map_id |  |  |
-| 0xA0 | 8 / - | [Vector2d](vector2d.md) | position |  |  |
-| 0xA8 | 4 / Little | u32 | point_opt |  |  |
-| 0xAC | - / - | CString | title |  |  |
-| - | - / - | CString | objective_text |  |  |
-| - | - / - | CString | details |  |  |
-| - | - / - | CString | end_text |  |  |
-| - | 64 / - | [QuestObjective](questobjective.md)[4] | objectives |  |  |
-| - | ? / - | CString[4] | objective_texts |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x04 | 4 / Little | u32 | quest_id |  |
+| 0x08 | 4 / Little | u32 | quest_method | Accepted values: 0, 1 or 2. 0==IsAutoComplete() (skip objectives/details) |
+| 0x0C | 4 / Little | Level32 | quest_level |  |
+| 0x10 | 4 / Little | u32 | zone_or_sort |  |
+| 0x14 | 4 / Little | u32 | quest_type |  |
+| 0x18 | 4 / Little | u32 | suggest_player_amount |  |
+| 0x1C | 2 / - | [Faction](faction.md) | reputation_objective_faction | cmangos: shown in quest log as part of quest objective |
+| 0x1E | 4 / Little | u32 | reputation_objective_value | cmangos: shown in quest log as part of quest objective |
+| 0x22 | 2 / - | [Faction](faction.md) | required_opposite_faction | cmangos: RequiredOpositeRepFaction, required faction value with another (oposite) faction (objective). cmangos sets to 0 |
+| 0x24 | 4 / Little | u32 | required_opposite_reputation_value | cmangos: RequiredOpositeRepValue, required faction value with another (oposite) faction (objective). cmangos sets to 0 |
+| 0x28 | 4 / Little | u32 | next_quest_in_chain |  |
+| 0x2C | 4 / Little | Gold | money_reward |  |
+| 0x30 | 4 / Little | Gold | max_level_money_reward | cmangos: used in XP calculation at client |
+| 0x34 | 4 / Little | u32 | reward_spell | cmangos: reward spell, this spell will display (icon) (casted if RewSpellCast==0) |
+| 0x38 | 4 / Little | u32 | casted_reward_spell | mangosone: casted spell |
+| 0x3C | 4 / Little | u32 | honor_reward |  |
+| 0x40 | 4 / Little | u32 | source_item_id |  |
+| 0x44 | 4 / Little | u32 | quest_flags |  |
+| 0x48 | 4 / Little | u32 | title_reward | CharTitleId, new 2.4.0, player gets this title (id from CharTitles) |
+| 0x4C | 32 / - | [QuestItemReward](questitemreward.md)[4] | rewards |  |
+| 0x6C | 48 / - | [QuestItemReward](questitemreward.md)[6] | choice_rewards |  |
+| 0x9C | 4 / Little | u32 | point_map_id |  |
+| 0xA0 | 8 / - | [Vector2d](vector2d.md) | position |  |
+| 0xA8 | 4 / Little | u32 | point_opt |  |
+| 0xAC | - / - | CString | title |  |
+| - | - / - | CString | objective_text |  |
+| - | - / - | CString | details |  |
+| - | - / - | CString | end_text |  |
+| - | 64 / - | [QuestObjective](questobjective.md)[4] | objectives |  |
+| - | ? / - | CString[4] | objective_texts |  |
 
 ## Client Version 3.3.5
 
@@ -225,47 +225,47 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | 4 / Little | u32 | quest_id |  |  |
-| - | 4 / Little | u32 | quest_method |  | Accepted values: 0, 1 or 2. 0==IsAutoComplete() (skip objectives/details) |
-| - | 4 / Little | Level32 | quest_level |  |  |
-| - | 4 / Little | Level32 | minimum_quest_level |  | min required level to obtain (added for 3.3).<br/>Assumed allowed (database) range is -1 to 255 (still using uint32, since negative value would not be of any known use for client) |
-| - | 4 / Little | u32 | zone_or_sort |  |  |
-| - | 4 / Little | u32 | quest_type |  |  |
-| - | 4 / Little | u32 | suggest_player_amount |  |  |
-| - | 2 / - | [Faction](faction.md) | reputation_objective_faction |  | cmangos: shown in quest log as part of quest objective |
-| - | 4 / Little | u32 | reputation_objective_value |  | cmangos: shown in quest log as part of quest objective |
-| - | 2 / - | [Faction](faction.md) | required_opposite_faction |  | cmangos: RequiredOpositeRepFaction, required faction value with another (oposite) faction (objective). cmangos sets to 0 |
-| - | 4 / Little | u32 | required_opposite_reputation_value |  | cmangos: RequiredOpositeRepValue, required faction value with another (oposite) faction (objective). cmangos sets to 0 |
-| - | 4 / Little | u32 | next_quest_in_chain |  |  |
-| - | 4 / Little | Gold | money_reward |  |  |
-| - | 4 / Little | Gold | max_level_money_reward |  | cmangos: used in XP calculation at client |
-| - | 4 / Little | u32 | reward_spell |  | cmangos: reward spell, this spell will display (icon) (casted if RewSpellCast==0) |
-| - | 4 / Little | u32 | casted_reward_spell |  | mangosone: casted spell |
-| - | 4 / Little | u32 | honor_reward |  |  |
-| - | 4 / Little | f32 | honor_reward_multiplier |  | new reward honor (multiplied by around 62 at client side) |
-| - | 4 / Little | u32 | source_item_id |  |  |
-| - | 4 / Little | u32 | quest_flags |  |  |
-| - | 4 / Little | u32 | title_reward |  | CharTitleId, new 2.4.0, player gets this title (id from CharTitles) |
-| - | 4 / Little | u32 | players_slain |  |  |
-| - | 4 / Little | u32 | bonus_talents |  |  |
-| - | 4 / Little | u32 | bonus_arena_points |  |  |
-| - | 4 / Little | u32 | unknown1 |  |  |
-| - | 32 / - | [QuestItemReward](questitemreward.md)[4] | rewards |  |  |
-| - | 48 / - | [QuestItemReward](questitemreward.md)[6] | choice_rewards |  |  |
-| - | 20 / - | u32[5] | reputation_rewards |  |  |
-| - | 20 / - | u32[5] | reputation_reward_amounts |  |  |
-| - | 20 / - | u32[5] | reputation_reward_overrides |  |  |
-| - | 4 / Little | u32 | point_map_id |  |  |
-| - | 8 / - | [Vector2d](vector2d.md) | position |  |  |
-| - | 4 / Little | u32 | point_opt |  |  |
-| - | - / - | CString | title |  |  |
-| - | - / - | CString | objective_text |  |  |
-| - | - / - | CString | details |  |  |
-| - | - / - | CString | end_text |  |  |
-| - | - / - | CString | completed_text |  |  |
-| - | 64 / - | [QuestObjective](questobjective.md)[4] | objectives |  |  |
-| - | 72 / - | [QuestItemRequirement](questitemrequirement.md)[6] | item_requirements |  |  |
-| - | ? / - | CString[4] | objective_texts |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| - | 4 / Little | u32 | quest_id |  |
+| - | 4 / Little | u32 | quest_method | Accepted values: 0, 1 or 2. 0==IsAutoComplete() (skip objectives/details) |
+| - | 4 / Little | Level32 | quest_level |  |
+| - | 4 / Little | Level32 | minimum_quest_level | min required level to obtain (added for 3.3).<br/>Assumed allowed (database) range is -1 to 255 (still using uint32, since negative value would not be of any known use for client) |
+| - | 4 / Little | u32 | zone_or_sort |  |
+| - | 4 / Little | u32 | quest_type |  |
+| - | 4 / Little | u32 | suggest_player_amount |  |
+| - | 2 / - | [Faction](faction.md) | reputation_objective_faction | cmangos: shown in quest log as part of quest objective |
+| - | 4 / Little | u32 | reputation_objective_value | cmangos: shown in quest log as part of quest objective |
+| - | 2 / - | [Faction](faction.md) | required_opposite_faction | cmangos: RequiredOpositeRepFaction, required faction value with another (oposite) faction (objective). cmangos sets to 0 |
+| - | 4 / Little | u32 | required_opposite_reputation_value | cmangos: RequiredOpositeRepValue, required faction value with another (oposite) faction (objective). cmangos sets to 0 |
+| - | 4 / Little | u32 | next_quest_in_chain |  |
+| - | 4 / Little | Gold | money_reward |  |
+| - | 4 / Little | Gold | max_level_money_reward | cmangos: used in XP calculation at client |
+| - | 4 / Little | u32 | reward_spell | cmangos: reward spell, this spell will display (icon) (casted if RewSpellCast==0) |
+| - | 4 / Little | u32 | casted_reward_spell | mangosone: casted spell |
+| - | 4 / Little | u32 | honor_reward |  |
+| - | 4 / Little | f32 | honor_reward_multiplier | new reward honor (multiplied by around 62 at client side) |
+| - | 4 / Little | u32 | source_item_id |  |
+| - | 4 / Little | u32 | quest_flags |  |
+| - | 4 / Little | u32 | title_reward | CharTitleId, new 2.4.0, player gets this title (id from CharTitles) |
+| - | 4 / Little | u32 | players_slain |  |
+| - | 4 / Little | u32 | bonus_talents |  |
+| - | 4 / Little | u32 | bonus_arena_points |  |
+| - | 4 / Little | u32 | unknown1 |  |
+| - | 32 / - | [QuestItemReward](questitemreward.md)[4] | rewards |  |
+| - | 48 / - | [QuestItemReward](questitemreward.md)[6] | choice_rewards |  |
+| - | 20 / - | u32[5] | reputation_rewards |  |
+| - | 20 / - | u32[5] | reputation_reward_amounts |  |
+| - | 20 / - | u32[5] | reputation_reward_overrides |  |
+| - | 4 / Little | u32 | point_map_id |  |
+| - | 8 / - | [Vector2d](vector2d.md) | position |  |
+| - | 4 / Little | u32 | point_opt |  |
+| - | - / - | CString | title |  |
+| - | - / - | CString | objective_text |  |
+| - | - / - | CString | details |  |
+| - | - / - | CString | end_text |  |
+| - | - / - | CString | completed_text |  |
+| - | 64 / - | [QuestObjective](questobjective.md)[4] | objectives |  |
+| - | 72 / - | [QuestItemRequirement](questitemrequirement.md)[6] | item_requirements |  |
+| - | ? / - | CString[4] | objective_texts |  |
 

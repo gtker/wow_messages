@@ -23,9 +23,9 @@ CMSG have a header of 6 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x06 | 8 / Little | [Guid](../types/packed-guid.md) | guid |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x06 | 8 / Little | [Guid](../types/packed-guid.md) | guid |  |
 
 ## Client Version 2.4.3, Client Version 3
 
@@ -51,8 +51,8 @@ CMSG have a header of 6 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x06 | 8 / Little | [Guid](../types/packed-guid.md) | guid |  |  |
-| 0x0E | 1 / - | u8 | unknown |  | mangosone/arcemu/trinitycore/azerothcore: probably related to spam reporting |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x06 | 8 / Little | [Guid](../types/packed-guid.md) | guid |  |
+| 0x0E | 1 / - | u8 | unknown | mangosone/arcemu/trinitycore/azerothcore: probably related to spam reporting |
 

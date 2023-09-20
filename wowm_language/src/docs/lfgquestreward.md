@@ -14,11 +14,11 @@ struct LfgQuestReward {
 ```
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x00 | 4 / Little | u32 | item |  |  |
-| 0x04 | 4 / Little | u32 | display_id |  |  |
-| 0x08 | 4 / Little | u32 | amount_of_rewards |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x00 | 4 / Little | u32 | item |  |
+| 0x04 | 4 / Little | u32 | display_id |  |
+| 0x08 | 4 / Little | u32 | amount_of_rewards |  |
 
 
 Used in:

@@ -31,29 +31,29 @@ CMSG have a header of 6 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x06 | 4 / - | [ChatType](chattype.md) | chat_type |  |  |
-| 0x0A | 4 / - | [Language](language.md) | language |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x06 | 4 / - | [ChatType](chattype.md) | chat_type |  |
+| 0x0A | 4 / - | [Language](language.md) | language |  |
 
 If chat_type is equal to `WHISPER`:
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x0E | - / - | CString | target_player |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x0E | - / - | CString | target_player |  |
 
 Else If chat_type is equal to `CHANNEL`:
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | - / - | CString | channel |  |  |
-| - | - / - | CString | message |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| - | - / - | CString | channel |  |
+| - | - / - | CString | message |  |
 
 ### Examples
 
 #### Example 1
 
-##### Description
+##### Comment
 
 Say message.
 
@@ -95,23 +95,23 @@ CMSG have a header of 6 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x06 | 4 / - | [ChatType](chattype.md) | chat_type |  |  |
-| 0x0A | 4 / - | [Language](language.md) | language |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x06 | 4 / - | [ChatType](chattype.md) | chat_type |  |
+| 0x0A | 4 / - | [Language](language.md) | language |  |
 
 If chat_type is equal to `WHISPER`:
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x0E | - / - | CString | target_player |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x0E | - / - | CString | target_player |  |
 
 Else If chat_type is equal to `CHANNEL`:
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | - / - | CString | channel |  |  |
-| - | - / - | CString | message |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| - | - / - | CString | channel |  |
+| - | - / - | CString | message |  |
 
 ## Client Version 3.3.5
 
@@ -144,21 +144,21 @@ CMSG have a header of 6 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x06 | 4 / - | [ChatType](chattype.md) | chat_type |  |  |
-| 0x0A | 4 / - | [Language](language.md) | language |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x06 | 4 / - | [ChatType](chattype.md) | chat_type |  |
+| 0x0A | 4 / - | [Language](language.md) | language |  |
 
 If chat_type is equal to `WHISPER`:
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x0E | - / - | CString | target_player |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x0E | - / - | CString | target_player |  |
 
 Else If chat_type is equal to `CHANNEL`:
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | - / - | CString | channel |  |  |
-| - | - / - | CString | message |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| - | - / - | CString | channel |  |
+| - | - / - | CString | message |  |
 

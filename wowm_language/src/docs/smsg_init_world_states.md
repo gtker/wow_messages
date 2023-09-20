@@ -26,12 +26,12 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | 4 / - | [Map](map.md) | map |  |  |
-| 0x08 | 4 / - | [Area](area.md) | area |  |  |
-| 0x0C | 2 / Little | u16 | amount_of_states |  |  |
-| 0x0E | ? / - | [WorldState](worldstate.md)[amount_of_states] | states |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x04 | 4 / - | [Map](map.md) | map |  |
+| 0x08 | 4 / - | [Area](area.md) | area |  |
+| 0x0C | 2 / Little | u16 | amount_of_states |  |
+| 0x0E | ? / - | [WorldState](worldstate.md)[amount_of_states] | states |  |
 
 ## Client Version 2.4.3
 
@@ -59,12 +59,12 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | 4 / - | [Map](map.md) | map |  |  |
-| 0x08 | 4 / - | [Area](area.md) | area |  |  |
-| 0x0C | 2 / Little | u16 | amount_of_states |  |  |
-| 0x0E | ? / - | [WorldState](worldstate.md)[amount_of_states] | states |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x04 | 4 / - | [Map](map.md) | map |  |
+| 0x08 | 4 / - | [Area](area.md) | area |  |
+| 0x0C | 2 / Little | u16 | amount_of_states |  |
+| 0x0E | ? / - | [WorldState](worldstate.md)[amount_of_states] | states |  |
 
 ## Client Version 3.3.5
 
@@ -93,11 +93,11 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | 4 / - | [Map](map.md) | map |  |  |
-| - | 4 / - | [Area](area.md) | area |  |  |
-| - | 4 / - | [Area](area.md) | sub_area |  |  |
-| - | 2 / Little | u16 | amount_of_states |  |  |
-| - | ? / - | [WorldState](worldstate.md)[amount_of_states] | states |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| - | 4 / - | [Map](map.md) | map |  |
+| - | 4 / - | [Area](area.md) | area |  |
+| - | 4 / - | [Area](area.md) | sub_area |  |
+| - | 2 / Little | u16 | amount_of_states |  |
+| - | ? / - | [WorldState](worldstate.md)[amount_of_states] | states |  |
 

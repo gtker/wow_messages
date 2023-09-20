@@ -47,7 +47,7 @@ CMSG have a header of 6 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x06 | 1 / - | Bool | show_on_ui |  | Whether the clients wants it shown on the UI. Just ping it back in [SMSG_PLAYED_TIME](./smsg_played_time.md) |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x06 | 1 / - | Bool | show_on_ui | Whether the clients wants it shown on the UI. Just ping it back in [SMSG_PLAYED_TIME](./smsg_played_time.md) |
 

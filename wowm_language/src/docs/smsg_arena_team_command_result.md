@@ -26,10 +26,10 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | 4 / - | [ArenaTeamCommand](arenateamcommand.md) | command |  |  |
-| - | - / - | CString | team |  |  |
-| - | - / - | CString | player |  |  |
-| - | 4 / - | [ArenaTeamCommandError](arenateamcommanderror.md) | error |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| - | 4 / - | [ArenaTeamCommand](arenateamcommand.md) | command |  |
+| - | - / - | CString | team |  |
+| - | - / - | CString | player |  |
+| - | 4 / - | [ArenaTeamCommandError](arenateamcommanderror.md) | error |  |
 

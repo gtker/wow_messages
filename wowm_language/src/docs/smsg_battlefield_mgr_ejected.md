@@ -26,10 +26,10 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | 4 / Little | u32 | battle_id |  |  |
-| 0x08 | 1 / - | u8 | reason |  |  |
-| 0x09 | 1 / - | u8 | battle_status |  |  |
-| 0x0A | 1 / - | u8 | relocated |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x04 | 4 / Little | u32 | battle_id |  |
+| 0x08 | 1 / - | u8 | reason |  |
+| 0x09 | 1 / - | u8 | battle_status |  |
+| 0x0A | 1 / - | u8 | relocated |  |
 

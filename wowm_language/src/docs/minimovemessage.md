@@ -15,12 +15,12 @@ struct MiniMoveMessage {
 ```
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x00 | 1 / - | u8 | size |  |  |
-| 0x01 | 2 / - | [MiniMoveOpcode](minimoveopcode.md) | opcode |  |  |
-| 0x03 | - / - | [PackedGuid](../types/packed-guid.md) | guid |  |  |
-| - | 4 / Little | u32 | movement_counter |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x00 | 1 / - | u8 | size |  |
+| 0x01 | 2 / - | [MiniMoveOpcode](minimoveopcode.md) | opcode |  |
+| 0x03 | - / - | [PackedGuid](../types/packed-guid.md) | guid |  |
+| - | 4 / Little | u32 | movement_counter |  |
 
 
 Used in:

@@ -13,10 +13,10 @@ struct SpellSteal {
 ```
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x00 | 4 / Little | u32 | spell |  |  |
-| 0x04 | 1 / - | [SpellStealAction](spellstealaction.md) | action |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x00 | 4 / Little | u32 | spell |  |
+| 0x04 | 1 / - | [SpellStealAction](spellstealaction.md) | action |  |
 
 
 Used in:

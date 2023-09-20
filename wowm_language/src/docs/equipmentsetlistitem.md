@@ -15,12 +15,12 @@ struct EquipmentSetListItem {
 ```
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x00 | 8 / Little | [Guid](../types/packed-guid.md) | guid |  |  |
-| 0x08 | - / - | CString | name |  |  |
-| - | - / - | CString | icon_name |  |  |
-| - | 152 / - | [Guid](../types/packed-guid.md)[19] | equipment |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x00 | 8 / Little | [Guid](../types/packed-guid.md) | guid |  |
+| 0x08 | - / - | CString | name |  |
+| - | - / - | CString | icon_name |  |
+| - | 152 / - | [Guid](../types/packed-guid.md)[19] | equipment |  |
 
 
 Used in:

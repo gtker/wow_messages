@@ -15,10 +15,10 @@ enum ExperienceAwardType : u8 {
 ### Type
 The basic type is `u8`, a 1 byte (8 bit) integer.
 ### Enumerators
-| Enumerator | Value  | Description | Comment |
-| --------- | -------- | ----------- | ------- |
-| `KILL` | 0 (0x00) |  |  |
-| `NON_KILL` | 1 (0x01) |  |  |
+| Enumerator | Value  | Comment |
+| --------- | -------- | ------- |
+| `KILL` | 0 (0x00) |  |
+| `NON_KILL` | 1 (0x01) |  |
 
 Used in:
 * [SMSG_LOG_XPGAIN](smsg_log_xpgain.md)

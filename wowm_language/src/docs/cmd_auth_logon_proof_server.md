@@ -28,16 +28,16 @@ Login messages have a header of 1 byte with an opcode. Some messages also have a
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x01 | 1 / - | [LoginResult](loginresult.md) | result |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x01 | 1 / - | [LoginResult](loginresult.md) | result |  |
 
 If result is equal to `SUCCESS`:
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x02 | 20 / - | u8[20] | server_proof |  |  |
-| 0x16 | 4 / Little | u32 | hardware_survey_id |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x02 | 20 / - | u8[20] | server_proof |  |
+| 0x16 | 4 / Little | u32 | hardware_survey_id |  |
 
 ### Examples
 
@@ -78,17 +78,17 @@ Login messages have a header of 1 byte with an opcode. Some messages also have a
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x01 | 1 / - | [LoginResult](loginresult.md) | result |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x01 | 1 / - | [LoginResult](loginresult.md) | result |  |
 
 If result is equal to `SUCCESS`:
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x02 | 20 / - | u8[20] | server_proof |  |  |
-| 0x16 | 4 / Little | u32 | hardware_survey_id |  |  |
-| 0x1A | 2 / Little | u16 | unknown |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x02 | 20 / - | u8[20] | server_proof |  |
+| 0x16 | 4 / Little | u32 | hardware_survey_id |  |
+| 0x1A | 2 / Little | u16 | unknown |  |
 
 ## Protocol Version 8
 
@@ -121,27 +121,27 @@ Login messages have a header of 1 byte with an opcode. Some messages also have a
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x01 | 1 / - | [LoginResult](loginresult.md) | result |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x01 | 1 / - | [LoginResult](loginresult.md) | result |  |
 
 If result is equal to `SUCCESS`:
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x02 | 20 / - | u8[20] | server_proof |  |  |
-| 0x16 | 4 / - | [AccountFlag](accountflag.md) | account_flag |  |  |
-| 0x1A | 4 / Little | u32 | hardware_survey_id |  |  |
-| 0x1E | 2 / Little | u16 | unknown_flags |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x02 | 20 / - | u8[20] | server_proof |  |
+| 0x16 | 4 / - | [AccountFlag](accountflag.md) | account_flag |  |
+| 0x1A | 4 / Little | u32 | hardware_survey_id |  |
+| 0x1E | 2 / Little | u16 | unknown_flags |  |
 
 Else: 
-| 0x20 | 2 / Little | u16 | padding |  |  |
+| 0x20 | 2 / Little | u16 | padding |  |
 
 ### Examples
 
 #### Example 1
 
-##### Description
+##### Comment
 
 Reply to [CMD_AUTH_LOGON_PROOF_Client](./cmd_auth_logon_proof_client.md).
 

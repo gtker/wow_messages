@@ -21,14 +21,14 @@ enum InstanceType : u8 {
 ### Type
 The basic type is `u8`, a 1 byte (8 bit) integer.
 ### Enumerators
-| Enumerator | Value  | Description | Comment |
-| --------- | -------- | ----------- | ------- |
-| `NORMAL` | 0 (0x00) |  |  |
-| `GROUP_INSTANCE` | 1 (0x01) |  |  |
-| `RAID_INSTANCE` | 2 (0x02) |  |  |
-| `BATTLEGROUND` | 3 (0x03) |  |  |
-| `WORLD_ZONE` | 4 (0x04) |  |  |
-| `BATTLEGROUND2` | 5 (0x05) |  |  |
+| Enumerator | Value  | Comment |
+| --------- | -------- | ------- |
+| `NORMAL` | 0 (0x00) |  |
+| `GROUP_INSTANCE` | 1 (0x01) |  |
+| `RAID_INSTANCE` | 2 (0x02) |  |
+| `BATTLEGROUND` | 3 (0x03) |  |
+| `WORLD_ZONE` | 4 (0x04) |  |
+| `BATTLEGROUND2` | 5 (0x05) |  |
 
 Used in:
 

@@ -29,11 +29,11 @@ CMSG have a header of 6 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x06 | 4 / - | [TextEmote](textemote.md) | text_emote |  |  |
-| 0x0A | 4 / Little | u32 | emote |  |  |
-| 0x0E | 8 / Little | [Guid](../types/packed-guid.md) | target | Guid targeted by the client. |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x06 | 4 / - | [TextEmote](textemote.md) | text_emote |  |
+| 0x0A | 4 / Little | u32 | emote |  |
+| 0x0E | 8 / Little | [Guid](../types/packed-guid.md) | target | Guid targeted by the client. |
 
 ### Examples
 
@@ -75,11 +75,11 @@ CMSG have a header of 6 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x06 | 4 / - | [TextEmote](textemote.md) | text_emote |  |  |
-| 0x0A | 4 / Little | u32 | emote |  |  |
-| 0x0E | 8 / Little | [Guid](../types/packed-guid.md) | target | Guid targeted by the client. |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x06 | 4 / - | [TextEmote](textemote.md) | text_emote |  |
+| 0x0A | 4 / Little | u32 | emote |  |
+| 0x0E | 8 / Little | [Guid](../types/packed-guid.md) | target | Guid targeted by the client. |
 
 ## Client Version 3.3.5
 
@@ -110,9 +110,9 @@ CMSG have a header of 6 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x06 | 4 / - | [TextEmote](textemote.md) | text_emote |  |  |
-| 0x0A | 4 / Little | u32 | emote |  |  |
-| 0x0E | 8 / Little | [Guid](../types/packed-guid.md) | target | Guid targeted by the client. |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x06 | 4 / - | [TextEmote](textemote.md) | text_emote |  |
+| 0x0A | 4 / Little | u32 | emote |  |
+| 0x0E | 8 / Little | [Guid](../types/packed-guid.md) | target | Guid targeted by the client. |
 

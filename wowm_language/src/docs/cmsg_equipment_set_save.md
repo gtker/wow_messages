@@ -27,11 +27,11 @@ CMSG have a header of 6 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x06 | - / - | [PackedGuid](../types/packed-guid.md) | guid |  |  |
-| - | 4 / Little | u32 | index |  |  |
-| - | - / - | CString | name |  |  |
-| - | - / - | CString | icon_name |  |  |
-| - | 152 / - | [Guid](../types/packed-guid.md)[19] | equipment |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x06 | - / - | [PackedGuid](../types/packed-guid.md) | guid |  |
+| - | 4 / Little | u32 | index |  |
+| - | - / - | CString | name |  |
+| - | - / - | CString | icon_name |  |
+| - | 152 / - | [Guid](../types/packed-guid.md)[19] | equipment |  |
 

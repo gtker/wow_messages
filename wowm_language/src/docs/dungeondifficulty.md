@@ -15,10 +15,10 @@ enum DungeonDifficulty : u8 {
 ### Type
 The basic type is `u8`, a 1 byte (8 bit) integer.
 ### Enumerators
-| Enumerator | Value  | Description | Comment |
-| --------- | -------- | ----------- | ------- |
-| `NORMAL` | 0 (0x00) |  |  |
-| `HEROIC` | 1 (0x01) |  |  |
+| Enumerator | Value  | Comment |
+| --------- | -------- | ------- |
+| `NORMAL` | 0 (0x00) |  |
+| `HEROIC` | 1 (0x01) |  |
 
 Used in:
 * [MSG_SET_DUNGEON_DIFFICULTY_Client](msg_set_dungeon_difficulty_client.md)

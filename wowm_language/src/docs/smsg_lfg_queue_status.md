@@ -32,16 +32,16 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | 4 / Little | u32 | dungeon |  |  |
-| 0x08 | 4 / Little | i32 | average_wait_time |  |  |
-| 0x0C | 4 / Little | i32 | wait_time |  |  |
-| 0x10 | 4 / Little | i32 | wait_time_tank |  |  |
-| 0x14 | 4 / Little | i32 | wait_time_healer |  |  |
-| 0x18 | 4 / Little | i32 | wait_time_dps |  |  |
-| 0x1C | 1 / - | u8 | tanks_needed |  |  |
-| 0x1D | 1 / - | u8 | healers_needed |  |  |
-| 0x1E | 1 / - | u8 | dps_needed |  |  |
-| 0x1F | 4 / Little | u32 | queue_time |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x04 | 4 / Little | u32 | dungeon |  |
+| 0x08 | 4 / Little | i32 | average_wait_time |  |
+| 0x0C | 4 / Little | i32 | wait_time |  |
+| 0x10 | 4 / Little | i32 | wait_time_tank |  |
+| 0x14 | 4 / Little | i32 | wait_time_healer |  |
+| 0x18 | 4 / Little | i32 | wait_time_dps |  |
+| 0x1C | 1 / - | u8 | tanks_needed |  |
+| 0x1D | 1 / - | u8 | healers_needed |  |
+| 0x1E | 1 / - | u8 | dps_needed |  |
+| 0x1F | 4 / Little | u32 | queue_time |  |
 

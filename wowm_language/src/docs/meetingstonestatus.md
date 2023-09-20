@@ -19,14 +19,14 @@ enum MeetingStoneStatus : u8 {
 ### Type
 The basic type is `u8`, a 1 byte (8 bit) integer.
 ### Enumerators
-| Enumerator | Value  | Description | Comment |
-| --------- | -------- | ----------- | ------- |
-| `LEAVE_QUEUE` | 0 (0x00) |  |  |
-| `JOINED_QUEUE` | 1 (0x01) |  |  |
-| `PARTY_MEMBER_LEFT_LFG` | 2 (0x02) |  |  |
-| `PARTY_MEMBER_REMOVED_PARTY_REMOVED` | 3 (0x03) |  |  |
-| `LOOKING_FOR_NEW_PARTY_IN_QUEUE` | 4 (0x04) |  |  |
-| `NONE` | 5 (0x05) |  |  |
+| Enumerator | Value  | Comment |
+| --------- | -------- | ------- |
+| `LEAVE_QUEUE` | 0 (0x00) |  |
+| `JOINED_QUEUE` | 1 (0x01) |  |
+| `PARTY_MEMBER_LEFT_LFG` | 2 (0x02) |  |
+| `PARTY_MEMBER_REMOVED_PARTY_REMOVED` | 3 (0x03) |  |
+| `LOOKING_FOR_NEW_PARTY_IN_QUEUE` | 4 (0x04) |  |
+| `NONE` | 5 (0x05) |  |
 
 Used in:
 * [SMSG_MEETINGSTONE_SETQUEUE](smsg_meetingstone_setqueue.md)

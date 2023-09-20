@@ -24,10 +24,10 @@ CMSG have a header of 6 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x06 | 1 / - | [ItemSlot](itemslot.md) | source_slot |  |  |
-| 0x07 | 1 / - | [ItemSlot](itemslot.md) | destination_slot |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x06 | 1 / - | [ItemSlot](itemslot.md) | source_slot |  |
+| 0x07 | 1 / - | [ItemSlot](itemslot.md) | destination_slot |  |
 
 ## Client Version 2.4.3
 
@@ -53,10 +53,10 @@ CMSG have a header of 6 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x06 | 1 / - | [ItemSlot](itemslot.md) | source_slot |  |  |
-| 0x07 | 1 / - | [ItemSlot](itemslot.md) | destination_slot |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x06 | 1 / - | [ItemSlot](itemslot.md) | source_slot |  |
+| 0x07 | 1 / - | [ItemSlot](itemslot.md) | destination_slot |  |
 
 ## Client Version 3.3.5
 
@@ -82,8 +82,8 @@ CMSG have a header of 6 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x06 | 1 / - | [ItemSlot](itemslot.md) | source_slot |  |  |
-| 0x07 | 1 / - | [ItemSlot](itemslot.md) | destination_slot |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x06 | 1 / - | [ItemSlot](itemslot.md) | source_slot |  |
+| 0x07 | 1 / - | [ItemSlot](itemslot.md) | destination_slot |  |
 

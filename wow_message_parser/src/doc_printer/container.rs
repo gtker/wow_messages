@@ -435,15 +435,6 @@ fn print_container_examples(s: &mut Writer, e: &Container, o: &Objects) {
         s.wln(format!("#### Example {}", i + 1));
         s.newline();
 
-        if let Some(desc) = t.tags().description() {
-            s.wln("##### Description");
-            s.newline();
-            for l in desc.as_doc_lines() {
-                s.wln(l);
-                s.newline();
-            }
-        }
-
         if let Some(comment) = t.tags().comment() {
             s.wln("##### Comment");
             s.newline();
@@ -622,11 +613,6 @@ fn print_container_field(
                 | Type::FloatingPoint => d.ty().str(),
             };
 
-            let description = if let Some(d) = d.tags().description() {
-                d.as_doc_table_string()
-            } else {
-                "".to_string()
-            };
             let comment = if let Some(d) = d.tags().comment() {
                 d.as_doc_table_string()
             } else {
@@ -634,7 +620,7 @@ fn print_container_field(
             };
 
             s.wln(format!(
-                "| {offset} | {size} / {endian} | {ty} | {name} | {description} | {comment} |",
+                "| {offset} | {size} / {endian} | {ty} | {name} | {comment} |",
                 offset = if let Some(offset) = offset {
                     format!("0x{offset:02X}")
                 } else {
@@ -663,8 +649,8 @@ fn print_container_field(
 }
 
 fn print_container_item_header(s: &mut Writer) {
-    s.wln("| Offset | Size / Endianness | Type | Name | Description | Comment |");
-    s.wln("| ------ | ----------------- | ---- | ---- | ----------- | ------- |");
+    s.wln("| Offset | Size / Endianness | Type | Name | Comment |");
+    s.wln("| ------ | ----------------- | ---- | ---- | ------- |");
 }
 
 fn print_container_body(s: &mut Writer, e: &Container, o: &Objects) {

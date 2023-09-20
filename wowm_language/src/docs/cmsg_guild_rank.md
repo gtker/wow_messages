@@ -25,11 +25,11 @@ CMSG have a header of 6 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x06 | 4 / Little | u32 | rank_id |  |  |
-| 0x0A | 4 / Little | u32 | rights |  |  |
-| 0x0E | - / - | CString | rank_name |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x06 | 4 / Little | u32 | rank_id |  |
+| 0x0A | 4 / Little | u32 | rights |  |
+| 0x0E | - / - | CString | rank_name |  |
 
 ## Client Version 2.4.3, Client Version 3
 
@@ -58,11 +58,11 @@ CMSG have a header of 6 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x06 | 4 / Little | u32 | rank_id |  |  |
-| 0x0A | 4 / Little | u32 | rights |  |  |
-| 0x0E | - / - | CString | rank_name |  |  |
-| - | 4 / Little | Gold | money_per_day |  |  |
-| - | 48 / - | [GuildBankRights](guildbankrights.md)[6] | bank_tab_rights |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x06 | 4 / Little | u32 | rank_id |  |
+| 0x0A | 4 / Little | u32 | rights |  |
+| 0x0E | - / - | CString | rank_name |  |
+| - | 4 / Little | Gold | money_per_day |  |
+| - | 48 / - | [GuildBankRights](guildbankrights.md)[6] | bank_tab_rights |  |
 

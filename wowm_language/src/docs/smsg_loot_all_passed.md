@@ -27,11 +27,11 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | 8 / Little | [Guid](../types/packed-guid.md) | looted_target |  |  |
-| 0x0C | 4 / Little | u32 | loot_slot |  |  |
-| 0x10 | 4 / Little | u32 | item |  |  |
-| 0x14 | 4 / Little | u32 | item_random_property_id |  |  |
-| 0x18 | 4 / Little | u32 | item_random_suffix_id |  | vmangos/mangoszero: Always set to 0. |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x04 | 8 / Little | [Guid](../types/packed-guid.md) | looted_target |  |
+| 0x0C | 4 / Little | u32 | loot_slot |  |
+| 0x10 | 4 / Little | u32 | item |  |
+| 0x14 | 4 / Little | u32 | item_random_property_id |  |
+| 0x18 | 4 / Little | u32 | item_random_suffix_id | vmangos/mangoszero: Always set to 0. |
 

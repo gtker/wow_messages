@@ -24,19 +24,19 @@ enum MountResult : u32 {
 ### Type
 The basic type is `u32`, a 4 byte (32 bit) little endian integer.
 ### Enumerators
-| Enumerator | Value  | Description | Comment |
-| --------- | -------- | ----------- | ------- |
-| `INVALID_MOUNTEE` | 0 (0x00) |  | You can't mount that unit! |
-| `TOO_FAR_AWAY` | 1 (0x01) |  | That mount is too far away! |
-| `ALREADY_MOUNTED` | 2 (0x02) |  | You're already mounted! |
-| `NOT_MOUNTABLE` | 3 (0x03) |  | That unit can't be mounted! |
-| `NOT_YOUR_PET` | 4 (0x04) |  | That mount isn't your pet! |
-| `OTHER` | 5 (0x05) |  | internal |
-| `LOOTING` | 6 (0x06) |  | You can't mount while looting! |
-| `RACE_CANT_MOUNT` | 7 (0x07) |  | You can't mount because of your race! |
-| `SHAPESHIFTED` | 8 (0x08) |  | You can't mount while shapeshifted! |
-| `FORCED_DISMOUNT` | 9 (0x09) |  | You dismount before continuing. |
-| `OK` | 10 (0x0A) |  | no error |
+| Enumerator | Value  | Comment |
+| --------- | -------- | ------- |
+| `INVALID_MOUNTEE` | 0 (0x00) | You can't mount that unit! |
+| `TOO_FAR_AWAY` | 1 (0x01) | That mount is too far away! |
+| `ALREADY_MOUNTED` | 2 (0x02) | You're already mounted! |
+| `NOT_MOUNTABLE` | 3 (0x03) | That unit can't be mounted! |
+| `NOT_YOUR_PET` | 4 (0x04) | That mount isn't your pet! |
+| `OTHER` | 5 (0x05) | internal |
+| `LOOTING` | 6 (0x06) | You can't mount while looting! |
+| `RACE_CANT_MOUNT` | 7 (0x07) | You can't mount because of your race! |
+| `SHAPESHIFTED` | 8 (0x08) | You can't mount while shapeshifted! |
+| `FORCED_DISMOUNT` | 9 (0x09) | You dismount before continuing. |
+| `OK` | 10 (0x0A) | no error |
 
 Used in:
 * [SMSG_MOUNTRESULT](smsg_mountresult.md)

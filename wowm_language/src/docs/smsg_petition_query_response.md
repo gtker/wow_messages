@@ -39,25 +39,25 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | 4 / Little | u32 | petition_id |  |  |
-| 0x08 | 8 / Little | [Guid](../types/packed-guid.md) | charter_owner |  |  |
-| 0x10 | - / - | CString | guild_name |  |  |
-| - | - / - | CString | body_text |  | cmangos/vmangos/mangoszero: Set to 0, only info is comment from vmangos |
-| - | 4 / Little | u32 | unknown_flags |  | cmangos/vmangos/mangoszero: Set to 1, only info is comment from vmangos |
-| - | 4 / Little | u32 | minimum_signatures |  | cmangos/vmangos/mangoszero: Set to 9, only info is comment from vmangos |
-| - | 4 / Little | u32 | maximum_signatures |  | cmangos/vmangos/mangoszero: Set to 9, only info is comment from vmangos |
-| - | 4 / Little | u32 | deadline |  | cmangos/vmangos/mangoszero: Set to 0, only info is comment from vmangos |
-| - | 4 / Little | u32 | issue_date |  | cmangos/vmangos/mangoszero: Set to 0, only info is comment from vmangos |
-| - | 4 / Little | u32 | allowed_guild_id |  | cmangos/vmangos/mangoszero: Set to 0, only info is comment from vmangos |
-| - | 4 / - | [AllowedClass](allowedclass.md) | allowed_class |  | cmangos/vmangos/mangoszero: Set to 0, only info is comment from vmangos |
-| - | 4 / - | [AllowedRace](allowedrace.md) | allowed_race |  | cmangos/vmangos/mangoszero: Set to 0, only info is comment from vmangos |
-| - | 2 / Little | u16 | allowed_genders |  | cmangos/vmangos/mangoszero: Set to 0, only info is comment from vmangos |
-| - | 4 / Little | Level32 | allowed_minimum_level |  | cmangos/vmangos/mangoszero: Set to 0, only info is comment from vmangos |
-| - | 4 / Little | Level32 | allowed_maximum_level |  | cmangos/vmangos/mangoszero: Set to 0, only info is comment from vmangos |
-| - | 4 / Little | u32 | todo_amount_of_signers |  | cmangos/vmangos/mangoszero: Set to 0, only info is comment from vmangos<br/>vmangos: char m_choicetext[10](./10.md)[64](./64.md) |
-| - | 4 / Little | u32 | number_of_choices |  | cmangos/vmangos/mangoszero: Set to 0, only info is comment from vmangos |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x04 | 4 / Little | u32 | petition_id |  |
+| 0x08 | 8 / Little | [Guid](../types/packed-guid.md) | charter_owner |  |
+| 0x10 | - / - | CString | guild_name |  |
+| - | - / - | CString | body_text | cmangos/vmangos/mangoszero: Set to 0, only info is comment from vmangos |
+| - | 4 / Little | u32 | unknown_flags | cmangos/vmangos/mangoszero: Set to 1, only info is comment from vmangos |
+| - | 4 / Little | u32 | minimum_signatures | cmangos/vmangos/mangoszero: Set to 9, only info is comment from vmangos |
+| - | 4 / Little | u32 | maximum_signatures | cmangos/vmangos/mangoszero: Set to 9, only info is comment from vmangos |
+| - | 4 / Little | u32 | deadline | cmangos/vmangos/mangoszero: Set to 0, only info is comment from vmangos |
+| - | 4 / Little | u32 | issue_date | cmangos/vmangos/mangoszero: Set to 0, only info is comment from vmangos |
+| - | 4 / Little | u32 | allowed_guild_id | cmangos/vmangos/mangoszero: Set to 0, only info is comment from vmangos |
+| - | 4 / - | [AllowedClass](allowedclass.md) | allowed_class | cmangos/vmangos/mangoszero: Set to 0, only info is comment from vmangos |
+| - | 4 / - | [AllowedRace](allowedrace.md) | allowed_race | cmangos/vmangos/mangoszero: Set to 0, only info is comment from vmangos |
+| - | 2 / Little | u16 | allowed_genders | cmangos/vmangos/mangoszero: Set to 0, only info is comment from vmangos |
+| - | 4 / Little | Level32 | allowed_minimum_level | cmangos/vmangos/mangoszero: Set to 0, only info is comment from vmangos |
+| - | 4 / Little | Level32 | allowed_maximum_level | cmangos/vmangos/mangoszero: Set to 0, only info is comment from vmangos |
+| - | 4 / Little | u32 | todo_amount_of_signers | cmangos/vmangos/mangoszero: Set to 0, only info is comment from vmangos<br/>vmangos: char m_choicetext[10](./10.md)[64](./64.md) |
+| - | 4 / Little | u32 | number_of_choices | cmangos/vmangos/mangoszero: Set to 0, only info is comment from vmangos |
 
 ## Client Version 2.4.3
 
@@ -98,25 +98,25 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | 4 / Little | u32 | petition_id |  |  |
-| 0x08 | 8 / Little | [Guid](../types/packed-guid.md) | charter_owner |  |  |
-| 0x10 | - / - | CString | guild_name |  |  |
-| - | - / - | CString | body_text |  | cmangos/vmangos/mangoszero: Set to 0, only info is comment from vmangos |
-| - | 4 / Little | u32 | minimum_signatures |  | cmangos/vmangos/mangoszero: Set to 9, only info is comment from vmangos |
-| - | 4 / Little | u32 | maximum_signatures |  | cmangos/vmangos/mangoszero: Set to 9, only info is comment from vmangos |
-| - | 4 / Little | u32 | unknown1 |  | mangosone: bypass client - side limitation, a different value is needed here for each petition |
-| - | 4 / Little | u32 | unknown2 |  |  |
-| - | 4 / Little | u32 | unknown3 |  |  |
-| - | 4 / Little | u32 | unknown4 |  |  |
-| - | 4 / Little | u32 | unknown5 |  |  |
-| - | 2 / Little | u16 | unknown6 |  |  |
-| - | 4 / Little | u32 | unknown7 |  |  |
-| - | 4 / Little | u32 | unknown8 |  |  |
-| - | 4 / Little | u32 | unknown9 |  |  |
-| - | 4 / Little | u32 | unknown10 |  |  |
-| - | 4 / - | [CharterType](chartertype.md) | charter_type |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x04 | 4 / Little | u32 | petition_id |  |
+| 0x08 | 8 / Little | [Guid](../types/packed-guid.md) | charter_owner |  |
+| 0x10 | - / - | CString | guild_name |  |
+| - | - / - | CString | body_text | cmangos/vmangos/mangoszero: Set to 0, only info is comment from vmangos |
+| - | 4 / Little | u32 | minimum_signatures | cmangos/vmangos/mangoszero: Set to 9, only info is comment from vmangos |
+| - | 4 / Little | u32 | maximum_signatures | cmangos/vmangos/mangoszero: Set to 9, only info is comment from vmangos |
+| - | 4 / Little | u32 | unknown1 | mangosone: bypass client - side limitation, a different value is needed here for each petition |
+| - | 4 / Little | u32 | unknown2 |  |
+| - | 4 / Little | u32 | unknown3 |  |
+| - | 4 / Little | u32 | unknown4 |  |
+| - | 4 / Little | u32 | unknown5 |  |
+| - | 2 / Little | u16 | unknown6 |  |
+| - | 4 / Little | u32 | unknown7 |  |
+| - | 4 / Little | u32 | unknown8 |  |
+| - | 4 / Little | u32 | unknown9 |  |
+| - | 4 / Little | u32 | unknown10 |  |
+| - | 4 / - | [CharterType](chartertype.md) | charter_type |  |
 
 ## Client Version 3.3.5
 
@@ -158,24 +158,24 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | 4 / Little | u32 | petition_id |  |  |
-| - | 8 / Little | [Guid](../types/packed-guid.md) | charter_owner |  |  |
-| - | - / - | CString | guild_name |  |  |
-| - | - / - | CString | body_text |  | cmangos/vmangos/mangoszero: Set to 0, only info is comment from vmangos |
-| - | 4 / Little | u32 | minimum_signatures |  | cmangos/vmangos/mangoszero: Set to 9, only info is comment from vmangos |
-| - | 4 / Little | u32 | maximum_signatures |  | cmangos/vmangos/mangoszero: Set to 9, only info is comment from vmangos |
-| - | 4 / Little | u32 | unknown1 |  | mangosone: bypass client - side limitation, a different value is needed here for each petition |
-| - | 4 / Little | u32 | unknown2 |  |  |
-| - | 4 / Little | u32 | unknown3 |  |  |
-| - | 4 / Little | u32 | unknown4 |  |  |
-| - | 4 / Little | u32 | unknown5 |  |  |
-| - | 2 / Little | u16 | unknown6 |  |  |
-| - | 4 / Little | u32 | unknown7 |  |  |
-| - | 4 / Little | u32 | unknown8 |  |  |
-| - | 4 / Little | u32 | unknown9 |  |  |
-| - | 10 / - | u8[10] | unknown10 |  |  |
-| - | 4 / Little | u32 | unknown11 |  |  |
-| - | 4 / - | [CharterType](chartertype.md) | charter_type |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| - | 4 / Little | u32 | petition_id |  |
+| - | 8 / Little | [Guid](../types/packed-guid.md) | charter_owner |  |
+| - | - / - | CString | guild_name |  |
+| - | - / - | CString | body_text | cmangos/vmangos/mangoszero: Set to 0, only info is comment from vmangos |
+| - | 4 / Little | u32 | minimum_signatures | cmangos/vmangos/mangoszero: Set to 9, only info is comment from vmangos |
+| - | 4 / Little | u32 | maximum_signatures | cmangos/vmangos/mangoszero: Set to 9, only info is comment from vmangos |
+| - | 4 / Little | u32 | unknown1 | mangosone: bypass client - side limitation, a different value is needed here for each petition |
+| - | 4 / Little | u32 | unknown2 |  |
+| - | 4 / Little | u32 | unknown3 |  |
+| - | 4 / Little | u32 | unknown4 |  |
+| - | 4 / Little | u32 | unknown5 |  |
+| - | 2 / Little | u16 | unknown6 |  |
+| - | 4 / Little | u32 | unknown7 |  |
+| - | 4 / Little | u32 | unknown8 |  |
+| - | 4 / Little | u32 | unknown9 |  |
+| - | 10 / - | u8[10] | unknown10 |  |
+| - | 4 / Little | u32 | unknown11 |  |
+| - | 4 / - | [CharterType](chartertype.md) | charter_type |  |
 

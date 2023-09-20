@@ -26,8 +26,8 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | 4 / - | [TimerType](timertype.md) | timer |  |  |
-| 0x08 | 1 / - | Bool | is_frozen |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x04 | 4 / - | [TimerType](timertype.md) | timer |  |
+| 0x08 | 1 / - | Bool | is_frozen |  |
 

@@ -27,11 +27,11 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | 4 / Little | u32 | battle_id |  |  |
-| 0x08 | 4 / - | [Area](area.md) | area |  |  |
-| 0x0C | 1 / - | Bool | queued |  |  |
-| 0x0D | 1 / - | Bool | full |  |  |
-| 0x0E | 1 / - | Bool | warmup |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x04 | 4 / Little | u32 | battle_id |  |
+| 0x08 | 4 / - | [Area](area.md) | area |  |
+| 0x0C | 1 / - | Bool | queued |  |
+| 0x0D | 1 / - | Bool | full |  |
+| 0x0E | 1 / - | Bool | warmup |  |
 

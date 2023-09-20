@@ -13,10 +13,10 @@ struct ItemRefundExtra {
 ```
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x00 | 4 / Little | u32 | item |  |  |
-| 0x04 | 4 / Little | u32 | amount |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x00 | 4 / Little | u32 | item |  |
+| 0x04 | 4 / Little | u32 | amount |  |
 
 
 Used in:

@@ -20,12 +20,12 @@ flag CharacterRaceFlags : u8 {
 ### Type
 The basic type is `u8`, a 1 byte (8 bit) integer.
 ### Enumerators
-| Enumerator | Value  | Description | Comment |
-| --------- | -------- | ----------- | ------- |
-| `NONE` | 0 (0x00) |  |  |
-| `NOT_PLAYABLE` | 1 (0x01) |  |  |
-| `BARE_FEET` | 2 (0x02) |  |  |
-| `CAN_CURRENT_FORM_MOUNT` | 4 (0x04) |  |  |
-| `UNKNOWN2` | 8 (0x08) |  |  |
+| Enumerator | Value  | Comment |
+| --------- | -------- | ------- |
+| `NONE` | 0 (0x00) |  |
+| `NOT_PLAYABLE` | 1 (0x01) |  |
+| `BARE_FEET` | 2 (0x02) |  |
+| `CAN_CURRENT_FORM_MOUNT` | 4 (0x04) |  |
+| `UNKNOWN2` | 8 (0x08) |  |
 
 Used in:

@@ -17,9 +17,9 @@ flag PvpFlags : u16 {
 ### Type
 The basic type is `u16`, a 2 byte (16 bit) little endian integer.
 ### Enumerators
-| Enumerator | Value  | Description | Comment |
-| --------- | -------- | ----------- | ------- |
-| `PVP_FLAGGED` | 2048 (0x800) |  |  |
-| `ATTACK_PVPING_PLAYERS` | 4096 (0x1000) |  |  |
+| Enumerator | Value  | Comment |
+| --------- | -------- | ------- |
+| `PVP_FLAGGED` | 2048 (0x800) |  |
+| `ATTACK_PVPING_PLAYERS` | 4096 (0x1000) |  |
 
 Used in:

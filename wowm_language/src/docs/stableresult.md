@@ -18,13 +18,13 @@ enum StableResult : u8 {
 ### Type
 The basic type is `u8`, a 1 byte (8 bit) integer.
 ### Enumerators
-| Enumerator | Value  | Description | Comment |
-| --------- | -------- | ----------- | ------- |
-| `ERR_MONEY` | 1 (0x01) |  | you don't have enough money |
-| `ERR_STABLE` | 6 (0x06) |  | currently used in most fail cases |
-| `SUCCESS_STABLE` | 8 (0x08) |  | table success |
-| `SUCCESS_UNSTABLE` | 9 (0x09) |  | unstable/swap success |
-| `SUCCESS_BUY_SLOT` | 10 (0x0A) |  | buy slot success |
+| Enumerator | Value  | Comment |
+| --------- | -------- | ------- |
+| `ERR_MONEY` | 1 (0x01) | you don't have enough money |
+| `ERR_STABLE` | 6 (0x06) | currently used in most fail cases |
+| `SUCCESS_STABLE` | 8 (0x08) | table success |
+| `SUCCESS_UNSTABLE` | 9 (0x09) | unstable/swap success |
+| `SUCCESS_BUY_SLOT` | 10 (0x0A) | buy slot success |
 
 Used in:
 * [SMSG_STABLE_RESULT](smsg_stable_result.md)
@@ -48,14 +48,14 @@ enum StableResult : u8 {
 ### Type
 The basic type is `u8`, a 1 byte (8 bit) integer.
 ### Enumerators
-| Enumerator | Value  | Description | Comment |
-| --------- | -------- | ----------- | ------- |
-| `ERR_MONEY` | 1 (0x01) |  | you don't have enough money |
-| `ERR_STABLE` | 6 (0x06) |  | currently used in most fail cases |
-| `SUCCESS_STABLE` | 8 (0x08) |  | table success |
-| `SUCCESS_UNSTABLE` | 9 (0x09) |  | unstable/swap success |
-| `SUCCESS_BUY_SLOT` | 10 (0x0A) |  | buy slot success |
-| `ERR_EXOTIC` | 12 (0x0C) |  | you are unable to control exotic creatures |
+| Enumerator | Value  | Comment |
+| --------- | -------- | ------- |
+| `ERR_MONEY` | 1 (0x01) | you don't have enough money |
+| `ERR_STABLE` | 6 (0x06) | currently used in most fail cases |
+| `SUCCESS_STABLE` | 8 (0x08) | table success |
+| `SUCCESS_UNSTABLE` | 9 (0x09) | unstable/swap success |
+| `SUCCESS_BUY_SLOT` | 10 (0x0A) | buy slot success |
+| `ERR_EXOTIC` | 12 (0x0C) | you are unable to control exotic creatures |
 
 Used in:
 * [SMSG_STABLE_RESULT](smsg_stable_result.md)

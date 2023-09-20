@@ -29,16 +29,16 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | 1 / - | [WorldResult](worldresult.md) | result |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x04 | 1 / - | [WorldResult](worldresult.md) | result |  |
 
 If result is equal to `RESPONSE_SUCCESS`:
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x05 | 8 / Little | [Guid](../types/packed-guid.md) | character |  |  |
-| 0x0D | - / - | CString | new_name |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x05 | 8 / Little | [Guid](../types/packed-guid.md) | character |  |
+| 0x0D | - / - | CString | new_name |  |
 
 ### Examples
 
@@ -87,16 +87,16 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | 1 / - | [WorldResult](worldresult.md) | result |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x04 | 1 / - | [WorldResult](worldresult.md) | result |  |
 
 If result is equal to `RESPONSE_SUCCESS`:
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x05 | 8 / Little | [Guid](../types/packed-guid.md) | character |  |  |
-| 0x0D | - / - | CString | new_name |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x05 | 8 / Little | [Guid](../types/packed-guid.md) | character |  |
+| 0x0D | - / - | CString | new_name |  |
 
 ## Client Version 3.3.5
 
@@ -127,14 +127,14 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | 1 / - | [WorldResult](worldresult.md) | result |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| - | 1 / - | [WorldResult](worldresult.md) | result |  |
 
 If result is equal to `RESPONSE_SUCCESS`:
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | 8 / Little | [Guid](../types/packed-guid.md) | character |  |  |
-| - | - / - | CString | new_name |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| - | 8 / Little | [Guid](../types/packed-guid.md) | character |  |
+| - | - / - | CString | new_name |  |
 

@@ -24,16 +24,16 @@ flag DefaultChannelFlags : u32 {
 ### Type
 The basic type is `u32`, a 4 byte (32 bit) little endian integer.
 ### Enumerators
-| Enumerator | Value  | Description | Comment |
-| --------- | -------- | ----------- | ------- |
-| `NONE` | 0 (0x00) |  |  |
-| `INITIAL` | 1 (0x01) |  |  |
-| `ZONE_DEPENDENCY` | 2 (0x02) |  |  |
-| `GLOBAL` | 4 (0x04) |  |  |
-| `TRADE` | 8 (0x08) |  |  |
-| `CITY_ONLY` | 16 (0x10) |  |  |
-| `CITY_ONLY_2` | 32 (0x20) |  |  |
-| `DEFENCE` | 65536 (0x10000) |  |  |
-| `UNSELECTED` | 262144 (0x40000) |  |  |
+| Enumerator | Value  | Comment |
+| --------- | -------- | ------- |
+| `NONE` | 0 (0x00) |  |
+| `INITIAL` | 1 (0x01) |  |
+| `ZONE_DEPENDENCY` | 2 (0x02) |  |
+| `GLOBAL` | 4 (0x04) |  |
+| `TRADE` | 8 (0x08) |  |
+| `CITY_ONLY` | 16 (0x10) |  |
+| `CITY_ONLY_2` | 32 (0x20) |  |
+| `DEFENCE` | 65536 (0x10000) |  |
+| `UNSELECTED` | 262144 (0x40000) |  |
 
 Used in:

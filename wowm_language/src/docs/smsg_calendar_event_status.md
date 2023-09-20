@@ -29,13 +29,13 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | - / - | [PackedGuid](../types/packed-guid.md) | invitee |  |  |
-| - | 8 / Little | [Guid](../types/packed-guid.md) | event_id |  |  |
-| - | 4 / Little | DateTime | event_time |  |  |
-| - | 4 / Little | u32 | flags |  |  |
-| - | 1 / - | u8 | status |  |  |
-| - | 1 / - | u8 | rank |  |  |
-| - | 4 / Little | DateTime | status_time |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| - | - / - | [PackedGuid](../types/packed-guid.md) | invitee |  |
+| - | 8 / Little | [Guid](../types/packed-guid.md) | event_id |  |
+| - | 4 / Little | DateTime | event_time |  |
+| - | 4 / Little | u32 | flags |  |
+| - | 1 / - | u8 | status |  |
+| - | 1 / - | u8 | rank |  |
+| - | 4 / Little | DateTime | status_time |  |
 

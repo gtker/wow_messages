@@ -24,10 +24,10 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | 4 / Little | u32 | amount_of_faction_standings |  |  |
-| 0x08 | ? / - | [FactionStanding](factionstanding.md)[amount_of_faction_standings] | faction_standings |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x04 | 4 / Little | u32 | amount_of_faction_standings |  |
+| 0x08 | ? / - | [FactionStanding](factionstanding.md)[amount_of_faction_standings] | faction_standings |  |
 
 ## Client Version 2.4.3
 
@@ -54,11 +54,11 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | 4 / Little | f32 | refer_a_friend_bonus |  | All emus set to 0. |
-| 0x08 | 4 / Little | u32 | amount_of_faction_standings |  |  |
-| 0x0C | ? / - | [FactionStanding](factionstanding.md)[amount_of_faction_standings] | faction_standings |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x04 | 4 / Little | f32 | refer_a_friend_bonus | All emus set to 0. |
+| 0x08 | 4 / Little | u32 | amount_of_faction_standings |  |
+| 0x0C | ? / - | [FactionStanding](factionstanding.md)[amount_of_faction_standings] | faction_standings |  |
 
 ## Client Version 3.3.5
 
@@ -86,10 +86,10 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | 4 / Little | f32 | refer_a_friend_bonus |  | All emus set to 0. |
-| - | 1 / - | Bool | any_rank_increased |  | mangostwo: display visual effect |
-| - | 4 / Little | u32 | amount_of_faction_standings |  |  |
-| - | ? / - | [FactionStanding](factionstanding.md)[amount_of_faction_standings] | faction_standings |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| - | 4 / Little | f32 | refer_a_friend_bonus | All emus set to 0. |
+| - | 1 / - | Bool | any_rank_increased | mangostwo: display visual effect |
+| - | 4 / Little | u32 | amount_of_faction_standings |  |
+| - | ? / - | [FactionStanding](factionstanding.md)[amount_of_faction_standings] | faction_standings |  |
 

@@ -14,11 +14,11 @@ struct LootItem {
 ```
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x00 | 1 / - | u8 | index |  |  |
-| 0x01 | 4 / Little | u32 | item |  |  |
-| 0x05 | 1 / - | [LootSlotType](lootslottype.md) | ty |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x00 | 1 / - | u8 | index |  |
+| 0x01 | 4 / Little | u32 | item |  |
+| 0x05 | 1 / - | [LootSlotType](lootslottype.md) | ty |  |
 
 
 Used in:

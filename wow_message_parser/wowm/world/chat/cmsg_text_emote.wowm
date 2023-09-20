@@ -2,10 +2,10 @@ cmsg CMSG_TEXT_EMOTE = 0x0104 {
     TextEmote text_emote;
     u32 emote;
     Guid target {
-        description = "Guid targeted by the client.";
+        comment = "Guid targeted by the client.";
     }
 } {
-    description = "Sent to notify the server that the client wants to perform an emote like /dance or /cry.";
+    comment = "Sent to notify the server that the client wants to perform an emote like /dance or /cry.";
     comment = "Server responds with [SMSG_TEXT_EMOTE] and [SMSG_EMOTE].";
     paste_versions = "1.12 2.4.3 3.3.5";
 }

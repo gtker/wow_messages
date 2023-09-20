@@ -25,9 +25,9 @@ CMSG have a header of 6 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x06 | 4 / Little | u32 | suggestion |  | cmangos/vmangos/mangoszero: If 0 received bug report, else received suggestion |
-| 0x0A | - / - | SizedCString | content |  |  |
-| - | - / - | SizedCString | bug_type |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x06 | 4 / Little | u32 | suggestion | cmangos/vmangos/mangoszero: If 0 received bug report, else received suggestion |
+| 0x0A | - / - | SizedCString | content |  |
+| - | - / - | SizedCString | bug_type |  |
 

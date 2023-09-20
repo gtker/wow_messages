@@ -25,11 +25,11 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | 1 / - | [GuildEvent](guildevent.md) | event |  |  |
-| 0x05 | 1 / - | u8 | amount_of_events |  |  |
-| 0x06 | ? / - | CString[amount_of_events] | event_descriptions |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x04 | 1 / - | [GuildEvent](guildevent.md) | event |  |
+| 0x05 | 1 / - | u8 | amount_of_events |  |
+| 0x06 | ? / - | CString[amount_of_events] | event_descriptions |  |
 
 ## Client Version 2.4.3, Client Version 3
 
@@ -56,9 +56,9 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | 1 / - | [GuildEvent](guildevent.md) | event |  |  |
-| - | 1 / - | u8 | amount_of_events |  |  |
-| - | ? / - | CString[amount_of_events] | event_descriptions |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| - | 1 / - | [GuildEvent](guildevent.md) | event |  |
+| - | 1 / - | u8 | amount_of_events |  |
+| - | ? / - | CString[amount_of_events] | event_descriptions |  |
 

@@ -32,21 +32,21 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | - / - | [PackedGuid](../types/packed-guid.md) | cast_item |  | cmangos/vmangos/mangoszero: if cast item is used, set this to guid of cast item, otherwise set it to same as caster. |
-| - | - / - | [PackedGuid](../types/packed-guid.md) | caster |  |  |
-| - | 4 / Little | u32 | spell |  |  |
-| - | 2 / - | [CastFlags](castflags.md) | flags |  |  |
-| - | 4 / Little | u32 | timer |  |  |
-| - | - / - | [SpellCastTargets](spellcasttargets.md) | targets |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x04 | - / - | [PackedGuid](../types/packed-guid.md) | cast_item | cmangos/vmangos/mangoszero: if cast item is used, set this to guid of cast item, otherwise set it to same as caster. |
+| - | - / - | [PackedGuid](../types/packed-guid.md) | caster |  |
+| - | 4 / Little | u32 | spell |  |
+| - | 2 / - | [CastFlags](castflags.md) | flags |  |
+| - | 4 / Little | u32 | timer |  |
+| - | - / - | [SpellCastTargets](spellcasttargets.md) | targets |  |
 
 If flags contains `AMMO`:
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | 4 / Little | u32 | ammo_display_id |  |  |
-| - | 4 / Little | u32 | ammo_inventory_type |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| - | 4 / Little | u32 | ammo_display_id |  |
+| - | 4 / Little | u32 | ammo_inventory_type |  |
 
 ## Client Version 2.4.3
 
@@ -81,22 +81,22 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | - / - | [PackedGuid](../types/packed-guid.md) | cast_item |  | cmangos/vmangos/mangoszero: if cast item is used, set this to guid of cast item, otherwise set it to same as caster. |
-| - | - / - | [PackedGuid](../types/packed-guid.md) | caster |  |  |
-| - | 4 / Little | u32 | spell |  |  |
-| - | 1 / - | u8 | cast_count |  |  |
-| - | 2 / - | [CastFlags](castflags.md) | flags |  |  |
-| - | 4 / Little | u32 | timer |  |  |
-| - | - / - | [SpellCastTargets](spellcasttargets.md) | targets |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x04 | - / - | [PackedGuid](../types/packed-guid.md) | cast_item | cmangos/vmangos/mangoszero: if cast item is used, set this to guid of cast item, otherwise set it to same as caster. |
+| - | - / - | [PackedGuid](../types/packed-guid.md) | caster |  |
+| - | 4 / Little | u32 | spell |  |
+| - | 1 / - | u8 | cast_count |  |
+| - | 2 / - | [CastFlags](castflags.md) | flags |  |
+| - | 4 / Little | u32 | timer |  |
+| - | - / - | [SpellCastTargets](spellcasttargets.md) | targets |  |
 
 If flags contains `AMMO`:
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | 4 / Little | u32 | ammo_display_id |  |  |
-| - | 4 / Little | u32 | ammo_inventory_type |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| - | 4 / Little | u32 | ammo_display_id |  |
+| - | 4 / Little | u32 | ammo_inventory_type |  |
 
 ## Client Version 3.3.5
 
@@ -138,33 +138,33 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | - / - | [PackedGuid](../types/packed-guid.md) | cast_item |  | cmangos/vmangos/mangoszero: if cast item is used, set this to guid of cast item, otherwise set it to same as caster. |
-| - | - / - | [PackedGuid](../types/packed-guid.md) | caster |  |  |
-| - | 1 / - | u8 | cast_count |  |  |
-| - | 4 / Little | u32 | spell |  |  |
-| - | 4 / - | [CastFlags](castflags.md) | flags |  |  |
-| - | 4 / Little | u32 | timer |  |  |
-| - | - / - | [SpellCastTargets](spellcasttargets.md) | targets |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| - | - / - | [PackedGuid](../types/packed-guid.md) | cast_item | cmangos/vmangos/mangoszero: if cast item is used, set this to guid of cast item, otherwise set it to same as caster. |
+| - | - / - | [PackedGuid](../types/packed-guid.md) | caster |  |
+| - | 1 / - | u8 | cast_count |  |
+| - | 4 / Little | u32 | spell |  |
+| - | 4 / - | [CastFlags](castflags.md) | flags |  |
+| - | 4 / Little | u32 | timer |  |
+| - | - / - | [SpellCastTargets](spellcasttargets.md) | targets |  |
 
 If flags contains `POWER_LEFT_SELF`:
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | 4 / - | [Power](power.md) | power |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| - | 4 / - | [Power](power.md) | power |  |
 
 If flags contains `AMMO`:
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | 4 / Little | u32 | ammo_display_id |  |  |
-| - | 4 / Little | u32 | ammo_inventory_type |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| - | 4 / Little | u32 | ammo_display_id |  |
+| - | 4 / Little | u32 | ammo_inventory_type |  |
 
 If flags contains `UNKNOWN_23`:
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | 4 / Little | u32 | unknown1 |  |  |
-| - | 4 / Little | u32 | unknown2 |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| - | 4 / Little | u32 | unknown1 |  |
+| - | 4 / Little | u32 | unknown2 |  |
 

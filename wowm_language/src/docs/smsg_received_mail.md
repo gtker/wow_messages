@@ -25,7 +25,7 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | 4 / Little | u32 | unknown1 |  | cmangos/vmangos sends 0 as u32, mangoszero sends 0 as f32 |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x04 | 4 / Little | u32 | unknown1 | cmangos/vmangos sends 0 as u32, mangoszero sends 0 as f32 |
 

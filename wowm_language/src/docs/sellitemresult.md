@@ -19,14 +19,14 @@ enum SellItemResult : u8 {
 ### Type
 The basic type is `u8`, a 1 byte (8 bit) integer.
 ### Enumerators
-| Enumerator | Value  | Description | Comment |
-| --------- | -------- | ----------- | ------- |
-| `CANT_FIND_ITEM` | 1 (0x01) |  |  |
-| `CANT_SELL_ITEM` | 2 (0x02) |  | cmangos/vmangos/mangoszero: merchant doesn't like that item |
-| `CANT_FIND_VENDOR` | 3 (0x03) |  | cmangos/vmangos/mangoszero: merchant doesn't like you |
-| `YOU_DONT_OWN_THAT_ITEM` | 4 (0x04) |  | cmangos/vmangos/mangoszero: you don't own that item |
-| `UNK` | 5 (0x05) |  | cmangos/vmangos/mangoszero: nothing appears... |
-| `ONLY_EMPTY_BAG` | 6 (0x06) |  | cmangos/vmangos/mangoszero: can only do with empty bags |
+| Enumerator | Value  | Comment |
+| --------- | -------- | ------- |
+| `CANT_FIND_ITEM` | 1 (0x01) |  |
+| `CANT_SELL_ITEM` | 2 (0x02) | cmangos/vmangos/mangoszero: merchant doesn't like that item |
+| `CANT_FIND_VENDOR` | 3 (0x03) | cmangos/vmangos/mangoszero: merchant doesn't like you |
+| `YOU_DONT_OWN_THAT_ITEM` | 4 (0x04) | cmangos/vmangos/mangoszero: you don't own that item |
+| `UNK` | 5 (0x05) | cmangos/vmangos/mangoszero: nothing appears... |
+| `ONLY_EMPTY_BAG` | 6 (0x06) | cmangos/vmangos/mangoszero: can only do with empty bags |
 
 Used in:
 * [SMSG_SELL_ITEM](smsg_sell_item.md)
@@ -53,17 +53,17 @@ enum SellItemResult : u8 {
 ### Type
 The basic type is `u8`, a 1 byte (8 bit) integer.
 ### Enumerators
-| Enumerator | Value  | Description | Comment |
-| --------- | -------- | ----------- | ------- |
-| `ERR_CANT_FIND_ITEM` | 1 (0x01) |  | The item was not found. |
-| `ERR_CANT_SELL_ITEM` | 2 (0x02) |  | The merchant doesn't want that item. |
-| `ERR_CANT_FIND_VENDOR` | 3 (0x03) |  | The merchant doesn't like you. |
-| `ERR_YOU_DONT_OWN_THAT_ITEM` | 4 (0x04) |  | You don't own that item. |
-| `ERR_UNK` | 5 (0x05) |  | Nothing appears... |
-| `ERR_ONLY_EMPTY_BAG` | 6 (0x06) |  | You can only do that with empty bags. |
-| `ERR_CANT_SELL_TO_THIS_MERCHANT` | 7 (0x07) |  | You cannot sell items to this merchant. |
-| `ERR_MUST_REPAIR_ITEM_DURABILITY_TO_USE` | 8 (0x08) |  | You must repair that item's durability to use it. |
-| `INTERNAL_BAG_ERROR` | 9 (0x09) |  | Internal Bag Error |
+| Enumerator | Value  | Comment |
+| --------- | -------- | ------- |
+| `ERR_CANT_FIND_ITEM` | 1 (0x01) | The item was not found. |
+| `ERR_CANT_SELL_ITEM` | 2 (0x02) | The merchant doesn't want that item. |
+| `ERR_CANT_FIND_VENDOR` | 3 (0x03) | The merchant doesn't like you. |
+| `ERR_YOU_DONT_OWN_THAT_ITEM` | 4 (0x04) | You don't own that item. |
+| `ERR_UNK` | 5 (0x05) | Nothing appears... |
+| `ERR_ONLY_EMPTY_BAG` | 6 (0x06) | You can only do that with empty bags. |
+| `ERR_CANT_SELL_TO_THIS_MERCHANT` | 7 (0x07) | You cannot sell items to this merchant. |
+| `ERR_MUST_REPAIR_ITEM_DURABILITY_TO_USE` | 8 (0x08) | You must repair that item's durability to use it. |
+| `INTERNAL_BAG_ERROR` | 9 (0x09) | Internal Bag Error |
 
 Used in:
 * [SMSG_SELL_ITEM](smsg_sell_item.md)

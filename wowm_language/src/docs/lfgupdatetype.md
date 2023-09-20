@@ -27,22 +27,22 @@ enum LfgUpdateType : u8 {
 ### Type
 The basic type is `u8`, a 1 byte (8 bit) integer.
 ### Enumerators
-| Enumerator | Value  | Description | Comment |
-| --------- | -------- | ----------- | ------- |
-| `DEFAULT` | 0 (0x00) |  |  |
-| `LEADER_LEAVE` | 1 (0x01) |  |  |
-| `ROLECHECK_ABORTED` | 4 (0x04) |  |  |
-| `JOIN` | 5 (0x05) |  |  |
-| `ROLECHECK_FAILED` | 6 (0x06) |  |  |
-| `LEAVE` | 7 (0x07) |  |  |
-| `PROPOSAL_FAILED` | 8 (0x08) |  |  |
-| `PROPOSAL_DECLINED` | 9 (0x09) |  |  |
-| `GROUP_FOUND` | 10 (0x0A) |  |  |
-| `ADDED_TO_QUEUE` | 12 (0x0C) |  |  |
-| `PROPOSAL_BEGIN` | 13 (0x0D) |  |  |
-| `STATUS` | 14 (0x0E) |  |  |
-| `GROUP_MEMBER_OFFLINE` | 15 (0x0F) |  |  |
-| `GROUP_DISBAND` | 16 (0x10) |  |  |
+| Enumerator | Value  | Comment |
+| --------- | -------- | ------- |
+| `DEFAULT` | 0 (0x00) |  |
+| `LEADER_LEAVE` | 1 (0x01) |  |
+| `ROLECHECK_ABORTED` | 4 (0x04) |  |
+| `JOIN` | 5 (0x05) |  |
+| `ROLECHECK_FAILED` | 6 (0x06) |  |
+| `LEAVE` | 7 (0x07) |  |
+| `PROPOSAL_FAILED` | 8 (0x08) |  |
+| `PROPOSAL_DECLINED` | 9 (0x09) |  |
+| `GROUP_FOUND` | 10 (0x0A) |  |
+| `ADDED_TO_QUEUE` | 12 (0x0C) |  |
+| `PROPOSAL_BEGIN` | 13 (0x0D) |  |
+| `STATUS` | 14 (0x0E) |  |
+| `GROUP_MEMBER_OFFLINE` | 15 (0x0F) |  |
+| `GROUP_DISBAND` | 16 (0x10) |  |
 
 Used in:
 * [SMSG_LFG_UPDATE_PARTY](smsg_lfg_update_party.md)

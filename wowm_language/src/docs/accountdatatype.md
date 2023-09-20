@@ -22,17 +22,17 @@ enum AccountDataType : u8 {
 ### Type
 The basic type is `u8`, a 1 byte (8 bit) integer.
 ### Enumerators
-| Enumerator | Value  | Description | Comment |
-| --------- | -------- | ----------- | ------- |
-| `GLOBAL_CONFIG_CACHE` | 0 (0x00) |  |  |
-| `PER_CHARACTER_CONFIG_CACHE` | 1 (0x01) |  |  |
-| `GLOBAL_BINDINGS_CACHE` | 2 (0x02) |  |  |
-| `PER_CHARACTER_BINDINGS_CACHE` | 3 (0x03) |  |  |
-| `GLOBAL_MACROS_CACHE` | 4 (0x04) |  |  |
-| `PER_CHARACTER_MACROS_CACHE` | 5 (0x05) |  |  |
-| `PER_CHARACTER_LAYOUT_CACHE` | 6 (0x06) |  |  |
-| `PER_CHARACTER_CHAT_CACHE` | 7 (0x07) |  |  |
-| `NUM_ACCOUNT_DATA_TYPES` | 8 (0x08) |  |  |
+| Enumerator | Value  | Comment |
+| --------- | -------- | ------- |
+| `GLOBAL_CONFIG_CACHE` | 0 (0x00) |  |
+| `PER_CHARACTER_CONFIG_CACHE` | 1 (0x01) |  |
+| `GLOBAL_BINDINGS_CACHE` | 2 (0x02) |  |
+| `PER_CHARACTER_BINDINGS_CACHE` | 3 (0x03) |  |
+| `GLOBAL_MACROS_CACHE` | 4 (0x04) |  |
+| `PER_CHARACTER_MACROS_CACHE` | 5 (0x05) |  |
+| `PER_CHARACTER_LAYOUT_CACHE` | 6 (0x06) |  |
+| `PER_CHARACTER_CHAT_CACHE` | 7 (0x07) |  |
+| `NUM_ACCOUNT_DATA_TYPES` | 8 (0x08) |  |
 
 Used in:
 * [CMSG_UPDATE_ACCOUNT_DATA](cmsg_update_account_data.md)

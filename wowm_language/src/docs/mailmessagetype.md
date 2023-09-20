@@ -18,13 +18,13 @@ enum MailMessageType : u32 {
 ### Type
 The basic type is `u32`, a 4 byte (32 bit) little endian integer.
 ### Enumerators
-| Enumerator | Value  | Description | Comment |
-| --------- | -------- | ----------- | ------- |
-| `NORMAL` | 0 (0x00) |  |  |
-| `AUCTION` | 2 (0x02) |  |  |
-| `CREATURE` | 3 (0x03) |  | client send CMSG_CREATURE_QUERY on this mailmessagetype |
-| `GAMEOBJECT` | 4 (0x04) |  | client send CMSG_GAMEOBJECT_QUERY on this mailmessagetype |
-| `ITEM` | 5 (0x05) |  | client send CMSG_ITEM_QUERY on this mailmessagetype |
+| Enumerator | Value  | Comment |
+| --------- | -------- | ------- |
+| `NORMAL` | 0 (0x00) |  |
+| `AUCTION` | 2 (0x02) |  |
+| `CREATURE` | 3 (0x03) | client send CMSG_CREATURE_QUERY on this mailmessagetype |
+| `GAMEOBJECT` | 4 (0x04) | client send CMSG_GAMEOBJECT_QUERY on this mailmessagetype |
+| `ITEM` | 5 (0x05) | client send CMSG_ITEM_QUERY on this mailmessagetype |
 
 Used in:
 * [ReceivedMail](receivedmail.md)

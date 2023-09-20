@@ -14,11 +14,11 @@ struct ItemDamageType {
 ```
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x00 | 4 / Little | f32 | damage_minimum |  |  |
-| 0x04 | 4 / Little | f32 | damage_maximum |  |  |
-| 0x08 | 4 / - | [SpellSchool](spellschool.md) | school |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x00 | 4 / Little | f32 | damage_minimum |  |
+| 0x04 | 4 / Little | f32 | damage_maximum |  |
+| 0x08 | 4 / - | [SpellSchool](spellschool.md) | school |  |
 
 
 Used in:

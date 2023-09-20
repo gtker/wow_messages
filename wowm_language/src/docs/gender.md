@@ -16,11 +16,11 @@ enum Gender : u8 {
 ### Type
 The basic type is `u8`, a 1 byte (8 bit) integer.
 ### Enumerators
-| Enumerator | Value  | Description | Comment |
-| --------- | -------- | ----------- | ------- |
-| `MALE` | 0 (0x00) |  |  |
-| `FEMALE` | 1 (0x01) |  |  |
-| `NONE` | 2 (0x02) |  | Apparently used by hunter and warlock pets. |
+| Enumerator | Value  | Comment |
+| --------- | -------- | ------- |
+| `MALE` | 0 (0x00) |  |
+| `FEMALE` | 1 (0x01) |  |
+| `NONE` | 2 (0x02) | Apparently used by hunter and warlock pets. |
 
 Used in:
 * [CMSG_CHAR_CREATE](cmsg_char_create.md)

@@ -22,17 +22,17 @@ enum Class : u8 {
 ### Type
 The basic type is `u8`, a 1 byte (8 bit) integer.
 ### Enumerators
-| Enumerator | Value  | Description | Comment |
-| --------- | -------- | ----------- | ------- |
-| `WARRIOR` | 1 (0x01) |  |  |
-| `PALADIN` | 2 (0x02) |  |  |
-| `HUNTER` | 3 (0x03) |  |  |
-| `ROGUE` | 4 (0x04) |  |  |
-| `PRIEST` | 5 (0x05) |  |  |
-| `SHAMAN` | 7 (0x07) |  |  |
-| `MAGE` | 8 (0x08) |  |  |
-| `WARLOCK` | 9 (0x09) |  |  |
-| `DRUID` | 11 (0x0B) |  |  |
+| Enumerator | Value  | Comment |
+| --------- | -------- | ------- |
+| `WARRIOR` | 1 (0x01) |  |
+| `PALADIN` | 2 (0x02) |  |
+| `HUNTER` | 3 (0x03) |  |
+| `ROGUE` | 4 (0x04) |  |
+| `PRIEST` | 5 (0x05) |  |
+| `SHAMAN` | 7 (0x07) |  |
+| `MAGE` | 8 (0x08) |  |
+| `WARLOCK` | 9 (0x09) |  |
+| `DRUID` | 11 (0x0B) |  |
 
 Used in:
 * [ArenaTeamMember](arenateammember.md)
@@ -72,18 +72,18 @@ enum Class : u8 {
 ### Type
 The basic type is `u8`, a 1 byte (8 bit) integer.
 ### Enumerators
-| Enumerator | Value  | Description | Comment |
-| --------- | -------- | ----------- | ------- |
-| `WARRIOR` | 1 (0x01) |  |  |
-| `PALADIN` | 2 (0x02) |  |  |
-| `HUNTER` | 3 (0x03) |  |  |
-| `ROGUE` | 4 (0x04) |  |  |
-| `PRIEST` | 5 (0x05) |  |  |
-| `DEATH_KNIGHT` | 6 (0x06) |  |  |
-| `SHAMAN` | 7 (0x07) |  |  |
-| `MAGE` | 8 (0x08) |  |  |
-| `WARLOCK` | 9 (0x09) |  |  |
-| `DRUID` | 11 (0x0B) |  |  |
+| Enumerator | Value  | Comment |
+| --------- | -------- | ------- |
+| `WARRIOR` | 1 (0x01) |  |
+| `PALADIN` | 2 (0x02) |  |
+| `HUNTER` | 3 (0x03) |  |
+| `ROGUE` | 4 (0x04) |  |
+| `PRIEST` | 5 (0x05) |  |
+| `DEATH_KNIGHT` | 6 (0x06) |  |
+| `SHAMAN` | 7 (0x07) |  |
+| `MAGE` | 8 (0x08) |  |
+| `WARLOCK` | 9 (0x09) |  |
+| `DRUID` | 11 (0x0B) |  |
 
 Used in:
 * [ArenaTeamMember](arenateammember.md)

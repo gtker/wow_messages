@@ -15,10 +15,10 @@ enum NewItemCreationType : u32 {
 ### Type
 The basic type is `u32`, a 4 byte (32 bit) little endian integer.
 ### Enumerators
-| Enumerator | Value  | Description | Comment |
-| --------- | -------- | ----------- | ------- |
-| `RECEIVED` | 0 (0x00) |  |  |
-| `CREATED` | 1 (0x01) |  |  |
+| Enumerator | Value  | Comment |
+| --------- | -------- | ------- |
+| `RECEIVED` | 0 (0x00) |  |
+| `CREATED` | 1 (0x01) |  |
 
 Used in:
 * [SMSG_ITEM_PUSH_RESULT](smsg_item_push_result.md)

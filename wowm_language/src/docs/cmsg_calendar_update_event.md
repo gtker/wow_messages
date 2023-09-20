@@ -33,17 +33,17 @@ CMSG have a header of 6 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x06 | 8 / Little | [Guid](../types/packed-guid.md) | event |  |  |
-| 0x0E | 8 / Little | [Guid](../types/packed-guid.md) | invite_id |  |  |
-| 0x16 | - / - | CString | title |  |  |
-| - | - / - | CString | description |  |  |
-| - | 1 / - | u8 | event_type |  |  |
-| - | 1 / - | Bool | repeatable |  |  |
-| - | 4 / Little | u32 | maximum_invites |  |  |
-| - | 4 / Little | u32 | dungeon_id |  |  |
-| - | 4 / Little | DateTime | event_time |  |  |
-| - | 4 / Little | DateTime | time_zone_time |  |  |
-| - | 4 / Little | u32 | flags |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x06 | 8 / Little | [Guid](../types/packed-guid.md) | event |  |
+| 0x0E | 8 / Little | [Guid](../types/packed-guid.md) | invite_id |  |
+| 0x16 | - / - | CString | title |  |
+| - | - / - | CString | description |  |
+| - | 1 / - | u8 | event_type |  |
+| - | 1 / - | Bool | repeatable |  |
+| - | 4 / Little | u32 | maximum_invites |  |
+| - | 4 / Little | u32 | dungeon_id |  |
+| - | 4 / Little | DateTime | event_time |  |
+| - | 4 / Little | DateTime | time_zone_time |  |
+| - | 4 / Little | u32 | flags |  |
 

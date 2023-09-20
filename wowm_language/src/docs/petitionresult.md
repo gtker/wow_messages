@@ -19,14 +19,14 @@ enum PetitionResult : u32 {
 ### Type
 The basic type is `u32`, a 4 byte (32 bit) little endian integer.
 ### Enumerators
-| Enumerator | Value  | Description | Comment |
-| --------- | -------- | ----------- | ------- |
-| `OK` | 0 (0x00) |  |  |
-| `ALREADY_SIGNED` | 1 (0x01) |  |  |
-| `ALREADY_IN_GUILD` | 2 (0x02) |  |  |
-| `CANT_SIGN_OWN` | 3 (0x03) |  |  |
-| `NEED_MORE` | 4 (0x04) |  |  |
-| `NOT_SERVER` | 5 (0x05) |  |  |
+| Enumerator | Value  | Comment |
+| --------- | -------- | ------- |
+| `OK` | 0 (0x00) |  |
+| `ALREADY_SIGNED` | 1 (0x01) |  |
+| `ALREADY_IN_GUILD` | 2 (0x02) |  |
+| `CANT_SIGN_OWN` | 3 (0x03) |  |
+| `NEED_MORE` | 4 (0x04) |  |
+| `NOT_SERVER` | 5 (0x05) |  |
 
 Used in:
 * [SMSG_PETITION_SIGN_RESULTS](smsg_petition_sign_results.md)
@@ -50,13 +50,13 @@ enum PetitionResult : u32 {
 ### Type
 The basic type is `u32`, a 4 byte (32 bit) little endian integer.
 ### Enumerators
-| Enumerator | Value  | Description | Comment |
-| --------- | -------- | ----------- | ------- |
-| `OK` | 0 (0x00) |  |  |
-| `ALREADY_SIGNED` | 1 (0x01) |  |  |
-| `ALREADY_IN_GUILD` | 2 (0x02) |  |  |
-| `CANT_SIGN_OWN` | 3 (0x03) |  |  |
-| `NOT_SERVER` | 4 (0x04) |  |  |
+| Enumerator | Value  | Comment |
+| --------- | -------- | ------- |
+| `OK` | 0 (0x00) |  |
+| `ALREADY_SIGNED` | 1 (0x01) |  |
+| `ALREADY_IN_GUILD` | 2 (0x02) |  |
+| `CANT_SIGN_OWN` | 3 (0x03) |  |
+| `NOT_SERVER` | 4 (0x04) |  |
 
 Used in:
 * [SMSG_PETITION_SIGN_RESULTS](smsg_petition_sign_results.md)

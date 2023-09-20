@@ -25,9 +25,9 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | 4 / Little | u32 | result |  |  |
-| - | 4 / Little | u32 | state |  |  |
-| - | ? / - | [LfgJoinPlayer](lfgjoinplayer.md)[-] | players |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| - | 4 / Little | u32 | result |  |
+| - | 4 / Little | u32 | state |  |
+| - | ? / - | [LfgJoinPlayer](lfgjoinplayer.md)[-] | players |  |
 

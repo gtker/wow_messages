@@ -16,11 +16,11 @@ enum MeetingStoneFailure : u8 {
 ### Type
 The basic type is `u8`, a 1 byte (8 bit) integer.
 ### Enumerators
-| Enumerator | Value  | Description | Comment |
-| --------- | -------- | ----------- | ------- |
-| `MEETINGSTONE_FAIL_PARTYLEADER` | 1 (0x01) |  |  |
-| `MEETINGSTONE_FAIL_FULL_GROUP` | 2 (0x02) |  |  |
-| `MEETINGSTONE_FAIL_RAID_GROUP` | 3 (0x03) |  |  |
+| Enumerator | Value  | Comment |
+| --------- | -------- | ------- |
+| `MEETINGSTONE_FAIL_PARTYLEADER` | 1 (0x01) |  |
+| `MEETINGSTONE_FAIL_FULL_GROUP` | 2 (0x02) |  |
+| `MEETINGSTONE_FAIL_RAID_GROUP` | 3 (0x03) |  |
 
 Used in:
 * [SMSG_MEETINGSTONE_JOINFAILED](smsg_meetingstone_joinfailed.md)

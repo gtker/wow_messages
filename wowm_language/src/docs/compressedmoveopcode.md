@@ -19,14 +19,14 @@ enum CompressedMoveOpcode : u16 {
 ### Type
 The basic type is `u16`, a 2 byte (16 bit) little endian integer.
 ### Enumerators
-| Enumerator | Value  | Description | Comment |
-| --------- | -------- | ----------- | ------- |
-| `SMSG_MONSTER_MOVE` | 221 (0xDD) |  |  |
-| `SMSG_MONSTER_MOVE_TRANSPORT` | 686 (0x2AE) |  |  |
-| `SMSG_SPLINE_SET_RUN_SPEED` | 766 (0x2FE) |  |  |
-| `SMSG_SPLINE_MOVE_UNROOT` | 772 (0x304) |  |  |
-| `SMSG_SPLINE_MOVE_SET_RUN_MODE` | 781 (0x30D) |  |  |
-| `SMSG_SPLINE_MOVE_SET_WALK_MODE` | 782 (0x30E) |  |  |
+| Enumerator | Value  | Comment |
+| --------- | -------- | ------- |
+| `SMSG_MONSTER_MOVE` | 221 (0xDD) |  |
+| `SMSG_MONSTER_MOVE_TRANSPORT` | 686 (0x2AE) |  |
+| `SMSG_SPLINE_SET_RUN_SPEED` | 766 (0x2FE) |  |
+| `SMSG_SPLINE_MOVE_UNROOT` | 772 (0x304) |  |
+| `SMSG_SPLINE_MOVE_SET_RUN_MODE` | 781 (0x30D) |  |
+| `SMSG_SPLINE_MOVE_SET_WALK_MODE` | 782 (0x30E) |  |
 
 Used in:
 * [CompressedMove](compressedmove.md)

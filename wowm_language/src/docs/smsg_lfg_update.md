@@ -28,15 +28,15 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | 1 / - | Bool | queued |  |  |
-| 0x05 | 1 / - | Bool | is_looking_for_group |  |  |
-| 0x06 | 1 / - | [LfgUpdateLookingForMore](lfgupdatelookingformore.md) | looking_for_more |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x04 | 1 / - | Bool | queued |  |
+| 0x05 | 1 / - | Bool | is_looking_for_group |  |
+| 0x06 | 1 / - | [LfgUpdateLookingForMore](lfgupdatelookingformore.md) | looking_for_more |  |
 
 If looking_for_more is equal to `LOOKING_FOR_MORE`:
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x07 | 4 / - | [LfgData](lfgdata.md) | data |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x07 | 4 / - | [LfgData](lfgdata.md) | data |  |
 

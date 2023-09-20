@@ -22,17 +22,17 @@ enum CinematicSequenceId : u32 {
 ### Type
 The basic type is `u32`, a 4 byte (32 bit) little endian integer.
 ### Enumerators
-| Enumerator | Value  | Description | Comment |
-| --------- | -------- | ----------- | ------- |
-| `GOBLIN` | 0 (0x00) |  |  |
-| `UNDEAD` | 2 (0x02) |  |  |
-| `ORC` | 21 (0x15) |  |  |
-| `DWARF` | 41 (0x29) |  |  |
-| `NIGHT_ELF` | 61 (0x3D) |  |  |
-| `HUMAN` | 81 (0x51) |  |  |
-| `GNOME` | 101 (0x65) |  |  |
-| `TROLL` | 121 (0x79) |  |  |
-| `TAUREN` | 141 (0x8D) |  |  |
+| Enumerator | Value  | Comment |
+| --------- | -------- | ------- |
+| `GOBLIN` | 0 (0x00) |  |
+| `UNDEAD` | 2 (0x02) |  |
+| `ORC` | 21 (0x15) |  |
+| `DWARF` | 41 (0x29) |  |
+| `NIGHT_ELF` | 61 (0x3D) |  |
+| `HUMAN` | 81 (0x51) |  |
+| `GNOME` | 101 (0x65) |  |
+| `TROLL` | 121 (0x79) |  |
+| `TAUREN` | 141 (0x8D) |  |
 
 Used in:
 * [SMSG_TRIGGER_CINEMATIC](smsg_trigger_cinematic.md)
@@ -64,22 +64,22 @@ enum CinematicSequenceId : u32 {
 ### Type
 The basic type is `u32`, a 4 byte (32 bit) little endian integer.
 ### Enumerators
-| Enumerator | Value  | Description | Comment |
-| --------- | -------- | ----------- | ------- |
-| `GOBLIN` | 0 (0x00) |  |  |
-| `PALANTIR_OF_AZORA` | 1 (0x01) |  |  |
-| `UNDEAD` | 2 (0x02) |  |  |
-| `ORC` | 21 (0x15) |  |  |
-| `DWARF` | 41 (0x29) |  |  |
-| `NIGHT_ELF` | 61 (0x3D) |  |  |
-| `HUMAN` | 81 (0x51) |  |  |
-| `GNOME` | 101 (0x65) |  |  |
-| `TROLL` | 121 (0x79) |  |  |
-| `TAUREN` | 141 (0x8D) |  |  |
-| `SCRY_CAM` | 161 (0xA1) |  |  |
-| `BLOOD_ELF` | 162 (0xA2) |  |  |
-| `DRAENEI` | 163 (0xA3) |  |  |
-| `SUNWELL_FIVE_MAN` | 164 (0xA4) |  |  |
+| Enumerator | Value  | Comment |
+| --------- | -------- | ------- |
+| `GOBLIN` | 0 (0x00) |  |
+| `PALANTIR_OF_AZORA` | 1 (0x01) |  |
+| `UNDEAD` | 2 (0x02) |  |
+| `ORC` | 21 (0x15) |  |
+| `DWARF` | 41 (0x29) |  |
+| `NIGHT_ELF` | 61 (0x3D) |  |
+| `HUMAN` | 81 (0x51) |  |
+| `GNOME` | 101 (0x65) |  |
+| `TROLL` | 121 (0x79) |  |
+| `TAUREN` | 141 (0x8D) |  |
+| `SCRY_CAM` | 161 (0xA1) |  |
+| `BLOOD_ELF` | 162 (0xA2) |  |
+| `DRAENEI` | 163 (0xA3) |  |
+| `SUNWELL_FIVE_MAN` | 164 (0xA4) |  |
 
 Used in:
 * [SMSG_TRIGGER_CINEMATIC](smsg_trigger_cinematic.md)
@@ -112,23 +112,23 @@ enum CinematicSequenceId : u32 {
 ### Type
 The basic type is `u32`, a 4 byte (32 bit) little endian integer.
 ### Enumerators
-| Enumerator | Value  | Description | Comment |
-| --------- | -------- | ----------- | ------- |
-| `GOBLIN` | 0 (0x00) |  |  |
-| `PALANTIR_OF_AZORA` | 1 (0x01) |  |  |
-| `UNDEAD` | 2 (0x02) |  |  |
-| `ORC` | 21 (0x15) |  |  |
-| `DWARF` | 41 (0x29) |  |  |
-| `NIGHT_ELF` | 61 (0x3D) |  |  |
-| `HUMAN` | 81 (0x51) |  |  |
-| `GNOME` | 101 (0x65) |  |  |
-| `TROLL` | 121 (0x79) |  |  |
-| `TAUREN` | 141 (0x8D) |  |  |
-| `SCRY_CAM` | 161 (0xA1) |  |  |
-| `BLOOD_ELF` | 162 (0xA2) |  |  |
-| `DRAENEI` | 163 (0xA3) |  |  |
-| `SUNWELL_FIVE_MAN` | 164 (0xA4) |  |  |
-| `DEATH_KNIGHT` | 165 (0xA5) |  |  |
+| Enumerator | Value  | Comment |
+| --------- | -------- | ------- |
+| `GOBLIN` | 0 (0x00) |  |
+| `PALANTIR_OF_AZORA` | 1 (0x01) |  |
+| `UNDEAD` | 2 (0x02) |  |
+| `ORC` | 21 (0x15) |  |
+| `DWARF` | 41 (0x29) |  |
+| `NIGHT_ELF` | 61 (0x3D) |  |
+| `HUMAN` | 81 (0x51) |  |
+| `GNOME` | 101 (0x65) |  |
+| `TROLL` | 121 (0x79) |  |
+| `TAUREN` | 141 (0x8D) |  |
+| `SCRY_CAM` | 161 (0xA1) |  |
+| `BLOOD_ELF` | 162 (0xA2) |  |
+| `DRAENEI` | 163 (0xA3) |  |
+| `SUNWELL_FIVE_MAN` | 164 (0xA4) |  |
+| `DEATH_KNIGHT` | 165 (0xA5) |  |
 
 Used in:
 * [SMSG_TRIGGER_CINEMATIC](smsg_trigger_cinematic.md)

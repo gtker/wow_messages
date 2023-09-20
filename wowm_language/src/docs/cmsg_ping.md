@@ -23,9 +23,9 @@ CMSG have a header of 6 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x06 | 4 / Little | u32 | sequence_id |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x06 | 4 / Little | u32 | sequence_id |  |
 
 ## Client Version 1.9, Client Version 1.10, Client Version 1.11, Client Version 1.12, Client Version 2, Client Version 3
 
@@ -51,10 +51,10 @@ CMSG have a header of 6 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x06 | 4 / Little | u32 | sequence_id |  |  |
-| 0x0A | 4 / Little | u32 | round_time_in_ms |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x06 | 4 / Little | u32 | sequence_id |  |
+| 0x0A | 4 / Little | u32 | round_time_in_ms |  |
 
 ### Examples
 

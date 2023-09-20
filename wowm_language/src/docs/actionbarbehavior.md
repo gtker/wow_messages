@@ -16,11 +16,11 @@ enum ActionBarBehavior : u8 {
 ### Type
 The basic type is `u8`, a 1 byte (8 bit) integer.
 ### Enumerators
-| Enumerator | Value  | Description | Comment |
-| --------- | -------- | ----------- | ------- |
-| `INITIAL` | 0 (0x00) |  |  |
-| `SET` | 1 (0x01) |  |  |
-| `CLEAR` | 2 (0x02) |  |  |
+| Enumerator | Value  | Comment |
+| --------- | -------- | ------- |
+| `INITIAL` | 0 (0x00) |  |
+| `SET` | 1 (0x01) |  |
+| `CLEAR` | 2 (0x02) |  |
 
 Used in:
 * [SMSG_ACTION_BUTTONS](smsg_action_buttons.md)

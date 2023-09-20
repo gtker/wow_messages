@@ -95,90 +95,90 @@ enum WorldResult : u8 {
 ### Type
 The basic type is `u8`, a 1 byte (8 bit) integer.
 ### Enumerators
-| Enumerator | Value  | Description | Comment |
-| --------- | -------- | ----------- | ------- |
-| `RESPONSE_SUCCESS` | 0 (0x00) | Shows `Success` with `Okay` button. |  |
-| `RESPONSE_FAILURE` | 1 (0x01) | Shows `Failure` with `Okay` button. |  |
-| `RESPONSE_CANCELLED` | 2 (0x02) | Shows `Cancelled` with `Okay` button. |  |
-| `RESPONSE_DISCONNECTED` | 3 (0x03) | Shows `Disconnected from server` with `Okay` button. |  |
-| `RESPONSE_FAILED_TO_CONNECT` | 4 (0x04) | Shows `Failed to connect. Please be sure that your computer is currently connected to the internet, and that no security features on your system might be blocking traffic. See www.wow-europe.com/en/support for more information.` with `Okay` button. |  |
-| `RESPONSE_CONNECTED` | 5 (0x05) | Shows `Connected` with `Okay` button. |  |
-| `RESPONSE_VERSION_MISMATCH` | 6 (0x06) | Shows `Wrong client version` with `Okay` button. |  |
-| `CSTATUS_CONNECTING` | 7 (0x07) | Shows `Connecting to server...` with `Okay` button. |  |
-| `CSTATUS_NEGOTIATING_SECURITY` | 8 (0x08) | Shows `Negotiating security` with `Okay` button. |  |
-| `CSTATUS_NEGOTIATION_COMPLETE` | 9 (0x09) | Shows `Security negotiation complete` with `Okay` button. |  |
-| `CSTATUS_NEGOTIATION_FAILED` | 10 (0x0A) | Shows `Security negotiation failed` with `Okay` button. |  |
-| `CSTATUS_AUTHENTICATING` | 11 (0x0B) | Shows `Authenticating` with `Okay` button. |  |
-| `AUTH_OK` | 12 (0x0C) | Shows `Authentication Successful` with `Okay` button. |  |
-| `AUTH_FAILED` | 13 (0x0D) | Shows `Authentication failed` with `Okay` button. |  |
-| `AUTH_REJECT` | 14 (0x0E) | Shows `Login unavailable - Please contact Technical Support at http://www.wow-europe.com/en/support/` with `Okay` button. |  |
-| `AUTH_BAD_SERVER_PROOF` | 15 (0x0F) | Shows `Server is not valid` with `Okay` button. |  |
-| `AUTH_UNAVAILABLE` | 16 (0x10) | Shows `System unavailable - Please try again later` with `Okay` button. |  |
-| `AUTH_SYSTEM_ERROR` | 17 (0x11) |  |  |
-| `AUTH_BILLING_ERROR` | 18 (0x12) | Shows `Billing system error` with `Okay` button. |  |
-| `AUTH_BILLING_EXPIRED` | 19 (0x13) | Shows `Account billing has expired` with `Okay` button. |  |
-| `AUTH_VERSION_MISMATCH` | 20 (0x14) | Shows `Wrong client version` with `Okay` button. |  |
-| `AUTH_UNKNOWN_ACCOUNT` | 21 (0x15) | Shows `Unknown account` with `Okay` button. |  |
-| `AUTH_INCORRECT_PASSWORD` | 22 (0x16) | Shows `Incorrect Password` with `Okay` button. |  |
-| `AUTH_SESSION_EXPIRED` | 23 (0x17) | Shows `Session Expired` with `Okay` button. |  |
-| `AUTH_SERVER_SHUTTING_DOWN` | 24 (0x18) |  |  |
-| `AUTH_ALREADY_LOGGING_IN` | 25 (0x19) | Shows `Already Logging In` with `Okay` button. |  |
-| `AUTH_LOGIN_SERVER_NOT_FOUND` | 26 (0x1A) | Shows `Invalid Login Server` with `Okay` button. |  |
-| `AUTH_WAIT_QUEUE` | 27 (0x1B) |  | If this is sent without a `queue_position` field it will either reuse the one from before or use 0. |
-| `AUTH_BANNED` | 28 (0x1C) | Shows `This account has been banned for violating the Terms of Use Agreement- http://www.wow-europe.com/en/lega. Please contact our GM department at http://www.wow-europe.com/en/support/ for more information.` with `Okay` button. |  |
-| `AUTH_ALREADY_ONLINE` | 29 (0x1D) | Shows `This character is still logged on. If this character is not logged in and you continue to experience this issue for more than 15 minutes, please contact our Technical Support Department at http://www.wow-europe.com/en/support/` with `Okay` button. |  |
-| `AUTH_NO_TIME` | 30 (0x1E) | Shows `Your World of Warcraft subscription has expired. You will need to reactivate your account. To do so, please visit http://signup.wow-europe.com/ for more information.` with `Okay` button. |  |
-| `AUTH_DB_BUSY` | 31 (0x1F) | Shows `This session has timed out. Please try again at a later time or check the status of our WoW realms at http://www.wow-europe.com/en/serverstatus` with `Okay` button. |  |
-| `AUTH_SUSPENDED` | 32 (0x20) | Shows 'This account has been temporarily suspended for violating the Terms of Use Agreement - `http://www.wow-europe.com/en/legal`. Please contact our GM department at `http://www.wow-europe.com/en/support/` for more information.' with 'Okay' button. |  |
-| `AUTH_PARENTAL_CONTROL` | 33 (0x21) | Shows 'Access to this account has been blocked by parental controls. Your settings may be changed in your preferences at `http://www.worldofwarcraft.com`.' with 'Okay' button. |  |
-| `REALM_LIST_IN_PROGRESS` | 34 (0x22) | Shows 'Retrieving realm list' with 'Okay' button. |  |
-| `REALM_LIST_SUCCESS` | 35 (0x23) | Shows 'Realm list retrieved' with 'Okay' button. |  |
-| `REALM_LIST_FAILED` | 36 (0x24) | Shows 'Unable to connect to realm list server' with 'Okay' button. |  |
-| `REALM_LIST_INVALID` | 37 (0x25) | Shows 'Invalid realm list' with 'Okay' button. |  |
-| `REALM_LIST_REALM_NOT_FOUND` | 38 (0x26) | Shows 'The game server you have chosen is currently down. Use the Change Realm button to choose another Realm. Check `http://www.wow-europe.com/en/serverstatus` for current server status.' with 'Okay' button. |  |
-| `ACCOUNT_CREATE_IN_PROGRESS` | 39 (0x27) | Shows 'Creating account' with 'Okay' button. |  |
-| `ACCOUNT_CREATE_SUCCESS` | 40 (0x28) | Shows 'Account created' with 'Okay' button. |  |
-| `ACCOUNT_CREATE_FAILED` | 41 (0x29) | Shows 'Account creation failed' with 'Okay' button. |  |
-| `CHAR_LIST_RETRIEVING` | 42 (0x2A) | Shows 'Retrieving character list' with 'Okay' button. |  |
-| `CHAR_LIST_RETRIEVED` | 43 (0x2B) | Shows 'Character list retrieved' with 'Okay' button. |  |
-| `CHAR_LIST_FAILED` | 44 (0x2C) | Shows 'Error retrieving character list' with 'Okay' button. |  |
-| `CHAR_CREATE_IN_PROGRESS` | 45 (0x2D) | Shows 'Creating character' with 'Okay' button. |  |
-| `CHAR_CREATE_SUCCESS` | 46 (0x2E) |  |  |
-| `CHAR_CREATE_ERROR` | 47 (0x2F) |  |  |
-| `CHAR_CREATE_FAILED` | 48 (0x30) | Shows 'Character creation failed' with 'Okay' button. |  |
-| `CHAR_CREATE_NAME_IN_USE` | 49 (0x31) | Shows 'That name is unavailable' with 'Okay' button. |  |
-| `CHAR_CREATE_DISABLED` | 50 (0x32) | Shows 'Creation of that race and/or class is currently disabled.' with 'Okay' button. |  |
-| `CHAR_CREATE_PVP_TEAMS_VIOLATION` | 51 (0x33) | Shows 'You cannot have both a Horde and an Alliance character on the same PvP realm' with 'Okay' button. |  |
-| `CHAR_CREATE_SERVER_LIMIT` | 52 (0x34) |  |  |
-| `CHAR_CREATE_ACCOUNT_LIMIT` | 53 (0x35) | Shows 'You already have the maximum number of characters allowed on this account.' with 'Okay' button. |  |
-| `CHAR_CREATE_SERVER_QUEUE` | 54 (0x36) |  |  |
-| `CHAR_CREATE_ONLY_EXISTING` | 55 (0x37) | Shows 'Only players who already have characters on this realm are currently allowed to create characters.' with 'Okay' button. |  |
-| `CHAR_DELETE_IN_PROGRESS` | 56 (0x38) | Shows 'Deleting character' with 'Okay' button. |  |
-| `CHAR_DELETE_SUCCESS` | 57 (0x39) | Shows 'Character deleted' with 'Okay' button. |  |
-| `CHAR_DELETE_FAILED` | 58 (0x3A) | Shows 'Character deletion failed' with 'Okay' button. |  |
-| `CHAR_DELETE_FAILED_LOCKED_FOR_TRANSFER` | 59 (0x3B) | Shows 'Your character is currently locked as part of the paid character transfer process.' with 'Okay' button. |  |
-| `CHAR_LOGIN_IN_PROGRESS` | 60 (0x3C) | Shows 'Entering the World of Warcraft' with 'Okay' button. |  |
-| `CHAR_LOGIN_SUCCESS` | 61 (0x3D) | Shows 'Login successful' with 'Okay' button. |  |
-| `CHAR_LOGIN_NO_WORLD` | 62 (0x3E) | Shows 'World server is down' with 'Okay' button. |  |
-| `CHAR_LOGIN_DUPLICATE_CHARACTER` | 63 (0x3F) | Shows 'A character with that name already exists' with 'Okay' button. |  |
-| `CHAR_LOGIN_NO_INSTANCES` | 64 (0x40) | Shows 'No instance servers are available' with 'Okay' button. |  |
-| `CHAR_LOGIN_FAILED` | 65 (0x41) | Shows 'Login failed' with 'Okay' button. |  |
-| `CHAR_LOGIN_DISABLED` | 66 (0x42) | Shows 'Login for that race, class or character is currently disabled.' with 'Okay' button. |  |
-| `CHAR_LOGIN_NO_CHARACTER` | 67 (0x43) | Shows 'Character not found' with 'Okay' button. |  |
-| `CHAR_LOGIN_LOCKED_FOR_TRANSFER` | 68 (0x44) | Shows 'Your character is currently locked as part of the paid character transfer process.' with 'Okay' button. |  |
-| `CHAR_NAME_NO_NAME` | 69 (0x45) | Shows 'Enter a name for your character' with 'Okay' button. |  |
-| `CHAR_NAME_TOO_SHORT` | 70 (0x46) | Shows 'Names must be at least 2 characters' with 'Okay' button. |  |
-| `CHAR_NAME_TOO_LONG` | 71 (0x47) | Shows 'Names must be no more than 12 characters' with 'Okay' button. |  |
-| `CHAR_NAME_ONLY_LETTERS` | 72 (0x48) | Shows 'Names can only contain letters' with 'Okay' button. |  |
-| `CHAR_NAME_MIXED_LANGUAGES` | 73 (0x49) | Shows 'Names must contain only one language' with 'Okay' button. |  |
-| `CHAR_NAME_PROFANE` | 74 (0x4A) | Shows 'That name contains profanity' with 'Okay' button. |  |
-| `CHAR_NAME_RESERVED` | 75 (0x4B) | Shows 'That name is unavailable' with 'Okay' button. |  |
-| `CHAR_NAME_INVALID_APOSTROPHE` | 76 (0x4C) | Shows 'You cannot use an apostrophe as the first or last character of your name' with 'Okay' button. |  |
-| `CHAR_NAME_MULTIPLE_APOSTROPHES` | 77 (0x4D) | Shows 'You can only have one apostrophe' with 'Okay' button. |  |
-| `CHAR_NAME_THREE_CONSECUTIVE` | 78 (0x4E) | Shows 'You cannot use the same letter three times consecutively' with 'Okay' button. |  |
-| `CHAR_NAME_INVALID_SPACE` | 79 (0x4F) | Shows 'You cannot use a space as the first or last character of your name' with 'Okay' button. |  |
-| `CHAR_NAME_SUCCESS` | 80 (0x50) | Shows an empty box with 'Okay' button. |  |
-| `CHAR_NAME_FAILURE` | 81 (0x51) | Shows 'Invalid character name' with 'Okay' button. |  |
+| Enumerator | Value  | Comment |
+| --------- | -------- | ------- |
+| `RESPONSE_SUCCESS` | 0 (0x00) | Shows `Success` with `Okay` button. |
+| `RESPONSE_FAILURE` | 1 (0x01) | Shows `Failure` with `Okay` button. |
+| `RESPONSE_CANCELLED` | 2 (0x02) | Shows `Cancelled` with `Okay` button. |
+| `RESPONSE_DISCONNECTED` | 3 (0x03) | Shows `Disconnected from server` with `Okay` button. |
+| `RESPONSE_FAILED_TO_CONNECT` | 4 (0x04) | Shows `Failed to connect. Please be sure that your computer is currently connected to the internet, and that no security features on your system might be blocking traffic. See www.wow-europe.com/en/support for more information.` with `Okay` button. |
+| `RESPONSE_CONNECTED` | 5 (0x05) | Shows `Connected` with `Okay` button. |
+| `RESPONSE_VERSION_MISMATCH` | 6 (0x06) | Shows `Wrong client version` with `Okay` button. |
+| `CSTATUS_CONNECTING` | 7 (0x07) | Shows `Connecting to server...` with `Okay` button. |
+| `CSTATUS_NEGOTIATING_SECURITY` | 8 (0x08) | Shows `Negotiating security` with `Okay` button. |
+| `CSTATUS_NEGOTIATION_COMPLETE` | 9 (0x09) | Shows `Security negotiation complete` with `Okay` button. |
+| `CSTATUS_NEGOTIATION_FAILED` | 10 (0x0A) | Shows `Security negotiation failed` with `Okay` button. |
+| `CSTATUS_AUTHENTICATING` | 11 (0x0B) | Shows `Authenticating` with `Okay` button. |
+| `AUTH_OK` | 12 (0x0C) | Shows `Authentication Successful` with `Okay` button. |
+| `AUTH_FAILED` | 13 (0x0D) | Shows `Authentication failed` with `Okay` button. |
+| `AUTH_REJECT` | 14 (0x0E) | Shows `Login unavailable - Please contact Technical Support at http://www.wow-europe.com/en/support/` with `Okay` button. |
+| `AUTH_BAD_SERVER_PROOF` | 15 (0x0F) | Shows `Server is not valid` with `Okay` button. |
+| `AUTH_UNAVAILABLE` | 16 (0x10) | Shows `System unavailable - Please try again later` with `Okay` button. |
+| `AUTH_SYSTEM_ERROR` | 17 (0x11) |  |
+| `AUTH_BILLING_ERROR` | 18 (0x12) | Shows `Billing system error` with `Okay` button. |
+| `AUTH_BILLING_EXPIRED` | 19 (0x13) | Shows `Account billing has expired` with `Okay` button. |
+| `AUTH_VERSION_MISMATCH` | 20 (0x14) | Shows `Wrong client version` with `Okay` button. |
+| `AUTH_UNKNOWN_ACCOUNT` | 21 (0x15) | Shows `Unknown account` with `Okay` button. |
+| `AUTH_INCORRECT_PASSWORD` | 22 (0x16) | Shows `Incorrect Password` with `Okay` button. |
+| `AUTH_SESSION_EXPIRED` | 23 (0x17) | Shows `Session Expired` with `Okay` button. |
+| `AUTH_SERVER_SHUTTING_DOWN` | 24 (0x18) |  |
+| `AUTH_ALREADY_LOGGING_IN` | 25 (0x19) | Shows `Already Logging In` with `Okay` button. |
+| `AUTH_LOGIN_SERVER_NOT_FOUND` | 26 (0x1A) | Shows `Invalid Login Server` with `Okay` button. |
+| `AUTH_WAIT_QUEUE` | 27 (0x1B) | If this is sent without a `queue_position` field it will either reuse the one from before or use 0. |
+| `AUTH_BANNED` | 28 (0x1C) | Shows `This account has been banned for violating the Terms of Use Agreement- http://www.wow-europe.com/en/lega. Please contact our GM department at http://www.wow-europe.com/en/support/ for more information.` with `Okay` button. |
+| `AUTH_ALREADY_ONLINE` | 29 (0x1D) | Shows `This character is still logged on. If this character is not logged in and you continue to experience this issue for more than 15 minutes, please contact our Technical Support Department at http://www.wow-europe.com/en/support/` with `Okay` button. |
+| `AUTH_NO_TIME` | 30 (0x1E) | Shows `Your World of Warcraft subscription has expired. You will need to reactivate your account. To do so, please visit http://signup.wow-europe.com/ for more information.` with `Okay` button. |
+| `AUTH_DB_BUSY` | 31 (0x1F) | Shows `This session has timed out. Please try again at a later time or check the status of our WoW realms at http://www.wow-europe.com/en/serverstatus` with `Okay` button. |
+| `AUTH_SUSPENDED` | 32 (0x20) | Shows 'This account has been temporarily suspended for violating the Terms of Use Agreement - `http://www.wow-europe.com/en/legal`. Please contact our GM department at `http://www.wow-europe.com/en/support/` for more information.' with 'Okay' button. |
+| `AUTH_PARENTAL_CONTROL` | 33 (0x21) | Shows 'Access to this account has been blocked by parental controls. Your settings may be changed in your preferences at `http://www.worldofwarcraft.com`.' with 'Okay' button. |
+| `REALM_LIST_IN_PROGRESS` | 34 (0x22) | Shows 'Retrieving realm list' with 'Okay' button. |
+| `REALM_LIST_SUCCESS` | 35 (0x23) | Shows 'Realm list retrieved' with 'Okay' button. |
+| `REALM_LIST_FAILED` | 36 (0x24) | Shows 'Unable to connect to realm list server' with 'Okay' button. |
+| `REALM_LIST_INVALID` | 37 (0x25) | Shows 'Invalid realm list' with 'Okay' button. |
+| `REALM_LIST_REALM_NOT_FOUND` | 38 (0x26) | Shows 'The game server you have chosen is currently down. Use the Change Realm button to choose another Realm. Check `http://www.wow-europe.com/en/serverstatus` for current server status.' with 'Okay' button. |
+| `ACCOUNT_CREATE_IN_PROGRESS` | 39 (0x27) | Shows 'Creating account' with 'Okay' button. |
+| `ACCOUNT_CREATE_SUCCESS` | 40 (0x28) | Shows 'Account created' with 'Okay' button. |
+| `ACCOUNT_CREATE_FAILED` | 41 (0x29) | Shows 'Account creation failed' with 'Okay' button. |
+| `CHAR_LIST_RETRIEVING` | 42 (0x2A) | Shows 'Retrieving character list' with 'Okay' button. |
+| `CHAR_LIST_RETRIEVED` | 43 (0x2B) | Shows 'Character list retrieved' with 'Okay' button. |
+| `CHAR_LIST_FAILED` | 44 (0x2C) | Shows 'Error retrieving character list' with 'Okay' button. |
+| `CHAR_CREATE_IN_PROGRESS` | 45 (0x2D) | Shows 'Creating character' with 'Okay' button. |
+| `CHAR_CREATE_SUCCESS` | 46 (0x2E) |  |
+| `CHAR_CREATE_ERROR` | 47 (0x2F) |  |
+| `CHAR_CREATE_FAILED` | 48 (0x30) | Shows 'Character creation failed' with 'Okay' button. |
+| `CHAR_CREATE_NAME_IN_USE` | 49 (0x31) | Shows 'That name is unavailable' with 'Okay' button. |
+| `CHAR_CREATE_DISABLED` | 50 (0x32) | Shows 'Creation of that race and/or class is currently disabled.' with 'Okay' button. |
+| `CHAR_CREATE_PVP_TEAMS_VIOLATION` | 51 (0x33) | Shows 'You cannot have both a Horde and an Alliance character on the same PvP realm' with 'Okay' button. |
+| `CHAR_CREATE_SERVER_LIMIT` | 52 (0x34) |  |
+| `CHAR_CREATE_ACCOUNT_LIMIT` | 53 (0x35) | Shows 'You already have the maximum number of characters allowed on this account.' with 'Okay' button. |
+| `CHAR_CREATE_SERVER_QUEUE` | 54 (0x36) |  |
+| `CHAR_CREATE_ONLY_EXISTING` | 55 (0x37) | Shows 'Only players who already have characters on this realm are currently allowed to create characters.' with 'Okay' button. |
+| `CHAR_DELETE_IN_PROGRESS` | 56 (0x38) | Shows 'Deleting character' with 'Okay' button. |
+| `CHAR_DELETE_SUCCESS` | 57 (0x39) | Shows 'Character deleted' with 'Okay' button. |
+| `CHAR_DELETE_FAILED` | 58 (0x3A) | Shows 'Character deletion failed' with 'Okay' button. |
+| `CHAR_DELETE_FAILED_LOCKED_FOR_TRANSFER` | 59 (0x3B) | Shows 'Your character is currently locked as part of the paid character transfer process.' with 'Okay' button. |
+| `CHAR_LOGIN_IN_PROGRESS` | 60 (0x3C) | Shows 'Entering the World of Warcraft' with 'Okay' button. |
+| `CHAR_LOGIN_SUCCESS` | 61 (0x3D) | Shows 'Login successful' with 'Okay' button. |
+| `CHAR_LOGIN_NO_WORLD` | 62 (0x3E) | Shows 'World server is down' with 'Okay' button. |
+| `CHAR_LOGIN_DUPLICATE_CHARACTER` | 63 (0x3F) | Shows 'A character with that name already exists' with 'Okay' button. |
+| `CHAR_LOGIN_NO_INSTANCES` | 64 (0x40) | Shows 'No instance servers are available' with 'Okay' button. |
+| `CHAR_LOGIN_FAILED` | 65 (0x41) | Shows 'Login failed' with 'Okay' button. |
+| `CHAR_LOGIN_DISABLED` | 66 (0x42) | Shows 'Login for that race, class or character is currently disabled.' with 'Okay' button. |
+| `CHAR_LOGIN_NO_CHARACTER` | 67 (0x43) | Shows 'Character not found' with 'Okay' button. |
+| `CHAR_LOGIN_LOCKED_FOR_TRANSFER` | 68 (0x44) | Shows 'Your character is currently locked as part of the paid character transfer process.' with 'Okay' button. |
+| `CHAR_NAME_NO_NAME` | 69 (0x45) | Shows 'Enter a name for your character' with 'Okay' button. |
+| `CHAR_NAME_TOO_SHORT` | 70 (0x46) | Shows 'Names must be at least 2 characters' with 'Okay' button. |
+| `CHAR_NAME_TOO_LONG` | 71 (0x47) | Shows 'Names must be no more than 12 characters' with 'Okay' button. |
+| `CHAR_NAME_ONLY_LETTERS` | 72 (0x48) | Shows 'Names can only contain letters' with 'Okay' button. |
+| `CHAR_NAME_MIXED_LANGUAGES` | 73 (0x49) | Shows 'Names must contain only one language' with 'Okay' button. |
+| `CHAR_NAME_PROFANE` | 74 (0x4A) | Shows 'That name contains profanity' with 'Okay' button. |
+| `CHAR_NAME_RESERVED` | 75 (0x4B) | Shows 'That name is unavailable' with 'Okay' button. |
+| `CHAR_NAME_INVALID_APOSTROPHE` | 76 (0x4C) | Shows 'You cannot use an apostrophe as the first or last character of your name' with 'Okay' button. |
+| `CHAR_NAME_MULTIPLE_APOSTROPHES` | 77 (0x4D) | Shows 'You can only have one apostrophe' with 'Okay' button. |
+| `CHAR_NAME_THREE_CONSECUTIVE` | 78 (0x4E) | Shows 'You cannot use the same letter three times consecutively' with 'Okay' button. |
+| `CHAR_NAME_INVALID_SPACE` | 79 (0x4F) | Shows 'You cannot use a space as the first or last character of your name' with 'Okay' button. |
+| `CHAR_NAME_SUCCESS` | 80 (0x50) | Shows an empty box with 'Okay' button. |
+| `CHAR_NAME_FAILURE` | 81 (0x51) | Shows 'Invalid character name' with 'Okay' button. |
 
 Used in:
 * [SMSG_AUTH_RESPONSE](smsg_auth_response.md)
@@ -291,99 +291,99 @@ enum WorldResult : u8 {
 ### Type
 The basic type is `u8`, a 1 byte (8 bit) integer.
 ### Enumerators
-| Enumerator | Value  | Description | Comment |
-| --------- | -------- | ----------- | ------- |
-| `RESPONSE_SUCCESS` | 0 (0x00) |  |  |
-| `RESPONSE_FAILURE` | 1 (0x01) |  |  |
-| `RESPONSE_CANCELLED` | 2 (0x02) |  |  |
-| `RESPONSE_DISCONNECTED` | 3 (0x03) |  |  |
-| `RESPONSE_FAILED_TO_CONNECT` | 4 (0x04) |  |  |
-| `RESPONSE_CONNECTED` | 5 (0x05) |  |  |
-| `RESPONSE_VERSION_MISMATCH` | 6 (0x06) |  |  |
-| `CSTATUS_CONNECTING` | 7 (0x07) |  |  |
-| `CSTATUS_NEGOTIATING_SECURITY` | 8 (0x08) |  |  |
-| `CSTATUS_NEGOTIATION_COMPLETE` | 9 (0x09) |  |  |
-| `CSTATUS_NEGOTIATION_FAILED` | 10 (0x0A) |  |  |
-| `CSTATUS_AUTHENTICATING` | 11 (0x0B) |  |  |
-| `AUTH_OK` | 12 (0x0C) |  |  |
-| `AUTH_FAILED` | 13 (0x0D) |  |  |
-| `AUTH_REJECT` | 14 (0x0E) |  |  |
-| `AUTH_BAD_SERVER_PROOF` | 15 (0x0F) |  |  |
-| `AUTH_UNAVAILABLE` | 16 (0x10) |  |  |
-| `AUTH_SYSTEM_ERROR` | 17 (0x11) |  |  |
-| `AUTH_BILLING_ERROR` | 18 (0x12) |  |  |
-| `AUTH_BILLING_EXPIRED` | 19 (0x13) |  |  |
-| `AUTH_VERSION_MISMATCH` | 20 (0x14) |  |  |
-| `AUTH_UNKNOWN_ACCOUNT` | 21 (0x15) |  |  |
-| `AUTH_INCORRECT_PASSWORD` | 22 (0x16) |  |  |
-| `AUTH_SESSION_EXPIRED` | 23 (0x17) |  |  |
-| `AUTH_SERVER_SHUTTING_DOWN` | 24 (0x18) |  |  |
-| `AUTH_ALREADY_LOGGING_IN` | 25 (0x19) |  |  |
-| `AUTH_LOGIN_SERVER_NOT_FOUND` | 26 (0x1A) |  |  |
-| `AUTH_WAIT_QUEUE` | 27 (0x1B) |  |  |
-| `AUTH_BANNED` | 28 (0x1C) |  |  |
-| `AUTH_ALREADY_ONLINE` | 29 (0x1D) |  |  |
-| `AUTH_NO_TIME` | 30 (0x1E) |  |  |
-| `AUTH_DB_BUSY` | 31 (0x1F) |  |  |
-| `AUTH_SUSPENDED` | 32 (0x20) |  |  |
-| `AUTH_PARENTAL_CONTROL` | 33 (0x21) |  |  |
-| `AUTH_LOCKED_ENFORCED` | 34 (0x22) |  |  |
-| `REALM_LIST_IN_PROGRESS` | 35 (0x23) |  |  |
-| `REALM_LIST_SUCCESS` | 36 (0x24) |  |  |
-| `REALM_LIST_FAILED` | 37 (0x25) |  |  |
-| `REALM_LIST_INVALID` | 38 (0x26) |  |  |
-| `REALM_LIST_REALM_NOT_FOUND` | 39 (0x27) |  |  |
-| `ACCOUNT_CREATE_IN_PROGRESS` | 40 (0x28) |  |  |
-| `ACCOUNT_CREATE_SUCCESS` | 41 (0x29) |  |  |
-| `ACCOUNT_CREATE_FAILED` | 42 (0x2A) |  |  |
-| `CHAR_LIST_RETRIEVING` | 43 (0x2B) |  |  |
-| `CHAR_LIST_RETRIEVED` | 44 (0x2C) |  |  |
-| `CHAR_LIST_FAILED` | 45 (0x2D) |  |  |
-| `CHAR_CREATE_IN_PROGRESS` | 46 (0x2E) |  |  |
-| `CHAR_CREATE_SUCCESS` | 47 (0x2F) |  |  |
-| `CHAR_CREATE_ERROR` | 48 (0x30) |  |  |
-| `CHAR_CREATE_FAILED` | 49 (0x31) |  |  |
-| `CHAR_CREATE_NAME_IN_USE` | 50 (0x32) |  |  |
-| `CHAR_CREATE_DISABLED` | 51 (0x33) |  |  |
-| `CHAR_CREATE_PVP_TEAMS_VIOLATION` | 52 (0x34) |  |  |
-| `CHAR_CREATE_SERVER_LIMIT` | 53 (0x35) |  |  |
-| `CHAR_CREATE_ACCOUNT_LIMIT` | 54 (0x36) |  |  |
-| `CHAR_CREATE_SERVER_QUEUE` | 55 (0x37) |  |  |
-| `CHAR_CREATE_ONLY_EXISTING` | 56 (0x38) |  |  |
-| `CHAR_CREATE_EXPANSION` | 57 (0x39) |  |  |
-| `CHAR_DELETE_IN_PROGRESS` | 58 (0x3A) |  |  |
-| `CHAR_DELETE_SUCCESS` | 59 (0x3B) |  |  |
-| `CHAR_DELETE_FAILED` | 60 (0x3C) |  |  |
-| `CHAR_DELETE_FAILED_LOCKED_FOR_TRANSFER` | 61 (0x3D) |  |  |
-| `CHAR_DELETE_FAILED_GUILD_LEADER` | 62 (0x3E) |  |  |
-| `CHAR_DELETE_FAILED_ARENA_CAPTAIN` | 63 (0x3F) |  |  |
-| `CHAR_LOGIN_IN_PROGRESS` | 64 (0x40) |  |  |
-| `CHAR_LOGIN_SUCCESS` | 65 (0x41) |  |  |
-| `CHAR_LOGIN_NO_WORLD` | 66 (0x42) |  |  |
-| `CHAR_LOGIN_DUPLICATE_CHARACTER` | 67 (0x43) |  |  |
-| `CHAR_LOGIN_NO_INSTANCES` | 68 (0x44) |  |  |
-| `CHAR_LOGIN_FAILED` | 69 (0x45) |  |  |
-| `CHAR_LOGIN_DISABLED` | 70 (0x46) |  |  |
-| `CHAR_LOGIN_NO_CHARACTER` | 71 (0x47) |  |  |
-| `CHAR_LOGIN_LOCKED_FOR_TRANSFER` | 72 (0x48) |  |  |
-| `CHAR_LOGIN_LOCKED_BY_BILLING` | 73 (0x49) |  |  |
-| `CHAR_NAME_SUCCESS` | 74 (0x4A) |  |  |
-| `CHAR_NAME_FAILURE` | 75 (0x4B) |  |  |
-| `CHAR_NAME_NO_NAME` | 76 (0x4C) |  |  |
-| `CHAR_NAME_TOO_SHORT` | 77 (0x4D) |  |  |
-| `CHAR_NAME_TOO_LONG` | 78 (0x4E) |  |  |
-| `CHAR_NAME_INVALID_CHARACTER` | 79 (0x4F) |  |  |
-| `CHAR_NAME_MIXED_LANGUAGES` | 80 (0x50) |  |  |
-| `CHAR_NAME_PROFANE` | 81 (0x51) |  |  |
-| `CHAR_NAME_RESERVED` | 82 (0x52) |  |  |
-| `CHAR_NAME_INVALID_APOSTROPHE` | 83 (0x53) |  |  |
-| `CHAR_NAME_MULTIPLE_APOSTROPHES` | 84 (0x54) |  |  |
-| `CHAR_NAME_THREE_CONSECUTIVE` | 85 (0x55) |  |  |
-| `CHAR_NAME_INVALID_SPACE` | 86 (0x56) |  |  |
-| `CHAR_NAME_CONSECUTIVE_SPACES` | 87 (0x57) |  |  |
-| `CHAR_NAME_RUSSIAN_CONSECUTIVE_SILENT_CHARACTERS` | 88 (0x58) |  |  |
-| `CHAR_NAME_RUSSIAN_SILENT_CHARACTER_AT_BEGINNING_OR_END` | 89 (0x59) |  |  |
-| `CHAR_NAME_DECLENSION_DOESNT_MATCH_BASE_NAME` | 90 (0x5A) |  |  |
+| Enumerator | Value  | Comment |
+| --------- | -------- | ------- |
+| `RESPONSE_SUCCESS` | 0 (0x00) |  |
+| `RESPONSE_FAILURE` | 1 (0x01) |  |
+| `RESPONSE_CANCELLED` | 2 (0x02) |  |
+| `RESPONSE_DISCONNECTED` | 3 (0x03) |  |
+| `RESPONSE_FAILED_TO_CONNECT` | 4 (0x04) |  |
+| `RESPONSE_CONNECTED` | 5 (0x05) |  |
+| `RESPONSE_VERSION_MISMATCH` | 6 (0x06) |  |
+| `CSTATUS_CONNECTING` | 7 (0x07) |  |
+| `CSTATUS_NEGOTIATING_SECURITY` | 8 (0x08) |  |
+| `CSTATUS_NEGOTIATION_COMPLETE` | 9 (0x09) |  |
+| `CSTATUS_NEGOTIATION_FAILED` | 10 (0x0A) |  |
+| `CSTATUS_AUTHENTICATING` | 11 (0x0B) |  |
+| `AUTH_OK` | 12 (0x0C) |  |
+| `AUTH_FAILED` | 13 (0x0D) |  |
+| `AUTH_REJECT` | 14 (0x0E) |  |
+| `AUTH_BAD_SERVER_PROOF` | 15 (0x0F) |  |
+| `AUTH_UNAVAILABLE` | 16 (0x10) |  |
+| `AUTH_SYSTEM_ERROR` | 17 (0x11) |  |
+| `AUTH_BILLING_ERROR` | 18 (0x12) |  |
+| `AUTH_BILLING_EXPIRED` | 19 (0x13) |  |
+| `AUTH_VERSION_MISMATCH` | 20 (0x14) |  |
+| `AUTH_UNKNOWN_ACCOUNT` | 21 (0x15) |  |
+| `AUTH_INCORRECT_PASSWORD` | 22 (0x16) |  |
+| `AUTH_SESSION_EXPIRED` | 23 (0x17) |  |
+| `AUTH_SERVER_SHUTTING_DOWN` | 24 (0x18) |  |
+| `AUTH_ALREADY_LOGGING_IN` | 25 (0x19) |  |
+| `AUTH_LOGIN_SERVER_NOT_FOUND` | 26 (0x1A) |  |
+| `AUTH_WAIT_QUEUE` | 27 (0x1B) |  |
+| `AUTH_BANNED` | 28 (0x1C) |  |
+| `AUTH_ALREADY_ONLINE` | 29 (0x1D) |  |
+| `AUTH_NO_TIME` | 30 (0x1E) |  |
+| `AUTH_DB_BUSY` | 31 (0x1F) |  |
+| `AUTH_SUSPENDED` | 32 (0x20) |  |
+| `AUTH_PARENTAL_CONTROL` | 33 (0x21) |  |
+| `AUTH_LOCKED_ENFORCED` | 34 (0x22) |  |
+| `REALM_LIST_IN_PROGRESS` | 35 (0x23) |  |
+| `REALM_LIST_SUCCESS` | 36 (0x24) |  |
+| `REALM_LIST_FAILED` | 37 (0x25) |  |
+| `REALM_LIST_INVALID` | 38 (0x26) |  |
+| `REALM_LIST_REALM_NOT_FOUND` | 39 (0x27) |  |
+| `ACCOUNT_CREATE_IN_PROGRESS` | 40 (0x28) |  |
+| `ACCOUNT_CREATE_SUCCESS` | 41 (0x29) |  |
+| `ACCOUNT_CREATE_FAILED` | 42 (0x2A) |  |
+| `CHAR_LIST_RETRIEVING` | 43 (0x2B) |  |
+| `CHAR_LIST_RETRIEVED` | 44 (0x2C) |  |
+| `CHAR_LIST_FAILED` | 45 (0x2D) |  |
+| `CHAR_CREATE_IN_PROGRESS` | 46 (0x2E) |  |
+| `CHAR_CREATE_SUCCESS` | 47 (0x2F) |  |
+| `CHAR_CREATE_ERROR` | 48 (0x30) |  |
+| `CHAR_CREATE_FAILED` | 49 (0x31) |  |
+| `CHAR_CREATE_NAME_IN_USE` | 50 (0x32) |  |
+| `CHAR_CREATE_DISABLED` | 51 (0x33) |  |
+| `CHAR_CREATE_PVP_TEAMS_VIOLATION` | 52 (0x34) |  |
+| `CHAR_CREATE_SERVER_LIMIT` | 53 (0x35) |  |
+| `CHAR_CREATE_ACCOUNT_LIMIT` | 54 (0x36) |  |
+| `CHAR_CREATE_SERVER_QUEUE` | 55 (0x37) |  |
+| `CHAR_CREATE_ONLY_EXISTING` | 56 (0x38) |  |
+| `CHAR_CREATE_EXPANSION` | 57 (0x39) |  |
+| `CHAR_DELETE_IN_PROGRESS` | 58 (0x3A) |  |
+| `CHAR_DELETE_SUCCESS` | 59 (0x3B) |  |
+| `CHAR_DELETE_FAILED` | 60 (0x3C) |  |
+| `CHAR_DELETE_FAILED_LOCKED_FOR_TRANSFER` | 61 (0x3D) |  |
+| `CHAR_DELETE_FAILED_GUILD_LEADER` | 62 (0x3E) |  |
+| `CHAR_DELETE_FAILED_ARENA_CAPTAIN` | 63 (0x3F) |  |
+| `CHAR_LOGIN_IN_PROGRESS` | 64 (0x40) |  |
+| `CHAR_LOGIN_SUCCESS` | 65 (0x41) |  |
+| `CHAR_LOGIN_NO_WORLD` | 66 (0x42) |  |
+| `CHAR_LOGIN_DUPLICATE_CHARACTER` | 67 (0x43) |  |
+| `CHAR_LOGIN_NO_INSTANCES` | 68 (0x44) |  |
+| `CHAR_LOGIN_FAILED` | 69 (0x45) |  |
+| `CHAR_LOGIN_DISABLED` | 70 (0x46) |  |
+| `CHAR_LOGIN_NO_CHARACTER` | 71 (0x47) |  |
+| `CHAR_LOGIN_LOCKED_FOR_TRANSFER` | 72 (0x48) |  |
+| `CHAR_LOGIN_LOCKED_BY_BILLING` | 73 (0x49) |  |
+| `CHAR_NAME_SUCCESS` | 74 (0x4A) |  |
+| `CHAR_NAME_FAILURE` | 75 (0x4B) |  |
+| `CHAR_NAME_NO_NAME` | 76 (0x4C) |  |
+| `CHAR_NAME_TOO_SHORT` | 77 (0x4D) |  |
+| `CHAR_NAME_TOO_LONG` | 78 (0x4E) |  |
+| `CHAR_NAME_INVALID_CHARACTER` | 79 (0x4F) |  |
+| `CHAR_NAME_MIXED_LANGUAGES` | 80 (0x50) |  |
+| `CHAR_NAME_PROFANE` | 81 (0x51) |  |
+| `CHAR_NAME_RESERVED` | 82 (0x52) |  |
+| `CHAR_NAME_INVALID_APOSTROPHE` | 83 (0x53) |  |
+| `CHAR_NAME_MULTIPLE_APOSTROPHES` | 84 (0x54) |  |
+| `CHAR_NAME_THREE_CONSECUTIVE` | 85 (0x55) |  |
+| `CHAR_NAME_INVALID_SPACE` | 86 (0x56) |  |
+| `CHAR_NAME_CONSECUTIVE_SPACES` | 87 (0x57) |  |
+| `CHAR_NAME_RUSSIAN_CONSECUTIVE_SILENT_CHARACTERS` | 88 (0x58) |  |
+| `CHAR_NAME_RUSSIAN_SILENT_CHARACTER_AT_BEGINNING_OR_END` | 89 (0x59) |  |
+| `CHAR_NAME_DECLENSION_DOESNT_MATCH_BASE_NAME` | 90 (0x5A) |  |
 
 Used in:
 * [SMSG_AUTH_RESPONSE](smsg_auth_response.md)
@@ -509,112 +509,112 @@ enum WorldResult : u8 {
 ### Type
 The basic type is `u8`, a 1 byte (8 bit) integer.
 ### Enumerators
-| Enumerator | Value  | Description | Comment |
-| --------- | -------- | ----------- | ------- |
-| `RESPONSE_SUCCESS` | 0 (0x00) |  |  |
-| `RESPONSE_FAILURE` | 1 (0x01) |  |  |
-| `RESPONSE_CANCELLED` | 2 (0x02) |  |  |
-| `RESPONSE_DISCONNECTED` | 3 (0x03) |  |  |
-| `RESPONSE_FAILED_TO_CONNECT` | 4 (0x04) |  |  |
-| `RESPONSE_CONNECTED` | 5 (0x05) |  |  |
-| `RESPONSE_VERSION_MISMATCH` | 6 (0x06) |  |  |
-| `CSTATUS_CONNECTING` | 7 (0x07) |  |  |
-| `CSTATUS_NEGOTIATING_SECURITY` | 8 (0x08) |  |  |
-| `CSTATUS_NEGOTIATION_COMPLETE` | 9 (0x09) |  |  |
-| `CSTATUS_NEGOTIATION_FAILED` | 10 (0x0A) |  |  |
-| `CSTATUS_AUTHENTICATING` | 11 (0x0B) |  |  |
-| `AUTH_OK` | 12 (0x0C) |  |  |
-| `AUTH_FAILED` | 13 (0x0D) |  |  |
-| `AUTH_REJECT` | 14 (0x0E) |  |  |
-| `AUTH_BAD_SERVER_PROOF` | 15 (0x0F) |  |  |
-| `AUTH_UNAVAILABLE` | 16 (0x10) |  |  |
-| `AUTH_SYSTEM_ERROR` | 17 (0x11) |  |  |
-| `AUTH_BILLING_ERROR` | 18 (0x12) |  |  |
-| `AUTH_BILLING_EXPIRED` | 19 (0x13) |  |  |
-| `AUTH_VERSION_MISMATCH` | 20 (0x14) |  |  |
-| `AUTH_UNKNOWN_ACCOUNT` | 21 (0x15) |  |  |
-| `AUTH_INCORRECT_PASSWORD` | 22 (0x16) |  |  |
-| `AUTH_SESSION_EXPIRED` | 23 (0x17) |  |  |
-| `AUTH_SERVER_SHUTTING_DOWN` | 24 (0x18) |  |  |
-| `AUTH_ALREADY_LOGGING_IN` | 25 (0x19) |  |  |
-| `AUTH_LOGIN_SERVER_NOT_FOUND` | 26 (0x1A) |  |  |
-| `AUTH_WAIT_QUEUE` | 27 (0x1B) |  |  |
-| `AUTH_BANNED` | 28 (0x1C) |  |  |
-| `AUTH_ALREADY_ONLINE` | 29 (0x1D) |  |  |
-| `AUTH_NO_TIME` | 30 (0x1E) |  |  |
-| `AUTH_DB_BUSY` | 31 (0x1F) |  |  |
-| `AUTH_SUSPENDED` | 32 (0x20) |  |  |
-| `AUTH_PARENTAL_CONTROL` | 33 (0x21) |  |  |
-| `AUTH_LOCKED_ENFORCED` | 34 (0x22) |  |  |
-| `REALM_LIST_IN_PROGRESS` | 35 (0x23) |  |  |
-| `REALM_LIST_SUCCESS` | 36 (0x24) |  |  |
-| `REALM_LIST_FAILED` | 37 (0x25) |  |  |
-| `REALM_LIST_INVALID` | 38 (0x26) |  |  |
-| `REALM_LIST_REALM_NOT_FOUND` | 39 (0x27) |  |  |
-| `ACCOUNT_CREATE_IN_PROGRESS` | 40 (0x28) |  |  |
-| `ACCOUNT_CREATE_SUCCESS` | 41 (0x29) |  |  |
-| `ACCOUNT_CREATE_FAILED` | 42 (0x2A) |  |  |
-| `CHAR_LIST_RETRIEVING` | 43 (0x2B) |  |  |
-| `CHAR_LIST_RETRIEVED` | 44 (0x2C) |  |  |
-| `CHAR_LIST_FAILED` | 45 (0x2D) |  |  |
-| `CHAR_CREATE_IN_PROGRESS` | 46 (0x2E) |  |  |
-| `CHAR_CREATE_SUCCESS` | 47 (0x2F) |  |  |
-| `CHAR_CREATE_ERROR` | 48 (0x30) |  |  |
-| `CHAR_CREATE_FAILED` | 49 (0x31) |  |  |
-| `CHAR_CREATE_NAME_IN_USE` | 50 (0x32) |  |  |
-| `CHAR_CREATE_DISABLED` | 51 (0x33) |  |  |
-| `CHAR_CREATE_PVP_TEAMS_VIOLATION` | 52 (0x34) |  |  |
-| `CHAR_CREATE_SERVER_LIMIT` | 53 (0x35) |  |  |
-| `CHAR_CREATE_ACCOUNT_LIMIT` | 54 (0x36) |  |  |
-| `CHAR_CREATE_SERVER_QUEUE` | 55 (0x37) |  |  |
-| `CHAR_CREATE_ONLY_EXISTING` | 56 (0x38) |  |  |
-| `CHAR_CREATE_EXPANSION` | 57 (0x39) |  |  |
-| `CHAR_CREATE_EXPANSION_CLASS` | 58 (0x3A) |  |  |
-| `CHAR_CREATE_LEVEL_REQUIREMENT` | 59 (0x3B) |  |  |
-| `CHAR_CREATE_UNIQUE_CLASS_LIMIT` | 60 (0x3C) |  |  |
-| `CHAR_CREATE_CHARACTER_IN_GUILD` | 61 (0x3D) |  |  |
-| `CHAR_CREATE_RESTRICTED_RACECLASS` | 62 (0x3E) |  |  |
-| `CHAR_CREATE_CHARACTER_CHOOSE_RACE` | 63 (0x3F) |  |  |
-| `CHAR_CREATE_CHARACTER_ARENA_LEADER` | 64 (0x40) |  |  |
-| `CHAR_CREATE_CHARACTER_DELETE_MAIL` | 65 (0x41) |  |  |
-| `CHAR_CREATE_CHARACTER_SWAP_FACTION` | 66 (0x42) |  |  |
-| `CHAR_CREATE_CHARACTER_RACE_ONLY` | 67 (0x43) |  |  |
-| `CHAR_CREATE_CHARACTER_GOLD_LIMIT` | 68 (0x44) |  |  |
-| `CHAR_CREATE_FORCE_LOGIN` | 69 (0x45) |  |  |
-| `CHAR_DELETE_IN_PROGRESS` | 70 (0x46) |  |  |
-| `CHAR_DELETE_SUCCESS` | 71 (0x47) |  |  |
-| `CHAR_DELETE_FAILED` | 72 (0x48) |  |  |
-| `CHAR_DELETE_FAILED_LOCKED_FOR_TRANSFER` | 73 (0x49) |  |  |
-| `CHAR_DELETE_FAILED_GUILD_LEADER` | 74 (0x4A) |  |  |
-| `CHAR_DELETE_FAILED_ARENA_CAPTAIN` | 75 (0x4B) |  |  |
-| `CHAR_LOGIN_IN_PROGRESS` | 76 (0x4C) |  |  |
-| `CHAR_LOGIN_SUCCESS` | 77 (0x4D) |  |  |
-| `CHAR_LOGIN_NO_WORLD` | 78 (0x4E) |  |  |
-| `CHAR_LOGIN_DUPLICATE_CHARACTER` | 79 (0x4F) |  |  |
-| `CHAR_LOGIN_NO_INSTANCES` | 80 (0x50) |  |  |
-| `CHAR_LOGIN_FAILED` | 81 (0x51) |  |  |
-| `CHAR_LOGIN_DISABLED` | 82 (0x52) |  |  |
-| `CHAR_LOGIN_NO_CHARACTER` | 83 (0x53) |  |  |
-| `CHAR_LOGIN_LOCKED_FOR_TRANSFER` | 84 (0x54) |  |  |
-| `CHAR_LOGIN_LOCKED_BY_BILLING` | 85 (0x55) |  |  |
-| `CHAR_LOGIN_LOCKED_BY_MOBILE_AH` | 86 (0x56) |  |  |
-| `CHAR_NAME_SUCCESS` | 87 (0x57) |  |  |
-| `CHAR_NAME_FAILURE` | 88 (0x58) |  |  |
-| `CHAR_NAME_NO_NAME` | 89 (0x59) |  |  |
-| `CHAR_NAME_TOO_SHORT` | 90 (0x5A) |  |  |
-| `CHAR_NAME_TOO_LONG` | 91 (0x5B) |  |  |
-| `CHAR_NAME_INVALID_CHARACTER` | 92 (0x5C) |  |  |
-| `CHAR_NAME_MIXED_LANGUAGES` | 93 (0x5D) |  |  |
-| `CHAR_NAME_PROFANE` | 94 (0x5E) |  |  |
-| `CHAR_NAME_RESERVED` | 95 (0x5F) |  |  |
-| `CHAR_NAME_INVALID_APOSTROPHE` | 96 (0x60) |  |  |
-| `CHAR_NAME_MULTIPLE_APOSTROPHES` | 97 (0x61) |  |  |
-| `CHAR_NAME_THREE_CONSECUTIVE` | 98 (0x62) |  |  |
-| `CHAR_NAME_INVALID_SPACE` | 99 (0x63) |  |  |
-| `CHAR_NAME_CONSECUTIVE_SPACES` | 100 (0x64) |  |  |
-| `CHAR_NAME_RUSSIAN_CONSECUTIVE_SILENT_CHARACTERS` | 101 (0x65) |  |  |
-| `CHAR_NAME_RUSSIAN_SILENT_CHARACTER_AT_BEGINNING_OR_END` | 102 (0x66) |  |  |
-| `CHAR_NAME_DECLENSION_DOESNT_MATCH_BASE_NAME` | 103 (0x67) |  |  |
+| Enumerator | Value  | Comment |
+| --------- | -------- | ------- |
+| `RESPONSE_SUCCESS` | 0 (0x00) |  |
+| `RESPONSE_FAILURE` | 1 (0x01) |  |
+| `RESPONSE_CANCELLED` | 2 (0x02) |  |
+| `RESPONSE_DISCONNECTED` | 3 (0x03) |  |
+| `RESPONSE_FAILED_TO_CONNECT` | 4 (0x04) |  |
+| `RESPONSE_CONNECTED` | 5 (0x05) |  |
+| `RESPONSE_VERSION_MISMATCH` | 6 (0x06) |  |
+| `CSTATUS_CONNECTING` | 7 (0x07) |  |
+| `CSTATUS_NEGOTIATING_SECURITY` | 8 (0x08) |  |
+| `CSTATUS_NEGOTIATION_COMPLETE` | 9 (0x09) |  |
+| `CSTATUS_NEGOTIATION_FAILED` | 10 (0x0A) |  |
+| `CSTATUS_AUTHENTICATING` | 11 (0x0B) |  |
+| `AUTH_OK` | 12 (0x0C) |  |
+| `AUTH_FAILED` | 13 (0x0D) |  |
+| `AUTH_REJECT` | 14 (0x0E) |  |
+| `AUTH_BAD_SERVER_PROOF` | 15 (0x0F) |  |
+| `AUTH_UNAVAILABLE` | 16 (0x10) |  |
+| `AUTH_SYSTEM_ERROR` | 17 (0x11) |  |
+| `AUTH_BILLING_ERROR` | 18 (0x12) |  |
+| `AUTH_BILLING_EXPIRED` | 19 (0x13) |  |
+| `AUTH_VERSION_MISMATCH` | 20 (0x14) |  |
+| `AUTH_UNKNOWN_ACCOUNT` | 21 (0x15) |  |
+| `AUTH_INCORRECT_PASSWORD` | 22 (0x16) |  |
+| `AUTH_SESSION_EXPIRED` | 23 (0x17) |  |
+| `AUTH_SERVER_SHUTTING_DOWN` | 24 (0x18) |  |
+| `AUTH_ALREADY_LOGGING_IN` | 25 (0x19) |  |
+| `AUTH_LOGIN_SERVER_NOT_FOUND` | 26 (0x1A) |  |
+| `AUTH_WAIT_QUEUE` | 27 (0x1B) |  |
+| `AUTH_BANNED` | 28 (0x1C) |  |
+| `AUTH_ALREADY_ONLINE` | 29 (0x1D) |  |
+| `AUTH_NO_TIME` | 30 (0x1E) |  |
+| `AUTH_DB_BUSY` | 31 (0x1F) |  |
+| `AUTH_SUSPENDED` | 32 (0x20) |  |
+| `AUTH_PARENTAL_CONTROL` | 33 (0x21) |  |
+| `AUTH_LOCKED_ENFORCED` | 34 (0x22) |  |
+| `REALM_LIST_IN_PROGRESS` | 35 (0x23) |  |
+| `REALM_LIST_SUCCESS` | 36 (0x24) |  |
+| `REALM_LIST_FAILED` | 37 (0x25) |  |
+| `REALM_LIST_INVALID` | 38 (0x26) |  |
+| `REALM_LIST_REALM_NOT_FOUND` | 39 (0x27) |  |
+| `ACCOUNT_CREATE_IN_PROGRESS` | 40 (0x28) |  |
+| `ACCOUNT_CREATE_SUCCESS` | 41 (0x29) |  |
+| `ACCOUNT_CREATE_FAILED` | 42 (0x2A) |  |
+| `CHAR_LIST_RETRIEVING` | 43 (0x2B) |  |
+| `CHAR_LIST_RETRIEVED` | 44 (0x2C) |  |
+| `CHAR_LIST_FAILED` | 45 (0x2D) |  |
+| `CHAR_CREATE_IN_PROGRESS` | 46 (0x2E) |  |
+| `CHAR_CREATE_SUCCESS` | 47 (0x2F) |  |
+| `CHAR_CREATE_ERROR` | 48 (0x30) |  |
+| `CHAR_CREATE_FAILED` | 49 (0x31) |  |
+| `CHAR_CREATE_NAME_IN_USE` | 50 (0x32) |  |
+| `CHAR_CREATE_DISABLED` | 51 (0x33) |  |
+| `CHAR_CREATE_PVP_TEAMS_VIOLATION` | 52 (0x34) |  |
+| `CHAR_CREATE_SERVER_LIMIT` | 53 (0x35) |  |
+| `CHAR_CREATE_ACCOUNT_LIMIT` | 54 (0x36) |  |
+| `CHAR_CREATE_SERVER_QUEUE` | 55 (0x37) |  |
+| `CHAR_CREATE_ONLY_EXISTING` | 56 (0x38) |  |
+| `CHAR_CREATE_EXPANSION` | 57 (0x39) |  |
+| `CHAR_CREATE_EXPANSION_CLASS` | 58 (0x3A) |  |
+| `CHAR_CREATE_LEVEL_REQUIREMENT` | 59 (0x3B) |  |
+| `CHAR_CREATE_UNIQUE_CLASS_LIMIT` | 60 (0x3C) |  |
+| `CHAR_CREATE_CHARACTER_IN_GUILD` | 61 (0x3D) |  |
+| `CHAR_CREATE_RESTRICTED_RACECLASS` | 62 (0x3E) |  |
+| `CHAR_CREATE_CHARACTER_CHOOSE_RACE` | 63 (0x3F) |  |
+| `CHAR_CREATE_CHARACTER_ARENA_LEADER` | 64 (0x40) |  |
+| `CHAR_CREATE_CHARACTER_DELETE_MAIL` | 65 (0x41) |  |
+| `CHAR_CREATE_CHARACTER_SWAP_FACTION` | 66 (0x42) |  |
+| `CHAR_CREATE_CHARACTER_RACE_ONLY` | 67 (0x43) |  |
+| `CHAR_CREATE_CHARACTER_GOLD_LIMIT` | 68 (0x44) |  |
+| `CHAR_CREATE_FORCE_LOGIN` | 69 (0x45) |  |
+| `CHAR_DELETE_IN_PROGRESS` | 70 (0x46) |  |
+| `CHAR_DELETE_SUCCESS` | 71 (0x47) |  |
+| `CHAR_DELETE_FAILED` | 72 (0x48) |  |
+| `CHAR_DELETE_FAILED_LOCKED_FOR_TRANSFER` | 73 (0x49) |  |
+| `CHAR_DELETE_FAILED_GUILD_LEADER` | 74 (0x4A) |  |
+| `CHAR_DELETE_FAILED_ARENA_CAPTAIN` | 75 (0x4B) |  |
+| `CHAR_LOGIN_IN_PROGRESS` | 76 (0x4C) |  |
+| `CHAR_LOGIN_SUCCESS` | 77 (0x4D) |  |
+| `CHAR_LOGIN_NO_WORLD` | 78 (0x4E) |  |
+| `CHAR_LOGIN_DUPLICATE_CHARACTER` | 79 (0x4F) |  |
+| `CHAR_LOGIN_NO_INSTANCES` | 80 (0x50) |  |
+| `CHAR_LOGIN_FAILED` | 81 (0x51) |  |
+| `CHAR_LOGIN_DISABLED` | 82 (0x52) |  |
+| `CHAR_LOGIN_NO_CHARACTER` | 83 (0x53) |  |
+| `CHAR_LOGIN_LOCKED_FOR_TRANSFER` | 84 (0x54) |  |
+| `CHAR_LOGIN_LOCKED_BY_BILLING` | 85 (0x55) |  |
+| `CHAR_LOGIN_LOCKED_BY_MOBILE_AH` | 86 (0x56) |  |
+| `CHAR_NAME_SUCCESS` | 87 (0x57) |  |
+| `CHAR_NAME_FAILURE` | 88 (0x58) |  |
+| `CHAR_NAME_NO_NAME` | 89 (0x59) |  |
+| `CHAR_NAME_TOO_SHORT` | 90 (0x5A) |  |
+| `CHAR_NAME_TOO_LONG` | 91 (0x5B) |  |
+| `CHAR_NAME_INVALID_CHARACTER` | 92 (0x5C) |  |
+| `CHAR_NAME_MIXED_LANGUAGES` | 93 (0x5D) |  |
+| `CHAR_NAME_PROFANE` | 94 (0x5E) |  |
+| `CHAR_NAME_RESERVED` | 95 (0x5F) |  |
+| `CHAR_NAME_INVALID_APOSTROPHE` | 96 (0x60) |  |
+| `CHAR_NAME_MULTIPLE_APOSTROPHES` | 97 (0x61) |  |
+| `CHAR_NAME_THREE_CONSECUTIVE` | 98 (0x62) |  |
+| `CHAR_NAME_INVALID_SPACE` | 99 (0x63) |  |
+| `CHAR_NAME_CONSECUTIVE_SPACES` | 100 (0x64) |  |
+| `CHAR_NAME_RUSSIAN_CONSECUTIVE_SILENT_CHARACTERS` | 101 (0x65) |  |
+| `CHAR_NAME_RUSSIAN_SILENT_CHARACTER_AT_BEGINNING_OR_END` | 102 (0x66) |  |
+| `CHAR_NAME_DECLENSION_DOESNT_MATCH_BASE_NAME` | 103 (0x67) |  |
 
 Used in:
 * [SMSG_AUTH_RESPONSE](smsg_auth_response.md)

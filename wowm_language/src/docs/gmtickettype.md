@@ -25,18 +25,18 @@ enum GmTicketType : u8 {
 ### Type
 The basic type is `u8`, a 1 byte (8 bit) integer.
 ### Enumerators
-| Enumerator | Value  | Description | Comment |
-| --------- | -------- | ----------- | ------- |
-| `STUCK` | 1 (0x01) |  |  |
-| `BEHAVIOR_HARASSMENT` | 2 (0x02) |  |  |
-| `GUILD` | 3 (0x03) |  |  |
-| `ITEM` | 4 (0x04) |  |  |
-| `ENVIRONMENTAL` | 5 (0x05) |  |  |
-| `NONQUEST_CREEP` | 6 (0x06) |  |  |
-| `QUEST_QUESTNPC` | 7 (0x07) |  |  |
-| `TECHNICAL` | 8 (0x08) |  |  |
-| `ACCOUNT_BILLING` | 9 (0x09) |  |  |
-| `CHARACTER` | 10 (0x0A) |  |  |
+| Enumerator | Value  | Comment |
+| --------- | -------- | ------- |
+| `STUCK` | 1 (0x01) |  |
+| `BEHAVIOR_HARASSMENT` | 2 (0x02) |  |
+| `GUILD` | 3 (0x03) |  |
+| `ITEM` | 4 (0x04) |  |
+| `ENVIRONMENTAL` | 5 (0x05) |  |
+| `NONQUEST_CREEP` | 6 (0x06) |  |
+| `QUEST_QUESTNPC` | 7 (0x07) |  |
+| `TECHNICAL` | 8 (0x08) |  |
+| `ACCOUNT_BILLING` | 9 (0x09) |  |
+| `CHARACTER` | 10 (0x0A) |  |
 
 Used in:
 * [CMSG_GMTICKET_CREATE](cmsg_gmticket_create.md)
@@ -93,45 +93,45 @@ enum GmTicketType : u8 {
 ### Type
 The basic type is `u8`, a 1 byte (8 bit) integer.
 ### Enumerators
-| Enumerator | Value  | Description | Comment |
-| --------- | -------- | ----------- | ------- |
-| `NOT_SET` | 0 (0x00) |  |  |
-| `STUCK` | 1 (0x01) |  |  |
-| `BEHAVIOR_HARASSMENT` | 2 (0x02) |  |  |
-| `GUILD` | 3 (0x03) |  |  |
-| `ITEM` | 4 (0x04) |  |  |
-| `ENVIRONMENTAL` | 5 (0x05) |  |  |
-| `NON_QUEST_CREEP` | 6 (0x06) |  |  |
-| `QUEST_QUEST_NPC` | 7 (0x07) |  |  |
-| `TECHNICAL` | 8 (0x08) |  |  |
-| `ACCOUNT_BILLING` | 9 (0x09) |  |  |
-| `CHARACTER` | 10 (0x0A) |  |  |
-| `ARENA_HONOR_ITEM_ISSUES` | 11 (0x0B) |  |  |
-| `ARENA_HONOR_POINTS_ISSUES` | 12 (0x0C) |  |  |
-| `BOTTING_CHEATING_HACKING` | 13 (0x0D) |  |  |
-| `BUG_REPORT` | 14 (0x0E) |  |  |
-| `COMPROMISED_ACCOUNT_ISSUE` | 15 (0x0F) |  |  |
-| `GAME_SUGGESTIONS` | 16 (0x10) |  |  |
-| `GAMEPLAY_QUESTION` | 17 (0x11) |  |  |
-| `GUILD_BANK_ISSUE` | 18 (0x12) |  |  |
-| `GUILD_MASTER_ISSUE` | 19 (0x13) |  |  |
-| `HARASSMENT_SCAM_REPORT` | 20 (0x14) |  |  |
-| `INAPPROPRIATE_NAME_GUILD_ARENA_CHARACTER_PET` | 21 (0x15) |  |  |
-| `KNOWN_ISSUE_FIX` | 22 (0x16) |  |  |
-| `LATENCY_LAG_REPORT` | 23 (0x17) |  |  |
-| `LOOTING_ISSUE_MISTAKE` | 24 (0x18) |  |  |
-| `MAIL_ISSUE` | 25 (0x19) |  |  |
-| `NON_IN_GAME_RELATED_INQUIRY` | 26 (0x1A) |  |  |
-| `PARENTAL_CONTROLS_CAIS` | 27 (0x1B) |  |  |
-| `PCNC` | 28 (0x1C) |  |  |
-| `PCT` | 29 (0x1D) |  |  |
-| `RESTORATION_STATUS_FOLLOW_UP` | 30 (0x1E) |  |  |
-| `SERVER_INSTANCE_ISSUES` | 31 (0x1F) |  |  |
-| `SPAM` | 32 (0x20) |  |  |
-| `SUICIDE_CASE` | 33 (0x21) |  |  |
-| `SUSPENSION_QUESTIONS` | 34 (0x22) |  |  |
-| `TECHNICAL_SOUND_GRAPHICS_ISSUE` | 35 (0x23) |  |  |
-| `UI_ISSUE` | 36 (0x24) |  |  |
+| Enumerator | Value  | Comment |
+| --------- | -------- | ------- |
+| `NOT_SET` | 0 (0x00) |  |
+| `STUCK` | 1 (0x01) |  |
+| `BEHAVIOR_HARASSMENT` | 2 (0x02) |  |
+| `GUILD` | 3 (0x03) |  |
+| `ITEM` | 4 (0x04) |  |
+| `ENVIRONMENTAL` | 5 (0x05) |  |
+| `NON_QUEST_CREEP` | 6 (0x06) |  |
+| `QUEST_QUEST_NPC` | 7 (0x07) |  |
+| `TECHNICAL` | 8 (0x08) |  |
+| `ACCOUNT_BILLING` | 9 (0x09) |  |
+| `CHARACTER` | 10 (0x0A) |  |
+| `ARENA_HONOR_ITEM_ISSUES` | 11 (0x0B) |  |
+| `ARENA_HONOR_POINTS_ISSUES` | 12 (0x0C) |  |
+| `BOTTING_CHEATING_HACKING` | 13 (0x0D) |  |
+| `BUG_REPORT` | 14 (0x0E) |  |
+| `COMPROMISED_ACCOUNT_ISSUE` | 15 (0x0F) |  |
+| `GAME_SUGGESTIONS` | 16 (0x10) |  |
+| `GAMEPLAY_QUESTION` | 17 (0x11) |  |
+| `GUILD_BANK_ISSUE` | 18 (0x12) |  |
+| `GUILD_MASTER_ISSUE` | 19 (0x13) |  |
+| `HARASSMENT_SCAM_REPORT` | 20 (0x14) |  |
+| `INAPPROPRIATE_NAME_GUILD_ARENA_CHARACTER_PET` | 21 (0x15) |  |
+| `KNOWN_ISSUE_FIX` | 22 (0x16) |  |
+| `LATENCY_LAG_REPORT` | 23 (0x17) |  |
+| `LOOTING_ISSUE_MISTAKE` | 24 (0x18) |  |
+| `MAIL_ISSUE` | 25 (0x19) |  |
+| `NON_IN_GAME_RELATED_INQUIRY` | 26 (0x1A) |  |
+| `PARENTAL_CONTROLS_CAIS` | 27 (0x1B) |  |
+| `PCNC` | 28 (0x1C) |  |
+| `PCT` | 29 (0x1D) |  |
+| `RESTORATION_STATUS_FOLLOW_UP` | 30 (0x1E) |  |
+| `SERVER_INSTANCE_ISSUES` | 31 (0x1F) |  |
+| `SPAM` | 32 (0x20) |  |
+| `SUICIDE_CASE` | 33 (0x21) |  |
+| `SUSPENSION_QUESTIONS` | 34 (0x22) |  |
+| `TECHNICAL_SOUND_GRAPHICS_ISSUE` | 35 (0x23) |  |
+| `UI_ISSUE` | 36 (0x24) |  |
 
 Used in:
 * [CMSG_GMTICKET_CREATE](cmsg_gmticket_create.md)

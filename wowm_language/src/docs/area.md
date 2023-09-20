@@ -1095,1090 +1095,1090 @@ enum Area : u32 {
 ### Type
 The basic type is `u32`, a 4 byte (32 bit) little endian integer.
 ### Enumerators
-| Enumerator | Value  | Description | Comment | Display |
-| --------- | -------- | ----------- | ------- | ------- |
-| `NONE` | 0 (0x00) |  |  |  |
-| `DUN_MOROGH` | 1 (0x01) |  |  | Dun Morogh |
-| `LONGSHORE` | 2 (0x02) |  |  | Longshore |
-| `BADLANDS` | 3 (0x03) |  |  | Badlands |
-| `BLASTED_LANDS` | 4 (0x04) |  |  | Blasted Lands |
-| `BLACKWATER_COVE` | 7 (0x07) |  |  | Blackwater Cove |
-| `SWAMP_OF_SORROWS` | 8 (0x08) |  |  | Swamp of Sorrows |
-| `NORTHSHIRE_VALLEY` | 9 (0x09) |  |  | Northshire Valley |
-| `DUSKWOOD` | 10 (0x0A) |  |  | Duskwood |
-| `WETLANDS` | 11 (0x0B) |  |  | Wetlands |
-| `ELWYNN_FOREST` | 12 (0x0C) |  |  | Elwynn Forest |
-| `THE_WORLD_TREE` | 13 (0x0D) |  |  | The World Tree |
-| `DUROTAR` | 14 (0x0E) |  |  | Durotar |
-| `DUSTWALLOW_MARSH` | 15 (0x0F) |  |  | Dustwallow Marsh |
-| `AZSHARA` | 16 (0x10) |  |  | Azshara |
-| `THE_BARRENS` | 17 (0x11) |  |  | The Barrens |
-| `CRYSTAL_LAKE` | 18 (0x12) |  |  | Crystal Lake |
-| `ZUL_GURUB0` | 19 (0x13) |  |  | Zul'Gurub |
-| `MOONBROOK` | 20 (0x14) |  |  | Moonbrook |
-| `KUL_TIRAS` | 21 (0x15) |  |  | Kul Tiras |
-| `PROGRAMMER_ISLE` | 22 (0x16) |  |  | Programmer Isle |
-| `NORTHSHIRE_RIVER` | 23 (0x17) |  |  | Northshire River |
-| `NORTHSHIRE_ABBEY` | 24 (0x18) |  |  | Northshire Abbey |
-| `BLACKROCK_MOUNTAIN0` | 25 (0x19) |  |  | Blackrock Mountain |
-| `LIGHTHOUSE` | 26 (0x1A) |  |  | Lighthouse |
-| `WESTERN_PLAGUELANDS` | 28 (0x1C) |  |  | Western Plaguelands |
-| `NINE` | 30 (0x1E) |  |  | Nine |
-| `THE_CEMETARY` | 32 (0x20) |  |  | The Cemetary |
-| `STRANGLETHORN_VALE` | 33 (0x21) |  |  | Stranglethorn Vale |
-| `ECHO_RIDGE_MINE` | 34 (0x22) |  |  | Echo Ridge Mine |
-| `BOOTY_BAY` | 35 (0x23) |  |  | Booty Bay |
-| `ALTERAC_MOUNTAINS` | 36 (0x24) |  |  | Alterac Mountains |
-| `LAKE_NAZFERITI` | 37 (0x25) |  |  | Lake Nazferiti |
-| `LOCH_MODAN` | 38 (0x26) |  |  | Loch Modan |
-| `WESTFALL0` | 40 (0x28) |  |  | Westfall |
-| `DEADWIND_PASS` | 41 (0x29) |  |  | Deadwind Pass |
-| `DARKSHIRE` | 42 (0x2A) |  |  | Darkshire |
-| `WILD_SHORE` | 43 (0x2B) |  |  | Wild Shore |
-| `REDRIDGE_MOUNTAINS` | 44 (0x2C) |  |  | Redridge Mountains |
-| `ARATHI_HIGHLANDS` | 45 (0x2D) |  |  | Arathi Highlands |
-| `BURNING_STEPPES` | 46 (0x2E) |  |  | Burning Steppes |
-| `THE_HINTERLANDS` | 47 (0x2F) |  |  | The Hinterlands |
-| `DEAD_MANS_HOLE` | 49 (0x31) |  |  | Dead Man's Hole |
-| `SEARING_GORGE` | 51 (0x33) |  |  | Searing Gorge |
-| `THIEVES_CAMP` | 53 (0x35) |  |  | Thieves Camp |
-| `JASPERLODE_MINE` | 54 (0x36) |  |  | Jasperlode Mine |
-| `VALLEY_OF_HEROES_UNUSED` | 55 (0x37) |  |  | Valley of Heroes UNUSED |
-| `HEROES_VIGIL` | 56 (0x38) |  |  | Heroes' Vigil |
-| `FARGODEEP_MINE` | 57 (0x39) |  |  | Fargodeep Mine |
-| `NORTHSHIRE_VINEYARDS` | 59 (0x3B) |  |  | Northshire Vineyards |
-| `FORESTS_EDGE` | 60 (0x3C) |  |  | Forest's Edge |
-| `THUNDER_FALLS` | 61 (0x3D) |  |  | Thunder Falls |
-| `BRACKWELL_PUMPKIN_PATCH` | 62 (0x3E) |  |  | Brackwell Pumpkin Patch |
-| `THE_STONEFIELD_FARM` | 63 (0x3F) |  |  | The Stonefield Farm |
-| `THE_MACLURE_VINEYARDS` | 64 (0x40) |  |  | The Maclure Vineyards |
-| `ON_MAP_DUNGEON0` | 65 (0x41) |  |  | ***On Map Dungeon*** |
-| `ON_MAP_DUNGEON1` | 66 (0x42) |  |  | ***On Map Dungeon*** |
-| `ON_MAP_DUNGEON2` | 67 (0x43) |  |  | ***On Map Dungeon*** |
-| `LAKE_EVERSTILL` | 68 (0x44) |  |  | Lake Everstill |
-| `LAKESHIRE` | 69 (0x45) |  |  | Lakeshire |
-| `STONEWATCH` | 70 (0x46) |  |  | Stonewatch |
-| `STONEWATCH_FALLS` | 71 (0x47) |  |  | Stonewatch Falls |
-| `THE_DARK_PORTAL` | 72 (0x48) |  |  | The Dark Portal |
-| `THE_TAINTED_SCAR` | 73 (0x49) |  |  | The Tainted Scar |
-| `POOL_OF_TEARS` | 74 (0x4A) |  |  | Pool of Tears |
-| `STONARD` | 75 (0x4B) |  |  | Stonard |
-| `FALLOW_SANCTUARY` | 76 (0x4C) |  |  | Fallow Sanctuary |
-| `ANVILMAR` | 77 (0x4D) |  |  | Anvilmar |
-| `STORMWIND_MOUNTAINS` | 80 (0x50) |  |  | Stormwind Mountains |
-| `JEFF_NE_QUADRANT_CHANGED` | 81 (0x51) |  |  | Jeff NE Quadrant Changed |
-| `JEFF_NW_QUADRANT` | 82 (0x52) |  |  | Jeff NW Quadrant |
-| `JEFF_SE_QUADRANT` | 83 (0x53) |  |  | Jeff SE Quadrant |
-| `JEFF_SW_QUADRANT` | 84 (0x54) |  |  | Jeff SW Quadrant |
-| `TIRISFAL_GLADES` | 85 (0x55) |  |  | Tirisfal Glades |
-| `STONE_CAIRN_LAKE` | 86 (0x56) |  |  | Stone Cairn Lake |
-| `GOLDSHIRE` | 87 (0x57) |  |  | Goldshire |
-| `EASTVALE_LOGGING_CAMP` | 88 (0x58) |  |  | Eastvale Logging Camp |
-| `MIRROR_LAKE_ORCHARD` | 89 (0x59) |  |  | Mirror Lake Orchard |
-| `TOWER_OF_AZORA` | 91 (0x5B) |  |  | Tower of Azora |
-| `MIRROR_LAKE` | 92 (0x5C) |  |  | Mirror Lake |
-| `VUL_GOL_OGRE_MOUND` | 93 (0x5D) |  |  | Vul'Gol Ogre Mound |
-| `RAVEN_HILL` | 94 (0x5E) |  |  | Raven Hill |
-| `REDRIDGE_CANYONS` | 95 (0x5F) |  |  | Redridge Canyons |
-| `TOWER_OF_ILGALAR` | 96 (0x60) |  |  | Tower of Ilgalar |
-| `ALTHERS_MILL` | 97 (0x61) |  |  | Alther's Mill |
-| `RETHBAN_CAVERNS` | 98 (0x62) |  |  | Rethban Caverns |
-| `REBEL_CAMP` | 99 (0x63) |  |  | Rebel Camp |
-| `NESINGWARYS_EXPEDITION` | 100 (0x64) |  |  | Nesingwary's Expedition |
-| `KURZENS_COMPOUND` | 101 (0x65) |  |  | Kurzen's Compound |
-| `RUINS_OF_ZUL_KUNDA` | 102 (0x66) |  |  | Ruins of Zul'Kunda |
-| `RUINS_OF_ZUL_MAMWE` | 103 (0x67) |  |  | Ruins of Zul'Mamwe |
-| `THE_VILE_REEF` | 104 (0x68) |  |  | The Vile Reef |
-| `MOSH_OGG_OGRE_MOUND` | 105 (0x69) |  |  | Mosh'Ogg Ogre Mound |
-| `THE_STOCKPILE` | 106 (0x6A) |  |  | The Stockpile |
-| `SALDEANS_FARM` | 107 (0x6B) |  |  | Saldean's Farm |
-| `SENTINEL_HILL` | 108 (0x6C) |  |  | Sentinel Hill |
-| `FURLBROWS_PUMPKIN_FARM` | 109 (0x6D) |  |  | Furlbrow's Pumpkin Farm |
-| `JANGOLODE_MINE` | 111 (0x6F) |  |  | Jangolode Mine |
-| `GOLD_COAST_QUARRY` | 113 (0x71) |  |  | Gold Coast Quarry |
-| `WESTFALL_LIGHTHOUSE` | 115 (0x73) |  |  | Westfall Lighthouse |
-| `MISTY_VALLEY` | 116 (0x74) |  |  | Misty Valley |
-| `GROM_GOL_BASE_CAMP` | 117 (0x75) |  |  | Grom'gol Base Camp |
-| `WHELGARS_EXCAVATION_SITE` | 118 (0x76) |  |  | Whelgar's Excavation Site |
-| `WESTBROOK_GARRISON` | 120 (0x78) |  |  | Westbrook Garrison |
-| `TRANQUIL_GARDENS_CEMETERY` | 121 (0x79) |  |  | Tranquil Gardens Cemetery |
-| `ZUULDAIA_RUINS` | 122 (0x7A) |  |  | Zuuldaia Ruins |
-| `BAL_LAL_RUINS` | 123 (0x7B) |  |  | Bal'lal Ruins |
-| `KAL_AI_RUINS` | 125 (0x7D) |  |  | Kal'ai Ruins |
-| `TKASHI_RUINS` | 126 (0x7E) |  |  | Tkashi Ruins |
-| `BALIA_MAH_RUINS` | 127 (0x7F) |  |  | Balia'mah Ruins |
-| `ZIATAJAI_RUINS` | 128 (0x80) |  |  | Ziata'jai Ruins |
-| `MIZJAH_RUINS` | 129 (0x81) |  |  | Mizjah Ruins |
-| `SILVERPINE_FOREST` | 130 (0x82) |  |  | Silverpine Forest |
-| `KHARANOS` | 131 (0x83) |  |  | Kharanos |
-| `COLDRIDGE_VALLEY` | 132 (0x84) |  |  | Coldridge Valley |
-| `GNOMEREGAN0` | 133 (0x85) |  |  | Gnomeregan |
-| `GOL_BOLAR_QUARRY` | 134 (0x86) |  |  | Gol'Bolar Quarry |
-| `FROSTMANE_HOLD` | 135 (0x87) |  |  | Frostmane Hold |
-| `THE_GRIZZLED_DEN` | 136 (0x88) |  |  | The Grizzled Den |
-| `BREWNALL_VILLAGE` | 137 (0x89) |  |  | Brewnall Village |
-| `MISTY_PINE_REFUGE` | 138 (0x8A) |  |  | Misty Pine Refuge |
-| `EASTERN_PLAGUELANDS` | 139 (0x8B) |  |  | Eastern Plaguelands |
-| `TELDRASSIL` | 141 (0x8D) |  |  | Teldrassil |
-| `IRONBANDS_EXCAVATION_SITE` | 142 (0x8E) |  |  | Ironband's Excavation Site |
-| `MO_GROSH_STRONGHOLD` | 143 (0x8F) |  |  | Mo'grosh Stronghold |
-| `THELSAMAR` | 144 (0x90) |  |  | Thelsamar |
-| `ALGAZ_GATE` | 145 (0x91) |  |  | Algaz Gate |
-| `STONEWROUGHT_DAM` | 146 (0x92) |  |  | Stonewrought Dam |
-| `THE_FARSTRIDER_LODGE` | 147 (0x93) |  |  | The Farstrider Lodge |
-| `DARKSHORE` | 148 (0x94) |  |  | Darkshore |
-| `SILVER_STREAM_MINE` | 149 (0x95) |  |  | Silver Stream Mine |
-| `MENETHIL_HARBOR` | 150 (0x96) |  |  | Menethil Harbor |
-| `DESIGNER_ISLAND` | 151 (0x97) |  |  | Designer Island |
-| `THE_BULWARK0` | 152 (0x98) |  |  | The Bulwark |
-| `RUINS_OF_LORDAERON` | 153 (0x99) |  |  | Ruins of Lordaeron |
-| `DEATHKNELL` | 154 (0x9A) |  |  | Deathknell |
-| `NIGHT_WEBS_HOLLOW` | 155 (0x9B) |  |  | Night Web's Hollow |
-| `SOLLIDEN_FARMSTEAD` | 156 (0x9C) |  |  | Solliden Farmstead |
-| `AGAMAND_MILLS` | 157 (0x9D) |  |  | Agamand Mills |
-| `AGAMAND_FAMILY_CRYPT` | 158 (0x9E) |  |  | Agamand Family Crypt |
-| `BRILL` | 159 (0x9F) |  |  | Brill |
-| `WHISPERING_GARDENS` | 160 (0xA0) |  |  | Whispering Gardens |
-| `TERRACE_OF_REPOSE` | 161 (0xA1) |  |  | Terrace of Repose |
-| `BRIGHTWATER_LAKE` | 162 (0xA2) |  |  | Brightwater Lake |
-| `GUNTHERS_RETREAT` | 163 (0xA3) |  |  | Gunther's Retreat |
-| `GARRENS_HAUNT` | 164 (0xA4) |  |  | Garren's Haunt |
-| `BALNIR_FARMSTEAD` | 165 (0xA5) |  |  | Balnir Farmstead |
-| `COLD_HEARTH_MANOR` | 166 (0xA6) |  |  | Cold Hearth Manor |
-| `CRUSADER_OUTPOST` | 167 (0xA7) |  |  | Crusader Outpost |
-| `THE_NORTH_COAST` | 168 (0xA8) |  |  | The North Coast |
-| `WHISPERING_SHORE` | 169 (0xA9) |  |  | Whispering Shore |
-| `LORDAMERE_LAKE0` | 170 (0xAA) |  |  | Lordamere Lake |
-| `FENRIS_ISLE` | 172 (0xAC) |  |  | Fenris Isle |
-| `FAOLS_REST` | 173 (0xAD) |  |  | Faol's Rest |
-| `DOLANAAR` | 186 (0xBA) |  |  | Dolanaar |
-| `DARNASSUS_UNUSED` | 187 (0xBB) |  |  | Darnassus UNUSED |
-| `SHADOWGLEN` | 188 (0xBC) |  |  | Shadowglen |
-| `STEELGRILLS_DEPOT` | 189 (0xBD) |  |  | Steelgrill's Depot |
-| `HEARTHGLEN` | 190 (0xBE) |  |  | Hearthglen |
-| `NORTHRIDGE_LUMBER_CAMP` | 192 (0xC0) |  |  | Northridge Lumber Camp |
-| `RUINS_OF_ANDORHAL` | 193 (0xC1) |  |  | Ruins of Andorhal |
-| `SCHOOL_OF_NECROMANCY` | 195 (0xC3) |  |  | School of Necromancy |
-| `UTHERS_TOMB` | 196 (0xC4) |  |  | Uther's Tomb |
-| `SORROW_HILL` | 197 (0xC5) |  |  | Sorrow Hill |
-| `THE_WEEPING_CAVE` | 198 (0xC6) |  |  | The Weeping Cave |
-| `FELSTONE_FIELD` | 199 (0xC7) |  |  | Felstone Field |
-| `DALSONS_TEARS` | 200 (0xC8) |  |  | Dalson's Tears |
-| `GAHRRONS_WITHERING` | 201 (0xC9) |  |  | Gahrron's Withering |
-| `THE_WRITHING_HAUNT` | 202 (0xCA) |  |  | The Writhing Haunt |
-| `MARDENHOLDE_KEEP` | 203 (0xCB) |  |  | Mardenholde Keep |
-| `PYREWOOD_VILLAGE` | 204 (0xCC) |  |  | Pyrewood Village |
-| `DUN_MODR` | 205 (0xCD) |  |  | Dun Modr |
-| `WESTFALL1` | 206 (0xCE) |  |  | Westfall |
-| `THE_GREAT_SEA0` | 207 (0xCF) |  |  | The Great Sea |
-| `UNUSED_IRONCLADCOVE` | 208 (0xD0) |  |  | Unused Ironcladcove |
-| `SHADOWFANG_KEEP0` | 209 (0xD1) |  |  | Shadowfang Keep |
-| `ON_MAP_DUNGEON3` | 210 (0xD2) |  |  | ***On Map Dungeon*** |
-| `ICEFLOW_LAKE` | 211 (0xD3) |  |  | Iceflow Lake |
-| `HELMS_BED_LAKE` | 212 (0xD4) |  |  | Helm's Bed Lake |
-| `DEEP_ELEM_MINE` | 213 (0xD5) |  |  | Deep Elem Mine |
-| `THE_GREAT_SEA1` | 214 (0xD6) |  |  | The Great Sea |
-| `MULGORE` | 215 (0xD7) |  |  | Mulgore |
-| `ALEXSTON_FARMSTEAD` | 219 (0xDB) |  |  | Alexston Farmstead |
-| `RED_CLOUD_MESA` | 220 (0xDC) |  |  | Red Cloud Mesa |
-| `CAMP_NARACHE` | 221 (0xDD) |  |  | Camp Narache |
-| `BLOODHOOF_VILLAGE` | 222 (0xDE) |  |  | Bloodhoof Village |
-| `STONEBULL_LAKE` | 223 (0xDF) |  |  | Stonebull Lake |
-| `RAVAGED_CARAVAN` | 224 (0xE0) |  |  | Ravaged Caravan |
-| `RED_ROCKS` | 225 (0xE1) |  |  | Red Rocks |
-| `THE_SKITTERING_DARK` | 226 (0xE2) |  |  | The Skittering Dark |
-| `VALGANS_FIELD` | 227 (0xE3) |  |  | Valgan's Field |
-| `THE_SEPULCHER` | 228 (0xE4) |  |  | The Sepulcher |
-| `OLSENS_FARTHING` | 229 (0xE5) |  |  | Olsen's Farthing |
-| `THE_GREYMANE_WALL` | 230 (0xE6) |  |  | The Greymane Wall |
-| `BERENS_PERIL` | 231 (0xE7) |  |  | Beren's Peril |
-| `THE_DAWNING_ISLES` | 232 (0xE8) |  |  | The Dawning Isles |
-| `AMBERMILL` | 233 (0xE9) |  |  | Ambermill |
-| `FENRIS_KEEP` | 235 (0xEB) |  |  | Fenris Keep |
-| `SHADOWFANG_KEEP1` | 236 (0xEC) |  |  | Shadowfang Keep |
-| `THE_DECREPIT_FERRY` | 237 (0xED) |  |  | The Decrepit Ferry |
-| `MALDENS_ORCHARD` | 238 (0xEE) |  |  | Malden's Orchard |
-| `THE_IVAR_PATCH` | 239 (0xEF) |  |  | The Ivar Patch |
-| `THE_DEAD_FIELD` | 240 (0xF0) |  |  | The Dead Field |
-| `THE_ROTTING_ORCHARD` | 241 (0xF1) |  |  | The Rotting Orchard |
-| `BRIGHTWOOD_GROVE` | 242 (0xF2) |  |  | Brightwood Grove |
-| `FORLORN_ROWE` | 243 (0xF3) |  |  | Forlorn Rowe |
-| `THE_WHIPPLE_ESTATE` | 244 (0xF4) |  |  | The Whipple Estate |
-| `THE_YORGEN_FARMSTEAD` | 245 (0xF5) |  |  | The Yorgen Farmstead |
-| `THE_CAULDRON` | 246 (0xF6) |  |  | The Cauldron |
-| `GRIMESILT_DIG_SITE` | 247 (0xF7) |  |  | Grimesilt Dig Site |
-| `DREADMAUL_ROCK` | 249 (0xF9) |  |  | Dreadmaul Rock |
-| `RUINS_OF_THAURISSAN` | 250 (0xFA) |  |  | Ruins of Thaurissan |
-| `FLAME_CREST` | 251 (0xFB) |  |  | Flame Crest |
-| `BLACKROCK_STRONGHOLD` | 252 (0xFC) |  |  | Blackrock Stronghold |
-| `THE_PILLAR_OF_ASH` | 253 (0xFD) |  |  | The Pillar of Ash |
-| `BLACKROCK_MOUNTAIN1` | 254 (0xFE) |  |  | Blackrock Mountain |
-| `ALTAR_OF_STORMS0` | 255 (0xFF) |  |  | Altar of Storms |
-| `ALDRASSIL` | 256 (0x100) |  |  | Aldrassil |
-| `SHADOWTHREAD_CAVE` | 257 (0x101) |  |  | Shadowthread Cave |
-| `FEL_ROCK` | 258 (0x102) |  |  | Fel Rock |
-| `LAKE_AL_AMETH` | 259 (0x103) |  |  | Lake Al'Ameth |
-| `STARBREEZE_VILLAGE` | 260 (0x104) |  |  | Starbreeze Village |
-| `GNARLPINE_HOLD` | 261 (0x105) |  |  | Gnarlpine Hold |
-| `BAN_ETHIL_BARROW_DEN` | 262 (0x106) |  |  | Ban'ethil Barrow Den |
-| `THE_CLEFT` | 263 (0x107) |  |  | The Cleft |
-| `THE_ORACLE_GLADE` | 264 (0x108) |  |  | The Oracle Glade |
-| `WELLSPRING_RIVER` | 265 (0x109) |  |  | Wellspring River |
-| `WELLSPRING_LAKE` | 266 (0x10A) |  |  | Wellspring Lake |
-| `HILLSBRAD_FOOTHILLS` | 267 (0x10B) |  |  | Hillsbrad Foothills |
-| `AZSHARA_CRATER` | 268 (0x10C) |  |  | Azshara Crater |
-| `DUN_ALGAZ0` | 269 (0x10D) |  |  | Dun Algaz |
-| `SOUTHSHORE0` | 271 (0x10F) |  |  | Southshore |
-| `TARREN_MILL0` | 272 (0x110) |  |  | Tarren Mill |
-| `DURNHOLDE_KEEP0` | 275 (0x113) |  |  | Durnholde Keep |
-| `UNUSED_STONEWROUGHT_PASS` | 276 (0x114) |  |  | UNUSED Stonewrought Pass |
-| `THE_FOOTHILL_CAVERNS` | 277 (0x115) |  |  | The Foothill Caverns |
-| `LORDAMERE_INTERNMENT_CAMP` | 278 (0x116) |  |  | Lordamere Internment Camp |
-| `DALARAN` | 279 (0x117) |  |  | Dalaran |
-| `STRAHNBRAD` | 280 (0x118) |  |  | Strahnbrad |
-| `RUINS_OF_ALTERAC` | 281 (0x119) |  |  | Ruins of Alterac |
-| `CRUSHRIDGE_HOLD` | 282 (0x11A) |  |  | Crushridge Hold |
-| `SLAUGHTER_HOLLOW` | 283 (0x11B) |  |  | Slaughter Hollow |
-| `THE_UPLANDS` | 284 (0x11C) |  |  | The Uplands |
-| `SOUTHPOINT_TOWER0` | 285 (0x11D) |  |  | Southpoint Tower |
-| `HILLSBRAD_FIELDS0` | 286 (0x11E) |  |  | Hillsbrad Fields |
-| `HILLSBRAD` | 287 (0x11F) |  |  | Hillsbrad |
-| `AZURELODE_MINE0` | 288 (0x120) |  |  | Azurelode Mine |
-| `NETHANDER_STEAD0` | 289 (0x121) |  |  | Nethander Stead |
-| `DUN_GAROK0` | 290 (0x122) |  |  | Dun Garok |
-| `THORADINS_WALL0` | 293 (0x125) |  |  | Thoradin's Wall |
-| `EASTERN_STRAND0` | 294 (0x126) |  |  | Eastern Strand |
-| `WESTERN_STRAND0` | 295 (0x127) |  |  | Western Strand |
-| `SOUTH_SEAS_UNUSED` | 296 (0x128) |  |  | South Seas UNUSED |
-| `JAGUERO_ISLE` | 297 (0x129) |  |  | Jaguero Isle |
-| `BARADIN_BAY` | 298 (0x12A) |  |  | Baradin Bay |
-| `MENETHIL_BAY` | 299 (0x12B) |  |  | Menethil Bay |
-| `MISTY_REED_STRAND` | 300 (0x12C) |  |  | Misty Reed Strand |
-| `THE_SAVAGE_COAST` | 301 (0x12D) |  |  | The Savage Coast |
-| `THE_CRYSTAL_SHORE` | 302 (0x12E) |  |  | The Crystal Shore |
-| `SHELL_BEACH` | 303 (0x12F) |  |  | Shell Beach |
-| `NORTH_TIDES_RUN` | 305 (0x131) |  |  | North Tide's Run |
-| `SOUTH_TIDES_RUN` | 306 (0x132) |  |  | South Tide's Run |
-| `THE_OVERLOOK_CLIFFS` | 307 (0x133) |  |  | The Overlook Cliffs |
-| `THE_FORBIDDING_SEA0` | 308 (0x134) |  |  | The Forbidding Sea |
-| `IRONBEARDS_TOMB` | 309 (0x135) |  |  | Ironbeard's Tomb |
-| `CRYSTALVEIN_MINE` | 310 (0x136) |  |  | Crystalvein Mine |
-| `RUINS_OF_ABORAZ` | 311 (0x137) |  |  | Ruins of Aboraz |
-| `JANEIROS_POINT` | 312 (0x138) |  |  | Janeiro's Point |
-| `NORTHFOLD_MANOR` | 313 (0x139) |  |  | Northfold Manor |
-| `GO_SHEK_FARM` | 314 (0x13A) |  |  | Go'Shek Farm |
-| `DABYRIES_FARMSTEAD` | 315 (0x13B) |  |  | Dabyrie's Farmstead |
-| `BOULDERFIST_HALL` | 316 (0x13C) |  |  | Boulderfist Hall |
-| `WITHERBARK_VILLAGE` | 317 (0x13D) |  |  | Witherbark Village |
-| `DRYWHISKER_GORGE` | 318 (0x13E) |  |  | Drywhisker Gorge |
-| `REFUGE_POINTE` | 320 (0x140) |  |  | Refuge Pointe |
-| `HAMMERFALL` | 321 (0x141) |  |  | Hammerfall |
-| `BLACKWATER_SHIPWRECKS` | 322 (0x142) |  |  | Blackwater Shipwrecks |
-| `O_BREENS_CAMP` | 323 (0x143) |  |  | O'Breen's Camp |
-| `STROMGARDE_KEEP` | 324 (0x144) |  |  | Stromgarde Keep |
-| `THE_TOWER_OF_ARATHOR` | 325 (0x145) |  |  | The Tower of Arathor |
-| `THE_SANCTUM` | 326 (0x146) |  |  | The Sanctum |
-| `FALDIRS_COVE` | 327 (0x147) |  |  | Faldir's Cove |
-| `THE_DROWNED_REEF` | 328 (0x148) |  |  | The Drowned Reef |
-| `THANDOL_SPAN0` | 330 (0x14A) |  |  | Thandol Span |
-| `ASHENVALE` | 331 (0x14B) |  |  | Ashenvale |
-| `THE_GREAT_SEA2` | 332 (0x14C) |  |  | The Great Sea |
-| `CIRCLE_OF_EAST_BINDING` | 333 (0x14D) |  |  | Circle of East Binding |
-| `CIRCLE_OF_WEST_BINDING` | 334 (0x14E) |  |  | Circle of West Binding |
-| `CIRCLE_OF_INNER_BINDING` | 335 (0x14F) |  |  | Circle of Inner Binding |
-| `CIRCLE_OF_OUTER_BINDING` | 336 (0x150) |  |  | Circle of Outer Binding |
-| `APOCRYPHANS_REST` | 337 (0x151) |  |  | Apocryphan's Rest |
-| `ANGOR_FORTRESS` | 338 (0x152) |  |  | Angor Fortress |
-| `LETHLOR_RAVINE` | 339 (0x153) |  |  | Lethlor Ravine |
-| `KARGATH` | 340 (0x154) |  |  | Kargath |
-| `CAMP_KOSH` | 341 (0x155) |  |  | Camp Kosh |
-| `CAMP_BOFF` | 342 (0x156) |  |  | Camp Boff |
-| `CAMP_WURG` | 343 (0x157) |  |  | Camp Wurg |
-| `CAMP_CAGG` | 344 (0x158) |  |  | Camp Cagg |
-| `AGMONDS_END` | 345 (0x159) |  |  | Agmond's End |
-| `HAMMERTOES_DIGSITE` | 346 (0x15A) |  |  | Hammertoe's Digsite |
-| `DUSTBELCH_GROTTO` | 347 (0x15B) |  |  | Dustbelch Grotto |
-| `AERIE_PEAK` | 348 (0x15C) |  |  | Aerie Peak |
-| `WILDHAMMER_KEEP` | 349 (0x15D) |  |  | Wildhammer Keep |
-| `QUEL_DANIL_LODGE` | 350 (0x15E) |  |  | Quel'Danil Lodge |
-| `SKULK_ROCK` | 351 (0x15F) |  |  | Skulk Rock |
-| `ZUN_WATHA` | 352 (0x160) |  |  | Zun'watha |
-| `SHADRA_ALOR` | 353 (0x161) |  |  | Shadra'Alor |
-| `JINTHA_ALOR` | 354 (0x162) |  |  | Jintha'Alor |
-| `THE_ALTAR_OF_ZUL` | 355 (0x163) |  |  | The Altar of Zul |
-| `SERADANE` | 356 (0x164) |  |  | Seradane |
-| `FERALAS` | 357 (0x165) |  |  | Feralas |
-| `BRAMBLEBLADE_RAVINE` | 358 (0x166) |  |  | Brambleblade Ravine |
-| `BAEL_MODAN` | 359 (0x167) |  |  | Bael Modan |
-| `THE_VENTURE_CO_MINE` | 360 (0x168) |  |  | The Venture Co. Mine |
-| `FELWOOD` | 361 (0x169) |  |  | Felwood |
-| `RAZOR_HILL` | 362 (0x16A) |  |  | Razor Hill |
-| `VALLEY_OF_TRIALS` | 363 (0x16B) |  |  | Valley of Trials |
-| `THE_DEN` | 364 (0x16C) |  |  | The Den |
-| `BURNING_BLADE_COVEN` | 365 (0x16D) |  |  | Burning Blade Coven |
-| `KOLKAR_CRAG` | 366 (0x16E) |  |  | Kolkar Crag |
-| `SEN_JIN_VILLAGE` | 367 (0x16F) |  |  | Sen'jin Village |
-| `ECHO_ISLES` | 368 (0x170) |  |  | Echo Isles |
-| `THUNDER_RIDGE` | 369 (0x171) |  |  | Thunder Ridge |
-| `DRYGULCH_RAVINE` | 370 (0x172) |  |  | Drygulch Ravine |
-| `DUSTWIND_CAVE` | 371 (0x173) |  |  | Dustwind Cave |
-| `TIRAGARDE_KEEP` | 372 (0x174) |  |  | Tiragarde Keep |
-| `SCUTTLE_COAST` | 373 (0x175) |  |  | Scuttle Coast |
-| `BLADEFIST_BAY` | 374 (0x176) |  |  | Bladefist Bay |
-| `DEADEYE_SHORE` | 375 (0x177) |  |  | Deadeye Shore |
-| `SOUTHFURY_RIVER0` | 377 (0x179) |  |  | Southfury River |
-| `CAMP_TAURAJO` | 378 (0x17A) |  |  | Camp Taurajo |
-| `FAR_WATCH_POST` | 379 (0x17B) |  |  | Far Watch Post |
-| `THE_CROSSROADS` | 380 (0x17C) |  |  | The Crossroads |
-| `BOULDER_LODE_MINE` | 381 (0x17D) |  |  | Boulder Lode Mine |
-| `THE_SLUDGE_FEN` | 382 (0x17E) |  |  | The Sludge Fen |
-| `THE_DRY_HILLS` | 383 (0x17F) |  |  | The Dry Hills |
-| `DREADMIST_PEAK` | 384 (0x180) |  |  | Dreadmist Peak |
-| `NORTHWATCH_HOLD` | 385 (0x181) |  |  | Northwatch Hold |
-| `THE_FORGOTTEN_POOLS` | 386 (0x182) |  |  | The Forgotten Pools |
-| `LUSHWATER_OASIS` | 387 (0x183) |  |  | Lushwater Oasis |
-| `THE_STAGNANT_OASIS` | 388 (0x184) |  |  | The Stagnant Oasis |
-| `FIELD_OF_GIANTS` | 390 (0x186) |  |  | Field of Giants |
-| `THE_MERCHANT_COAST` | 391 (0x187) |  |  | The Merchant Coast |
-| `RATCHET` | 392 (0x188) |  |  | Ratchet |
-| `DARKSPEAR_STRAND` | 393 (0x189) |  |  | Darkspear Strand |
-| `DARROWMERE_LAKE_UNUSED` | 394 (0x18A) |  |  | Darrowmere Lake UNUSED |
-| `CAER_DARROW_UNUSED` | 395 (0x18B) |  |  | Caer Darrow UNUSED |
-| `WINTERHOOF_WATER_WELL` | 396 (0x18C) |  |  | Winterhoof Water Well |
-| `THUNDERHORN_WATER_WELL` | 397 (0x18D) |  |  | Thunderhorn Water Well |
-| `WILDMANE_WATER_WELL` | 398 (0x18E) |  |  | Wildmane Water Well |
-| `SKYLINE_RIDGE` | 399 (0x18F) |  |  | Skyline Ridge |
-| `THOUSAND_NEEDLES` | 400 (0x190) |  |  | Thousand Needles |
-| `THE_TIDUS_STAIR` | 401 (0x191) |  |  | The Tidus Stair |
-| `SHADY_REST_INN` | 403 (0x193) |  |  | Shady Rest Inn |
-| `BAEL_DUN_DIGSITE` | 404 (0x194) |  |  | Bael'dun Digsite |
-| `DESOLACE` | 405 (0x195) |  |  | Desolace |
-| `STONETALON_MOUNTAINS` | 406 (0x196) |  |  | Stonetalon Mountains |
-| `ORGRIMMAR_UNUSED` | 407 (0x197) |  |  | Orgrimmar UNUSED |
-| `GILLIJIMS_ISLE` | 408 (0x198) |  |  | Gillijim's Isle |
-| `ISLAND_OF_DOCTOR_LAPIDIS` | 409 (0x199) |  |  | Island of Doctor Lapidis |
-| `RAZORWIND_CANYON` | 410 (0x19A) |  |  | Razorwind Canyon |
-| `BATHRANS_HAUNT` | 411 (0x19B) |  |  | Bathran's Haunt |
-| `THE_RUINS_OF_ORDIL_ARAN` | 412 (0x19C) |  |  | The Ruins of Ordil'Aran |
-| `MAESTRAS_POST` | 413 (0x19D) |  |  | Maestra's Post |
-| `THE_ZORAM_STRAND` | 414 (0x19E) |  |  | The Zoram Strand |
-| `ASTRANAAR` | 415 (0x19F) |  |  | Astranaar |
-| `THE_SHRINE_OF_AESSINA` | 416 (0x1A0) |  |  | The Shrine of Aessina |
-| `FIRE_SCAR_SHRINE` | 417 (0x1A1) |  |  | Fire Scar Shrine |
-| `THE_RUINS_OF_STARDUST` | 418 (0x1A2) |  |  | The Ruins of Stardust |
-| `THE_HOWLING_VALE` | 419 (0x1A3) |  |  | The Howling Vale |
-| `SILVERWIND_REFUGE` | 420 (0x1A4) |  |  | Silverwind Refuge |
-| `MYSTRAL_LAKE` | 421 (0x1A5) |  |  | Mystral Lake |
-| `FALLEN_SKY_LAKE` | 422 (0x1A6) |  |  | Fallen Sky Lake |
-| `IRIS_LAKE` | 424 (0x1A8) |  |  | Iris Lake |
-| `MOONWELL` | 425 (0x1A9) |  |  | Moonwell |
-| `RAYNEWOOD_RETREAT` | 426 (0x1AA) |  |  | Raynewood Retreat |
-| `THE_SHADY_NOOK` | 427 (0x1AB) |  |  | The Shady Nook |
-| `NIGHT_RUN` | 428 (0x1AC) |  |  | Night Run |
-| `XAVIAN` | 429 (0x1AD) |  |  | Xavian |
-| `SATYRNAAR` | 430 (0x1AE) |  |  | Satyrnaar |
-| `SPLINTERTREE_POST` | 431 (0x1AF) |  |  | Splintertree Post |
-| `THE_DOR_DANIL_BARROW_DEN` | 432 (0x1B0) |  |  | The Dor'Danil Barrow Den |
-| `FALFARREN_RIVER` | 433 (0x1B1) |  |  | Falfarren River |
-| `FELFIRE_HILL` | 434 (0x1B2) |  |  | Felfire Hill |
-| `DEMON_FALL_CANYON` | 435 (0x1B3) |  |  | Demon Fall Canyon |
-| `DEMON_FALL_RIDGE` | 436 (0x1B4) |  |  | Demon Fall Ridge |
-| `WARSONG_LUMBER_CAMP` | 437 (0x1B5) |  |  | Warsong Lumber Camp |
-| `BOUGH_SHADOW` | 438 (0x1B6) |  |  | Bough Shadow |
-| `THE_SHIMMERING_FLATS` | 439 (0x1B7) |  |  | The Shimmering Flats |
-| `TANARIS` | 440 (0x1B8) |  |  | Tanaris |
-| `LAKE_FALATHIM` | 441 (0x1B9) |  |  | Lake Falathim |
-| `AUBERDINE` | 442 (0x1BA) |  |  | Auberdine |
-| `RUINS_OF_MATHYSTRA` | 443 (0x1BB) |  |  | Ruins of Mathystra |
-| `TOWER_OF_ALTHALAXX` | 444 (0x1BC) |  |  | Tower of Althalaxx |
-| `CLIFFSPRING_FALLS` | 445 (0x1BD) |  |  | Cliffspring Falls |
-| `BASHAL_ARAN` | 446 (0x1BE) |  |  | Bashal'Aran |
-| `AMETH_ARAN` | 447 (0x1BF) |  |  | Ameth'Aran |
-| `GROVE_OF_THE_ANCIENTS` | 448 (0x1C0) |  |  | Grove of the Ancients |
-| `THE_MASTERS_GLAIVE` | 449 (0x1C1) |  |  | The Master's Glaive |
-| `REMTRAVELS_EXCAVATION` | 450 (0x1C2) |  |  | Remtravel's Excavation |
-| `MISTS_EDGE` | 452 (0x1C4) |  |  | Mist's Edge |
-| `THE_LONG_WASH` | 453 (0x1C5) |  |  | The Long Wash |
-| `WILDBEND_RIVER` | 454 (0x1C6) |  |  | Wildbend River |
-| `BLACKWOOD_DEN` | 455 (0x1C7) |  |  | Blackwood Den |
-| `CLIFFSPRING_RIVER` | 456 (0x1C8) |  |  | Cliffspring River |
-| `THE_VEILED_SEA0` | 457 (0x1C9) |  |  | The Veiled Sea |
-| `GOLD_ROAD` | 458 (0x1CA) |  |  | Gold Road |
-| `SCARLET_WATCH_POST` | 459 (0x1CB) |  |  | Scarlet Watch Post |
-| `SUN_ROCK_RETREAT` | 460 (0x1CC) |  |  | Sun Rock Retreat |
-| `WINDSHEAR_CRAG` | 461 (0x1CD) |  |  | Windshear Crag |
-| `CRAGPOOL_LAKE` | 463 (0x1CF) |  |  | Cragpool Lake |
-| `MIRKFALLON_LAKE` | 464 (0x1D0) |  |  | Mirkfallon Lake |
-| `THE_CHARRED_VALE` | 465 (0x1D1) |  |  | The Charred Vale |
-| `VALLEY_OF_THE_BLOODFURIES` | 466 (0x1D2) |  |  | Valley of the Bloodfuries |
-| `STONETALON_PEAK` | 467 (0x1D3) |  |  | Stonetalon Peak |
-| `THE_TALON_DEN` | 468 (0x1D4) |  |  | The Talon Den |
-| `GREATWOOD_VALE` | 469 (0x1D5) |  |  | Greatwood Vale |
-| `THUNDER_BLUFF_UNUSED` | 470 (0x1D6) |  |  | Thunder Bluff UNUSED |
-| `BRAVE_WIND_MESA` | 471 (0x1D7) |  |  | Brave Wind Mesa |
-| `FIRE_STONE_MESA` | 472 (0x1D8) |  |  | Fire Stone Mesa |
-| `MANTLE_ROCK` | 473 (0x1D9) |  |  | Mantle Rock |
-| `HUNTER_RISE_UNUSED` | 474 (0x1DA) |  |  | Hunter Rise UNUSED |
-| `SPIRIT_RISE_UNUSED` | 475 (0x1DB) |  |  | Spirit RiseUNUSED |
-| `ELDER_RISE_UNUSED` | 476 (0x1DC) |  |  | Elder RiseUNUSED |
-| `RUINS_OF_JUBUWAL` | 477 (0x1DD) |  |  | Ruins of Jubuwal |
-| `POOLS_OF_ARLITHRIEN` | 478 (0x1DE) |  |  | Pools of Arlithrien |
-| `THE_RUSTMAUL_DIG_SITE` | 479 (0x1DF) |  |  | The Rustmaul Dig Site |
-| `CAMP_E_THOK` | 480 (0x1E0) |  |  | Camp E'thok |
-| `SPLITHOOF_CRAG` | 481 (0x1E1) |  |  | Splithoof Crag |
-| `HIGHPERCH` | 482 (0x1E2) |  |  | Highperch |
-| `THE_SCREECHING_CANYON` | 483 (0x1E3) |  |  | The Screeching Canyon |
-| `FREEWIND_POST` | 484 (0x1E4) |  |  | Freewind Post |
-| `THE_GREAT_LIFT0` | 485 (0x1E5) |  |  | The Great Lift |
-| `GALAK_HOLD` | 486 (0x1E6) |  |  | Galak Hold |
-| `ROGUEFEATHER_DEN` | 487 (0x1E7) |  |  | Roguefeather Den |
-| `THE_WEATHERED_NOOK` | 488 (0x1E8) |  |  | The Weathered Nook |
-| `THALANAAR` | 489 (0x1E9) |  |  | Thalanaar |
-| `UN_GORO_CRATER` | 490 (0x1EA) |  |  | Un'Goro Crater |
-| `RAZORFEN_KRAUL0` | 491 (0x1EB) |  |  | Razorfen Kraul |
-| `RAVEN_HILL_CEMETERY` | 492 (0x1EC) |  |  | Raven Hill Cemetery |
-| `MOONGLADE` | 493 (0x1ED) |  |  | Moonglade |
-| `DELETE_ME0` | 495 (0x1EF) |  |  | DELETE ME |
-| `BRACKENWALL_VILLAGE` | 496 (0x1F0) |  |  | Brackenwall Village |
-| `SWAMPLIGHT_MANOR` | 497 (0x1F1) |  |  | Swamplight Manor |
-| `BLOODFEN_BURROW` | 498 (0x1F2) |  |  | Bloodfen Burrow |
-| `DARKMIST_CAVERN` | 499 (0x1F3) |  |  | Darkmist Cavern |
-| `MOGGLE_POINT` | 500 (0x1F4) |  |  | Moggle Point |
-| `BEEZILS_WRECK` | 501 (0x1F5) |  |  | Beezil's Wreck |
-| `WITCH_HILL` | 502 (0x1F6) |  |  | Witch Hill |
-| `SENTRY_POINT` | 503 (0x1F7) |  |  | Sentry Point |
-| `NORTH_POINT_TOWER` | 504 (0x1F8) |  |  | North Point Tower |
-| `WEST_POINT_TOWER` | 505 (0x1F9) |  |  | West Point Tower |
-| `LOST_POINT` | 506 (0x1FA) |  |  | Lost Point |
-| `BLUEFEN` | 507 (0x1FB) |  |  | Bluefen |
-| `STONEMAUL_RUINS` | 508 (0x1FC) |  |  | Stonemaul Ruins |
-| `THE_DEN_OF_FLAME` | 509 (0x1FD) |  |  | The Den of Flame |
-| `THE_DRAGONMURK` | 510 (0x1FE) |  |  | The Dragonmurk |
-| `WYRMBOG` | 511 (0x1FF) |  |  | Wyrmbog |
-| `ONYXIAS_LAIR_UNUSED` | 512 (0x200) |  |  | Onyxia's Lair UNUSED |
-| `THERAMORE_ISLE` | 513 (0x201) |  |  | Theramore Isle |
-| `FOOTHOLD_CITADEL` | 514 (0x202) |  |  | Foothold Citadel |
-| `IRONCLAD_PRISON` | 515 (0x203) |  |  | Ironclad Prison |
-| `DUSTWALLOW_BAY` | 516 (0x204) |  |  | Dustwallow Bay |
-| `TIDEFURY_COVE` | 517 (0x205) |  |  | Tidefury Cove |
-| `DREADMURK_SHORE` | 518 (0x206) |  |  | Dreadmurk Shore |
-| `ADDLES_STEAD` | 536 (0x218) |  |  | Addle's Stead |
-| `FIRE_PLUME_RIDGE` | 537 (0x219) |  |  | Fire Plume Ridge |
-| `LAKKARI_TAR_PITS` | 538 (0x21A) |  |  | Lakkari Tar Pits |
-| `TERROR_RUN` | 539 (0x21B) |  |  | Terror Run |
-| `THE_SLITHERING_SCAR` | 540 (0x21C) |  |  | The Slithering Scar |
-| `MARSHALS_REFUGE` | 541 (0x21D) |  |  | Marshal's Refuge |
-| `FUNGAL_ROCK` | 542 (0x21E) |  |  | Fungal Rock |
-| `GOLAKKA_HOT_SPRINGS` | 543 (0x21F) |  |  | Golakka Hot Springs |
-| `THE_LOCH` | 556 (0x22C) |  |  | The Loch |
-| `BEGGARS_HAUNT` | 576 (0x240) |  |  | Beggar's Haunt |
-| `KODO_GRAVEYARD` | 596 (0x254) |  |  | Kodo Graveyard |
-| `GHOST_WALKER_POST` | 597 (0x255) |  |  | Ghost Walker Post |
-| `SAR_THERIS_STRAND` | 598 (0x256) |  |  | Sar'theris Strand |
-| `THUNDER_AXE_FORTRESS` | 599 (0x257) |  |  | Thunder Axe Fortress |
-| `BOLGANS_HOLE` | 600 (0x258) |  |  | Bolgan's Hole |
-| `MANNOROC_COVEN` | 602 (0x25A) |  |  | Mannoroc Coven |
-| `SARGERON` | 603 (0x25B) |  |  | Sargeron |
-| `MAGRAM_VILLAGE` | 604 (0x25C) |  |  | Magram Village |
-| `GELKIS_VILLAGE` | 606 (0x25E) |  |  | Gelkis Village |
-| `VALLEY_OF_SPEARS` | 607 (0x25F) |  |  | Valley of Spears |
-| `NIJELS_POINT` | 608 (0x260) |  |  | Nijel's Point |
-| `KOLKAR_VILLAGE` | 609 (0x261) |  |  | Kolkar Village |
-| `HYJAL` | 616 (0x268) |  |  | Hyjal |
-| `WINTERSPRING` | 618 (0x26A) |  |  | Winterspring |
-| `BLACKWOLF_RIVER` | 636 (0x27C) |  |  | Blackwolf River |
-| `KODO_ROCK` | 637 (0x27D) |  |  | Kodo Rock |
-| `HIDDEN_PATH` | 638 (0x27E) |  |  | Hidden Path |
-| `SPIRIT_ROCK` | 639 (0x27F) |  |  | Spirit Rock |
-| `SHRINE_OF_THE_DORMANT_FLAME` | 640 (0x280) |  |  | Shrine of the Dormant Flame |
-| `LAKE_ELUNE_ARA` | 656 (0x290) |  |  | Lake Elune'ara |
-| `THE_HARBORAGE` | 657 (0x291) |  |  | The Harborage |
-| `OUTLAND` | 676 (0x2A4) |  |  | Outland |
-| `CRAFTSMENS_TERRACE_UNUSED` | 696 (0x2B8) |  |  | Craftsmen's Terrace UNUSED |
-| `TRADESMENS_TERRACE_UNUSED` | 697 (0x2B9) |  |  | Tradesmen's Terrace UNUSED |
-| `THE_TEMPLE_GARDENS_UNUSED` | 698 (0x2BA) |  |  | The Temple Gardens UNUSED |
-| `TEMPLE_OF_ELUNE_UNUSED` | 699 (0x2BB) |  |  | Temple of Elune UNUSED |
-| `CENARION_ENCLAVE_UNUSED` | 700 (0x2BC) |  |  | Cenarion Enclave UNUSED |
-| `WARRIORS_TERRACE_UNUSED` | 701 (0x2BD) |  |  | Warrior's Terrace UNUSED |
-| `RUT_THERAN_VILLAGE` | 702 (0x2BE) |  |  | Rut'theran Village |
-| `IRONBANDS_COMPOUND` | 716 (0x2CC) |  |  | Ironband's Compound |
-| `THE_STOCKADE` | 717 (0x2CD) |  |  | The Stockade |
-| `WAILING_CAVERNS` | 718 (0x2CE) |  |  | Wailing Caverns |
-| `BLACKFATHOM_DEEPS0` | 719 (0x2CF) |  |  | Blackfathom Deeps |
-| `FRAY_ISLAND` | 720 (0x2D0) |  |  | Fray Island |
-| `GNOMEREGAN1` | 721 (0x2D1) |  |  | Gnomeregan |
-| `RAZORFEN_DOWNS0` | 722 (0x2D2) |  |  | Razorfen Downs |
-| `BAN_ETHIL_HOLLOW` | 736 (0x2E0) |  |  | Ban'ethil Hollow |
-| `SCARLET_MONASTERY` | 796 (0x31C) |  |  | Scarlet Monastery |
-| `JERODS_LANDING` | 797 (0x31D) |  |  | Jerod's Landing |
-| `RIDGEPOINT_TOWER` | 798 (0x31E) |  |  | Ridgepoint Tower |
-| `THE_DARKENED_BANK` | 799 (0x31F) |  |  | The Darkened Bank |
-| `COLDRIDGE_PASS` | 800 (0x320) |  |  | Coldridge Pass |
-| `CHILL_BREEZE_VALLEY` | 801 (0x321) |  |  | Chill Breeze Valley |
-| `SHIMMER_RIDGE` | 802 (0x322) |  |  | Shimmer Ridge |
-| `AMBERSTILL_RANCH` | 803 (0x323) |  |  | Amberstill Ranch |
-| `THE_TUNDRID_HILLS` | 804 (0x324) |  |  | The Tundrid Hills |
-| `SOUTH_GATE_PASS0` | 805 (0x325) |  |  | South Gate Pass |
-| `SOUTH_GATE_OUTPOST` | 806 (0x326) |  |  | South Gate Outpost |
-| `NORTH_GATE_PASS0` | 807 (0x327) |  |  | North Gate Pass |
-| `NORTH_GATE_OUTPOST` | 808 (0x328) |  |  | North Gate Outpost |
-| `GATES_OF_IRONFORGE` | 809 (0x329) |  |  | Gates of Ironforge |
-| `STILLWATER_POND` | 810 (0x32A) |  |  | Stillwater Pond |
-| `NIGHTMARE_VALE` | 811 (0x32B) |  |  | Nightmare Vale |
-| `VENOMWEB_VALE` | 812 (0x32C) |  |  | Venomweb Vale |
-| `THE_BULWARK1` | 813 (0x32D) |  |  | The Bulwark |
-| `SOUTHFURY_RIVER1` | 814 (0x32E) |  |  | Southfury River |
-| `SOUTHFURY_RIVER2` | 815 (0x32F) |  |  | Southfury River |
-| `RAZORMANE_GROUNDS` | 816 (0x330) |  |  | Razormane Grounds |
-| `SKULL_ROCK` | 817 (0x331) |  |  | Skull Rock |
-| `PALEMANE_ROCK` | 818 (0x332) |  |  | Palemane Rock |
-| `WINDFURY_RIDGE` | 819 (0x333) |  |  | Windfury Ridge |
-| `THE_GOLDEN_PLAINS` | 820 (0x334) |  |  | The Golden Plains |
-| `THE_ROLLING_PLAINS` | 821 (0x335) |  |  | The Rolling Plains |
-| `DUN_ALGAZ1` | 836 (0x344) |  |  | Dun Algaz |
-| `DUN_ALGAZ2` | 837 (0x345) |  |  | Dun Algaz |
-| `NORTH_GATE_PASS1` | 838 (0x346) |  |  | North Gate Pass |
-| `SOUTH_GATE_PASS1` | 839 (0x347) |  |  | South Gate Pass |
-| `TWILIGHT_GROVE` | 856 (0x358) |  |  | Twilight Grove |
-| `GM_ISLAND` | 876 (0x36C) |  |  | GM Island |
-| `DELETE_ME1` | 877 (0x36D) |  |  | Delete ME |
-| `SOUTHFURY_RIVER3` | 878 (0x36E) |  |  | Southfury River |
-| `SOUTHFURY_RIVER4` | 879 (0x36F) |  |  | Southfury River |
-| `THANDOL_SPAN1` | 880 (0x370) |  |  | Thandol Span |
-| `THANDOL_SPAN2` | 881 (0x371) |  |  | Thandol Span |
-| `PURGATION_ISLE` | 896 (0x380) |  |  | Purgation Isle |
-| `THE_JANSEN_STEAD` | 916 (0x394) |  |  | The Jansen Stead |
-| `THE_DEAD_ACRE` | 917 (0x395) |  |  | The Dead Acre |
-| `THE_MOLSEN_FARM` | 918 (0x396) |  |  | The Molsen Farm |
-| `STENDELS_POND` | 919 (0x397) |  |  | Stendel's Pond |
-| `THE_DAGGER_HILLS` | 920 (0x398) |  |  | The Dagger Hills |
-| `DEMONTS_PLACE` | 921 (0x399) |  |  | Demont's Place |
-| `THE_DUST_PLAINS` | 922 (0x39A) |  |  | The Dust Plains |
-| `STONESPLINTER_VALLEY` | 923 (0x39B) |  |  | Stonesplinter Valley |
-| `VALLEY_OF_KINGS` | 924 (0x39C) |  |  | Valley of Kings |
-| `ALGAZ_STATION` | 925 (0x39D) |  |  | Algaz Station |
-| `BUCKLEBREE_FARM` | 926 (0x39E) |  |  | Bucklebree Farm |
-| `THE_SHINING_STRAND` | 927 (0x39F) |  |  | The Shining Strand |
-| `NORTH_TIDES_HOLLOW` | 928 (0x3A0) |  |  | North Tide's Hollow |
-| `GRIZZLEPAW_RIDGE` | 936 (0x3A8) |  |  | Grizzlepaw Ridge |
-| `THE_VERDANT_FIELDS` | 956 (0x3BC) |  |  | The Verdant Fields |
-| `GADGETZAN` | 976 (0x3D0) |  |  | Gadgetzan |
-| `STEAMWHEEDLE_PORT` | 977 (0x3D1) |  |  | Steamwheedle Port |
-| `ZUL_FARRAK0` | 978 (0x3D2) |  |  | Zul'Farrak |
-| `SANDSORROW_WATCH` | 979 (0x3D3) |  |  | Sandsorrow Watch |
-| `THISTLESHRUB_VALLEY` | 980 (0x3D4) |  |  | Thistleshrub Valley |
-| `THE_GAPING_CHASM` | 981 (0x3D5) |  |  | The Gaping Chasm |
-| `THE_NOXIOUS_LAIR` | 982 (0x3D6) |  |  | The Noxious Lair |
-| `DUNEMAUL_COMPOUND` | 983 (0x3D7) |  |  | Dunemaul Compound |
-| `EASTMOON_RUINS` | 984 (0x3D8) |  |  | Eastmoon Ruins |
-| `WATERSPRING_FIELD` | 985 (0x3D9) |  |  | Waterspring Field |
-| `ZALASHJIS_DEN` | 986 (0x3DA) |  |  | Zalashji's Den |
-| `LANDS_END_BEACH` | 987 (0x3DB) |  |  | Land's End Beach |
-| `WAVESTRIDER_BEACH` | 988 (0x3DC) |  |  | Wavestrider Beach |
-| `ULDUM` | 989 (0x3DD) |  |  | Uldum |
-| `VALLEY_OF_THE_WATCHERS` | 990 (0x3DE) |  |  | Valley of the Watchers |
-| `GUNSTANS_POST` | 991 (0x3DF) |  |  | Gunstan's Post |
-| `SOUTHMOON_RUINS` | 992 (0x3E0) |  |  | Southmoon Ruins |
-| `RENDERS_CAMP` | 996 (0x3E4) |  |  | Render's Camp |
-| `RENDERS_VALLEY` | 997 (0x3E5) |  |  | Render's Valley |
-| `RENDERS_ROCK` | 998 (0x3E6) |  |  | Render's Rock |
-| `STONEWATCH_TOWER` | 999 (0x3E7) |  |  | Stonewatch Tower |
-| `GALARDELL_VALLEY` | 1000 (0x3E8) |  |  | Galardell Valley |
-| `LAKERIDGE_HIGHWAY` | 1001 (0x3E9) |  |  | Lakeridge Highway |
-| `THREE_CORNERS` | 1002 (0x3EA) |  |  | Three Corners |
-| `DIREFORGE_HILL` | 1016 (0x3F8) |  |  | Direforge Hill |
-| `RAPTOR_RIDGE` | 1017 (0x3F9) |  |  | Raptor Ridge |
-| `BLACK_CHANNEL_MARSH` | 1018 (0x3FA) |  |  | Black Channel Marsh |
-| `THE_GREEN_BELT0` | 1019 (0x3FB) |  |  | The Green Belt |
-| `MOSSHIDE_FEN` | 1020 (0x3FC) |  |  | Mosshide Fen |
-| `THELGEN_ROCK` | 1021 (0x3FD) |  |  | Thelgen Rock |
-| `BLUEGILL_MARSH` | 1022 (0x3FE) |  |  | Bluegill Marsh |
-| `SALTSPRAY_GLEN` | 1023 (0x3FF) |  |  | Saltspray Glen |
-| `SUNDOWN_MARSH` | 1024 (0x400) |  |  | Sundown Marsh |
-| `THE_GREEN_BELT1` | 1025 (0x401) |  |  | The Green Belt |
-| `ANGERFANG_ENCAMPMENT` | 1036 (0x40C) |  |  | Angerfang Encampment |
-| `GRIM_BATOL` | 1037 (0x40D) |  |  | Grim Batol |
-| `DRAGONMAW_GATES` | 1038 (0x40E) |  |  | Dragonmaw Gates |
-| `THE_LOST_FLEET` | 1039 (0x40F) |  |  | The Lost Fleet |
-| `DARROW_HILL0` | 1056 (0x420) |  |  | Darrow Hill |
-| `THORADINS_WALL1` | 1057 (0x421) |  |  | Thoradin's Wall |
-| `WEBWINDER_PATH` | 1076 (0x434) |  |  | Webwinder Path |
-| `THE_HUSHED_BANK` | 1097 (0x449) |  |  | The Hushed Bank |
-| `MANOR_MISTMANTLE` | 1098 (0x44A) |  |  | Manor Mistmantle |
-| `CAMP_MOJACHE` | 1099 (0x44B) |  |  | Camp Mojache |
-| `GRIMTOTEM_COMPOUND` | 1100 (0x44C) |  |  | Grimtotem Compound |
-| `THE_WRITHING_DEEP` | 1101 (0x44D) |  |  | The Writhing Deep |
-| `WILDWIND_LAKE` | 1102 (0x44E) |  |  | Wildwind Lake |
-| `GORDUNNI_OUTPOST` | 1103 (0x44F) |  |  | Gordunni Outpost |
-| `MOK_GORDUN` | 1104 (0x450) |  |  | Mok'Gordun |
-| `FERAL_SCAR_VALE` | 1105 (0x451) |  |  | Feral Scar Vale |
-| `FRAYFEATHER_HIGHLANDS` | 1106 (0x452) |  |  | Frayfeather Highlands |
-| `IDLEWIND_LAKE` | 1107 (0x453) |  |  | Idlewind Lake |
-| `THE_FORGOTTEN_COAST` | 1108 (0x454) |  |  | The Forgotten Coast |
-| `EAST_PILLAR` | 1109 (0x455) |  |  | East Pillar |
-| `WEST_PILLAR` | 1110 (0x456) |  |  | West Pillar |
-| `DREAM_BOUGH` | 1111 (0x457) |  |  | Dream Bough |
-| `JADEMIR_LAKE` | 1112 (0x458) |  |  | Jademir Lake |
-| `ONEIROS` | 1113 (0x459) |  |  | Oneiros |
-| `RUINS_OF_RAVENWIND` | 1114 (0x45A) |  |  | Ruins of Ravenwind |
-| `RAGE_SCAR_HOLD` | 1115 (0x45B) |  |  | Rage Scar Hold |
-| `FEATHERMOON_STRONGHOLD` | 1116 (0x45C) |  |  | Feathermoon Stronghold |
-| `RUINS_OF_SOLARSAL` | 1117 (0x45D) |  |  | Ruins of Solarsal |
-| `LOWER_WILDS_UNUSED` | 1118 (0x45E) |  |  | Lower Wilds UNUSED |
-| `THE_TWIN_COLOSSALS` | 1119 (0x45F) |  |  | The Twin Colossals |
-| `SARDOR_ISLE` | 1120 (0x460) |  |  | Sardor Isle |
-| `ISLE_OF_DREAD` | 1121 (0x461) |  |  | Isle of Dread |
-| `HIGH_WILDERNESS` | 1136 (0x470) |  |  | High Wilderness |
-| `LOWER_WILDS` | 1137 (0x471) |  |  | Lower Wilds |
-| `SOUTHERN_BARRENS` | 1156 (0x484) |  |  | Southern Barrens |
-| `SOUTHERN_GOLD_ROAD` | 1157 (0x485) |  |  | Southern Gold Road |
-| `ZUL_FARRAK1` | 1176 (0x498) |  |  | Zul'Farrak |
-| `UNUSED_ALCAZ_ISLAND` | 1196 (0x4AC) |  |  | UNUSEDAlcaz Island |
-| `TIMBERMAW_HOLD0` | 1216 (0x4C0) |  |  | Timbermaw Hold |
-| `VANNDIR_ENCAMPMENT` | 1217 (0x4C1) |  |  | Vanndir Encampment |
-| `TEST_AZSHARA` | 1218 (0x4C2) |  |  | TESTAzshara |
-| `LEGASH_ENCAMPMENT` | 1219 (0x4C3) |  |  | Legash Encampment |
-| `THALASSIAN_BASE_CAMP` | 1220 (0x4C4) |  |  | Thalassian Base Camp |
-| `RUINS_OF_ELDARATH` | 1221 (0x4C5) |  |  | Ruins of Eldarath |
-| `HETAERAS_CLUTCH` | 1222 (0x4C6) |  |  | Hetaera's Clutch |
-| `TEMPLE_OF_ZIN_MALOR` | 1223 (0x4C7) |  |  | Temple of Zin-Malor |
-| `BEARS_HEAD` | 1224 (0x4C8) |  |  | Bear's Head |
-| `URSOLAN` | 1225 (0x4C9) |  |  | Ursolan |
-| `TEMPLE_OF_ARKKORAN` | 1226 (0x4CA) |  |  | Temple of Arkkoran |
-| `BAY_OF_STORMS` | 1227 (0x4CB) |  |  | Bay of Storms |
-| `THE_SHATTERED_STRAND` | 1228 (0x4CC) |  |  | The Shattered Strand |
-| `TOWER_OF_ELDARA` | 1229 (0x4CD) |  |  | Tower of Eldara |
-| `JAGGED_REEF` | 1230 (0x4CE) |  |  | Jagged Reef |
-| `SOUTHRIDGE_BEACH` | 1231 (0x4CF) |  |  | Southridge Beach |
-| `RAVENCREST_MONUMENT` | 1232 (0x4D0) |  |  | Ravencrest Monument |
-| `FORLORN_RIDGE` | 1233 (0x4D1) |  |  | Forlorn Ridge |
-| `LAKE_MENNAR` | 1234 (0x4D2) |  |  | Lake Mennar |
-| `SHADOWSONG_SHRINE` | 1235 (0x4D3) |  |  | Shadowsong Shrine |
-| `HALDARR_ENCAMPMENT` | 1236 (0x4D4) |  |  | Haldarr Encampment |
-| `VALORMOK` | 1237 (0x4D5) |  |  | Valormok |
-| `THE_RUINED_REACHES` | 1256 (0x4E8) |  |  | The Ruined Reaches |
-| `THE_TALONDEEP_PATH0` | 1276 (0x4FC) |  |  | The Talondeep Path |
-| `THE_TALONDEEP_PATH1` | 1277 (0x4FD) |  |  | The Talondeep Path |
-| `ROCKTUSK_FARM` | 1296 (0x510) |  |  | Rocktusk Farm |
-| `JAGGEDSWINE_FARM` | 1297 (0x511) |  |  | Jaggedswine Farm |
-| `RAZORFEN_DOWNS1` | 1316 (0x524) |  |  | Razorfen Downs |
-| `LOST_RIGGER_COVE` | 1336 (0x538) |  |  | Lost Rigger Cove |
-| `ULDAMAN0` | 1337 (0x539) |  |  | Uldaman |
-| `LORDAMERE_LAKE1` | 1338 (0x53A) |  |  | Lordamere Lake |
-| `LORDAMERE_LAKE2` | 1339 (0x53B) |  |  | Lordamere Lake |
-| `GALLOWS_CORNER` | 1357 (0x54D) |  |  | Gallows' Corner |
-| `SILITHUS` | 1377 (0x561) |  |  | Silithus |
-| `EMERALD_FOREST` | 1397 (0x575) |  |  | Emerald Forest |
-| `SUNKEN_TEMPLE` | 1417 (0x589) |  |  | Sunken Temple |
-| `DREADMAUL_HOLD` | 1437 (0x59D) |  |  | Dreadmaul Hold |
-| `NETHERGARDE_KEEP` | 1438 (0x59E) |  |  | Nethergarde Keep |
-| `DREADMAUL_POST` | 1439 (0x59F) |  |  | Dreadmaul Post |
-| `SERPENTS_COIL` | 1440 (0x5A0) |  |  | Serpent's Coil |
-| `ALTAR_OF_STORMS1` | 1441 (0x5A1) |  |  | Altar of Storms |
-| `FIREWATCH_RIDGE` | 1442 (0x5A2) |  |  | Firewatch Ridge |
-| `THE_SLAG_PIT` | 1443 (0x5A3) |  |  | The Slag Pit |
-| `THE_SEA_OF_CINDERS` | 1444 (0x5A4) |  |  | The Sea of Cinders |
-| `BLACKROCK_MOUNTAIN2` | 1445 (0x5A5) |  |  | Blackrock Mountain |
-| `THORIUM_POINT` | 1446 (0x5A6) |  |  | Thorium Point |
-| `GARRISON_ARMORY` | 1457 (0x5B1) |  |  | Garrison Armory |
-| `THE_TEMPLE_OF_ATAL_HAKKAR` | 1477 (0x5C5) |  |  | The Temple of Atal'Hakkar |
-| `UNDERCITY` | 1497 (0x5D9) |  |  | Undercity |
-| `ULDAMAN1` | 1517 (0x5ED) |  |  | Uldaman |
-| `NOT_USED_DEADMINES` | 1518 (0x5EE) |  |  | Not Used Deadmines |
-| `STORMWIND_CITY` | 1519 (0x5EF) |  |  | Stormwind City |
-| `IRONFORGE` | 1537 (0x601) |  |  | Ironforge |
-| `SPLITHOOF_HOLD` | 1557 (0x615) |  |  | Splithoof Hold |
-| `THE_CAPE_OF_STRANGLETHORN` | 1577 (0x629) |  |  | The Cape of Stranglethorn |
-| `SOUTHERN_SAVAGE_COAST` | 1578 (0x62A) |  |  | Southern Savage Coast |
-| `UNUSED_THE_DEADMINES_002` | 1579 (0x62B) |  |  | Unused The Deadmines 002 |
-| `UNUSED_IRONCLAD_COVE_003` | 1580 (0x62C) |  |  | Unused Ironclad Cove 003 |
-| `THE_DEADMINES` | 1581 (0x62D) |  |  | The Deadmines |
-| `IRONCLAD_COVE` | 1582 (0x62E) |  |  | Ironclad Cove |
-| `BLACKROCK_SPIRE` | 1583 (0x62F) |  |  | Blackrock Spire |
-| `BLACKROCK_DEPTHS` | 1584 (0x630) |  |  | Blackrock Depths |
-| `RAPTOR_GROUNDS_UNUSED` | 1597 (0x63D) |  |  | Raptor Grounds UNUSED |
-| `GROL_DOM_FARM_UNUSED` | 1598 (0x63E) |  |  | Grol'dom Farm UNUSED |
-| `MORSHAN_BASE_CAMP` | 1599 (0x63F) |  |  | Mor'shan Base Camp |
-| `HONORS_STAND_UNUSED` | 1600 (0x640) |  |  | Honor's Stand UNUSED |
-| `BLACKTHORN_RIDGE_UNUSED` | 1601 (0x641) |  |  | Blackthorn Ridge UNUSED |
-| `BRAMBLESCAR_UNUSED` | 1602 (0x642) |  |  | Bramblescar UNUSED |
-| `AGAMA_GOR_UNUSED` | 1603 (0x643) |  |  | Agama'gor UNUSED |
-| `VALLEY_OF_HEROES` | 1617 (0x651) |  |  | Valley of Heroes |
-| `ORGRIMMAR` | 1637 (0x665) |  |  | Orgrimmar |
-| `THUNDER_BLUFF` | 1638 (0x666) |  |  | Thunder Bluff |
-| `ELDER_RISE` | 1639 (0x667) |  |  | Elder Rise |
-| `SPIRIT_RISE` | 1640 (0x668) |  |  | Spirit Rise |
-| `HUNTER_RISE` | 1641 (0x669) |  |  | Hunter Rise |
-| `DARNASSUS` | 1657 (0x679) |  |  | Darnassus |
-| `CENARION_ENCLAVE` | 1658 (0x67A) |  |  | Cenarion Enclave |
-| `CRAFTSMENS_TERRACE` | 1659 (0x67B) |  |  | Craftsmen's Terrace |
-| `WARRIORS_TERRACE` | 1660 (0x67C) |  |  | Warrior's Terrace |
-| `THE_TEMPLE_GARDENS` | 1661 (0x67D) |  |  | The Temple Gardens |
-| `TRADESMENS_TERRACE` | 1662 (0x67E) |  |  | Tradesmen's Terrace |
-| `GAVINS_NAZE` | 1677 (0x68D) |  |  | Gavin's Naze |
-| `SOFERAS_NAZE` | 1678 (0x68E) |  |  | Sofera's Naze |
-| `CORRAHNS_DAGGER` | 1679 (0x68F) |  |  | Corrahn's Dagger |
-| `THE_HEADLAND` | 1680 (0x690) |  |  | The Headland |
-| `MISTY_SHORE` | 1681 (0x691) |  |  | Misty Shore |
-| `DANDREDS_FOLD` | 1682 (0x692) |  |  | Dandred's Fold |
-| `GROWLESS_CAVE` | 1683 (0x693) |  |  | Growless Cave |
-| `CHILLWIND_POINT` | 1684 (0x694) |  |  | Chillwind Point |
-| `RAPTOR_GROUNDS` | 1697 (0x6A1) |  |  | Raptor Grounds |
-| `BRAMBLESCAR` | 1698 (0x6A2) |  |  | Bramblescar |
-| `THORN_HILL` | 1699 (0x6A3) |  |  | Thorn Hill |
-| `AGAMA_GOR` | 1700 (0x6A4) |  |  | Agama'gor |
-| `BLACKTHORN_RIDGE` | 1701 (0x6A5) |  |  | Blackthorn Ridge |
-| `HONORS_STAND` | 1702 (0x6A6) |  |  | Honor's Stand |
-| `THE_MORSHAN_RAMPART` | 1703 (0x6A7) |  |  | The Mor'shan Rampart |
-| `GROL_DOM_FARM` | 1704 (0x6A8) |  |  | Grol'dom Farm |
-| `RAZORFEN_KRAUL1` | 1717 (0x6B5) |  |  | Razorfen Kraul |
-| `THE_GREAT_LIFT1` | 1718 (0x6B6) |  |  | The Great Lift |
-| `MISTVALE_VALLEY` | 1737 (0x6C9) |  |  | Mistvale Valley |
-| `NEK_MANI_WELLSPRING` | 1738 (0x6CA) |  |  | Nek'mani Wellspring |
-| `BLOODSAIL_COMPOUND` | 1739 (0x6CB) |  |  | Bloodsail Compound |
-| `VENTURE_CO_BASE_CAMP` | 1740 (0x6CC) |  |  | Venture Co. Base Camp |
-| `GURUBASHI_ARENA` | 1741 (0x6CD) |  |  | Gurubashi Arena |
-| `SPIRIT_DEN` | 1742 (0x6CE) |  |  | Spirit Den |
-| `THE_CRIMSON_VEIL` | 1757 (0x6DD) |  |  | The Crimson Veil |
-| `THE_RIPTIDE` | 1758 (0x6DE) |  |  | The Riptide |
-| `THE_DAMSELS_LUCK` | 1759 (0x6DF) |  |  | The Damsel's Luck |
-| `VENTURE_CO_OPERATIONS_CENTER` | 1760 (0x6E0) |  |  | Venture Co. Operations Center |
-| `DEADWOOD_VILLAGE` | 1761 (0x6E1) |  |  | Deadwood Village |
-| `FELPAW_VILLAGE` | 1762 (0x6E2) |  |  | Felpaw Village |
-| `JAEDENAR` | 1763 (0x6E3) |  |  | Jaedenar |
-| `BLOODVENOM_RIVER` | 1764 (0x6E4) |  |  | Bloodvenom River |
-| `BLOODVENOM_FALLS` | 1765 (0x6E5) |  |  | Bloodvenom Falls |
-| `SHATTER_SCAR_VALE` | 1766 (0x6E6) |  |  | Shatter Scar Vale |
-| `IRONTREE_WOODS` | 1767 (0x6E7) |  |  | Irontree Woods |
-| `IRONTREE_CAVERN` | 1768 (0x6E8) |  |  | Irontree Cavern |
-| `TIMBERMAW_HOLD1` | 1769 (0x6E9) |  |  | Timbermaw Hold |
-| `SHADOW_HOLD` | 1770 (0x6EA) |  |  | Shadow Hold |
-| `SHRINE_OF_THE_DECEIVER` | 1771 (0x6EB) |  |  | Shrine of the Deceiver |
-| `ITHARIUSS_CAVE` | 1777 (0x6F1) |  |  | Itharius's Cave |
-| `SORROWMURK` | 1778 (0x6F2) |  |  | Sorrowmurk |
-| `DRAENIL_DUR_VILLAGE` | 1779 (0x6F3) |  |  | Draenil'dur Village |
-| `SPLINTERSPEAR_JUNCTION` | 1780 (0x6F4) |  |  | Splinterspear Junction |
-| `STAGALBOG` | 1797 (0x705) |  |  | Stagalbog |
-| `THE_SHIFTING_MIRE` | 1798 (0x706) |  |  | The Shifting Mire |
-| `STAGALBOG_CAVE` | 1817 (0x719) |  |  | Stagalbog Cave |
-| `WITHERBARK_CAVERNS` | 1837 (0x72D) |  |  | Witherbark Caverns |
-| `THORADINS_WALL2` | 1857 (0x741) |  |  | Thoradin's Wall |
-| `BOULDER_GOR` | 1858 (0x742) |  |  | Boulder'gor |
-| `VALLEY_OF_FANGS` | 1877 (0x755) |  |  | Valley of Fangs |
-| `THE_DUSTBOWL` | 1878 (0x756) |  |  | The Dustbowl |
-| `MIRAGE_FLATS` | 1879 (0x757) |  |  | Mirage Flats |
-| `FEATHERBEARDS_HOVEL` | 1880 (0x758) |  |  | Featherbeard's Hovel |
-| `SHINDIGGERS_CAMP` | 1881 (0x759) |  |  | Shindigger's Camp |
-| `PLAGUEMIST_RAVINE` | 1882 (0x75A) |  |  | Plaguemist Ravine |
-| `VALORWIND_LAKE` | 1883 (0x75B) |  |  | Valorwind Lake |
-| `AGOL_WATHA` | 1884 (0x75C) |  |  | Agol'watha |
-| `HIRI_WATHA` | 1885 (0x75D) |  |  | Hiri'watha |
-| `THE_CREEPING_RUIN` | 1886 (0x75E) |  |  | The Creeping Ruin |
-| `BOGENS_LEDGE` | 1887 (0x75F) |  |  | Bogen's Ledge |
-| `THE_MAKERS_TERRACE` | 1897 (0x769) |  |  | The Maker's Terrace |
-| `DUSTWIND_GULCH` | 1898 (0x76A) |  |  | Dustwind Gulch |
-| `SHAOL_WATHA` | 1917 (0x77D) |  |  | Shaol'watha |
-| `NOONSHADE_RUINS` | 1937 (0x791) |  |  | Noonshade Ruins |
-| `BROKEN_PILLAR` | 1938 (0x792) |  |  | Broken Pillar |
-| `ABYSSAL_SANDS` | 1939 (0x793) |  |  | Abyssal Sands |
-| `SOUTHBREAK_SHORE` | 1940 (0x794) |  |  | Southbreak Shore |
-| `CAVERNS_OF_TIME0` | 1941 (0x795) |  |  | Caverns of Time |
-| `THE_MARSHLANDS` | 1942 (0x796) |  |  | The Marshlands |
-| `IRONSTONE_PLATEAU` | 1943 (0x797) |  |  | Ironstone Plateau |
-| `BLACKCHAR_CAVE` | 1957 (0x7A5) |  |  | Blackchar Cave |
-| `TANNER_CAMP` | 1958 (0x7A6) |  |  | Tanner Camp |
-| `DUSTFIRE_VALLEY` | 1959 (0x7A7) |  |  | Dustfire Valley |
-| `ZUL_GURUB1` | 1977 (0x7B9) |  |  | Zul'Gurub |
-| `MISTY_REED_POST` | 1978 (0x7BA) |  |  | Misty Reed Post |
-| `BLOODVENOM_POST` | 1997 (0x7CD) |  |  | Bloodvenom Post |
-| `TALONBRANCH_GLADE` | 1998 (0x7CE) |  |  | Talonbranch Glade |
-| `STRATHOLME0` | 2017 (0x7E1) |  |  | Stratholme |
-| `UNUSED_SHADOWFANG_KEEP_003` | 2037 (0x7F5) |  |  | UNUSEDShadowfang Keep 003 |
-| `SCHOLOMANCE` | 2057 (0x809) |  |  | Scholomance |
-| `TWILIGHT_VALE` | 2077 (0x81D) |  |  | Twilight Vale |
-| `TWILIGHT_SHORE` | 2078 (0x81E) |  |  | Twilight Shore |
-| `ALCAZ_ISLAND` | 2079 (0x81F) |  |  | Alcaz Island |
-| `DARKCLOUD_PINNACLE` | 2097 (0x831) |  |  | Darkcloud Pinnacle |
-| `DAWNING_WOOD_CATACOMBS` | 2098 (0x832) |  |  | Dawning Wood Catacombs |
-| `STONEWATCH_KEEP` | 2099 (0x833) |  |  | Stonewatch Keep |
-| `MARAUDON` | 2100 (0x834) |  |  | Maraudon |
-| `STOUTLAGER_INN` | 2101 (0x835) |  |  | Stoutlager Inn |
-| `THUNDERBREW_DISTILLERY` | 2102 (0x836) |  |  | Thunderbrew Distillery |
-| `MENETHIL_KEEP` | 2103 (0x837) |  |  | Menethil Keep |
-| `DEEPWATER_TAVERN` | 2104 (0x838) |  |  | Deepwater Tavern |
-| `SHADOW_GRAVE` | 2117 (0x845) |  |  | Shadow Grave |
-| `BRILL_TOWN_HALL` | 2118 (0x846) |  |  | Brill Town Hall |
-| `GALLOWS_END_TAVERN` | 2119 (0x847) |  |  | Gallows' End Tavern |
-| `THE_POOLS_OF_VISION_UNUSED` | 2137 (0x859) |  |  | The Pools of VisionUNUSED |
-| `DREADMIST_DEN` | 2138 (0x85A) |  |  | Dreadmist Den |
-| `BAEL_DUN_KEEP` | 2157 (0x86D) |  |  | Bael'dun Keep |
-| `EMBERSTRIFES_DEN` | 2158 (0x86E) |  |  | Emberstrife's Den |
-| `ONYXIAS_LAIR` | 2159 (0x86F) |  |  | Onyxia's Lair |
-| `WINDSHEAR_MINE` | 2160 (0x870) |  |  | Windshear Mine |
-| `ROLANDS_DOOM` | 2161 (0x871) |  |  | Roland's Doom |
-| `BATTLE_RING` | 2177 (0x881) |  |  | Battle Ring |
-| `THE_POOLS_OF_VISION` | 2197 (0x895) |  |  | The Pools of Vision |
-| `SHADOWBREAK_RAVINE` | 2198 (0x896) |  |  | Shadowbreak Ravine |
-| `BROKEN_SPEAR_VILLAGE` | 2217 (0x8A9) |  |  | Broken Spear Village |
-| `WHITEREACH_POST` | 2237 (0x8BD) |  |  | Whitereach Post |
-| `GORNIA` | 2238 (0x8BE) |  |  | Gornia |
-| `ZANES_EYE_CRATER` | 2239 (0x8BF) |  |  | Zane's Eye Crater |
-| `MIRAGE_RACEWAY` | 2240 (0x8C0) |  |  | Mirage Raceway |
-| `FROSTSABER_ROCK` | 2241 (0x8C1) |  |  | Frostsaber Rock |
-| `THE_HIDDEN_GROVE` | 2242 (0x8C2) |  |  | The Hidden Grove |
-| `TIMBERMAW_POST` | 2243 (0x8C3) |  |  | Timbermaw Post |
-| `WINTERFALL_VILLAGE` | 2244 (0x8C4) |  |  | Winterfall Village |
-| `MAZTHORIL` | 2245 (0x8C5) |  |  | Mazthoril |
-| `FROSTFIRE_HOT_SPRINGS` | 2246 (0x8C6) |  |  | Frostfire Hot Springs |
-| `ICE_THISTLE_HILLS` | 2247 (0x8C7) |  |  | Ice Thistle Hills |
-| `DUN_MANDARR` | 2248 (0x8C8) |  |  | Dun Mandarr |
-| `FROSTWHISPER_GORGE` | 2249 (0x8C9) |  |  | Frostwhisper Gorge |
-| `OWL_WING_THICKET` | 2250 (0x8CA) |  |  | Owl Wing Thicket |
-| `LAKE_KEL_THERIL` | 2251 (0x8CB) |  |  | Lake Kel'Theril |
-| `THE_RUINS_OF_KEL_THERIL` | 2252 (0x8CC) |  |  | The Ruins of Kel'Theril |
-| `STARFALL_VILLAGE` | 2253 (0x8CD) |  |  | Starfall Village |
-| `BAN_THALLOW_BARROW_DEN` | 2254 (0x8CE) |  |  | Ban'Thallow Barrow Den |
-| `EVERLOOK` | 2255 (0x8CF) |  |  | Everlook |
-| `DARKWHISPER_GORGE` | 2256 (0x8D0) |  |  | Darkwhisper Gorge |
-| `DEEPRUN_TRAM` | 2257 (0x8D1) |  |  | Deeprun Tram |
-| `THE_FUNGAL_VALE` | 2258 (0x8D2) |  |  | The Fungal Vale |
-| `UNUSED_THE_MARRIS_STEAD` | 2259 (0x8D3) |  |  | UNUSEDThe Marris Stead |
-| `THE_MARRIS_STEAD` | 2260 (0x8D4) |  |  | The Marris Stead |
-| `THE_UNDERCROFT` | 2261 (0x8D5) |  |  | The Undercroft |
-| `DARROWSHIRE` | 2262 (0x8D6) |  |  | Darrowshire |
-| `CROWN_GUARD_TOWER` | 2263 (0x8D7) |  |  | Crown Guard Tower |
-| `CORINS_CROSSING` | 2264 (0x8D8) |  |  | Corin's Crossing |
-| `SCARLET_BASE_CAMP` | 2265 (0x8D9) |  |  | Scarlet Base Camp |
-| `TYRS_HAND` | 2266 (0x8DA) |  |  | Tyr's Hand |
-| `THE_SCARLET_BASILICA` | 2267 (0x8DB) |  |  | The Scarlet Basilica |
-| `LIGHTS_HOPE_CHAPEL` | 2268 (0x8DC) |  |  | Light's Hope Chapel |
-| `BROWMAN_MILL` | 2269 (0x8DD) |  |  | Browman Mill |
-| `THE_NOXIOUS_GLADE` | 2270 (0x8DE) |  |  | The Noxious Glade |
-| `EASTWALL_TOWER` | 2271 (0x8DF) |  |  | Eastwall Tower |
-| `NORTHDALE` | 2272 (0x8E0) |  |  | Northdale |
-| `ZUL_MASHAR` | 2273 (0x8E1) |  |  | Zul'Mashar |
-| `MAZRA_ALOR` | 2274 (0x8E2) |  |  | Mazra'Alor |
-| `NORTHPASS_TOWER` | 2275 (0x8E3) |  |  | Northpass Tower |
-| `QUEL_LITHIEN_LODGE` | 2276 (0x8E4) |  |  | Quel'Lithien Lodge |
-| `PLAGUEWOOD` | 2277 (0x8E5) |  |  | Plaguewood |
-| `SCOURGEHOLD` | 2278 (0x8E6) |  |  | Scourgehold |
-| `STRATHOLME1` | 2279 (0x8E7) |  |  | Stratholme |
-| `UNUSED_STRATHOLME` | 2280 (0x8E8) |  |  | UNUSED Stratholme |
-| `DARROWMERE_LAKE0` | 2297 (0x8F9) |  |  | Darrowmere Lake |
-| `CAER_DARROW` | 2298 (0x8FA) |  |  | Caer Darrow |
-| `DARROWMERE_LAKE1` | 2299 (0x8FB) |  |  | Darrowmere Lake |
-| `CAVERNS_OF_TIME1` | 2300 (0x8FC) |  |  | Caverns of Time |
-| `THISTLEFUR_VILLAGE` | 2301 (0x8FD) |  |  | Thistlefur Village |
-| `THE_QUAGMIRE` | 2302 (0x8FE) |  |  | The Quagmire |
-| `WINDBREAK_CANYON` | 2303 (0x8FF) |  |  | Windbreak Canyon |
-| `SOUTH_SEAS0` | 2317 (0x90D) |  |  | South Seas |
-| `THE_GREAT_SEA3` | 2318 (0x90E) |  |  | The Great Sea |
-| `THE_GREAT_SEA4` | 2319 (0x90F) |  |  | The Great Sea |
-| `THE_GREAT_SEA5` | 2320 (0x910) |  |  | The Great Sea |
-| `THE_GREAT_SEA6` | 2321 (0x911) |  |  | The Great Sea |
-| `THE_VEILED_SEA1` | 2322 (0x912) |  |  | The Veiled Sea |
-| `THE_VEILED_SEA2` | 2323 (0x913) |  |  | The Veiled Sea |
-| `THE_VEILED_SEA3` | 2324 (0x914) |  |  | The Veiled Sea |
-| `THE_VEILED_SEA4` | 2325 (0x915) |  |  | The Veiled Sea |
-| `THE_VEILED_SEA5` | 2326 (0x916) |  |  | The Veiled Sea |
-| `RAZOR_HILL_BARRACKS` | 2337 (0x921) |  |  | Razor Hill Barracks |
-| `SOUTH_SEAS1` | 2338 (0x922) |  |  | South Seas |
-| `THE_GREAT_SEA7` | 2339 (0x923) |  |  | The Great Sea |
-| `BLOODTOOTH_CAMP` | 2357 (0x935) |  |  | Bloodtooth Camp |
-| `FOREST_SONG` | 2358 (0x936) |  |  | Forest Song |
-| `GREENPAW_VILLAGE` | 2359 (0x937) |  |  | Greenpaw Village |
-| `SILVERWING_OUTPOST` | 2360 (0x938) |  |  | Silverwing Outpost |
-| `NIGHTHAVEN` | 2361 (0x939) |  |  | Nighthaven |
-| `SHRINE_OF_REMULOS` | 2362 (0x93A) |  |  | Shrine of Remulos |
-| `STORMRAGE_BARROW_DENS` | 2363 (0x93B) |  |  | Stormrage Barrow Dens |
-| `THE_GREAT_SEA8` | 2364 (0x93C) |  |  | The Great Sea |
-| `THE_GREAT_SEA9` | 2365 (0x93D) |  |  | The Great Sea |
-| `THE_BLACK_MORASS` | 2366 (0x93E) |  |  | The Black Morass |
-| `OLD_HILLSBRAD_FOOTHILLS` | 2367 (0x93F) |  |  | Old Hillsbrad Foothills |
-| `TARREN_MILL1` | 2368 (0x940) |  |  | Tarren Mill |
-| `SOUTHSHORE1` | 2369 (0x941) |  |  | Southshore |
-| `DURNHOLDE_KEEP1` | 2370 (0x942) |  |  | Durnholde Keep |
-| `DUN_GAROK1` | 2371 (0x943) |  |  | Dun Garok |
-| `HILLSBRAD_FIELDS1` | 2372 (0x944) |  |  | Hillsbrad Fields |
-| `EASTERN_STRAND1` | 2373 (0x945) |  |  | Eastern Strand |
-| `NETHANDER_STEAD1` | 2374 (0x946) |  |  | Nethander Stead |
-| `DARROW_HILL1` | 2375 (0x947) |  |  | Darrow Hill |
-| `SOUTHPOINT_TOWER1` | 2376 (0x948) |  |  | Southpoint Tower |
-| `THORADINS_WALL3` | 2377 (0x949) |  |  | Thoradin's Wall |
-| `WESTERN_STRAND1` | 2378 (0x94A) |  |  | Western Strand |
-| `AZURELODE_MINE1` | 2379 (0x94B) |  |  | Azurelode Mine |
-| `THE_GREAT_SEA10` | 2397 (0x95D) |  |  | The Great Sea |
-| `THE_GREAT_SEA11` | 2398 (0x95E) |  |  | The Great Sea |
-| `THE_GREAT_SEA12` | 2399 (0x95F) |  |  | The Great Sea |
-| `THE_FORBIDDING_SEA1` | 2400 (0x960) |  |  | The Forbidding Sea |
-| `THE_FORBIDDING_SEA2` | 2401 (0x961) |  |  | The Forbidding Sea |
-| `THE_FORBIDDING_SEA3` | 2402 (0x962) |  |  | The Forbidding Sea |
-| `THE_FORBIDDING_SEA4` | 2403 (0x963) |  |  | The Forbidding Sea |
-| `TETHRIS_ARAN` | 2404 (0x964) |  |  | Tethris Aran |
-| `ETHEL_RETHOR` | 2405 (0x965) |  |  | Ethel Rethor |
-| `RANAZJAR_ISLE` | 2406 (0x966) |  |  | Ranazjar Isle |
-| `KORMEKS_HUT` | 2407 (0x967) |  |  | Kormek's Hut |
-| `SHADOWPREY_VILLAGE` | 2408 (0x968) |  |  | Shadowprey Village |
-| `BLACKROCK_PASS` | 2417 (0x971) |  |  | Blackrock Pass |
-| `MORGANS_VIGIL` | 2418 (0x972) |  |  | Morgan's Vigil |
-| `SLITHER_ROCK` | 2419 (0x973) |  |  | Slither Rock |
-| `TERROR_WING_PATH` | 2420 (0x974) |  |  | Terror Wing Path |
-| `DRACO_DAR` | 2421 (0x975) |  |  | Draco'dar |
-| `RAGEFIRE_CHASM` | 2437 (0x985) |  |  | Ragefire Chasm |
-| `NIGHTSONG_WOODS` | 2457 (0x999) |  |  | Nightsong Woods |
-| `THE_VEILED_SEA6` | 2477 (0x9AD) |  |  | The Veiled Sea |
-| `MORLOS_ARAN` | 2478 (0x9AE) |  |  | Morlos'Aran |
-| `EMERALD_SANCTUARY` | 2479 (0x9AF) |  |  | Emerald Sanctuary |
-| `JADEFIRE_GLEN` | 2480 (0x9B0) |  |  | Jadefire Glen |
-| `RUINS_OF_CONSTELLAS` | 2481 (0x9B1) |  |  | Ruins of Constellas |
-| `BITTER_REACHES` | 2497 (0x9C1) |  |  | Bitter Reaches |
-| `RISE_OF_THE_DEFILER` | 2517 (0x9D5) |  |  | Rise of the Defiler |
-| `LARISS_PAVILION` | 2518 (0x9D6) |  |  | Lariss Pavilion |
-| `WOODPAW_HILLS` | 2519 (0x9D7) |  |  | Woodpaw Hills |
-| `WOODPAW_DEN` | 2520 (0x9D8) |  |  | Woodpaw Den |
-| `VERDANTIS_RIVER` | 2521 (0x9D9) |  |  | Verdantis River |
-| `RUINS_OF_ISILDIEN` | 2522 (0x9DA) |  |  | Ruins of Isildien |
-| `GRIMTOTEM_POST` | 2537 (0x9E9) |  |  | Grimtotem Post |
-| `CAMP_APARAJE` | 2538 (0x9EA) |  |  | Camp Aparaje |
-| `MALAKA_JIN` | 2539 (0x9EB) |  |  | Malaka'jin |
-| `BOULDERSLIDE_RAVINE` | 2540 (0x9EC) |  |  | Boulderslide Ravine |
-| `SISHIR_CANYON` | 2541 (0x9ED) |  |  | Sishir Canyon |
-| `DIRE_MAUL0` | 2557 (0x9FD) |  |  | Dire Maul |
-| `DEADWIND_RAVINE` | 2558 (0x9FE) |  |  | Deadwind Ravine |
-| `DIAMONDHEAD_RIVER` | 2559 (0x9FF) |  |  | Diamondhead River |
-| `ARIDENS_CAMP` | 2560 (0xA00) |  |  | Ariden's Camp |
-| `THE_VICE` | 2561 (0xA01) |  |  | The Vice |
-| `KARAZHAN` | 2562 (0xA02) |  |  | Karazhan |
-| `MORGANS_PLOT` | 2563 (0xA03) |  |  | Morgan's Plot |
-| `DIRE_MAUL1` | 2577 (0xA11) |  |  | Dire Maul |
-| `ALTERAC_VALLEY0` | 2597 (0xA25) |  |  | Alterac Valley |
-| `SCRABBLESCREWS_CAMP` | 2617 (0xA39) |  |  | Scrabblescrew's Camp |
-| `JADEFIRE_RUN` | 2618 (0xA3A) |  |  | Jadefire Run |
-| `THONDRORIL_RIVER0` | 2619 (0xA3B) |  |  | Thondroril River |
-| `THONDRORIL_RIVER1` | 2620 (0xA3C) |  |  | Thondroril River |
-| `LAKE_MERELDAR` | 2621 (0xA3D) |  |  | Lake Mereldar |
-| `PESTILENT_SCAR` | 2622 (0xA3E) |  |  | Pestilent Scar |
-| `THE_INFECTIS_SCAR` | 2623 (0xA3F) |  |  | The Infectis Scar |
-| `BLACKWOOD_LAKE` | 2624 (0xA40) |  |  | Blackwood Lake |
-| `EASTWALL_GATE` | 2625 (0xA41) |  |  | Eastwall Gate |
-| `TERRORWEB_TUNNEL` | 2626 (0xA42) |  |  | Terrorweb Tunnel |
-| `TERRORDALE` | 2627 (0xA43) |  |  | Terrordale |
-| `KARGATHIA_KEEP` | 2637 (0xA4D) |  |  | Kargathia Keep |
-| `VALLEY_OF_BONES` | 2657 (0xA61) |  |  | Valley of Bones |
-| `BLACKWING_LAIR` | 2677 (0xA75) |  |  | Blackwing Lair |
-| `DEADMANS_CROSSING` | 2697 (0xA89) |  |  | Deadman's Crossing |
-| `MOLTEN_CORE` | 2717 (0xA9D) |  |  | Molten Core |
-| `THE_SCARAB_WALL` | 2737 (0xAB1) |  |  | The Scarab Wall |
-| `SOUTHWIND_VILLAGE` | 2738 (0xAB2) |  |  | Southwind Village |
-| `TWILIGHT_BASE_CAMP` | 2739 (0xAB3) |  |  | Twilight Base Camp |
-| `THE_CRYSTAL_VALE` | 2740 (0xAB4) |  |  | The Crystal Vale |
-| `THE_SCARAB_DAIS` | 2741 (0xAB5) |  |  | The Scarab Dais |
-| `HIVE_ASHI` | 2742 (0xAB6) |  |  | Hive'Ashi |
-| `HIVE_ZORA` | 2743 (0xAB7) |  |  | Hive'Zora |
-| `HIVE_REGAL` | 2744 (0xAB8) |  |  | Hive'Regal |
-| `SHRINE_OF_THE_FALLEN_WARRIOR` | 2757 (0xAC5) |  |  | Shrine of the Fallen Warrior |
-| `UNUSED_ALTERAC_VALLEY` | 2777 (0xAD9) |  |  | UNUSED Alterac Valley |
-| `BLACKFATHOM_DEEPS1` | 2797 (0xAED) |  |  | Blackfathom Deeps |
-| `ON_MAP_DUNGEON4` | 2817 (0xB01) |  |  | ***On Map Dungeon*** |
-| `THE_MASTERS_CELLAR` | 2837 (0xB15) |  |  | The Master's Cellar |
-| `STONEWROUGHT_PASS` | 2838 (0xB16) |  |  | Stonewrought Pass |
-| `ALTERAC_VALLEY1` | 2839 (0xB17) |  |  | Alterac Valley |
-| `THE_RUMBLE_CAGE` | 2857 (0xB29) |  |  | The Rumble Cage |
-| `CHUNK_TEST` | 2877 (0xB3D) |  |  | Chunk Test |
-| `ZORAMGAR_OUTPOST` | 2897 (0xB51) |  |  | Zoram'gar Outpost |
-| `HALL_OF_LEGENDS` | 2917 (0xB65) |  |  | Hall of Legends |
-| `CHAMPIONS_HALL` | 2918 (0xB66) |  |  | Champions' Hall |
-| `GROSH_GOK_COMPOUND` | 2937 (0xB79) |  |  | Grosh'gok Compound |
-| `SLEEPING_GORGE` | 2938 (0xB7A) |  |  | Sleeping Gorge |
-| `IRONDEEP_MINE` | 2957 (0xB8D) |  |  | Irondeep Mine |
-| `STONEHEARTH_OUTPOST` | 2958 (0xB8E) |  |  | Stonehearth Outpost |
-| `DUN_BALDAR` | 2959 (0xB8F) |  |  | Dun Baldar |
-| `ICEWING_PASS` | 2960 (0xB90) |  |  | Icewing Pass |
-| `FROSTWOLF_VILLAGE` | 2961 (0xB91) |  |  | Frostwolf Village |
-| `TOWER_POINT` | 2962 (0xB92) |  |  | Tower Point |
-| `COLDTOOTH_MINE` | 2963 (0xB93) |  |  | Coldtooth Mine |
-| `WINTERAX_HOLD` | 2964 (0xB94) |  |  | Winterax Hold |
-| `ICEBLOOD_GARRISON` | 2977 (0xBA1) |  |  | Iceblood Garrison |
-| `FROSTWOLF_KEEP` | 2978 (0xBA2) |  |  | Frostwolf Keep |
-| `TOR_KREN_FARM` | 2979 (0xBA3) |  |  | Tor'kren Farm |
-| `FROST_DAGGER_PASS` | 3017 (0xBC9) |  |  | Frost Dagger Pass |
-| `IRONSTONE_CAMP` | 3037 (0xBDD) |  |  | Ironstone Camp |
-| `WEAZELS_CRATER` | 3038 (0xBDE) |  |  | Weazel's Crater |
-| `TAHONDA_RUINS` | 3039 (0xBDF) |  |  | Tahonda Ruins |
-| `FIELD_OF_STRIFE` | 3057 (0xBF1) |  |  | Field of Strife |
-| `ICEWING_CAVERN` | 3058 (0xBF2) |  |  | Icewing Cavern |
-| `VALORS_REST` | 3077 (0xC05) |  |  | Valor's Rest |
-| `THE_SWARMING_PILLAR` | 3097 (0xC19) |  |  | The Swarming Pillar |
-| `TWILIGHT_POST` | 3098 (0xC1A) |  |  | Twilight Post |
-| `TWILIGHT_OUTPOST` | 3099 (0xC1B) |  |  | Twilight Outpost |
-| `RAVAGED_TWILIGHT_CAMP` | 3100 (0xC1C) |  |  | Ravaged Twilight Camp |
-| `SHALZARUS_LAIR` | 3117 (0xC2D) |  |  | Shalzaru's Lair |
-| `TALRENDIS_POINT` | 3137 (0xC41) |  |  | Talrendis Point |
-| `RETHRESS_SANCTUM` | 3138 (0xC42) |  |  | Rethress Sanctum |
-| `MOON_HORROR_DEN` | 3139 (0xC43) |  |  | Moon Horror Den |
-| `SCALEBEARDS_CAVE` | 3140 (0xC44) |  |  | Scalebeard's Cave |
-| `BOULDERSLIDE_CAVERN` | 3157 (0xC55) |  |  | Boulderslide Cavern |
-| `WARSONG_LABOR_CAMP` | 3177 (0xC69) |  |  | Warsong Labor Camp |
-| `CHILLWIND_CAMP` | 3197 (0xC7D) |  |  | Chillwind Camp |
-| `THE_MAUL` | 3217 (0xC91) |  |  | The Maul |
-| `THE_MAUL_UNUSED` | 3237 (0xCA5) |  |  | The Maul UNUSED |
-| `BONES_OF_GRAKKAROND` | 3257 (0xCB9) |  |  | Bones of Grakkarond |
-| `WARSONG_GULCH` | 3277 (0xCCD) |  |  | Warsong Gulch |
-| `FROSTWOLF_GRAVEYARD` | 3297 (0xCE1) |  |  | Frostwolf Graveyard |
-| `FROSTWOLF_PASS` | 3298 (0xCE2) |  |  | Frostwolf Pass |
-| `DUN_BALDAR_PASS` | 3299 (0xCE3) |  |  | Dun Baldar Pass |
-| `ICEBLOOD_GRAVEYARD` | 3300 (0xCE4) |  |  | Iceblood Graveyard |
-| `SNOWFALL_GRAVEYARD` | 3301 (0xCE5) |  |  | Snowfall Graveyard |
-| `STONEHEARTH_GRAVEYARD` | 3302 (0xCE6) |  |  | Stonehearth Graveyard |
-| `STORMPIKE_GRAVEYARD` | 3303 (0xCE7) |  |  | Stormpike Graveyard |
-| `ICEWING_BUNKER` | 3304 (0xCE8) |  |  | Icewing Bunker |
-| `STONEHEARTH_BUNKER` | 3305 (0xCE9) |  |  | Stonehearth Bunker |
-| `WILDPAW_RIDGE` | 3306 (0xCEA) |  |  | Wildpaw Ridge |
-| `REVANTUSK_VILLAGE` | 3317 (0xCF5) |  |  | Revantusk Village |
-| `ROCK_OF_DUROTAN` | 3318 (0xCF6) |  |  | Rock of Durotan |
-| `SILVERWING_GROVE` | 3319 (0xCF7) |  |  | Silverwing Grove |
-| `WARSONG_LUMBER_MILL` | 3320 (0xCF8) |  |  | Warsong Lumber Mill |
-| `SILVERWING_HOLD` | 3321 (0xCF9) |  |  | Silverwing Hold |
-| `WILDPAW_CAVERN` | 3337 (0xD09) |  |  | Wildpaw Cavern |
-| `THE_VEILED_CLEFT` | 3338 (0xD0A) |  |  | The Veiled Cleft |
-| `YOJAMBA_ISLE` | 3357 (0xD1D) |  |  | Yojamba Isle |
-| `ARATHI_BASIN` | 3358 (0xD1E) |  |  | Arathi Basin |
-| `THE_COIL` | 3377 (0xD31) |  |  | The Coil |
-| `ALTAR_OF_HIR_EEK` | 3378 (0xD32) |  |  | Altar of Hir'eek |
-| `SHADRA_ZAAR` | 3379 (0xD33) |  |  | Shadra'zaar |
-| `HAKKARI_GROUNDS` | 3380 (0xD34) |  |  | Hakkari Grounds |
-| `NAZE_OF_SHIRVALLAH` | 3381 (0xD35) |  |  | Naze of Shirvallah |
-| `TEMPLE_OF_BETHEKK` | 3382 (0xD36) |  |  | Temple of Bethekk |
-| `THE_BLOODFIRE_PIT` | 3383 (0xD37) |  |  | The Bloodfire Pit |
-| `ALTAR_OF_THE_BLOOD_GOD` | 3384 (0xD38) |  |  | Altar of the Blood God |
-| `ZANZAS_RISE` | 3397 (0xD45) |  |  | Zanza's Rise |
-| `EDGE_OF_MADNESS` | 3398 (0xD46) |  |  | Edge of Madness |
-| `TROLLBANE_HALL` | 3417 (0xD59) |  |  | Trollbane Hall |
-| `DEFILERS_DEN` | 3418 (0xD5A) |  |  | Defiler's Den |
-| `PAGLES_POINTE` | 3419 (0xD5B) |  |  | Pagle's Pointe |
-| `FARM` | 3420 (0xD5C) |  |  | Farm |
-| `BLACKSMITH` | 3421 (0xD5D) |  |  | Blacksmith |
-| `LUMBER_MILL` | 3422 (0xD5E) |  |  | Lumber Mill |
-| `GOLD_MINE` | 3423 (0xD5F) |  |  | Gold Mine |
-| `STABLES` | 3424 (0xD60) |  |  | Stables |
-| `CENARION_HOLD` | 3425 (0xD61) |  |  | Cenarion Hold |
-| `STAGHELM_POINT` | 3426 (0xD62) |  |  | Staghelm Point |
-| `BRONZEBEARD_ENCAMPMENT` | 3427 (0xD63) |  |  | Bronzebeard Encampment |
-| `AHN_QIRAJ` | 3428 (0xD64) |  |  | Ahn'Qiraj |
-| `RUINS_OF_AHN_QIRAJ0` | 3429 (0xD65) |  |  | Ruins of Ahn'Qiraj |
-| `TWILIGHTS_RUN` | 3446 (0xD76) |  |  | Twilight's Run |
-| `ORTELLS_HIDEOUT` | 3447 (0xD77) |  |  | Ortell's Hideout |
-| `SCARAB_TERRACE` | 3448 (0xD78) |  |  | Scarab Terrace |
-| `GENERALS_TERRACE` | 3449 (0xD79) |  |  | General's Terrace |
-| `THE_RESERVOIR` | 3450 (0xD7A) |  |  | The Reservoir |
-| `THE_HATCHERY` | 3451 (0xD7B) |  |  | The Hatchery |
-| `THE_COMB` | 3452 (0xD7C) |  |  | The Comb |
-| `WATCHERS_TERRACE` | 3453 (0xD7D) |  |  | Watchers' Terrace |
-| `RUINS_OF_AHN_QIRAJ1` | 3454 (0xD7E) |  |  | Ruins of Ahn'Qiraj |
-| `NAXXRAMAS` | 3456 (0xD80) |  |  | Naxxramas |
-| `CITY` | 3459 (0xD83) |  |  | City |
-| `GATES_OF_AHN_QIRAJ` | 3478 (0xD96) |  |  | Gates of Ahn'Qiraj |
-| `RAVENHOLDT_MANOR` | 3486 (0xD9E) |  |  | Ravenholdt Manor |
+| Enumerator | Value  | Comment | Display |
+| --------- | -------- | ------- | ------- |
+| `NONE` | 0 (0x00) |  |  |
+| `DUN_MOROGH` | 1 (0x01) |  | Dun Morogh |
+| `LONGSHORE` | 2 (0x02) |  | Longshore |
+| `BADLANDS` | 3 (0x03) |  | Badlands |
+| `BLASTED_LANDS` | 4 (0x04) |  | Blasted Lands |
+| `BLACKWATER_COVE` | 7 (0x07) |  | Blackwater Cove |
+| `SWAMP_OF_SORROWS` | 8 (0x08) |  | Swamp of Sorrows |
+| `NORTHSHIRE_VALLEY` | 9 (0x09) |  | Northshire Valley |
+| `DUSKWOOD` | 10 (0x0A) |  | Duskwood |
+| `WETLANDS` | 11 (0x0B) |  | Wetlands |
+| `ELWYNN_FOREST` | 12 (0x0C) |  | Elwynn Forest |
+| `THE_WORLD_TREE` | 13 (0x0D) |  | The World Tree |
+| `DUROTAR` | 14 (0x0E) |  | Durotar |
+| `DUSTWALLOW_MARSH` | 15 (0x0F) |  | Dustwallow Marsh |
+| `AZSHARA` | 16 (0x10) |  | Azshara |
+| `THE_BARRENS` | 17 (0x11) |  | The Barrens |
+| `CRYSTAL_LAKE` | 18 (0x12) |  | Crystal Lake |
+| `ZUL_GURUB0` | 19 (0x13) |  | Zul'Gurub |
+| `MOONBROOK` | 20 (0x14) |  | Moonbrook |
+| `KUL_TIRAS` | 21 (0x15) |  | Kul Tiras |
+| `PROGRAMMER_ISLE` | 22 (0x16) |  | Programmer Isle |
+| `NORTHSHIRE_RIVER` | 23 (0x17) |  | Northshire River |
+| `NORTHSHIRE_ABBEY` | 24 (0x18) |  | Northshire Abbey |
+| `BLACKROCK_MOUNTAIN0` | 25 (0x19) |  | Blackrock Mountain |
+| `LIGHTHOUSE` | 26 (0x1A) |  | Lighthouse |
+| `WESTERN_PLAGUELANDS` | 28 (0x1C) |  | Western Plaguelands |
+| `NINE` | 30 (0x1E) |  | Nine |
+| `THE_CEMETARY` | 32 (0x20) |  | The Cemetary |
+| `STRANGLETHORN_VALE` | 33 (0x21) |  | Stranglethorn Vale |
+| `ECHO_RIDGE_MINE` | 34 (0x22) |  | Echo Ridge Mine |
+| `BOOTY_BAY` | 35 (0x23) |  | Booty Bay |
+| `ALTERAC_MOUNTAINS` | 36 (0x24) |  | Alterac Mountains |
+| `LAKE_NAZFERITI` | 37 (0x25) |  | Lake Nazferiti |
+| `LOCH_MODAN` | 38 (0x26) |  | Loch Modan |
+| `WESTFALL0` | 40 (0x28) |  | Westfall |
+| `DEADWIND_PASS` | 41 (0x29) |  | Deadwind Pass |
+| `DARKSHIRE` | 42 (0x2A) |  | Darkshire |
+| `WILD_SHORE` | 43 (0x2B) |  | Wild Shore |
+| `REDRIDGE_MOUNTAINS` | 44 (0x2C) |  | Redridge Mountains |
+| `ARATHI_HIGHLANDS` | 45 (0x2D) |  | Arathi Highlands |
+| `BURNING_STEPPES` | 46 (0x2E) |  | Burning Steppes |
+| `THE_HINTERLANDS` | 47 (0x2F) |  | The Hinterlands |
+| `DEAD_MANS_HOLE` | 49 (0x31) |  | Dead Man's Hole |
+| `SEARING_GORGE` | 51 (0x33) |  | Searing Gorge |
+| `THIEVES_CAMP` | 53 (0x35) |  | Thieves Camp |
+| `JASPERLODE_MINE` | 54 (0x36) |  | Jasperlode Mine |
+| `VALLEY_OF_HEROES_UNUSED` | 55 (0x37) |  | Valley of Heroes UNUSED |
+| `HEROES_VIGIL` | 56 (0x38) |  | Heroes' Vigil |
+| `FARGODEEP_MINE` | 57 (0x39) |  | Fargodeep Mine |
+| `NORTHSHIRE_VINEYARDS` | 59 (0x3B) |  | Northshire Vineyards |
+| `FORESTS_EDGE` | 60 (0x3C) |  | Forest's Edge |
+| `THUNDER_FALLS` | 61 (0x3D) |  | Thunder Falls |
+| `BRACKWELL_PUMPKIN_PATCH` | 62 (0x3E) |  | Brackwell Pumpkin Patch |
+| `THE_STONEFIELD_FARM` | 63 (0x3F) |  | The Stonefield Farm |
+| `THE_MACLURE_VINEYARDS` | 64 (0x40) |  | The Maclure Vineyards |
+| `ON_MAP_DUNGEON0` | 65 (0x41) |  | ***On Map Dungeon*** |
+| `ON_MAP_DUNGEON1` | 66 (0x42) |  | ***On Map Dungeon*** |
+| `ON_MAP_DUNGEON2` | 67 (0x43) |  | ***On Map Dungeon*** |
+| `LAKE_EVERSTILL` | 68 (0x44) |  | Lake Everstill |
+| `LAKESHIRE` | 69 (0x45) |  | Lakeshire |
+| `STONEWATCH` | 70 (0x46) |  | Stonewatch |
+| `STONEWATCH_FALLS` | 71 (0x47) |  | Stonewatch Falls |
+| `THE_DARK_PORTAL` | 72 (0x48) |  | The Dark Portal |
+| `THE_TAINTED_SCAR` | 73 (0x49) |  | The Tainted Scar |
+| `POOL_OF_TEARS` | 74 (0x4A) |  | Pool of Tears |
+| `STONARD` | 75 (0x4B) |  | Stonard |
+| `FALLOW_SANCTUARY` | 76 (0x4C) |  | Fallow Sanctuary |
+| `ANVILMAR` | 77 (0x4D) |  | Anvilmar |
+| `STORMWIND_MOUNTAINS` | 80 (0x50) |  | Stormwind Mountains |
+| `JEFF_NE_QUADRANT_CHANGED` | 81 (0x51) |  | Jeff NE Quadrant Changed |
+| `JEFF_NW_QUADRANT` | 82 (0x52) |  | Jeff NW Quadrant |
+| `JEFF_SE_QUADRANT` | 83 (0x53) |  | Jeff SE Quadrant |
+| `JEFF_SW_QUADRANT` | 84 (0x54) |  | Jeff SW Quadrant |
+| `TIRISFAL_GLADES` | 85 (0x55) |  | Tirisfal Glades |
+| `STONE_CAIRN_LAKE` | 86 (0x56) |  | Stone Cairn Lake |
+| `GOLDSHIRE` | 87 (0x57) |  | Goldshire |
+| `EASTVALE_LOGGING_CAMP` | 88 (0x58) |  | Eastvale Logging Camp |
+| `MIRROR_LAKE_ORCHARD` | 89 (0x59) |  | Mirror Lake Orchard |
+| `TOWER_OF_AZORA` | 91 (0x5B) |  | Tower of Azora |
+| `MIRROR_LAKE` | 92 (0x5C) |  | Mirror Lake |
+| `VUL_GOL_OGRE_MOUND` | 93 (0x5D) |  | Vul'Gol Ogre Mound |
+| `RAVEN_HILL` | 94 (0x5E) |  | Raven Hill |
+| `REDRIDGE_CANYONS` | 95 (0x5F) |  | Redridge Canyons |
+| `TOWER_OF_ILGALAR` | 96 (0x60) |  | Tower of Ilgalar |
+| `ALTHERS_MILL` | 97 (0x61) |  | Alther's Mill |
+| `RETHBAN_CAVERNS` | 98 (0x62) |  | Rethban Caverns |
+| `REBEL_CAMP` | 99 (0x63) |  | Rebel Camp |
+| `NESINGWARYS_EXPEDITION` | 100 (0x64) |  | Nesingwary's Expedition |
+| `KURZENS_COMPOUND` | 101 (0x65) |  | Kurzen's Compound |
+| `RUINS_OF_ZUL_KUNDA` | 102 (0x66) |  | Ruins of Zul'Kunda |
+| `RUINS_OF_ZUL_MAMWE` | 103 (0x67) |  | Ruins of Zul'Mamwe |
+| `THE_VILE_REEF` | 104 (0x68) |  | The Vile Reef |
+| `MOSH_OGG_OGRE_MOUND` | 105 (0x69) |  | Mosh'Ogg Ogre Mound |
+| `THE_STOCKPILE` | 106 (0x6A) |  | The Stockpile |
+| `SALDEANS_FARM` | 107 (0x6B) |  | Saldean's Farm |
+| `SENTINEL_HILL` | 108 (0x6C) |  | Sentinel Hill |
+| `FURLBROWS_PUMPKIN_FARM` | 109 (0x6D) |  | Furlbrow's Pumpkin Farm |
+| `JANGOLODE_MINE` | 111 (0x6F) |  | Jangolode Mine |
+| `GOLD_COAST_QUARRY` | 113 (0x71) |  | Gold Coast Quarry |
+| `WESTFALL_LIGHTHOUSE` | 115 (0x73) |  | Westfall Lighthouse |
+| `MISTY_VALLEY` | 116 (0x74) |  | Misty Valley |
+| `GROM_GOL_BASE_CAMP` | 117 (0x75) |  | Grom'gol Base Camp |
+| `WHELGARS_EXCAVATION_SITE` | 118 (0x76) |  | Whelgar's Excavation Site |
+| `WESTBROOK_GARRISON` | 120 (0x78) |  | Westbrook Garrison |
+| `TRANQUIL_GARDENS_CEMETERY` | 121 (0x79) |  | Tranquil Gardens Cemetery |
+| `ZUULDAIA_RUINS` | 122 (0x7A) |  | Zuuldaia Ruins |
+| `BAL_LAL_RUINS` | 123 (0x7B) |  | Bal'lal Ruins |
+| `KAL_AI_RUINS` | 125 (0x7D) |  | Kal'ai Ruins |
+| `TKASHI_RUINS` | 126 (0x7E) |  | Tkashi Ruins |
+| `BALIA_MAH_RUINS` | 127 (0x7F) |  | Balia'mah Ruins |
+| `ZIATAJAI_RUINS` | 128 (0x80) |  | Ziata'jai Ruins |
+| `MIZJAH_RUINS` | 129 (0x81) |  | Mizjah Ruins |
+| `SILVERPINE_FOREST` | 130 (0x82) |  | Silverpine Forest |
+| `KHARANOS` | 131 (0x83) |  | Kharanos |
+| `COLDRIDGE_VALLEY` | 132 (0x84) |  | Coldridge Valley |
+| `GNOMEREGAN0` | 133 (0x85) |  | Gnomeregan |
+| `GOL_BOLAR_QUARRY` | 134 (0x86) |  | Gol'Bolar Quarry |
+| `FROSTMANE_HOLD` | 135 (0x87) |  | Frostmane Hold |
+| `THE_GRIZZLED_DEN` | 136 (0x88) |  | The Grizzled Den |
+| `BREWNALL_VILLAGE` | 137 (0x89) |  | Brewnall Village |
+| `MISTY_PINE_REFUGE` | 138 (0x8A) |  | Misty Pine Refuge |
+| `EASTERN_PLAGUELANDS` | 139 (0x8B) |  | Eastern Plaguelands |
+| `TELDRASSIL` | 141 (0x8D) |  | Teldrassil |
+| `IRONBANDS_EXCAVATION_SITE` | 142 (0x8E) |  | Ironband's Excavation Site |
+| `MO_GROSH_STRONGHOLD` | 143 (0x8F) |  | Mo'grosh Stronghold |
+| `THELSAMAR` | 144 (0x90) |  | Thelsamar |
+| `ALGAZ_GATE` | 145 (0x91) |  | Algaz Gate |
+| `STONEWROUGHT_DAM` | 146 (0x92) |  | Stonewrought Dam |
+| `THE_FARSTRIDER_LODGE` | 147 (0x93) |  | The Farstrider Lodge |
+| `DARKSHORE` | 148 (0x94) |  | Darkshore |
+| `SILVER_STREAM_MINE` | 149 (0x95) |  | Silver Stream Mine |
+| `MENETHIL_HARBOR` | 150 (0x96) |  | Menethil Harbor |
+| `DESIGNER_ISLAND` | 151 (0x97) |  | Designer Island |
+| `THE_BULWARK0` | 152 (0x98) |  | The Bulwark |
+| `RUINS_OF_LORDAERON` | 153 (0x99) |  | Ruins of Lordaeron |
+| `DEATHKNELL` | 154 (0x9A) |  | Deathknell |
+| `NIGHT_WEBS_HOLLOW` | 155 (0x9B) |  | Night Web's Hollow |
+| `SOLLIDEN_FARMSTEAD` | 156 (0x9C) |  | Solliden Farmstead |
+| `AGAMAND_MILLS` | 157 (0x9D) |  | Agamand Mills |
+| `AGAMAND_FAMILY_CRYPT` | 158 (0x9E) |  | Agamand Family Crypt |
+| `BRILL` | 159 (0x9F) |  | Brill |
+| `WHISPERING_GARDENS` | 160 (0xA0) |  | Whispering Gardens |
+| `TERRACE_OF_REPOSE` | 161 (0xA1) |  | Terrace of Repose |
+| `BRIGHTWATER_LAKE` | 162 (0xA2) |  | Brightwater Lake |
+| `GUNTHERS_RETREAT` | 163 (0xA3) |  | Gunther's Retreat |
+| `GARRENS_HAUNT` | 164 (0xA4) |  | Garren's Haunt |
+| `BALNIR_FARMSTEAD` | 165 (0xA5) |  | Balnir Farmstead |
+| `COLD_HEARTH_MANOR` | 166 (0xA6) |  | Cold Hearth Manor |
+| `CRUSADER_OUTPOST` | 167 (0xA7) |  | Crusader Outpost |
+| `THE_NORTH_COAST` | 168 (0xA8) |  | The North Coast |
+| `WHISPERING_SHORE` | 169 (0xA9) |  | Whispering Shore |
+| `LORDAMERE_LAKE0` | 170 (0xAA) |  | Lordamere Lake |
+| `FENRIS_ISLE` | 172 (0xAC) |  | Fenris Isle |
+| `FAOLS_REST` | 173 (0xAD) |  | Faol's Rest |
+| `DOLANAAR` | 186 (0xBA) |  | Dolanaar |
+| `DARNASSUS_UNUSED` | 187 (0xBB) |  | Darnassus UNUSED |
+| `SHADOWGLEN` | 188 (0xBC) |  | Shadowglen |
+| `STEELGRILLS_DEPOT` | 189 (0xBD) |  | Steelgrill's Depot |
+| `HEARTHGLEN` | 190 (0xBE) |  | Hearthglen |
+| `NORTHRIDGE_LUMBER_CAMP` | 192 (0xC0) |  | Northridge Lumber Camp |
+| `RUINS_OF_ANDORHAL` | 193 (0xC1) |  | Ruins of Andorhal |
+| `SCHOOL_OF_NECROMANCY` | 195 (0xC3) |  | School of Necromancy |
+| `UTHERS_TOMB` | 196 (0xC4) |  | Uther's Tomb |
+| `SORROW_HILL` | 197 (0xC5) |  | Sorrow Hill |
+| `THE_WEEPING_CAVE` | 198 (0xC6) |  | The Weeping Cave |
+| `FELSTONE_FIELD` | 199 (0xC7) |  | Felstone Field |
+| `DALSONS_TEARS` | 200 (0xC8) |  | Dalson's Tears |
+| `GAHRRONS_WITHERING` | 201 (0xC9) |  | Gahrron's Withering |
+| `THE_WRITHING_HAUNT` | 202 (0xCA) |  | The Writhing Haunt |
+| `MARDENHOLDE_KEEP` | 203 (0xCB) |  | Mardenholde Keep |
+| `PYREWOOD_VILLAGE` | 204 (0xCC) |  | Pyrewood Village |
+| `DUN_MODR` | 205 (0xCD) |  | Dun Modr |
+| `WESTFALL1` | 206 (0xCE) |  | Westfall |
+| `THE_GREAT_SEA0` | 207 (0xCF) |  | The Great Sea |
+| `UNUSED_IRONCLADCOVE` | 208 (0xD0) |  | Unused Ironcladcove |
+| `SHADOWFANG_KEEP0` | 209 (0xD1) |  | Shadowfang Keep |
+| `ON_MAP_DUNGEON3` | 210 (0xD2) |  | ***On Map Dungeon*** |
+| `ICEFLOW_LAKE` | 211 (0xD3) |  | Iceflow Lake |
+| `HELMS_BED_LAKE` | 212 (0xD4) |  | Helm's Bed Lake |
+| `DEEP_ELEM_MINE` | 213 (0xD5) |  | Deep Elem Mine |
+| `THE_GREAT_SEA1` | 214 (0xD6) |  | The Great Sea |
+| `MULGORE` | 215 (0xD7) |  | Mulgore |
+| `ALEXSTON_FARMSTEAD` | 219 (0xDB) |  | Alexston Farmstead |
+| `RED_CLOUD_MESA` | 220 (0xDC) |  | Red Cloud Mesa |
+| `CAMP_NARACHE` | 221 (0xDD) |  | Camp Narache |
+| `BLOODHOOF_VILLAGE` | 222 (0xDE) |  | Bloodhoof Village |
+| `STONEBULL_LAKE` | 223 (0xDF) |  | Stonebull Lake |
+| `RAVAGED_CARAVAN` | 224 (0xE0) |  | Ravaged Caravan |
+| `RED_ROCKS` | 225 (0xE1) |  | Red Rocks |
+| `THE_SKITTERING_DARK` | 226 (0xE2) |  | The Skittering Dark |
+| `VALGANS_FIELD` | 227 (0xE3) |  | Valgan's Field |
+| `THE_SEPULCHER` | 228 (0xE4) |  | The Sepulcher |
+| `OLSENS_FARTHING` | 229 (0xE5) |  | Olsen's Farthing |
+| `THE_GREYMANE_WALL` | 230 (0xE6) |  | The Greymane Wall |
+| `BERENS_PERIL` | 231 (0xE7) |  | Beren's Peril |
+| `THE_DAWNING_ISLES` | 232 (0xE8) |  | The Dawning Isles |
+| `AMBERMILL` | 233 (0xE9) |  | Ambermill |
+| `FENRIS_KEEP` | 235 (0xEB) |  | Fenris Keep |
+| `SHADOWFANG_KEEP1` | 236 (0xEC) |  | Shadowfang Keep |
+| `THE_DECREPIT_FERRY` | 237 (0xED) |  | The Decrepit Ferry |
+| `MALDENS_ORCHARD` | 238 (0xEE) |  | Malden's Orchard |
+| `THE_IVAR_PATCH` | 239 (0xEF) |  | The Ivar Patch |
+| `THE_DEAD_FIELD` | 240 (0xF0) |  | The Dead Field |
+| `THE_ROTTING_ORCHARD` | 241 (0xF1) |  | The Rotting Orchard |
+| `BRIGHTWOOD_GROVE` | 242 (0xF2) |  | Brightwood Grove |
+| `FORLORN_ROWE` | 243 (0xF3) |  | Forlorn Rowe |
+| `THE_WHIPPLE_ESTATE` | 244 (0xF4) |  | The Whipple Estate |
+| `THE_YORGEN_FARMSTEAD` | 245 (0xF5) |  | The Yorgen Farmstead |
+| `THE_CAULDRON` | 246 (0xF6) |  | The Cauldron |
+| `GRIMESILT_DIG_SITE` | 247 (0xF7) |  | Grimesilt Dig Site |
+| `DREADMAUL_ROCK` | 249 (0xF9) |  | Dreadmaul Rock |
+| `RUINS_OF_THAURISSAN` | 250 (0xFA) |  | Ruins of Thaurissan |
+| `FLAME_CREST` | 251 (0xFB) |  | Flame Crest |
+| `BLACKROCK_STRONGHOLD` | 252 (0xFC) |  | Blackrock Stronghold |
+| `THE_PILLAR_OF_ASH` | 253 (0xFD) |  | The Pillar of Ash |
+| `BLACKROCK_MOUNTAIN1` | 254 (0xFE) |  | Blackrock Mountain |
+| `ALTAR_OF_STORMS0` | 255 (0xFF) |  | Altar of Storms |
+| `ALDRASSIL` | 256 (0x100) |  | Aldrassil |
+| `SHADOWTHREAD_CAVE` | 257 (0x101) |  | Shadowthread Cave |
+| `FEL_ROCK` | 258 (0x102) |  | Fel Rock |
+| `LAKE_AL_AMETH` | 259 (0x103) |  | Lake Al'Ameth |
+| `STARBREEZE_VILLAGE` | 260 (0x104) |  | Starbreeze Village |
+| `GNARLPINE_HOLD` | 261 (0x105) |  | Gnarlpine Hold |
+| `BAN_ETHIL_BARROW_DEN` | 262 (0x106) |  | Ban'ethil Barrow Den |
+| `THE_CLEFT` | 263 (0x107) |  | The Cleft |
+| `THE_ORACLE_GLADE` | 264 (0x108) |  | The Oracle Glade |
+| `WELLSPRING_RIVER` | 265 (0x109) |  | Wellspring River |
+| `WELLSPRING_LAKE` | 266 (0x10A) |  | Wellspring Lake |
+| `HILLSBRAD_FOOTHILLS` | 267 (0x10B) |  | Hillsbrad Foothills |
+| `AZSHARA_CRATER` | 268 (0x10C) |  | Azshara Crater |
+| `DUN_ALGAZ0` | 269 (0x10D) |  | Dun Algaz |
+| `SOUTHSHORE0` | 271 (0x10F) |  | Southshore |
+| `TARREN_MILL0` | 272 (0x110) |  | Tarren Mill |
+| `DURNHOLDE_KEEP0` | 275 (0x113) |  | Durnholde Keep |
+| `UNUSED_STONEWROUGHT_PASS` | 276 (0x114) |  | UNUSED Stonewrought Pass |
+| `THE_FOOTHILL_CAVERNS` | 277 (0x115) |  | The Foothill Caverns |
+| `LORDAMERE_INTERNMENT_CAMP` | 278 (0x116) |  | Lordamere Internment Camp |
+| `DALARAN` | 279 (0x117) |  | Dalaran |
+| `STRAHNBRAD` | 280 (0x118) |  | Strahnbrad |
+| `RUINS_OF_ALTERAC` | 281 (0x119) |  | Ruins of Alterac |
+| `CRUSHRIDGE_HOLD` | 282 (0x11A) |  | Crushridge Hold |
+| `SLAUGHTER_HOLLOW` | 283 (0x11B) |  | Slaughter Hollow |
+| `THE_UPLANDS` | 284 (0x11C) |  | The Uplands |
+| `SOUTHPOINT_TOWER0` | 285 (0x11D) |  | Southpoint Tower |
+| `HILLSBRAD_FIELDS0` | 286 (0x11E) |  | Hillsbrad Fields |
+| `HILLSBRAD` | 287 (0x11F) |  | Hillsbrad |
+| `AZURELODE_MINE0` | 288 (0x120) |  | Azurelode Mine |
+| `NETHANDER_STEAD0` | 289 (0x121) |  | Nethander Stead |
+| `DUN_GAROK0` | 290 (0x122) |  | Dun Garok |
+| `THORADINS_WALL0` | 293 (0x125) |  | Thoradin's Wall |
+| `EASTERN_STRAND0` | 294 (0x126) |  | Eastern Strand |
+| `WESTERN_STRAND0` | 295 (0x127) |  | Western Strand |
+| `SOUTH_SEAS_UNUSED` | 296 (0x128) |  | South Seas UNUSED |
+| `JAGUERO_ISLE` | 297 (0x129) |  | Jaguero Isle |
+| `BARADIN_BAY` | 298 (0x12A) |  | Baradin Bay |
+| `MENETHIL_BAY` | 299 (0x12B) |  | Menethil Bay |
+| `MISTY_REED_STRAND` | 300 (0x12C) |  | Misty Reed Strand |
+| `THE_SAVAGE_COAST` | 301 (0x12D) |  | The Savage Coast |
+| `THE_CRYSTAL_SHORE` | 302 (0x12E) |  | The Crystal Shore |
+| `SHELL_BEACH` | 303 (0x12F) |  | Shell Beach |
+| `NORTH_TIDES_RUN` | 305 (0x131) |  | North Tide's Run |
+| `SOUTH_TIDES_RUN` | 306 (0x132) |  | South Tide's Run |
+| `THE_OVERLOOK_CLIFFS` | 307 (0x133) |  | The Overlook Cliffs |
+| `THE_FORBIDDING_SEA0` | 308 (0x134) |  | The Forbidding Sea |
+| `IRONBEARDS_TOMB` | 309 (0x135) |  | Ironbeard's Tomb |
+| `CRYSTALVEIN_MINE` | 310 (0x136) |  | Crystalvein Mine |
+| `RUINS_OF_ABORAZ` | 311 (0x137) |  | Ruins of Aboraz |
+| `JANEIROS_POINT` | 312 (0x138) |  | Janeiro's Point |
+| `NORTHFOLD_MANOR` | 313 (0x139) |  | Northfold Manor |
+| `GO_SHEK_FARM` | 314 (0x13A) |  | Go'Shek Farm |
+| `DABYRIES_FARMSTEAD` | 315 (0x13B) |  | Dabyrie's Farmstead |
+| `BOULDERFIST_HALL` | 316 (0x13C) |  | Boulderfist Hall |
+| `WITHERBARK_VILLAGE` | 317 (0x13D) |  | Witherbark Village |
+| `DRYWHISKER_GORGE` | 318 (0x13E) |  | Drywhisker Gorge |
+| `REFUGE_POINTE` | 320 (0x140) |  | Refuge Pointe |
+| `HAMMERFALL` | 321 (0x141) |  | Hammerfall |
+| `BLACKWATER_SHIPWRECKS` | 322 (0x142) |  | Blackwater Shipwrecks |
+| `O_BREENS_CAMP` | 323 (0x143) |  | O'Breen's Camp |
+| `STROMGARDE_KEEP` | 324 (0x144) |  | Stromgarde Keep |
+| `THE_TOWER_OF_ARATHOR` | 325 (0x145) |  | The Tower of Arathor |
+| `THE_SANCTUM` | 326 (0x146) |  | The Sanctum |
+| `FALDIRS_COVE` | 327 (0x147) |  | Faldir's Cove |
+| `THE_DROWNED_REEF` | 328 (0x148) |  | The Drowned Reef |
+| `THANDOL_SPAN0` | 330 (0x14A) |  | Thandol Span |
+| `ASHENVALE` | 331 (0x14B) |  | Ashenvale |
+| `THE_GREAT_SEA2` | 332 (0x14C) |  | The Great Sea |
+| `CIRCLE_OF_EAST_BINDING` | 333 (0x14D) |  | Circle of East Binding |
+| `CIRCLE_OF_WEST_BINDING` | 334 (0x14E) |  | Circle of West Binding |
+| `CIRCLE_OF_INNER_BINDING` | 335 (0x14F) |  | Circle of Inner Binding |
+| `CIRCLE_OF_OUTER_BINDING` | 336 (0x150) |  | Circle of Outer Binding |
+| `APOCRYPHANS_REST` | 337 (0x151) |  | Apocryphan's Rest |
+| `ANGOR_FORTRESS` | 338 (0x152) |  | Angor Fortress |
+| `LETHLOR_RAVINE` | 339 (0x153) |  | Lethlor Ravine |
+| `KARGATH` | 340 (0x154) |  | Kargath |
+| `CAMP_KOSH` | 341 (0x155) |  | Camp Kosh |
+| `CAMP_BOFF` | 342 (0x156) |  | Camp Boff |
+| `CAMP_WURG` | 343 (0x157) |  | Camp Wurg |
+| `CAMP_CAGG` | 344 (0x158) |  | Camp Cagg |
+| `AGMONDS_END` | 345 (0x159) |  | Agmond's End |
+| `HAMMERTOES_DIGSITE` | 346 (0x15A) |  | Hammertoe's Digsite |
+| `DUSTBELCH_GROTTO` | 347 (0x15B) |  | Dustbelch Grotto |
+| `AERIE_PEAK` | 348 (0x15C) |  | Aerie Peak |
+| `WILDHAMMER_KEEP` | 349 (0x15D) |  | Wildhammer Keep |
+| `QUEL_DANIL_LODGE` | 350 (0x15E) |  | Quel'Danil Lodge |
+| `SKULK_ROCK` | 351 (0x15F) |  | Skulk Rock |
+| `ZUN_WATHA` | 352 (0x160) |  | Zun'watha |
+| `SHADRA_ALOR` | 353 (0x161) |  | Shadra'Alor |
+| `JINTHA_ALOR` | 354 (0x162) |  | Jintha'Alor |
+| `THE_ALTAR_OF_ZUL` | 355 (0x163) |  | The Altar of Zul |
+| `SERADANE` | 356 (0x164) |  | Seradane |
+| `FERALAS` | 357 (0x165) |  | Feralas |
+| `BRAMBLEBLADE_RAVINE` | 358 (0x166) |  | Brambleblade Ravine |
+| `BAEL_MODAN` | 359 (0x167) |  | Bael Modan |
+| `THE_VENTURE_CO_MINE` | 360 (0x168) |  | The Venture Co. Mine |
+| `FELWOOD` | 361 (0x169) |  | Felwood |
+| `RAZOR_HILL` | 362 (0x16A) |  | Razor Hill |
+| `VALLEY_OF_TRIALS` | 363 (0x16B) |  | Valley of Trials |
+| `THE_DEN` | 364 (0x16C) |  | The Den |
+| `BURNING_BLADE_COVEN` | 365 (0x16D) |  | Burning Blade Coven |
+| `KOLKAR_CRAG` | 366 (0x16E) |  | Kolkar Crag |
+| `SEN_JIN_VILLAGE` | 367 (0x16F) |  | Sen'jin Village |
+| `ECHO_ISLES` | 368 (0x170) |  | Echo Isles |
+| `THUNDER_RIDGE` | 369 (0x171) |  | Thunder Ridge |
+| `DRYGULCH_RAVINE` | 370 (0x172) |  | Drygulch Ravine |
+| `DUSTWIND_CAVE` | 371 (0x173) |  | Dustwind Cave |
+| `TIRAGARDE_KEEP` | 372 (0x174) |  | Tiragarde Keep |
+| `SCUTTLE_COAST` | 373 (0x175) |  | Scuttle Coast |
+| `BLADEFIST_BAY` | 374 (0x176) |  | Bladefist Bay |
+| `DEADEYE_SHORE` | 375 (0x177) |  | Deadeye Shore |
+| `SOUTHFURY_RIVER0` | 377 (0x179) |  | Southfury River |
+| `CAMP_TAURAJO` | 378 (0x17A) |  | Camp Taurajo |
+| `FAR_WATCH_POST` | 379 (0x17B) |  | Far Watch Post |
+| `THE_CROSSROADS` | 380 (0x17C) |  | The Crossroads |
+| `BOULDER_LODE_MINE` | 381 (0x17D) |  | Boulder Lode Mine |
+| `THE_SLUDGE_FEN` | 382 (0x17E) |  | The Sludge Fen |
+| `THE_DRY_HILLS` | 383 (0x17F) |  | The Dry Hills |
+| `DREADMIST_PEAK` | 384 (0x180) |  | Dreadmist Peak |
+| `NORTHWATCH_HOLD` | 385 (0x181) |  | Northwatch Hold |
+| `THE_FORGOTTEN_POOLS` | 386 (0x182) |  | The Forgotten Pools |
+| `LUSHWATER_OASIS` | 387 (0x183) |  | Lushwater Oasis |
+| `THE_STAGNANT_OASIS` | 388 (0x184) |  | The Stagnant Oasis |
+| `FIELD_OF_GIANTS` | 390 (0x186) |  | Field of Giants |
+| `THE_MERCHANT_COAST` | 391 (0x187) |  | The Merchant Coast |
+| `RATCHET` | 392 (0x188) |  | Ratchet |
+| `DARKSPEAR_STRAND` | 393 (0x189) |  | Darkspear Strand |
+| `DARROWMERE_LAKE_UNUSED` | 394 (0x18A) |  | Darrowmere Lake UNUSED |
+| `CAER_DARROW_UNUSED` | 395 (0x18B) |  | Caer Darrow UNUSED |
+| `WINTERHOOF_WATER_WELL` | 396 (0x18C) |  | Winterhoof Water Well |
+| `THUNDERHORN_WATER_WELL` | 397 (0x18D) |  | Thunderhorn Water Well |
+| `WILDMANE_WATER_WELL` | 398 (0x18E) |  | Wildmane Water Well |
+| `SKYLINE_RIDGE` | 399 (0x18F) |  | Skyline Ridge |
+| `THOUSAND_NEEDLES` | 400 (0x190) |  | Thousand Needles |
+| `THE_TIDUS_STAIR` | 401 (0x191) |  | The Tidus Stair |
+| `SHADY_REST_INN` | 403 (0x193) |  | Shady Rest Inn |
+| `BAEL_DUN_DIGSITE` | 404 (0x194) |  | Bael'dun Digsite |
+| `DESOLACE` | 405 (0x195) |  | Desolace |
+| `STONETALON_MOUNTAINS` | 406 (0x196) |  | Stonetalon Mountains |
+| `ORGRIMMAR_UNUSED` | 407 (0x197) |  | Orgrimmar UNUSED |
+| `GILLIJIMS_ISLE` | 408 (0x198) |  | Gillijim's Isle |
+| `ISLAND_OF_DOCTOR_LAPIDIS` | 409 (0x199) |  | Island of Doctor Lapidis |
+| `RAZORWIND_CANYON` | 410 (0x19A) |  | Razorwind Canyon |
+| `BATHRANS_HAUNT` | 411 (0x19B) |  | Bathran's Haunt |
+| `THE_RUINS_OF_ORDIL_ARAN` | 412 (0x19C) |  | The Ruins of Ordil'Aran |
+| `MAESTRAS_POST` | 413 (0x19D) |  | Maestra's Post |
+| `THE_ZORAM_STRAND` | 414 (0x19E) |  | The Zoram Strand |
+| `ASTRANAAR` | 415 (0x19F) |  | Astranaar |
+| `THE_SHRINE_OF_AESSINA` | 416 (0x1A0) |  | The Shrine of Aessina |
+| `FIRE_SCAR_SHRINE` | 417 (0x1A1) |  | Fire Scar Shrine |
+| `THE_RUINS_OF_STARDUST` | 418 (0x1A2) |  | The Ruins of Stardust |
+| `THE_HOWLING_VALE` | 419 (0x1A3) |  | The Howling Vale |
+| `SILVERWIND_REFUGE` | 420 (0x1A4) |  | Silverwind Refuge |
+| `MYSTRAL_LAKE` | 421 (0x1A5) |  | Mystral Lake |
+| `FALLEN_SKY_LAKE` | 422 (0x1A6) |  | Fallen Sky Lake |
+| `IRIS_LAKE` | 424 (0x1A8) |  | Iris Lake |
+| `MOONWELL` | 425 (0x1A9) |  | Moonwell |
+| `RAYNEWOOD_RETREAT` | 426 (0x1AA) |  | Raynewood Retreat |
+| `THE_SHADY_NOOK` | 427 (0x1AB) |  | The Shady Nook |
+| `NIGHT_RUN` | 428 (0x1AC) |  | Night Run |
+| `XAVIAN` | 429 (0x1AD) |  | Xavian |
+| `SATYRNAAR` | 430 (0x1AE) |  | Satyrnaar |
+| `SPLINTERTREE_POST` | 431 (0x1AF) |  | Splintertree Post |
+| `THE_DOR_DANIL_BARROW_DEN` | 432 (0x1B0) |  | The Dor'Danil Barrow Den |
+| `FALFARREN_RIVER` | 433 (0x1B1) |  | Falfarren River |
+| `FELFIRE_HILL` | 434 (0x1B2) |  | Felfire Hill |
+| `DEMON_FALL_CANYON` | 435 (0x1B3) |  | Demon Fall Canyon |
+| `DEMON_FALL_RIDGE` | 436 (0x1B4) |  | Demon Fall Ridge |
+| `WARSONG_LUMBER_CAMP` | 437 (0x1B5) |  | Warsong Lumber Camp |
+| `BOUGH_SHADOW` | 438 (0x1B6) |  | Bough Shadow |
+| `THE_SHIMMERING_FLATS` | 439 (0x1B7) |  | The Shimmering Flats |
+| `TANARIS` | 440 (0x1B8) |  | Tanaris |
+| `LAKE_FALATHIM` | 441 (0x1B9) |  | Lake Falathim |
+| `AUBERDINE` | 442 (0x1BA) |  | Auberdine |
+| `RUINS_OF_MATHYSTRA` | 443 (0x1BB) |  | Ruins of Mathystra |
+| `TOWER_OF_ALTHALAXX` | 444 (0x1BC) |  | Tower of Althalaxx |
+| `CLIFFSPRING_FALLS` | 445 (0x1BD) |  | Cliffspring Falls |
+| `BASHAL_ARAN` | 446 (0x1BE) |  | Bashal'Aran |
+| `AMETH_ARAN` | 447 (0x1BF) |  | Ameth'Aran |
+| `GROVE_OF_THE_ANCIENTS` | 448 (0x1C0) |  | Grove of the Ancients |
+| `THE_MASTERS_GLAIVE` | 449 (0x1C1) |  | The Master's Glaive |
+| `REMTRAVELS_EXCAVATION` | 450 (0x1C2) |  | Remtravel's Excavation |
+| `MISTS_EDGE` | 452 (0x1C4) |  | Mist's Edge |
+| `THE_LONG_WASH` | 453 (0x1C5) |  | The Long Wash |
+| `WILDBEND_RIVER` | 454 (0x1C6) |  | Wildbend River |
+| `BLACKWOOD_DEN` | 455 (0x1C7) |  | Blackwood Den |
+| `CLIFFSPRING_RIVER` | 456 (0x1C8) |  | Cliffspring River |
+| `THE_VEILED_SEA0` | 457 (0x1C9) |  | The Veiled Sea |
+| `GOLD_ROAD` | 458 (0x1CA) |  | Gold Road |
+| `SCARLET_WATCH_POST` | 459 (0x1CB) |  | Scarlet Watch Post |
+| `SUN_ROCK_RETREAT` | 460 (0x1CC) |  | Sun Rock Retreat |
+| `WINDSHEAR_CRAG` | 461 (0x1CD) |  | Windshear Crag |
+| `CRAGPOOL_LAKE` | 463 (0x1CF) |  | Cragpool Lake |
+| `MIRKFALLON_LAKE` | 464 (0x1D0) |  | Mirkfallon Lake |
+| `THE_CHARRED_VALE` | 465 (0x1D1) |  | The Charred Vale |
+| `VALLEY_OF_THE_BLOODFURIES` | 466 (0x1D2) |  | Valley of the Bloodfuries |
+| `STONETALON_PEAK` | 467 (0x1D3) |  | Stonetalon Peak |
+| `THE_TALON_DEN` | 468 (0x1D4) |  | The Talon Den |
+| `GREATWOOD_VALE` | 469 (0x1D5) |  | Greatwood Vale |
+| `THUNDER_BLUFF_UNUSED` | 470 (0x1D6) |  | Thunder Bluff UNUSED |
+| `BRAVE_WIND_MESA` | 471 (0x1D7) |  | Brave Wind Mesa |
+| `FIRE_STONE_MESA` | 472 (0x1D8) |  | Fire Stone Mesa |
+| `MANTLE_ROCK` | 473 (0x1D9) |  | Mantle Rock |
+| `HUNTER_RISE_UNUSED` | 474 (0x1DA) |  | Hunter Rise UNUSED |
+| `SPIRIT_RISE_UNUSED` | 475 (0x1DB) |  | Spirit RiseUNUSED |
+| `ELDER_RISE_UNUSED` | 476 (0x1DC) |  | Elder RiseUNUSED |
+| `RUINS_OF_JUBUWAL` | 477 (0x1DD) |  | Ruins of Jubuwal |
+| `POOLS_OF_ARLITHRIEN` | 478 (0x1DE) |  | Pools of Arlithrien |
+| `THE_RUSTMAUL_DIG_SITE` | 479 (0x1DF) |  | The Rustmaul Dig Site |
+| `CAMP_E_THOK` | 480 (0x1E0) |  | Camp E'thok |
+| `SPLITHOOF_CRAG` | 481 (0x1E1) |  | Splithoof Crag |
+| `HIGHPERCH` | 482 (0x1E2) |  | Highperch |
+| `THE_SCREECHING_CANYON` | 483 (0x1E3) |  | The Screeching Canyon |
+| `FREEWIND_POST` | 484 (0x1E4) |  | Freewind Post |
+| `THE_GREAT_LIFT0` | 485 (0x1E5) |  | The Great Lift |
+| `GALAK_HOLD` | 486 (0x1E6) |  | Galak Hold |
+| `ROGUEFEATHER_DEN` | 487 (0x1E7) |  | Roguefeather Den |
+| `THE_WEATHERED_NOOK` | 488 (0x1E8) |  | The Weathered Nook |
+| `THALANAAR` | 489 (0x1E9) |  | Thalanaar |
+| `UN_GORO_CRATER` | 490 (0x1EA) |  | Un'Goro Crater |
+| `RAZORFEN_KRAUL0` | 491 (0x1EB) |  | Razorfen Kraul |
+| `RAVEN_HILL_CEMETERY` | 492 (0x1EC) |  | Raven Hill Cemetery |
+| `MOONGLADE` | 493 (0x1ED) |  | Moonglade |
+| `DELETE_ME0` | 495 (0x1EF) |  | DELETE ME |
+| `BRACKENWALL_VILLAGE` | 496 (0x1F0) |  | Brackenwall Village |
+| `SWAMPLIGHT_MANOR` | 497 (0x1F1) |  | Swamplight Manor |
+| `BLOODFEN_BURROW` | 498 (0x1F2) |  | Bloodfen Burrow |
+| `DARKMIST_CAVERN` | 499 (0x1F3) |  | Darkmist Cavern |
+| `MOGGLE_POINT` | 500 (0x1F4) |  | Moggle Point |
+| `BEEZILS_WRECK` | 501 (0x1F5) |  | Beezil's Wreck |
+| `WITCH_HILL` | 502 (0x1F6) |  | Witch Hill |
+| `SENTRY_POINT` | 503 (0x1F7) |  | Sentry Point |
+| `NORTH_POINT_TOWER` | 504 (0x1F8) |  | North Point Tower |
+| `WEST_POINT_TOWER` | 505 (0x1F9) |  | West Point Tower |
+| `LOST_POINT` | 506 (0x1FA) |  | Lost Point |
+| `BLUEFEN` | 507 (0x1FB) |  | Bluefen |
+| `STONEMAUL_RUINS` | 508 (0x1FC) |  | Stonemaul Ruins |
+| `THE_DEN_OF_FLAME` | 509 (0x1FD) |  | The Den of Flame |
+| `THE_DRAGONMURK` | 510 (0x1FE) |  | The Dragonmurk |
+| `WYRMBOG` | 511 (0x1FF) |  | Wyrmbog |
+| `ONYXIAS_LAIR_UNUSED` | 512 (0x200) |  | Onyxia's Lair UNUSED |
+| `THERAMORE_ISLE` | 513 (0x201) |  | Theramore Isle |
+| `FOOTHOLD_CITADEL` | 514 (0x202) |  | Foothold Citadel |
+| `IRONCLAD_PRISON` | 515 (0x203) |  | Ironclad Prison |
+| `DUSTWALLOW_BAY` | 516 (0x204) |  | Dustwallow Bay |
+| `TIDEFURY_COVE` | 517 (0x205) |  | Tidefury Cove |
+| `DREADMURK_SHORE` | 518 (0x206) |  | Dreadmurk Shore |
+| `ADDLES_STEAD` | 536 (0x218) |  | Addle's Stead |
+| `FIRE_PLUME_RIDGE` | 537 (0x219) |  | Fire Plume Ridge |
+| `LAKKARI_TAR_PITS` | 538 (0x21A) |  | Lakkari Tar Pits |
+| `TERROR_RUN` | 539 (0x21B) |  | Terror Run |
+| `THE_SLITHERING_SCAR` | 540 (0x21C) |  | The Slithering Scar |
+| `MARSHALS_REFUGE` | 541 (0x21D) |  | Marshal's Refuge |
+| `FUNGAL_ROCK` | 542 (0x21E) |  | Fungal Rock |
+| `GOLAKKA_HOT_SPRINGS` | 543 (0x21F) |  | Golakka Hot Springs |
+| `THE_LOCH` | 556 (0x22C) |  | The Loch |
+| `BEGGARS_HAUNT` | 576 (0x240) |  | Beggar's Haunt |
+| `KODO_GRAVEYARD` | 596 (0x254) |  | Kodo Graveyard |
+| `GHOST_WALKER_POST` | 597 (0x255) |  | Ghost Walker Post |
+| `SAR_THERIS_STRAND` | 598 (0x256) |  | Sar'theris Strand |
+| `THUNDER_AXE_FORTRESS` | 599 (0x257) |  | Thunder Axe Fortress |
+| `BOLGANS_HOLE` | 600 (0x258) |  | Bolgan's Hole |
+| `MANNOROC_COVEN` | 602 (0x25A) |  | Mannoroc Coven |
+| `SARGERON` | 603 (0x25B) |  | Sargeron |
+| `MAGRAM_VILLAGE` | 604 (0x25C) |  | Magram Village |
+| `GELKIS_VILLAGE` | 606 (0x25E) |  | Gelkis Village |
+| `VALLEY_OF_SPEARS` | 607 (0x25F) |  | Valley of Spears |
+| `NIJELS_POINT` | 608 (0x260) |  | Nijel's Point |
+| `KOLKAR_VILLAGE` | 609 (0x261) |  | Kolkar Village |
+| `HYJAL` | 616 (0x268) |  | Hyjal |
+| `WINTERSPRING` | 618 (0x26A) |  | Winterspring |
+| `BLACKWOLF_RIVER` | 636 (0x27C) |  | Blackwolf River |
+| `KODO_ROCK` | 637 (0x27D) |  | Kodo Rock |
+| `HIDDEN_PATH` | 638 (0x27E) |  | Hidden Path |
+| `SPIRIT_ROCK` | 639 (0x27F) |  | Spirit Rock |
+| `SHRINE_OF_THE_DORMANT_FLAME` | 640 (0x280) |  | Shrine of the Dormant Flame |
+| `LAKE_ELUNE_ARA` | 656 (0x290) |  | Lake Elune'ara |
+| `THE_HARBORAGE` | 657 (0x291) |  | The Harborage |
+| `OUTLAND` | 676 (0x2A4) |  | Outland |
+| `CRAFTSMENS_TERRACE_UNUSED` | 696 (0x2B8) |  | Craftsmen's Terrace UNUSED |
+| `TRADESMENS_TERRACE_UNUSED` | 697 (0x2B9) |  | Tradesmen's Terrace UNUSED |
+| `THE_TEMPLE_GARDENS_UNUSED` | 698 (0x2BA) |  | The Temple Gardens UNUSED |
+| `TEMPLE_OF_ELUNE_UNUSED` | 699 (0x2BB) |  | Temple of Elune UNUSED |
+| `CENARION_ENCLAVE_UNUSED` | 700 (0x2BC) |  | Cenarion Enclave UNUSED |
+| `WARRIORS_TERRACE_UNUSED` | 701 (0x2BD) |  | Warrior's Terrace UNUSED |
+| `RUT_THERAN_VILLAGE` | 702 (0x2BE) |  | Rut'theran Village |
+| `IRONBANDS_COMPOUND` | 716 (0x2CC) |  | Ironband's Compound |
+| `THE_STOCKADE` | 717 (0x2CD) |  | The Stockade |
+| `WAILING_CAVERNS` | 718 (0x2CE) |  | Wailing Caverns |
+| `BLACKFATHOM_DEEPS0` | 719 (0x2CF) |  | Blackfathom Deeps |
+| `FRAY_ISLAND` | 720 (0x2D0) |  | Fray Island |
+| `GNOMEREGAN1` | 721 (0x2D1) |  | Gnomeregan |
+| `RAZORFEN_DOWNS0` | 722 (0x2D2) |  | Razorfen Downs |
+| `BAN_ETHIL_HOLLOW` | 736 (0x2E0) |  | Ban'ethil Hollow |
+| `SCARLET_MONASTERY` | 796 (0x31C) |  | Scarlet Monastery |
+| `JERODS_LANDING` | 797 (0x31D) |  | Jerod's Landing |
+| `RIDGEPOINT_TOWER` | 798 (0x31E) |  | Ridgepoint Tower |
+| `THE_DARKENED_BANK` | 799 (0x31F) |  | The Darkened Bank |
+| `COLDRIDGE_PASS` | 800 (0x320) |  | Coldridge Pass |
+| `CHILL_BREEZE_VALLEY` | 801 (0x321) |  | Chill Breeze Valley |
+| `SHIMMER_RIDGE` | 802 (0x322) |  | Shimmer Ridge |
+| `AMBERSTILL_RANCH` | 803 (0x323) |  | Amberstill Ranch |
+| `THE_TUNDRID_HILLS` | 804 (0x324) |  | The Tundrid Hills |
+| `SOUTH_GATE_PASS0` | 805 (0x325) |  | South Gate Pass |
+| `SOUTH_GATE_OUTPOST` | 806 (0x326) |  | South Gate Outpost |
+| `NORTH_GATE_PASS0` | 807 (0x327) |  | North Gate Pass |
+| `NORTH_GATE_OUTPOST` | 808 (0x328) |  | North Gate Outpost |
+| `GATES_OF_IRONFORGE` | 809 (0x329) |  | Gates of Ironforge |
+| `STILLWATER_POND` | 810 (0x32A) |  | Stillwater Pond |
+| `NIGHTMARE_VALE` | 811 (0x32B) |  | Nightmare Vale |
+| `VENOMWEB_VALE` | 812 (0x32C) |  | Venomweb Vale |
+| `THE_BULWARK1` | 813 (0x32D) |  | The Bulwark |
+| `SOUTHFURY_RIVER1` | 814 (0x32E) |  | Southfury River |
+| `SOUTHFURY_RIVER2` | 815 (0x32F) |  | Southfury River |
+| `RAZORMANE_GROUNDS` | 816 (0x330) |  | Razormane Grounds |
+| `SKULL_ROCK` | 817 (0x331) |  | Skull Rock |
+| `PALEMANE_ROCK` | 818 (0x332) |  | Palemane Rock |
+| `WINDFURY_RIDGE` | 819 (0x333) |  | Windfury Ridge |
+| `THE_GOLDEN_PLAINS` | 820 (0x334) |  | The Golden Plains |
+| `THE_ROLLING_PLAINS` | 821 (0x335) |  | The Rolling Plains |
+| `DUN_ALGAZ1` | 836 (0x344) |  | Dun Algaz |
+| `DUN_ALGAZ2` | 837 (0x345) |  | Dun Algaz |
+| `NORTH_GATE_PASS1` | 838 (0x346) |  | North Gate Pass |
+| `SOUTH_GATE_PASS1` | 839 (0x347) |  | South Gate Pass |
+| `TWILIGHT_GROVE` | 856 (0x358) |  | Twilight Grove |
+| `GM_ISLAND` | 876 (0x36C) |  | GM Island |
+| `DELETE_ME1` | 877 (0x36D) |  | Delete ME |
+| `SOUTHFURY_RIVER3` | 878 (0x36E) |  | Southfury River |
+| `SOUTHFURY_RIVER4` | 879 (0x36F) |  | Southfury River |
+| `THANDOL_SPAN1` | 880 (0x370) |  | Thandol Span |
+| `THANDOL_SPAN2` | 881 (0x371) |  | Thandol Span |
+| `PURGATION_ISLE` | 896 (0x380) |  | Purgation Isle |
+| `THE_JANSEN_STEAD` | 916 (0x394) |  | The Jansen Stead |
+| `THE_DEAD_ACRE` | 917 (0x395) |  | The Dead Acre |
+| `THE_MOLSEN_FARM` | 918 (0x396) |  | The Molsen Farm |
+| `STENDELS_POND` | 919 (0x397) |  | Stendel's Pond |
+| `THE_DAGGER_HILLS` | 920 (0x398) |  | The Dagger Hills |
+| `DEMONTS_PLACE` | 921 (0x399) |  | Demont's Place |
+| `THE_DUST_PLAINS` | 922 (0x39A) |  | The Dust Plains |
+| `STONESPLINTER_VALLEY` | 923 (0x39B) |  | Stonesplinter Valley |
+| `VALLEY_OF_KINGS` | 924 (0x39C) |  | Valley of Kings |
+| `ALGAZ_STATION` | 925 (0x39D) |  | Algaz Station |
+| `BUCKLEBREE_FARM` | 926 (0x39E) |  | Bucklebree Farm |
+| `THE_SHINING_STRAND` | 927 (0x39F) |  | The Shining Strand |
+| `NORTH_TIDES_HOLLOW` | 928 (0x3A0) |  | North Tide's Hollow |
+| `GRIZZLEPAW_RIDGE` | 936 (0x3A8) |  | Grizzlepaw Ridge |
+| `THE_VERDANT_FIELDS` | 956 (0x3BC) |  | The Verdant Fields |
+| `GADGETZAN` | 976 (0x3D0) |  | Gadgetzan |
+| `STEAMWHEEDLE_PORT` | 977 (0x3D1) |  | Steamwheedle Port |
+| `ZUL_FARRAK0` | 978 (0x3D2) |  | Zul'Farrak |
+| `SANDSORROW_WATCH` | 979 (0x3D3) |  | Sandsorrow Watch |
+| `THISTLESHRUB_VALLEY` | 980 (0x3D4) |  | Thistleshrub Valley |
+| `THE_GAPING_CHASM` | 981 (0x3D5) |  | The Gaping Chasm |
+| `THE_NOXIOUS_LAIR` | 982 (0x3D6) |  | The Noxious Lair |
+| `DUNEMAUL_COMPOUND` | 983 (0x3D7) |  | Dunemaul Compound |
+| `EASTMOON_RUINS` | 984 (0x3D8) |  | Eastmoon Ruins |
+| `WATERSPRING_FIELD` | 985 (0x3D9) |  | Waterspring Field |
+| `ZALASHJIS_DEN` | 986 (0x3DA) |  | Zalashji's Den |
+| `LANDS_END_BEACH` | 987 (0x3DB) |  | Land's End Beach |
+| `WAVESTRIDER_BEACH` | 988 (0x3DC) |  | Wavestrider Beach |
+| `ULDUM` | 989 (0x3DD) |  | Uldum |
+| `VALLEY_OF_THE_WATCHERS` | 990 (0x3DE) |  | Valley of the Watchers |
+| `GUNSTANS_POST` | 991 (0x3DF) |  | Gunstan's Post |
+| `SOUTHMOON_RUINS` | 992 (0x3E0) |  | Southmoon Ruins |
+| `RENDERS_CAMP` | 996 (0x3E4) |  | Render's Camp |
+| `RENDERS_VALLEY` | 997 (0x3E5) |  | Render's Valley |
+| `RENDERS_ROCK` | 998 (0x3E6) |  | Render's Rock |
+| `STONEWATCH_TOWER` | 999 (0x3E7) |  | Stonewatch Tower |
+| `GALARDELL_VALLEY` | 1000 (0x3E8) |  | Galardell Valley |
+| `LAKERIDGE_HIGHWAY` | 1001 (0x3E9) |  | Lakeridge Highway |
+| `THREE_CORNERS` | 1002 (0x3EA) |  | Three Corners |
+| `DIREFORGE_HILL` | 1016 (0x3F8) |  | Direforge Hill |
+| `RAPTOR_RIDGE` | 1017 (0x3F9) |  | Raptor Ridge |
+| `BLACK_CHANNEL_MARSH` | 1018 (0x3FA) |  | Black Channel Marsh |
+| `THE_GREEN_BELT0` | 1019 (0x3FB) |  | The Green Belt |
+| `MOSSHIDE_FEN` | 1020 (0x3FC) |  | Mosshide Fen |
+| `THELGEN_ROCK` | 1021 (0x3FD) |  | Thelgen Rock |
+| `BLUEGILL_MARSH` | 1022 (0x3FE) |  | Bluegill Marsh |
+| `SALTSPRAY_GLEN` | 1023 (0x3FF) |  | Saltspray Glen |
+| `SUNDOWN_MARSH` | 1024 (0x400) |  | Sundown Marsh |
+| `THE_GREEN_BELT1` | 1025 (0x401) |  | The Green Belt |
+| `ANGERFANG_ENCAMPMENT` | 1036 (0x40C) |  | Angerfang Encampment |
+| `GRIM_BATOL` | 1037 (0x40D) |  | Grim Batol |
+| `DRAGONMAW_GATES` | 1038 (0x40E) |  | Dragonmaw Gates |
+| `THE_LOST_FLEET` | 1039 (0x40F) |  | The Lost Fleet |
+| `DARROW_HILL0` | 1056 (0x420) |  | Darrow Hill |
+| `THORADINS_WALL1` | 1057 (0x421) |  | Thoradin's Wall |
+| `WEBWINDER_PATH` | 1076 (0x434) |  | Webwinder Path |
+| `THE_HUSHED_BANK` | 1097 (0x449) |  | The Hushed Bank |
+| `MANOR_MISTMANTLE` | 1098 (0x44A) |  | Manor Mistmantle |
+| `CAMP_MOJACHE` | 1099 (0x44B) |  | Camp Mojache |
+| `GRIMTOTEM_COMPOUND` | 1100 (0x44C) |  | Grimtotem Compound |
+| `THE_WRITHING_DEEP` | 1101 (0x44D) |  | The Writhing Deep |
+| `WILDWIND_LAKE` | 1102 (0x44E) |  | Wildwind Lake |
+| `GORDUNNI_OUTPOST` | 1103 (0x44F) |  | Gordunni Outpost |
+| `MOK_GORDUN` | 1104 (0x450) |  | Mok'Gordun |
+| `FERAL_SCAR_VALE` | 1105 (0x451) |  | Feral Scar Vale |
+| `FRAYFEATHER_HIGHLANDS` | 1106 (0x452) |  | Frayfeather Highlands |
+| `IDLEWIND_LAKE` | 1107 (0x453) |  | Idlewind Lake |
+| `THE_FORGOTTEN_COAST` | 1108 (0x454) |  | The Forgotten Coast |
+| `EAST_PILLAR` | 1109 (0x455) |  | East Pillar |
+| `WEST_PILLAR` | 1110 (0x456) |  | West Pillar |
+| `DREAM_BOUGH` | 1111 (0x457) |  | Dream Bough |
+| `JADEMIR_LAKE` | 1112 (0x458) |  | Jademir Lake |
+| `ONEIROS` | 1113 (0x459) |  | Oneiros |
+| `RUINS_OF_RAVENWIND` | 1114 (0x45A) |  | Ruins of Ravenwind |
+| `RAGE_SCAR_HOLD` | 1115 (0x45B) |  | Rage Scar Hold |
+| `FEATHERMOON_STRONGHOLD` | 1116 (0x45C) |  | Feathermoon Stronghold |
+| `RUINS_OF_SOLARSAL` | 1117 (0x45D) |  | Ruins of Solarsal |
+| `LOWER_WILDS_UNUSED` | 1118 (0x45E) |  | Lower Wilds UNUSED |
+| `THE_TWIN_COLOSSALS` | 1119 (0x45F) |  | The Twin Colossals |
+| `SARDOR_ISLE` | 1120 (0x460) |  | Sardor Isle |
+| `ISLE_OF_DREAD` | 1121 (0x461) |  | Isle of Dread |
+| `HIGH_WILDERNESS` | 1136 (0x470) |  | High Wilderness |
+| `LOWER_WILDS` | 1137 (0x471) |  | Lower Wilds |
+| `SOUTHERN_BARRENS` | 1156 (0x484) |  | Southern Barrens |
+| `SOUTHERN_GOLD_ROAD` | 1157 (0x485) |  | Southern Gold Road |
+| `ZUL_FARRAK1` | 1176 (0x498) |  | Zul'Farrak |
+| `UNUSED_ALCAZ_ISLAND` | 1196 (0x4AC) |  | UNUSEDAlcaz Island |
+| `TIMBERMAW_HOLD0` | 1216 (0x4C0) |  | Timbermaw Hold |
+| `VANNDIR_ENCAMPMENT` | 1217 (0x4C1) |  | Vanndir Encampment |
+| `TEST_AZSHARA` | 1218 (0x4C2) |  | TESTAzshara |
+| `LEGASH_ENCAMPMENT` | 1219 (0x4C3) |  | Legash Encampment |
+| `THALASSIAN_BASE_CAMP` | 1220 (0x4C4) |  | Thalassian Base Camp |
+| `RUINS_OF_ELDARATH` | 1221 (0x4C5) |  | Ruins of Eldarath |
+| `HETAERAS_CLUTCH` | 1222 (0x4C6) |  | Hetaera's Clutch |
+| `TEMPLE_OF_ZIN_MALOR` | 1223 (0x4C7) |  | Temple of Zin-Malor |
+| `BEARS_HEAD` | 1224 (0x4C8) |  | Bear's Head |
+| `URSOLAN` | 1225 (0x4C9) |  | Ursolan |
+| `TEMPLE_OF_ARKKORAN` | 1226 (0x4CA) |  | Temple of Arkkoran |
+| `BAY_OF_STORMS` | 1227 (0x4CB) |  | Bay of Storms |
+| `THE_SHATTERED_STRAND` | 1228 (0x4CC) |  | The Shattered Strand |
+| `TOWER_OF_ELDARA` | 1229 (0x4CD) |  | Tower of Eldara |
+| `JAGGED_REEF` | 1230 (0x4CE) |  | Jagged Reef |
+| `SOUTHRIDGE_BEACH` | 1231 (0x4CF) |  | Southridge Beach |
+| `RAVENCREST_MONUMENT` | 1232 (0x4D0) |  | Ravencrest Monument |
+| `FORLORN_RIDGE` | 1233 (0x4D1) |  | Forlorn Ridge |
+| `LAKE_MENNAR` | 1234 (0x4D2) |  | Lake Mennar |
+| `SHADOWSONG_SHRINE` | 1235 (0x4D3) |  | Shadowsong Shrine |
+| `HALDARR_ENCAMPMENT` | 1236 (0x4D4) |  | Haldarr Encampment |
+| `VALORMOK` | 1237 (0x4D5) |  | Valormok |
+| `THE_RUINED_REACHES` | 1256 (0x4E8) |  | The Ruined Reaches |
+| `THE_TALONDEEP_PATH0` | 1276 (0x4FC) |  | The Talondeep Path |
+| `THE_TALONDEEP_PATH1` | 1277 (0x4FD) |  | The Talondeep Path |
+| `ROCKTUSK_FARM` | 1296 (0x510) |  | Rocktusk Farm |
+| `JAGGEDSWINE_FARM` | 1297 (0x511) |  | Jaggedswine Farm |
+| `RAZORFEN_DOWNS1` | 1316 (0x524) |  | Razorfen Downs |
+| `LOST_RIGGER_COVE` | 1336 (0x538) |  | Lost Rigger Cove |
+| `ULDAMAN0` | 1337 (0x539) |  | Uldaman |
+| `LORDAMERE_LAKE1` | 1338 (0x53A) |  | Lordamere Lake |
+| `LORDAMERE_LAKE2` | 1339 (0x53B) |  | Lordamere Lake |
+| `GALLOWS_CORNER` | 1357 (0x54D) |  | Gallows' Corner |
+| `SILITHUS` | 1377 (0x561) |  | Silithus |
+| `EMERALD_FOREST` | 1397 (0x575) |  | Emerald Forest |
+| `SUNKEN_TEMPLE` | 1417 (0x589) |  | Sunken Temple |
+| `DREADMAUL_HOLD` | 1437 (0x59D) |  | Dreadmaul Hold |
+| `NETHERGARDE_KEEP` | 1438 (0x59E) |  | Nethergarde Keep |
+| `DREADMAUL_POST` | 1439 (0x59F) |  | Dreadmaul Post |
+| `SERPENTS_COIL` | 1440 (0x5A0) |  | Serpent's Coil |
+| `ALTAR_OF_STORMS1` | 1441 (0x5A1) |  | Altar of Storms |
+| `FIREWATCH_RIDGE` | 1442 (0x5A2) |  | Firewatch Ridge |
+| `THE_SLAG_PIT` | 1443 (0x5A3) |  | The Slag Pit |
+| `THE_SEA_OF_CINDERS` | 1444 (0x5A4) |  | The Sea of Cinders |
+| `BLACKROCK_MOUNTAIN2` | 1445 (0x5A5) |  | Blackrock Mountain |
+| `THORIUM_POINT` | 1446 (0x5A6) |  | Thorium Point |
+| `GARRISON_ARMORY` | 1457 (0x5B1) |  | Garrison Armory |
+| `THE_TEMPLE_OF_ATAL_HAKKAR` | 1477 (0x5C5) |  | The Temple of Atal'Hakkar |
+| `UNDERCITY` | 1497 (0x5D9) |  | Undercity |
+| `ULDAMAN1` | 1517 (0x5ED) |  | Uldaman |
+| `NOT_USED_DEADMINES` | 1518 (0x5EE) |  | Not Used Deadmines |
+| `STORMWIND_CITY` | 1519 (0x5EF) |  | Stormwind City |
+| `IRONFORGE` | 1537 (0x601) |  | Ironforge |
+| `SPLITHOOF_HOLD` | 1557 (0x615) |  | Splithoof Hold |
+| `THE_CAPE_OF_STRANGLETHORN` | 1577 (0x629) |  | The Cape of Stranglethorn |
+| `SOUTHERN_SAVAGE_COAST` | 1578 (0x62A) |  | Southern Savage Coast |
+| `UNUSED_THE_DEADMINES_002` | 1579 (0x62B) |  | Unused The Deadmines 002 |
+| `UNUSED_IRONCLAD_COVE_003` | 1580 (0x62C) |  | Unused Ironclad Cove 003 |
+| `THE_DEADMINES` | 1581 (0x62D) |  | The Deadmines |
+| `IRONCLAD_COVE` | 1582 (0x62E) |  | Ironclad Cove |
+| `BLACKROCK_SPIRE` | 1583 (0x62F) |  | Blackrock Spire |
+| `BLACKROCK_DEPTHS` | 1584 (0x630) |  | Blackrock Depths |
+| `RAPTOR_GROUNDS_UNUSED` | 1597 (0x63D) |  | Raptor Grounds UNUSED |
+| `GROL_DOM_FARM_UNUSED` | 1598 (0x63E) |  | Grol'dom Farm UNUSED |
+| `MORSHAN_BASE_CAMP` | 1599 (0x63F) |  | Mor'shan Base Camp |
+| `HONORS_STAND_UNUSED` | 1600 (0x640) |  | Honor's Stand UNUSED |
+| `BLACKTHORN_RIDGE_UNUSED` | 1601 (0x641) |  | Blackthorn Ridge UNUSED |
+| `BRAMBLESCAR_UNUSED` | 1602 (0x642) |  | Bramblescar UNUSED |
+| `AGAMA_GOR_UNUSED` | 1603 (0x643) |  | Agama'gor UNUSED |
+| `VALLEY_OF_HEROES` | 1617 (0x651) |  | Valley of Heroes |
+| `ORGRIMMAR` | 1637 (0x665) |  | Orgrimmar |
+| `THUNDER_BLUFF` | 1638 (0x666) |  | Thunder Bluff |
+| `ELDER_RISE` | 1639 (0x667) |  | Elder Rise |
+| `SPIRIT_RISE` | 1640 (0x668) |  | Spirit Rise |
+| `HUNTER_RISE` | 1641 (0x669) |  | Hunter Rise |
+| `DARNASSUS` | 1657 (0x679) |  | Darnassus |
+| `CENARION_ENCLAVE` | 1658 (0x67A) |  | Cenarion Enclave |
+| `CRAFTSMENS_TERRACE` | 1659 (0x67B) |  | Craftsmen's Terrace |
+| `WARRIORS_TERRACE` | 1660 (0x67C) |  | Warrior's Terrace |
+| `THE_TEMPLE_GARDENS` | 1661 (0x67D) |  | The Temple Gardens |
+| `TRADESMENS_TERRACE` | 1662 (0x67E) |  | Tradesmen's Terrace |
+| `GAVINS_NAZE` | 1677 (0x68D) |  | Gavin's Naze |
+| `SOFERAS_NAZE` | 1678 (0x68E) |  | Sofera's Naze |
+| `CORRAHNS_DAGGER` | 1679 (0x68F) |  | Corrahn's Dagger |
+| `THE_HEADLAND` | 1680 (0x690) |  | The Headland |
+| `MISTY_SHORE` | 1681 (0x691) |  | Misty Shore |
+| `DANDREDS_FOLD` | 1682 (0x692) |  | Dandred's Fold |
+| `GROWLESS_CAVE` | 1683 (0x693) |  | Growless Cave |
+| `CHILLWIND_POINT` | 1684 (0x694) |  | Chillwind Point |
+| `RAPTOR_GROUNDS` | 1697 (0x6A1) |  | Raptor Grounds |
+| `BRAMBLESCAR` | 1698 (0x6A2) |  | Bramblescar |
+| `THORN_HILL` | 1699 (0x6A3) |  | Thorn Hill |
+| `AGAMA_GOR` | 1700 (0x6A4) |  | Agama'gor |
+| `BLACKTHORN_RIDGE` | 1701 (0x6A5) |  | Blackthorn Ridge |
+| `HONORS_STAND` | 1702 (0x6A6) |  | Honor's Stand |
+| `THE_MORSHAN_RAMPART` | 1703 (0x6A7) |  | The Mor'shan Rampart |
+| `GROL_DOM_FARM` | 1704 (0x6A8) |  | Grol'dom Farm |
+| `RAZORFEN_KRAUL1` | 1717 (0x6B5) |  | Razorfen Kraul |
+| `THE_GREAT_LIFT1` | 1718 (0x6B6) |  | The Great Lift |
+| `MISTVALE_VALLEY` | 1737 (0x6C9) |  | Mistvale Valley |
+| `NEK_MANI_WELLSPRING` | 1738 (0x6CA) |  | Nek'mani Wellspring |
+| `BLOODSAIL_COMPOUND` | 1739 (0x6CB) |  | Bloodsail Compound |
+| `VENTURE_CO_BASE_CAMP` | 1740 (0x6CC) |  | Venture Co. Base Camp |
+| `GURUBASHI_ARENA` | 1741 (0x6CD) |  | Gurubashi Arena |
+| `SPIRIT_DEN` | 1742 (0x6CE) |  | Spirit Den |
+| `THE_CRIMSON_VEIL` | 1757 (0x6DD) |  | The Crimson Veil |
+| `THE_RIPTIDE` | 1758 (0x6DE) |  | The Riptide |
+| `THE_DAMSELS_LUCK` | 1759 (0x6DF) |  | The Damsel's Luck |
+| `VENTURE_CO_OPERATIONS_CENTER` | 1760 (0x6E0) |  | Venture Co. Operations Center |
+| `DEADWOOD_VILLAGE` | 1761 (0x6E1) |  | Deadwood Village |
+| `FELPAW_VILLAGE` | 1762 (0x6E2) |  | Felpaw Village |
+| `JAEDENAR` | 1763 (0x6E3) |  | Jaedenar |
+| `BLOODVENOM_RIVER` | 1764 (0x6E4) |  | Bloodvenom River |
+| `BLOODVENOM_FALLS` | 1765 (0x6E5) |  | Bloodvenom Falls |
+| `SHATTER_SCAR_VALE` | 1766 (0x6E6) |  | Shatter Scar Vale |
+| `IRONTREE_WOODS` | 1767 (0x6E7) |  | Irontree Woods |
+| `IRONTREE_CAVERN` | 1768 (0x6E8) |  | Irontree Cavern |
+| `TIMBERMAW_HOLD1` | 1769 (0x6E9) |  | Timbermaw Hold |
+| `SHADOW_HOLD` | 1770 (0x6EA) |  | Shadow Hold |
+| `SHRINE_OF_THE_DECEIVER` | 1771 (0x6EB) |  | Shrine of the Deceiver |
+| `ITHARIUSS_CAVE` | 1777 (0x6F1) |  | Itharius's Cave |
+| `SORROWMURK` | 1778 (0x6F2) |  | Sorrowmurk |
+| `DRAENIL_DUR_VILLAGE` | 1779 (0x6F3) |  | Draenil'dur Village |
+| `SPLINTERSPEAR_JUNCTION` | 1780 (0x6F4) |  | Splinterspear Junction |
+| `STAGALBOG` | 1797 (0x705) |  | Stagalbog |
+| `THE_SHIFTING_MIRE` | 1798 (0x706) |  | The Shifting Mire |
+| `STAGALBOG_CAVE` | 1817 (0x719) |  | Stagalbog Cave |
+| `WITHERBARK_CAVERNS` | 1837 (0x72D) |  | Witherbark Caverns |
+| `THORADINS_WALL2` | 1857 (0x741) |  | Thoradin's Wall |
+| `BOULDER_GOR` | 1858 (0x742) |  | Boulder'gor |
+| `VALLEY_OF_FANGS` | 1877 (0x755) |  | Valley of Fangs |
+| `THE_DUSTBOWL` | 1878 (0x756) |  | The Dustbowl |
+| `MIRAGE_FLATS` | 1879 (0x757) |  | Mirage Flats |
+| `FEATHERBEARDS_HOVEL` | 1880 (0x758) |  | Featherbeard's Hovel |
+| `SHINDIGGERS_CAMP` | 1881 (0x759) |  | Shindigger's Camp |
+| `PLAGUEMIST_RAVINE` | 1882 (0x75A) |  | Plaguemist Ravine |
+| `VALORWIND_LAKE` | 1883 (0x75B) |  | Valorwind Lake |
+| `AGOL_WATHA` | 1884 (0x75C) |  | Agol'watha |
+| `HIRI_WATHA` | 1885 (0x75D) |  | Hiri'watha |
+| `THE_CREEPING_RUIN` | 1886 (0x75E) |  | The Creeping Ruin |
+| `BOGENS_LEDGE` | 1887 (0x75F) |  | Bogen's Ledge |
+| `THE_MAKERS_TERRACE` | 1897 (0x769) |  | The Maker's Terrace |
+| `DUSTWIND_GULCH` | 1898 (0x76A) |  | Dustwind Gulch |
+| `SHAOL_WATHA` | 1917 (0x77D) |  | Shaol'watha |
+| `NOONSHADE_RUINS` | 1937 (0x791) |  | Noonshade Ruins |
+| `BROKEN_PILLAR` | 1938 (0x792) |  | Broken Pillar |
+| `ABYSSAL_SANDS` | 1939 (0x793) |  | Abyssal Sands |
+| `SOUTHBREAK_SHORE` | 1940 (0x794) |  | Southbreak Shore |
+| `CAVERNS_OF_TIME0` | 1941 (0x795) |  | Caverns of Time |
+| `THE_MARSHLANDS` | 1942 (0x796) |  | The Marshlands |
+| `IRONSTONE_PLATEAU` | 1943 (0x797) |  | Ironstone Plateau |
+| `BLACKCHAR_CAVE` | 1957 (0x7A5) |  | Blackchar Cave |
+| `TANNER_CAMP` | 1958 (0x7A6) |  | Tanner Camp |
+| `DUSTFIRE_VALLEY` | 1959 (0x7A7) |  | Dustfire Valley |
+| `ZUL_GURUB1` | 1977 (0x7B9) |  | Zul'Gurub |
+| `MISTY_REED_POST` | 1978 (0x7BA) |  | Misty Reed Post |
+| `BLOODVENOM_POST` | 1997 (0x7CD) |  | Bloodvenom Post |
+| `TALONBRANCH_GLADE` | 1998 (0x7CE) |  | Talonbranch Glade |
+| `STRATHOLME0` | 2017 (0x7E1) |  | Stratholme |
+| `UNUSED_SHADOWFANG_KEEP_003` | 2037 (0x7F5) |  | UNUSEDShadowfang Keep 003 |
+| `SCHOLOMANCE` | 2057 (0x809) |  | Scholomance |
+| `TWILIGHT_VALE` | 2077 (0x81D) |  | Twilight Vale |
+| `TWILIGHT_SHORE` | 2078 (0x81E) |  | Twilight Shore |
+| `ALCAZ_ISLAND` | 2079 (0x81F) |  | Alcaz Island |
+| `DARKCLOUD_PINNACLE` | 2097 (0x831) |  | Darkcloud Pinnacle |
+| `DAWNING_WOOD_CATACOMBS` | 2098 (0x832) |  | Dawning Wood Catacombs |
+| `STONEWATCH_KEEP` | 2099 (0x833) |  | Stonewatch Keep |
+| `MARAUDON` | 2100 (0x834) |  | Maraudon |
+| `STOUTLAGER_INN` | 2101 (0x835) |  | Stoutlager Inn |
+| `THUNDERBREW_DISTILLERY` | 2102 (0x836) |  | Thunderbrew Distillery |
+| `MENETHIL_KEEP` | 2103 (0x837) |  | Menethil Keep |
+| `DEEPWATER_TAVERN` | 2104 (0x838) |  | Deepwater Tavern |
+| `SHADOW_GRAVE` | 2117 (0x845) |  | Shadow Grave |
+| `BRILL_TOWN_HALL` | 2118 (0x846) |  | Brill Town Hall |
+| `GALLOWS_END_TAVERN` | 2119 (0x847) |  | Gallows' End Tavern |
+| `THE_POOLS_OF_VISION_UNUSED` | 2137 (0x859) |  | The Pools of VisionUNUSED |
+| `DREADMIST_DEN` | 2138 (0x85A) |  | Dreadmist Den |
+| `BAEL_DUN_KEEP` | 2157 (0x86D) |  | Bael'dun Keep |
+| `EMBERSTRIFES_DEN` | 2158 (0x86E) |  | Emberstrife's Den |
+| `ONYXIAS_LAIR` | 2159 (0x86F) |  | Onyxia's Lair |
+| `WINDSHEAR_MINE` | 2160 (0x870) |  | Windshear Mine |
+| `ROLANDS_DOOM` | 2161 (0x871) |  | Roland's Doom |
+| `BATTLE_RING` | 2177 (0x881) |  | Battle Ring |
+| `THE_POOLS_OF_VISION` | 2197 (0x895) |  | The Pools of Vision |
+| `SHADOWBREAK_RAVINE` | 2198 (0x896) |  | Shadowbreak Ravine |
+| `BROKEN_SPEAR_VILLAGE` | 2217 (0x8A9) |  | Broken Spear Village |
+| `WHITEREACH_POST` | 2237 (0x8BD) |  | Whitereach Post |
+| `GORNIA` | 2238 (0x8BE) |  | Gornia |
+| `ZANES_EYE_CRATER` | 2239 (0x8BF) |  | Zane's Eye Crater |
+| `MIRAGE_RACEWAY` | 2240 (0x8C0) |  | Mirage Raceway |
+| `FROSTSABER_ROCK` | 2241 (0x8C1) |  | Frostsaber Rock |
+| `THE_HIDDEN_GROVE` | 2242 (0x8C2) |  | The Hidden Grove |
+| `TIMBERMAW_POST` | 2243 (0x8C3) |  | Timbermaw Post |
+| `WINTERFALL_VILLAGE` | 2244 (0x8C4) |  | Winterfall Village |
+| `MAZTHORIL` | 2245 (0x8C5) |  | Mazthoril |
+| `FROSTFIRE_HOT_SPRINGS` | 2246 (0x8C6) |  | Frostfire Hot Springs |
+| `ICE_THISTLE_HILLS` | 2247 (0x8C7) |  | Ice Thistle Hills |
+| `DUN_MANDARR` | 2248 (0x8C8) |  | Dun Mandarr |
+| `FROSTWHISPER_GORGE` | 2249 (0x8C9) |  | Frostwhisper Gorge |
+| `OWL_WING_THICKET` | 2250 (0x8CA) |  | Owl Wing Thicket |
+| `LAKE_KEL_THERIL` | 2251 (0x8CB) |  | Lake Kel'Theril |
+| `THE_RUINS_OF_KEL_THERIL` | 2252 (0x8CC) |  | The Ruins of Kel'Theril |
+| `STARFALL_VILLAGE` | 2253 (0x8CD) |  | Starfall Village |
+| `BAN_THALLOW_BARROW_DEN` | 2254 (0x8CE) |  | Ban'Thallow Barrow Den |
+| `EVERLOOK` | 2255 (0x8CF) |  | Everlook |
+| `DARKWHISPER_GORGE` | 2256 (0x8D0) |  | Darkwhisper Gorge |
+| `DEEPRUN_TRAM` | 2257 (0x8D1) |  | Deeprun Tram |
+| `THE_FUNGAL_VALE` | 2258 (0x8D2) |  | The Fungal Vale |
+| `UNUSED_THE_MARRIS_STEAD` | 2259 (0x8D3) |  | UNUSEDThe Marris Stead |
+| `THE_MARRIS_STEAD` | 2260 (0x8D4) |  | The Marris Stead |
+| `THE_UNDERCROFT` | 2261 (0x8D5) |  | The Undercroft |
+| `DARROWSHIRE` | 2262 (0x8D6) |  | Darrowshire |
+| `CROWN_GUARD_TOWER` | 2263 (0x8D7) |  | Crown Guard Tower |
+| `CORINS_CROSSING` | 2264 (0x8D8) |  | Corin's Crossing |
+| `SCARLET_BASE_CAMP` | 2265 (0x8D9) |  | Scarlet Base Camp |
+| `TYRS_HAND` | 2266 (0x8DA) |  | Tyr's Hand |
+| `THE_SCARLET_BASILICA` | 2267 (0x8DB) |  | The Scarlet Basilica |
+| `LIGHTS_HOPE_CHAPEL` | 2268 (0x8DC) |  | Light's Hope Chapel |
+| `BROWMAN_MILL` | 2269 (0x8DD) |  | Browman Mill |
+| `THE_NOXIOUS_GLADE` | 2270 (0x8DE) |  | The Noxious Glade |
+| `EASTWALL_TOWER` | 2271 (0x8DF) |  | Eastwall Tower |
+| `NORTHDALE` | 2272 (0x8E0) |  | Northdale |
+| `ZUL_MASHAR` | 2273 (0x8E1) |  | Zul'Mashar |
+| `MAZRA_ALOR` | 2274 (0x8E2) |  | Mazra'Alor |
+| `NORTHPASS_TOWER` | 2275 (0x8E3) |  | Northpass Tower |
+| `QUEL_LITHIEN_LODGE` | 2276 (0x8E4) |  | Quel'Lithien Lodge |
+| `PLAGUEWOOD` | 2277 (0x8E5) |  | Plaguewood |
+| `SCOURGEHOLD` | 2278 (0x8E6) |  | Scourgehold |
+| `STRATHOLME1` | 2279 (0x8E7) |  | Stratholme |
+| `UNUSED_STRATHOLME` | 2280 (0x8E8) |  | UNUSED Stratholme |
+| `DARROWMERE_LAKE0` | 2297 (0x8F9) |  | Darrowmere Lake |
+| `CAER_DARROW` | 2298 (0x8FA) |  | Caer Darrow |
+| `DARROWMERE_LAKE1` | 2299 (0x8FB) |  | Darrowmere Lake |
+| `CAVERNS_OF_TIME1` | 2300 (0x8FC) |  | Caverns of Time |
+| `THISTLEFUR_VILLAGE` | 2301 (0x8FD) |  | Thistlefur Village |
+| `THE_QUAGMIRE` | 2302 (0x8FE) |  | The Quagmire |
+| `WINDBREAK_CANYON` | 2303 (0x8FF) |  | Windbreak Canyon |
+| `SOUTH_SEAS0` | 2317 (0x90D) |  | South Seas |
+| `THE_GREAT_SEA3` | 2318 (0x90E) |  | The Great Sea |
+| `THE_GREAT_SEA4` | 2319 (0x90F) |  | The Great Sea |
+| `THE_GREAT_SEA5` | 2320 (0x910) |  | The Great Sea |
+| `THE_GREAT_SEA6` | 2321 (0x911) |  | The Great Sea |
+| `THE_VEILED_SEA1` | 2322 (0x912) |  | The Veiled Sea |
+| `THE_VEILED_SEA2` | 2323 (0x913) |  | The Veiled Sea |
+| `THE_VEILED_SEA3` | 2324 (0x914) |  | The Veiled Sea |
+| `THE_VEILED_SEA4` | 2325 (0x915) |  | The Veiled Sea |
+| `THE_VEILED_SEA5` | 2326 (0x916) |  | The Veiled Sea |
+| `RAZOR_HILL_BARRACKS` | 2337 (0x921) |  | Razor Hill Barracks |
+| `SOUTH_SEAS1` | 2338 (0x922) |  | South Seas |
+| `THE_GREAT_SEA7` | 2339 (0x923) |  | The Great Sea |
+| `BLOODTOOTH_CAMP` | 2357 (0x935) |  | Bloodtooth Camp |
+| `FOREST_SONG` | 2358 (0x936) |  | Forest Song |
+| `GREENPAW_VILLAGE` | 2359 (0x937) |  | Greenpaw Village |
+| `SILVERWING_OUTPOST` | 2360 (0x938) |  | Silverwing Outpost |
+| `NIGHTHAVEN` | 2361 (0x939) |  | Nighthaven |
+| `SHRINE_OF_REMULOS` | 2362 (0x93A) |  | Shrine of Remulos |
+| `STORMRAGE_BARROW_DENS` | 2363 (0x93B) |  | Stormrage Barrow Dens |
+| `THE_GREAT_SEA8` | 2364 (0x93C) |  | The Great Sea |
+| `THE_GREAT_SEA9` | 2365 (0x93D) |  | The Great Sea |
+| `THE_BLACK_MORASS` | 2366 (0x93E) |  | The Black Morass |
+| `OLD_HILLSBRAD_FOOTHILLS` | 2367 (0x93F) |  | Old Hillsbrad Foothills |
+| `TARREN_MILL1` | 2368 (0x940) |  | Tarren Mill |
+| `SOUTHSHORE1` | 2369 (0x941) |  | Southshore |
+| `DURNHOLDE_KEEP1` | 2370 (0x942) |  | Durnholde Keep |
+| `DUN_GAROK1` | 2371 (0x943) |  | Dun Garok |
+| `HILLSBRAD_FIELDS1` | 2372 (0x944) |  | Hillsbrad Fields |
+| `EASTERN_STRAND1` | 2373 (0x945) |  | Eastern Strand |
+| `NETHANDER_STEAD1` | 2374 (0x946) |  | Nethander Stead |
+| `DARROW_HILL1` | 2375 (0x947) |  | Darrow Hill |
+| `SOUTHPOINT_TOWER1` | 2376 (0x948) |  | Southpoint Tower |
+| `THORADINS_WALL3` | 2377 (0x949) |  | Thoradin's Wall |
+| `WESTERN_STRAND1` | 2378 (0x94A) |  | Western Strand |
+| `AZURELODE_MINE1` | 2379 (0x94B) |  | Azurelode Mine |
+| `THE_GREAT_SEA10` | 2397 (0x95D) |  | The Great Sea |
+| `THE_GREAT_SEA11` | 2398 (0x95E) |  | The Great Sea |
+| `THE_GREAT_SEA12` | 2399 (0x95F) |  | The Great Sea |
+| `THE_FORBIDDING_SEA1` | 2400 (0x960) |  | The Forbidding Sea |
+| `THE_FORBIDDING_SEA2` | 2401 (0x961) |  | The Forbidding Sea |
+| `THE_FORBIDDING_SEA3` | 2402 (0x962) |  | The Forbidding Sea |
+| `THE_FORBIDDING_SEA4` | 2403 (0x963) |  | The Forbidding Sea |
+| `TETHRIS_ARAN` | 2404 (0x964) |  | Tethris Aran |
+| `ETHEL_RETHOR` | 2405 (0x965) |  | Ethel Rethor |
+| `RANAZJAR_ISLE` | 2406 (0x966) |  | Ranazjar Isle |
+| `KORMEKS_HUT` | 2407 (0x967) |  | Kormek's Hut |
+| `SHADOWPREY_VILLAGE` | 2408 (0x968) |  | Shadowprey Village |
+| `BLACKROCK_PASS` | 2417 (0x971) |  | Blackrock Pass |
+| `MORGANS_VIGIL` | 2418 (0x972) |  | Morgan's Vigil |
+| `SLITHER_ROCK` | 2419 (0x973) |  | Slither Rock |
+| `TERROR_WING_PATH` | 2420 (0x974) |  | Terror Wing Path |
+| `DRACO_DAR` | 2421 (0x975) |  | Draco'dar |
+| `RAGEFIRE_CHASM` | 2437 (0x985) |  | Ragefire Chasm |
+| `NIGHTSONG_WOODS` | 2457 (0x999) |  | Nightsong Woods |
+| `THE_VEILED_SEA6` | 2477 (0x9AD) |  | The Veiled Sea |
+| `MORLOS_ARAN` | 2478 (0x9AE) |  | Morlos'Aran |
+| `EMERALD_SANCTUARY` | 2479 (0x9AF) |  | Emerald Sanctuary |
+| `JADEFIRE_GLEN` | 2480 (0x9B0) |  | Jadefire Glen |
+| `RUINS_OF_CONSTELLAS` | 2481 (0x9B1) |  | Ruins of Constellas |
+| `BITTER_REACHES` | 2497 (0x9C1) |  | Bitter Reaches |
+| `RISE_OF_THE_DEFILER` | 2517 (0x9D5) |  | Rise of the Defiler |
+| `LARISS_PAVILION` | 2518 (0x9D6) |  | Lariss Pavilion |
+| `WOODPAW_HILLS` | 2519 (0x9D7) |  | Woodpaw Hills |
+| `WOODPAW_DEN` | 2520 (0x9D8) |  | Woodpaw Den |
+| `VERDANTIS_RIVER` | 2521 (0x9D9) |  | Verdantis River |
+| `RUINS_OF_ISILDIEN` | 2522 (0x9DA) |  | Ruins of Isildien |
+| `GRIMTOTEM_POST` | 2537 (0x9E9) |  | Grimtotem Post |
+| `CAMP_APARAJE` | 2538 (0x9EA) |  | Camp Aparaje |
+| `MALAKA_JIN` | 2539 (0x9EB) |  | Malaka'jin |
+| `BOULDERSLIDE_RAVINE` | 2540 (0x9EC) |  | Boulderslide Ravine |
+| `SISHIR_CANYON` | 2541 (0x9ED) |  | Sishir Canyon |
+| `DIRE_MAUL0` | 2557 (0x9FD) |  | Dire Maul |
+| `DEADWIND_RAVINE` | 2558 (0x9FE) |  | Deadwind Ravine |
+| `DIAMONDHEAD_RIVER` | 2559 (0x9FF) |  | Diamondhead River |
+| `ARIDENS_CAMP` | 2560 (0xA00) |  | Ariden's Camp |
+| `THE_VICE` | 2561 (0xA01) |  | The Vice |
+| `KARAZHAN` | 2562 (0xA02) |  | Karazhan |
+| `MORGANS_PLOT` | 2563 (0xA03) |  | Morgan's Plot |
+| `DIRE_MAUL1` | 2577 (0xA11) |  | Dire Maul |
+| `ALTERAC_VALLEY0` | 2597 (0xA25) |  | Alterac Valley |
+| `SCRABBLESCREWS_CAMP` | 2617 (0xA39) |  | Scrabblescrew's Camp |
+| `JADEFIRE_RUN` | 2618 (0xA3A) |  | Jadefire Run |
+| `THONDRORIL_RIVER0` | 2619 (0xA3B) |  | Thondroril River |
+| `THONDRORIL_RIVER1` | 2620 (0xA3C) |  | Thondroril River |
+| `LAKE_MERELDAR` | 2621 (0xA3D) |  | Lake Mereldar |
+| `PESTILENT_SCAR` | 2622 (0xA3E) |  | Pestilent Scar |
+| `THE_INFECTIS_SCAR` | 2623 (0xA3F) |  | The Infectis Scar |
+| `BLACKWOOD_LAKE` | 2624 (0xA40) |  | Blackwood Lake |
+| `EASTWALL_GATE` | 2625 (0xA41) |  | Eastwall Gate |
+| `TERRORWEB_TUNNEL` | 2626 (0xA42) |  | Terrorweb Tunnel |
+| `TERRORDALE` | 2627 (0xA43) |  | Terrordale |
+| `KARGATHIA_KEEP` | 2637 (0xA4D) |  | Kargathia Keep |
+| `VALLEY_OF_BONES` | 2657 (0xA61) |  | Valley of Bones |
+| `BLACKWING_LAIR` | 2677 (0xA75) |  | Blackwing Lair |
+| `DEADMANS_CROSSING` | 2697 (0xA89) |  | Deadman's Crossing |
+| `MOLTEN_CORE` | 2717 (0xA9D) |  | Molten Core |
+| `THE_SCARAB_WALL` | 2737 (0xAB1) |  | The Scarab Wall |
+| `SOUTHWIND_VILLAGE` | 2738 (0xAB2) |  | Southwind Village |
+| `TWILIGHT_BASE_CAMP` | 2739 (0xAB3) |  | Twilight Base Camp |
+| `THE_CRYSTAL_VALE` | 2740 (0xAB4) |  | The Crystal Vale |
+| `THE_SCARAB_DAIS` | 2741 (0xAB5) |  | The Scarab Dais |
+| `HIVE_ASHI` | 2742 (0xAB6) |  | Hive'Ashi |
+| `HIVE_ZORA` | 2743 (0xAB7) |  | Hive'Zora |
+| `HIVE_REGAL` | 2744 (0xAB8) |  | Hive'Regal |
+| `SHRINE_OF_THE_FALLEN_WARRIOR` | 2757 (0xAC5) |  | Shrine of the Fallen Warrior |
+| `UNUSED_ALTERAC_VALLEY` | 2777 (0xAD9) |  | UNUSED Alterac Valley |
+| `BLACKFATHOM_DEEPS1` | 2797 (0xAED) |  | Blackfathom Deeps |
+| `ON_MAP_DUNGEON4` | 2817 (0xB01) |  | ***On Map Dungeon*** |
+| `THE_MASTERS_CELLAR` | 2837 (0xB15) |  | The Master's Cellar |
+| `STONEWROUGHT_PASS` | 2838 (0xB16) |  | Stonewrought Pass |
+| `ALTERAC_VALLEY1` | 2839 (0xB17) |  | Alterac Valley |
+| `THE_RUMBLE_CAGE` | 2857 (0xB29) |  | The Rumble Cage |
+| `CHUNK_TEST` | 2877 (0xB3D) |  | Chunk Test |
+| `ZORAMGAR_OUTPOST` | 2897 (0xB51) |  | Zoram'gar Outpost |
+| `HALL_OF_LEGENDS` | 2917 (0xB65) |  | Hall of Legends |
+| `CHAMPIONS_HALL` | 2918 (0xB66) |  | Champions' Hall |
+| `GROSH_GOK_COMPOUND` | 2937 (0xB79) |  | Grosh'gok Compound |
+| `SLEEPING_GORGE` | 2938 (0xB7A) |  | Sleeping Gorge |
+| `IRONDEEP_MINE` | 2957 (0xB8D) |  | Irondeep Mine |
+| `STONEHEARTH_OUTPOST` | 2958 (0xB8E) |  | Stonehearth Outpost |
+| `DUN_BALDAR` | 2959 (0xB8F) |  | Dun Baldar |
+| `ICEWING_PASS` | 2960 (0xB90) |  | Icewing Pass |
+| `FROSTWOLF_VILLAGE` | 2961 (0xB91) |  | Frostwolf Village |
+| `TOWER_POINT` | 2962 (0xB92) |  | Tower Point |
+| `COLDTOOTH_MINE` | 2963 (0xB93) |  | Coldtooth Mine |
+| `WINTERAX_HOLD` | 2964 (0xB94) |  | Winterax Hold |
+| `ICEBLOOD_GARRISON` | 2977 (0xBA1) |  | Iceblood Garrison |
+| `FROSTWOLF_KEEP` | 2978 (0xBA2) |  | Frostwolf Keep |
+| `TOR_KREN_FARM` | 2979 (0xBA3) |  | Tor'kren Farm |
+| `FROST_DAGGER_PASS` | 3017 (0xBC9) |  | Frost Dagger Pass |
+| `IRONSTONE_CAMP` | 3037 (0xBDD) |  | Ironstone Camp |
+| `WEAZELS_CRATER` | 3038 (0xBDE) |  | Weazel's Crater |
+| `TAHONDA_RUINS` | 3039 (0xBDF) |  | Tahonda Ruins |
+| `FIELD_OF_STRIFE` | 3057 (0xBF1) |  | Field of Strife |
+| `ICEWING_CAVERN` | 3058 (0xBF2) |  | Icewing Cavern |
+| `VALORS_REST` | 3077 (0xC05) |  | Valor's Rest |
+| `THE_SWARMING_PILLAR` | 3097 (0xC19) |  | The Swarming Pillar |
+| `TWILIGHT_POST` | 3098 (0xC1A) |  | Twilight Post |
+| `TWILIGHT_OUTPOST` | 3099 (0xC1B) |  | Twilight Outpost |
+| `RAVAGED_TWILIGHT_CAMP` | 3100 (0xC1C) |  | Ravaged Twilight Camp |
+| `SHALZARUS_LAIR` | 3117 (0xC2D) |  | Shalzaru's Lair |
+| `TALRENDIS_POINT` | 3137 (0xC41) |  | Talrendis Point |
+| `RETHRESS_SANCTUM` | 3138 (0xC42) |  | Rethress Sanctum |
+| `MOON_HORROR_DEN` | 3139 (0xC43) |  | Moon Horror Den |
+| `SCALEBEARDS_CAVE` | 3140 (0xC44) |  | Scalebeard's Cave |
+| `BOULDERSLIDE_CAVERN` | 3157 (0xC55) |  | Boulderslide Cavern |
+| `WARSONG_LABOR_CAMP` | 3177 (0xC69) |  | Warsong Labor Camp |
+| `CHILLWIND_CAMP` | 3197 (0xC7D) |  | Chillwind Camp |
+| `THE_MAUL` | 3217 (0xC91) |  | The Maul |
+| `THE_MAUL_UNUSED` | 3237 (0xCA5) |  | The Maul UNUSED |
+| `BONES_OF_GRAKKAROND` | 3257 (0xCB9) |  | Bones of Grakkarond |
+| `WARSONG_GULCH` | 3277 (0xCCD) |  | Warsong Gulch |
+| `FROSTWOLF_GRAVEYARD` | 3297 (0xCE1) |  | Frostwolf Graveyard |
+| `FROSTWOLF_PASS` | 3298 (0xCE2) |  | Frostwolf Pass |
+| `DUN_BALDAR_PASS` | 3299 (0xCE3) |  | Dun Baldar Pass |
+| `ICEBLOOD_GRAVEYARD` | 3300 (0xCE4) |  | Iceblood Graveyard |
+| `SNOWFALL_GRAVEYARD` | 3301 (0xCE5) |  | Snowfall Graveyard |
+| `STONEHEARTH_GRAVEYARD` | 3302 (0xCE6) |  | Stonehearth Graveyard |
+| `STORMPIKE_GRAVEYARD` | 3303 (0xCE7) |  | Stormpike Graveyard |
+| `ICEWING_BUNKER` | 3304 (0xCE8) |  | Icewing Bunker |
+| `STONEHEARTH_BUNKER` | 3305 (0xCE9) |  | Stonehearth Bunker |
+| `WILDPAW_RIDGE` | 3306 (0xCEA) |  | Wildpaw Ridge |
+| `REVANTUSK_VILLAGE` | 3317 (0xCF5) |  | Revantusk Village |
+| `ROCK_OF_DUROTAN` | 3318 (0xCF6) |  | Rock of Durotan |
+| `SILVERWING_GROVE` | 3319 (0xCF7) |  | Silverwing Grove |
+| `WARSONG_LUMBER_MILL` | 3320 (0xCF8) |  | Warsong Lumber Mill |
+| `SILVERWING_HOLD` | 3321 (0xCF9) |  | Silverwing Hold |
+| `WILDPAW_CAVERN` | 3337 (0xD09) |  | Wildpaw Cavern |
+| `THE_VEILED_CLEFT` | 3338 (0xD0A) |  | The Veiled Cleft |
+| `YOJAMBA_ISLE` | 3357 (0xD1D) |  | Yojamba Isle |
+| `ARATHI_BASIN` | 3358 (0xD1E) |  | Arathi Basin |
+| `THE_COIL` | 3377 (0xD31) |  | The Coil |
+| `ALTAR_OF_HIR_EEK` | 3378 (0xD32) |  | Altar of Hir'eek |
+| `SHADRA_ZAAR` | 3379 (0xD33) |  | Shadra'zaar |
+| `HAKKARI_GROUNDS` | 3380 (0xD34) |  | Hakkari Grounds |
+| `NAZE_OF_SHIRVALLAH` | 3381 (0xD35) |  | Naze of Shirvallah |
+| `TEMPLE_OF_BETHEKK` | 3382 (0xD36) |  | Temple of Bethekk |
+| `THE_BLOODFIRE_PIT` | 3383 (0xD37) |  | The Bloodfire Pit |
+| `ALTAR_OF_THE_BLOOD_GOD` | 3384 (0xD38) |  | Altar of the Blood God |
+| `ZANZAS_RISE` | 3397 (0xD45) |  | Zanza's Rise |
+| `EDGE_OF_MADNESS` | 3398 (0xD46) |  | Edge of Madness |
+| `TROLLBANE_HALL` | 3417 (0xD59) |  | Trollbane Hall |
+| `DEFILERS_DEN` | 3418 (0xD5A) |  | Defiler's Den |
+| `PAGLES_POINTE` | 3419 (0xD5B) |  | Pagle's Pointe |
+| `FARM` | 3420 (0xD5C) |  | Farm |
+| `BLACKSMITH` | 3421 (0xD5D) |  | Blacksmith |
+| `LUMBER_MILL` | 3422 (0xD5E) |  | Lumber Mill |
+| `GOLD_MINE` | 3423 (0xD5F) |  | Gold Mine |
+| `STABLES` | 3424 (0xD60) |  | Stables |
+| `CENARION_HOLD` | 3425 (0xD61) |  | Cenarion Hold |
+| `STAGHELM_POINT` | 3426 (0xD62) |  | Staghelm Point |
+| `BRONZEBEARD_ENCAMPMENT` | 3427 (0xD63) |  | Bronzebeard Encampment |
+| `AHN_QIRAJ` | 3428 (0xD64) |  | Ahn'Qiraj |
+| `RUINS_OF_AHN_QIRAJ0` | 3429 (0xD65) |  | Ruins of Ahn'Qiraj |
+| `TWILIGHTS_RUN` | 3446 (0xD76) |  | Twilight's Run |
+| `ORTELLS_HIDEOUT` | 3447 (0xD77) |  | Ortell's Hideout |
+| `SCARAB_TERRACE` | 3448 (0xD78) |  | Scarab Terrace |
+| `GENERALS_TERRACE` | 3449 (0xD79) |  | General's Terrace |
+| `THE_RESERVOIR` | 3450 (0xD7A) |  | The Reservoir |
+| `THE_HATCHERY` | 3451 (0xD7B) |  | The Hatchery |
+| `THE_COMB` | 3452 (0xD7C) |  | The Comb |
+| `WATCHERS_TERRACE` | 3453 (0xD7D) |  | Watchers' Terrace |
+| `RUINS_OF_AHN_QIRAJ1` | 3454 (0xD7E) |  | Ruins of Ahn'Qiraj |
+| `NAXXRAMAS` | 3456 (0xD80) |  | Naxxramas |
+| `CITY` | 3459 (0xD83) |  | City |
+| `GATES_OF_AHN_QIRAJ` | 3478 (0xD96) |  | Gates of Ahn'Qiraj |
+| `RAVENHOLDT_MANOR` | 3486 (0xD9E) |  | Ravenholdt Manor |
 
 Used in:
 * [CMSG_ZONEUPDATE](cmsg_zoneupdate.md)
@@ -3856,1652 +3856,1652 @@ enum Area : u32 {
 ### Type
 The basic type is `u32`, a 4 byte (32 bit) little endian integer.
 ### Enumerators
-| Enumerator | Value  | Description | Comment | Display |
-| --------- | -------- | ----------- | ------- | ------- |
-| `NONE` | 0 (0x00) |  |  |  |
-| `DUN_MOROGH` | 1 (0x01) |  |  | Dun Morogh |
-| `LONGSHORE` | 2 (0x02) |  |  | Longshore |
-| `BADLANDS` | 3 (0x03) |  |  | Badlands |
-| `BLASTED_LANDS` | 4 (0x04) |  |  | Blasted Lands |
-| `BLACKWATER_COVE` | 7 (0x07) |  |  | Blackwater Cove |
-| `SWAMP_OF_SORROWS` | 8 (0x08) |  |  | Swamp of Sorrows |
-| `NORTHSHIRE_VALLEY` | 9 (0x09) |  |  | Northshire Valley |
-| `DUSKWOOD` | 10 (0x0A) |  |  | Duskwood |
-| `WETLANDS` | 11 (0x0B) |  |  | Wetlands |
-| `ELWYNN_FOREST` | 12 (0x0C) |  |  | Elwynn Forest |
-| `THE_WORLD_TREE` | 13 (0x0D) |  |  | The World Tree |
-| `DUROTAR` | 14 (0x0E) |  |  | Durotar |
-| `DUSTWALLOW_MARSH` | 15 (0x0F) |  |  | Dustwallow Marsh |
-| `AZSHARA` | 16 (0x10) |  |  | Azshara |
-| `THE_BARRENS` | 17 (0x11) |  |  | The Barrens |
-| `CRYSTAL_LAKE` | 18 (0x12) |  |  | Crystal Lake |
-| `ZUL_GURUB` | 19 (0x13) |  |  | Zul'Gurub |
-| `MOONBROOK` | 20 (0x14) |  |  | Moonbrook |
-| `KUL_TIRAS` | 21 (0x15) |  |  | Kul Tiras |
-| `PROGRAMMER_ISLE` | 22 (0x16) |  |  | Programmer Isle |
-| `NORTHSHIRE_RIVER` | 23 (0x17) |  |  | Northshire River |
-| `NORTHSHIRE_ABBEY` | 24 (0x18) |  |  | Northshire Abbey |
-| `BLACKROCK_MOUNTAIN` | 25 (0x19) |  |  | Blackrock Mountain |
-| `LIGHTHOUSE` | 26 (0x1A) |  |  | Lighthouse |
-| `WESTERN_PLAGUELANDS` | 28 (0x1C) |  |  | Western Plaguelands |
-| `NINE` | 30 (0x1E) |  |  | Nine |
-| `THE_CEMETARY` | 32 (0x20) |  |  | The Cemetary |
-| `STRANGLETHORN_VALE` | 33 (0x21) |  |  | Stranglethorn Vale |
-| `ECHO_RIDGE_MINE` | 34 (0x22) |  |  | Echo Ridge Mine |
-| `BOOTY_BAY` | 35 (0x23) |  |  | Booty Bay |
-| `ALTERAC_MOUNTAINS` | 36 (0x24) |  |  | Alterac Mountains |
-| `LAKE_NAZFERITI` | 37 (0x25) |  |  | Lake Nazferiti |
-| `LOCH_MODAN` | 38 (0x26) |  |  | Loch Modan |
-| `WESTFALL` | 40 (0x28) |  |  | Westfall |
-| `DEADWIND_PASS` | 41 (0x29) |  |  | Deadwind Pass |
-| `DARKSHIRE` | 42 (0x2A) |  |  | Darkshire |
-| `WILD_SHORE` | 43 (0x2B) |  |  | Wild Shore |
-| `REDRIDGE_MOUNTAINS` | 44 (0x2C) |  |  | Redridge Mountains |
-| `ARATHI_HIGHLANDS` | 45 (0x2D) |  |  | Arathi Highlands |
-| `BURNING_STEPPES` | 46 (0x2E) |  |  | Burning Steppes |
-| `THE_HINTERLANDS` | 47 (0x2F) |  |  | The Hinterlands |
-| `DEAD_MANS_HOLE` | 49 (0x31) |  |  | Dead Man's Hole |
-| `SEARING_GORGE` | 51 (0x33) |  |  | Searing Gorge |
-| `THIEVES_CAMP` | 53 (0x35) |  |  | Thieves Camp |
-| `JASPERLODE_MINE` | 54 (0x36) |  |  | Jasperlode Mine |
-| `VALLEY_OF_HEROES_UNUSED` | 55 (0x37) |  |  | Valley of Heroes UNUSED |
-| `HEROES_VIGIL` | 56 (0x38) |  |  | Heroes' Vigil |
-| `FARGODEEP_MINE` | 57 (0x39) |  |  | Fargodeep Mine |
-| `NORTHSHIRE_VINEYARDS` | 59 (0x3B) |  |  | Northshire Vineyards |
-| `FORESTS_EDGE` | 60 (0x3C) |  |  | Forest's Edge |
-| `THUNDER_FALLS` | 61 (0x3D) |  |  | Thunder Falls |
-| `BRACKWELL_PUMPKIN_PATCH` | 62 (0x3E) |  |  | Brackwell Pumpkin Patch |
-| `THE_STONEFIELD_FARM` | 63 (0x3F) |  |  | The Stonefield Farm |
-| `THE_MACLURE_VINEYARDS` | 64 (0x40) |  |  | The Maclure Vineyards |
-| `REUSE_ME_THREE` | 65 (0x41) |  |  | Reuse Me 3 |
-| `REUSE_ME_SIX` | 66 (0x42) |  |  | Reuse Me 6 |
-| `REUSE_ME_FIVE` | 67 (0x43) |  |  | Reuse Me 5 |
-| `LAKE_EVERSTILL` | 68 (0x44) |  |  | Lake Everstill |
-| `LAKESHIRE` | 69 (0x45) |  |  | Lakeshire |
-| `STONEWATCH` | 70 (0x46) |  |  | Stonewatch |
-| `STONEWATCH_FALLS` | 71 (0x47) |  |  | Stonewatch Falls |
-| `THE_DARK_PORTAL` | 72 (0x48) |  |  | The Dark Portal |
-| `THE_TAINTED_SCAR` | 73 (0x49) |  |  | The Tainted Scar |
-| `POOL_OF_TEARS` | 74 (0x4A) |  |  | Pool of Tears |
-| `STONARD` | 75 (0x4B) |  |  | Stonard |
-| `FALLOW_SANCTUARY` | 76 (0x4C) |  |  | Fallow Sanctuary |
-| `ANVILMAR` | 77 (0x4D) |  |  | Anvilmar |
-| `STORMWIND_MOUNTAINS` | 80 (0x50) |  |  | Stormwind Mountains |
-| `JEFF_NE_QUADRANT_CHANGED` | 81 (0x51) |  |  | Jeff NE Quadrant Changed |
-| `JEFF_NW_QUADRANT` | 82 (0x52) |  |  | Jeff NW Quadrant |
-| `JEFF_SE_QUADRANT` | 83 (0x53) |  |  | Jeff SE Quadrant |
-| `JEFF_SW_QUADRANT` | 84 (0x54) |  |  | Jeff SW Quadrant |
-| `TIRISFAL_GLADES` | 85 (0x55) |  |  | Tirisfal Glades |
-| `STONE_CAIRN_LAKE` | 86 (0x56) |  |  | Stone Cairn Lake |
-| `GOLDSHIRE` | 87 (0x57) |  |  | Goldshire |
-| `EASTVALE_LOGGING_CAMP` | 88 (0x58) |  |  | Eastvale Logging Camp |
-| `MIRROR_LAKE_ORCHARD` | 89 (0x59) |  |  | Mirror Lake Orchard |
-| `TOWER_OF_AZORA` | 91 (0x5B) |  |  | Tower of Azora |
-| `MIRROR_LAKE` | 92 (0x5C) |  |  | Mirror Lake |
-| `VUL_GOL_OGRE_MOUND` | 93 (0x5D) |  |  | Vul'Gol Ogre Mound |
-| `RAVEN_HILL` | 94 (0x5E) |  |  | Raven Hill |
-| `REDRIDGE_CANYONS` | 95 (0x5F) |  |  | Redridge Canyons |
-| `TOWER_OF_ILGALAR` | 96 (0x60) |  |  | Tower of Ilgalar |
-| `ALTHERS_MILL` | 97 (0x61) |  |  | Alther's Mill |
-| `RETHBAN_CAVERNS` | 98 (0x62) |  |  | Rethban Caverns |
-| `REBEL_CAMP` | 99 (0x63) |  |  | Rebel Camp |
-| `NESINGWARYS_EXPEDITION` | 100 (0x64) |  |  | Nesingwary's Expedition |
-| `KURZENS_COMPOUND` | 101 (0x65) |  |  | Kurzen's Compound |
-| `RUINS_OF_ZUL_KUNDA` | 102 (0x66) |  |  | Ruins of Zul'Kunda |
-| `RUINS_OF_ZUL_MAMWE` | 103 (0x67) |  |  | Ruins of Zul'Mamwe |
-| `THE_VILE_REEF` | 104 (0x68) |  |  | The Vile Reef |
-| `MOSH_OGG_OGRE_MOUND` | 105 (0x69) |  |  | Mosh'Ogg Ogre Mound |
-| `THE_STOCKPILE` | 106 (0x6A) |  |  | The Stockpile |
-| `SALDEANS_FARM` | 107 (0x6B) |  |  | Saldean's Farm |
-| `SENTINEL_HILL` | 108 (0x6C) |  |  | Sentinel Hill |
-| `FURLBROWS_PUMPKIN_FARM` | 109 (0x6D) |  |  | Furlbrow's Pumpkin Farm |
-| `JANGOLODE_MINE` | 111 (0x6F) |  |  | Jangolode Mine |
-| `GOLD_COAST_QUARRY` | 113 (0x71) |  |  | Gold Coast Quarry |
-| `WESTFALL_LIGHTHOUSE` | 115 (0x73) |  |  | Westfall Lighthouse |
-| `MISTY_VALLEY` | 116 (0x74) |  |  | Misty Valley |
-| `GROM_GOL_BASE_CAMP` | 117 (0x75) |  |  | Grom'gol Base Camp |
-| `WHELGARS_EXCAVATION_SITE` | 118 (0x76) |  |  | Whelgar's Excavation Site |
-| `WESTBROOK_GARRISON` | 120 (0x78) |  |  | Westbrook Garrison |
-| `TRANQUIL_GARDENS_CEMETERY` | 121 (0x79) |  |  | Tranquil Gardens Cemetery |
-| `ZUULDAIA_RUINS` | 122 (0x7A) |  |  | Zuuldaia Ruins |
-| `BAL_LAL_RUINS` | 123 (0x7B) |  |  | Bal'lal Ruins |
-| `KAL_AI_RUINS` | 125 (0x7D) |  |  | Kal'ai Ruins |
-| `TKASHI_RUINS` | 126 (0x7E) |  |  | Tkashi Ruins |
-| `BALIA_MAH_RUINS` | 127 (0x7F) |  |  | Balia'mah Ruins |
-| `ZIATA_JAI_RUINS` | 128 (0x80) |  |  | Ziata'jai Ruins |
-| `MIZJAH_RUINS` | 129 (0x81) |  |  | Mizjah Ruins |
-| `SILVERPINE_FOREST` | 130 (0x82) |  |  | Silverpine Forest |
-| `KHARANOS` | 131 (0x83) |  |  | Kharanos |
-| `COLDRIDGE_VALLEY` | 132 (0x84) |  |  | Coldridge Valley |
-| `GNOMEREGAN` | 133 (0x85) |  |  | Gnomeregan |
-| `GOL_BOLAR_QUARRY` | 134 (0x86) |  |  | Gol'Bolar Quarry |
-| `FROSTMANE_HOLD` | 135 (0x87) |  |  | Frostmane Hold |
-| `THE_GRIZZLED_DEN` | 136 (0x88) |  |  | The Grizzled Den |
-| `BREWNALL_VILLAGE` | 137 (0x89) |  |  | Brewnall Village |
-| `MISTY_PINE_REFUGE` | 138 (0x8A) |  |  | Misty Pine Refuge |
-| `EASTERN_PLAGUELANDS` | 139 (0x8B) |  |  | Eastern Plaguelands |
-| `TELDRASSIL` | 141 (0x8D) |  |  | Teldrassil |
-| `IRONBANDS_EXCAVATION_SITE` | 142 (0x8E) |  |  | Ironband's Excavation Site |
-| `MO_GROSH_STRONGHOLD` | 143 (0x8F) |  |  | Mo'grosh Stronghold |
-| `THELSAMAR` | 144 (0x90) |  |  | Thelsamar |
-| `ALGAZ_GATE` | 145 (0x91) |  |  | Algaz Gate |
-| `STONEWROUGHT_DAM` | 146 (0x92) |  |  | Stonewrought Dam |
-| `THE_FARSTRIDER_LODGE` | 147 (0x93) |  |  | The Farstrider Lodge |
-| `DARKSHORE` | 148 (0x94) |  |  | Darkshore |
-| `SILVER_STREAM_MINE` | 149 (0x95) |  |  | Silver Stream Mine |
-| `MENETHIL_HARBOR` | 150 (0x96) |  |  | Menethil Harbor |
-| `DESIGNER_ISLAND` | 151 (0x97) |  |  | Designer Island |
-| `THE_BULWARK` | 152 (0x98) |  |  | The Bulwark |
-| `RUINS_OF_LORDAERON` | 153 (0x99) |  |  | Ruins of Lordaeron |
-| `DEATHKNELL` | 154 (0x9A) |  |  | Deathknell |
-| `NIGHT_WEBS_HOLLOW` | 155 (0x9B) |  |  | Night Web's Hollow |
-| `SOLLIDEN_FARMSTEAD` | 156 (0x9C) |  |  | Solliden Farmstead |
-| `AGAMAND_MILLS` | 157 (0x9D) |  |  | Agamand Mills |
-| `AGAMAND_FAMILY_CRYPT` | 158 (0x9E) |  |  | Agamand Family Crypt |
-| `BRILL` | 159 (0x9F) |  |  | Brill |
-| `WHISPERING_GARDENS` | 160 (0xA0) |  |  | Whispering Gardens |
-| `TERRACE_OF_REPOSE` | 161 (0xA1) |  |  | Terrace of Repose |
-| `BRIGHTWATER_LAKE` | 162 (0xA2) |  |  | Brightwater Lake |
-| `GUNTHERS_RETREAT` | 163 (0xA3) |  |  | Gunther's Retreat |
-| `GARRENS_HAUNT` | 164 (0xA4) |  |  | Garren's Haunt |
-| `BALNIR_FARMSTEAD` | 165 (0xA5) |  |  | Balnir Farmstead |
-| `COLD_HEARTH_MANOR` | 166 (0xA6) |  |  | Cold Hearth Manor |
-| `CRUSADER_OUTPOST` | 167 (0xA7) |  |  | Crusader Outpost |
-| `THE_NORTH_COAST` | 168 (0xA8) |  |  | The North Coast |
-| `WHISPERING_SHORE` | 169 (0xA9) |  |  | Whispering Shore |
-| `LORDAMERE_LAKE` | 170 (0xAA) |  |  | Lordamere Lake |
-| `FENRIS_ISLE` | 172 (0xAC) |  |  | Fenris Isle |
-| `FAOLS_REST` | 173 (0xAD) |  |  | Faol's Rest |
-| `DOLANAAR` | 186 (0xBA) |  |  | Dolanaar |
-| `DARNASSUS_UNUSED` | 187 (0xBB) |  |  | Darnassus UNUSED |
-| `SHADOWGLEN` | 188 (0xBC) |  |  | Shadowglen |
-| `STEELGRILLS_DEPOT` | 189 (0xBD) |  |  | Steelgrill's Depot |
-| `HEARTHGLEN` | 190 (0xBE) |  |  | Hearthglen |
-| `NORTHRIDGE_LUMBER_CAMP` | 192 (0xC0) |  |  | Northridge Lumber Camp |
-| `RUINS_OF_ANDORHAL` | 193 (0xC1) |  |  | Ruins of Andorhal |
-| `SCHOOL_OF_NECROMANCY` | 195 (0xC3) |  |  | School of Necromancy |
-| `UTHERS_TOMB` | 196 (0xC4) |  |  | Uther's Tomb |
-| `SORROW_HILL` | 197 (0xC5) |  |  | Sorrow Hill |
-| `THE_WEEPING_CAVE` | 198 (0xC6) |  |  | The Weeping Cave |
-| `FELSTONE_FIELD` | 199 (0xC7) |  |  | Felstone Field |
-| `DALSONS_TEARS` | 200 (0xC8) |  |  | Dalson's Tears |
-| `GAHRRONS_WITHERING` | 201 (0xC9) |  |  | Gahrron's Withering |
-| `THE_WRITHING_HAUNT` | 202 (0xCA) |  |  | The Writhing Haunt |
-| `MARDENHOLDE_KEEP` | 203 (0xCB) |  |  | Mardenholde Keep |
-| `PYREWOOD_VILLAGE` | 204 (0xCC) |  |  | Pyrewood Village |
-| `DUN_MODR` | 205 (0xCD) |  |  | Dun Modr |
-| `UNUSED_WESTFALL` | 206 (0xCE) |  |  | UNUSED Westfall |
-| `THE_GREAT_SEA` | 207 (0xCF) |  |  | The Great Sea |
-| `UNUSED_IRONCLADCOVE` | 208 (0xD0) |  |  | Unused Ironcladcove |
-| `SHADOWFANG_KEEP` | 209 (0xD1) |  |  | Shadowfang Keep |
-| `REUSE_ME_2` | 210 (0xD2) |  |  | Reuse Me 2 |
-| `ICEFLOW_LAKE` | 211 (0xD3) |  |  | Iceflow Lake |
-| `HELMS_BED_LAKE` | 212 (0xD4) |  |  | Helm's Bed Lake |
-| `DEEP_ELEM_MINE` | 213 (0xD5) |  |  | Deep Elem Mine |
-| `THE_GREAT_SEA1` | 214 (0xD6) |  |  | The Great Sea |
-| `MULGORE` | 215 (0xD7) |  |  | Mulgore |
-| `ALEXSTON_FARMSTEAD` | 219 (0xDB) |  |  | Alexston Farmstead |
-| `RED_CLOUD_MESA` | 220 (0xDC) |  |  | Red Cloud Mesa |
-| `CAMP_NARACHE` | 221 (0xDD) |  |  | Camp Narache |
-| `BLOODHOOF_VILLAGE` | 222 (0xDE) |  |  | Bloodhoof Village |
-| `STONEBULL_LAKE` | 223 (0xDF) |  |  | Stonebull Lake |
-| `RAVAGED_CARAVAN` | 224 (0xE0) |  |  | Ravaged Caravan |
-| `RED_ROCKS` | 225 (0xE1) |  |  | Red Rocks |
-| `THE_SKITTERING_DARK` | 226 (0xE2) |  |  | The Skittering Dark |
-| `VALGANS_FIELD` | 227 (0xE3) |  |  | Valgan's Field |
-| `THE_SEPULCHER` | 228 (0xE4) |  |  | The Sepulcher |
-| `OLSENS_FARTHING` | 229 (0xE5) |  |  | Olsen's Farthing |
-| `THE_GREYMANE_WALL` | 230 (0xE6) |  |  | The Greymane Wall |
-| `BERENS_PERIL` | 231 (0xE7) |  |  | Beren's Peril |
-| `THE_DAWNING_ISLES` | 232 (0xE8) |  |  | The Dawning Isles |
-| `AMBERMILL` | 233 (0xE9) |  |  | Ambermill |
-| `FENRIS_KEEP` | 235 (0xEB) |  |  | Fenris Keep |
-| `SHADOWFANG_KEEP1` | 236 (0xEC) |  |  | Shadowfang Keep |
-| `THE_DECREPIT_FERRY` | 237 (0xED) |  |  | The Decrepit Ferry |
-| `MALDENS_ORCHARD` | 238 (0xEE) |  |  | Malden's Orchard |
-| `THE_IVAR_PATCH` | 239 (0xEF) |  |  | The Ivar Patch |
-| `THE_DEAD_FIELD` | 240 (0xF0) |  |  | The Dead Field |
-| `THE_ROTTING_ORCHARD` | 241 (0xF1) |  |  | The Rotting Orchard |
-| `BRIGHTWOOD_GROVE` | 242 (0xF2) |  |  | Brightwood Grove |
-| `FORLORN_ROWE` | 243 (0xF3) |  |  | Forlorn Rowe |
-| `THE_WHIPPLE_ESTATE` | 244 (0xF4) |  |  | The Whipple Estate |
-| `THE_YORGEN_FARMSTEAD` | 245 (0xF5) |  |  | The Yorgen Farmstead |
-| `THE_CAULDRON` | 246 (0xF6) |  |  | The Cauldron |
-| `GRIMESILT_DIG_SITE` | 247 (0xF7) |  |  | Grimesilt Dig Site |
-| `DREADMAUL_ROCK` | 249 (0xF9) |  |  | Dreadmaul Rock |
-| `RUINS_OF_THAURISSAN` | 250 (0xFA) |  |  | Ruins of Thaurissan |
-| `FLAME_CREST` | 251 (0xFB) |  |  | Flame Crest |
-| `BLACKROCK_STRONGHOLD` | 252 (0xFC) |  |  | Blackrock Stronghold |
-| `THE_PILLAR_OF_ASH` | 253 (0xFD) |  |  | The Pillar of Ash |
-| `BLACKROCK_MOUNTAIN1` | 254 (0xFE) |  |  | Blackrock Mountain |
-| `ALTAR_OF_STORMS` | 255 (0xFF) |  |  | Altar of Storms |
-| `ALDRASSIL` | 256 (0x100) |  |  | Aldrassil |
-| `SHADOWTHREAD_CAVE` | 257 (0x101) |  |  | Shadowthread Cave |
-| `FEL_ROCK` | 258 (0x102) |  |  | Fel Rock |
-| `LAKE_AL_AMETH` | 259 (0x103) |  |  | Lake Al'Ameth |
-| `STARBREEZE_VILLAGE` | 260 (0x104) |  |  | Starbreeze Village |
-| `GNARLPINE_HOLD` | 261 (0x105) |  |  | Gnarlpine Hold |
-| `BAN_ETHIL_BARROW_DEN` | 262 (0x106) |  |  | Ban'ethil Barrow Den |
-| `THE_CLEFT` | 263 (0x107) |  |  | The Cleft |
-| `THE_ORACLE_GLADE` | 264 (0x108) |  |  | The Oracle Glade |
-| `WELLSPRING_RIVER` | 265 (0x109) |  |  | Wellspring River |
-| `WELLSPRING_LAKE` | 266 (0x10A) |  |  | Wellspring Lake |
-| `HILLSBRAD_FOOTHILLS` | 267 (0x10B) |  |  | Hillsbrad Foothills |
-| `AZSHARA_CRATER` | 268 (0x10C) |  |  | Azshara Crater |
-| `DUN_ALGAZ` | 269 (0x10D) |  |  | Dun Algaz |
-| `SOUTHSHORE` | 271 (0x10F) |  |  | Southshore |
-| `TARREN_MILL` | 272 (0x110) |  |  | Tarren Mill |
-| `DURNHOLDE_KEEP` | 275 (0x113) |  |  | Durnholde Keep |
-| `UNUSED_STONEWROUGHT_PASS` | 276 (0x114) |  |  | UNUSED Stonewrought Pass |
-| `THE_FOOTHILL_CAVERNS` | 277 (0x115) |  |  | The Foothill Caverns |
-| `LORDAMERE_INTERNMENT_CAMP` | 278 (0x116) |  |  | Lordamere Internment Camp |
-| `DALARAN` | 279 (0x117) |  |  | Dalaran |
-| `STRAHNBRAD` | 280 (0x118) |  |  | Strahnbrad |
-| `RUINS_OF_ALTERAC` | 281 (0x119) |  |  | Ruins of Alterac |
-| `CRUSHRIDGE_HOLD` | 282 (0x11A) |  |  | Crushridge Hold |
-| `SLAUGHTER_HOLLOW` | 283 (0x11B) |  |  | Slaughter Hollow |
-| `THE_UPLANDS` | 284 (0x11C) |  |  | The Uplands |
-| `SOUTHPOINT_TOWER` | 285 (0x11D) |  |  | Southpoint Tower |
-| `HILLSBRAD_FIELDS` | 286 (0x11E) |  |  | Hillsbrad Fields |
-| `HILLSBRAD` | 287 (0x11F) |  |  | Hillsbrad |
-| `AZURELODE_MINE` | 288 (0x120) |  |  | Azurelode Mine |
-| `NETHANDER_STEAD` | 289 (0x121) |  |  | Nethander Stead |
-| `DUN_GAROK` | 290 (0x122) |  |  | Dun Garok |
-| `THORADINS_WALL` | 293 (0x125) |  |  | Thoradin's Wall |
-| `EASTERN_STRAND` | 294 (0x126) |  |  | Eastern Strand |
-| `WESTERN_STRAND` | 295 (0x127) |  |  | Western Strand |
-| `SOUTH_SEAS_UNUSED` | 296 (0x128) |  |  | South Seas UNUSED |
-| `JAGUERO_ISLE` | 297 (0x129) |  |  | Jaguero Isle |
-| `BARADIN_BAY` | 298 (0x12A) |  |  | Baradin Bay |
-| `MENETHIL_BAY` | 299 (0x12B) |  |  | Menethil Bay |
-| `MISTY_REED_STRAND` | 300 (0x12C) |  |  | Misty Reed Strand |
-| `THE_SAVAGE_COAST` | 301 (0x12D) |  |  | The Savage Coast |
-| `THE_CRYSTAL_SHORE` | 302 (0x12E) |  |  | The Crystal Shore |
-| `SHELL_BEACH` | 303 (0x12F) |  |  | Shell Beach |
-| `NORTH_TIDES_RUN` | 305 (0x131) |  |  | North Tide's Run |
-| `SOUTH_TIDES_RUN` | 306 (0x132) |  |  | South Tide's Run |
-| `THE_OVERLOOK_CLIFFS` | 307 (0x133) |  |  | The Overlook Cliffs |
-| `THE_FORBIDDING_SEA` | 308 (0x134) |  |  | The Forbidding Sea |
-| `IRONBEARDS_TOMB` | 309 (0x135) |  |  | Ironbeard's Tomb |
-| `CRYSTALVEIN_MINE` | 310 (0x136) |  |  | Crystalvein Mine |
-| `RUINS_OF_ABORAZ` | 311 (0x137) |  |  | Ruins of Aboraz |
-| `JANEIROS_POINT` | 312 (0x138) |  |  | Janeiro's Point |
-| `NORTHFOLD_MANOR` | 313 (0x139) |  |  | Northfold Manor |
-| `GO_SHEK_FARM` | 314 (0x13A) |  |  | Go'Shek Farm |
-| `DABYRIES_FARMSTEAD` | 315 (0x13B) |  |  | Dabyrie's Farmstead |
-| `BOULDERFIST_HALL` | 316 (0x13C) |  |  | Boulderfist Hall |
-| `WITHERBARK_VILLAGE` | 317 (0x13D) |  |  | Witherbark Village |
-| `DRYWHISKER_GORGE` | 318 (0x13E) |  |  | Drywhisker Gorge |
-| `REFUGE_POINTE` | 320 (0x140) |  |  | Refuge Pointe |
-| `HAMMERFALL` | 321 (0x141) |  |  | Hammerfall |
-| `BLACKWATER_SHIPWRECKS` | 322 (0x142) |  |  | Blackwater Shipwrecks |
-| `O_BREENS_CAMP` | 323 (0x143) |  |  | O'Breen's Camp |
-| `STROMGARDE_KEEP` | 324 (0x144) |  |  | Stromgarde Keep |
-| `THE_TOWER_OF_ARATHOR` | 325 (0x145) |  |  | The Tower of Arathor |
-| `THE_SANCTUM` | 326 (0x146) |  |  | The Sanctum |
-| `FALDIRS_COVE` | 327 (0x147) |  |  | Faldir's Cove |
-| `THE_DROWNED_REEF` | 328 (0x148) |  |  | The Drowned Reef |
-| `THANDOL_SPAN` | 330 (0x14A) |  |  | Thandol Span |
-| `ASHENVALE` | 331 (0x14B) |  |  | Ashenvale |
-| `THE_GREAT_SEA2` | 332 (0x14C) |  |  | The Great Sea |
-| `CIRCLE_OF_EAST_BINDING` | 333 (0x14D) |  |  | Circle of East Binding |
-| `CIRCLE_OF_WEST_BINDING` | 334 (0x14E) |  |  | Circle of West Binding |
-| `CIRCLE_OF_INNER_BINDING` | 335 (0x14F) |  |  | Circle of Inner Binding |
-| `CIRCLE_OF_OUTER_BINDING` | 336 (0x150) |  |  | Circle of Outer Binding |
-| `APOCRYPHANS_REST` | 337 (0x151) |  |  | Apocryphan's Rest |
-| `ANGOR_FORTRESS` | 338 (0x152) |  |  | Angor Fortress |
-| `LETHLOR_RAVINE` | 339 (0x153) |  |  | Lethlor Ravine |
-| `KARGATH` | 340 (0x154) |  |  | Kargath |
-| `CAMP_KOSH` | 341 (0x155) |  |  | Camp Kosh |
-| `CAMP_BOFF` | 342 (0x156) |  |  | Camp Boff |
-| `CAMP_WURG` | 343 (0x157) |  |  | Camp Wurg |
-| `CAMP_CAGG` | 344 (0x158) |  |  | Camp Cagg |
-| `AGMONDS_END` | 345 (0x159) |  |  | Agmond's End |
-| `HAMMERTOES_DIGSITE` | 346 (0x15A) |  |  | Hammertoe's Digsite |
-| `DUSTBELCH_GROTTO` | 347 (0x15B) |  |  | Dustbelch Grotto |
-| `AERIE_PEAK` | 348 (0x15C) |  |  | Aerie Peak |
-| `WILDHAMMER_KEEP` | 349 (0x15D) |  |  | Wildhammer Keep |
-| `QUEL_DANIL_LODGE` | 350 (0x15E) |  |  | Quel'Danil Lodge |
-| `SKULK_ROCK` | 351 (0x15F) |  |  | Skulk Rock |
-| `ZUN_WATHA` | 352 (0x160) |  |  | Zun'watha |
-| `SHADRA_ALOR` | 353 (0x161) |  |  | Shadra'Alor |
-| `JINTHA_ALOR` | 354 (0x162) |  |  | Jintha'Alor |
-| `THE_ALTAR_OF_ZUL` | 355 (0x163) |  |  | The Altar of Zul |
-| `SERADANE` | 356 (0x164) |  |  | Seradane |
-| `FERALAS` | 357 (0x165) |  |  | Feralas |
-| `BRAMBLEBLADE_RAVINE` | 358 (0x166) |  |  | Brambleblade Ravine |
-| `BAEL_MODAN` | 359 (0x167) |  |  | Bael Modan |
-| `THE_VENTURE_CO_MINE` | 360 (0x168) |  |  | The Venture Co. Mine |
-| `FELWOOD` | 361 (0x169) |  |  | Felwood |
-| `RAZOR_HILL` | 362 (0x16A) |  |  | Razor Hill |
-| `VALLEY_OF_TRIALS` | 363 (0x16B) |  |  | Valley of Trials |
-| `THE_DEN` | 364 (0x16C) |  |  | The Den |
-| `BURNING_BLADE_COVEN` | 365 (0x16D) |  |  | Burning Blade Coven |
-| `KOLKAR_CRAG` | 366 (0x16E) |  |  | Kolkar Crag |
-| `SEN_JIN_VILLAGE` | 367 (0x16F) |  |  | Sen'jin Village |
-| `ECHO_ISLES` | 368 (0x170) |  |  | Echo Isles |
-| `THUNDER_RIDGE` | 369 (0x171) |  |  | Thunder Ridge |
-| `DRYGULCH_RAVINE` | 370 (0x172) |  |  | Drygulch Ravine |
-| `DUSTWIND_CAVE` | 371 (0x173) |  |  | Dustwind Cave |
-| `TIRAGARDE_KEEP` | 372 (0x174) |  |  | Tiragarde Keep |
-| `SCUTTLE_COAST` | 373 (0x175) |  |  | Scuttle Coast |
-| `BLADEFIST_BAY` | 374 (0x176) |  |  | Bladefist Bay |
-| `DEADEYE_SHORE` | 375 (0x177) |  |  | Deadeye Shore |
-| `SOUTHFURY_RIVER` | 377 (0x179) |  |  | Southfury River |
-| `CAMP_TAURAJO` | 378 (0x17A) |  |  | Camp Taurajo |
-| `FAR_WATCH_POST` | 379 (0x17B) |  |  | Far Watch Post |
-| `THE_CROSSROADS` | 380 (0x17C) |  |  | The Crossroads |
-| `BOULDER_LODE_MINE` | 381 (0x17D) |  |  | Boulder Lode Mine |
-| `THE_SLUDGE_FEN` | 382 (0x17E) |  |  | The Sludge Fen |
-| `THE_DRY_HILLS` | 383 (0x17F) |  |  | The Dry Hills |
-| `DREADMIST_PEAK` | 384 (0x180) |  |  | Dreadmist Peak |
-| `NORTHWATCH_HOLD` | 385 (0x181) |  |  | Northwatch Hold |
-| `THE_FORGOTTEN_POOLS` | 386 (0x182) |  |  | The Forgotten Pools |
-| `LUSHWATER_OASIS` | 387 (0x183) |  |  | Lushwater Oasis |
-| `THE_STAGNANT_OASIS` | 388 (0x184) |  |  | The Stagnant Oasis |
-| `FIELD_OF_GIANTS` | 390 (0x186) |  |  | Field of Giants |
-| `THE_MERCHANT_COAST` | 391 (0x187) |  |  | The Merchant Coast |
-| `RATCHET` | 392 (0x188) |  |  | Ratchet |
-| `DARKSPEAR_STRAND` | 393 (0x189) |  |  | Darkspear Strand |
-| `DARROWMERE_LAKE_UNUSED` | 394 (0x18A) |  |  | Darrowmere Lake UNUSED |
-| `CAER_DARROW_UNUSED` | 395 (0x18B) |  |  | Caer Darrow UNUSED |
-| `WINTERHOOF_WATER_WELL` | 396 (0x18C) |  |  | Winterhoof Water Well |
-| `THUNDERHORN_WATER_WELL` | 397 (0x18D) |  |  | Thunderhorn Water Well |
-| `WILDMANE_WATER_WELL` | 398 (0x18E) |  |  | Wildmane Water Well |
-| `SKYLINE_RIDGE` | 399 (0x18F) |  |  | Skyline Ridge |
-| `THOUSAND_NEEDLES` | 400 (0x190) |  |  | Thousand Needles |
-| `THE_TIDUS_STAIR` | 401 (0x191) |  |  | The Tidus Stair |
-| `SHADY_REST_INN` | 403 (0x193) |  |  | Shady Rest Inn |
-| `BAEL_DUN_DIGSITE` | 404 (0x194) |  |  | Bael'dun Digsite |
-| `DESOLACE` | 405 (0x195) |  |  | Desolace |
-| `STONETALON_MOUNTAINS` | 406 (0x196) |  |  | Stonetalon Mountains |
-| `ORGRIMMAR_UNUSED` | 407 (0x197) |  |  | Orgrimmar UNUSED |
-| `GILLIJIMS_ISLE` | 408 (0x198) |  |  | Gillijim's Isle |
-| `ISLAND_OF_DOCTOR_LAPIDIS` | 409 (0x199) |  |  | Island of Doctor Lapidis |
-| `RAZORWIND_CANYON` | 410 (0x19A) |  |  | Razorwind Canyon |
-| `BATHRANS_HAUNT` | 411 (0x19B) |  |  | Bathran's Haunt |
-| `THE_RUINS_OF_ORDIL_ARAN` | 412 (0x19C) |  |  | The Ruins of Ordil'Aran |
-| `MAESTRAS_POST` | 413 (0x19D) |  |  | Maestra's Post |
-| `THE_ZORAM_STRAND` | 414 (0x19E) |  |  | The Zoram Strand |
-| `ASTRANAAR` | 415 (0x19F) |  |  | Astranaar |
-| `THE_SHRINE_OF_AESSINA` | 416 (0x1A0) |  |  | The Shrine of Aessina |
-| `FIRE_SCAR_SHRINE` | 417 (0x1A1) |  |  | Fire Scar Shrine |
-| `THE_RUINS_OF_STARDUST` | 418 (0x1A2) |  |  | The Ruins of Stardust |
-| `THE_HOWLING_VALE` | 419 (0x1A3) |  |  | The Howling Vale |
-| `SILVERWIND_REFUGE` | 420 (0x1A4) |  |  | Silverwind Refuge |
-| `MYSTRAL_LAKE` | 421 (0x1A5) |  |  | Mystral Lake |
-| `FALLEN_SKY_LAKE` | 422 (0x1A6) |  |  | Fallen Sky Lake |
-| `IRIS_LAKE` | 424 (0x1A8) |  |  | Iris Lake |
-| `MOONWELL` | 425 (0x1A9) |  |  | Moonwell |
-| `RAYNEWOOD_RETREAT` | 426 (0x1AA) |  |  | Raynewood Retreat |
-| `THE_SHADY_NOOK` | 427 (0x1AB) |  |  | The Shady Nook |
-| `NIGHT_RUN` | 428 (0x1AC) |  |  | Night Run |
-| `XAVIAN` | 429 (0x1AD) |  |  | Xavian |
-| `SATYRNAAR` | 430 (0x1AE) |  |  | Satyrnaar |
-| `SPLINTERTREE_POST` | 431 (0x1AF) |  |  | Splintertree Post |
-| `THE_DOR_DANIL_BARROW_DEN` | 432 (0x1B0) |  |  | The Dor'Danil Barrow Den |
-| `FALFARREN_RIVER` | 433 (0x1B1) |  |  | Falfarren River |
-| `FELFIRE_HILL` | 434 (0x1B2) |  |  | Felfire Hill |
-| `DEMON_FALL_CANYON` | 435 (0x1B3) |  |  | Demon Fall Canyon |
-| `DEMON_FALL_RIDGE` | 436 (0x1B4) |  |  | Demon Fall Ridge |
-| `WARSONG_LUMBER_CAMP` | 437 (0x1B5) |  |  | Warsong Lumber Camp |
-| `BOUGH_SHADOW` | 438 (0x1B6) |  |  | Bough Shadow |
-| `THE_SHIMMERING_FLATS` | 439 (0x1B7) |  |  | The Shimmering Flats |
-| `TANARIS` | 440 (0x1B8) |  |  | Tanaris |
-| `LAKE_FALATHIM` | 441 (0x1B9) |  |  | Lake Falathim |
-| `AUBERDINE` | 442 (0x1BA) |  |  | Auberdine |
-| `RUINS_OF_MATHYSTRA` | 443 (0x1BB) |  |  | Ruins of Mathystra |
-| `TOWER_OF_ALTHALAXX` | 444 (0x1BC) |  |  | Tower of Althalaxx |
-| `CLIFFSPRING_FALLS` | 445 (0x1BD) |  |  | Cliffspring Falls |
-| `BASHAL_ARAN` | 446 (0x1BE) |  |  | Bashal'Aran |
-| `AMETH_ARAN` | 447 (0x1BF) |  |  | Ameth'Aran |
-| `GROVE_OF_THE_ANCIENTS` | 448 (0x1C0) |  |  | Grove of the Ancients |
-| `THE_MASTERS_GLAIVE` | 449 (0x1C1) |  |  | The Master's Glaive |
-| `REMTRAVELS_EXCAVATION` | 450 (0x1C2) |  |  | Remtravel's Excavation |
-| `MISTS_EDGE` | 452 (0x1C4) |  |  | Mist's Edge |
-| `THE_LONG_WASH` | 453 (0x1C5) |  |  | The Long Wash |
-| `WILDBEND_RIVER` | 454 (0x1C6) |  |  | Wildbend River |
-| `BLACKWOOD_DEN` | 455 (0x1C7) |  |  | Blackwood Den |
-| `CLIFFSPRING_RIVER` | 456 (0x1C8) |  |  | Cliffspring River |
-| `THE_VEILED_SEA` | 457 (0x1C9) |  |  | The Veiled Sea |
-| `GOLD_ROAD` | 458 (0x1CA) |  |  | Gold Road |
-| `SCARLET_WATCH_POST` | 459 (0x1CB) |  |  | Scarlet Watch Post |
-| `SUN_ROCK_RETREAT` | 460 (0x1CC) |  |  | Sun Rock Retreat |
-| `WINDSHEAR_CRAG` | 461 (0x1CD) |  |  | Windshear Crag |
-| `CRAGPOOL_LAKE` | 463 (0x1CF) |  |  | Cragpool Lake |
-| `MIRKFALLON_LAKE` | 464 (0x1D0) |  |  | Mirkfallon Lake |
-| `THE_CHARRED_VALE` | 465 (0x1D1) |  |  | The Charred Vale |
-| `VALLEY_OF_THE_BLOODFURIES` | 466 (0x1D2) |  |  | Valley of the Bloodfuries |
-| `STONETALON_PEAK` | 467 (0x1D3) |  |  | Stonetalon Peak |
-| `THE_TALON_DEN` | 468 (0x1D4) |  |  | The Talon Den |
-| `GREATWOOD_VALE` | 469 (0x1D5) |  |  | Greatwood Vale |
-| `THUNDER_BLUFF_UNUSED` | 470 (0x1D6) |  |  | Thunder Bluff UNUSED |
-| `BRAVE_WIND_MESA` | 471 (0x1D7) |  |  | Brave Wind Mesa |
-| `FIRE_STONE_MESA` | 472 (0x1D8) |  |  | Fire Stone Mesa |
-| `MANTLE_ROCK` | 473 (0x1D9) |  |  | Mantle Rock |
-| `HUNTER_RISE_UNUSED` | 474 (0x1DA) |  |  | Hunter Rise UNUSED |
-| `SPIRIT_RISEUNUSED` | 475 (0x1DB) |  |  | Spirit RiseUNUSED |
-| `ELDER_RISEUNUSED` | 476 (0x1DC) |  |  | Elder RiseUNUSED |
-| `RUINS_OF_JUBUWAL` | 477 (0x1DD) |  |  | Ruins of Jubuwal |
-| `POOLS_OF_ARLITHRIEN` | 478 (0x1DE) |  |  | Pools of Arlithrien |
-| `THE_RUSTMAUL_DIG_SITE` | 479 (0x1DF) |  |  | The Rustmaul Dig Site |
-| `CAMP_E_THOK` | 480 (0x1E0) |  |  | Camp E'thok |
-| `SPLITHOOF_CRAG` | 481 (0x1E1) |  |  | Splithoof Crag |
-| `HIGHPERCH` | 482 (0x1E2) |  |  | Highperch |
-| `THE_SCREECHING_CANYON` | 483 (0x1E3) |  |  | The Screeching Canyon |
-| `FREEWIND_POST` | 484 (0x1E4) |  |  | Freewind Post |
-| `THE_GREAT_LIFT` | 485 (0x1E5) |  |  | The Great Lift |
-| `GALAK_HOLD` | 486 (0x1E6) |  |  | Galak Hold |
-| `ROGUEFEATHER_DEN` | 487 (0x1E7) |  |  | Roguefeather Den |
-| `THE_WEATHERED_NOOK` | 488 (0x1E8) |  |  | The Weathered Nook |
-| `THALANAAR` | 489 (0x1E9) |  |  | Thalanaar |
-| `UN_GORO_CRATER` | 490 (0x1EA) |  |  | Un'Goro Crater |
-| `RAZORFEN_KRAUL` | 491 (0x1EB) |  |  | Razorfen Kraul |
-| `RAVEN_HILL_CEMETERY` | 492 (0x1EC) |  |  | Raven Hill Cemetery |
-| `MOONGLADE` | 493 (0x1ED) |  |  | Moonglade |
-| `DELETE_ME` | 495 (0x1EF) |  |  | DELETE ME |
-| `BRACKENWALL_VILLAGE` | 496 (0x1F0) |  |  | Brackenwall Village |
-| `SWAMPLIGHT_MANOR` | 497 (0x1F1) |  |  | Swamplight Manor |
-| `BLOODFEN_BURROW` | 498 (0x1F2) |  |  | Bloodfen Burrow |
-| `DARKMIST_CAVERN` | 499 (0x1F3) |  |  | Darkmist Cavern |
-| `MOGGLE_POINT` | 500 (0x1F4) |  |  | Moggle Point |
-| `BEEZILS_WRECK` | 501 (0x1F5) |  |  | Beezil's Wreck |
-| `WITCH_HILL` | 502 (0x1F6) |  |  | Witch Hill |
-| `SENTRY_POINT` | 503 (0x1F7) |  |  | Sentry Point |
-| `NORTH_POINT_TOWER` | 504 (0x1F8) |  |  | North Point Tower |
-| `WEST_POINT_TOWER` | 505 (0x1F9) |  |  | West Point Tower |
-| `LOST_POINT` | 506 (0x1FA) |  |  | Lost Point |
-| `BLUEFEN` | 507 (0x1FB) |  |  | Bluefen |
-| `STONEMAUL_RUINS` | 508 (0x1FC) |  |  | Stonemaul Ruins |
-| `THE_DEN_OF_FLAME` | 509 (0x1FD) |  |  | The Den of Flame |
-| `THE_DRAGONMURK` | 510 (0x1FE) |  |  | The Dragonmurk |
-| `WYRMBOG` | 511 (0x1FF) |  |  | Wyrmbog |
-| `BLACKHOOF_VILLAGE` | 512 (0x200) |  |  | Blackhoof Village |
-| `THERAMORE_ISLE` | 513 (0x201) |  |  | Theramore Isle |
-| `FOOTHOLD_CITADEL` | 514 (0x202) |  |  | Foothold Citadel |
-| `IRONCLAD_PRISON` | 515 (0x203) |  |  | Ironclad Prison |
-| `DUSTWALLOW_BAY` | 516 (0x204) |  |  | Dustwallow Bay |
-| `TIDEFURY_COVE` | 517 (0x205) |  |  | Tidefury Cove |
-| `DREADMURK_SHORE` | 518 (0x206) |  |  | Dreadmurk Shore |
-| `ADDLES_STEAD` | 536 (0x218) |  |  | Addle's Stead |
-| `FIRE_PLUME_RIDGE` | 537 (0x219) |  |  | Fire Plume Ridge |
-| `LAKKARI_TAR_PITS` | 538 (0x21A) |  |  | Lakkari Tar Pits |
-| `TERROR_RUN` | 539 (0x21B) |  |  | Terror Run |
-| `THE_SLITHERING_SCAR` | 540 (0x21C) |  |  | The Slithering Scar |
-| `MARSHALS_REFUGE` | 541 (0x21D) |  |  | Marshal's Refuge |
-| `FUNGAL_ROCK` | 542 (0x21E) |  |  | Fungal Rock |
-| `GOLAKKA_HOT_SPRINGS` | 543 (0x21F) |  |  | Golakka Hot Springs |
-| `THE_LOCH` | 556 (0x22C) |  |  | The Loch |
-| `BEGGARS_HAUNT` | 576 (0x240) |  |  | Beggar's Haunt |
-| `KODO_GRAVEYARD` | 596 (0x254) |  |  | Kodo Graveyard |
-| `GHOST_WALKER_POST` | 597 (0x255) |  |  | Ghost Walker Post |
-| `SAR_THERIS_STRAND` | 598 (0x256) |  |  | Sar'theris Strand |
-| `THUNDER_AXE_FORTRESS` | 599 (0x257) |  |  | Thunder Axe Fortress |
-| `BOLGANS_HOLE` | 600 (0x258) |  |  | Bolgan's Hole |
-| `MANNOROC_COVEN` | 602 (0x25A) |  |  | Mannoroc Coven |
-| `SARGERON` | 603 (0x25B) |  |  | Sargeron |
-| `MAGRAM_VILLAGE` | 604 (0x25C) |  |  | Magram Village |
-| `GELKIS_VILLAGE` | 606 (0x25E) |  |  | Gelkis Village |
-| `VALLEY_OF_SPEARS` | 607 (0x25F) |  |  | Valley of Spears |
-| `NIJELS_POINT` | 608 (0x260) |  |  | Nijel's Point |
-| `KOLKAR_VILLAGE` | 609 (0x261) |  |  | Kolkar Village |
-| `HYJAL` | 616 (0x268) |  |  | Hyjal |
-| `WINTERSPRING` | 618 (0x26A) |  |  | Winterspring |
-| `BLACKWOLF_RIVER` | 636 (0x27C) |  |  | Blackwolf River |
-| `KODO_ROCK` | 637 (0x27D) |  |  | Kodo Rock |
-| `HIDDEN_PATH` | 638 (0x27E) |  |  | Hidden Path |
-| `SPIRIT_ROCK` | 639 (0x27F) |  |  | Spirit Rock |
-| `SHRINE_OF_THE_DORMANT_FLAME` | 640 (0x280) |  |  | Shrine of the Dormant Flame |
-| `LAKE_ELUNE_ARA` | 656 (0x290) |  |  | Lake Elune'ara |
-| `THE_HARBORAGE` | 657 (0x291) |  |  | The Harborage |
-| `OUTLAND` | 676 (0x2A4) |  |  | Outland |
-| `CRAFTSMENS_TERRACE_UNUSED` | 696 (0x2B8) |  |  | Craftsmen's Terrace UNUSED |
-| `TRADESMENS_TERRACE_UNUSED` | 697 (0x2B9) |  |  | Tradesmen's Terrace UNUSED |
-| `THE_TEMPLE_GARDENS_UNUSED` | 698 (0x2BA) |  |  | The Temple Gardens UNUSED |
-| `TEMPLE_OF_ELUNE_UNUSED` | 699 (0x2BB) |  |  | Temple of Elune UNUSED |
-| `CENARION_ENCLAVE_UNUSED` | 700 (0x2BC) |  |  | Cenarion Enclave UNUSED |
-| `WARRIORS_TERRACE_UNUSED` | 701 (0x2BD) |  |  | Warrior's Terrace UNUSED |
-| `RUT_THERAN_VILLAGE` | 702 (0x2BE) |  |  | Rut'theran Village |
-| `IRONBANDS_COMPOUND` | 716 (0x2CC) |  |  | Ironband's Compound |
-| `THE_STOCKADE` | 717 (0x2CD) |  |  | The Stockade |
-| `WAILING_CAVERNS` | 718 (0x2CE) |  |  | Wailing Caverns |
-| `BLACKFATHOM_DEEPS` | 719 (0x2CF) |  |  | Blackfathom Deeps |
-| `FRAY_ISLAND` | 720 (0x2D0) |  |  | Fray Island |
-| `GNOMEREGAN1` | 721 (0x2D1) |  |  | Gnomeregan |
-| `RAZORFEN_DOWNS` | 722 (0x2D2) |  |  | Razorfen Downs |
-| `BAN_ETHIL_HOLLOW` | 736 (0x2E0) |  |  | Ban'ethil Hollow |
-| `SCARLET_MONASTERY` | 796 (0x31C) |  |  | Scarlet Monastery |
-| `JERODS_LANDING` | 797 (0x31D) |  |  | Jerod's Landing |
-| `RIDGEPOINT_TOWER` | 798 (0x31E) |  |  | Ridgepoint Tower |
-| `THE_DARKENED_BANK` | 799 (0x31F) |  |  | The Darkened Bank |
-| `COLDRIDGE_PASS` | 800 (0x320) |  |  | Coldridge Pass |
-| `CHILL_BREEZE_VALLEY` | 801 (0x321) |  |  | Chill Breeze Valley |
-| `SHIMMER_RIDGE` | 802 (0x322) |  |  | Shimmer Ridge |
-| `AMBERSTILL_RANCH` | 803 (0x323) |  |  | Amberstill Ranch |
-| `THE_TUNDRID_HILLS` | 804 (0x324) |  |  | The Tundrid Hills |
-| `SOUTH_GATE_PASS` | 805 (0x325) |  |  | South Gate Pass |
-| `SOUTH_GATE_OUTPOST` | 806 (0x326) |  |  | South Gate Outpost |
-| `NORTH_GATE_PASS` | 807 (0x327) |  |  | North Gate Pass |
-| `NORTH_GATE_OUTPOST` | 808 (0x328) |  |  | North Gate Outpost |
-| `GATES_OF_IRONFORGE` | 809 (0x329) |  |  | Gates of Ironforge |
-| `STILLWATER_POND` | 810 (0x32A) |  |  | Stillwater Pond |
-| `NIGHTMARE_VALE` | 811 (0x32B) |  |  | Nightmare Vale |
-| `VENOMWEB_VALE` | 812 (0x32C) |  |  | Venomweb Vale |
-| `THE_BULWARK1` | 813 (0x32D) |  |  | The Bulwark |
-| `SOUTHFURY_RIVER1` | 814 (0x32E) |  |  | Southfury River |
-| `SOUTHFURY_RIVER2` | 815 (0x32F) |  |  | Southfury River |
-| `RAZORMANE_GROUNDS` | 816 (0x330) |  |  | Razormane Grounds |
-| `SKULL_ROCK` | 817 (0x331) |  |  | Skull Rock |
-| `PALEMANE_ROCK` | 818 (0x332) |  |  | Palemane Rock |
-| `WINDFURY_RIDGE` | 819 (0x333) |  |  | Windfury Ridge |
-| `THE_GOLDEN_PLAINS` | 820 (0x334) |  |  | The Golden Plains |
-| `THE_ROLLING_PLAINS` | 821 (0x335) |  |  | The Rolling Plains |
-| `DUN_ALGAZ1` | 836 (0x344) |  |  | Dun Algaz |
-| `DUN_ALGAZ2` | 837 (0x345) |  |  | Dun Algaz |
-| `NORTH_GATE_PASS1` | 838 (0x346) |  |  | North Gate Pass |
-| `SOUTH_GATE_PASS1` | 839 (0x347) |  |  | South Gate Pass |
-| `TWILIGHT_GROVE` | 856 (0x358) |  |  | Twilight Grove |
-| `GM_ISLAND` | 876 (0x36C) |  |  | GM Island |
-| `DELETE_ME1` | 877 (0x36D) |  |  | Delete ME |
-| `SOUTHFURY_RIVER3` | 878 (0x36E) |  |  | Southfury River |
-| `SOUTHFURY_RIVER4` | 879 (0x36F) |  |  | Southfury River |
-| `THANDOL_SPAN1` | 880 (0x370) |  |  | Thandol Span |
-| `THANDOL_SPAN2` | 881 (0x371) |  |  | Thandol Span |
-| `PURGATION_ISLE` | 896 (0x380) |  |  | Purgation Isle |
-| `THE_JANSEN_STEAD` | 916 (0x394) |  |  | The Jansen Stead |
-| `THE_DEAD_ACRE` | 917 (0x395) |  |  | The Dead Acre |
-| `THE_MOLSEN_FARM` | 918 (0x396) |  |  | The Molsen Farm |
-| `STENDELS_POND` | 919 (0x397) |  |  | Stendel's Pond |
-| `THE_DAGGER_HILLS` | 920 (0x398) |  |  | The Dagger Hills |
-| `DEMONTS_PLACE` | 921 (0x399) |  |  | Demont's Place |
-| `THE_DUST_PLAINS` | 922 (0x39A) |  |  | The Dust Plains |
-| `STONESPLINTER_VALLEY` | 923 (0x39B) |  |  | Stonesplinter Valley |
-| `VALLEY_OF_KINGS` | 924 (0x39C) |  |  | Valley of Kings |
-| `ALGAZ_STATION` | 925 (0x39D) |  |  | Algaz Station |
-| `BUCKLEBREE_FARM` | 926 (0x39E) |  |  | Bucklebree Farm |
-| `THE_SHINING_STRAND` | 927 (0x39F) |  |  | The Shining Strand |
-| `NORTH_TIDES_HOLLOW` | 928 (0x3A0) |  |  | North Tide's Hollow |
-| `GRIZZLEPAW_RIDGE` | 936 (0x3A8) |  |  | Grizzlepaw Ridge |
-| `THE_VERDANT_FIELDS` | 956 (0x3BC) |  |  | The Verdant Fields |
-| `GADGETZAN` | 976 (0x3D0) |  |  | Gadgetzan |
-| `STEAMWHEEDLE_PORT` | 977 (0x3D1) |  |  | Steamwheedle Port |
-| `ZUL_FARRAK` | 978 (0x3D2) |  |  | Zul'Farrak |
-| `SANDSORROW_WATCH` | 979 (0x3D3) |  |  | Sandsorrow Watch |
-| `THISTLESHRUB_VALLEY` | 980 (0x3D4) |  |  | Thistleshrub Valley |
-| `THE_GAPING_CHASM` | 981 (0x3D5) |  |  | The Gaping Chasm |
-| `THE_NOXIOUS_LAIR` | 982 (0x3D6) |  |  | The Noxious Lair |
-| `DUNEMAUL_COMPOUND` | 983 (0x3D7) |  |  | Dunemaul Compound |
-| `EASTMOON_RUINS` | 984 (0x3D8) |  |  | Eastmoon Ruins |
-| `WATERSPRING_FIELD` | 985 (0x3D9) |  |  | Waterspring Field |
-| `ZALASHJIS_DEN` | 986 (0x3DA) |  |  | Zalashji's Den |
-| `LANDS_END_BEACH` | 987 (0x3DB) |  |  | Land's End Beach |
-| `WAVESTRIDER_BEACH` | 988 (0x3DC) |  |  | Wavestrider Beach |
-| `ULDUM` | 989 (0x3DD) |  |  | Uldum |
-| `VALLEY_OF_THE_WATCHERS` | 990 (0x3DE) |  |  | Valley of the Watchers |
-| `GUNSTANS_POST` | 991 (0x3DF) |  |  | Gunstan's Post |
-| `SOUTHMOON_RUINS` | 992 (0x3E0) |  |  | Southmoon Ruins |
-| `RENDERS_CAMP` | 996 (0x3E4) |  |  | Render's Camp |
-| `RENDERS_VALLEY` | 997 (0x3E5) |  |  | Render's Valley |
-| `RENDERS_ROCK` | 998 (0x3E6) |  |  | Render's Rock |
-| `STONEWATCH_TOWER` | 999 (0x3E7) |  |  | Stonewatch Tower |
-| `GALARDELL_VALLEY` | 1000 (0x3E8) |  |  | Galardell Valley |
-| `LAKERIDGE_HIGHWAY` | 1001 (0x3E9) |  |  | Lakeridge Highway |
-| `THREE_CORNERS` | 1002 (0x3EA) |  |  | Three Corners |
-| `DIREFORGE_HILL` | 1016 (0x3F8) |  |  | Direforge Hill |
-| `RAPTOR_RIDGE` | 1017 (0x3F9) |  |  | Raptor Ridge |
-| `BLACK_CHANNEL_MARSH` | 1018 (0x3FA) |  |  | Black Channel Marsh |
-| `THE_GREEN_BELT` | 1019 (0x3FB) |  |  | The Green Belt |
-| `MOSSHIDE_FEN` | 1020 (0x3FC) |  |  | Mosshide Fen |
-| `THELGEN_ROCK` | 1021 (0x3FD) |  |  | Thelgen Rock |
-| `BLUEGILL_MARSH` | 1022 (0x3FE) |  |  | Bluegill Marsh |
-| `SALTSPRAY_GLEN` | 1023 (0x3FF) |  |  | Saltspray Glen |
-| `SUNDOWN_MARSH` | 1024 (0x400) |  |  | Sundown Marsh |
-| `THE_GREEN_BELT1` | 1025 (0x401) |  |  | The Green Belt |
-| `ANGERFANG_ENCAMPMENT` | 1036 (0x40C) |  |  | Angerfang Encampment |
-| `GRIM_BATOL` | 1037 (0x40D) |  |  | Grim Batol |
-| `DRAGONMAW_GATES` | 1038 (0x40E) |  |  | Dragonmaw Gates |
-| `THE_LOST_FLEET` | 1039 (0x40F) |  |  | The Lost Fleet |
-| `DARROW_HILL` | 1056 (0x420) |  |  | Darrow Hill |
-| `THORADINS_WALL1` | 1057 (0x421) |  |  | Thoradin's Wall |
-| `WEBWINDER_PATH` | 1076 (0x434) |  |  | Webwinder Path |
-| `THE_HUSHED_BANK` | 1097 (0x449) |  |  | The Hushed Bank |
-| `MANOR_MISTMANTLE` | 1098 (0x44A) |  |  | Manor Mistmantle |
-| `CAMP_MOJACHE` | 1099 (0x44B) |  |  | Camp Mojache |
-| `GRIMTOTEM_COMPOUND` | 1100 (0x44C) |  |  | Grimtotem Compound |
-| `THE_WRITHING_DEEP` | 1101 (0x44D) |  |  | The Writhing Deep |
-| `WILDWIND_LAKE` | 1102 (0x44E) |  |  | Wildwind Lake |
-| `GORDUNNI_OUTPOST` | 1103 (0x44F) |  |  | Gordunni Outpost |
-| `MOK_GORDUN` | 1104 (0x450) |  |  | Mok'Gordun |
-| `FERAL_SCAR_VALE` | 1105 (0x451) |  |  | Feral Scar Vale |
-| `FRAYFEATHER_HIGHLANDS` | 1106 (0x452) |  |  | Frayfeather Highlands |
-| `IDLEWIND_LAKE` | 1107 (0x453) |  |  | Idlewind Lake |
-| `THE_FORGOTTEN_COAST` | 1108 (0x454) |  |  | The Forgotten Coast |
-| `EAST_PILLAR` | 1109 (0x455) |  |  | East Pillar |
-| `WEST_PILLAR` | 1110 (0x456) |  |  | West Pillar |
-| `DREAM_BOUGH` | 1111 (0x457) |  |  | Dream Bough |
-| `JADEMIR_LAKE` | 1112 (0x458) |  |  | Jademir Lake |
-| `ONEIROS` | 1113 (0x459) |  |  | Oneiros |
-| `RUINS_OF_RAVENWIND` | 1114 (0x45A) |  |  | Ruins of Ravenwind |
-| `RAGE_SCAR_HOLD` | 1115 (0x45B) |  |  | Rage Scar Hold |
-| `FEATHERMOON_STRONGHOLD` | 1116 (0x45C) |  |  | Feathermoon Stronghold |
-| `RUINS_OF_SOLARSAL` | 1117 (0x45D) |  |  | Ruins of Solarsal |
-| `LOWER_WILDS_UNUSED` | 1118 (0x45E) |  |  | Lower Wilds UNUSED |
-| `THE_TWIN_COLOSSALS` | 1119 (0x45F) |  |  | The Twin Colossals |
-| `SARDOR_ISLE` | 1120 (0x460) |  |  | Sardor Isle |
-| `ISLE_OF_DREAD` | 1121 (0x461) |  |  | Isle of Dread |
-| `HIGH_WILDERNESS` | 1136 (0x470) |  |  | High Wilderness |
-| `LOWER_WILDS` | 1137 (0x471) |  |  | Lower Wilds |
-| `SOUTHERN_BARRENS` | 1156 (0x484) |  |  | Southern Barrens |
-| `SOUTHERN_GOLD_ROAD` | 1157 (0x485) |  |  | Southern Gold Road |
-| `ZUL_FARRAK1` | 1176 (0x498) |  |  | Zul'Farrak |
-| `UNUSEDALCAZ_ISLAND` | 1196 (0x4AC) |  |  | UNUSEDAlcaz Island |
-| `TIMBERMAW_HOLD` | 1216 (0x4C0) |  |  | Timbermaw Hold |
-| `VANNDIR_ENCAMPMENT` | 1217 (0x4C1) |  |  | Vanndir Encampment |
-| `TESTAZSHARA` | 1218 (0x4C2) |  |  | TESTAzshara |
-| `LEGASH_ENCAMPMENT` | 1219 (0x4C3) |  |  | Legash Encampment |
-| `THALASSIAN_BASE_CAMP` | 1220 (0x4C4) |  |  | Thalassian Base Camp |
-| `RUINS_OF_ELDARATH` | 1221 (0x4C5) |  |  | Ruins of Eldarath |
-| `HETAERAS_CLUTCH` | 1222 (0x4C6) |  |  | Hetaera's Clutch |
-| `TEMPLE_OF_ZIN_MALOR` | 1223 (0x4C7) |  |  | Temple of Zin-Malor |
-| `BEARS_HEAD` | 1224 (0x4C8) |  |  | Bear's Head |
-| `URSOLAN` | 1225 (0x4C9) |  |  | Ursolan |
-| `TEMPLE_OF_ARKKORAN` | 1226 (0x4CA) |  |  | Temple of Arkkoran |
-| `BAY_OF_STORMS` | 1227 (0x4CB) |  |  | Bay of Storms |
-| `THE_SHATTERED_STRAND` | 1228 (0x4CC) |  |  | The Shattered Strand |
-| `TOWER_OF_ELDARA` | 1229 (0x4CD) |  |  | Tower of Eldara |
-| `JAGGED_REEF` | 1230 (0x4CE) |  |  | Jagged Reef |
-| `SOUTHRIDGE_BEACH` | 1231 (0x4CF) |  |  | Southridge Beach |
-| `RAVENCREST_MONUMENT` | 1232 (0x4D0) |  |  | Ravencrest Monument |
-| `FORLORN_RIDGE` | 1233 (0x4D1) |  |  | Forlorn Ridge |
-| `LAKE_MENNAR` | 1234 (0x4D2) |  |  | Lake Mennar |
-| `SHADOWSONG_SHRINE` | 1235 (0x4D3) |  |  | Shadowsong Shrine |
-| `HALDARR_ENCAMPMENT` | 1236 (0x4D4) |  |  | Haldarr Encampment |
-| `VALORMOK` | 1237 (0x4D5) |  |  | Valormok |
-| `THE_RUINED_REACHES` | 1256 (0x4E8) |  |  | The Ruined Reaches |
-| `THE_TALONDEEP_PATH` | 1276 (0x4FC) |  |  | The Talondeep Path |
-| `THE_TALONDEEP_PATH1` | 1277 (0x4FD) |  |  | The Talondeep Path |
-| `ROCKTUSK_FARM` | 1296 (0x510) |  |  | Rocktusk Farm |
-| `JAGGEDSWINE_FARM` | 1297 (0x511) |  |  | Jaggedswine Farm |
-| `RAZORFEN_DOWNS1` | 1316 (0x524) |  |  | Razorfen Downs |
-| `LOST_RIGGER_COVE` | 1336 (0x538) |  |  | Lost Rigger Cove |
-| `ULDAMAN` | 1337 (0x539) |  |  | Uldaman |
-| `LORDAMERE_LAKE1` | 1338 (0x53A) |  |  | Lordamere Lake |
-| `LORDAMERE_LAKE2` | 1339 (0x53B) |  |  | Lordamere Lake |
-| `GALLOWS_CORNER` | 1357 (0x54D) |  |  | Gallows' Corner |
-| `SILITHUS` | 1377 (0x561) |  |  | Silithus |
-| `EMERALD_FOREST` | 1397 (0x575) |  |  | Emerald Forest |
-| `SUNKEN_TEMPLE` | 1417 (0x589) |  |  | Sunken Temple |
-| `DREADMAUL_HOLD` | 1437 (0x59D) |  |  | Dreadmaul Hold |
-| `NETHERGARDE_KEEP` | 1438 (0x59E) |  |  | Nethergarde Keep |
-| `DREADMAUL_POST` | 1439 (0x59F) |  |  | Dreadmaul Post |
-| `SERPENTS_COIL` | 1440 (0x5A0) |  |  | Serpent's Coil |
-| `ALTAR_OF_STORMS1` | 1441 (0x5A1) |  |  | Altar of Storms |
-| `FIREWATCH_RIDGE` | 1442 (0x5A2) |  |  | Firewatch Ridge |
-| `THE_SLAG_PIT` | 1443 (0x5A3) |  |  | The Slag Pit |
-| `THE_SEA_OF_CINDERS` | 1444 (0x5A4) |  |  | The Sea of Cinders |
-| `BLACKROCK_MOUNTAIN2` | 1445 (0x5A5) |  |  | Blackrock Mountain |
-| `THORIUM_POINT` | 1446 (0x5A6) |  |  | Thorium Point |
-| `GARRISON_ARMORY` | 1457 (0x5B1) |  |  | Garrison Armory |
-| `THE_TEMPLE_OF_ATAL_HAKKAR` | 1477 (0x5C5) |  |  | The Temple of Atal'Hakkar |
-| `UNDERCITY` | 1497 (0x5D9) |  |  | Undercity |
-| `ULDAMAN1` | 1517 (0x5ED) |  |  | Uldaman |
-| `NOT_USED_DEADMINES` | 1518 (0x5EE) |  |  | Not Used Deadmines |
-| `STORMWIND_CITY` | 1519 (0x5EF) |  |  | Stormwind City |
-| `IRONFORGE` | 1537 (0x601) |  |  | Ironforge |
-| `SPLITHOOF_HOLD` | 1557 (0x615) |  |  | Splithoof Hold |
-| `THE_CAPE_OF_STRANGLETHORN` | 1577 (0x629) |  |  | The Cape of Stranglethorn |
-| `SOUTHERN_SAVAGE_COAST` | 1578 (0x62A) |  |  | Southern Savage Coast |
-| `UNUSED_THE_DEADMINES_002` | 1579 (0x62B) |  |  | Unused The Deadmines 002 |
-| `UNUSED_IRONCLAD_COVE_00THREE` | 1580 (0x62C) |  |  | Unused Ironclad Cove 003 |
-| `THE_DEADMINES` | 1581 (0x62D) |  |  | The Deadmines |
-| `IRONCLAD_COVE` | 1582 (0x62E) |  |  | Ironclad Cove |
-| `BLACKROCK_SPIRE` | 1583 (0x62F) |  |  | Blackrock Spire |
-| `BLACKROCK_DEPTHS` | 1584 (0x630) |  |  | Blackrock Depths |
-| `RAPTOR_GROUNDS_UNUSED` | 1597 (0x63D) |  |  | Raptor Grounds UNUSED |
-| `GROL_DOM_FARM_UNUSED` | 1598 (0x63E) |  |  | Grol'dom Farm UNUSED |
-| `MORSHAN_BASE_CAMP` | 1599 (0x63F) |  |  | Mor'shan Base Camp |
-| `HONORS_STAND_UNUSED` | 1600 (0x640) |  |  | Honor's Stand UNUSED |
-| `BLACKTHORN_RIDGE_UNUSED` | 1601 (0x641) |  |  | Blackthorn Ridge UNUSED |
-| `BRAMBLESCAR_UNUSED` | 1602 (0x642) |  |  | Bramblescar UNUSED |
-| `AGAMA_GOR_UNUSED` | 1603 (0x643) |  |  | Agama'gor UNUSED |
-| `VALLEY_OF_HEROES` | 1617 (0x651) |  |  | Valley of Heroes |
-| `ORGRIMMAR` | 1637 (0x665) |  |  | Orgrimmar |
-| `THUNDER_BLUFF` | 1638 (0x666) |  |  | Thunder Bluff |
-| `ELDER_RISE` | 1639 (0x667) |  |  | Elder Rise |
-| `SPIRIT_RISE` | 1640 (0x668) |  |  | Spirit Rise |
-| `HUNTER_RISE` | 1641 (0x669) |  |  | Hunter Rise |
-| `DARNASSUS` | 1657 (0x679) |  |  | Darnassus |
-| `CENARION_ENCLAVE` | 1658 (0x67A) |  |  | Cenarion Enclave |
-| `CRAFTSMENS_TERRACE` | 1659 (0x67B) |  |  | Craftsmen's Terrace |
-| `WARRIORS_TERRACE` | 1660 (0x67C) |  |  | Warrior's Terrace |
-| `THE_TEMPLE_GARDENS` | 1661 (0x67D) |  |  | The Temple Gardens |
-| `TRADESMENS_TERRACE` | 1662 (0x67E) |  |  | Tradesmen's Terrace |
-| `GAVINS_NAZE` | 1677 (0x68D) |  |  | Gavin's Naze |
-| `SOFERAS_NAZE` | 1678 (0x68E) |  |  | Sofera's Naze |
-| `CORRAHNS_DAGGER` | 1679 (0x68F) |  |  | Corrahn's Dagger |
-| `THE_HEADLAND` | 1680 (0x690) |  |  | The Headland |
-| `MISTY_SHORE` | 1681 (0x691) |  |  | Misty Shore |
-| `DANDREDS_FOLD` | 1682 (0x692) |  |  | Dandred's Fold |
-| `GROWLESS_CAVE` | 1683 (0x693) |  |  | Growless Cave |
-| `CHILLWIND_POINT` | 1684 (0x694) |  |  | Chillwind Point |
-| `RAPTOR_GROUNDS` | 1697 (0x6A1) |  |  | Raptor Grounds |
-| `BRAMBLESCAR` | 1698 (0x6A2) |  |  | Bramblescar |
-| `THORN_HILL` | 1699 (0x6A3) |  |  | Thorn Hill |
-| `AGAMA_GOR` | 1700 (0x6A4) |  |  | Agama'gor |
-| `BLACKTHORN_RIDGE` | 1701 (0x6A5) |  |  | Blackthorn Ridge |
-| `HONORS_STAND` | 1702 (0x6A6) |  |  | Honor's Stand |
-| `THE_MORSHAN_RAMPART` | 1703 (0x6A7) |  |  | The Mor'shan Rampart |
-| `GROL_DOM_FARM` | 1704 (0x6A8) |  |  | Grol'dom Farm |
-| `RAZORFEN_KRAUL1` | 1717 (0x6B5) |  |  | Razorfen Kraul |
-| `THE_GREAT_LIFT1` | 1718 (0x6B6) |  |  | The Great Lift |
-| `MISTVALE_VALLEY` | 1737 (0x6C9) |  |  | Mistvale Valley |
-| `NEK_MANI_WELLSPRING` | 1738 (0x6CA) |  |  | Nek'mani Wellspring |
-| `BLOODSAIL_COMPOUND` | 1739 (0x6CB) |  |  | Bloodsail Compound |
-| `VENTURE_CO_BASE_CAMP` | 1740 (0x6CC) |  |  | Venture Co. Base Camp |
-| `GURUBASHI_ARENA` | 1741 (0x6CD) |  |  | Gurubashi Arena |
-| `SPIRIT_DEN` | 1742 (0x6CE) |  |  | Spirit Den |
-| `THE_CRIMSON_VEIL` | 1757 (0x6DD) |  |  | The Crimson Veil |
-| `THE_RIPTIDE` | 1758 (0x6DE) |  |  | The Riptide |
-| `THE_DAMSELS_LUCK` | 1759 (0x6DF) |  |  | The Damsel's Luck |
-| `VENTURE_CO_OPERATIONS_CENTER` | 1760 (0x6E0) |  |  | Venture Co. Operations Center |
-| `DEADWOOD_VILLAGE` | 1761 (0x6E1) |  |  | Deadwood Village |
-| `FELPAW_VILLAGE` | 1762 (0x6E2) |  |  | Felpaw Village |
-| `JAEDENAR` | 1763 (0x6E3) |  |  | Jaedenar |
-| `BLOODVENOM_RIVER` | 1764 (0x6E4) |  |  | Bloodvenom River |
-| `BLOODVENOM_FALLS` | 1765 (0x6E5) |  |  | Bloodvenom Falls |
-| `SHATTER_SCAR_VALE` | 1766 (0x6E6) |  |  | Shatter Scar Vale |
-| `IRONTREE_WOODS` | 1767 (0x6E7) |  |  | Irontree Woods |
-| `IRONTREE_CAVERN` | 1768 (0x6E8) |  |  | Irontree Cavern |
-| `TIMBERMAW_HOLD1` | 1769 (0x6E9) |  |  | Timbermaw Hold |
-| `SHADOW_HOLD` | 1770 (0x6EA) |  |  | Shadow Hold |
-| `SHRINE_OF_THE_DECEIVER` | 1771 (0x6EB) |  |  | Shrine of the Deceiver |
-| `ITHARIUSS_CAVE` | 1777 (0x6F1) |  |  | Itharius's Cave |
-| `SORROWMURK` | 1778 (0x6F2) |  |  | Sorrowmurk |
-| `DRAENIL_DUR_VILLAGE` | 1779 (0x6F3) |  |  | Draenil'dur Village |
-| `SPLINTERSPEAR_JUNCTION` | 1780 (0x6F4) |  |  | Splinterspear Junction |
-| `STAGALBOG` | 1797 (0x705) |  |  | Stagalbog |
-| `THE_SHIFTING_MIRE` | 1798 (0x706) |  |  | The Shifting Mire |
-| `STAGALBOG_CAVE` | 1817 (0x719) |  |  | Stagalbog Cave |
-| `WITHERBARK_CAVERNS` | 1837 (0x72D) |  |  | Witherbark Caverns |
-| `THORADINS_WALL2` | 1857 (0x741) |  |  | Thoradin's Wall |
-| `BOULDER_GOR` | 1858 (0x742) |  |  | Boulder'gor |
-| `VALLEY_OF_FANGS` | 1877 (0x755) |  |  | Valley of Fangs |
-| `THE_DUSTBOWL` | 1878 (0x756) |  |  | The Dustbowl |
-| `MIRAGE_FLATS` | 1879 (0x757) |  |  | Mirage Flats |
-| `FEATHERBEARDS_HOVEL` | 1880 (0x758) |  |  | Featherbeard's Hovel |
-| `SHINDIGGERS_CAMP` | 1881 (0x759) |  |  | Shindigger's Camp |
-| `PLAGUEMIST_RAVINE` | 1882 (0x75A) |  |  | Plaguemist Ravine |
-| `VALORWIND_LAKE` | 1883 (0x75B) |  |  | Valorwind Lake |
-| `AGOL_WATHA` | 1884 (0x75C) |  |  | Agol'watha |
-| `HIRI_WATHA` | 1885 (0x75D) |  |  | Hiri'watha |
-| `THE_CREEPING_RUIN` | 1886 (0x75E) |  |  | The Creeping Ruin |
-| `BOGENS_LEDGE` | 1887 (0x75F) |  |  | Bogen's Ledge |
-| `THE_MAKERS_TERRACE` | 1897 (0x769) |  |  | The Maker's Terrace |
-| `DUSTWIND_GULCH` | 1898 (0x76A) |  |  | Dustwind Gulch |
-| `SHAOL_WATHA` | 1917 (0x77D) |  |  | Shaol'watha |
-| `NOONSHADE_RUINS` | 1937 (0x791) |  |  | Noonshade Ruins |
-| `BROKEN_PILLAR` | 1938 (0x792) |  |  | Broken Pillar |
-| `ABYSSAL_SANDS` | 1939 (0x793) |  |  | Abyssal Sands |
-| `SOUTHBREAK_SHORE` | 1940 (0x794) |  |  | Southbreak Shore |
-| `CAVERNS_OF_TIME` | 1941 (0x795) |  |  | Caverns of Time |
-| `THE_MARSHLANDS` | 1942 (0x796) |  |  | The Marshlands |
-| `IRONSTONE_PLATEAU` | 1943 (0x797) |  |  | Ironstone Plateau |
-| `BLACKCHAR_CAVE` | 1957 (0x7A5) |  |  | Blackchar Cave |
-| `TANNER_CAMP` | 1958 (0x7A6) |  |  | Tanner Camp |
-| `DUSTFIRE_VALLEY` | 1959 (0x7A7) |  |  | Dustfire Valley |
-| `ZUL_GURUB1` | 1977 (0x7B9) |  |  | Zul'Gurub |
-| `MISTY_REED_POST` | 1978 (0x7BA) |  |  | Misty Reed Post |
-| `BLOODVENOM_POST` | 1997 (0x7CD) |  |  | Bloodvenom Post |
-| `TALONBRANCH_GLADE` | 1998 (0x7CE) |  |  | Talonbranch Glade |
-| `STRATHOLME` | 2017 (0x7E1) |  |  | Stratholme |
-| `QUEL_THALAS` | 2037 (0x7F5) |  |  | Quel'thalas |
-| `SCHOLOMANCE` | 2057 (0x809) |  |  | Scholomance |
-| `TWILIGHT_VALE` | 2077 (0x81D) |  |  | Twilight Vale |
-| `TWILIGHT_SHORE` | 2078 (0x81E) |  |  | Twilight Shore |
-| `ALCAZ_ISLAND` | 2079 (0x81F) |  |  | Alcaz Island |
-| `DARKCLOUD_PINNACLE` | 2097 (0x831) |  |  | Darkcloud Pinnacle |
-| `DAWNING_WOOD_CATACOMBS` | 2098 (0x832) |  |  | Dawning Wood Catacombs |
-| `STONEWATCH_KEEP` | 2099 (0x833) |  |  | Stonewatch Keep |
-| `MARAUDON` | 2100 (0x834) |  |  | Maraudon |
-| `STOUTLAGER_INN` | 2101 (0x835) |  |  | Stoutlager Inn |
-| `THUNDERBREW_DISTILLERY` | 2102 (0x836) |  |  | Thunderbrew Distillery |
-| `MENETHIL_KEEP` | 2103 (0x837) |  |  | Menethil Keep |
-| `DEEPWATER_TAVERN` | 2104 (0x838) |  |  | Deepwater Tavern |
-| `SHADOW_GRAVE` | 2117 (0x845) |  |  | Shadow Grave |
-| `BRILL_TOWN_HALL` | 2118 (0x846) |  |  | Brill Town Hall |
-| `GALLOWS_END_TAVERN` | 2119 (0x847) |  |  | Gallows' End Tavern |
-| `THE_POOLS_OF_VISIONUNUSED` | 2137 (0x859) |  |  | The Pools of VisionUNUSED |
-| `DREADMIST_DEN` | 2138 (0x85A) |  |  | Dreadmist Den |
-| `BAEL_DUN_KEEP` | 2157 (0x86D) |  |  | Bael'dun Keep |
-| `EMBERSTRIFES_DEN` | 2158 (0x86E) |  |  | Emberstrife's Den |
-| `ONYXIAS_LAIR` | 2159 (0x86F) |  |  | Onyxia's Lair |
-| `WINDSHEAR_MINE` | 2160 (0x870) |  |  | Windshear Mine |
-| `ROLANDS_DOOM` | 2161 (0x871) |  |  | Roland's Doom |
-| `BATTLE_RING` | 2177 (0x881) |  |  | Battle Ring |
-| `THE_POOLS_OF_VISION` | 2197 (0x895) |  |  | The Pools of Vision |
-| `SHADOWBREAK_RAVINE` | 2198 (0x896) |  |  | Shadowbreak Ravine |
-| `BROKEN_SPEAR_VILLAGE` | 2217 (0x8A9) |  |  | Broken Spear Village |
-| `WHITEREACH_POST` | 2237 (0x8BD) |  |  | Whitereach Post |
-| `GORNIA` | 2238 (0x8BE) |  |  | Gornia |
-| `ZANES_EYE_CRATER` | 2239 (0x8BF) |  |  | Zane's Eye Crater |
-| `MIRAGE_RACEWAY` | 2240 (0x8C0) |  |  | Mirage Raceway |
-| `FROSTSABER_ROCK` | 2241 (0x8C1) |  |  | Frostsaber Rock |
-| `THE_HIDDEN_GROVE` | 2242 (0x8C2) |  |  | The Hidden Grove |
-| `TIMBERMAW_POST` | 2243 (0x8C3) |  |  | Timbermaw Post |
-| `WINTERFALL_VILLAGE` | 2244 (0x8C4) |  |  | Winterfall Village |
-| `MAZTHORIL` | 2245 (0x8C5) |  |  | Mazthoril |
-| `FROSTFIRE_HOT_SPRINGS` | 2246 (0x8C6) |  |  | Frostfire Hot Springs |
-| `ICE_THISTLE_HILLS` | 2247 (0x8C7) |  |  | Ice Thistle Hills |
-| `DUN_MANDARR` | 2248 (0x8C8) |  |  | Dun Mandarr |
-| `FROSTWHISPER_GORGE` | 2249 (0x8C9) |  |  | Frostwhisper Gorge |
-| `OWL_WING_THICKET` | 2250 (0x8CA) |  |  | Owl Wing Thicket |
-| `LAKE_KEL_THERIL` | 2251 (0x8CB) |  |  | Lake Kel'Theril |
-| `THE_RUINS_OF_KEL_THERIL` | 2252 (0x8CC) |  |  | The Ruins of Kel'Theril |
-| `STARFALL_VILLAGE` | 2253 (0x8CD) |  |  | Starfall Village |
-| `BAN_THALLOW_BARROW_DEN` | 2254 (0x8CE) |  |  | Ban'Thallow Barrow Den |
-| `EVERLOOK` | 2255 (0x8CF) |  |  | Everlook |
-| `DARKWHISPER_GORGE` | 2256 (0x8D0) |  |  | Darkwhisper Gorge |
-| `DEEPRUN_TRAM` | 2257 (0x8D1) |  |  | Deeprun Tram |
-| `THE_FUNGAL_VALE` | 2258 (0x8D2) |  |  | The Fungal Vale |
-| `UNUSEDTHE_MARRIS_STEAD` | 2259 (0x8D3) |  |  | UNUSEDThe Marris Stead |
-| `THE_MARRIS_STEAD` | 2260 (0x8D4) |  |  | The Marris Stead |
-| `THE_UNDERCROFT` | 2261 (0x8D5) |  |  | The Undercroft |
-| `DARROWSHIRE` | 2262 (0x8D6) |  |  | Darrowshire |
-| `CROWN_GUARD_TOWER` | 2263 (0x8D7) |  |  | Crown Guard Tower |
-| `CORINS_CROSSING` | 2264 (0x8D8) |  |  | Corin's Crossing |
-| `SCARLET_BASE_CAMP` | 2265 (0x8D9) |  |  | Scarlet Base Camp |
-| `TYRS_HAND` | 2266 (0x8DA) |  |  | Tyr's Hand |
-| `THE_SCARLET_BASILICA` | 2267 (0x8DB) |  |  | The Scarlet Basilica |
-| `LIGHTS_HOPE_CHAPEL` | 2268 (0x8DC) |  |  | Light's Hope Chapel |
-| `BROWMAN_MILL` | 2269 (0x8DD) |  |  | Browman Mill |
-| `THE_NOXIOUS_GLADE` | 2270 (0x8DE) |  |  | The Noxious Glade |
-| `EASTWALL_TOWER` | 2271 (0x8DF) |  |  | Eastwall Tower |
-| `NORTHDALE` | 2272 (0x8E0) |  |  | Northdale |
-| `ZUL_MASHAR` | 2273 (0x8E1) |  |  | Zul'Mashar |
-| `MAZRA_ALOR` | 2274 (0x8E2) |  |  | Mazra'Alor |
-| `NORTHPASS_TOWER` | 2275 (0x8E3) |  |  | Northpass Tower |
-| `QUEL_LITHIEN_LODGE` | 2276 (0x8E4) |  |  | Quel'Lithien Lodge |
-| `PLAGUEWOOD` | 2277 (0x8E5) |  |  | Plaguewood |
-| `SCOURGEHOLD` | 2278 (0x8E6) |  |  | Scourgehold |
-| `STRATHOLME1` | 2279 (0x8E7) |  |  | Stratholme |
-| `UNUSED_STRATHOLME` | 2280 (0x8E8) |  |  | UNUSED Stratholme |
-| `DARROWMERE_LAKE` | 2297 (0x8F9) |  |  | Darrowmere Lake |
-| `CAER_DARROW` | 2298 (0x8FA) |  |  | Caer Darrow |
-| `DARROWMERE_LAKE1` | 2299 (0x8FB) |  |  | Darrowmere Lake |
-| `CAVERNS_OF_TIME1` | 2300 (0x8FC) |  |  | Caverns of Time |
-| `THISTLEFUR_VILLAGE` | 2301 (0x8FD) |  |  | Thistlefur Village |
-| `THE_QUAGMIRE` | 2302 (0x8FE) |  |  | The Quagmire |
-| `WINDBREAK_CANYON` | 2303 (0x8FF) |  |  | Windbreak Canyon |
-| `SOUTH_SEAS` | 2317 (0x90D) |  |  | South Seas |
-| `THE_GREAT_SEA3` | 2318 (0x90E) |  |  | The Great Sea |
-| `THE_GREAT_SEA4` | 2319 (0x90F) |  |  | The Great Sea |
-| `THE_GREAT_SEA5` | 2320 (0x910) |  |  | The Great Sea |
-| `THE_GREAT_SEA6` | 2321 (0x911) |  |  | The Great Sea |
-| `THE_VEILED_SEA1` | 2322 (0x912) |  |  | The Veiled Sea |
-| `THE_VEILED_SEA2` | 2323 (0x913) |  |  | The Veiled Sea |
-| `THE_VEILED_SEA3` | 2324 (0x914) |  |  | The Veiled Sea |
-| `THE_VEILED_SEA4` | 2325 (0x915) |  |  | The Veiled Sea |
-| `THE_VEILED_SEA5` | 2326 (0x916) |  |  | The Veiled Sea |
-| `RAZOR_HILL_BARRACKS` | 2337 (0x921) |  |  | Razor Hill Barracks |
-| `SOUTH_SEAS1` | 2338 (0x922) |  |  | South Seas |
-| `THE_GREAT_SEA7` | 2339 (0x923) |  |  | The Great Sea |
-| `BLOODTOOTH_CAMP` | 2357 (0x935) |  |  | Bloodtooth Camp |
-| `FOREST_SONG` | 2358 (0x936) |  |  | Forest Song |
-| `GREENPAW_VILLAGE` | 2359 (0x937) |  |  | Greenpaw Village |
-| `SILVERWING_OUTPOST` | 2360 (0x938) |  |  | Silverwing Outpost |
-| `NIGHTHAVEN` | 2361 (0x939) |  |  | Nighthaven |
-| `SHRINE_OF_REMULOS` | 2362 (0x93A) |  |  | Shrine of Remulos |
-| `STORMRAGE_BARROW_DENS` | 2363 (0x93B) |  |  | Stormrage Barrow Dens |
-| `THE_GREAT_SEA8` | 2364 (0x93C) |  |  | The Great Sea |
-| `THE_GREAT_SEA9` | 2365 (0x93D) |  |  | The Great Sea |
-| `THE_BLACK_MORASS` | 2366 (0x93E) |  |  | The Black Morass |
-| `OLD_HILLSBRAD_FOOTHILLS` | 2367 (0x93F) |  |  | Old Hillsbrad Foothills |
-| `TARREN_MILL1` | 2368 (0x940) |  |  | Tarren Mill |
-| `SOUTHSHORE1` | 2369 (0x941) |  |  | Southshore |
-| `DURNHOLDE_KEEP1` | 2370 (0x942) |  |  | Durnholde Keep |
-| `DUN_GAROK1` | 2371 (0x943) |  |  | Dun Garok |
-| `HILLSBRAD_FIELDS1` | 2372 (0x944) |  |  | Hillsbrad Fields |
-| `EASTERN_STRAND1` | 2373 (0x945) |  |  | Eastern Strand |
-| `NETHANDER_STEAD1` | 2374 (0x946) |  |  | Nethander Stead |
-| `DARROW_HILL1` | 2375 (0x947) |  |  | Darrow Hill |
-| `SOUTHPOINT_TOWER1` | 2376 (0x948) |  |  | Southpoint Tower |
-| `THORADINS_WALL3` | 2377 (0x949) |  |  | Thoradin's Wall |
-| `WESTERN_STRAND1` | 2378 (0x94A) |  |  | Western Strand |
-| `AZURELODE_MINE1` | 2379 (0x94B) |  |  | Azurelode Mine |
-| `THE_GREAT_SEA10` | 2397 (0x95D) |  |  | The Great Sea |
-| `THE_GREAT_SEA11` | 2398 (0x95E) |  |  | The Great Sea |
-| `THE_GREAT_SEA12` | 2399 (0x95F) |  |  | The Great Sea |
-| `THE_FORBIDDING_SEA1` | 2400 (0x960) |  |  | The Forbidding Sea |
-| `THE_FORBIDDING_SEA2` | 2401 (0x961) |  |  | The Forbidding Sea |
-| `THE_FORBIDDING_SEA3` | 2402 (0x962) |  |  | The Forbidding Sea |
-| `THE_FORBIDDING_SEA4` | 2403 (0x963) |  |  | The Forbidding Sea |
-| `TETHRIS_ARAN` | 2404 (0x964) |  |  | Tethris Aran |
-| `ETHEL_RETHOR` | 2405 (0x965) |  |  | Ethel Rethor |
-| `RANAZJAR_ISLE` | 2406 (0x966) |  |  | Ranazjar Isle |
-| `KORMEKS_HUT` | 2407 (0x967) |  |  | Kormek's Hut |
-| `SHADOWPREY_VILLAGE` | 2408 (0x968) |  |  | Shadowprey Village |
-| `BLACKROCK_PASS` | 2417 (0x971) |  |  | Blackrock Pass |
-| `MORGANS_VIGIL` | 2418 (0x972) |  |  | Morgan's Vigil |
-| `SLITHER_ROCK` | 2419 (0x973) |  |  | Slither Rock |
-| `TERROR_WING_PATH` | 2420 (0x974) |  |  | Terror Wing Path |
-| `DRACO_DAR` | 2421 (0x975) |  |  | Draco'dar |
-| `RAGEFIRE_CHASM` | 2437 (0x985) |  |  | Ragefire Chasm |
-| `NIGHTSONG_WOODS` | 2457 (0x999) |  |  | Nightsong Woods |
-| `THE_VEILED_SEA6` | 2477 (0x9AD) |  |  | The Veiled Sea |
-| `MORLOS_ARAN` | 2478 (0x9AE) |  |  | Morlos'Aran |
-| `EMERALD_SANCTUARY` | 2479 (0x9AF) |  |  | Emerald Sanctuary |
-| `JADEFIRE_GLEN` | 2480 (0x9B0) |  |  | Jadefire Glen |
-| `RUINS_OF_CONSTELLAS` | 2481 (0x9B1) |  |  | Ruins of Constellas |
-| `BITTER_REACHES` | 2497 (0x9C1) |  |  | Bitter Reaches |
-| `RISE_OF_THE_DEFILER` | 2517 (0x9D5) |  |  | Rise of the Defiler |
-| `LARISS_PAVILION` | 2518 (0x9D6) |  |  | Lariss Pavilion |
-| `WOODPAW_HILLS` | 2519 (0x9D7) |  |  | Woodpaw Hills |
-| `WOODPAW_DEN` | 2520 (0x9D8) |  |  | Woodpaw Den |
-| `VERDANTIS_RIVER` | 2521 (0x9D9) |  |  | Verdantis River |
-| `RUINS_OF_ISILDIEN` | 2522 (0x9DA) |  |  | Ruins of Isildien |
-| `GRIMTOTEM_POST` | 2537 (0x9E9) |  |  | Grimtotem Post |
-| `CAMP_APARAJE` | 2538 (0x9EA) |  |  | Camp Aparaje |
-| `MALAKA_JIN` | 2539 (0x9EB) |  |  | Malaka'jin |
-| `BOULDERSLIDE_RAVINE` | 2540 (0x9EC) |  |  | Boulderslide Ravine |
-| `SISHIR_CANYON` | 2541 (0x9ED) |  |  | Sishir Canyon |
-| `DIRE_MAUL` | 2557 (0x9FD) |  |  | Dire Maul |
-| `DEADWIND_RAVINE` | 2558 (0x9FE) |  |  | Deadwind Ravine |
-| `DIAMONDHEAD_RIVER` | 2559 (0x9FF) |  |  | Diamondhead River |
-| `ARIDENS_CAMP` | 2560 (0xA00) |  |  | Ariden's Camp |
-| `THE_VICE` | 2561 (0xA01) |  |  | The Vice |
-| `KARAZHAN` | 2562 (0xA02) |  |  | Karazhan |
-| `MORGANS_PLOT` | 2563 (0xA03) |  |  | Morgan's Plot |
-| `DIRE_MAUL1` | 2577 (0xA11) |  |  | Dire Maul |
-| `ALTERAC_VALLEY` | 2597 (0xA25) |  |  | Alterac Valley |
-| `SCRABBLESCREWS_CAMP` | 2617 (0xA39) |  |  | Scrabblescrew's Camp |
-| `JADEFIRE_RUN` | 2618 (0xA3A) |  |  | Jadefire Run |
-| `THONDRORIL_RIVER` | 2619 (0xA3B) |  |  | Thondroril River |
-| `THONDRORIL_RIVER1` | 2620 (0xA3C) |  |  | Thondroril River |
-| `LAKE_MERELDAR` | 2621 (0xA3D) |  |  | Lake Mereldar |
-| `PESTILENT_SCAR` | 2622 (0xA3E) |  |  | Pestilent Scar |
-| `THE_INFECTIS_SCAR` | 2623 (0xA3F) |  |  | The Infectis Scar |
-| `BLACKWOOD_LAKE` | 2624 (0xA40) |  |  | Blackwood Lake |
-| `EASTWALL_GATE` | 2625 (0xA41) |  |  | Eastwall Gate |
-| `TERRORWEB_TUNNEL` | 2626 (0xA42) |  |  | Terrorweb Tunnel |
-| `TERRORDALE` | 2627 (0xA43) |  |  | Terrordale |
-| `KARGATHIA_KEEP` | 2637 (0xA4D) |  |  | Kargathia Keep |
-| `VALLEY_OF_BONES` | 2657 (0xA61) |  |  | Valley of Bones |
-| `BLACKWING_LAIR` | 2677 (0xA75) |  |  | Blackwing Lair |
-| `DEADMANS_CROSSING` | 2697 (0xA89) |  |  | Deadman's Crossing |
-| `MOLTEN_CORE` | 2717 (0xA9D) |  |  | Molten Core |
-| `THE_SCARAB_WALL` | 2737 (0xAB1) |  |  | The Scarab Wall |
-| `SOUTHWIND_VILLAGE` | 2738 (0xAB2) |  |  | Southwind Village |
-| `TWILIGHT_BASE_CAMP` | 2739 (0xAB3) |  |  | Twilight Base Camp |
-| `THE_CRYSTAL_VALE` | 2740 (0xAB4) |  |  | The Crystal Vale |
-| `THE_SCARAB_DAIS` | 2741 (0xAB5) |  |  | The Scarab Dais |
-| `HIVE_ASHI` | 2742 (0xAB6) |  |  | Hive'Ashi |
-| `HIVE_ZORA` | 2743 (0xAB7) |  |  | Hive'Zora |
-| `HIVE_REGAL` | 2744 (0xAB8) |  |  | Hive'Regal |
-| `SHRINE_OF_THE_FALLEN_WARRIOR` | 2757 (0xAC5) |  |  | Shrine of the Fallen Warrior |
-| `UNUSED_ALTERAC_VALLEY` | 2777 (0xAD9) |  |  | UNUSED Alterac Valley |
-| `BLACKFATHOM_DEEPS1` | 2797 (0xAED) |  |  | Blackfathom Deeps |
-| `REUSE_ME_4` | 2817 (0xB01) |  |  | Reuse Me 4 |
-| `THE_MASTERS_CELLAR` | 2837 (0xB15) |  |  | The Master's Cellar |
-| `STONEWROUGHT_PASS` | 2838 (0xB16) |  |  | Stonewrought Pass |
-| `ALTERAC_VALLEY1` | 2839 (0xB17) |  |  | Alterac Valley |
-| `THE_RUMBLE_CAGE` | 2857 (0xB29) |  |  | The Rumble Cage |
-| `CHUNK_TEST` | 2877 (0xB3D) |  |  | Chunk Test |
-| `ZORAM_GAR_OUTPOST` | 2897 (0xB51) |  |  | Zoram'gar Outpost |
-| `HALL_OF_LEGENDS` | 2917 (0xB65) |  |  | Hall of Legends |
-| `CHAMPIONS_HALL` | 2918 (0xB66) |  |  | Champions' Hall |
-| `GROSH_GOK_COMPOUND` | 2937 (0xB79) |  |  | Grosh'gok Compound |
-| `SLEEPING_GORGE` | 2938 (0xB7A) |  |  | Sleeping Gorge |
-| `IRONDEEP_MINE` | 2957 (0xB8D) |  |  | Irondeep Mine |
-| `STONEHEARTH_OUTPOST` | 2958 (0xB8E) |  |  | Stonehearth Outpost |
-| `DUN_BALDAR` | 2959 (0xB8F) |  |  | Dun Baldar |
-| `ICEWING_PASS` | 2960 (0xB90) |  |  | Icewing Pass |
-| `FROSTWOLF_VILLAGE` | 2961 (0xB91) |  |  | Frostwolf Village |
-| `TOWER_POINT` | 2962 (0xB92) |  |  | Tower Point |
-| `COLDTOOTH_MINE` | 2963 (0xB93) |  |  | Coldtooth Mine |
-| `WINTERAX_HOLD` | 2964 (0xB94) |  |  | Winterax Hold |
-| `ICEBLOOD_GARRISON` | 2977 (0xBA1) |  |  | Iceblood Garrison |
-| `FROSTWOLF_KEEP` | 2978 (0xBA2) |  |  | Frostwolf Keep |
-| `TOR_KREN_FARM` | 2979 (0xBA3) |  |  | Tor'kren Farm |
-| `FROST_DAGGER_PASS` | 3017 (0xBC9) |  |  | Frost Dagger Pass |
-| `IRONSTONE_CAMP` | 3037 (0xBDD) |  |  | Ironstone Camp |
-| `WEAZELS_CRATER` | 3038 (0xBDE) |  |  | Weazel's Crater |
-| `TAHONDA_RUINS` | 3039 (0xBDF) |  |  | Tahonda Ruins |
-| `FIELD_OF_STRIFE` | 3057 (0xBF1) |  |  | Field of Strife |
-| `ICEWING_CAVERN` | 3058 (0xBF2) |  |  | Icewing Cavern |
-| `VALORS_REST` | 3077 (0xC05) |  |  | Valor's Rest |
-| `THE_SWARMING_PILLAR` | 3097 (0xC19) |  |  | The Swarming Pillar |
-| `TWILIGHT_POST` | 3098 (0xC1A) |  |  | Twilight Post |
-| `TWILIGHT_OUTPOST` | 3099 (0xC1B) |  |  | Twilight Outpost |
-| `RAVAGED_TWILIGHT_CAMP` | 3100 (0xC1C) |  |  | Ravaged Twilight Camp |
-| `SHALZARUS_LAIR` | 3117 (0xC2D) |  |  | Shalzaru's Lair |
-| `TALRENDIS_POINT` | 3137 (0xC41) |  |  | Talrendis Point |
-| `RETHRESS_SANCTUM` | 3138 (0xC42) |  |  | Rethress Sanctum |
-| `MOON_HORROR_DEN` | 3139 (0xC43) |  |  | Moon Horror Den |
-| `SCALEBEARDS_CAVE` | 3140 (0xC44) |  |  | Scalebeard's Cave |
-| `BOULDERSLIDE_CAVERN` | 3157 (0xC55) |  |  | Boulderslide Cavern |
-| `WARSONG_LABOR_CAMP` | 3177 (0xC69) |  |  | Warsong Labor Camp |
-| `CHILLWIND_CAMP` | 3197 (0xC7D) |  |  | Chillwind Camp |
-| `THE_MAUL` | 3217 (0xC91) |  |  | The Maul |
-| `THE_MAUL_UNUSED` | 3237 (0xCA5) |  |  | The Maul UNUSED |
-| `BONES_OF_GRAKKAROND` | 3257 (0xCB9) |  |  | Bones of Grakkarond |
-| `WARSONG_GULCH` | 3277 (0xCCD) |  |  | Warsong Gulch |
-| `FROSTWOLF_GRAVEYARD` | 3297 (0xCE1) |  |  | Frostwolf Graveyard |
-| `FROSTWOLF_PASS` | 3298 (0xCE2) |  |  | Frostwolf Pass |
-| `DUN_BALDAR_PASS` | 3299 (0xCE3) |  |  | Dun Baldar Pass |
-| `ICEBLOOD_GRAVEYARD` | 3300 (0xCE4) |  |  | Iceblood Graveyard |
-| `SNOWFALL_GRAVEYARD` | 3301 (0xCE5) |  |  | Snowfall Graveyard |
-| `STONEHEARTH_GRAVEYARD` | 3302 (0xCE6) |  |  | Stonehearth Graveyard |
-| `STORMPIKE_GRAVEYARD` | 3303 (0xCE7) |  |  | Stormpike Graveyard |
-| `ICEWING_BUNKER` | 3304 (0xCE8) |  |  | Icewing Bunker |
-| `STONEHEARTH_BUNKER` | 3305 (0xCE9) |  |  | Stonehearth Bunker |
-| `WILDPAW_RIDGE` | 3306 (0xCEA) |  |  | Wildpaw Ridge |
-| `REVANTUSK_VILLAGE` | 3317 (0xCF5) |  |  | Revantusk Village |
-| `ROCK_OF_DUROTAN` | 3318 (0xCF6) |  |  | Rock of Durotan |
-| `SILVERWING_GROVE` | 3319 (0xCF7) |  |  | Silverwing Grove |
-| `WARSONG_LUMBER_MILL` | 3320 (0xCF8) |  |  | Warsong Lumber Mill |
-| `SILVERWING_HOLD` | 3321 (0xCF9) |  |  | Silverwing Hold |
-| `WILDPAW_CAVERN` | 3337 (0xD09) |  |  | Wildpaw Cavern |
-| `THE_VEILED_CLEFT` | 3338 (0xD0A) |  |  | The Veiled Cleft |
-| `YOJAMBA_ISLE` | 3357 (0xD1D) |  |  | Yojamba Isle |
-| `ARATHI_BASIN` | 3358 (0xD1E) |  |  | Arathi Basin |
-| `THE_COIL` | 3377 (0xD31) |  |  | The Coil |
-| `ALTAR_OF_HIR_EEK` | 3378 (0xD32) |  |  | Altar of Hir'eek |
-| `SHADRA_ZAAR` | 3379 (0xD33) |  |  | Shadra'zaar |
-| `HAKKARI_GROUNDS` | 3380 (0xD34) |  |  | Hakkari Grounds |
-| `NAZE_OF_SHIRVALLAH` | 3381 (0xD35) |  |  | Naze of Shirvallah |
-| `TEMPLE_OF_BETHEKK` | 3382 (0xD36) |  |  | Temple of Bethekk |
-| `THE_BLOODFIRE_PIT` | 3383 (0xD37) |  |  | The Bloodfire Pit |
-| `ALTAR_OF_THE_BLOOD_GOD` | 3384 (0xD38) |  |  | Altar of the Blood God |
-| `ZANZAS_RISE` | 3397 (0xD45) |  |  | Zanza's Rise |
-| `EDGE_OF_MADNESS` | 3398 (0xD46) |  |  | Edge of Madness |
-| `TROLLBANE_HALL` | 3417 (0xD59) |  |  | Trollbane Hall |
-| `DEFILERS_DEN` | 3418 (0xD5A) |  |  | Defiler's Den |
-| `PAGLES_POINTE` | 3419 (0xD5B) |  |  | Pagle's Pointe |
-| `FARM` | 3420 (0xD5C) |  |  | Farm |
-| `BLACKSMITH` | 3421 (0xD5D) |  |  | Blacksmith |
-| `LUMBER_MILL` | 3422 (0xD5E) |  |  | Lumber Mill |
-| `GOLD_MINE` | 3423 (0xD5F) |  |  | Gold Mine |
-| `STABLES` | 3424 (0xD60) |  |  | Stables |
-| `CENARION_HOLD` | 3425 (0xD61) |  |  | Cenarion Hold |
-| `STAGHELM_POINT` | 3426 (0xD62) |  |  | Staghelm Point |
-| `BRONZEBEARD_ENCAMPMENT` | 3427 (0xD63) |  |  | Bronzebeard Encampment |
-| `AHN_QIRAJ` | 3428 (0xD64) |  |  | Ahn'Qiraj |
-| `RUINS_OF_AHN_QIRAJ` | 3429 (0xD65) |  |  | Ruins of Ahn'Qiraj |
-| `EVERSONG_WOODS` | 3430 (0xD66) |  |  | Eversong Woods |
-| `SUNSTRIDER_ISLE` | 3431 (0xD67) |  |  | Sunstrider Isle |
-| `SHRINE_OF_DATH_REMAR` | 3432 (0xD68) |  |  | Shrine of Dath'Remar |
-| `GHOSTLANDS` | 3433 (0xD69) |  |  | Ghostlands |
-| `SCARAB_TERRACE` | 3434 (0xD6A) |  |  | Scarab Terrace |
-| `GENERALS_TERRACE` | 3435 (0xD6B) |  |  | General's Terrace |
-| `THE_RESERVOIR` | 3436 (0xD6C) |  |  | The Reservoir |
-| `THE_HATCHERY` | 3437 (0xD6D) |  |  | The Hatchery |
-| `THE_COMB` | 3438 (0xD6E) |  |  | The Comb |
-| `WATCHERS_TERRACE` | 3439 (0xD6F) |  |  | Watchers' Terrace |
-| `SCARAB_TERRACE1` | 3440 (0xD70) |  |  | Scarab Terrace |
-| `GENERALS_TERRACE1` | 3441 (0xD71) |  |  | General's Terrace |
-| `THE_RESERVOIR1` | 3442 (0xD72) |  |  | The Reservoir |
-| `THE_HATCHERY1` | 3443 (0xD73) |  |  | The Hatchery |
-| `THE_COMB1` | 3444 (0xD74) |  |  | The Comb |
-| `WATCHERS_TERRACE1` | 3445 (0xD75) |  |  | Watchers' Terrace |
-| `TWILIGHTS_RUN` | 3446 (0xD76) |  |  | Twilight's Run |
-| `ORTELLS_HIDEOUT` | 3447 (0xD77) |  |  | Ortell's Hideout |
-| `SCARAB_TERRACE2` | 3448 (0xD78) |  |  | Scarab Terrace |
-| `GENERALS_TERRACE2` | 3449 (0xD79) |  |  | General's Terrace |
-| `THE_RESERVOIR2` | 3450 (0xD7A) |  |  | The Reservoir |
-| `THE_HATCHERY2` | 3451 (0xD7B) |  |  | The Hatchery |
-| `THE_COMB2` | 3452 (0xD7C) |  |  | The Comb |
-| `WATCHERS_TERRACE2` | 3453 (0xD7D) |  |  | Watchers' Terrace |
-| `RUINS_OF_AHN_QIRAJ1` | 3454 (0xD7E) |  |  | Ruins of Ahn'Qiraj |
-| `THE_NORTH_SEA` | 3455 (0xD7F) |  |  | The North Sea |
-| `NAXXRAMAS` | 3456 (0xD80) |  |  | Naxxramas |
-| `KARAZHAN1` | 3457 (0xD81) |  |  | Karazhan |
-| `CITY` | 3459 (0xD83) |  |  | City |
-| `GOLDEN_STRAND` | 3460 (0xD84) |  |  | Golden Strand |
-| `SUNSAIL_ANCHORAGE` | 3461 (0xD85) |  |  | Sunsail Anchorage |
-| `FAIRBREEZE_VILLAGE` | 3462 (0xD86) |  |  | Fairbreeze Village |
-| `MAGISTERS_GATE` | 3463 (0xD87) |  |  | Magisters Gate |
-| `FARSTRIDER_RETREAT` | 3464 (0xD88) |  |  | Farstrider Retreat |
-| `NORTH_SANCTUM` | 3465 (0xD89) |  |  | North Sanctum |
-| `WEST_SANCTUM` | 3466 (0xD8A) |  |  | West Sanctum |
-| `EAST_SANCTUM` | 3467 (0xD8B) |  |  | East Sanctum |
-| `SALTHERILS_HAVEN` | 3468 (0xD8C) |  |  | Saltheril's Haven |
-| `THURONS_LIVERY` | 3469 (0xD8D) |  |  | Thuron's Livery |
-| `STILLWHISPER_POND` | 3470 (0xD8E) |  |  | Stillwhisper Pond |
-| `THE_LIVING_WOOD` | 3471 (0xD8F) |  |  | The Living Wood |
-| `AZUREBREEZE_COAST` | 3472 (0xD90) |  |  | Azurebreeze Coast |
-| `LAKE_ELRENDAR` | 3473 (0xD91) |  |  | Lake Elrendar |
-| `THE_SCORCHED_GROVE` | 3474 (0xD92) |  |  | The Scorched Grove |
-| `ZEB_WATHA` | 3475 (0xD93) |  |  | Zeb'Watha |
-| `TOR_WATHA` | 3476 (0xD94) |  |  | Tor'Watha |
-| `KARAZHAN_UNUSED` | 3477 (0xD95) |  |  | Karazhan *UNUSED* |
-| `GATES_OF_AHN_QIRAJ` | 3478 (0xD96) |  |  | Gates of Ahn'Qiraj |
-| `THE_VEILED_SEA7` | 3479 (0xD97) |  |  | The Veiled Sea |
-| `DUSKWITHER_GROUNDS` | 3480 (0xD98) |  |  | Duskwither Grounds |
-| `DUSKWITHER_SPIRE` | 3481 (0xD99) |  |  | Duskwither Spire |
-| `THE_DEAD_SCAR` | 3482 (0xD9A) |  |  | The Dead Scar |
-| `HELLFIRE_PENINSULA` | 3483 (0xD9B) |  |  | Hellfire Peninsula |
-| `THE_SUNSPIRE` | 3484 (0xD9C) |  |  | The Sunspire |
-| `FALTHRIEN_ACADEMY` | 3485 (0xD9D) |  |  | Falthrien Academy |
-| `RAVENHOLDT_MANOR` | 3486 (0xD9E) |  |  | Ravenholdt Manor |
-| `SILVERMOON_CITY` | 3487 (0xD9F) |  |  | Silvermoon City |
-| `TRANQUILLIEN` | 3488 (0xDA0) |  |  | Tranquillien |
-| `SUNCROWN_VILLAGE` | 3489 (0xDA1) |  |  | Suncrown Village |
-| `GOLDENMIST_VILLAGE` | 3490 (0xDA2) |  |  | Goldenmist Village |
-| `WINDRUNNER_VILLAGE` | 3491 (0xDA3) |  |  | Windrunner Village |
-| `WINDRUNNER_SPIRE` | 3492 (0xDA4) |  |  | Windrunner Spire |
-| `SANCTUM_OF_THE_SUN` | 3493 (0xDA5) |  |  | Sanctum of the Sun |
-| `SANCTUM_OF_THE_MOON` | 3494 (0xDA6) |  |  | Sanctum of the Moon |
-| `DAWNSTAR_SPIRE` | 3495 (0xDA7) |  |  | Dawnstar Spire |
-| `FARSTRIDER_ENCLAVE` | 3496 (0xDA8) |  |  | Farstrider Enclave |
-| `AN_DAROTH` | 3497 (0xDA9) |  |  | An'daroth |
-| `AN_TELAS` | 3498 (0xDAA) |  |  | An'telas |
-| `AN_OWYN` | 3499 (0xDAB) |  |  | An'owyn |
-| `DEATHOLME` | 3500 (0xDAC) |  |  | Deatholme |
-| `BLEEDING_ZIGGURAT` | 3501 (0xDAD) |  |  | Bleeding Ziggurat |
-| `HOWLING_ZIGGURAT` | 3502 (0xDAE) |  |  | Howling Ziggurat |
-| `SHALANDIS_ISLE` | 3503 (0xDAF) |  |  | Shalandis Isle |
-| `TORYL_ESTATE` | 3504 (0xDB0) |  |  | Toryl Estate |
-| `UNDERLIGHT_MINES` | 3505 (0xDB1) |  |  | Underlight Mines |
-| `ANDILIEN_ESTATE` | 3506 (0xDB2) |  |  | Andilien Estate |
-| `HATCHET_HILLS` | 3507 (0xDB3) |  |  | Hatchet Hills |
-| `AMANI_PASS` | 3508 (0xDB4) |  |  | Amani Pass |
-| `SUNGRAZE_PEAK` | 3509 (0xDB5) |  |  | Sungraze Peak |
-| `AMANI_CATACOMBS` | 3510 (0xDB6) |  |  | Amani Catacombs |
-| `TOWER_OF_THE_DAMNED` | 3511 (0xDB7) |  |  | Tower of the Damned |
-| `ZEB_SORA` | 3512 (0xDB8) |  |  | Zeb'Sora |
-| `LAKE_ELRENDAR1` | 3513 (0xDB9) |  |  | Lake Elrendar |
-| `THE_DEAD_SCAR1` | 3514 (0xDBA) |  |  | The Dead Scar |
-| `ELRENDAR_RIVER` | 3515 (0xDBB) |  |  | Elrendar River |
-| `ZEB_TELA` | 3516 (0xDBC) |  |  | Zeb'Tela |
-| `ZEB_NOWA` | 3517 (0xDBD) |  |  | Zeb'Nowa |
-| `NAGRAND` | 3518 (0xDBE) |  |  | Nagrand |
-| `TEROKKAR_FOREST` | 3519 (0xDBF) |  |  | Terokkar Forest |
-| `SHADOWMOON_VALLEY` | 3520 (0xDC0) |  |  | Shadowmoon Valley |
-| `ZANGARMARSH` | 3521 (0xDC1) |  |  | Zangarmarsh |
-| `BLADES_EDGE_MOUNTAINS` | 3522 (0xDC2) |  |  | Blade's Edge Mountains |
-| `NETHERSTORM` | 3523 (0xDC3) |  |  | Netherstorm |
-| `AZUREMYST_ISLE` | 3524 (0xDC4) |  |  | Azuremyst Isle |
-| `BLOODMYST_ISLE` | 3525 (0xDC5) |  |  | Bloodmyst Isle |
-| `AMMEN_VALE` | 3526 (0xDC6) |  |  | Ammen Vale |
-| `CRASH_SITE` | 3527 (0xDC7) |  |  | Crash Site |
-| `SILVERLINE_LAKE` | 3528 (0xDC8) |  |  | Silverline Lake |
-| `NESTLEWOOD_THICKET` | 3529 (0xDC9) |  |  | Nestlewood Thicket |
-| `SHADOW_RIDGE` | 3530 (0xDCA) |  |  | Shadow Ridge |
-| `SKULKING_ROW` | 3531 (0xDCB) |  |  | Skulking Row |
-| `DAWNING_LANE` | 3532 (0xDCC) |  |  | Dawning Lane |
-| `RUINS_OF_SILVERMOON` | 3533 (0xDCD) |  |  | Ruins of Silvermoon |
-| `FETHS_WAY` | 3534 (0xDCE) |  |  | Feth's Way |
-| `HELLFIRE_CITADEL` | 3535 (0xDCF) |  |  | Hellfire Citadel |
-| `THRALLMAR` | 3536 (0xDD0) |  |  | Thrallmar |
-| `REUSE` | 3537 (0xDD1) |  |  | REUSE |
-| `HONOR_HOLD` | 3538 (0xDD2) |  |  | Honor Hold |
-| `THE_STAIR_OF_DESTINY` | 3539 (0xDD3) |  |  | The Stair of Destiny |
-| `TWISTING_NETHER` | 3540 (0xDD4) |  |  | Twisting Nether |
-| `FORGE_CAMP_MAGEDDON` | 3541 (0xDD5) |  |  | Forge Camp: Mageddon |
-| `THE_PATH_OF_GLORY` | 3542 (0xDD6) |  |  | The Path of Glory |
-| `THE_GREAT_FISSURE` | 3543 (0xDD7) |  |  | The Great Fissure |
-| `PLAIN_OF_SHARDS` | 3544 (0xDD8) |  |  | Plain of Shards |
-| `HELLFIRE_CITADEL1` | 3545 (0xDD9) |  |  | Hellfire Citadel |
-| `EXPEDITION_ARMORY` | 3546 (0xDDA) |  |  | Expedition Armory |
-| `THRONE_OF_KIL_JAEDEN` | 3547 (0xDDB) |  |  | Throne of Kil'jaeden |
-| `FORGE_CAMP_RAGE` | 3548 (0xDDC) |  |  | Forge Camp: Rage |
-| `INVASION_POINT_ANNIHILATOR` | 3549 (0xDDD) |  |  | Invasion Point: Annihilator |
-| `BORUNE_RUINS` | 3550 (0xDDE) |  |  | Borune Ruins |
-| `RUINS_OF_SHA_NAAR` | 3551 (0xDDF) |  |  | Ruins of Sha'naar |
-| `TEMPLE_OF_TELHAMAT` | 3552 (0xDE0) |  |  | Temple of Telhamat |
-| `POOLS_OF_AGGONAR` | 3553 (0xDE1) |  |  | Pools of Aggonar |
-| `FALCON_WATCH` | 3554 (0xDE2) |  |  | Falcon Watch |
-| `MAG_HAR_POST` | 3555 (0xDE3) |  |  | Mag'har Post |
-| `DEN_OF_HAAL_ESH` | 3556 (0xDE4) |  |  | Den of Haal'esh |
-| `THE_EXODAR` | 3557 (0xDE5) |  |  | The Exodar |
-| `ELRENDAR_FALLS` | 3558 (0xDE6) |  |  | Elrendar Falls |
-| `NESTLEWOOD_HILLS` | 3559 (0xDE7) |  |  | Nestlewood Hills |
-| `AMMEN_FIELDS` | 3560 (0xDE8) |  |  | Ammen Fields |
-| `THE_SACRED_GROVE` | 3561 (0xDE9) |  |  | The Sacred Grove |
-| `HELLFIRE_RAMPARTS` | 3562 (0xDEA) |  |  | Hellfire Ramparts |
-| `HELLFIRE_CITADEL2` | 3563 (0xDEB) |  |  | Hellfire Citadel |
-| `EMBERGLADE` | 3564 (0xDEC) |  |  | Emberglade |
-| `CENARION_REFUGE` | 3565 (0xDED) |  |  | Cenarion Refuge |
-| `MOONWING_DEN` | 3566 (0xDEE) |  |  | Moonwing Den |
-| `POD_CLUSTER` | 3567 (0xDEF) |  |  | Pod Cluster |
-| `POD_WRECKAGE` | 3568 (0xDF0) |  |  | Pod Wreckage |
-| `TIDES_HOLLOW` | 3569 (0xDF1) |  |  | Tides' Hollow |
-| `WRATHSCALE_POINT` | 3570 (0xDF2) |  |  | Wrathscale Point |
-| `BRISTLELIMB_VILLAGE` | 3571 (0xDF3) |  |  | Bristlelimb Village |
-| `STILLPINE_HOLD` | 3572 (0xDF4) |  |  | Stillpine Hold |
-| `ODESYUS_LANDING` | 3573 (0xDF5) |  |  | Odesyus' Landing |
-| `VALAARS_BERTH` | 3574 (0xDF6) |  |  | Valaar's Berth |
-| `SILTING_SHORE` | 3575 (0xDF7) |  |  | Silting Shore |
-| `AZURE_WATCH` | 3576 (0xDF8) |  |  | Azure Watch |
-| `GEEZLES_CAMP` | 3577 (0xDF9) |  |  | Geezle's Camp |
-| `MENAGERIE_WRECKAGE` | 3578 (0xDFA) |  |  | Menagerie Wreckage |
-| `TRAITORS_COVE` | 3579 (0xDFB) |  |  | Traitor's Cove |
-| `WILDWIND_PEAK` | 3580 (0xDFC) |  |  | Wildwind Peak |
-| `WILDWIND_PATH` | 3581 (0xDFD) |  |  | Wildwind Path |
-| `ZETH_GOR` | 3582 (0xDFE) |  |  | Zeth'Gor |
-| `BERYL_COAST` | 3583 (0xDFF) |  |  | Beryl Coast |
-| `BLOOD_WATCH` | 3584 (0xE00) |  |  | Blood Watch |
-| `BLADEWOOD` | 3585 (0xE01) |  |  | Bladewood |
-| `THE_VECTOR_COIL` | 3586 (0xE02) |  |  | The Vector Coil |
-| `THE_WARP_PISTON` | 3587 (0xE03) |  |  | The Warp Piston |
-| `THE_CRYO_CORE` | 3588 (0xE04) |  |  | The Cryo-Core |
-| `THE_CRIMSON_REACH` | 3589 (0xE05) |  |  | The Crimson Reach |
-| `WRATHSCALE_LAIR` | 3590 (0xE06) |  |  | Wrathscale Lair |
-| `RUINS_OF_LORETH_ARAN` | 3591 (0xE07) |  |  | Ruins of Loreth'Aran |
-| `NAZZIVIAN` | 3592 (0xE08) |  |  | Nazzivian |
-| `AXXARIEN` | 3593 (0xE09) |  |  | Axxarien |
-| `BLACKSILT_SHORE` | 3594 (0xE0A) |  |  | Blacksilt Shore |
-| `THE_FOUL_POOL` | 3595 (0xE0B) |  |  | The Foul Pool |
-| `THE_HIDDEN_REEF` | 3596 (0xE0C) |  |  | The Hidden Reef |
-| `AMBERWEB_PASS` | 3597 (0xE0D) |  |  | Amberweb Pass |
-| `WYRMSCAR_ISLAND` | 3598 (0xE0E) |  |  | Wyrmscar Island |
-| `TALON_STAND` | 3599 (0xE0F) |  |  | Talon Stand |
-| `BRISTLELIMB_ENCLAVE` | 3600 (0xE10) |  |  | Bristlelimb Enclave |
-| `RAGEFEATHER_RIDGE` | 3601 (0xE11) |  |  | Ragefeather Ridge |
-| `KESSELS_CROSSING` | 3602 (0xE12) |  |  | Kessel's Crossing |
-| `TEL_ATHIONS_CAMP` | 3603 (0xE13) |  |  | Tel'athion's Camp |
-| `THE_BLOODCURSED_REEF` | 3604 (0xE14) |  |  | The Bloodcursed Reef |
-| `HYJAL_PAST` | 3605 (0xE15) |  |  | Hyjal Past |
-| `HYJAL_SUMMIT` | 3606 (0xE16) |  |  | Hyjal Summit |
-| `SERPENTSHRINE_CAVERN` | 3607 (0xE17) |  |  | Serpentshrine Cavern |
-| `VINDICATORS_REST` | 3608 (0xE18) |  |  | Vindicator's Rest |
-| `UNUSEDTHREE` | 3609 (0xE19) |  |  | Unused3 |
-| `BURNING_BLADE_RUINS` | 3610 (0xE1A) |  |  | Burning Blade Ruins |
-| `CLAN_WATCH` | 3611 (0xE1B) |  |  | Clan Watch |
-| `BLOODCURSE_ISLE` | 3612 (0xE1C) |  |  | Bloodcurse Isle |
-| `GARADAR` | 3613 (0xE1D) |  |  | Garadar |
-| `SKYSONG_LAKE` | 3614 (0xE1E) |  |  | Skysong Lake |
-| `THRONE_OF_THE_ELEMENTS` | 3615 (0xE1F) |  |  | Throne of the Elements |
-| `LAUGHING_SKULL_RUINS` | 3616 (0xE20) |  |  | Laughing Skull Ruins |
-| `WARMAUL_HILL` | 3617 (0xE21) |  |  | Warmaul Hill |
-| `GRUULS_LAIR` | 3618 (0xE22) |  |  | Gruul's Lair |
-| `AUREN_RIDGE` | 3619 (0xE23) |  |  | Auren Ridge |
-| `AUREN_FALLS` | 3620 (0xE24) |  |  | Auren Falls |
-| `LAKE_SUNSPRING` | 3621 (0xE25) |  |  | Lake Sunspring |
-| `SUNSPRING_POST` | 3622 (0xE26) |  |  | Sunspring Post |
-| `AERIS_LANDING` | 3623 (0xE27) |  |  | Aeris Landing |
-| `FORGE_CAMP_FEAR` | 3624 (0xE28) |  |  | Forge Camp: Fear |
-| `FORGE_CAMP_HATE` | 3625 (0xE29) |  |  | Forge Camp: Hate |
-| `TELAAR` | 3626 (0xE2A) |  |  | Telaar |
-| `NORTHWIND_CLEFT` | 3627 (0xE2B) |  |  | Northwind Cleft |
-| `HALAA` | 3628 (0xE2C) |  |  | Halaa |
-| `SOUTHWIND_CLEFT` | 3629 (0xE2D) |  |  | Southwind Cleft |
-| `OSHU_GUN` | 3630 (0xE2E) |  |  | Oshu'gun |
-| `SPIRIT_FIELDS` | 3631 (0xE2F) |  |  | Spirit Fields |
-| `SHAMANAR` | 3632 (0xE30) |  |  | Shamanar |
-| `ANCESTRAL_GROUNDS` | 3633 (0xE31) |  |  | Ancestral Grounds |
-| `WINDYREED_VILLAGE` | 3634 (0xE32) |  |  | Windyreed Village |
-| `UNUSED2` | 3635 (0xE33) |  |  | Unused2 |
-| `ELEMENTAL_PLATEAU` | 3636 (0xE34) |  |  | Elemental Plateau |
-| `KILSORROW_FORTRESS` | 3637 (0xE35) |  |  | Kil'sorrow Fortress |
-| `THE_RING_OF_TRIALS` | 3638 (0xE36) |  |  | The Ring of Trials |
-| `SILVERMYST_ISLE` | 3639 (0xE37) |  |  | Silvermyst Isle |
-| `DAGGERFEN_VILLAGE` | 3640 (0xE38) |  |  | Daggerfen Village |
-| `UMBRAFEN_VILLAGE` | 3641 (0xE39) |  |  | Umbrafen Village |
-| `FERALFEN_VILLAGE` | 3642 (0xE3A) |  |  | Feralfen Village |
-| `BLOODSCALE_ENCLAVE` | 3643 (0xE3B) |  |  | Bloodscale Enclave |
-| `TELREDOR` | 3644 (0xE3C) |  |  | Telredor |
-| `ZABRA_JIN` | 3645 (0xE3D) |  |  | Zabra'jin |
-| `QUAGG_RIDGE` | 3646 (0xE3E) |  |  | Quagg Ridge |
-| `THE_SPAWNING_GLEN` | 3647 (0xE3F) |  |  | The Spawning Glen |
-| `THE_DEAD_MIRE` | 3648 (0xE40) |  |  | The Dead Mire |
-| `SPOREGGAR` | 3649 (0xE41) |  |  | Sporeggar |
-| `ANGO_ROSH_GROUNDS` | 3650 (0xE42) |  |  | Ango'rosh Grounds |
-| `ANGO_ROSH_STRONGHOLD` | 3651 (0xE43) |  |  | Ango'rosh Stronghold |
-| `FUNGGOR_CAVERN` | 3652 (0xE44) |  |  | Funggor Cavern |
-| `SERPENT_LAKE` | 3653 (0xE45) |  |  | Serpent Lake |
-| `THE_DRAIN` | 3654 (0xE46) |  |  | The Drain |
-| `UMBRAFEN_LAKE` | 3655 (0xE47) |  |  | Umbrafen Lake |
-| `MARSHLIGHT_LAKE` | 3656 (0xE48) |  |  | Marshlight Lake |
-| `PORTAL_CLEARING` | 3657 (0xE49) |  |  | Portal Clearing |
-| `SPOREWIND_LAKE` | 3658 (0xE4A) |  |  | Sporewind Lake |
-| `THE_LAGOON` | 3659 (0xE4B) |  |  | The Lagoon |
-| `BLADES_RUN` | 3660 (0xE4C) |  |  | Blades' Run |
-| `BLADE_TOOTH_CANYON` | 3661 (0xE4D) |  |  | Blade Tooth Canyon |
-| `COMMONS_HALL` | 3662 (0xE4E) |  |  | Commons Hall |
-| `DERELICT_MANOR` | 3663 (0xE4F) |  |  | Derelict Manor |
-| `HUNTRESS_OF_THE_SUN` | 3664 (0xE50) |  |  | Huntress of the Sun |
-| `FALCONWING_SQUARE` | 3665 (0xE51) |  |  | Falconwing Square |
-| `HALAANI_BASIN` | 3666 (0xE52) |  |  | Halaani Basin |
-| `HEWN_BOG` | 3667 (0xE53) |  |  | Hewn Bog |
-| `BOHA_MU_RUINS` | 3668 (0xE54) |  |  | Boha'mu Ruins |
-| `THE_STADIUM` | 3669 (0xE55) |  |  | The Stadium |
-| `THE_OVERLOOK` | 3670 (0xE56) |  |  | The Overlook |
-| `BROKEN_HILL` | 3671 (0xE57) |  |  | Broken Hill |
-| `MAG_HARI_PROCESSION` | 3672 (0xE58) |  |  | Mag'hari Procession |
-| `NESINGWARY_SAFARI` | 3673 (0xE59) |  |  | Nesingwary Safari |
-| `CENARION_THICKET` | 3674 (0xE5A) |  |  | Cenarion Thicket |
-| `TUUREM` | 3675 (0xE5B) |  |  | Tuurem |
-| `VEIL_SHIENOR` | 3676 (0xE5C) |  |  | Veil Shienor |
-| `VEIL_SKITH` | 3677 (0xE5D) |  |  | Veil Skith |
-| `VEIL_SHALAS` | 3678 (0xE5E) |  |  | Veil Shalas |
-| `SKETTIS` | 3679 (0xE5F) |  |  | Skettis |
-| `BLACKWIND_VALLEY` | 3680 (0xE60) |  |  | Blackwind Valley |
-| `FIREWING_POINT` | 3681 (0xE61) |  |  | Firewing Point |
-| `GRANGOL_VAR_VILLAGE` | 3682 (0xE62) |  |  | Grangol'var Village |
-| `STONEBREAKER_HOLD` | 3683 (0xE63) |  |  | Stonebreaker Hold |
-| `ALLERIAN_STRONGHOLD` | 3684 (0xE64) |  |  | Allerian Stronghold |
-| `BONECHEWER_RUINS` | 3685 (0xE65) |  |  | Bonechewer Ruins |
-| `VEIL_LITHIC` | 3686 (0xE66) |  |  | Veil Lithic |
-| `OLEMBAS` | 3687 (0xE67) |  |  | Olembas |
-| `AUCHINDOUN` | 3688 (0xE68) |  |  | Auchindoun |
-| `VEIL_RESKK` | 3689 (0xE69) |  |  | Veil Reskk |
-| `BLACKWIND_LAKE` | 3690 (0xE6A) |  |  | Blackwind Lake |
-| `LAKE_ERE_NORU` | 3691 (0xE6B) |  |  | Lake Ere'Noru |
-| `LAKE_JORUNE` | 3692 (0xE6C) |  |  | Lake Jorune |
-| `SKETHYL_MOUNTAINS` | 3693 (0xE6D) |  |  | Skethyl Mountains |
-| `MISTY_RIDGE` | 3694 (0xE6E) |  |  | Misty Ridge |
-| `THE_BROKEN_HILLS` | 3695 (0xE6F) |  |  | The Broken Hills |
-| `THE_BARRIER_HILLS` | 3696 (0xE70) |  |  | The Barrier Hills |
-| `THE_BONE_WASTES` | 3697 (0xE71) |  |  | The Bone Wastes |
-| `NAGRAND_ARENA` | 3698 (0xE72) |  |  | Nagrand Arena |
-| `LAUGHING_SKULL_COURTYARD` | 3699 (0xE73) |  |  | Laughing Skull Courtyard |
-| `THE_RING_OF_BLOOD` | 3700 (0xE74) |  |  | The Ring of Blood |
-| `ARENA_FLOOR` | 3701 (0xE75) |  |  | Arena Floor |
-| `BLADES_EDGE_ARENA` | 3702 (0xE76) |  |  | Blade's Edge Arena |
-| `SHATTRATH_CITY` | 3703 (0xE77) |  |  | Shattrath City |
-| `THE_SHEPHERDS_GATE` | 3704 (0xE78) |  |  | The Shepherd's Gate |
-| `TELAARI_BASIN` | 3705 (0xE79) |  |  | Telaari Basin |
-| `THE_DARK_PORTAL1` | 3706 (0xE7A) |  |  | The Dark Portal |
-| `ALLIANCE_BASE` | 3707 (0xE7B) |  |  | Alliance Base |
-| `HORDE_ENCAMPMENT` | 3708 (0xE7C) |  |  | Horde Encampment |
-| `NIGHT_ELF_VILLAGE` | 3709 (0xE7D) |  |  | Night Elf Village |
-| `NORDRASSIL` | 3710 (0xE7E) |  |  | Nordrassil |
-| `REUSE_ME` | 3711 (0xE7F) |  |  | Reuse Me |
-| `AREA_52` | 3712 (0xE80) |  |  | Area 52 |
-| `THE_BLOOD_FURNACE` | 3713 (0xE81) |  |  | The Blood Furnace |
-| `THE_SHATTERED_HALLS` | 3714 (0xE82) |  |  | The Shattered Halls |
-| `THE_STEAMVAULT` | 3715 (0xE83) |  |  | The Steamvault |
-| `THE_UNDERBOG` | 3716 (0xE84) |  |  | The Underbog |
-| `THE_SLAVE_PENS` | 3717 (0xE85) |  |  | The Slave Pens |
-| `SWAMPRAT_POST` | 3718 (0xE86) |  |  | Swamprat Post |
-| `BLEEDING_HOLLOW_RUINS` | 3719 (0xE87) |  |  | Bleeding Hollow Ruins |
-| `TWIN_SPIRE_RUINS` | 3720 (0xE88) |  |  | Twin Spire Ruins |
-| `THE_CRUMBLING_WASTE` | 3721 (0xE89) |  |  | The Crumbling Waste |
-| `MANAFORGE_ARA` | 3722 (0xE8A) |  |  | Manaforge Ara |
-| `ARKLON_RUINS` | 3723 (0xE8B) |  |  | Arklon Ruins |
-| `COSMOWRENCH` | 3724 (0xE8C) |  |  | Cosmowrench |
-| `RUINS_OF_ENKAAT` | 3725 (0xE8D) |  |  | Ruins of Enkaat |
-| `MANAFORGE_B_NAAR` | 3726 (0xE8E) |  |  | Manaforge B'naar |
-| `THE_SCRAP_FIELD` | 3727 (0xE8F) |  |  | The Scrap Field |
-| `THE_VORTEX_FIELDS` | 3728 (0xE90) |  |  | The Vortex Fields |
-| `THE_HEAP` | 3729 (0xE91) |  |  | The Heap |
-| `MANAFORGE_CORUU` | 3730 (0xE92) |  |  | Manaforge Coruu |
-| `THE_TEMPEST_RIFT` | 3731 (0xE93) |  |  | The Tempest Rift |
-| `KIRIN_VAR_VILLAGE` | 3732 (0xE94) |  |  | Kirin'Var Village |
-| `THE_VIOLET_TOWER` | 3733 (0xE95) |  |  | The Violet Tower |
-| `MANAFORGE_DURO` | 3734 (0xE96) |  |  | Manaforge Duro |
-| `VOIDWIND_PLATEAU` | 3735 (0xE97) |  |  | Voidwind Plateau |
-| `MANAFORGE_ULTRIS` | 3736 (0xE98) |  |  | Manaforge Ultris |
-| `CELESTIAL_RIDGE` | 3737 (0xE99) |  |  | Celestial Ridge |
-| `THE_STORMSPIRE` | 3738 (0xE9A) |  |  | The Stormspire |
-| `FORGE_BASE_OBLIVION` | 3739 (0xE9B) |  |  | Forge Base: Oblivion |
-| `FORGE_BASE_GEHENNA` | 3740 (0xE9C) |  |  | Forge Base: Gehenna |
-| `RUINS_OF_FARAHLON` | 3741 (0xE9D) |  |  | Ruins of Farahlon |
-| `SOCRETHARS_SEAT` | 3742 (0xE9E) |  |  | Socrethar's Seat |
-| `LEGION_HOLD` | 3743 (0xE9F) |  |  | Legion Hold |
-| `SHADOWMOON_VILLAGE` | 3744 (0xEA0) |  |  | Shadowmoon Village |
-| `WILDHAMMER_STRONGHOLD` | 3745 (0xEA1) |  |  | Wildhammer Stronghold |
-| `THE_HAND_OF_GUL_DAN` | 3746 (0xEA2) |  |  | The Hand of Gul'dan |
-| `THE_FEL_PITS` | 3747 (0xEA3) |  |  | The Fel Pits |
-| `THE_DEATHFORGE` | 3748 (0xEA4) |  |  | The Deathforge |
-| `COILSKAR_CISTERN` | 3749 (0xEA5) |  |  | Coilskar Cistern |
-| `COILSKAR_POINT` | 3750 (0xEA6) |  |  | Coilskar Point |
-| `SUNFIRE_POINT` | 3751 (0xEA7) |  |  | Sunfire Point |
-| `ILLIDARI_POINT` | 3752 (0xEA8) |  |  | Illidari Point |
-| `RUINS_OF_BAA_RI` | 3753 (0xEA9) |  |  | Ruins of Baa'ri |
-| `ALTAR_OF_SHA_TAR` | 3754 (0xEAA) |  |  | Altar of Sha'tar |
-| `THE_STAIR_OF_DOOM` | 3755 (0xEAB) |  |  | The Stair of Doom |
-| `RUINS_OF_KARABOR` | 3756 (0xEAC) |  |  | Ruins of Karabor |
-| `ATA_MAL_TERRACE` | 3757 (0xEAD) |  |  | Ata'mal Terrace |
-| `NETHERWING_FIELDS` | 3758 (0xEAE) |  |  | Netherwing Fields |
-| `NETHERWING_LEDGE` | 3759 (0xEAF) |  |  | Netherwing Ledge |
-| `THE_BARRIER_HILLS1` | 3760 (0xEB0) |  |  | The Barrier Hills |
-| `THE_HIGH_PATH` | 3761 (0xEB1) |  |  | The High Path |
-| `WINDYREED_PASS` | 3762 (0xEB2) |  |  | Windyreed Pass |
-| `ZANGAR_RIDGE` | 3763 (0xEB3) |  |  | Zangar Ridge |
-| `THE_TWILIGHT_RIDGE` | 3764 (0xEB4) |  |  | The Twilight Ridge |
-| `RAZORTHORN_TRAIL` | 3765 (0xEB5) |  |  | Razorthorn Trail |
-| `OREBOR_HARBORAGE` | 3766 (0xEB6) |  |  | Orebor Harborage |
-| `BLADES_RUN1` | 3767 (0xEB7) |  |  | Blades' Run |
-| `JAGGED_RIDGE` | 3768 (0xEB8) |  |  | Jagged Ridge |
-| `THUNDERLORD_STRONGHOLD` | 3769 (0xEB9) |  |  | Thunderlord Stronghold |
-| `BLADE_TOOTH_CANYON1` | 3770 (0xEBA) |  |  | Blade Tooth Canyon |
-| `THE_LIVING_GROVE` | 3771 (0xEBB) |  |  | The Living Grove |
-| `SYLVANAAR` | 3772 (0xEBC) |  |  | Sylvanaar |
-| `BLADESPIRE_HOLD` | 3773 (0xEBD) |  |  | Bladespire Hold |
-| `GRUULS_LAIR1` | 3774 (0xEBE) |  |  | Gruul's Lair |
-| `CIRCLE_OF_BLOOD` | 3775 (0xEBF) |  |  | Circle of Blood |
-| `BLOODMAUL_OUTPOST` | 3776 (0xEC0) |  |  | Bloodmaul Outpost |
-| `BLOODMAUL_CAMP` | 3777 (0xEC1) |  |  | Bloodmaul Camp |
-| `DRAENETHYST_MINE` | 3778 (0xEC2) |  |  | Draenethyst Mine |
-| `TROGMAS_CLAIM` | 3779 (0xEC3) |  |  | Trogma's Claim |
-| `BLACKWING_COVEN` | 3780 (0xEC4) |  |  | Blackwing Coven |
-| `GRISHNATH` | 3781 (0xEC5) |  |  | Grishnath |
-| `VEIL_LASHH` | 3782 (0xEC6) |  |  | Veil Lashh |
-| `VEIL_VEKH` | 3783 (0xEC7) |  |  | Veil Vekh |
-| `FORGE_CAMP_TERROR` | 3784 (0xEC8) |  |  | Forge Camp: Terror |
-| `FORGE_CAMP_WRATH` | 3785 (0xEC9) |  |  | Forge Camp: Wrath |
-| `OGRI_LA` | 3786 (0xECA) |  |  | Ogri'la |
-| `FORGE_CAMP_ANGER` | 3787 (0xECB) |  |  | Forge Camp: Anger |
-| `THE_LOW_PATH` | 3788 (0xECC) |  |  | The Low Path |
-| `SHADOW_LABYRINTH` | 3789 (0xECD) |  |  | Shadow Labyrinth |
-| `AUCHENAI_CRYPTS` | 3790 (0xECE) |  |  | Auchenai Crypts |
-| `SETHEKK_HALLS` | 3791 (0xECF) |  |  | Sethekk Halls |
-| `MANA_TOMBS` | 3792 (0xED0) |  |  | Mana-Tombs |
-| `FELSPARK_RAVINE` | 3793 (0xED1) |  |  | Felspark Ravine |
-| `VALLEY_OF_BONES1` | 3794 (0xED2) |  |  | Valley of Bones |
-| `SHA_NAARI_WASTES` | 3795 (0xED3) |  |  | Sha'naari Wastes |
-| `THE_WARP_FIELDS` | 3796 (0xED4) |  |  | The Warp Fields |
-| `FALLEN_SKY_RIDGE` | 3797 (0xED5) |  |  | Fallen Sky Ridge |
-| `HAAL_ESHI_GORGE` | 3798 (0xED6) |  |  | Haal'eshi Gorge |
-| `STONEWALL_CANYON` | 3799 (0xED7) |  |  | Stonewall Canyon |
-| `THORNFANG_HILL` | 3800 (0xED8) |  |  | Thornfang Hill |
-| `MAG_HAR_GROUNDS` | 3801 (0xED9) |  |  | Mag'har Grounds |
-| `VOID_RIDGE` | 3802 (0xEDA) |  |  | Void Ridge |
-| `THE_ABYSSAL_SHELF` | 3803 (0xEDB) |  |  | The Abyssal Shelf |
-| `THE_LEGION_FRONT` | 3804 (0xEDC) |  |  | The Legion Front |
-| `ZUL_AMAN` | 3805 (0xEDD) |  |  | Zul'Aman |
-| `SUPPLY_CARAVAN` | 3806 (0xEDE) |  |  | Supply Caravan |
-| `REAVERS_FALL` | 3807 (0xEDF) |  |  | Reaver's Fall |
-| `CENARION_POST` | 3808 (0xEE0) |  |  | Cenarion Post |
-| `SOUTHERN_RAMPART` | 3809 (0xEE1) |  |  | Southern Rampart |
-| `NORTHERN_RAMPART` | 3810 (0xEE2) |  |  | Northern Rampart |
-| `GOR_GAZ_OUTPOST` | 3811 (0xEE3) |  |  | Gor'gaz Outpost |
-| `SPINEBREAKER_POST` | 3812 (0xEE4) |  |  | Spinebreaker Post |
-| `THE_PATH_OF_ANGUISH` | 3813 (0xEE5) |  |  | The Path of Anguish |
-| `EAST_SUPPLY_CARAVAN` | 3814 (0xEE6) |  |  | East Supply Caravan |
-| `EXPEDITION_POINT` | 3815 (0xEE7) |  |  | Expedition Point |
-| `ZEPPELIN_CRASH` | 3816 (0xEE8) |  |  | Zeppelin Crash |
-| `TESTING` | 3817 (0xEE9) |  |  | Testing |
-| `BLOODSCALE_GROUNDS` | 3818 (0xEEA) |  |  | Bloodscale Grounds |
-| `DARKCREST_ENCLAVE` | 3819 (0xEEB) |  |  | Darkcrest Enclave |
-| `EYE_OF_THE_STORM` | 3820 (0xEEC) |  |  | Eye of the Storm |
-| `WARDENS_CAGE` | 3821 (0xEED) |  |  | Warden's Cage |
-| `ECLIPSE_POINT` | 3822 (0xEEE) |  |  | Eclipse Point |
-| `ISLE_OF_TRIBULATIONS` | 3823 (0xEEF) |  |  | Isle of Tribulations |
-| `BLOODMAUL_RAVINE` | 3824 (0xEF0) |  |  | Bloodmaul Ravine |
-| `DRAGONS_END` | 3825 (0xEF1) |  |  | Dragons' End |
-| `DAGGERMAW_CANYON` | 3826 (0xEF2) |  |  | Daggermaw Canyon |
-| `VEKHAAR_STAND` | 3827 (0xEF3) |  |  | Vekhaar Stand |
-| `RUUAN_WEALD` | 3828 (0xEF4) |  |  | Ruuan Weald |
-| `VEIL_RUUAN` | 3829 (0xEF5) |  |  | Veil Ruuan |
-| `RAVENS_WOOD` | 3830 (0xEF6) |  |  | Raven's Wood |
-| `DEATHS_DOOR` | 3831 (0xEF7) |  |  | Death's Door |
-| `VORTEX_PINNACLE` | 3832 (0xEF8) |  |  | Vortex Pinnacle |
-| `RAZOR_RIDGE` | 3833 (0xEF9) |  |  | Razor Ridge |
-| `RIDGE_OF_MADNESS` | 3834 (0xEFA) |  |  | Ridge of Madness |
-| `DUSTQUILL_RAVINE` | 3835 (0xEFB) |  |  | Dustquill Ravine |
-| `MAGTHERIDONS_LAIR` | 3836 (0xEFC) |  |  | Magtheridon's Lair |
-| `SUNFURY_HOLD` | 3837 (0xEFD) |  |  | Sunfury Hold |
-| `SPINEBREAKER_MOUNTAINS` | 3838 (0xEFE) |  |  | Spinebreaker Mountains |
-| `ABANDONED_ARMORY` | 3839 (0xEFF) |  |  | Abandoned Armory |
-| `THE_BLACK_TEMPLE` | 3840 (0xF00) |  |  | The Black Temple |
-| `DARKCREST_SHORE` | 3841 (0xF01) |  |  | Darkcrest Shore |
-| `TEMPEST_KEEP` | 3842 (0xF02) |  |  | Tempest Keep |
-| `MOK_NATHAL_VILLAGE` | 3844 (0xF04) |  |  | Mok'Nathal Village |
-| `TEMPEST_KEEP1` | 3845 (0xF05) |  |  | Tempest Keep |
-| `THE_ARCATRAZ` | 3846 (0xF06) |  |  | The Arcatraz |
-| `THE_BOTANICA` | 3847 (0xF07) |  |  | The Botanica |
-| `THE_ARCATRAZ1` | 3848 (0xF08) |  |  | The Arcatraz |
-| `THE_MECHANAR` | 3849 (0xF09) |  |  | The Mechanar |
-| `NETHERSTONE` | 3850 (0xF0A) |  |  | Netherstone |
-| `MIDREALM_POST` | 3851 (0xF0B) |  |  | Midrealm Post |
-| `TULUMANS_LANDING` | 3852 (0xF0C) |  |  | Tuluman's Landing |
-| `PROTECTORATE_WATCH_POST` | 3854 (0xF0E) |  |  | Protectorate Watch Post |
-| `CIRCLE_OF_BLOOD_ARENA` | 3855 (0xF0F) |  |  | Circle of Blood Arena |
-| `ELRENDAR_CROSSING` | 3856 (0xF10) |  |  | Elrendar Crossing |
-| `AMMEN_FORD` | 3857 (0xF11) |  |  | Ammen Ford |
-| `RAZORTHORN_SHELF` | 3858 (0xF12) |  |  | Razorthorn Shelf |
-| `SILMYR_LAKE` | 3859 (0xF13) |  |  | Silmyr Lake |
-| `RAASTOK_GLADE` | 3860 (0xF14) |  |  | Raastok Glade |
-| `THALASSIAN_PASS` | 3861 (0xF15) |  |  | Thalassian Pass |
-| `CHURNING_GULCH` | 3862 (0xF16) |  |  | Churning Gulch |
-| `BROKEN_WILDS` | 3863 (0xF17) |  |  | Broken Wilds |
-| `BASH_IR_LANDING` | 3864 (0xF18) |  |  | Bash'ir Landing |
-| `CRYSTAL_SPINE` | 3865 (0xF19) |  |  | Crystal Spine |
-| `SKALD` | 3866 (0xF1A) |  |  | Skald |
-| `BLADED_GULCH` | 3867 (0xF1B) |  |  | Bladed Gulch |
-| `GYRO_PLANK_BRIDGE` | 3868 (0xF1C) |  |  | Gyro-Plank Bridge |
-| `MAGE_TOWER` | 3869 (0xF1D) |  |  | Mage Tower |
-| `BLOOD_ELF_TOWER` | 3870 (0xF1E) |  |  | Blood Elf Tower |
-| `DRAENEI_RUINS` | 3871 (0xF1F) |  |  | Draenei Ruins |
-| `FEL_REAVER_RUINS` | 3872 (0xF20) |  |  | Fel Reaver Ruins |
-| `THE_PROVING_GROUNDS` | 3873 (0xF21) |  |  | The Proving Grounds |
-| `ECO_DOME_FARFIELD` | 3874 (0xF22) |  |  | Eco-Dome Farfield |
-| `ECO_DOME_SKYPERCH` | 3875 (0xF23) |  |  | Eco-Dome Skyperch |
-| `ECO_DOME_SUTHERON` | 3876 (0xF24) |  |  | Eco-Dome Sutheron |
-| `ECO_DOME_MIDREALM` | 3877 (0xF25) |  |  | Eco-Dome Midrealm |
-| `ETHEREUM_STAGING_GROUNDS` | 3878 (0xF26) |  |  | Ethereum Staging Grounds |
-| `CHAPEL_YARD` | 3879 (0xF27) |  |  | Chapel Yard |
-| `ACCESS_SHAFT_ZEON` | 3880 (0xF28) |  |  | Access Shaft Zeon |
-| `TRELLEUM_MINE` | 3881 (0xF29) |  |  | Trelleum Mine |
-| `INVASION_POINT_DESTROYER` | 3882 (0xF2A) |  |  | Invasion Point: Destroyer |
-| `CAMP_OF_BOOM` | 3883 (0xF2B) |  |  | Camp of Boom |
-| `SPINEBREAKER_PASS` | 3884 (0xF2C) |  |  | Spinebreaker Pass |
-| `NETHERWEB_RIDGE` | 3885 (0xF2D) |  |  | Netherweb Ridge |
-| `DERELICT_CARAVAN` | 3886 (0xF2E) |  |  | Derelict Caravan |
-| `REFUGEE_CARAVAN` | 3887 (0xF2F) |  |  | Refugee Caravan |
-| `SHADOW_TOMB` | 3888 (0xF30) |  |  | Shadow Tomb |
-| `VEIL_RHAZE` | 3889 (0xF31) |  |  | Veil Rhaze |
-| `TOMB_OF_LIGHTS` | 3890 (0xF32) |  |  | Tomb of Lights |
-| `CARRION_HILL` | 3891 (0xF33) |  |  | Carrion Hill |
-| `WRITHING_MOUND` | 3892 (0xF34) |  |  | Writhing Mound |
-| `RING_OF_OBSERVANCE` | 3893 (0xF35) |  |  | Ring of Observance |
-| `AUCHENAI_GROUNDS` | 3894 (0xF36) |  |  | Auchenai Grounds |
-| `CENARION_WATCHPOST` | 3895 (0xF37) |  |  | Cenarion Watchpost |
-| `ALDOR_RISE` | 3896 (0xF38) |  |  | Aldor Rise |
-| `TERRACE_OF_LIGHT` | 3897 (0xF39) |  |  | Terrace of Light |
-| `SCRYERS_TIER` | 3898 (0xF3A) |  |  | Scryer's Tier |
-| `LOWER_CITY` | 3899 (0xF3B) |  |  | Lower City |
-| `INVASION_POINT_OVERLORD` | 3900 (0xF3C) |  |  | Invasion Point: Overlord |
-| `ALLERIAN_POST` | 3901 (0xF3D) |  |  | Allerian Post |
-| `STONEBREAKER_CAMP` | 3902 (0xF3E) |  |  | Stonebreaker Camp |
-| `BOULDER_MOK` | 3903 (0xF3F) |  |  | Boulder'mok |
-| `CURSED_HOLLOW` | 3904 (0xF40) |  |  | Cursed Hollow |
-| `COILFANG_RESERVOIR` | 3905 (0xF41) |  |  | Coilfang Reservoir |
-| `THE_BLOODWASH` | 3906 (0xF42) |  |  | The Bloodwash |
-| `VERIDIAN_POINT` | 3907 (0xF43) |  |  | Veridian Point |
-| `MIDDENVALE` | 3908 (0xF44) |  |  | Middenvale |
-| `THE_LOST_FOLD` | 3909 (0xF45) |  |  | The Lost Fold |
-| `MYSTWOOD` | 3910 (0xF46) |  |  | Mystwood |
-| `TRANQUIL_SHORE` | 3911 (0xF47) |  |  | Tranquil Shore |
-| `GOLDENBOUGH_PASS` | 3912 (0xF48) |  |  | Goldenbough Pass |
-| `RUNESTONE_FALITHAS` | 3913 (0xF49) |  |  | Runestone Falithas |
-| `RUNESTONE_SHAN_DOR` | 3914 (0xF4A) |  |  | Runestone Shan'dor |
-| `FAIRBRIDGE_STRAND` | 3915 (0xF4B) |  |  | Fairbridge Strand |
-| `MOONGRAZE_WOODS` | 3916 (0xF4C) |  |  | Moongraze Woods |
-| `AUCHINDOUN1` | 3917 (0xF4D) |  |  | Auchindoun |
-| `TOSHLEYS_STATION` | 3918 (0xF4E) |  |  | Toshley's Station |
-| `SINGING_RIDGE` | 3919 (0xF4F) |  |  | Singing Ridge |
-| `SHATTER_POINT` | 3920 (0xF50) |  |  | Shatter Point |
-| `ARKLONIS_RIDGE` | 3921 (0xF51) |  |  | Arklonis Ridge |
-| `BLADESPIRE_OUTPOST` | 3922 (0xF52) |  |  | Bladespire Outpost |
-| `GRUULS_LAIR2` | 3923 (0xF53) |  |  | Gruul's Lair |
-| `NORTHMAUL_TOWER` | 3924 (0xF54) |  |  | Northmaul Tower |
-| `SOUTHMAUL_TOWER` | 3925 (0xF55) |  |  | Southmaul Tower |
-| `SHATTERED_PLAINS` | 3926 (0xF56) |  |  | Shattered Plains |
-| `ORONOKS_FARM` | 3927 (0xF57) |  |  | Oronok's Farm |
-| `THE_ALTAR_OF_DAMNATION` | 3928 (0xF58) |  |  | The Altar of Damnation |
-| `THE_PATH_OF_CONQUEST` | 3929 (0xF59) |  |  | The Path of Conquest |
-| `ECLIPSION_FIELDS` | 3930 (0xF5A) |  |  | Eclipsion Fields |
-| `BLADESPIRE_GROUNDS` | 3931 (0xF5B) |  |  | Bladespire Grounds |
-| `SKETH_LON_BASE_CAMP` | 3932 (0xF5C) |  |  | Sketh'lon Base Camp |
-| `SKETH_LON_WRECKAGE` | 3933 (0xF5D) |  |  | Sketh'lon Wreckage |
-| `TOWN_SQUARE` | 3934 (0xF5E) |  |  | Town Square |
-| `WIZARD_ROW` | 3935 (0xF5F) |  |  | Wizard Row |
-| `DEATHFORGE_TOWER` | 3936 (0xF60) |  |  | Deathforge Tower |
-| `SLAG_WATCH` | 3937 (0xF61) |  |  | Slag Watch |
-| `SANCTUM_OF_THE_STARS` | 3938 (0xF62) |  |  | Sanctum of the Stars |
-| `DRAGONMAW_FORTRESS` | 3939 (0xF63) |  |  | Dragonmaw Fortress |
-| `THE_FETID_POOL` | 3940 (0xF64) |  |  | The Fetid Pool |
-| `TEST` | 3941 (0xF65) |  |  | Test |
-| `RAZAANS_LANDING` | 3942 (0xF66) |  |  | Razaan's Landing |
-| `INVASION_POINT_CATACLYSM` | 3943 (0xF67) |  |  | Invasion Point: Cataclysm |
-| `THE_ALTAR_OF_SHADOWS` | 3944 (0xF68) |  |  | The Altar of Shadows |
-| `NETHERWING_PASS` | 3945 (0xF69) |  |  | Netherwing Pass |
-| `WAYNES_REFUGE` | 3946 (0xF6A) |  |  | Wayne's Refuge |
-| `THE_SCALDING_POOLS` | 3947 (0xF6B) |  |  | The Scalding Pools |
-| `BRIAN_AND_PAT_TEST` | 3948 (0xF6C) |  |  | Brian and Pat Test |
-| `MAGMA_FIELDS` | 3949 (0xF6D) |  |  | Magma Fields |
-| `CRIMSON_WATCH` | 3950 (0xF6E) |  |  | Crimson Watch |
-| `EVERGROVE` | 3951 (0xF6F) |  |  | Evergrove |
-| `WYRMSKULL_BRIDGE` | 3952 (0xF70) |  |  | Wyrmskull Bridge |
-| `SCALEWING_SHELF` | 3953 (0xF71) |  |  | Scalewing Shelf |
-| `WYRMSKULL_TUNNEL` | 3954 (0xF72) |  |  | Wyrmskull Tunnel |
-| `HELLFIRE_BASIN` | 3955 (0xF73) |  |  | Hellfire Basin |
-| `THE_SHADOW_STAIR` | 3956 (0xF74) |  |  | The Shadow Stair |
-| `SHA_TARI_OUTPOST` | 3957 (0xF75) |  |  | Sha'tari Outpost |
-| `SHA_TARI_BASE_CAMP` | 3958 (0xF76) |  |  | Sha'tari Base Camp |
-| `BLACK_TEMPLE` | 3959 (0xF77) |  |  | Black Temple |
-| `SOULGRINDERS_BARROW` | 3960 (0xF78) |  |  | Soulgrinder's Barrow |
-| `SORROW_WING_POINT` | 3961 (0xF79) |  |  | Sorrow Wing Point |
-| `VIM_GOLS_CIRCLE` | 3962 (0xF7A) |  |  | Vim'gol's Circle |
-| `DRAGONSPINE_RIDGE` | 3963 (0xF7B) |  |  | Dragonspine Ridge |
-| `SKYGUARD_OUTPOST` | 3964 (0xF7C) |  |  | Skyguard Outpost |
-| `NETHERWING_MINES` | 3965 (0xF7D) |  |  | Netherwing Mines |
-| `DRAGONMAW_BASE_CAMP` | 3966 (0xF7E) |  |  | Dragonmaw Base Camp |
-| `DRAGONMAW_SKYWAY` | 3967 (0xF7F) |  |  | Dragonmaw Skyway |
-| `RUINS_OF_LORDAERON1` | 3968 (0xF80) |  |  | Ruins of Lordaeron |
-| `RIVENDARKS_PERCH` | 3969 (0xF81) |  |  | Rivendark's Perch |
-| `OBSIDIAS_PERCH` | 3970 (0xF82) |  |  | Obsidia's Perch |
-| `INSIDIONS_PERCH` | 3971 (0xF83) |  |  | Insidion's Perch |
-| `FURYWINGS_PERCH` | 3972 (0xF84) |  |  | Furywing's Perch |
-| `BLACKWIND_LANDING` | 3973 (0xF85) |  |  | Blackwind Landing |
-| `VEIL_HARR_IK` | 3974 (0xF86) |  |  | Veil Harr'ik |
-| `TEROKKS_REST` | 3975 (0xF87) |  |  | Terokk's Rest |
-| `VEIL_ALA_RAK` | 3976 (0xF88) |  |  | Veil Ala'rak |
-| `UPPER_VEIL_SHIL_AK` | 3977 (0xF89) |  |  | Upper Veil Shil'ak |
-| `LOWER_VEIL_SHIL_AK` | 3978 (0xF8A) |  |  | Lower Veil Shil'ak |
-| `SHARTUULS_TRANSPORTER` | 4008 (0xFA8) |  |  | Shartuul's Transporter |
-| `ILLIDARI_TRAINING_GROUNDS` | 4009 (0xFA9) |  |  | Illidari Training Grounds |
-| `MUDSPROCKET` | 4010 (0xFAA) |  |  | Mudsprocket |
-| `DIREHORN_POST` | 4046 (0xFCE) |  |  | Direhorn Post |
-| `NATS_LANDING` | 4047 (0xFCF) |  |  | Nat's Landing |
-| `TABETHAS_FARM` | 4049 (0xFD1) |  |  | Tabetha's Farm |
-| `PLAGUEWOOD_TOWER` | 4067 (0xFE3) |  |  | Plaguewood Tower |
-| `SUNWELL_PLATEAU` | 4075 (0xFEB) |  |  | Sunwell Plateau |
-| `REUSE_ME_SEVEN` | 4076 (0xFEC) |  |  | Reuse Me 7 |
-| `RAZORTHORN_RISE` | 4078 (0xFEE) |  |  | Razorthorn Rise |
-| `ISLE_OF_QUEL_DANAS` | 4080 (0xFF0) |  |  | Isle of Quel'Danas |
-| `THE_DAWNCHASER` | 4081 (0xFF1) |  |  | The Dawnchaser |
-| `THE_SIN_LOREN` | 4082 (0xFF2) |  |  | The Sin'loren |
-| `SILVERMOONS_PRIDE` | 4083 (0xFF3) |  |  | Silvermoon's Pride |
-| `THE_BLOODOATH` | 4084 (0xFF4) |  |  | The Bloodoath |
-| `SHATTERED_SUN_STAGING_AREA` | 4085 (0xFF5) |  |  | Shattered Sun Staging Area |
-| `SUNS_REACH_SANCTUM` | 4086 (0xFF6) |  |  | Sun's Reach Sanctum |
-| `SUNS_REACH_HARBOR` | 4087 (0xFF7) |  |  | Sun's Reach Harbor |
-| `SUNS_REACH_ARMORY` | 4088 (0xFF8) |  |  | Sun's Reach Armory |
-| `DAWNSTAR_VILLAGE` | 4089 (0xFF9) |  |  | Dawnstar Village |
-| `THE_DAWNING_SQUARE` | 4090 (0xFFA) |  |  | The Dawning Square |
-| `GREENGILL_COAST` | 4091 (0xFFB) |  |  | Greengill Coast |
-| `THE_DEAD_SCAR2` | 4092 (0xFFC) |  |  | The Dead Scar |
-| `THE_SUN_FORGE` | 4093 (0xFFD) |  |  | The Sun Forge |
-| `SUNWELL_PLATEAU1` | 4094 (0xFFE) |  |  | Sunwell Plateau |
-| `MAGISTERS_TERRACE` | 4095 (0xFFF) |  |  | Magisters' Terrace |
-| `MAGISTERS_TERRACE1` | 4131 (0x1023) |  |  | Magisters' Terrace |
-| `PARHELION_PLAZA` | 4139 (0x102B) |  |  | Parhelion Plaza |
-| `THE_DEAD_SCAR3` | 4140 (0x102C) |  |  | The Dead Scar |
+| Enumerator | Value  | Comment | Display |
+| --------- | -------- | ------- | ------- |
+| `NONE` | 0 (0x00) |  |  |
+| `DUN_MOROGH` | 1 (0x01) |  | Dun Morogh |
+| `LONGSHORE` | 2 (0x02) |  | Longshore |
+| `BADLANDS` | 3 (0x03) |  | Badlands |
+| `BLASTED_LANDS` | 4 (0x04) |  | Blasted Lands |
+| `BLACKWATER_COVE` | 7 (0x07) |  | Blackwater Cove |
+| `SWAMP_OF_SORROWS` | 8 (0x08) |  | Swamp of Sorrows |
+| `NORTHSHIRE_VALLEY` | 9 (0x09) |  | Northshire Valley |
+| `DUSKWOOD` | 10 (0x0A) |  | Duskwood |
+| `WETLANDS` | 11 (0x0B) |  | Wetlands |
+| `ELWYNN_FOREST` | 12 (0x0C) |  | Elwynn Forest |
+| `THE_WORLD_TREE` | 13 (0x0D) |  | The World Tree |
+| `DUROTAR` | 14 (0x0E) |  | Durotar |
+| `DUSTWALLOW_MARSH` | 15 (0x0F) |  | Dustwallow Marsh |
+| `AZSHARA` | 16 (0x10) |  | Azshara |
+| `THE_BARRENS` | 17 (0x11) |  | The Barrens |
+| `CRYSTAL_LAKE` | 18 (0x12) |  | Crystal Lake |
+| `ZUL_GURUB` | 19 (0x13) |  | Zul'Gurub |
+| `MOONBROOK` | 20 (0x14) |  | Moonbrook |
+| `KUL_TIRAS` | 21 (0x15) |  | Kul Tiras |
+| `PROGRAMMER_ISLE` | 22 (0x16) |  | Programmer Isle |
+| `NORTHSHIRE_RIVER` | 23 (0x17) |  | Northshire River |
+| `NORTHSHIRE_ABBEY` | 24 (0x18) |  | Northshire Abbey |
+| `BLACKROCK_MOUNTAIN` | 25 (0x19) |  | Blackrock Mountain |
+| `LIGHTHOUSE` | 26 (0x1A) |  | Lighthouse |
+| `WESTERN_PLAGUELANDS` | 28 (0x1C) |  | Western Plaguelands |
+| `NINE` | 30 (0x1E) |  | Nine |
+| `THE_CEMETARY` | 32 (0x20) |  | The Cemetary |
+| `STRANGLETHORN_VALE` | 33 (0x21) |  | Stranglethorn Vale |
+| `ECHO_RIDGE_MINE` | 34 (0x22) |  | Echo Ridge Mine |
+| `BOOTY_BAY` | 35 (0x23) |  | Booty Bay |
+| `ALTERAC_MOUNTAINS` | 36 (0x24) |  | Alterac Mountains |
+| `LAKE_NAZFERITI` | 37 (0x25) |  | Lake Nazferiti |
+| `LOCH_MODAN` | 38 (0x26) |  | Loch Modan |
+| `WESTFALL` | 40 (0x28) |  | Westfall |
+| `DEADWIND_PASS` | 41 (0x29) |  | Deadwind Pass |
+| `DARKSHIRE` | 42 (0x2A) |  | Darkshire |
+| `WILD_SHORE` | 43 (0x2B) |  | Wild Shore |
+| `REDRIDGE_MOUNTAINS` | 44 (0x2C) |  | Redridge Mountains |
+| `ARATHI_HIGHLANDS` | 45 (0x2D) |  | Arathi Highlands |
+| `BURNING_STEPPES` | 46 (0x2E) |  | Burning Steppes |
+| `THE_HINTERLANDS` | 47 (0x2F) |  | The Hinterlands |
+| `DEAD_MANS_HOLE` | 49 (0x31) |  | Dead Man's Hole |
+| `SEARING_GORGE` | 51 (0x33) |  | Searing Gorge |
+| `THIEVES_CAMP` | 53 (0x35) |  | Thieves Camp |
+| `JASPERLODE_MINE` | 54 (0x36) |  | Jasperlode Mine |
+| `VALLEY_OF_HEROES_UNUSED` | 55 (0x37) |  | Valley of Heroes UNUSED |
+| `HEROES_VIGIL` | 56 (0x38) |  | Heroes' Vigil |
+| `FARGODEEP_MINE` | 57 (0x39) |  | Fargodeep Mine |
+| `NORTHSHIRE_VINEYARDS` | 59 (0x3B) |  | Northshire Vineyards |
+| `FORESTS_EDGE` | 60 (0x3C) |  | Forest's Edge |
+| `THUNDER_FALLS` | 61 (0x3D) |  | Thunder Falls |
+| `BRACKWELL_PUMPKIN_PATCH` | 62 (0x3E) |  | Brackwell Pumpkin Patch |
+| `THE_STONEFIELD_FARM` | 63 (0x3F) |  | The Stonefield Farm |
+| `THE_MACLURE_VINEYARDS` | 64 (0x40) |  | The Maclure Vineyards |
+| `REUSE_ME_THREE` | 65 (0x41) |  | Reuse Me 3 |
+| `REUSE_ME_SIX` | 66 (0x42) |  | Reuse Me 6 |
+| `REUSE_ME_FIVE` | 67 (0x43) |  | Reuse Me 5 |
+| `LAKE_EVERSTILL` | 68 (0x44) |  | Lake Everstill |
+| `LAKESHIRE` | 69 (0x45) |  | Lakeshire |
+| `STONEWATCH` | 70 (0x46) |  | Stonewatch |
+| `STONEWATCH_FALLS` | 71 (0x47) |  | Stonewatch Falls |
+| `THE_DARK_PORTAL` | 72 (0x48) |  | The Dark Portal |
+| `THE_TAINTED_SCAR` | 73 (0x49) |  | The Tainted Scar |
+| `POOL_OF_TEARS` | 74 (0x4A) |  | Pool of Tears |
+| `STONARD` | 75 (0x4B) |  | Stonard |
+| `FALLOW_SANCTUARY` | 76 (0x4C) |  | Fallow Sanctuary |
+| `ANVILMAR` | 77 (0x4D) |  | Anvilmar |
+| `STORMWIND_MOUNTAINS` | 80 (0x50) |  | Stormwind Mountains |
+| `JEFF_NE_QUADRANT_CHANGED` | 81 (0x51) |  | Jeff NE Quadrant Changed |
+| `JEFF_NW_QUADRANT` | 82 (0x52) |  | Jeff NW Quadrant |
+| `JEFF_SE_QUADRANT` | 83 (0x53) |  | Jeff SE Quadrant |
+| `JEFF_SW_QUADRANT` | 84 (0x54) |  | Jeff SW Quadrant |
+| `TIRISFAL_GLADES` | 85 (0x55) |  | Tirisfal Glades |
+| `STONE_CAIRN_LAKE` | 86 (0x56) |  | Stone Cairn Lake |
+| `GOLDSHIRE` | 87 (0x57) |  | Goldshire |
+| `EASTVALE_LOGGING_CAMP` | 88 (0x58) |  | Eastvale Logging Camp |
+| `MIRROR_LAKE_ORCHARD` | 89 (0x59) |  | Mirror Lake Orchard |
+| `TOWER_OF_AZORA` | 91 (0x5B) |  | Tower of Azora |
+| `MIRROR_LAKE` | 92 (0x5C) |  | Mirror Lake |
+| `VUL_GOL_OGRE_MOUND` | 93 (0x5D) |  | Vul'Gol Ogre Mound |
+| `RAVEN_HILL` | 94 (0x5E) |  | Raven Hill |
+| `REDRIDGE_CANYONS` | 95 (0x5F) |  | Redridge Canyons |
+| `TOWER_OF_ILGALAR` | 96 (0x60) |  | Tower of Ilgalar |
+| `ALTHERS_MILL` | 97 (0x61) |  | Alther's Mill |
+| `RETHBAN_CAVERNS` | 98 (0x62) |  | Rethban Caverns |
+| `REBEL_CAMP` | 99 (0x63) |  | Rebel Camp |
+| `NESINGWARYS_EXPEDITION` | 100 (0x64) |  | Nesingwary's Expedition |
+| `KURZENS_COMPOUND` | 101 (0x65) |  | Kurzen's Compound |
+| `RUINS_OF_ZUL_KUNDA` | 102 (0x66) |  | Ruins of Zul'Kunda |
+| `RUINS_OF_ZUL_MAMWE` | 103 (0x67) |  | Ruins of Zul'Mamwe |
+| `THE_VILE_REEF` | 104 (0x68) |  | The Vile Reef |
+| `MOSH_OGG_OGRE_MOUND` | 105 (0x69) |  | Mosh'Ogg Ogre Mound |
+| `THE_STOCKPILE` | 106 (0x6A) |  | The Stockpile |
+| `SALDEANS_FARM` | 107 (0x6B) |  | Saldean's Farm |
+| `SENTINEL_HILL` | 108 (0x6C) |  | Sentinel Hill |
+| `FURLBROWS_PUMPKIN_FARM` | 109 (0x6D) |  | Furlbrow's Pumpkin Farm |
+| `JANGOLODE_MINE` | 111 (0x6F) |  | Jangolode Mine |
+| `GOLD_COAST_QUARRY` | 113 (0x71) |  | Gold Coast Quarry |
+| `WESTFALL_LIGHTHOUSE` | 115 (0x73) |  | Westfall Lighthouse |
+| `MISTY_VALLEY` | 116 (0x74) |  | Misty Valley |
+| `GROM_GOL_BASE_CAMP` | 117 (0x75) |  | Grom'gol Base Camp |
+| `WHELGARS_EXCAVATION_SITE` | 118 (0x76) |  | Whelgar's Excavation Site |
+| `WESTBROOK_GARRISON` | 120 (0x78) |  | Westbrook Garrison |
+| `TRANQUIL_GARDENS_CEMETERY` | 121 (0x79) |  | Tranquil Gardens Cemetery |
+| `ZUULDAIA_RUINS` | 122 (0x7A) |  | Zuuldaia Ruins |
+| `BAL_LAL_RUINS` | 123 (0x7B) |  | Bal'lal Ruins |
+| `KAL_AI_RUINS` | 125 (0x7D) |  | Kal'ai Ruins |
+| `TKASHI_RUINS` | 126 (0x7E) |  | Tkashi Ruins |
+| `BALIA_MAH_RUINS` | 127 (0x7F) |  | Balia'mah Ruins |
+| `ZIATA_JAI_RUINS` | 128 (0x80) |  | Ziata'jai Ruins |
+| `MIZJAH_RUINS` | 129 (0x81) |  | Mizjah Ruins |
+| `SILVERPINE_FOREST` | 130 (0x82) |  | Silverpine Forest |
+| `KHARANOS` | 131 (0x83) |  | Kharanos |
+| `COLDRIDGE_VALLEY` | 132 (0x84) |  | Coldridge Valley |
+| `GNOMEREGAN` | 133 (0x85) |  | Gnomeregan |
+| `GOL_BOLAR_QUARRY` | 134 (0x86) |  | Gol'Bolar Quarry |
+| `FROSTMANE_HOLD` | 135 (0x87) |  | Frostmane Hold |
+| `THE_GRIZZLED_DEN` | 136 (0x88) |  | The Grizzled Den |
+| `BREWNALL_VILLAGE` | 137 (0x89) |  | Brewnall Village |
+| `MISTY_PINE_REFUGE` | 138 (0x8A) |  | Misty Pine Refuge |
+| `EASTERN_PLAGUELANDS` | 139 (0x8B) |  | Eastern Plaguelands |
+| `TELDRASSIL` | 141 (0x8D) |  | Teldrassil |
+| `IRONBANDS_EXCAVATION_SITE` | 142 (0x8E) |  | Ironband's Excavation Site |
+| `MO_GROSH_STRONGHOLD` | 143 (0x8F) |  | Mo'grosh Stronghold |
+| `THELSAMAR` | 144 (0x90) |  | Thelsamar |
+| `ALGAZ_GATE` | 145 (0x91) |  | Algaz Gate |
+| `STONEWROUGHT_DAM` | 146 (0x92) |  | Stonewrought Dam |
+| `THE_FARSTRIDER_LODGE` | 147 (0x93) |  | The Farstrider Lodge |
+| `DARKSHORE` | 148 (0x94) |  | Darkshore |
+| `SILVER_STREAM_MINE` | 149 (0x95) |  | Silver Stream Mine |
+| `MENETHIL_HARBOR` | 150 (0x96) |  | Menethil Harbor |
+| `DESIGNER_ISLAND` | 151 (0x97) |  | Designer Island |
+| `THE_BULWARK` | 152 (0x98) |  | The Bulwark |
+| `RUINS_OF_LORDAERON` | 153 (0x99) |  | Ruins of Lordaeron |
+| `DEATHKNELL` | 154 (0x9A) |  | Deathknell |
+| `NIGHT_WEBS_HOLLOW` | 155 (0x9B) |  | Night Web's Hollow |
+| `SOLLIDEN_FARMSTEAD` | 156 (0x9C) |  | Solliden Farmstead |
+| `AGAMAND_MILLS` | 157 (0x9D) |  | Agamand Mills |
+| `AGAMAND_FAMILY_CRYPT` | 158 (0x9E) |  | Agamand Family Crypt |
+| `BRILL` | 159 (0x9F) |  | Brill |
+| `WHISPERING_GARDENS` | 160 (0xA0) |  | Whispering Gardens |
+| `TERRACE_OF_REPOSE` | 161 (0xA1) |  | Terrace of Repose |
+| `BRIGHTWATER_LAKE` | 162 (0xA2) |  | Brightwater Lake |
+| `GUNTHERS_RETREAT` | 163 (0xA3) |  | Gunther's Retreat |
+| `GARRENS_HAUNT` | 164 (0xA4) |  | Garren's Haunt |
+| `BALNIR_FARMSTEAD` | 165 (0xA5) |  | Balnir Farmstead |
+| `COLD_HEARTH_MANOR` | 166 (0xA6) |  | Cold Hearth Manor |
+| `CRUSADER_OUTPOST` | 167 (0xA7) |  | Crusader Outpost |
+| `THE_NORTH_COAST` | 168 (0xA8) |  | The North Coast |
+| `WHISPERING_SHORE` | 169 (0xA9) |  | Whispering Shore |
+| `LORDAMERE_LAKE` | 170 (0xAA) |  | Lordamere Lake |
+| `FENRIS_ISLE` | 172 (0xAC) |  | Fenris Isle |
+| `FAOLS_REST` | 173 (0xAD) |  | Faol's Rest |
+| `DOLANAAR` | 186 (0xBA) |  | Dolanaar |
+| `DARNASSUS_UNUSED` | 187 (0xBB) |  | Darnassus UNUSED |
+| `SHADOWGLEN` | 188 (0xBC) |  | Shadowglen |
+| `STEELGRILLS_DEPOT` | 189 (0xBD) |  | Steelgrill's Depot |
+| `HEARTHGLEN` | 190 (0xBE) |  | Hearthglen |
+| `NORTHRIDGE_LUMBER_CAMP` | 192 (0xC0) |  | Northridge Lumber Camp |
+| `RUINS_OF_ANDORHAL` | 193 (0xC1) |  | Ruins of Andorhal |
+| `SCHOOL_OF_NECROMANCY` | 195 (0xC3) |  | School of Necromancy |
+| `UTHERS_TOMB` | 196 (0xC4) |  | Uther's Tomb |
+| `SORROW_HILL` | 197 (0xC5) |  | Sorrow Hill |
+| `THE_WEEPING_CAVE` | 198 (0xC6) |  | The Weeping Cave |
+| `FELSTONE_FIELD` | 199 (0xC7) |  | Felstone Field |
+| `DALSONS_TEARS` | 200 (0xC8) |  | Dalson's Tears |
+| `GAHRRONS_WITHERING` | 201 (0xC9) |  | Gahrron's Withering |
+| `THE_WRITHING_HAUNT` | 202 (0xCA) |  | The Writhing Haunt |
+| `MARDENHOLDE_KEEP` | 203 (0xCB) |  | Mardenholde Keep |
+| `PYREWOOD_VILLAGE` | 204 (0xCC) |  | Pyrewood Village |
+| `DUN_MODR` | 205 (0xCD) |  | Dun Modr |
+| `UNUSED_WESTFALL` | 206 (0xCE) |  | UNUSED Westfall |
+| `THE_GREAT_SEA` | 207 (0xCF) |  | The Great Sea |
+| `UNUSED_IRONCLADCOVE` | 208 (0xD0) |  | Unused Ironcladcove |
+| `SHADOWFANG_KEEP` | 209 (0xD1) |  | Shadowfang Keep |
+| `REUSE_ME_2` | 210 (0xD2) |  | Reuse Me 2 |
+| `ICEFLOW_LAKE` | 211 (0xD3) |  | Iceflow Lake |
+| `HELMS_BED_LAKE` | 212 (0xD4) |  | Helm's Bed Lake |
+| `DEEP_ELEM_MINE` | 213 (0xD5) |  | Deep Elem Mine |
+| `THE_GREAT_SEA1` | 214 (0xD6) |  | The Great Sea |
+| `MULGORE` | 215 (0xD7) |  | Mulgore |
+| `ALEXSTON_FARMSTEAD` | 219 (0xDB) |  | Alexston Farmstead |
+| `RED_CLOUD_MESA` | 220 (0xDC) |  | Red Cloud Mesa |
+| `CAMP_NARACHE` | 221 (0xDD) |  | Camp Narache |
+| `BLOODHOOF_VILLAGE` | 222 (0xDE) |  | Bloodhoof Village |
+| `STONEBULL_LAKE` | 223 (0xDF) |  | Stonebull Lake |
+| `RAVAGED_CARAVAN` | 224 (0xE0) |  | Ravaged Caravan |
+| `RED_ROCKS` | 225 (0xE1) |  | Red Rocks |
+| `THE_SKITTERING_DARK` | 226 (0xE2) |  | The Skittering Dark |
+| `VALGANS_FIELD` | 227 (0xE3) |  | Valgan's Field |
+| `THE_SEPULCHER` | 228 (0xE4) |  | The Sepulcher |
+| `OLSENS_FARTHING` | 229 (0xE5) |  | Olsen's Farthing |
+| `THE_GREYMANE_WALL` | 230 (0xE6) |  | The Greymane Wall |
+| `BERENS_PERIL` | 231 (0xE7) |  | Beren's Peril |
+| `THE_DAWNING_ISLES` | 232 (0xE8) |  | The Dawning Isles |
+| `AMBERMILL` | 233 (0xE9) |  | Ambermill |
+| `FENRIS_KEEP` | 235 (0xEB) |  | Fenris Keep |
+| `SHADOWFANG_KEEP1` | 236 (0xEC) |  | Shadowfang Keep |
+| `THE_DECREPIT_FERRY` | 237 (0xED) |  | The Decrepit Ferry |
+| `MALDENS_ORCHARD` | 238 (0xEE) |  | Malden's Orchard |
+| `THE_IVAR_PATCH` | 239 (0xEF) |  | The Ivar Patch |
+| `THE_DEAD_FIELD` | 240 (0xF0) |  | The Dead Field |
+| `THE_ROTTING_ORCHARD` | 241 (0xF1) |  | The Rotting Orchard |
+| `BRIGHTWOOD_GROVE` | 242 (0xF2) |  | Brightwood Grove |
+| `FORLORN_ROWE` | 243 (0xF3) |  | Forlorn Rowe |
+| `THE_WHIPPLE_ESTATE` | 244 (0xF4) |  | The Whipple Estate |
+| `THE_YORGEN_FARMSTEAD` | 245 (0xF5) |  | The Yorgen Farmstead |
+| `THE_CAULDRON` | 246 (0xF6) |  | The Cauldron |
+| `GRIMESILT_DIG_SITE` | 247 (0xF7) |  | Grimesilt Dig Site |
+| `DREADMAUL_ROCK` | 249 (0xF9) |  | Dreadmaul Rock |
+| `RUINS_OF_THAURISSAN` | 250 (0xFA) |  | Ruins of Thaurissan |
+| `FLAME_CREST` | 251 (0xFB) |  | Flame Crest |
+| `BLACKROCK_STRONGHOLD` | 252 (0xFC) |  | Blackrock Stronghold |
+| `THE_PILLAR_OF_ASH` | 253 (0xFD) |  | The Pillar of Ash |
+| `BLACKROCK_MOUNTAIN1` | 254 (0xFE) |  | Blackrock Mountain |
+| `ALTAR_OF_STORMS` | 255 (0xFF) |  | Altar of Storms |
+| `ALDRASSIL` | 256 (0x100) |  | Aldrassil |
+| `SHADOWTHREAD_CAVE` | 257 (0x101) |  | Shadowthread Cave |
+| `FEL_ROCK` | 258 (0x102) |  | Fel Rock |
+| `LAKE_AL_AMETH` | 259 (0x103) |  | Lake Al'Ameth |
+| `STARBREEZE_VILLAGE` | 260 (0x104) |  | Starbreeze Village |
+| `GNARLPINE_HOLD` | 261 (0x105) |  | Gnarlpine Hold |
+| `BAN_ETHIL_BARROW_DEN` | 262 (0x106) |  | Ban'ethil Barrow Den |
+| `THE_CLEFT` | 263 (0x107) |  | The Cleft |
+| `THE_ORACLE_GLADE` | 264 (0x108) |  | The Oracle Glade |
+| `WELLSPRING_RIVER` | 265 (0x109) |  | Wellspring River |
+| `WELLSPRING_LAKE` | 266 (0x10A) |  | Wellspring Lake |
+| `HILLSBRAD_FOOTHILLS` | 267 (0x10B) |  | Hillsbrad Foothills |
+| `AZSHARA_CRATER` | 268 (0x10C) |  | Azshara Crater |
+| `DUN_ALGAZ` | 269 (0x10D) |  | Dun Algaz |
+| `SOUTHSHORE` | 271 (0x10F) |  | Southshore |
+| `TARREN_MILL` | 272 (0x110) |  | Tarren Mill |
+| `DURNHOLDE_KEEP` | 275 (0x113) |  | Durnholde Keep |
+| `UNUSED_STONEWROUGHT_PASS` | 276 (0x114) |  | UNUSED Stonewrought Pass |
+| `THE_FOOTHILL_CAVERNS` | 277 (0x115) |  | The Foothill Caverns |
+| `LORDAMERE_INTERNMENT_CAMP` | 278 (0x116) |  | Lordamere Internment Camp |
+| `DALARAN` | 279 (0x117) |  | Dalaran |
+| `STRAHNBRAD` | 280 (0x118) |  | Strahnbrad |
+| `RUINS_OF_ALTERAC` | 281 (0x119) |  | Ruins of Alterac |
+| `CRUSHRIDGE_HOLD` | 282 (0x11A) |  | Crushridge Hold |
+| `SLAUGHTER_HOLLOW` | 283 (0x11B) |  | Slaughter Hollow |
+| `THE_UPLANDS` | 284 (0x11C) |  | The Uplands |
+| `SOUTHPOINT_TOWER` | 285 (0x11D) |  | Southpoint Tower |
+| `HILLSBRAD_FIELDS` | 286 (0x11E) |  | Hillsbrad Fields |
+| `HILLSBRAD` | 287 (0x11F) |  | Hillsbrad |
+| `AZURELODE_MINE` | 288 (0x120) |  | Azurelode Mine |
+| `NETHANDER_STEAD` | 289 (0x121) |  | Nethander Stead |
+| `DUN_GAROK` | 290 (0x122) |  | Dun Garok |
+| `THORADINS_WALL` | 293 (0x125) |  | Thoradin's Wall |
+| `EASTERN_STRAND` | 294 (0x126) |  | Eastern Strand |
+| `WESTERN_STRAND` | 295 (0x127) |  | Western Strand |
+| `SOUTH_SEAS_UNUSED` | 296 (0x128) |  | South Seas UNUSED |
+| `JAGUERO_ISLE` | 297 (0x129) |  | Jaguero Isle |
+| `BARADIN_BAY` | 298 (0x12A) |  | Baradin Bay |
+| `MENETHIL_BAY` | 299 (0x12B) |  | Menethil Bay |
+| `MISTY_REED_STRAND` | 300 (0x12C) |  | Misty Reed Strand |
+| `THE_SAVAGE_COAST` | 301 (0x12D) |  | The Savage Coast |
+| `THE_CRYSTAL_SHORE` | 302 (0x12E) |  | The Crystal Shore |
+| `SHELL_BEACH` | 303 (0x12F) |  | Shell Beach |
+| `NORTH_TIDES_RUN` | 305 (0x131) |  | North Tide's Run |
+| `SOUTH_TIDES_RUN` | 306 (0x132) |  | South Tide's Run |
+| `THE_OVERLOOK_CLIFFS` | 307 (0x133) |  | The Overlook Cliffs |
+| `THE_FORBIDDING_SEA` | 308 (0x134) |  | The Forbidding Sea |
+| `IRONBEARDS_TOMB` | 309 (0x135) |  | Ironbeard's Tomb |
+| `CRYSTALVEIN_MINE` | 310 (0x136) |  | Crystalvein Mine |
+| `RUINS_OF_ABORAZ` | 311 (0x137) |  | Ruins of Aboraz |
+| `JANEIROS_POINT` | 312 (0x138) |  | Janeiro's Point |
+| `NORTHFOLD_MANOR` | 313 (0x139) |  | Northfold Manor |
+| `GO_SHEK_FARM` | 314 (0x13A) |  | Go'Shek Farm |
+| `DABYRIES_FARMSTEAD` | 315 (0x13B) |  | Dabyrie's Farmstead |
+| `BOULDERFIST_HALL` | 316 (0x13C) |  | Boulderfist Hall |
+| `WITHERBARK_VILLAGE` | 317 (0x13D) |  | Witherbark Village |
+| `DRYWHISKER_GORGE` | 318 (0x13E) |  | Drywhisker Gorge |
+| `REFUGE_POINTE` | 320 (0x140) |  | Refuge Pointe |
+| `HAMMERFALL` | 321 (0x141) |  | Hammerfall |
+| `BLACKWATER_SHIPWRECKS` | 322 (0x142) |  | Blackwater Shipwrecks |
+| `O_BREENS_CAMP` | 323 (0x143) |  | O'Breen's Camp |
+| `STROMGARDE_KEEP` | 324 (0x144) |  | Stromgarde Keep |
+| `THE_TOWER_OF_ARATHOR` | 325 (0x145) |  | The Tower of Arathor |
+| `THE_SANCTUM` | 326 (0x146) |  | The Sanctum |
+| `FALDIRS_COVE` | 327 (0x147) |  | Faldir's Cove |
+| `THE_DROWNED_REEF` | 328 (0x148) |  | The Drowned Reef |
+| `THANDOL_SPAN` | 330 (0x14A) |  | Thandol Span |
+| `ASHENVALE` | 331 (0x14B) |  | Ashenvale |
+| `THE_GREAT_SEA2` | 332 (0x14C) |  | The Great Sea |
+| `CIRCLE_OF_EAST_BINDING` | 333 (0x14D) |  | Circle of East Binding |
+| `CIRCLE_OF_WEST_BINDING` | 334 (0x14E) |  | Circle of West Binding |
+| `CIRCLE_OF_INNER_BINDING` | 335 (0x14F) |  | Circle of Inner Binding |
+| `CIRCLE_OF_OUTER_BINDING` | 336 (0x150) |  | Circle of Outer Binding |
+| `APOCRYPHANS_REST` | 337 (0x151) |  | Apocryphan's Rest |
+| `ANGOR_FORTRESS` | 338 (0x152) |  | Angor Fortress |
+| `LETHLOR_RAVINE` | 339 (0x153) |  | Lethlor Ravine |
+| `KARGATH` | 340 (0x154) |  | Kargath |
+| `CAMP_KOSH` | 341 (0x155) |  | Camp Kosh |
+| `CAMP_BOFF` | 342 (0x156) |  | Camp Boff |
+| `CAMP_WURG` | 343 (0x157) |  | Camp Wurg |
+| `CAMP_CAGG` | 344 (0x158) |  | Camp Cagg |
+| `AGMONDS_END` | 345 (0x159) |  | Agmond's End |
+| `HAMMERTOES_DIGSITE` | 346 (0x15A) |  | Hammertoe's Digsite |
+| `DUSTBELCH_GROTTO` | 347 (0x15B) |  | Dustbelch Grotto |
+| `AERIE_PEAK` | 348 (0x15C) |  | Aerie Peak |
+| `WILDHAMMER_KEEP` | 349 (0x15D) |  | Wildhammer Keep |
+| `QUEL_DANIL_LODGE` | 350 (0x15E) |  | Quel'Danil Lodge |
+| `SKULK_ROCK` | 351 (0x15F) |  | Skulk Rock |
+| `ZUN_WATHA` | 352 (0x160) |  | Zun'watha |
+| `SHADRA_ALOR` | 353 (0x161) |  | Shadra'Alor |
+| `JINTHA_ALOR` | 354 (0x162) |  | Jintha'Alor |
+| `THE_ALTAR_OF_ZUL` | 355 (0x163) |  | The Altar of Zul |
+| `SERADANE` | 356 (0x164) |  | Seradane |
+| `FERALAS` | 357 (0x165) |  | Feralas |
+| `BRAMBLEBLADE_RAVINE` | 358 (0x166) |  | Brambleblade Ravine |
+| `BAEL_MODAN` | 359 (0x167) |  | Bael Modan |
+| `THE_VENTURE_CO_MINE` | 360 (0x168) |  | The Venture Co. Mine |
+| `FELWOOD` | 361 (0x169) |  | Felwood |
+| `RAZOR_HILL` | 362 (0x16A) |  | Razor Hill |
+| `VALLEY_OF_TRIALS` | 363 (0x16B) |  | Valley of Trials |
+| `THE_DEN` | 364 (0x16C) |  | The Den |
+| `BURNING_BLADE_COVEN` | 365 (0x16D) |  | Burning Blade Coven |
+| `KOLKAR_CRAG` | 366 (0x16E) |  | Kolkar Crag |
+| `SEN_JIN_VILLAGE` | 367 (0x16F) |  | Sen'jin Village |
+| `ECHO_ISLES` | 368 (0x170) |  | Echo Isles |
+| `THUNDER_RIDGE` | 369 (0x171) |  | Thunder Ridge |
+| `DRYGULCH_RAVINE` | 370 (0x172) |  | Drygulch Ravine |
+| `DUSTWIND_CAVE` | 371 (0x173) |  | Dustwind Cave |
+| `TIRAGARDE_KEEP` | 372 (0x174) |  | Tiragarde Keep |
+| `SCUTTLE_COAST` | 373 (0x175) |  | Scuttle Coast |
+| `BLADEFIST_BAY` | 374 (0x176) |  | Bladefist Bay |
+| `DEADEYE_SHORE` | 375 (0x177) |  | Deadeye Shore |
+| `SOUTHFURY_RIVER` | 377 (0x179) |  | Southfury River |
+| `CAMP_TAURAJO` | 378 (0x17A) |  | Camp Taurajo |
+| `FAR_WATCH_POST` | 379 (0x17B) |  | Far Watch Post |
+| `THE_CROSSROADS` | 380 (0x17C) |  | The Crossroads |
+| `BOULDER_LODE_MINE` | 381 (0x17D) |  | Boulder Lode Mine |
+| `THE_SLUDGE_FEN` | 382 (0x17E) |  | The Sludge Fen |
+| `THE_DRY_HILLS` | 383 (0x17F) |  | The Dry Hills |
+| `DREADMIST_PEAK` | 384 (0x180) |  | Dreadmist Peak |
+| `NORTHWATCH_HOLD` | 385 (0x181) |  | Northwatch Hold |
+| `THE_FORGOTTEN_POOLS` | 386 (0x182) |  | The Forgotten Pools |
+| `LUSHWATER_OASIS` | 387 (0x183) |  | Lushwater Oasis |
+| `THE_STAGNANT_OASIS` | 388 (0x184) |  | The Stagnant Oasis |
+| `FIELD_OF_GIANTS` | 390 (0x186) |  | Field of Giants |
+| `THE_MERCHANT_COAST` | 391 (0x187) |  | The Merchant Coast |
+| `RATCHET` | 392 (0x188) |  | Ratchet |
+| `DARKSPEAR_STRAND` | 393 (0x189) |  | Darkspear Strand |
+| `DARROWMERE_LAKE_UNUSED` | 394 (0x18A) |  | Darrowmere Lake UNUSED |
+| `CAER_DARROW_UNUSED` | 395 (0x18B) |  | Caer Darrow UNUSED |
+| `WINTERHOOF_WATER_WELL` | 396 (0x18C) |  | Winterhoof Water Well |
+| `THUNDERHORN_WATER_WELL` | 397 (0x18D) |  | Thunderhorn Water Well |
+| `WILDMANE_WATER_WELL` | 398 (0x18E) |  | Wildmane Water Well |
+| `SKYLINE_RIDGE` | 399 (0x18F) |  | Skyline Ridge |
+| `THOUSAND_NEEDLES` | 400 (0x190) |  | Thousand Needles |
+| `THE_TIDUS_STAIR` | 401 (0x191) |  | The Tidus Stair |
+| `SHADY_REST_INN` | 403 (0x193) |  | Shady Rest Inn |
+| `BAEL_DUN_DIGSITE` | 404 (0x194) |  | Bael'dun Digsite |
+| `DESOLACE` | 405 (0x195) |  | Desolace |
+| `STONETALON_MOUNTAINS` | 406 (0x196) |  | Stonetalon Mountains |
+| `ORGRIMMAR_UNUSED` | 407 (0x197) |  | Orgrimmar UNUSED |
+| `GILLIJIMS_ISLE` | 408 (0x198) |  | Gillijim's Isle |
+| `ISLAND_OF_DOCTOR_LAPIDIS` | 409 (0x199) |  | Island of Doctor Lapidis |
+| `RAZORWIND_CANYON` | 410 (0x19A) |  | Razorwind Canyon |
+| `BATHRANS_HAUNT` | 411 (0x19B) |  | Bathran's Haunt |
+| `THE_RUINS_OF_ORDIL_ARAN` | 412 (0x19C) |  | The Ruins of Ordil'Aran |
+| `MAESTRAS_POST` | 413 (0x19D) |  | Maestra's Post |
+| `THE_ZORAM_STRAND` | 414 (0x19E) |  | The Zoram Strand |
+| `ASTRANAAR` | 415 (0x19F) |  | Astranaar |
+| `THE_SHRINE_OF_AESSINA` | 416 (0x1A0) |  | The Shrine of Aessina |
+| `FIRE_SCAR_SHRINE` | 417 (0x1A1) |  | Fire Scar Shrine |
+| `THE_RUINS_OF_STARDUST` | 418 (0x1A2) |  | The Ruins of Stardust |
+| `THE_HOWLING_VALE` | 419 (0x1A3) |  | The Howling Vale |
+| `SILVERWIND_REFUGE` | 420 (0x1A4) |  | Silverwind Refuge |
+| `MYSTRAL_LAKE` | 421 (0x1A5) |  | Mystral Lake |
+| `FALLEN_SKY_LAKE` | 422 (0x1A6) |  | Fallen Sky Lake |
+| `IRIS_LAKE` | 424 (0x1A8) |  | Iris Lake |
+| `MOONWELL` | 425 (0x1A9) |  | Moonwell |
+| `RAYNEWOOD_RETREAT` | 426 (0x1AA) |  | Raynewood Retreat |
+| `THE_SHADY_NOOK` | 427 (0x1AB) |  | The Shady Nook |
+| `NIGHT_RUN` | 428 (0x1AC) |  | Night Run |
+| `XAVIAN` | 429 (0x1AD) |  | Xavian |
+| `SATYRNAAR` | 430 (0x1AE) |  | Satyrnaar |
+| `SPLINTERTREE_POST` | 431 (0x1AF) |  | Splintertree Post |
+| `THE_DOR_DANIL_BARROW_DEN` | 432 (0x1B0) |  | The Dor'Danil Barrow Den |
+| `FALFARREN_RIVER` | 433 (0x1B1) |  | Falfarren River |
+| `FELFIRE_HILL` | 434 (0x1B2) |  | Felfire Hill |
+| `DEMON_FALL_CANYON` | 435 (0x1B3) |  | Demon Fall Canyon |
+| `DEMON_FALL_RIDGE` | 436 (0x1B4) |  | Demon Fall Ridge |
+| `WARSONG_LUMBER_CAMP` | 437 (0x1B5) |  | Warsong Lumber Camp |
+| `BOUGH_SHADOW` | 438 (0x1B6) |  | Bough Shadow |
+| `THE_SHIMMERING_FLATS` | 439 (0x1B7) |  | The Shimmering Flats |
+| `TANARIS` | 440 (0x1B8) |  | Tanaris |
+| `LAKE_FALATHIM` | 441 (0x1B9) |  | Lake Falathim |
+| `AUBERDINE` | 442 (0x1BA) |  | Auberdine |
+| `RUINS_OF_MATHYSTRA` | 443 (0x1BB) |  | Ruins of Mathystra |
+| `TOWER_OF_ALTHALAXX` | 444 (0x1BC) |  | Tower of Althalaxx |
+| `CLIFFSPRING_FALLS` | 445 (0x1BD) |  | Cliffspring Falls |
+| `BASHAL_ARAN` | 446 (0x1BE) |  | Bashal'Aran |
+| `AMETH_ARAN` | 447 (0x1BF) |  | Ameth'Aran |
+| `GROVE_OF_THE_ANCIENTS` | 448 (0x1C0) |  | Grove of the Ancients |
+| `THE_MASTERS_GLAIVE` | 449 (0x1C1) |  | The Master's Glaive |
+| `REMTRAVELS_EXCAVATION` | 450 (0x1C2) |  | Remtravel's Excavation |
+| `MISTS_EDGE` | 452 (0x1C4) |  | Mist's Edge |
+| `THE_LONG_WASH` | 453 (0x1C5) |  | The Long Wash |
+| `WILDBEND_RIVER` | 454 (0x1C6) |  | Wildbend River |
+| `BLACKWOOD_DEN` | 455 (0x1C7) |  | Blackwood Den |
+| `CLIFFSPRING_RIVER` | 456 (0x1C8) |  | Cliffspring River |
+| `THE_VEILED_SEA` | 457 (0x1C9) |  | The Veiled Sea |
+| `GOLD_ROAD` | 458 (0x1CA) |  | Gold Road |
+| `SCARLET_WATCH_POST` | 459 (0x1CB) |  | Scarlet Watch Post |
+| `SUN_ROCK_RETREAT` | 460 (0x1CC) |  | Sun Rock Retreat |
+| `WINDSHEAR_CRAG` | 461 (0x1CD) |  | Windshear Crag |
+| `CRAGPOOL_LAKE` | 463 (0x1CF) |  | Cragpool Lake |
+| `MIRKFALLON_LAKE` | 464 (0x1D0) |  | Mirkfallon Lake |
+| `THE_CHARRED_VALE` | 465 (0x1D1) |  | The Charred Vale |
+| `VALLEY_OF_THE_BLOODFURIES` | 466 (0x1D2) |  | Valley of the Bloodfuries |
+| `STONETALON_PEAK` | 467 (0x1D3) |  | Stonetalon Peak |
+| `THE_TALON_DEN` | 468 (0x1D4) |  | The Talon Den |
+| `GREATWOOD_VALE` | 469 (0x1D5) |  | Greatwood Vale |
+| `THUNDER_BLUFF_UNUSED` | 470 (0x1D6) |  | Thunder Bluff UNUSED |
+| `BRAVE_WIND_MESA` | 471 (0x1D7) |  | Brave Wind Mesa |
+| `FIRE_STONE_MESA` | 472 (0x1D8) |  | Fire Stone Mesa |
+| `MANTLE_ROCK` | 473 (0x1D9) |  | Mantle Rock |
+| `HUNTER_RISE_UNUSED` | 474 (0x1DA) |  | Hunter Rise UNUSED |
+| `SPIRIT_RISEUNUSED` | 475 (0x1DB) |  | Spirit RiseUNUSED |
+| `ELDER_RISEUNUSED` | 476 (0x1DC) |  | Elder RiseUNUSED |
+| `RUINS_OF_JUBUWAL` | 477 (0x1DD) |  | Ruins of Jubuwal |
+| `POOLS_OF_ARLITHRIEN` | 478 (0x1DE) |  | Pools of Arlithrien |
+| `THE_RUSTMAUL_DIG_SITE` | 479 (0x1DF) |  | The Rustmaul Dig Site |
+| `CAMP_E_THOK` | 480 (0x1E0) |  | Camp E'thok |
+| `SPLITHOOF_CRAG` | 481 (0x1E1) |  | Splithoof Crag |
+| `HIGHPERCH` | 482 (0x1E2) |  | Highperch |
+| `THE_SCREECHING_CANYON` | 483 (0x1E3) |  | The Screeching Canyon |
+| `FREEWIND_POST` | 484 (0x1E4) |  | Freewind Post |
+| `THE_GREAT_LIFT` | 485 (0x1E5) |  | The Great Lift |
+| `GALAK_HOLD` | 486 (0x1E6) |  | Galak Hold |
+| `ROGUEFEATHER_DEN` | 487 (0x1E7) |  | Roguefeather Den |
+| `THE_WEATHERED_NOOK` | 488 (0x1E8) |  | The Weathered Nook |
+| `THALANAAR` | 489 (0x1E9) |  | Thalanaar |
+| `UN_GORO_CRATER` | 490 (0x1EA) |  | Un'Goro Crater |
+| `RAZORFEN_KRAUL` | 491 (0x1EB) |  | Razorfen Kraul |
+| `RAVEN_HILL_CEMETERY` | 492 (0x1EC) |  | Raven Hill Cemetery |
+| `MOONGLADE` | 493 (0x1ED) |  | Moonglade |
+| `DELETE_ME` | 495 (0x1EF) |  | DELETE ME |
+| `BRACKENWALL_VILLAGE` | 496 (0x1F0) |  | Brackenwall Village |
+| `SWAMPLIGHT_MANOR` | 497 (0x1F1) |  | Swamplight Manor |
+| `BLOODFEN_BURROW` | 498 (0x1F2) |  | Bloodfen Burrow |
+| `DARKMIST_CAVERN` | 499 (0x1F3) |  | Darkmist Cavern |
+| `MOGGLE_POINT` | 500 (0x1F4) |  | Moggle Point |
+| `BEEZILS_WRECK` | 501 (0x1F5) |  | Beezil's Wreck |
+| `WITCH_HILL` | 502 (0x1F6) |  | Witch Hill |
+| `SENTRY_POINT` | 503 (0x1F7) |  | Sentry Point |
+| `NORTH_POINT_TOWER` | 504 (0x1F8) |  | North Point Tower |
+| `WEST_POINT_TOWER` | 505 (0x1F9) |  | West Point Tower |
+| `LOST_POINT` | 506 (0x1FA) |  | Lost Point |
+| `BLUEFEN` | 507 (0x1FB) |  | Bluefen |
+| `STONEMAUL_RUINS` | 508 (0x1FC) |  | Stonemaul Ruins |
+| `THE_DEN_OF_FLAME` | 509 (0x1FD) |  | The Den of Flame |
+| `THE_DRAGONMURK` | 510 (0x1FE) |  | The Dragonmurk |
+| `WYRMBOG` | 511 (0x1FF) |  | Wyrmbog |
+| `BLACKHOOF_VILLAGE` | 512 (0x200) |  | Blackhoof Village |
+| `THERAMORE_ISLE` | 513 (0x201) |  | Theramore Isle |
+| `FOOTHOLD_CITADEL` | 514 (0x202) |  | Foothold Citadel |
+| `IRONCLAD_PRISON` | 515 (0x203) |  | Ironclad Prison |
+| `DUSTWALLOW_BAY` | 516 (0x204) |  | Dustwallow Bay |
+| `TIDEFURY_COVE` | 517 (0x205) |  | Tidefury Cove |
+| `DREADMURK_SHORE` | 518 (0x206) |  | Dreadmurk Shore |
+| `ADDLES_STEAD` | 536 (0x218) |  | Addle's Stead |
+| `FIRE_PLUME_RIDGE` | 537 (0x219) |  | Fire Plume Ridge |
+| `LAKKARI_TAR_PITS` | 538 (0x21A) |  | Lakkari Tar Pits |
+| `TERROR_RUN` | 539 (0x21B) |  | Terror Run |
+| `THE_SLITHERING_SCAR` | 540 (0x21C) |  | The Slithering Scar |
+| `MARSHALS_REFUGE` | 541 (0x21D) |  | Marshal's Refuge |
+| `FUNGAL_ROCK` | 542 (0x21E) |  | Fungal Rock |
+| `GOLAKKA_HOT_SPRINGS` | 543 (0x21F) |  | Golakka Hot Springs |
+| `THE_LOCH` | 556 (0x22C) |  | The Loch |
+| `BEGGARS_HAUNT` | 576 (0x240) |  | Beggar's Haunt |
+| `KODO_GRAVEYARD` | 596 (0x254) |  | Kodo Graveyard |
+| `GHOST_WALKER_POST` | 597 (0x255) |  | Ghost Walker Post |
+| `SAR_THERIS_STRAND` | 598 (0x256) |  | Sar'theris Strand |
+| `THUNDER_AXE_FORTRESS` | 599 (0x257) |  | Thunder Axe Fortress |
+| `BOLGANS_HOLE` | 600 (0x258) |  | Bolgan's Hole |
+| `MANNOROC_COVEN` | 602 (0x25A) |  | Mannoroc Coven |
+| `SARGERON` | 603 (0x25B) |  | Sargeron |
+| `MAGRAM_VILLAGE` | 604 (0x25C) |  | Magram Village |
+| `GELKIS_VILLAGE` | 606 (0x25E) |  | Gelkis Village |
+| `VALLEY_OF_SPEARS` | 607 (0x25F) |  | Valley of Spears |
+| `NIJELS_POINT` | 608 (0x260) |  | Nijel's Point |
+| `KOLKAR_VILLAGE` | 609 (0x261) |  | Kolkar Village |
+| `HYJAL` | 616 (0x268) |  | Hyjal |
+| `WINTERSPRING` | 618 (0x26A) |  | Winterspring |
+| `BLACKWOLF_RIVER` | 636 (0x27C) |  | Blackwolf River |
+| `KODO_ROCK` | 637 (0x27D) |  | Kodo Rock |
+| `HIDDEN_PATH` | 638 (0x27E) |  | Hidden Path |
+| `SPIRIT_ROCK` | 639 (0x27F) |  | Spirit Rock |
+| `SHRINE_OF_THE_DORMANT_FLAME` | 640 (0x280) |  | Shrine of the Dormant Flame |
+| `LAKE_ELUNE_ARA` | 656 (0x290) |  | Lake Elune'ara |
+| `THE_HARBORAGE` | 657 (0x291) |  | The Harborage |
+| `OUTLAND` | 676 (0x2A4) |  | Outland |
+| `CRAFTSMENS_TERRACE_UNUSED` | 696 (0x2B8) |  | Craftsmen's Terrace UNUSED |
+| `TRADESMENS_TERRACE_UNUSED` | 697 (0x2B9) |  | Tradesmen's Terrace UNUSED |
+| `THE_TEMPLE_GARDENS_UNUSED` | 698 (0x2BA) |  | The Temple Gardens UNUSED |
+| `TEMPLE_OF_ELUNE_UNUSED` | 699 (0x2BB) |  | Temple of Elune UNUSED |
+| `CENARION_ENCLAVE_UNUSED` | 700 (0x2BC) |  | Cenarion Enclave UNUSED |
+| `WARRIORS_TERRACE_UNUSED` | 701 (0x2BD) |  | Warrior's Terrace UNUSED |
+| `RUT_THERAN_VILLAGE` | 702 (0x2BE) |  | Rut'theran Village |
+| `IRONBANDS_COMPOUND` | 716 (0x2CC) |  | Ironband's Compound |
+| `THE_STOCKADE` | 717 (0x2CD) |  | The Stockade |
+| `WAILING_CAVERNS` | 718 (0x2CE) |  | Wailing Caverns |
+| `BLACKFATHOM_DEEPS` | 719 (0x2CF) |  | Blackfathom Deeps |
+| `FRAY_ISLAND` | 720 (0x2D0) |  | Fray Island |
+| `GNOMEREGAN1` | 721 (0x2D1) |  | Gnomeregan |
+| `RAZORFEN_DOWNS` | 722 (0x2D2) |  | Razorfen Downs |
+| `BAN_ETHIL_HOLLOW` | 736 (0x2E0) |  | Ban'ethil Hollow |
+| `SCARLET_MONASTERY` | 796 (0x31C) |  | Scarlet Monastery |
+| `JERODS_LANDING` | 797 (0x31D) |  | Jerod's Landing |
+| `RIDGEPOINT_TOWER` | 798 (0x31E) |  | Ridgepoint Tower |
+| `THE_DARKENED_BANK` | 799 (0x31F) |  | The Darkened Bank |
+| `COLDRIDGE_PASS` | 800 (0x320) |  | Coldridge Pass |
+| `CHILL_BREEZE_VALLEY` | 801 (0x321) |  | Chill Breeze Valley |
+| `SHIMMER_RIDGE` | 802 (0x322) |  | Shimmer Ridge |
+| `AMBERSTILL_RANCH` | 803 (0x323) |  | Amberstill Ranch |
+| `THE_TUNDRID_HILLS` | 804 (0x324) |  | The Tundrid Hills |
+| `SOUTH_GATE_PASS` | 805 (0x325) |  | South Gate Pass |
+| `SOUTH_GATE_OUTPOST` | 806 (0x326) |  | South Gate Outpost |
+| `NORTH_GATE_PASS` | 807 (0x327) |  | North Gate Pass |
+| `NORTH_GATE_OUTPOST` | 808 (0x328) |  | North Gate Outpost |
+| `GATES_OF_IRONFORGE` | 809 (0x329) |  | Gates of Ironforge |
+| `STILLWATER_POND` | 810 (0x32A) |  | Stillwater Pond |
+| `NIGHTMARE_VALE` | 811 (0x32B) |  | Nightmare Vale |
+| `VENOMWEB_VALE` | 812 (0x32C) |  | Venomweb Vale |
+| `THE_BULWARK1` | 813 (0x32D) |  | The Bulwark |
+| `SOUTHFURY_RIVER1` | 814 (0x32E) |  | Southfury River |
+| `SOUTHFURY_RIVER2` | 815 (0x32F) |  | Southfury River |
+| `RAZORMANE_GROUNDS` | 816 (0x330) |  | Razormane Grounds |
+| `SKULL_ROCK` | 817 (0x331) |  | Skull Rock |
+| `PALEMANE_ROCK` | 818 (0x332) |  | Palemane Rock |
+| `WINDFURY_RIDGE` | 819 (0x333) |  | Windfury Ridge |
+| `THE_GOLDEN_PLAINS` | 820 (0x334) |  | The Golden Plains |
+| `THE_ROLLING_PLAINS` | 821 (0x335) |  | The Rolling Plains |
+| `DUN_ALGAZ1` | 836 (0x344) |  | Dun Algaz |
+| `DUN_ALGAZ2` | 837 (0x345) |  | Dun Algaz |
+| `NORTH_GATE_PASS1` | 838 (0x346) |  | North Gate Pass |
+| `SOUTH_GATE_PASS1` | 839 (0x347) |  | South Gate Pass |
+| `TWILIGHT_GROVE` | 856 (0x358) |  | Twilight Grove |
+| `GM_ISLAND` | 876 (0x36C) |  | GM Island |
+| `DELETE_ME1` | 877 (0x36D) |  | Delete ME |
+| `SOUTHFURY_RIVER3` | 878 (0x36E) |  | Southfury River |
+| `SOUTHFURY_RIVER4` | 879 (0x36F) |  | Southfury River |
+| `THANDOL_SPAN1` | 880 (0x370) |  | Thandol Span |
+| `THANDOL_SPAN2` | 881 (0x371) |  | Thandol Span |
+| `PURGATION_ISLE` | 896 (0x380) |  | Purgation Isle |
+| `THE_JANSEN_STEAD` | 916 (0x394) |  | The Jansen Stead |
+| `THE_DEAD_ACRE` | 917 (0x395) |  | The Dead Acre |
+| `THE_MOLSEN_FARM` | 918 (0x396) |  | The Molsen Farm |
+| `STENDELS_POND` | 919 (0x397) |  | Stendel's Pond |
+| `THE_DAGGER_HILLS` | 920 (0x398) |  | The Dagger Hills |
+| `DEMONTS_PLACE` | 921 (0x399) |  | Demont's Place |
+| `THE_DUST_PLAINS` | 922 (0x39A) |  | The Dust Plains |
+| `STONESPLINTER_VALLEY` | 923 (0x39B) |  | Stonesplinter Valley |
+| `VALLEY_OF_KINGS` | 924 (0x39C) |  | Valley of Kings |
+| `ALGAZ_STATION` | 925 (0x39D) |  | Algaz Station |
+| `BUCKLEBREE_FARM` | 926 (0x39E) |  | Bucklebree Farm |
+| `THE_SHINING_STRAND` | 927 (0x39F) |  | The Shining Strand |
+| `NORTH_TIDES_HOLLOW` | 928 (0x3A0) |  | North Tide's Hollow |
+| `GRIZZLEPAW_RIDGE` | 936 (0x3A8) |  | Grizzlepaw Ridge |
+| `THE_VERDANT_FIELDS` | 956 (0x3BC) |  | The Verdant Fields |
+| `GADGETZAN` | 976 (0x3D0) |  | Gadgetzan |
+| `STEAMWHEEDLE_PORT` | 977 (0x3D1) |  | Steamwheedle Port |
+| `ZUL_FARRAK` | 978 (0x3D2) |  | Zul'Farrak |
+| `SANDSORROW_WATCH` | 979 (0x3D3) |  | Sandsorrow Watch |
+| `THISTLESHRUB_VALLEY` | 980 (0x3D4) |  | Thistleshrub Valley |
+| `THE_GAPING_CHASM` | 981 (0x3D5) |  | The Gaping Chasm |
+| `THE_NOXIOUS_LAIR` | 982 (0x3D6) |  | The Noxious Lair |
+| `DUNEMAUL_COMPOUND` | 983 (0x3D7) |  | Dunemaul Compound |
+| `EASTMOON_RUINS` | 984 (0x3D8) |  | Eastmoon Ruins |
+| `WATERSPRING_FIELD` | 985 (0x3D9) |  | Waterspring Field |
+| `ZALASHJIS_DEN` | 986 (0x3DA) |  | Zalashji's Den |
+| `LANDS_END_BEACH` | 987 (0x3DB) |  | Land's End Beach |
+| `WAVESTRIDER_BEACH` | 988 (0x3DC) |  | Wavestrider Beach |
+| `ULDUM` | 989 (0x3DD) |  | Uldum |
+| `VALLEY_OF_THE_WATCHERS` | 990 (0x3DE) |  | Valley of the Watchers |
+| `GUNSTANS_POST` | 991 (0x3DF) |  | Gunstan's Post |
+| `SOUTHMOON_RUINS` | 992 (0x3E0) |  | Southmoon Ruins |
+| `RENDERS_CAMP` | 996 (0x3E4) |  | Render's Camp |
+| `RENDERS_VALLEY` | 997 (0x3E5) |  | Render's Valley |
+| `RENDERS_ROCK` | 998 (0x3E6) |  | Render's Rock |
+| `STONEWATCH_TOWER` | 999 (0x3E7) |  | Stonewatch Tower |
+| `GALARDELL_VALLEY` | 1000 (0x3E8) |  | Galardell Valley |
+| `LAKERIDGE_HIGHWAY` | 1001 (0x3E9) |  | Lakeridge Highway |
+| `THREE_CORNERS` | 1002 (0x3EA) |  | Three Corners |
+| `DIREFORGE_HILL` | 1016 (0x3F8) |  | Direforge Hill |
+| `RAPTOR_RIDGE` | 1017 (0x3F9) |  | Raptor Ridge |
+| `BLACK_CHANNEL_MARSH` | 1018 (0x3FA) |  | Black Channel Marsh |
+| `THE_GREEN_BELT` | 1019 (0x3FB) |  | The Green Belt |
+| `MOSSHIDE_FEN` | 1020 (0x3FC) |  | Mosshide Fen |
+| `THELGEN_ROCK` | 1021 (0x3FD) |  | Thelgen Rock |
+| `BLUEGILL_MARSH` | 1022 (0x3FE) |  | Bluegill Marsh |
+| `SALTSPRAY_GLEN` | 1023 (0x3FF) |  | Saltspray Glen |
+| `SUNDOWN_MARSH` | 1024 (0x400) |  | Sundown Marsh |
+| `THE_GREEN_BELT1` | 1025 (0x401) |  | The Green Belt |
+| `ANGERFANG_ENCAMPMENT` | 1036 (0x40C) |  | Angerfang Encampment |
+| `GRIM_BATOL` | 1037 (0x40D) |  | Grim Batol |
+| `DRAGONMAW_GATES` | 1038 (0x40E) |  | Dragonmaw Gates |
+| `THE_LOST_FLEET` | 1039 (0x40F) |  | The Lost Fleet |
+| `DARROW_HILL` | 1056 (0x420) |  | Darrow Hill |
+| `THORADINS_WALL1` | 1057 (0x421) |  | Thoradin's Wall |
+| `WEBWINDER_PATH` | 1076 (0x434) |  | Webwinder Path |
+| `THE_HUSHED_BANK` | 1097 (0x449) |  | The Hushed Bank |
+| `MANOR_MISTMANTLE` | 1098 (0x44A) |  | Manor Mistmantle |
+| `CAMP_MOJACHE` | 1099 (0x44B) |  | Camp Mojache |
+| `GRIMTOTEM_COMPOUND` | 1100 (0x44C) |  | Grimtotem Compound |
+| `THE_WRITHING_DEEP` | 1101 (0x44D) |  | The Writhing Deep |
+| `WILDWIND_LAKE` | 1102 (0x44E) |  | Wildwind Lake |
+| `GORDUNNI_OUTPOST` | 1103 (0x44F) |  | Gordunni Outpost |
+| `MOK_GORDUN` | 1104 (0x450) |  | Mok'Gordun |
+| `FERAL_SCAR_VALE` | 1105 (0x451) |  | Feral Scar Vale |
+| `FRAYFEATHER_HIGHLANDS` | 1106 (0x452) |  | Frayfeather Highlands |
+| `IDLEWIND_LAKE` | 1107 (0x453) |  | Idlewind Lake |
+| `THE_FORGOTTEN_COAST` | 1108 (0x454) |  | The Forgotten Coast |
+| `EAST_PILLAR` | 1109 (0x455) |  | East Pillar |
+| `WEST_PILLAR` | 1110 (0x456) |  | West Pillar |
+| `DREAM_BOUGH` | 1111 (0x457) |  | Dream Bough |
+| `JADEMIR_LAKE` | 1112 (0x458) |  | Jademir Lake |
+| `ONEIROS` | 1113 (0x459) |  | Oneiros |
+| `RUINS_OF_RAVENWIND` | 1114 (0x45A) |  | Ruins of Ravenwind |
+| `RAGE_SCAR_HOLD` | 1115 (0x45B) |  | Rage Scar Hold |
+| `FEATHERMOON_STRONGHOLD` | 1116 (0x45C) |  | Feathermoon Stronghold |
+| `RUINS_OF_SOLARSAL` | 1117 (0x45D) |  | Ruins of Solarsal |
+| `LOWER_WILDS_UNUSED` | 1118 (0x45E) |  | Lower Wilds UNUSED |
+| `THE_TWIN_COLOSSALS` | 1119 (0x45F) |  | The Twin Colossals |
+| `SARDOR_ISLE` | 1120 (0x460) |  | Sardor Isle |
+| `ISLE_OF_DREAD` | 1121 (0x461) |  | Isle of Dread |
+| `HIGH_WILDERNESS` | 1136 (0x470) |  | High Wilderness |
+| `LOWER_WILDS` | 1137 (0x471) |  | Lower Wilds |
+| `SOUTHERN_BARRENS` | 1156 (0x484) |  | Southern Barrens |
+| `SOUTHERN_GOLD_ROAD` | 1157 (0x485) |  | Southern Gold Road |
+| `ZUL_FARRAK1` | 1176 (0x498) |  | Zul'Farrak |
+| `UNUSEDALCAZ_ISLAND` | 1196 (0x4AC) |  | UNUSEDAlcaz Island |
+| `TIMBERMAW_HOLD` | 1216 (0x4C0) |  | Timbermaw Hold |
+| `VANNDIR_ENCAMPMENT` | 1217 (0x4C1) |  | Vanndir Encampment |
+| `TESTAZSHARA` | 1218 (0x4C2) |  | TESTAzshara |
+| `LEGASH_ENCAMPMENT` | 1219 (0x4C3) |  | Legash Encampment |
+| `THALASSIAN_BASE_CAMP` | 1220 (0x4C4) |  | Thalassian Base Camp |
+| `RUINS_OF_ELDARATH` | 1221 (0x4C5) |  | Ruins of Eldarath |
+| `HETAERAS_CLUTCH` | 1222 (0x4C6) |  | Hetaera's Clutch |
+| `TEMPLE_OF_ZIN_MALOR` | 1223 (0x4C7) |  | Temple of Zin-Malor |
+| `BEARS_HEAD` | 1224 (0x4C8) |  | Bear's Head |
+| `URSOLAN` | 1225 (0x4C9) |  | Ursolan |
+| `TEMPLE_OF_ARKKORAN` | 1226 (0x4CA) |  | Temple of Arkkoran |
+| `BAY_OF_STORMS` | 1227 (0x4CB) |  | Bay of Storms |
+| `THE_SHATTERED_STRAND` | 1228 (0x4CC) |  | The Shattered Strand |
+| `TOWER_OF_ELDARA` | 1229 (0x4CD) |  | Tower of Eldara |
+| `JAGGED_REEF` | 1230 (0x4CE) |  | Jagged Reef |
+| `SOUTHRIDGE_BEACH` | 1231 (0x4CF) |  | Southridge Beach |
+| `RAVENCREST_MONUMENT` | 1232 (0x4D0) |  | Ravencrest Monument |
+| `FORLORN_RIDGE` | 1233 (0x4D1) |  | Forlorn Ridge |
+| `LAKE_MENNAR` | 1234 (0x4D2) |  | Lake Mennar |
+| `SHADOWSONG_SHRINE` | 1235 (0x4D3) |  | Shadowsong Shrine |
+| `HALDARR_ENCAMPMENT` | 1236 (0x4D4) |  | Haldarr Encampment |
+| `VALORMOK` | 1237 (0x4D5) |  | Valormok |
+| `THE_RUINED_REACHES` | 1256 (0x4E8) |  | The Ruined Reaches |
+| `THE_TALONDEEP_PATH` | 1276 (0x4FC) |  | The Talondeep Path |
+| `THE_TALONDEEP_PATH1` | 1277 (0x4FD) |  | The Talondeep Path |
+| `ROCKTUSK_FARM` | 1296 (0x510) |  | Rocktusk Farm |
+| `JAGGEDSWINE_FARM` | 1297 (0x511) |  | Jaggedswine Farm |
+| `RAZORFEN_DOWNS1` | 1316 (0x524) |  | Razorfen Downs |
+| `LOST_RIGGER_COVE` | 1336 (0x538) |  | Lost Rigger Cove |
+| `ULDAMAN` | 1337 (0x539) |  | Uldaman |
+| `LORDAMERE_LAKE1` | 1338 (0x53A) |  | Lordamere Lake |
+| `LORDAMERE_LAKE2` | 1339 (0x53B) |  | Lordamere Lake |
+| `GALLOWS_CORNER` | 1357 (0x54D) |  | Gallows' Corner |
+| `SILITHUS` | 1377 (0x561) |  | Silithus |
+| `EMERALD_FOREST` | 1397 (0x575) |  | Emerald Forest |
+| `SUNKEN_TEMPLE` | 1417 (0x589) |  | Sunken Temple |
+| `DREADMAUL_HOLD` | 1437 (0x59D) |  | Dreadmaul Hold |
+| `NETHERGARDE_KEEP` | 1438 (0x59E) |  | Nethergarde Keep |
+| `DREADMAUL_POST` | 1439 (0x59F) |  | Dreadmaul Post |
+| `SERPENTS_COIL` | 1440 (0x5A0) |  | Serpent's Coil |
+| `ALTAR_OF_STORMS1` | 1441 (0x5A1) |  | Altar of Storms |
+| `FIREWATCH_RIDGE` | 1442 (0x5A2) |  | Firewatch Ridge |
+| `THE_SLAG_PIT` | 1443 (0x5A3) |  | The Slag Pit |
+| `THE_SEA_OF_CINDERS` | 1444 (0x5A4) |  | The Sea of Cinders |
+| `BLACKROCK_MOUNTAIN2` | 1445 (0x5A5) |  | Blackrock Mountain |
+| `THORIUM_POINT` | 1446 (0x5A6) |  | Thorium Point |
+| `GARRISON_ARMORY` | 1457 (0x5B1) |  | Garrison Armory |
+| `THE_TEMPLE_OF_ATAL_HAKKAR` | 1477 (0x5C5) |  | The Temple of Atal'Hakkar |
+| `UNDERCITY` | 1497 (0x5D9) |  | Undercity |
+| `ULDAMAN1` | 1517 (0x5ED) |  | Uldaman |
+| `NOT_USED_DEADMINES` | 1518 (0x5EE) |  | Not Used Deadmines |
+| `STORMWIND_CITY` | 1519 (0x5EF) |  | Stormwind City |
+| `IRONFORGE` | 1537 (0x601) |  | Ironforge |
+| `SPLITHOOF_HOLD` | 1557 (0x615) |  | Splithoof Hold |
+| `THE_CAPE_OF_STRANGLETHORN` | 1577 (0x629) |  | The Cape of Stranglethorn |
+| `SOUTHERN_SAVAGE_COAST` | 1578 (0x62A) |  | Southern Savage Coast |
+| `UNUSED_THE_DEADMINES_002` | 1579 (0x62B) |  | Unused The Deadmines 002 |
+| `UNUSED_IRONCLAD_COVE_00THREE` | 1580 (0x62C) |  | Unused Ironclad Cove 003 |
+| `THE_DEADMINES` | 1581 (0x62D) |  | The Deadmines |
+| `IRONCLAD_COVE` | 1582 (0x62E) |  | Ironclad Cove |
+| `BLACKROCK_SPIRE` | 1583 (0x62F) |  | Blackrock Spire |
+| `BLACKROCK_DEPTHS` | 1584 (0x630) |  | Blackrock Depths |
+| `RAPTOR_GROUNDS_UNUSED` | 1597 (0x63D) |  | Raptor Grounds UNUSED |
+| `GROL_DOM_FARM_UNUSED` | 1598 (0x63E) |  | Grol'dom Farm UNUSED |
+| `MORSHAN_BASE_CAMP` | 1599 (0x63F) |  | Mor'shan Base Camp |
+| `HONORS_STAND_UNUSED` | 1600 (0x640) |  | Honor's Stand UNUSED |
+| `BLACKTHORN_RIDGE_UNUSED` | 1601 (0x641) |  | Blackthorn Ridge UNUSED |
+| `BRAMBLESCAR_UNUSED` | 1602 (0x642) |  | Bramblescar UNUSED |
+| `AGAMA_GOR_UNUSED` | 1603 (0x643) |  | Agama'gor UNUSED |
+| `VALLEY_OF_HEROES` | 1617 (0x651) |  | Valley of Heroes |
+| `ORGRIMMAR` | 1637 (0x665) |  | Orgrimmar |
+| `THUNDER_BLUFF` | 1638 (0x666) |  | Thunder Bluff |
+| `ELDER_RISE` | 1639 (0x667) |  | Elder Rise |
+| `SPIRIT_RISE` | 1640 (0x668) |  | Spirit Rise |
+| `HUNTER_RISE` | 1641 (0x669) |  | Hunter Rise |
+| `DARNASSUS` | 1657 (0x679) |  | Darnassus |
+| `CENARION_ENCLAVE` | 1658 (0x67A) |  | Cenarion Enclave |
+| `CRAFTSMENS_TERRACE` | 1659 (0x67B) |  | Craftsmen's Terrace |
+| `WARRIORS_TERRACE` | 1660 (0x67C) |  | Warrior's Terrace |
+| `THE_TEMPLE_GARDENS` | 1661 (0x67D) |  | The Temple Gardens |
+| `TRADESMENS_TERRACE` | 1662 (0x67E) |  | Tradesmen's Terrace |
+| `GAVINS_NAZE` | 1677 (0x68D) |  | Gavin's Naze |
+| `SOFERAS_NAZE` | 1678 (0x68E) |  | Sofera's Naze |
+| `CORRAHNS_DAGGER` | 1679 (0x68F) |  | Corrahn's Dagger |
+| `THE_HEADLAND` | 1680 (0x690) |  | The Headland |
+| `MISTY_SHORE` | 1681 (0x691) |  | Misty Shore |
+| `DANDREDS_FOLD` | 1682 (0x692) |  | Dandred's Fold |
+| `GROWLESS_CAVE` | 1683 (0x693) |  | Growless Cave |
+| `CHILLWIND_POINT` | 1684 (0x694) |  | Chillwind Point |
+| `RAPTOR_GROUNDS` | 1697 (0x6A1) |  | Raptor Grounds |
+| `BRAMBLESCAR` | 1698 (0x6A2) |  | Bramblescar |
+| `THORN_HILL` | 1699 (0x6A3) |  | Thorn Hill |
+| `AGAMA_GOR` | 1700 (0x6A4) |  | Agama'gor |
+| `BLACKTHORN_RIDGE` | 1701 (0x6A5) |  | Blackthorn Ridge |
+| `HONORS_STAND` | 1702 (0x6A6) |  | Honor's Stand |
+| `THE_MORSHAN_RAMPART` | 1703 (0x6A7) |  | The Mor'shan Rampart |
+| `GROL_DOM_FARM` | 1704 (0x6A8) |  | Grol'dom Farm |
+| `RAZORFEN_KRAUL1` | 1717 (0x6B5) |  | Razorfen Kraul |
+| `THE_GREAT_LIFT1` | 1718 (0x6B6) |  | The Great Lift |
+| `MISTVALE_VALLEY` | 1737 (0x6C9) |  | Mistvale Valley |
+| `NEK_MANI_WELLSPRING` | 1738 (0x6CA) |  | Nek'mani Wellspring |
+| `BLOODSAIL_COMPOUND` | 1739 (0x6CB) |  | Bloodsail Compound |
+| `VENTURE_CO_BASE_CAMP` | 1740 (0x6CC) |  | Venture Co. Base Camp |
+| `GURUBASHI_ARENA` | 1741 (0x6CD) |  | Gurubashi Arena |
+| `SPIRIT_DEN` | 1742 (0x6CE) |  | Spirit Den |
+| `THE_CRIMSON_VEIL` | 1757 (0x6DD) |  | The Crimson Veil |
+| `THE_RIPTIDE` | 1758 (0x6DE) |  | The Riptide |
+| `THE_DAMSELS_LUCK` | 1759 (0x6DF) |  | The Damsel's Luck |
+| `VENTURE_CO_OPERATIONS_CENTER` | 1760 (0x6E0) |  | Venture Co. Operations Center |
+| `DEADWOOD_VILLAGE` | 1761 (0x6E1) |  | Deadwood Village |
+| `FELPAW_VILLAGE` | 1762 (0x6E2) |  | Felpaw Village |
+| `JAEDENAR` | 1763 (0x6E3) |  | Jaedenar |
+| `BLOODVENOM_RIVER` | 1764 (0x6E4) |  | Bloodvenom River |
+| `BLOODVENOM_FALLS` | 1765 (0x6E5) |  | Bloodvenom Falls |
+| `SHATTER_SCAR_VALE` | 1766 (0x6E6) |  | Shatter Scar Vale |
+| `IRONTREE_WOODS` | 1767 (0x6E7) |  | Irontree Woods |
+| `IRONTREE_CAVERN` | 1768 (0x6E8) |  | Irontree Cavern |
+| `TIMBERMAW_HOLD1` | 1769 (0x6E9) |  | Timbermaw Hold |
+| `SHADOW_HOLD` | 1770 (0x6EA) |  | Shadow Hold |
+| `SHRINE_OF_THE_DECEIVER` | 1771 (0x6EB) |  | Shrine of the Deceiver |
+| `ITHARIUSS_CAVE` | 1777 (0x6F1) |  | Itharius's Cave |
+| `SORROWMURK` | 1778 (0x6F2) |  | Sorrowmurk |
+| `DRAENIL_DUR_VILLAGE` | 1779 (0x6F3) |  | Draenil'dur Village |
+| `SPLINTERSPEAR_JUNCTION` | 1780 (0x6F4) |  | Splinterspear Junction |
+| `STAGALBOG` | 1797 (0x705) |  | Stagalbog |
+| `THE_SHIFTING_MIRE` | 1798 (0x706) |  | The Shifting Mire |
+| `STAGALBOG_CAVE` | 1817 (0x719) |  | Stagalbog Cave |
+| `WITHERBARK_CAVERNS` | 1837 (0x72D) |  | Witherbark Caverns |
+| `THORADINS_WALL2` | 1857 (0x741) |  | Thoradin's Wall |
+| `BOULDER_GOR` | 1858 (0x742) |  | Boulder'gor |
+| `VALLEY_OF_FANGS` | 1877 (0x755) |  | Valley of Fangs |
+| `THE_DUSTBOWL` | 1878 (0x756) |  | The Dustbowl |
+| `MIRAGE_FLATS` | 1879 (0x757) |  | Mirage Flats |
+| `FEATHERBEARDS_HOVEL` | 1880 (0x758) |  | Featherbeard's Hovel |
+| `SHINDIGGERS_CAMP` | 1881 (0x759) |  | Shindigger's Camp |
+| `PLAGUEMIST_RAVINE` | 1882 (0x75A) |  | Plaguemist Ravine |
+| `VALORWIND_LAKE` | 1883 (0x75B) |  | Valorwind Lake |
+| `AGOL_WATHA` | 1884 (0x75C) |  | Agol'watha |
+| `HIRI_WATHA` | 1885 (0x75D) |  | Hiri'watha |
+| `THE_CREEPING_RUIN` | 1886 (0x75E) |  | The Creeping Ruin |
+| `BOGENS_LEDGE` | 1887 (0x75F) |  | Bogen's Ledge |
+| `THE_MAKERS_TERRACE` | 1897 (0x769) |  | The Maker's Terrace |
+| `DUSTWIND_GULCH` | 1898 (0x76A) |  | Dustwind Gulch |
+| `SHAOL_WATHA` | 1917 (0x77D) |  | Shaol'watha |
+| `NOONSHADE_RUINS` | 1937 (0x791) |  | Noonshade Ruins |
+| `BROKEN_PILLAR` | 1938 (0x792) |  | Broken Pillar |
+| `ABYSSAL_SANDS` | 1939 (0x793) |  | Abyssal Sands |
+| `SOUTHBREAK_SHORE` | 1940 (0x794) |  | Southbreak Shore |
+| `CAVERNS_OF_TIME` | 1941 (0x795) |  | Caverns of Time |
+| `THE_MARSHLANDS` | 1942 (0x796) |  | The Marshlands |
+| `IRONSTONE_PLATEAU` | 1943 (0x797) |  | Ironstone Plateau |
+| `BLACKCHAR_CAVE` | 1957 (0x7A5) |  | Blackchar Cave |
+| `TANNER_CAMP` | 1958 (0x7A6) |  | Tanner Camp |
+| `DUSTFIRE_VALLEY` | 1959 (0x7A7) |  | Dustfire Valley |
+| `ZUL_GURUB1` | 1977 (0x7B9) |  | Zul'Gurub |
+| `MISTY_REED_POST` | 1978 (0x7BA) |  | Misty Reed Post |
+| `BLOODVENOM_POST` | 1997 (0x7CD) |  | Bloodvenom Post |
+| `TALONBRANCH_GLADE` | 1998 (0x7CE) |  | Talonbranch Glade |
+| `STRATHOLME` | 2017 (0x7E1) |  | Stratholme |
+| `QUEL_THALAS` | 2037 (0x7F5) |  | Quel'thalas |
+| `SCHOLOMANCE` | 2057 (0x809) |  | Scholomance |
+| `TWILIGHT_VALE` | 2077 (0x81D) |  | Twilight Vale |
+| `TWILIGHT_SHORE` | 2078 (0x81E) |  | Twilight Shore |
+| `ALCAZ_ISLAND` | 2079 (0x81F) |  | Alcaz Island |
+| `DARKCLOUD_PINNACLE` | 2097 (0x831) |  | Darkcloud Pinnacle |
+| `DAWNING_WOOD_CATACOMBS` | 2098 (0x832) |  | Dawning Wood Catacombs |
+| `STONEWATCH_KEEP` | 2099 (0x833) |  | Stonewatch Keep |
+| `MARAUDON` | 2100 (0x834) |  | Maraudon |
+| `STOUTLAGER_INN` | 2101 (0x835) |  | Stoutlager Inn |
+| `THUNDERBREW_DISTILLERY` | 2102 (0x836) |  | Thunderbrew Distillery |
+| `MENETHIL_KEEP` | 2103 (0x837) |  | Menethil Keep |
+| `DEEPWATER_TAVERN` | 2104 (0x838) |  | Deepwater Tavern |
+| `SHADOW_GRAVE` | 2117 (0x845) |  | Shadow Grave |
+| `BRILL_TOWN_HALL` | 2118 (0x846) |  | Brill Town Hall |
+| `GALLOWS_END_TAVERN` | 2119 (0x847) |  | Gallows' End Tavern |
+| `THE_POOLS_OF_VISIONUNUSED` | 2137 (0x859) |  | The Pools of VisionUNUSED |
+| `DREADMIST_DEN` | 2138 (0x85A) |  | Dreadmist Den |
+| `BAEL_DUN_KEEP` | 2157 (0x86D) |  | Bael'dun Keep |
+| `EMBERSTRIFES_DEN` | 2158 (0x86E) |  | Emberstrife's Den |
+| `ONYXIAS_LAIR` | 2159 (0x86F) |  | Onyxia's Lair |
+| `WINDSHEAR_MINE` | 2160 (0x870) |  | Windshear Mine |
+| `ROLANDS_DOOM` | 2161 (0x871) |  | Roland's Doom |
+| `BATTLE_RING` | 2177 (0x881) |  | Battle Ring |
+| `THE_POOLS_OF_VISION` | 2197 (0x895) |  | The Pools of Vision |
+| `SHADOWBREAK_RAVINE` | 2198 (0x896) |  | Shadowbreak Ravine |
+| `BROKEN_SPEAR_VILLAGE` | 2217 (0x8A9) |  | Broken Spear Village |
+| `WHITEREACH_POST` | 2237 (0x8BD) |  | Whitereach Post |
+| `GORNIA` | 2238 (0x8BE) |  | Gornia |
+| `ZANES_EYE_CRATER` | 2239 (0x8BF) |  | Zane's Eye Crater |
+| `MIRAGE_RACEWAY` | 2240 (0x8C0) |  | Mirage Raceway |
+| `FROSTSABER_ROCK` | 2241 (0x8C1) |  | Frostsaber Rock |
+| `THE_HIDDEN_GROVE` | 2242 (0x8C2) |  | The Hidden Grove |
+| `TIMBERMAW_POST` | 2243 (0x8C3) |  | Timbermaw Post |
+| `WINTERFALL_VILLAGE` | 2244 (0x8C4) |  | Winterfall Village |
+| `MAZTHORIL` | 2245 (0x8C5) |  | Mazthoril |
+| `FROSTFIRE_HOT_SPRINGS` | 2246 (0x8C6) |  | Frostfire Hot Springs |
+| `ICE_THISTLE_HILLS` | 2247 (0x8C7) |  | Ice Thistle Hills |
+| `DUN_MANDARR` | 2248 (0x8C8) |  | Dun Mandarr |
+| `FROSTWHISPER_GORGE` | 2249 (0x8C9) |  | Frostwhisper Gorge |
+| `OWL_WING_THICKET` | 2250 (0x8CA) |  | Owl Wing Thicket |
+| `LAKE_KEL_THERIL` | 2251 (0x8CB) |  | Lake Kel'Theril |
+| `THE_RUINS_OF_KEL_THERIL` | 2252 (0x8CC) |  | The Ruins of Kel'Theril |
+| `STARFALL_VILLAGE` | 2253 (0x8CD) |  | Starfall Village |
+| `BAN_THALLOW_BARROW_DEN` | 2254 (0x8CE) |  | Ban'Thallow Barrow Den |
+| `EVERLOOK` | 2255 (0x8CF) |  | Everlook |
+| `DARKWHISPER_GORGE` | 2256 (0x8D0) |  | Darkwhisper Gorge |
+| `DEEPRUN_TRAM` | 2257 (0x8D1) |  | Deeprun Tram |
+| `THE_FUNGAL_VALE` | 2258 (0x8D2) |  | The Fungal Vale |
+| `UNUSEDTHE_MARRIS_STEAD` | 2259 (0x8D3) |  | UNUSEDThe Marris Stead |
+| `THE_MARRIS_STEAD` | 2260 (0x8D4) |  | The Marris Stead |
+| `THE_UNDERCROFT` | 2261 (0x8D5) |  | The Undercroft |
+| `DARROWSHIRE` | 2262 (0x8D6) |  | Darrowshire |
+| `CROWN_GUARD_TOWER` | 2263 (0x8D7) |  | Crown Guard Tower |
+| `CORINS_CROSSING` | 2264 (0x8D8) |  | Corin's Crossing |
+| `SCARLET_BASE_CAMP` | 2265 (0x8D9) |  | Scarlet Base Camp |
+| `TYRS_HAND` | 2266 (0x8DA) |  | Tyr's Hand |
+| `THE_SCARLET_BASILICA` | 2267 (0x8DB) |  | The Scarlet Basilica |
+| `LIGHTS_HOPE_CHAPEL` | 2268 (0x8DC) |  | Light's Hope Chapel |
+| `BROWMAN_MILL` | 2269 (0x8DD) |  | Browman Mill |
+| `THE_NOXIOUS_GLADE` | 2270 (0x8DE) |  | The Noxious Glade |
+| `EASTWALL_TOWER` | 2271 (0x8DF) |  | Eastwall Tower |
+| `NORTHDALE` | 2272 (0x8E0) |  | Northdale |
+| `ZUL_MASHAR` | 2273 (0x8E1) |  | Zul'Mashar |
+| `MAZRA_ALOR` | 2274 (0x8E2) |  | Mazra'Alor |
+| `NORTHPASS_TOWER` | 2275 (0x8E3) |  | Northpass Tower |
+| `QUEL_LITHIEN_LODGE` | 2276 (0x8E4) |  | Quel'Lithien Lodge |
+| `PLAGUEWOOD` | 2277 (0x8E5) |  | Plaguewood |
+| `SCOURGEHOLD` | 2278 (0x8E6) |  | Scourgehold |
+| `STRATHOLME1` | 2279 (0x8E7) |  | Stratholme |
+| `UNUSED_STRATHOLME` | 2280 (0x8E8) |  | UNUSED Stratholme |
+| `DARROWMERE_LAKE` | 2297 (0x8F9) |  | Darrowmere Lake |
+| `CAER_DARROW` | 2298 (0x8FA) |  | Caer Darrow |
+| `DARROWMERE_LAKE1` | 2299 (0x8FB) |  | Darrowmere Lake |
+| `CAVERNS_OF_TIME1` | 2300 (0x8FC) |  | Caverns of Time |
+| `THISTLEFUR_VILLAGE` | 2301 (0x8FD) |  | Thistlefur Village |
+| `THE_QUAGMIRE` | 2302 (0x8FE) |  | The Quagmire |
+| `WINDBREAK_CANYON` | 2303 (0x8FF) |  | Windbreak Canyon |
+| `SOUTH_SEAS` | 2317 (0x90D) |  | South Seas |
+| `THE_GREAT_SEA3` | 2318 (0x90E) |  | The Great Sea |
+| `THE_GREAT_SEA4` | 2319 (0x90F) |  | The Great Sea |
+| `THE_GREAT_SEA5` | 2320 (0x910) |  | The Great Sea |
+| `THE_GREAT_SEA6` | 2321 (0x911) |  | The Great Sea |
+| `THE_VEILED_SEA1` | 2322 (0x912) |  | The Veiled Sea |
+| `THE_VEILED_SEA2` | 2323 (0x913) |  | The Veiled Sea |
+| `THE_VEILED_SEA3` | 2324 (0x914) |  | The Veiled Sea |
+| `THE_VEILED_SEA4` | 2325 (0x915) |  | The Veiled Sea |
+| `THE_VEILED_SEA5` | 2326 (0x916) |  | The Veiled Sea |
+| `RAZOR_HILL_BARRACKS` | 2337 (0x921) |  | Razor Hill Barracks |
+| `SOUTH_SEAS1` | 2338 (0x922) |  | South Seas |
+| `THE_GREAT_SEA7` | 2339 (0x923) |  | The Great Sea |
+| `BLOODTOOTH_CAMP` | 2357 (0x935) |  | Bloodtooth Camp |
+| `FOREST_SONG` | 2358 (0x936) |  | Forest Song |
+| `GREENPAW_VILLAGE` | 2359 (0x937) |  | Greenpaw Village |
+| `SILVERWING_OUTPOST` | 2360 (0x938) |  | Silverwing Outpost |
+| `NIGHTHAVEN` | 2361 (0x939) |  | Nighthaven |
+| `SHRINE_OF_REMULOS` | 2362 (0x93A) |  | Shrine of Remulos |
+| `STORMRAGE_BARROW_DENS` | 2363 (0x93B) |  | Stormrage Barrow Dens |
+| `THE_GREAT_SEA8` | 2364 (0x93C) |  | The Great Sea |
+| `THE_GREAT_SEA9` | 2365 (0x93D) |  | The Great Sea |
+| `THE_BLACK_MORASS` | 2366 (0x93E) |  | The Black Morass |
+| `OLD_HILLSBRAD_FOOTHILLS` | 2367 (0x93F) |  | Old Hillsbrad Foothills |
+| `TARREN_MILL1` | 2368 (0x940) |  | Tarren Mill |
+| `SOUTHSHORE1` | 2369 (0x941) |  | Southshore |
+| `DURNHOLDE_KEEP1` | 2370 (0x942) |  | Durnholde Keep |
+| `DUN_GAROK1` | 2371 (0x943) |  | Dun Garok |
+| `HILLSBRAD_FIELDS1` | 2372 (0x944) |  | Hillsbrad Fields |
+| `EASTERN_STRAND1` | 2373 (0x945) |  | Eastern Strand |
+| `NETHANDER_STEAD1` | 2374 (0x946) |  | Nethander Stead |
+| `DARROW_HILL1` | 2375 (0x947) |  | Darrow Hill |
+| `SOUTHPOINT_TOWER1` | 2376 (0x948) |  | Southpoint Tower |
+| `THORADINS_WALL3` | 2377 (0x949) |  | Thoradin's Wall |
+| `WESTERN_STRAND1` | 2378 (0x94A) |  | Western Strand |
+| `AZURELODE_MINE1` | 2379 (0x94B) |  | Azurelode Mine |
+| `THE_GREAT_SEA10` | 2397 (0x95D) |  | The Great Sea |
+| `THE_GREAT_SEA11` | 2398 (0x95E) |  | The Great Sea |
+| `THE_GREAT_SEA12` | 2399 (0x95F) |  | The Great Sea |
+| `THE_FORBIDDING_SEA1` | 2400 (0x960) |  | The Forbidding Sea |
+| `THE_FORBIDDING_SEA2` | 2401 (0x961) |  | The Forbidding Sea |
+| `THE_FORBIDDING_SEA3` | 2402 (0x962) |  | The Forbidding Sea |
+| `THE_FORBIDDING_SEA4` | 2403 (0x963) |  | The Forbidding Sea |
+| `TETHRIS_ARAN` | 2404 (0x964) |  | Tethris Aran |
+| `ETHEL_RETHOR` | 2405 (0x965) |  | Ethel Rethor |
+| `RANAZJAR_ISLE` | 2406 (0x966) |  | Ranazjar Isle |
+| `KORMEKS_HUT` | 2407 (0x967) |  | Kormek's Hut |
+| `SHADOWPREY_VILLAGE` | 2408 (0x968) |  | Shadowprey Village |
+| `BLACKROCK_PASS` | 2417 (0x971) |  | Blackrock Pass |
+| `MORGANS_VIGIL` | 2418 (0x972) |  | Morgan's Vigil |
+| `SLITHER_ROCK` | 2419 (0x973) |  | Slither Rock |
+| `TERROR_WING_PATH` | 2420 (0x974) |  | Terror Wing Path |
+| `DRACO_DAR` | 2421 (0x975) |  | Draco'dar |
+| `RAGEFIRE_CHASM` | 2437 (0x985) |  | Ragefire Chasm |
+| `NIGHTSONG_WOODS` | 2457 (0x999) |  | Nightsong Woods |
+| `THE_VEILED_SEA6` | 2477 (0x9AD) |  | The Veiled Sea |
+| `MORLOS_ARAN` | 2478 (0x9AE) |  | Morlos'Aran |
+| `EMERALD_SANCTUARY` | 2479 (0x9AF) |  | Emerald Sanctuary |
+| `JADEFIRE_GLEN` | 2480 (0x9B0) |  | Jadefire Glen |
+| `RUINS_OF_CONSTELLAS` | 2481 (0x9B1) |  | Ruins of Constellas |
+| `BITTER_REACHES` | 2497 (0x9C1) |  | Bitter Reaches |
+| `RISE_OF_THE_DEFILER` | 2517 (0x9D5) |  | Rise of the Defiler |
+| `LARISS_PAVILION` | 2518 (0x9D6) |  | Lariss Pavilion |
+| `WOODPAW_HILLS` | 2519 (0x9D7) |  | Woodpaw Hills |
+| `WOODPAW_DEN` | 2520 (0x9D8) |  | Woodpaw Den |
+| `VERDANTIS_RIVER` | 2521 (0x9D9) |  | Verdantis River |
+| `RUINS_OF_ISILDIEN` | 2522 (0x9DA) |  | Ruins of Isildien |
+| `GRIMTOTEM_POST` | 2537 (0x9E9) |  | Grimtotem Post |
+| `CAMP_APARAJE` | 2538 (0x9EA) |  | Camp Aparaje |
+| `MALAKA_JIN` | 2539 (0x9EB) |  | Malaka'jin |
+| `BOULDERSLIDE_RAVINE` | 2540 (0x9EC) |  | Boulderslide Ravine |
+| `SISHIR_CANYON` | 2541 (0x9ED) |  | Sishir Canyon |
+| `DIRE_MAUL` | 2557 (0x9FD) |  | Dire Maul |
+| `DEADWIND_RAVINE` | 2558 (0x9FE) |  | Deadwind Ravine |
+| `DIAMONDHEAD_RIVER` | 2559 (0x9FF) |  | Diamondhead River |
+| `ARIDENS_CAMP` | 2560 (0xA00) |  | Ariden's Camp |
+| `THE_VICE` | 2561 (0xA01) |  | The Vice |
+| `KARAZHAN` | 2562 (0xA02) |  | Karazhan |
+| `MORGANS_PLOT` | 2563 (0xA03) |  | Morgan's Plot |
+| `DIRE_MAUL1` | 2577 (0xA11) |  | Dire Maul |
+| `ALTERAC_VALLEY` | 2597 (0xA25) |  | Alterac Valley |
+| `SCRABBLESCREWS_CAMP` | 2617 (0xA39) |  | Scrabblescrew's Camp |
+| `JADEFIRE_RUN` | 2618 (0xA3A) |  | Jadefire Run |
+| `THONDRORIL_RIVER` | 2619 (0xA3B) |  | Thondroril River |
+| `THONDRORIL_RIVER1` | 2620 (0xA3C) |  | Thondroril River |
+| `LAKE_MERELDAR` | 2621 (0xA3D) |  | Lake Mereldar |
+| `PESTILENT_SCAR` | 2622 (0xA3E) |  | Pestilent Scar |
+| `THE_INFECTIS_SCAR` | 2623 (0xA3F) |  | The Infectis Scar |
+| `BLACKWOOD_LAKE` | 2624 (0xA40) |  | Blackwood Lake |
+| `EASTWALL_GATE` | 2625 (0xA41) |  | Eastwall Gate |
+| `TERRORWEB_TUNNEL` | 2626 (0xA42) |  | Terrorweb Tunnel |
+| `TERRORDALE` | 2627 (0xA43) |  | Terrordale |
+| `KARGATHIA_KEEP` | 2637 (0xA4D) |  | Kargathia Keep |
+| `VALLEY_OF_BONES` | 2657 (0xA61) |  | Valley of Bones |
+| `BLACKWING_LAIR` | 2677 (0xA75) |  | Blackwing Lair |
+| `DEADMANS_CROSSING` | 2697 (0xA89) |  | Deadman's Crossing |
+| `MOLTEN_CORE` | 2717 (0xA9D) |  | Molten Core |
+| `THE_SCARAB_WALL` | 2737 (0xAB1) |  | The Scarab Wall |
+| `SOUTHWIND_VILLAGE` | 2738 (0xAB2) |  | Southwind Village |
+| `TWILIGHT_BASE_CAMP` | 2739 (0xAB3) |  | Twilight Base Camp |
+| `THE_CRYSTAL_VALE` | 2740 (0xAB4) |  | The Crystal Vale |
+| `THE_SCARAB_DAIS` | 2741 (0xAB5) |  | The Scarab Dais |
+| `HIVE_ASHI` | 2742 (0xAB6) |  | Hive'Ashi |
+| `HIVE_ZORA` | 2743 (0xAB7) |  | Hive'Zora |
+| `HIVE_REGAL` | 2744 (0xAB8) |  | Hive'Regal |
+| `SHRINE_OF_THE_FALLEN_WARRIOR` | 2757 (0xAC5) |  | Shrine of the Fallen Warrior |
+| `UNUSED_ALTERAC_VALLEY` | 2777 (0xAD9) |  | UNUSED Alterac Valley |
+| `BLACKFATHOM_DEEPS1` | 2797 (0xAED) |  | Blackfathom Deeps |
+| `REUSE_ME_4` | 2817 (0xB01) |  | Reuse Me 4 |
+| `THE_MASTERS_CELLAR` | 2837 (0xB15) |  | The Master's Cellar |
+| `STONEWROUGHT_PASS` | 2838 (0xB16) |  | Stonewrought Pass |
+| `ALTERAC_VALLEY1` | 2839 (0xB17) |  | Alterac Valley |
+| `THE_RUMBLE_CAGE` | 2857 (0xB29) |  | The Rumble Cage |
+| `CHUNK_TEST` | 2877 (0xB3D) |  | Chunk Test |
+| `ZORAM_GAR_OUTPOST` | 2897 (0xB51) |  | Zoram'gar Outpost |
+| `HALL_OF_LEGENDS` | 2917 (0xB65) |  | Hall of Legends |
+| `CHAMPIONS_HALL` | 2918 (0xB66) |  | Champions' Hall |
+| `GROSH_GOK_COMPOUND` | 2937 (0xB79) |  | Grosh'gok Compound |
+| `SLEEPING_GORGE` | 2938 (0xB7A) |  | Sleeping Gorge |
+| `IRONDEEP_MINE` | 2957 (0xB8D) |  | Irondeep Mine |
+| `STONEHEARTH_OUTPOST` | 2958 (0xB8E) |  | Stonehearth Outpost |
+| `DUN_BALDAR` | 2959 (0xB8F) |  | Dun Baldar |
+| `ICEWING_PASS` | 2960 (0xB90) |  | Icewing Pass |
+| `FROSTWOLF_VILLAGE` | 2961 (0xB91) |  | Frostwolf Village |
+| `TOWER_POINT` | 2962 (0xB92) |  | Tower Point |
+| `COLDTOOTH_MINE` | 2963 (0xB93) |  | Coldtooth Mine |
+| `WINTERAX_HOLD` | 2964 (0xB94) |  | Winterax Hold |
+| `ICEBLOOD_GARRISON` | 2977 (0xBA1) |  | Iceblood Garrison |
+| `FROSTWOLF_KEEP` | 2978 (0xBA2) |  | Frostwolf Keep |
+| `TOR_KREN_FARM` | 2979 (0xBA3) |  | Tor'kren Farm |
+| `FROST_DAGGER_PASS` | 3017 (0xBC9) |  | Frost Dagger Pass |
+| `IRONSTONE_CAMP` | 3037 (0xBDD) |  | Ironstone Camp |
+| `WEAZELS_CRATER` | 3038 (0xBDE) |  | Weazel's Crater |
+| `TAHONDA_RUINS` | 3039 (0xBDF) |  | Tahonda Ruins |
+| `FIELD_OF_STRIFE` | 3057 (0xBF1) |  | Field of Strife |
+| `ICEWING_CAVERN` | 3058 (0xBF2) |  | Icewing Cavern |
+| `VALORS_REST` | 3077 (0xC05) |  | Valor's Rest |
+| `THE_SWARMING_PILLAR` | 3097 (0xC19) |  | The Swarming Pillar |
+| `TWILIGHT_POST` | 3098 (0xC1A) |  | Twilight Post |
+| `TWILIGHT_OUTPOST` | 3099 (0xC1B) |  | Twilight Outpost |
+| `RAVAGED_TWILIGHT_CAMP` | 3100 (0xC1C) |  | Ravaged Twilight Camp |
+| `SHALZARUS_LAIR` | 3117 (0xC2D) |  | Shalzaru's Lair |
+| `TALRENDIS_POINT` | 3137 (0xC41) |  | Talrendis Point |
+| `RETHRESS_SANCTUM` | 3138 (0xC42) |  | Rethress Sanctum |
+| `MOON_HORROR_DEN` | 3139 (0xC43) |  | Moon Horror Den |
+| `SCALEBEARDS_CAVE` | 3140 (0xC44) |  | Scalebeard's Cave |
+| `BOULDERSLIDE_CAVERN` | 3157 (0xC55) |  | Boulderslide Cavern |
+| `WARSONG_LABOR_CAMP` | 3177 (0xC69) |  | Warsong Labor Camp |
+| `CHILLWIND_CAMP` | 3197 (0xC7D) |  | Chillwind Camp |
+| `THE_MAUL` | 3217 (0xC91) |  | The Maul |
+| `THE_MAUL_UNUSED` | 3237 (0xCA5) |  | The Maul UNUSED |
+| `BONES_OF_GRAKKAROND` | 3257 (0xCB9) |  | Bones of Grakkarond |
+| `WARSONG_GULCH` | 3277 (0xCCD) |  | Warsong Gulch |
+| `FROSTWOLF_GRAVEYARD` | 3297 (0xCE1) |  | Frostwolf Graveyard |
+| `FROSTWOLF_PASS` | 3298 (0xCE2) |  | Frostwolf Pass |
+| `DUN_BALDAR_PASS` | 3299 (0xCE3) |  | Dun Baldar Pass |
+| `ICEBLOOD_GRAVEYARD` | 3300 (0xCE4) |  | Iceblood Graveyard |
+| `SNOWFALL_GRAVEYARD` | 3301 (0xCE5) |  | Snowfall Graveyard |
+| `STONEHEARTH_GRAVEYARD` | 3302 (0xCE6) |  | Stonehearth Graveyard |
+| `STORMPIKE_GRAVEYARD` | 3303 (0xCE7) |  | Stormpike Graveyard |
+| `ICEWING_BUNKER` | 3304 (0xCE8) |  | Icewing Bunker |
+| `STONEHEARTH_BUNKER` | 3305 (0xCE9) |  | Stonehearth Bunker |
+| `WILDPAW_RIDGE` | 3306 (0xCEA) |  | Wildpaw Ridge |
+| `REVANTUSK_VILLAGE` | 3317 (0xCF5) |  | Revantusk Village |
+| `ROCK_OF_DUROTAN` | 3318 (0xCF6) |  | Rock of Durotan |
+| `SILVERWING_GROVE` | 3319 (0xCF7) |  | Silverwing Grove |
+| `WARSONG_LUMBER_MILL` | 3320 (0xCF8) |  | Warsong Lumber Mill |
+| `SILVERWING_HOLD` | 3321 (0xCF9) |  | Silverwing Hold |
+| `WILDPAW_CAVERN` | 3337 (0xD09) |  | Wildpaw Cavern |
+| `THE_VEILED_CLEFT` | 3338 (0xD0A) |  | The Veiled Cleft |
+| `YOJAMBA_ISLE` | 3357 (0xD1D) |  | Yojamba Isle |
+| `ARATHI_BASIN` | 3358 (0xD1E) |  | Arathi Basin |
+| `THE_COIL` | 3377 (0xD31) |  | The Coil |
+| `ALTAR_OF_HIR_EEK` | 3378 (0xD32) |  | Altar of Hir'eek |
+| `SHADRA_ZAAR` | 3379 (0xD33) |  | Shadra'zaar |
+| `HAKKARI_GROUNDS` | 3380 (0xD34) |  | Hakkari Grounds |
+| `NAZE_OF_SHIRVALLAH` | 3381 (0xD35) |  | Naze of Shirvallah |
+| `TEMPLE_OF_BETHEKK` | 3382 (0xD36) |  | Temple of Bethekk |
+| `THE_BLOODFIRE_PIT` | 3383 (0xD37) |  | The Bloodfire Pit |
+| `ALTAR_OF_THE_BLOOD_GOD` | 3384 (0xD38) |  | Altar of the Blood God |
+| `ZANZAS_RISE` | 3397 (0xD45) |  | Zanza's Rise |
+| `EDGE_OF_MADNESS` | 3398 (0xD46) |  | Edge of Madness |
+| `TROLLBANE_HALL` | 3417 (0xD59) |  | Trollbane Hall |
+| `DEFILERS_DEN` | 3418 (0xD5A) |  | Defiler's Den |
+| `PAGLES_POINTE` | 3419 (0xD5B) |  | Pagle's Pointe |
+| `FARM` | 3420 (0xD5C) |  | Farm |
+| `BLACKSMITH` | 3421 (0xD5D) |  | Blacksmith |
+| `LUMBER_MILL` | 3422 (0xD5E) |  | Lumber Mill |
+| `GOLD_MINE` | 3423 (0xD5F) |  | Gold Mine |
+| `STABLES` | 3424 (0xD60) |  | Stables |
+| `CENARION_HOLD` | 3425 (0xD61) |  | Cenarion Hold |
+| `STAGHELM_POINT` | 3426 (0xD62) |  | Staghelm Point |
+| `BRONZEBEARD_ENCAMPMENT` | 3427 (0xD63) |  | Bronzebeard Encampment |
+| `AHN_QIRAJ` | 3428 (0xD64) |  | Ahn'Qiraj |
+| `RUINS_OF_AHN_QIRAJ` | 3429 (0xD65) |  | Ruins of Ahn'Qiraj |
+| `EVERSONG_WOODS` | 3430 (0xD66) |  | Eversong Woods |
+| `SUNSTRIDER_ISLE` | 3431 (0xD67) |  | Sunstrider Isle |
+| `SHRINE_OF_DATH_REMAR` | 3432 (0xD68) |  | Shrine of Dath'Remar |
+| `GHOSTLANDS` | 3433 (0xD69) |  | Ghostlands |
+| `SCARAB_TERRACE` | 3434 (0xD6A) |  | Scarab Terrace |
+| `GENERALS_TERRACE` | 3435 (0xD6B) |  | General's Terrace |
+| `THE_RESERVOIR` | 3436 (0xD6C) |  | The Reservoir |
+| `THE_HATCHERY` | 3437 (0xD6D) |  | The Hatchery |
+| `THE_COMB` | 3438 (0xD6E) |  | The Comb |
+| `WATCHERS_TERRACE` | 3439 (0xD6F) |  | Watchers' Terrace |
+| `SCARAB_TERRACE1` | 3440 (0xD70) |  | Scarab Terrace |
+| `GENERALS_TERRACE1` | 3441 (0xD71) |  | General's Terrace |
+| `THE_RESERVOIR1` | 3442 (0xD72) |  | The Reservoir |
+| `THE_HATCHERY1` | 3443 (0xD73) |  | The Hatchery |
+| `THE_COMB1` | 3444 (0xD74) |  | The Comb |
+| `WATCHERS_TERRACE1` | 3445 (0xD75) |  | Watchers' Terrace |
+| `TWILIGHTS_RUN` | 3446 (0xD76) |  | Twilight's Run |
+| `ORTELLS_HIDEOUT` | 3447 (0xD77) |  | Ortell's Hideout |
+| `SCARAB_TERRACE2` | 3448 (0xD78) |  | Scarab Terrace |
+| `GENERALS_TERRACE2` | 3449 (0xD79) |  | General's Terrace |
+| `THE_RESERVOIR2` | 3450 (0xD7A) |  | The Reservoir |
+| `THE_HATCHERY2` | 3451 (0xD7B) |  | The Hatchery |
+| `THE_COMB2` | 3452 (0xD7C) |  | The Comb |
+| `WATCHERS_TERRACE2` | 3453 (0xD7D) |  | Watchers' Terrace |
+| `RUINS_OF_AHN_QIRAJ1` | 3454 (0xD7E) |  | Ruins of Ahn'Qiraj |
+| `THE_NORTH_SEA` | 3455 (0xD7F) |  | The North Sea |
+| `NAXXRAMAS` | 3456 (0xD80) |  | Naxxramas |
+| `KARAZHAN1` | 3457 (0xD81) |  | Karazhan |
+| `CITY` | 3459 (0xD83) |  | City |
+| `GOLDEN_STRAND` | 3460 (0xD84) |  | Golden Strand |
+| `SUNSAIL_ANCHORAGE` | 3461 (0xD85) |  | Sunsail Anchorage |
+| `FAIRBREEZE_VILLAGE` | 3462 (0xD86) |  | Fairbreeze Village |
+| `MAGISTERS_GATE` | 3463 (0xD87) |  | Magisters Gate |
+| `FARSTRIDER_RETREAT` | 3464 (0xD88) |  | Farstrider Retreat |
+| `NORTH_SANCTUM` | 3465 (0xD89) |  | North Sanctum |
+| `WEST_SANCTUM` | 3466 (0xD8A) |  | West Sanctum |
+| `EAST_SANCTUM` | 3467 (0xD8B) |  | East Sanctum |
+| `SALTHERILS_HAVEN` | 3468 (0xD8C) |  | Saltheril's Haven |
+| `THURONS_LIVERY` | 3469 (0xD8D) |  | Thuron's Livery |
+| `STILLWHISPER_POND` | 3470 (0xD8E) |  | Stillwhisper Pond |
+| `THE_LIVING_WOOD` | 3471 (0xD8F) |  | The Living Wood |
+| `AZUREBREEZE_COAST` | 3472 (0xD90) |  | Azurebreeze Coast |
+| `LAKE_ELRENDAR` | 3473 (0xD91) |  | Lake Elrendar |
+| `THE_SCORCHED_GROVE` | 3474 (0xD92) |  | The Scorched Grove |
+| `ZEB_WATHA` | 3475 (0xD93) |  | Zeb'Watha |
+| `TOR_WATHA` | 3476 (0xD94) |  | Tor'Watha |
+| `KARAZHAN_UNUSED` | 3477 (0xD95) |  | Karazhan *UNUSED* |
+| `GATES_OF_AHN_QIRAJ` | 3478 (0xD96) |  | Gates of Ahn'Qiraj |
+| `THE_VEILED_SEA7` | 3479 (0xD97) |  | The Veiled Sea |
+| `DUSKWITHER_GROUNDS` | 3480 (0xD98) |  | Duskwither Grounds |
+| `DUSKWITHER_SPIRE` | 3481 (0xD99) |  | Duskwither Spire |
+| `THE_DEAD_SCAR` | 3482 (0xD9A) |  | The Dead Scar |
+| `HELLFIRE_PENINSULA` | 3483 (0xD9B) |  | Hellfire Peninsula |
+| `THE_SUNSPIRE` | 3484 (0xD9C) |  | The Sunspire |
+| `FALTHRIEN_ACADEMY` | 3485 (0xD9D) |  | Falthrien Academy |
+| `RAVENHOLDT_MANOR` | 3486 (0xD9E) |  | Ravenholdt Manor |
+| `SILVERMOON_CITY` | 3487 (0xD9F) |  | Silvermoon City |
+| `TRANQUILLIEN` | 3488 (0xDA0) |  | Tranquillien |
+| `SUNCROWN_VILLAGE` | 3489 (0xDA1) |  | Suncrown Village |
+| `GOLDENMIST_VILLAGE` | 3490 (0xDA2) |  | Goldenmist Village |
+| `WINDRUNNER_VILLAGE` | 3491 (0xDA3) |  | Windrunner Village |
+| `WINDRUNNER_SPIRE` | 3492 (0xDA4) |  | Windrunner Spire |
+| `SANCTUM_OF_THE_SUN` | 3493 (0xDA5) |  | Sanctum of the Sun |
+| `SANCTUM_OF_THE_MOON` | 3494 (0xDA6) |  | Sanctum of the Moon |
+| `DAWNSTAR_SPIRE` | 3495 (0xDA7) |  | Dawnstar Spire |
+| `FARSTRIDER_ENCLAVE` | 3496 (0xDA8) |  | Farstrider Enclave |
+| `AN_DAROTH` | 3497 (0xDA9) |  | An'daroth |
+| `AN_TELAS` | 3498 (0xDAA) |  | An'telas |
+| `AN_OWYN` | 3499 (0xDAB) |  | An'owyn |
+| `DEATHOLME` | 3500 (0xDAC) |  | Deatholme |
+| `BLEEDING_ZIGGURAT` | 3501 (0xDAD) |  | Bleeding Ziggurat |
+| `HOWLING_ZIGGURAT` | 3502 (0xDAE) |  | Howling Ziggurat |
+| `SHALANDIS_ISLE` | 3503 (0xDAF) |  | Shalandis Isle |
+| `TORYL_ESTATE` | 3504 (0xDB0) |  | Toryl Estate |
+| `UNDERLIGHT_MINES` | 3505 (0xDB1) |  | Underlight Mines |
+| `ANDILIEN_ESTATE` | 3506 (0xDB2) |  | Andilien Estate |
+| `HATCHET_HILLS` | 3507 (0xDB3) |  | Hatchet Hills |
+| `AMANI_PASS` | 3508 (0xDB4) |  | Amani Pass |
+| `SUNGRAZE_PEAK` | 3509 (0xDB5) |  | Sungraze Peak |
+| `AMANI_CATACOMBS` | 3510 (0xDB6) |  | Amani Catacombs |
+| `TOWER_OF_THE_DAMNED` | 3511 (0xDB7) |  | Tower of the Damned |
+| `ZEB_SORA` | 3512 (0xDB8) |  | Zeb'Sora |
+| `LAKE_ELRENDAR1` | 3513 (0xDB9) |  | Lake Elrendar |
+| `THE_DEAD_SCAR1` | 3514 (0xDBA) |  | The Dead Scar |
+| `ELRENDAR_RIVER` | 3515 (0xDBB) |  | Elrendar River |
+| `ZEB_TELA` | 3516 (0xDBC) |  | Zeb'Tela |
+| `ZEB_NOWA` | 3517 (0xDBD) |  | Zeb'Nowa |
+| `NAGRAND` | 3518 (0xDBE) |  | Nagrand |
+| `TEROKKAR_FOREST` | 3519 (0xDBF) |  | Terokkar Forest |
+| `SHADOWMOON_VALLEY` | 3520 (0xDC0) |  | Shadowmoon Valley |
+| `ZANGARMARSH` | 3521 (0xDC1) |  | Zangarmarsh |
+| `BLADES_EDGE_MOUNTAINS` | 3522 (0xDC2) |  | Blade's Edge Mountains |
+| `NETHERSTORM` | 3523 (0xDC3) |  | Netherstorm |
+| `AZUREMYST_ISLE` | 3524 (0xDC4) |  | Azuremyst Isle |
+| `BLOODMYST_ISLE` | 3525 (0xDC5) |  | Bloodmyst Isle |
+| `AMMEN_VALE` | 3526 (0xDC6) |  | Ammen Vale |
+| `CRASH_SITE` | 3527 (0xDC7) |  | Crash Site |
+| `SILVERLINE_LAKE` | 3528 (0xDC8) |  | Silverline Lake |
+| `NESTLEWOOD_THICKET` | 3529 (0xDC9) |  | Nestlewood Thicket |
+| `SHADOW_RIDGE` | 3530 (0xDCA) |  | Shadow Ridge |
+| `SKULKING_ROW` | 3531 (0xDCB) |  | Skulking Row |
+| `DAWNING_LANE` | 3532 (0xDCC) |  | Dawning Lane |
+| `RUINS_OF_SILVERMOON` | 3533 (0xDCD) |  | Ruins of Silvermoon |
+| `FETHS_WAY` | 3534 (0xDCE) |  | Feth's Way |
+| `HELLFIRE_CITADEL` | 3535 (0xDCF) |  | Hellfire Citadel |
+| `THRALLMAR` | 3536 (0xDD0) |  | Thrallmar |
+| `REUSE` | 3537 (0xDD1) |  | REUSE |
+| `HONOR_HOLD` | 3538 (0xDD2) |  | Honor Hold |
+| `THE_STAIR_OF_DESTINY` | 3539 (0xDD3) |  | The Stair of Destiny |
+| `TWISTING_NETHER` | 3540 (0xDD4) |  | Twisting Nether |
+| `FORGE_CAMP_MAGEDDON` | 3541 (0xDD5) |  | Forge Camp: Mageddon |
+| `THE_PATH_OF_GLORY` | 3542 (0xDD6) |  | The Path of Glory |
+| `THE_GREAT_FISSURE` | 3543 (0xDD7) |  | The Great Fissure |
+| `PLAIN_OF_SHARDS` | 3544 (0xDD8) |  | Plain of Shards |
+| `HELLFIRE_CITADEL1` | 3545 (0xDD9) |  | Hellfire Citadel |
+| `EXPEDITION_ARMORY` | 3546 (0xDDA) |  | Expedition Armory |
+| `THRONE_OF_KIL_JAEDEN` | 3547 (0xDDB) |  | Throne of Kil'jaeden |
+| `FORGE_CAMP_RAGE` | 3548 (0xDDC) |  | Forge Camp: Rage |
+| `INVASION_POINT_ANNIHILATOR` | 3549 (0xDDD) |  | Invasion Point: Annihilator |
+| `BORUNE_RUINS` | 3550 (0xDDE) |  | Borune Ruins |
+| `RUINS_OF_SHA_NAAR` | 3551 (0xDDF) |  | Ruins of Sha'naar |
+| `TEMPLE_OF_TELHAMAT` | 3552 (0xDE0) |  | Temple of Telhamat |
+| `POOLS_OF_AGGONAR` | 3553 (0xDE1) |  | Pools of Aggonar |
+| `FALCON_WATCH` | 3554 (0xDE2) |  | Falcon Watch |
+| `MAG_HAR_POST` | 3555 (0xDE3) |  | Mag'har Post |
+| `DEN_OF_HAAL_ESH` | 3556 (0xDE4) |  | Den of Haal'esh |
+| `THE_EXODAR` | 3557 (0xDE5) |  | The Exodar |
+| `ELRENDAR_FALLS` | 3558 (0xDE6) |  | Elrendar Falls |
+| `NESTLEWOOD_HILLS` | 3559 (0xDE7) |  | Nestlewood Hills |
+| `AMMEN_FIELDS` | 3560 (0xDE8) |  | Ammen Fields |
+| `THE_SACRED_GROVE` | 3561 (0xDE9) |  | The Sacred Grove |
+| `HELLFIRE_RAMPARTS` | 3562 (0xDEA) |  | Hellfire Ramparts |
+| `HELLFIRE_CITADEL2` | 3563 (0xDEB) |  | Hellfire Citadel |
+| `EMBERGLADE` | 3564 (0xDEC) |  | Emberglade |
+| `CENARION_REFUGE` | 3565 (0xDED) |  | Cenarion Refuge |
+| `MOONWING_DEN` | 3566 (0xDEE) |  | Moonwing Den |
+| `POD_CLUSTER` | 3567 (0xDEF) |  | Pod Cluster |
+| `POD_WRECKAGE` | 3568 (0xDF0) |  | Pod Wreckage |
+| `TIDES_HOLLOW` | 3569 (0xDF1) |  | Tides' Hollow |
+| `WRATHSCALE_POINT` | 3570 (0xDF2) |  | Wrathscale Point |
+| `BRISTLELIMB_VILLAGE` | 3571 (0xDF3) |  | Bristlelimb Village |
+| `STILLPINE_HOLD` | 3572 (0xDF4) |  | Stillpine Hold |
+| `ODESYUS_LANDING` | 3573 (0xDF5) |  | Odesyus' Landing |
+| `VALAARS_BERTH` | 3574 (0xDF6) |  | Valaar's Berth |
+| `SILTING_SHORE` | 3575 (0xDF7) |  | Silting Shore |
+| `AZURE_WATCH` | 3576 (0xDF8) |  | Azure Watch |
+| `GEEZLES_CAMP` | 3577 (0xDF9) |  | Geezle's Camp |
+| `MENAGERIE_WRECKAGE` | 3578 (0xDFA) |  | Menagerie Wreckage |
+| `TRAITORS_COVE` | 3579 (0xDFB) |  | Traitor's Cove |
+| `WILDWIND_PEAK` | 3580 (0xDFC) |  | Wildwind Peak |
+| `WILDWIND_PATH` | 3581 (0xDFD) |  | Wildwind Path |
+| `ZETH_GOR` | 3582 (0xDFE) |  | Zeth'Gor |
+| `BERYL_COAST` | 3583 (0xDFF) |  | Beryl Coast |
+| `BLOOD_WATCH` | 3584 (0xE00) |  | Blood Watch |
+| `BLADEWOOD` | 3585 (0xE01) |  | Bladewood |
+| `THE_VECTOR_COIL` | 3586 (0xE02) |  | The Vector Coil |
+| `THE_WARP_PISTON` | 3587 (0xE03) |  | The Warp Piston |
+| `THE_CRYO_CORE` | 3588 (0xE04) |  | The Cryo-Core |
+| `THE_CRIMSON_REACH` | 3589 (0xE05) |  | The Crimson Reach |
+| `WRATHSCALE_LAIR` | 3590 (0xE06) |  | Wrathscale Lair |
+| `RUINS_OF_LORETH_ARAN` | 3591 (0xE07) |  | Ruins of Loreth'Aran |
+| `NAZZIVIAN` | 3592 (0xE08) |  | Nazzivian |
+| `AXXARIEN` | 3593 (0xE09) |  | Axxarien |
+| `BLACKSILT_SHORE` | 3594 (0xE0A) |  | Blacksilt Shore |
+| `THE_FOUL_POOL` | 3595 (0xE0B) |  | The Foul Pool |
+| `THE_HIDDEN_REEF` | 3596 (0xE0C) |  | The Hidden Reef |
+| `AMBERWEB_PASS` | 3597 (0xE0D) |  | Amberweb Pass |
+| `WYRMSCAR_ISLAND` | 3598 (0xE0E) |  | Wyrmscar Island |
+| `TALON_STAND` | 3599 (0xE0F) |  | Talon Stand |
+| `BRISTLELIMB_ENCLAVE` | 3600 (0xE10) |  | Bristlelimb Enclave |
+| `RAGEFEATHER_RIDGE` | 3601 (0xE11) |  | Ragefeather Ridge |
+| `KESSELS_CROSSING` | 3602 (0xE12) |  | Kessel's Crossing |
+| `TEL_ATHIONS_CAMP` | 3603 (0xE13) |  | Tel'athion's Camp |
+| `THE_BLOODCURSED_REEF` | 3604 (0xE14) |  | The Bloodcursed Reef |
+| `HYJAL_PAST` | 3605 (0xE15) |  | Hyjal Past |
+| `HYJAL_SUMMIT` | 3606 (0xE16) |  | Hyjal Summit |
+| `SERPENTSHRINE_CAVERN` | 3607 (0xE17) |  | Serpentshrine Cavern |
+| `VINDICATORS_REST` | 3608 (0xE18) |  | Vindicator's Rest |
+| `UNUSEDTHREE` | 3609 (0xE19) |  | Unused3 |
+| `BURNING_BLADE_RUINS` | 3610 (0xE1A) |  | Burning Blade Ruins |
+| `CLAN_WATCH` | 3611 (0xE1B) |  | Clan Watch |
+| `BLOODCURSE_ISLE` | 3612 (0xE1C) |  | Bloodcurse Isle |
+| `GARADAR` | 3613 (0xE1D) |  | Garadar |
+| `SKYSONG_LAKE` | 3614 (0xE1E) |  | Skysong Lake |
+| `THRONE_OF_THE_ELEMENTS` | 3615 (0xE1F) |  | Throne of the Elements |
+| `LAUGHING_SKULL_RUINS` | 3616 (0xE20) |  | Laughing Skull Ruins |
+| `WARMAUL_HILL` | 3617 (0xE21) |  | Warmaul Hill |
+| `GRUULS_LAIR` | 3618 (0xE22) |  | Gruul's Lair |
+| `AUREN_RIDGE` | 3619 (0xE23) |  | Auren Ridge |
+| `AUREN_FALLS` | 3620 (0xE24) |  | Auren Falls |
+| `LAKE_SUNSPRING` | 3621 (0xE25) |  | Lake Sunspring |
+| `SUNSPRING_POST` | 3622 (0xE26) |  | Sunspring Post |
+| `AERIS_LANDING` | 3623 (0xE27) |  | Aeris Landing |
+| `FORGE_CAMP_FEAR` | 3624 (0xE28) |  | Forge Camp: Fear |
+| `FORGE_CAMP_HATE` | 3625 (0xE29) |  | Forge Camp: Hate |
+| `TELAAR` | 3626 (0xE2A) |  | Telaar |
+| `NORTHWIND_CLEFT` | 3627 (0xE2B) |  | Northwind Cleft |
+| `HALAA` | 3628 (0xE2C) |  | Halaa |
+| `SOUTHWIND_CLEFT` | 3629 (0xE2D) |  | Southwind Cleft |
+| `OSHU_GUN` | 3630 (0xE2E) |  | Oshu'gun |
+| `SPIRIT_FIELDS` | 3631 (0xE2F) |  | Spirit Fields |
+| `SHAMANAR` | 3632 (0xE30) |  | Shamanar |
+| `ANCESTRAL_GROUNDS` | 3633 (0xE31) |  | Ancestral Grounds |
+| `WINDYREED_VILLAGE` | 3634 (0xE32) |  | Windyreed Village |
+| `UNUSED2` | 3635 (0xE33) |  | Unused2 |
+| `ELEMENTAL_PLATEAU` | 3636 (0xE34) |  | Elemental Plateau |
+| `KILSORROW_FORTRESS` | 3637 (0xE35) |  | Kil'sorrow Fortress |
+| `THE_RING_OF_TRIALS` | 3638 (0xE36) |  | The Ring of Trials |
+| `SILVERMYST_ISLE` | 3639 (0xE37) |  | Silvermyst Isle |
+| `DAGGERFEN_VILLAGE` | 3640 (0xE38) |  | Daggerfen Village |
+| `UMBRAFEN_VILLAGE` | 3641 (0xE39) |  | Umbrafen Village |
+| `FERALFEN_VILLAGE` | 3642 (0xE3A) |  | Feralfen Village |
+| `BLOODSCALE_ENCLAVE` | 3643 (0xE3B) |  | Bloodscale Enclave |
+| `TELREDOR` | 3644 (0xE3C) |  | Telredor |
+| `ZABRA_JIN` | 3645 (0xE3D) |  | Zabra'jin |
+| `QUAGG_RIDGE` | 3646 (0xE3E) |  | Quagg Ridge |
+| `THE_SPAWNING_GLEN` | 3647 (0xE3F) |  | The Spawning Glen |
+| `THE_DEAD_MIRE` | 3648 (0xE40) |  | The Dead Mire |
+| `SPOREGGAR` | 3649 (0xE41) |  | Sporeggar |
+| `ANGO_ROSH_GROUNDS` | 3650 (0xE42) |  | Ango'rosh Grounds |
+| `ANGO_ROSH_STRONGHOLD` | 3651 (0xE43) |  | Ango'rosh Stronghold |
+| `FUNGGOR_CAVERN` | 3652 (0xE44) |  | Funggor Cavern |
+| `SERPENT_LAKE` | 3653 (0xE45) |  | Serpent Lake |
+| `THE_DRAIN` | 3654 (0xE46) |  | The Drain |
+| `UMBRAFEN_LAKE` | 3655 (0xE47) |  | Umbrafen Lake |
+| `MARSHLIGHT_LAKE` | 3656 (0xE48) |  | Marshlight Lake |
+| `PORTAL_CLEARING` | 3657 (0xE49) |  | Portal Clearing |
+| `SPOREWIND_LAKE` | 3658 (0xE4A) |  | Sporewind Lake |
+| `THE_LAGOON` | 3659 (0xE4B) |  | The Lagoon |
+| `BLADES_RUN` | 3660 (0xE4C) |  | Blades' Run |
+| `BLADE_TOOTH_CANYON` | 3661 (0xE4D) |  | Blade Tooth Canyon |
+| `COMMONS_HALL` | 3662 (0xE4E) |  | Commons Hall |
+| `DERELICT_MANOR` | 3663 (0xE4F) |  | Derelict Manor |
+| `HUNTRESS_OF_THE_SUN` | 3664 (0xE50) |  | Huntress of the Sun |
+| `FALCONWING_SQUARE` | 3665 (0xE51) |  | Falconwing Square |
+| `HALAANI_BASIN` | 3666 (0xE52) |  | Halaani Basin |
+| `HEWN_BOG` | 3667 (0xE53) |  | Hewn Bog |
+| `BOHA_MU_RUINS` | 3668 (0xE54) |  | Boha'mu Ruins |
+| `THE_STADIUM` | 3669 (0xE55) |  | The Stadium |
+| `THE_OVERLOOK` | 3670 (0xE56) |  | The Overlook |
+| `BROKEN_HILL` | 3671 (0xE57) |  | Broken Hill |
+| `MAG_HARI_PROCESSION` | 3672 (0xE58) |  | Mag'hari Procession |
+| `NESINGWARY_SAFARI` | 3673 (0xE59) |  | Nesingwary Safari |
+| `CENARION_THICKET` | 3674 (0xE5A) |  | Cenarion Thicket |
+| `TUUREM` | 3675 (0xE5B) |  | Tuurem |
+| `VEIL_SHIENOR` | 3676 (0xE5C) |  | Veil Shienor |
+| `VEIL_SKITH` | 3677 (0xE5D) |  | Veil Skith |
+| `VEIL_SHALAS` | 3678 (0xE5E) |  | Veil Shalas |
+| `SKETTIS` | 3679 (0xE5F) |  | Skettis |
+| `BLACKWIND_VALLEY` | 3680 (0xE60) |  | Blackwind Valley |
+| `FIREWING_POINT` | 3681 (0xE61) |  | Firewing Point |
+| `GRANGOL_VAR_VILLAGE` | 3682 (0xE62) |  | Grangol'var Village |
+| `STONEBREAKER_HOLD` | 3683 (0xE63) |  | Stonebreaker Hold |
+| `ALLERIAN_STRONGHOLD` | 3684 (0xE64) |  | Allerian Stronghold |
+| `BONECHEWER_RUINS` | 3685 (0xE65) |  | Bonechewer Ruins |
+| `VEIL_LITHIC` | 3686 (0xE66) |  | Veil Lithic |
+| `OLEMBAS` | 3687 (0xE67) |  | Olembas |
+| `AUCHINDOUN` | 3688 (0xE68) |  | Auchindoun |
+| `VEIL_RESKK` | 3689 (0xE69) |  | Veil Reskk |
+| `BLACKWIND_LAKE` | 3690 (0xE6A) |  | Blackwind Lake |
+| `LAKE_ERE_NORU` | 3691 (0xE6B) |  | Lake Ere'Noru |
+| `LAKE_JORUNE` | 3692 (0xE6C) |  | Lake Jorune |
+| `SKETHYL_MOUNTAINS` | 3693 (0xE6D) |  | Skethyl Mountains |
+| `MISTY_RIDGE` | 3694 (0xE6E) |  | Misty Ridge |
+| `THE_BROKEN_HILLS` | 3695 (0xE6F) |  | The Broken Hills |
+| `THE_BARRIER_HILLS` | 3696 (0xE70) |  | The Barrier Hills |
+| `THE_BONE_WASTES` | 3697 (0xE71) |  | The Bone Wastes |
+| `NAGRAND_ARENA` | 3698 (0xE72) |  | Nagrand Arena |
+| `LAUGHING_SKULL_COURTYARD` | 3699 (0xE73) |  | Laughing Skull Courtyard |
+| `THE_RING_OF_BLOOD` | 3700 (0xE74) |  | The Ring of Blood |
+| `ARENA_FLOOR` | 3701 (0xE75) |  | Arena Floor |
+| `BLADES_EDGE_ARENA` | 3702 (0xE76) |  | Blade's Edge Arena |
+| `SHATTRATH_CITY` | 3703 (0xE77) |  | Shattrath City |
+| `THE_SHEPHERDS_GATE` | 3704 (0xE78) |  | The Shepherd's Gate |
+| `TELAARI_BASIN` | 3705 (0xE79) |  | Telaari Basin |
+| `THE_DARK_PORTAL1` | 3706 (0xE7A) |  | The Dark Portal |
+| `ALLIANCE_BASE` | 3707 (0xE7B) |  | Alliance Base |
+| `HORDE_ENCAMPMENT` | 3708 (0xE7C) |  | Horde Encampment |
+| `NIGHT_ELF_VILLAGE` | 3709 (0xE7D) |  | Night Elf Village |
+| `NORDRASSIL` | 3710 (0xE7E) |  | Nordrassil |
+| `REUSE_ME` | 3711 (0xE7F) |  | Reuse Me |
+| `AREA_52` | 3712 (0xE80) |  | Area 52 |
+| `THE_BLOOD_FURNACE` | 3713 (0xE81) |  | The Blood Furnace |
+| `THE_SHATTERED_HALLS` | 3714 (0xE82) |  | The Shattered Halls |
+| `THE_STEAMVAULT` | 3715 (0xE83) |  | The Steamvault |
+| `THE_UNDERBOG` | 3716 (0xE84) |  | The Underbog |
+| `THE_SLAVE_PENS` | 3717 (0xE85) |  | The Slave Pens |
+| `SWAMPRAT_POST` | 3718 (0xE86) |  | Swamprat Post |
+| `BLEEDING_HOLLOW_RUINS` | 3719 (0xE87) |  | Bleeding Hollow Ruins |
+| `TWIN_SPIRE_RUINS` | 3720 (0xE88) |  | Twin Spire Ruins |
+| `THE_CRUMBLING_WASTE` | 3721 (0xE89) |  | The Crumbling Waste |
+| `MANAFORGE_ARA` | 3722 (0xE8A) |  | Manaforge Ara |
+| `ARKLON_RUINS` | 3723 (0xE8B) |  | Arklon Ruins |
+| `COSMOWRENCH` | 3724 (0xE8C) |  | Cosmowrench |
+| `RUINS_OF_ENKAAT` | 3725 (0xE8D) |  | Ruins of Enkaat |
+| `MANAFORGE_B_NAAR` | 3726 (0xE8E) |  | Manaforge B'naar |
+| `THE_SCRAP_FIELD` | 3727 (0xE8F) |  | The Scrap Field |
+| `THE_VORTEX_FIELDS` | 3728 (0xE90) |  | The Vortex Fields |
+| `THE_HEAP` | 3729 (0xE91) |  | The Heap |
+| `MANAFORGE_CORUU` | 3730 (0xE92) |  | Manaforge Coruu |
+| `THE_TEMPEST_RIFT` | 3731 (0xE93) |  | The Tempest Rift |
+| `KIRIN_VAR_VILLAGE` | 3732 (0xE94) |  | Kirin'Var Village |
+| `THE_VIOLET_TOWER` | 3733 (0xE95) |  | The Violet Tower |
+| `MANAFORGE_DURO` | 3734 (0xE96) |  | Manaforge Duro |
+| `VOIDWIND_PLATEAU` | 3735 (0xE97) |  | Voidwind Plateau |
+| `MANAFORGE_ULTRIS` | 3736 (0xE98) |  | Manaforge Ultris |
+| `CELESTIAL_RIDGE` | 3737 (0xE99) |  | Celestial Ridge |
+| `THE_STORMSPIRE` | 3738 (0xE9A) |  | The Stormspire |
+| `FORGE_BASE_OBLIVION` | 3739 (0xE9B) |  | Forge Base: Oblivion |
+| `FORGE_BASE_GEHENNA` | 3740 (0xE9C) |  | Forge Base: Gehenna |
+| `RUINS_OF_FARAHLON` | 3741 (0xE9D) |  | Ruins of Farahlon |
+| `SOCRETHARS_SEAT` | 3742 (0xE9E) |  | Socrethar's Seat |
+| `LEGION_HOLD` | 3743 (0xE9F) |  | Legion Hold |
+| `SHADOWMOON_VILLAGE` | 3744 (0xEA0) |  | Shadowmoon Village |
+| `WILDHAMMER_STRONGHOLD` | 3745 (0xEA1) |  | Wildhammer Stronghold |
+| `THE_HAND_OF_GUL_DAN` | 3746 (0xEA2) |  | The Hand of Gul'dan |
+| `THE_FEL_PITS` | 3747 (0xEA3) |  | The Fel Pits |
+| `THE_DEATHFORGE` | 3748 (0xEA4) |  | The Deathforge |
+| `COILSKAR_CISTERN` | 3749 (0xEA5) |  | Coilskar Cistern |
+| `COILSKAR_POINT` | 3750 (0xEA6) |  | Coilskar Point |
+| `SUNFIRE_POINT` | 3751 (0xEA7) |  | Sunfire Point |
+| `ILLIDARI_POINT` | 3752 (0xEA8) |  | Illidari Point |
+| `RUINS_OF_BAA_RI` | 3753 (0xEA9) |  | Ruins of Baa'ri |
+| `ALTAR_OF_SHA_TAR` | 3754 (0xEAA) |  | Altar of Sha'tar |
+| `THE_STAIR_OF_DOOM` | 3755 (0xEAB) |  | The Stair of Doom |
+| `RUINS_OF_KARABOR` | 3756 (0xEAC) |  | Ruins of Karabor |
+| `ATA_MAL_TERRACE` | 3757 (0xEAD) |  | Ata'mal Terrace |
+| `NETHERWING_FIELDS` | 3758 (0xEAE) |  | Netherwing Fields |
+| `NETHERWING_LEDGE` | 3759 (0xEAF) |  | Netherwing Ledge |
+| `THE_BARRIER_HILLS1` | 3760 (0xEB0) |  | The Barrier Hills |
+| `THE_HIGH_PATH` | 3761 (0xEB1) |  | The High Path |
+| `WINDYREED_PASS` | 3762 (0xEB2) |  | Windyreed Pass |
+| `ZANGAR_RIDGE` | 3763 (0xEB3) |  | Zangar Ridge |
+| `THE_TWILIGHT_RIDGE` | 3764 (0xEB4) |  | The Twilight Ridge |
+| `RAZORTHORN_TRAIL` | 3765 (0xEB5) |  | Razorthorn Trail |
+| `OREBOR_HARBORAGE` | 3766 (0xEB6) |  | Orebor Harborage |
+| `BLADES_RUN1` | 3767 (0xEB7) |  | Blades' Run |
+| `JAGGED_RIDGE` | 3768 (0xEB8) |  | Jagged Ridge |
+| `THUNDERLORD_STRONGHOLD` | 3769 (0xEB9) |  | Thunderlord Stronghold |
+| `BLADE_TOOTH_CANYON1` | 3770 (0xEBA) |  | Blade Tooth Canyon |
+| `THE_LIVING_GROVE` | 3771 (0xEBB) |  | The Living Grove |
+| `SYLVANAAR` | 3772 (0xEBC) |  | Sylvanaar |
+| `BLADESPIRE_HOLD` | 3773 (0xEBD) |  | Bladespire Hold |
+| `GRUULS_LAIR1` | 3774 (0xEBE) |  | Gruul's Lair |
+| `CIRCLE_OF_BLOOD` | 3775 (0xEBF) |  | Circle of Blood |
+| `BLOODMAUL_OUTPOST` | 3776 (0xEC0) |  | Bloodmaul Outpost |
+| `BLOODMAUL_CAMP` | 3777 (0xEC1) |  | Bloodmaul Camp |
+| `DRAENETHYST_MINE` | 3778 (0xEC2) |  | Draenethyst Mine |
+| `TROGMAS_CLAIM` | 3779 (0xEC3) |  | Trogma's Claim |
+| `BLACKWING_COVEN` | 3780 (0xEC4) |  | Blackwing Coven |
+| `GRISHNATH` | 3781 (0xEC5) |  | Grishnath |
+| `VEIL_LASHH` | 3782 (0xEC6) |  | Veil Lashh |
+| `VEIL_VEKH` | 3783 (0xEC7) |  | Veil Vekh |
+| `FORGE_CAMP_TERROR` | 3784 (0xEC8) |  | Forge Camp: Terror |
+| `FORGE_CAMP_WRATH` | 3785 (0xEC9) |  | Forge Camp: Wrath |
+| `OGRI_LA` | 3786 (0xECA) |  | Ogri'la |
+| `FORGE_CAMP_ANGER` | 3787 (0xECB) |  | Forge Camp: Anger |
+| `THE_LOW_PATH` | 3788 (0xECC) |  | The Low Path |
+| `SHADOW_LABYRINTH` | 3789 (0xECD) |  | Shadow Labyrinth |
+| `AUCHENAI_CRYPTS` | 3790 (0xECE) |  | Auchenai Crypts |
+| `SETHEKK_HALLS` | 3791 (0xECF) |  | Sethekk Halls |
+| `MANA_TOMBS` | 3792 (0xED0) |  | Mana-Tombs |
+| `FELSPARK_RAVINE` | 3793 (0xED1) |  | Felspark Ravine |
+| `VALLEY_OF_BONES1` | 3794 (0xED2) |  | Valley of Bones |
+| `SHA_NAARI_WASTES` | 3795 (0xED3) |  | Sha'naari Wastes |
+| `THE_WARP_FIELDS` | 3796 (0xED4) |  | The Warp Fields |
+| `FALLEN_SKY_RIDGE` | 3797 (0xED5) |  | Fallen Sky Ridge |
+| `HAAL_ESHI_GORGE` | 3798 (0xED6) |  | Haal'eshi Gorge |
+| `STONEWALL_CANYON` | 3799 (0xED7) |  | Stonewall Canyon |
+| `THORNFANG_HILL` | 3800 (0xED8) |  | Thornfang Hill |
+| `MAG_HAR_GROUNDS` | 3801 (0xED9) |  | Mag'har Grounds |
+| `VOID_RIDGE` | 3802 (0xEDA) |  | Void Ridge |
+| `THE_ABYSSAL_SHELF` | 3803 (0xEDB) |  | The Abyssal Shelf |
+| `THE_LEGION_FRONT` | 3804 (0xEDC) |  | The Legion Front |
+| `ZUL_AMAN` | 3805 (0xEDD) |  | Zul'Aman |
+| `SUPPLY_CARAVAN` | 3806 (0xEDE) |  | Supply Caravan |
+| `REAVERS_FALL` | 3807 (0xEDF) |  | Reaver's Fall |
+| `CENARION_POST` | 3808 (0xEE0) |  | Cenarion Post |
+| `SOUTHERN_RAMPART` | 3809 (0xEE1) |  | Southern Rampart |
+| `NORTHERN_RAMPART` | 3810 (0xEE2) |  | Northern Rampart |
+| `GOR_GAZ_OUTPOST` | 3811 (0xEE3) |  | Gor'gaz Outpost |
+| `SPINEBREAKER_POST` | 3812 (0xEE4) |  | Spinebreaker Post |
+| `THE_PATH_OF_ANGUISH` | 3813 (0xEE5) |  | The Path of Anguish |
+| `EAST_SUPPLY_CARAVAN` | 3814 (0xEE6) |  | East Supply Caravan |
+| `EXPEDITION_POINT` | 3815 (0xEE7) |  | Expedition Point |
+| `ZEPPELIN_CRASH` | 3816 (0xEE8) |  | Zeppelin Crash |
+| `TESTING` | 3817 (0xEE9) |  | Testing |
+| `BLOODSCALE_GROUNDS` | 3818 (0xEEA) |  | Bloodscale Grounds |
+| `DARKCREST_ENCLAVE` | 3819 (0xEEB) |  | Darkcrest Enclave |
+| `EYE_OF_THE_STORM` | 3820 (0xEEC) |  | Eye of the Storm |
+| `WARDENS_CAGE` | 3821 (0xEED) |  | Warden's Cage |
+| `ECLIPSE_POINT` | 3822 (0xEEE) |  | Eclipse Point |
+| `ISLE_OF_TRIBULATIONS` | 3823 (0xEEF) |  | Isle of Tribulations |
+| `BLOODMAUL_RAVINE` | 3824 (0xEF0) |  | Bloodmaul Ravine |
+| `DRAGONS_END` | 3825 (0xEF1) |  | Dragons' End |
+| `DAGGERMAW_CANYON` | 3826 (0xEF2) |  | Daggermaw Canyon |
+| `VEKHAAR_STAND` | 3827 (0xEF3) |  | Vekhaar Stand |
+| `RUUAN_WEALD` | 3828 (0xEF4) |  | Ruuan Weald |
+| `VEIL_RUUAN` | 3829 (0xEF5) |  | Veil Ruuan |
+| `RAVENS_WOOD` | 3830 (0xEF6) |  | Raven's Wood |
+| `DEATHS_DOOR` | 3831 (0xEF7) |  | Death's Door |
+| `VORTEX_PINNACLE` | 3832 (0xEF8) |  | Vortex Pinnacle |
+| `RAZOR_RIDGE` | 3833 (0xEF9) |  | Razor Ridge |
+| `RIDGE_OF_MADNESS` | 3834 (0xEFA) |  | Ridge of Madness |
+| `DUSTQUILL_RAVINE` | 3835 (0xEFB) |  | Dustquill Ravine |
+| `MAGTHERIDONS_LAIR` | 3836 (0xEFC) |  | Magtheridon's Lair |
+| `SUNFURY_HOLD` | 3837 (0xEFD) |  | Sunfury Hold |
+| `SPINEBREAKER_MOUNTAINS` | 3838 (0xEFE) |  | Spinebreaker Mountains |
+| `ABANDONED_ARMORY` | 3839 (0xEFF) |  | Abandoned Armory |
+| `THE_BLACK_TEMPLE` | 3840 (0xF00) |  | The Black Temple |
+| `DARKCREST_SHORE` | 3841 (0xF01) |  | Darkcrest Shore |
+| `TEMPEST_KEEP` | 3842 (0xF02) |  | Tempest Keep |
+| `MOK_NATHAL_VILLAGE` | 3844 (0xF04) |  | Mok'Nathal Village |
+| `TEMPEST_KEEP1` | 3845 (0xF05) |  | Tempest Keep |
+| `THE_ARCATRAZ` | 3846 (0xF06) |  | The Arcatraz |
+| `THE_BOTANICA` | 3847 (0xF07) |  | The Botanica |
+| `THE_ARCATRAZ1` | 3848 (0xF08) |  | The Arcatraz |
+| `THE_MECHANAR` | 3849 (0xF09) |  | The Mechanar |
+| `NETHERSTONE` | 3850 (0xF0A) |  | Netherstone |
+| `MIDREALM_POST` | 3851 (0xF0B) |  | Midrealm Post |
+| `TULUMANS_LANDING` | 3852 (0xF0C) |  | Tuluman's Landing |
+| `PROTECTORATE_WATCH_POST` | 3854 (0xF0E) |  | Protectorate Watch Post |
+| `CIRCLE_OF_BLOOD_ARENA` | 3855 (0xF0F) |  | Circle of Blood Arena |
+| `ELRENDAR_CROSSING` | 3856 (0xF10) |  | Elrendar Crossing |
+| `AMMEN_FORD` | 3857 (0xF11) |  | Ammen Ford |
+| `RAZORTHORN_SHELF` | 3858 (0xF12) |  | Razorthorn Shelf |
+| `SILMYR_LAKE` | 3859 (0xF13) |  | Silmyr Lake |
+| `RAASTOK_GLADE` | 3860 (0xF14) |  | Raastok Glade |
+| `THALASSIAN_PASS` | 3861 (0xF15) |  | Thalassian Pass |
+| `CHURNING_GULCH` | 3862 (0xF16) |  | Churning Gulch |
+| `BROKEN_WILDS` | 3863 (0xF17) |  | Broken Wilds |
+| `BASH_IR_LANDING` | 3864 (0xF18) |  | Bash'ir Landing |
+| `CRYSTAL_SPINE` | 3865 (0xF19) |  | Crystal Spine |
+| `SKALD` | 3866 (0xF1A) |  | Skald |
+| `BLADED_GULCH` | 3867 (0xF1B) |  | Bladed Gulch |
+| `GYRO_PLANK_BRIDGE` | 3868 (0xF1C) |  | Gyro-Plank Bridge |
+| `MAGE_TOWER` | 3869 (0xF1D) |  | Mage Tower |
+| `BLOOD_ELF_TOWER` | 3870 (0xF1E) |  | Blood Elf Tower |
+| `DRAENEI_RUINS` | 3871 (0xF1F) |  | Draenei Ruins |
+| `FEL_REAVER_RUINS` | 3872 (0xF20) |  | Fel Reaver Ruins |
+| `THE_PROVING_GROUNDS` | 3873 (0xF21) |  | The Proving Grounds |
+| `ECO_DOME_FARFIELD` | 3874 (0xF22) |  | Eco-Dome Farfield |
+| `ECO_DOME_SKYPERCH` | 3875 (0xF23) |  | Eco-Dome Skyperch |
+| `ECO_DOME_SUTHERON` | 3876 (0xF24) |  | Eco-Dome Sutheron |
+| `ECO_DOME_MIDREALM` | 3877 (0xF25) |  | Eco-Dome Midrealm |
+| `ETHEREUM_STAGING_GROUNDS` | 3878 (0xF26) |  | Ethereum Staging Grounds |
+| `CHAPEL_YARD` | 3879 (0xF27) |  | Chapel Yard |
+| `ACCESS_SHAFT_ZEON` | 3880 (0xF28) |  | Access Shaft Zeon |
+| `TRELLEUM_MINE` | 3881 (0xF29) |  | Trelleum Mine |
+| `INVASION_POINT_DESTROYER` | 3882 (0xF2A) |  | Invasion Point: Destroyer |
+| `CAMP_OF_BOOM` | 3883 (0xF2B) |  | Camp of Boom |
+| `SPINEBREAKER_PASS` | 3884 (0xF2C) |  | Spinebreaker Pass |
+| `NETHERWEB_RIDGE` | 3885 (0xF2D) |  | Netherweb Ridge |
+| `DERELICT_CARAVAN` | 3886 (0xF2E) |  | Derelict Caravan |
+| `REFUGEE_CARAVAN` | 3887 (0xF2F) |  | Refugee Caravan |
+| `SHADOW_TOMB` | 3888 (0xF30) |  | Shadow Tomb |
+| `VEIL_RHAZE` | 3889 (0xF31) |  | Veil Rhaze |
+| `TOMB_OF_LIGHTS` | 3890 (0xF32) |  | Tomb of Lights |
+| `CARRION_HILL` | 3891 (0xF33) |  | Carrion Hill |
+| `WRITHING_MOUND` | 3892 (0xF34) |  | Writhing Mound |
+| `RING_OF_OBSERVANCE` | 3893 (0xF35) |  | Ring of Observance |
+| `AUCHENAI_GROUNDS` | 3894 (0xF36) |  | Auchenai Grounds |
+| `CENARION_WATCHPOST` | 3895 (0xF37) |  | Cenarion Watchpost |
+| `ALDOR_RISE` | 3896 (0xF38) |  | Aldor Rise |
+| `TERRACE_OF_LIGHT` | 3897 (0xF39) |  | Terrace of Light |
+| `SCRYERS_TIER` | 3898 (0xF3A) |  | Scryer's Tier |
+| `LOWER_CITY` | 3899 (0xF3B) |  | Lower City |
+| `INVASION_POINT_OVERLORD` | 3900 (0xF3C) |  | Invasion Point: Overlord |
+| `ALLERIAN_POST` | 3901 (0xF3D) |  | Allerian Post |
+| `STONEBREAKER_CAMP` | 3902 (0xF3E) |  | Stonebreaker Camp |
+| `BOULDER_MOK` | 3903 (0xF3F) |  | Boulder'mok |
+| `CURSED_HOLLOW` | 3904 (0xF40) |  | Cursed Hollow |
+| `COILFANG_RESERVOIR` | 3905 (0xF41) |  | Coilfang Reservoir |
+| `THE_BLOODWASH` | 3906 (0xF42) |  | The Bloodwash |
+| `VERIDIAN_POINT` | 3907 (0xF43) |  | Veridian Point |
+| `MIDDENVALE` | 3908 (0xF44) |  | Middenvale |
+| `THE_LOST_FOLD` | 3909 (0xF45) |  | The Lost Fold |
+| `MYSTWOOD` | 3910 (0xF46) |  | Mystwood |
+| `TRANQUIL_SHORE` | 3911 (0xF47) |  | Tranquil Shore |
+| `GOLDENBOUGH_PASS` | 3912 (0xF48) |  | Goldenbough Pass |
+| `RUNESTONE_FALITHAS` | 3913 (0xF49) |  | Runestone Falithas |
+| `RUNESTONE_SHAN_DOR` | 3914 (0xF4A) |  | Runestone Shan'dor |
+| `FAIRBRIDGE_STRAND` | 3915 (0xF4B) |  | Fairbridge Strand |
+| `MOONGRAZE_WOODS` | 3916 (0xF4C) |  | Moongraze Woods |
+| `AUCHINDOUN1` | 3917 (0xF4D) |  | Auchindoun |
+| `TOSHLEYS_STATION` | 3918 (0xF4E) |  | Toshley's Station |
+| `SINGING_RIDGE` | 3919 (0xF4F) |  | Singing Ridge |
+| `SHATTER_POINT` | 3920 (0xF50) |  | Shatter Point |
+| `ARKLONIS_RIDGE` | 3921 (0xF51) |  | Arklonis Ridge |
+| `BLADESPIRE_OUTPOST` | 3922 (0xF52) |  | Bladespire Outpost |
+| `GRUULS_LAIR2` | 3923 (0xF53) |  | Gruul's Lair |
+| `NORTHMAUL_TOWER` | 3924 (0xF54) |  | Northmaul Tower |
+| `SOUTHMAUL_TOWER` | 3925 (0xF55) |  | Southmaul Tower |
+| `SHATTERED_PLAINS` | 3926 (0xF56) |  | Shattered Plains |
+| `ORONOKS_FARM` | 3927 (0xF57) |  | Oronok's Farm |
+| `THE_ALTAR_OF_DAMNATION` | 3928 (0xF58) |  | The Altar of Damnation |
+| `THE_PATH_OF_CONQUEST` | 3929 (0xF59) |  | The Path of Conquest |
+| `ECLIPSION_FIELDS` | 3930 (0xF5A) |  | Eclipsion Fields |
+| `BLADESPIRE_GROUNDS` | 3931 (0xF5B) |  | Bladespire Grounds |
+| `SKETH_LON_BASE_CAMP` | 3932 (0xF5C) |  | Sketh'lon Base Camp |
+| `SKETH_LON_WRECKAGE` | 3933 (0xF5D) |  | Sketh'lon Wreckage |
+| `TOWN_SQUARE` | 3934 (0xF5E) |  | Town Square |
+| `WIZARD_ROW` | 3935 (0xF5F) |  | Wizard Row |
+| `DEATHFORGE_TOWER` | 3936 (0xF60) |  | Deathforge Tower |
+| `SLAG_WATCH` | 3937 (0xF61) |  | Slag Watch |
+| `SANCTUM_OF_THE_STARS` | 3938 (0xF62) |  | Sanctum of the Stars |
+| `DRAGONMAW_FORTRESS` | 3939 (0xF63) |  | Dragonmaw Fortress |
+| `THE_FETID_POOL` | 3940 (0xF64) |  | The Fetid Pool |
+| `TEST` | 3941 (0xF65) |  | Test |
+| `RAZAANS_LANDING` | 3942 (0xF66) |  | Razaan's Landing |
+| `INVASION_POINT_CATACLYSM` | 3943 (0xF67) |  | Invasion Point: Cataclysm |
+| `THE_ALTAR_OF_SHADOWS` | 3944 (0xF68) |  | The Altar of Shadows |
+| `NETHERWING_PASS` | 3945 (0xF69) |  | Netherwing Pass |
+| `WAYNES_REFUGE` | 3946 (0xF6A) |  | Wayne's Refuge |
+| `THE_SCALDING_POOLS` | 3947 (0xF6B) |  | The Scalding Pools |
+| `BRIAN_AND_PAT_TEST` | 3948 (0xF6C) |  | Brian and Pat Test |
+| `MAGMA_FIELDS` | 3949 (0xF6D) |  | Magma Fields |
+| `CRIMSON_WATCH` | 3950 (0xF6E) |  | Crimson Watch |
+| `EVERGROVE` | 3951 (0xF6F) |  | Evergrove |
+| `WYRMSKULL_BRIDGE` | 3952 (0xF70) |  | Wyrmskull Bridge |
+| `SCALEWING_SHELF` | 3953 (0xF71) |  | Scalewing Shelf |
+| `WYRMSKULL_TUNNEL` | 3954 (0xF72) |  | Wyrmskull Tunnel |
+| `HELLFIRE_BASIN` | 3955 (0xF73) |  | Hellfire Basin |
+| `THE_SHADOW_STAIR` | 3956 (0xF74) |  | The Shadow Stair |
+| `SHA_TARI_OUTPOST` | 3957 (0xF75) |  | Sha'tari Outpost |
+| `SHA_TARI_BASE_CAMP` | 3958 (0xF76) |  | Sha'tari Base Camp |
+| `BLACK_TEMPLE` | 3959 (0xF77) |  | Black Temple |
+| `SOULGRINDERS_BARROW` | 3960 (0xF78) |  | Soulgrinder's Barrow |
+| `SORROW_WING_POINT` | 3961 (0xF79) |  | Sorrow Wing Point |
+| `VIM_GOLS_CIRCLE` | 3962 (0xF7A) |  | Vim'gol's Circle |
+| `DRAGONSPINE_RIDGE` | 3963 (0xF7B) |  | Dragonspine Ridge |
+| `SKYGUARD_OUTPOST` | 3964 (0xF7C) |  | Skyguard Outpost |
+| `NETHERWING_MINES` | 3965 (0xF7D) |  | Netherwing Mines |
+| `DRAGONMAW_BASE_CAMP` | 3966 (0xF7E) |  | Dragonmaw Base Camp |
+| `DRAGONMAW_SKYWAY` | 3967 (0xF7F) |  | Dragonmaw Skyway |
+| `RUINS_OF_LORDAERON1` | 3968 (0xF80) |  | Ruins of Lordaeron |
+| `RIVENDARKS_PERCH` | 3969 (0xF81) |  | Rivendark's Perch |
+| `OBSIDIAS_PERCH` | 3970 (0xF82) |  | Obsidia's Perch |
+| `INSIDIONS_PERCH` | 3971 (0xF83) |  | Insidion's Perch |
+| `FURYWINGS_PERCH` | 3972 (0xF84) |  | Furywing's Perch |
+| `BLACKWIND_LANDING` | 3973 (0xF85) |  | Blackwind Landing |
+| `VEIL_HARR_IK` | 3974 (0xF86) |  | Veil Harr'ik |
+| `TEROKKS_REST` | 3975 (0xF87) |  | Terokk's Rest |
+| `VEIL_ALA_RAK` | 3976 (0xF88) |  | Veil Ala'rak |
+| `UPPER_VEIL_SHIL_AK` | 3977 (0xF89) |  | Upper Veil Shil'ak |
+| `LOWER_VEIL_SHIL_AK` | 3978 (0xF8A) |  | Lower Veil Shil'ak |
+| `SHARTUULS_TRANSPORTER` | 4008 (0xFA8) |  | Shartuul's Transporter |
+| `ILLIDARI_TRAINING_GROUNDS` | 4009 (0xFA9) |  | Illidari Training Grounds |
+| `MUDSPROCKET` | 4010 (0xFAA) |  | Mudsprocket |
+| `DIREHORN_POST` | 4046 (0xFCE) |  | Direhorn Post |
+| `NATS_LANDING` | 4047 (0xFCF) |  | Nat's Landing |
+| `TABETHAS_FARM` | 4049 (0xFD1) |  | Tabetha's Farm |
+| `PLAGUEWOOD_TOWER` | 4067 (0xFE3) |  | Plaguewood Tower |
+| `SUNWELL_PLATEAU` | 4075 (0xFEB) |  | Sunwell Plateau |
+| `REUSE_ME_SEVEN` | 4076 (0xFEC) |  | Reuse Me 7 |
+| `RAZORTHORN_RISE` | 4078 (0xFEE) |  | Razorthorn Rise |
+| `ISLE_OF_QUEL_DANAS` | 4080 (0xFF0) |  | Isle of Quel'Danas |
+| `THE_DAWNCHASER` | 4081 (0xFF1) |  | The Dawnchaser |
+| `THE_SIN_LOREN` | 4082 (0xFF2) |  | The Sin'loren |
+| `SILVERMOONS_PRIDE` | 4083 (0xFF3) |  | Silvermoon's Pride |
+| `THE_BLOODOATH` | 4084 (0xFF4) |  | The Bloodoath |
+| `SHATTERED_SUN_STAGING_AREA` | 4085 (0xFF5) |  | Shattered Sun Staging Area |
+| `SUNS_REACH_SANCTUM` | 4086 (0xFF6) |  | Sun's Reach Sanctum |
+| `SUNS_REACH_HARBOR` | 4087 (0xFF7) |  | Sun's Reach Harbor |
+| `SUNS_REACH_ARMORY` | 4088 (0xFF8) |  | Sun's Reach Armory |
+| `DAWNSTAR_VILLAGE` | 4089 (0xFF9) |  | Dawnstar Village |
+| `THE_DAWNING_SQUARE` | 4090 (0xFFA) |  | The Dawning Square |
+| `GREENGILL_COAST` | 4091 (0xFFB) |  | Greengill Coast |
+| `THE_DEAD_SCAR2` | 4092 (0xFFC) |  | The Dead Scar |
+| `THE_SUN_FORGE` | 4093 (0xFFD) |  | The Sun Forge |
+| `SUNWELL_PLATEAU1` | 4094 (0xFFE) |  | Sunwell Plateau |
+| `MAGISTERS_TERRACE` | 4095 (0xFFF) |  | Magisters' Terrace |
+| `MAGISTERS_TERRACE1` | 4131 (0x1023) |  | Magisters' Terrace |
+| `PARHELION_PLAZA` | 4139 (0x102B) |  | Parhelion Plaza |
+| `THE_DEAD_SCAR3` | 4140 (0x102C) |  | The Dead Scar |
 
 Used in:
 * [CMSG_ZONEUPDATE](cmsg_zoneupdate.md)
@@ -7845,2316 +7845,2316 @@ enum Area : u32 {
 ### Type
 The basic type is `u32`, a 4 byte (32 bit) little endian integer.
 ### Enumerators
-| Enumerator | Value  | Description | Comment | Display |
-| --------- | -------- | ----------- | ------- | ------- |
-| `NONE` | 0 (0x00) |  |  |  |
-| `DUN_MOROGH` | 1 (0x01) |  |  | Dun Morogh |
-| `LONGSHORE` | 2 (0x02) |  |  | Longshore |
-| `BADLANDS` | 3 (0x03) |  |  | Badlands |
-| `BLASTED_LANDS` | 4 (0x04) |  |  | Blasted Lands |
-| `BLACKWATER_COVE` | 7 (0x07) |  |  | Blackwater Cove |
-| `SWAMP_OF_SORROWS` | 8 (0x08) |  |  | Swamp of Sorrows |
-| `NORTHSHIRE_VALLEY` | 9 (0x09) |  |  | Northshire Valley |
-| `DUSKWOOD` | 10 (0x0A) |  |  | Duskwood |
-| `WETLANDS` | 11 (0x0B) |  |  | Wetlands |
-| `ELWYNN_FOREST` | 12 (0x0C) |  |  | Elwynn Forest |
-| `THE_WORLD_TREE` | 13 (0x0D) |  |  | The World Tree |
-| `DUROTAR` | 14 (0x0E) |  |  | Durotar |
-| `DUSTWALLOW_MARSH` | 15 (0x0F) |  |  | Dustwallow Marsh |
-| `AZSHARA` | 16 (0x10) |  |  | Azshara |
-| `THE_BARRENS` | 17 (0x11) |  |  | The Barrens |
-| `CRYSTAL_LAKE` | 18 (0x12) |  |  | Crystal Lake |
-| `ZUL_GURUB` | 19 (0x13) |  |  | Zul'Gurub |
-| `MOONBROOK` | 20 (0x14) |  |  | Moonbrook |
-| `KUL_TIRAS` | 21 (0x15) |  |  | Kul Tiras |
-| `PROGRAMMER_ISLE` | 22 (0x16) |  |  | Programmer Isle |
-| `NORTHSHIRE_RIVER` | 23 (0x17) |  |  | Northshire River |
-| `NORTHSHIRE_ABBEY` | 24 (0x18) |  |  | Northshire Abbey |
-| `BLACKROCK_MOUNTAIN` | 25 (0x19) |  |  | Blackrock Mountain |
-| `LIGHTHOUSE` | 26 (0x1A) |  |  | Lighthouse |
-| `WESTERN_PLAGUELANDS` | 28 (0x1C) |  |  | Western Plaguelands |
-| `NINE` | 30 (0x1E) |  |  | Nine |
-| `THE_CEMETARY` | 32 (0x20) |  |  | The Cemetary |
-| `STRANGLETHORN_VALE` | 33 (0x21) |  |  | Stranglethorn Vale |
-| `ECHO_RIDGE_MINE` | 34 (0x22) |  |  | Echo Ridge Mine |
-| `BOOTY_BAY` | 35 (0x23) |  |  | Booty Bay |
-| `ALTERAC_MOUNTAINS` | 36 (0x24) |  |  | Alterac Mountains |
-| `LAKE_NAZFERITI` | 37 (0x25) |  |  | Lake Nazferiti |
-| `LOCH_MODAN` | 38 (0x26) |  |  | Loch Modan |
-| `WESTFALL` | 40 (0x28) |  |  | Westfall |
-| `DEADWIND_PASS` | 41 (0x29) |  |  | Deadwind Pass |
-| `DARKSHIRE` | 42 (0x2A) |  |  | Darkshire |
-| `WILD_SHORE` | 43 (0x2B) |  |  | Wild Shore |
-| `REDRIDGE_MOUNTAINS` | 44 (0x2C) |  |  | Redridge Mountains |
-| `ARATHI_HIGHLANDS` | 45 (0x2D) |  |  | Arathi Highlands |
-| `BURNING_STEPPES` | 46 (0x2E) |  |  | Burning Steppes |
-| `THE_HINTERLANDS` | 47 (0x2F) |  |  | The Hinterlands |
-| `DEAD_MANS_HOLE` | 49 (0x31) |  |  | Dead Man's Hole |
-| `SEARING_GORGE` | 51 (0x33) |  |  | Searing Gorge |
-| `THIEVES_CAMP` | 53 (0x35) |  |  | Thieves Camp |
-| `JASPERLODE_MINE` | 54 (0x36) |  |  | Jasperlode Mine |
-| `VALLEY_OF_HEROES_UNUSED` | 55 (0x37) |  |  | Valley of Heroes UNUSED |
-| `HEROES_VIGIL` | 56 (0x38) |  |  | Heroes' Vigil |
-| `FARGODEEP_MINE` | 57 (0x39) |  |  | Fargodeep Mine |
-| `NORTHSHIRE_VINEYARDS` | 59 (0x3B) |  |  | Northshire Vineyards |
-| `FORESTS_EDGE` | 60 (0x3C) |  |  | Forest's Edge |
-| `THUNDER_FALLS` | 61 (0x3D) |  |  | Thunder Falls |
-| `BRACKWELL_PUMPKIN_PATCH` | 62 (0x3E) |  |  | Brackwell Pumpkin Patch |
-| `THE_STONEFIELD_FARM` | 63 (0x3F) |  |  | The Stonefield Farm |
-| `THE_MACLURE_VINEYARDS` | 64 (0x40) |  |  | The Maclure Vineyards |
-| `DRAGONBLIGHT` | 65 (0x41) |  |  | Dragonblight |
-| `ZUL_DRAK` | 66 (0x42) |  |  | Zul'Drak |
-| `THE_STORM_PEAKS` | 67 (0x43) |  |  | The Storm Peaks |
-| `LAKE_EVERSTILL` | 68 (0x44) |  |  | Lake Everstill |
-| `LAKESHIRE` | 69 (0x45) |  |  | Lakeshire |
-| `STONEWATCH` | 70 (0x46) |  |  | Stonewatch |
-| `STONEWATCH_FALLS` | 71 (0x47) |  |  | Stonewatch Falls |
-| `THE_DARK_PORTAL` | 72 (0x48) |  |  | The Dark Portal |
-| `THE_TAINTED_SCAR` | 73 (0x49) |  |  | The Tainted Scar |
-| `POOL_OF_TEARS` | 74 (0x4A) |  |  | Pool of Tears |
-| `STONARD` | 75 (0x4B) |  |  | Stonard |
-| `FALLOW_SANCTUARY` | 76 (0x4C) |  |  | Fallow Sanctuary |
-| `ANVILMAR` | 77 (0x4D) |  |  | Anvilmar |
-| `STORMWIND_MOUNTAINS` | 80 (0x50) |  |  | Stormwind Mountains |
-| `JEFF_NE_QUADRANT_CHANGED` | 81 (0x51) |  |  | Jeff NE Quadrant Changed |
-| `JEFF_NW_QUADRANT` | 82 (0x52) |  |  | Jeff NW Quadrant |
-| `JEFF_SE_QUADRANT` | 83 (0x53) |  |  | Jeff SE Quadrant |
-| `JEFF_SW_QUADRANT` | 84 (0x54) |  |  | Jeff SW Quadrant |
-| `TIRISFAL_GLADES` | 85 (0x55) |  |  | Tirisfal Glades |
-| `STONE_CAIRN_LAKE` | 86 (0x56) |  |  | Stone Cairn Lake |
-| `GOLDSHIRE` | 87 (0x57) |  |  | Goldshire |
-| `EASTVALE_LOGGING_CAMP` | 88 (0x58) |  |  | Eastvale Logging Camp |
-| `MIRROR_LAKE_ORCHARD` | 89 (0x59) |  |  | Mirror Lake Orchard |
-| `TOWER_OF_AZORA` | 91 (0x5B) |  |  | Tower of Azora |
-| `MIRROR_LAKE` | 92 (0x5C) |  |  | Mirror Lake |
-| `VUL_GOL_OGRE_MOUND` | 93 (0x5D) |  |  | Vul'Gol Ogre Mound |
-| `RAVEN_HILL` | 94 (0x5E) |  |  | Raven Hill |
-| `REDRIDGE_CANYONS` | 95 (0x5F) |  |  | Redridge Canyons |
-| `TOWER_OF_ILGALAR` | 96 (0x60) |  |  | Tower of Ilgalar |
-| `ALTHERS_MILL` | 97 (0x61) |  |  | Alther's Mill |
-| `RETHBAN_CAVERNS` | 98 (0x62) |  |  | Rethban Caverns |
-| `REBEL_CAMP` | 99 (0x63) |  |  | Rebel Camp |
-| `NESINGWARYS_EXPEDITION` | 100 (0x64) |  |  | Nesingwary's Expedition |
-| `KURZENS_COMPOUND` | 101 (0x65) |  |  | Kurzen's Compound |
-| `RUINS_OF_ZUL_KUNDA` | 102 (0x66) |  |  | Ruins of Zul'Kunda |
-| `RUINS_OF_ZUL_MAMWE` | 103 (0x67) |  |  | Ruins of Zul'Mamwe |
-| `THE_VILE_REEF` | 104 (0x68) |  |  | The Vile Reef |
-| `MOSH_OGG_OGRE_MOUND` | 105 (0x69) |  |  | Mosh'Ogg Ogre Mound |
-| `THE_STOCKPILE` | 106 (0x6A) |  |  | The Stockpile |
-| `SALDEANS_FARM` | 107 (0x6B) |  |  | Saldean's Farm |
-| `SENTINEL_HILL` | 108 (0x6C) |  |  | Sentinel Hill |
-| `FURLBROWS_PUMPKIN_FARM` | 109 (0x6D) |  |  | Furlbrow's Pumpkin Farm |
-| `JANGOLODE_MINE` | 111 (0x6F) |  |  | Jangolode Mine |
-| `GOLD_COAST_QUARRY` | 113 (0x71) |  |  | Gold Coast Quarry |
-| `WESTFALL_LIGHTHOUSE` | 115 (0x73) |  |  | Westfall Lighthouse |
-| `MISTY_VALLEY` | 116 (0x74) |  |  | Misty Valley |
-| `GROM_GOL_BASE_CAMP` | 117 (0x75) |  |  | Grom'gol Base Camp |
-| `WHELGARS_EXCAVATION_SITE` | 118 (0x76) |  |  | Whelgar's Excavation Site |
-| `WESTBROOK_GARRISON` | 120 (0x78) |  |  | Westbrook Garrison |
-| `TRANQUIL_GARDENS_CEMETERY` | 121 (0x79) |  |  | Tranquil Gardens Cemetery |
-| `ZUULDAIA_RUINS` | 122 (0x7A) |  |  | Zuuldaia Ruins |
-| `BAL_LAL_RUINS` | 123 (0x7B) |  |  | Bal'lal Ruins |
-| `KAL_AI_RUINS` | 125 (0x7D) |  |  | Kal'ai Ruins |
-| `TKASHI_RUINS` | 126 (0x7E) |  |  | Tkashi Ruins |
-| `BALIA_MAH_RUINS` | 127 (0x7F) |  |  | Balia'mah Ruins |
-| `ZIATA_JAI_RUINS` | 128 (0x80) |  |  | Ziata'jai Ruins |
-| `MIZJAH_RUINS` | 129 (0x81) |  |  | Mizjah Ruins |
-| `SILVERPINE_FOREST` | 130 (0x82) |  |  | Silverpine Forest |
-| `KHARANOS` | 131 (0x83) |  |  | Kharanos |
-| `COLDRIDGE_VALLEY` | 132 (0x84) |  |  | Coldridge Valley |
-| `GNOMEREGAN` | 133 (0x85) |  |  | Gnomeregan |
-| `GOL_BOLAR_QUARRY` | 134 (0x86) |  |  | Gol'Bolar Quarry |
-| `FROSTMANE_HOLD` | 135 (0x87) |  |  | Frostmane Hold |
-| `THE_GRIZZLED_DEN` | 136 (0x88) |  |  | The Grizzled Den |
-| `BREWNALL_VILLAGE` | 137 (0x89) |  |  | Brewnall Village |
-| `MISTY_PINE_REFUGE` | 138 (0x8A) |  |  | Misty Pine Refuge |
-| `EASTERN_PLAGUELANDS` | 139 (0x8B) |  |  | Eastern Plaguelands |
-| `TELDRASSIL` | 141 (0x8D) |  |  | Teldrassil |
-| `IRONBANDS_EXCAVATION_SITE` | 142 (0x8E) |  |  | Ironband's Excavation Site |
-| `MO_GROSH_STRONGHOLD` | 143 (0x8F) |  |  | Mo'grosh Stronghold |
-| `THELSAMAR` | 144 (0x90) |  |  | Thelsamar |
-| `ALGAZ_GATE` | 145 (0x91) |  |  | Algaz Gate |
-| `STONEWROUGHT_DAM` | 146 (0x92) |  |  | Stonewrought Dam |
-| `THE_FARSTRIDER_LODGE` | 147 (0x93) |  |  | The Farstrider Lodge |
-| `DARKSHORE` | 148 (0x94) |  |  | Darkshore |
-| `SILVER_STREAM_MINE` | 149 (0x95) |  |  | Silver Stream Mine |
-| `MENETHIL_HARBOR` | 150 (0x96) |  |  | Menethil Harbor |
-| `DESIGNER_ISLAND` | 151 (0x97) |  |  | Designer Island |
-| `THE_BULWARK` | 152 (0x98) |  |  | The Bulwark |
-| `RUINS_OF_LORDAERON` | 153 (0x99) |  |  | Ruins of Lordaeron |
-| `DEATHKNELL` | 154 (0x9A) |  |  | Deathknell |
-| `NIGHT_WEBS_HOLLOW` | 155 (0x9B) |  |  | Night Web's Hollow |
-| `SOLLIDEN_FARMSTEAD` | 156 (0x9C) |  |  | Solliden Farmstead |
-| `AGAMAND_MILLS` | 157 (0x9D) |  |  | Agamand Mills |
-| `AGAMAND_FAMILY_CRYPT` | 158 (0x9E) |  |  | Agamand Family Crypt |
-| `BRILL` | 159 (0x9F) |  |  | Brill |
-| `WHISPERING_GARDENS` | 160 (0xA0) |  |  | Whispering Gardens |
-| `TERRACE_OF_REPOSE` | 161 (0xA1) |  |  | Terrace of Repose |
-| `BRIGHTWATER_LAKE` | 162 (0xA2) |  |  | Brightwater Lake |
-| `GUNTHERS_RETREAT` | 163 (0xA3) |  |  | Gunther's Retreat |
-| `GARRENS_HAUNT` | 164 (0xA4) |  |  | Garren's Haunt |
-| `BALNIR_FARMSTEAD` | 165 (0xA5) |  |  | Balnir Farmstead |
-| `COLD_HEARTH_MANOR` | 166 (0xA6) |  |  | Cold Hearth Manor |
-| `CRUSADER_OUTPOST` | 167 (0xA7) |  |  | Crusader Outpost |
-| `THE_NORTH_COAST` | 168 (0xA8) |  |  | The North Coast |
-| `WHISPERING_SHORE` | 169 (0xA9) |  |  | Whispering Shore |
-| `LORDAMERE_LAKE` | 170 (0xAA) |  |  | Lordamere Lake |
-| `FENRIS_ISLE` | 172 (0xAC) |  |  | Fenris Isle |
-| `FAOLS_REST` | 173 (0xAD) |  |  | Faol's Rest |
-| `DOLANAAR` | 186 (0xBA) |  |  | Dolanaar |
-| `DARNASSUS_UNUSED` | 187 (0xBB) |  |  | Darnassus UNUSED |
-| `SHADOWGLEN` | 188 (0xBC) |  |  | Shadowglen |
-| `STEELGRILLS_DEPOT` | 189 (0xBD) |  |  | Steelgrill's Depot |
-| `HEARTHGLEN` | 190 (0xBE) |  |  | Hearthglen |
-| `NORTHRIDGE_LUMBER_CAMP` | 192 (0xC0) |  |  | Northridge Lumber Camp |
-| `RUINS_OF_ANDORHAL` | 193 (0xC1) |  |  | Ruins of Andorhal |
-| `SCHOOL_OF_NECROMANCY` | 195 (0xC3) |  |  | School of Necromancy |
-| `UTHERS_TOMB` | 196 (0xC4) |  |  | Uther's Tomb |
-| `SORROW_HILL` | 197 (0xC5) |  |  | Sorrow Hill |
-| `THE_WEEPING_CAVE` | 198 (0xC6) |  |  | The Weeping Cave |
-| `FELSTONE_FIELD` | 199 (0xC7) |  |  | Felstone Field |
-| `DALSONS_TEARS` | 200 (0xC8) |  |  | Dalson's Tears |
-| `GAHRRONS_WITHERING` | 201 (0xC9) |  |  | Gahrron's Withering |
-| `THE_WRITHING_HAUNT` | 202 (0xCA) |  |  | The Writhing Haunt |
-| `MARDENHOLDE_KEEP` | 203 (0xCB) |  |  | Mardenholde Keep |
-| `PYREWOOD_VILLAGE` | 204 (0xCC) |  |  | Pyrewood Village |
-| `DUN_MODR` | 205 (0xCD) |  |  | Dun Modr |
-| `UTGARDE_KEEP` | 206 (0xCE) |  |  | Utgarde Keep |
-| `THE_GREAT_SEA` | 207 (0xCF) |  |  | The Great Sea |
-| `UNUSED_IRONCLADCOVE` | 208 (0xD0) |  |  | Unused Ironcladcove |
-| `SHADOWFANG_KEEP` | 209 (0xD1) |  |  | Shadowfang Keep |
-| `ICECROWN` | 210 (0xD2) |  |  | Icecrown |
-| `ICEFLOW_LAKE` | 211 (0xD3) |  |  | Iceflow Lake |
-| `HELMS_BED_LAKE` | 212 (0xD4) |  |  | Helm's Bed Lake |
-| `DEEP_ELEM_MINE` | 213 (0xD5) |  |  | Deep Elem Mine |
-| `THE_GREAT_SEA1` | 214 (0xD6) |  |  | The Great Sea |
-| `MULGORE` | 215 (0xD7) |  |  | Mulgore |
-| `ALEXSTON_FARMSTEAD` | 219 (0xDB) |  |  | Alexston Farmstead |
-| `RED_CLOUD_MESA` | 220 (0xDC) |  |  | Red Cloud Mesa |
-| `CAMP_NARACHE` | 221 (0xDD) |  |  | Camp Narache |
-| `BLOODHOOF_VILLAGE` | 222 (0xDE) |  |  | Bloodhoof Village |
-| `STONEBULL_LAKE` | 223 (0xDF) |  |  | Stonebull Lake |
-| `RAVAGED_CARAVAN` | 224 (0xE0) |  |  | Ravaged Caravan |
-| `RED_ROCKS` | 225 (0xE1) |  |  | Red Rocks |
-| `THE_SKITTERING_DARK` | 226 (0xE2) |  |  | The Skittering Dark |
-| `VALGANS_FIELD` | 227 (0xE3) |  |  | Valgan's Field |
-| `THE_SEPULCHER` | 228 (0xE4) |  |  | The Sepulcher |
-| `OLSENS_FARTHING` | 229 (0xE5) |  |  | Olsen's Farthing |
-| `THE_GREYMANE_WALL` | 230 (0xE6) |  |  | The Greymane Wall |
-| `BERENS_PERIL` | 231 (0xE7) |  |  | Beren's Peril |
-| `THE_DAWNING_ISLES` | 232 (0xE8) |  |  | The Dawning Isles |
-| `AMBERMILL` | 233 (0xE9) |  |  | Ambermill |
-| `FENRIS_KEEP` | 235 (0xEB) |  |  | Fenris Keep |
-| `SHADOWFANG_KEEP1` | 236 (0xEC) |  |  | Shadowfang Keep |
-| `THE_DECREPIT_FERRY` | 237 (0xED) |  |  | The Decrepit Ferry |
-| `MALDENS_ORCHARD` | 238 (0xEE) |  |  | Malden's Orchard |
-| `THE_IVAR_PATCH` | 239 (0xEF) |  |  | The Ivar Patch |
-| `THE_DEAD_FIELD` | 240 (0xF0) |  |  | The Dead Field |
-| `THE_ROTTING_ORCHARD` | 241 (0xF1) |  |  | The Rotting Orchard |
-| `BRIGHTWOOD_GROVE` | 242 (0xF2) |  |  | Brightwood Grove |
-| `FORLORN_ROWE` | 243 (0xF3) |  |  | Forlorn Rowe |
-| `THE_WHIPPLE_ESTATE` | 244 (0xF4) |  |  | The Whipple Estate |
-| `THE_YORGEN_FARMSTEAD` | 245 (0xF5) |  |  | The Yorgen Farmstead |
-| `THE_CAULDRON` | 246 (0xF6) |  |  | The Cauldron |
-| `GRIMESILT_DIG_SITE` | 247 (0xF7) |  |  | Grimesilt Dig Site |
-| `DREADMAUL_ROCK` | 249 (0xF9) |  |  | Dreadmaul Rock |
-| `RUINS_OF_THAURISSAN` | 250 (0xFA) |  |  | Ruins of Thaurissan |
-| `FLAME_CREST` | 251 (0xFB) |  |  | Flame Crest |
-| `BLACKROCK_STRONGHOLD` | 252 (0xFC) |  |  | Blackrock Stronghold |
-| `THE_PILLAR_OF_ASH` | 253 (0xFD) |  |  | The Pillar of Ash |
-| `BLACKROCK_MOUNTAIN1` | 254 (0xFE) |  |  | Blackrock Mountain |
-| `ALTAR_OF_STORMS` | 255 (0xFF) |  |  | Altar of Storms |
-| `ALDRASSIL` | 256 (0x100) |  |  | Aldrassil |
-| `SHADOWTHREAD_CAVE` | 257 (0x101) |  |  | Shadowthread Cave |
-| `FEL_ROCK` | 258 (0x102) |  |  | Fel Rock |
-| `LAKE_AL_AMETH` | 259 (0x103) |  |  | Lake Al'Ameth |
-| `STARBREEZE_VILLAGE` | 260 (0x104) |  |  | Starbreeze Village |
-| `GNARLPINE_HOLD` | 261 (0x105) |  |  | Gnarlpine Hold |
-| `BAN_ETHIL_BARROW_DEN` | 262 (0x106) |  |  | Ban'ethil Barrow Den |
-| `THE_CLEFT` | 263 (0x107) |  |  | The Cleft |
-| `THE_ORACLE_GLADE` | 264 (0x108) |  |  | The Oracle Glade |
-| `WELLSPRING_RIVER` | 265 (0x109) |  |  | Wellspring River |
-| `WELLSPRING_LAKE` | 266 (0x10A) |  |  | Wellspring Lake |
-| `HILLSBRAD_FOOTHILLS` | 267 (0x10B) |  |  | Hillsbrad Foothills |
-| `AZSHARA_CRATER` | 268 (0x10C) |  |  | Azshara Crater |
-| `DUN_ALGAZ` | 269 (0x10D) |  |  | Dun Algaz |
-| `SOUTHSHORE` | 271 (0x10F) |  |  | Southshore |
-| `TARREN_MILL` | 272 (0x110) |  |  | Tarren Mill |
-| `DURNHOLDE_KEEP` | 275 (0x113) |  |  | Durnholde Keep |
-| `UNUSED_STONEWROUGHT_PASS` | 276 (0x114) |  |  | UNUSED Stonewrought Pass |
-| `THE_FOOTHILL_CAVERNS` | 277 (0x115) |  |  | The Foothill Caverns |
-| `LORDAMERE_INTERNMENT_CAMP` | 278 (0x116) |  |  | Lordamere Internment Camp |
-| `DALARAN_CRATER` | 279 (0x117) |  |  | Dalaran Crater |
-| `STRAHNBRAD` | 280 (0x118) |  |  | Strahnbrad |
-| `RUINS_OF_ALTERAC` | 281 (0x119) |  |  | Ruins of Alterac |
-| `CRUSHRIDGE_HOLD` | 282 (0x11A) |  |  | Crushridge Hold |
-| `SLAUGHTER_HOLLOW` | 283 (0x11B) |  |  | Slaughter Hollow |
-| `THE_UPLANDS` | 284 (0x11C) |  |  | The Uplands |
-| `SOUTHPOINT_TOWER` | 285 (0x11D) |  |  | Southpoint Tower |
-| `HILLSBRAD_FIELDS` | 286 (0x11E) |  |  | Hillsbrad Fields |
-| `HILLSBRAD` | 287 (0x11F) |  |  | Hillsbrad |
-| `AZURELODE_MINE` | 288 (0x120) |  |  | Azurelode Mine |
-| `NETHANDER_STEAD` | 289 (0x121) |  |  | Nethander Stead |
-| `DUN_GAROK` | 290 (0x122) |  |  | Dun Garok |
-| `THORADINS_WALL` | 293 (0x125) |  |  | Thoradin's Wall |
-| `EASTERN_STRAND` | 294 (0x126) |  |  | Eastern Strand |
-| `WESTERN_STRAND` | 295 (0x127) |  |  | Western Strand |
-| `SOUTH_SEAS_UNUSED` | 296 (0x128) |  |  | South Seas UNUSED |
-| `JAGUERO_ISLE` | 297 (0x129) |  |  | Jaguero Isle |
-| `BARADIN_BAY` | 298 (0x12A) |  |  | Baradin Bay |
-| `MENETHIL_BAY` | 299 (0x12B) |  |  | Menethil Bay |
-| `MISTY_REED_STRAND` | 300 (0x12C) |  |  | Misty Reed Strand |
-| `THE_SAVAGE_COAST` | 301 (0x12D) |  |  | The Savage Coast |
-| `THE_CRYSTAL_SHORE` | 302 (0x12E) |  |  | The Crystal Shore |
-| `SHELL_BEACH` | 303 (0x12F) |  |  | Shell Beach |
-| `NORTH_TIDES_RUN` | 305 (0x131) |  |  | North Tide's Run |
-| `SOUTH_TIDES_RUN` | 306 (0x132) |  |  | South Tide's Run |
-| `THE_OVERLOOK_CLIFFS` | 307 (0x133) |  |  | The Overlook Cliffs |
-| `THE_FORBIDDING_SEA` | 308 (0x134) |  |  | The Forbidding Sea |
-| `IRONBEARDS_TOMB` | 309 (0x135) |  |  | Ironbeard's Tomb |
-| `CRYSTALVEIN_MINE` | 310 (0x136) |  |  | Crystalvein Mine |
-| `RUINS_OF_ABORAZ` | 311 (0x137) |  |  | Ruins of Aboraz |
-| `JANEIROS_POINT` | 312 (0x138) |  |  | Janeiro's Point |
-| `NORTHFOLD_MANOR` | 313 (0x139) |  |  | Northfold Manor |
-| `GOSHEK_FARM` | 314 (0x13A) |  |  | Go'Shek Farm |
-| `DABYRIES_FARMSTEAD` | 315 (0x13B) |  |  | Dabyrie's Farmstead |
-| `BOULDERFIST_HALL` | 316 (0x13C) |  |  | Boulderfist Hall |
-| `WITHERBARK_VILLAGE` | 317 (0x13D) |  |  | Witherbark Village |
-| `DRYWHISKER_GORGE` | 318 (0x13E) |  |  | Drywhisker Gorge |
-| `REFUGE_POINTE` | 320 (0x140) |  |  | Refuge Pointe |
-| `HAMMERFALL` | 321 (0x141) |  |  | Hammerfall |
-| `BLACKWATER_SHIPWRECKS` | 322 (0x142) |  |  | Blackwater Shipwrecks |
-| `O_BREENS_CAMP` | 323 (0x143) |  |  | O'Breen's Camp |
-| `STROMGARDE_KEEP` | 324 (0x144) |  |  | Stromgarde Keep |
-| `THE_TOWER_OF_ARATHOR` | 325 (0x145) |  |  | The Tower of Arathor |
-| `THE_SANCTUM` | 326 (0x146) |  |  | The Sanctum |
-| `FALDIRS_COVE` | 327 (0x147) |  |  | Faldir's Cove |
-| `THE_DROWNED_REEF` | 328 (0x148) |  |  | The Drowned Reef |
-| `THANDOL_SPAN` | 330 (0x14A) |  |  | Thandol Span |
-| `ASHENVALE` | 331 (0x14B) |  |  | Ashenvale |
-| `THE_GREAT_SEA2` | 332 (0x14C) |  |  | The Great Sea |
-| `CIRCLE_OF_EAST_BINDING` | 333 (0x14D) |  |  | Circle of East Binding |
-| `CIRCLE_OF_WEST_BINDING` | 334 (0x14E) |  |  | Circle of West Binding |
-| `CIRCLE_OF_INNER_BINDING` | 335 (0x14F) |  |  | Circle of Inner Binding |
-| `CIRCLE_OF_OUTER_BINDING` | 336 (0x150) |  |  | Circle of Outer Binding |
-| `APOCRYPHANS_REST` | 337 (0x151) |  |  | Apocryphan's Rest |
-| `ANGOR_FORTRESS` | 338 (0x152) |  |  | Angor Fortress |
-| `LETHLOR_RAVINE` | 339 (0x153) |  |  | Lethlor Ravine |
-| `KARGATH` | 340 (0x154) |  |  | Kargath |
-| `CAMP_KOSH` | 341 (0x155) |  |  | Camp Kosh |
-| `CAMP_BOFF` | 342 (0x156) |  |  | Camp Boff |
-| `CAMP_WURG` | 343 (0x157) |  |  | Camp Wurg |
-| `CAMP_CAGG` | 344 (0x158) |  |  | Camp Cagg |
-| `AGMONDS_END` | 345 (0x159) |  |  | Agmond's End |
-| `HAMMERTOES_DIGSITE` | 346 (0x15A) |  |  | Hammertoe's Digsite |
-| `DUSTBELCH_GROTTO` | 347 (0x15B) |  |  | Dustbelch Grotto |
-| `AERIE_PEAK` | 348 (0x15C) |  |  | Aerie Peak |
-| `WILDHAMMER_KEEP` | 349 (0x15D) |  |  | Wildhammer Keep |
-| `QUEL_DANIL_LODGE` | 350 (0x15E) |  |  | Quel'Danil Lodge |
-| `SKULK_ROCK` | 351 (0x15F) |  |  | Skulk Rock |
-| `ZUN_WATHA` | 352 (0x160) |  |  | Zun'watha |
-| `SHADRA_ALOR` | 353 (0x161) |  |  | Shadra'Alor |
-| `JINTHA_ALOR` | 354 (0x162) |  |  | Jintha'Alor |
-| `THE_ALTAR_OF_ZUL` | 355 (0x163) |  |  | The Altar of Zul |
-| `SERADANE` | 356 (0x164) |  |  | Seradane |
-| `FERALAS` | 357 (0x165) |  |  | Feralas |
-| `BRAMBLEBLADE_RAVINE` | 358 (0x166) |  |  | Brambleblade Ravine |
-| `BAEL_MODAN` | 359 (0x167) |  |  | Bael Modan |
-| `THE_VENTURE_CO_MINE` | 360 (0x168) |  |  | The Venture Co. Mine |
-| `FELWOOD` | 361 (0x169) |  |  | Felwood |
-| `RAZOR_HILL` | 362 (0x16A) |  |  | Razor Hill |
-| `VALLEY_OF_TRIALS` | 363 (0x16B) |  |  | Valley of Trials |
-| `THE_DEN` | 364 (0x16C) |  |  | The Den |
-| `BURNING_BLADE_COVEN` | 365 (0x16D) |  |  | Burning Blade Coven |
-| `KOLKAR_CRAG` | 366 (0x16E) |  |  | Kolkar Crag |
-| `SEN_JIN_VILLAGE` | 367 (0x16F) |  |  | Sen'jin Village |
-| `ECHO_ISLES` | 368 (0x170) |  |  | Echo Isles |
-| `THUNDER_RIDGE` | 369 (0x171) |  |  | Thunder Ridge |
-| `DRYGULCH_RAVINE` | 370 (0x172) |  |  | Drygulch Ravine |
-| `DUSTWIND_CAVE` | 371 (0x173) |  |  | Dustwind Cave |
-| `TIRAGARDE_KEEP` | 372 (0x174) |  |  | Tiragarde Keep |
-| `SCUTTLE_COAST` | 373 (0x175) |  |  | Scuttle Coast |
-| `BLADEFIST_BAY` | 374 (0x176) |  |  | Bladefist Bay |
-| `DEADEYE_SHORE` | 375 (0x177) |  |  | Deadeye Shore |
-| `SOUTHFURY_RIVER` | 377 (0x179) |  |  | Southfury River |
-| `CAMP_TAURAJO` | 378 (0x17A) |  |  | Camp Taurajo |
-| `FAR_WATCH_POST` | 379 (0x17B) |  |  | Far Watch Post |
-| `THE_CROSSROADS` | 380 (0x17C) |  |  | The Crossroads |
-| `BOULDER_LODE_MINE` | 381 (0x17D) |  |  | Boulder Lode Mine |
-| `THE_SLUDGE_FEN` | 382 (0x17E) |  |  | The Sludge Fen |
-| `THE_DRY_HILLS` | 383 (0x17F) |  |  | The Dry Hills |
-| `DREADMIST_PEAK` | 384 (0x180) |  |  | Dreadmist Peak |
-| `NORTHWATCH_HOLD` | 385 (0x181) |  |  | Northwatch Hold |
-| `THE_FORGOTTEN_POOLS` | 386 (0x182) |  |  | The Forgotten Pools |
-| `LUSHWATER_OASIS` | 387 (0x183) |  |  | Lushwater Oasis |
-| `THE_STAGNANT_OASIS` | 388 (0x184) |  |  | The Stagnant Oasis |
-| `FIELD_OF_GIANTS` | 390 (0x186) |  |  | Field of Giants |
-| `THE_MERCHANT_COAST` | 391 (0x187) |  |  | The Merchant Coast |
-| `RATCHET` | 392 (0x188) |  |  | Ratchet |
-| `DARKSPEAR_STRAND` | 393 (0x189) |  |  | Darkspear Strand |
-| `GRIZZLY_HILLS` | 394 (0x18A) |  |  | Grizzly Hills |
-| `GRIZZLEMAW` | 395 (0x18B) |  |  | Grizzlemaw |
-| `WINTERHOOF_WATER_WELL` | 396 (0x18C) |  |  | Winterhoof Water Well |
-| `THUNDERHORN_WATER_WELL` | 397 (0x18D) |  |  | Thunderhorn Water Well |
-| `WILDMANE_WATER_WELL` | 398 (0x18E) |  |  | Wildmane Water Well |
-| `SKYLINE_RIDGE` | 399 (0x18F) |  |  | Skyline Ridge |
-| `THOUSAND_NEEDLES` | 400 (0x190) |  |  | Thousand Needles |
-| `THE_TIDUS_STAIR` | 401 (0x191) |  |  | The Tidus Stair |
-| `SHADY_REST_INN` | 403 (0x193) |  |  | Shady Rest Inn |
-| `BAEL_DUN_DIGSITE` | 404 (0x194) |  |  | Bael'dun Digsite |
-| `DESOLACE` | 405 (0x195) |  |  | Desolace |
-| `STONETALON_MOUNTAINS` | 406 (0x196) |  |  | Stonetalon Mountains |
-| `ORGRIMMAR_UNUSED` | 407 (0x197) |  |  | Orgrimmar UNUSED |
-| `GILLIJIMS_ISLE` | 408 (0x198) |  |  | Gillijim's Isle |
-| `ISLAND_OF_DOCTOR_LAPIDIS` | 409 (0x199) |  |  | Island of Doctor Lapidis |
-| `RAZORWIND_CANYON` | 410 (0x19A) |  |  | Razorwind Canyon |
-| `BATHRANS_HAUNT` | 411 (0x19B) |  |  | Bathran's Haunt |
-| `THE_RUINS_OF_ORDIL_ARAN` | 412 (0x19C) |  |  | The Ruins of Ordil'Aran |
-| `MAESTRAS_POST` | 413 (0x19D) |  |  | Maestra's Post |
-| `THE_ZORAM_STRAND` | 414 (0x19E) |  |  | The Zoram Strand |
-| `ASTRANAAR` | 415 (0x19F) |  |  | Astranaar |
-| `THE_SHRINE_OF_AESSINA` | 416 (0x1A0) |  |  | The Shrine of Aessina |
-| `FIRE_SCAR_SHRINE` | 417 (0x1A1) |  |  | Fire Scar Shrine |
-| `THE_RUINS_OF_STARDUST` | 418 (0x1A2) |  |  | The Ruins of Stardust |
-| `THE_HOWLING_VALE` | 419 (0x1A3) |  |  | The Howling Vale |
-| `SILVERWIND_REFUGE` | 420 (0x1A4) |  |  | Silverwind Refuge |
-| `MYSTRAL_LAKE` | 421 (0x1A5) |  |  | Mystral Lake |
-| `FALLEN_SKY_LAKE` | 422 (0x1A6) |  |  | Fallen Sky Lake |
-| `IRIS_LAKE` | 424 (0x1A8) |  |  | Iris Lake |
-| `MOONWELL` | 425 (0x1A9) |  |  | Moonwell |
-| `RAYNEWOOD_RETREAT` | 426 (0x1AA) |  |  | Raynewood Retreat |
-| `THE_SHADY_NOOK` | 427 (0x1AB) |  |  | The Shady Nook |
-| `NIGHT_RUN` | 428 (0x1AC) |  |  | Night Run |
-| `XAVIAN` | 429 (0x1AD) |  |  | Xavian |
-| `SATYRNAAR` | 430 (0x1AE) |  |  | Satyrnaar |
-| `SPLINTERTREE_POST` | 431 (0x1AF) |  |  | Splintertree Post |
-| `THE_DOR_DANIL_BARROW_DEN` | 432 (0x1B0) |  |  | The Dor'Danil Barrow Den |
-| `FALFARREN_RIVER` | 433 (0x1B1) |  |  | Falfarren River |
-| `FELFIRE_HILL` | 434 (0x1B2) |  |  | Felfire Hill |
-| `DEMON_FALL_CANYON` | 435 (0x1B3) |  |  | Demon Fall Canyon |
-| `DEMON_FALL_RIDGE` | 436 (0x1B4) |  |  | Demon Fall Ridge |
-| `WARSONG_LUMBER_CAMP` | 437 (0x1B5) |  |  | Warsong Lumber Camp |
-| `BOUGH_SHADOW` | 438 (0x1B6) |  |  | Bough Shadow |
-| `THE_SHIMMERING_FLATS` | 439 (0x1B7) |  |  | The Shimmering Flats |
-| `TANARIS` | 440 (0x1B8) |  |  | Tanaris |
-| `LAKE_FALATHIM` | 441 (0x1B9) |  |  | Lake Falathim |
-| `AUBERDINE` | 442 (0x1BA) |  |  | Auberdine |
-| `RUINS_OF_MATHYSTRA` | 443 (0x1BB) |  |  | Ruins of Mathystra |
-| `TOWER_OF_ALTHALAXX` | 444 (0x1BC) |  |  | Tower of Althalaxx |
-| `CLIFFSPRING_FALLS` | 445 (0x1BD) |  |  | Cliffspring Falls |
-| `BASHAL_ARAN` | 446 (0x1BE) |  |  | Bashal'Aran |
-| `AMETH_ARAN` | 447 (0x1BF) |  |  | Ameth'Aran |
-| `GROVE_OF_THE_ANCIENTS` | 448 (0x1C0) |  |  | Grove of the Ancients |
-| `THE_MASTERS_GLAIVE` | 449 (0x1C1) |  |  | The Master's Glaive |
-| `REMTRAVELS_EXCAVATION` | 450 (0x1C2) |  |  | Remtravel's Excavation |
-| `MISTS_EDGE` | 452 (0x1C4) |  |  | Mist's Edge |
-| `THE_LONG_WASH` | 453 (0x1C5) |  |  | The Long Wash |
-| `WILDBEND_RIVER` | 454 (0x1C6) |  |  | Wildbend River |
-| `BLACKWOOD_DEN` | 455 (0x1C7) |  |  | Blackwood Den |
-| `CLIFFSPRING_RIVER` | 456 (0x1C8) |  |  | Cliffspring River |
-| `THE_VEILED_SEA` | 457 (0x1C9) |  |  | The Veiled Sea |
-| `GOLD_ROAD` | 458 (0x1CA) |  |  | Gold Road |
-| `SCARLET_WATCH_POST` | 459 (0x1CB) |  |  | Scarlet Watch Post |
-| `SUN_ROCK_RETREAT` | 460 (0x1CC) |  |  | Sun Rock Retreat |
-| `WINDSHEAR_CRAG` | 461 (0x1CD) |  |  | Windshear Crag |
-| `CRAGPOOL_LAKE` | 463 (0x1CF) |  |  | Cragpool Lake |
-| `MIRKFALLON_LAKE` | 464 (0x1D0) |  |  | Mirkfallon Lake |
-| `THE_CHARRED_VALE` | 465 (0x1D1) |  |  | The Charred Vale |
-| `VALLEY_OF_THE_BLOODFURIES` | 466 (0x1D2) |  |  | Valley of the Bloodfuries |
-| `STONETALON_PEAK` | 467 (0x1D3) |  |  | Stonetalon Peak |
-| `THE_TALON_DEN` | 468 (0x1D4) |  |  | The Talon Den |
-| `GREATWOOD_VALE` | 469 (0x1D5) |  |  | Greatwood Vale |
-| `THUNDER_BLUFF_UNUSED` | 470 (0x1D6) |  |  | Thunder Bluff UNUSED |
-| `BRAVE_WIND_MESA` | 471 (0x1D7) |  |  | Brave Wind Mesa |
-| `FIRE_STONE_MESA` | 472 (0x1D8) |  |  | Fire Stone Mesa |
-| `MANTLE_ROCK` | 473 (0x1D9) |  |  | Mantle Rock |
-| `HUNTER_RISE_UNUSED` | 474 (0x1DA) |  |  | Hunter Rise UNUSED |
-| `SPIRIT_RISEUNUSED` | 475 (0x1DB) |  |  | Spirit RiseUNUSED |
-| `ELDER_RISEUNUSED` | 476 (0x1DC) |  |  | Elder RiseUNUSED |
-| `RUINS_OF_JUBUWAL` | 477 (0x1DD) |  |  | Ruins of Jubuwal |
-| `POOLS_OF_ARLITHRIEN` | 478 (0x1DE) |  |  | Pools of Arlithrien |
-| `THE_RUSTMAUL_DIG_SITE` | 479 (0x1DF) |  |  | The Rustmaul Dig Site |
-| `CAMP_E_THOK` | 480 (0x1E0) |  |  | Camp E'thok |
-| `SPLITHOOF_CRAG` | 481 (0x1E1) |  |  | Splithoof Crag |
-| `HIGHPERCH` | 482 (0x1E2) |  |  | Highperch |
-| `THE_SCREECHING_CANYON` | 483 (0x1E3) |  |  | The Screeching Canyon |
-| `FREEWIND_POST` | 484 (0x1E4) |  |  | Freewind Post |
-| `THE_GREAT_LIFT` | 485 (0x1E5) |  |  | The Great Lift |
-| `GALAK_HOLD` | 486 (0x1E6) |  |  | Galak Hold |
-| `ROGUEFEATHER_DEN` | 487 (0x1E7) |  |  | Roguefeather Den |
-| `THE_WEATHERED_NOOK` | 488 (0x1E8) |  |  | The Weathered Nook |
-| `THALANAAR` | 489 (0x1E9) |  |  | Thalanaar |
-| `UN_GORO_CRATER` | 490 (0x1EA) |  |  | Un'Goro Crater |
-| `RAZORFEN_KRAUL` | 491 (0x1EB) |  |  | Razorfen Kraul |
-| `RAVEN_HILL_CEMETERY` | 492 (0x1EC) |  |  | Raven Hill Cemetery |
-| `MOONGLADE` | 493 (0x1ED) |  |  | Moonglade |
-| `HOWLING_FJORD` | 495 (0x1EF) |  |  | Howling Fjord |
-| `BRACKENWALL_VILLAGE` | 496 (0x1F0) |  |  | Brackenwall Village |
-| `SWAMPLIGHT_MANOR` | 497 (0x1F1) |  |  | Swamplight Manor |
-| `BLOODFEN_BURROW` | 498 (0x1F2) |  |  | Bloodfen Burrow |
-| `DARKMIST_CAVERN` | 499 (0x1F3) |  |  | Darkmist Cavern |
-| `MOGGLE_POINT` | 500 (0x1F4) |  |  | Moggle Point |
-| `BEEZILS_WRECK` | 501 (0x1F5) |  |  | Beezil's Wreck |
-| `WITCH_HILL` | 502 (0x1F6) |  |  | Witch Hill |
-| `SENTRY_POINT` | 503 (0x1F7) |  |  | Sentry Point |
-| `NORTH_POINT_TOWER` | 504 (0x1F8) |  |  | North Point Tower |
-| `WEST_POINT_TOWER` | 505 (0x1F9) |  |  | West Point Tower |
-| `LOST_POINT` | 506 (0x1FA) |  |  | Lost Point |
-| `BLUEFEN` | 507 (0x1FB) |  |  | Bluefen |
-| `STONEMAUL_RUINS` | 508 (0x1FC) |  |  | Stonemaul Ruins |
-| `THE_DEN_OF_FLAME` | 509 (0x1FD) |  |  | The Den of Flame |
-| `THE_DRAGONMURK` | 510 (0x1FE) |  |  | The Dragonmurk |
-| `WYRMBOG` | 511 (0x1FF) |  |  | Wyrmbog |
-| `BLACKHOOF_VILLAGE` | 512 (0x200) |  |  | Blackhoof Village |
-| `THERAMORE_ISLE` | 513 (0x201) |  |  | Theramore Isle |
-| `FOOTHOLD_CITADEL` | 514 (0x202) |  |  | Foothold Citadel |
-| `IRONCLAD_PRISON` | 515 (0x203) |  |  | Ironclad Prison |
-| `DUSTWALLOW_BAY` | 516 (0x204) |  |  | Dustwallow Bay |
-| `TIDEFURY_COVE` | 517 (0x205) |  |  | Tidefury Cove |
-| `DREADMURK_SHORE` | 518 (0x206) |  |  | Dreadmurk Shore |
-| `ADDLES_STEAD` | 536 (0x218) |  |  | Addle's Stead |
-| `FIRE_PLUME_RIDGE` | 537 (0x219) |  |  | Fire Plume Ridge |
-| `LAKKARI_TAR_PITS` | 538 (0x21A) |  |  | Lakkari Tar Pits |
-| `TERROR_RUN` | 539 (0x21B) |  |  | Terror Run |
-| `THE_SLITHERING_SCAR` | 540 (0x21C) |  |  | The Slithering Scar |
-| `MARSHALS_REFUGE` | 541 (0x21D) |  |  | Marshal's Refuge |
-| `FUNGAL_ROCK` | 542 (0x21E) |  |  | Fungal Rock |
-| `GOLAKKA_HOT_SPRINGS` | 543 (0x21F) |  |  | Golakka Hot Springs |
-| `THE_LOCH` | 556 (0x22C) |  |  | The Loch |
-| `BEGGARS_HAUNT` | 576 (0x240) |  |  | Beggar's Haunt |
-| `KODO_GRAVEYARD` | 596 (0x254) |  |  | Kodo Graveyard |
-| `GHOST_WALKER_POST` | 597 (0x255) |  |  | Ghost Walker Post |
-| `SAR_THERIS_STRAND` | 598 (0x256) |  |  | Sar'theris Strand |
-| `THUNDER_AXE_FORTRESS` | 599 (0x257) |  |  | Thunder Axe Fortress |
-| `BOLGANS_HOLE` | 600 (0x258) |  |  | Bolgan's Hole |
-| `MANNOROC_COVEN` | 602 (0x25A) |  |  | Mannoroc Coven |
-| `SARGERON` | 603 (0x25B) |  |  | Sargeron |
-| `MAGRAM_VILLAGE` | 604 (0x25C) |  |  | Magram Village |
-| `GELKIS_VILLAGE` | 606 (0x25E) |  |  | Gelkis Village |
-| `VALLEY_OF_SPEARS` | 607 (0x25F) |  |  | Valley of Spears |
-| `NIJELS_POINT` | 608 (0x260) |  |  | Nijel's Point |
-| `KOLKAR_VILLAGE` | 609 (0x261) |  |  | Kolkar Village |
-| `HYJAL` | 616 (0x268) |  |  | Hyjal |
-| `WINTERSPRING` | 618 (0x26A) |  |  | Winterspring |
-| `BLACKWOLF_RIVER` | 636 (0x27C) |  |  | Blackwolf River |
-| `KODO_ROCK` | 637 (0x27D) |  |  | Kodo Rock |
-| `HIDDEN_PATH` | 638 (0x27E) |  |  | Hidden Path |
-| `SPIRIT_ROCK` | 639 (0x27F) |  |  | Spirit Rock |
-| `SHRINE_OF_THE_DORMANT_FLAME` | 640 (0x280) |  |  | Shrine of the Dormant Flame |
-| `LAKE_ELUNE_ARA` | 656 (0x290) |  |  | Lake Elune'ara |
-| `THE_HARBORAGE` | 657 (0x291) |  |  | The Harborage |
-| `OUTLAND` | 676 (0x2A4) |  |  | Outland |
-| `CRAFTSMENS_TERRACE_UNUSED` | 696 (0x2B8) |  |  | Craftsmen's Terrace UNUSED |
-| `TRADESMENS_TERRACE_UNUSED` | 697 (0x2B9) |  |  | Tradesmen's Terrace UNUSED |
-| `THE_TEMPLE_GARDENS_UNUSED` | 698 (0x2BA) |  |  | The Temple Gardens UNUSED |
-| `TEMPLE_OF_ELUNE_UNUSED` | 699 (0x2BB) |  |  | Temple of Elune UNUSED |
-| `CENARION_ENCLAVE_UNUSED` | 700 (0x2BC) |  |  | Cenarion Enclave UNUSED |
-| `WARRIORS_TERRACE_UNUSED` | 701 (0x2BD) |  |  | Warrior's Terrace UNUSED |
-| `RUT_THERAN_VILLAGE` | 702 (0x2BE) |  |  | Rut'theran Village |
-| `IRONBANDS_COMPOUND` | 716 (0x2CC) |  |  | Ironband's Compound |
-| `THE_STOCKADE` | 717 (0x2CD) |  |  | The Stockade |
-| `WAILING_CAVERNS` | 718 (0x2CE) |  |  | Wailing Caverns |
-| `BLACKFATHOM_DEEPS` | 719 (0x2CF) |  |  | Blackfathom Deeps |
-| `FRAY_ISLAND` | 720 (0x2D0) |  |  | Fray Island |
-| `GNOMEREGAN1` | 721 (0x2D1) |  |  | Gnomeregan |
-| `RAZORFEN_DOWNS` | 722 (0x2D2) |  |  | Razorfen Downs |
-| `BAN_ETHIL_HOLLOW` | 736 (0x2E0) |  |  | Ban'ethil Hollow |
-| `SCARLET_MONASTERY` | 796 (0x31C) |  |  | Scarlet Monastery |
-| `JERODS_LANDING` | 797 (0x31D) |  |  | Jerod's Landing |
-| `RIDGEPOINT_TOWER` | 798 (0x31E) |  |  | Ridgepoint Tower |
-| `THE_DARKENED_BANK` | 799 (0x31F) |  |  | The Darkened Bank |
-| `COLDRIDGE_PASS` | 800 (0x320) |  |  | Coldridge Pass |
-| `CHILL_BREEZE_VALLEY` | 801 (0x321) |  |  | Chill Breeze Valley |
-| `SHIMMER_RIDGE` | 802 (0x322) |  |  | Shimmer Ridge |
-| `AMBERSTILL_RANCH` | 803 (0x323) |  |  | Amberstill Ranch |
-| `THE_TUNDRID_HILLS` | 804 (0x324) |  |  | The Tundrid Hills |
-| `SOUTH_GATE_PASS` | 805 (0x325) |  |  | South Gate Pass |
-| `SOUTH_GATE_OUTPOST` | 806 (0x326) |  |  | South Gate Outpost |
-| `NORTH_GATE_PASS` | 807 (0x327) |  |  | North Gate Pass |
-| `NORTH_GATE_OUTPOST` | 808 (0x328) |  |  | North Gate Outpost |
-| `GATES_OF_IRONFORGE` | 809 (0x329) |  |  | Gates of Ironforge |
-| `STILLWATER_POND` | 810 (0x32A) |  |  | Stillwater Pond |
-| `NIGHTMARE_VALE` | 811 (0x32B) |  |  | Nightmare Vale |
-| `VENOMWEB_VALE` | 812 (0x32C) |  |  | Venomweb Vale |
-| `THE_BULWARK1` | 813 (0x32D) |  |  | The Bulwark |
-| `SOUTHFURY_RIVER1` | 814 (0x32E) |  |  | Southfury River |
-| `SOUTHFURY_RIVER2` | 815 (0x32F) |  |  | Southfury River |
-| `RAZORMANE_GROUNDS` | 816 (0x330) |  |  | Razormane Grounds |
-| `SKULL_ROCK` | 817 (0x331) |  |  | Skull Rock |
-| `PALEMANE_ROCK` | 818 (0x332) |  |  | Palemane Rock |
-| `WINDFURY_RIDGE` | 819 (0x333) |  |  | Windfury Ridge |
-| `THE_GOLDEN_PLAINS` | 820 (0x334) |  |  | The Golden Plains |
-| `THE_ROLLING_PLAINS` | 821 (0x335) |  |  | The Rolling Plains |
-| `DUN_ALGAZ1` | 836 (0x344) |  |  | Dun Algaz |
-| `DUN_ALGAZ2` | 837 (0x345) |  |  | Dun Algaz |
-| `NORTH_GATE_PASS1` | 838 (0x346) |  |  | North Gate Pass |
-| `SOUTH_GATE_PASS1` | 839 (0x347) |  |  | South Gate Pass |
-| `TWILIGHT_GROVE` | 856 (0x358) |  |  | Twilight Grove |
-| `GM_ISLAND` | 876 (0x36C) |  |  | GM Island |
-| `DELETE_ME` | 877 (0x36D) |  |  | Delete ME |
-| `SOUTHFURY_RIVER3` | 878 (0x36E) |  |  | Southfury River |
-| `SOUTHFURY_RIVER4` | 879 (0x36F) |  |  | Southfury River |
-| `THANDOL_SPAN1` | 880 (0x370) |  |  | Thandol Span |
-| `THANDOL_SPAN2` | 881 (0x371) |  |  | Thandol Span |
-| `PURGATION_ISLE` | 896 (0x380) |  |  | Purgation Isle |
-| `THE_JANSEN_STEAD` | 916 (0x394) |  |  | The Jansen Stead |
-| `THE_DEAD_ACRE` | 917 (0x395) |  |  | The Dead Acre |
-| `THE_MOLSEN_FARM` | 918 (0x396) |  |  | The Molsen Farm |
-| `STENDELS_POND` | 919 (0x397) |  |  | Stendel's Pond |
-| `THE_DAGGER_HILLS` | 920 (0x398) |  |  | The Dagger Hills |
-| `DEMONTS_PLACE` | 921 (0x399) |  |  | Demont's Place |
-| `THE_DUST_PLAINS` | 922 (0x39A) |  |  | The Dust Plains |
-| `STONESPLINTER_VALLEY` | 923 (0x39B) |  |  | Stonesplinter Valley |
-| `VALLEY_OF_KINGS` | 924 (0x39C) |  |  | Valley of Kings |
-| `ALGAZ_STATION` | 925 (0x39D) |  |  | Algaz Station |
-| `BUCKLEBREE_FARM` | 926 (0x39E) |  |  | Bucklebree Farm |
-| `THE_SHINING_STRAND` | 927 (0x39F) |  |  | The Shining Strand |
-| `NORTH_TIDES_HOLLOW` | 928 (0x3A0) |  |  | North Tide's Hollow |
-| `GRIZZLEPAW_RIDGE` | 936 (0x3A8) |  |  | Grizzlepaw Ridge |
-| `THE_VERDANT_FIELDS` | 956 (0x3BC) |  |  | The Verdant Fields |
-| `GADGETZAN` | 976 (0x3D0) |  |  | Gadgetzan |
-| `STEAMWHEEDLE_PORT` | 977 (0x3D1) |  |  | Steamwheedle Port |
-| `ZUL_FARRAK` | 978 (0x3D2) |  |  | Zul'Farrak |
-| `SANDSORROW_WATCH` | 979 (0x3D3) |  |  | Sandsorrow Watch |
-| `THISTLESHRUB_VALLEY` | 980 (0x3D4) |  |  | Thistleshrub Valley |
-| `THE_GAPING_CHASM` | 981 (0x3D5) |  |  | The Gaping Chasm |
-| `THE_NOXIOUS_LAIR` | 982 (0x3D6) |  |  | The Noxious Lair |
-| `DUNEMAUL_COMPOUND` | 983 (0x3D7) |  |  | Dunemaul Compound |
-| `EASTMOON_RUINS` | 984 (0x3D8) |  |  | Eastmoon Ruins |
-| `WATERSPRING_FIELD` | 985 (0x3D9) |  |  | Waterspring Field |
-| `ZALASHJIS_DEN` | 986 (0x3DA) |  |  | Zalashji's Den |
-| `LANDS_END_BEACH` | 987 (0x3DB) |  |  | Land's End Beach |
-| `WAVESTRIDER_BEACH` | 988 (0x3DC) |  |  | Wavestrider Beach |
-| `ULDUM` | 989 (0x3DD) |  |  | Uldum |
-| `VALLEY_OF_THE_WATCHERS` | 990 (0x3DE) |  |  | Valley of the Watchers |
-| `GUNSTANS_POST` | 991 (0x3DF) |  |  | Gunstan's Post |
-| `SOUTHMOON_RUINS` | 992 (0x3E0) |  |  | Southmoon Ruins |
-| `RENDERS_CAMP` | 996 (0x3E4) |  |  | Render's Camp |
-| `RENDERS_VALLEY` | 997 (0x3E5) |  |  | Render's Valley |
-| `RENDERS_ROCK` | 998 (0x3E6) |  |  | Render's Rock |
-| `STONEWATCH_TOWER` | 999 (0x3E7) |  |  | Stonewatch Tower |
-| `GALARDELL_VALLEY` | 1000 (0x3E8) |  |  | Galardell Valley |
-| `LAKERIDGE_HIGHWAY` | 1001 (0x3E9) |  |  | Lakeridge Highway |
-| `THREE_CORNERS` | 1002 (0x3EA) |  |  | Three Corners |
-| `DIREFORGE_HILL` | 1016 (0x3F8) |  |  | Direforge Hill |
-| `RAPTOR_RIDGE` | 1017 (0x3F9) |  |  | Raptor Ridge |
-| `BLACK_CHANNEL_MARSH` | 1018 (0x3FA) |  |  | Black Channel Marsh |
-| `THE_GREEN_BELT` | 1019 (0x3FB) |  |  | The Green Belt |
-| `MOSSHIDE_FEN` | 1020 (0x3FC) |  |  | Mosshide Fen |
-| `THELGEN_ROCK` | 1021 (0x3FD) |  |  | Thelgen Rock |
-| `BLUEGILL_MARSH` | 1022 (0x3FE) |  |  | Bluegill Marsh |
-| `SALTSPRAY_GLEN` | 1023 (0x3FF) |  |  | Saltspray Glen |
-| `SUNDOWN_MARSH` | 1024 (0x400) |  |  | Sundown Marsh |
-| `THE_GREEN_BELT1` | 1025 (0x401) |  |  | The Green Belt |
-| `ANGERFANG_ENCAMPMENT` | 1036 (0x40C) |  |  | Angerfang Encampment |
-| `GRIM_BATOL` | 1037 (0x40D) |  |  | Grim Batol |
-| `DRAGONMAW_GATES` | 1038 (0x40E) |  |  | Dragonmaw Gates |
-| `THE_LOST_FLEET` | 1039 (0x40F) |  |  | The Lost Fleet |
-| `DARROW_HILL` | 1056 (0x420) |  |  | Darrow Hill |
-| `THORADINS_WALL1` | 1057 (0x421) |  |  | Thoradin's Wall |
-| `WEBWINDER_PATH` | 1076 (0x434) |  |  | Webwinder Path |
-| `THE_HUSHED_BANK` | 1097 (0x449) |  |  | The Hushed Bank |
-| `MANOR_MISTMANTLE` | 1098 (0x44A) |  |  | Manor Mistmantle |
-| `CAMP_MOJACHE` | 1099 (0x44B) |  |  | Camp Mojache |
-| `GRIMTOTEM_COMPOUND` | 1100 (0x44C) |  |  | Grimtotem Compound |
-| `THE_WRITHING_DEEP` | 1101 (0x44D) |  |  | The Writhing Deep |
-| `WILDWIND_LAKE` | 1102 (0x44E) |  |  | Wildwind Lake |
-| `GORDUNNI_OUTPOST` | 1103 (0x44F) |  |  | Gordunni Outpost |
-| `MOK_GORDUN` | 1104 (0x450) |  |  | Mok'Gordun |
-| `FERAL_SCAR_VALE` | 1105 (0x451) |  |  | Feral Scar Vale |
-| `FRAYFEATHER_HIGHLANDS` | 1106 (0x452) |  |  | Frayfeather Highlands |
-| `IDLEWIND_LAKE` | 1107 (0x453) |  |  | Idlewind Lake |
-| `THE_FORGOTTEN_COAST` | 1108 (0x454) |  |  | The Forgotten Coast |
-| `EAST_PILLAR` | 1109 (0x455) |  |  | East Pillar |
-| `WEST_PILLAR` | 1110 (0x456) |  |  | West Pillar |
-| `DREAM_BOUGH` | 1111 (0x457) |  |  | Dream Bough |
-| `JADEMIR_LAKE` | 1112 (0x458) |  |  | Jademir Lake |
-| `ONEIROS` | 1113 (0x459) |  |  | Oneiros |
-| `RUINS_OF_RAVENWIND` | 1114 (0x45A) |  |  | Ruins of Ravenwind |
-| `RAGE_SCAR_HOLD` | 1115 (0x45B) |  |  | Rage Scar Hold |
-| `FEATHERMOON_STRONGHOLD` | 1116 (0x45C) |  |  | Feathermoon Stronghold |
-| `RUINS_OF_SOLARSAL` | 1117 (0x45D) |  |  | Ruins of Solarsal |
-| `LOWER_WILDS_UNUSED` | 1118 (0x45E) |  |  | Lower Wilds UNUSED |
-| `THE_TWIN_COLOSSALS` | 1119 (0x45F) |  |  | The Twin Colossals |
-| `SARDOR_ISLE` | 1120 (0x460) |  |  | Sardor Isle |
-| `ISLE_OF_DREAD` | 1121 (0x461) |  |  | Isle of Dread |
-| `HIGH_WILDERNESS` | 1136 (0x470) |  |  | High Wilderness |
-| `LOWER_WILDS` | 1137 (0x471) |  |  | Lower Wilds |
-| `SOUTHERN_BARRENS` | 1156 (0x484) |  |  | Southern Barrens |
-| `SOUTHERN_GOLD_ROAD` | 1157 (0x485) |  |  | Southern Gold Road |
-| `ZUL_FARRAK1` | 1176 (0x498) |  |  | Zul'Farrak |
-| `UTGARDE_PINNACLE` | 1196 (0x4AC) |  |  | Utgarde Pinnacle |
-| `TIMBERMAW_HOLD` | 1216 (0x4C0) |  |  | Timbermaw Hold |
-| `VANNDIR_ENCAMPMENT` | 1217 (0x4C1) |  |  | Vanndir Encampment |
-| `TESTAZSHARA` | 1218 (0x4C2) |  |  | TESTAzshara |
-| `LEGASH_ENCAMPMENT` | 1219 (0x4C3) |  |  | Legash Encampment |
-| `THALASSIAN_BASE_CAMP` | 1220 (0x4C4) |  |  | Thalassian Base Camp |
-| `RUINS_OF_ELDARATH` | 1221 (0x4C5) |  |  | Ruins of Eldarath |
-| `HETAERAS_CLUTCH` | 1222 (0x4C6) |  |  | Hetaera's Clutch |
-| `TEMPLE_OF_ZIN_MALOR` | 1223 (0x4C7) |  |  | Temple of Zin-Malor |
-| `BEARS_HEAD` | 1224 (0x4C8) |  |  | Bear's Head |
-| `URSOLAN` | 1225 (0x4C9) |  |  | Ursolan |
-| `TEMPLE_OF_ARKKORAN` | 1226 (0x4CA) |  |  | Temple of Arkkoran |
-| `BAY_OF_STORMS` | 1227 (0x4CB) |  |  | Bay of Storms |
-| `THE_SHATTERED_STRAND` | 1228 (0x4CC) |  |  | The Shattered Strand |
-| `TOWER_OF_ELDARA` | 1229 (0x4CD) |  |  | Tower of Eldara |
-| `JAGGED_REEF` | 1230 (0x4CE) |  |  | Jagged Reef |
-| `SOUTHRIDGE_BEACH` | 1231 (0x4CF) |  |  | Southridge Beach |
-| `RAVENCREST_MONUMENT` | 1232 (0x4D0) |  |  | Ravencrest Monument |
-| `FORLORN_RIDGE` | 1233 (0x4D1) |  |  | Forlorn Ridge |
-| `LAKE_MENNAR` | 1234 (0x4D2) |  |  | Lake Mennar |
-| `SHADOWSONG_SHRINE` | 1235 (0x4D3) |  |  | Shadowsong Shrine |
-| `HALDARR_ENCAMPMENT` | 1236 (0x4D4) |  |  | Haldarr Encampment |
-| `VALORMOK` | 1237 (0x4D5) |  |  | Valormok |
-| `THE_RUINED_REACHES` | 1256 (0x4E8) |  |  | The Ruined Reaches |
-| `THE_TALONDEEP_PATH` | 1276 (0x4FC) |  |  | The Talondeep Path |
-| `THE_TALONDEEP_PATH1` | 1277 (0x4FD) |  |  | The Talondeep Path |
-| `ROCKTUSK_FARM` | 1296 (0x510) |  |  | Rocktusk Farm |
-| `JAGGEDSWINE_FARM` | 1297 (0x511) |  |  | Jaggedswine Farm |
-| `RAZORFEN_DOWNS1` | 1316 (0x524) |  |  | Razorfen Downs |
-| `LOST_RIGGER_COVE` | 1336 (0x538) |  |  | Lost Rigger Cove |
-| `ULDAMAN` | 1337 (0x539) |  |  | Uldaman |
-| `LORDAMERE_LAKE1` | 1338 (0x53A) |  |  | Lordamere Lake |
-| `LORDAMERE_LAKE2` | 1339 (0x53B) |  |  | Lordamere Lake |
-| `GALLOWS_CORNER` | 1357 (0x54D) |  |  | Gallows' Corner |
-| `SILITHUS` | 1377 (0x561) |  |  | Silithus |
-| `EMERALD_FOREST` | 1397 (0x575) |  |  | Emerald Forest |
-| `SUNKEN_TEMPLE` | 1417 (0x589) |  |  | Sunken Temple |
-| `DREADMAUL_HOLD` | 1437 (0x59D) |  |  | Dreadmaul Hold |
-| `NETHERGARDE_KEEP` | 1438 (0x59E) |  |  | Nethergarde Keep |
-| `DREADMAUL_POST` | 1439 (0x59F) |  |  | Dreadmaul Post |
-| `SERPENTS_COIL` | 1440 (0x5A0) |  |  | Serpent's Coil |
-| `ALTAR_OF_STORMS1` | 1441 (0x5A1) |  |  | Altar of Storms |
-| `FIREWATCH_RIDGE` | 1442 (0x5A2) |  |  | Firewatch Ridge |
-| `THE_SLAG_PIT` | 1443 (0x5A3) |  |  | The Slag Pit |
-| `THE_SEA_OF_CINDERS` | 1444 (0x5A4) |  |  | The Sea of Cinders |
-| `BLACKROCK_MOUNTAIN2` | 1445 (0x5A5) |  |  | Blackrock Mountain |
-| `THORIUM_POINT` | 1446 (0x5A6) |  |  | Thorium Point |
-| `GARRISON_ARMORY` | 1457 (0x5B1) |  |  | Garrison Armory |
-| `THE_TEMPLE_OF_ATAL_HAKKAR` | 1477 (0x5C5) |  |  | The Temple of Atal'Hakkar |
-| `UNDERCITY` | 1497 (0x5D9) |  |  | Undercity |
-| `ULDAMAN1` | 1517 (0x5ED) |  |  | Uldaman |
-| `NOT_USED_DEADMINES` | 1518 (0x5EE) |  |  | Not Used Deadmines |
-| `STORMWIND_CITY` | 1519 (0x5EF) |  |  | Stormwind City |
-| `IRONFORGE` | 1537 (0x601) |  |  | Ironforge |
-| `SPLITHOOF_HOLD` | 1557 (0x615) |  |  | Splithoof Hold |
-| `THE_CAPE_OF_STRANGLETHORN` | 1577 (0x629) |  |  | The Cape of Stranglethorn |
-| `SOUTHERN_SAVAGE_COAST` | 1578 (0x62A) |  |  | Southern Savage Coast |
-| `UNUSED_THE_DEADMINES_002` | 1579 (0x62B) |  |  | Unused The Deadmines 002 |
-| `UNUSED_IRONCLAD_COVE_003` | 1580 (0x62C) |  |  | Unused Ironclad Cove 003 |
-| `THE_DEADMINES` | 1581 (0x62D) |  |  | The Deadmines |
-| `IRONCLAD_COVE` | 1582 (0x62E) |  |  | Ironclad Cove |
-| `BLACKROCK_SPIRE` | 1583 (0x62F) |  |  | Blackrock Spire |
-| `BLACKROCK_DEPTHS` | 1584 (0x630) |  |  | Blackrock Depths |
-| `RAPTOR_GROUNDS_UNUSED` | 1597 (0x63D) |  |  | Raptor Grounds UNUSED |
-| `GROL_DOM_FARM_UNUSED` | 1598 (0x63E) |  |  | Grol'dom Farm UNUSED |
-| `MORSHAN_BASE_CAMP` | 1599 (0x63F) |  |  | Mor'shan Base Camp |
-| `HONORS_STAND_UNUSED` | 1600 (0x640) |  |  | Honor's Stand UNUSED |
-| `BLACKTHORN_RIDGE_UNUSED` | 1601 (0x641) |  |  | Blackthorn Ridge UNUSED |
-| `BRAMBLESCAR_UNUSED` | 1602 (0x642) |  |  | Bramblescar UNUSED |
-| `AGAMA_GOR_UNUSED` | 1603 (0x643) |  |  | Agama'gor UNUSED |
-| `VALLEY_OF_HEROES` | 1617 (0x651) |  |  | Valley of Heroes |
-| `ORGRIMMAR` | 1637 (0x665) |  |  | Orgrimmar |
-| `THUNDER_BLUFF` | 1638 (0x666) |  |  | Thunder Bluff |
-| `ELDER_RISE` | 1639 (0x667) |  |  | Elder Rise |
-| `SPIRIT_RISE` | 1640 (0x668) |  |  | Spirit Rise |
-| `HUNTER_RISE` | 1641 (0x669) |  |  | Hunter Rise |
-| `DARNASSUS` | 1657 (0x679) |  |  | Darnassus |
-| `CENARION_ENCLAVE` | 1658 (0x67A) |  |  | Cenarion Enclave |
-| `CRAFTSMENS_TERRACE` | 1659 (0x67B) |  |  | Craftsmen's Terrace |
-| `WARRIORS_TERRACE` | 1660 (0x67C) |  |  | Warrior's Terrace |
-| `THE_TEMPLE_GARDENS` | 1661 (0x67D) |  |  | The Temple Gardens |
-| `TRADESMENS_TERRACE` | 1662 (0x67E) |  |  | Tradesmen's Terrace |
-| `GAVINS_NAZE` | 1677 (0x68D) |  |  | Gavin's Naze |
-| `SOFERAS_NAZE` | 1678 (0x68E) |  |  | Sofera's Naze |
-| `CORRAHNS_DAGGER` | 1679 (0x68F) |  |  | Corrahn's Dagger |
-| `THE_HEADLAND` | 1680 (0x690) |  |  | The Headland |
-| `MISTY_SHORE` | 1681 (0x691) |  |  | Misty Shore |
-| `DANDREDS_FOLD` | 1682 (0x692) |  |  | Dandred's Fold |
-| `GROWLESS_CAVE` | 1683 (0x693) |  |  | Growless Cave |
-| `CHILLWIND_POINT` | 1684 (0x694) |  |  | Chillwind Point |
-| `RAPTOR_GROUNDS` | 1697 (0x6A1) |  |  | Raptor Grounds |
-| `BRAMBLESCAR` | 1698 (0x6A2) |  |  | Bramblescar |
-| `THORN_HILL` | 1699 (0x6A3) |  |  | Thorn Hill |
-| `AGAMA_GOR` | 1700 (0x6A4) |  |  | Agama'gor |
-| `BLACKTHORN_RIDGE` | 1701 (0x6A5) |  |  | Blackthorn Ridge |
-| `HONORS_STAND` | 1702 (0x6A6) |  |  | Honor's Stand |
-| `THE_MORSHAN_RAMPART` | 1703 (0x6A7) |  |  | The Mor'shan Rampart |
-| `GROL_DOM_FARM` | 1704 (0x6A8) |  |  | Grol'dom Farm |
-| `RAZORFEN_KRAUL1` | 1717 (0x6B5) |  |  | Razorfen Kraul |
-| `THE_GREAT_LIFT1` | 1718 (0x6B6) |  |  | The Great Lift |
-| `MISTVALE_VALLEY` | 1737 (0x6C9) |  |  | Mistvale Valley |
-| `NEK_MANI_WELLSPRING` | 1738 (0x6CA) |  |  | Nek'mani Wellspring |
-| `BLOODSAIL_COMPOUND` | 1739 (0x6CB) |  |  | Bloodsail Compound |
-| `VENTURE_CO_BASE_CAMP` | 1740 (0x6CC) |  |  | Venture Co. Base Camp |
-| `GURUBASHI_ARENA` | 1741 (0x6CD) |  |  | Gurubashi Arena |
-| `SPIRIT_DEN` | 1742 (0x6CE) |  |  | Spirit Den |
-| `THE_CRIMSON_VEIL` | 1757 (0x6DD) |  |  | The Crimson Veil |
-| `THE_RIPTIDE` | 1758 (0x6DE) |  |  | The Riptide |
-| `THE_DAMSELS_LUCK` | 1759 (0x6DF) |  |  | The Damsel's Luck |
-| `VENTURE_CO_OPERATIONS_CENTER` | 1760 (0x6E0) |  |  | Venture Co. Operations Center |
-| `DEADWOOD_VILLAGE` | 1761 (0x6E1) |  |  | Deadwood Village |
-| `FELPAW_VILLAGE` | 1762 (0x6E2) |  |  | Felpaw Village |
-| `JAEDENAR` | 1763 (0x6E3) |  |  | Jaedenar |
-| `BLOODVENOM_RIVER` | 1764 (0x6E4) |  |  | Bloodvenom River |
-| `BLOODVENOM_FALLS` | 1765 (0x6E5) |  |  | Bloodvenom Falls |
-| `SHATTER_SCAR_VALE` | 1766 (0x6E6) |  |  | Shatter Scar Vale |
-| `IRONTREE_WOODS` | 1767 (0x6E7) |  |  | Irontree Woods |
-| `IRONTREE_CAVERN` | 1768 (0x6E8) |  |  | Irontree Cavern |
-| `TIMBERMAW_HOLD1` | 1769 (0x6E9) |  |  | Timbermaw Hold |
-| `SHADOW_HOLD` | 1770 (0x6EA) |  |  | Shadow Hold |
-| `SHRINE_OF_THE_DECEIVER` | 1771 (0x6EB) |  |  | Shrine of the Deceiver |
-| `ITHARIUSS_CAVE` | 1777 (0x6F1) |  |  | Itharius's Cave |
-| `SORROWMURK` | 1778 (0x6F2) |  |  | Sorrowmurk |
-| `DRAENIL_DUR_VILLAGE` | 1779 (0x6F3) |  |  | Draenil'dur Village |
-| `SPLINTERSPEAR_JUNCTION` | 1780 (0x6F4) |  |  | Splinterspear Junction |
-| `STAGALBOG` | 1797 (0x705) |  |  | Stagalbog |
-| `THE_SHIFTING_MIRE` | 1798 (0x706) |  |  | The Shifting Mire |
-| `STAGALBOG_CAVE` | 1817 (0x719) |  |  | Stagalbog Cave |
-| `WITHERBARK_CAVERNS` | 1837 (0x72D) |  |  | Witherbark Caverns |
-| `THORADINS_WALL2` | 1857 (0x741) |  |  | Thoradin's Wall |
-| `BOULDER_GOR` | 1858 (0x742) |  |  | Boulder'gor |
-| `VALLEY_OF_FANGS` | 1877 (0x755) |  |  | Valley of Fangs |
-| `THE_DUSTBOWL` | 1878 (0x756) |  |  | The Dustbowl |
-| `MIRAGE_FLATS` | 1879 (0x757) |  |  | Mirage Flats |
-| `FEATHERBEARDS_HOVEL` | 1880 (0x758) |  |  | Featherbeard's Hovel |
-| `SHINDIGGERS_CAMP` | 1881 (0x759) |  |  | Shindigger's Camp |
-| `PLAGUEMIST_RAVINE` | 1882 (0x75A) |  |  | Plaguemist Ravine |
-| `VALORWIND_LAKE` | 1883 (0x75B) |  |  | Valorwind Lake |
-| `AGOL_WATHA` | 1884 (0x75C) |  |  | Agol'watha |
-| `HIRI_WATHA` | 1885 (0x75D) |  |  | Hiri'watha |
-| `THE_CREEPING_RUIN` | 1886 (0x75E) |  |  | The Creeping Ruin |
-| `BOGENS_LEDGE` | 1887 (0x75F) |  |  | Bogen's Ledge |
-| `THE_MAKERS_TERRACE` | 1897 (0x769) |  |  | The Maker's Terrace |
-| `DUSTWIND_GULCH` | 1898 (0x76A) |  |  | Dustwind Gulch |
-| `SHAOL_WATHA` | 1917 (0x77D) |  |  | Shaol'watha |
-| `NOONSHADE_RUINS` | 1937 (0x791) |  |  | Noonshade Ruins |
-| `BROKEN_PILLAR` | 1938 (0x792) |  |  | Broken Pillar |
-| `ABYSSAL_SANDS` | 1939 (0x793) |  |  | Abyssal Sands |
-| `SOUTHBREAK_SHORE` | 1940 (0x794) |  |  | Southbreak Shore |
-| `CAVERNS_OF_TIME` | 1941 (0x795) |  |  | Caverns of Time |
-| `THE_MARSHLANDS` | 1942 (0x796) |  |  | The Marshlands |
-| `IRONSTONE_PLATEAU` | 1943 (0x797) |  |  | Ironstone Plateau |
-| `BLACKCHAR_CAVE` | 1957 (0x7A5) |  |  | Blackchar Cave |
-| `TANNER_CAMP` | 1958 (0x7A6) |  |  | Tanner Camp |
-| `DUSTFIRE_VALLEY` | 1959 (0x7A7) |  |  | Dustfire Valley |
-| `ZUL_GURUB1` | 1977 (0x7B9) |  |  | Zul'Gurub |
-| `MISTY_REED_POST` | 1978 (0x7BA) |  |  | Misty Reed Post |
-| `BLOODVENOM_POST` | 1997 (0x7CD) |  |  | Bloodvenom Post |
-| `TALONBRANCH_GLADE_` | 1998 (0x7CE) |  |  | Talonbranch Glade |
-| `STRATHOLME` | 2017 (0x7E1) |  |  | Stratholme |
-| `QUEL_THALAS` | 2037 (0x7F5) |  |  | Quel'thalas |
-| `SCHOLOMANCE` | 2057 (0x809) |  |  | Scholomance |
-| `TWILIGHT_VALE` | 2077 (0x81D) |  |  | Twilight Vale |
-| `TWILIGHT_SHORE` | 2078 (0x81E) |  |  | Twilight Shore |
-| `ALCAZ_ISLAND` | 2079 (0x81F) |  |  | Alcaz Island |
-| `DARKCLOUD_PINNACLE` | 2097 (0x831) |  |  | Darkcloud Pinnacle |
-| `DAWNING_WOOD_CATACOMBS` | 2098 (0x832) |  |  | Dawning Wood Catacombs |
-| `STONEWATCH_KEEP` | 2099 (0x833) |  |  | Stonewatch Keep |
-| `MARAUDON` | 2100 (0x834) |  |  | Maraudon |
-| `STOUTLAGER_INN` | 2101 (0x835) |  |  | Stoutlager Inn |
-| `THUNDERBREW_DISTILLERY` | 2102 (0x836) |  |  | Thunderbrew Distillery |
-| `MENETHIL_KEEP` | 2103 (0x837) |  |  | Menethil Keep |
-| `DEEPWATER_TAVERN` | 2104 (0x838) |  |  | Deepwater Tavern |
-| `SHADOW_GRAVE` | 2117 (0x845) |  |  | Shadow Grave |
-| `BRILL_TOWN_HALL` | 2118 (0x846) |  |  | Brill Town Hall |
-| `GALLOWS_END_TAVERN` | 2119 (0x847) |  |  | Gallows' End Tavern |
-| `THE_POOLS_OF_VISIONUNUSED` | 2137 (0x859) |  |  | The Pools of VisionUNUSED |
-| `DREADMIST_DEN` | 2138 (0x85A) |  |  | Dreadmist Den |
-| `BAEL_DUN_KEEP` | 2157 (0x86D) |  |  | Bael'dun Keep |
-| `EMBERSTRIFES_DEN` | 2158 (0x86E) |  |  | Emberstrife's Den |
-| `ONYXIAS_LAIR` | 2159 (0x86F) |  |  | Onyxia's Lair |
-| `WINDSHEAR_MINE` | 2160 (0x870) |  |  | Windshear Mine |
-| `ROLANDS_DOOM` | 2161 (0x871) |  |  | Roland's Doom |
-| `BATTLE_RING` | 2177 (0x881) |  |  | Battle Ring |
-| `THE_POOLS_OF_VISION` | 2197 (0x895) |  |  | The Pools of Vision |
-| `SHADOWBREAK_RAVINE` | 2198 (0x896) |  |  | Shadowbreak Ravine |
-| `BROKEN_SPEAR_VILLAGE` | 2217 (0x8A9) |  |  | Broken Spear Village |
-| `WHITEREACH_POST` | 2237 (0x8BD) |  |  | Whitereach Post |
-| `GORNIA` | 2238 (0x8BE) |  |  | Gornia |
-| `ZANES_EYE_CRATER` | 2239 (0x8BF) |  |  | Zane's Eye Crater |
-| `MIRAGE_RACEWAY` | 2240 (0x8C0) |  |  | Mirage Raceway |
-| `FROSTSABER_ROCK` | 2241 (0x8C1) |  |  | Frostsaber Rock |
-| `THE_HIDDEN_GROVE` | 2242 (0x8C2) |  |  | The Hidden Grove |
-| `TIMBERMAW_POST` | 2243 (0x8C3) |  |  | Timbermaw Post |
-| `WINTERFALL_VILLAGE` | 2244 (0x8C4) |  |  | Winterfall Village |
-| `MAZTHORIL` | 2245 (0x8C5) |  |  | Mazthoril |
-| `FROSTFIRE_HOT_SPRINGS` | 2246 (0x8C6) |  |  | Frostfire Hot Springs |
-| `ICE_THISTLE_HILLS` | 2247 (0x8C7) |  |  | Ice Thistle Hills |
-| `DUN_MANDARR` | 2248 (0x8C8) |  |  | Dun Mandarr |
-| `FROSTWHISPER_GORGE` | 2249 (0x8C9) |  |  | Frostwhisper Gorge |
-| `OWL_WING_THICKET` | 2250 (0x8CA) |  |  | Owl Wing Thicket |
-| `LAKE_KEL_THERIL` | 2251 (0x8CB) |  |  | Lake Kel'Theril |
-| `THE_RUINS_OF_KEL_THERIL` | 2252 (0x8CC) |  |  | The Ruins of Kel'Theril |
-| `STARFALL_VILLAGE` | 2253 (0x8CD) |  |  | Starfall Village |
-| `BAN_THALLOW_BARROW_DEN` | 2254 (0x8CE) |  |  | Ban'Thallow Barrow Den |
-| `EVERLOOK` | 2255 (0x8CF) |  |  | Everlook |
-| `DARKWHISPER_GORGE` | 2256 (0x8D0) |  |  | Darkwhisper Gorge |
-| `DEEPRUN_TRAM` | 2257 (0x8D1) |  |  | Deeprun Tram |
-| `THE_FUNGAL_VALE` | 2258 (0x8D2) |  |  | The Fungal Vale |
-| `UNUSEDTHE_MARRIS_STEAD` | 2259 (0x8D3) |  |  | UNUSEDThe Marris Stead |
-| `THE_MARRIS_STEAD` | 2260 (0x8D4) |  |  | The Marris Stead |
-| `THE_UNDERCROFT` | 2261 (0x8D5) |  |  | The Undercroft |
-| `DARROWSHIRE` | 2262 (0x8D6) |  |  | Darrowshire |
-| `CROWN_GUARD_TOWER` | 2263 (0x8D7) |  |  | Crown Guard Tower |
-| `CORINS_CROSSING` | 2264 (0x8D8) |  |  | Corin's Crossing |
-| `SCARLET_BASE_CAMP` | 2265 (0x8D9) |  |  | Scarlet Base Camp |
-| `TYRS_HAND` | 2266 (0x8DA) |  |  | Tyr's Hand |
-| `THE_SCARLET_BASILICA` | 2267 (0x8DB) |  |  | The Scarlet Basilica |
-| `LIGHTS_HOPE_CHAPEL` | 2268 (0x8DC) |  |  | Light's Hope Chapel |
-| `BROWMAN_MILL` | 2269 (0x8DD) |  |  | Browman Mill |
-| `THE_NOXIOUS_GLADE` | 2270 (0x8DE) |  |  | The Noxious Glade |
-| `EASTWALL_TOWER` | 2271 (0x8DF) |  |  | Eastwall Tower |
-| `NORTHDALE` | 2272 (0x8E0) |  |  | Northdale |
-| `ZUL_MASHAR` | 2273 (0x8E1) |  |  | Zul'Mashar |
-| `MAZRA_ALOR` | 2274 (0x8E2) |  |  | Mazra'Alor |
-| `NORTHPASS_TOWER` | 2275 (0x8E3) |  |  | Northpass Tower |
-| `QUEL_LITHIEN_LODGE` | 2276 (0x8E4) |  |  | Quel'Lithien Lodge |
-| `PLAGUEWOOD` | 2277 (0x8E5) |  |  | Plaguewood |
-| `SCOURGEHOLD` | 2278 (0x8E6) |  |  | Scourgehold |
-| `STRATHOLME1` | 2279 (0x8E7) |  |  | Stratholme |
-| `DO_NOT_USE` | 2280 (0x8E8) |  |  | DO NOT USE |
-| `DARROWMERE_LAKE` | 2297 (0x8F9) |  |  | Darrowmere Lake |
-| `CAER_DARROW` | 2298 (0x8FA) |  |  | Caer Darrow |
-| `DARROWMERE_LAKE1` | 2299 (0x8FB) |  |  | Darrowmere Lake |
-| `CAVERNS_OF_TIME1` | 2300 (0x8FC) |  |  | Caverns of Time |
-| `THISTLEFUR_VILLAGE` | 2301 (0x8FD) |  |  | Thistlefur Village |
-| `THE_QUAGMIRE` | 2302 (0x8FE) |  |  | The Quagmire |
-| `WINDBREAK_CANYON` | 2303 (0x8FF) |  |  | Windbreak Canyon |
-| `SOUTH_SEAS` | 2317 (0x90D) |  |  | South Seas |
-| `THE_GREAT_SEA3` | 2318 (0x90E) |  |  | The Great Sea |
-| `THE_GREAT_SEA4` | 2319 (0x90F) |  |  | The Great Sea |
-| `THE_GREAT_SEA5` | 2320 (0x910) |  |  | The Great Sea |
-| `THE_GREAT_SEA6` | 2321 (0x911) |  |  | The Great Sea |
-| `THE_VEILED_SEA1` | 2322 (0x912) |  |  | The Veiled Sea |
-| `THE_VEILED_SEA2` | 2323 (0x913) |  |  | The Veiled Sea |
-| `THE_VEILED_SEA3` | 2324 (0x914) |  |  | The Veiled Sea |
-| `THE_VEILED_SEA4` | 2325 (0x915) |  |  | The Veiled Sea |
-| `THE_VEILED_SEA5` | 2326 (0x916) |  |  | The Veiled Sea |
-| `RAZOR_HILL_BARRACKS` | 2337 (0x921) |  |  | Razor Hill Barracks |
-| `SOUTH_SEAS1` | 2338 (0x922) |  |  | South Seas |
-| `THE_GREAT_SEA7` | 2339 (0x923) |  |  | The Great Sea |
-| `BLOODTOOTH_CAMP` | 2357 (0x935) |  |  | Bloodtooth Camp |
-| `FOREST_SONG` | 2358 (0x936) |  |  | Forest Song |
-| `GREENPAW_VILLAGE` | 2359 (0x937) |  |  | Greenpaw Village |
-| `SILVERWING_OUTPOST` | 2360 (0x938) |  |  | Silverwing Outpost |
-| `NIGHTHAVEN` | 2361 (0x939) |  |  | Nighthaven |
-| `SHRINE_OF_REMULOS` | 2362 (0x93A) |  |  | Shrine of Remulos |
-| `STORMRAGE_BARROW_DENS` | 2363 (0x93B) |  |  | Stormrage Barrow Dens |
-| `THE_GREAT_SEA8` | 2364 (0x93C) |  |  | The Great Sea |
-| `THE_GREAT_SEA9` | 2365 (0x93D) |  |  | The Great Sea |
-| `THE_BLACK_MORASS` | 2366 (0x93E) |  |  | The Black Morass |
-| `OLD_HILLSBRAD_FOOTHILLS` | 2367 (0x93F) |  |  | Old Hillsbrad Foothills |
-| `TARREN_MILL1` | 2368 (0x940) |  |  | Tarren Mill |
-| `SOUTHSHORE1` | 2369 (0x941) |  |  | Southshore |
-| `DURNHOLDE_KEEP1` | 2370 (0x942) |  |  | Durnholde Keep |
-| `DUN_GAROK1` | 2371 (0x943) |  |  | Dun Garok |
-| `HILLSBRAD_FIELDS1` | 2372 (0x944) |  |  | Hillsbrad Fields |
-| `EASTERN_STRAND1` | 2373 (0x945) |  |  | Eastern Strand |
-| `NETHANDER_STEAD1` | 2374 (0x946) |  |  | Nethander Stead |
-| `DARROW_HILL1` | 2375 (0x947) |  |  | Darrow Hill |
-| `SOUTHPOINT_TOWER1` | 2376 (0x948) |  |  | Southpoint Tower |
-| `THORADINS_WALL3` | 2377 (0x949) |  |  | Thoradin's Wall |
-| `WESTERN_STRAND1` | 2378 (0x94A) |  |  | Western Strand |
-| `AZURELODE_MINE1` | 2379 (0x94B) |  |  | Azurelode Mine |
-| `THE_GREAT_SEA10` | 2397 (0x95D) |  |  | The Great Sea |
-| `THE_GREAT_SEA11` | 2398 (0x95E) |  |  | The Great Sea |
-| `THE_GREAT_SEA12` | 2399 (0x95F) |  |  | The Great Sea |
-| `THE_FORBIDDING_SEA1` | 2400 (0x960) |  |  | The Forbidding Sea |
-| `THE_FORBIDDING_SEA2` | 2401 (0x961) |  |  | The Forbidding Sea |
-| `THE_FORBIDDING_SEA3` | 2402 (0x962) |  |  | The Forbidding Sea |
-| `THE_FORBIDDING_SEA4` | 2403 (0x963) |  |  | The Forbidding Sea |
-| `TETHRIS_ARAN` | 2404 (0x964) |  |  | Tethris Aran |
-| `ETHEL_RETHOR` | 2405 (0x965) |  |  | Ethel Rethor |
-| `RANAZJAR_ISLE` | 2406 (0x966) |  |  | Ranazjar Isle |
-| `KORMEKS_HUT` | 2407 (0x967) |  |  | Kormek's Hut |
-| `SHADOWPREY_VILLAGE` | 2408 (0x968) |  |  | Shadowprey Village |
-| `BLACKROCK_PASS` | 2417 (0x971) |  |  | Blackrock Pass |
-| `MORGANS_VIGIL` | 2418 (0x972) |  |  | Morgan's Vigil |
-| `SLITHER_ROCK` | 2419 (0x973) |  |  | Slither Rock |
-| `TERROR_WING_PATH` | 2420 (0x974) |  |  | Terror Wing Path |
-| `DRACO_DAR` | 2421 (0x975) |  |  | Draco'dar |
-| `RAGEFIRE_CHASM` | 2437 (0x985) |  |  | Ragefire Chasm |
-| `NIGHTSONG_WOODS` | 2457 (0x999) |  |  | Nightsong Woods |
-| `THE_VEILED_SEA6` | 2477 (0x9AD) |  |  | The Veiled Sea |
-| `MORLOS_ARAN` | 2478 (0x9AE) |  |  | Morlos'Aran |
-| `EMERALD_SANCTUARY` | 2479 (0x9AF) |  |  | Emerald Sanctuary |
-| `JADEFIRE_GLEN` | 2480 (0x9B0) |  |  | Jadefire Glen |
-| `RUINS_OF_CONSTELLAS` | 2481 (0x9B1) |  |  | Ruins of Constellas |
-| `BITTER_REACHES` | 2497 (0x9C1) |  |  | Bitter Reaches |
-| `RISE_OF_THE_DEFILER` | 2517 (0x9D5) |  |  | Rise of the Defiler |
-| `LARISS_PAVILION` | 2518 (0x9D6) |  |  | Lariss Pavilion |
-| `WOODPAW_HILLS` | 2519 (0x9D7) |  |  | Woodpaw Hills |
-| `WOODPAW_DEN` | 2520 (0x9D8) |  |  | Woodpaw Den |
-| `VERDANTIS_RIVER` | 2521 (0x9D9) |  |  | Verdantis River |
-| `RUINS_OF_ISILDIEN` | 2522 (0x9DA) |  |  | Ruins of Isildien |
-| `GRIMTOTEM_POST` | 2537 (0x9E9) |  |  | Grimtotem Post |
-| `CAMP_APARAJE` | 2538 (0x9EA) |  |  | Camp Aparaje |
-| `MALAKA_JIN` | 2539 (0x9EB) |  |  | Malaka'jin |
-| `BOULDERSLIDE_RAVINE` | 2540 (0x9EC) |  |  | Boulderslide Ravine |
-| `SISHIR_CANYON` | 2541 (0x9ED) |  |  | Sishir Canyon |
-| `DIRE_MAUL` | 2557 (0x9FD) |  |  | Dire Maul |
-| `DEADWIND_RAVINE` | 2558 (0x9FE) |  |  | Deadwind Ravine |
-| `DIAMONDHEAD_RIVER` | 2559 (0x9FF) |  |  | Diamondhead River |
-| `ARIDENS_CAMP` | 2560 (0xA00) |  |  | Ariden's Camp |
-| `THE_VICE` | 2561 (0xA01) |  |  | The Vice |
-| `KARAZHAN` | 2562 (0xA02) |  |  | Karazhan |
-| `MORGANS_PLOT` | 2563 (0xA03) |  |  | Morgan's Plot |
-| `DIRE_MAUL1` | 2577 (0xA11) |  |  | Dire Maul |
-| `ALTERAC_VALLEY` | 2597 (0xA25) |  |  | Alterac Valley |
-| `SCRABBLESCREWS_CAMP` | 2617 (0xA39) |  |  | Scrabblescrew's Camp |
-| `JADEFIRE_RUN` | 2618 (0xA3A) |  |  | Jadefire Run |
-| `THONDRORIL_RIVER` | 2619 (0xA3B) |  |  | Thondroril River |
-| `THONDRORIL_RIVER1` | 2620 (0xA3C) |  |  | Thondroril River |
-| `LAKE_MERELDAR` | 2621 (0xA3D) |  |  | Lake Mereldar |
-| `PESTILENT_SCAR` | 2622 (0xA3E) |  |  | Pestilent Scar |
-| `THE_INFECTIS_SCAR` | 2623 (0xA3F) |  |  | The Infectis Scar |
-| `BLACKWOOD_LAKE` | 2624 (0xA40) |  |  | Blackwood Lake |
-| `EASTWALL_GATE` | 2625 (0xA41) |  |  | Eastwall Gate |
-| `TERRORWEB_TUNNEL` | 2626 (0xA42) |  |  | Terrorweb Tunnel |
-| `TERRORDALE` | 2627 (0xA43) |  |  | Terrordale |
-| `KARGATHIA_KEEP` | 2637 (0xA4D) |  |  | Kargathia Keep |
-| `VALLEY_OF_BONES` | 2657 (0xA61) |  |  | Valley of Bones |
-| `BLACKWING_LAIR` | 2677 (0xA75) |  |  | Blackwing Lair |
-| `DEADMANS_CROSSING` | 2697 (0xA89) |  |  | Deadman's Crossing |
-| `MOLTEN_CORE` | 2717 (0xA9D) |  |  | Molten Core |
-| `THE_SCARAB_WALL` | 2737 (0xAB1) |  |  | The Scarab Wall |
-| `SOUTHWIND_VILLAGE` | 2738 (0xAB2) |  |  | Southwind Village |
-| `TWILIGHT_BASE_CAMP` | 2739 (0xAB3) |  |  | Twilight Base Camp |
-| `THE_CRYSTAL_VALE` | 2740 (0xAB4) |  |  | The Crystal Vale |
-| `THE_SCARAB_DAIS` | 2741 (0xAB5) |  |  | The Scarab Dais |
-| `HIVE_ASHI` | 2742 (0xAB6) |  |  | Hive'Ashi |
-| `HIVE_ZORA` | 2743 (0xAB7) |  |  | Hive'Zora |
-| `HIVE_REGAL` | 2744 (0xAB8) |  |  | Hive'Regal |
-| `SHRINE_OF_THE_FALLEN_WARRIOR` | 2757 (0xAC5) |  |  | Shrine of the Fallen Warrior |
-| `UNUSED_ALTERAC_VALLEY` | 2777 (0xAD9) |  |  | UNUSED Alterac Valley |
-| `BLACKFATHOM_DEEPS1` | 2797 (0xAED) |  |  | Blackfathom Deeps |
-| `CRYSTALSONG_FOREST` | 2817 (0xB01) |  |  | Crystalsong Forest |
-| `THE_MASTERS_CELLAR` | 2837 (0xB15) |  |  | The Master's Cellar |
-| `STONEWROUGHT_PASS` | 2838 (0xB16) |  |  | Stonewrought Pass |
-| `ALTERAC_VALLEY1` | 2839 (0xB17) |  |  | Alterac Valley |
-| `THE_RUMBLE_CAGE` | 2857 (0xB29) |  |  | The Rumble Cage |
-| `CHUNK_TEST` | 2877 (0xB3D) |  |  | Chunk Test |
-| `ZORAM_GAR_OUTPOST` | 2897 (0xB51) |  |  | Zoram'gar Outpost |
-| `HALL_OF_LEGENDS` | 2917 (0xB65) |  |  | Hall of Legends |
-| `CHAMPIONS_HALL` | 2918 (0xB66) |  |  | Champions' Hall |
-| `GROSH_GOK_COMPOUND` | 2937 (0xB79) |  |  | Grosh'gok Compound |
-| `SLEEPING_GORGE` | 2938 (0xB7A) |  |  | Sleeping Gorge |
-| `IRONDEEP_MINE` | 2957 (0xB8D) |  |  | Irondeep Mine |
-| `STONEHEARTH_OUTPOST` | 2958 (0xB8E) |  |  | Stonehearth Outpost |
-| `DUN_BALDAR` | 2959 (0xB8F) |  |  | Dun Baldar |
-| `ICEWING_PASS` | 2960 (0xB90) |  |  | Icewing Pass |
-| `FROSTWOLF_VILLAGE` | 2961 (0xB91) |  |  | Frostwolf Village |
-| `TOWER_POINT` | 2962 (0xB92) |  |  | Tower Point |
-| `COLDTOOTH_MINE` | 2963 (0xB93) |  |  | Coldtooth Mine |
-| `WINTERAX_HOLD` | 2964 (0xB94) |  |  | Winterax Hold |
-| `ICEBLOOD_GARRISON` | 2977 (0xBA1) |  |  | Iceblood Garrison |
-| `FROSTWOLF_KEEP` | 2978 (0xBA2) |  |  | Frostwolf Keep |
-| `TOR_KREN_FARM` | 2979 (0xBA3) |  |  | Tor'kren Farm |
-| `FROST_DAGGER_PASS` | 3017 (0xBC9) |  |  | Frost Dagger Pass |
-| `IRONSTONE_CAMP` | 3037 (0xBDD) |  |  | Ironstone Camp |
-| `WEAZELS_CRATER` | 3038 (0xBDE) |  |  | Weazel's Crater |
-| `TAHONDA_RUINS` | 3039 (0xBDF) |  |  | Tahonda Ruins |
-| `FIELD_OF_STRIFE` | 3057 (0xBF1) |  |  | Field of Strife |
-| `ICEWING_CAVERN` | 3058 (0xBF2) |  |  | Icewing Cavern |
-| `VALORS_REST` | 3077 (0xC05) |  |  | Valor's Rest |
-| `THE_SWARMING_PILLAR` | 3097 (0xC19) |  |  | The Swarming Pillar |
-| `TWILIGHT_POST` | 3098 (0xC1A) |  |  | Twilight Post |
-| `TWILIGHT_OUTPOST` | 3099 (0xC1B) |  |  | Twilight Outpost |
-| `RAVAGED_TWILIGHT_CAMP` | 3100 (0xC1C) |  |  | Ravaged Twilight Camp |
-| `SHALZARUS_LAIR` | 3117 (0xC2D) |  |  | Shalzaru's Lair |
-| `TALRENDIS_POINT` | 3137 (0xC41) |  |  | Talrendis Point |
-| `RETHRESS_SANCTUM` | 3138 (0xC42) |  |  | Rethress Sanctum |
-| `MOON_HORROR_DEN` | 3139 (0xC43) |  |  | Moon Horror Den |
-| `SCALEBEARDS_CAVE` | 3140 (0xC44) |  |  | Scalebeard's Cave |
-| `BOULDERSLIDE_CAVERN` | 3157 (0xC55) |  |  | Boulderslide Cavern |
-| `WARSONG_LABOR_CAMP` | 3177 (0xC69) |  |  | Warsong Labor Camp |
-| `CHILLWIND_CAMP` | 3197 (0xC7D) |  |  | Chillwind Camp |
-| `THE_MAUL` | 3217 (0xC91) |  |  | The Maul |
-| `THE_MAUL_UNUSED` | 3237 (0xCA5) |  |  | The Maul UNUSED |
-| `BONES_OF_GRAKKAROND` | 3257 (0xCB9) |  |  | Bones of Grakkarond |
-| `WARSONG_GULCH` | 3277 (0xCCD) |  |  | Warsong Gulch |
-| `FROSTWOLF_GRAVEYARD` | 3297 (0xCE1) |  |  | Frostwolf Graveyard |
-| `FROSTWOLF_PASS` | 3298 (0xCE2) |  |  | Frostwolf Pass |
-| `DUN_BALDAR_PASS` | 3299 (0xCE3) |  |  | Dun Baldar Pass |
-| `ICEBLOOD_GRAVEYARD` | 3300 (0xCE4) |  |  | Iceblood Graveyard |
-| `SNOWFALL_GRAVEYARD` | 3301 (0xCE5) |  |  | Snowfall Graveyard |
-| `STONEHEARTH_GRAVEYARD` | 3302 (0xCE6) |  |  | Stonehearth Graveyard |
-| `STORMPIKE_GRAVEYARD` | 3303 (0xCE7) |  |  | Stormpike Graveyard |
-| `ICEWING_BUNKER` | 3304 (0xCE8) |  |  | Icewing Bunker |
-| `STONEHEARTH_BUNKER` | 3305 (0xCE9) |  |  | Stonehearth Bunker |
-| `WILDPAW_RIDGE` | 3306 (0xCEA) |  |  | Wildpaw Ridge |
-| `REVANTUSK_VILLAGE` | 3317 (0xCF5) |  |  | Revantusk Village |
-| `ROCK_OF_DUROTAN` | 3318 (0xCF6) |  |  | Rock of Durotan |
-| `SILVERWING_GROVE` | 3319 (0xCF7) |  |  | Silverwing Grove |
-| `WARSONG_LUMBER_MILL` | 3320 (0xCF8) |  |  | Warsong Lumber Mill |
-| `SILVERWING_HOLD` | 3321 (0xCF9) |  |  | Silverwing Hold |
-| `WILDPAW_CAVERN` | 3337 (0xD09) |  |  | Wildpaw Cavern |
-| `THE_VEILED_CLEFT` | 3338 (0xD0A) |  |  | The Veiled Cleft |
-| `YOJAMBA_ISLE` | 3357 (0xD1D) |  |  | Yojamba Isle |
-| `ARATHI_BASIN` | 3358 (0xD1E) |  |  | Arathi Basin |
-| `THE_COIL` | 3377 (0xD31) |  |  | The Coil |
-| `ALTAR_OF_HIR_EEK` | 3378 (0xD32) |  |  | Altar of Hir'eek |
-| `SHADRA_ZAAR` | 3379 (0xD33) |  |  | Shadra'zaar |
-| `HAKKARI_GROUNDS` | 3380 (0xD34) |  |  | Hakkari Grounds |
-| `NAZE_OF_SHIRVALLAH` | 3381 (0xD35) |  |  | Naze of Shirvallah |
-| `TEMPLE_OF_BETHEKK` | 3382 (0xD36) |  |  | Temple of Bethekk |
-| `THE_BLOODFIRE_PIT` | 3383 (0xD37) |  |  | The Bloodfire Pit |
-| `ALTAR_OF_THE_BLOOD_GOD` | 3384 (0xD38) |  |  | Altar of the Blood God |
-| `ZANZAS_RISE` | 3397 (0xD45) |  |  | Zanza's Rise |
-| `EDGE_OF_MADNESS` | 3398 (0xD46) |  |  | Edge of Madness |
-| `TROLLBANE_HALL` | 3417 (0xD59) |  |  | Trollbane Hall |
-| `DEFILERS_DEN` | 3418 (0xD5A) |  |  | Defiler's Den |
-| `PAGLES_POINTE` | 3419 (0xD5B) |  |  | Pagle's Pointe |
-| `FARM` | 3420 (0xD5C) |  |  | Farm |
-| `BLACKSMITH` | 3421 (0xD5D) |  |  | Blacksmith |
-| `LUMBER_MILL` | 3422 (0xD5E) |  |  | Lumber Mill |
-| `GOLD_MINE` | 3423 (0xD5F) |  |  | Gold Mine |
-| `STABLES` | 3424 (0xD60) |  |  | Stables |
-| `CENARION_HOLD` | 3425 (0xD61) |  |  | Cenarion Hold |
-| `STAGHELM_POINT` | 3426 (0xD62) |  |  | Staghelm Point |
-| `BRONZEBEARD_ENCAMPMENT` | 3427 (0xD63) |  |  | Bronzebeard Encampment |
-| `AHN_QIRAJ` | 3428 (0xD64) |  |  | Ahn'Qiraj |
-| `RUINS_OF_AHN_QIRAJ` | 3429 (0xD65) |  |  | Ruins of Ahn'Qiraj |
-| `EVERSONG_WOODS` | 3430 (0xD66) |  |  | Eversong Woods |
-| `SUNSTRIDER_ISLE` | 3431 (0xD67) |  |  | Sunstrider Isle |
-| `SHRINE_OF_DATH_REMAR` | 3432 (0xD68) |  |  | Shrine of Dath'Remar |
-| `GHOSTLANDS` | 3433 (0xD69) |  |  | Ghostlands |
-| `SCARAB_TERRACE` | 3434 (0xD6A) |  |  | Scarab Terrace |
-| `GENERALS_TERRACE` | 3435 (0xD6B) |  |  | General's Terrace |
-| `THE_RESERVOIR` | 3436 (0xD6C) |  |  | The Reservoir |
-| `THE_HATCHERY` | 3437 (0xD6D) |  |  | The Hatchery |
-| `THE_COMB` | 3438 (0xD6E) |  |  | The Comb |
-| `WATCHERS_TERRACE` | 3439 (0xD6F) |  |  | Watchers' Terrace |
-| `SCARAB_TERRACE1` | 3440 (0xD70) |  |  | Scarab Terrace |
-| `GENERALS_TERRACE1` | 3441 (0xD71) |  |  | General's Terrace |
-| `THE_RESERVOIR1` | 3442 (0xD72) |  |  | The Reservoir |
-| `THE_HATCHERY1` | 3443 (0xD73) |  |  | The Hatchery |
-| `THE_COMB1` | 3444 (0xD74) |  |  | The Comb |
-| `WATCHERS_TERRACE1` | 3445 (0xD75) |  |  | Watchers' Terrace |
-| `TWILIGHTS_RUN` | 3446 (0xD76) |  |  | Twilight's Run |
-| `ORTELLS_HIDEOUT` | 3447 (0xD77) |  |  | Ortell's Hideout |
-| `SCARAB_TERRACE2` | 3448 (0xD78) |  |  | Scarab Terrace |
-| `GENERALS_TERRACE2` | 3449 (0xD79) |  |  | General's Terrace |
-| `THE_RESERVOIR2` | 3450 (0xD7A) |  |  | The Reservoir |
-| `THE_HATCHERY2` | 3451 (0xD7B) |  |  | The Hatchery |
-| `THE_COMB2` | 3452 (0xD7C) |  |  | The Comb |
-| `WATCHERS_TERRACE2` | 3453 (0xD7D) |  |  | Watchers' Terrace |
-| `RUINS_OF_AHN_QIRAJ1` | 3454 (0xD7E) |  |  | Ruins of Ahn'Qiraj |
-| `THE_NORTH_SEA` | 3455 (0xD7F) |  |  | The North Sea |
-| `NAXXRAMAS` | 3456 (0xD80) |  |  | Naxxramas |
-| `KARAZHAN1` | 3457 (0xD81) |  |  | Karazhan |
-| `CITY` | 3459 (0xD83) |  |  | City |
-| `GOLDEN_STRAND` | 3460 (0xD84) |  |  | Golden Strand |
-| `SUNSAIL_ANCHORAGE` | 3461 (0xD85) |  |  | Sunsail Anchorage |
-| `FAIRBREEZE_VILLAGE` | 3462 (0xD86) |  |  | Fairbreeze Village |
-| `MAGISTERS_GATE` | 3463 (0xD87) |  |  | Magisters Gate |
-| `FARSTRIDER_RETREAT` | 3464 (0xD88) |  |  | Farstrider Retreat |
-| `NORTH_SANCTUM` | 3465 (0xD89) |  |  | North Sanctum |
-| `WEST_SANCTUM` | 3466 (0xD8A) |  |  | West Sanctum |
-| `EAST_SANCTUM` | 3467 (0xD8B) |  |  | East Sanctum |
-| `SALTHERILS_HAVEN` | 3468 (0xD8C) |  |  | Saltheril's Haven |
-| `THURONS_LIVERY` | 3469 (0xD8D) |  |  | Thuron's Livery |
-| `STILLWHISPER_POND` | 3470 (0xD8E) |  |  | Stillwhisper Pond |
-| `THE_LIVING_WOOD` | 3471 (0xD8F) |  |  | The Living Wood |
-| `AZUREBREEZE_COAST` | 3472 (0xD90) |  |  | Azurebreeze Coast |
-| `LAKE_ELRENDAR` | 3473 (0xD91) |  |  | Lake Elrendar |
-| `THE_SCORCHED_GROVE` | 3474 (0xD92) |  |  | The Scorched Grove |
-| `ZEB_WATHA` | 3475 (0xD93) |  |  | Zeb'Watha |
-| `TOR_WATHA` | 3476 (0xD94) |  |  | Tor'Watha |
-| `AZJOL_NERUB` | 3477 (0xD95) |  |  | Azjol-Nerub |
-| `GATES_OF_AHN_QIRAJ` | 3478 (0xD96) |  |  | Gates of Ahn'Qiraj |
-| `THE_VEILED_SEA7` | 3479 (0xD97) |  |  | The Veiled Sea |
-| `DUSKWITHER_GROUNDS` | 3480 (0xD98) |  |  | Duskwither Grounds |
-| `DUSKWITHER_SPIRE` | 3481 (0xD99) |  |  | Duskwither Spire |
-| `THE_DEAD_SCAR` | 3482 (0xD9A) |  |  | The Dead Scar |
-| `HELLFIRE_PENINSULA` | 3483 (0xD9B) |  |  | Hellfire Peninsula |
-| `THE_SUNSPIRE` | 3484 (0xD9C) |  |  | The Sunspire |
-| `FALTHRIEN_ACADEMY` | 3485 (0xD9D) |  |  | Falthrien Academy |
-| `RAVENHOLDT_MANOR` | 3486 (0xD9E) |  |  | Ravenholdt Manor |
-| `SILVERMOON_CITY` | 3487 (0xD9F) |  |  | Silvermoon City |
-| `TRANQUILLIEN` | 3488 (0xDA0) |  |  | Tranquillien |
-| `SUNCROWN_VILLAGE` | 3489 (0xDA1) |  |  | Suncrown Village |
-| `GOLDENMIST_VILLAGE` | 3490 (0xDA2) |  |  | Goldenmist Village |
-| `WINDRUNNER_VILLAGE` | 3491 (0xDA3) |  |  | Windrunner Village |
-| `WINDRUNNER_SPIRE` | 3492 (0xDA4) |  |  | Windrunner Spire |
-| `SANCTUM_OF_THE_SUN` | 3493 (0xDA5) |  |  | Sanctum of the Sun |
-| `SANCTUM_OF_THE_MOON` | 3494 (0xDA6) |  |  | Sanctum of the Moon |
-| `DAWNSTAR_SPIRE` | 3495 (0xDA7) |  |  | Dawnstar Spire |
-| `FARSTRIDER_ENCLAVE` | 3496 (0xDA8) |  |  | Farstrider Enclave |
-| `AN_DAROTH` | 3497 (0xDA9) |  |  | An'daroth |
-| `AN_TELAS` | 3498 (0xDAA) |  |  | An'telas |
-| `AN_OWYN` | 3499 (0xDAB) |  |  | An'owyn |
-| `DEATHOLME` | 3500 (0xDAC) |  |  | Deatholme |
-| `BLEEDING_ZIGGURAT` | 3501 (0xDAD) |  |  | Bleeding Ziggurat |
-| `HOWLING_ZIGGURAT` | 3502 (0xDAE) |  |  | Howling Ziggurat |
-| `SHALANDIS_ISLE` | 3503 (0xDAF) |  |  | Shalandis Isle |
-| `TORYL_ESTATE` | 3504 (0xDB0) |  |  | Toryl Estate |
-| `UNDERLIGHT_MINES` | 3505 (0xDB1) |  |  | Underlight Mines |
-| `ANDILIEN_ESTATE` | 3506 (0xDB2) |  |  | Andilien Estate |
-| `HATCHET_HILLS` | 3507 (0xDB3) |  |  | Hatchet Hills |
-| `AMANI_PASS` | 3508 (0xDB4) |  |  | Amani Pass |
-| `SUNGRAZE_PEAK` | 3509 (0xDB5) |  |  | Sungraze Peak |
-| `AMANI_CATACOMBS` | 3510 (0xDB6) |  |  | Amani Catacombs |
-| `TOWER_OF_THE_DAMNED` | 3511 (0xDB7) |  |  | Tower of the Damned |
-| `ZEB_SORA` | 3512 (0xDB8) |  |  | Zeb'Sora |
-| `LAKE_ELRENDAR1` | 3513 (0xDB9) |  |  | Lake Elrendar |
-| `THE_DEAD_SCAR1` | 3514 (0xDBA) |  |  | The Dead Scar |
-| `ELRENDAR_RIVER` | 3515 (0xDBB) |  |  | Elrendar River |
-| `ZEB_TELA` | 3516 (0xDBC) |  |  | Zeb'Tela |
-| `ZEB_NOWA` | 3517 (0xDBD) |  |  | Zeb'Nowa |
-| `NAGRAND` | 3518 (0xDBE) |  |  | Nagrand |
-| `TEROKKAR_FOREST` | 3519 (0xDBF) |  |  | Terokkar Forest |
-| `SHADOWMOON_VALLEY` | 3520 (0xDC0) |  |  | Shadowmoon Valley |
-| `ZANGARMARSH` | 3521 (0xDC1) |  |  | Zangarmarsh |
-| `BLADES_EDGE_MOUNTAINS` | 3522 (0xDC2) |  |  | Blade's Edge Mountains |
-| `NETHERSTORM` | 3523 (0xDC3) |  |  | Netherstorm |
-| `AZUREMYST_ISLE` | 3524 (0xDC4) |  |  | Azuremyst Isle |
-| `BLOODMYST_ISLE` | 3525 (0xDC5) |  |  | Bloodmyst Isle |
-| `AMMEN_VALE` | 3526 (0xDC6) |  |  | Ammen Vale |
-| `CRASH_SITE` | 3527 (0xDC7) |  |  | Crash Site |
-| `SILVERLINE_LAKE` | 3528 (0xDC8) |  |  | Silverline Lake |
-| `NESTLEWOOD_THICKET` | 3529 (0xDC9) |  |  | Nestlewood Thicket |
-| `SHADOW_RIDGE` | 3530 (0xDCA) |  |  | Shadow Ridge |
-| `SKULKING_ROW` | 3531 (0xDCB) |  |  | Skulking Row |
-| `DAWNING_LANE` | 3532 (0xDCC) |  |  | Dawning Lane |
-| `RUINS_OF_SILVERMOON` | 3533 (0xDCD) |  |  | Ruins of Silvermoon |
-| `FETHS_WAY` | 3534 (0xDCE) |  |  | Feth's Way |
-| `HELLFIRE_CITADEL` | 3535 (0xDCF) |  |  | Hellfire Citadel |
-| `THRALLMAR` | 3536 (0xDD0) |  |  | Thrallmar |
-| `BOREAN_TUNDRA` | 3537 (0xDD1) |  |  | Borean Tundra |
-| `HONOR_HOLD` | 3538 (0xDD2) |  |  | Honor Hold |
-| `THE_STAIR_OF_DESTINY` | 3539 (0xDD3) |  |  | The Stair of Destiny |
-| `TWISTING_NETHER` | 3540 (0xDD4) |  |  | Twisting Nether |
-| `FORGE_CAMP_MAGEDDON` | 3541 (0xDD5) |  |  | Forge Camp: Mageddon |
-| `THE_PATH_OF_GLORY` | 3542 (0xDD6) |  |  | The Path of Glory |
-| `THE_GREAT_FISSURE` | 3543 (0xDD7) |  |  | The Great Fissure |
-| `PLAIN_OF_SHARDS` | 3544 (0xDD8) |  |  | Plain of Shards |
-| `HELLFIRE_CITADEL1` | 3545 (0xDD9) |  |  | Hellfire Citadel |
-| `EXPEDITION_ARMORY` | 3546 (0xDDA) |  |  | Expedition Armory |
-| `THRONE_OF_KIL_JAEDEN` | 3547 (0xDDB) |  |  | Throne of Kil'jaeden |
-| `FORGE_CAMP_RAGE` | 3548 (0xDDC) |  |  | Forge Camp: Rage |
-| `INVASION_POINT_ANNIHILATOR` | 3549 (0xDDD) |  |  | Invasion Point: Annihilator |
-| `BORUNE_RUINS` | 3550 (0xDDE) |  |  | Borune Ruins |
-| `RUINS_OF_SHA_NAAR` | 3551 (0xDDF) |  |  | Ruins of Sha'naar |
-| `TEMPLE_OF_TELHAMAT` | 3552 (0xDE0) |  |  | Temple of Telhamat |
-| `POOLS_OF_AGGONAR` | 3553 (0xDE1) |  |  | Pools of Aggonar |
-| `FALCON_WATCH` | 3554 (0xDE2) |  |  | Falcon Watch |
-| `MAG_HAR_POST` | 3555 (0xDE3) |  |  | Mag'har Post |
-| `DEN_OF_HAAL_ESH` | 3556 (0xDE4) |  |  | Den of Haal'esh |
-| `THE_EXODAR` | 3557 (0xDE5) |  |  | The Exodar |
-| `ELRENDAR_FALLS` | 3558 (0xDE6) |  |  | Elrendar Falls |
-| `NESTLEWOOD_HILLS` | 3559 (0xDE7) |  |  | Nestlewood Hills |
-| `AMMEN_FIELDS` | 3560 (0xDE8) |  |  | Ammen Fields |
-| `THE_SACRED_GROVE` | 3561 (0xDE9) |  |  | The Sacred Grove |
-| `HELLFIRE_RAMPARTS` | 3562 (0xDEA) |  |  | Hellfire Ramparts |
-| `HELLFIRE_CITADEL2` | 3563 (0xDEB) |  |  | Hellfire Citadel |
-| `EMBERGLADE` | 3564 (0xDEC) |  |  | Emberglade |
-| `CENARION_REFUGE` | 3565 (0xDED) |  |  | Cenarion Refuge |
-| `MOONWING_DEN` | 3566 (0xDEE) |  |  | Moonwing Den |
-| `POD_CLUSTER` | 3567 (0xDEF) |  |  | Pod Cluster |
-| `POD_WRECKAGE` | 3568 (0xDF0) |  |  | Pod Wreckage |
-| `TIDES_HOLLOW` | 3569 (0xDF1) |  |  | Tides' Hollow |
-| `WRATHSCALE_POINT` | 3570 (0xDF2) |  |  | Wrathscale Point |
-| `BRISTLELIMB_VILLAGE` | 3571 (0xDF3) |  |  | Bristlelimb Village |
-| `STILLPINE_HOLD` | 3572 (0xDF4) |  |  | Stillpine Hold |
-| `ODESYUS_LANDING` | 3573 (0xDF5) |  |  | Odesyus' Landing |
-| `VALAARS_BERTH` | 3574 (0xDF6) |  |  | Valaar's Berth |
-| `SILTING_SHORE` | 3575 (0xDF7) |  |  | Silting Shore |
-| `AZURE_WATCH` | 3576 (0xDF8) |  |  | Azure Watch |
-| `GEEZLES_CAMP` | 3577 (0xDF9) |  |  | Geezle's Camp |
-| `MENAGERIE_WRECKAGE` | 3578 (0xDFA) |  |  | Menagerie Wreckage |
-| `TRAITORS_COVE` | 3579 (0xDFB) |  |  | Traitor's Cove |
-| `WILDWIND_PEAK` | 3580 (0xDFC) |  |  | Wildwind Peak |
-| `WILDWIND_PATH` | 3581 (0xDFD) |  |  | Wildwind Path |
-| `ZETH_GOR` | 3582 (0xDFE) |  |  | Zeth'Gor |
-| `BERYL_COAST` | 3583 (0xDFF) |  |  | Beryl Coast |
-| `BLOOD_WATCH` | 3584 (0xE00) |  |  | Blood Watch |
-| `BLADEWOOD` | 3585 (0xE01) |  |  | Bladewood |
-| `THE_VECTOR_COIL` | 3586 (0xE02) |  |  | The Vector Coil |
-| `THE_WARP_PISTON` | 3587 (0xE03) |  |  | The Warp Piston |
-| `THE_CRYO_CORE` | 3588 (0xE04) |  |  | The Cryo-Core |
-| `THE_CRIMSON_REACH` | 3589 (0xE05) |  |  | The Crimson Reach |
-| `WRATHSCALE_LAIR` | 3590 (0xE06) |  |  | Wrathscale Lair |
-| `RUINS_OF_LORETH_ARAN` | 3591 (0xE07) |  |  | Ruins of Loreth'Aran |
-| `NAZZIVIAN` | 3592 (0xE08) |  |  | Nazzivian |
-| `AXXARIEN` | 3593 (0xE09) |  |  | Axxarien |
-| `BLACKSILT_SHORE` | 3594 (0xE0A) |  |  | Blacksilt Shore |
-| `THE_FOUL_POOL` | 3595 (0xE0B) |  |  | The Foul Pool |
-| `THE_HIDDEN_REEF` | 3596 (0xE0C) |  |  | The Hidden Reef |
-| `AMBERWEB_PASS` | 3597 (0xE0D) |  |  | Amberweb Pass |
-| `WYRMSCAR_ISLAND` | 3598 (0xE0E) |  |  | Wyrmscar Island |
-| `TALON_STAND` | 3599 (0xE0F) |  |  | Talon Stand |
-| `BRISTLELIMB_ENCLAVE` | 3600 (0xE10) |  |  | Bristlelimb Enclave |
-| `RAGEFEATHER_RIDGE` | 3601 (0xE11) |  |  | Ragefeather Ridge |
-| `KESSELS_CROSSING` | 3602 (0xE12) |  |  | Kessel's Crossing |
-| `TEL_ATHIONS_CAMP` | 3603 (0xE13) |  |  | Tel'athion's Camp |
-| `THE_BLOODCURSED_REEF` | 3604 (0xE14) |  |  | The Bloodcursed Reef |
-| `HYJAL_PAST` | 3605 (0xE15) |  |  | Hyjal Past |
-| `HYJAL_SUMMIT` | 3606 (0xE16) |  |  | Hyjal Summit |
-| `SERPENTSHRINE_CAVERN` | 3607 (0xE17) |  |  | Serpentshrine Cavern |
-| `VINDICATORS_REST` | 3608 (0xE18) |  |  | Vindicator's Rest |
-| `UNUSED3` | 3609 (0xE19) |  |  | Unused3 |
-| `BURNING_BLADE_RUINS` | 3610 (0xE1A) |  |  | Burning Blade Ruins |
-| `CLAN_WATCH` | 3611 (0xE1B) |  |  | Clan Watch |
-| `BLOODCURSE_ISLE` | 3612 (0xE1C) |  |  | Bloodcurse Isle |
-| `GARADAR` | 3613 (0xE1D) |  |  | Garadar |
-| `SKYSONG_LAKE` | 3614 (0xE1E) |  |  | Skysong Lake |
-| `THRONE_OF_THE_ELEMENTS` | 3615 (0xE1F) |  |  | Throne of the Elements |
-| `LAUGHING_SKULL_RUINS` | 3616 (0xE20) |  |  | Laughing Skull Ruins |
-| `WARMAUL_HILL` | 3617 (0xE21) |  |  | Warmaul Hill |
-| `GRUULS_LAIR` | 3618 (0xE22) |  |  | Gruul's Lair |
-| `AUREN_RIDGE` | 3619 (0xE23) |  |  | Auren Ridge |
-| `AUREN_FALLS` | 3620 (0xE24) |  |  | Auren Falls |
-| `LAKE_SUNSPRING` | 3621 (0xE25) |  |  | Lake Sunspring |
-| `SUNSPRING_POST` | 3622 (0xE26) |  |  | Sunspring Post |
-| `AERIS_LANDING` | 3623 (0xE27) |  |  | Aeris Landing |
-| `FORGE_CAMP_FEAR` | 3624 (0xE28) |  |  | Forge Camp: Fear |
-| `FORGE_CAMP_HATE` | 3625 (0xE29) |  |  | Forge Camp: Hate |
-| `TELAAR` | 3626 (0xE2A) |  |  | Telaar |
-| `NORTHWIND_CLEFT` | 3627 (0xE2B) |  |  | Northwind Cleft |
-| `HALAA` | 3628 (0xE2C) |  |  | Halaa |
-| `SOUTHWIND_CLEFT` | 3629 (0xE2D) |  |  | Southwind Cleft |
-| `OSHU_GUN` | 3630 (0xE2E) |  |  | Oshu'gun |
-| `SPIRIT_FIELDS` | 3631 (0xE2F) |  |  | Spirit Fields |
-| `SHAMANAR` | 3632 (0xE30) |  |  | Shamanar |
-| `ANCESTRAL_GROUNDS` | 3633 (0xE31) |  |  | Ancestral Grounds |
-| `WINDYREED_VILLAGE` | 3634 (0xE32) |  |  | Windyreed Village |
-| `UNUSED2` | 3635 (0xE33) |  |  | Unused2 |
-| `ELEMENTAL_PLATEAU` | 3636 (0xE34) |  |  | Elemental Plateau |
-| `KILSORROW_FORTRESS` | 3637 (0xE35) |  |  | Kil'sorrow Fortress |
-| `THE_RING_OF_TRIALS` | 3638 (0xE36) |  |  | The Ring of Trials |
-| `SILVERMYST_ISLE` | 3639 (0xE37) |  |  | Silvermyst Isle |
-| `DAGGERFEN_VILLAGE` | 3640 (0xE38) |  |  | Daggerfen Village |
-| `UMBRAFEN_VILLAGE` | 3641 (0xE39) |  |  | Umbrafen Village |
-| `FERALFEN_VILLAGE` | 3642 (0xE3A) |  |  | Feralfen Village |
-| `BLOODSCALE_ENCLAVE` | 3643 (0xE3B) |  |  | Bloodscale Enclave |
-| `TELREDOR` | 3644 (0xE3C) |  |  | Telredor |
-| `ZABRA_JIN` | 3645 (0xE3D) |  |  | Zabra'jin |
-| `QUAGG_RIDGE` | 3646 (0xE3E) |  |  | Quagg Ridge |
-| `THE_SPAWNING_GLEN` | 3647 (0xE3F) |  |  | The Spawning Glen |
-| `THE_DEAD_MIRE` | 3648 (0xE40) |  |  | The Dead Mire |
-| `SPOREGGAR` | 3649 (0xE41) |  |  | Sporeggar |
-| `ANGO_ROSH_GROUNDS` | 3650 (0xE42) |  |  | Ango'rosh Grounds |
-| `ANGO_ROSH_STRONGHOLD` | 3651 (0xE43) |  |  | Ango'rosh Stronghold |
-| `FUNGGOR_CAVERN` | 3652 (0xE44) |  |  | Funggor Cavern |
-| `SERPENT_LAKE` | 3653 (0xE45) |  |  | Serpent Lake |
-| `THE_DRAIN` | 3654 (0xE46) |  |  | The Drain |
-| `UMBRAFEN_LAKE` | 3655 (0xE47) |  |  | Umbrafen Lake |
-| `MARSHLIGHT_LAKE` | 3656 (0xE48) |  |  | Marshlight Lake |
-| `PORTAL_CLEARING` | 3657 (0xE49) |  |  | Portal Clearing |
-| `SPOREWIND_LAKE` | 3658 (0xE4A) |  |  | Sporewind Lake |
-| `THE_LAGOON` | 3659 (0xE4B) |  |  | The Lagoon |
-| `BLADES_RUN` | 3660 (0xE4C) |  |  | Blades' Run |
-| `BLADE_TOOTH_CANYON` | 3661 (0xE4D) |  |  | Blade Tooth Canyon |
-| `COMMONS_HALL` | 3662 (0xE4E) |  |  | Commons Hall |
-| `DERELICT_MANOR` | 3663 (0xE4F) |  |  | Derelict Manor |
-| `HUNTRESS_OF_THE_SUN` | 3664 (0xE50) |  |  | Huntress of the Sun |
-| `FALCONWING_SQUARE` | 3665 (0xE51) |  |  | Falconwing Square |
-| `HALAANI_BASIN` | 3666 (0xE52) |  |  | Halaani Basin |
-| `HEWN_BOG` | 3667 (0xE53) |  |  | Hewn Bog |
-| `BOHA_MU_RUINS` | 3668 (0xE54) |  |  | Boha'mu Ruins |
-| `THE_STADIUM` | 3669 (0xE55) |  |  | The Stadium |
-| `THE_OVERLOOK` | 3670 (0xE56) |  |  | The Overlook |
-| `BROKEN_HILL` | 3671 (0xE57) |  |  | Broken Hill |
-| `MAG_HARI_PROCESSION` | 3672 (0xE58) |  |  | Mag'hari Procession |
-| `NESINGWARY_SAFARI` | 3673 (0xE59) |  |  | Nesingwary Safari |
-| `CENARION_THICKET` | 3674 (0xE5A) |  |  | Cenarion Thicket |
-| `TUUREM` | 3675 (0xE5B) |  |  | Tuurem |
-| `VEIL_SHIENOR` | 3676 (0xE5C) |  |  | Veil Shienor |
-| `VEIL_SKITH` | 3677 (0xE5D) |  |  | Veil Skith |
-| `VEIL_SHALAS` | 3678 (0xE5E) |  |  | Veil Shalas |
-| `SKETTIS` | 3679 (0xE5F) |  |  | Skettis |
-| `BLACKWIND_VALLEY` | 3680 (0xE60) |  |  | Blackwind Valley |
-| `FIREWING_POINT` | 3681 (0xE61) |  |  | Firewing Point |
-| `GRANGOL_VAR_VILLAGE` | 3682 (0xE62) |  |  | Grangol'var Village |
-| `STONEBREAKER_HOLD` | 3683 (0xE63) |  |  | Stonebreaker Hold |
-| `ALLERIAN_STRONGHOLD` | 3684 (0xE64) |  |  | Allerian Stronghold |
-| `BONECHEWER_RUINS` | 3685 (0xE65) |  |  | Bonechewer Ruins |
-| `VEIL_LITHIC` | 3686 (0xE66) |  |  | Veil Lithic |
-| `OLEMBAS` | 3687 (0xE67) |  |  | Olembas |
-| `AUCHINDOUN` | 3688 (0xE68) |  |  | Auchindoun |
-| `VEIL_RESKK` | 3689 (0xE69) |  |  | Veil Reskk |
-| `BLACKWIND_LAKE` | 3690 (0xE6A) |  |  | Blackwind Lake |
-| `LAKE_ERE_NORU` | 3691 (0xE6B) |  |  | Lake Ere'Noru |
-| `LAKE_JORUNE` | 3692 (0xE6C) |  |  | Lake Jorune |
-| `SKETHYL_MOUNTAINS` | 3693 (0xE6D) |  |  | Skethyl Mountains |
-| `MISTY_RIDGE` | 3694 (0xE6E) |  |  | Misty Ridge |
-| `THE_BROKEN_HILLS` | 3695 (0xE6F) |  |  | The Broken Hills |
-| `THE_BARRIER_HILLS` | 3696 (0xE70) |  |  | The Barrier Hills |
-| `THE_BONE_WASTES` | 3697 (0xE71) |  |  | The Bone Wastes |
-| `NAGRAND_ARENA` | 3698 (0xE72) |  |  | Nagrand Arena |
-| `LAUGHING_SKULL_COURTYARD` | 3699 (0xE73) |  |  | Laughing Skull Courtyard |
-| `THE_RING_OF_BLOOD` | 3700 (0xE74) |  |  | The Ring of Blood |
-| `ARENA_FLOOR` | 3701 (0xE75) |  |  | Arena Floor |
-| `BLADES_EDGE_ARENA` | 3702 (0xE76) |  |  | Blade's Edge Arena |
-| `SHATTRATH_CITY` | 3703 (0xE77) |  |  | Shattrath City |
-| `THE_SHEPHERDS_GATE` | 3704 (0xE78) |  |  | The Shepherd's Gate |
-| `TELAARI_BASIN` | 3705 (0xE79) |  |  | Telaari Basin |
-| `THE_DARK_PORTAL1` | 3706 (0xE7A) |  |  | The Dark Portal |
-| `ALLIANCE_BASE` | 3707 (0xE7B) |  |  | Alliance Base |
-| `HORDE_ENCAMPMENT` | 3708 (0xE7C) |  |  | Horde Encampment |
-| `NIGHT_ELF_VILLAGE` | 3709 (0xE7D) |  |  | Night Elf Village |
-| `NORDRASSIL` | 3710 (0xE7E) |  |  | Nordrassil |
-| `SHOLAZAR_BASIN` | 3711 (0xE7F) |  |  | Sholazar Basin |
-| `AREA_52` | 3712 (0xE80) |  |  | Area 52 |
-| `THE_BLOOD_FURNACE` | 3713 (0xE81) |  |  | The Blood Furnace |
-| `THE_SHATTERED_HALLS` | 3714 (0xE82) |  |  | The Shattered Halls |
-| `THE_STEAMVAULT` | 3715 (0xE83) |  |  | The Steamvault |
-| `THE_UNDERBOG` | 3716 (0xE84) |  |  | The Underbog |
-| `THE_SLAVE_PENS` | 3717 (0xE85) |  |  | The Slave Pens |
-| `SWAMPRAT_POST` | 3718 (0xE86) |  |  | Swamprat Post |
-| `BLEEDING_HOLLOW_RUINS` | 3719 (0xE87) |  |  | Bleeding Hollow Ruins |
-| `TWIN_SPIRE_RUINS` | 3720 (0xE88) |  |  | Twin Spire Ruins |
-| `THE_CRUMBLING_WASTE` | 3721 (0xE89) |  |  | The Crumbling Waste |
-| `MANAFORGE_ARA` | 3722 (0xE8A) |  |  | Manaforge Ara |
-| `ARKLON_RUINS` | 3723 (0xE8B) |  |  | Arklon Ruins |
-| `COSMOWRENCH` | 3724 (0xE8C) |  |  | Cosmowrench |
-| `RUINS_OF_ENKAAT` | 3725 (0xE8D) |  |  | Ruins of Enkaat |
-| `MANAFORGE_B_NAAR` | 3726 (0xE8E) |  |  | Manaforge B'naar |
-| `THE_SCRAP_FIELD` | 3727 (0xE8F) |  |  | The Scrap Field |
-| `THE_VORTEX_FIELDS` | 3728 (0xE90) |  |  | The Vortex Fields |
-| `THE_HEAP` | 3729 (0xE91) |  |  | The Heap |
-| `MANAFORGE_CORUU` | 3730 (0xE92) |  |  | Manaforge Coruu |
-| `THE_TEMPEST_RIFT` | 3731 (0xE93) |  |  | The Tempest Rift |
-| `KIRIN_VAR_VILLAGE` | 3732 (0xE94) |  |  | Kirin'Var Village |
-| `THE_VIOLET_TOWER` | 3733 (0xE95) |  |  | The Violet Tower |
-| `MANAFORGE_DURO` | 3734 (0xE96) |  |  | Manaforge Duro |
-| `VOIDWIND_PLATEAU` | 3735 (0xE97) |  |  | Voidwind Plateau |
-| `MANAFORGE_ULTRIS` | 3736 (0xE98) |  |  | Manaforge Ultris |
-| `CELESTIAL_RIDGE` | 3737 (0xE99) |  |  | Celestial Ridge |
-| `THE_STORMSPIRE` | 3738 (0xE9A) |  |  | The Stormspire |
-| `FORGE_BASE_OBLIVION` | 3739 (0xE9B) |  |  | Forge Base: Oblivion |
-| `FORGE_BASE_GEHENNA` | 3740 (0xE9C) |  |  | Forge Base: Gehenna |
-| `RUINS_OF_FARAHLON` | 3741 (0xE9D) |  |  | Ruins of Farahlon |
-| `SOCRETHARS_SEAT` | 3742 (0xE9E) |  |  | Socrethar's Seat |
-| `LEGION_HOLD` | 3743 (0xE9F) |  |  | Legion Hold |
-| `SHADOWMOON_VILLAGE` | 3744 (0xEA0) |  |  | Shadowmoon Village |
-| `WILDHAMMER_STRONGHOLD` | 3745 (0xEA1) |  |  | Wildhammer Stronghold |
-| `THE_HAND_OF_GUL_DAN` | 3746 (0xEA2) |  |  | The Hand of Gul'dan |
-| `THE_FEL_PITS` | 3747 (0xEA3) |  |  | The Fel Pits |
-| `THE_DEATHFORGE` | 3748 (0xEA4) |  |  | The Deathforge |
-| `COILSKAR_CISTERN` | 3749 (0xEA5) |  |  | Coilskar Cistern |
-| `COILSKAR_POINT` | 3750 (0xEA6) |  |  | Coilskar Point |
-| `SUNFIRE_POINT` | 3751 (0xEA7) |  |  | Sunfire Point |
-| `ILLIDARI_POINT` | 3752 (0xEA8) |  |  | Illidari Point |
-| `RUINS_OF_BAA_RI` | 3753 (0xEA9) |  |  | Ruins of Baa'ri |
-| `ALTAR_OF_SHA_TAR` | 3754 (0xEAA) |  |  | Altar of Sha'tar |
-| `THE_STAIR_OF_DOOM` | 3755 (0xEAB) |  |  | The Stair of Doom |
-| `RUINS_OF_KARABOR` | 3756 (0xEAC) |  |  | Ruins of Karabor |
-| `ATA_MAL_TERRACE` | 3757 (0xEAD) |  |  | Ata'mal Terrace |
-| `NETHERWING_FIELDS` | 3758 (0xEAE) |  |  | Netherwing Fields |
-| `NETHERWING_LEDGE` | 3759 (0xEAF) |  |  | Netherwing Ledge |
-| `THE_BARRIER_HILLS1` | 3760 (0xEB0) |  |  | The Barrier Hills |
-| `THE_HIGH_PATH` | 3761 (0xEB1) |  |  | The High Path |
-| `WINDYREED_PASS` | 3762 (0xEB2) |  |  | Windyreed Pass |
-| `ZANGAR_RIDGE` | 3763 (0xEB3) |  |  | Zangar Ridge |
-| `THE_TWILIGHT_RIDGE` | 3764 (0xEB4) |  |  | The Twilight Ridge |
-| `RAZORTHORN_TRAIL` | 3765 (0xEB5) |  |  | Razorthorn Trail |
-| `OREBOR_HARBORAGE` | 3766 (0xEB6) |  |  | Orebor Harborage |
-| `BLADES_RUN1` | 3767 (0xEB7) |  |  | Blades' Run |
-| `JAGGED_RIDGE` | 3768 (0xEB8) |  |  | Jagged Ridge |
-| `THUNDERLORD_STRONGHOLD` | 3769 (0xEB9) |  |  | Thunderlord Stronghold |
-| `BLADE_TOOTH_CANYON1` | 3770 (0xEBA) |  |  | Blade Tooth Canyon |
-| `THE_LIVING_GROVE` | 3771 (0xEBB) |  |  | The Living Grove |
-| `SYLVANAAR` | 3772 (0xEBC) |  |  | Sylvanaar |
-| `BLADESPIRE_HOLD` | 3773 (0xEBD) |  |  | Bladespire Hold |
-| `GRUULS_LAIR1` | 3774 (0xEBE) |  |  | Gruul's Lair |
-| `CIRCLE_OF_BLOOD` | 3775 (0xEBF) |  |  | Circle of Blood |
-| `BLOODMAUL_OUTPOST` | 3776 (0xEC0) |  |  | Bloodmaul Outpost |
-| `BLOODMAUL_CAMP` | 3777 (0xEC1) |  |  | Bloodmaul Camp |
-| `DRAENETHYST_MINE` | 3778 (0xEC2) |  |  | Draenethyst Mine |
-| `TROGMAS_CLAIM` | 3779 (0xEC3) |  |  | Trogma's Claim |
-| `BLACKWING_COVEN` | 3780 (0xEC4) |  |  | Blackwing Coven |
-| `GRISHNATH` | 3781 (0xEC5) |  |  | Grishnath |
-| `VEIL_LASHH` | 3782 (0xEC6) |  |  | Veil Lashh |
-| `VEIL_VEKH` | 3783 (0xEC7) |  |  | Veil Vekh |
-| `FORGE_CAMP_TERROR` | 3784 (0xEC8) |  |  | Forge Camp: Terror |
-| `FORGE_CAMP_WRATH` | 3785 (0xEC9) |  |  | Forge Camp: Wrath |
-| `OGRI_LA` | 3786 (0xECA) |  |  | Ogri'la |
-| `FORGE_CAMP_ANGER` | 3787 (0xECB) |  |  | Forge Camp: Anger |
-| `THE_LOW_PATH` | 3788 (0xECC) |  |  | The Low Path |
-| `SHADOW_LABYRINTH` | 3789 (0xECD) |  |  | Shadow Labyrinth |
-| `AUCHENAI_CRYPTS` | 3790 (0xECE) |  |  | Auchenai Crypts |
-| `SETHEKK_HALLS` | 3791 (0xECF) |  |  | Sethekk Halls |
-| `MANA_TOMBS` | 3792 (0xED0) |  |  | Mana-Tombs |
-| `FELSPARK_RAVINE` | 3793 (0xED1) |  |  | Felspark Ravine |
-| `VALLEY_OF_BONES1` | 3794 (0xED2) |  |  | Valley of Bones |
-| `SHA_NAARI_WASTES` | 3795 (0xED3) |  |  | Sha'naari Wastes |
-| `THE_WARP_FIELDS` | 3796 (0xED4) |  |  | The Warp Fields |
-| `FALLEN_SKY_RIDGE` | 3797 (0xED5) |  |  | Fallen Sky Ridge |
-| `HAAL_ESHI_GORGE` | 3798 (0xED6) |  |  | Haal'eshi Gorge |
-| `STONEWALL_CANYON` | 3799 (0xED7) |  |  | Stonewall Canyon |
-| `THORNFANG_HILL` | 3800 (0xED8) |  |  | Thornfang Hill |
-| `MAG_HAR_GROUNDS` | 3801 (0xED9) |  |  | Mag'har Grounds |
-| `VOID_RIDGE` | 3802 (0xEDA) |  |  | Void Ridge |
-| `THE_ABYSSAL_SHELF` | 3803 (0xEDB) |  |  | The Abyssal Shelf |
-| `THE_LEGION_FRONT` | 3804 (0xEDC) |  |  | The Legion Front |
-| `ZUL_AMAN` | 3805 (0xEDD) |  |  | Zul'Aman |
-| `SUPPLY_CARAVAN` | 3806 (0xEDE) |  |  | Supply Caravan |
-| `REAVERS_FALL` | 3807 (0xEDF) |  |  | Reaver's Fall |
-| `CENARION_POST` | 3808 (0xEE0) |  |  | Cenarion Post |
-| `SOUTHERN_RAMPART` | 3809 (0xEE1) |  |  | Southern Rampart |
-| `NORTHERN_RAMPART` | 3810 (0xEE2) |  |  | Northern Rampart |
-| `GOR_GAZ_OUTPOST` | 3811 (0xEE3) |  |  | Gor'gaz Outpost |
-| `SPINEBREAKER_POST` | 3812 (0xEE4) |  |  | Spinebreaker Post |
-| `THE_PATH_OF_ANGUISH` | 3813 (0xEE5) |  |  | The Path of Anguish |
-| `EAST_SUPPLY_CARAVAN` | 3814 (0xEE6) |  |  | East Supply Caravan |
-| `EXPEDITION_POINT` | 3815 (0xEE7) |  |  | Expedition Point |
-| `ZEPPELIN_CRASH` | 3816 (0xEE8) |  |  | Zeppelin Crash |
-| `TESTING` | 3817 (0xEE9) |  |  | Testing |
-| `BLOODSCALE_GROUNDS` | 3818 (0xEEA) |  |  | Bloodscale Grounds |
-| `DARKCREST_ENCLAVE` | 3819 (0xEEB) |  |  | Darkcrest Enclave |
-| `EYE_OF_THE_STORM` | 3820 (0xEEC) |  |  | Eye of the Storm |
-| `WARDENS_CAGE` | 3821 (0xEED) |  |  | Warden's Cage |
-| `ECLIPSE_POINT` | 3822 (0xEEE) |  |  | Eclipse Point |
-| `ISLE_OF_TRIBULATIONS` | 3823 (0xEEF) |  |  | Isle of Tribulations |
-| `BLOODMAUL_RAVINE` | 3824 (0xEF0) |  |  | Bloodmaul Ravine |
-| `DRAGONS_END` | 3825 (0xEF1) |  |  | Dragons' End |
-| `DAGGERMAW_CANYON` | 3826 (0xEF2) |  |  | Daggermaw Canyon |
-| `VEKHAAR_STAND` | 3827 (0xEF3) |  |  | Vekhaar Stand |
-| `RUUAN_WEALD` | 3828 (0xEF4) |  |  | Ruuan Weald |
-| `VEIL_RUUAN` | 3829 (0xEF5) |  |  | Veil Ruuan |
-| `RAVENS_WOOD` | 3830 (0xEF6) |  |  | Raven's Wood |
-| `DEATHS_DOOR` | 3831 (0xEF7) |  |  | Death's Door |
-| `VORTEX_PINNACLE` | 3832 (0xEF8) |  |  | Vortex Pinnacle |
-| `RAZOR_RIDGE` | 3833 (0xEF9) |  |  | Razor Ridge |
-| `RIDGE_OF_MADNESS` | 3834 (0xEFA) |  |  | Ridge of Madness |
-| `DUSTQUILL_RAVINE` | 3835 (0xEFB) |  |  | Dustquill Ravine |
-| `MAGTHERIDONS_LAIR` | 3836 (0xEFC) |  |  | Magtheridon's Lair |
-| `SUNFURY_HOLD` | 3837 (0xEFD) |  |  | Sunfury Hold |
-| `SPINEBREAKER_MOUNTAINS` | 3838 (0xEFE) |  |  | Spinebreaker Mountains |
-| `ABANDONED_ARMORY` | 3839 (0xEFF) |  |  | Abandoned Armory |
-| `THE_BLACK_TEMPLE` | 3840 (0xF00) |  |  | The Black Temple |
-| `DARKCREST_SHORE` | 3841 (0xF01) |  |  | Darkcrest Shore |
-| `TEMPEST_KEEP` | 3842 (0xF02) |  |  | Tempest Keep |
-| `MOK_NATHAL_VILLAGE` | 3844 (0xF04) |  |  | Mok'Nathal Village |
-| `TEMPEST_KEEP1` | 3845 (0xF05) |  |  | Tempest Keep |
-| `THE_ARCATRAZ` | 3846 (0xF06) |  |  | The Arcatraz |
-| `THE_BOTANICA` | 3847 (0xF07) |  |  | The Botanica |
-| `THE_ARCATRAZ1` | 3848 (0xF08) |  |  | The Arcatraz |
-| `THE_MECHANAR` | 3849 (0xF09) |  |  | The Mechanar |
-| `NETHERSTONE` | 3850 (0xF0A) |  |  | Netherstone |
-| `MIDREALM_POST` | 3851 (0xF0B) |  |  | Midrealm Post |
-| `TULUMANS_LANDING` | 3852 (0xF0C) |  |  | Tuluman's Landing |
-| `PROTECTORATE_WATCH_POST` | 3854 (0xF0E) |  |  | Protectorate Watch Post |
-| `CIRCLE_OF_BLOOD_ARENA` | 3855 (0xF0F) |  |  | Circle of Blood Arena |
-| `ELRENDAR_CROSSING` | 3856 (0xF10) |  |  | Elrendar Crossing |
-| `AMMEN_FORD` | 3857 (0xF11) |  |  | Ammen Ford |
-| `RAZORTHORN_SHELF` | 3858 (0xF12) |  |  | Razorthorn Shelf |
-| `SILMYR_LAKE` | 3859 (0xF13) |  |  | Silmyr Lake |
-| `RAASTOK_GLADE` | 3860 (0xF14) |  |  | Raastok Glade |
-| `THALASSIAN_PASS` | 3861 (0xF15) |  |  | Thalassian Pass |
-| `CHURNING_GULCH` | 3862 (0xF16) |  |  | Churning Gulch |
-| `BROKEN_WILDS` | 3863 (0xF17) |  |  | Broken Wilds |
-| `BASH_IR_LANDING` | 3864 (0xF18) |  |  | Bash'ir Landing |
-| `CRYSTAL_SPINE` | 3865 (0xF19) |  |  | Crystal Spine |
-| `SKALD` | 3866 (0xF1A) |  |  | Skald |
-| `BLADED_GULCH` | 3867 (0xF1B) |  |  | Bladed Gulch |
-| `GYRO_PLANK_BRIDGE` | 3868 (0xF1C) |  |  | Gyro-Plank Bridge |
-| `MAGE_TOWER` | 3869 (0xF1D) |  |  | Mage Tower |
-| `BLOOD_ELF_TOWER` | 3870 (0xF1E) |  |  | Blood Elf Tower |
-| `DRAENEI_RUINS` | 3871 (0xF1F) |  |  | Draenei Ruins |
-| `FEL_REAVER_RUINS` | 3872 (0xF20) |  |  | Fel Reaver Ruins |
-| `THE_PROVING_GROUNDS` | 3873 (0xF21) |  |  | The Proving Grounds |
-| `ECO_DOME_FARFIELD` | 3874 (0xF22) |  |  | Eco-Dome Farfield |
-| `ECO_DOME_SKYPERCH` | 3875 (0xF23) |  |  | Eco-Dome Skyperch |
-| `ECO_DOME_SUTHERON` | 3876 (0xF24) |  |  | Eco-Dome Sutheron |
-| `ECO_DOME_MIDREALM` | 3877 (0xF25) |  |  | Eco-Dome Midrealm |
-| `ETHEREUM_STAGING_GROUNDS` | 3878 (0xF26) |  |  | Ethereum Staging Grounds |
-| `CHAPEL_YARD` | 3879 (0xF27) |  |  | Chapel Yard |
-| `ACCESS_SHAFT_ZEON` | 3880 (0xF28) |  |  | Access Shaft Zeon |
-| `TRELLEUM_MINE` | 3881 (0xF29) |  |  | Trelleum Mine |
-| `INVASION_POINT_DESTROYER` | 3882 (0xF2A) |  |  | Invasion Point: Destroyer |
-| `CAMP_OF_BOOM` | 3883 (0xF2B) |  |  | Camp of Boom |
-| `SPINEBREAKER_PASS` | 3884 (0xF2C) |  |  | Spinebreaker Pass |
-| `NETHERWEB_RIDGE` | 3885 (0xF2D) |  |  | Netherweb Ridge |
-| `DERELICT_CARAVAN` | 3886 (0xF2E) |  |  | Derelict Caravan |
-| `REFUGEE_CARAVAN` | 3887 (0xF2F) |  |  | Refugee Caravan |
-| `SHADOW_TOMB` | 3888 (0xF30) |  |  | Shadow Tomb |
-| `VEIL_RHAZE` | 3889 (0xF31) |  |  | Veil Rhaze |
-| `TOMB_OF_LIGHTS` | 3890 (0xF32) |  |  | Tomb of Lights |
-| `CARRION_HILL` | 3891 (0xF33) |  |  | Carrion Hill |
-| `WRITHING_MOUND` | 3892 (0xF34) |  |  | Writhing Mound |
-| `RING_OF_OBSERVANCE` | 3893 (0xF35) |  |  | Ring of Observance |
-| `AUCHENAI_GROUNDS` | 3894 (0xF36) |  |  | Auchenai Grounds |
-| `CENARION_WATCHPOST` | 3895 (0xF37) |  |  | Cenarion Watchpost |
-| `ALDOR_RISE` | 3896 (0xF38) |  |  | Aldor Rise |
-| `TERRACE_OF_LIGHT` | 3897 (0xF39) |  |  | Terrace of Light |
-| `SCRYERS_TIER` | 3898 (0xF3A) |  |  | Scryer's Tier |
-| `LOWER_CITY` | 3899 (0xF3B) |  |  | Lower City |
-| `INVASION_POINT_OVERLORD` | 3900 (0xF3C) |  |  | Invasion Point: Overlord |
-| `ALLERIAN_POST` | 3901 (0xF3D) |  |  | Allerian Post |
-| `STONEBREAKER_CAMP` | 3902 (0xF3E) |  |  | Stonebreaker Camp |
-| `BOULDER_MOK` | 3903 (0xF3F) |  |  | Boulder'mok |
-| `CURSED_HOLLOW` | 3904 (0xF40) |  |  | Cursed Hollow |
-| `COILFANG_RESERVOIR` | 3905 (0xF41) |  |  | Coilfang Reservoir |
-| `THE_BLOODWASH` | 3906 (0xF42) |  |  | The Bloodwash |
-| `VERIDIAN_POINT` | 3907 (0xF43) |  |  | Veridian Point |
-| `MIDDENVALE` | 3908 (0xF44) |  |  | Middenvale |
-| `THE_LOST_FOLD` | 3909 (0xF45) |  |  | The Lost Fold |
-| `MYSTWOOD` | 3910 (0xF46) |  |  | Mystwood |
-| `TRANQUIL_SHORE` | 3911 (0xF47) |  |  | Tranquil Shore |
-| `GOLDENBOUGH_PASS` | 3912 (0xF48) |  |  | Goldenbough Pass |
-| `RUNESTONE_FALITHAS` | 3913 (0xF49) |  |  | Runestone Falithas |
-| `RUNESTONE_SHAN_DOR` | 3914 (0xF4A) |  |  | Runestone Shan'dor |
-| `FAIRBRIDGE_STRAND` | 3915 (0xF4B) |  |  | Fairbridge Strand |
-| `MOONGRAZE_WOODS` | 3916 (0xF4C) |  |  | Moongraze Woods |
-| `AUCHINDOUN1` | 3917 (0xF4D) |  |  | Auchindoun |
-| `TOSHLEYS_STATION` | 3918 (0xF4E) |  |  | Toshley's Station |
-| `SINGING_RIDGE` | 3919 (0xF4F) |  |  | Singing Ridge |
-| `SHATTER_POINT` | 3920 (0xF50) |  |  | Shatter Point |
-| `ARKLONIS_RIDGE` | 3921 (0xF51) |  |  | Arklonis Ridge |
-| `BLADESPIRE_OUTPOST` | 3922 (0xF52) |  |  | Bladespire Outpost |
-| `GRUULS_LAIR2` | 3923 (0xF53) |  |  | Gruul's Lair |
-| `NORTHMAUL_TOWER` | 3924 (0xF54) |  |  | Northmaul Tower |
-| `SOUTHMAUL_TOWER` | 3925 (0xF55) |  |  | Southmaul Tower |
-| `SHATTERED_PLAINS` | 3926 (0xF56) |  |  | Shattered Plains |
-| `ORONOKS_FARM` | 3927 (0xF57) |  |  | Oronok's Farm |
-| `THE_ALTAR_OF_DAMNATION` | 3928 (0xF58) |  |  | The Altar of Damnation |
-| `THE_PATH_OF_CONQUEST` | 3929 (0xF59) |  |  | The Path of Conquest |
-| `ECLIPSION_FIELDS` | 3930 (0xF5A) |  |  | Eclipsion Fields |
-| `BLADESPIRE_GROUNDS` | 3931 (0xF5B) |  |  | Bladespire Grounds |
-| `SKETH_LON_BASE_CAMP` | 3932 (0xF5C) |  |  | Sketh'lon Base Camp |
-| `SKETH_LON_WRECKAGE` | 3933 (0xF5D) |  |  | Sketh'lon Wreckage |
-| `TOWN_SQUARE` | 3934 (0xF5E) |  |  | Town Square |
-| `WIZARD_ROW` | 3935 (0xF5F) |  |  | Wizard Row |
-| `DEATHFORGE_TOWER` | 3936 (0xF60) |  |  | Deathforge Tower |
-| `SLAG_WATCH` | 3937 (0xF61) |  |  | Slag Watch |
-| `SANCTUM_OF_THE_STARS` | 3938 (0xF62) |  |  | Sanctum of the Stars |
-| `DRAGONMAW_FORTRESS` | 3939 (0xF63) |  |  | Dragonmaw Fortress |
-| `THE_FETID_POOL` | 3940 (0xF64) |  |  | The Fetid Pool |
-| `TEST` | 3941 (0xF65) |  |  | Test |
-| `RAZAANS_LANDING` | 3942 (0xF66) |  |  | Razaan's Landing |
-| `INVASION_POINT_CATACLYSM` | 3943 (0xF67) |  |  | Invasion Point: Cataclysm |
-| `THE_ALTAR_OF_SHADOWS` | 3944 (0xF68) |  |  | The Altar of Shadows |
-| `NETHERWING_PASS` | 3945 (0xF69) |  |  | Netherwing Pass |
-| `WAYNES_REFUGE` | 3946 (0xF6A) |  |  | Wayne's Refuge |
-| `THE_SCALDING_POOLS` | 3947 (0xF6B) |  |  | The Scalding Pools |
-| `BRIAN_AND_PAT_TEST` | 3948 (0xF6C) |  |  | Brian and Pat Test |
-| `MAGMA_FIELDS` | 3949 (0xF6D) |  |  | Magma Fields |
-| `CRIMSON_WATCH` | 3950 (0xF6E) |  |  | Crimson Watch |
-| `EVERGROVE` | 3951 (0xF6F) |  |  | Evergrove |
-| `WYRMSKULL_BRIDGE` | 3952 (0xF70) |  |  | Wyrmskull Bridge |
-| `SCALEWING_SHELF` | 3953 (0xF71) |  |  | Scalewing Shelf |
-| `WYRMSKULL_TUNNEL` | 3954 (0xF72) |  |  | Wyrmskull Tunnel |
-| `HELLFIRE_BASIN` | 3955 (0xF73) |  |  | Hellfire Basin |
-| `THE_SHADOW_STAIR` | 3956 (0xF74) |  |  | The Shadow Stair |
-| `SHA_TARI_OUTPOST` | 3957 (0xF75) |  |  | Sha'tari Outpost |
-| `SHA_TARI_BASE_CAMP` | 3958 (0xF76) |  |  | Sha'tari Base Camp |
-| `BLACK_TEMPLE` | 3959 (0xF77) |  |  | Black Temple |
-| `SOULGRINDERS_BARROW` | 3960 (0xF78) |  |  | Soulgrinder's Barrow |
-| `SORROW_WING_POINT` | 3961 (0xF79) |  |  | Sorrow Wing Point |
-| `VIM_GOLS_CIRCLE` | 3962 (0xF7A) |  |  | Vim'gol's Circle |
-| `DRAGONSPINE_RIDGE` | 3963 (0xF7B) |  |  | Dragonspine Ridge |
-| `SKYGUARD_OUTPOST` | 3964 (0xF7C) |  |  | Skyguard Outpost |
-| `NETHERWING_MINES` | 3965 (0xF7D) |  |  | Netherwing Mines |
-| `DRAGONMAW_BASE_CAMP` | 3966 (0xF7E) |  |  | Dragonmaw Base Camp |
-| `DRAGONMAW_SKYWAY` | 3967 (0xF7F) |  |  | Dragonmaw Skyway |
-| `RUINS_OF_LORDAERON1` | 3968 (0xF80) |  |  | Ruins of Lordaeron |
-| `RIVENDARKS_PERCH` | 3969 (0xF81) |  |  | Rivendark's Perch |
-| `OBSIDIAS_PERCH` | 3970 (0xF82) |  |  | Obsidia's Perch |
-| `INSIDIONS_PERCH` | 3971 (0xF83) |  |  | Insidion's Perch |
-| `FURYWINGS_PERCH` | 3972 (0xF84) |  |  | Furywing's Perch |
-| `BLACKWIND_LANDING` | 3973 (0xF85) |  |  | Blackwind Landing |
-| `VEIL_HARR_IK` | 3974 (0xF86) |  |  | Veil Harr'ik |
-| `TEROKKS_REST` | 3975 (0xF87) |  |  | Terokk's Rest |
-| `VEIL_ALA_RAK` | 3976 (0xF88) |  |  | Veil Ala'rak |
-| `UPPER_VEIL_SHIL_AK` | 3977 (0xF89) |  |  | Upper Veil Shil'ak |
-| `LOWER_VEIL_SHIL_AK` | 3978 (0xF8A) |  |  | Lower Veil Shil'ak |
-| `THE_FROZEN_SEA` | 3979 (0xF8B) |  |  | The Frozen Sea |
-| `DAGGERCAP_BAY` | 3980 (0xF8C) |  |  | Daggercap Bay |
-| `VALGARDE` | 3981 (0xF8D) |  |  | Valgarde |
-| `WYRMSKULL_VILLAGE` | 3982 (0xF8E) |  |  | Wyrmskull Village |
-| `UTGARDE_KEEP1` | 3983 (0xF8F) |  |  | Utgarde Keep |
-| `NIFFLEVAR` | 3984 (0xF90) |  |  | Nifflevar |
-| `FALLS_OF_YMIRON` | 3985 (0xF91) |  |  | Falls of Ymiron |
-| `ECHO_REACH` | 3986 (0xF92) |  |  | Echo Reach |
-| `THE_ISLE_OF_SPEARS` | 3987 (0xF93) |  |  | The Isle of Spears |
-| `KAMAGUA` | 3988 (0xF94) |  |  | Kamagua |
-| `GARVANS_REEF` | 3989 (0xF95) |  |  | Garvan's Reef |
-| `SCALAWAG_POINT` | 3990 (0xF96) |  |  | Scalawag Point |
-| `NEW_AGAMAND` | 3991 (0xF97) |  |  | New Agamand |
-| `THE_ANCIENT_LIFT` | 3992 (0xF98) |  |  | The Ancient Lift |
-| `WESTGUARD_TURRET` | 3993 (0xF99) |  |  | Westguard Turret |
-| `HALGRIND` | 3994 (0xF9A) |  |  | Halgrind |
-| `THE_LAUGHING_STAND` | 3995 (0xF9B) |  |  | The Laughing Stand |
-| `BAELGUNS_EXCAVATION_SITE` | 3996 (0xF9C) |  |  | Baelgun's Excavation Site |
-| `EXPLORERS_LEAGUE_OUTPOST` | 3997 (0xF9D) |  |  | Explorers' League Outpost |
-| `WESTGUARD_KEEP` | 3998 (0xF9E) |  |  | Westguard Keep |
-| `STEEL_GATE` | 3999 (0xF9F) |  |  | Steel Gate |
-| `VENGEANCE_LANDING` | 4000 (0xFA0) |  |  | Vengeance Landing |
-| `BALEHEIM` | 4001 (0xFA1) |  |  | Baleheim |
-| `SKORN` | 4002 (0xFA2) |  |  | Skorn |
-| `FORT_WILDERVAR` | 4003 (0xFA3) |  |  | Fort Wildervar |
-| `VILEPREY_VILLAGE` | 4004 (0xFA4) |  |  | Vileprey Village |
-| `IVALDS_RUIN` | 4005 (0xFA5) |  |  | Ivald's Ruin |
-| `GJALERBRON` | 4006 (0xFA6) |  |  | Gjalerbron |
-| `TOMB_OF_THE_LOST_KINGS` | 4007 (0xFA7) |  |  | Tomb of the Lost Kings |
-| `SHARTUULS_TRANSPORTER` | 4008 (0xFA8) |  |  | Shartuul's Transporter |
-| `ILLIDARI_TRAINING_GROUNDS` | 4009 (0xFA9) |  |  | Illidari Training Grounds |
-| `MUDSPROCKET` | 4010 (0xFAA) |  |  | Mudsprocket |
-| `CAMP_WINTERHOOF` | 4018 (0xFB2) |  |  | Camp Winterhoof |
-| `DEVELOPMENT_LAND` | 4019 (0xFB3) |  |  | Development Land |
-| `MIGHTSTONE_QUARRY` | 4020 (0xFB4) |  |  | Mightstone Quarry |
-| `BLOODSPORE_PLAINS` | 4021 (0xFB5) |  |  | Bloodspore Plains |
-| `GAMMOTH` | 4022 (0xFB6) |  |  | Gammoth |
-| `AMBER_LEDGE` | 4023 (0xFB7) |  |  | Amber Ledge |
-| `COLDARRA` | 4024 (0xFB8) |  |  | Coldarra |
-| `THE_WESTRIFT` | 4025 (0xFB9) |  |  | The Westrift |
-| `THE_TRANSITUS_STAIR` | 4026 (0xFBA) |  |  | The Transitus Stair |
-| `COAST_OF_ECHOES` | 4027 (0xFBB) |  |  | Coast of Echoes |
-| `RIPLASH_STRAND` | 4028 (0xFBC) |  |  | Riplash Strand |
-| `RIPLASH_RUINS` | 4029 (0xFBD) |  |  | Riplash Ruins |
-| `COAST_OF_IDOLS` | 4030 (0xFBE) |  |  | Coast of Idols |
-| `PAL_EA` | 4031 (0xFBF) |  |  | Pal'ea |
-| `VALIANCE_KEEP` | 4032 (0xFC0) |  |  | Valiance Keep |
-| `WINTERFIN_VILLAGE` | 4033 (0xFC1) |  |  | Winterfin Village |
-| `THE_BOREAN_WALL` | 4034 (0xFC2) |  |  | The Borean Wall |
-| `THE_GEYSER_FIELDS` | 4035 (0xFC3) |  |  | The Geyser Fields |
-| `FIZZCRANK_PUMPING_STATION` | 4036 (0xFC4) |  |  | Fizzcrank Pumping Station |
-| `TAUNKA_LE_VILLAGE` | 4037 (0xFC5) |  |  | Taunka'le Village |
-| `MAGNAMOTH_CAVERNS` | 4038 (0xFC6) |  |  | Magnamoth Caverns |
-| `COLDROCK_QUARRY` | 4039 (0xFC7) |  |  | Coldrock Quarry |
-| `NJORDS_BREATH_BAY` | 4040 (0xFC8) |  |  | Njord's Breath Bay |
-| `KASKALA` | 4041 (0xFC9) |  |  | Kaskala |
-| `TRANSBOREA` | 4042 (0xFCA) |  |  | Transborea |
-| `THE_FLOOD_PLAINS` | 4043 (0xFCB) |  |  | The Flood Plains |
-| `DIREHORN_POST` | 4046 (0xFCE) |  |  | Direhorn Post |
-| `NATS_LANDING` | 4047 (0xFCF) |  |  | Nat's Landing |
-| `EMBER_CLUTCH` | 4048 (0xFD0) |  |  | Ember Clutch |
-| `TABETHAS_FARM` | 4049 (0xFD1) |  |  | Tabetha's Farm |
-| `DERELICT_STRAND` | 4050 (0xFD2) |  |  | Derelict Strand |
-| `THE_FROZEN_GLADE` | 4051 (0xFD3) |  |  | The Frozen Glade |
-| `THE_VIBRANT_GLADE` | 4052 (0xFD4) |  |  | The Vibrant Glade |
-| `THE_TWISTED_GLADE` | 4053 (0xFD5) |  |  | The Twisted Glade |
-| `RIVENWOOD` | 4054 (0xFD6) |  |  | Rivenwood |
-| `CALDEMERE_LAKE` | 4055 (0xFD7) |  |  | Caldemere Lake |
-| `UTGARDE_CATACOMBS` | 4056 (0xFD8) |  |  | Utgarde Catacombs |
-| `SHIELD_HILL` | 4057 (0xFD9) |  |  | Shield Hill |
-| `LAKE_CAULDROS` | 4058 (0xFDA) |  |  | Lake Cauldros |
-| `CAULDROS_ISLE` | 4059 (0xFDB) |  |  | Cauldros Isle |
-| `BLEEDING_VALE` | 4060 (0xFDC) |  |  | Bleeding Vale |
-| `GIANTS_RUN` | 4061 (0xFDD) |  |  | Giants' Run |
-| `APOTHECARY_CAMP` | 4062 (0xFDE) |  |  | Apothecary Camp |
-| `EMBER_SPEAR_TOWER` | 4063 (0xFDF) |  |  | Ember Spear Tower |
-| `SHATTERED_STRAITS` | 4064 (0xFE0) |  |  | Shattered Straits |
-| `GJALERHORN` | 4065 (0xFE1) |  |  | Gjalerhorn |
-| `FROSTBLADE_PEAK` | 4066 (0xFE2) |  |  | Frostblade Peak |
-| `PLAGUEWOOD_TOWER` | 4067 (0xFE3) |  |  | Plaguewood Tower |
-| `WEST_SPEAR_TOWER` | 4068 (0xFE4) |  |  | West Spear Tower |
-| `NORTH_SPEAR_TOWER` | 4069 (0xFE5) |  |  | North Spear Tower |
-| `CHILLMERE_COAST` | 4070 (0xFE6) |  |  | Chillmere Coast |
-| `WHISPER_GULCH` | 4071 (0xFE7) |  |  | Whisper Gulch |
-| `SUB_ZONE` | 4072 (0xFE8) |  |  | Sub zone |
-| `WINTERS_TERRACE` | 4073 (0xFE9) |  |  | Winter's Terrace |
-| `THE_WAKING_HALLS` | 4074 (0xFEA) |  |  | The Waking Halls |
-| `SUNWELL_PLATEAU` | 4075 (0xFEB) |  |  | Sunwell Plateau |
-| `REUSE_ME_SEVEN` | 4076 (0xFEC) |  |  | Reuse Me 7 |
-| `SORLOFS_STRAND` | 4077 (0xFED) |  |  | Sorlof's Strand |
-| `RAZORTHORN_RISE` | 4078 (0xFEE) |  |  | Razorthorn Rise |
-| `FROSTBLADE_PASS` | 4079 (0xFEF) |  |  | Frostblade Pass |
-| `ISLE_OF_QUEL_DANAS` | 4080 (0xFF0) |  |  | Isle of Quel'Danas |
-| `THE_DAWNCHASER` | 4081 (0xFF1) |  |  | The Dawnchaser |
-| `THE_SIN_LOREN` | 4082 (0xFF2) |  |  | The Sin'loren |
-| `SILVERMOONS_PRIDE` | 4083 (0xFF3) |  |  | Silvermoon's Pride |
-| `THE_BLOODOATH` | 4084 (0xFF4) |  |  | The Bloodoath |
-| `SHATTERED_SUN_STAGING_AREA` | 4085 (0xFF5) |  |  | Shattered Sun Staging Area |
-| `SUNS_REACH_SANCTUM` | 4086 (0xFF6) |  |  | Sun's Reach Sanctum |
-| `SUNS_REACH_HARBOR` | 4087 (0xFF7) |  |  | Sun's Reach Harbor |
-| `SUNS_REACH_ARMORY` | 4088 (0xFF8) |  |  | Sun's Reach Armory |
-| `DAWNSTAR_VILLAGE` | 4089 (0xFF9) |  |  | Dawnstar Village |
-| `THE_DAWNING_SQUARE` | 4090 (0xFFA) |  |  | The Dawning Square |
-| `GREENGILL_COAST` | 4091 (0xFFB) |  |  | Greengill Coast |
-| `THE_DEAD_SCAR2` | 4092 (0xFFC) |  |  | The Dead Scar |
-| `THE_SUN_FORGE` | 4093 (0xFFD) |  |  | The Sun Forge |
-| `SUNWELL_PLATEAU1` | 4094 (0xFFE) |  |  | Sunwell Plateau |
-| `MAGISTERS_TERRACE` | 4095 (0xFFF) |  |  | Magisters' Terrace |
-| `CLAYTONS_WOWEDIT_LAND` | 4096 (0x1000) |  |  | Clayton's WoWEdit Land |
-| `WINTERFIN_CAVERNS` | 4097 (0x1001) |  |  | Winterfin Caverns |
-| `GLIMMER_BAY` | 4098 (0x1002) |  |  | Glimmer Bay |
-| `WINTERFIN_RETREAT` | 4099 (0x1003) |  |  | Winterfin Retreat |
-| `THE_CULLING_OF_STRATHOLME` | 4100 (0x1004) |  |  | The Culling of Stratholme |
-| `SANDS_OF_NASAM` | 4101 (0x1005) |  |  | Sands of Nasam |
-| `KROMS_LANDING` | 4102 (0x1006) |  |  | Krom's Landing |
-| `NASAMS_TALON` | 4103 (0x1007) |  |  | Nasam's Talon |
-| `ECHO_COVE` | 4104 (0x1008) |  |  | Echo Cove |
-| `BERYL_POINT` | 4105 (0x1009) |  |  | Beryl Point |
-| `GARROSHS_LANDING` | 4106 (0x100A) |  |  | Garrosh's Landing |
-| `WARSONG_JETTY` | 4107 (0x100B) |  |  | Warsong Jetty |
-| `FIZZCRANK_AIRSTRIP` | 4108 (0x100C) |  |  | Fizzcrank Airstrip |
-| `LAKE_KUM_UYA` | 4109 (0x100D) |  |  | Lake Kum'uya |
-| `FARSHIRE_FIELDS` | 4110 (0x100E) |  |  | Farshire Fields |
-| `FARSHIRE` | 4111 (0x100F) |  |  | Farshire |
-| `FARSHIRE_LIGHTHOUSE` | 4112 (0x1010) |  |  | Farshire Lighthouse |
-| `UNU_PE` | 4113 (0x1011) |  |  | Unu'pe |
-| `DEATHS_STAND` | 4114 (0x1012) |  |  | Death's Stand |
-| `THE_ABANDONED_REACH` | 4115 (0x1013) |  |  | The Abandoned Reach |
-| `SCALDING_POOLS` | 4116 (0x1014) |  |  | Scalding Pools |
-| `STEAM_SPRINGS` | 4117 (0x1015) |  |  | Steam Springs |
-| `TALRAMAS` | 4118 (0x1016) |  |  | Talramas |
-| `FESTERING_POOLS` | 4119 (0x1017) |  |  | Festering Pools |
-| `THE_NEXUS` | 4120 (0x1018) |  |  | The Nexus |
-| `TRANSITUS_SHIELD` | 4121 (0x1019) |  |  | Transitus Shield |
-| `BOR_GOROK_OUTPOST` | 4122 (0x101A) |  |  | Bor'gorok Outpost |
-| `MAGMOTH` | 4123 (0x101B) |  |  | Magmoth |
-| `THE_DENS_OF_DYING` | 4124 (0x101C) |  |  | The Dens of Dying |
-| `TEMPLE_CITY_OF_EN_KILAH` | 4125 (0x101D) |  |  | Temple City of En'kilah |
-| `THE_WAILING_ZIGGURAT` | 4126 (0x101E) |  |  | The Wailing Ziggurat |
-| `STEELJAWS_CARAVAN` | 4127 (0x101F) |  |  | Steeljaw's Caravan |
-| `NAXXANAR` | 4128 (0x1020) |  |  | Naxxanar |
-| `WARSONG_HOLD` | 4129 (0x1021) |  |  | Warsong Hold |
-| `PLAINS_OF_NASAM` | 4130 (0x1022) |  |  | Plains of Nasam |
-| `MAGISTERS_TERRACE1` | 4131 (0x1023) |  |  | Magisters' Terrace |
-| `RUINS_OF_ELDRA_NATH` | 4132 (0x1024) |  |  | Ruins of Eldra'nath |
-| `CHARRED_RISE` | 4133 (0x1025) |  |  | Charred Rise |
-| `BLISTERING_POOL` | 4134 (0x1026) |  |  | Blistering Pool |
-| `SPIRE_OF_BLOOD` | 4135 (0x1027) |  |  | Spire of Blood |
-| `SPIRE_OF_DECAY` | 4136 (0x1028) |  |  | Spire of Decay |
-| `SPIRE_OF_PAIN` | 4137 (0x1029) |  |  | Spire of Pain |
-| `FROZEN_REACH` | 4138 (0x102A) |  |  | Frozen Reach |
-| `PARHELION_PLAZA` | 4139 (0x102B) |  |  | Parhelion Plaza |
-| `THE_DEAD_SCAR3` | 4140 (0x102C) |  |  | The Dead Scar |
-| `TORPS_FARM` | 4141 (0x102D) |  |  | Torp's Farm |
-| `WARSONG_GRANARY` | 4142 (0x102E) |  |  | Warsong Granary |
-| `WARSONG_SLAUGHTERHOUSE` | 4143 (0x102F) |  |  | Warsong Slaughterhouse |
-| `WARSONG_FARMS_OUTPOST` | 4144 (0x1030) |  |  | Warsong Farms Outpost |
-| `WEST_POINT_STATION` | 4145 (0x1031) |  |  | West Point Station |
-| `NORTH_POINT_STATION` | 4146 (0x1032) |  |  | North Point Station |
-| `MID_POINT_STATION` | 4147 (0x1033) |  |  | Mid Point Station |
-| `SOUTH_POINT_STATION` | 4148 (0x1034) |  |  | South Point Station |
-| `DEHTA_ENCAMPMENT` | 4149 (0x1035) |  |  | D.E.H.T.A. Encampment |
-| `KAWS_ROOST` | 4150 (0x1036) |  |  | Kaw's Roost |
-| `WESTWIND_REFUGEE_CAMP` | 4151 (0x1037) |  |  | Westwind Refugee Camp |
-| `MOA_KI_HARBOR` | 4152 (0x1038) |  |  | Moa'ki Harbor |
-| `INDU_LE_VILLAGE` | 4153 (0x1039) |  |  | Indu'le Village |
-| `SNOWFALL_GLADE` | 4154 (0x103A) |  |  | Snowfall Glade |
-| `THE_HALF_SHELL` | 4155 (0x103B) |  |  | The Half Shell |
-| `SURGE_NEEDLE` | 4156 (0x103C) |  |  | Surge Needle |
-| `MOONREST_GARDENS` | 4157 (0x103D) |  |  | Moonrest Gardens |
-| `STARS_REST` | 4158 (0x103E) |  |  | Stars' Rest |
-| `WESTFALL_BRIGADE_ENCAMPMENT` | 4159 (0x103F) |  |  | Westfall Brigade Encampment |
-| `LOTHALOR_WOODLANDS` | 4160 (0x1040) |  |  | Lothalor Woodlands |
-| `WYRMREST_TEMPLE` | 4161 (0x1041) |  |  | Wyrmrest Temple |
-| `ICEMIST_FALLS` | 4162 (0x1042) |  |  | Icemist Falls |
-| `ICEMIST_VILLAGE` | 4163 (0x1043) |  |  | Icemist Village |
-| `THE_PIT_OF_NARJUN` | 4164 (0x1044) |  |  | The Pit of Narjun |
-| `AGMARS_HAMMER` | 4165 (0x1045) |  |  | Agmar's Hammer |
-| `LAKE_INDU_LE` | 4166 (0x1046) |  |  | Lake Indu'le |
-| `OBSIDIAN_DRAGONSHRINE` | 4167 (0x1047) |  |  | Obsidian Dragonshrine |
-| `RUBY_DRAGONSHRINE` | 4168 (0x1048) |  |  | Ruby Dragonshrine |
-| `FORDRAGON_HOLD` | 4169 (0x1049) |  |  | Fordragon Hold |
-| `KOR_KRON_VANGUARD` | 4170 (0x104A) |  |  | Kor'kron Vanguard |
-| `THE_COURT_OF_SKULLS` | 4171 (0x104B) |  |  | The Court of Skulls |
-| `ANGRATHAR_THE_WRATHGATE` | 4172 (0x104C) |  |  | Angrathar the Wrathgate |
-| `GALAKRONDS_REST` | 4173 (0x104D) |  |  | Galakrond's Rest |
-| `THE_WICKED_COIL` | 4174 (0x104E) |  |  | The Wicked Coil |
-| `BRONZE_DRAGONSHRINE` | 4175 (0x104F) |  |  | Bronze Dragonshrine |
-| `THE_MIRROR_OF_DAWN` | 4176 (0x1050) |  |  | The Mirror of Dawn |
-| `WINTERGARDE_KEEP` | 4177 (0x1051) |  |  | Wintergarde Keep |
-| `WINTERGARDE_MINE` | 4178 (0x1052) |  |  | Wintergarde Mine |
-| `EMERALD_DRAGONSHRINE` | 4179 (0x1053) |  |  | Emerald Dragonshrine |
-| `NEW_HEARTHGLEN` | 4180 (0x1054) |  |  | New Hearthglen |
-| `CRUSADERS_LANDING` | 4181 (0x1055) |  |  | Crusader's Landing |
-| `SINNERS_FOLLY` | 4182 (0x1056) |  |  | Sinner's Folly |
-| `AZURE_DRAGONSHRINE` | 4183 (0x1057) |  |  | Azure Dragonshrine |
-| `PATH_OF_THE_TITANS` | 4184 (0x1058) |  |  | Path of the Titans |
-| `THE_FORGOTTEN_SHORE` | 4185 (0x1059) |  |  | The Forgotten Shore |
-| `VENOMSPITE` | 4186 (0x105A) |  |  | Venomspite |
-| `THE_CRYSTAL_VICE` | 4187 (0x105B) |  |  | The Crystal Vice |
-| `THE_CARRION_FIELDS` | 4188 (0x105C) |  |  | The Carrion Fields |
-| `ONSLAUGHT_BASE_CAMP` | 4189 (0x105D) |  |  | Onslaught Base Camp |
-| `THORSONS_POST` | 4190 (0x105E) |  |  | Thorson's Post |
-| `LIGHTS_TRUST` | 4191 (0x105F) |  |  | Light's Trust |
-| `FROSTMOURNE_CAVERN` | 4192 (0x1060) |  |  | Frostmourne Cavern |
-| `SCARLET_POINT` | 4193 (0x1061) |  |  | Scarlet Point |
-| `JINTHA_KALAR` | 4194 (0x1062) |  |  | Jintha'kalar |
-| `ICE_HEART_CAVERN` | 4195 (0x1063) |  |  | Ice Heart Cavern |
-| `DRAK_THARON_KEEP` | 4196 (0x1064) |  |  | Drak'Tharon Keep |
-| `WINTERGRASP` | 4197 (0x1065) |  |  | Wintergrasp |
-| `KILI_UAS_ATOLL` | 4198 (0x1066) |  |  | Kili'ua's Atoll |
-| `SILVERBROOK` | 4199 (0x1067) |  |  | Silverbrook |
-| `VORDRASSILS_HEART` | 4200 (0x1068) |  |  | Vordrassil's Heart |
-| `VORDRASSILS_TEARS` | 4201 (0x1069) |  |  | Vordrassil's Tears |
-| `VORDRASSILS_TEARS1` | 4202 (0x106A) |  |  | Vordrassil's Tears |
-| `VORDRASSILS_LIMB` | 4203 (0x106B) |  |  | Vordrassil's Limb |
-| `AMBERPINE_LODGE` | 4204 (0x106C) |  |  | Amberpine Lodge |
-| `SOLSTICE_VILLAGE` | 4205 (0x106D) |  |  | Solstice Village |
-| `CONQUEST_HOLD` | 4206 (0x106E) |  |  | Conquest Hold |
-| `VOLDRUNE` | 4207 (0x106F) |  |  | Voldrune |
-| `GRANITE_SPRINGS` | 4208 (0x1070) |  |  | Granite Springs |
-| `ZEB_HALAK` | 4209 (0x1071) |  |  | Zeb'Halak |
-| `DRAK_THARON_KEEP1` | 4210 (0x1072) |  |  | Drak'Tharon Keep |
-| `CAMP_ONEQWAH` | 4211 (0x1073) |  |  | Camp Oneqwah |
-| `EASTWIND_SHORE` | 4212 (0x1074) |  |  | Eastwind Shore |
-| `THE_BROKEN_BLUFFS` | 4213 (0x1075) |  |  | The Broken Bluffs |
-| `BOULDER_HILLS` | 4214 (0x1076) |  |  | Boulder Hills |
-| `RAGE_FANG_SHRINE` | 4215 (0x1077) |  |  | Rage Fang Shrine |
-| `DRAKIL_JIN_RUINS` | 4216 (0x1078) |  |  | Drakil'jin Ruins |
-| `BLACKRIVER_LOGGING_CAMP` | 4217 (0x1079) |  |  | Blackriver Logging Camp |
-| `HEARTS_BLOOD_SHRINE` | 4218 (0x107A) |  |  | Heart's Blood Shrine |
-| `HOLLOWSTONE_MINE` | 4219 (0x107B) |  |  | Hollowstone Mine |
-| `DUN_ARGOL` | 4220 (0x107C) |  |  | Dun Argol |
-| `THOR_MODAN` | 4221 (0x107D) |  |  | Thor Modan |
-| `BLUE_SKY_LOGGING_GROUNDS` | 4222 (0x107E) |  |  | Blue Sky Logging Grounds |
-| `MAW_OF_NELTHARION` | 4223 (0x107F) |  |  | Maw of Neltharion |
-| `THE_BRINY_PINNACLE` | 4224 (0x1080) |  |  | The Briny Pinnacle |
-| `GLITTERING_STRAND` | 4225 (0x1081) |  |  | Glittering Strand |
-| `ISKAAL` | 4226 (0x1082) |  |  | Iskaal |
-| `DRAGONS_FALL` | 4227 (0x1083) |  |  | Dragon's Fall |
-| `THE_OCULUS` | 4228 (0x1084) |  |  | The Oculus |
-| `PROSPECTORS_POINT` | 4229 (0x1085) |  |  | Prospector's Point |
-| `COLDWIND_HEIGHTS` | 4230 (0x1086) |  |  | Coldwind Heights |
-| `REDWOOD_TRADING_POST` | 4231 (0x1087) |  |  | Redwood Trading Post |
-| `VENGEANCE_PASS` | 4232 (0x1088) |  |  | Vengeance Pass |
-| `DAWNS_REACH` | 4233 (0x1089) |  |  | Dawn's Reach |
-| `NAXXRAMAS1` | 4234 (0x108A) |  |  | Naxxramas |
-| `HEARTWOOD_TRADING_POST` | 4235 (0x108B) |  |  | Heartwood Trading Post |
-| `EVERGREEN_TRADING_POST` | 4236 (0x108C) |  |  | Evergreen Trading Post |
-| `SPRUCE_POINT_POST` | 4237 (0x108D) |  |  | Spruce Point Post |
-| `WHITE_PINE_TRADING_POST` | 4238 (0x108E) |  |  | White Pine Trading Post |
-| `ASPEN_GROVE_POST` | 4239 (0x108F) |  |  | Aspen Grove Post |
-| `FORESTS_EDGE_POST` | 4240 (0x1090) |  |  | Forest's Edge Post |
-| `ELDRITCH_HEIGHTS` | 4241 (0x1091) |  |  | Eldritch Heights |
-| `VENTURE_BAY` | 4242 (0x1092) |  |  | Venture Bay |
-| `WINTERGARDE_CRYPT` | 4243 (0x1093) |  |  | Wintergarde Crypt |
-| `BLOODMOON_ISLE` | 4244 (0x1094) |  |  | Bloodmoon Isle |
-| `SHADOWFANG_TOWER` | 4245 (0x1095) |  |  | Shadowfang Tower |
-| `WINTERGARDE_MAUSOLEUM` | 4246 (0x1096) |  |  | Wintergarde Mausoleum |
-| `DUSKHOWL_DEN` | 4247 (0x1097) |  |  | Duskhowl Den |
-| `THE_CONQUEST_PIT` | 4248 (0x1098) |  |  | The Conquest Pit |
-| `THE_PATH_OF_IRON` | 4249 (0x1099) |  |  | The Path of Iron |
-| `RUINS_OF_TETHYS` | 4250 (0x109A) |  |  | Ruins of Tethys |
-| `SILVERBROOK_HILLS` | 4251 (0x109B) |  |  | Silverbrook Hills |
-| `THE_BROKEN_BLUFFS1` | 4252 (0x109C) |  |  | The Broken Bluffs |
-| `SEVENTH_LEGION_FRONT` | 4253 (0x109D) |  |  | 7th Legion Front |
-| `THE_DRAGON_WASTES` | 4254 (0x109E) |  |  | The Dragon Wastes |
-| `RUINS_OF_DRAK_ZIN` | 4255 (0x109F) |  |  | Ruins of Drak'Zin |
-| `DRAK_MAR_LAKE` | 4256 (0x10A0) |  |  | Drak'Mar Lake |
-| `DRAGONSPINE_TRIBUTARY` | 4257 (0x10A1) |  |  | Dragonspine Tributary |
-| `THE_NORTH_SEA1` | 4258 (0x10A2) |  |  | The North Sea |
-| `DRAK_URAL` | 4259 (0x10A3) |  |  | Drak'ural |
-| `THORVALDS_CAMP` | 4260 (0x10A4) |  |  | Thorvald's Camp |
-| `GHOSTBLADE_POST` | 4261 (0x10A5) |  |  | Ghostblade Post |
-| `ASHWOOD_POST` | 4262 (0x10A6) |  |  | Ashwood Post |
-| `LYDELLS_AMBUSH` | 4263 (0x10A7) |  |  | Lydell's Ambush |
-| `HALLS_OF_STONE` | 4264 (0x10A8) |  |  | Halls of Stone |
-| `THE_NEXUS1` | 4265 (0x10A9) |  |  | The Nexus |
-| `HARKORS_CAMP` | 4266 (0x10AA) |  |  | Harkor's Camp |
-| `VORDRASSIL_PASS` | 4267 (0x10AB) |  |  | Vordrassil Pass |
-| `RUUNAS_CAMP` | 4268 (0x10AC) |  |  | Ruuna's Camp |
-| `SHRINE_OF_SCALES` | 4269 (0x10AD) |  |  | Shrine of Scales |
-| `DRAK_ATAL_PASSAGE` | 4270 (0x10AE) |  |  | Drak'atal Passage |
-| `UTGARDE_PINNACLE1` | 4271 (0x10AF) |  |  | Utgarde Pinnacle |
-| `HALLS_OF_LIGHTNING` | 4272 (0x10B0) |  |  | Halls of Lightning |
-| `ULDUAR` | 4273 (0x10B1) |  |  | Ulduar |
-| `THE_ARGENT_STAND` | 4275 (0x10B3) |  |  | The Argent Stand |
-| `ALTAR_OF_SSERATUS` | 4276 (0x10B4) |  |  | Altar of Sseratus |
-| `AZJOL_NERUB1` | 4277 (0x10B5) |  |  | Azjol-Nerub |
-| `DRAKSOTRA_FIELDS` | 4278 (0x10B6) |  |  | Drak'Sotra Fields |
-| `DRAKSOTRA` | 4279 (0x10B7) |  |  | Drak'Sotra |
-| `DRAK_AGAL` | 4280 (0x10B8) |  |  | Drak'Agal |
-| `ACHERUS_THE_EBON_HOLD` | 4281 (0x10B9) |  |  | Acherus: The Ebon Hold |
-| `THE_AVALANCHE` | 4282 (0x10BA) |  |  | The Avalanche |
-| `THE_LOST_LANDS` | 4283 (0x10BB) |  |  | The Lost Lands |
-| `NESINGWARY_BASE_CAMP` | 4284 (0x10BC) |  |  | Nesingwary Base Camp |
-| `THE_SEABREACH_FLOW` | 4285 (0x10BD) |  |  | The Seabreach Flow |
-| `THE_BONES_OF_NOZRONN` | 4286 (0x10BE) |  |  | The Bones of Nozronn |
-| `KARTAKS_HOLD` | 4287 (0x10BF) |  |  | Kartak's Hold |
-| `SPARKTOUCHED_HAVEN` | 4288 (0x10C0) |  |  | Sparktouched Haven |
-| `THE_PATH_OF_THE_LIFEWARDEN` | 4289 (0x10C1) |  |  | The Path of the Lifewarden |
-| `RIVERS_HEART` | 4290 (0x10C2) |  |  | River's Heart |
-| `RAINSPEAKER_CANOPY` | 4291 (0x10C3) |  |  | Rainspeaker Canopy |
-| `FRENZYHEART_HILL` | 4292 (0x10C4) |  |  | Frenzyheart Hill |
-| `WILDGROWTH_MANGAL` | 4293 (0x10C5) |  |  | Wildgrowth Mangal |
-| `HEB_VALOK` | 4294 (0x10C6) |  |  | Heb'Valok |
-| `THE_SUNDERED_SHARD` | 4295 (0x10C7) |  |  | The Sundered Shard |
-| `THE_LIFEBLOOD_PILLAR` | 4296 (0x10C8) |  |  | The Lifeblood Pillar |
-| `MOSSWALKER_VILLAGE` | 4297 (0x10C9) |  |  | Mosswalker Village |
-| `PLAGUELANDS_THE_SCARLET_ENCLAVE` | 4298 (0x10CA) |  |  | Plaguelands: The Scarlet Enclave |
-| `KOLRAMAS` | 4299 (0x10CB) |  |  | Kolramas |
-| `WAYGATE` | 4300 (0x10CC) |  |  | Waygate |
-| `THE_SKYREACH_PILLAR` | 4302 (0x10CE) |  |  | The Skyreach Pillar |
-| `HARDKNUCKLE_CLEARING` | 4303 (0x10CF) |  |  | Hardknuckle Clearing |
-| `SAPPHIRE_HIVE` | 4304 (0x10D0) |  |  | Sapphire Hive |
-| `MISTWHISPER_REFUGE` | 4306 (0x10D2) |  |  | Mistwhisper Refuge |
-| `THE_GLIMMERING_PILLAR` | 4307 (0x10D3) |  |  | The Glimmering Pillar |
-| `SPEARBORN_ENCAMPMENT` | 4308 (0x10D4) |  |  | Spearborn Encampment |
-| `DRAK_THARON_KEEP2` | 4309 (0x10D5) |  |  | Drak'Tharon Keep |
-| `ZERAMAS` | 4310 (0x10D6) |  |  | Zeramas |
-| `RELIQUARY_OF_AGONY` | 4311 (0x10D7) |  |  | Reliquary of Agony |
-| `EBON_WATCH` | 4312 (0x10D8) |  |  | Ebon Watch |
-| `THRYMS_END` | 4313 (0x10D9) |  |  | Thrym's End |
-| `VOLTARUS` | 4314 (0x10DA) |  |  | Voltarus |
-| `RELIQUARY_OF_PAIN` | 4315 (0x10DB) |  |  | Reliquary of Pain |
-| `RAGECLAW_DEN` | 4316 (0x10DC) |  |  | Rageclaw Den |
-| `LIGHTS_BREACH` | 4317 (0x10DD) |  |  | Light's Breach |
-| `POOLS_OF_ZHA_JIN` | 4318 (0x10DE) |  |  | Pools of Zha'Jin |
-| `ZIM_ABWA` | 4319 (0x10DF) |  |  | Zim'Abwa |
-| `AMPHITHEATER_OF_ANGUISH` | 4320 (0x10E0) |  |  | Amphitheater of Anguish |
-| `ALTAR_OF_RHUNOK` | 4321 (0x10E1) |  |  | Altar of Rhunok |
-| `ALTAR_OF_HAR_KOA` | 4322 (0x10E2) |  |  | Altar of Har'koa |
-| `ZIM_TORGA` | 4323 (0x10E3) |  |  | Zim'Torga |
-| `POOLS_OF_JIN_ALAI` | 4324 (0x10E4) |  |  | Pools of Jin'Alai |
-| `ALTAR_OF_QUETZ_LUN` | 4325 (0x10E5) |  |  | Altar of Quetz'lun |
-| `HEB_DRAKKAR` | 4326 (0x10E6) |  |  | Heb'Drakkar |
-| `DRAK_MABWA` | 4327 (0x10E7) |  |  | Drak'Mabwa |
-| `ZIM_RHUK` | 4328 (0x10E8) |  |  | Zim'Rhuk |
-| `ALTAR_OF_MAM_TOTH` | 4329 (0x10E9) |  |  | Altar of Mam'toth |
-| `ACHERUS_THE_EBON_HOLD1` | 4342 (0x10F6) |  |  | Acherus: The Ebon Hold |
-| `NEW_AVALON` | 4343 (0x10F7) |  |  | New Avalon |
-| `NEW_AVALON_FIELDS` | 4344 (0x10F8) |  |  | New Avalon Fields |
-| `NEW_AVALON_ORCHARD` | 4345 (0x10F9) |  |  | New Avalon Orchard |
-| `NEW_AVALON_TOWN_HALL` | 4346 (0x10FA) |  |  | New Avalon Town Hall |
-| `HAVENSHIRE` | 4347 (0x10FB) |  |  | Havenshire |
-| `HAVENSHIRE_FARMS` | 4348 (0x10FC) |  |  | Havenshire Farms |
-| `HAVENSHIRE_LUMBER_MILL` | 4349 (0x10FD) |  |  | Havenshire Lumber Mill |
-| `HAVENSHIRE_STABLES` | 4350 (0x10FE) |  |  | Havenshire Stables |
-| `SCARLET_HOLD` | 4351 (0x10FF) |  |  | Scarlet Hold |
-| `CHAPEL_OF_THE_CRIMSON_FLAME` | 4352 (0x1100) |  |  | Chapel of the Crimson Flame |
-| `LIGHTS_POINT_TOWER` | 4353 (0x1101) |  |  | Light's Point Tower |
-| `LIGHTS_POINT` | 4354 (0x1102) |  |  | Light's Point |
-| `CRYPT_OF_REMEMBRANCE` | 4355 (0x1103) |  |  | Crypt of Remembrance |
-| `DEATHS_BREACH` | 4356 (0x1104) |  |  | Death's Breach |
-| `THE_NOXIOUS_GLADE1` | 4357 (0x1105) |  |  | The Noxious Glade |
-| `TYRS_HAND1` | 4358 (0x1106) |  |  | Tyr's Hand |
-| `KINGS_HARBOR` | 4359 (0x1107) |  |  | King's Harbor |
-| `SCARLET_OVERLOOK` | 4360 (0x1108) |  |  | Scarlet Overlook |
-| `LIGHTS_HOPE_CHAPEL1` | 4361 (0x1109) |  |  | Light's Hope Chapel |
-| `SINNERS_FOLLY1` | 4362 (0x110A) |  |  | Sinner's Folly |
-| `PESTILENT_SCAR1` | 4363 (0x110B) |  |  | Pestilent Scar |
-| `BROWMAN_MILL1` | 4364 (0x110C) |  |  | Browman Mill |
-| `HAVENSHIRE_MINE` | 4365 (0x110D) |  |  | Havenshire Mine |
-| `URSOCS_DEN` | 4366 (0x110E) |  |  | Ursoc's Den |
-| `THE_BLIGHT_LINE` | 4367 (0x110F) |  |  | The Blight Line |
-| `THE_BONEFIELDS` | 4368 (0x1110) |  |  | The Bonefields |
-| `DORIANS_OUTPOST` | 4369 (0x1111) |  |  | Dorian's Outpost |
-| `MAM_TOTH_CRATER` | 4371 (0x1113) |  |  | Mam'toth Crater |
-| `ZOL_MAZ_STRONGHOLD` | 4372 (0x1114) |  |  | Zol'Maz Stronghold |
-| `ZOL_HEB` | 4373 (0x1115) |  |  | Zol'Heb |
-| `RAGECLAW_LAKE` | 4374 (0x1116) |  |  | Rageclaw Lake |
-| `GUNDRAK` | 4375 (0x1117) |  |  | Gundrak |
-| `THE_SAVAGE_THICKET` | 4376 (0x1118) |  |  | The Savage Thicket |
-| `NEW_AVALON_FORGE` | 4377 (0x1119) |  |  | New Avalon Forge |
-| `DALARAN_ARENA` | 4378 (0x111A) |  |  | Dalaran Arena |
-| `VALGARDE1` | 4379 (0x111B) |  |  | Valgarde |
-| `WESTGUARD_INN` | 4380 (0x111C) |  |  | Westguard Inn |
-| `WAYGATE1` | 4381 (0x111D) |  |  | Waygate |
-| `THE_SHAPERS_TERRACE` | 4382 (0x111E) |  |  | The Shaper's Terrace |
-| `LAKESIDE_LANDING` | 4383 (0x111F) |  |  | Lakeside Landing |
-| `STRAND_OF_THE_ANCIENTS` | 4384 (0x1120) |  |  | Strand of the Ancients |
-| `BITTERTIDE_LAKE` | 4385 (0x1121) |  |  | Bittertide Lake |
-| `RAINSPEAKER_RAPIDS` | 4386 (0x1122) |  |  | Rainspeaker Rapids |
-| `FRENZYHEART_RIVER` | 4387 (0x1123) |  |  | Frenzyheart River |
-| `WINTERGRASP_RIVER` | 4388 (0x1124) |  |  | Wintergrasp River |
-| `THE_SUNTOUCHED_PILLAR` | 4389 (0x1125) |  |  | The Suntouched Pillar |
-| `FRIGID_BREACH` | 4390 (0x1126) |  |  | Frigid Breach |
-| `SWINDLEGRINS_DIG` | 4391 (0x1127) |  |  | Swindlegrin's Dig |
-| `THE_STORMWRIGHTS_SHELF` | 4392 (0x1128) |  |  | The Stormwright's Shelf |
-| `DEATHS_HAND_ENCAMPMENT` | 4393 (0x1129) |  |  | Death's Hand Encampment |
-| `SCARLET_TAVERN` | 4394 (0x112A) |  |  | Scarlet Tavern |
-| `DALARAN` | 4395 (0x112B) |  |  | Dalaran |
-| `NOZZLERUST_POST` | 4396 (0x112C) |  |  | Nozzlerust Post |
-| `FARSHIRE_MINE` | 4399 (0x112F) |  |  | Farshire Mine |
-| `THE_MOSSLIGHT_PILLAR` | 4400 (0x1130) |  |  | The Mosslight Pillar |
-| `SARAGOSAS_LANDING` | 4401 (0x1131) |  |  | Saragosa's Landing |
-| `VENGEANCE_LIFT` | 4402 (0x1132) |  |  | Vengeance Lift |
-| `BALEJAR_WATCH` | 4403 (0x1133) |  |  | Balejar Watch |
-| `NEW_AGAMAND_INN` | 4404 (0x1134) |  |  | New Agamand Inn |
-| `PASSAGE_OF_LOST_FIENDS` | 4405 (0x1135) |  |  | Passage of Lost Fiends |
-| `THE_RING_OF_VALOR` | 4406 (0x1136) |  |  | The Ring of Valor |
-| `HALL_OF_THE_FROSTWOLF` | 4407 (0x1137) |  |  | Hall of the Frostwolf |
-| `HALL_OF_THE_STORMPIKE` | 4408 (0x1138) |  |  | Hall of the Stormpike |
-| `STORMWIND_HARBOR` | 4411 (0x113B) |  |  | Stormwind Harbor |
-| `THE_MAKERS_OVERLOOK` | 4412 (0x113C) |  |  | The Makers' Overlook |
-| `THE_MAKERS_PERCH` | 4413 (0x113D) |  |  | The Makers' Perch |
-| `SCARLET_TOWER` | 4414 (0x113E) |  |  | Scarlet Tower |
-| `THE_VIOLET_HOLD` | 4415 (0x113F) |  |  | The Violet Hold |
-| `GUNDRAK1` | 4416 (0x1140) |  |  | Gundrak |
-| `ONSLAUGHT_HARBOR` | 4417 (0x1141) |  |  | Onslaught Harbor |
-| `K3` | 4418 (0x1142) |  |  | K3 |
-| `SNOWBLIND_HILLS` | 4419 (0x1143) |  |  | Snowblind Hills |
-| `SNOWBLIND_TERRACE` | 4420 (0x1144) |  |  | Snowblind Terrace |
-| `GARM` | 4421 (0x1145) |  |  | Garm |
-| `BRUNNHILDAR_VILLAGE` | 4422 (0x1146) |  |  | Brunnhildar Village |
-| `SIFRELDAR_VILLAGE` | 4423 (0x1147) |  |  | Sifreldar Village |
-| `VALKYRION` | 4424 (0x1148) |  |  | Valkyrion |
-| `THE_FORLORN_MINE` | 4425 (0x1149) |  |  | The Forlorn Mine |
-| `BORS_BREATH_RIVER` | 4426 (0x114A) |  |  | Bor's Breath River |
-| `ARGENT_VANGUARD` | 4427 (0x114B) |  |  | Argent Vanguard |
-| `FROSTHOLD` | 4428 (0x114C) |  |  | Frosthold |
-| `GROM_ARSH_CRASH_SITE` | 4429 (0x114D) |  |  | Grom'arsh Crash-Site |
-| `TEMPLE_OF_STORMS` | 4430 (0x114E) |  |  | Temple of Storms |
-| `ENGINE_OF_THE_MAKERS` | 4431 (0x114F) |  |  | Engine of the Makers |
-| `THE_FOOT_STEPPES` | 4432 (0x1150) |  |  | The Foot Steppes |
-| `DRAGONSPINE_PEAKS` | 4433 (0x1151) |  |  | Dragonspine Peaks |
-| `NIDAVELIR` | 4434 (0x1152) |  |  | Nidavelir |
-| `NARVIRS_CRADLE` | 4435 (0x1153) |  |  | Narvir's Cradle |
-| `SNOWDRIFT_PLAINS` | 4436 (0x1154) |  |  | Snowdrift Plains |
-| `VALLEY_OF_ANCIENT_WINTERS` | 4437 (0x1155) |  |  | Valley of Ancient Winters |
-| `DUN_NIFFELEM` | 4438 (0x1156) |  |  | Dun Niffelem |
-| `FROSTFIELD_LAKE` | 4439 (0x1157) |  |  | Frostfield Lake |
-| `THUNDERFALL` | 4440 (0x1158) |  |  | Thunderfall |
-| `CAMP_TUNKA_LO` | 4441 (0x1159) |  |  | Camp Tunka'lo |
-| `BRANNS_BASE_CAMP` | 4442 (0x115A) |  |  | Brann's Base-Camp |
-| `GATE_OF_ECHOES` | 4443 (0x115B) |  |  | Gate of Echoes |
-| `PLAIN_OF_ECHOES` | 4444 (0x115C) |  |  | Plain of Echoes |
-| `ULDUAR1` | 4445 (0x115D) |  |  | Ulduar |
-| `TERRACE_OF_THE_MAKERS` | 4446 (0x115E) |  |  | Terrace of the Makers |
-| `GATE_OF_LIGHTNING` | 4447 (0x115F) |  |  | Gate of Lightning |
-| `PATH_OF_THE_TITANS1` | 4448 (0x1160) |  |  | Path of the Titans |
-| `ULDIS` | 4449 (0x1161) |  |  | Uldis |
-| `LOKENS_BARGAIN` | 4450 (0x1162) |  |  | Loken's Bargain |
-| `BORS_FALL` | 4451 (0x1163) |  |  | Bor's Fall |
-| `BORS_BREATH` | 4452 (0x1164) |  |  | Bor's Breath |
-| `ROHEMDAL_PASS` | 4453 (0x1165) |  |  | Rohemdal Pass |
-| `THE_STORM_FOUNDRY` | 4454 (0x1166) |  |  | The Storm Foundry |
-| `HIBERNAL_CAVERN` | 4455 (0x1167) |  |  | Hibernal Cavern |
-| `VOLDRUNE_DWELLING` | 4456 (0x1168) |  |  | Voldrune Dwelling |
-| `TORSEGS_REST` | 4457 (0x1169) |  |  | Torseg's Rest |
-| `SPARKSOCKET_MINEFIELD` | 4458 (0x116A) |  |  | Sparksocket Minefield |
-| `RICKETS_FOLLY` | 4459 (0x116B) |  |  | Ricket's Folly |
-| `GARMS_BANE` | 4460 (0x116C) |  |  | Garm's Bane |
-| `GARMS_RISE` | 4461 (0x116D) |  |  | Garm's Rise |
-| `CRYSTALWEB_CAVERN` | 4462 (0x116E) |  |  | Crystalweb Cavern |
-| `TEMPLE_OF_LIFE` | 4463 (0x116F) |  |  | Temple of Life |
-| `TEMPLE_OF_ORDER` | 4464 (0x1170) |  |  | Temple of Order |
-| `TEMPLE_OF_WINTER` | 4465 (0x1171) |  |  | Temple of Winter |
-| `TEMPLE_OF_INVENTION` | 4466 (0x1172) |  |  | Temple of Invention |
-| `DEATHS_RISE` | 4467 (0x1173) |  |  | Death's Rise |
-| `THE_DEAD_FIELDS` | 4468 (0x1174) |  |  | The Dead Fields |
-| `DARGATHS_DEMISE` | 4469 (0x1175) |  |  | Dargath's Demise |
-| `THE_HIDDEN_HOLLOW` | 4470 (0x1176) |  |  | The Hidden Hollow |
-| `BERNAUS_HAPPY_FUN_LAND` | 4471 (0x1177) |  |  | Bernau's Happy Fun Land |
-| `FROSTGRIPS_HOLLOW` | 4472 (0x1178) |  |  | Frostgrip's Hollow |
-| `THE_FRIGID_TOMB` | 4473 (0x1179) |  |  | The Frigid Tomb |
-| `TWIN_SHORES` | 4474 (0x117A) |  |  | Twin Shores |
-| `ZIM_BOS_HIDEOUT` | 4475 (0x117B) |  |  | Zim'bo's Hideout |
-| `ABANDONED_CAMP` | 4476 (0x117C) |  |  | Abandoned Camp |
-| `THE_SHADOW_VAULT` | 4477 (0x117D) |  |  | The Shadow Vault |
-| `COLDWIND_PASS` | 4478 (0x117E) |  |  | Coldwind Pass |
-| `WINTERS_BREATH_LAKE` | 4479 (0x117F) |  |  | Winter's Breath Lake |
-| `THE_FORGOTTEN_OVERLOOK` | 4480 (0x1180) |  |  | The Forgotten Overlook |
-| `JINTHA_KALAR_PASSAGE` | 4481 (0x1181) |  |  | Jintha'kalar Passage |
-| `ARRIGA_FOOTBRIDGE` | 4482 (0x1182) |  |  | Arriga Footbridge |
-| `THE_LOST_PASSAGE` | 4483 (0x1183) |  |  | The Lost Passage |
-| `BOULDERCRAGS_REFUGE` | 4484 (0x1184) |  |  | Bouldercrag's Refuge |
-| `THE_INVENTORS_LIBRARY` | 4485 (0x1185) |  |  | The Inventor's Library |
-| `THE_FROZEN_MINE` | 4486 (0x1186) |  |  | The Frozen Mine |
-| `FROSTFLOE_DEEP` | 4487 (0x1187) |  |  | Frostfloe Deep |
-| `THE_HOWLING_HOLLOW` | 4488 (0x1188) |  |  | The Howling Hollow |
-| `CRUSADER_FORWARD_CAMP` | 4489 (0x1189) |  |  | Crusader Forward Camp |
-| `STORMCREST` | 4490 (0x118A) |  |  | Stormcrest |
-| `BONESNAPS_CAMP` | 4491 (0x118B) |  |  | Bonesnap's Camp |
-| `UFRANGS_HALL` | 4492 (0x118C) |  |  | Ufrang's Hall |
-| `THE_OBSIDIAN_SANCTUM` | 4493 (0x118D) |  |  | The Obsidian Sanctum |
-| `AHN_KAHET_THE_OLD_KINGDOM` | 4494 (0x118E) |  |  | Ahn'kahet: The Old Kingdom |
-| `FJORNS_ANVIL` | 4495 (0x118F) |  |  | Fjorn's Anvil |
-| `JOTUNHEIM` | 4496 (0x1190) |  |  | Jotunheim |
-| `SAVAGE_LEDGE` | 4497 (0x1191) |  |  | Savage Ledge |
-| `HALLS_OF_THE_ANCESTORS` | 4498 (0x1192) |  |  | Halls of the Ancestors |
-| `THE_BLIGHTED_POOL` | 4499 (0x1193) |  |  | The Blighted Pool |
-| `THE_EYE_OF_ETERNITY` | 4500 (0x1194) |  |  | The Eye of Eternity |
-| `THE_ARGENT_VANGUARD` | 4501 (0x1195) |  |  | The Argent Vanguard |
-| `MIMIRS_WORKSHOP` | 4502 (0x1196) |  |  | Mimir's Workshop |
-| `IRONWALL_DAM` | 4503 (0x1197) |  |  | Ironwall Dam |
-| `VALLEY_OF_ECHOES` | 4504 (0x1198) |  |  | Valley of Echoes |
-| `THE_BREACH` | 4505 (0x1199) |  |  | The Breach |
-| `SCOURGEHOLME` | 4506 (0x119A) |  |  | Scourgeholme |
-| `THE_BROKEN_FRONT` | 4507 (0x119B) |  |  | The Broken Front |
-| `MORD_RETHAR_THE_DEATH_GATE` | 4508 (0x119C) |  |  | Mord'rethar: The Death Gate |
-| `THE_BOMBARDMENT` | 4509 (0x119D) |  |  | The Bombardment |
-| `ALDUR_THAR_THE_DESOLATION_GATE` | 4510 (0x119E) |  |  | Aldur'thar: The Desolation Gate |
-| `THE_SKYBREAKER` | 4511 (0x119F) |  |  | The Skybreaker |
-| `ORGRIMS_HAMMER` | 4512 (0x11A0) |  |  | Orgrim's Hammer |
-| `YMIRHEIM` | 4513 (0x11A1) |  |  | Ymirheim |
-| `SARONITE_MINES` | 4514 (0x11A2) |  |  | Saronite Mines |
-| `THE_CONFLAGRATION` | 4515 (0x11A3) |  |  | The Conflagration |
-| `IRONWALL_RAMPART` | 4516 (0x11A4) |  |  | Ironwall Rampart |
-| `WEEPING_QUARRY` | 4517 (0x11A5) |  |  | Weeping Quarry |
-| `CORP_RETHAR_THE_HORROR_GATE` | 4518 (0x11A6) |  |  | Corp'rethar: The Horror Gate |
-| `THE_COURT_OF_BONES` | 4519 (0x11A7) |  |  | The Court of Bones |
-| `MALYKRISS_THE_VILE_HOLD` | 4520 (0x11A8) |  |  | Malykriss: The Vile Hold |
-| `CATHEDRAL_OF_DARKNESS` | 4521 (0x11A9) |  |  | Cathedral of Darkness |
-| `ICECROWN_CITADEL` | 4522 (0x11AA) |  |  | Icecrown Citadel |
-| `ICECROWN_GLACIER` | 4523 (0x11AB) |  |  | Icecrown Glacier |
-| `VALHALAS` | 4524 (0x11AC) |  |  | Valhalas |
-| `THE_UNDERHALLS` | 4525 (0x11AD) |  |  | The Underhalls |
-| `NJORNDAR_VILLAGE` | 4526 (0x11AE) |  |  | Njorndar Village |
-| `BALARGARDE_FORTRESS` | 4527 (0x11AF) |  |  | Balargarde Fortress |
-| `KUL_GALAR_KEEP` | 4528 (0x11B0) |  |  | Kul'galar Keep |
-| `THE_CRIMSON_CATHEDRAL` | 4529 (0x11B1) |  |  | The Crimson Cathedral |
-| `SANCTUM_OF_REANIMATION` | 4530 (0x11B2) |  |  | Sanctum of Reanimation |
-| `THE_FLESHWERKS` | 4531 (0x11B3) |  |  | The Fleshwerks |
-| `VENGEANCE_LANDING_INN` | 4532 (0x11B4) |  |  | Vengeance Landing Inn |
-| `SINDRAGOSAS_FALL` | 4533 (0x11B5) |  |  | Sindragosa's Fall |
-| `WILDERVAR_MINE` | 4534 (0x11B6) |  |  | Wildervar Mine |
-| `THE_PIT_OF_THE_FANG` | 4535 (0x11B7) |  |  | The Pit of the Fang |
-| `FROSTHOWL_CAVERN` | 4536 (0x11B8) |  |  | Frosthowl Cavern |
-| `THE_VALLEY_OF_LOST_HOPE` | 4537 (0x11B9) |  |  | The Valley of Lost Hope |
-| `THE_SUNKEN_RING` | 4538 (0x11BA) |  |  | The Sunken Ring |
-| `THE_BROKEN_TEMPLE` | 4539 (0x11BB) |  |  | The Broken Temple |
-| `THE_VALLEY_OF_FALLEN_HEROES` | 4540 (0x11BC) |  |  | The Valley of Fallen Heroes |
-| `VANGUARD_INFIRMARY` | 4541 (0x11BD) |  |  | Vanguard Infirmary |
-| `HALL_OF_THE_SHAPER` | 4542 (0x11BE) |  |  | Hall of the Shaper |
-| `TEMPLE_OF_WISDOM` | 4543 (0x11BF) |  |  | Temple of Wisdom |
-| `DEATHS_BREACH1` | 4544 (0x11C0) |  |  | Death's Breach |
-| `ABANDONED_MINE` | 4545 (0x11C1) |  |  | Abandoned Mine |
-| `RUINS_OF_THE_SCARLET_ENCLAVE` | 4546 (0x11C2) |  |  | Ruins of the Scarlet Enclave |
-| `HALLS_OF_STONE1` | 4547 (0x11C3) |  |  | Halls of Stone |
-| `HALLS_OF_LIGHTNING1` | 4548 (0x11C4) |  |  | Halls of Lightning |
-| `THE_GREAT_TREE` | 4549 (0x11C5) |  |  | The Great Tree |
-| `THE_MIRROR_OF_TWILIGHT` | 4550 (0x11C6) |  |  | The Mirror of Twilight |
-| `THE_TWILIGHT_RIVULET` | 4551 (0x11C7) |  |  | The Twilight Rivulet |
-| `THE_DECREPIT_FLOW` | 4552 (0x11C8) |  |  | The Decrepit Flow |
-| `FORLORN_WOODS` | 4553 (0x11C9) |  |  | Forlorn Woods |
-| `RUINS_OF_SHANDARAL` | 4554 (0x11CA) |  |  | Ruins of Shandaral |
-| `THE_AZURE_FRONT` | 4555 (0x11CB) |  |  | The Azure Front |
-| `VIOLET_STAND` | 4556 (0x11CC) |  |  | Violet Stand |
-| `THE_UNBOUND_THICKET` | 4557 (0x11CD) |  |  | The Unbound Thicket |
-| `SUNREAVERS_COMMAND` | 4558 (0x11CE) |  |  | Sunreaver's Command |
-| `WINDRUNNERS_OVERLOOK` | 4559 (0x11CF) |  |  | Windrunner's Overlook |
-| `THE_UNDERBELLY` | 4560 (0x11D0) |  |  | The Underbelly |
-| `KRASUS_LANDING` | 4564 (0x11D4) |  |  | Krasus' Landing |
-| `THE_VIOLET_HOLD1` | 4567 (0x11D7) |  |  | The Violet Hold |
-| `THE_EVENTIDE` | 4568 (0x11D8) |  |  | The Eventide |
-| `SEWER_EXIT_PIPE` | 4569 (0x11D9) |  |  | Sewer Exit Pipe |
-| `CIRCLE_OF_WILLS` | 4570 (0x11DA) |  |  | Circle of Wills |
-| `SILVERWING_FLAG_ROOM` | 4571 (0x11DB) |  |  | Silverwing Flag Room |
-| `WARSONG_FLAG_ROOM` | 4572 (0x11DC) |  |  | Warsong Flag Room |
-| `WINTERGRASP_FORTRESS` | 4575 (0x11DF) |  |  | Wintergrasp Fortress |
-| `CENTRAL_BRIDGE` | 4576 (0x11E0) |  |  | Central Bridge |
-| `EASTERN_BRIDGE` | 4577 (0x11E1) |  |  | Eastern Bridge |
-| `WESTERN_BRIDGE` | 4578 (0x11E2) |  |  | Western Bridge |
-| `DUBRA_JIN` | 4579 (0x11E3) |  |  | Dubra'Jin |
-| `CRUSADERS_PINNACLE` | 4580 (0x11E4) |  |  | Crusaders' Pinnacle |
-| `FLAMEWATCH_TOWER` | 4581 (0x11E5) |  |  | Flamewatch Tower |
-| `WINTERS_EDGE_TOWER` | 4582 (0x11E6) |  |  | Winter's Edge Tower |
-| `SHADOWSIGHT_TOWER` | 4583 (0x11E7) |  |  | Shadowsight Tower |
-| `THE_CAULDRON_OF_FLAMES` | 4584 (0x11E8) |  |  | The Cauldron of Flames |
-| `GLACIAL_FALLS` | 4585 (0x11E9) |  |  | Glacial Falls |
-| `WINDY_BLUFFS` | 4586 (0x11EA) |  |  | Windy Bluffs |
-| `THE_FOREST_OF_SHADOWS` | 4587 (0x11EB) |  |  | The Forest of Shadows |
-| `BLACKWATCH` | 4588 (0x11EC) |  |  | Blackwatch |
-| `THE_CHILLED_QUAGMIRE` | 4589 (0x11ED) |  |  | The Chilled Quagmire |
-| `THE_STEPPE_OF_LIFE` | 4590 (0x11EE) |  |  | The Steppe of Life |
-| `SILENT_VIGIL` | 4591 (0x11EF) |  |  | Silent Vigil |
-| `GIMORAKS_DEN` | 4592 (0x11F0) |  |  | Gimorak's Den |
-| `THE_PIT_OF_FIENDS` | 4593 (0x11F1) |  |  | The Pit of Fiends |
-| `BATTLESCAR_SPIRE` | 4594 (0x11F2) |  |  | Battlescar Spire |
-| `HALL_OF_HORRORS` | 4595 (0x11F3) |  |  | Hall of Horrors |
-| `THE_CIRCLE_OF_SUFFERING` | 4596 (0x11F4) |  |  | The Circle of Suffering |
-| `RISE_OF_SUFFERING` | 4597 (0x11F5) |  |  | Rise of Suffering |
-| `KRASUS_LANDING1` | 4598 (0x11F6) |  |  | Krasus' Landing |
-| `SEWER_EXIT_PIPE1` | 4599 (0x11F7) |  |  | Sewer Exit Pipe |
-| `DALARAN_ISLAND` | 4601 (0x11F9) |  |  | Dalaran Island |
-| `FORCE_INTERIOR` | 4602 (0x11FA) |  |  | Force Interior |
-| `VAULT_OF_ARCHAVON` | 4603 (0x11FB) |  |  | Vault of Archavon |
-| `GATE_OF_THE_RED_SUN` | 4604 (0x11FC) |  |  | Gate of the Red Sun |
-| `GATE_OF_THE_BLUE_SAPPHIRE` | 4605 (0x11FD) |  |  | Gate of the Blue Sapphire |
-| `GATE_OF_THE_GREEN_EMERALD` | 4606 (0x11FE) |  |  | Gate of the Green Emerald |
-| `GATE_OF_THE_PURPLE_AMETHYST` | 4607 (0x11FF) |  |  | Gate of the Purple Amethyst |
-| `GATE_OF_THE_YELLOW_MOON` | 4608 (0x1200) |  |  | Gate of the Yellow Moon |
-| `COURTYARD_OF_THE_ANCIENTS` | 4609 (0x1201) |  |  | Courtyard of the Ancients |
-| `LANDING_BEACH` | 4610 (0x1202) |  |  | Landing Beach |
-| `WESTSPARK_WORKSHOP` | 4611 (0x1203) |  |  | Westspark Workshop |
-| `EASTSPARK_WORKSHOP` | 4612 (0x1204) |  |  | Eastspark Workshop |
-| `DALARAN_CITY` | 4613 (0x1205) |  |  | Dalaran City |
-| `THE_VIOLET_CITADEL_SPIRE` | 4614 (0x1206) |  |  | The Violet Citadel Spire |
-| `NAZ_ANAK_THE_FORGOTTEN_DEPTHS` | 4615 (0x1207) |  |  | Naz'anak: The Forgotten Depths |
-| `SUNREAVERS_SANCTUARY` | 4616 (0x1208) |  |  | Sunreaver's Sanctuary |
-| `ELEVATOR` | 4617 (0x1209) |  |  | Elevator |
-| `ANTONIDAS_MEMORIAL` | 4618 (0x120A) |  |  | Antonidas Memorial |
-| `THE_VIOLET_CITADEL` | 4619 (0x120B) |  |  | The Violet Citadel |
-| `MAGUS_COMMERCE_EXCHANGE` | 4620 (0x120C) |  |  | Magus Commerce Exchange |
-| `UNUSED` | 4621 (0x120D) |  |  | UNUSED |
-| `FIRST_LEGION_FORWARD_CAMP` | 4622 (0x120E) |  |  | First Legion Forward Camp |
-| `HALL_OF_THE_CONQUERED_KINGS` | 4623 (0x120F) |  |  | Hall of the Conquered Kings |
-| `BEFOULED_TERRACE` | 4624 (0x1210) |  |  | Befouled Terrace |
-| `THE_DESECRATED_ALTAR` | 4625 (0x1211) |  |  | The Desecrated Altar |
-| `SHIMMERING_BOG` | 4626 (0x1212) |  |  | Shimmering Bog |
-| `FALLEN_TEMPLE_OF_AHN_KAHET` | 4627 (0x1213) |  |  | Fallen Temple of Ahn'kahet |
-| `HALLS_OF_BINDING` | 4628 (0x1214) |  |  | Halls of Binding |
-| `WINTERS_HEART` | 4629 (0x1215) |  |  | Winter's Heart |
-| `THE_NORTH_SEA2` | 4630 (0x1216) |  |  | The North Sea |
-| `THE_BROODMOTHERS_NEST` | 4631 (0x1217) |  |  | The Broodmother's Nest |
-| `DALARAN_FLOATING_ROCKS` | 4632 (0x1218) |  |  | Dalaran Floating Rocks |
-| `RAPTOR_PENS` | 4633 (0x1219) |  |  | Raptor Pens |
-| `DRAK_THARON_KEEP3` | 4635 (0x121B) |  |  | Drak'Tharon Keep |
-| `THE_NOXIOUS_PASS` | 4636 (0x121C) |  |  | The Noxious Pass |
-| `VARGOTHS_RETREAT` | 4637 (0x121D) |  |  | Vargoth's Retreat |
-| `VIOLET_CITADEL_BALCONY` | 4638 (0x121E) |  |  | Violet Citadel Balcony |
-| `BAND_OF_VARIANCE` | 4639 (0x121F) |  |  | Band of Variance |
-| `BAND_OF_ACCELERATION` | 4640 (0x1220) |  |  | Band of Acceleration |
-| `BAND_OF_TRANSMUTATION` | 4641 (0x1221) |  |  | Band of Transmutation |
-| `BAND_OF_ALIGNMENT` | 4642 (0x1222) |  |  | Band of Alignment |
-| `ASHWOOD_LAKE` | 4646 (0x1226) |  |  | Ashwood Lake |
-| `IRON_CONCOURSE` | 4650 (0x122A) |  |  | Iron Concourse |
-| `FORMATION_GROUNDS` | 4652 (0x122C) |  |  | Formation Grounds |
-| `RAZORSCALES_AERIE` | 4653 (0x122D) |  |  | Razorscale's Aerie |
-| `THE_COLOSSAL_FORGE` | 4654 (0x122E) |  |  | The Colossal Forge |
-| `THE_SCRAPYARD` | 4655 (0x122F) |  |  | The Scrapyard |
-| `THE_CONSERVATORY_OF_LIFE` | 4656 (0x1230) |  |  | The Conservatory of Life |
-| `THE_ARCHIVUM` | 4657 (0x1231) |  |  | The Archivum |
-| `ARGENT_TOURNAMENT_GROUNDS` | 4658 (0x1232) |  |  | Argent Tournament Grounds |
-| `EXPEDITION_BASE_CAMP` | 4665 (0x1239) |  |  | Expedition Base Camp |
-| `SUNREAVER_PAVILION` | 4666 (0x123A) |  |  | Sunreaver Pavilion |
-| `SILVER_COVENANT_PAVILION` | 4667 (0x123B) |  |  | Silver Covenant Pavilion |
-| `THE_COOPER_RESIDENCE` | 4668 (0x123C) |  |  | The Cooper Residence |
-| `THE_RING_OF_CHAMPIONS` | 4669 (0x123D) |  |  | The Ring of Champions |
-| `THE_ASPIRANTS_RING` | 4670 (0x123E) |  |  | The Aspirants' Ring |
-| `THE_ARGENT_VALIANTS_RING` | 4671 (0x123F) |  |  | The Argent Valiants' Ring |
-| `THE_ALLIANCE_VALIANTS_RING` | 4672 (0x1240) |  |  | The Alliance Valiants' Ring |
-| `THE_HORDE_VALIANTS_RING` | 4673 (0x1241) |  |  | The Horde Valiants' Ring |
-| `ARGENT_PAVILION` | 4674 (0x1242) |  |  | Argent Pavilion |
-| `SUNREAVER_PAVILION1` | 4676 (0x1244) |  |  | Sunreaver Pavilion |
-| `SILVER_COVENANT_PAVILION1` | 4677 (0x1245) |  |  | Silver Covenant Pavilion |
-| `THE_FORLORN_CAVERN` | 4679 (0x1247) |  |  | The Forlorn Cavern |
-| `CLAYTONIO_TEST_AREA` | 4688 (0x1250) |  |  | claytonio test area |
-| `QUEL_DELARS_REST` | 4692 (0x1254) |  |  | Quel'Delar's Rest |
-| `ISLE_OF_CONQUEST` | 4710 (0x1266) |  |  | Isle of Conquest |
-| `TRIAL_OF_THE_CRUSADER` | 4722 (0x1272) |  |  | Trial of the Crusader |
-| `TRIAL_OF_THE_CHAMPION` | 4723 (0x1273) |  |  | Trial of the Champion |
-| `RUNEWEAVER_SQUARE` | 4739 (0x1283) |  |  | Runeweaver Square |
-| `THE_SILVER_ENCLAVE` | 4740 (0x1284) |  |  | The Silver Enclave |
-| `ISLE_OF_CONQUEST_NO_MANS_LAND` | 4741 (0x1285) |  |  | Isle of Conquest No Man's Land |
-| `HROTHGARS_LANDING` | 4742 (0x1286) |  |  | Hrothgar's Landing |
-| `DEATHSPEAKERS_WATCH` | 4743 (0x1287) |  |  | Deathspeaker's Watch |
-| `WORKSHOP` | 4747 (0x128B) |  |  | Workshop |
-| `QUARRY` | 4748 (0x128C) |  |  | Quarry |
-| `DOCKS` | 4749 (0x128D) |  |  | Docks |
-| `HANGAR` | 4750 (0x128E) |  |  | Hangar |
-| `REFINERY` | 4751 (0x128F) |  |  | Refinery |
-| `HORDE_KEEP` | 4752 (0x1290) |  |  | Horde Keep |
-| `ALLIANCE_KEEP` | 4753 (0x1291) |  |  | Alliance Keep |
-| `THE_SEA_REAVERS_RUN` | 4760 (0x1298) |  |  | The Sea Reaver's Run |
-| `TRANSPORT_ALLIANCE_GUNSHIP` | 4763 (0x129B) |  |  | Transport: Alliance Gunship |
-| `TRANSPORT_HORDE_GUNSHIP` | 4764 (0x129C) |  |  | Transport: Horde Gunship |
-| `HROTHGARS_LANDING1` | 4769 (0x12A1) |  |  | Hrothgar's Landing |
-| `THE_FORGE_OF_SOULS` | 4809 (0x12C9) |  |  | The Forge of Souls |
-| `ICECROWN_CITADEL1` | 4812 (0x12CC) |  |  | Icecrown Citadel |
-| `PIT_OF_SARON` | 4813 (0x12CD) |  |  | Pit of Saron |
-| `HALLS_OF_REFLECTION` | 4820 (0x12D4) |  |  | Halls of Reflection |
-| `TRANSPORT_ALLIANCE_GUNSHIP_IGB` | 4832 (0x12E0) |  |  | Transport: Alliance Gunship (IGB) |
-| `TRANSPORT_HORDE_GUNSHIP_IGB` | 4833 (0x12E1) |  |  | Transport: Horde Gunship (IGB) |
-| `THE_FROZEN_THRONE` | 4859 (0x12FB) |  |  | The Frozen Throne |
-| `THE_FROZEN_HALLS` | 4862 (0x12FE) |  |  | The Frozen Halls |
-| `THE_FROST_QUEENS_LAIR` | 4889 (0x1319) |  |  | The Frost Queen's Lair |
-| `PUTRICIDES_LABORATORY_OF_ALCHEMICAL_HORRORS_AND_FUN` | 4890 (0x131A) |  |  | Putricide's Laboratory of Alchemical Horrors and Fun |
-| `THE_SANCTUM_OF_BLOOD` | 4891 (0x131B) |  |  | The Sanctum of Blood |
-| `THE_CRIMSON_HALL` | 4892 (0x131C) |  |  | The Crimson Hall |
-| `THE_FROST_QUEENS_LAIR1` | 4893 (0x131D) |  |  | The Frost Queen's Lair |
-| `PUTRICIDES_LABORATORY_OF_ALCHEMICAL_HORRORS_AND_FUN1` | 4894 (0x131E) |  |  | Putricide's Laboratory of Alchemical Horrors and Fun |
-| `THE_CRIMSON_HALL1` | 4895 (0x131F) |  |  | The Crimson Hall |
-| `THE_FROZEN_THRONE1` | 4896 (0x1320) |  |  | The Frozen Throne |
-| `THE_SANCTUM_OF_BLOOD1` | 4897 (0x1321) |  |  | The Sanctum of Blood |
-| `FROSTMOURNE` | 4898 (0x1322) |  |  | Frostmourne |
-| `THE_DARK_APPROACH` | 4904 (0x1328) |  |  | The Dark Approach |
-| `SCOURGELORDS_COMMAND` | 4905 (0x1329) |  |  | Scourgelord's Command |
-| `THE_SHADOW_THRONE` | 4906 (0x132A) |  |  | The Shadow Throne |
-| `THE_HIDDEN_PASSAGE` | 4908 (0x132C) |  |  | The Hidden Passage |
-| `FROSTMOURNE1` | 4910 (0x132E) |  |  | Frostmourne |
-| `THE_RUBY_SANCTUM` | 4987 (0x137B) |  |  | The Ruby Sanctum |
+| Enumerator | Value  | Comment | Display |
+| --------- | -------- | ------- | ------- |
+| `NONE` | 0 (0x00) |  |  |
+| `DUN_MOROGH` | 1 (0x01) |  | Dun Morogh |
+| `LONGSHORE` | 2 (0x02) |  | Longshore |
+| `BADLANDS` | 3 (0x03) |  | Badlands |
+| `BLASTED_LANDS` | 4 (0x04) |  | Blasted Lands |
+| `BLACKWATER_COVE` | 7 (0x07) |  | Blackwater Cove |
+| `SWAMP_OF_SORROWS` | 8 (0x08) |  | Swamp of Sorrows |
+| `NORTHSHIRE_VALLEY` | 9 (0x09) |  | Northshire Valley |
+| `DUSKWOOD` | 10 (0x0A) |  | Duskwood |
+| `WETLANDS` | 11 (0x0B) |  | Wetlands |
+| `ELWYNN_FOREST` | 12 (0x0C) |  | Elwynn Forest |
+| `THE_WORLD_TREE` | 13 (0x0D) |  | The World Tree |
+| `DUROTAR` | 14 (0x0E) |  | Durotar |
+| `DUSTWALLOW_MARSH` | 15 (0x0F) |  | Dustwallow Marsh |
+| `AZSHARA` | 16 (0x10) |  | Azshara |
+| `THE_BARRENS` | 17 (0x11) |  | The Barrens |
+| `CRYSTAL_LAKE` | 18 (0x12) |  | Crystal Lake |
+| `ZUL_GURUB` | 19 (0x13) |  | Zul'Gurub |
+| `MOONBROOK` | 20 (0x14) |  | Moonbrook |
+| `KUL_TIRAS` | 21 (0x15) |  | Kul Tiras |
+| `PROGRAMMER_ISLE` | 22 (0x16) |  | Programmer Isle |
+| `NORTHSHIRE_RIVER` | 23 (0x17) |  | Northshire River |
+| `NORTHSHIRE_ABBEY` | 24 (0x18) |  | Northshire Abbey |
+| `BLACKROCK_MOUNTAIN` | 25 (0x19) |  | Blackrock Mountain |
+| `LIGHTHOUSE` | 26 (0x1A) |  | Lighthouse |
+| `WESTERN_PLAGUELANDS` | 28 (0x1C) |  | Western Plaguelands |
+| `NINE` | 30 (0x1E) |  | Nine |
+| `THE_CEMETARY` | 32 (0x20) |  | The Cemetary |
+| `STRANGLETHORN_VALE` | 33 (0x21) |  | Stranglethorn Vale |
+| `ECHO_RIDGE_MINE` | 34 (0x22) |  | Echo Ridge Mine |
+| `BOOTY_BAY` | 35 (0x23) |  | Booty Bay |
+| `ALTERAC_MOUNTAINS` | 36 (0x24) |  | Alterac Mountains |
+| `LAKE_NAZFERITI` | 37 (0x25) |  | Lake Nazferiti |
+| `LOCH_MODAN` | 38 (0x26) |  | Loch Modan |
+| `WESTFALL` | 40 (0x28) |  | Westfall |
+| `DEADWIND_PASS` | 41 (0x29) |  | Deadwind Pass |
+| `DARKSHIRE` | 42 (0x2A) |  | Darkshire |
+| `WILD_SHORE` | 43 (0x2B) |  | Wild Shore |
+| `REDRIDGE_MOUNTAINS` | 44 (0x2C) |  | Redridge Mountains |
+| `ARATHI_HIGHLANDS` | 45 (0x2D) |  | Arathi Highlands |
+| `BURNING_STEPPES` | 46 (0x2E) |  | Burning Steppes |
+| `THE_HINTERLANDS` | 47 (0x2F) |  | The Hinterlands |
+| `DEAD_MANS_HOLE` | 49 (0x31) |  | Dead Man's Hole |
+| `SEARING_GORGE` | 51 (0x33) |  | Searing Gorge |
+| `THIEVES_CAMP` | 53 (0x35) |  | Thieves Camp |
+| `JASPERLODE_MINE` | 54 (0x36) |  | Jasperlode Mine |
+| `VALLEY_OF_HEROES_UNUSED` | 55 (0x37) |  | Valley of Heroes UNUSED |
+| `HEROES_VIGIL` | 56 (0x38) |  | Heroes' Vigil |
+| `FARGODEEP_MINE` | 57 (0x39) |  | Fargodeep Mine |
+| `NORTHSHIRE_VINEYARDS` | 59 (0x3B) |  | Northshire Vineyards |
+| `FORESTS_EDGE` | 60 (0x3C) |  | Forest's Edge |
+| `THUNDER_FALLS` | 61 (0x3D) |  | Thunder Falls |
+| `BRACKWELL_PUMPKIN_PATCH` | 62 (0x3E) |  | Brackwell Pumpkin Patch |
+| `THE_STONEFIELD_FARM` | 63 (0x3F) |  | The Stonefield Farm |
+| `THE_MACLURE_VINEYARDS` | 64 (0x40) |  | The Maclure Vineyards |
+| `DRAGONBLIGHT` | 65 (0x41) |  | Dragonblight |
+| `ZUL_DRAK` | 66 (0x42) |  | Zul'Drak |
+| `THE_STORM_PEAKS` | 67 (0x43) |  | The Storm Peaks |
+| `LAKE_EVERSTILL` | 68 (0x44) |  | Lake Everstill |
+| `LAKESHIRE` | 69 (0x45) |  | Lakeshire |
+| `STONEWATCH` | 70 (0x46) |  | Stonewatch |
+| `STONEWATCH_FALLS` | 71 (0x47) |  | Stonewatch Falls |
+| `THE_DARK_PORTAL` | 72 (0x48) |  | The Dark Portal |
+| `THE_TAINTED_SCAR` | 73 (0x49) |  | The Tainted Scar |
+| `POOL_OF_TEARS` | 74 (0x4A) |  | Pool of Tears |
+| `STONARD` | 75 (0x4B) |  | Stonard |
+| `FALLOW_SANCTUARY` | 76 (0x4C) |  | Fallow Sanctuary |
+| `ANVILMAR` | 77 (0x4D) |  | Anvilmar |
+| `STORMWIND_MOUNTAINS` | 80 (0x50) |  | Stormwind Mountains |
+| `JEFF_NE_QUADRANT_CHANGED` | 81 (0x51) |  | Jeff NE Quadrant Changed |
+| `JEFF_NW_QUADRANT` | 82 (0x52) |  | Jeff NW Quadrant |
+| `JEFF_SE_QUADRANT` | 83 (0x53) |  | Jeff SE Quadrant |
+| `JEFF_SW_QUADRANT` | 84 (0x54) |  | Jeff SW Quadrant |
+| `TIRISFAL_GLADES` | 85 (0x55) |  | Tirisfal Glades |
+| `STONE_CAIRN_LAKE` | 86 (0x56) |  | Stone Cairn Lake |
+| `GOLDSHIRE` | 87 (0x57) |  | Goldshire |
+| `EASTVALE_LOGGING_CAMP` | 88 (0x58) |  | Eastvale Logging Camp |
+| `MIRROR_LAKE_ORCHARD` | 89 (0x59) |  | Mirror Lake Orchard |
+| `TOWER_OF_AZORA` | 91 (0x5B) |  | Tower of Azora |
+| `MIRROR_LAKE` | 92 (0x5C) |  | Mirror Lake |
+| `VUL_GOL_OGRE_MOUND` | 93 (0x5D) |  | Vul'Gol Ogre Mound |
+| `RAVEN_HILL` | 94 (0x5E) |  | Raven Hill |
+| `REDRIDGE_CANYONS` | 95 (0x5F) |  | Redridge Canyons |
+| `TOWER_OF_ILGALAR` | 96 (0x60) |  | Tower of Ilgalar |
+| `ALTHERS_MILL` | 97 (0x61) |  | Alther's Mill |
+| `RETHBAN_CAVERNS` | 98 (0x62) |  | Rethban Caverns |
+| `REBEL_CAMP` | 99 (0x63) |  | Rebel Camp |
+| `NESINGWARYS_EXPEDITION` | 100 (0x64) |  | Nesingwary's Expedition |
+| `KURZENS_COMPOUND` | 101 (0x65) |  | Kurzen's Compound |
+| `RUINS_OF_ZUL_KUNDA` | 102 (0x66) |  | Ruins of Zul'Kunda |
+| `RUINS_OF_ZUL_MAMWE` | 103 (0x67) |  | Ruins of Zul'Mamwe |
+| `THE_VILE_REEF` | 104 (0x68) |  | The Vile Reef |
+| `MOSH_OGG_OGRE_MOUND` | 105 (0x69) |  | Mosh'Ogg Ogre Mound |
+| `THE_STOCKPILE` | 106 (0x6A) |  | The Stockpile |
+| `SALDEANS_FARM` | 107 (0x6B) |  | Saldean's Farm |
+| `SENTINEL_HILL` | 108 (0x6C) |  | Sentinel Hill |
+| `FURLBROWS_PUMPKIN_FARM` | 109 (0x6D) |  | Furlbrow's Pumpkin Farm |
+| `JANGOLODE_MINE` | 111 (0x6F) |  | Jangolode Mine |
+| `GOLD_COAST_QUARRY` | 113 (0x71) |  | Gold Coast Quarry |
+| `WESTFALL_LIGHTHOUSE` | 115 (0x73) |  | Westfall Lighthouse |
+| `MISTY_VALLEY` | 116 (0x74) |  | Misty Valley |
+| `GROM_GOL_BASE_CAMP` | 117 (0x75) |  | Grom'gol Base Camp |
+| `WHELGARS_EXCAVATION_SITE` | 118 (0x76) |  | Whelgar's Excavation Site |
+| `WESTBROOK_GARRISON` | 120 (0x78) |  | Westbrook Garrison |
+| `TRANQUIL_GARDENS_CEMETERY` | 121 (0x79) |  | Tranquil Gardens Cemetery |
+| `ZUULDAIA_RUINS` | 122 (0x7A) |  | Zuuldaia Ruins |
+| `BAL_LAL_RUINS` | 123 (0x7B) |  | Bal'lal Ruins |
+| `KAL_AI_RUINS` | 125 (0x7D) |  | Kal'ai Ruins |
+| `TKASHI_RUINS` | 126 (0x7E) |  | Tkashi Ruins |
+| `BALIA_MAH_RUINS` | 127 (0x7F) |  | Balia'mah Ruins |
+| `ZIATA_JAI_RUINS` | 128 (0x80) |  | Ziata'jai Ruins |
+| `MIZJAH_RUINS` | 129 (0x81) |  | Mizjah Ruins |
+| `SILVERPINE_FOREST` | 130 (0x82) |  | Silverpine Forest |
+| `KHARANOS` | 131 (0x83) |  | Kharanos |
+| `COLDRIDGE_VALLEY` | 132 (0x84) |  | Coldridge Valley |
+| `GNOMEREGAN` | 133 (0x85) |  | Gnomeregan |
+| `GOL_BOLAR_QUARRY` | 134 (0x86) |  | Gol'Bolar Quarry |
+| `FROSTMANE_HOLD` | 135 (0x87) |  | Frostmane Hold |
+| `THE_GRIZZLED_DEN` | 136 (0x88) |  | The Grizzled Den |
+| `BREWNALL_VILLAGE` | 137 (0x89) |  | Brewnall Village |
+| `MISTY_PINE_REFUGE` | 138 (0x8A) |  | Misty Pine Refuge |
+| `EASTERN_PLAGUELANDS` | 139 (0x8B) |  | Eastern Plaguelands |
+| `TELDRASSIL` | 141 (0x8D) |  | Teldrassil |
+| `IRONBANDS_EXCAVATION_SITE` | 142 (0x8E) |  | Ironband's Excavation Site |
+| `MO_GROSH_STRONGHOLD` | 143 (0x8F) |  | Mo'grosh Stronghold |
+| `THELSAMAR` | 144 (0x90) |  | Thelsamar |
+| `ALGAZ_GATE` | 145 (0x91) |  | Algaz Gate |
+| `STONEWROUGHT_DAM` | 146 (0x92) |  | Stonewrought Dam |
+| `THE_FARSTRIDER_LODGE` | 147 (0x93) |  | The Farstrider Lodge |
+| `DARKSHORE` | 148 (0x94) |  | Darkshore |
+| `SILVER_STREAM_MINE` | 149 (0x95) |  | Silver Stream Mine |
+| `MENETHIL_HARBOR` | 150 (0x96) |  | Menethil Harbor |
+| `DESIGNER_ISLAND` | 151 (0x97) |  | Designer Island |
+| `THE_BULWARK` | 152 (0x98) |  | The Bulwark |
+| `RUINS_OF_LORDAERON` | 153 (0x99) |  | Ruins of Lordaeron |
+| `DEATHKNELL` | 154 (0x9A) |  | Deathknell |
+| `NIGHT_WEBS_HOLLOW` | 155 (0x9B) |  | Night Web's Hollow |
+| `SOLLIDEN_FARMSTEAD` | 156 (0x9C) |  | Solliden Farmstead |
+| `AGAMAND_MILLS` | 157 (0x9D) |  | Agamand Mills |
+| `AGAMAND_FAMILY_CRYPT` | 158 (0x9E) |  | Agamand Family Crypt |
+| `BRILL` | 159 (0x9F) |  | Brill |
+| `WHISPERING_GARDENS` | 160 (0xA0) |  | Whispering Gardens |
+| `TERRACE_OF_REPOSE` | 161 (0xA1) |  | Terrace of Repose |
+| `BRIGHTWATER_LAKE` | 162 (0xA2) |  | Brightwater Lake |
+| `GUNTHERS_RETREAT` | 163 (0xA3) |  | Gunther's Retreat |
+| `GARRENS_HAUNT` | 164 (0xA4) |  | Garren's Haunt |
+| `BALNIR_FARMSTEAD` | 165 (0xA5) |  | Balnir Farmstead |
+| `COLD_HEARTH_MANOR` | 166 (0xA6) |  | Cold Hearth Manor |
+| `CRUSADER_OUTPOST` | 167 (0xA7) |  | Crusader Outpost |
+| `THE_NORTH_COAST` | 168 (0xA8) |  | The North Coast |
+| `WHISPERING_SHORE` | 169 (0xA9) |  | Whispering Shore |
+| `LORDAMERE_LAKE` | 170 (0xAA) |  | Lordamere Lake |
+| `FENRIS_ISLE` | 172 (0xAC) |  | Fenris Isle |
+| `FAOLS_REST` | 173 (0xAD) |  | Faol's Rest |
+| `DOLANAAR` | 186 (0xBA) |  | Dolanaar |
+| `DARNASSUS_UNUSED` | 187 (0xBB) |  | Darnassus UNUSED |
+| `SHADOWGLEN` | 188 (0xBC) |  | Shadowglen |
+| `STEELGRILLS_DEPOT` | 189 (0xBD) |  | Steelgrill's Depot |
+| `HEARTHGLEN` | 190 (0xBE) |  | Hearthglen |
+| `NORTHRIDGE_LUMBER_CAMP` | 192 (0xC0) |  | Northridge Lumber Camp |
+| `RUINS_OF_ANDORHAL` | 193 (0xC1) |  | Ruins of Andorhal |
+| `SCHOOL_OF_NECROMANCY` | 195 (0xC3) |  | School of Necromancy |
+| `UTHERS_TOMB` | 196 (0xC4) |  | Uther's Tomb |
+| `SORROW_HILL` | 197 (0xC5) |  | Sorrow Hill |
+| `THE_WEEPING_CAVE` | 198 (0xC6) |  | The Weeping Cave |
+| `FELSTONE_FIELD` | 199 (0xC7) |  | Felstone Field |
+| `DALSONS_TEARS` | 200 (0xC8) |  | Dalson's Tears |
+| `GAHRRONS_WITHERING` | 201 (0xC9) |  | Gahrron's Withering |
+| `THE_WRITHING_HAUNT` | 202 (0xCA) |  | The Writhing Haunt |
+| `MARDENHOLDE_KEEP` | 203 (0xCB) |  | Mardenholde Keep |
+| `PYREWOOD_VILLAGE` | 204 (0xCC) |  | Pyrewood Village |
+| `DUN_MODR` | 205 (0xCD) |  | Dun Modr |
+| `UTGARDE_KEEP` | 206 (0xCE) |  | Utgarde Keep |
+| `THE_GREAT_SEA` | 207 (0xCF) |  | The Great Sea |
+| `UNUSED_IRONCLADCOVE` | 208 (0xD0) |  | Unused Ironcladcove |
+| `SHADOWFANG_KEEP` | 209 (0xD1) |  | Shadowfang Keep |
+| `ICECROWN` | 210 (0xD2) |  | Icecrown |
+| `ICEFLOW_LAKE` | 211 (0xD3) |  | Iceflow Lake |
+| `HELMS_BED_LAKE` | 212 (0xD4) |  | Helm's Bed Lake |
+| `DEEP_ELEM_MINE` | 213 (0xD5) |  | Deep Elem Mine |
+| `THE_GREAT_SEA1` | 214 (0xD6) |  | The Great Sea |
+| `MULGORE` | 215 (0xD7) |  | Mulgore |
+| `ALEXSTON_FARMSTEAD` | 219 (0xDB) |  | Alexston Farmstead |
+| `RED_CLOUD_MESA` | 220 (0xDC) |  | Red Cloud Mesa |
+| `CAMP_NARACHE` | 221 (0xDD) |  | Camp Narache |
+| `BLOODHOOF_VILLAGE` | 222 (0xDE) |  | Bloodhoof Village |
+| `STONEBULL_LAKE` | 223 (0xDF) |  | Stonebull Lake |
+| `RAVAGED_CARAVAN` | 224 (0xE0) |  | Ravaged Caravan |
+| `RED_ROCKS` | 225 (0xE1) |  | Red Rocks |
+| `THE_SKITTERING_DARK` | 226 (0xE2) |  | The Skittering Dark |
+| `VALGANS_FIELD` | 227 (0xE3) |  | Valgan's Field |
+| `THE_SEPULCHER` | 228 (0xE4) |  | The Sepulcher |
+| `OLSENS_FARTHING` | 229 (0xE5) |  | Olsen's Farthing |
+| `THE_GREYMANE_WALL` | 230 (0xE6) |  | The Greymane Wall |
+| `BERENS_PERIL` | 231 (0xE7) |  | Beren's Peril |
+| `THE_DAWNING_ISLES` | 232 (0xE8) |  | The Dawning Isles |
+| `AMBERMILL` | 233 (0xE9) |  | Ambermill |
+| `FENRIS_KEEP` | 235 (0xEB) |  | Fenris Keep |
+| `SHADOWFANG_KEEP1` | 236 (0xEC) |  | Shadowfang Keep |
+| `THE_DECREPIT_FERRY` | 237 (0xED) |  | The Decrepit Ferry |
+| `MALDENS_ORCHARD` | 238 (0xEE) |  | Malden's Orchard |
+| `THE_IVAR_PATCH` | 239 (0xEF) |  | The Ivar Patch |
+| `THE_DEAD_FIELD` | 240 (0xF0) |  | The Dead Field |
+| `THE_ROTTING_ORCHARD` | 241 (0xF1) |  | The Rotting Orchard |
+| `BRIGHTWOOD_GROVE` | 242 (0xF2) |  | Brightwood Grove |
+| `FORLORN_ROWE` | 243 (0xF3) |  | Forlorn Rowe |
+| `THE_WHIPPLE_ESTATE` | 244 (0xF4) |  | The Whipple Estate |
+| `THE_YORGEN_FARMSTEAD` | 245 (0xF5) |  | The Yorgen Farmstead |
+| `THE_CAULDRON` | 246 (0xF6) |  | The Cauldron |
+| `GRIMESILT_DIG_SITE` | 247 (0xF7) |  | Grimesilt Dig Site |
+| `DREADMAUL_ROCK` | 249 (0xF9) |  | Dreadmaul Rock |
+| `RUINS_OF_THAURISSAN` | 250 (0xFA) |  | Ruins of Thaurissan |
+| `FLAME_CREST` | 251 (0xFB) |  | Flame Crest |
+| `BLACKROCK_STRONGHOLD` | 252 (0xFC) |  | Blackrock Stronghold |
+| `THE_PILLAR_OF_ASH` | 253 (0xFD) |  | The Pillar of Ash |
+| `BLACKROCK_MOUNTAIN1` | 254 (0xFE) |  | Blackrock Mountain |
+| `ALTAR_OF_STORMS` | 255 (0xFF) |  | Altar of Storms |
+| `ALDRASSIL` | 256 (0x100) |  | Aldrassil |
+| `SHADOWTHREAD_CAVE` | 257 (0x101) |  | Shadowthread Cave |
+| `FEL_ROCK` | 258 (0x102) |  | Fel Rock |
+| `LAKE_AL_AMETH` | 259 (0x103) |  | Lake Al'Ameth |
+| `STARBREEZE_VILLAGE` | 260 (0x104) |  | Starbreeze Village |
+| `GNARLPINE_HOLD` | 261 (0x105) |  | Gnarlpine Hold |
+| `BAN_ETHIL_BARROW_DEN` | 262 (0x106) |  | Ban'ethil Barrow Den |
+| `THE_CLEFT` | 263 (0x107) |  | The Cleft |
+| `THE_ORACLE_GLADE` | 264 (0x108) |  | The Oracle Glade |
+| `WELLSPRING_RIVER` | 265 (0x109) |  | Wellspring River |
+| `WELLSPRING_LAKE` | 266 (0x10A) |  | Wellspring Lake |
+| `HILLSBRAD_FOOTHILLS` | 267 (0x10B) |  | Hillsbrad Foothills |
+| `AZSHARA_CRATER` | 268 (0x10C) |  | Azshara Crater |
+| `DUN_ALGAZ` | 269 (0x10D) |  | Dun Algaz |
+| `SOUTHSHORE` | 271 (0x10F) |  | Southshore |
+| `TARREN_MILL` | 272 (0x110) |  | Tarren Mill |
+| `DURNHOLDE_KEEP` | 275 (0x113) |  | Durnholde Keep |
+| `UNUSED_STONEWROUGHT_PASS` | 276 (0x114) |  | UNUSED Stonewrought Pass |
+| `THE_FOOTHILL_CAVERNS` | 277 (0x115) |  | The Foothill Caverns |
+| `LORDAMERE_INTERNMENT_CAMP` | 278 (0x116) |  | Lordamere Internment Camp |
+| `DALARAN_CRATER` | 279 (0x117) |  | Dalaran Crater |
+| `STRAHNBRAD` | 280 (0x118) |  | Strahnbrad |
+| `RUINS_OF_ALTERAC` | 281 (0x119) |  | Ruins of Alterac |
+| `CRUSHRIDGE_HOLD` | 282 (0x11A) |  | Crushridge Hold |
+| `SLAUGHTER_HOLLOW` | 283 (0x11B) |  | Slaughter Hollow |
+| `THE_UPLANDS` | 284 (0x11C) |  | The Uplands |
+| `SOUTHPOINT_TOWER` | 285 (0x11D) |  | Southpoint Tower |
+| `HILLSBRAD_FIELDS` | 286 (0x11E) |  | Hillsbrad Fields |
+| `HILLSBRAD` | 287 (0x11F) |  | Hillsbrad |
+| `AZURELODE_MINE` | 288 (0x120) |  | Azurelode Mine |
+| `NETHANDER_STEAD` | 289 (0x121) |  | Nethander Stead |
+| `DUN_GAROK` | 290 (0x122) |  | Dun Garok |
+| `THORADINS_WALL` | 293 (0x125) |  | Thoradin's Wall |
+| `EASTERN_STRAND` | 294 (0x126) |  | Eastern Strand |
+| `WESTERN_STRAND` | 295 (0x127) |  | Western Strand |
+| `SOUTH_SEAS_UNUSED` | 296 (0x128) |  | South Seas UNUSED |
+| `JAGUERO_ISLE` | 297 (0x129) |  | Jaguero Isle |
+| `BARADIN_BAY` | 298 (0x12A) |  | Baradin Bay |
+| `MENETHIL_BAY` | 299 (0x12B) |  | Menethil Bay |
+| `MISTY_REED_STRAND` | 300 (0x12C) |  | Misty Reed Strand |
+| `THE_SAVAGE_COAST` | 301 (0x12D) |  | The Savage Coast |
+| `THE_CRYSTAL_SHORE` | 302 (0x12E) |  | The Crystal Shore |
+| `SHELL_BEACH` | 303 (0x12F) |  | Shell Beach |
+| `NORTH_TIDES_RUN` | 305 (0x131) |  | North Tide's Run |
+| `SOUTH_TIDES_RUN` | 306 (0x132) |  | South Tide's Run |
+| `THE_OVERLOOK_CLIFFS` | 307 (0x133) |  | The Overlook Cliffs |
+| `THE_FORBIDDING_SEA` | 308 (0x134) |  | The Forbidding Sea |
+| `IRONBEARDS_TOMB` | 309 (0x135) |  | Ironbeard's Tomb |
+| `CRYSTALVEIN_MINE` | 310 (0x136) |  | Crystalvein Mine |
+| `RUINS_OF_ABORAZ` | 311 (0x137) |  | Ruins of Aboraz |
+| `JANEIROS_POINT` | 312 (0x138) |  | Janeiro's Point |
+| `NORTHFOLD_MANOR` | 313 (0x139) |  | Northfold Manor |
+| `GOSHEK_FARM` | 314 (0x13A) |  | Go'Shek Farm |
+| `DABYRIES_FARMSTEAD` | 315 (0x13B) |  | Dabyrie's Farmstead |
+| `BOULDERFIST_HALL` | 316 (0x13C) |  | Boulderfist Hall |
+| `WITHERBARK_VILLAGE` | 317 (0x13D) |  | Witherbark Village |
+| `DRYWHISKER_GORGE` | 318 (0x13E) |  | Drywhisker Gorge |
+| `REFUGE_POINTE` | 320 (0x140) |  | Refuge Pointe |
+| `HAMMERFALL` | 321 (0x141) |  | Hammerfall |
+| `BLACKWATER_SHIPWRECKS` | 322 (0x142) |  | Blackwater Shipwrecks |
+| `O_BREENS_CAMP` | 323 (0x143) |  | O'Breen's Camp |
+| `STROMGARDE_KEEP` | 324 (0x144) |  | Stromgarde Keep |
+| `THE_TOWER_OF_ARATHOR` | 325 (0x145) |  | The Tower of Arathor |
+| `THE_SANCTUM` | 326 (0x146) |  | The Sanctum |
+| `FALDIRS_COVE` | 327 (0x147) |  | Faldir's Cove |
+| `THE_DROWNED_REEF` | 328 (0x148) |  | The Drowned Reef |
+| `THANDOL_SPAN` | 330 (0x14A) |  | Thandol Span |
+| `ASHENVALE` | 331 (0x14B) |  | Ashenvale |
+| `THE_GREAT_SEA2` | 332 (0x14C) |  | The Great Sea |
+| `CIRCLE_OF_EAST_BINDING` | 333 (0x14D) |  | Circle of East Binding |
+| `CIRCLE_OF_WEST_BINDING` | 334 (0x14E) |  | Circle of West Binding |
+| `CIRCLE_OF_INNER_BINDING` | 335 (0x14F) |  | Circle of Inner Binding |
+| `CIRCLE_OF_OUTER_BINDING` | 336 (0x150) |  | Circle of Outer Binding |
+| `APOCRYPHANS_REST` | 337 (0x151) |  | Apocryphan's Rest |
+| `ANGOR_FORTRESS` | 338 (0x152) |  | Angor Fortress |
+| `LETHLOR_RAVINE` | 339 (0x153) |  | Lethlor Ravine |
+| `KARGATH` | 340 (0x154) |  | Kargath |
+| `CAMP_KOSH` | 341 (0x155) |  | Camp Kosh |
+| `CAMP_BOFF` | 342 (0x156) |  | Camp Boff |
+| `CAMP_WURG` | 343 (0x157) |  | Camp Wurg |
+| `CAMP_CAGG` | 344 (0x158) |  | Camp Cagg |
+| `AGMONDS_END` | 345 (0x159) |  | Agmond's End |
+| `HAMMERTOES_DIGSITE` | 346 (0x15A) |  | Hammertoe's Digsite |
+| `DUSTBELCH_GROTTO` | 347 (0x15B) |  | Dustbelch Grotto |
+| `AERIE_PEAK` | 348 (0x15C) |  | Aerie Peak |
+| `WILDHAMMER_KEEP` | 349 (0x15D) |  | Wildhammer Keep |
+| `QUEL_DANIL_LODGE` | 350 (0x15E) |  | Quel'Danil Lodge |
+| `SKULK_ROCK` | 351 (0x15F) |  | Skulk Rock |
+| `ZUN_WATHA` | 352 (0x160) |  | Zun'watha |
+| `SHADRA_ALOR` | 353 (0x161) |  | Shadra'Alor |
+| `JINTHA_ALOR` | 354 (0x162) |  | Jintha'Alor |
+| `THE_ALTAR_OF_ZUL` | 355 (0x163) |  | The Altar of Zul |
+| `SERADANE` | 356 (0x164) |  | Seradane |
+| `FERALAS` | 357 (0x165) |  | Feralas |
+| `BRAMBLEBLADE_RAVINE` | 358 (0x166) |  | Brambleblade Ravine |
+| `BAEL_MODAN` | 359 (0x167) |  | Bael Modan |
+| `THE_VENTURE_CO_MINE` | 360 (0x168) |  | The Venture Co. Mine |
+| `FELWOOD` | 361 (0x169) |  | Felwood |
+| `RAZOR_HILL` | 362 (0x16A) |  | Razor Hill |
+| `VALLEY_OF_TRIALS` | 363 (0x16B) |  | Valley of Trials |
+| `THE_DEN` | 364 (0x16C) |  | The Den |
+| `BURNING_BLADE_COVEN` | 365 (0x16D) |  | Burning Blade Coven |
+| `KOLKAR_CRAG` | 366 (0x16E) |  | Kolkar Crag |
+| `SEN_JIN_VILLAGE` | 367 (0x16F) |  | Sen'jin Village |
+| `ECHO_ISLES` | 368 (0x170) |  | Echo Isles |
+| `THUNDER_RIDGE` | 369 (0x171) |  | Thunder Ridge |
+| `DRYGULCH_RAVINE` | 370 (0x172) |  | Drygulch Ravine |
+| `DUSTWIND_CAVE` | 371 (0x173) |  | Dustwind Cave |
+| `TIRAGARDE_KEEP` | 372 (0x174) |  | Tiragarde Keep |
+| `SCUTTLE_COAST` | 373 (0x175) |  | Scuttle Coast |
+| `BLADEFIST_BAY` | 374 (0x176) |  | Bladefist Bay |
+| `DEADEYE_SHORE` | 375 (0x177) |  | Deadeye Shore |
+| `SOUTHFURY_RIVER` | 377 (0x179) |  | Southfury River |
+| `CAMP_TAURAJO` | 378 (0x17A) |  | Camp Taurajo |
+| `FAR_WATCH_POST` | 379 (0x17B) |  | Far Watch Post |
+| `THE_CROSSROADS` | 380 (0x17C) |  | The Crossroads |
+| `BOULDER_LODE_MINE` | 381 (0x17D) |  | Boulder Lode Mine |
+| `THE_SLUDGE_FEN` | 382 (0x17E) |  | The Sludge Fen |
+| `THE_DRY_HILLS` | 383 (0x17F) |  | The Dry Hills |
+| `DREADMIST_PEAK` | 384 (0x180) |  | Dreadmist Peak |
+| `NORTHWATCH_HOLD` | 385 (0x181) |  | Northwatch Hold |
+| `THE_FORGOTTEN_POOLS` | 386 (0x182) |  | The Forgotten Pools |
+| `LUSHWATER_OASIS` | 387 (0x183) |  | Lushwater Oasis |
+| `THE_STAGNANT_OASIS` | 388 (0x184) |  | The Stagnant Oasis |
+| `FIELD_OF_GIANTS` | 390 (0x186) |  | Field of Giants |
+| `THE_MERCHANT_COAST` | 391 (0x187) |  | The Merchant Coast |
+| `RATCHET` | 392 (0x188) |  | Ratchet |
+| `DARKSPEAR_STRAND` | 393 (0x189) |  | Darkspear Strand |
+| `GRIZZLY_HILLS` | 394 (0x18A) |  | Grizzly Hills |
+| `GRIZZLEMAW` | 395 (0x18B) |  | Grizzlemaw |
+| `WINTERHOOF_WATER_WELL` | 396 (0x18C) |  | Winterhoof Water Well |
+| `THUNDERHORN_WATER_WELL` | 397 (0x18D) |  | Thunderhorn Water Well |
+| `WILDMANE_WATER_WELL` | 398 (0x18E) |  | Wildmane Water Well |
+| `SKYLINE_RIDGE` | 399 (0x18F) |  | Skyline Ridge |
+| `THOUSAND_NEEDLES` | 400 (0x190) |  | Thousand Needles |
+| `THE_TIDUS_STAIR` | 401 (0x191) |  | The Tidus Stair |
+| `SHADY_REST_INN` | 403 (0x193) |  | Shady Rest Inn |
+| `BAEL_DUN_DIGSITE` | 404 (0x194) |  | Bael'dun Digsite |
+| `DESOLACE` | 405 (0x195) |  | Desolace |
+| `STONETALON_MOUNTAINS` | 406 (0x196) |  | Stonetalon Mountains |
+| `ORGRIMMAR_UNUSED` | 407 (0x197) |  | Orgrimmar UNUSED |
+| `GILLIJIMS_ISLE` | 408 (0x198) |  | Gillijim's Isle |
+| `ISLAND_OF_DOCTOR_LAPIDIS` | 409 (0x199) |  | Island of Doctor Lapidis |
+| `RAZORWIND_CANYON` | 410 (0x19A) |  | Razorwind Canyon |
+| `BATHRANS_HAUNT` | 411 (0x19B) |  | Bathran's Haunt |
+| `THE_RUINS_OF_ORDIL_ARAN` | 412 (0x19C) |  | The Ruins of Ordil'Aran |
+| `MAESTRAS_POST` | 413 (0x19D) |  | Maestra's Post |
+| `THE_ZORAM_STRAND` | 414 (0x19E) |  | The Zoram Strand |
+| `ASTRANAAR` | 415 (0x19F) |  | Astranaar |
+| `THE_SHRINE_OF_AESSINA` | 416 (0x1A0) |  | The Shrine of Aessina |
+| `FIRE_SCAR_SHRINE` | 417 (0x1A1) |  | Fire Scar Shrine |
+| `THE_RUINS_OF_STARDUST` | 418 (0x1A2) |  | The Ruins of Stardust |
+| `THE_HOWLING_VALE` | 419 (0x1A3) |  | The Howling Vale |
+| `SILVERWIND_REFUGE` | 420 (0x1A4) |  | Silverwind Refuge |
+| `MYSTRAL_LAKE` | 421 (0x1A5) |  | Mystral Lake |
+| `FALLEN_SKY_LAKE` | 422 (0x1A6) |  | Fallen Sky Lake |
+| `IRIS_LAKE` | 424 (0x1A8) |  | Iris Lake |
+| `MOONWELL` | 425 (0x1A9) |  | Moonwell |
+| `RAYNEWOOD_RETREAT` | 426 (0x1AA) |  | Raynewood Retreat |
+| `THE_SHADY_NOOK` | 427 (0x1AB) |  | The Shady Nook |
+| `NIGHT_RUN` | 428 (0x1AC) |  | Night Run |
+| `XAVIAN` | 429 (0x1AD) |  | Xavian |
+| `SATYRNAAR` | 430 (0x1AE) |  | Satyrnaar |
+| `SPLINTERTREE_POST` | 431 (0x1AF) |  | Splintertree Post |
+| `THE_DOR_DANIL_BARROW_DEN` | 432 (0x1B0) |  | The Dor'Danil Barrow Den |
+| `FALFARREN_RIVER` | 433 (0x1B1) |  | Falfarren River |
+| `FELFIRE_HILL` | 434 (0x1B2) |  | Felfire Hill |
+| `DEMON_FALL_CANYON` | 435 (0x1B3) |  | Demon Fall Canyon |
+| `DEMON_FALL_RIDGE` | 436 (0x1B4) |  | Demon Fall Ridge |
+| `WARSONG_LUMBER_CAMP` | 437 (0x1B5) |  | Warsong Lumber Camp |
+| `BOUGH_SHADOW` | 438 (0x1B6) |  | Bough Shadow |
+| `THE_SHIMMERING_FLATS` | 439 (0x1B7) |  | The Shimmering Flats |
+| `TANARIS` | 440 (0x1B8) |  | Tanaris |
+| `LAKE_FALATHIM` | 441 (0x1B9) |  | Lake Falathim |
+| `AUBERDINE` | 442 (0x1BA) |  | Auberdine |
+| `RUINS_OF_MATHYSTRA` | 443 (0x1BB) |  | Ruins of Mathystra |
+| `TOWER_OF_ALTHALAXX` | 444 (0x1BC) |  | Tower of Althalaxx |
+| `CLIFFSPRING_FALLS` | 445 (0x1BD) |  | Cliffspring Falls |
+| `BASHAL_ARAN` | 446 (0x1BE) |  | Bashal'Aran |
+| `AMETH_ARAN` | 447 (0x1BF) |  | Ameth'Aran |
+| `GROVE_OF_THE_ANCIENTS` | 448 (0x1C0) |  | Grove of the Ancients |
+| `THE_MASTERS_GLAIVE` | 449 (0x1C1) |  | The Master's Glaive |
+| `REMTRAVELS_EXCAVATION` | 450 (0x1C2) |  | Remtravel's Excavation |
+| `MISTS_EDGE` | 452 (0x1C4) |  | Mist's Edge |
+| `THE_LONG_WASH` | 453 (0x1C5) |  | The Long Wash |
+| `WILDBEND_RIVER` | 454 (0x1C6) |  | Wildbend River |
+| `BLACKWOOD_DEN` | 455 (0x1C7) |  | Blackwood Den |
+| `CLIFFSPRING_RIVER` | 456 (0x1C8) |  | Cliffspring River |
+| `THE_VEILED_SEA` | 457 (0x1C9) |  | The Veiled Sea |
+| `GOLD_ROAD` | 458 (0x1CA) |  | Gold Road |
+| `SCARLET_WATCH_POST` | 459 (0x1CB) |  | Scarlet Watch Post |
+| `SUN_ROCK_RETREAT` | 460 (0x1CC) |  | Sun Rock Retreat |
+| `WINDSHEAR_CRAG` | 461 (0x1CD) |  | Windshear Crag |
+| `CRAGPOOL_LAKE` | 463 (0x1CF) |  | Cragpool Lake |
+| `MIRKFALLON_LAKE` | 464 (0x1D0) |  | Mirkfallon Lake |
+| `THE_CHARRED_VALE` | 465 (0x1D1) |  | The Charred Vale |
+| `VALLEY_OF_THE_BLOODFURIES` | 466 (0x1D2) |  | Valley of the Bloodfuries |
+| `STONETALON_PEAK` | 467 (0x1D3) |  | Stonetalon Peak |
+| `THE_TALON_DEN` | 468 (0x1D4) |  | The Talon Den |
+| `GREATWOOD_VALE` | 469 (0x1D5) |  | Greatwood Vale |
+| `THUNDER_BLUFF_UNUSED` | 470 (0x1D6) |  | Thunder Bluff UNUSED |
+| `BRAVE_WIND_MESA` | 471 (0x1D7) |  | Brave Wind Mesa |
+| `FIRE_STONE_MESA` | 472 (0x1D8) |  | Fire Stone Mesa |
+| `MANTLE_ROCK` | 473 (0x1D9) |  | Mantle Rock |
+| `HUNTER_RISE_UNUSED` | 474 (0x1DA) |  | Hunter Rise UNUSED |
+| `SPIRIT_RISEUNUSED` | 475 (0x1DB) |  | Spirit RiseUNUSED |
+| `ELDER_RISEUNUSED` | 476 (0x1DC) |  | Elder RiseUNUSED |
+| `RUINS_OF_JUBUWAL` | 477 (0x1DD) |  | Ruins of Jubuwal |
+| `POOLS_OF_ARLITHRIEN` | 478 (0x1DE) |  | Pools of Arlithrien |
+| `THE_RUSTMAUL_DIG_SITE` | 479 (0x1DF) |  | The Rustmaul Dig Site |
+| `CAMP_E_THOK` | 480 (0x1E0) |  | Camp E'thok |
+| `SPLITHOOF_CRAG` | 481 (0x1E1) |  | Splithoof Crag |
+| `HIGHPERCH` | 482 (0x1E2) |  | Highperch |
+| `THE_SCREECHING_CANYON` | 483 (0x1E3) |  | The Screeching Canyon |
+| `FREEWIND_POST` | 484 (0x1E4) |  | Freewind Post |
+| `THE_GREAT_LIFT` | 485 (0x1E5) |  | The Great Lift |
+| `GALAK_HOLD` | 486 (0x1E6) |  | Galak Hold |
+| `ROGUEFEATHER_DEN` | 487 (0x1E7) |  | Roguefeather Den |
+| `THE_WEATHERED_NOOK` | 488 (0x1E8) |  | The Weathered Nook |
+| `THALANAAR` | 489 (0x1E9) |  | Thalanaar |
+| `UN_GORO_CRATER` | 490 (0x1EA) |  | Un'Goro Crater |
+| `RAZORFEN_KRAUL` | 491 (0x1EB) |  | Razorfen Kraul |
+| `RAVEN_HILL_CEMETERY` | 492 (0x1EC) |  | Raven Hill Cemetery |
+| `MOONGLADE` | 493 (0x1ED) |  | Moonglade |
+| `HOWLING_FJORD` | 495 (0x1EF) |  | Howling Fjord |
+| `BRACKENWALL_VILLAGE` | 496 (0x1F0) |  | Brackenwall Village |
+| `SWAMPLIGHT_MANOR` | 497 (0x1F1) |  | Swamplight Manor |
+| `BLOODFEN_BURROW` | 498 (0x1F2) |  | Bloodfen Burrow |
+| `DARKMIST_CAVERN` | 499 (0x1F3) |  | Darkmist Cavern |
+| `MOGGLE_POINT` | 500 (0x1F4) |  | Moggle Point |
+| `BEEZILS_WRECK` | 501 (0x1F5) |  | Beezil's Wreck |
+| `WITCH_HILL` | 502 (0x1F6) |  | Witch Hill |
+| `SENTRY_POINT` | 503 (0x1F7) |  | Sentry Point |
+| `NORTH_POINT_TOWER` | 504 (0x1F8) |  | North Point Tower |
+| `WEST_POINT_TOWER` | 505 (0x1F9) |  | West Point Tower |
+| `LOST_POINT` | 506 (0x1FA) |  | Lost Point |
+| `BLUEFEN` | 507 (0x1FB) |  | Bluefen |
+| `STONEMAUL_RUINS` | 508 (0x1FC) |  | Stonemaul Ruins |
+| `THE_DEN_OF_FLAME` | 509 (0x1FD) |  | The Den of Flame |
+| `THE_DRAGONMURK` | 510 (0x1FE) |  | The Dragonmurk |
+| `WYRMBOG` | 511 (0x1FF) |  | Wyrmbog |
+| `BLACKHOOF_VILLAGE` | 512 (0x200) |  | Blackhoof Village |
+| `THERAMORE_ISLE` | 513 (0x201) |  | Theramore Isle |
+| `FOOTHOLD_CITADEL` | 514 (0x202) |  | Foothold Citadel |
+| `IRONCLAD_PRISON` | 515 (0x203) |  | Ironclad Prison |
+| `DUSTWALLOW_BAY` | 516 (0x204) |  | Dustwallow Bay |
+| `TIDEFURY_COVE` | 517 (0x205) |  | Tidefury Cove |
+| `DREADMURK_SHORE` | 518 (0x206) |  | Dreadmurk Shore |
+| `ADDLES_STEAD` | 536 (0x218) |  | Addle's Stead |
+| `FIRE_PLUME_RIDGE` | 537 (0x219) |  | Fire Plume Ridge |
+| `LAKKARI_TAR_PITS` | 538 (0x21A) |  | Lakkari Tar Pits |
+| `TERROR_RUN` | 539 (0x21B) |  | Terror Run |
+| `THE_SLITHERING_SCAR` | 540 (0x21C) |  | The Slithering Scar |
+| `MARSHALS_REFUGE` | 541 (0x21D) |  | Marshal's Refuge |
+| `FUNGAL_ROCK` | 542 (0x21E) |  | Fungal Rock |
+| `GOLAKKA_HOT_SPRINGS` | 543 (0x21F) |  | Golakka Hot Springs |
+| `THE_LOCH` | 556 (0x22C) |  | The Loch |
+| `BEGGARS_HAUNT` | 576 (0x240) |  | Beggar's Haunt |
+| `KODO_GRAVEYARD` | 596 (0x254) |  | Kodo Graveyard |
+| `GHOST_WALKER_POST` | 597 (0x255) |  | Ghost Walker Post |
+| `SAR_THERIS_STRAND` | 598 (0x256) |  | Sar'theris Strand |
+| `THUNDER_AXE_FORTRESS` | 599 (0x257) |  | Thunder Axe Fortress |
+| `BOLGANS_HOLE` | 600 (0x258) |  | Bolgan's Hole |
+| `MANNOROC_COVEN` | 602 (0x25A) |  | Mannoroc Coven |
+| `SARGERON` | 603 (0x25B) |  | Sargeron |
+| `MAGRAM_VILLAGE` | 604 (0x25C) |  | Magram Village |
+| `GELKIS_VILLAGE` | 606 (0x25E) |  | Gelkis Village |
+| `VALLEY_OF_SPEARS` | 607 (0x25F) |  | Valley of Spears |
+| `NIJELS_POINT` | 608 (0x260) |  | Nijel's Point |
+| `KOLKAR_VILLAGE` | 609 (0x261) |  | Kolkar Village |
+| `HYJAL` | 616 (0x268) |  | Hyjal |
+| `WINTERSPRING` | 618 (0x26A) |  | Winterspring |
+| `BLACKWOLF_RIVER` | 636 (0x27C) |  | Blackwolf River |
+| `KODO_ROCK` | 637 (0x27D) |  | Kodo Rock |
+| `HIDDEN_PATH` | 638 (0x27E) |  | Hidden Path |
+| `SPIRIT_ROCK` | 639 (0x27F) |  | Spirit Rock |
+| `SHRINE_OF_THE_DORMANT_FLAME` | 640 (0x280) |  | Shrine of the Dormant Flame |
+| `LAKE_ELUNE_ARA` | 656 (0x290) |  | Lake Elune'ara |
+| `THE_HARBORAGE` | 657 (0x291) |  | The Harborage |
+| `OUTLAND` | 676 (0x2A4) |  | Outland |
+| `CRAFTSMENS_TERRACE_UNUSED` | 696 (0x2B8) |  | Craftsmen's Terrace UNUSED |
+| `TRADESMENS_TERRACE_UNUSED` | 697 (0x2B9) |  | Tradesmen's Terrace UNUSED |
+| `THE_TEMPLE_GARDENS_UNUSED` | 698 (0x2BA) |  | The Temple Gardens UNUSED |
+| `TEMPLE_OF_ELUNE_UNUSED` | 699 (0x2BB) |  | Temple of Elune UNUSED |
+| `CENARION_ENCLAVE_UNUSED` | 700 (0x2BC) |  | Cenarion Enclave UNUSED |
+| `WARRIORS_TERRACE_UNUSED` | 701 (0x2BD) |  | Warrior's Terrace UNUSED |
+| `RUT_THERAN_VILLAGE` | 702 (0x2BE) |  | Rut'theran Village |
+| `IRONBANDS_COMPOUND` | 716 (0x2CC) |  | Ironband's Compound |
+| `THE_STOCKADE` | 717 (0x2CD) |  | The Stockade |
+| `WAILING_CAVERNS` | 718 (0x2CE) |  | Wailing Caverns |
+| `BLACKFATHOM_DEEPS` | 719 (0x2CF) |  | Blackfathom Deeps |
+| `FRAY_ISLAND` | 720 (0x2D0) |  | Fray Island |
+| `GNOMEREGAN1` | 721 (0x2D1) |  | Gnomeregan |
+| `RAZORFEN_DOWNS` | 722 (0x2D2) |  | Razorfen Downs |
+| `BAN_ETHIL_HOLLOW` | 736 (0x2E0) |  | Ban'ethil Hollow |
+| `SCARLET_MONASTERY` | 796 (0x31C) |  | Scarlet Monastery |
+| `JERODS_LANDING` | 797 (0x31D) |  | Jerod's Landing |
+| `RIDGEPOINT_TOWER` | 798 (0x31E) |  | Ridgepoint Tower |
+| `THE_DARKENED_BANK` | 799 (0x31F) |  | The Darkened Bank |
+| `COLDRIDGE_PASS` | 800 (0x320) |  | Coldridge Pass |
+| `CHILL_BREEZE_VALLEY` | 801 (0x321) |  | Chill Breeze Valley |
+| `SHIMMER_RIDGE` | 802 (0x322) |  | Shimmer Ridge |
+| `AMBERSTILL_RANCH` | 803 (0x323) |  | Amberstill Ranch |
+| `THE_TUNDRID_HILLS` | 804 (0x324) |  | The Tundrid Hills |
+| `SOUTH_GATE_PASS` | 805 (0x325) |  | South Gate Pass |
+| `SOUTH_GATE_OUTPOST` | 806 (0x326) |  | South Gate Outpost |
+| `NORTH_GATE_PASS` | 807 (0x327) |  | North Gate Pass |
+| `NORTH_GATE_OUTPOST` | 808 (0x328) |  | North Gate Outpost |
+| `GATES_OF_IRONFORGE` | 809 (0x329) |  | Gates of Ironforge |
+| `STILLWATER_POND` | 810 (0x32A) |  | Stillwater Pond |
+| `NIGHTMARE_VALE` | 811 (0x32B) |  | Nightmare Vale |
+| `VENOMWEB_VALE` | 812 (0x32C) |  | Venomweb Vale |
+| `THE_BULWARK1` | 813 (0x32D) |  | The Bulwark |
+| `SOUTHFURY_RIVER1` | 814 (0x32E) |  | Southfury River |
+| `SOUTHFURY_RIVER2` | 815 (0x32F) |  | Southfury River |
+| `RAZORMANE_GROUNDS` | 816 (0x330) |  | Razormane Grounds |
+| `SKULL_ROCK` | 817 (0x331) |  | Skull Rock |
+| `PALEMANE_ROCK` | 818 (0x332) |  | Palemane Rock |
+| `WINDFURY_RIDGE` | 819 (0x333) |  | Windfury Ridge |
+| `THE_GOLDEN_PLAINS` | 820 (0x334) |  | The Golden Plains |
+| `THE_ROLLING_PLAINS` | 821 (0x335) |  | The Rolling Plains |
+| `DUN_ALGAZ1` | 836 (0x344) |  | Dun Algaz |
+| `DUN_ALGAZ2` | 837 (0x345) |  | Dun Algaz |
+| `NORTH_GATE_PASS1` | 838 (0x346) |  | North Gate Pass |
+| `SOUTH_GATE_PASS1` | 839 (0x347) |  | South Gate Pass |
+| `TWILIGHT_GROVE` | 856 (0x358) |  | Twilight Grove |
+| `GM_ISLAND` | 876 (0x36C) |  | GM Island |
+| `DELETE_ME` | 877 (0x36D) |  | Delete ME |
+| `SOUTHFURY_RIVER3` | 878 (0x36E) |  | Southfury River |
+| `SOUTHFURY_RIVER4` | 879 (0x36F) |  | Southfury River |
+| `THANDOL_SPAN1` | 880 (0x370) |  | Thandol Span |
+| `THANDOL_SPAN2` | 881 (0x371) |  | Thandol Span |
+| `PURGATION_ISLE` | 896 (0x380) |  | Purgation Isle |
+| `THE_JANSEN_STEAD` | 916 (0x394) |  | The Jansen Stead |
+| `THE_DEAD_ACRE` | 917 (0x395) |  | The Dead Acre |
+| `THE_MOLSEN_FARM` | 918 (0x396) |  | The Molsen Farm |
+| `STENDELS_POND` | 919 (0x397) |  | Stendel's Pond |
+| `THE_DAGGER_HILLS` | 920 (0x398) |  | The Dagger Hills |
+| `DEMONTS_PLACE` | 921 (0x399) |  | Demont's Place |
+| `THE_DUST_PLAINS` | 922 (0x39A) |  | The Dust Plains |
+| `STONESPLINTER_VALLEY` | 923 (0x39B) |  | Stonesplinter Valley |
+| `VALLEY_OF_KINGS` | 924 (0x39C) |  | Valley of Kings |
+| `ALGAZ_STATION` | 925 (0x39D) |  | Algaz Station |
+| `BUCKLEBREE_FARM` | 926 (0x39E) |  | Bucklebree Farm |
+| `THE_SHINING_STRAND` | 927 (0x39F) |  | The Shining Strand |
+| `NORTH_TIDES_HOLLOW` | 928 (0x3A0) |  | North Tide's Hollow |
+| `GRIZZLEPAW_RIDGE` | 936 (0x3A8) |  | Grizzlepaw Ridge |
+| `THE_VERDANT_FIELDS` | 956 (0x3BC) |  | The Verdant Fields |
+| `GADGETZAN` | 976 (0x3D0) |  | Gadgetzan |
+| `STEAMWHEEDLE_PORT` | 977 (0x3D1) |  | Steamwheedle Port |
+| `ZUL_FARRAK` | 978 (0x3D2) |  | Zul'Farrak |
+| `SANDSORROW_WATCH` | 979 (0x3D3) |  | Sandsorrow Watch |
+| `THISTLESHRUB_VALLEY` | 980 (0x3D4) |  | Thistleshrub Valley |
+| `THE_GAPING_CHASM` | 981 (0x3D5) |  | The Gaping Chasm |
+| `THE_NOXIOUS_LAIR` | 982 (0x3D6) |  | The Noxious Lair |
+| `DUNEMAUL_COMPOUND` | 983 (0x3D7) |  | Dunemaul Compound |
+| `EASTMOON_RUINS` | 984 (0x3D8) |  | Eastmoon Ruins |
+| `WATERSPRING_FIELD` | 985 (0x3D9) |  | Waterspring Field |
+| `ZALASHJIS_DEN` | 986 (0x3DA) |  | Zalashji's Den |
+| `LANDS_END_BEACH` | 987 (0x3DB) |  | Land's End Beach |
+| `WAVESTRIDER_BEACH` | 988 (0x3DC) |  | Wavestrider Beach |
+| `ULDUM` | 989 (0x3DD) |  | Uldum |
+| `VALLEY_OF_THE_WATCHERS` | 990 (0x3DE) |  | Valley of the Watchers |
+| `GUNSTANS_POST` | 991 (0x3DF) |  | Gunstan's Post |
+| `SOUTHMOON_RUINS` | 992 (0x3E0) |  | Southmoon Ruins |
+| `RENDERS_CAMP` | 996 (0x3E4) |  | Render's Camp |
+| `RENDERS_VALLEY` | 997 (0x3E5) |  | Render's Valley |
+| `RENDERS_ROCK` | 998 (0x3E6) |  | Render's Rock |
+| `STONEWATCH_TOWER` | 999 (0x3E7) |  | Stonewatch Tower |
+| `GALARDELL_VALLEY` | 1000 (0x3E8) |  | Galardell Valley |
+| `LAKERIDGE_HIGHWAY` | 1001 (0x3E9) |  | Lakeridge Highway |
+| `THREE_CORNERS` | 1002 (0x3EA) |  | Three Corners |
+| `DIREFORGE_HILL` | 1016 (0x3F8) |  | Direforge Hill |
+| `RAPTOR_RIDGE` | 1017 (0x3F9) |  | Raptor Ridge |
+| `BLACK_CHANNEL_MARSH` | 1018 (0x3FA) |  | Black Channel Marsh |
+| `THE_GREEN_BELT` | 1019 (0x3FB) |  | The Green Belt |
+| `MOSSHIDE_FEN` | 1020 (0x3FC) |  | Mosshide Fen |
+| `THELGEN_ROCK` | 1021 (0x3FD) |  | Thelgen Rock |
+| `BLUEGILL_MARSH` | 1022 (0x3FE) |  | Bluegill Marsh |
+| `SALTSPRAY_GLEN` | 1023 (0x3FF) |  | Saltspray Glen |
+| `SUNDOWN_MARSH` | 1024 (0x400) |  | Sundown Marsh |
+| `THE_GREEN_BELT1` | 1025 (0x401) |  | The Green Belt |
+| `ANGERFANG_ENCAMPMENT` | 1036 (0x40C) |  | Angerfang Encampment |
+| `GRIM_BATOL` | 1037 (0x40D) |  | Grim Batol |
+| `DRAGONMAW_GATES` | 1038 (0x40E) |  | Dragonmaw Gates |
+| `THE_LOST_FLEET` | 1039 (0x40F) |  | The Lost Fleet |
+| `DARROW_HILL` | 1056 (0x420) |  | Darrow Hill |
+| `THORADINS_WALL1` | 1057 (0x421) |  | Thoradin's Wall |
+| `WEBWINDER_PATH` | 1076 (0x434) |  | Webwinder Path |
+| `THE_HUSHED_BANK` | 1097 (0x449) |  | The Hushed Bank |
+| `MANOR_MISTMANTLE` | 1098 (0x44A) |  | Manor Mistmantle |
+| `CAMP_MOJACHE` | 1099 (0x44B) |  | Camp Mojache |
+| `GRIMTOTEM_COMPOUND` | 1100 (0x44C) |  | Grimtotem Compound |
+| `THE_WRITHING_DEEP` | 1101 (0x44D) |  | The Writhing Deep |
+| `WILDWIND_LAKE` | 1102 (0x44E) |  | Wildwind Lake |
+| `GORDUNNI_OUTPOST` | 1103 (0x44F) |  | Gordunni Outpost |
+| `MOK_GORDUN` | 1104 (0x450) |  | Mok'Gordun |
+| `FERAL_SCAR_VALE` | 1105 (0x451) |  | Feral Scar Vale |
+| `FRAYFEATHER_HIGHLANDS` | 1106 (0x452) |  | Frayfeather Highlands |
+| `IDLEWIND_LAKE` | 1107 (0x453) |  | Idlewind Lake |
+| `THE_FORGOTTEN_COAST` | 1108 (0x454) |  | The Forgotten Coast |
+| `EAST_PILLAR` | 1109 (0x455) |  | East Pillar |
+| `WEST_PILLAR` | 1110 (0x456) |  | West Pillar |
+| `DREAM_BOUGH` | 1111 (0x457) |  | Dream Bough |
+| `JADEMIR_LAKE` | 1112 (0x458) |  | Jademir Lake |
+| `ONEIROS` | 1113 (0x459) |  | Oneiros |
+| `RUINS_OF_RAVENWIND` | 1114 (0x45A) |  | Ruins of Ravenwind |
+| `RAGE_SCAR_HOLD` | 1115 (0x45B) |  | Rage Scar Hold |
+| `FEATHERMOON_STRONGHOLD` | 1116 (0x45C) |  | Feathermoon Stronghold |
+| `RUINS_OF_SOLARSAL` | 1117 (0x45D) |  | Ruins of Solarsal |
+| `LOWER_WILDS_UNUSED` | 1118 (0x45E) |  | Lower Wilds UNUSED |
+| `THE_TWIN_COLOSSALS` | 1119 (0x45F) |  | The Twin Colossals |
+| `SARDOR_ISLE` | 1120 (0x460) |  | Sardor Isle |
+| `ISLE_OF_DREAD` | 1121 (0x461) |  | Isle of Dread |
+| `HIGH_WILDERNESS` | 1136 (0x470) |  | High Wilderness |
+| `LOWER_WILDS` | 1137 (0x471) |  | Lower Wilds |
+| `SOUTHERN_BARRENS` | 1156 (0x484) |  | Southern Barrens |
+| `SOUTHERN_GOLD_ROAD` | 1157 (0x485) |  | Southern Gold Road |
+| `ZUL_FARRAK1` | 1176 (0x498) |  | Zul'Farrak |
+| `UTGARDE_PINNACLE` | 1196 (0x4AC) |  | Utgarde Pinnacle |
+| `TIMBERMAW_HOLD` | 1216 (0x4C0) |  | Timbermaw Hold |
+| `VANNDIR_ENCAMPMENT` | 1217 (0x4C1) |  | Vanndir Encampment |
+| `TESTAZSHARA` | 1218 (0x4C2) |  | TESTAzshara |
+| `LEGASH_ENCAMPMENT` | 1219 (0x4C3) |  | Legash Encampment |
+| `THALASSIAN_BASE_CAMP` | 1220 (0x4C4) |  | Thalassian Base Camp |
+| `RUINS_OF_ELDARATH` | 1221 (0x4C5) |  | Ruins of Eldarath |
+| `HETAERAS_CLUTCH` | 1222 (0x4C6) |  | Hetaera's Clutch |
+| `TEMPLE_OF_ZIN_MALOR` | 1223 (0x4C7) |  | Temple of Zin-Malor |
+| `BEARS_HEAD` | 1224 (0x4C8) |  | Bear's Head |
+| `URSOLAN` | 1225 (0x4C9) |  | Ursolan |
+| `TEMPLE_OF_ARKKORAN` | 1226 (0x4CA) |  | Temple of Arkkoran |
+| `BAY_OF_STORMS` | 1227 (0x4CB) |  | Bay of Storms |
+| `THE_SHATTERED_STRAND` | 1228 (0x4CC) |  | The Shattered Strand |
+| `TOWER_OF_ELDARA` | 1229 (0x4CD) |  | Tower of Eldara |
+| `JAGGED_REEF` | 1230 (0x4CE) |  | Jagged Reef |
+| `SOUTHRIDGE_BEACH` | 1231 (0x4CF) |  | Southridge Beach |
+| `RAVENCREST_MONUMENT` | 1232 (0x4D0) |  | Ravencrest Monument |
+| `FORLORN_RIDGE` | 1233 (0x4D1) |  | Forlorn Ridge |
+| `LAKE_MENNAR` | 1234 (0x4D2) |  | Lake Mennar |
+| `SHADOWSONG_SHRINE` | 1235 (0x4D3) |  | Shadowsong Shrine |
+| `HALDARR_ENCAMPMENT` | 1236 (0x4D4) |  | Haldarr Encampment |
+| `VALORMOK` | 1237 (0x4D5) |  | Valormok |
+| `THE_RUINED_REACHES` | 1256 (0x4E8) |  | The Ruined Reaches |
+| `THE_TALONDEEP_PATH` | 1276 (0x4FC) |  | The Talondeep Path |
+| `THE_TALONDEEP_PATH1` | 1277 (0x4FD) |  | The Talondeep Path |
+| `ROCKTUSK_FARM` | 1296 (0x510) |  | Rocktusk Farm |
+| `JAGGEDSWINE_FARM` | 1297 (0x511) |  | Jaggedswine Farm |
+| `RAZORFEN_DOWNS1` | 1316 (0x524) |  | Razorfen Downs |
+| `LOST_RIGGER_COVE` | 1336 (0x538) |  | Lost Rigger Cove |
+| `ULDAMAN` | 1337 (0x539) |  | Uldaman |
+| `LORDAMERE_LAKE1` | 1338 (0x53A) |  | Lordamere Lake |
+| `LORDAMERE_LAKE2` | 1339 (0x53B) |  | Lordamere Lake |
+| `GALLOWS_CORNER` | 1357 (0x54D) |  | Gallows' Corner |
+| `SILITHUS` | 1377 (0x561) |  | Silithus |
+| `EMERALD_FOREST` | 1397 (0x575) |  | Emerald Forest |
+| `SUNKEN_TEMPLE` | 1417 (0x589) |  | Sunken Temple |
+| `DREADMAUL_HOLD` | 1437 (0x59D) |  | Dreadmaul Hold |
+| `NETHERGARDE_KEEP` | 1438 (0x59E) |  | Nethergarde Keep |
+| `DREADMAUL_POST` | 1439 (0x59F) |  | Dreadmaul Post |
+| `SERPENTS_COIL` | 1440 (0x5A0) |  | Serpent's Coil |
+| `ALTAR_OF_STORMS1` | 1441 (0x5A1) |  | Altar of Storms |
+| `FIREWATCH_RIDGE` | 1442 (0x5A2) |  | Firewatch Ridge |
+| `THE_SLAG_PIT` | 1443 (0x5A3) |  | The Slag Pit |
+| `THE_SEA_OF_CINDERS` | 1444 (0x5A4) |  | The Sea of Cinders |
+| `BLACKROCK_MOUNTAIN2` | 1445 (0x5A5) |  | Blackrock Mountain |
+| `THORIUM_POINT` | 1446 (0x5A6) |  | Thorium Point |
+| `GARRISON_ARMORY` | 1457 (0x5B1) |  | Garrison Armory |
+| `THE_TEMPLE_OF_ATAL_HAKKAR` | 1477 (0x5C5) |  | The Temple of Atal'Hakkar |
+| `UNDERCITY` | 1497 (0x5D9) |  | Undercity |
+| `ULDAMAN1` | 1517 (0x5ED) |  | Uldaman |
+| `NOT_USED_DEADMINES` | 1518 (0x5EE) |  | Not Used Deadmines |
+| `STORMWIND_CITY` | 1519 (0x5EF) |  | Stormwind City |
+| `IRONFORGE` | 1537 (0x601) |  | Ironforge |
+| `SPLITHOOF_HOLD` | 1557 (0x615) |  | Splithoof Hold |
+| `THE_CAPE_OF_STRANGLETHORN` | 1577 (0x629) |  | The Cape of Stranglethorn |
+| `SOUTHERN_SAVAGE_COAST` | 1578 (0x62A) |  | Southern Savage Coast |
+| `UNUSED_THE_DEADMINES_002` | 1579 (0x62B) |  | Unused The Deadmines 002 |
+| `UNUSED_IRONCLAD_COVE_003` | 1580 (0x62C) |  | Unused Ironclad Cove 003 |
+| `THE_DEADMINES` | 1581 (0x62D) |  | The Deadmines |
+| `IRONCLAD_COVE` | 1582 (0x62E) |  | Ironclad Cove |
+| `BLACKROCK_SPIRE` | 1583 (0x62F) |  | Blackrock Spire |
+| `BLACKROCK_DEPTHS` | 1584 (0x630) |  | Blackrock Depths |
+| `RAPTOR_GROUNDS_UNUSED` | 1597 (0x63D) |  | Raptor Grounds UNUSED |
+| `GROL_DOM_FARM_UNUSED` | 1598 (0x63E) |  | Grol'dom Farm UNUSED |
+| `MORSHAN_BASE_CAMP` | 1599 (0x63F) |  | Mor'shan Base Camp |
+| `HONORS_STAND_UNUSED` | 1600 (0x640) |  | Honor's Stand UNUSED |
+| `BLACKTHORN_RIDGE_UNUSED` | 1601 (0x641) |  | Blackthorn Ridge UNUSED |
+| `BRAMBLESCAR_UNUSED` | 1602 (0x642) |  | Bramblescar UNUSED |
+| `AGAMA_GOR_UNUSED` | 1603 (0x643) |  | Agama'gor UNUSED |
+| `VALLEY_OF_HEROES` | 1617 (0x651) |  | Valley of Heroes |
+| `ORGRIMMAR` | 1637 (0x665) |  | Orgrimmar |
+| `THUNDER_BLUFF` | 1638 (0x666) |  | Thunder Bluff |
+| `ELDER_RISE` | 1639 (0x667) |  | Elder Rise |
+| `SPIRIT_RISE` | 1640 (0x668) |  | Spirit Rise |
+| `HUNTER_RISE` | 1641 (0x669) |  | Hunter Rise |
+| `DARNASSUS` | 1657 (0x679) |  | Darnassus |
+| `CENARION_ENCLAVE` | 1658 (0x67A) |  | Cenarion Enclave |
+| `CRAFTSMENS_TERRACE` | 1659 (0x67B) |  | Craftsmen's Terrace |
+| `WARRIORS_TERRACE` | 1660 (0x67C) |  | Warrior's Terrace |
+| `THE_TEMPLE_GARDENS` | 1661 (0x67D) |  | The Temple Gardens |
+| `TRADESMENS_TERRACE` | 1662 (0x67E) |  | Tradesmen's Terrace |
+| `GAVINS_NAZE` | 1677 (0x68D) |  | Gavin's Naze |
+| `SOFERAS_NAZE` | 1678 (0x68E) |  | Sofera's Naze |
+| `CORRAHNS_DAGGER` | 1679 (0x68F) |  | Corrahn's Dagger |
+| `THE_HEADLAND` | 1680 (0x690) |  | The Headland |
+| `MISTY_SHORE` | 1681 (0x691) |  | Misty Shore |
+| `DANDREDS_FOLD` | 1682 (0x692) |  | Dandred's Fold |
+| `GROWLESS_CAVE` | 1683 (0x693) |  | Growless Cave |
+| `CHILLWIND_POINT` | 1684 (0x694) |  | Chillwind Point |
+| `RAPTOR_GROUNDS` | 1697 (0x6A1) |  | Raptor Grounds |
+| `BRAMBLESCAR` | 1698 (0x6A2) |  | Bramblescar |
+| `THORN_HILL` | 1699 (0x6A3) |  | Thorn Hill |
+| `AGAMA_GOR` | 1700 (0x6A4) |  | Agama'gor |
+| `BLACKTHORN_RIDGE` | 1701 (0x6A5) |  | Blackthorn Ridge |
+| `HONORS_STAND` | 1702 (0x6A6) |  | Honor's Stand |
+| `THE_MORSHAN_RAMPART` | 1703 (0x6A7) |  | The Mor'shan Rampart |
+| `GROL_DOM_FARM` | 1704 (0x6A8) |  | Grol'dom Farm |
+| `RAZORFEN_KRAUL1` | 1717 (0x6B5) |  | Razorfen Kraul |
+| `THE_GREAT_LIFT1` | 1718 (0x6B6) |  | The Great Lift |
+| `MISTVALE_VALLEY` | 1737 (0x6C9) |  | Mistvale Valley |
+| `NEK_MANI_WELLSPRING` | 1738 (0x6CA) |  | Nek'mani Wellspring |
+| `BLOODSAIL_COMPOUND` | 1739 (0x6CB) |  | Bloodsail Compound |
+| `VENTURE_CO_BASE_CAMP` | 1740 (0x6CC) |  | Venture Co. Base Camp |
+| `GURUBASHI_ARENA` | 1741 (0x6CD) |  | Gurubashi Arena |
+| `SPIRIT_DEN` | 1742 (0x6CE) |  | Spirit Den |
+| `THE_CRIMSON_VEIL` | 1757 (0x6DD) |  | The Crimson Veil |
+| `THE_RIPTIDE` | 1758 (0x6DE) |  | The Riptide |
+| `THE_DAMSELS_LUCK` | 1759 (0x6DF) |  | The Damsel's Luck |
+| `VENTURE_CO_OPERATIONS_CENTER` | 1760 (0x6E0) |  | Venture Co. Operations Center |
+| `DEADWOOD_VILLAGE` | 1761 (0x6E1) |  | Deadwood Village |
+| `FELPAW_VILLAGE` | 1762 (0x6E2) |  | Felpaw Village |
+| `JAEDENAR` | 1763 (0x6E3) |  | Jaedenar |
+| `BLOODVENOM_RIVER` | 1764 (0x6E4) |  | Bloodvenom River |
+| `BLOODVENOM_FALLS` | 1765 (0x6E5) |  | Bloodvenom Falls |
+| `SHATTER_SCAR_VALE` | 1766 (0x6E6) |  | Shatter Scar Vale |
+| `IRONTREE_WOODS` | 1767 (0x6E7) |  | Irontree Woods |
+| `IRONTREE_CAVERN` | 1768 (0x6E8) |  | Irontree Cavern |
+| `TIMBERMAW_HOLD1` | 1769 (0x6E9) |  | Timbermaw Hold |
+| `SHADOW_HOLD` | 1770 (0x6EA) |  | Shadow Hold |
+| `SHRINE_OF_THE_DECEIVER` | 1771 (0x6EB) |  | Shrine of the Deceiver |
+| `ITHARIUSS_CAVE` | 1777 (0x6F1) |  | Itharius's Cave |
+| `SORROWMURK` | 1778 (0x6F2) |  | Sorrowmurk |
+| `DRAENIL_DUR_VILLAGE` | 1779 (0x6F3) |  | Draenil'dur Village |
+| `SPLINTERSPEAR_JUNCTION` | 1780 (0x6F4) |  | Splinterspear Junction |
+| `STAGALBOG` | 1797 (0x705) |  | Stagalbog |
+| `THE_SHIFTING_MIRE` | 1798 (0x706) |  | The Shifting Mire |
+| `STAGALBOG_CAVE` | 1817 (0x719) |  | Stagalbog Cave |
+| `WITHERBARK_CAVERNS` | 1837 (0x72D) |  | Witherbark Caverns |
+| `THORADINS_WALL2` | 1857 (0x741) |  | Thoradin's Wall |
+| `BOULDER_GOR` | 1858 (0x742) |  | Boulder'gor |
+| `VALLEY_OF_FANGS` | 1877 (0x755) |  | Valley of Fangs |
+| `THE_DUSTBOWL` | 1878 (0x756) |  | The Dustbowl |
+| `MIRAGE_FLATS` | 1879 (0x757) |  | Mirage Flats |
+| `FEATHERBEARDS_HOVEL` | 1880 (0x758) |  | Featherbeard's Hovel |
+| `SHINDIGGERS_CAMP` | 1881 (0x759) |  | Shindigger's Camp |
+| `PLAGUEMIST_RAVINE` | 1882 (0x75A) |  | Plaguemist Ravine |
+| `VALORWIND_LAKE` | 1883 (0x75B) |  | Valorwind Lake |
+| `AGOL_WATHA` | 1884 (0x75C) |  | Agol'watha |
+| `HIRI_WATHA` | 1885 (0x75D) |  | Hiri'watha |
+| `THE_CREEPING_RUIN` | 1886 (0x75E) |  | The Creeping Ruin |
+| `BOGENS_LEDGE` | 1887 (0x75F) |  | Bogen's Ledge |
+| `THE_MAKERS_TERRACE` | 1897 (0x769) |  | The Maker's Terrace |
+| `DUSTWIND_GULCH` | 1898 (0x76A) |  | Dustwind Gulch |
+| `SHAOL_WATHA` | 1917 (0x77D) |  | Shaol'watha |
+| `NOONSHADE_RUINS` | 1937 (0x791) |  | Noonshade Ruins |
+| `BROKEN_PILLAR` | 1938 (0x792) |  | Broken Pillar |
+| `ABYSSAL_SANDS` | 1939 (0x793) |  | Abyssal Sands |
+| `SOUTHBREAK_SHORE` | 1940 (0x794) |  | Southbreak Shore |
+| `CAVERNS_OF_TIME` | 1941 (0x795) |  | Caverns of Time |
+| `THE_MARSHLANDS` | 1942 (0x796) |  | The Marshlands |
+| `IRONSTONE_PLATEAU` | 1943 (0x797) |  | Ironstone Plateau |
+| `BLACKCHAR_CAVE` | 1957 (0x7A5) |  | Blackchar Cave |
+| `TANNER_CAMP` | 1958 (0x7A6) |  | Tanner Camp |
+| `DUSTFIRE_VALLEY` | 1959 (0x7A7) |  | Dustfire Valley |
+| `ZUL_GURUB1` | 1977 (0x7B9) |  | Zul'Gurub |
+| `MISTY_REED_POST` | 1978 (0x7BA) |  | Misty Reed Post |
+| `BLOODVENOM_POST` | 1997 (0x7CD) |  | Bloodvenom Post |
+| `TALONBRANCH_GLADE_` | 1998 (0x7CE) |  | Talonbranch Glade |
+| `STRATHOLME` | 2017 (0x7E1) |  | Stratholme |
+| `QUEL_THALAS` | 2037 (0x7F5) |  | Quel'thalas |
+| `SCHOLOMANCE` | 2057 (0x809) |  | Scholomance |
+| `TWILIGHT_VALE` | 2077 (0x81D) |  | Twilight Vale |
+| `TWILIGHT_SHORE` | 2078 (0x81E) |  | Twilight Shore |
+| `ALCAZ_ISLAND` | 2079 (0x81F) |  | Alcaz Island |
+| `DARKCLOUD_PINNACLE` | 2097 (0x831) |  | Darkcloud Pinnacle |
+| `DAWNING_WOOD_CATACOMBS` | 2098 (0x832) |  | Dawning Wood Catacombs |
+| `STONEWATCH_KEEP` | 2099 (0x833) |  | Stonewatch Keep |
+| `MARAUDON` | 2100 (0x834) |  | Maraudon |
+| `STOUTLAGER_INN` | 2101 (0x835) |  | Stoutlager Inn |
+| `THUNDERBREW_DISTILLERY` | 2102 (0x836) |  | Thunderbrew Distillery |
+| `MENETHIL_KEEP` | 2103 (0x837) |  | Menethil Keep |
+| `DEEPWATER_TAVERN` | 2104 (0x838) |  | Deepwater Tavern |
+| `SHADOW_GRAVE` | 2117 (0x845) |  | Shadow Grave |
+| `BRILL_TOWN_HALL` | 2118 (0x846) |  | Brill Town Hall |
+| `GALLOWS_END_TAVERN` | 2119 (0x847) |  | Gallows' End Tavern |
+| `THE_POOLS_OF_VISIONUNUSED` | 2137 (0x859) |  | The Pools of VisionUNUSED |
+| `DREADMIST_DEN` | 2138 (0x85A) |  | Dreadmist Den |
+| `BAEL_DUN_KEEP` | 2157 (0x86D) |  | Bael'dun Keep |
+| `EMBERSTRIFES_DEN` | 2158 (0x86E) |  | Emberstrife's Den |
+| `ONYXIAS_LAIR` | 2159 (0x86F) |  | Onyxia's Lair |
+| `WINDSHEAR_MINE` | 2160 (0x870) |  | Windshear Mine |
+| `ROLANDS_DOOM` | 2161 (0x871) |  | Roland's Doom |
+| `BATTLE_RING` | 2177 (0x881) |  | Battle Ring |
+| `THE_POOLS_OF_VISION` | 2197 (0x895) |  | The Pools of Vision |
+| `SHADOWBREAK_RAVINE` | 2198 (0x896) |  | Shadowbreak Ravine |
+| `BROKEN_SPEAR_VILLAGE` | 2217 (0x8A9) |  | Broken Spear Village |
+| `WHITEREACH_POST` | 2237 (0x8BD) |  | Whitereach Post |
+| `GORNIA` | 2238 (0x8BE) |  | Gornia |
+| `ZANES_EYE_CRATER` | 2239 (0x8BF) |  | Zane's Eye Crater |
+| `MIRAGE_RACEWAY` | 2240 (0x8C0) |  | Mirage Raceway |
+| `FROSTSABER_ROCK` | 2241 (0x8C1) |  | Frostsaber Rock |
+| `THE_HIDDEN_GROVE` | 2242 (0x8C2) |  | The Hidden Grove |
+| `TIMBERMAW_POST` | 2243 (0x8C3) |  | Timbermaw Post |
+| `WINTERFALL_VILLAGE` | 2244 (0x8C4) |  | Winterfall Village |
+| `MAZTHORIL` | 2245 (0x8C5) |  | Mazthoril |
+| `FROSTFIRE_HOT_SPRINGS` | 2246 (0x8C6) |  | Frostfire Hot Springs |
+| `ICE_THISTLE_HILLS` | 2247 (0x8C7) |  | Ice Thistle Hills |
+| `DUN_MANDARR` | 2248 (0x8C8) |  | Dun Mandarr |
+| `FROSTWHISPER_GORGE` | 2249 (0x8C9) |  | Frostwhisper Gorge |
+| `OWL_WING_THICKET` | 2250 (0x8CA) |  | Owl Wing Thicket |
+| `LAKE_KEL_THERIL` | 2251 (0x8CB) |  | Lake Kel'Theril |
+| `THE_RUINS_OF_KEL_THERIL` | 2252 (0x8CC) |  | The Ruins of Kel'Theril |
+| `STARFALL_VILLAGE` | 2253 (0x8CD) |  | Starfall Village |
+| `BAN_THALLOW_BARROW_DEN` | 2254 (0x8CE) |  | Ban'Thallow Barrow Den |
+| `EVERLOOK` | 2255 (0x8CF) |  | Everlook |
+| `DARKWHISPER_GORGE` | 2256 (0x8D0) |  | Darkwhisper Gorge |
+| `DEEPRUN_TRAM` | 2257 (0x8D1) |  | Deeprun Tram |
+| `THE_FUNGAL_VALE` | 2258 (0x8D2) |  | The Fungal Vale |
+| `UNUSEDTHE_MARRIS_STEAD` | 2259 (0x8D3) |  | UNUSEDThe Marris Stead |
+| `THE_MARRIS_STEAD` | 2260 (0x8D4) |  | The Marris Stead |
+| `THE_UNDERCROFT` | 2261 (0x8D5) |  | The Undercroft |
+| `DARROWSHIRE` | 2262 (0x8D6) |  | Darrowshire |
+| `CROWN_GUARD_TOWER` | 2263 (0x8D7) |  | Crown Guard Tower |
+| `CORINS_CROSSING` | 2264 (0x8D8) |  | Corin's Crossing |
+| `SCARLET_BASE_CAMP` | 2265 (0x8D9) |  | Scarlet Base Camp |
+| `TYRS_HAND` | 2266 (0x8DA) |  | Tyr's Hand |
+| `THE_SCARLET_BASILICA` | 2267 (0x8DB) |  | The Scarlet Basilica |
+| `LIGHTS_HOPE_CHAPEL` | 2268 (0x8DC) |  | Light's Hope Chapel |
+| `BROWMAN_MILL` | 2269 (0x8DD) |  | Browman Mill |
+| `THE_NOXIOUS_GLADE` | 2270 (0x8DE) |  | The Noxious Glade |
+| `EASTWALL_TOWER` | 2271 (0x8DF) |  | Eastwall Tower |
+| `NORTHDALE` | 2272 (0x8E0) |  | Northdale |
+| `ZUL_MASHAR` | 2273 (0x8E1) |  | Zul'Mashar |
+| `MAZRA_ALOR` | 2274 (0x8E2) |  | Mazra'Alor |
+| `NORTHPASS_TOWER` | 2275 (0x8E3) |  | Northpass Tower |
+| `QUEL_LITHIEN_LODGE` | 2276 (0x8E4) |  | Quel'Lithien Lodge |
+| `PLAGUEWOOD` | 2277 (0x8E5) |  | Plaguewood |
+| `SCOURGEHOLD` | 2278 (0x8E6) |  | Scourgehold |
+| `STRATHOLME1` | 2279 (0x8E7) |  | Stratholme |
+| `DO_NOT_USE` | 2280 (0x8E8) |  | DO NOT USE |
+| `DARROWMERE_LAKE` | 2297 (0x8F9) |  | Darrowmere Lake |
+| `CAER_DARROW` | 2298 (0x8FA) |  | Caer Darrow |
+| `DARROWMERE_LAKE1` | 2299 (0x8FB) |  | Darrowmere Lake |
+| `CAVERNS_OF_TIME1` | 2300 (0x8FC) |  | Caverns of Time |
+| `THISTLEFUR_VILLAGE` | 2301 (0x8FD) |  | Thistlefur Village |
+| `THE_QUAGMIRE` | 2302 (0x8FE) |  | The Quagmire |
+| `WINDBREAK_CANYON` | 2303 (0x8FF) |  | Windbreak Canyon |
+| `SOUTH_SEAS` | 2317 (0x90D) |  | South Seas |
+| `THE_GREAT_SEA3` | 2318 (0x90E) |  | The Great Sea |
+| `THE_GREAT_SEA4` | 2319 (0x90F) |  | The Great Sea |
+| `THE_GREAT_SEA5` | 2320 (0x910) |  | The Great Sea |
+| `THE_GREAT_SEA6` | 2321 (0x911) |  | The Great Sea |
+| `THE_VEILED_SEA1` | 2322 (0x912) |  | The Veiled Sea |
+| `THE_VEILED_SEA2` | 2323 (0x913) |  | The Veiled Sea |
+| `THE_VEILED_SEA3` | 2324 (0x914) |  | The Veiled Sea |
+| `THE_VEILED_SEA4` | 2325 (0x915) |  | The Veiled Sea |
+| `THE_VEILED_SEA5` | 2326 (0x916) |  | The Veiled Sea |
+| `RAZOR_HILL_BARRACKS` | 2337 (0x921) |  | Razor Hill Barracks |
+| `SOUTH_SEAS1` | 2338 (0x922) |  | South Seas |
+| `THE_GREAT_SEA7` | 2339 (0x923) |  | The Great Sea |
+| `BLOODTOOTH_CAMP` | 2357 (0x935) |  | Bloodtooth Camp |
+| `FOREST_SONG` | 2358 (0x936) |  | Forest Song |
+| `GREENPAW_VILLAGE` | 2359 (0x937) |  | Greenpaw Village |
+| `SILVERWING_OUTPOST` | 2360 (0x938) |  | Silverwing Outpost |
+| `NIGHTHAVEN` | 2361 (0x939) |  | Nighthaven |
+| `SHRINE_OF_REMULOS` | 2362 (0x93A) |  | Shrine of Remulos |
+| `STORMRAGE_BARROW_DENS` | 2363 (0x93B) |  | Stormrage Barrow Dens |
+| `THE_GREAT_SEA8` | 2364 (0x93C) |  | The Great Sea |
+| `THE_GREAT_SEA9` | 2365 (0x93D) |  | The Great Sea |
+| `THE_BLACK_MORASS` | 2366 (0x93E) |  | The Black Morass |
+| `OLD_HILLSBRAD_FOOTHILLS` | 2367 (0x93F) |  | Old Hillsbrad Foothills |
+| `TARREN_MILL1` | 2368 (0x940) |  | Tarren Mill |
+| `SOUTHSHORE1` | 2369 (0x941) |  | Southshore |
+| `DURNHOLDE_KEEP1` | 2370 (0x942) |  | Durnholde Keep |
+| `DUN_GAROK1` | 2371 (0x943) |  | Dun Garok |
+| `HILLSBRAD_FIELDS1` | 2372 (0x944) |  | Hillsbrad Fields |
+| `EASTERN_STRAND1` | 2373 (0x945) |  | Eastern Strand |
+| `NETHANDER_STEAD1` | 2374 (0x946) |  | Nethander Stead |
+| `DARROW_HILL1` | 2375 (0x947) |  | Darrow Hill |
+| `SOUTHPOINT_TOWER1` | 2376 (0x948) |  | Southpoint Tower |
+| `THORADINS_WALL3` | 2377 (0x949) |  | Thoradin's Wall |
+| `WESTERN_STRAND1` | 2378 (0x94A) |  | Western Strand |
+| `AZURELODE_MINE1` | 2379 (0x94B) |  | Azurelode Mine |
+| `THE_GREAT_SEA10` | 2397 (0x95D) |  | The Great Sea |
+| `THE_GREAT_SEA11` | 2398 (0x95E) |  | The Great Sea |
+| `THE_GREAT_SEA12` | 2399 (0x95F) |  | The Great Sea |
+| `THE_FORBIDDING_SEA1` | 2400 (0x960) |  | The Forbidding Sea |
+| `THE_FORBIDDING_SEA2` | 2401 (0x961) |  | The Forbidding Sea |
+| `THE_FORBIDDING_SEA3` | 2402 (0x962) |  | The Forbidding Sea |
+| `THE_FORBIDDING_SEA4` | 2403 (0x963) |  | The Forbidding Sea |
+| `TETHRIS_ARAN` | 2404 (0x964) |  | Tethris Aran |
+| `ETHEL_RETHOR` | 2405 (0x965) |  | Ethel Rethor |
+| `RANAZJAR_ISLE` | 2406 (0x966) |  | Ranazjar Isle |
+| `KORMEKS_HUT` | 2407 (0x967) |  | Kormek's Hut |
+| `SHADOWPREY_VILLAGE` | 2408 (0x968) |  | Shadowprey Village |
+| `BLACKROCK_PASS` | 2417 (0x971) |  | Blackrock Pass |
+| `MORGANS_VIGIL` | 2418 (0x972) |  | Morgan's Vigil |
+| `SLITHER_ROCK` | 2419 (0x973) |  | Slither Rock |
+| `TERROR_WING_PATH` | 2420 (0x974) |  | Terror Wing Path |
+| `DRACO_DAR` | 2421 (0x975) |  | Draco'dar |
+| `RAGEFIRE_CHASM` | 2437 (0x985) |  | Ragefire Chasm |
+| `NIGHTSONG_WOODS` | 2457 (0x999) |  | Nightsong Woods |
+| `THE_VEILED_SEA6` | 2477 (0x9AD) |  | The Veiled Sea |
+| `MORLOS_ARAN` | 2478 (0x9AE) |  | Morlos'Aran |
+| `EMERALD_SANCTUARY` | 2479 (0x9AF) |  | Emerald Sanctuary |
+| `JADEFIRE_GLEN` | 2480 (0x9B0) |  | Jadefire Glen |
+| `RUINS_OF_CONSTELLAS` | 2481 (0x9B1) |  | Ruins of Constellas |
+| `BITTER_REACHES` | 2497 (0x9C1) |  | Bitter Reaches |
+| `RISE_OF_THE_DEFILER` | 2517 (0x9D5) |  | Rise of the Defiler |
+| `LARISS_PAVILION` | 2518 (0x9D6) |  | Lariss Pavilion |
+| `WOODPAW_HILLS` | 2519 (0x9D7) |  | Woodpaw Hills |
+| `WOODPAW_DEN` | 2520 (0x9D8) |  | Woodpaw Den |
+| `VERDANTIS_RIVER` | 2521 (0x9D9) |  | Verdantis River |
+| `RUINS_OF_ISILDIEN` | 2522 (0x9DA) |  | Ruins of Isildien |
+| `GRIMTOTEM_POST` | 2537 (0x9E9) |  | Grimtotem Post |
+| `CAMP_APARAJE` | 2538 (0x9EA) |  | Camp Aparaje |
+| `MALAKA_JIN` | 2539 (0x9EB) |  | Malaka'jin |
+| `BOULDERSLIDE_RAVINE` | 2540 (0x9EC) |  | Boulderslide Ravine |
+| `SISHIR_CANYON` | 2541 (0x9ED) |  | Sishir Canyon |
+| `DIRE_MAUL` | 2557 (0x9FD) |  | Dire Maul |
+| `DEADWIND_RAVINE` | 2558 (0x9FE) |  | Deadwind Ravine |
+| `DIAMONDHEAD_RIVER` | 2559 (0x9FF) |  | Diamondhead River |
+| `ARIDENS_CAMP` | 2560 (0xA00) |  | Ariden's Camp |
+| `THE_VICE` | 2561 (0xA01) |  | The Vice |
+| `KARAZHAN` | 2562 (0xA02) |  | Karazhan |
+| `MORGANS_PLOT` | 2563 (0xA03) |  | Morgan's Plot |
+| `DIRE_MAUL1` | 2577 (0xA11) |  | Dire Maul |
+| `ALTERAC_VALLEY` | 2597 (0xA25) |  | Alterac Valley |
+| `SCRABBLESCREWS_CAMP` | 2617 (0xA39) |  | Scrabblescrew's Camp |
+| `JADEFIRE_RUN` | 2618 (0xA3A) |  | Jadefire Run |
+| `THONDRORIL_RIVER` | 2619 (0xA3B) |  | Thondroril River |
+| `THONDRORIL_RIVER1` | 2620 (0xA3C) |  | Thondroril River |
+| `LAKE_MERELDAR` | 2621 (0xA3D) |  | Lake Mereldar |
+| `PESTILENT_SCAR` | 2622 (0xA3E) |  | Pestilent Scar |
+| `THE_INFECTIS_SCAR` | 2623 (0xA3F) |  | The Infectis Scar |
+| `BLACKWOOD_LAKE` | 2624 (0xA40) |  | Blackwood Lake |
+| `EASTWALL_GATE` | 2625 (0xA41) |  | Eastwall Gate |
+| `TERRORWEB_TUNNEL` | 2626 (0xA42) |  | Terrorweb Tunnel |
+| `TERRORDALE` | 2627 (0xA43) |  | Terrordale |
+| `KARGATHIA_KEEP` | 2637 (0xA4D) |  | Kargathia Keep |
+| `VALLEY_OF_BONES` | 2657 (0xA61) |  | Valley of Bones |
+| `BLACKWING_LAIR` | 2677 (0xA75) |  | Blackwing Lair |
+| `DEADMANS_CROSSING` | 2697 (0xA89) |  | Deadman's Crossing |
+| `MOLTEN_CORE` | 2717 (0xA9D) |  | Molten Core |
+| `THE_SCARAB_WALL` | 2737 (0xAB1) |  | The Scarab Wall |
+| `SOUTHWIND_VILLAGE` | 2738 (0xAB2) |  | Southwind Village |
+| `TWILIGHT_BASE_CAMP` | 2739 (0xAB3) |  | Twilight Base Camp |
+| `THE_CRYSTAL_VALE` | 2740 (0xAB4) |  | The Crystal Vale |
+| `THE_SCARAB_DAIS` | 2741 (0xAB5) |  | The Scarab Dais |
+| `HIVE_ASHI` | 2742 (0xAB6) |  | Hive'Ashi |
+| `HIVE_ZORA` | 2743 (0xAB7) |  | Hive'Zora |
+| `HIVE_REGAL` | 2744 (0xAB8) |  | Hive'Regal |
+| `SHRINE_OF_THE_FALLEN_WARRIOR` | 2757 (0xAC5) |  | Shrine of the Fallen Warrior |
+| `UNUSED_ALTERAC_VALLEY` | 2777 (0xAD9) |  | UNUSED Alterac Valley |
+| `BLACKFATHOM_DEEPS1` | 2797 (0xAED) |  | Blackfathom Deeps |
+| `CRYSTALSONG_FOREST` | 2817 (0xB01) |  | Crystalsong Forest |
+| `THE_MASTERS_CELLAR` | 2837 (0xB15) |  | The Master's Cellar |
+| `STONEWROUGHT_PASS` | 2838 (0xB16) |  | Stonewrought Pass |
+| `ALTERAC_VALLEY1` | 2839 (0xB17) |  | Alterac Valley |
+| `THE_RUMBLE_CAGE` | 2857 (0xB29) |  | The Rumble Cage |
+| `CHUNK_TEST` | 2877 (0xB3D) |  | Chunk Test |
+| `ZORAM_GAR_OUTPOST` | 2897 (0xB51) |  | Zoram'gar Outpost |
+| `HALL_OF_LEGENDS` | 2917 (0xB65) |  | Hall of Legends |
+| `CHAMPIONS_HALL` | 2918 (0xB66) |  | Champions' Hall |
+| `GROSH_GOK_COMPOUND` | 2937 (0xB79) |  | Grosh'gok Compound |
+| `SLEEPING_GORGE` | 2938 (0xB7A) |  | Sleeping Gorge |
+| `IRONDEEP_MINE` | 2957 (0xB8D) |  | Irondeep Mine |
+| `STONEHEARTH_OUTPOST` | 2958 (0xB8E) |  | Stonehearth Outpost |
+| `DUN_BALDAR` | 2959 (0xB8F) |  | Dun Baldar |
+| `ICEWING_PASS` | 2960 (0xB90) |  | Icewing Pass |
+| `FROSTWOLF_VILLAGE` | 2961 (0xB91) |  | Frostwolf Village |
+| `TOWER_POINT` | 2962 (0xB92) |  | Tower Point |
+| `COLDTOOTH_MINE` | 2963 (0xB93) |  | Coldtooth Mine |
+| `WINTERAX_HOLD` | 2964 (0xB94) |  | Winterax Hold |
+| `ICEBLOOD_GARRISON` | 2977 (0xBA1) |  | Iceblood Garrison |
+| `FROSTWOLF_KEEP` | 2978 (0xBA2) |  | Frostwolf Keep |
+| `TOR_KREN_FARM` | 2979 (0xBA3) |  | Tor'kren Farm |
+| `FROST_DAGGER_PASS` | 3017 (0xBC9) |  | Frost Dagger Pass |
+| `IRONSTONE_CAMP` | 3037 (0xBDD) |  | Ironstone Camp |
+| `WEAZELS_CRATER` | 3038 (0xBDE) |  | Weazel's Crater |
+| `TAHONDA_RUINS` | 3039 (0xBDF) |  | Tahonda Ruins |
+| `FIELD_OF_STRIFE` | 3057 (0xBF1) |  | Field of Strife |
+| `ICEWING_CAVERN` | 3058 (0xBF2) |  | Icewing Cavern |
+| `VALORS_REST` | 3077 (0xC05) |  | Valor's Rest |
+| `THE_SWARMING_PILLAR` | 3097 (0xC19) |  | The Swarming Pillar |
+| `TWILIGHT_POST` | 3098 (0xC1A) |  | Twilight Post |
+| `TWILIGHT_OUTPOST` | 3099 (0xC1B) |  | Twilight Outpost |
+| `RAVAGED_TWILIGHT_CAMP` | 3100 (0xC1C) |  | Ravaged Twilight Camp |
+| `SHALZARUS_LAIR` | 3117 (0xC2D) |  | Shalzaru's Lair |
+| `TALRENDIS_POINT` | 3137 (0xC41) |  | Talrendis Point |
+| `RETHRESS_SANCTUM` | 3138 (0xC42) |  | Rethress Sanctum |
+| `MOON_HORROR_DEN` | 3139 (0xC43) |  | Moon Horror Den |
+| `SCALEBEARDS_CAVE` | 3140 (0xC44) |  | Scalebeard's Cave |
+| `BOULDERSLIDE_CAVERN` | 3157 (0xC55) |  | Boulderslide Cavern |
+| `WARSONG_LABOR_CAMP` | 3177 (0xC69) |  | Warsong Labor Camp |
+| `CHILLWIND_CAMP` | 3197 (0xC7D) |  | Chillwind Camp |
+| `THE_MAUL` | 3217 (0xC91) |  | The Maul |
+| `THE_MAUL_UNUSED` | 3237 (0xCA5) |  | The Maul UNUSED |
+| `BONES_OF_GRAKKAROND` | 3257 (0xCB9) |  | Bones of Grakkarond |
+| `WARSONG_GULCH` | 3277 (0xCCD) |  | Warsong Gulch |
+| `FROSTWOLF_GRAVEYARD` | 3297 (0xCE1) |  | Frostwolf Graveyard |
+| `FROSTWOLF_PASS` | 3298 (0xCE2) |  | Frostwolf Pass |
+| `DUN_BALDAR_PASS` | 3299 (0xCE3) |  | Dun Baldar Pass |
+| `ICEBLOOD_GRAVEYARD` | 3300 (0xCE4) |  | Iceblood Graveyard |
+| `SNOWFALL_GRAVEYARD` | 3301 (0xCE5) |  | Snowfall Graveyard |
+| `STONEHEARTH_GRAVEYARD` | 3302 (0xCE6) |  | Stonehearth Graveyard |
+| `STORMPIKE_GRAVEYARD` | 3303 (0xCE7) |  | Stormpike Graveyard |
+| `ICEWING_BUNKER` | 3304 (0xCE8) |  | Icewing Bunker |
+| `STONEHEARTH_BUNKER` | 3305 (0xCE9) |  | Stonehearth Bunker |
+| `WILDPAW_RIDGE` | 3306 (0xCEA) |  | Wildpaw Ridge |
+| `REVANTUSK_VILLAGE` | 3317 (0xCF5) |  | Revantusk Village |
+| `ROCK_OF_DUROTAN` | 3318 (0xCF6) |  | Rock of Durotan |
+| `SILVERWING_GROVE` | 3319 (0xCF7) |  | Silverwing Grove |
+| `WARSONG_LUMBER_MILL` | 3320 (0xCF8) |  | Warsong Lumber Mill |
+| `SILVERWING_HOLD` | 3321 (0xCF9) |  | Silverwing Hold |
+| `WILDPAW_CAVERN` | 3337 (0xD09) |  | Wildpaw Cavern |
+| `THE_VEILED_CLEFT` | 3338 (0xD0A) |  | The Veiled Cleft |
+| `YOJAMBA_ISLE` | 3357 (0xD1D) |  | Yojamba Isle |
+| `ARATHI_BASIN` | 3358 (0xD1E) |  | Arathi Basin |
+| `THE_COIL` | 3377 (0xD31) |  | The Coil |
+| `ALTAR_OF_HIR_EEK` | 3378 (0xD32) |  | Altar of Hir'eek |
+| `SHADRA_ZAAR` | 3379 (0xD33) |  | Shadra'zaar |
+| `HAKKARI_GROUNDS` | 3380 (0xD34) |  | Hakkari Grounds |
+| `NAZE_OF_SHIRVALLAH` | 3381 (0xD35) |  | Naze of Shirvallah |
+| `TEMPLE_OF_BETHEKK` | 3382 (0xD36) |  | Temple of Bethekk |
+| `THE_BLOODFIRE_PIT` | 3383 (0xD37) |  | The Bloodfire Pit |
+| `ALTAR_OF_THE_BLOOD_GOD` | 3384 (0xD38) |  | Altar of the Blood God |
+| `ZANZAS_RISE` | 3397 (0xD45) |  | Zanza's Rise |
+| `EDGE_OF_MADNESS` | 3398 (0xD46) |  | Edge of Madness |
+| `TROLLBANE_HALL` | 3417 (0xD59) |  | Trollbane Hall |
+| `DEFILERS_DEN` | 3418 (0xD5A) |  | Defiler's Den |
+| `PAGLES_POINTE` | 3419 (0xD5B) |  | Pagle's Pointe |
+| `FARM` | 3420 (0xD5C) |  | Farm |
+| `BLACKSMITH` | 3421 (0xD5D) |  | Blacksmith |
+| `LUMBER_MILL` | 3422 (0xD5E) |  | Lumber Mill |
+| `GOLD_MINE` | 3423 (0xD5F) |  | Gold Mine |
+| `STABLES` | 3424 (0xD60) |  | Stables |
+| `CENARION_HOLD` | 3425 (0xD61) |  | Cenarion Hold |
+| `STAGHELM_POINT` | 3426 (0xD62) |  | Staghelm Point |
+| `BRONZEBEARD_ENCAMPMENT` | 3427 (0xD63) |  | Bronzebeard Encampment |
+| `AHN_QIRAJ` | 3428 (0xD64) |  | Ahn'Qiraj |
+| `RUINS_OF_AHN_QIRAJ` | 3429 (0xD65) |  | Ruins of Ahn'Qiraj |
+| `EVERSONG_WOODS` | 3430 (0xD66) |  | Eversong Woods |
+| `SUNSTRIDER_ISLE` | 3431 (0xD67) |  | Sunstrider Isle |
+| `SHRINE_OF_DATH_REMAR` | 3432 (0xD68) |  | Shrine of Dath'Remar |
+| `GHOSTLANDS` | 3433 (0xD69) |  | Ghostlands |
+| `SCARAB_TERRACE` | 3434 (0xD6A) |  | Scarab Terrace |
+| `GENERALS_TERRACE` | 3435 (0xD6B) |  | General's Terrace |
+| `THE_RESERVOIR` | 3436 (0xD6C) |  | The Reservoir |
+| `THE_HATCHERY` | 3437 (0xD6D) |  | The Hatchery |
+| `THE_COMB` | 3438 (0xD6E) |  | The Comb |
+| `WATCHERS_TERRACE` | 3439 (0xD6F) |  | Watchers' Terrace |
+| `SCARAB_TERRACE1` | 3440 (0xD70) |  | Scarab Terrace |
+| `GENERALS_TERRACE1` | 3441 (0xD71) |  | General's Terrace |
+| `THE_RESERVOIR1` | 3442 (0xD72) |  | The Reservoir |
+| `THE_HATCHERY1` | 3443 (0xD73) |  | The Hatchery |
+| `THE_COMB1` | 3444 (0xD74) |  | The Comb |
+| `WATCHERS_TERRACE1` | 3445 (0xD75) |  | Watchers' Terrace |
+| `TWILIGHTS_RUN` | 3446 (0xD76) |  | Twilight's Run |
+| `ORTELLS_HIDEOUT` | 3447 (0xD77) |  | Ortell's Hideout |
+| `SCARAB_TERRACE2` | 3448 (0xD78) |  | Scarab Terrace |
+| `GENERALS_TERRACE2` | 3449 (0xD79) |  | General's Terrace |
+| `THE_RESERVOIR2` | 3450 (0xD7A) |  | The Reservoir |
+| `THE_HATCHERY2` | 3451 (0xD7B) |  | The Hatchery |
+| `THE_COMB2` | 3452 (0xD7C) |  | The Comb |
+| `WATCHERS_TERRACE2` | 3453 (0xD7D) |  | Watchers' Terrace |
+| `RUINS_OF_AHN_QIRAJ1` | 3454 (0xD7E) |  | Ruins of Ahn'Qiraj |
+| `THE_NORTH_SEA` | 3455 (0xD7F) |  | The North Sea |
+| `NAXXRAMAS` | 3456 (0xD80) |  | Naxxramas |
+| `KARAZHAN1` | 3457 (0xD81) |  | Karazhan |
+| `CITY` | 3459 (0xD83) |  | City |
+| `GOLDEN_STRAND` | 3460 (0xD84) |  | Golden Strand |
+| `SUNSAIL_ANCHORAGE` | 3461 (0xD85) |  | Sunsail Anchorage |
+| `FAIRBREEZE_VILLAGE` | 3462 (0xD86) |  | Fairbreeze Village |
+| `MAGISTERS_GATE` | 3463 (0xD87) |  | Magisters Gate |
+| `FARSTRIDER_RETREAT` | 3464 (0xD88) |  | Farstrider Retreat |
+| `NORTH_SANCTUM` | 3465 (0xD89) |  | North Sanctum |
+| `WEST_SANCTUM` | 3466 (0xD8A) |  | West Sanctum |
+| `EAST_SANCTUM` | 3467 (0xD8B) |  | East Sanctum |
+| `SALTHERILS_HAVEN` | 3468 (0xD8C) |  | Saltheril's Haven |
+| `THURONS_LIVERY` | 3469 (0xD8D) |  | Thuron's Livery |
+| `STILLWHISPER_POND` | 3470 (0xD8E) |  | Stillwhisper Pond |
+| `THE_LIVING_WOOD` | 3471 (0xD8F) |  | The Living Wood |
+| `AZUREBREEZE_COAST` | 3472 (0xD90) |  | Azurebreeze Coast |
+| `LAKE_ELRENDAR` | 3473 (0xD91) |  | Lake Elrendar |
+| `THE_SCORCHED_GROVE` | 3474 (0xD92) |  | The Scorched Grove |
+| `ZEB_WATHA` | 3475 (0xD93) |  | Zeb'Watha |
+| `TOR_WATHA` | 3476 (0xD94) |  | Tor'Watha |
+| `AZJOL_NERUB` | 3477 (0xD95) |  | Azjol-Nerub |
+| `GATES_OF_AHN_QIRAJ` | 3478 (0xD96) |  | Gates of Ahn'Qiraj |
+| `THE_VEILED_SEA7` | 3479 (0xD97) |  | The Veiled Sea |
+| `DUSKWITHER_GROUNDS` | 3480 (0xD98) |  | Duskwither Grounds |
+| `DUSKWITHER_SPIRE` | 3481 (0xD99) |  | Duskwither Spire |
+| `THE_DEAD_SCAR` | 3482 (0xD9A) |  | The Dead Scar |
+| `HELLFIRE_PENINSULA` | 3483 (0xD9B) |  | Hellfire Peninsula |
+| `THE_SUNSPIRE` | 3484 (0xD9C) |  | The Sunspire |
+| `FALTHRIEN_ACADEMY` | 3485 (0xD9D) |  | Falthrien Academy |
+| `RAVENHOLDT_MANOR` | 3486 (0xD9E) |  | Ravenholdt Manor |
+| `SILVERMOON_CITY` | 3487 (0xD9F) |  | Silvermoon City |
+| `TRANQUILLIEN` | 3488 (0xDA0) |  | Tranquillien |
+| `SUNCROWN_VILLAGE` | 3489 (0xDA1) |  | Suncrown Village |
+| `GOLDENMIST_VILLAGE` | 3490 (0xDA2) |  | Goldenmist Village |
+| `WINDRUNNER_VILLAGE` | 3491 (0xDA3) |  | Windrunner Village |
+| `WINDRUNNER_SPIRE` | 3492 (0xDA4) |  | Windrunner Spire |
+| `SANCTUM_OF_THE_SUN` | 3493 (0xDA5) |  | Sanctum of the Sun |
+| `SANCTUM_OF_THE_MOON` | 3494 (0xDA6) |  | Sanctum of the Moon |
+| `DAWNSTAR_SPIRE` | 3495 (0xDA7) |  | Dawnstar Spire |
+| `FARSTRIDER_ENCLAVE` | 3496 (0xDA8) |  | Farstrider Enclave |
+| `AN_DAROTH` | 3497 (0xDA9) |  | An'daroth |
+| `AN_TELAS` | 3498 (0xDAA) |  | An'telas |
+| `AN_OWYN` | 3499 (0xDAB) |  | An'owyn |
+| `DEATHOLME` | 3500 (0xDAC) |  | Deatholme |
+| `BLEEDING_ZIGGURAT` | 3501 (0xDAD) |  | Bleeding Ziggurat |
+| `HOWLING_ZIGGURAT` | 3502 (0xDAE) |  | Howling Ziggurat |
+| `SHALANDIS_ISLE` | 3503 (0xDAF) |  | Shalandis Isle |
+| `TORYL_ESTATE` | 3504 (0xDB0) |  | Toryl Estate |
+| `UNDERLIGHT_MINES` | 3505 (0xDB1) |  | Underlight Mines |
+| `ANDILIEN_ESTATE` | 3506 (0xDB2) |  | Andilien Estate |
+| `HATCHET_HILLS` | 3507 (0xDB3) |  | Hatchet Hills |
+| `AMANI_PASS` | 3508 (0xDB4) |  | Amani Pass |
+| `SUNGRAZE_PEAK` | 3509 (0xDB5) |  | Sungraze Peak |
+| `AMANI_CATACOMBS` | 3510 (0xDB6) |  | Amani Catacombs |
+| `TOWER_OF_THE_DAMNED` | 3511 (0xDB7) |  | Tower of the Damned |
+| `ZEB_SORA` | 3512 (0xDB8) |  | Zeb'Sora |
+| `LAKE_ELRENDAR1` | 3513 (0xDB9) |  | Lake Elrendar |
+| `THE_DEAD_SCAR1` | 3514 (0xDBA) |  | The Dead Scar |
+| `ELRENDAR_RIVER` | 3515 (0xDBB) |  | Elrendar River |
+| `ZEB_TELA` | 3516 (0xDBC) |  | Zeb'Tela |
+| `ZEB_NOWA` | 3517 (0xDBD) |  | Zeb'Nowa |
+| `NAGRAND` | 3518 (0xDBE) |  | Nagrand |
+| `TEROKKAR_FOREST` | 3519 (0xDBF) |  | Terokkar Forest |
+| `SHADOWMOON_VALLEY` | 3520 (0xDC0) |  | Shadowmoon Valley |
+| `ZANGARMARSH` | 3521 (0xDC1) |  | Zangarmarsh |
+| `BLADES_EDGE_MOUNTAINS` | 3522 (0xDC2) |  | Blade's Edge Mountains |
+| `NETHERSTORM` | 3523 (0xDC3) |  | Netherstorm |
+| `AZUREMYST_ISLE` | 3524 (0xDC4) |  | Azuremyst Isle |
+| `BLOODMYST_ISLE` | 3525 (0xDC5) |  | Bloodmyst Isle |
+| `AMMEN_VALE` | 3526 (0xDC6) |  | Ammen Vale |
+| `CRASH_SITE` | 3527 (0xDC7) |  | Crash Site |
+| `SILVERLINE_LAKE` | 3528 (0xDC8) |  | Silverline Lake |
+| `NESTLEWOOD_THICKET` | 3529 (0xDC9) |  | Nestlewood Thicket |
+| `SHADOW_RIDGE` | 3530 (0xDCA) |  | Shadow Ridge |
+| `SKULKING_ROW` | 3531 (0xDCB) |  | Skulking Row |
+| `DAWNING_LANE` | 3532 (0xDCC) |  | Dawning Lane |
+| `RUINS_OF_SILVERMOON` | 3533 (0xDCD) |  | Ruins of Silvermoon |
+| `FETHS_WAY` | 3534 (0xDCE) |  | Feth's Way |
+| `HELLFIRE_CITADEL` | 3535 (0xDCF) |  | Hellfire Citadel |
+| `THRALLMAR` | 3536 (0xDD0) |  | Thrallmar |
+| `BOREAN_TUNDRA` | 3537 (0xDD1) |  | Borean Tundra |
+| `HONOR_HOLD` | 3538 (0xDD2) |  | Honor Hold |
+| `THE_STAIR_OF_DESTINY` | 3539 (0xDD3) |  | The Stair of Destiny |
+| `TWISTING_NETHER` | 3540 (0xDD4) |  | Twisting Nether |
+| `FORGE_CAMP_MAGEDDON` | 3541 (0xDD5) |  | Forge Camp: Mageddon |
+| `THE_PATH_OF_GLORY` | 3542 (0xDD6) |  | The Path of Glory |
+| `THE_GREAT_FISSURE` | 3543 (0xDD7) |  | The Great Fissure |
+| `PLAIN_OF_SHARDS` | 3544 (0xDD8) |  | Plain of Shards |
+| `HELLFIRE_CITADEL1` | 3545 (0xDD9) |  | Hellfire Citadel |
+| `EXPEDITION_ARMORY` | 3546 (0xDDA) |  | Expedition Armory |
+| `THRONE_OF_KIL_JAEDEN` | 3547 (0xDDB) |  | Throne of Kil'jaeden |
+| `FORGE_CAMP_RAGE` | 3548 (0xDDC) |  | Forge Camp: Rage |
+| `INVASION_POINT_ANNIHILATOR` | 3549 (0xDDD) |  | Invasion Point: Annihilator |
+| `BORUNE_RUINS` | 3550 (0xDDE) |  | Borune Ruins |
+| `RUINS_OF_SHA_NAAR` | 3551 (0xDDF) |  | Ruins of Sha'naar |
+| `TEMPLE_OF_TELHAMAT` | 3552 (0xDE0) |  | Temple of Telhamat |
+| `POOLS_OF_AGGONAR` | 3553 (0xDE1) |  | Pools of Aggonar |
+| `FALCON_WATCH` | 3554 (0xDE2) |  | Falcon Watch |
+| `MAG_HAR_POST` | 3555 (0xDE3) |  | Mag'har Post |
+| `DEN_OF_HAAL_ESH` | 3556 (0xDE4) |  | Den of Haal'esh |
+| `THE_EXODAR` | 3557 (0xDE5) |  | The Exodar |
+| `ELRENDAR_FALLS` | 3558 (0xDE6) |  | Elrendar Falls |
+| `NESTLEWOOD_HILLS` | 3559 (0xDE7) |  | Nestlewood Hills |
+| `AMMEN_FIELDS` | 3560 (0xDE8) |  | Ammen Fields |
+| `THE_SACRED_GROVE` | 3561 (0xDE9) |  | The Sacred Grove |
+| `HELLFIRE_RAMPARTS` | 3562 (0xDEA) |  | Hellfire Ramparts |
+| `HELLFIRE_CITADEL2` | 3563 (0xDEB) |  | Hellfire Citadel |
+| `EMBERGLADE` | 3564 (0xDEC) |  | Emberglade |
+| `CENARION_REFUGE` | 3565 (0xDED) |  | Cenarion Refuge |
+| `MOONWING_DEN` | 3566 (0xDEE) |  | Moonwing Den |
+| `POD_CLUSTER` | 3567 (0xDEF) |  | Pod Cluster |
+| `POD_WRECKAGE` | 3568 (0xDF0) |  | Pod Wreckage |
+| `TIDES_HOLLOW` | 3569 (0xDF1) |  | Tides' Hollow |
+| `WRATHSCALE_POINT` | 3570 (0xDF2) |  | Wrathscale Point |
+| `BRISTLELIMB_VILLAGE` | 3571 (0xDF3) |  | Bristlelimb Village |
+| `STILLPINE_HOLD` | 3572 (0xDF4) |  | Stillpine Hold |
+| `ODESYUS_LANDING` | 3573 (0xDF5) |  | Odesyus' Landing |
+| `VALAARS_BERTH` | 3574 (0xDF6) |  | Valaar's Berth |
+| `SILTING_SHORE` | 3575 (0xDF7) |  | Silting Shore |
+| `AZURE_WATCH` | 3576 (0xDF8) |  | Azure Watch |
+| `GEEZLES_CAMP` | 3577 (0xDF9) |  | Geezle's Camp |
+| `MENAGERIE_WRECKAGE` | 3578 (0xDFA) |  | Menagerie Wreckage |
+| `TRAITORS_COVE` | 3579 (0xDFB) |  | Traitor's Cove |
+| `WILDWIND_PEAK` | 3580 (0xDFC) |  | Wildwind Peak |
+| `WILDWIND_PATH` | 3581 (0xDFD) |  | Wildwind Path |
+| `ZETH_GOR` | 3582 (0xDFE) |  | Zeth'Gor |
+| `BERYL_COAST` | 3583 (0xDFF) |  | Beryl Coast |
+| `BLOOD_WATCH` | 3584 (0xE00) |  | Blood Watch |
+| `BLADEWOOD` | 3585 (0xE01) |  | Bladewood |
+| `THE_VECTOR_COIL` | 3586 (0xE02) |  | The Vector Coil |
+| `THE_WARP_PISTON` | 3587 (0xE03) |  | The Warp Piston |
+| `THE_CRYO_CORE` | 3588 (0xE04) |  | The Cryo-Core |
+| `THE_CRIMSON_REACH` | 3589 (0xE05) |  | The Crimson Reach |
+| `WRATHSCALE_LAIR` | 3590 (0xE06) |  | Wrathscale Lair |
+| `RUINS_OF_LORETH_ARAN` | 3591 (0xE07) |  | Ruins of Loreth'Aran |
+| `NAZZIVIAN` | 3592 (0xE08) |  | Nazzivian |
+| `AXXARIEN` | 3593 (0xE09) |  | Axxarien |
+| `BLACKSILT_SHORE` | 3594 (0xE0A) |  | Blacksilt Shore |
+| `THE_FOUL_POOL` | 3595 (0xE0B) |  | The Foul Pool |
+| `THE_HIDDEN_REEF` | 3596 (0xE0C) |  | The Hidden Reef |
+| `AMBERWEB_PASS` | 3597 (0xE0D) |  | Amberweb Pass |
+| `WYRMSCAR_ISLAND` | 3598 (0xE0E) |  | Wyrmscar Island |
+| `TALON_STAND` | 3599 (0xE0F) |  | Talon Stand |
+| `BRISTLELIMB_ENCLAVE` | 3600 (0xE10) |  | Bristlelimb Enclave |
+| `RAGEFEATHER_RIDGE` | 3601 (0xE11) |  | Ragefeather Ridge |
+| `KESSELS_CROSSING` | 3602 (0xE12) |  | Kessel's Crossing |
+| `TEL_ATHIONS_CAMP` | 3603 (0xE13) |  | Tel'athion's Camp |
+| `THE_BLOODCURSED_REEF` | 3604 (0xE14) |  | The Bloodcursed Reef |
+| `HYJAL_PAST` | 3605 (0xE15) |  | Hyjal Past |
+| `HYJAL_SUMMIT` | 3606 (0xE16) |  | Hyjal Summit |
+| `SERPENTSHRINE_CAVERN` | 3607 (0xE17) |  | Serpentshrine Cavern |
+| `VINDICATORS_REST` | 3608 (0xE18) |  | Vindicator's Rest |
+| `UNUSED3` | 3609 (0xE19) |  | Unused3 |
+| `BURNING_BLADE_RUINS` | 3610 (0xE1A) |  | Burning Blade Ruins |
+| `CLAN_WATCH` | 3611 (0xE1B) |  | Clan Watch |
+| `BLOODCURSE_ISLE` | 3612 (0xE1C) |  | Bloodcurse Isle |
+| `GARADAR` | 3613 (0xE1D) |  | Garadar |
+| `SKYSONG_LAKE` | 3614 (0xE1E) |  | Skysong Lake |
+| `THRONE_OF_THE_ELEMENTS` | 3615 (0xE1F) |  | Throne of the Elements |
+| `LAUGHING_SKULL_RUINS` | 3616 (0xE20) |  | Laughing Skull Ruins |
+| `WARMAUL_HILL` | 3617 (0xE21) |  | Warmaul Hill |
+| `GRUULS_LAIR` | 3618 (0xE22) |  | Gruul's Lair |
+| `AUREN_RIDGE` | 3619 (0xE23) |  | Auren Ridge |
+| `AUREN_FALLS` | 3620 (0xE24) |  | Auren Falls |
+| `LAKE_SUNSPRING` | 3621 (0xE25) |  | Lake Sunspring |
+| `SUNSPRING_POST` | 3622 (0xE26) |  | Sunspring Post |
+| `AERIS_LANDING` | 3623 (0xE27) |  | Aeris Landing |
+| `FORGE_CAMP_FEAR` | 3624 (0xE28) |  | Forge Camp: Fear |
+| `FORGE_CAMP_HATE` | 3625 (0xE29) |  | Forge Camp: Hate |
+| `TELAAR` | 3626 (0xE2A) |  | Telaar |
+| `NORTHWIND_CLEFT` | 3627 (0xE2B) |  | Northwind Cleft |
+| `HALAA` | 3628 (0xE2C) |  | Halaa |
+| `SOUTHWIND_CLEFT` | 3629 (0xE2D) |  | Southwind Cleft |
+| `OSHU_GUN` | 3630 (0xE2E) |  | Oshu'gun |
+| `SPIRIT_FIELDS` | 3631 (0xE2F) |  | Spirit Fields |
+| `SHAMANAR` | 3632 (0xE30) |  | Shamanar |
+| `ANCESTRAL_GROUNDS` | 3633 (0xE31) |  | Ancestral Grounds |
+| `WINDYREED_VILLAGE` | 3634 (0xE32) |  | Windyreed Village |
+| `UNUSED2` | 3635 (0xE33) |  | Unused2 |
+| `ELEMENTAL_PLATEAU` | 3636 (0xE34) |  | Elemental Plateau |
+| `KILSORROW_FORTRESS` | 3637 (0xE35) |  | Kil'sorrow Fortress |
+| `THE_RING_OF_TRIALS` | 3638 (0xE36) |  | The Ring of Trials |
+| `SILVERMYST_ISLE` | 3639 (0xE37) |  | Silvermyst Isle |
+| `DAGGERFEN_VILLAGE` | 3640 (0xE38) |  | Daggerfen Village |
+| `UMBRAFEN_VILLAGE` | 3641 (0xE39) |  | Umbrafen Village |
+| `FERALFEN_VILLAGE` | 3642 (0xE3A) |  | Feralfen Village |
+| `BLOODSCALE_ENCLAVE` | 3643 (0xE3B) |  | Bloodscale Enclave |
+| `TELREDOR` | 3644 (0xE3C) |  | Telredor |
+| `ZABRA_JIN` | 3645 (0xE3D) |  | Zabra'jin |
+| `QUAGG_RIDGE` | 3646 (0xE3E) |  | Quagg Ridge |
+| `THE_SPAWNING_GLEN` | 3647 (0xE3F) |  | The Spawning Glen |
+| `THE_DEAD_MIRE` | 3648 (0xE40) |  | The Dead Mire |
+| `SPOREGGAR` | 3649 (0xE41) |  | Sporeggar |
+| `ANGO_ROSH_GROUNDS` | 3650 (0xE42) |  | Ango'rosh Grounds |
+| `ANGO_ROSH_STRONGHOLD` | 3651 (0xE43) |  | Ango'rosh Stronghold |
+| `FUNGGOR_CAVERN` | 3652 (0xE44) |  | Funggor Cavern |
+| `SERPENT_LAKE` | 3653 (0xE45) |  | Serpent Lake |
+| `THE_DRAIN` | 3654 (0xE46) |  | The Drain |
+| `UMBRAFEN_LAKE` | 3655 (0xE47) |  | Umbrafen Lake |
+| `MARSHLIGHT_LAKE` | 3656 (0xE48) |  | Marshlight Lake |
+| `PORTAL_CLEARING` | 3657 (0xE49) |  | Portal Clearing |
+| `SPOREWIND_LAKE` | 3658 (0xE4A) |  | Sporewind Lake |
+| `THE_LAGOON` | 3659 (0xE4B) |  | The Lagoon |
+| `BLADES_RUN` | 3660 (0xE4C) |  | Blades' Run |
+| `BLADE_TOOTH_CANYON` | 3661 (0xE4D) |  | Blade Tooth Canyon |
+| `COMMONS_HALL` | 3662 (0xE4E) |  | Commons Hall |
+| `DERELICT_MANOR` | 3663 (0xE4F) |  | Derelict Manor |
+| `HUNTRESS_OF_THE_SUN` | 3664 (0xE50) |  | Huntress of the Sun |
+| `FALCONWING_SQUARE` | 3665 (0xE51) |  | Falconwing Square |
+| `HALAANI_BASIN` | 3666 (0xE52) |  | Halaani Basin |
+| `HEWN_BOG` | 3667 (0xE53) |  | Hewn Bog |
+| `BOHA_MU_RUINS` | 3668 (0xE54) |  | Boha'mu Ruins |
+| `THE_STADIUM` | 3669 (0xE55) |  | The Stadium |
+| `THE_OVERLOOK` | 3670 (0xE56) |  | The Overlook |
+| `BROKEN_HILL` | 3671 (0xE57) |  | Broken Hill |
+| `MAG_HARI_PROCESSION` | 3672 (0xE58) |  | Mag'hari Procession |
+| `NESINGWARY_SAFARI` | 3673 (0xE59) |  | Nesingwary Safari |
+| `CENARION_THICKET` | 3674 (0xE5A) |  | Cenarion Thicket |
+| `TUUREM` | 3675 (0xE5B) |  | Tuurem |
+| `VEIL_SHIENOR` | 3676 (0xE5C) |  | Veil Shienor |
+| `VEIL_SKITH` | 3677 (0xE5D) |  | Veil Skith |
+| `VEIL_SHALAS` | 3678 (0xE5E) |  | Veil Shalas |
+| `SKETTIS` | 3679 (0xE5F) |  | Skettis |
+| `BLACKWIND_VALLEY` | 3680 (0xE60) |  | Blackwind Valley |
+| `FIREWING_POINT` | 3681 (0xE61) |  | Firewing Point |
+| `GRANGOL_VAR_VILLAGE` | 3682 (0xE62) |  | Grangol'var Village |
+| `STONEBREAKER_HOLD` | 3683 (0xE63) |  | Stonebreaker Hold |
+| `ALLERIAN_STRONGHOLD` | 3684 (0xE64) |  | Allerian Stronghold |
+| `BONECHEWER_RUINS` | 3685 (0xE65) |  | Bonechewer Ruins |
+| `VEIL_LITHIC` | 3686 (0xE66) |  | Veil Lithic |
+| `OLEMBAS` | 3687 (0xE67) |  | Olembas |
+| `AUCHINDOUN` | 3688 (0xE68) |  | Auchindoun |
+| `VEIL_RESKK` | 3689 (0xE69) |  | Veil Reskk |
+| `BLACKWIND_LAKE` | 3690 (0xE6A) |  | Blackwind Lake |
+| `LAKE_ERE_NORU` | 3691 (0xE6B) |  | Lake Ere'Noru |
+| `LAKE_JORUNE` | 3692 (0xE6C) |  | Lake Jorune |
+| `SKETHYL_MOUNTAINS` | 3693 (0xE6D) |  | Skethyl Mountains |
+| `MISTY_RIDGE` | 3694 (0xE6E) |  | Misty Ridge |
+| `THE_BROKEN_HILLS` | 3695 (0xE6F) |  | The Broken Hills |
+| `THE_BARRIER_HILLS` | 3696 (0xE70) |  | The Barrier Hills |
+| `THE_BONE_WASTES` | 3697 (0xE71) |  | The Bone Wastes |
+| `NAGRAND_ARENA` | 3698 (0xE72) |  | Nagrand Arena |
+| `LAUGHING_SKULL_COURTYARD` | 3699 (0xE73) |  | Laughing Skull Courtyard |
+| `THE_RING_OF_BLOOD` | 3700 (0xE74) |  | The Ring of Blood |
+| `ARENA_FLOOR` | 3701 (0xE75) |  | Arena Floor |
+| `BLADES_EDGE_ARENA` | 3702 (0xE76) |  | Blade's Edge Arena |
+| `SHATTRATH_CITY` | 3703 (0xE77) |  | Shattrath City |
+| `THE_SHEPHERDS_GATE` | 3704 (0xE78) |  | The Shepherd's Gate |
+| `TELAARI_BASIN` | 3705 (0xE79) |  | Telaari Basin |
+| `THE_DARK_PORTAL1` | 3706 (0xE7A) |  | The Dark Portal |
+| `ALLIANCE_BASE` | 3707 (0xE7B) |  | Alliance Base |
+| `HORDE_ENCAMPMENT` | 3708 (0xE7C) |  | Horde Encampment |
+| `NIGHT_ELF_VILLAGE` | 3709 (0xE7D) |  | Night Elf Village |
+| `NORDRASSIL` | 3710 (0xE7E) |  | Nordrassil |
+| `SHOLAZAR_BASIN` | 3711 (0xE7F) |  | Sholazar Basin |
+| `AREA_52` | 3712 (0xE80) |  | Area 52 |
+| `THE_BLOOD_FURNACE` | 3713 (0xE81) |  | The Blood Furnace |
+| `THE_SHATTERED_HALLS` | 3714 (0xE82) |  | The Shattered Halls |
+| `THE_STEAMVAULT` | 3715 (0xE83) |  | The Steamvault |
+| `THE_UNDERBOG` | 3716 (0xE84) |  | The Underbog |
+| `THE_SLAVE_PENS` | 3717 (0xE85) |  | The Slave Pens |
+| `SWAMPRAT_POST` | 3718 (0xE86) |  | Swamprat Post |
+| `BLEEDING_HOLLOW_RUINS` | 3719 (0xE87) |  | Bleeding Hollow Ruins |
+| `TWIN_SPIRE_RUINS` | 3720 (0xE88) |  | Twin Spire Ruins |
+| `THE_CRUMBLING_WASTE` | 3721 (0xE89) |  | The Crumbling Waste |
+| `MANAFORGE_ARA` | 3722 (0xE8A) |  | Manaforge Ara |
+| `ARKLON_RUINS` | 3723 (0xE8B) |  | Arklon Ruins |
+| `COSMOWRENCH` | 3724 (0xE8C) |  | Cosmowrench |
+| `RUINS_OF_ENKAAT` | 3725 (0xE8D) |  | Ruins of Enkaat |
+| `MANAFORGE_B_NAAR` | 3726 (0xE8E) |  | Manaforge B'naar |
+| `THE_SCRAP_FIELD` | 3727 (0xE8F) |  | The Scrap Field |
+| `THE_VORTEX_FIELDS` | 3728 (0xE90) |  | The Vortex Fields |
+| `THE_HEAP` | 3729 (0xE91) |  | The Heap |
+| `MANAFORGE_CORUU` | 3730 (0xE92) |  | Manaforge Coruu |
+| `THE_TEMPEST_RIFT` | 3731 (0xE93) |  | The Tempest Rift |
+| `KIRIN_VAR_VILLAGE` | 3732 (0xE94) |  | Kirin'Var Village |
+| `THE_VIOLET_TOWER` | 3733 (0xE95) |  | The Violet Tower |
+| `MANAFORGE_DURO` | 3734 (0xE96) |  | Manaforge Duro |
+| `VOIDWIND_PLATEAU` | 3735 (0xE97) |  | Voidwind Plateau |
+| `MANAFORGE_ULTRIS` | 3736 (0xE98) |  | Manaforge Ultris |
+| `CELESTIAL_RIDGE` | 3737 (0xE99) |  | Celestial Ridge |
+| `THE_STORMSPIRE` | 3738 (0xE9A) |  | The Stormspire |
+| `FORGE_BASE_OBLIVION` | 3739 (0xE9B) |  | Forge Base: Oblivion |
+| `FORGE_BASE_GEHENNA` | 3740 (0xE9C) |  | Forge Base: Gehenna |
+| `RUINS_OF_FARAHLON` | 3741 (0xE9D) |  | Ruins of Farahlon |
+| `SOCRETHARS_SEAT` | 3742 (0xE9E) |  | Socrethar's Seat |
+| `LEGION_HOLD` | 3743 (0xE9F) |  | Legion Hold |
+| `SHADOWMOON_VILLAGE` | 3744 (0xEA0) |  | Shadowmoon Village |
+| `WILDHAMMER_STRONGHOLD` | 3745 (0xEA1) |  | Wildhammer Stronghold |
+| `THE_HAND_OF_GUL_DAN` | 3746 (0xEA2) |  | The Hand of Gul'dan |
+| `THE_FEL_PITS` | 3747 (0xEA3) |  | The Fel Pits |
+| `THE_DEATHFORGE` | 3748 (0xEA4) |  | The Deathforge |
+| `COILSKAR_CISTERN` | 3749 (0xEA5) |  | Coilskar Cistern |
+| `COILSKAR_POINT` | 3750 (0xEA6) |  | Coilskar Point |
+| `SUNFIRE_POINT` | 3751 (0xEA7) |  | Sunfire Point |
+| `ILLIDARI_POINT` | 3752 (0xEA8) |  | Illidari Point |
+| `RUINS_OF_BAA_RI` | 3753 (0xEA9) |  | Ruins of Baa'ri |
+| `ALTAR_OF_SHA_TAR` | 3754 (0xEAA) |  | Altar of Sha'tar |
+| `THE_STAIR_OF_DOOM` | 3755 (0xEAB) |  | The Stair of Doom |
+| `RUINS_OF_KARABOR` | 3756 (0xEAC) |  | Ruins of Karabor |
+| `ATA_MAL_TERRACE` | 3757 (0xEAD) |  | Ata'mal Terrace |
+| `NETHERWING_FIELDS` | 3758 (0xEAE) |  | Netherwing Fields |
+| `NETHERWING_LEDGE` | 3759 (0xEAF) |  | Netherwing Ledge |
+| `THE_BARRIER_HILLS1` | 3760 (0xEB0) |  | The Barrier Hills |
+| `THE_HIGH_PATH` | 3761 (0xEB1) |  | The High Path |
+| `WINDYREED_PASS` | 3762 (0xEB2) |  | Windyreed Pass |
+| `ZANGAR_RIDGE` | 3763 (0xEB3) |  | Zangar Ridge |
+| `THE_TWILIGHT_RIDGE` | 3764 (0xEB4) |  | The Twilight Ridge |
+| `RAZORTHORN_TRAIL` | 3765 (0xEB5) |  | Razorthorn Trail |
+| `OREBOR_HARBORAGE` | 3766 (0xEB6) |  | Orebor Harborage |
+| `BLADES_RUN1` | 3767 (0xEB7) |  | Blades' Run |
+| `JAGGED_RIDGE` | 3768 (0xEB8) |  | Jagged Ridge |
+| `THUNDERLORD_STRONGHOLD` | 3769 (0xEB9) |  | Thunderlord Stronghold |
+| `BLADE_TOOTH_CANYON1` | 3770 (0xEBA) |  | Blade Tooth Canyon |
+| `THE_LIVING_GROVE` | 3771 (0xEBB) |  | The Living Grove |
+| `SYLVANAAR` | 3772 (0xEBC) |  | Sylvanaar |
+| `BLADESPIRE_HOLD` | 3773 (0xEBD) |  | Bladespire Hold |
+| `GRUULS_LAIR1` | 3774 (0xEBE) |  | Gruul's Lair |
+| `CIRCLE_OF_BLOOD` | 3775 (0xEBF) |  | Circle of Blood |
+| `BLOODMAUL_OUTPOST` | 3776 (0xEC0) |  | Bloodmaul Outpost |
+| `BLOODMAUL_CAMP` | 3777 (0xEC1) |  | Bloodmaul Camp |
+| `DRAENETHYST_MINE` | 3778 (0xEC2) |  | Draenethyst Mine |
+| `TROGMAS_CLAIM` | 3779 (0xEC3) |  | Trogma's Claim |
+| `BLACKWING_COVEN` | 3780 (0xEC4) |  | Blackwing Coven |
+| `GRISHNATH` | 3781 (0xEC5) |  | Grishnath |
+| `VEIL_LASHH` | 3782 (0xEC6) |  | Veil Lashh |
+| `VEIL_VEKH` | 3783 (0xEC7) |  | Veil Vekh |
+| `FORGE_CAMP_TERROR` | 3784 (0xEC8) |  | Forge Camp: Terror |
+| `FORGE_CAMP_WRATH` | 3785 (0xEC9) |  | Forge Camp: Wrath |
+| `OGRI_LA` | 3786 (0xECA) |  | Ogri'la |
+| `FORGE_CAMP_ANGER` | 3787 (0xECB) |  | Forge Camp: Anger |
+| `THE_LOW_PATH` | 3788 (0xECC) |  | The Low Path |
+| `SHADOW_LABYRINTH` | 3789 (0xECD) |  | Shadow Labyrinth |
+| `AUCHENAI_CRYPTS` | 3790 (0xECE) |  | Auchenai Crypts |
+| `SETHEKK_HALLS` | 3791 (0xECF) |  | Sethekk Halls |
+| `MANA_TOMBS` | 3792 (0xED0) |  | Mana-Tombs |
+| `FELSPARK_RAVINE` | 3793 (0xED1) |  | Felspark Ravine |
+| `VALLEY_OF_BONES1` | 3794 (0xED2) |  | Valley of Bones |
+| `SHA_NAARI_WASTES` | 3795 (0xED3) |  | Sha'naari Wastes |
+| `THE_WARP_FIELDS` | 3796 (0xED4) |  | The Warp Fields |
+| `FALLEN_SKY_RIDGE` | 3797 (0xED5) |  | Fallen Sky Ridge |
+| `HAAL_ESHI_GORGE` | 3798 (0xED6) |  | Haal'eshi Gorge |
+| `STONEWALL_CANYON` | 3799 (0xED7) |  | Stonewall Canyon |
+| `THORNFANG_HILL` | 3800 (0xED8) |  | Thornfang Hill |
+| `MAG_HAR_GROUNDS` | 3801 (0xED9) |  | Mag'har Grounds |
+| `VOID_RIDGE` | 3802 (0xEDA) |  | Void Ridge |
+| `THE_ABYSSAL_SHELF` | 3803 (0xEDB) |  | The Abyssal Shelf |
+| `THE_LEGION_FRONT` | 3804 (0xEDC) |  | The Legion Front |
+| `ZUL_AMAN` | 3805 (0xEDD) |  | Zul'Aman |
+| `SUPPLY_CARAVAN` | 3806 (0xEDE) |  | Supply Caravan |
+| `REAVERS_FALL` | 3807 (0xEDF) |  | Reaver's Fall |
+| `CENARION_POST` | 3808 (0xEE0) |  | Cenarion Post |
+| `SOUTHERN_RAMPART` | 3809 (0xEE1) |  | Southern Rampart |
+| `NORTHERN_RAMPART` | 3810 (0xEE2) |  | Northern Rampart |
+| `GOR_GAZ_OUTPOST` | 3811 (0xEE3) |  | Gor'gaz Outpost |
+| `SPINEBREAKER_POST` | 3812 (0xEE4) |  | Spinebreaker Post |
+| `THE_PATH_OF_ANGUISH` | 3813 (0xEE5) |  | The Path of Anguish |
+| `EAST_SUPPLY_CARAVAN` | 3814 (0xEE6) |  | East Supply Caravan |
+| `EXPEDITION_POINT` | 3815 (0xEE7) |  | Expedition Point |
+| `ZEPPELIN_CRASH` | 3816 (0xEE8) |  | Zeppelin Crash |
+| `TESTING` | 3817 (0xEE9) |  | Testing |
+| `BLOODSCALE_GROUNDS` | 3818 (0xEEA) |  | Bloodscale Grounds |
+| `DARKCREST_ENCLAVE` | 3819 (0xEEB) |  | Darkcrest Enclave |
+| `EYE_OF_THE_STORM` | 3820 (0xEEC) |  | Eye of the Storm |
+| `WARDENS_CAGE` | 3821 (0xEED) |  | Warden's Cage |
+| `ECLIPSE_POINT` | 3822 (0xEEE) |  | Eclipse Point |
+| `ISLE_OF_TRIBULATIONS` | 3823 (0xEEF) |  | Isle of Tribulations |
+| `BLOODMAUL_RAVINE` | 3824 (0xEF0) |  | Bloodmaul Ravine |
+| `DRAGONS_END` | 3825 (0xEF1) |  | Dragons' End |
+| `DAGGERMAW_CANYON` | 3826 (0xEF2) |  | Daggermaw Canyon |
+| `VEKHAAR_STAND` | 3827 (0xEF3) |  | Vekhaar Stand |
+| `RUUAN_WEALD` | 3828 (0xEF4) |  | Ruuan Weald |
+| `VEIL_RUUAN` | 3829 (0xEF5) |  | Veil Ruuan |
+| `RAVENS_WOOD` | 3830 (0xEF6) |  | Raven's Wood |
+| `DEATHS_DOOR` | 3831 (0xEF7) |  | Death's Door |
+| `VORTEX_PINNACLE` | 3832 (0xEF8) |  | Vortex Pinnacle |
+| `RAZOR_RIDGE` | 3833 (0xEF9) |  | Razor Ridge |
+| `RIDGE_OF_MADNESS` | 3834 (0xEFA) |  | Ridge of Madness |
+| `DUSTQUILL_RAVINE` | 3835 (0xEFB) |  | Dustquill Ravine |
+| `MAGTHERIDONS_LAIR` | 3836 (0xEFC) |  | Magtheridon's Lair |
+| `SUNFURY_HOLD` | 3837 (0xEFD) |  | Sunfury Hold |
+| `SPINEBREAKER_MOUNTAINS` | 3838 (0xEFE) |  | Spinebreaker Mountains |
+| `ABANDONED_ARMORY` | 3839 (0xEFF) |  | Abandoned Armory |
+| `THE_BLACK_TEMPLE` | 3840 (0xF00) |  | The Black Temple |
+| `DARKCREST_SHORE` | 3841 (0xF01) |  | Darkcrest Shore |
+| `TEMPEST_KEEP` | 3842 (0xF02) |  | Tempest Keep |
+| `MOK_NATHAL_VILLAGE` | 3844 (0xF04) |  | Mok'Nathal Village |
+| `TEMPEST_KEEP1` | 3845 (0xF05) |  | Tempest Keep |
+| `THE_ARCATRAZ` | 3846 (0xF06) |  | The Arcatraz |
+| `THE_BOTANICA` | 3847 (0xF07) |  | The Botanica |
+| `THE_ARCATRAZ1` | 3848 (0xF08) |  | The Arcatraz |
+| `THE_MECHANAR` | 3849 (0xF09) |  | The Mechanar |
+| `NETHERSTONE` | 3850 (0xF0A) |  | Netherstone |
+| `MIDREALM_POST` | 3851 (0xF0B) |  | Midrealm Post |
+| `TULUMANS_LANDING` | 3852 (0xF0C) |  | Tuluman's Landing |
+| `PROTECTORATE_WATCH_POST` | 3854 (0xF0E) |  | Protectorate Watch Post |
+| `CIRCLE_OF_BLOOD_ARENA` | 3855 (0xF0F) |  | Circle of Blood Arena |
+| `ELRENDAR_CROSSING` | 3856 (0xF10) |  | Elrendar Crossing |
+| `AMMEN_FORD` | 3857 (0xF11) |  | Ammen Ford |
+| `RAZORTHORN_SHELF` | 3858 (0xF12) |  | Razorthorn Shelf |
+| `SILMYR_LAKE` | 3859 (0xF13) |  | Silmyr Lake |
+| `RAASTOK_GLADE` | 3860 (0xF14) |  | Raastok Glade |
+| `THALASSIAN_PASS` | 3861 (0xF15) |  | Thalassian Pass |
+| `CHURNING_GULCH` | 3862 (0xF16) |  | Churning Gulch |
+| `BROKEN_WILDS` | 3863 (0xF17) |  | Broken Wilds |
+| `BASH_IR_LANDING` | 3864 (0xF18) |  | Bash'ir Landing |
+| `CRYSTAL_SPINE` | 3865 (0xF19) |  | Crystal Spine |
+| `SKALD` | 3866 (0xF1A) |  | Skald |
+| `BLADED_GULCH` | 3867 (0xF1B) |  | Bladed Gulch |
+| `GYRO_PLANK_BRIDGE` | 3868 (0xF1C) |  | Gyro-Plank Bridge |
+| `MAGE_TOWER` | 3869 (0xF1D) |  | Mage Tower |
+| `BLOOD_ELF_TOWER` | 3870 (0xF1E) |  | Blood Elf Tower |
+| `DRAENEI_RUINS` | 3871 (0xF1F) |  | Draenei Ruins |
+| `FEL_REAVER_RUINS` | 3872 (0xF20) |  | Fel Reaver Ruins |
+| `THE_PROVING_GROUNDS` | 3873 (0xF21) |  | The Proving Grounds |
+| `ECO_DOME_FARFIELD` | 3874 (0xF22) |  | Eco-Dome Farfield |
+| `ECO_DOME_SKYPERCH` | 3875 (0xF23) |  | Eco-Dome Skyperch |
+| `ECO_DOME_SUTHERON` | 3876 (0xF24) |  | Eco-Dome Sutheron |
+| `ECO_DOME_MIDREALM` | 3877 (0xF25) |  | Eco-Dome Midrealm |
+| `ETHEREUM_STAGING_GROUNDS` | 3878 (0xF26) |  | Ethereum Staging Grounds |
+| `CHAPEL_YARD` | 3879 (0xF27) |  | Chapel Yard |
+| `ACCESS_SHAFT_ZEON` | 3880 (0xF28) |  | Access Shaft Zeon |
+| `TRELLEUM_MINE` | 3881 (0xF29) |  | Trelleum Mine |
+| `INVASION_POINT_DESTROYER` | 3882 (0xF2A) |  | Invasion Point: Destroyer |
+| `CAMP_OF_BOOM` | 3883 (0xF2B) |  | Camp of Boom |
+| `SPINEBREAKER_PASS` | 3884 (0xF2C) |  | Spinebreaker Pass |
+| `NETHERWEB_RIDGE` | 3885 (0xF2D) |  | Netherweb Ridge |
+| `DERELICT_CARAVAN` | 3886 (0xF2E) |  | Derelict Caravan |
+| `REFUGEE_CARAVAN` | 3887 (0xF2F) |  | Refugee Caravan |
+| `SHADOW_TOMB` | 3888 (0xF30) |  | Shadow Tomb |
+| `VEIL_RHAZE` | 3889 (0xF31) |  | Veil Rhaze |
+| `TOMB_OF_LIGHTS` | 3890 (0xF32) |  | Tomb of Lights |
+| `CARRION_HILL` | 3891 (0xF33) |  | Carrion Hill |
+| `WRITHING_MOUND` | 3892 (0xF34) |  | Writhing Mound |
+| `RING_OF_OBSERVANCE` | 3893 (0xF35) |  | Ring of Observance |
+| `AUCHENAI_GROUNDS` | 3894 (0xF36) |  | Auchenai Grounds |
+| `CENARION_WATCHPOST` | 3895 (0xF37) |  | Cenarion Watchpost |
+| `ALDOR_RISE` | 3896 (0xF38) |  | Aldor Rise |
+| `TERRACE_OF_LIGHT` | 3897 (0xF39) |  | Terrace of Light |
+| `SCRYERS_TIER` | 3898 (0xF3A) |  | Scryer's Tier |
+| `LOWER_CITY` | 3899 (0xF3B) |  | Lower City |
+| `INVASION_POINT_OVERLORD` | 3900 (0xF3C) |  | Invasion Point: Overlord |
+| `ALLERIAN_POST` | 3901 (0xF3D) |  | Allerian Post |
+| `STONEBREAKER_CAMP` | 3902 (0xF3E) |  | Stonebreaker Camp |
+| `BOULDER_MOK` | 3903 (0xF3F) |  | Boulder'mok |
+| `CURSED_HOLLOW` | 3904 (0xF40) |  | Cursed Hollow |
+| `COILFANG_RESERVOIR` | 3905 (0xF41) |  | Coilfang Reservoir |
+| `THE_BLOODWASH` | 3906 (0xF42) |  | The Bloodwash |
+| `VERIDIAN_POINT` | 3907 (0xF43) |  | Veridian Point |
+| `MIDDENVALE` | 3908 (0xF44) |  | Middenvale |
+| `THE_LOST_FOLD` | 3909 (0xF45) |  | The Lost Fold |
+| `MYSTWOOD` | 3910 (0xF46) |  | Mystwood |
+| `TRANQUIL_SHORE` | 3911 (0xF47) |  | Tranquil Shore |
+| `GOLDENBOUGH_PASS` | 3912 (0xF48) |  | Goldenbough Pass |
+| `RUNESTONE_FALITHAS` | 3913 (0xF49) |  | Runestone Falithas |
+| `RUNESTONE_SHAN_DOR` | 3914 (0xF4A) |  | Runestone Shan'dor |
+| `FAIRBRIDGE_STRAND` | 3915 (0xF4B) |  | Fairbridge Strand |
+| `MOONGRAZE_WOODS` | 3916 (0xF4C) |  | Moongraze Woods |
+| `AUCHINDOUN1` | 3917 (0xF4D) |  | Auchindoun |
+| `TOSHLEYS_STATION` | 3918 (0xF4E) |  | Toshley's Station |
+| `SINGING_RIDGE` | 3919 (0xF4F) |  | Singing Ridge |
+| `SHATTER_POINT` | 3920 (0xF50) |  | Shatter Point |
+| `ARKLONIS_RIDGE` | 3921 (0xF51) |  | Arklonis Ridge |
+| `BLADESPIRE_OUTPOST` | 3922 (0xF52) |  | Bladespire Outpost |
+| `GRUULS_LAIR2` | 3923 (0xF53) |  | Gruul's Lair |
+| `NORTHMAUL_TOWER` | 3924 (0xF54) |  | Northmaul Tower |
+| `SOUTHMAUL_TOWER` | 3925 (0xF55) |  | Southmaul Tower |
+| `SHATTERED_PLAINS` | 3926 (0xF56) |  | Shattered Plains |
+| `ORONOKS_FARM` | 3927 (0xF57) |  | Oronok's Farm |
+| `THE_ALTAR_OF_DAMNATION` | 3928 (0xF58) |  | The Altar of Damnation |
+| `THE_PATH_OF_CONQUEST` | 3929 (0xF59) |  | The Path of Conquest |
+| `ECLIPSION_FIELDS` | 3930 (0xF5A) |  | Eclipsion Fields |
+| `BLADESPIRE_GROUNDS` | 3931 (0xF5B) |  | Bladespire Grounds |
+| `SKETH_LON_BASE_CAMP` | 3932 (0xF5C) |  | Sketh'lon Base Camp |
+| `SKETH_LON_WRECKAGE` | 3933 (0xF5D) |  | Sketh'lon Wreckage |
+| `TOWN_SQUARE` | 3934 (0xF5E) |  | Town Square |
+| `WIZARD_ROW` | 3935 (0xF5F) |  | Wizard Row |
+| `DEATHFORGE_TOWER` | 3936 (0xF60) |  | Deathforge Tower |
+| `SLAG_WATCH` | 3937 (0xF61) |  | Slag Watch |
+| `SANCTUM_OF_THE_STARS` | 3938 (0xF62) |  | Sanctum of the Stars |
+| `DRAGONMAW_FORTRESS` | 3939 (0xF63) |  | Dragonmaw Fortress |
+| `THE_FETID_POOL` | 3940 (0xF64) |  | The Fetid Pool |
+| `TEST` | 3941 (0xF65) |  | Test |
+| `RAZAANS_LANDING` | 3942 (0xF66) |  | Razaan's Landing |
+| `INVASION_POINT_CATACLYSM` | 3943 (0xF67) |  | Invasion Point: Cataclysm |
+| `THE_ALTAR_OF_SHADOWS` | 3944 (0xF68) |  | The Altar of Shadows |
+| `NETHERWING_PASS` | 3945 (0xF69) |  | Netherwing Pass |
+| `WAYNES_REFUGE` | 3946 (0xF6A) |  | Wayne's Refuge |
+| `THE_SCALDING_POOLS` | 3947 (0xF6B) |  | The Scalding Pools |
+| `BRIAN_AND_PAT_TEST` | 3948 (0xF6C) |  | Brian and Pat Test |
+| `MAGMA_FIELDS` | 3949 (0xF6D) |  | Magma Fields |
+| `CRIMSON_WATCH` | 3950 (0xF6E) |  | Crimson Watch |
+| `EVERGROVE` | 3951 (0xF6F) |  | Evergrove |
+| `WYRMSKULL_BRIDGE` | 3952 (0xF70) |  | Wyrmskull Bridge |
+| `SCALEWING_SHELF` | 3953 (0xF71) |  | Scalewing Shelf |
+| `WYRMSKULL_TUNNEL` | 3954 (0xF72) |  | Wyrmskull Tunnel |
+| `HELLFIRE_BASIN` | 3955 (0xF73) |  | Hellfire Basin |
+| `THE_SHADOW_STAIR` | 3956 (0xF74) |  | The Shadow Stair |
+| `SHA_TARI_OUTPOST` | 3957 (0xF75) |  | Sha'tari Outpost |
+| `SHA_TARI_BASE_CAMP` | 3958 (0xF76) |  | Sha'tari Base Camp |
+| `BLACK_TEMPLE` | 3959 (0xF77) |  | Black Temple |
+| `SOULGRINDERS_BARROW` | 3960 (0xF78) |  | Soulgrinder's Barrow |
+| `SORROW_WING_POINT` | 3961 (0xF79) |  | Sorrow Wing Point |
+| `VIM_GOLS_CIRCLE` | 3962 (0xF7A) |  | Vim'gol's Circle |
+| `DRAGONSPINE_RIDGE` | 3963 (0xF7B) |  | Dragonspine Ridge |
+| `SKYGUARD_OUTPOST` | 3964 (0xF7C) |  | Skyguard Outpost |
+| `NETHERWING_MINES` | 3965 (0xF7D) |  | Netherwing Mines |
+| `DRAGONMAW_BASE_CAMP` | 3966 (0xF7E) |  | Dragonmaw Base Camp |
+| `DRAGONMAW_SKYWAY` | 3967 (0xF7F) |  | Dragonmaw Skyway |
+| `RUINS_OF_LORDAERON1` | 3968 (0xF80) |  | Ruins of Lordaeron |
+| `RIVENDARKS_PERCH` | 3969 (0xF81) |  | Rivendark's Perch |
+| `OBSIDIAS_PERCH` | 3970 (0xF82) |  | Obsidia's Perch |
+| `INSIDIONS_PERCH` | 3971 (0xF83) |  | Insidion's Perch |
+| `FURYWINGS_PERCH` | 3972 (0xF84) |  | Furywing's Perch |
+| `BLACKWIND_LANDING` | 3973 (0xF85) |  | Blackwind Landing |
+| `VEIL_HARR_IK` | 3974 (0xF86) |  | Veil Harr'ik |
+| `TEROKKS_REST` | 3975 (0xF87) |  | Terokk's Rest |
+| `VEIL_ALA_RAK` | 3976 (0xF88) |  | Veil Ala'rak |
+| `UPPER_VEIL_SHIL_AK` | 3977 (0xF89) |  | Upper Veil Shil'ak |
+| `LOWER_VEIL_SHIL_AK` | 3978 (0xF8A) |  | Lower Veil Shil'ak |
+| `THE_FROZEN_SEA` | 3979 (0xF8B) |  | The Frozen Sea |
+| `DAGGERCAP_BAY` | 3980 (0xF8C) |  | Daggercap Bay |
+| `VALGARDE` | 3981 (0xF8D) |  | Valgarde |
+| `WYRMSKULL_VILLAGE` | 3982 (0xF8E) |  | Wyrmskull Village |
+| `UTGARDE_KEEP1` | 3983 (0xF8F) |  | Utgarde Keep |
+| `NIFFLEVAR` | 3984 (0xF90) |  | Nifflevar |
+| `FALLS_OF_YMIRON` | 3985 (0xF91) |  | Falls of Ymiron |
+| `ECHO_REACH` | 3986 (0xF92) |  | Echo Reach |
+| `THE_ISLE_OF_SPEARS` | 3987 (0xF93) |  | The Isle of Spears |
+| `KAMAGUA` | 3988 (0xF94) |  | Kamagua |
+| `GARVANS_REEF` | 3989 (0xF95) |  | Garvan's Reef |
+| `SCALAWAG_POINT` | 3990 (0xF96) |  | Scalawag Point |
+| `NEW_AGAMAND` | 3991 (0xF97) |  | New Agamand |
+| `THE_ANCIENT_LIFT` | 3992 (0xF98) |  | The Ancient Lift |
+| `WESTGUARD_TURRET` | 3993 (0xF99) |  | Westguard Turret |
+| `HALGRIND` | 3994 (0xF9A) |  | Halgrind |
+| `THE_LAUGHING_STAND` | 3995 (0xF9B) |  | The Laughing Stand |
+| `BAELGUNS_EXCAVATION_SITE` | 3996 (0xF9C) |  | Baelgun's Excavation Site |
+| `EXPLORERS_LEAGUE_OUTPOST` | 3997 (0xF9D) |  | Explorers' League Outpost |
+| `WESTGUARD_KEEP` | 3998 (0xF9E) |  | Westguard Keep |
+| `STEEL_GATE` | 3999 (0xF9F) |  | Steel Gate |
+| `VENGEANCE_LANDING` | 4000 (0xFA0) |  | Vengeance Landing |
+| `BALEHEIM` | 4001 (0xFA1) |  | Baleheim |
+| `SKORN` | 4002 (0xFA2) |  | Skorn |
+| `FORT_WILDERVAR` | 4003 (0xFA3) |  | Fort Wildervar |
+| `VILEPREY_VILLAGE` | 4004 (0xFA4) |  | Vileprey Village |
+| `IVALDS_RUIN` | 4005 (0xFA5) |  | Ivald's Ruin |
+| `GJALERBRON` | 4006 (0xFA6) |  | Gjalerbron |
+| `TOMB_OF_THE_LOST_KINGS` | 4007 (0xFA7) |  | Tomb of the Lost Kings |
+| `SHARTUULS_TRANSPORTER` | 4008 (0xFA8) |  | Shartuul's Transporter |
+| `ILLIDARI_TRAINING_GROUNDS` | 4009 (0xFA9) |  | Illidari Training Grounds |
+| `MUDSPROCKET` | 4010 (0xFAA) |  | Mudsprocket |
+| `CAMP_WINTERHOOF` | 4018 (0xFB2) |  | Camp Winterhoof |
+| `DEVELOPMENT_LAND` | 4019 (0xFB3) |  | Development Land |
+| `MIGHTSTONE_QUARRY` | 4020 (0xFB4) |  | Mightstone Quarry |
+| `BLOODSPORE_PLAINS` | 4021 (0xFB5) |  | Bloodspore Plains |
+| `GAMMOTH` | 4022 (0xFB6) |  | Gammoth |
+| `AMBER_LEDGE` | 4023 (0xFB7) |  | Amber Ledge |
+| `COLDARRA` | 4024 (0xFB8) |  | Coldarra |
+| `THE_WESTRIFT` | 4025 (0xFB9) |  | The Westrift |
+| `THE_TRANSITUS_STAIR` | 4026 (0xFBA) |  | The Transitus Stair |
+| `COAST_OF_ECHOES` | 4027 (0xFBB) |  | Coast of Echoes |
+| `RIPLASH_STRAND` | 4028 (0xFBC) |  | Riplash Strand |
+| `RIPLASH_RUINS` | 4029 (0xFBD) |  | Riplash Ruins |
+| `COAST_OF_IDOLS` | 4030 (0xFBE) |  | Coast of Idols |
+| `PAL_EA` | 4031 (0xFBF) |  | Pal'ea |
+| `VALIANCE_KEEP` | 4032 (0xFC0) |  | Valiance Keep |
+| `WINTERFIN_VILLAGE` | 4033 (0xFC1) |  | Winterfin Village |
+| `THE_BOREAN_WALL` | 4034 (0xFC2) |  | The Borean Wall |
+| `THE_GEYSER_FIELDS` | 4035 (0xFC3) |  | The Geyser Fields |
+| `FIZZCRANK_PUMPING_STATION` | 4036 (0xFC4) |  | Fizzcrank Pumping Station |
+| `TAUNKA_LE_VILLAGE` | 4037 (0xFC5) |  | Taunka'le Village |
+| `MAGNAMOTH_CAVERNS` | 4038 (0xFC6) |  | Magnamoth Caverns |
+| `COLDROCK_QUARRY` | 4039 (0xFC7) |  | Coldrock Quarry |
+| `NJORDS_BREATH_BAY` | 4040 (0xFC8) |  | Njord's Breath Bay |
+| `KASKALA` | 4041 (0xFC9) |  | Kaskala |
+| `TRANSBOREA` | 4042 (0xFCA) |  | Transborea |
+| `THE_FLOOD_PLAINS` | 4043 (0xFCB) |  | The Flood Plains |
+| `DIREHORN_POST` | 4046 (0xFCE) |  | Direhorn Post |
+| `NATS_LANDING` | 4047 (0xFCF) |  | Nat's Landing |
+| `EMBER_CLUTCH` | 4048 (0xFD0) |  | Ember Clutch |
+| `TABETHAS_FARM` | 4049 (0xFD1) |  | Tabetha's Farm |
+| `DERELICT_STRAND` | 4050 (0xFD2) |  | Derelict Strand |
+| `THE_FROZEN_GLADE` | 4051 (0xFD3) |  | The Frozen Glade |
+| `THE_VIBRANT_GLADE` | 4052 (0xFD4) |  | The Vibrant Glade |
+| `THE_TWISTED_GLADE` | 4053 (0xFD5) |  | The Twisted Glade |
+| `RIVENWOOD` | 4054 (0xFD6) |  | Rivenwood |
+| `CALDEMERE_LAKE` | 4055 (0xFD7) |  | Caldemere Lake |
+| `UTGARDE_CATACOMBS` | 4056 (0xFD8) |  | Utgarde Catacombs |
+| `SHIELD_HILL` | 4057 (0xFD9) |  | Shield Hill |
+| `LAKE_CAULDROS` | 4058 (0xFDA) |  | Lake Cauldros |
+| `CAULDROS_ISLE` | 4059 (0xFDB) |  | Cauldros Isle |
+| `BLEEDING_VALE` | 4060 (0xFDC) |  | Bleeding Vale |
+| `GIANTS_RUN` | 4061 (0xFDD) |  | Giants' Run |
+| `APOTHECARY_CAMP` | 4062 (0xFDE) |  | Apothecary Camp |
+| `EMBER_SPEAR_TOWER` | 4063 (0xFDF) |  | Ember Spear Tower |
+| `SHATTERED_STRAITS` | 4064 (0xFE0) |  | Shattered Straits |
+| `GJALERHORN` | 4065 (0xFE1) |  | Gjalerhorn |
+| `FROSTBLADE_PEAK` | 4066 (0xFE2) |  | Frostblade Peak |
+| `PLAGUEWOOD_TOWER` | 4067 (0xFE3) |  | Plaguewood Tower |
+| `WEST_SPEAR_TOWER` | 4068 (0xFE4) |  | West Spear Tower |
+| `NORTH_SPEAR_TOWER` | 4069 (0xFE5) |  | North Spear Tower |
+| `CHILLMERE_COAST` | 4070 (0xFE6) |  | Chillmere Coast |
+| `WHISPER_GULCH` | 4071 (0xFE7) |  | Whisper Gulch |
+| `SUB_ZONE` | 4072 (0xFE8) |  | Sub zone |
+| `WINTERS_TERRACE` | 4073 (0xFE9) |  | Winter's Terrace |
+| `THE_WAKING_HALLS` | 4074 (0xFEA) |  | The Waking Halls |
+| `SUNWELL_PLATEAU` | 4075 (0xFEB) |  | Sunwell Plateau |
+| `REUSE_ME_SEVEN` | 4076 (0xFEC) |  | Reuse Me 7 |
+| `SORLOFS_STRAND` | 4077 (0xFED) |  | Sorlof's Strand |
+| `RAZORTHORN_RISE` | 4078 (0xFEE) |  | Razorthorn Rise |
+| `FROSTBLADE_PASS` | 4079 (0xFEF) |  | Frostblade Pass |
+| `ISLE_OF_QUEL_DANAS` | 4080 (0xFF0) |  | Isle of Quel'Danas |
+| `THE_DAWNCHASER` | 4081 (0xFF1) |  | The Dawnchaser |
+| `THE_SIN_LOREN` | 4082 (0xFF2) |  | The Sin'loren |
+| `SILVERMOONS_PRIDE` | 4083 (0xFF3) |  | Silvermoon's Pride |
+| `THE_BLOODOATH` | 4084 (0xFF4) |  | The Bloodoath |
+| `SHATTERED_SUN_STAGING_AREA` | 4085 (0xFF5) |  | Shattered Sun Staging Area |
+| `SUNS_REACH_SANCTUM` | 4086 (0xFF6) |  | Sun's Reach Sanctum |
+| `SUNS_REACH_HARBOR` | 4087 (0xFF7) |  | Sun's Reach Harbor |
+| `SUNS_REACH_ARMORY` | 4088 (0xFF8) |  | Sun's Reach Armory |
+| `DAWNSTAR_VILLAGE` | 4089 (0xFF9) |  | Dawnstar Village |
+| `THE_DAWNING_SQUARE` | 4090 (0xFFA) |  | The Dawning Square |
+| `GREENGILL_COAST` | 4091 (0xFFB) |  | Greengill Coast |
+| `THE_DEAD_SCAR2` | 4092 (0xFFC) |  | The Dead Scar |
+| `THE_SUN_FORGE` | 4093 (0xFFD) |  | The Sun Forge |
+| `SUNWELL_PLATEAU1` | 4094 (0xFFE) |  | Sunwell Plateau |
+| `MAGISTERS_TERRACE` | 4095 (0xFFF) |  | Magisters' Terrace |
+| `CLAYTONS_WOWEDIT_LAND` | 4096 (0x1000) |  | Clayton's WoWEdit Land |
+| `WINTERFIN_CAVERNS` | 4097 (0x1001) |  | Winterfin Caverns |
+| `GLIMMER_BAY` | 4098 (0x1002) |  | Glimmer Bay |
+| `WINTERFIN_RETREAT` | 4099 (0x1003) |  | Winterfin Retreat |
+| `THE_CULLING_OF_STRATHOLME` | 4100 (0x1004) |  | The Culling of Stratholme |
+| `SANDS_OF_NASAM` | 4101 (0x1005) |  | Sands of Nasam |
+| `KROMS_LANDING` | 4102 (0x1006) |  | Krom's Landing |
+| `NASAMS_TALON` | 4103 (0x1007) |  | Nasam's Talon |
+| `ECHO_COVE` | 4104 (0x1008) |  | Echo Cove |
+| `BERYL_POINT` | 4105 (0x1009) |  | Beryl Point |
+| `GARROSHS_LANDING` | 4106 (0x100A) |  | Garrosh's Landing |
+| `WARSONG_JETTY` | 4107 (0x100B) |  | Warsong Jetty |
+| `FIZZCRANK_AIRSTRIP` | 4108 (0x100C) |  | Fizzcrank Airstrip |
+| `LAKE_KUM_UYA` | 4109 (0x100D) |  | Lake Kum'uya |
+| `FARSHIRE_FIELDS` | 4110 (0x100E) |  | Farshire Fields |
+| `FARSHIRE` | 4111 (0x100F) |  | Farshire |
+| `FARSHIRE_LIGHTHOUSE` | 4112 (0x1010) |  | Farshire Lighthouse |
+| `UNU_PE` | 4113 (0x1011) |  | Unu'pe |
+| `DEATHS_STAND` | 4114 (0x1012) |  | Death's Stand |
+| `THE_ABANDONED_REACH` | 4115 (0x1013) |  | The Abandoned Reach |
+| `SCALDING_POOLS` | 4116 (0x1014) |  | Scalding Pools |
+| `STEAM_SPRINGS` | 4117 (0x1015) |  | Steam Springs |
+| `TALRAMAS` | 4118 (0x1016) |  | Talramas |
+| `FESTERING_POOLS` | 4119 (0x1017) |  | Festering Pools |
+| `THE_NEXUS` | 4120 (0x1018) |  | The Nexus |
+| `TRANSITUS_SHIELD` | 4121 (0x1019) |  | Transitus Shield |
+| `BOR_GOROK_OUTPOST` | 4122 (0x101A) |  | Bor'gorok Outpost |
+| `MAGMOTH` | 4123 (0x101B) |  | Magmoth |
+| `THE_DENS_OF_DYING` | 4124 (0x101C) |  | The Dens of Dying |
+| `TEMPLE_CITY_OF_EN_KILAH` | 4125 (0x101D) |  | Temple City of En'kilah |
+| `THE_WAILING_ZIGGURAT` | 4126 (0x101E) |  | The Wailing Ziggurat |
+| `STEELJAWS_CARAVAN` | 4127 (0x101F) |  | Steeljaw's Caravan |
+| `NAXXANAR` | 4128 (0x1020) |  | Naxxanar |
+| `WARSONG_HOLD` | 4129 (0x1021) |  | Warsong Hold |
+| `PLAINS_OF_NASAM` | 4130 (0x1022) |  | Plains of Nasam |
+| `MAGISTERS_TERRACE1` | 4131 (0x1023) |  | Magisters' Terrace |
+| `RUINS_OF_ELDRA_NATH` | 4132 (0x1024) |  | Ruins of Eldra'nath |
+| `CHARRED_RISE` | 4133 (0x1025) |  | Charred Rise |
+| `BLISTERING_POOL` | 4134 (0x1026) |  | Blistering Pool |
+| `SPIRE_OF_BLOOD` | 4135 (0x1027) |  | Spire of Blood |
+| `SPIRE_OF_DECAY` | 4136 (0x1028) |  | Spire of Decay |
+| `SPIRE_OF_PAIN` | 4137 (0x1029) |  | Spire of Pain |
+| `FROZEN_REACH` | 4138 (0x102A) |  | Frozen Reach |
+| `PARHELION_PLAZA` | 4139 (0x102B) |  | Parhelion Plaza |
+| `THE_DEAD_SCAR3` | 4140 (0x102C) |  | The Dead Scar |
+| `TORPS_FARM` | 4141 (0x102D) |  | Torp's Farm |
+| `WARSONG_GRANARY` | 4142 (0x102E) |  | Warsong Granary |
+| `WARSONG_SLAUGHTERHOUSE` | 4143 (0x102F) |  | Warsong Slaughterhouse |
+| `WARSONG_FARMS_OUTPOST` | 4144 (0x1030) |  | Warsong Farms Outpost |
+| `WEST_POINT_STATION` | 4145 (0x1031) |  | West Point Station |
+| `NORTH_POINT_STATION` | 4146 (0x1032) |  | North Point Station |
+| `MID_POINT_STATION` | 4147 (0x1033) |  | Mid Point Station |
+| `SOUTH_POINT_STATION` | 4148 (0x1034) |  | South Point Station |
+| `DEHTA_ENCAMPMENT` | 4149 (0x1035) |  | D.E.H.T.A. Encampment |
+| `KAWS_ROOST` | 4150 (0x1036) |  | Kaw's Roost |
+| `WESTWIND_REFUGEE_CAMP` | 4151 (0x1037) |  | Westwind Refugee Camp |
+| `MOA_KI_HARBOR` | 4152 (0x1038) |  | Moa'ki Harbor |
+| `INDU_LE_VILLAGE` | 4153 (0x1039) |  | Indu'le Village |
+| `SNOWFALL_GLADE` | 4154 (0x103A) |  | Snowfall Glade |
+| `THE_HALF_SHELL` | 4155 (0x103B) |  | The Half Shell |
+| `SURGE_NEEDLE` | 4156 (0x103C) |  | Surge Needle |
+| `MOONREST_GARDENS` | 4157 (0x103D) |  | Moonrest Gardens |
+| `STARS_REST` | 4158 (0x103E) |  | Stars' Rest |
+| `WESTFALL_BRIGADE_ENCAMPMENT` | 4159 (0x103F) |  | Westfall Brigade Encampment |
+| `LOTHALOR_WOODLANDS` | 4160 (0x1040) |  | Lothalor Woodlands |
+| `WYRMREST_TEMPLE` | 4161 (0x1041) |  | Wyrmrest Temple |
+| `ICEMIST_FALLS` | 4162 (0x1042) |  | Icemist Falls |
+| `ICEMIST_VILLAGE` | 4163 (0x1043) |  | Icemist Village |
+| `THE_PIT_OF_NARJUN` | 4164 (0x1044) |  | The Pit of Narjun |
+| `AGMARS_HAMMER` | 4165 (0x1045) |  | Agmar's Hammer |
+| `LAKE_INDU_LE` | 4166 (0x1046) |  | Lake Indu'le |
+| `OBSIDIAN_DRAGONSHRINE` | 4167 (0x1047) |  | Obsidian Dragonshrine |
+| `RUBY_DRAGONSHRINE` | 4168 (0x1048) |  | Ruby Dragonshrine |
+| `FORDRAGON_HOLD` | 4169 (0x1049) |  | Fordragon Hold |
+| `KOR_KRON_VANGUARD` | 4170 (0x104A) |  | Kor'kron Vanguard |
+| `THE_COURT_OF_SKULLS` | 4171 (0x104B) |  | The Court of Skulls |
+| `ANGRATHAR_THE_WRATHGATE` | 4172 (0x104C) |  | Angrathar the Wrathgate |
+| `GALAKRONDS_REST` | 4173 (0x104D) |  | Galakrond's Rest |
+| `THE_WICKED_COIL` | 4174 (0x104E) |  | The Wicked Coil |
+| `BRONZE_DRAGONSHRINE` | 4175 (0x104F) |  | Bronze Dragonshrine |
+| `THE_MIRROR_OF_DAWN` | 4176 (0x1050) |  | The Mirror of Dawn |
+| `WINTERGARDE_KEEP` | 4177 (0x1051) |  | Wintergarde Keep |
+| `WINTERGARDE_MINE` | 4178 (0x1052) |  | Wintergarde Mine |
+| `EMERALD_DRAGONSHRINE` | 4179 (0x1053) |  | Emerald Dragonshrine |
+| `NEW_HEARTHGLEN` | 4180 (0x1054) |  | New Hearthglen |
+| `CRUSADERS_LANDING` | 4181 (0x1055) |  | Crusader's Landing |
+| `SINNERS_FOLLY` | 4182 (0x1056) |  | Sinner's Folly |
+| `AZURE_DRAGONSHRINE` | 4183 (0x1057) |  | Azure Dragonshrine |
+| `PATH_OF_THE_TITANS` | 4184 (0x1058) |  | Path of the Titans |
+| `THE_FORGOTTEN_SHORE` | 4185 (0x1059) |  | The Forgotten Shore |
+| `VENOMSPITE` | 4186 (0x105A) |  | Venomspite |
+| `THE_CRYSTAL_VICE` | 4187 (0x105B) |  | The Crystal Vice |
+| `THE_CARRION_FIELDS` | 4188 (0x105C) |  | The Carrion Fields |
+| `ONSLAUGHT_BASE_CAMP` | 4189 (0x105D) |  | Onslaught Base Camp |
+| `THORSONS_POST` | 4190 (0x105E) |  | Thorson's Post |
+| `LIGHTS_TRUST` | 4191 (0x105F) |  | Light's Trust |
+| `FROSTMOURNE_CAVERN` | 4192 (0x1060) |  | Frostmourne Cavern |
+| `SCARLET_POINT` | 4193 (0x1061) |  | Scarlet Point |
+| `JINTHA_KALAR` | 4194 (0x1062) |  | Jintha'kalar |
+| `ICE_HEART_CAVERN` | 4195 (0x1063) |  | Ice Heart Cavern |
+| `DRAK_THARON_KEEP` | 4196 (0x1064) |  | Drak'Tharon Keep |
+| `WINTERGRASP` | 4197 (0x1065) |  | Wintergrasp |
+| `KILI_UAS_ATOLL` | 4198 (0x1066) |  | Kili'ua's Atoll |
+| `SILVERBROOK` | 4199 (0x1067) |  | Silverbrook |
+| `VORDRASSILS_HEART` | 4200 (0x1068) |  | Vordrassil's Heart |
+| `VORDRASSILS_TEARS` | 4201 (0x1069) |  | Vordrassil's Tears |
+| `VORDRASSILS_TEARS1` | 4202 (0x106A) |  | Vordrassil's Tears |
+| `VORDRASSILS_LIMB` | 4203 (0x106B) |  | Vordrassil's Limb |
+| `AMBERPINE_LODGE` | 4204 (0x106C) |  | Amberpine Lodge |
+| `SOLSTICE_VILLAGE` | 4205 (0x106D) |  | Solstice Village |
+| `CONQUEST_HOLD` | 4206 (0x106E) |  | Conquest Hold |
+| `VOLDRUNE` | 4207 (0x106F) |  | Voldrune |
+| `GRANITE_SPRINGS` | 4208 (0x1070) |  | Granite Springs |
+| `ZEB_HALAK` | 4209 (0x1071) |  | Zeb'Halak |
+| `DRAK_THARON_KEEP1` | 4210 (0x1072) |  | Drak'Tharon Keep |
+| `CAMP_ONEQWAH` | 4211 (0x1073) |  | Camp Oneqwah |
+| `EASTWIND_SHORE` | 4212 (0x1074) |  | Eastwind Shore |
+| `THE_BROKEN_BLUFFS` | 4213 (0x1075) |  | The Broken Bluffs |
+| `BOULDER_HILLS` | 4214 (0x1076) |  | Boulder Hills |
+| `RAGE_FANG_SHRINE` | 4215 (0x1077) |  | Rage Fang Shrine |
+| `DRAKIL_JIN_RUINS` | 4216 (0x1078) |  | Drakil'jin Ruins |
+| `BLACKRIVER_LOGGING_CAMP` | 4217 (0x1079) |  | Blackriver Logging Camp |
+| `HEARTS_BLOOD_SHRINE` | 4218 (0x107A) |  | Heart's Blood Shrine |
+| `HOLLOWSTONE_MINE` | 4219 (0x107B) |  | Hollowstone Mine |
+| `DUN_ARGOL` | 4220 (0x107C) |  | Dun Argol |
+| `THOR_MODAN` | 4221 (0x107D) |  | Thor Modan |
+| `BLUE_SKY_LOGGING_GROUNDS` | 4222 (0x107E) |  | Blue Sky Logging Grounds |
+| `MAW_OF_NELTHARION` | 4223 (0x107F) |  | Maw of Neltharion |
+| `THE_BRINY_PINNACLE` | 4224 (0x1080) |  | The Briny Pinnacle |
+| `GLITTERING_STRAND` | 4225 (0x1081) |  | Glittering Strand |
+| `ISKAAL` | 4226 (0x1082) |  | Iskaal |
+| `DRAGONS_FALL` | 4227 (0x1083) |  | Dragon's Fall |
+| `THE_OCULUS` | 4228 (0x1084) |  | The Oculus |
+| `PROSPECTORS_POINT` | 4229 (0x1085) |  | Prospector's Point |
+| `COLDWIND_HEIGHTS` | 4230 (0x1086) |  | Coldwind Heights |
+| `REDWOOD_TRADING_POST` | 4231 (0x1087) |  | Redwood Trading Post |
+| `VENGEANCE_PASS` | 4232 (0x1088) |  | Vengeance Pass |
+| `DAWNS_REACH` | 4233 (0x1089) |  | Dawn's Reach |
+| `NAXXRAMAS1` | 4234 (0x108A) |  | Naxxramas |
+| `HEARTWOOD_TRADING_POST` | 4235 (0x108B) |  | Heartwood Trading Post |
+| `EVERGREEN_TRADING_POST` | 4236 (0x108C) |  | Evergreen Trading Post |
+| `SPRUCE_POINT_POST` | 4237 (0x108D) |  | Spruce Point Post |
+| `WHITE_PINE_TRADING_POST` | 4238 (0x108E) |  | White Pine Trading Post |
+| `ASPEN_GROVE_POST` | 4239 (0x108F) |  | Aspen Grove Post |
+| `FORESTS_EDGE_POST` | 4240 (0x1090) |  | Forest's Edge Post |
+| `ELDRITCH_HEIGHTS` | 4241 (0x1091) |  | Eldritch Heights |
+| `VENTURE_BAY` | 4242 (0x1092) |  | Venture Bay |
+| `WINTERGARDE_CRYPT` | 4243 (0x1093) |  | Wintergarde Crypt |
+| `BLOODMOON_ISLE` | 4244 (0x1094) |  | Bloodmoon Isle |
+| `SHADOWFANG_TOWER` | 4245 (0x1095) |  | Shadowfang Tower |
+| `WINTERGARDE_MAUSOLEUM` | 4246 (0x1096) |  | Wintergarde Mausoleum |
+| `DUSKHOWL_DEN` | 4247 (0x1097) |  | Duskhowl Den |
+| `THE_CONQUEST_PIT` | 4248 (0x1098) |  | The Conquest Pit |
+| `THE_PATH_OF_IRON` | 4249 (0x1099) |  | The Path of Iron |
+| `RUINS_OF_TETHYS` | 4250 (0x109A) |  | Ruins of Tethys |
+| `SILVERBROOK_HILLS` | 4251 (0x109B) |  | Silverbrook Hills |
+| `THE_BROKEN_BLUFFS1` | 4252 (0x109C) |  | The Broken Bluffs |
+| `SEVENTH_LEGION_FRONT` | 4253 (0x109D) |  | 7th Legion Front |
+| `THE_DRAGON_WASTES` | 4254 (0x109E) |  | The Dragon Wastes |
+| `RUINS_OF_DRAK_ZIN` | 4255 (0x109F) |  | Ruins of Drak'Zin |
+| `DRAK_MAR_LAKE` | 4256 (0x10A0) |  | Drak'Mar Lake |
+| `DRAGONSPINE_TRIBUTARY` | 4257 (0x10A1) |  | Dragonspine Tributary |
+| `THE_NORTH_SEA1` | 4258 (0x10A2) |  | The North Sea |
+| `DRAK_URAL` | 4259 (0x10A3) |  | Drak'ural |
+| `THORVALDS_CAMP` | 4260 (0x10A4) |  | Thorvald's Camp |
+| `GHOSTBLADE_POST` | 4261 (0x10A5) |  | Ghostblade Post |
+| `ASHWOOD_POST` | 4262 (0x10A6) |  | Ashwood Post |
+| `LYDELLS_AMBUSH` | 4263 (0x10A7) |  | Lydell's Ambush |
+| `HALLS_OF_STONE` | 4264 (0x10A8) |  | Halls of Stone |
+| `THE_NEXUS1` | 4265 (0x10A9) |  | The Nexus |
+| `HARKORS_CAMP` | 4266 (0x10AA) |  | Harkor's Camp |
+| `VORDRASSIL_PASS` | 4267 (0x10AB) |  | Vordrassil Pass |
+| `RUUNAS_CAMP` | 4268 (0x10AC) |  | Ruuna's Camp |
+| `SHRINE_OF_SCALES` | 4269 (0x10AD) |  | Shrine of Scales |
+| `DRAK_ATAL_PASSAGE` | 4270 (0x10AE) |  | Drak'atal Passage |
+| `UTGARDE_PINNACLE1` | 4271 (0x10AF) |  | Utgarde Pinnacle |
+| `HALLS_OF_LIGHTNING` | 4272 (0x10B0) |  | Halls of Lightning |
+| `ULDUAR` | 4273 (0x10B1) |  | Ulduar |
+| `THE_ARGENT_STAND` | 4275 (0x10B3) |  | The Argent Stand |
+| `ALTAR_OF_SSERATUS` | 4276 (0x10B4) |  | Altar of Sseratus |
+| `AZJOL_NERUB1` | 4277 (0x10B5) |  | Azjol-Nerub |
+| `DRAKSOTRA_FIELDS` | 4278 (0x10B6) |  | Drak'Sotra Fields |
+| `DRAKSOTRA` | 4279 (0x10B7) |  | Drak'Sotra |
+| `DRAK_AGAL` | 4280 (0x10B8) |  | Drak'Agal |
+| `ACHERUS_THE_EBON_HOLD` | 4281 (0x10B9) |  | Acherus: The Ebon Hold |
+| `THE_AVALANCHE` | 4282 (0x10BA) |  | The Avalanche |
+| `THE_LOST_LANDS` | 4283 (0x10BB) |  | The Lost Lands |
+| `NESINGWARY_BASE_CAMP` | 4284 (0x10BC) |  | Nesingwary Base Camp |
+| `THE_SEABREACH_FLOW` | 4285 (0x10BD) |  | The Seabreach Flow |
+| `THE_BONES_OF_NOZRONN` | 4286 (0x10BE) |  | The Bones of Nozronn |
+| `KARTAKS_HOLD` | 4287 (0x10BF) |  | Kartak's Hold |
+| `SPARKTOUCHED_HAVEN` | 4288 (0x10C0) |  | Sparktouched Haven |
+| `THE_PATH_OF_THE_LIFEWARDEN` | 4289 (0x10C1) |  | The Path of the Lifewarden |
+| `RIVERS_HEART` | 4290 (0x10C2) |  | River's Heart |
+| `RAINSPEAKER_CANOPY` | 4291 (0x10C3) |  | Rainspeaker Canopy |
+| `FRENZYHEART_HILL` | 4292 (0x10C4) |  | Frenzyheart Hill |
+| `WILDGROWTH_MANGAL` | 4293 (0x10C5) |  | Wildgrowth Mangal |
+| `HEB_VALOK` | 4294 (0x10C6) |  | Heb'Valok |
+| `THE_SUNDERED_SHARD` | 4295 (0x10C7) |  | The Sundered Shard |
+| `THE_LIFEBLOOD_PILLAR` | 4296 (0x10C8) |  | The Lifeblood Pillar |
+| `MOSSWALKER_VILLAGE` | 4297 (0x10C9) |  | Mosswalker Village |
+| `PLAGUELANDS_THE_SCARLET_ENCLAVE` | 4298 (0x10CA) |  | Plaguelands: The Scarlet Enclave |
+| `KOLRAMAS` | 4299 (0x10CB) |  | Kolramas |
+| `WAYGATE` | 4300 (0x10CC) |  | Waygate |
+| `THE_SKYREACH_PILLAR` | 4302 (0x10CE) |  | The Skyreach Pillar |
+| `HARDKNUCKLE_CLEARING` | 4303 (0x10CF) |  | Hardknuckle Clearing |
+| `SAPPHIRE_HIVE` | 4304 (0x10D0) |  | Sapphire Hive |
+| `MISTWHISPER_REFUGE` | 4306 (0x10D2) |  | Mistwhisper Refuge |
+| `THE_GLIMMERING_PILLAR` | 4307 (0x10D3) |  | The Glimmering Pillar |
+| `SPEARBORN_ENCAMPMENT` | 4308 (0x10D4) |  | Spearborn Encampment |
+| `DRAK_THARON_KEEP2` | 4309 (0x10D5) |  | Drak'Tharon Keep |
+| `ZERAMAS` | 4310 (0x10D6) |  | Zeramas |
+| `RELIQUARY_OF_AGONY` | 4311 (0x10D7) |  | Reliquary of Agony |
+| `EBON_WATCH` | 4312 (0x10D8) |  | Ebon Watch |
+| `THRYMS_END` | 4313 (0x10D9) |  | Thrym's End |
+| `VOLTARUS` | 4314 (0x10DA) |  | Voltarus |
+| `RELIQUARY_OF_PAIN` | 4315 (0x10DB) |  | Reliquary of Pain |
+| `RAGECLAW_DEN` | 4316 (0x10DC) |  | Rageclaw Den |
+| `LIGHTS_BREACH` | 4317 (0x10DD) |  | Light's Breach |
+| `POOLS_OF_ZHA_JIN` | 4318 (0x10DE) |  | Pools of Zha'Jin |
+| `ZIM_ABWA` | 4319 (0x10DF) |  | Zim'Abwa |
+| `AMPHITHEATER_OF_ANGUISH` | 4320 (0x10E0) |  | Amphitheater of Anguish |
+| `ALTAR_OF_RHUNOK` | 4321 (0x10E1) |  | Altar of Rhunok |
+| `ALTAR_OF_HAR_KOA` | 4322 (0x10E2) |  | Altar of Har'koa |
+| `ZIM_TORGA` | 4323 (0x10E3) |  | Zim'Torga |
+| `POOLS_OF_JIN_ALAI` | 4324 (0x10E4) |  | Pools of Jin'Alai |
+| `ALTAR_OF_QUETZ_LUN` | 4325 (0x10E5) |  | Altar of Quetz'lun |
+| `HEB_DRAKKAR` | 4326 (0x10E6) |  | Heb'Drakkar |
+| `DRAK_MABWA` | 4327 (0x10E7) |  | Drak'Mabwa |
+| `ZIM_RHUK` | 4328 (0x10E8) |  | Zim'Rhuk |
+| `ALTAR_OF_MAM_TOTH` | 4329 (0x10E9) |  | Altar of Mam'toth |
+| `ACHERUS_THE_EBON_HOLD1` | 4342 (0x10F6) |  | Acherus: The Ebon Hold |
+| `NEW_AVALON` | 4343 (0x10F7) |  | New Avalon |
+| `NEW_AVALON_FIELDS` | 4344 (0x10F8) |  | New Avalon Fields |
+| `NEW_AVALON_ORCHARD` | 4345 (0x10F9) |  | New Avalon Orchard |
+| `NEW_AVALON_TOWN_HALL` | 4346 (0x10FA) |  | New Avalon Town Hall |
+| `HAVENSHIRE` | 4347 (0x10FB) |  | Havenshire |
+| `HAVENSHIRE_FARMS` | 4348 (0x10FC) |  | Havenshire Farms |
+| `HAVENSHIRE_LUMBER_MILL` | 4349 (0x10FD) |  | Havenshire Lumber Mill |
+| `HAVENSHIRE_STABLES` | 4350 (0x10FE) |  | Havenshire Stables |
+| `SCARLET_HOLD` | 4351 (0x10FF) |  | Scarlet Hold |
+| `CHAPEL_OF_THE_CRIMSON_FLAME` | 4352 (0x1100) |  | Chapel of the Crimson Flame |
+| `LIGHTS_POINT_TOWER` | 4353 (0x1101) |  | Light's Point Tower |
+| `LIGHTS_POINT` | 4354 (0x1102) |  | Light's Point |
+| `CRYPT_OF_REMEMBRANCE` | 4355 (0x1103) |  | Crypt of Remembrance |
+| `DEATHS_BREACH` | 4356 (0x1104) |  | Death's Breach |
+| `THE_NOXIOUS_GLADE1` | 4357 (0x1105) |  | The Noxious Glade |
+| `TYRS_HAND1` | 4358 (0x1106) |  | Tyr's Hand |
+| `KINGS_HARBOR` | 4359 (0x1107) |  | King's Harbor |
+| `SCARLET_OVERLOOK` | 4360 (0x1108) |  | Scarlet Overlook |
+| `LIGHTS_HOPE_CHAPEL1` | 4361 (0x1109) |  | Light's Hope Chapel |
+| `SINNERS_FOLLY1` | 4362 (0x110A) |  | Sinner's Folly |
+| `PESTILENT_SCAR1` | 4363 (0x110B) |  | Pestilent Scar |
+| `BROWMAN_MILL1` | 4364 (0x110C) |  | Browman Mill |
+| `HAVENSHIRE_MINE` | 4365 (0x110D) |  | Havenshire Mine |
+| `URSOCS_DEN` | 4366 (0x110E) |  | Ursoc's Den |
+| `THE_BLIGHT_LINE` | 4367 (0x110F) |  | The Blight Line |
+| `THE_BONEFIELDS` | 4368 (0x1110) |  | The Bonefields |
+| `DORIANS_OUTPOST` | 4369 (0x1111) |  | Dorian's Outpost |
+| `MAM_TOTH_CRATER` | 4371 (0x1113) |  | Mam'toth Crater |
+| `ZOL_MAZ_STRONGHOLD` | 4372 (0x1114) |  | Zol'Maz Stronghold |
+| `ZOL_HEB` | 4373 (0x1115) |  | Zol'Heb |
+| `RAGECLAW_LAKE` | 4374 (0x1116) |  | Rageclaw Lake |
+| `GUNDRAK` | 4375 (0x1117) |  | Gundrak |
+| `THE_SAVAGE_THICKET` | 4376 (0x1118) |  | The Savage Thicket |
+| `NEW_AVALON_FORGE` | 4377 (0x1119) |  | New Avalon Forge |
+| `DALARAN_ARENA` | 4378 (0x111A) |  | Dalaran Arena |
+| `VALGARDE1` | 4379 (0x111B) |  | Valgarde |
+| `WESTGUARD_INN` | 4380 (0x111C) |  | Westguard Inn |
+| `WAYGATE1` | 4381 (0x111D) |  | Waygate |
+| `THE_SHAPERS_TERRACE` | 4382 (0x111E) |  | The Shaper's Terrace |
+| `LAKESIDE_LANDING` | 4383 (0x111F) |  | Lakeside Landing |
+| `STRAND_OF_THE_ANCIENTS` | 4384 (0x1120) |  | Strand of the Ancients |
+| `BITTERTIDE_LAKE` | 4385 (0x1121) |  | Bittertide Lake |
+| `RAINSPEAKER_RAPIDS` | 4386 (0x1122) |  | Rainspeaker Rapids |
+| `FRENZYHEART_RIVER` | 4387 (0x1123) |  | Frenzyheart River |
+| `WINTERGRASP_RIVER` | 4388 (0x1124) |  | Wintergrasp River |
+| `THE_SUNTOUCHED_PILLAR` | 4389 (0x1125) |  | The Suntouched Pillar |
+| `FRIGID_BREACH` | 4390 (0x1126) |  | Frigid Breach |
+| `SWINDLEGRINS_DIG` | 4391 (0x1127) |  | Swindlegrin's Dig |
+| `THE_STORMWRIGHTS_SHELF` | 4392 (0x1128) |  | The Stormwright's Shelf |
+| `DEATHS_HAND_ENCAMPMENT` | 4393 (0x1129) |  | Death's Hand Encampment |
+| `SCARLET_TAVERN` | 4394 (0x112A) |  | Scarlet Tavern |
+| `DALARAN` | 4395 (0x112B) |  | Dalaran |
+| `NOZZLERUST_POST` | 4396 (0x112C) |  | Nozzlerust Post |
+| `FARSHIRE_MINE` | 4399 (0x112F) |  | Farshire Mine |
+| `THE_MOSSLIGHT_PILLAR` | 4400 (0x1130) |  | The Mosslight Pillar |
+| `SARAGOSAS_LANDING` | 4401 (0x1131) |  | Saragosa's Landing |
+| `VENGEANCE_LIFT` | 4402 (0x1132) |  | Vengeance Lift |
+| `BALEJAR_WATCH` | 4403 (0x1133) |  | Balejar Watch |
+| `NEW_AGAMAND_INN` | 4404 (0x1134) |  | New Agamand Inn |
+| `PASSAGE_OF_LOST_FIENDS` | 4405 (0x1135) |  | Passage of Lost Fiends |
+| `THE_RING_OF_VALOR` | 4406 (0x1136) |  | The Ring of Valor |
+| `HALL_OF_THE_FROSTWOLF` | 4407 (0x1137) |  | Hall of the Frostwolf |
+| `HALL_OF_THE_STORMPIKE` | 4408 (0x1138) |  | Hall of the Stormpike |
+| `STORMWIND_HARBOR` | 4411 (0x113B) |  | Stormwind Harbor |
+| `THE_MAKERS_OVERLOOK` | 4412 (0x113C) |  | The Makers' Overlook |
+| `THE_MAKERS_PERCH` | 4413 (0x113D) |  | The Makers' Perch |
+| `SCARLET_TOWER` | 4414 (0x113E) |  | Scarlet Tower |
+| `THE_VIOLET_HOLD` | 4415 (0x113F) |  | The Violet Hold |
+| `GUNDRAK1` | 4416 (0x1140) |  | Gundrak |
+| `ONSLAUGHT_HARBOR` | 4417 (0x1141) |  | Onslaught Harbor |
+| `K3` | 4418 (0x1142) |  | K3 |
+| `SNOWBLIND_HILLS` | 4419 (0x1143) |  | Snowblind Hills |
+| `SNOWBLIND_TERRACE` | 4420 (0x1144) |  | Snowblind Terrace |
+| `GARM` | 4421 (0x1145) |  | Garm |
+| `BRUNNHILDAR_VILLAGE` | 4422 (0x1146) |  | Brunnhildar Village |
+| `SIFRELDAR_VILLAGE` | 4423 (0x1147) |  | Sifreldar Village |
+| `VALKYRION` | 4424 (0x1148) |  | Valkyrion |
+| `THE_FORLORN_MINE` | 4425 (0x1149) |  | The Forlorn Mine |
+| `BORS_BREATH_RIVER` | 4426 (0x114A) |  | Bor's Breath River |
+| `ARGENT_VANGUARD` | 4427 (0x114B) |  | Argent Vanguard |
+| `FROSTHOLD` | 4428 (0x114C) |  | Frosthold |
+| `GROM_ARSH_CRASH_SITE` | 4429 (0x114D) |  | Grom'arsh Crash-Site |
+| `TEMPLE_OF_STORMS` | 4430 (0x114E) |  | Temple of Storms |
+| `ENGINE_OF_THE_MAKERS` | 4431 (0x114F) |  | Engine of the Makers |
+| `THE_FOOT_STEPPES` | 4432 (0x1150) |  | The Foot Steppes |
+| `DRAGONSPINE_PEAKS` | 4433 (0x1151) |  | Dragonspine Peaks |
+| `NIDAVELIR` | 4434 (0x1152) |  | Nidavelir |
+| `NARVIRS_CRADLE` | 4435 (0x1153) |  | Narvir's Cradle |
+| `SNOWDRIFT_PLAINS` | 4436 (0x1154) |  | Snowdrift Plains |
+| `VALLEY_OF_ANCIENT_WINTERS` | 4437 (0x1155) |  | Valley of Ancient Winters |
+| `DUN_NIFFELEM` | 4438 (0x1156) |  | Dun Niffelem |
+| `FROSTFIELD_LAKE` | 4439 (0x1157) |  | Frostfield Lake |
+| `THUNDERFALL` | 4440 (0x1158) |  | Thunderfall |
+| `CAMP_TUNKA_LO` | 4441 (0x1159) |  | Camp Tunka'lo |
+| `BRANNS_BASE_CAMP` | 4442 (0x115A) |  | Brann's Base-Camp |
+| `GATE_OF_ECHOES` | 4443 (0x115B) |  | Gate of Echoes |
+| `PLAIN_OF_ECHOES` | 4444 (0x115C) |  | Plain of Echoes |
+| `ULDUAR1` | 4445 (0x115D) |  | Ulduar |
+| `TERRACE_OF_THE_MAKERS` | 4446 (0x115E) |  | Terrace of the Makers |
+| `GATE_OF_LIGHTNING` | 4447 (0x115F) |  | Gate of Lightning |
+| `PATH_OF_THE_TITANS1` | 4448 (0x1160) |  | Path of the Titans |
+| `ULDIS` | 4449 (0x1161) |  | Uldis |
+| `LOKENS_BARGAIN` | 4450 (0x1162) |  | Loken's Bargain |
+| `BORS_FALL` | 4451 (0x1163) |  | Bor's Fall |
+| `BORS_BREATH` | 4452 (0x1164) |  | Bor's Breath |
+| `ROHEMDAL_PASS` | 4453 (0x1165) |  | Rohemdal Pass |
+| `THE_STORM_FOUNDRY` | 4454 (0x1166) |  | The Storm Foundry |
+| `HIBERNAL_CAVERN` | 4455 (0x1167) |  | Hibernal Cavern |
+| `VOLDRUNE_DWELLING` | 4456 (0x1168) |  | Voldrune Dwelling |
+| `TORSEGS_REST` | 4457 (0x1169) |  | Torseg's Rest |
+| `SPARKSOCKET_MINEFIELD` | 4458 (0x116A) |  | Sparksocket Minefield |
+| `RICKETS_FOLLY` | 4459 (0x116B) |  | Ricket's Folly |
+| `GARMS_BANE` | 4460 (0x116C) |  | Garm's Bane |
+| `GARMS_RISE` | 4461 (0x116D) |  | Garm's Rise |
+| `CRYSTALWEB_CAVERN` | 4462 (0x116E) |  | Crystalweb Cavern |
+| `TEMPLE_OF_LIFE` | 4463 (0x116F) |  | Temple of Life |
+| `TEMPLE_OF_ORDER` | 4464 (0x1170) |  | Temple of Order |
+| `TEMPLE_OF_WINTER` | 4465 (0x1171) |  | Temple of Winter |
+| `TEMPLE_OF_INVENTION` | 4466 (0x1172) |  | Temple of Invention |
+| `DEATHS_RISE` | 4467 (0x1173) |  | Death's Rise |
+| `THE_DEAD_FIELDS` | 4468 (0x1174) |  | The Dead Fields |
+| `DARGATHS_DEMISE` | 4469 (0x1175) |  | Dargath's Demise |
+| `THE_HIDDEN_HOLLOW` | 4470 (0x1176) |  | The Hidden Hollow |
+| `BERNAUS_HAPPY_FUN_LAND` | 4471 (0x1177) |  | Bernau's Happy Fun Land |
+| `FROSTGRIPS_HOLLOW` | 4472 (0x1178) |  | Frostgrip's Hollow |
+| `THE_FRIGID_TOMB` | 4473 (0x1179) |  | The Frigid Tomb |
+| `TWIN_SHORES` | 4474 (0x117A) |  | Twin Shores |
+| `ZIM_BOS_HIDEOUT` | 4475 (0x117B) |  | Zim'bo's Hideout |
+| `ABANDONED_CAMP` | 4476 (0x117C) |  | Abandoned Camp |
+| `THE_SHADOW_VAULT` | 4477 (0x117D) |  | The Shadow Vault |
+| `COLDWIND_PASS` | 4478 (0x117E) |  | Coldwind Pass |
+| `WINTERS_BREATH_LAKE` | 4479 (0x117F) |  | Winter's Breath Lake |
+| `THE_FORGOTTEN_OVERLOOK` | 4480 (0x1180) |  | The Forgotten Overlook |
+| `JINTHA_KALAR_PASSAGE` | 4481 (0x1181) |  | Jintha'kalar Passage |
+| `ARRIGA_FOOTBRIDGE` | 4482 (0x1182) |  | Arriga Footbridge |
+| `THE_LOST_PASSAGE` | 4483 (0x1183) |  | The Lost Passage |
+| `BOULDERCRAGS_REFUGE` | 4484 (0x1184) |  | Bouldercrag's Refuge |
+| `THE_INVENTORS_LIBRARY` | 4485 (0x1185) |  | The Inventor's Library |
+| `THE_FROZEN_MINE` | 4486 (0x1186) |  | The Frozen Mine |
+| `FROSTFLOE_DEEP` | 4487 (0x1187) |  | Frostfloe Deep |
+| `THE_HOWLING_HOLLOW` | 4488 (0x1188) |  | The Howling Hollow |
+| `CRUSADER_FORWARD_CAMP` | 4489 (0x1189) |  | Crusader Forward Camp |
+| `STORMCREST` | 4490 (0x118A) |  | Stormcrest |
+| `BONESNAPS_CAMP` | 4491 (0x118B) |  | Bonesnap's Camp |
+| `UFRANGS_HALL` | 4492 (0x118C) |  | Ufrang's Hall |
+| `THE_OBSIDIAN_SANCTUM` | 4493 (0x118D) |  | The Obsidian Sanctum |
+| `AHN_KAHET_THE_OLD_KINGDOM` | 4494 (0x118E) |  | Ahn'kahet: The Old Kingdom |
+| `FJORNS_ANVIL` | 4495 (0x118F) |  | Fjorn's Anvil |
+| `JOTUNHEIM` | 4496 (0x1190) |  | Jotunheim |
+| `SAVAGE_LEDGE` | 4497 (0x1191) |  | Savage Ledge |
+| `HALLS_OF_THE_ANCESTORS` | 4498 (0x1192) |  | Halls of the Ancestors |
+| `THE_BLIGHTED_POOL` | 4499 (0x1193) |  | The Blighted Pool |
+| `THE_EYE_OF_ETERNITY` | 4500 (0x1194) |  | The Eye of Eternity |
+| `THE_ARGENT_VANGUARD` | 4501 (0x1195) |  | The Argent Vanguard |
+| `MIMIRS_WORKSHOP` | 4502 (0x1196) |  | Mimir's Workshop |
+| `IRONWALL_DAM` | 4503 (0x1197) |  | Ironwall Dam |
+| `VALLEY_OF_ECHOES` | 4504 (0x1198) |  | Valley of Echoes |
+| `THE_BREACH` | 4505 (0x1199) |  | The Breach |
+| `SCOURGEHOLME` | 4506 (0x119A) |  | Scourgeholme |
+| `THE_BROKEN_FRONT` | 4507 (0x119B) |  | The Broken Front |
+| `MORD_RETHAR_THE_DEATH_GATE` | 4508 (0x119C) |  | Mord'rethar: The Death Gate |
+| `THE_BOMBARDMENT` | 4509 (0x119D) |  | The Bombardment |
+| `ALDUR_THAR_THE_DESOLATION_GATE` | 4510 (0x119E) |  | Aldur'thar: The Desolation Gate |
+| `THE_SKYBREAKER` | 4511 (0x119F) |  | The Skybreaker |
+| `ORGRIMS_HAMMER` | 4512 (0x11A0) |  | Orgrim's Hammer |
+| `YMIRHEIM` | 4513 (0x11A1) |  | Ymirheim |
+| `SARONITE_MINES` | 4514 (0x11A2) |  | Saronite Mines |
+| `THE_CONFLAGRATION` | 4515 (0x11A3) |  | The Conflagration |
+| `IRONWALL_RAMPART` | 4516 (0x11A4) |  | Ironwall Rampart |
+| `WEEPING_QUARRY` | 4517 (0x11A5) |  | Weeping Quarry |
+| `CORP_RETHAR_THE_HORROR_GATE` | 4518 (0x11A6) |  | Corp'rethar: The Horror Gate |
+| `THE_COURT_OF_BONES` | 4519 (0x11A7) |  | The Court of Bones |
+| `MALYKRISS_THE_VILE_HOLD` | 4520 (0x11A8) |  | Malykriss: The Vile Hold |
+| `CATHEDRAL_OF_DARKNESS` | 4521 (0x11A9) |  | Cathedral of Darkness |
+| `ICECROWN_CITADEL` | 4522 (0x11AA) |  | Icecrown Citadel |
+| `ICECROWN_GLACIER` | 4523 (0x11AB) |  | Icecrown Glacier |
+| `VALHALAS` | 4524 (0x11AC) |  | Valhalas |
+| `THE_UNDERHALLS` | 4525 (0x11AD) |  | The Underhalls |
+| `NJORNDAR_VILLAGE` | 4526 (0x11AE) |  | Njorndar Village |
+| `BALARGARDE_FORTRESS` | 4527 (0x11AF) |  | Balargarde Fortress |
+| `KUL_GALAR_KEEP` | 4528 (0x11B0) |  | Kul'galar Keep |
+| `THE_CRIMSON_CATHEDRAL` | 4529 (0x11B1) |  | The Crimson Cathedral |
+| `SANCTUM_OF_REANIMATION` | 4530 (0x11B2) |  | Sanctum of Reanimation |
+| `THE_FLESHWERKS` | 4531 (0x11B3) |  | The Fleshwerks |
+| `VENGEANCE_LANDING_INN` | 4532 (0x11B4) |  | Vengeance Landing Inn |
+| `SINDRAGOSAS_FALL` | 4533 (0x11B5) |  | Sindragosa's Fall |
+| `WILDERVAR_MINE` | 4534 (0x11B6) |  | Wildervar Mine |
+| `THE_PIT_OF_THE_FANG` | 4535 (0x11B7) |  | The Pit of the Fang |
+| `FROSTHOWL_CAVERN` | 4536 (0x11B8) |  | Frosthowl Cavern |
+| `THE_VALLEY_OF_LOST_HOPE` | 4537 (0x11B9) |  | The Valley of Lost Hope |
+| `THE_SUNKEN_RING` | 4538 (0x11BA) |  | The Sunken Ring |
+| `THE_BROKEN_TEMPLE` | 4539 (0x11BB) |  | The Broken Temple |
+| `THE_VALLEY_OF_FALLEN_HEROES` | 4540 (0x11BC) |  | The Valley of Fallen Heroes |
+| `VANGUARD_INFIRMARY` | 4541 (0x11BD) |  | Vanguard Infirmary |
+| `HALL_OF_THE_SHAPER` | 4542 (0x11BE) |  | Hall of the Shaper |
+| `TEMPLE_OF_WISDOM` | 4543 (0x11BF) |  | Temple of Wisdom |
+| `DEATHS_BREACH1` | 4544 (0x11C0) |  | Death's Breach |
+| `ABANDONED_MINE` | 4545 (0x11C1) |  | Abandoned Mine |
+| `RUINS_OF_THE_SCARLET_ENCLAVE` | 4546 (0x11C2) |  | Ruins of the Scarlet Enclave |
+| `HALLS_OF_STONE1` | 4547 (0x11C3) |  | Halls of Stone |
+| `HALLS_OF_LIGHTNING1` | 4548 (0x11C4) |  | Halls of Lightning |
+| `THE_GREAT_TREE` | 4549 (0x11C5) |  | The Great Tree |
+| `THE_MIRROR_OF_TWILIGHT` | 4550 (0x11C6) |  | The Mirror of Twilight |
+| `THE_TWILIGHT_RIVULET` | 4551 (0x11C7) |  | The Twilight Rivulet |
+| `THE_DECREPIT_FLOW` | 4552 (0x11C8) |  | The Decrepit Flow |
+| `FORLORN_WOODS` | 4553 (0x11C9) |  | Forlorn Woods |
+| `RUINS_OF_SHANDARAL` | 4554 (0x11CA) |  | Ruins of Shandaral |
+| `THE_AZURE_FRONT` | 4555 (0x11CB) |  | The Azure Front |
+| `VIOLET_STAND` | 4556 (0x11CC) |  | Violet Stand |
+| `THE_UNBOUND_THICKET` | 4557 (0x11CD) |  | The Unbound Thicket |
+| `SUNREAVERS_COMMAND` | 4558 (0x11CE) |  | Sunreaver's Command |
+| `WINDRUNNERS_OVERLOOK` | 4559 (0x11CF) |  | Windrunner's Overlook |
+| `THE_UNDERBELLY` | 4560 (0x11D0) |  | The Underbelly |
+| `KRASUS_LANDING` | 4564 (0x11D4) |  | Krasus' Landing |
+| `THE_VIOLET_HOLD1` | 4567 (0x11D7) |  | The Violet Hold |
+| `THE_EVENTIDE` | 4568 (0x11D8) |  | The Eventide |
+| `SEWER_EXIT_PIPE` | 4569 (0x11D9) |  | Sewer Exit Pipe |
+| `CIRCLE_OF_WILLS` | 4570 (0x11DA) |  | Circle of Wills |
+| `SILVERWING_FLAG_ROOM` | 4571 (0x11DB) |  | Silverwing Flag Room |
+| `WARSONG_FLAG_ROOM` | 4572 (0x11DC) |  | Warsong Flag Room |
+| `WINTERGRASP_FORTRESS` | 4575 (0x11DF) |  | Wintergrasp Fortress |
+| `CENTRAL_BRIDGE` | 4576 (0x11E0) |  | Central Bridge |
+| `EASTERN_BRIDGE` | 4577 (0x11E1) |  | Eastern Bridge |
+| `WESTERN_BRIDGE` | 4578 (0x11E2) |  | Western Bridge |
+| `DUBRA_JIN` | 4579 (0x11E3) |  | Dubra'Jin |
+| `CRUSADERS_PINNACLE` | 4580 (0x11E4) |  | Crusaders' Pinnacle |
+| `FLAMEWATCH_TOWER` | 4581 (0x11E5) |  | Flamewatch Tower |
+| `WINTERS_EDGE_TOWER` | 4582 (0x11E6) |  | Winter's Edge Tower |
+| `SHADOWSIGHT_TOWER` | 4583 (0x11E7) |  | Shadowsight Tower |
+| `THE_CAULDRON_OF_FLAMES` | 4584 (0x11E8) |  | The Cauldron of Flames |
+| `GLACIAL_FALLS` | 4585 (0x11E9) |  | Glacial Falls |
+| `WINDY_BLUFFS` | 4586 (0x11EA) |  | Windy Bluffs |
+| `THE_FOREST_OF_SHADOWS` | 4587 (0x11EB) |  | The Forest of Shadows |
+| `BLACKWATCH` | 4588 (0x11EC) |  | Blackwatch |
+| `THE_CHILLED_QUAGMIRE` | 4589 (0x11ED) |  | The Chilled Quagmire |
+| `THE_STEPPE_OF_LIFE` | 4590 (0x11EE) |  | The Steppe of Life |
+| `SILENT_VIGIL` | 4591 (0x11EF) |  | Silent Vigil |
+| `GIMORAKS_DEN` | 4592 (0x11F0) |  | Gimorak's Den |
+| `THE_PIT_OF_FIENDS` | 4593 (0x11F1) |  | The Pit of Fiends |
+| `BATTLESCAR_SPIRE` | 4594 (0x11F2) |  | Battlescar Spire |
+| `HALL_OF_HORRORS` | 4595 (0x11F3) |  | Hall of Horrors |
+| `THE_CIRCLE_OF_SUFFERING` | 4596 (0x11F4) |  | The Circle of Suffering |
+| `RISE_OF_SUFFERING` | 4597 (0x11F5) |  | Rise of Suffering |
+| `KRASUS_LANDING1` | 4598 (0x11F6) |  | Krasus' Landing |
+| `SEWER_EXIT_PIPE1` | 4599 (0x11F7) |  | Sewer Exit Pipe |
+| `DALARAN_ISLAND` | 4601 (0x11F9) |  | Dalaran Island |
+| `FORCE_INTERIOR` | 4602 (0x11FA) |  | Force Interior |
+| `VAULT_OF_ARCHAVON` | 4603 (0x11FB) |  | Vault of Archavon |
+| `GATE_OF_THE_RED_SUN` | 4604 (0x11FC) |  | Gate of the Red Sun |
+| `GATE_OF_THE_BLUE_SAPPHIRE` | 4605 (0x11FD) |  | Gate of the Blue Sapphire |
+| `GATE_OF_THE_GREEN_EMERALD` | 4606 (0x11FE) |  | Gate of the Green Emerald |
+| `GATE_OF_THE_PURPLE_AMETHYST` | 4607 (0x11FF) |  | Gate of the Purple Amethyst |
+| `GATE_OF_THE_YELLOW_MOON` | 4608 (0x1200) |  | Gate of the Yellow Moon |
+| `COURTYARD_OF_THE_ANCIENTS` | 4609 (0x1201) |  | Courtyard of the Ancients |
+| `LANDING_BEACH` | 4610 (0x1202) |  | Landing Beach |
+| `WESTSPARK_WORKSHOP` | 4611 (0x1203) |  | Westspark Workshop |
+| `EASTSPARK_WORKSHOP` | 4612 (0x1204) |  | Eastspark Workshop |
+| `DALARAN_CITY` | 4613 (0x1205) |  | Dalaran City |
+| `THE_VIOLET_CITADEL_SPIRE` | 4614 (0x1206) |  | The Violet Citadel Spire |
+| `NAZ_ANAK_THE_FORGOTTEN_DEPTHS` | 4615 (0x1207) |  | Naz'anak: The Forgotten Depths |
+| `SUNREAVERS_SANCTUARY` | 4616 (0x1208) |  | Sunreaver's Sanctuary |
+| `ELEVATOR` | 4617 (0x1209) |  | Elevator |
+| `ANTONIDAS_MEMORIAL` | 4618 (0x120A) |  | Antonidas Memorial |
+| `THE_VIOLET_CITADEL` | 4619 (0x120B) |  | The Violet Citadel |
+| `MAGUS_COMMERCE_EXCHANGE` | 4620 (0x120C) |  | Magus Commerce Exchange |
+| `UNUSED` | 4621 (0x120D) |  | UNUSED |
+| `FIRST_LEGION_FORWARD_CAMP` | 4622 (0x120E) |  | First Legion Forward Camp |
+| `HALL_OF_THE_CONQUERED_KINGS` | 4623 (0x120F) |  | Hall of the Conquered Kings |
+| `BEFOULED_TERRACE` | 4624 (0x1210) |  | Befouled Terrace |
+| `THE_DESECRATED_ALTAR` | 4625 (0x1211) |  | The Desecrated Altar |
+| `SHIMMERING_BOG` | 4626 (0x1212) |  | Shimmering Bog |
+| `FALLEN_TEMPLE_OF_AHN_KAHET` | 4627 (0x1213) |  | Fallen Temple of Ahn'kahet |
+| `HALLS_OF_BINDING` | 4628 (0x1214) |  | Halls of Binding |
+| `WINTERS_HEART` | 4629 (0x1215) |  | Winter's Heart |
+| `THE_NORTH_SEA2` | 4630 (0x1216) |  | The North Sea |
+| `THE_BROODMOTHERS_NEST` | 4631 (0x1217) |  | The Broodmother's Nest |
+| `DALARAN_FLOATING_ROCKS` | 4632 (0x1218) |  | Dalaran Floating Rocks |
+| `RAPTOR_PENS` | 4633 (0x1219) |  | Raptor Pens |
+| `DRAK_THARON_KEEP3` | 4635 (0x121B) |  | Drak'Tharon Keep |
+| `THE_NOXIOUS_PASS` | 4636 (0x121C) |  | The Noxious Pass |
+| `VARGOTHS_RETREAT` | 4637 (0x121D) |  | Vargoth's Retreat |
+| `VIOLET_CITADEL_BALCONY` | 4638 (0x121E) |  | Violet Citadel Balcony |
+| `BAND_OF_VARIANCE` | 4639 (0x121F) |  | Band of Variance |
+| `BAND_OF_ACCELERATION` | 4640 (0x1220) |  | Band of Acceleration |
+| `BAND_OF_TRANSMUTATION` | 4641 (0x1221) |  | Band of Transmutation |
+| `BAND_OF_ALIGNMENT` | 4642 (0x1222) |  | Band of Alignment |
+| `ASHWOOD_LAKE` | 4646 (0x1226) |  | Ashwood Lake |
+| `IRON_CONCOURSE` | 4650 (0x122A) |  | Iron Concourse |
+| `FORMATION_GROUNDS` | 4652 (0x122C) |  | Formation Grounds |
+| `RAZORSCALES_AERIE` | 4653 (0x122D) |  | Razorscale's Aerie |
+| `THE_COLOSSAL_FORGE` | 4654 (0x122E) |  | The Colossal Forge |
+| `THE_SCRAPYARD` | 4655 (0x122F) |  | The Scrapyard |
+| `THE_CONSERVATORY_OF_LIFE` | 4656 (0x1230) |  | The Conservatory of Life |
+| `THE_ARCHIVUM` | 4657 (0x1231) |  | The Archivum |
+| `ARGENT_TOURNAMENT_GROUNDS` | 4658 (0x1232) |  | Argent Tournament Grounds |
+| `EXPEDITION_BASE_CAMP` | 4665 (0x1239) |  | Expedition Base Camp |
+| `SUNREAVER_PAVILION` | 4666 (0x123A) |  | Sunreaver Pavilion |
+| `SILVER_COVENANT_PAVILION` | 4667 (0x123B) |  | Silver Covenant Pavilion |
+| `THE_COOPER_RESIDENCE` | 4668 (0x123C) |  | The Cooper Residence |
+| `THE_RING_OF_CHAMPIONS` | 4669 (0x123D) |  | The Ring of Champions |
+| `THE_ASPIRANTS_RING` | 4670 (0x123E) |  | The Aspirants' Ring |
+| `THE_ARGENT_VALIANTS_RING` | 4671 (0x123F) |  | The Argent Valiants' Ring |
+| `THE_ALLIANCE_VALIANTS_RING` | 4672 (0x1240) |  | The Alliance Valiants' Ring |
+| `THE_HORDE_VALIANTS_RING` | 4673 (0x1241) |  | The Horde Valiants' Ring |
+| `ARGENT_PAVILION` | 4674 (0x1242) |  | Argent Pavilion |
+| `SUNREAVER_PAVILION1` | 4676 (0x1244) |  | Sunreaver Pavilion |
+| `SILVER_COVENANT_PAVILION1` | 4677 (0x1245) |  | Silver Covenant Pavilion |
+| `THE_FORLORN_CAVERN` | 4679 (0x1247) |  | The Forlorn Cavern |
+| `CLAYTONIO_TEST_AREA` | 4688 (0x1250) |  | claytonio test area |
+| `QUEL_DELARS_REST` | 4692 (0x1254) |  | Quel'Delar's Rest |
+| `ISLE_OF_CONQUEST` | 4710 (0x1266) |  | Isle of Conquest |
+| `TRIAL_OF_THE_CRUSADER` | 4722 (0x1272) |  | Trial of the Crusader |
+| `TRIAL_OF_THE_CHAMPION` | 4723 (0x1273) |  | Trial of the Champion |
+| `RUNEWEAVER_SQUARE` | 4739 (0x1283) |  | Runeweaver Square |
+| `THE_SILVER_ENCLAVE` | 4740 (0x1284) |  | The Silver Enclave |
+| `ISLE_OF_CONQUEST_NO_MANS_LAND` | 4741 (0x1285) |  | Isle of Conquest No Man's Land |
+| `HROTHGARS_LANDING` | 4742 (0x1286) |  | Hrothgar's Landing |
+| `DEATHSPEAKERS_WATCH` | 4743 (0x1287) |  | Deathspeaker's Watch |
+| `WORKSHOP` | 4747 (0x128B) |  | Workshop |
+| `QUARRY` | 4748 (0x128C) |  | Quarry |
+| `DOCKS` | 4749 (0x128D) |  | Docks |
+| `HANGAR` | 4750 (0x128E) |  | Hangar |
+| `REFINERY` | 4751 (0x128F) |  | Refinery |
+| `HORDE_KEEP` | 4752 (0x1290) |  | Horde Keep |
+| `ALLIANCE_KEEP` | 4753 (0x1291) |  | Alliance Keep |
+| `THE_SEA_REAVERS_RUN` | 4760 (0x1298) |  | The Sea Reaver's Run |
+| `TRANSPORT_ALLIANCE_GUNSHIP` | 4763 (0x129B) |  | Transport: Alliance Gunship |
+| `TRANSPORT_HORDE_GUNSHIP` | 4764 (0x129C) |  | Transport: Horde Gunship |
+| `HROTHGARS_LANDING1` | 4769 (0x12A1) |  | Hrothgar's Landing |
+| `THE_FORGE_OF_SOULS` | 4809 (0x12C9) |  | The Forge of Souls |
+| `ICECROWN_CITADEL1` | 4812 (0x12CC) |  | Icecrown Citadel |
+| `PIT_OF_SARON` | 4813 (0x12CD) |  | Pit of Saron |
+| `HALLS_OF_REFLECTION` | 4820 (0x12D4) |  | Halls of Reflection |
+| `TRANSPORT_ALLIANCE_GUNSHIP_IGB` | 4832 (0x12E0) |  | Transport: Alliance Gunship (IGB) |
+| `TRANSPORT_HORDE_GUNSHIP_IGB` | 4833 (0x12E1) |  | Transport: Horde Gunship (IGB) |
+| `THE_FROZEN_THRONE` | 4859 (0x12FB) |  | The Frozen Throne |
+| `THE_FROZEN_HALLS` | 4862 (0x12FE) |  | The Frozen Halls |
+| `THE_FROST_QUEENS_LAIR` | 4889 (0x1319) |  | The Frost Queen's Lair |
+| `PUTRICIDES_LABORATORY_OF_ALCHEMICAL_HORRORS_AND_FUN` | 4890 (0x131A) |  | Putricide's Laboratory of Alchemical Horrors and Fun |
+| `THE_SANCTUM_OF_BLOOD` | 4891 (0x131B) |  | The Sanctum of Blood |
+| `THE_CRIMSON_HALL` | 4892 (0x131C) |  | The Crimson Hall |
+| `THE_FROST_QUEENS_LAIR1` | 4893 (0x131D) |  | The Frost Queen's Lair |
+| `PUTRICIDES_LABORATORY_OF_ALCHEMICAL_HORRORS_AND_FUN1` | 4894 (0x131E) |  | Putricide's Laboratory of Alchemical Horrors and Fun |
+| `THE_CRIMSON_HALL1` | 4895 (0x131F) |  | The Crimson Hall |
+| `THE_FROZEN_THRONE1` | 4896 (0x1320) |  | The Frozen Throne |
+| `THE_SANCTUM_OF_BLOOD1` | 4897 (0x1321) |  | The Sanctum of Blood |
+| `FROSTMOURNE` | 4898 (0x1322) |  | Frostmourne |
+| `THE_DARK_APPROACH` | 4904 (0x1328) |  | The Dark Approach |
+| `SCOURGELORDS_COMMAND` | 4905 (0x1329) |  | Scourgelord's Command |
+| `THE_SHADOW_THRONE` | 4906 (0x132A) |  | The Shadow Throne |
+| `THE_HIDDEN_PASSAGE` | 4908 (0x132C) |  | The Hidden Passage |
+| `FROSTMOURNE1` | 4910 (0x132E) |  | Frostmourne |
+| `THE_RUBY_SANCTUM` | 4987 (0x137B) |  | The Ruby Sanctum |
 
 Used in:
 * [CMSG_ZONEUPDATE](cmsg_zoneupdate.md)

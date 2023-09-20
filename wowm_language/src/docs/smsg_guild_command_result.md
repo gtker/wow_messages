@@ -25,11 +25,11 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | 4 / - | [GuildCommand](guildcommand.md) | command |  |  |
-| 0x08 | - / - | CString | string |  |  |
-| - | 4 / - | [GuildCommandResult](guildcommandresult.md) | result |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x04 | 4 / - | [GuildCommand](guildcommand.md) | command |  |
+| 0x08 | - / - | CString | string |  |
+| - | 4 / - | [GuildCommandResult](guildcommandresult.md) | result |  |
 
 ## Client Version 2.4.3
 
@@ -56,11 +56,11 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | 4 / - | [GuildCommand](guildcommand.md) | command |  |  |
-| 0x08 | - / - | CString | string |  |  |
-| - | 4 / - | [GuildCommandResult](guildcommandresult.md) | result |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x04 | 4 / - | [GuildCommand](guildcommand.md) | command |  |
+| 0x08 | - / - | CString | string |  |
+| - | 4 / - | [GuildCommandResult](guildcommandresult.md) | result |  |
 
 ## Client Version 3.3.5
 
@@ -87,9 +87,9 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | 4 / - | [GuildCommand](guildcommand.md) | command |  |  |
-| - | - / - | CString | string |  |  |
-| - | 4 / - | [GuildCommandResult](guildcommandresult.md) | result |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| - | 4 / - | [GuildCommand](guildcommand.md) | command |  |
+| - | - / - | CString | string |  |
+| - | 4 / - | [GuildCommandResult](guildcommandresult.md) | result |  |
 

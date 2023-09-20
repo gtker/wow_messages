@@ -25,11 +25,11 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | 8 / Little | [Guid](../types/packed-guid.md) | petition |  |  |
-| 0x0C | 8 / Little | [Guid](../types/packed-guid.md) | owner |  |  |
-| 0x14 | 4 / - | [PetitionResult](petitionresult.md) | result |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x04 | 8 / Little | [Guid](../types/packed-guid.md) | petition |  |
+| 0x0C | 8 / Little | [Guid](../types/packed-guid.md) | owner |  |
+| 0x14 | 4 / - | [PetitionResult](petitionresult.md) | result |  |
 
 ## Client Version 2.4.3, Client Version 3
 
@@ -56,9 +56,9 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | 8 / Little | [Guid](../types/packed-guid.md) | petition |  |  |
-| 0x0C | 8 / Little | [Guid](../types/packed-guid.md) | owner |  |  |
-| 0x14 | 4 / - | [PetitionResult](petitionresult.md) | result |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x04 | 8 / Little | [Guid](../types/packed-guid.md) | petition |  |
+| 0x0C | 8 / Little | [Guid](../types/packed-guid.md) | owner |  |
+| 0x14 | 4 / - | [PetitionResult](petitionresult.md) | result |  |
 

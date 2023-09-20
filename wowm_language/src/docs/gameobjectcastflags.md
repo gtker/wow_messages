@@ -32,27 +32,27 @@ flag GameobjectCastFlags : u32 {
 ### Type
 The basic type is `u32`, a 4 byte (32 bit) little endian integer.
 ### Enumerators
-| Enumerator | Value  | Description | Comment |
-| --------- | -------- | ----------- | ------- |
-| `LOCK_PLAYER_CAST_ANIM` | 1 (0x01) |  | also do not send standstate update |
-| `UNKNOWN2` | 2 (0x02) |  |  |
-| `UNKNOWN4` | 4 (0x04) |  |  |
-| `UNKNOWN8` | 8 (0x08) |  |  |
-| `UNKNOWN16` | 16 (0x10) |  |  |
-| `AMMO` | 32 (0x20) |  | 2 functions are called on 2 values |
-| `DEST_LOCATION` | 64 (0x40) |  |  |
-| `ITEM_CASTER` | 256 (0x100) |  |  |
-| `UNK200` | 512 (0x200) |  |  |
-| `EXTRA_MESSAGE` | 1024 (0x400) |  | TARGET MISSES AND OTHER MESSAGES LIKE 'Resist' |
-| `POWER_UPDATE` | 2048 (0x800) |  | seems to work hand in hand with some visual effect of update actually |
-| `UNK2000` | 8192 (0x2000) |  |  |
-| `UNK1000` | 4096 (0x1000) |  | no idea |
-| `UNK8000` | 32768 (0x8000) |  | seems to make server send extra 2 bytes before UNK1 and after UNK20000 |
-| `ADJUST_MISSILE` | 131072 (0x20000) |  | seems to make server send an uint32 after `m_targets.write` |
-| `UNK40000` | 262144 (0x40000) |  | 1 uint32. this is not confirmed but i have a feeling about it :D |
-| `VISUAL_CHAIN` | 524288 (0x80000) |  | 2 functions called (same ones as for ranged but different) |
-| `RUNE_UPDATE` | 2097152 (0x200000) |  | 2 bytes for the rune cur and rune next flags |
-| `UNK400000` | 4194304 (0x400000) |  | seems to make server send an uint32 after `m_targets.write` |
+| Enumerator | Value  | Comment |
+| --------- | -------- | ------- |
+| `LOCK_PLAYER_CAST_ANIM` | 1 (0x01) | also do not send standstate update |
+| `UNKNOWN2` | 2 (0x02) |  |
+| `UNKNOWN4` | 4 (0x04) |  |
+| `UNKNOWN8` | 8 (0x08) |  |
+| `UNKNOWN16` | 16 (0x10) |  |
+| `AMMO` | 32 (0x20) | 2 functions are called on 2 values |
+| `DEST_LOCATION` | 64 (0x40) |  |
+| `ITEM_CASTER` | 256 (0x100) |  |
+| `UNK200` | 512 (0x200) |  |
+| `EXTRA_MESSAGE` | 1024 (0x400) | TARGET MISSES AND OTHER MESSAGES LIKE 'Resist' |
+| `POWER_UPDATE` | 2048 (0x800) | seems to work hand in hand with some visual effect of update actually |
+| `UNK2000` | 8192 (0x2000) |  |
+| `UNK1000` | 4096 (0x1000) | no idea |
+| `UNK8000` | 32768 (0x8000) | seems to make server send extra 2 bytes before UNK1 and after UNK20000 |
+| `ADJUST_MISSILE` | 131072 (0x20000) | seems to make server send an uint32 after `m_targets.write` |
+| `UNK40000` | 262144 (0x40000) | 1 uint32. this is not confirmed but i have a feeling about it :D |
+| `VISUAL_CHAIN` | 524288 (0x80000) | 2 functions called (same ones as for ranged but different) |
+| `RUNE_UPDATE` | 2097152 (0x200000) | 2 bytes for the rune cur and rune next flags |
+| `UNK400000` | 4194304 (0x400000) | seems to make server send an uint32 after `m_targets.write` |
 
 Used in:
 * [SMSG_SPELL_GO](smsg_spell_go.md)

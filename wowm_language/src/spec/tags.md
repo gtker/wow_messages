@@ -5,60 +5,10 @@
 The following tags have compiler defined meaning.
 
 ## For Objects, Definer Enumerators, and Object Declarations
-
-### `description`
-
-Used to describe the general purpose of something in a high level way.
-Will be shown in documentation and generated code.
-
-Compared to `comment` this is more general and high level.
-
-The format is general text input.
-
-For example
-
-```rust,ignore
-smsg SMSG_TEST = 0x00 {
-    u8 basic;
-} {
-    description = "Sent every time the client tests.";
-}
-```
-
-Multiple `description` tags are allowed and will not overwrite each other.
-One `description` tag should be used for each distinctive subject.
-
-For example
-
-```rust,ignore
-smsg SMSG_TEST = 0x00 {
-    u8 basic;
-} {
-    description = "Sent every time the client tests.";
-    description = "Testing occurs whenever [...]";
-}
-```
-
-#### Linking
-
-Text in comments and descriptions can hyperlink to other objects by surrounding them in square brackets (`[` and `]`).
-
-For example
-
-```rust,ignore
-smsg SMSG_TEST = 0x00 {
-    u8 basic;
-} {
-    description = "Reponse to [CMSG_TEST].";
-}
-```
-
 ### `comment`
 
-Used to describe quirks or non-obvious information regarding something.
+Used to provide description, or describe quirks and non-obvious information regarding something.
 Will be shown in documentation and generated code.
-
-Compared to `description` this is more specific and lower level.
 
 The format is general text input.
 
@@ -88,7 +38,7 @@ smsg SMSG_TEST = 0x00 {
 
 #### Linking
 
-Text in comments and descriptions can hyperlink to other objects by surrounding them in square brackets (`[` and `]`).
+Text in comments can hyperlink to other objects by surrounding them in square brackets (`[` and `]`).
 
 For example
 
@@ -96,7 +46,7 @@ For example
 smsg SMSG_TEST = 0x00 {
     u8 basic;
 } {
-    description = "Reponse to [CMSG_TEST].";
+    comment = "Reponse to [CMSG_TEST].";
 }
 ```
 

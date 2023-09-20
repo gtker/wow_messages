@@ -27,13 +27,13 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | - / - | [PackedGuid](../types/packed-guid.md) | victim |  |  |
-| - | - / - | [PackedGuid](../types/packed-guid.md) | caster |  |  |
-| - | 4 / Little | u32 | id |  |  |
-| - | 4 / Little | u32 | damage |  |  |
-| - | 1 / - | Bool | critical |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x04 | - / - | [PackedGuid](../types/packed-guid.md) | victim |  |
+| - | - / - | [PackedGuid](../types/packed-guid.md) | caster |  |
+| - | 4 / Little | u32 | id |  |
+| - | 4 / Little | u32 | damage |  |
+| - | 1 / - | Bool | critical |  |
 
 ## Client Version 2.4.3
 
@@ -63,14 +63,14 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | - / - | [PackedGuid](../types/packed-guid.md) | victim |  |  |
-| - | - / - | [PackedGuid](../types/packed-guid.md) | caster |  |  |
-| - | 4 / Little | u32 | id |  |  |
-| - | 4 / Little | u32 | damage |  |  |
-| - | 1 / - | Bool | critical |  |  |
-| - | 1 / - | u8 | unknown |  | mangosone: unused in client? |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x04 | - / - | [PackedGuid](../types/packed-guid.md) | victim |  |
+| - | - / - | [PackedGuid](../types/packed-guid.md) | caster |  |
+| - | 4 / Little | u32 | id |  |
+| - | 4 / Little | u32 | damage |  |
+| - | 1 / - | Bool | critical |  |
+| - | 1 / - | u8 | unknown | mangosone: unused in client? |
 
 ## Client Version 3.3.5
 
@@ -102,14 +102,14 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | - / - | [PackedGuid](../types/packed-guid.md) | victim |  |  |
-| - | - / - | [PackedGuid](../types/packed-guid.md) | caster |  |  |
-| - | 4 / Little | u32 | id |  |  |
-| - | 4 / Little | u32 | damage |  |  |
-| - | 4 / Little | u32 | overheal |  |  |
-| - | 4 / Little | u32 | absorb |  |  |
-| - | 1 / - | Bool | critical |  |  |
-| - | 1 / - | u8 | unknown |  | mangostwo: unused in client? |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| - | - / - | [PackedGuid](../types/packed-guid.md) | victim |  |
+| - | - / - | [PackedGuid](../types/packed-guid.md) | caster |  |
+| - | 4 / Little | u32 | id |  |
+| - | 4 / Little | u32 | damage |  |
+| - | 4 / Little | u32 | overheal |  |
+| - | 4 / Little | u32 | absorb |  |
+| - | 1 / - | Bool | critical |  |
+| - | 1 / - | u8 | unknown | mangostwo: unused in client? |
 

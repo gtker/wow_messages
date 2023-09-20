@@ -27,11 +27,11 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | 8 / Little | [Guid](../types/packed-guid.md) | vendor |  |  |
-| 0x0C | 1 / - | u8 | amount_of_items |  | cmangos: 0 displays Vendor has no inventory |
-| 0x0D | ? / - | [ListInventoryItem](listinventoryitem.md)[amount_of_items] | items |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x04 | 8 / Little | [Guid](../types/packed-guid.md) | vendor |  |
+| 0x0C | 1 / - | u8 | amount_of_items | cmangos: 0 displays Vendor has no inventory |
+| 0x0D | ? / - | [ListInventoryItem](listinventoryitem.md)[amount_of_items] | items |  |
 
 ## Client Version 2.4.3, Client Version 3
 
@@ -60,9 +60,9 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | 8 / Little | [Guid](../types/packed-guid.md) | vendor |  |  |
-| - | 1 / - | u8 | amount_of_items |  | cmangos: 0 displays Vendor has no inventory |
-| - | ? / - | [ListInventoryItem](listinventoryitem.md)[amount_of_items] | items |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| - | 8 / Little | [Guid](../types/packed-guid.md) | vendor |  |
+| - | 1 / - | u8 | amount_of_items | cmangos: 0 displays Vendor has no inventory |
+| - | ? / - | [ListInventoryItem](listinventoryitem.md)[amount_of_items] | items |  |
 

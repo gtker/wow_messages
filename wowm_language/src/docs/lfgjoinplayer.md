@@ -14,11 +14,11 @@ struct LfgJoinPlayer {
 ```
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x00 | 8 / Little | [Guid](../types/packed-guid.md) | player |  |  |
-| 0x08 | 4 / Little | u32 | amount_of_locked_dungeons |  |  |
-| 0x0C | ? / - | [LfgJoinLockedDungeon](lfgjoinlockeddungeon.md)[amount_of_locked_dungeons] | locked_dungeons |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x00 | 8 / Little | [Guid](../types/packed-guid.md) | player |  |
+| 0x08 | 4 / Little | u32 | amount_of_locked_dungeons |  |
+| 0x0C | ? / - | [LfgJoinLockedDungeon](lfgjoinlockeddungeon.md)[amount_of_locked_dungeons] | locked_dungeons |  |
 
 
 Used in:

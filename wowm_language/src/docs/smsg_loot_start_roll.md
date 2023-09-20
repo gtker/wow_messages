@@ -28,14 +28,14 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | 8 / Little | [Guid](../types/packed-guid.md) | creature |  |  |
-| 0x0C | 4 / Little | u32 | loot_slot |  |  |
-| 0x10 | 4 / Little | u32 | item |  |  |
-| 0x14 | 4 / Little | u32 | item_random_suffix |  | vmangos/mangoszero: not used ? |
-| 0x18 | 4 / Little | u32 | item_random_property_id |  |  |
-| 0x1C | 4 / Little | Milliseconds | countdown_time |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x04 | 8 / Little | [Guid](../types/packed-guid.md) | creature |  |
+| 0x0C | 4 / Little | u32 | loot_slot |  |
+| 0x10 | 4 / Little | u32 | item |  |
+| 0x14 | 4 / Little | u32 | item_random_suffix | vmangos/mangoszero: not used ? |
+| 0x18 | 4 / Little | u32 | item_random_property_id |  |
+| 0x1C | 4 / Little | Milliseconds | countdown_time |  |
 
 ## Client Version 3.3.5
 
@@ -67,14 +67,14 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | 8 / Little | [Guid](../types/packed-guid.md) | creature |  |  |
-| 0x0C | 4 / - | [Map](map.md) | map |  |  |
-| 0x10 | 4 / Little | u32 | loot_slot |  |  |
-| 0x14 | 4 / Little | u32 | item |  |  |
-| 0x18 | 4 / Little | u32 | item_random_suffix |  | vmangos/mangoszero: not used ? |
-| 0x1C | 4 / Little | u32 | item_random_property_id |  |  |
-| 0x20 | 4 / Little | Milliseconds | countdown_time |  |  |
-| 0x24 | 1 / - | [RollFlags](rollflags.md) | flags |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x04 | 8 / Little | [Guid](../types/packed-guid.md) | creature |  |
+| 0x0C | 4 / - | [Map](map.md) | map |  |
+| 0x10 | 4 / Little | u32 | loot_slot |  |
+| 0x14 | 4 / Little | u32 | item |  |
+| 0x18 | 4 / Little | u32 | item_random_suffix | vmangos/mangoszero: not used ? |
+| 0x1C | 4 / Little | u32 | item_random_property_id |  |
+| 0x20 | 4 / Little | Milliseconds | countdown_time |  |
+| 0x24 | 1 / - | [RollFlags](rollflags.md) | flags |  |
 

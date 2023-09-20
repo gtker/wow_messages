@@ -15,10 +15,10 @@ enum AchievementNameLinkType : u8 {
 ### Type
 The basic type is `u8`, a 1 byte (8 bit) integer.
 ### Enumerators
-| Enumerator | Value  | Description | Comment |
-| --------- | -------- | ----------- | ------- |
-| `NORMAL` | 0 (0x00) |  |  |
-| `CLICKABLE` | 1 (0x01) |  |  |
+| Enumerator | Value  | Comment |
+| --------- | -------- | ------- |
+| `NORMAL` | 0 (0x00) |  |
+| `CLICKABLE` | 1 (0x01) |  |
 
 Used in:
 * [SMSG_SERVER_FIRST_ACHIEVEMENT](smsg_server_first_achievement.md)

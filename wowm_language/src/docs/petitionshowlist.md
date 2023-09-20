@@ -16,13 +16,13 @@ struct PetitionShowlist {
 ```
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x00 | 4 / Little | u32 | index |  |  |
-| 0x04 | 4 / Little | u32 | charter_entry |  | cmangos/vmangos/mangoszero: statically sets to guild charter item id (5863) and arena charter ids. |
-| 0x08 | 4 / Little | u32 | charter_display_id |  | cmangos/vmangos/mangoszero: statically sets to guild charter display id (16161) and arena charter ids. |
-| 0x0C | 4 / Little | u32 | guild_charter_cost |  | cmangos/vmangos/mangoszero: statically set to 1000 (10 silver) for guild charters and the cost of arena charters for that. |
-| 0x10 | 4 / Little | u32 | unknown1 |  | cmangos/vmangos/mangoszero: statically set to 1 |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x00 | 4 / Little | u32 | index |  |
+| 0x04 | 4 / Little | u32 | charter_entry | cmangos/vmangos/mangoszero: statically sets to guild charter item id (5863) and arena charter ids. |
+| 0x08 | 4 / Little | u32 | charter_display_id | cmangos/vmangos/mangoszero: statically sets to guild charter display id (16161) and arena charter ids. |
+| 0x0C | 4 / Little | u32 | guild_charter_cost | cmangos/vmangos/mangoszero: statically set to 1000 (10 silver) for guild charters and the cost of arena charters for that. |
+| 0x10 | 4 / Little | u32 | unknown1 | cmangos/vmangos/mangoszero: statically set to 1 |
 
 
 Used in:
@@ -45,14 +45,14 @@ struct PetitionShowlist {
 ```
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x00 | 4 / Little | u32 | index |  |  |
-| 0x04 | 4 / Little | u32 | charter_entry |  | cmangos/vmangos/mangoszero: statically sets to guild charter item id (5863). |
-| 0x08 | 4 / Little | u32 | charter_display_id |  | cmangos/vmangos/mangoszero: statically sets to guild charter display id (16161). |
-| 0x0C | 4 / Little | u32 | guild_charter_cost |  | cmangos/vmangos/mangoszero: statically set to 1000 (10 silver). |
-| 0x10 | 4 / Little | u32 | unknown1 |  | cmangos/vmangos/mangoszero: statically set to 1<br/>arcemu: charter type? seems to be 0x0 for guilds and 0x1 for arena charters |
-| 0x14 | 4 / Little | u32 | signatures_required |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x00 | 4 / Little | u32 | index |  |
+| 0x04 | 4 / Little | u32 | charter_entry | cmangos/vmangos/mangoszero: statically sets to guild charter item id (5863). |
+| 0x08 | 4 / Little | u32 | charter_display_id | cmangos/vmangos/mangoszero: statically sets to guild charter display id (16161). |
+| 0x0C | 4 / Little | u32 | guild_charter_cost | cmangos/vmangos/mangoszero: statically set to 1000 (10 silver). |
+| 0x10 | 4 / Little | u32 | unknown1 | cmangos/vmangos/mangoszero: statically set to 1<br/>arcemu: charter type? seems to be 0x0 for guilds and 0x1 for arena charters |
+| 0x14 | 4 / Little | u32 | signatures_required |  |
 
 
 Used in:

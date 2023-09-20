@@ -27,11 +27,11 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | 4 / Little | DateTime | current_time |  |  |
-| 0x08 | 4 / - | [Map](map.md) | map |  |  |
-| 0x0C | 4 / Little | u32 | difficulty |  |  |
-| 0x10 | 4 / Little | Seconds | old_time_to_update |  |  |
-| 0x14 | 4 / Little | Seconds | new_time_to_update |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x04 | 4 / Little | DateTime | current_time |  |
+| 0x08 | 4 / - | [Map](map.md) | map |  |
+| 0x0C | 4 / Little | u32 | difficulty |  |
+| 0x10 | 4 / Little | Seconds | old_time_to_update |  |
+| 0x14 | 4 / Little | Seconds | new_time_to_update |  |
 

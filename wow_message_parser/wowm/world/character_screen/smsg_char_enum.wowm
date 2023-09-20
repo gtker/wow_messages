@@ -47,7 +47,7 @@ smsg SMSG_CHAR_ENUM = 0x03B {
     }
     Character[amount_of_characters] characters;
 } {
-    description = "Response to [CMSG_CHAR_ENUM].";
+    comment = "Response to [CMSG_CHAR_ENUM].";
 }
 
 test SMSG_CHAR_ENUM {
@@ -58,5 +58,5 @@ test SMSG_CHAR_ENUM {
     0x3B, 0x00, /* opcode */
     0x00, /* amount_of_characters */
 ] {
-    description = "Empty character list.";
+    comment = "Empty character list.";
 }

@@ -17,12 +17,12 @@ enum BuyBankSlotResult : u32 {
 ### Type
 The basic type is `u32`, a 4 byte (32 bit) little endian integer.
 ### Enumerators
-| Enumerator | Value  | Description | Comment |
-| --------- | -------- | ----------- | ------- |
-| `FAILED_TOO_MANY` | 0 (0x00) |  |  |
-| `INSUFFICIENT_FUNDS` | 1 (0x01) |  |  |
-| `NOT_BANKER` | 2 (0x02) |  |  |
-| `OK` | 3 (0x03) |  |  |
+| Enumerator | Value  | Comment |
+| --------- | -------- | ------- |
+| `FAILED_TOO_MANY` | 0 (0x00) |  |
+| `INSUFFICIENT_FUNDS` | 1 (0x01) |  |
+| `NOT_BANKER` | 2 (0x02) |  |
+| `OK` | 3 (0x03) |  |
 
 Used in:
 * [SMSG_BUY_BANK_SLOT_RESULT](smsg_buy_bank_slot_result.md)

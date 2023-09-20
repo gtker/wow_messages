@@ -15,10 +15,10 @@ enum LfgTeleportLocation : u8 {
 ### Type
 The basic type is `u8`, a 1 byte (8 bit) integer.
 ### Enumerators
-| Enumerator | Value  | Description | Comment |
-| --------- | -------- | ----------- | ------- |
-| `IN` | 0 (0x00) |  |  |
-| `OUT` | 1 (0x01) |  |  |
+| Enumerator | Value  | Comment |
+| --------- | -------- | ------- |
+| `IN` | 0 (0x00) |  |
+| `OUT` | 1 (0x01) |  |
 
 Used in:
 * [CMSG_LFG_TELEPORT](cmsg_lfg_teleport.md)

@@ -24,8 +24,8 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | 1 / - | u8 | amount_of_infos |  |  |
-| - | ? / - | [LfgPartyInfo](lfgpartyinfo.md)[amount_of_infos] | infos |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| - | 1 / - | u8 | amount_of_infos |  |
+| - | ? / - | [LfgPartyInfo](lfgpartyinfo.md)[amount_of_infos] | infos |  |
 

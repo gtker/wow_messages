@@ -26,10 +26,10 @@ CMSG have a header of 6 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x06 | 8 / Little | [Guid](../types/packed-guid.md) | battlemaster |  |  |
-| 0x0E | 1 / - | [JoinArenaType](joinarenatype.md) | arena_type |  |  |
-| 0x0F | 1 / - | Bool | as_group |  |  |
-| 0x10 | 1 / - | Bool | rated |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x06 | 8 / Little | [Guid](../types/packed-guid.md) | battlemaster |  |
+| 0x0E | 1 / - | [JoinArenaType](joinarenatype.md) | arena_type |  |
+| 0x0F | 1 / - | Bool | as_group |  |
+| 0x10 | 1 / - | Bool | rated |  |
 

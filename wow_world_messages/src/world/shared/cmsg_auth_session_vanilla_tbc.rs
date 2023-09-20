@@ -6,7 +6,6 @@ use crate::shared::addon_info_vanilla_tbc_wrath::AddonInfo;
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Sent after receiving [`SMSG_AUTH_CHALLENGE`](crate::vanilla::SMSG_AUTH_CHALLENGE).
 /// Followed by [`SMSG_AUTH_RESPONSE`](crate::vanilla::SMSG_AUTH_RESPONSE).
-///
 /// This message is never encrypted.
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/character_screen/cmsg_auth_session.wowm:10`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/character_screen/cmsg_auth_session.wowm#L10):
 /// ```text

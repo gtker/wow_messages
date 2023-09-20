@@ -30,25 +30,25 @@ flag ItemFlag : u32 {
 ### Type
 The basic type is `u32`, a 4 byte (32 bit) little endian integer.
 ### Enumerators
-| Enumerator | Value  | Description | Comment |
-| --------- | -------- | ----------- | ------- |
-| `NONE` | 0 (0x00) |  |  |
-| `NO_PICKUP` | 1 (0x01) |  | not used |
-| `CONJURED` | 2 (0x02) |  |  |
-| `LOOTABLE` | 4 (0x04) |  | affect only non container items that can be 'open' for loot. It or lockid set enable for client show 'Right click to open'. See also `ITEM_DYNFLAG_UNLOCKED` |
-| `DEPRECATED` | 16 (0x10) |  | can't repeat old note: appears red icon (like when item durability==0) |
-| `INDESTRUCTIBLE` | 32 (0x20) |  | used for totem. Item can not be destroyed, except by using spell (item can be reagent for spell and then allowed) |
-| `PLAYER_CAST` | 64 (0x40) |  | ? old note: usable |
-| `NO_EQUIP_COOLDOWN` | 128 (0x80) |  |  |
-| `INT_BONUS_INSTEAD` | 256 (0x100) |  |  |
-| `WRAPPER` | 512 (0x200) |  | used or not used wrapper |
-| `IGNORE_BAG_SPACE` | 1024 (0x400) |  | ignore bag space at new item creation? |
-| `PARTY_LOOT` | 2048 (0x800) |  | determines if item is party loot or not |
-| `CHARTER` | 8192 (0x2000) |  | guild charter |
-| `HAS_TEXT` | 16384 (0x4000) |  | Only readable items have this (but not all) |
-| `NO_DISENCHANT` | 32768 (0x8000) |  |  |
-| `REAL_DURATION` | 65536 (0x10000) |  |  |
-| `NO_CREATOR` | 131072 (0x20000) |  |  |
+| Enumerator | Value  | Comment |
+| --------- | -------- | ------- |
+| `NONE` | 0 (0x00) |  |
+| `NO_PICKUP` | 1 (0x01) | not used |
+| `CONJURED` | 2 (0x02) |  |
+| `LOOTABLE` | 4 (0x04) | affect only non container items that can be 'open' for loot. It or lockid set enable for client show 'Right click to open'. See also `ITEM_DYNFLAG_UNLOCKED` |
+| `DEPRECATED` | 16 (0x10) | can't repeat old note: appears red icon (like when item durability==0) |
+| `INDESTRUCTIBLE` | 32 (0x20) | used for totem. Item can not be destroyed, except by using spell (item can be reagent for spell and then allowed) |
+| `PLAYER_CAST` | 64 (0x40) | ? old note: usable |
+| `NO_EQUIP_COOLDOWN` | 128 (0x80) |  |
+| `INT_BONUS_INSTEAD` | 256 (0x100) |  |
+| `WRAPPER` | 512 (0x200) | used or not used wrapper |
+| `IGNORE_BAG_SPACE` | 1024 (0x400) | ignore bag space at new item creation? |
+| `PARTY_LOOT` | 2048 (0x800) | determines if item is party loot or not |
+| `CHARTER` | 8192 (0x2000) | guild charter |
+| `HAS_TEXT` | 16384 (0x4000) | Only readable items have this (but not all) |
+| `NO_DISENCHANT` | 32768 (0x8000) |  |
+| `REAL_DURATION` | 65536 (0x10000) |  |
+| `NO_CREATOR` | 131072 (0x20000) |  |
 
 Used in:
 * [SMSG_ITEM_QUERY_SINGLE_RESPONSE](smsg_item_query_single_response.md)
@@ -87,30 +87,30 @@ flag ItemFlag : u32 {
 ### Type
 The basic type is `u32`, a 4 byte (32 bit) little endian integer.
 ### Enumerators
-| Enumerator | Value  | Description | Comment |
-| --------- | -------- | ----------- | ------- |
-| `NO_PICKUP` | 1 (0x01) |  | not used |
-| `CONJURED` | 2 (0x02) |  | items created by spells with `SPELL_EFFECT_CREATE_ITEM` |
-| `LOOTABLE` | 4 (0x04) |  | affect only non container items that can be 'open' for loot. It or lockid set enable for client show 'Right click to open'. See also `ITEM_DYNFLAG_UNLOCKED` |
-| `DEPRECATED` | 16 (0x10) |  | can't repeat old note: appears red icon (like when item durability==0) |
-| `INDESTRUCTIBLE` | 32 (0x20) |  | used for totem. Item can not be destroyed, except by using spell (item can be reagent for spell and then allowed) |
-| `PLAYER_CAST` | 64 (0x40) |  | ? old note: usable |
-| `NO_EQUIP_COOLDOWN` | 128 (0x80) |  | items without an equip cooldown (and usually a _USABLE flag) |
-| `INT_BONUS_INSTEAD` | 256 (0x100) |  | saw this on item 47115, 49295... |
-| `WRAPPER` | 512 (0x200) |  | used or not used wrapper |
-| `IGNORE_BAG_SPACE` | 1024 (0x400) |  | ignore bag space at new item creation? |
-| `PARTY_LOOT` | 2048 (0x800) |  | items which can be looted by all party members |
-| `CHARTER` | 8192 (0x2000) |  | arena/guild charter |
-| `LETTER` | 16384 (0x4000) |  | readable letter items |
-| `NO_DISENCHANT` | 32768 (0x8000) |  |  |
-| `REAL_DURATION` | 65536 (0x10000) |  |  |
-| `NO_CREATOR` | 131072 (0x20000) |  |  |
-| `PROSPECTABLE` | 262144 (0x40000) |  | item can have prospecting loot (in fact some items expected have empty loot) |
-| `UNIQUE_EQUIPPED` | 524288 (0x80000) |  | custom server side check, in client added in 2.x |
-| `IGNORE_FOR_AURAS` | 1048576 (0x100000) |  |  |
-| `IGNORE_DEFAULT_ARENA_RESTRICTIONS` | 2097152 (0x200000) |  | Item can be used during arena match |
-| `NO_DURABILITY_LOSS` | 4194304 (0x400000) |  | Some Thrown weapons have it (and only Thrown) but not all |
-| `SPECIAL_USE` | 8388608 (0x800000) |  |  |
+| Enumerator | Value  | Comment |
+| --------- | -------- | ------- |
+| `NO_PICKUP` | 1 (0x01) | not used |
+| `CONJURED` | 2 (0x02) | items created by spells with `SPELL_EFFECT_CREATE_ITEM` |
+| `LOOTABLE` | 4 (0x04) | affect only non container items that can be 'open' for loot. It or lockid set enable for client show 'Right click to open'. See also `ITEM_DYNFLAG_UNLOCKED` |
+| `DEPRECATED` | 16 (0x10) | can't repeat old note: appears red icon (like when item durability==0) |
+| `INDESTRUCTIBLE` | 32 (0x20) | used for totem. Item can not be destroyed, except by using spell (item can be reagent for spell and then allowed) |
+| `PLAYER_CAST` | 64 (0x40) | ? old note: usable |
+| `NO_EQUIP_COOLDOWN` | 128 (0x80) | items without an equip cooldown (and usually a _USABLE flag) |
+| `INT_BONUS_INSTEAD` | 256 (0x100) | saw this on item 47115, 49295... |
+| `WRAPPER` | 512 (0x200) | used or not used wrapper |
+| `IGNORE_BAG_SPACE` | 1024 (0x400) | ignore bag space at new item creation? |
+| `PARTY_LOOT` | 2048 (0x800) | items which can be looted by all party members |
+| `CHARTER` | 8192 (0x2000) | arena/guild charter |
+| `LETTER` | 16384 (0x4000) | readable letter items |
+| `NO_DISENCHANT` | 32768 (0x8000) |  |
+| `REAL_DURATION` | 65536 (0x10000) |  |
+| `NO_CREATOR` | 131072 (0x20000) |  |
+| `PROSPECTABLE` | 262144 (0x40000) | item can have prospecting loot (in fact some items expected have empty loot) |
+| `UNIQUE_EQUIPPED` | 524288 (0x80000) | custom server side check, in client added in 2.x |
+| `IGNORE_FOR_AURAS` | 1048576 (0x100000) |  |
+| `IGNORE_DEFAULT_ARENA_RESTRICTIONS` | 2097152 (0x200000) | Item can be used during arena match |
+| `NO_DURABILITY_LOSS` | 4194304 (0x400000) | Some Thrown weapons have it (and only Thrown) but not all |
+| `SPECIAL_USE` | 8388608 (0x800000) |  |
 
 Used in:
 * [SMSG_ITEM_QUERY_SINGLE_RESPONSE](smsg_item_query_single_response.md)
@@ -159,40 +159,40 @@ flag ItemFlag : u32 {
 ### Type
 The basic type is `u32`, a 4 byte (32 bit) little endian integer.
 ### Enumerators
-| Enumerator | Value  | Description | Comment |
-| --------- | -------- | ----------- | ------- |
-| `NO_PICKUP` | 1 (0x01) |  |  |
-| `CONJURED` | 2 (0x02) |  | Conjured item |
-| `LOOTABLE` | 4 (0x04) |  | Item can be right clicked to open for loot |
-| `HEROIC_TOOLTIP` | 8 (0x08) |  | Makes green 'Heroic' text appear on item |
-| `DEPRECATED` | 16 (0x10) |  | Cannot equip or use |
-| `INDESTRUCTIBLE` | 32 (0x20) |  | Item can not be destroyed, except by using spell (item can be reagent for spell) |
-| `PLAYER_CAST` | 64 (0x40) |  | Item's spells are castable by players |
-| `NO_EQUIP_COOLDOWN` | 128 (0x80) |  | No default 30 seconds cooldown when equipped |
-| `MULTI_LOOT_QUEST` | 256 (0x100) |  |  |
-| `WRAPPER` | 512 (0x200) |  | Item can wrap other items |
-| `USES_RESOURCES` | 1024 (0x400) |  |  |
-| `MULTI_DROP` | 2048 (0x800) |  | Looting this item does not remove it from available loot |
-| `ITEM_PURCHASE_RECORD` | 4096 (0x1000) |  | Item can be returned to vendor for its original cost (extended cost) |
-| `CHARTER` | 8192 (0x2000) |  | Item is guild or arena charter |
-| `HAS_TEXT` | 16384 (0x4000) |  | Only readable items have this (but not all) |
-| `NO_DISENCHANT` | 32768 (0x8000) |  |  |
-| `REAL_DURATION` | 65536 (0x10000) |  |  |
-| `NO_CREATOR` | 131072 (0x20000) |  |  |
-| `IS_PROSPECTABLE` | 262144 (0x40000) |  | Item can be prospected |
-| `UNIQUE_EQUIPPED` | 524288 (0x80000) |  | You can only equip one of these |
-| `IGNORE_FOR_AURAS` | 1048576 (0x100000) |  |  |
-| `IGNORE_DEFAULT_ARENA_RESTRICTIONS` | 2097152 (0x200000) |  | Item can be used during arena match |
-| `NO_DURABILITY_LOSS` | 4194304 (0x400000) |  | Some Thrown weapons have it (and only Thrown) but not all |
-| `USE_WHEN_SHAPESHIFTED` | 8388608 (0x800000) |  | Item can be used in shapeshift forms |
-| `HAS_QUEST_GLOW` | 16777216 (0x1000000) |  |  |
-| `HIDE_UNUSABLE_RECIPE` | 33554432 (0x2000000) |  | Profession recipes: can only be looted if you meet requirements and don't already know it |
-| `NOT_USEABLE_IN_ARENA` | 67108864 (0x4000000) |  | Item cannot be used in arena |
-| `IS_BOUND_TO_ACCOUNT` | 134217728 (0x8000000) |  | Item binds to account and can be sent only to your own characters |
-| `NO_REAGENT_COST` | 268435456 (0x10000000) |  | Spell is cast ignoring reagents |
-| `IS_MILLABLE` | 536870912 (0x20000000) |  | Item can be milled |
-| `REPORT_TO_GUILD_CHAT` | 1073741824 (0x40000000) |  |  |
-| `NO_PROGRESSIVE_LOOT` | 2147483648 (0x80000000) |  |  |
+| Enumerator | Value  | Comment |
+| --------- | -------- | ------- |
+| `NO_PICKUP` | 1 (0x01) |  |
+| `CONJURED` | 2 (0x02) | Conjured item |
+| `LOOTABLE` | 4 (0x04) | Item can be right clicked to open for loot |
+| `HEROIC_TOOLTIP` | 8 (0x08) | Makes green 'Heroic' text appear on item |
+| `DEPRECATED` | 16 (0x10) | Cannot equip or use |
+| `INDESTRUCTIBLE` | 32 (0x20) | Item can not be destroyed, except by using spell (item can be reagent for spell) |
+| `PLAYER_CAST` | 64 (0x40) | Item's spells are castable by players |
+| `NO_EQUIP_COOLDOWN` | 128 (0x80) | No default 30 seconds cooldown when equipped |
+| `MULTI_LOOT_QUEST` | 256 (0x100) |  |
+| `WRAPPER` | 512 (0x200) | Item can wrap other items |
+| `USES_RESOURCES` | 1024 (0x400) |  |
+| `MULTI_DROP` | 2048 (0x800) | Looting this item does not remove it from available loot |
+| `ITEM_PURCHASE_RECORD` | 4096 (0x1000) | Item can be returned to vendor for its original cost (extended cost) |
+| `CHARTER` | 8192 (0x2000) | Item is guild or arena charter |
+| `HAS_TEXT` | 16384 (0x4000) | Only readable items have this (but not all) |
+| `NO_DISENCHANT` | 32768 (0x8000) |  |
+| `REAL_DURATION` | 65536 (0x10000) |  |
+| `NO_CREATOR` | 131072 (0x20000) |  |
+| `IS_PROSPECTABLE` | 262144 (0x40000) | Item can be prospected |
+| `UNIQUE_EQUIPPED` | 524288 (0x80000) | You can only equip one of these |
+| `IGNORE_FOR_AURAS` | 1048576 (0x100000) |  |
+| `IGNORE_DEFAULT_ARENA_RESTRICTIONS` | 2097152 (0x200000) | Item can be used during arena match |
+| `NO_DURABILITY_LOSS` | 4194304 (0x400000) | Some Thrown weapons have it (and only Thrown) but not all |
+| `USE_WHEN_SHAPESHIFTED` | 8388608 (0x800000) | Item can be used in shapeshift forms |
+| `HAS_QUEST_GLOW` | 16777216 (0x1000000) |  |
+| `HIDE_UNUSABLE_RECIPE` | 33554432 (0x2000000) | Profession recipes: can only be looted if you meet requirements and don't already know it |
+| `NOT_USEABLE_IN_ARENA` | 67108864 (0x4000000) | Item cannot be used in arena |
+| `IS_BOUND_TO_ACCOUNT` | 134217728 (0x8000000) | Item binds to account and can be sent only to your own characters |
+| `NO_REAGENT_COST` | 268435456 (0x10000000) | Spell is cast ignoring reagents |
+| `IS_MILLABLE` | 536870912 (0x20000000) | Item can be milled |
+| `REPORT_TO_GUILD_CHAT` | 1073741824 (0x40000000) |  |
+| `NO_PROGRESSIVE_LOOT` | 2147483648 (0x80000000) |  |
 
 Used in:
 * [SMSG_ITEM_QUERY_SINGLE_RESPONSE](smsg_item_query_single_response.md)

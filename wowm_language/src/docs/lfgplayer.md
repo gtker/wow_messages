@@ -19,16 +19,16 @@ struct LfgPlayer {
 ```
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x00 | - / - | [PackedGuid](../types/packed-guid.md) | guid |  |  |
-| - | 4 / Little | Level32 | level |  |  |
-| - | 4 / - | [Area](area.md) | area |  |  |
-| - | 1 / - | [LfgMode](lfgmode.md) | lfg_mode |  |  |
-| - | 12 / - | u32[3] | lfg_slots |  |  |
-| - | - / - | CString | comment |  |  |
-| - | 4 / Little | u32 | amount_of_members |  |  |
-| - | ? / - | [LfgPlayerMember](lfgplayermember.md)[amount_of_members] | members |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x00 | - / - | [PackedGuid](../types/packed-guid.md) | guid |  |
+| - | 4 / Little | Level32 | level |  |
+| - | 4 / - | [Area](area.md) | area |  |
+| - | 1 / - | [LfgMode](lfgmode.md) | lfg_mode |  |
+| - | 12 / - | u32[3] | lfg_slots |  |
+| - | - / - | CString | comment |  |
+| - | 4 / Little | u32 | amount_of_members |  |
+| - | ? / - | [LfgPlayerMember](lfgplayermember.md)[amount_of_members] | members |  |
 
 
 Used in:

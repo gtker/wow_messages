@@ -33,19 +33,19 @@ CMSG have a header of 6 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x06 | 8 / Little | [Guid](../types/packed-guid.md) | mailbox |  |  |
-| 0x0E | - / - | CString | receiver |  |  |
-| - | - / - | CString | subject |  |  |
-| - | - / - | CString | body |  |  |
-| - | 4 / Little | u32 | unknown1 |  | cmangos: stationery? |
-| - | 4 / Little | u32 | unknown2 |  | cmangos: 0x00000000 |
-| - | 8 / Little | [Guid](../types/packed-guid.md) | item |  |  |
-| - | 4 / Little | Gold | money |  |  |
-| - | 4 / Little | u32 | cash_on_delivery_amount |  |  |
-| - | 4 / Little | u32 | unknown3 |  | cmangos: const 0 |
-| - | 4 / Little | u32 | unknown4 |  | cmangos: const 0 |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x06 | 8 / Little | [Guid](../types/packed-guid.md) | mailbox |  |
+| 0x0E | - / - | CString | receiver |  |
+| - | - / - | CString | subject |  |
+| - | - / - | CString | body |  |
+| - | 4 / Little | u32 | unknown1 | cmangos: stationery? |
+| - | 4 / Little | u32 | unknown2 | cmangos: 0x00000000 |
+| - | 8 / Little | [Guid](../types/packed-guid.md) | item |  |
+| - | 4 / Little | Gold | money |  |
+| - | 4 / Little | u32 | cash_on_delivery_amount |  |
+| - | 4 / Little | u32 | unknown3 | cmangos: const 0 |
+| - | 4 / Little | u32 | unknown4 | cmangos: const 0 |
 
 ## Client Version 2.4.3, Client Version 3
 
@@ -81,18 +81,18 @@ CMSG have a header of 6 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x06 | 8 / Little | [Guid](../types/packed-guid.md) | mailbox |  |  |
-| 0x0E | - / - | CString | receiver |  |  |
-| - | - / - | CString | subject |  |  |
-| - | - / - | CString | body |  |  |
-| - | 4 / Little | u32 | unknown1 |  | cmangos: stationery? |
-| - | 4 / Little | u32 | unknown2 |  | cmangos: 0x00000000 |
-| - | 1 / - | u8 | amount_of_items |  |  |
-| - | ? / - | [MailItem](mailitem.md)[amount_of_items] | items |  |  |
-| - | 4 / Little | Gold | money |  |  |
-| - | 4 / Little | u32 | cash_on_delivery_amount |  |  |
-| - | 4 / Little | u32 | unknown3 |  | mangosone: const 0 |
-| - | 4 / Little | u32 | unknown4 |  | mangosone: const 0 |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x06 | 8 / Little | [Guid](../types/packed-guid.md) | mailbox |  |
+| 0x0E | - / - | CString | receiver |  |
+| - | - / - | CString | subject |  |
+| - | - / - | CString | body |  |
+| - | 4 / Little | u32 | unknown1 | cmangos: stationery? |
+| - | 4 / Little | u32 | unknown2 | cmangos: 0x00000000 |
+| - | 1 / - | u8 | amount_of_items |  |
+| - | ? / - | [MailItem](mailitem.md)[amount_of_items] | items |  |
+| - | 4 / Little | Gold | money |  |
+| - | 4 / Little | u32 | cash_on_delivery_amount |  |
+| - | 4 / Little | u32 | unknown3 | mangosone: const 0 |
+| - | 4 / Little | u32 | unknown4 | mangosone: const 0 |
 

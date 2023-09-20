@@ -21,16 +21,16 @@ enum SheatheType : u8 {
 ### Type
 The basic type is `u8`, a 1 byte (8 bit) integer.
 ### Enumerators
-| Enumerator | Value  | Description | Comment |
-| --------- | -------- | ----------- | ------- |
-| `NONE` | 0 (0x00) |  |  |
-| `MAIN_HAND` | 1 (0x01) |  |  |
-| `OFF_HAND` | 2 (0x02) |  |  |
-| `LARGE_WEAPON_LEFT` | 3 (0x03) |  |  |
-| `LARGE_WEAPON_RIGHT` | 4 (0x04) |  |  |
-| `HIP_WEAPON_LEFT` | 5 (0x05) |  |  |
-| `HIP_WEAPON_RIGHT` | 6 (0x06) |  |  |
-| `SHIELD` | 7 (0x07) |  |  |
+| Enumerator | Value  | Comment |
+| --------- | -------- | ------- |
+| `NONE` | 0 (0x00) |  |
+| `MAIN_HAND` | 1 (0x01) |  |
+| `OFF_HAND` | 2 (0x02) |  |
+| `LARGE_WEAPON_LEFT` | 3 (0x03) |  |
+| `LARGE_WEAPON_RIGHT` | 4 (0x04) |  |
+| `HIP_WEAPON_LEFT` | 5 (0x05) |  |
+| `HIP_WEAPON_RIGHT` | 6 (0x06) |  |
+| `SHIELD` | 7 (0x07) |  |
 
 Used in:
 * [SMSG_ITEM_QUERY_SINGLE_RESPONSE](smsg_item_query_single_response.md)

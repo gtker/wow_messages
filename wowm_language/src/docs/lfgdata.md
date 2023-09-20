@@ -13,10 +13,10 @@ struct LfgData {
 ```
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x00 | 2 / Little | u16 | entry |  |  |
-| 0x02 | 2 / - | [LfgType](lfgtype.md) | lfg_type |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x00 | 2 / Little | u16 | entry |  |
+| 0x02 | 2 / - | [LfgType](lfgtype.md) | lfg_type |  |
 
 
 Used in:

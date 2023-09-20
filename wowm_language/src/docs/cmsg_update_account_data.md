@@ -26,10 +26,10 @@ CMSG have a header of 6 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x06 | 4 / - | [AccountDataType](accountdatatype.md) | data_type |  | Exact meaning unknown. Seems to be between 0 and 7. Block 6 is changed when changing `layout-cache.txt` inside the WTF folder. |
-| 0x0A | ? / - | u8[-] | compressed_data |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x06 | 4 / - | [AccountDataType](accountdatatype.md) | data_type | Exact meaning unknown. Seems to be between 0 and 7. Block 6 is changed when changing `layout-cache.txt` inside the WTF folder. |
+| 0x0A | ? / - | u8[-] | compressed_data |  |
 
 ### Examples
 
@@ -335,9 +335,9 @@ CMSG have a header of 6 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x06 | 4 / Little | u32 | data_type |  | You can check this against the [CacheMask](./cachemask.md) to find out if this is character-specific data or account-wide data |
-| 0x0A | 4 / Little | u32 | unix_time |  | Seconds since unix epoch. The client wants this number back when it requests the ACCOUNT_DATA_TIMES |
-| 0x0E | ? / - | u8[-] | compressed_data |  | Compressed account data (macros, keybinds, etc). The server does not actually care about the uncompressed contents. It only needs to send this back to the client. The server acts as a cross-device storage |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x06 | 4 / Little | u32 | data_type | You can check this against the [CacheMask](./cachemask.md) to find out if this is character-specific data or account-wide data |
+| 0x0A | 4 / Little | u32 | unix_time | Seconds since unix epoch. The client wants this number back when it requests the ACCOUNT_DATA_TIMES |
+| 0x0E | ? / - | u8[-] | compressed_data | Compressed account data (macros, keybinds, etc). The server does not actually care about the uncompressed contents. It only needs to send this back to the client. The server acts as a cross-device storage |
 

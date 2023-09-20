@@ -18,15 +18,15 @@ struct SendCalendarEvent {
 ```
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x00 | 8 / Little | [Guid](../types/packed-guid.md) | event_id |  |  |
-| 0x08 | - / - | CString | title |  |  |
-| - | 4 / Little | u32 | event_type |  |  |
-| - | 4 / Little | DateTime | event_time |  |  |
-| - | 4 / Little | u32 | flags |  |  |
-| - | 4 / Little | u32 | dungeon_id |  |  |
-| - | - / - | [PackedGuid](../types/packed-guid.md) | creator |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x00 | 8 / Little | [Guid](../types/packed-guid.md) | event_id |  |
+| 0x08 | - / - | CString | title |  |
+| - | 4 / Little | u32 | event_type |  |
+| - | 4 / Little | DateTime | event_time |  |
+| - | 4 / Little | u32 | flags |  |
+| - | 4 / Little | u32 | dungeon_id |  |
+| - | - / - | [PackedGuid](../types/packed-guid.md) | creator |  |
 
 
 Used in:

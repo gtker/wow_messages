@@ -26,20 +26,20 @@ flag AttributesEx4 : u32 {
 ### Type
 The basic type is `u32`, a 4 byte (32 bit) little endian integer.
 ### Enumerators
-| Enumerator | Value  | Description | Comment |
-| --------- | -------- | ----------- | ------- |
-| `NONE` | 0 (0x00) |  |  |
-| `NO_CAST_LOG` | 1 (0x01) |  |  |
-| `CLASS_TRIGGER_ONLY_ON_TARGET` | 2 (0x02) |  |  |
-| `AURA_EXPIRES_OFFLINE` | 4 (0x04) |  |  |
-| `NO_HELPFUL_THREAT` | 8 (0x08) |  |  |
-| `NO_HARMFUL_THREAT` | 16 (0x10) |  |  |
-| `ALLOW_CLIENT_TARGETING` | 32 (0x20) |  |  |
-| `CANNOT_BE_STOLEN` | 64 (0x40) |  |  |
-| `ALLOW_CAST_WHILE_CASTING` | 128 (0x80) |  |  |
-| `IGNORE_DAMAGE_TAKEN_MODIFIERS` | 256 (0x100) |  |  |
-| `COMBAT_FEEDBACK_WHEN_USABLE` | 512 (0x200) |  |  |
-| `WEAPON_SPEED_COST_SCALING` | 1024 (0x400) |  |  |
-| `NO_PARTIAL_IMMUNITY` | 2048 (0x800) |  |  |
+| Enumerator | Value  | Comment |
+| --------- | -------- | ------- |
+| `NONE` | 0 (0x00) |  |
+| `NO_CAST_LOG` | 1 (0x01) |  |
+| `CLASS_TRIGGER_ONLY_ON_TARGET` | 2 (0x02) |  |
+| `AURA_EXPIRES_OFFLINE` | 4 (0x04) |  |
+| `NO_HELPFUL_THREAT` | 8 (0x08) |  |
+| `NO_HARMFUL_THREAT` | 16 (0x10) |  |
+| `ALLOW_CLIENT_TARGETING` | 32 (0x20) |  |
+| `CANNOT_BE_STOLEN` | 64 (0x40) |  |
+| `ALLOW_CAST_WHILE_CASTING` | 128 (0x80) |  |
+| `IGNORE_DAMAGE_TAKEN_MODIFIERS` | 256 (0x100) |  |
+| `COMBAT_FEEDBACK_WHEN_USABLE` | 512 (0x200) |  |
+| `WEAPON_SPEED_COST_SCALING` | 1024 (0x400) |  |
+| `NO_PARTIAL_IMMUNITY` | 2048 (0x800) |  |
 
 Used in:

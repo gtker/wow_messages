@@ -16,11 +16,11 @@ enum JoinArenaType : u8 {
 ### Type
 The basic type is `u8`, a 1 byte (8 bit) integer.
 ### Enumerators
-| Enumerator | Value  | Description | Comment |
-| --------- | -------- | ----------- | ------- |
-| `TWO_VS_TWO` | 0 (0x00) |  |  |
-| `THREE_VS_THREE` | 1 (0x01) |  |  |
-| `FIVE_VS_FIVE` | 2 (0x02) |  |  |
+| Enumerator | Value  | Comment |
+| --------- | -------- | ------- |
+| `TWO_VS_TWO` | 0 (0x00) |  |
+| `THREE_VS_THREE` | 1 (0x01) |  |
+| `FIVE_VS_FIVE` | 2 (0x02) |  |
 
 Used in:
 * [CMSG_BATTLEMASTER_JOIN_ARENA](cmsg_battlemaster_join_arena.md)

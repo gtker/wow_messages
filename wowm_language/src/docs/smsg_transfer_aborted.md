@@ -25,11 +25,11 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | 4 / - | [Map](map.md) | map |  |  |
-| 0x08 | 1 / - | [TransferAbortReason](transferabortreason.md) | reason |  |  |
-| 0x09 | 1 / - | u8 | argument |  | Possibly not needed. |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x04 | 4 / - | [Map](map.md) | map |  |
+| 0x08 | 1 / - | [TransferAbortReason](transferabortreason.md) | reason |  |
+| 0x09 | 1 / - | u8 | argument | Possibly not needed. |
 
 ## Client Version 2.4.3
 
@@ -59,17 +59,17 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | 4 / - | [Map](map.md) | map |  |  |
-| 0x08 | 1 / - | [TransferAbortReason](transferabortreason.md) | reason |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x04 | 4 / - | [Map](map.md) | map |  |
+| 0x08 | 1 / - | [TransferAbortReason](transferabortreason.md) | reason |  |
 
 If reason is equal to `INSUFFICIENT_EXPANSION_LEVEL` **or** 
 is equal to `DIFFICULTY_NOT_AVAILABLE`:
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x09 | 1 / - | [DungeonDifficulty](dungeondifficulty.md) | difficulty |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x09 | 1 / - | [DungeonDifficulty](dungeondifficulty.md) | difficulty |  |
 
 ## Client Version 3.3.5
 
@@ -100,16 +100,16 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | 4 / - | [Map](map.md) | map |  |  |
-| - | 1 / - | [TransferAbortReason](transferabortreason.md) | reason |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| - | 4 / - | [Map](map.md) | map |  |
+| - | 1 / - | [TransferAbortReason](transferabortreason.md) | reason |  |
 
 If reason is equal to `INSUFFICIENT_EXPANSION_LEVEL` **or** 
 is equal to `DIFFICULTY_NOT_AVAILABLE` **or** 
 is equal to `UNIQUE_MESSAGE`:
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | 1 / - | [DungeonDifficulty](dungeondifficulty.md) | difficulty |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| - | 1 / - | [DungeonDifficulty](dungeondifficulty.md) | difficulty |  |
 

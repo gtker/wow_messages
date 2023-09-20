@@ -19,14 +19,14 @@ flag RealmFlag : u8 {
 ### Type
 The basic type is `u8`, a 1 byte (8 bit) integer.
 ### Enumerators
-| Enumerator | Value  | Description | Comment |
-| --------- | -------- | ----------- | ------- |
-| `NONE` | 0 (0x00) |  |  |
-| `INVALID` | 1 (0x01) |  |  |
-| `OFFLINE` | 2 (0x02) |  |  |
-| `FORCE_BLUE_RECOMMENDED` | 32 (0x20) |  |  |
-| `FORCE_GREEN_RECOMMENDED` | 64 (0x40) |  |  |
-| `FORCE_RED_FULL` | 128 (0x80) |  |  |
+| Enumerator | Value  | Comment |
+| --------- | -------- | ------- |
+| `NONE` | 0 (0x00) |  |
+| `INVALID` | 1 (0x01) |  |
+| `OFFLINE` | 2 (0x02) |  |
+| `FORCE_BLUE_RECOMMENDED` | 32 (0x20) |  |
+| `FORCE_GREEN_RECOMMENDED` | 64 (0x40) |  |
+| `FORCE_RED_FULL` | 128 (0x80) |  |
 
 Used in:
 * [Realm](realm.md)
@@ -51,15 +51,15 @@ flag RealmFlag : u8 {
 ### Type
 The basic type is `u8`, a 1 byte (8 bit) integer.
 ### Enumerators
-| Enumerator | Value  | Description | Comment |
-| --------- | -------- | ----------- | ------- |
-| `NONE` | 0 (0x00) |  |  |
-| `INVALID` | 1 (0x01) |  |  |
-| `OFFLINE` | 2 (0x02) |  |  |
-| `SPECIFY_BUILD` | 4 (0x04) |  |  |
-| `FORCE_BLUE_RECOMMENDED` | 32 (0x20) |  |  |
-| `FORCE_GREEN_RECOMMENDED` | 64 (0x40) |  |  |
-| `FORCE_RED_FULL` | 128 (0x80) |  |  |
+| Enumerator | Value  | Comment |
+| --------- | -------- | ------- |
+| `NONE` | 0 (0x00) |  |
+| `INVALID` | 1 (0x01) |  |
+| `OFFLINE` | 2 (0x02) |  |
+| `SPECIFY_BUILD` | 4 (0x04) |  |
+| `FORCE_BLUE_RECOMMENDED` | 32 (0x20) |  |
+| `FORCE_GREEN_RECOMMENDED` | 64 (0x40) |  |
+| `FORCE_RED_FULL` | 128 (0x80) |  |
 
 Used in:
 * [Realm](realm.md)

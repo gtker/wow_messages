@@ -23,7 +23,7 @@ CMSG have a header of 6 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x06 | 4 / Little | u32 | tutorial_flag |  | arcemu indexes into the tutorials by dividing by 32 and modulo 32. |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x06 | 4 / Little | u32 | tutorial_flag | arcemu indexes into the tutorials by dividing by 32 and modulo 32. |
 

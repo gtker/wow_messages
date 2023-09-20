@@ -13,10 +13,10 @@ struct ForcedReaction {
 ```
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x00 | 2 / - | [Faction](faction.md) | faction |  |  |
-| 0x02 | 4 / Little | u32 | reputation_rank |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x00 | 2 / - | [Faction](faction.md) | faction |  |
+| 0x02 | 4 / Little | u32 | reputation_rank |  |
 
 
 Used in:
@@ -35,10 +35,10 @@ struct ForcedReaction {
 ```
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x00 | 2 / - | [Faction](faction.md) | faction |  |  |
-| 0x02 | 4 / Little | u32 | reputation_rank |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x00 | 2 / - | [Faction](faction.md) | faction |  |
+| 0x02 | 4 / Little | u32 | reputation_rank |  |
 
 
 Used in:
@@ -57,10 +57,10 @@ struct ForcedReaction {
 ```
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x00 | 2 / - | [Faction](faction.md) | faction |  |  |
-| 0x02 | 4 / Little | u32 | reputation_rank |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x00 | 2 / - | [Faction](faction.md) | faction |  |
+| 0x02 | 4 / Little | u32 | reputation_rank |  |
 
 
 Used in:

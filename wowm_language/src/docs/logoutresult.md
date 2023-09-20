@@ -17,12 +17,12 @@ enum LogoutResult : u32 {
 ### Type
 The basic type is `u32`, a 4 byte (32 bit) little endian integer.
 ### Enumerators
-| Enumerator | Value  | Description | Comment |
-| --------- | -------- | ----------- | ------- |
-| `SUCCESS` | 0 (0x00) |  |  |
-| `FAILURE_IN_COMBAT` | 1 (0x01) |  |  |
-| `FAILURE_FROZEN_BY_GM` | 2 (0x02) |  | vmangos checks for aura 9454. Has FIXME - Need the correct value. |
-| `FAILURE_JUMPING_OR_FALLING` | 3 (0x03) |  |  |
+| Enumerator | Value  | Comment |
+| --------- | -------- | ------- |
+| `SUCCESS` | 0 (0x00) |  |
+| `FAILURE_IN_COMBAT` | 1 (0x01) |  |
+| `FAILURE_FROZEN_BY_GM` | 2 (0x02) | vmangos checks for aura 9454. Has FIXME - Need the correct value. |
+| `FAILURE_JUMPING_OR_FALLING` | 3 (0x03) |  |
 
 Used in:
 * [SMSG_LOGOUT_RESPONSE](smsg_logout_response.md)

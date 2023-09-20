@@ -15,12 +15,12 @@ struct SendCalendarInstance {
 ```
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x00 | 4 / - | [Map](map.md) | map |  |  |
-| 0x04 | 4 / Little | u32 | difficulty |  |  |
-| 0x08 | 4 / Little | u32 | reset_time |  |  |
-| 0x0C | 8 / Little | [Guid](../types/packed-guid.md) | instance_id |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x00 | 4 / - | [Map](map.md) | map |  |
+| 0x04 | 4 / Little | u32 | difficulty |  |
+| 0x08 | 4 / Little | u32 | reset_time |  |
+| 0x0C | 8 / Little | [Guid](../types/packed-guid.md) | instance_id |  |
 
 
 Used in:

@@ -28,12 +28,12 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | 4 / Little | u32 | rolecheck_state |  |  |
-| - | 1 / - | u8 | rolecheck_initializing |  |  |
-| - | 1 / - | u8 | amount_of_dungeon_entries |  |  |
-| - | ? / - | u32[amount_of_dungeon_entries] | dungeon_entries |  |  |
-| - | 1 / - | u8 | amount_of_roles |  |  |
-| - | ? / - | [LfgRole](lfgrole.md)[amount_of_roles] | roles |  | azerothcore: Leader info MUST be sent first. |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| - | 4 / Little | u32 | rolecheck_state |  |
+| - | 1 / - | u8 | rolecheck_initializing |  |
+| - | 1 / - | u8 | amount_of_dungeon_entries |  |
+| - | ? / - | u32[amount_of_dungeon_entries] | dungeon_entries |  |
+| - | 1 / - | u8 | amount_of_roles |  |
+| - | ? / - | [LfgRole](lfgrole.md)[amount_of_roles] | roles | azerothcore: Leader info MUST be sent first. |
 

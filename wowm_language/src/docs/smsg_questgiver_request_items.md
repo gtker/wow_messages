@@ -38,22 +38,22 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | 8 / Little | [Guid](../types/packed-guid.md) | npc |  |  |
-| 0x0C | 4 / Little | u32 | quest_id |  |  |
-| 0x10 | - / - | CString | title |  |  |
-| - | - / - | CString | request_items_text |  |  |
-| - | 4 / Little | u32 | emote_delay |  |  |
-| - | 4 / Little | u32 | emote |  |  |
-| - | 4 / Little | Bool32 | auto_finish |  |  |
-| - | 4 / Little | Gold | required_money |  |  |
-| - | 4 / Little | u32 | amount_of_required_items |  |  |
-| - | ? / - | [QuestItemRequirement](questitemrequirement.md)[amount_of_required_items] | required_items |  |  |
-| - | 4 / Little | u32 | unknown1 |  | cmangos/vmangos/mangoszero: All emulators set to 0x02 |
-| - | 4 / - | [QuestCompletable](questcompletable.md) | completable |  |  |
-| - | 4 / Little | u32 | flags2 |  | cmangos/vmangos/mangoszero: set to 0x04 |
-| - | 4 / Little | u32 | flags3 |  | cmangos/vmangos/mangoszero: set to 0x08 |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x04 | 8 / Little | [Guid](../types/packed-guid.md) | npc |  |
+| 0x0C | 4 / Little | u32 | quest_id |  |
+| 0x10 | - / - | CString | title |  |
+| - | - / - | CString | request_items_text |  |
+| - | 4 / Little | u32 | emote_delay |  |
+| - | 4 / Little | u32 | emote |  |
+| - | 4 / Little | Bool32 | auto_finish |  |
+| - | 4 / Little | Gold | required_money |  |
+| - | 4 / Little | u32 | amount_of_required_items |  |
+| - | ? / - | [QuestItemRequirement](questitemrequirement.md)[amount_of_required_items] | required_items |  |
+| - | 4 / Little | u32 | unknown1 | cmangos/vmangos/mangoszero: All emulators set to 0x02 |
+| - | 4 / - | [QuestCompletable](questcompletable.md) | completable |  |
+| - | 4 / Little | u32 | flags2 | cmangos/vmangos/mangoszero: set to 0x04 |
+| - | 4 / Little | u32 | flags3 | cmangos/vmangos/mangoszero: set to 0x08 |
 
 ## Client Version 2.4.3
 
@@ -94,23 +94,23 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | 8 / Little | [Guid](../types/packed-guid.md) | npc |  |  |
-| 0x0C | 4 / Little | u32 | quest_id |  |  |
-| 0x10 | - / - | CString | title |  |  |
-| - | - / - | CString | request_items_text |  |  |
-| - | 4 / Little | u32 | emote_delay |  |  |
-| - | 4 / Little | u32 | emote |  |  |
-| - | 4 / Little | Bool32 | auto_finish |  |  |
-| - | 4 / Little | u32 | suggested_players |  |  |
-| - | 4 / Little | Gold | required_money |  |  |
-| - | 4 / Little | u32 | amount_of_required_items |  |  |
-| - | ? / - | [QuestItemRequirement](questitemrequirement.md)[amount_of_required_items] | required_items |  |  |
-| - | 4 / - | [QuestCompletable](questcompletable.md) | completable |  |  |
-| - | 4 / Little | u32 | flags1 |  | cmangos/vmangos/mangoszero: set to 0x04 |
-| - | 4 / Little | u32 | flags2 |  | cmangos/vmangos/mangoszero: set to 0x08 |
-| - | 4 / Little | u32 | flags3 |  | cmangos/vmangos/mangoszero: set to 0x10 |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x04 | 8 / Little | [Guid](../types/packed-guid.md) | npc |  |
+| 0x0C | 4 / Little | u32 | quest_id |  |
+| 0x10 | - / - | CString | title |  |
+| - | - / - | CString | request_items_text |  |
+| - | 4 / Little | u32 | emote_delay |  |
+| - | 4 / Little | u32 | emote |  |
+| - | 4 / Little | Bool32 | auto_finish |  |
+| - | 4 / Little | u32 | suggested_players |  |
+| - | 4 / Little | Gold | required_money |  |
+| - | 4 / Little | u32 | amount_of_required_items |  |
+| - | ? / - | [QuestItemRequirement](questitemrequirement.md)[amount_of_required_items] | required_items |  |
+| - | 4 / - | [QuestCompletable](questcompletable.md) | completable |  |
+| - | 4 / Little | u32 | flags1 | cmangos/vmangos/mangoszero: set to 0x04 |
+| - | 4 / Little | u32 | flags2 | cmangos/vmangos/mangoszero: set to 0x08 |
+| - | 4 / Little | u32 | flags3 | cmangos/vmangos/mangoszero: set to 0x10 |
 
 ## Client Version 3.3.5
 
@@ -152,22 +152,22 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | 8 / Little | [Guid](../types/packed-guid.md) | npc |  |  |
-| - | 4 / Little | u32 | quest_id |  |  |
-| - | - / - | CString | title |  |  |
-| - | - / - | CString | request_items_text |  |  |
-| - | 4 / Little | u32 | emote_delay |  |  |
-| - | 4 / Little | u32 | emote |  |  |
-| - | 4 / Little | Bool32 | auto_finish |  |  |
-| - | 4 / Little | u32 | flags1 |  | mangostwo: 3.3.3 questFlags |
-| - | 4 / Little | u32 | suggested_players |  |  |
-| - | 4 / Little | Gold | required_money |  |  |
-| - | 4 / Little | u32 | amount_of_required_items |  |  |
-| - | ? / - | [QuestItemRequirement](questitemrequirement.md)[amount_of_required_items] | required_items |  |  |
-| - | 4 / - | [QuestCompletable](questcompletable.md) | completable |  |  |
-| - | 4 / Little | u32 | flags2 |  | mangostwo: set to 0x04 |
-| - | 4 / Little | u32 | flags3 |  | mangostwo: set to 0x08 |
-| - | 4 / Little | u32 | flags4 |  | mangostwo: set to 0x10 |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| - | 8 / Little | [Guid](../types/packed-guid.md) | npc |  |
+| - | 4 / Little | u32 | quest_id |  |
+| - | - / - | CString | title |  |
+| - | - / - | CString | request_items_text |  |
+| - | 4 / Little | u32 | emote_delay |  |
+| - | 4 / Little | u32 | emote |  |
+| - | 4 / Little | Bool32 | auto_finish |  |
+| - | 4 / Little | u32 | flags1 | mangostwo: 3.3.3 questFlags |
+| - | 4 / Little | u32 | suggested_players |  |
+| - | 4 / Little | Gold | required_money |  |
+| - | 4 / Little | u32 | amount_of_required_items |  |
+| - | ? / - | [QuestItemRequirement](questitemrequirement.md)[amount_of_required_items] | required_items |  |
+| - | 4 / - | [QuestCompletable](questcompletable.md) | completable |  |
+| - | 4 / Little | u32 | flags2 | mangostwo: set to 0x04 |
+| - | 4 / Little | u32 | flags3 | mangostwo: set to 0x08 |
+| - | 4 / Little | u32 | flags4 | mangostwo: set to 0x10 |
 

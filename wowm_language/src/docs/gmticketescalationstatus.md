@@ -16,11 +16,11 @@ enum GmTicketEscalationStatus : u8 {
 ### Type
 The basic type is `u8`, a 1 byte (8 bit) integer.
 ### Enumerators
-| Enumerator | Value  | Description | Comment |
-| --------- | -------- | ----------- | ------- |
-| `GMTICKET_ASSIGNEDTOGM_STATUS_NOT_ASSIGNED` | 0 (0x00) |  | ticket is not currently assigned to a gm |
-| `GMTICKET_ASSIGNEDTOGM_STATUS_ASSIGNED` | 1 (0x01) |  | ticket is assigned to a normal gm |
-| `GMTICKET_ASSIGNEDTOGM_STATUS_ESCALATED` | 2 (0x02) |  | ticket is in the escalation queue |
+| Enumerator | Value  | Comment |
+| --------- | -------- | ------- |
+| `GMTICKET_ASSIGNEDTOGM_STATUS_NOT_ASSIGNED` | 0 (0x00) | ticket is not currently assigned to a gm |
+| `GMTICKET_ASSIGNEDTOGM_STATUS_ASSIGNED` | 1 (0x01) | ticket is assigned to a normal gm |
+| `GMTICKET_ASSIGNEDTOGM_STATUS_ESCALATED` | 2 (0x02) | ticket is in the escalation queue |
 
 Used in:
 * [SMSG_GMTICKET_GETTICKET](smsg_gmticket_getticket.md)

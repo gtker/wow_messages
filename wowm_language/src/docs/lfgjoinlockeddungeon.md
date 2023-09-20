@@ -13,10 +13,10 @@ struct LfgJoinLockedDungeon {
 ```
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x00 | 4 / Little | u32 | dungeon_entry |  |  |
-| 0x04 | 4 / Little | u32 | reason |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x00 | 4 / Little | u32 | dungeon_entry |  |
+| 0x04 | 4 / Little | u32 | reason |  |
 
 
 Used in:

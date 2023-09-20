@@ -23,18 +23,18 @@ enum RaidTargetIndex : u8 {
 ### Type
 The basic type is `u8`, a 1 byte (8 bit) integer.
 ### Enumerators
-| Enumerator | Value  | Description | Comment |
-| --------- | -------- | ----------- | ------- |
-| `UNKNOWN0` | 0 (0x00) |  |  |
-| `UNKNOWN1` | 1 (0x01) |  |  |
-| `UNKNOWN2` | 2 (0x02) |  |  |
-| `UNKNOWN3` | 3 (0x03) |  |  |
-| `UNKNOWN4` | 4 (0x04) |  |  |
-| `UNKNOWN5` | 5 (0x05) |  |  |
-| `UNKNOWN6` | 6 (0x06) |  |  |
-| `UNKNOWN7` | 7 (0x07) |  |  |
-| `UNKNOWN8` | 8 (0x08) |  |  |
-| `REQUEST_ICONS` | 255 (0xFF) |  |  |
+| Enumerator | Value  | Comment |
+| --------- | -------- | ------- |
+| `UNKNOWN0` | 0 (0x00) |  |
+| `UNKNOWN1` | 1 (0x01) |  |
+| `UNKNOWN2` | 2 (0x02) |  |
+| `UNKNOWN3` | 3 (0x03) |  |
+| `UNKNOWN4` | 4 (0x04) |  |
+| `UNKNOWN5` | 5 (0x05) |  |
+| `UNKNOWN6` | 6 (0x06) |  |
+| `UNKNOWN7` | 7 (0x07) |  |
+| `UNKNOWN8` | 8 (0x08) |  |
+| `REQUEST_ICONS` | 255 (0xFF) |  |
 
 Used in:
 * [MSG_RAID_TARGET_UPDATE_Client](msg_raid_target_update_client.md)

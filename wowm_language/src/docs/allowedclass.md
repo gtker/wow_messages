@@ -23,18 +23,18 @@ flag AllowedClass : u32 {
 ### Type
 The basic type is `u32`, a 4 byte (32 bit) little endian integer.
 ### Enumerators
-| Enumerator | Value  | Description | Comment |
-| --------- | -------- | ----------- | ------- |
-| `ALL` | 0 (0x00) |  |  |
-| `WARRIOR` | 1 (0x01) |  |  |
-| `PALADIN` | 2 (0x02) |  |  |
-| `HUNTER` | 4 (0x04) |  |  |
-| `ROGUE` | 8 (0x08) |  |  |
-| `PRIEST` | 16 (0x10) |  |  |
-| `SHAMAN` | 64 (0x40) |  |  |
-| `MAGE` | 128 (0x80) |  |  |
-| `WARLOCK` | 256 (0x100) |  |  |
-| `DRUID` | 1024 (0x400) |  |  |
+| Enumerator | Value  | Comment |
+| --------- | -------- | ------- |
+| `ALL` | 0 (0x00) |  |
+| `WARRIOR` | 1 (0x01) |  |
+| `PALADIN` | 2 (0x02) |  |
+| `HUNTER` | 4 (0x04) |  |
+| `ROGUE` | 8 (0x08) |  |
+| `PRIEST` | 16 (0x10) |  |
+| `SHAMAN` | 64 (0x40) |  |
+| `MAGE` | 128 (0x80) |  |
+| `WARLOCK` | 256 (0x100) |  |
+| `DRUID` | 1024 (0x400) |  |
 
 Used in:
 * [SMSG_ITEM_QUERY_SINGLE_RESPONSE](smsg_item_query_single_response.md)
@@ -64,19 +64,19 @@ flag AllowedClass : u32 {
 ### Type
 The basic type is `u32`, a 4 byte (32 bit) little endian integer.
 ### Enumerators
-| Enumerator | Value  | Description | Comment |
-| --------- | -------- | ----------- | ------- |
-| `ALL` | 0 (0x00) |  |  |
-| `WARRIOR` | 1 (0x01) |  |  |
-| `PALADIN` | 2 (0x02) |  |  |
-| `HUNTER` | 4 (0x04) |  |  |
-| `ROGUE` | 8 (0x08) |  |  |
-| `PRIEST` | 16 (0x10) |  |  |
-| `DEATH_KNIGHT` | 32 (0x20) |  |  |
-| `SHAMAN` | 64 (0x40) |  |  |
-| `MAGE` | 128 (0x80) |  |  |
-| `WARLOCK` | 256 (0x100) |  |  |
-| `DRUID` | 1024 (0x400) |  |  |
+| Enumerator | Value  | Comment |
+| --------- | -------- | ------- |
+| `ALL` | 0 (0x00) |  |
+| `WARRIOR` | 1 (0x01) |  |
+| `PALADIN` | 2 (0x02) |  |
+| `HUNTER` | 4 (0x04) |  |
+| `ROGUE` | 8 (0x08) |  |
+| `PRIEST` | 16 (0x10) |  |
+| `DEATH_KNIGHT` | 32 (0x20) |  |
+| `SHAMAN` | 64 (0x40) |  |
+| `MAGE` | 128 (0x80) |  |
+| `WARLOCK` | 256 (0x100) |  |
+| `DRUID` | 1024 (0x400) |  |
 
 Used in:
 * [SMSG_ITEM_QUERY_SINGLE_RESPONSE](smsg_item_query_single_response.md)

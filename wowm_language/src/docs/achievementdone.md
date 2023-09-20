@@ -15,10 +15,10 @@ struct AchievementDone {
 ```
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x00 | 4 / Little | u32 | achievement |  |  |
-| 0x04 | 4 / Little | DateTime | time |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x00 | 4 / Little | u32 | achievement |  |
+| 0x04 | 4 / Little | DateTime | time |  |
 
 
 Used in:

@@ -36,31 +36,31 @@ flag GroupUpdateFlags : u32 {
 ### Type
 The basic type is `u32`, a 4 byte (32 bit) little endian integer.
 ### Enumerators
-| Enumerator | Value  | Description | Comment |
-| --------- | -------- | ----------- | ------- |
-| `NONE` | 0 (0x00) |  | nothing |
-| `STATUS` | 1 (0x01) |  | uint8, enum `GroupMemberOnlineStatus` |
-| `CUR_HP` | 2 (0x02) |  | uint16 |
-| `MAX_HP` | 4 (0x04) |  | uint16 |
-| `POWER_TYPE` | 8 (0x08) |  | uint8, enum Powers |
-| `CUR_POWER` | 16 (0x10) |  | uint16 |
-| `MAX_POWER` | 32 (0x20) |  | uint16 |
-| `LEVEL` | 64 (0x40) |  | uint16 |
-| `ZONE` | 128 (0x80) |  | uint16 |
-| `POSITION` | 256 (0x100) |  | uint16, uint16 |
-| `AURAS` | 512 (0x200) |  | uint32 mask, for each bit set uint16 spellid |
-| `AURAS_2` | 1024 (0x400) |  | uint16 above mask continuation, giving max total of 48 auras possible |
-| `PET_GUID` | 2048 (0x800) |  | uint64 pet guid |
-| `PET_NAME` | 4096 (0x1000) |  | pet name, NULL terminated string |
-| `PET_MODEL_ID` | 8192 (0x2000) |  | uint16, model id |
-| `PET_CUR_HP` | 16384 (0x4000) |  | uint16 pet cur health |
-| `PET_MAX_HP` | 32768 (0x8000) |  | uint16 pet max health |
-| `PET_POWER_TYPE` | 65536 (0x10000) |  | uint8 pet power type |
-| `PET_CUR_POWER` | 131072 (0x20000) |  | uint16 pet cur power |
-| `PET_MAX_POWER` | 262144 (0x40000) |  | uint16 pet max power |
-| `PET_AURAS` | 524288 (0x80000) |  | uint32 mask, for each bit set uint16 spellid, pet auras... |
-| `PET_AURAS_2` | 1048576 (0x100000) |  | uint16 above mask continuation, giving max total of 48 auras possible |
-| `MODE_OFFLINE` | 268435456 (0x10000000) |  |  |
+| Enumerator | Value  | Comment |
+| --------- | -------- | ------- |
+| `NONE` | 0 (0x00) | nothing |
+| `STATUS` | 1 (0x01) | uint8, enum `GroupMemberOnlineStatus` |
+| `CUR_HP` | 2 (0x02) | uint16 |
+| `MAX_HP` | 4 (0x04) | uint16 |
+| `POWER_TYPE` | 8 (0x08) | uint8, enum Powers |
+| `CUR_POWER` | 16 (0x10) | uint16 |
+| `MAX_POWER` | 32 (0x20) | uint16 |
+| `LEVEL` | 64 (0x40) | uint16 |
+| `ZONE` | 128 (0x80) | uint16 |
+| `POSITION` | 256 (0x100) | uint16, uint16 |
+| `AURAS` | 512 (0x200) | uint32 mask, for each bit set uint16 spellid |
+| `AURAS_2` | 1024 (0x400) | uint16 above mask continuation, giving max total of 48 auras possible |
+| `PET_GUID` | 2048 (0x800) | uint64 pet guid |
+| `PET_NAME` | 4096 (0x1000) | pet name, NULL terminated string |
+| `PET_MODEL_ID` | 8192 (0x2000) | uint16, model id |
+| `PET_CUR_HP` | 16384 (0x4000) | uint16 pet cur health |
+| `PET_MAX_HP` | 32768 (0x8000) | uint16 pet max health |
+| `PET_POWER_TYPE` | 65536 (0x10000) | uint8 pet power type |
+| `PET_CUR_POWER` | 131072 (0x20000) | uint16 pet cur power |
+| `PET_MAX_POWER` | 262144 (0x40000) | uint16 pet max power |
+| `PET_AURAS` | 524288 (0x80000) | uint32 mask, for each bit set uint16 spellid, pet auras... |
+| `PET_AURAS_2` | 1048576 (0x100000) | uint16 above mask continuation, giving max total of 48 auras possible |
+| `MODE_OFFLINE` | 268435456 (0x10000000) |  |
 
 Used in:
 * [SMSG_PARTY_MEMBER_STATS](smsg_party_member_stats.md)
@@ -98,28 +98,28 @@ flag GroupUpdateFlags : u32 {
 ### Type
 The basic type is `u32`, a 4 byte (32 bit) little endian integer.
 ### Enumerators
-| Enumerator | Value  | Description | Comment |
-| --------- | -------- | ----------- | ------- |
-| `NONE` | 0 (0x00) |  | nothing |
-| `STATUS` | 1 (0x01) |  | uint16, flags |
-| `CUR_HP` | 2 (0x02) |  | uint16 |
-| `MAX_HP` | 4 (0x04) |  | uint16 |
-| `POWER_TYPE` | 8 (0x08) |  | uint8 |
-| `CUR_POWER` | 16 (0x10) |  | uint16 |
-| `MAX_POWER` | 32 (0x20) |  | uint16 |
-| `LEVEL` | 64 (0x40) |  | uint16 |
-| `ZONE` | 128 (0x80) |  | uint16 |
-| `POSITION` | 256 (0x100) |  | uint16, uint16 |
-| `AURAS` | 512 (0x200) |  | uint64 mask, for each bit set uint16 spellid + uint8 unk |
-| `PET_GUID` | 1024 (0x400) |  | uint64 pet guid |
-| `PET_NAME` | 2048 (0x800) |  | pet name, nullptr terminated string |
-| `PET_MODEL_ID` | 4096 (0x1000) |  | uint16, model id |
-| `PET_CUR_HP` | 8192 (0x2000) |  | uint16 pet cur health |
-| `PET_MAX_HP` | 16384 (0x4000) |  | uint16 pet max health |
-| `PET_POWER_TYPE` | 32768 (0x8000) |  | uint8 pet power type |
-| `PET_CUR_POWER` | 65536 (0x10000) |  | uint16 pet cur power |
-| `PET_MAX_POWER` | 131072 (0x20000) |  | uint16 pet max power |
-| `PET_AURAS` | 262144 (0x40000) |  | uint64 mask, for each bit set uint16 spellid + uint8 unk, pet auras... |
+| Enumerator | Value  | Comment |
+| --------- | -------- | ------- |
+| `NONE` | 0 (0x00) | nothing |
+| `STATUS` | 1 (0x01) | uint16, flags |
+| `CUR_HP` | 2 (0x02) | uint16 |
+| `MAX_HP` | 4 (0x04) | uint16 |
+| `POWER_TYPE` | 8 (0x08) | uint8 |
+| `CUR_POWER` | 16 (0x10) | uint16 |
+| `MAX_POWER` | 32 (0x20) | uint16 |
+| `LEVEL` | 64 (0x40) | uint16 |
+| `ZONE` | 128 (0x80) | uint16 |
+| `POSITION` | 256 (0x100) | uint16, uint16 |
+| `AURAS` | 512 (0x200) | uint64 mask, for each bit set uint16 spellid + uint8 unk |
+| `PET_GUID` | 1024 (0x400) | uint64 pet guid |
+| `PET_NAME` | 2048 (0x800) | pet name, nullptr terminated string |
+| `PET_MODEL_ID` | 4096 (0x1000) | uint16, model id |
+| `PET_CUR_HP` | 8192 (0x2000) | uint16 pet cur health |
+| `PET_MAX_HP` | 16384 (0x4000) | uint16 pet max health |
+| `PET_POWER_TYPE` | 32768 (0x8000) | uint8 pet power type |
+| `PET_CUR_POWER` | 65536 (0x10000) | uint16 pet cur power |
+| `PET_MAX_POWER` | 131072 (0x20000) | uint16 pet max power |
+| `PET_AURAS` | 262144 (0x40000) | uint64 mask, for each bit set uint16 spellid + uint8 unk, pet auras... |
 
 Used in:
 * [SMSG_PARTY_MEMBER_STATS](smsg_party_member_stats.md)
@@ -158,29 +158,29 @@ flag GroupUpdateFlags : u32 {
 ### Type
 The basic type is `u32`, a 4 byte (32 bit) little endian integer.
 ### Enumerators
-| Enumerator | Value  | Description | Comment |
-| --------- | -------- | ----------- | ------- |
-| `NONE` | 0 (0x00) |  | nothing |
-| `STATUS` | 1 (0x01) |  | uint16, flags |
-| `CUR_HP` | 2 (0x02) |  | uint32 |
-| `MAX_HP` | 4 (0x04) |  | uint32 |
-| `POWER_TYPE` | 8 (0x08) |  | uint8 |
-| `CUR_POWER` | 16 (0x10) |  | uint16 |
-| `MAX_POWER` | 32 (0x20) |  | uint16 |
-| `LEVEL` | 64 (0x40) |  | uint16 |
-| `ZONE` | 128 (0x80) |  | uint16 |
-| `POSITION` | 256 (0x100) |  | uint16, uint16 |
-| `AURAS` | 512 (0x200) |  | uint64 mask, for each bit set uint32 spellid + uint8 unk |
-| `PET_GUID` | 1024 (0x400) |  | uint64 pet guid |
-| `PET_NAME` | 2048 (0x800) |  | pet name, nullptr terminated string |
-| `PET_MODEL_ID` | 4096 (0x1000) |  | uint16, model id |
-| `PET_CUR_HP` | 8192 (0x2000) |  | uint32 pet cur health |
-| `PET_MAX_HP` | 16384 (0x4000) |  | uint32 pet max health |
-| `PET_POWER_TYPE` | 32768 (0x8000) |  | uint8 pet power type |
-| `PET_CUR_POWER` | 65536 (0x10000) |  | uint16 pet cur power |
-| `PET_MAX_POWER` | 131072 (0x20000) |  | uint16 pet max power |
-| `PET_AURAS` | 262144 (0x40000) |  | uint64 mask, for each bit set uint32 spellid + uint8 unk, pet auras... |
-| `VEHICLE_SEAT` | 524288 (0x80000) |  | uint32 `vehicle_seat_id` (index from VehicleSeat.dbc) |
+| Enumerator | Value  | Comment |
+| --------- | -------- | ------- |
+| `NONE` | 0 (0x00) | nothing |
+| `STATUS` | 1 (0x01) | uint16, flags |
+| `CUR_HP` | 2 (0x02) | uint32 |
+| `MAX_HP` | 4 (0x04) | uint32 |
+| `POWER_TYPE` | 8 (0x08) | uint8 |
+| `CUR_POWER` | 16 (0x10) | uint16 |
+| `MAX_POWER` | 32 (0x20) | uint16 |
+| `LEVEL` | 64 (0x40) | uint16 |
+| `ZONE` | 128 (0x80) | uint16 |
+| `POSITION` | 256 (0x100) | uint16, uint16 |
+| `AURAS` | 512 (0x200) | uint64 mask, for each bit set uint32 spellid + uint8 unk |
+| `PET_GUID` | 1024 (0x400) | uint64 pet guid |
+| `PET_NAME` | 2048 (0x800) | pet name, nullptr terminated string |
+| `PET_MODEL_ID` | 4096 (0x1000) | uint16, model id |
+| `PET_CUR_HP` | 8192 (0x2000) | uint32 pet cur health |
+| `PET_MAX_HP` | 16384 (0x4000) | uint32 pet max health |
+| `PET_POWER_TYPE` | 32768 (0x8000) | uint8 pet power type |
+| `PET_CUR_POWER` | 65536 (0x10000) | uint16 pet cur power |
+| `PET_MAX_POWER` | 131072 (0x20000) | uint16 pet max power |
+| `PET_AURAS` | 262144 (0x40000) | uint64 mask, for each bit set uint32 spellid + uint8 unk, pet auras... |
+| `VEHICLE_SEAT` | 524288 (0x80000) | uint32 `vehicle_seat_id` (index from VehicleSeat.dbc) |
 
 Used in:
 * [SMSG_PARTY_MEMBER_STATS](smsg_party_member_stats.md)

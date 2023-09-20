@@ -91,14 +91,14 @@ fn print_definer_table(s: &mut Writer, e: &Definer) {
 
     let any_fields_has_display = e.fields().iter().any(|f| f.tags().display().is_some());
 
-    s.w("| Enumerator | Value  | Description | Comment |");
+    s.w("| Enumerator | Value  | Comment |");
     if any_fields_has_display {
         s.wln(" Display |");
     } else {
         s.newline();
     }
 
-    s.w("| --------- | -------- | ----------- | ------- |");
+    s.w("| --------- | -------- | ------- |");
     if any_fields_has_display {
         s.wln(" ------- |");
     } else {
@@ -106,12 +106,6 @@ fn print_definer_table(s: &mut Writer, e: &Definer) {
     }
 
     for f in e.fields() {
-        let description = if let Some(d) = f.tags().description() {
-            d.as_doc_table_string()
-        } else {
-            "".to_string()
-        };
-
         let comment = if let Some(d) = f.tags().comment() {
             d.as_doc_table_string()
         } else {
@@ -119,11 +113,10 @@ fn print_definer_table(s: &mut Writer, e: &Definer) {
         };
 
         s.w(format!(
-            "| `{name}` | {value} (0x{hex:0>2X}) | {description} | {comment} |",
+            "| `{name}` | {value} (0x{hex:0>2X}) | {comment} |",
             name = f.name(),
             value = f.value().int(),
             hex = f.value().int(),
-            description = description,
             comment = comment,
         ));
         if any_fields_has_display {

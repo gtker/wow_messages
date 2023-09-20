@@ -16,11 +16,11 @@ enum AddonType : u8 {
 ### Type
 The basic type is `u8`, a 1 byte (8 bit) integer.
 ### Enumerators
-| Enumerator | Value  | Description | Comment |
-| --------- | -------- | ----------- | ------- |
-| `BANNED` | 0 (0x00) |  |  |
-| `ENABLED` | 1 (0x01) |  | Shows addon in list. Probably intended for player-created addons. |
-| `BLIZZARD` | 2 (0x02) |  | Hides addon from list. |
+| Enumerator | Value  | Comment |
+| --------- | -------- | ------- |
+| `BANNED` | 0 (0x00) |  |
+| `ENABLED` | 1 (0x01) | Shows addon in list. Probably intended for player-created addons. |
+| `BLIZZARD` | 2 (0x02) | Hides addon from list. |
 
 Used in:
 * [Addon](addon.md)

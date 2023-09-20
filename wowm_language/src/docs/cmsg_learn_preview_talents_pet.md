@@ -25,9 +25,9 @@ CMSG have a header of 6 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x06 | 8 / Little | [Guid](../types/packed-guid.md) | pet |  |  |
-| 0x0E | 4 / Little | u32 | amount_of_talents |  |  |
-| 0x12 | ? / - | [PreviewTalent](previewtalent.md)[amount_of_talents] | talents |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x06 | 8 / Little | [Guid](../types/packed-guid.md) | pet |  |
+| 0x0E | 4 / Little | u32 | amount_of_talents |  |
+| 0x12 | ? / - | [PreviewTalent](previewtalent.md)[amount_of_talents] | talents |  |
 

@@ -13,10 +13,10 @@ struct ResyncRune {
 ```
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x00 | 1 / - | u8 | current_rune |  |  |
-| 0x01 | 1 / - | u8 | rune_cooldown |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x00 | 1 / - | u8 | current_rune |  |
+| 0x01 | 1 / - | u8 | rune_cooldown |  |
 
 
 Used in:

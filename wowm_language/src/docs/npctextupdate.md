@@ -15,12 +15,12 @@ struct NpcTextUpdate {
 ```
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x00 | 4 / Little | f32 | probability |  |  |
-| 0x04 | ? / - | CString[2] | texts |  |  |
-| - | 4 / - | [Language](language.md) | language |  |  |
-| - | 24 / - | [NpcTextUpdateEmote](npctextupdateemote.md)[3] | emotes |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x00 | 4 / Little | f32 | probability |  |
+| 0x04 | ? / - | CString[2] | texts |  |
+| - | 4 / - | [Language](language.md) | language |  |
+| - | 24 / - | [NpcTextUpdateEmote](npctextupdateemote.md)[3] | emotes |  |
 
 
 Used in:
@@ -41,12 +41,12 @@ struct NpcTextUpdate {
 ```
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x00 | 4 / Little | f32 | probability |  |  |
-| 0x04 | ? / - | CString[2] | texts |  |  |
-| - | 1 / - | [Language](language.md) | language |  |  |
-| - | 24 / - | [NpcTextUpdateEmote](npctextupdateemote.md)[3] | emotes |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x00 | 4 / Little | f32 | probability |  |
+| 0x04 | ? / - | CString[2] | texts |  |
+| - | 1 / - | [Language](language.md) | language |  |
+| - | 24 / - | [NpcTextUpdateEmote](npctextupdateemote.md)[3] | emotes |  |
 
 
 Used in:
@@ -67,12 +67,12 @@ struct NpcTextUpdate {
 ```
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x00 | 4 / Little | f32 | probability |  |  |
-| 0x04 | ? / - | CString[2] | texts |  |  |
-| - | 1 / - | [Language](language.md) | language |  |  |
-| - | 24 / - | [NpcTextUpdateEmote](npctextupdateemote.md)[3] | emotes |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x00 | 4 / Little | f32 | probability |  |
+| 0x04 | ? / - | CString[2] | texts |  |
+| - | 1 / - | [Language](language.md) | language |  |
+| - | 24 / - | [NpcTextUpdateEmote](npctextupdateemote.md)[3] | emotes |  |
 
 
 Used in:

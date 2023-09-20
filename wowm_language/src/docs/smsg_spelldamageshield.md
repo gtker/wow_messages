@@ -26,12 +26,12 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | 8 / Little | [Guid](../types/packed-guid.md) | victim |  |  |
-| 0x0C | 8 / Little | [Guid](../types/packed-guid.md) | caster |  |  |
-| 0x14 | 4 / Little | u32 | damage |  |  |
-| 0x18 | 4 / - | [SpellSchool](spellschool.md) | school |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x04 | 8 / Little | [Guid](../types/packed-guid.md) | victim |  |
+| 0x0C | 8 / Little | [Guid](../types/packed-guid.md) | caster |  |
+| 0x14 | 4 / Little | u32 | damage |  |
+| 0x18 | 4 / - | [SpellSchool](spellschool.md) | school |  |
 
 ## Client Version 2.4.3
 
@@ -60,13 +60,13 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | 8 / Little | [Guid](../types/packed-guid.md) | victim |  |  |
-| 0x0C | 8 / Little | [Guid](../types/packed-guid.md) | caster |  |  |
-| 0x14 | 4 / Little | u32 | spell |  |  |
-| 0x18 | 4 / Little | u32 | damage |  |  |
-| 0x1C | 4 / - | [SpellSchool](spellschool.md) | school |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x04 | 8 / Little | [Guid](../types/packed-guid.md) | victim |  |
+| 0x0C | 8 / Little | [Guid](../types/packed-guid.md) | caster |  |
+| 0x14 | 4 / Little | u32 | spell |  |
+| 0x18 | 4 / Little | u32 | damage |  |
+| 0x1C | 4 / - | [SpellSchool](spellschool.md) | school |  |
 
 ## Client Version 3.3.5
 
@@ -96,12 +96,12 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | 8 / Little | [Guid](../types/packed-guid.md) | victim |  |  |
-| 0x0C | 8 / Little | [Guid](../types/packed-guid.md) | caster |  |  |
-| 0x14 | 4 / Little | u32 | spell |  |  |
-| 0x18 | 4 / Little | u32 | damage |  |  |
-| 0x1C | 4 / Little | u32 | overkill |  |  |
-| 0x20 | 4 / - | [SpellSchool](spellschool.md) | school |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x04 | 8 / Little | [Guid](../types/packed-guid.md) | victim |  |
+| 0x0C | 8 / Little | [Guid](../types/packed-guid.md) | caster |  |
+| 0x14 | 4 / Little | u32 | spell |  |
+| 0x18 | 4 / Little | u32 | damage |  |
+| 0x1C | 4 / Little | u32 | overkill |  |
+| 0x20 | 4 / - | [SpellSchool](spellschool.md) | school |  |
 

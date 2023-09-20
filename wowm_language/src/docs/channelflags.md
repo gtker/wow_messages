@@ -21,16 +21,16 @@ flag ChannelFlags : u8 {
 ### Type
 The basic type is `u8`, a 1 byte (8 bit) integer.
 ### Enumerators
-| Enumerator | Value  | Description | Comment |
-| --------- | -------- | ----------- | ------- |
-| `NONE` | 0 (0x00) |  |  |
-| `CUSTOM` | 1 (0x01) |  |  |
-| `TRADE` | 4 (0x04) |  |  |
-| `NOT_LFG` | 8 (0x08) |  |  |
-| `GENERAL` | 16 (0x10) |  |  |
-| `CITY` | 32 (0x20) |  |  |
-| `LFG` | 64 (0x40) |  |  |
-| `VOICE` | 128 (0x80) |  |  |
+| Enumerator | Value  | Comment |
+| --------- | -------- | ------- |
+| `NONE` | 0 (0x00) |  |
+| `CUSTOM` | 1 (0x01) |  |
+| `TRADE` | 4 (0x04) |  |
+| `NOT_LFG` | 8 (0x08) |  |
+| `GENERAL` | 16 (0x10) |  |
+| `CITY` | 32 (0x20) |  |
+| `LFG` | 64 (0x40) |  |
+| `VOICE` | 128 (0x80) |  |
 
 Used in:
 * [SMSG_CHANNEL_LIST](smsg_channel_list.md)

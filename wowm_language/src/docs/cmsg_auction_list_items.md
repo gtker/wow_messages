@@ -32,18 +32,18 @@ CMSG have a header of 6 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x06 | 8 / Little | [Guid](../types/packed-guid.md) | auctioneer |  |  |
-| 0x0E | 4 / Little | u32 | list_start_item |  |  |
-| 0x12 | - / - | CString | searched_name |  |  |
-| - | 1 / - | u8 | minimum_level |  |  |
-| - | 1 / - | u8 | maximum_level |  |  |
-| - | 4 / Little | u32 | auction_slot_id |  |  |
-| - | 4 / Little | u32 | auction_main_category |  |  |
-| - | 4 / Little | u32 | auction_sub_category |  |  |
-| - | 4 / - | [ItemQuality](itemquality.md) | auction_quality |  |  |
-| - | 1 / - | u8 | usable |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x06 | 8 / Little | [Guid](../types/packed-guid.md) | auctioneer |  |
+| 0x0E | 4 / Little | u32 | list_start_item |  |
+| 0x12 | - / - | CString | searched_name |  |
+| - | 1 / - | u8 | minimum_level |  |
+| - | 1 / - | u8 | maximum_level |  |
+| - | 4 / Little | u32 | auction_slot_id |  |
+| - | 4 / Little | u32 | auction_main_category |  |
+| - | 4 / Little | u32 | auction_sub_category |  |
+| - | 4 / - | [ItemQuality](itemquality.md) | auction_quality |  |
+| - | 1 / - | u8 | usable |  |
 
 ## Client Version 2.4.3
 
@@ -80,21 +80,21 @@ CMSG have a header of 6 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x06 | 8 / Little | [Guid](../types/packed-guid.md) | auctioneer |  |  |
-| 0x0E | 4 / Little | u32 | list_start_item |  |  |
-| 0x12 | - / - | CString | searched_name |  |  |
-| - | 1 / - | u8 | minimum_level |  |  |
-| - | 1 / - | u8 | maximum_level |  |  |
-| - | 4 / Little | u32 | auction_slot_id |  |  |
-| - | 4 / Little | u32 | auction_main_category |  |  |
-| - | 4 / Little | u32 | auction_sub_category |  |  |
-| - | 4 / - | [ItemQuality](itemquality.md) | auction_quality |  |  |
-| - | 1 / - | u8 | usable |  |  |
-| - | 1 / - | u8 | is_full |  |  |
-| - | 1 / - | u8 | amount_of_sorted_auctions |  |  |
-| - | ? / - | [AuctionSort](auctionsort.md)[amount_of_sorted_auctions] | sorted_auctions |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x06 | 8 / Little | [Guid](../types/packed-guid.md) | auctioneer |  |
+| 0x0E | 4 / Little | u32 | list_start_item |  |
+| 0x12 | - / - | CString | searched_name |  |
+| - | 1 / - | u8 | minimum_level |  |
+| - | 1 / - | u8 | maximum_level |  |
+| - | 4 / Little | u32 | auction_slot_id |  |
+| - | 4 / Little | u32 | auction_main_category |  |
+| - | 4 / Little | u32 | auction_sub_category |  |
+| - | 4 / - | [ItemQuality](itemquality.md) | auction_quality |  |
+| - | 1 / - | u8 | usable |  |
+| - | 1 / - | u8 | is_full |  |
+| - | 1 / - | u8 | amount_of_sorted_auctions |  |
+| - | ? / - | [AuctionSort](auctionsort.md)[amount_of_sorted_auctions] | sorted_auctions |  |
 
 ## Client Version 3.3.5
 
@@ -131,19 +131,19 @@ CMSG have a header of 6 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x06 | 8 / Little | [Guid](../types/packed-guid.md) | auctioneer |  |  |
-| 0x0E | 4 / Little | u32 | list_start_item |  |  |
-| 0x12 | - / - | CString | searched_name |  |  |
-| - | 1 / - | u8 | minimum_level |  |  |
-| - | 1 / - | u8 | maximum_level |  |  |
-| - | 4 / Little | u32 | auction_slot_id |  |  |
-| - | 4 / Little | u32 | auction_main_category |  |  |
-| - | 4 / Little | u32 | auction_sub_category |  |  |
-| - | 4 / - | [ItemQuality](itemquality.md) | auction_quality |  |  |
-| - | 1 / - | u8 | usable |  |  |
-| - | 1 / - | u8 | is_full |  |  |
-| - | 1 / - | u8 | amount_of_sorted_auctions |  |  |
-| - | ? / - | [AuctionSort](auctionsort.md)[amount_of_sorted_auctions] | sorted_auctions |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x06 | 8 / Little | [Guid](../types/packed-guid.md) | auctioneer |  |
+| 0x0E | 4 / Little | u32 | list_start_item |  |
+| 0x12 | - / - | CString | searched_name |  |
+| - | 1 / - | u8 | minimum_level |  |
+| - | 1 / - | u8 | maximum_level |  |
+| - | 4 / Little | u32 | auction_slot_id |  |
+| - | 4 / Little | u32 | auction_main_category |  |
+| - | 4 / Little | u32 | auction_sub_category |  |
+| - | 4 / - | [ItemQuality](itemquality.md) | auction_quality |  |
+| - | 1 / - | u8 | usable |  |
+| - | 1 / - | u8 | is_full |  |
+| - | 1 / - | u8 | amount_of_sorted_auctions |  |
+| - | ? / - | [AuctionSort](auctionsort.md)[amount_of_sorted_auctions] | sorted_auctions |  |
 

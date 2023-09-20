@@ -24,10 +24,10 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | 4 / - | [ServerMessageType](servermessagetype.md) | message_type |  |  |
-| 0x08 | - / - | CString | message |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x04 | 4 / - | [ServerMessageType](servermessagetype.md) | message_type |  |
+| 0x08 | - / - | CString | message |  |
 
 ## Client Version 3.3.5
 
@@ -53,8 +53,8 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | 4 / - | [ServerMessageType](servermessagetype.md) | message_type |  |  |
-| - | - / - | CString | message |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| - | 4 / - | [ServerMessageType](servermessagetype.md) | message_type |  |
+| - | - / - | CString | message |  |
 

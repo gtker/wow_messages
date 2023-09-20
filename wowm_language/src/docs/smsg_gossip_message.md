@@ -28,14 +28,14 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | 8 / Little | [Guid](../types/packed-guid.md) | guid |  |  |
-| 0x0C | 4 / Little | u32 | title_text_id |  |  |
-| 0x10 | 4 / Little | u32 | amount_of_gossip_items |  |  |
-| 0x14 | ? / - | [GossipItem](gossipitem.md)[amount_of_gossip_items] | gossips |  |  |
-| - | 4 / Little | u32 | amount_of_quests |  |  |
-| - | ? / - | [QuestItem](questitem.md)[amount_of_quests] | quests |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x04 | 8 / Little | [Guid](../types/packed-guid.md) | guid |  |
+| 0x0C | 4 / Little | u32 | title_text_id |  |
+| 0x10 | 4 / Little | u32 | amount_of_gossip_items |  |
+| 0x14 | ? / - | [GossipItem](gossipitem.md)[amount_of_gossip_items] | gossips |  |
+| - | 4 / Little | u32 | amount_of_quests |  |
+| - | ? / - | [QuestItem](questitem.md)[amount_of_quests] | quests |  |
 
 ## Client Version 2.4
 
@@ -66,15 +66,15 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | 8 / Little | [Guid](../types/packed-guid.md) | guid |  |  |
-| 0x0C | 4 / Little | u32 | menu_id |  | mangosone: new 2.4.0 |
-| 0x10 | 4 / Little | u32 | title_text_id |  |  |
-| 0x14 | 4 / Little | u32 | amount_of_gossip_items |  |  |
-| 0x18 | ? / - | [GossipItem](gossipitem.md)[amount_of_gossip_items] | gossips |  |  |
-| - | 4 / Little | u32 | amount_of_quests |  |  |
-| - | ? / - | [QuestItem](questitem.md)[amount_of_quests] | quests |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x04 | 8 / Little | [Guid](../types/packed-guid.md) | guid |  |
+| 0x0C | 4 / Little | u32 | menu_id | mangosone: new 2.4.0 |
+| 0x10 | 4 / Little | u32 | title_text_id |  |
+| 0x14 | 4 / Little | u32 | amount_of_gossip_items |  |
+| 0x18 | ? / - | [GossipItem](gossipitem.md)[amount_of_gossip_items] | gossips |  |
+| - | 4 / Little | u32 | amount_of_quests |  |
+| - | ? / - | [QuestItem](questitem.md)[amount_of_quests] | quests |  |
 
 ## Client Version 3.3.5
 
@@ -105,13 +105,13 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | 8 / Little | [Guid](../types/packed-guid.md) | guid |  |  |
-| - | 4 / Little | u32 | menu_id |  | mangosone: new 2.4.0 |
-| - | 4 / Little | u32 | title_text_id |  |  |
-| - | 4 / Little | u32 | amount_of_gossip_items |  |  |
-| - | ? / - | [GossipItem](gossipitem.md)[amount_of_gossip_items] | gossips |  |  |
-| - | 4 / Little | u32 | amount_of_quests |  |  |
-| - | ? / - | [QuestItem](questitem.md)[amount_of_quests] | quests |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| - | 8 / Little | [Guid](../types/packed-guid.md) | guid |  |
+| - | 4 / Little | u32 | menu_id | mangosone: new 2.4.0 |
+| - | 4 / Little | u32 | title_text_id |  |
+| - | 4 / Little | u32 | amount_of_gossip_items |  |
+| - | ? / - | [GossipItem](gossipitem.md)[amount_of_gossip_items] | gossips |  |
+| - | 4 / Little | u32 | amount_of_quests |  |
+| - | ? / - | [QuestItem](questitem.md)[amount_of_quests] | quests |  |
 

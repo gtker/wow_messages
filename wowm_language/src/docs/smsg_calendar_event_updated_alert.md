@@ -34,18 +34,18 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | 1 / - | Bool | show_alert |  |  |
-| - | 8 / Little | [Guid](../types/packed-guid.md) | event_id |  |  |
-| - | 4 / Little | DateTime | old_event_time |  |  |
-| - | 4 / Little | u32 | flags |  |  |
-| - | 4 / Little | DateTime | new_event_time |  |  |
-| - | 1 / - | u8 | event_type |  |  |
-| - | 4 / Little | u32 | dungeon_id |  |  |
-| - | - / - | CString | title |  |  |
-| - | - / - | CString | description |  |  |
-| - | 1 / - | u8 | repeatable |  |  |
-| - | 4 / Little | u32 | max_invitees |  |  |
-| - | 4 / Little | DateTime | unknown_time |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| - | 1 / - | Bool | show_alert |  |
+| - | 8 / Little | [Guid](../types/packed-guid.md) | event_id |  |
+| - | 4 / Little | DateTime | old_event_time |  |
+| - | 4 / Little | u32 | flags |  |
+| - | 4 / Little | DateTime | new_event_time |  |
+| - | 1 / - | u8 | event_type |  |
+| - | 4 / Little | u32 | dungeon_id |  |
+| - | - / - | CString | title |  |
+| - | - / - | CString | description |  |
+| - | 1 / - | u8 | repeatable |  |
+| - | 4 / Little | u32 | max_invitees |  |
+| - | 4 / Little | DateTime | unknown_time |  |
 

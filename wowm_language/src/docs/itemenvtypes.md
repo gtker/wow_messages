@@ -18,11 +18,11 @@ enum ItemEnvTypes : u8 {
 ### Type
 The basic type is `u8`, a 1 byte (8 bit) integer.
 ### Enumerators
-| Enumerator | Value  | Description | Comment |
-| --------- | -------- | ----------- | ------- |
-| `SHIELD` | 0 (0x00) |  |  |
-| `METAL_WEAPON` | 1 (0x01) |  |  |
-| `WOOD_WEAPON` | 2 (0x02) |  |  |
+| Enumerator | Value  | Comment |
+| --------- | -------- | ------- |
+| `SHIELD` | 0 (0x00) |  |
+| `METAL_WEAPON` | 1 (0x01) |  |
+| `WOOD_WEAPON` | 2 (0x02) |  |
 
 Used in:
 

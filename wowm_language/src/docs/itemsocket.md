@@ -13,10 +13,10 @@ struct ItemSocket {
 ```
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x00 | 4 / Little | u32 | color |  |  |
-| 0x04 | 4 / Little | u32 | content |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x00 | 4 / Little | u32 | color |  |
+| 0x04 | 4 / Little | u32 | content |  |
 
 
 Used in:

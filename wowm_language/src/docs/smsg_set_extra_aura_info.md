@@ -29,16 +29,16 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | - / - | [PackedGuid](../types/packed-guid.md) | unit |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x04 | - / - | [PackedGuid](../types/packed-guid.md) | unit |  |
 
 Optionally the following fields can be present. This can only be detected by looking at the size of the message.
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | 1 / - | u8 | slot |  |  |
-| - | 4 / Little | u32 | spell |  |  |
-| - | 4 / Little | u32 | max_duration |  |  |
-| - | 4 / Little | u32 | remaining_duration |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| - | 1 / - | u8 | slot |  |
+| - | 4 / Little | u32 | spell |  |
+| - | 4 / Little | u32 | max_duration |  |
+| - | 4 / Little | u32 | remaining_duration |  |
 

@@ -26,13 +26,13 @@ Login messages have a header of 1 byte with an opcode. Some messages also have a
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x01 | 2 / Little | u16 | size |  |  |
-| 0x03 | 4 / Little | u32 | header_padding |  |  |
-| 0x07 | 1 / - | u8 | number_of_realms |  |  |
-| 0x08 | ? / - | [Realm](realm.md)[number_of_realms] | realms |  |  |
-| - | 2 / Little | u16 | footer_padding |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x01 | 2 / Little | u16 | size |  |
+| 0x03 | 4 / Little | u32 | header_padding |  |
+| 0x07 | 1 / - | u8 | number_of_realms |  |
+| 0x08 | ? / - | [Realm](realm.md)[number_of_realms] | realms |  |
+| - | 2 / Little | u16 | footer_padding |  |
 
 ### Examples
 
@@ -98,13 +98,13 @@ Login messages have a header of 1 byte with an opcode. Some messages also have a
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x01 | 2 / Little | u16 | size |  |  |
-| 0x03 | 4 / Little | u32 | header_padding |  |  |
-| 0x07 | 1 / - | u8 | number_of_realms |  |  |
-| 0x08 | ? / - | [Realm](realm.md)[number_of_realms] | realms |  |  |
-| - | 2 / Little | u16 | footer_padding |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x01 | 2 / Little | u16 | size |  |
+| 0x03 | 4 / Little | u32 | header_padding |  |
+| 0x07 | 1 / - | u8 | number_of_realms |  |
+| 0x08 | ? / - | [Realm](realm.md)[number_of_realms] | realms |  |
+| - | 2 / Little | u16 | footer_padding |  |
 
 ## Protocol Version 6, Protocol Version 7
 
@@ -132,13 +132,13 @@ Login messages have a header of 1 byte with an opcode. Some messages also have a
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x01 | 2 / Little | u16 | size |  |  |
-| 0x03 | 4 / Little | u32 | header_padding |  |  |
-| 0x07 | 2 / Little | u16 | number_of_realms |  |  |
-| 0x09 | ? / - | [Realm](realm.md)[number_of_realms] | realms |  |  |
-| - | 2 / Little | u16 | footer_padding |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x01 | 2 / Little | u16 | size |  |
+| 0x03 | 4 / Little | u32 | header_padding |  |
+| 0x07 | 2 / Little | u16 | number_of_realms |  |
+| 0x09 | ? / - | [Realm](realm.md)[number_of_realms] | realms |  |
+| - | 2 / Little | u16 | footer_padding |  |
 
 ## Protocol Version 8
 
@@ -166,13 +166,13 @@ Login messages have a header of 1 byte with an opcode. Some messages also have a
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x01 | 2 / Little | u16 | size |  |  |
-| 0x03 | 4 / Little | u32 | header_padding |  |  |
-| 0x07 | 2 / Little | u16 | number_of_realms |  |  |
-| 0x09 | ? / - | [Realm](realm.md)[number_of_realms] | realms |  |  |
-| - | 2 / Little | u16 | footer_padding |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x01 | 2 / Little | u16 | size |  |
+| 0x03 | 4 / Little | u32 | header_padding |  |
+| 0x07 | 2 / Little | u16 | number_of_realms |  |
+| 0x09 | ? / - | [Realm](realm.md)[number_of_realms] | realms |  |
+| - | 2 / Little | u16 | footer_padding |  |
 
 ### Examples
 

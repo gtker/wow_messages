@@ -39,34 +39,34 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | - / - | [PackedGuid](../types/packed-guid.md) | guid |  |  |
-| - | - / - | [PackedGuid](../types/packed-guid.md) | transport |  |  |
-| - | 12 / - | [Vector3d](vector3d.md) | spline_point |  |  |
-| - | 4 / Little | u32 | spline_id |  |  |
-| - | 1 / - | [MonsterMoveType](monstermovetype.md) | move_type |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x04 | - / - | [PackedGuid](../types/packed-guid.md) | guid |  |
+| - | - / - | [PackedGuid](../types/packed-guid.md) | transport |  |
+| - | 12 / - | [Vector3d](vector3d.md) | spline_point |  |
+| - | 4 / Little | u32 | spline_id |  |
+| - | 1 / - | [MonsterMoveType](monstermovetype.md) | move_type |  |
 
 If move_type is equal to `FACING_TARGET`:
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | 8 / Little | [Guid](../types/packed-guid.md) | target |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| - | 8 / Little | [Guid](../types/packed-guid.md) | target |  |
 
 Else If move_type is equal to `FACING_ANGLE`:
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | 4 / Little | f32 | angle |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| - | 4 / Little | f32 | angle |  |
 
 Else If move_type is equal to `FACING_SPOT`:
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | 12 / - | [Vector3d](vector3d.md) | position |  |  |
-| - | 4 / - | [SplineFlag](splineflag.md) | spline_flags |  |  |
-| - | 4 / Little | u32 | duration |  |  |
-| - | - / - | [MonsterMoveSpline](../types/monster-move-spline.md) | splines |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| - | 12 / - | [Vector3d](vector3d.md) | position |  |
+| - | 4 / - | [SplineFlag](splineflag.md) | spline_flags |  |
+| - | 4 / Little | u32 | duration |  |
+| - | - / - | [MonsterMoveSpline](../types/monster-move-spline.md) | splines |  |
 
 ## Client Version 3.3.5
 
@@ -116,47 +116,47 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | - / - | [PackedGuid](../types/packed-guid.md) | guid |  |  |
-| - | - / - | [PackedGuid](../types/packed-guid.md) | transport |  |  |
-| - | 1 / - | u8 | unknown |  | cmangos-wotlk sets to 0 |
-| - | 12 / - | [Vector3d](vector3d.md) | spline_point |  |  |
-| - | 4 / Little | u32 | spline_id |  |  |
-| - | 1 / - | [MonsterMoveType](monstermovetype.md) | move_type |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| - | - / - | [PackedGuid](../types/packed-guid.md) | guid |  |
+| - | - / - | [PackedGuid](../types/packed-guid.md) | transport |  |
+| - | 1 / - | u8 | unknown | cmangos-wotlk sets to 0 |
+| - | 12 / - | [Vector3d](vector3d.md) | spline_point |  |
+| - | 4 / Little | u32 | spline_id |  |
+| - | 1 / - | [MonsterMoveType](monstermovetype.md) | move_type |  |
 
 If move_type is equal to `FACING_TARGET`:
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | 8 / Little | [Guid](../types/packed-guid.md) | target |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| - | 8 / Little | [Guid](../types/packed-guid.md) | target |  |
 
 Else If move_type is equal to `FACING_ANGLE`:
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | 4 / Little | f32 | angle |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| - | 4 / Little | f32 | angle |  |
 
 Else If move_type is equal to `FACING_SPOT`:
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | 12 / - | [Vector3d](vector3d.md) | position |  |  |
-| - | 4 / - | [SplineFlag](splineflag.md) | spline_flags |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| - | 12 / - | [Vector3d](vector3d.md) | position |  |
+| - | 4 / - | [SplineFlag](splineflag.md) | spline_flags |  |
 
 If spline_flags contains `ENTER_CYCLE`:
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | 4 / Little | u32 | animation_id |  |  |
-| - | 4 / Little | u32 | animation_start_time |  |  |
-| - | 4 / Little | u32 | duration |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| - | 4 / Little | u32 | animation_id |  |
+| - | 4 / Little | u32 | animation_start_time |  |
+| - | 4 / Little | u32 | duration |  |
 
 If spline_flags contains `PARABOLIC`:
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | 4 / Little | f32 | vertical_acceleration |  |  |
-| - | 4 / Little | u32 | effect_start_time |  |  |
-| - | - / - | [MonsterMoveSpline](../types/monster-move-spline.md) | splines |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| - | 4 / Little | f32 | vertical_acceleration |  |
+| - | 4 / Little | u32 | effect_start_time |  |
+| - | - / - | [MonsterMoveSpline](../types/monster-move-spline.md) | splines |  |
 

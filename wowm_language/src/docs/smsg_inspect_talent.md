@@ -24,10 +24,10 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | - / - | [PackedGuid](../types/packed-guid.md) | player |  |  |
-| - | ? / - | u8[-] | talent_data |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x04 | - / - | [PackedGuid](../types/packed-guid.md) | player |  |
+| - | ? / - | u8[-] | talent_data |  |
 
 ## Client Version 3.3.5
 
@@ -59,14 +59,14 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | - / - | [PackedGuid](../types/packed-guid.md) | player |  |  |
-| - | 4 / Little | u32 | unspent_talent_points |  |  |
-| - | 1 / - | u8 | amount_of_specs |  |  |
-| - | 1 / - | u8 | active_spec |  |  |
-| - | ? / - | [InspectTalentSpec](inspecttalentspec.md)[amount_of_specs] | specs |  |  |
-| - | 1 / - | u8 | amount_of_glyphs |  |  |
-| - | ? / - | u16[amount_of_glyphs] | glyphs |  |  |
-| - | - / - | [InspectTalentGearMask](../types/aura-mask.md) | talent_gear_mask |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| - | - / - | [PackedGuid](../types/packed-guid.md) | player |  |
+| - | 4 / Little | u32 | unspent_talent_points |  |
+| - | 1 / - | u8 | amount_of_specs |  |
+| - | 1 / - | u8 | active_spec |  |
+| - | ? / - | [InspectTalentSpec](inspecttalentspec.md)[amount_of_specs] | specs |  |
+| - | 1 / - | u8 | amount_of_glyphs |  |
+| - | ? / - | u16[amount_of_glyphs] | glyphs |  |
+| - | - / - | [InspectTalentGearMask](../types/aura-mask.md) | talent_gear_mask |  |
 

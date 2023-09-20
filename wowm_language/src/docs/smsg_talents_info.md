@@ -33,23 +33,23 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | 1 / - | [TalentInfoType](talentinfotype.md) | talent_type |  |  |
-| - | 4 / Little | u32 | points_left |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| - | 1 / - | [TalentInfoType](talentinfotype.md) | talent_type |  |
+| - | 4 / Little | u32 | points_left |  |
 
 If talent_type is equal to `PET`:
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | 1 / - | u8 | amount_of_talents |  |  |
-| - | ? / - | [InspectTalent](inspecttalent.md)[amount_of_talents] | talents |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| - | 1 / - | u8 | amount_of_talents |  |
+| - | ? / - | [InspectTalent](inspecttalent.md)[amount_of_talents] | talents |  |
 
 Else If talent_type is equal to `PLAYER`:
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | 1 / - | u8 | amount_of_specs |  |  |
-| - | 1 / - | u8 | active_spec |  |  |
-| - | ? / - | [TalentInfoSpec](talentinfospec.md)[amount_of_specs] | specs |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| - | 1 / - | u8 | amount_of_specs |  |
+| - | 1 / - | u8 | active_spec |  |
+| - | ? / - | [TalentInfoSpec](talentinfospec.md)[amount_of_specs] | specs |  |
 

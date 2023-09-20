@@ -38,33 +38,33 @@ flag MovementFlags : u32 {
 ### Type
 The basic type is `u32`, a 4 byte (32 bit) little endian integer.
 ### Enumerators
-| Enumerator | Value  | Description | Comment |
-| --------- | -------- | ----------- | ------- |
-| `NONE` | 0 (0x00) |  |  |
-| `FORWARD` | 1 (0x01) |  |  |
-| `BACKWARD` | 2 (0x02) |  |  |
-| `STRAFE_LEFT` | 4 (0x04) |  |  |
-| `STRAFE_RIGHT` | 8 (0x08) |  |  |
-| `TURN_LEFT` | 16 (0x10) |  |  |
-| `TURN_RIGHT` | 32 (0x20) |  |  |
-| `PITCH_UP` | 64 (0x40) |  |  |
-| `PITCH_DOWN` | 128 (0x80) |  |  |
-| `WALK_MODE` | 256 (0x100) |  |  |
-| `ON_TRANSPORT` | 512 (0x200) |  |  |
-| `LEVITATING` | 1024 (0x400) |  |  |
-| `FIXED_Z` | 2048 (0x800) |  |  |
-| `ROOT` | 4096 (0x1000) |  |  |
-| `JUMPING` | 8192 (0x2000) |  |  |
-| `FALLINGFAR` | 16384 (0x4000) |  |  |
-| `SWIMMING` | 2097152 (0x200000) |  |  |
-| `SPLINE_ENABLED` | 4194304 (0x400000) |  |  |
-| `CAN_FLY` | 8388608 (0x800000) |  |  |
-| `FLYING` | 16777216 (0x1000000) |  |  |
-| `ONTRANSPORT` | 33554432 (0x2000000) |  |  |
-| `SPLINE_ELEVATION` | 67108864 (0x4000000) |  |  |
-| `WATERWALKING` | 268435456 (0x10000000) |  |  |
-| `SAFE_FALL` | 536870912 (0x20000000) |  |  |
-| `HOVER` | 1073741824 (0x40000000) |  |  |
+| Enumerator | Value  | Comment |
+| --------- | -------- | ------- |
+| `NONE` | 0 (0x00) |  |
+| `FORWARD` | 1 (0x01) |  |
+| `BACKWARD` | 2 (0x02) |  |
+| `STRAFE_LEFT` | 4 (0x04) |  |
+| `STRAFE_RIGHT` | 8 (0x08) |  |
+| `TURN_LEFT` | 16 (0x10) |  |
+| `TURN_RIGHT` | 32 (0x20) |  |
+| `PITCH_UP` | 64 (0x40) |  |
+| `PITCH_DOWN` | 128 (0x80) |  |
+| `WALK_MODE` | 256 (0x100) |  |
+| `ON_TRANSPORT` | 512 (0x200) |  |
+| `LEVITATING` | 1024 (0x400) |  |
+| `FIXED_Z` | 2048 (0x800) |  |
+| `ROOT` | 4096 (0x1000) |  |
+| `JUMPING` | 8192 (0x2000) |  |
+| `FALLINGFAR` | 16384 (0x4000) |  |
+| `SWIMMING` | 2097152 (0x200000) |  |
+| `SPLINE_ENABLED` | 4194304 (0x400000) |  |
+| `CAN_FLY` | 8388608 (0x800000) |  |
+| `FLYING` | 16777216 (0x1000000) |  |
+| `ONTRANSPORT` | 33554432 (0x2000000) |  |
+| `SPLINE_ELEVATION` | 67108864 (0x4000000) |  |
+| `WATERWALKING` | 268435456 (0x10000000) |  |
+| `SAFE_FALL` | 536870912 (0x20000000) |  |
+| `HOVER` | 1073741824 (0x40000000) |  |
 
 Used in:
 * [MovementBlock](movementblock.md)
@@ -108,34 +108,34 @@ flag MovementFlags : u32 {
 ### Type
 The basic type is `u32`, a 4 byte (32 bit) little endian integer.
 ### Enumerators
-| Enumerator | Value  | Description | Comment |
-| --------- | -------- | ----------- | ------- |
-| `NONE` | 0 (0x00) |  |  |
-| `FORWARD` | 1 (0x01) |  |  |
-| `BACKWARD` | 2 (0x02) |  |  |
-| `STRAFE_LEFT` | 4 (0x04) |  |  |
-| `STRAFE_RIGHT` | 8 (0x08) |  |  |
-| `TURN_LEFT` | 16 (0x10) |  |  |
-| `TURN_RIGHT` | 32 (0x20) |  |  |
-| `PITCH_UP` | 64 (0x40) |  |  |
-| `PITCH_DOWN` | 128 (0x80) |  |  |
-| `WALK_MODE` | 256 (0x100) |  |  |
-| `ON_TRANSPORT` | 512 (0x200) |  |  |
-| `LEVITATING` | 1024 (0x400) |  |  |
-| `FIXED_Z` | 2048 (0x800) |  |  |
-| `ROOT` | 4096 (0x1000) |  |  |
-| `JUMPING` | 8192 (0x2000) |  |  |
-| `FALLINGFAR` | 16384 (0x4000) |  |  |
-| `SWIMMING` | 2097152 (0x200000) |  |  |
-| `ASCENDING` | 4194304 (0x400000) |  |  |
-| `CAN_FLY` | 8388608 (0x800000) |  |  |
-| `FLYING` | 16777216 (0x1000000) |  |  |
-| `ONTRANSPORT` | 33554432 (0x2000000) |  |  |
-| `SPLINE_ELEVATION` | 67108864 (0x4000000) |  |  |
-| `SPLINE_ENABLED` | 134217728 (0x8000000) |  |  |
-| `WATERWALKING` | 268435456 (0x10000000) |  |  |
-| `SAFE_FALL` | 536870912 (0x20000000) |  |  |
-| `HOVER` | 1073741824 (0x40000000) |  |  |
+| Enumerator | Value  | Comment |
+| --------- | -------- | ------- |
+| `NONE` | 0 (0x00) |  |
+| `FORWARD` | 1 (0x01) |  |
+| `BACKWARD` | 2 (0x02) |  |
+| `STRAFE_LEFT` | 4 (0x04) |  |
+| `STRAFE_RIGHT` | 8 (0x08) |  |
+| `TURN_LEFT` | 16 (0x10) |  |
+| `TURN_RIGHT` | 32 (0x20) |  |
+| `PITCH_UP` | 64 (0x40) |  |
+| `PITCH_DOWN` | 128 (0x80) |  |
+| `WALK_MODE` | 256 (0x100) |  |
+| `ON_TRANSPORT` | 512 (0x200) |  |
+| `LEVITATING` | 1024 (0x400) |  |
+| `FIXED_Z` | 2048 (0x800) |  |
+| `ROOT` | 4096 (0x1000) |  |
+| `JUMPING` | 8192 (0x2000) |  |
+| `FALLINGFAR` | 16384 (0x4000) |  |
+| `SWIMMING` | 2097152 (0x200000) |  |
+| `ASCENDING` | 4194304 (0x400000) |  |
+| `CAN_FLY` | 8388608 (0x800000) |  |
+| `FLYING` | 16777216 (0x1000000) |  |
+| `ONTRANSPORT` | 33554432 (0x2000000) |  |
+| `SPLINE_ELEVATION` | 67108864 (0x4000000) |  |
+| `SPLINE_ENABLED` | 134217728 (0x8000000) |  |
+| `WATERWALKING` | 268435456 (0x10000000) |  |
+| `SAFE_FALL` | 536870912 (0x20000000) |  |
+| `HOVER` | 1073741824 (0x40000000) |  |
 
 Used in:
 * [MovementBlock](movementblock.md)
@@ -202,57 +202,57 @@ flag MovementFlags : u48 {
 ### Type
 The basic type is `u48`, a 6 byte (48 bit) 32bit little endian followed by 16 bit little endian integer.
 ### Enumerators
-| Enumerator | Value  | Description | Comment |
-| --------- | -------- | ----------- | ------- |
-| `NONE` | 0 (0x00) |  |  |
-| `FORWARD` | 1 (0x01) |  |  |
-| `BACKWARD` | 2 (0x02) |  |  |
-| `STRAFE_LEFT` | 4 (0x04) |  |  |
-| `STRAFE_RIGHT` | 8 (0x08) |  |  |
-| `LEFT` | 16 (0x10) |  |  |
-| `RIGHT` | 32 (0x20) |  |  |
-| `PITCH_UP` | 64 (0x40) |  |  |
-| `PITCH_DOWN` | 128 (0x80) |  |  |
-| `WALKING` | 256 (0x100) |  | Walking |
-| `ON_TRANSPORT` | 512 (0x200) |  | `AzerothCore`: Used for flying on some creatures |
-| `DISABLE_GRAVITY` | 1024 (0x400) |  | `AzerothCore`: Former `MOVEMENTFLAG_LEVITATING`. This is used when walking is not possible. |
-| `ROOT` | 2048 (0x800) |  | `AzerothCore`: Must not be set along with `MOVEMENTFLAG_MASK_MOVING` |
-| `FALLING` | 4096 (0x1000) |  | `AzerothCore`: damage dealt on that type of falling |
-| `FALLING_FAR` | 8192 (0x2000) |  |  |
-| `PENDING_STOP` | 16384 (0x4000) |  |  |
-| `PENDING_STRAFE_STOP` | 32768 (0x8000) |  |  |
-| `PENDING_FORWARD` | 65536 (0x10000) |  |  |
-| `PENDING_BACKWARD` | 131072 (0x20000) |  |  |
-| `PENDING_STRAFE_LEFT` | 262144 (0x40000) |  |  |
-| `PENDING_STRAFE_RIGHT` | 524288 (0x80000) |  |  |
-| `PENDING_ROOT` | 1048576 (0x100000) |  |  |
-| `SWIMMING` | 2097152 (0x200000) |  | `AzerothCore`: appears with fly flag also |
-| `ASCENDING` | 4194304 (0x400000) |  | `AzerothCore`: press 'space' when flying |
-| `DESCENDING` | 8388608 (0x800000) |  |  |
-| `CAN_FLY` | 16777216 (0x1000000) |  | `AzerothCore`: Appears when unit can fly AND also walk |
-| `FLYING` | 33554432 (0x2000000) |  | `AzerothCore`: unit is actually flying. pretty sure this is only used for players. creatures use `disable_gravity` |
-| `SPLINE_ELEVATION` | 67108864 (0x4000000) |  | `AzerothCore`: used for flight paths |
-| `SPLINE_ENABLED` | 134217728 (0x8000000) |  | `AzerothCore`: used for flight paths |
-| `WATERWALKING` | 268435456 (0x10000000) |  | `AzerothCore`: prevent unit from falling through water |
-| `FALLING_SLOW` | 536870912 (0x20000000) |  | `AzerothCore`: active rogue safe fall spell (passive) |
-| `HOVER` | 1073741824 (0x40000000) |  | `AzerothCore`: hover, cannot jump |
-| `NO_STRAFE` | 4294967296 (0x100000000) |  |  |
-| `NO_JUMPING` | 8589934592 (0x200000000) |  |  |
-| `UNK3` | 17179869184 (0x400000000) |  | `AzerothCore`: Overrides various clientside checks |
-| `FULL_SPEED_TURNING` | 34359738368 (0x800000000) |  |  |
-| `FULL_SPEED_PITCHING` | 68719476736 (0x1000000000) |  |  |
-| `ALWAYS_ALLOW_PITCHING` | 137438953472 (0x2000000000) |  |  |
-| `UNK7` | 274877906944 (0x4000000000) |  |  |
-| `UNK8` | 549755813888 (0x8000000000) |  |  |
-| `UNK9` | 1099511627776 (0x10000000000) |  |  |
-| `UNK10` | 2199023255552 (0x20000000000) |  |  |
-| `INTERPOLATED_MOVEMENT` | 4398046511104 (0x40000000000) |  |  |
-| `INTERPOLATED_TURNING` | 8796093022208 (0x80000000000) |  |  |
-| `INTERPOLATED_PITCHING` | 17592186044416 (0x100000000000) |  |  |
-| `UNK14` | 35184372088832 (0x200000000000) |  |  |
-| `UNK15` | 70368744177664 (0x400000000000) |  |  |
-| `UNK16` | 140737488355328 (0x800000000000) |  |  |
-| `ON_TRANSPORT_AND_INTERPOLATED_MOVEMENT` | 4398046511616 (0x40000000200) |  |  |
+| Enumerator | Value  | Comment |
+| --------- | -------- | ------- |
+| `NONE` | 0 (0x00) |  |
+| `FORWARD` | 1 (0x01) |  |
+| `BACKWARD` | 2 (0x02) |  |
+| `STRAFE_LEFT` | 4 (0x04) |  |
+| `STRAFE_RIGHT` | 8 (0x08) |  |
+| `LEFT` | 16 (0x10) |  |
+| `RIGHT` | 32 (0x20) |  |
+| `PITCH_UP` | 64 (0x40) |  |
+| `PITCH_DOWN` | 128 (0x80) |  |
+| `WALKING` | 256 (0x100) | Walking |
+| `ON_TRANSPORT` | 512 (0x200) | `AzerothCore`: Used for flying on some creatures |
+| `DISABLE_GRAVITY` | 1024 (0x400) | `AzerothCore`: Former `MOVEMENTFLAG_LEVITATING`. This is used when walking is not possible. |
+| `ROOT` | 2048 (0x800) | `AzerothCore`: Must not be set along with `MOVEMENTFLAG_MASK_MOVING` |
+| `FALLING` | 4096 (0x1000) | `AzerothCore`: damage dealt on that type of falling |
+| `FALLING_FAR` | 8192 (0x2000) |  |
+| `PENDING_STOP` | 16384 (0x4000) |  |
+| `PENDING_STRAFE_STOP` | 32768 (0x8000) |  |
+| `PENDING_FORWARD` | 65536 (0x10000) |  |
+| `PENDING_BACKWARD` | 131072 (0x20000) |  |
+| `PENDING_STRAFE_LEFT` | 262144 (0x40000) |  |
+| `PENDING_STRAFE_RIGHT` | 524288 (0x80000) |  |
+| `PENDING_ROOT` | 1048576 (0x100000) |  |
+| `SWIMMING` | 2097152 (0x200000) | `AzerothCore`: appears with fly flag also |
+| `ASCENDING` | 4194304 (0x400000) | `AzerothCore`: press 'space' when flying |
+| `DESCENDING` | 8388608 (0x800000) |  |
+| `CAN_FLY` | 16777216 (0x1000000) | `AzerothCore`: Appears when unit can fly AND also walk |
+| `FLYING` | 33554432 (0x2000000) | `AzerothCore`: unit is actually flying. pretty sure this is only used for players. creatures use `disable_gravity` |
+| `SPLINE_ELEVATION` | 67108864 (0x4000000) | `AzerothCore`: used for flight paths |
+| `SPLINE_ENABLED` | 134217728 (0x8000000) | `AzerothCore`: used for flight paths |
+| `WATERWALKING` | 268435456 (0x10000000) | `AzerothCore`: prevent unit from falling through water |
+| `FALLING_SLOW` | 536870912 (0x20000000) | `AzerothCore`: active rogue safe fall spell (passive) |
+| `HOVER` | 1073741824 (0x40000000) | `AzerothCore`: hover, cannot jump |
+| `NO_STRAFE` | 4294967296 (0x100000000) |  |
+| `NO_JUMPING` | 8589934592 (0x200000000) |  |
+| `UNK3` | 17179869184 (0x400000000) | `AzerothCore`: Overrides various clientside checks |
+| `FULL_SPEED_TURNING` | 34359738368 (0x800000000) |  |
+| `FULL_SPEED_PITCHING` | 68719476736 (0x1000000000) |  |
+| `ALWAYS_ALLOW_PITCHING` | 137438953472 (0x2000000000) |  |
+| `UNK7` | 274877906944 (0x4000000000) |  |
+| `UNK8` | 549755813888 (0x8000000000) |  |
+| `UNK9` | 1099511627776 (0x10000000000) |  |
+| `UNK10` | 2199023255552 (0x20000000000) |  |
+| `INTERPOLATED_MOVEMENT` | 4398046511104 (0x40000000000) |  |
+| `INTERPOLATED_TURNING` | 8796093022208 (0x80000000000) |  |
+| `INTERPOLATED_PITCHING` | 17592186044416 (0x100000000000) |  |
+| `UNK14` | 35184372088832 (0x200000000000) |  |
+| `UNK15` | 70368744177664 (0x400000000000) |  |
+| `UNK16` | 140737488355328 (0x800000000000) |  |
+| `ON_TRANSPORT_AND_INTERPOLATED_MOVEMENT` | 4398046511616 (0x40000000200) |  |
 
 Used in:
 * [MovementBlock](movementblock.md)

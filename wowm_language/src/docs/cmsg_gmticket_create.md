@@ -31,20 +31,20 @@ CMSG have a header of 6 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x06 | 1 / - | [GmTicketType](gmtickettype.md) | category |  |  |
-| 0x07 | 4 / - | [Map](map.md) | map |  |  |
-| 0x0B | 12 / - | [Vector3d](vector3d.md) | position |  |  |
-| 0x17 | - / - | CString | message |  |  |
-| - | - / - | CString | reserved_for_future_use |  | cmangos/vmangos/mangoszero: Pre-TBC: 'Reserved for future use'<br/>cmangos/vmangos/mangoszero: Unused |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x06 | 1 / - | [GmTicketType](gmtickettype.md) | category |  |
+| 0x07 | 4 / - | [Map](map.md) | map |  |
+| 0x0B | 12 / - | [Vector3d](vector3d.md) | position |  |
+| 0x17 | - / - | CString | message |  |
+| - | - / - | CString | reserved_for_future_use | cmangos/vmangos/mangoszero: Pre-TBC: 'Reserved for future use'<br/>cmangos/vmangos/mangoszero: Unused |
 
 If category is equal to `BEHAVIOR_HARASSMENT`:
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | 4 / Little | u32 | chat_data_line_count |  |  |
-| - | ? / - | u8[-] | compressed_chat_data |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| - | 4 / Little | u32 | chat_data_line_count |  |
+| - | ? / - | u8[-] | compressed_chat_data |  |
 
 ## Client Version 2.4.3
 
@@ -77,20 +77,20 @@ CMSG have a header of 6 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x06 | 1 / - | [GmTicketType](gmtickettype.md) | category |  |  |
-| 0x07 | 4 / - | [Map](map.md) | map |  |  |
-| 0x0B | 12 / - | [Vector3d](vector3d.md) | position |  |  |
-| 0x17 | - / - | CString | message |  |  |
-| - | - / - | CString | reserved_for_future_use |  | cmangos/vmangos/mangoszero: Pre-TBC: 'Reserved for future use'<br/>cmangos/vmangos/mangoszero: Unused |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x06 | 1 / - | [GmTicketType](gmtickettype.md) | category |  |
+| 0x07 | 4 / - | [Map](map.md) | map |  |
+| 0x0B | 12 / - | [Vector3d](vector3d.md) | position |  |
+| 0x17 | - / - | CString | message |  |
+| - | - / - | CString | reserved_for_future_use | cmangos/vmangos/mangoszero: Pre-TBC: 'Reserved for future use'<br/>cmangos/vmangos/mangoszero: Unused |
 
 If category is equal to `BEHAVIOR_HARASSMENT`:
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | 4 / Little | u32 | chat_data_line_count |  |  |
-| - | ? / - | u8[-] | compressed_chat_data |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| - | 4 / Little | u32 | chat_data_line_count |  |
+| - | ? / - | u8[-] | compressed_chat_data |  |
 
 ## Client Version 3.3.5
 
@@ -122,14 +122,14 @@ CMSG have a header of 6 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x06 | 4 / - | [Map](map.md) | map |  |  |
-| 0x0A | 12 / - | [Vector3d](vector3d.md) | position |  |  |
-| 0x16 | - / - | CString | message |  |  |
-| - | 1 / - | Bool | needs_response |  |  |
-| - | 1 / - | Bool | needs_more_help |  |  |
-| - | 4 / Little | u32 | num_of_times |  |  |
-| - | ? / - | u32[num_of_times] | times |  |  |
-| - | ? / - | u8[-] | compressed_data |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x06 | 4 / - | [Map](map.md) | map |  |
+| 0x0A | 12 / - | [Vector3d](vector3d.md) | position |  |
+| 0x16 | - / - | CString | message |  |
+| - | 1 / - | Bool | needs_response |  |
+| - | 1 / - | Bool | needs_more_help |  |
+| - | 4 / Little | u32 | num_of_times |  |
+| - | ? / - | u32[num_of_times] | times |  |
+| - | ? / - | u8[-] | compressed_data |  |
 

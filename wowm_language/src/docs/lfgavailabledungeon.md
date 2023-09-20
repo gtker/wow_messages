@@ -19,16 +19,16 @@ struct LfgAvailableDungeon {
 ```
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x00 | 4 / Little | u32 | dungeon_entry |  |  |
-| 0x04 | 1 / - | Bool | done |  |  |
-| 0x05 | 4 / Little | u32 | quest_reward |  |  |
-| 0x09 | 4 / Little | u32 | xp_reward |  |  |
-| 0x0D | 4 / Little | u32 | unknown1 |  |  |
-| 0x11 | 4 / Little | u32 | unknown2 |  |  |
-| 0x15 | 1 / - | u8 | amount_of_rewards |  |  |
-| 0x16 | ? / - | [LfgQuestReward](lfgquestreward.md)[amount_of_rewards] | rewards |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x00 | 4 / Little | u32 | dungeon_entry |  |
+| 0x04 | 1 / - | Bool | done |  |
+| 0x05 | 4 / Little | u32 | quest_reward |  |
+| 0x09 | 4 / Little | u32 | xp_reward |  |
+| 0x0D | 4 / Little | u32 | unknown1 |  |
+| 0x11 | 4 / Little | u32 | unknown2 |  |
+| 0x15 | 1 / - | u8 | amount_of_rewards |  |
+| 0x16 | ? / - | [LfgQuestReward](lfgquestreward.md)[amount_of_rewards] | rewards |  |
 
 
 Used in:

@@ -5,7 +5,7 @@ smsg SMSG_CHAR_RENAME = 0x2C8 {
         CString new_name;
     }
 } {
-    description = "Response to [CMSG_CHAR_RENAME].";
+    comment = "Response to [CMSG_CHAR_RENAME].";
     paste_versions = "1 2.4.3 3.3.5";
 }
 

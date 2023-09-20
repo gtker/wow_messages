@@ -17,12 +17,12 @@ enum WeatherType : u32 {
 ### Type
 The basic type is `u32`, a 4 byte (32 bit) little endian integer.
 ### Enumerators
-| Enumerator | Value  | Description | Comment |
-| --------- | -------- | ----------- | ------- |
-| `FINE` | 0 (0x00) |  |  |
-| `RAIN` | 1 (0x01) |  |  |
-| `SNOW` | 2 (0x02) |  |  |
-| `STORM` | 3 (0x03) |  |  |
+| Enumerator | Value  | Comment |
+| --------- | -------- | ------- |
+| `FINE` | 0 (0x00) |  |
+| `RAIN` | 1 (0x01) |  |
+| `SNOW` | 2 (0x02) |  |
+| `STORM` | 3 (0x03) |  |
 
 Used in:
 * [SMSG_WEATHER](smsg_weather.md)
@@ -52,20 +52,20 @@ enum WeatherType : u32 {
 ### Type
 The basic type is `u32`, a 4 byte (32 bit) little endian integer.
 ### Enumerators
-| Enumerator | Value  | Description | Comment |
-| --------- | -------- | ----------- | ------- |
-| `FINE` | 0 (0x00) |  |  |
-| `LIGHT_RAIN` | 3 (0x03) |  |  |
-| `MEDIUM_RAIN` | 4 (0x04) |  |  |
-| `HEAVY_RAIN` | 5 (0x05) |  |  |
-| `LIGHT_SNOW` | 6 (0x06) |  |  |
-| `MEDIUM_SNOW` | 7 (0x07) |  |  |
-| `HEAVY_SNOW` | 8 (0x08) |  |  |
-| `LIGHT_SANDSTORM` | 22 (0x16) |  |  |
-| `MEDIUM_SANDSTORM` | 41 (0x29) |  |  |
-| `HEAVY_SANDSTORM` | 42 (0x2A) |  |  |
-| `THUNDERS` | 86 (0x56) |  |  |
-| `BLACKRAIN` | 90 (0x5A) |  |  |
+| Enumerator | Value  | Comment |
+| --------- | -------- | ------- |
+| `FINE` | 0 (0x00) |  |
+| `LIGHT_RAIN` | 3 (0x03) |  |
+| `MEDIUM_RAIN` | 4 (0x04) |  |
+| `HEAVY_RAIN` | 5 (0x05) |  |
+| `LIGHT_SNOW` | 6 (0x06) |  |
+| `MEDIUM_SNOW` | 7 (0x07) |  |
+| `HEAVY_SNOW` | 8 (0x08) |  |
+| `LIGHT_SANDSTORM` | 22 (0x16) |  |
+| `MEDIUM_SANDSTORM` | 41 (0x29) |  |
+| `HEAVY_SANDSTORM` | 42 (0x2A) |  |
+| `THUNDERS` | 86 (0x56) |  |
+| `BLACKRAIN` | 90 (0x5A) |  |
 
 Used in:
 * [SMSG_WEATHER](smsg_weather.md)
@@ -96,21 +96,21 @@ enum WeatherType : u32 {
 ### Type
 The basic type is `u32`, a 4 byte (32 bit) little endian integer.
 ### Enumerators
-| Enumerator | Value  | Description | Comment |
-| --------- | -------- | ----------- | ------- |
-| `FINE` | 0 (0x00) |  |  |
-| `FOG` | 1 (0x01) |  |  |
-| `LIGHT_RAIN` | 3 (0x03) |  |  |
-| `MEDIUM_RAIN` | 4 (0x04) |  |  |
-| `HEAVY_RAIN` | 5 (0x05) |  |  |
-| `LIGHT_SNOW` | 6 (0x06) |  |  |
-| `MEDIUM_SNOW` | 7 (0x07) |  |  |
-| `HEAVY_SNOW` | 8 (0x08) |  |  |
-| `LIGHT_SANDSTORM` | 22 (0x16) |  |  |
-| `MEDIUM_SANDSTORM` | 41 (0x29) |  |  |
-| `HEAVY_SANDSTORM` | 42 (0x2A) |  |  |
-| `THUNDERS` | 86 (0x56) |  |  |
-| `BLACKRAIN` | 90 (0x5A) |  |  |
+| Enumerator | Value  | Comment |
+| --------- | -------- | ------- |
+| `FINE` | 0 (0x00) |  |
+| `FOG` | 1 (0x01) |  |
+| `LIGHT_RAIN` | 3 (0x03) |  |
+| `MEDIUM_RAIN` | 4 (0x04) |  |
+| `HEAVY_RAIN` | 5 (0x05) |  |
+| `LIGHT_SNOW` | 6 (0x06) |  |
+| `MEDIUM_SNOW` | 7 (0x07) |  |
+| `HEAVY_SNOW` | 8 (0x08) |  |
+| `LIGHT_SANDSTORM` | 22 (0x16) |  |
+| `MEDIUM_SANDSTORM` | 41 (0x29) |  |
+| `HEAVY_SANDSTORM` | 42 (0x2A) |  |
+| `THUNDERS` | 86 (0x56) |  |
+| `BLACKRAIN` | 90 (0x5A) |  |
 
 Used in:
 * [SMSG_WEATHER](smsg_weather.md)

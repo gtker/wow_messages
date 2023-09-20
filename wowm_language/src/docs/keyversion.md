@@ -23,18 +23,18 @@ enum KeyVersion : u8 {
 ### Type
 The basic type is `u8`, a 1 byte (8 bit) integer.
 ### Enumerators
-| Enumerator | Value  | Description | Comment |
-| --------- | -------- | ----------- | ------- |
-| `ZERO` | 0 (0x00) |  |  |
-| `ONE` | 1 (0x01) |  |  |
-| `TWO` | 2 (0x02) |  |  |
-| `THREE` | 3 (0x03) |  |  |
-| `FOUR` | 4 (0x04) |  |  |
-| `FIVE` | 5 (0x05) |  |  |
-| `SIX` | 6 (0x06) |  |  |
-| `SEVEN` | 7 (0x07) |  |  |
-| `EIGHT` | 8 (0x08) |  |  |
-| `NINE` | 9 (0x09) |  |  |
+| Enumerator | Value  | Comment |
+| --------- | -------- | ------- |
+| `ZERO` | 0 (0x00) |  |
+| `ONE` | 1 (0x01) |  |
+| `TWO` | 2 (0x02) |  |
+| `THREE` | 3 (0x03) |  |
+| `FOUR` | 4 (0x04) |  |
+| `FIVE` | 5 (0x05) |  |
+| `SIX` | 6 (0x06) |  |
+| `SEVEN` | 7 (0x07) |  |
+| `EIGHT` | 8 (0x08) |  |
+| `NINE` | 9 (0x09) |  |
 
 Used in:
 * [Addon](addon.md)

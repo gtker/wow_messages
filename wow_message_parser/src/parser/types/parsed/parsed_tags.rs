@@ -5,16 +5,15 @@ use crate::file_info::FileInfo;
 use crate::parser::types::tags::{MemberTags, TagString};
 use crate::parser::types::version::{AllVersions, LoginVersion, WorldVersion};
 use crate::{
-    ObjectTags, COMMENT, COMPRESSED, DESCRIPTION, DISPLAY, LOGIN_VERSIONS, NON_NETWORK_TYPE,
-    PASTE_VERSIONS, RUST_BASE_TYPE, SKIP_STR, TEST_STR, UNIMPLEMENTED, USED_IN_UPDATE_MASK,
-    VERSIONS, ZERO_IS_ALWAYS_VALID,
+    ObjectTags, COMMENT, COMPRESSED, DISPLAY, LOGIN_VERSIONS, NON_NETWORK_TYPE, PASTE_VERSIONS,
+    RUST_BASE_TYPE, SKIP_STR, TEST_STR, UNIMPLEMENTED, USED_IN_UPDATE_MASK, VERSIONS,
+    ZERO_IS_ALWAYS_VALID,
 };
 
 #[derive(Debug, Eq, PartialEq, Clone, Default)]
 pub(crate) struct ParsedTags {
     login_versions: BTreeSet<LoginVersion>,
     world_versions: BTreeSet<WorldVersion>,
-    description: Option<TagString>,
     compressed: Option<String>,
     comment: Option<TagString>,
     display: Option<String>,
@@ -38,14 +37,6 @@ impl ParsedTags {
         self.login_versions.append(&mut t.login_versions);
 
         self.world_versions.append(&mut t.world_versions);
-
-        if let Some(v) = t.description {
-            self.description = Some(v);
-        }
-
-        if let Some(v) = t.compressed {
-            self.compressed = Some(v);
-        }
 
         if let Some(v) = t.comment {
             self.comment = Some(v);
@@ -98,7 +89,6 @@ impl ParsedTags {
 
         ObjectTags::from_parsed(
             all_versions,
-            self.description,
             self.comment,
             if let Some(compressed) = self.compressed {
                 compressed == "true"
@@ -117,7 +107,7 @@ impl ParsedTags {
     }
 
     pub(crate) fn into_member_tags(self) -> MemberTags {
-        MemberTags::from_parsed(self.description, self.comment, self.display)
+        MemberTags::from_parsed(self.comment, self.display)
     }
 
     pub(crate) fn paste_versions(&self) -> impl Iterator<Item = WorldVersion> {
@@ -186,14 +176,6 @@ impl ParsedTags {
                     4 => WorldVersion::Exact(d[0], d[1], d[2], u16::from(d[3])),
                     _ => panic!("incorrect world version string"),
                 });
-            }
-        } else if key == DESCRIPTION {
-            if let Some(desc) = &mut self.description {
-                desc.add(value);
-            } else {
-                let mut t = TagString::new();
-                t.add(value);
-                self.description = Some(t);
             }
         } else if key == COMPRESSED {
             self.compressed = Some(value.to_owned());

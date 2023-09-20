@@ -36,28 +36,28 @@ CMSG have a header of 6 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x06 | 1 / - | [SpamType](spamtype.md) | complaint_type |  |  |
-| 0x07 | 8 / Little | [Guid](../types/packed-guid.md) | offender |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x06 | 1 / - | [SpamType](spamtype.md) | complaint_type |  |
+| 0x07 | 8 / Little | [Guid](../types/packed-guid.md) | offender |  |
 
 If complaint_type is equal to `MAIL`:
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x0F | 4 / Little | u32 | unknown1 |  |  |
-| 0x13 | 4 / Little | u32 | mail_id |  |  |
-| 0x17 | 4 / Little | u32 | unknown2 |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x0F | 4 / Little | u32 | unknown1 |  |
+| 0x13 | 4 / Little | u32 | mail_id |  |
+| 0x17 | 4 / Little | u32 | unknown2 |  |
 
 Else If complaint_type is equal to `CHAT`:
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x1B | 4 / Little | u32 | language |  |  |
-| 0x1F | 4 / Little | u32 | message_type |  |  |
-| 0x23 | 4 / Little | u32 | channel_id |  |  |
-| 0x27 | 4 / Little | u32 | time |  |  |
-| 0x2B | - / - | CString | description |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x1B | 4 / Little | u32 | language |  |
+| 0x1F | 4 / Little | u32 | message_type |  |
+| 0x23 | 4 / Little | u32 | channel_id |  |
+| 0x27 | 4 / Little | u32 | time |  |
+| 0x2B | - / - | CString | description |  |
 
 ## Client Version 3.3.5
 
@@ -95,26 +95,26 @@ CMSG have a header of 6 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x06 | 1 / - | [SpamType](spamtype.md) | complaint_type |  |  |
-| 0x07 | 8 / Little | [Guid](../types/packed-guid.md) | offender |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x06 | 1 / - | [SpamType](spamtype.md) | complaint_type |  |
+| 0x07 | 8 / Little | [Guid](../types/packed-guid.md) | offender |  |
 
 If complaint_type is equal to `MAIL`:
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x0F | 4 / Little | u32 | unknown1 |  |  |
-| 0x13 | 4 / Little | u32 | mail_id |  |  |
-| 0x17 | 4 / Little | u32 | unknown2 |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x0F | 4 / Little | u32 | unknown1 |  |
+| 0x13 | 4 / Little | u32 | mail_id |  |
+| 0x17 | 4 / Little | u32 | unknown2 |  |
 
 Else If complaint_type is equal to `CHAT`:
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x1B | 4 / Little | u32 | language |  |  |
-| 0x1F | 4 / Little | u32 | message_type |  |  |
-| 0x23 | 4 / Little | u32 | channel_id |  |  |
-| 0x27 | 4 / Little | u32 | time |  |  |
-| 0x2B | - / - | CString | description |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x1B | 4 / Little | u32 | language |  |
+| 0x1F | 4 / Little | u32 | message_type |  |
+| 0x23 | 4 / Little | u32 | channel_id |  |
+| 0x27 | 4 / Little | u32 | time |  |
+| 0x2B | - / - | CString | description |  |
 

@@ -23,7 +23,7 @@ CMSG have a header of 6 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x06 | 4 / Little | u32 | realm_id |  | Realm ID that was sent earlier by the Auth Server<br/>ArcEmu/TriniyCore/mangosthree send back in [SMSG_REALM_SPLIT](./smsg_realm_split.md). |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x06 | 4 / Little | u32 | realm_id | Realm ID that was sent earlier by the Auth Server<br/>ArcEmu/TriniyCore/mangosthree send back in [SMSG_REALM_SPLIT](./smsg_realm_split.md). |
 

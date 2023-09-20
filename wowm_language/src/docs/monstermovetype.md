@@ -18,13 +18,13 @@ enum MonsterMoveType : u8 {
 ### Type
 The basic type is `u8`, a 1 byte (8 bit) integer.
 ### Enumerators
-| Enumerator | Value  | Description | Comment |
-| --------- | -------- | ----------- | ------- |
-| `NORMAL` | 0 (0x00) |  |  |
-| `STOP` | 1 (0x01) |  |  |
-| `FACING_SPOT` | 2 (0x02) |  |  |
-| `FACING_TARGET` | 3 (0x03) |  |  |
-| `FACING_ANGLE` | 4 (0x04) |  |  |
+| Enumerator | Value  | Comment |
+| --------- | -------- | ------- |
+| `NORMAL` | 0 (0x00) |  |
+| `STOP` | 1 (0x01) |  |
+| `FACING_SPOT` | 2 (0x02) |  |
+| `FACING_TARGET` | 3 (0x03) |  |
+| `FACING_ANGLE` | 4 (0x04) |  |
 
 Used in:
 * [MonsterMove](monstermove.md)

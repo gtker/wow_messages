@@ -18,13 +18,13 @@ enum BgTypeId : u32 {
 ### Type
 The basic type is `u32`, a 4 byte (32 bit) little endian integer.
 ### Enumerators
-| Enumerator | Value  | Description | Comment |
-| --------- | -------- | ----------- | ------- |
-| `NOT_ELIGIBLE` | 0 (0x00) |  | Your group has joined a battleground queue, but you are not eligible |
-| `QUEUED_FOR_AV` | 1 (0x01) |  | Your group has joined the queue for AV |
-| `QUEUED_FOR_WSG` | 2 (0x02) |  | Your group has joined the queue for WS |
-| `QUEUED_FOR_AB` | 3 (0x03) |  | Your group has joined the queue for AB |
-| `REMOVE_FROM_QUEUE` | 4294967294 (0xFFFFFFFE) |  | send bg command result to show nice message |
+| Enumerator | Value  | Comment |
+| --------- | -------- | ------- |
+| `NOT_ELIGIBLE` | 0 (0x00) | Your group has joined a battleground queue, but you are not eligible |
+| `QUEUED_FOR_AV` | 1 (0x01) | Your group has joined the queue for AV |
+| `QUEUED_FOR_WSG` | 2 (0x02) | Your group has joined the queue for WS |
+| `QUEUED_FOR_AB` | 3 (0x03) | Your group has joined the queue for AB |
+| `REMOVE_FROM_QUEUE` | 4294967294 (0xFFFFFFFE) | send bg command result to show nice message |
 
 Used in:
 * [SMSG_GROUP_JOINED_BATTLEGROUND](smsg_group_joined_battleground.md)
@@ -52,18 +52,18 @@ enum BgTypeId : u32 {
 ### Type
 The basic type is `u32`, a 4 byte (32 bit) little endian integer.
 ### Enumerators
-| Enumerator | Value  | Description | Comment |
-| --------- | -------- | ----------- | ------- |
-| `NOT_ELIGIBLE` | 0 (0x00) |  | Your group has joined a battleground queue, but you are not eligible |
-| `QUEUED_FOR_AV` | 1 (0x01) |  | Your group has joined the queue for AV |
-| `QUEUED_FOR_WSG` | 2 (0x02) |  | Your group has joined the queue for WS |
-| `QUEUED_FOR_AB` | 3 (0x03) |  | Your group has joined the queue for AB |
-| `QUEUED_FOR_NETHERSTORM` | 4 (0x04) |  |  |
-| `QUEUED_FOR_BLADES_EDGE_ARENA` | 5 (0x05) |  |  |
-| `QUEUED_FOR_ARENA` | 6 (0x06) |  |  |
-| `QUEUED_FOR_EYE_OF_THE_STORM` | 7 (0x07) |  |  |
-| `QUEUED_FOR_RUINS_OF_LORDAERON` | 8 (0x08) |  |  |
-| `REMOVE_FROM_QUEUE` | 4294967294 (0xFFFFFFFE) |  | send bg command result to show nice message |
+| Enumerator | Value  | Comment |
+| --------- | -------- | ------- |
+| `NOT_ELIGIBLE` | 0 (0x00) | Your group has joined a battleground queue, but you are not eligible |
+| `QUEUED_FOR_AV` | 1 (0x01) | Your group has joined the queue for AV |
+| `QUEUED_FOR_WSG` | 2 (0x02) | Your group has joined the queue for WS |
+| `QUEUED_FOR_AB` | 3 (0x03) | Your group has joined the queue for AB |
+| `QUEUED_FOR_NETHERSTORM` | 4 (0x04) |  |
+| `QUEUED_FOR_BLADES_EDGE_ARENA` | 5 (0x05) |  |
+| `QUEUED_FOR_ARENA` | 6 (0x06) |  |
+| `QUEUED_FOR_EYE_OF_THE_STORM` | 7 (0x07) |  |
+| `QUEUED_FOR_RUINS_OF_LORDAERON` | 8 (0x08) |  |
+| `REMOVE_FROM_QUEUE` | 4294967294 (0xFFFFFFFE) | send bg command result to show nice message |
 
 Used in:
 * [SMSG_GROUP_JOINED_BATTLEGROUND](smsg_group_joined_battleground.md)
@@ -95,22 +95,22 @@ enum BgTypeId : u32 {
 ### Type
 The basic type is `u32`, a 4 byte (32 bit) little endian integer.
 ### Enumerators
-| Enumerator | Value  | Description | Comment |
-| --------- | -------- | ----------- | ------- |
-| `NOT_ELIGIBLE` | 0 (0x00) |  | Your group has joined a battleground queue, but you are not eligible |
-| `QUEUED_FOR_AV` | 1 (0x01) |  | Your group has joined the queue for AV |
-| `QUEUED_FOR_WSG` | 2 (0x02) |  | Your group has joined the queue for WS |
-| `QUEUED_FOR_AB` | 3 (0x03) |  | Your group has joined the queue for AB |
-| `QUEUED_FOR_NETHERSTORM` | 4 (0x04) |  |  |
-| `QUEUED_FOR_BLADES_EDGE_ARENA` | 5 (0x05) |  |  |
-| `QUEUED_FOR_ARENA` | 6 (0x06) |  |  |
-| `QUEUED_FOR_EYE_OF_THE_STORM` | 7 (0x07) |  |  |
-| `QUEUED_FOR_RUINS_OF_LORDAERON` | 8 (0x08) |  |  |
-| `QUEUED_FOR_STRAND_OF_THE_ANCIENT` | 9 (0x09) |  |  |
-| `QUEUED_FOR_DALARAN_SEWERS` | 10 (0x0A) |  |  |
-| `QUEUED_FOR_RING_OF_VALOR` | 11 (0x0B) |  |  |
-| `QUEUED_FOR_ISLE_OF_CONQUEST` | 30 (0x1E) |  |  |
-| `REMOVE_FROM_QUEUE` | 4294967294 (0xFFFFFFFE) |  | send bg command result to show nice message |
+| Enumerator | Value  | Comment |
+| --------- | -------- | ------- |
+| `NOT_ELIGIBLE` | 0 (0x00) | Your group has joined a battleground queue, but you are not eligible |
+| `QUEUED_FOR_AV` | 1 (0x01) | Your group has joined the queue for AV |
+| `QUEUED_FOR_WSG` | 2 (0x02) | Your group has joined the queue for WS |
+| `QUEUED_FOR_AB` | 3 (0x03) | Your group has joined the queue for AB |
+| `QUEUED_FOR_NETHERSTORM` | 4 (0x04) |  |
+| `QUEUED_FOR_BLADES_EDGE_ARENA` | 5 (0x05) |  |
+| `QUEUED_FOR_ARENA` | 6 (0x06) |  |
+| `QUEUED_FOR_EYE_OF_THE_STORM` | 7 (0x07) |  |
+| `QUEUED_FOR_RUINS_OF_LORDAERON` | 8 (0x08) |  |
+| `QUEUED_FOR_STRAND_OF_THE_ANCIENT` | 9 (0x09) |  |
+| `QUEUED_FOR_DALARAN_SEWERS` | 10 (0x0A) |  |
+| `QUEUED_FOR_RING_OF_VALOR` | 11 (0x0B) |  |
+| `QUEUED_FOR_ISLE_OF_CONQUEST` | 30 (0x1E) |  |
+| `REMOVE_FROM_QUEUE` | 4294967294 (0xFFFFFFFE) | send bg command result to show nice message |
 
 Used in:
 * [SMSG_GROUP_JOINED_BATTLEGROUND](smsg_group_joined_battleground.md)

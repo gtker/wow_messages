@@ -2,7 +2,6 @@ use std::io::{Read, Write};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Data for which tutorials the client has passed.
-///
 /// All bits set means that all tutorials have been passed.
 /// Must be sent after [`SMSG_LOGIN_VERIFY_WORLD`](crate::vanilla::SMSG_LOGIN_VERIFY_WORLD) otherwise the client will SEGFAULT.
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/character_screen/smsg_tutorial_flags.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/character_screen/smsg_tutorial_flags.wowm#L3):

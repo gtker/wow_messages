@@ -28,23 +28,23 @@ enum Language : u32 {
 ### Type
 The basic type is `u32`, a 4 byte (32 bit) little endian integer.
 ### Enumerators
-| Enumerator | Value  | Description | Comment |
-| --------- | -------- | ----------- | ------- |
-| `UNIVERSAL` | 0 (0x00) |  |  |
-| `ORCISH` | 1 (0x01) |  |  |
-| `DARNASSIAN` | 2 (0x02) |  |  |
-| `TAURAHE` | 3 (0x03) |  |  |
-| `DWARVISH` | 6 (0x06) |  |  |
-| `COMMON` | 7 (0x07) |  |  |
-| `DEMONIC` | 8 (0x08) |  |  |
-| `TITAN` | 9 (0x09) |  |  |
-| `THALASSIAN` | 10 (0x0A) |  |  |
-| `DRACONIC` | 11 (0x0B) |  |  |
-| `KALIMAG` | 12 (0x0C) |  |  |
-| `GNOMISH` | 13 (0x0D) |  |  |
-| `TROLL` | 14 (0x0E) |  |  |
-| `GUTTERSPEAK` | 33 (0x21) |  |  |
-| `ADDON` | 4294967295 (0xFFFFFFFF) |  |  |
+| Enumerator | Value  | Comment |
+| --------- | -------- | ------- |
+| `UNIVERSAL` | 0 (0x00) |  |
+| `ORCISH` | 1 (0x01) |  |
+| `DARNASSIAN` | 2 (0x02) |  |
+| `TAURAHE` | 3 (0x03) |  |
+| `DWARVISH` | 6 (0x06) |  |
+| `COMMON` | 7 (0x07) |  |
+| `DEMONIC` | 8 (0x08) |  |
+| `TITAN` | 9 (0x09) |  |
+| `THALASSIAN` | 10 (0x0A) |  |
+| `DRACONIC` | 11 (0x0B) |  |
+| `KALIMAG` | 12 (0x0C) |  |
+| `GNOMISH` | 13 (0x0D) |  |
+| `TROLL` | 14 (0x0E) |  |
+| `GUTTERSPEAK` | 33 (0x21) |  |
+| `ADDON` | 4294967295 (0xFFFFFFFF) |  |
 
 Used in:
 * [CMSG_MESSAGECHAT](cmsg_messagechat.md)
@@ -83,26 +83,26 @@ enum Language : u8 {
 ### Type
 The basic type is `u8`, a 1 byte (8 bit) integer.
 ### Enumerators
-| Enumerator | Value  | Description | Comment |
-| --------- | -------- | ----------- | ------- |
-| `UNIVERSAL` | 0 (0x00) |  |  |
-| `ORCISH` | 1 (0x01) |  |  |
-| `DARNASSIAN` | 2 (0x02) |  |  |
-| `TAURAHE` | 3 (0x03) |  |  |
-| `DWARVISH` | 6 (0x06) |  |  |
-| `COMMON` | 7 (0x07) |  |  |
-| `DEMONIC` | 8 (0x08) |  |  |
-| `TITAN` | 9 (0x09) |  |  |
-| `THALASSIAN` | 10 (0x0A) |  |  |
-| `DRACONIC` | 11 (0x0B) |  |  |
-| `KALIMAG` | 12 (0x0C) |  |  |
-| `GNOMISH` | 13 (0x0D) |  |  |
-| `TROLL` | 14 (0x0E) |  |  |
-| `GUTTERSPEAK` | 33 (0x21) |  |  |
-| `DRAENEI` | 35 (0x23) |  |  |
-| `ZOMBIE` | 36 (0x24) |  |  |
-| `GNOMISH_BINARY` | 37 (0x25) |  |  |
-| `GOBLIN_BINARY` | 38 (0x26) |  |  |
+| Enumerator | Value  | Comment |
+| --------- | -------- | ------- |
+| `UNIVERSAL` | 0 (0x00) |  |
+| `ORCISH` | 1 (0x01) |  |
+| `DARNASSIAN` | 2 (0x02) |  |
+| `TAURAHE` | 3 (0x03) |  |
+| `DWARVISH` | 6 (0x06) |  |
+| `COMMON` | 7 (0x07) |  |
+| `DEMONIC` | 8 (0x08) |  |
+| `TITAN` | 9 (0x09) |  |
+| `THALASSIAN` | 10 (0x0A) |  |
+| `DRACONIC` | 11 (0x0B) |  |
+| `KALIMAG` | 12 (0x0C) |  |
+| `GNOMISH` | 13 (0x0D) |  |
+| `TROLL` | 14 (0x0E) |  |
+| `GUTTERSPEAK` | 33 (0x21) |  |
+| `DRAENEI` | 35 (0x23) |  |
+| `ZOMBIE` | 36 (0x24) |  |
+| `GNOMISH_BINARY` | 37 (0x25) |  |
+| `GOBLIN_BINARY` | 38 (0x26) |  |
 
 Used in:
 * [CMSG_MESSAGECHAT](cmsg_messagechat.md)

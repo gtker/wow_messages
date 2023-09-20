@@ -28,14 +28,14 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | - / - | CString | guild_name |  |  |
-| - | 4 / Little | u32 | created_day |  |  |
-| - | 4 / Little | u32 | created_month |  |  |
-| - | 4 / Little | u32 | created_year |  |  |
-| - | 4 / Little | u32 | amount_of_characters_in_guild |  |  |
-| - | 4 / Little | u32 | amount_of_accounts_in_guild |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x04 | - / - | CString | guild_name |  |
+| - | 4 / Little | u32 | created_day |  |
+| - | 4 / Little | u32 | created_month |  |
+| - | 4 / Little | u32 | created_year |  |
+| - | 4 / Little | u32 | amount_of_characters_in_guild |  |
+| - | 4 / Little | u32 | amount_of_accounts_in_guild |  |
 
 ## Client Version 3.3.5
 
@@ -63,10 +63,10 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | - / - | CString | guild_name |  |  |
-| - | 4 / Little | DateTime | created |  |  |
-| - | 4 / Little | u32 | amount_of_characters_in_guild |  |  |
-| - | 4 / Little | u32 | amount_of_accounts_in_guild |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| - | - / - | CString | guild_name |  |
+| - | 4 / Little | DateTime | created |  |
+| - | 4 / Little | u32 | amount_of_characters_in_guild |  |
+| - | 4 / Little | u32 | amount_of_accounts_in_guild |  |
 

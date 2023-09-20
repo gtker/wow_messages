@@ -25,9 +25,9 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | - / - | [PackedGuid](../types/packed-guid.md) | unit |  |  |
-| - | 4 / Little | u32 | amount_of_units |  |  |
-| - | ? / - | [ThreatUpdateUnit](threatupdateunit.md)[amount_of_units] | units |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| - | - / - | [PackedGuid](../types/packed-guid.md) | unit |  |
+| - | 4 / Little | u32 | amount_of_units |  |
+| - | ? / - | [ThreatUpdateUnit](threatupdateunit.md)[amount_of_units] | units |  |
 

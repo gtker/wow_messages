@@ -6,9 +6,9 @@ smsg SMSG_FORCE_RUN_SPEED_CHANGE = 0x00E2 {
     }
     f32 speed;
 } {
-    description = "Tells the client that the running speed has changed.";
-    description = "Client replies with [CMSG_FORCE_RUN_SPEED_CHANGE_ACK].";
-    description = "vmangos sends this message to the client being changed and [SMSG_SPLINE_SET_RUN_SPEED] to others.";
+    comment = "Tells the client that the running speed has changed.";
+    comment = "Client replies with [CMSG_FORCE_RUN_SPEED_CHANGE_ACK].";
+    comment = "vmangos sends this message to the client being changed and [SMSG_SPLINE_SET_RUN_SPEED] to others.";
     versions = "1.12";
 }
 
@@ -23,7 +23,7 @@ test SMSG_FORCE_RUN_SPEED_CHANGE {
     0x00, 0x00, 0x00, 0x00, /* move_event */
     0x00, 0x00, 0xe0, 0x40 /* speed */
 ] {
-    description = "Force speed to 7";
+    comment = "Force speed to 7";
     versions = "1.12";
 }
 
@@ -39,9 +39,9 @@ smsg SMSG_FORCE_RUN_SPEED_CHANGE = 0x00E2 {
     }
     f32 speed;
 } {
-    description = "Tells the client that the running speed has changed.";
-    description = "Client replies with [CMSG_FORCE_RUN_SPEED_CHANGE_ACK].";
-    description = "vmangos sends this message to the client being changed and [SMSG_SPLINE_SET_RUN_SPEED] to others.";
+    comment = "Tells the client that the running speed has changed.";
+    comment = "Client replies with [CMSG_FORCE_RUN_SPEED_CHANGE_ACK].";
+    comment = "vmangos sends this message to the client being changed and [SMSG_SPLINE_SET_RUN_SPEED] to others.";
     versions = "2.4.3 3";
 }
 

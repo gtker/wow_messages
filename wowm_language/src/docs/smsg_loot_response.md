@@ -30,17 +30,17 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | 8 / Little | [Guid](../types/packed-guid.md) | guid |  |  |
-| - | 1 / - | [LootMethod](lootmethod.md) | loot_method |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| - | 8 / Little | [Guid](../types/packed-guid.md) | guid |  |
+| - | 1 / - | [LootMethod](lootmethod.md) | loot_method |  |
 
 If loot_method is equal to `ERROR`:
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | 1 / - | [LootMethodError](lootmethoderror.md) | loot_error |  |  |
-| - | 4 / Little | Gold | gold |  |  |
-| - | 1 / - | u8 | amount_of_items |  |  |
-| - | ? / - | [LootItem](lootitem.md)[amount_of_items] | items |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| - | 1 / - | [LootMethodError](lootmethoderror.md) | loot_error |  |
+| - | 4 / Little | Gold | gold |  |
+| - | 1 / - | u8 | amount_of_items |  |
+| - | ? / - | [LootItem](lootitem.md)[amount_of_items] | items |  |
 

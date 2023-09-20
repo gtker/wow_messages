@@ -65,7 +65,7 @@ test SMSG_ITEM_PUSH_RESULT {
     0x00, 0x00, 0x00, 0x00, /* item_random_property_id */
     0x01, 0x00, 0x00, 0x00 /* item_count */
 ] {
-    description = "Pushing the creation of a lionheart helm to player with Guid 4.";
+    comment = "Pushing the creation of a lionheart helm to player with Guid 4.";
     versions = "1.12";
 }
 

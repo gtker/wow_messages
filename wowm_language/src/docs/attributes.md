@@ -46,40 +46,40 @@ flag Attributes : u32 {
 ### Type
 The basic type is `u32`, a 4 byte (32 bit) little endian integer.
 ### Enumerators
-| Enumerator | Value  | Description | Comment |
-| --------- | -------- | ----------- | ------- |
-| `NONE` | 0 (0x00) |  |  |
-| `PROC_FAILURE_BURNS_CHARGE` | 1 (0x01) |  |  |
-| `USES_RANGED_SLOT` | 2 (0x02) |  |  |
-| `ON_NEXT_SWING_NO_DAMAGE` | 4 (0x04) |  |  |
-| `NEED_EXOTIC_AMMO` | 8 (0x08) |  |  |
-| `IS_ABILITY` | 16 (0x10) |  |  |
-| `IS_TRADESKILL` | 32 (0x20) |  |  |
-| `PASSIVE` | 64 (0x40) |  |  |
-| `DO_NOT_DISPLAY` | 128 (0x80) |  |  |
-| `DO_NOT_LOG` | 256 (0x100) |  |  |
-| `HELD_ITEM_ONLY` | 512 (0x200) |  |  |
-| `ON_NEXT_SWING` | 1024 (0x400) |  |  |
-| `WEARER_CASTS_PROC_TRIGGER` | 2048 (0x800) |  |  |
-| `DAYTIME_ONLY` | 4096 (0x1000) |  |  |
-| `NIGHT_ONLY` | 8192 (0x2000) |  |  |
-| `ONLY_INDOORS` | 16384 (0x4000) |  |  |
-| `ONLY_OUTDOORS` | 32768 (0x8000) |  |  |
-| `NOT_SHAPESHIFT` | 65536 (0x10000) |  |  |
-| `ONLY_STEALTHED` | 131072 (0x20000) |  |  |
-| `DO_NOT_SHEATH` | 262144 (0x40000) |  |  |
-| `SCALES_WITH_CREATURE_LEVEL` | 524288 (0x80000) |  |  |
-| `CANCELS_AUTO_ATTACK_COMBAT` | 1048576 (0x100000) |  |  |
-| `NO_ACTIVE_DEFENSE` | 2097152 (0x200000) |  |  |
-| `TRACK_TARGET_IN_CAST_PLAYER_ONLY` | 4194304 (0x400000) |  |  |
-| `ALLOW_CAST_WHILE_DEAD` | 8388608 (0x800000) |  |  |
-| `ALLOW_WHILE_MOUNTED` | 16777216 (0x1000000) |  |  |
-| `COOLDOWN_ON_EVENT` | 33554432 (0x2000000) |  |  |
-| `AURA_IS_DEBUFF` | 67108864 (0x4000000) |  |  |
-| `ALLOW_WHILE_SITTING` | 134217728 (0x8000000) |  |  |
-| `NOT_IN_COMBAT_ONLY_PEACEFUL` | 268435456 (0x10000000) |  |  |
-| `NO_IMMUNITIES` | 536870912 (0x20000000) |  |  |
-| `HEARTBEAT_RESIST` | 1073741824 (0x40000000) |  |  |
-| `NO_AURA_CANCEL` | 2147483648 (0x80000000) |  |  |
+| Enumerator | Value  | Comment |
+| --------- | -------- | ------- |
+| `NONE` | 0 (0x00) |  |
+| `PROC_FAILURE_BURNS_CHARGE` | 1 (0x01) |  |
+| `USES_RANGED_SLOT` | 2 (0x02) |  |
+| `ON_NEXT_SWING_NO_DAMAGE` | 4 (0x04) |  |
+| `NEED_EXOTIC_AMMO` | 8 (0x08) |  |
+| `IS_ABILITY` | 16 (0x10) |  |
+| `IS_TRADESKILL` | 32 (0x20) |  |
+| `PASSIVE` | 64 (0x40) |  |
+| `DO_NOT_DISPLAY` | 128 (0x80) |  |
+| `DO_NOT_LOG` | 256 (0x100) |  |
+| `HELD_ITEM_ONLY` | 512 (0x200) |  |
+| `ON_NEXT_SWING` | 1024 (0x400) |  |
+| `WEARER_CASTS_PROC_TRIGGER` | 2048 (0x800) |  |
+| `DAYTIME_ONLY` | 4096 (0x1000) |  |
+| `NIGHT_ONLY` | 8192 (0x2000) |  |
+| `ONLY_INDOORS` | 16384 (0x4000) |  |
+| `ONLY_OUTDOORS` | 32768 (0x8000) |  |
+| `NOT_SHAPESHIFT` | 65536 (0x10000) |  |
+| `ONLY_STEALTHED` | 131072 (0x20000) |  |
+| `DO_NOT_SHEATH` | 262144 (0x40000) |  |
+| `SCALES_WITH_CREATURE_LEVEL` | 524288 (0x80000) |  |
+| `CANCELS_AUTO_ATTACK_COMBAT` | 1048576 (0x100000) |  |
+| `NO_ACTIVE_DEFENSE` | 2097152 (0x200000) |  |
+| `TRACK_TARGET_IN_CAST_PLAYER_ONLY` | 4194304 (0x400000) |  |
+| `ALLOW_CAST_WHILE_DEAD` | 8388608 (0x800000) |  |
+| `ALLOW_WHILE_MOUNTED` | 16777216 (0x1000000) |  |
+| `COOLDOWN_ON_EVENT` | 33554432 (0x2000000) |  |
+| `AURA_IS_DEBUFF` | 67108864 (0x4000000) |  |
+| `ALLOW_WHILE_SITTING` | 134217728 (0x8000000) |  |
+| `NOT_IN_COMBAT_ONLY_PEACEFUL` | 268435456 (0x10000000) |  |
+| `NO_IMMUNITIES` | 536870912 (0x20000000) |  |
+| `HEARTBEAT_RESIST` | 1073741824 (0x40000000) |  |
+| `NO_AURA_CANCEL` | 2147483648 (0x80000000) |  |
 
 Used in:

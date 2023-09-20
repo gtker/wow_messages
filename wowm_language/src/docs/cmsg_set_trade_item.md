@@ -25,9 +25,9 @@ CMSG have a header of 6 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x06 | 1 / - | u8 | trade_slot |  |  |
-| 0x07 | 1 / - | u8 | bag |  |  |
-| 0x08 | 1 / - | u8 | slot |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x06 | 1 / - | u8 | trade_slot |  |
+| 0x07 | 1 / - | u8 | bag |  |
+| 0x08 | 1 / - | u8 | slot |  |
 

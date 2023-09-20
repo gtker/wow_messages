@@ -28,12 +28,12 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | - / - | [PackedGuid](../types/packed-guid.md) | guid |  |  |
-| - | 4 / Little | u32 | movement_counter |  | mangoszero: Sequence<br/>mangoszero sets to 0 |
-| - | 4 / Little | f32 | v_cos |  | cmangos/mangoszero/vmangos: x direction |
-| - | 4 / Little | f32 | v_sin |  | cmangos/mangoszero/vmangos: y direction |
-| - | 4 / Little | f32 | horizontal_speed |  | cmangos/mangoszero/vmangos: Horizontal speed |
-| - | 4 / Little | f32 | vertical_speed |  | cmangos/mangoszero/vmangos: Z Movement speed (vertical) |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| - | - / - | [PackedGuid](../types/packed-guid.md) | guid |  |
+| - | 4 / Little | u32 | movement_counter | mangoszero: Sequence<br/>mangoszero sets to 0 |
+| - | 4 / Little | f32 | v_cos | cmangos/mangoszero/vmangos: x direction |
+| - | 4 / Little | f32 | v_sin | cmangos/mangoszero/vmangos: y direction |
+| - | 4 / Little | f32 | horizontal_speed | cmangos/mangoszero/vmangos: Horizontal speed |
+| - | 4 / Little | f32 | vertical_speed | cmangos/mangoszero/vmangos: Z Movement speed (vertical) |
 

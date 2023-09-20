@@ -23,9 +23,9 @@ CMSG have a header of 6 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x06 | 1 / - | [BattlefieldPortAction](battlefieldportaction.md) | action |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x06 | 1 / - | [BattlefieldPortAction](battlefieldportaction.md) | action |  |
 
 ## Client Version 1.12
 
@@ -51,10 +51,10 @@ CMSG have a header of 6 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x06 | 4 / - | [Map](map.md) | map |  |  |
-| 0x0A | 1 / - | [BattlefieldPortAction](battlefieldportaction.md) | action |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x06 | 4 / - | [Map](map.md) | map |  |
+| 0x0A | 1 / - | [BattlefieldPortAction](battlefieldportaction.md) | action |  |
 
 ## Client Version 2.4.3, Client Version 3
 
@@ -83,11 +83,11 @@ CMSG have a header of 6 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x06 | 1 / - | u8 | arena_type |  | mangosone/mangos-tbc/azerothcore: arenatype if arena |
-| 0x07 | 1 / - | u8 | unknown1 |  | mangosone/mangos-tbc/azerothcore: unk, can be 0x0 (may be if was invited?) and 0x1 |
-| 0x08 | 4 / Little | u32 | bg_type_id |  | mangosone/mangos-tbc/azerothcore: type id from dbc |
-| 0x0C | 2 / Little | u16 | unknown2 |  | mangosone/mangos-tbc/azerothcore: 0x1F90 constant? |
-| 0x0E | 1 / - | [BattlefieldPortAction](battlefieldportaction.md) | action |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x06 | 1 / - | u8 | arena_type | mangosone/mangos-tbc/azerothcore: arenatype if arena |
+| 0x07 | 1 / - | u8 | unknown1 | mangosone/mangos-tbc/azerothcore: unk, can be 0x0 (may be if was invited?) and 0x1 |
+| 0x08 | 4 / Little | u32 | bg_type_id | mangosone/mangos-tbc/azerothcore: type id from dbc |
+| 0x0C | 2 / Little | u16 | unknown2 | mangosone/mangos-tbc/azerothcore: 0x1F90 constant? |
+| 0x0E | 1 / - | [BattlefieldPortAction](battlefieldportaction.md) | action |  |
 

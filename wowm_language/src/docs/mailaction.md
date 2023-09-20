@@ -19,14 +19,14 @@ enum MailAction : u32 {
 ### Type
 The basic type is `u32`, a 4 byte (32 bit) little endian integer.
 ### Enumerators
-| Enumerator | Value  | Description | Comment |
-| --------- | -------- | ----------- | ------- |
-| `SEND` | 0 (0x00) |  |  |
-| `MONEY_TAKEN` | 1 (0x01) |  |  |
-| `ITEM_TAKEN` | 2 (0x02) |  |  |
-| `RETURNED_TO_SENDER` | 3 (0x03) |  |  |
-| `DELETED` | 4 (0x04) |  |  |
-| `MADE_PERMANENT` | 5 (0x05) |  |  |
+| Enumerator | Value  | Comment |
+| --------- | -------- | ------- |
+| `SEND` | 0 (0x00) |  |
+| `MONEY_TAKEN` | 1 (0x01) |  |
+| `ITEM_TAKEN` | 2 (0x02) |  |
+| `RETURNED_TO_SENDER` | 3 (0x03) |  |
+| `DELETED` | 4 (0x04) |  |
+| `MADE_PERMANENT` | 5 (0x05) |  |
 
 Used in:
 * [SMSG_SEND_MAIL_RESULT](smsg_send_mail_result.md)

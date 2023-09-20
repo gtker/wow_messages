@@ -17,12 +17,12 @@ enum PlayerChatTag : u8 {
 ### Type
 The basic type is `u8`, a 1 byte (8 bit) integer.
 ### Enumerators
-| Enumerator | Value  | Description | Comment |
-| --------- | -------- | ----------- | ------- |
-| `NONE` | 0 (0x00) |  |  |
-| `AFK` | 1 (0x01) |  |  |
-| `DND` | 2 (0x02) |  |  |
-| `GM` | 3 (0x03) |  |  |
+| Enumerator | Value  | Comment |
+| --------- | -------- | ------- |
+| `NONE` | 0 (0x00) |  |
+| `AFK` | 1 (0x01) |  |
+| `DND` | 2 (0x02) |  |
+| `GM` | 3 (0x03) |  |
 
 Used in:
 * [SMSG_GM_MESSAGECHAT](smsg_gm_messagechat.md)
@@ -48,14 +48,14 @@ enum PlayerChatTag : u8 {
 ### Type
 The basic type is `u8`, a 1 byte (8 bit) integer.
 ### Enumerators
-| Enumerator | Value  | Description | Comment |
-| --------- | -------- | ----------- | ------- |
-| `NONE` | 0 (0x00) |  |  |
-| `AFK` | 1 (0x01) |  |  |
-| `DND` | 2 (0x02) |  |  |
-| `GM` | 3 (0x03) |  |  |
-| `COMMENTATOR` | 4 (0x04) |  |  |
-| `DEVELOPER` | 5 (0x05) |  |  |
+| Enumerator | Value  | Comment |
+| --------- | -------- | ------- |
+| `NONE` | 0 (0x00) |  |
+| `AFK` | 1 (0x01) |  |
+| `DND` | 2 (0x02) |  |
+| `GM` | 3 (0x03) |  |
+| `COMMENTATOR` | 4 (0x04) |  |
+| `DEVELOPER` | 5 (0x05) |  |
 
 Used in:
 * [SMSG_GM_MESSAGECHAT](smsg_gm_messagechat.md)

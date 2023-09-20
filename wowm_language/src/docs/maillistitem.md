@@ -21,18 +21,18 @@ struct MailListItem {
 ```
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x00 | 1 / - | u8 | item_index |  |  |
-| 0x01 | 4 / Little | u32 | low_guid |  |  |
-| 0x05 | 4 / Little | u32 | item |  |  |
-| 0x09 | 72 / - | [MailListItemEnchant](maillistitemenchant.md)[6] | enchants |  |  |
-| 0x51 | 4 / Little | u32 | item_random_property_id |  |  |
-| 0x55 | 4 / Little | u32 | item_suffix_factor |  |  |
-| 0x59 | 1 / - | u8 | item_amount |  |  |
-| 0x5A | 4 / Little | u32 | charges |  |  |
-| 0x5E | 4 / Little | u32 | max_durability |  |  |
-| 0x62 | 4 / Little | u32 | durability |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x00 | 1 / - | u8 | item_index |  |
+| 0x01 | 4 / Little | u32 | low_guid |  |
+| 0x05 | 4 / Little | u32 | item |  |
+| 0x09 | 72 / - | [MailListItemEnchant](maillistitemenchant.md)[6] | enchants |  |
+| 0x51 | 4 / Little | u32 | item_random_property_id |  |
+| 0x55 | 4 / Little | u32 | item_suffix_factor |  |
+| 0x59 | 1 / - | u8 | item_amount |  |
+| 0x5A | 4 / Little | u32 | charges |  |
+| 0x5E | 4 / Little | u32 | max_durability |  |
+| 0x62 | 4 / Little | u32 | durability |  |
 
 
 Used in:
@@ -60,19 +60,19 @@ struct MailListItem {
 ```
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x00 | 1 / - | u8 | item_index |  |  |
-| 0x01 | 4 / Little | u32 | low_guid |  |  |
-| 0x05 | 4 / Little | u32 | item |  |  |
-| 0x09 | 84 / - | [MailListItemEnchant](maillistitemenchant.md)[7] | enchants |  |  |
-| 0x5D | 4 / Little | u32 | item_random_property_id |  |  |
-| 0x61 | 4 / Little | u32 | item_suffix_factor |  |  |
-| 0x65 | 1 / - | u8 | item_amount |  |  |
-| 0x66 | 4 / Little | u32 | charges |  |  |
-| 0x6A | 4 / Little | u32 | max_durability |  |  |
-| 0x6E | 4 / Little | u32 | durability |  |  |
-| 0x72 | 1 / - | u8 | unknown |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x00 | 1 / - | u8 | item_index |  |
+| 0x01 | 4 / Little | u32 | low_guid |  |
+| 0x05 | 4 / Little | u32 | item |  |
+| 0x09 | 84 / - | [MailListItemEnchant](maillistitemenchant.md)[7] | enchants |  |
+| 0x5D | 4 / Little | u32 | item_random_property_id |  |
+| 0x61 | 4 / Little | u32 | item_suffix_factor |  |
+| 0x65 | 1 / - | u8 | item_amount |  |
+| 0x66 | 4 / Little | u32 | charges |  |
+| 0x6A | 4 / Little | u32 | max_durability |  |
+| 0x6E | 4 / Little | u32 | durability |  |
+| 0x72 | 1 / - | u8 | unknown |  |
 
 
 Used in:

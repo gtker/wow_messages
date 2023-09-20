@@ -10,7 +10,7 @@ smsg SMSG_AUTH_RESPONSE = 0x1EE {
         u32 queue_position;
     }
 } {
-    description = "Response to [CMSG_AUTH_SESSION].";
+    comment = "Response to [CMSG_AUTH_SESSION].";
     comment = "Usually followed by [CMSG_CHAR_ENUM] if login was successful (`AUTH_OK`).";
     comment = "vmangos/cmangos/mangoszero all have a variant of this message that contains fields from `AUTH_OK` for `AUTH_WAIT_QUEUE` as well (`https://github.com/vmangos/core/blob/cd896d43712ceafecdbd8f005846d7f676e55b4f/src/game/World.cpp#L322`) but this does not seem to be actually be a real thing.";
     versions = "1";
@@ -23,7 +23,7 @@ test SMSG_AUTH_RESPONSE {
     0xEE, 0x01, /* opcode */
     0x0D, /* result */
 ] {
-    description = "Authentication failed.";
+    comment = "Authentication failed.";
     versions = "1.12";
 }
 
@@ -36,7 +36,7 @@ test SMSG_AUTH_RESPONSE {
     0x1B, /* result */
     0xEF, 0xBE, 0xAD, 0xDE, /* queue_position */
 ] {
-    description = "Client told to wait in queue.";
+    comment = "Client told to wait in queue.";
     versions = "1.12";
 }
 
@@ -53,7 +53,7 @@ test SMSG_AUTH_RESPONSE {
     0x00, /* billing_flags */
     0x00, 0x00, 0x00, 0x00, /* billing_rested */
 ] {
-    description = "Client can join.";
+    comment = "Client can join.";
     versions = "1.12";
 }
 
@@ -92,7 +92,7 @@ smsg SMSG_AUTH_RESPONSE = 0x1EE {
         u32 queue_position;
     }
 } {
-    description = "Response to [CMSG_AUTH_SESSION].";
+    comment = "Response to [CMSG_AUTH_SESSION].";
     comment = "Usually followed by [CMSG_CHAR_ENUM] if login was successful (`AUTH_OK`).";
     comment = "vmangos/cmangos/mangoszero all have a variant of this message that contains fields from `AUTH_OK` for `AUTH_WAIT_QUEUE` as well (`https://github.com/vmangos/core/blob/cd896d43712ceafecdbd8f005846d7f676e55b4f/src/game/World.cpp#L322`) but this does not seem to be actually be a real thing.";
     versions = "2.4.3";
@@ -119,7 +119,7 @@ smsg SMSG_AUTH_RESPONSE = 0x1EE {
         Bool realm_has_free_character_migration;
     }
 } {
-    description = "Response to [CMSG_AUTH_SESSION].";
+    comment = "Response to [CMSG_AUTH_SESSION].";
     comment = "Usually followed by [CMSG_CHAR_ENUM] if login was successful (`AUTH_OK`).";
     comment = "vmangos/cmangos/mangoszero all have a variant of this message that contains fields from `AUTH_OK` for `AUTH_WAIT_QUEUE` as well (`https://github.com/vmangos/core/blob/cd896d43712ceafecdbd8f005846d7f676e55b4f/src/game/World.cpp#L322`) but this does not seem to be actually be a real thing.";
     versions = "3.3.5";

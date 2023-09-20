@@ -16,13 +16,13 @@ struct CooldownSpell {
 ```
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x00 | 2 / Little | u16 | spell_id |  |  |
-| 0x02 | 2 / Little | u16 | item_id |  | cmangos/mangoszero: cast item id |
-| 0x04 | 2 / Little | u16 | spell_category |  |  |
-| 0x06 | 4 / Little | Milliseconds | cooldown |  |  |
-| 0x0A | 4 / Little | Milliseconds | category_cooldown |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x00 | 2 / Little | u16 | spell_id |  |
+| 0x02 | 2 / Little | u16 | item_id | cmangos/mangoszero: cast item id |
+| 0x04 | 2 / Little | u16 | spell_category |  |
+| 0x06 | 4 / Little | Milliseconds | cooldown |  |
+| 0x0A | 4 / Little | Milliseconds | category_cooldown |  |
 
 
 Used in:

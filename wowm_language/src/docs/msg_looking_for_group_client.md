@@ -49,9 +49,9 @@ CMSG have a header of 6 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x06 | 4 / - | [LfgType](lfgtype.md) | lfg_type |  |  |
-| 0x0A | 4 / Little | u32 | entry |  | entry from LfgDunggeons.dbc |
-| 0x0E | 4 / Little | u32 | unknown |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x06 | 4 / - | [LfgType](lfgtype.md) | lfg_type |  |
+| 0x0A | 4 / Little | u32 | entry | entry from LfgDunggeons.dbc |
+| 0x0E | 4 / Little | u32 | unknown |  |
 

@@ -22,17 +22,17 @@ enum AuctionCommandResultTwo : u32 {
 ### Type
 The basic type is `u32`, a 4 byte (32 bit) little endian integer.
 ### Enumerators
-| Enumerator | Value  | Description | Comment |
-| --------- | -------- | ----------- | ------- |
-| `OK` | 0 (0x00) |  | depends on enum AuctionAction |
-| `ERR_INVENTORY` | 1 (0x01) |  | depends on enum `InventoryChangeResult` |
-| `ERR_DATABASE` | 2 (0x02) |  | ERR_AUCTION_DATABASE_ERROR (default) |
-| `ERR_NOT_ENOUGH_MONEY` | 3 (0x03) |  | ERR_NOT_ENOUGH_MONEY |
-| `ERR_ITEM_NOT_FOUND` | 4 (0x04) |  | ERR_ITEM_NOT_FOUND |
-| `ERR_HIGHER_BID` | 5 (0x05) |  | ERR_AUCTION_HIGHER_BID |
-| `ERR_BID_INCREMENT` | 7 (0x07) |  | ERR_AUCTION_BID_INCREMENT |
-| `ERR_BID_OWN` | 10 (0x0A) |  | ERR_AUCTION_BID_OWN |
-| `ERR_RESTRICTED_ACCOUNT` | 13 (0x0D) |  | ERR_RESTRICTED_ACCOUNT |
+| Enumerator | Value  | Comment |
+| --------- | -------- | ------- |
+| `OK` | 0 (0x00) | depends on enum AuctionAction |
+| `ERR_INVENTORY` | 1 (0x01) | depends on enum `InventoryChangeResult` |
+| `ERR_DATABASE` | 2 (0x02) | ERR_AUCTION_DATABASE_ERROR (default) |
+| `ERR_NOT_ENOUGH_MONEY` | 3 (0x03) | ERR_NOT_ENOUGH_MONEY |
+| `ERR_ITEM_NOT_FOUND` | 4 (0x04) | ERR_ITEM_NOT_FOUND |
+| `ERR_HIGHER_BID` | 5 (0x05) | ERR_AUCTION_HIGHER_BID |
+| `ERR_BID_INCREMENT` | 7 (0x07) | ERR_AUCTION_BID_INCREMENT |
+| `ERR_BID_OWN` | 10 (0x0A) | ERR_AUCTION_BID_OWN |
+| `ERR_RESTRICTED_ACCOUNT` | 13 (0x0D) | ERR_RESTRICTED_ACCOUNT |
 
 Used in:
 * [SMSG_AUCTION_COMMAND_RESULT](smsg_auction_command_result.md)

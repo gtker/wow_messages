@@ -24,10 +24,10 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | 4 / Little | u32 | total_played_time |  |  |
-| 0x08 | 4 / Little | u32 | level_played_time |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x04 | 4 / Little | u32 | total_played_time |  |
+| 0x08 | 4 / Little | u32 | level_played_time |  |
 
 ## Client Version 3
 
@@ -54,9 +54,9 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | 4 / Little | u32 | total_played_time |  | Time played in total (seconds) |
-| 0x08 | 4 / Little | u32 | level_played_time |  | Time played on this level (seconds) |
-| 0x0C | 1 / - | Bool | show_on_ui |  | Whether this is a silent query or the client should show it on the UI (chat box).<br/>Send back the value received in [CMSG_PLAYED_TIME](./cmsg_played_time.md) |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x04 | 4 / Little | u32 | total_played_time | Time played in total (seconds) |
+| 0x08 | 4 / Little | u32 | level_played_time | Time played on this level (seconds) |
+| 0x0C | 1 / - | Bool | show_on_ui | Whether this is a silent query or the client should show it on the UI (chat box).<br/>Send back the value received in [CMSG_PLAYED_TIME](./cmsg_played_time.md) |
 

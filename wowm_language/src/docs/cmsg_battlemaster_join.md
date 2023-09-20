@@ -26,12 +26,12 @@ CMSG have a header of 6 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x06 | 8 / Little | [Guid](../types/packed-guid.md) | guid |  | vmangos: battlemaster guid, or player guid if joining queue from BG portal |
-| 0x0E | 4 / - | [Map](map.md) | map |  |  |
-| 0x12 | 4 / Little | u32 | instance_id |  | vmangos: 0 if First Available selected |
-| 0x16 | 1 / - | Bool | join_as_group |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x06 | 8 / Little | [Guid](../types/packed-guid.md) | guid | vmangos: battlemaster guid, or player guid if joining queue from BG portal |
+| 0x0E | 4 / - | [Map](map.md) | map |  |
+| 0x12 | 4 / Little | u32 | instance_id | vmangos: 0 if First Available selected |
+| 0x16 | 1 / - | Bool | join_as_group |  |
 
 ## Client Version 2.4.3
 
@@ -59,12 +59,12 @@ CMSG have a header of 6 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x06 | 8 / Little | [Guid](../types/packed-guid.md) | guid |  | vmangos: battlemaster guid, or player guid if joining queue from BG portal |
-| 0x0E | 4 / - | [Map](map.md) | map |  |  |
-| 0x12 | 4 / Little | u32 | instance_id |  | vmangos: 0 if First Available selected |
-| 0x16 | 1 / - | Bool | join_as_group |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x06 | 8 / Little | [Guid](../types/packed-guid.md) | guid | vmangos: battlemaster guid, or player guid if joining queue from BG portal |
+| 0x0E | 4 / - | [Map](map.md) | map |  |
+| 0x12 | 4 / Little | u32 | instance_id | vmangos: 0 if First Available selected |
+| 0x16 | 1 / - | Bool | join_as_group |  |
 
 ## Client Version 3.3.5
 
@@ -92,10 +92,10 @@ CMSG have a header of 6 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x06 | 8 / Little | [Guid](../types/packed-guid.md) | guid |  | vmangos: battlemaster guid, or player guid if joining queue from BG portal |
-| 0x0E | 4 / - | [Map](map.md) | map |  |  |
-| 0x12 | 4 / Little | u32 | instance_id |  | vmangos: 0 if First Available selected |
-| 0x16 | 1 / - | Bool | join_as_group |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x06 | 8 / Little | [Guid](../types/packed-guid.md) | guid | vmangos: battlemaster guid, or player guid if joining queue from BG portal |
+| 0x0E | 4 / - | [Map](map.md) | map |  |
+| 0x12 | 4 / Little | u32 | instance_id | vmangos: 0 if First Available selected |
+| 0x16 | 1 / - | Bool | join_as_group |  |
 

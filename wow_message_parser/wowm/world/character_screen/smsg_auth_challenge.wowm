@@ -2,7 +2,7 @@
 smsg SMSG_AUTH_CHALLENGE = 0x1EC {
     u32 server_seed;
 } {
-    description = "Seed used by the client to prove in [CMSG_AUTH_SESSION] that it has authenticated with the auth server.";
+    comment = "Seed used by the client to prove in [CMSG_AUTH_SESSION] that it has authenticated with the auth server.";
     comment = "First thing sent when a client connects to the world server.";
     comment = "This message is always unencrypted.";
     versions = "1 2";

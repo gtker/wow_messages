@@ -154,8 +154,6 @@ impl IrWorldVersion {
 #[derive(Clone, Debug, Serialize)]
 pub(crate) struct IrTags {
     #[serde(skip_serializing_if = "Option::is_none")]
-    description: Option<String>,
-    #[serde(skip_serializing_if = "Option::is_none")]
     comment: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
     display: Option<String>,
@@ -173,8 +171,6 @@ pub(crate) struct IrTags {
 
 impl IrTags {
     fn from_tags(tags: &ObjectTags) -> Self {
-        let description = tags.description().map(|d| d.as_ir_string());
-
         let comment = tags.comment().map(|d| d.as_ir_string());
 
         let compressed = if tags.compressed() { Some(true) } else { None };
@@ -209,7 +205,6 @@ impl IrTags {
         });
 
         Self {
-            description,
             comment,
             display: None,
             version,
@@ -221,12 +216,9 @@ impl IrTags {
     }
 
     fn from_member_tags(tags: &MemberTags) -> Self {
-        let description = tags.description().map(|d| d.as_ir_string());
-
         let comment = tags.comment().map(|d| d.as_ir_string());
 
         Self {
-            description,
             comment,
             display: tags.display().map(|a| a.to_owned()),
             version: None,

@@ -28,23 +28,23 @@ enum HitInfo : u32 {
 ### Type
 The basic type is `u32`, a 4 byte (32 bit) little endian integer.
 ### Enumerators
-| Enumerator | Value  | Description | Comment |
-| --------- | -------- | ----------- | ------- |
-| `NORMAL_SWING` | 0 (0x00) |  |  |
-| `UNK1` | 1 (0x01) |  | req correct packet structure |
-| `AFFECTS_VICTIM` | 2 (0x02) |  | no being hit animation on victim without it |
-| `LEFT_SWING` | 4 (0x04) |  |  |
-| `EARLY_CRITICAL_HIT` | 8 (0x08) |  | According to vmangos used as crit prior to 1.9. |
-| `MISS` | 16 (0x10) |  |  |
-| `ABSORB` | 32 (0x20) |  | plays absorb sound |
-| `RESIST` | 64 (0x40) |  | resisted atleast some damage |
-| `CRITICAL_HIT` | 128 (0x80) |  |  |
-| `UNK9` | 256 (0x100) |  | wotlk? |
-| `UNK10` | 8192 (0x2000) |  | wotlk? |
-| `GLANCING` | 16384 (0x4000) |  |  |
-| `CRUSHING` | 32768 (0x8000) |  |  |
-| `NO_ACTION` | 65536 (0x10000) |  |  |
-| `SWING_NO_HIT_SOUND` | 524288 (0x80000) |  |  |
+| Enumerator | Value  | Comment |
+| --------- | -------- | ------- |
+| `NORMAL_SWING` | 0 (0x00) |  |
+| `UNK1` | 1 (0x01) | req correct packet structure |
+| `AFFECTS_VICTIM` | 2 (0x02) | no being hit animation on victim without it |
+| `LEFT_SWING` | 4 (0x04) |  |
+| `EARLY_CRITICAL_HIT` | 8 (0x08) | According to vmangos used as crit prior to 1.9. |
+| `MISS` | 16 (0x10) |  |
+| `ABSORB` | 32 (0x20) | plays absorb sound |
+| `RESIST` | 64 (0x40) | resisted atleast some damage |
+| `CRITICAL_HIT` | 128 (0x80) |  |
+| `UNK9` | 256 (0x100) | wotlk? |
+| `UNK10` | 8192 (0x2000) | wotlk? |
+| `GLANCING` | 16384 (0x4000) |  |
+| `CRUSHING` | 32768 (0x8000) |  |
+| `NO_ACTION` | 65536 (0x10000) |  |
+| `SWING_NO_HIT_SOUND` | 524288 (0x80000) |  |
 
 Used in:
 * [SMSG_ATTACKERSTATEUPDATE](smsg_attackerstateupdate.md)
@@ -93,36 +93,36 @@ flag HitInfo : u32 {
 ### Type
 The basic type is `u32`, a 4 byte (32 bit) little endian integer.
 ### Enumerators
-| Enumerator | Value  | Description | Comment |
-| --------- | -------- | ----------- | ------- |
-| `NORMALSWING` | 0 (0x00) |  |  |
-| `UNK1` | 1 (0x01) |  | req correct packet structure |
-| `AFFECTS_VICTIM` | 2 (0x02) |  |  |
-| `OFFHAND` | 4 (0x04) |  |  |
-| `UNK2` | 8 (0x08) |  |  |
-| `MISS` | 16 (0x10) |  |  |
-| `FULL_ABSORB` | 32 (0x20) |  |  |
-| `PARTIAL_ABSORB` | 64 (0x40) |  |  |
-| `ALL_ABSORB` | 96 (0x60) |  |  |
-| `FULL_RESIST` | 128 (0x80) |  |  |
-| `PARTIAL_RESIST` | 256 (0x100) |  |  |
-| `ALL_RESIST` | 384 (0x180) |  |  |
-| `CRITICALHIT` | 512 (0x200) |  | critical hit |
-| `UNK10` | 1024 (0x400) |  |  |
-| `UNK11` | 2048 (0x800) |  |  |
-| `UNK12` | 4096 (0x1000) |  |  |
-| `BLOCK` | 8192 (0x2000) |  | blocked damage |
-| `UNK14` | 16384 (0x4000) |  | set only if meleespellid is present. no world text when victim is hit for 0 dmg(HideWorldTextForNoDamage?) |
-| `UNK15` | 32768 (0x8000) |  | player victim? something related to blod sprut visual (`BloodSpurtInBack`?) |
-| `GLANCING` | 65536 (0x10000) |  |  |
-| `CRUSHING` | 131072 (0x20000) |  |  |
-| `NO_ANIMATION` | 262144 (0x40000) |  |  |
-| `UNK19` | 524288 (0x80000) |  |  |
-| `UNK20` | 1048576 (0x100000) |  |  |
-| `SWINGNOHITSOUND` | 2097152 (0x200000) |  | unused? |
-| `UNK22` | 4194304 (0x400000) |  |  |
-| `RAGE_GAIN` | 8388608 (0x800000) |  |  |
-| `FAKE_DAMAGE` | 16777216 (0x1000000) |  | enables damage animation even if no damage done. set only if no damage |
+| Enumerator | Value  | Comment |
+| --------- | -------- | ------- |
+| `NORMALSWING` | 0 (0x00) |  |
+| `UNK1` | 1 (0x01) | req correct packet structure |
+| `AFFECTS_VICTIM` | 2 (0x02) |  |
+| `OFFHAND` | 4 (0x04) |  |
+| `UNK2` | 8 (0x08) |  |
+| `MISS` | 16 (0x10) |  |
+| `FULL_ABSORB` | 32 (0x20) |  |
+| `PARTIAL_ABSORB` | 64 (0x40) |  |
+| `ALL_ABSORB` | 96 (0x60) |  |
+| `FULL_RESIST` | 128 (0x80) |  |
+| `PARTIAL_RESIST` | 256 (0x100) |  |
+| `ALL_RESIST` | 384 (0x180) |  |
+| `CRITICALHIT` | 512 (0x200) | critical hit |
+| `UNK10` | 1024 (0x400) |  |
+| `UNK11` | 2048 (0x800) |  |
+| `UNK12` | 4096 (0x1000) |  |
+| `BLOCK` | 8192 (0x2000) | blocked damage |
+| `UNK14` | 16384 (0x4000) | set only if meleespellid is present. no world text when victim is hit for 0 dmg(HideWorldTextForNoDamage?) |
+| `UNK15` | 32768 (0x8000) | player victim? something related to blod sprut visual (`BloodSpurtInBack`?) |
+| `GLANCING` | 65536 (0x10000) |  |
+| `CRUSHING` | 131072 (0x20000) |  |
+| `NO_ANIMATION` | 262144 (0x40000) |  |
+| `UNK19` | 524288 (0x80000) |  |
+| `UNK20` | 1048576 (0x100000) |  |
+| `SWINGNOHITSOUND` | 2097152 (0x200000) | unused? |
+| `UNK22` | 4194304 (0x400000) |  |
+| `RAGE_GAIN` | 8388608 (0x800000) |  |
+| `FAKE_DAMAGE` | 16777216 (0x1000000) | enables damage animation even if no damage done. set only if no damage |
 
 Used in:
 * [SMSG_ATTACKERSTATEUPDATE](smsg_attackerstateupdate.md)

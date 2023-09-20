@@ -23,9 +23,9 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | - / - | CString | name |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x04 | - / - | CString | name |  |
 
 ## Client Version 3.3.5
 
@@ -56,16 +56,16 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | 1 / - | [PlayerInviteStatus](playerinvitestatus.md) | status |  |  |
-| - | - / - | CString | name |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| - | 1 / - | [PlayerInviteStatus](playerinvitestatus.md) | status |  |
+| - | - / - | CString | name |  |
 
 Optionally the following fields can be present. This can only be detected by looking at the size of the message.
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | 4 / Little | u32 | unknown1 |  | All emulators set entire optional to 0. |
-| - | 1 / - | u8 | count |  | All emulators set entire optional to 0. |
-| - | 4 / Little | u32 | unknown2 |  | All emulators set entire optional to 0. |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| - | 4 / Little | u32 | unknown1 | All emulators set entire optional to 0. |
+| - | 1 / - | u8 | count | All emulators set entire optional to 0. |
+| - | 4 / Little | u32 | unknown2 | All emulators set entire optional to 0. |
 

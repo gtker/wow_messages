@@ -4,7 +4,7 @@ cmsg CMSG_FORCE_RUN_SPEED_CHANGE_ACK = 0x00E3 {
     MovementInfo info;
     f32 new_speed;
 } {
-    description = "Sent to acknowledge the new speed. Reply to [SMSG_FORCE_RUN_SPEED_CHANGE].";
+    comment = "Sent to acknowledge the new speed. Reply to [SMSG_FORCE_RUN_SPEED_CHANGE].";
     versions = "1.12";
 }
 
@@ -37,7 +37,7 @@ test CMSG_FORCE_RUN_SPEED_CHANGE_ACK {
     0x39, 0x03, 0x00, 0x00, /* MovementInfo.fall_time */
     0x00, 0x00, 0xe0, 0x40 /* new_speed */
 ] {
-    description = "Client responds to having movement speed set to 7 in Northshire Abbey.";
+    comment = "Client responds to having movement speed set to 7 in Northshire Abbey.";
     versions = "1.12";
 }
 
@@ -47,7 +47,7 @@ cmsg CMSG_FORCE_RUN_SPEED_CHANGE_ACK = 0x00E3 {
     MovementInfo info;
     f32 new_speed;
 } {
-    description = "Sent to acknowledge the new speed. Reply to [SMSG_FORCE_RUN_SPEED_CHANGE].";
+    comment = "Sent to acknowledge the new speed. Reply to [SMSG_FORCE_RUN_SPEED_CHANGE].";
     versions = "2.4.3";
 }
 
@@ -57,6 +57,6 @@ cmsg CMSG_FORCE_RUN_SPEED_CHANGE_ACK = 0x00E3 {
     MovementInfo info;
     f32 new_speed;
 } {
-    description = "Sent to acknowledge the new speed. Reply to [SMSG_FORCE_RUN_SPEED_CHANGE].";
+    comment = "Sent to acknowledge the new speed. Reply to [SMSG_FORCE_RUN_SPEED_CHANGE].";
     versions = "3.3.5";
 }

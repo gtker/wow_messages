@@ -15,12 +15,12 @@ struct TalentInfoSpec {
 ```
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x00 | 1 / - | u8 | amount_of_talents |  |  |
-| 0x01 | ? / - | [InspectTalent](inspecttalent.md)[amount_of_talents] | talents |  |  |
-| - | 1 / - | u8 | amount_of_glyphs |  |  |
-| - | ? / - | u16[amount_of_glyphs] | glyphs |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x00 | 1 / - | u8 | amount_of_talents |  |
+| 0x01 | ? / - | [InspectTalent](inspecttalent.md)[amount_of_talents] | talents |  |
+| - | 1 / - | u8 | amount_of_glyphs |  |
+| - | ? / - | u16[amount_of_glyphs] | glyphs |  |
 
 
 Used in:

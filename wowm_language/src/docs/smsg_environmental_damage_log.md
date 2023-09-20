@@ -27,11 +27,11 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | 8 / Little | [Guid](../types/packed-guid.md) | guid |  |  |
-| 0x0C | 1 / - | [EnvironmentalDamageType](environmentaldamagetype.md) | damage_type |  |  |
-| 0x0D | 4 / Little | u32 | damage |  |  |
-| 0x11 | 4 / Little | u32 | absorb |  |  |
-| 0x15 | 4 / Little | u32 | resist |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x04 | 8 / Little | [Guid](../types/packed-guid.md) | guid |  |
+| 0x0C | 1 / - | [EnvironmentalDamageType](environmentaldamagetype.md) | damage_type |  |
+| 0x0D | 4 / Little | u32 | damage |  |
+| 0x11 | 4 / Little | u32 | absorb |  |
+| 0x15 | 4 / Little | u32 | resist |  |
 

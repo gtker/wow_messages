@@ -40,35 +40,35 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | 4 / Little | u32 | mail_id |  |  |
-| 0x08 | 4 / - | [MailAction](mailaction.md) | action |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x04 | 4 / Little | u32 | mail_id |  |
+| 0x08 | 4 / - | [MailAction](mailaction.md) | action |  |
 
 If action is equal to `ITEM_TAKEN`:
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x0C | 4 / - | [MailResult](mailresult.md) | result |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x0C | 4 / - | [MailResult](mailresult.md) | result |  |
 
 If result is equal to `ERR_EQUIP_ERROR`:
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x10 | 4 / Little | u32 | equip_error |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x10 | 4 / Little | u32 | equip_error |  |
 
 Else: 
-| 0x14 | 4 / Little | u32 | item |  | cmangos/vmangos: item guid low? |
-| 0x18 | 4 / Little | u32 | item_count |  |  |
+| 0x14 | 4 / Little | u32 | item | cmangos/vmangos: item guid low? |
+| 0x18 | 4 / Little | u32 | item_count |  |
 
 Else: 
-| 0x1C | 4 / - | [MailResultTwo](mailresulttwo.md) | result2 |  |  |
+| 0x1C | 4 / - | [MailResultTwo](mailresulttwo.md) | result2 |  |
 
 If result2 is equal to `ERR_EQUIP_ERROR`:
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x20 | 4 / Little | u32 | equip_error2 |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x20 | 4 / Little | u32 | equip_error2 |  |
 
 ## Client Version 2
 
@@ -110,35 +110,35 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | 4 / Little | u32 | mail_id |  |  |
-| 0x08 | 4 / - | [MailAction](mailaction.md) | action |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x04 | 4 / Little | u32 | mail_id |  |
+| 0x08 | 4 / - | [MailAction](mailaction.md) | action |  |
 
 If action is equal to `ITEM_TAKEN`:
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x0C | 4 / - | [MailResult](mailresult.md) | result |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x0C | 4 / - | [MailResult](mailresult.md) | result |  |
 
 If result is equal to `ERR_EQUIP_ERROR`:
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x10 | 4 / Little | u32 | equip_error |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x10 | 4 / Little | u32 | equip_error |  |
 
 Else: 
-| 0x14 | 4 / Little | u32 | item |  | cmangos/vmangos: item guid low? |
-| 0x18 | 4 / Little | u32 | item_count |  |  |
+| 0x14 | 4 / Little | u32 | item | cmangos/vmangos: item guid low? |
+| 0x18 | 4 / Little | u32 | item_count |  |
 
 Else: 
-| 0x1C | 4 / - | [MailResultTwo](mailresulttwo.md) | result2 |  |  |
+| 0x1C | 4 / - | [MailResultTwo](mailresulttwo.md) | result2 |  |
 
 If result2 is equal to `ERR_EQUIP_ERROR`:
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x20 | 4 / Little | u32 | equip_error2 |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x20 | 4 / Little | u32 | equip_error2 |  |
 
 ## Client Version 3.3.5
 
@@ -180,33 +180,33 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | 4 / Little | u32 | mail_id |  |  |
-| - | 4 / - | [MailAction](mailaction.md) | action |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| - | 4 / Little | u32 | mail_id |  |
+| - | 4 / - | [MailAction](mailaction.md) | action |  |
 
 If action is equal to `ITEM_TAKEN`:
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | 4 / - | [MailResult](mailresult.md) | result |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| - | 4 / - | [MailResult](mailresult.md) | result |  |
 
 If result is equal to `ERR_EQUIP_ERROR`:
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | 4 / Little | u32 | equip_error |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| - | 4 / Little | u32 | equip_error |  |
 
 Else: 
-| - | 4 / Little | u32 | item |  | cmangos/vmangos: item guid low? |
-| - | 4 / Little | u32 | item_count |  |  |
+| - | 4 / Little | u32 | item | cmangos/vmangos: item guid low? |
+| - | 4 / Little | u32 | item_count |  |
 
 Else: 
-| - | 4 / - | [MailResultTwo](mailresulttwo.md) | result2 |  |  |
+| - | 4 / - | [MailResultTwo](mailresulttwo.md) | result2 |  |
 
 If result2 is equal to `ERR_EQUIP_ERROR`:
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | 4 / Little | u32 | equip_error2 |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| - | 4 / Little | u32 | equip_error2 |  |
 

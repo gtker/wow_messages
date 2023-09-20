@@ -27,11 +27,11 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | 4 / Little | u32 | quest_id |  |  |
-| 0x08 | 4 / Little | u32 | creature_id |  | Unsure of name |
-| 0x0C | 4 / Little | u32 | kill_count |  |  |
-| 0x10 | 4 / Little | u32 | required_kill_count |  |  |
-| 0x14 | 8 / Little | [Guid](../types/packed-guid.md) | guid |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x04 | 4 / Little | u32 | quest_id |  |
+| 0x08 | 4 / Little | u32 | creature_id | Unsure of name |
+| 0x0C | 4 / Little | u32 | kill_count |  |
+| 0x10 | 4 / Little | u32 | required_kill_count |  |
+| 0x14 | 8 / Little | [Guid](../types/packed-guid.md) | guid |  |
 

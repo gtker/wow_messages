@@ -29,15 +29,15 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | 4 / Little | u32 | auction_house_id |  |  |
-| 0x08 | 4 / Little | u32 | auction_id |  |  |
-| 0x0C | 8 / Little | [Guid](../types/packed-guid.md) | bidder |  |  |
-| 0x14 | 4 / Little | u32 | won |  | vmangos/cmangos: if 0, client shows ERR_AUCTION_WON_S, else ERR_AUCTION_OUTBID_S |
-| 0x18 | 4 / Little | u32 | out_bid |  |  |
-| 0x1C | 4 / Little | u32 | item_template |  |  |
-| 0x20 | 4 / Little | u32 | item_random_property_id |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x04 | 4 / Little | u32 | auction_house_id |  |
+| 0x08 | 4 / Little | u32 | auction_id |  |
+| 0x0C | 8 / Little | [Guid](../types/packed-guid.md) | bidder |  |
+| 0x14 | 4 / Little | u32 | won | vmangos/cmangos: if 0, client shows ERR_AUCTION_WON_S, else ERR_AUCTION_OUTBID_S |
+| 0x18 | 4 / Little | u32 | out_bid |  |
+| 0x1C | 4 / Little | u32 | item_template |  |
+| 0x20 | 4 / Little | u32 | item_random_property_id |  |
 
 ## Client Version 1.12, Client Version 2
 
@@ -68,15 +68,15 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | 4 / - | [AuctionHouse](auctionhouse.md) | auction_house |  |  |
-| 0x08 | 4 / Little | u32 | auction_id |  |  |
-| 0x0C | 8 / Little | [Guid](../types/packed-guid.md) | bidder |  |  |
-| 0x14 | 4 / Little | u32 | won |  | vmangos/cmangos: if 0, client shows ERR_AUCTION_WON_S, else ERR_AUCTION_OUTBID_S |
-| 0x18 | 4 / Little | u32 | out_bid |  |  |
-| 0x1C | 4 / Little | u32 | item_template |  |  |
-| 0x20 | 4 / Little | u32 | item_random_property_id |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x04 | 4 / - | [AuctionHouse](auctionhouse.md) | auction_house |  |
+| 0x08 | 4 / Little | u32 | auction_id |  |
+| 0x0C | 8 / Little | [Guid](../types/packed-guid.md) | bidder |  |
+| 0x14 | 4 / Little | u32 | won | vmangos/cmangos: if 0, client shows ERR_AUCTION_WON_S, else ERR_AUCTION_OUTBID_S |
+| 0x18 | 4 / Little | u32 | out_bid |  |
+| 0x1C | 4 / Little | u32 | item_template |  |
+| 0x20 | 4 / Little | u32 | item_random_property_id |  |
 
 ## Client Version 3.3.5
 
@@ -108,14 +108,14 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | 4 / - | [AuctionHouse](auctionhouse.md) | auction_house |  |  |
-| 0x08 | 4 / Little | u32 | auction_id |  |  |
-| 0x0C | 8 / Little | [Guid](../types/packed-guid.md) | bidder |  |  |
-| 0x14 | 4 / Little | u32 | bid_sum |  |  |
-| 0x18 | 4 / Little | u32 | new_highest_bid |  |  |
-| 0x1C | 4 / Little | u32 | out_bid_amount |  |  |
-| 0x20 | 4 / Little | u32 | item_template |  |  |
-| 0x24 | 4 / Little | u32 | item_random_property_id |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x04 | 4 / - | [AuctionHouse](auctionhouse.md) | auction_house |  |
+| 0x08 | 4 / Little | u32 | auction_id |  |
+| 0x0C | 8 / Little | [Guid](../types/packed-guid.md) | bidder |  |
+| 0x14 | 4 / Little | u32 | bid_sum |  |
+| 0x18 | 4 / Little | u32 | new_highest_bid |  |
+| 0x1C | 4 / Little | u32 | out_bid_amount |  |
+| 0x20 | 4 / Little | u32 | item_template |  |
+| 0x24 | 4 / Little | u32 | item_random_property_id |  |
 

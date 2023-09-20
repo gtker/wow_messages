@@ -6,7 +6,7 @@ slogin CMD_AUTH_LOGON_PROOF_Server = 0x01 {
         u32 hardware_survey_id;
     }
 } {
-    description = "Reply to [CMD_AUTH_LOGON_PROOF_Client].";
+    comment = "Reply to [CMD_AUTH_LOGON_PROOF_Client].";
     login_versions = "2 3";
 }
 
@@ -29,7 +29,7 @@ flag AccountFlag : u32 {
     TRIAL = 0x000008;
     PROPASS = 0x800000;
 } {
-    description = "Reply to [CMD_AUTH_LOGON_PROOF_Client].";
+    comment = "Reply to [CMD_AUTH_LOGON_PROOF_Client].";
     login_versions = "8";
 }
 
@@ -41,7 +41,7 @@ slogin CMD_AUTH_LOGON_PROOF_Server = 0x01 {
         u16 unknown;
     }
 } {
-    description = "Reply to [CMD_AUTH_LOGON_PROOF_Client].";
+    comment = "Reply to [CMD_AUTH_LOGON_PROOF_Client].";
     login_versions = "5 6 7";
 }
 
@@ -65,7 +65,7 @@ test CMD_AUTH_LOGON_PROOF_Server {
 } [
     1, 7, 0, 0
 ] {
-    description = "Reply to [CMD_AUTH_LOGON_PROOF_Client].";
+    comment = "Reply to [CMD_AUTH_LOGON_PROOF_Client].";
     login_versions = "8";
 }
 

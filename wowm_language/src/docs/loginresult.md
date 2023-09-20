@@ -29,24 +29,24 @@ enum LoginResult : u8 {
 ### Type
 The basic type is `u8`, a 1 byte (8 bit) integer.
 ### Enumerators
-| Enumerator | Value  | Description | Comment |
-| --------- | -------- | ----------- | ------- |
-| `SUCCESS` | 0 (0x00) |  |  |
-| `FAIL_UNKNOWN0` | 1 (0x01) |  |  |
-| `FAIL_UNKNOWN1` | 2 (0x02) |  |  |
-| `FAIL_BANNED` | 3 (0x03) |  |  |
-| `FAIL_UNKNOWN_ACCOUNT` | 4 (0x04) |  |  |
-| `FAIL_INCORRECT_PASSWORD` | 5 (0x05) |  |  |
-| `FAIL_ALREADY_ONLINE` | 6 (0x06) |  |  |
-| `FAIL_NO_TIME` | 7 (0x07) |  |  |
-| `FAIL_DB_BUSY` | 8 (0x08) |  |  |
-| `FAIL_VERSION_INVALID` | 9 (0x09) |  |  |
-| `LOGIN_DOWNLOAD_FILE` | 10 (0x0A) |  |  |
-| `FAIL_INVALID_SERVER` | 11 (0x0B) |  |  |
-| `FAIL_SUSPENDED` | 12 (0x0C) |  |  |
-| `FAIL_NO_ACCESS` | 13 (0x0D) |  |  |
-| `SUCCESS_SURVEY` | 14 (0x0E) |  |  |
-| `FAIL_PARENTALCONTROL` | 15 (0x0F) |  |  |
+| Enumerator | Value  | Comment |
+| --------- | -------- | ------- |
+| `SUCCESS` | 0 (0x00) |  |
+| `FAIL_UNKNOWN0` | 1 (0x01) |  |
+| `FAIL_UNKNOWN1` | 2 (0x02) |  |
+| `FAIL_BANNED` | 3 (0x03) |  |
+| `FAIL_UNKNOWN_ACCOUNT` | 4 (0x04) |  |
+| `FAIL_INCORRECT_PASSWORD` | 5 (0x05) |  |
+| `FAIL_ALREADY_ONLINE` | 6 (0x06) |  |
+| `FAIL_NO_TIME` | 7 (0x07) |  |
+| `FAIL_DB_BUSY` | 8 (0x08) |  |
+| `FAIL_VERSION_INVALID` | 9 (0x09) |  |
+| `LOGIN_DOWNLOAD_FILE` | 10 (0x0A) |  |
+| `FAIL_INVALID_SERVER` | 11 (0x0B) |  |
+| `FAIL_SUSPENDED` | 12 (0x0C) |  |
+| `FAIL_NO_ACCESS` | 13 (0x0D) |  |
+| `SUCCESS_SURVEY` | 14 (0x0E) |  |
+| `FAIL_PARENTALCONTROL` | 15 (0x0F) |  |
 
 Used in:
 * [CMD_AUTH_LOGON_CHALLENGE_Server](cmd_auth_logon_challenge_server.md)
@@ -87,25 +87,25 @@ enum LoginResult : u8 {
 ### Type
 The basic type is `u8`, a 1 byte (8 bit) integer.
 ### Enumerators
-| Enumerator | Value  | Description | Comment |
-| --------- | -------- | ----------- | ------- |
-| `SUCCESS` | 0 (0x00) |  |  |
-| `FAIL_UNKNOWN0` | 1 (0x01) |  |  |
-| `FAIL_UNKNOWN1` | 2 (0x02) |  |  |
-| `FAIL_BANNED` | 3 (0x03) |  |  |
-| `FAIL_UNKNOWN_ACCOUNT` | 4 (0x04) |  |  |
-| `FAIL_INCORRECT_PASSWORD` | 5 (0x05) |  |  |
-| `FAIL_ALREADY_ONLINE` | 6 (0x06) |  |  |
-| `FAIL_NO_TIME` | 7 (0x07) |  |  |
-| `FAIL_DB_BUSY` | 8 (0x08) |  |  |
-| `FAIL_VERSION_INVALID` | 9 (0x09) |  |  |
-| `LOGIN_DOWNLOAD_FILE` | 10 (0x0A) |  |  |
-| `FAIL_INVALID_SERVER` | 11 (0x0B) |  |  |
-| `FAIL_SUSPENDED` | 12 (0x0C) |  |  |
-| `FAIL_NO_ACCESS` | 13 (0x0D) |  |  |
-| `SUCCESS_SURVEY` | 14 (0x0E) |  |  |
-| `FAIL_PARENTALCONTROL` | 15 (0x0F) |  |  |
-| `FAIL_LOCKED_ENFORCED` | 16 (0x10) |  |  |
+| Enumerator | Value  | Comment |
+| --------- | -------- | ------- |
+| `SUCCESS` | 0 (0x00) |  |
+| `FAIL_UNKNOWN0` | 1 (0x01) |  |
+| `FAIL_UNKNOWN1` | 2 (0x02) |  |
+| `FAIL_BANNED` | 3 (0x03) |  |
+| `FAIL_UNKNOWN_ACCOUNT` | 4 (0x04) |  |
+| `FAIL_INCORRECT_PASSWORD` | 5 (0x05) |  |
+| `FAIL_ALREADY_ONLINE` | 6 (0x06) |  |
+| `FAIL_NO_TIME` | 7 (0x07) |  |
+| `FAIL_DB_BUSY` | 8 (0x08) |  |
+| `FAIL_VERSION_INVALID` | 9 (0x09) |  |
+| `LOGIN_DOWNLOAD_FILE` | 10 (0x0A) |  |
+| `FAIL_INVALID_SERVER` | 11 (0x0B) |  |
+| `FAIL_SUSPENDED` | 12 (0x0C) |  |
+| `FAIL_NO_ACCESS` | 13 (0x0D) |  |
+| `SUCCESS_SURVEY` | 14 (0x0E) |  |
+| `FAIL_PARENTALCONTROL` | 15 (0x0F) |  |
+| `FAIL_LOCKED_ENFORCED` | 16 (0x10) |  |
 
 Used in:
 * [CMD_AUTH_LOGON_CHALLENGE_Server](cmd_auth_logon_challenge_server.md)

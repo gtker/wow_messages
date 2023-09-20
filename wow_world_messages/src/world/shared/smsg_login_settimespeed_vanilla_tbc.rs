@@ -4,7 +4,6 @@ use crate::DateTime;
 
 #[derive(Debug, Clone, Copy, PartialEq, PartialOrd, Default)]
 /// Tells the client what the datetime is and how fast time passes.
-///
 /// The client also asks for the datetime with [`CMSG_QUERY_TIME`](crate::vanilla::CMSG_QUERY_TIME) and gets a reply from [`SMSG_QUERY_TIME_RESPONSE`](crate::vanilla::SMSG_QUERY_TIME_RESPONSE), but this does not appear to change anything in the client.
 /// Despite sending this as the very first message after the client logs in it will still send a [`CMSG_QUERY_TIME`](crate::vanilla::CMSG_QUERY_TIME).
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/login_logout/smsg_login_settimespeed.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/login_logout/smsg_login_settimespeed.wowm#L1):
@@ -16,11 +15,9 @@ use crate::DateTime;
 /// ```
 pub struct SMSG_LOGIN_SETTIMESPEED {
     /// Current server datetime.
-    ///
     /// Running the client with `-console` verifies that this message in this format sets the correct datetime. [`SMSG_QUERY_TIME_RESPONSE`](crate::vanilla::SMSG_QUERY_TIME_RESPONSE) will not set this.
     pub datetime: DateTime,
     /// How many minutes should pass by every second.
-    ///
     /// vmangos/cmangos/mangoszero set this to 0.01666667. This means that 1/60 minutes pass every second (one second passes every second). Setting this to 1.0 will make the client advance one minute every second.
     pub timescale: f32,
 }

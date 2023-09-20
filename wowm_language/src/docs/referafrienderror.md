@@ -27,22 +27,22 @@ enum ReferAFriendError : u8 {
 ### Type
 The basic type is `u8`, a 1 byte (8 bit) integer.
 ### Enumerators
-| Enumerator | Value  | Description | Comment |
-| --------- | -------- | ----------- | ------- |
-| `NONE` | 0 (0x00) |  |  |
-| `NOT_REFERRED_BY` | 1 (0x01) |  |  |
-| `TARGET_TOO_HIGH` | 2 (0x02) |  |  |
-| `INSUFFICIENT_GRANTABLE_LEVELS` | 3 (0x03) |  |  |
-| `TOO_FAR` | 4 (0x04) |  |  |
-| `DIFFERENT_FACTION` | 5 (0x05) |  |  |
-| `NOT_NOW` | 6 (0x06) |  |  |
-| `GRANT_LEVEL_MAX` | 7 (0x07) |  |  |
-| `NO_TARGET` | 8 (0x08) |  |  |
-| `NOT_IN_GROUP` | 9 (0x09) |  |  |
-| `SUMMON_LEVEL_MAX` | 10 (0x0A) |  |  |
-| `SUMMON_COOLDOWN` | 11 (0x0B) |  |  |
-| `INSUFFICIENT_EXPANSION_LEVEL` | 12 (0x0C) |  |  |
-| `SUMMON_OFFLINE` | 13 (0x0D) |  |  |
+| Enumerator | Value  | Comment |
+| --------- | -------- | ------- |
+| `NONE` | 0 (0x00) |  |
+| `NOT_REFERRED_BY` | 1 (0x01) |  |
+| `TARGET_TOO_HIGH` | 2 (0x02) |  |
+| `INSUFFICIENT_GRANTABLE_LEVELS` | 3 (0x03) |  |
+| `TOO_FAR` | 4 (0x04) |  |
+| `DIFFERENT_FACTION` | 5 (0x05) |  |
+| `NOT_NOW` | 6 (0x06) |  |
+| `GRANT_LEVEL_MAX` | 7 (0x07) |  |
+| `NO_TARGET` | 8 (0x08) |  |
+| `NOT_IN_GROUP` | 9 (0x09) |  |
+| `SUMMON_LEVEL_MAX` | 10 (0x0A) |  |
+| `SUMMON_COOLDOWN` | 11 (0x0B) |  |
+| `INSUFFICIENT_EXPANSION_LEVEL` | 12 (0x0C) |  |
+| `SUMMON_OFFLINE` | 13 (0x0D) |  |
 
 Used in:
 * [SMSG_REFER_A_FRIEND_FAILURE](smsg_refer_a_friend_failure.md)

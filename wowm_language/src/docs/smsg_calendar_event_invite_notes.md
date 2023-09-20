@@ -28,10 +28,10 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | - / - | [PackedGuid](../types/packed-guid.md) | invitee |  |  |
-| - | 8 / Little | [Guid](../types/packed-guid.md) | invite_id |  |  |
-| - | - / - | CString | text |  |  |
-| - | 1 / - | Bool | unknown |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| - | - / - | [PackedGuid](../types/packed-guid.md) | invitee |  |
+| - | 8 / Little | [Guid](../types/packed-guid.md) | invite_id |  |
+| - | - / - | CString | text |  |
+| - | 1 / - | Bool | unknown |  |
 

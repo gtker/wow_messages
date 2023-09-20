@@ -26,12 +26,12 @@ CMSG have a header of 6 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x06 | 8 / Little | [Guid](../types/packed-guid.md) | vendor |  |  |
-| 0x0E | 4 / Little | u32 | item |  |  |
-| 0x12 | 1 / - | u8 | amount |  |  |
-| 0x13 | 1 / - | u8 | unknown1 |  | cmangos says this is hardcoded to 1 in the TBC client. |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x06 | 8 / Little | [Guid](../types/packed-guid.md) | vendor |  |
+| 0x0E | 4 / Little | u32 | item |  |
+| 0x12 | 1 / - | u8 | amount |  |
+| 0x13 | 1 / - | u8 | unknown1 | cmangos says this is hardcoded to 1 in the TBC client. |
 
 ## Client Version 3.3.5
 
@@ -59,10 +59,10 @@ CMSG have a header of 6 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x06 | 8 / Little | [Guid](../types/packed-guid.md) | vendor |  |  |
-| 0x0E | 4 / Little | u32 | item |  |  |
-| 0x12 | 4 / Little | u32 | slot |  |  |
-| 0x16 | 1 / - | u8 | amount |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x06 | 8 / Little | [Guid](../types/packed-guid.md) | vendor |  |
+| 0x0E | 4 / Little | u32 | item |  |
+| 0x12 | 4 / Little | u32 | slot |  |
+| 0x16 | 1 / - | u8 | amount |  |
 

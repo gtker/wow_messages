@@ -19,14 +19,14 @@ enum EnvironmentalDamageType : u8 {
 ### Type
 The basic type is `u8`, a 1 byte (8 bit) integer.
 ### Enumerators
-| Enumerator | Value  | Description | Comment |
-| --------- | -------- | ----------- | ------- |
-| `EXHAUSTED` | 0 (0x00) |  |  |
-| `DROWNING` | 1 (0x01) |  |  |
-| `FALL` | 2 (0x02) |  |  |
-| `LAVA` | 3 (0x03) |  |  |
-| `SLIME` | 4 (0x04) |  |  |
-| `FIRE` | 5 (0x05) |  |  |
+| Enumerator | Value  | Comment |
+| --------- | -------- | ------- |
+| `EXHAUSTED` | 0 (0x00) |  |
+| `DROWNING` | 1 (0x01) |  |
+| `FALL` | 2 (0x02) |  |
+| `LAVA` | 3 (0x03) |  |
+| `SLIME` | 4 (0x04) |  |
+| `FIRE` | 5 (0x05) |  |
 
 Used in:
 * [SMSG_ENVIRONMENTAL_DAMAGE_LOG](smsg_environmental_damage_log.md)

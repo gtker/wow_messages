@@ -29,13 +29,13 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | 8 / Little | [Guid](../types/packed-guid.md) | item |  |  |
-| 0x0C | 4 / Little | Gold | money_cost |  |  |
-| 0x10 | 4 / Little | u32 | honor_point_cost |  |  |
-| 0x14 | 4 / Little | u32 | arena_point_cost |  |  |
-| 0x18 | 40 / - | [ItemRefundExtra](itemrefundextra.md)[5] | extra_items |  |  |
-| 0x40 | 4 / Little | u32 | unknown1 |  | Emus set to 0. |
-| 0x44 | 4 / Little | u32 | time_since_loss |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x04 | 8 / Little | [Guid](../types/packed-guid.md) | item |  |
+| 0x0C | 4 / Little | Gold | money_cost |  |
+| 0x10 | 4 / Little | u32 | honor_point_cost |  |
+| 0x14 | 4 / Little | u32 | arena_point_cost |  |
+| 0x18 | 40 / - | [ItemRefundExtra](itemrefundextra.md)[5] | extra_items |  |
+| 0x40 | 4 / Little | u32 | unknown1 | Emus set to 0. |
+| 0x44 | 4 / Little | u32 | time_since_loss |  |
 

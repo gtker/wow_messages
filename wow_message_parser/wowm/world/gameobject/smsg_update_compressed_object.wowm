@@ -157,6 +157,6 @@ test SMSG_COMPRESSED_UPDATE_OBJECT {
   0xd3, 0x20, 0x6c, 0xec, 0x6e, 0x03, 0x00, 0x36,
   0x4c, 0x30, 0x21
 ] {
-    description = "Most minimal package required to load into the world. Also requires a valid [SMSG_TUTORIAL_FLAGS] and [SMSG_LOGIN_VERIFY_WORLD].";
+    comment = "Most minimal package required to load into the world. Also requires a valid [SMSG_TUTORIAL_FLAGS] and [SMSG_LOGIN_VERIFY_WORLD].";
     versions = "1.12";
 }

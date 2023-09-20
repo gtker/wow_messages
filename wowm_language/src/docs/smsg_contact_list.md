@@ -25,11 +25,11 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | 4 / - | [RelationType](relationtype.md) | list_mask |  | Indicates which kinds of relations are being sent in this list |
-| 0x08 | 4 / Little | u32 | amount_of_relations |  |  |
-| 0x0C | ? / - | [Relation](relation.md)[amount_of_relations] | relations |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x04 | 4 / - | [RelationType](relationtype.md) | list_mask | Indicates which kinds of relations are being sent in this list |
+| 0x08 | 4 / Little | u32 | amount_of_relations |  |
+| 0x0C | ? / - | [Relation](relation.md)[amount_of_relations] | relations |  |
 
 ## Client Version 3.3.5
 
@@ -56,9 +56,9 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | 4 / - | [RelationType](relationtype.md) | list_mask |  | Indicates which kinds of relations are being sent in this list |
-| - | 4 / Little | u32 | amount_of_relations |  |  |
-| - | ? / - | [Relation](relation.md)[amount_of_relations] | relations |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| - | 4 / - | [RelationType](relationtype.md) | list_mask | Indicates which kinds of relations are being sent in this list |
+| - | 4 / Little | u32 | amount_of_relations |  |
+| - | ? / - | [Relation](relation.md)[amount_of_relations] | relations |  |
 

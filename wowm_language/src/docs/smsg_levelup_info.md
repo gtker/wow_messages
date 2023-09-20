@@ -34,20 +34,20 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | 4 / Little | Level32 | new_level |  |  |
-| 0x08 | 4 / Little | u32 | health |  |  |
-| 0x0C | 4 / Little | u32 | mana |  |  |
-| 0x10 | 4 / Little | u32 | rage |  |  |
-| 0x14 | 4 / Little | u32 | focus |  |  |
-| 0x18 | 4 / Little | u32 | energy |  |  |
-| 0x1C | 4 / Little | u32 | happiness |  |  |
-| 0x20 | 4 / Little | u32 | strength |  |  |
-| 0x24 | 4 / Little | u32 | agility |  |  |
-| 0x28 | 4 / Little | u32 | stamina |  |  |
-| 0x2C | 4 / Little | u32 | intellect |  |  |
-| 0x30 | 4 / Little | u32 | spirit |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x04 | 4 / Little | Level32 | new_level |  |
+| 0x08 | 4 / Little | u32 | health |  |
+| 0x0C | 4 / Little | u32 | mana |  |
+| 0x10 | 4 / Little | u32 | rage |  |
+| 0x14 | 4 / Little | u32 | focus |  |
+| 0x18 | 4 / Little | u32 | energy |  |
+| 0x1C | 4 / Little | u32 | happiness |  |
+| 0x20 | 4 / Little | u32 | strength |  |
+| 0x24 | 4 / Little | u32 | agility |  |
+| 0x28 | 4 / Little | u32 | stamina |  |
+| 0x2C | 4 / Little | u32 | intellect |  |
+| 0x30 | 4 / Little | u32 | spirit |  |
 
 ## Client Version 3
 
@@ -85,20 +85,20 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | 4 / Little | Level32 | new_level |  |  |
-| 0x08 | 4 / Little | u32 | health |  |  |
-| 0x0C | 4 / Little | u32 | mana |  |  |
-| 0x10 | 4 / Little | u32 | rage |  |  |
-| 0x14 | 4 / Little | u32 | focus |  |  |
-| 0x18 | 4 / Little | u32 | energy |  |  |
-| 0x1C | 4 / Little | u32 | happiness |  |  |
-| 0x20 | 4 / Little | u32 | rune |  |  |
-| 0x24 | 4 / Little | u32 | runic_power |  |  |
-| 0x28 | 4 / Little | u32 | strength |  |  |
-| 0x2C | 4 / Little | u32 | agility |  |  |
-| 0x30 | 4 / Little | u32 | stamina |  |  |
-| 0x34 | 4 / Little | u32 | intellect |  |  |
-| 0x38 | 4 / Little | u32 | spirit |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x04 | 4 / Little | Level32 | new_level |  |
+| 0x08 | 4 / Little | u32 | health |  |
+| 0x0C | 4 / Little | u32 | mana |  |
+| 0x10 | 4 / Little | u32 | rage |  |
+| 0x14 | 4 / Little | u32 | focus |  |
+| 0x18 | 4 / Little | u32 | energy |  |
+| 0x1C | 4 / Little | u32 | happiness |  |
+| 0x20 | 4 / Little | u32 | rune |  |
+| 0x24 | 4 / Little | u32 | runic_power |  |
+| 0x28 | 4 / Little | u32 | strength |  |
+| 0x2C | 4 / Little | u32 | agility |  |
+| 0x30 | 4 / Little | u32 | stamina |  |
+| 0x34 | 4 / Little | u32 | intellect |  |
+| 0x38 | 4 / Little | u32 | spirit |  |
 

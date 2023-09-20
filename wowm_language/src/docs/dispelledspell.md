@@ -13,10 +13,10 @@ struct DispelledSpell {
 ```
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x00 | 4 / Little | u32 | spell |  |  |
-| 0x04 | 1 / - | [DispelMethod](dispelmethod.md) | method |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x00 | 4 / Little | u32 | spell |  |
+| 0x04 | 1 / - | [DispelMethod](dispelmethod.md) | method |  |
 
 
 Used in:

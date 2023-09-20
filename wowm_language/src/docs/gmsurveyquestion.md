@@ -14,11 +14,11 @@ struct GmSurveyQuestion {
 ```
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x00 | 4 / Little | u32 | question_id |  | cmangos: questions found in GMSurveyQuestions.dbc<br/>ref to i'th GMSurveySurveys.dbc field (all fields in that dbc point to fields in GMSurveyQuestions.dbc) |
-| 0x04 | 1 / - | u8 | answer |  | Rating: hardcoded limit of 0-5 in pre-Wrath, ranges defined in GMSurveyAnswers.dbc Wrath+ |
-| 0x05 | - / - | CString | comment |  | Usage: `GMSurveyAnswerSubmit(question, rank, comment)`<br/>cmangos: Unused in stock UI, can be only set by calling Lua function |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x00 | 4 / Little | u32 | question_id | cmangos: questions found in GMSurveyQuestions.dbc<br/>ref to i'th GMSurveySurveys.dbc field (all fields in that dbc point to fields in GMSurveyQuestions.dbc) |
+| 0x04 | 1 / - | u8 | answer | Rating: hardcoded limit of 0-5 in pre-Wrath, ranges defined in GMSurveyAnswers.dbc Wrath+ |
+| 0x05 | - / - | CString | comment | Usage: `GMSurveyAnswerSubmit(question, rank, comment)`<br/>cmangos: Unused in stock UI, can be only set by calling Lua function |
 
 
 Used in:

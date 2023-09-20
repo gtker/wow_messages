@@ -26,10 +26,10 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | 4 / Little | u32 | response_id |  |  |
-| - | 4 / Little | u32 | ticket_id |  |  |
-| - | - / - | CString | message |  |  |
-| - | ? / - | CString[4] | response |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| - | 4 / Little | u32 | response_id |  |
+| - | 4 / Little | u32 | ticket_id |  |
+| - | - / - | CString | message |  |
+| - | ? / - | CString[4] | response |  |
 

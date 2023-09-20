@@ -20,17 +20,17 @@ struct QuestPoi {
 ```
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x00 | 4 / Little | u32 | id |  |  |
-| 0x04 | 4 / Little | u32 | objective_id |  |  |
-| 0x08 | 4 / - | [Map](map.md) | map |  |  |
-| 0x0C | 4 / - | [Area](area.md) | area |  |  |
-| 0x10 | 4 / Little | u32 | floor_id |  |  |
-| 0x14 | 4 / Little | u32 | unknown1 |  |  |
-| 0x18 | 4 / Little | u32 | unknown2 |  |  |
-| 0x1C | 4 / Little | u32 | amount_of_points |  |  |
-| 0x20 | ? / - | [Vector2dUnsigned](vector2dunsigned.md)[amount_of_points] | points |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x00 | 4 / Little | u32 | id |  |
+| 0x04 | 4 / Little | u32 | objective_id |  |
+| 0x08 | 4 / - | [Map](map.md) | map |  |
+| 0x0C | 4 / - | [Area](area.md) | area |  |
+| 0x10 | 4 / Little | u32 | floor_id |  |
+| 0x14 | 4 / Little | u32 | unknown1 |  |
+| 0x18 | 4 / Little | u32 | unknown2 |  |
+| 0x1C | 4 / Little | u32 | amount_of_points |  |
+| 0x20 | ? / - | [Vector2dUnsigned](vector2dunsigned.md)[amount_of_points] | points |  |
 
 
 Used in:

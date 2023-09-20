@@ -205,200 +205,200 @@ enum AuraMod : u32 {
 ### Type
 The basic type is `u32`, a 4 byte (32 bit) little endian integer.
 ### Enumerators
-| Enumerator | Value  | Description | Comment |
-| --------- | -------- | ----------- | ------- |
-| `NONE` | 0 (0x00) |  |  |
-| `BIND_SIGHT` | 1 (0x01) |  |  |
-| `MOD_POSSESS` | 2 (0x02) |  |  |
-| `PERIODIC_DAMAGE` | 3 (0x03) |  |  |
-| `DUMMY` | 4 (0x04) |  |  |
-| `MOD_CONFUSE` | 5 (0x05) |  |  |
-| `MOD_CHARM` | 6 (0x06) |  |  |
-| `MOD_FEAR` | 7 (0x07) |  |  |
-| `PERIODIC_HEAL` | 8 (0x08) |  |  |
-| `MOD_ATTACKSPEED` | 9 (0x09) |  |  |
-| `MOD_THREAT` | 10 (0x0A) |  |  |
-| `MOD_TAUNT` | 11 (0x0B) |  |  |
-| `MOD_STUN` | 12 (0x0C) |  |  |
-| `MOD_DAMAGE_DONE` | 13 (0x0D) |  |  |
-| `MOD_DAMAGE_TAKEN` | 14 (0x0E) |  |  |
-| `DAMAGE_SHIELD` | 15 (0x0F) |  |  |
-| `MOD_STEALTH` | 16 (0x10) |  |  |
-| `MOD_STEALTH_DETECT` | 17 (0x11) |  |  |
-| `MOD_INVISIBILITY` | 18 (0x12) |  |  |
-| `MOD_INVISIBILITY_DETECTION` | 19 (0x13) |  |  |
-| `OBS_MOD_HEALTH` | 20 (0x14) |  |  |
-| `OBS_MOD_MANA` | 21 (0x15) |  |  |
-| `MOD_RESISTANCE` | 22 (0x16) |  |  |
-| `PERIODIC_TRIGGER_SPELL` | 23 (0x17) |  |  |
-| `PERIODIC_ENERGIZE` | 24 (0x18) |  |  |
-| `MOD_PACIFY` | 25 (0x19) |  |  |
-| `MOD_ROOT` | 26 (0x1A) |  |  |
-| `MOD_SILENCE` | 27 (0x1B) |  |  |
-| `REFLECT_SPELLS` | 28 (0x1C) |  |  |
-| `MOD_STAT` | 29 (0x1D) |  |  |
-| `MOD_SKILL` | 30 (0x1E) |  |  |
-| `MOD_INCREASE_SPEED` | 31 (0x1F) |  |  |
-| `MOD_INCREASE_MOUNTED_SPEED` | 32 (0x20) |  |  |
-| `MOD_DECREASE_SPEED` | 33 (0x21) |  |  |
-| `MOD_INCREASE_HEALTH` | 34 (0x22) |  |  |
-| `MOD_INCREASE_ENERGY` | 35 (0x23) |  |  |
-| `MOD_SHAPESHIFT` | 36 (0x24) |  |  |
-| `EFFECT_IMMUNITY` | 37 (0x25) |  |  |
-| `STATE_IMMUNITY` | 38 (0x26) |  |  |
-| `SCHOOL_IMMUNITY` | 39 (0x27) |  |  |
-| `DAMAGE_IMMUNITY` | 40 (0x28) |  |  |
-| `DISPEL_IMMUNITY` | 41 (0x29) |  |  |
-| `PROC_TRIGGER_SPELL` | 42 (0x2A) |  |  |
-| `PROC_TRIGGER_DAMAGE` | 43 (0x2B) |  |  |
-| `TRACK_CREATURES` | 44 (0x2C) |  |  |
-| `TRACK_RESOURCES` | 45 (0x2D) |  |  |
-| `MOD_PARRY_SKILL` | 46 (0x2E) |  |  |
-| `MOD_PARRY_PERCENT` | 47 (0x2F) |  |  |
-| `MOD_DODGE_SKILL` | 48 (0x30) |  |  |
-| `MOD_DODGE_PERCENT` | 49 (0x31) |  |  |
-| `MOD_BLOCK_SKILL` | 50 (0x32) |  |  |
-| `MOD_BLOCK_PERCENT` | 51 (0x33) |  |  |
-| `MOD_CRIT_PERCENT` | 52 (0x34) |  |  |
-| `PERIODIC_LEECH` | 53 (0x35) |  |  |
-| `MOD_HIT_CHANCE` | 54 (0x36) |  |  |
-| `MOD_SPELL_HIT_CHANCE` | 55 (0x37) |  |  |
-| `TRANSFORM` | 56 (0x38) |  |  |
-| `MOD_SPELL_CRIT_CHANCE` | 57 (0x39) |  |  |
-| `MOD_INCREASE_SWIM_SPEED` | 58 (0x3A) |  |  |
-| `MOD_DAMAGE_DONE_CREATURE` | 59 (0x3B) |  |  |
-| `MOD_PACIFY_SILENCE` | 60 (0x3C) |  |  |
-| `MOD_SCALE` | 61 (0x3D) |  |  |
-| `PERIODIC_HEALTH_FUNNEL` | 62 (0x3E) |  |  |
-| `PERIODIC_MANA_FUNNEL` | 63 (0x3F) |  |  |
-| `PERIODIC_MANA_LEECH` | 64 (0x40) |  |  |
-| `MOD_CASTING_SPEED_NOT_STACK` | 65 (0x41) |  |  |
-| `FEIGN_DEATH` | 66 (0x42) |  |  |
-| `MOD_DISARM` | 67 (0x43) |  |  |
-| `MOD_STALKED` | 68 (0x44) |  |  |
-| `SCHOOL_ABSORB` | 69 (0x45) |  |  |
-| `EXTRA_ATTACKS` | 70 (0x46) |  |  |
-| `MOD_SPELL_CRIT_CHANCE_SCHOOL` | 71 (0x47) |  |  |
-| `MOD_POWER_COST_SCHOOL_PCT` | 72 (0x48) |  |  |
-| `MOD_POWER_COST_SCHOOL` | 73 (0x49) |  |  |
-| `REFLECT_SPELLS_SCHOOL` | 74 (0x4A) |  |  |
-| `MOD_LANGUAGE` | 75 (0x4B) |  |  |
-| `FAR_SIGHT` | 76 (0x4C) |  |  |
-| `MECHANIC_IMMUNITY` | 77 (0x4D) |  |  |
-| `MOUNTED` | 78 (0x4E) |  |  |
-| `MOD_DAMAGE_PERCENT_DONE` | 79 (0x4F) |  |  |
-| `MOD_PERCENT_STAT` | 80 (0x50) |  |  |
-| `SPLIT_DAMAGE_PCT` | 81 (0x51) |  |  |
-| `WATER_BREATHING` | 82 (0x52) |  |  |
-| `MOD_BASE_RESISTANCE` | 83 (0x53) |  |  |
-| `MOD_REGEN` | 84 (0x54) |  |  |
-| `MOD_POWER_REGEN` | 85 (0x55) |  |  |
-| `CHANNEL_DEATH_ITEM` | 86 (0x56) |  |  |
-| `MOD_DAMAGE_PERCENT_TAKEN` | 87 (0x57) |  |  |
-| `MOD_HEALTH_REGEN_PERCENT` | 88 (0x58) |  |  |
-| `PERIODIC_DAMAGE_PERCENT` | 89 (0x59) |  |  |
-| `MOD_RESIST_CHANCE` | 90 (0x5A) |  |  |
-| `MOD_DETECT_RANGE` | 91 (0x5B) |  |  |
-| `PREVENTS_FLEEING` | 92 (0x5C) |  |  |
-| `MOD_UNATTACKABLE` | 93 (0x5D) |  |  |
-| `INTERRUPT_REGEN` | 94 (0x5E) |  |  |
-| `GHOST` | 95 (0x5F) |  |  |
-| `SPELL_MAGNET` | 96 (0x60) |  |  |
-| `MANA_SHIELD` | 97 (0x61) |  |  |
-| `MOD_SKILL_TALENT` | 98 (0x62) |  |  |
-| `MOD_ATTACK_POWER` | 99 (0x63) |  |  |
-| `AURAS_VISIBLE` | 100 (0x64) |  |  |
-| `MOD_RESISTANCE_PCT` | 101 (0x65) |  |  |
-| `MOD_MELEE_ATTACK_POWER_VERSUS` | 102 (0x66) |  |  |
-| `MOD_TOTAL_THREAT` | 103 (0x67) |  |  |
-| `WATER_WALK` | 104 (0x68) |  |  |
-| `FEATHER_FALL` | 105 (0x69) |  |  |
-| `HOVER` | 106 (0x6A) |  |  |
-| `ADD_FLAT_MODIFIER` | 107 (0x6B) |  |  |
-| `ADD_PCT_MODIFIER` | 108 (0x6C) |  |  |
-| `ADD_TARGET_TRIGGER` | 109 (0x6D) |  |  |
-| `MOD_POWER_REGEN_PERCENT` | 110 (0x6E) |  |  |
-| `ADD_CASTER_HIT_TRIGGER` | 111 (0x6F) |  |  |
-| `OVERRIDE_CLASS_SCRIPTS` | 112 (0x70) |  |  |
-| `MOD_RANGED_DAMAGE_TAKEN` | 113 (0x71) |  |  |
-| `MOD_RANGED_DAMAGE_TAKEN_PCT` | 114 (0x72) |  |  |
-| `MOD_HEALING` | 115 (0x73) |  |  |
-| `MOD_REGEN_DURING_COMBAT` | 116 (0x74) |  |  |
-| `MOD_MECHANIC_RESISTANCE` | 117 (0x75) |  |  |
-| `MOD_HEALING_PCT` | 118 (0x76) |  |  |
-| `SHARE_PET_TRACKING` | 119 (0x77) |  |  |
-| `UNTRACKABLE` | 120 (0x78) |  |  |
-| `EMPATHY` | 121 (0x79) |  |  |
-| `MOD_OFFHAND_DAMAGE_PCT` | 122 (0x7A) |  |  |
-| `MOD_TARGET_RESISTANCE` | 123 (0x7B) |  |  |
-| `MOD_RANGED_ATTACK_POWER` | 124 (0x7C) |  |  |
-| `MOD_MELEE_DAMAGE_TAKEN` | 125 (0x7D) |  |  |
-| `MOD_MELEE_DAMAGE_TAKEN_PCT` | 126 (0x7E) |  |  |
-| `RANGED_ATTACK_POWER_ATTACKER_BONUS` | 127 (0x7F) |  |  |
-| `MOD_POSSESS_PET` | 128 (0x80) |  |  |
-| `MOD_SPEED_ALWAYS` | 129 (0x81) |  |  |
-| `MOD_MOUNTED_SPEED_ALWAYS` | 130 (0x82) |  |  |
-| `MOD_RANGED_ATTACK_POWER_VERSUS` | 131 (0x83) |  |  |
-| `MOD_INCREASE_ENERGY_PERCENT` | 132 (0x84) |  |  |
-| `MOD_INCREASE_HEALTH_PERCENT` | 133 (0x85) |  |  |
-| `MOD_MANA_REGEN_INTERRUPT` | 134 (0x86) |  |  |
-| `MOD_HEALING_DONE` | 135 (0x87) |  |  |
-| `MOD_HEALING_DONE_PERCENT` | 136 (0x88) |  |  |
-| `MOD_TOTAL_STAT_PERCENTAGE` | 137 (0x89) |  |  |
-| `MOD_MELEE_HASTE` | 138 (0x8A) |  |  |
-| `FORCE_REACTION` | 139 (0x8B) |  |  |
-| `MOD_RANGED_HASTE` | 140 (0x8C) |  |  |
-| `MOD_RANGED_AMMO_HASTE` | 141 (0x8D) |  |  |
-| `MOD_BASE_RESISTANCE_PCT` | 142 (0x8E) |  |  |
-| `MOD_RESISTANCE_EXCLUSIVE` | 143 (0x8F) |  |  |
-| `SAFE_FALL` | 144 (0x90) |  |  |
-| `CHARISMA` | 145 (0x91) |  |  |
-| `PERSUADED` | 146 (0x92) |  |  |
-| `MECHANIC_IMMUNITY_MASK` | 147 (0x93) |  |  |
-| `RETAIN_COMBO_POINTS` | 148 (0x94) |  |  |
-| `RESIST_PUSHBACK` | 149 (0x95) |  |  |
-| `MOD_SHIELD_BLOCKVALUE_PCT` | 150 (0x96) |  |  |
-| `TRACK_STEALTHED` | 151 (0x97) |  |  |
-| `MOD_DETECTED_RANGE` | 152 (0x98) |  |  |
-| `SPLIT_DAMAGE_FLAT` | 153 (0x99) |  |  |
-| `MOD_STEALTH_LEVEL` | 154 (0x9A) |  |  |
-| `MOD_WATER_BREATHING` | 155 (0x9B) |  |  |
-| `MOD_REPUTATION_GAIN` | 156 (0x9C) |  |  |
-| `PET_DAMAGE_MULTI` | 157 (0x9D) |  |  |
-| `MOD_SHIELD_BLOCKVALUE` | 158 (0x9E) |  |  |
-| `NO_PVP_CREDIT` | 159 (0x9F) |  |  |
-| `MOD_AOE_AVOIDANCE` | 160 (0xA0) |  |  |
-| `MOD_HEALTH_REGEN_IN_COMBAT` | 161 (0xA1) |  |  |
-| `POWER_BURN_MANA` | 162 (0xA2) |  |  |
-| `MOD_CRIT_DAMAGE_BONUS` | 163 (0xA3) |  |  |
-| `UNKNOWN164` | 164 (0xA4) |  |  |
-| `MELEE_ATTACK_POWER_ATTACKER_BONUS` | 165 (0xA5) |  |  |
-| `MOD_ATTACK_POWER_PCT` | 166 (0xA6) |  |  |
-| `MOD_RANGED_ATTACK_POWER_PCT` | 167 (0xA7) |  |  |
-| `MOD_DAMAGE_DONE_VERSUS` | 168 (0xA8) |  |  |
-| `MOD_CRIT_PERCENT_VERSUS` | 169 (0xA9) |  |  |
-| `DETECT_AMORE` | 170 (0xAA) |  |  |
-| `MOD_SPEED_NOT_STACK` | 171 (0xAB) |  |  |
-| `MOD_MOUNTED_SPEED_NOT_STACK` | 172 (0xAC) |  |  |
-| `ALLOW_CHAMPION_SPELLS` | 173 (0xAD) |  |  |
-| `MOD_SPELL_DAMAGE_OF_STAT_PERCENT` | 174 (0xAE) |  |  |
-| `MOD_SPELL_HEALING_OF_STAT_PERCENT` | 175 (0xAF) |  |  |
-| `SPIRIT_OF_REDEMPTION` | 176 (0xB0) |  |  |
-| `AOE_CHARM` | 177 (0xB1) |  |  |
-| `MOD_DEBUFF_RESISTANCE` | 178 (0xB2) |  |  |
-| `MOD_ATTACKER_SPELL_CRIT_CHANCE` | 179 (0xB3) |  |  |
-| `MOD_FLAT_SPELL_DAMAGE_VERSUS` | 180 (0xB4) |  |  |
-| `MOD_FLAT_SPELL_CRIT_DAMAGE_VERSUS` | 181 (0xB5) |  |  |
-| `MOD_RESISTANCE_OF_STAT_PERCENT` | 182 (0xB6) |  |  |
-| `MOD_CRITICAL_THREAT` | 183 (0xB7) |  |  |
-| `MOD_ATTACKER_MELEE_HIT_CHANCE` | 184 (0xB8) |  |  |
-| `MOD_ATTACKER_RANGED_HIT_CHANCE` | 185 (0xB9) |  |  |
-| `MOD_ATTACKER_SPELL_HIT_CHANCE` | 186 (0xBA) |  |  |
-| `MOD_ATTACKER_MELEE_CRIT_CHANCE` | 187 (0xBB) |  |  |
-| `MOD_ATTACKER_RANGED_CRIT_CHANCE` | 188 (0xBC) |  |  |
-| `MOD_RATING` | 189 (0xBD) |  |  |
-| `MOD_FACTION_REPUTATION_GAIN` | 190 (0xBE) |  |  |
-| `USE_NORMAL_MOVEMENT_SPEED` | 191 (0xBF) |  |  |
+| Enumerator | Value  | Comment |
+| --------- | -------- | ------- |
+| `NONE` | 0 (0x00) |  |
+| `BIND_SIGHT` | 1 (0x01) |  |
+| `MOD_POSSESS` | 2 (0x02) |  |
+| `PERIODIC_DAMAGE` | 3 (0x03) |  |
+| `DUMMY` | 4 (0x04) |  |
+| `MOD_CONFUSE` | 5 (0x05) |  |
+| `MOD_CHARM` | 6 (0x06) |  |
+| `MOD_FEAR` | 7 (0x07) |  |
+| `PERIODIC_HEAL` | 8 (0x08) |  |
+| `MOD_ATTACKSPEED` | 9 (0x09) |  |
+| `MOD_THREAT` | 10 (0x0A) |  |
+| `MOD_TAUNT` | 11 (0x0B) |  |
+| `MOD_STUN` | 12 (0x0C) |  |
+| `MOD_DAMAGE_DONE` | 13 (0x0D) |  |
+| `MOD_DAMAGE_TAKEN` | 14 (0x0E) |  |
+| `DAMAGE_SHIELD` | 15 (0x0F) |  |
+| `MOD_STEALTH` | 16 (0x10) |  |
+| `MOD_STEALTH_DETECT` | 17 (0x11) |  |
+| `MOD_INVISIBILITY` | 18 (0x12) |  |
+| `MOD_INVISIBILITY_DETECTION` | 19 (0x13) |  |
+| `OBS_MOD_HEALTH` | 20 (0x14) |  |
+| `OBS_MOD_MANA` | 21 (0x15) |  |
+| `MOD_RESISTANCE` | 22 (0x16) |  |
+| `PERIODIC_TRIGGER_SPELL` | 23 (0x17) |  |
+| `PERIODIC_ENERGIZE` | 24 (0x18) |  |
+| `MOD_PACIFY` | 25 (0x19) |  |
+| `MOD_ROOT` | 26 (0x1A) |  |
+| `MOD_SILENCE` | 27 (0x1B) |  |
+| `REFLECT_SPELLS` | 28 (0x1C) |  |
+| `MOD_STAT` | 29 (0x1D) |  |
+| `MOD_SKILL` | 30 (0x1E) |  |
+| `MOD_INCREASE_SPEED` | 31 (0x1F) |  |
+| `MOD_INCREASE_MOUNTED_SPEED` | 32 (0x20) |  |
+| `MOD_DECREASE_SPEED` | 33 (0x21) |  |
+| `MOD_INCREASE_HEALTH` | 34 (0x22) |  |
+| `MOD_INCREASE_ENERGY` | 35 (0x23) |  |
+| `MOD_SHAPESHIFT` | 36 (0x24) |  |
+| `EFFECT_IMMUNITY` | 37 (0x25) |  |
+| `STATE_IMMUNITY` | 38 (0x26) |  |
+| `SCHOOL_IMMUNITY` | 39 (0x27) |  |
+| `DAMAGE_IMMUNITY` | 40 (0x28) |  |
+| `DISPEL_IMMUNITY` | 41 (0x29) |  |
+| `PROC_TRIGGER_SPELL` | 42 (0x2A) |  |
+| `PROC_TRIGGER_DAMAGE` | 43 (0x2B) |  |
+| `TRACK_CREATURES` | 44 (0x2C) |  |
+| `TRACK_RESOURCES` | 45 (0x2D) |  |
+| `MOD_PARRY_SKILL` | 46 (0x2E) |  |
+| `MOD_PARRY_PERCENT` | 47 (0x2F) |  |
+| `MOD_DODGE_SKILL` | 48 (0x30) |  |
+| `MOD_DODGE_PERCENT` | 49 (0x31) |  |
+| `MOD_BLOCK_SKILL` | 50 (0x32) |  |
+| `MOD_BLOCK_PERCENT` | 51 (0x33) |  |
+| `MOD_CRIT_PERCENT` | 52 (0x34) |  |
+| `PERIODIC_LEECH` | 53 (0x35) |  |
+| `MOD_HIT_CHANCE` | 54 (0x36) |  |
+| `MOD_SPELL_HIT_CHANCE` | 55 (0x37) |  |
+| `TRANSFORM` | 56 (0x38) |  |
+| `MOD_SPELL_CRIT_CHANCE` | 57 (0x39) |  |
+| `MOD_INCREASE_SWIM_SPEED` | 58 (0x3A) |  |
+| `MOD_DAMAGE_DONE_CREATURE` | 59 (0x3B) |  |
+| `MOD_PACIFY_SILENCE` | 60 (0x3C) |  |
+| `MOD_SCALE` | 61 (0x3D) |  |
+| `PERIODIC_HEALTH_FUNNEL` | 62 (0x3E) |  |
+| `PERIODIC_MANA_FUNNEL` | 63 (0x3F) |  |
+| `PERIODIC_MANA_LEECH` | 64 (0x40) |  |
+| `MOD_CASTING_SPEED_NOT_STACK` | 65 (0x41) |  |
+| `FEIGN_DEATH` | 66 (0x42) |  |
+| `MOD_DISARM` | 67 (0x43) |  |
+| `MOD_STALKED` | 68 (0x44) |  |
+| `SCHOOL_ABSORB` | 69 (0x45) |  |
+| `EXTRA_ATTACKS` | 70 (0x46) |  |
+| `MOD_SPELL_CRIT_CHANCE_SCHOOL` | 71 (0x47) |  |
+| `MOD_POWER_COST_SCHOOL_PCT` | 72 (0x48) |  |
+| `MOD_POWER_COST_SCHOOL` | 73 (0x49) |  |
+| `REFLECT_SPELLS_SCHOOL` | 74 (0x4A) |  |
+| `MOD_LANGUAGE` | 75 (0x4B) |  |
+| `FAR_SIGHT` | 76 (0x4C) |  |
+| `MECHANIC_IMMUNITY` | 77 (0x4D) |  |
+| `MOUNTED` | 78 (0x4E) |  |
+| `MOD_DAMAGE_PERCENT_DONE` | 79 (0x4F) |  |
+| `MOD_PERCENT_STAT` | 80 (0x50) |  |
+| `SPLIT_DAMAGE_PCT` | 81 (0x51) |  |
+| `WATER_BREATHING` | 82 (0x52) |  |
+| `MOD_BASE_RESISTANCE` | 83 (0x53) |  |
+| `MOD_REGEN` | 84 (0x54) |  |
+| `MOD_POWER_REGEN` | 85 (0x55) |  |
+| `CHANNEL_DEATH_ITEM` | 86 (0x56) |  |
+| `MOD_DAMAGE_PERCENT_TAKEN` | 87 (0x57) |  |
+| `MOD_HEALTH_REGEN_PERCENT` | 88 (0x58) |  |
+| `PERIODIC_DAMAGE_PERCENT` | 89 (0x59) |  |
+| `MOD_RESIST_CHANCE` | 90 (0x5A) |  |
+| `MOD_DETECT_RANGE` | 91 (0x5B) |  |
+| `PREVENTS_FLEEING` | 92 (0x5C) |  |
+| `MOD_UNATTACKABLE` | 93 (0x5D) |  |
+| `INTERRUPT_REGEN` | 94 (0x5E) |  |
+| `GHOST` | 95 (0x5F) |  |
+| `SPELL_MAGNET` | 96 (0x60) |  |
+| `MANA_SHIELD` | 97 (0x61) |  |
+| `MOD_SKILL_TALENT` | 98 (0x62) |  |
+| `MOD_ATTACK_POWER` | 99 (0x63) |  |
+| `AURAS_VISIBLE` | 100 (0x64) |  |
+| `MOD_RESISTANCE_PCT` | 101 (0x65) |  |
+| `MOD_MELEE_ATTACK_POWER_VERSUS` | 102 (0x66) |  |
+| `MOD_TOTAL_THREAT` | 103 (0x67) |  |
+| `WATER_WALK` | 104 (0x68) |  |
+| `FEATHER_FALL` | 105 (0x69) |  |
+| `HOVER` | 106 (0x6A) |  |
+| `ADD_FLAT_MODIFIER` | 107 (0x6B) |  |
+| `ADD_PCT_MODIFIER` | 108 (0x6C) |  |
+| `ADD_TARGET_TRIGGER` | 109 (0x6D) |  |
+| `MOD_POWER_REGEN_PERCENT` | 110 (0x6E) |  |
+| `ADD_CASTER_HIT_TRIGGER` | 111 (0x6F) |  |
+| `OVERRIDE_CLASS_SCRIPTS` | 112 (0x70) |  |
+| `MOD_RANGED_DAMAGE_TAKEN` | 113 (0x71) |  |
+| `MOD_RANGED_DAMAGE_TAKEN_PCT` | 114 (0x72) |  |
+| `MOD_HEALING` | 115 (0x73) |  |
+| `MOD_REGEN_DURING_COMBAT` | 116 (0x74) |  |
+| `MOD_MECHANIC_RESISTANCE` | 117 (0x75) |  |
+| `MOD_HEALING_PCT` | 118 (0x76) |  |
+| `SHARE_PET_TRACKING` | 119 (0x77) |  |
+| `UNTRACKABLE` | 120 (0x78) |  |
+| `EMPATHY` | 121 (0x79) |  |
+| `MOD_OFFHAND_DAMAGE_PCT` | 122 (0x7A) |  |
+| `MOD_TARGET_RESISTANCE` | 123 (0x7B) |  |
+| `MOD_RANGED_ATTACK_POWER` | 124 (0x7C) |  |
+| `MOD_MELEE_DAMAGE_TAKEN` | 125 (0x7D) |  |
+| `MOD_MELEE_DAMAGE_TAKEN_PCT` | 126 (0x7E) |  |
+| `RANGED_ATTACK_POWER_ATTACKER_BONUS` | 127 (0x7F) |  |
+| `MOD_POSSESS_PET` | 128 (0x80) |  |
+| `MOD_SPEED_ALWAYS` | 129 (0x81) |  |
+| `MOD_MOUNTED_SPEED_ALWAYS` | 130 (0x82) |  |
+| `MOD_RANGED_ATTACK_POWER_VERSUS` | 131 (0x83) |  |
+| `MOD_INCREASE_ENERGY_PERCENT` | 132 (0x84) |  |
+| `MOD_INCREASE_HEALTH_PERCENT` | 133 (0x85) |  |
+| `MOD_MANA_REGEN_INTERRUPT` | 134 (0x86) |  |
+| `MOD_HEALING_DONE` | 135 (0x87) |  |
+| `MOD_HEALING_DONE_PERCENT` | 136 (0x88) |  |
+| `MOD_TOTAL_STAT_PERCENTAGE` | 137 (0x89) |  |
+| `MOD_MELEE_HASTE` | 138 (0x8A) |  |
+| `FORCE_REACTION` | 139 (0x8B) |  |
+| `MOD_RANGED_HASTE` | 140 (0x8C) |  |
+| `MOD_RANGED_AMMO_HASTE` | 141 (0x8D) |  |
+| `MOD_BASE_RESISTANCE_PCT` | 142 (0x8E) |  |
+| `MOD_RESISTANCE_EXCLUSIVE` | 143 (0x8F) |  |
+| `SAFE_FALL` | 144 (0x90) |  |
+| `CHARISMA` | 145 (0x91) |  |
+| `PERSUADED` | 146 (0x92) |  |
+| `MECHANIC_IMMUNITY_MASK` | 147 (0x93) |  |
+| `RETAIN_COMBO_POINTS` | 148 (0x94) |  |
+| `RESIST_PUSHBACK` | 149 (0x95) |  |
+| `MOD_SHIELD_BLOCKVALUE_PCT` | 150 (0x96) |  |
+| `TRACK_STEALTHED` | 151 (0x97) |  |
+| `MOD_DETECTED_RANGE` | 152 (0x98) |  |
+| `SPLIT_DAMAGE_FLAT` | 153 (0x99) |  |
+| `MOD_STEALTH_LEVEL` | 154 (0x9A) |  |
+| `MOD_WATER_BREATHING` | 155 (0x9B) |  |
+| `MOD_REPUTATION_GAIN` | 156 (0x9C) |  |
+| `PET_DAMAGE_MULTI` | 157 (0x9D) |  |
+| `MOD_SHIELD_BLOCKVALUE` | 158 (0x9E) |  |
+| `NO_PVP_CREDIT` | 159 (0x9F) |  |
+| `MOD_AOE_AVOIDANCE` | 160 (0xA0) |  |
+| `MOD_HEALTH_REGEN_IN_COMBAT` | 161 (0xA1) |  |
+| `POWER_BURN_MANA` | 162 (0xA2) |  |
+| `MOD_CRIT_DAMAGE_BONUS` | 163 (0xA3) |  |
+| `UNKNOWN164` | 164 (0xA4) |  |
+| `MELEE_ATTACK_POWER_ATTACKER_BONUS` | 165 (0xA5) |  |
+| `MOD_ATTACK_POWER_PCT` | 166 (0xA6) |  |
+| `MOD_RANGED_ATTACK_POWER_PCT` | 167 (0xA7) |  |
+| `MOD_DAMAGE_DONE_VERSUS` | 168 (0xA8) |  |
+| `MOD_CRIT_PERCENT_VERSUS` | 169 (0xA9) |  |
+| `DETECT_AMORE` | 170 (0xAA) |  |
+| `MOD_SPEED_NOT_STACK` | 171 (0xAB) |  |
+| `MOD_MOUNTED_SPEED_NOT_STACK` | 172 (0xAC) |  |
+| `ALLOW_CHAMPION_SPELLS` | 173 (0xAD) |  |
+| `MOD_SPELL_DAMAGE_OF_STAT_PERCENT` | 174 (0xAE) |  |
+| `MOD_SPELL_HEALING_OF_STAT_PERCENT` | 175 (0xAF) |  |
+| `SPIRIT_OF_REDEMPTION` | 176 (0xB0) |  |
+| `AOE_CHARM` | 177 (0xB1) |  |
+| `MOD_DEBUFF_RESISTANCE` | 178 (0xB2) |  |
+| `MOD_ATTACKER_SPELL_CRIT_CHANCE` | 179 (0xB3) |  |
+| `MOD_FLAT_SPELL_DAMAGE_VERSUS` | 180 (0xB4) |  |
+| `MOD_FLAT_SPELL_CRIT_DAMAGE_VERSUS` | 181 (0xB5) |  |
+| `MOD_RESISTANCE_OF_STAT_PERCENT` | 182 (0xB6) |  |
+| `MOD_CRITICAL_THREAT` | 183 (0xB7) |  |
+| `MOD_ATTACKER_MELEE_HIT_CHANCE` | 184 (0xB8) |  |
+| `MOD_ATTACKER_RANGED_HIT_CHANCE` | 185 (0xB9) |  |
+| `MOD_ATTACKER_SPELL_HIT_CHANCE` | 186 (0xBA) |  |
+| `MOD_ATTACKER_MELEE_CRIT_CHANCE` | 187 (0xBB) |  |
+| `MOD_ATTACKER_RANGED_CRIT_CHANCE` | 188 (0xBC) |  |
+| `MOD_RATING` | 189 (0xBD) |  |
+| `MOD_FACTION_REPUTATION_GAIN` | 190 (0xBE) |  |
+| `USE_NORMAL_MOVEMENT_SPEED` | 191 (0xBF) |  |
 
 Used in:
 
@@ -677,270 +677,270 @@ enum AuraMod : u32 {
 ### Type
 The basic type is `u32`, a 4 byte (32 bit) little endian integer.
 ### Enumerators
-| Enumerator | Value  | Description | Comment |
-| --------- | -------- | ----------- | ------- |
-| `NONE` | 0 (0x00) |  |  |
-| `BIND_SIGHT` | 1 (0x01) |  |  |
-| `MOD_POSSESS` | 2 (0x02) |  |  |
-| `PERIODIC_DAMAGE` | 3 (0x03) |  |  |
-| `DUMMY` | 4 (0x04) |  |  |
-| `MOD_CONFUSE` | 5 (0x05) |  |  |
-| `MOD_CHARM` | 6 (0x06) |  |  |
-| `MOD_FEAR` | 7 (0x07) |  |  |
-| `PERIODIC_HEAL` | 8 (0x08) |  |  |
-| `MOD_ATTACKSPEED` | 9 (0x09) |  |  |
-| `MOD_THREAT` | 10 (0x0A) |  |  |
-| `MOD_TAUNT` | 11 (0x0B) |  |  |
-| `MOD_STUN` | 12 (0x0C) |  |  |
-| `MOD_DAMAGE_DONE` | 13 (0x0D) |  |  |
-| `MOD_DAMAGE_TAKEN` | 14 (0x0E) |  |  |
-| `DAMAGE_SHIELD` | 15 (0x0F) |  |  |
-| `MOD_STEALTH` | 16 (0x10) |  |  |
-| `MOD_STEALTH_DETECT` | 17 (0x11) |  |  |
-| `MOD_INVISIBILITY` | 18 (0x12) |  |  |
-| `MOD_INVISIBILITY_DETECTION` | 19 (0x13) |  |  |
-| `OBS_MOD_HEALTH` | 20 (0x14) |  |  |
-| `OBS_MOD_MANA` | 21 (0x15) |  |  |
-| `MOD_RESISTANCE` | 22 (0x16) |  |  |
-| `PERIODIC_TRIGGER_SPELL` | 23 (0x17) |  |  |
-| `PERIODIC_ENERGIZE` | 24 (0x18) |  |  |
-| `MOD_PACIFY` | 25 (0x19) |  |  |
-| `MOD_ROOT` | 26 (0x1A) |  |  |
-| `MOD_SILENCE` | 27 (0x1B) |  |  |
-| `REFLECT_SPELLS` | 28 (0x1C) |  |  |
-| `MOD_STAT` | 29 (0x1D) |  |  |
-| `MOD_SKILL` | 30 (0x1E) |  |  |
-| `MOD_INCREASE_SPEED` | 31 (0x1F) |  |  |
-| `MOD_INCREASE_MOUNTED_SPEED` | 32 (0x20) |  |  |
-| `MOD_DECREASE_SPEED` | 33 (0x21) |  |  |
-| `MOD_INCREASE_HEALTH` | 34 (0x22) |  |  |
-| `MOD_INCREASE_ENERGY` | 35 (0x23) |  |  |
-| `MOD_SHAPESHIFT` | 36 (0x24) |  |  |
-| `EFFECT_IMMUNITY` | 37 (0x25) |  |  |
-| `STATE_IMMUNITY` | 38 (0x26) |  |  |
-| `SCHOOL_IMMUNITY` | 39 (0x27) |  |  |
-| `DAMAGE_IMMUNITY` | 40 (0x28) |  |  |
-| `DISPEL_IMMUNITY` | 41 (0x29) |  |  |
-| `PROC_TRIGGER_SPELL` | 42 (0x2A) |  |  |
-| `PROC_TRIGGER_DAMAGE` | 43 (0x2B) |  |  |
-| `TRACK_CREATURES` | 44 (0x2C) |  |  |
-| `TRACK_RESOURCES` | 45 (0x2D) |  |  |
-| `UNKNOWN46` | 46 (0x2E) |  |  |
-| `MOD_PARRY_PERCENT` | 47 (0x2F) |  |  |
-| `UNKNOWN48` | 48 (0x30) |  |  |
-| `MOD_DODGE_PERCENT` | 49 (0x31) |  |  |
-| `MOD_BLOCK_SKILL` | 50 (0x32) |  |  |
-| `MOD_BLOCK_PERCENT` | 51 (0x33) |  |  |
-| `MOD_CRIT_PERCENT` | 52 (0x34) |  |  |
-| `PERIODIC_LEECH` | 53 (0x35) |  |  |
-| `MOD_HIT_CHANCE` | 54 (0x36) |  |  |
-| `MOD_SPELL_HIT_CHANCE` | 55 (0x37) |  |  |
-| `TRANSFORM` | 56 (0x38) |  |  |
-| `MOD_SPELL_CRIT_CHANCE` | 57 (0x39) |  |  |
-| `MOD_INCREASE_SWIM_SPEED` | 58 (0x3A) |  |  |
-| `MOD_DAMAGE_DONE_CREATURE` | 59 (0x3B) |  |  |
-| `MOD_PACIFY_SILENCE` | 60 (0x3C) |  |  |
-| `MOD_SCALE` | 61 (0x3D) |  |  |
-| `PERIODIC_HEALTH_FUNNEL` | 62 (0x3E) |  |  |
-| `PERIODIC_MANA_FUNNEL` | 63 (0x3F) |  |  |
-| `PERIODIC_MANA_LEECH` | 64 (0x40) |  |  |
-| `MOD_CASTING_SPEED_NOT_STACK` | 65 (0x41) |  |  |
-| `FEIGN_DEATH` | 66 (0x42) |  |  |
-| `MOD_DISARM` | 67 (0x43) |  |  |
-| `MOD_STALKED` | 68 (0x44) |  |  |
-| `SCHOOL_ABSORB` | 69 (0x45) |  |  |
-| `EXTRA_ATTACKS` | 70 (0x46) |  |  |
-| `MOD_SPELL_CRIT_CHANCE_SCHOOL` | 71 (0x47) |  |  |
-| `MOD_POWER_COST_SCHOOL_PCT` | 72 (0x48) |  |  |
-| `MOD_POWER_COST_SCHOOL` | 73 (0x49) |  |  |
-| `REFLECT_SPELLS_SCHOOL` | 74 (0x4A) |  |  |
-| `MOD_LANGUAGE` | 75 (0x4B) |  |  |
-| `FAR_SIGHT` | 76 (0x4C) |  |  |
-| `MECHANIC_IMMUNITY` | 77 (0x4D) |  |  |
-| `MOUNTED` | 78 (0x4E) |  |  |
-| `MOD_DAMAGE_PERCENT_DONE` | 79 (0x4F) |  |  |
-| `MOD_PERCENT_STAT` | 80 (0x50) |  |  |
-| `SPLIT_DAMAGE_PCT` | 81 (0x51) |  |  |
-| `WATER_BREATHING` | 82 (0x52) |  |  |
-| `MOD_BASE_RESISTANCE` | 83 (0x53) |  |  |
-| `MOD_REGEN` | 84 (0x54) |  |  |
-| `MOD_POWER_REGEN` | 85 (0x55) |  |  |
-| `CHANNEL_DEATH_ITEM` | 86 (0x56) |  |  |
-| `MOD_DAMAGE_PERCENT_TAKEN` | 87 (0x57) |  |  |
-| `MOD_HEALTH_REGEN_PERCENT` | 88 (0x58) |  |  |
-| `PERIODIC_DAMAGE_PERCENT` | 89 (0x59) |  |  |
-| `MOD_RESIST_CHANCE` | 90 (0x5A) |  |  |
-| `MOD_DETECT_RANGE` | 91 (0x5B) |  |  |
-| `PREVENTS_FLEEING` | 92 (0x5C) |  |  |
-| `MOD_UNATTACKABLE` | 93 (0x5D) |  |  |
-| `INTERRUPT_REGEN` | 94 (0x5E) |  |  |
-| `GHOST` | 95 (0x5F) |  |  |
-| `SPELL_MAGNET` | 96 (0x60) |  |  |
-| `MANA_SHIELD` | 97 (0x61) |  |  |
-| `MOD_SKILL_TALENT` | 98 (0x62) |  |  |
-| `MOD_ATTACK_POWER` | 99 (0x63) |  |  |
-| `AURAS_VISIBLE` | 100 (0x64) |  |  |
-| `MOD_RESISTANCE_PCT` | 101 (0x65) |  |  |
-| `MOD_MELEE_ATTACK_POWER_VERSUS` | 102 (0x66) |  |  |
-| `MOD_TOTAL_THREAT` | 103 (0x67) |  |  |
-| `WATER_WALK` | 104 (0x68) |  |  |
-| `FEATHER_FALL` | 105 (0x69) |  |  |
-| `HOVER` | 106 (0x6A) |  |  |
-| `ADD_FLAT_MODIFIER` | 107 (0x6B) |  |  |
-| `ADD_PCT_MODIFIER` | 108 (0x6C) |  |  |
-| `ADD_TARGET_TRIGGER` | 109 (0x6D) |  |  |
-| `MOD_POWER_REGEN_PERCENT` | 110 (0x6E) |  |  |
-| `ADD_CASTER_HIT_TRIGGER` | 111 (0x6F) |  |  |
-| `OVERRIDE_CLASS_SCRIPTS` | 112 (0x70) |  |  |
-| `MOD_RANGED_DAMAGE_TAKEN` | 113 (0x71) |  |  |
-| `MOD_RANGED_DAMAGE_TAKEN_PCT` | 114 (0x72) |  |  |
-| `MOD_HEALING` | 115 (0x73) |  |  |
-| `MOD_REGEN_DURING_COMBAT` | 116 (0x74) |  |  |
-| `MOD_MECHANIC_RESISTANCE` | 117 (0x75) |  |  |
-| `MOD_HEALING_PCT` | 118 (0x76) |  |  |
-| `SHARE_PET_TRACKING` | 119 (0x77) |  |  |
-| `UNTRACKABLE` | 120 (0x78) |  |  |
-| `EMPATHY` | 121 (0x79) |  |  |
-| `MOD_OFFHAND_DAMAGE_PCT` | 122 (0x7A) |  |  |
-| `MOD_TARGET_RESISTANCE` | 123 (0x7B) |  |  |
-| `MOD_RANGED_ATTACK_POWER` | 124 (0x7C) |  |  |
-| `MOD_MELEE_DAMAGE_TAKEN` | 125 (0x7D) |  |  |
-| `MOD_MELEE_DAMAGE_TAKEN_PCT` | 126 (0x7E) |  |  |
-| `RANGED_ATTACK_POWER_ATTACKER_BONUS` | 127 (0x7F) |  |  |
-| `MOD_POSSESS_PET` | 128 (0x80) |  |  |
-| `MOD_SPEED_ALWAYS` | 129 (0x81) |  |  |
-| `MOD_MOUNTED_SPEED_ALWAYS` | 130 (0x82) |  |  |
-| `MOD_RANGED_ATTACK_POWER_VERSUS` | 131 (0x83) |  |  |
-| `MOD_INCREASE_ENERGY_PERCENT` | 132 (0x84) |  |  |
-| `MOD_INCREASE_HEALTH_PERCENT` | 133 (0x85) |  |  |
-| `MOD_MANA_REGEN_INTERRUPT` | 134 (0x86) |  |  |
-| `MOD_HEALING_DONE` | 135 (0x87) |  |  |
-| `MOD_HEALING_DONE_PERCENT` | 136 (0x88) |  |  |
-| `MOD_TOTAL_STAT_PERCENTAGE` | 137 (0x89) |  |  |
-| `MOD_MELEE_HASTE` | 138 (0x8A) |  |  |
-| `FORCE_REACTION` | 139 (0x8B) |  |  |
-| `MOD_RANGED_HASTE` | 140 (0x8C) |  |  |
-| `MOD_RANGED_AMMO_HASTE` | 141 (0x8D) |  |  |
-| `MOD_BASE_RESISTANCE_PCT` | 142 (0x8E) |  |  |
-| `MOD_RESISTANCE_EXCLUSIVE` | 143 (0x8F) |  |  |
-| `SAFE_FALL` | 144 (0x90) |  |  |
-| `CHARISMA` | 145 (0x91) |  |  |
-| `PERSUADED` | 146 (0x92) |  |  |
-| `MECHANIC_IMMUNITY_MASK` | 147 (0x93) |  |  |
-| `RETAIN_COMBO_POINTS` | 148 (0x94) |  |  |
-| `RESIST_PUSHBACK` | 149 (0x95) |  |  |
-| `MOD_SHIELD_BLOCKVALUE_PCT` | 150 (0x96) |  |  |
-| `TRACK_STEALTHED` | 151 (0x97) |  |  |
-| `MOD_DETECTED_RANGE` | 152 (0x98) |  |  |
-| `SPLIT_DAMAGE_FLAT` | 153 (0x99) |  |  |
-| `MOD_STEALTH_LEVEL` | 154 (0x9A) |  |  |
-| `MOD_WATER_BREATHING` | 155 (0x9B) |  |  |
-| `MOD_REPUTATION_GAIN` | 156 (0x9C) |  |  |
-| `PET_DAMAGE_MULTI` | 157 (0x9D) |  |  |
-| `MOD_SHIELD_BLOCKVALUE` | 158 (0x9E) |  |  |
-| `NO_PVP_CREDIT` | 159 (0x9F) |  |  |
-| `MOD_AOE_AVOIDANCE` | 160 (0xA0) |  |  |
-| `MOD_HEALTH_REGEN_IN_COMBAT` | 161 (0xA1) |  |  |
-| `POWER_BURN_MANA` | 162 (0xA2) |  |  |
-| `MOD_CRIT_DAMAGE_BONUS` | 163 (0xA3) |  |  |
-| `UNKNOWN164` | 164 (0xA4) |  |  |
-| `MELEE_ATTACK_POWER_ATTACKER_BONUS` | 165 (0xA5) |  |  |
-| `MOD_ATTACK_POWER_PCT` | 166 (0xA6) |  |  |
-| `MOD_RANGED_ATTACK_POWER_PCT` | 167 (0xA7) |  |  |
-| `MOD_DAMAGE_DONE_VERSUS` | 168 (0xA8) |  |  |
-| `MOD_CRIT_PERCENT_VERSUS` | 169 (0xA9) |  |  |
-| `DETECT_AMORE` | 170 (0xAA) |  |  |
-| `MOD_SPEED_NOT_STACK` | 171 (0xAB) |  |  |
-| `MOD_MOUNTED_SPEED_NOT_STACK` | 172 (0xAC) |  |  |
-| `ALLOW_CHAMPION_SPELLS` | 173 (0xAD) |  |  |
-| `MOD_SPELL_DAMAGE_OF_STAT_PERCENT` | 174 (0xAE) |  |  |
-| `MOD_SPELL_HEALING_OF_STAT_PERCENT` | 175 (0xAF) |  |  |
-| `SPIRIT_OF_REDEMPTION` | 176 (0xB0) |  |  |
-| `AOE_CHARM` | 177 (0xB1) |  |  |
-| `MOD_DEBUFF_RESISTANCE` | 178 (0xB2) |  |  |
-| `MOD_ATTACKER_SPELL_CRIT_CHANCE` | 179 (0xB3) |  |  |
-| `MOD_FLAT_SPELL_DAMAGE_VERSUS` | 180 (0xB4) |  |  |
-| `MOD_FLAT_SPELL_CRIT_DAMAGE_VERSUS` | 181 (0xB5) |  |  |
-| `MOD_RESISTANCE_OF_STAT_PERCENT` | 182 (0xB6) |  |  |
-| `MOD_CRITICAL_THREAT` | 183 (0xB7) |  |  |
-| `MOD_ATTACKER_MELEE_HIT_CHANCE` | 184 (0xB8) |  |  |
-| `MOD_ATTACKER_RANGED_HIT_CHANCE` | 185 (0xB9) |  |  |
-| `MOD_ATTACKER_SPELL_HIT_CHANCE` | 186 (0xBA) |  |  |
-| `MOD_ATTACKER_MELEE_CRIT_CHANCE` | 187 (0xBB) |  |  |
-| `MOD_ATTACKER_RANGED_CRIT_CHANCE` | 188 (0xBC) |  |  |
-| `MOD_RATING` | 189 (0xBD) |  |  |
-| `MOD_FACTION_REPUTATION_GAIN` | 190 (0xBE) |  |  |
-| `USE_NORMAL_MOVEMENT_SPEED` | 191 (0xBF) |  |  |
-| `MOD_MELEE_RANGED_HASTE` | 192 (0xC0) |  |  |
-| `HASTE_ALL` | 193 (0xC1) |  |  |
-| `MOD_DEPRICATED_1` | 194 (0xC2) |  |  |
-| `MOD_DEPRICATED_2` | 195 (0xC3) |  |  |
-| `MOD_COOLDOWN` | 196 (0xC4) |  |  |
-| `MOD_ATTACKER_SPELL_AND_WEAPON_CRIT_CHANCE` | 197 (0xC5) |  |  |
-| `MOD_ALL_WEAPON_SKILLS` | 198 (0xC6) |  |  |
-| `MOD_INCREASES_SPELL_PCT_TO_HIT` | 199 (0xC7) |  |  |
-| `MOD_XP_PCT` | 200 (0xC8) |  |  |
-| `FLY` | 201 (0xC9) |  |  |
-| `IGNORE_COMBAT_RESULT` | 202 (0xCA) |  |  |
-| `MOD_ATTACKER_MELEE_CRIT_DAMAGE` | 203 (0xCB) |  |  |
-| `MOD_ATTACKER_RANGED_CRIT_DAMAGE` | 204 (0xCC) |  |  |
-| `MOD_ATTACKER_SPELL_CRIT_DAMAGE` | 205 (0xCD) |  |  |
-| `MOD_FLIGHT_SPEED` | 206 (0xCE) |  |  |
-| `MOD_FLIGHT_SPEED_MOUNTED` | 207 (0xCF) |  |  |
-| `MOD_FLIGHT_SPEED_STACKING` | 208 (0xD0) |  |  |
-| `MOD_FLIGHT_SPEED_MOUNTED_STACKING` | 209 (0xD1) |  |  |
-| `MOD_FLIGHT_SPEED_NOT_STACKING` | 210 (0xD2) |  |  |
-| `MOD_FLIGHT_SPEED_MOUNTED_NOT_STACKING` | 211 (0xD3) |  |  |
-| `MOD_RANGED_ATTACK_POWER_OF_STAT_PERCENT` | 212 (0xD4) |  |  |
-| `MOD_RAGE_FROM_DAMAGE_DEALT` | 213 (0xD5) |  |  |
-| `UNKNOWN214` | 214 (0xD6) |  |  |
-| `ARENA_PREPARATION` | 215 (0xD7) |  |  |
-| `HASTE_SPELLS` | 216 (0xD8) |  |  |
-| `UNKNOWN217` | 217 (0xD9) |  |  |
-| `HASTE_RANGED` | 218 (0xDA) |  |  |
-| `MOD_MANA_REGEN_FROM_STAT` | 219 (0xDB) |  |  |
-| `MOD_RATING_FROM_STAT` | 220 (0xDC) |  |  |
-| `UNKNOWN221` | 221 (0xDD) |  |  |
-| `UNKNOWN222` | 222 (0xDE) |  |  |
-| `UNKNOWN223` | 223 (0xDF) |  |  |
-| `UNKNOWN224` | 224 (0xE0) |  |  |
-| `PRAYER_OF_MENDING` | 225 (0xE1) |  |  |
-| `PERIODIC_DUMMY` | 226 (0xE2) |  |  |
-| `PERIODIC_TRIGGER_SPELL_WITH_VALUE` | 227 (0xE3) |  |  |
-| `DETECT_STEALTH` | 228 (0xE4) |  |  |
-| `MOD_AOE_DAMAGE_AVOIDANCE` | 229 (0xE5) |  |  |
-| `UNKNOWN230` | 230 (0xE6) |  |  |
-| `PROC_TRIGGER_SPELL_WITH_VALUE` | 231 (0xE7) |  |  |
-| `MECHANIC_DURATION_MOD` | 232 (0xE8) |  |  |
-| `UNKNOWN233` | 233 (0xE9) |  |  |
-| `MECHANIC_DURATION_MOD_NOT_STACK` | 234 (0xEA) |  |  |
-| `MOD_DISPEL_RESIST` | 235 (0xEB) |  |  |
-| `UNKNOWN236` | 236 (0xEC) |  |  |
-| `MOD_SPELL_DAMAGE_OF_ATTACK_POWER` | 237 (0xED) |  |  |
-| `MOD_SPELL_HEALING_OF_ATTACK_POWER` | 238 (0xEE) |  |  |
-| `MOD_SCALE_2` | 239 (0xEF) |  |  |
-| `MOD_EXPERTISE` | 240 (0xF0) |  |  |
-| `FORCE_MOVE_FORWARD` | 241 (0xF1) |  |  |
-| `UNKNOWN242` | 242 (0xF2) |  |  |
-| `UNKNOWN243` | 243 (0xF3) |  |  |
-| `COMPREHEND_LANGUAGE` | 244 (0xF4) |  |  |
-| `UNKNOWN245` | 245 (0xF5) |  |  |
-| `UNKNOWN246` | 246 (0xF6) |  |  |
-| `MIRROR_IMAGE` | 247 (0xF7) |  |  |
-| `MOD_COMBAT_RESULT_CHANCE` | 248 (0xF8) |  |  |
-| `UNKNOWN249` | 249 (0xF9) |  |  |
-| `MOD_INCREASE_HEALTH_2` | 250 (0xFA) |  |  |
-| `MOD_ENEMY_DODGE` | 251 (0xFB) |  |  |
-| `UNKNOWN252` | 252 (0xFC) |  |  |
-| `UNKNOWN253` | 253 (0xFD) |  |  |
-| `UNKNOWN254` | 254 (0xFE) |  |  |
-| `UNKNOWN255` | 255 (0xFF) |  |  |
-| `UNKNOWN256` | 256 (0x100) |  |  |
-| `UNKNOWN257` | 257 (0x101) |  |  |
-| `UNKNOWN258` | 258 (0x102) |  |  |
-| `UNKNOWN259` | 259 (0x103) |  |  |
-| `UNKNOWN260` | 260 (0x104) |  |  |
-| `UNKNOWN261` | 261 (0x105) |  |  |
+| Enumerator | Value  | Comment |
+| --------- | -------- | ------- |
+| `NONE` | 0 (0x00) |  |
+| `BIND_SIGHT` | 1 (0x01) |  |
+| `MOD_POSSESS` | 2 (0x02) |  |
+| `PERIODIC_DAMAGE` | 3 (0x03) |  |
+| `DUMMY` | 4 (0x04) |  |
+| `MOD_CONFUSE` | 5 (0x05) |  |
+| `MOD_CHARM` | 6 (0x06) |  |
+| `MOD_FEAR` | 7 (0x07) |  |
+| `PERIODIC_HEAL` | 8 (0x08) |  |
+| `MOD_ATTACKSPEED` | 9 (0x09) |  |
+| `MOD_THREAT` | 10 (0x0A) |  |
+| `MOD_TAUNT` | 11 (0x0B) |  |
+| `MOD_STUN` | 12 (0x0C) |  |
+| `MOD_DAMAGE_DONE` | 13 (0x0D) |  |
+| `MOD_DAMAGE_TAKEN` | 14 (0x0E) |  |
+| `DAMAGE_SHIELD` | 15 (0x0F) |  |
+| `MOD_STEALTH` | 16 (0x10) |  |
+| `MOD_STEALTH_DETECT` | 17 (0x11) |  |
+| `MOD_INVISIBILITY` | 18 (0x12) |  |
+| `MOD_INVISIBILITY_DETECTION` | 19 (0x13) |  |
+| `OBS_MOD_HEALTH` | 20 (0x14) |  |
+| `OBS_MOD_MANA` | 21 (0x15) |  |
+| `MOD_RESISTANCE` | 22 (0x16) |  |
+| `PERIODIC_TRIGGER_SPELL` | 23 (0x17) |  |
+| `PERIODIC_ENERGIZE` | 24 (0x18) |  |
+| `MOD_PACIFY` | 25 (0x19) |  |
+| `MOD_ROOT` | 26 (0x1A) |  |
+| `MOD_SILENCE` | 27 (0x1B) |  |
+| `REFLECT_SPELLS` | 28 (0x1C) |  |
+| `MOD_STAT` | 29 (0x1D) |  |
+| `MOD_SKILL` | 30 (0x1E) |  |
+| `MOD_INCREASE_SPEED` | 31 (0x1F) |  |
+| `MOD_INCREASE_MOUNTED_SPEED` | 32 (0x20) |  |
+| `MOD_DECREASE_SPEED` | 33 (0x21) |  |
+| `MOD_INCREASE_HEALTH` | 34 (0x22) |  |
+| `MOD_INCREASE_ENERGY` | 35 (0x23) |  |
+| `MOD_SHAPESHIFT` | 36 (0x24) |  |
+| `EFFECT_IMMUNITY` | 37 (0x25) |  |
+| `STATE_IMMUNITY` | 38 (0x26) |  |
+| `SCHOOL_IMMUNITY` | 39 (0x27) |  |
+| `DAMAGE_IMMUNITY` | 40 (0x28) |  |
+| `DISPEL_IMMUNITY` | 41 (0x29) |  |
+| `PROC_TRIGGER_SPELL` | 42 (0x2A) |  |
+| `PROC_TRIGGER_DAMAGE` | 43 (0x2B) |  |
+| `TRACK_CREATURES` | 44 (0x2C) |  |
+| `TRACK_RESOURCES` | 45 (0x2D) |  |
+| `UNKNOWN46` | 46 (0x2E) |  |
+| `MOD_PARRY_PERCENT` | 47 (0x2F) |  |
+| `UNKNOWN48` | 48 (0x30) |  |
+| `MOD_DODGE_PERCENT` | 49 (0x31) |  |
+| `MOD_BLOCK_SKILL` | 50 (0x32) |  |
+| `MOD_BLOCK_PERCENT` | 51 (0x33) |  |
+| `MOD_CRIT_PERCENT` | 52 (0x34) |  |
+| `PERIODIC_LEECH` | 53 (0x35) |  |
+| `MOD_HIT_CHANCE` | 54 (0x36) |  |
+| `MOD_SPELL_HIT_CHANCE` | 55 (0x37) |  |
+| `TRANSFORM` | 56 (0x38) |  |
+| `MOD_SPELL_CRIT_CHANCE` | 57 (0x39) |  |
+| `MOD_INCREASE_SWIM_SPEED` | 58 (0x3A) |  |
+| `MOD_DAMAGE_DONE_CREATURE` | 59 (0x3B) |  |
+| `MOD_PACIFY_SILENCE` | 60 (0x3C) |  |
+| `MOD_SCALE` | 61 (0x3D) |  |
+| `PERIODIC_HEALTH_FUNNEL` | 62 (0x3E) |  |
+| `PERIODIC_MANA_FUNNEL` | 63 (0x3F) |  |
+| `PERIODIC_MANA_LEECH` | 64 (0x40) |  |
+| `MOD_CASTING_SPEED_NOT_STACK` | 65 (0x41) |  |
+| `FEIGN_DEATH` | 66 (0x42) |  |
+| `MOD_DISARM` | 67 (0x43) |  |
+| `MOD_STALKED` | 68 (0x44) |  |
+| `SCHOOL_ABSORB` | 69 (0x45) |  |
+| `EXTRA_ATTACKS` | 70 (0x46) |  |
+| `MOD_SPELL_CRIT_CHANCE_SCHOOL` | 71 (0x47) |  |
+| `MOD_POWER_COST_SCHOOL_PCT` | 72 (0x48) |  |
+| `MOD_POWER_COST_SCHOOL` | 73 (0x49) |  |
+| `REFLECT_SPELLS_SCHOOL` | 74 (0x4A) |  |
+| `MOD_LANGUAGE` | 75 (0x4B) |  |
+| `FAR_SIGHT` | 76 (0x4C) |  |
+| `MECHANIC_IMMUNITY` | 77 (0x4D) |  |
+| `MOUNTED` | 78 (0x4E) |  |
+| `MOD_DAMAGE_PERCENT_DONE` | 79 (0x4F) |  |
+| `MOD_PERCENT_STAT` | 80 (0x50) |  |
+| `SPLIT_DAMAGE_PCT` | 81 (0x51) |  |
+| `WATER_BREATHING` | 82 (0x52) |  |
+| `MOD_BASE_RESISTANCE` | 83 (0x53) |  |
+| `MOD_REGEN` | 84 (0x54) |  |
+| `MOD_POWER_REGEN` | 85 (0x55) |  |
+| `CHANNEL_DEATH_ITEM` | 86 (0x56) |  |
+| `MOD_DAMAGE_PERCENT_TAKEN` | 87 (0x57) |  |
+| `MOD_HEALTH_REGEN_PERCENT` | 88 (0x58) |  |
+| `PERIODIC_DAMAGE_PERCENT` | 89 (0x59) |  |
+| `MOD_RESIST_CHANCE` | 90 (0x5A) |  |
+| `MOD_DETECT_RANGE` | 91 (0x5B) |  |
+| `PREVENTS_FLEEING` | 92 (0x5C) |  |
+| `MOD_UNATTACKABLE` | 93 (0x5D) |  |
+| `INTERRUPT_REGEN` | 94 (0x5E) |  |
+| `GHOST` | 95 (0x5F) |  |
+| `SPELL_MAGNET` | 96 (0x60) |  |
+| `MANA_SHIELD` | 97 (0x61) |  |
+| `MOD_SKILL_TALENT` | 98 (0x62) |  |
+| `MOD_ATTACK_POWER` | 99 (0x63) |  |
+| `AURAS_VISIBLE` | 100 (0x64) |  |
+| `MOD_RESISTANCE_PCT` | 101 (0x65) |  |
+| `MOD_MELEE_ATTACK_POWER_VERSUS` | 102 (0x66) |  |
+| `MOD_TOTAL_THREAT` | 103 (0x67) |  |
+| `WATER_WALK` | 104 (0x68) |  |
+| `FEATHER_FALL` | 105 (0x69) |  |
+| `HOVER` | 106 (0x6A) |  |
+| `ADD_FLAT_MODIFIER` | 107 (0x6B) |  |
+| `ADD_PCT_MODIFIER` | 108 (0x6C) |  |
+| `ADD_TARGET_TRIGGER` | 109 (0x6D) |  |
+| `MOD_POWER_REGEN_PERCENT` | 110 (0x6E) |  |
+| `ADD_CASTER_HIT_TRIGGER` | 111 (0x6F) |  |
+| `OVERRIDE_CLASS_SCRIPTS` | 112 (0x70) |  |
+| `MOD_RANGED_DAMAGE_TAKEN` | 113 (0x71) |  |
+| `MOD_RANGED_DAMAGE_TAKEN_PCT` | 114 (0x72) |  |
+| `MOD_HEALING` | 115 (0x73) |  |
+| `MOD_REGEN_DURING_COMBAT` | 116 (0x74) |  |
+| `MOD_MECHANIC_RESISTANCE` | 117 (0x75) |  |
+| `MOD_HEALING_PCT` | 118 (0x76) |  |
+| `SHARE_PET_TRACKING` | 119 (0x77) |  |
+| `UNTRACKABLE` | 120 (0x78) |  |
+| `EMPATHY` | 121 (0x79) |  |
+| `MOD_OFFHAND_DAMAGE_PCT` | 122 (0x7A) |  |
+| `MOD_TARGET_RESISTANCE` | 123 (0x7B) |  |
+| `MOD_RANGED_ATTACK_POWER` | 124 (0x7C) |  |
+| `MOD_MELEE_DAMAGE_TAKEN` | 125 (0x7D) |  |
+| `MOD_MELEE_DAMAGE_TAKEN_PCT` | 126 (0x7E) |  |
+| `RANGED_ATTACK_POWER_ATTACKER_BONUS` | 127 (0x7F) |  |
+| `MOD_POSSESS_PET` | 128 (0x80) |  |
+| `MOD_SPEED_ALWAYS` | 129 (0x81) |  |
+| `MOD_MOUNTED_SPEED_ALWAYS` | 130 (0x82) |  |
+| `MOD_RANGED_ATTACK_POWER_VERSUS` | 131 (0x83) |  |
+| `MOD_INCREASE_ENERGY_PERCENT` | 132 (0x84) |  |
+| `MOD_INCREASE_HEALTH_PERCENT` | 133 (0x85) |  |
+| `MOD_MANA_REGEN_INTERRUPT` | 134 (0x86) |  |
+| `MOD_HEALING_DONE` | 135 (0x87) |  |
+| `MOD_HEALING_DONE_PERCENT` | 136 (0x88) |  |
+| `MOD_TOTAL_STAT_PERCENTAGE` | 137 (0x89) |  |
+| `MOD_MELEE_HASTE` | 138 (0x8A) |  |
+| `FORCE_REACTION` | 139 (0x8B) |  |
+| `MOD_RANGED_HASTE` | 140 (0x8C) |  |
+| `MOD_RANGED_AMMO_HASTE` | 141 (0x8D) |  |
+| `MOD_BASE_RESISTANCE_PCT` | 142 (0x8E) |  |
+| `MOD_RESISTANCE_EXCLUSIVE` | 143 (0x8F) |  |
+| `SAFE_FALL` | 144 (0x90) |  |
+| `CHARISMA` | 145 (0x91) |  |
+| `PERSUADED` | 146 (0x92) |  |
+| `MECHANIC_IMMUNITY_MASK` | 147 (0x93) |  |
+| `RETAIN_COMBO_POINTS` | 148 (0x94) |  |
+| `RESIST_PUSHBACK` | 149 (0x95) |  |
+| `MOD_SHIELD_BLOCKVALUE_PCT` | 150 (0x96) |  |
+| `TRACK_STEALTHED` | 151 (0x97) |  |
+| `MOD_DETECTED_RANGE` | 152 (0x98) |  |
+| `SPLIT_DAMAGE_FLAT` | 153 (0x99) |  |
+| `MOD_STEALTH_LEVEL` | 154 (0x9A) |  |
+| `MOD_WATER_BREATHING` | 155 (0x9B) |  |
+| `MOD_REPUTATION_GAIN` | 156 (0x9C) |  |
+| `PET_DAMAGE_MULTI` | 157 (0x9D) |  |
+| `MOD_SHIELD_BLOCKVALUE` | 158 (0x9E) |  |
+| `NO_PVP_CREDIT` | 159 (0x9F) |  |
+| `MOD_AOE_AVOIDANCE` | 160 (0xA0) |  |
+| `MOD_HEALTH_REGEN_IN_COMBAT` | 161 (0xA1) |  |
+| `POWER_BURN_MANA` | 162 (0xA2) |  |
+| `MOD_CRIT_DAMAGE_BONUS` | 163 (0xA3) |  |
+| `UNKNOWN164` | 164 (0xA4) |  |
+| `MELEE_ATTACK_POWER_ATTACKER_BONUS` | 165 (0xA5) |  |
+| `MOD_ATTACK_POWER_PCT` | 166 (0xA6) |  |
+| `MOD_RANGED_ATTACK_POWER_PCT` | 167 (0xA7) |  |
+| `MOD_DAMAGE_DONE_VERSUS` | 168 (0xA8) |  |
+| `MOD_CRIT_PERCENT_VERSUS` | 169 (0xA9) |  |
+| `DETECT_AMORE` | 170 (0xAA) |  |
+| `MOD_SPEED_NOT_STACK` | 171 (0xAB) |  |
+| `MOD_MOUNTED_SPEED_NOT_STACK` | 172 (0xAC) |  |
+| `ALLOW_CHAMPION_SPELLS` | 173 (0xAD) |  |
+| `MOD_SPELL_DAMAGE_OF_STAT_PERCENT` | 174 (0xAE) |  |
+| `MOD_SPELL_HEALING_OF_STAT_PERCENT` | 175 (0xAF) |  |
+| `SPIRIT_OF_REDEMPTION` | 176 (0xB0) |  |
+| `AOE_CHARM` | 177 (0xB1) |  |
+| `MOD_DEBUFF_RESISTANCE` | 178 (0xB2) |  |
+| `MOD_ATTACKER_SPELL_CRIT_CHANCE` | 179 (0xB3) |  |
+| `MOD_FLAT_SPELL_DAMAGE_VERSUS` | 180 (0xB4) |  |
+| `MOD_FLAT_SPELL_CRIT_DAMAGE_VERSUS` | 181 (0xB5) |  |
+| `MOD_RESISTANCE_OF_STAT_PERCENT` | 182 (0xB6) |  |
+| `MOD_CRITICAL_THREAT` | 183 (0xB7) |  |
+| `MOD_ATTACKER_MELEE_HIT_CHANCE` | 184 (0xB8) |  |
+| `MOD_ATTACKER_RANGED_HIT_CHANCE` | 185 (0xB9) |  |
+| `MOD_ATTACKER_SPELL_HIT_CHANCE` | 186 (0xBA) |  |
+| `MOD_ATTACKER_MELEE_CRIT_CHANCE` | 187 (0xBB) |  |
+| `MOD_ATTACKER_RANGED_CRIT_CHANCE` | 188 (0xBC) |  |
+| `MOD_RATING` | 189 (0xBD) |  |
+| `MOD_FACTION_REPUTATION_GAIN` | 190 (0xBE) |  |
+| `USE_NORMAL_MOVEMENT_SPEED` | 191 (0xBF) |  |
+| `MOD_MELEE_RANGED_HASTE` | 192 (0xC0) |  |
+| `HASTE_ALL` | 193 (0xC1) |  |
+| `MOD_DEPRICATED_1` | 194 (0xC2) |  |
+| `MOD_DEPRICATED_2` | 195 (0xC3) |  |
+| `MOD_COOLDOWN` | 196 (0xC4) |  |
+| `MOD_ATTACKER_SPELL_AND_WEAPON_CRIT_CHANCE` | 197 (0xC5) |  |
+| `MOD_ALL_WEAPON_SKILLS` | 198 (0xC6) |  |
+| `MOD_INCREASES_SPELL_PCT_TO_HIT` | 199 (0xC7) |  |
+| `MOD_XP_PCT` | 200 (0xC8) |  |
+| `FLY` | 201 (0xC9) |  |
+| `IGNORE_COMBAT_RESULT` | 202 (0xCA) |  |
+| `MOD_ATTACKER_MELEE_CRIT_DAMAGE` | 203 (0xCB) |  |
+| `MOD_ATTACKER_RANGED_CRIT_DAMAGE` | 204 (0xCC) |  |
+| `MOD_ATTACKER_SPELL_CRIT_DAMAGE` | 205 (0xCD) |  |
+| `MOD_FLIGHT_SPEED` | 206 (0xCE) |  |
+| `MOD_FLIGHT_SPEED_MOUNTED` | 207 (0xCF) |  |
+| `MOD_FLIGHT_SPEED_STACKING` | 208 (0xD0) |  |
+| `MOD_FLIGHT_SPEED_MOUNTED_STACKING` | 209 (0xD1) |  |
+| `MOD_FLIGHT_SPEED_NOT_STACKING` | 210 (0xD2) |  |
+| `MOD_FLIGHT_SPEED_MOUNTED_NOT_STACKING` | 211 (0xD3) |  |
+| `MOD_RANGED_ATTACK_POWER_OF_STAT_PERCENT` | 212 (0xD4) |  |
+| `MOD_RAGE_FROM_DAMAGE_DEALT` | 213 (0xD5) |  |
+| `UNKNOWN214` | 214 (0xD6) |  |
+| `ARENA_PREPARATION` | 215 (0xD7) |  |
+| `HASTE_SPELLS` | 216 (0xD8) |  |
+| `UNKNOWN217` | 217 (0xD9) |  |
+| `HASTE_RANGED` | 218 (0xDA) |  |
+| `MOD_MANA_REGEN_FROM_STAT` | 219 (0xDB) |  |
+| `MOD_RATING_FROM_STAT` | 220 (0xDC) |  |
+| `UNKNOWN221` | 221 (0xDD) |  |
+| `UNKNOWN222` | 222 (0xDE) |  |
+| `UNKNOWN223` | 223 (0xDF) |  |
+| `UNKNOWN224` | 224 (0xE0) |  |
+| `PRAYER_OF_MENDING` | 225 (0xE1) |  |
+| `PERIODIC_DUMMY` | 226 (0xE2) |  |
+| `PERIODIC_TRIGGER_SPELL_WITH_VALUE` | 227 (0xE3) |  |
+| `DETECT_STEALTH` | 228 (0xE4) |  |
+| `MOD_AOE_DAMAGE_AVOIDANCE` | 229 (0xE5) |  |
+| `UNKNOWN230` | 230 (0xE6) |  |
+| `PROC_TRIGGER_SPELL_WITH_VALUE` | 231 (0xE7) |  |
+| `MECHANIC_DURATION_MOD` | 232 (0xE8) |  |
+| `UNKNOWN233` | 233 (0xE9) |  |
+| `MECHANIC_DURATION_MOD_NOT_STACK` | 234 (0xEA) |  |
+| `MOD_DISPEL_RESIST` | 235 (0xEB) |  |
+| `UNKNOWN236` | 236 (0xEC) |  |
+| `MOD_SPELL_DAMAGE_OF_ATTACK_POWER` | 237 (0xED) |  |
+| `MOD_SPELL_HEALING_OF_ATTACK_POWER` | 238 (0xEE) |  |
+| `MOD_SCALE_2` | 239 (0xEF) |  |
+| `MOD_EXPERTISE` | 240 (0xF0) |  |
+| `FORCE_MOVE_FORWARD` | 241 (0xF1) |  |
+| `UNKNOWN242` | 242 (0xF2) |  |
+| `UNKNOWN243` | 243 (0xF3) |  |
+| `COMPREHEND_LANGUAGE` | 244 (0xF4) |  |
+| `UNKNOWN245` | 245 (0xF5) |  |
+| `UNKNOWN246` | 246 (0xF6) |  |
+| `MIRROR_IMAGE` | 247 (0xF7) |  |
+| `MOD_COMBAT_RESULT_CHANCE` | 248 (0xF8) |  |
+| `UNKNOWN249` | 249 (0xF9) |  |
+| `MOD_INCREASE_HEALTH_2` | 250 (0xFA) |  |
+| `MOD_ENEMY_DODGE` | 251 (0xFB) |  |
+| `UNKNOWN252` | 252 (0xFC) |  |
+| `UNKNOWN253` | 253 (0xFD) |  |
+| `UNKNOWN254` | 254 (0xFE) |  |
+| `UNKNOWN255` | 255 (0xFF) |  |
+| `UNKNOWN256` | 256 (0x100) |  |
+| `UNKNOWN257` | 257 (0x101) |  |
+| `UNKNOWN258` | 258 (0x102) |  |
+| `UNKNOWN259` | 259 (0x103) |  |
+| `UNKNOWN260` | 260 (0x104) |  |
+| `UNKNOWN261` | 261 (0x105) |  |
 
 Used in:
 
@@ -1274,325 +1274,325 @@ enum AuraMod : u32 {
 ### Type
 The basic type is `u32`, a 4 byte (32 bit) little endian integer.
 ### Enumerators
-| Enumerator | Value  | Description | Comment |
-| --------- | -------- | ----------- | ------- |
-| `NONE` | 0 (0x00) |  |  |
-| `BIND_SIGHT` | 1 (0x01) |  |  |
-| `MOD_POSSESS` | 2 (0x02) |  |  |
-| `PERIODIC_DAMAGE` | 3 (0x03) |  |  |
-| `DUMMY` | 4 (0x04) |  |  |
-| `MOD_CONFUSE` | 5 (0x05) |  |  |
-| `MOD_CHARM` | 6 (0x06) |  |  |
-| `MOD_FEAR` | 7 (0x07) |  |  |
-| `PERIODIC_HEAL` | 8 (0x08) |  |  |
-| `MOD_ATTACKSPEED` | 9 (0x09) |  |  |
-| `MOD_THREAT` | 10 (0x0A) |  |  |
-| `MOD_TAUNT` | 11 (0x0B) |  |  |
-| `MOD_STUN` | 12 (0x0C) |  |  |
-| `MOD_DAMAGE_DONE` | 13 (0x0D) |  |  |
-| `MOD_DAMAGE_TAKEN` | 14 (0x0E) |  |  |
-| `DAMAGE_SHIELD` | 15 (0x0F) |  |  |
-| `MOD_STEALTH` | 16 (0x10) |  |  |
-| `MOD_STEALTH_DETECT` | 17 (0x11) |  |  |
-| `MOD_INVISIBILITY` | 18 (0x12) |  |  |
-| `MOD_INVISIBILITY_DETECT` | 19 (0x13) |  |  |
-| `OBS_MOD_HEALTH` | 20 (0x14) |  |  |
-| `OBS_MOD_POWER` | 21 (0x15) |  |  |
-| `MOD_RESISTANCE` | 22 (0x16) |  |  |
-| `PERIODIC_TRIGGER_SPELL` | 23 (0x17) |  |  |
-| `PERIODIC_ENERGIZE` | 24 (0x18) |  |  |
-| `MOD_PACIFY` | 25 (0x19) |  |  |
-| `MOD_ROOT` | 26 (0x1A) |  |  |
-| `MOD_SILENCE` | 27 (0x1B) |  |  |
-| `REFLECT_SPELLS` | 28 (0x1C) |  |  |
-| `MOD_STAT` | 29 (0x1D) |  |  |
-| `MOD_SKILL` | 30 (0x1E) |  |  |
-| `MOD_INCREASE_SPEED` | 31 (0x1F) |  |  |
-| `MOD_INCREASE_MOUNTED_SPEED` | 32 (0x20) |  |  |
-| `MOD_DECREASE_SPEED` | 33 (0x21) |  |  |
-| `MOD_INCREASE_HEALTH` | 34 (0x22) |  |  |
-| `MOD_INCREASE_ENERGY` | 35 (0x23) |  |  |
-| `MOD_SHAPESHIFT` | 36 (0x24) |  |  |
-| `EFFECT_IMMUNITY` | 37 (0x25) |  |  |
-| `STATE_IMMUNITY` | 38 (0x26) |  |  |
-| `SCHOOL_IMMUNITY` | 39 (0x27) |  |  |
-| `DAMAGE_IMMUNITY` | 40 (0x28) |  |  |
-| `DISPEL_IMMUNITY` | 41 (0x29) |  |  |
-| `PROC_TRIGGER_SPELL` | 42 (0x2A) |  |  |
-| `PROC_TRIGGER_DAMAGE` | 43 (0x2B) |  |  |
-| `TRACK_CREATURES` | 44 (0x2C) |  |  |
-| `TRACK_RESOURCES` | 45 (0x2D) |  |  |
-| `UNKNOWN46` | 46 (0x2E) |  |  |
-| `MOD_PARRY_PERCENT` | 47 (0x2F) |  |  |
-| `PERIODIC_TRIGGER_SPELL_FROM_CLIENT` | 48 (0x30) |  |  |
-| `MOD_DODGE_PERCENT` | 49 (0x31) |  |  |
-| `MOD_CRITICAL_HEALING_AMOUNT` | 50 (0x32) |  |  |
-| `MOD_BLOCK_PERCENT` | 51 (0x33) |  |  |
-| `MOD_WEAPON_CRIT_PERCENT` | 52 (0x34) |  |  |
-| `PERIODIC_LEECH` | 53 (0x35) |  |  |
-| `MOD_HIT_CHANCE` | 54 (0x36) |  |  |
-| `MOD_SPELL_HIT_CHANCE` | 55 (0x37) |  |  |
-| `TRANSFORM` | 56 (0x38) |  |  |
-| `MOD_SPELL_CRIT_CHANCE` | 57 (0x39) |  |  |
-| `MOD_INCREASE_SWIM_SPEED` | 58 (0x3A) |  |  |
-| `MOD_DAMAGE_DONE_CREATURE` | 59 (0x3B) |  |  |
-| `MOD_PACIFY_SILENCE` | 60 (0x3C) |  |  |
-| `MOD_SCALE` | 61 (0x3D) |  |  |
-| `PERIODIC_HEALTH_FUNNEL` | 62 (0x3E) |  |  |
-| `UNKNOWN63` | 63 (0x3F) |  |  |
-| `PERIODIC_MANA_LEECH` | 64 (0x40) |  |  |
-| `MOD_CASTING_SPEED_NOT_STACK` | 65 (0x41) |  |  |
-| `FEIGN_DEATH` | 66 (0x42) |  |  |
-| `MOD_DISARM` | 67 (0x43) |  |  |
-| `MOD_STALKED` | 68 (0x44) |  |  |
-| `SCHOOL_ABSORB` | 69 (0x45) |  |  |
-| `EXTRA_ATTACKS` | 70 (0x46) |  |  |
-| `MOD_SPELL_CRIT_CHANCE_SCHOOL` | 71 (0x47) |  |  |
-| `MOD_POWER_COST_SCHOOL_PCT` | 72 (0x48) |  |  |
-| `MOD_POWER_COST_SCHOOL` | 73 (0x49) |  |  |
-| `REFLECT_SPELLS_SCHOOL` | 74 (0x4A) |  |  |
-| `MOD_LANGUAGE` | 75 (0x4B) |  |  |
-| `FAR_SIGHT` | 76 (0x4C) |  |  |
-| `MECHANIC_IMMUNITY` | 77 (0x4D) |  |  |
-| `MOUNTED` | 78 (0x4E) |  |  |
-| `MOD_DAMAGE_PERCENT_DONE` | 79 (0x4F) |  |  |
-| `MOD_PERCENT_STAT` | 80 (0x50) |  |  |
-| `SPLIT_DAMAGE_PCT` | 81 (0x51) |  |  |
-| `WATER_BREATHING` | 82 (0x52) |  |  |
-| `MOD_BASE_RESISTANCE` | 83 (0x53) |  |  |
-| `MOD_REGEN` | 84 (0x54) |  |  |
-| `MOD_POWER_REGEN` | 85 (0x55) |  |  |
-| `CHANNEL_DEATH_ITEM` | 86 (0x56) |  |  |
-| `MOD_DAMAGE_PERCENT_TAKEN` | 87 (0x57) |  |  |
-| `MOD_HEALTH_REGEN_PERCENT` | 88 (0x58) |  |  |
-| `PERIODIC_DAMAGE_PERCENT` | 89 (0x59) |  |  |
-| `UNKNOWN90` | 90 (0x5A) |  |  |
-| `MOD_DETECT_RANGE` | 91 (0x5B) |  |  |
-| `PREVENTS_FLEEING` | 92 (0x5C) |  |  |
-| `MOD_UNATTACKABLE` | 93 (0x5D) |  |  |
-| `INTERRUPT_REGEN` | 94 (0x5E) |  |  |
-| `GHOST` | 95 (0x5F) |  |  |
-| `SPELL_MAGNET` | 96 (0x60) |  |  |
-| `MANA_SHIELD` | 97 (0x61) |  |  |
-| `MOD_SKILL_TALENT` | 98 (0x62) |  |  |
-| `MOD_ATTACK_POWER` | 99 (0x63) |  |  |
-| `AURAS_VISIBLE` | 100 (0x64) |  |  |
-| `MOD_RESISTANCE_PCT` | 101 (0x65) |  |  |
-| `MOD_MELEE_ATTACK_POWER_VERSUS` | 102 (0x66) |  |  |
-| `MOD_TOTAL_THREAT` | 103 (0x67) |  |  |
-| `WATER_WALK` | 104 (0x68) |  |  |
-| `FEATHER_FALL` | 105 (0x69) |  |  |
-| `HOVER` | 106 (0x6A) |  |  |
-| `ADD_FLAT_MODIFIER` | 107 (0x6B) |  |  |
-| `ADD_PCT_MODIFIER` | 108 (0x6C) |  |  |
-| `ADD_TARGET_TRIGGER` | 109 (0x6D) |  |  |
-| `MOD_POWER_REGEN_PERCENT` | 110 (0x6E) |  |  |
-| `ADD_CASTER_HIT_TRIGGER` | 111 (0x6F) |  |  |
-| `OVERRIDE_CLASS_SCRIPTS` | 112 (0x70) |  |  |
-| `MOD_RANGED_DAMAGE_TAKEN` | 113 (0x71) |  |  |
-| `MOD_RANGED_DAMAGE_TAKEN_PCT` | 114 (0x72) |  |  |
-| `MOD_HEALING` | 115 (0x73) |  |  |
-| `MOD_REGEN_DURING_COMBAT` | 116 (0x74) |  |  |
-| `MOD_MECHANIC_RESISTANCE` | 117 (0x75) |  |  |
-| `MOD_HEALING_PCT` | 118 (0x76) |  |  |
-| `UNKNOWN119` | 119 (0x77) |  |  |
-| `UNTRACKABLE` | 120 (0x78) |  |  |
-| `EMPATHY` | 121 (0x79) |  |  |
-| `MOD_OFFHAND_DAMAGE_PCT` | 122 (0x7A) |  |  |
-| `MOD_TARGET_RESISTANCE` | 123 (0x7B) |  |  |
-| `MOD_RANGED_ATTACK_POWER` | 124 (0x7C) |  |  |
-| `MOD_MELEE_DAMAGE_TAKEN` | 125 (0x7D) |  |  |
-| `MOD_MELEE_DAMAGE_TAKEN_PCT` | 126 (0x7E) |  |  |
-| `RANGED_ATTACK_POWER_ATTACKER_BONUS` | 127 (0x7F) |  |  |
-| `MOD_POSSESS_PET` | 128 (0x80) |  |  |
-| `MOD_SPEED_ALWAYS` | 129 (0x81) |  |  |
-| `MOD_MOUNTED_SPEED_ALWAYS` | 130 (0x82) |  |  |
-| `MOD_RANGED_ATTACK_POWER_VERSUS` | 131 (0x83) |  |  |
-| `MOD_INCREASE_ENERGY_PERCENT` | 132 (0x84) |  |  |
-| `MOD_INCREASE_HEALTH_PERCENT` | 133 (0x85) |  |  |
-| `MOD_MANA_REGEN_INTERRUPT` | 134 (0x86) |  |  |
-| `MOD_HEALING_DONE` | 135 (0x87) |  |  |
-| `MOD_HEALING_DONE_PERCENT` | 136 (0x88) |  |  |
-| `MOD_TOTAL_STAT_PERCENTAGE` | 137 (0x89) |  |  |
-| `MOD_MELEE_HASTE` | 138 (0x8A) |  |  |
-| `FORCE_REACTION` | 139 (0x8B) |  |  |
-| `MOD_RANGED_HASTE` | 140 (0x8C) |  |  |
-| `MOD_RANGED_AMMO_HASTE` | 141 (0x8D) |  |  |
-| `MOD_BASE_RESISTANCE_PCT` | 142 (0x8E) |  |  |
-| `MOD_RESISTANCE_EXCLUSIVE` | 143 (0x8F) |  |  |
-| `SAFE_FALL` | 144 (0x90) |  |  |
-| `MOD_PET_TALENT_POINTS` | 145 (0x91) |  |  |
-| `ALLOW_TAME_PET_TYPE` | 146 (0x92) |  |  |
-| `MECHANIC_IMMUNITY_MASK` | 147 (0x93) |  |  |
-| `RETAIN_COMBO_POINTS` | 148 (0x94) |  |  |
-| `REDUCE_PUSHBACK` | 149 (0x95) |  |  |
-| `MOD_SHIELD_BLOCKVALUE_PCT` | 150 (0x96) |  |  |
-| `TRACK_STEALTHED` | 151 (0x97) |  |  |
-| `MOD_DETECTED_RANGE` | 152 (0x98) |  |  |
-| `SPLIT_DAMAGE_FLAT` | 153 (0x99) |  |  |
-| `MOD_STEALTH_LEVEL` | 154 (0x9A) |  |  |
-| `MOD_WATER_BREATHING` | 155 (0x9B) |  |  |
-| `MOD_REPUTATION_GAIN` | 156 (0x9C) |  |  |
-| `PET_DAMAGE_MULTI` | 157 (0x9D) |  |  |
-| `MOD_SHIELD_BLOCKVALUE` | 158 (0x9E) |  |  |
-| `NO_PVP_CREDIT` | 159 (0x9F) |  |  |
-| `MOD_AOE_AVOIDANCE` | 160 (0xA0) |  |  |
-| `MOD_HEALTH_REGEN_IN_COMBAT` | 161 (0xA1) |  |  |
-| `POWER_BURN` | 162 (0xA2) |  |  |
-| `MOD_CRIT_DAMAGE_BONUS` | 163 (0xA3) |  |  |
-| `UNKNOWN164` | 164 (0xA4) |  |  |
-| `MELEE_ATTACK_POWER_ATTACKER_BONUS` | 165 (0xA5) |  |  |
-| `MOD_ATTACK_POWER_PCT` | 166 (0xA6) |  |  |
-| `MOD_RANGED_ATTACK_POWER_PCT` | 167 (0xA7) |  |  |
-| `MOD_DAMAGE_DONE_VERSUS` | 168 (0xA8) |  |  |
-| `MOD_CRIT_PERCENT_VERSUS` | 169 (0xA9) |  |  |
-| `DETECT_AMORE` | 170 (0xAA) |  |  |
-| `MOD_SPEED_NOT_STACK` | 171 (0xAB) |  |  |
-| `MOD_MOUNTED_SPEED_NOT_STACK` | 172 (0xAC) |  |  |
-| `UNKNOWN173` | 173 (0xAD) |  |  |
-| `MOD_SPELL_DAMAGE_OF_STAT_PERCENT` | 174 (0xAE) |  |  |
-| `MOD_SPELL_HEALING_OF_STAT_PERCENT` | 175 (0xAF) |  |  |
-| `SPIRIT_OF_REDEMPTION` | 176 (0xB0) |  |  |
-| `AOE_CHARM` | 177 (0xB1) |  |  |
-| `MOD_DEBUFF_RESISTANCE` | 178 (0xB2) |  |  |
-| `MOD_ATTACKER_SPELL_CRIT_CHANCE` | 179 (0xB3) |  |  |
-| `MOD_FLAT_SPELL_DAMAGE_VERSUS` | 180 (0xB4) |  |  |
-| `UNKNOWN181` | 181 (0xB5) |  |  |
-| `MOD_RESISTANCE_OF_STAT_PERCENT` | 182 (0xB6) |  |  |
-| `MOD_CRITICAL_THREAT` | 183 (0xB7) |  |  |
-| `MOD_ATTACKER_MELEE_HIT_CHANCE` | 184 (0xB8) |  |  |
-| `MOD_ATTACKER_RANGED_HIT_CHANCE` | 185 (0xB9) |  |  |
-| `MOD_ATTACKER_SPELL_HIT_CHANCE` | 186 (0xBA) |  |  |
-| `MOD_ATTACKER_MELEE_CRIT_CHANCE` | 187 (0xBB) |  |  |
-| `MOD_ATTACKER_RANGED_CRIT_CHANCE` | 188 (0xBC) |  |  |
-| `MOD_RATING` | 189 (0xBD) |  |  |
-| `MOD_FACTION_REPUTATION_GAIN` | 190 (0xBE) |  |  |
-| `USE_NORMAL_MOVEMENT_SPEED` | 191 (0xBF) |  |  |
-| `MOD_MELEE_RANGED_HASTE` | 192 (0xC0) |  |  |
-| `MELEE_SLOW` | 193 (0xC1) |  |  |
-| `MOD_TARGET_ABSORB_SCHOOL` | 194 (0xC2) |  |  |
-| `MOD_TARGET_ABILITY_ABSORB_SCHOOL` | 195 (0xC3) |  |  |
-| `MOD_COOLDOWN` | 196 (0xC4) |  |  |
-| `MOD_ATTACKER_SPELL_AND_WEAPON_CRIT_CHANCE` | 197 (0xC5) |  |  |
-| `UNKNOWN198` | 198 (0xC6) |  |  |
-| `MOD_INCREASES_SPELL_PCT_TO_HIT` | 199 (0xC7) |  |  |
-| `MOD_XP_PCT` | 200 (0xC8) |  |  |
-| `FLY` | 201 (0xC9) |  |  |
-| `IGNORE_COMBAT_RESULT` | 202 (0xCA) |  |  |
-| `MOD_ATTACKER_MELEE_CRIT_DAMAGE` | 203 (0xCB) |  |  |
-| `MOD_ATTACKER_RANGED_CRIT_DAMAGE` | 204 (0xCC) |  |  |
-| `MOD_SCHOOL_CRIT_DMG_TAKEN` | 205 (0xCD) |  |  |
-| `MOD_INCREASE_VEHICLE_FLIGHT_SPEED` | 206 (0xCE) |  |  |
-| `MOD_INCREASE_MOUNTED_FLIGHT_SPEED` | 207 (0xCF) |  |  |
-| `MOD_INCREASE_FLIGHT_SPEED` | 208 (0xD0) |  |  |
-| `MOD_MOUNTED_FLIGHT_SPEED_ALWAYS` | 209 (0xD1) |  |  |
-| `MOD_VEHICLE_SPEED_ALWAYS` | 210 (0xD2) |  |  |
-| `MOD_FLIGHT_SPEED_NOT_STACK` | 211 (0xD3) |  |  |
-| `MOD_RANGED_ATTACK_POWER_OF_STAT_PERCENT` | 212 (0xD4) |  |  |
-| `MOD_RAGE_FROM_DAMAGE_DEALT` | 213 (0xD5) |  |  |
-| `UNKNOWN214` | 214 (0xD6) |  |  |
-| `ARENA_PREPARATION` | 215 (0xD7) |  |  |
-| `HASTE_SPELLS` | 216 (0xD8) |  |  |
-| `MOD_MELEE_HASTE_2` | 217 (0xD9) |  |  |
-| `HASTE_RANGED` | 218 (0xDA) |  |  |
-| `MOD_MANA_REGEN_FROM_STAT` | 219 (0xDB) |  |  |
-| `MOD_RATING_FROM_STAT` | 220 (0xDC) |  |  |
-| `MOD_DETAUNT` | 221 (0xDD) |  |  |
-| `UNKNOWN222` | 222 (0xDE) |  |  |
-| `RAID_PROC_FROM_CHARGE` | 223 (0xDF) |  |  |
-| `UNKNOWN224` | 224 (0xE0) |  |  |
-| `RAID_PROC_FROM_CHARGE_WITH_VALUE` | 225 (0xE1) |  |  |
-| `PERIODIC_DUMMY` | 226 (0xE2) |  |  |
-| `PERIODIC_TRIGGER_SPELL_WITH_VALUE` | 227 (0xE3) |  |  |
-| `DETECT_STEALTH` | 228 (0xE4) |  |  |
-| `MOD_AOE_DAMAGE_AVOIDANCE` | 229 (0xE5) |  |  |
-| `UNKNOWN230` | 230 (0xE6) |  |  |
-| `PROC_TRIGGER_SPELL_WITH_VALUE` | 231 (0xE7) |  |  |
-| `MECHANIC_DURATION_MOD` | 232 (0xE8) |  |  |
-| `CHANGE_MODEL_FOR_ALL_HUMANOIDS` | 233 (0xE9) |  |  |
-| `MECHANIC_DURATION_MOD_NOT_STACK` | 234 (0xEA) |  |  |
-| `MOD_DISPEL_RESIST` | 235 (0xEB) |  |  |
-| `CONTROL_VEHICLE` | 236 (0xEC) |  |  |
-| `MOD_SPELL_DAMAGE_OF_ATTACK_POWER` | 237 (0xED) |  |  |
-| `MOD_SPELL_HEALING_OF_ATTACK_POWER` | 238 (0xEE) |  |  |
-| `MOD_SCALE_2` | 239 (0xEF) |  |  |
-| `MOD_EXPERTISE` | 240 (0xF0) |  |  |
-| `FORCE_MOVE_FORWARD` | 241 (0xF1) |  |  |
-| `MOD_SPELL_DAMAGE_FROM_HEALING` | 242 (0xF2) |  |  |
-| `MOD_FACTION` | 243 (0xF3) |  |  |
-| `COMPREHEND_LANGUAGE` | 244 (0xF4) |  |  |
-| `MOD_AURA_DURATION_BY_DISPEL` | 245 (0xF5) |  |  |
-| `MOD_AURA_DURATION_BY_DISPEL_NOT_STACK` | 246 (0xF6) |  |  |
-| `CLONE_CASTER` | 247 (0xF7) |  |  |
-| `MOD_COMBAT_RESULT_CHANCE` | 248 (0xF8) |  |  |
-| `CONVERT_RUNE` | 249 (0xF9) |  |  |
-| `MOD_INCREASE_HEALTH_2` | 250 (0xFA) |  |  |
-| `MOD_ENEMY_DODGE` | 251 (0xFB) |  |  |
-| `MOD_SPEED_SLOW_ALL` | 252 (0xFC) |  |  |
-| `MOD_BLOCK_CRIT_CHANCE` | 253 (0xFD) |  |  |
-| `MOD_DISARM_OFFHAND` | 254 (0xFE) |  |  |
-| `MOD_MECHANIC_DAMAGE_TAKEN_PERCENT` | 255 (0xFF) |  |  |
-| `NO_REAGENT_USE` | 256 (0x100) |  |  |
-| `MOD_TARGET_RESIST_BY_SPELL_CLASS` | 257 (0x101) |  |  |
-| `UNKNOWN258` | 258 (0x102) |  |  |
-| `MOD_HOT_PCT` | 259 (0x103) |  |  |
-| `SCREEN_EFFECT` | 260 (0x104) |  |  |
-| `PHASE` | 261 (0x105) |  |  |
-| `ABILITY_IGNORE_AURASTATE` | 262 (0x106) |  |  |
-| `ALLOW_ONLY_ABILITY` | 263 (0x107) |  |  |
-| `UNKNOWN264` | 264 (0x108) |  |  |
-| `UNKNOWN265` | 265 (0x109) |  |  |
-| `UNKNOWN266` | 266 (0x10A) |  |  |
-| `MOD_IMMUNE_AURA_APPLY_SCHOOL` | 267 (0x10B) |  |  |
-| `MOD_ATTACK_POWER_OF_STAT_PERCENT` | 268 (0x10C) |  |  |
-| `MOD_IGNORE_TARGET_RESIST` | 269 (0x10D) |  |  |
-| `MOD_ABILITY_IGNORE_TARGET_RESIST` | 270 (0x10E) |  |  |
-| `MOD_DAMAGE_FROM_CASTER` | 271 (0x10F) |  |  |
-| `IGNORE_MELEE_RESET` | 272 (0x110) |  |  |
-| `X_RAY` | 273 (0x111) |  |  |
-| `ABILITY_CONSUME_NO_AMMO` | 274 (0x112) |  |  |
-| `MOD_IGNORE_SHAPESHIFT` | 275 (0x113) |  |  |
-| `MOD_DAMAGE_DONE_FOR_MECHANIC` | 276 (0x114) |  |  |
-| `MOD_MAX_AFFECTED_TARGETS` | 277 (0x115) |  |  |
-| `MOD_DISARM_RANGED` | 278 (0x116) |  |  |
-| `INITIALIZE_IMAGES` | 279 (0x117) |  |  |
-| `MOD_ARMOR_PENETRATION_PCT` | 280 (0x118) |  |  |
-| `MOD_HONOR_GAIN_PCT` | 281 (0x119) |  |  |
-| `MOD_BASE_HEALTH_PCT` | 282 (0x11A) |  |  |
-| `MOD_HEALING_RECEIVED` | 283 (0x11B) |  |  |
-| `LINKED` | 284 (0x11C) |  |  |
-| `MOD_ATTACK_POWER_OF_ARMOR` | 285 (0x11D) |  |  |
-| `ABILITY_PERIODIC_CRIT` | 286 (0x11E) |  |  |
-| `DEFLECT_SPELLS` | 287 (0x11F) |  |  |
-| `IGNORE_HIT_DIRECTION` | 288 (0x120) |  |  |
-| `PREVENT_DURABILITY_LOSS` | 289 (0x121) |  |  |
-| `MOD_CRIT_PCT` | 290 (0x122) |  |  |
-| `MOD_XP_QUEST_PCT` | 291 (0x123) |  |  |
-| `OPEN_STABLE` | 292 (0x124) |  |  |
-| `OVERRIDE_SPELLS` | 293 (0x125) |  |  |
-| `PREVENT_REGENERATE_POWER` | 294 (0x126) |  |  |
-| `UNKNOWN295` | 295 (0x127) |  |  |
-| `SET_VEHICLE_ID` | 296 (0x128) |  |  |
-| `BLOCK_SPELL_FAMILY` | 297 (0x129) |  |  |
-| `STRANGULATE` | 298 (0x12A) |  |  |
-| `UNKNOWN299` | 299 (0x12B) |  |  |
-| `SHARE_DAMAGE_PCT` | 300 (0x12C) |  |  |
-| `SCHOOL_HEAL_ABSORB` | 301 (0x12D) |  |  |
-| `UNKNOWN302` | 302 (0x12E) |  |  |
-| `MOD_DAMAGE_DONE_VERSUS_AURASTATE` | 303 (0x12F) |  |  |
-| `MOD_FAKE_INEBRIATE` | 304 (0x130) |  |  |
-| `MOD_MINIMUM_SPEED` | 305 (0x131) |  |  |
-| `UNKNOWN306` | 306 (0x132) |  |  |
-| `HEAL_ABSORB_TEST` | 307 (0x133) |  |  |
-| `MOD_CRIT_CHANCE_FOR_CASTER` | 308 (0x134) |  |  |
-| `UNKNOWN309` | 309 (0x135) |  |  |
-| `MOD_CREATURE_AOE_DAMAGE_AVOIDANCE` | 310 (0x136) |  |  |
-| `UNKNOWN311` | 311 (0x137) |  |  |
-| `UNKNOWN312` | 312 (0x138) |  |  |
-| `UNKNOWN313` | 313 (0x139) |  |  |
-| `PREVENT_RESURRECTION` | 314 (0x13A) |  |  |
-| `UNDERWATER_WALKING` | 315 (0x13B) |  |  |
-| `PERIODIC_HASTE` | 316 (0x13C) |  |  |
+| Enumerator | Value  | Comment |
+| --------- | -------- | ------- |
+| `NONE` | 0 (0x00) |  |
+| `BIND_SIGHT` | 1 (0x01) |  |
+| `MOD_POSSESS` | 2 (0x02) |  |
+| `PERIODIC_DAMAGE` | 3 (0x03) |  |
+| `DUMMY` | 4 (0x04) |  |
+| `MOD_CONFUSE` | 5 (0x05) |  |
+| `MOD_CHARM` | 6 (0x06) |  |
+| `MOD_FEAR` | 7 (0x07) |  |
+| `PERIODIC_HEAL` | 8 (0x08) |  |
+| `MOD_ATTACKSPEED` | 9 (0x09) |  |
+| `MOD_THREAT` | 10 (0x0A) |  |
+| `MOD_TAUNT` | 11 (0x0B) |  |
+| `MOD_STUN` | 12 (0x0C) |  |
+| `MOD_DAMAGE_DONE` | 13 (0x0D) |  |
+| `MOD_DAMAGE_TAKEN` | 14 (0x0E) |  |
+| `DAMAGE_SHIELD` | 15 (0x0F) |  |
+| `MOD_STEALTH` | 16 (0x10) |  |
+| `MOD_STEALTH_DETECT` | 17 (0x11) |  |
+| `MOD_INVISIBILITY` | 18 (0x12) |  |
+| `MOD_INVISIBILITY_DETECT` | 19 (0x13) |  |
+| `OBS_MOD_HEALTH` | 20 (0x14) |  |
+| `OBS_MOD_POWER` | 21 (0x15) |  |
+| `MOD_RESISTANCE` | 22 (0x16) |  |
+| `PERIODIC_TRIGGER_SPELL` | 23 (0x17) |  |
+| `PERIODIC_ENERGIZE` | 24 (0x18) |  |
+| `MOD_PACIFY` | 25 (0x19) |  |
+| `MOD_ROOT` | 26 (0x1A) |  |
+| `MOD_SILENCE` | 27 (0x1B) |  |
+| `REFLECT_SPELLS` | 28 (0x1C) |  |
+| `MOD_STAT` | 29 (0x1D) |  |
+| `MOD_SKILL` | 30 (0x1E) |  |
+| `MOD_INCREASE_SPEED` | 31 (0x1F) |  |
+| `MOD_INCREASE_MOUNTED_SPEED` | 32 (0x20) |  |
+| `MOD_DECREASE_SPEED` | 33 (0x21) |  |
+| `MOD_INCREASE_HEALTH` | 34 (0x22) |  |
+| `MOD_INCREASE_ENERGY` | 35 (0x23) |  |
+| `MOD_SHAPESHIFT` | 36 (0x24) |  |
+| `EFFECT_IMMUNITY` | 37 (0x25) |  |
+| `STATE_IMMUNITY` | 38 (0x26) |  |
+| `SCHOOL_IMMUNITY` | 39 (0x27) |  |
+| `DAMAGE_IMMUNITY` | 40 (0x28) |  |
+| `DISPEL_IMMUNITY` | 41 (0x29) |  |
+| `PROC_TRIGGER_SPELL` | 42 (0x2A) |  |
+| `PROC_TRIGGER_DAMAGE` | 43 (0x2B) |  |
+| `TRACK_CREATURES` | 44 (0x2C) |  |
+| `TRACK_RESOURCES` | 45 (0x2D) |  |
+| `UNKNOWN46` | 46 (0x2E) |  |
+| `MOD_PARRY_PERCENT` | 47 (0x2F) |  |
+| `PERIODIC_TRIGGER_SPELL_FROM_CLIENT` | 48 (0x30) |  |
+| `MOD_DODGE_PERCENT` | 49 (0x31) |  |
+| `MOD_CRITICAL_HEALING_AMOUNT` | 50 (0x32) |  |
+| `MOD_BLOCK_PERCENT` | 51 (0x33) |  |
+| `MOD_WEAPON_CRIT_PERCENT` | 52 (0x34) |  |
+| `PERIODIC_LEECH` | 53 (0x35) |  |
+| `MOD_HIT_CHANCE` | 54 (0x36) |  |
+| `MOD_SPELL_HIT_CHANCE` | 55 (0x37) |  |
+| `TRANSFORM` | 56 (0x38) |  |
+| `MOD_SPELL_CRIT_CHANCE` | 57 (0x39) |  |
+| `MOD_INCREASE_SWIM_SPEED` | 58 (0x3A) |  |
+| `MOD_DAMAGE_DONE_CREATURE` | 59 (0x3B) |  |
+| `MOD_PACIFY_SILENCE` | 60 (0x3C) |  |
+| `MOD_SCALE` | 61 (0x3D) |  |
+| `PERIODIC_HEALTH_FUNNEL` | 62 (0x3E) |  |
+| `UNKNOWN63` | 63 (0x3F) |  |
+| `PERIODIC_MANA_LEECH` | 64 (0x40) |  |
+| `MOD_CASTING_SPEED_NOT_STACK` | 65 (0x41) |  |
+| `FEIGN_DEATH` | 66 (0x42) |  |
+| `MOD_DISARM` | 67 (0x43) |  |
+| `MOD_STALKED` | 68 (0x44) |  |
+| `SCHOOL_ABSORB` | 69 (0x45) |  |
+| `EXTRA_ATTACKS` | 70 (0x46) |  |
+| `MOD_SPELL_CRIT_CHANCE_SCHOOL` | 71 (0x47) |  |
+| `MOD_POWER_COST_SCHOOL_PCT` | 72 (0x48) |  |
+| `MOD_POWER_COST_SCHOOL` | 73 (0x49) |  |
+| `REFLECT_SPELLS_SCHOOL` | 74 (0x4A) |  |
+| `MOD_LANGUAGE` | 75 (0x4B) |  |
+| `FAR_SIGHT` | 76 (0x4C) |  |
+| `MECHANIC_IMMUNITY` | 77 (0x4D) |  |
+| `MOUNTED` | 78 (0x4E) |  |
+| `MOD_DAMAGE_PERCENT_DONE` | 79 (0x4F) |  |
+| `MOD_PERCENT_STAT` | 80 (0x50) |  |
+| `SPLIT_DAMAGE_PCT` | 81 (0x51) |  |
+| `WATER_BREATHING` | 82 (0x52) |  |
+| `MOD_BASE_RESISTANCE` | 83 (0x53) |  |
+| `MOD_REGEN` | 84 (0x54) |  |
+| `MOD_POWER_REGEN` | 85 (0x55) |  |
+| `CHANNEL_DEATH_ITEM` | 86 (0x56) |  |
+| `MOD_DAMAGE_PERCENT_TAKEN` | 87 (0x57) |  |
+| `MOD_HEALTH_REGEN_PERCENT` | 88 (0x58) |  |
+| `PERIODIC_DAMAGE_PERCENT` | 89 (0x59) |  |
+| `UNKNOWN90` | 90 (0x5A) |  |
+| `MOD_DETECT_RANGE` | 91 (0x5B) |  |
+| `PREVENTS_FLEEING` | 92 (0x5C) |  |
+| `MOD_UNATTACKABLE` | 93 (0x5D) |  |
+| `INTERRUPT_REGEN` | 94 (0x5E) |  |
+| `GHOST` | 95 (0x5F) |  |
+| `SPELL_MAGNET` | 96 (0x60) |  |
+| `MANA_SHIELD` | 97 (0x61) |  |
+| `MOD_SKILL_TALENT` | 98 (0x62) |  |
+| `MOD_ATTACK_POWER` | 99 (0x63) |  |
+| `AURAS_VISIBLE` | 100 (0x64) |  |
+| `MOD_RESISTANCE_PCT` | 101 (0x65) |  |
+| `MOD_MELEE_ATTACK_POWER_VERSUS` | 102 (0x66) |  |
+| `MOD_TOTAL_THREAT` | 103 (0x67) |  |
+| `WATER_WALK` | 104 (0x68) |  |
+| `FEATHER_FALL` | 105 (0x69) |  |
+| `HOVER` | 106 (0x6A) |  |
+| `ADD_FLAT_MODIFIER` | 107 (0x6B) |  |
+| `ADD_PCT_MODIFIER` | 108 (0x6C) |  |
+| `ADD_TARGET_TRIGGER` | 109 (0x6D) |  |
+| `MOD_POWER_REGEN_PERCENT` | 110 (0x6E) |  |
+| `ADD_CASTER_HIT_TRIGGER` | 111 (0x6F) |  |
+| `OVERRIDE_CLASS_SCRIPTS` | 112 (0x70) |  |
+| `MOD_RANGED_DAMAGE_TAKEN` | 113 (0x71) |  |
+| `MOD_RANGED_DAMAGE_TAKEN_PCT` | 114 (0x72) |  |
+| `MOD_HEALING` | 115 (0x73) |  |
+| `MOD_REGEN_DURING_COMBAT` | 116 (0x74) |  |
+| `MOD_MECHANIC_RESISTANCE` | 117 (0x75) |  |
+| `MOD_HEALING_PCT` | 118 (0x76) |  |
+| `UNKNOWN119` | 119 (0x77) |  |
+| `UNTRACKABLE` | 120 (0x78) |  |
+| `EMPATHY` | 121 (0x79) |  |
+| `MOD_OFFHAND_DAMAGE_PCT` | 122 (0x7A) |  |
+| `MOD_TARGET_RESISTANCE` | 123 (0x7B) |  |
+| `MOD_RANGED_ATTACK_POWER` | 124 (0x7C) |  |
+| `MOD_MELEE_DAMAGE_TAKEN` | 125 (0x7D) |  |
+| `MOD_MELEE_DAMAGE_TAKEN_PCT` | 126 (0x7E) |  |
+| `RANGED_ATTACK_POWER_ATTACKER_BONUS` | 127 (0x7F) |  |
+| `MOD_POSSESS_PET` | 128 (0x80) |  |
+| `MOD_SPEED_ALWAYS` | 129 (0x81) |  |
+| `MOD_MOUNTED_SPEED_ALWAYS` | 130 (0x82) |  |
+| `MOD_RANGED_ATTACK_POWER_VERSUS` | 131 (0x83) |  |
+| `MOD_INCREASE_ENERGY_PERCENT` | 132 (0x84) |  |
+| `MOD_INCREASE_HEALTH_PERCENT` | 133 (0x85) |  |
+| `MOD_MANA_REGEN_INTERRUPT` | 134 (0x86) |  |
+| `MOD_HEALING_DONE` | 135 (0x87) |  |
+| `MOD_HEALING_DONE_PERCENT` | 136 (0x88) |  |
+| `MOD_TOTAL_STAT_PERCENTAGE` | 137 (0x89) |  |
+| `MOD_MELEE_HASTE` | 138 (0x8A) |  |
+| `FORCE_REACTION` | 139 (0x8B) |  |
+| `MOD_RANGED_HASTE` | 140 (0x8C) |  |
+| `MOD_RANGED_AMMO_HASTE` | 141 (0x8D) |  |
+| `MOD_BASE_RESISTANCE_PCT` | 142 (0x8E) |  |
+| `MOD_RESISTANCE_EXCLUSIVE` | 143 (0x8F) |  |
+| `SAFE_FALL` | 144 (0x90) |  |
+| `MOD_PET_TALENT_POINTS` | 145 (0x91) |  |
+| `ALLOW_TAME_PET_TYPE` | 146 (0x92) |  |
+| `MECHANIC_IMMUNITY_MASK` | 147 (0x93) |  |
+| `RETAIN_COMBO_POINTS` | 148 (0x94) |  |
+| `REDUCE_PUSHBACK` | 149 (0x95) |  |
+| `MOD_SHIELD_BLOCKVALUE_PCT` | 150 (0x96) |  |
+| `TRACK_STEALTHED` | 151 (0x97) |  |
+| `MOD_DETECTED_RANGE` | 152 (0x98) |  |
+| `SPLIT_DAMAGE_FLAT` | 153 (0x99) |  |
+| `MOD_STEALTH_LEVEL` | 154 (0x9A) |  |
+| `MOD_WATER_BREATHING` | 155 (0x9B) |  |
+| `MOD_REPUTATION_GAIN` | 156 (0x9C) |  |
+| `PET_DAMAGE_MULTI` | 157 (0x9D) |  |
+| `MOD_SHIELD_BLOCKVALUE` | 158 (0x9E) |  |
+| `NO_PVP_CREDIT` | 159 (0x9F) |  |
+| `MOD_AOE_AVOIDANCE` | 160 (0xA0) |  |
+| `MOD_HEALTH_REGEN_IN_COMBAT` | 161 (0xA1) |  |
+| `POWER_BURN` | 162 (0xA2) |  |
+| `MOD_CRIT_DAMAGE_BONUS` | 163 (0xA3) |  |
+| `UNKNOWN164` | 164 (0xA4) |  |
+| `MELEE_ATTACK_POWER_ATTACKER_BONUS` | 165 (0xA5) |  |
+| `MOD_ATTACK_POWER_PCT` | 166 (0xA6) |  |
+| `MOD_RANGED_ATTACK_POWER_PCT` | 167 (0xA7) |  |
+| `MOD_DAMAGE_DONE_VERSUS` | 168 (0xA8) |  |
+| `MOD_CRIT_PERCENT_VERSUS` | 169 (0xA9) |  |
+| `DETECT_AMORE` | 170 (0xAA) |  |
+| `MOD_SPEED_NOT_STACK` | 171 (0xAB) |  |
+| `MOD_MOUNTED_SPEED_NOT_STACK` | 172 (0xAC) |  |
+| `UNKNOWN173` | 173 (0xAD) |  |
+| `MOD_SPELL_DAMAGE_OF_STAT_PERCENT` | 174 (0xAE) |  |
+| `MOD_SPELL_HEALING_OF_STAT_PERCENT` | 175 (0xAF) |  |
+| `SPIRIT_OF_REDEMPTION` | 176 (0xB0) |  |
+| `AOE_CHARM` | 177 (0xB1) |  |
+| `MOD_DEBUFF_RESISTANCE` | 178 (0xB2) |  |
+| `MOD_ATTACKER_SPELL_CRIT_CHANCE` | 179 (0xB3) |  |
+| `MOD_FLAT_SPELL_DAMAGE_VERSUS` | 180 (0xB4) |  |
+| `UNKNOWN181` | 181 (0xB5) |  |
+| `MOD_RESISTANCE_OF_STAT_PERCENT` | 182 (0xB6) |  |
+| `MOD_CRITICAL_THREAT` | 183 (0xB7) |  |
+| `MOD_ATTACKER_MELEE_HIT_CHANCE` | 184 (0xB8) |  |
+| `MOD_ATTACKER_RANGED_HIT_CHANCE` | 185 (0xB9) |  |
+| `MOD_ATTACKER_SPELL_HIT_CHANCE` | 186 (0xBA) |  |
+| `MOD_ATTACKER_MELEE_CRIT_CHANCE` | 187 (0xBB) |  |
+| `MOD_ATTACKER_RANGED_CRIT_CHANCE` | 188 (0xBC) |  |
+| `MOD_RATING` | 189 (0xBD) |  |
+| `MOD_FACTION_REPUTATION_GAIN` | 190 (0xBE) |  |
+| `USE_NORMAL_MOVEMENT_SPEED` | 191 (0xBF) |  |
+| `MOD_MELEE_RANGED_HASTE` | 192 (0xC0) |  |
+| `MELEE_SLOW` | 193 (0xC1) |  |
+| `MOD_TARGET_ABSORB_SCHOOL` | 194 (0xC2) |  |
+| `MOD_TARGET_ABILITY_ABSORB_SCHOOL` | 195 (0xC3) |  |
+| `MOD_COOLDOWN` | 196 (0xC4) |  |
+| `MOD_ATTACKER_SPELL_AND_WEAPON_CRIT_CHANCE` | 197 (0xC5) |  |
+| `UNKNOWN198` | 198 (0xC6) |  |
+| `MOD_INCREASES_SPELL_PCT_TO_HIT` | 199 (0xC7) |  |
+| `MOD_XP_PCT` | 200 (0xC8) |  |
+| `FLY` | 201 (0xC9) |  |
+| `IGNORE_COMBAT_RESULT` | 202 (0xCA) |  |
+| `MOD_ATTACKER_MELEE_CRIT_DAMAGE` | 203 (0xCB) |  |
+| `MOD_ATTACKER_RANGED_CRIT_DAMAGE` | 204 (0xCC) |  |
+| `MOD_SCHOOL_CRIT_DMG_TAKEN` | 205 (0xCD) |  |
+| `MOD_INCREASE_VEHICLE_FLIGHT_SPEED` | 206 (0xCE) |  |
+| `MOD_INCREASE_MOUNTED_FLIGHT_SPEED` | 207 (0xCF) |  |
+| `MOD_INCREASE_FLIGHT_SPEED` | 208 (0xD0) |  |
+| `MOD_MOUNTED_FLIGHT_SPEED_ALWAYS` | 209 (0xD1) |  |
+| `MOD_VEHICLE_SPEED_ALWAYS` | 210 (0xD2) |  |
+| `MOD_FLIGHT_SPEED_NOT_STACK` | 211 (0xD3) |  |
+| `MOD_RANGED_ATTACK_POWER_OF_STAT_PERCENT` | 212 (0xD4) |  |
+| `MOD_RAGE_FROM_DAMAGE_DEALT` | 213 (0xD5) |  |
+| `UNKNOWN214` | 214 (0xD6) |  |
+| `ARENA_PREPARATION` | 215 (0xD7) |  |
+| `HASTE_SPELLS` | 216 (0xD8) |  |
+| `MOD_MELEE_HASTE_2` | 217 (0xD9) |  |
+| `HASTE_RANGED` | 218 (0xDA) |  |
+| `MOD_MANA_REGEN_FROM_STAT` | 219 (0xDB) |  |
+| `MOD_RATING_FROM_STAT` | 220 (0xDC) |  |
+| `MOD_DETAUNT` | 221 (0xDD) |  |
+| `UNKNOWN222` | 222 (0xDE) |  |
+| `RAID_PROC_FROM_CHARGE` | 223 (0xDF) |  |
+| `UNKNOWN224` | 224 (0xE0) |  |
+| `RAID_PROC_FROM_CHARGE_WITH_VALUE` | 225 (0xE1) |  |
+| `PERIODIC_DUMMY` | 226 (0xE2) |  |
+| `PERIODIC_TRIGGER_SPELL_WITH_VALUE` | 227 (0xE3) |  |
+| `DETECT_STEALTH` | 228 (0xE4) |  |
+| `MOD_AOE_DAMAGE_AVOIDANCE` | 229 (0xE5) |  |
+| `UNKNOWN230` | 230 (0xE6) |  |
+| `PROC_TRIGGER_SPELL_WITH_VALUE` | 231 (0xE7) |  |
+| `MECHANIC_DURATION_MOD` | 232 (0xE8) |  |
+| `CHANGE_MODEL_FOR_ALL_HUMANOIDS` | 233 (0xE9) |  |
+| `MECHANIC_DURATION_MOD_NOT_STACK` | 234 (0xEA) |  |
+| `MOD_DISPEL_RESIST` | 235 (0xEB) |  |
+| `CONTROL_VEHICLE` | 236 (0xEC) |  |
+| `MOD_SPELL_DAMAGE_OF_ATTACK_POWER` | 237 (0xED) |  |
+| `MOD_SPELL_HEALING_OF_ATTACK_POWER` | 238 (0xEE) |  |
+| `MOD_SCALE_2` | 239 (0xEF) |  |
+| `MOD_EXPERTISE` | 240 (0xF0) |  |
+| `FORCE_MOVE_FORWARD` | 241 (0xF1) |  |
+| `MOD_SPELL_DAMAGE_FROM_HEALING` | 242 (0xF2) |  |
+| `MOD_FACTION` | 243 (0xF3) |  |
+| `COMPREHEND_LANGUAGE` | 244 (0xF4) |  |
+| `MOD_AURA_DURATION_BY_DISPEL` | 245 (0xF5) |  |
+| `MOD_AURA_DURATION_BY_DISPEL_NOT_STACK` | 246 (0xF6) |  |
+| `CLONE_CASTER` | 247 (0xF7) |  |
+| `MOD_COMBAT_RESULT_CHANCE` | 248 (0xF8) |  |
+| `CONVERT_RUNE` | 249 (0xF9) |  |
+| `MOD_INCREASE_HEALTH_2` | 250 (0xFA) |  |
+| `MOD_ENEMY_DODGE` | 251 (0xFB) |  |
+| `MOD_SPEED_SLOW_ALL` | 252 (0xFC) |  |
+| `MOD_BLOCK_CRIT_CHANCE` | 253 (0xFD) |  |
+| `MOD_DISARM_OFFHAND` | 254 (0xFE) |  |
+| `MOD_MECHANIC_DAMAGE_TAKEN_PERCENT` | 255 (0xFF) |  |
+| `NO_REAGENT_USE` | 256 (0x100) |  |
+| `MOD_TARGET_RESIST_BY_SPELL_CLASS` | 257 (0x101) |  |
+| `UNKNOWN258` | 258 (0x102) |  |
+| `MOD_HOT_PCT` | 259 (0x103) |  |
+| `SCREEN_EFFECT` | 260 (0x104) |  |
+| `PHASE` | 261 (0x105) |  |
+| `ABILITY_IGNORE_AURASTATE` | 262 (0x106) |  |
+| `ALLOW_ONLY_ABILITY` | 263 (0x107) |  |
+| `UNKNOWN264` | 264 (0x108) |  |
+| `UNKNOWN265` | 265 (0x109) |  |
+| `UNKNOWN266` | 266 (0x10A) |  |
+| `MOD_IMMUNE_AURA_APPLY_SCHOOL` | 267 (0x10B) |  |
+| `MOD_ATTACK_POWER_OF_STAT_PERCENT` | 268 (0x10C) |  |
+| `MOD_IGNORE_TARGET_RESIST` | 269 (0x10D) |  |
+| `MOD_ABILITY_IGNORE_TARGET_RESIST` | 270 (0x10E) |  |
+| `MOD_DAMAGE_FROM_CASTER` | 271 (0x10F) |  |
+| `IGNORE_MELEE_RESET` | 272 (0x110) |  |
+| `X_RAY` | 273 (0x111) |  |
+| `ABILITY_CONSUME_NO_AMMO` | 274 (0x112) |  |
+| `MOD_IGNORE_SHAPESHIFT` | 275 (0x113) |  |
+| `MOD_DAMAGE_DONE_FOR_MECHANIC` | 276 (0x114) |  |
+| `MOD_MAX_AFFECTED_TARGETS` | 277 (0x115) |  |
+| `MOD_DISARM_RANGED` | 278 (0x116) |  |
+| `INITIALIZE_IMAGES` | 279 (0x117) |  |
+| `MOD_ARMOR_PENETRATION_PCT` | 280 (0x118) |  |
+| `MOD_HONOR_GAIN_PCT` | 281 (0x119) |  |
+| `MOD_BASE_HEALTH_PCT` | 282 (0x11A) |  |
+| `MOD_HEALING_RECEIVED` | 283 (0x11B) |  |
+| `LINKED` | 284 (0x11C) |  |
+| `MOD_ATTACK_POWER_OF_ARMOR` | 285 (0x11D) |  |
+| `ABILITY_PERIODIC_CRIT` | 286 (0x11E) |  |
+| `DEFLECT_SPELLS` | 287 (0x11F) |  |
+| `IGNORE_HIT_DIRECTION` | 288 (0x120) |  |
+| `PREVENT_DURABILITY_LOSS` | 289 (0x121) |  |
+| `MOD_CRIT_PCT` | 290 (0x122) |  |
+| `MOD_XP_QUEST_PCT` | 291 (0x123) |  |
+| `OPEN_STABLE` | 292 (0x124) |  |
+| `OVERRIDE_SPELLS` | 293 (0x125) |  |
+| `PREVENT_REGENERATE_POWER` | 294 (0x126) |  |
+| `UNKNOWN295` | 295 (0x127) |  |
+| `SET_VEHICLE_ID` | 296 (0x128) |  |
+| `BLOCK_SPELL_FAMILY` | 297 (0x129) |  |
+| `STRANGULATE` | 298 (0x12A) |  |
+| `UNKNOWN299` | 299 (0x12B) |  |
+| `SHARE_DAMAGE_PCT` | 300 (0x12C) |  |
+| `SCHOOL_HEAL_ABSORB` | 301 (0x12D) |  |
+| `UNKNOWN302` | 302 (0x12E) |  |
+| `MOD_DAMAGE_DONE_VERSUS_AURASTATE` | 303 (0x12F) |  |
+| `MOD_FAKE_INEBRIATE` | 304 (0x130) |  |
+| `MOD_MINIMUM_SPEED` | 305 (0x131) |  |
+| `UNKNOWN306` | 306 (0x132) |  |
+| `HEAL_ABSORB_TEST` | 307 (0x133) |  |
+| `MOD_CRIT_CHANCE_FOR_CASTER` | 308 (0x134) |  |
+| `UNKNOWN309` | 309 (0x135) |  |
+| `MOD_CREATURE_AOE_DAMAGE_AVOIDANCE` | 310 (0x136) |  |
+| `UNKNOWN311` | 311 (0x137) |  |
+| `UNKNOWN312` | 312 (0x138) |  |
+| `UNKNOWN313` | 313 (0x139) |  |
+| `PREVENT_RESURRECTION` | 314 (0x13A) |  |
+| `UNDERWATER_WALKING` | 315 (0x13B) |  |
+| `PERIODIC_HASTE` | 316 (0x13C) |  |
 
 Used in:
 

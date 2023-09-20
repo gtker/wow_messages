@@ -40,46 +40,46 @@ struct Mail {
 ```
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x00 | 4 / Little | u32 | message_id |  |  |
-| 0x04 | 1 / - | [MailType](mailtype.md) | message_type |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x00 | 4 / Little | u32 | message_id |  |
+| 0x04 | 1 / - | [MailType](mailtype.md) | message_type |  |
 
 If message_type is equal to `NORMAL`:
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x05 | 8 / Little | [Guid](../types/packed-guid.md) | sender |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x05 | 8 / Little | [Guid](../types/packed-guid.md) | sender |  |
 
 Else If message_type is equal to `CREATURE` **or** 
 is equal to `GAMEOBJECT`:
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x0D | 4 / Little | u32 | sender_id |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x0D | 4 / Little | u32 | sender_id |  |
 
 Else If message_type is equal to `AUCTION`:
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x11 | 4 / Little | u32 | auction_id |  |  |
-| 0x15 | - / - | CString | subject |  |  |
-| - | 4 / Little | u32 | item_text_id |  |  |
-| - | 4 / Little | u32 | unknown1 |  | cmangos/vmangos/mangoszero: set to 0 |
-| - | 4 / Little | u32 | stationery |  | cmangos/vmangos/mangoszero: stationery (Stationery.dbc) |
-| - | 4 / Little | u32 | item |  |  |
-| - | 4 / Little | u32 | item_enchant_id |  |  |
-| - | 4 / Little | u32 | item_random_property_id |  |  |
-| - | 4 / Little | u32 | item_suffix_factor |  |  |
-| - | 1 / - | u8 | item_stack_size |  |  |
-| - | 4 / Little | u32 | item_spell_charges |  |  |
-| - | 4 / Little | u32 | max_durability |  |  |
-| - | 4 / Little | u32 | durability |  |  |
-| - | 4 / Little | Gold | money |  |  |
-| - | 4 / Little | u32 | cash_on_delivery_amount |  |  |
-| - | 4 / Little | u32 | checked_timestamp |  | cmangos/vmangos/mangoszero: All have a comment with 'flags' but send the timestamp from the item. |
-| - | 4 / Little | f32 | expiration_time |  |  |
-| - | 4 / Little | u32 | mail_template_id |  | cmangos/vmangos/mangoszero: mail template (MailTemplate.dbc) |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x11 | 4 / Little | u32 | auction_id |  |
+| 0x15 | - / - | CString | subject |  |
+| - | 4 / Little | u32 | item_text_id |  |
+| - | 4 / Little | u32 | unknown1 | cmangos/vmangos/mangoszero: set to 0 |
+| - | 4 / Little | u32 | stationery | cmangos/vmangos/mangoszero: stationery (Stationery.dbc) |
+| - | 4 / Little | u32 | item |  |
+| - | 4 / Little | u32 | item_enchant_id |  |
+| - | 4 / Little | u32 | item_random_property_id |  |
+| - | 4 / Little | u32 | item_suffix_factor |  |
+| - | 1 / - | u8 | item_stack_size |  |
+| - | 4 / Little | u32 | item_spell_charges |  |
+| - | 4 / Little | u32 | max_durability |  |
+| - | 4 / Little | u32 | durability |  |
+| - | 4 / Little | Gold | money |  |
+| - | 4 / Little | u32 | cash_on_delivery_amount |  |
+| - | 4 / Little | u32 | checked_timestamp | cmangos/vmangos/mangoszero: All have a comment with 'flags' but send the timestamp from the item. |
+| - | 4 / Little | f32 | expiration_time |  |
+| - | 4 / Little | u32 | mail_template_id | cmangos/vmangos/mangoszero: mail template (MailTemplate.dbc) |
 
 
 Used in:
@@ -123,47 +123,47 @@ struct Mail {
 ```
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x00 | 2 / Little | u16 | size |  |  |
-| 0x02 | 4 / Little | u32 | message_id |  |  |
-| 0x06 | 1 / - | [MailType](mailtype.md) | message_type |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x00 | 2 / Little | u16 | size |  |
+| 0x02 | 4 / Little | u32 | message_id |  |
+| 0x06 | 1 / - | [MailType](mailtype.md) | message_type |  |
 
 If message_type is equal to `NORMAL`:
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x07 | 8 / Little | [Guid](../types/packed-guid.md) | sender |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x07 | 8 / Little | [Guid](../types/packed-guid.md) | sender |  |
 
 Else If message_type is equal to `CREATURE` **or** 
 is equal to `GAMEOBJECT`:
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x0F | 4 / Little | u32 | sender_id |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x0F | 4 / Little | u32 | sender_id |  |
 
 Else If message_type is equal to `AUCTION`:
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x13 | 4 / Little | u32 | auction_id |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x13 | 4 / Little | u32 | auction_id |  |
 
 Else If message_type is equal to `ITEM`:
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x17 | 4 / Little | u32 | item |  |  |
-| 0x1B | 4 / Little | Gold | cash_on_delivery |  |  |
-| 0x1F | 4 / Little | u32 | item_text_id |  |  |
-| 0x23 | 4 / Little | u32 | unknown |  |  |
-| 0x27 | 4 / Little | u32 | stationery |  |  |
-| 0x2B | 4 / Little | Gold | money |  |  |
-| 0x2F | 4 / Little | u32 | flags |  |  |
-| 0x33 | 4 / Little | f32 | expiration_time |  |  |
-| 0x37 | 4 / Little | u32 | mail_template_id |  | cmangos/vmangos/mangoszero: mail template (MailTemplate.dbc) |
-| 0x3B | - / - | CString | subject |  |  |
-| - | 1 / - | u8 | amount_of_items |  |  |
-| - | ? / - | [MailListItem](maillistitem.md)[amount_of_items] | items |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x17 | 4 / Little | u32 | item |  |
+| 0x1B | 4 / Little | Gold | cash_on_delivery |  |
+| 0x1F | 4 / Little | u32 | item_text_id |  |
+| 0x23 | 4 / Little | u32 | unknown |  |
+| 0x27 | 4 / Little | u32 | stationery |  |
+| 0x2B | 4 / Little | Gold | money |  |
+| 0x2F | 4 / Little | u32 | flags |  |
+| 0x33 | 4 / Little | f32 | expiration_time |  |
+| 0x37 | 4 / Little | u32 | mail_template_id | cmangos/vmangos/mangoszero: mail template (MailTemplate.dbc) |
+| 0x3B | - / - | CString | subject |  |
+| - | 1 / - | u8 | amount_of_items |  |
+| - | ? / - | [MailListItem](maillistitem.md)[amount_of_items] | items |  |
 
 
 Used in:
@@ -207,47 +207,47 @@ struct Mail {
 ```
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x00 | 2 / Little | u16 | size |  |  |
-| 0x02 | 4 / Little | u32 | message_id |  |  |
-| 0x06 | 1 / - | [MailType](mailtype.md) | message_type |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x00 | 2 / Little | u16 | size |  |
+| 0x02 | 4 / Little | u32 | message_id |  |
+| 0x06 | 1 / - | [MailType](mailtype.md) | message_type |  |
 
 If message_type is equal to `NORMAL`:
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x07 | 8 / Little | [Guid](../types/packed-guid.md) | sender |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x07 | 8 / Little | [Guid](../types/packed-guid.md) | sender |  |
 
 Else If message_type is equal to `CREATURE` **or** 
 is equal to `GAMEOBJECT`:
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x0F | 4 / Little | u32 | sender_id |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x0F | 4 / Little | u32 | sender_id |  |
 
 Else If message_type is equal to `AUCTION`:
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x13 | 4 / Little | u32 | auction_id |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x13 | 4 / Little | u32 | auction_id |  |
 
 Else If message_type is equal to `ITEM`:
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x17 | 4 / Little | u32 | item |  |  |
-| 0x1B | 4 / Little | Gold | cash_on_delivery |  |  |
-| 0x1F | 4 / Little | u32 | unknown |  |  |
-| 0x23 | 4 / Little | u32 | stationery |  |  |
-| 0x27 | 4 / Little | Gold | money |  |  |
-| 0x2B | 4 / Little | u32 | flags |  |  |
-| 0x2F | 4 / Little | f32 | expiration_time |  |  |
-| 0x33 | 4 / Little | u32 | mail_template_id |  | cmangos/vmangos/mangoszero: mail template (MailTemplate.dbc) |
-| 0x37 | - / - | CString | subject |  |  |
-| - | - / - | CString | message |  |  |
-| - | 1 / - | u8 | amount_of_items |  |  |
-| - | ? / - | [MailListItem](maillistitem.md)[amount_of_items] | items |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x17 | 4 / Little | u32 | item |  |
+| 0x1B | 4 / Little | Gold | cash_on_delivery |  |
+| 0x1F | 4 / Little | u32 | unknown |  |
+| 0x23 | 4 / Little | u32 | stationery |  |
+| 0x27 | 4 / Little | Gold | money |  |
+| 0x2B | 4 / Little | u32 | flags |  |
+| 0x2F | 4 / Little | f32 | expiration_time |  |
+| 0x33 | 4 / Little | u32 | mail_template_id | cmangos/vmangos/mangoszero: mail template (MailTemplate.dbc) |
+| 0x37 | - / - | CString | subject |  |
+| - | - / - | CString | message |  |
+| - | 1 / - | u8 | amount_of_items |  |
+| - | ? / - | [MailListItem](maillistitem.md)[amount_of_items] | items |  |
 
 
 Used in:

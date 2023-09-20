@@ -14,11 +14,11 @@ struct AuctionEnchantment {
 ```
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x00 | 4 / Little | u32 | enchant_id |  |  |
-| 0x04 | 4 / Little | u32 | enchant_duration |  |  |
-| 0x08 | 4 / Little | u32 | enchant_charges |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x00 | 4 / Little | u32 | enchant_id |  |
+| 0x04 | 4 / Little | u32 | enchant_duration |  |
+| 0x08 | 4 / Little | u32 | enchant_charges |  |
 
 
 Used in:

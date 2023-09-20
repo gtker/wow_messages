@@ -13,10 +13,10 @@ struct PreviewTalent {
 ```
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x00 | 4 / - | [Talent](talent.md) | talent |  |  |
-| 0x04 | 4 / Little | u32 | rank |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x00 | 4 / - | [Talent](talent.md) | talent |  |
+| 0x04 | 4 / Little | u32 | rank |  |
 
 
 Used in:

@@ -46,41 +46,41 @@ flag SplineFlag : u32 {
 ### Type
 The basic type is `u32`, a 4 byte (32 bit) little endian integer.
 ### Enumerators
-| Enumerator | Value  | Description | Comment |
-| --------- | -------- | ----------- | ------- |
-| `NONE` | 0 (0x00) |  |  |
-| `DONE` | 1 (0x01) |  |  |
-| `FALLING` | 2 (0x02) |  | vmangos: Affects elevation computation |
-| `UNKNOWN3` | 4 (0x04) |  |  |
-| `UNKNOWN4` | 8 (0x08) |  |  |
-| `UNKNOWN5` | 16 (0x10) |  |  |
-| `UNKNOWN6` | 32 (0x20) |  |  |
-| `UNKNOWN7` | 64 (0x40) |  |  |
-| `UNKNOWN8` | 128 (0x80) |  |  |
-| `RUN_MODE` | 256 (0x100) |  |  |
-| `FLYING` | 512 (0x200) |  | vmangos: Smooth movement(Catmullrom interpolation mode), flying animation |
-| `NO_SPLINE` | 1024 (0x400) |  |  |
-| `UNKNOWN12` | 2048 (0x800) |  |  |
-| `UNKNOWN13` | 4096 (0x1000) |  |  |
-| `UNKNOWN14` | 8192 (0x2000) |  |  |
-| `UNKNOWN15` | 16384 (0x4000) |  |  |
-| `UNKNOWN16` | 32768 (0x8000) |  |  |
-| `FINAL_POINT` | 65536 (0x10000) |  |  |
-| `FINAL_TARGET` | 131072 (0x20000) |  |  |
-| `FINAL_ANGLE` | 262144 (0x40000) |  |  |
-| `UNKNOWN19` | 524288 (0x80000) |  | vmangos: exists, but unknown what it does |
-| `CYCLIC` | 1048576 (0x100000) |  | vmangos: Movement by cycled spline |
-| `ENTER_CYCLE` | 2097152 (0x200000) |  | vmangos: Everytimes appears with cyclic flag in monster move packet, erases first spline vertex after first cycle done |
-| `FROZEN` | 4194304 (0x400000) |  | vmangos: Will never arrive |
-| `UNKNOWN23` | 8388608 (0x800000) |  |  |
-| `UNKNOWN24` | 16777216 (0x1000000) |  |  |
-| `UNKNOWN25` | 33554432 (0x2000000) |  | vmangos: exists, but unknown what it does |
-| `UNKNOWN26` | 67108864 (0x4000000) |  |  |
-| `UNKNOWN27` | 134217728 (0x8000000) |  |  |
-| `UNKNOWN28` | 268435456 (0x10000000) |  |  |
-| `UNKNOWN29` | 536870912 (0x20000000) |  |  |
-| `UNKNOWN30` | 1073741824 (0x40000000) |  |  |
-| `UNKNOWN31` | 2147483648 (0x80000000) |  |  |
+| Enumerator | Value  | Comment |
+| --------- | -------- | ------- |
+| `NONE` | 0 (0x00) |  |
+| `DONE` | 1 (0x01) |  |
+| `FALLING` | 2 (0x02) | vmangos: Affects elevation computation |
+| `UNKNOWN3` | 4 (0x04) |  |
+| `UNKNOWN4` | 8 (0x08) |  |
+| `UNKNOWN5` | 16 (0x10) |  |
+| `UNKNOWN6` | 32 (0x20) |  |
+| `UNKNOWN7` | 64 (0x40) |  |
+| `UNKNOWN8` | 128 (0x80) |  |
+| `RUN_MODE` | 256 (0x100) |  |
+| `FLYING` | 512 (0x200) | vmangos: Smooth movement(Catmullrom interpolation mode), flying animation |
+| `NO_SPLINE` | 1024 (0x400) |  |
+| `UNKNOWN12` | 2048 (0x800) |  |
+| `UNKNOWN13` | 4096 (0x1000) |  |
+| `UNKNOWN14` | 8192 (0x2000) |  |
+| `UNKNOWN15` | 16384 (0x4000) |  |
+| `UNKNOWN16` | 32768 (0x8000) |  |
+| `FINAL_POINT` | 65536 (0x10000) |  |
+| `FINAL_TARGET` | 131072 (0x20000) |  |
+| `FINAL_ANGLE` | 262144 (0x40000) |  |
+| `UNKNOWN19` | 524288 (0x80000) | vmangos: exists, but unknown what it does |
+| `CYCLIC` | 1048576 (0x100000) | vmangos: Movement by cycled spline |
+| `ENTER_CYCLE` | 2097152 (0x200000) | vmangos: Everytimes appears with cyclic flag in monster move packet, erases first spline vertex after first cycle done |
+| `FROZEN` | 4194304 (0x400000) | vmangos: Will never arrive |
+| `UNKNOWN23` | 8388608 (0x800000) |  |
+| `UNKNOWN24` | 16777216 (0x1000000) |  |
+| `UNKNOWN25` | 33554432 (0x2000000) | vmangos: exists, but unknown what it does |
+| `UNKNOWN26` | 67108864 (0x4000000) |  |
+| `UNKNOWN27` | 134217728 (0x8000000) |  |
+| `UNKNOWN28` | 268435456 (0x10000000) |  |
+| `UNKNOWN29` | 536870912 (0x20000000) |  |
+| `UNKNOWN30` | 1073741824 (0x40000000) |  |
+| `UNKNOWN31` | 2147483648 (0x80000000) |  |
 
 Used in:
 * [MonsterMove](monstermove.md)
@@ -134,41 +134,41 @@ flag SplineFlag : u32 {
 ### Type
 The basic type is `u32`, a 4 byte (32 bit) little endian integer.
 ### Enumerators
-| Enumerator | Value  | Description | Comment |
-| --------- | -------- | ----------- | ------- |
-| `NONE` | 0 (0x00) |  |  |
-| `DONE` | 1 (0x01) |  |  |
-| `FALLING` | 2 (0x02) |  | vmangos: Affects elevation computation |
-| `UNKNOWN3` | 4 (0x04) |  |  |
-| `UNKNOWN4` | 8 (0x08) |  |  |
-| `UNKNOWN5` | 16 (0x10) |  |  |
-| `UNKNOWN6` | 32 (0x20) |  |  |
-| `UNKNOWN7` | 64 (0x40) |  |  |
-| `UNKNOWN8` | 128 (0x80) |  |  |
-| `RUNMODE` | 256 (0x100) |  |  |
-| `FLYING` | 512 (0x200) |  | vmangos: Smooth movement(Catmullrom interpolation mode), flying animation |
-| `NO_SPLINE` | 1024 (0x400) |  |  |
-| `PARABOLIC` | 2048 (0x800) |  |  |
-| `UNKNOWN13` | 4096 (0x1000) |  |  |
-| `UNKNOWN14` | 8192 (0x2000) |  |  |
-| `UNKNOWN15` | 16384 (0x4000) |  |  |
-| `UNKNOWN16` | 32768 (0x8000) |  |  |
-| `FINAL_POINT` | 65536 (0x10000) |  |  |
-| `FINAL_TARGET` | 131072 (0x20000) |  |  |
-| `FINAL_ANGLE` | 262144 (0x40000) |  |  |
-| `UNKNOWN19` | 524288 (0x80000) |  | vmangos: exists, but unknown what it does |
-| `CYCLIC` | 1048576 (0x100000) |  | vmangos: Movement by cycled spline |
-| `ENTER_CYCLE` | 2097152 (0x200000) |  | vmangos: Everytimes appears with cyclic flag in monster move packet, erases first spline vertex after first cycle done |
-| `FROZEN` | 4194304 (0x400000) |  | vmangos: Will never arrive |
-| `UNKNOWN23` | 8388608 (0x800000) |  |  |
-| `UNKNOWN24` | 16777216 (0x1000000) |  |  |
-| `UNKNOWN25` | 33554432 (0x2000000) |  | vmangos: exists, but unknown what it does |
-| `UNKNOWN26` | 67108864 (0x4000000) |  |  |
-| `UNKNOWN27` | 134217728 (0x8000000) |  |  |
-| `UNKNOWN28` | 268435456 (0x10000000) |  |  |
-| `UNKNOWN29` | 536870912 (0x20000000) |  |  |
-| `UNKNOWN30` | 1073741824 (0x40000000) |  |  |
-| `UNKNOWN31` | 2147483648 (0x80000000) |  |  |
+| Enumerator | Value  | Comment |
+| --------- | -------- | ------- |
+| `NONE` | 0 (0x00) |  |
+| `DONE` | 1 (0x01) |  |
+| `FALLING` | 2 (0x02) | vmangos: Affects elevation computation |
+| `UNKNOWN3` | 4 (0x04) |  |
+| `UNKNOWN4` | 8 (0x08) |  |
+| `UNKNOWN5` | 16 (0x10) |  |
+| `UNKNOWN6` | 32 (0x20) |  |
+| `UNKNOWN7` | 64 (0x40) |  |
+| `UNKNOWN8` | 128 (0x80) |  |
+| `RUNMODE` | 256 (0x100) |  |
+| `FLYING` | 512 (0x200) | vmangos: Smooth movement(Catmullrom interpolation mode), flying animation |
+| `NO_SPLINE` | 1024 (0x400) |  |
+| `PARABOLIC` | 2048 (0x800) |  |
+| `UNKNOWN13` | 4096 (0x1000) |  |
+| `UNKNOWN14` | 8192 (0x2000) |  |
+| `UNKNOWN15` | 16384 (0x4000) |  |
+| `UNKNOWN16` | 32768 (0x8000) |  |
+| `FINAL_POINT` | 65536 (0x10000) |  |
+| `FINAL_TARGET` | 131072 (0x20000) |  |
+| `FINAL_ANGLE` | 262144 (0x40000) |  |
+| `UNKNOWN19` | 524288 (0x80000) | vmangos: exists, but unknown what it does |
+| `CYCLIC` | 1048576 (0x100000) | vmangos: Movement by cycled spline |
+| `ENTER_CYCLE` | 2097152 (0x200000) | vmangos: Everytimes appears with cyclic flag in monster move packet, erases first spline vertex after first cycle done |
+| `FROZEN` | 4194304 (0x400000) | vmangos: Will never arrive |
+| `UNKNOWN23` | 8388608 (0x800000) |  |
+| `UNKNOWN24` | 16777216 (0x1000000) |  |
+| `UNKNOWN25` | 33554432 (0x2000000) | vmangos: exists, but unknown what it does |
+| `UNKNOWN26` | 67108864 (0x4000000) |  |
+| `UNKNOWN27` | 134217728 (0x8000000) |  |
+| `UNKNOWN28` | 268435456 (0x10000000) |  |
+| `UNKNOWN29` | 536870912 (0x20000000) |  |
+| `UNKNOWN30` | 1073741824 (0x40000000) |  |
+| `UNKNOWN31` | 2147483648 (0x80000000) |  |
 
 Used in:
 * [MovementBlock](movementblock.md)

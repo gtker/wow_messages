@@ -204,199 +204,199 @@ enum Faction : u16 {
 ### Type
 The basic type is `u16`, a 2 byte (16 bit) little endian integer.
 ### Enumerators
-| Enumerator | Value  | Description | Comment | Display |
-| --------- | -------- | ----------- | ------- | ------- |
-| `NONE` | 0 (0x00) |  |  |  |
-| `PLAYER_HUMAN` | 1 (0x01) |  |  | PLAYER, Human |
-| `PLAYER_ORC` | 2 (0x02) |  |  | PLAYER, Orc |
-| `PLAYER_DWARF` | 3 (0x03) |  |  | PLAYER, Dwarf |
-| `PLAYER_NIGHT_ELF` | 4 (0x04) |  |  | PLAYER, Night Elf |
-| `PLAYER_UNDEAD` | 5 (0x05) |  |  | PLAYER, Undead |
-| `PLAYER_TAUREN` | 6 (0x06) |  |  | PLAYER, Tauren |
-| `CREATURE` | 7 (0x07) |  |  |  |
-| `PLAYER_GNOME` | 8 (0x08) |  |  | PLAYER, Gnome |
-| `PLAYER_TROLL` | 9 (0x09) |  |  | PLAYER, Troll |
-| `MONSTER` | 14 (0x0E) |  |  |  |
-| `DEFIAS_BROTHERHOOD` | 15 (0x0F) |  |  |  |
-| `GNOLL_RIVERPAW` | 16 (0x10) |  |  | Gnoll - Riverpaw |
-| `GNOLL_REDRIDGE` | 17 (0x11) |  |  | Gnoll - Redridge |
-| `GNOLL_SHADOWHIDE` | 18 (0x12) |  |  | Gnoll - Shadowhide |
-| `MURLOC` | 19 (0x13) |  |  |  |
-| `UNDEAD_SCOURGE` | 20 (0x14) |  |  | Undead, Scourge |
-| `BOOTY_BAY` | 21 (0x15) |  |  |  |
-| `BEAST_SPIDER` | 22 (0x16) |  |  | Beast - Spider |
-| `BEAST_BOAR` | 23 (0x17) |  |  | Beast - Boar |
-| `WORGEN` | 24 (0x18) |  |  |  |
-| `KOBOLD` | 25 (0x19) |  |  |  |
-| `TROLL_BLOODSCALP` | 26 (0x1A) |  |  | Troll, Bloodscalp |
-| `TROLL_SKULLSPLITTER` | 27 (0x1B) |  |  | Troll, Skullsplitter |
-| `PREY` | 28 (0x1C) |  |  |  |
-| `BEAST_WOLF` | 29 (0x1D) |  |  | Beast - Wolf |
-| `DEFIAS_BROTHERHOOD_TRAITOR` | 30 (0x1E) |  |  |  |
-| `FRIENDLY` | 31 (0x1F) |  |  |  |
-| `TROGG` | 32 (0x20) |  |  |  |
-| `TROLL_FROSTMANE` | 33 (0x21) |  |  | Troll, Frostmane |
-| `ORC_BLACKROCK` | 34 (0x22) |  |  | Orc, Blackrock |
-| `VILLIAN` | 35 (0x23) |  |  |  |
-| `VICTIM` | 36 (0x24) |  |  |  |
-| `BEAST_BEAR` | 37 (0x25) |  |  | Beast - Bear |
-| `OGRE` | 38 (0x26) |  |  |  |
-| `KURZENS_MERCENARIES` | 39 (0x27) |  |  | Kurzen's Mercenaries |
-| `ESCORTEE` | 40 (0x28) |  |  |  |
-| `VENTURE_COMPANY` | 41 (0x29) |  |  |  |
-| `BEAST_RAPTOR` | 42 (0x2A) |  |  | Beast - Raptor |
-| `BASILISK` | 43 (0x2B) |  |  |  |
-| `DRAGONFLIGHT_GREEN` | 44 (0x2C) |  |  | Dragonflight, Green |
-| `LOST_ONES` | 45 (0x2D) |  |  |  |
-| `BLACKSMITHING_ARMORSMITHING` | 46 (0x2E) |  |  | Blacksmithing - Armorsmithing |
-| `IRONFORGE` | 47 (0x2F) |  |  |  |
-| `DARK_IRON_DWARVES` | 48 (0x30) |  |  |  |
-| `HUMAN_NIGHT_WATCH` | 49 (0x31) |  |  | Human, Night Watch |
-| `DRAGONFLIGHT_RED` | 50 (0x32) |  |  | Dragonflight, Red |
-| `GNOLL_MOSSHIDE` | 51 (0x33) |  |  | Gnoll - Mosshide |
-| `ORC_DRAGONMAW` | 52 (0x34) |  |  | Orc, Dragonmaw |
-| `GNOME_LEPER` | 53 (0x35) |  |  | Gnome - Leper |
-| `GNOMEREGAN_EXILES` | 54 (0x36) |  |  |  |
-| `LEOPARD` | 55 (0x37) |  |  |  |
-| `SCARLET_CRUSADE` | 56 (0x38) |  |  |  |
-| `GNOLL_ROTHIDE` | 57 (0x39) |  |  | Gnoll - Rothide |
-| `BEAST_GORILLA` | 58 (0x3A) |  |  | Beast - Gorilla |
-| `THORIUM_BROTHERHOOD` | 59 (0x3B) |  |  |  |
-| `NAGA` | 60 (0x3C) |  |  |  |
-| `DALARAN` | 61 (0x3D) |  |  |  |
-| `FORLORN_SPIRIT` | 62 (0x3E) |  |  |  |
-| `DARKHOWL` | 63 (0x3F) |  |  |  |
-| `GRELL` | 64 (0x40) |  |  |  |
-| `FURBOLG` | 65 (0x41) |  |  |  |
-| `HORDE_GENERIC` | 66 (0x42) |  |  |  |
-| `HORDE` | 67 (0x43) |  |  |  |
-| `UNDERCITY` | 68 (0x44) |  |  |  |
-| `DARNASSUS` | 69 (0x45) |  |  |  |
-| `SYNDICATE` | 70 (0x46) |  |  |  |
-| `HILLSBRAD_MILITIA` | 71 (0x47) |  |  |  |
-| `STORMWIND` | 72 (0x48) |  |  |  |
-| `DEMON` | 73 (0x49) |  |  |  |
-| `ELEMENTAL` | 74 (0x4A) |  |  |  |
-| `SPIRIT` | 75 (0x4B) |  |  |  |
-| `ORGRIMMAR` | 76 (0x4C) |  |  |  |
-| `TREASURE` | 77 (0x4D) |  |  |  |
-| `GNOLL_MUDSNOUT` | 78 (0x4E) |  |  | Gnoll - Mudsnout |
-| `HILLSBRAD_SOUTHSHORE_MAYOR` | 79 (0x4F) |  |  | HIllsbrad, Southshore Mayor |
-| `DRAGONFLIGHT_BLACK` | 80 (0x50) |  |  | Dragonflight, Black |
-| `THUNDER_BLUFF` | 81 (0x51) |  |  |  |
-| `TROLL_WITHERBARK` | 82 (0x52) |  |  | Troll, Witherbark |
-| `LEATHERWORKING_ELEMENTAL` | 83 (0x53) |  |  | Leatherworking - Elemental |
-| `QUILBOAR_RAZORMANE` | 84 (0x54) |  |  | Quilboar, Razormane |
-| `QUILBOAR_BRISTLEBACK` | 85 (0x55) |  |  | Quilboar, Bristleback |
-| `LEATHERWORKING_DRAGONSCALE` | 86 (0x56) |  |  | Leatherworking - Dragonscale |
-| `BLOODSAIL_BUCCANEERS` | 87 (0x57) |  |  |  |
-| `BLACKFATHOM` | 88 (0x58) |  |  |  |
-| `MAKRURA` | 89 (0x59) |  |  |  |
-| `CENTAUR_KOLKAR` | 90 (0x5A) |  |  | Centaur, Kolkar |
-| `CENTAUR_GALAK` | 91 (0x5B) |  |  | Centaur, Galak |
-| `GELKIS_CLAN_CENTAUR` | 92 (0x5C) |  |  |  |
-| `MAGRAM_CLAN_CENTAUR` | 93 (0x5D) |  |  |  |
-| `MARAUDINE` | 94 (0x5E) |  |  |  |
-| `THERAMORE` | 108 (0x6C) |  |  |  |
-| `QUILBOAR_RAZORFEN` | 109 (0x6D) |  |  | Quilboar, Razorfen |
-| `QUILBOAR_RAZORMANE_2` | 110 (0x6E) |  |  | Quilboar, Razormane 2 |
-| `QUILBOAR_DEATHSHEAD` | 111 (0x6F) |  |  | Quilboar, Deathshead |
-| `ENEMY` | 128 (0x80) |  |  |  |
-| `AMBIENT` | 148 (0x94) |  |  |  |
-| `NETHERGARDE_CARAVAN` | 168 (0xA8) |  |  |  |
-| `STEAMWHEEDLE_CARTEL` | 169 (0xA9) |  |  |  |
-| `ALLIANCE_GENERIC` | 189 (0xBD) |  |  |  |
-| `NETHERGARDE` | 209 (0xD1) |  |  |  |
-| `WAILING_CAVERNS` | 229 (0xE5) |  |  |  |
-| `SILITHID` | 249 (0xF9) |  |  |  |
-| `SILVERMOON_REMNANT` | 269 (0x10D) |  |  |  |
-| `ZANDALAR_TRIBE` | 270 (0x10E) |  |  |  |
-| `BLACKSMITHING_WEAPONSMITHING` | 289 (0x121) |  |  | Blacksmithing - Weaponsmithing |
-| `SCORPID` | 309 (0x135) |  |  |  |
-| `BEAST_BAT` | 310 (0x136) |  |  | Beast - Bat |
-| `TITAN` | 311 (0x137) |  |  |  |
-| `TASKMASTER_FIZZULE` | 329 (0x149) |  |  |  |
-| `RAVENHOLDT` | 349 (0x15D) |  |  |  |
-| `GADGETZAN` | 369 (0x171) |  |  |  |
-| `GNOMEREGAN_BUG` | 389 (0x185) |  |  |  |
-| `HARPY` | 409 (0x199) |  |  |  |
-| `BURNING_BLADE` | 429 (0x1AD) |  |  |  |
-| `SHADOWSILK_POACHER` | 449 (0x1C1) |  |  |  |
-| `SEARING_SPIDER` | 450 (0x1C2) |  |  |  |
-| `ALLIANCE` | 469 (0x1D5) |  |  |  |
-| `RATCHET` | 470 (0x1D6) |  |  |  |
-| `WILDHAMMER_CLAN` | 471 (0x1D7) |  |  |  |
-| `GOBLIN_DARK_IRON_BAR_PATRON` | 489 (0x1E9) |  |  | Goblin, Dark Iron Bar Patron |
-| `THE_LEAGUE_OF_ARATHOR` | 509 (0x1FD) |  |  |  |
-| `THE_DEFILERS` | 510 (0x1FE) |  |  |  |
-| `GIANT` | 511 (0x1FF) |  |  |  |
-| `ARGENT_DAWN` | 529 (0x211) |  |  |  |
-| `DARKSPEAR_TROLLS` | 530 (0x212) |  |  |  |
-| `DRAGONFLIGHT_BRONZE` | 531 (0x213) |  |  | Dragonflight, Bronze |
-| `DRAGONFLIGHT_BLUE` | 532 (0x214) |  |  | Dragonflight, Blue |
-| `LEATHERWORKING_TRIBAL` | 549 (0x225) |  |  | Leatherworking - Tribal |
-| `ENGINEERING_GOBLIN` | 550 (0x226) |  |  | Engineering - Goblin |
-| `ENGINEERING_GNOME` | 551 (0x227) |  |  | Engineering - Gnome |
-| `BLACKSMITHING_HAMMERSMITHING` | 569 (0x239) |  |  | Blacksmithing - Hammersmithing |
-| `BLACKSMITHING_AXESMITHING` | 570 (0x23A) |  |  | Blacksmithing - Axesmithing |
-| `BLACKSMITHING_SWORDSMITHING` | 571 (0x23B) |  |  | Blacksmithing - Swordsmithing |
-| `TROLL_VILEBRANCH` | 572 (0x23C) |  |  | Troll, Vilebranch |
-| `SOUTHSEA_FREEBOOTERS` | 573 (0x23D) |  |  |  |
-| `CAER_DARROW` | 574 (0x23E) |  |  |  |
-| `FURBOLG_UNCORRUPTED` | 575 (0x23F) |  |  | Furbolg, Uncorrupted |
-| `TIMBERMAW_HOLD` | 576 (0x240) |  |  |  |
-| `EVERLOOK` | 577 (0x241) |  |  |  |
-| `WINTERSABER_TRAINERS` | 589 (0x24D) |  |  |  |
-| `CENARION_CIRCLE` | 609 (0x261) |  |  |  |
-| `SHATTERSPEAR_TROLLS` | 629 (0x275) |  |  |  |
-| `RAVASAUR_TRAINERS` | 630 (0x276) |  |  |  |
-| `MAJORDOMO_EXECUTUS` | 649 (0x289) |  |  |  |
-| `BEAST_CARRION_BIRD` | 669 (0x29D) |  |  | Beast - Carrion Bird |
-| `BEAST_CAT` | 670 (0x29E) |  |  | Beast - Cat |
-| `BEAST_CRAB` | 671 (0x29F) |  |  | Beast - Crab |
-| `BEAST_CROCILISK` | 672 (0x2A0) |  |  | Beast - Crocilisk |
-| `BEAST_HYENA` | 673 (0x2A1) |  |  | Beast - Hyena |
-| `BEAST_OWL` | 674 (0x2A2) |  |  | Beast - Owl |
-| `BEAST_SCORPID` | 675 (0x2A3) |  |  | Beast - Scorpid |
-| `BEAST_TALLSTRIDER` | 676 (0x2A4) |  |  | Beast - Tallstrider |
-| `BEAST_TURTLE` | 677 (0x2A5) |  |  | Beast - Turtle |
-| `BEAST_WIND_SERPENT` | 678 (0x2A6) |  |  | Beast - Wind Serpent |
-| `TRAINING_DUMMY` | 679 (0x2A7) |  |  |  |
-| `DRAGONFLIGHT_BLACK_BAIT` | 689 (0x2B1) |  |  | Dragonflight, Black - Bait |
-| `BATTLEGROUND_NEUTRAL` | 709 (0x2C5) |  |  |  |
-| `FROSTWOLF_CLAN` | 729 (0x2D9) |  |  |  |
-| `STORMPIKE_GUARD` | 730 (0x2DA) |  |  |  |
-| `HYDRAXIAN_WATERLORDS` | 749 (0x2ED) |  |  |  |
-| `SULFURON_FIRELORDS` | 750 (0x2EE) |  |  |  |
-| `GIZLOCKS_DUMMY` | 769 (0x301) |  |  | Gizlock's Dummy |
-| `GIZLOCKS_CHARM` | 770 (0x302) |  |  | Gizlock's Charm |
-| `GIZLOCK` | 771 (0x303) |  |  |  |
-| `MORO_GAI` | 789 (0x315) |  |  | Moro'gai |
-| `SPIRIT_GUIDE_ALLIANCE` | 790 (0x316) |  |  | Spirit Guide - Alliance |
-| `SHEN_DRALAR` | 809 (0x329) |  |  | Shen'dralar |
-| `OGRE_CAPTAIN_KROMCRUSH` | 829 (0x33D) |  |  | Ogre (Captain Kromcrush) |
-| `SPIRIT_GUIDE_HORDE` | 849 (0x351) |  |  | Spirit Guide - Horde |
-| `JAEDENAR` | 869 (0x365) |  |  |  |
-| `WARSONG_OUTRIDERS` | 889 (0x379) |  |  |  |
-| `SILVERWING_SENTINELS` | 890 (0x37A) |  |  |  |
-| `ALLIANCE_FORCES` | 891 (0x37B) |  |  |  |
-| `HORDE_FORCES` | 892 (0x37C) |  |  |  |
-| `REVANTUSK_TROLLS` | 893 (0x37D) |  |  |  |
-| `DARKMOON_FAIRE` | 909 (0x38D) |  |  |  |
-| `BROOD_OF_NOZDORMU` | 910 (0x38E) |  |  |  |
-| `MIGHT_OF_KALIMDOR` | 912 (0x390) |  |  |  |
-| `ARMIES_OF_C_THUN` | 915 (0x393) |  |  | Armies of C'Thun |
-| `SILITHID_ATTACKERS` | 916 (0x394) |  |  |  |
-| `THE_IRONFORGE_BRIGADE` | 917 (0x395) |  |  |  |
-| `RC_ENEMIES` | 918 (0x396) |  |  |  |
-| `RC_OBJECTS` | 919 (0x397) |  |  |  |
-| `RED` | 920 (0x398) |  |  |  |
-| `BLUE` | 921 (0x399) |  |  |  |
-| `SCOURGE_INVADERS` | 928 (0x3A0) |  |  |  |
-| `TEST_FACTION_NOT_A_REAL_FACTION` | 931 (0x3A3) |  |  | Test Faction (not a real faction) |
-| `TOWOW_FLAG` | 950 (0x3B6) |  |  | ToWoW - Flag |
-| `TOWOW_FLAG_TRIGGER_ALLIANCE_DND` | 951 (0x3B7) |  |  | ToWoW - Flag Trigger Alliance (DND) |
-| `TOWOW_FLAG_TRIGGER_HORDE_DND` | 954 (0x3BA) |  |  | ToWoW - Flag Trigger Horde (DND) |
+| Enumerator | Value  | Comment | Display |
+| --------- | -------- | ------- | ------- |
+| `NONE` | 0 (0x00) |  |  |
+| `PLAYER_HUMAN` | 1 (0x01) |  | PLAYER, Human |
+| `PLAYER_ORC` | 2 (0x02) |  | PLAYER, Orc |
+| `PLAYER_DWARF` | 3 (0x03) |  | PLAYER, Dwarf |
+| `PLAYER_NIGHT_ELF` | 4 (0x04) |  | PLAYER, Night Elf |
+| `PLAYER_UNDEAD` | 5 (0x05) |  | PLAYER, Undead |
+| `PLAYER_TAUREN` | 6 (0x06) |  | PLAYER, Tauren |
+| `CREATURE` | 7 (0x07) |  |  |
+| `PLAYER_GNOME` | 8 (0x08) |  | PLAYER, Gnome |
+| `PLAYER_TROLL` | 9 (0x09) |  | PLAYER, Troll |
+| `MONSTER` | 14 (0x0E) |  |  |
+| `DEFIAS_BROTHERHOOD` | 15 (0x0F) |  |  |
+| `GNOLL_RIVERPAW` | 16 (0x10) |  | Gnoll - Riverpaw |
+| `GNOLL_REDRIDGE` | 17 (0x11) |  | Gnoll - Redridge |
+| `GNOLL_SHADOWHIDE` | 18 (0x12) |  | Gnoll - Shadowhide |
+| `MURLOC` | 19 (0x13) |  |  |
+| `UNDEAD_SCOURGE` | 20 (0x14) |  | Undead, Scourge |
+| `BOOTY_BAY` | 21 (0x15) |  |  |
+| `BEAST_SPIDER` | 22 (0x16) |  | Beast - Spider |
+| `BEAST_BOAR` | 23 (0x17) |  | Beast - Boar |
+| `WORGEN` | 24 (0x18) |  |  |
+| `KOBOLD` | 25 (0x19) |  |  |
+| `TROLL_BLOODSCALP` | 26 (0x1A) |  | Troll, Bloodscalp |
+| `TROLL_SKULLSPLITTER` | 27 (0x1B) |  | Troll, Skullsplitter |
+| `PREY` | 28 (0x1C) |  |  |
+| `BEAST_WOLF` | 29 (0x1D) |  | Beast - Wolf |
+| `DEFIAS_BROTHERHOOD_TRAITOR` | 30 (0x1E) |  |  |
+| `FRIENDLY` | 31 (0x1F) |  |  |
+| `TROGG` | 32 (0x20) |  |  |
+| `TROLL_FROSTMANE` | 33 (0x21) |  | Troll, Frostmane |
+| `ORC_BLACKROCK` | 34 (0x22) |  | Orc, Blackrock |
+| `VILLIAN` | 35 (0x23) |  |  |
+| `VICTIM` | 36 (0x24) |  |  |
+| `BEAST_BEAR` | 37 (0x25) |  | Beast - Bear |
+| `OGRE` | 38 (0x26) |  |  |
+| `KURZENS_MERCENARIES` | 39 (0x27) |  | Kurzen's Mercenaries |
+| `ESCORTEE` | 40 (0x28) |  |  |
+| `VENTURE_COMPANY` | 41 (0x29) |  |  |
+| `BEAST_RAPTOR` | 42 (0x2A) |  | Beast - Raptor |
+| `BASILISK` | 43 (0x2B) |  |  |
+| `DRAGONFLIGHT_GREEN` | 44 (0x2C) |  | Dragonflight, Green |
+| `LOST_ONES` | 45 (0x2D) |  |  |
+| `BLACKSMITHING_ARMORSMITHING` | 46 (0x2E) |  | Blacksmithing - Armorsmithing |
+| `IRONFORGE` | 47 (0x2F) |  |  |
+| `DARK_IRON_DWARVES` | 48 (0x30) |  |  |
+| `HUMAN_NIGHT_WATCH` | 49 (0x31) |  | Human, Night Watch |
+| `DRAGONFLIGHT_RED` | 50 (0x32) |  | Dragonflight, Red |
+| `GNOLL_MOSSHIDE` | 51 (0x33) |  | Gnoll - Mosshide |
+| `ORC_DRAGONMAW` | 52 (0x34) |  | Orc, Dragonmaw |
+| `GNOME_LEPER` | 53 (0x35) |  | Gnome - Leper |
+| `GNOMEREGAN_EXILES` | 54 (0x36) |  |  |
+| `LEOPARD` | 55 (0x37) |  |  |
+| `SCARLET_CRUSADE` | 56 (0x38) |  |  |
+| `GNOLL_ROTHIDE` | 57 (0x39) |  | Gnoll - Rothide |
+| `BEAST_GORILLA` | 58 (0x3A) |  | Beast - Gorilla |
+| `THORIUM_BROTHERHOOD` | 59 (0x3B) |  |  |
+| `NAGA` | 60 (0x3C) |  |  |
+| `DALARAN` | 61 (0x3D) |  |  |
+| `FORLORN_SPIRIT` | 62 (0x3E) |  |  |
+| `DARKHOWL` | 63 (0x3F) |  |  |
+| `GRELL` | 64 (0x40) |  |  |
+| `FURBOLG` | 65 (0x41) |  |  |
+| `HORDE_GENERIC` | 66 (0x42) |  |  |
+| `HORDE` | 67 (0x43) |  |  |
+| `UNDERCITY` | 68 (0x44) |  |  |
+| `DARNASSUS` | 69 (0x45) |  |  |
+| `SYNDICATE` | 70 (0x46) |  |  |
+| `HILLSBRAD_MILITIA` | 71 (0x47) |  |  |
+| `STORMWIND` | 72 (0x48) |  |  |
+| `DEMON` | 73 (0x49) |  |  |
+| `ELEMENTAL` | 74 (0x4A) |  |  |
+| `SPIRIT` | 75 (0x4B) |  |  |
+| `ORGRIMMAR` | 76 (0x4C) |  |  |
+| `TREASURE` | 77 (0x4D) |  |  |
+| `GNOLL_MUDSNOUT` | 78 (0x4E) |  | Gnoll - Mudsnout |
+| `HILLSBRAD_SOUTHSHORE_MAYOR` | 79 (0x4F) |  | HIllsbrad, Southshore Mayor |
+| `DRAGONFLIGHT_BLACK` | 80 (0x50) |  | Dragonflight, Black |
+| `THUNDER_BLUFF` | 81 (0x51) |  |  |
+| `TROLL_WITHERBARK` | 82 (0x52) |  | Troll, Witherbark |
+| `LEATHERWORKING_ELEMENTAL` | 83 (0x53) |  | Leatherworking - Elemental |
+| `QUILBOAR_RAZORMANE` | 84 (0x54) |  | Quilboar, Razormane |
+| `QUILBOAR_BRISTLEBACK` | 85 (0x55) |  | Quilboar, Bristleback |
+| `LEATHERWORKING_DRAGONSCALE` | 86 (0x56) |  | Leatherworking - Dragonscale |
+| `BLOODSAIL_BUCCANEERS` | 87 (0x57) |  |  |
+| `BLACKFATHOM` | 88 (0x58) |  |  |
+| `MAKRURA` | 89 (0x59) |  |  |
+| `CENTAUR_KOLKAR` | 90 (0x5A) |  | Centaur, Kolkar |
+| `CENTAUR_GALAK` | 91 (0x5B) |  | Centaur, Galak |
+| `GELKIS_CLAN_CENTAUR` | 92 (0x5C) |  |  |
+| `MAGRAM_CLAN_CENTAUR` | 93 (0x5D) |  |  |
+| `MARAUDINE` | 94 (0x5E) |  |  |
+| `THERAMORE` | 108 (0x6C) |  |  |
+| `QUILBOAR_RAZORFEN` | 109 (0x6D) |  | Quilboar, Razorfen |
+| `QUILBOAR_RAZORMANE_2` | 110 (0x6E) |  | Quilboar, Razormane 2 |
+| `QUILBOAR_DEATHSHEAD` | 111 (0x6F) |  | Quilboar, Deathshead |
+| `ENEMY` | 128 (0x80) |  |  |
+| `AMBIENT` | 148 (0x94) |  |  |
+| `NETHERGARDE_CARAVAN` | 168 (0xA8) |  |  |
+| `STEAMWHEEDLE_CARTEL` | 169 (0xA9) |  |  |
+| `ALLIANCE_GENERIC` | 189 (0xBD) |  |  |
+| `NETHERGARDE` | 209 (0xD1) |  |  |
+| `WAILING_CAVERNS` | 229 (0xE5) |  |  |
+| `SILITHID` | 249 (0xF9) |  |  |
+| `SILVERMOON_REMNANT` | 269 (0x10D) |  |  |
+| `ZANDALAR_TRIBE` | 270 (0x10E) |  |  |
+| `BLACKSMITHING_WEAPONSMITHING` | 289 (0x121) |  | Blacksmithing - Weaponsmithing |
+| `SCORPID` | 309 (0x135) |  |  |
+| `BEAST_BAT` | 310 (0x136) |  | Beast - Bat |
+| `TITAN` | 311 (0x137) |  |  |
+| `TASKMASTER_FIZZULE` | 329 (0x149) |  |  |
+| `RAVENHOLDT` | 349 (0x15D) |  |  |
+| `GADGETZAN` | 369 (0x171) |  |  |
+| `GNOMEREGAN_BUG` | 389 (0x185) |  |  |
+| `HARPY` | 409 (0x199) |  |  |
+| `BURNING_BLADE` | 429 (0x1AD) |  |  |
+| `SHADOWSILK_POACHER` | 449 (0x1C1) |  |  |
+| `SEARING_SPIDER` | 450 (0x1C2) |  |  |
+| `ALLIANCE` | 469 (0x1D5) |  |  |
+| `RATCHET` | 470 (0x1D6) |  |  |
+| `WILDHAMMER_CLAN` | 471 (0x1D7) |  |  |
+| `GOBLIN_DARK_IRON_BAR_PATRON` | 489 (0x1E9) |  | Goblin, Dark Iron Bar Patron |
+| `THE_LEAGUE_OF_ARATHOR` | 509 (0x1FD) |  |  |
+| `THE_DEFILERS` | 510 (0x1FE) |  |  |
+| `GIANT` | 511 (0x1FF) |  |  |
+| `ARGENT_DAWN` | 529 (0x211) |  |  |
+| `DARKSPEAR_TROLLS` | 530 (0x212) |  |  |
+| `DRAGONFLIGHT_BRONZE` | 531 (0x213) |  | Dragonflight, Bronze |
+| `DRAGONFLIGHT_BLUE` | 532 (0x214) |  | Dragonflight, Blue |
+| `LEATHERWORKING_TRIBAL` | 549 (0x225) |  | Leatherworking - Tribal |
+| `ENGINEERING_GOBLIN` | 550 (0x226) |  | Engineering - Goblin |
+| `ENGINEERING_GNOME` | 551 (0x227) |  | Engineering - Gnome |
+| `BLACKSMITHING_HAMMERSMITHING` | 569 (0x239) |  | Blacksmithing - Hammersmithing |
+| `BLACKSMITHING_AXESMITHING` | 570 (0x23A) |  | Blacksmithing - Axesmithing |
+| `BLACKSMITHING_SWORDSMITHING` | 571 (0x23B) |  | Blacksmithing - Swordsmithing |
+| `TROLL_VILEBRANCH` | 572 (0x23C) |  | Troll, Vilebranch |
+| `SOUTHSEA_FREEBOOTERS` | 573 (0x23D) |  |  |
+| `CAER_DARROW` | 574 (0x23E) |  |  |
+| `FURBOLG_UNCORRUPTED` | 575 (0x23F) |  | Furbolg, Uncorrupted |
+| `TIMBERMAW_HOLD` | 576 (0x240) |  |  |
+| `EVERLOOK` | 577 (0x241) |  |  |
+| `WINTERSABER_TRAINERS` | 589 (0x24D) |  |  |
+| `CENARION_CIRCLE` | 609 (0x261) |  |  |
+| `SHATTERSPEAR_TROLLS` | 629 (0x275) |  |  |
+| `RAVASAUR_TRAINERS` | 630 (0x276) |  |  |
+| `MAJORDOMO_EXECUTUS` | 649 (0x289) |  |  |
+| `BEAST_CARRION_BIRD` | 669 (0x29D) |  | Beast - Carrion Bird |
+| `BEAST_CAT` | 670 (0x29E) |  | Beast - Cat |
+| `BEAST_CRAB` | 671 (0x29F) |  | Beast - Crab |
+| `BEAST_CROCILISK` | 672 (0x2A0) |  | Beast - Crocilisk |
+| `BEAST_HYENA` | 673 (0x2A1) |  | Beast - Hyena |
+| `BEAST_OWL` | 674 (0x2A2) |  | Beast - Owl |
+| `BEAST_SCORPID` | 675 (0x2A3) |  | Beast - Scorpid |
+| `BEAST_TALLSTRIDER` | 676 (0x2A4) |  | Beast - Tallstrider |
+| `BEAST_TURTLE` | 677 (0x2A5) |  | Beast - Turtle |
+| `BEAST_WIND_SERPENT` | 678 (0x2A6) |  | Beast - Wind Serpent |
+| `TRAINING_DUMMY` | 679 (0x2A7) |  |  |
+| `DRAGONFLIGHT_BLACK_BAIT` | 689 (0x2B1) |  | Dragonflight, Black - Bait |
+| `BATTLEGROUND_NEUTRAL` | 709 (0x2C5) |  |  |
+| `FROSTWOLF_CLAN` | 729 (0x2D9) |  |  |
+| `STORMPIKE_GUARD` | 730 (0x2DA) |  |  |
+| `HYDRAXIAN_WATERLORDS` | 749 (0x2ED) |  |  |
+| `SULFURON_FIRELORDS` | 750 (0x2EE) |  |  |
+| `GIZLOCKS_DUMMY` | 769 (0x301) |  | Gizlock's Dummy |
+| `GIZLOCKS_CHARM` | 770 (0x302) |  | Gizlock's Charm |
+| `GIZLOCK` | 771 (0x303) |  |  |
+| `MORO_GAI` | 789 (0x315) |  | Moro'gai |
+| `SPIRIT_GUIDE_ALLIANCE` | 790 (0x316) |  | Spirit Guide - Alliance |
+| `SHEN_DRALAR` | 809 (0x329) |  | Shen'dralar |
+| `OGRE_CAPTAIN_KROMCRUSH` | 829 (0x33D) |  | Ogre (Captain Kromcrush) |
+| `SPIRIT_GUIDE_HORDE` | 849 (0x351) |  | Spirit Guide - Horde |
+| `JAEDENAR` | 869 (0x365) |  |  |
+| `WARSONG_OUTRIDERS` | 889 (0x379) |  |  |
+| `SILVERWING_SENTINELS` | 890 (0x37A) |  |  |
+| `ALLIANCE_FORCES` | 891 (0x37B) |  |  |
+| `HORDE_FORCES` | 892 (0x37C) |  |  |
+| `REVANTUSK_TROLLS` | 893 (0x37D) |  |  |
+| `DARKMOON_FAIRE` | 909 (0x38D) |  |  |
+| `BROOD_OF_NOZDORMU` | 910 (0x38E) |  |  |
+| `MIGHT_OF_KALIMDOR` | 912 (0x390) |  |  |
+| `ARMIES_OF_C_THUN` | 915 (0x393) |  | Armies of C'Thun |
+| `SILITHID_ATTACKERS` | 916 (0x394) |  |  |
+| `THE_IRONFORGE_BRIGADE` | 917 (0x395) |  |  |
+| `RC_ENEMIES` | 918 (0x396) |  |  |
+| `RC_OBJECTS` | 919 (0x397) |  |  |
+| `RED` | 920 (0x398) |  |  |
+| `BLUE` | 921 (0x399) |  |  |
+| `SCOURGE_INVADERS` | 928 (0x3A0) |  |  |
+| `TEST_FACTION_NOT_A_REAL_FACTION` | 931 (0x3A3) |  | Test Faction (not a real faction) |
+| `TOWOW_FLAG` | 950 (0x3B6) |  | ToWoW - Flag |
+| `TOWOW_FLAG_TRIGGER_ALLIANCE_DND` | 951 (0x3B7) |  | ToWoW - Flag Trigger Alliance (DND) |
+| `TOWOW_FLAG_TRIGGER_HORDE_DND` | 954 (0x3BA) |  | ToWoW - Flag Trigger Horde (DND) |
 
 Used in:
 * [CMSG_SET_FACTION_ATWAR](cmsg_set_faction_atwar.md)
@@ -744,331 +744,331 @@ enum Faction : u16 {
 ### Type
 The basic type is `u16`, a 2 byte (16 bit) little endian integer.
 ### Enumerators
-| Enumerator | Value  | Description | Comment | Display |
-| --------- | -------- | ----------- | ------- | ------- |
-| `NONE` | 0 (0x00) |  |  |  |
-| `PLAYER_HUMAN` | 1 (0x01) |  |  | PLAYER, Human |
-| `PLAYER_ORC` | 2 (0x02) |  |  | PLAYER, Orc |
-| `PLAYER_DWARF` | 3 (0x03) |  |  | PLAYER, Dwarf |
-| `PLAYER_NIGHT_ELF` | 4 (0x04) |  |  | PLAYER, Night Elf |
-| `PLAYER_UNDEAD` | 5 (0x05) |  |  | PLAYER, Undead |
-| `PLAYER_TAUREN` | 6 (0x06) |  |  | PLAYER, Tauren |
-| `CREATURE` | 7 (0x07) |  |  |  |
-| `PLAYER_GNOME` | 8 (0x08) |  |  | PLAYER, Gnome |
-| `PLAYER_TROLL` | 9 (0x09) |  |  | PLAYER, Troll |
-| `MONSTER` | 14 (0x0E) |  |  |  |
-| `DEFIAS_BROTHERHOOD` | 15 (0x0F) |  |  |  |
-| `GNOLL_RIVERPAW` | 16 (0x10) |  |  | Gnoll - Riverpaw |
-| `GNOLL_REDRIDGE` | 17 (0x11) |  |  | Gnoll - Redridge |
-| `GNOLL_SHADOWHIDE` | 18 (0x12) |  |  | Gnoll - Shadowhide |
-| `MURLOC` | 19 (0x13) |  |  |  |
-| `UNDEAD_SCOURGE` | 20 (0x14) |  |  | Undead, Scourge |
-| `BOOTY_BAY` | 21 (0x15) |  |  |  |
-| `BEAST_SPIDER` | 22 (0x16) |  |  | Beast - Spider |
-| `BEAST_BOAR` | 23 (0x17) |  |  | Beast - Boar |
-| `WORGEN` | 24 (0x18) |  |  |  |
-| `KOBOLD` | 25 (0x19) |  |  |  |
-| `TROLL_BLOODSCALP` | 26 (0x1A) |  |  | Troll, Bloodscalp |
-| `TROLL_SKULLSPLITTER` | 27 (0x1B) |  |  | Troll, Skullsplitter |
-| `PREY` | 28 (0x1C) |  |  |  |
-| `BEAST_WOLF` | 29 (0x1D) |  |  | Beast - Wolf |
-| `DEFIAS_BROTHERHOOD_TRAITOR` | 30 (0x1E) |  |  |  |
-| `FRIENDLY` | 31 (0x1F) |  |  |  |
-| `TROGG` | 32 (0x20) |  |  |  |
-| `TROLL_FROSTMANE` | 33 (0x21) |  |  | Troll, Frostmane |
-| `ORC_BLACKROCK` | 34 (0x22) |  |  | Orc, Blackrock |
-| `VILLIAN` | 35 (0x23) |  |  |  |
-| `VICTIM` | 36 (0x24) |  |  |  |
-| `BEAST_BEAR` | 37 (0x25) |  |  | Beast - Bear |
-| `OGRE` | 38 (0x26) |  |  |  |
-| `KURZENS_MERCENARIES` | 39 (0x27) |  |  | Kurzen's Mercenaries |
-| `ESCORTEE` | 40 (0x28) |  |  |  |
-| `VENTURE_COMPANY` | 41 (0x29) |  |  |  |
-| `BEAST_RAPTOR` | 42 (0x2A) |  |  | Beast - Raptor |
-| `BASILISK` | 43 (0x2B) |  |  |  |
-| `DRAGONFLIGHT_GREEN` | 44 (0x2C) |  |  | Dragonflight, Green |
-| `LOST_ONES` | 45 (0x2D) |  |  |  |
-| `BLACKSMITHING_ARMORSMITHING` | 46 (0x2E) |  |  | Blacksmithing - Armorsmithing |
-| `IRONFORGE` | 47 (0x2F) |  |  |  |
-| `DARK_IRON_DWARVES` | 48 (0x30) |  |  |  |
-| `HUMAN_NIGHT_WATCH` | 49 (0x31) |  |  | Human, Night Watch |
-| `DRAGONFLIGHT_RED` | 50 (0x32) |  |  | Dragonflight, Red |
-| `GNOLL_MOSSHIDE` | 51 (0x33) |  |  | Gnoll - Mosshide |
-| `ORC_DRAGONMAW` | 52 (0x34) |  |  | Orc, Dragonmaw |
-| `GNOME_LEPER` | 53 (0x35) |  |  | Gnome - Leper |
-| `GNOMEREGAN_EXILES` | 54 (0x36) |  |  |  |
-| `LEOPARD` | 55 (0x37) |  |  |  |
-| `SCARLET_CRUSADE` | 56 (0x38) |  |  |  |
-| `GNOLL_ROTHIDE` | 57 (0x39) |  |  | Gnoll - Rothide |
-| `BEAST_GORILLA` | 58 (0x3A) |  |  | Beast - Gorilla |
-| `THORIUM_BROTHERHOOD` | 59 (0x3B) |  |  |  |
-| `NAGA` | 60 (0x3C) |  |  |  |
-| `DALARAN` | 61 (0x3D) |  |  |  |
-| `FORLORN_SPIRIT` | 62 (0x3E) |  |  |  |
-| `DARKHOWL` | 63 (0x3F) |  |  |  |
-| `GRELL` | 64 (0x40) |  |  |  |
-| `FURBOLG` | 65 (0x41) |  |  |  |
-| `HORDE_GENERIC` | 66 (0x42) |  |  |  |
-| `HORDE` | 67 (0x43) |  |  |  |
-| `UNDERCITY` | 68 (0x44) |  |  |  |
-| `DARNASSUS` | 69 (0x45) |  |  |  |
-| `SYNDICATE` | 70 (0x46) |  |  |  |
-| `HILLSBRAD_MILITIA` | 71 (0x47) |  |  |  |
-| `STORMWIND` | 72 (0x48) |  |  |  |
-| `DEMON` | 73 (0x49) |  |  |  |
-| `ELEMENTAL` | 74 (0x4A) |  |  |  |
-| `SPIRIT` | 75 (0x4B) |  |  |  |
-| `ORGRIMMAR` | 76 (0x4C) |  |  |  |
-| `TREASURE` | 77 (0x4D) |  |  |  |
-| `GNOLL_MUDSNOUT` | 78 (0x4E) |  |  | Gnoll - Mudsnout |
-| `HILLSBRAD_SOUTHSHORE_MAYOR` | 79 (0x4F) |  |  | HIllsbrad, Southshore Mayor |
-| `DRAGONFLIGHT_BLACK` | 80 (0x50) |  |  | Dragonflight, Black |
-| `THUNDER_BLUFF` | 81 (0x51) |  |  |  |
-| `TROLL_WITHERBARK` | 82 (0x52) |  |  | Troll, Witherbark |
-| `LEATHERWORKING_ELEMENTAL` | 83 (0x53) |  |  | Leatherworking - Elemental |
-| `QUILBOAR_RAZORMANE` | 84 (0x54) |  |  | Quilboar, Razormane |
-| `QUILBOAR_BRISTLEBACK` | 85 (0x55) |  |  | Quilboar, Bristleback |
-| `LEATHERWORKING_DRAGONSCALE` | 86 (0x56) |  |  | Leatherworking - Dragonscale |
-| `BLOODSAIL_BUCCANEERS` | 87 (0x57) |  |  |  |
-| `BLACKFATHOM` | 88 (0x58) |  |  |  |
-| `MAKRURA` | 89 (0x59) |  |  |  |
-| `CENTAUR_KOLKAR` | 90 (0x5A) |  |  | Centaur, Kolkar |
-| `CENTAUR_GALAK` | 91 (0x5B) |  |  | Centaur, Galak |
-| `GELKIS_CLAN_CENTAUR` | 92 (0x5C) |  |  |  |
-| `MAGRAM_CLAN_CENTAUR` | 93 (0x5D) |  |  |  |
-| `MARAUDINE` | 94 (0x5E) |  |  |  |
-| `THERAMORE` | 108 (0x6C) |  |  |  |
-| `QUILBOAR_RAZORFEN` | 109 (0x6D) |  |  | Quilboar, Razorfen |
-| `QUILBOAR_RAZORMANE_2` | 110 (0x6E) |  |  | Quilboar, Razormane 2 |
-| `QUILBOAR_DEATHSHEAD` | 111 (0x6F) |  |  | Quilboar, Deathshead |
-| `ENEMY` | 128 (0x80) |  |  |  |
-| `AMBIENT` | 148 (0x94) |  |  |  |
-| `NETHERGARDE_CARAVAN` | 168 (0xA8) |  |  |  |
-| `STEAMWHEEDLE_CARTEL` | 169 (0xA9) |  |  |  |
-| `ALLIANCE_GENERIC` | 189 (0xBD) |  |  |  |
-| `NETHERGARDE` | 209 (0xD1) |  |  |  |
-| `WAILING_CAVERNS` | 229 (0xE5) |  |  |  |
-| `SILITHID` | 249 (0xF9) |  |  |  |
-| `SILVERMOON_REMNANT` | 269 (0x10D) |  |  |  |
-| `ZANDALAR_TRIBE` | 270 (0x10E) |  |  |  |
-| `BLACKSMITHING_WEAPONSMITHING` | 289 (0x121) |  |  | Blacksmithing - Weaponsmithing |
-| `SCORPID` | 309 (0x135) |  |  |  |
-| `BEAST_BAT` | 310 (0x136) |  |  | Beast - Bat |
-| `TITAN` | 311 (0x137) |  |  |  |
-| `TASKMASTER_FIZZULE` | 329 (0x149) |  |  |  |
-| `RAVENHOLDT` | 349 (0x15D) |  |  |  |
-| `GADGETZAN` | 369 (0x171) |  |  |  |
-| `GNOMEREGAN_BUG` | 389 (0x185) |  |  |  |
-| `HARPY` | 409 (0x199) |  |  |  |
-| `BURNING_BLADE` | 429 (0x1AD) |  |  |  |
-| `SHADOWSILK_POACHER` | 449 (0x1C1) |  |  |  |
-| `SEARING_SPIDER` | 450 (0x1C2) |  |  |  |
-| `ALLIANCE` | 469 (0x1D5) |  |  |  |
-| `RATCHET` | 470 (0x1D6) |  |  |  |
-| `WILDHAMMER_CLAN` | 471 (0x1D7) |  |  |  |
-| `GOBLIN_DARK_IRON_BAR_PATRON` | 489 (0x1E9) |  |  | Goblin, Dark Iron Bar Patron |
-| `THE_LEAGUE_OF_ARATHOR` | 509 (0x1FD) |  |  |  |
-| `THE_DEFILERS` | 510 (0x1FE) |  |  |  |
-| `GIANT` | 511 (0x1FF) |  |  |  |
-| `ARGENT_DAWN` | 529 (0x211) |  |  |  |
-| `DARKSPEAR_TROLLS` | 530 (0x212) |  |  |  |
-| `DRAGONFLIGHT_BRONZE` | 531 (0x213) |  |  | Dragonflight, Bronze |
-| `DRAGONFLIGHT_BLUE` | 532 (0x214) |  |  | Dragonflight, Blue |
-| `LEATHERWORKING_TRIBAL` | 549 (0x225) |  |  | Leatherworking - Tribal |
-| `ENGINEERING_GOBLIN` | 550 (0x226) |  |  | Engineering - Goblin |
-| `ENGINEERING_GNOME` | 551 (0x227) |  |  | Engineering - Gnome |
-| `BLACKSMITHING_HAMMERSMITHING` | 569 (0x239) |  |  | Blacksmithing - Hammersmithing |
-| `BLACKSMITHING_AXESMITHING` | 570 (0x23A) |  |  | Blacksmithing - Axesmithing |
-| `BLACKSMITHING_SWORDSMITHING` | 571 (0x23B) |  |  | Blacksmithing - Swordsmithing |
-| `TROLL_VILEBRANCH` | 572 (0x23C) |  |  | Troll, Vilebranch |
-| `SOUTHSEA_FREEBOOTERS` | 573 (0x23D) |  |  |  |
-| `CAER_DARROW` | 574 (0x23E) |  |  |  |
-| `FURBOLG_UNCORRUPTED` | 575 (0x23F) |  |  | Furbolg, Uncorrupted |
-| `TIMBERMAW_HOLD` | 576 (0x240) |  |  |  |
-| `EVERLOOK` | 577 (0x241) |  |  |  |
-| `WINTERSABER_TRAINERS` | 589 (0x24D) |  |  |  |
-| `CENARION_CIRCLE` | 609 (0x261) |  |  |  |
-| `SHATTERSPEAR_TROLLS` | 629 (0x275) |  |  |  |
-| `RAVASAUR_TRAINERS` | 630 (0x276) |  |  |  |
-| `MAJORDOMO_EXECUTUS` | 649 (0x289) |  |  |  |
-| `BEAST_CARRION_BIRD` | 669 (0x29D) |  |  | Beast - Carrion Bird |
-| `BEAST_CAT` | 670 (0x29E) |  |  | Beast - Cat |
-| `BEAST_CRAB` | 671 (0x29F) |  |  | Beast - Crab |
-| `BEAST_CROCILISK` | 672 (0x2A0) |  |  | Beast - Crocilisk |
-| `BEAST_HYENA` | 673 (0x2A1) |  |  | Beast - Hyena |
-| `BEAST_OWL` | 674 (0x2A2) |  |  | Beast - Owl |
-| `BEAST_SCORPID` | 675 (0x2A3) |  |  | Beast - Scorpid |
-| `BEAST_TALLSTRIDER` | 676 (0x2A4) |  |  | Beast - Tallstrider |
-| `BEAST_TURTLE` | 677 (0x2A5) |  |  | Beast - Turtle |
-| `BEAST_WIND_SERPENT` | 678 (0x2A6) |  |  | Beast - Wind Serpent |
-| `TRAINING_DUMMY` | 679 (0x2A7) |  |  |  |
-| `DRAGONFLIGHT_BLACK_BAIT` | 689 (0x2B1) |  |  | Dragonflight, Black - Bait |
-| `BATTLEGROUND_NEUTRAL` | 709 (0x2C5) |  |  |  |
-| `FROSTWOLF_CLAN` | 729 (0x2D9) |  |  |  |
-| `STORMPIKE_GUARD` | 730 (0x2DA) |  |  |  |
-| `HYDRAXIAN_WATERLORDS` | 749 (0x2ED) |  |  |  |
-| `SULFURON_FIRELORDS` | 750 (0x2EE) |  |  |  |
-| `GIZLOCKS_DUMMY` | 769 (0x301) |  |  | Gizlock's Dummy |
-| `GIZLOCKS_CHARM` | 770 (0x302) |  |  | Gizlock's Charm |
-| `GIZLOCK` | 771 (0x303) |  |  |  |
-| `MORO_GAI` | 789 (0x315) |  |  | Moro'gai |
-| `SPIRIT_GUIDE_ALLIANCE` | 790 (0x316) |  |  | Spirit Guide - Alliance |
-| `SHEN_DRALAR` | 809 (0x329) |  |  | Shen'dralar |
-| `OGRE_CAPTAIN_KROMCRUSH` | 829 (0x33D) |  |  | Ogre (Captain Kromcrush) |
-| `SPIRIT_GUIDE_HORDE` | 849 (0x351) |  |  | Spirit Guide - Horde |
-| `JAEDENAR` | 869 (0x365) |  |  |  |
-| `WARSONG_OUTRIDERS` | 889 (0x379) |  |  |  |
-| `SILVERWING_SENTINELS` | 890 (0x37A) |  |  |  |
-| `ALLIANCE_FORCES` | 891 (0x37B) |  |  |  |
-| `HORDE_FORCES` | 892 (0x37C) |  |  |  |
-| `REVANTUSK_TROLLS` | 893 (0x37D) |  |  |  |
-| `DARKMOON_FAIRE` | 909 (0x38D) |  |  |  |
-| `BROOD_OF_NOZDORMU` | 910 (0x38E) |  |  |  |
-| `SILVERMOON_CITY` | 911 (0x38F) |  |  |  |
-| `MIGHT_OF_KALIMDOR` | 912 (0x390) |  |  |  |
-| `PLAYER_BLOOD_ELF` | 914 (0x392) |  |  | PLAYER, Blood Elf |
-| `ARMIES_OF_C_THUN` | 915 (0x393) |  |  | Armies of C'Thun |
-| `SILITHID_ATTACKERS` | 916 (0x394) |  |  |  |
-| `THE_IRONFORGE_BRIGADE` | 917 (0x395) |  |  |  |
-| `RC_ENEMIES` | 918 (0x396) |  |  |  |
-| `RC_OBJECTS` | 919 (0x397) |  |  |  |
-| `RED` | 920 (0x398) |  |  |  |
-| `BLUE` | 921 (0x399) |  |  |  |
-| `TRANQUILLIEN` | 922 (0x39A) |  |  |  |
-| `FARSTRIDERS` | 923 (0x39B) |  |  |  |
-| `DEPRECATED` | 924 (0x39C) |  |  |  |
-| `SUNSTRIDERS` | 925 (0x39D) |  |  |  |
-| `MAGISTERS_GUILD` | 926 (0x39E) |  |  | Magister's Guild |
-| `PLAYER_DRAENEI` | 927 (0x39F) |  |  | PLAYER, Draenei |
-| `SCOURGE_INVADERS` | 928 (0x3A0) |  |  |  |
-| `BLOODMAUL_CLAN` | 929 (0x3A1) |  |  |  |
-| `EXODAR` | 930 (0x3A2) |  |  |  |
-| `TEST_FACTION_NOT_A_REAL_FACTION` | 931 (0x3A3) |  |  | Test Faction (not a real faction) |
-| `THE_ALDOR` | 932 (0x3A4) |  |  |  |
-| `THE_CONSORTIUM` | 933 (0x3A5) |  |  |  |
-| `THE_SCRYERS` | 934 (0x3A6) |  |  |  |
-| `THE_SHA_TAR` | 935 (0x3A7) |  |  | The Sha'tar |
-| `SHATTRATH_CITY` | 936 (0x3A8) |  |  |  |
-| `TROLL_FOREST` | 937 (0x3A9) |  |  | Troll, Forest |
-| `THE_OMENAI` | 938 (0x3AA) |  |  |  |
-| `DEPRECATED1` | 939 (0x3AB) |  |  |  |
-| `THE_SONS_OF_LOTHAR` | 940 (0x3AC) |  |  |  |
-| `THE_MAG_HAR` | 941 (0x3AD) |  |  | The Mag'har |
-| `CENARION_EXPEDITION` | 942 (0x3AE) |  |  |  |
-| `FEL_ORC` | 943 (0x3AF) |  |  |  |
-| `FEL_ORC_GHOST` | 944 (0x3B0) |  |  |  |
-| `SONS_OF_LOTHAR_GHOSTS` | 945 (0x3B1) |  |  |  |
-| `HONOR_HOLD` | 946 (0x3B2) |  |  |  |
-| `THRALLMAR` | 947 (0x3B3) |  |  |  |
-| `TEST_FACTION_2` | 948 (0x3B4) |  |  |  |
-| `TEST_FACTION_1` | 949 (0x3B5) |  |  |  |
-| `TOWOW_FLAG` | 950 (0x3B6) |  |  | ToWoW - Flag |
-| `TOWOW_FLAG_TRIGGER_ALLIANCE_DND` | 951 (0x3B7) |  |  | ToWoW - Flag Trigger Alliance (DND) |
-| `TEST_FACTION_3` | 952 (0x3B8) |  |  |  |
-| `TEST_FACTION_4` | 953 (0x3B9) |  |  |  |
-| `TOWOW_FLAG_TRIGGER_HORDE_DND` | 954 (0x3BA) |  |  | ToWoW - Flag Trigger Horde (DND) |
-| `BROKEN` | 955 (0x3BB) |  |  |  |
-| `ETHEREUM` | 956 (0x3BC) |  |  |  |
-| `EARTH_ELEMENTAL` | 957 (0x3BD) |  |  |  |
-| `FIGHTING_ROBOTS` | 958 (0x3BE) |  |  |  |
-| `ACTOR_GOOD` | 959 (0x3BF) |  |  |  |
-| `ACTOR_EVIL` | 960 (0x3C0) |  |  |  |
-| `STILLPINE_FURBOLG` | 961 (0x3C1) |  |  |  |
-| `CRAZED_OWLKIN` | 962 (0x3C2) |  |  |  |
-| `CHESS_ALLIANCE` | 963 (0x3C3) |  |  |  |
-| `CHESS_HORDE` | 964 (0x3C4) |  |  |  |
-| `MONSTER_SPAR` | 965 (0x3C5) |  |  |  |
-| `MONSTER_SPAR_BUDDY` | 966 (0x3C6) |  |  |  |
-| `THE_VIOLET_EYE` | 967 (0x3C7) |  |  |  |
-| `SUNHAWKS` | 968 (0x3C8) |  |  |  |
-| `HAND_OF_ARGUS` | 969 (0x3C9) |  |  |  |
-| `SPOREGGAR` | 970 (0x3CA) |  |  |  |
-| `FUNGAL_GIANT` | 971 (0x3CB) |  |  |  |
-| `SPORE_BAT` | 972 (0x3CC) |  |  |  |
-| `MONSTER_PREDATOR` | 973 (0x3CD) |  |  | Monster, Predator |
-| `MONSTER_PREY` | 974 (0x3CE) |  |  | Monster, Prey |
-| `VOID_ANOMALY` | 975 (0x3CF) |  |  |  |
-| `HYJAL_DEFENDERS` | 976 (0x3D0) |  |  |  |
-| `HYJAL_INVADERS` | 977 (0x3D1) |  |  |  |
-| `KURENAI` | 978 (0x3D2) |  |  |  |
-| `EARTHEN_RING` | 979 (0x3D3) |  |  |  |
-| `OUTLAND` | 980 (0x3D4) |  |  |  |
-| `ARAKKOA` | 981 (0x3D5) |  |  |  |
-| `ZANGARMARSH_BANNER_ALLIANCE` | 982 (0x3D6) |  |  | Zangarmarsh Banner (Alliance) |
-| `ZANGARMARSH_BANNER_HORDE` | 983 (0x3D7) |  |  | Zangarmarsh Banner (Horde) |
-| `ZANGARMARSH_BANNER_NEUTRAL` | 984 (0x3D8) |  |  | Zangarmarsh Banner (Neutral) |
-| `CAVERNS_OF_TIME_THRALL` | 985 (0x3D9) |  |  | Caverns of Time - Thrall |
-| `CAVERNS_OF_TIME_DURNHOLDE` | 986 (0x3DA) |  |  | Caverns of Time - Durnholde |
-| `CAVERNS_OF_TIME_SOUTHSHORE_GUARDS` | 987 (0x3DB) |  |  | Caverns of Time - Southshore Guards |
-| `SHADOW_COUNCIL_COVERT` | 988 (0x3DC) |  |  |  |
-| `KEEPERS_OF_TIME` | 989 (0x3DD) |  |  |  |
-| `THE_SCALE_OF_THE_SANDS` | 990 (0x3DE) |  |  |  |
-| `DARK_PORTAL_DEFENDER_ALLIANCE` | 991 (0x3DF) |  |  | Dark Portal Defender, Alliance |
-| `DARK_PORTAL_DEFENDER_HORDE` | 992 (0x3E0) |  |  | Dark Portal Defender, Horde |
-| `DARK_PORTAL_ATTACKER_LEGION` | 993 (0x3E1) |  |  | Dark Portal Attacker, Legion |
-| `INCITER_TRIGGER` | 994 (0x3E2) |  |  |  |
-| `INCITER_TRIGGER_2` | 995 (0x3E3) |  |  |  |
-| `INCITER_TRIGGER_3` | 996 (0x3E4) |  |  |  |
-| `INCITER_TRIGGER_4` | 997 (0x3E5) |  |  |  |
-| `INCITER_TRIGGER_5` | 998 (0x3E6) |  |  |  |
-| `MANA_CREATURE` | 999 (0x3E7) |  |  |  |
-| `KHADGARS_SERVANT` | 1000 (0x3E8) |  |  | Khadgar's Servant |
-| `BLADESPIRE_CLAN` | 1001 (0x3E9) |  |  |  |
-| `ETHEREUM_SPARBUDDY` | 1002 (0x3EA) |  |  |  |
-| `PROTECTORATE` | 1003 (0x3EB) |  |  |  |
-| `ARCANE_ANNIHILATOR_DNR` | 1004 (0x3EC) |  |  | Arcane Annihilator (DNR) |
-| `FRIENDLY_HIDDEN` | 1005 (0x3ED) |  |  | Friendly, Hidden |
-| `KIRIN_VAR_DATHRIC` | 1006 (0x3EE) |  |  | Kirin'Var - Dathric |
-| `KIRIN_VAR_BELMARA` | 1007 (0x3EF) |  |  | Kirin'Var - Belmara |
-| `KIRIN_VAR_LUMINRATH` | 1008 (0x3F0) |  |  | Kirin'Var - Luminrath |
-| `KIRIN_VAR_COHLIEN` | 1009 (0x3F1) |  |  | Kirin'Var - Cohlien |
-| `SERVANT_OF_ILLIDAN` | 1010 (0x3F2) |  |  |  |
-| `LOWER_CITY` | 1011 (0x3F3) |  |  |  |
-| `ASHTONGUE_DEATHSWORN` | 1012 (0x3F4) |  |  |  |
-| `SPIRITS_OF_SHADOWMOON_1` | 1013 (0x3F5) |  |  |  |
-| `SPIRITS_OF_SHADOWMOON_2` | 1014 (0x3F6) |  |  |  |
-| `NETHERWING` | 1015 (0x3F7) |  |  |  |
-| `WYRMCULT` | 1016 (0x3F8) |  |  |  |
-| `TREANT` | 1017 (0x3F9) |  |  |  |
-| `LEOTHERAS_DEMON_I` | 1018 (0x3FA) |  |  |  |
-| `LEOTHERAS_DEMON_II` | 1019 (0x3FB) |  |  |  |
-| `LEOTHERAS_DEMON_III` | 1020 (0x3FC) |  |  |  |
-| `LEOTHERAS_DEMON_IV` | 1021 (0x3FD) |  |  |  |
-| `LEOTHERAS_DEMON_V` | 1022 (0x3FE) |  |  |  |
-| `AZALOTH` | 1023 (0x3FF) |  |  |  |
-| `ROCK_FLAYER` | 1024 (0x400) |  |  |  |
-| `FLAYER_HUNTER` | 1025 (0x401) |  |  |  |
-| `SHADOWMOON_SHADE` | 1026 (0x402) |  |  |  |
-| `LEGION_COMMUNICATOR` | 1027 (0x403) |  |  |  |
-| `RAVENSWOOD_ANCIENTS` | 1028 (0x404) |  |  |  |
-| `CHESS_FRIENDLY_TO_ALL_CHESS` | 1029 (0x405) |  |  | Chess, Friendly to All Chess |
-| `BLACK_TEMPLE_GATES_ILLIDARI` | 1030 (0x406) |  |  | Black Temple Gates - Illidari |
-| `SHA_TARI_SKYGUARD` | 1031 (0x407) |  |  | Sha'tari Skyguard |
-| `AREA_52` | 1032 (0x408) |  |  |  |
-| `MAIEV` | 1033 (0x409) |  |  |  |
-| `SKETTIS_SHADOWY_ARAKKOA` | 1034 (0x40A) |  |  |  |
-| `SKETTIS_ARAKKOA` | 1035 (0x40B) |  |  |  |
-| `DRAGONMAW_ENEMY` | 1036 (0x40C) |  |  |  |
-| `REUSE` | 1037 (0x40D) |  |  |  |
-| `OGRI_LA` | 1038 (0x40E) |  |  | Ogri'la |
-| `RAVAGER` | 1039 (0x40F) |  |  |  |
-| `REUSE1` | 1040 (0x410) |  |  |  |
-| `FRENZY` | 1041 (0x411) |  |  |  |
-| `SKYGUARD_ENEMY` | 1042 (0x412) |  |  |  |
-| `SKUNK_PETUNIA` | 1043 (0x413) |  |  | Skunk, Petunia |
-| `THERAMORE_DESERTER` | 1044 (0x414) |  |  |  |
-| `TROLL_AMANI` | 1049 (0x419) |  |  | Troll, Amani |
-| `CTF_FLAGS` | 1059 (0x423) |  |  | CTF - Flags |
-| `RAM_RACING_POWERUP_DND` | 1069 (0x42D) |  |  |  |
-| `RAM_RACING_TRAP_DND` | 1070 (0x42E) |  |  |  |
-| `CRAIGS_SQUIRRELS` | 1071 (0x42F) |  |  | Craig's Squirrels |
-| `HOLIDAY_WATER_BARREL` | 1074 (0x432) |  |  | Holiday - Water Barrel |
-| `HOLIDAY_GENERIC` | 1075 (0x433) |  |  | Holiday - Generic |
-| `SHATTERED_SUN_OFFENSIVE` | 1077 (0x435) |  |  |  |
-| `FIGHTING_VANITY_PET` | 1078 (0x436) |  |  |  |
-| `MONSTER_FORCE_REACTION` | 1080 (0x438) |  |  | Monster, Force Reaction |
-| `OBJECT_FORCE_REACTION` | 1081 (0x439) |  |  | Object, Force Reaction |
-| `HOLIDAY_MONSTER` | 1087 (0x43F) |  |  |  |
+| Enumerator | Value  | Comment | Display |
+| --------- | -------- | ------- | ------- |
+| `NONE` | 0 (0x00) |  |  |
+| `PLAYER_HUMAN` | 1 (0x01) |  | PLAYER, Human |
+| `PLAYER_ORC` | 2 (0x02) |  | PLAYER, Orc |
+| `PLAYER_DWARF` | 3 (0x03) |  | PLAYER, Dwarf |
+| `PLAYER_NIGHT_ELF` | 4 (0x04) |  | PLAYER, Night Elf |
+| `PLAYER_UNDEAD` | 5 (0x05) |  | PLAYER, Undead |
+| `PLAYER_TAUREN` | 6 (0x06) |  | PLAYER, Tauren |
+| `CREATURE` | 7 (0x07) |  |  |
+| `PLAYER_GNOME` | 8 (0x08) |  | PLAYER, Gnome |
+| `PLAYER_TROLL` | 9 (0x09) |  | PLAYER, Troll |
+| `MONSTER` | 14 (0x0E) |  |  |
+| `DEFIAS_BROTHERHOOD` | 15 (0x0F) |  |  |
+| `GNOLL_RIVERPAW` | 16 (0x10) |  | Gnoll - Riverpaw |
+| `GNOLL_REDRIDGE` | 17 (0x11) |  | Gnoll - Redridge |
+| `GNOLL_SHADOWHIDE` | 18 (0x12) |  | Gnoll - Shadowhide |
+| `MURLOC` | 19 (0x13) |  |  |
+| `UNDEAD_SCOURGE` | 20 (0x14) |  | Undead, Scourge |
+| `BOOTY_BAY` | 21 (0x15) |  |  |
+| `BEAST_SPIDER` | 22 (0x16) |  | Beast - Spider |
+| `BEAST_BOAR` | 23 (0x17) |  | Beast - Boar |
+| `WORGEN` | 24 (0x18) |  |  |
+| `KOBOLD` | 25 (0x19) |  |  |
+| `TROLL_BLOODSCALP` | 26 (0x1A) |  | Troll, Bloodscalp |
+| `TROLL_SKULLSPLITTER` | 27 (0x1B) |  | Troll, Skullsplitter |
+| `PREY` | 28 (0x1C) |  |  |
+| `BEAST_WOLF` | 29 (0x1D) |  | Beast - Wolf |
+| `DEFIAS_BROTHERHOOD_TRAITOR` | 30 (0x1E) |  |  |
+| `FRIENDLY` | 31 (0x1F) |  |  |
+| `TROGG` | 32 (0x20) |  |  |
+| `TROLL_FROSTMANE` | 33 (0x21) |  | Troll, Frostmane |
+| `ORC_BLACKROCK` | 34 (0x22) |  | Orc, Blackrock |
+| `VILLIAN` | 35 (0x23) |  |  |
+| `VICTIM` | 36 (0x24) |  |  |
+| `BEAST_BEAR` | 37 (0x25) |  | Beast - Bear |
+| `OGRE` | 38 (0x26) |  |  |
+| `KURZENS_MERCENARIES` | 39 (0x27) |  | Kurzen's Mercenaries |
+| `ESCORTEE` | 40 (0x28) |  |  |
+| `VENTURE_COMPANY` | 41 (0x29) |  |  |
+| `BEAST_RAPTOR` | 42 (0x2A) |  | Beast - Raptor |
+| `BASILISK` | 43 (0x2B) |  |  |
+| `DRAGONFLIGHT_GREEN` | 44 (0x2C) |  | Dragonflight, Green |
+| `LOST_ONES` | 45 (0x2D) |  |  |
+| `BLACKSMITHING_ARMORSMITHING` | 46 (0x2E) |  | Blacksmithing - Armorsmithing |
+| `IRONFORGE` | 47 (0x2F) |  |  |
+| `DARK_IRON_DWARVES` | 48 (0x30) |  |  |
+| `HUMAN_NIGHT_WATCH` | 49 (0x31) |  | Human, Night Watch |
+| `DRAGONFLIGHT_RED` | 50 (0x32) |  | Dragonflight, Red |
+| `GNOLL_MOSSHIDE` | 51 (0x33) |  | Gnoll - Mosshide |
+| `ORC_DRAGONMAW` | 52 (0x34) |  | Orc, Dragonmaw |
+| `GNOME_LEPER` | 53 (0x35) |  | Gnome - Leper |
+| `GNOMEREGAN_EXILES` | 54 (0x36) |  |  |
+| `LEOPARD` | 55 (0x37) |  |  |
+| `SCARLET_CRUSADE` | 56 (0x38) |  |  |
+| `GNOLL_ROTHIDE` | 57 (0x39) |  | Gnoll - Rothide |
+| `BEAST_GORILLA` | 58 (0x3A) |  | Beast - Gorilla |
+| `THORIUM_BROTHERHOOD` | 59 (0x3B) |  |  |
+| `NAGA` | 60 (0x3C) |  |  |
+| `DALARAN` | 61 (0x3D) |  |  |
+| `FORLORN_SPIRIT` | 62 (0x3E) |  |  |
+| `DARKHOWL` | 63 (0x3F) |  |  |
+| `GRELL` | 64 (0x40) |  |  |
+| `FURBOLG` | 65 (0x41) |  |  |
+| `HORDE_GENERIC` | 66 (0x42) |  |  |
+| `HORDE` | 67 (0x43) |  |  |
+| `UNDERCITY` | 68 (0x44) |  |  |
+| `DARNASSUS` | 69 (0x45) |  |  |
+| `SYNDICATE` | 70 (0x46) |  |  |
+| `HILLSBRAD_MILITIA` | 71 (0x47) |  |  |
+| `STORMWIND` | 72 (0x48) |  |  |
+| `DEMON` | 73 (0x49) |  |  |
+| `ELEMENTAL` | 74 (0x4A) |  |  |
+| `SPIRIT` | 75 (0x4B) |  |  |
+| `ORGRIMMAR` | 76 (0x4C) |  |  |
+| `TREASURE` | 77 (0x4D) |  |  |
+| `GNOLL_MUDSNOUT` | 78 (0x4E) |  | Gnoll - Mudsnout |
+| `HILLSBRAD_SOUTHSHORE_MAYOR` | 79 (0x4F) |  | HIllsbrad, Southshore Mayor |
+| `DRAGONFLIGHT_BLACK` | 80 (0x50) |  | Dragonflight, Black |
+| `THUNDER_BLUFF` | 81 (0x51) |  |  |
+| `TROLL_WITHERBARK` | 82 (0x52) |  | Troll, Witherbark |
+| `LEATHERWORKING_ELEMENTAL` | 83 (0x53) |  | Leatherworking - Elemental |
+| `QUILBOAR_RAZORMANE` | 84 (0x54) |  | Quilboar, Razormane |
+| `QUILBOAR_BRISTLEBACK` | 85 (0x55) |  | Quilboar, Bristleback |
+| `LEATHERWORKING_DRAGONSCALE` | 86 (0x56) |  | Leatherworking - Dragonscale |
+| `BLOODSAIL_BUCCANEERS` | 87 (0x57) |  |  |
+| `BLACKFATHOM` | 88 (0x58) |  |  |
+| `MAKRURA` | 89 (0x59) |  |  |
+| `CENTAUR_KOLKAR` | 90 (0x5A) |  | Centaur, Kolkar |
+| `CENTAUR_GALAK` | 91 (0x5B) |  | Centaur, Galak |
+| `GELKIS_CLAN_CENTAUR` | 92 (0x5C) |  |  |
+| `MAGRAM_CLAN_CENTAUR` | 93 (0x5D) |  |  |
+| `MARAUDINE` | 94 (0x5E) |  |  |
+| `THERAMORE` | 108 (0x6C) |  |  |
+| `QUILBOAR_RAZORFEN` | 109 (0x6D) |  | Quilboar, Razorfen |
+| `QUILBOAR_RAZORMANE_2` | 110 (0x6E) |  | Quilboar, Razormane 2 |
+| `QUILBOAR_DEATHSHEAD` | 111 (0x6F) |  | Quilboar, Deathshead |
+| `ENEMY` | 128 (0x80) |  |  |
+| `AMBIENT` | 148 (0x94) |  |  |
+| `NETHERGARDE_CARAVAN` | 168 (0xA8) |  |  |
+| `STEAMWHEEDLE_CARTEL` | 169 (0xA9) |  |  |
+| `ALLIANCE_GENERIC` | 189 (0xBD) |  |  |
+| `NETHERGARDE` | 209 (0xD1) |  |  |
+| `WAILING_CAVERNS` | 229 (0xE5) |  |  |
+| `SILITHID` | 249 (0xF9) |  |  |
+| `SILVERMOON_REMNANT` | 269 (0x10D) |  |  |
+| `ZANDALAR_TRIBE` | 270 (0x10E) |  |  |
+| `BLACKSMITHING_WEAPONSMITHING` | 289 (0x121) |  | Blacksmithing - Weaponsmithing |
+| `SCORPID` | 309 (0x135) |  |  |
+| `BEAST_BAT` | 310 (0x136) |  | Beast - Bat |
+| `TITAN` | 311 (0x137) |  |  |
+| `TASKMASTER_FIZZULE` | 329 (0x149) |  |  |
+| `RAVENHOLDT` | 349 (0x15D) |  |  |
+| `GADGETZAN` | 369 (0x171) |  |  |
+| `GNOMEREGAN_BUG` | 389 (0x185) |  |  |
+| `HARPY` | 409 (0x199) |  |  |
+| `BURNING_BLADE` | 429 (0x1AD) |  |  |
+| `SHADOWSILK_POACHER` | 449 (0x1C1) |  |  |
+| `SEARING_SPIDER` | 450 (0x1C2) |  |  |
+| `ALLIANCE` | 469 (0x1D5) |  |  |
+| `RATCHET` | 470 (0x1D6) |  |  |
+| `WILDHAMMER_CLAN` | 471 (0x1D7) |  |  |
+| `GOBLIN_DARK_IRON_BAR_PATRON` | 489 (0x1E9) |  | Goblin, Dark Iron Bar Patron |
+| `THE_LEAGUE_OF_ARATHOR` | 509 (0x1FD) |  |  |
+| `THE_DEFILERS` | 510 (0x1FE) |  |  |
+| `GIANT` | 511 (0x1FF) |  |  |
+| `ARGENT_DAWN` | 529 (0x211) |  |  |
+| `DARKSPEAR_TROLLS` | 530 (0x212) |  |  |
+| `DRAGONFLIGHT_BRONZE` | 531 (0x213) |  | Dragonflight, Bronze |
+| `DRAGONFLIGHT_BLUE` | 532 (0x214) |  | Dragonflight, Blue |
+| `LEATHERWORKING_TRIBAL` | 549 (0x225) |  | Leatherworking - Tribal |
+| `ENGINEERING_GOBLIN` | 550 (0x226) |  | Engineering - Goblin |
+| `ENGINEERING_GNOME` | 551 (0x227) |  | Engineering - Gnome |
+| `BLACKSMITHING_HAMMERSMITHING` | 569 (0x239) |  | Blacksmithing - Hammersmithing |
+| `BLACKSMITHING_AXESMITHING` | 570 (0x23A) |  | Blacksmithing - Axesmithing |
+| `BLACKSMITHING_SWORDSMITHING` | 571 (0x23B) |  | Blacksmithing - Swordsmithing |
+| `TROLL_VILEBRANCH` | 572 (0x23C) |  | Troll, Vilebranch |
+| `SOUTHSEA_FREEBOOTERS` | 573 (0x23D) |  |  |
+| `CAER_DARROW` | 574 (0x23E) |  |  |
+| `FURBOLG_UNCORRUPTED` | 575 (0x23F) |  | Furbolg, Uncorrupted |
+| `TIMBERMAW_HOLD` | 576 (0x240) |  |  |
+| `EVERLOOK` | 577 (0x241) |  |  |
+| `WINTERSABER_TRAINERS` | 589 (0x24D) |  |  |
+| `CENARION_CIRCLE` | 609 (0x261) |  |  |
+| `SHATTERSPEAR_TROLLS` | 629 (0x275) |  |  |
+| `RAVASAUR_TRAINERS` | 630 (0x276) |  |  |
+| `MAJORDOMO_EXECUTUS` | 649 (0x289) |  |  |
+| `BEAST_CARRION_BIRD` | 669 (0x29D) |  | Beast - Carrion Bird |
+| `BEAST_CAT` | 670 (0x29E) |  | Beast - Cat |
+| `BEAST_CRAB` | 671 (0x29F) |  | Beast - Crab |
+| `BEAST_CROCILISK` | 672 (0x2A0) |  | Beast - Crocilisk |
+| `BEAST_HYENA` | 673 (0x2A1) |  | Beast - Hyena |
+| `BEAST_OWL` | 674 (0x2A2) |  | Beast - Owl |
+| `BEAST_SCORPID` | 675 (0x2A3) |  | Beast - Scorpid |
+| `BEAST_TALLSTRIDER` | 676 (0x2A4) |  | Beast - Tallstrider |
+| `BEAST_TURTLE` | 677 (0x2A5) |  | Beast - Turtle |
+| `BEAST_WIND_SERPENT` | 678 (0x2A6) |  | Beast - Wind Serpent |
+| `TRAINING_DUMMY` | 679 (0x2A7) |  |  |
+| `DRAGONFLIGHT_BLACK_BAIT` | 689 (0x2B1) |  | Dragonflight, Black - Bait |
+| `BATTLEGROUND_NEUTRAL` | 709 (0x2C5) |  |  |
+| `FROSTWOLF_CLAN` | 729 (0x2D9) |  |  |
+| `STORMPIKE_GUARD` | 730 (0x2DA) |  |  |
+| `HYDRAXIAN_WATERLORDS` | 749 (0x2ED) |  |  |
+| `SULFURON_FIRELORDS` | 750 (0x2EE) |  |  |
+| `GIZLOCKS_DUMMY` | 769 (0x301) |  | Gizlock's Dummy |
+| `GIZLOCKS_CHARM` | 770 (0x302) |  | Gizlock's Charm |
+| `GIZLOCK` | 771 (0x303) |  |  |
+| `MORO_GAI` | 789 (0x315) |  | Moro'gai |
+| `SPIRIT_GUIDE_ALLIANCE` | 790 (0x316) |  | Spirit Guide - Alliance |
+| `SHEN_DRALAR` | 809 (0x329) |  | Shen'dralar |
+| `OGRE_CAPTAIN_KROMCRUSH` | 829 (0x33D) |  | Ogre (Captain Kromcrush) |
+| `SPIRIT_GUIDE_HORDE` | 849 (0x351) |  | Spirit Guide - Horde |
+| `JAEDENAR` | 869 (0x365) |  |  |
+| `WARSONG_OUTRIDERS` | 889 (0x379) |  |  |
+| `SILVERWING_SENTINELS` | 890 (0x37A) |  |  |
+| `ALLIANCE_FORCES` | 891 (0x37B) |  |  |
+| `HORDE_FORCES` | 892 (0x37C) |  |  |
+| `REVANTUSK_TROLLS` | 893 (0x37D) |  |  |
+| `DARKMOON_FAIRE` | 909 (0x38D) |  |  |
+| `BROOD_OF_NOZDORMU` | 910 (0x38E) |  |  |
+| `SILVERMOON_CITY` | 911 (0x38F) |  |  |
+| `MIGHT_OF_KALIMDOR` | 912 (0x390) |  |  |
+| `PLAYER_BLOOD_ELF` | 914 (0x392) |  | PLAYER, Blood Elf |
+| `ARMIES_OF_C_THUN` | 915 (0x393) |  | Armies of C'Thun |
+| `SILITHID_ATTACKERS` | 916 (0x394) |  |  |
+| `THE_IRONFORGE_BRIGADE` | 917 (0x395) |  |  |
+| `RC_ENEMIES` | 918 (0x396) |  |  |
+| `RC_OBJECTS` | 919 (0x397) |  |  |
+| `RED` | 920 (0x398) |  |  |
+| `BLUE` | 921 (0x399) |  |  |
+| `TRANQUILLIEN` | 922 (0x39A) |  |  |
+| `FARSTRIDERS` | 923 (0x39B) |  |  |
+| `DEPRECATED` | 924 (0x39C) |  |  |
+| `SUNSTRIDERS` | 925 (0x39D) |  |  |
+| `MAGISTERS_GUILD` | 926 (0x39E) |  | Magister's Guild |
+| `PLAYER_DRAENEI` | 927 (0x39F) |  | PLAYER, Draenei |
+| `SCOURGE_INVADERS` | 928 (0x3A0) |  |  |
+| `BLOODMAUL_CLAN` | 929 (0x3A1) |  |  |
+| `EXODAR` | 930 (0x3A2) |  |  |
+| `TEST_FACTION_NOT_A_REAL_FACTION` | 931 (0x3A3) |  | Test Faction (not a real faction) |
+| `THE_ALDOR` | 932 (0x3A4) |  |  |
+| `THE_CONSORTIUM` | 933 (0x3A5) |  |  |
+| `THE_SCRYERS` | 934 (0x3A6) |  |  |
+| `THE_SHA_TAR` | 935 (0x3A7) |  | The Sha'tar |
+| `SHATTRATH_CITY` | 936 (0x3A8) |  |  |
+| `TROLL_FOREST` | 937 (0x3A9) |  | Troll, Forest |
+| `THE_OMENAI` | 938 (0x3AA) |  |  |
+| `DEPRECATED1` | 939 (0x3AB) |  |  |
+| `THE_SONS_OF_LOTHAR` | 940 (0x3AC) |  |  |
+| `THE_MAG_HAR` | 941 (0x3AD) |  | The Mag'har |
+| `CENARION_EXPEDITION` | 942 (0x3AE) |  |  |
+| `FEL_ORC` | 943 (0x3AF) |  |  |
+| `FEL_ORC_GHOST` | 944 (0x3B0) |  |  |
+| `SONS_OF_LOTHAR_GHOSTS` | 945 (0x3B1) |  |  |
+| `HONOR_HOLD` | 946 (0x3B2) |  |  |
+| `THRALLMAR` | 947 (0x3B3) |  |  |
+| `TEST_FACTION_2` | 948 (0x3B4) |  |  |
+| `TEST_FACTION_1` | 949 (0x3B5) |  |  |
+| `TOWOW_FLAG` | 950 (0x3B6) |  | ToWoW - Flag |
+| `TOWOW_FLAG_TRIGGER_ALLIANCE_DND` | 951 (0x3B7) |  | ToWoW - Flag Trigger Alliance (DND) |
+| `TEST_FACTION_3` | 952 (0x3B8) |  |  |
+| `TEST_FACTION_4` | 953 (0x3B9) |  |  |
+| `TOWOW_FLAG_TRIGGER_HORDE_DND` | 954 (0x3BA) |  | ToWoW - Flag Trigger Horde (DND) |
+| `BROKEN` | 955 (0x3BB) |  |  |
+| `ETHEREUM` | 956 (0x3BC) |  |  |
+| `EARTH_ELEMENTAL` | 957 (0x3BD) |  |  |
+| `FIGHTING_ROBOTS` | 958 (0x3BE) |  |  |
+| `ACTOR_GOOD` | 959 (0x3BF) |  |  |
+| `ACTOR_EVIL` | 960 (0x3C0) |  |  |
+| `STILLPINE_FURBOLG` | 961 (0x3C1) |  |  |
+| `CRAZED_OWLKIN` | 962 (0x3C2) |  |  |
+| `CHESS_ALLIANCE` | 963 (0x3C3) |  |  |
+| `CHESS_HORDE` | 964 (0x3C4) |  |  |
+| `MONSTER_SPAR` | 965 (0x3C5) |  |  |
+| `MONSTER_SPAR_BUDDY` | 966 (0x3C6) |  |  |
+| `THE_VIOLET_EYE` | 967 (0x3C7) |  |  |
+| `SUNHAWKS` | 968 (0x3C8) |  |  |
+| `HAND_OF_ARGUS` | 969 (0x3C9) |  |  |
+| `SPOREGGAR` | 970 (0x3CA) |  |  |
+| `FUNGAL_GIANT` | 971 (0x3CB) |  |  |
+| `SPORE_BAT` | 972 (0x3CC) |  |  |
+| `MONSTER_PREDATOR` | 973 (0x3CD) |  | Monster, Predator |
+| `MONSTER_PREY` | 974 (0x3CE) |  | Monster, Prey |
+| `VOID_ANOMALY` | 975 (0x3CF) |  |  |
+| `HYJAL_DEFENDERS` | 976 (0x3D0) |  |  |
+| `HYJAL_INVADERS` | 977 (0x3D1) |  |  |
+| `KURENAI` | 978 (0x3D2) |  |  |
+| `EARTHEN_RING` | 979 (0x3D3) |  |  |
+| `OUTLAND` | 980 (0x3D4) |  |  |
+| `ARAKKOA` | 981 (0x3D5) |  |  |
+| `ZANGARMARSH_BANNER_ALLIANCE` | 982 (0x3D6) |  | Zangarmarsh Banner (Alliance) |
+| `ZANGARMARSH_BANNER_HORDE` | 983 (0x3D7) |  | Zangarmarsh Banner (Horde) |
+| `ZANGARMARSH_BANNER_NEUTRAL` | 984 (0x3D8) |  | Zangarmarsh Banner (Neutral) |
+| `CAVERNS_OF_TIME_THRALL` | 985 (0x3D9) |  | Caverns of Time - Thrall |
+| `CAVERNS_OF_TIME_DURNHOLDE` | 986 (0x3DA) |  | Caverns of Time - Durnholde |
+| `CAVERNS_OF_TIME_SOUTHSHORE_GUARDS` | 987 (0x3DB) |  | Caverns of Time - Southshore Guards |
+| `SHADOW_COUNCIL_COVERT` | 988 (0x3DC) |  |  |
+| `KEEPERS_OF_TIME` | 989 (0x3DD) |  |  |
+| `THE_SCALE_OF_THE_SANDS` | 990 (0x3DE) |  |  |
+| `DARK_PORTAL_DEFENDER_ALLIANCE` | 991 (0x3DF) |  | Dark Portal Defender, Alliance |
+| `DARK_PORTAL_DEFENDER_HORDE` | 992 (0x3E0) |  | Dark Portal Defender, Horde |
+| `DARK_PORTAL_ATTACKER_LEGION` | 993 (0x3E1) |  | Dark Portal Attacker, Legion |
+| `INCITER_TRIGGER` | 994 (0x3E2) |  |  |
+| `INCITER_TRIGGER_2` | 995 (0x3E3) |  |  |
+| `INCITER_TRIGGER_3` | 996 (0x3E4) |  |  |
+| `INCITER_TRIGGER_4` | 997 (0x3E5) |  |  |
+| `INCITER_TRIGGER_5` | 998 (0x3E6) |  |  |
+| `MANA_CREATURE` | 999 (0x3E7) |  |  |
+| `KHADGARS_SERVANT` | 1000 (0x3E8) |  | Khadgar's Servant |
+| `BLADESPIRE_CLAN` | 1001 (0x3E9) |  |  |
+| `ETHEREUM_SPARBUDDY` | 1002 (0x3EA) |  |  |
+| `PROTECTORATE` | 1003 (0x3EB) |  |  |
+| `ARCANE_ANNIHILATOR_DNR` | 1004 (0x3EC) |  | Arcane Annihilator (DNR) |
+| `FRIENDLY_HIDDEN` | 1005 (0x3ED) |  | Friendly, Hidden |
+| `KIRIN_VAR_DATHRIC` | 1006 (0x3EE) |  | Kirin'Var - Dathric |
+| `KIRIN_VAR_BELMARA` | 1007 (0x3EF) |  | Kirin'Var - Belmara |
+| `KIRIN_VAR_LUMINRATH` | 1008 (0x3F0) |  | Kirin'Var - Luminrath |
+| `KIRIN_VAR_COHLIEN` | 1009 (0x3F1) |  | Kirin'Var - Cohlien |
+| `SERVANT_OF_ILLIDAN` | 1010 (0x3F2) |  |  |
+| `LOWER_CITY` | 1011 (0x3F3) |  |  |
+| `ASHTONGUE_DEATHSWORN` | 1012 (0x3F4) |  |  |
+| `SPIRITS_OF_SHADOWMOON_1` | 1013 (0x3F5) |  |  |
+| `SPIRITS_OF_SHADOWMOON_2` | 1014 (0x3F6) |  |  |
+| `NETHERWING` | 1015 (0x3F7) |  |  |
+| `WYRMCULT` | 1016 (0x3F8) |  |  |
+| `TREANT` | 1017 (0x3F9) |  |  |
+| `LEOTHERAS_DEMON_I` | 1018 (0x3FA) |  |  |
+| `LEOTHERAS_DEMON_II` | 1019 (0x3FB) |  |  |
+| `LEOTHERAS_DEMON_III` | 1020 (0x3FC) |  |  |
+| `LEOTHERAS_DEMON_IV` | 1021 (0x3FD) |  |  |
+| `LEOTHERAS_DEMON_V` | 1022 (0x3FE) |  |  |
+| `AZALOTH` | 1023 (0x3FF) |  |  |
+| `ROCK_FLAYER` | 1024 (0x400) |  |  |
+| `FLAYER_HUNTER` | 1025 (0x401) |  |  |
+| `SHADOWMOON_SHADE` | 1026 (0x402) |  |  |
+| `LEGION_COMMUNICATOR` | 1027 (0x403) |  |  |
+| `RAVENSWOOD_ANCIENTS` | 1028 (0x404) |  |  |
+| `CHESS_FRIENDLY_TO_ALL_CHESS` | 1029 (0x405) |  | Chess, Friendly to All Chess |
+| `BLACK_TEMPLE_GATES_ILLIDARI` | 1030 (0x406) |  | Black Temple Gates - Illidari |
+| `SHA_TARI_SKYGUARD` | 1031 (0x407) |  | Sha'tari Skyguard |
+| `AREA_52` | 1032 (0x408) |  |  |
+| `MAIEV` | 1033 (0x409) |  |  |
+| `SKETTIS_SHADOWY_ARAKKOA` | 1034 (0x40A) |  |  |
+| `SKETTIS_ARAKKOA` | 1035 (0x40B) |  |  |
+| `DRAGONMAW_ENEMY` | 1036 (0x40C) |  |  |
+| `REUSE` | 1037 (0x40D) |  |  |
+| `OGRI_LA` | 1038 (0x40E) |  | Ogri'la |
+| `RAVAGER` | 1039 (0x40F) |  |  |
+| `REUSE1` | 1040 (0x410) |  |  |
+| `FRENZY` | 1041 (0x411) |  |  |
+| `SKYGUARD_ENEMY` | 1042 (0x412) |  |  |
+| `SKUNK_PETUNIA` | 1043 (0x413) |  | Skunk, Petunia |
+| `THERAMORE_DESERTER` | 1044 (0x414) |  |  |
+| `TROLL_AMANI` | 1049 (0x419) |  | Troll, Amani |
+| `CTF_FLAGS` | 1059 (0x423) |  | CTF - Flags |
+| `RAM_RACING_POWERUP_DND` | 1069 (0x42D) |  |  |
+| `RAM_RACING_TRAP_DND` | 1070 (0x42E) |  |  |
+| `CRAIGS_SQUIRRELS` | 1071 (0x42F) |  | Craig's Squirrels |
+| `HOLIDAY_WATER_BARREL` | 1074 (0x432) |  | Holiday - Water Barrel |
+| `HOLIDAY_GENERIC` | 1075 (0x433) |  | Holiday - Generic |
+| `SHATTERED_SUN_OFFENSIVE` | 1077 (0x435) |  |  |
+| `FIGHTING_VANITY_PET` | 1078 (0x436) |  |  |
+| `MONSTER_FORCE_REACTION` | 1080 (0x438) |  | Monster, Force Reaction |
+| `OBJECT_FORCE_REACTION` | 1081 (0x439) |  | Object, Force Reaction |
+| `HOLIDAY_MONSTER` | 1087 (0x43F) |  |  |
 
 Used in:
 * [CMSG_SET_FACTION_ATWAR](cmsg_set_faction_atwar.md)
@@ -1495,410 +1495,410 @@ enum Faction : u16 {
 ### Type
 The basic type is `u16`, a 2 byte (16 bit) little endian integer.
 ### Enumerators
-| Enumerator | Value  | Description | Comment | Display |
-| --------- | -------- | ----------- | ------- | ------- |
-| `NONE` | 0 (0x00) |  |  |  |
-| `PLAYER_HUMAN` | 1 (0x01) |  |  | PLAYER, Human |
-| `PLAYER_ORC` | 2 (0x02) |  |  | PLAYER, Orc |
-| `PLAYER_DWARF` | 3 (0x03) |  |  | PLAYER, Dwarf |
-| `PLAYER_NIGHT_ELF` | 4 (0x04) |  |  | PLAYER, Night Elf |
-| `PLAYER_UNDEAD` | 5 (0x05) |  |  | PLAYER, Undead |
-| `PLAYER_TAUREN` | 6 (0x06) |  |  | PLAYER, Tauren |
-| `CREATURE` | 7 (0x07) |  |  |  |
-| `PLAYER_GNOME` | 8 (0x08) |  |  | PLAYER, Gnome |
-| `PLAYER_TROLL` | 9 (0x09) |  |  | PLAYER, Troll |
-| `MONSTER` | 14 (0x0E) |  |  |  |
-| `DEFIAS_BROTHERHOOD` | 15 (0x0F) |  |  |  |
-| `GNOLL_RIVERPAW` | 16 (0x10) |  |  | Gnoll - Riverpaw |
-| `GNOLL_REDRIDGE` | 17 (0x11) |  |  | Gnoll - Redridge |
-| `GNOLL_SHADOWHIDE` | 18 (0x12) |  |  | Gnoll - Shadowhide |
-| `MURLOC` | 19 (0x13) |  |  |  |
-| `UNDEAD_SCOURGE` | 20 (0x14) |  |  | Undead, Scourge |
-| `BOOTY_BAY` | 21 (0x15) |  |  |  |
-| `BEAST_SPIDER` | 22 (0x16) |  |  | Beast - Spider |
-| `BEAST_BOAR` | 23 (0x17) |  |  | Beast - Boar |
-| `WORGEN` | 24 (0x18) |  |  |  |
-| `KOBOLD` | 25 (0x19) |  |  |  |
-| `TROLL_BLOODSCALP` | 26 (0x1A) |  |  | Troll, Bloodscalp |
-| `TROLL_SKULLSPLITTER` | 27 (0x1B) |  |  | Troll, Skullsplitter |
-| `PREY` | 28 (0x1C) |  |  |  |
-| `BEAST_WOLF` | 29 (0x1D) |  |  | Beast - Wolf |
-| `DEFIAS_BROTHERHOOD_TRAITOR` | 30 (0x1E) |  |  |  |
-| `FRIENDLY` | 31 (0x1F) |  |  |  |
-| `TROGG` | 32 (0x20) |  |  |  |
-| `TROLL_FROSTMANE` | 33 (0x21) |  |  | Troll, Frostmane |
-| `ORC_BLACKROCK` | 34 (0x22) |  |  | Orc, Blackrock |
-| `VILLIAN` | 35 (0x23) |  |  |  |
-| `VICTIM` | 36 (0x24) |  |  |  |
-| `BEAST_BEAR` | 37 (0x25) |  |  | Beast - Bear |
-| `OGRE` | 38 (0x26) |  |  |  |
-| `KURZENS_MERCENARIES` | 39 (0x27) |  |  | Kurzen's Mercenaries |
-| `ESCORTEE` | 40 (0x28) |  |  |  |
-| `VENTURE_COMPANY` | 41 (0x29) |  |  |  |
-| `BEAST_RAPTOR` | 42 (0x2A) |  |  | Beast - Raptor |
-| `BASILISK` | 43 (0x2B) |  |  |  |
-| `DRAGONFLIGHT_GREEN` | 44 (0x2C) |  |  | Dragonflight, Green |
-| `LOST_ONES` | 45 (0x2D) |  |  |  |
-| `BLACKSMITHING_ARMORSMITHING` | 46 (0x2E) |  |  | Blacksmithing - Armorsmithing |
-| `IRONFORGE` | 47 (0x2F) |  |  |  |
-| `DARK_IRON_DWARVES` | 48 (0x30) |  |  |  |
-| `HUMAN_NIGHT_WATCH` | 49 (0x31) |  |  | Human, Night Watch |
-| `DRAGONFLIGHT_RED` | 50 (0x32) |  |  | Dragonflight, Red |
-| `GNOLL_MOSSHIDE` | 51 (0x33) |  |  | Gnoll - Mosshide |
-| `ORC_DRAGONMAW` | 52 (0x34) |  |  | Orc, Dragonmaw |
-| `GNOME_LEPER` | 53 (0x35) |  |  | Gnome - Leper |
-| `GNOMEREGAN_EXILES` | 54 (0x36) |  |  |  |
-| `LEOPARD` | 55 (0x37) |  |  |  |
-| `SCARLET_CRUSADE` | 56 (0x38) |  |  |  |
-| `GNOLL_ROTHIDE` | 57 (0x39) |  |  | Gnoll - Rothide |
-| `BEAST_GORILLA` | 58 (0x3A) |  |  | Beast - Gorilla |
-| `THORIUM_BROTHERHOOD` | 59 (0x3B) |  |  |  |
-| `NAGA` | 60 (0x3C) |  |  |  |
-| `DALARAN` | 61 (0x3D) |  |  |  |
-| `FORLORN_SPIRIT` | 62 (0x3E) |  |  |  |
-| `DARKHOWL` | 63 (0x3F) |  |  |  |
-| `GRELL` | 64 (0x40) |  |  |  |
-| `FURBOLG` | 65 (0x41) |  |  |  |
-| `HORDE_GENERIC` | 66 (0x42) |  |  |  |
-| `HORDE` | 67 (0x43) |  |  |  |
-| `UNDERCITY` | 68 (0x44) |  |  |  |
-| `DARNASSUS` | 69 (0x45) |  |  |  |
-| `SYNDICATE` | 70 (0x46) |  |  |  |
-| `HILLSBRAD_MILITIA` | 71 (0x47) |  |  |  |
-| `STORMWIND` | 72 (0x48) |  |  |  |
-| `DEMON` | 73 (0x49) |  |  |  |
-| `ELEMENTAL` | 74 (0x4A) |  |  |  |
-| `SPIRIT` | 75 (0x4B) |  |  |  |
-| `ORGRIMMAR` | 76 (0x4C) |  |  |  |
-| `TREASURE` | 77 (0x4D) |  |  |  |
-| `GNOLL_MUDSNOUT` | 78 (0x4E) |  |  | Gnoll - Mudsnout |
-| `HILLSBRAD_SOUTHSHORE_MAYOR` | 79 (0x4F) |  |  | HIllsbrad, Southshore Mayor |
-| `DRAGONFLIGHT_BLACK` | 80 (0x50) |  |  | Dragonflight, Black |
-| `THUNDER_BLUFF` | 81 (0x51) |  |  |  |
-| `TROLL_WITHERBARK` | 82 (0x52) |  |  | Troll, Witherbark |
-| `LEATHERWORKING_ELEMENTAL` | 83 (0x53) |  |  | Leatherworking - Elemental |
-| `QUILBOAR_RAZORMANE` | 84 (0x54) |  |  | Quilboar, Razormane |
-| `QUILBOAR_BRISTLEBACK` | 85 (0x55) |  |  | Quilboar, Bristleback |
-| `LEATHERWORKING_DRAGONSCALE` | 86 (0x56) |  |  | Leatherworking - Dragonscale |
-| `BLOODSAIL_BUCCANEERS` | 87 (0x57) |  |  |  |
-| `BLACKFATHOM` | 88 (0x58) |  |  |  |
-| `MAKRURA` | 89 (0x59) |  |  |  |
-| `CENTAUR_KOLKAR` | 90 (0x5A) |  |  | Centaur, Kolkar |
-| `CENTAUR_GALAK` | 91 (0x5B) |  |  | Centaur, Galak |
-| `GELKIS_CLAN_CENTAUR` | 92 (0x5C) |  |  |  |
-| `MAGRAM_CLAN_CENTAUR` | 93 (0x5D) |  |  |  |
-| `MARAUDINE` | 94 (0x5E) |  |  |  |
-| `THERAMORE` | 108 (0x6C) |  |  |  |
-| `QUILBOAR_RAZORFEN` | 109 (0x6D) |  |  | Quilboar, Razorfen |
-| `QUILBOAR_RAZORMANE_2` | 110 (0x6E) |  |  | Quilboar, Razormane 2 |
-| `QUILBOAR_DEATHSHEAD` | 111 (0x6F) |  |  | Quilboar, Deathshead |
-| `ENEMY` | 128 (0x80) |  |  |  |
-| `AMBIENT` | 148 (0x94) |  |  |  |
-| `NETHERGARDE_CARAVAN` | 168 (0xA8) |  |  |  |
-| `STEAMWHEEDLE_CARTEL` | 169 (0xA9) |  |  |  |
-| `ALLIANCE_GENERIC` | 189 (0xBD) |  |  |  |
-| `NETHERGARDE` | 209 (0xD1) |  |  |  |
-| `WAILING_CAVERNS` | 229 (0xE5) |  |  |  |
-| `SILITHID` | 249 (0xF9) |  |  |  |
-| `SILVERMOON_REMNANT` | 269 (0x10D) |  |  |  |
-| `ZANDALAR_TRIBE` | 270 (0x10E) |  |  |  |
-| `BLACKSMITHING_WEAPONSMITHING` | 289 (0x121) |  |  | Blacksmithing - Weaponsmithing |
-| `SCORPID` | 309 (0x135) |  |  |  |
-| `BEAST_BAT` | 310 (0x136) |  |  | Beast - Bat |
-| `TITAN` | 311 (0x137) |  |  |  |
-| `TASKMASTER_FIZZULE` | 329 (0x149) |  |  |  |
-| `RAVENHOLDT` | 349 (0x15D) |  |  |  |
-| `GADGETZAN` | 369 (0x171) |  |  |  |
-| `GNOMEREGAN_BUG` | 389 (0x185) |  |  |  |
-| `HARPY` | 409 (0x199) |  |  |  |
-| `BURNING_BLADE` | 429 (0x1AD) |  |  |  |
-| `SHADOWSILK_POACHER` | 449 (0x1C1) |  |  |  |
-| `SEARING_SPIDER` | 450 (0x1C2) |  |  |  |
-| `ALLIANCE` | 469 (0x1D5) |  |  |  |
-| `RATCHET` | 470 (0x1D6) |  |  |  |
-| `WILDHAMMER_CLAN` | 471 (0x1D7) |  |  |  |
-| `GOBLIN_DARK_IRON_BAR_PATRON` | 489 (0x1E9) |  |  | Goblin, Dark Iron Bar Patron |
-| `THE_LEAGUE_OF_ARATHOR` | 509 (0x1FD) |  |  |  |
-| `THE_DEFILERS` | 510 (0x1FE) |  |  |  |
-| `GIANT` | 511 (0x1FF) |  |  |  |
-| `ARGENT_DAWN` | 529 (0x211) |  |  |  |
-| `DARKSPEAR_TROLLS` | 530 (0x212) |  |  |  |
-| `DRAGONFLIGHT_BRONZE` | 531 (0x213) |  |  | Dragonflight, Bronze |
-| `DRAGONFLIGHT_BLUE` | 532 (0x214) |  |  | Dragonflight, Blue |
-| `LEATHERWORKING_TRIBAL` | 549 (0x225) |  |  | Leatherworking - Tribal |
-| `ENGINEERING_GOBLIN` | 550 (0x226) |  |  | Engineering - Goblin |
-| `ENGINEERING_GNOME` | 551 (0x227) |  |  | Engineering - Gnome |
-| `BLACKSMITHING_HAMMERSMITHING` | 569 (0x239) |  |  | Blacksmithing - Hammersmithing |
-| `BLACKSMITHING_AXESMITHING` | 570 (0x23A) |  |  | Blacksmithing - Axesmithing |
-| `BLACKSMITHING_SWORDSMITHING` | 571 (0x23B) |  |  | Blacksmithing - Swordsmithing |
-| `TROLL_VILEBRANCH` | 572 (0x23C) |  |  | Troll, Vilebranch |
-| `SOUTHSEA_FREEBOOTERS` | 573 (0x23D) |  |  |  |
-| `CAER_DARROW` | 574 (0x23E) |  |  |  |
-| `FURBOLG_UNCORRUPTED` | 575 (0x23F) |  |  | Furbolg, Uncorrupted |
-| `TIMBERMAW_HOLD` | 576 (0x240) |  |  |  |
-| `EVERLOOK` | 577 (0x241) |  |  |  |
-| `WINTERSABER_TRAINERS` | 589 (0x24D) |  |  |  |
-| `CENARION_CIRCLE` | 609 (0x261) |  |  |  |
-| `SHATTERSPEAR_TROLLS` | 629 (0x275) |  |  |  |
-| `RAVASAUR_TRAINERS` | 630 (0x276) |  |  |  |
-| `MAJORDOMO_EXECUTUS` | 649 (0x289) |  |  |  |
-| `BEAST_CARRION_BIRD` | 669 (0x29D) |  |  | Beast - Carrion Bird |
-| `BEAST_CAT` | 670 (0x29E) |  |  | Beast - Cat |
-| `BEAST_CRAB` | 671 (0x29F) |  |  | Beast - Crab |
-| `BEAST_CROCILISK` | 672 (0x2A0) |  |  | Beast - Crocilisk |
-| `BEAST_HYENA` | 673 (0x2A1) |  |  | Beast - Hyena |
-| `BEAST_OWL` | 674 (0x2A2) |  |  | Beast - Owl |
-| `BEAST_SCORPID` | 675 (0x2A3) |  |  | Beast - Scorpid |
-| `BEAST_TALLSTRIDER` | 676 (0x2A4) |  |  | Beast - Tallstrider |
-| `BEAST_TURTLE` | 677 (0x2A5) |  |  | Beast - Turtle |
-| `BEAST_WIND_SERPENT` | 678 (0x2A6) |  |  | Beast - Wind Serpent |
-| `TRAINING_DUMMY` | 679 (0x2A7) |  |  |  |
-| `DRAGONFLIGHT_BLACK_BAIT` | 689 (0x2B1) |  |  | Dragonflight, Black - Bait |
-| `BATTLEGROUND_NEUTRAL` | 709 (0x2C5) |  |  |  |
-| `FROSTWOLF_CLAN` | 729 (0x2D9) |  |  |  |
-| `STORMPIKE_GUARD` | 730 (0x2DA) |  |  |  |
-| `HYDRAXIAN_WATERLORDS` | 749 (0x2ED) |  |  |  |
-| `SULFURON_FIRELORDS` | 750 (0x2EE) |  |  |  |
-| `GIZLOCKS_DUMMY` | 769 (0x301) |  |  | Gizlock's Dummy |
-| `GIZLOCKS_CHARM` | 770 (0x302) |  |  | Gizlock's Charm |
-| `GIZLOCK` | 771 (0x303) |  |  |  |
-| `MORO_GAI` | 789 (0x315) |  |  | Moro'gai |
-| `SPIRIT_GUIDE_ALLIANCE` | 790 (0x316) |  |  | Spirit Guide - Alliance |
-| `SHEN_DRALAR` | 809 (0x329) |  |  | Shen'dralar |
-| `OGRE_CAPTAIN_KROMCRUSH` | 829 (0x33D) |  |  | Ogre (Captain Kromcrush) |
-| `SPIRIT_GUIDE_HORDE` | 849 (0x351) |  |  | Spirit Guide - Horde |
-| `JAEDENAR` | 869 (0x365) |  |  |  |
-| `WARSONG_OUTRIDERS` | 889 (0x379) |  |  |  |
-| `SILVERWING_SENTINELS` | 890 (0x37A) |  |  |  |
-| `ALLIANCE_FORCES` | 891 (0x37B) |  |  |  |
-| `HORDE_FORCES` | 892 (0x37C) |  |  |  |
-| `REVANTUSK_TROLLS` | 893 (0x37D) |  |  |  |
-| `DARKMOON_FAIRE` | 909 (0x38D) |  |  |  |
-| `BROOD_OF_NOZDORMU` | 910 (0x38E) |  |  |  |
-| `SILVERMOON_CITY` | 911 (0x38F) |  |  |  |
-| `MIGHT_OF_KALIMDOR` | 912 (0x390) |  |  |  |
-| `PLAYER_BLOOD_ELF` | 914 (0x392) |  |  | PLAYER, Blood Elf |
-| `ARMIES_OF_C_THUN` | 915 (0x393) |  |  | Armies of C'Thun |
-| `SILITHID_ATTACKERS` | 916 (0x394) |  |  |  |
-| `THE_IRONFORGE_BRIGADE` | 917 (0x395) |  |  |  |
-| `RC_ENEMIES` | 918 (0x396) |  |  |  |
-| `RC_OBJECTS` | 919 (0x397) |  |  |  |
-| `RED` | 920 (0x398) |  |  |  |
-| `BLUE` | 921 (0x399) |  |  |  |
-| `TRANQUILLIEN` | 922 (0x39A) |  |  |  |
-| `FARSTRIDERS` | 923 (0x39B) |  |  |  |
-| `DEPRECATED` | 924 (0x39C) |  |  |  |
-| `SUNSTRIDERS` | 925 (0x39D) |  |  |  |
-| `MAGISTERS_GUILD` | 926 (0x39E) |  |  | Magister's Guild |
-| `PLAYER_DRAENEI` | 927 (0x39F) |  |  | PLAYER, Draenei |
-| `SCOURGE_INVADERS` | 928 (0x3A0) |  |  |  |
-| `BLOODMAUL_CLAN` | 929 (0x3A1) |  |  |  |
-| `EXODAR` | 930 (0x3A2) |  |  |  |
-| `TEST_FACTION_NOT_A_REAL_FACTION` | 931 (0x3A3) |  |  | Test Faction (not a real faction) |
-| `THE_ALDOR` | 932 (0x3A4) |  |  |  |
-| `THE_CONSORTIUM` | 933 (0x3A5) |  |  |  |
-| `THE_SCRYERS` | 934 (0x3A6) |  |  |  |
-| `THE_SHA_TAR` | 935 (0x3A7) |  |  | The Sha'tar |
-| `SHATTRATH_CITY` | 936 (0x3A8) |  |  |  |
-| `TROLL_FOREST` | 937 (0x3A9) |  |  | Troll, Forest |
-| `THE_OMENAI` | 938 (0x3AA) |  |  |  |
-| `DEPRECATED1` | 939 (0x3AB) |  |  |  |
-| `THE_SONS_OF_LOTHAR` | 940 (0x3AC) |  |  |  |
-| `THE_MAG_HAR` | 941 (0x3AD) |  |  | The Mag'har |
-| `CENARION_EXPEDITION` | 942 (0x3AE) |  |  |  |
-| `FEL_ORC` | 943 (0x3AF) |  |  |  |
-| `FEL_ORC_GHOST` | 944 (0x3B0) |  |  |  |
-| `SONS_OF_LOTHAR_GHOSTS` | 945 (0x3B1) |  |  |  |
-| `HONOR_HOLD` | 946 (0x3B2) |  |  |  |
-| `THRALLMAR` | 947 (0x3B3) |  |  |  |
-| `TEST_FACTION_2` | 948 (0x3B4) |  |  |  |
-| `TEST_FACTION_1` | 949 (0x3B5) |  |  |  |
-| `TOWOW_FLAG` | 950 (0x3B6) |  |  | ToWoW - Flag |
-| `TOWOW_FLAG_TRIGGER_ALLIANCE_DND` | 951 (0x3B7) |  |  | ToWoW - Flag Trigger Alliance (DND) |
-| `TEST_FACTION_3` | 952 (0x3B8) |  |  |  |
-| `TEST_FACTION_4` | 953 (0x3B9) |  |  |  |
-| `TOWOW_FLAG_TRIGGER_HORDE_DND` | 954 (0x3BA) |  |  | ToWoW - Flag Trigger Horde (DND) |
-| `BROKEN` | 955 (0x3BB) |  |  |  |
-| `ETHEREUM` | 956 (0x3BC) |  |  |  |
-| `EARTH_ELEMENTAL` | 957 (0x3BD) |  |  |  |
-| `FIGHTING_ROBOTS` | 958 (0x3BE) |  |  |  |
-| `ACTOR_GOOD` | 959 (0x3BF) |  |  |  |
-| `ACTOR_EVIL` | 960 (0x3C0) |  |  |  |
-| `STILLPINE_FURBOLG` | 961 (0x3C1) |  |  |  |
-| `CRAZED_OWLKIN` | 962 (0x3C2) |  |  |  |
-| `CHESS_ALLIANCE` | 963 (0x3C3) |  |  |  |
-| `CHESS_HORDE` | 964 (0x3C4) |  |  |  |
-| `MONSTER_SPAR` | 965 (0x3C5) |  |  |  |
-| `MONSTER_SPAR_BUDDY` | 966 (0x3C6) |  |  |  |
-| `THE_VIOLET_EYE` | 967 (0x3C7) |  |  |  |
-| `SUNHAWKS` | 968 (0x3C8) |  |  |  |
-| `HAND_OF_ARGUS` | 969 (0x3C9) |  |  |  |
-| `SPOREGGAR` | 970 (0x3CA) |  |  |  |
-| `FUNGAL_GIANT` | 971 (0x3CB) |  |  |  |
-| `SPORE_BAT` | 972 (0x3CC) |  |  |  |
-| `MONSTER_PREDATOR` | 973 (0x3CD) |  |  | Monster, Predator |
-| `MONSTER_PREY` | 974 (0x3CE) |  |  | Monster, Prey |
-| `VOID_ANOMALY` | 975 (0x3CF) |  |  |  |
-| `HYJAL_DEFENDERS` | 976 (0x3D0) |  |  |  |
-| `HYJAL_INVADERS` | 977 (0x3D1) |  |  |  |
-| `KURENAI` | 978 (0x3D2) |  |  |  |
-| `EARTHEN_RING` | 979 (0x3D3) |  |  |  |
-| `THE_BURNING_CRUSADE` | 980 (0x3D4) |  |  |  |
-| `ARAKKOA` | 981 (0x3D5) |  |  |  |
-| `ZANGARMARSH_BANNER_ALLIANCE` | 982 (0x3D6) |  |  | Zangarmarsh Banner (Alliance) |
-| `ZANGARMARSH_BANNER_HORDE` | 983 (0x3D7) |  |  | Zangarmarsh Banner (Horde) |
-| `ZANGARMARSH_BANNER_NEUTRAL` | 984 (0x3D8) |  |  | Zangarmarsh Banner (Neutral) |
-| `CAVERNS_OF_TIME_THRALL` | 985 (0x3D9) |  |  | Caverns of Time - Thrall |
-| `CAVERNS_OF_TIME_DURNHOLDE` | 986 (0x3DA) |  |  | Caverns of Time - Durnholde |
-| `CAVERNS_OF_TIME_SOUTHSHORE_GUARDS` | 987 (0x3DB) |  |  | Caverns of Time - Southshore Guards |
-| `SHADOW_COUNCIL_COVERT` | 988 (0x3DC) |  |  |  |
-| `KEEPERS_OF_TIME` | 989 (0x3DD) |  |  |  |
-| `THE_SCALE_OF_THE_SANDS` | 990 (0x3DE) |  |  |  |
-| `DARK_PORTAL_DEFENDER_ALLIANCE` | 991 (0x3DF) |  |  | Dark Portal Defender, Alliance |
-| `DARK_PORTAL_DEFENDER_HORDE` | 992 (0x3E0) |  |  | Dark Portal Defender, Horde |
-| `DARK_PORTAL_ATTACKER_LEGION` | 993 (0x3E1) |  |  | Dark Portal Attacker, Legion |
-| `INCITER_TRIGGER` | 994 (0x3E2) |  |  |  |
-| `INCITER_TRIGGER_2` | 995 (0x3E3) |  |  |  |
-| `INCITER_TRIGGER_3` | 996 (0x3E4) |  |  |  |
-| `INCITER_TRIGGER_4` | 997 (0x3E5) |  |  |  |
-| `INCITER_TRIGGER_5` | 998 (0x3E6) |  |  |  |
-| `MANA_CREATURE` | 999 (0x3E7) |  |  |  |
-| `KHADGARS_SERVANT` | 1000 (0x3E8) |  |  | Khadgar's Servant |
-| `BLADESPIRE_CLAN` | 1001 (0x3E9) |  |  |  |
-| `ETHEREUM_SPARBUDDY` | 1002 (0x3EA) |  |  |  |
-| `PROTECTORATE` | 1003 (0x3EB) |  |  |  |
-| `ARCANE_ANNIHILATOR_DNR` | 1004 (0x3EC) |  |  | Arcane Annihilator (DNR) |
-| `FRIENDLY_HIDDEN` | 1005 (0x3ED) |  |  | Friendly, Hidden |
-| `KIRIN_VAR_DATHRIC` | 1006 (0x3EE) |  |  | Kirin'Var - Dathric |
-| `KIRIN_VAR_BELMARA` | 1007 (0x3EF) |  |  | Kirin'Var - Belmara |
-| `KIRIN_VAR_LUMINRATH` | 1008 (0x3F0) |  |  | Kirin'Var - Luminrath |
-| `KIRIN_VAR_COHLIEN` | 1009 (0x3F1) |  |  | Kirin'Var - Cohlien |
-| `SERVANT_OF_ILLIDAN` | 1010 (0x3F2) |  |  |  |
-| `LOWER_CITY` | 1011 (0x3F3) |  |  |  |
-| `ASHTONGUE_DEATHSWORN` | 1012 (0x3F4) |  |  |  |
-| `SPIRITS_OF_SHADOWMOON_1` | 1013 (0x3F5) |  |  |  |
-| `SPIRITS_OF_SHADOWMOON_2` | 1014 (0x3F6) |  |  |  |
-| `NETHERWING` | 1015 (0x3F7) |  |  |  |
-| `WYRMCULT` | 1016 (0x3F8) |  |  |  |
-| `TREANT` | 1017 (0x3F9) |  |  |  |
-| `LEOTHERAS_DEMON_I` | 1018 (0x3FA) |  |  |  |
-| `LEOTHERAS_DEMON_II` | 1019 (0x3FB) |  |  |  |
-| `LEOTHERAS_DEMON_III` | 1020 (0x3FC) |  |  |  |
-| `LEOTHERAS_DEMON_IV` | 1021 (0x3FD) |  |  |  |
-| `LEOTHERAS_DEMON_V` | 1022 (0x3FE) |  |  |  |
-| `AZALOTH` | 1023 (0x3FF) |  |  |  |
-| `ROCK_FLAYER` | 1024 (0x400) |  |  |  |
-| `FLAYER_HUNTER` | 1025 (0x401) |  |  |  |
-| `SHADOWMOON_SHADE` | 1026 (0x402) |  |  |  |
-| `LEGION_COMMUNICATOR` | 1027 (0x403) |  |  |  |
-| `RAVENSWOOD_ANCIENTS` | 1028 (0x404) |  |  |  |
-| `CHESS_FRIENDLY_TO_ALL_CHESS` | 1029 (0x405) |  |  | Chess, Friendly to All Chess |
-| `BLACK_TEMPLE_GATES_ILLIDARI` | 1030 (0x406) |  |  | Black Temple Gates - Illidari |
-| `SHA_TARI_SKYGUARD` | 1031 (0x407) |  |  | Sha'tari Skyguard |
-| `AREA_52` | 1032 (0x408) |  |  |  |
-| `MAIEV` | 1033 (0x409) |  |  |  |
-| `SKETTIS_SHADOWY_ARAKKOA` | 1034 (0x40A) |  |  |  |
-| `SKETTIS_ARAKKOA` | 1035 (0x40B) |  |  |  |
-| `DRAGONMAW_ENEMY` | 1036 (0x40C) |  |  |  |
-| `ALLIANCE_VANGUARD` | 1037 (0x40D) |  |  |  |
-| `OGRI_LA` | 1038 (0x40E) |  |  | Ogri'la |
-| `RAVAGER` | 1039 (0x40F) |  |  |  |
-| `REUSE` | 1040 (0x410) |  |  |  |
-| `FRENZY` | 1041 (0x411) |  |  |  |
-| `SKYGUARD_ENEMY` | 1042 (0x412) |  |  |  |
-| `SKUNK_PETUNIA` | 1043 (0x413) |  |  | Skunk, Petunia |
-| `THERAMORE_DESERTER` | 1044 (0x414) |  |  |  |
-| `VRYKUL` | 1045 (0x415) |  |  |  |
-| `NORTHSEA_PIRATES` | 1046 (0x416) |  |  |  |
-| `TUSKARR` | 1047 (0x417) |  |  |  |
-| `UNUSED` | 1048 (0x418) |  |  |  |
-| `TROLL_AMANI` | 1049 (0x419) |  |  | Troll, Amani |
-| `VALIANCE_EXPEDITION` | 1050 (0x41A) |  |  |  |
-| `UNUSED1` | 1051 (0x41B) |  |  |  |
-| `HORDE_EXPEDITION` | 1052 (0x41C) |  |  |  |
-| `WESTGUARD` | 1053 (0x41D) |  |  |  |
-| `SPOTTED_GRYPHON` | 1054 (0x41E) |  |  |  |
-| `TAMED_PLAGUEHOUND` | 1055 (0x41F) |  |  |  |
-| `VRYKUL_ANCIENT_SPIRIT_1` | 1056 (0x420) |  |  | Vrykul (Ancient Spirit 1) |
-| `VRYKUL_ANCIENT_SIPRIT_2` | 1057 (0x421) |  |  | Vrykul (Ancient Siprit 2) |
-| `VRYKUL_ANCIENT_SIPRIT_3` | 1058 (0x422) |  |  | Vrykul (Ancient Siprit 3) |
-| `CTF_FLAG_ALLIANCE` | 1059 (0x423) |  |  | CTF - Flag - Alliance |
-| `TEST` | 1060 (0x424) |  |  |  |
-| `VRYKUL1` | 1061 (0x425) |  |  |  |
-| `VRYKUL_GLADIATOR` | 1062 (0x426) |  |  |  |
-| `VALGARDE_COMBATANT` | 1063 (0x427) |  |  |  |
-| `THE_TAUNKA` | 1064 (0x428) |  |  |  |
-| `MONSTER_ZONE_FORCE_REACTION_1` | 1065 (0x429) |  |  | Monster, Zone Force Reaction 1 |
-| `MONSTER_ZONE_FORCE_REACTION_2` | 1066 (0x42A) |  |  | Monster, Zone Force Reaction 2 |
-| `THE_HAND_OF_VENGEANCE` | 1067 (0x42B) |  |  |  |
-| `EXPLORERS__LEAGUE` | 1068 (0x42C) |  |  | Explorers' League |
-| `RAM_RACING_POWERUP_DND` | 1069 (0x42D) |  |  |  |
-| `RAM_RACING_TRAP_DND` | 1070 (0x42E) |  |  |  |
-| `CRAIGS_SQUIRRELS` | 1071 (0x42F) |  |  | Craig's Squirrels |
-| `REUSE1` | 1072 (0x430) |  |  |  |
-| `THE_KALU_AK` | 1073 (0x431) |  |  | The Kalu'ak |
-| `HOLIDAY_WATER_BARREL` | 1074 (0x432) |  |  | Holiday - Water Barrel |
-| `HOLIDAY_GENERIC` | 1075 (0x433) |  |  | Holiday - Generic |
-| `IRON_DWARVES` | 1076 (0x434) |  |  |  |
-| `SHATTERED_SUN_OFFENSIVE` | 1077 (0x435) |  |  |  |
-| `FIGHTING_VANITY_PET` | 1078 (0x436) |  |  |  |
-| `MURLOC_WINTERFIN` | 1079 (0x437) |  |  | Murloc, Winterfin |
-| `FRIENDLY_FORCE_REACTION` | 1080 (0x438) |  |  | Friendly, Force Reaction |
-| `OBJECT_FORCE_REACTION` | 1081 (0x439) |  |  | Object, Force Reaction |
-| `REUSE2` | 1082 (0x43A) |  |  |  |
-| `REUSE4` | 1083 (0x43B) |  |  |  |
-| `VRYKUL_SEA` | 1084 (0x43C) |  |  | Vrykul, Sea |
-| `WARSONG_OFFENSIVE` | 1085 (0x43D) |  |  |  |
-| `POACHER` | 1086 (0x43E) |  |  |  |
-| `HOLIDAY_MONSTER` | 1087 (0x43F) |  |  |  |
-| `FURBOLG_REDFANG` | 1088 (0x440) |  |  | Furbolg, Redfang |
-| `FURBOLG_FROSTPAW` | 1089 (0x441) |  |  | Furbolg, Frostpaw |
-| `KIRIN_TOR` | 1090 (0x442) |  |  |  |
-| `THE_WYRMREST_ACCORD` | 1091 (0x443) |  |  |  |
-| `AZJOL_NERUB` | 1092 (0x444) |  |  | Azjol-Nerub |
-| `REUSE8` | 1093 (0x445) |  |  |  |
-| `THE_SILVER_COVENANT` | 1094 (0x446) |  |  |  |
-| `GRIZZLY_HILLS_TRAPPER` | 1095 (0x447) |  |  |  |
-| `REUSE16` | 1096 (0x448) |  |  |  |
-| `WRATH_OF_THE_LICH_KING` | 1097 (0x449) |  |  |  |
-| `KNIGHTS_OF_THE_EBON_BLADE` | 1098 (0x44A) |  |  |  |
-| `WRATHGATE_SCOURGE` | 1099 (0x44B) |  |  |  |
-| `WRATHGATE_ALLIANCE` | 1100 (0x44C) |  |  |  |
-| `WRATHGATE_HORDE` | 1101 (0x44D) |  |  |  |
-| `CTF_FLAG_HORDE` | 1102 (0x44E) |  |  | CTF - Flag - Horde |
-| `CTF_FLAG_NEUTRAL` | 1103 (0x44F) |  |  | CTF - Flag - Neutral |
-| `FRENZYHEART_TRIBE` | 1104 (0x450) |  |  |  |
-| `THE_ORACLES` | 1105 (0x451) |  |  |  |
-| `ARGENT_CRUSADE` | 1106 (0x452) |  |  |  |
-| `TROLL_DRAKKARI` | 1107 (0x453) |  |  | Troll, Drakkari |
-| `COT_ARTHAS` | 1108 (0x454) |  |  |  |
-| `COT_STRATHOLME_CITIZEN` | 1109 (0x455) |  |  |  |
-| `COT_SCOURGE` | 1110 (0x456) |  |  |  |
-| `FREYA` | 1111 (0x457) |  |  |  |
-| `MOUNT_TAXI_ALLIANCE` | 1112 (0x458) |  |  | Mount - Taxi - Alliance |
-| `MOUNT_TAXI_HORDE` | 1113 (0x459) |  |  | Mount - Taxi - Horde |
-| `MOUNT_TAXI_NEUTRAL` | 1114 (0x45A) |  |  | Mount - Taxi - Neutral |
-| `ELEMENTAL_WATER` | 1115 (0x45B) |  |  | Elemental, Water |
-| `ELEMENTAL_AIR` | 1116 (0x45C) |  |  | Elemental, Air |
-| `SHOLAZAR_BASIN` | 1117 (0x45D) |  |  |  |
-| `CLASSIC` | 1118 (0x45E) |  |  |  |
-| `THE_SONS_OF_HODIR` | 1119 (0x45F) |  |  |  |
-| `IRON_GIANTS` | 1120 (0x460) |  |  |  |
-| `FROST_VRYKUL` | 1121 (0x461) |  |  |  |
-| `EARTHEN` | 1122 (0x462) |  |  |  |
-| `MONSTER_REFEREE` | 1123 (0x463) |  |  |  |
-| `THE_SUNREAVERS` | 1124 (0x464) |  |  |  |
-| `HYLDSMEET` | 1125 (0x465) |  |  |  |
-| `THE_FROSTBORN` | 1126 (0x466) |  |  |  |
-| `ORGRIMMAR_ALEX_TEST` | 1127 (0x467) |  |  | Orgrimmar (Alex Test) |
-| `TRANQUILLIEN_CONVERSION` | 1136 (0x470) |  |  |  |
-| `WINTERSABER_CONVERSION` | 1137 (0x471) |  |  |  |
-| `HATES_EVERYTHING` | 1145 (0x479) |  |  |  |
-| `SILVER_COVENANT_CONVERSION` | 1154 (0x482) |  |  |  |
-| `SUNREAVERS_CONVERSION` | 1155 (0x483) |  |  |  |
-| `THE_ASHEN_VERDICT` | 1156 (0x484) |  |  |  |
-| `CTF_FLAG_ALLIANCE_2` | 1159 (0x487) |  |  | CTF - Flag - Alliance 2 |
-| `CTF_FLAG_HORDE_2` | 1160 (0x488) |  |  | CTF - Flag - Horde 2 |
+| Enumerator | Value  | Comment | Display |
+| --------- | -------- | ------- | ------- |
+| `NONE` | 0 (0x00) |  |  |
+| `PLAYER_HUMAN` | 1 (0x01) |  | PLAYER, Human |
+| `PLAYER_ORC` | 2 (0x02) |  | PLAYER, Orc |
+| `PLAYER_DWARF` | 3 (0x03) |  | PLAYER, Dwarf |
+| `PLAYER_NIGHT_ELF` | 4 (0x04) |  | PLAYER, Night Elf |
+| `PLAYER_UNDEAD` | 5 (0x05) |  | PLAYER, Undead |
+| `PLAYER_TAUREN` | 6 (0x06) |  | PLAYER, Tauren |
+| `CREATURE` | 7 (0x07) |  |  |
+| `PLAYER_GNOME` | 8 (0x08) |  | PLAYER, Gnome |
+| `PLAYER_TROLL` | 9 (0x09) |  | PLAYER, Troll |
+| `MONSTER` | 14 (0x0E) |  |  |
+| `DEFIAS_BROTHERHOOD` | 15 (0x0F) |  |  |
+| `GNOLL_RIVERPAW` | 16 (0x10) |  | Gnoll - Riverpaw |
+| `GNOLL_REDRIDGE` | 17 (0x11) |  | Gnoll - Redridge |
+| `GNOLL_SHADOWHIDE` | 18 (0x12) |  | Gnoll - Shadowhide |
+| `MURLOC` | 19 (0x13) |  |  |
+| `UNDEAD_SCOURGE` | 20 (0x14) |  | Undead, Scourge |
+| `BOOTY_BAY` | 21 (0x15) |  |  |
+| `BEAST_SPIDER` | 22 (0x16) |  | Beast - Spider |
+| `BEAST_BOAR` | 23 (0x17) |  | Beast - Boar |
+| `WORGEN` | 24 (0x18) |  |  |
+| `KOBOLD` | 25 (0x19) |  |  |
+| `TROLL_BLOODSCALP` | 26 (0x1A) |  | Troll, Bloodscalp |
+| `TROLL_SKULLSPLITTER` | 27 (0x1B) |  | Troll, Skullsplitter |
+| `PREY` | 28 (0x1C) |  |  |
+| `BEAST_WOLF` | 29 (0x1D) |  | Beast - Wolf |
+| `DEFIAS_BROTHERHOOD_TRAITOR` | 30 (0x1E) |  |  |
+| `FRIENDLY` | 31 (0x1F) |  |  |
+| `TROGG` | 32 (0x20) |  |  |
+| `TROLL_FROSTMANE` | 33 (0x21) |  | Troll, Frostmane |
+| `ORC_BLACKROCK` | 34 (0x22) |  | Orc, Blackrock |
+| `VILLIAN` | 35 (0x23) |  |  |
+| `VICTIM` | 36 (0x24) |  |  |
+| `BEAST_BEAR` | 37 (0x25) |  | Beast - Bear |
+| `OGRE` | 38 (0x26) |  |  |
+| `KURZENS_MERCENARIES` | 39 (0x27) |  | Kurzen's Mercenaries |
+| `ESCORTEE` | 40 (0x28) |  |  |
+| `VENTURE_COMPANY` | 41 (0x29) |  |  |
+| `BEAST_RAPTOR` | 42 (0x2A) |  | Beast - Raptor |
+| `BASILISK` | 43 (0x2B) |  |  |
+| `DRAGONFLIGHT_GREEN` | 44 (0x2C) |  | Dragonflight, Green |
+| `LOST_ONES` | 45 (0x2D) |  |  |
+| `BLACKSMITHING_ARMORSMITHING` | 46 (0x2E) |  | Blacksmithing - Armorsmithing |
+| `IRONFORGE` | 47 (0x2F) |  |  |
+| `DARK_IRON_DWARVES` | 48 (0x30) |  |  |
+| `HUMAN_NIGHT_WATCH` | 49 (0x31) |  | Human, Night Watch |
+| `DRAGONFLIGHT_RED` | 50 (0x32) |  | Dragonflight, Red |
+| `GNOLL_MOSSHIDE` | 51 (0x33) |  | Gnoll - Mosshide |
+| `ORC_DRAGONMAW` | 52 (0x34) |  | Orc, Dragonmaw |
+| `GNOME_LEPER` | 53 (0x35) |  | Gnome - Leper |
+| `GNOMEREGAN_EXILES` | 54 (0x36) |  |  |
+| `LEOPARD` | 55 (0x37) |  |  |
+| `SCARLET_CRUSADE` | 56 (0x38) |  |  |
+| `GNOLL_ROTHIDE` | 57 (0x39) |  | Gnoll - Rothide |
+| `BEAST_GORILLA` | 58 (0x3A) |  | Beast - Gorilla |
+| `THORIUM_BROTHERHOOD` | 59 (0x3B) |  |  |
+| `NAGA` | 60 (0x3C) |  |  |
+| `DALARAN` | 61 (0x3D) |  |  |
+| `FORLORN_SPIRIT` | 62 (0x3E) |  |  |
+| `DARKHOWL` | 63 (0x3F) |  |  |
+| `GRELL` | 64 (0x40) |  |  |
+| `FURBOLG` | 65 (0x41) |  |  |
+| `HORDE_GENERIC` | 66 (0x42) |  |  |
+| `HORDE` | 67 (0x43) |  |  |
+| `UNDERCITY` | 68 (0x44) |  |  |
+| `DARNASSUS` | 69 (0x45) |  |  |
+| `SYNDICATE` | 70 (0x46) |  |  |
+| `HILLSBRAD_MILITIA` | 71 (0x47) |  |  |
+| `STORMWIND` | 72 (0x48) |  |  |
+| `DEMON` | 73 (0x49) |  |  |
+| `ELEMENTAL` | 74 (0x4A) |  |  |
+| `SPIRIT` | 75 (0x4B) |  |  |
+| `ORGRIMMAR` | 76 (0x4C) |  |  |
+| `TREASURE` | 77 (0x4D) |  |  |
+| `GNOLL_MUDSNOUT` | 78 (0x4E) |  | Gnoll - Mudsnout |
+| `HILLSBRAD_SOUTHSHORE_MAYOR` | 79 (0x4F) |  | HIllsbrad, Southshore Mayor |
+| `DRAGONFLIGHT_BLACK` | 80 (0x50) |  | Dragonflight, Black |
+| `THUNDER_BLUFF` | 81 (0x51) |  |  |
+| `TROLL_WITHERBARK` | 82 (0x52) |  | Troll, Witherbark |
+| `LEATHERWORKING_ELEMENTAL` | 83 (0x53) |  | Leatherworking - Elemental |
+| `QUILBOAR_RAZORMANE` | 84 (0x54) |  | Quilboar, Razormane |
+| `QUILBOAR_BRISTLEBACK` | 85 (0x55) |  | Quilboar, Bristleback |
+| `LEATHERWORKING_DRAGONSCALE` | 86 (0x56) |  | Leatherworking - Dragonscale |
+| `BLOODSAIL_BUCCANEERS` | 87 (0x57) |  |  |
+| `BLACKFATHOM` | 88 (0x58) |  |  |
+| `MAKRURA` | 89 (0x59) |  |  |
+| `CENTAUR_KOLKAR` | 90 (0x5A) |  | Centaur, Kolkar |
+| `CENTAUR_GALAK` | 91 (0x5B) |  | Centaur, Galak |
+| `GELKIS_CLAN_CENTAUR` | 92 (0x5C) |  |  |
+| `MAGRAM_CLAN_CENTAUR` | 93 (0x5D) |  |  |
+| `MARAUDINE` | 94 (0x5E) |  |  |
+| `THERAMORE` | 108 (0x6C) |  |  |
+| `QUILBOAR_RAZORFEN` | 109 (0x6D) |  | Quilboar, Razorfen |
+| `QUILBOAR_RAZORMANE_2` | 110 (0x6E) |  | Quilboar, Razormane 2 |
+| `QUILBOAR_DEATHSHEAD` | 111 (0x6F) |  | Quilboar, Deathshead |
+| `ENEMY` | 128 (0x80) |  |  |
+| `AMBIENT` | 148 (0x94) |  |  |
+| `NETHERGARDE_CARAVAN` | 168 (0xA8) |  |  |
+| `STEAMWHEEDLE_CARTEL` | 169 (0xA9) |  |  |
+| `ALLIANCE_GENERIC` | 189 (0xBD) |  |  |
+| `NETHERGARDE` | 209 (0xD1) |  |  |
+| `WAILING_CAVERNS` | 229 (0xE5) |  |  |
+| `SILITHID` | 249 (0xF9) |  |  |
+| `SILVERMOON_REMNANT` | 269 (0x10D) |  |  |
+| `ZANDALAR_TRIBE` | 270 (0x10E) |  |  |
+| `BLACKSMITHING_WEAPONSMITHING` | 289 (0x121) |  | Blacksmithing - Weaponsmithing |
+| `SCORPID` | 309 (0x135) |  |  |
+| `BEAST_BAT` | 310 (0x136) |  | Beast - Bat |
+| `TITAN` | 311 (0x137) |  |  |
+| `TASKMASTER_FIZZULE` | 329 (0x149) |  |  |
+| `RAVENHOLDT` | 349 (0x15D) |  |  |
+| `GADGETZAN` | 369 (0x171) |  |  |
+| `GNOMEREGAN_BUG` | 389 (0x185) |  |  |
+| `HARPY` | 409 (0x199) |  |  |
+| `BURNING_BLADE` | 429 (0x1AD) |  |  |
+| `SHADOWSILK_POACHER` | 449 (0x1C1) |  |  |
+| `SEARING_SPIDER` | 450 (0x1C2) |  |  |
+| `ALLIANCE` | 469 (0x1D5) |  |  |
+| `RATCHET` | 470 (0x1D6) |  |  |
+| `WILDHAMMER_CLAN` | 471 (0x1D7) |  |  |
+| `GOBLIN_DARK_IRON_BAR_PATRON` | 489 (0x1E9) |  | Goblin, Dark Iron Bar Patron |
+| `THE_LEAGUE_OF_ARATHOR` | 509 (0x1FD) |  |  |
+| `THE_DEFILERS` | 510 (0x1FE) |  |  |
+| `GIANT` | 511 (0x1FF) |  |  |
+| `ARGENT_DAWN` | 529 (0x211) |  |  |
+| `DARKSPEAR_TROLLS` | 530 (0x212) |  |  |
+| `DRAGONFLIGHT_BRONZE` | 531 (0x213) |  | Dragonflight, Bronze |
+| `DRAGONFLIGHT_BLUE` | 532 (0x214) |  | Dragonflight, Blue |
+| `LEATHERWORKING_TRIBAL` | 549 (0x225) |  | Leatherworking - Tribal |
+| `ENGINEERING_GOBLIN` | 550 (0x226) |  | Engineering - Goblin |
+| `ENGINEERING_GNOME` | 551 (0x227) |  | Engineering - Gnome |
+| `BLACKSMITHING_HAMMERSMITHING` | 569 (0x239) |  | Blacksmithing - Hammersmithing |
+| `BLACKSMITHING_AXESMITHING` | 570 (0x23A) |  | Blacksmithing - Axesmithing |
+| `BLACKSMITHING_SWORDSMITHING` | 571 (0x23B) |  | Blacksmithing - Swordsmithing |
+| `TROLL_VILEBRANCH` | 572 (0x23C) |  | Troll, Vilebranch |
+| `SOUTHSEA_FREEBOOTERS` | 573 (0x23D) |  |  |
+| `CAER_DARROW` | 574 (0x23E) |  |  |
+| `FURBOLG_UNCORRUPTED` | 575 (0x23F) |  | Furbolg, Uncorrupted |
+| `TIMBERMAW_HOLD` | 576 (0x240) |  |  |
+| `EVERLOOK` | 577 (0x241) |  |  |
+| `WINTERSABER_TRAINERS` | 589 (0x24D) |  |  |
+| `CENARION_CIRCLE` | 609 (0x261) |  |  |
+| `SHATTERSPEAR_TROLLS` | 629 (0x275) |  |  |
+| `RAVASAUR_TRAINERS` | 630 (0x276) |  |  |
+| `MAJORDOMO_EXECUTUS` | 649 (0x289) |  |  |
+| `BEAST_CARRION_BIRD` | 669 (0x29D) |  | Beast - Carrion Bird |
+| `BEAST_CAT` | 670 (0x29E) |  | Beast - Cat |
+| `BEAST_CRAB` | 671 (0x29F) |  | Beast - Crab |
+| `BEAST_CROCILISK` | 672 (0x2A0) |  | Beast - Crocilisk |
+| `BEAST_HYENA` | 673 (0x2A1) |  | Beast - Hyena |
+| `BEAST_OWL` | 674 (0x2A2) |  | Beast - Owl |
+| `BEAST_SCORPID` | 675 (0x2A3) |  | Beast - Scorpid |
+| `BEAST_TALLSTRIDER` | 676 (0x2A4) |  | Beast - Tallstrider |
+| `BEAST_TURTLE` | 677 (0x2A5) |  | Beast - Turtle |
+| `BEAST_WIND_SERPENT` | 678 (0x2A6) |  | Beast - Wind Serpent |
+| `TRAINING_DUMMY` | 679 (0x2A7) |  |  |
+| `DRAGONFLIGHT_BLACK_BAIT` | 689 (0x2B1) |  | Dragonflight, Black - Bait |
+| `BATTLEGROUND_NEUTRAL` | 709 (0x2C5) |  |  |
+| `FROSTWOLF_CLAN` | 729 (0x2D9) |  |  |
+| `STORMPIKE_GUARD` | 730 (0x2DA) |  |  |
+| `HYDRAXIAN_WATERLORDS` | 749 (0x2ED) |  |  |
+| `SULFURON_FIRELORDS` | 750 (0x2EE) |  |  |
+| `GIZLOCKS_DUMMY` | 769 (0x301) |  | Gizlock's Dummy |
+| `GIZLOCKS_CHARM` | 770 (0x302) |  | Gizlock's Charm |
+| `GIZLOCK` | 771 (0x303) |  |  |
+| `MORO_GAI` | 789 (0x315) |  | Moro'gai |
+| `SPIRIT_GUIDE_ALLIANCE` | 790 (0x316) |  | Spirit Guide - Alliance |
+| `SHEN_DRALAR` | 809 (0x329) |  | Shen'dralar |
+| `OGRE_CAPTAIN_KROMCRUSH` | 829 (0x33D) |  | Ogre (Captain Kromcrush) |
+| `SPIRIT_GUIDE_HORDE` | 849 (0x351) |  | Spirit Guide - Horde |
+| `JAEDENAR` | 869 (0x365) |  |  |
+| `WARSONG_OUTRIDERS` | 889 (0x379) |  |  |
+| `SILVERWING_SENTINELS` | 890 (0x37A) |  |  |
+| `ALLIANCE_FORCES` | 891 (0x37B) |  |  |
+| `HORDE_FORCES` | 892 (0x37C) |  |  |
+| `REVANTUSK_TROLLS` | 893 (0x37D) |  |  |
+| `DARKMOON_FAIRE` | 909 (0x38D) |  |  |
+| `BROOD_OF_NOZDORMU` | 910 (0x38E) |  |  |
+| `SILVERMOON_CITY` | 911 (0x38F) |  |  |
+| `MIGHT_OF_KALIMDOR` | 912 (0x390) |  |  |
+| `PLAYER_BLOOD_ELF` | 914 (0x392) |  | PLAYER, Blood Elf |
+| `ARMIES_OF_C_THUN` | 915 (0x393) |  | Armies of C'Thun |
+| `SILITHID_ATTACKERS` | 916 (0x394) |  |  |
+| `THE_IRONFORGE_BRIGADE` | 917 (0x395) |  |  |
+| `RC_ENEMIES` | 918 (0x396) |  |  |
+| `RC_OBJECTS` | 919 (0x397) |  |  |
+| `RED` | 920 (0x398) |  |  |
+| `BLUE` | 921 (0x399) |  |  |
+| `TRANQUILLIEN` | 922 (0x39A) |  |  |
+| `FARSTRIDERS` | 923 (0x39B) |  |  |
+| `DEPRECATED` | 924 (0x39C) |  |  |
+| `SUNSTRIDERS` | 925 (0x39D) |  |  |
+| `MAGISTERS_GUILD` | 926 (0x39E) |  | Magister's Guild |
+| `PLAYER_DRAENEI` | 927 (0x39F) |  | PLAYER, Draenei |
+| `SCOURGE_INVADERS` | 928 (0x3A0) |  |  |
+| `BLOODMAUL_CLAN` | 929 (0x3A1) |  |  |
+| `EXODAR` | 930 (0x3A2) |  |  |
+| `TEST_FACTION_NOT_A_REAL_FACTION` | 931 (0x3A3) |  | Test Faction (not a real faction) |
+| `THE_ALDOR` | 932 (0x3A4) |  |  |
+| `THE_CONSORTIUM` | 933 (0x3A5) |  |  |
+| `THE_SCRYERS` | 934 (0x3A6) |  |  |
+| `THE_SHA_TAR` | 935 (0x3A7) |  | The Sha'tar |
+| `SHATTRATH_CITY` | 936 (0x3A8) |  |  |
+| `TROLL_FOREST` | 937 (0x3A9) |  | Troll, Forest |
+| `THE_OMENAI` | 938 (0x3AA) |  |  |
+| `DEPRECATED1` | 939 (0x3AB) |  |  |
+| `THE_SONS_OF_LOTHAR` | 940 (0x3AC) |  |  |
+| `THE_MAG_HAR` | 941 (0x3AD) |  | The Mag'har |
+| `CENARION_EXPEDITION` | 942 (0x3AE) |  |  |
+| `FEL_ORC` | 943 (0x3AF) |  |  |
+| `FEL_ORC_GHOST` | 944 (0x3B0) |  |  |
+| `SONS_OF_LOTHAR_GHOSTS` | 945 (0x3B1) |  |  |
+| `HONOR_HOLD` | 946 (0x3B2) |  |  |
+| `THRALLMAR` | 947 (0x3B3) |  |  |
+| `TEST_FACTION_2` | 948 (0x3B4) |  |  |
+| `TEST_FACTION_1` | 949 (0x3B5) |  |  |
+| `TOWOW_FLAG` | 950 (0x3B6) |  | ToWoW - Flag |
+| `TOWOW_FLAG_TRIGGER_ALLIANCE_DND` | 951 (0x3B7) |  | ToWoW - Flag Trigger Alliance (DND) |
+| `TEST_FACTION_3` | 952 (0x3B8) |  |  |
+| `TEST_FACTION_4` | 953 (0x3B9) |  |  |
+| `TOWOW_FLAG_TRIGGER_HORDE_DND` | 954 (0x3BA) |  | ToWoW - Flag Trigger Horde (DND) |
+| `BROKEN` | 955 (0x3BB) |  |  |
+| `ETHEREUM` | 956 (0x3BC) |  |  |
+| `EARTH_ELEMENTAL` | 957 (0x3BD) |  |  |
+| `FIGHTING_ROBOTS` | 958 (0x3BE) |  |  |
+| `ACTOR_GOOD` | 959 (0x3BF) |  |  |
+| `ACTOR_EVIL` | 960 (0x3C0) |  |  |
+| `STILLPINE_FURBOLG` | 961 (0x3C1) |  |  |
+| `CRAZED_OWLKIN` | 962 (0x3C2) |  |  |
+| `CHESS_ALLIANCE` | 963 (0x3C3) |  |  |
+| `CHESS_HORDE` | 964 (0x3C4) |  |  |
+| `MONSTER_SPAR` | 965 (0x3C5) |  |  |
+| `MONSTER_SPAR_BUDDY` | 966 (0x3C6) |  |  |
+| `THE_VIOLET_EYE` | 967 (0x3C7) |  |  |
+| `SUNHAWKS` | 968 (0x3C8) |  |  |
+| `HAND_OF_ARGUS` | 969 (0x3C9) |  |  |
+| `SPOREGGAR` | 970 (0x3CA) |  |  |
+| `FUNGAL_GIANT` | 971 (0x3CB) |  |  |
+| `SPORE_BAT` | 972 (0x3CC) |  |  |
+| `MONSTER_PREDATOR` | 973 (0x3CD) |  | Monster, Predator |
+| `MONSTER_PREY` | 974 (0x3CE) |  | Monster, Prey |
+| `VOID_ANOMALY` | 975 (0x3CF) |  |  |
+| `HYJAL_DEFENDERS` | 976 (0x3D0) |  |  |
+| `HYJAL_INVADERS` | 977 (0x3D1) |  |  |
+| `KURENAI` | 978 (0x3D2) |  |  |
+| `EARTHEN_RING` | 979 (0x3D3) |  |  |
+| `THE_BURNING_CRUSADE` | 980 (0x3D4) |  |  |
+| `ARAKKOA` | 981 (0x3D5) |  |  |
+| `ZANGARMARSH_BANNER_ALLIANCE` | 982 (0x3D6) |  | Zangarmarsh Banner (Alliance) |
+| `ZANGARMARSH_BANNER_HORDE` | 983 (0x3D7) |  | Zangarmarsh Banner (Horde) |
+| `ZANGARMARSH_BANNER_NEUTRAL` | 984 (0x3D8) |  | Zangarmarsh Banner (Neutral) |
+| `CAVERNS_OF_TIME_THRALL` | 985 (0x3D9) |  | Caverns of Time - Thrall |
+| `CAVERNS_OF_TIME_DURNHOLDE` | 986 (0x3DA) |  | Caverns of Time - Durnholde |
+| `CAVERNS_OF_TIME_SOUTHSHORE_GUARDS` | 987 (0x3DB) |  | Caverns of Time - Southshore Guards |
+| `SHADOW_COUNCIL_COVERT` | 988 (0x3DC) |  |  |
+| `KEEPERS_OF_TIME` | 989 (0x3DD) |  |  |
+| `THE_SCALE_OF_THE_SANDS` | 990 (0x3DE) |  |  |
+| `DARK_PORTAL_DEFENDER_ALLIANCE` | 991 (0x3DF) |  | Dark Portal Defender, Alliance |
+| `DARK_PORTAL_DEFENDER_HORDE` | 992 (0x3E0) |  | Dark Portal Defender, Horde |
+| `DARK_PORTAL_ATTACKER_LEGION` | 993 (0x3E1) |  | Dark Portal Attacker, Legion |
+| `INCITER_TRIGGER` | 994 (0x3E2) |  |  |
+| `INCITER_TRIGGER_2` | 995 (0x3E3) |  |  |
+| `INCITER_TRIGGER_3` | 996 (0x3E4) |  |  |
+| `INCITER_TRIGGER_4` | 997 (0x3E5) |  |  |
+| `INCITER_TRIGGER_5` | 998 (0x3E6) |  |  |
+| `MANA_CREATURE` | 999 (0x3E7) |  |  |
+| `KHADGARS_SERVANT` | 1000 (0x3E8) |  | Khadgar's Servant |
+| `BLADESPIRE_CLAN` | 1001 (0x3E9) |  |  |
+| `ETHEREUM_SPARBUDDY` | 1002 (0x3EA) |  |  |
+| `PROTECTORATE` | 1003 (0x3EB) |  |  |
+| `ARCANE_ANNIHILATOR_DNR` | 1004 (0x3EC) |  | Arcane Annihilator (DNR) |
+| `FRIENDLY_HIDDEN` | 1005 (0x3ED) |  | Friendly, Hidden |
+| `KIRIN_VAR_DATHRIC` | 1006 (0x3EE) |  | Kirin'Var - Dathric |
+| `KIRIN_VAR_BELMARA` | 1007 (0x3EF) |  | Kirin'Var - Belmara |
+| `KIRIN_VAR_LUMINRATH` | 1008 (0x3F0) |  | Kirin'Var - Luminrath |
+| `KIRIN_VAR_COHLIEN` | 1009 (0x3F1) |  | Kirin'Var - Cohlien |
+| `SERVANT_OF_ILLIDAN` | 1010 (0x3F2) |  |  |
+| `LOWER_CITY` | 1011 (0x3F3) |  |  |
+| `ASHTONGUE_DEATHSWORN` | 1012 (0x3F4) |  |  |
+| `SPIRITS_OF_SHADOWMOON_1` | 1013 (0x3F5) |  |  |
+| `SPIRITS_OF_SHADOWMOON_2` | 1014 (0x3F6) |  |  |
+| `NETHERWING` | 1015 (0x3F7) |  |  |
+| `WYRMCULT` | 1016 (0x3F8) |  |  |
+| `TREANT` | 1017 (0x3F9) |  |  |
+| `LEOTHERAS_DEMON_I` | 1018 (0x3FA) |  |  |
+| `LEOTHERAS_DEMON_II` | 1019 (0x3FB) |  |  |
+| `LEOTHERAS_DEMON_III` | 1020 (0x3FC) |  |  |
+| `LEOTHERAS_DEMON_IV` | 1021 (0x3FD) |  |  |
+| `LEOTHERAS_DEMON_V` | 1022 (0x3FE) |  |  |
+| `AZALOTH` | 1023 (0x3FF) |  |  |
+| `ROCK_FLAYER` | 1024 (0x400) |  |  |
+| `FLAYER_HUNTER` | 1025 (0x401) |  |  |
+| `SHADOWMOON_SHADE` | 1026 (0x402) |  |  |
+| `LEGION_COMMUNICATOR` | 1027 (0x403) |  |  |
+| `RAVENSWOOD_ANCIENTS` | 1028 (0x404) |  |  |
+| `CHESS_FRIENDLY_TO_ALL_CHESS` | 1029 (0x405) |  | Chess, Friendly to All Chess |
+| `BLACK_TEMPLE_GATES_ILLIDARI` | 1030 (0x406) |  | Black Temple Gates - Illidari |
+| `SHA_TARI_SKYGUARD` | 1031 (0x407) |  | Sha'tari Skyguard |
+| `AREA_52` | 1032 (0x408) |  |  |
+| `MAIEV` | 1033 (0x409) |  |  |
+| `SKETTIS_SHADOWY_ARAKKOA` | 1034 (0x40A) |  |  |
+| `SKETTIS_ARAKKOA` | 1035 (0x40B) |  |  |
+| `DRAGONMAW_ENEMY` | 1036 (0x40C) |  |  |
+| `ALLIANCE_VANGUARD` | 1037 (0x40D) |  |  |
+| `OGRI_LA` | 1038 (0x40E) |  | Ogri'la |
+| `RAVAGER` | 1039 (0x40F) |  |  |
+| `REUSE` | 1040 (0x410) |  |  |
+| `FRENZY` | 1041 (0x411) |  |  |
+| `SKYGUARD_ENEMY` | 1042 (0x412) |  |  |
+| `SKUNK_PETUNIA` | 1043 (0x413) |  | Skunk, Petunia |
+| `THERAMORE_DESERTER` | 1044 (0x414) |  |  |
+| `VRYKUL` | 1045 (0x415) |  |  |
+| `NORTHSEA_PIRATES` | 1046 (0x416) |  |  |
+| `TUSKARR` | 1047 (0x417) |  |  |
+| `UNUSED` | 1048 (0x418) |  |  |
+| `TROLL_AMANI` | 1049 (0x419) |  | Troll, Amani |
+| `VALIANCE_EXPEDITION` | 1050 (0x41A) |  |  |
+| `UNUSED1` | 1051 (0x41B) |  |  |
+| `HORDE_EXPEDITION` | 1052 (0x41C) |  |  |
+| `WESTGUARD` | 1053 (0x41D) |  |  |
+| `SPOTTED_GRYPHON` | 1054 (0x41E) |  |  |
+| `TAMED_PLAGUEHOUND` | 1055 (0x41F) |  |  |
+| `VRYKUL_ANCIENT_SPIRIT_1` | 1056 (0x420) |  | Vrykul (Ancient Spirit 1) |
+| `VRYKUL_ANCIENT_SIPRIT_2` | 1057 (0x421) |  | Vrykul (Ancient Siprit 2) |
+| `VRYKUL_ANCIENT_SIPRIT_3` | 1058 (0x422) |  | Vrykul (Ancient Siprit 3) |
+| `CTF_FLAG_ALLIANCE` | 1059 (0x423) |  | CTF - Flag - Alliance |
+| `TEST` | 1060 (0x424) |  |  |
+| `VRYKUL1` | 1061 (0x425) |  |  |
+| `VRYKUL_GLADIATOR` | 1062 (0x426) |  |  |
+| `VALGARDE_COMBATANT` | 1063 (0x427) |  |  |
+| `THE_TAUNKA` | 1064 (0x428) |  |  |
+| `MONSTER_ZONE_FORCE_REACTION_1` | 1065 (0x429) |  | Monster, Zone Force Reaction 1 |
+| `MONSTER_ZONE_FORCE_REACTION_2` | 1066 (0x42A) |  | Monster, Zone Force Reaction 2 |
+| `THE_HAND_OF_VENGEANCE` | 1067 (0x42B) |  |  |
+| `EXPLORERS__LEAGUE` | 1068 (0x42C) |  | Explorers' League |
+| `RAM_RACING_POWERUP_DND` | 1069 (0x42D) |  |  |
+| `RAM_RACING_TRAP_DND` | 1070 (0x42E) |  |  |
+| `CRAIGS_SQUIRRELS` | 1071 (0x42F) |  | Craig's Squirrels |
+| `REUSE1` | 1072 (0x430) |  |  |
+| `THE_KALU_AK` | 1073 (0x431) |  | The Kalu'ak |
+| `HOLIDAY_WATER_BARREL` | 1074 (0x432) |  | Holiday - Water Barrel |
+| `HOLIDAY_GENERIC` | 1075 (0x433) |  | Holiday - Generic |
+| `IRON_DWARVES` | 1076 (0x434) |  |  |
+| `SHATTERED_SUN_OFFENSIVE` | 1077 (0x435) |  |  |
+| `FIGHTING_VANITY_PET` | 1078 (0x436) |  |  |
+| `MURLOC_WINTERFIN` | 1079 (0x437) |  | Murloc, Winterfin |
+| `FRIENDLY_FORCE_REACTION` | 1080 (0x438) |  | Friendly, Force Reaction |
+| `OBJECT_FORCE_REACTION` | 1081 (0x439) |  | Object, Force Reaction |
+| `REUSE2` | 1082 (0x43A) |  |  |
+| `REUSE4` | 1083 (0x43B) |  |  |
+| `VRYKUL_SEA` | 1084 (0x43C) |  | Vrykul, Sea |
+| `WARSONG_OFFENSIVE` | 1085 (0x43D) |  |  |
+| `POACHER` | 1086 (0x43E) |  |  |
+| `HOLIDAY_MONSTER` | 1087 (0x43F) |  |  |
+| `FURBOLG_REDFANG` | 1088 (0x440) |  | Furbolg, Redfang |
+| `FURBOLG_FROSTPAW` | 1089 (0x441) |  | Furbolg, Frostpaw |
+| `KIRIN_TOR` | 1090 (0x442) |  |  |
+| `THE_WYRMREST_ACCORD` | 1091 (0x443) |  |  |
+| `AZJOL_NERUB` | 1092 (0x444) |  | Azjol-Nerub |
+| `REUSE8` | 1093 (0x445) |  |  |
+| `THE_SILVER_COVENANT` | 1094 (0x446) |  |  |
+| `GRIZZLY_HILLS_TRAPPER` | 1095 (0x447) |  |  |
+| `REUSE16` | 1096 (0x448) |  |  |
+| `WRATH_OF_THE_LICH_KING` | 1097 (0x449) |  |  |
+| `KNIGHTS_OF_THE_EBON_BLADE` | 1098 (0x44A) |  |  |
+| `WRATHGATE_SCOURGE` | 1099 (0x44B) |  |  |
+| `WRATHGATE_ALLIANCE` | 1100 (0x44C) |  |  |
+| `WRATHGATE_HORDE` | 1101 (0x44D) |  |  |
+| `CTF_FLAG_HORDE` | 1102 (0x44E) |  | CTF - Flag - Horde |
+| `CTF_FLAG_NEUTRAL` | 1103 (0x44F) |  | CTF - Flag - Neutral |
+| `FRENZYHEART_TRIBE` | 1104 (0x450) |  |  |
+| `THE_ORACLES` | 1105 (0x451) |  |  |
+| `ARGENT_CRUSADE` | 1106 (0x452) |  |  |
+| `TROLL_DRAKKARI` | 1107 (0x453) |  | Troll, Drakkari |
+| `COT_ARTHAS` | 1108 (0x454) |  |  |
+| `COT_STRATHOLME_CITIZEN` | 1109 (0x455) |  |  |
+| `COT_SCOURGE` | 1110 (0x456) |  |  |
+| `FREYA` | 1111 (0x457) |  |  |
+| `MOUNT_TAXI_ALLIANCE` | 1112 (0x458) |  | Mount - Taxi - Alliance |
+| `MOUNT_TAXI_HORDE` | 1113 (0x459) |  | Mount - Taxi - Horde |
+| `MOUNT_TAXI_NEUTRAL` | 1114 (0x45A) |  | Mount - Taxi - Neutral |
+| `ELEMENTAL_WATER` | 1115 (0x45B) |  | Elemental, Water |
+| `ELEMENTAL_AIR` | 1116 (0x45C) |  | Elemental, Air |
+| `SHOLAZAR_BASIN` | 1117 (0x45D) |  |  |
+| `CLASSIC` | 1118 (0x45E) |  |  |
+| `THE_SONS_OF_HODIR` | 1119 (0x45F) |  |  |
+| `IRON_GIANTS` | 1120 (0x460) |  |  |
+| `FROST_VRYKUL` | 1121 (0x461) |  |  |
+| `EARTHEN` | 1122 (0x462) |  |  |
+| `MONSTER_REFEREE` | 1123 (0x463) |  |  |
+| `THE_SUNREAVERS` | 1124 (0x464) |  |  |
+| `HYLDSMEET` | 1125 (0x465) |  |  |
+| `THE_FROSTBORN` | 1126 (0x466) |  |  |
+| `ORGRIMMAR_ALEX_TEST` | 1127 (0x467) |  | Orgrimmar (Alex Test) |
+| `TRANQUILLIEN_CONVERSION` | 1136 (0x470) |  |  |
+| `WINTERSABER_CONVERSION` | 1137 (0x471) |  |  |
+| `HATES_EVERYTHING` | 1145 (0x479) |  |  |
+| `SILVER_COVENANT_CONVERSION` | 1154 (0x482) |  |  |
+| `SUNREAVERS_CONVERSION` | 1155 (0x483) |  |  |
+| `THE_ASHEN_VERDICT` | 1156 (0x484) |  |  |
+| `CTF_FLAG_ALLIANCE_2` | 1159 (0x487) |  | CTF - Flag - Alliance 2 |
+| `CTF_FLAG_HORDE_2` | 1160 (0x488) |  | CTF - Flag - Horde 2 |
 
 Used in:
 * [CMSG_SET_FACTION_ATWAR](cmsg_set_faction_atwar.md)

@@ -35,30 +35,30 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | 4 / - | [TradeStatus](tradestatus.md) | status |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x04 | 4 / - | [TradeStatus](tradestatus.md) | status |  |
 
 If status is equal to `BEGIN_TRADE`:
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x08 | 8 / Little | [Guid](../types/packed-guid.md) | unknown1 |  | Set to 0 in vmangos. |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x08 | 8 / Little | [Guid](../types/packed-guid.md) | unknown1 | Set to 0 in vmangos. |
 
 Else If status is equal to `CLOSE_WINDOW`:
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x10 | 4 / - | [InventoryResult](inventoryresult.md) | inventory_result |  |  |
-| 0x14 | 1 / - | Bool | target_error |  | used for: EQUIP_ERR_BAG_FULL, EQUIP_ERR_CANT_CARRY_MORE_OF_THIS, EQUIP_ERR_MISSING_REAGENT, EQUIP_ERR_ITEM_MAX_LIMIT_CATEGORY_COUNT_EXCEEDED |
-| 0x15 | 4 / Little | u32 | item_limit_category_id |  | ItemLimitCategory.dbc entry |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x10 | 4 / - | [InventoryResult](inventoryresult.md) | inventory_result |  |
+| 0x14 | 1 / - | Bool | target_error | used for: EQUIP_ERR_BAG_FULL, EQUIP_ERR_CANT_CARRY_MORE_OF_THIS, EQUIP_ERR_MISSING_REAGENT, EQUIP_ERR_ITEM_MAX_LIMIT_CATEGORY_COUNT_EXCEEDED |
+| 0x15 | 4 / Little | u32 | item_limit_category_id | ItemLimitCategory.dbc entry |
 
 Else If status is equal to `ONLY_CONJURED` **or** 
 is equal to `NOT_ON_TAPLIST`:
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x19 | 1 / - | u8 | slot |  | Trade slot -1 here clears CGTradeInfo::m_tradeMoney |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x19 | 1 / - | u8 | slot | Trade slot -1 here clears CGTradeInfo::m_tradeMoney |
 
 ## Client Version 2.4.3
 
@@ -95,30 +95,30 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | 4 / - | [TradeStatus](tradestatus.md) | status |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x04 | 4 / - | [TradeStatus](tradestatus.md) | status |  |
 
 If status is equal to `BEGIN_TRADE`:
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x08 | 8 / Little | [Guid](../types/packed-guid.md) | unknown1 |  | Set to 0 in vmangos. |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x08 | 8 / Little | [Guid](../types/packed-guid.md) | unknown1 | Set to 0 in vmangos. |
 
 Else If status is equal to `CLOSE_WINDOW`:
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x10 | 4 / - | [InventoryResult](inventoryresult.md) | inventory_result |  |  |
-| 0x14 | 1 / - | Bool | target_error |  | used for: EQUIP_ERR_BAG_FULL, EQUIP_ERR_CANT_CARRY_MORE_OF_THIS, EQUIP_ERR_MISSING_REAGENT, EQUIP_ERR_ITEM_MAX_LIMIT_CATEGORY_COUNT_EXCEEDED |
-| 0x15 | 4 / Little | u32 | item_limit_category_id |  | ItemLimitCategory.dbc entry |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x10 | 4 / - | [InventoryResult](inventoryresult.md) | inventory_result |  |
+| 0x14 | 1 / - | Bool | target_error | used for: EQUIP_ERR_BAG_FULL, EQUIP_ERR_CANT_CARRY_MORE_OF_THIS, EQUIP_ERR_MISSING_REAGENT, EQUIP_ERR_ITEM_MAX_LIMIT_CATEGORY_COUNT_EXCEEDED |
+| 0x15 | 4 / Little | u32 | item_limit_category_id | ItemLimitCategory.dbc entry |
 
 Else If status is equal to `ONLY_CONJURED` **or** 
 is equal to `NOT_ON_TAPLIST`:
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x19 | 1 / - | u8 | slot |  | Trade slot -1 here clears CGTradeInfo::m_tradeMoney |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x19 | 1 / - | u8 | slot | Trade slot -1 here clears CGTradeInfo::m_tradeMoney |
 
 ## Client Version 3.3.5
 
@@ -155,28 +155,28 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | 4 / - | [TradeStatus](tradestatus.md) | status |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| - | 4 / - | [TradeStatus](tradestatus.md) | status |  |
 
 If status is equal to `BEGIN_TRADE`:
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | 8 / Little | [Guid](../types/packed-guid.md) | unknown1 |  | Set to 0 in vmangos. |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| - | 8 / Little | [Guid](../types/packed-guid.md) | unknown1 | Set to 0 in vmangos. |
 
 Else If status is equal to `CLOSE_WINDOW`:
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | 4 / - | [InventoryResult](inventoryresult.md) | inventory_result |  |  |
-| - | 1 / - | Bool | target_error |  | used for: EQUIP_ERR_BAG_FULL, EQUIP_ERR_CANT_CARRY_MORE_OF_THIS, EQUIP_ERR_MISSING_REAGENT, EQUIP_ERR_ITEM_MAX_LIMIT_CATEGORY_COUNT_EXCEEDED |
-| - | 4 / Little | u32 | item_limit_category_id |  | ItemLimitCategory.dbc entry |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| - | 4 / - | [InventoryResult](inventoryresult.md) | inventory_result |  |
+| - | 1 / - | Bool | target_error | used for: EQUIP_ERR_BAG_FULL, EQUIP_ERR_CANT_CARRY_MORE_OF_THIS, EQUIP_ERR_MISSING_REAGENT, EQUIP_ERR_ITEM_MAX_LIMIT_CATEGORY_COUNT_EXCEEDED |
+| - | 4 / Little | u32 | item_limit_category_id | ItemLimitCategory.dbc entry |
 
 Else If status is equal to `ONLY_CONJURED` **or** 
 is equal to `NOT_ON_TAPLIST`:
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | 1 / - | u8 | slot |  | Trade slot -1 here clears CGTradeInfo::m_tradeMoney |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| - | 1 / - | u8 | slot | Trade slot -1 here clears CGTradeInfo::m_tradeMoney |
 

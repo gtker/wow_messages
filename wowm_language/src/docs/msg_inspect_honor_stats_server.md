@@ -38,24 +38,24 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | 8 / Little | [Guid](../types/packed-guid.md) | guid |  |  |
-| 0x0C | 1 / - | [PvpRank](pvprank.md) | highest_rank |  |  |
-| 0x0D | 4 / Little | u32 | today_honorable_and_dishonorable |  |  |
-| 0x11 | 2 / Little | u16 | yesterday_honorable |  |  |
-| 0x13 | 2 / Little | u16 | unknown1 |  | vmangos: Unknown (deprecated, yesterday dishonourable?) |
-| 0x15 | 2 / Little | u16 | last_week_honorable |  |  |
-| 0x17 | 2 / Little | u16 | unknown2 |  | vmangos: Unknown (deprecated, last week dishonourable?) |
-| 0x19 | 2 / Little | u16 | this_week_honorable |  |  |
-| 0x1B | 2 / Little | u16 | unknown3 |  | vmangos: Unknown (deprecated, this week dishonourable?) |
-| 0x1D | 4 / Little | u32 | lifetime_honorable |  |  |
-| 0x21 | 4 / Little | u32 | lifetime_dishonorable |  |  |
-| 0x25 | 4 / Little | u32 | yesterday_honor |  |  |
-| 0x29 | 4 / Little | u32 | last_week_honor |  |  |
-| 0x2D | 4 / Little | u32 | this_week_honor |  |  |
-| 0x31 | 4 / - | [PvpRank](pvprank.md) | last_week_standing |  |  |
-| 0x35 | 1 / - | u8 | rank_progress_bar |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x04 | 8 / Little | [Guid](../types/packed-guid.md) | guid |  |
+| 0x0C | 1 / - | [PvpRank](pvprank.md) | highest_rank |  |
+| 0x0D | 4 / Little | u32 | today_honorable_and_dishonorable |  |
+| 0x11 | 2 / Little | u16 | yesterday_honorable |  |
+| 0x13 | 2 / Little | u16 | unknown1 | vmangos: Unknown (deprecated, yesterday dishonourable?) |
+| 0x15 | 2 / Little | u16 | last_week_honorable |  |
+| 0x17 | 2 / Little | u16 | unknown2 | vmangos: Unknown (deprecated, last week dishonourable?) |
+| 0x19 | 2 / Little | u16 | this_week_honorable |  |
+| 0x1B | 2 / Little | u16 | unknown3 | vmangos: Unknown (deprecated, this week dishonourable?) |
+| 0x1D | 4 / Little | u32 | lifetime_honorable |  |
+| 0x21 | 4 / Little | u32 | lifetime_dishonorable |  |
+| 0x25 | 4 / Little | u32 | yesterday_honor |  |
+| 0x29 | 4 / Little | u32 | last_week_honor |  |
+| 0x2D | 4 / Little | u32 | this_week_honor |  |
+| 0x31 | 4 / - | [PvpRank](pvprank.md) | last_week_standing |  |
+| 0x35 | 1 / - | u8 | rank_progress_bar |  |
 
 ## Client Version 2.4.3, Client Version 3
 
@@ -85,12 +85,12 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | 8 / Little | [Guid](../types/packed-guid.md) | guid |  |  |
-| 0x0C | 1 / - | u8 | amount_of_honor |  |  |
-| 0x0D | 4 / Little | u32 | kills |  |  |
-| 0x11 | 4 / Little | u32 | honor_today |  |  |
-| 0x15 | 4 / Little | u32 | honor_yesterday |  |  |
-| 0x19 | 4 / Little | u32 | lifetime_honorable_kills |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x04 | 8 / Little | [Guid](../types/packed-guid.md) | guid |  |
+| 0x0C | 1 / - | u8 | amount_of_honor |  |
+| 0x0D | 4 / Little | u32 | kills |  |
+| 0x11 | 4 / Little | u32 | honor_today |  |
+| 0x15 | 4 / Little | u32 | honor_yesterday |  |
+| 0x19 | 4 / Little | u32 | lifetime_honorable_kills |  |
 

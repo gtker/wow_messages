@@ -23,7 +23,7 @@ CMSG have a header of 6 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x06 | 1 / - | u8 | action_bar |  | Emulators set PLAYER_FIELD_BYTES[2](./2.md) to this unless it's 0. |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x06 | 1 / - | u8 | action_bar | Emulators set PLAYER_FIELD_BYTES[2](./2.md) to this unless it's 0. |
 

@@ -24,10 +24,10 @@ CMSG have a header of 6 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x06 | - / - | CString | channel_name |  |  |
-| - | - / - | CString | channel_password |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x06 | - / - | CString | channel_name |  |
+| - | - / - | CString | channel_password |  |
 
 ### Examples
 
@@ -74,11 +74,11 @@ CMSG have a header of 6 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x06 | 4 / Little | u32 | channel_id |  |  |
-| 0x0A | 1 / - | u8 | unknown1 |  |  |
-| 0x0B | 1 / - | u8 | unknown2 |  |  |
-| 0x0C | - / - | CString | channel_name |  |  |
-| - | - / - | CString | channel_password |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x06 | 4 / Little | u32 | channel_id |  |
+| 0x0A | 1 / - | u8 | unknown1 |  |
+| 0x0B | 1 / - | u8 | unknown2 |  |
+| 0x0C | - / - | CString | channel_name |  |
+| - | - / - | CString | channel_password |  |
 

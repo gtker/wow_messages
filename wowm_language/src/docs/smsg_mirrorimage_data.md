@@ -33,19 +33,19 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | 8 / Little | [Guid](../types/packed-guid.md) | guid |  |  |
-| 0x0C | 4 / Little | u32 | display_id |  |  |
-| 0x10 | 1 / - | [Race](race.md) | race |  |  |
-| 0x11 | 1 / - | [Gender](gender.md) | gender |  |  |
-| 0x12 | 1 / - | u8 | skin_color |  |  |
-| 0x13 | 1 / - | u8 | face |  |  |
-| 0x14 | 1 / - | u8 | hair_style |  |  |
-| 0x15 | 1 / - | u8 | hair_color |  |  |
-| 0x16 | 1 / - | u8 | facial_hair |  |  |
-| 0x17 | 4 / Little | u32 | guild_id |  |  |
-| 0x1B | 44 / - | u32[11] | display_ids |  | This array contains the: HEAD, SHOULDERS, BODY, CHEST, WAIST, LEGS, FEET, WRISTS, HANDS, BACK, and TABARD. |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x04 | 8 / Little | [Guid](../types/packed-guid.md) | guid |  |
+| 0x0C | 4 / Little | u32 | display_id |  |
+| 0x10 | 1 / - | [Race](race.md) | race |  |
+| 0x11 | 1 / - | [Gender](gender.md) | gender |  |
+| 0x12 | 1 / - | u8 | skin_color |  |
+| 0x13 | 1 / - | u8 | face |  |
+| 0x14 | 1 / - | u8 | hair_style |  |
+| 0x15 | 1 / - | u8 | hair_color |  |
+| 0x16 | 1 / - | u8 | facial_hair |  |
+| 0x17 | 4 / Little | u32 | guild_id |  |
+| 0x1B | 44 / - | u32[11] | display_ids | This array contains the: HEAD, SHOULDERS, BODY, CHEST, WAIST, LEGS, FEET, WRISTS, HANDS, BACK, and TABARD. |
 
 ## Client Version 3.3.5
 
@@ -81,18 +81,18 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | 8 / Little | [Guid](../types/packed-guid.md) | guid |  |  |
-| 0x0C | 4 / Little | u32 | display_id |  |  |
-| 0x10 | 1 / - | [Race](race.md) | race |  |  |
-| 0x11 | 1 / - | [Gender](gender.md) | gender |  |  |
-| 0x12 | 1 / - | [Class](class.md) | class |  |  |
-| 0x13 | 1 / - | u8 | skin_color |  |  |
-| 0x14 | 1 / - | u8 | face |  |  |
-| 0x15 | 1 / - | u8 | hair_style |  |  |
-| 0x16 | 1 / - | u8 | hair_color |  |  |
-| 0x17 | 1 / - | u8 | facial_hair |  |  |
-| 0x18 | 4 / Little | u32 | guild_id |  |  |
-| 0x1C | 44 / - | u32[11] | display_ids |  | This array contains the: HEAD, SHOULDERS, BODY, CHEST, WAIST, LEGS, FEET, WRISTS, HANDS, BACK, and TABARD. |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x04 | 8 / Little | [Guid](../types/packed-guid.md) | guid |  |
+| 0x0C | 4 / Little | u32 | display_id |  |
+| 0x10 | 1 / - | [Race](race.md) | race |  |
+| 0x11 | 1 / - | [Gender](gender.md) | gender |  |
+| 0x12 | 1 / - | [Class](class.md) | class |  |
+| 0x13 | 1 / - | u8 | skin_color |  |
+| 0x14 | 1 / - | u8 | face |  |
+| 0x15 | 1 / - | u8 | hair_style |  |
+| 0x16 | 1 / - | u8 | hair_color |  |
+| 0x17 | 1 / - | u8 | facial_hair |  |
+| 0x18 | 4 / Little | u32 | guild_id |  |
+| 0x1C | 44 / - | u32[11] | display_ids | This array contains the: HEAD, SHOULDERS, BODY, CHEST, WAIST, LEGS, FEET, WRISTS, HANDS, BACK, and TABARD. |
 

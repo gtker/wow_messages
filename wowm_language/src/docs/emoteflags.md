@@ -20,12 +20,12 @@ flag EmoteFlags : u8 {
 ### Type
 The basic type is `u8`, a 1 byte (8 bit) integer.
 ### Enumerators
-| Enumerator | Value  | Description | Comment |
-| --------- | -------- | ----------- | ------- |
-| `TALK` | 8 (0x08) |  |  |
-| `QUESTION` | 16 (0x10) |  |  |
-| `EXCLAMATION` | 32 (0x20) |  |  |
-| `SHOUT` | 64 (0x40) |  |  |
-| `LAUGH` | 128 (0x80) |  |  |
+| Enumerator | Value  | Comment |
+| --------- | -------- | ------- |
+| `TALK` | 8 (0x08) |  |
+| `QUESTION` | 16 (0x10) |  |
+| `EXCLAMATION` | 32 (0x20) |  |
+| `SHOUT` | 64 (0x40) |  |
+| `LAUGH` | 128 (0x80) |  |
 
 Used in:

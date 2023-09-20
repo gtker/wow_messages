@@ -28,14 +28,14 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | 4 / Little | u32 | amount_of_members |  |  |
-| 0x08 | - / - | CString | motd |  |  |
-| - | - / - | CString | guild_info |  |  |
-| - | 4 / Little | u32 | amount_of_rights |  |  |
-| - | ? / - | u32[amount_of_rights] | rights |  |  |
-| - | ? / - | [GuildMember](guildmember.md)[amount_of_members] | members |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x04 | 4 / Little | u32 | amount_of_members |  |
+| 0x08 | - / - | CString | motd |  |
+| - | - / - | CString | guild_info |  |
+| - | 4 / Little | u32 | amount_of_rights |  |
+| - | ? / - | u32[amount_of_rights] | rights |  |
+| - | ? / - | [GuildMember](guildmember.md)[amount_of_members] | members |  |
 
 ## Client Version 2.4.3
 
@@ -65,14 +65,14 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | 4 / Little | u32 | amount_of_members |  |  |
-| 0x08 | - / - | CString | motd |  |  |
-| - | - / - | CString | guild_info |  |  |
-| - | 4 / Little | u32 | amount_of_rights |  |  |
-| - | ? / - | [GuildRights](guildrights.md)[amount_of_rights] | rights |  |  |
-| - | ? / - | [GuildMember](guildmember.md)[amount_of_members] | members |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x04 | 4 / Little | u32 | amount_of_members |  |
+| 0x08 | - / - | CString | motd |  |
+| - | - / - | CString | guild_info |  |
+| - | 4 / Little | u32 | amount_of_rights |  |
+| - | ? / - | [GuildRights](guildrights.md)[amount_of_rights] | rights |  |
+| - | ? / - | [GuildMember](guildmember.md)[amount_of_members] | members |  |
 
 ## Client Version 3.3.5
 
@@ -102,12 +102,12 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | 4 / Little | u32 | amount_of_members |  |  |
-| - | - / - | CString | motd |  |  |
-| - | - / - | CString | guild_info |  |  |
-| - | 4 / Little | u32 | amount_of_rights |  |  |
-| - | ? / - | [GuildRights](guildrights.md)[amount_of_rights] | rights |  |  |
-| - | ? / - | [GuildMember](guildmember.md)[amount_of_members] | members |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| - | 4 / Little | u32 | amount_of_members |  |
+| - | - / - | CString | motd |  |
+| - | - / - | CString | guild_info |  |
+| - | 4 / Little | u32 | amount_of_rights |  |
+| - | ? / - | [GuildRights](guildrights.md)[amount_of_rights] | rights |  |
+| - | ? / - | [GuildMember](guildmember.md)[amount_of_members] | members |  |
 

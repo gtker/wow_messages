@@ -18,11 +18,11 @@ enum SheathState : u8 {
 ### Type
 The basic type is `u8`, a 1 byte (8 bit) integer.
 ### Enumerators
-| Enumerator | Value  | Description | Comment |
-| --------- | -------- | ----------- | ------- |
-| `UNARMED` | 0 (0x00) |  |  |
-| `MELEE` | 1 (0x01) |  |  |
-| `RANGED` | 2 (0x02) |  |  |
+| Enumerator | Value  | Comment |
+| --------- | -------- | ------- |
+| `UNARMED` | 0 (0x00) |  |
+| `MELEE` | 1 (0x01) |  |
+| `RANGED` | 2 (0x02) |  |
 
 Used in:
 * [CMSG_SETSHEATHED](cmsg_setsheathed.md)

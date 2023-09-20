@@ -23,18 +23,18 @@ flag AuraFlag : u8 {
 ### Type
 The basic type is `u8`, a 1 byte (8 bit) integer.
 ### Enumerators
-| Enumerator | Value  | Description | Comment |
-| --------- | -------- | ----------- | ------- |
-| `EMPTY` | 0 (0x00) |  |  |
-| `EFFECT_1` | 1 (0x01) |  |  |
-| `EFFECT_2` | 2 (0x02) |  |  |
-| `EFFECT_3` | 4 (0x04) |  |  |
-| `NOT_CASTER` | 8 (0x08) |  |  |
-| `SET` | 9 (0x09) |  |  |
-| `CANCELLABLE` | 16 (0x10) |  |  |
-| `DURATION` | 32 (0x20) |  |  |
-| `HIDE` | 64 (0x40) |  | Seems to hide the aura and tell client the aura was removed |
-| `NEGATIVE` | 128 (0x80) |  |  |
+| Enumerator | Value  | Comment |
+| --------- | -------- | ------- |
+| `EMPTY` | 0 (0x00) |  |
+| `EFFECT_1` | 1 (0x01) |  |
+| `EFFECT_2` | 2 (0x02) |  |
+| `EFFECT_3` | 4 (0x04) |  |
+| `NOT_CASTER` | 8 (0x08) |  |
+| `SET` | 9 (0x09) |  |
+| `CANCELLABLE` | 16 (0x10) |  |
+| `DURATION` | 32 (0x20) |  |
+| `HIDE` | 64 (0x40) | Seems to hide the aura and tell client the aura was removed |
+| `NEGATIVE` | 128 (0x80) |  |
 
 Used in:
 * [AuraUpdate](auraupdate.md)

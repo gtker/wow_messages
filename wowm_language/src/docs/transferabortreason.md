@@ -18,13 +18,13 @@ enum TransferAbortReason : u8 {
 ### Type
 The basic type is `u8`, a 1 byte (8 bit) integer.
 ### Enumerators
-| Enumerator | Value  | Description | Comment |
-| --------- | -------- | ----------- | ------- |
-| `NONE` | 0 (0x00) |  |  |
-| `IS_FULL` | 1 (0x01) |  |  |
-| `NOT_FOUND` | 2 (0x02) |  |  |
-| `TOO_MANY_INSTANCES` | 3 (0x03) |  |  |
-| `ZONE_IS_IN_COMBAT` | 5 (0x05) |  |  |
+| Enumerator | Value  | Comment |
+| --------- | -------- | ------- |
+| `NONE` | 0 (0x00) |  |
+| `IS_FULL` | 1 (0x01) |  |
+| `NOT_FOUND` | 2 (0x02) |  |
+| `TOO_MANY_INSTANCES` | 3 (0x03) |  |
+| `ZONE_IS_IN_COMBAT` | 5 (0x05) |  |
 
 Used in:
 * [SMSG_TRANSFER_ABORTED](smsg_transfer_aborted.md)
@@ -54,20 +54,20 @@ enum TransferAbortReason : u8 {
 ### Type
 The basic type is `u8`, a 1 byte (8 bit) integer.
 ### Enumerators
-| Enumerator | Value  | Description | Comment |
-| --------- | -------- | ----------- | ------- |
-| `NONE` | 0 (0x00) |  |  |
-| `IS_FULL` | 1 (0x01) |  |  |
-| `NOT_FOUND` | 2 (0x02) |  |  |
-| `TOO_MANY_INSTANCES` | 3 (0x03) |  |  |
-| `ZONE_IS_IN_COMBAT` | 5 (0x05) |  |  |
-| `INSUFFICIENT_EXPANSION_LEVEL` | 6 (0x06) |  |  |
-| `DIFFICULTY_NOT_AVAILABLE` | 7 (0x07) |  |  |
-| `MISSING_DIFFICULTY` | 8 (0x08) |  |  |
-| `ZONE_IN_COMBAT` | 9 (0x09) |  |  |
-| `INSTANCE_IS_FULL` | 10 (0x0A) |  |  |
-| `NOT_ALLOWED` | 11 (0x0B) |  |  |
-| `HAS_BIND` | 12 (0x0C) |  |  |
+| Enumerator | Value  | Comment |
+| --------- | -------- | ------- |
+| `NONE` | 0 (0x00) |  |
+| `IS_FULL` | 1 (0x01) |  |
+| `NOT_FOUND` | 2 (0x02) |  |
+| `TOO_MANY_INSTANCES` | 3 (0x03) |  |
+| `ZONE_IS_IN_COMBAT` | 5 (0x05) |  |
+| `INSUFFICIENT_EXPANSION_LEVEL` | 6 (0x06) |  |
+| `DIFFICULTY_NOT_AVAILABLE` | 7 (0x07) |  |
+| `MISSING_DIFFICULTY` | 8 (0x08) |  |
+| `ZONE_IN_COMBAT` | 9 (0x09) |  |
+| `INSTANCE_IS_FULL` | 10 (0x0A) |  |
+| `NOT_ALLOWED` | 11 (0x0B) |  |
+| `HAS_BIND` | 12 (0x0C) |  |
 
 Used in:
 * [SMSG_TRANSFER_ABORTED](smsg_transfer_aborted.md)
@@ -101,24 +101,24 @@ enum TransferAbortReason : u8 {
 ### Type
 The basic type is `u8`, a 1 byte (8 bit) integer.
 ### Enumerators
-| Enumerator | Value  | Description | Comment |
-| --------- | -------- | ----------- | ------- |
-| `NONE` | 0 (0x00) |  |  |
-| `ERROR` | 1 (0x01) |  |  |
-| `MAX_PLAYERS` | 2 (0x02) |  | Transfer Aborted: instance is full |
-| `NOT_FOUND` | 3 (0x03) |  | Transfer Aborted: instance not found |
-| `TOO_MANY_INSTANCES` | 4 (0x04) |  | You have entered too many instances recently. |
-| `ZONE_IN_COMBAT` | 6 (0x06) |  | Unable to zone in while an encounter is in progress. |
-| `INSUFFICIENT_EXPANSION_LEVEL` | 7 (0x07) |  | You must have TBC/WotLK expansion installed to access this area. |
-| `DIFFICULTY_NOT_AVAILABLE` | 8 (0x08) |  | Normal/Heroic/Epic difficulty mode is not available for %s. |
-| `UNIQUE_MESSAGE` | 9 (0x09) |  | Until you've escaped The Lich Kings grasp, you cannot leave this place! |
-| `TOO_MANY_REALM_INSTANCES` | 10 (0x0A) |  | Additional instances cannot be launched, please try again later. |
-| `NEED_GROUP` | 11 (0x0B) |  | 3.1 |
-| `NOT_FOUND1` | 12 (0x0C) |  | 3.1 |
-| `NOT_FOUND2` | 13 (0x0D) |  | 3.1 |
-| `NOT_FOUND3` | 14 (0x0E) |  | 3.2 |
-| `REALM_ONLY` | 15 (0x0F) |  | All players on party must be from the same realm. |
-| `MAP_NOT_ALLOWED` | 16 (0x10) |  | Map can't be entered at this time. |
+| Enumerator | Value  | Comment |
+| --------- | -------- | ------- |
+| `NONE` | 0 (0x00) |  |
+| `ERROR` | 1 (0x01) |  |
+| `MAX_PLAYERS` | 2 (0x02) | Transfer Aborted: instance is full |
+| `NOT_FOUND` | 3 (0x03) | Transfer Aborted: instance not found |
+| `TOO_MANY_INSTANCES` | 4 (0x04) | You have entered too many instances recently. |
+| `ZONE_IN_COMBAT` | 6 (0x06) | Unable to zone in while an encounter is in progress. |
+| `INSUFFICIENT_EXPANSION_LEVEL` | 7 (0x07) | You must have TBC/WotLK expansion installed to access this area. |
+| `DIFFICULTY_NOT_AVAILABLE` | 8 (0x08) | Normal/Heroic/Epic difficulty mode is not available for %s. |
+| `UNIQUE_MESSAGE` | 9 (0x09) | Until you've escaped The Lich Kings grasp, you cannot leave this place! |
+| `TOO_MANY_REALM_INSTANCES` | 10 (0x0A) | Additional instances cannot be launched, please try again later. |
+| `NEED_GROUP` | 11 (0x0B) | 3.1 |
+| `NOT_FOUND1` | 12 (0x0C) | 3.1 |
+| `NOT_FOUND2` | 13 (0x0D) | 3.1 |
+| `NOT_FOUND3` | 14 (0x0E) | 3.2 |
+| `REALM_ONLY` | 15 (0x0F) | All players on party must be from the same realm. |
+| `MAP_NOT_ALLOWED` | 16 (0x10) | Map can't be entered at this time. |
 
 Used in:
 * [SMSG_TRANSFER_ABORTED](smsg_transfer_aborted.md)

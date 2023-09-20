@@ -18,11 +18,11 @@ enum SwingType : u8 {
 ### Type
 The basic type is `u8`, a 1 byte (8 bit) integer.
 ### Enumerators
-| Enumerator | Value  | Description | Comment |
-| --------- | -------- | ----------- | ------- |
-| `LIGHT` | 0 (0x00) |  |  |
-| `MEDIUM` | 1 (0x01) |  |  |
-| `HEAVY` | 2 (0x02) |  |  |
+| Enumerator | Value  | Comment |
+| --------- | -------- | ------- |
+| `LIGHT` | 0 (0x00) |  |
+| `MEDIUM` | 1 (0x01) |  |
+| `HEAVY` | 2 (0x02) |  |
 
 Used in:
 

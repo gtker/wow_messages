@@ -19,11 +19,11 @@ flag WeaponFlags : u8 {
 ### Type
 The basic type is `u8`, a 1 byte (8 bit) integer.
 ### Enumerators
-| Enumerator | Value  | Description | Comment |
-| --------- | -------- | ----------- | ------- |
-| `WEAPON_NOT_AFFECTED_BY_ANIMATION` | 0 (0x00) |  |  |
-| `SHEATHE_WEAPONS_AUTOMATICALLY` | 4 (0x04) |  |  |
-| `SHEATHE_WEAPONS_AUTOMATICALLY_2` | 16 (0x10) |  |  |
-| `UNSHEATHE_WEAPONS` | 32 (0x20) |  |  |
+| Enumerator | Value  | Comment |
+| --------- | -------- | ------- |
+| `WEAPON_NOT_AFFECTED_BY_ANIMATION` | 0 (0x00) |  |
+| `SHEATHE_WEAPONS_AUTOMATICALLY` | 4 (0x04) |  |
+| `SHEATHE_WEAPONS_AUTOMATICALLY_2` | 16 (0x10) |  |
+| `UNSHEATHE_WEAPONS` | 32 (0x20) |  |
 
 Used in:

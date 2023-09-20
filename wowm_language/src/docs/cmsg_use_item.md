@@ -26,12 +26,12 @@ CMSG have a header of 6 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x06 | 1 / - | u8 | bag_index |  |  |
-| 0x07 | 1 / - | u8 | bag_slot |  |  |
-| 0x08 | 1 / - | u8 | spell_index |  |  |
-| 0x09 | - / - | [SpellCastTargets](spellcasttargets.md) | targets |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x06 | 1 / - | u8 | bag_index |  |
+| 0x07 | 1 / - | u8 | bag_slot |  |
+| 0x08 | 1 / - | u8 | spell_index |  |
+| 0x09 | - / - | [SpellCastTargets](spellcasttargets.md) | targets |  |
 
 ### Examples
 
@@ -73,14 +73,14 @@ CMSG have a header of 6 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x06 | 1 / - | u8 | bag_index |  |  |
-| 0x07 | 1 / - | u8 | bag_slot |  |  |
-| 0x08 | 1 / - | u8 | spell_index |  |  |
-| 0x09 | 1 / - | u8 | cast_count |  | mangosone: next cast if exists (single or not) |
-| 0x0A | 8 / Little | [Guid](../types/packed-guid.md) | item |  |  |
-| 0x12 | - / - | [SpellCastTargets](spellcasttargets.md) | targets |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x06 | 1 / - | u8 | bag_index |  |
+| 0x07 | 1 / - | u8 | bag_slot |  |
+| 0x08 | 1 / - | u8 | spell_index |  |
+| 0x09 | 1 / - | u8 | cast_count | mangosone: next cast if exists (single or not) |
+| 0x0A | 8 / Little | [Guid](../types/packed-guid.md) | item |  |
+| 0x12 | - / - | [SpellCastTargets](spellcasttargets.md) | targets |  |
 
 ## Client Version 3.3.5
 
@@ -123,31 +123,31 @@ CMSG have a header of 6 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x06 | 1 / - | u8 | bag_index |  |  |
-| 0x07 | 1 / - | u8 | bag_slot |  |  |
-| 0x08 | 1 / - | u8 | spell_index |  |  |
-| 0x09 | 1 / - | u8 | cast_count |  | mangosone: next cast if exists (single or not) |
-| 0x0A | 4 / Little | u32 | spell |  |  |
-| 0x0E | 8 / Little | [Guid](../types/packed-guid.md) | item |  |  |
-| 0x16 | 4 / Little | u32 | glyph_index |  |  |
-| 0x1A | 1 / - | [ClientCastFlags](clientcastflags.md) | cast_flags |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x06 | 1 / - | u8 | bag_index |  |
+| 0x07 | 1 / - | u8 | bag_slot |  |
+| 0x08 | 1 / - | u8 | spell_index |  |
+| 0x09 | 1 / - | u8 | cast_count | mangosone: next cast if exists (single or not) |
+| 0x0A | 4 / Little | u32 | spell |  |
+| 0x0E | 8 / Little | [Guid](../types/packed-guid.md) | item |  |
+| 0x16 | 4 / Little | u32 | glyph_index |  |
+| 0x1A | 1 / - | [ClientCastFlags](clientcastflags.md) | cast_flags |  |
 
 If cast_flags is equal to `EXTRA`:
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x1B | 4 / Little | f32 | elevation |  |  |
-| 0x1F | 4 / Little | f32 | speed |  |  |
-| 0x23 | 1 / - | [ClientMovementData](clientmovementdata.md) | movement_data |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x1B | 4 / Little | f32 | elevation |  |
+| 0x1F | 4 / Little | f32 | speed |  |
+| 0x23 | 1 / - | [ClientMovementData](clientmovementdata.md) | movement_data |  |
 
 If movement_data is equal to `PRESENT`:
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x24 | 4 / Little | u32 | opcode |  |  |
-| 0x28 | - / - | [PackedGuid](../types/packed-guid.md) | guid |  |  |
-| - | - / - | [MovementInfo](movementinfo.md) | info |  |  |
-| - | - / - | [SpellCastTargets](spellcasttargets.md) | targets |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x24 | 4 / Little | u32 | opcode |  |
+| 0x28 | - / - | [PackedGuid](../types/packed-guid.md) | guid |  |
+| - | - / - | [MovementInfo](movementinfo.md) | info |  |
+| - | - / - | [SpellCastTargets](spellcasttargets.md) | targets |  |
 

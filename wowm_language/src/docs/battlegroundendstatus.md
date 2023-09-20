@@ -15,10 +15,10 @@ enum BattlegroundEndStatus : u8 {
 ### Type
 The basic type is `u8`, a 1 byte (8 bit) integer.
 ### Enumerators
-| Enumerator | Value  | Description | Comment |
-| --------- | -------- | ----------- | ------- |
-| `NOT_ENDED` | 0 (0x00) |  |  |
-| `ENDED` | 1 (0x01) |  |  |
+| Enumerator | Value  | Comment |
+| --------- | -------- | ------- |
+| `NOT_ENDED` | 0 (0x00) |  |
+| `ENDED` | 1 (0x01) |  |
 
 Used in:
 * [MSG_PVP_LOG_DATA_Server](msg_pvp_log_data_server.md)

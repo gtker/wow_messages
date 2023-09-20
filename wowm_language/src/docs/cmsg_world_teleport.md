@@ -28,12 +28,12 @@ CMSG have a header of 6 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x06 | 4 / Little | Milliseconds | time |  |  |
-| 0x0A | 4 / - | [Map](map.md) | map |  |  |
-| 0x0E | 12 / - | [Vector3d](vector3d.md) | position |  |  |
-| 0x1A | 4 / Little | f32 | orientation |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x06 | 4 / Little | Milliseconds | time |  |
+| 0x0A | 4 / - | [Map](map.md) | map |  |
+| 0x0E | 12 / - | [Vector3d](vector3d.md) | position |  |
+| 0x1A | 4 / Little | f32 | orientation |  |
 
 ### Examples
 
@@ -93,12 +93,12 @@ CMSG have a header of 6 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x06 | 4 / Little | Milliseconds | time |  |  |
-| 0x0A | 4 / - | [Map](map.md) | map |  |  |
-| 0x0E | 12 / - | [Vector3d](vector3d.md) | position |  |  |
-| 0x1A | 4 / Little | f32 | orientation |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x06 | 4 / Little | Milliseconds | time |  |
+| 0x0A | 4 / - | [Map](map.md) | map |  |
+| 0x0E | 12 / - | [Vector3d](vector3d.md) | position |  |
+| 0x1A | 4 / Little | f32 | orientation |  |
 
 ## Client Version 3.3.5
 
@@ -131,13 +131,13 @@ CMSG have a header of 6 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x06 | 4 / Little | Milliseconds | time |  |  |
-| 0x0A | 4 / - | [Map](map.md) | map |  |  |
-| 0x0E | 8 / Little | u64 | unknown |  |  |
-| 0x16 | 12 / - | [Vector3d](vector3d.md) | position |  |  |
-| 0x22 | 4 / Little | f32 | orientation |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x06 | 4 / Little | Milliseconds | time |  |
+| 0x0A | 4 / - | [Map](map.md) | map |  |
+| 0x0E | 8 / Little | u64 | unknown |  |
+| 0x16 | 12 / - | [Vector3d](vector3d.md) | position |  |
+| 0x22 | 4 / Little | f32 | orientation |  |
 
 ### Examples
 

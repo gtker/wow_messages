@@ -18,11 +18,11 @@ enum LockType : u8 {
 ### Type
 The basic type is `u8`, a 1 byte (8 bit) integer.
 ### Enumerators
-| Enumerator | Value  | Description | Comment |
-| --------- | -------- | ----------- | ------- |
-| `NONE` | 0 (0x00) |  |  |
-| `ITEM_REQUIRED` | 1 (0x01) |  |  |
-| `LOCKTYPE_REFERENCE` | 2 (0x02) |  |  |
+| Enumerator | Value  | Comment |
+| --------- | -------- | ------- |
+| `NONE` | 0 (0x00) |  |
+| `ITEM_REQUIRED` | 1 (0x01) |  |
+| `LOCKTYPE_REFERENCE` | 2 (0x02) |  |
 
 Used in:
 

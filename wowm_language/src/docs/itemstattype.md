@@ -20,15 +20,15 @@ enum ItemStatType : u8 {
 ### Type
 The basic type is `u8`, a 1 byte (8 bit) integer.
 ### Enumerators
-| Enumerator | Value  | Description | Comment |
-| --------- | -------- | ----------- | ------- |
-| `MANA` | 0 (0x00) |  |  |
-| `HEALTH` | 1 (0x01) |  |  |
-| `AGILITY` | 3 (0x03) |  |  |
-| `STRENGTH` | 4 (0x04) |  |  |
-| `INTELLECT` | 5 (0x05) |  |  |
-| `SPIRIT` | 6 (0x06) |  |  |
-| `STAMINA` | 7 (0x07) |  |  |
+| Enumerator | Value  | Comment |
+| --------- | -------- | ------- |
+| `MANA` | 0 (0x00) |  |
+| `HEALTH` | 1 (0x01) |  |
+| `AGILITY` | 3 (0x03) |  |
+| `STRENGTH` | 4 (0x04) |  |
+| `INTELLECT` | 5 (0x05) |  |
+| `SPIRIT` | 6 (0x06) |  |
+| `STAMINA` | 7 (0x07) |  |
 
 Used in:
 * [ItemStat](itemstat.md)

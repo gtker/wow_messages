@@ -29,15 +29,15 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | 128 / - | u32[32] | data |  | cmangos/vmangos/mangoszero sets to all zeros |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x04 | 128 / - | u32[32] | data | cmangos/vmangos/mangoszero sets to all zeros |
 
 ### Examples
 
 #### Example 1
 
-##### Description
+##### Comment
 
 Zeroed out message needed for showing chat box.
 
@@ -78,10 +78,10 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | 4 / Little | u32 | unix_time |  | Seconds since Unix Epoch |
-| - | 1 / - | u8 | unknown1 |  | Both mangostwo and arcemu hardcode this to 1 |
-| - | 4 / - | [CacheMask](cachemask.md) | mask |  |  |
-| - | ? / - | u32[-] | data |  | Maximum size is 32 4-bit integers. For every bit that is 1 in the mask, write one u32 with the time |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| - | 4 / Little | u32 | unix_time | Seconds since Unix Epoch |
+| - | 1 / - | u8 | unknown1 | Both mangostwo and arcemu hardcode this to 1 |
+| - | 4 / - | [CacheMask](cachemask.md) | mask |  |
+| - | ? / - | u32[-] | data | Maximum size is 32 4-bit integers. For every bit that is 1 in the mask, write one u32 with the time |
 

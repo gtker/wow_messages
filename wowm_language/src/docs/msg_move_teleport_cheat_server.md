@@ -26,8 +26,8 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | 12 / - | [Vector3d](vector3d.md) | position |  |  |
-| 0x10 | 4 / Little | f32 | orientation |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x04 | 12 / - | [Vector3d](vector3d.md) | position |  |
+| 0x10 | 4 / Little | f32 | orientation |  |
 

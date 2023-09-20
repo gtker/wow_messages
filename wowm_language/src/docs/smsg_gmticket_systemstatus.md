@@ -23,7 +23,7 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | 4 / - | [GmTicketQueueStatus](gmticketqueuestatus.md) | will_accept_tickets |  | vmangos: This only disables the ticket UI at client side and is not fully reliable are we sure this is a uint32? Should ask Zor |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x04 | 4 / - | [GmTicketQueueStatus](gmticketqueuestatus.md) | will_accept_tickets | vmangos: This only disables the ticket UI at client side and is not fully reliable are we sure this is a uint32? Should ask Zor |
 

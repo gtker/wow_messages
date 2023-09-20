@@ -15,10 +15,10 @@ enum RaidTargetUpdateType : u8 {
 ### Type
 The basic type is `u8`, a 1 byte (8 bit) integer.
 ### Enumerators
-| Enumerator | Value  | Description | Comment |
-| --------- | -------- | ----------- | ------- |
-| `PARTIAL` | 0 (0x00) |  |  |
-| `FULL` | 1 (0x01) |  |  |
+| Enumerator | Value  | Comment |
+| --------- | -------- | ------- |
+| `PARTIAL` | 0 (0x00) |  |
+| `FULL` | 1 (0x01) |  |
 
 Used in:
 * [MSG_RAID_TARGET_UPDATE_Server](msg_raid_target_update_server.md)

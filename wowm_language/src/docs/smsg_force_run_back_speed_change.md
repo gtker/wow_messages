@@ -25,9 +25,9 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | - / - | [PackedGuid](../types/packed-guid.md) | guid |  |  |
-| - | 4 / Little | u32 | move_event |  | cmangos/mangoszero/vmangos: set to 0<br/>cmangos/mangoszero/vmangos: moveEvent, NUM_PMOVE_EVTS = 0x39 |
-| - | 4 / Little | f32 | speed |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| - | - / - | [PackedGuid](../types/packed-guid.md) | guid |  |
+| - | 4 / Little | u32 | move_event | cmangos/mangoszero/vmangos: set to 0<br/>cmangos/mangoszero/vmangos: moveEvent, NUM_PMOVE_EVTS = 0x39 |
+| - | 4 / Little | f32 | speed |  |
 

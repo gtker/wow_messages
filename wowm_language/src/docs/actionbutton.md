@@ -14,11 +14,11 @@ struct ActionButton {
 ```
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x00 | 2 / Little | u16 | action |  |  |
-| 0x02 | 1 / - | u8 | action_type |  |  |
-| 0x03 | 1 / - | u8 | misc |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x00 | 2 / Little | u16 | action |  |
+| 0x02 | 1 / - | u8 | action_type |  |
+| 0x03 | 1 / - | u8 | misc |  |
 
 
 Used in:

@@ -11,7 +11,7 @@ clogin CMD_AUTH_RECONNECT_CHALLENGE_Client = 0x02 {
     Os os;
     Locale locale;
     u32 utc_timezone_offset {
-        description = "Offset in minutes from UTC time. 180 would be UTC+3";
+        comment = "Offset in minutes from UTC time. 180 would be UTC+3";
     }
     IpAddress client_ip_address;
     String account_name {
@@ -20,7 +20,7 @@ clogin CMD_AUTH_RECONNECT_CHALLENGE_Client = 0x02 {
         comment = "Uppercasing in regards to non-ASCII values is little weird. See `https://docs.rs/wow_srp/latest/wow_srp/normalized_string/index.html` for more info.";
     }
 } {
-    description = "First message sent by the client when attempting to reconnect. The server will respond with [CMD_AUTH_RECONNECT_CHALLENGE_Server].";
+    comment = "First message sent by the client when attempting to reconnect. The server will respond with [CMD_AUTH_RECONNECT_CHALLENGE_Server].";
     comment = "Has the exact same layout as [CMD_AUTH_LOGON_CHALLENGE_Client].";
 }
 

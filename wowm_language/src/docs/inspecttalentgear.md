@@ -16,13 +16,13 @@ struct InspectTalentGear {
 ```
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x00 | 4 / Little | u32 | item |  |  |
-| 0x04 | - / - | [EnchantMask](../types/aura-mask.md) | enchant_mask |  |  |
-| - | 2 / Little | u16 | unknown1 |  |  |
-| - | - / - | [PackedGuid](../types/packed-guid.md) | creator |  |  |
-| - | 4 / Little | u32 | unknown2 |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x00 | 4 / Little | u32 | item |  |
+| 0x04 | - / - | [EnchantMask](../types/aura-mask.md) | enchant_mask |  |
+| - | 2 / Little | u16 | unknown1 |  |
+| - | - / - | [PackedGuid](../types/packed-guid.md) | creator |  |
+| - | 4 / Little | u32 | unknown2 |  |
 
 
 Used in:

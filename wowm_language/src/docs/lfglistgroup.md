@@ -21,24 +21,24 @@ struct LfgListGroup {
 ```
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x00 | 8 / Little | [Guid](../types/packed-guid.md) | group |  |  |
-| 0x08 | 4 / - | [LfgUpdateFlag](lfgupdateflag.md) | flags |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x00 | 8 / Little | [Guid](../types/packed-guid.md) | group |  |
+| 0x08 | 4 / - | [LfgUpdateFlag](lfgupdateflag.md) | flags |  |
 
 If flags contains `COMMENT`:
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x0C | - / - | CString | comment |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x0C | - / - | CString | comment |  |
 
 If flags contains `ROLES`:
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | 3 / - | u8[3] | roles |  | Emu just sets all to 0. |
-| - | 8 / Little | [Guid](../types/packed-guid.md) | instance |  |  |
-| - | 4 / Little | u32 | encounter_mask |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| - | 3 / - | u8[3] | roles | Emu just sets all to 0. |
+| - | 8 / Little | [Guid](../types/packed-guid.md) | instance |  |
+| - | 4 / Little | u32 | encounter_mask |  |
 
 
 Used in:

@@ -13,10 +13,10 @@ struct LfgPlayerMember {
 ```
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x00 | - / - | [PackedGuid](../types/packed-guid.md) | guid |  |  |
-| - | 4 / Little | Level32 | level |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x00 | - / - | [PackedGuid](../types/packed-guid.md) | guid |  |
+| - | 4 / Little | Level32 | level |  |
 
 
 Used in:

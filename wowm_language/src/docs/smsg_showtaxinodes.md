@@ -26,10 +26,10 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | 4 / Little | u32 | unknown1 |  | Set to 1 in mangoszero |
-| - | 8 / Little | [Guid](../types/packed-guid.md) | guid |  |  |
-| - | 4 / Little | u32 | nearest_node |  |  |
-| - | ? / - | u32[-] | nodes |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| - | 4 / Little | u32 | unknown1 | Set to 1 in mangoszero |
+| - | 8 / Little | [Guid](../types/packed-guid.md) | guid |  |
+| - | 4 / Little | u32 | nearest_node |  |
+| - | ? / - | u32[-] | nodes |  |
 

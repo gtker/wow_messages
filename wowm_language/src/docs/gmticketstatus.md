@@ -16,11 +16,11 @@ enum GmTicketStatus : u32 {
 ### Type
 The basic type is `u32`, a 4 byte (32 bit) little endian integer.
 ### Enumerators
-| Enumerator | Value  | Description | Comment |
-| --------- | -------- | ----------- | ------- |
-| `DB_ERROR` | 0 (0x00) |  |  |
-| `HAS_TEXT` | 6 (0x06) |  |  |
-| `DEFAULT` | 10 (0x0A) |  |  |
+| Enumerator | Value  | Comment |
+| --------- | -------- | ------- |
+| `DB_ERROR` | 0 (0x00) |  |
+| `HAS_TEXT` | 6 (0x06) |  |
+| `DEFAULT` | 10 (0x0A) |  |
 
 Used in:
 * [SMSG_GMTICKET_GETTICKET](smsg_gmticket_getticket.md)

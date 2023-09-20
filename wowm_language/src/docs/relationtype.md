@@ -18,13 +18,13 @@ flag RelationType : u32 {
 ### Type
 The basic type is `u32`, a 4 byte (32 bit) little endian integer.
 ### Enumerators
-| Enumerator | Value  | Description | Comment |
-| --------- | -------- | ----------- | ------- |
-| `NONE` | 0 (0x00) |  |  |
-| `FRIEND` | 1 (0x01) |  |  |
-| `IGNORED` | 2 (0x02) |  |  |
-| `MUTED` | 4 (0x04) |  |  |
-| `RECRUITAFRIEND` | 8 (0x08) |  |  |
+| Enumerator | Value  | Comment |
+| --------- | -------- | ------- |
+| `NONE` | 0 (0x00) |  |
+| `FRIEND` | 1 (0x01) |  |
+| `IGNORED` | 2 (0x02) |  |
+| `MUTED` | 4 (0x04) |  |
+| `RECRUITAFRIEND` | 8 (0x08) |  |
 
 Used in:
 * [Relation](relation.md)

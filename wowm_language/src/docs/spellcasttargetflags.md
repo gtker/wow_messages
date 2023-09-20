@@ -30,25 +30,25 @@ flag SpellCastTargetFlags : u16 {
 ### Type
 The basic type is `u16`, a 2 byte (16 bit) little endian integer.
 ### Enumerators
-| Enumerator | Value  | Description | Comment |
-| --------- | -------- | ----------- | ------- |
-| `SELF` | 0 (0x00) |  |  |
-| `UNUSED1` | 1 (0x01) |  | not used in any spells (can be set dynamically) |
-| `UNIT` | 2 (0x02) |  |  |
-| `UNUSED2` | 4 (0x04) |  | not used in any spells (can be set dynamically) |
-| `UNUSED3` | 8 (0x08) |  | not used in any spells (can be set dynamically) |
-| `ITEM` | 16 (0x10) |  |  |
-| `SOURCE_LOCATION` | 32 (0x20) |  |  |
-| `DEST_LOCATION` | 64 (0x40) |  |  |
-| `OBJECT_UNK` | 128 (0x80) |  | used in 7 spells only |
-| `UNIT_UNK` | 256 (0x100) |  | looks like self target (389 spells) |
-| `PVP_CORPSE` | 512 (0x200) |  |  |
-| `UNIT_CORPSE` | 1024 (0x400) |  | 10 spells (gathering professions) |
-| `GAMEOBJECT` | 2048 (0x800) |  | pguid, 0 spells |
-| `TRADE_ITEM` | 4096 (0x1000) |  | pguid, 0 spells |
-| `STRING` | 8192 (0x2000) |  | string, 0 spells |
-| `UNK1` | 16384 (0x4000) |  | 199 spells, opening object/lock |
-| `CORPSE` | 32768 (0x8000) |  | pguid, resurrection spells |
+| Enumerator | Value  | Comment |
+| --------- | -------- | ------- |
+| `SELF` | 0 (0x00) |  |
+| `UNUSED1` | 1 (0x01) | not used in any spells (can be set dynamically) |
+| `UNIT` | 2 (0x02) |  |
+| `UNUSED2` | 4 (0x04) | not used in any spells (can be set dynamically) |
+| `UNUSED3` | 8 (0x08) | not used in any spells (can be set dynamically) |
+| `ITEM` | 16 (0x10) |  |
+| `SOURCE_LOCATION` | 32 (0x20) |  |
+| `DEST_LOCATION` | 64 (0x40) |  |
+| `OBJECT_UNK` | 128 (0x80) | used in 7 spells only |
+| `UNIT_UNK` | 256 (0x100) | looks like self target (389 spells) |
+| `PVP_CORPSE` | 512 (0x200) |  |
+| `UNIT_CORPSE` | 1024 (0x400) | 10 spells (gathering professions) |
+| `GAMEOBJECT` | 2048 (0x800) | pguid, 0 spells |
+| `TRADE_ITEM` | 4096 (0x1000) | pguid, 0 spells |
+| `STRING` | 8192 (0x2000) | string, 0 spells |
+| `UNK1` | 16384 (0x4000) | 199 spells, opening object/lock |
+| `CORPSE` | 32768 (0x8000) | pguid, resurrection spells |
 
 Used in:
 * [SpellCastTargets](spellcasttargets.md)
@@ -83,26 +83,26 @@ flag SpellCastTargetFlags : u32 {
 ### Type
 The basic type is `u32`, a 4 byte (32 bit) little endian integer.
 ### Enumerators
-| Enumerator | Value  | Description | Comment |
-| --------- | -------- | ----------- | ------- |
-| `SELF` | 0 (0x00) |  |  |
-| `UNUSED1` | 1 (0x01) |  | not used in any spells as of 2.4.3 (can be set dynamically) |
-| `UNIT` | 2 (0x02) |  |  |
-| `UNIT_RAID` | 4 (0x04) |  | not used in any spells as of 2.4.3 (can be set dynamically) - raid member |
-| `UNIT_PARTY` | 8 (0x08) |  | not used in any spells as of 2.4.3 (can be set dynamically) - party member |
-| `ITEM` | 16 (0x10) |  |  |
-| `SOURCE_LOCATION` | 32 (0x20) |  |  |
-| `DEST_LOCATION` | 64 (0x40) |  |  |
-| `UNIT_ENEMY` | 128 (0x80) |  | `CanAttack` == true |
-| `UNIT_ALLY` | 256 (0x100) |  | `CanAssist` == true |
-| `CORPSE_ENEMY` | 512 (0x200) |  | pguid, `CanAssist` == false |
-| `UNIT_DEAD` | 1024 (0x400) |  | skinning-like effects |
-| `GAMEOBJECT` | 2048 (0x800) |  | pguid, 0 spells in 2.4.3 |
-| `TRADE_ITEM` | 4096 (0x1000) |  | pguid, 0 spells |
-| `STRING` | 8192 (0x2000) |  | string, 0 spells |
-| `LOCKED` | 16384 (0x4000) |  | 199 spells, opening object/lock |
-| `CORPSE_ALLY` | 32768 (0x8000) |  | pguid, `CanAssist` == true |
-| `UNIT_MINIPET` | 65536 (0x10000) |  | pguid, not used in any spells as of 2.4.3 (can be set dynamically) |
+| Enumerator | Value  | Comment |
+| --------- | -------- | ------- |
+| `SELF` | 0 (0x00) |  |
+| `UNUSED1` | 1 (0x01) | not used in any spells as of 2.4.3 (can be set dynamically) |
+| `UNIT` | 2 (0x02) |  |
+| `UNIT_RAID` | 4 (0x04) | not used in any spells as of 2.4.3 (can be set dynamically) - raid member |
+| `UNIT_PARTY` | 8 (0x08) | not used in any spells as of 2.4.3 (can be set dynamically) - party member |
+| `ITEM` | 16 (0x10) |  |
+| `SOURCE_LOCATION` | 32 (0x20) |  |
+| `DEST_LOCATION` | 64 (0x40) |  |
+| `UNIT_ENEMY` | 128 (0x80) | `CanAttack` == true |
+| `UNIT_ALLY` | 256 (0x100) | `CanAssist` == true |
+| `CORPSE_ENEMY` | 512 (0x200) | pguid, `CanAssist` == false |
+| `UNIT_DEAD` | 1024 (0x400) | skinning-like effects |
+| `GAMEOBJECT` | 2048 (0x800) | pguid, 0 spells in 2.4.3 |
+| `TRADE_ITEM` | 4096 (0x1000) | pguid, 0 spells |
+| `STRING` | 8192 (0x2000) | string, 0 spells |
+| `LOCKED` | 16384 (0x4000) | 199 spells, opening object/lock |
+| `CORPSE_ALLY` | 32768 (0x8000) | pguid, `CanAssist` == true |
+| `UNIT_MINIPET` | 65536 (0x10000) | pguid, not used in any spells as of 2.4.3 (can be set dynamically) |
 
 Used in:
 * [SpellCastTargets](spellcasttargets.md)
@@ -141,30 +141,30 @@ flag SpellCastTargetFlags : u32 {
 ### Type
 The basic type is `u32`, a 4 byte (32 bit) little endian integer.
 ### Enumerators
-| Enumerator | Value  | Description | Comment |
-| --------- | -------- | ----------- | ------- |
-| `SELF` | 0 (0x00) |  |  |
-| `UNUSED1` | 1 (0x01) |  | not used in any spells as of 2.4.3 (can be set dynamically) |
-| `UNIT` | 2 (0x02) |  | pguid |
-| `UNIT_RAID` | 4 (0x04) |  | not used in any spells as of 2.4.3 (can be set dynamically) - raid member |
-| `UNIT_PARTY` | 8 (0x08) |  | not used in any spells as of 2.4.3 (can be set dynamically) - party member |
-| `ITEM` | 16 (0x10) |  | pguid |
-| `SOURCE_LOCATION` | 32 (0x20) |  | 3xfloat |
-| `DEST_LOCATION` | 64 (0x40) |  | 3xfloat |
-| `UNIT_ENEMY` | 128 (0x80) |  | `CanAttack` == true |
-| `UNIT_ALLY` | 256 (0x100) |  | `CanAssist` == true |
-| `CORPSE_ENEMY` | 512 (0x200) |  | pguid, `CanAssist` == false |
-| `UNIT_DEAD` | 1024 (0x400) |  | skinning-like effects |
-| `GAMEOBJECT` | 2048 (0x800) |  | pguid, 0 spells in 2.4.3 |
-| `TRADE_ITEM` | 4096 (0x1000) |  | pguid, 0 spells |
-| `STRING` | 8192 (0x2000) |  | string, 0 spells |
-| `LOCKED` | 16384 (0x4000) |  | 199 spells, opening object/lock |
-| `CORPSE_ALLY` | 32768 (0x8000) |  | pguid, `CanAssist` == true |
-| `UNIT_MINIPET` | 65536 (0x10000) |  | pguid, not used in any spells as of 2.4.3 (can be set dynamically) |
-| `GLYPH_SLOT` | 131072 (0x20000) |  | used in glyph spells |
-| `DEST_TARGET` | 262144 (0x40000) |  | sometimes appears with `DEST_TARGET` spells (may appear or not for a given spell) |
-| `UNUSED20` | 524288 (0x80000) |  | uint32 counter loop, vec3 - screen position (?) guid, not used so far |
-| `UNIT_PASSENGER` | 1048576 (0x100000) |  | guessed, used to validate target (if vehicle passenger) |
+| Enumerator | Value  | Comment |
+| --------- | -------- | ------- |
+| `SELF` | 0 (0x00) |  |
+| `UNUSED1` | 1 (0x01) | not used in any spells as of 2.4.3 (can be set dynamically) |
+| `UNIT` | 2 (0x02) | pguid |
+| `UNIT_RAID` | 4 (0x04) | not used in any spells as of 2.4.3 (can be set dynamically) - raid member |
+| `UNIT_PARTY` | 8 (0x08) | not used in any spells as of 2.4.3 (can be set dynamically) - party member |
+| `ITEM` | 16 (0x10) | pguid |
+| `SOURCE_LOCATION` | 32 (0x20) | 3xfloat |
+| `DEST_LOCATION` | 64 (0x40) | 3xfloat |
+| `UNIT_ENEMY` | 128 (0x80) | `CanAttack` == true |
+| `UNIT_ALLY` | 256 (0x100) | `CanAssist` == true |
+| `CORPSE_ENEMY` | 512 (0x200) | pguid, `CanAssist` == false |
+| `UNIT_DEAD` | 1024 (0x400) | skinning-like effects |
+| `GAMEOBJECT` | 2048 (0x800) | pguid, 0 spells in 2.4.3 |
+| `TRADE_ITEM` | 4096 (0x1000) | pguid, 0 spells |
+| `STRING` | 8192 (0x2000) | string, 0 spells |
+| `LOCKED` | 16384 (0x4000) | 199 spells, opening object/lock |
+| `CORPSE_ALLY` | 32768 (0x8000) | pguid, `CanAssist` == true |
+| `UNIT_MINIPET` | 65536 (0x10000) | pguid, not used in any spells as of 2.4.3 (can be set dynamically) |
+| `GLYPH_SLOT` | 131072 (0x20000) | used in glyph spells |
+| `DEST_TARGET` | 262144 (0x40000) | sometimes appears with `DEST_TARGET` spells (may appear or not for a given spell) |
+| `UNUSED20` | 524288 (0x80000) | uint32 counter loop, vec3 - screen position (?) guid, not used so far |
+| `UNIT_PASSENGER` | 1048576 (0x100000) | guessed, used to validate target (if vehicle passenger) |
 
 Used in:
 * [SpellCastTargets](spellcasttargets.md)

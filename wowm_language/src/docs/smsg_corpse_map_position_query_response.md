@@ -28,10 +28,10 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | 4 / Little | f32 | unknown1 |  |  |
-| 0x08 | 4 / Little | f32 | unknown2 |  |  |
-| 0x0C | 4 / Little | f32 | unknown3 |  |  |
-| 0x10 | 4 / Little | f32 | unknown4 |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x04 | 4 / Little | f32 | unknown1 |  |
+| 0x08 | 4 / Little | f32 | unknown2 |  |
+| 0x0C | 4 / Little | f32 | unknown3 |  |
+| 0x10 | 4 / Little | f32 | unknown4 |  |
 

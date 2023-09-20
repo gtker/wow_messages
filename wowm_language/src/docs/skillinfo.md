@@ -17,14 +17,14 @@ struct SkillInfo {
 ```
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x00 | 2 / - | [Skill](skill.md) | skill |  |  |
-| 0x02 | 2 / Little | u16 | skill_step |  |  |
-| 0x04 | 2 / Little | u16 | minimum |  |  |
-| 0x06 | 2 / Little | u16 | maximum |  |  |
-| 0x08 | 2 / Little | u16 | permanent_bonus |  |  |
-| 0x0A | 2 / Little | u16 | temporary_bonus |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x00 | 2 / - | [Skill](skill.md) | skill |  |
+| 0x02 | 2 / Little | u16 | skill_step |  |
+| 0x04 | 2 / Little | u16 | minimum |  |
+| 0x06 | 2 / Little | u16 | maximum |  |
+| 0x08 | 2 / Little | u16 | permanent_bonus |  |
+| 0x0A | 2 / Little | u16 | temporary_bonus |  |
 
 
 Used in:
@@ -46,14 +46,14 @@ struct SkillInfo {
 ```
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x00 | 2 / - | [Skill](skill.md) | skill |  |  |
-| 0x02 | 2 / Little | u16 | skill_step |  |  |
-| 0x04 | 2 / Little | u16 | minimum |  |  |
-| 0x06 | 2 / Little | u16 | maximum |  |  |
-| 0x08 | 2 / Little | u16 | permanent_bonus |  |  |
-| 0x0A | 2 / Little | u16 | temporary_bonus |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x00 | 2 / - | [Skill](skill.md) | skill |  |
+| 0x02 | 2 / Little | u16 | skill_step |  |
+| 0x04 | 2 / Little | u16 | minimum |  |
+| 0x06 | 2 / Little | u16 | maximum |  |
+| 0x08 | 2 / Little | u16 | permanent_bonus |  |
+| 0x0A | 2 / Little | u16 | temporary_bonus |  |
 
 
 Used in:
@@ -75,14 +75,14 @@ struct SkillInfo {
 ```
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x00 | 2 / - | [Skill](skill.md) | skill |  |  |
-| 0x02 | 2 / Little | u16 | skill_step |  |  |
-| 0x04 | 2 / Little | u16 | minimum |  |  |
-| 0x06 | 2 / Little | u16 | maximum |  |  |
-| 0x08 | 2 / Little | u16 | permanent_bonus |  |  |
-| 0x0A | 2 / Little | u16 | temporary_bonus |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x00 | 2 / - | [Skill](skill.md) | skill |  |
+| 0x02 | 2 / Little | u16 | skill_step |  |
+| 0x04 | 2 / Little | u16 | minimum |  |
+| 0x06 | 2 / Little | u16 | maximum |  |
+| 0x08 | 2 / Little | u16 | permanent_bonus |  |
+| 0x0A | 2 / Little | u16 | temporary_bonus |  |
 
 
 Used in:

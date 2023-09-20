@@ -25,9 +25,9 @@ CMSG have a header of 6 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x06 | 4 / - | [Map](map.md) | map |  |  |
-| 0x0A | 1 / - | [RaidDifficulty](raiddifficulty.md) | difficulty |  |  |
-| 0x0B | 1 / - | Bool | toggle_extend |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x06 | 4 / - | [Map](map.md) | map |  |
+| 0x0A | 1 / - | [RaidDifficulty](raiddifficulty.md) | difficulty |  |
+| 0x0B | 1 / - | Bool | toggle_extend |  |
 

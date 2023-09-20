@@ -32,18 +32,18 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | 4 / - | [HitInfo](hitinfo.md) | hit_info |  |  |
-| 0x08 | - / - | [PackedGuid](../types/packed-guid.md) | attacker |  |  |
-| - | - / - | [PackedGuid](../types/packed-guid.md) | target |  |  |
-| - | 4 / Little | u32 | total_damage |  |  |
-| - | 1 / - | u8 | amount_of_damages |  |  |
-| - | ? / - | [DamageInfo](damageinfo.md)[amount_of_damages] | damages |  |  |
-| - | 4 / Little | u32 | damage_state |  |  |
-| - | 4 / Little | u32 | unknown1 |  |  |
-| - | 4 / Little | u32 | spell_id |  | vmangos: spell id, seen with heroic strike and disarm as examples |
-| - | 4 / Little | u32 | blocked_amount |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x04 | 4 / - | [HitInfo](hitinfo.md) | hit_info |  |
+| 0x08 | - / - | [PackedGuid](../types/packed-guid.md) | attacker |  |
+| - | - / - | [PackedGuid](../types/packed-guid.md) | target |  |
+| - | 4 / Little | u32 | total_damage |  |
+| - | 1 / - | u8 | amount_of_damages |  |
+| - | ? / - | [DamageInfo](damageinfo.md)[amount_of_damages] | damages |  |
+| - | 4 / Little | u32 | damage_state |  |
+| - | 4 / Little | u32 | unknown1 |  |
+| - | 4 / Little | u32 | spell_id | vmangos: spell id, seen with heroic strike and disarm as examples |
+| - | 4 / Little | u32 | blocked_amount |  |
 
 ### Examples
 
@@ -100,18 +100,18 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | 4 / - | [HitInfo](hitinfo.md) | hit_info |  |  |
-| 0x08 | - / - | [PackedGuid](../types/packed-guid.md) | attacker |  |  |
-| - | - / - | [PackedGuid](../types/packed-guid.md) | target |  |  |
-| - | 4 / Little | u32 | total_damage |  |  |
-| - | 1 / - | u8 | amount_of_damages |  |  |
-| - | ? / - | [DamageInfo](damageinfo.md)[amount_of_damages] | damages |  |  |
-| - | 4 / Little | u32 | damage_state |  |  |
-| - | 4 / Little | u32 | unknown1 |  |  |
-| - | 4 / Little | u32 | spell_id |  | vmangos: spell id, seen with heroic strike and disarm as examples |
-| - | 4 / Little | u32 | blocked_amount |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x04 | 4 / - | [HitInfo](hitinfo.md) | hit_info |  |
+| 0x08 | - / - | [PackedGuid](../types/packed-guid.md) | attacker |  |
+| - | - / - | [PackedGuid](../types/packed-guid.md) | target |  |
+| - | 4 / Little | u32 | total_damage |  |
+| - | 1 / - | u8 | amount_of_damages |  |
+| - | ? / - | [DamageInfo](damageinfo.md)[amount_of_damages] | damages |  |
+| - | 4 / Little | u32 | damage_state |  |
+| - | 4 / Little | u32 | unknown1 |  |
+| - | 4 / Little | u32 | spell_id | vmangos: spell id, seen with heroic strike and disarm as examples |
+| - | 4 / Little | u32 | blocked_amount |  |
 
 ## Client Version 3.3.5
 
@@ -171,57 +171,57 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | 4 / - | [HitInfo](hitinfo.md) | hit_info |  |  |
-| - | - / - | [PackedGuid](../types/packed-guid.md) | attacker |  |  |
-| - | - / - | [PackedGuid](../types/packed-guid.md) | target |  |  |
-| - | 4 / Little | u32 | total_damage |  |  |
-| - | 4 / Little | u32 | overkill |  |  |
-| - | 1 / - | u8 | amount_of_damages |  |  |
-| - | ? / - | [DamageInfo](damageinfo.md)[amount_of_damages] | damage_infos |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| - | 4 / - | [HitInfo](hitinfo.md) | hit_info |  |
+| - | - / - | [PackedGuid](../types/packed-guid.md) | attacker |  |
+| - | - / - | [PackedGuid](../types/packed-guid.md) | target |  |
+| - | 4 / Little | u32 | total_damage |  |
+| - | 4 / Little | u32 | overkill |  |
+| - | 1 / - | u8 | amount_of_damages |  |
+| - | ? / - | [DamageInfo](damageinfo.md)[amount_of_damages] | damage_infos |  |
 
 If hit_info contains `ALL_ABSORB`:
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | 4 / Little | u32 | absorb |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| - | 4 / Little | u32 | absorb |  |
 
 If hit_info contains `ALL_RESIST`:
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | 4 / Little | u32 | resist |  |  |
-| - | 1 / - | [VictimState](victimstate.md) | victim_state |  |  |
-| - | 4 / Little | u32 | unknown1 |  | arcemu: can be 0,1000 or -1 |
-| - | 4 / Little | u32 | unknown2 |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| - | 4 / Little | u32 | resist |  |
+| - | 1 / - | [VictimState](victimstate.md) | victim_state |  |
+| - | 4 / Little | u32 | unknown1 | arcemu: can be 0,1000 or -1 |
+| - | 4 / Little | u32 | unknown2 |  |
 
 If hit_info contains `BLOCK`:
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | 4 / Little | u32 | blocked_amount |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| - | 4 / Little | u32 | blocked_amount |  |
 
 If hit_info contains `UNK19`:
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | 4 / Little | u32 | unknown3 |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| - | 4 / Little | u32 | unknown3 |  |
 
 If hit_info contains `UNK1`:
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | 4 / Little | u32 | unknown4 |  |  |
-| - | 4 / Little | f32 | unknown5 |  |  |
-| - | 4 / Little | f32 | unknown6 |  |  |
-| - | 4 / Little | f32 | unknown7 |  |  |
-| - | 4 / Little | f32 | unknown8 |  |  |
-| - | 4 / Little | f32 | unknown9 |  |  |
-| - | 4 / Little | f32 | unknown10 |  |  |
-| - | 4 / Little | f32 | unknown11 |  |  |
-| - | 4 / Little | f32 | unknown12 |  |  |
-| - | 4 / Little | f32 | unknown13 |  |  |
-| - | 4 / Little | f32 | unknown14 |  |  |
-| - | 4 / Little | u32 | unknown15 |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| - | 4 / Little | u32 | unknown4 |  |
+| - | 4 / Little | f32 | unknown5 |  |
+| - | 4 / Little | f32 | unknown6 |  |
+| - | 4 / Little | f32 | unknown7 |  |
+| - | 4 / Little | f32 | unknown8 |  |
+| - | 4 / Little | f32 | unknown9 |  |
+| - | 4 / Little | f32 | unknown10 |  |
+| - | 4 / Little | f32 | unknown11 |  |
+| - | 4 / Little | f32 | unknown12 |  |
+| - | 4 / Little | f32 | unknown13 |  |
+| - | 4 / Little | f32 | unknown14 |  |
+| - | 4 / Little | u32 | unknown15 |  |
 

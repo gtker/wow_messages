@@ -28,14 +28,14 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | 8 / Little | [Guid](../types/packed-guid.md) | npc |  |  |
-| 0x0C | - / - | CString | title |  |  |
-| - | 4 / Little | u32 | emote_delay |  | mangoszero: player emote |
-| - | 4 / Little | u32 | emote |  | mangoszero: NPC emote |
-| - | 1 / - | u8 | amount_of_entries |  |  |
-| - | ? / - | [QuestItem](questitem.md)[amount_of_entries] | quest_items |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x04 | 8 / Little | [Guid](../types/packed-guid.md) | npc |  |
+| 0x0C | - / - | CString | title |  |
+| - | 4 / Little | u32 | emote_delay | mangoszero: player emote |
+| - | 4 / Little | u32 | emote | mangoszero: NPC emote |
+| - | 1 / - | u8 | amount_of_entries |  |
+| - | ? / - | [QuestItem](questitem.md)[amount_of_entries] | quest_items |  |
 
 ## Client Version 3.3.5
 
@@ -65,12 +65,12 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | 8 / Little | [Guid](../types/packed-guid.md) | npc |  |  |
-| - | - / - | CString | title |  |  |
-| - | 4 / Little | u32 | emote_delay |  | mangoszero: player emote |
-| - | 4 / Little | u32 | emote |  | mangoszero: NPC emote |
-| - | 1 / - | u8 | amount_of_entries |  |  |
-| - | ? / - | [QuestItem](questitem.md)[amount_of_entries] | quest_items |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| - | 8 / Little | [Guid](../types/packed-guid.md) | npc |  |
+| - | - / - | CString | title |  |
+| - | 4 / Little | u32 | emote_delay | mangoszero: player emote |
+| - | 4 / Little | u32 | emote | mangoszero: NPC emote |
+| - | 1 / - | u8 | amount_of_entries |  |
+| - | ? / - | [QuestItem](questitem.md)[amount_of_entries] | quest_items |  |
 

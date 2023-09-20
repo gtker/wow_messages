@@ -19,16 +19,16 @@ struct Realm {
 ```
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x00 | 4 / - | [RealmType](realmtype.md) | realm_type |  |  |
-| 0x04 | 1 / - | [RealmFlag](realmflag.md) | flag |  |  |
-| 0x05 | - / - | CString | name |  |  |
-| - | - / - | CString | address |  |  |
-| - | 4 / Little | Population | population |  |  |
-| - | 1 / - | u8 | number_of_characters_on_realm |  |  |
-| - | 1 / - | [RealmCategory](realmcategory.md) | category |  |  |
-| - | 1 / - | u8 | realm_id |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x00 | 4 / - | [RealmType](realmtype.md) | realm_type |  |
+| 0x04 | 1 / - | [RealmFlag](realmflag.md) | flag |  |
+| 0x05 | - / - | CString | name |  |
+| - | - / - | CString | address |  |
+| - | 4 / Little | Population | population |  |
+| - | 1 / - | u8 | number_of_characters_on_realm |  |
+| - | 1 / - | [RealmCategory](realmcategory.md) | category |  |
+| - | 1 / - | u8 | realm_id |  |
 
 
 Used in:
@@ -54,17 +54,17 @@ struct Realm {
 ```
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x00 | 1 / - | [RealmType](realmtype.md) | realm_type |  |  |
-| 0x01 | 1 / - | Bool | locked |  |  |
-| 0x02 | 1 / - | [RealmFlag](realmflag.md) | flag |  |  |
-| 0x03 | - / - | CString | name |  |  |
-| - | - / - | CString | address |  |  |
-| - | 4 / Little | Population | population |  |  |
-| - | 1 / - | u8 | number_of_characters_on_realm |  |  |
-| - | 1 / - | [RealmCategory](realmcategory.md) | category |  |  |
-| - | 1 / - | u8 | realm_id |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x00 | 1 / - | [RealmType](realmtype.md) | realm_type |  |
+| 0x01 | 1 / - | Bool | locked |  |
+| 0x02 | 1 / - | [RealmFlag](realmflag.md) | flag |  |
+| 0x03 | - / - | CString | name |  |
+| - | - / - | CString | address |  |
+| - | 4 / Little | Population | population |  |
+| - | 1 / - | u8 | number_of_characters_on_realm |  |
+| - | 1 / - | [RealmCategory](realmcategory.md) | category |  |
+| - | 1 / - | u8 | realm_id |  |
 
 
 Used in:
@@ -93,23 +93,23 @@ struct Realm {
 ```
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x00 | 1 / - | [RealmType](realmtype.md) | realm_type |  | vmangos: this is the second column in Cfg_Configs.dbc |
-| 0x01 | 1 / - | Bool | locked |  |  |
-| 0x02 | 1 / - | [RealmFlag](realmflag.md) | flag |  |  |
-| 0x03 | - / - | CString | name |  |  |
-| - | - / - | CString | address |  |  |
-| - | 4 / Little | Population | population |  |  |
-| - | 1 / - | u8 | number_of_characters_on_realm |  |  |
-| - | 1 / - | [RealmCategory](realmcategory.md) | category |  |  |
-| - | 1 / - | u8 | realm_id |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x00 | 1 / - | [RealmType](realmtype.md) | realm_type | vmangos: this is the second column in Cfg_Configs.dbc |
+| 0x01 | 1 / - | Bool | locked |  |
+| 0x02 | 1 / - | [RealmFlag](realmflag.md) | flag |  |
+| 0x03 | - / - | CString | name |  |
+| - | - / - | CString | address |  |
+| - | 4 / Little | Population | population |  |
+| - | 1 / - | u8 | number_of_characters_on_realm |  |
+| - | 1 / - | [RealmCategory](realmcategory.md) | category |  |
+| - | 1 / - | u8 | realm_id |  |
 
 If flag contains `SPECIFY_BUILD`:
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | 5 / - | [Version](version.md) | version |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| - | 5 / - | [Version](version.md) | version |  |
 
 
 Used in:

@@ -15,10 +15,10 @@ enum Platform : u32 {
 ### Type
 The basic type is `u32`, a 4 byte (32 bit) little endian integer.
 ### Enumerators
-| Enumerator | Value  | Description | Comment |
-| --------- | -------- | ----------- | ------- |
-| `X86` | 7878710 (0x783836) |  |  |
-| `POWER_PC` | 5263427 (0x505043) |  |  |
+| Enumerator | Value  | Comment |
+| --------- | -------- | ------- |
+| `X86` | 7878710 (0x783836) |  |
+| `POWER_PC` | 5263427 (0x505043) |  |
 
 Used in:
 * [CMD_AUTH_LOGON_CHALLENGE_Client](cmd_auth_logon_challenge_client.md)

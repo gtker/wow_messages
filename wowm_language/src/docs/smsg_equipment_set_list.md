@@ -24,8 +24,8 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | 4 / Little | u32 | amount_of_equipment_sets |  |  |
-| - | ? / - | [EquipmentSetListItem](equipmentsetlistitem.md)[amount_of_equipment_sets] | equipment_sets |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| - | 4 / Little | u32 | amount_of_equipment_sets |  |
+| - | ? / - | [EquipmentSetListItem](equipmentsetlistitem.md)[amount_of_equipment_sets] | equipment_sets |  |
 

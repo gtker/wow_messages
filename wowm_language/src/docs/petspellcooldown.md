@@ -15,12 +15,12 @@ struct PetSpellCooldown {
 ```
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x00 | 2 / Little | u16 | spell |  |  |
-| 0x02 | 2 / Little | u16 | spell_category |  | mangoszero: sets to 0 |
-| 0x04 | 4 / Little | Milliseconds | cooldown |  |  |
-| 0x08 | 4 / Little | Milliseconds | category_cooldown |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x00 | 2 / Little | u16 | spell |  |
+| 0x02 | 2 / Little | u16 | spell_category | mangoszero: sets to 0 |
+| 0x04 | 4 / Little | Milliseconds | cooldown |  |
+| 0x08 | 4 / Little | Milliseconds | category_cooldown |  |
 
 
 Used in:
@@ -41,12 +41,12 @@ struct PetSpellCooldown {
 ```
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x00 | 4 / Little | u32 | spell |  |  |
-| 0x04 | 2 / Little | u16 | spell_category |  | mangoszero: sets to 0 |
-| 0x06 | 4 / Little | Milliseconds | cooldown |  |  |
-| 0x0A | 4 / Little | Milliseconds | category_cooldown |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x00 | 4 / Little | u32 | spell |  |
+| 0x04 | 2 / Little | u16 | spell_category | mangoszero: sets to 0 |
+| 0x06 | 4 / Little | Milliseconds | cooldown |  |
+| 0x0A | 4 / Little | Milliseconds | category_cooldown |  |
 
 
 Used in:

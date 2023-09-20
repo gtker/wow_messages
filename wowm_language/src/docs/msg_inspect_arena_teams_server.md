@@ -30,14 +30,14 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | 8 / Little | [Guid](../types/packed-guid.md) | player |  |  |
-| 0x0C | 1 / - | u8 | slot |  |  |
-| 0x0D | 4 / Little | u32 | arena_team |  |  |
-| 0x11 | 4 / Little | u32 | rating |  |  |
-| 0x15 | 4 / Little | u32 | games_played_this_season |  |  |
-| 0x19 | 4 / Little | u32 | wins_this_season |  |  |
-| 0x1D | 4 / Little | u32 | total_games_played |  |  |
-| 0x21 | 4 / Little | u32 | personal_rating |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x04 | 8 / Little | [Guid](../types/packed-guid.md) | player |  |
+| 0x0C | 1 / - | u8 | slot |  |
+| 0x0D | 4 / Little | u32 | arena_team |  |
+| 0x11 | 4 / Little | u32 | rating |  |
+| 0x15 | 4 / Little | u32 | games_played_this_season |  |
+| 0x19 | 4 / Little | u32 | wins_this_season |  |
+| 0x1D | 4 / Little | u32 | total_games_played |  |
+| 0x21 | 4 / Little | u32 | personal_rating |  |
 

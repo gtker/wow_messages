@@ -11,7 +11,6 @@ pub(crate) struct ObjectTags {
     all_versions: AllVersions,
     rust_versions: Option<AllRustVersions>,
 
-    description: Option<TagString>,
     comment: Option<TagString>,
 
     compressed: bool,
@@ -27,7 +26,6 @@ pub(crate) struct ObjectTags {
 impl ObjectTags {
     pub(crate) fn from_parsed(
         all_versions: AllVersions,
-        description: Option<TagString>,
         comment: Option<TagString>,
         compressed: bool,
         is_test: bool,
@@ -59,7 +57,6 @@ impl ObjectTags {
         Self {
             all_versions,
             rust_versions,
-            description,
             compressed,
             comment,
             is_test,
@@ -87,7 +84,7 @@ impl ObjectTags {
         };
 
         Self::from_parsed(
-            v.0, None, None, false, false, false, false, false, false, false, false,
+            v.0, None, false, false, false, false, false, false, false, false,
         )
     }
 
@@ -99,7 +96,6 @@ impl ObjectTags {
 
         Self::from_parsed(
             AllVersions::World(s),
-            None,
             None,
             false,
             false,
@@ -218,10 +214,6 @@ impl ObjectTags {
 
     pub(crate) fn has_login_version(&self) -> bool {
         matches!(self.all_versions, AllVersions::Login(_))
-    }
-
-    pub(crate) fn description(&self) -> Option<&TagString> {
-        self.description.as_ref()
     }
 
     pub(crate) fn comment(&self) -> Option<&TagString> {
@@ -393,30 +385,17 @@ impl TagString {
 
 #[derive(Debug, Eq, PartialEq, Ord, PartialOrd, Clone, Default)]
 pub(crate) struct MemberTags {
-    description: Option<TagString>,
     comment: Option<TagString>,
     display: Option<String>,
 }
 
 impl MemberTags {
-    pub(crate) fn from_parsed(
-        description: Option<TagString>,
-        comment: Option<TagString>,
-        display: Option<String>,
-    ) -> Self {
-        Self {
-            description,
-            comment,
-            display,
-        }
+    pub(crate) fn from_parsed(comment: Option<TagString>, display: Option<String>) -> Self {
+        Self { comment, display }
     }
 
     pub(crate) fn new() -> Self {
         Self::default()
-    }
-
-    pub(crate) fn description(&self) -> Option<&TagString> {
-        self.description.as_ref()
     }
 
     pub(crate) fn comment(&self) -> Option<&TagString> {

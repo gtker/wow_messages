@@ -27,17 +27,17 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | 4 / Little | u32 | amount_of_objects |  |  |
-| 0x08 | 1 / - | u8 | has_transport |  |  |
-| 0x09 | ? / - | [Object](object.md)[amount_of_objects] | objects |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x04 | 4 / Little | u32 | amount_of_objects |  |
+| 0x08 | 1 / - | u8 | has_transport |  |
+| 0x09 | ? / - | [Object](object.md)[amount_of_objects] | objects |  |
 
 ### Examples
 
 #### Example 1
 
-##### Description
+##### Comment
 
 Most minimal package required to load into the world. Also requires a valid [SMSG_TUTORIAL_FLAGS](./smsg_tutorial_flags.md) and [SMSG_LOGIN_VERIFY_WORLD](./smsg_login_verify_world.md).
 
@@ -81,11 +81,11 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | 4 / Little | u32 | amount_of_objects |  |  |
-| 0x08 | 1 / - | u8 | has_transport |  |  |
-| 0x09 | ? / - | [Object](object.md)[amount_of_objects] | objects |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x04 | 4 / Little | u32 | amount_of_objects |  |
+| 0x08 | 1 / - | u8 | has_transport |  |
+| 0x09 | ? / - | [Object](object.md)[amount_of_objects] | objects |  |
 
 ## Client Version 3.3.5
 
@@ -113,8 +113,8 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | 4 / Little | u32 | amount_of_objects |  |  |
-| - | ? / - | [Object](object.md)[amount_of_objects] | objects |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| - | 4 / Little | u32 | amount_of_objects |  |
+| - | ? / - | [Object](object.md)[amount_of_objects] | objects |  |
 

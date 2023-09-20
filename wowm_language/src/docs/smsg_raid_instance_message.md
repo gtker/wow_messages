@@ -25,11 +25,11 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | 4 / - | [RaidInstanceMessage](raidinstancemessage.md) | message_type |  |  |
-| 0x08 | 4 / - | [Map](map.md) | map |  |  |
-| 0x0C | 4 / Little | u32 | time_left |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x04 | 4 / - | [RaidInstanceMessage](raidinstancemessage.md) | message_type |  |
+| 0x08 | 4 / - | [Map](map.md) | map |  |
+| 0x0C | 4 / Little | u32 | time_left |  |
 
 ## Client Version 2.4.3
 
@@ -56,11 +56,11 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | 4 / - | [RaidInstanceMessage](raidinstancemessage.md) | message_type |  |  |
-| 0x08 | 4 / - | [Map](map.md) | map |  |  |
-| 0x0C | 4 / Little | u32 | time_left |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x04 | 4 / - | [RaidInstanceMessage](raidinstancemessage.md) | message_type |  |
+| 0x08 | 4 / - | [Map](map.md) | map |  |
+| 0x0C | 4 / Little | u32 | time_left |  |
 
 ## Client Version 3.3.5
 
@@ -88,10 +88,10 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | 4 / - | [RaidInstanceMessage](raidinstancemessage.md) | message_type |  |  |
-| 0x08 | 4 / - | [Map](map.md) | map |  |  |
-| 0x0C | 4 / - | [RaidDifficulty](raiddifficulty.md) | difficulty |  |  |
-| 0x10 | 4 / Little | u32 | time_left |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x04 | 4 / - | [RaidInstanceMessage](raidinstancemessage.md) | message_type |  |
+| 0x08 | 4 / - | [Map](map.md) | map |  |
+| 0x0C | 4 / - | [RaidDifficulty](raiddifficulty.md) | difficulty |  |
+| 0x10 | 4 / Little | u32 | time_left |  |
 

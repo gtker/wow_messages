@@ -21,16 +21,16 @@ enum ObjectType : u8 {
 ### Type
 The basic type is `u8`, a 1 byte (8 bit) integer.
 ### Enumerators
-| Enumerator | Value  | Description | Comment |
-| --------- | -------- | ----------- | ------- |
-| `OBJECT` | 0 (0x00) |  |  |
-| `ITEM` | 1 (0x01) |  |  |
-| `CONTAINER` | 2 (0x02) |  |  |
-| `UNIT` | 3 (0x03) |  |  |
-| `PLAYER` | 4 (0x04) |  |  |
-| `GAME_OBJECT` | 5 (0x05) |  |  |
-| `DYNAMIC_OBJECT` | 6 (0x06) |  |  |
-| `CORPSE` | 7 (0x07) |  |  |
+| Enumerator | Value  | Comment |
+| --------- | -------- | ------- |
+| `OBJECT` | 0 (0x00) |  |
+| `ITEM` | 1 (0x01) |  |
+| `CONTAINER` | 2 (0x02) |  |
+| `UNIT` | 3 (0x03) |  |
+| `PLAYER` | 4 (0x04) |  |
+| `GAME_OBJECT` | 5 (0x05) |  |
+| `DYNAMIC_OBJECT` | 6 (0x06) |  |
+| `CORPSE` | 7 (0x07) |  |
 
 Used in:
 * [Object](object.md)
@@ -56,16 +56,16 @@ enum ObjectType : u8 {
 ### Type
 The basic type is `u8`, a 1 byte (8 bit) integer.
 ### Enumerators
-| Enumerator | Value  | Description | Comment |
-| --------- | -------- | ----------- | ------- |
-| `OBJECT` | 0 (0x00) |  |  |
-| `ITEM` | 1 (0x01) |  |  |
-| `CONTAINER` | 2 (0x02) |  |  |
-| `UNIT` | 3 (0x03) |  |  |
-| `PLAYER` | 4 (0x04) |  |  |
-| `GAME_OBJECT` | 5 (0x05) |  |  |
-| `DYNAMIC_OBJECT` | 6 (0x06) |  |  |
-| `CORPSE` | 7 (0x07) |  |  |
+| Enumerator | Value  | Comment |
+| --------- | -------- | ------- |
+| `OBJECT` | 0 (0x00) |  |
+| `ITEM` | 1 (0x01) |  |
+| `CONTAINER` | 2 (0x02) |  |
+| `UNIT` | 3 (0x03) |  |
+| `PLAYER` | 4 (0x04) |  |
+| `GAME_OBJECT` | 5 (0x05) |  |
+| `DYNAMIC_OBJECT` | 6 (0x06) |  |
+| `CORPSE` | 7 (0x07) |  |
 
 Used in:
 * [Object](object.md)
@@ -91,16 +91,16 @@ enum ObjectType : u8 {
 ### Type
 The basic type is `u8`, a 1 byte (8 bit) integer.
 ### Enumerators
-| Enumerator | Value  | Description | Comment |
-| --------- | -------- | ----------- | ------- |
-| `OBJECT` | 0 (0x00) |  |  |
-| `ITEM` | 1 (0x01) |  |  |
-| `CONTAINER` | 2 (0x02) |  |  |
-| `UNIT` | 3 (0x03) |  |  |
-| `PLAYER` | 4 (0x04) |  |  |
-| `GAME_OBJECT` | 5 (0x05) |  |  |
-| `DYNAMIC_OBJECT` | 6 (0x06) |  |  |
-| `CORPSE` | 7 (0x07) |  |  |
+| Enumerator | Value  | Comment |
+| --------- | -------- | ------- |
+| `OBJECT` | 0 (0x00) |  |
+| `ITEM` | 1 (0x01) |  |
+| `CONTAINER` | 2 (0x02) |  |
+| `UNIT` | 3 (0x03) |  |
+| `PLAYER` | 4 (0x04) |  |
+| `GAME_OBJECT` | 5 (0x05) |  |
+| `DYNAMIC_OBJECT` | 6 (0x06) |  |
+| `CORPSE` | 7 (0x07) |  |
 
 Used in:
 * [Object](object.md)

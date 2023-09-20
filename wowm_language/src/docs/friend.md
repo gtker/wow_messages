@@ -18,18 +18,18 @@ struct Friend {
 ```
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x00 | 8 / Little | [Guid](../types/packed-guid.md) | guid |  |  |
-| 0x08 | 1 / - | [FriendStatus](friendstatus.md) | status |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x00 | 8 / Little | [Guid](../types/packed-guid.md) | guid |  |
+| 0x08 | 1 / - | [FriendStatus](friendstatus.md) | status |  |
 
 If status is not equal to `OFFLINE`:
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x09 | 4 / - | [Area](area.md) | area |  |  |
-| 0x0D | 4 / Little | Level32 | level |  |  |
-| 0x11 | 4 / - | [Class](class.md) | class |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x09 | 4 / - | [Area](area.md) | area |  |
+| 0x0D | 4 / Little | Level32 | level |  |
+| 0x11 | 4 / - | [Class](class.md) | class |  |
 
 
 Used in:

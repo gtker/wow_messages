@@ -13,10 +13,10 @@ struct PetitionSignature {
 ```
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x00 | 8 / Little | [Guid](../types/packed-guid.md) | signer |  |  |
-| 0x08 | 4 / Little | u32 | unknown1 |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x00 | 8 / Little | [Guid](../types/packed-guid.md) | signer |  |
+| 0x08 | 4 / Little | u32 | unknown1 |  |
 
 
 Used in:

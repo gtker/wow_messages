@@ -23,9 +23,9 @@ CMSG have a header of 6 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x06 | 4 / - | [Map](map.md) | map |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x06 | 4 / - | [Map](map.md) | map |  |
 
 ## Client Version 2.4.3
 
@@ -50,9 +50,9 @@ CMSG have a header of 6 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x06 | 4 / - | [Map](map.md) | map |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x06 | 4 / - | [Map](map.md) | map |  |
 
 ## Client Version 3.3.5
 
@@ -79,9 +79,9 @@ CMSG have a header of 6 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x06 | 4 / - | [BattlegroundType](battlegroundtype.md) | battleground_type |  |  |
-| 0x0A | 1 / - | [BattlefieldListLocation](battlefieldlistlocation.md) | location |  |  |
-| 0x0B | 1 / - | Bool | can_gain_exp |  | azerothcore: players with locked xp have their own bg queue on retail |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x06 | 4 / - | [BattlegroundType](battlegroundtype.md) | battleground_type |  |
+| 0x0A | 1 / - | [BattlefieldListLocation](battlefieldlistlocation.md) | location |  |
+| 0x0B | 1 / - | Bool | can_gain_exp | azerothcore: players with locked xp have their own bg queue on retail |
 

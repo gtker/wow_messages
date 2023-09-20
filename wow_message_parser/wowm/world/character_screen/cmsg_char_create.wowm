@@ -10,7 +10,7 @@ cmsg CMSG_CHAR_CREATE = 0x36 {
     u8 facial_hair;
     u8 outfit_id = 0;
 } {
-    description = "Sent after the client presses 'Create Character'. The client will then wait for [SMSG_CHAR_CREATE].";
+    comment = "Sent after the client presses 'Create Character'. The client will then wait for [SMSG_CHAR_CREATE].";
     paste_versions = "1 2.4.3";
 }
 
@@ -54,6 +54,6 @@ cmsg CMSG_CHAR_CREATE = 0x36 {
     u8 facial_hair;
     u8 outfit_id = 0;
 } {
-    description = "Sent after the client presses 'Create Character'. The client will then wait for [SMSG_CHAR_CREATE].";
+    comment = "Sent after the client presses 'Create Character'. The client will then wait for [SMSG_CHAR_CREATE].";
     versions = "3.2 3.3";
 }

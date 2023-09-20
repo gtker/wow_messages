@@ -25,9 +25,9 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | 1 / - | u8 | eff |  |  |
-| 0x05 | 1 / - | u8 | op |  |  |
-| 0x06 | 4 / Little | u32 | value |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x04 | 1 / - | u8 | eff |  |
+| 0x05 | 1 / - | u8 | op |  |
+| 0x06 | 4 / Little | u32 | value |  |
 

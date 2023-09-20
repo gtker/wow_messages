@@ -25,11 +25,11 @@ CMSG have a header of 6 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x06 | 4 / Little | u32 | item_text_id |  |  |
-| 0x0A | 4 / Little | u32 | mail_id |  | vmangos/cmangos/mangoszero: this value can be item id in bag, but it is also mail id |
-| 0x0E | 4 / Little | u32 | unknown1 |  | vmangos/cmangos/mangoszero: maybe something like state - 0x70000000 |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x06 | 4 / Little | u32 | item_text_id |  |
+| 0x0A | 4 / Little | u32 | mail_id | vmangos/cmangos/mangoszero: this value can be item id in bag, but it is also mail id |
+| 0x0E | 4 / Little | u32 | unknown1 | vmangos/cmangos/mangoszero: maybe something like state - 0x70000000 |
 
 ## Client Version 3.3.5
 
@@ -54,7 +54,7 @@ CMSG have a header of 6 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x06 | 8 / Little | [Guid](../types/packed-guid.md) | item |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x06 | 8 / Little | [Guid](../types/packed-guid.md) | item |  |
 

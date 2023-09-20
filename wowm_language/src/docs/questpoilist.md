@@ -13,10 +13,10 @@ struct QuestPoiList {
 ```
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x00 | 4 / Little | u32 | quest_id |  |  |
-| 0x04 | 4 / Little | u32 | amount_of_pois |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x00 | 4 / Little | u32 | quest_id |  |
+| 0x04 | 4 / Little | u32 | amount_of_pois |  |
 
 
 Used in:

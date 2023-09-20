@@ -1,7 +1,7 @@
 cmsg CMSG_SET_SELECTION = 0x13D {
     Guid target;
 } {
-    description = "Sets the current target.";
+    comment = "Sets the current target.";
     versions = "1 2 3";
 }
 
@@ -13,7 +13,7 @@ test CMSG_SET_SELECTION {
   0x3d, 0x01, 0x00, 0x00, /* opcode */
   0x06, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 /* target */
 ] {
-    description = "Client sets target to GUID 6.";
+    comment = "Client sets target to GUID 6.";
     versions = "1.12";
 }
 

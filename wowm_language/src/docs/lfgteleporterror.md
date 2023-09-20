@@ -19,14 +19,14 @@ enum LfgTeleportError : u32 {
 ### Type
 The basic type is `u32`, a 4 byte (32 bit) little endian integer.
 ### Enumerators
-| Enumerator | Value  | Description | Comment |
-| --------- | -------- | ----------- | ------- |
-| `PLAYER_DEAD` | 1 (0x01) |  |  |
-| `FALLING` | 2 (0x02) |  |  |
-| `IN_VEHICLE` | 3 (0x03) |  |  |
-| `FATIGUE` | 4 (0x04) |  |  |
-| `INVALID_LOCATION` | 6 (0x06) |  |  |
-| `COMBAT` | 8 (0x08) |  | azerothcore: It can be 7 or 8 |
+| Enumerator | Value  | Comment |
+| --------- | -------- | ------- |
+| `PLAYER_DEAD` | 1 (0x01) |  |
+| `FALLING` | 2 (0x02) |  |
+| `IN_VEHICLE` | 3 (0x03) |  |
+| `FATIGUE` | 4 (0x04) |  |
+| `INVALID_LOCATION` | 6 (0x06) |  |
+| `COMBAT` | 8 (0x08) | azerothcore: It can be 7 or 8 |
 
 Used in:
 * [SMSG_LFG_TELEPORT_DENIED](smsg_lfg_teleport_denied.md)

@@ -19,16 +19,16 @@ struct GuildBankSlot {
 ```
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x00 | 1 / - | u8 | slot |  |  |
-| 0x01 | 4 / Little | u32 | item |  |  |
-| 0x05 | - / - | [VariableItemRandomProperty](../types/variable-item-random-property.md) | item_random_property_id |  |  |
-| - | 1 / - | u8 | amount_of_items |  |  |
-| - | 4 / Little | u32 | enchant |  |  |
-| - | 1 / - | u8 | charges |  |  |
-| - | 1 / - | u8 | amount_of_sockets |  |  |
-| - | ? / - | [GuildBankSocket](guildbanksocket.md)[amount_of_sockets] | sockets |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x00 | 1 / - | u8 | slot |  |
+| 0x01 | 4 / Little | u32 | item |  |
+| 0x05 | - / - | [VariableItemRandomProperty](../types/variable-item-random-property.md) | item_random_property_id |  |
+| - | 1 / - | u8 | amount_of_items |  |
+| - | 4 / Little | u32 | enchant |  |
+| - | 1 / - | u8 | charges |  |
+| - | 1 / - | u8 | amount_of_sockets |  |
+| - | ? / - | [GuildBankSocket](guildbanksocket.md)[amount_of_sockets] | sockets |  |
 
 
 Used in:
@@ -54,17 +54,17 @@ struct GuildBankSlot {
 ```
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x00 | 1 / - | u8 | slot |  |  |
-| 0x01 | 4 / Little | u32 | item |  |  |
-| 0x05 | 4 / Little | u32 | unknown1 |  | 3.3.0 (0x8000, 0x8020) |
-| 0x09 | - / - | [VariableItemRandomProperty](../types/variable-item-random-property.md) | item_random_property_id |  |  |
-| - | 4 / Little | u32 | amount_of_items |  |  |
-| - | 4 / Little | u32 | unknown2 |  |  |
-| - | 1 / - | u8 | unknown3 |  |  |
-| - | 1 / - | u8 | amount_of_sockets |  |  |
-| - | ? / - | [GuildBankSocket](guildbanksocket.md)[amount_of_sockets] | sockets |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x00 | 1 / - | u8 | slot |  |
+| 0x01 | 4 / Little | u32 | item |  |
+| 0x05 | 4 / Little | u32 | unknown1 | 3.3.0 (0x8000, 0x8020) |
+| 0x09 | - / - | [VariableItemRandomProperty](../types/variable-item-random-property.md) | item_random_property_id |  |
+| - | 4 / Little | u32 | amount_of_items |  |
+| - | 4 / Little | u32 | unknown2 |  |
+| - | 1 / - | u8 | unknown3 |  |
+| - | 1 / - | u8 | amount_of_sockets |  |
+| - | ? / - | [GuildBankSocket](guildbanksocket.md)[amount_of_sockets] | sockets |  |
 
 
 Used in:

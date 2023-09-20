@@ -28,37 +28,37 @@ struct MonsterMove {
 ```
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x00 | 12 / - | [Vector3d](vector3d.md) | spline_point |  |  |
-| 0x0C | 4 / Little | u32 | spline_id |  |  |
-| 0x10 | 1 / - | [MonsterMoveType](monstermovetype.md) | move_type |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x00 | 12 / - | [Vector3d](vector3d.md) | spline_point |  |
+| 0x0C | 4 / Little | u32 | spline_id |  |
+| 0x10 | 1 / - | [MonsterMoveType](monstermovetype.md) | move_type |  |
 
 If move_type is equal to `FACING_TARGET`:
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x11 | 8 / Little | [Guid](../types/packed-guid.md) | target |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x11 | 8 / Little | [Guid](../types/packed-guid.md) | target |  |
 
 Else If move_type is equal to `FACING_ANGLE`:
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x19 | 4 / Little | f32 | angle |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x19 | 4 / Little | f32 | angle |  |
 
 Else If move_type is equal to `FACING_SPOT`:
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x1D | 12 / - | [Vector3d](vector3d.md) | position |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x1D | 12 / - | [Vector3d](vector3d.md) | position |  |
 
 If move_type is not equal to `STOP`:
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x29 | 4 / - | [SplineFlag](splineflag.md) | spline_flags |  |  |
-| 0x2D | 4 / Little | u32 | duration |  |  |
-| 0x31 | - / - | [MonsterMoveSpline](../types/monster-move-spline.md) | splines |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x29 | 4 / - | [SplineFlag](splineflag.md) | spline_flags |  |
+| 0x2D | 4 / Little | u32 | duration |  |
+| 0x31 | - / - | [MonsterMoveSpline](../types/monster-move-spline.md) | splines |  |
 
 
 Used in:

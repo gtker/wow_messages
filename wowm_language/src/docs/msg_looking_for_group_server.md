@@ -23,9 +23,9 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | 4 / Little | u32 | unknown1 |  | vmangos sets to 0. cmangos/mangoszero don't implement |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x04 | 4 / Little | u32 | unknown1 | vmangos sets to 0. cmangos/mangoszero don't implement |
 
 ## Client Version 2.4.3
 
@@ -54,11 +54,11 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | 4 / - | [LfgType](lfgtype.md) | lfg_type |  |  |
-| 0x08 | 4 / Little | u32 | entry |  | entry from LfgDunggeons.dbc |
-| 0x0C | 4 / Little | u32 | amount_of_players_displayed |  |  |
-| 0x10 | 4 / Little | u32 | amount_of_players_found |  |  |
-| 0x14 | ? / - | [LfgPlayer](lfgplayer.md)[amount_of_players_displayed] | players_displayed |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x04 | 4 / - | [LfgType](lfgtype.md) | lfg_type |  |
+| 0x08 | 4 / Little | u32 | entry | entry from LfgDunggeons.dbc |
+| 0x0C | 4 / Little | u32 | amount_of_players_displayed |  |
+| 0x10 | 4 / Little | u32 | amount_of_players_found |  |
+| 0x14 | ? / - | [LfgPlayer](lfgplayer.md)[amount_of_players_displayed] | players_displayed |  |
 

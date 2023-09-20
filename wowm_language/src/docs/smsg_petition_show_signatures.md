@@ -27,11 +27,11 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | 8 / Little | [Guid](../types/packed-guid.md) | item |  |  |
-| - | 8 / Little | [Guid](../types/packed-guid.md) | owner |  |  |
-| - | 4 / Little | u32 | petition |  |  |
-| - | 1 / - | u8 | amount_of_signatures |  |  |
-| - | ? / - | [PetitionSignature](petitionsignature.md)[amount_of_signatures] | signatures |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| - | 8 / Little | [Guid](../types/packed-guid.md) | item |  |
+| - | 8 / Little | [Guid](../types/packed-guid.md) | owner |  |
+| - | 4 / Little | u32 | petition |  |
+| - | 1 / - | u8 | amount_of_signatures |  |
+| - | ? / - | [PetitionSignature](petitionsignature.md)[amount_of_signatures] | signatures |  |
 

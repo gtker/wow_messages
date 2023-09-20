@@ -27,9 +27,9 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | 4 / Little | u32 | time | Seconds since 1970, 1st of January (Unix Time). |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x04 | 4 / Little | u32 | time | Seconds since 1970, 1st of January (Unix Time). |
 
 ### Examples
 
@@ -68,8 +68,8 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | 4 / Little | u32 | time | Seconds since 1970, 1st of January (Unix Time). |  |
-| 0x08 | 4 / Little | u32 | time_until_daily_quest_reset |  | Units need confirmation, but it's likely in seconds, since many other time related things are also seconds. |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x04 | 4 / Little | u32 | time | Seconds since 1970, 1st of January (Unix Time). |
+| 0x08 | 4 / Little | u32 | time_until_daily_quest_reset | Units need confirmation, but it's likely in seconds, since many other time related things are also seconds. |
 

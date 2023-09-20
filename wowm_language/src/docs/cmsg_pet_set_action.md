@@ -29,16 +29,16 @@ CMSG have a header of 6 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x06 | 8 / Little | [Guid](../types/packed-guid.md) | guid |  |  |
-| 0x0E | 4 / Little | u32 | position1 |  |  |
-| 0x12 | 4 / Little | u32 | data1 |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x06 | 8 / Little | [Guid](../types/packed-guid.md) | guid |  |
+| 0x0E | 4 / Little | u32 | position1 |  |
+| 0x12 | 4 / Little | u32 | data1 |  |
 
 Optionally the following fields can be present. This can only be detected by looking at the size of the message.
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x16 | 4 / Little | u32 | position2 |  |  |
-| 0x1A | 4 / Little | u32 | data2 |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x16 | 4 / Little | u32 | position2 |  |
+| 0x1A | 4 / Little | u32 | data2 |  |
 

@@ -13,10 +13,10 @@ struct MailItem {
 ```
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x00 | 8 / Little | [Guid](../types/packed-guid.md) | item |  |  |
-| 0x08 | 1 / - | u8 | slot |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x00 | 8 / Little | [Guid](../types/packed-guid.md) | item |  |
+| 0x08 | 1 / - | u8 | slot |  |
 
 
 Used in:

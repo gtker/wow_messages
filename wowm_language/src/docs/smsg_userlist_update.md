@@ -27,13 +27,13 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | 8 / Little | [Guid](../types/packed-guid.md) | player |  |  |
-| 0x0C | 1 / - | u8 | player_flags |  |  |
-| 0x0D | 1 / - | u8 | flags |  |  |
-| 0x0E | 4 / Little | u32 | amount_of_players |  |  |
-| 0x12 | - / - | CString | name |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x04 | 8 / Little | [Guid](../types/packed-guid.md) | player |  |
+| 0x0C | 1 / - | u8 | player_flags |  |
+| 0x0D | 1 / - | u8 | flags |  |
+| 0x0E | 4 / Little | u32 | amount_of_players |  |
+| 0x12 | - / - | CString | name |  |
 
 ## Client Version 3.3.5
 
@@ -62,11 +62,11 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | 8 / Little | [Guid](../types/packed-guid.md) | player |  |  |
-| - | 1 / - | u8 | player_flags |  |  |
-| - | 1 / - | u8 | flags |  |  |
-| - | 4 / Little | u32 | amount_of_players |  |  |
-| - | - / - | CString | name |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| - | 8 / Little | [Guid](../types/packed-guid.md) | player |  |
+| - | 1 / - | u8 | player_flags |  |
+| - | 1 / - | u8 | flags |  |
+| - | 4 / Little | u32 | amount_of_players |  |
+| - | - / - | CString | name |  |
 

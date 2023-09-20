@@ -33,13 +33,13 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | 8 / Little | [Guid](../types/packed-guid.md) | guid1 |  |  |
-| 0x0C | 8 / Little | [Guid](../types/packed-guid.md) | guid2 |  |  |
-| 0x14 | 4 / Little | u32 | unknown1 |  |  |
-| 0x18 | 4 / Little | f32 | unknown2 |  |  |
-| 0x1C | 4 / Little | f32 | unknown3 |  |  |
-| 0x20 | 4 / Little | u32 | unknown4 |  |  |
-| 0x24 | 4 / Little | u32 | unknown5 |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x04 | 8 / Little | [Guid](../types/packed-guid.md) | guid1 |  |
+| 0x0C | 8 / Little | [Guid](../types/packed-guid.md) | guid2 |  |
+| 0x14 | 4 / Little | u32 | unknown1 |  |
+| 0x18 | 4 / Little | f32 | unknown2 |  |
+| 0x1C | 4 / Little | f32 | unknown3 |  |
+| 0x20 | 4 / Little | u32 | unknown4 |  |
+| 0x24 | 4 / Little | u32 | unknown5 |  |
 

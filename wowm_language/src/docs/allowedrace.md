@@ -23,18 +23,18 @@ flag AllowedRace : u32 {
 ### Type
 The basic type is `u32`, a 4 byte (32 bit) little endian integer.
 ### Enumerators
-| Enumerator | Value  | Description | Comment |
-| --------- | -------- | ----------- | ------- |
-| `ALL` | 0 (0x00) |  |  |
-| `HUMAN` | 1 (0x01) |  |  |
-| `ORC` | 2 (0x02) |  |  |
-| `DWARF` | 4 (0x04) |  |  |
-| `NIGHT_ELF` | 8 (0x08) |  |  |
-| `UNDEAD` | 16 (0x10) |  |  |
-| `TAUREN` | 32 (0x20) |  |  |
-| `GNOME` | 64 (0x40) |  |  |
-| `TROLL` | 128 (0x80) |  |  |
-| `GOBLIN` | 256 (0x100) |  |  |
+| Enumerator | Value  | Comment |
+| --------- | -------- | ------- |
+| `ALL` | 0 (0x00) |  |
+| `HUMAN` | 1 (0x01) |  |
+| `ORC` | 2 (0x02) |  |
+| `DWARF` | 4 (0x04) |  |
+| `NIGHT_ELF` | 8 (0x08) |  |
+| `UNDEAD` | 16 (0x10) |  |
+| `TAUREN` | 32 (0x20) |  |
+| `GNOME` | 64 (0x40) |  |
+| `TROLL` | 128 (0x80) |  |
+| `GOBLIN` | 256 (0x100) |  |
 
 Used in:
 * [SMSG_ITEM_QUERY_SINGLE_RESPONSE](smsg_item_query_single_response.md)
@@ -71,27 +71,27 @@ flag AllowedRace : u32 {
 ### Type
 The basic type is `u32`, a 4 byte (32 bit) little endian integer.
 ### Enumerators
-| Enumerator | Value  | Description | Comment |
-| --------- | -------- | ----------- | ------- |
-| `ALL` | 0 (0x00) |  |  |
-| `HUMAN` | 1 (0x01) |  |  |
-| `ORC` | 2 (0x02) |  |  |
-| `DWARF` | 4 (0x04) |  |  |
-| `NIGHT_ELF` | 8 (0x08) |  |  |
-| `UNDEAD` | 16 (0x10) |  |  |
-| `TAUREN` | 32 (0x20) |  |  |
-| `GNOME` | 64 (0x40) |  |  |
-| `TROLL` | 128 (0x80) |  |  |
-| `GOBLIN` | 256 (0x100) |  |  |
-| `BLOODELF` | 512 (0x200) |  |  |
-| `DRAENEI` | 1024 (0x400) |  |  |
-| `FEL_ORC` | 2048 (0x800) |  |  |
-| `NAGA` | 4096 (0x1000) |  |  |
-| `BROKEN` | 8192 (0x2000) |  |  |
-| `SKELETON` | 16384 (0x4000) |  |  |
-| `VRYKUL` | 32768 (0x8000) |  |  |
-| `TUSKARR` | 65536 (0x10000) |  |  |
-| `FOREST_TROLL` | 131072 (0x20000) |  |  |
+| Enumerator | Value  | Comment |
+| --------- | -------- | ------- |
+| `ALL` | 0 (0x00) |  |
+| `HUMAN` | 1 (0x01) |  |
+| `ORC` | 2 (0x02) |  |
+| `DWARF` | 4 (0x04) |  |
+| `NIGHT_ELF` | 8 (0x08) |  |
+| `UNDEAD` | 16 (0x10) |  |
+| `TAUREN` | 32 (0x20) |  |
+| `GNOME` | 64 (0x40) |  |
+| `TROLL` | 128 (0x80) |  |
+| `GOBLIN` | 256 (0x100) |  |
+| `BLOODELF` | 512 (0x200) |  |
+| `DRAENEI` | 1024 (0x400) |  |
+| `FEL_ORC` | 2048 (0x800) |  |
+| `NAGA` | 4096 (0x1000) |  |
+| `BROKEN` | 8192 (0x2000) |  |
+| `SKELETON` | 16384 (0x4000) |  |
+| `VRYKUL` | 32768 (0x8000) |  |
+| `TUSKARR` | 65536 (0x10000) |  |
+| `FOREST_TROLL` | 131072 (0x20000) |  |
 
 Used in:
 * [SMSG_ITEM_QUERY_SINGLE_RESPONSE](smsg_item_query_single_response.md)
@@ -130,30 +130,30 @@ flag AllowedRace : u32 {
 ### Type
 The basic type is `u32`, a 4 byte (32 bit) little endian integer.
 ### Enumerators
-| Enumerator | Value  | Description | Comment |
-| --------- | -------- | ----------- | ------- |
-| `ALL` | 0 (0x00) |  |  |
-| `HUMAN` | 1 (0x01) |  |  |
-| `ORC` | 2 (0x02) |  |  |
-| `DWARF` | 4 (0x04) |  |  |
-| `NIGHT_ELF` | 8 (0x08) |  |  |
-| `UNDEAD` | 16 (0x10) |  |  |
-| `TAUREN` | 32 (0x20) |  |  |
-| `GNOME` | 64 (0x40) |  |  |
-| `TROLL` | 128 (0x80) |  |  |
-| `GOBLIN` | 256 (0x100) |  |  |
-| `BLOODELF` | 512 (0x200) |  |  |
-| `DRAENEI` | 1024 (0x400) |  |  |
-| `FEL_ORC` | 2048 (0x800) |  |  |
-| `NAGA` | 4096 (0x1000) |  |  |
-| `BROKEN` | 8192 (0x2000) |  |  |
-| `SKELETON` | 16384 (0x4000) |  |  |
-| `VRYKUL` | 32768 (0x8000) |  |  |
-| `TUSKARR` | 65536 (0x10000) |  |  |
-| `FOREST_TROLL` | 131072 (0x20000) |  |  |
-| `TAUNKA` | 262144 (0x40000) |  |  |
-| `NORTHREND_SKELETON` | 524288 (0x80000) |  |  |
-| `ICE_TROLL` | 1048576 (0x100000) |  |  |
+| Enumerator | Value  | Comment |
+| --------- | -------- | ------- |
+| `ALL` | 0 (0x00) |  |
+| `HUMAN` | 1 (0x01) |  |
+| `ORC` | 2 (0x02) |  |
+| `DWARF` | 4 (0x04) |  |
+| `NIGHT_ELF` | 8 (0x08) |  |
+| `UNDEAD` | 16 (0x10) |  |
+| `TAUREN` | 32 (0x20) |  |
+| `GNOME` | 64 (0x40) |  |
+| `TROLL` | 128 (0x80) |  |
+| `GOBLIN` | 256 (0x100) |  |
+| `BLOODELF` | 512 (0x200) |  |
+| `DRAENEI` | 1024 (0x400) |  |
+| `FEL_ORC` | 2048 (0x800) |  |
+| `NAGA` | 4096 (0x1000) |  |
+| `BROKEN` | 8192 (0x2000) |  |
+| `SKELETON` | 16384 (0x4000) |  |
+| `VRYKUL` | 32768 (0x8000) |  |
+| `TUSKARR` | 65536 (0x10000) |  |
+| `FOREST_TROLL` | 131072 (0x20000) |  |
+| `TAUNKA` | 262144 (0x40000) |  |
+| `NORTHREND_SKELETON` | 524288 (0x80000) |  |
+| `ICE_TROLL` | 1048576 (0x100000) |  |
 
 Used in:
 * [SMSG_ITEM_QUERY_SINGLE_RESPONSE](smsg_item_query_single_response.md)

@@ -13,10 +13,10 @@ struct InspectTalent {
 ```
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x00 | 4 / - | [Talent](talent.md) | talent |  |  |
-| 0x04 | 1 / - | u8 | max_rank |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x00 | 4 / - | [Talent](talent.md) | talent |  |
+| 0x04 | 1 / - | u8 | max_rank |  |
 
 
 Used in:

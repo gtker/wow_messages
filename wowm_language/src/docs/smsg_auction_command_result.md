@@ -49,53 +49,53 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | 4 / Little | u32 | auction_id |  |  |
-| 0x08 | 4 / - | [AuctionCommandAction](auctioncommandaction.md) | action |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x04 | 4 / Little | u32 | auction_id |  |
+| 0x08 | 4 / - | [AuctionCommandAction](auctioncommandaction.md) | action |  |
 
 If action is equal to `BID_PLACED`:
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x0C | 4 / - | [AuctionCommandResult](auctioncommandresult.md) | result |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x0C | 4 / - | [AuctionCommandResult](auctioncommandresult.md) | result |  |
 
 If result is equal to `OK`:
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x10 | 4 / Little | u32 | auction_outbid1 |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x10 | 4 / Little | u32 | auction_outbid1 |  |
 
 Else If result is equal to `ERR_INVENTORY`:
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x14 | 1 / - | [InventoryResult](inventoryresult.md) | inventory_result |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x14 | 1 / - | [InventoryResult](inventoryresult.md) | inventory_result |  |
 
 Else If result is equal to `ERR_HIGHER_BID`:
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x15 | 8 / Little | [Guid](../types/packed-guid.md) | higher_bidder |  |  |
-| 0x1D | 4 / Little | u32 | new_bid |  |  |
-| 0x21 | 4 / Little | u32 | auction_outbid2 |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x15 | 8 / Little | [Guid](../types/packed-guid.md) | higher_bidder |  |
+| 0x1D | 4 / Little | u32 | new_bid |  |
+| 0x21 | 4 / Little | u32 | auction_outbid2 |  |
 
 Else: 
-| 0x25 | 4 / - | [AuctionCommandResultTwo](auctioncommandresulttwo.md) | result2 |  |  |
+| 0x25 | 4 / - | [AuctionCommandResultTwo](auctioncommandresulttwo.md) | result2 |  |
 
 If result2 is equal to `ERR_INVENTORY`:
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x29 | 1 / - | [InventoryResult](inventoryresult.md) | inventory_result2 |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x29 | 1 / - | [InventoryResult](inventoryresult.md) | inventory_result2 |  |
 
 Else If result2 is equal to `ERR_HIGHER_BID`:
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x2A | 8 / Little | [Guid](../types/packed-guid.md) | higher_bidder2 |  |  |
-| 0x32 | 4 / Little | u32 | new_bid2 |  |  |
-| 0x36 | 4 / Little | u32 | auction_outbid3 |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x2A | 8 / Little | [Guid](../types/packed-guid.md) | higher_bidder2 |  |
+| 0x32 | 4 / Little | u32 | new_bid2 |  |
+| 0x36 | 4 / Little | u32 | auction_outbid3 |  |
 
 ## Client Version 2.4.3
 
@@ -146,53 +146,53 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | 4 / Little | u32 | auction_id |  |  |
-| 0x08 | 4 / - | [AuctionCommandAction](auctioncommandaction.md) | action |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x04 | 4 / Little | u32 | auction_id |  |
+| 0x08 | 4 / - | [AuctionCommandAction](auctioncommandaction.md) | action |  |
 
 If action is equal to `BID_PLACED`:
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x0C | 4 / - | [AuctionCommandResult](auctioncommandresult.md) | result |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x0C | 4 / - | [AuctionCommandResult](auctioncommandresult.md) | result |  |
 
 If result is equal to `OK`:
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x10 | 4 / Little | u32 | auction_outbid1 |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x10 | 4 / Little | u32 | auction_outbid1 |  |
 
 Else If result is equal to `ERR_INVENTORY`:
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x14 | 1 / - | [InventoryResult](inventoryresult.md) | inventory_result |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x14 | 1 / - | [InventoryResult](inventoryresult.md) | inventory_result |  |
 
 Else If result is equal to `ERR_HIGHER_BID`:
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x15 | 8 / Little | [Guid](../types/packed-guid.md) | higher_bidder |  |  |
-| 0x1D | 4 / Little | u32 | new_bid |  |  |
-| 0x21 | 4 / Little | u32 | auction_outbid2 |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x15 | 8 / Little | [Guid](../types/packed-guid.md) | higher_bidder |  |
+| 0x1D | 4 / Little | u32 | new_bid |  |
+| 0x21 | 4 / Little | u32 | auction_outbid2 |  |
 
 Else: 
-| 0x25 | 4 / - | [AuctionCommandResultTwo](auctioncommandresulttwo.md) | result2 |  |  |
+| 0x25 | 4 / - | [AuctionCommandResultTwo](auctioncommandresulttwo.md) | result2 |  |
 
 If result2 is equal to `ERR_INVENTORY`:
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x29 | 1 / - | [InventoryResult](inventoryresult.md) | inventory_result2 |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x29 | 1 / - | [InventoryResult](inventoryresult.md) | inventory_result2 |  |
 
 Else If result2 is equal to `ERR_HIGHER_BID`:
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x2A | 8 / Little | [Guid](../types/packed-guid.md) | higher_bidder2 |  |  |
-| 0x32 | 4 / Little | u32 | new_bid2 |  |  |
-| 0x36 | 4 / Little | u32 | auction_outbid3 |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x2A | 8 / Little | [Guid](../types/packed-guid.md) | higher_bidder2 |  |
+| 0x32 | 4 / Little | u32 | new_bid2 |  |
+| 0x36 | 4 / Little | u32 | auction_outbid3 |  |
 
 ## Client Version 3.3.5
 
@@ -222,15 +222,15 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | 4 / Little | u32 | auction_id |  |  |
-| - | 4 / - | [AuctionCommandAction](auctioncommandaction.md) | action |  |  |
-| - | 4 / - | [AuctionCommandResult](auctioncommandresult.md) | result |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| - | 4 / Little | u32 | auction_id |  |
+| - | 4 / - | [AuctionCommandAction](auctioncommandaction.md) | action |  |
+| - | 4 / - | [AuctionCommandResult](auctioncommandresult.md) | result |  |
 
 If result is equal to `ERR_INVENTORY`:
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | 1 / - | [InventoryResult](inventoryresult.md) | inventory_result |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| - | 1 / - | [InventoryResult](inventoryresult.md) | inventory_result |  |
 

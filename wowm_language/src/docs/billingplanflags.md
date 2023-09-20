@@ -22,17 +22,17 @@ flag BillingPlanFlags : u8 {
 ### Type
 The basic type is `u8`, a 1 byte (8 bit) integer.
 ### Enumerators
-| Enumerator | Value  | Description | Comment |
-| --------- | -------- | ----------- | ------- |
-| `NONE` | 0 (0x00) |  |  |
-| `UNUSED` | 1 (0x01) |  |  |
-| `RECURRING_BILL` | 2 (0x02) |  |  |
-| `FREE_TRIAL` | 4 (0x04) |  |  |
-| `IGR` | 8 (0x08) |  | Name meaning unknown |
-| `USAGE` | 16 (0x10) |  |  |
-| `TIME_MIXTURE` | 32 (0x20) |  |  |
-| `RESTRICTED` | 64 (0x40) |  |  |
-| `ENABLE_CAIS` | 128 (0x80) |  |  |
+| Enumerator | Value  | Comment |
+| --------- | -------- | ------- |
+| `NONE` | 0 (0x00) |  |
+| `UNUSED` | 1 (0x01) |  |
+| `RECURRING_BILL` | 2 (0x02) |  |
+| `FREE_TRIAL` | 4 (0x04) |  |
+| `IGR` | 8 (0x08) | Name meaning unknown |
+| `USAGE` | 16 (0x10) |  |
+| `TIME_MIXTURE` | 32 (0x20) |  |
+| `RESTRICTED` | 64 (0x40) |  |
+| `ENABLE_CAIS` | 128 (0x80) |  |
 
 Used in:
 * [SMSG_AUTH_RESPONSE](smsg_auth_response.md)

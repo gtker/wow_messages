@@ -24,30 +24,30 @@ struct CompressedMove {
 ```
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x00 | 1 / - | u8 | size |  |  |
-| 0x01 | 2 / - | [CompressedMoveOpcode](compressedmoveopcode.md) | opcode |  |  |
-| 0x03 | - / - | [PackedGuid](../types/packed-guid.md) | guid |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x00 | 1 / - | u8 | size |  |
+| 0x01 | 2 / - | [CompressedMoveOpcode](compressedmoveopcode.md) | opcode |  |
+| 0x03 | - / - | [PackedGuid](../types/packed-guid.md) | guid |  |
 
 If opcode is equal to `SMSG_SPLINE_SET_RUN_SPEED`:
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | 4 / Little | f32 | speed |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| - | 4 / Little | f32 | speed |  |
 
 Else If opcode is equal to `SMSG_MONSTER_MOVE`:
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | - / - | [MonsterMove](monstermove.md) | monster_move |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| - | - / - | [MonsterMove](monstermove.md) | monster_move |  |
 
 Else If opcode is equal to `SMSG_MONSTER_MOVE_TRANSPORT`:
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | - / - | [PackedGuid](../types/packed-guid.md) | transport |  |  |
-| - | - / - | [MonsterMove](monstermove.md) | monster_move_transport |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| - | - / - | [PackedGuid](../types/packed-guid.md) | transport |  |
+| - | - / - | [MonsterMove](monstermove.md) | monster_move_transport |  |
 
 
 Used in:

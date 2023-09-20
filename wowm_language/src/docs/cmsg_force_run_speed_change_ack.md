@@ -28,18 +28,18 @@ CMSG have a header of 6 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x06 | 8 / Little | [Guid](../types/packed-guid.md) | guid |  |  |
-| 0x0E | 4 / Little | u32 | counter |  |  |
-| 0x12 | - / - | [MovementInfo](movementinfo.md) | info |  |  |
-| - | 4 / Little | f32 | new_speed |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x06 | 8 / Little | [Guid](../types/packed-guid.md) | guid |  |
+| 0x0E | 4 / Little | u32 | counter |  |
+| 0x12 | - / - | [MovementInfo](movementinfo.md) | info |  |
+| - | 4 / Little | f32 | new_speed |  |
 
 ### Examples
 
 #### Example 1
 
-##### Description
+##### Comment
 
 Client responds to having movement speed set to 7 in Northshire Abbey.
 
@@ -85,12 +85,12 @@ CMSG have a header of 6 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x06 | 8 / Little | [Guid](../types/packed-guid.md) | guid |  |  |
-| 0x0E | 4 / Little | u32 | counter |  |  |
-| 0x12 | - / - | [MovementInfo](movementinfo.md) | info |  |  |
-| - | 4 / Little | f32 | new_speed |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x06 | 8 / Little | [Guid](../types/packed-guid.md) | guid |  |
+| 0x0E | 4 / Little | u32 | counter |  |
+| 0x12 | - / - | [MovementInfo](movementinfo.md) | info |  |
+| - | 4 / Little | f32 | new_speed |  |
 
 ## Client Version 3.3.5
 
@@ -120,10 +120,10 @@ CMSG have a header of 6 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x06 | - / - | [PackedGuid](../types/packed-guid.md) | guid |  |  |
-| - | 4 / Little | u32 | counter |  |  |
-| - | - / - | [MovementInfo](movementinfo.md) | info |  |  |
-| - | 4 / Little | f32 | new_speed |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x06 | - / - | [PackedGuid](../types/packed-guid.md) | guid |  |
+| - | 4 / Little | u32 | counter |  |
+| - | - / - | [MovementInfo](movementinfo.md) | info |  |
+| - | 4 / Little | f32 | new_speed |  |
 

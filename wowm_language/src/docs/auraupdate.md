@@ -23,26 +23,26 @@ struct AuraUpdate {
 ```
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x00 | 1 / - | u8 | visual_slot |  |  |
-| 0x01 | 4 / Little | u32 | spell |  |  |
-| 0x05 | 1 / - | [AuraFlag](auraflag.md) | flags |  |  |
-| 0x06 | 1 / - | Level | level |  |  |
-| 0x07 | 1 / - | u8 | aura_stack_count |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x00 | 1 / - | u8 | visual_slot |  |
+| 0x01 | 4 / Little | u32 | spell |  |
+| 0x05 | 1 / - | [AuraFlag](auraflag.md) | flags |  |
+| 0x06 | 1 / - | Level | level |  |
+| 0x07 | 1 / - | u8 | aura_stack_count |  |
 
 If flags contains `NOT_CASTER`:
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x08 | - / - | [PackedGuid](../types/packed-guid.md) | caster |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x08 | - / - | [PackedGuid](../types/packed-guid.md) | caster |  |
 
 If flags contains `DURATION`:
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | 4 / Little | u32 | duration |  |  |
-| - | 4 / Little | u32 | time_left |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| - | 4 / Little | u32 | duration |  |
+| - | 4 / Little | u32 | time_left |  |
 
 
 Used in:

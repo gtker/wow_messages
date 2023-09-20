@@ -16,11 +16,11 @@ enum SpellTriggerType : u8 {
 ### Type
 The basic type is `u8`, a 1 byte (8 bit) integer.
 ### Enumerators
-| Enumerator | Value  | Description | Comment |
-| --------- | -------- | ----------- | ------- |
-| `ON_USE` | 0 (0x00) |  |  |
-| `ON_EQUIP` | 1 (0x01) |  |  |
-| `CHANCE_ON_HIT` | 2 (0x02) |  |  |
+| Enumerator | Value  | Comment |
+| --------- | -------- | ------- |
+| `ON_USE` | 0 (0x00) |  |
+| `ON_EQUIP` | 1 (0x01) |  |
+| `CHANCE_ON_HIT` | 2 (0x02) |  |
 
 Used in:
 * [ItemSpells](itemspells.md)
@@ -47,15 +47,15 @@ enum SpellTriggerType : u8 {
 ### Type
 The basic type is `u8`, a 1 byte (8 bit) integer.
 ### Enumerators
-| Enumerator | Value  | Description | Comment |
-| --------- | -------- | ----------- | ------- |
-| `ON_USE` | 0 (0x00) |  |  |
-| `ON_EQUIP` | 1 (0x01) |  |  |
-| `CHANCE_ON_HIT` | 2 (0x02) |  |  |
-| `SERVER_SIDE_SCRIPT` | 3 (0x03) |  | cmangos-tbc: Only used by 23442, Glowing Sanctified Crystal which is used for a Hellfire Peninsula quest.<br/>Unknown why exactly it does not use the normal triggers. |
-| `SOULSTONE` | 4 (0x04) |  |  |
-| `NO_EQUIP_COOLDOWN` | 5 (0x05) |  |  |
-| `LEARN_SPELL_ID` | 6 (0x06) |  |  |
+| Enumerator | Value  | Comment |
+| --------- | -------- | ------- |
+| `ON_USE` | 0 (0x00) |  |
+| `ON_EQUIP` | 1 (0x01) |  |
+| `CHANCE_ON_HIT` | 2 (0x02) |  |
+| `SERVER_SIDE_SCRIPT` | 3 (0x03) | cmangos-tbc: Only used by 23442, Glowing Sanctified Crystal which is used for a Hellfire Peninsula quest.<br/>Unknown why exactly it does not use the normal triggers. |
+| `SOULSTONE` | 4 (0x04) |  |
+| `NO_EQUIP_COOLDOWN` | 5 (0x05) |  |
+| `LEARN_SPELL_ID` | 6 (0x06) |  |
 
 Used in:
 * [ItemSpells](itemspells.md)

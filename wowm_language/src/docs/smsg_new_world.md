@@ -25,11 +25,11 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | 4 / - | [Map](map.md) | map |  |  |
-| 0x08 | 12 / - | [Vector3d](vector3d.md) | position |  |  |
-| 0x14 | 4 / Little | f32 | orientation |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x04 | 4 / - | [Map](map.md) | map |  |
+| 0x08 | 12 / - | [Vector3d](vector3d.md) | position |  |
+| 0x14 | 4 / Little | f32 | orientation |  |
 
 ### Examples
 
@@ -69,11 +69,11 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | 4 / - | [Map](map.md) | map |  |  |
-| 0x08 | 12 / - | [Vector3d](vector3d.md) | position |  |  |
-| 0x14 | 4 / Little | f32 | orientation |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x04 | 4 / - | [Map](map.md) | map |  |
+| 0x08 | 12 / - | [Vector3d](vector3d.md) | position |  |
+| 0x14 | 4 / Little | f32 | orientation |  |
 
 ## Client Version 3.3.5
 
@@ -100,9 +100,9 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | 4 / - | [Map](map.md) | map |  |  |
-| 0x08 | 12 / - | [Vector3d](vector3d.md) | position |  |  |
-| 0x14 | 4 / Little | f32 | orientation |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x04 | 4 / - | [Map](map.md) | map |  |
+| 0x08 | 12 / - | [Vector3d](vector3d.md) | position |  |
+| 0x14 | 4 / Little | f32 | orientation |  |
 

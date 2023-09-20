@@ -26,10 +26,10 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | 1 / - | u8 | amount_of_available_dungeons |  |  |
-| - | ? / - | [LfgAvailableDungeon](lfgavailabledungeon.md)[amount_of_available_dungeons] | available_dungeons |  |  |
-| - | 1 / - | u8 | amount_of_locked_dungeons |  |  |
-| - | ? / - | [LfgJoinLockedDungeon](lfgjoinlockeddungeon.md)[amount_of_locked_dungeons] | locked_dungeons |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| - | 1 / - | u8 | amount_of_available_dungeons |  |
+| - | ? / - | [LfgAvailableDungeon](lfgavailabledungeon.md)[amount_of_available_dungeons] | available_dungeons |  |
+| - | 1 / - | u8 | amount_of_locked_dungeons |  |
+| - | ? / - | [LfgJoinLockedDungeon](lfgjoinlockeddungeon.md)[amount_of_locked_dungeons] | locked_dungeons |  |
 

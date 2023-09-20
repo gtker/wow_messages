@@ -15,12 +15,12 @@ struct GroupListMember {
 ```
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x00 | - / - | CString | name |  |  |
-| - | 8 / Little | [Guid](../types/packed-guid.md) | guid |  |  |
-| - | 1 / - | Bool | is_online |  |  |
-| - | 1 / - | u8 | flags |  | mangoszero/cmangos/vmangos: own flags (groupid | (assistant?0x80:0)) |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x00 | - / - | CString | name |  |
+| - | 8 / Little | [Guid](../types/packed-guid.md) | guid |  |
+| - | 1 / - | Bool | is_online |  |
+| - | 1 / - | u8 | flags | mangoszero/cmangos/vmangos: own flags (groupid | (assistant?0x80:0)) |
 
 
 Used in:
@@ -42,13 +42,13 @@ struct GroupListMember {
 ```
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x00 | - / - | CString | name |  |  |
-| - | 8 / Little | [Guid](../types/packed-guid.md) | guid |  |  |
-| - | 1 / - | Bool | is_online |  |  |
-| - | 1 / - | u8 | group_id |  |  |
-| - | 1 / - | u8 | flags |  | mangosone: 0x2 main assist, 0x4 main tank |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x00 | - / - | CString | name |  |
+| - | 8 / Little | [Guid](../types/packed-guid.md) | guid |  |
+| - | 1 / - | Bool | is_online |  |
+| - | 1 / - | u8 | group_id |  |
+| - | 1 / - | u8 | flags | mangosone: 0x2 main assist, 0x4 main tank |
 
 
 Used in:
@@ -71,14 +71,14 @@ struct GroupListMember {
 ```
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x00 | - / - | CString | name |  |  |
-| - | 8 / Little | [Guid](../types/packed-guid.md) | guid |  |  |
-| - | 1 / - | Bool | is_online |  |  |
-| - | 1 / - | u8 | group_id |  |  |
-| - | 1 / - | u8 | flags |  | mangosone: 0x2 main assist, 0x4 main tank |
-| - | 1 / - | u8 | lfg_roles |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x00 | - / - | CString | name |  |
+| - | 8 / Little | [Guid](../types/packed-guid.md) | guid |  |
+| - | 1 / - | Bool | is_online |  |
+| - | 1 / - | u8 | group_id |  |
+| - | 1 / - | u8 | flags | mangosone: 0x2 main assist, 0x4 main tank |
+| - | 1 / - | u8 | lfg_roles |  |
 
 
 Used in:

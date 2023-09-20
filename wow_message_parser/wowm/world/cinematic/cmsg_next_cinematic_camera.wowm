@@ -1,5 +1,5 @@
 #tag_all versions "1 2 3";
 
 cmsg CMSG_NEXT_CINEMATIC_CAMERA = 0x00FB {} {
-    description = "Sent by client when cinematic beings.";
+    comment = "Sent by client when cinematic beings.";
 }

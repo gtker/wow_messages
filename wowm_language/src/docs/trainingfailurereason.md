@@ -18,11 +18,11 @@ enum TrainingFailureReason : u32 {
 ### Type
 The basic type is `u32`, a 4 byte (32 bit) little endian integer.
 ### Enumerators
-| Enumerator | Value  | Description | Comment |
-| --------- | -------- | ----------- | ------- |
-| `UNAVAILABLE` | 0 (0x00) |  | Trainer service %d unavailable. |
-| `NOT_ENOUGH_MONEY` | 1 (0x01) |  | Not enough money for trainer service %d. |
-| `NOT_ENOUGH_SKILL` | 2 (0x02) |  | Not enough skill points for trainer service %d. |
+| Enumerator | Value  | Comment |
+| --------- | -------- | ------- |
+| `UNAVAILABLE` | 0 (0x00) | Trainer service %d unavailable. |
+| `NOT_ENOUGH_MONEY` | 1 (0x01) | Not enough money for trainer service %d. |
+| `NOT_ENOUGH_SKILL` | 2 (0x02) | Not enough skill points for trainer service %d. |
 
 Used in:
 * [SMSG_TRAINER_BUY_FAILED](smsg_trainer_buy_failed.md)

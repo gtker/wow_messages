@@ -16,11 +16,11 @@ enum ChatRestrictionType : u8 {
 ### Type
 The basic type is `u8`, a 1 byte (8 bit) integer.
 ### Enumerators
-| Enumerator | Value  | Description | Comment |
-| --------- | -------- | ----------- | ------- |
-| `CHAT_RESTRICTED` | 0 (0x00) |  |  |
-| `CHAT_THROTTLED` | 1 (0x01) |  |  |
-| `USER_SQUELCHED` | 2 (0x02) |  |  |
+| Enumerator | Value  | Comment |
+| --------- | -------- | ------- |
+| `CHAT_RESTRICTED` | 0 (0x00) |  |
+| `CHAT_THROTTLED` | 1 (0x01) |  |
+| `USER_SQUELCHED` | 2 (0x02) |  |
 
 Used in:
 * [SMSG_CHAT_RESTRICTED](smsg_chat_restricted.md)
@@ -42,12 +42,12 @@ enum ChatRestrictionType : u8 {
 ### Type
 The basic type is `u8`, a 1 byte (8 bit) integer.
 ### Enumerators
-| Enumerator | Value  | Description | Comment |
-| --------- | -------- | ----------- | ------- |
-| `CHAT_RESTRICTED` | 0 (0x00) |  |  |
-| `CHAT_THROTTLED` | 1 (0x01) |  |  |
-| `USER_SQUELCHED` | 2 (0x02) |  |  |
-| `YELL_RESTRICTED` | 3 (0x03) |  |  |
+| Enumerator | Value  | Comment |
+| --------- | -------- | ------- |
+| `CHAT_RESTRICTED` | 0 (0x00) |  |
+| `CHAT_THROTTLED` | 1 (0x01) |  |
+| `USER_SQUELCHED` | 2 (0x02) |  |
+| `YELL_RESTRICTED` | 3 (0x03) |  |
 
 Used in:
 * [SMSG_CHAT_RESTRICTED](smsg_chat_restricted.md)

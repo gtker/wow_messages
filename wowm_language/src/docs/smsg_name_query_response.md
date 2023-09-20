@@ -30,14 +30,14 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | 8 / Little | [Guid](../types/packed-guid.md) | guid |  |  |
-| 0x0C | - / - | CString | character_name |  |  |
-| - | - / - | CString | realm_name | Used for showing cross realm realm names. If this is an empty string it is shown like a regular player on the same realm. |  |
-| - | 4 / - | [Race](race.md) | race |  |  |
-| - | 4 / - | [Gender](gender.md) | gender |  |  |
-| - | 4 / - | [Class](class.md) | class |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x04 | 8 / Little | [Guid](../types/packed-guid.md) | guid |  |
+| 0x0C | - / - | CString | character_name |  |
+| - | - / - | CString | realm_name | Used for showing cross realm realm names. If this is an empty string it is shown like a regular player on the same realm. |
+| - | 4 / - | [Race](race.md) | race |  |
+| - | 4 / - | [Gender](gender.md) | gender |  |
+| - | 4 / - | [Class](class.md) | class |  |
 
 ### Examples
 
@@ -99,21 +99,21 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | - / - | [PackedGuid](../types/packed-guid.md) | guid |  |  |
-| - | - / - | CString | character_name |  |  |
-| - | - / - | CString | realm_name | Used for showing cross realm realm names. If this is an empty string it is shown like a regular player on the same realm. |  |
-| - | 4 / - | [Race](race.md) | race |  |  |
-| - | 4 / - | [Gender](gender.md) | gender |  |  |
-| - | 4 / - | [Class](class.md) | class |  |  |
-| - | 1 / - | [DeclinedNames](declinednames.md) | has_declined_names |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x04 | - / - | [PackedGuid](../types/packed-guid.md) | guid |  |
+| - | - / - | CString | character_name |  |
+| - | - / - | CString | realm_name | Used for showing cross realm realm names. If this is an empty string it is shown like a regular player on the same realm. |
+| - | 4 / - | [Race](race.md) | race |  |
+| - | 4 / - | [Gender](gender.md) | gender |  |
+| - | 4 / - | [Class](class.md) | class |  |
+| - | 1 / - | [DeclinedNames](declinednames.md) | has_declined_names |  |
 
 If has_declined_names is equal to `YES`:
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | ? / - | CString[5] | declined_names |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| - | ? / - | CString[5] | declined_names |  |
 
 ## Client Version 3.3.5
 
@@ -150,20 +150,20 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | - / - | [PackedGuid](../types/packed-guid.md) | guid |  |  |
-| - | 1 / - | u8 | early_terminate |  | Added in 3.1<br/>When this is 1, the packet stops early. However, there is as of yet no good reason to ever send 1, so this is const |
-| - | - / - | CString | character_name |  |  |
-| - | - / - | CString | realm_name | Used for showing cross realm realm names. If this is an empty string it is shown like a regular player on the same realm. |  |
-| - | 1 / - | [Race](race.md) | race |  |  |
-| - | 1 / - | [Gender](gender.md) | gender |  |  |
-| - | 1 / - | [Class](class.md) | class |  |  |
-| - | 1 / - | [DeclinedNames](declinednames.md) | has_declined_names |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| - | - / - | [PackedGuid](../types/packed-guid.md) | guid |  |
+| - | 1 / - | u8 | early_terminate | Added in 3.1<br/>When this is 1, the packet stops early. However, there is as of yet no good reason to ever send 1, so this is const |
+| - | - / - | CString | character_name |  |
+| - | - / - | CString | realm_name | Used for showing cross realm realm names. If this is an empty string it is shown like a regular player on the same realm. |
+| - | 1 / - | [Race](race.md) | race |  |
+| - | 1 / - | [Gender](gender.md) | gender |  |
+| - | 1 / - | [Class](class.md) | class |  |
+| - | 1 / - | [DeclinedNames](declinednames.md) | has_declined_names |  |
 
 If has_declined_names is equal to `YES`:
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | ? / - | CString[5] | declined_names |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| - | ? / - | CString[5] | declined_names |  |
 

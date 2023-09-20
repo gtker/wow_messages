@@ -24,9 +24,9 @@ Login messages have a header of 1 byte with an opcode. Some messages also have a
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x01 | 1 / - | [LoginResult](loginresult.md) | result |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x01 | 1 / - | [LoginResult](loginresult.md) | result |  |
 
 ### Examples
 
@@ -73,10 +73,10 @@ Login messages have a header of 1 byte with an opcode. Some messages also have a
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x01 | 1 / - | [LoginResult](loginresult.md) | result |  |  |
-| 0x02 | 2 / Little | u16 | padding |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x01 | 1 / - | [LoginResult](loginresult.md) | result |  |
+| 0x02 | 2 / Little | u16 | padding |  |
 
 ## Protocol Version 8
 
@@ -103,10 +103,10 @@ Login messages have a header of 1 byte with an opcode. Some messages also have a
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x01 | 1 / - | [LoginResult](loginresult.md) | result |  |  |
-| 0x02 | 2 / Little | u16 | padding |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x01 | 1 / - | [LoginResult](loginresult.md) | result |  |
+| 0x02 | 2 / Little | u16 | padding |  |
 
 ### Examples
 

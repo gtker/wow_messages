@@ -37,29 +37,29 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | 1 / - | [WorldResult](worldresult.md) | result |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x04 | 1 / - | [WorldResult](worldresult.md) | result |  |
 
 If result is equal to `AUTH_OK`:
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x05 | 4 / Little | u32 | billing_time |  |  |
-| 0x09 | 1 / - | u8 | billing_flags |  |  |
-| 0x0A | 4 / Little | u32 | billing_rested |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x05 | 4 / Little | u32 | billing_time |  |
+| 0x09 | 1 / - | u8 | billing_flags |  |
+| 0x0A | 4 / Little | u32 | billing_rested |  |
 
 Else If result is equal to `AUTH_WAIT_QUEUE`:
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x0E | 4 / Little | u32 | queue_position |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x0E | 4 / Little | u32 | queue_position |  |
 
 ### Examples
 
 #### Example 1
 
-##### Description
+##### Comment
 
 Authentication failed.
 
@@ -70,7 +70,7 @@ Authentication failed.
 ```
 #### Example 2
 
-##### Description
+##### Comment
 
 Client told to wait in queue.
 
@@ -82,7 +82,7 @@ Client told to wait in queue.
 ```
 #### Example 3
 
-##### Description
+##### Comment
 
 Client can join.
 
@@ -132,24 +132,24 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | 1 / - | [WorldResult](worldresult.md) | result |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x04 | 1 / - | [WorldResult](worldresult.md) | result |  |
 
 If result is equal to `AUTH_OK`:
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x05 | 4 / Little | u32 | billing_time |  |  |
-| 0x09 | 1 / - | [BillingPlanFlags](billingplanflags.md) | billing_flags |  |  |
-| 0x0A | 4 / Little | u32 | billing_rested |  |  |
-| 0x0E | 1 / - | [Expansion](expansion.md) | expansion |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x05 | 4 / Little | u32 | billing_time |  |
+| 0x09 | 1 / - | [BillingPlanFlags](billingplanflags.md) | billing_flags |  |
+| 0x0A | 4 / Little | u32 | billing_rested |  |
+| 0x0E | 1 / - | [Expansion](expansion.md) | expansion |  |
 
 Else If result is equal to `AUTH_WAIT_QUEUE`:
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x0F | 4 / Little | u32 | queue_position |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x0F | 4 / Little | u32 | queue_position |  |
 
 ## Client Version 3.3.5
 
@@ -190,23 +190,23 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | 1 / - | [WorldResult](worldresult.md) | result |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| - | 1 / - | [WorldResult](worldresult.md) | result |  |
 
 If result is equal to `AUTH_OK`:
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | 4 / Little | u32 | billing_time |  |  |
-| - | 1 / - | [BillingPlanFlags](billingplanflags.md) | billing_flags |  |  |
-| - | 4 / Little | u32 | billing_rested |  |  |
-| - | 1 / - | [Expansion](expansion.md) | expansion |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| - | 4 / Little | u32 | billing_time |  |
+| - | 1 / - | [BillingPlanFlags](billingplanflags.md) | billing_flags |  |
+| - | 4 / Little | u32 | billing_rested |  |
+| - | 1 / - | [Expansion](expansion.md) | expansion |  |
 
 Else If result is equal to `AUTH_WAIT_QUEUE`:
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | 4 / Little | u32 | queue_position |  |  |
-| - | 1 / - | Bool | realm_has_free_character_migration |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| - | 4 / Little | u32 | queue_position |  |
+| - | 1 / - | Bool | realm_has_free_character_migration |  |
 

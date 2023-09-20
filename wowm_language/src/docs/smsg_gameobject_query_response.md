@@ -33,22 +33,22 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | 4 / Little | u32 | entry_id |  | When the `found` optional is not present all emulators bitwise OR the entry with `0x80000000`.`` |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x04 | 4 / Little | u32 | entry_id | When the `found` optional is not present all emulators bitwise OR the entry with `0x80000000`.`` |
 
 Optionally the following fields can be present. This can only be detected by looking at the size of the message.
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x08 | 4 / Little | u32 | info_type |  |  |
-| 0x0C | 4 / Little | u32 | display_id |  |  |
-| 0x10 | - / - | CString | name1 |  |  |
-| - | - / - | CString | name2 |  |  |
-| - | - / - | CString | name3 |  |  |
-| - | - / - | CString | name4 |  |  |
-| - | - / - | CString | name5 |  |  |
-| - | 24 / - | u32[6] | raw_data |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x08 | 4 / Little | u32 | info_type |  |
+| 0x0C | 4 / Little | u32 | display_id |  |
+| 0x10 | - / - | CString | name1 |  |
+| - | - / - | CString | name2 |  |
+| - | - / - | CString | name3 |  |
+| - | - / - | CString | name4 |  |
+| - | - / - | CString | name5 |  |
+| - | 24 / - | u32[6] | raw_data |  |
 
 ## Client Version 2.4.3
 
@@ -86,25 +86,25 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | 4 / Little | u32 | entry_id |  | When the `found` optional is not present all emulators bitwise OR the entry with `0x80000000`.`` |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x04 | 4 / Little | u32 | entry_id | When the `found` optional is not present all emulators bitwise OR the entry with `0x80000000`.`` |
 
 Optionally the following fields can be present. This can only be detected by looking at the size of the message.
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x08 | 4 / Little | u32 | info_type |  |  |
-| 0x0C | 4 / Little | u32 | display_id |  |  |
-| 0x10 | - / - | CString | name1 |  |  |
-| - | - / - | CString | name2 |  |  |
-| - | - / - | CString | name3 |  |  |
-| - | - / - | CString | name4 |  |  |
-| - | - / - | CString | icon_name |  |  |
-| - | - / - | CString | cast_bar_caption |  |  |
-| - | - / - | CString | unknown |  |  |
-| - | 24 / - | u32[6] | raw_data |  |  |
-| - | 4 / Little | f32 | gameobject_size |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x08 | 4 / Little | u32 | info_type |  |
+| 0x0C | 4 / Little | u32 | display_id |  |
+| 0x10 | - / - | CString | name1 |  |
+| - | - / - | CString | name2 |  |
+| - | - / - | CString | name3 |  |
+| - | - / - | CString | name4 |  |
+| - | - / - | CString | icon_name |  |
+| - | - / - | CString | cast_bar_caption |  |
+| - | - / - | CString | unknown |  |
+| - | 24 / - | u32[6] | raw_data |  |
+| - | 4 / Little | f32 | gameobject_size |  |
 
 ## Client Version 3.3.5
 
@@ -143,24 +143,24 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | 4 / Little | u32 | entry_id |  | When the `found` optional is not present all emulators bitwise OR the entry with `0x80000000`.`` |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| - | 4 / Little | u32 | entry_id | When the `found` optional is not present all emulators bitwise OR the entry with `0x80000000`.`` |
 
 Optionally the following fields can be present. This can only be detected by looking at the size of the message.
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | 4 / Little | u32 | info_type |  |  |
-| - | 4 / Little | u32 | display_id |  |  |
-| - | - / - | CString | name1 |  |  |
-| - | - / - | CString | name2 |  |  |
-| - | - / - | CString | name3 |  |  |
-| - | - / - | CString | name4 |  |  |
-| - | - / - | CString | icon_name |  |  |
-| - | - / - | CString | cast_bar_caption |  |  |
-| - | - / - | CString | unknown |  |  |
-| - | 24 / - | u32[6] | raw_data |  |  |
-| - | 4 / Little | f32 | gameobject_size |  |  |
-| - | 24 / - | u32[6] | gameobject_quest_items |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| - | 4 / Little | u32 | info_type |  |
+| - | 4 / Little | u32 | display_id |  |
+| - | - / - | CString | name1 |  |
+| - | - / - | CString | name2 |  |
+| - | - / - | CString | name3 |  |
+| - | - / - | CString | name4 |  |
+| - | - / - | CString | icon_name |  |
+| - | - / - | CString | cast_bar_caption |  |
+| - | - / - | CString | unknown |  |
+| - | 24 / - | u32[6] | raw_data |  |
+| - | 4 / Little | f32 | gameobject_size |  |
+| - | 24 / - | u32[6] | gameobject_quest_items |  |
 

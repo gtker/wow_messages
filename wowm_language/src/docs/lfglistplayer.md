@@ -61,79 +61,79 @@ struct LfgListPlayer {
 ```
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x00 | 8 / Little | [Guid](../types/packed-guid.md) | player |  |  |
-| 0x08 | 4 / - | [LfgUpdateFlag](lfgupdateflag.md) | flags |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x00 | 8 / Little | [Guid](../types/packed-guid.md) | player |  |
+| 0x08 | 4 / - | [LfgUpdateFlag](lfgupdateflag.md) | flags |  |
 
 If flags contains `CHARACTER_INFO`:
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x0C | 1 / - | Level | level |  |  |
-| 0x0D | 1 / - | [Class](class.md) | class |  |  |
-| 0x0E | 1 / - | [Race](race.md) | race |  |  |
-| 0x0F | 1 / - | u8 | talents0 |  |  |
-| 0x10 | 1 / - | u8 | talents1 |  |  |
-| 0x11 | 1 / - | u8 | talents2 |  |  |
-| 0x12 | 4 / Little | u32 | armor |  |  |
-| 0x16 | 4 / Little | u32 | spell_damage |  |  |
-| 0x1A | 4 / Little | u32 | spell_heal |  |  |
-| 0x1E | 4 / Little | u32 | crit_rating_melee |  |  |
-| 0x22 | 4 / Little | u32 | crit_rating_ranged |  |  |
-| 0x26 | 4 / Little | u32 | crit_rating_spell |  |  |
-| 0x2A | 4 / Little | f32 | mana_per_5_seconds |  |  |
-| 0x2E | 4 / Little | f32 | mana_per_5_seconds_combat |  |  |
-| 0x32 | 4 / Little | u32 | attack_power |  |  |
-| 0x36 | 4 / Little | u32 | agility |  |  |
-| 0x3A | 4 / Little | u32 | health |  |  |
-| 0x3E | 4 / Little | u32 | mana |  |  |
-| 0x42 | 4 / Little | Bool32 | online |  | azerothcore: talentpoints, used as online/offline marker :D |
-| 0x46 | 4 / Little | u32 | average_item_level |  |  |
-| 0x4A | 4 / Little | u32 | defense_skill |  |  |
-| 0x4E | 4 / Little | u32 | dodge_rating |  |  |
-| 0x52 | 4 / Little | u32 | block_rating |  |  |
-| 0x56 | 4 / Little | u32 | parry_rating |  |  |
-| 0x5A | 4 / Little | u32 | haste_rating |  |  |
-| 0x5E | 4 / Little | u32 | expertise_rating |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x0C | 1 / - | Level | level |  |
+| 0x0D | 1 / - | [Class](class.md) | class |  |
+| 0x0E | 1 / - | [Race](race.md) | race |  |
+| 0x0F | 1 / - | u8 | talents0 |  |
+| 0x10 | 1 / - | u8 | talents1 |  |
+| 0x11 | 1 / - | u8 | talents2 |  |
+| 0x12 | 4 / Little | u32 | armor |  |
+| 0x16 | 4 / Little | u32 | spell_damage |  |
+| 0x1A | 4 / Little | u32 | spell_heal |  |
+| 0x1E | 4 / Little | u32 | crit_rating_melee |  |
+| 0x22 | 4 / Little | u32 | crit_rating_ranged |  |
+| 0x26 | 4 / Little | u32 | crit_rating_spell |  |
+| 0x2A | 4 / Little | f32 | mana_per_5_seconds |  |
+| 0x2E | 4 / Little | f32 | mana_per_5_seconds_combat |  |
+| 0x32 | 4 / Little | u32 | attack_power |  |
+| 0x36 | 4 / Little | u32 | agility |  |
+| 0x3A | 4 / Little | u32 | health |  |
+| 0x3E | 4 / Little | u32 | mana |  |
+| 0x42 | 4 / Little | Bool32 | online | azerothcore: talentpoints, used as online/offline marker :D |
+| 0x46 | 4 / Little | u32 | average_item_level |  |
+| 0x4A | 4 / Little | u32 | defense_skill |  |
+| 0x4E | 4 / Little | u32 | dodge_rating |  |
+| 0x52 | 4 / Little | u32 | block_rating |  |
+| 0x56 | 4 / Little | u32 | parry_rating |  |
+| 0x5A | 4 / Little | u32 | haste_rating |  |
+| 0x5E | 4 / Little | u32 | expertise_rating |  |
 
 If flags contains `COMMENT`:
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x62 | - / - | CString | comment |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x62 | - / - | CString | comment |  |
 
 If flags contains `GROUP_LEADER`:
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | 1 / - | Bool | is_looking_for_more |  | emu sets to true. |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| - | 1 / - | Bool | is_looking_for_more | emu sets to true. |
 
 If flags contains `GROUP_GUID`:
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | 8 / Little | [Guid](../types/packed-guid.md) | group |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| - | 8 / Little | [Guid](../types/packed-guid.md) | group |  |
 
 If flags contains `ROLES`:
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | 1 / - | u8 | roles |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| - | 1 / - | u8 | roles |  |
 
 If flags contains `AREA`:
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | 4 / - | [Area](area.md) | area |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| - | 4 / - | [Area](area.md) | area |  |
 
 If flags contains `STATUS`:
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | 1 / - | u8 | unknown1 |  | Emus set to 0. |
-| - | 8 / Little | [Guid](../types/packed-guid.md) | instance |  |  |
-| - | 4 / Little | u32 | encounter_mask |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| - | 1 / - | u8 | unknown1 | Emus set to 0. |
+| - | 8 / Little | [Guid](../types/packed-guid.md) | instance |  |
+| - | 4 / Little | u32 | encounter_mask |  |
 
 
 Used in:

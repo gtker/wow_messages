@@ -18,11 +18,11 @@ enum OceanType : u8 {
 ### Type
 The basic type is `u8`, a 1 byte (8 bit) integer.
 ### Enumerators
-| Enumerator | Value  | Description | Comment |
-| --------- | -------- | ----------- | ------- |
-| `FIRE` | 0 (0x00) |  |  |
-| `SLIME` | 2 (0x02) |  |  |
-| `WATER` | 3 (0x03) |  |  |
+| Enumerator | Value  | Comment |
+| --------- | -------- | ------- |
+| `FIRE` | 0 (0x00) |  |
+| `SLIME` | 2 (0x02) |  |
+| `WATER` | 3 (0x03) |  |
 
 Used in:
 

@@ -35,24 +35,24 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | 8 / Little | [Guid](../types/packed-guid.md) | pet |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x04 | 8 / Little | [Guid](../types/packed-guid.md) | pet |  |
 
 Optionally the following fields can be present. This can only be detected by looking at the size of the message.
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x0C | 4 / Little | u32 | duration |  |  |
-| 0x10 | 1 / - | [PetReactState](petreactstate.md) | react |  |  |
-| 0x11 | 1 / - | [PetCommandState](petcommandstate.md) | command |  |  |
-| 0x12 | 1 / - | u8 | unknown |  | mangoszero: set to 0 |
-| 0x13 | 1 / - | [PetEnabled](petenabled.md) | pet_enabled |  |  |
-| 0x14 | 40 / - | u32[10] | action_bars |  |  |
-| 0x3C | 1 / - | u8 | amount_of_spells |  |  |
-| 0x3D | ? / - | u32[amount_of_spells] | spells |  |  |
-| - | 1 / - | u8 | amount_of_cooldowns |  |  |
-| - | ? / - | [PetSpellCooldown](petspellcooldown.md)[amount_of_cooldowns] | cooldowns |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x0C | 4 / Little | u32 | duration |  |
+| 0x10 | 1 / - | [PetReactState](petreactstate.md) | react |  |
+| 0x11 | 1 / - | [PetCommandState](petcommandstate.md) | command |  |
+| 0x12 | 1 / - | u8 | unknown | mangoszero: set to 0 |
+| 0x13 | 1 / - | [PetEnabled](petenabled.md) | pet_enabled |  |
+| 0x14 | 40 / - | u32[10] | action_bars |  |
+| 0x3C | 1 / - | u8 | amount_of_spells |  |
+| 0x3D | ? / - | u32[amount_of_spells] | spells |  |
+| - | 1 / - | u8 | amount_of_cooldowns |  |
+| - | ? / - | [PetSpellCooldown](petspellcooldown.md)[amount_of_cooldowns] | cooldowns |  |
 
 ## Client Version 3.3.5
 
@@ -90,23 +90,23 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | 8 / Little | [Guid](../types/packed-guid.md) | pet |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| - | 8 / Little | [Guid](../types/packed-guid.md) | pet |  |
 
 Optionally the following fields can be present. This can only be detected by looking at the size of the message.
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | 2 / - | [CreatureFamily](creaturefamily.md) | family |  |  |
-| - | 4 / Little | u32 | duration |  |  |
-| - | 1 / - | [PetReactState](petreactstate.md) | react |  |  |
-| - | 1 / - | [PetCommandState](petcommandstate.md) | command |  |  |
-| - | 1 / - | u8 | unknown |  | mangoszero: set to 0 |
-| - | 1 / - | [PetEnabled](petenabled.md) | pet_enabled |  |  |
-| - | 40 / - | u32[10] | action_bars |  |  |
-| - | 1 / - | u8 | amount_of_spells |  |  |
-| - | ? / - | u32[amount_of_spells] | spells |  |  |
-| - | 1 / - | u8 | amount_of_cooldowns |  |  |
-| - | ? / - | [PetSpellCooldown](petspellcooldown.md)[amount_of_cooldowns] | cooldowns |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| - | 2 / - | [CreatureFamily](creaturefamily.md) | family |  |
+| - | 4 / Little | u32 | duration |  |
+| - | 1 / - | [PetReactState](petreactstate.md) | react |  |
+| - | 1 / - | [PetCommandState](petcommandstate.md) | command |  |
+| - | 1 / - | u8 | unknown | mangoszero: set to 0 |
+| - | 1 / - | [PetEnabled](petenabled.md) | pet_enabled |  |
+| - | 40 / - | u32[10] | action_bars |  |
+| - | 1 / - | u8 | amount_of_spells |  |
+| - | ? / - | u32[amount_of_spells] | spells |  |
+| - | 1 / - | u8 | amount_of_cooldowns |  |
+| - | ? / - | [PetSpellCooldown](petspellcooldown.md)[amount_of_cooldowns] | cooldowns |  |
 

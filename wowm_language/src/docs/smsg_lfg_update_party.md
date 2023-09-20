@@ -33,20 +33,20 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | 1 / - | [LfgUpdateType](lfgupdatetype.md) | update_type |  |  |
-| - | 1 / - | [LfgJoinStatus](lfgjoinstatus.md) | join_status |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| - | 1 / - | [LfgUpdateType](lfgupdatetype.md) | update_type |  |
+| - | 1 / - | [LfgJoinStatus](lfgjoinstatus.md) | join_status |  |
 
 If join_status is equal to `JOINED`:
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | 1 / - | u8 | joined |  |  |
-| - | 1 / - | u8 | queued |  |  |
-| - | 1 / - | u8 | no_partial_clear |  |  |
-| - | 1 / - | u8 | achievements |  |  |
-| - | 1 / - | u8 | amount_of_dungeons |  |  |
-| - | ? / - | u32[amount_of_dungeons] | dungeons |  |  |
-| - | - / - | CString | comment |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| - | 1 / - | u8 | joined |  |
+| - | 1 / - | u8 | queued |  |
+| - | 1 / - | u8 | no_partial_clear |  |
+| - | 1 / - | u8 | achievements |  |
+| - | 1 / - | u8 | amount_of_dungeons |  |
+| - | ? / - | u32[amount_of_dungeons] | dungeons |  |
+| - | - / - | CString | comment |  |
 

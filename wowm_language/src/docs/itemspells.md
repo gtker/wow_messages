@@ -17,14 +17,14 @@ struct ItemSpells {
 ```
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x00 | 4 / Little | u32 | spell |  |  |
-| 0x04 | 4 / - | [SpellTriggerType](spelltriggertype.md) | spell_trigger |  |  |
-| 0x08 | 4 / Little | i32 | spell_charges |  | let the database control the sign here. negative means that the item should be consumed once the charges are consumed. |
-| 0x0C | 4 / Little | i32 | spell_cooldown |  |  |
-| 0x10 | 4 / Little | u32 | spell_category |  |  |
-| 0x14 | 4 / Little | i32 | spell_category_cooldown |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x00 | 4 / Little | u32 | spell |  |
+| 0x04 | 4 / - | [SpellTriggerType](spelltriggertype.md) | spell_trigger |  |
+| 0x08 | 4 / Little | i32 | spell_charges | let the database control the sign here. negative means that the item should be consumed once the charges are consumed. |
+| 0x0C | 4 / Little | i32 | spell_cooldown |  |
+| 0x10 | 4 / Little | u32 | spell_category |  |
+| 0x14 | 4 / Little | i32 | spell_category_cooldown |  |
 
 
 Used in:
@@ -47,14 +47,14 @@ struct ItemSpells {
 ```
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x00 | 4 / Little | u32 | spell |  |  |
-| 0x04 | 4 / - | [SpellTriggerType](spelltriggertype.md) | spell_trigger |  |  |
-| 0x08 | 4 / Little | i32 | spell_charges |  | let the database control the sign here. negative means that the item should be consumed once the charges are consumed. |
-| 0x0C | 4 / Little | i32 | spell_cooldown |  |  |
-| 0x10 | 4 / Little | u32 | spell_category |  |  |
-| 0x14 | 4 / Little | i32 | spell_category_cooldown |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x00 | 4 / Little | u32 | spell |  |
+| 0x04 | 4 / - | [SpellTriggerType](spelltriggertype.md) | spell_trigger |  |
+| 0x08 | 4 / Little | i32 | spell_charges | let the database control the sign here. negative means that the item should be consumed once the charges are consumed. |
+| 0x0C | 4 / Little | i32 | spell_cooldown |  |
+| 0x10 | 4 / Little | u32 | spell_category |  |
+| 0x14 | 4 / Little | i32 | spell_category_cooldown |  |
 
 
 Used in:

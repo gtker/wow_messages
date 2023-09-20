@@ -17,12 +17,12 @@ enum BarberShopResult : u8 {
 ### Type
 The basic type is `u8`, a 1 byte (8 bit) integer.
 ### Enumerators
-| Enumerator | Value  | Description | Comment |
-| --------- | -------- | ----------- | ------- |
-| `OK` | 0 (0x00) |  |  |
-| `NOT_ENOUGH_MONEY` | 1 (0x01) |  |  |
-| `MUST_BE_SEATED_IN_BARBER_CHAIR` | 2 (0x02) |  |  |
-| `NOT_ENOUGH_MONEY2` | 3 (0x03) |  |  |
+| Enumerator | Value  | Comment |
+| --------- | -------- | ------- |
+| `OK` | 0 (0x00) |  |
+| `NOT_ENOUGH_MONEY` | 1 (0x01) |  |
+| `MUST_BE_SEATED_IN_BARBER_CHAIR` | 2 (0x02) |  |
+| `NOT_ENOUGH_MONEY2` | 3 (0x03) |  |
 
 Used in:
 * [SMSG_BARBER_SHOP_RESULT](smsg_barber_shop_result.md)

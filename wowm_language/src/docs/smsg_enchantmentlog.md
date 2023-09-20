@@ -29,13 +29,13 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | 8 / Little | [Guid](../types/packed-guid.md) | target |  |  |
-| 0x0C | 8 / Little | [Guid](../types/packed-guid.md) | caster |  | vmangos: message says enchant has faded if empty |
-| 0x14 | 4 / Little | u32 | item |  |  |
-| 0x18 | 4 / Little | u32 | spell |  |  |
-| 0x1C | 1 / - | Bool | show_affiliation |  | vmangos: Only used if `caster` is not 0. |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x04 | 8 / Little | [Guid](../types/packed-guid.md) | target |  |
+| 0x0C | 8 / Little | [Guid](../types/packed-guid.md) | caster | vmangos: message says enchant has faded if empty |
+| 0x14 | 4 / Little | u32 | item |  |
+| 0x18 | 4 / Little | u32 | spell |  |
+| 0x1C | 1 / - | Bool | show_affiliation | vmangos: Only used if `caster` is not 0. |
 
 ## Client Version 3.3.5
 
@@ -66,11 +66,11 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | - / - | [PackedGuid](../types/packed-guid.md) | target |  |  |
-| - | - / - | [PackedGuid](../types/packed-guid.md) | caster |  | vmangos: message says enchant has faded if empty |
-| - | 4 / Little | u32 | item |  |  |
-| - | 4 / Little | u32 | spell |  |  |
-| - | 1 / - | Bool | show_affiliation |  | vmangos: Only used if `caster` is not 0. |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| - | - / - | [PackedGuid](../types/packed-guid.md) | target |  |
+| - | - / - | [PackedGuid](../types/packed-guid.md) | caster | vmangos: message says enchant has faded if empty |
+| - | 4 / Little | u32 | item |  |
+| - | 4 / Little | u32 | spell |  |
+| - | 1 / - | Bool | show_affiliation | vmangos: Only used if `caster` is not 0. |
 

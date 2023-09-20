@@ -25,20 +25,20 @@ enum PetTameFailureReason : u8 {
 ### Type
 The basic type is `u8`, a 1 byte (8 bit) integer.
 ### Enumerators
-| Enumerator | Value  | Description | Comment |
-| --------- | -------- | ----------- | ------- |
-| `INVALID_CREATURE` | 1 (0x01) |  |  |
-| `TOO_MANY` | 2 (0x02) |  |  |
-| `CREATURE_ALREADY_OWNED` | 3 (0x03) |  |  |
-| `NOT_TAMEABLE` | 4 (0x04) |  |  |
-| `ANOTHER_SUMMON_ACTIVE` | 5 (0x05) |  |  |
-| `UNITS_CANT_TAME` | 6 (0x06) |  |  |
-| `NO_PET_AVAILABLE` | 7 (0x07) |  | not used in taming |
-| `INTERNAL_ERROR` | 8 (0x08) |  |  |
-| `TOO_HIGH_LEVEL` | 9 (0x09) |  |  |
-| `DEAD` | 10 (0x0A) |  | not used in taming |
-| `NOT_DEAD` | 11 (0x0B) |  | not used in taming |
-| `UNKNOWN_ERROR` | 12 (0x0C) |  |  |
+| Enumerator | Value  | Comment |
+| --------- | -------- | ------- |
+| `INVALID_CREATURE` | 1 (0x01) |  |
+| `TOO_MANY` | 2 (0x02) |  |
+| `CREATURE_ALREADY_OWNED` | 3 (0x03) |  |
+| `NOT_TAMEABLE` | 4 (0x04) |  |
+| `ANOTHER_SUMMON_ACTIVE` | 5 (0x05) |  |
+| `UNITS_CANT_TAME` | 6 (0x06) |  |
+| `NO_PET_AVAILABLE` | 7 (0x07) | not used in taming |
+| `INTERNAL_ERROR` | 8 (0x08) |  |
+| `TOO_HIGH_LEVEL` | 9 (0x09) |  |
+| `DEAD` | 10 (0x0A) | not used in taming |
+| `NOT_DEAD` | 11 (0x0B) | not used in taming |
+| `UNKNOWN_ERROR` | 12 (0x0C) |  |
 
 Used in:
 * [SMSG_PET_TAME_FAILURE](smsg_pet_tame_failure.md)
@@ -69,21 +69,21 @@ enum PetTameFailureReason : u8 {
 ### Type
 The basic type is `u8`, a 1 byte (8 bit) integer.
 ### Enumerators
-| Enumerator | Value  | Description | Comment |
-| --------- | -------- | ----------- | ------- |
-| `INVALID_CREATURE` | 1 (0x01) |  |  |
-| `TOO_MANY` | 2 (0x02) |  |  |
-| `CREATURE_ALREADY_OWNED` | 3 (0x03) |  |  |
-| `NOT_TAMEABLE` | 4 (0x04) |  |  |
-| `ANOTHER_SUMMON_ACTIVE` | 5 (0x05) |  |  |
-| `UNITS_CANT_TAME` | 6 (0x06) |  |  |
-| `NO_PET_AVAILABLE` | 7 (0x07) |  | not used in taming |
-| `INTERNA_LERROR` | 8 (0x08) |  |  |
-| `TOO_HIGH_LEVEL` | 9 (0x09) |  |  |
-| `DEAD` | 10 (0x0A) |  | not used in taming |
-| `NOT_DEAD` | 11 (0x0B) |  | not used in taming |
-| `CANT_CONTROL_EXOTIC` | 12 (0x0C) |  |  |
-| `UNKNOWN_ERROR` | 13 (0x0D) |  |  |
+| Enumerator | Value  | Comment |
+| --------- | -------- | ------- |
+| `INVALID_CREATURE` | 1 (0x01) |  |
+| `TOO_MANY` | 2 (0x02) |  |
+| `CREATURE_ALREADY_OWNED` | 3 (0x03) |  |
+| `NOT_TAMEABLE` | 4 (0x04) |  |
+| `ANOTHER_SUMMON_ACTIVE` | 5 (0x05) |  |
+| `UNITS_CANT_TAME` | 6 (0x06) |  |
+| `NO_PET_AVAILABLE` | 7 (0x07) | not used in taming |
+| `INTERNA_LERROR` | 8 (0x08) |  |
+| `TOO_HIGH_LEVEL` | 9 (0x09) |  |
+| `DEAD` | 10 (0x0A) | not used in taming |
+| `NOT_DEAD` | 11 (0x0B) | not used in taming |
+| `CANT_CONTROL_EXOTIC` | 12 (0x0C) |  |
+| `UNKNOWN_ERROR` | 13 (0x0D) |  |
 
 Used in:
 * [SMSG_PET_TAME_FAILURE](smsg_pet_tame_failure.md)

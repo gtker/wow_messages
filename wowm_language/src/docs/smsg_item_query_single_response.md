@@ -79,68 +79,68 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | 4 / Little | u32 | item |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x04 | 4 / Little | u32 | item |  |
 
 Optionally the following fields can be present. This can only be detected by looking at the size of the message.
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x08 | 8 / - | [ItemClassAndSubClass](itemclassandsubclass.md) | class_and_sub_class |  |  |
-| 0x10 | - / - | CString | name1 |  |  |
-| - | - / - | CString | name2 |  |  |
-| - | - / - | CString | name3 |  |  |
-| - | - / - | CString | name4 |  |  |
-| - | 4 / Little | u32 | display_id |  | id from ItemDisplayInfo.dbc |
-| - | 4 / - | [ItemQuality](itemquality.md) | quality |  |  |
-| - | 4 / - | [ItemFlag](itemflag.md) | flags |  |  |
-| - | 4 / Little | Gold | buy_price |  |  |
-| - | 4 / Little | Gold | sell_price |  |  |
-| - | 4 / - | [InventoryType](inventorytype.md) | inventory_type |  |  |
-| - | 4 / - | [AllowedClass](allowedclass.md) | allowed_class |  |  |
-| - | 4 / - | [AllowedRace](allowedrace.md) | allowed_race |  |  |
-| - | 4 / Little | Level32 | item_level |  |  |
-| - | 4 / Little | Level32 | required_level |  |  |
-| - | 4 / - | [Skill](skill.md) | required_skill |  |  |
-| - | 4 / Little | u32 | required_skill_rank |  |  |
-| - | 4 / Little | u32 | required_spell |  |  |
-| - | 4 / Little | u32 | required_honor_rank |  |  |
-| - | 4 / Little | u32 | required_city_rank |  |  |
-| - | 4 / - | [Faction](faction.md) | required_faction |  |  |
-| - | 4 / Little | u32 | required_faction_rank |  | cmangos/vmangos/mangoszero: send value only if reputation faction id setted ( needed for some items) |
-| - | 4 / Little | u32 | max_count |  |  |
-| - | 4 / Little | u32 | stackable |  |  |
-| - | 4 / Little | u32 | container_slots |  |  |
-| - | 80 / - | [ItemStat](itemstat.md)[10] | stats |  |  |
-| - | 60 / - | [ItemDamageType](itemdamagetype.md)[5] | damages |  |  |
-| - | 4 / Little | i32 | armor |  |  |
-| - | 4 / Little | i32 | holy_resistance |  |  |
-| - | 4 / Little | i32 | fire_resistance |  |  |
-| - | 4 / Little | i32 | nature_resistance |  |  |
-| - | 4 / Little | i32 | frost_resistance |  |  |
-| - | 4 / Little | i32 | shadow_resistance |  |  |
-| - | 4 / Little | i32 | arcane_resistance |  |  |
-| - | 4 / Little | u32 | delay |  |  |
-| - | 4 / Little | u32 | ammo_type |  |  |
-| - | 4 / Little | f32 | ranged_range_modification |  |  |
-| - | 120 / - | [ItemSpells](itemspells.md)[5] | spells |  |  |
-| - | 4 / - | [Bonding](bonding.md) | bonding |  |  |
-| - | - / - | CString | description |  |  |
-| - | 4 / Little | u32 | page_text |  |  |
-| - | 4 / - | [Language](language.md) | language |  |  |
-| - | 4 / - | [PageTextMaterial](pagetextmaterial.md) | page_text_material |  |  |
-| - | 4 / Little | u32 | start_quest |  | cmangos/vmangos/mangoszero: id from QuestCache.wdb |
-| - | 4 / Little | u32 | lock_id |  |  |
-| - | 4 / Little | u32 | material |  | cmangos/vmangos/mangoszero: id from Material.dbc |
-| - | 4 / - | [SheatheType](sheathetype.md) | sheathe_type |  |  |
-| - | 4 / Little | u32 | random_property |  | cmangos/vmangos/mangoszero: id from ItemRandomProperties.dbc |
-| - | 4 / Little | u32 | block |  |  |
-| - | 4 / - | [ItemSet](itemset.md) | item_set |  |  |
-| - | 4 / Little | u32 | max_durability |  |  |
-| - | 4 / - | [Area](area.md) | area |  |  |
-| - | 4 / - | [Map](map.md) | map |  |  |
-| - | 4 / - | [BagFamily](bagfamily.md) | bag_family |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x08 | 8 / - | [ItemClassAndSubClass](itemclassandsubclass.md) | class_and_sub_class |  |
+| 0x10 | - / - | CString | name1 |  |
+| - | - / - | CString | name2 |  |
+| - | - / - | CString | name3 |  |
+| - | - / - | CString | name4 |  |
+| - | 4 / Little | u32 | display_id | id from ItemDisplayInfo.dbc |
+| - | 4 / - | [ItemQuality](itemquality.md) | quality |  |
+| - | 4 / - | [ItemFlag](itemflag.md) | flags |  |
+| - | 4 / Little | Gold | buy_price |  |
+| - | 4 / Little | Gold | sell_price |  |
+| - | 4 / - | [InventoryType](inventorytype.md) | inventory_type |  |
+| - | 4 / - | [AllowedClass](allowedclass.md) | allowed_class |  |
+| - | 4 / - | [AllowedRace](allowedrace.md) | allowed_race |  |
+| - | 4 / Little | Level32 | item_level |  |
+| - | 4 / Little | Level32 | required_level |  |
+| - | 4 / - | [Skill](skill.md) | required_skill |  |
+| - | 4 / Little | u32 | required_skill_rank |  |
+| - | 4 / Little | u32 | required_spell |  |
+| - | 4 / Little | u32 | required_honor_rank |  |
+| - | 4 / Little | u32 | required_city_rank |  |
+| - | 4 / - | [Faction](faction.md) | required_faction |  |
+| - | 4 / Little | u32 | required_faction_rank | cmangos/vmangos/mangoszero: send value only if reputation faction id setted ( needed for some items) |
+| - | 4 / Little | u32 | max_count |  |
+| - | 4 / Little | u32 | stackable |  |
+| - | 4 / Little | u32 | container_slots |  |
+| - | 80 / - | [ItemStat](itemstat.md)[10] | stats |  |
+| - | 60 / - | [ItemDamageType](itemdamagetype.md)[5] | damages |  |
+| - | 4 / Little | i32 | armor |  |
+| - | 4 / Little | i32 | holy_resistance |  |
+| - | 4 / Little | i32 | fire_resistance |  |
+| - | 4 / Little | i32 | nature_resistance |  |
+| - | 4 / Little | i32 | frost_resistance |  |
+| - | 4 / Little | i32 | shadow_resistance |  |
+| - | 4 / Little | i32 | arcane_resistance |  |
+| - | 4 / Little | u32 | delay |  |
+| - | 4 / Little | u32 | ammo_type |  |
+| - | 4 / Little | f32 | ranged_range_modification |  |
+| - | 120 / - | [ItemSpells](itemspells.md)[5] | spells |  |
+| - | 4 / - | [Bonding](bonding.md) | bonding |  |
+| - | - / - | CString | description |  |
+| - | 4 / Little | u32 | page_text |  |
+| - | 4 / - | [Language](language.md) | language |  |
+| - | 4 / - | [PageTextMaterial](pagetextmaterial.md) | page_text_material |  |
+| - | 4 / Little | u32 | start_quest | cmangos/vmangos/mangoszero: id from QuestCache.wdb |
+| - | 4 / Little | u32 | lock_id |  |
+| - | 4 / Little | u32 | material | cmangos/vmangos/mangoszero: id from Material.dbc |
+| - | 4 / - | [SheatheType](sheathetype.md) | sheathe_type |  |
+| - | 4 / Little | u32 | random_property | cmangos/vmangos/mangoszero: id from ItemRandomProperties.dbc |
+| - | 4 / Little | u32 | block |  |
+| - | 4 / - | [ItemSet](itemset.md) | item_set |  |
+| - | 4 / Little | u32 | max_durability |  |
+| - | 4 / - | [Area](area.md) | area |  |
+| - | 4 / - | [Map](map.md) | map |  |
+| - | 4 / - | [BagFamily](bagfamily.md) | bag_family |  |
 
 ### Examples
 
@@ -358,76 +358,76 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | 4 / Little | u32 | item |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x04 | 4 / Little | u32 | item |  |
 
 Optionally the following fields can be present. This can only be detected by looking at the size of the message.
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x08 | 8 / - | [ItemClassAndSubClass](itemclassandsubclass.md) | class_and_sub_class |  |  |
-| 0x10 | 4 / Little | u32 | sound_override_sub_class |  | mangosone: new 2.0.3, not exist in wdb cache?<br/>mangosone sets to -1.<br/>azerothcore: < 0: id from ItemSubClass.dbc, used to override weapon sound from actual sub class |
-| 0x14 | - / - | CString | name1 |  |  |
-| - | - / - | CString | name2 |  |  |
-| - | - / - | CString | name3 |  |  |
-| - | - / - | CString | name4 |  |  |
-| - | 4 / Little | u32 | display_id |  | id from ItemDisplayInfo.dbc |
-| - | 4 / - | [ItemQuality](itemquality.md) | quality |  |  |
-| - | 4 / - | [ItemFlag](itemflag.md) | flags |  |  |
-| - | 4 / Little | Gold | buy_price |  |  |
-| - | 4 / Little | Gold | sell_price |  |  |
-| - | 4 / - | [InventoryType](inventorytype.md) | inventory_type |  |  |
-| - | 4 / - | [AllowedClass](allowedclass.md) | allowed_class |  |  |
-| - | 4 / - | [AllowedRace](allowedrace.md) | allowed_race |  |  |
-| - | 4 / Little | u32 | item_level |  |  |
-| - | 4 / Little | Level32 | required_level |  |  |
-| - | 4 / - | [Skill](skill.md) | required_skill |  |  |
-| - | 4 / Little | u32 | required_skill_rank |  |  |
-| - | 4 / Little | u32 | required_spell |  |  |
-| - | 4 / Little | u32 | required_honor_rank |  |  |
-| - | 4 / Little | u32 | required_city_rank |  |  |
-| - | 4 / - | [Faction](faction.md) | required_faction |  |  |
-| - | 4 / Little | u32 | required_faction_rank |  | cmangos/vmangos/mangoszero: send value only if reputation faction id setted ( needed for some items) |
-| - | 4 / Little | u32 | max_count |  |  |
-| - | 4 / Little | u32 | stackable |  |  |
-| - | 4 / Little | u32 | container_slots |  |  |
-| - | 80 / - | [ItemStat](itemstat.md)[10] | stats |  |  |
-| - | 60 / - | [ItemDamageType](itemdamagetype.md)[5] | damages |  |  |
-| - | 4 / Little | i32 | armor |  |  |
-| - | 4 / Little | i32 | holy_resistance |  |  |
-| - | 4 / Little | i32 | fire_resistance |  |  |
-| - | 4 / Little | i32 | nature_resistance |  |  |
-| - | 4 / Little | i32 | frost_resistance |  |  |
-| - | 4 / Little | i32 | shadow_resistance |  |  |
-| - | 4 / Little | i32 | arcane_resistance |  |  |
-| - | 4 / Little | u32 | delay |  |  |
-| - | 4 / Little | u32 | ammo_type |  |  |
-| - | 4 / Little | f32 | ranged_range_modification |  |  |
-| - | 120 / - | [ItemSpells](itemspells.md)[5] | spells |  |  |
-| - | 4 / - | [Bonding](bonding.md) | bonding |  |  |
-| - | - / - | CString | description |  |  |
-| - | 4 / Little | u32 | page_text |  |  |
-| - | 4 / - | [Language](language.md) | language |  |  |
-| - | 4 / - | [PageTextMaterial](pagetextmaterial.md) | page_text_material |  |  |
-| - | 4 / Little | u32 | start_quest |  | cmangos/vmangos/mangoszero: id from QuestCache.wdb |
-| - | 4 / Little | u32 | lock_id |  |  |
-| - | 4 / Little | u32 | material |  | cmangos/vmangos/mangoszero: id from Material.dbc |
-| - | 4 / - | [SheatheType](sheathetype.md) | sheathe_type |  |  |
-| - | 4 / Little | u32 | random_property |  | cmangos/vmangos/mangoszero: id from ItemRandomProperties.dbc |
-| - | 4 / Little | u32 | block |  |  |
-| - | 4 / - | [ItemSet](itemset.md) | item_set |  |  |
-| - | 4 / Little | u32 | max_durability |  |  |
-| - | 4 / - | [Area](area.md) | area |  |  |
-| - | 4 / - | [Map](map.md) | map |  |  |
-| - | 4 / - | [BagFamily](bagfamily.md) | bag_family |  |  |
-| - | 4 / Little | u32 | totem_category |  | mangosone: id from TotemCategory.dbc |
-| - | 24 / - | [ItemSocket](itemsocket.md)[3] | sockets |  |  |
-| - | 4 / Little | u32 | socket_bonus |  |  |
-| - | 4 / Little | u32 | gem_properties |  |  |
-| - | 4 / Little | u32 | required_disenchant_skill |  |  |
-| - | 4 / Little | f32 | armor_damage_modifier |  |  |
-| - | 4 / Little | Seconds | duration |  | mangosone: added in 2.4.2.8209, duration (seconds) |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x08 | 8 / - | [ItemClassAndSubClass](itemclassandsubclass.md) | class_and_sub_class |  |
+| 0x10 | 4 / Little | u32 | sound_override_sub_class | mangosone: new 2.0.3, not exist in wdb cache?<br/>mangosone sets to -1.<br/>azerothcore: < 0: id from ItemSubClass.dbc, used to override weapon sound from actual sub class |
+| 0x14 | - / - | CString | name1 |  |
+| - | - / - | CString | name2 |  |
+| - | - / - | CString | name3 |  |
+| - | - / - | CString | name4 |  |
+| - | 4 / Little | u32 | display_id | id from ItemDisplayInfo.dbc |
+| - | 4 / - | [ItemQuality](itemquality.md) | quality |  |
+| - | 4 / - | [ItemFlag](itemflag.md) | flags |  |
+| - | 4 / Little | Gold | buy_price |  |
+| - | 4 / Little | Gold | sell_price |  |
+| - | 4 / - | [InventoryType](inventorytype.md) | inventory_type |  |
+| - | 4 / - | [AllowedClass](allowedclass.md) | allowed_class |  |
+| - | 4 / - | [AllowedRace](allowedrace.md) | allowed_race |  |
+| - | 4 / Little | u32 | item_level |  |
+| - | 4 / Little | Level32 | required_level |  |
+| - | 4 / - | [Skill](skill.md) | required_skill |  |
+| - | 4 / Little | u32 | required_skill_rank |  |
+| - | 4 / Little | u32 | required_spell |  |
+| - | 4 / Little | u32 | required_honor_rank |  |
+| - | 4 / Little | u32 | required_city_rank |  |
+| - | 4 / - | [Faction](faction.md) | required_faction |  |
+| - | 4 / Little | u32 | required_faction_rank | cmangos/vmangos/mangoszero: send value only if reputation faction id setted ( needed for some items) |
+| - | 4 / Little | u32 | max_count |  |
+| - | 4 / Little | u32 | stackable |  |
+| - | 4 / Little | u32 | container_slots |  |
+| - | 80 / - | [ItemStat](itemstat.md)[10] | stats |  |
+| - | 60 / - | [ItemDamageType](itemdamagetype.md)[5] | damages |  |
+| - | 4 / Little | i32 | armor |  |
+| - | 4 / Little | i32 | holy_resistance |  |
+| - | 4 / Little | i32 | fire_resistance |  |
+| - | 4 / Little | i32 | nature_resistance |  |
+| - | 4 / Little | i32 | frost_resistance |  |
+| - | 4 / Little | i32 | shadow_resistance |  |
+| - | 4 / Little | i32 | arcane_resistance |  |
+| - | 4 / Little | u32 | delay |  |
+| - | 4 / Little | u32 | ammo_type |  |
+| - | 4 / Little | f32 | ranged_range_modification |  |
+| - | 120 / - | [ItemSpells](itemspells.md)[5] | spells |  |
+| - | 4 / - | [Bonding](bonding.md) | bonding |  |
+| - | - / - | CString | description |  |
+| - | 4 / Little | u32 | page_text |  |
+| - | 4 / - | [Language](language.md) | language |  |
+| - | 4 / - | [PageTextMaterial](pagetextmaterial.md) | page_text_material |  |
+| - | 4 / Little | u32 | start_quest | cmangos/vmangos/mangoszero: id from QuestCache.wdb |
+| - | 4 / Little | u32 | lock_id |  |
+| - | 4 / Little | u32 | material | cmangos/vmangos/mangoszero: id from Material.dbc |
+| - | 4 / - | [SheatheType](sheathetype.md) | sheathe_type |  |
+| - | 4 / Little | u32 | random_property | cmangos/vmangos/mangoszero: id from ItemRandomProperties.dbc |
+| - | 4 / Little | u32 | block |  |
+| - | 4 / - | [ItemSet](itemset.md) | item_set |  |
+| - | 4 / Little | u32 | max_durability |  |
+| - | 4 / - | [Area](area.md) | area |  |
+| - | 4 / - | [Map](map.md) | map |  |
+| - | 4 / - | [BagFamily](bagfamily.md) | bag_family |  |
+| - | 4 / Little | u32 | totem_category | mangosone: id from TotemCategory.dbc |
+| - | 24 / - | [ItemSocket](itemsocket.md)[3] | sockets |  |
+| - | 4 / Little | u32 | socket_bonus |  |
+| - | 4 / Little | u32 | gem_properties |  |
+| - | 4 / Little | u32 | required_disenchant_skill |  |
+| - | 4 / Little | f32 | armor_damage_modifier |  |
+| - | 4 / Little | Seconds | duration | mangosone: added in 2.4.2.8209, duration (seconds) |
 
 ## Client Version 3.3.5
 
@@ -523,81 +523,81 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | 4 / Little | u32 | item |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| - | 4 / Little | u32 | item |  |
 
 Optionally the following fields can be present. This can only be detected by looking at the size of the message.
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | 8 / - | [ItemClassAndSubClass](itemclassandsubclass.md) | class_and_sub_class |  |  |
-| - | 4 / Little | u32 | sound_override_sub_class |  | mangosone: new 2.0.3, not exist in wdb cache?<br/>mangosone sets to -1.<br/>azerothcore: < 0: id from ItemSubClass.dbc, used to override weapon sound from actual sub class |
-| - | - / - | CString | name1 |  |  |
-| - | - / - | CString | name2 |  |  |
-| - | - / - | CString | name3 |  |  |
-| - | - / - | CString | name4 |  |  |
-| - | 4 / Little | u32 | display_id |  | id from ItemDisplayInfo.dbc |
-| - | 4 / - | [ItemQuality](itemquality.md) | quality |  |  |
-| - | 4 / - | [ItemFlag](itemflag.md) | flags |  |  |
-| - | 4 / - | [ItemFlag2](itemflag2.md) | flags2 |  |  |
-| - | 4 / Little | Gold | buy_price |  |  |
-| - | 4 / Little | Gold | sell_price |  |  |
-| - | 4 / - | [InventoryType](inventorytype.md) | inventory_type |  |  |
-| - | 4 / - | [AllowedClass](allowedclass.md) | allowed_class |  |  |
-| - | 4 / - | [AllowedRace](allowedrace.md) | allowed_race |  |  |
-| - | 4 / Little | u32 | item_level |  |  |
-| - | 4 / Little | Level32 | required_level |  |  |
-| - | 4 / - | [Skill](skill.md) | required_skill |  |  |
-| - | 4 / Little | u32 | required_skill_rank |  |  |
-| - | 4 / Little | u32 | required_spell |  |  |
-| - | 4 / Little | u32 | required_honor_rank |  |  |
-| - | 4 / Little | u32 | required_city_rank |  |  |
-| - | 4 / - | [Faction](faction.md) | required_faction |  |  |
-| - | 4 / Little | u32 | required_faction_rank |  | cmangos/vmangos/mangoszero: send value only if reputation faction id setted ( needed for some items) |
-| - | 4 / Little | u32 | max_count |  |  |
-| - | 4 / Little | u32 | stackable |  |  |
-| - | 4 / Little | u32 | container_slots |  |  |
-| - | 4 / Little | u32 | amount_of_stats |  |  |
-| - | ? / - | [ItemStat](itemstat.md)[amount_of_stats] | stats |  |  |
-| - | 4 / Little | u32 | scaling_stats_entry |  |  |
-| - | 4 / Little | u32 | scaling_stats_flag |  |  |
-| - | 24 / - | [ItemDamageType](itemdamagetype.md)[2] | damages |  |  |
-| - | 4 / Little | i32 | armor |  |  |
-| - | 4 / Little | i32 | holy_resistance |  |  |
-| - | 4 / Little | i32 | fire_resistance |  |  |
-| - | 4 / Little | i32 | nature_resistance |  |  |
-| - | 4 / Little | i32 | frost_resistance |  |  |
-| - | 4 / Little | i32 | shadow_resistance |  |  |
-| - | 4 / Little | i32 | arcane_resistance |  |  |
-| - | 4 / Little | u32 | delay |  |  |
-| - | 4 / Little | u32 | ammo_type |  |  |
-| - | 4 / Little | f32 | ranged_range_modification |  |  |
-| - | 120 / - | [ItemSpells](itemspells.md)[5] | spells |  |  |
-| - | 4 / - | [Bonding](bonding.md) | bonding |  |  |
-| - | - / - | CString | description |  |  |
-| - | 4 / Little | u32 | page_text |  |  |
-| - | 4 / - | [Language](language.md) | language |  |  |
-| - | 4 / - | [PageTextMaterial](pagetextmaterial.md) | page_text_material |  |  |
-| - | 4 / Little | u32 | start_quest |  | cmangos/vmangos/mangoszero: id from QuestCache.wdb |
-| - | 4 / Little | u32 | lock_id |  |  |
-| - | 4 / Little | u32 | material |  | cmangos/vmangos/mangoszero: id from Material.dbc |
-| - | 4 / - | [SheatheType](sheathetype.md) | sheathe_type |  |  |
-| - | 4 / Little | u32 | random_property |  | cmangos/vmangos/mangoszero: id from ItemRandomProperties.dbc |
-| - | 4 / Little | u32 | random_suffix |  |  |
-| - | 4 / Little | u32 | block |  |  |
-| - | 4 / - | [ItemSet](itemset.md) | item_set |  |  |
-| - | 4 / Little | u32 | max_durability |  |  |
-| - | 4 / - | [Area](area.md) | area |  |  |
-| - | 4 / - | [Map](map.md) | map |  |  |
-| - | 4 / - | [BagFamily](bagfamily.md) | bag_family |  |  |
-| - | 4 / Little | u32 | totem_category |  | mangosone: id from TotemCategory.dbc |
-| - | 24 / - | [ItemSocket](itemsocket.md)[3] | sockets |  |  |
-| - | 4 / Little | u32 | socket_bonus |  |  |
-| - | 4 / Little | u32 | gem_properties |  |  |
-| - | 4 / Little | u32 | required_disenchant_skill |  |  |
-| - | 4 / Little | f32 | armor_damage_modifier |  |  |
-| - | 4 / Little | Seconds | duration |  | mangosone: added in 2.4.2.8209, duration (seconds) |
-| - | 4 / Little | u32 | item_limit_category |  |  |
-| - | 4 / Little | u32 | holiday_id |  | mangosone: HolidayId - points to HolidayNames.dbc |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| - | 8 / - | [ItemClassAndSubClass](itemclassandsubclass.md) | class_and_sub_class |  |
+| - | 4 / Little | u32 | sound_override_sub_class | mangosone: new 2.0.3, not exist in wdb cache?<br/>mangosone sets to -1.<br/>azerothcore: < 0: id from ItemSubClass.dbc, used to override weapon sound from actual sub class |
+| - | - / - | CString | name1 |  |
+| - | - / - | CString | name2 |  |
+| - | - / - | CString | name3 |  |
+| - | - / - | CString | name4 |  |
+| - | 4 / Little | u32 | display_id | id from ItemDisplayInfo.dbc |
+| - | 4 / - | [ItemQuality](itemquality.md) | quality |  |
+| - | 4 / - | [ItemFlag](itemflag.md) | flags |  |
+| - | 4 / - | [ItemFlag2](itemflag2.md) | flags2 |  |
+| - | 4 / Little | Gold | buy_price |  |
+| - | 4 / Little | Gold | sell_price |  |
+| - | 4 / - | [InventoryType](inventorytype.md) | inventory_type |  |
+| - | 4 / - | [AllowedClass](allowedclass.md) | allowed_class |  |
+| - | 4 / - | [AllowedRace](allowedrace.md) | allowed_race |  |
+| - | 4 / Little | u32 | item_level |  |
+| - | 4 / Little | Level32 | required_level |  |
+| - | 4 / - | [Skill](skill.md) | required_skill |  |
+| - | 4 / Little | u32 | required_skill_rank |  |
+| - | 4 / Little | u32 | required_spell |  |
+| - | 4 / Little | u32 | required_honor_rank |  |
+| - | 4 / Little | u32 | required_city_rank |  |
+| - | 4 / - | [Faction](faction.md) | required_faction |  |
+| - | 4 / Little | u32 | required_faction_rank | cmangos/vmangos/mangoszero: send value only if reputation faction id setted ( needed for some items) |
+| - | 4 / Little | u32 | max_count |  |
+| - | 4 / Little | u32 | stackable |  |
+| - | 4 / Little | u32 | container_slots |  |
+| - | 4 / Little | u32 | amount_of_stats |  |
+| - | ? / - | [ItemStat](itemstat.md)[amount_of_stats] | stats |  |
+| - | 4 / Little | u32 | scaling_stats_entry |  |
+| - | 4 / Little | u32 | scaling_stats_flag |  |
+| - | 24 / - | [ItemDamageType](itemdamagetype.md)[2] | damages |  |
+| - | 4 / Little | i32 | armor |  |
+| - | 4 / Little | i32 | holy_resistance |  |
+| - | 4 / Little | i32 | fire_resistance |  |
+| - | 4 / Little | i32 | nature_resistance |  |
+| - | 4 / Little | i32 | frost_resistance |  |
+| - | 4 / Little | i32 | shadow_resistance |  |
+| - | 4 / Little | i32 | arcane_resistance |  |
+| - | 4 / Little | u32 | delay |  |
+| - | 4 / Little | u32 | ammo_type |  |
+| - | 4 / Little | f32 | ranged_range_modification |  |
+| - | 120 / - | [ItemSpells](itemspells.md)[5] | spells |  |
+| - | 4 / - | [Bonding](bonding.md) | bonding |  |
+| - | - / - | CString | description |  |
+| - | 4 / Little | u32 | page_text |  |
+| - | 4 / - | [Language](language.md) | language |  |
+| - | 4 / - | [PageTextMaterial](pagetextmaterial.md) | page_text_material |  |
+| - | 4 / Little | u32 | start_quest | cmangos/vmangos/mangoszero: id from QuestCache.wdb |
+| - | 4 / Little | u32 | lock_id |  |
+| - | 4 / Little | u32 | material | cmangos/vmangos/mangoszero: id from Material.dbc |
+| - | 4 / - | [SheatheType](sheathetype.md) | sheathe_type |  |
+| - | 4 / Little | u32 | random_property | cmangos/vmangos/mangoszero: id from ItemRandomProperties.dbc |
+| - | 4 / Little | u32 | random_suffix |  |
+| - | 4 / Little | u32 | block |  |
+| - | 4 / - | [ItemSet](itemset.md) | item_set |  |
+| - | 4 / Little | u32 | max_durability |  |
+| - | 4 / - | [Area](area.md) | area |  |
+| - | 4 / - | [Map](map.md) | map |  |
+| - | 4 / - | [BagFamily](bagfamily.md) | bag_family |  |
+| - | 4 / Little | u32 | totem_category | mangosone: id from TotemCategory.dbc |
+| - | 24 / - | [ItemSocket](itemsocket.md)[3] | sockets |  |
+| - | 4 / Little | u32 | socket_bonus |  |
+| - | 4 / Little | u32 | gem_properties |  |
+| - | 4 / Little | u32 | required_disenchant_skill |  |
+| - | 4 / Little | f32 | armor_damage_modifier |  |
+| - | 4 / Little | Seconds | duration | mangosone: added in 2.4.2.8209, duration (seconds) |
+| - | 4 / Little | u32 | item_limit_category |  |
+| - | 4 / Little | u32 | holiday_id | mangosone: HolidayId - points to HolidayNames.dbc |
 

@@ -15,12 +15,12 @@ struct TransportInfo {
 ```
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x00 | - / - | [PackedGuid](../types/packed-guid.md) | guid |  |  |
-| - | 12 / - | [Vector3d](vector3d.md) | position |  |  |
-| - | 4 / Little | f32 | orientation |  |  |
-| - | 4 / Little | u32 | timestamp |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x00 | - / - | [PackedGuid](../types/packed-guid.md) | guid |  |
+| - | 12 / - | [Vector3d](vector3d.md) | position |  |
+| - | 4 / Little | f32 | orientation |  |
+| - | 4 / Little | u32 | timestamp |  |
 
 
 Used in:
@@ -43,13 +43,13 @@ struct TransportInfo {
 ```
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x00 | - / - | [PackedGuid](../types/packed-guid.md) | guid |  |  |
-| - | 12 / - | [Vector3d](vector3d.md) | position |  |  |
-| - | 4 / Little | f32 | orientation |  |  |
-| - | 4 / Little | u32 | timestamp |  |  |
-| - | 1 / - | u8 | seat |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x00 | - / - | [PackedGuid](../types/packed-guid.md) | guid |  |
+| - | 12 / - | [Vector3d](vector3d.md) | position |  |
+| - | 4 / Little | f32 | orientation |  |
+| - | 4 / Little | u32 | timestamp |  |
+| - | 1 / - | u8 | seat |  |
 
 
 Used in:

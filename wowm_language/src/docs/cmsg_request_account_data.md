@@ -25,9 +25,9 @@ CMSG have a header of 6 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x06 | 4 / Little | u32 | data_type |  | The type of account data being requested. You can check this against the [CacheMask](./cachemask.md) to know if this is character-specific data or account-wide data. |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x06 | 4 / Little | u32 | data_type | The type of account data being requested. You can check this against the [CacheMask](./cachemask.md) to know if this is character-specific data or account-wide data. |
 
 ### Examples
 

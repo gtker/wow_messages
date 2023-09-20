@@ -13,10 +13,10 @@ struct QuestDetailsEmote {
 ```
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x00 | 4 / Little | u32 | emote |  |  |
-| 0x04 | 4 / Little | Milliseconds | emote_delay |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x00 | 4 / Little | u32 | emote |  |
+| 0x04 | 4 / Little | Milliseconds | emote_delay |  |
 
 
 Used in:

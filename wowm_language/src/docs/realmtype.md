@@ -17,12 +17,12 @@ enum RealmType : u8 {
 ### Type
 The basic type is `u8`, a 1 byte (8 bit) integer.
 ### Enumerators
-| Enumerator | Value  | Description | Comment |
-| --------- | -------- | ----------- | ------- |
-| `PLAYER_VS_ENVIRONMENT` | 0 (0x00) |  |  |
-| `PLAYER_VS_PLAYER` | 1 (0x01) |  |  |
-| `ROLEPLAYING` | 6 (0x06) |  |  |
-| `ROLEPLAYING_PLAYER_VS_PLAYER` | 8 (0x08) |  |  |
+| Enumerator | Value  | Comment |
+| --------- | -------- | ------- |
+| `PLAYER_VS_ENVIRONMENT` | 0 (0x00) |  |
+| `PLAYER_VS_PLAYER` | 1 (0x01) |  |
+| `ROLEPLAYING` | 6 (0x06) |  |
+| `ROLEPLAYING_PLAYER_VS_PLAYER` | 8 (0x08) |  |
 
 Used in:
 * [Realm](realm.md)

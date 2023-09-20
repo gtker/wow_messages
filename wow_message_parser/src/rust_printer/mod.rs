@@ -213,16 +213,6 @@ fn print_member_docc_description_and_comment(
     o: &Objects,
     object_tags: &ObjectTags,
 ) {
-    if let Some(description) = tags.description() {
-        for line in description.as_rust_doc_lines(o, object_tags) {
-            s.docc(line);
-        }
-
-        if tags.comment().is_some() {
-            s.docc_newline();
-        }
-    }
-
     if let Some(comment) = tags.comment() {
         for line in comment.as_rust_doc_lines(o, object_tags) {
             s.docc(line);
@@ -242,16 +232,6 @@ fn print_docc_description_and_comment(
     o: &Objects,
     object_tags: &ObjectTags,
 ) {
-    if let Some(description) = tags.description() {
-        for line in description.as_rust_doc_lines(o, object_tags) {
-            s.docc(line);
-        }
-
-        if tags.comment().is_some() {
-            s.docc_newline();
-        }
-    }
-
     if let Some(comment) = tags.comment() {
         for line in comment.as_rust_doc_lines(o, object_tags) {
             s.docc(line);

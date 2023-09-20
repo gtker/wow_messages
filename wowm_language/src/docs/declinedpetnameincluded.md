@@ -15,10 +15,10 @@ enum DeclinedPetNameIncluded : u8 {
 ### Type
 The basic type is `u8`, a 1 byte (8 bit) integer.
 ### Enumerators
-| Enumerator | Value  | Description | Comment |
-| --------- | -------- | ----------- | ------- |
-| `NOT_INCLUDED` | 0 (0x00) |  |  |
-| `INCLUDED` | 1 (0x01) |  |  |
+| Enumerator | Value  | Comment |
+| --------- | -------- | ------- |
+| `NOT_INCLUDED` | 0 (0x00) |  |
+| `INCLUDED` | 1 (0x01) |  |
 
 Used in:
 * [SMSG_PET_NAME_INVALID](smsg_pet_name_invalid.md)

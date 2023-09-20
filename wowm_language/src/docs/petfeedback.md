@@ -17,12 +17,12 @@ enum PetFeedback : u8 {
 ### Type
 The basic type is `u8`, a 1 byte (8 bit) integer.
 ### Enumerators
-| Enumerator | Value  | Description | Comment |
-| --------- | -------- | ----------- | ------- |
-| `PET_DEAD` | 1 (0x01) |  |  |
-| `NOTHING_TO_ATTACK` | 2 (0x02) |  |  |
-| `CANT_ATTACK_TARGET` | 3 (0x03) |  |  |
-| `NO_PATH_TO` | 4 (0x04) |  |  |
+| Enumerator | Value  | Comment |
+| --------- | -------- | ------- |
+| `PET_DEAD` | 1 (0x01) |  |
+| `NOTHING_TO_ATTACK` | 2 (0x02) |  |
+| `CANT_ATTACK_TARGET` | 3 (0x03) |  |
+| `NO_PATH_TO` | 4 (0x04) |  |
 
 Used in:
 * [SMSG_PET_ACTION_FEEDBACK](smsg_pet_action_feedback.md)

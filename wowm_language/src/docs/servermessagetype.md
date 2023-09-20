@@ -18,13 +18,13 @@ enum ServerMessageType : u32 {
 ### Type
 The basic type is `u32`, a 4 byte (32 bit) little endian integer.
 ### Enumerators
-| Enumerator | Value  | Description | Comment |
-| --------- | -------- | ----------- | ------- |
-| `SHUTDOWN_TIME` | 1 (0x01) |  |  |
-| `RESTART_TIME` | 2 (0x02) |  |  |
-| `CUSTOM` | 3 (0x03) |  |  |
-| `SHUTDOWN_CANCELLED` | 4 (0x04) |  |  |
-| `RESTART_CANCELLED` | 5 (0x05) |  |  |
+| Enumerator | Value  | Comment |
+| --------- | -------- | ------- |
+| `SHUTDOWN_TIME` | 1 (0x01) |  |
+| `RESTART_TIME` | 2 (0x02) |  |
+| `CUSTOM` | 3 (0x03) |  |
+| `SHUTDOWN_CANCELLED` | 4 (0x04) |  |
+| `RESTART_CANCELLED` | 5 (0x05) |  |
 
 Used in:
 * [SMSG_SERVER_MESSAGE](smsg_server_message.md)
@@ -51,17 +51,17 @@ enum ServerMessageType : u32 {
 ### Type
 The basic type is `u32`, a 4 byte (32 bit) little endian integer.
 ### Enumerators
-| Enumerator | Value  | Description | Comment |
-| --------- | -------- | ----------- | ------- |
-| `SHUTDOWN_TIME` | 1 (0x01) |  |  |
-| `RESTART_TIME` | 2 (0x02) |  |  |
-| `CUSTOM` | 3 (0x03) |  |  |
-| `SHUTDOWN_CANCELLED` | 4 (0x04) |  |  |
-| `RESTART_CANCELLED` | 5 (0x05) |  |  |
-| `BATTLEGROUND_SHUTDOWN` | 6 (0x06) |  |  |
-| `BATTLEGROUND_RESTART` | 7 (0x07) |  |  |
-| `INSTANCE_SHUTDOWN` | 8 (0x08) |  |  |
-| `INSTANCE_RESTART` | 9 (0x09) |  |  |
+| Enumerator | Value  | Comment |
+| --------- | -------- | ------- |
+| `SHUTDOWN_TIME` | 1 (0x01) |  |
+| `RESTART_TIME` | 2 (0x02) |  |
+| `CUSTOM` | 3 (0x03) |  |
+| `SHUTDOWN_CANCELLED` | 4 (0x04) |  |
+| `RESTART_CANCELLED` | 5 (0x05) |  |
+| `BATTLEGROUND_SHUTDOWN` | 6 (0x06) |  |
+| `BATTLEGROUND_RESTART` | 7 (0x07) |  |
+| `INSTANCE_SHUTDOWN` | 8 (0x08) |  |
+| `INSTANCE_RESTART` | 9 (0x09) |  |
 
 Used in:
 * [SMSG_SERVER_MESSAGE](smsg_server_message.md)

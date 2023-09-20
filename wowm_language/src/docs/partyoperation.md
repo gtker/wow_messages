@@ -15,10 +15,10 @@ enum PartyOperation : u8 {
 ### Type
 The basic type is `u8`, a 1 byte (8 bit) integer.
 ### Enumerators
-| Enumerator | Value  | Description | Comment |
-| --------- | -------- | ----------- | ------- |
-| `INVITE` | 0 (0x00) |  |  |
-| `LEAVE` | 2 (0x02) |  |  |
+| Enumerator | Value  | Comment |
+| --------- | -------- | ------- |
+| `INVITE` | 0 (0x00) |  |
+| `LEAVE` | 2 (0x02) |  |
 
 Used in:
 * [SMSG_PARTY_COMMAND_RESULT](smsg_party_command_result.md)

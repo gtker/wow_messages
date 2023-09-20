@@ -24,10 +24,10 @@ CMSG have a header of 6 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x06 | 2 / - | [Faction](faction.md) | faction |  |  |
-| 0x08 | 1 / - | [FactionFlag](factionflag.md) | flags |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x06 | 2 / - | [Faction](faction.md) | faction |  |
+| 0x08 | 1 / - | [FactionFlag](factionflag.md) | flags |  |
 
 ## Client Version 2.4.3
 
@@ -53,10 +53,10 @@ CMSG have a header of 6 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x06 | 2 / - | [Faction](faction.md) | faction |  |  |
-| 0x08 | 1 / - | [FactionFlag](factionflag.md) | flags |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x06 | 2 / - | [Faction](faction.md) | faction |  |
+| 0x08 | 1 / - | [FactionFlag](factionflag.md) | flags |  |
 
 ## Client Version 3.3.5
 
@@ -82,8 +82,8 @@ CMSG have a header of 6 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x06 | 2 / - | [Faction](faction.md) | faction |  |  |
-| 0x08 | 1 / - | [FactionFlag](factionflag.md) | flags |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x06 | 2 / - | [Faction](faction.md) | faction |  |
+| 0x08 | 1 / - | [FactionFlag](factionflag.md) | flags |  |
 

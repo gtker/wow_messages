@@ -20,15 +20,15 @@ enum PageTextMaterial : u8 {
 ### Type
 The basic type is `u8`, a 1 byte (8 bit) integer.
 ### Enumerators
-| Enumerator | Value  | Description | Comment |
-| --------- | -------- | ----------- | ------- |
-| `NONE` | 0 (0x00) |  |  |
-| `PARCHMENT` | 1 (0x01) |  |  |
-| `STONE` | 2 (0x02) |  |  |
-| `MARBLE` | 3 (0x03) |  |  |
-| `SILVER` | 4 (0x04) |  |  |
-| `BRONZE` | 5 (0x05) |  |  |
-| `VALENTINE` | 6 (0x06) |  |  |
+| Enumerator | Value  | Comment |
+| --------- | -------- | ------- |
+| `NONE` | 0 (0x00) |  |
+| `PARCHMENT` | 1 (0x01) |  |
+| `STONE` | 2 (0x02) |  |
+| `MARBLE` | 3 (0x03) |  |
+| `SILVER` | 4 (0x04) |  |
+| `BRONZE` | 5 (0x05) |  |
+| `VALENTINE` | 6 (0x06) |  |
 
 Used in:
 * [SMSG_ITEM_QUERY_SINGLE_RESPONSE](smsg_item_query_single_response.md)
@@ -54,16 +54,16 @@ enum PageTextMaterial : u8 {
 ### Type
 The basic type is `u8`, a 1 byte (8 bit) integer.
 ### Enumerators
-| Enumerator | Value  | Description | Comment |
-| --------- | -------- | ----------- | ------- |
-| `NONE` | 0 (0x00) |  |  |
-| `PARCHMENT` | 1 (0x01) |  |  |
-| `STONE` | 2 (0x02) |  |  |
-| `MARBLE` | 3 (0x03) |  |  |
-| `SILVER` | 4 (0x04) |  |  |
-| `BRONZE` | 5 (0x05) |  |  |
-| `VALENTINE` | 6 (0x06) |  |  |
-| `ILLIDAN` | 7 (0x07) |  |  |
+| Enumerator | Value  | Comment |
+| --------- | -------- | ------- |
+| `NONE` | 0 (0x00) |  |
+| `PARCHMENT` | 1 (0x01) |  |
+| `STONE` | 2 (0x02) |  |
+| `MARBLE` | 3 (0x03) |  |
+| `SILVER` | 4 (0x04) |  |
+| `BRONZE` | 5 (0x05) |  |
+| `VALENTINE` | 6 (0x06) |  |
+| `ILLIDAN` | 7 (0x07) |  |
 
 Used in:
 * [SMSG_ITEM_QUERY_SINGLE_RESPONSE](smsg_item_query_single_response.md)

@@ -15,10 +15,10 @@ enum DispelMethod : u8 {
 ### Type
 The basic type is `u8`, a 1 byte (8 bit) integer.
 ### Enumerators
-| Enumerator | Value  | Description | Comment |
-| --------- | -------- | ----------- | ------- |
-| `DISPELLED` | 0 (0x00) |  |  |
-| `CLEANSED` | 1 (0x01) |  |  |
+| Enumerator | Value  | Comment |
+| --------- | -------- | ------- |
+| `DISPELLED` | 0 (0x00) |  |
+| `CLEANSED` | 1 (0x01) |  |
 
 Used in:
 * [DispelledSpell](dispelledspell.md)

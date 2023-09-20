@@ -32,21 +32,21 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | 8 / Little | u64 | bank_balance |  |  |
-| 0x0C | 1 / - | u8 | tab_id |  |  |
-| 0x0D | 4 / Little | u32 | amount_of_allowed_item_withdraws |  |  |
-| 0x11 | 1 / - | [GuildBankTabResult](guildbanktabresult.md) | tab_result |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x04 | 8 / Little | u64 | bank_balance |  |
+| 0x0C | 1 / - | u8 | tab_id |  |
+| 0x0D | 4 / Little | u32 | amount_of_allowed_item_withdraws |  |
+| 0x11 | 1 / - | [GuildBankTabResult](guildbanktabresult.md) | tab_result |  |
 
 If tab_result is equal to `PRESENT`:
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x12 | 1 / - | u8 | amount_of_bank_tabs |  |  |
-| 0x13 | ? / - | [GuildBankTab](guildbanktab.md)[amount_of_bank_tabs] | tabs |  |  |
-| - | 1 / - | u8 | amount_of_slot_updates |  |  |
-| - | ? / - | [GuildBankSlot](guildbankslot.md)[amount_of_slot_updates] | slot_updates |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x12 | 1 / - | u8 | amount_of_bank_tabs |  |
+| 0x13 | ? / - | [GuildBankTab](guildbanktab.md)[amount_of_bank_tabs] | tabs |  |
+| - | 1 / - | u8 | amount_of_slot_updates |  |
+| - | ? / - | [GuildBankSlot](guildbankslot.md)[amount_of_slot_updates] | slot_updates |  |
 
 ## Client Version 3.3.5
 
@@ -83,25 +83,25 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | 8 / Little | u64 | bank_balance |  |  |
-| - | 1 / - | u8 | tab_id |  |  |
-| - | 4 / Little | u32 | amount_of_allowed_item_withdraws |  |  |
-| - | 1 / - | [GuildBankTabResult](guildbanktabresult.md) | tab_result |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| - | 8 / Little | u64 | bank_balance |  |
+| - | 1 / - | u8 | tab_id |  |
+| - | 4 / Little | u32 | amount_of_allowed_item_withdraws |  |
+| - | 1 / - | [GuildBankTabResult](guildbanktabresult.md) | tab_result |  |
 
 If tab_result is equal to `PRESENT`:
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | 1 / - | u8 | amount_of_bank_tabs |  |  |
-| - | ? / - | [GuildBankTab](guildbanktab.md)[amount_of_bank_tabs] | tabs |  |  |
-| - | 1 / - | [GuildBankContentResult](guildbankcontentresult.md) | content_result |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| - | 1 / - | u8 | amount_of_bank_tabs |  |
+| - | ? / - | [GuildBankTab](guildbanktab.md)[amount_of_bank_tabs] | tabs |  |
+| - | 1 / - | [GuildBankContentResult](guildbankcontentresult.md) | content_result |  |
 
 If content_result is equal to `PRESENT`:
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | 1 / - | u8 | amount_of_slot_updates |  |  |
-| - | ? / - | [GuildBankSlot](guildbankslot.md)[amount_of_slot_updates] | slot_updates |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| - | 1 / - | u8 | amount_of_slot_updates |  |
+| - | ? / - | [GuildBankSlot](guildbankslot.md)[amount_of_slot_updates] | slot_updates |  |
 

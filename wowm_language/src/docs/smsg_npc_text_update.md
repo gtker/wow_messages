@@ -24,10 +24,10 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | 4 / Little | u32 | text_id |  |  |
-| 0x08 | ? / - | [NpcTextUpdate](npctextupdate.md)[8] | texts |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x04 | 4 / Little | u32 | text_id |  |
+| 0x08 | ? / - | [NpcTextUpdate](npctextupdate.md)[8] | texts |  |
 
 ## Client Version 2.4.3
 
@@ -53,10 +53,10 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | 4 / Little | u32 | text_id |  |  |
-| 0x08 | ? / - | [NpcTextUpdate](npctextupdate.md)[8] | texts |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x04 | 4 / Little | u32 | text_id |  |
+| 0x08 | ? / - | [NpcTextUpdate](npctextupdate.md)[8] | texts |  |
 
 ## Client Version 3
 
@@ -82,8 +82,8 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | 4 / Little | u32 | text_id |  |  |
-| - | ? / - | [NpcTextUpdate](npctextupdate.md)[8] | texts |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| - | 4 / Little | u32 | text_id |  |
+| - | ? / - | [NpcTextUpdate](npctextupdate.md)[8] | texts |  |
 

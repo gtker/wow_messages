@@ -42,26 +42,26 @@ CMSG have a header of 6 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x06 | 8 / Little | [Guid](../types/packed-guid.md) | npc |  |  |
-| 0x0E | 4 / Little | u32 | unknown1 |  |  |
-| 0x12 | 8 / Little | [Guid](../types/packed-guid.md) | unknown2 |  |  |
-| 0x1A | - / - | CString | name |  |  |
-| - | 4 / Little | u32 | unknown3 |  |  |
-| - | 4 / Little | u32 | unknown4 |  |  |
-| - | 4 / Little | u32 | unknown5 |  |  |
-| - | 4 / Little | u32 | unknown6 |  |  |
-| - | 4 / Little | u32 | unknown7 |  |  |
-| - | 4 / Little | u32 | unknown8 |  |  |
-| - | 4 / Little | u32 | unknown9 |  |  |
-| - | 4 / Little | u32 | unknown10 |  |  |
-| - | 4 / Little | u32 | unknown11 |  |  |
-| - | 4 / Little | u32 | unknown12 |  |  |
-| - | 2 / Little | u16 | unknown13 |  |  |
-| - | 1 / - | u8 | unknown14 |  |  |
-| - | 4 / Little | u32 | index |  | cmangos/vmangos/mangoszero: Named but never used |
-| - | 4 / Little | u32 | unknown15 |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x06 | 8 / Little | [Guid](../types/packed-guid.md) | npc |  |
+| 0x0E | 4 / Little | u32 | unknown1 |  |
+| 0x12 | 8 / Little | [Guid](../types/packed-guid.md) | unknown2 |  |
+| 0x1A | - / - | CString | name |  |
+| - | 4 / Little | u32 | unknown3 |  |
+| - | 4 / Little | u32 | unknown4 |  |
+| - | 4 / Little | u32 | unknown5 |  |
+| - | 4 / Little | u32 | unknown6 |  |
+| - | 4 / Little | u32 | unknown7 |  |
+| - | 4 / Little | u32 | unknown8 |  |
+| - | 4 / Little | u32 | unknown9 |  |
+| - | 4 / Little | u32 | unknown10 |  |
+| - | 4 / Little | u32 | unknown11 |  |
+| - | 4 / Little | u32 | unknown12 |  |
+| - | 2 / Little | u16 | unknown13 |  |
+| - | 1 / - | u8 | unknown14 |  |
+| - | 4 / Little | u32 | index | cmangos/vmangos/mangoszero: Named but never used |
+| - | 4 / Little | u32 | unknown15 |  |
 
 ## Client Version 3.3.5
 
@@ -106,25 +106,25 @@ CMSG have a header of 6 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x06 | 8 / Little | [Guid](../types/packed-guid.md) | npc |  |  |
-| 0x0E | 4 / Little | u32 | unknown1 |  |  |
-| 0x12 | 8 / Little | [Guid](../types/packed-guid.md) | unknown2 |  |  |
-| 0x1A | - / - | CString | name |  |  |
-| - | - / - | CString | unknown3 |  |  |
-| - | 4 / Little | u32 | unknown4 |  |  |
-| - | 4 / Little | u32 | unknown5 |  |  |
-| - | 4 / Little | u32 | unknown6 |  |  |
-| - | 4 / Little | u32 | unknown7 |  |  |
-| - | 4 / Little | u32 | unknown8 |  |  |
-| - | 4 / Little | u32 | unknown9 |  |  |
-| - | 4 / Little | u32 | unknown10 |  |  |
-| - | 2 / Little | u16 | unknown11 |  |  |
-| - | 4 / Little | u32 | unknown12 |  |  |
-| - | 4 / Little | u32 | unknown13 |  |  |
-| - | 4 / Little | u32 | unknown14 |  |  |
-| - | ? / - | CString[10] | unknown15 |  |  |
-| - | 4 / Little | u32 | index |  |  |
-| - | 4 / Little | u32 | unknown16 |  |  |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x06 | 8 / Little | [Guid](../types/packed-guid.md) | npc |  |
+| 0x0E | 4 / Little | u32 | unknown1 |  |
+| 0x12 | 8 / Little | [Guid](../types/packed-guid.md) | unknown2 |  |
+| 0x1A | - / - | CString | name |  |
+| - | - / - | CString | unknown3 |  |
+| - | 4 / Little | u32 | unknown4 |  |
+| - | 4 / Little | u32 | unknown5 |  |
+| - | 4 / Little | u32 | unknown6 |  |
+| - | 4 / Little | u32 | unknown7 |  |
+| - | 4 / Little | u32 | unknown8 |  |
+| - | 4 / Little | u32 | unknown9 |  |
+| - | 4 / Little | u32 | unknown10 |  |
+| - | 2 / Little | u16 | unknown11 |  |
+| - | 4 / Little | u32 | unknown12 |  |
+| - | 4 / Little | u32 | unknown13 |  |
+| - | 4 / Little | u32 | unknown14 |  |
+| - | ? / - | CString[10] | unknown15 |  |
+| - | 4 / Little | u32 | index |  |
+| - | 4 / Little | u32 | unknown16 |  |
 

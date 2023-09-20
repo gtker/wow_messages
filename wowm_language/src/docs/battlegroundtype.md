@@ -22,17 +22,17 @@ enum BattlegroundType : u32 {
 ### Type
 The basic type is `u32`, a 4 byte (32 bit) little endian integer.
 ### Enumerators
-| Enumerator | Value  | Description | Comment |
-| --------- | -------- | ----------- | ------- |
-| `NONE` | 0 (0x00) |  |  |
-| `ALTERAC_VALLEY` | 1 (0x01) |  |  |
-| `WARSONG_GULCH` | 2 (0x02) |  |  |
-| `ARATHI_BASIN` | 3 (0x03) |  |  |
-| `NETHERSTORM` | 4 (0x04) |  |  |
-| `BLADES_EDGE_ARENA` | 5 (0x05) |  |  |
-| `ARENA` | 6 (0x06) |  |  |
-| `EYE_OF_THE_STORM` | 7 (0x07) |  |  |
-| `RUINS_OF_LORDAERON` | 8 (0x08) |  |  |
+| Enumerator | Value  | Comment |
+| --------- | -------- | ------- |
+| `NONE` | 0 (0x00) |  |
+| `ALTERAC_VALLEY` | 1 (0x01) |  |
+| `WARSONG_GULCH` | 2 (0x02) |  |
+| `ARATHI_BASIN` | 3 (0x03) |  |
+| `NETHERSTORM` | 4 (0x04) |  |
+| `BLADES_EDGE_ARENA` | 5 (0x05) |  |
+| `ARENA` | 6 (0x06) |  |
+| `EYE_OF_THE_STORM` | 7 (0x07) |  |
+| `RUINS_OF_LORDAERON` | 8 (0x08) |  |
 
 Used in:
 * [SMSG_BATTLEFIELD_LIST](smsg_battlefield_list.md)
@@ -65,22 +65,22 @@ enum BattlegroundType : u32 {
 ### Type
 The basic type is `u32`, a 4 byte (32 bit) little endian integer.
 ### Enumerators
-| Enumerator | Value  | Description | Comment |
-| --------- | -------- | ----------- | ------- |
-| `NONE` | 0 (0x00) |  |  |
-| `ALTERAC_VALLEY` | 1 (0x01) |  |  |
-| `WARSONG_GULCH` | 2 (0x02) |  |  |
-| `ARATHI_BASIN` | 3 (0x03) |  |  |
-| `NAGRAND_ARENA` | 4 (0x04) |  |  |
-| `BLADES_EDGE_ARENA` | 5 (0x05) |  |  |
-| `ARENA` | 6 (0x06) |  |  |
-| `EYE_OF_THE_STORM` | 7 (0x07) |  |  |
-| `RUINS_OF_LORDAERON` | 8 (0x08) |  |  |
-| `STRAND_OF_THE_ANCIENT` | 9 (0x09) |  |  |
-| `DALARAN_SEWERS` | 10 (0x0A) |  |  |
-| `RING_OF_VALOR` | 11 (0x0B) |  |  |
-| `ISLE_OF_CONQUEST` | 30 (0x1E) |  |  |
-| `RANDOM` | 32 (0x20) |  |  |
+| Enumerator | Value  | Comment |
+| --------- | -------- | ------- |
+| `NONE` | 0 (0x00) |  |
+| `ALTERAC_VALLEY` | 1 (0x01) |  |
+| `WARSONG_GULCH` | 2 (0x02) |  |
+| `ARATHI_BASIN` | 3 (0x03) |  |
+| `NAGRAND_ARENA` | 4 (0x04) |  |
+| `BLADES_EDGE_ARENA` | 5 (0x05) |  |
+| `ARENA` | 6 (0x06) |  |
+| `EYE_OF_THE_STORM` | 7 (0x07) |  |
+| `RUINS_OF_LORDAERON` | 8 (0x08) |  |
+| `STRAND_OF_THE_ANCIENT` | 9 (0x09) |  |
+| `DALARAN_SEWERS` | 10 (0x0A) |  |
+| `RING_OF_VALOR` | 11 (0x0B) |  |
+| `ISLE_OF_CONQUEST` | 30 (0x1E) |  |
+| `RANDOM` | 32 (0x20) |  |
 
 Used in:
 * [CMSG_BATTLEFIELD_LIST](cmsg_battlefield_list.md)

@@ -23,7 +23,7 @@ SMSG have a header of 4 bytes.
 
 ### Body
 
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | 4 / Little | u32 | rune |  | Emus bitshifts 1 by the rune index instead of directly sending the index.<br/>mangostwo: mask (0x00-0x3F probably) |
+| Offset | Size / Endianness | Type | Name | Comment |
+| ------ | ----------------- | ---- | ---- | ------- |
+| 0x04 | 4 / Little | u32 | rune | Emus bitshifts 1 by the rune index instead of directly sending the index.<br/>mangostwo: mask (0x00-0x3F probably) |
 
