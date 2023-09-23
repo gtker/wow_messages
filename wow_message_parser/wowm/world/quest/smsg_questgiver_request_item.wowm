@@ -13,6 +13,7 @@ enum QuestCompletable : u32 {
     versions = "1 2 3";
 }
 
+/// mangoszero/vmangos: Quests that don't require items use the `RequestItemsText` field to store the text that is shown when you talk to the quest giver while the quest is incomplete. Therefore the text should not be shown for them when the quest is complete. For quests that do require items, it is self explanatory.
 smsg SMSG_QUESTGIVER_REQUEST_ITEMS = 0x018B {
     Guid npc;
     u32 quest_id;
@@ -24,21 +25,18 @@ smsg SMSG_QUESTGIVER_REQUEST_ITEMS = 0x018B {
     Gold required_money;
     u32 amount_of_required_items;
     QuestItemRequirement[amount_of_required_items] required_items;
-    u32 unknown1 {
-        comment = "cmangos/vmangos/mangoszero: All emulators set to 0x02";
-    }
+    /// cmangos/vmangos/mangoszero: All emulators set to 0x02
+    u32 unknown1;
     QuestCompletable completable;
-    u32 flags2 {
-        comment = "cmangos/vmangos/mangoszero: set to 0x04";
-    }
-    u32 flags3 {
-        comment = "cmangos/vmangos/mangoszero: set to 0x08";
-    }
+    /// cmangos/vmangos/mangoszero: set to 0x04
+    u32 flags2;
+    /// cmangos/vmangos/mangoszero: set to 0x08
+    u32 flags3;
 } {
-    comment = "mangoszero/vmangos: Quests that don't require items use the `RequestItemsText` field to store the text that is shown when you talk to the quest giver while the quest is incomplete. Therefore the text should not be shown for them when the quest is complete. For quests that do require items, it is self explanatory.";
     versions = "1";
 }
 
+/// mangoszero/vmangos: Quests that don't require items use the `RequestItemsText` field to store the text that is shown when you talk to the quest giver while the quest is incomplete. Therefore the text should not be shown for them when the quest is complete. For quests that do require items, it is self explanatory.
 smsg SMSG_QUESTGIVER_REQUEST_ITEMS = 0x018B {
     Guid npc;
     u32 quest_id;
@@ -52,20 +50,17 @@ smsg SMSG_QUESTGIVER_REQUEST_ITEMS = 0x018B {
     u32 amount_of_required_items;
     QuestItemRequirement[amount_of_required_items] required_items;
     QuestCompletable completable;
-    u32 flags1 {
-        comment = "cmangos/vmangos/mangoszero: set to 0x04";
-    }
-    u32 flags2 {
-        comment = "cmangos/vmangos/mangoszero: set to 0x08";
-    }
-    u32 flags3 {
-        comment = "cmangos/vmangos/mangoszero: set to 0x10";
-    }
+    /// cmangos/vmangos/mangoszero: set to 0x04
+    u32 flags1;
+    /// cmangos/vmangos/mangoszero: set to 0x08
+    u32 flags2;
+    /// cmangos/vmangos/mangoszero: set to 0x10
+    u32 flags3;
 } {
-    comment = "mangoszero/vmangos: Quests that don't require items use the `RequestItemsText` field to store the text that is shown when you talk to the quest giver while the quest is incomplete. Therefore the text should not be shown for them when the quest is complete. For quests that do require items, it is self explanatory.";
     versions = "2.4.3";
 }
 
+/// mangoszero/vmangos: Quests that don't require items use the `RequestItemsText` field to store the text that is shown when you talk to the quest giver while the quest is incomplete. Therefore the text should not be shown for them when the quest is complete. For quests that do require items, it is self explanatory.
 smsg SMSG_QUESTGIVER_REQUEST_ITEMS = 0x018B {
     Guid npc;
     u32 quest_id;
@@ -74,24 +69,19 @@ smsg SMSG_QUESTGIVER_REQUEST_ITEMS = 0x018B {
     u32 emote_delay;
     u32 emote;
     Bool32 auto_finish;
-    u32 flags1 {
-        comment = "mangostwo: 3.3.3 questFlags";
-    }
+    /// mangostwo: 3.3.3 questFlags
+    u32 flags1;
     u32 suggested_players;
     Gold required_money;
     u32 amount_of_required_items;
     QuestItemRequirement[amount_of_required_items] required_items;
     QuestCompletable completable;
-    u32 flags2 {
-        comment = "mangostwo: set to 0x04";
-    }
-    u32 flags3 {
-        comment = "mangostwo: set to 0x08";
-    }
-    u32 flags4 {
-        comment = "mangostwo: set to 0x10";
-    }
+    /// mangostwo: set to 0x04
+    u32 flags2;
+    /// mangostwo: set to 0x08
+    u32 flags3;
+    /// mangostwo: set to 0x10
+    u32 flags4;
 } {
-    comment = "mangoszero/vmangos: Quests that don't require items use the `RequestItemsText` field to store the text that is shown when you talk to the quest giver while the quest is incomplete. Therefore the text should not be shown for them when the quest is complete. For quests that do require items, it is self explanatory.";
     versions = "3.3.5";
 }

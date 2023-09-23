@@ -1,11 +1,11 @@
 
+/// Message to the client that is has successfully logged into the world and that it should load the map and coordinates.
+/// The positions and orientations do not matter since they can be overwritten in the [SMSG_UPDATE_OBJECT], but the map determines which map the client loads and this is not changeable in [SMSG_UPDATE_OBJECT].
 smsg SMSG_LOGIN_VERIFY_WORLD = 0x236 {
     Map map;
     Vector3d position;
     f32 orientation;
 } {
-    comment = "Message to the client that is has successfully logged into the world and that it should load the map and coordinates.";
-    comment = "The positions and orientations do not matter since they can be overwritten in the [SMSG_UPDATE_OBJECT], but the map determines which map the client loads and this is not changeable in [SMSG_UPDATE_OBJECT].";
     paste_versions = "1.12 2.4.3 3.3.5";
 }
 

@@ -4,9 +4,8 @@ enum TimerType : u32 {
     FATIGUE = 0;
     BREATH = 1;
     FEIGN_DEATH = 2;
-    ENVIRONMENTAL = 3 {
-        comment = "Might be a mangos only thing.";
-    }
+    /// Might be a mangos only thing.
+    ENVIRONMENTAL = 3;
 } {
     versions = "1 2 3";
 }
@@ -34,9 +33,8 @@ struct SpellMiss {
 }
 
 enum SpellSchool : u8 {
-    NORMAL = 0 {
-        comment = "Physical, Armor";
-    }
+    /// Physical, Armor
+    NORMAL = 0;
     HOLY = 1;
     FIRE = 2;
     NATURE = 3;
@@ -50,19 +48,16 @@ enum SpellSchool : u8 {
 
 flag CastFlags : u16 {
     NONE = 0x00000000;
-    HIDDEN_COMBATLOG = 0x00000001 {
-        comment = "mangoszero/cmangos/vmangos: hide in combat log?";
-    }
+    /// mangoszero/cmangos/vmangos: hide in combat log?
+    HIDDEN_COMBATLOG = 0x00000001;
     UNKNOWN2 = 0x00000002;
     UNKNOWN3 = 0x00000004;
     UNKNOWN4 = 0x00000008;
     UNKNOWN5 = 0x00000010;
-    AMMO = 0x00000020 {
-        comment = "cmangos/vmangos/mangoszero: Projectiles visual";
-    }
-    UNKNOWN7 = 0x00000040 {
-        comment = "cmangos/vmangos/mangoszero: !0x41 mask used to call `CGTradeSkillInfo::DoRecast`";
-    }
+    /// cmangos/vmangos/mangoszero: Projectiles visual
+    AMMO = 0x00000020;
+    /// cmangos/vmangos/mangoszero: !0x41 mask used to call `CGTradeSkillInfo::DoRecast`
+    UNKNOWN7 = 0x00000040;
     UNKNOWN8 = 0x00000080;
     UNKNOWN9 = 0x00000100;
 } {

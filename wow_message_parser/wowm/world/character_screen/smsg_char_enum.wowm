@@ -40,16 +40,16 @@ struct Character {
     u8 first_bag_inventory_id = 0;
 }
 
+/// Response to [CMSG_CHAR_ENUM].
 smsg SMSG_CHAR_ENUM = 0x03B {
+    /// Client can not handle values larger than 10
     u8 amount_of_characters {
         valid_range = "0 10";
-        comment = "Client can not handle values larger than 10";
     }
     Character[amount_of_characters] characters;
-} {
-    comment = "Response to [CMSG_CHAR_ENUM].";
 }
 
+/// Empty character list.
 test SMSG_CHAR_ENUM {
     amount_of_characters = 0;
     characters = [];
@@ -57,6 +57,4 @@ test SMSG_CHAR_ENUM {
     0x00, 0x03, /* size */
     0x3B, 0x00, /* opcode */
     0x00, /* amount_of_characters */
-] {
-    comment = "Empty character list.";
-}
+]

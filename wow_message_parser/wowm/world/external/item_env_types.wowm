@@ -1,3 +1,4 @@
+/// Used in `SheatheSoundLookups.dbc`.
 enum ItemEnvTypes : u8 {
     SHIELD = 0;
     METAL_WEAPON = 1;
@@ -5,5 +6,4 @@ enum ItemEnvTypes : u8 {
 } {
     versions = "1.12";
     non_network_type = "true";
-    comment = "Used in `SheatheSoundLookups.dbc`.";
 }

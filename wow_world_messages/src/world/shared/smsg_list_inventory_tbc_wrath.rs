@@ -6,7 +6,7 @@ use crate::shared::list_inventory_item_tbc_wrath::ListInventoryItem;
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// if `amount_of_items` is 0 it is supposedly followed by a single u8 with 0 to say that vendor has no items.
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/item/smsg_list_inventory.wowm:41`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/item/smsg_list_inventory.wowm#L41):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/item/smsg_list_inventory.wowm:39`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/item/smsg_list_inventory.wowm#L39):
 /// ```text
 /// smsg SMSG_LIST_INVENTORY = 0x019F {
 ///     Guid vendor;

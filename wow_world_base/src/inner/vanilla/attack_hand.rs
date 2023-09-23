@@ -2,7 +2,7 @@
 ///
 /// This type is not sent over the network, but is used in the game in another way.
 ///
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/external/attack_hand.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/external/attack_hand.wowm#L1):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/external/attack_hand.wowm:2`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/external/attack_hand.wowm#L2):
 /// ```text
 /// enum AttackHand : u8 {
 ///     MAIN_HAND = 0;

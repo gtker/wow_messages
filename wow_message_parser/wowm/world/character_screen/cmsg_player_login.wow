@@ -1,11 +1,10 @@
 #tag_all versions "1 2 3";
 
+/// Command to log into the specified character.
+/// This is sent after the client has been authenticated and served the character list with [SMSG_CHAR_ENUM].
+/// If the player receives a [SMSG_CHARACTER_LOGIN_FAILED] it will return to the character screen and send a [CMSG_CHAR_ENUM].
 cmsg CMSG_PLAYER_LOGIN = 0x3D {
     Guid guid;
-} {
-    comment = "Command to log into the specified character.";
-    comment = "This is sent after the client has been authenticated and served the character list with [SMSG_CHAR_ENUM].";
-    comment = "If the player receives a [SMSG_CHARACTER_LOGIN_FAILED] it will return to the character screen and send a [CMSG_CHAR_ENUM].";
 }
 
 test CMSG_PLAYER_LOGIN {

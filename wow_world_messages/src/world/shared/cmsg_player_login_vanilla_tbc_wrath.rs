@@ -6,7 +6,7 @@ use crate::Guid;
 /// Command to log into the specified character.
 /// This is sent after the client has been authenticated and served the character list with [`SMSG_CHAR_ENUM`](crate::vanilla::SMSG_CHAR_ENUM).
 /// If the player receives a [`SMSG_CHARACTER_LOGIN_FAILED`](crate::vanilla::SMSG_CHARACTER_LOGIN_FAILED) it will return to the character screen and send a [`CMSG_CHAR_ENUM`](crate::vanilla::CMSG_CHAR_ENUM).
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/character_screen/cmsg_player_login.wow:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/character_screen/cmsg_player_login.wow#L3):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/character_screen/cmsg_player_login.wow:6`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/character_screen/cmsg_player_login.wow#L6):
 /// ```text
 /// cmsg CMSG_PLAYER_LOGIN = 0x003D {
 ///     Guid guid;
@@ -92,7 +92,7 @@ mod test_vanilla {
 
     }
 
-    // Generated from `wow_message_parser/wowm/world/character_screen/cmsg_player_login.wow` line 11.
+    // Generated from `wow_message_parser/wowm/world/character_screen/cmsg_player_login.wow` line 10.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn cmsg_player_login0() {
@@ -112,7 +112,7 @@ mod test_vanilla {
         assert_eq!(dest, RAW0);
     }
 
-    // Generated from `wow_message_parser/wowm/world/character_screen/cmsg_player_login.wow` line 11.
+    // Generated from `wow_message_parser/wowm/world/character_screen/cmsg_player_login.wow` line 10.
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_cmsg_player_login0() {
@@ -132,7 +132,7 @@ mod test_vanilla {
         assert_eq!(dest, RAW0);
     }
 
-    // Generated from `wow_message_parser/wowm/world/character_screen/cmsg_player_login.wow` line 11.
+    // Generated from `wow_message_parser/wowm/world/character_screen/cmsg_player_login.wow` line 10.
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_cmsg_player_login0() {
@@ -179,7 +179,7 @@ mod test_tbc {
 
     }
 
-    // Generated from `wow_message_parser/wowm/world/character_screen/cmsg_player_login.wow` line 11.
+    // Generated from `wow_message_parser/wowm/world/character_screen/cmsg_player_login.wow` line 10.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn cmsg_player_login0() {
@@ -199,7 +199,7 @@ mod test_tbc {
         assert_eq!(dest, RAW0);
     }
 
-    // Generated from `wow_message_parser/wowm/world/character_screen/cmsg_player_login.wow` line 11.
+    // Generated from `wow_message_parser/wowm/world/character_screen/cmsg_player_login.wow` line 10.
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_cmsg_player_login0() {
@@ -219,7 +219,7 @@ mod test_tbc {
         assert_eq!(dest, RAW0);
     }
 
-    // Generated from `wow_message_parser/wowm/world/character_screen/cmsg_player_login.wow` line 11.
+    // Generated from `wow_message_parser/wowm/world/character_screen/cmsg_player_login.wow` line 10.
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_cmsg_player_login0() {
@@ -266,7 +266,7 @@ mod test_wrath {
 
     }
 
-    // Generated from `wow_message_parser/wowm/world/character_screen/cmsg_player_login.wow` line 11.
+    // Generated from `wow_message_parser/wowm/world/character_screen/cmsg_player_login.wow` line 10.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn cmsg_player_login0() {
@@ -286,7 +286,7 @@ mod test_wrath {
         assert_eq!(dest, RAW0);
     }
 
-    // Generated from `wow_message_parser/wowm/world/character_screen/cmsg_player_login.wow` line 11.
+    // Generated from `wow_message_parser/wowm/world/character_screen/cmsg_player_login.wow` line 10.
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_cmsg_player_login0() {
@@ -306,7 +306,7 @@ mod test_wrath {
         assert_eq!(dest, RAW0);
     }
 
-    // Generated from `wow_message_parser/wowm/world/character_screen/cmsg_player_login.wow` line 11.
+    // Generated from `wow_message_parser/wowm/world/character_screen/cmsg_player_login.wow` line 10.
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_cmsg_player_login0() {

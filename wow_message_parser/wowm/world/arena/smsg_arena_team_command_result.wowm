@@ -6,9 +6,8 @@ enum ArenaTeamCommandError : u32 {
     ALREADY_INVITED_TO_ARENA_TEAM_S     = 0x05;
     ARENA_TEAM_NAME_INVALID             = 0x06;
     ARENA_TEAM_NAME_EXISTS_S            = 0x07;
-    ARENA_TEAM_LEADER_LEAVE_S           = 0x08 {
-        comment = "This value also has the name `ARENA_TEAM_PERMISSIONS`.";
-    }
+    /// This value also has the name `ARENA_TEAM_PERMISSIONS`.
+    ARENA_TEAM_LEADER_LEAVE_S           = 0x08;
     ARENA_TEAM_PLAYER_NOT_IN_TEAM       = 0x09;
     ARENA_TEAM_PLAYER_NOT_IN_TEAM_SS    = 0x0A;
     ARENA_TEAM_PLAYER_NOT_FOUND_S       = 0x0B;

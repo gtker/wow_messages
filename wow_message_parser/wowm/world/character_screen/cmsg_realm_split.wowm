@@ -1,8 +1,7 @@
 #tag_all versions "2.4.3 3";
 
 cmsg CMSG_REALM_SPLIT = 0x38C {
-    u32 realm_id {
-        comment = "Realm ID that was sent earlier by the Auth Server";
-        comment = "ArcEmu/TriniyCore/mangosthree send back in [SMSG_REALM_SPLIT].";
-    }
+    /// Realm ID that was sent earlier by the Auth Server
+    /// ArcEmu/TriniyCore/mangosthree send back in [SMSG_REALM_SPLIT].
+    u32 realm_id;
 }

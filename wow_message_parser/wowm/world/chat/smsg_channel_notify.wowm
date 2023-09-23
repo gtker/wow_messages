@@ -1,98 +1,67 @@
 enum ChatNotify : u8 {
-    JOINED_NOTICE = 0x00 {
-        comment = "%s joined channel.";
-    }
-    LEFT_NOTICE = 0x01 {
-        comment = "%s left channel.";
-    }
-    YOU_JOINED_NOTICE = 0x02 {
-        comment = "Joined Channel: %s -- You joined";
-    }
-    YOU_LEFT_NOTICE = 0x03 {
-        comment = "Left Channel: %s -- You left";
-    }
-    WRONG_PASSWORD_NOTICE = 0x04 {
-        comment = "Wrong password for %s.";
-    }
-    NOT_MEMBER_NOTICE = 0x05 {
-        comment = "Not on channel %s.";
-    }
-    NOT_MODERATOR_NOTICE = 0x06 {
-        comment = "Not a moderator of %s.";
-    }
-    PASSWORD_CHANGED_NOTICE = 0x07 {
-        comment = "%s Password changed by %s.";
-    }
-    OWNER_CHANGED_NOTICE = 0x08 {
-        comment = "%s Owner changed to %s.";
-    }
-    PLAYER_NOT_FOUND_NOTICE = 0x09 {
-        comment = "%s Player %s was not found.";
-    }
-    NOT_OWNER_NOTICE = 0x0A {
-        comment = "%s You are not the channel owner.";
-    }
-    CHANNEL_OWNER_NOTICE = 0x0B {
-        comment = "%s Channel owner is %s.";
-    }
+    /// %s joined channel.
+    JOINED_NOTICE = 0x00;
+    /// %s left channel.
+    LEFT_NOTICE = 0x01;
+    /// Joined Channel: %s -- You joined
+    YOU_JOINED_NOTICE = 0x02;
+    /// Left Channel: %s -- You left
+    YOU_LEFT_NOTICE = 0x03;
+    /// Wrong password for %s.
+    WRONG_PASSWORD_NOTICE = 0x04;
+    /// Not on channel %s.
+    NOT_MEMBER_NOTICE = 0x05;
+    /// Not a moderator of %s.
+    NOT_MODERATOR_NOTICE = 0x06;
+    /// %s Password changed by %s.
+    PASSWORD_CHANGED_NOTICE = 0x07;
+    /// %s Owner changed to %s.
+    OWNER_CHANGED_NOTICE = 0x08;
+    /// %s Player %s was not found.
+    PLAYER_NOT_FOUND_NOTICE = 0x09;
+    /// %s You are not the channel owner.
+    NOT_OWNER_NOTICE = 0x0A;
+    /// %s Channel owner is %s.
+    CHANNEL_OWNER_NOTICE = 0x0B;
     MODE_CHANGE_NOTICE = 0x0C;
-    ANNOUNCEMENTS_ON_NOTICE = 0x0D {
-        comment = "%s Channel announcements enabled by %s.";
-    }
-    ANNOUNCEMENTS_OFF_NOTICE = 0x0E {
-        comment = "%s Channel announcements disabled by %s.";
-    }
-    MODERATION_ON_NOTICE = 0x0F {
-        comment = "%s Channel moderation enabled by %s.";
-    }
-    MODERATION_OFF_NOTICE = 0x10 {
-        comment = "%s Channel moderation disabled by %s.";
-    }
-    MUTED_NOTICE = 0x11 {
-        comment = "%s You do not have permission to speak.";
-    }
-    PLAYER_KICKED_NOTICE = 0x12 {
-        comment = "%s Player %s kicked by %s.";
-    }
-    BANNED_NOTICE = 0x13 {
-        comment = "%s You are banned from that channel.";
-    }
-    PLAYER_BANNED_NOTICE = 0x14 {
-        comment = "%s Player %s banned by %s.";
-    }
-    PLAYER_UNBANNED_NOTICE = 0x15 {
-        comment = "%s Player %s unbanned by %s.";
-    }
-    PLAYER_NOT_BANNED_NOTICE = 0x16 {
-        comment = "%s Player %s is not banned.";
-    }
-    PLAYER_ALREADY_MEMBER_NOTICE = 0x17 {
-        comment = "%s Player %s is already on the channel.";
-    }
-    INVITE_NOTICE = 0x18 {
-        comment = "%2$s has invited you to join the channel '%1$s'.";
-    }
-    INVITE_WRONG_FACTION_NOTICE = 0x19 {
-        comment = "Target is in the wrong alliance for %s.";
-    }
-    WRONG_FACTION_NOTICE = 0x1A {
-        comment = "Wrong alliance for %s.";
-    }
-    INVALID_NAME_NOTICE = 0x1B {
-        comment = "Invalid channel name";
-    }
-    NOT_MODERATED_NOTICE = 0x1C {
-        comment = "%s is not moderated";
-    }
-    PLAYER_INVITED_NOTICE = 0x1D {
-        comment = "%s You invited %s to join the channel";
-    }
-    PLAYER_INVITE_BANNED_NOTICE = 0x1E {
-        comment = "%s %s has been banned.";
-    }
-    THROTTLED_NOTICE = 0x1F {
-        comment = "%s The number of messages that can be sent to this channel is limited, please wait to send another message.";
-    }
+    /// %s Channel announcements enabled by %s.
+    ANNOUNCEMENTS_ON_NOTICE = 0x0D;
+    /// %s Channel announcements disabled by %s.
+    ANNOUNCEMENTS_OFF_NOTICE = 0x0E;
+    /// %s Channel moderation enabled by %s.
+    MODERATION_ON_NOTICE = 0x0F;
+    /// %s Channel moderation disabled by %s.
+    MODERATION_OFF_NOTICE = 0x10;
+    /// %s You do not have permission to speak.
+    MUTED_NOTICE = 0x11;
+    /// %s Player %s kicked by %s.
+    PLAYER_KICKED_NOTICE = 0x12;
+    /// %s You are banned from that channel.
+    BANNED_NOTICE = 0x13;
+    /// %s Player %s banned by %s.
+    PLAYER_BANNED_NOTICE = 0x14;
+    /// %s Player %s unbanned by %s.
+    PLAYER_UNBANNED_NOTICE = 0x15;
+    /// %s Player %s is not banned.
+    PLAYER_NOT_BANNED_NOTICE = 0x16;
+    /// %s Player %s is already on the channel.
+    PLAYER_ALREADY_MEMBER_NOTICE = 0x17;
+    /// %2$s has invited you to join the channel '%1$s'.
+    INVITE_NOTICE = 0x18;
+    /// Target is in the wrong alliance for %s.
+    INVITE_WRONG_FACTION_NOTICE = 0x19;
+    /// Wrong alliance for %s.
+    WRONG_FACTION_NOTICE = 0x1A;
+    /// Invalid channel name
+    INVALID_NAME_NOTICE = 0x1B;
+    /// %s is not moderated
+    NOT_MODERATED_NOTICE = 0x1C;
+    /// %s You invited %s to join the channel
+    PLAYER_INVITED_NOTICE = 0x1D;
+    /// %s %s has been banned.
+    PLAYER_INVITE_BANNED_NOTICE = 0x1E;
+    /// %s The number of messages that can be sent to this channel is limited, please wait to send another message.
+    THROTTLED_NOTICE = 0x1F;
 } {
     versions = "1.12";
 }
@@ -105,112 +74,77 @@ smsg SMSG_CHANNEL_NOTIFY = 0x0099 {
 }
 
 enum ChatNotify : u8 {
-    JOINED_NOTICE = 0x00 {
-        comment = "%s joined channel.";
-    }
-    LEFT_NOTICE = 0x01 {
-        comment = "%s left channel.";
-    }
-    YOU_JOINED_NOTICE = 0x02 {
-        comment = "Joined Channel: %s -- You joined";
-    }
-    YOU_LEFT_NOTICE = 0x03 {
-        comment = "Left Channel: %s -- You left";
-    }
-    WRONG_PASSWORD_NOTICE = 0x04 {
-        comment = "Wrong password for %s.";
-    }
-    NOT_MEMBER_NOTICE = 0x05 {
-        comment = "Not on channel %s.";
-    }
-    NOT_MODERATOR_NOTICE = 0x06 {
-        comment = "Not a moderator of %s.";
-    }
-    PASSWORD_CHANGED_NOTICE = 0x07 {
-        comment = "%s Password changed by %s.";
-    }
-    OWNER_CHANGED_NOTICE = 0x08 {
-        comment = "%s Owner changed to %s.";
-    }
-    PLAYER_NOT_FOUND_NOTICE = 0x09 {
-        comment = "%s Player %s was not found.";
-    }
-    NOT_OWNER_NOTICE = 0x0A {
-        comment = "%s You are not the channel owner.";
-    }
-    CHANNEL_OWNER_NOTICE = 0x0B {
-        comment = "%s Channel owner is %s.";
-    }
+    /// %s joined channel.
+    JOINED_NOTICE = 0x00;
+    /// %s left channel.
+    LEFT_NOTICE = 0x01;
+    /// Joined Channel: %s -- You joined
+    YOU_JOINED_NOTICE = 0x02;
+    /// Left Channel: %s -- You left
+    YOU_LEFT_NOTICE = 0x03;
+    /// Wrong password for %s.
+    WRONG_PASSWORD_NOTICE = 0x04;
+    /// Not on channel %s.
+    NOT_MEMBER_NOTICE = 0x05;
+    /// Not a moderator of %s.
+    NOT_MODERATOR_NOTICE = 0x06;
+    /// %s Password changed by %s.
+    PASSWORD_CHANGED_NOTICE = 0x07;
+    /// %s Owner changed to %s.
+    OWNER_CHANGED_NOTICE = 0x08;
+    /// %s Player %s was not found.
+    PLAYER_NOT_FOUND_NOTICE = 0x09;
+    /// %s You are not the channel owner.
+    NOT_OWNER_NOTICE = 0x0A;
+    /// %s Channel owner is %s.
+    CHANNEL_OWNER_NOTICE = 0x0B;
     MODE_CHANGE_NOTICE = 0x0C;
-    ANNOUNCEMENTS_ON_NOTICE = 0x0D {
-        comment = "%s Channel announcements enabled by %s.";
-    }
-    ANNOUNCEMENTS_OFF_NOTICE = 0x0E {
-        comment = "%s Channel announcements disabled by %s.";
-    }
-    MODERATION_ON_NOTICE = 0x0F {
-        comment = "%s Channel moderation enabled by %s.";
-    }
-    MODERATION_OFF_NOTICE = 0x10 {
-        comment = "%s Channel moderation disabled by %s.";
-    }
-    MUTED_NOTICE = 0x11 {
-        comment = "%s You do not have permission to speak.";
-    }
-    PLAYER_KICKED_NOTICE = 0x12 {
-        comment = "%s Player %s kicked by %s.";
-    }
-    BANNED_NOTICE = 0x13 {
-        comment = "%s You are banned from that channel.";
-    }
-    PLAYER_BANNED_NOTICE = 0x14 {
-        comment = "%s Player %s banned by %s.";
-    }
-    PLAYER_UNBANNED_NOTICE = 0x15 {
-        comment = "%s Player %s unbanned by %s.";
-    }
-    PLAYER_NOT_BANNED_NOTICE = 0x16 {
-        comment = "%s Player %s is not banned.";
-    }
-    PLAYER_ALREADY_MEMBER_NOTICE = 0x17 {
-        comment = "%s Player %s is already on the channel.";
-    }
-    INVITE_NOTICE = 0x18 {
-        comment = "%2$s has invited you to join the channel '%1$s'.";
-    }
-    INVITE_WRONG_FACTION_NOTICE = 0x19 {
-        comment = "Target is in the wrong alliance for %s.";
-    }
-    WRONG_FACTION_NOTICE = 0x1A {
-        comment = "Wrong alliance for %s.";
-    }
-    INVALID_NAME_NOTICE = 0x1B {
-        comment = "Invalid channel name";
-    }
-    NOT_MODERATED_NOTICE = 0x1C {
-        comment = "%s is not moderated";
-    }
-    PLAYER_INVITED_NOTICE = 0x1D {
-        comment = "%s You invited %s to join the channel";
-    }
-    PLAYER_INVITE_BANNED_NOTICE = 0x1E {
-        comment = "%s %s has been banned.";
-    }
-    THROTTLED_NOTICE = 0x1F {
-        comment = "%s The number of messages that can be sent to this channel is limited, please wait to send another message.";
-    }
-    NOT_IN_AREA_NOTICE = 0x20 {
-        comment = "%s You are not in the correct area for this channel. -- The user is trying to send a chat to a zone specific channel, and they're not physically in that zone.";
-    }
-    NOT_IN_LFG_NOTICE = 0x21 {
-        comment = "%s You must be queued in looking for group before joining this channel. -- The user must be in the looking for group system to join LFG chat channels.";
-    }
-    VOICE_ON_NOTICE = 0x22 {
-        comment = "%s Channel voice enabled by %s.";
-    }
-    VOICE_OFF_NOTICE = 0x23 {
-        comment = "%s Channel voice disabled by %s.";
-    }
+    /// %s Channel announcements enabled by %s.
+    ANNOUNCEMENTS_ON_NOTICE = 0x0D;
+    /// %s Channel announcements disabled by %s.
+    ANNOUNCEMENTS_OFF_NOTICE = 0x0E;
+    /// %s Channel moderation enabled by %s.
+    MODERATION_ON_NOTICE = 0x0F;
+    /// %s Channel moderation disabled by %s.
+    MODERATION_OFF_NOTICE = 0x10;
+    /// %s You do not have permission to speak.
+    MUTED_NOTICE = 0x11;
+    /// %s Player %s kicked by %s.
+    PLAYER_KICKED_NOTICE = 0x12;
+    /// %s You are banned from that channel.
+    BANNED_NOTICE = 0x13;
+    /// %s Player %s banned by %s.
+    PLAYER_BANNED_NOTICE = 0x14;
+    /// %s Player %s unbanned by %s.
+    PLAYER_UNBANNED_NOTICE = 0x15;
+    /// %s Player %s is not banned.
+    PLAYER_NOT_BANNED_NOTICE = 0x16;
+    /// %s Player %s is already on the channel.
+    PLAYER_ALREADY_MEMBER_NOTICE = 0x17;
+    /// %2$s has invited you to join the channel '%1$s'.
+    INVITE_NOTICE = 0x18;
+    /// Target is in the wrong alliance for %s.
+    INVITE_WRONG_FACTION_NOTICE = 0x19;
+    /// Wrong alliance for %s.
+    WRONG_FACTION_NOTICE = 0x1A;
+    /// Invalid channel name
+    INVALID_NAME_NOTICE = 0x1B;
+    /// %s is not moderated
+    NOT_MODERATED_NOTICE = 0x1C;
+    /// %s You invited %s to join the channel
+    PLAYER_INVITED_NOTICE = 0x1D;
+    /// %s %s has been banned.
+    PLAYER_INVITE_BANNED_NOTICE = 0x1E;
+    /// %s The number of messages that can be sent to this channel is limited, please wait to send another message.
+    THROTTLED_NOTICE = 0x1F;
+    /// %s You are not in the correct area for this channel. -- The user is trying to send a chat to a zone specific channel, and they're not physically in that zone.
+    NOT_IN_AREA_NOTICE = 0x20;
+    /// %s You must be queued in looking for group before joining this channel. -- The user must be in the looking for group system to join LFG chat channels.
+    NOT_IN_LFG_NOTICE = 0x21;
+    /// %s Channel voice enabled by %s.
+    VOICE_ON_NOTICE = 0x22;
+    /// %s Channel voice disabled by %s.
+    VOICE_OFF_NOTICE = 0x23;
 } {
     versions = "2.4.3 3";
 }

@@ -17,9 +17,8 @@ struct RaidInfo {
     Map map;
     u32 reset_time;
     u32 instance_id;
-    u32 index {
-        comment = "Neither 1.12 nor 3.3.5 have an index field so this might not be accurate.";
-    }
+    /// Neither 1.12 nor 3.3.5 have an index field so this might not be accurate.
+    u32 index;
 } {
     versions = "2.4.3";
 }
@@ -30,9 +29,8 @@ struct RaidInfo {
     u64 instance_id;
     Bool expired;
     Bool extended;
-    u32 time_until_reset {
-        comment = "Seems to be in seconds";
-    }
+    /// Seems to be in seconds
+    u32 time_until_reset;
 } {
     versions = "3.3.5";
 }

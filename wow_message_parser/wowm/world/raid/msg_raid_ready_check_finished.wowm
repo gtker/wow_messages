@@ -1,9 +1,9 @@
+/// This MSG does not appear to have an SMSG version.
 cmsg MSG_RAID_READY_CHECK_FINISHED_Client = 0x03C5 {} {
     versions = "2.4.3";
-    comment = "This MSG does not appear to have an SMSG version.";
 }
 
+/// This MSG does not appear to have an SMSG version.
 cmsg MSG_RAID_READY_CHECK_FINISHED_Client = 0x03C6 {} {
     versions = "3.3.5";
-    comment = "This MSG does not appear to have an SMSG version.";
 }

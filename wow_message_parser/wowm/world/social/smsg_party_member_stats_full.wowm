@@ -26,17 +26,14 @@ smsg SMSG_PARTY_MEMBER_STATS_FULL = 0x02F2 {
         Area area;
     }
     if (mask & POSITION) {
-        u16 position_x {
-            comment = "cmangos: float cast to u16";
-        }
-        u16 position_y {
-            comment = "cmangos: float cast to u16";
-        }
+        /// cmangos: float cast to u16
+        u16 position_x;
+        /// cmangos: float cast to u16
+        u16 position_y;
     }
     if (mask & AURAS) {
-        AuraMask auras {
-            comment = "cmangos: In all checked pre-2.x data of packets included only positive auras";
-        }
+        /// cmangos: In all checked pre-2.x data of packets included only positive auras
+        AuraMask auras;
     }
     if (mask & PET_GUID) {
         Guid pet;
@@ -97,17 +94,14 @@ smsg SMSG_PARTY_MEMBER_STATS_FULL = 0x02F2 {
         Area area;
     }
     if (mask & POSITION) {
-        u16 position_x {
-            comment = "cmangos: float cast to u16";
-        }
-        u16 position_y {
-            comment = "cmangos: float cast to u16";
-        }
+        /// cmangos: float cast to u16
+        u16 position_x;
+        /// cmangos: float cast to u16
+        u16 position_y;
     }
     if (mask & AURAS) {
-        AuraMask auras {
-            comment = "cmangos: In all checked pre-2.x data of packets included only positive auras";
-        }
+        /// cmangos: In all checked pre-2.x data of packets included only positive auras
+        AuraMask auras;
     }
     if (mask & PET_GUID) {
         Guid pet;
@@ -168,17 +162,14 @@ smsg SMSG_PARTY_MEMBER_STATS_FULL = 0x02F2 {
         Area area;
     }
     if (mask & POSITION) {
-        u16 position_x {
-            comment = "cmangos: float cast to u16";
-        }
-        u16 position_y {
-            comment = "cmangos: float cast to u16";
-        }
+        /// cmangos: float cast to u16
+        u16 position_x;
+        /// cmangos: float cast to u16
+        u16 position_y;
     }
     if (mask & AURAS) {
-        AuraMask auras {
-            comment = "cmangos: In all checked pre-2.x data of packets included only positive auras";
-        }
+        /// cmangos: In all checked pre-2.x data of packets included only positive auras
+        AuraMask auras;
     }
     if (mask & PET_GUID) {
         Guid pet;

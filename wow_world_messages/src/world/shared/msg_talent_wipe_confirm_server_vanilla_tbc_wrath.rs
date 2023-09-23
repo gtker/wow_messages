@@ -5,7 +5,7 @@ use crate::Guid;
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// cmangos/vmangos/mangoszero returns guid 0 and unknown 0 when talents can not be reset
 /// cmangos/vmangos/mangoszero casts spell 14876 when resetting
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/spell/msg_talent_wipe_confirm_server.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/spell/msg_talent_wipe_confirm_server.wowm#L3):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/spell/msg_talent_wipe_confirm_server.wowm:5`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/spell/msg_talent_wipe_confirm_server.wowm#L5):
 /// ```text
 /// smsg MSG_TALENT_WIPE_CONFIRM_Server = 0x02AA {
 ///     Guid wiping_npc;

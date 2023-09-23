@@ -161,9 +161,8 @@ test CMD_REALM_LIST_Server {
 }
 
 struct Realm {
-    RealmType realm_type {
-        comment = "vmangos: this is the second column in Cfg_Configs.dbc";
-    }
+    /// vmangos: this is the second column in Cfg_Configs.dbc
+    RealmType realm_type;
     Bool locked;
     RealmFlag flag;
     CString name;

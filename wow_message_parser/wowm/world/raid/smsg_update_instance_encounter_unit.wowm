@@ -6,9 +6,8 @@ enum EncounterFrame : u32 {
     ENABLE_OBJECTIVE    = 4;
     UPDATE_OBJECTIVE    = 5;
     DISABLE_OBJECTIVE   = 6;
-    REFRESH_FRAMES      = 7 {
-        comment = "azerothcore: can be used to refresh frames after unit was destroyed from client and send back (phase changes)";
-    }
+    /// azerothcore: can be used to refresh frames after unit was destroyed from client and send back (phase changes)
+    REFRESH_FRAMES      = 7;
 } {
     versions = "3.3.5";
 }

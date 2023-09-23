@@ -1,10 +1,9 @@
 #tag_all versions "1 2 3";
 
+/// Command to delete a character from the clients account. Can be sent after the client has received [SMSG_CHAR_ENUM].
+/// Sent after the client has confirmed the character deletion.
 cmsg CMSG_CHAR_DELETE = 0x38 {
     Guid guid;
-} {
-    comment = "Command to delete a character from the clients account. Can be sent after the client has received [SMSG_CHAR_ENUM].";
-    comment = "Sent after the client has confirmed the character deletion.";
 }
 
 test CMSG_CHAR_DELETE {

@@ -4,7 +4,7 @@ use std::io::{Read, Write};
 /// Data for which tutorials the client has passed.
 /// All bits set means that all tutorials have been passed.
 /// Must be sent after [`SMSG_LOGIN_VERIFY_WORLD`](crate::vanilla::SMSG_LOGIN_VERIFY_WORLD) otherwise the client will SEGFAULT.
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/character_screen/smsg_tutorial_flags.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/character_screen/smsg_tutorial_flags.wowm#L3):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/character_screen/smsg_tutorial_flags.wowm:6`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/character_screen/smsg_tutorial_flags.wowm#L6):
 /// ```text
 /// smsg SMSG_TUTORIAL_FLAGS = 0x00FD {
 ///     u32[8] tutorial_data;
@@ -100,7 +100,7 @@ mod test_vanilla {
 
     }
 
-    // Generated from `wow_message_parser/wowm/world/character_screen/smsg_tutorial_flags.wowm` line 11.
+    // Generated from `wow_message_parser/wowm/world/character_screen/smsg_tutorial_flags.wowm` line 10.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn smsg_tutorial_flags0() {
@@ -120,7 +120,7 @@ mod test_vanilla {
         assert_eq!(dest, RAW0);
     }
 
-    // Generated from `wow_message_parser/wowm/world/character_screen/smsg_tutorial_flags.wowm` line 11.
+    // Generated from `wow_message_parser/wowm/world/character_screen/smsg_tutorial_flags.wowm` line 10.
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_smsg_tutorial_flags0() {
@@ -140,7 +140,7 @@ mod test_vanilla {
         assert_eq!(dest, RAW0);
     }
 
-    // Generated from `wow_message_parser/wowm/world/character_screen/smsg_tutorial_flags.wowm` line 11.
+    // Generated from `wow_message_parser/wowm/world/character_screen/smsg_tutorial_flags.wowm` line 10.
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_smsg_tutorial_flags0() {
@@ -189,7 +189,7 @@ mod test_tbc {
 
     }
 
-    // Generated from `wow_message_parser/wowm/world/character_screen/smsg_tutorial_flags.wowm` line 11.
+    // Generated from `wow_message_parser/wowm/world/character_screen/smsg_tutorial_flags.wowm` line 10.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn smsg_tutorial_flags0() {
@@ -209,7 +209,7 @@ mod test_tbc {
         assert_eq!(dest, RAW0);
     }
 
-    // Generated from `wow_message_parser/wowm/world/character_screen/smsg_tutorial_flags.wowm` line 11.
+    // Generated from `wow_message_parser/wowm/world/character_screen/smsg_tutorial_flags.wowm` line 10.
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_smsg_tutorial_flags0() {
@@ -229,7 +229,7 @@ mod test_tbc {
         assert_eq!(dest, RAW0);
     }
 
-    // Generated from `wow_message_parser/wowm/world/character_screen/smsg_tutorial_flags.wowm` line 11.
+    // Generated from `wow_message_parser/wowm/world/character_screen/smsg_tutorial_flags.wowm` line 10.
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_smsg_tutorial_flags0() {
@@ -278,7 +278,7 @@ mod test_wrath {
 
     }
 
-    // Generated from `wow_message_parser/wowm/world/character_screen/smsg_tutorial_flags.wowm` line 11.
+    // Generated from `wow_message_parser/wowm/world/character_screen/smsg_tutorial_flags.wowm` line 10.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn smsg_tutorial_flags0() {
@@ -298,7 +298,7 @@ mod test_wrath {
         assert_eq!(dest, RAW0);
     }
 
-    // Generated from `wow_message_parser/wowm/world/character_screen/smsg_tutorial_flags.wowm` line 11.
+    // Generated from `wow_message_parser/wowm/world/character_screen/smsg_tutorial_flags.wowm` line 10.
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_smsg_tutorial_flags0() {
@@ -318,7 +318,7 @@ mod test_wrath {
         assert_eq!(dest, RAW0);
     }
 
-    // Generated from `wow_message_parser/wowm/world/character_screen/smsg_tutorial_flags.wowm` line 11.
+    // Generated from `wow_message_parser/wowm/world/character_screen/smsg_tutorial_flags.wowm` line 10.
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_smsg_tutorial_flags0() {

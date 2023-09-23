@@ -1,17 +1,17 @@
+/// Tells the client that the running speed has changed.
+/// Client replies with [CMSG_FORCE_RUN_SPEED_CHANGE_ACK].
+/// vmangos sends this message to the client being changed and [SMSG_SPLINE_SET_RUN_SPEED] to others.
 smsg SMSG_FORCE_RUN_SPEED_CHANGE = 0x00E2 {
     PackedGuid guid;
-    u32 move_event {
-        comment = "cmangos/mangoszero/vmangos: set to 0";
-        comment = "cmangos/mangoszero/vmangos: moveEvent, NUM_PMOVE_EVTS = 0x39";
-    }
+    /// cmangos/mangoszero/vmangos: set to 0
+    /// cmangos/mangoszero/vmangos: moveEvent, NUM_PMOVE_EVTS = 0x39
+    u32 move_event;
     f32 speed;
 } {
-    comment = "Tells the client that the running speed has changed.";
-    comment = "Client replies with [CMSG_FORCE_RUN_SPEED_CHANGE_ACK].";
-    comment = "vmangos sends this message to the client being changed and [SMSG_SPLINE_SET_RUN_SPEED] to others.";
     versions = "1.12";
 }
 
+/// Force speed to 7
 test SMSG_FORCE_RUN_SPEED_CHANGE {
     guid = 6;
     move_event = 0;
@@ -23,25 +23,22 @@ test SMSG_FORCE_RUN_SPEED_CHANGE {
     0x00, 0x00, 0x00, 0x00, /* move_event */
     0x00, 0x00, 0xe0, 0x40 /* speed */
 ] {
-    comment = "Force speed to 7";
     versions = "1.12";
 }
 
+/// Tells the client that the running speed has changed.
+/// Client replies with [CMSG_FORCE_RUN_SPEED_CHANGE_ACK].
+/// vmangos sends this message to the client being changed and [SMSG_SPLINE_SET_RUN_SPEED] to others.
 smsg SMSG_FORCE_RUN_SPEED_CHANGE = 0x00E2 {
     PackedGuid guid;
-    u32 move_event {
-        comment = "cmangos/mangoszero/vmangos: set to 0";
-        comment = "cmangos/mangoszero/vmangos: moveEvent, NUM_PMOVE_EVTS = 0x39";
-    }
-    u8 unknown {
-        comment = "mangosone sets to 0";
-        comment = "mangosone: new 2.1.0";
-    }
+    /// cmangos/mangoszero/vmangos: set to 0
+    /// cmangos/mangoszero/vmangos: moveEvent, NUM_PMOVE_EVTS = 0x39
+    u32 move_event;
+    /// mangosone sets to 0
+    /// mangosone: new 2.1.0
+    u8 unknown;
     f32 speed;
 } {
-    comment = "Tells the client that the running speed has changed.";
-    comment = "Client replies with [CMSG_FORCE_RUN_SPEED_CHANGE_ACK].";
-    comment = "vmangos sends this message to the client being changed and [SMSG_SPLINE_SET_RUN_SPEED] to others.";
     versions = "2.4.3 3";
 }
 

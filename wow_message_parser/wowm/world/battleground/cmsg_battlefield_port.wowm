@@ -19,18 +19,14 @@ cmsg CMSG_BATTLEFIELD_PORT = 0x02D5 {
 }
 
 cmsg CMSG_BATTLEFIELD_PORT = 0x02D5 {
-    u8 arena_type {
-        comment = "mangosone/mangos-tbc/azerothcore: arenatype if arena";
-    }
-    u8 unknown1 {
-        comment = "mangosone/mangos-tbc/azerothcore: unk, can be 0x0 (may be if was invited?) and 0x1";
-    }
-    u32 bg_type_id {
-        comment = "mangosone/mangos-tbc/azerothcore: type id from dbc"; /* TODO NARROW_TYPE: Which DBC? */
-    }
-    u16 unknown2 {
-        comment = "mangosone/mangos-tbc/azerothcore: 0x1F90 constant?";
-    }
+    /// mangosone/mangos-tbc/azerothcore: arenatype if arena
+    u8 arena_type;
+    /// mangosone/mangos-tbc/azerothcore: unk, can be 0x0 (may be if was invited?) and 0x1
+    u8 unknown1;
+    /// mangosone/mangos-tbc/azerothcore: type id from dbc
+    u32 bg_type_id;
+    /// mangosone/mangos-tbc/azerothcore: 0x1F90 constant?
+    u16 unknown2;
     BattlefieldPortAction action;
 } {
     versions = "2.4.3 3";

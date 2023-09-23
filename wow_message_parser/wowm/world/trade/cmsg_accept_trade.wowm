@@ -1,8 +1,7 @@
 #tag_all versions "1 2 3";
 
 cmsg CMSG_ACCEPT_TRADE = 0x011A {
-    u32 unknown1 {
-        comment = "Skipped in vmangos and set to 1 for bots";
-    }
+    /// Skipped in vmangos and set to 1 for bots
+    u32 unknown1;
 }
 

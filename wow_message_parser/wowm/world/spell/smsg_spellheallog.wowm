@@ -14,9 +14,8 @@ smsg SMSG_SPELLHEALLOG = 0x0150 {
     Spell id;
     u32 damage;
     Bool critical;
-    u8 unknown {
-        comment = "mangosone: unused in client?";
-    }
+    /// mangosone: unused in client?
+    u8 unknown;
 } {
     versions = "2.4.3";
 }
@@ -29,9 +28,8 @@ smsg SMSG_SPELLHEALLOG = 0x0150 {
     u32 overheal;
     u32 absorb;
     Bool critical;
-    u8 unknown {
-        comment = "mangostwo: unused in client?";
-    }
+    /// mangostwo: unused in client?
+    u8 unknown;
 } {
     versions = "3.3.5";
 }

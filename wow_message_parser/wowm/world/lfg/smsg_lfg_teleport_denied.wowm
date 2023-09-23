@@ -4,9 +4,8 @@ enum LfgTeleportError : u32 {
     IN_VEHICLE                 = 3;
     FATIGUE                    = 4;
     INVALID_LOCATION           = 6;
-    COMBAT                     = 8 {
-        comment = "azerothcore: It can be 7 or 8";
-    }
+    /// azerothcore: It can be 7 or 8
+    COMBAT                     = 8;
 } {
     versions = "3.3.5";
 }

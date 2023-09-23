@@ -3,7 +3,7 @@ use std::io::{Read, Write};
 use crate::vanilla::Object;
 
 #[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/gameobject/smsg_update_object.wowm:189`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/gameobject/smsg_update_object.wowm#L189):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/gameobject/smsg_update_object.wowm:180`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/gameobject/smsg_update_object.wowm#L180):
 /// ```text
 /// smsg SMSG_UPDATE_OBJECT = 0x00A9 {
 ///     u32 amount_of_objects;
@@ -164,7 +164,7 @@ mod test {
 
     }
 
-    // Generated from `wow_message_parser/wowm/world/gameobject/smsg_update_object.wowm` line 195.
+    // Generated from `wow_message_parser/wowm/world/gameobject/smsg_update_object.wowm` line 187.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn smsg_update_object0() {
@@ -184,7 +184,7 @@ mod test {
         assert_eq!(dest, RAW0);
     }
 
-    // Generated from `wow_message_parser/wowm/world/gameobject/smsg_update_object.wowm` line 195.
+    // Generated from `wow_message_parser/wowm/world/gameobject/smsg_update_object.wowm` line 187.
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_smsg_update_object0() {
@@ -204,7 +204,7 @@ mod test {
         assert_eq!(dest, RAW0);
     }
 
-    // Generated from `wow_message_parser/wowm/world/gameobject/smsg_update_object.wowm` line 195.
+    // Generated from `wow_message_parser/wowm/world/gameobject/smsg_update_object.wowm` line 187.
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_smsg_update_object0() {
@@ -290,7 +290,7 @@ mod test {
 
     }
 
-    // Generated from `wow_message_parser/wowm/world/gameobject/smsg_update_object.wowm` line 262.
+    // Generated from `wow_message_parser/wowm/world/gameobject/smsg_update_object.wowm` line 252.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn smsg_update_object1() {
@@ -310,7 +310,7 @@ mod test {
         assert_eq!(dest, RAW1);
     }
 
-    // Generated from `wow_message_parser/wowm/world/gameobject/smsg_update_object.wowm` line 262.
+    // Generated from `wow_message_parser/wowm/world/gameobject/smsg_update_object.wowm` line 252.
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_smsg_update_object1() {
@@ -330,7 +330,7 @@ mod test {
         assert_eq!(dest, RAW1);
     }
 
-    // Generated from `wow_message_parser/wowm/world/gameobject/smsg_update_object.wowm` line 262.
+    // Generated from `wow_message_parser/wowm/world/gameobject/smsg_update_object.wowm` line 252.
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_smsg_update_object1() {

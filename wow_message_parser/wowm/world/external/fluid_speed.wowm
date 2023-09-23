@@ -1,3 +1,4 @@
+/// Used in `SoundWaterType.dbc`.
 enum FluidSpeed : u8 {
     STILL = 0;
     SLOW = 4;
@@ -5,5 +6,4 @@ enum FluidSpeed : u8 {
 } {
     versions = "1.12";
     non_network_type = "true";
-    comment = "Used in `SoundWaterType.dbc`.";
 }

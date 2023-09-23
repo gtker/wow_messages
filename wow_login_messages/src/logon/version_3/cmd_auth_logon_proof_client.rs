@@ -507,7 +507,7 @@ mod test_version_3 {
 
     }
 
-    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/proof_client.wowm` line 160.
+    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/proof_client.wowm` line 159.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn cmd_auth_logon_proof_client0() {
@@ -527,7 +527,7 @@ mod test_version_3 {
         assert_eq!(dest, RAW0);
     }
 
-    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/proof_client.wowm` line 160.
+    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/proof_client.wowm` line 159.
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_cmd_auth_logon_proof_client0() {
@@ -547,7 +547,7 @@ mod test_version_3 {
         assert_eq!(dest, RAW0);
     }
 
-    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/proof_client.wowm` line 160.
+    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/proof_client.wowm` line 159.
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_cmd_auth_logon_proof_client0() {
@@ -602,7 +602,7 @@ mod test_version_3 {
 
     }
 
-    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/proof_client.wowm` line 217.
+    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/proof_client.wowm` line 216.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn cmd_auth_logon_proof_client1() {
@@ -622,7 +622,7 @@ mod test_version_3 {
         assert_eq!(dest, RAW1);
     }
 
-    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/proof_client.wowm` line 217.
+    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/proof_client.wowm` line 216.
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_cmd_auth_logon_proof_client1() {
@@ -642,7 +642,7 @@ mod test_version_3 {
         assert_eq!(dest, RAW1);
     }
 
-    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/proof_client.wowm` line 217.
+    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/proof_client.wowm` line 216.
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_cmd_auth_logon_proof_client1() {
@@ -686,7 +686,7 @@ mod test_version_3 {
 
     }
 
-    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/proof_client.wowm` line 259.
+    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/proof_client.wowm` line 258.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn cmd_auth_logon_proof_client2() {
@@ -706,7 +706,7 @@ mod test_version_3 {
         assert_eq!(dest, RAW2);
     }
 
-    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/proof_client.wowm` line 259.
+    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/proof_client.wowm` line 258.
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_cmd_auth_logon_proof_client2() {
@@ -726,7 +726,7 @@ mod test_version_3 {
         assert_eq!(dest, RAW2);
     }
 
-    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/proof_client.wowm` line 259.
+    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/proof_client.wowm` line 258.
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_cmd_auth_logon_proof_client2() {
@@ -779,7 +779,7 @@ mod test_version_3 {
 
     }
 
-    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/proof_client.wowm` line 285.
+    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/proof_client.wowm` line 284.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn cmd_auth_logon_proof_client3() {
@@ -799,7 +799,7 @@ mod test_version_3 {
         assert_eq!(dest, RAW3);
     }
 
-    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/proof_client.wowm` line 285.
+    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/proof_client.wowm` line 284.
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_cmd_auth_logon_proof_client3() {
@@ -819,7 +819,7 @@ mod test_version_3 {
         assert_eq!(dest, RAW3);
     }
 
-    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/proof_client.wowm` line 285.
+    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/proof_client.wowm` line 284.
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_cmd_auth_logon_proof_client3() {
@@ -905,7 +905,7 @@ mod test_version_5 {
 
     }
 
-    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/proof_client.wowm` line 160.
+    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/proof_client.wowm` line 159.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn cmd_auth_logon_proof_client0() {
@@ -925,7 +925,7 @@ mod test_version_5 {
         assert_eq!(dest, RAW0);
     }
 
-    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/proof_client.wowm` line 160.
+    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/proof_client.wowm` line 159.
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_cmd_auth_logon_proof_client0() {
@@ -945,7 +945,7 @@ mod test_version_5 {
         assert_eq!(dest, RAW0);
     }
 
-    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/proof_client.wowm` line 160.
+    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/proof_client.wowm` line 159.
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_cmd_auth_logon_proof_client0() {
@@ -1000,7 +1000,7 @@ mod test_version_5 {
 
     }
 
-    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/proof_client.wowm` line 217.
+    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/proof_client.wowm` line 216.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn cmd_auth_logon_proof_client1() {
@@ -1020,7 +1020,7 @@ mod test_version_5 {
         assert_eq!(dest, RAW1);
     }
 
-    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/proof_client.wowm` line 217.
+    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/proof_client.wowm` line 216.
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_cmd_auth_logon_proof_client1() {
@@ -1040,7 +1040,7 @@ mod test_version_5 {
         assert_eq!(dest, RAW1);
     }
 
-    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/proof_client.wowm` line 217.
+    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/proof_client.wowm` line 216.
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_cmd_auth_logon_proof_client1() {
@@ -1084,7 +1084,7 @@ mod test_version_5 {
 
     }
 
-    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/proof_client.wowm` line 259.
+    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/proof_client.wowm` line 258.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn cmd_auth_logon_proof_client2() {
@@ -1104,7 +1104,7 @@ mod test_version_5 {
         assert_eq!(dest, RAW2);
     }
 
-    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/proof_client.wowm` line 259.
+    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/proof_client.wowm` line 258.
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_cmd_auth_logon_proof_client2() {
@@ -1124,7 +1124,7 @@ mod test_version_5 {
         assert_eq!(dest, RAW2);
     }
 
-    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/proof_client.wowm` line 259.
+    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/proof_client.wowm` line 258.
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_cmd_auth_logon_proof_client2() {
@@ -1177,7 +1177,7 @@ mod test_version_5 {
 
     }
 
-    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/proof_client.wowm` line 285.
+    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/proof_client.wowm` line 284.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn cmd_auth_logon_proof_client3() {
@@ -1197,7 +1197,7 @@ mod test_version_5 {
         assert_eq!(dest, RAW3);
     }
 
-    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/proof_client.wowm` line 285.
+    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/proof_client.wowm` line 284.
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_cmd_auth_logon_proof_client3() {
@@ -1217,7 +1217,7 @@ mod test_version_5 {
         assert_eq!(dest, RAW3);
     }
 
-    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/proof_client.wowm` line 285.
+    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/proof_client.wowm` line 284.
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_cmd_auth_logon_proof_client3() {
@@ -1303,7 +1303,7 @@ mod test_version_6 {
 
     }
 
-    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/proof_client.wowm` line 160.
+    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/proof_client.wowm` line 159.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn cmd_auth_logon_proof_client0() {
@@ -1323,7 +1323,7 @@ mod test_version_6 {
         assert_eq!(dest, RAW0);
     }
 
-    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/proof_client.wowm` line 160.
+    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/proof_client.wowm` line 159.
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_cmd_auth_logon_proof_client0() {
@@ -1343,7 +1343,7 @@ mod test_version_6 {
         assert_eq!(dest, RAW0);
     }
 
-    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/proof_client.wowm` line 160.
+    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/proof_client.wowm` line 159.
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_cmd_auth_logon_proof_client0() {
@@ -1398,7 +1398,7 @@ mod test_version_6 {
 
     }
 
-    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/proof_client.wowm` line 217.
+    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/proof_client.wowm` line 216.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn cmd_auth_logon_proof_client1() {
@@ -1418,7 +1418,7 @@ mod test_version_6 {
         assert_eq!(dest, RAW1);
     }
 
-    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/proof_client.wowm` line 217.
+    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/proof_client.wowm` line 216.
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_cmd_auth_logon_proof_client1() {
@@ -1438,7 +1438,7 @@ mod test_version_6 {
         assert_eq!(dest, RAW1);
     }
 
-    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/proof_client.wowm` line 217.
+    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/proof_client.wowm` line 216.
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_cmd_auth_logon_proof_client1() {
@@ -1482,7 +1482,7 @@ mod test_version_6 {
 
     }
 
-    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/proof_client.wowm` line 259.
+    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/proof_client.wowm` line 258.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn cmd_auth_logon_proof_client2() {
@@ -1502,7 +1502,7 @@ mod test_version_6 {
         assert_eq!(dest, RAW2);
     }
 
-    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/proof_client.wowm` line 259.
+    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/proof_client.wowm` line 258.
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_cmd_auth_logon_proof_client2() {
@@ -1522,7 +1522,7 @@ mod test_version_6 {
         assert_eq!(dest, RAW2);
     }
 
-    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/proof_client.wowm` line 259.
+    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/proof_client.wowm` line 258.
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_cmd_auth_logon_proof_client2() {
@@ -1575,7 +1575,7 @@ mod test_version_6 {
 
     }
 
-    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/proof_client.wowm` line 285.
+    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/proof_client.wowm` line 284.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn cmd_auth_logon_proof_client3() {
@@ -1595,7 +1595,7 @@ mod test_version_6 {
         assert_eq!(dest, RAW3);
     }
 
-    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/proof_client.wowm` line 285.
+    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/proof_client.wowm` line 284.
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_cmd_auth_logon_proof_client3() {
@@ -1615,7 +1615,7 @@ mod test_version_6 {
         assert_eq!(dest, RAW3);
     }
 
-    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/proof_client.wowm` line 285.
+    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/proof_client.wowm` line 284.
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_cmd_auth_logon_proof_client3() {
@@ -1701,7 +1701,7 @@ mod test_version_7 {
 
     }
 
-    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/proof_client.wowm` line 160.
+    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/proof_client.wowm` line 159.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn cmd_auth_logon_proof_client0() {
@@ -1721,7 +1721,7 @@ mod test_version_7 {
         assert_eq!(dest, RAW0);
     }
 
-    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/proof_client.wowm` line 160.
+    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/proof_client.wowm` line 159.
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_cmd_auth_logon_proof_client0() {
@@ -1741,7 +1741,7 @@ mod test_version_7 {
         assert_eq!(dest, RAW0);
     }
 
-    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/proof_client.wowm` line 160.
+    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/proof_client.wowm` line 159.
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_cmd_auth_logon_proof_client0() {
@@ -1796,7 +1796,7 @@ mod test_version_7 {
 
     }
 
-    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/proof_client.wowm` line 217.
+    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/proof_client.wowm` line 216.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn cmd_auth_logon_proof_client1() {
@@ -1816,7 +1816,7 @@ mod test_version_7 {
         assert_eq!(dest, RAW1);
     }
 
-    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/proof_client.wowm` line 217.
+    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/proof_client.wowm` line 216.
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_cmd_auth_logon_proof_client1() {
@@ -1836,7 +1836,7 @@ mod test_version_7 {
         assert_eq!(dest, RAW1);
     }
 
-    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/proof_client.wowm` line 217.
+    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/proof_client.wowm` line 216.
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_cmd_auth_logon_proof_client1() {
@@ -1880,7 +1880,7 @@ mod test_version_7 {
 
     }
 
-    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/proof_client.wowm` line 259.
+    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/proof_client.wowm` line 258.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn cmd_auth_logon_proof_client2() {
@@ -1900,7 +1900,7 @@ mod test_version_7 {
         assert_eq!(dest, RAW2);
     }
 
-    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/proof_client.wowm` line 259.
+    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/proof_client.wowm` line 258.
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_cmd_auth_logon_proof_client2() {
@@ -1920,7 +1920,7 @@ mod test_version_7 {
         assert_eq!(dest, RAW2);
     }
 
-    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/proof_client.wowm` line 259.
+    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/proof_client.wowm` line 258.
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_cmd_auth_logon_proof_client2() {
@@ -1973,7 +1973,7 @@ mod test_version_7 {
 
     }
 
-    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/proof_client.wowm` line 285.
+    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/proof_client.wowm` line 284.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn cmd_auth_logon_proof_client3() {
@@ -1993,7 +1993,7 @@ mod test_version_7 {
         assert_eq!(dest, RAW3);
     }
 
-    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/proof_client.wowm` line 285.
+    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/proof_client.wowm` line 284.
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_cmd_auth_logon_proof_client3() {
@@ -2013,7 +2013,7 @@ mod test_version_7 {
         assert_eq!(dest, RAW3);
     }
 
-    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/proof_client.wowm` line 285.
+    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/proof_client.wowm` line 284.
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_cmd_auth_logon_proof_client3() {

@@ -2,9 +2,8 @@
 
 smsg SMSG_QUESTUPDATE_ADD_KILL = 0x0199 {
     u32 quest_id;
-    u32 creature_id {
-        comment = "Unsure of name";
-    }
+    /// Unsure of name
+    u32 creature_id;
     u32 kill_count;
     u32 required_kill_count;
     Guid guid;

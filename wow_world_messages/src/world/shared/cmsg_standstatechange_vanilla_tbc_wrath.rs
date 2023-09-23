@@ -4,7 +4,7 @@ use wow_world_base::shared::unit_stand_state_vanilla_tbc_wrath::UnitStandState;
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Automatically sent by the client when it goes AFK.
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/social/cmsg_standstatechange.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/social/cmsg_standstatechange.wowm#L3):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/social/cmsg_standstatechange.wowm:4`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/social/cmsg_standstatechange.wowm#L4):
 /// ```text
 /// cmsg CMSG_STANDSTATECHANGE = 0x0101 {
 ///     (u32)UnitStandState animation_state;
@@ -89,7 +89,7 @@ mod test_vanilla {
 
     }
 
-    // Generated from `wow_message_parser/wowm/world/social/cmsg_standstatechange.wowm` line 10.
+    // Generated from `wow_message_parser/wowm/world/social/cmsg_standstatechange.wowm` line 8.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn cmsg_standstatechange0() {
@@ -109,7 +109,7 @@ mod test_vanilla {
         assert_eq!(dest, RAW0);
     }
 
-    // Generated from `wow_message_parser/wowm/world/social/cmsg_standstatechange.wowm` line 10.
+    // Generated from `wow_message_parser/wowm/world/social/cmsg_standstatechange.wowm` line 8.
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_cmsg_standstatechange0() {
@@ -129,7 +129,7 @@ mod test_vanilla {
         assert_eq!(dest, RAW0);
     }
 
-    // Generated from `wow_message_parser/wowm/world/social/cmsg_standstatechange.wowm` line 10.
+    // Generated from `wow_message_parser/wowm/world/social/cmsg_standstatechange.wowm` line 8.
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_cmsg_standstatechange0() {
@@ -175,7 +175,7 @@ mod test_tbc {
 
     }
 
-    // Generated from `wow_message_parser/wowm/world/social/cmsg_standstatechange.wowm` line 10.
+    // Generated from `wow_message_parser/wowm/world/social/cmsg_standstatechange.wowm` line 8.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn cmsg_standstatechange0() {
@@ -195,7 +195,7 @@ mod test_tbc {
         assert_eq!(dest, RAW0);
     }
 
-    // Generated from `wow_message_parser/wowm/world/social/cmsg_standstatechange.wowm` line 10.
+    // Generated from `wow_message_parser/wowm/world/social/cmsg_standstatechange.wowm` line 8.
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_cmsg_standstatechange0() {
@@ -215,7 +215,7 @@ mod test_tbc {
         assert_eq!(dest, RAW0);
     }
 
-    // Generated from `wow_message_parser/wowm/world/social/cmsg_standstatechange.wowm` line 10.
+    // Generated from `wow_message_parser/wowm/world/social/cmsg_standstatechange.wowm` line 8.
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_cmsg_standstatechange0() {
@@ -261,7 +261,7 @@ mod test_wrath {
 
     }
 
-    // Generated from `wow_message_parser/wowm/world/social/cmsg_standstatechange.wowm` line 10.
+    // Generated from `wow_message_parser/wowm/world/social/cmsg_standstatechange.wowm` line 8.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn cmsg_standstatechange0() {
@@ -281,7 +281,7 @@ mod test_wrath {
         assert_eq!(dest, RAW0);
     }
 
-    // Generated from `wow_message_parser/wowm/world/social/cmsg_standstatechange.wowm` line 10.
+    // Generated from `wow_message_parser/wowm/world/social/cmsg_standstatechange.wowm` line 8.
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_cmsg_standstatechange0() {
@@ -301,7 +301,7 @@ mod test_wrath {
         assert_eq!(dest, RAW0);
     }
 
-    // Generated from `wow_message_parser/wowm/world/social/cmsg_standstatechange.wowm` line 10.
+    // Generated from `wow_message_parser/wowm/world/social/cmsg_standstatechange.wowm` line 8.
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_cmsg_standstatechange0() {

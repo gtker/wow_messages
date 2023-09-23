@@ -4,9 +4,8 @@ cmsg CMSG_PLAYED_TIME = 0x01CC {
 }
 
 cmsg CMSG_PLAYED_TIME = 0x01CC {
-    Bool show_on_ui {
-        comment = "Whether the clients wants it shown on the UI. Just ping it back in [SMSG_PLAYED_TIME]";
-    }
+    /// Whether the clients wants it shown on the UI. Just ping it back in [SMSG_PLAYED_TIME]
+    Bool show_on_ui;
 } {
     versions = "3";
 }

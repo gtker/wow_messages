@@ -7,11 +7,13 @@ struct AddonInfo {
     versions = "1 2 3.3.5";
 }
 
+/// Sent after receiving [SMSG_AUTH_CHALLENGE].
+/// Followed by [SMSG_AUTH_RESPONSE].
+/// This message is never encrypted.
 cmsg CMSG_AUTH_SESSION = 0x1ED {
     u32 build;
-    u32 server_id {
-        comment = "This is sent to the client in [CMD_REALM_LIST_Server].";
-    }
+    /// This is sent to the client in [CMD_REALM_LIST_Server].
+    u32 server_id;
     CString username;
     u32 client_seed;
     u8[20] client_proof;
@@ -19,9 +21,6 @@ cmsg CMSG_AUTH_SESSION = 0x1ED {
         compressed = "true";
     }
 } {
-    comment = "Sent after receiving [SMSG_AUTH_CHALLENGE].";
-    comment = "Followed by [SMSG_AUTH_RESPONSE].";
-    comment = "This message is never encrypted.";
     versions = "1 2";
 }
 
@@ -140,6 +139,8 @@ test CMSG_AUTH_SESSION {
     versions = "1";
 }
 
+/// Sent after receiving [SMSG_AUTH_CHALLENGE].
+/// This message is never encrypted.
 cmsg CMSG_AUTH_SESSION = 0x1ED {
     u32 client_build;
     u32 login_server_id;
@@ -149,16 +150,13 @@ cmsg CMSG_AUTH_SESSION = 0x1ED {
     u32 region_id;
     u32 battleground_id;
     u32 realm_id;
-    u64 dos_response {
-        comment = "Purpose and exact meaning of name unknown.";
-        comment = "TrinityCore has this name but never uses the variable afterwards.";
-    }
+    /// Purpose and exact meaning of name unknown.
+    /// TrinityCore has this name but never uses the variable afterwards.
+    u64 dos_response;
     u8[20] client_proof;
     u8[-] addon_info  {
         compressed = "true";
     }
 } {
-    comment = "Sent after receiving [SMSG_AUTH_CHALLENGE].";
-    comment = "This message is never encrypted.";
     versions = "3.3.5";
 }

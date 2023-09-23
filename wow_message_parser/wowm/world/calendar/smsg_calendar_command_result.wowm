@@ -1,10 +1,8 @@
 smsg SMSG_CALENDAR_COMMAND_RESULT = 0x043D {
-    u32 unknown1 {
-        comment = "All emus set to 0.";
-    }
-    u8 unknown2 {
-        comment = "All emus set to 0.";
-    }
+    /// All emus set to 0.
+    u32 unknown1;
+    /// All emus set to 0.
+    u8 unknown2;
     CString name;
     u32 result;
 } {

@@ -9,7 +9,7 @@ use std::net::Ipv4Addr;
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord)]
 /// First message sent by the client when attempting to connect. The server will respond with [`CMD_AUTH_LOGON_CHALLENGE_Server`](crate::logon::version_2::CMD_AUTH_LOGON_CHALLENGE_Server).
 /// Has the exact same layout as [`CMD_AUTH_RECONNECT_CHALLENGE_Client`](crate::logon::all::CMD_AUTH_RECONNECT_CHALLENGE_Client).
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/login/cmd_auth_logon/challenge_client.wowm:25`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/login/cmd_auth_logon/challenge_client.wowm#L25):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/login/cmd_auth_logon/challenge_client.wowm:21`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/login/cmd_auth_logon/challenge_client.wowm#L21):
 /// ```text
 /// clogin CMD_AUTH_LOGON_CHALLENGE_Client = 0x00 {
 ///     ProtocolVersion protocol_version;
@@ -390,7 +390,7 @@ mod test {
 
     }
 
-    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/challenge_client.wowm` line 49.
+    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/challenge_client.wowm` line 40.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn cmd_auth_logon_challenge_client0() {
@@ -410,7 +410,7 @@ mod test {
         assert_eq!(dest, RAW0);
     }
 
-    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/challenge_client.wowm` line 49.
+    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/challenge_client.wowm` line 40.
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_cmd_auth_logon_challenge_client0() {
@@ -430,7 +430,7 @@ mod test {
         assert_eq!(dest, RAW0);
     }
 
-    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/challenge_client.wowm` line 49.
+    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/challenge_client.wowm` line 40.
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_cmd_auth_logon_challenge_client0() {

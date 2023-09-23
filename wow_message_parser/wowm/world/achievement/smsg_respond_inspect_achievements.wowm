@@ -13,14 +13,15 @@ smsg SMSG_ALL_ACHIEVEMENT_DATA = 0x047D {
     versions = "3.3.5";
 }
 
+/// Used in the `AchievementDoneArray` built-in type.
 struct AchievementDone {
     u32 achievement;
     DateTime time;
 } {
-    comment = "Used in the `AchievementDoneArray` built-in type.";
     versions = "3.3.5";
 }
 
+/// Used in the `AchievementInProgressArray` built-in type.
 struct AchievementInProgress {
     u32 achievement;
     PackedGuid counter;
@@ -30,6 +31,5 @@ struct AchievementInProgress {
     u32 time_since_progress;
     u32 time_since_progress2;
 } {
-    comment = "Used in the `AchievementInProgressArray` built-in type.";
     versions = "3.3.5";
 }

@@ -1,7 +1,6 @@
 #tag_all versions "3";
 
 smsg SMSG_WORLD_STATE_UI_TIMER_UPDATE = 0x4F7 {
-    u32 time {
-        comment = "Seconds since Unix Epoch";
-    }
+    /// Seconds since Unix Epoch
+    u32 time;
 } 

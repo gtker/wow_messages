@@ -1,29 +1,25 @@
+/// cmangos and vmangos/mangoszero disagree about packed and extra u8
 smsg SMSG_ENCHANTMENTLOG = 0x01D7 {
     Guid target;
-    Guid caster {
-        comment = "vmangos: message says enchant has faded if empty";
-    }
+    /// vmangos: message says enchant has faded if empty
+    Guid caster;
     Item item;
     Spell spell;
-    Bool show_affiliation {
-        comment = "vmangos: Only used if `caster` is not 0.";
-    }
+    /// vmangos: Only used if `caster` is not 0.
+    Bool show_affiliation;
 } {
-    comment = "cmangos and vmangos/mangoszero disagree about packed and extra u8";
     versions = "1 2";
 }
 
+/// Some emulators have the guids as not packed.
 smsg SMSG_ENCHANTMENTLOG = 0x01D7 {
     PackedGuid target;
-    PackedGuid caster {
-        comment = "vmangos: message says enchant has faded if empty";
-    }
+    /// vmangos: message says enchant has faded if empty
+    PackedGuid caster;
     Item item;
     Spell spell;
-    Bool show_affiliation {
-        comment = "vmangos: Only used if `caster` is not 0.";
-    }
+    /// vmangos: Only used if `caster` is not 0.
+    Bool show_affiliation;
 } {
-    comment = "Some emulators have the guids as not packed.";
     versions = "3.3.5";
 }

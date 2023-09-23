@@ -6,7 +6,7 @@ use wow_world_base::shared::auction_house_vanilla_tbc_wrath::AuctionHouse;
 use wow_world_base::shared::mail_message_type_vanilla_tbc_wrath::MailMessageType;
 
 #[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/queries/msg_query_next_mail_time_server.wowm:42`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/queries/msg_query_next_mail_time_server.wowm#L42):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/queries/msg_query_next_mail_time_server.wowm:37`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/queries/msg_query_next_mail_time_server.wowm#L37):
 /// ```text
 /// smsg MSG_QUERY_NEXT_MAIL_TIME_Server = 0x0284 {
 ///     u32 float;

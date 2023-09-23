@@ -1,4 +1,4 @@
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/login/common.wowm:41`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/login/common.wowm#L41):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/login/common.wowm:40`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/login/common.wowm#L40):
 /// ```text
 /// enum LoginResult : u8 {
 ///     SUCCESS = 0x00;

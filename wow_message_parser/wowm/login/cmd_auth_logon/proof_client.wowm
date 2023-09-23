@@ -3,13 +3,13 @@ struct TelemetryKey {
     u16 unknown1;
     u32 unknown2;
     u8[4] unknown3;
-    u8[20] cd_key_proof {
-        comment = "SHA1 hash of the session key, server public key, and an unknown 20 byte value.";
-    }
+    /// SHA1 hash of the session key, server public key, and an unknown 20 byte value.
+    u8[20] cd_key_proof;
 } {
     login_versions = "2 3 5 6 7 8";
 }
 
+/// Reply after successful [CMD_AUTH_LOGON_CHALLENGE_Server].
 clogin CMD_AUTH_LOGON_PROOF_Client = 0x01 {
     u8[32] client_public_key;
     u8[20] client_proof;
@@ -17,7 +17,6 @@ clogin CMD_AUTH_LOGON_PROOF_Client = 0x01 {
     u8 number_of_telemetry_keys;
     TelemetryKey[number_of_telemetry_keys] telemetry_keys;
 } {
-    comment = "Reply after successful [CMD_AUTH_LOGON_CHALLENGE_Server].";
     login_versions = "2";
 }
 
@@ -140,6 +139,7 @@ test CMD_AUTH_LOGON_PROOF_Client {
     login_versions = "2";
 }
 
+/// Reply after successful [CMD_AUTH_LOGON_CHALLENGE_Server].
 clogin CMD_AUTH_LOGON_PROOF_Client = 0x01 {
     u8[32] client_public_key;
     u8[20] client_proof;
@@ -153,7 +153,6 @@ clogin CMD_AUTH_LOGON_PROOF_Client = 0x01 {
         u8[20] pin_hash;
     }
 } {
-    comment = "Reply after successful [CMD_AUTH_LOGON_CHALLENGE_Server].";
     login_versions = "3 5 6 7";
 }
 
@@ -316,6 +315,7 @@ test CMD_AUTH_LOGON_PROOF_Client {
     login_versions = "3";
 }
 
+/// Reply after successful [CMD_AUTH_LOGON_CHALLENGE_Server].
 clogin CMD_AUTH_LOGON_PROOF_Client = 0x01 {
     u8[32] client_public_key;
     u8[20] client_proof;
@@ -329,10 +329,9 @@ clogin CMD_AUTH_LOGON_PROOF_Client = 0x01 {
         u8[20] pin_hash;
     }
     if (security_flag & MATRIX_CARD) {
-        u8[20] matrix_card_proof {
-            comment = "Client proof of matrix input.";
-            comment = "Implementation details at `https://gist.github.com/barncastle/979c12a9c5e64d810a28ad1728e7e0f9`.";
-        }
+        /// Client proof of matrix input.
+        /// Implementation details at `https://gist.github.com/barncastle/979c12a9c5e64d810a28ad1728e7e0f9`.
+        u8[20] matrix_card_proof;
     }
     if (security_flag & AUTHENTICATOR) {
         u8 amount_of_tokens {
@@ -341,7 +340,6 @@ clogin CMD_AUTH_LOGON_PROOF_Client = 0x01 {
         u8[amount_of_tokens] tokens;
     }
 } {
-    comment = "Reply after successful [CMD_AUTH_LOGON_CHALLENGE_Server].";
     login_versions = "8";
 }
 

@@ -6,9 +6,8 @@ smsg SMSG_LOOT_MONEY_NOTIFY = 0x0163 {
 
 smsg SMSG_LOOT_MONEY_NOTIFY = 0x0163 {
     u32 amount;
-    Bool alone {
-        comment = "Controls the text displayed in chat. False is 'Your share is...' and true is 'You loot...'";
-    }
+    /// Controls the text displayed in chat. False is 'Your share is...' and true is 'You loot...'
+    Bool alone;
 } {
     versions = "3.3.5";
 }

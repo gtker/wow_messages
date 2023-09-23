@@ -6,9 +6,8 @@ smsg SMSG_LEARNED_SPELL = 0x012B {
 
 smsg SMSG_LEARNED_SPELL = 0x012B {
     Spell id;
-    u16 unknown {
-        comment = "mangostwo: 3.3.3 unk";
-    }
+    /// mangostwo: 3.3.3 unk
+    u16 unknown;
 } {
     versions = "3.3.5";
 }

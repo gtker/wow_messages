@@ -12,9 +12,9 @@ enum Bonding : u8 {
     QUEST_ITEM = 4 {
         display = "Quest Item";
     }
+    /// Not used in game according to all emulators.
     QUEST_ITEM1 = 5 {
         display = "Quest Item";
-        comment = "Not used in game according to all emulators.";
     }
 } {
     rust_base_type = "true";

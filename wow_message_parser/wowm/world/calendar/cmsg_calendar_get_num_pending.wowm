@@ -1,7 +1,4 @@
 #tag_all versions "3.3.5";
 
-msg CMSG_CALENDAR_GET_NUM_PENDING = 0x0447 {
-
-} {
-    comment = "Respond with [SMSG_CALENDAR_SEND_NUM_PENDING]";
-}
+/// Respond with [SMSG_CALENDAR_SEND_NUM_PENDING]
+msg CMSG_CALENDAR_GET_NUM_PENDING = 0x0447 {}

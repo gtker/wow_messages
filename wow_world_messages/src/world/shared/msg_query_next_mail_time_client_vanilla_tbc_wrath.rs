@@ -2,7 +2,7 @@ use std::io::{Read, Write};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Sent when the client enters the world.
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/queries/msg_query_next_mail_time_client.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/queries/msg_query_next_mail_time_client.wowm#L1):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/queries/msg_query_next_mail_time_client.wowm:2`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/queries/msg_query_next_mail_time_client.wowm#L2):
 /// ```text
 /// cmsg MSG_QUERY_NEXT_MAIL_TIME_Client = 0x0284 {
 /// }
@@ -72,7 +72,7 @@ mod test_vanilla {
 
     }
 
-    // Generated from `wow_message_parser/wowm/world/queries/msg_query_next_mail_time_client.wowm` line 7.
+    // Generated from `wow_message_parser/wowm/world/queries/msg_query_next_mail_time_client.wowm` line 6.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn msg_query_next_mail_time_client0() {
@@ -91,7 +91,7 @@ mod test_vanilla {
         assert_eq!(dest, RAW0);
     }
 
-    // Generated from `wow_message_parser/wowm/world/queries/msg_query_next_mail_time_client.wowm` line 7.
+    // Generated from `wow_message_parser/wowm/world/queries/msg_query_next_mail_time_client.wowm` line 6.
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_msg_query_next_mail_time_client0() {
@@ -110,7 +110,7 @@ mod test_vanilla {
         assert_eq!(dest, RAW0);
     }
 
-    // Generated from `wow_message_parser/wowm/world/queries/msg_query_next_mail_time_client.wowm` line 7.
+    // Generated from `wow_message_parser/wowm/world/queries/msg_query_next_mail_time_client.wowm` line 6.
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_msg_query_next_mail_time_client0() {
@@ -149,7 +149,7 @@ mod test_tbc {
 
     }
 
-    // Generated from `wow_message_parser/wowm/world/queries/msg_query_next_mail_time_client.wowm` line 7.
+    // Generated from `wow_message_parser/wowm/world/queries/msg_query_next_mail_time_client.wowm` line 6.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn msg_query_next_mail_time_client0() {
@@ -168,7 +168,7 @@ mod test_tbc {
         assert_eq!(dest, RAW0);
     }
 
-    // Generated from `wow_message_parser/wowm/world/queries/msg_query_next_mail_time_client.wowm` line 7.
+    // Generated from `wow_message_parser/wowm/world/queries/msg_query_next_mail_time_client.wowm` line 6.
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_msg_query_next_mail_time_client0() {
@@ -187,7 +187,7 @@ mod test_tbc {
         assert_eq!(dest, RAW0);
     }
 
-    // Generated from `wow_message_parser/wowm/world/queries/msg_query_next_mail_time_client.wowm` line 7.
+    // Generated from `wow_message_parser/wowm/world/queries/msg_query_next_mail_time_client.wowm` line 6.
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_msg_query_next_mail_time_client0() {
@@ -226,7 +226,7 @@ mod test_wrath {
 
     }
 
-    // Generated from `wow_message_parser/wowm/world/queries/msg_query_next_mail_time_client.wowm` line 7.
+    // Generated from `wow_message_parser/wowm/world/queries/msg_query_next_mail_time_client.wowm` line 6.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn msg_query_next_mail_time_client0() {
@@ -245,7 +245,7 @@ mod test_wrath {
         assert_eq!(dest, RAW0);
     }
 
-    // Generated from `wow_message_parser/wowm/world/queries/msg_query_next_mail_time_client.wowm` line 7.
+    // Generated from `wow_message_parser/wowm/world/queries/msg_query_next_mail_time_client.wowm` line 6.
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_msg_query_next_mail_time_client0() {
@@ -264,7 +264,7 @@ mod test_wrath {
         assert_eq!(dest, RAW0);
     }
 
-    // Generated from `wow_message_parser/wowm/world/queries/msg_query_next_mail_time_client.wowm` line 7.
+    // Generated from `wow_message_parser/wowm/world/queries/msg_query_next_mail_time_client.wowm` line 6.
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_msg_query_next_mail_time_client0() {

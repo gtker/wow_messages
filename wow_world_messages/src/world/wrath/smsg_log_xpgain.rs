@@ -4,7 +4,7 @@ use crate::Guid;
 use crate::wrath::ExperienceAwardType;
 
 #[derive(Debug, Clone, Copy, PartialEq, PartialOrd, Default)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/exp/smsg_log_xpgain.wowm:22`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/exp/smsg_log_xpgain.wowm#L22):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/exp/smsg_log_xpgain.wowm:21`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/exp/smsg_log_xpgain.wowm#L21):
 /// ```text
 /// smsg SMSG_LOG_XPGAIN = 0x01D0 {
 ///     Guid target;

@@ -2,10 +2,9 @@
 
 smsg SMSG_FORCE_SWIM_SPEED_CHANGE = 0x00E6 {
     PackedGuid guid;
-    u32 move_event {
-        comment = "cmangos/mangoszero/vmangos: set to 0";
-        comment = "cmangos/mangoszero/vmangos: moveEvent, NUM_PMOVE_EVTS = 0x39";
-    }
+    /// cmangos/mangoszero/vmangos: set to 0
+    /// cmangos/mangoszero/vmangos: moveEvent, NUM_PMOVE_EVTS = 0x39
+    u32 move_event;
     f32 speed;
 }
 

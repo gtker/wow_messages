@@ -11,9 +11,8 @@ smsg SMSG_ITEM_REFUND_INFO_RESPONSE = 0x04B2 {
     u32 honor_point_cost;
     u32 arena_point_cost;
     ItemRefundExtra[5] extra_items;
-    u32 unknown1 {
-        comment = "Emus set to 0.";
-    }
+    /// Emus set to 0.
+    u32 unknown1;
     u32 time_since_loss;
 } {
     versions = "3.3.5";

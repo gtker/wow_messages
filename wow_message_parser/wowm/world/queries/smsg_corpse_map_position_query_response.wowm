@@ -1,9 +1,9 @@
+/// Emus just set all values to 0.
 smsg SMSG_CORPSE_MAP_POSITION_QUERY_RESPONSE = 0x04B7 {
     f32 unknown1;
     f32 unknown2;
     f32 unknown3;
     f32 unknown4;
 } {
-    comment = "Emus just set all values to 0.";
     versions = "3.3.5";
 }

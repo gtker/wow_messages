@@ -11,9 +11,8 @@ enum TransferAbortReason : u8 {
 smsg SMSG_TRANSFER_ABORTED = 0x0040 {
     Map map;
     TransferAbortReason reason;
-    u8 argument {
-        comment = "Possibly not needed.";
-    }
+    /// Possibly not needed.
+    u8 argument;
 } {
     versions = "1.12";
 }
@@ -57,48 +56,34 @@ smsg SMSG_TRANSFER_ABORTED = 0x0040 {
 enum TransferAbortReason : u8 {
     NONE = 0x00;
     ERROR = 0x01;
-    MAX_PLAYERS = 0x02 {
-         comment = "Transfer Aborted: instance is full";
-    }
-    NOT_FOUND = 0x03 {
-         comment = "Transfer Aborted: instance not found";
-    }
-    TOO_MANY_INSTANCES = 0x04 {
-         comment = "You have entered too many instances recently.";
-    }
-    ZONE_IN_COMBAT = 0x06 {
-         comment = "Unable to zone in while an encounter is in progress.";
-    }
-    INSUFFICIENT_EXPANSION_LEVEL = 0x07 {
-         comment = "You must have TBC/WotLK expansion installed to access this area.";
-    }
-    DIFFICULTY_NOT_AVAILABLE = 0x08 {
-         comment = "Normal/Heroic/Epic difficulty mode is not available for %s.";
-    }
-    UNIQUE_MESSAGE = 0x09 {
-         comment = "Until you've escaped The Lich Kings grasp, you cannot leave this place!";
-    }
-    TOO_MANY_REALM_INSTANCES = 0x0A {
-         comment = "Additional instances cannot be launched, please try again later.";
-    }
-    NEED_GROUP = 0x0B {
-         comment = "3.1";
-    }
-    NOT_FOUND1 = 0x0C {
-         comment = "3.1";
-    }
-    NOT_FOUND2 = 0x0D {
-         comment = "3.1";
-    }
-    NOT_FOUND3 = 0x0E {
-         comment = "3.2";
-    }
-    REALM_ONLY = 0x0F {
-         comment = "All players on party must be from the same realm.";
-    }
-    MAP_NOT_ALLOWED = 0x10 {
-         comment = "Map can't be entered at this time.";
-    }
+    /// Transfer Aborted: instance is full
+    MAX_PLAYERS = 0x02;
+    /// Transfer Aborted: instance not found
+    NOT_FOUND = 0x03;
+    /// You have entered too many instances recently.
+    TOO_MANY_INSTANCES = 0x04;
+    /// Unable to zone in while an encounter is in progress.
+    ZONE_IN_COMBAT = 0x06;
+    /// You must have TBC/WotLK expansion installed to access this area.
+    INSUFFICIENT_EXPANSION_LEVEL = 0x07;
+    /// Normal/Heroic/Epic difficulty mode is not available for %s.
+    DIFFICULTY_NOT_AVAILABLE = 0x08;
+    /// Until you've escaped The Lich Kings grasp, you cannot leave this place!
+    UNIQUE_MESSAGE = 0x09;
+    /// Additional instances cannot be launched, please try again later.
+    TOO_MANY_REALM_INSTANCES = 0x0A;
+    /// 3.1
+    NEED_GROUP = 0x0B;
+    /// 3.1
+    NOT_FOUND1 = 0x0C;
+    /// 3.1
+    NOT_FOUND2 = 0x0D;
+    /// 3.2
+    NOT_FOUND3 = 0x0E;
+    /// All players on party must be from the same realm.
+    REALM_ONLY = 0x0F;
+    /// Map can't be entered at this time.
+    MAP_NOT_ALLOWED = 0x10;
 } {
     versions = "3.3.5";
 }

@@ -4,82 +4,60 @@ enum LootMethod : u8 {
     PICKPOCKETING          = 2;
     FISHING                = 3;
     DISENCHANTING          = 4;
-    SKINNING               = 6 {
-        comment = "unsupported by client, send LOOT_PICKPOCKETING instead";
-    }
-    FISHINGHOLE            = 20 {
-        comment = "unsupported by client, send LOOT_FISHING instead";
-    }
-    FISHING_FAIL           = 21 {
-        comment = "unsupported by client, send LOOT_FISHING instead";
-    }
-    INSIGNIA               = 22 {
-        comment = "unsupported by client, send LOOT_CORPSE instead";
-    }
+    /// unsupported by client, send LOOT_PICKPOCKETING instead
+    SKINNING               = 6;
+    /// unsupported by client, send LOOT_FISHING instead
+    FISHINGHOLE            = 20;
+    /// unsupported by client, send LOOT_FISHING instead
+    FISHING_FAIL           = 21;
+    /// unsupported by client, send LOOT_CORPSE instead
+    INSIGNIA               = 22;
 } {
     versions = "1 2 3";
 }
 
 enum LootMethodError : u8 {
-    DIDNT_KILL               = 0 {
-        comment = "You don't have permission to loot that corpse.";
-    }
-    TOO_FAR                  = 4 {
-        comment = "You are too far away to loot that corpse.";
-    }
-    BAD_FACING               = 5 {
-        comment = "You must be facing the corpse to loot it.";
-    }
-    LOCKED                   = 6 {
-        comment = "Someone is already looting that corpse.";
-    }
-    NOTSTANDING              = 8 {
-        comment = "You need to be standing up to loot something!";
-    }
-    STUNNED                  = 9 {
-        comment = "You can't loot anything while stunned!";
-    }
-    PLAYER_NOT_FOUND         = 10 {
-        comment = "Player not found";
-    }
-    PLAY_TIME_EXCEEDED       = 11 {
-        comment = "Maximum play time exceeded";
-    }
-    MASTER_INV_FULL          = 12 {
-        comment = "That player's inventory is full";
-    }
-    MASTER_UNIQUE_ITEM       = 13 {
-        comment = "Player has too many of that item already";
-    }
-    MASTER_OTHER             = 14 {
-        comment = "Can't assign item to that player";
-    }
-    ALREADY_PICKPOCKETED     = 15 {
-        comment = "Your target has already had its pockets picked";
-    }
-    NOT_WHILE_SHAPESHIFTED   = 16 {
-        comment = "You can't do that while shapeshifted.";
-    }
+    /// You don't have permission to loot that corpse.
+    DIDNT_KILL               = 0;
+    /// You are too far away to loot that corpse.
+    TOO_FAR                  = 4;
+    /// You must be facing the corpse to loot it.
+    BAD_FACING               = 5;
+    /// Someone is already looting that corpse.
+    LOCKED                   = 6;
+    /// You need to be standing up to loot something!
+    NOTSTANDING              = 8;
+    /// You can't loot anything while stunned!
+    STUNNED                  = 9;
+    /// Player not found
+    PLAYER_NOT_FOUND         = 10;
+    /// Maximum play time exceeded
+    PLAY_TIME_EXCEEDED       = 11;
+    /// That player's inventory is full
+    MASTER_INV_FULL          = 12;
+    /// Player has too many of that item already
+    MASTER_UNIQUE_ITEM       = 13;
+    /// Can't assign item to that player
+    MASTER_OTHER             = 14;
+    /// Your target has already had its pockets picked
+    ALREADY_PICKPOCKETED     = 15;
+    /// You can't do that while shapeshifted.
+    NOT_WHILE_SHAPESHIFTED   = 16;
 } {
     versions = "1 2 3";
 }
 
 enum LootSlotType : u8 {
-    TYPE_ALLOW_LOOT = 0 {
-        comment = " player can loot the item.";
-    }
-    TYPE_ROLL_ONGOING = 1 {
-        comment = " roll is ongoing. player cannot loot.";
-    }
-    TYPE_MASTER = 2 {
-        comment = " item can only be distributed by group loot master.";
-    }
-    TYPE_LOCKED = 3 {
-        comment = " item is shown in red. player cannot loot.";
-    }
-    TYPE_OWNER = 4 {
-        comment = " ignore binding confirmation and etc, for single player looting";
-    }
+    ///  player can loot the item.
+    TYPE_ALLOW_LOOT = 0;
+    ///  roll is ongoing. player cannot loot.
+    TYPE_ROLL_ONGOING = 1;
+    ///  item can only be distributed by group loot master.
+    TYPE_MASTER = 2;
+    ///  item is shown in red. player cannot loot.
+    TYPE_LOCKED = 3;
+    ///  ignore binding confirmation and etc, for single player looting
+    TYPE_OWNER = 4;
 } {
     versions = "1 2 3";
 }

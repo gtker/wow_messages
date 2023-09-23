@@ -9,8 +9,8 @@ smsg SMSG_MIRRORIMAGE_DATA = 0x0401 {
     u8 hair_color;
     u8 facial_hair;
     u32 guild_id;
-    u32[11] display_ids {
-        comment = "This array contains the: HEAD, SHOULDERS, BODY, CHEST, WAIST, LEGS, FEET, WRISTS, HANDS, BACK, and TABARD."; }
+    /// This array contains the: HEAD, SHOULDERS, BODY, CHEST, WAIST, LEGS, FEET, WRISTS, HANDS, BACK, and TABARD.
+    u32[11] display_ids;
 } {
     versions = "2.4.3";
 }
@@ -27,8 +27,8 @@ smsg SMSG_MIRRORIMAGE_DATA = 0x0402 {
     u8 hair_color;
     u8 facial_hair;
     u32 guild_id;
-    u32[11] display_ids {
-        comment = "This array contains the: HEAD, SHOULDERS, BODY, CHEST, WAIST, LEGS, FEET, WRISTS, HANDS, BACK, and TABARD."; }
+    /// This array contains the: HEAD, SHOULDERS, BODY, CHEST, WAIST, LEGS, FEET, WRISTS, HANDS, BACK, and TABARD.
+    u32[11] display_ids;
 } {
     versions = "3.3.5";
 }

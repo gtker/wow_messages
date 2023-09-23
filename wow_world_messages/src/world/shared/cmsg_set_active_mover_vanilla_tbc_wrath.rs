@@ -4,7 +4,7 @@ use crate::Guid;
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Sent when the client enters the world.
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/client_set/cmsg_set_active_mover.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/client_set/cmsg_set_active_mover.wowm#L1):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/client_set/cmsg_set_active_mover.wowm:2`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/client_set/cmsg_set_active_mover.wowm#L2):
 /// ```text
 /// cmsg CMSG_SET_ACTIVE_MOVER = 0x026A {
 ///     Guid guid;

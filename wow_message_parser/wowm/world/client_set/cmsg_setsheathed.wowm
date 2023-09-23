@@ -1,20 +1,21 @@
+/// According to cmangos: byte value (`UNIT_FIELD_BYTES_2`,0)
 enum SheathState : u8 {
     UNARMED = 0;
     MELEE = 1;
     RANGED = 2;
 } {
-    comment = "According to cmangos: byte value (`UNIT_FIELD_BYTES_2`,0)";
     versions = "1 2 3";
 }
 
 
+/// Says which weapon the client pulls out.
 cmsg CMSG_SETSHEATHED = 0x01E0 {
     (u32)SheathState sheathed;
 } {
-    comment = "Says which weapon the client pulls out.";
     versions = "1 2 3";
 }
 
+/// Client takes out melee weapon.
 test CMSG_SETSHEATHED {
     sheathed = MELEE;
 } [
@@ -22,6 +23,5 @@ test CMSG_SETSHEATHED {
     0xE0, 0x01, 0x00, 0x00, /* opcode */
     0x01, 0x00, 0x00, 0x00 /* sheathed */
 ] {
-    comment = "Client takes out melee weapon.";
     versions = "1 2 3";
 }

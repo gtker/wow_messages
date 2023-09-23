@@ -31,10 +31,9 @@ struct ArenaTeamMember {
 
 smsg SMSG_ARENA_TEAM_ROSTER = 0x034E {
     u32 arena_team;
-    u8 unknown {
-        comment = "arcemu: new 3.0.8.";
-        comment = "arcemu sets to 0.";
-    }
+    /// arcemu: new 3.0.8.
+    /// arcemu sets to 0.
+    u8 unknown;
     u32 amount_of_members;
     ArenaType arena_type;
     ArenaTeamMember[amount_of_members] members;

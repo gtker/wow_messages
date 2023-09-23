@@ -1,3 +1,6 @@
+/// This is both the class field and the sub class field.
+/// They are combined into one enum because the value of the sub class depends on the value of the class.
+/// The high bits of this are the class field since they are both sent as little endian.
 enum ItemClassAndSubClass : u64 {
     CONSUMABLE = 0x0000000000000000;
     CHEESE_OR_BREAD_OBSOLETE = 0x0000000100000000;
@@ -71,13 +74,13 @@ enum ItemClassAndSubClass : u64 {
     PERMANENT = 0x000000000000000E;
     JUNK = 0x000000000000000F;
 } {
-    comment = "This is both the class field and the sub class field.";
-    comment = "They are combined into one enum because the value of the sub class depends on the value of the class.";
-    comment = "The high bits of this are the class field since they are both sent as little endian.";
     versions = "1.12";
     rust_base_type = "true";
 }
 
+/// This is both the class field and the sub class field.
+/// They are combined into one enum because the value of the sub class depends on the value of the class.
+/// The high bits of this are the class field since they are both sent as little endian.
 enum ItemClassAndSubClass : u64 {
     CONSUMABLE = 0x0000000000000000;
     FOOD_AND_DRINK = 0x0000000500000000;
@@ -184,14 +187,13 @@ enum ItemClassAndSubClass : u64 {
     MISCELLANEOUS_OTHER = 0x000000040000000F;
     MOUNT = 0x000000050000000F;
 } {
-    comment = "This is both the class field and the sub class field.";
-    comment = "They are combined into one enum because the value of the sub class depends on the value of the class.";
-    comment = "The high bits of this are the class field since they are both sent as little endian.";
     versions = "2.4.3";
     rust_base_type = "true";
 }
 
-
+/// This is both the class field and the sub class field.
+/// They are combined into one enum because the value of the sub class depends on the value of the class.
+/// The high bits of this are the class field since they are both sent as little endian.
 enum ItemClassAndSubClass : u64 {
     CONSUMABLE = 0x0000000000000000;
     FOOD_AND_DRINK = 0x0000000500000000;
@@ -313,9 +315,6 @@ enum ItemClassAndSubClass : u64 {
     WARLOCK_GLYPH = 0x0000000900000010;
     DRUID_GLYPH = 0x0000000b00000010;
 } {
-    comment = "This is both the class field and the sub class field.";
-    comment = "They are combined into one enum because the value of the sub class depends on the value of the class.";
-    comment = "The high bits of this are the class field since they are both sent as little endian.";
     rust_base_type = "true";
     versions = "3.3.5";
 }

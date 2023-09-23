@@ -41,9 +41,8 @@ smsg SMSG_GM_MESSAGECHAT = 0x03B3 {
     ChatType chat_type;
     (u32)Language language;
     Guid sender;
-    u32 flags {
-        comment = "azerothcore sets to 0.";
-    }
+    /// azerothcore sets to 0.
+    u32 flags;
     if (chat_type == MONSTER_SAY
      || chat_type == MONSTER_PARTY
      || chat_type == MONSTER_YELL

@@ -5,17 +5,14 @@ enum PetTameFailureReason : u8 {
     NOT_TAMEABLE = 4;
     ANOTHER_SUMMON_ACTIVE = 5;
     UNITS_CANT_TAME = 6;
-    NO_PET_AVAILABLE = 7 {
-        comment = "not used in taming";
-    }
+    /// not used in taming
+    NO_PET_AVAILABLE = 7;
     INTERNAL_ERROR = 8;
     TOO_HIGH_LEVEL = 9;
-    DEAD = 10 {
-        comment = "not used in taming";
-    }
-    NOT_DEAD = 11 {
-        comment = "not used in taming";
-    }
+    /// not used in taming
+    DEAD = 10;
+    /// not used in taming
+    NOT_DEAD = 11;
     UNKNOWN_ERROR = 12;
 } {
     versions = "1 2";
@@ -34,17 +31,14 @@ enum PetTameFailureReason : u8 {
     NOT_TAMEABLE = 4;
     ANOTHER_SUMMON_ACTIVE = 5;
     UNITS_CANT_TAME = 6;
-    NO_PET_AVAILABLE = 7 {
-        comment = "not used in taming";
-    }
+    /// not used in taming
+    NO_PET_AVAILABLE = 7;
     INTERNA_LERROR = 8;
     TOO_HIGH_LEVEL = 9;
-    DEAD = 10 {
-        comment = "not used in taming";
-    }
-    NOT_DEAD = 11 {
-        comment = "not used in taming";
-    }
+    /// not used in taming
+    DEAD = 10;
+    /// not used in taming
+    NOT_DEAD = 11;
     CANT_CONTROL_EXOTIC = 12;
     UNKNOWN_ERROR = 13;
 } {

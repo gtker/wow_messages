@@ -1,13 +1,14 @@
+/// Sent to acknowledge the new speed. Reply to [SMSG_FORCE_RUN_SPEED_CHANGE].
 cmsg CMSG_FORCE_RUN_SPEED_CHANGE_ACK = 0x00E3 {
     Guid guid;
     u32 counter;
     MovementInfo info;
     f32 new_speed;
 } {
-    comment = "Sent to acknowledge the new speed. Reply to [SMSG_FORCE_RUN_SPEED_CHANGE].";
     versions = "1.12";
 }
 
+/// Client responds to having movement speed set to 7 in Northshire Abbey.
 test CMSG_FORCE_RUN_SPEED_CHANGE_ACK {
     guid = 6;
     counter = 0;
@@ -37,26 +38,25 @@ test CMSG_FORCE_RUN_SPEED_CHANGE_ACK {
     0x39, 0x03, 0x00, 0x00, /* MovementInfo.fall_time */
     0x00, 0x00, 0xe0, 0x40 /* new_speed */
 ] {
-    comment = "Client responds to having movement speed set to 7 in Northshire Abbey.";
     versions = "1.12";
 }
 
+/// Sent to acknowledge the new speed. Reply to [SMSG_FORCE_RUN_SPEED_CHANGE].
 cmsg CMSG_FORCE_RUN_SPEED_CHANGE_ACK = 0x00E3 {
     Guid guid;
     u32 counter;
     MovementInfo info;
     f32 new_speed;
 } {
-    comment = "Sent to acknowledge the new speed. Reply to [SMSG_FORCE_RUN_SPEED_CHANGE].";
     versions = "2.4.3";
 }
 
+/// Sent to acknowledge the new speed. Reply to [SMSG_FORCE_RUN_SPEED_CHANGE].
 cmsg CMSG_FORCE_RUN_SPEED_CHANGE_ACK = 0x00E3 {
     PackedGuid guid;
     u32 counter;
     MovementInfo info;
     f32 new_speed;
 } {
-    comment = "Sent to acknowledge the new speed. Reply to [SMSG_FORCE_RUN_SPEED_CHANGE].";
     versions = "3.3.5";
 }

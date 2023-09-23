@@ -1,161 +1,116 @@
 flag SpellCastTargetFlags : u16 {
     SELF            = 0x00000000;
-    UNUSED1         = 0x00000001 {
-        comment = "not used in any spells (can be set dynamically)";
-    }
+    /// not used in any spells (can be set dynamically)
+    UNUSED1         = 0x00000001;
     UNIT            = 0x00000002;
-    UNUSED2         = 0x00000004 {
-        comment = "not used in any spells (can be set dynamically)";
-    }
-    UNUSED3         = 0x00000008 {
-        comment = "not used in any spells (can be set dynamically)";
-    }
+    /// not used in any spells (can be set dynamically)
+    UNUSED2         = 0x00000004;
+    /// not used in any spells (can be set dynamically)
+    UNUSED3         = 0x00000008;
     ITEM            = 0x00000010;
     SOURCE_LOCATION = 0x00000020;
     DEST_LOCATION   = 0x00000040;
-    OBJECT_UNK      = 0x00000080 {
-        comment = "used in 7 spells only";
-    }
-    UNIT_UNK        = 0x00000100 {
-        comment = "looks like self target (389 spells)";
-    }
+    /// used in 7 spells only
+    OBJECT_UNK      = 0x00000080;
+    /// looks like self target (389 spells)
+    UNIT_UNK        = 0x00000100;
     PVP_CORPSE      = 0x00000200;
-    UNIT_CORPSE     = 0x00000400 {
-        comment = "10 spells (gathering professions)";
-    }
-    GAMEOBJECT          = 0x00000800 {
-        comment = "pguid, 0 spells";
-    }
-    TRADE_ITEM      = 0x00001000 {
-        comment = "pguid, 0 spells";
-    }
-    STRING          = 0x00002000 {
-        comment = "string, 0 spells";
-    }
-    UNK1            = 0x00004000 {
-        comment = "199 spells, opening object/lock";
-    }
-    CORPSE          = 0x00008000 {
-        comment = "pguid, resurrection spells";
-    }
+    /// 10 spells (gathering professions)
+    UNIT_CORPSE     = 0x00000400;
+    /// pguid, 0 spells
+    GAMEOBJECT          = 0x00000800;
+    /// pguid, 0 spells
+    TRADE_ITEM      = 0x00001000;
+    /// string, 0 spells
+    STRING          = 0x00002000;
+    /// 199 spells, opening object/lock
+    UNK1            = 0x00004000;
+    /// pguid, resurrection spells
+    CORPSE          = 0x00008000;
 } {
     versions = "1.12";
 }
 
 flag SpellCastTargetFlags : u32 {
     SELF = 0x00000000;
-    UNUSED1 = 0x00000001 {
-        comment = "not used in any spells as of 2.4.3 (can be set dynamically)";
-    }
+    /// not used in any spells as of 2.4.3 (can be set dynamically)
+    UNUSED1 = 0x00000001;
     UNIT = 0x00000002;
-    UNIT_RAID = 0x00000004 {
-        comment = "not used in any spells as of 2.4.3 (can be set dynamically) - raid member";
-    }
-    UNIT_PARTY = 0x00000008 {
-        comment = "not used in any spells as of 2.4.3 (can be set dynamically) - party member";
-    }
+    /// not used in any spells as of 2.4.3 (can be set dynamically) - raid member
+    UNIT_RAID = 0x00000004;
+    /// not used in any spells as of 2.4.3 (can be set dynamically) - party member
+    UNIT_PARTY = 0x00000008;
     ITEM = 0x00000010;
     SOURCE_LOCATION = 0x00000020;
     DEST_LOCATION = 0x00000040;
-    UNIT_ENEMY = 0x00000080 {
-        comment = "`CanAttack` == true";
-    }
-    UNIT_ALLY = 0x00000100 {
-        comment = "`CanAssist` == true";
-    }
-    CORPSE_ENEMY = 0x00000200 {
-        comment = "pguid, `CanAssist` == false";
-    }
-    UNIT_DEAD = 0x00000400 {
-        comment = "skinning-like effects";
-    }
-    GAMEOBJECT = 0x00000800 {
-        comment = "pguid, 0 spells in 2.4.3";
-    }
-    TRADE_ITEM = 0x00001000 {
-        comment = "pguid, 0 spells";
-    }
-    STRING = 0x00002000 {
-        comment = "string, 0 spells";
-    }
-    LOCKED = 0x00004000 {
-        comment = "199 spells, opening object/lock";
-    }
-    CORPSE_ALLY = 0x00008000 {
-        comment = "pguid, `CanAssist` == true";
-    }
-    UNIT_MINIPET = 0x00010000 {
-        comment = "pguid, not used in any spells as of 2.4.3 (can be set dynamically)";
-    }
+    /// `CanAttack` == true
+    UNIT_ENEMY = 0x00000080;
+    /// `CanAssist` == true
+    UNIT_ALLY = 0x00000100;
+    /// pguid, `CanAssist` == false
+    CORPSE_ENEMY = 0x00000200;
+    /// skinning-like effects
+    UNIT_DEAD = 0x00000400;
+    /// pguid, 0 spells in 2.4.3
+    GAMEOBJECT = 0x00000800;
+    /// pguid, 0 spells
+    TRADE_ITEM = 0x00001000;
+    /// string, 0 spells
+    STRING = 0x00002000;
+    /// 199 spells, opening object/lock
+    LOCKED = 0x00004000;
+    /// pguid, `CanAssist` == true
+    CORPSE_ALLY = 0x00008000;
+    /// pguid, not used in any spells as of 2.4.3 (can be set dynamically)
+    UNIT_MINIPET = 0x00010000;
 } {
     versions = "2.4.3";
 }
 
 flag SpellCastTargetFlags : u32 {
     SELF = 0x00000000;
-    UNUSED1 = 0x00000001 {
-        comment = "not used in any spells as of 2.4.3 (can be set dynamically)";
-    }
-    UNIT = 0x00000002 {
-        comment = "pguid";
-    }
-    UNIT_RAID = 0x00000004 {
-        comment = "not used in any spells as of 2.4.3 (can be set dynamically) - raid member";
-    }
-    UNIT_PARTY = 0x00000008 {
-        comment = "not used in any spells as of 2.4.3 (can be set dynamically) - party member";
-    }
-    ITEM = 0x00000010 {
-        comment = "pguid";
-    }
-    SOURCE_LOCATION = 0x00000020 {
-        comment = "3xfloat";
-    }
-    DEST_LOCATION = 0x00000040 {
-        comment = "3xfloat";
-    }
-    UNIT_ENEMY = 0x00000080 {
-        comment = "`CanAttack` == true";
-    }
-    UNIT_ALLY = 0x00000100 {
-        comment = "`CanAssist` == true";
-    }
-    CORPSE_ENEMY = 0x00000200 {
-        comment = "pguid, `CanAssist` == false";
-    }
-    UNIT_DEAD = 0x00000400 {
-        comment = "skinning-like effects";
-    }
-    GAMEOBJECT = 0x00000800 {
-        comment = "pguid, 0 spells in 2.4.3";
-    }
-    TRADE_ITEM = 0x00001000 {
-        comment = "pguid, 0 spells";
-    }
-    STRING = 0x00002000 {
-        comment = "string, 0 spells";
-    }
-    LOCKED = 0x00004000 {
-        comment = "199 spells, opening object/lock";
-    }
-    CORPSE_ALLY = 0x00008000 {
-        comment = "pguid, `CanAssist` == true";
-    }
-    UNIT_MINIPET = 0x00010000 {
-        comment = "pguid, not used in any spells as of 2.4.3 (can be set dynamically)";
-    }
-    GLYPH_SLOT      = 0x00020000 {
-        comment = "used in glyph spells";
-    }
-    DEST_TARGET     = 0x00040000 {
-        comment = "sometimes appears with `DEST_TARGET` spells (may appear or not for a given spell)";
-    }
-    UNUSED20        = 0x00080000 {
-        comment = "uint32 counter loop, vec3 - screen position (?) guid, not used so far";
-    }
-    UNIT_PASSENGER  = 0x00100000 {
-        comment = "guessed, used to validate target (if vehicle passenger)";
-    }
+    /// not used in any spells as of 2.4.3 (can be set dynamically)
+    UNUSED1 = 0x00000001;
+    /// pguid
+    UNIT = 0x00000002;
+    /// not used in any spells as of 2.4.3 (can be set dynamically) - raid member
+    UNIT_RAID = 0x00000004;
+    /// not used in any spells as of 2.4.3 (can be set dynamically) - party member
+    UNIT_PARTY = 0x00000008;
+    /// pguid
+    ITEM = 0x00000010;
+    /// 3xfloat
+    SOURCE_LOCATION = 0x00000020;
+    /// 3xfloat
+    DEST_LOCATION = 0x00000040;
+    /// `CanAttack` == true
+    UNIT_ENEMY = 0x00000080;
+    /// `CanAssist` == true
+    UNIT_ALLY = 0x00000100;
+    /// pguid, `CanAssist` == false
+    CORPSE_ENEMY = 0x00000200;
+    /// skinning-like effects
+    UNIT_DEAD = 0x00000400;
+    /// pguid, 0 spells in 2.4.3
+    GAMEOBJECT = 0x00000800;
+    /// pguid, 0 spells
+    TRADE_ITEM = 0x00001000;
+    /// string, 0 spells
+    STRING = 0x00002000;
+    /// 199 spells, opening object/lock
+    LOCKED = 0x00004000;
+    /// pguid, `CanAssist` == true
+    CORPSE_ALLY = 0x00008000;
+    /// pguid, not used in any spells as of 2.4.3 (can be set dynamically)
+    UNIT_MINIPET = 0x00010000;
+    /// used in glyph spells
+    GLYPH_SLOT      = 0x00020000;
+    /// sometimes appears with `DEST_TARGET` spells (may appear or not for a given spell)
+    DEST_TARGET     = 0x00040000;
+    /// uint32 counter loop, vec3 - screen position (?) guid, not used so far
+    UNUSED20        = 0x00080000;
+    /// guessed, used to validate target (if vehicle passenger)
+    UNIT_PASSENGER  = 0x00100000;
 } {
     versions = "3.3.5";
 }
@@ -393,9 +348,8 @@ enum SpellCastResult : u8 {
     NOT_READY = 0x3C;
     NOT_SHAPESHIFT = 0x3D;
     NOT_STANDING = 0x3E;
-    NOT_TRADEABLE = 0x3F {
-        comment = "rogues trying 'enchant' other's weapon with poison";
-    }
+    /// rogues trying 'enchant' other's weapon with poison
+    NOT_TRADEABLE = 0x3F;
     NOT_TRADING = 0x40;
     NOT_UNSHEATHED = 0x41;
     NOT_WHILE_GHOST = 0x42;
@@ -850,9 +804,8 @@ struct QuestItem {
     u32 quest_id;
     u32 quest_icon;
     Level32 level;
-    CString title {
-        comment = "vmangos/cmangos/mangoszero: max 0x200";
-    }
+    /// vmangos/cmangos/mangoszero: max 0x200
+    CString title;
 } {
     versions = "1 2";
 }
@@ -863,9 +816,8 @@ struct QuestItem {
     Level32 level;
     u32 flags;
     Bool repeatable;
-    CString title {
-        comment = "vmangos/cmangos/mangoszero: max 0x200";
-    }
+    /// vmangos/cmangos/mangoszero: max 0x200
+    CString title;
 } {
     versions = "3.3.3 3.3.4 3.3.5";
 }

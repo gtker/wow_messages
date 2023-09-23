@@ -14,9 +14,8 @@ smsg SMSG_SET_FACTION_STANDING = 0x0124 {
 }
 
 smsg SMSG_SET_FACTION_STANDING = 0x0124 {
-    f32 refer_a_friend_bonus {
-        comment = "All emus set to 0.";
-    }
+    /// All emus set to 0.
+    f32 refer_a_friend_bonus;
     u32 amount_of_faction_standings;
     FactionStanding[amount_of_faction_standings] faction_standings;
 } {
@@ -24,12 +23,10 @@ smsg SMSG_SET_FACTION_STANDING = 0x0124 {
 }
 
 smsg SMSG_SET_FACTION_STANDING = 0x0124 {
-    f32 refer_a_friend_bonus {
-        comment = "All emus set to 0.";
-    }
-    Bool any_rank_increased {
-        comment = "mangostwo: display visual effect";
-    }
+    /// All emus set to 0.
+    f32 refer_a_friend_bonus;
+    /// mangostwo: display visual effect
+    Bool any_rank_increased;
     u32 amount_of_faction_standings;
     FactionStanding[amount_of_faction_standings] faction_standings;
 } {

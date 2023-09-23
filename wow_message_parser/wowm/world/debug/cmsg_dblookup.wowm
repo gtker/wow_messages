@@ -1,7 +1,7 @@
+/// Executes a query directly on the world server.
+/// Not implemented on any major emulator.
 cmsg CMSG_DBLOOKUP = 0x02 {
     CString query;
 } {
-    comment = "Executes a query directly on the world server.";
-    comment = "Not implemented on any major emulator.";
     versions = "1 2 3";
 }

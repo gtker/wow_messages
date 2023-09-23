@@ -1,8 +1,8 @@
+/// Used in `ItemClass.dbc`.
 enum ItemWeaponClass : u8 {
     ITEM = 0;
     WEAPON = 1;
 } {
     non_network_type = "true";
     versions = "1.12";
-    comment = "Used in `ItemClass.dbc`.";
 }

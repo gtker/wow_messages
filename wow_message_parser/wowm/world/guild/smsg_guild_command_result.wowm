@@ -3,12 +3,10 @@ enum GuildCommand : u8 {
     INVITE = 0x01;
     QUIT = 0x03;
     FOUNDER = 0x0E;
-    UNKNOWN19 = 0x13 {
-        comment = "cmangos claims this triggers UI event EVENT_GUILD_ROSTER_UPDATE";
-    }
-    UNKNOWN20 = 0x14 {
-        comment = "cmangos claims this triggers UI event EVENT_GUILD_ROSTER_UPDATE";
-    }
+    /// cmangos claims this triggers UI event EVENT_GUILD_ROSTER_UPDATE
+    UNKNOWN19 = 0x13;
+    /// cmangos claims this triggers UI event EVENT_GUILD_ROSTER_UPDATE
+    UNKNOWN20 = 0x14;
 } {
     versions = "1 2";
 }
@@ -35,10 +33,9 @@ enum GuildCommandResult : u8 {
     ALREADY_INVITED_TO_GUILD_S  = 0x05;
     GUILD_NAME_INVALID          = 0x06;
     GUILD_NAME_EXISTS_S         = 0x07;
-    GUILD_PERMISSIONS_OR_LEADER = 0x08 {
-        comment = "mangos has 0x08 as both GUILD_LEADER_LEAVE and GUILD_PERMISSIONS.";
-        comment = "Supposedly the [GuildCommand] QUIT used GUILD_LEADER_LEAVE and others used GUILD_PERMISSIONS";
-    }
+    /// mangos has 0x08 as both GUILD_LEADER_LEAVE and GUILD_PERMISSIONS.
+    /// Supposedly the [GuildCommand] QUIT used GUILD_LEADER_LEAVE and others used GUILD_PERMISSIONS
+    GUILD_PERMISSIONS_OR_LEADER = 0x08;
     GUILD_PLAYER_NOT_IN_GUILD   = 0x09;
     GUILD_PLAYER_NOT_IN_GUILD_S = 0x0A;
     GUILD_PLAYER_NOT_FOUND_S    = 0x0B;
@@ -50,9 +47,8 @@ enum GuildCommandResult : u8 {
 }
 
 enum GuildCommandResult : u8 {
-    PLAYER_NO_MORE_IN_GUILD = 0x00 {
-        comment = "no message/error";
-    }
+    /// no message/error
+    PLAYER_NO_MORE_IN_GUILD = 0x00;
     GUILD_INTERNAL = 0x01;
     ALREADY_IN_GUILD = 0x02;
     ALREADY_IN_GUILD_S = 0x03;
@@ -60,10 +56,9 @@ enum GuildCommandResult : u8 {
     ALREADY_INVITED_TO_GUILD_S = 0x05;
     GUILD_NAME_INVALID = 0x06;
     GUILD_NAME_EXISTS_S = 0x07;
-    GUILD_LEADER_LEAVE_OR_PERMISSIONS = 0x08 {
-        comment = "for Typecommand 0x03";
-        comment = "mangosone has both `GUILD_PERMISSIONS` and `GUILD_LEADER_LEAVE` as `0x08`.";
-    }
+    /// for Typecommand 0x03
+    /// mangosone has both `GUILD_PERMISSIONS` and `GUILD_LEADER_LEAVE` as `0x08`.
+    GUILD_LEADER_LEAVE_OR_PERMISSIONS = 0x08;
     GUILD_PLAYER_NOT_IN_GUILD = 0x09;
     GUILD_PLAYER_NOT_IN_GUILD_S = 0x0A;
     GUILD_PLAYER_NOT_FOUND_S = 0x0B;
@@ -73,9 +68,8 @@ enum GuildCommandResult : u8 {
     GUILD_RANKS_LOCKED = 0x11;
     GUILD_RANK_IN_USE = 0x12;
     GUILD_IGNORING_YOU_S = 0x13;
-    GUILD_UNK20 = 0x14 {
-        comment = "for Typecommand 0x05 only";
-    }
+    /// for Typecommand 0x05 only
+    GUILD_UNK20 = 0x14;
 } {
     versions = "2.4.3";
 }
@@ -89,9 +83,8 @@ enum GuildCommandResult : u8 {
     ALREADY_INVITED_TO_GUILD_S  = 0x05;
     GUILD_NAME_INVALID          = 0x06;
     GUILD_NAME_EXISTS_S         = 0x07;
-    GUILD_LEADER_LEAVE_OR_PERMISSIONS = 0x08 {
-        comment = "mangosone has both `GUILD_PERMISSIONS` and `GUILD_LEADER_LEAVE` as `0x08`.";
-    }
+    /// mangosone has both `GUILD_PERMISSIONS` and `GUILD_LEADER_LEAVE` as `0x08`.
+    GUILD_LEADER_LEAVE_OR_PERMISSIONS = 0x08;
     GUILD_PLAYER_NOT_IN_GUILD   = 0x09;
     GUILD_PLAYER_NOT_IN_GUILD_S = 0x0A;
     GUILD_PLAYER_NOT_FOUND_S    = 0x0B;

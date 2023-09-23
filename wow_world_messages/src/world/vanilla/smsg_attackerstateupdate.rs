@@ -6,7 +6,7 @@ use crate::vanilla::{
 };
 
 #[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/combat/smsg_attackerstateupdate.wowm:50`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/combat/smsg_attackerstateupdate.wowm#L50):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/combat/smsg_attackerstateupdate.wowm:41`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/combat/smsg_attackerstateupdate.wowm#L41):
 /// ```text
 /// smsg SMSG_ATTACKERSTATEUPDATE = 0x014A {
 ///     HitInfo hit_info;
@@ -216,7 +216,7 @@ mod test {
 
     }
 
-    // Generated from `wow_message_parser/wowm/world/combat/smsg_attackerstateupdate.wowm` line 68.
+    // Generated from `wow_message_parser/wowm/world/combat/smsg_attackerstateupdate.wowm` line 58.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn smsg_attackerstateupdate0() {
@@ -236,7 +236,7 @@ mod test {
         assert_eq!(dest, RAW0);
     }
 
-    // Generated from `wow_message_parser/wowm/world/combat/smsg_attackerstateupdate.wowm` line 68.
+    // Generated from `wow_message_parser/wowm/world/combat/smsg_attackerstateupdate.wowm` line 58.
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_smsg_attackerstateupdate0() {
@@ -256,7 +256,7 @@ mod test {
         assert_eq!(dest, RAW0);
     }
 
-    // Generated from `wow_message_parser/wowm/world/combat/smsg_attackerstateupdate.wowm` line 68.
+    // Generated from `wow_message_parser/wowm/world/combat/smsg_attackerstateupdate.wowm` line 58.
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_smsg_attackerstateupdate0() {

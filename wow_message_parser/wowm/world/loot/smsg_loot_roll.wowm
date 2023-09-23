@@ -3,14 +3,12 @@ smsg SMSG_LOOT_ROLL = 0x02A2 {
     u32 loot_slot;
     Guid player;
     Item item;
-    u32 item_random_suffix {
-        comment = "vmangos/mangoszero: not used ?";
-    }
+    /// vmangos/mangoszero: not used ?
+    u32 item_random_suffix;
     u32 item_random_property_id;
     /* TODO NARROW_TYPE exact meaning? */
-    u8 roll_number {
-        comment = "vmangos/cmangos/mangoszero: 0: Need for: `item_name` > 127: you passed on: `item_name`      Roll number";
-    }
+    /// vmangos/cmangos/mangoszero: 0: Need for: `item_name` > 127: you passed on: `item_name`      Roll number
+    u8 roll_number;
     RollVote vote;
 } {
     versions = "1.12";
@@ -21,21 +19,18 @@ smsg SMSG_LOOT_ROLL = 0x02A2 {
     u32 loot_slot;
     Guid player;
     Item item;
-    u32 item_random_suffix {
-        comment = "vmangos/mangoszero: not used ?";
-    }
+    /// vmangos/mangoszero: not used ?
+    u32 item_random_suffix;
     u32 item_random_property_id;
     /* TODO NARROW_TYPE exact meaning? */
-    u8 roll_number {
-        comment = "vmangos/cmangos/mangoszero: 0: Need for: `item_name` > 127: you passed on: `item_name`      Roll number";
-    }
+    /// vmangos/cmangos/mangoszero: 0: Need for: `item_name` > 127: you passed on: `item_name`      Roll number
+    u8 roll_number;
     RollVote vote;
-    u8 auto_pass {
-        comment = "mangosone/arcemu sets to 0.";
-        comment = "mangosone: auto pass on loot";
-        comment = "arcemu: possibly related to disenchanting of loot";
-        comment = "azerothcore: 1: 'You automatically passed on: %s because you cannot loot that item.' - Possibly used in need before greed";
-    }
+    /// mangosone/arcemu sets to 0.
+    /// mangosone: auto pass on loot
+    /// arcemu: possibly related to disenchanting of loot
+    /// azerothcore: 1: 'You automatically passed on: %s because you cannot loot that item.' - Possibly used in need before greed
+    u8 auto_pass;
 } {
     versions = "2.4.3 3";
 }

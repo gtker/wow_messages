@@ -1,3 +1,4 @@
+/// Used in `ChatChannels.dbc`.
 flag DefaultChannelFlags : u32 {
     NONE = 0x00;
     INITIAL = 0x01;
@@ -11,5 +12,4 @@ flag DefaultChannelFlags : u32 {
 } {
     versions = "1.12";
     non_network_type = "true";
-    comment = "Used in `ChatChannels.dbc`.";
 }

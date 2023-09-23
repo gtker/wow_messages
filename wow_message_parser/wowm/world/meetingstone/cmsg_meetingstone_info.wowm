@@ -1,6 +1,6 @@
+/// Sent when the client enters the world.
 cmsg CMSG_MEETINGSTONE_INFO = 0x0296 {} {
     versions = "1 2"; /* In wrath this is a different message */
-    comment = "Sent when the client enters the world.";
 }
 
 test CMSG_MEETINGSTONE_INFO {

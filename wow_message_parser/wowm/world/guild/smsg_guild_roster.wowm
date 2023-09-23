@@ -39,10 +39,9 @@ struct GuildMember {
     u32 rank;
     Level level;
     Class class;
-    u8 unknown1 {
-        comment = "mangosone: new 2.4.0";
-        comment = "Possibly gender";
-    }
+    /// mangosone: new 2.4.0
+    /// Possibly gender
+    u8 unknown1;
     Area area;
     if (status == OFFLINE) {
         f32 time_offline;
@@ -55,9 +54,8 @@ struct GuildMember {
 
 struct GuildMember {
     Guid guid;
-    u32 unknown {
-        comment = "arcemu: high guid";
-    }
+    /// arcemu: high guid
+    u32 unknown;
     GuildMemberStatus status;
     CString name;
     u32 rank;

@@ -19,16 +19,14 @@ smsg SMSG_MESSAGECHAT = 0x0096 {
     else if (chat_type == SAY
           || chat_type == PARTY
           || chat_type == YELL) {
-        Guid speech_bubble_credit {
-            comment = "This character will have the speech bubble above their head.";
-            comment = "0 value credits same as `chat_credit`. Invalid value credits no one.";
-            comment = "cmangos/vmangos/mangoszero: `chat_credit` and `speech_bubble_credit` are the same";
-        }
-        Guid chat_credit {
-            comment = "This character will be appear to say this in the chat box.";
-            comment = "0 value credits no name.";
-            comment = "cmangos/vmangos/mangoszero: `chat_credit` and `speech_bubble_credit` are the same";
-        }
+        /// This character will have the speech bubble above their head.
+        /// 0 value credits same as `chat_credit`. Invalid value credits no one.
+        /// cmangos/vmangos/mangoszero: `chat_credit` and `speech_bubble_credit` are the same
+        Guid speech_bubble_credit;
+        /// This character will be appear to say this in the chat box.
+        /// 0 value credits no name.
+        /// cmangos/vmangos/mangoszero: `chat_credit` and `speech_bubble_credit` are the same
+        Guid chat_credit;
     }
     else if (chat_type == MONSTER_SAY
           || chat_type == MONSTER_YELL) {
@@ -119,9 +117,8 @@ smsg SMSG_MESSAGECHAT = 0x0096 {
     ChatType chat_type;
     (u32)Language language;
     Guid sender;
-    u32 flags {
-        comment = "azerothcore sets to 0.";
-    }
+    /// azerothcore sets to 0.
+    u32 flags;
     if (chat_type == MONSTER_SAY
      || chat_type == MONSTER_PARTY
      || chat_type == MONSTER_YELL

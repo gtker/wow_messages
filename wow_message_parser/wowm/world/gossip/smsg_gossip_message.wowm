@@ -1,11 +1,9 @@
 struct GossipItem {
-    u32 id {
-        comment = "vmangos: sets to loop index";
-    }
+    /// vmangos: sets to loop index
+    u32 id;
     u8 item_icon;
-    Bool coded {
-        comment = "vmangos: makes pop up box password";
-    }
+    /// vmangos: makes pop up box password
+    Bool coded;
     CString message;
 } {
     versions = "1.12";
@@ -27,29 +25,24 @@ smsg SMSG_GOSSIP_MESSAGE = 0x017D {
 }
 
 struct GossipItem {
-    u32 id {
-        comment = "vmangos: sets to loop index";
-    }
+    /// vmangos: sets to loop index
+    u32 id;
     u8 item_icon;
-    Bool coded {
-        comment = "vmangos: makes pop up box password";
-    }
-    Gold money_required {
-        comment = "mangosone: 2.0.3";
-    }
+    /// vmangos: makes pop up box password
+    Bool coded;
+    /// mangosone: 2.0.3
+    Gold money_required;
     CString message;
-    CString accept_text {
-        comment = "mangosone: related to money pop up box, 2.0.3, max 0x800";
-    }
+    /// mangosone: related to money pop up box, 2.0.3, max 0x800
+    CString accept_text;
 } {
     versions = "2.0.3 2.1 2.2 2.3 2.4 3";
 }
 
 smsg SMSG_GOSSIP_MESSAGE = 0x017D {
     Guid guid;
-    u32 menu_id {
-        comment = "mangosone: new 2.4.0";
-    }
+    /// mangosone: new 2.4.0
+    u32 menu_id;
     u32 title_text_id;
     u32 amount_of_gossip_items {
         valid_range = "0 15";

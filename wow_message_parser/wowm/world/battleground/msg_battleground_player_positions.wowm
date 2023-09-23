@@ -13,9 +13,8 @@ struct BattlegroundPlayerPosition {
 smsg MSG_BATTLEGROUND_PLAYER_POSITIONS_Server = 0x02E9 {
     u32 amount_of_teammates; 
     BattlegroundPlayerPosition[amount_of_teammates] teammates;
-    u8 amount_of_carriers {
-        comment = "vmangos only sends the carrier of the player team. No emu ever sends more than 2.";
-    }
+    /// vmangos only sends the carrier of the player team. No emu ever sends more than 2.
+    u8 amount_of_carriers;
     BattlegroundPlayerPosition[amount_of_carriers] carriers;
 } {
     versions = "1 2 3";

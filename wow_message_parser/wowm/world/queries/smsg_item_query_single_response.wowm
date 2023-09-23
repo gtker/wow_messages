@@ -40,9 +40,8 @@ enum SpellTriggerType : u8 {
 struct ItemSpells {
     Spell spell;   
     (u32)SpellTriggerType spell_trigger;
-    i32 spell_charges {
-        comment = "let the database control the sign here. negative means that the item should be consumed once the charges are consumed.";
-    }
+    /// let the database control the sign here. negative means that the item should be consumed once the charges are consumed.
+    i32 spell_charges;
     i32 spell_cooldown;
     u32 spell_category;
     i32 spell_category_cooldown;
@@ -51,29 +50,27 @@ struct ItemSpells {
     versions = "1";
 }
 
+/// azerothcore: `ItemSpelltriggerType` 5 might have changed on 2.4.3/3.0.3: Such auras will be applied on item pickup and removed on item loss - maybe on the other hand the item is destroyed if the aura is removed ('removed on death' of spell 57348 makes me think so)
 enum SpellTriggerType : u8 {
     ON_USE = 0;
     ON_EQUIP = 1;
     CHANCE_ON_HIT = 2;
-    SERVER_SIDE_SCRIPT = 3 {
-        comment = "cmangos-tbc: Only used by 23442, Glowing Sanctified Crystal which is used for a Hellfire Peninsula quest.";
-        comment = "Unknown why exactly it does not use the normal triggers.";
-    }
+    /// cmangos-tbc: Only used by 23442, Glowing Sanctified Crystal which is used for a Hellfire Peninsula quest.
+    /// Unknown why exactly it does not use the normal triggers.
+    SERVER_SIDE_SCRIPT = 3;
     SOULSTONE = 4;
     NO_EQUIP_COOLDOWN = 5;
     LEARN_SPELL_ID = 6;
 } {
     rust_base_type = "true";
     versions = "2 3";
-    comment = "azerothcore: `ItemSpelltriggerType` 5 might have changed on 2.4.3/3.0.3: Such auras will be applied on item pickup and removed on item loss - maybe on the other hand the item is destroyed if the aura is removed ('removed on death' of spell 57348 makes me think so)";
 }
 
 struct ItemSpells {
     Spell spell;   
     (u32)SpellTriggerType spell_trigger;
-    i32 spell_charges {
-        comment = "let the database control the sign here. negative means that the item should be consumed once the charges are consumed.";
-    }
+    /// let the database control the sign here. negative means that the item should be consumed once the charges are consumed.
+    i32 spell_charges;
     i32 spell_cooldown;
     u32 spell_category;
     i32 spell_category_cooldown;
@@ -114,39 +111,29 @@ struct ItemStat {
 
 flag ItemFlag : u32 {
     NONE = 0x00000000;
-    NO_PICKUP = 0x00000001 {
-        comment = "not used";
-    }
+    /// not used
+    NO_PICKUP = 0x00000001;
     CONJURED = 0x00000002;
-    LOOTABLE = 0x00000004 {
-        comment = "affect only non container items that can be 'open' for loot. It or lockid set enable for client show 'Right click to open'. See also `ITEM_DYNFLAG_UNLOCKED`";
-    }
-    DEPRECATED = 0x00000010 {
-        comment = "can't repeat old note: appears red icon (like when item durability==0)";
-    }
-    INDESTRUCTIBLE = 0x00000020 {
-        comment = "used for totem. Item can not be destroyed, except by using spell (item can be reagent for spell and then allowed)";
-    }
-    PLAYER_CAST = 0x00000040 {
-        comment = "? old note: usable";
-    }
+    /// affect only non container items that can be 'open' for loot. It or lockid set enable for client show 'Right click to open'. See also `ITEM_DYNFLAG_UNLOCKED`
+    LOOTABLE = 0x00000004;
+    /// can't repeat old note: appears red icon (like when item durability==0)
+    DEPRECATED = 0x00000010;
+    /// used for totem. Item can not be destroyed, except by using spell (item can be reagent for spell and then allowed)
+    INDESTRUCTIBLE = 0x00000020;
+    /// ? old note: usable
+    PLAYER_CAST = 0x00000040;
     NO_EQUIP_COOLDOWN = 0x00000080;
     INT_BONUS_INSTEAD = 0x00000100;
-    WRAPPER = 0x00000200 {
-        comment = "used or not used wrapper";
-    }
-    IGNORE_BAG_SPACE = 0x00000400 {
-        comment = "ignore bag space at new item creation?";
-    }
-    PARTY_LOOT = 0x00000800 {
-        comment = "determines if item is party loot or not";
-    }
-    CHARTER = 0x00002000 {
-        comment = "guild charter";
-    }
-    HAS_TEXT = 0x00004000 {
-        comment = "Only readable items have this (but not all)";
-    }
+    /// used or not used wrapper
+    WRAPPER = 0x00000200;
+    /// ignore bag space at new item creation?
+    IGNORE_BAG_SPACE = 0x00000400;
+    /// determines if item is party loot or not
+    PARTY_LOOT = 0x00000800;
+    /// guild charter
+    CHARTER = 0x00002000;
+    /// Only readable items have this (but not all)
+    HAS_TEXT = 0x00004000;
     NO_DISENCHANT = 0x00008000;
     REAL_DURATION = 0x00010000;
     NO_CREATOR = 0x00020000;
@@ -190,9 +177,8 @@ smsg SMSG_ITEM_QUERY_SINGLE_RESPONSE = 0x0058 {
         CString name2;
         CString name3;
         CString name4;
-        u32 display_id {
-            comment = "id from ItemDisplayInfo.dbc";
-        }
+        /// id from ItemDisplayInfo.dbc
+        u32 display_id;
         (u32)ItemQuality quality;
         ItemFlag flags;
         Gold buy_price;
@@ -208,9 +194,8 @@ smsg SMSG_ITEM_QUERY_SINGLE_RESPONSE = 0x0058 {
         u32 required_honor_rank;
         u32 required_city_rank;
         (u32)Faction required_faction;
-        u32 required_faction_rank {
-            comment = "cmangos/vmangos/mangoszero: send value only if reputation faction id setted ( needed for some items)";
-        }
+        /// cmangos/vmangos/mangoszero: send value only if reputation faction id setted ( needed for some items)
+        u32 required_faction_rank;
         u32 max_count;
         u32 stackable;
         u32 container_slots;
@@ -232,25 +217,20 @@ smsg SMSG_ITEM_QUERY_SINGLE_RESPONSE = 0x0058 {
         u32 page_text;
         Language language;
         (u32)PageTextMaterial page_text_material;
-        u32 start_quest {
-            comment = "cmangos/vmangos/mangoszero: id from QuestCache.wdb";
-        }
+        /// cmangos/vmangos/mangoszero: id from QuestCache.wdb
+        u32 start_quest;
         u32 lock_id;
-        u32 material {
-            comment = "cmangos/vmangos/mangoszero: id from Material.dbc";
-        }
+        /// cmangos/vmangos/mangoszero: id from Material.dbc
+        u32 material;
         (u32)SheatheType sheathe_type;
-        u32 random_property {
-            comment = "cmangos/vmangos/mangoszero: id from ItemRandomProperties.dbc";
-        }
+        /// cmangos/vmangos/mangoszero: id from ItemRandomProperties.dbc
+        u32 random_property;
         u32 block;
         (u32)ItemSet item_set;
         u32 max_durability;
         Area area;
         Map map;
         (u32)BagFamily bag_family;
-    } {
-        comment = "mangos doesn't send this if item doesn't exist";
     }
 } {
     versions = "1.12";
@@ -630,61 +610,44 @@ flag BagFamily : u32 {
 }
 
 flag ItemFlag : u32 {
-    NO_PICKUP = 0x00000001 {
-        comment = "not used";
-    }
-    CONJURED = 0x00000002 {
-        comment = "items created by spells with `SPELL_EFFECT_CREATE_ITEM`";
-    }
-    LOOTABLE = 0x00000004 {
-        comment = "affect only non container items that can be 'open' for loot. It or lockid set enable for client show 'Right click to open'. See also `ITEM_DYNFLAG_UNLOCKED`";
-    }
-    DEPRECATED = 0x00000010 {
-        comment = "can't repeat old note: appears red icon (like when item durability==0)";
-    }
-    INDESTRUCTIBLE = 0x00000020 {
-        comment = "used for totem. Item can not be destroyed, except by using spell (item can be reagent for spell and then allowed)";
-    }
-    PLAYER_CAST = 0x00000040 {
-        comment = "? old note: usable";
-    }
-    NO_EQUIP_COOLDOWN = 0x00000080 {
-        comment = "items without an equip cooldown (and usually a _USABLE flag)";
-    }
-    INT_BONUS_INSTEAD = 0x00000100 {
-        comment = "saw this on item 47115, 49295...";
-    }
-    WRAPPER = 0x00000200 {
-        comment = "used or not used wrapper";
-    }
-    IGNORE_BAG_SPACE = 0x00000400 {
-        comment = "ignore bag space at new item creation?";
-    }
-    PARTY_LOOT = 0x00000800 {
-        comment = "items which can be looted by all party members";
-    }
-    CHARTER = 0x00002000 {
-        comment = "arena/guild charter";
-    }
-    LETTER = 0x00004000 {
-        comment = "readable letter items";
-    }
+    /// not used
+    NO_PICKUP = 0x00000001;
+    /// items created by spells with `SPELL_EFFECT_CREATE_ITEM`
+    CONJURED = 0x00000002;
+    /// affect only non container items that can be 'open' for loot. It or lockid set enable for client show 'Right click to open'. See also `ITEM_DYNFLAG_UNLOCKED`
+    LOOTABLE = 0x00000004;
+    /// can't repeat old note: appears red icon (like when item durability==0)
+    DEPRECATED = 0x00000010;
+    /// used for totem. Item can not be destroyed, except by using spell (item can be reagent for spell and then allowed)
+    INDESTRUCTIBLE = 0x00000020;
+    /// ? old note: usable
+    PLAYER_CAST = 0x00000040;
+    /// items without an equip cooldown (and usually a _USABLE flag)
+    NO_EQUIP_COOLDOWN = 0x00000080;
+    /// saw this on item 47115, 49295...
+    INT_BONUS_INSTEAD = 0x00000100;
+    /// used or not used wrapper
+    WRAPPER = 0x00000200;
+    /// ignore bag space at new item creation?
+    IGNORE_BAG_SPACE = 0x00000400;
+    /// items which can be looted by all party members
+    PARTY_LOOT = 0x00000800;
+    /// arena/guild charter
+    CHARTER = 0x00002000;
+    /// readable letter items
+    LETTER = 0x00004000;
     NO_DISENCHANT = 0x00008000;
     REAL_DURATION = 0x00010000;
     NO_CREATOR = 0x00020000;
-    PROSPECTABLE = 0x00040000 {
-        comment = "item can have prospecting loot (in fact some items expected have empty loot)";
-    }
-    UNIQUE_EQUIPPED = 0x00080000 {
-        comment = "custom server side check, in client added in 2.x";
-    }
+    /// item can have prospecting loot (in fact some items expected have empty loot)
+    PROSPECTABLE = 0x00040000;
+    /// custom server side check, in client added in 2.x
+    UNIQUE_EQUIPPED = 0x00080000;
     IGNORE_FOR_AURAS = 0x00100000;
-    IGNORE_DEFAULT_ARENA_RESTRICTIONS = 0x00200000 {
-        comment = "Item can be used during arena match";
-    }
-    NO_DURABILITY_LOSS = 0x00400000 {
-        comment = "Some Thrown weapons have it (and only Thrown) but not all";
-    }
+    /// Item can be used during arena match
+    IGNORE_DEFAULT_ARENA_RESTRICTIONS = 0x00200000;
+    /// Some Thrown weapons have it (and only Thrown) but not all
+    NO_DURABILITY_LOSS = 0x00400000;
     SPECIAL_USE = 0x00800000;
 } {
     rust_base_type = "true";
@@ -695,18 +658,16 @@ smsg SMSG_ITEM_QUERY_SINGLE_RESPONSE = 0x0058 {
     Item item;
     optional found {
         ItemClassAndSubClass class_and_sub_class;
-        u32 sound_override_sub_class {
-            comment = "mangosone: new 2.0.3, not exist in wdb cache?";
-            comment = "mangosone sets to -1.";
-            comment = "azerothcore: < 0: id from ItemSubClass.dbc, used to override weapon sound from actual sub class";
-        }
+        /// mangosone: new 2.0.3, not exist in wdb cache?
+        /// mangosone sets to -1.
+        /// azerothcore: < 0: id from ItemSubClass.dbc, used to override weapon sound from actual sub class
+        u32 sound_override_sub_class;
         CString name1;
         CString name2;
         CString name3;
         CString name4;
-        u32 display_id {
-            comment = "id from ItemDisplayInfo.dbc";
-        }
+        /// id from ItemDisplayInfo.dbc
+        u32 display_id;
         (u32)ItemQuality quality;
         ItemFlag flags;
         Gold buy_price;
@@ -722,9 +683,8 @@ smsg SMSG_ITEM_QUERY_SINGLE_RESPONSE = 0x0058 {
         u32 required_honor_rank;
         u32 required_city_rank;
         (u32)Faction required_faction;
-        u32 required_faction_rank {
-            comment = "cmangos/vmangos/mangoszero: send value only if reputation faction id setted ( needed for some items)";
-        }
+        /// cmangos/vmangos/mangoszero: send value only if reputation faction id setted ( needed for some items)
+        u32 required_faction_rank;
         u32 max_count;
         u32 stackable;
         u32 container_slots;
@@ -746,36 +706,29 @@ smsg SMSG_ITEM_QUERY_SINGLE_RESPONSE = 0x0058 {
         u32 page_text;
         (u32)Language language;
         (u32)PageTextMaterial page_text_material;
-        u32 start_quest {
-            comment = "cmangos/vmangos/mangoszero: id from QuestCache.wdb";
-        }
+        /// cmangos/vmangos/mangoszero: id from QuestCache.wdb
+        u32 start_quest;
         u32 lock_id;
-        u32 material {
-            comment = "cmangos/vmangos/mangoszero: id from Material.dbc";
-        }
+        /// cmangos/vmangos/mangoszero: id from Material.dbc
+        u32 material;
         (u32)SheatheType sheathe_type;
-        u32 random_property {
-            comment = "cmangos/vmangos/mangoszero: id from ItemRandomProperties.dbc";
-        }
+        /// cmangos/vmangos/mangoszero: id from ItemRandomProperties.dbc
+        u32 random_property;
         u32 block;
         (u32)ItemSet item_set;
         u32 max_durability;
         Area area;
         Map map;
         BagFamily bag_family;
-        u32 totem_category {
-            comment = "mangosone: id from TotemCategory.dbc";
-        }
+        /// mangosone: id from TotemCategory.dbc
+        u32 totem_category;
         ItemSocket[3] sockets;
         u32 socket_bonus;
         u32 gem_properties;
         u32 required_disenchant_skill;
         f32 armor_damage_modifier;
-        Seconds duration {
-            comment = "mangosone: added in 2.4.2.8209, duration (seconds)";
-        }
-    } {
-        comment = "mangos doesn't send this if item doesn't exist";
+        /// mangosone: added in 2.4.2.8209, duration (seconds)
+        Seconds duration;
     }
 } {
     versions = "2.4.3";
@@ -783,79 +736,57 @@ smsg SMSG_ITEM_QUERY_SINGLE_RESPONSE = 0x0058 {
 
 flag ItemFlag : u32 {
     NO_PICKUP                         = 0x00000001;
-    CONJURED = 0x00000002 {
-        comment = "Conjured item";
-    }
-    LOOTABLE = 0x00000004 {
-        comment = "Item can be right clicked to open for loot";
-    }
-    HEROIC_TOOLTIP = 0x00000008 {
-        comment = "Makes green 'Heroic' text appear on item";
-    }
-    DEPRECATED = 0x00000010 {
-        comment = "Cannot equip or use";
-    }
-    INDESTRUCTIBLE = 0x00000020 {
-        comment = "Item can not be destroyed, except by using spell (item can be reagent for spell)";
-    }
-    PLAYER_CAST = 0x00000040 {
-        comment = "Item's spells are castable by players";
-    }
-    NO_EQUIP_COOLDOWN = 0x00000080 {
-        comment = "No default 30 seconds cooldown when equipped";
-    }
+    /// Conjured item
+    CONJURED = 0x00000002;
+    /// Item can be right clicked to open for loot
+    LOOTABLE = 0x00000004;
+    /// Makes green 'Heroic' text appear on item
+    HEROIC_TOOLTIP = 0x00000008;
+    /// Cannot equip or use
+    DEPRECATED = 0x00000010;
+    /// Item can not be destroyed, except by using spell (item can be reagent for spell)
+    INDESTRUCTIBLE = 0x00000020;
+    /// Item's spells are castable by players
+    PLAYER_CAST = 0x00000040;
+    /// No default 30 seconds cooldown when equipped
+    NO_EQUIP_COOLDOWN = 0x00000080;
     MULTI_LOOT_QUEST = 0x00000100;
-    WRAPPER = 0x00000200 {
-        comment = "Item can wrap other items";
-    }
+    /// Item can wrap other items
+    WRAPPER = 0x00000200;
     USES_RESOURCES = 0x00000400;
-    MULTI_DROP = 0x00000800 {
-        comment = "Looting this item does not remove it from available loot";
-    }
-    ITEM_PURCHASE_RECORD = 0x00001000 {
-        comment = "Item can be returned to vendor for its original cost (extended cost)";
-    }
-    CHARTER = 0x00002000 {
-        comment = "Item is guild or arena charter";
-    }
-    HAS_TEXT = 0x00004000 {
-        comment = "Only readable items have this (but not all)";
-    }
+    /// Looting this item does not remove it from available loot
+    MULTI_DROP = 0x00000800;
+    /// Item can be returned to vendor for its original cost (extended cost)
+    ITEM_PURCHASE_RECORD = 0x00001000;
+    /// Item is guild or arena charter
+    CHARTER = 0x00002000;
+    /// Only readable items have this (but not all)
+    HAS_TEXT = 0x00004000;
     NO_DISENCHANT = 0x00008000;
     REAL_DURATION = 0x00010000;
     NO_CREATOR = 0x00020000;
-    IS_PROSPECTABLE = 0x00040000 {
-        comment = "Item can be prospected";
-    }
-    UNIQUE_EQUIPPED = 0x00080000 {
-        comment = "You can only equip one of these";
-    }
+    /// Item can be prospected
+    IS_PROSPECTABLE = 0x00040000;
+    /// You can only equip one of these
+    UNIQUE_EQUIPPED = 0x00080000;
     IGNORE_FOR_AURAS = 0x00100000;
-    IGNORE_DEFAULT_ARENA_RESTRICTIONS = 0x00200000 {
-        comment = "Item can be used during arena match";
-    }
-    NO_DURABILITY_LOSS = 0x00400000 {
-        comment = "Some Thrown weapons have it (and only Thrown) but not all";
-    }
-    USE_WHEN_SHAPESHIFTED = 0x00800000 {
-        comment = "Item can be used in shapeshift forms";
-    }
+    /// Item can be used during arena match
+    IGNORE_DEFAULT_ARENA_RESTRICTIONS = 0x00200000;
+    /// Some Thrown weapons have it (and only Thrown) but not all
+    NO_DURABILITY_LOSS = 0x00400000;
+    /// Item can be used in shapeshift forms
+    USE_WHEN_SHAPESHIFTED = 0x00800000;
     HAS_QUEST_GLOW = 0x01000000;
-    HIDE_UNUSABLE_RECIPE = 0x02000000 {
-        comment = "Profession recipes: can only be looted if you meet requirements and don't already know it";
-    }
-    NOT_USEABLE_IN_ARENA = 0x04000000 {
-        comment = "Item cannot be used in arena";
-    }
-    IS_BOUND_TO_ACCOUNT = 0x08000000 {
-        comment = "Item binds to account and can be sent only to your own characters";
-    }
-    NO_REAGENT_COST = 0x10000000 {
-        comment = "Spell is cast ignoring reagents";
-    }
-    IS_MILLABLE = 0x20000000 {
-        comment = "Item can be milled";
-    }
+    /// Profession recipes: can only be looted if you meet requirements and don't already know it
+    HIDE_UNUSABLE_RECIPE = 0x02000000;
+    /// Item cannot be used in arena
+    NOT_USEABLE_IN_ARENA = 0x04000000;
+    /// Item binds to account and can be sent only to your own characters
+    IS_BOUND_TO_ACCOUNT = 0x08000000;
+    /// Spell is cast ignoring reagents
+    NO_REAGENT_COST = 0x10000000;
+    /// Item can be milled
+    IS_MILLABLE = 0x20000000;
     REPORT_TO_GUILD_CHAT = 0x40000000;
     NO_PROGRESSIVE_LOOT = 0x80000000;
 } {
@@ -866,9 +797,8 @@ flag ItemFlag : u32 {
 flag ItemFlag2 : u32 {
     FACTION_HORDE                            = 0x00000001;
     FACTION_ALLIANCE                         = 0x00000002;
-    DONT_IGNORE_BUY_PRICE                    = 0x00000004 {
-        comment = "when item uses extended cost, gold is also required";
-    }
+    /// when item uses extended cost, gold is also required
+    DONT_IGNORE_BUY_PRICE                    = 0x00000004;
     CLASSIFY_AS_CASTER                       = 0x00000008;
     CLASSIFY_AS_PHYSICAL                     = 0x00000010;
     EVERYONE_CAN_ROLL_NEED                   = 0x00000020;
@@ -907,18 +837,16 @@ smsg SMSG_ITEM_QUERY_SINGLE_RESPONSE = 0x0058 {
     Item item;
     optional found {
         ItemClassAndSubClass class_and_sub_class;
-        u32 sound_override_sub_class {
-            comment = "mangosone: new 2.0.3, not exist in wdb cache?";
-            comment = "mangosone sets to -1.";
-            comment = "azerothcore: < 0: id from ItemSubClass.dbc, used to override weapon sound from actual sub class";
-        }
+        /// mangosone: new 2.0.3, not exist in wdb cache?
+        /// mangosone sets to -1.
+        /// azerothcore: < 0: id from ItemSubClass.dbc, used to override weapon sound from actual sub class
+        u32 sound_override_sub_class;
         CString name1;
         CString name2;
         CString name3;
         CString name4;
-        u32 display_id {
-            comment = "id from ItemDisplayInfo.dbc";
-        }
+        /// id from ItemDisplayInfo.dbc
+        u32 display_id;
         (u32)ItemQuality quality;
         ItemFlag flags;
         ItemFlag2 flags2;
@@ -935,9 +863,8 @@ smsg SMSG_ITEM_QUERY_SINGLE_RESPONSE = 0x0058 {
         u32 required_honor_rank;
         u32 required_city_rank;
         (u32)Faction required_faction;
-        u32 required_faction_rank {
-            comment = "cmangos/vmangos/mangoszero: send value only if reputation faction id setted ( needed for some items)";
-        }
+        /// cmangos/vmangos/mangoszero: send value only if reputation faction id setted ( needed for some items)
+        u32 required_faction_rank;
         u32 max_count;
         u32 stackable;
         u32 container_slots;
@@ -962,17 +889,14 @@ smsg SMSG_ITEM_QUERY_SINGLE_RESPONSE = 0x0058 {
         u32 page_text;
         (u32)Language language;
         (u32)PageTextMaterial page_text_material;
-        u32 start_quest {
-            comment = "cmangos/vmangos/mangoszero: id from QuestCache.wdb";
-        }
+        /// cmangos/vmangos/mangoszero: id from QuestCache.wdb
+        u32 start_quest;
         u32 lock_id;
-        u32 material {
-            comment = "cmangos/vmangos/mangoszero: id from Material.dbc";
-        }
+        /// cmangos/vmangos/mangoszero: id from Material.dbc
+        u32 material;
         (u32)SheatheType sheathe_type;
-        u32 random_property {
-            comment = "cmangos/vmangos/mangoszero: id from ItemRandomProperties.dbc";
-        }
+        /// cmangos/vmangos/mangoszero: id from ItemRandomProperties.dbc
+        u32 random_property;
         u32 random_suffix;
         u32 block;
         (u32)ItemSet item_set;
@@ -980,23 +904,18 @@ smsg SMSG_ITEM_QUERY_SINGLE_RESPONSE = 0x0058 {
         Area area;
         Map map;
         BagFamily bag_family;
-        u32 totem_category {
-            comment = "mangosone: id from TotemCategory.dbc";
-        }
+        /// mangosone: id from TotemCategory.dbc
+        u32 totem_category;
         ItemSocket[3] sockets;
         u32 socket_bonus;
         u32 gem_properties;
         u32 required_disenchant_skill;
         f32 armor_damage_modifier;
-        Seconds duration {
-            comment = "mangosone: added in 2.4.2.8209, duration (seconds)";
-        }
+        /// mangosone: added in 2.4.2.8209, duration (seconds)
+        Seconds duration;
         u32 item_limit_category;
-        u32 holiday_id {
-            comment = "mangosone: HolidayId - points to HolidayNames.dbc";
-        }
-    } {
-        comment = "mangos doesn't send this if item doesn't exist";
+        /// mangosone: HolidayId - points to HolidayNames.dbc
+        u32 holiday_id;
     }
 } {
     versions = "3.3.5";

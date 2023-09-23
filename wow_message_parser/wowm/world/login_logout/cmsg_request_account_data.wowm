@@ -1,9 +1,8 @@
+/// Respond with [SMSG_UPDATE_ACCOUNT_DATA]
 cmsg CMSG_REQUEST_ACCOUNT_DATA = 0x020A {
-    u32 data_type {
-        comment = "The type of account data being requested. You can check this against the [CacheMask] to know if this is character-specific data or account-wide data.";
-    }
+    /// The type of account data being requested. You can check this against the [CacheMask] to know if this is character-specific data or account-wide data.
+    u32 data_type;
 } {
-    comment = "Respond with [SMSG_UPDATE_ACCOUNT_DATA]";
     versions = "1 2 3";
 }
 

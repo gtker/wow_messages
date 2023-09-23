@@ -2,9 +2,8 @@ cmsg CMSG_BUY_ITEM = 0x01A2 {
     Guid vendor;
     Item item;
     u8 amount;
-    u8 unknown1 {
-        comment = "cmangos says this is hardcoded to 1 in the TBC client.";
-    }
+    /// cmangos says this is hardcoded to 1 in the TBC client.
+    u8 unknown1;
 } {
     versions = "1 2";
 }

@@ -38,13 +38,11 @@ smsg SMSG_QUESTGIVER_QUEST_DETAILS = 0x0188 {
     QuestItemReward[amount_of_item_rewards] item_rewards;
     Gold money_reward;
     u32 honor_reward;
-    Spell reward_spell {
-        comment = "mangosone: reward spell, this spell will display (icon) (casted if RewSpellCast==0)";
-    }
+    /// mangosone: reward spell, this spell will display (icon) (casted if RewSpellCast==0)
+    Spell reward_spell;
     Spell casted_spell;
-    u32 title_reward {
-        comment = "mangosone: CharTitle, new 2.4.0, player gets this title (bit index from CharTitles)";
-    }
+    /// mangosone: CharTitle, new 2.4.0, player gets this title (bit index from CharTitles)
+    u32 title_reward;
     u32 amount_of_emotes;
     QuestDetailsEmote[amount_of_emotes] emotes;
 } {
@@ -61,9 +59,8 @@ struct QuestGiverReward {
 
 smsg SMSG_QUESTGIVER_QUEST_DETAILS = 0x0188 {
     Guid guid;
-    Guid guid2 {
-        comment = "arcemu also sends guid2 if guid is a player. Otherwise sends 0.";
-    }
+    /// arcemu also sends guid2 if guid is a player. Otherwise sends 0.
+    Guid guid2;
     u32 quest_id;
     CString title;
     CString details;
@@ -71,40 +68,32 @@ smsg SMSG_QUESTGIVER_QUEST_DETAILS = 0x0188 {
     Bool auto_finish;
     u32 quest_flags;
     u32 suggested_players;
-    u8 is_finished {
-        comment = "arcemu: MANGOS: IsFinished? value is sent back to server in quest accept packet";
-    }
+    /// arcemu: MANGOS: IsFinished? value is sent back to server in quest accept packet
+    u8 is_finished;
     u32 amount_of_choice_item_rewards;
     QuestGiverReward[amount_of_choice_item_rewards] choice_item_rewards;
     u32 amount_of_item_rewards;
     QuestGiverReward[amount_of_item_rewards] item_rewards;
     Gold money_reward;
-    u32 experience_reward {
-        comment = "arcemu: New 3.3 - this is the XP you'll see on the quest reward panel too, but I think it is fine not to show it, because it can change if the player levels up before completing the quest.";
-    }
+    /// arcemu: New 3.3 - this is the XP you'll see on the quest reward panel too, but I think it is fine not to show it, because it can change if the player levels up before completing the quest.
+    u32 experience_reward;
     u32 honor_reward;
-    f32 honor_reward_multiplier {
-        comment = "arcemu: new 3.3";
-    }
-    Spell reward_spell {
-        comment = "mangosone: reward spell, this spell will display (icon) (casted if RewSpellCast==0)";
-    }
+    /// arcemu: new 3.3
+    f32 honor_reward_multiplier;
+    /// mangosone: reward spell, this spell will display (icon) (casted if RewSpellCast==0)
+    Spell reward_spell;
     Spell casted_spell;
-    u32 title_reward {
-        comment = "mangosone: CharTitle, new 2.4.0, player gets this title (bit index from CharTitles)";
-    }
+    /// mangosone: CharTitle, new 2.4.0, player gets this title (bit index from CharTitles)
+    u32 title_reward;
     u32 talent_reward;
     u32 arena_point_reward;
-    u32 unknown2 {
-        comment = "arcemu: new 3.3.0";
-    }
+    /// arcemu: new 3.3.0
+    u32 unknown2;
     u32[5] reward_factions;
-    u32[5] reward_reputations {
-        comment = "mangostwo: columnid in QuestFactionReward.dbc (if negative, from second row)";
-    }
-    u32[5] reward_reputations_override {
-        comment = "mangostwo: reward reputation override. No diplomacy bonus is expected given, reward also does not display in chat window";
-    }
+    /// mangostwo: columnid in QuestFactionReward.dbc (if negative, from second row)
+    u32[5] reward_reputations;
+    /// mangostwo: reward reputation override. No diplomacy bonus is expected given, reward also does not display in chat window
+    u32[5] reward_reputations_override;
     u32 amount_of_emotes;
     QuestDetailsEmote[amount_of_emotes] emotes;
 } {

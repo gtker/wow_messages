@@ -1,7 +1,6 @@
 smsg SMSG_CREATURE_QUERY_RESPONSE = 0x61 {
-    u32 creature_entry {
-        comment = "When the `found` optional is not present all emulators bitwise OR the entry with `0x80000000`.``";
-    }
+    /// When the `found` optional is not present all emulators bitwise OR the entry with `0x80000000`.``
+    u32 creature_entry;
     optional found {
         CString name1;
         CString name2;
@@ -9,25 +8,19 @@ smsg SMSG_CREATURE_QUERY_RESPONSE = 0x61 {
         CString name4;
         CString sub_name;
         u32 type_flags;
-        u32 creature_type {
-            comment = "cmangos: CreatureType.dbc   wdbFeild8";
-        }
+        /// cmangos: CreatureType.dbc   wdbFeild8
+        u32 creature_type;
         (u32)CreatureFamily creature_family;
-        u32 creature_rank {
-            comment = "cmangos: Creature Rank (elite, boss, etc)";
-        }
-        u32 unknown0 {
-            comment = "cmangos: wdbFeild11";
-        }
-        u32 spell_data_id {
-            comment = "cmangos: Id from CreatureSpellData.dbc wdbField12";
-        }
-        u32 display_id {
-            comment = "cmangos: DisplayID      wdbFeild13 and workaround, way to manage models must be fixed";
-        }
-        u8 civilian {
-            comment = "cmangos: wdbFeild14";
-        }
+        /// cmangos: Creature Rank (elite, boss, etc)
+        u32 creature_rank;
+        /// cmangos: wdbFeild11
+        u32 unknown0;
+        /// cmangos: Id from CreatureSpellData.dbc wdbField12
+        u32 spell_data_id;
+        /// cmangos: DisplayID      wdbFeild13 and workaround, way to manage models must be fixed
+        u32 display_id;
+        /// cmangos: wdbFeild14
+        u8 civilian;
         u8 racial_leader;
     }
 } {
@@ -35,32 +28,26 @@ smsg SMSG_CREATURE_QUERY_RESPONSE = 0x61 {
 }
 
 smsg SMSG_CREATURE_QUERY_RESPONSE = 0x61 {
-    u32 creature_entry {
-        comment = "When the `found` optional is not present all emulators bitwise OR the entry with `0x80000000`.``";
-    }
+    /// When the `found` optional is not present all emulators bitwise OR the entry with `0x80000000`.``
+    u32 creature_entry;
     optional found {
         CString name1;
         CString name2;
         CString name3;
         CString name4;
         CString sub_name;
-        CString description {
-            comment = "mangosone: 'Directions' for guard, string for Icons 2.3.0";
-        }
+        /// mangosone: 'Directions' for guard, string for Icons 2.3.0
+        CString description;
         u32 type_flags;
-        u32 creature_type {
-            comment = "mangosone: CreatureType.dbc   wdbFeild8";
-        }
+        /// mangosone: CreatureType.dbc   wdbFeild8
+        u32 creature_type;
         (u32)CreatureFamily creature_family;
-        u32 creature_rank {
-            comment = "mangosone: Creature Rank (elite, boss, etc)";
-        }
-        u32 unknown0 {
-            comment = "mangosone: wdbFeild11";
-        }
-        u32 spell_data_id {
-            comment = "mangosone: Id from CreatureSpellData.dbc wdbField12";
-        }
+        /// mangosone: Creature Rank (elite, boss, etc)
+        u32 creature_rank;
+        /// mangosone: wdbFeild11
+        u32 unknown0;
+        /// mangosone: Id from CreatureSpellData.dbc wdbField12
+        u32 spell_data_id;
         u32[4] display_ids;
         f32 health_multiplier;
         f32 mana_multiplier;
@@ -72,40 +59,33 @@ smsg SMSG_CREATURE_QUERY_RESPONSE = 0x61 {
 }
 
 smsg SMSG_CREATURE_QUERY_RESPONSE = 0x61 {
-    u32 creature_entry {
-        comment = "When the `found` optional is not present all emulators bitwise OR the entry with `0x80000000`.``";
-    }
+    /// When the `found` optional is not present all emulators bitwise OR the entry with `0x80000000`.``
+    u32 creature_entry;
     optional found {
         CString name1;
         CString name2;
         CString name3;
         CString name4;
         CString sub_name;
-        CString description {
-            comment = "mangosone: 'Directions' for guard, string for Icons 2.3.0";
-        }
+        /// mangosone: 'Directions' for guard, string for Icons 2.3.0
+        CString description;
         u32 type_flags;
-        u32 creature_type {
-            comment = "mangosone: CreatureType.dbc   wdbFeild8";
-        }
+        /// mangosone: CreatureType.dbc   wdbFeild8
+        u32 creature_type;
         (u32)CreatureFamily creature_family;
-        u32 creature_rank {
-            comment = "mangosone: Creature Rank (elite, boss, etc)";
-        }
-        u32 kill_credit1 {
-            comment = "mangosone: new in 3.1";
-        }
-        u32 kill_credit2 {
-            comment = "mangosone: new in 3.1";
-        }
+        /// mangosone: Creature Rank (elite, boss, etc)
+        u32 creature_rank;
+        /// mangosone: new in 3.1
+        u32 kill_credit1;
+        /// mangosone: new in 3.1
+        u32 kill_credit2;
         u32[4] display_ids;
         f32 health_multiplier;
         f32 mana_multiplier;
         u8 racial_leader;
         u32[6] quest_items;
-        u32 movement_id {
-            comment = "mangosone: CreatureMovementInfo.dbc";
-        }
+        /// mangosone: CreatureMovementInfo.dbc
+        u32 movement_id;
     }
 } {
     versions = "3.3.5";

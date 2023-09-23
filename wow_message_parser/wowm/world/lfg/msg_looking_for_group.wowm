@@ -12,9 +12,8 @@ enum LfgType : u8
 
 cmsg MSG_LOOKING_FOR_GROUP_Client = 0x01FF {
     (u32)LfgType lfg_type;
-    u32 entry {
-        comment = "entry from LfgDunggeons.dbc";
-    }
+    /// entry from LfgDunggeons.dbc
+    u32 entry;
     u32 unknown;
 } {
     versions = "2.4.3";
@@ -49,9 +48,8 @@ struct LfgPlayer {
 
 smsg MSG_LOOKING_FOR_GROUP_Server = 0x01FF {
     (u32)LfgType lfg_type;
-    u32 entry {
-        comment = "entry from LfgDunggeons.dbc";
-    }
+    /// entry from LfgDunggeons.dbc
+    u32 entry;
     u32 amount_of_players_displayed;
     u32 amount_of_players_found;
     LfgPlayer[amount_of_players_displayed] players_displayed;

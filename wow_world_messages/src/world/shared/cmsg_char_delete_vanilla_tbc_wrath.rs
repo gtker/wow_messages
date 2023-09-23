@@ -5,7 +5,7 @@ use crate::Guid;
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Command to delete a character from the clients account. Can be sent after the client has received [`SMSG_CHAR_ENUM`](crate::vanilla::SMSG_CHAR_ENUM).
 /// Sent after the client has confirmed the character deletion.
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/character_screen/cmsg_char_delete.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/character_screen/cmsg_char_delete.wowm#L3):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/character_screen/cmsg_char_delete.wowm:5`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/character_screen/cmsg_char_delete.wowm#L5):
 /// ```text
 /// cmsg CMSG_CHAR_DELETE = 0x0038 {
 ///     Guid guid;
@@ -91,7 +91,7 @@ mod test_vanilla {
 
     }
 
-    // Generated from `wow_message_parser/wowm/world/character_screen/cmsg_char_delete.wowm` line 10.
+    // Generated from `wow_message_parser/wowm/world/character_screen/cmsg_char_delete.wowm` line 9.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn cmsg_char_delete0() {
@@ -111,7 +111,7 @@ mod test_vanilla {
         assert_eq!(dest, RAW0);
     }
 
-    // Generated from `wow_message_parser/wowm/world/character_screen/cmsg_char_delete.wowm` line 10.
+    // Generated from `wow_message_parser/wowm/world/character_screen/cmsg_char_delete.wowm` line 9.
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_cmsg_char_delete0() {
@@ -131,7 +131,7 @@ mod test_vanilla {
         assert_eq!(dest, RAW0);
     }
 
-    // Generated from `wow_message_parser/wowm/world/character_screen/cmsg_char_delete.wowm` line 10.
+    // Generated from `wow_message_parser/wowm/world/character_screen/cmsg_char_delete.wowm` line 9.
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_cmsg_char_delete0() {
@@ -178,7 +178,7 @@ mod test_tbc {
 
     }
 
-    // Generated from `wow_message_parser/wowm/world/character_screen/cmsg_char_delete.wowm` line 10.
+    // Generated from `wow_message_parser/wowm/world/character_screen/cmsg_char_delete.wowm` line 9.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn cmsg_char_delete0() {
@@ -198,7 +198,7 @@ mod test_tbc {
         assert_eq!(dest, RAW0);
     }
 
-    // Generated from `wow_message_parser/wowm/world/character_screen/cmsg_char_delete.wowm` line 10.
+    // Generated from `wow_message_parser/wowm/world/character_screen/cmsg_char_delete.wowm` line 9.
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_cmsg_char_delete0() {
@@ -218,7 +218,7 @@ mod test_tbc {
         assert_eq!(dest, RAW0);
     }
 
-    // Generated from `wow_message_parser/wowm/world/character_screen/cmsg_char_delete.wowm` line 10.
+    // Generated from `wow_message_parser/wowm/world/character_screen/cmsg_char_delete.wowm` line 9.
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_cmsg_char_delete0() {
@@ -265,7 +265,7 @@ mod test_wrath {
 
     }
 
-    // Generated from `wow_message_parser/wowm/world/character_screen/cmsg_char_delete.wowm` line 10.
+    // Generated from `wow_message_parser/wowm/world/character_screen/cmsg_char_delete.wowm` line 9.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn cmsg_char_delete0() {
@@ -285,7 +285,7 @@ mod test_wrath {
         assert_eq!(dest, RAW0);
     }
 
-    // Generated from `wow_message_parser/wowm/world/character_screen/cmsg_char_delete.wowm` line 10.
+    // Generated from `wow_message_parser/wowm/world/character_screen/cmsg_char_delete.wowm` line 9.
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_cmsg_char_delete0() {
@@ -305,7 +305,7 @@ mod test_wrath {
         assert_eq!(dest, RAW0);
     }
 
-    // Generated from `wow_message_parser/wowm/world/character_screen/cmsg_char_delete.wowm` line 10.
+    // Generated from `wow_message_parser/wowm/world/character_screen/cmsg_char_delete.wowm` line 9.
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_cmsg_char_delete0() {

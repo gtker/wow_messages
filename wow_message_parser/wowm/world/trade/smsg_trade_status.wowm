@@ -1,3 +1,4 @@
+/// mangos-tbc/mangosone: probably exist more
 enum InventoryResult : u8 {
     OK                                 = 0;
     CANT_EQUIP_LEVEL_I                 = 1;
@@ -81,7 +82,6 @@ enum InventoryResult : u8 {
     CANNOT_TRADE_THAT                  = 79;
     PERSONAL_ARENA_RATING_TOO_LOW      = 80;
 } {
-    comment = "mangos-tbc/mangosone: probably exist more";
     versions = "2.4.3";
 }
 
@@ -178,6 +178,7 @@ enum InventoryResult : u8 {
     versions = "3.3.5";
 }
 
+/// Any values greater than maximum enum value show as 'bag full'
 enum InventoryResult : u8 {
     OK = 0;
     CANT_EQUIP_LEVEL_I = 1;
@@ -247,7 +248,6 @@ enum InventoryResult : u8 {
     TOO_MANY_SPECIAL_BAGS = 65;
     LOOT_CANT_LOOT_THAT_NOW = 66;
 } {
-    comment = "Any values greater than maximum enum value show as 'bag full'";
     versions = "1.12";
 }
 
@@ -283,23 +283,19 @@ enum TradeStatus : u32 {
 smsg SMSG_TRADE_STATUS = 0x0120 {
     TradeStatus status;
     if (status == BEGIN_TRADE) {
-        Guid unknown1 {
-            comment = "Set to 0 in vmangos.";
-        }
+        /// Set to 0 in vmangos.
+        Guid unknown1;
     }
     else if (status == CLOSE_WINDOW) {
         (u32)InventoryResult inventory_result;
-        Bool target_error {
-            comment = "used for: EQUIP_ERR_BAG_FULL, EQUIP_ERR_CANT_CARRY_MORE_OF_THIS, EQUIP_ERR_MISSING_REAGENT, EQUIP_ERR_ITEM_MAX_LIMIT_CATEGORY_COUNT_EXCEEDED";
-        }
-        u32 item_limit_category_id {
-            comment = "ItemLimitCategory.dbc entry";
-        }
+        /// used for: EQUIP_ERR_BAG_FULL, EQUIP_ERR_CANT_CARRY_MORE_OF_THIS, EQUIP_ERR_MISSING_REAGENT, EQUIP_ERR_ITEM_MAX_LIMIT_CATEGORY_COUNT_EXCEEDED
+        Bool target_error;
+        /// ItemLimitCategory.dbc entry
+        u32 item_limit_category_id;
     }
     else if (status == ONLY_CONJURED || status == NOT_ON_TAPLIST) {
-        u8 slot {
-            comment = "Trade slot -1 here clears CGTradeInfo::m_tradeMoney";
-        }
+        /// Trade slot -1 here clears CGTradeInfo::m_tradeMoney
+        u8 slot;
     }
 } {
     paste_versions = "1.12 2.4.3 3.3.5";

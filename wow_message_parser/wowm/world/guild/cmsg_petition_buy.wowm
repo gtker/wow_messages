@@ -1,3 +1,4 @@
+/// cmangos/vmangos/mangoszero: All fields with 'skip' are completely unused
 cmsg CMSG_PETITION_BUY = 0x01BD {
     Guid npc;
     u32 unknown1;
@@ -15,15 +16,14 @@ cmsg CMSG_PETITION_BUY = 0x01BD {
     u32 unknown12;
     u16 unknown13;
     u8 unknown14;
-    u32 index {
-        comment = "cmangos/vmangos/mangoszero: Named but never used";
-    }
+    /// cmangos/vmangos/mangoszero: Named but never used
+    u32 index;
     u32 unknown15;
 } {
-    comment = "cmangos/vmangos/mangoszero: All fields with 'skip' are completely unused";
     versions = "1 2";
 }
 
+/// cmangos/vmangos/mangoszero: All fields with 'skip' are completely unused
 cmsg CMSG_PETITION_BUY = 0x01BD {
     Guid npc;
     u32 unknown1;
@@ -45,6 +45,5 @@ cmsg CMSG_PETITION_BUY = 0x01BD {
     u32 index;
     u32 unknown16;
 } {
-    comment = "cmangos/vmangos/mangoszero: All fields with 'skip' are completely unused";
     versions = "3.3.5";
 }

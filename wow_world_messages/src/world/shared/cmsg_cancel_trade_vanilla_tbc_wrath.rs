@@ -2,7 +2,7 @@ use std::io::{Read, Write};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Sent twice by the client when teleporting and logging out.
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/trade/cmsg_cancel_trade.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/trade/cmsg_cancel_trade.wowm#L3):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/trade/cmsg_cancel_trade.wowm:4`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/trade/cmsg_cancel_trade.wowm#L4):
 /// ```text
 /// cmsg CMSG_CANCEL_TRADE = 0x011C {
 /// }
@@ -72,7 +72,7 @@ mod test_vanilla {
 
     }
 
-    // Generated from `wow_message_parser/wowm/world/trade/cmsg_cancel_trade.wowm` line 7.
+    // Generated from `wow_message_parser/wowm/world/trade/cmsg_cancel_trade.wowm` line 6.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn cmsg_cancel_trade0() {
@@ -91,7 +91,7 @@ mod test_vanilla {
         assert_eq!(dest, RAW0);
     }
 
-    // Generated from `wow_message_parser/wowm/world/trade/cmsg_cancel_trade.wowm` line 7.
+    // Generated from `wow_message_parser/wowm/world/trade/cmsg_cancel_trade.wowm` line 6.
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_cmsg_cancel_trade0() {
@@ -110,7 +110,7 @@ mod test_vanilla {
         assert_eq!(dest, RAW0);
     }
 
-    // Generated from `wow_message_parser/wowm/world/trade/cmsg_cancel_trade.wowm` line 7.
+    // Generated from `wow_message_parser/wowm/world/trade/cmsg_cancel_trade.wowm` line 6.
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_cmsg_cancel_trade0() {
@@ -149,7 +149,7 @@ mod test_tbc {
 
     }
 
-    // Generated from `wow_message_parser/wowm/world/trade/cmsg_cancel_trade.wowm` line 7.
+    // Generated from `wow_message_parser/wowm/world/trade/cmsg_cancel_trade.wowm` line 6.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn cmsg_cancel_trade0() {
@@ -168,7 +168,7 @@ mod test_tbc {
         assert_eq!(dest, RAW0);
     }
 
-    // Generated from `wow_message_parser/wowm/world/trade/cmsg_cancel_trade.wowm` line 7.
+    // Generated from `wow_message_parser/wowm/world/trade/cmsg_cancel_trade.wowm` line 6.
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_cmsg_cancel_trade0() {
@@ -187,7 +187,7 @@ mod test_tbc {
         assert_eq!(dest, RAW0);
     }
 
-    // Generated from `wow_message_parser/wowm/world/trade/cmsg_cancel_trade.wowm` line 7.
+    // Generated from `wow_message_parser/wowm/world/trade/cmsg_cancel_trade.wowm` line 6.
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_cmsg_cancel_trade0() {
@@ -226,7 +226,7 @@ mod test_wrath {
 
     }
 
-    // Generated from `wow_message_parser/wowm/world/trade/cmsg_cancel_trade.wowm` line 7.
+    // Generated from `wow_message_parser/wowm/world/trade/cmsg_cancel_trade.wowm` line 6.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn cmsg_cancel_trade0() {
@@ -245,7 +245,7 @@ mod test_wrath {
         assert_eq!(dest, RAW0);
     }
 
-    // Generated from `wow_message_parser/wowm/world/trade/cmsg_cancel_trade.wowm` line 7.
+    // Generated from `wow_message_parser/wowm/world/trade/cmsg_cancel_trade.wowm` line 6.
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_cmsg_cancel_trade0() {
@@ -264,7 +264,7 @@ mod test_wrath {
         assert_eq!(dest, RAW0);
     }
 
-    // Generated from `wow_message_parser/wowm/world/trade/cmsg_cancel_trade.wowm` line 7.
+    // Generated from `wow_message_parser/wowm/world/trade/cmsg_cancel_trade.wowm` line 6.
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_cmsg_cancel_trade0() {

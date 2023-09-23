@@ -3,9 +3,8 @@
 enum LogoutResult : u32 {
     SUCCESS = 0;
     FAILURE_IN_COMBAT = 1;
-    FAILURE_FROZEN_BY_GM = 2 {
-        comment = "vmangos checks for aura 9454. Has FIXME - Need the correct value.";
-    }
+    /// vmangos checks for aura 9454. Has FIXME - Need the correct value.
+    FAILURE_FROZEN_BY_GM = 2;
     FAILURE_JUMPING_OR_FALLING = 3;
 }
 
@@ -14,12 +13,11 @@ enum LogoutSpeed : u8 {
     INSTANT = 1;
 }
 
+/// Reply to [CMSG_LOGOUT_REQUEST].
+/// The client expects to get an [SMSG_LOGOUT_COMPLETE] when logout is complete.
 smsg SMSG_LOGOUT_RESPONSE = 0x4C {
     LogoutResult result;
     LogoutSpeed speed;
-} {
-    comment = "Reply to [CMSG_LOGOUT_REQUEST].";
-    comment = "The client expects to get an [SMSG_LOGOUT_COMPLETE] when logout is complete.";
 }
 
 test SMSG_LOGOUT_RESPONSE {

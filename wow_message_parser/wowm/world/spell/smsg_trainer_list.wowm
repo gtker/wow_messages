@@ -7,19 +7,16 @@ enum TrainerSpellState : u8 {
 }
 
 struct TrainerSpell {
-    Spell spell {
-        comment = "cmangos: learned spell (or cast-spell in profession case)";
-    }
+    /// cmangos: learned spell (or cast-spell in profession case)
+    Spell spell;
     TrainerSpellState state;
     u32 spell_cost;
-    u32 talent_point_cost {
-        comment = "cmangos: spells don't cost talent points";
-        comment = "cmangos: set to 0";
-    }
-    u32 first_rank {
-        comment = "cmangos: must be equal prev. field to have learn button in enabled state";
-        comment = "cmangos: 1 for true 0 for false";
-    }
+    /// cmangos: spells don't cost talent points
+    /// cmangos: set to 0
+    u32 talent_point_cost;
+    /// cmangos: must be equal prev. field to have learn button in enabled state
+    /// cmangos: 1 for true 0 for false
+    u32 first_rank;
     u8 required_level;
     (u32)Skill required_skill;
     u32 required_skill_value;

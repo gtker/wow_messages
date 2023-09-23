@@ -6,9 +6,8 @@ smsg SMSG_BINDER_CONFIRM = 0x02EB {
 
 smsg SMSG_BINDER_CONFIRM = 0x02EB {
     Guid guid;
-    Area area {
-        comment = "arcemu has this field while other emus do not.";
-    }
+    /// arcemu has this field while other emus do not.
+    Area area;
 } {
     versions = "3.3.5";
 }

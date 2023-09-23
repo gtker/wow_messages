@@ -5,7 +5,7 @@ use wow_world_base::shared::account_data_type_vanilla_tbc::AccountDataType;
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// This is sent by the client after receiving [`SMSG_ACCOUNT_DATA_TIMES`](crate::vanilla::SMSG_ACCOUNT_DATA_TIMES). Client can also request a block through [`CMSG_REQUEST_ACCOUNT_DATA`](crate::vanilla::CMSG_REQUEST_ACCOUNT_DATA).
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/login_logout/cmsg_update_account_data.wowm:15`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/login_logout/cmsg_update_account_data.wowm#L15):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/login_logout/cmsg_update_account_data.wowm:16`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/login_logout/cmsg_update_account_data.wowm#L16):
 /// ```text
 /// cmsg CMSG_UPDATE_ACCOUNT_DATA = 0x020B {
 ///     (u32)AccountDataType data_type;
@@ -400,7 +400,7 @@ mod test_vanilla {
 
     }
 
-    // Generated from `wow_message_parser/wowm/world/login_logout/cmsg_update_account_data.wowm` line 43.
+    // Generated from `wow_message_parser/wowm/world/login_logout/cmsg_update_account_data.wowm` line 40.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn cmsg_update_account_data0() {
@@ -424,7 +424,7 @@ mod test_vanilla {
         assert_eq!(t, s);
     }
 
-    // Generated from `wow_message_parser/wowm/world/login_logout/cmsg_update_account_data.wowm` line 43.
+    // Generated from `wow_message_parser/wowm/world/login_logout/cmsg_update_account_data.wowm` line 40.
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_cmsg_update_account_data0() {
@@ -448,7 +448,7 @@ mod test_vanilla {
         assert_eq!(t, s);
     }
 
-    // Generated from `wow_message_parser/wowm/world/login_logout/cmsg_update_account_data.wowm` line 43.
+    // Generated from `wow_message_parser/wowm/world/login_logout/cmsg_update_account_data.wowm` line 40.
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_cmsg_update_account_data0() {
@@ -1048,7 +1048,7 @@ mod test_vanilla {
 
     }
 
-    // Generated from `wow_message_parser/wowm/world/login_logout/cmsg_update_account_data.wowm` line 55.
+    // Generated from `wow_message_parser/wowm/world/login_logout/cmsg_update_account_data.wowm` line 52.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn cmsg_update_account_data1() {
@@ -1072,7 +1072,7 @@ mod test_vanilla {
         assert_eq!(t, s);
     }
 
-    // Generated from `wow_message_parser/wowm/world/login_logout/cmsg_update_account_data.wowm` line 55.
+    // Generated from `wow_message_parser/wowm/world/login_logout/cmsg_update_account_data.wowm` line 52.
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_cmsg_update_account_data1() {
@@ -1096,7 +1096,7 @@ mod test_vanilla {
         assert_eq!(t, s);
     }
 
-    // Generated from `wow_message_parser/wowm/world/login_logout/cmsg_update_account_data.wowm` line 55.
+    // Generated from `wow_message_parser/wowm/world/login_logout/cmsg_update_account_data.wowm` line 52.
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_cmsg_update_account_data1() {
@@ -1148,7 +1148,7 @@ mod test_tbc {
 
     }
 
-    // Generated from `wow_message_parser/wowm/world/login_logout/cmsg_update_account_data.wowm` line 43.
+    // Generated from `wow_message_parser/wowm/world/login_logout/cmsg_update_account_data.wowm` line 40.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn cmsg_update_account_data0() {
@@ -1172,7 +1172,7 @@ mod test_tbc {
         assert_eq!(t, s);
     }
 
-    // Generated from `wow_message_parser/wowm/world/login_logout/cmsg_update_account_data.wowm` line 43.
+    // Generated from `wow_message_parser/wowm/world/login_logout/cmsg_update_account_data.wowm` line 40.
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_cmsg_update_account_data0() {
@@ -1196,7 +1196,7 @@ mod test_tbc {
         assert_eq!(t, s);
     }
 
-    // Generated from `wow_message_parser/wowm/world/login_logout/cmsg_update_account_data.wowm` line 43.
+    // Generated from `wow_message_parser/wowm/world/login_logout/cmsg_update_account_data.wowm` line 40.
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_cmsg_update_account_data0() {
@@ -1796,7 +1796,7 @@ mod test_tbc {
 
     }
 
-    // Generated from `wow_message_parser/wowm/world/login_logout/cmsg_update_account_data.wowm` line 55.
+    // Generated from `wow_message_parser/wowm/world/login_logout/cmsg_update_account_data.wowm` line 52.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn cmsg_update_account_data1() {
@@ -1820,7 +1820,7 @@ mod test_tbc {
         assert_eq!(t, s);
     }
 
-    // Generated from `wow_message_parser/wowm/world/login_logout/cmsg_update_account_data.wowm` line 55.
+    // Generated from `wow_message_parser/wowm/world/login_logout/cmsg_update_account_data.wowm` line 52.
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_cmsg_update_account_data1() {
@@ -1844,7 +1844,7 @@ mod test_tbc {
         assert_eq!(t, s);
     }
 
-    // Generated from `wow_message_parser/wowm/world/login_logout/cmsg_update_account_data.wowm` line 55.
+    // Generated from `wow_message_parser/wowm/world/login_logout/cmsg_update_account_data.wowm` line 52.
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_cmsg_update_account_data1() {

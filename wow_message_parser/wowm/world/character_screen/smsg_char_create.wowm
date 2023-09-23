@@ -1,9 +1,9 @@
+/// Response to [CMSG_CHAR_CREATE].
+/// Every [WorldResult] except `CHAR_CREATE_SUCCESS` will lead to a popup showing. `CHAR_CREATE_SUCCESS` will cause the client to send a [CMSG_CHAR_ENUM].
 smsg SMSG_CHAR_CREATE = 0x3A {
     WorldResult result;
 } {
     paste_versions = "1 2.4.3 3.3.5";
-    comment = "Response to [CMSG_CHAR_CREATE].";
-    comment = "Every [WorldResult] except `CHAR_CREATE_SUCCESS` will lead to a popup showing. `CHAR_CREATE_SUCCESS` will cause the client to send a [CMSG_CHAR_ENUM].";
 }
 
 test SMSG_CHAR_CREATE {

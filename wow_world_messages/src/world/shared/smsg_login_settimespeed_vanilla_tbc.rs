@@ -6,7 +6,7 @@ use crate::DateTime;
 /// Tells the client what the datetime is and how fast time passes.
 /// The client also asks for the datetime with [`CMSG_QUERY_TIME`](crate::vanilla::CMSG_QUERY_TIME) and gets a reply from [`SMSG_QUERY_TIME_RESPONSE`](crate::vanilla::SMSG_QUERY_TIME_RESPONSE), but this does not appear to change anything in the client.
 /// Despite sending this as the very first message after the client logs in it will still send a [`CMSG_QUERY_TIME`](crate::vanilla::CMSG_QUERY_TIME).
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/login_logout/smsg_login_settimespeed.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/login_logout/smsg_login_settimespeed.wowm#L1):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/login_logout/smsg_login_settimespeed.wowm:4`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/login_logout/smsg_login_settimespeed.wowm#L4):
 /// ```text
 /// smsg SMSG_LOGIN_SETTIMESPEED = 0x0042 {
 ///     DateTime datetime;
@@ -103,7 +103,7 @@ mod test_vanilla {
 
     }
 
-    // Generated from `wow_message_parser/wowm/world/login_logout/smsg_login_settimespeed.wowm` line 17.
+    // Generated from `wow_message_parser/wowm/world/login_logout/smsg_login_settimespeed.wowm` line 16.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn smsg_login_settimespeed0() {
@@ -123,7 +123,7 @@ mod test_vanilla {
         assert_eq!(dest, RAW0);
     }
 
-    // Generated from `wow_message_parser/wowm/world/login_logout/smsg_login_settimespeed.wowm` line 17.
+    // Generated from `wow_message_parser/wowm/world/login_logout/smsg_login_settimespeed.wowm` line 16.
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_smsg_login_settimespeed0() {
@@ -143,7 +143,7 @@ mod test_vanilla {
         assert_eq!(dest, RAW0);
     }
 
-    // Generated from `wow_message_parser/wowm/world/login_logout/smsg_login_settimespeed.wowm` line 17.
+    // Generated from `wow_message_parser/wowm/world/login_logout/smsg_login_settimespeed.wowm` line 16.
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_smsg_login_settimespeed0() {
@@ -191,7 +191,7 @@ mod test_tbc {
 
     }
 
-    // Generated from `wow_message_parser/wowm/world/login_logout/smsg_login_settimespeed.wowm` line 17.
+    // Generated from `wow_message_parser/wowm/world/login_logout/smsg_login_settimespeed.wowm` line 16.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn smsg_login_settimespeed0() {
@@ -211,7 +211,7 @@ mod test_tbc {
         assert_eq!(dest, RAW0);
     }
 
-    // Generated from `wow_message_parser/wowm/world/login_logout/smsg_login_settimespeed.wowm` line 17.
+    // Generated from `wow_message_parser/wowm/world/login_logout/smsg_login_settimespeed.wowm` line 16.
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_smsg_login_settimespeed0() {
@@ -231,7 +231,7 @@ mod test_tbc {
         assert_eq!(dest, RAW0);
     }
 
-    // Generated from `wow_message_parser/wowm/world/login_logout/smsg_login_settimespeed.wowm` line 17.
+    // Generated from `wow_message_parser/wowm/world/login_logout/smsg_login_settimespeed.wowm` line 16.
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_smsg_login_settimespeed0() {

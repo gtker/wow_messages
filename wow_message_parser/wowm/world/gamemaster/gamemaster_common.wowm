@@ -11,6 +11,7 @@ enum GmTicketResponse : u32 {
 }
 
 /* Used for CMSG_GMTICKET_CREATE */
+/// vmangos: From GMTicketCategory.dbc
 enum GmTicketType : u8 {
     STUCK = 1;
     BEHAVIOR_HARASSMENT = 2;
@@ -23,7 +24,6 @@ enum GmTicketType : u8 {
     ACCOUNT_BILLING = 9;
     CHARACTER = 10;
 } {
-    comment = "vmangos: From GMTicketCategory.dbc";
     versions = "1";
 }
 

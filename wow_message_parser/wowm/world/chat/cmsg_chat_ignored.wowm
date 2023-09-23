@@ -6,9 +6,8 @@ cmsg CMSG_CHAT_IGNORED = 0x0225 {
 
 cmsg CMSG_CHAT_IGNORED = 0x0225 {
     Guid guid;
-    u8 unknown {
-        comment = "mangosone/arcemu/trinitycore/azerothcore: probably related to spam reporting";
-    }
+    /// mangosone/arcemu/trinitycore/azerothcore: probably related to spam reporting
+    u8 unknown;
 } {
     versions = "2.4.3 3";
 }

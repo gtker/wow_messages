@@ -1,4 +1,4 @@
+/// Only exists as comment in azerothcore/trinitycore.
 smsg SMSG_TOGGLE_XP_GAIN = 0x04ED {} {
-    comment = "Only exists as comment in azerothcore/trinitycore.";
     versions = "3.3.5";
 }

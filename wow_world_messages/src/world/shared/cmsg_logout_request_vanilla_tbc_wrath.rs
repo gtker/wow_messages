@@ -4,7 +4,7 @@ use std::io::{Read, Write};
 /// Sent by client after pressing 'Logout' or 'Exit Game'.
 /// Server should reply with [`SMSG_LOGOUT_RESPONSE`](crate::vanilla::SMSG_LOGOUT_RESPONSE).
 /// Spamming the 'Logout' and 'Exit Game' buttons does not send multiple messages.
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/login_logout/cmsg_logout_request.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/login_logout/cmsg_logout_request.wowm#L3):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/login_logout/cmsg_logout_request.wowm:6`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/login_logout/cmsg_logout_request.wowm#L6):
 /// ```text
 /// cmsg CMSG_LOGOUT_REQUEST = 0x004B {
 /// }
@@ -74,7 +74,7 @@ mod test_vanilla {
 
     }
 
-    // Generated from `wow_message_parser/wowm/world/login_logout/cmsg_logout_request.wowm` line 9.
+    // Generated from `wow_message_parser/wowm/world/login_logout/cmsg_logout_request.wowm` line 8.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn cmsg_logout_request0() {
@@ -93,7 +93,7 @@ mod test_vanilla {
         assert_eq!(dest, RAW0);
     }
 
-    // Generated from `wow_message_parser/wowm/world/login_logout/cmsg_logout_request.wowm` line 9.
+    // Generated from `wow_message_parser/wowm/world/login_logout/cmsg_logout_request.wowm` line 8.
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_cmsg_logout_request0() {
@@ -112,7 +112,7 @@ mod test_vanilla {
         assert_eq!(dest, RAW0);
     }
 
-    // Generated from `wow_message_parser/wowm/world/login_logout/cmsg_logout_request.wowm` line 9.
+    // Generated from `wow_message_parser/wowm/world/login_logout/cmsg_logout_request.wowm` line 8.
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_cmsg_logout_request0() {
@@ -151,7 +151,7 @@ mod test_tbc {
 
     }
 
-    // Generated from `wow_message_parser/wowm/world/login_logout/cmsg_logout_request.wowm` line 9.
+    // Generated from `wow_message_parser/wowm/world/login_logout/cmsg_logout_request.wowm` line 8.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn cmsg_logout_request0() {
@@ -170,7 +170,7 @@ mod test_tbc {
         assert_eq!(dest, RAW0);
     }
 
-    // Generated from `wow_message_parser/wowm/world/login_logout/cmsg_logout_request.wowm` line 9.
+    // Generated from `wow_message_parser/wowm/world/login_logout/cmsg_logout_request.wowm` line 8.
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_cmsg_logout_request0() {
@@ -189,7 +189,7 @@ mod test_tbc {
         assert_eq!(dest, RAW0);
     }
 
-    // Generated from `wow_message_parser/wowm/world/login_logout/cmsg_logout_request.wowm` line 9.
+    // Generated from `wow_message_parser/wowm/world/login_logout/cmsg_logout_request.wowm` line 8.
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_cmsg_logout_request0() {
@@ -228,7 +228,7 @@ mod test_wrath {
 
     }
 
-    // Generated from `wow_message_parser/wowm/world/login_logout/cmsg_logout_request.wowm` line 9.
+    // Generated from `wow_message_parser/wowm/world/login_logout/cmsg_logout_request.wowm` line 8.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn cmsg_logout_request0() {
@@ -247,7 +247,7 @@ mod test_wrath {
         assert_eq!(dest, RAW0);
     }
 
-    // Generated from `wow_message_parser/wowm/world/login_logout/cmsg_logout_request.wowm` line 9.
+    // Generated from `wow_message_parser/wowm/world/login_logout/cmsg_logout_request.wowm` line 8.
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_cmsg_logout_request0() {
@@ -266,7 +266,7 @@ mod test_wrath {
         assert_eq!(dest, RAW0);
     }
 
-    // Generated from `wow_message_parser/wowm/world/login_logout/cmsg_logout_request.wowm` line 9.
+    // Generated from `wow_message_parser/wowm/world/login_logout/cmsg_logout_request.wowm` line 8.
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_cmsg_logout_request0() {

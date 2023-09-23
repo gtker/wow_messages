@@ -6,9 +6,8 @@ cmsg MSG_SET_RAID_DIFFICULTY_Client = 0x04EB {
 
 smsg MSG_SET_RAID_DIFFICULTY_Server = 0x04EB {
     (u32)RaidDifficulty difficulty;
-    u32 unknown1 {
-        comment = "Emus set to 1.";
-    }
+    /// Emus set to 1.
+    u32 unknown1;
     Bool32 in_group;
 } {
     versions = "3.3.5";

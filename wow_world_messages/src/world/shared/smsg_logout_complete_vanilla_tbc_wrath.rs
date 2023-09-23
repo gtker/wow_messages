@@ -5,7 +5,7 @@ use std::io::{Read, Write};
 /// Normally the client will send [`CMSG_LOGOUT_REQUEST`](crate::vanilla::CMSG_LOGOUT_REQUEST) and the server will reply with an [`SMSG_LOGOUT_RESPONSE`](crate::vanilla::SMSG_LOGOUT_RESPONSE) before this message, but sending it unprompted will also immediately send the client to the character screen.
 /// The client always seems to send 2 [`CMSG_CANCEL_TRADE`](crate::vanilla::CMSG_CANCEL_TRADE) immediately after receiving this mesage, but before sending [`CMSG_CHAR_ENUM`](crate::vanilla::CMSG_CHAR_ENUM).
 /// Even if 'Exit Game' is selected the client will still send a [`CMSG_CHAR_ENUM`](crate::vanilla::CMSG_CHAR_ENUM) immediately before closing the connection, despite it not needing to see the character list.
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/login_logout/smsg_logout_complete.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/login_logout/smsg_logout_complete.wowm#L3):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/login_logout/smsg_logout_complete.wowm:7`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/login_logout/smsg_logout_complete.wowm#L7):
 /// ```text
 /// smsg SMSG_LOGOUT_COMPLETE = 0x004D {
 /// }
@@ -75,7 +75,7 @@ mod test_vanilla {
 
     }
 
-    // Generated from `wow_message_parser/wowm/world/login_logout/smsg_logout_complete.wowm` line 10.
+    // Generated from `wow_message_parser/wowm/world/login_logout/smsg_logout_complete.wowm` line 9.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn smsg_logout_complete0() {
@@ -94,7 +94,7 @@ mod test_vanilla {
         assert_eq!(dest, RAW0);
     }
 
-    // Generated from `wow_message_parser/wowm/world/login_logout/smsg_logout_complete.wowm` line 10.
+    // Generated from `wow_message_parser/wowm/world/login_logout/smsg_logout_complete.wowm` line 9.
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_smsg_logout_complete0() {
@@ -113,7 +113,7 @@ mod test_vanilla {
         assert_eq!(dest, RAW0);
     }
 
-    // Generated from `wow_message_parser/wowm/world/login_logout/smsg_logout_complete.wowm` line 10.
+    // Generated from `wow_message_parser/wowm/world/login_logout/smsg_logout_complete.wowm` line 9.
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_smsg_logout_complete0() {
@@ -152,7 +152,7 @@ mod test_tbc {
 
     }
 
-    // Generated from `wow_message_parser/wowm/world/login_logout/smsg_logout_complete.wowm` line 10.
+    // Generated from `wow_message_parser/wowm/world/login_logout/smsg_logout_complete.wowm` line 9.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn smsg_logout_complete0() {
@@ -171,7 +171,7 @@ mod test_tbc {
         assert_eq!(dest, RAW0);
     }
 
-    // Generated from `wow_message_parser/wowm/world/login_logout/smsg_logout_complete.wowm` line 10.
+    // Generated from `wow_message_parser/wowm/world/login_logout/smsg_logout_complete.wowm` line 9.
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_smsg_logout_complete0() {
@@ -190,7 +190,7 @@ mod test_tbc {
         assert_eq!(dest, RAW0);
     }
 
-    // Generated from `wow_message_parser/wowm/world/login_logout/smsg_logout_complete.wowm` line 10.
+    // Generated from `wow_message_parser/wowm/world/login_logout/smsg_logout_complete.wowm` line 9.
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_smsg_logout_complete0() {
@@ -229,7 +229,7 @@ mod test_wrath {
 
     }
 
-    // Generated from `wow_message_parser/wowm/world/login_logout/smsg_logout_complete.wowm` line 10.
+    // Generated from `wow_message_parser/wowm/world/login_logout/smsg_logout_complete.wowm` line 9.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn smsg_logout_complete0() {
@@ -248,7 +248,7 @@ mod test_wrath {
         assert_eq!(dest, RAW0);
     }
 
-    // Generated from `wow_message_parser/wowm/world/login_logout/smsg_logout_complete.wowm` line 10.
+    // Generated from `wow_message_parser/wowm/world/login_logout/smsg_logout_complete.wowm` line 9.
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_smsg_logout_complete0() {
@@ -267,7 +267,7 @@ mod test_wrath {
         assert_eq!(dest, RAW0);
     }
 
-    // Generated from `wow_message_parser/wowm/world/login_logout/smsg_logout_complete.wowm` line 10.
+    // Generated from `wow_message_parser/wowm/world/login_logout/smsg_logout_complete.wowm` line 9.
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_smsg_logout_complete0() {

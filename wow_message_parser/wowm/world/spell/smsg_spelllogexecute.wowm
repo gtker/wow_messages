@@ -142,9 +142,8 @@ enum SpellEffect : u32 {
 
 struct SpellLog {
     SpellEffect effect;
-    u32 amount_of_logs = 1 {
-        comment = "vmangos/cmangos/mangoszero: Can be variable but all use constant 1";
-    }
+    /// vmangos/cmangos/mangoszero: Can be variable but all use constant 1
+    u32 amount_of_logs = 1;
     if (effect == POWER_DRAIN) {
         Guid target1;
         u32 amount;
@@ -255,12 +254,10 @@ enum SpellEffect : u32 {
     DISPEL = 38;
     LANGUAGE = 39;
     DUAL_WIELD = 40;
-    UNKNOWN41 = 41 {
-        comment = "old SPELL_EFFECT_SUMMON_WILD";
-    }
-    UNKNOWN42 = 42 {
-        comment = "old SPELL_EFFECT_SUMMON_GUARDIAN";
-    }
+    /// old SPELL_EFFECT_SUMMON_WILD
+    UNKNOWN41 = 41;
+    /// old SPELL_EFFECT_SUMMON_GUARDIAN
+    UNKNOWN42 = 42;
     TELEPORT_UNITS_FACE_CASTER = 43;
     SKILL_STEP = 44;
     UNDEFINED_45 = 45;
@@ -291,12 +288,10 @@ enum SpellEffect : u32 {
     PULL = 70;
     PICKPOCKET = 71;
     ADD_FARSIGHT = 72;
-    UNKNOWN73 = 73 {
-        comment = "old SPELL_EFFECT_SUMMON_POSSESSED";
-    }
-    UNKNOWN74 = 74 {
-        comment = "old SPELL_EFFECT_SUMMON_TOTEM";
-    }
+    /// old SPELL_EFFECT_SUMMON_POSSESSED
+    UNKNOWN73 = 73;
+    /// old SPELL_EFFECT_SUMMON_TOTEM
+    UNKNOWN74 = 74;
     HEAL_MECHANICAL = 75;
     SUMMON_OBJECT_WILD = 76;
     SCRIPT_EFFECT = 77;
@@ -309,29 +304,23 @@ enum SpellEffect : u32 {
     STUCK = 84;
     SUMMON_PLAYER = 85;
     ACTIVATE_OBJECT = 86;
-    UNKNOWN87 = 87 {
-        comment = "old SPELL_EFFECT_SUMMON_TOTEM_SLOT1";
-    }
-    UNKNOWN88 = 88 {
-        comment = "old SPELL_EFFECT_SUMMON_TOTEM_SLOT2";
-    }
-    UNKNOWN89 = 89 {
-        comment = "old SPELL_EFFECT_SUMMON_TOTEM_SLOT3";
-    }
-    UNKNOWN90 = 90 {
-        comment = "old SPELL_EFFECT_SUMMON_TOTEM_SLOT4";
-    }
+    /// old SPELL_EFFECT_SUMMON_TOTEM_SLOT1
+    UNKNOWN87 = 87;
+    /// old SPELL_EFFECT_SUMMON_TOTEM_SLOT2
+    UNKNOWN88 = 88;
+    /// old SPELL_EFFECT_SUMMON_TOTEM_SLOT3
+    UNKNOWN89 = 89;
+    /// old SPELL_EFFECT_SUMMON_TOTEM_SLOT4
+    UNKNOWN90 = 90;
     THREAT_ALL = 91;
     ENCHANT_HELD_ITEM = 92;
-    UNKNOWN93 = 93 {
-        comment = "old SPELL_EFFECT_SUMMON_PHANTASM";
-    }
+    /// old SPELL_EFFECT_SUMMON_PHANTASM
+    UNKNOWN93 = 93;
     SELF_RESURRECT = 94;
     SKINNING = 95;
     CHARGE = 96;
-    UNKNOWN97 = 97 {
-        comment = "old SPELL_EFFECT_SUMMON_CRITTER";
-    }
+    /// old SPELL_EFFECT_SUMMON_CRITTER
+    UNKNOWN97 = 97;
     KNOCK_BACK = 98;
     DISENCHANT = 99;
     INEBRIATE = 100;
@@ -346,9 +335,8 @@ enum SpellEffect : u32 {
     SUMMON_DEAD_PET = 109;
     DESTROY_ALL_TOTEMS = 110;
     DURABILITY_DAMAGE = 111;
-    UNKNOWN112 = 112 {
-        comment = "old SPELL_EFFECT_SUMMON_DEMON";
-    }
+    /// old SPELL_EFFECT_SUMMON_DEMON
+    UNKNOWN112 = 112;
     RESURRECT_NEW = 113;
     ATTACK_ME = 114;
     DURABILITY_DAMAGE_PCT = 115;
@@ -396,9 +384,8 @@ enum SpellEffect : u32 {
 
 struct SpellLog {
     SpellEffect effect;
-    u32 amount_of_logs = 1 {
-        comment = "vmangos/cmangos/mangoszero: Can be variable but all use constant 1";
-    }
+    /// vmangos/cmangos/mangoszero: Can be variable but all use constant 1
+    u32 amount_of_logs = 1;
     if (effect == POWER_DRAIN) {
         PackedGuid target1;
         u32 amount;
@@ -554,9 +541,8 @@ enum SpellEffect : u32 {
     SUMMON_DEAD_PET = 109;
     DESTROY_ALL_TOTEMS = 110;
     DURABILITY_DAMAGE = 111;
-    UNKNOWN112 = 112 {
-        comment = "old SPELL_EFFECT_SUMMON_DEMON";
-    }
+    /// old SPELL_EFFECT_SUMMON_DEMON
+    UNKNOWN112 = 112;
     RESURRECT_NEW = 113;
     ATTACK_ME = 114;
     DURABILITY_DAMAGE_PCT = 115;
@@ -615,9 +601,8 @@ enum SpellEffect : u32 {
 
 struct SpellLog {
     SpellEffect effect;
-    u32 amount_of_logs = 1 {
-        comment = "vmangos/cmangos/mangoszero: Can be variable but all use constant 1";
-    }
+    /// vmangos/cmangos/mangoszero: Can be variable but all use constant 1
+    u32 amount_of_logs = 1;
     if (effect == POWER_DRAIN) {
         PackedGuid target1;
         u32 amount;

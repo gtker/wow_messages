@@ -1,5 +1,5 @@
 /// Mask to indicate the variant of the cache
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/enums/cache_mask.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/enums/cache_mask.wowm#L1):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/enums/cache_mask.wowm:2`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/enums/cache_mask.wowm#L2):
 /// ```text
 /// enum CacheMask : u32 {
 ///     GLOBAL_CACHE = 0x15;

@@ -1,25 +1,19 @@
 #tag_all versions "1 2 3";
 
+/// These errors are only printed in client console.
 enum TrainingFailureReason : u32
 {
-    UNAVAILABLE = 0 {
-        comment = "Trainer service %d unavailable.";
-    }
-    NOT_ENOUGH_MONEY = 1 {
-        comment = "Not enough money for trainer service %d.";
-    }
-    NOT_ENOUGH_SKILL = 2 {
-        comment = "Not enough skill points for trainer service %d.";
-    }
-} {
-    comment = "These errors are only printed in client console.";
+    /// Trainer service %d unavailable.
+    UNAVAILABLE = 0;
+    /// Not enough money for trainer service %d.
+    NOT_ENOUGH_MONEY = 1;
+    /// Not enough skill points for trainer service %d.
+    NOT_ENOUGH_SKILL = 2;
 }
 
+/// No TBC emulators implement this.
 smsg SMSG_TRAINER_BUY_FAILED = 0x01B4 {
     Guid guid;
     Spell id;
     TrainingFailureReason error;
-} {
-    comment = "No TBC emulators implement this.";
 }
-

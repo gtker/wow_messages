@@ -1,8 +1,7 @@
 #tag_all versions "1 2 3";
 
 smsg SMSG_INSTANCE_SAVE_CREATED = 0x02CB {
-    u32 unknown {
-        comment = "All emulators across all versions set to 0";
-    }
+    /// All emulators across all versions set to 0
+    u32 unknown;
 }
 

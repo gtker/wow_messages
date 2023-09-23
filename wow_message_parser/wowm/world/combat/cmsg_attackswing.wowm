@@ -1,18 +1,16 @@
 #tag_all versions "1 2 3";
 
+/// Signals that client has right clicked an opponent and is in the attack stance.
+/// Server should reply with [SMSG_ATTACKSTART].
 cmsg CMSG_ATTACKSWING = 0x0141 {
     Guid guid;
-} {
-    comment = "Signals that client has right clicked an opponent and is in the attack stance.";
-    comment = "Server should reply with [SMSG_ATTACKSTART].";
 }
 
+/// Player starts attacking creature with GUID 100.
 test CMSG_ATTACKSWING {
     guid = 100;
 } [
     0x00, 0x0c, /* size */
     0x41, 0x01, 0x00, 0x00, /* opcode */
     0x64, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
-] {
-    comment = "Player starts attacking creature with GUID 100.";
-}
+]

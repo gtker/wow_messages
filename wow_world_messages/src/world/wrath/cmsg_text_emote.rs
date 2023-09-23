@@ -6,7 +6,7 @@ use crate::wrath::TextEmote;
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Sent to notify the server that the client wants to perform an emote like /dance or /cry.
 /// Server responds with [`SMSG_TEXT_EMOTE`](crate::wrath::SMSG_TEXT_EMOTE) and [`SMSG_EMOTE`](crate::wrath::SMSG_EMOTE).
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/chat/cmsg_text_emote.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/chat/cmsg_text_emote.wowm#L1):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/chat/cmsg_text_emote.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/chat/cmsg_text_emote.wowm#L3):
 /// ```text
 /// cmsg CMSG_TEXT_EMOTE = 0x0104 {
 ///     TextEmote text_emote;

@@ -3,7 +3,7 @@ use std::io::{Read, Write};
 use crate::Guid;
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/combat/smsg_attackstop.wowm:11`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/combat/smsg_attackstop.wowm#L11):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/combat/smsg_attackstop.wowm:10`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/combat/smsg_attackstop.wowm#L10):
 /// ```text
 /// smsg SMSG_ATTACKSTOP = 0x0144 {
 ///     PackedGuid player;
@@ -120,7 +120,7 @@ mod test_vanilla {
 
     }
 
-    // Generated from `wow_message_parser/wowm/world/combat/smsg_attackstop.wowm` line 22.
+    // Generated from `wow_message_parser/wowm/world/combat/smsg_attackstop.wowm` line 20.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn smsg_attackstop0() {
@@ -140,7 +140,7 @@ mod test_vanilla {
         assert_eq!(dest, RAW0);
     }
 
-    // Generated from `wow_message_parser/wowm/world/combat/smsg_attackstop.wowm` line 22.
+    // Generated from `wow_message_parser/wowm/world/combat/smsg_attackstop.wowm` line 20.
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_smsg_attackstop0() {
@@ -160,7 +160,7 @@ mod test_vanilla {
         assert_eq!(dest, RAW0);
     }
 
-    // Generated from `wow_message_parser/wowm/world/combat/smsg_attackstop.wowm` line 22.
+    // Generated from `wow_message_parser/wowm/world/combat/smsg_attackstop.wowm` line 20.
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_smsg_attackstop0() {
@@ -211,7 +211,7 @@ mod test_tbc {
 
     }
 
-    // Generated from `wow_message_parser/wowm/world/combat/smsg_attackstop.wowm` line 22.
+    // Generated from `wow_message_parser/wowm/world/combat/smsg_attackstop.wowm` line 20.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn smsg_attackstop0() {
@@ -231,7 +231,7 @@ mod test_tbc {
         assert_eq!(dest, RAW0);
     }
 
-    // Generated from `wow_message_parser/wowm/world/combat/smsg_attackstop.wowm` line 22.
+    // Generated from `wow_message_parser/wowm/world/combat/smsg_attackstop.wowm` line 20.
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_smsg_attackstop0() {
@@ -251,7 +251,7 @@ mod test_tbc {
         assert_eq!(dest, RAW0);
     }
 
-    // Generated from `wow_message_parser/wowm/world/combat/smsg_attackstop.wowm` line 22.
+    // Generated from `wow_message_parser/wowm/world/combat/smsg_attackstop.wowm` line 20.
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_smsg_attackstop0() {
@@ -302,7 +302,7 @@ mod test_wrath {
 
     }
 
-    // Generated from `wow_message_parser/wowm/world/combat/smsg_attackstop.wowm` line 22.
+    // Generated from `wow_message_parser/wowm/world/combat/smsg_attackstop.wowm` line 20.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn smsg_attackstop0() {
@@ -322,7 +322,7 @@ mod test_wrath {
         assert_eq!(dest, RAW0);
     }
 
-    // Generated from `wow_message_parser/wowm/world/combat/smsg_attackstop.wowm` line 22.
+    // Generated from `wow_message_parser/wowm/world/combat/smsg_attackstop.wowm` line 20.
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_smsg_attackstop0() {
@@ -342,7 +342,7 @@ mod test_wrath {
         assert_eq!(dest, RAW0);
     }
 
-    // Generated from `wow_message_parser/wowm/world/combat/smsg_attackstop.wowm` line 22.
+    // Generated from `wow_message_parser/wowm/world/combat/smsg_attackstop.wowm` line 20.
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_smsg_attackstop0() {

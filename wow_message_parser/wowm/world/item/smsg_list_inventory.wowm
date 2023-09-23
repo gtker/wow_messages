@@ -2,9 +2,8 @@ struct ListInventoryItem {
     u32 item_stack_count;
     Item item;
     u32 item_display_id;
-    u32 max_items {
-        comment = "cmangos: 0 for infinity item amount, although they send 0xFFFFFFFF in that case";
-    }
+    /// cmangos: 0 for infinity item amount, although they send 0xFFFFFFFF in that case
+    u32 max_items;
     Gold price;
     u32 max_durability;
     u32 durability;
@@ -16,9 +15,8 @@ struct ListInventoryItem {
     u32 item_stack_count;
     Item item;
     u32 item_display_id;
-    u32 max_items {
-        comment = "cmangos: 0 for infinity item amount, although they send 0xFFFFFFFF in that case";
-    }
+    /// cmangos: 0 for infinity item amount, although they send 0xFFFFFFFF in that case
+    u32 max_items;
     Gold price;
     u32 max_durability;
     u32 durability;
@@ -27,24 +25,22 @@ struct ListInventoryItem {
     versions = "2.4.3 3";
 }
 
+/// if `amount_of_items` is 0 it is supposedly followed by a single u8 with 0 to say that vendor has no items.
 smsg SMSG_LIST_INVENTORY = 0x019F {
     Guid vendor;
-    u8 amount_of_items {
-        comment = "cmangos: 0 displays Vendor has no inventory";
-    }
+    /// cmangos: 0 displays Vendor has no inventory
+    u8 amount_of_items;
     ListInventoryItem[amount_of_items] items;
 } {
-    comment = "if `amount_of_items` is 0 it is supposedly followed by a single u8 with 0 to say that vendor has no items.";
     versions = "1";
 }
 
+/// if `amount_of_items` is 0 it is supposedly followed by a single u8 with 0 to say that vendor has no items.
 smsg SMSG_LIST_INVENTORY = 0x019F {
     Guid vendor;
-    u8 amount_of_items {
-        comment = "cmangos: 0 displays Vendor has no inventory";
-    }
+    /// cmangos: 0 displays Vendor has no inventory
+    u8 amount_of_items;
     ListInventoryItem[amount_of_items] items;
 } {
-    comment = "if `amount_of_items` is 0 it is supposedly followed by a single u8 with 0 to say that vendor has no items.";
     versions = "2.4.3 3";
 }

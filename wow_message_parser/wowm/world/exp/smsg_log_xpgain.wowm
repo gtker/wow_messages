@@ -11,9 +11,8 @@ smsg SMSG_LOG_XPGAIN = 0x01D0 {
     ExperienceAwardType exp_type; 
     if (exp_type == NON_KILL) {
         u32 experience_without_rested;
-        f32 exp_group_bonus {
-            comment = "mangoszero sets to 1 and comments: 1 - none 0 - 100% group bonus output";
-        }
+        /// mangoszero sets to 1 and comments: 1 - none 0 - 100% group bonus output
+        f32 exp_group_bonus;
     }
 } {
     versions = "1 2";
@@ -25,9 +24,8 @@ smsg SMSG_LOG_XPGAIN = 0x01D0 {
     ExperienceAwardType exp_type; 
     if (exp_type == NON_KILL) {
         u32 experience_without_rested;
-        f32 exp_group_bonus {
-            comment = "mangoszero sets to 1 and comments: 1 - none 0 - 100% group bonus output";
-        }
+        /// mangoszero sets to 1 and comments: 1 - none 0 - 100% group bonus output
+        f32 exp_group_bonus;
     }
     Bool exp_includes_recruit_a_friend_bonus;
 } {

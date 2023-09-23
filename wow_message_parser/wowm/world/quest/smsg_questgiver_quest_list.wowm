@@ -1,12 +1,10 @@
 smsg SMSG_QUESTGIVER_QUEST_LIST = 0x0185 {
     Guid npc;
     CString title;
-    u32 emote_delay {
-        comment = "mangoszero: player emote";
-    }
-    u32 emote {
-        comment = "mangoszero: NPC emote";
-    }
+    /// mangoszero: player emote
+    u32 emote_delay;
+    /// mangoszero: NPC emote
+    u32 emote;
     u8 amount_of_entries {
         valid_range = "0 32";
     }
@@ -18,12 +16,10 @@ smsg SMSG_QUESTGIVER_QUEST_LIST = 0x0185 {
 smsg SMSG_QUESTGIVER_QUEST_LIST = 0x0185 {
     Guid npc;
     CString title;
-    u32 emote_delay {
-        comment = "mangoszero: player emote";
-    }
-    u32 emote {
-        comment = "mangoszero: NPC emote";
-    }
+    /// mangoszero: player emote
+    u32 emote_delay;
+    /// mangoszero: NPC emote
+    u32 emote;
     u8 amount_of_entries {
         valid_range = "0 32";
     }

@@ -2,7 +2,7 @@ use std::io::{Read, Write};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Sent when the client enters the world.
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/raid/cmsg_request_raid_info.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/raid/cmsg_request_raid_info.wowm#L1):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/raid/cmsg_request_raid_info.wowm:2`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/raid/cmsg_request_raid_info.wowm#L2):
 /// ```text
 /// cmsg CMSG_REQUEST_RAID_INFO = 0x02CD {
 /// }

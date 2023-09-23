@@ -1,22 +1,16 @@
 enum BattlegroundBracket : u8 {
-    TENS = 0 {
-        comment = "10-19";
-    }
-    TWENTIES = 1 {
-        comment = "20-29";
-    }
-    THIRTIES = 2 {
-        comment = "30-39";
-    }
-    FOURTIES = 3 {
-        comment = "40-49";
-    }
-    FIFTIES = 4 {
-        comment = "50-59";
-    }
-    SIXTY = 5 {
-        comment = "60";
-    }
+    /// 10-19
+    TENS = 0;
+    /// 20-29
+    TWENTIES = 1;
+    /// 30-39
+    THIRTIES = 2;
+    /// 40-49
+    FOURTIES = 3;
+    /// 50-59
+    FIFTIES = 4;
+    /// 60
+    SIXTY = 5;
 } {
     versions = "1";
 }

@@ -1,8 +1,8 @@
+/// Sent by the client whenever it reaches a new area.
+/// The client does not send an accurate area. For example when going to Sen'jin Village, the client will send `DUROTAR` (0x0E) and not `SENJIN_VILLAGE` (0x16F).
 cmsg CMSG_ZONEUPDATE = 0x01F4 {
     Area area;
 } {
-    comment = "Sent by the client whenever it reaches a new area.";
-    comment = "The client does not send an accurate area. For example when going to Sen'jin Village, the client will send `DUROTAR` (0x0E) and not `SENJIN_VILLAGE` (0x16F).";
     paste_versions = "1.12 2.4.3 3.3.5";
 }
 

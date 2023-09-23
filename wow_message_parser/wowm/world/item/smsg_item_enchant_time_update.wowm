@@ -2,9 +2,8 @@
 
 smsg SMSG_ITEM_ENCHANT_TIME_UPDATE = 0x01EB {
     Guid item;
-    u32 slot {
-        comment = "Possibly used with EnchantmentSlot enum.";
-    }
+    /// Possibly used with EnchantmentSlot enum.
+    u32 slot;
     u32 duration;
     Guid player;
 }

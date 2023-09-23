@@ -1,29 +1,22 @@
 enum HitInfo : u32 {
     NORMAL_SWING        = 0x00000000;
-    UNK1                = 0x00000001 {
-        comment = "req correct packet structure";
-    }
-    AFFECTS_VICTIM      = 0x00000002 {
-        comment = "no being hit animation on victim without it";
-    }
+    /// req correct packet structure
+    UNK1                = 0x00000001;
+    /// no being hit animation on victim without it
+    AFFECTS_VICTIM      = 0x00000002;
     LEFT_SWING          = 0x00000004;
-    EARLY_CRITICAL_HIT  = 0x00000008 {
-        comment = "According to vmangos used as crit prior to 1.9.";
-    }
+    /// According to vmangos used as crit prior to 1.9.
+    EARLY_CRITICAL_HIT  = 0x00000008;
     MISS                = 0x00000010;
-    ABSORB              = 0x00000020 {
-        comment = "plays absorb sound";
-    }
-    RESIST              = 0x00000040 {
-        comment = "resisted atleast some damage";
-    }
+    /// plays absorb sound
+    ABSORB              = 0x00000020;
+    /// resisted atleast some damage
+    RESIST              = 0x00000040;
     CRITICAL_HIT        = 0x00000080;
-    UNK9                = 0x00000100 {
-        comment = "wotlk?";
-    }
-    UNK10               = 0x00002000 {
-        comment = "wotlk?";
-    }
+    /// wotlk?
+    UNK9                = 0x00000100;
+    /// wotlk?
+    UNK10               = 0x00002000;
     GLANCING            = 0x00004000;
     CRUSHING            = 0x00008000;
     NO_ACTION           = 0x00010000;
@@ -35,12 +28,10 @@ enum HitInfo : u32 {
 
 struct DamageInfo {
     u32 spell_school_mask;
-    f32 damage_float {
-        comment = "vmangos sends the same data in `damage_uint`.";
-    }
-    u32 damage_uint {
-        comment = "vmangos sends the same data in `damage_float`.";
-    }
+    /// vmangos sends the same data in `damage_uint`.
+    f32 damage_float;
+    /// vmangos sends the same data in `damage_float`.
+    u32 damage_uint;
     u32 absorb;
     u32 resist;
 } {
@@ -56,9 +47,8 @@ smsg SMSG_ATTACKERSTATEUPDATE = 0x014A {
     DamageInfo[amount_of_damages] damages;
     u32 damage_state;
     u32 unknown1;
-    u32 spell_id {
-        comment = "vmangos: spell id, seen with heroic strike and disarm as examples";
-    }
+    /// vmangos: spell id, seen with heroic strike and disarm as examples
+    u32 spell_id;
     u32 blocked_amount;
 } {
     paste_versions = "1.12 2.4.3";

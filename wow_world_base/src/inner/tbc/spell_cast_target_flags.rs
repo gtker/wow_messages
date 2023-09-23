@@ -1,4 +1,4 @@
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/common.wowm:45`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/common.wowm#L45):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/common.wowm:34`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/common.wowm#L34):
 /// ```text
 /// flag SpellCastTargetFlags : u32 {
 ///     SELF = 0x00000000;

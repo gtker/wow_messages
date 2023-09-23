@@ -1,9 +1,8 @@
 #tag_all non_network_type "true";
 
 enum SkillCategory : u8 {
-    ATTRIBUTE = 5 {
-        comment = "Not used for anything in Vanilla and TBC, only used for `Pet - Exotic Spirit Beast` in Wrath.";
-    }
+    /// Not used for anything in Vanilla and TBC, only used for `Pet - Exotic Spirit Beast` in Wrath.
+    ATTRIBUTE = 5;
     WEAPON = 6;
     CLASS = 7;
     ARMOR = 8;

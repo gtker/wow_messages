@@ -1,14 +1,14 @@
+/// There does not appear to be a CMSG version of this MSG.
 smsg MSG_MOVE_ROOT_Server = 0x00EC {
     PackedGuid player;
     MovementInfo info;
 } {
     paste_versions = "2.4.3";
-    comment = "There does not appear to be a CMSG version of this MSG.";
 }
 
+/// There does not appear to be a CMSG version of this MSG.
 smsg MSG_MOVE_ROOT_Server = 0x00EC {
     MovementInfo info;
 } {
     paste_versions = "3.3.5";
-    comment = "There does not appear to be a CMSG version of this MSG.";
 }

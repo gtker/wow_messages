@@ -8,7 +8,7 @@ use crate::wrath::{
 /// Response to [`CMSG_AUTH_SESSION`](crate::wrath::CMSG_AUTH_SESSION).
 /// Usually followed by [`CMSG_CHAR_ENUM`](crate::vanilla::CMSG_CHAR_ENUM) if login was successful (`AUTH_OK`).
 /// vmangos/cmangos/mangoszero all have a variant of this message that contains fields from `AUTH_OK` for `AUTH_WAIT_QUEUE` as well (`https://github.com/vmangos/core/blob/cd896d43712ceafecdbd8f005846d7f676e55b4f/src/game/World.cpp#L322`) but this does not seem to be actually be a real thing.
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/character_screen/smsg_auth_response.wowm:109`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/character_screen/smsg_auth_response.wowm#L109):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/character_screen/smsg_auth_response.wowm:110`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/character_screen/smsg_auth_response.wowm#L110):
 /// ```text
 /// smsg SMSG_AUTH_RESPONSE = 0x01EE {
 ///     WorldResult result;

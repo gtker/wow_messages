@@ -7,10 +7,9 @@ struct FactionInitializer {
 }
 
 smsg SMSG_INITIALIZE_FACTIONS = 0x0122 {
-    u32 amount_of_factions {
-        comment = "vmangos/cmangos/mangoszero: sets to 0x00000040 (64)";
-        comment = "mangostwo (wrath) sets this to 0x00000080 (128)";
-    }
+    /// vmangos/cmangos/mangoszero: sets to 0x00000040 (64)
+    /// mangostwo (wrath) sets this to 0x00000080 (128)
+    u32 amount_of_factions;
     FactionInitializer[amount_of_factions] factions;
 } {
     versions = "1 2";
@@ -25,10 +24,9 @@ struct FactionInitializer {
 }
 
 smsg SMSG_INITIALIZE_FACTIONS = 0x0122 {
-    u32 amount_of_factions {
-        comment = "vmangos/cmangos/mangoszero: sets to 0x00000040 (64)";
-        comment = "mangostwo (wrath) sets this to 0x00000080 (128)";
-    }
+    /// vmangos/cmangos/mangoszero: sets to 0x00000040 (64)
+    /// mangostwo (wrath) sets this to 0x00000080 (128)
+    u32 amount_of_factions;
     FactionInitializer[amount_of_factions] factions;
 } {
     versions = "3";

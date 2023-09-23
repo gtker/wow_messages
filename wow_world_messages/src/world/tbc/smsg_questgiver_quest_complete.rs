@@ -4,7 +4,7 @@ use crate::shared::gold_vanilla_tbc_wrath::Gold;
 use crate::tbc::QuestItemReward;
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/quest/smsg_questgiver_quest_complete.wowm:16`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/quest/smsg_questgiver_quest_complete.wowm#L16):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/quest/smsg_questgiver_quest_complete.wowm:15`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/quest/smsg_questgiver_quest_complete.wowm#L15):
 /// ```text
 /// smsg SMSG_QUESTGIVER_QUEST_COMPLETE = 0x0191 {
 ///     u32 quest_id;

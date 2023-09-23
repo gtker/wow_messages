@@ -3,7 +3,7 @@ use std::io::{Read, Write};
 use wow_world_base::shared::chat_notify_tbc_wrath::ChatNotify;
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/chat/smsg_channel_notify.wowm:218`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/chat/smsg_channel_notify.wowm#L218):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/chat/smsg_channel_notify.wowm:152`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/chat/smsg_channel_notify.wowm#L152):
 /// ```text
 /// smsg SMSG_CHANNEL_NOTIFY = 0x0099 {
 ///     ChatNotify notify_type;

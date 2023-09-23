@@ -1,6 +1,5 @@
-cmsg MSG_QUERY_NEXT_MAIL_TIME_Client = 0x0284 {
-} {
-    comment = "Sent when the client enters the world.";
+/// Sent when the client enters the world.
+cmsg MSG_QUERY_NEXT_MAIL_TIME_Client = 0x0284 {} {
     versions = "1.12 2 3.3.5";
 }
 

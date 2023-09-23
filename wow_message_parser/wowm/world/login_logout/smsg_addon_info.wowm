@@ -1,11 +1,9 @@
 enum AddonType : u8 {
     BANNED = 0;
-    ENABLED = 1 {
-        comment = "Shows addon in list. Probably intended for player-created addons.";
-    }
-    BLIZZARD = 2 {
-        comment = "Hides addon from list.";
-    }
+    /// Shows addon in list. Probably intended for player-created addons.
+    ENABLED = 1;
+    /// Hides addon from list.
+    BLIZZARD = 2;
 } {
     versions = "1.12";
 }
@@ -66,29 +64,25 @@ smsg SMSG_ADDON_INFO = 0x2EF {
 struct Addon
 {
     /* TODO NARROW_TYPE addon_type requires more research and turn into a proper enum */
-    u8 addon_type {
-        comment = "Other emus hardcode this to 2. More research is required";
-    }
-    u8 uses_crc {
-        comment = "Other emus hardcode this to 1.";
-    }
+    /// Other emus hardcode this to 2. More research is required
+    u8 addon_type;
+    /// Other emus hardcode this to 1.
+    u8 uses_crc;
     Bool uses_diffent_public_key;
-    u32 unknown1 {
-        comment = "Other emus hardcode this to 0";
-    }
-    u8 unknown2 {
-        comment = "Other emus hardcode this to 0";
-    }
+    /// Other emus hardcode this to 0
+    u32 unknown1;
+    /// Other emus hardcode this to 0
+    u8 unknown2;
 } {
     versions = "2.4.3 3";
 }
 
+/// Banned addons are not properly implemented in the wowm. Sending any number other than 0 means that the packet is incomplete and thus invalid
 smsg SMSG_ADDON_INFO = 0x2EF {
     AddonArray addons;
     u32 number_of_banned_addons = 0;
     /* TODO CORRECT_LAYOUT Figure out the structure of banned addons and remove hardcoded 0 */
 } {
     paste_versions = "2.4.3 3.3.5";
-    comment = "Banned addons are not properly implemented in the wowm. Sending any number other than 0 means that the packet is incomplete and thus invalid";
 }
 

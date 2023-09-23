@@ -1,7 +1,7 @@
+/// Sent when using the `port` console command.
 cmsg CMSG_TELEPORT_TO_UNIT = 0x09 {
     CString name;
 } {
-    comment = "Sent when using the `port` console command.";
     versions = "1 2 3";
 }
 

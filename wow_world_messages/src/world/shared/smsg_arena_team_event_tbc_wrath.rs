@@ -4,7 +4,7 @@ use crate::Guid;
 use wow_world_base::shared::arena_team_event_tbc_wrath::ArenaTeamEvent;
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/arena/smsg_arena_team_event.wowm:24`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/arena/smsg_arena_team_event.wowm#L24):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/arena/smsg_arena_team_event.wowm:18`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/arena/smsg_arena_team_event.wowm#L18):
 /// ```text
 /// smsg SMSG_ARENA_TEAM_EVENT = 0x0357 {
 ///     ArenaTeamEvent event;

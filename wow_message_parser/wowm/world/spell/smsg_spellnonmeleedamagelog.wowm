@@ -5,18 +5,15 @@ smsg SMSG_SPELLNONMELEEDAMAGELOG = 0x0250 {
     u32 damage;
     SpellSchool school;
     u32 absorbed_damage;
-    u32 resisted {
-        comment = "cmangos/mangoszero/vmangos: sent as int32";
-    }
-    Bool periodic_log {
-        comment = "cmangos/mangoszero/vmangos: if 1, then client show spell name (example: %s's ranged shot hit %s for %u school or %s suffers %u school damage from %s's spell_name";
-    }
+    /// cmangos/mangoszero/vmangos: sent as int32
+    u32 resisted;
+    /// cmangos/mangoszero/vmangos: if 1, then client show spell name (example: %s's ranged shot hit %s for %u school or %s suffers %u school damage from %s's spell_name
+    Bool periodic_log;
     u8 unused;
     u32 blocked;
     HitInfo hit_info;
-    u8 extend_flag {
-        comment = "cmangos has some that might be correct `https://github.com/cmangos/mangos-classic/blob/524a39412dae7946d06e4b8f319f45b615075815/src/game/Entities/Unit.cpp#L5497`.";
-    }
+    /// cmangos has some that might be correct `https://github.com/cmangos/mangos-classic/blob/524a39412dae7946d06e4b8f319f45b615075815/src/game/Entities/Unit.cpp#L5497`.
+    u8 extend_flag;
 } {
     paste_versions = "1.12 2.4.3";
 }
@@ -29,18 +26,15 @@ smsg SMSG_SPELLNONMELEEDAMAGELOG = 0x0250 {
     u32 overkill;
     SpellSchool school;
     u32 absorbed_damage;
-    u32 resisted {
-        comment = "cmangos/mangoszero/vmangos: sent as int32";
-    }
-    Bool periodic_log {
-        comment = "cmangos/mangoszero/vmangos: if 1, then client show spell name (example: %s's ranged shot hit %s for %u school or %s suffers %u school damage from %s's spell_name";
-    }
+    /// cmangos/mangoszero/vmangos: sent as int32
+    u32 resisted;
+    /// cmangos/mangoszero/vmangos: if 1, then client show spell name (example: %s's ranged shot hit %s for %u school or %s suffers %u school damage from %s's spell_name
+    Bool periodic_log;
     u8 unused;
     u32 blocked;
     HitInfo hit_info;
-    u8 extend_flag {
-        comment = "cmangos has some that might be correct `https://github.com/cmangos/mangos-classic/blob/524a39412dae7946d06e4b8f319f45b615075815/src/game/Entities/Unit.cpp#L5497`.";
-    }
+    /// cmangos has some that might be correct `https://github.com/cmangos/mangos-classic/blob/524a39412dae7946d06e4b8f319f45b615075815/src/game/Entities/Unit.cpp#L5497`.
+    u8 extend_flag;
 } {
     versions = "3.3.5";
 }

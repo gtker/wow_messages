@@ -2,7 +2,7 @@ use std::io::{Read, Write};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Respond with [`SMSG_UPDATE_ACCOUNT_DATA`](crate::tbc::SMSG_UPDATE_ACCOUNT_DATA)
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/login_logout/cmsg_request_account_data.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/login_logout/cmsg_request_account_data.wowm#L1):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/login_logout/cmsg_request_account_data.wowm:2`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/login_logout/cmsg_request_account_data.wowm#L2):
 /// ```text
 /// cmsg CMSG_REQUEST_ACCOUNT_DATA = 0x020A {
 ///     u32 data_type;
@@ -88,7 +88,7 @@ mod test_vanilla {
 
     }
 
-    // Generated from `wow_message_parser/wowm/world/login_logout/cmsg_request_account_data.wowm` line 10.
+    // Generated from `wow_message_parser/wowm/world/login_logout/cmsg_request_account_data.wowm` line 9.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn cmsg_request_account_data0() {
@@ -108,7 +108,7 @@ mod test_vanilla {
         assert_eq!(dest, RAW0);
     }
 
-    // Generated from `wow_message_parser/wowm/world/login_logout/cmsg_request_account_data.wowm` line 10.
+    // Generated from `wow_message_parser/wowm/world/login_logout/cmsg_request_account_data.wowm` line 9.
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_cmsg_request_account_data0() {
@@ -128,7 +128,7 @@ mod test_vanilla {
         assert_eq!(dest, RAW0);
     }
 
-    // Generated from `wow_message_parser/wowm/world/login_logout/cmsg_request_account_data.wowm` line 10.
+    // Generated from `wow_message_parser/wowm/world/login_logout/cmsg_request_account_data.wowm` line 9.
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_cmsg_request_account_data0() {
@@ -174,7 +174,7 @@ mod test_tbc {
 
     }
 
-    // Generated from `wow_message_parser/wowm/world/login_logout/cmsg_request_account_data.wowm` line 10.
+    // Generated from `wow_message_parser/wowm/world/login_logout/cmsg_request_account_data.wowm` line 9.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn cmsg_request_account_data0() {
@@ -194,7 +194,7 @@ mod test_tbc {
         assert_eq!(dest, RAW0);
     }
 
-    // Generated from `wow_message_parser/wowm/world/login_logout/cmsg_request_account_data.wowm` line 10.
+    // Generated from `wow_message_parser/wowm/world/login_logout/cmsg_request_account_data.wowm` line 9.
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_cmsg_request_account_data0() {
@@ -214,7 +214,7 @@ mod test_tbc {
         assert_eq!(dest, RAW0);
     }
 
-    // Generated from `wow_message_parser/wowm/world/login_logout/cmsg_request_account_data.wowm` line 10.
+    // Generated from `wow_message_parser/wowm/world/login_logout/cmsg_request_account_data.wowm` line 9.
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_cmsg_request_account_data0() {
@@ -260,7 +260,7 @@ mod test_wrath {
 
     }
 
-    // Generated from `wow_message_parser/wowm/world/login_logout/cmsg_request_account_data.wowm` line 10.
+    // Generated from `wow_message_parser/wowm/world/login_logout/cmsg_request_account_data.wowm` line 9.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn cmsg_request_account_data0() {
@@ -280,7 +280,7 @@ mod test_wrath {
         assert_eq!(dest, RAW0);
     }
 
-    // Generated from `wow_message_parser/wowm/world/login_logout/cmsg_request_account_data.wowm` line 10.
+    // Generated from `wow_message_parser/wowm/world/login_logout/cmsg_request_account_data.wowm` line 9.
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_cmsg_request_account_data0() {
@@ -300,7 +300,7 @@ mod test_wrath {
         assert_eq!(dest, RAW0);
     }
 
-    // Generated from `wow_message_parser/wowm/world/login_logout/cmsg_request_account_data.wowm` line 10.
+    // Generated from `wow_message_parser/wowm/world/login_logout/cmsg_request_account_data.wowm` line 9.
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_cmsg_request_account_data0() {

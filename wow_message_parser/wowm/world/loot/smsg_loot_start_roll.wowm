@@ -2,9 +2,8 @@ smsg SMSG_LOOT_START_ROLL = 0x02A1 {
     Guid creature;
     u32 loot_slot;
     Item item;
-    u32 item_random_suffix {
-        comment = "vmangos/mangoszero: not used ?";
-    }
+    /// vmangos/mangoszero: not used ?
+    u32 item_random_suffix;
     u32 item_random_property_id;
     Milliseconds countdown_time;
 } {
@@ -25,9 +24,8 @@ smsg SMSG_LOOT_START_ROLL = 0x02A1 {
     Map map;
     u32 loot_slot;
     Item item;
-    u32 item_random_suffix {
-        comment = "vmangos/mangoszero: not used ?";
-    }
+    /// vmangos/mangoszero: not used ?
+    u32 item_random_suffix;
     u32 item_random_property_id;
     Milliseconds countdown_time;
     RollFlags flags;

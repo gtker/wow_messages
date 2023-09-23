@@ -5,12 +5,11 @@ enum LogFormat : u8 {
     DEBUG = 1;
 }
 
+/// According to cmangos/azerothcore/trinitycore/mangostwo. Not present in vmangos.
 smsg SMSG_PROCRESIST = 0x0260 {
     Guid caster;
     Guid target;
     Spell id;
     LogFormat log_format;
-} {
-    comment = "According to cmangos/azerothcore/trinitycore/mangostwo. Not present in vmangos.";
 }
 

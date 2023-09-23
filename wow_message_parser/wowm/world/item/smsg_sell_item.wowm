@@ -1,20 +1,15 @@
 enum SellItemResult : u8 {
     CANT_FIND_ITEM = 1;
-    CANT_SELL_ITEM = 2 {
-        comment = "cmangos/vmangos/mangoszero: merchant doesn't like that item";
-    }
-    CANT_FIND_VENDOR = 3 {
-        comment = "cmangos/vmangos/mangoszero: merchant doesn't like you";
-    }
-    YOU_DONT_OWN_THAT_ITEM = 4 {
-        comment = "cmangos/vmangos/mangoszero: you don't own that item";
-    }
-    UNK = 5 {
-        comment = "cmangos/vmangos/mangoszero: nothing appears...";
-    }
-    ONLY_EMPTY_BAG = 6 {
-        comment = "cmangos/vmangos/mangoszero: can only do with empty bags";
-    }
+    /// cmangos/vmangos/mangoszero: merchant doesn't like that item
+    CANT_SELL_ITEM = 2;
+    /// cmangos/vmangos/mangoszero: merchant doesn't like you
+    CANT_FIND_VENDOR = 3;
+    /// cmangos/vmangos/mangoszero: you don't own that item
+    YOU_DONT_OWN_THAT_ITEM = 4;
+    /// cmangos/vmangos/mangoszero: nothing appears...
+    UNK = 5;
+    /// cmangos/vmangos/mangoszero: can only do with empty bags
+    ONLY_EMPTY_BAG = 6;
 } {
     versions = "1 2";
 }
@@ -28,33 +23,24 @@ smsg SMSG_SELL_ITEM = 0x01A1 {
 }
 
 enum SellItemResult : u8 {
-    ERR_CANT_FIND_ITEM                      = 1 {
-           comment = "The item was not found.";
-    }
-    ERR_CANT_SELL_ITEM                      = 2 {
-           comment = "The merchant doesn't want that item.";
-    }
-    ERR_CANT_FIND_VENDOR                    = 3 {
-           comment = "The merchant doesn't like you.";
-    }
-    ERR_YOU_DONT_OWN_THAT_ITEM              = 4 {
-           comment = "You don't own that item.";
-    }
-    ERR_UNK                                 = 5 {
-           comment = "Nothing appears...";
-    }
-    ERR_ONLY_EMPTY_BAG                      = 6 {
-           comment = "You can only do that with empty bags.";
-    }
-    ERR_CANT_SELL_TO_THIS_MERCHANT          = 7 {
-           comment = "You cannot sell items to this merchant.";
-    }
-    ERR_MUST_REPAIR_ITEM_DURABILITY_TO_USE  = 8 {
-           comment = "You must repair that item's durability to use it.";
-    }
-    INTERNAL_BAG_ERROR                      = 9 {
-           comment = "Internal Bag Error";
-    }
+    /// The item was not found.
+    ERR_CANT_FIND_ITEM                      = 1;
+    /// The merchant doesn't want that item.
+    ERR_CANT_SELL_ITEM                      = 2;
+    /// The merchant doesn't like you.
+    ERR_CANT_FIND_VENDOR                    = 3;
+    /// You don't own that item.
+    ERR_YOU_DONT_OWN_THAT_ITEM              = 4;
+    /// Nothing appears...
+    ERR_UNK                                 = 5;
+    /// You can only do that with empty bags.
+    ERR_ONLY_EMPTY_BAG                      = 6;
+    /// You cannot sell items to this merchant.
+    ERR_CANT_SELL_TO_THIS_MERCHANT          = 7;
+    /// You must repair that item's durability to use it.
+    ERR_MUST_REPAIR_ITEM_DURABILITY_TO_USE  = 8;
+    /// Internal Bag Error
+    INTERNAL_BAG_ERROR                      = 9;
 } {
     versions = "3.3.5";
 }

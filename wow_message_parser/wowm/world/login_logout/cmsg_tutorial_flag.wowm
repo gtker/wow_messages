@@ -1,8 +1,7 @@
 #tag_all versions "1 2 3";
 
 cmsg CMSG_TUTORIAL_FLAG = 0x00FE {
-    u32 tutorial_flag {
-        comment = "arcemu indexes into the tutorials by dividing by 32 and modulo 32.";
-    }
+    /// arcemu indexes into the tutorials by dividing by 32 and modulo 32.
+    u32 tutorial_flag;
 }
 

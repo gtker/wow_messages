@@ -5,7 +5,7 @@ use crate::shared::gold_vanilla_tbc_wrath::Gold;
 use crate::shared::trade_slot_tbc_wrath::TradeSlot;
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/trade/smsg_trade_status_extended.wowm:67`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/trade/smsg_trade_status_extended.wowm#L67):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/trade/smsg_trade_status_extended.wowm:61`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/trade/smsg_trade_status_extended.wowm#L61):
 /// ```text
 /// smsg SMSG_TRADE_STATUS_EXTENDED = 0x0121 {
 ///     Bool self_player;

@@ -1,13 +1,10 @@
 enum InstanceResetFailedReason : u8 {
-    GENERAL = 0 {
-        comment = "at least one player is in the instance";
-    }
-    OFFLINE = 1 {
-        comment = "at least one player is offline";
-    }
-    ZONING = 2 {
-        comment = "at least one player try to enter the instance (being teleported in)";
-    }
+    /// at least one player is in the instance
+    GENERAL = 0;
+    /// at least one player is offline
+    OFFLINE = 1;
+    /// at least one player try to enter the instance (being teleported in)
+    ZONING = 2;
     SILENTLY = 3;
 } {
     versions = "1 2 3";

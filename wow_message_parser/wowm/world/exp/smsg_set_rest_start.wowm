@@ -1,8 +1,7 @@
 #tag_all versions "1 2";
 
 smsg SMSG_SET_REST_START = 0x021E {
-    u32 unknown1 {
-        comment = "cmangos/mangoszero: unknown, may be rest state time or experience";
-    }
+    /// cmangos/mangoszero: unknown, may be rest state time or experience
+    u32 unknown1;
 }
 

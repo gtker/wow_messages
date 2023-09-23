@@ -1,28 +1,23 @@
 #tag_all versions "1 2 3";
 
 struct GmSurveyQuestion {
-    u32 question_id {
-        comment = "cmangos: questions found in GMSurveyQuestions.dbc";
-        comment = "ref to i'th GMSurveySurveys.dbc field (all fields in that dbc point to fields in GMSurveyQuestions.dbc)";
-    }
-    u8 answer {
-        comment = "Rating: hardcoded limit of 0-5 in pre-Wrath, ranges defined in GMSurveyAnswers.dbc Wrath+";
-    }
-    CString comment {
-        comment = "Usage: `GMSurveyAnswerSubmit(question, rank, comment)`";
-        comment = "cmangos: Unused in stock UI, can be only set by calling Lua function";
-    }
+    /// cmangos: questions found in GMSurveyQuestions.dbc
+    /// ref to i'th GMSurveySurveys.dbc field (all fields in that dbc point to fields in GMSurveyQuestions.dbc)
+    u32 question_id;
+    /// Rating: hardcoded limit of 0-5 in pre-Wrath, ranges defined in GMSurveyAnswers.dbc Wrath+
+    u8 answer;
+    /// Usage: `GMSurveyAnswerSubmit(question, rank, comment)`
+    /// cmangos: Unused in stock UI, can be only set by calling Lua function
+    CString comment;
 }
 
 cmsg CMSG_GMSURVEY_SUBMIT = 0x032A {
     /* Enum for survey id */
-    u32 survey_id {
-        comment = "cmangos: Survey ID: found in GMSurveySurveys.dbc";
-    }
+    /// cmangos: Survey ID: found in GMSurveySurveys.dbc
+    u32 survey_id;
     GmSurveyQuestion[10] questions;
-    CString answer_comment {
-        comment = "cmangos: Answer comment: Unused in stock UI, can be only set by calling Lua function"; 
-        comment = "cmangos: Answer comment max sizes in bytes: Vanilla - 8106:8110, TBC - 11459:11463, Wrath - 582:586";
-    }
+    /// cmangos: Answer comment: Unused in stock UI, can be only set by calling Lua function
+    /// cmangos: Answer comment max sizes in bytes: Vanilla - 8106:8110, TBC - 11459:11463, Wrath - 582:586
+    CString answer_comment;
 }
 

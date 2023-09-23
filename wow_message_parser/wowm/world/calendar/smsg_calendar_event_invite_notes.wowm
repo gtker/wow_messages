@@ -1,3 +1,4 @@
+/// This message only exists as a coment in trinitycore.
 smsg SMSG_CALENDAR_EVENT_INVITE_NOTES = 0x0460 {
     PackedGuid invitee;
     Guid invite_id;
@@ -5,5 +6,4 @@ smsg SMSG_CALENDAR_EVENT_INVITE_NOTES = 0x0460 {
     Bool unknown;
 } {
     versions = "3.3.5";
-    comment = "This message only exists as a coment in trinitycore.";
 }

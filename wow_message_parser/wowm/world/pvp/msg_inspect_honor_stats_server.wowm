@@ -3,17 +3,14 @@ smsg MSG_INSPECT_HONOR_STATS_Server = 0x02D6 {
     PvpRank highest_rank;
     u32 today_honorable_and_dishonorable;
     u16 yesterday_honorable;
-    u16 unknown1 {
-        comment = "vmangos: Unknown (deprecated, yesterday dishonourable?)";
-    }
+    /// vmangos: Unknown (deprecated, yesterday dishonourable?)
+    u16 unknown1;
     u16 last_week_honorable;
-    u16 unknown2 {
-        comment = "vmangos: Unknown (deprecated, last week dishonourable?)";
-    }
+    /// vmangos: Unknown (deprecated, last week dishonourable?)
+    u16 unknown2;
     u16 this_week_honorable;
-    u16 unknown3 {
-        comment = "vmangos: Unknown (deprecated, this week dishonourable?)";
-    }
+    /// vmangos: Unknown (deprecated, this week dishonourable?)
+    u16 unknown3;
     u32 lifetime_honorable;
     u32 lifetime_dishonorable;
     u32 yesterday_honor;

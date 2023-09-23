@@ -1,14 +1,13 @@
+/// Response to [CMSG_NAME_QUERY].
 smsg SMSG_NAME_QUERY_RESPONSE = 0x51 {
     Guid guid;
     CString character_name;
-    CString realm_name {
-        comment = "Used for showing cross realm realm names. If this is an empty string it is shown like a regular player on the same realm.";
-    }
+    /// Used for showing cross realm realm names. If this is an empty string it is shown like a regular player on the same realm.
+    CString realm_name;
     (u32)Race race;
     (u32)Gender gender;
     (u32)Class class;
 } {
-    comment = "Response to [CMSG_NAME_QUERY].";
     versions = "1.12";
 }
 
@@ -19,12 +18,12 @@ enum DeclinedNames : u8 {
     versions = "2.4.3 3";
 }
 
+/// Response to [CMSG_NAME_QUERY].
 smsg SMSG_NAME_QUERY_RESPONSE = 0x51 {
     PackedGuid guid;
     CString character_name;
-    CString realm_name {
-        comment = "Used for showing cross realm realm names. If this is an empty string it is shown like a regular player on the same realm.";
-    }
+    /// Used for showing cross realm realm names. If this is an empty string it is shown like a regular player on the same realm.
+    CString realm_name;
     (u32)Race race;
     (u32)Gender gender;
     (u32)Class class;
@@ -33,20 +32,18 @@ smsg SMSG_NAME_QUERY_RESPONSE = 0x51 {
         CString[5] declined_names;
     }
 } {
-    comment = "Response to [CMSG_NAME_QUERY].";
     versions = "2.4.3";
 }
 
+/// Response to [CMSG_NAME_QUERY].
 smsg SMSG_NAME_QUERY_RESPONSE = 0x51 {
     PackedGuid guid;
-    u8 early_terminate = 0 {
-        comment = "Added in 3.1";
-        comment = "When this is 1, the packet stops early. However, there is as of yet no good reason to ever send 1, so this is const";
-    }
+    /// Added in 3.1
+    /// When this is 1, the packet stops early. However, there is as of yet no good reason to ever send 1, so this is const
+    u8 early_terminate = 0;
     CString character_name;
-    CString realm_name {
-        comment = "Used for showing cross realm realm names. If this is an empty string it is shown like a regular player on the same realm.";
-    }
+    /// Used for showing cross realm realm names. If this is an empty string it is shown like a regular player on the same realm.
+    CString realm_name;
     Race race;
     Gender gender;
     Class class;
@@ -55,7 +52,6 @@ smsg SMSG_NAME_QUERY_RESPONSE = 0x51 {
         CString[5] declined_names;
     }
 } {
-    comment = "Response to [CMSG_NAME_QUERY].";
     versions = "3.3.5";
 }
 

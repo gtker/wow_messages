@@ -1,8 +1,7 @@
 #tag_all versions "1 2 3";
 
+/// vmangos has extra u8 with comment `0..2, read failure reason? if == 1, use next command`.
 smsg SMSG_READ_ITEM_FAILED = 0x00AF {
     Guid guid;
-} {
-    comment = "vmangos has extra u8 with comment `0..2, read failure reason? if == 1, use next command`.";
 }
 

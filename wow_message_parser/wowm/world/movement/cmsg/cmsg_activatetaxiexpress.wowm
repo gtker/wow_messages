@@ -1,8 +1,7 @@
 cmsg CMSG_ACTIVATETAXIEXPRESS = 0x0312 {
     Guid guid;
-    u32 total_cost {
-        comment = "vmangos/mangosone: Never used.";
-    }
+    /// vmangos/mangosone: Never used.
+    u32 total_cost;
     u32 node_count;
     u32[node_count] nodes;
 } {

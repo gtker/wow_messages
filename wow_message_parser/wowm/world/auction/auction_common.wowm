@@ -33,9 +33,8 @@ struct AuctionListItem {
     u32 item_suffix_factor;
     u32 item_count;
     u32 item_charges;
-    u32 item_flags {
-        comment = "mangosone: item flags (dynamic?) (0x04 no lockId?)";
-    }
+    /// mangosone: item flags (dynamic?) (0x04 no lockId?)
+    u32 item_flags;
     Guid item_owner;
     u32 start_bid;
     u32 minimum_bid;
@@ -55,9 +54,8 @@ struct AuctionListItem {
     u32 item_suffix_factor;
     u32 item_count;
     u32 item_charges;
-    u32 item_flags {
-        comment = "mangosone: item flags (dynamic?) (0x04 no lockId?)";
-    }
+    /// mangosone: item flags (dynamic?) (0x04 no lockId?)
+    u32 item_flags;
     Guid item_owner;
     u32 start_bid;
     u32 minimum_bid;

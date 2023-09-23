@@ -8,7 +8,7 @@ use crate::tbc::{
 #[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
 /// Can be response to [`CMSG_TELEPORT_TO_UNIT`](crate::vanilla::CMSG_TELEPORT_TO_UNIT).
 /// Can also be a response to [`MSG_MOVE_TELEPORT_ACK_Client`](crate::vanilla::MSG_MOVE_TELEPORT_ACK_Client) after being sent.
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/movement/msg/msg_move_teleport_ack.wowm:10`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/movement/msg/msg_move_teleport_ack.wowm#L10):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/movement/msg/msg_move_teleport_ack.wowm:12`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/movement/msg/msg_move_teleport_ack.wowm#L12):
 /// ```text
 /// smsg MSG_MOVE_TELEPORT_ACK_Server = 0x00C7 {
 ///     PackedGuid guid;

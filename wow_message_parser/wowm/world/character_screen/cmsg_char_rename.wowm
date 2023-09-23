@@ -1,10 +1,9 @@
 #tag_all versions "1 2 3";
 
+/// Request of new name for character. This is only sent by the client if RENAME is set in the [CharacterFlags] of [SMSG_CHAR_ENUM] and the client tries to login.
 cmsg CMSG_CHAR_RENAME = 0x2C7 {
     Guid character;
     CString new_name;
-} {
-    comment = "Request of new name for character. This is only sent by the client if RENAME is set in the [CharacterFlags] of [SMSG_CHAR_ENUM] and the client tries to login.";
 }
 
 test CMSG_CHAR_RENAME {

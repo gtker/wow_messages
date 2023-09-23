@@ -6,7 +6,7 @@ use crate::vanilla::TextEmote;
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Sent to notify the server that the client wants to perform an emote like /dance or /cry.
 /// Server responds with [`SMSG_TEXT_EMOTE`](crate::vanilla::SMSG_TEXT_EMOTE) and [`SMSG_EMOTE`](crate::vanilla::SMSG_EMOTE).
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/chat/cmsg_text_emote.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/chat/cmsg_text_emote.wowm#L1):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/chat/cmsg_text_emote.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/chat/cmsg_text_emote.wowm#L3):
 /// ```text
 /// cmsg CMSG_TEXT_EMOTE = 0x0104 {
 ///     TextEmote text_emote;
@@ -110,7 +110,7 @@ mod test {
 
     }
 
-    // Generated from `wow_message_parser/wowm/world/chat/cmsg_text_emote.wowm` line 13.
+    // Generated from `wow_message_parser/wowm/world/chat/cmsg_text_emote.wowm` line 12.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn cmsg_text_emote0() {
@@ -130,7 +130,7 @@ mod test {
         assert_eq!(dest, RAW0);
     }
 
-    // Generated from `wow_message_parser/wowm/world/chat/cmsg_text_emote.wowm` line 13.
+    // Generated from `wow_message_parser/wowm/world/chat/cmsg_text_emote.wowm` line 12.
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_cmsg_text_emote0() {
@@ -150,7 +150,7 @@ mod test {
         assert_eq!(dest, RAW0);
     }
 
-    // Generated from `wow_message_parser/wowm/world/chat/cmsg_text_emote.wowm` line 13.
+    // Generated from `wow_message_parser/wowm/world/chat/cmsg_text_emote.wowm` line 12.
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_cmsg_text_emote0() {

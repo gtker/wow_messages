@@ -1,3 +1,4 @@
+/// Used in `Faction.dbc`.
 flag ReputationFlags : u8 {
     VISIBLE_TO_CLIENT = 0x01;
     ENABLE_AT_WAR = 0x02;
@@ -8,5 +9,4 @@ flag ReputationFlags : u8 {
 } {
     versions = "1.12";
     non_network_type = "true";
-    comment = "Used in `Faction.dbc`.";
 }

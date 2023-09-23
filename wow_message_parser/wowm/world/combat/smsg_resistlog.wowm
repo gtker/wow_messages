@@ -1,5 +1,7 @@
 #tag_all versions "1.12";
 
+/// Structure as comment on `https://github1s.com/mangoszero/server/blob/HEAD/src/game/Server/Opcodes.h#L525`.
+/// Not used in azerothcore/trinitycore/mangostwo/arcemu.
 smsg SMSG_RESISTLOG = 0x01D6 {
     /* TODO CORRECT_LAYOUT Nothing except a comment for this */
     Guid guid1;
@@ -9,8 +11,5 @@ smsg SMSG_RESISTLOG = 0x01D6 {
     f32 unknown3;
     u32 unknown4;
     u32 unknown5;
-} {
-    comment = "Structure as comment on `https://github1s.com/mangoszero/server/blob/HEAD/src/game/Server/Opcodes.h#L525`.";
-    comment = "Not used in azerothcore/trinitycore/mangostwo/arcemu.";
 }
 

@@ -1,12 +1,12 @@
+/// Immediately removes an object from the presence of the player.
+/// Used by vmangos for logout.
 smsg SMSG_DESTROY_OBJECT = 0x00AA {
     Guid guid;
 } {
-    comment = "Immediately removes an object from the presence of the player.";
-    comment = "Used by vmangos for logout.";
     versions = "1 2";
 }
 
-
+/// Remove object with GUID 6 from game world.
 test SMSG_DESTROY_OBJECT {
     guid = 6;
 } [
@@ -14,16 +14,15 @@ test SMSG_DESTROY_OBJECT {
   0xAA, 0x00, /* opcode */
   0x06, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 /* guid */
 ] {
-    comment = "Remove object with GUID 6 from game world.";
     versions = "1.12";
 }
 
+/// Immediately removes an object from the presence of the player.
+/// Used by vmangos for logout.
+/// azerothcore: If the following bool is true, the client will call `void CGUnit_C::OnDeath()` for this object. `OnDeath()` does for eg trigger death animation and interrupts certain spells/missiles/auras/sounds...
 smsg SMSG_DESTROY_OBJECT = 0x00AA {
     Guid guid;
     Bool target_died;
 } {
-    comment = "Immediately removes an object from the presence of the player.";
-    comment = "Used by vmangos for logout.";
-    comment = "azerothcore: If the following bool is true, the client will call `void CGUnit_C::OnDeath()` for this object. `OnDeath()` does for eg trigger death animation and interrupts certain spells/missiles/auras/sounds...";
     versions = "3.3.5";
 }

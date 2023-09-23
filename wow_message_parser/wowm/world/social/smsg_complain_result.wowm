@@ -6,18 +6,16 @@ enum ComplainResultWindow : u8 {
 }
 
 smsg SMSG_COMPLAIN_RESULT = 0x03C7 {
-    u8 unknown {
-        comment = "All emulators set to 0.";
-    }
+    /// All emulators set to 0.
+    u8 unknown;
     ComplainResultWindow window_result;
 } {
     versions = "2.4.3";
 }
 
 smsg SMSG_COMPLAIN_RESULT = 0x03C8 {
-    u8 unknown {
-        comment = "All emulators set to 0.";
-    }
+    /// All emulators set to 0.
+    u8 unknown;
     ComplainResultWindow window_result;
 } {
     versions = "3.3.5";

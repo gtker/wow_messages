@@ -5,7 +5,7 @@ use crate::vanilla::MovementInfo;
 
 #[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
 /// Sent to acknowledge the new speed. Reply to [`SMSG_FORCE_RUN_SPEED_CHANGE`](crate::vanilla::SMSG_FORCE_RUN_SPEED_CHANGE).
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/movement/cmsg/cmsg_force_run_speed_change_ack.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/movement/cmsg/cmsg_force_run_speed_change_ack.wowm#L1):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/movement/cmsg/cmsg_force_run_speed_change_ack.wowm:2`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/movement/cmsg/cmsg_force_run_speed_change_ack.wowm#L2):
 /// ```text
 /// cmsg CMSG_FORCE_RUN_SPEED_CHANGE_ACK = 0x00E3 {
 ///     Guid guid;
@@ -141,7 +141,7 @@ mod test {
 
     }
 
-    // Generated from `wow_message_parser/wowm/world/movement/cmsg/cmsg_force_run_speed_change_ack.wowm` line 11.
+    // Generated from `wow_message_parser/wowm/world/movement/cmsg/cmsg_force_run_speed_change_ack.wowm` line 12.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn cmsg_force_run_speed_change_ack0() {
@@ -161,7 +161,7 @@ mod test {
         assert_eq!(dest, RAW0);
     }
 
-    // Generated from `wow_message_parser/wowm/world/movement/cmsg/cmsg_force_run_speed_change_ack.wowm` line 11.
+    // Generated from `wow_message_parser/wowm/world/movement/cmsg/cmsg_force_run_speed_change_ack.wowm` line 12.
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_cmsg_force_run_speed_change_ack0() {
@@ -181,7 +181,7 @@ mod test {
         assert_eq!(dest, RAW0);
     }
 
-    // Generated from `wow_message_parser/wowm/world/movement/cmsg/cmsg_force_run_speed_change_ack.wowm` line 11.
+    // Generated from `wow_message_parser/wowm/world/movement/cmsg/cmsg_force_run_speed_change_ack.wowm` line 12.
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_cmsg_force_run_speed_change_ack0() {

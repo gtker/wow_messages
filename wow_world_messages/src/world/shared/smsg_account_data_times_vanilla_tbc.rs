@@ -4,7 +4,7 @@ use std::io::{Read, Write};
 /// The purpose of this message is unknown, but it is required in order to prevent the chat box from being a white rectangle that is unable to show text.
 /// Sending this causes the client to send [`CMSG_UPDATE_ACCOUNT_DATA`](crate::vanilla::CMSG_UPDATE_ACCOUNT_DATA) messages.
 /// [`CMSG_UPDATE_ACCOUNT_DATA`](crate::vanilla::CMSG_UPDATE_ACCOUNT_DATA) and [`CMSG_REQUEST_ACCOUNT_DATA`](crate::vanilla::CMSG_REQUEST_ACCOUNT_DATA) act on blocks numbered 0 to 7. The 32 u32s in this message could possibly actually be 8 sets of u8`16` but it could also be a variable sized message.
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/login_logout/smsg_account_data_times.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/login_logout/smsg_account_data_times.wowm#L1):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/login_logout/smsg_account_data_times.wowm:4`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/login_logout/smsg_account_data_times.wowm#L4):
 /// ```text
 /// smsg SMSG_ACCOUNT_DATA_TIMES = 0x0209 {
 ///     u32[32] data;

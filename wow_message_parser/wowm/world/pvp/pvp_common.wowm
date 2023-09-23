@@ -6,62 +6,48 @@ enum PvpRank : u8 {
     OUTLAW = 2;
     EXILED = 3;
     DISHONORED = 4;
-    RANK1 = 5 {
-        comment = "Alliance name: Private";
-        comment = "Horde name: Scout";
-    }
-    RANK2 = 6 {
-        comment = "Alliance name: Corporal";
-        comment = "Horde name: Grunt";
-    }
-    RANK3 = 7 {
-        comment = "Alliance name: Sergeant";
-        comment = "Horde name: Sergeant";
-    }
-    RANK4 = 8 {
-        comment = "Alliance name: Master Sergeant";
-        comment = "Horde name: Senior Sergeatn";
-    }
-    RANK5 = 9 {
-        comment = "Alliance name: Sergeant Major";
-        comment = "Horde name: First Sergeant";
-    }
-    RANK6 = 10 {
-        comment = "Alliance name: Knight";
-        comment = "Horde name: Stone Guard";
-    }
-    RANK7 = 11 {
-        comment = "Alliance name: Knight Lieutenant";
-        comment = "Horde name: Blood Guard";
-    }
-    RANK8 = 12 {
-        comment = "Alliance name: Knight Captain";
-        comment = "Horde name: Legionnare";
-    }
-    RANK9 = 13 {
-        comment = "Alliance name: Kngith Champion";
-        comment = "Horde name: Centurion";
-    }
-    RANK10 = 14 {
-        comment = "Alliance name: Liuetenant Commander";
-        comment = "Horde name: Champion";
-    }
-    RANK11 = 15 {
-        comment = "Alliance name: Commander";
-        comment = "Horde name: Lieutenant General";
-    }
-    RANK12 = 16 {
-        comment = "Alliance name: Marshal";
-        comment = "Horde name: General";
-    }
-    RANK13 = 17 {
-        comment = "Alliance name: Field Marshal";
-        comment = "Horde name: Warlord";
-    }
-    RANK14 = 18 {
-        comment = "Alliance name: Grand Marshal";
-        comment = "Horde name: High Warlord";
-    }
+    /// Alliance name: Private
+    /// Horde name: Scout
+    RANK1 = 5;
+    /// Alliance name: Corporal
+    /// Horde name: Grunt
+    RANK2 = 6;
+    /// Alliance name: Sergeant
+    /// Horde name: Sergeant
+    RANK3 = 7;
+    /// Alliance name: Master Sergeant
+    /// Horde name: Senior Sergeatn
+    RANK4 = 8;
+    /// Alliance name: Sergeant Major
+    /// Horde name: First Sergeant
+    RANK5 = 9;
+    /// Alliance name: Knight
+    /// Horde name: Stone Guard
+    RANK6 = 10;
+    /// Alliance name: Knight Lieutenant
+    /// Horde name: Blood Guard
+    RANK7 = 11;
+    /// Alliance name: Knight Captain
+    /// Horde name: Legionnare
+    RANK8 = 12;
+    /// Alliance name: Kngith Champion
+    /// Horde name: Centurion
+    RANK9 = 13;
+    /// Alliance name: Liuetenant Commander
+    /// Horde name: Champion
+    RANK10 = 14;
+    /// Alliance name: Commander
+    /// Horde name: Lieutenant General
+    RANK11 = 15;
+    /// Alliance name: Marshal
+    /// Horde name: General
+    RANK12 = 16;
+    /// Alliance name: Field Marshal
+    /// Horde name: Warlord
+    RANK13 = 17;
+    /// Alliance name: Grand Marshal
+    /// Horde name: High Warlord
+    RANK14 = 18;
     FACTION_LEADER = 19;
 } {
     rust_base_type = "true";

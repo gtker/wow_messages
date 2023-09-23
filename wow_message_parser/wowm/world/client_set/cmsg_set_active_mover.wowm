@@ -1,7 +1,7 @@
+/// Sent when the client enters the world.
 cmsg CMSG_SET_ACTIVE_MOVER = 0x26A {
     Guid guid;
 } {
-    comment = "Sent when the client enters the world.";
     versions = "1 2 3";
 }
 

@@ -11,9 +11,8 @@ smsg SMSG_SPELLDISPELLOG = 0x027B {
     PackedGuid victim;
     PackedGuid caster;
     Spell dispell_spell;
-    u8 unknown {
-        comment = "mangosone: unused";
-    }
+    /// mangosone: unused
+    u8 unknown;
     u32 amount_of_spells;
     DispelledSpell[amount_of_spells] spells;
 } {

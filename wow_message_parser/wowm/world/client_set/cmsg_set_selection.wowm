@@ -1,11 +1,11 @@
+/// Sets the current target.
 cmsg CMSG_SET_SELECTION = 0x13D {
     Guid target;
 } {
-    comment = "Sets the current target.";
     versions = "1 2 3";
 }
 
-
+/// Client sets target to GUID 6.
 test CMSG_SET_SELECTION {
     target = 6;
 } [
@@ -13,7 +13,6 @@ test CMSG_SET_SELECTION {
   0x3d, 0x01, 0x00, 0x00, /* opcode */
   0x06, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 /* target */
 ] {
-    comment = "Client sets target to GUID 6.";
     versions = "1.12";
 }
 

@@ -2,7 +2,7 @@ use std::io::{Read, Write};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Only exists as comment in azerothcore/trinitycore.
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/exp/smsg_toggle_xp_gain.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/exp/smsg_toggle_xp_gain.wowm#L1):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/exp/smsg_toggle_xp_gain.wowm:2`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/exp/smsg_toggle_xp_gain.wowm#L2):
 /// ```text
 /// smsg SMSG_TOGGLE_XP_GAIN = 0x04ED {
 /// }

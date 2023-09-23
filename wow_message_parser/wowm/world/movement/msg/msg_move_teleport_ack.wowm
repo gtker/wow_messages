@@ -1,20 +1,20 @@
+/// Response to [MSG_MOVE_TELEPORT_ACK_Server], at which point [MSG_MOVE_TELEPORT_ACK_Server] should be sent to observing players.
 cmsg MSG_MOVE_TELEPORT_ACK_Client = 0x00C7 {
     PackedGuid guid;
     u32 movement_counter;
     Milliseconds time;
 } {
-    comment = "Response to [MSG_MOVE_TELEPORT_ACK_Server], at which point [MSG_MOVE_TELEPORT_ACK_Server] should be sent to observing players.";
     versions = "1 2 3";
 }
 
+/// Can be response to [CMSG_TELEPORT_TO_UNIT].
+/// Can also be a response to [MSG_MOVE_TELEPORT_ACK_Client] after being sent.
 smsg MSG_MOVE_TELEPORT_ACK_Server = 0x00C7 {
     PackedGuid guid;
     u32 movement_counter;
     MovementInfo info;
 } {
     paste_versions = "1.12 2.4.3 3.3.5";
-    comment = "Can be response to [CMSG_TELEPORT_TO_UNIT].";
-    comment = "Can also be a response to [MSG_MOVE_TELEPORT_ACK_Client] after being sent.";
 }
 
 

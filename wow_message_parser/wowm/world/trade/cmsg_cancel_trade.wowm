@@ -1,8 +1,7 @@
 #tag_all versions "1.12 2 3.3.5";
 
-cmsg CMSG_CANCEL_TRADE = 0x011C {} {
-    comment = "Sent twice by the client when teleporting and logging out.";
-}
+/// Sent twice by the client when teleporting and logging out.
+cmsg CMSG_CANCEL_TRADE = 0x011C {}
 
 test CMSG_CANCEL_TRADE {
 } [

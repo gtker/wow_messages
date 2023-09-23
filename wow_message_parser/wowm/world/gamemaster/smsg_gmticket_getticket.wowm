@@ -1,13 +1,10 @@
 enum GmTicketEscalationStatus : u8 {
-    GMTICKET_ASSIGNEDTOGM_STATUS_NOT_ASSIGNED = 0 {
-        comment = "ticket is not currently assigned to a gm";
-    }
-    GMTICKET_ASSIGNEDTOGM_STATUS_ASSIGNED = 1 {
-        comment = "ticket is assigned to a normal gm";
-    }
-    GMTICKET_ASSIGNEDTOGM_STATUS_ESCALATED = 2 {
-        comment = "ticket is in the escalation queue";
-    }
+    /// ticket is not currently assigned to a gm
+    GMTICKET_ASSIGNEDTOGM_STATUS_NOT_ASSIGNED = 0;
+    /// ticket is assigned to a normal gm
+    GMTICKET_ASSIGNEDTOGM_STATUS_ASSIGNED = 1;
+    /// ticket is in the escalation queue
+    GMTICKET_ASSIGNEDTOGM_STATUS_ESCALATED = 2;
 } {
     versions = "1.12 2 3";
 }
@@ -15,9 +12,8 @@ enum GmTicketEscalationStatus : u8 {
 smsg SMSG_GMTICKET_GETTICKET = 0x0212 {
     GmTicketStatus status;
     if (status == HAS_TEXT) {
-        CString text {
-            comment = "cmangos: Ticket text: data, should never exceed 1999 bytes";
-        }
+        /// cmangos: Ticket text: data, should never exceed 1999 bytes
+        CString text;
         GmTicketType ticket_type;
         f32 days_since_ticket_creation;
         f32 days_since_oldest_ticket_creation;
@@ -33,9 +29,8 @@ smsg SMSG_GMTICKET_GETTICKET = 0x0212 {
     GmTicketStatus status;
     if (status == HAS_TEXT) {
         u32 id;
-        CString text {
-            comment = "cmangos: Ticket text: data, should never exceed 1999 bytes";
-        }
+        /// cmangos: Ticket text: data, should never exceed 1999 bytes
+        CString text;
         Bool need_more_help;
         f32 days_since_ticket_creation;
         f32 days_since_oldest_ticket_creation;

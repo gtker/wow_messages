@@ -1,8 +1,7 @@
 struct PetSpellCooldown {
     Spell16 spell;
-    u16 spell_category {
-        comment = "mangoszero: sets to 0";
-    }
+    /// mangoszero: sets to 0
+    u16 spell_category;
     Milliseconds cooldown;
     Milliseconds category_cooldown;
 } {
@@ -15,9 +14,8 @@ smsg SMSG_PET_SPELLS = 0x0179 {
         u32 duration;
         PetReactState react;
         PetCommandState command;
-        u8 unknown {
-            comment = "mangoszero: set to 0";
-        }
+        /// mangoszero: set to 0
+        u8 unknown;
         PetEnabled pet_enabled;
         u32[10] action_bars;
         u8 amount_of_spells;
@@ -31,9 +29,8 @@ smsg SMSG_PET_SPELLS = 0x0179 {
 
 struct PetSpellCooldown {
     Spell spell;
-    u16 spell_category {
-        comment = "mangoszero: sets to 0";
-    }
+    /// mangoszero: sets to 0
+    u16 spell_category;
     Milliseconds cooldown;
     Milliseconds category_cooldown;
 } {
@@ -47,9 +44,8 @@ smsg SMSG_PET_SPELLS = 0x0179 {
         u32 duration;
         PetReactState react;
         PetCommandState command;
-        u8 unknown {
-            comment = "mangoszero: set to 0";
-        }
+        /// mangoszero: set to 0
+        u8 unknown;
         PetEnabled pet_enabled;
         u32[10] action_bars;
         u8 amount_of_spells;

@@ -9,7 +9,7 @@ use crate::vanilla::{
 };
 
 #[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/queries/smsg_item_query_single_response.wowm:185`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/queries/smsg_item_query_single_response.wowm#L185):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/queries/smsg_item_query_single_response.wowm:172`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/queries/smsg_item_query_single_response.wowm#L172):
 /// ```text
 /// smsg SMSG_ITEM_QUERY_SINGLE_RESPONSE = 0x0058 {
 ///     u32 item;
@@ -886,7 +886,7 @@ mod test {
 
     }
 
-    // Generated from `wow_message_parser/wowm/world/queries/smsg_item_query_single_response.wowm` line 259.
+    // Generated from `wow_message_parser/wowm/world/queries/smsg_item_query_single_response.wowm` line 239.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn smsg_item_query_single_response0() {
@@ -906,7 +906,7 @@ mod test {
         assert_eq!(dest, RAW0);
     }
 
-    // Generated from `wow_message_parser/wowm/world/queries/smsg_item_query_single_response.wowm` line 259.
+    // Generated from `wow_message_parser/wowm/world/queries/smsg_item_query_single_response.wowm` line 239.
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_smsg_item_query_single_response0() {
@@ -926,7 +926,7 @@ mod test {
         assert_eq!(dest, RAW0);
     }
 
-    // Generated from `wow_message_parser/wowm/world/queries/smsg_item_query_single_response.wowm` line 259.
+    // Generated from `wow_message_parser/wowm/world/queries/smsg_item_query_single_response.wowm` line 239.
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_smsg_item_query_single_response0() {

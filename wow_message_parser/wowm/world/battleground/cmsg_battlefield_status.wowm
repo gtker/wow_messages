@@ -1,5 +1,5 @@
+/// Sent when the client enters the world.
 cmsg CMSG_BATTLEFIELD_STATUS = 0x02D3 {} {
-    comment = "Sent when the client enters the world.";
     versions = "1 2 3";
 }
 

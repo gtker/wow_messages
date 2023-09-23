@@ -2,50 +2,36 @@ smsg SMSG_PETITION_QUERY_RESPONSE = 0x01C7 {
     u32 petition_id;
     Guid charter_owner;
     CString guild_name;
-    CString body_text {
-        comment = "cmangos/vmangos/mangoszero: Set to 0, only info is comment from vmangos";
-    }
-    u32 unknown_flags {
-        comment = "cmangos/vmangos/mangoszero: Set to 1, only info is comment from vmangos";
-    }
-    u32 minimum_signatures {
-        comment = "cmangos/vmangos/mangoszero: Set to 9, only info is comment from vmangos";
-    }
-    u32 maximum_signatures {
-        comment = "cmangos/vmangos/mangoszero: Set to 9, only info is comment from vmangos";
-    }
-    u32 deadline {
-        comment = "cmangos/vmangos/mangoszero: Set to 0, only info is comment from vmangos";
-    }
-    u32 issue_date {
-        comment = "cmangos/vmangos/mangoszero: Set to 0, only info is comment from vmangos";
-    }
-    u32 allowed_guild_id {
-        comment = "cmangos/vmangos/mangoszero: Set to 0, only info is comment from vmangos";
-    }
-    AllowedClass allowed_class {
-        comment = "cmangos/vmangos/mangoszero: Set to 0, only info is comment from vmangos";
-    }
-    AllowedRace allowed_race {
-        comment = "cmangos/vmangos/mangoszero: Set to 0, only info is comment from vmangos";
-    }
-    u16 allowed_genders {
-        comment = "cmangos/vmangos/mangoszero: Set to 0, only info is comment from vmangos";
-    }
-    Level32 allowed_minimum_level {
-        comment = "cmangos/vmangos/mangoszero: Set to 0, only info is comment from vmangos";
-    }
-    Level32 allowed_maximum_level {
-        comment = "cmangos/vmangos/mangoszero: Set to 0, only info is comment from vmangos";
-    }
+    /// cmangos/vmangos/mangoszero: Set to 0, only info is comment from vmangos
+    CString body_text;
+    /// cmangos/vmangos/mangoszero: Set to 1, only info is comment from vmangos
+    u32 unknown_flags;
+    /// cmangos/vmangos/mangoszero: Set to 9, only info is comment from vmangos
+    u32 minimum_signatures;
+    /// cmangos/vmangos/mangoszero: Set to 9, only info is comment from vmangos
+    u32 maximum_signatures;
+    /// cmangos/vmangos/mangoszero: Set to 0, only info is comment from vmangos
+    u32 deadline;
+    /// cmangos/vmangos/mangoszero: Set to 0, only info is comment from vmangos
+    u32 issue_date;
+    /// cmangos/vmangos/mangoszero: Set to 0, only info is comment from vmangos
+    u32 allowed_guild_id;
+    /// cmangos/vmangos/mangoszero: Set to 0, only info is comment from vmangos
+    AllowedClass allowed_class;
+    /// cmangos/vmangos/mangoszero: Set to 0, only info is comment from vmangos
+    AllowedRace allowed_race;
+    /// cmangos/vmangos/mangoszero: Set to 0, only info is comment from vmangos
+    u16 allowed_genders;
+    /// cmangos/vmangos/mangoszero: Set to 0, only info is comment from vmangos
+    Level32 allowed_minimum_level;
+    /// cmangos/vmangos/mangoszero: Set to 0, only info is comment from vmangos
+    Level32 allowed_maximum_level;
     /* TODO CORRECT_LAYOUT Figure out if CStrings work? */
-    u32 todo_amount_of_signers {
-        comment = "cmangos/vmangos/mangoszero: Set to 0, only info is comment from vmangos";
-        comment = "vmangos: char m_choicetext[10][64]";
-    }
-    u32 number_of_choices {
-        comment = "cmangos/vmangos/mangoszero: Set to 0, only info is comment from vmangos";
-    }
+    /// cmangos/vmangos/mangoszero: Set to 0, only info is comment from vmangos
+    /// vmangos: char m_choicetext[10][64]
+    u32 todo_amount_of_signers;
+    /// cmangos/vmangos/mangoszero: Set to 0, only info is comment from vmangos
+    u32 number_of_choices;
 } {
     versions = "1.12";
 }
@@ -61,18 +47,14 @@ smsg SMSG_PETITION_QUERY_RESPONSE = 0x01C7 {
     u32 petition_id;
     Guid charter_owner;
     CString guild_name;
-    CString body_text {
-        comment = "cmangos/vmangos/mangoszero: Set to 0, only info is comment from vmangos";
-    }
-    u32 minimum_signatures {
-        comment = "cmangos/vmangos/mangoszero: Set to 9, only info is comment from vmangos";
-    }
-    u32 maximum_signatures {
-        comment = "cmangos/vmangos/mangoszero: Set to 9, only info is comment from vmangos";
-    }
-    u32 unknown1 {
-        comment = "mangosone: bypass client - side limitation, a different value is needed here for each petition";
-    }
+    /// cmangos/vmangos/mangoszero: Set to 0, only info is comment from vmangos
+    CString body_text;
+    /// cmangos/vmangos/mangoszero: Set to 9, only info is comment from vmangos
+    u32 minimum_signatures;
+    /// cmangos/vmangos/mangoszero: Set to 9, only info is comment from vmangos
+    u32 maximum_signatures;
+    /// mangosone: bypass client - side limitation, a different value is needed here for each petition
+    u32 unknown1;
     u32 unknown2;
     u32 unknown3;
     u32 unknown4;
@@ -91,18 +73,14 @@ smsg SMSG_PETITION_QUERY_RESPONSE = 0x01C7 {
     u32 petition_id;
     Guid charter_owner;
     CString guild_name;
-    CString body_text {
-        comment = "cmangos/vmangos/mangoszero: Set to 0, only info is comment from vmangos";
-    }
-    u32 minimum_signatures {
-        comment = "cmangos/vmangos/mangoszero: Set to 9, only info is comment from vmangos";
-    }
-    u32 maximum_signatures {
-        comment = "cmangos/vmangos/mangoszero: Set to 9, only info is comment from vmangos";
-    }
-    u32 unknown1 {
-        comment = "mangosone: bypass client - side limitation, a different value is needed here for each petition";
-    }
+    /// cmangos/vmangos/mangoszero: Set to 0, only info is comment from vmangos
+    CString body_text;
+    /// cmangos/vmangos/mangoszero: Set to 9, only info is comment from vmangos
+    u32 minimum_signatures;
+    /// cmangos/vmangos/mangoszero: Set to 9, only info is comment from vmangos
+    u32 maximum_signatures;
+    /// mangosone: bypass client - side limitation, a different value is needed here for each petition
+    u32 unknown1;
     u32 unknown2;
     u32 unknown3;
     u32 unknown4;

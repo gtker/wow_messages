@@ -1,5 +1,5 @@
+/// Sent when the client enters the world.
 cmsg CMSG_REQUEST_RAID_INFO = 0x02CD {} {
-    comment = "Sent when the client enters the world.";
     versions = "1.12 2 3.3.5";
 }
 

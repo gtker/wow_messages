@@ -25,21 +25,19 @@ smsg SMSG_ITEM_PUSH_RESULT = 0x0166 {
     NewItemCreationType creation_type;
     NewItemChatAlert alert_chat;
     u8 bag_slot;
-    u32 item_slot {
-        comment = "mangoszero: item slot, but when added to stack: 0xFFFFFFFF";
-    }
+    /// mangoszero: item slot, but when added to stack: 0xFFFFFFFF
+    u32 item_slot;
     Item item;
-    u32 item_suffix_factor {
-        comment = "mangoszero: SuffixFactor";
-    }
-    u32 item_random_property_id {
-        comment = "mangoszero: random item property id";
-    }
+    /// mangoszero: SuffixFactor
+    u32 item_suffix_factor;
+    /// mangoszero: random item property id
+    u32 item_random_property_id;
     u32 item_count;
 } {
     versions = "1";
 }
 
+/// Pushing the creation of a lionheart helm to player with Guid 4.
 test SMSG_ITEM_PUSH_RESULT {
     guid = 0x4;
     source = LOOTED;
@@ -65,7 +63,6 @@ test SMSG_ITEM_PUSH_RESULT {
     0x00, 0x00, 0x00, 0x00, /* item_random_property_id */
     0x01, 0x00, 0x00, 0x00 /* item_count */
 ] {
-    comment = "Pushing the creation of a lionheart helm to player with Guid 4.";
     versions = "1.12";
 }
 
@@ -75,16 +72,13 @@ smsg SMSG_ITEM_PUSH_RESULT = 0x0166 {
     NewItemCreationType creation_type;
     NewItemChatAlert alert_chat;
     u8 bag_slot;
-    u32 item_slot {
-        comment = "mangoszero: item slot, but when added to stack: 0xFFFFFFFF";
-    }
+    /// mangoszero: item slot, but when added to stack: 0xFFFFFFFF
+    u32 item_slot;
     Item item;
-    u32 item_suffix_factor {
-        comment = "mangoszero: SuffixFactor";
-    }
-    u32 item_random_property_id {
-        comment = "mangoszero: random item property id";
-    }
+    /// mangoszero: SuffixFactor
+    u32 item_suffix_factor;
+    /// mangoszero: random item property id
+    u32 item_random_property_id;
     u32 item_count;
     u32 item_count_in_inventory;
 } {

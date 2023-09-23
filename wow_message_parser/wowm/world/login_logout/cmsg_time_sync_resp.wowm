@@ -1,12 +1,10 @@
 #tag_all versions "2.4.3 3";
 
 cmsg CMSG_TIME_SYNC_RESP = 0x391 {
-    u32 time_sync {
-        comment = "Can be used to check if the client is still properly in sync";
-        comment = "This should be the same as the counter sent in [SMSG_TIME_SYNC_REQ].";
-    }
-    u32 client_ticks {
-        comment = "You can check this against expected values to estimate client latency";
-    }
+    /// Can be used to check if the client is still properly in sync
+    /// This should be the same as the counter sent in [SMSG_TIME_SYNC_REQ].
+    u32 time_sync;
+    /// You can check this against expected values to estimate client latency
+    u32 client_ticks;
 }
 

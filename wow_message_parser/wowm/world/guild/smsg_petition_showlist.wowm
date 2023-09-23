@@ -1,18 +1,14 @@
 struct PetitionShowlist {
     u32 index;
-    u32 charter_entry {
-        comment = "cmangos/vmangos/mangoszero: statically sets to guild charter item id (5863).";
-    }
-    u32 charter_display_id {
-        comment = "cmangos/vmangos/mangoszero: statically sets to guild charter display id (16161).";
-    }
-    u32 guild_charter_cost {
-        comment = "cmangos/vmangos/mangoszero: statically set to 1000 (10 silver).";
-    }
-    u32 unknown1 {
-        comment = "cmangos/vmangos/mangoszero: statically set to 1";
-        comment = "arcemu: charter type? seems to be 0x0 for guilds and 0x1 for arena charters";
-    }
+    /// cmangos/vmangos/mangoszero: statically sets to guild charter item id (5863).
+    u32 charter_entry;
+    /// cmangos/vmangos/mangoszero: statically sets to guild charter display id (16161).
+    u32 charter_display_id;
+    /// cmangos/vmangos/mangoszero: statically set to 1000 (10 silver).
+    u32 guild_charter_cost;
+    /// cmangos/vmangos/mangoszero: statically set to 1
+    /// arcemu: charter type? seems to be 0x0 for guilds and 0x1 for arena charters
+    u32 unknown1;
     u32 signatures_required;
 } {
     versions = "2.4.3 3";
@@ -20,18 +16,14 @@ struct PetitionShowlist {
 
 struct PetitionShowlist {
     u32 index;
-    u32 charter_entry {
-        comment = "cmangos/vmangos/mangoszero: statically sets to guild charter item id (5863) and arena charter ids.";
-    }
-    u32 charter_display_id {
-        comment = "cmangos/vmangos/mangoszero: statically sets to guild charter display id (16161) and arena charter ids.";
-    }
-    u32 guild_charter_cost {
-        comment = "cmangos/vmangos/mangoszero: statically set to 1000 (10 silver) for guild charters and the cost of arena charters for that.";
-    }
-    u32 unknown1 {
-        comment = "cmangos/vmangos/mangoszero: statically set to 1";
-    }
+    /// cmangos/vmangos/mangoszero: statically sets to guild charter item id (5863) and arena charter ids.
+    u32 charter_entry;
+    /// cmangos/vmangos/mangoszero: statically sets to guild charter display id (16161) and arena charter ids.
+    u32 charter_display_id;
+    /// cmangos/vmangos/mangoszero: statically set to 1000 (10 silver) for guild charters and the cost of arena charters for that.
+    u32 guild_charter_cost;
+    /// cmangos/vmangos/mangoszero: statically set to 1
+    u32 unknown1;
 } {
     versions = "1";
 }

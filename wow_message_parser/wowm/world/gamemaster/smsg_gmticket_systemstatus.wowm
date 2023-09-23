@@ -6,8 +6,7 @@ enum GmTicketQueueStatus : u32 {
 }
 
 smsg SMSG_GMTICKET_SYSTEMSTATUS = 0x021B {
-    GmTicketQueueStatus will_accept_tickets {
-        comment = "vmangos: This only disables the ticket UI at client side and is not fully reliable are we sure this is a uint32? Should ask Zor";
-    }
+    /// vmangos: This only disables the ticket UI at client side and is not fully reliable are we sure this is a uint32? Should ask Zor
+    GmTicketQueueStatus will_accept_tickets;
 }
 

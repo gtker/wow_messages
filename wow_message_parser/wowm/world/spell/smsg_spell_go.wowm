@@ -1,7 +1,6 @@
 smsg SMSG_SPELL_GO = 0x0132 {
-    PackedGuid cast_item {
-        comment = "cmangos/vmangos/mangoszero: if cast item is used, set this to guid of cast item, otherwise set it to same as caster.";
-    }
+    /// cmangos/vmangos/mangoszero: if cast item is used, set this to guid of cast item, otherwise set it to same as caster.
+    PackedGuid cast_item;
     PackedGuid caster;
     Spell spell;
     CastFlags flags;
@@ -22,9 +21,8 @@ smsg SMSG_SPELL_GO = 0x0132 {
 }
 
 smsg SMSG_SPELL_GO = 0x0132 {
-    PackedGuid cast_item {
-        comment = "cmangos/vmangos/mangoszero: if cast item is used, set this to guid of cast item, otherwise set it to same as caster.";
-    }
+    /// cmangos/vmangos/mangoszero: if cast item is used, set this to guid of cast item, otherwise set it to same as caster.
+    PackedGuid cast_item;
     PackedGuid caster;
     Spell spell;
     CastFlags flags;
@@ -47,9 +45,8 @@ smsg SMSG_SPELL_GO = 0x0132 {
 }
 
 smsg SMSG_SPELL_GO = 0x0132 {
-    PackedGuid cast_item {
-        comment = "cmangos/vmangos/mangoszero: if cast item is used, set this to guid of cast item, otherwise set it to same as caster.";
-    }
+    /// cmangos/vmangos/mangoszero: if cast item is used, set this to guid of cast item, otherwise set it to same as caster.
+    PackedGuid cast_item;
     PackedGuid caster;
     u8 extra_casts;
     Spell spell;

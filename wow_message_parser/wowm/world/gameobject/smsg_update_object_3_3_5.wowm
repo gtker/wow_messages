@@ -26,9 +26,8 @@ flag UpdateFlag : u16 {
 flag SplineFlag : u32 {
     NONE = 0x00000000;
     DONE = 0x00000001;
-    FALLING = 0x00000002 {
-        comment = "vmangos: Affects elevation computation";
-    }
+    /// vmangos: Affects elevation computation
+    FALLING = 0x00000002;
     UNKNOWN3 = 0x00000004;
     UNKNOWN4 = 0x00000008;
     UNKNOWN5 = 0x00000010;
@@ -36,9 +35,8 @@ flag SplineFlag : u32 {
     UNKNOWN7 = 0x00000040;
     UNKNOWN8 = 0x00000080;
     RUNMODE = 0x00000100;
-    FLYING = 0x00000200 {
-        comment = "vmangos: Smooth movement(Catmullrom interpolation mode), flying animation";
-    }
+    /// vmangos: Smooth movement(Catmullrom interpolation mode), flying animation
+    FLYING = 0x00000200;
     NO_SPLINE = 0x00000400;
     PARABOLIC = 0x00000800;
     UNKNOWN13 = 0x00001000;
@@ -48,23 +46,18 @@ flag SplineFlag : u32 {
     FINAL_POINT = 0x00010000;
     FINAL_TARGET = 0x00020000;
     FINAL_ANGLE = 0x00040000;
-    UNKNOWN19 = 0x00080000 {
-        comment = "vmangos: exists, but unknown what it does";
-    }
-    CYCLIC = 0x00100000 {
-        comment = "vmangos: Movement by cycled spline";
-    }
-    ENTER_CYCLE = 0x00200000 {
-        comment = "vmangos: Everytimes appears with cyclic flag in monster move packet, erases first spline vertex after first cycle done";
-    }
-    FROZEN = 0x00400000 {
-        comment = "vmangos: Will never arrive";
-    }
+    /// vmangos: exists, but unknown what it does
+    UNKNOWN19 = 0x00080000;
+    /// vmangos: Movement by cycled spline
+    CYCLIC = 0x00100000;
+    /// vmangos: Everytimes appears with cyclic flag in monster move packet, erases first spline vertex after first cycle done
+    ENTER_CYCLE = 0x00200000;
+    /// vmangos: Will never arrive
+    FROZEN = 0x00400000;
     UNKNOWN23 = 0x00800000;
     UNKNOWN24 = 0x01000000;
-    UNKNOWN25 = 0x02000000 {
-        comment = "vmangos: exists, but unknown what it does";
-    }
+    /// vmangos: exists, but unknown what it does
+    UNKNOWN25 = 0x02000000;
     UNKNOWN26 = 0x04000000;
     UNKNOWN27 = 0x08000000;
     UNKNOWN28 = 0x10000000;
@@ -160,9 +153,8 @@ struct MovementBlock {
         f32 orientation2;
     }
     if (update_flag & HIGH_GUID) {
-        u32 unknown0 {
-            comment = "vmangos statically sets to 0";
-        }
+        /// vmangos statically sets to 0
+        u32 unknown0;
     }
     if (update_flag & LOW_GUID) {
         u32 unknown1;
@@ -178,9 +170,8 @@ struct MovementBlock {
         f32 vehicle_orientation;
     }
     if (update_flag & ROTATION) {
-        u64 packed_local_rotation {
-            comment = "AzerothCore deliberately casts to i64";
-        }
+        /// AzerothCore deliberately casts to i64
+        u64 packed_local_rotation;
     }
 }
 

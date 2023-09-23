@@ -1,9 +1,8 @@
 cmsg CMSG_MAIL_CREATE_TEXT_ITEM = 0x024A {
     Guid mailbox;
     u32 mail_id;
-    u32 mail_template_id {
-        comment = "mangoszero/cmangos/vmangos: mailTemplateId, non need, Mail store own 100% correct value anyway";
-    }
+    /// mangoszero/cmangos/vmangos: mailTemplateId, non need, Mail store own 100% correct value anyway
+    u32 mail_template_id;
 } {
     versions = "1 2";
 }

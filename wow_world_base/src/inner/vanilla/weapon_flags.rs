@@ -2,7 +2,7 @@
 ///
 /// This type is not sent over the network, but is used in the game in another way.
 ///
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/external/weapon_flags.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/external/weapon_flags.wowm#L1):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/external/weapon_flags.wowm:2`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/external/weapon_flags.wowm#L2):
 /// ```text
 /// flag WeaponFlags : u8 {
 ///     WEAPON_NOT_AFFECTED_BY_ANIMATION = 0x00;

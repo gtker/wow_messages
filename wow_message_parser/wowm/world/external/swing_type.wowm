@@ -1,3 +1,4 @@
+/// Used in `WeaponSwingSounds2.dbc`.
 enum SwingType : u8 {
     LIGHT = 0;
     MEDIUM = 1;
@@ -5,5 +6,4 @@ enum SwingType : u8 {
 } {
     versions = "1.12";
     non_network_type = "true";
-    comment = "Used in `WeaponSwingSounds2.dbc`.";
 }

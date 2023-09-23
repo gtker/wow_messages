@@ -1,7 +1,7 @@
+/// Reply to [CMD_AUTH_RECONNECT_PROOF_Client].
 slogin CMD_AUTH_RECONNECT_PROOF_Server = 0x03 {
     LoginResult result;
 } {
-    comment = "Reply to [CMD_AUTH_RECONNECT_PROOF_Client].";
     login_versions = "2";
 }
 
@@ -23,19 +23,19 @@ test CMD_AUTH_RECONNECT_PROOF_Server {
     login_versions = "2";
 }
 
+/// Reply to [CMD_AUTH_RECONNECT_PROOF_Client].
 slogin CMD_AUTH_RECONNECT_PROOF_Server = 0x03 {
     LoginResult result;
     u16 padding = 0;
 } {
-    comment = "Reply to [CMD_AUTH_RECONNECT_PROOF_Client].";
     login_versions = "5 6 7";
 }
 
+/// Reply to [CMD_AUTH_RECONNECT_PROOF_Client].
 slogin CMD_AUTH_RECONNECT_PROOF_Server = 0x03 {
     LoginResult result;
     u16 padding = 0;
 } {
-    comment = "Reply to [CMD_AUTH_RECONNECT_PROOF_Client].";
     login_versions = "8";
 }
 

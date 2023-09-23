@@ -1,5 +1,5 @@
+/// Sent when the client enters the world.
 cmsg CMSG_GMTICKET_GETTICKET = 0x0211 {} {
-    comment = "Sent when the client enters the world.";
     versions = "1 2 3";
 }
 

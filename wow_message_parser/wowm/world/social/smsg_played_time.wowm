@@ -7,16 +7,13 @@ smsg SMSG_PLAYED_TIME = 0x01CD {
 }
 
 smsg SMSG_PLAYED_TIME = 0x01CD {
-    u32 total_played_time {
-        comment = "Time played in total (seconds)";
-    }
-    u32 level_played_time {
-        comment = "Time played on this level (seconds)";
-    }
-    Bool show_on_ui {
-        comment = "Whether this is a silent query or the client should show it on the UI (chat box).";
-        comment = "Send back the value received in [CMSG_PLAYED_TIME]";
-    }
+    /// Time played in total (seconds)
+    u32 total_played_time;
+    /// Time played on this level (seconds)
+    u32 level_played_time;
+    /// Whether this is a silent query or the client should show it on the UI (chat box).
+    /// Send back the value received in [CMSG_PLAYED_TIME]
+    Bool show_on_ui;
 } {
     versions = "3";
 }

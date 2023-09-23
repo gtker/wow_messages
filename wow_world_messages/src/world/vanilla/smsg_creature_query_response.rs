@@ -292,7 +292,7 @@ mod test {
 
     }
 
-    // Generated from `wow_message_parser/wowm/world/queries/smsg_creature_query_response.wowm` line 114.
+    // Generated from `wow_message_parser/wowm/world/queries/smsg_creature_query_response.wowm` line 94.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn smsg_creature_query_response0() {
@@ -312,7 +312,7 @@ mod test {
         assert_eq!(dest, RAW0);
     }
 
-    // Generated from `wow_message_parser/wowm/world/queries/smsg_creature_query_response.wowm` line 114.
+    // Generated from `wow_message_parser/wowm/world/queries/smsg_creature_query_response.wowm` line 94.
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_smsg_creature_query_response0() {
@@ -332,7 +332,7 @@ mod test {
         assert_eq!(dest, RAW0);
     }
 
-    // Generated from `wow_message_parser/wowm/world/queries/smsg_creature_query_response.wowm` line 114.
+    // Generated from `wow_message_parser/wowm/world/queries/smsg_creature_query_response.wowm` line 94.
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_smsg_creature_query_response0() {

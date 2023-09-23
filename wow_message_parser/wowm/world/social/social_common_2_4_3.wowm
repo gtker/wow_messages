@@ -381,65 +381,45 @@ enum Language : u8 {
 }
 
 flag GroupUpdateFlags : u32 {
-    NONE              = 0x00000000 {
-        comment = "nothing";
-    }
-    STATUS            = 0x00000001 {
-        comment = "uint16, flags";
-    }
-    CUR_HP            = 0x00000002 {
-        comment = "uint16";
-    }
-    MAX_HP            = 0x00000004 {
-        comment = "uint16";
-    }
-    POWER_TYPE        = 0x00000008 {
-        comment = "uint8";
-    }
-    CUR_POWER         = 0x00000010 {
-        comment = "uint16";
-    }
-    MAX_POWER         = 0x00000020 {
-        comment = "uint16";
-    }
-    LEVEL             = 0x00000040 {
-        comment = "uint16";
-    }
-    ZONE              = 0x00000080 {
-        comment = "uint16";
-    }
-    POSITION          = 0x00000100 {
-        comment = "uint16, uint16";
-    }
-    AURAS             = 0x00000200 {
-        comment = "uint64 mask, for each bit set uint16 spellid + uint8 unk";
-    }
-    PET_GUID          = 0x00000400 {
-        comment = "uint64 pet guid";
-    }
-    PET_NAME          = 0x00000800 {
-        comment = "pet name, nullptr terminated string";
-    }
-    PET_MODEL_ID      = 0x00001000 {
-        comment = "uint16, model id";
-    }
-    PET_CUR_HP        = 0x00002000 {
-        comment = "uint16 pet cur health";
-    }
-    PET_MAX_HP        = 0x00004000 {
-        comment = "uint16 pet max health";
-    }
-    PET_POWER_TYPE    = 0x00008000 {
-        comment = "uint8 pet power type";
-    }
-    PET_CUR_POWER     = 0x00010000 {
-        comment = "uint16 pet cur power";
-    }
-    PET_MAX_POWER     = 0x00020000 {
-        comment = "uint16 pet max power";
-    }
-    PET_AURAS         = 0x00040000 {
-        comment = "uint64 mask, for each bit set uint16 spellid + uint8 unk, pet auras...";
-    }
+    /// nothing
+    NONE              = 0x00000000;
+    /// uint16, flags
+    STATUS            = 0x00000001;
+    /// uint16
+    CUR_HP            = 0x00000002;
+    /// uint16
+    MAX_HP            = 0x00000004;
+    /// uint8
+    POWER_TYPE        = 0x00000008;
+    /// uint16
+    CUR_POWER         = 0x00000010;
+    /// uint16
+    MAX_POWER         = 0x00000020;
+    /// uint16
+    LEVEL             = 0x00000040;
+    /// uint16
+    ZONE              = 0x00000080;
+    /// uint16, uint16
+    POSITION          = 0x00000100;
+    /// uint64 mask, for each bit set uint16 spellid + uint8 unk
+    AURAS             = 0x00000200;
+    /// uint64 pet guid
+    PET_GUID          = 0x00000400;
+    /// pet name, nullptr terminated string
+    PET_NAME          = 0x00000800;
+    /// uint16, model id
+    PET_MODEL_ID      = 0x00001000;
+    /// uint16 pet cur health
+    PET_CUR_HP        = 0x00002000;
+    /// uint16 pet max health
+    PET_MAX_HP        = 0x00004000;
+    /// uint8 pet power type
+    PET_POWER_TYPE    = 0x00008000;
+    /// uint16 pet cur power
+    PET_CUR_POWER     = 0x00010000;
+    /// uint16 pet max power
+    PET_MAX_POWER     = 0x00020000;
+    /// uint64 mask, for each bit set uint16 spellid + uint8 unk, pet auras...
+    PET_AURAS         = 0x00040000;
 }
 

@@ -57,9 +57,8 @@ smsg SMSG_GUILD_BANK_LIST = 0x03E7 {
 struct GuildBankSlot {
     u8 slot;
     Item item;
-    u32 unknown1 {
-        comment = "3.3.0 (0x8000, 0x8020)";
-    }
+    /// 3.3.0 (0x8000, 0x8020)
+    u32 unknown1;
     VariableItemRandomProperty item_random_property_id;
     u32 amount_of_items;
     u32 unknown2;

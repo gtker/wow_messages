@@ -1,4 +1,4 @@
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/common.wowm:334`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/common.wowm#L334):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/common.wowm:289`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/common.wowm#L289):
 /// ```text
 /// enum SpellCastResult : u8 {
 ///     AFFECTING_COMBAT = 0x00;

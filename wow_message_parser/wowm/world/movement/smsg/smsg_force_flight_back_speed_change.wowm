@@ -1,9 +1,8 @@
 smsg SMSG_FORCE_FLIGHT_BACK_SPEED_CHANGE = 0x0383 {
     PackedGuid guid;
-    u32 move_event {
-        comment = "cmangos/mangoszero/vmangos: set to 0";
-        comment = "cmangos/mangoszero/vmangos: moveEvent, NUM_PMOVE_EVTS = 0x39";
-    }
+    /// cmangos/mangoszero/vmangos: set to 0
+    /// cmangos/mangoszero/vmangos: moveEvent, NUM_PMOVE_EVTS = 0x39
+    u32 move_event;
     f32 speed;
 } {
     versions = "2.4.3 3";

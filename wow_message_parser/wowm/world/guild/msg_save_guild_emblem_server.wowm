@@ -1,20 +1,15 @@
 enum GuildEmblemResult : u32 {
-    SUCCESS = 0 {
-        comment = "Guild Emblem saved.";
-    }
+    /// Guild Emblem saved.
+    SUCCESS = 0;
     INVALID_TABARD_COLORS = 1;
-    NO_GUILD = 2 {
-        comment = "vmangos: You are not part of a guild!";
-    }
-    NOT_GUILD_MASTER = 3 {
-        comment = "vmangos: Only guild leaders can create emblems.";
-    }
-    NOT_ENOUGH_MONEY = 4 {
-        comment = "vmangos: You can't afford to do that.";
-    }
-    NO_MESSAGE = 5 {
-        comment = "mangoszero: This version fails silently.";
-    }
+    /// vmangos: You are not part of a guild!
+    NO_GUILD = 2;
+    /// vmangos: Only guild leaders can create emblems.
+    NOT_GUILD_MASTER = 3;
+    /// vmangos: You can't afford to do that.
+    NOT_ENOUGH_MONEY = 4;
+    /// mangoszero: This version fails silently.
+    NO_MESSAGE = 5;
 } {
     versions = "1";
 }

@@ -1,3 +1,4 @@
+/// Used in `CharSections.dbc`.
 enum SelectionType : u8 {
     BASE_SKIN = 0x00;
     FACE = 0x01;
@@ -7,5 +8,4 @@ enum SelectionType : u8 {
 } {
     versions = "1.12";
     non_network_type = "true";
-    comment = "Used in `CharSections.dbc`.";
 }

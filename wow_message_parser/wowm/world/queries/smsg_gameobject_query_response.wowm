@@ -1,8 +1,6 @@
 smsg SMSG_GAMEOBJECT_QUERY_RESPONSE = 0x005F {
-    u32 entry_id {
-        comment = "When the `found` optional is not present all emulators bitwise OR the entry with `0x80000000`.``";
-    }
-    /* TODO INT_EQUALS */
+    /// When the `found` optional is not present all emulators bitwise OR the entry with `0x80000000`.``
+    u32 entry_id;
     optional found {
         u32 info_type;
         u32 display_id;
@@ -18,10 +16,8 @@ smsg SMSG_GAMEOBJECT_QUERY_RESPONSE = 0x005F {
 }
 
 smsg SMSG_GAMEOBJECT_QUERY_RESPONSE = 0x005F {
-    u32 entry_id {
-        comment = "When the `found` optional is not present all emulators bitwise OR the entry with `0x80000000`.``";
-    }
-    /* TODO INT_EQUALS */
+    /// When the `found` optional is not present all emulators bitwise OR the entry with `0x80000000`.``
+    u32 entry_id;
     optional found {
         u32 info_type;
         u32 display_id;
@@ -40,10 +36,8 @@ smsg SMSG_GAMEOBJECT_QUERY_RESPONSE = 0x005F {
 }
 
 smsg SMSG_GAMEOBJECT_QUERY_RESPONSE = 0x005F {
-    u32 entry_id {
-        comment = "When the `found` optional is not present all emulators bitwise OR the entry with `0x80000000`.``";
-    }
-    /* TODO INT_EQUALS */
+    /// When the `found` optional is not present all emulators bitwise OR the entry with `0x80000000`.``
+    u32 entry_id;
     optional found {
         u32 info_type;
         u32 display_id;

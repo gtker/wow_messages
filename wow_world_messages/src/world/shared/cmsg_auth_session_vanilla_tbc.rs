@@ -7,7 +7,7 @@ use crate::shared::addon_info_vanilla_tbc_wrath::AddonInfo;
 /// Sent after receiving [`SMSG_AUTH_CHALLENGE`](crate::vanilla::SMSG_AUTH_CHALLENGE).
 /// Followed by [`SMSG_AUTH_RESPONSE`](crate::vanilla::SMSG_AUTH_RESPONSE).
 /// This message is never encrypted.
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/character_screen/cmsg_auth_session.wowm:10`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/character_screen/cmsg_auth_session.wowm#L10):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/character_screen/cmsg_auth_session.wowm:13`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/character_screen/cmsg_auth_session.wowm#L13):
 /// ```text
 /// cmsg CMSG_AUTH_SESSION = 0x01ED {
 ///     u32 build;
@@ -554,7 +554,7 @@ mod test_vanilla {
 
     }
 
-    // Generated from `wow_message_parser/wowm/world/character_screen/cmsg_auth_session.wowm` line 28.
+    // Generated from `wow_message_parser/wowm/world/character_screen/cmsg_auth_session.wowm` line 27.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn cmsg_auth_session0() {
@@ -578,7 +578,7 @@ mod test_vanilla {
         assert_eq!(t, s);
     }
 
-    // Generated from `wow_message_parser/wowm/world/character_screen/cmsg_auth_session.wowm` line 28.
+    // Generated from `wow_message_parser/wowm/world/character_screen/cmsg_auth_session.wowm` line 27.
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_cmsg_auth_session0() {
@@ -602,7 +602,7 @@ mod test_vanilla {
         assert_eq!(t, s);
     }
 
-    // Generated from `wow_message_parser/wowm/world/character_screen/cmsg_auth_session.wowm` line 28.
+    // Generated from `wow_message_parser/wowm/world/character_screen/cmsg_auth_session.wowm` line 27.
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_cmsg_auth_session0() {
@@ -749,7 +749,7 @@ mod test_tbc {
 
     }
 
-    // Generated from `wow_message_parser/wowm/world/character_screen/cmsg_auth_session.wowm` line 28.
+    // Generated from `wow_message_parser/wowm/world/character_screen/cmsg_auth_session.wowm` line 27.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn cmsg_auth_session0() {
@@ -773,7 +773,7 @@ mod test_tbc {
         assert_eq!(t, s);
     }
 
-    // Generated from `wow_message_parser/wowm/world/character_screen/cmsg_auth_session.wowm` line 28.
+    // Generated from `wow_message_parser/wowm/world/character_screen/cmsg_auth_session.wowm` line 27.
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_cmsg_auth_session0() {
@@ -797,7 +797,7 @@ mod test_tbc {
         assert_eq!(t, s);
     }
 
-    // Generated from `wow_message_parser/wowm/world/character_screen/cmsg_auth_session.wowm` line 28.
+    // Generated from `wow_message_parser/wowm/world/character_screen/cmsg_auth_session.wowm` line 27.
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_cmsg_auth_session0() {

@@ -1,3 +1,4 @@
+/// Used in `Lock.dbc`.
 enum LockType : u8 {
     NONE = 0;
     ITEM_REQUIRED = 1;
@@ -5,5 +6,4 @@ enum LockType : u8 {
 } {
     non_network_type = "true";
     versions = "1.12";
-    comment = "Used in `Lock.dbc`.";
 }

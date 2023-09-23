@@ -9,26 +9,23 @@ struct GroupListMember {
     CString name;
     Guid guid;
     Bool is_online;
-    u8 flags {
-        comment = "mangoszero/cmangos/vmangos: own flags (groupid | (assistant?0x80:0))";
-    }
+    /// mangoszero/cmangos/vmangos: own flags (groupid | (assistant?0x80:0))
+    u8 flags;
 } {
     versions = "1.12";
 }
 
 smsg SMSG_GROUP_LIST = 0x007D {
     GroupType group_type;   
-    u8 flags {
-        comment = "mangoszero/cmangos/vmangos: own flags (groupid | (assistant?0x80:0))";
-    }
+    /// mangoszero/cmangos/vmangos: own flags (groupid | (assistant?0x80:0))
+    u8 flags;
     u32 amount_of_members;
     GroupListMember[amount_of_members] members;
     Guid leader;
     optional group_not_empty {
         GroupLootSetting loot_setting;
-        Guid master_loot {
-            comment = "Zero if loot_setting is not MASTER_LOOT";
-        }
+        /// Zero if loot_setting is not MASTER_LOOT
+        Guid master_loot;
         ItemQuality loot_threshold;
     }
 } {
@@ -40,9 +37,8 @@ struct GroupListMember {
     Guid guid;
     Bool is_online;
     u8 group_id;
-    u8 flags {
-        comment = "mangosone: 0x2 main assist, 0x4 main tank";
-    }
+    /// mangosone: 0x2 main assist, 0x4 main tank
+    u8 flags;
 } {
     versions = "2.4.3";
 }
@@ -51,18 +47,16 @@ smsg SMSG_GROUP_LIST = 0x007D {
     GroupType group_type;
     Bool battleground_group;
     u8 group_id;
-    u8 flags {
-        comment = "mangoszero/cmangos/vmangos: own flags (groupid | (assistant?0x80:0))";
-    }
+    /// mangoszero/cmangos/vmangos: own flags (groupid | (assistant?0x80:0))
+    u8 flags;
     Guid group;
     u32 amount_of_members;
     GroupListMember[amount_of_members] members;
     Guid leader;
     optional group_not_empty {
         GroupLootSetting loot_setting;
-        Guid master_loot {
-            comment = "Zero if loot_setting is not MASTER_LOOT";
-        }
+        /// Zero if loot_setting is not MASTER_LOOT
+        Guid master_loot;
         ItemQuality loot_threshold;
         DungeonDifficulty difficulty;
     }
@@ -75,9 +69,8 @@ struct GroupListMember {
     Guid guid;
     Bool is_online;
     u8 group_id;
-    u8 flags {
-        comment = "mangosone: 0x2 main assist, 0x4 main tank";
-    }
+    /// mangosone: 0x2 main assist, 0x4 main tank
+    u8 flags;
     u8 lfg_roles;
 } {
     versions = "3.3.5";
@@ -95,22 +88,19 @@ enum RaidDifficulty : u8 {
 smsg SMSG_GROUP_LIST = 0x007D {
     u8 group_type;
     u8 group_id;
-    u8 flags {
-        comment = "mangoszero/cmangos/vmangos: own flags (groupid | (assistant?0x80:0))";
-    }
+    /// mangoszero/cmangos/vmangos: own flags (groupid | (assistant?0x80:0))
+    u8 flags;
     u8 roles;
     Guid group;
-    u32 counter {
-        comment = "azerothcore: 3.3, value increases every time this packet gets sent";
-    }
+    /// azerothcore: 3.3, value increases every time this packet gets sent
+    u32 counter;
     u32 amount_of_members;
     GroupListMember[amount_of_members] members;
     Guid leader;
     optional group_not_empty {
         GroupLootSetting loot_setting;
-        Guid master_loot {
-            comment = "Zero if loot_setting is not MASTER_LOOT";
-        }
+        /// Zero if loot_setting is not MASTER_LOOT
+        Guid master_loot;
         ItemQuality loot_threshold;
         DungeonDifficulty difficulty;
         RaidDifficulty raid_difficulty;

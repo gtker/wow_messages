@@ -1,7 +1,6 @@
 struct TradeSlot {
-    u8 trade_slot_number {
-        comment = "cmangos/vmangos/mangoszero: sets to index of array";
-    }
+    /// cmangos/vmangos/mangoszero: sets to index of array
+    u8 trade_slot_number;
     Item item;
     u32 display_id;
     u32 stack_count;
@@ -20,32 +19,27 @@ struct TradeSlot {
 }
 
 smsg SMSG_TRADE_STATUS_EXTENDED = 0x0121 {
-    Bool self_player {
-        comment = "cmangos/vmangos/mangoszero: send trader or own trade windows state (last need for proper show spell apply to non-trade slot)";
-    }
-    u32 trade_slot_count1 {
+    /// cmangos/vmangos/mangoszero: send trader or own trade windows state (last need for proper show spell apply to non-trade slot)
+    Bool self_player;
         /* TODO NARROW_TYPE Maybe an enum for maximum values? */
-        comment = "cmangos/vmangos/mangoszero: sets to 7";
-        comment = "cmangos/vmangos/mangoszero: trade slots count/number?, = next field in most cases";
-    }
-    u32 trade_slot_count2 {
-        /* TODO NARROW_TYPE Maybe an enum for maximum values? */
-        comment = "cmangos/vmangos/mangoszero: sets to 7";
-        comment = "cmangos/vmangos/mangoszero: trade slots count/number?, = prev field in most cases";
-    }
+    /// cmangos/vmangos/mangoszero: sets to 7
+    /// cmangos/vmangos/mangoszero: trade slots count/number?, = next field in most cases
+    u32 trade_slot_count1;
+    /* TODO NARROW_TYPE Maybe an enum for maximum values? */
+    /// cmangos/vmangos/mangoszero: sets to 7
+    /// cmangos/vmangos/mangoszero: trade slots count/number?, = prev field in most cases
+    u32 trade_slot_count2;
     Gold money_in_trade;
     Spell spell_on_lowest_slot;
-    TradeSlot[7] trade_slots {
-        comment = "vmangos/cmangos/mangoszero: All set to same as trade_slot_count* (7), unsure which determines how big this is. Unused slots are 0.";
-    }
+    /// vmangos/cmangos/mangoszero: All set to same as trade_slot_count* (7), unsure which determines how big this is. Unused slots are 0.
+    TradeSlot[7] trade_slots;
 } {
     versions = "1.12";
 }
 
 struct TradeSlot {
-    u8 trade_slot_number {
-        comment = "cmangos/vmangos/mangoszero: sets to index of array";
-    }
+    /// cmangos/vmangos/mangoszero: sets to index of array
+    u8 trade_slot_number;
     Item item;
     u32 display_id;
     u32 stack_count;
@@ -65,27 +59,22 @@ struct TradeSlot {
 }
 
 smsg SMSG_TRADE_STATUS_EXTENDED = 0x0121 {
-    Bool self_player {
-        comment = "cmangos/vmangos/mangoszero: send trader or own trade windows state (last need for proper show spell apply to non-trade slot)";
-    }
-    u32 trade_id {
-        comment = "added in 2.4.0, this value must be equal to value from TRADE_STATUS_OPEN_WINDOW status packet (different value for different players to block multiple trades?)";
-    }
-    u32 trade_slot_count1 {
-        /* TODO NARROW_TYPE Maybe an enum for maximum values? */
-        comment = "cmangos/vmangos/mangoszero: sets to 7";
-        comment = "cmangos/vmangos/mangoszero: trade slots count/number?, = next field in most cases";
-    }
-    u32 trade_slot_count2 {
-        /* TODO NARROW_TYPE Maybe an enum for maximum values? */
-        comment = "cmangos/vmangos/mangoszero: sets to 7";
-        comment = "cmangos/vmangos/mangoszero: trade slots count/number?, = prev field in most cases";
-    }
+    /// cmangos/vmangos/mangoszero: send trader or own trade windows state (last need for proper show spell apply to non-trade slot)
+    Bool self_player;
+    /// added in 2.4.0, this value must be equal to value from TRADE_STATUS_OPEN_WINDOW status packet (different value for different players to block multiple trades?)
+    u32 trade_id;
+    /* TODO NARROW_TYPE Maybe an enum for maximum values? */
+    /// cmangos/vmangos/mangoszero: sets to 7
+    /// cmangos/vmangos/mangoszero: trade slots count/number?, = next field in most cases
+    u32 trade_slot_count1;
+    /* TODO NARROW_TYPE Maybe an enum for maximum values? */
+    /// cmangos/vmangos/mangoszero: sets to 7
+    /// cmangos/vmangos/mangoszero: trade slots count/number?, = prev field in most cases
+    u32 trade_slot_count2;
     Gold money_in_trade;
     Spell spell_on_lowest_slot;
-    TradeSlot[7] trade_slots {
-        comment = "vmangos/cmangos/mangoszero: All set to same as trade_slot_count* (7), unsure which determines how big this is. Unused slots are 0.";
-    }
+    /// vmangos/cmangos/mangoszero: All set to same as trade_slot_count* (7), unsure which determines how big this is. Unused slots are 0.
+    TradeSlot[7] trade_slots;
 } {
     versions = "2.4.3 3";
 }

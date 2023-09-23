@@ -1,45 +1,33 @@
 enum AuctionCommandAction : u32 {
-    STARTED = 0 {
-        comment = "ERR_AUCTION_STARTED";
-    }
-    REMOVED = 1 {
-        comment = "ERR_AUCTION_REMOVED";
-    }
-    BID_PLACED = 2 {
-        comment = "ERR_AUCTION_BID_PLACED";
-    }
+    /// ERR_AUCTION_STARTED
+    STARTED = 0;
+    /// ERR_AUCTION_REMOVED
+    REMOVED = 1;
+    /// ERR_AUCTION_BID_PLACED
+    BID_PLACED = 2;
 } {
     versions = "1.12 2 3";
 }
 
 enum AuctionCommandResult : u32 {
-    OK = 0 {
-        comment = "depends on enum AuctionAction";
-    }
-    ERR_INVENTORY = 1 {
-        comment = "depends on enum `InventoryChangeResult`";
-    }
-    ERR_DATABASE = 2 {
-        comment = "ERR_AUCTION_DATABASE_ERROR (default)";
-    }
-    ERR_NOT_ENOUGH_MONEY = 3 {
-        comment = "ERR_NOT_ENOUGH_MONEY";
-    }
-    ERR_ITEM_NOT_FOUND = 4 {
-        comment = "ERR_ITEM_NOT_FOUND";
-    }
-    ERR_HIGHER_BID = 5 {
-        comment = "ERR_AUCTION_HIGHER_BID";
-    }
-    ERR_BID_INCREMENT = 7 {
-        comment = "ERR_AUCTION_BID_INCREMENT";
-    }
-    ERR_BID_OWN = 10 {
-        comment = "ERR_AUCTION_BID_OWN";
-    }
-    ERR_RESTRICTED_ACCOUNT = 13 {
-        comment = "ERR_RESTRICTED_ACCOUNT";
-    }
+    /// depends on enum AuctionAction
+    OK = 0;
+    /// depends on enum `InventoryChangeResult`
+    ERR_INVENTORY = 1;
+    /// ERR_AUCTION_DATABASE_ERROR (default)
+    ERR_DATABASE = 2;
+    /// ERR_NOT_ENOUGH_MONEY
+    ERR_NOT_ENOUGH_MONEY = 3;
+    /// ERR_ITEM_NOT_FOUND
+    ERR_ITEM_NOT_FOUND = 4;
+    /// ERR_AUCTION_HIGHER_BID
+    ERR_HIGHER_BID = 5;
+    /// ERR_AUCTION_BID_INCREMENT
+    ERR_BID_INCREMENT = 7;
+    /// ERR_AUCTION_BID_OWN
+    ERR_BID_OWN = 10;
+    /// ERR_RESTRICTED_ACCOUNT
+    ERR_RESTRICTED_ACCOUNT = 13;
 } {
      versions = "1.12 2 3";
 }
@@ -74,33 +62,24 @@ smsg SMSG_AUCTION_COMMAND_RESULT = 0x025B {
 
 /* TODO RUST_SAME_ENUM_USED_MULTIPLE_TIMES Manually duplicated to work with Rust codegen */
 enum AuctionCommandResultTwo : u32 {
-    OK = 0 {
-        comment = "depends on enum AuctionAction";
-    }
-    ERR_INVENTORY = 1 {
-        comment = "depends on enum `InventoryChangeResult`";
-    }
-    ERR_DATABASE = 2 {
-        comment = "ERR_AUCTION_DATABASE_ERROR (default)";
-    }
-    ERR_NOT_ENOUGH_MONEY = 3 {
-        comment = "ERR_NOT_ENOUGH_MONEY";
-    }
-    ERR_ITEM_NOT_FOUND = 4 {
-        comment = "ERR_ITEM_NOT_FOUND";
-    }
-    ERR_HIGHER_BID = 5 {
-        comment = "ERR_AUCTION_HIGHER_BID";
-    }
-    ERR_BID_INCREMENT = 7 {
-        comment = "ERR_AUCTION_BID_INCREMENT";
-    }
-    ERR_BID_OWN = 10 {
-        comment = "ERR_AUCTION_BID_OWN";
-    }
-    ERR_RESTRICTED_ACCOUNT = 13 {
-        comment = "ERR_RESTRICTED_ACCOUNT";
-    }
+    /// depends on enum AuctionAction
+    OK = 0;
+    /// depends on enum `InventoryChangeResult`
+    ERR_INVENTORY = 1;
+    /// ERR_AUCTION_DATABASE_ERROR (default)
+    ERR_DATABASE = 2;
+    /// ERR_NOT_ENOUGH_MONEY
+    ERR_NOT_ENOUGH_MONEY = 3;
+    /// ERR_ITEM_NOT_FOUND
+    ERR_ITEM_NOT_FOUND = 4;
+    /// ERR_AUCTION_HIGHER_BID
+    ERR_HIGHER_BID = 5;
+    /// ERR_AUCTION_BID_INCREMENT
+    ERR_BID_INCREMENT = 7;
+    /// ERR_AUCTION_BID_OWN
+    ERR_BID_OWN = 10;
+    /// ERR_RESTRICTED_ACCOUNT
+    ERR_RESTRICTED_ACCOUNT = 13;
 } {
      versions = "1.12 2 3";
 }

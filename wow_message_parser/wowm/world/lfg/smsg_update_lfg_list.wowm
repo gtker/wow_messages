@@ -37,9 +37,8 @@ struct LfgListGroup {
         CString comment;
     }
     if (flags & ROLES) {
-        u8[3] roles {
-            comment = "Emu just sets all to 0.";
-        }
+        /// Emu just sets all to 0.
+        u8[3] roles;
     }
     Guid instance;
     u32 encounter_mask;
@@ -69,9 +68,8 @@ struct LfgListPlayer {
         u32 agility;
         u32 health;
         u32 mana;
-        Bool32 online {
-            comment = "azerothcore: talentpoints, used as online/offline marker :D";
-        }
+        /// azerothcore: talentpoints, used as online/offline marker :D
+        Bool32 online;
         u32 average_item_level;
         u32 defense_skill;
         u32 dodge_rating;
@@ -84,9 +82,8 @@ struct LfgListPlayer {
         CString comment;
     }
     if (flags & GROUP_LEADER) {
-        Bool is_looking_for_more {
-            comment = "emu sets to true.";
-        }
+        /// emu sets to true.
+        Bool is_looking_for_more;
     }
     if (flags & GROUP_GUID) {
         Guid group;
@@ -98,9 +95,8 @@ struct LfgListPlayer {
         Area area;
     }
     if (flags & STATUS) {
-        u8 unknown1 {
-            comment = "Emus set to 0.";
-        }
+        /// Emus set to 0.
+        u8 unknown1;
     }
     Guid instance;
     u32 encounter_mask;
@@ -117,14 +113,12 @@ smsg SMSG_UPDATE_LFG_LIST = 0x0360 {
         Guid[amount_of_deleted_guids] deleted_guids;
     }
     u32 amount_of_groups;
-    u32 unknown1 {
-        comment = "emus set to 0.";
-    }
+    /// emus set to 0.
+    u32 unknown1;
     LfgListGroup[amount_of_groups] groups;
     u32 amount_of_players;
-    u32 unknown2 {
-        comment = "emus set to 0.";
-    }
+    /// emus set to 0.
+    u32 unknown2;
     LfgListPlayer[amount_of_players] players;
 } {
     versions = "3.3.5";

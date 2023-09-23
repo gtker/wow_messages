@@ -1,21 +1,16 @@
 #tag_all versions "1 2 3";
 
 enum AiReaction : u32 {
-    ALERT = 0 {
-        comment = "pre-aggro (used in client packet handler)";
-    }
-    FRIENDLY = 1 {
-        comment = "(NOT used in client packet handler)";
-    }
-    HOSTILE = 2 {
-        comment = "sent on every attack, triggers aggro sound (used in client packet handler)";
-    }
-    AFRAID = 3 {
-        comment = "seen for polymorph (when AI not in control of self?) (NOT used in client packet handler)";
-    }
-    DESTROY = 4 {
-        comment = "used on object destroy (NOT used in client packet handler)";
-    }
+    /// pre-aggro (used in client packet handler)
+    ALERT = 0;
+    /// (NOT used in client packet handler)
+    FRIENDLY = 1;
+    /// sent on every attack, triggers aggro sound (used in client packet handler)
+    HOSTILE = 2;
+    /// seen for polymorph (when AI not in control of self?) (NOT used in client packet handler)
+    AFRAID = 3;
+    /// used on object destroy (NOT used in client packet handler)
+    DESTROY = 4;
 }
 
 smsg SMSG_AI_REACTION = 0x013C {

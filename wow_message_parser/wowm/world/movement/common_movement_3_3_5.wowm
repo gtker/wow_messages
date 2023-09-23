@@ -18,21 +18,16 @@ flag MovementFlags : u48 {
     RIGHT                 = 0x00000020;
     PITCH_UP              = 0x00000040;
     PITCH_DOWN            = 0x00000080;
-    WALKING               = 0x00000100 {
-        comment = "Walking";
-    }
-    ON_TRANSPORT           = 0x00000200 {
-        comment = "`AzerothCore`: Used for flying on some creatures";
-    }
-    DISABLE_GRAVITY       = 0x00000400 {
-        comment = "`AzerothCore`: Former `MOVEMENTFLAG_LEVITATING`. This is used when walking is not possible.";
-    }
-    ROOT                  = 0x00000800 {
-        comment = "`AzerothCore`: Must not be set along with `MOVEMENTFLAG_MASK_MOVING`";
-    }
-    FALLING               = 0x00001000 {
-        comment = "`AzerothCore`: damage dealt on that type of falling";
-    }
+    /// Walking
+    WALKING               = 0x00000100;
+    /// `AzerothCore`: Used for flying on some creatures
+    ON_TRANSPORT           = 0x00000200;
+    /// `AzerothCore`: Former `MOVEMENTFLAG_LEVITATING`. This is used when walking is not possible.
+    DISABLE_GRAVITY       = 0x00000400;
+    /// `AzerothCore`: Must not be set along with `MOVEMENTFLAG_MASK_MOVING`
+    ROOT                  = 0x00000800;
+    /// `AzerothCore`: damage dealt on that type of falling
+    FALLING               = 0x00001000;
     FALLING_FAR           = 0x00002000;
     PENDING_STOP          = 0x00004000;
     PENDING_STRAFE_STOP   = 0x00008000;
@@ -41,39 +36,29 @@ flag MovementFlags : u48 {
     PENDING_STRAFE_LEFT   = 0x00040000;
     PENDING_STRAFE_RIGHT  = 0x00080000;
     PENDING_ROOT          = 0x00100000;
-    SWIMMING              = 0x00200000 {
-        comment = "`AzerothCore`: appears with fly flag also";
-    }
-    ASCENDING             = 0x00400000 {
-        comment = "`AzerothCore`: press 'space' when flying";
-    }
+    /// `AzerothCore`: appears with fly flag also
+    SWIMMING              = 0x00200000;
+    /// `AzerothCore`: press 'space' when flying
+    ASCENDING             = 0x00400000;
     DESCENDING            = 0x00800000;
-    CAN_FLY               = 0x01000000 {
-        comment = "`AzerothCore`: Appears when unit can fly AND also walk";
-    }
-    FLYING                = 0x02000000 {
-        comment = "`AzerothCore`: unit is actually flying. pretty sure this is only used for players. creatures use `disable_gravity`";
-    }
-    SPLINE_ELEVATION      = 0x04000000 {
-        comment = "`AzerothCore`: used for flight paths";
-    }
-    SPLINE_ENABLED        = 0x08000000 {
-        comment = "`AzerothCore`: used for flight paths";
-    }
-    WATERWALKING          = 0x10000000 {
-        comment = "`AzerothCore`: prevent unit from falling through water";
-    }
-    FALLING_SLOW          = 0x20000000 {
-        comment = "`AzerothCore`: active rogue safe fall spell (passive)";
-    }
-    HOVER                 = 0x40000000 {
-        comment = "`AzerothCore`: hover, cannot jump";
-    }
+    /// `AzerothCore`: Appears when unit can fly AND also walk
+    CAN_FLY               = 0x01000000;
+    /// `AzerothCore`: unit is actually flying. pretty sure this is only used for players. creatures use `disable_gravity`
+    FLYING                = 0x02000000;
+    /// `AzerothCore`: used for flight paths
+    SPLINE_ELEVATION      = 0x04000000;
+    /// `AzerothCore`: used for flight paths
+    SPLINE_ENABLED        = 0x08000000;
+    /// `AzerothCore`: prevent unit from falling through water
+    WATERWALKING          = 0x10000000;
+    /// `AzerothCore`: active rogue safe fall spell (passive)
+    FALLING_SLOW          = 0x20000000;
+    /// `AzerothCore`: hover, cannot jump
+    HOVER                 = 0x40000000;
     NO_STRAFE                = 0x0000000100000000;
     NO_JUMPING               = 0x0000000200000000;
-    UNK3                     = 0x0000000400000000 {
-        comment = "`AzerothCore`: Overrides various clientside checks";
-    }
+    /// `AzerothCore`: Overrides various clientside checks
+    UNK3                     = 0x0000000400000000;
     FULL_SPEED_TURNING       = 0x0000000800000000;
     FULL_SPEED_PITCHING      = 0x0000001000000000;
     ALWAYS_ALLOW_PITCHING    = 0x0000002000000000;

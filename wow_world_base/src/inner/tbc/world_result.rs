@@ -1,4 +1,4 @@
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/enums/world_result.wowm:240`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/enums/world_result.wowm#L240):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/enums/world_result.wowm:164`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/enums/world_result.wowm#L164):
 /// ```text
 /// enum WorldResult : u8 {
 ///     RESPONSE_SUCCESS = 0x00;

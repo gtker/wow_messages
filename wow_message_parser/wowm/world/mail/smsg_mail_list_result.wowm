@@ -1,15 +1,12 @@
 enum MailType : u8 {
     NORMAL = 0;
     AUCTION = 2;
-    CREATURE = 3 {
-        comment = "client send CMSG_CREATURE_QUERY on this mailmessagetype";
-    }
-    GAMEOBJECT = 4 {
-        comment = "client send CMSG_GAMEOBJECT_QUERY on this mailmessagetype";
-    }
-    ITEM = 5 {
-        comment = "client send CMSG_ITEM_QUERY on this mailmessagetype";
-    }
+    /// client send CMSG_CREATURE_QUERY on this mailmessagetype
+    CREATURE = 3;
+    /// client send CMSG_GAMEOBJECT_QUERY on this mailmessagetype
+    GAMEOBJECT = 4;
+    /// client send CMSG_ITEM_QUERY on this mailmessagetype
+    ITEM = 5;
 } {
     versions = "1.12 2.4.3 3.3.5";
 }
@@ -30,12 +27,10 @@ struct Mail {
     }
     CString subject;
     u32 item_text_id;
-    u32 unknown1 {
-        comment = "cmangos/vmangos/mangoszero: set to 0";
-    }
-    u32 stationery {
-        comment = "cmangos/vmangos/mangoszero: stationery (Stationery.dbc)";
-    }
+    /// cmangos/vmangos/mangoszero: set to 0
+    u32 unknown1;
+    /// cmangos/vmangos/mangoszero: stationery (Stationery.dbc)
+    u32 stationery;
     Item item;
     u32 item_enchant_id;
     u32 item_random_property_id;
@@ -46,13 +41,11 @@ struct Mail {
     u32 durability;
     Gold money;
     u32 cash_on_delivery_amount;
-    u32 checked_timestamp {
-        comment = "cmangos/vmangos/mangoszero: All have a comment with 'flags' but send the timestamp from the item.";
-    }
+    /// cmangos/vmangos/mangoszero: All have a comment with 'flags' but send the timestamp from the item.
+    u32 checked_timestamp;
     f32 expiration_time;
-    u32 mail_template_id {
-        comment = "cmangos/vmangos/mangoszero: mail template (MailTemplate.dbc)";
-    }
+    /// cmangos/vmangos/mangoszero: mail template (MailTemplate.dbc)
+    u32 mail_template_id;
 } {
     versions = "1.12";
 }
@@ -82,9 +75,8 @@ struct Mail {
     Gold money;
     u32 flags;
     f32 expiration_time;
-    u32 mail_template_id {
-        comment = "cmangos/vmangos/mangoszero: mail template (MailTemplate.dbc)";
-    }
+    /// cmangos/vmangos/mangoszero: mail template (MailTemplate.dbc)
+    u32 mail_template_id;
     CString subject;
     u8 amount_of_items;
     MailListItem[amount_of_items] items;
@@ -146,9 +138,8 @@ struct Mail {
     Gold money;
     u32 flags;
     f32 expiration_time;
-    u32 mail_template_id {
-        comment = "cmangos/vmangos/mangoszero: mail template (MailTemplate.dbc)";
-    }
+    /// cmangos/vmangos/mangoszero: mail template (MailTemplate.dbc)
+    u32 mail_template_id;
     CString subject;
     CString message;
     u8 amount_of_items;
@@ -174,9 +165,8 @@ struct MailListItem {
 }
 
 smsg SMSG_MAIL_LIST_RESULT = 0x023B {
-    u32 real_mail_amount {
-        comment = "azerothcore: this will display warning about undelivered mail to player if realCount > mailsCount";
-    }
+    /// azerothcore: this will display warning about undelivered mail to player if realCount > mailsCount
+    u32 real_mail_amount;
     u8 amount_of_mails;
     Mail[amount_of_mails] mails;
 } {

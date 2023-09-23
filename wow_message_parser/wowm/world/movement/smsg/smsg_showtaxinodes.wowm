@@ -1,9 +1,8 @@
 #tag_all versions "1.12 2 3";
 
 smsg SMSG_SHOWTAXINODES = 0x01A9 {
-    u32 unknown1 {
-        comment = "Set to 1 in mangoszero";
-    }
+    /// Set to 1 in mangoszero
+    u32 unknown1;
     Guid guid;
     u32 nearest_node;
     u32[-] nodes;

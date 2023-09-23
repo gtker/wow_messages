@@ -1,3 +1,4 @@
+/// mangoszero: in [SMSG_SEND_MAIL_RESULT], 7-13 and 16+: 'Mail database error'
 enum MailResult : u32 {
     OK = 0;
     ERR_EQUIP_ERROR = 1;
@@ -13,10 +14,10 @@ enum MailResult : u32 {
     ERR_TOO_MANY_ATTACHMENTS = 18;
     ERR_MAIL_ATTACHMENT_INVALID = 19;
 } {
-    comment = "mangoszero: in [SMSG_SEND_MAIL_RESULT], 7-13 and 16+: 'Mail database error'";
     versions = "1.12 2";
 }
 
+/// mangoszero: in [SMSG_SEND_MAIL_RESULT], 7-13 and 16+: 'Mail database error'
 enum MailResult : u32 {
     OK = 0;
     ERR_EQUIP_ERROR = 1;
@@ -33,7 +34,6 @@ enum MailResult : u32 {
     ERR_MAIL_ATTACHMENT_INVALID = 19;
     ERR_ITEM_HAS_EXPIRED = 21;
 } {
-    comment = "mangoszero: in [SMSG_SEND_MAIL_RESULT], 7-13 and 16+: 'Mail database error'";
     versions = "3.3.5";
 }
 
@@ -56,9 +56,8 @@ smsg SMSG_SEND_MAIL_RESULT = 0x0239 {
         if (result == ERR_EQUIP_ERROR) {
             u32 equip_error;
         } else {
-            Item item {
-                comment = "cmangos/vmangos: item guid low?";
-            }
+            /// cmangos/vmangos: item guid low?
+            Item item;
             u32 item_count;
         }
     } else {
@@ -72,6 +71,7 @@ smsg SMSG_SEND_MAIL_RESULT = 0x0239 {
 }
 
 /* TODO RUST_SAME_ENUM_USED_MULTIPLE_TIMES Manually duplicated to work with Rust codegen */
+/// mangoszero: in [SMSG_SEND_MAIL_RESULT], 7-13 and 16+: 'Mail database error'
 enum MailResultTwo : u32 {
     OK = 0;
     ERR_EQUIP_ERROR = 1;
@@ -87,11 +87,11 @@ enum MailResultTwo : u32 {
     ERR_TOO_MANY_ATTACHMENTS = 18;
     ERR_MAIL_ATTACHMENT_INVALID = 19;
 } {
-    comment = "mangoszero: in [SMSG_SEND_MAIL_RESULT], 7-13 and 16+: 'Mail database error'";
     versions = "1.12 2";
 }
 
 /* TODO RUST_SAME_ENUM_USED_MULTIPLE_TIMES Manually duplicated to work with Rust codegen */
+/// mangoszero: in [SMSG_SEND_MAIL_RESULT], 7-13 and 16+: 'Mail database error'
 enum MailResultTwo : u32 {
     OK = 0;
     ERR_EQUIP_ERROR = 1;
@@ -108,6 +108,5 @@ enum MailResultTwo : u32 {
     ERR_MAIL_ATTACHMENT_INVALID = 19;
     ERR_ITEM_HAS_EXPIRED = 21;
 } {
-    comment = "mangoszero: in [SMSG_SEND_MAIL_RESULT], 7-13 and 16+: 'Mail database error'";
     versions = "3.3.5";
 }

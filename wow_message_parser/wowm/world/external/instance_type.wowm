@@ -1,3 +1,4 @@
+/// Used in `Map.dbc`, and `LFGDungeons.dbc`.
 enum InstanceType : u8 {
     NORMAL = 0x00;
     GROUP_INSTANCE = 0x01;
@@ -8,5 +9,4 @@ enum InstanceType : u8 {
 } {
     versions = "1.12";
     non_network_type = "true";
-    comment = "Used in `Map.dbc`, and `LFGDungeons.dbc`.";
 }

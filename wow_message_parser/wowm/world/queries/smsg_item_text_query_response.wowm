@@ -1,8 +1,7 @@
 smsg SMSG_ITEM_TEXT_QUERY_RESPONSE = 0x0244 {
     u32 item_text_id;
-    CString text {
-        comment = "mangoszero: CString TODO max length 8000";
-    }
+    /// mangoszero: CString TODO max length 8000
+    CString text;
 } {
     versions = "1 2";
 }

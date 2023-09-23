@@ -15,15 +15,12 @@ smsg SMSG_GROUP_INVITE = 0x6F {
     PlayerInviteStatus status;
     CString name;
     optional unknown {
-        u32 unknown1 {
-            comment = "All emulators set entire optional to 0.";
-        }
-        u8 count {
-            comment = "All emulators set entire optional to 0.";
-        }
-        u32 unknown2 {
-            comment = "All emulators set entire optional to 0.";
-        }
+        /// All emulators set entire optional to 0.
+        u32 unknown1;
+        /// All emulators set entire optional to 0.
+        u8 count;
+        /// All emulators set entire optional to 0.
+        u32 unknown2;
     }
 } {
     versions = "3.3.5";

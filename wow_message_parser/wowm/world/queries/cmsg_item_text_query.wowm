@@ -1,11 +1,9 @@
 cmsg CMSG_ITEM_TEXT_QUERY = 0x0243 {
     u32 item_text_id;
-    u32 mail_id {
-        comment = "vmangos/cmangos/mangoszero: this value can be item id in bag, but it is also mail id";
-    }
-    u32 unknown1 {
-        comment = "vmangos/cmangos/mangoszero: maybe something like state - 0x70000000";
-    }
+    /// vmangos/cmangos/mangoszero: this value can be item id in bag, but it is also mail id
+    u32 mail_id;
+    /// vmangos/cmangos/mangoszero: maybe something like state - 0x70000000
+    u32 unknown1;
 } {
     versions = "1 2";
 }

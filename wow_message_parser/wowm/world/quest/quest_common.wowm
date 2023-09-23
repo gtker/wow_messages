@@ -1,117 +1,83 @@
 enum QuestFailedReason : u32 {
-    DONT_HAVE_REQ = 0 {
-        comment = "this is default case";
-    }
-    QUEST_FAILED_LOW_LEVEL = 1 {
-        comment = "You are not high enough level for that quest.";
-    }
-    QUEST_FAILED_REQS = 2 {
-        comment = "You don't meet the requirements for that quest.";
-    }
-    QUEST_FAILED_INVENTORY_FULL = 4 {
-        comment = "Inventory is full. (Also 50. From SMSG_QUESTGIVER_QUEST_FAILED)";
-    }
-    QUEST_FAILED_WRONG_RACE = 6 {
-        comment = "That quest is not available to your race.";
-    }
-    QUEST_ONLY_ONE_TIMED = 12 {
-        comment = "You can only be on one timed quest at a time.";
-    }
-    QUEST_ALREADY_ON = 13 {
-        comment = "You are already on that quest.";
-    }
-    QUEST_FAILED_DUPLICATE_ITEM = 17 {
-        comment = "Duplicate item found. (From SMSG_QUESTGIVER_QUEST_FAILED)";
-    }
-    QUEST_FAILED_MISSING_ITEMS = 20 {
-        comment = "You don't have the required items with you. Check storage.";
-    }
-    QUEST_FAILED_NOT_ENOUGH_MONEY = 22 {
-        comment = "You don't have enough money for that quest.";
-    }
+    /// this is default case
+    DONT_HAVE_REQ = 0;
+    /// You are not high enough level for that quest.
+    QUEST_FAILED_LOW_LEVEL = 1;
+    /// You don't meet the requirements for that quest.
+    QUEST_FAILED_REQS = 2;
+    /// Inventory is full. (Also 50. From SMSG_QUESTGIVER_QUEST_FAILED)
+    QUEST_FAILED_INVENTORY_FULL = 4;
+    /// That quest is not available to your race.
+    QUEST_FAILED_WRONG_RACE = 6;
+    /// You can only be on one timed quest at a time.
+    QUEST_ONLY_ONE_TIMED = 12;
+    /// You are already on that quest.
+    QUEST_ALREADY_ON = 13;
+    /// Duplicate item found. (From SMSG_QUESTGIVER_QUEST_FAILED)
+    QUEST_FAILED_DUPLICATE_ITEM = 17;
+    /// You don't have the required items with you. Check storage.
+    QUEST_FAILED_MISSING_ITEMS = 20;
+    /// You don't have enough money for that quest.
+    QUEST_FAILED_NOT_ENOUGH_MONEY = 22;
 } {
     versions = "1.12";
 }
 
 enum QuestFailedReason : u32 {
-    DONT_HAVE_REQ = 0 {
-        comment = "this is default case";
-    }
-    QUEST_FAILED_LOW_LEVEL = 1 {
-      comment = "You are not high enough level for that quest.";
-    }
-    QUEST_FAILED_WRONG_RACE = 6 {
-      comment = "That quest is not available to your race.";
-    }
-    QUEST_ALREADY_DONE = 7 {
-      comment = "You have completed that quest.";
-    }
-    QUEST_ONLY_ONE_TIMED = 12 {
-     comment = "You can only be on one timed quest at a time.";
-    }
-    QUEST_ALREADY_ON = 13 {
-     comment = "You are already on that quest.";
-    }
-    QUEST_FAILED_EXPANSION = 16 {
-     comment = "This quest requires an expansion enabled account.";
-    }
-    QUEST_ALREADY_ON2 = 18 {
-     comment = "You are already on that quest.";
-    }
-    QUEST_FAILED_MISSING_ITEMS = 21 {
-     comment = "You don't have the required items with you. Check storage.";
-    }
-    QUEST_FAILED_NOT_ENOUGH_MONEY = 23 {
-     comment = "You don't have enough money for that quest.";
-    }
-    DAILY_QUESTS_REMAINING = 26 {
-     comment = "You have already completed 10 daily quests today.";
-    }
-    QUEST_FAILED_CAIS = 27 {
-      comment = "You cannot complete quests once you have reached tired time.";
-    }
+    /// this is default case
+    DONT_HAVE_REQ = 0;
+    /// You are not high enough level for that quest.
+    QUEST_FAILED_LOW_LEVEL = 1;
+    /// That quest is not available to your race.
+    QUEST_FAILED_WRONG_RACE = 6;
+    /// You have completed that quest.
+    QUEST_ALREADY_DONE = 7;
+    /// You can only be on one timed quest at a time.
+    QUEST_ONLY_ONE_TIMED = 12;
+    /// You are already on that quest.
+    QUEST_ALREADY_ON = 13;
+    /// This quest requires an expansion enabled account.
+    QUEST_FAILED_EXPANSION = 16;
+    /// You are already on that quest.
+    QUEST_ALREADY_ON2 = 18;
+    /// You don't have the required items with you. Check storage.
+    QUEST_FAILED_MISSING_ITEMS = 21;
+    /// You don't have enough money for that quest.
+    QUEST_FAILED_NOT_ENOUGH_MONEY = 23;
+    /// You have already completed 10 daily quests today.
+    DAILY_QUESTS_REMAINING = 26;
+    /// You cannot complete quests once you have reached tired time.
+    QUEST_FAILED_CAIS = 27;
 } {
     versions = "2.4.3";
 }
 
 enum QuestFailedReason : u32 {
     DONT_HAVE_REQ                 = 0;
-    QUEST_FAILED_LOW_LEVEL        = 1 {
-            comment = "DESCRIPTION You are not high enough level for that quest.";
-    }
-    QUEST_FAILED_WRONG_RACE       = 6 {
-            comment = "DESCRIPTION That quest is not available to your race.";
-    }
-    QUEST_ALREADY_DONE            = 7 {
-            comment = "DESCRIPTION You have completed that quest.";
-    }
-    QUEST_ONLY_ONE_TIMED          = 12 {
-           comment = "DESCRIPTION You can only be on one timed quest at a time.";
-    }
-    QUEST_ALREADY_ON              = 13 {
-           comment = "DESCRIPTION You are already on that quest.";
-    }
-    QUEST_FAILED_EXPANSION        = 16 {
-           comment = "DESCRIPTION This quest requires an expansion enabled account.";
-    }
-    QUEST_ALREADY_ON2             = 18 {
-           comment = "DESCRIPTION You are already on that quest.";
-    }
-    QUEST_FAILED_MISSING_ITEMS    = 21 {
-           comment = "DESCRIPTION You don't have the required items with you. Check storage.";
-    }
-    QUEST_FAILED_NOT_ENOUGH_MONEY = 23 {
-           comment = "DESCRIPTION You don't have enough money for that quest.";
-    }
-    DAILY_QUESTS_REMAINING        = 26 {
-           comment = "DESCRIPTION You have already completed 25 daily quests today.";
-    }
-    QUEST_FAILED_CAIS             = 27 {
-           comment = "DESCRIPTION You cannot complete quests once you have reached tired time.";
-    }
-    DAILY_QUEST_COMPLETED_TODAY   = 29 {
-            comment = "DESCRIPTION You have completed that daily quest today.";
-    }
+    /// DESCRIPTION You are not high enough level for that quest.
+    QUEST_FAILED_LOW_LEVEL        = 1;
+    /// DESCRIPTION That quest is not available to your race.
+    QUEST_FAILED_WRONG_RACE       = 6;
+    /// DESCRIPTION You have completed that quest.
+    QUEST_ALREADY_DONE            = 7;
+    /// DESCRIPTION You can only be on one timed quest at a time.
+    QUEST_ONLY_ONE_TIMED          = 12;
+    /// DESCRIPTION You are already on that quest.
+    QUEST_ALREADY_ON              = 13;
+    /// DESCRIPTION This quest requires an expansion enabled account.
+    QUEST_FAILED_EXPANSION        = 16;
+    /// DESCRIPTION You are already on that quest.
+    QUEST_ALREADY_ON2             = 18;
+    /// DESCRIPTION You don't have the required items with you. Check storage.
+    QUEST_FAILED_MISSING_ITEMS    = 21;
+    /// DESCRIPTION You don't have enough money for that quest.
+    QUEST_FAILED_NOT_ENOUGH_MONEY = 23;
+    /// DESCRIPTION You have already completed 25 daily quests today.
+    DAILY_QUESTS_REMAINING        = 26;
+    /// DESCRIPTION You cannot complete quests once you have reached tired time.
+    QUEST_FAILED_CAIS             = 27;
+    /// DESCRIPTION You have completed that daily quest today.
+    DAILY_QUEST_COMPLETED_TODAY   = 29;
 } {
     versions = "3.3.5";
 }
@@ -123,12 +89,10 @@ enum QuestGiverStatus : u8 {
     INCOMPLETE = 3;
     REWARD_REP = 4;
     AVAILABLE = 5;
-    REWARD_OLD = 6 {
-        comment = "red dot on minimap";
-    }
-    REWARD2 = 7 {
-        comment = "yellow dot on minimap";
-    }
+    /// red dot on minimap
+    REWARD_OLD = 6;
+    /// yellow dot on minimap
+    REWARD2 = 7;
 } {
     versions = "1.12";
 }
@@ -141,12 +105,10 @@ enum QuestGiverStatus : u8 {
     REWARD_REP = 4;
     AVAILABLE_REP = 5;
     AVAILABLE = 6;
-    REWARD_OLD = 7 {
-        comment = "red dot on minimap";
-    }
-    REWARD2 = 8 {
-        comment = "yellow dot on minimap";
-    }
+    /// red dot on minimap
+    REWARD_OLD = 7;
+    /// yellow dot on minimap
+    REWARD2 = 8;
 } {
     versions = "2.4.3";
 }
@@ -161,12 +123,10 @@ enum QuestGiverStatus : u8 {
     REWARD_REP               = 6;
     AVAILABLE_REP            = 7;
     AVAILABLE                = 8;
-    REWARD2                  = 9 {
-        comment = "no yellow dot on minimap";
-    }
-    REWARD                   = 10 {
-        comment = "yellow dot on minimap";
-    }
+    /// no yellow dot on minimap
+    REWARD2                  = 9;
+    /// yellow dot on minimap
+    REWARD                   = 10;
 } {
     versions = "3.3.5";
 }

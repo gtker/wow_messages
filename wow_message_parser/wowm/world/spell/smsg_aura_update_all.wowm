@@ -7,9 +7,8 @@ flag AuraFlag : u8 {
     SET			= 0x9;
     CANCELLABLE	= 0x10;
     DURATION		= 0x20;
-    HIDE			= 0x40 {
-        comment = "Seems to hide the aura and tell client the aura was removed";
-    }
+    /// Seems to hide the aura and tell client the aura was removed
+    HIDE			= 0x40;
     NEGATIVE		= 0x80;
 } {
      versions = "3.3.5";

@@ -6,7 +6,7 @@ use crate::wrath::{
 };
 
 #[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/common.wowm:251`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/common.wowm#L251):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/common.wowm:206`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/common.wowm#L206):
 /// ```text
 /// struct SpellCastTargets {
 ///     SpellCastTargetFlags target_flags;

@@ -1,3 +1,4 @@
+/// Sent after the client presses 'Create Character'. The client will then wait for [SMSG_CHAR_CREATE].
 cmsg CMSG_CHAR_CREATE = 0x36 {
     CString name;
     Race race;
@@ -10,7 +11,6 @@ cmsg CMSG_CHAR_CREATE = 0x36 {
     u8 facial_hair;
     u8 outfit_id = 0;
 } {
-    comment = "Sent after the client presses 'Create Character'. The client will then wait for [SMSG_CHAR_CREATE].";
     paste_versions = "1 2.4.3";
 }
 
@@ -42,6 +42,7 @@ test CMSG_CHAR_CREATE {
     versions = "1";
 }
 
+/// Sent after the client presses 'Create Character'. The client will then wait for [SMSG_CHAR_CREATE].
 cmsg CMSG_CHAR_CREATE = 0x36 {
     CString name;
     Race race;
@@ -54,6 +55,5 @@ cmsg CMSG_CHAR_CREATE = 0x36 {
     u8 facial_hair;
     u8 outfit_id = 0;
 } {
-    comment = "Sent after the client presses 'Create Character'. The client will then wait for [SMSG_CHAR_CREATE].";
     versions = "3.2 3.3";
 }

@@ -1,12 +1,10 @@
 smsg SMSG_CRITERIA_UPDATE = 0x46A {
     u32 achievement;
-    PackedGuid progress_counter {
-        comment = "trinitycore/azerothcore: This is a u32 passed to the `appendPackGUID` function which promotes it to u64.";
-    }
+    /// trinitycore/azerothcore: This is a u32 passed to the `appendPackGUID` function which promotes it to u64.
+    PackedGuid progress_counter;
     PackedGuid player;
-    u32 flags {
-        comment = "trinitycore: this are some flags, 1 is for keeping the counter at 0 in client";
-    }
+    /// trinitycore: this are some flags, 1 is for keeping the counter at 0 in client
+    u32 flags;
     DateTime time;
     Seconds time_elapsed;
     u32 unknown;

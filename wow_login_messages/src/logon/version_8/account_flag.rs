@@ -1,5 +1,4 @@
-/// Reply to [`CMD_AUTH_LOGON_PROOF_Client`](crate::logon::version_8::CMD_AUTH_LOGON_PROOF_Client).
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/login/cmd_auth_logon/proof_server.wowm:27`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/login/cmd_auth_logon/proof_server.wowm#L27):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/login/cmd_auth_logon/proof_server.wowm:26`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/login/cmd_auth_logon/proof_server.wowm#L26):
 /// ```text
 /// flag AccountFlag : u32 {
 ///     GM = 0x000001;

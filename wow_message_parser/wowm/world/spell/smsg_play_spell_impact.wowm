@@ -2,8 +2,7 @@
 
 smsg SMSG_PLAY_SPELL_IMPACT = 0x01F7 {
     Guid guid;
-    u32 spell_visual_kit {
-        comment = "mangoszero/mangosone/azerothcore: index from SpellVisualKit.dbc. Used for visual effect on player with 0x016A";
-    }
+    /// mangoszero/mangosone/azerothcore: index from SpellVisualKit.dbc. Used for visual effect on player with 0x016A
+    u32 spell_visual_kit;
 }
 

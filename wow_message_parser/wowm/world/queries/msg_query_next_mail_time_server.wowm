@@ -1,27 +1,23 @@
+/// mangoszero/vmangos: No idea when this is called.
 smsg MSG_QUERY_NEXT_MAIL_TIME_Server = 0x0284 {
     /* TODO CORRECT_LAYOUT Figure out if Cmangos is correct in this */
-    f32 unread_mails {
-        comment = "mangoszero sets 0 if has unread mail, -86400.0f (0xC7A8C000) if not";
-        comment = "vmangos sets 0 if has unread mail, -1.0f if not";
-        comment = "cmangos has the behavior of mangoszero except when there are unread mails. This is TODO.";
-    }
+    /// mangoszero sets 0 if has unread mail, -86400.0f (0xC7A8C000) if not
+    /// vmangos sets 0 if has unread mail, -1.0f if not
+    /// cmangos has the behavior of mangoszero except when there are unread mails. This is TODO.
+    f32 unread_mails;
 } {
-    comment = "mangoszero/vmangos: No idea when this is called.";
     versions = "1.12";
 }
 
 enum MailMessageType : u32 {
     NORMAL         = 0;
     AUCTION        = 2;
-    CREATURE       = 3 {
-        comment = "client send CMSG_CREATURE_QUERY on this mailmessagetype";
-    }
-    GAMEOBJECT     = 4 {
-        comment = "client send CMSG_GAMEOBJECT_QUERY on this mailmessagetype";
-    }
-    ITEM           = 5 {
-        comment = "client send CMSG_ITEM_QUERY on this mailmessagetype";
-    }
+    /// client send CMSG_CREATURE_QUERY on this mailmessagetype
+    CREATURE       = 3;
+    /// client send CMSG_GAMEOBJECT_QUERY on this mailmessagetype
+    GAMEOBJECT     = 4;
+    /// client send CMSG_ITEM_QUERY on this mailmessagetype
+    ITEM           = 5;
 } {
     versions = "1 2 3";
 }
@@ -31,10 +27,9 @@ struct ReceivedMail {
     AuctionHouse auction_house;
     MailMessageType message_type;
     u32 stationery;
-    f32 time {
-        comment = "mangosone sets to `0xC6000000`";
-        comment = "mangosone: float unk, time or something";
-    }
+    /// mangosone sets to `0xC6000000`
+    /// mangosone: float unk, time or something
+    f32 time;
 } {
     versions = "2.4.3 3";
 }

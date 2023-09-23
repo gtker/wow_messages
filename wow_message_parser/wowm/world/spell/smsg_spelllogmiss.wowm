@@ -8,9 +8,8 @@ struct SpellLogMiss {
 smsg SMSG_SPELLLOGMISS = 0x024B {
     Spell id;
     Guid caster;
-    u8 unknown1 {
-        comment = "cmangos/mangoszero: can be 0 or 1";
-    }
+    /// cmangos/mangoszero: can be 0 or 1
+    u8 unknown1;
     u32 amount_of_targets;
     SpellLogMiss[amount_of_targets] targets;
 } {

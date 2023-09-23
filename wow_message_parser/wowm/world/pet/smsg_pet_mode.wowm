@@ -9,9 +9,8 @@ smsg SMSG_PET_MODE = 0x017A {
     Guid guid;
     PetReactState react_state;
     PetCommandState command_state;
-    u8 unknown1 {
-        comment = "vmangos sets to 0.";
-    }
+    /// vmangos sets to 0.
+    u8 unknown1;
     PetEnabled pet_enabled;
 }
 

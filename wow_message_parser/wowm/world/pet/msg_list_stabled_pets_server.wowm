@@ -6,9 +6,8 @@ struct StabledPet {
     Level32 level;
     CString name;
     u32 loyalty;
-    u8 slot {
-        comment = "vmangos/mangoszero/cmangos: client slot 1 == current pet (0)";
-    }
+    /// vmangos/mangoszero/cmangos: client slot 1 == current pet (0)
+    u8 slot;
 }
 
 smsg MSG_LIST_STABLED_PETS_Server = 0x026F {

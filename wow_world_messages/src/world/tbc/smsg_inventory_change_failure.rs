@@ -5,7 +5,7 @@ use crate::shared::level_vanilla_tbc_wrath::Level;
 use crate::tbc::InventoryResult;
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/item/smsg_inventory_change_failure.wowm:18`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/item/smsg_inventory_change_failure.wowm#L18):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/item/smsg_inventory_change_failure.wowm:17`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/item/smsg_inventory_change_failure.wowm#L17):
 /// ```text
 /// smsg SMSG_INVENTORY_CHANGE_FAILURE = 0x0112 {
 ///     InventoryResult result;

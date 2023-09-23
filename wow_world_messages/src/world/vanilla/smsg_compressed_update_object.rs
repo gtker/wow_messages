@@ -5,7 +5,7 @@ use crate::vanilla::Object;
 
 #[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
 /// Compressed version of [`SMSG_UPDATE_OBJECT`](crate::vanilla::SMSG_UPDATE_OBJECT). Has the same fields when uncompressed
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/gameobject/smsg_update_compressed_object.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/gameobject/smsg_update_compressed_object.wowm#L1):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/gameobject/smsg_update_compressed_object.wowm:2`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/gameobject/smsg_update_compressed_object.wowm#L2):
 /// ```text
 /// smsg SMSG_COMPRESSED_UPDATE_OBJECT = 0x01F6 {
 ///     u32 amount_of_objects;
@@ -428,7 +428,7 @@ mod test {
 
     }
 
-    // Generated from `wow_message_parser/wowm/world/gameobject/smsg_update_compressed_object.wowm` line 20.
+    // Generated from `wow_message_parser/wowm/world/gameobject/smsg_update_compressed_object.wowm` line 21.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn smsg_compressed_update_object0() {
@@ -452,7 +452,7 @@ mod test {
         assert_eq!(t, s);
     }
 
-    // Generated from `wow_message_parser/wowm/world/gameobject/smsg_update_compressed_object.wowm` line 20.
+    // Generated from `wow_message_parser/wowm/world/gameobject/smsg_update_compressed_object.wowm` line 21.
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_smsg_compressed_update_object0() {
@@ -476,7 +476,7 @@ mod test {
         assert_eq!(t, s);
     }
 
-    // Generated from `wow_message_parser/wowm/world/gameobject/smsg_update_compressed_object.wowm` line 20.
+    // Generated from `wow_message_parser/wowm/world/gameobject/smsg_update_compressed_object.wowm` line 21.
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_smsg_compressed_update_object0() {

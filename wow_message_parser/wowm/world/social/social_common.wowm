@@ -377,101 +377,71 @@ enum TextEmote : u32 {
 }
 
 flag GroupUpdateFlags : u32 {
-    NONE = 0x00000000 {
-        comment = "nothing";
-    }
-    STATUS = 0x00000001 {
-        comment = "uint8, enum `GroupMemberOnlineStatus`";
-    }
-    CUR_HP = 0x00000002 {
-        comment = "uint16";
-    }
-    MAX_HP = 0x00000004 {
-        comment = "uint16";
-    }
-    POWER_TYPE = 0x00000008 {
-        comment = "uint8, enum Powers";
-    }
-    CUR_POWER = 0x00000010 {
-        comment = "uint16";
-    }
-    MAX_POWER = 0x00000020 {
-        comment = "uint16";
-    }
-    LEVEL = 0x00000040 {
-        comment = "uint16";
-    }
-    ZONE = 0x00000080 {
-        comment = "uint16";
-    }
-    POSITION = 0x00000100 {
-        comment = "uint16, uint16";
-    }
-    AURAS = 0x00000200 {
-        comment = "uint32 mask, for each bit set uint16 spellid";
-    }
-    AURAS_2 = 0x00000400 {
-        comment = "uint16 above mask continuation, giving max total of 48 auras possible";
-    }
-    PET_GUID = 0x00000800 {
-        comment = "uint64 pet guid";
-    }
-    PET_NAME = 0x00001000 {
-        comment = "pet name, NULL terminated string";
-    }
-    PET_MODEL_ID = 0x00002000 {
-        comment = "uint16, model id";
-    }
-    PET_CUR_HP = 0x00004000 {
-        comment = "uint16 pet cur health";
-    }
-    PET_MAX_HP = 0x00008000 {
-        comment = "uint16 pet max health";
-    }
-    PET_POWER_TYPE = 0x00010000 {
-        comment = "uint8 pet power type";
-    }
-    PET_CUR_POWER = 0x00020000 {
-        comment = "uint16 pet cur power";
-    }
-    PET_MAX_POWER = 0x00040000 {
-        comment = "uint16 pet max power";
-    }
-    PET_AURAS = 0x00080000 {
-        comment = "uint32 mask, for each bit set uint16 spellid, pet auras...";
-    }
-    PET_AURAS_2 = 0x00100000 {
-        comment = "uint16 above mask continuation, giving max total of 48 auras possible";
-    }
+    /// nothing
+    NONE = 0x00000000;
+    /// uint8, enum `GroupMemberOnlineStatus`
+    STATUS = 0x00000001;
+    /// uint16
+    CUR_HP = 0x00000002;
+    /// uint16
+    MAX_HP = 0x00000004;
+    /// uint8, enum Powers
+    POWER_TYPE = 0x00000008;
+    /// uint16
+    CUR_POWER = 0x00000010;
+    /// uint16
+    MAX_POWER = 0x00000020;
+    /// uint16
+    LEVEL = 0x00000040;
+    /// uint16
+    ZONE = 0x00000080;
+    /// uint16, uint16
+    POSITION = 0x00000100;
+    /// uint32 mask, for each bit set uint16 spellid
+    AURAS = 0x00000200;
+    /// uint16 above mask continuation, giving max total of 48 auras possible
+    AURAS_2 = 0x00000400;
+    /// uint64 pet guid
+    PET_GUID = 0x00000800;
+    /// pet name, NULL terminated string
+    PET_NAME = 0x00001000;
+    /// uint16, model id
+    PET_MODEL_ID = 0x00002000;
+    /// uint16 pet cur health
+    PET_CUR_HP = 0x00004000;
+    /// uint16 pet max health
+    PET_MAX_HP = 0x00008000;
+    /// uint8 pet power type
+    PET_POWER_TYPE = 0x00010000;
+    /// uint16 pet cur power
+    PET_CUR_POWER = 0x00020000;
+    /// uint16 pet max power
+    PET_MAX_POWER = 0x00040000;
+    /// uint32 mask, for each bit set uint16 spellid, pet auras...
+    PET_AURAS = 0x00080000;
+    /// uint16 above mask continuation, giving max total of 48 auras possible
+    PET_AURAS_2 = 0x00100000;
     MODE_OFFLINE = 0x10000000;
 }
 
 flag GroupMemberOnlineStatus : u8 {
     OFFLINE = 0x0000;
-    ONLINE = 0x0001 {
-        comment = "`Lua_UnitIsConnected`";
-    }
-    PVP = 0x0002 {
-        comment = "`Lua_UnitIsPVP`";
-    }
-    DEAD = 0x0004 {
-        comment = "`Lua_UnitIsDead`";
-    }
-    GHOST = 0x0008 {
-        comment = "`Lua_UnitIsGhost`";
-    }
-    PVP_FFA = 0x0010 {
-        comment = "`Lua_UnitIsPVPFreeForAll`";
-    }
-    ZONE_OUT = 0x0020 {
-        comment = "used in calls from `Lua_GetPlayerMapPosition`/`Lua_GetBattlefieldFlagPosition`";
-    }
-    AFK = 0x0040 {
-        comment = "`Lua_UnitIsAFK`";
-    }
-    DND = 0x0080 {
-        comment = "`Lua_UnitIsDND`";
-    }
+    /// `Lua_UnitIsConnected`
+    ONLINE = 0x0001;
+    /// `Lua_UnitIsPVP`
+    PVP = 0x0002;
+    /// `Lua_UnitIsDead`
+    DEAD = 0x0004;
+    /// `Lua_UnitIsGhost`
+    GHOST = 0x0008;
+    /// `Lua_UnitIsPVPFreeForAll`
+    PVP_FFA = 0x0010;
+    /// used in calls from `Lua_GetPlayerMapPosition`/`Lua_GetBattlefieldFlagPosition`
+    ZONE_OUT = 0x0020;
+    /// `Lua_UnitIsAFK`
+    AFK = 0x0040;
+    /// `Lua_UnitIsDND`
+    DND = 0x0080;
 } {
     versions = "2 3";
 }
@@ -486,10 +456,9 @@ enum UnitStandState : u8 {
     SIT_HIGH_CHAIR = 6;
     DEAD = 7;
     KNEEL = 8;
-    CUSTOM = 9 {
-        comment = "Used for Cthun according to cmangos.";
-        comment = "mangos-tbc: Depends on model animation. Submerge, freeze, hide, hibernate, rest";
-    }
+    /// Used for Cthun according to cmangos.
+    /// mangos-tbc: Depends on model animation. Submerge, freeze, hide, hibernate, rest
+    CUSTOM = 9;
 } {
     versions = "2 3";
 }

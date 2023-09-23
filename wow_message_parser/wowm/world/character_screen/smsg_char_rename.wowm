@@ -1,3 +1,4 @@
+/// Response to [CMSG_CHAR_RENAME].
 smsg SMSG_CHAR_RENAME = 0x2C8 {
     WorldResult result;
     if (result == RESPONSE_SUCCESS) {
@@ -5,7 +6,6 @@ smsg SMSG_CHAR_RENAME = 0x2C8 {
         CString new_name;
     }
 } {
-    comment = "Response to [CMSG_CHAR_RENAME].";
     paste_versions = "1 2.4.3 3.3.5";
 }
 

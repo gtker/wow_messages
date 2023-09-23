@@ -4,7 +4,7 @@ use crate::Guid;
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// This message only exists as a comment in trinitycore.
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/calendar/smsg_calendar_event_invite_notes_alert.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/calendar/smsg_calendar_event_invite_notes_alert.wowm#L1):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/calendar/smsg_calendar_event_invite_notes_alert.wowm:2`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/calendar/smsg_calendar_event_invite_notes_alert.wowm#L2):
 /// ```text
 /// smsg SMSG_CALENDAR_EVENT_INVITE_NOTES_ALERT = 0x0461 {
 ///     Guid invite_id;

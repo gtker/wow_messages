@@ -21,9 +21,8 @@ smsg SMSG_MONSTER_MOVE_TRANSPORT = 0x02AE {
 smsg SMSG_MONSTER_MOVE_TRANSPORT = 0x02AE {
     PackedGuid guid;
     PackedGuid transport;
-    u8 unknown {
-        comment = "cmangos-wotlk sets to 0";
-    }
+    /// cmangos-wotlk sets to 0
+    u8 unknown;
     Vector3d spline_point;
     u32 spline_id;
     MonsterMoveType move_type;

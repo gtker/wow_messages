@@ -40,9 +40,8 @@ cmsg CMSG_GUILD_BANK_SWAP_ITEMS = 0x03E8 {
             u8 split_amount;
         }
     }
-    u8[-] unknown5 {
-        comment = "cmangos-tbc/mangosone has extra ";
-    }
+    /// cmangos-tbc/mangosone has extra
+    u8[-] unknown5;
 } {
     versions = "2.4.3";
 }
@@ -75,9 +74,8 @@ cmsg CMSG_GUILD_BANK_SWAP_ITEMS = 0x03E9 {
             u32 split_amount;
         }
     }
-    u8[-] unknown5 {
-        comment = "cmangos-tbc/mangosone has extra ";
-    }
+    /// cmangos-tbc/mangosone has extra
+    u8[-] unknown5;
 } {
     versions = "3.3.5";
 }

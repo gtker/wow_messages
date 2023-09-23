@@ -1,4 +1,4 @@
+/// Only exists as a comment in azerothcore.
 smsg SMSG_BATTLEGROUND_INFO_THROTTLED = 0x04A6 {} {
-    comment = "Only exists as a comment in azerothcore.";
     versions = "3.3.5";
 }

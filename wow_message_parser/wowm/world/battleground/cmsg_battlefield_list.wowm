@@ -5,12 +5,10 @@ cmsg CMSG_BATTLEFIELD_LIST = 0x023C {
 }
 
 enum BattlefieldListLocation : u8 {
-    BATTLEMASTER = 0 {
-        comment = "lua: ShowBattlefieldList";
-    }
-    UI = 1 {
-        comment = "lua: RequestBattlegroundInstanceInfo";
-    }
+    /// lua: ShowBattlefieldList
+    BATTLEMASTER = 0;
+    /// lua: RequestBattlegroundInstanceInfo
+    UI = 1;
 } {
     versions = "3.3.5";
 }
@@ -18,9 +16,8 @@ enum BattlefieldListLocation : u8 {
 cmsg CMSG_BATTLEFIELD_LIST = 0x023C {
     BattlegroundType battleground_type;
     BattlefieldListLocation location;
-    Bool can_gain_exp {
-        comment = "azerothcore: players with locked xp have their own bg queue on retail";
-    }
+    /// azerothcore: players with locked xp have their own bg queue on retail
+    Bool can_gain_exp;
 } {
     versions = "3.3.5";
 }

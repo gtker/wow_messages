@@ -36,9 +36,8 @@ struct Relation {
 }
 
 smsg SMSG_CONTACT_LIST = 0x0067 {
-    RelationType list_mask {
-        comment = "Indicates which kinds of relations are being sent in this list";
-    }
+    /// Indicates which kinds of relations are being sent in this list
+    RelationType list_mask;
     u32 amount_of_relations;
     Relation[amount_of_relations] relations;
 } {

@@ -1,3 +1,4 @@
+/// Used in `AreaTable.dbc`.
 flag AreaFlags : u16 {
     SNOW = 0x01;
     UNK = 0x02;
@@ -12,5 +13,4 @@ flag AreaFlags : u16 {
 } {
     versions = "1.12";
     non_network_type = "true";
-    comment = "Used in `AreaTable.dbc`.";
 }
