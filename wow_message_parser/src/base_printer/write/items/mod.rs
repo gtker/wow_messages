@@ -3,10 +3,7 @@ pub(crate) mod constructor;
 pub(crate) mod conversions;
 pub(crate) mod definition;
 
-use crate::base_printer::data::items::{
-    Array, ArrayInstances, Field, IntegerSize, Optimizations, Value,
-};
-use std::cmp::Ordering;
+use crate::base_printer::data::items::{Array, ArrayInstances, Field, Optimizations};
 use std::collections::BTreeSet;
 
 pub(crate) struct Stats {
@@ -273,24 +270,15 @@ pub(crate) fn write_things(
 ) {
     let mut s = Writer::new();
 
-    let (default_values, arrays) = get_default_values(things, optimizations);
+    let arrays = get_default_values(things);
     let mut sorted = BTreeSet::new();
-    const_default_values(&default_values, &mut sorted);
     print_arrays(&arrays, &mut sorted);
 
     for line in sorted {
         s.wln(line);
     }
 
-    all_items(
-        &mut s,
-        things,
-        expansion,
-        ty_name,
-        &default_values,
-        &arrays,
-        optimizations,
-    );
+    all_items(&mut s, things, expansion, ty_name, &arrays, optimizations);
 
     overwrite_if_not_same_contents(s.inner(), path);
 }
@@ -433,31 +421,11 @@ mod test {
     }
 }
 
-type Values = HashMap<(Value, Option<IntegerSize>), String>;
 type Arrays<'a> = HashMap<(&'a ArrayInstances, &'static str), String>;
 
-fn get_default_values<'a>(
-    things: &'a [GenericThing],
-    optimizations: &Optimizations,
-) -> (Values, Arrays<'a>) {
-    let mut values: HashMap<(Value, Option<IntegerSize>), usize> = HashMap::new();
+fn get_default_values<'a>(things: &'a [GenericThing]) -> Arrays<'a> {
     let mut arrays = HashMap::new();
     for thing in things {
-        for (field_index, field) in thing.fields.iter().enumerate() {
-            if optimizations.optimization(field_index).skip_field() {
-                continue;
-            }
-
-            let value = field.value.const_value();
-            let value_and_size = (value, optimizations.integer_size(field_index));
-
-            if let Some(g) = values.get_mut(&value_and_size) {
-                *g += 1;
-            } else {
-                values.insert(value_and_size, 1);
-            }
-        }
-
         for array in &thing.arrays {
             if array.is_default() {
                 continue;
@@ -471,73 +439,25 @@ fn get_default_values<'a>(
         }
     }
 
-    enum ValuesWrapper<'a> {
-        Values(((Value, Option<IntegerSize>), usize)),
-        Arrays(((&'a ArrayInstances, &'static str), usize)),
-    }
-
     // Ensure that most used consts have the shortest name
-    let values = values.into_iter().map(ValuesWrapper::Values);
-    let arrays = arrays.into_iter().map(ValuesWrapper::Arrays);
+    let mut arrays = arrays.into_iter().collect::<Vec<_>>();
 
-    let mut values: Vec<_> = values.chain(arrays).collect();
-    values.sort_by(|a, b| match (a, b) {
-        (
-            ValuesWrapper::Values(((value, integer), amount)),
-            ValuesWrapper::Values(((value2, integer2), amount2)),
-        ) => {
+    arrays.sort_by(
+        |((value, integer), amount), ((value2, integer2), amount2)| {
             let value = value2.cmp(value);
             let integer = integer2.cmp(integer);
 
             amount2.cmp(amount).then(value).then(integer)
-        }
-        (ValuesWrapper::Values((_, amount)), ValuesWrapper::Arrays((_, amount2))) => {
-            amount2.cmp(amount).then(Ordering::Greater)
-        }
-
-        (ValuesWrapper::Arrays((_, amount)), ValuesWrapper::Values((_, amount2))) => {
-            amount2.cmp(amount).then(Ordering::Less)
-        }
-        (
-            ValuesWrapper::Arrays(((value, integer), amount)),
-            ValuesWrapper::Arrays(((value2, integer2), amount2)),
-        ) => {
-            let value = value2.cmp(value);
-            let integer = integer2.cmp(integer);
-
-            amount2.cmp(amount).then(value).then(integer)
-        }
-    });
+        },
+    );
 
     let mut namer = ConstNamer::new();
-    let mut values_output = HashMap::new();
     let mut arrays_output = HashMap::new();
-    for value in values {
-        match value {
-            ValuesWrapper::Values((value, amount)) => {
-                let ty_name = if let Some(t) = value.1 {
-                    t.string_value()
-                } else {
-                    value.0.const_variable_type_name()
-                };
-                let try_name = namer.try_next();
-                let definition =
-                    get_const_definition(&try_name, ty_name, &value.0.to_string_value());
-
-                let definition_characters = definition.len() + amount * try_name.len();
-                let no_definition_characters = amount * value.0.to_string_value().len();
-
-                if definition_characters <= no_definition_characters {
-                    values_output.insert(value, namer.next());
-                }
-            }
-            ValuesWrapper::Arrays((array, _)) => {
-                arrays_output.insert(array, namer.next());
-            }
-        }
+    for (value, _) in arrays {
+        arrays_output.insert(value, namer.next());
     }
 
-    (values_output, arrays_output)
+    arrays_output
 }
 
 fn print_arrays(arrays: &Arrays, sorted: &mut BTreeSet<String>) {
@@ -562,24 +482,4 @@ fn print_arrays(arrays: &Arrays, sorted: &mut BTreeSet<String>) {
         s.w_no_indent("];");
         sorted.insert(s.into_inner());
     }
-}
-
-fn const_default_values(default_values: &Values, sorted: &mut BTreeSet<String>) {
-    for ((value, integer_size), const_name) in default_values {
-        let ty_name = if let Some(t) = integer_size {
-            t.string_value()
-        } else {
-            value.const_variable_type_name()
-        };
-
-        sorted.insert(get_const_definition(
-            const_name,
-            ty_name,
-            &value.to_string_value(),
-        ));
-    }
-}
-
-fn get_const_definition(const_name: &str, ty_name: &str, value: &str) -> String {
-    format!("const {const_name}:{ty_name}={value};")
 }

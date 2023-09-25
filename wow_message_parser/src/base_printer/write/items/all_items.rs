@@ -1,5 +1,5 @@
 use crate::base_printer::data::get_fields;
-use crate::base_printer::data::items::{ArrayInstances, IntegerSize, Optimizations, Value};
+use crate::base_printer::data::items::{ArrayInstances, Optimizations};
 use crate::base_printer::write::items::definition::includes;
 use crate::base_printer::write::items::GenericThing;
 use crate::base_printer::{Expansion, ImportFrom};
@@ -12,7 +12,6 @@ pub(crate) fn all_items(
     items: &[GenericThing],
     expansion: Expansion,
     ty_name: &str,
-    default_values: &HashMap<(Value, Option<IntegerSize>), String>,
     arrays: &HashMap<(&ArrayInstances, &'static str), String>,
     optimizations: &Optimizations,
 ) {
@@ -26,7 +25,7 @@ pub(crate) fn all_items(
         optimizations,
     );
 
-    print_data(s, items, default_values, arrays, optimizations, ty_name);
+    print_data(s, items, arrays, optimizations, ty_name);
 
     print_lookup(s, items);
 }
@@ -34,7 +33,6 @@ pub(crate) fn all_items(
 fn print_data(
     s: &mut Writer,
     items: &[GenericThing],
-    default_values: &HashMap<(Value, Option<IntegerSize>), String>,
     arrays: &HashMap<(&ArrayInstances, &str), String>,
     optimizations: &Optimizations,
     ty_name: &str,
@@ -49,14 +47,7 @@ fn print_data(
                 continue;
             }
 
-            if let Some(const_name) = default_values.get(&(
-                value.value.const_value(),
-                optimizations.integer_size(field_index),
-            )) {
-                s.w_no_indent(format!("{const_name},"));
-            } else {
-                s.w_no_indent(format!("{},", value.value.to_string_value()));
-            }
+            s.w_no_indent(format!("{},", value.value.to_string_value()));
         }
 
         for array in &item.arrays {

@@ -491,13 +491,6 @@ impl Value {
         }
     }
 
-    pub fn const_variable_type_name(&self) -> &'static str {
-        match self {
-            Value::String(_) => "&str",
-            _ => self.const_value().type_name(),
-        }
-    }
-
     pub fn constructor_type_name(&self) -> &'static str {
         self.const_value().type_name()
     }
