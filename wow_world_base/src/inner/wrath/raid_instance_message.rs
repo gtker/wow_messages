@@ -43,6 +43,16 @@ impl RaidInstanceMessage {
         ]
     }
 
+    pub const fn from_int(value: u32) -> Result<Self, crate::errors::EnumError> {
+        match value {
+            1 => Ok(Self::WarningHours),
+            2 => Ok(Self::WarningMin),
+            3 => Ok(Self::WarningMinSoon),
+            4 => Ok(Self::Welcome),
+            5 => Ok(Self::Expired),
+            v => Err(crate::errors::EnumError::new(NAME, v as i128),)
+        }
+    }
 }
 
 #[cfg(feature = "print-testcase")]
@@ -82,14 +92,7 @@ impl std::fmt::Display for RaidInstanceMessage {
 impl TryFrom<u32> for RaidInstanceMessage {
     type Error = crate::errors::EnumError;
     fn try_from(value: u32) -> Result<Self, Self::Error> {
-        match value {
-            1 => Ok(Self::WarningHours),
-            2 => Ok(Self::WarningMin),
-            3 => Ok(Self::WarningMinSoon),
-            4 => Ok(Self::Welcome),
-            5 => Ok(Self::Expired),
-            v => Err(crate::errors::EnumError::new(NAME, v.into()),)
-        }
+        Self::from_int(value)
     }
 }
 

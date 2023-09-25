@@ -61,6 +61,21 @@ impl UnitStandState {
         ]
     }
 
+    pub const fn from_int(value: u8) -> Result<Self, crate::errors::EnumError> {
+        match value {
+            0 => Ok(Self::Stand),
+            1 => Ok(Self::Sit),
+            2 => Ok(Self::SitChair),
+            3 => Ok(Self::Sleep),
+            4 => Ok(Self::SitLowChair),
+            5 => Ok(Self::SitMediumChair),
+            6 => Ok(Self::SitHighChair),
+            7 => Ok(Self::Dead),
+            8 => Ok(Self::Kneel),
+            9 => Ok(Self::Custom),
+            v => Err(crate::errors::EnumError::new(NAME, v as i128),)
+        }
+    }
 }
 
 #[cfg(feature = "print-testcase")]
@@ -110,19 +125,7 @@ impl std::fmt::Display for UnitStandState {
 impl TryFrom<u8> for UnitStandState {
     type Error = crate::errors::EnumError;
     fn try_from(value: u8) -> Result<Self, Self::Error> {
-        match value {
-            0 => Ok(Self::Stand),
-            1 => Ok(Self::Sit),
-            2 => Ok(Self::SitChair),
-            3 => Ok(Self::Sleep),
-            4 => Ok(Self::SitLowChair),
-            5 => Ok(Self::SitMediumChair),
-            6 => Ok(Self::SitHighChair),
-            7 => Ok(Self::Dead),
-            8 => Ok(Self::Kneel),
-            9 => Ok(Self::Custom),
-            v => Err(crate::errors::EnumError::new(NAME, v.into()),)
-        }
+        Self::from_int(value)
     }
 }
 

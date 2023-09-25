@@ -86,6 +86,26 @@ impl HitInfo {
         ]
     }
 
+    pub const fn from_int(value: u32) -> Result<Self, crate::errors::EnumError> {
+        match value {
+            0 => Ok(Self::NormalSwing),
+            1 => Ok(Self::Unk1),
+            2 => Ok(Self::AffectsVictim),
+            4 => Ok(Self::LeftSwing),
+            8 => Ok(Self::EarlyCriticalHit),
+            16 => Ok(Self::Miss),
+            32 => Ok(Self::Absorb),
+            64 => Ok(Self::Resist),
+            128 => Ok(Self::CriticalHit),
+            256 => Ok(Self::Unk9),
+            8192 => Ok(Self::Unk10),
+            16384 => Ok(Self::Glancing),
+            32768 => Ok(Self::Crushing),
+            65536 => Ok(Self::NoAction),
+            524288 => Ok(Self::SwingNoHitSound),
+            v => Err(crate::errors::EnumError::new(NAME, v as i128),)
+        }
+    }
 }
 
 #[cfg(feature = "print-testcase")]
@@ -145,24 +165,7 @@ impl std::fmt::Display for HitInfo {
 impl TryFrom<u32> for HitInfo {
     type Error = crate::errors::EnumError;
     fn try_from(value: u32) -> Result<Self, Self::Error> {
-        match value {
-            0 => Ok(Self::NormalSwing),
-            1 => Ok(Self::Unk1),
-            2 => Ok(Self::AffectsVictim),
-            4 => Ok(Self::LeftSwing),
-            8 => Ok(Self::EarlyCriticalHit),
-            16 => Ok(Self::Miss),
-            32 => Ok(Self::Absorb),
-            64 => Ok(Self::Resist),
-            128 => Ok(Self::CriticalHit),
-            256 => Ok(Self::Unk9),
-            8192 => Ok(Self::Unk10),
-            16384 => Ok(Self::Glancing),
-            32768 => Ok(Self::Crushing),
-            65536 => Ok(Self::NoAction),
-            524288 => Ok(Self::SwingNoHitSound),
-            v => Err(crate::errors::EnumError::new(NAME, v.into()),)
-        }
+        Self::from_int(value)
     }
 }
 

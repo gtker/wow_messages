@@ -35,6 +35,14 @@ impl LfgFaction {
         ]
     }
 
+    pub const fn from_int(value: i8) -> Result<Self, crate::errors::EnumError> {
+        match value {
+            -1 => Ok(Self::Neutral),
+            0 => Ok(Self::Horde),
+            1 => Ok(Self::Alliance),
+            v => Err(crate::errors::EnumError::new(NAME, v as i128),)
+        }
+    }
 }
 
 #[cfg(feature = "print-testcase")]
@@ -70,12 +78,7 @@ impl std::fmt::Display for LfgFaction {
 impl TryFrom<i8> for LfgFaction {
     type Error = crate::errors::EnumError;
     fn try_from(value: i8) -> Result<Self, Self::Error> {
-        match value {
-            -1 => Ok(Self::Neutral),
-            0 => Ok(Self::Horde),
-            1 => Ok(Self::Alliance),
-            v => Err(crate::errors::EnumError::new(NAME, v.into()),)
-        }
+        Self::from_int(value)
     }
 }
 

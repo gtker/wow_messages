@@ -44,6 +44,16 @@ impl StatusId {
         ]
     }
 
+    pub const fn from_int(value: u8) -> Result<Self, crate::errors::EnumError> {
+        match value {
+            0 => Ok(Self::None),
+            1 => Ok(Self::WaitQueue),
+            2 => Ok(Self::WaitJoin),
+            3 => Ok(Self::InProgress),
+            4 => Ok(Self::WaitLeave),
+            v => Err(crate::errors::EnumError::new(NAME, v as i128),)
+        }
+    }
 }
 
 #[cfg(feature = "print-testcase")]
@@ -83,14 +93,7 @@ impl std::fmt::Display for StatusId {
 impl TryFrom<u8> for StatusId {
     type Error = crate::errors::EnumError;
     fn try_from(value: u8) -> Result<Self, Self::Error> {
-        match value {
-            0 => Ok(Self::None),
-            1 => Ok(Self::WaitQueue),
-            2 => Ok(Self::WaitJoin),
-            3 => Ok(Self::InProgress),
-            4 => Ok(Self::WaitLeave),
-            v => Err(crate::errors::EnumError::new(NAME, v.into()),)
-        }
+        Self::from_int(value)
     }
 }
 

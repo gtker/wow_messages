@@ -178,6 +178,43 @@ impl ChatNotify {
         ]
     }
 
+    pub const fn from_int(value: u8) -> Result<Self, crate::errors::EnumError> {
+        match value {
+            0 => Ok(Self::JoinedNotice),
+            1 => Ok(Self::LeftNotice),
+            2 => Ok(Self::YouJoinedNotice),
+            3 => Ok(Self::YouLeftNotice),
+            4 => Ok(Self::WrongPasswordNotice),
+            5 => Ok(Self::NotMemberNotice),
+            6 => Ok(Self::NotModeratorNotice),
+            7 => Ok(Self::PasswordChangedNotice),
+            8 => Ok(Self::OwnerChangedNotice),
+            9 => Ok(Self::PlayerNotFoundNotice),
+            10 => Ok(Self::NotOwnerNotice),
+            11 => Ok(Self::ChannelOwnerNotice),
+            12 => Ok(Self::ModeChangeNotice),
+            13 => Ok(Self::AnnouncementsOnNotice),
+            14 => Ok(Self::AnnouncementsOffNotice),
+            15 => Ok(Self::ModerationOnNotice),
+            16 => Ok(Self::ModerationOffNotice),
+            17 => Ok(Self::MutedNotice),
+            18 => Ok(Self::PlayerKickedNotice),
+            19 => Ok(Self::BannedNotice),
+            20 => Ok(Self::PlayerBannedNotice),
+            21 => Ok(Self::PlayerUnbannedNotice),
+            22 => Ok(Self::PlayerNotBannedNotice),
+            23 => Ok(Self::PlayerAlreadyMemberNotice),
+            24 => Ok(Self::InviteNotice),
+            25 => Ok(Self::InviteWrongFactionNotice),
+            26 => Ok(Self::WrongFactionNotice),
+            27 => Ok(Self::InvalidNameNotice),
+            28 => Ok(Self::NotModeratedNotice),
+            29 => Ok(Self::PlayerInvitedNotice),
+            30 => Ok(Self::PlayerInviteBannedNotice),
+            31 => Ok(Self::ThrottledNotice),
+            v => Err(crate::errors::EnumError::new(NAME, v as i128),)
+        }
+    }
 }
 
 #[cfg(feature = "print-testcase")]
@@ -271,41 +308,7 @@ impl std::fmt::Display for ChatNotify {
 impl TryFrom<u8> for ChatNotify {
     type Error = crate::errors::EnumError;
     fn try_from(value: u8) -> Result<Self, Self::Error> {
-        match value {
-            0 => Ok(Self::JoinedNotice),
-            1 => Ok(Self::LeftNotice),
-            2 => Ok(Self::YouJoinedNotice),
-            3 => Ok(Self::YouLeftNotice),
-            4 => Ok(Self::WrongPasswordNotice),
-            5 => Ok(Self::NotMemberNotice),
-            6 => Ok(Self::NotModeratorNotice),
-            7 => Ok(Self::PasswordChangedNotice),
-            8 => Ok(Self::OwnerChangedNotice),
-            9 => Ok(Self::PlayerNotFoundNotice),
-            10 => Ok(Self::NotOwnerNotice),
-            11 => Ok(Self::ChannelOwnerNotice),
-            12 => Ok(Self::ModeChangeNotice),
-            13 => Ok(Self::AnnouncementsOnNotice),
-            14 => Ok(Self::AnnouncementsOffNotice),
-            15 => Ok(Self::ModerationOnNotice),
-            16 => Ok(Self::ModerationOffNotice),
-            17 => Ok(Self::MutedNotice),
-            18 => Ok(Self::PlayerKickedNotice),
-            19 => Ok(Self::BannedNotice),
-            20 => Ok(Self::PlayerBannedNotice),
-            21 => Ok(Self::PlayerUnbannedNotice),
-            22 => Ok(Self::PlayerNotBannedNotice),
-            23 => Ok(Self::PlayerAlreadyMemberNotice),
-            24 => Ok(Self::InviteNotice),
-            25 => Ok(Self::InviteWrongFactionNotice),
-            26 => Ok(Self::WrongFactionNotice),
-            27 => Ok(Self::InvalidNameNotice),
-            28 => Ok(Self::NotModeratedNotice),
-            29 => Ok(Self::PlayerInvitedNotice),
-            30 => Ok(Self::PlayerInviteBannedNotice),
-            31 => Ok(Self::ThrottledNotice),
-            v => Err(crate::errors::EnumError::new(NAME, v.into()),)
-        }
+        Self::from_int(value)
     }
 }
 

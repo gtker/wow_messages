@@ -51,6 +51,18 @@ impl ServerRegion {
         ]
     }
 
+    pub const fn from_int(value: u8) -> Result<Self, crate::errors::EnumError> {
+        match value {
+            1 => Ok(Self::UnitedStates),
+            2 => Ok(Self::Korea),
+            3 => Ok(Self::Europe),
+            4 => Ok(Self::Taiwan),
+            5 => Ok(Self::China),
+            99 => Ok(Self::TestServer),
+            101 => Ok(Self::QaServer),
+            v => Err(crate::errors::EnumError::new(NAME, v as i128),)
+        }
+    }
 }
 
 #[cfg(feature = "print-testcase")]
@@ -94,16 +106,7 @@ impl std::fmt::Display for ServerRegion {
 impl TryFrom<u8> for ServerRegion {
     type Error = crate::errors::EnumError;
     fn try_from(value: u8) -> Result<Self, Self::Error> {
-        match value {
-            1 => Ok(Self::UnitedStates),
-            2 => Ok(Self::Korea),
-            3 => Ok(Self::Europe),
-            4 => Ok(Self::Taiwan),
-            5 => Ok(Self::China),
-            99 => Ok(Self::TestServer),
-            101 => Ok(Self::QaServer),
-            v => Err(crate::errors::EnumError::new(NAME, v.into()),)
-        }
+        Self::from_int(value)
     }
 }
 

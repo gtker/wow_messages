@@ -38,6 +38,15 @@ impl InstanceResetFailedReason {
         ]
     }
 
+    pub const fn from_int(value: u8) -> Result<Self, crate::errors::EnumError> {
+        match value {
+            0 => Ok(Self::General),
+            1 => Ok(Self::Offline),
+            2 => Ok(Self::Zoning),
+            3 => Ok(Self::Silently),
+            v => Err(crate::errors::EnumError::new(NAME, v as i128),)
+        }
+    }
 }
 
 #[cfg(feature = "print-testcase")]
@@ -75,13 +84,7 @@ impl std::fmt::Display for InstanceResetFailedReason {
 impl TryFrom<u8> for InstanceResetFailedReason {
     type Error = crate::errors::EnumError;
     fn try_from(value: u8) -> Result<Self, Self::Error> {
-        match value {
-            0 => Ok(Self::General),
-            1 => Ok(Self::Offline),
-            2 => Ok(Self::Zoning),
-            3 => Ok(Self::Silently),
-            v => Err(crate::errors::EnumError::new(NAME, v.into()),)
-        }
+        Self::from_int(value)
     }
 }
 

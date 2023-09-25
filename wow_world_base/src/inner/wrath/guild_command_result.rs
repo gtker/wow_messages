@@ -112,6 +112,34 @@ impl GuildCommandResult {
         ]
     }
 
+    pub const fn from_int(value: u8) -> Result<Self, crate::errors::EnumError> {
+        match value {
+            0 => Ok(Self::PlayerNoMoreInGuild),
+            1 => Ok(Self::GuildInternal),
+            2 => Ok(Self::AlreadyInGuild),
+            3 => Ok(Self::AlreadyInGuildS),
+            4 => Ok(Self::InvitedToGuild),
+            5 => Ok(Self::AlreadyInvitedToGuildS),
+            6 => Ok(Self::GuildNameInvalid),
+            7 => Ok(Self::GuildNameExistsS),
+            8 => Ok(Self::GuildLeaderLeaveOrPermissions),
+            9 => Ok(Self::GuildPlayerNotInGuild),
+            10 => Ok(Self::GuildPlayerNotInGuildS),
+            11 => Ok(Self::GuildPlayerNotFoundS),
+            12 => Ok(Self::GuildNotAllied),
+            13 => Ok(Self::GuildRankTooHighS),
+            14 => Ok(Self::GuildRankTooLowS),
+            17 => Ok(Self::GuildRanksLocked),
+            18 => Ok(Self::GuildRankInUse),
+            19 => Ok(Self::GuildIgnoringYouS),
+            20 => Ok(Self::GuildUnk1),
+            25 => Ok(Self::GuildWithdrawLimit),
+            26 => Ok(Self::GuildNotEnoughMoney),
+            28 => Ok(Self::GuildBankFull),
+            29 => Ok(Self::GuildItemNotFound),
+            v => Err(crate::errors::EnumError::new(NAME, v as i128),)
+        }
+    }
 }
 
 #[cfg(feature = "print-testcase")]
@@ -187,32 +215,7 @@ impl std::fmt::Display for GuildCommandResult {
 impl TryFrom<u8> for GuildCommandResult {
     type Error = crate::errors::EnumError;
     fn try_from(value: u8) -> Result<Self, Self::Error> {
-        match value {
-            0 => Ok(Self::PlayerNoMoreInGuild),
-            1 => Ok(Self::GuildInternal),
-            2 => Ok(Self::AlreadyInGuild),
-            3 => Ok(Self::AlreadyInGuildS),
-            4 => Ok(Self::InvitedToGuild),
-            5 => Ok(Self::AlreadyInvitedToGuildS),
-            6 => Ok(Self::GuildNameInvalid),
-            7 => Ok(Self::GuildNameExistsS),
-            8 => Ok(Self::GuildLeaderLeaveOrPermissions),
-            9 => Ok(Self::GuildPlayerNotInGuild),
-            10 => Ok(Self::GuildPlayerNotInGuildS),
-            11 => Ok(Self::GuildPlayerNotFoundS),
-            12 => Ok(Self::GuildNotAllied),
-            13 => Ok(Self::GuildRankTooHighS),
-            14 => Ok(Self::GuildRankTooLowS),
-            17 => Ok(Self::GuildRanksLocked),
-            18 => Ok(Self::GuildRankInUse),
-            19 => Ok(Self::GuildIgnoringYouS),
-            20 => Ok(Self::GuildUnk1),
-            25 => Ok(Self::GuildWithdrawLimit),
-            26 => Ok(Self::GuildNotEnoughMoney),
-            28 => Ok(Self::GuildBankFull),
-            29 => Ok(Self::GuildItemNotFound),
-            v => Err(crate::errors::EnumError::new(NAME, v.into()),)
-        }
+        Self::from_int(value)
     }
 }
 

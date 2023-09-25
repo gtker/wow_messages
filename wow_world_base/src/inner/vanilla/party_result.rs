@@ -55,6 +55,20 @@ impl PartyResult {
         ]
     }
 
+    pub const fn from_int(value: u8) -> Result<Self, crate::errors::EnumError> {
+        match value {
+            0 => Ok(Self::Success),
+            1 => Ok(Self::BadPlayerName),
+            2 => Ok(Self::TargetNotInGroup),
+            3 => Ok(Self::GroupFull),
+            4 => Ok(Self::AlreadyInGroup),
+            5 => Ok(Self::NotInGroup),
+            6 => Ok(Self::NotLeader),
+            7 => Ok(Self::PlayerWrongFaction),
+            8 => Ok(Self::IgnoringYou),
+            v => Err(crate::errors::EnumError::new(NAME, v as i128),)
+        }
+    }
 }
 
 #[cfg(feature = "print-testcase")]
@@ -102,18 +116,7 @@ impl std::fmt::Display for PartyResult {
 impl TryFrom<u8> for PartyResult {
     type Error = crate::errors::EnumError;
     fn try_from(value: u8) -> Result<Self, Self::Error> {
-        match value {
-            0 => Ok(Self::Success),
-            1 => Ok(Self::BadPlayerName),
-            2 => Ok(Self::TargetNotInGroup),
-            3 => Ok(Self::GroupFull),
-            4 => Ok(Self::AlreadyInGroup),
-            5 => Ok(Self::NotInGroup),
-            6 => Ok(Self::NotLeader),
-            7 => Ok(Self::PlayerWrongFaction),
-            8 => Ok(Self::IgnoringYou),
-            v => Err(crate::errors::EnumError::new(NAME, v.into()),)
-        }
+        Self::from_int(value)
     }
 }
 

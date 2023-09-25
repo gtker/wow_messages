@@ -39,6 +39,16 @@ impl ServerMessageType {
         ]
     }
 
+    pub const fn from_int(value: u32) -> Result<Self, crate::errors::EnumError> {
+        match value {
+            1 => Ok(Self::ShutdownTime),
+            2 => Ok(Self::RestartTime),
+            3 => Ok(Self::Custom),
+            4 => Ok(Self::ShutdownCancelled),
+            5 => Ok(Self::RestartCancelled),
+            v => Err(crate::errors::EnumError::new(NAME, v as i128),)
+        }
+    }
 }
 
 #[cfg(feature = "print-testcase")]
@@ -78,14 +88,7 @@ impl std::fmt::Display for ServerMessageType {
 impl TryFrom<u32> for ServerMessageType {
     type Error = crate::errors::EnumError;
     fn try_from(value: u32) -> Result<Self, Self::Error> {
-        match value {
-            1 => Ok(Self::ShutdownTime),
-            2 => Ok(Self::RestartTime),
-            3 => Ok(Self::Custom),
-            4 => Ok(Self::ShutdownCancelled),
-            5 => Ok(Self::RestartCancelled),
-            v => Err(crate::errors::EnumError::new(NAME, v.into()),)
-        }
+        Self::from_int(value)
     }
 }
 

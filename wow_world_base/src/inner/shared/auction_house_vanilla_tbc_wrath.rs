@@ -47,6 +47,18 @@ impl AuctionHouse {
         ]
     }
 
+    pub const fn from_int(value: u32) -> Result<Self, crate::errors::EnumError> {
+        match value {
+            1 => Ok(Self::Stormwind),
+            2 => Ok(Self::Alliance),
+            3 => Ok(Self::Darnassus),
+            4 => Ok(Self::Undercity),
+            5 => Ok(Self::ThunderBluff),
+            6 => Ok(Self::Horde),
+            7 => Ok(Self::Goblin),
+            v => Err(crate::errors::EnumError::new(NAME, v as i128),)
+        }
+    }
 }
 
 #[cfg(feature = "print-testcase")]
@@ -90,16 +102,7 @@ impl std::fmt::Display for AuctionHouse {
 impl TryFrom<u32> for AuctionHouse {
     type Error = crate::errors::EnumError;
     fn try_from(value: u32) -> Result<Self, Self::Error> {
-        match value {
-            1 => Ok(Self::Stormwind),
-            2 => Ok(Self::Alliance),
-            3 => Ok(Self::Darnassus),
-            4 => Ok(Self::Undercity),
-            5 => Ok(Self::ThunderBluff),
-            6 => Ok(Self::Horde),
-            7 => Ok(Self::Goblin),
-            v => Err(crate::errors::EnumError::new(NAME, v.into()),)
-        }
+        Self::from_int(value)
     }
 }
 

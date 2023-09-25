@@ -74,6 +74,24 @@ impl PetTameFailureReason {
         ]
     }
 
+    pub const fn from_int(value: u8) -> Result<Self, crate::errors::EnumError> {
+        match value {
+            1 => Ok(Self::InvalidCreature),
+            2 => Ok(Self::TooMany),
+            3 => Ok(Self::CreatureAlreadyOwned),
+            4 => Ok(Self::NotTameable),
+            5 => Ok(Self::AnotherSummonActive),
+            6 => Ok(Self::UnitsCantTame),
+            7 => Ok(Self::NoPetAvailable),
+            8 => Ok(Self::InternaLerror),
+            9 => Ok(Self::TooHighLevel),
+            10 => Ok(Self::Dead),
+            11 => Ok(Self::NotDead),
+            12 => Ok(Self::CantControlExotic),
+            13 => Ok(Self::UnknownError),
+            v => Err(crate::errors::EnumError::new(NAME, v as i128),)
+        }
+    }
 }
 
 #[cfg(feature = "print-testcase")]
@@ -129,22 +147,7 @@ impl std::fmt::Display for PetTameFailureReason {
 impl TryFrom<u8> for PetTameFailureReason {
     type Error = crate::errors::EnumError;
     fn try_from(value: u8) -> Result<Self, Self::Error> {
-        match value {
-            1 => Ok(Self::InvalidCreature),
-            2 => Ok(Self::TooMany),
-            3 => Ok(Self::CreatureAlreadyOwned),
-            4 => Ok(Self::NotTameable),
-            5 => Ok(Self::AnotherSummonActive),
-            6 => Ok(Self::UnitsCantTame),
-            7 => Ok(Self::NoPetAvailable),
-            8 => Ok(Self::InternaLerror),
-            9 => Ok(Self::TooHighLevel),
-            10 => Ok(Self::Dead),
-            11 => Ok(Self::NotDead),
-            12 => Ok(Self::CantControlExotic),
-            13 => Ok(Self::UnknownError),
-            v => Err(crate::errors::EnumError::new(NAME, v.into()),)
-        }
+        Self::from_int(value)
     }
 }
 

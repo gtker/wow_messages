@@ -59,6 +59,21 @@ impl BagFamily {
         ]
     }
 
+    pub const fn from_int(value: u8) -> Result<Self, crate::errors::EnumError> {
+        match value {
+            0 => Ok(Self::None),
+            1 => Ok(Self::Arrows),
+            2 => Ok(Self::Bullets),
+            3 => Ok(Self::SoulShards),
+            4 => Ok(Self::Unknown4),
+            5 => Ok(Self::Unknown5),
+            6 => Ok(Self::Herbs),
+            7 => Ok(Self::EnchantingSupplies),
+            8 => Ok(Self::EngineeringSupplies),
+            9 => Ok(Self::Keys),
+            v => Err(crate::errors::EnumError::new(NAME, v as i128),)
+        }
+    }
 }
 
 #[cfg(feature = "print-testcase")]
@@ -108,19 +123,7 @@ impl std::fmt::Display for BagFamily {
 impl TryFrom<u8> for BagFamily {
     type Error = crate::errors::EnumError;
     fn try_from(value: u8) -> Result<Self, Self::Error> {
-        match value {
-            0 => Ok(Self::None),
-            1 => Ok(Self::Arrows),
-            2 => Ok(Self::Bullets),
-            3 => Ok(Self::SoulShards),
-            4 => Ok(Self::Unknown4),
-            5 => Ok(Self::Unknown5),
-            6 => Ok(Self::Herbs),
-            7 => Ok(Self::EnchantingSupplies),
-            8 => Ok(Self::EngineeringSupplies),
-            9 => Ok(Self::Keys),
-            v => Err(crate::errors::EnumError::new(NAME, v.into()),)
-        }
+        Self::from_int(value)
     }
 }
 

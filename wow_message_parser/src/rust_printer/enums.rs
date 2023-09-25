@@ -32,7 +32,7 @@ fn print_enum_inner(e: &Definer, o: &Objects, visibility_override: bool) -> Writ
 
     print_display(&mut s, e);
 
-    print_from_or_try_from(&mut s, e);
+    print_try_from(&mut s, e);
 
     s
 }
@@ -70,6 +70,7 @@ fn common_impls(s: &mut Writer, e: &Definer, visibility_override: bool) {
     s.bodyn(format!("impl {}", e.name()), |s| {
         as_type(s, e, visibility_override);
         iterators(s, e);
+        from_type(s, e);
     });
 }
 
@@ -86,6 +87,27 @@ fn iterators(s: &mut Writer, e: &Definer) {
         s.dec_indent();
         s.wln("]");
     });
+}
+
+fn from_type(s: &mut Writer, e: &Definer) {
+    let ty_name = e.ty().rust_str();
+    s.body(
+        format!(
+            "pub const fn from_int(value: {ty_name}) -> Result<Self, crate::errors::EnumError>",
+        ),
+        |s| {
+            s.body("match value", |s| {
+                for field in e.fields() {
+                    let value = field.value().int();
+                    let field_name = field.rust_name();
+
+                    s.wln(format!("{value} => Ok(Self::{field_name}),",));
+                }
+
+                s.wln("v => Err(crate::errors::EnumError::new(NAME, v as i128),)");
+            });
+        },
+    );
 }
 
 fn as_type(s: &mut Writer, e: &Definer, visibility_override: bool) {
@@ -160,10 +182,6 @@ fn print_display(s: &mut Writer, e: &Definer) {
     });
 }
 
-fn print_from_or_try_from(s: &mut Writer, e: &Definer) {
-    print_try_from(s, e);
-}
-
 fn print_try_from(s: &mut Writer, e: &Definer) {
     let ty_name = e.ty().rust_str();
     s.impl_for(format!("TryFrom<{ty_name}>"), e.name(), |s| {
@@ -172,16 +190,7 @@ fn print_try_from(s: &mut Writer, e: &Definer) {
         s.body(
             format!("fn try_from(value: {ty_name}) -> Result<Self, Self::Error>",),
             |s| {
-                s.body("match value", |s| {
-                    for field in e.fields() {
-                        let value = field.value().int();
-                        let field_name = field.rust_name();
-
-                        s.wln(format!("{value} => Ok(Self::{field_name}),",));
-                    }
-
-                    s.wln("v => Err(crate::errors::EnumError::new(NAME, v.into()),)");
-                });
+                s.wln(format!("Self::from_int(value)"));
             },
         );
     });

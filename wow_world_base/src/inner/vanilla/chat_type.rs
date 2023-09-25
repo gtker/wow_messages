@@ -159,6 +159,46 @@ impl ChatType {
         ]
     }
 
+    pub const fn from_int(value: u8) -> Result<Self, crate::errors::EnumError> {
+        match value {
+            0 => Ok(Self::Say),
+            1 => Ok(Self::Party),
+            2 => Ok(Self::Raid),
+            3 => Ok(Self::Guild),
+            4 => Ok(Self::Officer),
+            5 => Ok(Self::Yell),
+            6 => Ok(Self::Whisper),
+            7 => Ok(Self::WhisperInform),
+            8 => Ok(Self::Emote),
+            9 => Ok(Self::TextEmote),
+            10 => Ok(Self::System),
+            11 => Ok(Self::MonsterSay),
+            12 => Ok(Self::MonsterYell),
+            13 => Ok(Self::MonsterEmote),
+            14 => Ok(Self::Channel),
+            15 => Ok(Self::ChannelJoin),
+            16 => Ok(Self::ChannelLeave),
+            17 => Ok(Self::ChannelList),
+            18 => Ok(Self::ChannelNotice),
+            19 => Ok(Self::ChannelNoticeUser),
+            20 => Ok(Self::Afk),
+            21 => Ok(Self::Dnd),
+            22 => Ok(Self::Ignored),
+            23 => Ok(Self::Skill),
+            24 => Ok(Self::Loot),
+            26 => Ok(Self::MonsterWhisper),
+            82 => Ok(Self::BgSystemNeutral),
+            83 => Ok(Self::BgSystemAlliance),
+            84 => Ok(Self::BgSystemHorde),
+            87 => Ok(Self::RaidLeader),
+            88 => Ok(Self::RaidWarning),
+            89 => Ok(Self::RaidBossWhisper),
+            90 => Ok(Self::RaidBossEmote),
+            92 => Ok(Self::Battleground),
+            93 => Ok(Self::BattlegroundLeader),
+            v => Err(crate::errors::EnumError::new(NAME, v as i128),)
+        }
+    }
 }
 
 #[cfg(feature = "print-testcase")]
@@ -258,44 +298,7 @@ impl std::fmt::Display for ChatType {
 impl TryFrom<u8> for ChatType {
     type Error = crate::errors::EnumError;
     fn try_from(value: u8) -> Result<Self, Self::Error> {
-        match value {
-            0 => Ok(Self::Say),
-            1 => Ok(Self::Party),
-            2 => Ok(Self::Raid),
-            3 => Ok(Self::Guild),
-            4 => Ok(Self::Officer),
-            5 => Ok(Self::Yell),
-            6 => Ok(Self::Whisper),
-            7 => Ok(Self::WhisperInform),
-            8 => Ok(Self::Emote),
-            9 => Ok(Self::TextEmote),
-            10 => Ok(Self::System),
-            11 => Ok(Self::MonsterSay),
-            12 => Ok(Self::MonsterYell),
-            13 => Ok(Self::MonsterEmote),
-            14 => Ok(Self::Channel),
-            15 => Ok(Self::ChannelJoin),
-            16 => Ok(Self::ChannelLeave),
-            17 => Ok(Self::ChannelList),
-            18 => Ok(Self::ChannelNotice),
-            19 => Ok(Self::ChannelNoticeUser),
-            20 => Ok(Self::Afk),
-            21 => Ok(Self::Dnd),
-            22 => Ok(Self::Ignored),
-            23 => Ok(Self::Skill),
-            24 => Ok(Self::Loot),
-            26 => Ok(Self::MonsterWhisper),
-            82 => Ok(Self::BgSystemNeutral),
-            83 => Ok(Self::BgSystemAlliance),
-            84 => Ok(Self::BgSystemHorde),
-            87 => Ok(Self::RaidLeader),
-            88 => Ok(Self::RaidWarning),
-            89 => Ok(Self::RaidBossWhisper),
-            90 => Ok(Self::RaidBossEmote),
-            92 => Ok(Self::Battleground),
-            93 => Ok(Self::BattlegroundLeader),
-            v => Err(crate::errors::EnumError::new(NAME, v.into()),)
-        }
+        Self::from_int(value)
     }
 }
 

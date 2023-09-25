@@ -55,6 +55,19 @@ impl ClientLanguage {
         ]
     }
 
+    pub const fn from_int(value: u8) -> Result<Self, crate::errors::EnumError> {
+        match value {
+            0 => Ok(Self::English),
+            1 => Ok(Self::Korean),
+            2 => Ok(Self::French),
+            3 => Ok(Self::German),
+            4 => Ok(Self::Chinese),
+            5 => Ok(Self::Taiwanese),
+            6 => Ok(Self::SpanishSpain),
+            7 => Ok(Self::SpanishLatinAmerica),
+            v => Err(crate::errors::EnumError::new(NAME, v as i128),)
+        }
+    }
 }
 
 #[cfg(feature = "print-testcase")]
@@ -100,17 +113,7 @@ impl std::fmt::Display for ClientLanguage {
 impl TryFrom<u8> for ClientLanguage {
     type Error = crate::errors::EnumError;
     fn try_from(value: u8) -> Result<Self, Self::Error> {
-        match value {
-            0 => Ok(Self::English),
-            1 => Ok(Self::Korean),
-            2 => Ok(Self::French),
-            3 => Ok(Self::German),
-            4 => Ok(Self::Chinese),
-            5 => Ok(Self::Taiwanese),
-            6 => Ok(Self::SpanishSpain),
-            7 => Ok(Self::SpanishLatinAmerica),
-            v => Err(crate::errors::EnumError::new(NAME, v.into()),)
-        }
+        Self::from_int(value)
     }
 }
 

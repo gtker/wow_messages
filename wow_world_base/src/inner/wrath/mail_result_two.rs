@@ -76,6 +76,25 @@ impl MailResultTwo {
         ]
     }
 
+    pub const fn from_int(value: u32) -> Result<Self, crate::errors::EnumError> {
+        match value {
+            0 => Ok(Self::Ok),
+            1 => Ok(Self::ErrEquipError),
+            2 => Ok(Self::ErrCannotSendToSelf),
+            3 => Ok(Self::ErrNotEnoughMoney),
+            4 => Ok(Self::ErrRecipientNotFound),
+            5 => Ok(Self::ErrNotYourTeam),
+            6 => Ok(Self::ErrInternalError),
+            14 => Ok(Self::ErrDisabledForTrialAcc),
+            15 => Ok(Self::ErrRecipientCapReached),
+            16 => Ok(Self::ErrCantSendWrappedCod),
+            17 => Ok(Self::ErrMailAndChatSuspended),
+            18 => Ok(Self::ErrTooManyAttachments),
+            19 => Ok(Self::ErrMailAttachmentInvalid),
+            21 => Ok(Self::ErrItemHasExpired),
+            v => Err(crate::errors::EnumError::new(NAME, v as i128),)
+        }
+    }
 }
 
 #[cfg(feature = "print-testcase")]
@@ -133,23 +152,7 @@ impl std::fmt::Display for MailResultTwo {
 impl TryFrom<u32> for MailResultTwo {
     type Error = crate::errors::EnumError;
     fn try_from(value: u32) -> Result<Self, Self::Error> {
-        match value {
-            0 => Ok(Self::Ok),
-            1 => Ok(Self::ErrEquipError),
-            2 => Ok(Self::ErrCannotSendToSelf),
-            3 => Ok(Self::ErrNotEnoughMoney),
-            4 => Ok(Self::ErrRecipientNotFound),
-            5 => Ok(Self::ErrNotYourTeam),
-            6 => Ok(Self::ErrInternalError),
-            14 => Ok(Self::ErrDisabledForTrialAcc),
-            15 => Ok(Self::ErrRecipientCapReached),
-            16 => Ok(Self::ErrCantSendWrappedCod),
-            17 => Ok(Self::ErrMailAndChatSuspended),
-            18 => Ok(Self::ErrTooManyAttachments),
-            19 => Ok(Self::ErrMailAttachmentInvalid),
-            21 => Ok(Self::ErrItemHasExpired),
-            v => Err(crate::errors::EnumError::new(NAME, v.into()),)
-        }
+        Self::from_int(value)
     }
 }
 

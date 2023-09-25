@@ -71,6 +71,24 @@ impl BuybackSlot {
         ]
     }
 
+    pub const fn from_int(value: u32) -> Result<Self, crate::errors::EnumError> {
+        match value {
+            69 => Ok(Self::Slot1),
+            70 => Ok(Self::Slot2),
+            71 => Ok(Self::Slot3),
+            72 => Ok(Self::Slot4),
+            73 => Ok(Self::Slot5),
+            74 => Ok(Self::Slot6),
+            75 => Ok(Self::Slot7),
+            76 => Ok(Self::Slot8),
+            77 => Ok(Self::Slot9),
+            78 => Ok(Self::Slot10),
+            79 => Ok(Self::Slot11),
+            80 => Ok(Self::Slot12),
+            81 => Ok(Self::Slot13),
+            v => Err(crate::errors::EnumError::new(NAME, v as i128),)
+        }
+    }
 }
 
 #[cfg(feature = "print-testcase")]
@@ -126,22 +144,7 @@ impl std::fmt::Display for BuybackSlot {
 impl TryFrom<u32> for BuybackSlot {
     type Error = crate::errors::EnumError;
     fn try_from(value: u32) -> Result<Self, Self::Error> {
-        match value {
-            69 => Ok(Self::Slot1),
-            70 => Ok(Self::Slot2),
-            71 => Ok(Self::Slot3),
-            72 => Ok(Self::Slot4),
-            73 => Ok(Self::Slot5),
-            74 => Ok(Self::Slot6),
-            75 => Ok(Self::Slot7),
-            76 => Ok(Self::Slot8),
-            77 => Ok(Self::Slot9),
-            78 => Ok(Self::Slot10),
-            79 => Ok(Self::Slot11),
-            80 => Ok(Self::Slot12),
-            81 => Ok(Self::Slot13),
-            v => Err(crate::errors::EnumError::new(NAME, v.into()),)
-        }
+        Self::from_int(value)
     }
 }
 

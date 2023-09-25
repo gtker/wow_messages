@@ -39,6 +39,16 @@ impl GroupLootSetting {
         ]
     }
 
+    pub const fn from_int(value: u8) -> Result<Self, crate::errors::EnumError> {
+        match value {
+            0 => Ok(Self::FreeForAll),
+            1 => Ok(Self::RoundRobin),
+            2 => Ok(Self::MasterLoot),
+            3 => Ok(Self::GroupLoot),
+            4 => Ok(Self::NeedBeforeGreed),
+            v => Err(crate::errors::EnumError::new(NAME, v as i128),)
+        }
+    }
 }
 
 #[cfg(feature = "print-testcase")]
@@ -78,14 +88,7 @@ impl std::fmt::Display for GroupLootSetting {
 impl TryFrom<u8> for GroupLootSetting {
     type Error = crate::errors::EnumError;
     fn try_from(value: u8) -> Result<Self, Self::Error> {
-        match value {
-            0 => Ok(Self::FreeForAll),
-            1 => Ok(Self::RoundRobin),
-            2 => Ok(Self::MasterLoot),
-            3 => Ok(Self::GroupLoot),
-            4 => Ok(Self::NeedBeforeGreed),
-            v => Err(crate::errors::EnumError::new(NAME, v.into()),)
-        }
+        Self::from_int(value)
     }
 }
 

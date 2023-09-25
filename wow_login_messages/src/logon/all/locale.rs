@@ -74,6 +74,25 @@ impl Locale {
         ]
     }
 
+    pub const fn from_int(value: u32) -> Result<Self, crate::errors::EnumError> {
+        match value {
+            1701726018 => Ok(Self::EnGb),
+            1701729619 => Ok(Self::EnUs),
+            1702055256 => Ok(Self::EsMx),
+            1886667346 => Ok(Self::PtBr),
+            1718765138 => Ok(Self::FrFr),
+            1684358213 => Ok(Self::DeDe),
+            1702053203 => Ok(Self::EsEs),
+            1886670932 => Ok(Self::PtPt),
+            1769228628 => Ok(Self::ItIt),
+            1920291413 => Ok(Self::RuRu),
+            1802455890 => Ok(Self::KoKr),
+            2053657687 => Ok(Self::ZhTw),
+            1701729367 => Ok(Self::EnTw),
+            1701725006 => Ok(Self::EnCn),
+            v => Err(crate::errors::EnumError::new(NAME, v as i128),)
+        }
+    }
 }
 
 #[cfg(feature = "print-testcase")]
@@ -131,23 +150,7 @@ impl std::fmt::Display for Locale {
 impl TryFrom<u32> for Locale {
     type Error = crate::errors::EnumError;
     fn try_from(value: u32) -> Result<Self, Self::Error> {
-        match value {
-            1701726018 => Ok(Self::EnGb),
-            1701729619 => Ok(Self::EnUs),
-            1702055256 => Ok(Self::EsMx),
-            1886667346 => Ok(Self::PtBr),
-            1718765138 => Ok(Self::FrFr),
-            1684358213 => Ok(Self::DeDe),
-            1702053203 => Ok(Self::EsEs),
-            1886670932 => Ok(Self::PtPt),
-            1769228628 => Ok(Self::ItIt),
-            1920291413 => Ok(Self::RuRu),
-            1802455890 => Ok(Self::KoKr),
-            2053657687 => Ok(Self::ZhTw),
-            1701729367 => Ok(Self::EnTw),
-            1701725006 => Ok(Self::EnCn),
-            v => Err(crate::errors::EnumError::new(NAME, v.into()),)
-        }
+        Self::from_int(value)
     }
 }
 

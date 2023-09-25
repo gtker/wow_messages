@@ -67,6 +67,23 @@ impl SpellMissInfo {
         ]
     }
 
+    pub const fn from_int(value: u32) -> Result<Self, crate::errors::EnumError> {
+        match value {
+            0 => Ok(Self::None),
+            1 => Ok(Self::Miss),
+            2 => Ok(Self::Resist),
+            3 => Ok(Self::Dodge),
+            4 => Ok(Self::Parry),
+            5 => Ok(Self::Block),
+            6 => Ok(Self::Evade),
+            7 => Ok(Self::Immune),
+            8 => Ok(Self::Immune2),
+            9 => Ok(Self::Deflect),
+            10 => Ok(Self::Absorb),
+            11 => Ok(Self::Reflect),
+            v => Err(crate::errors::EnumError::new(NAME, v as i128),)
+        }
+    }
 }
 
 #[cfg(feature = "print-testcase")]
@@ -120,21 +137,7 @@ impl std::fmt::Display for SpellMissInfo {
 impl TryFrom<u32> for SpellMissInfo {
     type Error = crate::errors::EnumError;
     fn try_from(value: u32) -> Result<Self, Self::Error> {
-        match value {
-            0 => Ok(Self::None),
-            1 => Ok(Self::Miss),
-            2 => Ok(Self::Resist),
-            3 => Ok(Self::Dodge),
-            4 => Ok(Self::Parry),
-            5 => Ok(Self::Block),
-            6 => Ok(Self::Evade),
-            7 => Ok(Self::Immune),
-            8 => Ok(Self::Immune2),
-            9 => Ok(Self::Deflect),
-            10 => Ok(Self::Absorb),
-            11 => Ok(Self::Reflect),
-            v => Err(crate::errors::EnumError::new(NAME, v.into()),)
-        }
+        Self::from_int(value)
     }
 }
 

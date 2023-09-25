@@ -35,6 +35,14 @@ impl EmoteSpecProc {
         ]
     }
 
+    pub const fn from_int(value: u8) -> Result<Self, crate::errors::EnumError> {
+        match value {
+            0 => Ok(Self::NoLoop),
+            1 => Ok(Self::Loop),
+            2 => Ok(Self::LoopWithSound),
+            v => Err(crate::errors::EnumError::new(NAME, v as i128),)
+        }
+    }
 }
 
 #[cfg(feature = "print-testcase")]
@@ -70,12 +78,7 @@ impl std::fmt::Display for EmoteSpecProc {
 impl TryFrom<u8> for EmoteSpecProc {
     type Error = crate::errors::EnumError;
     fn try_from(value: u8) -> Result<Self, Self::Error> {
-        match value {
-            0 => Ok(Self::NoLoop),
-            1 => Ok(Self::Loop),
-            2 => Ok(Self::LoopWithSound),
-            v => Err(crate::errors::EnumError::new(NAME, v.into()),)
-        }
+        Self::from_int(value)
     }
 }
 

@@ -47,6 +47,18 @@ impl GmTicketResponse {
         ]
     }
 
+    pub const fn from_int(value: u32) -> Result<Self, crate::errors::EnumError> {
+        match value {
+            0 => Ok(Self::NotExist),
+            1 => Ok(Self::AlreadyExist),
+            2 => Ok(Self::CreateSuccess),
+            3 => Ok(Self::CreateError),
+            4 => Ok(Self::UpdateSuccess),
+            5 => Ok(Self::UpdateError),
+            9 => Ok(Self::TicketDeleted),
+            v => Err(crate::errors::EnumError::new(NAME, v as i128),)
+        }
+    }
 }
 
 #[cfg(feature = "print-testcase")]
@@ -90,16 +102,7 @@ impl std::fmt::Display for GmTicketResponse {
 impl TryFrom<u32> for GmTicketResponse {
     type Error = crate::errors::EnumError;
     fn try_from(value: u32) -> Result<Self, Self::Error> {
-        match value {
-            0 => Ok(Self::NotExist),
-            1 => Ok(Self::AlreadyExist),
-            2 => Ok(Self::CreateSuccess),
-            3 => Ok(Self::CreateError),
-            4 => Ok(Self::UpdateSuccess),
-            5 => Ok(Self::UpdateError),
-            9 => Ok(Self::TicketDeleted),
-            v => Err(crate::errors::EnumError::new(NAME, v.into()),)
-        }
+        Self::from_int(value)
     }
 }
 

@@ -51,6 +51,19 @@ impl GuildCommand {
         ]
     }
 
+    pub const fn from_int(value: u8) -> Result<Self, crate::errors::EnumError> {
+        match value {
+            0 => Ok(Self::Create),
+            1 => Ok(Self::Invite),
+            2 => Ok(Self::Quit),
+            3 => Ok(Self::Promote),
+            12 => Ok(Self::Founder),
+            13 => Ok(Self::Member),
+            19 => Ok(Self::PublicNoteChanged),
+            20 => Ok(Self::OfficerNoteChanged),
+            v => Err(crate::errors::EnumError::new(NAME, v as i128),)
+        }
+    }
 }
 
 #[cfg(feature = "print-testcase")]
@@ -96,17 +109,7 @@ impl std::fmt::Display for GuildCommand {
 impl TryFrom<u8> for GuildCommand {
     type Error = crate::errors::EnumError;
     fn try_from(value: u8) -> Result<Self, Self::Error> {
-        match value {
-            0 => Ok(Self::Create),
-            1 => Ok(Self::Invite),
-            2 => Ok(Self::Quit),
-            3 => Ok(Self::Promote),
-            12 => Ok(Self::Founder),
-            13 => Ok(Self::Member),
-            19 => Ok(Self::PublicNoteChanged),
-            20 => Ok(Self::OfficerNoteChanged),
-            v => Err(crate::errors::EnumError::new(NAME, v.into()),)
-        }
+        Self::from_int(value)
     }
 }
 

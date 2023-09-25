@@ -43,6 +43,17 @@ impl UpdateType {
         ]
     }
 
+    pub const fn from_int(value: u8) -> Result<Self, crate::errors::EnumError> {
+        match value {
+            0 => Ok(Self::Values),
+            1 => Ok(Self::Movement),
+            2 => Ok(Self::CreateObject),
+            3 => Ok(Self::CreateObject2),
+            4 => Ok(Self::OutOfRangeObjects),
+            5 => Ok(Self::NearObjects),
+            v => Err(crate::errors::EnumError::new(NAME, v as i128),)
+        }
+    }
 }
 
 #[cfg(feature = "print-testcase")]
@@ -84,15 +95,7 @@ impl std::fmt::Display for UpdateType {
 impl TryFrom<u8> for UpdateType {
     type Error = crate::errors::EnumError;
     fn try_from(value: u8) -> Result<Self, Self::Error> {
-        match value {
-            0 => Ok(Self::Values),
-            1 => Ok(Self::Movement),
-            2 => Ok(Self::CreateObject),
-            3 => Ok(Self::CreateObject2),
-            4 => Ok(Self::OutOfRangeObjects),
-            5 => Ok(Self::NearObjects),
-            v => Err(crate::errors::EnumError::new(NAME, v.into()),)
-        }
+        Self::from_int(value)
     }
 }
 

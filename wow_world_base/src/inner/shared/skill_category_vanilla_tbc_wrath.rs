@@ -54,6 +54,19 @@ impl SkillCategory {
         ]
     }
 
+    pub const fn from_int(value: u8) -> Result<Self, crate::errors::EnumError> {
+        match value {
+            5 => Ok(Self::Attribute),
+            6 => Ok(Self::Weapon),
+            7 => Ok(Self::Class),
+            8 => Ok(Self::Armor),
+            9 => Ok(Self::SecondaryProfession),
+            10 => Ok(Self::Language),
+            11 => Ok(Self::PrimaryProfession),
+            12 => Ok(Self::Generic),
+            v => Err(crate::errors::EnumError::new(NAME, v as i128),)
+        }
+    }
 }
 
 #[cfg(feature = "print-testcase")]
@@ -99,17 +112,7 @@ impl std::fmt::Display for SkillCategory {
 impl TryFrom<u8> for SkillCategory {
     type Error = crate::errors::EnumError;
     fn try_from(value: u8) -> Result<Self, Self::Error> {
-        match value {
-            5 => Ok(Self::Attribute),
-            6 => Ok(Self::Weapon),
-            7 => Ok(Self::Class),
-            8 => Ok(Self::Armor),
-            9 => Ok(Self::SecondaryProfession),
-            10 => Ok(Self::Language),
-            11 => Ok(Self::PrimaryProfession),
-            12 => Ok(Self::Generic),
-            v => Err(crate::errors::EnumError::new(NAME, v.into()),)
-        }
+        Self::from_int(value)
     }
 }
 

@@ -75,6 +75,25 @@ impl GuildEvent {
         ]
     }
 
+    pub const fn from_int(value: u8) -> Result<Self, crate::errors::EnumError> {
+        match value {
+            0 => Ok(Self::Promotion),
+            1 => Ok(Self::Demotion),
+            2 => Ok(Self::Motd),
+            3 => Ok(Self::Joined),
+            4 => Ok(Self::Left),
+            5 => Ok(Self::Removed),
+            6 => Ok(Self::LeaderIs),
+            7 => Ok(Self::LeaderChanged),
+            8 => Ok(Self::Disbanded),
+            9 => Ok(Self::TabardChanged),
+            10 => Ok(Self::Unknown10),
+            11 => Ok(Self::RosterUpdate),
+            12 => Ok(Self::SignedOn),
+            13 => Ok(Self::SignedOff),
+            v => Err(crate::errors::EnumError::new(NAME, v as i128),)
+        }
+    }
 }
 
 #[cfg(feature = "print-testcase")]
@@ -132,23 +151,7 @@ impl std::fmt::Display for GuildEvent {
 impl TryFrom<u8> for GuildEvent {
     type Error = crate::errors::EnumError;
     fn try_from(value: u8) -> Result<Self, Self::Error> {
-        match value {
-            0 => Ok(Self::Promotion),
-            1 => Ok(Self::Demotion),
-            2 => Ok(Self::Motd),
-            3 => Ok(Self::Joined),
-            4 => Ok(Self::Left),
-            5 => Ok(Self::Removed),
-            6 => Ok(Self::LeaderIs),
-            7 => Ok(Self::LeaderChanged),
-            8 => Ok(Self::Disbanded),
-            9 => Ok(Self::TabardChanged),
-            10 => Ok(Self::Unknown10),
-            11 => Ok(Self::RosterUpdate),
-            12 => Ok(Self::SignedOn),
-            13 => Ok(Self::SignedOff),
-            v => Err(crate::errors::EnumError::new(NAME, v.into()),)
-        }
+        Self::from_int(value)
     }
 }
 

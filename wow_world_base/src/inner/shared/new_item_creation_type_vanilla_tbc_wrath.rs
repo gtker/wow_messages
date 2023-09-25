@@ -27,6 +27,13 @@ impl NewItemCreationType {
         ]
     }
 
+    pub const fn from_int(value: u32) -> Result<Self, crate::errors::EnumError> {
+        match value {
+            0 => Ok(Self::Received),
+            1 => Ok(Self::Created),
+            v => Err(crate::errors::EnumError::new(NAME, v as i128),)
+        }
+    }
 }
 
 #[cfg(feature = "print-testcase")]
@@ -60,11 +67,7 @@ impl std::fmt::Display for NewItemCreationType {
 impl TryFrom<u32> for NewItemCreationType {
     type Error = crate::errors::EnumError;
     fn try_from(value: u32) -> Result<Self, Self::Error> {
-        match value {
-            0 => Ok(Self::Received),
-            1 => Ok(Self::Created),
-            v => Err(crate::errors::EnumError::new(NAME, v.into()),)
-        }
+        Self::from_int(value)
     }
 }
 

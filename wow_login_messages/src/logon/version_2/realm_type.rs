@@ -34,6 +34,15 @@ impl RealmType {
         ]
     }
 
+    pub const fn from_int(value: u8) -> Result<Self, crate::errors::EnumError> {
+        match value {
+            0 => Ok(Self::PlayerVsEnvironment),
+            1 => Ok(Self::PlayerVsPlayer),
+            6 => Ok(Self::Roleplaying),
+            8 => Ok(Self::RoleplayingPlayerVsPlayer),
+            v => Err(crate::errors::EnumError::new(NAME, v as i128),)
+        }
+    }
 }
 
 #[cfg(feature = "print-testcase")]
@@ -71,13 +80,7 @@ impl std::fmt::Display for RealmType {
 impl TryFrom<u8> for RealmType {
     type Error = crate::errors::EnumError;
     fn try_from(value: u8) -> Result<Self, Self::Error> {
-        match value {
-            0 => Ok(Self::PlayerVsEnvironment),
-            1 => Ok(Self::PlayerVsPlayer),
-            6 => Ok(Self::Roleplaying),
-            8 => Ok(Self::RoleplayingPlayerVsPlayer),
-            v => Err(crate::errors::EnumError::new(NAME, v.into()),)
-        }
+        Self::from_int(value)
     }
 }
 

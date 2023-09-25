@@ -27,6 +27,13 @@ impl BattlefieldPortAction {
         ]
     }
 
+    pub const fn from_int(value: u8) -> Result<Self, crate::errors::EnumError> {
+        match value {
+            0 => Ok(Self::LeaveQueue),
+            1 => Ok(Self::EnterBattle),
+            v => Err(crate::errors::EnumError::new(NAME, v as i128),)
+        }
+    }
 }
 
 #[cfg(feature = "print-testcase")]
@@ -60,11 +67,7 @@ impl std::fmt::Display for BattlefieldPortAction {
 impl TryFrom<u8> for BattlefieldPortAction {
     type Error = crate::errors::EnumError;
     fn try_from(value: u8) -> Result<Self, Self::Error> {
-        match value {
-            0 => Ok(Self::LeaveQueue),
-            1 => Ok(Self::EnterBattle),
-            v => Err(crate::errors::EnumError::new(NAME, v.into()),)
-        }
+        Self::from_int(value)
     }
 }
 

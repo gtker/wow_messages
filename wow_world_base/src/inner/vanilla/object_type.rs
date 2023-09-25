@@ -51,6 +51,19 @@ impl ObjectType {
         ]
     }
 
+    pub const fn from_int(value: u8) -> Result<Self, crate::errors::EnumError> {
+        match value {
+            0 => Ok(Self::Object),
+            1 => Ok(Self::Item),
+            2 => Ok(Self::Container),
+            3 => Ok(Self::Unit),
+            4 => Ok(Self::Player),
+            5 => Ok(Self::GameObject),
+            6 => Ok(Self::DynamicObject),
+            7 => Ok(Self::Corpse),
+            v => Err(crate::errors::EnumError::new(NAME, v as i128),)
+        }
+    }
 }
 
 #[cfg(feature = "print-testcase")]
@@ -96,17 +109,7 @@ impl std::fmt::Display for ObjectType {
 impl TryFrom<u8> for ObjectType {
     type Error = crate::errors::EnumError;
     fn try_from(value: u8) -> Result<Self, Self::Error> {
-        match value {
-            0 => Ok(Self::Object),
-            1 => Ok(Self::Item),
-            2 => Ok(Self::Container),
-            3 => Ok(Self::Unit),
-            4 => Ok(Self::Player),
-            5 => Ok(Self::GameObject),
-            6 => Ok(Self::DynamicObject),
-            7 => Ok(Self::Corpse),
-            v => Err(crate::errors::EnumError::new(NAME, v.into()),)
-        }
+        Self::from_int(value)
     }
 }
 

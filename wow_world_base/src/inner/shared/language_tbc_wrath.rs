@@ -91,6 +91,29 @@ impl Language {
         ]
     }
 
+    pub const fn from_int(value: u8) -> Result<Self, crate::errors::EnumError> {
+        match value {
+            0 => Ok(Self::Universal),
+            1 => Ok(Self::Orcish),
+            2 => Ok(Self::Darnassian),
+            3 => Ok(Self::Taurahe),
+            6 => Ok(Self::Dwarvish),
+            7 => Ok(Self::Common),
+            8 => Ok(Self::Demonic),
+            9 => Ok(Self::Titan),
+            10 => Ok(Self::Thalassian),
+            11 => Ok(Self::Draconic),
+            12 => Ok(Self::Kalimag),
+            13 => Ok(Self::Gnomish),
+            14 => Ok(Self::Troll),
+            33 => Ok(Self::Gutterspeak),
+            35 => Ok(Self::Draenei),
+            36 => Ok(Self::Zombie),
+            37 => Ok(Self::GnomishBinary),
+            38 => Ok(Self::GoblinBinary),
+            v => Err(crate::errors::EnumError::new(NAME, v as i128),)
+        }
+    }
 }
 
 #[cfg(feature = "print-testcase")]
@@ -156,27 +179,7 @@ impl std::fmt::Display for Language {
 impl TryFrom<u8> for Language {
     type Error = crate::errors::EnumError;
     fn try_from(value: u8) -> Result<Self, Self::Error> {
-        match value {
-            0 => Ok(Self::Universal),
-            1 => Ok(Self::Orcish),
-            2 => Ok(Self::Darnassian),
-            3 => Ok(Self::Taurahe),
-            6 => Ok(Self::Dwarvish),
-            7 => Ok(Self::Common),
-            8 => Ok(Self::Demonic),
-            9 => Ok(Self::Titan),
-            10 => Ok(Self::Thalassian),
-            11 => Ok(Self::Draconic),
-            12 => Ok(Self::Kalimag),
-            13 => Ok(Self::Gnomish),
-            14 => Ok(Self::Troll),
-            33 => Ok(Self::Gutterspeak),
-            35 => Ok(Self::Draenei),
-            36 => Ok(Self::Zombie),
-            37 => Ok(Self::GnomishBinary),
-            38 => Ok(Self::GoblinBinary),
-            v => Err(crate::errors::EnumError::new(NAME, v.into()),)
-        }
+        Self::from_int(value)
     }
 }
 

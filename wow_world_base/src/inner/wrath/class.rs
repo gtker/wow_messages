@@ -59,6 +59,21 @@ impl Class {
         ]
     }
 
+    pub const fn from_int(value: u8) -> Result<Self, crate::errors::EnumError> {
+        match value {
+            1 => Ok(Self::Warrior),
+            2 => Ok(Self::Paladin),
+            3 => Ok(Self::Hunter),
+            4 => Ok(Self::Rogue),
+            5 => Ok(Self::Priest),
+            6 => Ok(Self::DeathKnight),
+            7 => Ok(Self::Shaman),
+            8 => Ok(Self::Mage),
+            9 => Ok(Self::Warlock),
+            11 => Ok(Self::Druid),
+            v => Err(crate::errors::EnumError::new(NAME, v as i128),)
+        }
+    }
 }
 
 #[cfg(feature = "print-testcase")]
@@ -108,19 +123,7 @@ impl std::fmt::Display for Class {
 impl TryFrom<u8> for Class {
     type Error = crate::errors::EnumError;
     fn try_from(value: u8) -> Result<Self, Self::Error> {
-        match value {
-            1 => Ok(Self::Warrior),
-            2 => Ok(Self::Paladin),
-            3 => Ok(Self::Hunter),
-            4 => Ok(Self::Rogue),
-            5 => Ok(Self::Priest),
-            6 => Ok(Self::DeathKnight),
-            7 => Ok(Self::Shaman),
-            8 => Ok(Self::Mage),
-            9 => Ok(Self::Warlock),
-            11 => Ok(Self::Druid),
-            v => Err(crate::errors::EnumError::new(NAME, v.into()),)
-        }
+        Self::from_int(value)
     }
 }
 

@@ -75,6 +75,25 @@ impl ReferAFriendError {
         ]
     }
 
+    pub const fn from_int(value: u8) -> Result<Self, crate::errors::EnumError> {
+        match value {
+            0 => Ok(Self::None),
+            1 => Ok(Self::NotReferredBy),
+            2 => Ok(Self::TargetTooHigh),
+            3 => Ok(Self::InsufficientGrantableLevels),
+            4 => Ok(Self::TooFar),
+            5 => Ok(Self::DifferentFaction),
+            6 => Ok(Self::NotNow),
+            7 => Ok(Self::GrantLevelMax),
+            8 => Ok(Self::NoTarget),
+            9 => Ok(Self::NotInGroup),
+            10 => Ok(Self::SummonLevelMax),
+            11 => Ok(Self::SummonCooldown),
+            12 => Ok(Self::InsufficientExpansionLevel),
+            13 => Ok(Self::SummonOffline),
+            v => Err(crate::errors::EnumError::new(NAME, v as i128),)
+        }
+    }
 }
 
 #[cfg(feature = "print-testcase")]
@@ -132,23 +151,7 @@ impl std::fmt::Display for ReferAFriendError {
 impl TryFrom<u8> for ReferAFriendError {
     type Error = crate::errors::EnumError;
     fn try_from(value: u8) -> Result<Self, Self::Error> {
-        match value {
-            0 => Ok(Self::None),
-            1 => Ok(Self::NotReferredBy),
-            2 => Ok(Self::TargetTooHigh),
-            3 => Ok(Self::InsufficientGrantableLevels),
-            4 => Ok(Self::TooFar),
-            5 => Ok(Self::DifferentFaction),
-            6 => Ok(Self::NotNow),
-            7 => Ok(Self::GrantLevelMax),
-            8 => Ok(Self::NoTarget),
-            9 => Ok(Self::NotInGroup),
-            10 => Ok(Self::SummonLevelMax),
-            11 => Ok(Self::SummonCooldown),
-            12 => Ok(Self::InsufficientExpansionLevel),
-            13 => Ok(Self::SummonOffline),
-            v => Err(crate::errors::EnumError::new(NAME, v.into()),)
-        }
+        Self::from_int(value)
     }
 }
 

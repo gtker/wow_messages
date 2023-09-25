@@ -43,6 +43,17 @@ impl PlayerChatTag {
         ]
     }
 
+    pub const fn from_int(value: u8) -> Result<Self, crate::errors::EnumError> {
+        match value {
+            0 => Ok(Self::None),
+            1 => Ok(Self::Afk),
+            2 => Ok(Self::Dnd),
+            3 => Ok(Self::Gm),
+            4 => Ok(Self::Commentator),
+            5 => Ok(Self::Developer),
+            v => Err(crate::errors::EnumError::new(NAME, v as i128),)
+        }
+    }
 }
 
 #[cfg(feature = "print-testcase")]
@@ -84,15 +95,7 @@ impl std::fmt::Display for PlayerChatTag {
 impl TryFrom<u8> for PlayerChatTag {
     type Error = crate::errors::EnumError;
     fn try_from(value: u8) -> Result<Self, Self::Error> {
-        match value {
-            0 => Ok(Self::None),
-            1 => Ok(Self::Afk),
-            2 => Ok(Self::Dnd),
-            3 => Ok(Self::Gm),
-            4 => Ok(Self::Commentator),
-            5 => Ok(Self::Developer),
-            v => Err(crate::errors::EnumError::new(NAME, v.into()),)
-        }
+        Self::from_int(value)
     }
 }
 

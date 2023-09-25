@@ -167,6 +167,48 @@ impl GmTicketType {
         ]
     }
 
+    pub const fn from_int(value: u8) -> Result<Self, crate::errors::EnumError> {
+        match value {
+            0 => Ok(Self::NotSet),
+            1 => Ok(Self::Stuck),
+            2 => Ok(Self::BehaviorHarassment),
+            3 => Ok(Self::Guild),
+            4 => Ok(Self::Item),
+            5 => Ok(Self::Environmental),
+            6 => Ok(Self::NonQuestCreep),
+            7 => Ok(Self::QuestQuestNpc),
+            8 => Ok(Self::Technical),
+            9 => Ok(Self::AccountBilling),
+            10 => Ok(Self::Character),
+            11 => Ok(Self::ArenaHonorItemIssues),
+            12 => Ok(Self::ArenaHonorPointsIssues),
+            13 => Ok(Self::BottingCheatingHacking),
+            14 => Ok(Self::BugReport),
+            15 => Ok(Self::CompromisedAccountIssue),
+            16 => Ok(Self::GameSuggestions),
+            17 => Ok(Self::GameplayQuestion),
+            18 => Ok(Self::GuildBankIssue),
+            19 => Ok(Self::GuildMasterIssue),
+            20 => Ok(Self::HarassmentScamReport),
+            21 => Ok(Self::InappropriateNameGuildArenaCharacterPet),
+            22 => Ok(Self::KnownIssueFix),
+            23 => Ok(Self::LatencyLagReport),
+            24 => Ok(Self::LootingIssueMistake),
+            25 => Ok(Self::MailIssue),
+            26 => Ok(Self::NonInGameRelatedInquiry),
+            27 => Ok(Self::ParentalControlsCais),
+            28 => Ok(Self::Pcnc),
+            29 => Ok(Self::Pct),
+            30 => Ok(Self::RestorationStatusFollowUp),
+            31 => Ok(Self::ServerInstanceIssues),
+            32 => Ok(Self::Spam),
+            33 => Ok(Self::SuicideCase),
+            34 => Ok(Self::SuspensionQuestions),
+            35 => Ok(Self::TechnicalSoundGraphicsIssue),
+            36 => Ok(Self::UiIssue),
+            v => Err(crate::errors::EnumError::new(NAME, v as i128),)
+        }
+    }
 }
 
 #[cfg(feature = "print-testcase")]
@@ -270,46 +312,7 @@ impl std::fmt::Display for GmTicketType {
 impl TryFrom<u8> for GmTicketType {
     type Error = crate::errors::EnumError;
     fn try_from(value: u8) -> Result<Self, Self::Error> {
-        match value {
-            0 => Ok(Self::NotSet),
-            1 => Ok(Self::Stuck),
-            2 => Ok(Self::BehaviorHarassment),
-            3 => Ok(Self::Guild),
-            4 => Ok(Self::Item),
-            5 => Ok(Self::Environmental),
-            6 => Ok(Self::NonQuestCreep),
-            7 => Ok(Self::QuestQuestNpc),
-            8 => Ok(Self::Technical),
-            9 => Ok(Self::AccountBilling),
-            10 => Ok(Self::Character),
-            11 => Ok(Self::ArenaHonorItemIssues),
-            12 => Ok(Self::ArenaHonorPointsIssues),
-            13 => Ok(Self::BottingCheatingHacking),
-            14 => Ok(Self::BugReport),
-            15 => Ok(Self::CompromisedAccountIssue),
-            16 => Ok(Self::GameSuggestions),
-            17 => Ok(Self::GameplayQuestion),
-            18 => Ok(Self::GuildBankIssue),
-            19 => Ok(Self::GuildMasterIssue),
-            20 => Ok(Self::HarassmentScamReport),
-            21 => Ok(Self::InappropriateNameGuildArenaCharacterPet),
-            22 => Ok(Self::KnownIssueFix),
-            23 => Ok(Self::LatencyLagReport),
-            24 => Ok(Self::LootingIssueMistake),
-            25 => Ok(Self::MailIssue),
-            26 => Ok(Self::NonInGameRelatedInquiry),
-            27 => Ok(Self::ParentalControlsCais),
-            28 => Ok(Self::Pcnc),
-            29 => Ok(Self::Pct),
-            30 => Ok(Self::RestorationStatusFollowUp),
-            31 => Ok(Self::ServerInstanceIssues),
-            32 => Ok(Self::Spam),
-            33 => Ok(Self::SuicideCase),
-            34 => Ok(Self::SuspensionQuestions),
-            35 => Ok(Self::TechnicalSoundGraphicsIssue),
-            36 => Ok(Self::UiIssue),
-            v => Err(crate::errors::EnumError::new(NAME, v.into()),)
-        }
+        Self::from_int(value)
     }
 }
 

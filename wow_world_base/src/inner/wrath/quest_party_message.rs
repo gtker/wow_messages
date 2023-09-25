@@ -67,6 +67,23 @@ impl QuestPartyMessage {
         ]
     }
 
+    pub const fn from_int(value: u8) -> Result<Self, crate::errors::EnumError> {
+        match value {
+            0 => Ok(Self::MsgSharingQuest),
+            1 => Ok(Self::MsgCantTakeQuest),
+            2 => Ok(Self::MsgAcceptQuest),
+            3 => Ok(Self::MsgRefuseQuest),
+            4 => Ok(Self::MsgBusy),
+            5 => Ok(Self::MsgLogFull),
+            6 => Ok(Self::MsgHaveQuest),
+            7 => Ok(Self::MsgFinishQuest),
+            8 => Ok(Self::MsgCantBeSharedToday),
+            9 => Ok(Self::MsgSharingTimerExpired),
+            10 => Ok(Self::MsgNotInParty),
+            11 => Ok(Self::MsgDifferentServerDaily),
+            v => Err(crate::errors::EnumError::new(NAME, v as i128),)
+        }
+    }
 }
 
 #[cfg(feature = "print-testcase")]
@@ -120,21 +137,7 @@ impl std::fmt::Display for QuestPartyMessage {
 impl TryFrom<u8> for QuestPartyMessage {
     type Error = crate::errors::EnumError;
     fn try_from(value: u8) -> Result<Self, Self::Error> {
-        match value {
-            0 => Ok(Self::MsgSharingQuest),
-            1 => Ok(Self::MsgCantTakeQuest),
-            2 => Ok(Self::MsgAcceptQuest),
-            3 => Ok(Self::MsgRefuseQuest),
-            4 => Ok(Self::MsgBusy),
-            5 => Ok(Self::MsgLogFull),
-            6 => Ok(Self::MsgHaveQuest),
-            7 => Ok(Self::MsgFinishQuest),
-            8 => Ok(Self::MsgCantBeSharedToday),
-            9 => Ok(Self::MsgSharingTimerExpired),
-            10 => Ok(Self::MsgNotInParty),
-            11 => Ok(Self::MsgDifferentServerDaily),
-            v => Err(crate::errors::EnumError::new(NAME, v.into()),)
-        }
+        Self::from_int(value)
     }
 }
 

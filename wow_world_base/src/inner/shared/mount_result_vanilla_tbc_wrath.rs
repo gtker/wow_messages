@@ -74,6 +74,22 @@ impl MountResult {
         ]
     }
 
+    pub const fn from_int(value: u32) -> Result<Self, crate::errors::EnumError> {
+        match value {
+            0 => Ok(Self::InvalidMountee),
+            1 => Ok(Self::TooFarAway),
+            2 => Ok(Self::AlreadyMounted),
+            3 => Ok(Self::NotMountable),
+            4 => Ok(Self::NotYourPet),
+            5 => Ok(Self::Other),
+            6 => Ok(Self::Looting),
+            7 => Ok(Self::RaceCantMount),
+            8 => Ok(Self::Shapeshifted),
+            9 => Ok(Self::ForcedDismount),
+            10 => Ok(Self::Ok),
+            v => Err(crate::errors::EnumError::new(NAME, v as i128),)
+        }
+    }
 }
 
 #[cfg(feature = "print-testcase")]
@@ -125,20 +141,7 @@ impl std::fmt::Display for MountResult {
 impl TryFrom<u32> for MountResult {
     type Error = crate::errors::EnumError;
     fn try_from(value: u32) -> Result<Self, Self::Error> {
-        match value {
-            0 => Ok(Self::InvalidMountee),
-            1 => Ok(Self::TooFarAway),
-            2 => Ok(Self::AlreadyMounted),
-            3 => Ok(Self::NotMountable),
-            4 => Ok(Self::NotYourPet),
-            5 => Ok(Self::Other),
-            6 => Ok(Self::Looting),
-            7 => Ok(Self::RaceCantMount),
-            8 => Ok(Self::Shapeshifted),
-            9 => Ok(Self::ForcedDismount),
-            10 => Ok(Self::Ok),
-            v => Err(crate::errors::EnumError::new(NAME, v.into()),)
-        }
+        Self::from_int(value)
     }
 }
 

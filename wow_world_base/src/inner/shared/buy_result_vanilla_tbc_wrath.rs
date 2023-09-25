@@ -55,6 +55,20 @@ impl BuyResult {
         ]
     }
 
+    pub const fn from_int(value: u8) -> Result<Self, crate::errors::EnumError> {
+        match value {
+            0 => Ok(Self::CantFindItem),
+            1 => Ok(Self::ItemAlreadySold),
+            2 => Ok(Self::NotEnoughtMoney),
+            4 => Ok(Self::SellerDontLikeYou),
+            5 => Ok(Self::DistanceTooFar),
+            7 => Ok(Self::ItemSoldOut),
+            8 => Ok(Self::CantCarryMore),
+            11 => Ok(Self::RankRequire),
+            12 => Ok(Self::ReputationRequire),
+            v => Err(crate::errors::EnumError::new(NAME, v as i128),)
+        }
+    }
 }
 
 #[cfg(feature = "print-testcase")]
@@ -102,18 +116,7 @@ impl std::fmt::Display for BuyResult {
 impl TryFrom<u8> for BuyResult {
     type Error = crate::errors::EnumError;
     fn try_from(value: u8) -> Result<Self, Self::Error> {
-        match value {
-            0 => Ok(Self::CantFindItem),
-            1 => Ok(Self::ItemAlreadySold),
-            2 => Ok(Self::NotEnoughtMoney),
-            4 => Ok(Self::SellerDontLikeYou),
-            5 => Ok(Self::DistanceTooFar),
-            7 => Ok(Self::ItemSoldOut),
-            8 => Ok(Self::CantCarryMore),
-            11 => Ok(Self::RankRequire),
-            12 => Ok(Self::ReputationRequire),
-            v => Err(crate::errors::EnumError::new(NAME, v.into()),)
-        }
+        Self::from_int(value)
     }
 }
 

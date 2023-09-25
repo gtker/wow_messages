@@ -59,6 +59,21 @@ impl CalendarStatus {
         ]
     }
 
+    pub const fn from_int(value: u8) -> Result<Self, crate::errors::EnumError> {
+        match value {
+            0 => Ok(Self::Invited),
+            1 => Ok(Self::Accepted),
+            2 => Ok(Self::Declined),
+            3 => Ok(Self::Confirmed),
+            4 => Ok(Self::Out),
+            5 => Ok(Self::Standby),
+            6 => Ok(Self::SignedUp),
+            7 => Ok(Self::NotSignedUp),
+            8 => Ok(Self::Tentative),
+            9 => Ok(Self::Removed),
+            v => Err(crate::errors::EnumError::new(NAME, v as i128),)
+        }
+    }
 }
 
 #[cfg(feature = "print-testcase")]
@@ -108,19 +123,7 @@ impl std::fmt::Display for CalendarStatus {
 impl TryFrom<u8> for CalendarStatus {
     type Error = crate::errors::EnumError;
     fn try_from(value: u8) -> Result<Self, Self::Error> {
-        match value {
-            0 => Ok(Self::Invited),
-            1 => Ok(Self::Accepted),
-            2 => Ok(Self::Declined),
-            3 => Ok(Self::Confirmed),
-            4 => Ok(Self::Out),
-            5 => Ok(Self::Standby),
-            6 => Ok(Self::SignedUp),
-            7 => Ok(Self::NotSignedUp),
-            8 => Ok(Self::Tentative),
-            9 => Ok(Self::Removed),
-            v => Err(crate::errors::EnumError::new(NAME, v.into()),)
-        }
+        Self::from_int(value)
     }
 }
 

@@ -115,6 +115,35 @@ impl TradeStatus {
         ]
     }
 
+    pub const fn from_int(value: u32) -> Result<Self, crate::errors::EnumError> {
+        match value {
+            0 => Ok(Self::Busy),
+            1 => Ok(Self::BeginTrade),
+            2 => Ok(Self::OpenWindow),
+            3 => Ok(Self::TradeCanceled),
+            4 => Ok(Self::TradeAccept),
+            5 => Ok(Self::Busy2),
+            6 => Ok(Self::NoTarget),
+            7 => Ok(Self::BackToTrade),
+            8 => Ok(Self::TradeComplete),
+            9 => Ok(Self::TradeRejected),
+            10 => Ok(Self::TargetToFar),
+            11 => Ok(Self::WrongFaction),
+            12 => Ok(Self::CloseWindow),
+            13 => Ok(Self::Unknown13),
+            14 => Ok(Self::IgnoreYou),
+            15 => Ok(Self::YouStunned),
+            16 => Ok(Self::TargetStunned),
+            17 => Ok(Self::YouDead),
+            18 => Ok(Self::TargetDead),
+            19 => Ok(Self::YouLogout),
+            20 => Ok(Self::TargetLogout),
+            21 => Ok(Self::TrialAccount),
+            22 => Ok(Self::OnlyConjured),
+            23 => Ok(Self::NotOnTaplist),
+            v => Err(crate::errors::EnumError::new(NAME, v as i128),)
+        }
+    }
 }
 
 #[cfg(feature = "print-testcase")]
@@ -192,33 +221,7 @@ impl std::fmt::Display for TradeStatus {
 impl TryFrom<u32> for TradeStatus {
     type Error = crate::errors::EnumError;
     fn try_from(value: u32) -> Result<Self, Self::Error> {
-        match value {
-            0 => Ok(Self::Busy),
-            1 => Ok(Self::BeginTrade),
-            2 => Ok(Self::OpenWindow),
-            3 => Ok(Self::TradeCanceled),
-            4 => Ok(Self::TradeAccept),
-            5 => Ok(Self::Busy2),
-            6 => Ok(Self::NoTarget),
-            7 => Ok(Self::BackToTrade),
-            8 => Ok(Self::TradeComplete),
-            9 => Ok(Self::TradeRejected),
-            10 => Ok(Self::TargetToFar),
-            11 => Ok(Self::WrongFaction),
-            12 => Ok(Self::CloseWindow),
-            13 => Ok(Self::Unknown13),
-            14 => Ok(Self::IgnoreYou),
-            15 => Ok(Self::YouStunned),
-            16 => Ok(Self::TargetStunned),
-            17 => Ok(Self::YouDead),
-            18 => Ok(Self::TargetDead),
-            19 => Ok(Self::YouLogout),
-            20 => Ok(Self::TargetLogout),
-            21 => Ok(Self::TrialAccount),
-            22 => Ok(Self::OnlyConjured),
-            23 => Ok(Self::NotOnTaplist),
-            v => Err(crate::errors::EnumError::new(NAME, v.into()),)
-        }
+        Self::from_int(value)
     }
 }
 

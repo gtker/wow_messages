@@ -55,6 +55,20 @@ impl AccountDataType {
         ]
     }
 
+    pub const fn from_int(value: u8) -> Result<Self, crate::errors::EnumError> {
+        match value {
+            0 => Ok(Self::GlobalConfigCache),
+            1 => Ok(Self::PerCharacterConfigCache),
+            2 => Ok(Self::GlobalBindingsCache),
+            3 => Ok(Self::PerCharacterBindingsCache),
+            4 => Ok(Self::GlobalMacrosCache),
+            5 => Ok(Self::PerCharacterMacrosCache),
+            6 => Ok(Self::PerCharacterLayoutCache),
+            7 => Ok(Self::PerCharacterChatCache),
+            8 => Ok(Self::NumAccountDataTypes),
+            v => Err(crate::errors::EnumError::new(NAME, v as i128),)
+        }
+    }
 }
 
 #[cfg(feature = "print-testcase")]
@@ -102,18 +116,7 @@ impl std::fmt::Display for AccountDataType {
 impl TryFrom<u8> for AccountDataType {
     type Error = crate::errors::EnumError;
     fn try_from(value: u8) -> Result<Self, Self::Error> {
-        match value {
-            0 => Ok(Self::GlobalConfigCache),
-            1 => Ok(Self::PerCharacterConfigCache),
-            2 => Ok(Self::GlobalBindingsCache),
-            3 => Ok(Self::PerCharacterBindingsCache),
-            4 => Ok(Self::GlobalMacrosCache),
-            5 => Ok(Self::PerCharacterMacrosCache),
-            6 => Ok(Self::PerCharacterLayoutCache),
-            7 => Ok(Self::PerCharacterChatCache),
-            8 => Ok(Self::NumAccountDataTypes),
-            v => Err(crate::errors::EnumError::new(NAME, v.into()),)
-        }
+        Self::from_int(value)
     }
 }
 

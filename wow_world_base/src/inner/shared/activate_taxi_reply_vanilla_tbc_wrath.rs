@@ -71,6 +71,24 @@ impl ActivateTaxiReply {
         ]
     }
 
+    pub const fn from_int(value: u32) -> Result<Self, crate::errors::EnumError> {
+        match value {
+            0 => Ok(Self::Ok),
+            1 => Ok(Self::UnspecifiedServerError),
+            2 => Ok(Self::NoSuchPath),
+            3 => Ok(Self::NotEnoughMoney),
+            4 => Ok(Self::TooFarAway),
+            5 => Ok(Self::NoVendorNearby),
+            6 => Ok(Self::NotVisited),
+            7 => Ok(Self::PlayerBusy),
+            8 => Ok(Self::PlayerAlreadyMounted),
+            9 => Ok(Self::PlayerShapeShifted),
+            10 => Ok(Self::PlayerMoving),
+            11 => Ok(Self::SameNode),
+            12 => Ok(Self::NotStanding),
+            v => Err(crate::errors::EnumError::new(NAME, v as i128),)
+        }
+    }
 }
 
 #[cfg(feature = "print-testcase")]
@@ -126,22 +144,7 @@ impl std::fmt::Display for ActivateTaxiReply {
 impl TryFrom<u32> for ActivateTaxiReply {
     type Error = crate::errors::EnumError;
     fn try_from(value: u32) -> Result<Self, Self::Error> {
-        match value {
-            0 => Ok(Self::Ok),
-            1 => Ok(Self::UnspecifiedServerError),
-            2 => Ok(Self::NoSuchPath),
-            3 => Ok(Self::NotEnoughMoney),
-            4 => Ok(Self::TooFarAway),
-            5 => Ok(Self::NoVendorNearby),
-            6 => Ok(Self::NotVisited),
-            7 => Ok(Self::PlayerBusy),
-            8 => Ok(Self::PlayerAlreadyMounted),
-            9 => Ok(Self::PlayerShapeShifted),
-            10 => Ok(Self::PlayerMoving),
-            11 => Ok(Self::SameNode),
-            12 => Ok(Self::NotStanding),
-            v => Err(crate::errors::EnumError::new(NAME, v.into()),)
-        }
+        Self::from_int(value)
     }
 }
 

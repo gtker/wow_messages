@@ -127,6 +127,37 @@ impl SoundType {
         ]
     }
 
+    pub const fn from_int(value: u8) -> Result<Self, crate::errors::EnumError> {
+        match value {
+            0 => Ok(Self::Unused),
+            1 => Ok(Self::Spells),
+            2 => Ok(Self::Ui),
+            3 => Ok(Self::Footsteps),
+            4 => Ok(Self::WeaponImpact),
+            6 => Ok(Self::WeaponMiss),
+            9 => Ok(Self::PickUpPutDown),
+            10 => Ok(Self::NpcCombat),
+            12 => Ok(Self::Errors),
+            14 => Ok(Self::Objects),
+            16 => Ok(Self::Death),
+            17 => Ok(Self::NpcGreetings),
+            18 => Ok(Self::Test),
+            19 => Ok(Self::ArmourFoley),
+            20 => Ok(Self::Footsteps2),
+            21 => Ok(Self::WaterCharacter),
+            22 => Ok(Self::WaterLiquid),
+            23 => Ok(Self::Tradeskills),
+            25 => Ok(Self::Doodads),
+            26 => Ok(Self::SpellFizzle),
+            27 => Ok(Self::NpcLoops),
+            28 => Ok(Self::ZoneMusic),
+            29 => Ok(Self::Emotes),
+            30 => Ok(Self::NarrationMusic),
+            31 => Ok(Self::Narration),
+            50 => Ok(Self::ZoneAmbience),
+            v => Err(crate::errors::EnumError::new(NAME, v as i128),)
+        }
+    }
 }
 
 #[cfg(feature = "print-testcase")]
@@ -208,35 +239,7 @@ impl std::fmt::Display for SoundType {
 impl TryFrom<u8> for SoundType {
     type Error = crate::errors::EnumError;
     fn try_from(value: u8) -> Result<Self, Self::Error> {
-        match value {
-            0 => Ok(Self::Unused),
-            1 => Ok(Self::Spells),
-            2 => Ok(Self::Ui),
-            3 => Ok(Self::Footsteps),
-            4 => Ok(Self::WeaponImpact),
-            6 => Ok(Self::WeaponMiss),
-            9 => Ok(Self::PickUpPutDown),
-            10 => Ok(Self::NpcCombat),
-            12 => Ok(Self::Errors),
-            14 => Ok(Self::Objects),
-            16 => Ok(Self::Death),
-            17 => Ok(Self::NpcGreetings),
-            18 => Ok(Self::Test),
-            19 => Ok(Self::ArmourFoley),
-            20 => Ok(Self::Footsteps2),
-            21 => Ok(Self::WaterCharacter),
-            22 => Ok(Self::WaterLiquid),
-            23 => Ok(Self::Tradeskills),
-            25 => Ok(Self::Doodads),
-            26 => Ok(Self::SpellFizzle),
-            27 => Ok(Self::NpcLoops),
-            28 => Ok(Self::ZoneMusic),
-            29 => Ok(Self::Emotes),
-            30 => Ok(Self::NarrationMusic),
-            31 => Ok(Self::Narration),
-            50 => Ok(Self::ZoneAmbience),
-            v => Err(crate::errors::EnumError::new(NAME, v.into()),)
-        }
+        Self::from_int(value)
     }
 }
 

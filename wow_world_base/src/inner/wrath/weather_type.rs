@@ -71,6 +71,24 @@ impl WeatherType {
         ]
     }
 
+    pub const fn from_int(value: u32) -> Result<Self, crate::errors::EnumError> {
+        match value {
+            0 => Ok(Self::Fine),
+            1 => Ok(Self::Fog),
+            3 => Ok(Self::LightRain),
+            4 => Ok(Self::MediumRain),
+            5 => Ok(Self::HeavyRain),
+            6 => Ok(Self::LightSnow),
+            7 => Ok(Self::MediumSnow),
+            8 => Ok(Self::HeavySnow),
+            22 => Ok(Self::LightSandstorm),
+            41 => Ok(Self::MediumSandstorm),
+            42 => Ok(Self::HeavySandstorm),
+            86 => Ok(Self::Thunders),
+            90 => Ok(Self::Blackrain),
+            v => Err(crate::errors::EnumError::new(NAME, v as i128),)
+        }
+    }
 }
 
 #[cfg(feature = "print-testcase")]
@@ -126,22 +144,7 @@ impl std::fmt::Display for WeatherType {
 impl TryFrom<u32> for WeatherType {
     type Error = crate::errors::EnumError;
     fn try_from(value: u32) -> Result<Self, Self::Error> {
-        match value {
-            0 => Ok(Self::Fine),
-            1 => Ok(Self::Fog),
-            3 => Ok(Self::LightRain),
-            4 => Ok(Self::MediumRain),
-            5 => Ok(Self::HeavyRain),
-            6 => Ok(Self::LightSnow),
-            7 => Ok(Self::MediumSnow),
-            8 => Ok(Self::HeavySnow),
-            22 => Ok(Self::LightSandstorm),
-            41 => Ok(Self::MediumSandstorm),
-            42 => Ok(Self::HeavySandstorm),
-            86 => Ok(Self::Thunders),
-            90 => Ok(Self::Blackrain),
-            v => Err(crate::errors::EnumError::new(NAME, v.into()),)
-        }
+        Self::from_int(value)
     }
 }
 

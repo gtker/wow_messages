@@ -48,6 +48,17 @@ impl SellItemResult {
         ]
     }
 
+    pub const fn from_int(value: u8) -> Result<Self, crate::errors::EnumError> {
+        match value {
+            1 => Ok(Self::CantFindItem),
+            2 => Ok(Self::CantSellItem),
+            3 => Ok(Self::CantFindVendor),
+            4 => Ok(Self::YouDontOwnThatItem),
+            5 => Ok(Self::Unk),
+            6 => Ok(Self::OnlyEmptyBag),
+            v => Err(crate::errors::EnumError::new(NAME, v as i128),)
+        }
+    }
 }
 
 #[cfg(feature = "print-testcase")]
@@ -89,15 +100,7 @@ impl std::fmt::Display for SellItemResult {
 impl TryFrom<u8> for SellItemResult {
     type Error = crate::errors::EnumError;
     fn try_from(value: u8) -> Result<Self, Self::Error> {
-        match value {
-            1 => Ok(Self::CantFindItem),
-            2 => Ok(Self::CantSellItem),
-            3 => Ok(Self::CantFindVendor),
-            4 => Ok(Self::YouDontOwnThatItem),
-            5 => Ok(Self::Unk),
-            6 => Ok(Self::OnlyEmptyBag),
-            v => Err(crate::errors::EnumError::new(NAME, v.into()),)
-        }
+        Self::from_int(value)
     }
 }
 

@@ -75,6 +75,25 @@ impl CinematicSequenceId {
         ]
     }
 
+    pub const fn from_int(value: u32) -> Result<Self, crate::errors::EnumError> {
+        match value {
+            0 => Ok(Self::Goblin),
+            1 => Ok(Self::PalantirOfAzora),
+            2 => Ok(Self::Undead),
+            21 => Ok(Self::Orc),
+            41 => Ok(Self::Dwarf),
+            61 => Ok(Self::NightElf),
+            81 => Ok(Self::Human),
+            101 => Ok(Self::Gnome),
+            121 => Ok(Self::Troll),
+            141 => Ok(Self::Tauren),
+            161 => Ok(Self::ScryCam),
+            162 => Ok(Self::BloodElf),
+            163 => Ok(Self::Draenei),
+            164 => Ok(Self::SunwellFiveMan),
+            v => Err(crate::errors::EnumError::new(NAME, v as i128),)
+        }
+    }
 }
 
 #[cfg(feature = "print-testcase")]
@@ -132,23 +151,7 @@ impl std::fmt::Display for CinematicSequenceId {
 impl TryFrom<u32> for CinematicSequenceId {
     type Error = crate::errors::EnumError;
     fn try_from(value: u32) -> Result<Self, Self::Error> {
-        match value {
-            0 => Ok(Self::Goblin),
-            1 => Ok(Self::PalantirOfAzora),
-            2 => Ok(Self::Undead),
-            21 => Ok(Self::Orc),
-            41 => Ok(Self::Dwarf),
-            61 => Ok(Self::NightElf),
-            81 => Ok(Self::Human),
-            101 => Ok(Self::Gnome),
-            121 => Ok(Self::Troll),
-            141 => Ok(Self::Tauren),
-            161 => Ok(Self::ScryCam),
-            162 => Ok(Self::BloodElf),
-            163 => Ok(Self::Draenei),
-            164 => Ok(Self::SunwellFiveMan),
-            v => Err(crate::errors::EnumError::new(NAME, v.into()),)
-        }
+        Self::from_int(value)
     }
 }
 

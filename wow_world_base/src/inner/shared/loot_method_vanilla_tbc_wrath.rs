@@ -59,6 +59,20 @@ impl LootMethod {
         ]
     }
 
+    pub const fn from_int(value: u8) -> Result<Self, crate::errors::EnumError> {
+        match value {
+            0 => Ok(Self::ErrorX),
+            1 => Ok(Self::Corpse),
+            2 => Ok(Self::Pickpocketing),
+            3 => Ok(Self::Fishing),
+            4 => Ok(Self::Disenchanting),
+            6 => Ok(Self::Skinning),
+            20 => Ok(Self::Fishinghole),
+            21 => Ok(Self::FishingFail),
+            22 => Ok(Self::Insignia),
+            v => Err(crate::errors::EnumError::new(NAME, v as i128),)
+        }
+    }
 }
 
 #[cfg(feature = "print-testcase")]
@@ -106,18 +120,7 @@ impl std::fmt::Display for LootMethod {
 impl TryFrom<u8> for LootMethod {
     type Error = crate::errors::EnumError;
     fn try_from(value: u8) -> Result<Self, Self::Error> {
-        match value {
-            0 => Ok(Self::ErrorX),
-            1 => Ok(Self::Corpse),
-            2 => Ok(Self::Pickpocketing),
-            3 => Ok(Self::Fishing),
-            4 => Ok(Self::Disenchanting),
-            6 => Ok(Self::Skinning),
-            20 => Ok(Self::Fishinghole),
-            21 => Ok(Self::FishingFail),
-            22 => Ok(Self::Insignia),
-            v => Err(crate::errors::EnumError::new(NAME, v.into()),)
-        }
+        Self::from_int(value)
     }
 }
 

@@ -43,6 +43,17 @@ impl CompressedMoveOpcode {
         ]
     }
 
+    pub const fn from_int(value: u16) -> Result<Self, crate::errors::EnumError> {
+        match value {
+            221 => Ok(Self::SmsgMonsterMove),
+            686 => Ok(Self::SmsgMonsterMoveTransport),
+            766 => Ok(Self::SmsgSplineSetRunSpeed),
+            772 => Ok(Self::SmsgSplineMoveUnroot),
+            781 => Ok(Self::SmsgSplineMoveSetRunMode),
+            782 => Ok(Self::SmsgSplineMoveSetWalkMode),
+            v => Err(crate::errors::EnumError::new(NAME, v as i128),)
+        }
+    }
 }
 
 #[cfg(feature = "print-testcase")]
@@ -84,15 +95,7 @@ impl std::fmt::Display for CompressedMoveOpcode {
 impl TryFrom<u16> for CompressedMoveOpcode {
     type Error = crate::errors::EnumError;
     fn try_from(value: u16) -> Result<Self, Self::Error> {
-        match value {
-            221 => Ok(Self::SmsgMonsterMove),
-            686 => Ok(Self::SmsgMonsterMoveTransport),
-            766 => Ok(Self::SmsgSplineSetRunSpeed),
-            772 => Ok(Self::SmsgSplineMoveUnroot),
-            781 => Ok(Self::SmsgSplineMoveSetRunMode),
-            782 => Ok(Self::SmsgSplineMoveSetWalkMode),
-            v => Err(crate::errors::EnumError::new(NAME, v.into()),)
-        }
+        Self::from_int(value)
     }
 }
 

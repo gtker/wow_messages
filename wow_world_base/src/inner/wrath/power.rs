@@ -51,6 +51,19 @@ impl Power {
         ]
     }
 
+    pub const fn from_int(value: u8) -> Result<Self, crate::errors::EnumError> {
+        match value {
+            0 => Ok(Self::Mana),
+            1 => Ok(Self::Rage),
+            2 => Ok(Self::Focus),
+            3 => Ok(Self::Energy),
+            4 => Ok(Self::Happiness),
+            5 => Ok(Self::Rune),
+            6 => Ok(Self::RunicPower),
+            254 => Ok(Self::Health),
+            v => Err(crate::errors::EnumError::new(NAME, v as i128),)
+        }
+    }
 }
 
 #[cfg(feature = "print-testcase")]
@@ -96,17 +109,7 @@ impl std::fmt::Display for Power {
 impl TryFrom<u8> for Power {
     type Error = crate::errors::EnumError;
     fn try_from(value: u8) -> Result<Self, Self::Error> {
-        match value {
-            0 => Ok(Self::Mana),
-            1 => Ok(Self::Rage),
-            2 => Ok(Self::Focus),
-            3 => Ok(Self::Energy),
-            4 => Ok(Self::Happiness),
-            5 => Ok(Self::Rune),
-            6 => Ok(Self::RunicPower),
-            254 => Ok(Self::Health),
-            v => Err(crate::errors::EnumError::new(NAME, v.into()),)
-        }
+        Self::from_int(value)
     }
 }
 

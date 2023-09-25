@@ -39,6 +39,16 @@ impl MonsterMoveType {
         ]
     }
 
+    pub const fn from_int(value: u8) -> Result<Self, crate::errors::EnumError> {
+        match value {
+            0 => Ok(Self::Normal),
+            1 => Ok(Self::Stop),
+            2 => Ok(Self::FacingSpot),
+            3 => Ok(Self::FacingTarget),
+            4 => Ok(Self::FacingAngle),
+            v => Err(crate::errors::EnumError::new(NAME, v as i128),)
+        }
+    }
 }
 
 #[cfg(feature = "print-testcase")]
@@ -78,14 +88,7 @@ impl std::fmt::Display for MonsterMoveType {
 impl TryFrom<u8> for MonsterMoveType {
     type Error = crate::errors::EnumError;
     fn try_from(value: u8) -> Result<Self, Self::Error> {
-        match value {
-            0 => Ok(Self::Normal),
-            1 => Ok(Self::Stop),
-            2 => Ok(Self::FacingSpot),
-            3 => Ok(Self::FacingTarget),
-            4 => Ok(Self::FacingAngle),
-            v => Err(crate::errors::EnumError::new(NAME, v.into()),)
-        }
+        Self::from_int(value)
     }
 }
 

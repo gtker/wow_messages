@@ -35,6 +35,15 @@ impl BarberShopResult {
         ]
     }
 
+    pub const fn from_int(value: u8) -> Result<Self, crate::errors::EnumError> {
+        match value {
+            0 => Ok(Self::Ok),
+            1 => Ok(Self::NotEnoughMoney),
+            2 => Ok(Self::MustBeSeatedInBarberChair),
+            3 => Ok(Self::NotEnoughMoney2),
+            v => Err(crate::errors::EnumError::new(NAME, v as i128),)
+        }
+    }
 }
 
 #[cfg(feature = "print-testcase")]
@@ -72,13 +81,7 @@ impl std::fmt::Display for BarberShopResult {
 impl TryFrom<u8> for BarberShopResult {
     type Error = crate::errors::EnumError;
     fn try_from(value: u8) -> Result<Self, Self::Error> {
-        match value {
-            0 => Ok(Self::Ok),
-            1 => Ok(Self::NotEnoughMoney),
-            2 => Ok(Self::MustBeSeatedInBarberChair),
-            3 => Ok(Self::NotEnoughMoney2),
-            v => Err(crate::errors::EnumError::new(NAME, v.into()),)
-        }
+        Self::from_int(value)
     }
 }
 

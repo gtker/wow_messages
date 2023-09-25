@@ -65,6 +65,20 @@ impl QuestPartyMessage {
         ]
     }
 
+    pub const fn from_int(value: u8) -> Result<Self, crate::errors::EnumError> {
+        match value {
+            0 => Ok(Self::SharingQuest),
+            1 => Ok(Self::CantTakeQuest),
+            2 => Ok(Self::AcceptQuest),
+            3 => Ok(Self::DeclineQuest),
+            4 => Ok(Self::TooFar),
+            5 => Ok(Self::Busy),
+            6 => Ok(Self::LogFull),
+            7 => Ok(Self::HaveQuest),
+            8 => Ok(Self::FinishQuest),
+            v => Err(crate::errors::EnumError::new(NAME, v as i128),)
+        }
+    }
 }
 
 #[cfg(feature = "print-testcase")]
@@ -112,18 +126,7 @@ impl std::fmt::Display for QuestPartyMessage {
 impl TryFrom<u8> for QuestPartyMessage {
     type Error = crate::errors::EnumError;
     fn try_from(value: u8) -> Result<Self, Self::Error> {
-        match value {
-            0 => Ok(Self::SharingQuest),
-            1 => Ok(Self::CantTakeQuest),
-            2 => Ok(Self::AcceptQuest),
-            3 => Ok(Self::DeclineQuest),
-            4 => Ok(Self::TooFar),
-            5 => Ok(Self::Busy),
-            6 => Ok(Self::LogFull),
-            7 => Ok(Self::HaveQuest),
-            8 => Ok(Self::FinishQuest),
-            v => Err(crate::errors::EnumError::new(NAME, v.into()),)
-        }
+        Self::from_int(value)
     }
 }
 

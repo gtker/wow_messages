@@ -39,6 +39,16 @@ impl TransferAbortReason {
         ]
     }
 
+    pub const fn from_int(value: u8) -> Result<Self, crate::errors::EnumError> {
+        match value {
+            0 => Ok(Self::None),
+            1 => Ok(Self::IsFull),
+            2 => Ok(Self::NotFound),
+            3 => Ok(Self::TooManyInstances),
+            5 => Ok(Self::ZoneIsInCombat),
+            v => Err(crate::errors::EnumError::new(NAME, v as i128),)
+        }
+    }
 }
 
 #[cfg(feature = "print-testcase")]
@@ -78,14 +88,7 @@ impl std::fmt::Display for TransferAbortReason {
 impl TryFrom<u8> for TransferAbortReason {
     type Error = crate::errors::EnumError;
     fn try_from(value: u8) -> Result<Self, Self::Error> {
-        match value {
-            0 => Ok(Self::None),
-            1 => Ok(Self::IsFull),
-            2 => Ok(Self::NotFound),
-            3 => Ok(Self::TooManyInstances),
-            5 => Ok(Self::ZoneIsInCombat),
-            v => Err(crate::errors::EnumError::new(NAME, v.into()),)
-        }
+        Self::from_int(value)
     }
 }
 

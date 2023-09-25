@@ -47,6 +47,17 @@ impl SizeClass {
         ]
     }
 
+    pub const fn from_int(value: i8) -> Result<Self, crate::errors::EnumError> {
+        match value {
+            -1 => Ok(Self::None),
+            0 => Ok(Self::Small),
+            1 => Ok(Self::Medium),
+            2 => Ok(Self::Large),
+            3 => Ok(Self::Giant),
+            4 => Ok(Self::Colossal),
+            v => Err(crate::errors::EnumError::new(NAME, v as i128),)
+        }
+    }
 }
 
 #[cfg(feature = "print-testcase")]
@@ -88,15 +99,7 @@ impl std::fmt::Display for SizeClass {
 impl TryFrom<i8> for SizeClass {
     type Error = crate::errors::EnumError;
     fn try_from(value: i8) -> Result<Self, Self::Error> {
-        match value {
-            -1 => Ok(Self::None),
-            0 => Ok(Self::Small),
-            1 => Ok(Self::Medium),
-            2 => Ok(Self::Large),
-            3 => Ok(Self::Giant),
-            4 => Ok(Self::Colossal),
-            v => Err(crate::errors::EnumError::new(NAME, v.into()),)
-        }
+        Self::from_int(value)
     }
 }
 

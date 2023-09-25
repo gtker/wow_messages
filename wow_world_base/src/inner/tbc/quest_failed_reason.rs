@@ -79,6 +79,23 @@ impl QuestFailedReason {
         ]
     }
 
+    pub const fn from_int(value: u32) -> Result<Self, crate::errors::EnumError> {
+        match value {
+            0 => Ok(Self::DontHaveReq),
+            1 => Ok(Self::QuestFailedLowLevel),
+            6 => Ok(Self::QuestFailedWrongRace),
+            7 => Ok(Self::QuestAlreadyDone),
+            12 => Ok(Self::QuestOnlyOneTimed),
+            13 => Ok(Self::QuestAlreadyOn),
+            16 => Ok(Self::QuestFailedExpansion),
+            18 => Ok(Self::QuestAlreadyOn2),
+            21 => Ok(Self::QuestFailedMissingItems),
+            23 => Ok(Self::QuestFailedNotEnoughMoney),
+            26 => Ok(Self::DailyQuestsRemaining),
+            27 => Ok(Self::QuestFailedCais),
+            v => Err(crate::errors::EnumError::new(NAME, v as i128),)
+        }
+    }
 }
 
 #[cfg(feature = "print-testcase")]
@@ -132,21 +149,7 @@ impl std::fmt::Display for QuestFailedReason {
 impl TryFrom<u32> for QuestFailedReason {
     type Error = crate::errors::EnumError;
     fn try_from(value: u32) -> Result<Self, Self::Error> {
-        match value {
-            0 => Ok(Self::DontHaveReq),
-            1 => Ok(Self::QuestFailedLowLevel),
-            6 => Ok(Self::QuestFailedWrongRace),
-            7 => Ok(Self::QuestAlreadyDone),
-            12 => Ok(Self::QuestOnlyOneTimed),
-            13 => Ok(Self::QuestAlreadyOn),
-            16 => Ok(Self::QuestFailedExpansion),
-            18 => Ok(Self::QuestAlreadyOn2),
-            21 => Ok(Self::QuestFailedMissingItems),
-            23 => Ok(Self::QuestFailedNotEnoughMoney),
-            26 => Ok(Self::DailyQuestsRemaining),
-            27 => Ok(Self::QuestFailedCais),
-            v => Err(crate::errors::EnumError::new(NAME, v.into()),)
-        }
+        Self::from_int(value)
     }
 }
 

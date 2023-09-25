@@ -87,6 +87,28 @@ impl ItemClass {
         ]
     }
 
+    pub const fn from_int(value: u8) -> Result<Self, crate::errors::EnumError> {
+        match value {
+            0 => Ok(Self::Consumable),
+            1 => Ok(Self::Container),
+            2 => Ok(Self::Weapon),
+            3 => Ok(Self::Gem),
+            4 => Ok(Self::Armor),
+            5 => Ok(Self::Reagent),
+            6 => Ok(Self::Projectile),
+            7 => Ok(Self::TradeGoods),
+            8 => Ok(Self::Generic),
+            9 => Ok(Self::Recipe),
+            10 => Ok(Self::Money),
+            11 => Ok(Self::Quiver),
+            12 => Ok(Self::Quest),
+            13 => Ok(Self::Key),
+            14 => Ok(Self::Permanent),
+            15 => Ok(Self::Misc),
+            16 => Ok(Self::Glyph),
+            v => Err(crate::errors::EnumError::new(NAME, v as i128),)
+        }
+    }
 }
 
 #[cfg(feature = "print-testcase")]
@@ -150,26 +172,7 @@ impl std::fmt::Display for ItemClass {
 impl TryFrom<u8> for ItemClass {
     type Error = crate::errors::EnumError;
     fn try_from(value: u8) -> Result<Self, Self::Error> {
-        match value {
-            0 => Ok(Self::Consumable),
-            1 => Ok(Self::Container),
-            2 => Ok(Self::Weapon),
-            3 => Ok(Self::Gem),
-            4 => Ok(Self::Armor),
-            5 => Ok(Self::Reagent),
-            6 => Ok(Self::Projectile),
-            7 => Ok(Self::TradeGoods),
-            8 => Ok(Self::Generic),
-            9 => Ok(Self::Recipe),
-            10 => Ok(Self::Money),
-            11 => Ok(Self::Quiver),
-            12 => Ok(Self::Quest),
-            13 => Ok(Self::Key),
-            14 => Ok(Self::Permanent),
-            15 => Ok(Self::Misc),
-            16 => Ok(Self::Glyph),
-            v => Err(crate::errors::EnumError::new(NAME, v.into()),)
-        }
+        Self::from_int(value)
     }
 }
 

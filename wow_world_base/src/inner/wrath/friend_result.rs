@@ -87,6 +87,28 @@ impl FriendResult {
         ]
     }
 
+    pub const fn from_int(value: u8) -> Result<Self, crate::errors::EnumError> {
+        match value {
+            0 => Ok(Self::DbError),
+            1 => Ok(Self::ListFull),
+            2 => Ok(Self::Online),
+            3 => Ok(Self::Offline),
+            4 => Ok(Self::NotFound),
+            5 => Ok(Self::Removed),
+            6 => Ok(Self::AddedOnline),
+            7 => Ok(Self::AddedOffline),
+            8 => Ok(Self::Already),
+            9 => Ok(Self::SelfX),
+            10 => Ok(Self::Enemy),
+            11 => Ok(Self::IgnoreFull),
+            12 => Ok(Self::IgnoreSelf),
+            13 => Ok(Self::IgnoreNotFound),
+            14 => Ok(Self::IgnoreAlready),
+            15 => Ok(Self::IgnoreAdded),
+            16 => Ok(Self::IgnoreRemoved),
+            v => Err(crate::errors::EnumError::new(NAME, v as i128),)
+        }
+    }
 }
 
 #[cfg(feature = "print-testcase")]
@@ -150,26 +172,7 @@ impl std::fmt::Display for FriendResult {
 impl TryFrom<u8> for FriendResult {
     type Error = crate::errors::EnumError;
     fn try_from(value: u8) -> Result<Self, Self::Error> {
-        match value {
-            0 => Ok(Self::DbError),
-            1 => Ok(Self::ListFull),
-            2 => Ok(Self::Online),
-            3 => Ok(Self::Offline),
-            4 => Ok(Self::NotFound),
-            5 => Ok(Self::Removed),
-            6 => Ok(Self::AddedOnline),
-            7 => Ok(Self::AddedOffline),
-            8 => Ok(Self::Already),
-            9 => Ok(Self::SelfX),
-            10 => Ok(Self::Enemy),
-            11 => Ok(Self::IgnoreFull),
-            12 => Ok(Self::IgnoreSelf),
-            13 => Ok(Self::IgnoreNotFound),
-            14 => Ok(Self::IgnoreAlready),
-            15 => Ok(Self::IgnoreAdded),
-            16 => Ok(Self::IgnoreRemoved),
-            v => Err(crate::errors::EnumError::new(NAME, v.into()),)
-        }
+        Self::from_int(value)
     }
 }
 

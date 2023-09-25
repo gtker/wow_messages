@@ -84,6 +84,24 @@ impl LootMethodError {
         ]
     }
 
+    pub const fn from_int(value: u8) -> Result<Self, crate::errors::EnumError> {
+        match value {
+            0 => Ok(Self::DidntKill),
+            4 => Ok(Self::TooFar),
+            5 => Ok(Self::BadFacing),
+            6 => Ok(Self::Locked),
+            8 => Ok(Self::Notstanding),
+            9 => Ok(Self::Stunned),
+            10 => Ok(Self::PlayerNotFound),
+            11 => Ok(Self::PlayTimeExceeded),
+            12 => Ok(Self::MasterInvFull),
+            13 => Ok(Self::MasterUniqueItem),
+            14 => Ok(Self::MasterOther),
+            15 => Ok(Self::AlreadyPickpocketed),
+            16 => Ok(Self::NotWhileShapeshifted),
+            v => Err(crate::errors::EnumError::new(NAME, v as i128),)
+        }
+    }
 }
 
 #[cfg(feature = "print-testcase")]
@@ -139,22 +157,7 @@ impl std::fmt::Display for LootMethodError {
 impl TryFrom<u8> for LootMethodError {
     type Error = crate::errors::EnumError;
     fn try_from(value: u8) -> Result<Self, Self::Error> {
-        match value {
-            0 => Ok(Self::DidntKill),
-            4 => Ok(Self::TooFar),
-            5 => Ok(Self::BadFacing),
-            6 => Ok(Self::Locked),
-            8 => Ok(Self::Notstanding),
-            9 => Ok(Self::Stunned),
-            10 => Ok(Self::PlayerNotFound),
-            11 => Ok(Self::PlayTimeExceeded),
-            12 => Ok(Self::MasterInvFull),
-            13 => Ok(Self::MasterUniqueItem),
-            14 => Ok(Self::MasterOther),
-            15 => Ok(Self::AlreadyPickpocketed),
-            16 => Ok(Self::NotWhileShapeshifted),
-            v => Err(crate::errors::EnumError::new(NAME, v.into()),)
-        }
+        Self::from_int(value)
     }
 }
 

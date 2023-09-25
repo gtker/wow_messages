@@ -183,6 +183,52 @@ impl CreatureFamily {
         ]
     }
 
+    pub const fn from_int(value: u8) -> Result<Self, crate::errors::EnumError> {
+        match value {
+            0 => Ok(Self::None),
+            1 => Ok(Self::Wolf),
+            2 => Ok(Self::Cat),
+            3 => Ok(Self::Spider),
+            4 => Ok(Self::Bear),
+            5 => Ok(Self::Boar),
+            6 => Ok(Self::Crocolisk),
+            7 => Ok(Self::CarrionBird),
+            8 => Ok(Self::Crab),
+            9 => Ok(Self::Gorilla),
+            11 => Ok(Self::Raptor),
+            12 => Ok(Self::Tallstrider),
+            15 => Ok(Self::Felhunter),
+            16 => Ok(Self::Voidwalker),
+            17 => Ok(Self::Succubus),
+            19 => Ok(Self::Doomguard),
+            20 => Ok(Self::Scorpid),
+            21 => Ok(Self::Turtle),
+            23 => Ok(Self::Imp),
+            24 => Ok(Self::Bat),
+            25 => Ok(Self::Hyena),
+            26 => Ok(Self::BirdOfPrey),
+            27 => Ok(Self::WindSerpent),
+            28 => Ok(Self::RemoteControl),
+            29 => Ok(Self::Felguard),
+            30 => Ok(Self::Dragonhawk),
+            31 => Ok(Self::Ravager),
+            32 => Ok(Self::WarpStalker),
+            33 => Ok(Self::Sporebat),
+            34 => Ok(Self::NetherRay),
+            35 => Ok(Self::Serpent),
+            37 => Ok(Self::Moth),
+            38 => Ok(Self::Chimaera),
+            39 => Ok(Self::Devilsaur),
+            40 => Ok(Self::Ghoul),
+            41 => Ok(Self::Silithid),
+            42 => Ok(Self::Worm),
+            43 => Ok(Self::Rhino),
+            44 => Ok(Self::Wasp),
+            45 => Ok(Self::CoreHound),
+            46 => Ok(Self::SpiritBeast),
+            v => Err(crate::errors::EnumError::new(NAME, v as i128),)
+        }
+    }
 }
 
 #[cfg(feature = "print-testcase")]
@@ -294,50 +340,7 @@ impl std::fmt::Display for CreatureFamily {
 impl TryFrom<u8> for CreatureFamily {
     type Error = crate::errors::EnumError;
     fn try_from(value: u8) -> Result<Self, Self::Error> {
-        match value {
-            0 => Ok(Self::None),
-            1 => Ok(Self::Wolf),
-            2 => Ok(Self::Cat),
-            3 => Ok(Self::Spider),
-            4 => Ok(Self::Bear),
-            5 => Ok(Self::Boar),
-            6 => Ok(Self::Crocolisk),
-            7 => Ok(Self::CarrionBird),
-            8 => Ok(Self::Crab),
-            9 => Ok(Self::Gorilla),
-            11 => Ok(Self::Raptor),
-            12 => Ok(Self::Tallstrider),
-            15 => Ok(Self::Felhunter),
-            16 => Ok(Self::Voidwalker),
-            17 => Ok(Self::Succubus),
-            19 => Ok(Self::Doomguard),
-            20 => Ok(Self::Scorpid),
-            21 => Ok(Self::Turtle),
-            23 => Ok(Self::Imp),
-            24 => Ok(Self::Bat),
-            25 => Ok(Self::Hyena),
-            26 => Ok(Self::BirdOfPrey),
-            27 => Ok(Self::WindSerpent),
-            28 => Ok(Self::RemoteControl),
-            29 => Ok(Self::Felguard),
-            30 => Ok(Self::Dragonhawk),
-            31 => Ok(Self::Ravager),
-            32 => Ok(Self::WarpStalker),
-            33 => Ok(Self::Sporebat),
-            34 => Ok(Self::NetherRay),
-            35 => Ok(Self::Serpent),
-            37 => Ok(Self::Moth),
-            38 => Ok(Self::Chimaera),
-            39 => Ok(Self::Devilsaur),
-            40 => Ok(Self::Ghoul),
-            41 => Ok(Self::Silithid),
-            42 => Ok(Self::Worm),
-            43 => Ok(Self::Rhino),
-            44 => Ok(Self::Wasp),
-            45 => Ok(Self::CoreHound),
-            46 => Ok(Self::SpiritBeast),
-            v => Err(crate::errors::EnumError::new(NAME, v.into()),)
-        }
+        Self::from_int(value)
     }
 }
 

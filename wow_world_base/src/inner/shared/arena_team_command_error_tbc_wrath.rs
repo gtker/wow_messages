@@ -80,6 +80,26 @@ impl ArenaTeamCommandError {
         ]
     }
 
+    pub const fn from_int(value: u32) -> Result<Self, crate::errors::EnumError> {
+        match value {
+            1 => Ok(Self::ArenaTeamInternal),
+            2 => Ok(Self::AlreadyInArenaTeam),
+            3 => Ok(Self::AlreadyInArenaTeamS),
+            4 => Ok(Self::InvitedToArenaTeam),
+            5 => Ok(Self::AlreadyInvitedToArenaTeamS),
+            6 => Ok(Self::ArenaTeamNameInvalid),
+            7 => Ok(Self::ArenaTeamNameExistsS),
+            8 => Ok(Self::ArenaTeamLeaderLeaveS),
+            9 => Ok(Self::ArenaTeamPlayerNotInTeam),
+            10 => Ok(Self::ArenaTeamPlayerNotInTeamSs),
+            11 => Ok(Self::ArenaTeamPlayerNotFoundS),
+            12 => Ok(Self::ArenaTeamNotAllied),
+            19 => Ok(Self::ArenaTeamIgnoringYouS),
+            21 => Ok(Self::ArenaTeamTargetTooLowS),
+            22 => Ok(Self::ArenaTeamTooManyMembersS),
+            v => Err(crate::errors::EnumError::new(NAME, v as i128),)
+        }
+    }
 }
 
 #[cfg(feature = "print-testcase")]
@@ -139,24 +159,7 @@ impl std::fmt::Display for ArenaTeamCommandError {
 impl TryFrom<u32> for ArenaTeamCommandError {
     type Error = crate::errors::EnumError;
     fn try_from(value: u32) -> Result<Self, Self::Error> {
-        match value {
-            1 => Ok(Self::ArenaTeamInternal),
-            2 => Ok(Self::AlreadyInArenaTeam),
-            3 => Ok(Self::AlreadyInArenaTeamS),
-            4 => Ok(Self::InvitedToArenaTeam),
-            5 => Ok(Self::AlreadyInvitedToArenaTeamS),
-            6 => Ok(Self::ArenaTeamNameInvalid),
-            7 => Ok(Self::ArenaTeamNameExistsS),
-            8 => Ok(Self::ArenaTeamLeaderLeaveS),
-            9 => Ok(Self::ArenaTeamPlayerNotInTeam),
-            10 => Ok(Self::ArenaTeamPlayerNotInTeamSs),
-            11 => Ok(Self::ArenaTeamPlayerNotFoundS),
-            12 => Ok(Self::ArenaTeamNotAllied),
-            19 => Ok(Self::ArenaTeamIgnoringYouS),
-            21 => Ok(Self::ArenaTeamTargetTooLowS),
-            22 => Ok(Self::ArenaTeamTooManyMembersS),
-            v => Err(crate::errors::EnumError::new(NAME, v.into()),)
-        }
+        Self::from_int(value)
     }
 }
 

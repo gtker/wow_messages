@@ -135,6 +135,40 @@ impl InventoryType {
         ]
     }
 
+    pub const fn from_int(value: u8) -> Result<Self, crate::errors::EnumError> {
+        match value {
+            0 => Ok(Self::NonEquip),
+            1 => Ok(Self::Head),
+            2 => Ok(Self::Neck),
+            3 => Ok(Self::Shoulders),
+            4 => Ok(Self::Body),
+            5 => Ok(Self::Chest),
+            6 => Ok(Self::Waist),
+            7 => Ok(Self::Legs),
+            8 => Ok(Self::Feet),
+            9 => Ok(Self::Wrists),
+            10 => Ok(Self::Hands),
+            11 => Ok(Self::Finger),
+            12 => Ok(Self::Trinket),
+            13 => Ok(Self::Weapon),
+            14 => Ok(Self::Shield),
+            15 => Ok(Self::Ranged),
+            16 => Ok(Self::Cloak),
+            17 => Ok(Self::TwoHandedWeapon),
+            18 => Ok(Self::Bag),
+            19 => Ok(Self::Tabard),
+            20 => Ok(Self::Robe),
+            21 => Ok(Self::WeaponMainHand),
+            22 => Ok(Self::WeaponOffHand),
+            23 => Ok(Self::Holdable),
+            24 => Ok(Self::Ammo),
+            25 => Ok(Self::Thrown),
+            26 => Ok(Self::RangedRight),
+            27 => Ok(Self::Quiver),
+            28 => Ok(Self::Relic),
+            v => Err(crate::errors::EnumError::new(NAME, v as i128),)
+        }
+    }
 }
 
 #[cfg(feature = "print-testcase")]
@@ -222,38 +256,7 @@ impl std::fmt::Display for InventoryType {
 impl TryFrom<u8> for InventoryType {
     type Error = crate::errors::EnumError;
     fn try_from(value: u8) -> Result<Self, Self::Error> {
-        match value {
-            0 => Ok(Self::NonEquip),
-            1 => Ok(Self::Head),
-            2 => Ok(Self::Neck),
-            3 => Ok(Self::Shoulders),
-            4 => Ok(Self::Body),
-            5 => Ok(Self::Chest),
-            6 => Ok(Self::Waist),
-            7 => Ok(Self::Legs),
-            8 => Ok(Self::Feet),
-            9 => Ok(Self::Wrists),
-            10 => Ok(Self::Hands),
-            11 => Ok(Self::Finger),
-            12 => Ok(Self::Trinket),
-            13 => Ok(Self::Weapon),
-            14 => Ok(Self::Shield),
-            15 => Ok(Self::Ranged),
-            16 => Ok(Self::Cloak),
-            17 => Ok(Self::TwoHandedWeapon),
-            18 => Ok(Self::Bag),
-            19 => Ok(Self::Tabard),
-            20 => Ok(Self::Robe),
-            21 => Ok(Self::WeaponMainHand),
-            22 => Ok(Self::WeaponOffHand),
-            23 => Ok(Self::Holdable),
-            24 => Ok(Self::Ammo),
-            25 => Ok(Self::Thrown),
-            26 => Ok(Self::RangedRight),
-            27 => Ok(Self::Quiver),
-            28 => Ok(Self::Relic),
-            v => Err(crate::errors::EnumError::new(NAME, v.into()),)
-        }
+        Self::from_int(value)
     }
 }
 

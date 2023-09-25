@@ -31,6 +31,14 @@ impl RealmSplitState {
         ]
     }
 
+    pub const fn from_int(value: u32) -> Result<Self, crate::errors::EnumError> {
+        match value {
+            0 => Ok(Self::Normal),
+            1 => Ok(Self::Split),
+            2 => Ok(Self::SplitPending),
+            v => Err(crate::errors::EnumError::new(NAME, v as i128),)
+        }
+    }
 }
 
 #[cfg(feature = "print-testcase")]
@@ -66,12 +74,7 @@ impl std::fmt::Display for RealmSplitState {
 impl TryFrom<u32> for RealmSplitState {
     type Error = crate::errors::EnumError;
     fn try_from(value: u32) -> Result<Self, Self::Error> {
-        match value {
-            0 => Ok(Self::Normal),
-            1 => Ok(Self::Split),
-            2 => Ok(Self::SplitPending),
-            v => Err(crate::errors::EnumError::new(NAME, v.into()),)
-        }
+        Self::from_int(value)
     }
 }
 

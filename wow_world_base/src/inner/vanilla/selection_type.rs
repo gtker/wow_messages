@@ -43,6 +43,16 @@ impl SelectionType {
         ]
     }
 
+    pub const fn from_int(value: u8) -> Result<Self, crate::errors::EnumError> {
+        match value {
+            0 => Ok(Self::BaseSkin),
+            1 => Ok(Self::Face),
+            2 => Ok(Self::FacialHair),
+            3 => Ok(Self::Hair),
+            4 => Ok(Self::Underwear),
+            v => Err(crate::errors::EnumError::new(NAME, v as i128),)
+        }
+    }
 }
 
 #[cfg(feature = "print-testcase")]
@@ -82,14 +92,7 @@ impl std::fmt::Display for SelectionType {
 impl TryFrom<u8> for SelectionType {
     type Error = crate::errors::EnumError;
     fn try_from(value: u8) -> Result<Self, Self::Error> {
-        match value {
-            0 => Ok(Self::BaseSkin),
-            1 => Ok(Self::Face),
-            2 => Ok(Self::FacialHair),
-            3 => Ok(Self::Hair),
-            4 => Ok(Self::Underwear),
-            v => Err(crate::errors::EnumError::new(NAME, v.into()),)
-        }
+        Self::from_int(value)
     }
 }
 

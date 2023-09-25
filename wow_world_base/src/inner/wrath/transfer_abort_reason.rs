@@ -97,6 +97,27 @@ impl TransferAbortReason {
         ]
     }
 
+    pub const fn from_int(value: u8) -> Result<Self, crate::errors::EnumError> {
+        match value {
+            0 => Ok(Self::None),
+            1 => Ok(Self::ErrorX),
+            2 => Ok(Self::MaxPlayers),
+            3 => Ok(Self::NotFound),
+            4 => Ok(Self::TooManyInstances),
+            6 => Ok(Self::ZoneInCombat),
+            7 => Ok(Self::InsufficientExpansionLevel),
+            8 => Ok(Self::DifficultyNotAvailable),
+            9 => Ok(Self::UniqueMessage),
+            10 => Ok(Self::TooManyRealmInstances),
+            11 => Ok(Self::NeedGroup),
+            12 => Ok(Self::NotFound1),
+            13 => Ok(Self::NotFound2),
+            14 => Ok(Self::NotFound3),
+            15 => Ok(Self::RealmOnly),
+            16 => Ok(Self::MapNotAllowed),
+            v => Err(crate::errors::EnumError::new(NAME, v as i128),)
+        }
+    }
 }
 
 #[cfg(feature = "print-testcase")]
@@ -158,25 +179,7 @@ impl std::fmt::Display for TransferAbortReason {
 impl TryFrom<u8> for TransferAbortReason {
     type Error = crate::errors::EnumError;
     fn try_from(value: u8) -> Result<Self, Self::Error> {
-        match value {
-            0 => Ok(Self::None),
-            1 => Ok(Self::ErrorX),
-            2 => Ok(Self::MaxPlayers),
-            3 => Ok(Self::NotFound),
-            4 => Ok(Self::TooManyInstances),
-            6 => Ok(Self::ZoneInCombat),
-            7 => Ok(Self::InsufficientExpansionLevel),
-            8 => Ok(Self::DifficultyNotAvailable),
-            9 => Ok(Self::UniqueMessage),
-            10 => Ok(Self::TooManyRealmInstances),
-            11 => Ok(Self::NeedGroup),
-            12 => Ok(Self::NotFound1),
-            13 => Ok(Self::NotFound2),
-            14 => Ok(Self::NotFound3),
-            15 => Ok(Self::RealmOnly),
-            16 => Ok(Self::MapNotAllowed),
-            v => Err(crate::errors::EnumError::new(NAME, v.into()),)
-        }
+        Self::from_int(value)
     }
 }
 

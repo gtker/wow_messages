@@ -75,6 +75,25 @@ impl LfgUpdateType {
         ]
     }
 
+    pub const fn from_int(value: u8) -> Result<Self, crate::errors::EnumError> {
+        match value {
+            0 => Ok(Self::Default),
+            1 => Ok(Self::LeaderLeave),
+            4 => Ok(Self::RolecheckAborted),
+            5 => Ok(Self::Join),
+            6 => Ok(Self::RolecheckFailed),
+            7 => Ok(Self::Leave),
+            8 => Ok(Self::ProposalFailed),
+            9 => Ok(Self::ProposalDeclined),
+            10 => Ok(Self::GroupFound),
+            12 => Ok(Self::AddedToQueue),
+            13 => Ok(Self::ProposalBegin),
+            14 => Ok(Self::Status),
+            15 => Ok(Self::GroupMemberOffline),
+            16 => Ok(Self::GroupDisband),
+            v => Err(crate::errors::EnumError::new(NAME, v as i128),)
+        }
+    }
 }
 
 #[cfg(feature = "print-testcase")]
@@ -132,23 +151,7 @@ impl std::fmt::Display for LfgUpdateType {
 impl TryFrom<u8> for LfgUpdateType {
     type Error = crate::errors::EnumError;
     fn try_from(value: u8) -> Result<Self, Self::Error> {
-        match value {
-            0 => Ok(Self::Default),
-            1 => Ok(Self::LeaderLeave),
-            4 => Ok(Self::RolecheckAborted),
-            5 => Ok(Self::Join),
-            6 => Ok(Self::RolecheckFailed),
-            7 => Ok(Self::Leave),
-            8 => Ok(Self::ProposalFailed),
-            9 => Ok(Self::ProposalDeclined),
-            10 => Ok(Self::GroupFound),
-            12 => Ok(Self::AddedToQueue),
-            13 => Ok(Self::ProposalBegin),
-            14 => Ok(Self::Status),
-            15 => Ok(Self::GroupMemberOffline),
-            16 => Ok(Self::GroupDisband),
-            v => Err(crate::errors::EnumError::new(NAME, v.into()),)
-        }
+        Self::from_int(value)
     }
 }
 

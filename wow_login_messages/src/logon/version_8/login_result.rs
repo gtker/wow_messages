@@ -86,6 +86,28 @@ impl LoginResult {
         ]
     }
 
+    pub const fn from_int(value: u8) -> Result<Self, crate::errors::EnumError> {
+        match value {
+            0 => Ok(Self::Success),
+            1 => Ok(Self::FailUnknown0),
+            2 => Ok(Self::FailUnknown1),
+            3 => Ok(Self::FailBanned),
+            4 => Ok(Self::FailUnknownAccount),
+            5 => Ok(Self::FailIncorrectPassword),
+            6 => Ok(Self::FailAlreadyOnline),
+            7 => Ok(Self::FailNoTime),
+            8 => Ok(Self::FailDbBusy),
+            9 => Ok(Self::FailVersionInvalid),
+            10 => Ok(Self::LoginDownloadFile),
+            11 => Ok(Self::FailInvalidServer),
+            12 => Ok(Self::FailSuspended),
+            13 => Ok(Self::FailNoAccess),
+            14 => Ok(Self::SuccessSurvey),
+            15 => Ok(Self::FailParentalcontrol),
+            16 => Ok(Self::FailLockedEnforced),
+            v => Err(crate::errors::EnumError::new(NAME, v as i128),)
+        }
+    }
 }
 
 #[cfg(feature = "print-testcase")]
@@ -149,26 +171,7 @@ impl std::fmt::Display for LoginResult {
 impl TryFrom<u8> for LoginResult {
     type Error = crate::errors::EnumError;
     fn try_from(value: u8) -> Result<Self, Self::Error> {
-        match value {
-            0 => Ok(Self::Success),
-            1 => Ok(Self::FailUnknown0),
-            2 => Ok(Self::FailUnknown1),
-            3 => Ok(Self::FailBanned),
-            4 => Ok(Self::FailUnknownAccount),
-            5 => Ok(Self::FailIncorrectPassword),
-            6 => Ok(Self::FailAlreadyOnline),
-            7 => Ok(Self::FailNoTime),
-            8 => Ok(Self::FailDbBusy),
-            9 => Ok(Self::FailVersionInvalid),
-            10 => Ok(Self::LoginDownloadFile),
-            11 => Ok(Self::FailInvalidServer),
-            12 => Ok(Self::FailSuspended),
-            13 => Ok(Self::FailNoAccess),
-            14 => Ok(Self::SuccessSurvey),
-            15 => Ok(Self::FailParentalcontrol),
-            16 => Ok(Self::FailLockedEnforced),
-            v => Err(crate::errors::EnumError::new(NAME, v.into()),)
-        }
+        Self::from_int(value)
     }
 }
 

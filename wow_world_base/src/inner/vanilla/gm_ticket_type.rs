@@ -60,6 +60,21 @@ impl GmTicketType {
         ]
     }
 
+    pub const fn from_int(value: u8) -> Result<Self, crate::errors::EnumError> {
+        match value {
+            1 => Ok(Self::Stuck),
+            2 => Ok(Self::BehaviorHarassment),
+            3 => Ok(Self::Guild),
+            4 => Ok(Self::Item),
+            5 => Ok(Self::Environmental),
+            6 => Ok(Self::NonquestCreep),
+            7 => Ok(Self::QuestQuestnpc),
+            8 => Ok(Self::Technical),
+            9 => Ok(Self::AccountBilling),
+            10 => Ok(Self::Character),
+            v => Err(crate::errors::EnumError::new(NAME, v as i128),)
+        }
+    }
 }
 
 #[cfg(feature = "print-testcase")]
@@ -109,19 +124,7 @@ impl std::fmt::Display for GmTicketType {
 impl TryFrom<u8> for GmTicketType {
     type Error = crate::errors::EnumError;
     fn try_from(value: u8) -> Result<Self, Self::Error> {
-        match value {
-            1 => Ok(Self::Stuck),
-            2 => Ok(Self::BehaviorHarassment),
-            3 => Ok(Self::Guild),
-            4 => Ok(Self::Item),
-            5 => Ok(Self::Environmental),
-            6 => Ok(Self::NonquestCreep),
-            7 => Ok(Self::QuestQuestnpc),
-            8 => Ok(Self::Technical),
-            9 => Ok(Self::AccountBilling),
-            10 => Ok(Self::Character),
-            v => Err(crate::errors::EnumError::new(NAME, v.into()),)
-        }
+        Self::from_int(value)
     }
 }
 

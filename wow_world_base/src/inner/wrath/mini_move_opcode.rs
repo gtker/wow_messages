@@ -35,6 +35,15 @@ impl MiniMoveOpcode {
         ]
     }
 
+    pub const fn from_int(value: u16) -> Result<Self, crate::errors::EnumError> {
+        match value {
+            232 => Ok(Self::SmsgForceMoveRoot),
+            242 => Ok(Self::SmsgMoveFeatherFall),
+            222 => Ok(Self::SmsgMoveWaterWalk),
+            244 => Ok(Self::SmsgMoveSetHover),
+            v => Err(crate::errors::EnumError::new(NAME, v as i128),)
+        }
+    }
 }
 
 #[cfg(feature = "print-testcase")]
@@ -72,13 +81,7 @@ impl std::fmt::Display for MiniMoveOpcode {
 impl TryFrom<u16> for MiniMoveOpcode {
     type Error = crate::errors::EnumError;
     fn try_from(value: u16) -> Result<Self, Self::Error> {
-        match value {
-            232 => Ok(Self::SmsgForceMoveRoot),
-            242 => Ok(Self::SmsgMoveFeatherFall),
-            222 => Ok(Self::SmsgMoveWaterWalk),
-            244 => Ok(Self::SmsgMoveSetHover),
-            v => Err(crate::errors::EnumError::new(NAME, v.into()),)
-        }
+        Self::from_int(value)
     }
 }
 

@@ -127,6 +127,31 @@ impl PvpRank {
         ]
     }
 
+    pub const fn from_int(value: u8) -> Result<Self, crate::errors::EnumError> {
+        match value {
+            0 => Ok(Self::NoRank),
+            1 => Ok(Self::Pariah),
+            2 => Ok(Self::Outlaw),
+            3 => Ok(Self::Exiled),
+            4 => Ok(Self::Dishonored),
+            5 => Ok(Self::Rank1),
+            6 => Ok(Self::Rank2),
+            7 => Ok(Self::Rank3),
+            8 => Ok(Self::Rank4),
+            9 => Ok(Self::Rank5),
+            10 => Ok(Self::Rank6),
+            11 => Ok(Self::Rank7),
+            12 => Ok(Self::Rank8),
+            13 => Ok(Self::Rank9),
+            14 => Ok(Self::Rank10),
+            15 => Ok(Self::Rank11),
+            16 => Ok(Self::Rank12),
+            17 => Ok(Self::Rank13),
+            18 => Ok(Self::Rank14),
+            19 => Ok(Self::FactionLeader),
+            v => Err(crate::errors::EnumError::new(NAME, v as i128),)
+        }
+    }
 }
 
 #[cfg(feature = "print-testcase")]
@@ -196,29 +221,7 @@ impl std::fmt::Display for PvpRank {
 impl TryFrom<u8> for PvpRank {
     type Error = crate::errors::EnumError;
     fn try_from(value: u8) -> Result<Self, Self::Error> {
-        match value {
-            0 => Ok(Self::NoRank),
-            1 => Ok(Self::Pariah),
-            2 => Ok(Self::Outlaw),
-            3 => Ok(Self::Exiled),
-            4 => Ok(Self::Dishonored),
-            5 => Ok(Self::Rank1),
-            6 => Ok(Self::Rank2),
-            7 => Ok(Self::Rank3),
-            8 => Ok(Self::Rank4),
-            9 => Ok(Self::Rank5),
-            10 => Ok(Self::Rank6),
-            11 => Ok(Self::Rank7),
-            12 => Ok(Self::Rank8),
-            13 => Ok(Self::Rank9),
-            14 => Ok(Self::Rank10),
-            15 => Ok(Self::Rank11),
-            16 => Ok(Self::Rank12),
-            17 => Ok(Self::Rank13),
-            18 => Ok(Self::Rank14),
-            19 => Ok(Self::FactionLeader),
-            v => Err(crate::errors::EnumError::new(NAME, v.into()),)
-        }
+        Self::from_int(value)
     }
 }
 

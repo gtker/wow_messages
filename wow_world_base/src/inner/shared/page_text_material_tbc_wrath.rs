@@ -51,6 +51,19 @@ impl PageTextMaterial {
         ]
     }
 
+    pub const fn from_int(value: u8) -> Result<Self, crate::errors::EnumError> {
+        match value {
+            0 => Ok(Self::None),
+            1 => Ok(Self::Parchment),
+            2 => Ok(Self::Stone),
+            3 => Ok(Self::Marble),
+            4 => Ok(Self::Silver),
+            5 => Ok(Self::Bronze),
+            6 => Ok(Self::Valentine),
+            7 => Ok(Self::Illidan),
+            v => Err(crate::errors::EnumError::new(NAME, v as i128),)
+        }
+    }
 }
 
 #[cfg(feature = "print-testcase")]
@@ -96,17 +109,7 @@ impl std::fmt::Display for PageTextMaterial {
 impl TryFrom<u8> for PageTextMaterial {
     type Error = crate::errors::EnumError;
     fn try_from(value: u8) -> Result<Self, Self::Error> {
-        match value {
-            0 => Ok(Self::None),
-            1 => Ok(Self::Parchment),
-            2 => Ok(Self::Stone),
-            3 => Ok(Self::Marble),
-            4 => Ok(Self::Silver),
-            5 => Ok(Self::Bronze),
-            6 => Ok(Self::Valentine),
-            7 => Ok(Self::Illidan),
-            v => Err(crate::errors::EnumError::new(NAME, v.into()),)
-        }
+        Self::from_int(value)
     }
 }
 

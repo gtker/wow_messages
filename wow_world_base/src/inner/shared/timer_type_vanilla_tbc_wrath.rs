@@ -36,6 +36,15 @@ impl TimerType {
         ]
     }
 
+    pub const fn from_int(value: u32) -> Result<Self, crate::errors::EnumError> {
+        match value {
+            0 => Ok(Self::Fatigue),
+            1 => Ok(Self::Breath),
+            2 => Ok(Self::FeignDeath),
+            3 => Ok(Self::Environmental),
+            v => Err(crate::errors::EnumError::new(NAME, v as i128),)
+        }
+    }
 }
 
 #[cfg(feature = "print-testcase")]
@@ -73,13 +82,7 @@ impl std::fmt::Display for TimerType {
 impl TryFrom<u32> for TimerType {
     type Error = crate::errors::EnumError;
     fn try_from(value: u32) -> Result<Self, Self::Error> {
-        match value {
-            0 => Ok(Self::Fatigue),
-            1 => Ok(Self::Breath),
-            2 => Ok(Self::FeignDeath),
-            3 => Ok(Self::Environmental),
-            v => Err(crate::errors::EnumError::new(NAME, v.into()),)
-        }
+        Self::from_int(value)
     }
 }
 

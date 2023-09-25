@@ -44,6 +44,17 @@ impl Bonding {
         ]
     }
 
+    pub const fn from_int(value: u8) -> Result<Self, crate::errors::EnumError> {
+        match value {
+            0 => Ok(Self::NoBind),
+            1 => Ok(Self::PickUp),
+            2 => Ok(Self::Equip),
+            3 => Ok(Self::Use),
+            4 => Ok(Self::QuestItem),
+            5 => Ok(Self::QuestItem1),
+            v => Err(crate::errors::EnumError::new(NAME, v as i128),)
+        }
+    }
 }
 
 #[cfg(feature = "print-testcase")]
@@ -85,15 +96,7 @@ impl std::fmt::Display for Bonding {
 impl TryFrom<u8> for Bonding {
     type Error = crate::errors::EnumError;
     fn try_from(value: u8) -> Result<Self, Self::Error> {
-        match value {
-            0 => Ok(Self::NoBind),
-            1 => Ok(Self::PickUp),
-            2 => Ok(Self::Equip),
-            3 => Ok(Self::Use),
-            4 => Ok(Self::QuestItem),
-            5 => Ok(Self::QuestItem1),
-            v => Err(crate::errors::EnumError::new(NAME, v.into()),)
-        }
+        Self::from_int(value)
     }
 }
 
