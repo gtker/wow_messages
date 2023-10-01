@@ -7,7 +7,7 @@ use crate::Guid;
 /// ```text
 /// struct VisibleItem {
 ///     Guid creator;
-///     u32 item;
+///     Item item;
 ///     u32[2] enchants;
 ///     u32 padding5 = 0;
 ///     u32 padding6 = 0;

@@ -10,7 +10,7 @@ use crate::vanilla::RollVote;
 ///     Guid creature;
 ///     u32 loot_slot;
 ///     Guid player;
-///     u32 item;
+///     Item item;
 ///     u32 item_random_suffix;
 ///     u32 item_random_property_id;
 ///     u8 roll_number;
@@ -46,7 +46,7 @@ impl SMSG_LOOT_ROLL {
         // player: Guid
         let player = crate::util::read_guid(&mut r)?;
 
-        // item: u32
+        // item: Item
         let item = crate::util::read_u32_le(&mut r)?;
 
         // item_random_suffix: u32
@@ -142,7 +142,7 @@ impl crate::Message for SMSG_LOOT_ROLL {
         // player: Guid
         w.write_all(&self.player.guid().to_le_bytes())?;
 
-        // item: u32
+        // item: Item
         w.write_all(&self.item.to_le_bytes())?;
 
         // item_random_suffix: u32

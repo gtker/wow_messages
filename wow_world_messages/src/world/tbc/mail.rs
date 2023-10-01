@@ -24,7 +24,7 @@ use crate::tbc::{
 ///         u32 auction_id;
 ///     }
 ///     else if (message_type == ITEM) {
-///         u32 item;
+///         Item item;
 ///     }
 ///     Gold cash_on_delivery;
 ///     u32 item_text_id;
@@ -98,7 +98,7 @@ impl Mail {
             Mail_MailType::Item {
                 item,
             } => {
-                // item: u32
+                // item: Item
                 w.write_all(&item.to_le_bytes())?;
 
             }
@@ -193,7 +193,7 @@ impl Mail {
                 }
             }
             MailType::Item => {
-                // item: u32
+                // item: Item
                 let item = crate::util::read_u32_le(&mut r)?;
 
                 Mail_MailType::Item {
@@ -365,7 +365,7 @@ impl Mail_MailType {
                 ..
             } => {
                 1
-                + 4 // item: u32
+                + 4 // item: Item
             }
         }
     }

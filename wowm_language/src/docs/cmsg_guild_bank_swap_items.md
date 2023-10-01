@@ -15,14 +15,14 @@ cmsg CMSG_GUILD_BANK_SWAP_ITEMS = 0x03E8 {
         u32 unknown1;
         u8 bank_source_tab;
         u8 bank_source_slot;
-        u32 item1;
+        Item item1;
         u8 unknown2;
         u8 amount;
     }
     else {
         u8 bank_tab;
         u8 bank_slot;
-        u32 item2;
+        Item item2;
         BankSwapStoreMode mode;
         if (mode == AUTOMATIC) {
             u32 auto_count;
@@ -66,14 +66,14 @@ If source is equal to `BANK`:
 | 0x11 | 4 / Little | u32 | unknown1 |  |
 | 0x15 | 1 / - | u8 | bank_source_tab |  |
 | 0x16 | 1 / - | u8 | bank_source_slot |  |
-| 0x17 | 4 / Little | u32 | item1 |  |
+| 0x17 | 4 / Little | Item | item1 |  |
 | 0x1B | 1 / - | u8 | unknown2 |  |
 | 0x1C | 1 / - | u8 | amount |  |
 
 Else: 
 | 0x1D | 1 / - | u8 | bank_tab |  |
 | 0x1E | 1 / - | u8 | bank_slot |  |
-| 0x1F | 4 / Little | u32 | item2 |  |
+| 0x1F | 4 / Little | Item | item2 |  |
 | 0x23 | 1 / - | [BankSwapStoreMode](bankswapstoremode.md) | mode |  |
 
 If mode is equal to `AUTOMATIC`:
@@ -106,14 +106,14 @@ cmsg CMSG_GUILD_BANK_SWAP_ITEMS = 0x03E9 {
         u32 unknown1;
         u8 bank_source_tab;
         u8 bank_source_slot;
-        u32 item1;
+        Item item1;
         u8 unknown2;
         u32 amount;
     }
     else {
         u8 bank_tab;
         u8 bank_slot;
-        u32 item2;
+        Item item2;
         BankSwapStoreMode mode;
         if (mode == AUTOMATIC) {
             u32 auto_count;
@@ -157,14 +157,14 @@ If source is equal to `BANK`:
 | 0x11 | 4 / Little | u32 | unknown1 |  |
 | 0x15 | 1 / - | u8 | bank_source_tab |  |
 | 0x16 | 1 / - | u8 | bank_source_slot |  |
-| 0x17 | 4 / Little | u32 | item1 |  |
+| 0x17 | 4 / Little | Item | item1 |  |
 | 0x1B | 1 / - | u8 | unknown2 |  |
 | 0x1C | 4 / Little | u32 | amount |  |
 
 Else: 
 | 0x20 | 1 / - | u8 | bank_tab |  |
 | 0x21 | 1 / - | u8 | bank_slot |  |
-| 0x22 | 4 / Little | u32 | item2 |  |
+| 0x22 | 4 / Little | Item | item2 |  |
 | 0x26 | 1 / - | [BankSwapStoreMode](bankswapstoremode.md) | mode |  |
 
 If mode is equal to `AUTOMATIC`:

@@ -17,14 +17,14 @@ use crate::tbc::{
 ///         u32 unknown1;
 ///         u8 bank_source_tab;
 ///         u8 bank_source_slot;
-///         u32 item1;
+///         Item item1;
 ///         u8 unknown2;
 ///         u8 amount;
 ///     }
 ///     else {
 ///         u8 bank_tab;
 ///         u8 bank_slot;
-///         u32 item2;
+///         Item item2;
 ///         BankSwapStoreMode mode;
 ///         if (mode == AUTOMATIC) {
 ///             u32 auto_count;
@@ -69,7 +69,7 @@ impl CMSG_GUILD_BANK_SWAP_ITEMS {
                 // bank_slot: u8
                 let bank_slot = crate::util::read_u8_le(&mut r)?;
 
-                // item2: u32
+                // item2: Item
                 let item2 = crate::util::read_u32_le(&mut r)?;
 
                 // mode: BankSwapStoreMode
@@ -137,7 +137,7 @@ impl CMSG_GUILD_BANK_SWAP_ITEMS {
                 // bank_source_slot: u8
                 let bank_source_slot = crate::util::read_u8_le(&mut r)?;
 
-                // item1: u32
+                // item1: Item
                 let item1 = crate::util::read_u32_le(&mut r)?;
 
                 // unknown2: u8
@@ -365,7 +365,7 @@ impl crate::Message for CMSG_GUILD_BANK_SWAP_ITEMS {
                 // bank_slot: u8
                 w.write_all(&bank_slot.to_le_bytes())?;
 
-                // item2: u32
+                // item2: Item
                 w.write_all(&item2.to_le_bytes())?;
 
                 // mode: BankSwapStoreMode
@@ -434,7 +434,7 @@ impl crate::Message for CMSG_GUILD_BANK_SWAP_ITEMS {
                 // bank_source_slot: u8
                 w.write_all(&bank_source_slot.to_le_bytes())?;
 
-                // item1: u32
+                // item1: Item
                 w.write_all(&item1.to_le_bytes())?;
 
                 // unknown2: u8
@@ -602,7 +602,7 @@ impl CMSG_GUILD_BANK_SWAP_ITEMS_BankSwapSource {
                 1
                 + 1 // bank_slot: u8
                 + 1 // bank_tab: u8
-                + 4 // item2: u32
+                + 4 // item2: Item
                 + mode.size() // mode: CMSG_GUILD_BANK_SWAP_ITEMS_BankSwapStoreMode
             }
             Self::Bank {
@@ -614,7 +614,7 @@ impl CMSG_GUILD_BANK_SWAP_ITEMS_BankSwapSource {
                 + 1 // bank_destination_tab: u8
                 + 1 // bank_source_slot: u8
                 + 1 // bank_source_tab: u8
-                + 4 // item1: u32
+                + 4 // item1: Item
                 + 4 // unknown1: u32
                 + 1 // unknown2: u8
             }

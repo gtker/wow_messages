@@ -7,6 +7,7 @@ pub(crate) enum ParsedArrayType {
     CString,
     Guid,
     PackedGuid,
+    Spell,
 }
 
 impl ParsedArrayType {
@@ -17,6 +18,7 @@ impl ParsedArrayType {
             ParsedArrayType::CString => "CString".to_string(),
             ParsedArrayType::Guid => "Guid".to_string(),
             ParsedArrayType::PackedGuid => "PackedGuid".to_string(),
+            ParsedArrayType::Spell => "Spell".to_string(),
         }
     }
 
@@ -26,6 +28,7 @@ impl ParsedArrayType {
             ParsedArrayType::Complex(i) => i.clone(),
             ParsedArrayType::CString => "String".to_string(),
             ParsedArrayType::PackedGuid | ParsedArrayType::Guid => "Guid".to_string(),
+            ParsedArrayType::Spell => "u32".to_string(),
         }
     }
 }

@@ -9,7 +9,7 @@ use crate::tbc::SpellSchool;
 /// smsg SMSG_SPELLDAMAGESHIELD = 0x024F {
 ///     Guid victim;
 ///     Guid caster;
-///     u32 spell;
+///     Spell spell;
 ///     u32 damage;
 ///     (u32)SpellSchool school;
 /// }
@@ -35,7 +35,7 @@ impl SMSG_SPELLDAMAGESHIELD {
         // caster: Guid
         let caster = crate::util::read_guid(&mut r)?;
 
-        // spell: u32
+        // spell: Spell
         let spell = crate::util::read_u32_le(&mut r)?;
 
         // damage: u32
@@ -113,7 +113,7 @@ impl crate::Message for SMSG_SPELLDAMAGESHIELD {
         // caster: Guid
         w.write_all(&self.caster.guid().to_le_bytes())?;
 
-        // spell: u32
+        // spell: Spell
         w.write_all(&self.spell.to_le_bytes())?;
 
         // damage: u32

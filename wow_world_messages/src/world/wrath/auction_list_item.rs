@@ -9,7 +9,7 @@ use std::time::Duration;
 /// ```text
 /// struct AuctionListItem {
 ///     u32 id;
-///     u32 item;
+///     Item item;
 ///     AuctionEnchantment[7] enchantments;
 ///     u32 item_random_property_id;
 ///     u32 item_suffix_factor;
@@ -49,7 +49,7 @@ impl AuctionListItem {
         // id: u32
         w.write_all(&self.id.to_le_bytes())?;
 
-        // item: u32
+        // item: Item
         w.write_all(&self.item.to_le_bytes())?;
 
         // enchantments: AuctionEnchantment[7]
@@ -102,7 +102,7 @@ impl AuctionListItem {
         // id: u32
         let id = crate::util::read_u32_le(&mut r)?;
 
-        // item: u32
+        // item: Item
         let item = crate::util::read_u32_le(&mut r)?;
 
         // enchantments: AuctionEnchantment[7]

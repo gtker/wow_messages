@@ -13,7 +13,7 @@ smsg SMSG_ITEM_PUSH_RESULT = 0x0166 {
     NewItemChatAlert alert_chat;
     u8 bag_slot;
     u32 item_slot;
-    u32 item;
+    Item item;
     u32 item_suffix_factor;
     u32 item_random_property_id;
     u32 item_count;
@@ -40,7 +40,7 @@ SMSG have a header of 4 bytes.
 | 0x14 | 4 / - | [NewItemChatAlert](newitemchatalert.md) | alert_chat |  |
 | 0x18 | 1 / - | u8 | bag_slot |  |
 | 0x19 | 4 / Little | u32 | item_slot | mangoszero: item slot, but when added to stack: 0xFFFFFFFF |
-| 0x1D | 4 / Little | u32 | item |  |
+| 0x1D | 4 / Little | Item | item |  |
 | 0x21 | 4 / Little | u32 | item_suffix_factor | mangoszero: SuffixFactor |
 | 0x25 | 4 / Little | u32 | item_random_property_id | mangoszero: random item property id |
 | 0x29 | 4 / Little | u32 | item_count |  |
@@ -62,7 +62,7 @@ Pushing the creation of a lionheart helm to player with Guid 4.
 1, 0, 0, 0, // alert_chat: NewItemChatAlert SHOW (1)
 255, // bag_slot: u8
 24, 0, 0, 0, // item_slot: u32
-96, 49, 0, 0, // item: u32
+96, 49, 0, 0, // item: Item
 0, 0, 0, 0, // item_suffix_factor: u32
 0, 0, 0, 0, // item_random_property_id: u32
 1, 0, 0, 0, // item_count: u32
@@ -80,7 +80,7 @@ smsg SMSG_ITEM_PUSH_RESULT = 0x0166 {
     NewItemChatAlert alert_chat;
     u8 bag_slot;
     u32 item_slot;
-    u32 item;
+    Item item;
     u32 item_suffix_factor;
     u32 item_random_property_id;
     u32 item_count;
@@ -108,7 +108,7 @@ SMSG have a header of 4 bytes.
 | 0x14 | 4 / - | [NewItemChatAlert](newitemchatalert.md) | alert_chat |  |
 | 0x18 | 1 / - | u8 | bag_slot |  |
 | 0x19 | 4 / Little | u32 | item_slot | mangoszero: item slot, but when added to stack: 0xFFFFFFFF |
-| 0x1D | 4 / Little | u32 | item |  |
+| 0x1D | 4 / Little | Item | item |  |
 | 0x21 | 4 / Little | u32 | item_suffix_factor | mangoszero: SuffixFactor |
 | 0x25 | 4 / Little | u32 | item_random_property_id | mangoszero: random item property id |
 | 0x29 | 4 / Little | u32 | item_count |  |

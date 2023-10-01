@@ -7,7 +7,7 @@ use crate::wrath::EnchantMask;
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/spell/smsg_inspect_talent.wowm:23`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/spell/smsg_inspect_talent.wowm#L23):
 /// ```text
 /// struct InspectTalentGear {
-///     u32 item;
+///     Item item;
 ///     EnchantMask enchant_mask;
 ///     u16 unknown1;
 ///     PackedGuid creator;
@@ -24,7 +24,7 @@ pub struct InspectTalentGear {
 
 impl InspectTalentGear {
     pub(crate) fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
-        // item: u32
+        // item: Item
         w.write_all(&self.item.to_le_bytes())?;
 
         // enchant_mask: EnchantMask
@@ -45,7 +45,7 @@ impl InspectTalentGear {
 
 impl InspectTalentGear {
     pub(crate) fn read<R: std::io::Read>(mut r: R) -> Result<Self, std::io::Error> {
-        // item: u32
+        // item: Item
         let item = crate::util::read_u32_le(&mut r)?;
 
         // enchant_mask: EnchantMask
@@ -73,7 +73,7 @@ impl InspectTalentGear {
 
 impl InspectTalentGear {
     pub(crate) const fn size(&self) -> usize {
-        4 // item: u32
+        4 // item: Item
         + self.enchant_mask.size() // enchant_mask: EnchantMask
         + 2 // unknown1: u16
         + crate::util::packed_guid_size(&self.creator) // creator: PackedGuid

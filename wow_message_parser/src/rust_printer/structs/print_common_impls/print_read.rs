@@ -2,7 +2,7 @@ use crate::parser::types::array::{Array, ArraySize, ArrayType};
 use crate::parser::types::container::Container;
 use crate::parser::types::if_statement::{Equation, IfStatement};
 use crate::parser::types::objects::Objects;
-use crate::parser::types::sizes::GUID_SIZE;
+use crate::parser::types::sizes::{GUID_SIZE, SPELL_SIZE};
 use crate::parser::types::struct_member::{StructMember, StructMemberDefinition};
 use crate::parser::types::ty::Type;
 use crate::parser::types::IntegerType;
@@ -116,6 +116,7 @@ fn print_read_array(
 
                 let size = match array.ty() {
                     ArrayType::Integer(integer_type) => integer_type.size().to_string(),
+                    ArrayType::Spell => SPELL_SIZE.to_string(),
                     ArrayType::CString => "a.len() + 1".to_string(),
                     ArrayType::PackedGuid => "crate::util::packed_guid_size(&a)".to_string(),
                     ArrayType::Guid => GUID_SIZE.to_string(),
@@ -174,6 +175,11 @@ fn print_array_ty(
             s.wln(format!(
                 "{array_prefix}{UTILITY_PATH}::{prefix}read_{int_type}_le(&mut r){postfix}?{array_postfix}",
                 int_type = integer_type.rust_str(),
+            ));
+        }
+        ArrayType::Spell => {
+            s.wln(format!(
+                "{array_prefix}{UTILITY_PATH}::{prefix}read_u32_le(&mut r){postfix}?{array_postfix}",
             ));
         }
         ArrayType::CString => {
@@ -387,6 +393,16 @@ fn print_read_definition(
         Type::Level32 => {
             s.wln_no_indent(format!(
                 "Level::new({UTILITY_PATH}::{prefix}read_u32_le(&mut r){postfix}? as u8);",
+            ));
+        }
+        Type::Spell16 => {
+            s.wln_no_indent(format!(
+                "{UTILITY_PATH}::{prefix}read_u16_le(&mut r){postfix}?;",
+            ));
+        }
+        Type::Spell | Type::Item => {
+            s.wln_no_indent(format!(
+                "{UTILITY_PATH}::{prefix}read_u32_le(&mut r){postfix}?;",
             ));
         }
 

@@ -4,8 +4,8 @@ use std::io::{Read, Write};
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/spell/smsg_superceded_spell.wowm:8`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/spell/smsg_superceded_spell.wowm#L8):
 /// ```text
 /// smsg SMSG_SUPERCEDED_SPELL = 0x012C {
-///     u32 new;
-///     u32 old;
+///     Spell new;
+///     Spell old;
 /// }
 /// ```
 pub struct SMSG_SUPERCEDED_SPELL {
@@ -20,10 +20,10 @@ impl SMSG_SUPERCEDED_SPELL {
             return Err(crate::errors::ParseErrorKind::InvalidSize);
         }
 
-        // new: u32
+        // new: Spell
         let new = crate::util::read_u32_le(&mut r)?;
 
-        // old: u32
+        // old: Spell
         let old = crate::util::read_u32_le(&mut r)?;
 
         Ok(Self {
@@ -80,10 +80,10 @@ impl crate::Message for SMSG_SUPERCEDED_SPELL {
     }
 
     fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
-        // new: u32
+        // new: Spell
         w.write_all(&self.new.to_le_bytes())?;
 
-        // old: u32
+        // old: Spell
         w.write_all(&self.old.to_le_bytes())?;
 
         Ok(())

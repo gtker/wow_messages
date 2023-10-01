@@ -12,7 +12,7 @@ use crate::wrath::{
 /// cmsg CMSG_PET_CAST_SPELL = 0x01F0 {
 ///     Guid guid;
 ///     u8 cast_count;
-///     u32 id;
+///     Spell id;
 ///     ClientCastFlags cast_flags;
 ///     SpellCastTargets targets;
 ///     if (cast_flags == EXTRA) {
@@ -48,7 +48,7 @@ impl CMSG_PET_CAST_SPELL {
         // cast_count: u8
         let cast_count = crate::util::read_u8_le(&mut r)?;
 
-        // id: u32
+        // id: Spell
         let id = crate::util::read_u32_le(&mut r)?;
 
         // cast_flags: ClientCastFlags
@@ -535,7 +535,7 @@ impl crate::Message for CMSG_PET_CAST_SPELL {
         // cast_count: u8
         w.write_all(&self.cast_count.to_le_bytes())?;
 
-        // id: u32
+        // id: Spell
         w.write_all(&self.id.to_le_bytes())?;
 
         // cast_flags: ClientCastFlags
@@ -598,7 +598,7 @@ impl CMSG_PET_CAST_SPELL {
     pub(crate) fn size(&self) -> usize {
         8 // guid: Guid
         + 1 // cast_count: u8
-        + 4 // id: u32
+        + 4 // id: Spell
         + self.cast_flags.size() // cast_flags: CMSG_PET_CAST_SPELL_ClientCastFlags
         + self.targets.size() // targets: SpellCastTargets
     }

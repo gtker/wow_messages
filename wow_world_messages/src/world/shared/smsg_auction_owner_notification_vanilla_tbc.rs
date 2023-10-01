@@ -11,7 +11,7 @@ use crate::Guid;
 ///     u32 bid;
 ///     u32 auction_out_bid;
 ///     Guid bidder;
-///     u32 item;
+///     Item item;
 ///     u32 item_random_property_id;
 /// }
 /// ```
@@ -44,7 +44,7 @@ impl SMSG_AUCTION_OWNER_NOTIFICATION {
         // bidder: Guid
         let bidder = crate::util::read_guid(&mut r)?;
 
-        // item: u32
+        // item: Item
         let item = crate::util::read_u32_le(&mut r)?;
 
         // item_random_property_id: u32
@@ -128,7 +128,7 @@ impl crate::Message for SMSG_AUCTION_OWNER_NOTIFICATION {
         // bidder: Guid
         w.write_all(&self.bidder.guid().to_le_bytes())?;
 
-        // item: u32
+        // item: Item
         w.write_all(&self.item.to_le_bytes())?;
 
         // item_random_property_id: u32

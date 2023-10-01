@@ -8,7 +8,7 @@ use crate::wrath::Vector3d;
 /// ```text
 /// cmsg CMSG_UPDATE_MISSILE_TRAJECTORY = 0x0462 {
 ///     Guid guid;
-///     u32 spell;
+///     Spell spell;
 ///     f32 elevation;
 ///     f32 speed;
 ///     Vector3d position;
@@ -34,7 +34,7 @@ impl CMSG_UPDATE_MISSILE_TRAJECTORY {
         // guid: Guid
         let guid = crate::util::read_guid(&mut r)?;
 
-        // spell: u32
+        // spell: Spell
         let spell = crate::util::read_u32_le(&mut r)?;
 
         // elevation: f32
@@ -140,7 +140,7 @@ impl crate::Message for CMSG_UPDATE_MISSILE_TRAJECTORY {
         // guid: Guid
         w.write_all(&self.guid.guid().to_le_bytes())?;
 
-        // spell: u32
+        // spell: Spell
         w.write_all(&self.spell.to_le_bytes())?;
 
         // elevation: f32

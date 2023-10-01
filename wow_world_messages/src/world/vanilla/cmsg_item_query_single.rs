@@ -6,7 +6,7 @@ use crate::Guid;
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/queries/cmsg_item_query_single.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/queries/cmsg_item_query_single.wowm#L1):
 /// ```text
 /// cmsg CMSG_ITEM_QUERY_SINGLE = 0x0056 {
-///     u32 item;
+///     Item item;
 ///     Guid guid;
 /// }
 /// ```
@@ -22,7 +22,7 @@ impl CMSG_ITEM_QUERY_SINGLE {
             return Err(crate::errors::ParseErrorKind::InvalidSize);
         }
 
-        // item: u32
+        // item: Item
         let item = crate::util::read_u32_le(&mut r)?;
 
         // guid: Guid
@@ -82,7 +82,7 @@ impl crate::Message for CMSG_ITEM_QUERY_SINGLE {
     }
 
     fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
-        // item: u32
+        // item: Item
         w.write_all(&self.item.to_le_bytes())?;
 
         // guid: Guid

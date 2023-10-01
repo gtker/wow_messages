@@ -8,7 +8,7 @@ use crate::wrath::Vector3d;
 /// ```text
 /// cmsg CMSG_UPDATE_PROJECTILE_POSITION = 0x04BE {
 ///     Guid caster;
-///     u32 spell;
+///     Spell spell;
 ///     u8 cast_count;
 ///     Vector3d position;
 /// }
@@ -30,7 +30,7 @@ impl CMSG_UPDATE_PROJECTILE_POSITION {
         // caster: Guid
         let caster = crate::util::read_guid(&mut r)?;
 
-        // spell: u32
+        // spell: Spell
         let spell = crate::util::read_u32_le(&mut r)?;
 
         // cast_count: u8
@@ -113,7 +113,7 @@ impl crate::Message for CMSG_UPDATE_PROJECTILE_POSITION {
         // caster: Guid
         w.write_all(&self.caster.guid().to_le_bytes())?;
 
-        // spell: u32
+        // spell: Spell
         w.write_all(&self.spell.to_le_bytes())?;
 
         // cast_count: u8

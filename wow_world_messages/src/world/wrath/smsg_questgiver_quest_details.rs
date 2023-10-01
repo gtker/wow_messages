@@ -29,8 +29,8 @@ use std::time::Duration;
 ///     u32 experience_reward;
 ///     u32 honor_reward;
 ///     f32 honor_reward_multiplier;
-///     u32 reward_spell;
-///     u32 casted_spell;
+///     Spell reward_spell;
+///     Spell casted_spell;
 ///     u32 title_reward;
 ///     u32 talent_reward;
 ///     u32 arena_point_reward;
@@ -162,10 +162,10 @@ impl SMSG_QUESTGIVER_QUEST_DETAILS {
         // honor_reward_multiplier: f32
         let honor_reward_multiplier = crate::util::read_f32_le(&mut r)?;
 
-        // reward_spell: u32
+        // reward_spell: Spell
         let reward_spell = crate::util::read_u32_le(&mut r)?;
 
-        // casted_spell: u32
+        // casted_spell: Spell
         let casted_spell = crate::util::read_u32_le(&mut r)?;
 
         // title_reward: u32
@@ -503,10 +503,10 @@ impl crate::Message for SMSG_QUESTGIVER_QUEST_DETAILS {
         // honor_reward_multiplier: f32
         w.write_all(&self.honor_reward_multiplier.to_le_bytes())?;
 
-        // reward_spell: u32
+        // reward_spell: Spell
         w.write_all(&self.reward_spell.to_le_bytes())?;
 
-        // casted_spell: u32
+        // casted_spell: Spell
         w.write_all(&self.casted_spell.to_le_bytes())?;
 
         // title_reward: u32
@@ -576,8 +576,8 @@ impl SMSG_QUESTGIVER_QUEST_DETAILS {
         + 4 // experience_reward: u32
         + 4 // honor_reward: u32
         + 4 // honor_reward_multiplier: f32
-        + 4 // reward_spell: u32
-        + 4 // casted_spell: u32
+        + 4 // reward_spell: Spell
+        + 4 // casted_spell: Spell
         + 4 // title_reward: u32
         + 4 // talent_reward: u32
         + 4 // arena_point_reward: u32

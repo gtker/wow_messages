@@ -8,7 +8,7 @@ use crate::Guid;
 /// smsg SMSG_CROSSED_INEBRIATION_THRESHOLD = 0x03C0 {
 ///     Guid player;
 ///     u32 state;
-///     u32 item;
+///     Item item;
 /// }
 /// ```
 pub struct SMSG_CROSSED_INEBRIATION_THRESHOLD {
@@ -30,7 +30,7 @@ impl SMSG_CROSSED_INEBRIATION_THRESHOLD {
         // state: u32
         let state = crate::util::read_u32_le(&mut r)?;
 
-        // item: u32
+        // item: Item
         let item = crate::util::read_u32_le(&mut r)?;
 
         Ok(Self {
@@ -96,7 +96,7 @@ impl crate::Message for SMSG_CROSSED_INEBRIATION_THRESHOLD {
         // state: u32
         w.write_all(&self.state.to_le_bytes())?;
 
-        // item: u32
+        // item: Item
         w.write_all(&self.item.to_le_bytes())?;
 
         Ok(())

@@ -2,7 +2,7 @@ use crate::parser::types::array::{Array, ArraySize, ArrayType};
 use crate::parser::types::definer::Definer;
 use crate::parser::types::parsed::parsed_ty::ParsedType;
 use crate::parser::types::sizes::{
-    Sizes, GUID_SIZE, PACKED_GUID_MAX_SIZE, PACKED_GUID_MIN_SIZE, UPDATE_MASK_MIN_SIZE,
+    Sizes, GUID_SIZE, PACKED_GUID_MAX_SIZE, PACKED_GUID_MIN_SIZE, SPELL_SIZE, UPDATE_MASK_MIN_SIZE,
 };
 use crate::parser::types::IntegerType;
 use crate::{Container, CSTRING_LARGEST_ALLOWED, CSTRING_SMALLEST_ALLOWED};
@@ -50,11 +50,16 @@ pub(crate) enum Type {
     IpAddress,
     Seconds,
     Milliseconds,
+    Spell,
+    Spell16,
+    Item,
 }
 
 impl Type {
     pub(crate) const F32_NAME: &'static str = "f32";
     pub(crate) const SPELL_NAME: &'static str = "Spell";
+    pub(crate) const SPELL16_NAME: &'static str = "Spell16";
+    pub(crate) const ITEM_NAME: &'static str = "Item";
     pub(crate) const LEVEL_NAME: &'static str = "Level";
     pub(crate) const LEVEL_NAME16: &'static str = "Level16";
     pub(crate) const LEVEL_NAME32: &'static str = "Level32";
@@ -146,6 +151,9 @@ impl Type {
             Type::Seconds => ParsedType::Seconds,
             Type::Milliseconds => ParsedType::Milliseconds,
             Type::Population => ParsedType::Population,
+            Type::Spell => ParsedType::Spell,
+            Type::Spell16 => ParsedType::Spell16,
+            Type::Item => ParsedType::Item,
         }
     }
 
@@ -200,6 +208,7 @@ impl Type {
 
                         (c.minimum(), c.maximum())
                     }
+                    ArrayType::Spell => (SPELL_SIZE.into(), SPELL_SIZE.into()),
                 };
 
                 sizes.inc(inner_min.saturating_mul(min), inner_max.saturating_mul(max));
@@ -239,7 +248,10 @@ impl Type {
         match self {
             Type::Bool(i) | Type::Integer(i) => i.doc_endian_str().to_string(),
 
-            Type::Population
+            Type::Spell
+            | Type::Spell16
+            | Type::Item
+            | Type::Population
             | Type::Seconds
             | Type::Milliseconds
             | Type::FloatingPoint

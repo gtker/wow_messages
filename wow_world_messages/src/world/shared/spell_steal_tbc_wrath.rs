@@ -6,7 +6,7 @@ use wow_world_base::shared::spell_steal_action_tbc_wrath::SpellStealAction;
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/spell/smsg_spellsteallog.wowm:8`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/spell/smsg_spellsteallog.wowm#L8):
 /// ```text
 /// struct SpellSteal {
-///     u32 spell;
+///     Spell spell;
 ///     SpellStealAction action;
 /// }
 /// ```
@@ -17,7 +17,7 @@ pub struct SpellSteal {
 
 impl SpellSteal {
     pub(crate) fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
-        // spell: u32
+        // spell: Spell
         w.write_all(&self.spell.to_le_bytes())?;
 
         // action: SpellStealAction
@@ -29,7 +29,7 @@ impl SpellSteal {
 
 impl SpellSteal {
     pub(crate) fn read<R: std::io::Read>(mut r: R) -> Result<Self, crate::errors::ParseErrorKind> {
-        // spell: u32
+        // spell: Spell
         let spell = crate::util::read_u32_le(&mut r)?;
 
         // action: SpellStealAction

@@ -9,7 +9,7 @@ use crate::wrath::{
 /// ```text
 /// smsg SMSG_PET_CAST_FAILED = 0x0138 {
 ///     u8 cast_count;
-///     u32 id;
+///     Spell id;
 ///     SpellCastResult result;
 ///     Bool multiple_casts;
 ///     if (result == REQUIRES_SPELL_FOCUS) {
@@ -46,7 +46,7 @@ use crate::wrath::{
 ///         u32 equipped_item_sub_class;
 ///     }
 ///     else if (result == NEED_MORE_ITEMS) {
-///         u32 item;
+///         Item item;
 ///         u32 count;
 ///     }
 ///     else if (result == MIN_SKILL) {
@@ -75,7 +75,7 @@ impl SMSG_PET_CAST_FAILED {
         // cast_count: u8
         let cast_count = crate::util::read_u8_le(&mut r)?;
 
-        // id: u32
+        // id: Spell
         let id = crate::util::read_u32_le(&mut r)?;
 
         // result: SpellCastResult
@@ -181,7 +181,7 @@ impl SMSG_PET_CAST_FAILED {
                 }
             }
             SpellCastResult::NeedMoreItems => {
-                // item: u32
+                // item: Item
                 let item = crate::util::read_u32_le(&mut r)?;
 
                 // count: u32
@@ -669,7 +669,7 @@ impl crate::Message for SMSG_PET_CAST_FAILED {
         // cast_count: u8
         w.write_all(&self.cast_count.to_le_bytes())?;
 
-        // id: u32
+        // id: Spell
         w.write_all(&self.id.to_le_bytes())?;
 
         // result: SpellCastResult
@@ -723,7 +723,7 @@ impl crate::Message for SMSG_PET_CAST_FAILED {
                 count,
                 item,
             } => {
-                // item: u32
+                // item: Item
                 w.write_all(&item.to_le_bytes())?;
 
                 // count: u32
@@ -826,7 +826,7 @@ impl crate::wrath::ServerMessage for SMSG_PET_CAST_FAILED {}
 impl SMSG_PET_CAST_FAILED {
     pub(crate) const fn size(&self) -> usize {
         1 // cast_count: u8
-        + 4 // id: u32
+        + 4 // id: Spell
         + self.result.size() // result: SMSG_PET_CAST_FAILED_SpellCastResult
         + 1 // multiple_casts: Bool
     }
@@ -1492,7 +1492,7 @@ impl SMSG_PET_CAST_FAILED_SpellCastResult {
             } => {
                 1
                 + 4 // count: u32
-                + 4 // item: u32
+                + 4 // item: Item
             }
             Self::Reagents {
                 ..

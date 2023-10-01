@@ -10,7 +10,7 @@ use wow_world_base::shared::spell_steal_action_tbc_wrath::SpellStealAction;
 /// smsg SMSG_SPELLSTEALLOG = 0x0333 {
 ///     PackedGuid victim;
 ///     PackedGuid caster;
-///     u32 spell;
+///     Spell spell;
 ///     u8 unknown;
 ///     u32 amount_of_spell_steals;
 ///     SpellSteal[amount_of_spell_steals] spell_steals;
@@ -37,7 +37,7 @@ impl SMSG_SPELLSTEALLOG {
         // caster: PackedGuid
         let caster = crate::util::read_packed_guid(&mut r)?;
 
-        // spell: u32
+        // spell: Spell
         let spell = crate::util::read_u32_le(&mut r)?;
 
         // unknown: u8
@@ -144,7 +144,7 @@ impl crate::Message for SMSG_SPELLSTEALLOG {
         // caster: PackedGuid
         crate::util::write_packed_guid(&self.caster, &mut w)?;
 
-        // spell: u32
+        // spell: Spell
         w.write_all(&self.spell.to_le_bytes())?;
 
         // unknown: u8
@@ -177,7 +177,7 @@ impl SMSG_SPELLSTEALLOG {
     pub(crate) fn size(&self) -> usize {
         crate::util::packed_guid_size(&self.victim) // victim: PackedGuid
         + crate::util::packed_guid_size(&self.caster) // caster: PackedGuid
-        + 4 // spell: u32
+        + 4 // spell: Spell
         + 1 // unknown: u8
         + 4 // amount_of_spell_steals: u32
         + self.spell_steals.len() * 5 // spell_steals: SpellSteal[amount_of_spell_steals]

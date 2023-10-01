@@ -186,6 +186,22 @@ fn print_implementation_type(table: &mut WriterTable<3>, ty: &Type) {
             table.add_row([name.as_ref(), "Alias for `u16`.", "`unsigned short`"]);
         }
 
+        Type::Spell => table.add_row([
+            name.as_ref(),
+            "Alias for `u32` that represents a spell.",
+            "`unsigned int`",
+        ]),
+        Type::Spell16 => table.add_row([
+            name.as_ref(),
+            "Alias for `u16` that represents a spell.",
+            "`unsigned short`",
+        ]),
+        Type::Item => table.add_row([
+            name.as_ref(),
+            "Alias for `u32` that represents an item entry.",
+            "`unsigned int`",
+        ]),
+
         Type::Enum { .. } => {}
         Type::Flag { .. } => {}
         Type::Struct { .. } => {}

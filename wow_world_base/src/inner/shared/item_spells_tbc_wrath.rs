@@ -7,7 +7,7 @@ use crate::shared::spell_trigger_type_tbc_wrath::SpellTriggerType;
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/queries/smsg_item_query_single_response.wowm:69`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/queries/smsg_item_query_single_response.wowm#L69):
 /// ```text
 /// struct ItemSpells {
-///     u32 spell;
+///     Spell spell;
 ///     (u32)SpellTriggerType spell_trigger;
 ///     i32 spell_charges;
 ///     i32 spell_cooldown;

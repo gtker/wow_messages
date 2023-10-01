@@ -8,7 +8,7 @@ use crate::tbc::{
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/pet/smsg_pet_cast_failed.wowm:10`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/pet/smsg_pet_cast_failed.wowm#L10):
 /// ```text
 /// smsg SMSG_PET_CAST_FAILED = 0x0138 {
-///     u32 id;
+///     Spell id;
 ///     SpellCastResult result;
 ///     Bool multiple_casts;
 ///     if (result == REQUIRES_SPELL_FOCUS) {
@@ -43,7 +43,7 @@ impl SMSG_PET_CAST_FAILED {
             return Err(crate::errors::ParseErrorKind::InvalidSize);
         }
 
-        // id: u32
+        // id: Spell
         let id = crate::util::read_u32_le(&mut r)?;
 
         // result: SpellCastResult
@@ -418,7 +418,7 @@ impl crate::Message for SMSG_PET_CAST_FAILED {
     }
 
     fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
-        // id: u32
+        // id: Spell
         w.write_all(&self.id.to_le_bytes())?;
 
         // result: SpellCastResult
@@ -492,7 +492,7 @@ impl crate::tbc::ServerMessage for SMSG_PET_CAST_FAILED {}
 
 impl SMSG_PET_CAST_FAILED {
     pub(crate) const fn size(&self) -> usize {
-        4 // id: u32
+        4 // id: Spell
         + self.result.size() // result: SMSG_PET_CAST_FAILED_SpellCastResult
         + 1 // multiple_casts: Bool
     }

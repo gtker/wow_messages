@@ -9,7 +9,7 @@ use wow_world_base::shared::roll_vote_tbc_wrath::RollVote;
 /// smsg SMSG_LOOT_ROLL_WON = 0x029F {
 ///     Guid looted_target;
 ///     u32 loot_slot;
-///     u32 item;
+///     Item item;
 ///     u32 item_random_suffix;
 ///     u32 item_random_property_id;
 ///     Guid winning_player;
@@ -44,7 +44,7 @@ impl SMSG_LOOT_ROLL_WON {
         // loot_slot: u32
         let loot_slot = crate::util::read_u32_le(&mut r)?;
 
-        // item: u32
+        // item: Item
         let item = crate::util::read_u32_le(&mut r)?;
 
         // item_random_suffix: u32
@@ -140,7 +140,7 @@ impl crate::Message for SMSG_LOOT_ROLL_WON {
         // loot_slot: u32
         w.write_all(&self.loot_slot.to_le_bytes())?;
 
-        // item: u32
+        // item: Item
         w.write_all(&self.item.to_le_bytes())?;
 
         // item_random_suffix: u32

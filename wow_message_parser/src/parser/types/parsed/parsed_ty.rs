@@ -6,10 +6,10 @@ use crate::parser::types::parsed::parsed_array::{ParsedArray, ParsedArraySize, P
 use crate::parser::types::parsed::parsed_container::ParsedContainer;
 use crate::parser::types::sizes::{
     update_mask_max, Sizes, ADDON_ARRAY_MAX, ADDON_ARRAY_MIN, AURA_MASK_MAX_SIZE,
-    AURA_MASK_MIN_SIZE, DATETIME_SIZE, F32_SIZE, GOLD_SIZE, GUID_SIZE, IP_ADDRESS_SIZE,
+    AURA_MASK_MIN_SIZE, DATETIME_SIZE, F32_SIZE, GOLD_SIZE, GUID_SIZE, IP_ADDRESS_SIZE, ITEM_SIZE,
     LEVEL16_SIZE, LEVEL32_SIZE, LEVEL_SIZE, MILLISECONDS_SIZE, NAMED_GUID_MAX_SIZE,
     NAMED_GUID_MIN_SIZE, PACKED_GUID_MAX_SIZE, PACKED_GUID_MIN_SIZE, POPULATION_SIZE, SECONDS_SIZE,
-    UPDATE_MASK_MIN_SIZE, VARIABLE_ITEM_RANDOM_PROPERTY_MAX_SIZE,
+    SPELL16_SIZE, SPELL_SIZE, UPDATE_MASK_MIN_SIZE, VARIABLE_ITEM_RANDOM_PROPERTY_MAX_SIZE,
     VARIABLE_ITEM_RANDOM_PROPERTY_MIN_SIZE,
 };
 use crate::parser::types::ty::Type;
@@ -57,6 +57,9 @@ pub(crate) enum ParsedType {
     IpAddress,
     Seconds,
     Milliseconds,
+    Spell,
+    Spell16,
+    Item,
 }
 
 impl ParsedType {
@@ -95,6 +98,9 @@ impl ParsedType {
             ParsedType::Seconds => Type::SECONDS_NAME.to_string(),
             ParsedType::Milliseconds => Type::MILLISECONDS_NAME.to_string(),
             ParsedType::Population => Type::POPULATION_NAME.to_string(),
+            ParsedType::Spell => Type::SPELL_NAME.to_string(),
+            ParsedType::Spell16 => Type::SPELL16_NAME.to_string(),
+            ParsedType::Item => Type::ITEM_NAME.to_string(),
         }
     }
 
@@ -117,6 +123,9 @@ impl ParsedType {
             ParsedType::Array(a) => a.rust_str(),
 
             ParsedType::Milliseconds | ParsedType::Seconds => Type::DURATIONS_RUST_NAME.to_string(),
+
+            ParsedType::Item | ParsedType::Spell => "u32".to_string(),
+            ParsedType::Spell16 => "u16".to_string(),
 
             _ => self.str(),
         }
@@ -171,6 +180,10 @@ impl ParsedType {
             ParsedType::AddonArray => (ADDON_ARRAY_MIN.into(), ADDON_ARRAY_MAX),
             ParsedType::IpAddress => (IP_ADDRESS_SIZE.into(), IP_ADDRESS_SIZE.into()),
             ParsedType::Population => (POPULATION_SIZE.into(), POPULATION_SIZE.into()),
+            ParsedType::Spell => (SPELL_SIZE.into(), SPELL_SIZE.into()),
+            ParsedType::Spell16 => (SPELL16_SIZE.into(), SPELL16_SIZE.into()),
+            ParsedType::Item => (ITEM_SIZE.into(), ITEM_SIZE.into()),
+
             t => unimplemented!("sizes for {t:?}"),
         }
     }
@@ -238,6 +251,7 @@ impl ParsedType {
                     ParsedArrayType::PackedGuid => {
                         (PACKED_GUID_MIN_SIZE.into(), PACKED_GUID_MAX_SIZE.into())
                     }
+                    ParsedArrayType::Spell => (SPELL_SIZE.into(), SPELL_SIZE.into()),
                     ParsedArrayType::Complex(s) => {
                         if let Some(e) = get_definer(definers, s, e.tags()) {
                             (e.ty().size().into(), e.ty().size().into())
@@ -305,13 +319,14 @@ impl ParsedType {
 
             "u48" => Self::Integer(IntegerType::U48),
 
-            "Item16" | "Spell16" => Self::Integer(IntegerType::U16),
+            Type::SPELL16_NAME => Self::Spell16,
+            Type::SPELL_NAME => Self::Spell,
+            Type::ITEM_NAME => Self::Item,
             Type::LEVEL_NAME => Self::Level,
             Type::LEVEL_NAME16 => Self::Level16,
             Type::LEVEL_NAME32 => Self::Level32,
             Type::MILLISECONDS_NAME => Self::Milliseconds,
             Type::SECONDS_NAME => Self::Seconds,
-            Type::SPELL_NAME | "Item" => Self::Integer(IntegerType::U32),
             Type::GOLD_NAME => Self::Gold,
             Type::POPULATION_NAME => Self::Population,
             Type::GUID_NAME => Self::Guid,
@@ -377,6 +392,9 @@ impl ParsedType {
                         )),
                         ParsedType::Guid => {
                             Self::Array(ParsedArray::new(ParsedArrayType::Guid, size, compressed))
+                        }
+                        ParsedType::Spell => {
+                            Self::Array(ParsedArray::new(ParsedArrayType::Spell, size, compressed))
                         }
 
                         _ => unimplemented!("unsupported"),

@@ -12,7 +12,7 @@ use crate::vanilla::{
 /// smsg SMSG_SPELL_GO = 0x0132 {
 ///     PackedGuid cast_item;
 ///     PackedGuid caster;
-///     u32 spell;
+///     Spell spell;
 ///     CastFlags flags;
 ///     u8 amount_of_hits;
 ///     Guid[amount_of_hits] hits;
@@ -49,7 +49,7 @@ impl SMSG_SPELL_GO {
         // caster: PackedGuid
         let caster = crate::util::read_packed_guid(&mut r)?;
 
-        // spell: u32
+        // spell: Spell
         let spell = crate::util::read_u32_le(&mut r)?;
 
         // flags: CastFlags
@@ -371,7 +371,7 @@ impl crate::Message for SMSG_SPELL_GO {
         // caster: PackedGuid
         crate::util::write_packed_guid(&self.caster, &mut w)?;
 
-        // spell: u32
+        // spell: Spell
         w.write_all(&self.spell.to_le_bytes())?;
 
         // flags: CastFlags
@@ -421,7 +421,7 @@ impl SMSG_SPELL_GO {
     pub(crate) fn size(&self) -> usize {
         crate::util::packed_guid_size(&self.cast_item) // cast_item: PackedGuid
         + crate::util::packed_guid_size(&self.caster) // caster: PackedGuid
-        + 4 // spell: u32
+        + 4 // spell: Spell
         + self.flags.size() // flags: SMSG_SPELL_GO_CastFlags
         + 1 // amount_of_hits: u8
         + self.hits.len() *  8 // hits: Guid[amount_of_hits]

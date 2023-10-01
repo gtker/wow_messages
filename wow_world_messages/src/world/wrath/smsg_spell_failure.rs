@@ -9,7 +9,7 @@ use crate::wrath::SpellCastResult;
 /// smsg SMSG_SPELL_FAILURE = 0x0133 {
 ///     Guid guid;
 ///     u8 extra_casts;
-///     u32 spell;
+///     Spell spell;
 ///     SpellCastResult result;
 /// }
 /// ```
@@ -33,7 +33,7 @@ impl SMSG_SPELL_FAILURE {
         // extra_casts: u8
         let extra_casts = crate::util::read_u8_le(&mut r)?;
 
-        // spell: u32
+        // spell: Spell
         let spell = crate::util::read_u32_le(&mut r)?;
 
         // result: SpellCastResult
@@ -105,7 +105,7 @@ impl crate::Message for SMSG_SPELL_FAILURE {
         // extra_casts: u8
         w.write_all(&self.extra_casts.to_le_bytes())?;
 
-        // spell: u32
+        // spell: Spell
         w.write_all(&self.spell.to_le_bytes())?;
 
         // result: SpellCastResult

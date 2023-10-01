@@ -23,11 +23,11 @@ use crate::wrath::{
 ///     }
 ///     else if (effect == INTERRUPT_CAST) {
 ///         PackedGuid target5;
-///         u32 interrupted_spell;
+///         Spell interrupted_spell;
 ///     }
 ///     else if (effect == DURABILITY_DAMAGE) {
 ///         PackedGuid target6;
-///         u32 item_to_damage;
+///         Item item_to_damage;
 ///         u32 unknown5;
 ///     }
 ///     else if (effect == OPEN_LOCK
@@ -36,7 +36,7 @@ use crate::wrath::{
 ///     }
 ///     else if (effect == CREATE_ITEM
 ///         || effect == CREATE_ITEM2) {
-///         u32 item;
+///         Item item;
 ///     }
 ///     else if (effect == SUMMON
 ///         || effect == TRANS_DOOR
@@ -129,7 +129,7 @@ impl SpellLog {
             SpellLog_SpellEffect::CreateItem {
                 item,
             } => {
-                // item: u32
+                // item: Item
                 w.write_all(&item.to_le_bytes())?;
 
             }
@@ -168,7 +168,7 @@ impl SpellLog {
                 // target5: PackedGuid
                 crate::util::write_packed_guid(&target5, &mut w)?;
 
-                // interrupted_spell: u32
+                // interrupted_spell: Spell
                 w.write_all(&interrupted_spell.to_le_bytes())?;
 
             }
@@ -243,7 +243,7 @@ impl SpellLog {
                 // target6: PackedGuid
                 crate::util::write_packed_guid(&target6, &mut w)?;
 
-                // item_to_damage: u32
+                // item_to_damage: Item
                 w.write_all(&item_to_damage.to_le_bytes())?;
 
                 // unknown5: u32
@@ -336,7 +336,7 @@ impl SpellLog {
             SpellEffect::Parry => SpellLog_SpellEffect::Parry,
             SpellEffect::Block => SpellLog_SpellEffect::Block,
             SpellEffect::CreateItem => {
-                // item: u32
+                // item: Item
                 let item = crate::util::read_u32_le(&mut r)?;
 
                 SpellLog_SpellEffect::CreateItem {
@@ -418,7 +418,7 @@ impl SpellLog {
                 // target5: PackedGuid
                 let target5 = crate::util::read_packed_guid(&mut r)?;
 
-                // interrupted_spell: u32
+                // interrupted_spell: Spell
                 let interrupted_spell = crate::util::read_u32_le(&mut r)?;
 
                 SpellLog_SpellEffect::InterruptCast {
@@ -535,7 +535,7 @@ impl SpellLog {
                 // target6: PackedGuid
                 let target6 = crate::util::read_packed_guid(&mut r)?;
 
-                // item_to_damage: u32
+                // item_to_damage: Item
                 let item_to_damage = crate::util::read_u32_le(&mut r)?;
 
                 // unknown5: u32
@@ -1222,7 +1222,7 @@ impl SpellLog_SpellEffect {
                 ..
             } => {
                 4
-                + 4 // item: u32
+                + 4 // item: Item
             }
             Self::Summon {
                 summon_target,
@@ -1253,7 +1253,7 @@ impl SpellLog_SpellEffect {
                 ..
             } => {
                 4
-                + 4 // interrupted_spell: u32
+                + 4 // interrupted_spell: Spell
                 + crate::util::packed_guid_size(&target5) // target5: PackedGuid
             }
             Self::SummonObjectWild {
@@ -1315,7 +1315,7 @@ impl SpellLog_SpellEffect {
                 ..
             } => {
                 4
-                + 4 // item_to_damage: u32
+                + 4 // item_to_damage: Item
                 + crate::util::packed_guid_size(&target6) // target6: PackedGuid
                 + 4 // unknown5: u32
             }

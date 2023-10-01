@@ -8,7 +8,7 @@ use crate::vanilla::{
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/spell/smsg_cast_result.wowm:303`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/spell/smsg_cast_result.wowm#L303):
 /// ```text
 /// smsg SMSG_CAST_RESULT = 0x0130 {
-///     u32 spell;
+///     Spell spell;
 ///     SimpleSpellCastResult result;
 ///     if (result != FAILURE) {
 ///         CastFailureReason reason;
@@ -38,7 +38,7 @@ impl SMSG_CAST_RESULT {
             return Err(crate::errors::ParseErrorKind::InvalidSize);
         }
 
-        // spell: u32
+        // spell: Spell
         let spell = crate::util::read_u32_le(&mut r)?;
 
         // result: SimpleSpellCastResult
@@ -352,7 +352,7 @@ impl crate::Message for SMSG_CAST_RESULT {
     }
 
     fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
-        // spell: u32
+        // spell: Spell
         w.write_all(&self.spell.to_le_bytes())?;
 
         // result: SimpleSpellCastResult
@@ -416,7 +416,7 @@ impl crate::vanilla::ServerMessage for SMSG_CAST_RESULT {}
 
 impl SMSG_CAST_RESULT {
     pub(crate) const fn size(&self) -> usize {
-        4 // spell: u32
+        4 // spell: Spell
         + self.result.size() // result: SMSG_CAST_RESULT_SimpleSpellCastResult
     }
 }

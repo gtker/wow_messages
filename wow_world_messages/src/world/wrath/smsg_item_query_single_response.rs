@@ -14,7 +14,7 @@ use std::time::Duration;
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/queries/smsg_item_query_single_response.wowm:836`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/queries/smsg_item_query_single_response.wowm#L836):
 /// ```text
 /// smsg SMSG_ITEM_QUERY_SINGLE_RESPONSE = 0x0058 {
-///     u32 item;
+///     Item item;
 ///     optional found {
 ///         ItemClassAndSubClass class_and_sub_class;
 ///         u32 sound_override_sub_class;
@@ -35,7 +35,7 @@ use std::time::Duration;
 ///         Level32 required_level;
 ///         (u32)Skill required_skill;
 ///         u32 required_skill_rank;
-///         u32 required_spell;
+///         Spell required_spell;
 ///         u32 required_honor_rank;
 ///         u32 required_city_rank;
 ///         (u32)Faction required_faction;
@@ -100,12 +100,12 @@ impl SMSG_ITEM_QUERY_SINGLE_RESPONSE {
             return Err(crate::errors::ParseErrorKind::InvalidSize);
         }
 
-        // item: u32
+        // item: Item
         let item = crate::util::read_u32_le(&mut r)?;
 
         // optional found
         let current_size = {
-            4 // item: u32
+            4 // item: Item
         };
         let found = if current_size < body_size as usize {
             // class_and_sub_class: ItemClassAndSubClass
@@ -177,7 +177,7 @@ impl SMSG_ITEM_QUERY_SINGLE_RESPONSE {
             // required_skill_rank: u32
             let required_skill_rank = crate::util::read_u32_le(&mut r)?;
 
-            // required_spell: u32
+            // required_spell: Spell
             let required_spell = crate::util::read_u32_le(&mut r)?;
 
             // required_honor_rank: u32
@@ -698,7 +698,7 @@ impl crate::Message for SMSG_ITEM_QUERY_SINGLE_RESPONSE {
     }
 
     fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
-        // item: u32
+        // item: Item
         w.write_all(&self.item.to_le_bytes())?;
 
         // optional found
@@ -776,7 +776,7 @@ impl crate::Message for SMSG_ITEM_QUERY_SINGLE_RESPONSE {
             // required_skill_rank: u32
             w.write_all(&v.required_skill_rank.to_le_bytes())?;
 
-            // required_spell: u32
+            // required_spell: Spell
             w.write_all(&v.required_spell.to_le_bytes())?;
 
             // required_honor_rank: u32
@@ -954,7 +954,7 @@ impl crate::wrath::ServerMessage for SMSG_ITEM_QUERY_SINGLE_RESPONSE {}
 
 impl SMSG_ITEM_QUERY_SINGLE_RESPONSE {
     pub(crate) fn size(&self) -> usize {
-        4 // item: u32
+        4 // item: Item
         + if let Some(found) = &self.found {
             8 // class_and_sub_class: ItemClassAndSubClass
             + 4 // sound_override_sub_class: u32
@@ -975,7 +975,7 @@ impl SMSG_ITEM_QUERY_SINGLE_RESPONSE {
             + 4 // required_level: Level32
             + 4 // required_skill: Skill
             + 4 // required_skill_rank: u32
-            + 4 // required_spell: u32
+            + 4 // required_spell: Spell
             + 4 // required_honor_rank: u32
             + 4 // required_city_rank: u32
             + 4 // required_faction: Faction

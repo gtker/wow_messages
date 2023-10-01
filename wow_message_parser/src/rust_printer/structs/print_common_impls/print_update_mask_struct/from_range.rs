@@ -23,7 +23,11 @@ pub(crate) fn create_from_range(s: &mut Writer, words: &[Vec<UpdateMaskMember>])
                         ));
                     }
 
-                    Type::DateTime | Type::Seconds | Type::Milliseconds => {
+                    Type::Item
+                    | Type::Spell
+                    | Type::DateTime
+                    | Type::Seconds
+                    | Type::Milliseconds => {
                         s.wln(format!("let (_, &{name}) = range.next()?;"));
                     }
                     Type::Integer(i) => {
@@ -77,8 +81,13 @@ pub(crate) fn create_from_range(s: &mut Writer, words: &[Vec<UpdateMaskMember>])
                         }
                     },
 
-                    Type::Gold | Type::Level | Type::Level16 | Type::Level32 | Type::IpAddress => {
-                        unimplemented!()
+                    Type::Spell16
+                    | Type::Gold
+                    | Type::Level
+                    | Type::Level16
+                    | Type::Level32
+                    | Type::IpAddress => {
+                        unimplemented!("{:#?}", member.ty())
                     }
 
                     Type::Population
@@ -127,7 +136,10 @@ pub(crate) fn create_from_range(s: &mut Writer, words: &[Vec<UpdateMaskMember>])
 
                         Type::Array(_) => unimplemented!(),
 
-                        Type::Guid
+                        Type::Spell
+                        | Type::Spell16
+                        | Type::Item
+                        | Type::Guid
                         | Type::DateTime
                         | Type::Seconds
                         | Type::Milliseconds

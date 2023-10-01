@@ -9,8 +9,8 @@ use crate::Guid;
 /// smsg SMSG_ENCHANTMENTLOG = 0x01D7 {
 ///     Guid target;
 ///     Guid caster;
-///     u32 item;
-///     u32 spell;
+///     Item item;
+///     Spell spell;
 ///     Bool show_affiliation;
 /// }
 /// ```
@@ -37,10 +37,10 @@ impl SMSG_ENCHANTMENTLOG {
         // caster: Guid
         let caster = crate::util::read_guid(&mut r)?;
 
-        // item: u32
+        // item: Item
         let item = crate::util::read_u32_le(&mut r)?;
 
-        // spell: u32
+        // spell: Spell
         let spell = crate::util::read_u32_le(&mut r)?;
 
         // show_affiliation: Bool
@@ -115,10 +115,10 @@ impl crate::Message for SMSG_ENCHANTMENTLOG {
         // caster: Guid
         w.write_all(&self.caster.guid().to_le_bytes())?;
 
-        // item: u32
+        // item: Item
         w.write_all(&self.item.to_le_bytes())?;
 
-        // spell: u32
+        // spell: Spell
         w.write_all(&self.spell.to_le_bytes())?;
 
         // show_affiliation: Bool

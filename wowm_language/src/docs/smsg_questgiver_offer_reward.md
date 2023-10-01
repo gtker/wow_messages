@@ -19,8 +19,8 @@ smsg SMSG_QUESTGIVER_OFFER_REWARD = 0x018D {
     u32 amount_of_item_rewards;
     QuestItemRequirement[amount_of_item_rewards] item_rewards;
     Gold money_reward;
-    u32 reward_spell;
-    u32 reward_spell_cast;
+    Spell reward_spell;
+    Spell reward_spell_cast;
 }
 ```
 ### Header
@@ -50,8 +50,8 @@ SMSG have a header of 4 bytes.
 | - | 4 / Little | u32 | amount_of_item_rewards |  |
 | - | ? / - | [QuestItemRequirement](questitemrequirement.md)[amount_of_item_rewards] | item_rewards |  |
 | - | 4 / Little | Gold | money_reward |  |
-| - | 4 / Little | u32 | reward_spell |  |
-| - | 4 / Little | u32 | reward_spell_cast | mangoszero and cmangos disagree about which field is _cast, although they both agree that the _cast field should not be in zero (vanilla). They still both include both fields in the code though. |
+| - | 4 / Little | Spell | reward_spell |  |
+| - | 4 / Little | Spell | reward_spell_cast | mangoszero and cmangos disagree about which field is _cast, although they both agree that the _cast field should not be in zero (vanilla). They still both include both fields in the code though. |
 
 ## Client Version 2.4.3
 
@@ -75,8 +75,8 @@ smsg SMSG_QUESTGIVER_OFFER_REWARD = 0x018D {
     Gold money_reward;
     u32 honor_reward;
     u32 unknown1;
-    u32 reward_spell;
-    u32 reward_spell_cast;
+    Spell reward_spell;
+    Spell reward_spell_cast;
     u32 title_reward;
 }
 ```
@@ -110,8 +110,8 @@ SMSG have a header of 4 bytes.
 | - | 4 / Little | Gold | money_reward |  |
 | - | 4 / Little | u32 | honor_reward |  |
 | - | 4 / Little | u32 | unknown1 | mangostwo: unused by client?<br/>mangostwo sets to 0x08. |
-| - | 4 / Little | u32 | reward_spell |  |
-| - | 4 / Little | u32 | reward_spell_cast | mangoszero and cmangos disagree about which field is _cast, although they both agree that the _cast field should not be in zero (vanilla). They still both include both fields in the code though. |
+| - | 4 / Little | Spell | reward_spell |  |
+| - | 4 / Little | Spell | reward_spell_cast | mangoszero and cmangos disagree about which field is _cast, although they both agree that the _cast field should not be in zero (vanilla). They still both include both fields in the code though. |
 | - | 4 / Little | u32 | title_reward |  |
 
 ## Client Version 3.3.5
@@ -139,8 +139,8 @@ smsg SMSG_QUESTGIVER_OFFER_REWARD = 0x018D {
     u32 honor_reward;
     f32 honor_reward_multiplier;
     u32 unknown1;
-    u32 reward_spell;
-    u32 reward_spell_cast;
+    Spell reward_spell;
+    Spell reward_spell_cast;
     u32 title_reward;
     u32 reward_talents;
     u32 reward_arena_points;
@@ -183,8 +183,8 @@ SMSG have a header of 4 bytes.
 | - | 4 / Little | u32 | honor_reward |  |
 | - | 4 / Little | f32 | honor_reward_multiplier |  |
 | - | 4 / Little | u32 | unknown1 | mangostwo: unused by client?<br/>mangostwo sets to 0x08. |
-| - | 4 / Little | u32 | reward_spell |  |
-| - | 4 / Little | u32 | reward_spell_cast | mangoszero and cmangos disagree about which field is _cast, although they both agree that the _cast field should not be in zero (vanilla). They still both include both fields in the code though. |
+| - | 4 / Little | Spell | reward_spell |  |
+| - | 4 / Little | Spell | reward_spell_cast | mangoszero and cmangos disagree about which field is _cast, although they both agree that the _cast field should not be in zero (vanilla). They still both include both fields in the code though. |
 | - | 4 / Little | u32 | title_reward |  |
 | - | 4 / Little | u32 | reward_talents |  |
 | - | 4 / Little | u32 | reward_arena_points |  |

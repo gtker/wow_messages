@@ -4,7 +4,7 @@ use std::io::{Read, Write};
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/update_mask/skill_info.wowm:39`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/update_mask/skill_info.wowm#L39):
 /// ```text
 /// struct VisibleItem {
-///     u32 item;
+///     Item item;
 ///     u16[2] enchants;
 /// }
 /// ```

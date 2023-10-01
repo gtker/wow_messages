@@ -93,7 +93,7 @@ cmsg CMSG_USE_ITEM = 0x00AB {
     u8 bag_slot;
     u8 spell_index;
     u8 cast_count;
-    u32 spell;
+    Spell spell;
     Guid item;
     u32 glyph_index;
     ClientCastFlags cast_flags;
@@ -129,7 +129,7 @@ CMSG have a header of 6 bytes.
 | 0x07 | 1 / - | u8 | bag_slot |  |
 | 0x08 | 1 / - | u8 | spell_index |  |
 | 0x09 | 1 / - | u8 | cast_count | mangosone: next cast if exists (single or not) |
-| 0x0A | 4 / Little | u32 | spell |  |
+| 0x0A | 4 / Little | Spell | spell |  |
 | 0x0E | 8 / Little | [Guid](../types/packed-guid.md) | item |  |
 | 0x16 | 4 / Little | u32 | glyph_index |  |
 | 0x1A | 1 / - | [ClientCastFlags](clientcastflags.md) | cast_flags |  |

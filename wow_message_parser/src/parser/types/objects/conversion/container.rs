@@ -114,6 +114,9 @@ fn parsed_type_to_type(
         ParsedType::Seconds => Type::Seconds,
         ParsedType::Milliseconds => Type::Milliseconds,
         ParsedType::Population => Type::Population,
+        ParsedType::Spell => Type::Spell,
+        ParsedType::Spell16 => Type::Spell16,
+        ParsedType::Item => Type::Item,
     }
 }
 
@@ -149,6 +152,7 @@ fn parsed_array_to_array(
         ParsedArrayType::CString => ArrayType::CString,
         ParsedArrayType::Guid => ArrayType::Guid,
         ParsedArrayType::PackedGuid => ArrayType::PackedGuid,
+        ParsedArrayType::Spell => ArrayType::Spell,
     };
 
     Array::new(inner, size, array.compressed)
@@ -525,6 +529,7 @@ fn convert_parsed_test_case_value_to_test_case_value(
                     ParsedArrayType::CString => unimplemented!(),
                     ParsedArrayType::Guid => "Guid",
                     ParsedArrayType::PackedGuid => "Guid",
+                    ParsedArrayType::Spell => "u32",
                 },
                 ParsedType::MonsterMoveSpline => {
                     let mut v = Vec::new();
@@ -652,6 +657,18 @@ fn convert_parsed_test_case_value_to_test_case_value(
             value.clone(),
         )),
         ParsedType::IpAddress => TestValue::IpAddress(ContainerValue::new(
+            parse_value(&value).unwrap(),
+            value.clone(),
+        )),
+        ParsedType::Spell => TestValue::Number(ContainerValue::new(
+            parse_value(&value).unwrap(),
+            value.clone(),
+        )),
+        ParsedType::Spell16 => TestValue::Number(ContainerValue::new(
+            parse_value(&value).unwrap(),
+            value.clone(),
+        )),
+        ParsedType::Item => TestValue::Number(ContainerValue::new(
             parse_value(&value).unwrap(),
             value.clone(),
         )),

@@ -7,7 +7,7 @@ use crate::shared::gold_vanilla_tbc_wrath::Gold;
 /// ```text
 /// struct ListInventoryItem {
 ///     u32 item_stack_count;
-///     u32 item;
+///     Item item;
 ///     u32 item_display_id;
 ///     u32 max_items;
 ///     Gold price;
@@ -33,7 +33,7 @@ impl ListInventoryItem {
         // item_stack_count: u32
         w.write_all(&self.item_stack_count.to_le_bytes())?;
 
-        // item: u32
+        // item: Item
         w.write_all(&self.item.to_le_bytes())?;
 
         // item_display_id: u32
@@ -63,7 +63,7 @@ impl ListInventoryItem {
         // item_stack_count: u32
         let item_stack_count = crate::util::read_u32_le(&mut r)?;
 
-        // item: u32
+        // item: Item
         let item = crate::util::read_u32_le(&mut r)?;
 
         // item_display_id: u32

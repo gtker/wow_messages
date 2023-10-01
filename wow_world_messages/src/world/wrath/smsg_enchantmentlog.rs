@@ -9,8 +9,8 @@ use crate::Guid;
 /// smsg SMSG_ENCHANTMENTLOG = 0x01D7 {
 ///     PackedGuid target;
 ///     PackedGuid caster;
-///     u32 item;
-///     u32 spell;
+///     Item item;
+///     Spell spell;
 ///     Bool show_affiliation;
 /// }
 /// ```
@@ -37,10 +37,10 @@ impl SMSG_ENCHANTMENTLOG {
         // caster: PackedGuid
         let caster = crate::util::read_packed_guid(&mut r)?;
 
-        // item: u32
+        // item: Item
         let item = crate::util::read_u32_le(&mut r)?;
 
-        // spell: u32
+        // spell: Spell
         let spell = crate::util::read_u32_le(&mut r)?;
 
         // show_affiliation: Bool
@@ -115,10 +115,10 @@ impl crate::Message for SMSG_ENCHANTMENTLOG {
         // caster: PackedGuid
         crate::util::write_packed_guid(&self.caster, &mut w)?;
 
-        // item: u32
+        // item: Item
         w.write_all(&self.item.to_le_bytes())?;
 
-        // spell: u32
+        // spell: Spell
         w.write_all(&self.spell.to_le_bytes())?;
 
         // show_affiliation: Bool
@@ -140,8 +140,8 @@ impl SMSG_ENCHANTMENTLOG {
     pub(crate) const fn size(&self) -> usize {
         crate::util::packed_guid_size(&self.target) // target: PackedGuid
         + crate::util::packed_guid_size(&self.caster) // caster: PackedGuid
-        + 4 // item: u32
-        + 4 // spell: u32
+        + 4 // item: Item
+        + 4 // spell: Spell
         + 1 // show_affiliation: Bool
     }
 }

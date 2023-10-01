@@ -12,7 +12,7 @@ use crate::wrath::{
 ///     PackedGuid cast_item;
 ///     PackedGuid caster;
 ///     u8 extra_casts;
-///     u32 spell;
+///     Spell spell;
 ///     GameobjectCastFlags flags;
 ///     u32 timestamp;
 ///     SpellCastTargets targets;
@@ -68,7 +68,7 @@ impl SMSG_SPELL_GO {
         // extra_casts: u8
         let extra_casts = crate::util::read_u8_le(&mut r)?;
 
-        // spell: u32
+        // spell: Spell
         let spell = crate::util::read_u32_le(&mut r)?;
 
         // flags: GameobjectCastFlags
@@ -469,7 +469,7 @@ impl crate::Message for SMSG_SPELL_GO {
         // extra_casts: u8
         w.write_all(&self.extra_casts.to_le_bytes())?;
 
-        // spell: u32
+        // spell: Spell
         w.write_all(&self.spell.to_le_bytes())?;
 
         // flags: GameobjectCastFlags
@@ -551,7 +551,7 @@ impl SMSG_SPELL_GO {
         crate::util::packed_guid_size(&self.cast_item) // cast_item: PackedGuid
         + crate::util::packed_guid_size(&self.caster) // caster: PackedGuid
         + 1 // extra_casts: u8
-        + 4 // spell: u32
+        + 4 // spell: Spell
         + self.flags.size() // flags: SMSG_SPELL_GO_GameobjectCastFlags
         + 4 // timestamp: u32
         + self.targets.size() // targets: SpellCastTargets

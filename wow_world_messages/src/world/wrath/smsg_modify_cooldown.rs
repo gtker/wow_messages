@@ -7,7 +7,7 @@ use std::time::Duration;
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/spell/smsg_modify_cooldown.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/spell/smsg_modify_cooldown.wowm#L1):
 /// ```text
 /// smsg SMSG_MODIFY_COOLDOWN = 0x0491 {
-///     u32 spell;
+///     Spell spell;
 ///     Guid player;
 ///     Milliseconds cooldown;
 /// }
@@ -25,7 +25,7 @@ impl SMSG_MODIFY_COOLDOWN {
             return Err(crate::errors::ParseErrorKind::InvalidSize);
         }
 
-        // spell: u32
+        // spell: Spell
         let spell = crate::util::read_u32_le(&mut r)?;
 
         // player: Guid
@@ -91,7 +91,7 @@ impl crate::Message for SMSG_MODIFY_COOLDOWN {
     }
 
     fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
-        // spell: u32
+        // spell: Spell
         w.write_all(&self.spell.to_le_bytes())?;
 
         // player: Guid

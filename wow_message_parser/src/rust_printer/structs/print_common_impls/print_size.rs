@@ -100,6 +100,9 @@ pub(crate) fn print_size_of_ty_rust_view(s: &mut Writer, m: &RustMember, prefix:
                         }
                     }
                 },
+                ArrayType::Spell => {
+                    format!("{prefix}{name}.len() * 4",)
+                }
                 ArrayType::Struct(e) => match array.size() {
                     ArraySize::Fixed(fixed_value) => match e.sizes().is_constant() {
                         Some(size) => {

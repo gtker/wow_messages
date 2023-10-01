@@ -16,7 +16,7 @@ use crate::wrath::{
 ///             u32 equip_error;
 ///         }
 ///         else {
-///             u32 item;
+///             Item item;
 ///             u32 item_count;
 ///         }
 ///     }
@@ -117,7 +117,7 @@ impl SMSG_SEND_MAIL_RESULT {
 
                 let result_if = match result {
                     MailResult::Ok => {
-                        // item: u32
+                        // item: Item
                         let item = crate::util::read_u32_le(&mut r)?;
 
                         // item_count: u32
@@ -137,7 +137,7 @@ impl SMSG_SEND_MAIL_RESULT {
                         }
                     }
                     MailResult::ErrCannotSendToSelf => {
-                        // item: u32
+                        // item: Item
                         let item = crate::util::read_u32_le(&mut r)?;
 
                         // item_count: u32
@@ -149,7 +149,7 @@ impl SMSG_SEND_MAIL_RESULT {
                         }
                     }
                     MailResult::ErrNotEnoughMoney => {
-                        // item: u32
+                        // item: Item
                         let item = crate::util::read_u32_le(&mut r)?;
 
                         // item_count: u32
@@ -161,7 +161,7 @@ impl SMSG_SEND_MAIL_RESULT {
                         }
                     }
                     MailResult::ErrRecipientNotFound => {
-                        // item: u32
+                        // item: Item
                         let item = crate::util::read_u32_le(&mut r)?;
 
                         // item_count: u32
@@ -173,7 +173,7 @@ impl SMSG_SEND_MAIL_RESULT {
                         }
                     }
                     MailResult::ErrNotYourTeam => {
-                        // item: u32
+                        // item: Item
                         let item = crate::util::read_u32_le(&mut r)?;
 
                         // item_count: u32
@@ -185,7 +185,7 @@ impl SMSG_SEND_MAIL_RESULT {
                         }
                     }
                     MailResult::ErrInternalError => {
-                        // item: u32
+                        // item: Item
                         let item = crate::util::read_u32_le(&mut r)?;
 
                         // item_count: u32
@@ -197,7 +197,7 @@ impl SMSG_SEND_MAIL_RESULT {
                         }
                     }
                     MailResult::ErrDisabledForTrialAcc => {
-                        // item: u32
+                        // item: Item
                         let item = crate::util::read_u32_le(&mut r)?;
 
                         // item_count: u32
@@ -209,7 +209,7 @@ impl SMSG_SEND_MAIL_RESULT {
                         }
                     }
                     MailResult::ErrRecipientCapReached => {
-                        // item: u32
+                        // item: Item
                         let item = crate::util::read_u32_le(&mut r)?;
 
                         // item_count: u32
@@ -221,7 +221,7 @@ impl SMSG_SEND_MAIL_RESULT {
                         }
                     }
                     MailResult::ErrCantSendWrappedCod => {
-                        // item: u32
+                        // item: Item
                         let item = crate::util::read_u32_le(&mut r)?;
 
                         // item_count: u32
@@ -233,7 +233,7 @@ impl SMSG_SEND_MAIL_RESULT {
                         }
                     }
                     MailResult::ErrMailAndChatSuspended => {
-                        // item: u32
+                        // item: Item
                         let item = crate::util::read_u32_le(&mut r)?;
 
                         // item_count: u32
@@ -245,7 +245,7 @@ impl SMSG_SEND_MAIL_RESULT {
                         }
                     }
                     MailResult::ErrTooManyAttachments => {
-                        // item: u32
+                        // item: Item
                         let item = crate::util::read_u32_le(&mut r)?;
 
                         // item_count: u32
@@ -257,7 +257,7 @@ impl SMSG_SEND_MAIL_RESULT {
                         }
                     }
                     MailResult::ErrMailAttachmentInvalid => {
-                        // item: u32
+                        // item: Item
                         let item = crate::util::read_u32_le(&mut r)?;
 
                         // item_count: u32
@@ -269,7 +269,7 @@ impl SMSG_SEND_MAIL_RESULT {
                         }
                     }
                     MailResult::ErrItemHasExpired => {
-                        // item: u32
+                        // item: Item
                         let item = crate::util::read_u32_le(&mut r)?;
 
                         // item_count: u32
@@ -846,7 +846,7 @@ impl crate::Message for SMSG_SEND_MAIL_RESULT {
                         item,
                         item_count,
                     } => {
-                        // item: u32
+                        // item: Item
                         w.write_all(&item.to_le_bytes())?;
 
                         // item_count: u32
@@ -864,7 +864,7 @@ impl crate::Message for SMSG_SEND_MAIL_RESULT {
                         item,
                         item_count,
                     } => {
-                        // item: u32
+                        // item: Item
                         w.write_all(&item.to_le_bytes())?;
 
                         // item_count: u32
@@ -875,7 +875,7 @@ impl crate::Message for SMSG_SEND_MAIL_RESULT {
                         item,
                         item_count,
                     } => {
-                        // item: u32
+                        // item: Item
                         w.write_all(&item.to_le_bytes())?;
 
                         // item_count: u32
@@ -886,7 +886,7 @@ impl crate::Message for SMSG_SEND_MAIL_RESULT {
                         item,
                         item_count,
                     } => {
-                        // item: u32
+                        // item: Item
                         w.write_all(&item.to_le_bytes())?;
 
                         // item_count: u32
@@ -897,7 +897,7 @@ impl crate::Message for SMSG_SEND_MAIL_RESULT {
                         item,
                         item_count,
                     } => {
-                        // item: u32
+                        // item: Item
                         w.write_all(&item.to_le_bytes())?;
 
                         // item_count: u32
@@ -908,7 +908,7 @@ impl crate::Message for SMSG_SEND_MAIL_RESULT {
                         item,
                         item_count,
                     } => {
-                        // item: u32
+                        // item: Item
                         w.write_all(&item.to_le_bytes())?;
 
                         // item_count: u32
@@ -919,7 +919,7 @@ impl crate::Message for SMSG_SEND_MAIL_RESULT {
                         item,
                         item_count,
                     } => {
-                        // item: u32
+                        // item: Item
                         w.write_all(&item.to_le_bytes())?;
 
                         // item_count: u32
@@ -930,7 +930,7 @@ impl crate::Message for SMSG_SEND_MAIL_RESULT {
                         item,
                         item_count,
                     } => {
-                        // item: u32
+                        // item: Item
                         w.write_all(&item.to_le_bytes())?;
 
                         // item_count: u32
@@ -941,7 +941,7 @@ impl crate::Message for SMSG_SEND_MAIL_RESULT {
                         item,
                         item_count,
                     } => {
-                        // item: u32
+                        // item: Item
                         w.write_all(&item.to_le_bytes())?;
 
                         // item_count: u32
@@ -952,7 +952,7 @@ impl crate::Message for SMSG_SEND_MAIL_RESULT {
                         item,
                         item_count,
                     } => {
-                        // item: u32
+                        // item: Item
                         w.write_all(&item.to_le_bytes())?;
 
                         // item_count: u32
@@ -963,7 +963,7 @@ impl crate::Message for SMSG_SEND_MAIL_RESULT {
                         item,
                         item_count,
                     } => {
-                        // item: u32
+                        // item: Item
                         w.write_all(&item.to_le_bytes())?;
 
                         // item_count: u32
@@ -974,7 +974,7 @@ impl crate::Message for SMSG_SEND_MAIL_RESULT {
                         item,
                         item_count,
                     } => {
-                        // item: u32
+                        // item: Item
                         w.write_all(&item.to_le_bytes())?;
 
                         // item_count: u32
@@ -985,7 +985,7 @@ impl crate::Message for SMSG_SEND_MAIL_RESULT {
                         item,
                         item_count,
                     } => {
-                        // item: u32
+                        // item: Item
                         w.write_all(&item.to_le_bytes())?;
 
                         // item_count: u32
@@ -1273,7 +1273,7 @@ impl SMSG_SEND_MAIL_RESULT_MailResult {
                 ..
             } => {
                 4
-                + 4 // item: u32
+                + 4 // item: Item
                 + 4 // item_count: u32
             }
             Self::ErrEquipError {
@@ -1286,84 +1286,84 @@ impl SMSG_SEND_MAIL_RESULT_MailResult {
                 ..
             } => {
                 4
-                + 4 // item: u32
+                + 4 // item: Item
                 + 4 // item_count: u32
             }
             Self::ErrNotEnoughMoney {
                 ..
             } => {
                 4
-                + 4 // item: u32
+                + 4 // item: Item
                 + 4 // item_count: u32
             }
             Self::ErrRecipientNotFound {
                 ..
             } => {
                 4
-                + 4 // item: u32
+                + 4 // item: Item
                 + 4 // item_count: u32
             }
             Self::ErrNotYourTeam {
                 ..
             } => {
                 4
-                + 4 // item: u32
+                + 4 // item: Item
                 + 4 // item_count: u32
             }
             Self::ErrInternalError {
                 ..
             } => {
                 4
-                + 4 // item: u32
+                + 4 // item: Item
                 + 4 // item_count: u32
             }
             Self::ErrDisabledForTrialAcc {
                 ..
             } => {
                 4
-                + 4 // item: u32
+                + 4 // item: Item
                 + 4 // item_count: u32
             }
             Self::ErrRecipientCapReached {
                 ..
             } => {
                 4
-                + 4 // item: u32
+                + 4 // item: Item
                 + 4 // item_count: u32
             }
             Self::ErrCantSendWrappedCod {
                 ..
             } => {
                 4
-                + 4 // item: u32
+                + 4 // item: Item
                 + 4 // item_count: u32
             }
             Self::ErrMailAndChatSuspended {
                 ..
             } => {
                 4
-                + 4 // item: u32
+                + 4 // item: Item
                 + 4 // item_count: u32
             }
             Self::ErrTooManyAttachments {
                 ..
             } => {
                 4
-                + 4 // item: u32
+                + 4 // item: Item
                 + 4 // item_count: u32
             }
             Self::ErrMailAttachmentInvalid {
                 ..
             } => {
                 4
-                + 4 // item: u32
+                + 4 // item: Item
                 + 4 // item_count: u32
             }
             Self::ErrItemHasExpired {
                 ..
             } => {
                 4
-                + 4 // item: u32
+                + 4 // item: Item
                 + 4 // item_count: u32
             }
         }

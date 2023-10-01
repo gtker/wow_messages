@@ -149,7 +149,10 @@ fn print_bytes_definition(
     let prefix_text = format!("\"{prefix}\"");
 
     match d.ty() {
-        Type::Guid
+        Type::Spell
+        | Type::Spell16
+        | Type::Item
+        | Type::Guid
         | Type::Bool(_)
         | Type::Integer(_)
         | Type::Level
@@ -236,6 +239,11 @@ fn print_bytes_definition(
 
                             s.wln(format!(
                                 "crate::util::write_bytes(&mut s, &mut bytes, {size}, {name_text}, {prefix_text});"
+                            ));
+                        }
+                        ArrayType::Spell => {
+                            s.wln(format!(
+                                "crate::util::write_bytes(&mut s, &mut bytes, 4, {name_text}, {prefix_text});"
                             ));
                         }
                         ArrayType::Guid => {

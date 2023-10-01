@@ -31,19 +31,19 @@ struct SpellLog {
         u32 extra_attacks;
     }
     else if (effect == CREATE_ITEM) {
-        u32 item;
+        Item item;
     }
     else if (effect == INTERRUPT_CAST) {
         Guid target5;
-        u32 interrupted_spell;
+        Spell interrupted_spell;
     }
     else if (effect == DURABILITY_DAMAGE) {
         Guid target6;
-        u32 item_to_damage;
+        Item item_to_damage;
         u32 unknown5;
     }
     else if (effect == FEED_PET) {
-        u32 feed_pet_item;
+        Item feed_pet_item;
     }
     else if (effect == INSTAKILL
         || effect == RESURRECT
@@ -127,28 +127,28 @@ Else If effect is equal to `CREATE_ITEM`:
 
 | Offset | Size / Endianness | Type | Name | Comment |
 | ------ | ----------------- | ---- | ---- | ------- |
-| 0x48 | 4 / Little | u32 | item |  |
+| 0x48 | 4 / Little | Item | item |  |
 
 Else If effect is equal to `INTERRUPT_CAST`:
 
 | Offset | Size / Endianness | Type | Name | Comment |
 | ------ | ----------------- | ---- | ---- | ------- |
 | 0x4C | 8 / Little | [Guid](../types/packed-guid.md) | target5 |  |
-| 0x54 | 4 / Little | u32 | interrupted_spell |  |
+| 0x54 | 4 / Little | Spell | interrupted_spell |  |
 
 Else If effect is equal to `DURABILITY_DAMAGE`:
 
 | Offset | Size / Endianness | Type | Name | Comment |
 | ------ | ----------------- | ---- | ---- | ------- |
 | 0x58 | 8 / Little | [Guid](../types/packed-guid.md) | target6 |  |
-| 0x60 | 4 / Little | u32 | item_to_damage |  |
+| 0x60 | 4 / Little | Item | item_to_damage |  |
 | 0x64 | 4 / Little | u32 | unknown5 |  |
 
 Else If effect is equal to `FEED_PET`:
 
 | Offset | Size / Endianness | Type | Name | Comment |
 | ------ | ----------------- | ---- | ---- | ------- |
-| 0x68 | 4 / Little | u32 | feed_pet_item |  |
+| 0x68 | 4 / Little | Item | feed_pet_item |  |
 
 Else If effect is equal to `INSTAKILL` **or** 
 is equal to `RESURRECT` **or** 
@@ -214,11 +214,11 @@ struct SpellLog {
     }
     else if (effect == INTERRUPT_CAST) {
         PackedGuid target5;
-        u32 interrupted_spell;
+        Spell interrupted_spell;
     }
     else if (effect == DURABILITY_DAMAGE) {
         PackedGuid target6;
-        u32 item_to_damage;
+        Item item_to_damage;
         u32 unknown5;
     }
     else if (effect == OPEN_LOCK
@@ -226,7 +226,7 @@ struct SpellLog {
         PackedGuid lock_target;
     }
     else if (effect == CREATE_ITEM) {
-        u32 item;
+        Item item;
     }
     else if (effect == SUMMON
         || effect == TRANS_DOOR
@@ -276,14 +276,14 @@ Else If effect is equal to `INTERRUPT_CAST`:
 | Offset | Size / Endianness | Type | Name | Comment |
 | ------ | ----------------- | ---- | ---- | ------- |
 | - | - / - | [PackedGuid](../types/packed-guid.md) | target5 |  |
-| - | 4 / Little | u32 | interrupted_spell |  |
+| - | 4 / Little | Spell | interrupted_spell |  |
 
 Else If effect is equal to `DURABILITY_DAMAGE`:
 
 | Offset | Size / Endianness | Type | Name | Comment |
 | ------ | ----------------- | ---- | ---- | ------- |
 | - | - / - | [PackedGuid](../types/packed-guid.md) | target6 |  |
-| - | 4 / Little | u32 | item_to_damage |  |
+| - | 4 / Little | Item | item_to_damage |  |
 | - | 4 / Little | u32 | unknown5 |  |
 
 Else If effect is equal to `OPEN_LOCK` **or** 
@@ -297,7 +297,7 @@ Else If effect is equal to `CREATE_ITEM`:
 
 | Offset | Size / Endianness | Type | Name | Comment |
 | ------ | ----------------- | ---- | ---- | ------- |
-| - | 4 / Little | u32 | item |  |
+| - | 4 / Little | Item | item |  |
 
 Else If effect is equal to `SUMMON` **or** 
 is equal to `TRANS_DOOR` **or** 
@@ -351,11 +351,11 @@ struct SpellLog {
     }
     else if (effect == INTERRUPT_CAST) {
         PackedGuid target5;
-        u32 interrupted_spell;
+        Spell interrupted_spell;
     }
     else if (effect == DURABILITY_DAMAGE) {
         PackedGuid target6;
-        u32 item_to_damage;
+        Item item_to_damage;
         u32 unknown5;
     }
     else if (effect == OPEN_LOCK
@@ -364,7 +364,7 @@ struct SpellLog {
     }
     else if (effect == CREATE_ITEM
         || effect == CREATE_ITEM2) {
-        u32 item;
+        Item item;
     }
     else if (effect == SUMMON
         || effect == TRANS_DOOR
@@ -418,14 +418,14 @@ Else If effect is equal to `INTERRUPT_CAST`:
 | Offset | Size / Endianness | Type | Name | Comment |
 | ------ | ----------------- | ---- | ---- | ------- |
 | - | - / - | [PackedGuid](../types/packed-guid.md) | target5 |  |
-| - | 4 / Little | u32 | interrupted_spell |  |
+| - | 4 / Little | Spell | interrupted_spell |  |
 
 Else If effect is equal to `DURABILITY_DAMAGE`:
 
 | Offset | Size / Endianness | Type | Name | Comment |
 | ------ | ----------------- | ---- | ---- | ------- |
 | - | - / - | [PackedGuid](../types/packed-guid.md) | target6 |  |
-| - | 4 / Little | u32 | item_to_damage |  |
+| - | 4 / Little | Item | item_to_damage |  |
 | - | 4 / Little | u32 | unknown5 |  |
 
 Else If effect is equal to `OPEN_LOCK` **or** 
@@ -440,7 +440,7 @@ is equal to `CREATE_ITEM2`:
 
 | Offset | Size / Endianness | Type | Name | Comment |
 | ------ | ----------------- | ---- | ---- | ------- |
-| - | 4 / Little | u32 | item |  |
+| - | 4 / Little | Item | item |  |
 
 Else If effect is equal to `SUMMON` **or** 
 is equal to `TRANS_DOOR` **or** 

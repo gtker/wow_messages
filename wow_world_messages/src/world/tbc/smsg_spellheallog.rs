@@ -8,7 +8,7 @@ use crate::Guid;
 /// smsg SMSG_SPELLHEALLOG = 0x0150 {
 ///     PackedGuid victim;
 ///     PackedGuid caster;
-///     u32 id;
+///     Spell id;
 ///     u32 damage;
 ///     Bool critical;
 ///     u8 unknown;
@@ -37,7 +37,7 @@ impl SMSG_SPELLHEALLOG {
         // caster: PackedGuid
         let caster = crate::util::read_packed_guid(&mut r)?;
 
-        // id: u32
+        // id: Spell
         let id = crate::util::read_u32_le(&mut r)?;
 
         // damage: u32
@@ -121,7 +121,7 @@ impl crate::Message for SMSG_SPELLHEALLOG {
         // caster: PackedGuid
         crate::util::write_packed_guid(&self.caster, &mut w)?;
 
-        // id: u32
+        // id: Spell
         w.write_all(&self.id.to_le_bytes())?;
 
         // damage: u32
@@ -149,7 +149,7 @@ impl SMSG_SPELLHEALLOG {
     pub(crate) const fn size(&self) -> usize {
         crate::util::packed_guid_size(&self.victim) // victim: PackedGuid
         + crate::util::packed_guid_size(&self.caster) // caster: PackedGuid
-        + 4 // id: u32
+        + 4 // id: Spell
         + 4 // damage: u32
         + 1 // critical: Bool
         + 1 // unknown: u8

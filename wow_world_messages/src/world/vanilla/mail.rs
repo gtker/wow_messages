@@ -24,7 +24,7 @@ use crate::vanilla::MailType;
 ///     u32 item_text_id;
 ///     u32 unknown1;
 ///     u32 stationery;
-///     u32 item;
+///     Item item;
 ///     u32 item_enchant_id;
 ///     u32 item_random_property_id;
 ///     u32 item_suffix_factor;
@@ -121,7 +121,7 @@ impl Mail {
         // stationery: u32
         w.write_all(&self.stationery.to_le_bytes())?;
 
-        // item: u32
+        // item: Item
         w.write_all(&self.item.to_le_bytes())?;
 
         // item_enchant_id: u32
@@ -223,7 +223,7 @@ impl Mail {
         // stationery: u32
         let stationery = crate::util::read_u32_le(&mut r)?;
 
-        // item: u32
+        // item: Item
         let item = crate::util::read_u32_le(&mut r)?;
 
         // item_enchant_id: u32
@@ -295,7 +295,7 @@ impl Mail {
         + 4 // item_text_id: u32
         + 4 // unknown1: u32
         + 4 // stationery: u32
-        + 4 // item: u32
+        + 4 // item: Item
         + 4 // item_enchant_id: u32
         + 4 // item_random_property_id: u32
         + 4 // item_suffix_factor: u32

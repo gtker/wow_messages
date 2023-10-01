@@ -4,7 +4,7 @@ use std::io::{Read, Write};
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/quest/smsg_questgiver_quest_details.wowm:52`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/quest/smsg_questgiver_quest_details.wowm#L52):
 /// ```text
 /// struct QuestGiverReward {
-///     u32 item;
+///     Item item;
 ///     u32 item_count;
 ///     u32 display_id;
 /// }
@@ -17,7 +17,7 @@ pub struct QuestGiverReward {
 
 impl QuestGiverReward {
     pub(crate) fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
-        // item: u32
+        // item: Item
         w.write_all(&self.item.to_le_bytes())?;
 
         // item_count: u32
@@ -32,7 +32,7 @@ impl QuestGiverReward {
 
 impl QuestGiverReward {
     pub(crate) fn read<R: std::io::Read>(mut r: R) -> Result<Self, std::io::Error> {
-        // item: u32
+        // item: Item
         let item = crate::util::read_u32_le(&mut r)?;
 
         // item_count: u32

@@ -4,7 +4,7 @@ use std::io::{Read, Write};
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/chat/cmsg_cancel_channelling.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/chat/cmsg_cancel_channelling.wowm#L3):
 /// ```text
 /// cmsg CMSG_CANCEL_CHANNELLING = 0x013B {
-///     u32 id;
+///     Spell id;
 /// }
 /// ```
 pub struct CMSG_CANCEL_CHANNELLING {
@@ -18,7 +18,7 @@ impl CMSG_CANCEL_CHANNELLING {
             return Err(crate::errors::ParseErrorKind::InvalidSize);
         }
 
-        // id: u32
+        // id: Spell
         let id = crate::util::read_u32_le(&mut r)?;
 
         Ok(Self {
@@ -72,7 +72,7 @@ impl crate::Message for CMSG_CANCEL_CHANNELLING {
     }
 
     fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
-        // id: u32
+        // id: Spell
         w.write_all(&self.id.to_le_bytes())?;
 
         Ok(())

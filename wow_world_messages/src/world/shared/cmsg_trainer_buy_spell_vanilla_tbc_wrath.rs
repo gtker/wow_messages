@@ -7,7 +7,7 @@ use crate::Guid;
 /// ```text
 /// cmsg CMSG_TRAINER_BUY_SPELL = 0x01B2 {
 ///     Guid guid;
-///     u32 id;
+///     Spell id;
 /// }
 /// ```
 pub struct CMSG_TRAINER_BUY_SPELL {
@@ -25,7 +25,7 @@ impl CMSG_TRAINER_BUY_SPELL {
         // guid: Guid
         let guid = crate::util::read_guid(&mut r)?;
 
-        // id: u32
+        // id: Spell
         let id = crate::util::read_u32_le(&mut r)?;
 
         Ok(Self {
@@ -85,7 +85,7 @@ impl crate::Message for CMSG_TRAINER_BUY_SPELL {
         // guid: Guid
         w.write_all(&self.guid.guid().to_le_bytes())?;
 
-        // id: u32
+        // id: Spell
         w.write_all(&self.id.to_le_bytes())?;
 
         Ok(())

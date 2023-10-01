@@ -10,7 +10,7 @@ smsg SMSG_TOTEM_CREATED = 0x0412 {
     u8 slot;
     Guid totem;
     u32 duration;
-    u32 spell;
+    Spell spell;
 }
 ```
 ### Header
@@ -31,7 +31,7 @@ SMSG have a header of 4 bytes.
 | 0x04 | 1 / - | u8 | slot |  |
 | 0x05 | 8 / Little | [Guid](../types/packed-guid.md) | totem |  |
 | 0x0D | 4 / Little | u32 | duration |  |
-| 0x11 | 4 / Little | u32 | spell |  |
+| 0x11 | 4 / Little | Spell | spell |  |
 
 ## Client Version 3.3.5
 
@@ -43,7 +43,7 @@ smsg SMSG_TOTEM_CREATED = 0x0413 {
     u8 slot;
     Guid totem;
     u32 duration;
-    u32 spell;
+    Spell spell;
 }
 ```
 ### Header
@@ -64,5 +64,5 @@ SMSG have a header of 4 bytes.
 | 0x04 | 1 / - | u8 | slot |  |
 | 0x05 | 8 / Little | [Guid](../types/packed-guid.md) | totem |  |
 | 0x0D | 4 / Little | u32 | duration |  |
-| 0x11 | 4 / Little | u32 | spell |  |
+| 0x11 | 4 / Little | Spell | spell |  |
 

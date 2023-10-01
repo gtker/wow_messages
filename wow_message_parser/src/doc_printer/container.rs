@@ -1,5 +1,6 @@
 use crate::parser::types::array::{Array, ArraySize, ArrayType};
 use crate::parser::types::if_statement::{Equation, IfStatement};
+use crate::parser::types::sizes::SPELL_SIZE;
 use crate::parser::types::struct_member::{StructMember, StructMemberDefinition};
 use crate::parser::types::ty::Type;
 use crate::parser::types::IntegerType;
@@ -78,6 +79,13 @@ fn print_container_example_array(
         match array.ty() {
             ArrayType::Integer(t) => {
                 let bytes = bytes.take(t.size() as usize);
+
+                for b in bytes {
+                    s.w_break_at(format!("{b}, "));
+                }
+            }
+            ArrayType::Spell => {
+                let bytes = bytes.take(SPELL_SIZE.into());
 
                 for b in bytes {
                     s.w_break_at(format!("{b}, "));
@@ -559,7 +567,7 @@ fn print_container_field(
                     format!("[{}](../types/aura-mask.md)", d.ty().str())
                 }
                 Type::Array(array) => match array.ty() {
-                    ArrayType::CString | ArrayType::Integer(_) => d.ty().str(),
+                    ArrayType::Spell | ArrayType::CString | ArrayType::Integer(_) => d.ty().str(),
                     ArrayType::Struct(c) => {
                         format!(
                             "[{ty}]({ty_path}.md)[{size}]",
@@ -596,7 +604,10 @@ fn print_container_field(
                 Type::MonsterMoveSplines => {
                     "[MonsterMoveSpline](../types/monster-move-spline.md)".to_string()
                 }
-                Type::Population
+                Type::Spell
+                | Type::Spell16
+                | Type::Item
+                | Type::Population
                 | Type::Seconds
                 | Type::Milliseconds
                 | Type::IpAddress

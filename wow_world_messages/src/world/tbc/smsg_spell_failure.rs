@@ -8,7 +8,7 @@ use crate::tbc::SpellCastResult;
 /// ```text
 /// smsg SMSG_SPELL_FAILURE = 0x0133 {
 ///     Guid guid;
-///     u32 spell;
+///     Spell spell;
 ///     SpellCastResult result;
 /// }
 /// ```
@@ -28,7 +28,7 @@ impl SMSG_SPELL_FAILURE {
         // guid: Guid
         let guid = crate::util::read_guid(&mut r)?;
 
-        // spell: u32
+        // spell: Spell
         let spell = crate::util::read_u32_le(&mut r)?;
 
         // result: SpellCastResult
@@ -94,7 +94,7 @@ impl crate::Message for SMSG_SPELL_FAILURE {
         // guid: Guid
         w.write_all(&self.guid.guid().to_le_bytes())?;
 
-        // spell: u32
+        // spell: Spell
         w.write_all(&self.spell.to_le_bytes())?;
 
         // result: SpellCastResult

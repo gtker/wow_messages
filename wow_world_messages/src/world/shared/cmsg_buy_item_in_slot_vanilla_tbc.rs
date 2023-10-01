@@ -7,7 +7,7 @@ use crate::Guid;
 /// ```text
 /// cmsg CMSG_BUY_ITEM_IN_SLOT = 0x01A3 {
 ///     Guid vendor;
-///     u32 item;
+///     Item item;
 ///     Guid bag;
 ///     u8 bag_slot;
 ///     u8 amount;
@@ -31,7 +31,7 @@ impl CMSG_BUY_ITEM_IN_SLOT {
         // vendor: Guid
         let vendor = crate::util::read_guid(&mut r)?;
 
-        // item: u32
+        // item: Item
         let item = crate::util::read_u32_le(&mut r)?;
 
         // bag: Guid
@@ -109,7 +109,7 @@ impl crate::Message for CMSG_BUY_ITEM_IN_SLOT {
         // vendor: Guid
         w.write_all(&self.vendor.guid().to_le_bytes())?;
 
-        // item: u32
+        // item: Item
         w.write_all(&self.item.to_le_bytes())?;
 
         // bag: Guid

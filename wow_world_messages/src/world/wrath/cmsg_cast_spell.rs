@@ -11,7 +11,7 @@ use crate::wrath::{
 /// ```text
 /// cmsg CMSG_CAST_SPELL = 0x012E {
 ///     u8 cast_count;
-///     u32 spell;
+///     Spell spell;
 ///     ClientCastFlags cast_flags;
 ///     SpellCastTargets targets;
 ///     if (cast_flags == EXTRA) {
@@ -43,7 +43,7 @@ impl CMSG_CAST_SPELL {
         // cast_count: u8
         let cast_count = crate::util::read_u8_le(&mut r)?;
 
-        // spell: u32
+        // spell: Spell
         let spell = crate::util::read_u32_le(&mut r)?;
 
         // cast_flags: ClientCastFlags
@@ -524,7 +524,7 @@ impl crate::Message for CMSG_CAST_SPELL {
         // cast_count: u8
         w.write_all(&self.cast_count.to_le_bytes())?;
 
-        // spell: u32
+        // spell: Spell
         w.write_all(&self.spell.to_le_bytes())?;
 
         // cast_flags: ClientCastFlags
@@ -586,7 +586,7 @@ impl crate::wrath::ClientMessage for CMSG_CAST_SPELL {}
 impl CMSG_CAST_SPELL {
     pub(crate) fn size(&self) -> usize {
         1 // cast_count: u8
-        + 4 // spell: u32
+        + 4 // spell: Spell
         + self.cast_flags.size() // cast_flags: CMSG_CAST_SPELL_ClientCastFlags
         + self.targets.size() // targets: SpellCastTargets
     }

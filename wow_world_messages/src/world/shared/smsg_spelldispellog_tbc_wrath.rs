@@ -10,7 +10,7 @@ use wow_world_base::shared::dispel_method_tbc_wrath::DispelMethod;
 /// smsg SMSG_SPELLDISPELLOG = 0x027B {
 ///     PackedGuid victim;
 ///     PackedGuid caster;
-///     u32 dispell_spell;
+///     Spell dispell_spell;
 ///     u8 unknown;
 ///     u32 amount_of_spells;
 ///     DispelledSpell[amount_of_spells] spells;
@@ -38,7 +38,7 @@ impl SMSG_SPELLDISPELLOG {
         // caster: PackedGuid
         let caster = crate::util::read_packed_guid(&mut r)?;
 
-        // dispell_spell: u32
+        // dispell_spell: Spell
         let dispell_spell = crate::util::read_u32_le(&mut r)?;
 
         // unknown: u8
@@ -145,7 +145,7 @@ impl crate::Message for SMSG_SPELLDISPELLOG {
         // caster: PackedGuid
         crate::util::write_packed_guid(&self.caster, &mut w)?;
 
-        // dispell_spell: u32
+        // dispell_spell: Spell
         w.write_all(&self.dispell_spell.to_le_bytes())?;
 
         // unknown: u8
@@ -178,7 +178,7 @@ impl SMSG_SPELLDISPELLOG {
     pub(crate) fn size(&self) -> usize {
         crate::util::packed_guid_size(&self.victim) // victim: PackedGuid
         + crate::util::packed_guid_size(&self.caster) // caster: PackedGuid
-        + 4 // dispell_spell: u32
+        + 4 // dispell_spell: Spell
         + 1 // unknown: u8
         + 4 // amount_of_spells: u32
         + self.spells.len() * 5 // spells: DispelledSpell[amount_of_spells]

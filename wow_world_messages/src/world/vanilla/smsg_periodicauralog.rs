@@ -11,7 +11,7 @@ use crate::vanilla::{
 /// smsg SMSG_PERIODICAURALOG = 0x024E {
 ///     PackedGuid target;
 ///     PackedGuid caster;
-///     u32 spell;
+///     Spell spell;
 ///     u32 amount_of_auras;
 ///     AuraLog[amount_of_auras] auras;
 /// }
@@ -36,7 +36,7 @@ impl SMSG_PERIODICAURALOG {
         // caster: PackedGuid
         let caster = crate::util::read_packed_guid(&mut r)?;
 
-        // spell: u32
+        // spell: Spell
         let spell = crate::util::read_u32_le(&mut r)?;
 
         // amount_of_auras: u32
@@ -253,7 +253,7 @@ impl crate::Message for SMSG_PERIODICAURALOG {
         // caster: PackedGuid
         crate::util::write_packed_guid(&self.caster, &mut w)?;
 
-        // spell: u32
+        // spell: Spell
         w.write_all(&self.spell.to_le_bytes())?;
 
         // amount_of_auras: u32
@@ -280,7 +280,7 @@ impl SMSG_PERIODICAURALOG {
     pub(crate) fn size(&self) -> usize {
         crate::util::packed_guid_size(&self.target) // target: PackedGuid
         + crate::util::packed_guid_size(&self.caster) // caster: PackedGuid
-        + 4 // spell: u32
+        + 4 // spell: Spell
         + 4 // amount_of_auras: u32
         + self.auras.iter().fold(0, |acc, x| acc + x.size()) // auras: AuraLog[amount_of_auras]
     }

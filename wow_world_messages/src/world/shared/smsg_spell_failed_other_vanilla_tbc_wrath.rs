@@ -7,7 +7,7 @@ use crate::Guid;
 /// ```text
 /// smsg SMSG_SPELL_FAILED_OTHER = 0x02A6 {
 ///     Guid caster;
-///     u32 id;
+///     Spell id;
 /// }
 /// ```
 pub struct SMSG_SPELL_FAILED_OTHER {
@@ -25,7 +25,7 @@ impl SMSG_SPELL_FAILED_OTHER {
         // caster: Guid
         let caster = crate::util::read_guid(&mut r)?;
 
-        // id: u32
+        // id: Spell
         let id = crate::util::read_u32_le(&mut r)?;
 
         Ok(Self {
@@ -85,7 +85,7 @@ impl crate::Message for SMSG_SPELL_FAILED_OTHER {
         // caster: Guid
         w.write_all(&self.caster.guid().to_le_bytes())?;
 
-        // id: u32
+        // id: Spell
         w.write_all(&self.id.to_le_bytes())?;
 
         Ok(())

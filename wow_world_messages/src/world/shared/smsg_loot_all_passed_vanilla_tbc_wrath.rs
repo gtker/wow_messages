@@ -8,7 +8,7 @@ use crate::Guid;
 /// smsg SMSG_LOOT_ALL_PASSED = 0x029E {
 ///     Guid looted_target;
 ///     u32 loot_slot;
-///     u32 item;
+///     Item item;
 ///     u32 item_random_property_id;
 ///     u32 item_random_suffix_id;
 /// }
@@ -35,7 +35,7 @@ impl SMSG_LOOT_ALL_PASSED {
         // loot_slot: u32
         let loot_slot = crate::util::read_u32_le(&mut r)?;
 
-        // item: u32
+        // item: Item
         let item = crate::util::read_u32_le(&mut r)?;
 
         // item_random_property_id: u32
@@ -113,7 +113,7 @@ impl crate::Message for SMSG_LOOT_ALL_PASSED {
         // loot_slot: u32
         w.write_all(&self.loot_slot.to_le_bytes())?;
 
-        // item: u32
+        // item: Item
         w.write_all(&self.item.to_le_bytes())?;
 
         // item_random_property_id: u32

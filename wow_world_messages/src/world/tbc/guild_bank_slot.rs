@@ -9,7 +9,7 @@ use crate::tbc::{
 /// ```text
 /// struct GuildBankSlot {
 ///     u8 slot;
-///     u32 item;
+///     Item item;
 ///     VariableItemRandomProperty item_random_property_id;
 ///     u8 amount_of_items;
 ///     u32 enchant;
@@ -33,7 +33,7 @@ impl GuildBankSlot {
         // slot: u8
         w.write_all(&self.slot.to_le_bytes())?;
 
-        // item: u32
+        // item: Item
         w.write_all(&self.item.to_le_bytes())?;
 
         // item_random_property_id: VariableItemRandomProperty
@@ -65,7 +65,7 @@ impl GuildBankSlot {
         // slot: u8
         let slot = crate::util::read_u8_le(&mut r)?;
 
-        // item: u32
+        // item: Item
         let item = crate::util::read_u32_le(&mut r)?;
 
         // item_random_property_id: VariableItemRandomProperty
@@ -108,7 +108,7 @@ impl GuildBankSlot {
 impl GuildBankSlot {
     pub(crate) fn size(&self) -> usize {
         1 // slot: u8
-        + 4 // item: u32
+        + 4 // item: Item
         + self.item_random_property_id.size() // item_random_property_id: VariableItemRandomProperty
         + 1 // amount_of_items: u8
         + 4 // enchant: u32

@@ -6,7 +6,7 @@ use wow_world_base::shared::inventory_type_vanilla_tbc_wrath::InventoryType;
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/queries/smsg_item_name_query_response.wowm:8`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/queries/smsg_item_name_query_response.wowm#L8):
 /// ```text
 /// smsg SMSG_ITEM_NAME_QUERY_RESPONSE = 0x02C5 {
-///     u32 item;
+///     Item item;
 ///     CString item_name;
 ///     InventoryType inventory_type;
 /// }
@@ -24,7 +24,7 @@ impl SMSG_ITEM_NAME_QUERY_RESPONSE {
             return Err(crate::errors::ParseErrorKind::InvalidSize);
         }
 
-        // item: u32
+        // item: Item
         let item = crate::util::read_u32_le(&mut r)?;
 
         // item_name: CString
@@ -93,7 +93,7 @@ impl crate::Message for SMSG_ITEM_NAME_QUERY_RESPONSE {
     }
 
     fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
-        // item: u32
+        // item: Item
         w.write_all(&self.item.to_le_bytes())?;
 
         // item_name: CString
@@ -123,7 +123,7 @@ impl crate::wrath::ServerMessage for SMSG_ITEM_NAME_QUERY_RESPONSE {}
 
 impl SMSG_ITEM_NAME_QUERY_RESPONSE {
     pub(crate) fn size(&self) -> usize {
-        4 // item: u32
+        4 // item: Item
         + self.item_name.len() + 1 // item_name: CString
         + 1 // inventory_type: InventoryType
     }

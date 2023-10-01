@@ -1,4 +1,6 @@
-use crate::parser::types::sizes::{Sizes, GUID_SIZE, PACKED_GUID_MAX_SIZE, PACKED_GUID_MIN_SIZE};
+use crate::parser::types::sizes::{
+    Sizes, GUID_SIZE, PACKED_GUID_MAX_SIZE, PACKED_GUID_MIN_SIZE, SPELL_SIZE,
+};
 use crate::parser::types::struct_member::StructMemberDefinition;
 use crate::parser::types::IntegerType;
 use crate::{Container, CSTRING_LARGEST_ALLOWED, CSTRING_SMALLEST_ALLOWED};
@@ -10,6 +12,7 @@ pub(crate) enum ArrayType {
     CString,
     Guid,
     PackedGuid,
+    Spell,
 }
 
 impl ArrayType {
@@ -20,6 +23,7 @@ impl ArrayType {
             ArrayType::CString => "String".to_string(),
             ArrayType::Guid => "Guid".to_string(),
             ArrayType::PackedGuid => "Guid".to_string(),
+            ArrayType::Spell => "u32".to_string(),
         }
     }
 
@@ -30,6 +34,7 @@ impl ArrayType {
             ArrayType::CString => "CString".to_string(),
             ArrayType::Guid => "Guid".to_string(),
             ArrayType::PackedGuid => "PackedGuid".to_string(),
+            ArrayType::Spell => "Spell".to_string(),
         }
     }
 
@@ -54,6 +59,9 @@ impl ArrayType {
             }
             ArrayType::PackedGuid => {
                 s.inc(PACKED_GUID_MIN_SIZE.into(), PACKED_GUID_MAX_SIZE.into());
+            }
+            ArrayType::Spell => {
+                s.inc_both(SPELL_SIZE.into());
             }
         }
 
@@ -130,12 +138,7 @@ impl Array {
     }
 
     pub(crate) fn rust_str_inner(&self) -> String {
-        match &self.inner {
-            ArrayType::Integer(i) => i.rust_str().to_string(),
-            ArrayType::Struct(e) => e.name().to_string(),
-            ArrayType::CString => "String".to_string(),
-            ArrayType::Guid | ArrayType::PackedGuid => "Guid".to_string(),
-        }
+        self.inner.rust_str()
     }
 
     pub(crate) fn is_byte_array(&self) -> bool {
@@ -152,7 +155,9 @@ impl Array {
 
     pub(crate) fn inner_type_is_copy(&self) -> bool {
         match self.ty() {
-            ArrayType::PackedGuid | ArrayType::Integer(_) | ArrayType::Guid => true,
+            ArrayType::Spell | ArrayType::PackedGuid | ArrayType::Integer(_) | ArrayType::Guid => {
+                true
+            }
             ArrayType::Struct(c) => c.is_constant_sized(),
 
             ArrayType::CString => false,

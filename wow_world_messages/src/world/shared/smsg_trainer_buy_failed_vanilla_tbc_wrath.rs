@@ -9,7 +9,7 @@ use wow_world_base::shared::training_failure_reason_vanilla_tbc_wrath::TrainingF
 /// ```text
 /// smsg SMSG_TRAINER_BUY_FAILED = 0x01B4 {
 ///     Guid guid;
-///     u32 id;
+///     Spell id;
 ///     TrainingFailureReason error;
 /// }
 /// ```
@@ -29,7 +29,7 @@ impl SMSG_TRAINER_BUY_FAILED {
         // guid: Guid
         let guid = crate::util::read_guid(&mut r)?;
 
-        // id: u32
+        // id: Spell
         let id = crate::util::read_u32_le(&mut r)?;
 
         // error: TrainingFailureReason
@@ -95,7 +95,7 @@ impl crate::Message for SMSG_TRAINER_BUY_FAILED {
         // guid: Guid
         w.write_all(&self.guid.guid().to_le_bytes())?;
 
-        // id: u32
+        // id: Spell
         w.write_all(&self.id.to_le_bytes())?;
 
         // error: TrainingFailureReason

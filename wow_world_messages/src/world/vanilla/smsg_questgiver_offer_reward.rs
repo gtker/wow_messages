@@ -22,8 +22,8 @@ use crate::vanilla::{
 ///     u32 amount_of_item_rewards;
 ///     QuestItemRequirement[amount_of_item_rewards] item_rewards;
 ///     Gold money_reward;
-///     u32 reward_spell;
-///     u32 reward_spell_cast;
+///     Spell reward_spell;
+///     Spell reward_spell_cast;
 /// }
 /// ```
 pub struct SMSG_QUESTGIVER_OFFER_REWARD {
@@ -108,10 +108,10 @@ impl SMSG_QUESTGIVER_OFFER_REWARD {
         // money_reward: Gold
         let money_reward = Gold::new(crate::util::read_u32_le(&mut r)?);
 
-        // reward_spell: u32
+        // reward_spell: Spell
         let reward_spell = crate::util::read_u32_le(&mut r)?;
 
-        // reward_spell_cast: u32
+        // reward_spell_cast: Spell
         let reward_spell_cast = crate::util::read_u32_le(&mut r)?;
 
         Ok(Self {
@@ -309,10 +309,10 @@ impl crate::Message for SMSG_QUESTGIVER_OFFER_REWARD {
         // money_reward: Gold
         w.write_all((self.money_reward.as_int()).to_le_bytes().as_slice())?;
 
-        // reward_spell: u32
+        // reward_spell: Spell
         w.write_all(&self.reward_spell.to_le_bytes())?;
 
-        // reward_spell_cast: u32
+        // reward_spell_cast: Spell
         w.write_all(&self.reward_spell_cast.to_le_bytes())?;
 
         Ok(())
@@ -341,8 +341,8 @@ impl SMSG_QUESTGIVER_OFFER_REWARD {
         + 4 // amount_of_item_rewards: u32
         + self.item_rewards.len() * 12 // item_rewards: QuestItemRequirement[amount_of_item_rewards]
         + 4 // money_reward: Gold
-        + 4 // reward_spell: u32
-        + 4 // reward_spell_cast: u32
+        + 4 // reward_spell: Spell
+        + 4 // reward_spell_cast: Spell
     }
 }
 

@@ -23,7 +23,7 @@ struct Mail {
     u32 item_text_id;
     u32 unknown1;
     u32 stationery;
-    u32 item;
+    Item item;
     u32 item_enchant_id;
     u32 item_random_property_id;
     u32 item_suffix_factor;
@@ -67,7 +67,7 @@ Else If message_type is equal to `AUCTION`:
 | - | 4 / Little | u32 | item_text_id |  |
 | - | 4 / Little | u32 | unknown1 | cmangos/vmangos/mangoszero: set to 0 |
 | - | 4 / Little | u32 | stationery | cmangos/vmangos/mangoszero: stationery (Stationery.dbc) |
-| - | 4 / Little | u32 | item |  |
+| - | 4 / Little | Item | item |  |
 | - | 4 / Little | u32 | item_enchant_id |  |
 | - | 4 / Little | u32 | item_random_property_id |  |
 | - | 4 / Little | u32 | item_suffix_factor |  |
@@ -106,7 +106,7 @@ struct Mail {
         u32 auction_id;
     }
     else if (message_type == ITEM) {
-        u32 item;
+        Item item;
     }
     Gold cash_on_delivery;
     u32 item_text_id;
@@ -152,7 +152,7 @@ Else If message_type is equal to `ITEM`:
 
 | Offset | Size / Endianness | Type | Name | Comment |
 | ------ | ----------------- | ---- | ---- | ------- |
-| 0x17 | 4 / Little | u32 | item |  |
+| 0x17 | 4 / Little | Item | item |  |
 | 0x1B | 4 / Little | Gold | cash_on_delivery |  |
 | 0x1F | 4 / Little | u32 | item_text_id |  |
 | 0x23 | 4 / Little | u32 | unknown |  |
@@ -190,7 +190,7 @@ struct Mail {
         u32 auction_id;
     }
     else if (message_type == ITEM) {
-        u32 item;
+        Item item;
     }
     Gold cash_on_delivery;
     u32 unknown;
@@ -236,7 +236,7 @@ Else If message_type is equal to `ITEM`:
 
 | Offset | Size / Endianness | Type | Name | Comment |
 | ------ | ----------------- | ---- | ---- | ------- |
-| 0x17 | 4 / Little | u32 | item |  |
+| 0x17 | 4 / Little | Item | item |  |
 | 0x1B | 4 / Little | Gold | cash_on_delivery |  |
 | 0x1F | 4 / Little | u32 | unknown |  |
 | 0x23 | 4 / Little | u32 | stationery |  |

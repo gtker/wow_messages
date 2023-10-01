@@ -9,7 +9,7 @@ use crate::wrath::Power;
 /// smsg SMSG_SPELLENERGIZELOG = 0x0151 {
 ///     PackedGuid victim;
 ///     PackedGuid caster;
-///     u32 spell;
+///     Spell spell;
 ///     (u32)Power power;
 ///     u32 damage;
 /// }
@@ -35,7 +35,7 @@ impl SMSG_SPELLENERGIZELOG {
         // caster: PackedGuid
         let caster = crate::util::read_packed_guid(&mut r)?;
 
-        // spell: u32
+        // spell: Spell
         let spell = crate::util::read_u32_le(&mut r)?;
 
         // power: Power
@@ -113,7 +113,7 @@ impl crate::Message for SMSG_SPELLENERGIZELOG {
         // caster: PackedGuid
         crate::util::write_packed_guid(&self.caster, &mut w)?;
 
-        // spell: u32
+        // spell: Spell
         w.write_all(&self.spell.to_le_bytes())?;
 
         // power: Power
@@ -138,7 +138,7 @@ impl SMSG_SPELLENERGIZELOG {
     pub(crate) const fn size(&self) -> usize {
         crate::util::packed_guid_size(&self.victim) // victim: PackedGuid
         + crate::util::packed_guid_size(&self.caster) // caster: PackedGuid
-        + 4 // spell: u32
+        + 4 // spell: Spell
         + 4 // power: Power
         + 4 // damage: u32
     }

@@ -11,7 +11,7 @@ use wow_world_base::shared::timer_type_vanilla_tbc_wrath::TimerType;
 ///     u32 duration;
 ///     u32 scale;
 ///     Bool is_frozen;
-///     u32 id;
+///     Spell id;
 /// }
 /// ```
 pub struct SMSG_START_MIRROR_TIMER {
@@ -45,7 +45,7 @@ impl SMSG_START_MIRROR_TIMER {
         // is_frozen: Bool
         let is_frozen = crate::util::read_u8_le(&mut r)? != 0;
 
-        // id: u32
+        // id: Spell
         let id = crate::util::read_u32_le(&mut r)?;
 
         Ok(Self {
@@ -129,7 +129,7 @@ impl crate::Message for SMSG_START_MIRROR_TIMER {
         // is_frozen: Bool
         w.write_all(u8::from(self.is_frozen).to_le_bytes().as_slice())?;
 
-        // id: u32
+        // id: Spell
         w.write_all(&self.id.to_le_bytes())?;
 
         Ok(())

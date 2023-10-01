@@ -8,7 +8,7 @@ use crate::Guid;
 /// cmsg CMSG_MAIL_TAKE_ITEM = 0x0246 {
 ///     Guid mailbox;
 ///     u32 mail_id;
-///     u32 item;
+///     Item item;
 /// }
 /// ```
 pub struct CMSG_MAIL_TAKE_ITEM {
@@ -30,7 +30,7 @@ impl CMSG_MAIL_TAKE_ITEM {
         // mail_id: u32
         let mail_id = crate::util::read_u32_le(&mut r)?;
 
-        // item: u32
+        // item: Item
         let item = crate::util::read_u32_le(&mut r)?;
 
         Ok(Self {
@@ -96,7 +96,7 @@ impl crate::Message for CMSG_MAIL_TAKE_ITEM {
         // mail_id: u32
         w.write_all(&self.mail_id.to_le_bytes())?;
 
-        // item: u32
+        // item: Item
         w.write_all(&self.item.to_le_bytes())?;
 
         Ok(())

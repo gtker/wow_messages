@@ -15,7 +15,7 @@ smsg SMSG_SEND_MAIL_RESULT = 0x0239 {
             u32 equip_error;
         }
         else {
-            u32 item;
+            Item item;
             u32 item_count;
         }
     }
@@ -58,7 +58,7 @@ If result is equal to `ERR_EQUIP_ERROR`:
 | 0x10 | 4 / Little | u32 | equip_error |  |
 
 Else: 
-| 0x14 | 4 / Little | u32 | item | cmangos/vmangos: item guid low? |
+| 0x14 | 4 / Little | Item | item | cmangos/vmangos: item guid low? |
 | 0x18 | 4 / Little | u32 | item_count |  |
 
 Else: 
@@ -85,7 +85,7 @@ smsg SMSG_SEND_MAIL_RESULT = 0x0239 {
             u32 equip_error;
         }
         else {
-            u32 item;
+            Item item;
             u32 item_count;
         }
     }
@@ -128,7 +128,7 @@ If result is equal to `ERR_EQUIP_ERROR`:
 | 0x10 | 4 / Little | u32 | equip_error |  |
 
 Else: 
-| 0x14 | 4 / Little | u32 | item | cmangos/vmangos: item guid low? |
+| 0x14 | 4 / Little | Item | item | cmangos/vmangos: item guid low? |
 | 0x18 | 4 / Little | u32 | item_count |  |
 
 Else: 
@@ -155,7 +155,7 @@ smsg SMSG_SEND_MAIL_RESULT = 0x0239 {
             u32 equip_error;
         }
         else {
-            u32 item;
+            Item item;
             u32 item_count;
         }
     }
@@ -198,7 +198,7 @@ If result is equal to `ERR_EQUIP_ERROR`:
 | - | 4 / Little | u32 | equip_error |  |
 
 Else: 
-| - | 4 / Little | u32 | item | cmangos/vmangos: item guid low? |
+| - | 4 / Little | Item | item | cmangos/vmangos: item guid low? |
 | - | 4 / Little | u32 | item_count |  |
 
 Else: 

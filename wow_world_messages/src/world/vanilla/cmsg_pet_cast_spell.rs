@@ -10,7 +10,7 @@ use crate::vanilla::{
 /// ```text
 /// cmsg CMSG_PET_CAST_SPELL = 0x01F0 {
 ///     Guid guid;
-///     u32 id;
+///     Spell id;
 ///     SpellCastTargets targets;
 /// }
 /// ```
@@ -30,7 +30,7 @@ impl CMSG_PET_CAST_SPELL {
         // guid: Guid
         let guid = crate::util::read_guid(&mut r)?;
 
-        // id: u32
+        // id: Spell
         let id = crate::util::read_u32_le(&mut r)?;
 
         // targets: SpellCastTargets
@@ -247,7 +247,7 @@ impl crate::Message for CMSG_PET_CAST_SPELL {
         // guid: Guid
         w.write_all(&self.guid.guid().to_le_bytes())?;
 
-        // id: u32
+        // id: Spell
         w.write_all(&self.id.to_le_bytes())?;
 
         // targets: SpellCastTargets
@@ -268,7 +268,7 @@ impl crate::vanilla::ClientMessage for CMSG_PET_CAST_SPELL {}
 impl CMSG_PET_CAST_SPELL {
     pub(crate) fn size(&self) -> usize {
         8 // guid: Guid
-        + 4 // id: u32
+        + 4 // id: Spell
         + self.targets.size() // targets: SpellCastTargets
     }
 }

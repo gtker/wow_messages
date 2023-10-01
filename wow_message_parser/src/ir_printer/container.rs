@@ -356,6 +356,9 @@ pub(crate) enum IrType {
     IpAddress,
     Seconds,
     Milliseconds,
+    Spell,
+    Spell16,
+    Item,
 }
 
 impl IrType {
@@ -418,6 +421,9 @@ impl IrType {
             Type::Seconds => Self::Seconds,
             Type::Milliseconds => Self::Milliseconds,
             Type::Population => Self::Population,
+            Type::Spell => Self::Spell,
+            Type::Spell16 => Self::Spell16,
+            Type::Item => Self::Item,
         }
     }
 }
@@ -447,6 +453,7 @@ pub(crate) enum IrArrayType {
     CString,
     Guid,
     PackedGuid,
+    Spell,
 }
 
 impl IrArrayType {
@@ -459,6 +466,7 @@ impl IrArrayType {
             ArrayType::CString => Self::CString,
             ArrayType::Guid => Self::Guid,
             ArrayType::PackedGuid => Self::PackedGuid,
+            ArrayType::Spell => Self::Spell,
         }
     }
 }

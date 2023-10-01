@@ -4,7 +4,7 @@ use std::io::{Read, Write};
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/spell/smsg_learned_spell.wowm:7`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/spell/smsg_learned_spell.wowm#L7):
 /// ```text
 /// smsg SMSG_LEARNED_SPELL = 0x012B {
-///     u32 id;
+///     Spell id;
 ///     u16 unknown;
 /// }
 /// ```
@@ -21,7 +21,7 @@ impl SMSG_LEARNED_SPELL {
             return Err(crate::errors::ParseErrorKind::InvalidSize);
         }
 
-        // id: u32
+        // id: Spell
         let id = crate::util::read_u32_le(&mut r)?;
 
         // unknown: u16
@@ -81,7 +81,7 @@ impl crate::Message for SMSG_LEARNED_SPELL {
     }
 
     fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
-        // id: u32
+        // id: Spell
         w.write_all(&self.id.to_le_bytes())?;
 
         // unknown: u16

@@ -7,7 +7,7 @@ use wow_world_base::shared::loot_slot_type_vanilla_tbc_wrath::LootSlotType;
 /// ```text
 /// struct LootItem {
 ///     u8 index;
-///     u32 item;
+///     Item item;
 ///     LootSlotType ty;
 /// }
 /// ```
@@ -22,7 +22,7 @@ impl LootItem {
         // index: u8
         w.write_all(&self.index.to_le_bytes())?;
 
-        // item: u32
+        // item: Item
         w.write_all(&self.item.to_le_bytes())?;
 
         // ty: LootSlotType
@@ -37,7 +37,7 @@ impl LootItem {
         // index: u8
         let index = crate::util::read_u8_le(&mut r)?;
 
-        // item: u32
+        // item: Item
         let item = crate::util::read_u32_le(&mut r)?;
 
         // ty: LootSlotType

@@ -11,7 +11,7 @@ smsg SMSG_TRADE_STATUS_EXTENDED = 0x0121 {
     u32 trade_slot_count1;
     u32 trade_slot_count2;
     Gold money_in_trade;
-    u32 spell_on_lowest_slot;
+    Spell spell_on_lowest_slot;
     TradeSlot[7] trade_slots;
 }
 ```
@@ -34,7 +34,7 @@ SMSG have a header of 4 bytes.
 | 0x05 | 4 / Little | u32 | trade_slot_count1 | cmangos/vmangos/mangoszero: sets to 7<br/>cmangos/vmangos/mangoszero: trade slots count/number?, = next field in most cases |
 | 0x09 | 4 / Little | u32 | trade_slot_count2 | cmangos/vmangos/mangoszero: sets to 7<br/>cmangos/vmangos/mangoszero: trade slots count/number?, = prev field in most cases |
 | 0x0D | 4 / Little | Gold | money_in_trade |  |
-| 0x11 | 4 / Little | u32 | spell_on_lowest_slot |  |
+| 0x11 | 4 / Little | Spell | spell_on_lowest_slot |  |
 | 0x15 | 427 / - | [TradeSlot](tradeslot.md)[7] | trade_slots | vmangos/cmangos/mangoszero: All set to same as trade_slot_count* (7), unsure which determines how big this is. Unused slots are 0. |
 
 ## Client Version 2.4.3, Client Version 3
@@ -49,7 +49,7 @@ smsg SMSG_TRADE_STATUS_EXTENDED = 0x0121 {
     u32 trade_slot_count1;
     u32 trade_slot_count2;
     Gold money_in_trade;
-    u32 spell_on_lowest_slot;
+    Spell spell_on_lowest_slot;
     TradeSlot[7] trade_slots;
 }
 ```
@@ -73,6 +73,6 @@ SMSG have a header of 4 bytes.
 | 0x09 | 4 / Little | u32 | trade_slot_count1 | cmangos/vmangos/mangoszero: sets to 7<br/>cmangos/vmangos/mangoszero: trade slots count/number?, = next field in most cases |
 | 0x0D | 4 / Little | u32 | trade_slot_count2 | cmangos/vmangos/mangoszero: sets to 7<br/>cmangos/vmangos/mangoszero: trade slots count/number?, = prev field in most cases |
 | 0x11 | 4 / Little | Gold | money_in_trade |  |
-| 0x15 | 4 / Little | u32 | spell_on_lowest_slot |  |
+| 0x15 | 4 / Little | Spell | spell_on_lowest_slot |  |
 | 0x19 | 511 / - | [TradeSlot](tradeslot.md)[7] | trade_slots | vmangos/cmangos/mangoszero: All set to same as trade_slot_count* (7), unsure which determines how big this is. Unused slots are 0. |
 

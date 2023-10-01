@@ -10,7 +10,7 @@ use wow_world_base::shared::log_format_vanilla_tbc_wrath::LogFormat;
 /// smsg SMSG_PROCRESIST = 0x0260 {
 ///     Guid caster;
 ///     Guid target;
-///     u32 id;
+///     Spell id;
 ///     LogFormat log_format;
 /// }
 /// ```
@@ -34,7 +34,7 @@ impl SMSG_PROCRESIST {
         // target: Guid
         let target = crate::util::read_guid(&mut r)?;
 
-        // id: u32
+        // id: Spell
         let id = crate::util::read_u32_le(&mut r)?;
 
         // log_format: LogFormat
@@ -106,7 +106,7 @@ impl crate::Message for SMSG_PROCRESIST {
         // target: Guid
         w.write_all(&self.target.guid().to_le_bytes())?;
 
-        // id: u32
+        // id: Spell
         w.write_all(&self.id.to_le_bytes())?;
 
         // log_format: LogFormat

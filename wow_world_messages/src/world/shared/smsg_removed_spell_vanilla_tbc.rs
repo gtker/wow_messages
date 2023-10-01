@@ -4,7 +4,7 @@ use std::io::{Read, Write};
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/spell/smsg_removed_spell.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/spell/smsg_removed_spell.wowm#L1):
 /// ```text
 /// smsg SMSG_REMOVED_SPELL = 0x0203 {
-///     u16 spell;
+///     Spell16 spell;
 /// }
 /// ```
 pub struct SMSG_REMOVED_SPELL {
@@ -18,7 +18,7 @@ impl SMSG_REMOVED_SPELL {
             return Err(crate::errors::ParseErrorKind::InvalidSize);
         }
 
-        // spell: u16
+        // spell: Spell16
         let spell = crate::util::read_u16_le(&mut r)?;
 
         Ok(Self {
@@ -72,7 +72,7 @@ impl crate::Message for SMSG_REMOVED_SPELL {
     }
 
     fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
-        // spell: u16
+        // spell: Spell16
         w.write_all(&self.spell.to_le_bytes())?;
 
         Ok(())

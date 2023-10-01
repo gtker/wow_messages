@@ -9,7 +9,7 @@ use crate::wrath::AuraFlag;
 /// ```text
 /// struct AuraUpdate {
 ///     u8 visual_slot;
-///     u32 spell;
+///     Spell spell;
 ///     AuraFlag flags;
 ///     Level level;
 ///     u8 aura_stack_count;
@@ -35,7 +35,7 @@ impl AuraUpdate {
         // visual_slot: u8
         w.write_all(&self.visual_slot.to_le_bytes())?;
 
-        // spell: u32
+        // spell: Spell
         w.write_all(&self.spell.to_le_bytes())?;
 
         // flags: AuraFlag
@@ -71,7 +71,7 @@ impl AuraUpdate {
         // visual_slot: u8
         let visual_slot = crate::util::read_u8_le(&mut r)?;
 
-        // spell: u32
+        // spell: Spell
         let spell = crate::util::read_u32_le(&mut r)?;
 
         // flags: AuraFlag
@@ -131,7 +131,7 @@ impl AuraUpdate {
 impl AuraUpdate {
     pub(crate) const fn size(&self) -> usize {
         1 // visual_slot: u8
-        + 4 // spell: u32
+        + 4 // spell: Spell
         + self.flags.size() // flags: AuraUpdate_AuraFlag
         + 1 // level: Level
         + 1 // aura_stack_count: u8

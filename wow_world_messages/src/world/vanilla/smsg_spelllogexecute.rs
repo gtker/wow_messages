@@ -10,7 +10,7 @@ use crate::vanilla::{
 /// ```text
 /// smsg SMSG_SPELLLOGEXECUTE = 0x024C {
 ///     PackedGuid caster;
-///     u32 spell;
+///     Spell spell;
 ///     u32 amount_of_effects;
 ///     SpellLog[amount_of_effects] logs;
 /// }
@@ -31,7 +31,7 @@ impl SMSG_SPELLLOGEXECUTE {
         // caster: PackedGuid
         let caster = crate::util::read_packed_guid(&mut r)?;
 
-        // spell: u32
+        // spell: Spell
         let spell = crate::util::read_u32_le(&mut r)?;
 
         // amount_of_effects: u32
@@ -615,7 +615,7 @@ impl crate::Message for SMSG_SPELLLOGEXECUTE {
         // caster: PackedGuid
         crate::util::write_packed_guid(&self.caster, &mut w)?;
 
-        // spell: u32
+        // spell: Spell
         w.write_all(&self.spell.to_le_bytes())?;
 
         // amount_of_effects: u32
@@ -641,7 +641,7 @@ impl crate::vanilla::ServerMessage for SMSG_SPELLLOGEXECUTE {}
 impl SMSG_SPELLLOGEXECUTE {
     pub(crate) fn size(&self) -> usize {
         crate::util::packed_guid_size(&self.caster) // caster: PackedGuid
-        + 4 // spell: u32
+        + 4 // spell: Spell
         + 4 // amount_of_effects: u32
         + self.logs.iter().fold(0, |acc, x| acc + x.size()) // logs: SpellLog[amount_of_effects]
     }

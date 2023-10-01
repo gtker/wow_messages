@@ -7,7 +7,7 @@ use crate::Guid;
 /// ```text
 /// smsg SMSG_SPELL_UPDATE_CHAIN_TARGETS = 0x0330 {
 ///     Guid caster;
-///     u32 spell;
+///     Spell spell;
 ///     u32 amount_of_targets;
 ///     Guid[amount_of_targets] targets;
 /// }
@@ -28,7 +28,7 @@ impl SMSG_SPELL_UPDATE_CHAIN_TARGETS {
         // caster: Guid
         let caster = crate::util::read_guid(&mut r)?;
 
-        // spell: u32
+        // spell: Spell
         let spell = crate::util::read_u32_le(&mut r)?;
 
         // amount_of_targets: u32
@@ -115,7 +115,7 @@ impl crate::Message for SMSG_SPELL_UPDATE_CHAIN_TARGETS {
         // caster: Guid
         w.write_all(&self.caster.guid().to_le_bytes())?;
 
-        // spell: u32
+        // spell: Spell
         w.write_all(&self.spell.to_le_bytes())?;
 
         // amount_of_targets: u32
@@ -147,7 +147,7 @@ impl crate::wrath::ServerMessage for SMSG_SPELL_UPDATE_CHAIN_TARGETS {}
 impl SMSG_SPELL_UPDATE_CHAIN_TARGETS {
     pub(crate) fn size(&self) -> usize {
         8 // caster: Guid
-        + 4 // spell: u32
+        + 4 // spell: Spell
         + 4 // amount_of_targets: u32
         + self.targets.len() *  8 // targets: Guid[amount_of_targets]
     }

@@ -63,6 +63,9 @@ pub(crate) enum RustType {
     IpAddress,
     Seconds,
     Milliseconds,
+    Spell,
+    Spell16,
+    Item,
 }
 
 impl RustType {
@@ -122,12 +125,18 @@ impl RustType {
                 panic!("invalid conversion")
             }
             RustType::Population => Type::Population,
+            RustType::Spell => Type::Spell,
+            RustType::Spell16 => Type::Spell16,
+            RustType::Item => Type::Item,
         }
     }
 
     pub(crate) fn size_requires_variable(&self) -> bool {
         match self {
-            RustType::Population
+            RustType::Spell
+            | RustType::Spell16
+            | RustType::Item
+            | RustType::Population
             | RustType::Integer(_)
             | RustType::Bool(_)
             | RustType::DateTime
@@ -171,7 +180,8 @@ impl RustType {
             } => {
                 let inner_object = match array.ty() {
                     ArrayType::Struct(c) => Some(c.rust_object()),
-                    ArrayType::Integer(_)
+                    ArrayType::Spell
+                    | ArrayType::Integer(_)
                     | ArrayType::CString
                     | ArrayType::Guid
                     | ArrayType::PackedGuid => None,

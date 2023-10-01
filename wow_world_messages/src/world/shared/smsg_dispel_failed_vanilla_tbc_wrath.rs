@@ -8,7 +8,7 @@ use crate::Guid;
 /// smsg SMSG_DISPEL_FAILED = 0x0262 {
 ///     Guid caster;
 ///     Guid target;
-///     u32[-] spells;
+///     Spell[-] spells;
 /// }
 /// ```
 pub struct SMSG_DISPEL_FAILED {
@@ -30,7 +30,7 @@ impl SMSG_DISPEL_FAILED {
         // target: Guid
         let target = crate::util::read_guid(&mut r)?;
 
-        // spells: u32[-]
+        // spells: Spell[-]
         let spells = {
             let mut current_size = {
                 8 // caster: Guid
@@ -91,11 +91,11 @@ impl crate::Message for SMSG_DISPEL_FAILED {
         crate::util::write_bytes(&mut s, &mut bytes, 8, "caster", "    ");
         crate::util::write_bytes(&mut s, &mut bytes, 8, "target", "    ");
         if !self.spells.is_empty() {
-            writeln!(s, "    /* spells: u32[-] start */").unwrap();
+            writeln!(s, "    /* spells: Spell[-] start */").unwrap();
             for (i, v) in self.spells.iter().enumerate() {
                 crate::util::write_bytes(&mut s, &mut bytes, 4, &format!("spells {i}"), "    ");
             }
-            writeln!(s, "    /* spells: u32[-] end */").unwrap();
+            writeln!(s, "    /* spells: Spell[-] end */").unwrap();
         }
 
 
@@ -117,7 +117,7 @@ impl crate::Message for SMSG_DISPEL_FAILED {
         // target: Guid
         w.write_all(&self.target.guid().to_le_bytes())?;
 
-        // spells: u32[-]
+        // spells: Spell[-]
         for i in self.spells.iter() {
             w.write_all(&i.to_le_bytes())?;
         }
@@ -144,7 +144,7 @@ impl SMSG_DISPEL_FAILED {
     pub(crate) fn size(&self) -> usize {
         8 // caster: Guid
         + 8 // target: Guid
-        + self.spells.len() * core::mem::size_of::<u32>() // spells: u32[-]
+        + self.spells.len() * 4 // spells: Spell[-]
     }
 }
 

@@ -25,8 +25,8 @@ use crate::tbc::{
 ///     Gold money_reward;
 ///     u32 honor_reward;
 ///     u32 unknown1;
-///     u32 reward_spell;
-///     u32 reward_spell_cast;
+///     Spell reward_spell;
+///     Spell reward_spell_cast;
 ///     u32 title_reward;
 /// }
 /// ```
@@ -127,10 +127,10 @@ impl SMSG_QUESTGIVER_OFFER_REWARD {
         // unknown1: u32
         let unknown1 = crate::util::read_u32_le(&mut r)?;
 
-        // reward_spell: u32
+        // reward_spell: Spell
         let reward_spell = crate::util::read_u32_le(&mut r)?;
 
-        // reward_spell_cast: u32
+        // reward_spell_cast: Spell
         let reward_spell_cast = crate::util::read_u32_le(&mut r)?;
 
         // title_reward: u32
@@ -352,10 +352,10 @@ impl crate::Message for SMSG_QUESTGIVER_OFFER_REWARD {
         // unknown1: u32
         w.write_all(&self.unknown1.to_le_bytes())?;
 
-        // reward_spell: u32
+        // reward_spell: Spell
         w.write_all(&self.reward_spell.to_le_bytes())?;
 
-        // reward_spell_cast: u32
+        // reward_spell_cast: Spell
         w.write_all(&self.reward_spell_cast.to_le_bytes())?;
 
         // title_reward: u32
@@ -390,8 +390,8 @@ impl SMSG_QUESTGIVER_OFFER_REWARD {
         + 4 // money_reward: Gold
         + 4 // honor_reward: u32
         + 4 // unknown1: u32
-        + 4 // reward_spell: u32
-        + 4 // reward_spell_cast: u32
+        + 4 // reward_spell: Spell
+        + 4 // reward_spell_cast: Spell
         + 4 // title_reward: u32
     }
 }

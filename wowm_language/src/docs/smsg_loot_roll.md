@@ -10,7 +10,7 @@ smsg SMSG_LOOT_ROLL = 0x02A2 {
     Guid creature;
     u32 loot_slot;
     Guid player;
-    u32 item;
+    Item item;
     u32 item_random_suffix;
     u32 item_random_property_id;
     u8 roll_number;
@@ -35,7 +35,7 @@ SMSG have a header of 4 bytes.
 | 0x04 | 8 / Little | [Guid](../types/packed-guid.md) | creature |  |
 | 0x0C | 4 / Little | u32 | loot_slot |  |
 | 0x10 | 8 / Little | [Guid](../types/packed-guid.md) | player |  |
-| 0x18 | 4 / Little | u32 | item |  |
+| 0x18 | 4 / Little | Item | item |  |
 | 0x1C | 4 / Little | u32 | item_random_suffix | vmangos/mangoszero: not used ? |
 | 0x20 | 4 / Little | u32 | item_random_property_id |  |
 | 0x24 | 1 / - | u8 | roll_number | vmangos/cmangos/mangoszero: 0: Need for: `item_name` > 127: you passed on: `item_name`      Roll number |
@@ -51,7 +51,7 @@ smsg SMSG_LOOT_ROLL = 0x02A2 {
     Guid creature;
     u32 loot_slot;
     Guid player;
-    u32 item;
+    Item item;
     u32 item_random_suffix;
     u32 item_random_property_id;
     u8 roll_number;
@@ -77,7 +77,7 @@ SMSG have a header of 4 bytes.
 | 0x04 | 8 / Little | [Guid](../types/packed-guid.md) | creature |  |
 | 0x0C | 4 / Little | u32 | loot_slot |  |
 | 0x10 | 8 / Little | [Guid](../types/packed-guid.md) | player |  |
-| 0x18 | 4 / Little | u32 | item |  |
+| 0x18 | 4 / Little | Item | item |  |
 | 0x1C | 4 / Little | u32 | item_random_suffix | vmangos/mangoszero: not used ? |
 | 0x20 | 4 / Little | u32 | item_random_property_id |  |
 | 0x24 | 1 / - | u8 | roll_number | vmangos/cmangos/mangoszero: 0: Need for: `item_name` > 127: you passed on: `item_name`      Roll number |

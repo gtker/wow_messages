@@ -9,7 +9,7 @@ use wow_world_base::shared::buy_result_vanilla_tbc_wrath::BuyResult;
 /// ```text
 /// smsg SMSG_BUY_FAILED = 0x01A5 {
 ///     Guid guid;
-///     u32 item;
+///     Item item;
 ///     BuyResult result;
 /// }
 /// ```
@@ -29,7 +29,7 @@ impl SMSG_BUY_FAILED {
         // guid: Guid
         let guid = crate::util::read_guid(&mut r)?;
 
-        // item: u32
+        // item: Item
         let item = crate::util::read_u32_le(&mut r)?;
 
         // result: BuyResult
@@ -95,7 +95,7 @@ impl crate::Message for SMSG_BUY_FAILED {
         // guid: Guid
         w.write_all(&self.guid.guid().to_le_bytes())?;
 
-        // item: u32
+        // item: Item
         w.write_all(&self.item.to_le_bytes())?;
 
         // result: BuyResult

@@ -177,8 +177,8 @@ impl WiresharkType {
             Type::Bool(i) => Self::Integer(*i),
             Type::Guid | Type::PackedGuid => Self::Integer(IntegerType::U64),
             Type::Level => Self::Integer(IntegerType::U8),
-            Type::Level16 => Self::Integer(IntegerType::U16),
-            Type::Level32 => Self::Integer(IntegerType::U32),
+            Type::Spell16 | Type::Level16 => Self::Integer(IntegerType::U16),
+            Type::Spell | Type::Item | Type::Level32 => Self::Integer(IntegerType::U32),
             Type::Seconds | Type::Milliseconds | Type::Gold => Self::Integer(IntegerType::U32),
             Type::DateTime => Self::Integer(IntegerType::U32),
             Type::FloatingPoint => Self::Float,
@@ -194,6 +194,7 @@ impl WiresharkType {
                         Self::Integer(*v)
                     }
                 }
+                ArrayType::Spell => Self::Integer(IntegerType::U32),
                 ArrayType::CString => Self::String,
                 ArrayType::PackedGuid | ArrayType::Guid => Self::Integer(IntegerType::U64),
             },

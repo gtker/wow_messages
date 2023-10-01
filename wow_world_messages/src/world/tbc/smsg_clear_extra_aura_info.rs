@@ -7,7 +7,7 @@ use crate::Guid;
 /// ```text
 /// smsg SMSG_CLEAR_EXTRA_AURA_INFO = 0x03A6 {
 ///     PackedGuid unit;
-///     u32 spell;
+///     Spell spell;
 /// }
 /// ```
 pub struct SMSG_CLEAR_EXTRA_AURA_INFO {
@@ -25,7 +25,7 @@ impl SMSG_CLEAR_EXTRA_AURA_INFO {
         // unit: PackedGuid
         let unit = crate::util::read_packed_guid(&mut r)?;
 
-        // spell: u32
+        // spell: Spell
         let spell = crate::util::read_u32_le(&mut r)?;
 
         Ok(Self {
@@ -85,7 +85,7 @@ impl crate::Message for SMSG_CLEAR_EXTRA_AURA_INFO {
         // unit: PackedGuid
         crate::util::write_packed_guid(&self.unit, &mut w)?;
 
-        // spell: u32
+        // spell: Spell
         w.write_all(&self.spell.to_le_bytes())?;
 
         Ok(())
@@ -103,7 +103,7 @@ impl crate::tbc::ServerMessage for SMSG_CLEAR_EXTRA_AURA_INFO {}
 impl SMSG_CLEAR_EXTRA_AURA_INFO {
     pub(crate) const fn size(&self) -> usize {
         crate::util::packed_guid_size(&self.unit) // unit: PackedGuid
-        + 4 // spell: u32
+        + 4 // spell: Spell
     }
 }
 

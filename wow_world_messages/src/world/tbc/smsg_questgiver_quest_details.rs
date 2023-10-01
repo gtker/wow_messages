@@ -24,8 +24,8 @@ use std::time::Duration;
 ///     QuestItemReward[amount_of_item_rewards] item_rewards;
 ///     Gold money_reward;
 ///     u32 honor_reward;
-///     u32 reward_spell;
-///     u32 casted_spell;
+///     Spell reward_spell;
+///     Spell casted_spell;
 ///     u32 title_reward;
 ///     u32 amount_of_emotes;
 ///     QuestDetailsEmote[amount_of_emotes] emotes;
@@ -118,10 +118,10 @@ impl SMSG_QUESTGIVER_QUEST_DETAILS {
         // honor_reward: u32
         let honor_reward = crate::util::read_u32_le(&mut r)?;
 
-        // reward_spell: u32
+        // reward_spell: Spell
         let reward_spell = crate::util::read_u32_le(&mut r)?;
 
-        // casted_spell: u32
+        // casted_spell: Spell
         let casted_spell = crate::util::read_u32_le(&mut r)?;
 
         // title_reward: u32
@@ -347,10 +347,10 @@ impl crate::Message for SMSG_QUESTGIVER_QUEST_DETAILS {
         // honor_reward: u32
         w.write_all(&self.honor_reward.to_le_bytes())?;
 
-        // reward_spell: u32
+        // reward_spell: Spell
         w.write_all(&self.reward_spell.to_le_bytes())?;
 
-        // casted_spell: u32
+        // casted_spell: Spell
         w.write_all(&self.casted_spell.to_le_bytes())?;
 
         // title_reward: u32
@@ -391,8 +391,8 @@ impl SMSG_QUESTGIVER_QUEST_DETAILS {
         + self.item_rewards.len() * 8 // item_rewards: QuestItemReward[amount_of_item_rewards]
         + 4 // money_reward: Gold
         + 4 // honor_reward: u32
-        + 4 // reward_spell: u32
-        + 4 // casted_spell: u32
+        + 4 // reward_spell: Spell
+        + 4 // casted_spell: Spell
         + 4 // title_reward: u32
         + 4 // amount_of_emotes: u32
         + self.emotes.len() * 8 // emotes: QuestDetailsEmote[amount_of_emotes]

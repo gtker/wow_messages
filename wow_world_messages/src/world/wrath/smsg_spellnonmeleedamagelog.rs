@@ -11,7 +11,7 @@ use crate::wrath::{
 /// smsg SMSG_SPELLNONMELEEDAMAGELOG = 0x0250 {
 ///     PackedGuid target;
 ///     PackedGuid attacker;
-///     u32 spell;
+///     Spell spell;
 ///     u32 damage;
 ///     u32 overkill;
 ///     SpellSchool school;
@@ -56,7 +56,7 @@ impl SMSG_SPELLNONMELEEDAMAGELOG {
         // attacker: PackedGuid
         let attacker = crate::util::read_packed_guid(&mut r)?;
 
-        // spell: u32
+        // spell: Spell
         let spell = crate::util::read_u32_le(&mut r)?;
 
         // damage: u32
@@ -182,7 +182,7 @@ impl crate::Message for SMSG_SPELLNONMELEEDAMAGELOG {
         // attacker: PackedGuid
         crate::util::write_packed_guid(&self.attacker, &mut w)?;
 
-        // spell: u32
+        // spell: Spell
         w.write_all(&self.spell.to_le_bytes())?;
 
         // damage: u32
@@ -231,7 +231,7 @@ impl SMSG_SPELLNONMELEEDAMAGELOG {
     pub(crate) const fn size(&self) -> usize {
         crate::util::packed_guid_size(&self.target) // target: PackedGuid
         + crate::util::packed_guid_size(&self.attacker) // attacker: PackedGuid
-        + 4 // spell: u32
+        + 4 // spell: Spell
         + 4 // damage: u32
         + 4 // overkill: u32
         + 1 // school: SpellSchool

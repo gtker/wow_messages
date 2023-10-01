@@ -942,6 +942,9 @@
         },
         "PackedGuid": {
           "properties": {}
+        },
+        "Spell": {
+          "properties": {}
         }
       }
     },
@@ -1012,6 +1015,15 @@
           "properties": {}
         },
         "String": {
+          "properties": {}
+        },
+        "Spell": {
+          "properties": {}
+        },
+        "Spell16": {
+          "properties": {}
+        },
+        "Item": {
           "properties": {}
         },
         "Array": {

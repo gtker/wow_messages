@@ -33,19 +33,19 @@ use crate::vanilla::{
 ///         u32 extra_attacks;
 ///     }
 ///     else if (effect == CREATE_ITEM) {
-///         u32 item;
+///         Item item;
 ///     }
 ///     else if (effect == INTERRUPT_CAST) {
 ///         Guid target5;
-///         u32 interrupted_spell;
+///         Spell interrupted_spell;
 ///     }
 ///     else if (effect == DURABILITY_DAMAGE) {
 ///         Guid target6;
-///         u32 item_to_damage;
+///         Item item_to_damage;
 ///         u32 unknown5;
 ///     }
 ///     else if (effect == FEED_PET) {
-///         u32 feed_pet_item;
+///         Item feed_pet_item;
 ///     }
 ///     else if (effect == INSTAKILL
 ///         || effect == RESURRECT
@@ -174,7 +174,7 @@ impl SpellLog {
             SpellLog_SpellEffect::CreateItem {
                 item,
             } => {
-                // item: u32
+                // item: Item
                 w.write_all(&item.to_le_bytes())?;
 
             }
@@ -278,7 +278,7 @@ impl SpellLog {
                 // target5: Guid
                 w.write_all(&target5.guid().to_le_bytes())?;
 
-                // interrupted_spell: u32
+                // interrupted_spell: Spell
                 w.write_all(&interrupted_spell.to_le_bytes())?;
 
             }
@@ -362,7 +362,7 @@ impl SpellLog {
             SpellLog_SpellEffect::FeedPet {
                 feed_pet_item,
             } => {
-                // feed_pet_item: u32
+                // feed_pet_item: Item
                 w.write_all(&feed_pet_item.to_le_bytes())?;
 
             }
@@ -416,7 +416,7 @@ impl SpellLog {
                 // target6: Guid
                 w.write_all(&target6.guid().to_le_bytes())?;
 
-                // item_to_damage: u32
+                // item_to_damage: Item
                 w.write_all(&item_to_damage.to_le_bytes())?;
 
                 // unknown5: u32
@@ -566,7 +566,7 @@ impl SpellLog {
             SpellEffect::Parry => SpellLog_SpellEffect::Parry,
             SpellEffect::Block => SpellLog_SpellEffect::Block,
             SpellEffect::CreateItem => {
-                // item: u32
+                // item: Item
                 let item = crate::util::read_u32_le(&mut r)?;
 
                 SpellLog_SpellEffect::CreateItem {
@@ -713,7 +713,7 @@ impl SpellLog {
                 // target5: Guid
                 let target5 = crate::util::read_guid(&mut r)?;
 
-                // interrupted_spell: u32
+                // interrupted_spell: Spell
                 let interrupted_spell = crate::util::read_u32_le(&mut r)?;
 
                 SpellLog_SpellEffect::InterruptCast {
@@ -831,7 +831,7 @@ impl SpellLog {
             SpellEffect::Disenchant => SpellLog_SpellEffect::Disenchant,
             SpellEffect::Inebriate => SpellLog_SpellEffect::Inebriate,
             SpellEffect::FeedPet => {
-                // feed_pet_item: u32
+                // feed_pet_item: Item
                 let feed_pet_item = crate::util::read_u32_le(&mut r)?;
 
                 SpellLog_SpellEffect::FeedPet {
@@ -893,7 +893,7 @@ impl SpellLog {
                 // target6: Guid
                 let target6 = crate::util::read_guid(&mut r)?;
 
-                // item_to_damage: u32
+                // item_to_damage: Item
                 let item_to_damage = crate::util::read_u32_le(&mut r)?;
 
                 // unknown5: u32
@@ -1531,7 +1531,7 @@ impl SpellLog_SpellEffect {
                 ..
             } => {
                 4
-                + 4 // item: u32
+                + 4 // item: Item
             }
             Self::Summon {
                 ..
@@ -1607,7 +1607,7 @@ impl SpellLog_SpellEffect {
                 ..
             } => {
                 4
-                + 4 // interrupted_spell: u32
+                + 4 // interrupted_spell: Spell
                 + 8 // target5: Guid
             }
             Self::Distract {
@@ -1680,7 +1680,7 @@ impl SpellLog_SpellEffect {
                 ..
             } => {
                 4
-                + 4 // feed_pet_item: u32
+                + 4 // feed_pet_item: Item
             }
             Self::DismissPet {
                 ..
@@ -1722,7 +1722,7 @@ impl SpellLog_SpellEffect {
                 ..
             } => {
                 4
-                + 4 // item_to_damage: u32
+                + 4 // item_to_damage: Item
                 + 8 // target6: Guid
                 + 4 // unknown5: u32
             }

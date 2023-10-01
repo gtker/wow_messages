@@ -8,7 +8,7 @@ use crate::Guid;
 /// smsg SMSG_SPELLORDAMAGE_IMMUNE = 0x0263 {
 ///     Guid caster;
 ///     Guid target;
-///     u32 id;
+///     Spell id;
 ///     Bool debug_log_format;
 /// }
 /// ```
@@ -32,7 +32,7 @@ impl SMSG_SPELLORDAMAGE_IMMUNE {
         // target: Guid
         let target = crate::util::read_guid(&mut r)?;
 
-        // id: u32
+        // id: Spell
         let id = crate::util::read_u32_le(&mut r)?;
 
         // debug_log_format: Bool
@@ -104,7 +104,7 @@ impl crate::Message for SMSG_SPELLORDAMAGE_IMMUNE {
         // target: Guid
         w.write_all(&self.target.guid().to_le_bytes())?;
 
-        // id: u32
+        // id: Spell
         w.write_all(&self.id.to_le_bytes())?;
 
         // debug_log_format: Bool

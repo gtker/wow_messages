@@ -5,7 +5,7 @@ use std::io::{Read, Write};
 /// ```text
 /// smsg SMSG_SEND_UNLEARN_SPELLS = 0x041D {
 ///     u32 amount_of_spells;
-///     u32[amount_of_spells] spells;
+///     Spell[amount_of_spells] spells;
 /// }
 /// ```
 pub struct SMSG_SEND_UNLEARN_SPELLS {
@@ -22,7 +22,7 @@ impl SMSG_SEND_UNLEARN_SPELLS {
         // amount_of_spells: u32
         let amount_of_spells = crate::util::read_u32_le(&mut r)?;
 
-        // spells: u32[amount_of_spells]
+        // spells: Spell[amount_of_spells]
         let spells = {
             let mut spells = Vec::with_capacity(amount_of_spells as usize);
             for _ in 0..amount_of_spells {
@@ -74,11 +74,11 @@ impl crate::Message for SMSG_SEND_UNLEARN_SPELLS {
 
         crate::util::write_bytes(&mut s, &mut bytes, 4, "amount_of_spells", "    ");
         if !self.spells.is_empty() {
-            writeln!(s, "    /* spells: u32[amount_of_spells] start */").unwrap();
+            writeln!(s, "    /* spells: Spell[amount_of_spells] start */").unwrap();
             for (i, v) in self.spells.iter().enumerate() {
                 crate::util::write_bytes(&mut s, &mut bytes, 4, &format!("spells {i}"), "    ");
             }
-            writeln!(s, "    /* spells: u32[amount_of_spells] end */").unwrap();
+            writeln!(s, "    /* spells: Spell[amount_of_spells] end */").unwrap();
         }
 
 
@@ -97,7 +97,7 @@ impl crate::Message for SMSG_SEND_UNLEARN_SPELLS {
         // amount_of_spells: u32
         w.write_all(&(self.spells.len() as u32).to_le_bytes())?;
 
-        // spells: u32[amount_of_spells]
+        // spells: Spell[amount_of_spells]
         for i in self.spells.iter() {
             w.write_all(&i.to_le_bytes())?;
         }
@@ -117,7 +117,7 @@ impl crate::tbc::ServerMessage for SMSG_SEND_UNLEARN_SPELLS {}
 impl SMSG_SEND_UNLEARN_SPELLS {
     pub(crate) fn size(&self) -> usize {
         4 // amount_of_spells: u32
-        + self.spells.len() * core::mem::size_of::<u32>() // spells: u32[amount_of_spells]
+        + self.spells.len() * 4 // spells: Spell[amount_of_spells]
     }
 }
 

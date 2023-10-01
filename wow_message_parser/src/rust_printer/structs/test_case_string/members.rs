@@ -243,6 +243,9 @@ fn print_member_definition(
                 format!("{var_name}.as_int()"),
             );
         }
+        Type::Spell | Type::Spell16 | Type::Item => {
+            test_case_string::wlna(s, format!("{prefix}{name} = {{}};"), format!("{var_name}"));
+        }
         Type::Population => {
             test_case_string::wlna(s, format!("{prefix}{name} = {{}};"), format!("if {var_name}.as_int().to_string().contains(\'.\') {{ {var_name}.as_int().to_string() }} else {{ format!(\"{{}}.0\", {var_name}.as_int()) }}"));
         }
@@ -308,7 +311,7 @@ fn print_member_definition(
 
             s.body(format!("for v in {var_name}.as_slice()"), |s| {
                 match array.ty() {
-                    ArrayType::Integer(_) => {
+                    ArrayType::Spell | ArrayType::Integer(_) => {
                         s.wln("write!(s, \"{v:#04X}, \").unwrap();");
                     }
                     ArrayType::Guid | ArrayType::PackedGuid => {

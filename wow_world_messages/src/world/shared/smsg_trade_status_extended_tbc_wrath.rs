@@ -13,7 +13,7 @@ use crate::shared::trade_slot_tbc_wrath::TradeSlot;
 ///     u32 trade_slot_count1;
 ///     u32 trade_slot_count2;
 ///     Gold money_in_trade;
-///     u32 spell_on_lowest_slot;
+///     Spell spell_on_lowest_slot;
 ///     TradeSlot[7] trade_slots;
 /// }
 /// ```
@@ -56,7 +56,7 @@ impl SMSG_TRADE_STATUS_EXTENDED {
         // money_in_trade: Gold
         let money_in_trade = Gold::new(crate::util::read_u32_le(&mut r)?);
 
-        // spell_on_lowest_slot: u32
+        // spell_on_lowest_slot: Spell
         let spell_on_lowest_slot = crate::util::read_u32_le(&mut r)?;
 
         // trade_slots: TradeSlot[7]
@@ -202,7 +202,7 @@ impl crate::Message for SMSG_TRADE_STATUS_EXTENDED {
         // money_in_trade: Gold
         w.write_all((self.money_in_trade.as_int()).to_le_bytes().as_slice())?;
 
-        // spell_on_lowest_slot: u32
+        // spell_on_lowest_slot: Spell
         w.write_all(&self.spell_on_lowest_slot.to_le_bytes())?;
 
         // trade_slots: TradeSlot[7]

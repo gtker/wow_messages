@@ -30,6 +30,9 @@ pub(crate) fn print_write_field_array(
                 let i = i.size();
                 format!("{i} * {size}")
             }
+            ArrayType::Spell => {
+                format!("4 * {size}")
+            }
             ArrayType::Guid => {
                 format!("8 * {size}")
             }
@@ -62,7 +65,7 @@ pub(crate) fn print_write_field_array(
     s.body(
         format!("for i in {variable_prefix}{name}.iter()"),
         |s| match array.ty() {
-            ArrayType::Integer(_) => {
+            ArrayType::Spell | ArrayType::Integer(_) => {
                 s.wln(format!("{writer}.write_all(&i.to_le_bytes()){postfix}?;",))
             }
             ArrayType::Struct(e) => {
@@ -189,6 +192,11 @@ pub(crate) fn print_write_definition(
         Type::Gold => {
             s.wln(format!(
                 "w.write_all(({variable_prefix}{name}.as_int()).to_le_bytes().as_slice()){postfix}?;",
+            ));
+        }
+        Type::Spell16 | Type::Item | Type::Spell => {
+            s.wln(format!(
+                "w.write_all(&{variable_prefix}{name}.to_le_bytes()){postfix}?;",
             ));
         }
         Type::Seconds => {

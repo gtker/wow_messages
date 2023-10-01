@@ -345,7 +345,7 @@ fn print_definition(
                 ));
             }
         }
-        Type::Level16 => {
+        Type::Spell16 | Type::Level16 => {
             let name = w.unwrap().name();
             s.wln(format!("ptvcursor_add(ptv, {name}, 2, ENC_LITTLE_ENDIAN);",));
         }
@@ -376,7 +376,7 @@ fn print_definition(
                 len = i.size()
             ));
         }
-        Type::DateTime => {
+        Type::Spell | Type::Item | Type::DateTime => {
             let name = w.unwrap().name();
             s.wln(format!("ptvcursor_add(ptv, {name}, 4, ENC_LITTLE_ENDIAN);",));
         }
@@ -468,6 +468,11 @@ fn print_definition(
                         s.wln(format!(
                             "ptvcursor_add(ptv, {name}, {len}, ENC_LITTLE_ENDIAN);",
                         ));
+                    }
+                    ArrayType::Spell => {
+                        let name = w.unwrap().name();
+
+                        s.wln(format!("ptvcursor_add(ptv, {name}, 4, ENC_LITTLE_ENDIAN);",));
                     }
                     ArrayType::Guid => {
                         let name = w.unwrap().name();

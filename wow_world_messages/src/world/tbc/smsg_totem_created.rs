@@ -9,7 +9,7 @@ use crate::Guid;
 ///     u8 slot;
 ///     Guid totem;
 ///     u32 duration;
-///     u32 spell;
+///     Spell spell;
 /// }
 /// ```
 pub struct SMSG_TOTEM_CREATED {
@@ -35,7 +35,7 @@ impl SMSG_TOTEM_CREATED {
         // duration: u32
         let duration = crate::util::read_u32_le(&mut r)?;
 
-        // spell: u32
+        // spell: Spell
         let spell = crate::util::read_u32_le(&mut r)?;
 
         Ok(Self {
@@ -107,7 +107,7 @@ impl crate::Message for SMSG_TOTEM_CREATED {
         // duration: u32
         w.write_all(&self.duration.to_le_bytes())?;
 
-        // spell: u32
+        // spell: Spell
         w.write_all(&self.spell.to_le_bytes())?;
 
         Ok(())

@@ -7,7 +7,7 @@ use crate::Guid;
 /// ```text
 /// smsg SMSG_SPELLINSTAKILLLOG = 0x032F {
 ///     Guid target;
-///     u32 spell;
+///     Spell spell;
 /// }
 /// ```
 pub struct SMSG_SPELLINSTAKILLLOG {
@@ -25,7 +25,7 @@ impl SMSG_SPELLINSTAKILLLOG {
         // target: Guid
         let target = crate::util::read_guid(&mut r)?;
 
-        // spell: u32
+        // spell: Spell
         let spell = crate::util::read_u32_le(&mut r)?;
 
         Ok(Self {
@@ -85,7 +85,7 @@ impl crate::Message for SMSG_SPELLINSTAKILLLOG {
         // target: Guid
         w.write_all(&self.target.guid().to_le_bytes())?;
 
-        // spell: u32
+        // spell: Spell
         w.write_all(&self.spell.to_le_bytes())?;
 
         Ok(())

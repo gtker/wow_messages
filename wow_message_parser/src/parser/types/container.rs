@@ -580,6 +580,9 @@ impl Container {
                 | Type::String
                 | Type::Integer(_)
                 | Type::Bool(_)
+                | Type::Spell
+                | Type::Spell16
+                | Type::Item
                 | Type::FloatingPoint => continue,
 
                 Type::DateTime | Type::PackedGuid | Type::Guid => ("crate".to_string(), name),
@@ -625,7 +628,7 @@ impl Container {
                 Type::Array(array) => {
                     let name = array.rust_str_inner();
                     match array.ty() {
-                        ArrayType::CString | ArrayType::Integer(_) => continue,
+                        ArrayType::Spell | ArrayType::CString | ArrayType::Integer(_) => continue,
 
                         ArrayType::Guid | ArrayType::PackedGuid => ("crate".to_string(), name),
 
@@ -719,7 +722,9 @@ impl Container {
                             members.push(vec![]);
                         }
 
-                        Type::FloatingPoint
+                        Type::Spell
+                        | Type::Item
+                        | Type::FloatingPoint
                         | Type::DateTime
                         | Type::Gold
                         | Type::Level32
@@ -757,7 +762,7 @@ impl Container {
 
                             offset += 1;
                         }
-                        Type::Level16 => {
+                        Type::Spell16 | Type::Level16 => {
                             temp_definitions.push(UpdateMaskMember {
                                 member: d.clone(),
                                 offset,

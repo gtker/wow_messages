@@ -4,7 +4,7 @@ use std::io::{Read, Write};
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/auction/smsg/smsg_auction_removed_notification.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/auction/smsg/smsg_auction_removed_notification.wowm#L3):
 /// ```text
 /// smsg SMSG_AUCTION_REMOVED_NOTIFICATION = 0x028D {
-///     u32 item;
+///     Item item;
 ///     u32 item_template;
 ///     u32 random_property_id;
 /// }
@@ -22,7 +22,7 @@ impl SMSG_AUCTION_REMOVED_NOTIFICATION {
             return Err(crate::errors::ParseErrorKind::InvalidSize);
         }
 
-        // item: u32
+        // item: Item
         let item = crate::util::read_u32_le(&mut r)?;
 
         // item_template: u32
@@ -88,7 +88,7 @@ impl crate::Message for SMSG_AUCTION_REMOVED_NOTIFICATION {
     }
 
     fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
-        // item: u32
+        // item: Item
         w.write_all(&self.item.to_le_bytes())?;
 
         // item_template: u32

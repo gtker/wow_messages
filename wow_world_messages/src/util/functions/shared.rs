@@ -271,7 +271,7 @@ pub(crate) fn tbc_wrath_itemsocket_write_into_vec(s: &wow_world_base::shared::it
 
 #[cfg(feature = "vanilla")]
 pub(crate) fn vanilla_itemspells_read<R: std::io::Read>(mut r: R) -> Result<wow_world_base::vanilla::ItemSpells, crate::errors::ParseErrorKind> {
-    // spell: u32
+    // spell: Spell
     let spell = crate::util::read_u32_le(&mut r)?;
 
     // spell_trigger: SpellTriggerType
@@ -301,7 +301,7 @@ pub(crate) fn vanilla_itemspells_read<R: std::io::Read>(mut r: R) -> Result<wow_
 
 #[cfg(feature = "vanilla")]
 pub(crate) fn vanilla_itemspells_write_into_vec(s: &wow_world_base::vanilla::ItemSpells, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
-    // spell: u32
+    // spell: Spell
     w.write_all(&s.spell.to_le_bytes())?;
 
     // spell_trigger: SpellTriggerType
@@ -324,7 +324,7 @@ pub(crate) fn vanilla_itemspells_write_into_vec(s: &wow_world_base::vanilla::Ite
 
 #[cfg(any(feature = "tbc", feature = "wrath"))]
 pub(crate) fn tbc_wrath_itemspells_read<R: std::io::Read>(mut r: R) -> Result<wow_world_base::shared::item_spells_tbc_wrath::ItemSpells, crate::errors::ParseErrorKind> {
-    // spell: u32
+    // spell: Spell
     let spell = crate::util::read_u32_le(&mut r)?;
 
     // spell_trigger: SpellTriggerType
@@ -354,7 +354,7 @@ pub(crate) fn tbc_wrath_itemspells_read<R: std::io::Read>(mut r: R) -> Result<wo
 
 #[cfg(any(feature = "tbc", feature = "wrath"))]
 pub(crate) fn tbc_wrath_itemspells_write_into_vec(s: &wow_world_base::shared::item_spells_tbc_wrath::ItemSpells, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
-    // spell: u32
+    // spell: Spell
     w.write_all(&s.spell.to_le_bytes())?;
 
     // spell_trigger: SpellTriggerType

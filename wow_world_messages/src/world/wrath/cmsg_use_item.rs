@@ -14,7 +14,7 @@ use crate::wrath::{
 ///     u8 bag_slot;
 ///     u8 spell_index;
 ///     u8 cast_count;
-///     u32 spell;
+///     Spell spell;
 ///     Guid item;
 ///     u32 glyph_index;
 ///     ClientCastFlags cast_flags;
@@ -63,7 +63,7 @@ impl CMSG_USE_ITEM {
         // cast_count: u8
         let cast_count = crate::util::read_u8_le(&mut r)?;
 
-        // spell: u32
+        // spell: Spell
         let spell = crate::util::read_u32_le(&mut r)?;
 
         // item: Guid
@@ -574,7 +574,7 @@ impl crate::Message for CMSG_USE_ITEM {
         // cast_count: u8
         w.write_all(&self.cast_count.to_le_bytes())?;
 
-        // spell: u32
+        // spell: Spell
         w.write_all(&self.spell.to_le_bytes())?;
 
         // item: Guid
@@ -645,7 +645,7 @@ impl CMSG_USE_ITEM {
         + 1 // bag_slot: u8
         + 1 // spell_index: u8
         + 1 // cast_count: u8
-        + 4 // spell: u32
+        + 4 // spell: Spell
         + 8 // item: Guid
         + 4 // glyph_index: u32
         + self.cast_flags.size() // cast_flags: CMSG_USE_ITEM_ClientCastFlags

@@ -6,7 +6,7 @@ use crate::vanilla::SpellCastTargets;
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/spell/cmsg_cast_spell.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/spell/cmsg_cast_spell.wowm#L1):
 /// ```text
 /// cmsg CMSG_CAST_SPELL = 0x012E {
-///     u32 spell;
+///     Spell spell;
 ///     SpellCastTargets targets;
 /// }
 /// ```
@@ -22,7 +22,7 @@ impl CMSG_CAST_SPELL {
             return Err(crate::errors::ParseErrorKind::InvalidSize);
         }
 
-        // spell: u32
+        // spell: Spell
         let spell = crate::util::read_u32_le(&mut r)?;
 
         // targets: SpellCastTargets
@@ -49,7 +49,7 @@ impl crate::Message for CMSG_CAST_SPELL {
     }
 
     fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
-        // spell: u32
+        // spell: Spell
         w.write_all(&self.spell.to_le_bytes())?;
 
         // targets: SpellCastTargets
@@ -69,7 +69,7 @@ impl crate::vanilla::ClientMessage for CMSG_CAST_SPELL {}
 
 impl CMSG_CAST_SPELL {
     pub(crate) fn size(&self) -> usize {
-        4 // spell: u32
+        4 // spell: Spell
         + self.targets.size() // targets: SpellCastTargets
     }
 }

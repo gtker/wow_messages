@@ -7,7 +7,7 @@ use crate::Guid;
 /// ```text
 /// struct TradeSlot {
 ///     u8 trade_slot_number;
-///     u32 item;
+///     Item item;
 ///     u32 display_id;
 ///     u32 stack_count;
 ///     Bool32 wrapped;
@@ -47,7 +47,7 @@ impl TradeSlot {
         // trade_slot_number: u8
         w.write_all(&self.trade_slot_number.to_le_bytes())?;
 
-        // item: u32
+        // item: Item
         w.write_all(&self.item.to_le_bytes())?;
 
         // display_id: u32
@@ -100,7 +100,7 @@ impl TradeSlot {
         // trade_slot_number: u8
         let trade_slot_number = crate::util::read_u8_le(&mut r)?;
 
-        // item: u32
+        // item: Item
         let item = crate::util::read_u32_le(&mut r)?;
 
         // display_id: u32

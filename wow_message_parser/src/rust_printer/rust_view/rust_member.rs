@@ -47,7 +47,8 @@ impl RustMember {
                 ArrayType::Struct(c) => {
                     v.append(&mut c.rust_object().all_members());
                 }
-                ArrayType::Integer(_)
+                ArrayType::Spell
+                | ArrayType::Integer(_)
                 | ArrayType::CString
                 | ArrayType::Guid
                 | ArrayType::PackedGuid => {}

@@ -8,7 +8,7 @@ use crate::wrath::MailListItemEnchant;
 /// struct MailListItem {
 ///     u8 item_index;
 ///     u32 low_guid;
-///     u32 item;
+///     Item item;
 ///     MailListItemEnchant[7] enchants;
 ///     u32 item_random_property_id;
 ///     u32 item_suffix_factor;
@@ -41,7 +41,7 @@ impl MailListItem {
         // low_guid: u32
         w.write_all(&self.low_guid.to_le_bytes())?;
 
-        // item: u32
+        // item: Item
         w.write_all(&self.item.to_le_bytes())?;
 
         // enchants: MailListItemEnchant[7]
@@ -82,7 +82,7 @@ impl MailListItem {
         // low_guid: u32
         let low_guid = crate::util::read_u32_le(&mut r)?;
 
-        // item: u32
+        // item: Item
         let item = crate::util::read_u32_le(&mut r)?;
 
         // enchants: MailListItemEnchant[7]

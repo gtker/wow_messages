@@ -18,7 +18,7 @@ smsg SMSG_QUESTGIVER_QUEST_DETAILS = 0x0188 {
     u32 amount_of_item_rewards;
     QuestItemReward[amount_of_item_rewards] item_rewards;
     Gold money_reward;
-    u32 reward_spell;
+    Spell reward_spell;
     u32 amount_of_emotes;
     QuestDetailsEmote[amount_of_emotes] emotes;
 }
@@ -49,7 +49,7 @@ SMSG have a header of 4 bytes.
 | - | 4 / Little | u32 | amount_of_item_rewards |  |
 | - | ? / - | [QuestItemReward](questitemreward.md)[amount_of_item_rewards] | item_rewards |  |
 | - | 4 / Little | Gold | money_reward |  |
-| - | 4 / Little | u32 | reward_spell |  |
+| - | 4 / Little | Spell | reward_spell |  |
 | - | 4 / Little | u32 | amount_of_emotes |  |
 | - | ? / - | [QuestDetailsEmote](questdetailsemote.md)[amount_of_emotes] | emotes |  |
 
@@ -73,8 +73,8 @@ smsg SMSG_QUESTGIVER_QUEST_DETAILS = 0x0188 {
     QuestItemReward[amount_of_item_rewards] item_rewards;
     Gold money_reward;
     u32 honor_reward;
-    u32 reward_spell;
-    u32 casted_spell;
+    Spell reward_spell;
+    Spell casted_spell;
     u32 title_reward;
     u32 amount_of_emotes;
     QuestDetailsEmote[amount_of_emotes] emotes;
@@ -108,8 +108,8 @@ SMSG have a header of 4 bytes.
 | - | ? / - | [QuestItemReward](questitemreward.md)[amount_of_item_rewards] | item_rewards |  |
 | - | 4 / Little | Gold | money_reward |  |
 | - | 4 / Little | u32 | honor_reward |  |
-| - | 4 / Little | u32 | reward_spell | mangosone: reward spell, this spell will display (icon) (casted if RewSpellCast==0) |
-| - | 4 / Little | u32 | casted_spell |  |
+| - | 4 / Little | Spell | reward_spell | mangosone: reward spell, this spell will display (icon) (casted if RewSpellCast==0) |
+| - | 4 / Little | Spell | casted_spell |  |
 | - | 4 / Little | u32 | title_reward | mangosone: CharTitle, new 2.4.0, player gets this title (bit index from CharTitles) |
 | - | 4 / Little | u32 | amount_of_emotes |  |
 | - | ? / - | [QuestDetailsEmote](questdetailsemote.md)[amount_of_emotes] | emotes |  |
@@ -139,8 +139,8 @@ smsg SMSG_QUESTGIVER_QUEST_DETAILS = 0x0188 {
     u32 experience_reward;
     u32 honor_reward;
     f32 honor_reward_multiplier;
-    u32 reward_spell;
-    u32 casted_spell;
+    Spell reward_spell;
+    Spell casted_spell;
     u32 title_reward;
     u32 talent_reward;
     u32 arena_point_reward;
@@ -185,8 +185,8 @@ SMSG have a header of 4 bytes.
 | - | 4 / Little | u32 | experience_reward | arcemu: New 3.3 - this is the XP you'll see on the quest reward panel too, but I think it is fine not to show it, because it can change if the player levels up before completing the quest. |
 | - | 4 / Little | u32 | honor_reward |  |
 | - | 4 / Little | f32 | honor_reward_multiplier | arcemu: new 3.3 |
-| - | 4 / Little | u32 | reward_spell | mangosone: reward spell, this spell will display (icon) (casted if RewSpellCast==0) |
-| - | 4 / Little | u32 | casted_spell |  |
+| - | 4 / Little | Spell | reward_spell | mangosone: reward spell, this spell will display (icon) (casted if RewSpellCast==0) |
+| - | 4 / Little | Spell | casted_spell |  |
 | - | 4 / Little | u32 | title_reward | mangosone: CharTitle, new 2.4.0, player gets this title (bit index from CharTitles) |
 | - | 4 / Little | u32 | talent_reward |  |
 | - | 4 / Little | u32 | arena_point_reward |  |
