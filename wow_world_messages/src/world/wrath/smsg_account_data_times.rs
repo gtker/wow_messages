@@ -25,10 +25,7 @@ pub struct SMSG_ACCOUNT_DATA_TIMES {
 
 impl crate::private::Sealed for SMSG_ACCOUNT_DATA_TIMES {}
 impl SMSG_ACCOUNT_DATA_TIMES {
-    fn read_inner(
-        mut r: &mut &[u8],
-        body_size: u32,
-    ) -> Result<Self, crate::errors::ParseErrorKind> {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
         if !(9..=65544).contains(&body_size) {
             return Err(crate::errors::ParseErrorKind::InvalidSize);
         }
@@ -64,6 +61,7 @@ impl SMSG_ACCOUNT_DATA_TIMES {
             data,
         })
     }
+
 }
 
 impl crate::Message for SMSG_ACCOUNT_DATA_TIMES {
@@ -76,8 +74,8 @@ impl crate::Message for SMSG_ACCOUNT_DATA_TIMES {
 
     #[cfg(feature = "print-testcase")]
     fn to_test_case_string(&self) -> Option<String> {
-        use crate::traits::Message;
         use std::fmt::Write;
+        use crate::traits::Message;
 
         let mut s = String::new();
 
@@ -113,13 +111,9 @@ impl crate::Message for SMSG_ACCOUNT_DATA_TIMES {
             writeln!(s, "    /* data: u32[-] end */").unwrap();
         }
 
+
         writeln!(s, "] {{").unwrap();
-        writeln!(
-            s,
-            "    versions = \"{}\";",
-            std::env::var("WOWM_TEST_CASE_WORLD_VERSION").unwrap_or("3.3.5".to_string())
-        )
-        .unwrap();
+        writeln!(s, "    versions = \"{}\";", std::env::var("WOWM_TEST_CASE_WORLD_VERSION").unwrap_or("3.3.5".to_string())).unwrap();
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
@@ -147,14 +141,10 @@ impl crate::Message for SMSG_ACCOUNT_DATA_TIMES {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(
-        r: &mut &[u8],
-        body_size: u32,
-    ) -> Result<Self, crate::errors::ParseError> {
-        Self::read_inner(r, body_size).map_err(|a| {
-            crate::errors::ParseError::new(521, "SMSG_ACCOUNT_DATA_TIMES", body_size, a)
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size).map_err(|a| crate::errors::ParseError::new(521, "SMSG_ACCOUNT_DATA_TIMES", body_size, a))
     }
+
 }
 
 #[cfg(feature = "wrath")]
@@ -168,3 +158,4 @@ impl SMSG_ACCOUNT_DATA_TIMES {
         + self.data.len() * core::mem::size_of::<u32>() // data: u32[-]
     }
 }
+
