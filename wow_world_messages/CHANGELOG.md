@@ -44,6 +44,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   These were only intended to be used by `wow_world_messages` for reading `Guid`s on the wire and should provide no
   functionality for users for either `wow_world_messages` or `wow_world_base`.
 * `*object_type` functions for TBC and Wrath `UpdateMask`s.
+* BREAKING: `Copy` from `InspectTalentGearMask`. This type took up significant stack space.
+* BREAKING: `const` from `InspectTalentGearMask::size` and `*::inspect_talent_gears`.
 
 ## [0.1.0] - 2023-05-20
 
