@@ -30,7 +30,6 @@ impl SMSG_INSPECT_TALENT {
             let mut current_size = {
                 crate::util::packed_guid_size(&player) // player: PackedGuid
             };
-            current_size += 4; // talent_data_decompressed_size: u32
             let mut talent_data = Vec::with_capacity(body_size as usize - current_size);
             while current_size < (body_size as usize) {
                 talent_data.push(crate::util::read_u8_le(&mut r)?);

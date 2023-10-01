@@ -23,7 +23,6 @@ impl SMSG_WARDEN_DATA {
             let mut current_size = {
                 0
             };
-            current_size += 4; // encrypted_data_decompressed_size: u32
             let mut encrypted_data = Vec::with_capacity(body_size as usize - current_size);
             while current_size < (body_size as usize) {
                 encrypted_data.push(crate::util::read_u8_le(&mut r)?);

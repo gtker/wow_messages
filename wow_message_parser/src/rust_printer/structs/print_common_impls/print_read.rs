@@ -93,9 +93,12 @@ fn print_read_array(
             }
 
             print_size_before_variable(s, e, d.name());
-            s.wln(format!(
-                "current_size += 4; // {name}_decompressed_size: u32"
-            ));
+
+            if array.compressed() {
+                s.wln(format!(
+                    "current_size += 4; // {name}_decompressed_size: u32"
+                ));
+            }
 
             let use_decoder = array.compressed() || e.tags().compressed() && array.is_endless();
             let loop_condition = if use_decoder {

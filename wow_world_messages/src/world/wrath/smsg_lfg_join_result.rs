@@ -39,7 +39,6 @@ impl SMSG_LFG_JOIN_RESULT {
                 4 // result: u32
                 + 4 // state: u32
             };
-            current_size += 4; // players_decompressed_size: u32
             let mut players = Vec::with_capacity(body_size as usize - current_size);
             while current_size < (body_size as usize) {
                 let a = LfgJoinPlayer::read(&mut r)?;

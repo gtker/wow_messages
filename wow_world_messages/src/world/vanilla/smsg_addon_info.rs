@@ -27,7 +27,6 @@ impl SMSG_ADDON_INFO {
             let mut current_size = {
                 0
             };
-            current_size += 4; // addons_decompressed_size: u32
             let mut addons = Vec::with_capacity(body_size as usize - current_size);
             while current_size < (body_size as usize) {
                 let a = Addon::read(&mut r)?;
