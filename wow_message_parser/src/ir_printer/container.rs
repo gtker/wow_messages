@@ -106,12 +106,22 @@ pub(crate) struct IrSizes {
     maximum_size: u32,
 }
 
+fn i128_to_u32(v: i128) -> u32 {
+    if v < 0 {
+        0
+    } else if v >= (u32::MAX as i128) {
+        u32::MAX
+    } else {
+        v as u32
+    }
+}
+
 impl IrSizes {
     fn from_sizes(v: Sizes) -> Self {
         Self {
             constant_sized: v.is_constant().is_some(),
-            minimum_size: v.minimum() as u32,
-            maximum_size: v.maximum() as u32,
+            minimum_size: i128_to_u32(v.minimum()),
+            maximum_size: i128_to_u32(v.maximum()),
         }
     }
 }
