@@ -10413,7 +10413,6 @@ impl ServerOpcodeMessage {
             Self::SMSG_SPELLSTEALLOG(c) => crate::Message::to_test_case_string(c),
             Self::SMSG_DEFENSE_MESSAGE(c) => crate::Message::to_test_case_string(c),
             Self::SMSG_INSTANCE_DIFFICULTY(c) => crate::Message::to_test_case_string(c),
-            Self::SMSG_MOTD(c) => crate::Message::to_test_case_string(c),
             Self::SMSG_MOVE_SET_FLIGHT(c) => crate::Message::to_test_case_string(c),
             Self::SMSG_MOVE_UNSET_FLIGHT(c) => crate::Message::to_test_case_string(c),
             Self::SMSG_MOVE_SET_CAN_FLY(c) => crate::Message::to_test_case_string(c),

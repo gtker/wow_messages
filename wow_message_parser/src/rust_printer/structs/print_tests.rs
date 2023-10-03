@@ -418,7 +418,7 @@ fn print_value(
 
             s.wln_no_indent(format!("{value},"));
         }
-        TestValue::Array { values, size } => {
+        TestValue::IntegerArray { values, size } => {
             match size {
                 ArraySize::Fixed(_) => s.w_no_indent("["),
                 ArraySize::Variable(_) | ArraySize::Endless => s.w_no_indent("vec!["),
@@ -427,6 +427,20 @@ fn print_value(
 
             for value in values {
                 s.w_break_at(format!(" {value:#04X},"));
+            }
+
+            s.dec_indent();
+            s.wln_no_indent(" ],");
+        }
+        TestValue::StringArray { values, size } => {
+            match size {
+                ArraySize::Fixed(_) => s.w_no_indent("["),
+                ArraySize::Variable(_) | ArraySize::Endless => s.w_no_indent("vec!["),
+            }
+            s.inc_indent();
+
+            for value in values {
+                s.w_break_at(format!(" \"{value}\".to_string(),"));
             }
 
             s.dec_indent();

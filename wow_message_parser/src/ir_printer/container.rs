@@ -660,7 +660,7 @@ impl IrTestValue {
                 value: *value,
                 original_string: original_string.to_string(),
             },
-            TestValue::Array { values, size } => Self::Array {
+            TestValue::IntegerArray { values, size } => Self::Array {
                 values: values.iter().map(|a| a.to_string()).collect(),
                 size: IrArraySize::from_array_size(size.clone()),
             },
@@ -703,6 +703,10 @@ impl IrTestValue {
             TestValue::Gold(i) => Self::Gold(IrIntegerEnumValue::from_container_value(i)),
             TestValue::Level(i) => Self::Level(IrIntegerEnumValue::from_container_value(i)),
             TestValue::MonsterMoveSpline(v) => Self::MonsterMoveSpline(v.clone()),
+            TestValue::StringArray { values, size } => Self::Array {
+                values: values.clone(),
+                size: IrArraySize::from_array_size(size.clone()),
+            },
         }
     }
 }

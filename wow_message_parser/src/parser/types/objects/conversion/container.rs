@@ -609,18 +609,39 @@ fn convert_parsed_test_case_value_to_test_case_value(
             assert!(value.contains('['));
             assert!(value.contains(']'));
             let val = &value.replace(['[', ']'], "");
-            let mut v = Vec::new();
-            for value in val.split(',') {
-                let value = value.trim();
-                if value.is_empty() {
-                    continue;
-                }
 
-                v.push(parse_value(value).unwrap() as usize);
+            match array.ty() {
+                ParsedArrayType::CString => {
+                    let mut v = Vec::new();
+                    for value in val.split(',') {
+                        let value = value.trim().replace("\"", "");
+                        if value.is_empty() {
+                            continue;
+                        }
+
+                        v.push(value);
+                    }
+                    let size =
+                        parsed_array_to_array(c, array.clone(), containers, definers, c.tags())
+                            .size();
+                    TestValue::StringArray { values: v, size }
+                }
+                _ => {
+                    let mut v = Vec::new();
+                    for value in val.split(',') {
+                        let value = value.trim();
+                        if value.is_empty() {
+                            continue;
+                        }
+
+                        v.push(parse_value(value).unwrap() as usize);
+                    }
+                    let size =
+                        parsed_array_to_array(c, array.clone(), containers, definers, c.tags())
+                            .size();
+                    TestValue::IntegerArray { values: v, size }
+                }
             }
-            let size =
-                parsed_array_to_array(c, array.clone(), containers, definers, c.tags()).size();
-            TestValue::Array { values: v, size }
         }
         ParsedType::Population => TestValue::Population {
             value: value.parse().unwrap(),

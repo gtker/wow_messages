@@ -47,49 +47,6 @@ impl crate::Message for SMSG_MOTD {
         "SMSG_MOTD"
     }
 
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        use std::fmt::Write;
-        use crate::traits::Message;
-
-        let mut s = String::new();
-
-        writeln!(s, "test SMSG_MOTD {{").unwrap();
-        // Members
-        writeln!(s, "    amount_of_motds = {};", self.motds.len()).unwrap();
-        writeln!(s, "    motds = [").unwrap();
-        for v in self.motds.as_slice() {
-            write!(s, "\"{v}\", ").unwrap();
-        }
-        writeln!(s, "    ];").unwrap();
-
-        writeln!(s, "}} [").unwrap();
-
-        let [a, b] = (u16::try_from(self.size() + 2).unwrap()).to_be_bytes();
-        writeln!(s, "    {a:#04X}, {b:#04X}, /* size */").unwrap();
-        let [a, b] = 829_u16.to_le_bytes();
-        writeln!(s, "    {a:#04X}, {b:#04X}, /* opcode */").unwrap();
-        let mut bytes: Vec<u8> = Vec::new();
-        self.write_into_vec(&mut bytes).unwrap();
-        let mut bytes = bytes.into_iter();
-
-        crate::util::write_bytes(&mut s, &mut bytes, 4, "amount_of_motds", "    ");
-        if !self.motds.is_empty() {
-            writeln!(s, "    /* motds: CString[amount_of_motds] start */").unwrap();
-            for (i, v) in self.motds.iter().enumerate() {
-                crate::util::write_bytes(&mut s, &mut bytes, v.len() + 1, &format!("motds {i}"), "    ");
-            }
-            writeln!(s, "    /* motds: CString[amount_of_motds] end */").unwrap();
-        }
-
-
-        writeln!(s, "] {{").unwrap();
-        writeln!(s, "    versions = \"{}\";", std::env::var("WOWM_TEST_CASE_WORLD_VERSION").unwrap_or("2.4.3 3".to_string())).unwrap();
-        writeln!(s, "}}\n").unwrap();
-
-        Some(s)
-    }
-
     fn size_without_header(&self) -> u32 {
         self.size() as u32
     }
@@ -124,5 +81,195 @@ impl SMSG_MOTD {
         4 // amount_of_motds: u32
         + self.motds.iter().fold(0, |acc, x| acc + x.len() + 1) // motds: CString[amount_of_motds]
     }
+}
+
+#[cfg(all(feature = "tbc", test))]
+mod test_tbc {
+    #![allow(clippy::missing_const_for_fn)]
+    use super::SMSG_MOTD;
+    use super::*;
+    use super::super::*;
+    use crate::tbc::opcodes::ServerOpcodeMessage;
+    use crate::tbc::{ClientMessage, ServerMessage};
+
+    const HEADER_SIZE: usize = 2 + 2;
+    fn assert(t: &SMSG_MOTD, expected: &SMSG_MOTD) {
+        assert_eq!(t.motds, expected.motds);
+    }
+
+    const RAW0: [u8; 118] = [ 0x00, 0x74, 0x3D, 0x03, 0x02, 0x00, 0x00, 0x00, 0x57,
+         0x65, 0x6C, 0x63, 0x6F, 0x6D, 0x65, 0x20, 0x74, 0x6F, 0x20, 0x61, 0x6E,
+         0x20, 0x41, 0x7A, 0x65, 0x72, 0x6F, 0x74, 0x68, 0x43, 0x6F, 0x72, 0x65,
+         0x20, 0x73, 0x65, 0x72, 0x76, 0x65, 0x72, 0x2E, 0x00, 0x7C, 0x63, 0x66,
+         0x66, 0x46, 0x46, 0x34, 0x41, 0x32, 0x44, 0x54, 0x68, 0x69, 0x73, 0x20,
+         0x73, 0x65, 0x72, 0x76, 0x65, 0x72, 0x20, 0x72, 0x75, 0x6E, 0x73, 0x20,
+         0x6F, 0x6E, 0x20, 0x41, 0x7A, 0x65, 0x72, 0x6F, 0x74, 0x68, 0x43, 0x6F,
+         0x72, 0x65, 0x7C, 0x72, 0x20, 0x7C, 0x63, 0x66, 0x66, 0x33, 0x43, 0x45,
+         0x37, 0x46, 0x46, 0x77, 0x77, 0x77, 0x2E, 0x61, 0x7A, 0x65, 0x72, 0x6F,
+         0x74, 0x68, 0x63, 0x6F, 0x72, 0x65, 0x2E, 0x6F, 0x72, 0x67, 0x7C, 0x72,
+         0x00, ];
+
+    pub(crate) fn expected0() -> SMSG_MOTD {
+        SMSG_MOTD {
+            motds: vec![ "Welcome to an AzerothCore server.".to_string(), "|cffFF4A2DThis server runs on AzerothCore|r |cff3CE7FFwww.azerothcore.org|r".to_string(), ],
+        }
+
+    }
+
+    // Generated from `wow_message_parser/wowm/world/chat/smsg_motd.wowm` line 8.
+    #[cfg(feature = "sync")]
+    #[cfg_attr(feature = "sync", test)]
+    fn smsg_motd0() {
+        let expected = expected0();
+        let t = ServerOpcodeMessage::read_unencrypted(&mut std::io::Cursor::new(&RAW0)).unwrap();
+        let t = match t {
+            ServerOpcodeMessage::SMSG_MOTD(t) => t,
+            opcode => panic!("incorrect opcode. Expected SMSG_MOTD, got {opcode:#?}"),
+        };
+
+        assert(&t, &expected);
+        assert_eq!(t.size() + HEADER_SIZE, RAW0.len());
+
+        let mut dest = Vec::with_capacity(RAW0.len());
+        expected.write_unencrypted_server(&mut std::io::Cursor::new(&mut dest)).unwrap();
+
+        assert_eq!(dest, RAW0);
+    }
+
+    // Generated from `wow_message_parser/wowm/world/chat/smsg_motd.wowm` line 8.
+    #[cfg(feature = "tokio")]
+    #[cfg_attr(feature = "tokio", tokio::test)]
+    async fn tokio_smsg_motd0() {
+        let expected = expected0();
+        let t = ServerOpcodeMessage::tokio_read_unencrypted(&mut std::io::Cursor::new(&RAW0)).await.unwrap();
+        let t = match t {
+            ServerOpcodeMessage::SMSG_MOTD(t) => t,
+            opcode => panic!("incorrect opcode. Expected SMSG_MOTD, got {opcode:#?}"),
+        };
+
+        assert(&t, &expected);
+        assert_eq!(t.size() + HEADER_SIZE, RAW0.len());
+
+        let mut dest = Vec::with_capacity(RAW0.len());
+        expected.tokio_write_unencrypted_server(&mut std::io::Cursor::new(&mut dest)).await.unwrap();
+
+        assert_eq!(dest, RAW0);
+    }
+
+    // Generated from `wow_message_parser/wowm/world/chat/smsg_motd.wowm` line 8.
+    #[cfg(feature = "async-std")]
+    #[cfg_attr(feature = "async-std", async_std::test)]
+    async fn astd_smsg_motd0() {
+        let expected = expected0();
+        let t = ServerOpcodeMessage::astd_read_unencrypted(&mut async_std::io::Cursor::new(&RAW0)).await.unwrap();
+        let t = match t {
+            ServerOpcodeMessage::SMSG_MOTD(t) => t,
+            opcode => panic!("incorrect opcode. Expected SMSG_MOTD, got {opcode:#?}"),
+        };
+
+        assert(&t, &expected);
+        assert_eq!(t.size() + HEADER_SIZE, RAW0.len());
+
+        let mut dest = Vec::with_capacity(RAW0.len());
+        expected.astd_write_unencrypted_server(&mut async_std::io::Cursor::new(&mut dest)).await.unwrap();
+
+        assert_eq!(dest, RAW0);
+    }
+
+}
+
+#[cfg(all(feature = "wrath", test))]
+mod test_wrath {
+    #![allow(clippy::missing_const_for_fn)]
+    use super::SMSG_MOTD;
+    use super::*;
+    use super::super::*;
+    use crate::wrath::opcodes::ServerOpcodeMessage;
+    use crate::wrath::{ClientMessage, ServerMessage};
+
+    const HEADER_SIZE: usize = 2 + 2;
+    fn assert(t: &SMSG_MOTD, expected: &SMSG_MOTD) {
+        assert_eq!(t.motds, expected.motds);
+    }
+
+    const RAW0: [u8; 118] = [ 0x00, 0x74, 0x3D, 0x03, 0x02, 0x00, 0x00, 0x00, 0x57,
+         0x65, 0x6C, 0x63, 0x6F, 0x6D, 0x65, 0x20, 0x74, 0x6F, 0x20, 0x61, 0x6E,
+         0x20, 0x41, 0x7A, 0x65, 0x72, 0x6F, 0x74, 0x68, 0x43, 0x6F, 0x72, 0x65,
+         0x20, 0x73, 0x65, 0x72, 0x76, 0x65, 0x72, 0x2E, 0x00, 0x7C, 0x63, 0x66,
+         0x66, 0x46, 0x46, 0x34, 0x41, 0x32, 0x44, 0x54, 0x68, 0x69, 0x73, 0x20,
+         0x73, 0x65, 0x72, 0x76, 0x65, 0x72, 0x20, 0x72, 0x75, 0x6E, 0x73, 0x20,
+         0x6F, 0x6E, 0x20, 0x41, 0x7A, 0x65, 0x72, 0x6F, 0x74, 0x68, 0x43, 0x6F,
+         0x72, 0x65, 0x7C, 0x72, 0x20, 0x7C, 0x63, 0x66, 0x66, 0x33, 0x43, 0x45,
+         0x37, 0x46, 0x46, 0x77, 0x77, 0x77, 0x2E, 0x61, 0x7A, 0x65, 0x72, 0x6F,
+         0x74, 0x68, 0x63, 0x6F, 0x72, 0x65, 0x2E, 0x6F, 0x72, 0x67, 0x7C, 0x72,
+         0x00, ];
+
+    pub(crate) fn expected0() -> SMSG_MOTD {
+        SMSG_MOTD {
+            motds: vec![ "Welcome to an AzerothCore server.".to_string(), "|cffFF4A2DThis server runs on AzerothCore|r |cff3CE7FFwww.azerothcore.org|r".to_string(), ],
+        }
+
+    }
+
+    // Generated from `wow_message_parser/wowm/world/chat/smsg_motd.wowm` line 8.
+    #[cfg(feature = "sync")]
+    #[cfg_attr(feature = "sync", test)]
+    fn smsg_motd0() {
+        let expected = expected0();
+        let t = ServerOpcodeMessage::read_unencrypted(&mut std::io::Cursor::new(&RAW0)).unwrap();
+        let t = match t {
+            ServerOpcodeMessage::SMSG_MOTD(t) => t,
+            opcode => panic!("incorrect opcode. Expected SMSG_MOTD, got {opcode:#?}"),
+        };
+
+        assert(&t, &expected);
+        assert_eq!(t.size() + HEADER_SIZE, RAW0.len());
+
+        let mut dest = Vec::with_capacity(RAW0.len());
+        expected.write_unencrypted_server(&mut std::io::Cursor::new(&mut dest)).unwrap();
+
+        assert_eq!(dest, RAW0);
+    }
+
+    // Generated from `wow_message_parser/wowm/world/chat/smsg_motd.wowm` line 8.
+    #[cfg(feature = "tokio")]
+    #[cfg_attr(feature = "tokio", tokio::test)]
+    async fn tokio_smsg_motd0() {
+        let expected = expected0();
+        let t = ServerOpcodeMessage::tokio_read_unencrypted(&mut std::io::Cursor::new(&RAW0)).await.unwrap();
+        let t = match t {
+            ServerOpcodeMessage::SMSG_MOTD(t) => t,
+            opcode => panic!("incorrect opcode. Expected SMSG_MOTD, got {opcode:#?}"),
+        };
+
+        assert(&t, &expected);
+        assert_eq!(t.size() + HEADER_SIZE, RAW0.len());
+
+        let mut dest = Vec::with_capacity(RAW0.len());
+        expected.tokio_write_unencrypted_server(&mut std::io::Cursor::new(&mut dest)).await.unwrap();
+
+        assert_eq!(dest, RAW0);
+    }
+
+    // Generated from `wow_message_parser/wowm/world/chat/smsg_motd.wowm` line 8.
+    #[cfg(feature = "async-std")]
+    #[cfg_attr(feature = "async-std", async_std::test)]
+    async fn astd_smsg_motd0() {
+        let expected = expected0();
+        let t = ServerOpcodeMessage::astd_read_unencrypted(&mut async_std::io::Cursor::new(&RAW0)).await.unwrap();
+        let t = match t {
+            ServerOpcodeMessage::SMSG_MOTD(t) => t,
+            opcode => panic!("incorrect opcode. Expected SMSG_MOTD, got {opcode:#?}"),
+        };
+
+        assert(&t, &expected);
+        assert_eq!(t.size() + HEADER_SIZE, RAW0.len());
+
+        let mut dest = Vec::with_capacity(RAW0.len());
+        expected.astd_write_unencrypted_server(&mut async_std::io::Cursor::new(&mut dest)).await.unwrap();
+
+        assert_eq!(dest, RAW0);
+    }
+
 }
 

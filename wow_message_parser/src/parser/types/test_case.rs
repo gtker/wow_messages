@@ -137,8 +137,12 @@ pub(crate) enum TestValue {
     Population {
         value: f32,
     },
-    Array {
+    IntegerArray {
         values: Vec<usize>,
+        size: ArraySize,
+    },
+    StringArray {
+        values: Vec<String>,
         size: ArraySize,
     },
     String(String),
