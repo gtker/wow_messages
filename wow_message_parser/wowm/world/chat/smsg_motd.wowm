@@ -1,5 +1,6 @@
 smsg SMSG_MOTD = 0x033D {
-    SizedCString motd;
+    u32 amount_of_motds;
+    CString[amount_of_motds] motds;
 } {
     versions = "2.4.3 3";
 }
