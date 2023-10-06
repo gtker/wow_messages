@@ -685,8 +685,20 @@ heroic_keys: None,heroic_required_quest: 0 },
 heroic_keys: None,heroic_required_quest: 0 },
     ]
 )),
+(2206, (
+    AreaTrigger::Circle { position: Position::new(Map::Kalimdor, 5483.9, -749.9, 334.6, 0.0), radius: 30.0 },
+    &[
+        Trigger::Quest { quest_id: 5156 },
+    ]
+)),
 (2207, (
     AreaTrigger::Circle { position: Position::new(Map::Kalimdor, 5552.1, -683.8, 335.2, 0.0), radius: 25.0 },
+    &[
+        Trigger::Quest { quest_id: 5156 },
+    ]
+)),
+(2208, (
+    AreaTrigger::Circle { position: Position::new(Map::Kalimdor, 5587.0, -784.0, 335.8, 0.0), radius: 23.0 },
     &[
         Trigger::Quest { quest_id: 5156 },
     ]
