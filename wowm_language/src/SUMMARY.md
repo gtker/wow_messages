@@ -22,6 +22,7 @@
 - [PackedGuid](./types/packed-guid.md)
 - [UpdateMask](./types/update-mask.md)
 - [u48](./types/u48.md)
+- [DateTime](./types/datetime.md)
 - [Variable Item Random Property](./types/variable-item-random-property.md)
 
 # Intermediate Representation
