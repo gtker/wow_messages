@@ -19,7 +19,7 @@ value = @{ ( "0x" ~ HEX_DIGIT+
             | ASCII_DIGIT+
             | (QUOTATION_MARK ~ text ~ QUOTATION_MARK )
             | identifier ) }
-array = { "[" ~ raw_values* ~ "]" }
+array = { "[" ~ array_values* ~ "]" }
 
 identifier_and_value = { identifier ~ "=" ~ value }
 
@@ -88,12 +88,12 @@ sub_object = { "{" ~ basic_test_item* ~ "}" }
 array_of_sub_objects = { "[" ~ (sub_object ~ ","?)* ~ "]" }
 basic_test_item = { identifier ~ "=" ~ ( array | multiple_values | sub_object | array_of_sub_objects ) ~ ";" }
 complex_test_item = { identifier ~ "=" ~ ( array | multiple_values | sub_object | array_of_sub_objects ) ~ object_key_values }
-raw_values = { (value ~ ","?)+ }
+array_values = { value ~ ("," ~ value)* ~ ","? }
 
 test = {"test" ~ identifier ~ "{" ~
         test_items ~
         "}" ~ "[" ~
-        raw_values
+        array_values
         ~ "]" ~
         object_key_values? }
 

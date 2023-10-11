@@ -249,8 +249,8 @@ fn parse_test(
     }
 
     let mut raw_bytes = Vec::new();
-    let raw_values = t.next().unwrap().into_inner();
-    for r in raw_values {
+    let array_values = t.next().unwrap().into_inner();
+    for r in array_values {
         raw_bytes.push(parse_value(r.as_str()).unwrap() as u8);
     }
 
