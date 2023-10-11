@@ -109,6 +109,19 @@ const fn years_after_2000(v: u32) -> u32 {
     (v >> 24) & 0b11111111
 }
 
+impl std::fmt::Display for DateTime {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        let weekday = self.weekday();
+        let year = self.years_after_2000() as u32 + 2000;
+        let month = self.month().iso8601();
+        let day = self.month_day() + 1;
+        let hour = self.hours();
+        let minute = self.minutes();
+
+        write!(f, "{weekday} {year}-{month}-{day}T{hour}:{minute}")
+    }
+}
+
 impl TryFrom<u32> for DateTime {
     type Error = DateTimeError;
 
@@ -397,6 +410,20 @@ impl Weekday {
 
 const WEEKDAY: &str = "Weekday";
 
+impl std::fmt::Display for Weekday {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        f.write_str(match self {
+            Weekday::Monday => "Monday",
+            Weekday::Tuesday => "Tuesday",
+            Weekday::Wednesday => "Wednesday",
+            Weekday::Thursday => "Thursday",
+            Weekday::Friday => "Friday",
+            Weekday::Saturday => "Saturday",
+            Weekday::Sunday => "Sunday",
+        })
+    }
+}
+
 impl Default for Weekday {
     fn default() -> Self {
         Self::Monday
@@ -520,6 +547,10 @@ impl Month {
         }
     }
 
+    pub const fn iso8601(&self) -> u32 {
+        self.as_int() + 1
+    }
+
     const fn maximum_days(&self, years_after_2000: u8) -> u8 {
         match self {
             Month::January => 31,
@@ -641,6 +672,25 @@ const MONTH: &str = "Month";
 impl Default for Month {
     fn default() -> Self {
         Self::January
+    }
+}
+
+impl std::fmt::Display for Month {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        f.write_str(match self {
+            Month::January => "January",
+            Month::February => "February",
+            Month::March => "March",
+            Month::April => "April",
+            Month::May => "May",
+            Month::June => "June",
+            Month::July => "July",
+            Month::August => "August",
+            Month::September => "September",
+            Month::October => "October",
+            Month::November => "November",
+            Month::December => "December",
+        })
     }
 }
 

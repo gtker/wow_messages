@@ -24,6 +24,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   regardless of underlying type.
   This may break type deduction and lead to compile errors, so it is breaking.
 * `DateTimeError` type for `DateTime` parsing errors.
+* `Display` for `DateTime`, `Month`, and `Weekday`.
 
 ### Changed
 
