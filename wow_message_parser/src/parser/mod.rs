@@ -57,7 +57,7 @@ impl Commands {
     }
 }
 
-pub(crate) fn parse_commands(t: Pair<Rule>) -> Commands {
+pub(crate) fn parse_commands(t: Pair<Rule>, ty_name: &str, file_info: &FileInfo) -> Commands {
     let t = t.into_inner();
     let mut tags = ParsedTags::new();
 
@@ -68,7 +68,7 @@ pub(crate) fn parse_commands(t: Pair<Rule>) -> Commands {
             "tag_all" => {
                 let key = command.next().unwrap();
                 let value = command.next().unwrap();
-                tags.insert(key.as_str(), value.as_str());
+                tags.insert(key.as_str(), value.as_str(), ty_name, file_info);
             }
             _ => unreachable!("invalid command"),
         }
@@ -89,7 +89,7 @@ pub(crate) fn parse_contents(contents: &str, filename: &Path) -> ParsedObjects {
 
     let commands = file.find(|a| a.as_rule() == Rule::commands);
     let commands = match commands {
-        Some(c) => parse_commands(c),
+        Some(c) => parse_commands(c, "tag_all", &FileInfo::new(filename.to_path_buf(), 0, 0)),
         None => Commands::empty(),
     };
 
@@ -190,7 +190,12 @@ fn parse_statements(statements: &mut Pairs<Rule>, tags: &ParsedTags, path: &Path
     ParsedObjects::new(enums, flags, structs, messages, tests)
 }
 
-fn parse_test_values(m: Pair<Rule>, test_members: &mut Vec<ParsedTestCaseMember>) {
+fn parse_test_values(
+    m: Pair<Rule>,
+    test_members: &mut Vec<ParsedTestCaseMember>,
+    ty_name: &str,
+    file_info: &FileInfo,
+) {
     let mut m = m.into_inner();
     let member_name = m.next().unwrap().as_str();
     let member_value = m.next().unwrap();
@@ -200,7 +205,7 @@ fn parse_test_values(m: Pair<Rule>, test_members: &mut Vec<ParsedTestCaseMember>
             let mut v = Vec::new();
 
             for m_inner in member_value.into_inner() {
-                parse_test_values(m_inner, &mut v);
+                parse_test_values(m_inner, &mut v, ty_name, file_info);
             }
 
             ParsedTestValue::Multiple(v)
@@ -213,7 +218,7 @@ fn parse_test_values(m: Pair<Rule>, test_members: &mut Vec<ParsedTestCaseMember>
                 let mut v = Vec::new();
 
                 for m_inner in sub_object.into_inner() {
-                    parse_test_values(m_inner, &mut v);
+                    parse_test_values(m_inner, &mut v, ty_name, file_info);
                 }
 
                 multiples.push(v);
@@ -225,7 +230,7 @@ fn parse_test_values(m: Pair<Rule>, test_members: &mut Vec<ParsedTestCaseMember>
     };
 
     let mut extra_kvs = m.find(|a| a.as_rule() == Rule::object_key_values);
-    let kvs = parse_object_key_values(&mut extra_kvs, &ParsedTags::new());
+    let kvs = parse_object_key_values(&mut extra_kvs, &ParsedTags::new(), ty_name, file_info);
 
     test_members.push(ParsedTestCaseMember::new(
         member_name,
@@ -245,7 +250,7 @@ fn parse_test(
 
     let mut test_members = Vec::new();
     for m in members {
-        parse_test_values(m, &mut test_members);
+        parse_test_values(m, &mut test_members, name, &file_info);
     }
 
     let mut raw_bytes = Vec::new();
@@ -255,7 +260,7 @@ fn parse_test(
     }
 
     let mut extra_kvs = t.find(|a| a.as_rule() == Rule::object_key_values);
-    let mut kvs = parse_object_key_values(&mut extra_kvs, tags);
+    let mut kvs = parse_object_key_values(&mut extra_kvs, tags, name, &file_info);
     kvs.add_descriptive_comments(descriptive_comments);
 
     ParsedTestCase::new(
@@ -316,8 +321,8 @@ fn parse_struct(
 
         if unimplemented {
             let mut extra_kvs = t.find(|a| a.as_rule() == Rule::object_key_values);
-            let mut kvs = parse_object_key_values(&mut extra_kvs, tags);
-            kvs.insert(UNIMPLEMENTED, "true");
+            let mut kvs = parse_object_key_values(&mut extra_kvs, tags, identifier, &file_info);
+            kvs.insert(UNIMPLEMENTED, "true", identifier, &file_info);
             let v = vec![unimplemented_member()];
 
             apply_tags(identifier, v, kvs, file_info, container_type, objects);
@@ -328,7 +333,7 @@ fn parse_struct(
     }
 
     let mut extra_kvs = t.find(|a| a.as_rule() == Rule::object_key_values);
-    let mut kvs = parse_object_key_values(&mut extra_kvs, tags);
+    let mut kvs = parse_object_key_values(&mut extra_kvs, tags, identifier, &file_info);
     kvs.add_descriptive_comments(descriptive_comments);
 
     apply_tags(identifier, members, kvs, file_info, container_type, objects);
@@ -415,7 +420,7 @@ fn parse_struct_member(ts: Pair<Rule>, ty_name: &str, file_info: &FileInfo) -> P
                 let mut kv = kv.into_inner();
                 let identifier = kv.find(|a| a.as_rule() == Rule::identifier).unwrap();
                 let text = kv.find(|a| a.as_rule() == Rule::text).unwrap();
-                kvs.insert(identifier.as_str(), text.as_str());
+                kvs.insert(identifier.as_str(), text.as_str(), ty_name, file_info);
             }
             kvs.add_descriptive_comments(&descriptive_comments);
 
@@ -598,7 +603,12 @@ pub(crate) fn parse_enum(
             let mut complex_key_value_pair = complex_key_value_pair.into_inner();
             let identifier = complex_key_value_pair.next().unwrap();
             let text = complex_key_value_pair.next().unwrap();
-            kvs.insert(identifier.as_str(), text.as_str());
+            kvs.insert(
+                identifier.as_str(),
+                text.as_str(),
+                ident.as_str(),
+                &file_info,
+            );
         }
         kvs.add_descriptive_comments(&comments);
 
@@ -615,8 +625,8 @@ pub(crate) fn parse_enum(
     }
 
     let mut extra_key_values = t.next();
-    let mut extras = parse_object_key_values(&mut extra_key_values, tags);
-    extras.append(tags.clone());
+    let mut extras =
+        parse_object_key_values(&mut extra_key_values, tags, ident.as_str(), &file_info);
     extras.add_descriptive_comments(descriptive_comments);
 
     let basic_type = IntegerType::from_str(basic_type.as_str(), ident.as_str(), &file_info);
@@ -635,7 +645,12 @@ pub(crate) fn parse_enum(
     )
 }
 
-fn parse_object_key_values(t: &mut Option<Pair<Rule>>, tags: &ParsedTags) -> ParsedTags {
+fn parse_object_key_values(
+    t: &mut Option<Pair<Rule>>,
+    tags: &ParsedTags,
+    ty_name: &str,
+    file_info: &FileInfo,
+) -> ParsedTags {
     match t {
         None => tags.clone(),
         Some(s) => {
@@ -647,9 +662,9 @@ fn parse_object_key_values(t: &mut Option<Pair<Rule>>, tags: &ParsedTags) -> Par
                 let key = kv.next().unwrap().as_str();
                 let value = kv.next().unwrap().as_str();
 
-                v.insert(key, value);
+                v.insert(key, value, ty_name, file_info);
             }
-            v.append(tags.clone());
+            v.append(tags.clone(), ty_name, file_info);
             v
         }
     }

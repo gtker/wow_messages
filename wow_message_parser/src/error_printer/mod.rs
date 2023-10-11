@@ -1,5 +1,5 @@
 use crate::file_info::FileInfo;
-use crate::parser::types::version::{AllVersions, MajorWorldVersion};
+use crate::parser::types::version::{AllVersions, MajorWorldVersion, WorldVersion};
 use crate::parser::types::IntegerType;
 use crate::path_utils::opcodes_file;
 use crate::{ObjectTags, CONTAINER_SELF_SIZE_FIELD};
@@ -29,6 +29,7 @@ pub(crate) const OPCODE_HAS_INCORRECT_NAME: i32 = 19;
 pub(crate) const TYPE_IS_UPCAST_TO_SAME: i32 = 20;
 pub(crate) const FLAG_WITH_SIGNED_TYPE: i32 = 21;
 pub(crate) const DEFINER_WITH_INVALID_VALUE: i32 = 22;
+pub(crate) const VERSION_TAGS_OVERLAP: i32 = 23;
 
 fn wowm_exit(s: ErrorWriter, code: i32) -> ! {
     #[cfg(not(test))]
@@ -460,4 +461,20 @@ pub(crate) fn definer_with_invalid_value(
     );
 
     wowm_exit(s, DEFINER_WITH_INVALID_VALUE)
+}
+
+pub(crate) fn version_tags_overlap(
+    ty_name: &str,
+    file_info: &FileInfo,
+    less_specific: WorldVersion,
+    version: WorldVersion,
+) -> ! {
+    let mut s = ErrorWriter::new("Version tag already has less specific version.");
+
+    s.fileinfo(
+        file_info,
+        format!("Object '{ty_name}' already has version '{less_specific}' and tries to add '{version}'.",),
+    );
+
+    wowm_exit(s, VERSION_TAGS_OVERLAP)
 }

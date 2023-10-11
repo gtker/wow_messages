@@ -1,5 +1,3 @@
-#tag_all versions "1.12";
-
 enum TimerType : u32 {
     FATIGUE = 0;
     BREATH = 1;
@@ -30,6 +28,8 @@ enum SpellMissInfo : u32 {
 struct SpellMiss {
     Guid target;
     SpellMissInfo miss_info;
+} {
+    versions = "1.12";
 }
 
 enum SpellSchool : u8 {
@@ -61,6 +61,6 @@ flag CastFlags : u16 {
     UNKNOWN8 = 0x00000080;
     UNKNOWN9 = 0x00000100;
 } {
-    versions = "2";
+    versions = "1.12 2";
 }
 

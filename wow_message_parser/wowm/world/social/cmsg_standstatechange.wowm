@@ -1,8 +1,8 @@
-#tag_all versions "1.12 2 3";
-
 /// Automatically sent by the client when it goes AFK.
 cmsg CMSG_STANDSTATECHANGE = 0x0101 {
     (u32)UnitStandState animation_state;
+} {
+    versions = "1.12 2 3";
 }
 
 test CMSG_STANDSTATECHANGE {

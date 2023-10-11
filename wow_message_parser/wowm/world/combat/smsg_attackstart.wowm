@@ -1,10 +1,9 @@
-#tag_all versions "1 2 3";
-
 smsg SMSG_ATTACKSTART = 0x0143 {
     Guid attacker;
     Guid victim;
+} {
+    versions = "1 2 3";
 }
-
 
 test SMSG_ATTACKSTART {
     attacker = 23;

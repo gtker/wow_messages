@@ -1,9 +1,8 @@
-#tag_all versions "1 2 3";
-
 cmsg CMSG_INITIATE_TRADE = 0x0116 {
     Guid guid;
+} {
+    versions = "1 2 3";
 }
-
 
 test CMSG_INITIATE_TRADE {
     guid = 23;

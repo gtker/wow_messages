@@ -1,7 +1,7 @@
-#tag_all versions "1.12 2 3.3.5";
-
 /// Sent twice by the client when teleporting and logging out.
-cmsg CMSG_CANCEL_TRADE = 0x011C {}
+cmsg CMSG_CANCEL_TRADE = 0x011C {} {
+    versions = "1.12 2 3.3.5";
+}
 
 test CMSG_CANCEL_TRADE {
 } [

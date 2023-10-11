@@ -1,9 +1,8 @@
-#tag_all versions "1 2 3";
-
 cmsg CMSG_CANCEL_CAST = 0x012F {
     Spell id;
+} {
+    versions = "1 2 3";
 }
-
 
 test CMSG_CANCEL_CAST {
     id = 20600;
@@ -14,7 +13,6 @@ test CMSG_CANCEL_CAST {
 ] {
     versions = "1.12";
 }
-
 
 test CMSG_CANCEL_CAST {
     id = 8690;

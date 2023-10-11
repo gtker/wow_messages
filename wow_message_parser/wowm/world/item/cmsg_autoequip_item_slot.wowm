@@ -1,8 +1,8 @@
-#tag_all versions "1 2 3";
-
 cmsg CMSG_AUTOEQUIP_ITEM_SLOT = 0x010F {
     Guid guid;
     u8 destination_slot;
+} {
+    versions = "1 2 3";
 }
 
 test CMSG_AUTOEQUIP_ITEM {

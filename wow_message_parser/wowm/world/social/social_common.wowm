@@ -1,5 +1,3 @@
-#tag_all versions "1.12";
-
 enum GroupLootSetting : u8 {
     FREE_FOR_ALL = 0;
     ROUND_ROBIN = 1;
@@ -7,7 +5,7 @@ enum GroupLootSetting : u8 {
     GROUP_LOOT = 3;
     NEED_BEFORE_GREED = 4;
 } {
-    versions = "2 3";
+    versions = "1.12 2 3";
 }
 
 enum ItemQuality : u8 {
@@ -19,7 +17,7 @@ enum ItemQuality : u8 {
     LEGENDARY = 5;
     ARTIFACT = 6;
 } {
-    versions = "2";
+    versions = "1.12 2";
     rust_base_type = "true";
 }
 
@@ -60,7 +58,7 @@ enum ChatType : u8 {
     BATTLEGROUND           = 0x5C;
     BATTLEGROUND_LEADER    = 0x5D;
 } {
-    versions = "1.7 1.8 1.9 1.10 1.11";
+    versions = "1.7 1.8 1.9 1.10 1.11 1.12";
 }
 
 enum Language : u32 {
@@ -202,6 +200,8 @@ enum Emote : u32 {
     STATE_SIT_CHAIR_MED = 415;
     STATE_SPELLEFFECT_HOLD = 422;
     STATE_EAT_NO_SHEATHE = 423;
+} {
+    versions = "1.12";
 }
 
 enum TextEmote : u32 {
@@ -374,6 +374,8 @@ enum TextEmote : u32 {
     GOLF_CLAP = 343;
     WINK = 363;
     PAT = 364;
+} {
+    versions = "1.12";
 }
 
 flag GroupUpdateFlags : u32 {
@@ -422,6 +424,8 @@ flag GroupUpdateFlags : u32 {
     /// uint16 above mask continuation, giving max total of 48 auras possible
     PET_AURAS_2 = 0x00100000;
     MODE_OFFLINE = 0x10000000;
+} {
+    versions = "1.12";
 }
 
 flag GroupMemberOnlineStatus : u8 {
@@ -443,7 +447,7 @@ flag GroupMemberOnlineStatus : u8 {
     /// `Lua_UnitIsDND`
     DND = 0x0080;
 } {
-    versions = "2 3";
+    versions = "1.12 2 3";
 }
 
 enum UnitStandState : u8 {
@@ -460,6 +464,6 @@ enum UnitStandState : u8 {
     /// mangos-tbc: Depends on model animation. Submerge, freeze, hide, hibernate, rest
     CUSTOM = 9;
 } {
-    versions = "2 3";
+    versions = "1.12 2 3";
 }
 

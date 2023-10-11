@@ -1,6 +1,8 @@
 use std::collections::BTreeSet;
 
-use crate::error_printer::{object_has_both_versions, object_has_no_versions};
+use crate::error_printer::{
+    object_has_both_versions, object_has_no_versions, version_tags_overlap,
+};
 use crate::file_info::FileInfo;
 use crate::parser::types::tags::{MemberTags, TagString};
 use crate::parser::types::version::{AllVersions, LoginVersion, WorldVersion};
@@ -33,10 +35,12 @@ impl ParsedTags {
         Default::default()
     }
 
-    pub(crate) fn append(&mut self, mut t: ParsedTags) {
+    pub(crate) fn append(&mut self, mut t: ParsedTags, ty_name: &str, file_info: &FileInfo) {
         self.login_versions.append(&mut t.login_versions);
 
-        self.world_versions.append(&mut t.world_versions);
+        for v in t.world_versions {
+            self.insert_world_version(v, ty_name, file_info);
+        }
 
         if let Some(v) = t.comment {
             self.comment = Some(v);
@@ -134,7 +138,27 @@ impl ParsedTags {
         self.world_versions.insert(version);
     }
 
-    pub(crate) fn insert(&mut self, key: &str, value: &str) {
+    fn insert_world_version(&mut self, version: WorldVersion, ty_name: &str, file_info: &FileInfo) {
+        if matches!(version, WorldVersion::All) {
+            self.world_versions.clear();
+            self.world_versions.insert(WorldVersion::All);
+            return;
+        }
+
+        if self.world_versions.get(&WorldVersion::All).is_some() {
+            panic!("Object has both * and regular version")
+        }
+
+        for more_specific in &self.world_versions {
+            if version.overlaps(more_specific) {
+                version_tags_overlap(ty_name, file_info, *more_specific, version);
+            }
+        }
+
+        self.world_versions.insert(version);
+    }
+
+    pub(crate) fn insert(&mut self, key: &str, value: &str, ty_name: &str, file_info: &FileInfo) {
         if key == LOGIN_VERSIONS {
             for w in value.split_whitespace() {
                 if let Ok(v) = w.parse::<u8>() {
@@ -154,27 +178,26 @@ impl ParsedTags {
         } else if key == VERSIONS {
             for w in value.split_whitespace() {
                 if let Ok(v) = w.parse::<u8>() {
-                    if self.world_versions.get(&WorldVersion::All).is_none() {
-                        self.world_versions.insert(WorldVersion::Major(v));
-                        continue;
-                    } else {
-                        continue;
-                    }
+                    self.insert_world_version(WorldVersion::Major(v), ty_name, file_info);
+                    continue;
                 } else if w == "*" {
-                    self.world_versions.clear();
-                    self.world_versions.insert(WorldVersion::All);
+                    self.insert_world_version(WorldVersion::All, ty_name, file_info);
                     continue;
                 }
 
                 let d: Vec<u8> = w.split('.').map(|a| a.parse::<u8>().unwrap()).collect();
-                if self.world_versions.get(&WorldVersion::All).is_none() {
-                    self.world_versions.insert(match d.len() {
-                        2 => WorldVersion::Minor(d[0], d[1]),
-                        3 => WorldVersion::Patch(d[0], d[1], d[2]),
-                        4 => WorldVersion::Exact(d[0], d[1], d[2], u16::from(d[3])),
+                self.insert_world_version(
+                    match d.as_slice() {
+                        [major, minor] => WorldVersion::Minor(*major, *minor),
+                        [major, minor, patch] => WorldVersion::Patch(*major, *minor, *patch),
+                        [major, minor, patch, build] => {
+                            WorldVersion::Exact(*major, *minor, *patch, u16::from(*build))
+                        }
                         _ => panic!("incorrect world version string"),
-                    });
-                }
+                    },
+                    ty_name,
+                    file_info,
+                );
             }
         } else if key == PASTE_VERSIONS {
             for w in value.split_whitespace() {
@@ -186,10 +209,12 @@ impl ParsedTags {
                 }
 
                 let d: Vec<u8> = w.split('.').map(|a| a.parse::<u8>().unwrap()).collect();
-                self.paste_versions.insert(match d.len() {
-                    2 => WorldVersion::Minor(d[0], d[1]),
-                    3 => WorldVersion::Patch(d[0], d[1], d[2]),
-                    4 => WorldVersion::Exact(d[0], d[1], d[2], u16::from(d[3])),
+                self.paste_versions.insert(match d.as_slice() {
+                    [major, minor] => WorldVersion::Minor(*major, *minor),
+                    [major, minor, patch] => WorldVersion::Patch(*major, *minor, *patch),
+                    [major, minor, patch, build] => {
+                        WorldVersion::Exact(*major, *minor, *patch, u16::from(*build))
+                    }
                     _ => panic!("incorrect world version string"),
                 });
             }
