@@ -66,7 +66,7 @@ smsg SMSG_PARTY_MEMBER_STATS = 0x007E {
         AuraMask pet_auras;
     }
 } {
-    paste_versions = "1.12";
+    versions = "1.12";
 }
 
 smsg SMSG_PARTY_MEMBER_STATS = 0x007E {
@@ -134,7 +134,14 @@ smsg SMSG_PARTY_MEMBER_STATS = 0x007E {
         AuraMask pet_auras;
     }
 } {
-    paste_versions = "2.4.3";
+    versions = "2.4.3";
+}
+
+struct Aura {
+    u16 aura;
+    u8 unknown;
+} {
+    versions = "2.4.3";
 }
 
 smsg SMSG_PARTY_MEMBER_STATS = 0x007E {
@@ -205,5 +212,13 @@ smsg SMSG_PARTY_MEMBER_STATS = 0x007E {
         u32 transport;
     }
 } {
-    paste_versions = "3.3.5";
+    versions = "3.3.5";
 }
+
+struct Aura {
+    u32 aura;
+    u8 unknown;
+} {
+    versions = "3.3.5";
+}
+

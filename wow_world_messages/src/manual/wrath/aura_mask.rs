@@ -1,11 +1,6 @@
+use crate::wrath::Aura;
 use std::io;
 use std::io::Read;
-
-#[derive(Debug, Hash, Copy, Default, Clone, Ord, PartialOrd, Eq, PartialEq)]
-pub struct Aura {
-    pub aura: u32,
-    pub unknown: u8,
-}
 
 #[derive(Debug, Hash, Copy, Clone, Ord, PartialOrd, Eq, PartialEq)]
 pub struct AuraMask {
@@ -15,18 +10,13 @@ pub struct AuraMask {
 impl AuraMask {
     const MAX_CAPACITY: usize = 64;
 
-    pub fn read(r: &mut impl Read) -> Result<Self, io::Error> {
+    pub fn read<R: Read>(mut r: R) -> Result<Self, io::Error> {
         let mut auras = [None; Self::MAX_CAPACITY];
-        let bit_pattern: u64 = crate::util::read_u64_le(r)?;
+        let bit_pattern: u64 = crate::util::read_u64_le(&mut r)?;
 
         for (i, aura) in auras.iter_mut().enumerate() {
             if (bit_pattern & (1 << i)) != 0 {
-                let spell = crate::util::read_u32_le(r)?;
-                let unknown = crate::util::read_u8_le(r)?;
-                *aura = Some(Aura {
-                    aura: spell,
-                    unknown,
-                });
+                *aura = Some(Aura::read(&mut r)?);
             }
         }
 
@@ -44,9 +34,8 @@ impl AuraMask {
         std::io::Write::write_all(&mut v, bit_pattern.to_le_bytes().as_slice())?;
 
         for &i in self.auras() {
-            if let Some(Aura { aura, unknown }) = i {
-                std::io::Write::write_all(&mut v, aura.to_le_bytes().as_slice())?;
-                std::io::Write::write_all(&mut v, unknown.to_le_bytes().as_slice())?;
+            if let Some(aura) = i {
+                aura.write_into_vec(&mut v)?;
             }
         }
 

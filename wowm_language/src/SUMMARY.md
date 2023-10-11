@@ -129,6 +129,7 @@
     - [SpellSchool](docs/spellschool.md)
 - [AuraUpdate](docs/auraupdate.md)
     - [AuraFlag](docs/auraflag.md)
+- [Aura](docs/aura.md)
 - [BankTab](docs/banktab.md)
 - [BattlegroundPlayerPosition](docs/battlegroundplayerposition.md)
 - [BattlegroundPlayer](docs/battlegroundplayer.md)

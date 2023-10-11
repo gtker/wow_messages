@@ -4,15 +4,15 @@ Masks consist of an integer pattern mask and a member for every set bit in the p
 
 # Vanilla
 
-AuraMask has a pattern of 32 bits, with 16 bit members.
+AuraMask has a pattern of 32 bits, with `u16` members.
 
 # TBC
 
-AuraMask has a pattern of 64 bits with 24 bit members.
+AuraMask has a pattern of 64 bits with [`Aura`](../docs/aura.md) struct members.
 
 # Wrath
 
-AuraMask has a pattern of 64 bits with 40 bit members.
+AuraMask has a pattern of 64 bits with [`Aura`](../docs/aura.md) struct members.
 
 EnchantMask has a pattern of 16 bits with 16 bit members.
 
