@@ -1,4 +1,4 @@
-use crate::EnumError;
+use crate::{DateTimeError, EnumError};
 
 #[derive(Debug, Ord, PartialOrd, Eq, PartialEq, Default, Hash, Copy, Clone)]
 pub struct DateTime {
@@ -110,31 +110,237 @@ const fn years_after_2000(v: u32) -> u32 {
 }
 
 impl TryFrom<u32> for DateTime {
-    type Error = EnumError;
+    type Error = DateTimeError;
 
     fn try_from(value: u32) -> Result<Self, Self::Error> {
-        let minutes = minutes(value);
+        let minutes = minutes(value) as u8;
+        if minutes > 59 {
+            return Err(DateTimeError::InvalidMinute(minutes));
+        }
 
-        let hours = hours(value);
+        let hours = hours(value) as u8;
+        if hours > 23 {
+            return Err(DateTimeError::InvalidHour(hours));
+        }
 
         let weekday = weekday(value);
         let weekday = Weekday::try_from(weekday)?;
 
-        let month_day = month_day(value);
-
         let month = month(value);
         let month = Month::try_from(month)?;
 
-        let years_after_2000 = years_after_2000(value);
+        let years_after_2000 = years_after_2000(value) as u8;
+
+        let month_day = month_day(value) as u8;
+        if month_day > month.maximum_days(years_after_2000) {
+            return Err(DateTimeError::InvalidMonthDay {
+                month: month.as_int() as u8,
+                day: month_day,
+            });
+        }
+
+        let predicted_weekday = predicted_weekday(month_day, month, years_after_2000);
+
+        if weekday != predicted_weekday {
+            return Err(DateTimeError::InvalidDate {
+                year_after_2000: years_after_2000,
+                month: month.as_int() as u8,
+                month_day,
+                weekday: weekday.as_int() as u8,
+                predicted_weekday: predicted_weekday.as_int() as u8,
+            });
+        }
 
         Ok(Self::new(
-            years_after_2000 as u8,
+            years_after_2000,
             month,
-            month_day as u8,
+            month_day,
             weekday,
-            hours as u8,
-            minutes as u8,
+            hours,
+            minutes,
         ))
+    }
+}
+
+// Rata Die algorithm using Jan 1st 2000 as the base
+fn predicted_weekday(month_day: u8, month: Month, years_after_2000: u8) -> Weekday {
+    const DAYS_IN_WEEK: u32 = 7;
+    const SATURDAY: u32 = 5;
+
+    let january_first_2000_weekday = SATURDAY;
+
+    let number_of_days_since_january_first_2000 = {
+        let mut leap_year_days = years_after_2000 / 4 - years_after_2000 / 100;
+        if years_after_2000 > 0 {
+            leap_year_days += 1; // 2000 was a leap year
+        }
+        if leap_year(years_after_2000 as u32) && leap_year_days > 0 {
+            leap_year_days -= 1; // Leap day is added in months
+        }
+
+        let days_from_years = years_after_2000 as u32 * 365 + leap_year_days as u32;
+
+        let days_from_month = month.days_from_previous_months(years_after_2000);
+        days_from_years + days_from_month + month_day as u32
+    };
+
+    let day = (january_first_2000_weekday + number_of_days_since_january_first_2000) % DAYS_IN_WEEK;
+
+    match day {
+        0 => Weekday::Monday,
+        1 => Weekday::Tuesday,
+        2 => Weekday::Wednesday,
+        3 => Weekday::Thursday,
+        4 => Weekday::Friday,
+        5 => Weekday::Saturday,
+        6 => Weekday::Sunday,
+        DAYS_IN_WEEK..=u32::MAX => {
+            unreachable!("value greater than modulus DAYS_IN_WEEK not possible")
+        }
+    }
+}
+
+#[test]
+fn predicted_weekdays() {
+    const DATA: &[((u8, Month, u8), Weekday)] = &[
+        ((0, Month::January, 0), Weekday::Saturday), // Jan 1st 2000
+        ((1, Month::January, 0), Weekday::Sunday),   // Jan 2nd 2000
+        ((2, Month::January, 0), Weekday::Monday),   // Jan 3rd 2000
+        ((0, Month::February, 0), Weekday::Tuesday), // Feb 1st 2000
+        ((28, Month::February, 0), Weekday::Tuesday), // Feb 29th 2000
+        ((0, Month::March, 0), Weekday::Wednesday),  // Mar 1st 2000
+        ((14, Month::March, 0), Weekday::Wednesday), // Mar 15th 2000
+        ((30, Month::March, 0), Weekday::Friday),    // Mar 31st 2000
+        ((23, Month::June, 0), Weekday::Saturday),   // Jun 24th 2000
+        ((29, Month::November, 0), Weekday::Thursday), // Nov 30th 2000
+        ((0, Month::December, 0), Weekday::Friday),  // Dec 1st 2000
+        ((30, Month::December, 0), Weekday::Sunday), // Dec 31st 2000
+        ((0, Month::January, 1), Weekday::Monday),   // Jan 1st 2001
+        ((1, Month::January, 1), Weekday::Tuesday),  // Jan 2nd 2001
+        ((2, Month::January, 1), Weekday::Wednesday), // Jan 3rd 2001
+        ((0, Month::February, 1), Weekday::Thursday), // Feb 1st 2001
+        ((11, Month::October, 22), Weekday::Wednesday),
+        ((30, Month::March, 3), Weekday::Monday),
+        ((30, Month::December, 3), Weekday::Wednesday),
+        ((0, Month::January, 4), Weekday::Thursday),
+        ((23, Month::June, 4), Weekday::Thursday),
+        ((4, Month::December, 8), Weekday::Friday),
+        ((19, Month::September, 12), Weekday::Thursday),
+        ((21, Month::February, 35), Weekday::Thursday),
+        ((8, Month::July, 36), Weekday::Wednesday),
+        ((25, Month::July, 39), Weekday::Tuesday),
+        ((8, Month::July, 59), Weekday::Wednesday),
+        ((24, Month::February, 72), Weekday::Thursday),
+        ((17, Month::December, 87), Weekday::Thursday),
+        ((1, Month::March, 90), Weekday::Thursday),
+        ((1, Month::July, 132), Weekday::Wednesday),
+        ((10, Month::August, 152), Weekday::Friday),
+        ((6, Month::June, 157), Weekday::Tuesday),
+        ((24, Month::November, 184), Weekday::Thursday),
+        ((19, Month::May, 190), Weekday::Thursday),
+        ((19, Month::March, 199), Weekday::Wednesday),
+        ((1, Month::September, 212), Weekday::Wednesday),
+        ((15, Month::October, 212), Weekday::Friday),
+        ((8, Month::June, 218), Weekday::Tuesday),
+        ((13, Month::June, 222), Weekday::Friday),
+        ((1, Month::November, 224), Weekday::Tuesday),
+        ((13, Month::June, 233), Weekday::Friday),
+        ((15, Month::December, 247), Weekday::Thursday),
+        ((14, Month::April, 250), Weekday::Monday),
+        ((13, Month::October, 26), Weekday::Wednesday),
+        ((17, Month::September, 35), Weekday::Tuesday),
+        ((3, Month::August, 44), Weekday::Thursday),
+        ((28, Month::May, 62), Weekday::Monday),
+        ((24, Month::July, 69), Weekday::Thursday),
+        ((12, Month::March, 82), Weekday::Friday),
+        ((17, Month::August, 107), Weekday::Thursday),
+        ((12, Month::September, 118), Weekday::Tuesday),
+        ((7, Month::May, 125), Weekday::Tuesday),
+        ((6, Month::May, 126), Weekday::Tuesday),
+        ((28, Month::June, 135), Weekday::Wednesday),
+        ((7, Month::June, 141), Weekday::Thursday),
+        ((23, Month::October, 146), Weekday::Monday),
+        ((17, Month::August, 158), Weekday::Friday),
+        ((13, Month::July, 160), Weekday::Monday),
+        ((24, Month::April, 171), Weekday::Thursday),
+        ((25, Month::September, 177), Weekday::Friday),
+        ((8, Month::May, 183), Weekday::Friday),
+        ((19, Month::November, 183), Weekday::Thursday),
+        ((2, Month::July, 197), Weekday::Monday),
+        ((15, Month::August, 211), Weekday::Friday),
+        ((23, Month::January, 223), Weekday::Friday),
+        ((26, Month::April, 242), Weekday::Wednesday),
+        ((21, Month::July, 246), Weekday::Wednesday),
+        ((17, Month::March, 247), Weekday::Thursday),
+        ((12, Month::May, 33), Weekday::Friday),
+        ((27, Month::March, 35), Weekday::Wednesday),
+        ((12, Month::January, 38), Weekday::Wednesday),
+        ((18, Month::February, 42), Weekday::Wednesday),
+        ((5, Month::September, 45), Weekday::Wednesday),
+        ((13, Month::September, 55), Weekday::Tuesday),
+        ((18, Month::September, 56), Weekday::Tuesday),
+        ((3, Month::December, 68), Weekday::Tuesday),
+        ((10, Month::May, 90), Weekday::Thursday),
+        ((15, Month::December, 106), Weekday::Thursday),
+        ((22, Month::August, 112), Weekday::Tuesday),
+        ((22, Month::July, 115), Weekday::Tuesday),
+        ((5, Month::September, 135), Weekday::Tuesday),
+        ((14, Month::April, 149), Weekday::Tuesday),
+        ((19, Month::August, 150), Weekday::Thursday),
+        ((21, Month::May, 164), Weekday::Tuesday),
+        ((27, Month::December, 170), Weekday::Friday),
+        ((30, Month::January, 180), Weekday::Monday),
+        ((14, Month::September, 183), Weekday::Monday),
+        ((11, Month::March, 184), Weekday::Friday),
+        ((1, Month::June, 202), Weekday::Wednesday),
+        ((0, Month::May, 215), Weekday::Monday),
+        ((15, Month::April, 232), Weekday::Monday),
+        ((21, Month::December, 248), Weekday::Friday),
+        ((14, Month::March, 255), Weekday::Thursday),
+        ((27, Month::August, 6), Weekday::Monday),
+        ((6, Month::May, 9), Weekday::Thursday),
+        ((7, Month::February, 11), Weekday::Tuesday),
+        ((7, Month::February, 16), Weekday::Monday),
+        ((29, Month::May, 18), Weekday::Wednesday),
+        ((6, Month::February, 39), Weekday::Monday),
+        ((14, Month::October, 42), Weekday::Wednesday),
+        ((9, Month::November, 44), Weekday::Thursday),
+        ((16, Month::March, 59), Weekday::Monday),
+        ((2, Month::November, 59), Weekday::Monday),
+        ((23, Month::January, 62), Weekday::Tuesday),
+        ((15, Month::July, 64), Weekday::Wednesday),
+        ((25, Month::February, 65), Weekday::Thursday),
+        ((24, Month::April, 75), Weekday::Thursday),
+        ((19, Month::October, 100), Weekday::Wednesday),
+        ((5, Month::June, 126), Weekday::Thursday),
+        ((0, Month::January, 161), Weekday::Thursday),
+        ((0, Month::January, 173), Weekday::Friday),
+        ((20, Month::July, 195), Weekday::Tuesday),
+        ((11, Month::August, 208), Weekday::Friday),
+        ((5, Month::March, 216), Weekday::Wednesday),
+        ((16, Month::April, 221), Weekday::Tuesday),
+        ((4, Month::September, 223), Weekday::Friday),
+        ((23, Month::January, 226), Weekday::Tuesday),
+        ((14, Month::January, 250), Weekday::Tuesday),
+    ];
+
+    for (i, ((month_day, month, years_after_2000), expected)) in DATA.iter().enumerate() {
+        assert_eq!(
+            *expected,
+            predicted_weekday(*month_day, *month, *years_after_2000),
+            "index {i}: {month_day}+1, {month:?}, year 2000+{years_after_2000}"
+        );
+    }
+}
+
+const fn leap_year(years_after_2000: u32) -> bool {
+    let year = years_after_2000 + 2000;
+    if year % 4 == 0 && year % 100 != 0 {
+        true
+    } else if year % 400 == 0 {
+        true
+    } else {
+        false
     }
 }
 
@@ -311,6 +517,121 @@ impl Month {
             Month::October => 9,
             Month::November => 10,
             Month::December => 11,
+        }
+    }
+
+    const fn maximum_days(&self, years_after_2000: u8) -> u8 {
+        match self {
+            Month::January => 31,
+            Month::February => {
+                if leap_year(years_after_2000 as u32) {
+                    29
+                } else {
+                    28
+                }
+            }
+            Month::March => 31,
+            Month::April => 30,
+            Month::May => 31,
+            Month::June => 30,
+            Month::July => 31,
+            Month::August => 31,
+            Month::September => 30,
+            Month::October => 31,
+            Month::November => 30,
+            Month::December => 31,
+        }
+    }
+
+    const fn days_from_previous_months(&self, years_after_2000: u8) -> u32 {
+        match self {
+            Month::January => 0,
+            Month::February => Self::January.maximum_days(years_after_2000) as u32,
+            Month::March => {
+                Self::January.maximum_days(years_after_2000) as u32
+                    + Self::February.maximum_days(years_after_2000) as u32
+            }
+            Month::April => {
+                Self::January.maximum_days(years_after_2000) as u32
+                    + Self::February.maximum_days(years_after_2000) as u32
+                    + Self::March.maximum_days(years_after_2000) as u32
+            }
+            Month::May => {
+                Self::January.maximum_days(years_after_2000) as u32
+                    + Self::February.maximum_days(years_after_2000) as u32
+                    + Self::March.maximum_days(years_after_2000) as u32
+                    + Self::April.maximum_days(years_after_2000) as u32
+            }
+            Month::June => {
+                Self::January.maximum_days(years_after_2000) as u32
+                    + Self::February.maximum_days(years_after_2000) as u32
+                    + Self::March.maximum_days(years_after_2000) as u32
+                    + Self::April.maximum_days(years_after_2000) as u32
+                    + Self::May.maximum_days(years_after_2000) as u32
+            }
+            Month::July => {
+                Self::January.maximum_days(years_after_2000) as u32
+                    + Self::February.maximum_days(years_after_2000) as u32
+                    + Self::March.maximum_days(years_after_2000) as u32
+                    + Self::April.maximum_days(years_after_2000) as u32
+                    + Self::May.maximum_days(years_after_2000) as u32
+                    + Self::June.maximum_days(years_after_2000) as u32
+            }
+            Month::August => {
+                Self::January.maximum_days(years_after_2000) as u32
+                    + Self::February.maximum_days(years_after_2000) as u32
+                    + Self::March.maximum_days(years_after_2000) as u32
+                    + Self::April.maximum_days(years_after_2000) as u32
+                    + Self::May.maximum_days(years_after_2000) as u32
+                    + Self::June.maximum_days(years_after_2000) as u32
+                    + Self::July.maximum_days(years_after_2000) as u32
+            }
+            Month::September => {
+                Self::January.maximum_days(years_after_2000) as u32
+                    + Self::February.maximum_days(years_after_2000) as u32
+                    + Self::March.maximum_days(years_after_2000) as u32
+                    + Self::April.maximum_days(years_after_2000) as u32
+                    + Self::May.maximum_days(years_after_2000) as u32
+                    + Self::June.maximum_days(years_after_2000) as u32
+                    + Self::July.maximum_days(years_after_2000) as u32
+                    + Self::August.maximum_days(years_after_2000) as u32
+            }
+            Month::October => {
+                Self::January.maximum_days(years_after_2000) as u32
+                    + Self::February.maximum_days(years_after_2000) as u32
+                    + Self::March.maximum_days(years_after_2000) as u32
+                    + Self::April.maximum_days(years_after_2000) as u32
+                    + Self::May.maximum_days(years_after_2000) as u32
+                    + Self::June.maximum_days(years_after_2000) as u32
+                    + Self::July.maximum_days(years_after_2000) as u32
+                    + Self::August.maximum_days(years_after_2000) as u32
+                    + Self::September.maximum_days(years_after_2000) as u32
+            }
+            Month::November => {
+                Self::January.maximum_days(years_after_2000) as u32
+                    + Self::February.maximum_days(years_after_2000) as u32
+                    + Self::March.maximum_days(years_after_2000) as u32
+                    + Self::April.maximum_days(years_after_2000) as u32
+                    + Self::May.maximum_days(years_after_2000) as u32
+                    + Self::June.maximum_days(years_after_2000) as u32
+                    + Self::July.maximum_days(years_after_2000) as u32
+                    + Self::August.maximum_days(years_after_2000) as u32
+                    + Self::September.maximum_days(years_after_2000) as u32
+                    + Self::October.maximum_days(years_after_2000) as u32
+            }
+            Month::December => {
+                Self::January.maximum_days(years_after_2000) as u32
+                    + Self::February.maximum_days(years_after_2000) as u32
+                    + Self::March.maximum_days(years_after_2000) as u32
+                    + Self::April.maximum_days(years_after_2000) as u32
+                    + Self::May.maximum_days(years_after_2000) as u32
+                    + Self::June.maximum_days(years_after_2000) as u32
+                    + Self::July.maximum_days(years_after_2000) as u32
+                    + Self::August.maximum_days(years_after_2000) as u32
+                    + Self::September.maximum_days(years_after_2000) as u32
+                    + Self::October.maximum_days(years_after_2000) as u32
+                    + Self::November.maximum_days(years_after_2000) as u32
+            }
         }
     }
 }

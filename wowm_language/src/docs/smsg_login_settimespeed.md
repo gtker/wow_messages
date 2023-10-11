@@ -46,7 +46,7 @@ Set time to 2022-08-13 (Wednesday) 08:10 and timescale 0.016666668 (1/60).
 ```c
 0, 10, // size
 66, 0, // opcode (66)
-10, 26, 115, 22, // datetime: DateTime
+10, 50, 115, 22, // datetime: DateTime
 137, 136, 136, 60, // timescale: f32
 ```
 ## Client Version 3.1.2, Client Version 3.2, Client Version 3.3

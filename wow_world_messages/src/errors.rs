@@ -1,5 +1,6 @@
 use std::error::Error;
 use std::fmt::{Display, Formatter};
+use wow_world_base::DateTimeError;
 
 pub use wow_world_base::EnumError;
 
@@ -47,6 +48,7 @@ impl Error for ParseError {
             ParseErrorKind::Enum(e) => Some(e),
             ParseErrorKind::String(e) => Some(e),
             ParseErrorKind::BufferSizeTooSmall(io) => Some(io),
+            ParseErrorKind::DateTime(e) => Some(e),
             ParseErrorKind::InvalidSize { .. } => None,
         }
     }
@@ -104,6 +106,7 @@ impl From<std::io::Error> for ExpectedOpcodeError {
 pub enum ParseErrorKind {
     Io(std::io::Error),
     Enum(EnumError),
+    DateTime(DateTimeError),
     String(std::string::FromUtf8Error),
     InvalidSize,
     BufferSizeTooSmall(std::io::Error),
@@ -119,6 +122,7 @@ impl Display for ParseErrorKind {
             ParseErrorKind::BufferSizeTooSmall(io) => {
                 f.write_fmt(format_args!("buffer too small with io error: '{io}'"))
             }
+            ParseErrorKind::DateTime(i) => i.fmt(f),
         }
     }
 }
@@ -140,5 +144,11 @@ impl From<std::string::FromUtf8Error> for ParseErrorKind {
 impl From<std::io::Error> for ParseErrorKind {
     fn from(e: std::io::Error) -> Self {
         Self::Io(e)
+    }
+}
+
+impl From<DateTimeError> for ParseErrorKind {
+    fn from(value: DateTimeError) -> Self {
+        Self::DateTime(value)
     }
 }

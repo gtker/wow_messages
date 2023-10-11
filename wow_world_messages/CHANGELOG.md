@@ -23,6 +23,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * BREAKING: TryFrom for all enums and flags for `u8`, `i8`, `u16`, `i16`, `u32`, `i32`, `u64`, `i64`, and `usize`
   regardless of underlying type.
   This may break type deduction and lead to compile errors, so it is breaking.
+* `DateTimeError` type for `DateTime` parsing errors.
 
 ### Changed
 
@@ -37,6 +38,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * BREAKING: Vanilla `UpdatePlayer` methods `VISIBLE_ITEM_*` have been replaced by a single `VISIBLE_ITEM` method.
 * BREAKING: `CMSG_TEXT_EMOTE` and `SMSG_TEXT_EMOTE` field `emote` changed from `Emote` to `u32`.
 * BREAKING: `EnumError` `value` changed from `u64` to `i128`. This is so that all valid `TryFrom` values can fit.
+* BREAKING: `DateTime::try_from` now returns `DateTimeError` instead of `EnumError`.
+* BREAKING: `DateTime::try_from` will now reject more invalid dates and times.
+* BREAKING: Added `DateTime` to `ParseErrorKind`.
 
 ### Removed
 

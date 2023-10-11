@@ -14,12 +14,12 @@ smsg SMSG_LOGIN_SETTIMESPEED = 0x0042 {
 
 /// Set time to 2022-08-13 (Wednesday) 08:10 and timescale 0.016666668 (1/60).
 test SMSG_LOGIN_SETTIMESPEED {
-    datetime = 376642058;
+    datetime = 0x1673320A;
     timescale = 0.016666668;
 } [
   0x00, 0x0a, /* size */
   0x42, 0x00, /* opcode */
-  0x0a, 0x1a, 0x73, 0x16, /* datetime */
+  0x0a, 0x32, 0x73, 0x16, /* datetime */
   0x89, 0x88, 0x88, 0x3c, /* timescale */
 ] {
     versions = "1.12";

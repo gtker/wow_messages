@@ -92,12 +92,12 @@ mod test_vanilla {
         assert_eq!(t.timescale, expected.timescale);
     }
 
-    const RAW0: [u8; 12] = [ 0x00, 0x0A, 0x42, 0x00, 0x0A, 0x1A, 0x73, 0x16, 0x89,
+    const RAW0: [u8; 12] = [ 0x00, 0x0A, 0x42, 0x00, 0x0A, 0x32, 0x73, 0x16, 0x89,
          0x88, 0x88, 0x3C, ];
 
     pub(crate) fn expected0() -> SMSG_LOGIN_SETTIMESPEED {
         SMSG_LOGIN_SETTIMESPEED {
-            datetime: DateTime::try_from(0x16731A0A).unwrap(),
+            datetime: DateTime::try_from(0x1673320A).unwrap(),
             timescale: 0.016666668_f32,
         }
 
@@ -180,12 +180,12 @@ mod test_tbc {
         assert_eq!(t.timescale, expected.timescale);
     }
 
-    const RAW0: [u8; 12] = [ 0x00, 0x0A, 0x42, 0x00, 0x0A, 0x1A, 0x73, 0x16, 0x89,
+    const RAW0: [u8; 12] = [ 0x00, 0x0A, 0x42, 0x00, 0x0A, 0x32, 0x73, 0x16, 0x89,
          0x88, 0x88, 0x3C, ];
 
     pub(crate) fn expected0() -> SMSG_LOGIN_SETTIMESPEED {
         SMSG_LOGIN_SETTIMESPEED {
-            datetime: DateTime::try_from(0x16731A0A).unwrap(),
+            datetime: DateTime::try_from(0x1673320A).unwrap(),
             timescale: 0.016666668_f32,
         }
 
