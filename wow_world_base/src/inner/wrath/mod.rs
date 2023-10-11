@@ -45,8 +45,6 @@ pub use crate::shared::bonding_vanilla_tbc_wrath::*;
 pub use crate::shared::buy_bank_slot_result_vanilla_tbc_wrath::*;
 pub use crate::shared::buy_result_vanilla_tbc_wrath::*;
 pub use crate::shared::buyback_slot_vanilla_tbc_wrath::*;
-pub(crate) mod cache_mask;
-pub use cache_mask::*;
 pub(crate) mod calendar_moderator_rank;
 pub use calendar_moderator_rank::*;
 pub(crate) mod calendar_status;

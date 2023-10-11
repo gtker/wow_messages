@@ -369,6 +369,7 @@ pub(crate) enum IrType {
     Spell,
     Spell16,
     Item,
+    CacheMask,
 }
 
 impl IrType {
@@ -434,6 +435,7 @@ impl IrType {
             Type::Spell => Self::Spell,
             Type::Spell16 => Self::Spell16,
             Type::Item => Self::Item,
+            Type::CacheMask => Self::CacheMask,
         }
     }
 }

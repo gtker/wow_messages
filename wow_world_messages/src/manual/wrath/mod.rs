@@ -10,7 +10,10 @@ pub use enchant_mask::*;
 pub mod inspect_talent_gear_mask;
 pub use inspect_talent_gear_mask::*;
 
+pub mod cache_mask;
 mod movement_info;
+pub use cache_mask::*;
+
 pub use movement_info::*;
 
 pub use wow_world_base::wrath::Gold;

@@ -24,6 +24,7 @@
 - [u48](./types/u48.md)
 - [DateTime](./types/datetime.md)
 - [Variable Item Random Property](./types/variable-item-random-property.md)
+- [CacheMask](./types/cache-mask.md)
 
 # Intermediate Representation
 
@@ -1016,7 +1017,6 @@
     - [RelationType](docs/relationtype.md)
 - [ResyncRune](docs/resyncrune.md)
 - [SMSG_ACCOUNT_DATA_TIMES](docs/smsg_account_data_times.md)
-    - [CacheMask](docs/cachemask.md)
 - [SMSG_ACHIEVEMENT_DELETED](docs/smsg_achievement_deleted.md)
 - [SMSG_ACHIEVEMENT_EARNED](docs/smsg_achievement_earned.md)
 - [SMSG_ACTION_BUTTONS](docs/smsg_action_buttons.md)

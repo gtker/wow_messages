@@ -223,6 +223,9 @@ impl WiresharkType {
             Type::Population => {
                 unreachable!("population only in login")
             }
+            Type::CacheMask => {
+                unreachable!("cache mask only in wrath")
+            }
         })
     }
 

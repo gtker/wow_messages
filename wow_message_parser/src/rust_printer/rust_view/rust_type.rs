@@ -66,6 +66,7 @@ pub(crate) enum RustType {
     Spell,
     Spell16,
     Item,
+    CacheMask,
 }
 
 impl RustType {
@@ -128,6 +129,7 @@ impl RustType {
             RustType::Spell => Type::Spell,
             RustType::Spell16 => Type::Spell16,
             RustType::Item => Type::Item,
+            RustType::CacheMask => Type::CacheMask,
         }
     }
 
@@ -150,7 +152,8 @@ impl RustType {
             | RustType::Level16
             | RustType::Level32 => false,
 
-            RustType::UpdateMask { .. }
+            RustType::CacheMask
+            | RustType::UpdateMask { .. }
             | RustType::AuraMask
             | RustType::NamedGuid
             | RustType::PackedGuid

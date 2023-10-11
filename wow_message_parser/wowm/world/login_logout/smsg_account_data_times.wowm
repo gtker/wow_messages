@@ -48,8 +48,6 @@ smsg SMSG_ACCOUNT_DATA_TIMES = 0x0209 {
     /// Both mangostwo and arcemu hardcode this to 1
     u8 unknown1;
     CacheMask mask;
-    /// Maximum size is 32 4-bit integers. For every bit that is 1 in the mask, write one u32 with the time
-    u32[-] data;
 } {
     versions = "3.3.5";
 }

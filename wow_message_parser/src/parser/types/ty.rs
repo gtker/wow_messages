@@ -53,6 +53,7 @@ pub(crate) enum Type {
     Spell,
     Spell16,
     Item,
+    CacheMask,
 }
 
 impl Type {
@@ -69,6 +70,7 @@ impl Type {
     pub(crate) const PACKED_GUID_NAME: &'static str = "PackedGuid";
     pub(crate) const AURA_MASK_NAME: &'static str = "AuraMask";
     pub(crate) const UPDATE_MASK_NAME: &'static str = "UpdateMask";
+    pub(crate) const CACHE_MASK_NAME: &'static str = "CacheMask";
     pub(crate) const DATE_TIME_NAME: &'static str = "DateTime";
     pub(crate) const C_STRING_NAME: &'static str = "CString";
     pub(crate) const SIZED_C_STRING_NAME: &'static str = "SizedCString";
@@ -154,6 +156,7 @@ impl Type {
             Type::Spell => ParsedType::Spell,
             Type::Spell16 => ParsedType::Spell16,
             Type::Item => ParsedType::Item,
+            Type::CacheMask => ParsedType::CacheMask,
         }
     }
 
@@ -263,7 +266,8 @@ impl Type {
 
             Type::IpAddress => "Big".to_string(),
 
-            Type::AddonArray
+            Type::CacheMask
+            | Type::AddonArray
             | Type::VariableItemRandomProperty
             | Type::NamedGuid
             | Type::Level

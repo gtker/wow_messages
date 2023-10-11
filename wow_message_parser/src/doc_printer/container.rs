@@ -604,6 +604,7 @@ fn print_container_field(
                 Type::MonsterMoveSplines => {
                     "[MonsterMoveSpline](../types/monster-move-spline.md)".to_string()
                 }
+                Type::CacheMask => "[CacheMask](../types/cache-mask.md)".to_string(),
                 Type::Spell
                 | Type::Spell16
                 | Type::Item

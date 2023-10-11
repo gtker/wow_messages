@@ -446,7 +446,8 @@ fn print_read_definition(
             s.wln_no_indent("crate::util::read_guid(&mut r)?;");
         }
 
-        Type::VariableItemRandomProperty
+        Type::CacheMask
+        | Type::VariableItemRandomProperty
         | Type::NamedGuid
         | Type::UpdateMask { .. }
         | Type::AuraMask

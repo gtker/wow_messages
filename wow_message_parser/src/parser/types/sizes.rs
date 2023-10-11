@@ -57,6 +57,8 @@ pub(crate) const VARIABLE_ITEM_RANDOM_PROPERTY_MIN_SIZE: u8 = 4;
 pub(crate) const VARIABLE_ITEM_RANDOM_PROPERTY_MAX_SIZE: u8 = 8;
 pub(crate) const ADDON_ARRAY_MIN: u8 = 0;
 pub(crate) const ADDON_ARRAY_MAX: i128 = usize::MAX as i128;
+pub(crate) const CACHE_MASK_MIN: i128 = 4;
+pub(crate) const CACHE_MASK_MAX: i128 = 4 + 32 * 4;
 
 pub(crate) const DATETIME_SIZE: u8 = 4;
 

@@ -117,6 +117,7 @@ fn parsed_type_to_type(
         ParsedType::Spell => Type::Spell,
         ParsedType::Spell16 => Type::Spell16,
         ParsedType::Item => Type::Item,
+        ParsedType::CacheMask => Type::CacheMask,
     }
 }
 
@@ -708,7 +709,8 @@ fn convert_parsed_test_case_value_to_test_case_value(
                 complex_not_found(c.name(), c.tags(), &c.file_info, s, &related);
             }
         }
-        ParsedType::AddonArray
+        ParsedType::CacheMask
+        | ParsedType::AddonArray
         | ParsedType::VariableItemRandomProperty
         | ParsedType::NamedGuid
         | ParsedType::EnchantMask

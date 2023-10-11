@@ -90,7 +90,8 @@ pub(crate) fn create_from_range(s: &mut Writer, words: &[Vec<UpdateMaskMember>])
                         unimplemented!("{:#?}", member.ty())
                     }
 
-                    Type::Population
+                    Type::CacheMask
+                    | Type::Population
                     | Type::AddonArray
                     | Type::String
                     | Type::CString
@@ -152,7 +153,8 @@ pub(crate) fn create_from_range(s: &mut Writer, words: &[Vec<UpdateMaskMember>])
                             unimplemented!()
                         }
 
-                        Type::Population
+                        Type::CacheMask
+                        | Type::Population
                         | Type::AddonArray
                         | Type::String
                         | Type::CString

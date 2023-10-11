@@ -418,6 +418,7 @@ fn create_struct_member_definition(
         Type::Spell => RustType::Spell,
         Type::Spell16 => RustType::Spell16,
         Type::Item => RustType::Item,
+        Type::CacheMask => RustType::CacheMask,
     };
 
     let name = d.name().to_string();

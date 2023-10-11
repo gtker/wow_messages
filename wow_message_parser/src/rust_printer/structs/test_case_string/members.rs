@@ -357,7 +357,8 @@ fn print_member_definition(
             test_case_string::wln(s, format!("{prefix}];"));
         }
 
-        Type::UpdateMask { .. }
+        Type::CacheMask
+        | Type::UpdateMask { .. }
         | Type::AuraMask
         | Type::AchievementDoneArray
         | Type::AchievementInProgressArray

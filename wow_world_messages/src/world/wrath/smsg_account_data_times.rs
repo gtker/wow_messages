@@ -2,7 +2,7 @@ use std::io::{Read, Write};
 
 use crate::wrath::CacheMask;
 
-#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Indicate when each piece of account data was last updated by a [`CMSG_UPDATE_ACCOUNT_DATA`](crate::wrath::CMSG_UPDATE_ACCOUNT_DATA). The client can check this against its own times to detect that more recent account data was written from a different client.
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/login_logout/smsg_account_data_times.wowm:45`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/login_logout/smsg_account_data_times.wowm#L45):
 /// ```text
@@ -10,7 +10,6 @@ use crate::wrath::CacheMask;
 ///     u32 unix_time;
 ///     u8 unknown1;
 ///     CacheMask mask;
-///     u32[-] data;
 /// }
 /// ```
 pub struct SMSG_ACCOUNT_DATA_TIMES {
@@ -19,14 +18,12 @@ pub struct SMSG_ACCOUNT_DATA_TIMES {
     /// Both mangostwo and arcemu hardcode this to 1
     pub unknown1: u8,
     pub mask: CacheMask,
-    /// Maximum size is 32 4-bit integers. For every bit that is 1 in the mask, write one u32 with the time
-    pub data: Vec<u32>,
 }
 
 impl crate::private::Sealed for SMSG_ACCOUNT_DATA_TIMES {}
 impl SMSG_ACCOUNT_DATA_TIMES {
     fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
-        if !(9..=65544).contains(&body_size) {
+        if !(9..=137).contains(&body_size) {
             return Err(crate::errors::ParseErrorKind::InvalidSize);
         }
 
@@ -37,28 +34,12 @@ impl SMSG_ACCOUNT_DATA_TIMES {
         let unknown1 = crate::util::read_u8_le(&mut r)?;
 
         // mask: CacheMask
-        let mask = crate::util::read_u32_le(&mut r)?.try_into()?;
-
-        // data: u32[-]
-        let data = {
-            let mut current_size = {
-                4 // unix_time: u32
-                + 1 // unknown1: u8
-                + 4 // mask: CacheMask
-            };
-            let mut data = Vec::with_capacity(body_size as usize - current_size);
-            while current_size < (body_size as usize) {
-                data.push(crate::util::read_u32_le(&mut r)?);
-                current_size += 4;
-            }
-            data
-        };
+        let mask = CacheMask::read(&mut r)?;
 
         Ok(Self {
             unix_time,
             unknown1,
             mask,
-            data,
         })
     }
 
@@ -83,12 +64,7 @@ impl crate::Message for SMSG_ACCOUNT_DATA_TIMES {
         // Members
         writeln!(s, "    unix_time = {};", self.unix_time).unwrap();
         writeln!(s, "    unknown1 = {};", self.unknown1).unwrap();
-        writeln!(s, "    mask = {};", self.mask.as_test_case_value()).unwrap();
-        writeln!(s, "    data = [").unwrap();
-        for v in self.data.as_slice() {
-            write!(s, "{v:#04X}, ").unwrap();
-        }
-        writeln!(s, "    ];").unwrap();
+        panic!("unsupported type for test case printing: 'CacheMask' for variable 'mask'");
 
         writeln!(s, "}} [").unwrap();
 
@@ -102,14 +78,7 @@ impl crate::Message for SMSG_ACCOUNT_DATA_TIMES {
 
         crate::util::write_bytes(&mut s, &mut bytes, 4, "unix_time", "    ");
         crate::util::write_bytes(&mut s, &mut bytes, 1, "unknown1", "    ");
-        crate::util::write_bytes(&mut s, &mut bytes, 4, "mask", "    ");
-        if !self.data.is_empty() {
-            writeln!(s, "    /* data: u32[-] start */").unwrap();
-            for (i, v) in self.data.iter().enumerate() {
-                crate::util::write_bytes(&mut s, &mut bytes, 4, &format!("data {i}"), "    ");
-            }
-            writeln!(s, "    /* data: u32[-] end */").unwrap();
-        }
+        panic!("unsupported type CacheMask for variable 'mask'");
 
 
         writeln!(s, "] {{").unwrap();
@@ -131,12 +100,7 @@ impl crate::Message for SMSG_ACCOUNT_DATA_TIMES {
         w.write_all(&self.unknown1.to_le_bytes())?;
 
         // mask: CacheMask
-        w.write_all(&(self.mask.as_int().to_le_bytes()))?;
-
-        // data: u32[-]
-        for i in self.data.iter() {
-            w.write_all(&i.to_le_bytes())?;
-        }
+        self.mask.write_into_vec(&mut w)?;
 
         Ok(())
     }
@@ -151,11 +115,10 @@ impl crate::Message for SMSG_ACCOUNT_DATA_TIMES {
 impl crate::wrath::ServerMessage for SMSG_ACCOUNT_DATA_TIMES {}
 
 impl SMSG_ACCOUNT_DATA_TIMES {
-    pub(crate) fn size(&self) -> usize {
+    pub(crate) const fn size(&self) -> usize {
         4 // unix_time: u32
         + 1 // unknown1: u8
-        + 4 // mask: CacheMask
-        + self.data.len() * core::mem::size_of::<u32>() // data: u32[-]
+        + self.mask.size() // mask: CacheMask
     }
 }
 

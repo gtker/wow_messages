@@ -587,7 +587,8 @@ impl Container {
 
                 Type::DateTime | Type::PackedGuid | Type::Guid => ("crate".to_string(), name),
 
-                Type::VariableItemRandomProperty
+                Type::CacheMask
+                | Type::VariableItemRandomProperty
                 | Type::NamedGuid
                 | Type::EnchantMask
                 | Type::InspectTalentGearMask
@@ -831,7 +832,8 @@ impl Container {
                             }
                         },
 
-                        Type::IpAddress
+                        Type::CacheMask
+                        | Type::IpAddress
                         | Type::PackedGuid
                         | Type::NamedGuid
                         | Type::CString

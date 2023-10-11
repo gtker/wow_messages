@@ -318,7 +318,8 @@ pub(crate) fn print_write_definition(
             ));
         }
 
-        Type::VariableItemRandomProperty
+        Type::CacheMask
+        | Type::VariableItemRandomProperty
         | Type::NamedGuid
         | Type::EnchantMask
         | Type::InspectTalentGearMask

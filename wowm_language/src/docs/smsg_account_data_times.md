@@ -62,7 +62,6 @@ smsg SMSG_ACCOUNT_DATA_TIMES = 0x0209 {
     u32 unix_time;
     u8 unknown1;
     CacheMask mask;
-    u32[-] data;
 }
 ```
 ### Header
@@ -82,6 +81,5 @@ SMSG have a header of 4 bytes.
 | ------ | ----------------- | ---- | ---- | ------- |
 | - | 4 / Little | u32 | unix_time | Seconds since Unix Epoch |
 | - | 1 / - | u8 | unknown1 | Both mangostwo and arcemu hardcode this to 1 |
-| - | 4 / - | [CacheMask](cachemask.md) | mask |  |
-| - | ? / - | u32[-] | data | Maximum size is 32 4-bit integers. For every bit that is 1 in the mask, write one u32 with the time |
+| - | - / - | [CacheMask](../types/cache-mask.md) | mask |  |
 

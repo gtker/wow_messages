@@ -23,5 +23,4 @@ The basic type is `u32`, a 4 byte (32 bit) little endian integer.
 | `PER_CHARACTER_CACHE` | 234 (0xEA) | Values that are stored per character | Per-Character Cache |
 
 Used in:
-* [SMSG_ACCOUNT_DATA_TIMES](smsg_account_data_times.md)
 

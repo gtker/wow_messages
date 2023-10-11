@@ -138,6 +138,13 @@ fn print_implementation_type(table: &mut WriterTable<3>, ty: &Type) {
                 "-",
             ]);
         }
+        Type::CacheMask => {
+            table.add_row([
+                name.as_ref(),
+                "Client info sent using a mask. See [CacheMask](../types/cache-mask.md).",
+                "-",
+            ]);
+        }
         Type::InspectTalentGearMask => {
             table.add_row([
                 name.as_ref(),

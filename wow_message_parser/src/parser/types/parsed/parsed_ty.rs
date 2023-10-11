@@ -6,10 +6,11 @@ use crate::parser::types::parsed::parsed_array::{ParsedArray, ParsedArraySize, P
 use crate::parser::types::parsed::parsed_container::ParsedContainer;
 use crate::parser::types::sizes::{
     update_mask_max, Sizes, ADDON_ARRAY_MAX, ADDON_ARRAY_MIN, AURA_MASK_MAX_SIZE,
-    AURA_MASK_MIN_SIZE, DATETIME_SIZE, F32_SIZE, GOLD_SIZE, GUID_SIZE, IP_ADDRESS_SIZE, ITEM_SIZE,
-    LEVEL16_SIZE, LEVEL32_SIZE, LEVEL_SIZE, MILLISECONDS_SIZE, NAMED_GUID_MAX_SIZE,
-    NAMED_GUID_MIN_SIZE, PACKED_GUID_MAX_SIZE, PACKED_GUID_MIN_SIZE, POPULATION_SIZE, SECONDS_SIZE,
-    SPELL16_SIZE, SPELL_SIZE, UPDATE_MASK_MIN_SIZE, VARIABLE_ITEM_RANDOM_PROPERTY_MAX_SIZE,
+    AURA_MASK_MIN_SIZE, CACHE_MASK_MAX, CACHE_MASK_MIN, DATETIME_SIZE, F32_SIZE, GOLD_SIZE,
+    GUID_SIZE, IP_ADDRESS_SIZE, ITEM_SIZE, LEVEL16_SIZE, LEVEL32_SIZE, LEVEL_SIZE,
+    MILLISECONDS_SIZE, NAMED_GUID_MAX_SIZE, NAMED_GUID_MIN_SIZE, PACKED_GUID_MAX_SIZE,
+    PACKED_GUID_MIN_SIZE, POPULATION_SIZE, SECONDS_SIZE, SPELL16_SIZE, SPELL_SIZE,
+    UPDATE_MASK_MIN_SIZE, VARIABLE_ITEM_RANDOM_PROPERTY_MAX_SIZE,
     VARIABLE_ITEM_RANDOM_PROPERTY_MIN_SIZE,
 };
 use crate::parser::types::ty::Type;
@@ -60,6 +61,7 @@ pub(crate) enum ParsedType {
     Spell,
     Spell16,
     Item,
+    CacheMask,
 }
 
 impl ParsedType {
@@ -101,6 +103,7 @@ impl ParsedType {
             ParsedType::Spell => Type::SPELL_NAME.to_string(),
             ParsedType::Spell16 => Type::SPELL16_NAME.to_string(),
             ParsedType::Item => Type::ITEM_NAME.to_string(),
+            ParsedType::CacheMask => Type::CACHE_MASK_NAME.to_string(),
         }
     }
 
@@ -126,6 +129,8 @@ impl ParsedType {
 
             ParsedType::Item | ParsedType::Spell => "u32".to_string(),
             ParsedType::Spell16 => "u16".to_string(),
+
+            ParsedType::CacheMask => Type::CACHE_MASK_NAME.to_string(),
 
             _ => self.str(),
         }
@@ -183,6 +188,7 @@ impl ParsedType {
             ParsedType::Spell => (SPELL_SIZE.into(), SPELL_SIZE.into()),
             ParsedType::Spell16 => (SPELL16_SIZE.into(), SPELL16_SIZE.into()),
             ParsedType::Item => (ITEM_SIZE.into(), ITEM_SIZE.into()),
+            ParsedType::CacheMask => (CACHE_MASK_MIN, CACHE_MASK_MAX),
 
             t => unimplemented!("sizes for {t:?}"),
         }
@@ -346,6 +352,7 @@ impl ParsedType {
             Type::VARIABLE_ITEM_RANDOM_PROPERTY_NAME => Self::VariableItemRandomProperty,
             Type::ADDON_ARRAY_NAME => Self::AddonArray,
             Type::IP_ADDRESS_NAME => Self::IpAddress,
+            Type::CACHE_MASK_NAME => Self::CacheMask,
             _ => Self::Identifier {
                 s: s.to_string(),
                 upcast: None,

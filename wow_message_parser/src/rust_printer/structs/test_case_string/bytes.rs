@@ -310,7 +310,8 @@ fn print_bytes_definition(
             s.closing_curly(); // if !is empty
         }
 
-        Type::UpdateMask { .. }
+        Type::CacheMask
+        | Type::UpdateMask { .. }
         | Type::AuraMask
         | Type::AchievementDoneArray
         | Type::AchievementInProgressArray
