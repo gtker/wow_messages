@@ -43,6 +43,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * BREAKING: `DateTime::try_from` will now reject more invalid dates and times.
 * BREAKING: Added `DateTime` to `ParseErrorKind`.
 * BREAKING: `CacheMask` type is no longer an enum but a struct that also contains the `data` member from `SMSG_ACCOUNT_DATA_TIMES`.
+* BREAKING: `Expansion` member `WrathOfTheLichLing` renamed to `WrathOfTheLichKing`.
 
 ### Removed
 

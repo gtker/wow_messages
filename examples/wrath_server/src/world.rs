@@ -56,7 +56,7 @@ async fn handle(mut stream: TcpStream, users: Arc<Mutex<HashMap<String, SrpServe
             billing_flags: BillingPlanFlags::empty(),
             billing_rested: 0,
             billing_time: 0,
-            expansion: Expansion::WrathOfTheLichLing,
+            expansion: Expansion::WrathOfTheLichKing,
         },
     }
     .tokio_write_encrypted_server(&mut stream, encryption.encrypter())

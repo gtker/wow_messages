@@ -99,7 +99,7 @@ smsg SMSG_AUTH_RESPONSE = 0x1EE {
 enum Expansion : u8 {
     VANILLA = 0;
     THE_BURNING_CRUSADE = 1;
-    WRATH_OF_THE_LICH_LING = 2;
+    WRATH_OF_THE_LICH_KING = 2;
 } {
     versions = "3.3.5";
 }

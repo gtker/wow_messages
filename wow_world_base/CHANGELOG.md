@@ -32,6 +32,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * BREAKING: `CMSG_SWAP_INV_ITEM` fields changed from `u8` to `ItemSlot` for TBC/Wrath.
 * BREAKING: Fix some shared types having modules with `vanilla_vanilla` instead of just `vanilla`.
 * BREAKING: Fix some types that were in `shared` when they shouldn't have been.
+* BREAKING: `Expansion` member `WrathOfTheLichLing` renamed to `WrathOfTheLichKing`.
 
 ## [0.1.1] - 2023-05-20
 

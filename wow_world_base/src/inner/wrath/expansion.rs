@@ -3,7 +3,7 @@
 /// enum Expansion : u8 {
 ///     VANILLA = 0;
 ///     THE_BURNING_CRUSADE = 1;
-///     WRATH_OF_THE_LICH_LING = 2;
+///     WRATH_OF_THE_LICH_KING = 2;
 /// }
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
@@ -11,7 +11,7 @@
 pub enum Expansion {
     Vanilla,
     TheBurningCrusade,
-    WrathOfTheLichLing,
+    WrathOfTheLichKing,
 }
 
 impl Expansion {
@@ -19,7 +19,7 @@ impl Expansion {
         match self {
             Self::Vanilla => 0x0,
             Self::TheBurningCrusade => 0x1,
-            Self::WrathOfTheLichLing => 0x2,
+            Self::WrathOfTheLichKing => 0x2,
         }
     }
 
@@ -27,7 +27,7 @@ impl Expansion {
         [
             Self::Vanilla,
             Self::TheBurningCrusade,
-            Self::WrathOfTheLichLing,
+            Self::WrathOfTheLichKing,
         ]
     }
 
@@ -35,7 +35,7 @@ impl Expansion {
         match value {
             0 => Ok(Self::Vanilla),
             1 => Ok(Self::TheBurningCrusade),
-            2 => Ok(Self::WrathOfTheLichLing),
+            2 => Ok(Self::WrathOfTheLichKing),
             v => Err(crate::errors::EnumError::new(NAME, v as i128),)
         }
     }
@@ -47,7 +47,7 @@ impl Expansion {
         match self {
             Self::Vanilla => "VANILLA",
             Self::TheBurningCrusade => "THE_BURNING_CRUSADE",
-            Self::WrathOfTheLichLing => "WRATH_OF_THE_LICH_LING",
+            Self::WrathOfTheLichKing => "WRATH_OF_THE_LICH_KING",
         }
     }
 
@@ -66,7 +66,7 @@ impl std::fmt::Display for Expansion {
         match self {
             Self::Vanilla => f.write_str("Vanilla"),
             Self::TheBurningCrusade => f.write_str("TheBurningCrusade"),
-            Self::WrathOfTheLichLing => f.write_str("WrathOfTheLichLing"),
+            Self::WrathOfTheLichKing => f.write_str("WrathOfTheLichKing"),
         }
     }
 }
