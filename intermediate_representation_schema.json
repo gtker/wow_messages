@@ -1125,6 +1125,9 @@
         },
         "Milliseconds": {
           "properties": {}
+        },
+        "CacheMask": {
+          "properties": {}
         }
       }
     },
