@@ -13,7 +13,7 @@ use wow_login_messages::version_3::{
     CMD_AUTH_LOGON_PROOF_Client, CMD_AUTH_LOGON_PROOF_Client_SecurityFlag,
 };
 use wow_login_messages::ClientMessage;
-use wow_srp::client::SrpClientUser;
+use wow_srp::client::SrpClientChallenge;
 use wow_srp::normalized_string::NormalizedString;
 use wow_srp::{PublicKey, SESSION_KEY_LENGTH};
 
@@ -52,11 +52,14 @@ pub fn auth(
         let large_safe_prime = large_safe_prime.try_into().unwrap();
         let server_public_key = PublicKey::from_le_bytes(server_public_key).unwrap();
 
-        SrpClientUser::new(
+        SrpClientChallenge::new(
             NormalizedString::new(USERNAME).unwrap(),
             NormalizedString::new(PASSWORD).unwrap(),
+            generator,
+            large_safe_prime,
+            server_public_key,
+            salt,
         )
-        .into_challenge(generator, large_safe_prime, server_public_key, salt)
     } else {
         panic!()
     };
@@ -83,5 +86,5 @@ pub fn auth(
 
     let realms = expect_server_message::<CMD_REALM_LIST_Server, _>(&mut auth_server).unwrap();
 
-    (c.session_key(), realms)
+    (*c.session_key(), realms)
 }
