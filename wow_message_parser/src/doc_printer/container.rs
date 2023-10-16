@@ -563,7 +563,13 @@ fn print_container_field(
                 Type::UpdateMask { .. } => {
                     format!("[{}](../types/update-mask.md)", d.ty().str())
                 }
-                Type::EnchantMask | Type::InspectTalentGearMask | Type::AuraMask => {
+                Type::EnchantMask => {
+                    format!("[{}](../types/enchant-mask.md)", d.ty().str())
+                }
+                Type::InspectTalentGearMask => {
+                    format!("[{}](../types/inspect-talent-gear-mask.md)", d.ty().str())
+                }
+                Type::AuraMask => {
                     format!("[{}](../types/aura-mask.md)", d.ty().str())
                 }
                 Type::Array(array) => match array.ty() {

@@ -68,5 +68,5 @@ SMSG have a header of 4 bytes.
 | - | ? / - | [InspectTalentSpec](inspecttalentspec.md)[amount_of_specs] | specs |  |
 | - | 1 / - | u8 | amount_of_glyphs |  |
 | - | ? / - | u16[amount_of_glyphs] | glyphs |  |
-| - | - / - | [InspectTalentGearMask](../types/aura-mask.md) | talent_gear_mask |  |
+| - | - / - | [InspectTalentGearMask](../types/inspect-talent-gear-mask.md) | talent_gear_mask |  |
 

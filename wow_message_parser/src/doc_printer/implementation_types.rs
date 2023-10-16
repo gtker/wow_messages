@@ -134,7 +134,7 @@ fn print_implementation_type(table: &mut WriterTable<3>, ty: &Type) {
         Type::EnchantMask => {
             table.add_row([
                 name.as_ref(),
-                "Enchant values sent using a mask. See [Masks](../types/aura-mask.md).",
+                "Enchant values sent using a mask. See [EnchantMasks](../types/enchant-mask.md).",
                 "-",
             ]);
         }
@@ -148,7 +148,7 @@ fn print_implementation_type(table: &mut WriterTable<3>, ty: &Type) {
         Type::InspectTalentGearMask => {
             table.add_row([
                 name.as_ref(),
-                "[InspectTalentGear](../docs/inspecttalentgear.md) values sent using a mask. See [Masks](../types/aura-mask.md).",
+                "[InspectTalentGear](../docs/inspecttalentgear.md) values sent using a mask. See [Masks](../types/inspect-talent-gear-mask.md).",
                 "-",
             ]);
         }
