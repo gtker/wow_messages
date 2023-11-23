@@ -387,11 +387,23 @@ impl TagString {
 pub(crate) struct MemberTags {
     comment: Option<TagString>,
     display: Option<String>,
+    valid_range: Option<(i128, i128)>,
+    maximum_length: Option<i128>,
 }
 
 impl MemberTags {
-    pub(crate) fn from_parsed(comment: Option<TagString>, display: Option<String>) -> Self {
-        Self { comment, display }
+    pub(crate) fn from_parsed(
+        comment: Option<TagString>,
+        display: Option<String>,
+        valid_range: Option<(i128, i128)>,
+        maximum_length: Option<i128>,
+    ) -> Self {
+        Self {
+            comment,
+            display,
+            valid_range,
+            maximum_length,
+        }
     }
 
     pub(crate) fn new() -> Self {
@@ -408,5 +420,13 @@ impl MemberTags {
         } else {
             None
         }
+    }
+
+    pub(crate) fn valid_range(&self) -> Option<(i128, i128)> {
+        self.valid_range
+    }
+
+    pub(crate) fn maximum_length(&self) -> Option<i128> {
+        self.maximum_length
     }
 }

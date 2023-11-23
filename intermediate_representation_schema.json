@@ -664,6 +664,25 @@
         },
         "display": {
           "type": "string"
+        },
+        "maximum_length": {
+          "metadata": {
+            "description": "JSON Typedef does not support integers larger than unsigned 32 bit, so this is a string"
+          },
+          "type": "string"
+        },
+        "valid_range": {
+          "metadata": {
+            "description": "JSON Typedef does not support integers larger than unsigned 32 bit, so this is a string"
+          },
+          "properties": {
+            "from": {
+              "type": "string"
+            },
+            "to": {
+              "type": "string"
+            }
+          }
         }
       }
     },

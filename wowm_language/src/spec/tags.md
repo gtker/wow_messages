@@ -273,39 +273,6 @@ It is a good idea to use a `comment` tag to explain why the values are invalid.
 Note that values outside of the `valid` range **MUST** be invalid in every situation, either because the client can't
 handle values outside of the valid range, or if regular clients can never send values outside of the valid range.
 
-#### `minimum_valid_value`
-
-Specifies the lowest value that is valid.
-
-MUST be in the format of a single integer.
-
-For example
-
-```rust,ignore
-struct S {
-    u8 basic {
-        minimum_valid_value = "1";
-        comment = "Can never be zero because of [...]";
-    }
-}
-```
-
-#### `maximum_valid_value`
-
-Specifies the highest value that is valid.
-MUST be in the format of a single integer.
-
-For example
-
-```rust,ignore
-struct S {
-    u8 basic {
-        maximum_valid_value = "10";
-        comment = "Values above 10 crash the client";
-    }
-}
-```
-
 #### `valid_range`
 
 Specifies a range of valid values.
@@ -341,3 +308,23 @@ struct S {
 }
 ```
 
+## For Strings
+
+### Size
+
+#### `maximum_length`
+
+Specifices an upper limit on the size of the string.
+This should only be used in cases where the client absolutely can not handle larger strings.
+
+For example
+
+```rust,ignore
+struct S {
+    u32 length;
+    CString basic {
+        maximum_length = "200";
+        comment = "Client buffer is only 200 bytes.";
+    }
+}
+```

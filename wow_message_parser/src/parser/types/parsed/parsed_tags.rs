@@ -7,9 +7,9 @@ use crate::file_info::FileInfo;
 use crate::parser::types::tags::{MemberTags, TagString};
 use crate::parser::types::version::{AllVersions, LoginVersion, WorldVersion};
 use crate::{
-    ObjectTags, COMMENT, COMPRESSED, DISPLAY, LOGIN_VERSIONS, NON_NETWORK_TYPE, PASTE_VERSIONS,
-    RUST_BASE_TYPE, SKIP_STR, TEST_STR, UNIMPLEMENTED, USED_IN_UPDATE_MASK, VERSIONS,
-    ZERO_IS_ALWAYS_VALID,
+    ObjectTags, COMMENT, COMPRESSED, DISPLAY, LOGIN_VERSIONS, MAXIMUM_LENGTH, NON_NETWORK_TYPE,
+    PASTE_VERSIONS, RUST_BASE_TYPE, SKIP_STR, TEST_STR, UNIMPLEMENTED, USED_IN_UPDATE_MASK,
+    VALID_RANGE, VERSIONS, ZERO_IS_ALWAYS_VALID,
 };
 
 #[derive(Debug, Eq, PartialEq, Clone, Default)]
@@ -28,6 +28,8 @@ pub(crate) struct ParsedTags {
     zero_is_always_valid: BoolTag,
     non_network_type: BoolTag,
     used_in_update_mask: BoolTag,
+    valid_range: Option<(i128, i128)>,
+    maximum_length: Option<i128>,
 }
 
 impl ParsedTags {
@@ -127,7 +129,12 @@ impl ParsedTags {
     }
 
     pub(crate) fn into_member_tags(self) -> MemberTags {
-        MemberTags::from_parsed(self.comment, self.display)
+        MemberTags::from_parsed(
+            self.comment,
+            self.display,
+            self.valid_range,
+            self.maximum_length,
+        )
     }
 
     pub(crate) fn paste_versions(&self) -> impl Iterator<Item = WorldVersion> {
@@ -244,6 +251,13 @@ impl ParsedTags {
             self.non_network_type.insert(value);
         } else if key == USED_IN_UPDATE_MASK {
             self.used_in_update_mask.insert(value);
+        } else if key == VALID_RANGE {
+            let values = value.split(" ").collect::<Vec<_>>();
+            self.valid_range = Some((values[0].parse().unwrap(), values[1].parse().unwrap()));
+        } else if key == MAXIMUM_LENGTH {
+            self.maximum_length = Some(value.parse().unwrap());
+        } else {
+            panic!("Unknown tag: '{key}'")
         }
     }
 }

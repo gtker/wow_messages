@@ -167,6 +167,16 @@ pub(crate) struct IrTags {
     non_network_type: Option<bool>,
     #[serde(skip_serializing_if = "Option::is_none")]
     used_in_update_mask: Option<bool>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    maximum_length: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    valid_range: Option<IrValidRange>,
+}
+
+#[derive(Clone, Debug, Serialize)]
+struct IrValidRange {
+    from: String,
+    to: String,
 }
 
 impl IrTags {
@@ -212,6 +222,8 @@ impl IrTags {
             unimplemented,
             non_network_type,
             used_in_update_mask,
+            maximum_length: None,
+            valid_range: None,
         }
     }
 
@@ -226,6 +238,11 @@ impl IrTags {
             unimplemented: None,
             non_network_type: None,
             used_in_update_mask: None,
+            maximum_length: tags.maximum_length().map(|a| a.to_string()),
+            valid_range: tags.valid_range().map(|(from, to)| IrValidRange {
+                from: from.to_string(),
+                to: to.to_string(),
+            }),
         }
     }
 }

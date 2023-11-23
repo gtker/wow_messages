@@ -4,7 +4,7 @@ cmsg CMSG_SPLIT_ITEM = 0x010E {
     u8 destination_bag;
     u8 destination_slot;
     u8 amount {
-        minimum_legal_value = "1";
+        valid_range = "1 255";
     }
 } {
     versions = "1 2";
@@ -16,7 +16,7 @@ cmsg CMSG_SPLIT_ITEM = 0x010E {
     u8 destination_bag;
     u8 destination_slot;
     u32 amount {
-        minimum_legal_value = "1";
+        valid_range = "1 255";
     }
 } {
     versions = "3.3.5";

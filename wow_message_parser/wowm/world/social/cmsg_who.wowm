@@ -8,11 +8,11 @@ cmsg CMSG_WHO = 0x62 {
     u32 race_mask;
     u32 class_mask;
     u32 amount_of_zones {
-        maximum_value = "10";
+        valid_range = "0 10";
     }
     u32[amount_of_zones] zones;
     u32 amount_of_strings {
-        maximum_value = "4";
+        valid_range = "0 4";
     }
     CString[amount_of_strings] search_strings;
 }
