@@ -41,7 +41,7 @@ pub struct SMSG_SPELL_GO {
 impl crate::private::Sealed for SMSG_SPELL_GO {}
 impl SMSG_SPELL_GO {
     fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
-        if !(18..=5734).contains(&body_size) {
+        if !(18..=4966).contains(&body_size) {
             return Err(crate::errors::ParseErrorKind::InvalidSize);
         }
 
@@ -158,7 +158,7 @@ impl crate::Message for SMSG_SPELL_GO {
             writeln!(s, "            target = {};", v.target.guid()).unwrap();
             writeln!(s, "            miss_info = {};", SpellMissInfo::try_from(v.miss_info.as_int()).unwrap().as_test_case_value()).unwrap();
             match &v.miss_info {
-                crate::tbc::SpellMiss_SpellMissInfo::Reflect {
+                crate::shared::spell_miss_tbc_wrath::SpellMiss_SpellMissInfo::Reflect {
                     reflect_result,
                 } => {
                     writeln!(s, "            reflect_result = {};", reflect_result).unwrap();
@@ -302,9 +302,9 @@ impl crate::Message for SMSG_SPELL_GO {
             for (i, v) in self.misses.iter().enumerate() {
                 writeln!(s, "    /* misses: SpellMiss[amount_of_misses] {i} start */").unwrap();
                 crate::util::write_bytes(&mut s, &mut bytes, 8, "target", "        ");
-                crate::util::write_bytes(&mut s, &mut bytes, 4, "miss_info", "        ");
+                crate::util::write_bytes(&mut s, &mut bytes, 1, "miss_info", "        ");
                 match &v.miss_info {
-                    crate::tbc::SpellMiss_SpellMissInfo::Reflect {
+                    crate::shared::spell_miss_tbc_wrath::SpellMiss_SpellMissInfo::Reflect {
                         reflect_result,
                     } => {
                         crate::util::write_bytes(&mut s, &mut bytes, 1, "reflect_result", "        ");

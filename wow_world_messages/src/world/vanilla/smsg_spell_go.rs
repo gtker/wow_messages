@@ -39,7 +39,7 @@ pub struct SMSG_SPELL_GO {
 impl crate::private::Sealed for SMSG_SPELL_GO {}
 impl SMSG_SPELL_GO {
     fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
-        if !(12..=5472).contains(&body_size) {
+        if !(12..=4704).contains(&body_size) {
             return Err(crate::errors::ParseErrorKind::InvalidSize);
         }
 
@@ -269,7 +269,7 @@ impl crate::Message for SMSG_SPELL_GO {
             for (i, v) in self.misses.iter().enumerate() {
                 writeln!(s, "    /* misses: SpellMiss[amount_of_misses] {i} start */").unwrap();
                 crate::util::write_bytes(&mut s, &mut bytes, 8, "target", "        ");
-                crate::util::write_bytes(&mut s, &mut bytes, 4, "miss_info", "        ");
+                crate::util::write_bytes(&mut s, &mut bytes, 1, "miss_info", "        ");
                 writeln!(s, "    /* misses: SpellMiss[amount_of_misses] {i} end */").unwrap();
             }
             writeln!(s, "    /* misses: SpellMiss[amount_of_misses] end */").unwrap();
@@ -426,7 +426,7 @@ impl SMSG_SPELL_GO {
         + 1 // amount_of_hits: u8
         + self.hits.len() *  8 // hits: Guid[amount_of_hits]
         + 1 // amount_of_misses: u8
-        + self.misses.len() * 12 // misses: SpellMiss[amount_of_misses]
+        + self.misses.len() * 9 // misses: SpellMiss[amount_of_misses]
         + self.targets.size() // targets: SpellCastTargets
     }
 }

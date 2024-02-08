@@ -270,6 +270,7 @@ pub use crate::shared::spell_cooldown_status_vanilla_tbc_wrath::*;
 pub(crate) mod spell_log;
 pub use spell_log::*;
 pub use crate::shared::spell_log_miss_vanilla_tbc_wrath::*;
+pub use crate::shared::spell_miss_tbc_wrath::*;
 pub use crate::shared::spell_steal_tbc_wrath::*;
 pub use crate::shared::stabled_pet_vanilla_tbc_wrath::*;
 pub(crate) mod talent_info_spec;

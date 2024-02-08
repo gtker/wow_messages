@@ -8,7 +8,7 @@ enum TimerType : u32 {
     versions = "1 2 3";
 }
 
-enum SpellMissInfo : u32 {
+enum SpellMissInfo : u8 {
     NONE = 0;
     MISS = 1;
     RESIST = 2;

@@ -53,6 +53,12 @@ smsg SMSG_SPELL_GO = 0x0132 {
     GameobjectCastFlags flags;
 
     u32 timestamp;
+    u8 amount_of_hits;
+    Guid[amount_of_hits] hits;
+
+    u8 amount_of_misses;
+    SpellMiss[amount_of_misses] misses;
+
     SpellCastTargets targets;
 
     if(flags & POWER_UPDATE) {

@@ -48,7 +48,7 @@ struct SpellMiss {
         u8 reflect_result;
     }
 } {
-    versions = "2.4.3";
+    versions = "2 3";
 }
 
 flag GameobjectCastFlags : u32 {

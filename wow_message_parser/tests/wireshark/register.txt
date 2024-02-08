@@ -4002,7 +4002,7 @@
         },
         { &hf_woww_spell_miss_info,
             { "Spell Miss Info", "woww.spell.miss.info",
-                FT_UINT32, BASE_HEX_DEC, VALS(e_spell_miss_info_strings), 0,
+                FT_UINT8, BASE_HEX_DEC, VALS(e_spell_miss_info_strings), 0,
                 NULL, HFILL
             }
         },

@@ -123,6 +123,10 @@ smsg SMSG_SPELL_GO = 0x0132 {
     Spell spell;
     GameobjectCastFlags flags;
     u32 timestamp;
+    u8 amount_of_hits;
+    Guid[amount_of_hits] hits;
+    u8 amount_of_misses;
+    SpellMiss[amount_of_misses] misses;
     SpellCastTargets targets;
     if (flags & POWER_UPDATE) {
         (u32)Power power;
@@ -170,6 +174,10 @@ SMSG have a header of 4 bytes.
 | - | 4 / Little | Spell | spell |  |
 | - | 4 / - | [GameobjectCastFlags](gameobjectcastflags.md) | flags |  |
 | - | 4 / Little | u32 | timestamp |  |
+| - | 1 / - | u8 | amount_of_hits |  |
+| - | ? / - | [Guid](../types/packed-guid.md)[amount_of_hits] | hits |  |
+| - | 1 / - | u8 | amount_of_misses |  |
+| - | ? / - | [SpellMiss](spellmiss.md)[amount_of_misses] | misses |  |
 | - | - / - | [SpellCastTargets](spellcasttargets.md) | targets |  |
 
 If flags contains `POWER_UPDATE`:

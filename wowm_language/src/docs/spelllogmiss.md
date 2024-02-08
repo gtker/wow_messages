@@ -16,7 +16,7 @@ struct SpellLogMiss {
 | Offset | Size / Endianness | Type | Name | Comment |
 | ------ | ----------------- | ---- | ---- | ------- |
 | 0x00 | 8 / Little | [Guid](../types/packed-guid.md) | target |  |
-| 0x08 | 4 / - | [SpellMissInfo](spellmissinfo.md) | miss_info |  |
+| 0x08 | 1 / - | [SpellMissInfo](spellmissinfo.md) | miss_info |  |
 
 
 Used in:

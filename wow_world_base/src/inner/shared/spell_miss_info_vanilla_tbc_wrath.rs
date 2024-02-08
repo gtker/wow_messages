@@ -1,6 +1,6 @@
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/spell/spell_common.wowm:11`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/spell/spell_common.wowm#L11):
 /// ```text
-/// enum SpellMissInfo : u32 {
+/// enum SpellMissInfo : u8 {
 ///     NONE = 0;
 ///     MISS = 1;
 ///     RESIST = 2;
@@ -33,7 +33,7 @@ pub enum SpellMissInfo {
 }
 
 impl SpellMissInfo {
-    pub const fn as_int(&self) -> u32 {
+    pub const fn as_int(&self) -> u8 {
         match self {
             Self::None => 0x0,
             Self::Miss => 0x1,
@@ -67,7 +67,7 @@ impl SpellMissInfo {
         ]
     }
 
-    pub const fn from_int(value: u32) -> Result<Self, crate::errors::EnumError> {
+    pub const fn from_int(value: u8) -> Result<Self, crate::errors::EnumError> {
         match value {
             0 => Ok(Self::None),
             1 => Ok(Self::Miss),
@@ -134,26 +134,26 @@ impl std::fmt::Display for SpellMissInfo {
     }
 }
 
-impl TryFrom<u32> for SpellMissInfo {
-    type Error = crate::errors::EnumError;
-    fn try_from(value: u32) -> Result<Self, Self::Error> {
-        Self::from_int(value)
-    }
-}
-
 impl TryFrom<u8> for SpellMissInfo {
     type Error = crate::errors::EnumError;
     fn try_from(value: u8) -> Result<Self, Self::Error> {
-        TryInto::<u32>::try_into(value)
-            .map_err(|_| crate::errors::EnumError::new(NAME, value.into()))?
-            .try_into()
+        Self::from_int(value)
     }
 }
 
 impl TryFrom<u16> for SpellMissInfo {
     type Error = crate::errors::EnumError;
     fn try_from(value: u16) -> Result<Self, Self::Error> {
-        TryInto::<u32>::try_into(value)
+        TryInto::<u8>::try_into(value)
+            .map_err(|_| crate::errors::EnumError::new(NAME, value.into()))?
+            .try_into()
+    }
+}
+
+impl TryFrom<u32> for SpellMissInfo {
+    type Error = crate::errors::EnumError;
+    fn try_from(value: u32) -> Result<Self, Self::Error> {
+        TryInto::<u8>::try_into(value)
             .map_err(|_| crate::errors::EnumError::new(NAME, value.into()))?
             .try_into()
     }
@@ -162,7 +162,7 @@ impl TryFrom<u16> for SpellMissInfo {
 impl TryFrom<u64> for SpellMissInfo {
     type Error = crate::errors::EnumError;
     fn try_from(value: u64) -> Result<Self, Self::Error> {
-        TryInto::<u32>::try_into(value)
+        TryInto::<u8>::try_into(value)
             .map_err(|_| crate::errors::EnumError::new(NAME, value.into()))?
             .try_into()
     }
@@ -171,7 +171,7 @@ impl TryFrom<u64> for SpellMissInfo {
 impl TryFrom<i8> for SpellMissInfo {
     type Error = crate::errors::EnumError;
     fn try_from(value: i8) -> Result<Self, Self::Error> {
-        TryInto::<u32>::try_into(value)
+        TryInto::<u8>::try_into(value)
             .map_err(|_| crate::errors::EnumError::new(NAME, value.into()))?
             .try_into()
     }
@@ -180,7 +180,7 @@ impl TryFrom<i8> for SpellMissInfo {
 impl TryFrom<i16> for SpellMissInfo {
     type Error = crate::errors::EnumError;
     fn try_from(value: i16) -> Result<Self, Self::Error> {
-        TryInto::<u32>::try_into(value)
+        TryInto::<u8>::try_into(value)
             .map_err(|_| crate::errors::EnumError::new(NAME, value.into()))?
             .try_into()
     }
@@ -189,7 +189,7 @@ impl TryFrom<i16> for SpellMissInfo {
 impl TryFrom<i32> for SpellMissInfo {
     type Error = crate::errors::EnumError;
     fn try_from(value: i32) -> Result<Self, Self::Error> {
-        TryInto::<u32>::try_into(value)
+        TryInto::<u8>::try_into(value)
             .map_err(|_| crate::errors::EnumError::new(NAME, value.into()))?
             .try_into()
     }
@@ -198,7 +198,7 @@ impl TryFrom<i32> for SpellMissInfo {
 impl TryFrom<i64> for SpellMissInfo {
     type Error = crate::errors::EnumError;
     fn try_from(value: i64) -> Result<Self, Self::Error> {
-        TryInto::<u32>::try_into(value)
+        TryInto::<u8>::try_into(value)
             .map_err(|_| crate::errors::EnumError::new(NAME, value.into()))?
             .try_into()
     }
@@ -207,7 +207,7 @@ impl TryFrom<i64> for SpellMissInfo {
 impl TryFrom<usize> for SpellMissInfo {
     type Error = crate::errors::EnumError;
     fn try_from(value: usize) -> Result<Self, Self::Error> {
-        TryInto::<u32>::try_into(value)
+        TryInto::<u8>::try_into(value)
             .map_err(|_| crate::errors::EnumError::new(NAME, value as i128))?
             .try_into()
     }

@@ -112,7 +112,7 @@ impl crate::Message for SMSG_SPELLLOGMISS {
             for (i, v) in self.targets.iter().enumerate() {
                 writeln!(s, "    /* targets: SpellLogMiss[amount_of_targets] {i} start */").unwrap();
                 crate::util::write_bytes(&mut s, &mut bytes, 8, "target", "        ");
-                crate::util::write_bytes(&mut s, &mut bytes, 4, "miss_info", "        ");
+                crate::util::write_bytes(&mut s, &mut bytes, 1, "miss_info", "        ");
                 writeln!(s, "    /* targets: SpellLogMiss[amount_of_targets] {i} end */").unwrap();
             }
             writeln!(s, "    /* targets: SpellLogMiss[amount_of_targets] end */").unwrap();
@@ -172,7 +172,7 @@ impl SMSG_SPELLLOGMISS {
         + 8 // caster: Guid
         + 1 // unknown1: u8
         + 4 // amount_of_targets: u32
-        + self.targets.len() * 12 // targets: SpellLogMiss[amount_of_targets]
+        + self.targets.len() * 9 // targets: SpellLogMiss[amount_of_targets]
     }
 }
 

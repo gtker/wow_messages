@@ -2,7 +2,8 @@ use std::io::{Read, Write};
 
 use crate::Guid;
 use crate::wrath::{
-    GameobjectCastFlags, Power, SpellCastTargetFlags, SpellCastTargets, Vector3d,
+    GameobjectCastFlags, Power, SpellCastTargetFlags, SpellCastTargets, SpellMiss, 
+    SpellMissInfo, Vector3d,
 };
 
 #[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
@@ -15,6 +16,10 @@ use crate::wrath::{
 ///     Spell spell;
 ///     GameobjectCastFlags flags;
 ///     u32 timestamp;
+///     u8 amount_of_hits;
+///     Guid[amount_of_hits] hits;
+///     u8 amount_of_misses;
+///     SpellMiss[amount_of_misses] misses;
 ///     SpellCastTargets targets;
 ///     if (flags & POWER_UPDATE) {
 ///         (u32)Power power;
@@ -49,13 +54,15 @@ pub struct SMSG_SPELL_GO {
     pub spell: u32,
     pub flags: SMSG_SPELL_GO_GameobjectCastFlags,
     pub timestamp: u32,
+    pub hits: Vec<Guid>,
+    pub misses: Vec<SpellMiss>,
     pub targets: SpellCastTargets,
 }
 
 impl crate::private::Sealed for SMSG_SPELL_GO {}
 impl SMSG_SPELL_GO {
     fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
-        if !(19..=370).contains(&body_size) {
+        if !(21..=4980).contains(&body_size) {
             return Err(crate::errors::ParseErrorKind::InvalidSize);
         }
 
@@ -76,6 +83,30 @@ impl SMSG_SPELL_GO {
 
         // timestamp: u32
         let timestamp = crate::util::read_u32_le(&mut r)?;
+
+        // amount_of_hits: u8
+        let amount_of_hits = crate::util::read_u8_le(&mut r)?;
+
+        // hits: Guid[amount_of_hits]
+        let hits = {
+            let mut hits = Vec::with_capacity(amount_of_hits as usize);
+            for _ in 0..amount_of_hits {
+                hits.push(crate::util::read_guid(&mut r)?);
+            }
+            hits
+        };
+
+        // amount_of_misses: u8
+        let amount_of_misses = crate::util::read_u8_le(&mut r)?;
+
+        // misses: SpellMiss[amount_of_misses]
+        let misses = {
+            let mut misses = Vec::with_capacity(amount_of_misses as usize);
+            for _ in 0..amount_of_misses {
+                misses.push(SpellMiss::read(&mut r)?);
+            }
+            misses
+        };
 
         // targets: SpellCastTargets
         let targets = SpellCastTargets::read(&mut r)?;
@@ -193,6 +224,8 @@ impl SMSG_SPELL_GO {
             spell,
             flags,
             timestamp,
+            hits,
+            misses,
             targets,
         })
     }
@@ -222,6 +255,32 @@ impl crate::Message for SMSG_SPELL_GO {
         writeln!(s, "    spell = {};", self.spell).unwrap();
         writeln!(s, "    flags = {};", GameobjectCastFlags::new(self.flags.as_int()).as_test_case_value()).unwrap();
         writeln!(s, "    timestamp = {};", self.timestamp).unwrap();
+        writeln!(s, "    amount_of_hits = {};", self.hits.len()).unwrap();
+        writeln!(s, "    hits = [").unwrap();
+        for v in self.hits.as_slice() {
+            write!(s, "{v:#08X}, ").unwrap();
+        }
+        writeln!(s, "    ];").unwrap();
+        writeln!(s, "    amount_of_misses = {};", self.misses.len()).unwrap();
+        writeln!(s, "    misses = [").unwrap();
+        for v in self.misses.as_slice() {
+            writeln!(s, "        {{").unwrap();
+            // Members
+            writeln!(s, "            target = {};", v.target.guid()).unwrap();
+            writeln!(s, "            miss_info = {};", SpellMissInfo::try_from(v.miss_info.as_int()).unwrap().as_test_case_value()).unwrap();
+            match &v.miss_info {
+                crate::shared::spell_miss_tbc_wrath::SpellMiss_SpellMissInfo::Reflect {
+                    reflect_result,
+                } => {
+                    writeln!(s, "            reflect_result = {};", reflect_result).unwrap();
+                }
+                _ => {}
+            }
+
+
+            writeln!(s, "        }},").unwrap();
+        }
+        writeln!(s, "    ];").unwrap();
         // targets: SpellCastTargets
         writeln!(s, "    targets = {{").unwrap();
         // Members
@@ -349,6 +408,34 @@ impl crate::Message for SMSG_SPELL_GO {
         crate::util::write_bytes(&mut s, &mut bytes, 4, "spell", "    ");
         crate::util::write_bytes(&mut s, &mut bytes, 4, "flags", "    ");
         crate::util::write_bytes(&mut s, &mut bytes, 4, "timestamp", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, 1, "amount_of_hits", "    ");
+        if !self.hits.is_empty() {
+            writeln!(s, "    /* hits: Guid[amount_of_hits] start */").unwrap();
+            for (i, v) in self.hits.iter().enumerate() {
+                crate::util::write_bytes(&mut s, &mut bytes, 8, &format!("hits {i}"), "    ");
+            }
+            writeln!(s, "    /* hits: Guid[amount_of_hits] end */").unwrap();
+        }
+        crate::util::write_bytes(&mut s, &mut bytes, 1, "amount_of_misses", "    ");
+        if !self.misses.is_empty() {
+            writeln!(s, "    /* misses: SpellMiss[amount_of_misses] start */").unwrap();
+            for (i, v) in self.misses.iter().enumerate() {
+                writeln!(s, "    /* misses: SpellMiss[amount_of_misses] {i} start */").unwrap();
+                crate::util::write_bytes(&mut s, &mut bytes, 8, "target", "        ");
+                crate::util::write_bytes(&mut s, &mut bytes, 1, "miss_info", "        ");
+                match &v.miss_info {
+                    crate::shared::spell_miss_tbc_wrath::SpellMiss_SpellMissInfo::Reflect {
+                        reflect_result,
+                    } => {
+                        crate::util::write_bytes(&mut s, &mut bytes, 1, "reflect_result", "        ");
+                    }
+                    _ => {}
+                }
+
+                writeln!(s, "    /* misses: SpellMiss[amount_of_misses] {i} end */").unwrap();
+            }
+            writeln!(s, "    /* misses: SpellMiss[amount_of_misses] end */").unwrap();
+        }
         writeln!(s, "    /* targets: SpellCastTargets start */").unwrap();
         crate::util::write_bytes(&mut s, &mut bytes, 4, "target_flags", "        ");
         if let Some(if_statement) = &self.targets.target_flags.get_unit() {
@@ -478,6 +565,22 @@ impl crate::Message for SMSG_SPELL_GO {
         // timestamp: u32
         w.write_all(&self.timestamp.to_le_bytes())?;
 
+        // amount_of_hits: u8
+        w.write_all(&(self.hits.len() as u8).to_le_bytes())?;
+
+        // hits: Guid[amount_of_hits]
+        for i in self.hits.iter() {
+            w.write_all(&i.guid().to_le_bytes())?;
+        }
+
+        // amount_of_misses: u8
+        w.write_all(&(self.misses.len() as u8).to_le_bytes())?;
+
+        // misses: SpellMiss[amount_of_misses]
+        for i in self.misses.iter() {
+            i.write_into_vec(&mut w)?;
+        }
+
         // targets: SpellCastTargets
         self.targets.write_into_vec(&mut w)?;
 
@@ -554,6 +657,10 @@ impl SMSG_SPELL_GO {
         + 4 // spell: Spell
         + self.flags.size() // flags: SMSG_SPELL_GO_GameobjectCastFlags
         + 4 // timestamp: u32
+        + 1 // amount_of_hits: u8
+        + self.hits.len() *  8 // hits: Guid[amount_of_hits]
+        + 1 // amount_of_misses: u8
+        + self.misses.iter().fold(0, |acc, x| acc + x.size()) // misses: SpellMiss[amount_of_misses]
         + self.targets.size() // targets: SpellCastTargets
     }
 }

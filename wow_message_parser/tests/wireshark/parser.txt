@@ -5897,7 +5897,7 @@
             for (guint32 i1 = 0; i1 < amount_of_targets; ++i1) {
                 ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "SpellLogMiss %i", i1);
                 ptvcursor_add(ptv, hf_woww_target, 8, ENC_LITTLE_ENDIAN);
-                ptvcursor_add(ptv, hf_woww_spell_miss_info, 4, ENC_LITTLE_ENDIAN);
+                ptvcursor_add(ptv, hf_woww_spell_miss_info, 1, ENC_LITTLE_ENDIAN);
                 ptvcursor_pop_subtree(ptv);
             }
             break;
@@ -5956,7 +5956,7 @@
             for (guint32 i1 = 0; i1 < amount_of_misses; ++i1) {
                 ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "SpellMiss %i", i1);
                 ptvcursor_add(ptv, hf_woww_target, 8, ENC_LITTLE_ENDIAN);
-                ptvcursor_add_ret_uint(ptv, hf_woww_spell_miss_info, 4, ENC_LITTLE_ENDIAN, &miss_info);
+                ptvcursor_add_ret_uint(ptv, hf_woww_spell_miss_info, 1, ENC_LITTLE_ENDIAN, &miss_info);
                 ptvcursor_pop_subtree(ptv);
             }
             ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "SpellCastTargets");

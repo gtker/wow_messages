@@ -1688,6 +1688,7 @@
     - [GameobjectCastFlags](docs/gameobjectcastflags.md)
     - [Power](docs/power.md)
     - [SpellCastTargetFlags](docs/spellcasttargetflags.md)
+    - [SpellMissInfo](docs/spellmissinfo.md)
 - [SMSG_SPELL_START](docs/smsg_spell_start.md)
     - [CastFlags](docs/castflags.md)
     - [Power](docs/power.md)

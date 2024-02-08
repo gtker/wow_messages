@@ -16,13 +16,13 @@ struct SpellMiss {
 | Offset | Size / Endianness | Type | Name | Comment |
 | ------ | ----------------- | ---- | ---- | ------- |
 | 0x00 | 8 / Little | [Guid](../types/packed-guid.md) | target |  |
-| 0x08 | 4 / - | [SpellMissInfo](spellmissinfo.md) | miss_info |  |
+| 0x08 | 1 / - | [SpellMissInfo](spellmissinfo.md) | miss_info |  |
 
 
 Used in:
 * [SMSG_SPELL_GO](smsg_spell_go.md)
 
-## Client Version 2.4.3
+## Client Version 2, Client Version 3
 
 ### Wowm Representation
 
@@ -41,13 +41,13 @@ struct SpellMiss {
 | Offset | Size / Endianness | Type | Name | Comment |
 | ------ | ----------------- | ---- | ---- | ------- |
 | 0x00 | 8 / Little | [Guid](../types/packed-guid.md) | target |  |
-| 0x08 | 4 / - | [SpellMissInfo](spellmissinfo.md) | miss_info |  |
+| 0x08 | 1 / - | [SpellMissInfo](spellmissinfo.md) | miss_info |  |
 
 If miss_info is equal to `REFLECT`:
 
 | Offset | Size / Endianness | Type | Name | Comment |
 | ------ | ----------------- | ---- | ---- | ------- |
-| 0x0C | 1 / - | u8 | reflect_result |  |
+| 0x09 | 1 / - | u8 | reflect_result |  |
 
 
 Used in:

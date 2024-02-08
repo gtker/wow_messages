@@ -75,6 +75,8 @@ pub mod spell_cooldown_status_vanilla_tbc_wrath;
 #[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
 pub mod spell_log_miss_vanilla_tbc_wrath;
 #[cfg(any(feature = "tbc", feature = "wrath"))]
+pub mod spell_miss_tbc_wrath;
+#[cfg(any(feature = "tbc", feature = "wrath"))]
 pub mod spell_steal_tbc_wrath;
 #[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
 pub mod stabled_pet_vanilla_tbc_wrath;
