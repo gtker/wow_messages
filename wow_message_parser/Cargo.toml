@@ -6,6 +6,8 @@ authors.workspace = true
 repository.workspace = true
 license.workspace = true
 publish = false
+metadata.release.release = false
+
 
 [features]
 overwrite-tests = []

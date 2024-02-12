@@ -3,6 +3,7 @@ name = "vanilla_client"
 version = "0.0.0"
 edition = "2021"
 publish = false
+metadata.release.release = false
 
 [dependencies]
 wow_login_messages = { path = "../../wow_login_messages", features = ["sync"] }

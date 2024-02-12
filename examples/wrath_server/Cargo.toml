@@ -3,6 +3,7 @@ name = "wrath_server"
 version = "0.0.0"
 edition = "2018"
 publish = false
+metadata.release.release = false
 
 [dependencies]
 tokio = { version = "1.18.2", features = ["full"] }
