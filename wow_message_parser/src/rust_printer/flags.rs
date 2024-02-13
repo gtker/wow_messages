@@ -135,45 +135,54 @@ fn print_try_from(s: &mut Writer, e: &Definer) {
         });
     });
 
-    for (from_size, signed, from_ty) in IntegerType::try_from_types() {
+    let signed = ty_name.starts_with("i");
+
+    for (from_size, from_signed, from_ty) in IntegerType::try_from_types() {
         let from_ty = *from_ty;
+        let from_size = *from_size;
         if from_ty == ty_name {
             continue;
         }
 
-        if *from_size < size && !*signed && from_ty != "usize" {
-            s.impl_for(format!("From<{from_ty}>"), e.name(), |s| {
-                s.body(format!("fn from(value: {from_ty}) -> Self"), |s| {
-                    s.wln("Self::new(value.into())");
-                });
-            });
-        } else if (*from_size > size && !*signed) || from_ty == "usize" {
-            s.impl_for(format!("TryFrom<{from_ty}>"), e.name(), |s| {
+        let signedness_differs = signed != *from_signed;
+        let conversion_is_infallible = {
+            if from_ty == "usize" {
+                false
+            } else if from_size > size && !signedness_differs {
+                false
+            } else if from_size < size && !signedness_differs {
+                true
+            } else if signedness_differs && from_size == size {
+                true
+            } else {
+                false
+            }
+        };
+
+        let trait_text = if conversion_is_infallible {
+            format!("From<{from_ty}>")
+        } else {
+            format!("TryFrom<{from_ty}>")
+        };
+
+        let trait_function = if conversion_is_infallible {
+            format!("fn from(value: {from_ty}) -> Self")
+        } else {
+            format!("fn try_from(value: {from_ty}) -> Result<Self, Self::Error>")
+        };
+
+        s.impl_for(&trait_text, e.name(), |s| {
+            if !conversion_is_infallible {
                 s.wln(format!("type Error = {from_ty};"));
-                s.body(
-                    format!("fn try_from(value: {from_ty}) -> Result<Self, Self::Error>"),
-                    |s| {
+            }
+
+            s.body(&trait_function, |s| {
+                if signedness_differs {
+                    if conversion_is_infallible {
                         s.wln(format!(
-                            "let a = TryInto::<{ty_name}>::try_into(value).ok().ok_or(value)?;"
+                            "Self::new({ty_name}::from_le_bytes(value.to_le_bytes()))"
                         ));
-                        s.wln("Ok(Self::new(a))")
-                    },
-                );
-            });
-        } else if *signed && *from_size == size {
-            s.impl_for(format!("From<{from_ty}>"), e.name(), |s| {
-                s.body(format!("fn from(value: {from_ty}) -> Self"), |s| {
-                    s.wln(format!(
-                        "Self::new({ty_name}::from_le_bytes(value.to_le_bytes()))"
-                    ));
-                });
-            });
-        } else if *signed {
-            s.impl_for(format!("TryFrom<{from_ty}>"), e.name(), |s| {
-                s.wln(format!("type Error = {from_ty};"));
-                s.body(
-                    format!("fn try_from(value: {from_ty}) -> Result<Self, Self::Error>"),
-                    |s| {
+                    } else {
                         let converted_ty = from_ty.replace('i', "u");
 
                         s.wln(format!(
@@ -183,10 +192,19 @@ fn print_try_from(s: &mut Writer, e: &Definer) {
                             "let a = TryInto::<{ty_name}>::try_into(v).ok().ok_or(value)?;"
                         ));
                         s.wln("Ok(Self::new(a))")
-                    },
-                );
+                    }
+                } else {
+                    if conversion_is_infallible {
+                        s.wln("Self::new(value.into())");
+                    } else {
+                        s.wln(format!(
+                            "let a = TryInto::<{ty_name}>::try_into(value).ok().ok_or(value)?;"
+                        ));
+                        s.wln("Ok(Self::new(a))")
+                    }
+                }
             });
-        }
+        });
     }
 }
 
