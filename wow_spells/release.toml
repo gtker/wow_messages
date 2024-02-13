@@ -5,3 +5,4 @@ pre-release-replacements = [
   {file="CHANGELOG.md", search="<!-- next-header -->", replace="<!-- next-header -->\n## [Unreleased] - ReleaseDate\n", exactly=1},
   {file="CHANGELOG.md", search="<!-- next-url -->", replace="<!-- next-url -->\n[Unreleased]: https://github.com/gtker/wow_messages/compare/{{tag_name}}...HEAD", exactly=1},
 ]
+pre-release-hook = ["../pre-release.sh", "wow_spells"]
