@@ -137,7 +137,7 @@ impl std::fmt::Binary for Guid {
 
 #[cfg(test)]
 mod test {
-    use crate::vanilla::Guid;
+    use super::Guid;
 
     #[test]
     fn packed() {
