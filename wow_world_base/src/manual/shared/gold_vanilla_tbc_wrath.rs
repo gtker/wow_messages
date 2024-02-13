@@ -30,7 +30,7 @@ impl Gold {
     /// Creates a new object from separate parts.
     ///
     /// Variables will roll over, so supplying 100 `silver` will equal to 1 `gold`.
-    /// Supplying 1 `gold` and and 100 `silver` will equal 2 `gold`.
+    /// Supplying 1 `gold` and 100 `silver` will equal 2 `gold`.
     ///
     /// Get the values with [`Self::as_parts`].
     pub const fn from_parts(gold: u32, silver: u32, copper: u32) -> Self {
