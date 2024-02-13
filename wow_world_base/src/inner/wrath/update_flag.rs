@@ -441,8 +441,7 @@ impl TryFrom<i8> for UpdateFlag {
     type Error = i8;
     fn try_from(value: i8) -> Result<Self, Self::Error> {
         let v = u8::from_le_bytes(value.to_le_bytes());
-        let a = TryInto::<u16>::try_into(v).ok().ok_or(value)?;
-        Ok(Self::new(a))
+        Ok(Self::new(v.into()))
     }
 }
 

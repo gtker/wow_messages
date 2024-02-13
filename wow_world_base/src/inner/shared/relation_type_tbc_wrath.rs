@@ -265,8 +265,7 @@ impl TryFrom<i8> for RelationType {
     type Error = i8;
     fn try_from(value: i8) -> Result<Self, Self::Error> {
         let v = u8::from_le_bytes(value.to_le_bytes());
-        let a = TryInto::<u32>::try_into(v).ok().ok_or(value)?;
-        Ok(Self::new(a))
+        Ok(Self::new(v.into()))
     }
 }
 
@@ -274,8 +273,7 @@ impl TryFrom<i16> for RelationType {
     type Error = i16;
     fn try_from(value: i16) -> Result<Self, Self::Error> {
         let v = u16::from_le_bytes(value.to_le_bytes());
-        let a = TryInto::<u32>::try_into(v).ok().ok_or(value)?;
-        Ok(Self::new(a))
+        Ok(Self::new(v.into()))
     }
 }
 

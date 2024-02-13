@@ -135,8 +135,6 @@ fn print_try_from(s: &mut Writer, e: &Definer) {
         });
     });
 
-    let signed = ty_name.starts_with("i");
-
     for (from_size, from_signed, from_ty) in IntegerType::try_from_types() {
         let from_ty = *from_ty;
         let from_size = *from_size;
@@ -144,7 +142,7 @@ fn print_try_from(s: &mut Writer, e: &Definer) {
             continue;
         }
 
-        let signedness_differs = signed != *from_signed;
+        let signedness_differs = e.ty().is_signed() != *from_signed;
         let conversion_is_infallible = {
             if from_ty == "usize" {
                 false
@@ -188,10 +186,15 @@ fn print_try_from(s: &mut Writer, e: &Definer) {
                         s.wln(format!(
                             "let v = {converted_ty}::from_le_bytes(value.to_le_bytes());"
                         ));
-                        s.wln(format!(
-                            "let a = TryInto::<{ty_name}>::try_into(v).ok().ok_or(value)?;"
-                        ));
-                        s.wln("Ok(Self::new(a))")
+                        if from_size < size {
+                            //s.wln(format!("let a = Into::<{ty_name}>::into(v);"));
+                            s.wln("Ok(Self::new(v.into()))");
+                        } else {
+                            s.wln(format!(
+                                "let a = TryInto::<{ty_name}>::try_into(v).ok().ok_or(value)?;"
+                            ));
+                            s.wln("Ok(Self::new(a))")
+                        }
                     }
                 } else {
                     if conversion_is_infallible {
