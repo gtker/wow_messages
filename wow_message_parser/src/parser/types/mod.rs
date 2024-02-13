@@ -177,6 +177,55 @@ impl IntegerType {
             (2, false, "usize"),
         ]
     }
+
+    pub(crate) fn conversion_is_infallible(
+        &self,
+        from_size: i128,
+        from_signed: bool,
+        from_ty: &str,
+    ) -> bool {
+        let size: i128 = self.size().into();
+
+        let signedness_differs = self.is_signed() != from_signed;
+
+        if from_ty == "usize" {
+            false
+        } else if from_size > size && !signedness_differs {
+            false
+        } else if from_size < size && !signedness_differs {
+            true
+        } else if signedness_differs && from_size == size {
+            true
+        } else {
+            false
+        }
+    }
+
+    pub(crate) fn try_from_trait_name(
+        &self,
+        from_size: i128,
+        from_signed: bool,
+        from_ty: &str,
+    ) -> String {
+        if self.conversion_is_infallible(from_size, from_signed, from_ty) {
+            format!("From<{from_ty}>")
+        } else {
+            format!("TryFrom<{from_ty}>")
+        }
+    }
+
+    pub(crate) fn try_from_function_name(
+        &self,
+        from_size: i128,
+        from_signed: bool,
+        from_ty: &str,
+    ) -> String {
+        if self.conversion_is_infallible(from_size, from_signed, from_ty) {
+            format!("fn from(value: {from_ty}) -> Self")
+        } else {
+            format!("fn try_from(value: {from_ty}) -> Result<Self, Self::Error>")
+        }
+    }
 }
 
 #[derive(Debug, Eq, PartialEq, Ord, PartialOrd, Clone)]

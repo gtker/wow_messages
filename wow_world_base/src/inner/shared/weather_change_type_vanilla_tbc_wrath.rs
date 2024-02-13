@@ -101,9 +101,8 @@ impl TryFrom<u64> for WeatherChangeType {
 impl TryFrom<i8> for WeatherChangeType {
     type Error = crate::errors::EnumError;
     fn try_from(value: i8) -> Result<Self, Self::Error> {
-        TryInto::<u8>::try_into(value)
-            .map_err(|_| crate::errors::EnumError::new(NAME, value.into()))?
-            .try_into()
+        let v = u8::from_le_bytes(value.to_le_bytes());
+        Self::from_int(v)
     }
 }
 

@@ -195,7 +195,7 @@ fn print_try_from(s: &mut Writer, e: &Definer) {
         );
     });
 
-    for (_, _, from_ty) in IntegerType::try_from_types() {
+    for (from_size, from_signed, from_ty) in IntegerType::try_from_types() {
         let from_ty = *from_ty;
         if from_ty == ty_name || (e.tags().has_login_version() && from_ty == "i64") {
             continue;
@@ -205,22 +205,50 @@ fn print_try_from(s: &mut Writer, e: &Definer) {
             s.wln("type Error = crate::errors::EnumError;");
 
             s.body(
-                format!("fn try_from(value: {from_ty}) -> Result<Self, Self::Error>",),
+                format!("fn try_from(value: {from_ty}) -> Result<Self, Self::Error>"),
                 |s| {
-                    s.wln(format!("TryInto::<{ty_name}>::try_into(value)"));
-                    s.inc_indent();
+                    let conversion_is_infallible =
+                        e.ty()
+                            .conversion_is_infallible(*from_size, *from_signed, from_ty);
 
-                    let convert = if from_ty == "usize" {
-                        " as i128"
+                    if conversion_is_infallible {
+                        if *from_signed != e.ty().is_signed() {
+                            let converted_ty = if from_ty.contains("i") {
+                                from_ty.replace('i', "u")
+                            } else {
+                                from_ty.replace('u', "i")
+                            };
+
+                            s.wln(format!(
+                                "let v = {converted_ty}::from_le_bytes(value.to_le_bytes());"
+                            ));
+
+                            let into = if *from_size == e.ty().size() as i128 {
+                                ""
+                            } else {
+                                ".into()"
+                            };
+
+                            s.wln(format!("Self::from_int(v{into})"));
+                        } else {
+                            s.wln("Self::from_int(value.into())");
+                        }
                     } else {
-                        ".into()"
-                    };
+                        s.wln(format!("TryInto::<{ty_name}>::try_into(value)"));
+                        s.inc_indent();
 
-                    s.wln(format!(
-                        ".map_err(|_| crate::errors::EnumError::new(NAME, value{convert}))?"
-                    ));
-                    s.wln(".try_into()");
-                    s.dec_indent();
+                        let convert = if from_ty == "usize" {
+                            " as i128"
+                        } else {
+                            ".into()"
+                        };
+
+                        s.wln(format!(
+                            ".map_err(|_| crate::errors::EnumError::new(NAME, value{convert}))?"
+                        ));
+                        s.wln(".try_into()");
+                        s.dec_indent();
+                    }
                 },
             );
         });

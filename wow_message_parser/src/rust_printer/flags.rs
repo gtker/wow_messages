@@ -142,46 +142,35 @@ fn print_try_from(s: &mut Writer, e: &Definer) {
             continue;
         }
 
-        let signedness_differs = e.ty().is_signed() != *from_signed;
-        let conversion_is_infallible = {
-            if from_ty == "usize" {
-                false
-            } else if from_size > size && !signedness_differs {
-                false
-            } else if from_size < size && !signedness_differs {
-                true
-            } else if signedness_differs && from_size == size {
-                true
-            } else {
-                false
-            }
-        };
+        let trait_text = e.ty().try_from_trait_name(from_size, *from_signed, from_ty);
 
-        let trait_text = if conversion_is_infallible {
-            format!("From<{from_ty}>")
-        } else {
-            format!("TryFrom<{from_ty}>")
-        };
-
-        let trait_function = if conversion_is_infallible {
-            format!("fn from(value: {from_ty}) -> Self")
-        } else {
-            format!("fn try_from(value: {from_ty}) -> Result<Self, Self::Error>")
-        };
+        let trait_function = e
+            .ty()
+            .try_from_function_name(from_size, *from_signed, from_ty);
 
         s.impl_for(&trait_text, e.name(), |s| {
+            let conversion_is_infallible =
+                e.ty()
+                    .conversion_is_infallible(from_size, *from_signed, from_ty);
+
             if !conversion_is_infallible {
                 s.wln(format!("type Error = {from_ty};"));
             }
 
             s.body(&trait_function, |s| {
+                let signedness_differs = e.ty().is_signed() != *from_signed;
+
                 if signedness_differs {
                     if conversion_is_infallible {
                         s.wln(format!(
                             "Self::new({ty_name}::from_le_bytes(value.to_le_bytes()))"
                         ));
                     } else {
-                        let converted_ty = from_ty.replace('i', "u");
+                        let converted_ty = if from_ty.contains("i") {
+                            from_ty.replace('i', "u")
+                        } else {
+                            from_ty.replace('u', "i")
+                        };
 
                         s.wln(format!(
                             "let v = {converted_ty}::from_le_bytes(value.to_le_bytes());"

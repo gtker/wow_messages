@@ -106,9 +106,8 @@ impl TryFrom<i8> for SizeClass {
 impl TryFrom<u8> for SizeClass {
     type Error = crate::errors::EnumError;
     fn try_from(value: u8) -> Result<Self, Self::Error> {
-        TryInto::<i8>::try_into(value)
-            .map_err(|_| crate::errors::EnumError::new(NAME, value.into()))?
-            .try_into()
+        let v = i8::from_le_bytes(value.to_le_bytes());
+        Self::from_int(v)
     }
 }
 

@@ -102,9 +102,7 @@ impl TryFrom<u16> for CompressedMoveOpcode {
 impl TryFrom<u8> for CompressedMoveOpcode {
     type Error = crate::errors::EnumError;
     fn try_from(value: u8) -> Result<Self, Self::Error> {
-        TryInto::<u16>::try_into(value)
-            .map_err(|_| crate::errors::EnumError::new(NAME, value.into()))?
-            .try_into()
+        Self::from_int(value.into())
     }
 }
 
@@ -138,9 +136,8 @@ impl TryFrom<i8> for CompressedMoveOpcode {
 impl TryFrom<i16> for CompressedMoveOpcode {
     type Error = crate::errors::EnumError;
     fn try_from(value: i16) -> Result<Self, Self::Error> {
-        TryInto::<u16>::try_into(value)
-            .map_err(|_| crate::errors::EnumError::new(NAME, value.into()))?
-            .try_into()
+        let v = u16::from_le_bytes(value.to_le_bytes());
+        Self::from_int(v)
     }
 }
 

@@ -85,18 +85,14 @@ impl TryFrom<u32> for TrainingFailureReason {
 impl TryFrom<u8> for TrainingFailureReason {
     type Error = crate::errors::EnumError;
     fn try_from(value: u8) -> Result<Self, Self::Error> {
-        TryInto::<u32>::try_into(value)
-            .map_err(|_| crate::errors::EnumError::new(NAME, value.into()))?
-            .try_into()
+        Self::from_int(value.into())
     }
 }
 
 impl TryFrom<u16> for TrainingFailureReason {
     type Error = crate::errors::EnumError;
     fn try_from(value: u16) -> Result<Self, Self::Error> {
-        TryInto::<u32>::try_into(value)
-            .map_err(|_| crate::errors::EnumError::new(NAME, value.into()))?
-            .try_into()
+        Self::from_int(value.into())
     }
 }
 
@@ -130,9 +126,8 @@ impl TryFrom<i16> for TrainingFailureReason {
 impl TryFrom<i32> for TrainingFailureReason {
     type Error = crate::errors::EnumError;
     fn try_from(value: i32) -> Result<Self, Self::Error> {
-        TryInto::<u32>::try_into(value)
-            .map_err(|_| crate::errors::EnumError::new(NAME, value.into()))?
-            .try_into()
+        let v = u32::from_le_bytes(value.to_le_bytes());
+        Self::from_int(v)
     }
 }
 
