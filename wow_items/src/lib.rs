@@ -17,6 +17,7 @@
 //! ```rust
 //! let item_id = 12640; // Lionheart Helm
 //!
+//! # #[cfg(feature = "vanilla")]
 //! if let Some(item) = wow_items::vanilla::lookup_item(item_id) {
 //!     println!("Lionheart has {} strength and {} agility.", item.strength(), item.agility());
 //! } else {

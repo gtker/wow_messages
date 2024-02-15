@@ -17,6 +17,7 @@
 //! ```rust
 //! let spell_id = 7598; // Increased Critical 2
 //!
+//! # #[cfg(feature = "vanilla")]
 //! if let Some(spell) = wow_spells::vanilla::lookup_spell(spell_id) {
 //!     println!("Spell is named '{}'.", spell.spell_name());
 //! } else {
