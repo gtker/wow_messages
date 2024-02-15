@@ -338,7 +338,7 @@ fn check_versions(containers: &[ParsedContainer], definers: &[Definer]) {
         for inner in &v {
             if outer.name == inner.name
                 && outer.tags.has_version_intersections(inner.tags)
-                && outer.name as *const _ != inner.name as *const _
+                && !std::ptr::eq(outer.name as *const _, inner.name as *const _)
             {
                 overlapping_versions(
                     inner.name,

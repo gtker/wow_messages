@@ -1,23 +1,14 @@
 #[cfg(any(feature = "tbc", feature = "wrath"))]
 mod tbc_wrath_player_race;
-#[cfg(any(feature = "tbc", feature = "wrath"))]
-pub use tbc_wrath_player_race::*;
 
 #[cfg(any(feature = "vanilla", feature = "tbc"))]
 mod vanilla_tbc_class;
-#[cfg(any(feature = "vanilla", feature = "tbc"))]
-pub use vanilla_tbc_class::*;
 
 #[cfg(any(feature = "vanilla", feature = "tbc"))]
 mod vanilla_tbc_item_quality;
 
 #[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
 mod vanilla_tbc_wrath_auction_house;
-#[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
-pub use vanilla_tbc_wrath_auction_house::*;
-
-#[cfg(any(feature = "vanilla", feature = "tbc"))]
-pub use vanilla_tbc_item_quality::*;
 
 macro_rules! exp_required_to_level_up {
     ($level:expr, $exp_required:expr) => {

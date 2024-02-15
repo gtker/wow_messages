@@ -11,13 +11,8 @@ pub mod inspect_talent_gear_mask;
 pub use inspect_talent_gear_mask::*;
 
 pub mod cache_mask;
-mod movement_info;
 pub use cache_mask::*;
-
-pub use movement_info::*;
-
-pub use wow_world_base::wrath::Gold;
-pub use wow_world_base::wrath::Level;
+mod movement_info;
 
 pub use crate::manual::shared::tbc_wrath_named_guid::NamedGuid;
 pub use crate::manual::shared::tbc_wrath_variable_item_random_property::VariableItemRandomProperty;

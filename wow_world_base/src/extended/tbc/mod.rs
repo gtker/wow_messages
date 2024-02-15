@@ -6,6 +6,7 @@ pub mod exp;
 mod item;
 mod item_set;
 mod items;
+pub use items::*;
 mod map;
 pub mod position;
 mod skill;
@@ -13,17 +14,6 @@ mod skills;
 mod spells;
 pub mod stats;
 pub mod trigger;
-
-pub use actions::*;
-pub use base_stats::*;
-pub use creature_family::*;
-pub use item::*;
-pub use item_set::*;
-pub use items::*;
-pub use map::*;
-pub use skill::*;
-pub use skills::*;
-pub use spells::*;
 
 macro_rules! tbc_race_class_match {
     ($function:ident, $ret_type:ty, $race_class:ty) => {
