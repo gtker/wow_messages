@@ -65,7 +65,6 @@
     clippy::doc_markdown,
     clippy::unseparated_literal_suffix
 )]
-#![allow(clippy::missing_errors_doc)]
 #![cfg_attr(docsrs, feature(doc_auto_cfg))]
 #![cfg_attr(docsrs, feature(doc_cfg))]
 
@@ -84,8 +83,12 @@ pub(crate) mod util;
     clippy::approx_constant,
     clippy::upper_case_acronyms,
     clippy::needless_borrow,
-    clippy::identity_op
+    clippy::identity_op,
+    clippy::missing_errors_doc,
+    clippy::needless_borrows_for_generic_args
 )]
+// Panics in testcase prints
+#[allow(clippy::never_loop)]
 mod world;
 
 pub(crate) use traits::private;
