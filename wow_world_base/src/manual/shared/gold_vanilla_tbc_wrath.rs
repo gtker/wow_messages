@@ -61,6 +61,11 @@ impl Gold {
         Self::new(0)
     }
 
+    /// Returns true if value is zero.
+    pub const fn is_zero(&self) -> bool {
+        self.inner == 0
+    }
+
     /// Returns the underlying integer type.
     pub const fn as_int(&self) -> u32 {
         self.inner
