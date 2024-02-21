@@ -10,5 +10,4 @@ wow_login_messages = { path = "../../wow_login_messages", features = ["sync"] }
 wow_world_messages = { path = "../../wow_world_messages", features = ["sync", "vanilla"] }
 
 [dependencies.wow_srp]
-git = "https://github.com/gtker/wow_srp.git"
-rev = "7b019d589bdd11e7b206d250c4b85b968d3945ee"
+version = "0.7.0"
