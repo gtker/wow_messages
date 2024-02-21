@@ -1,6 +1,8 @@
 use crate::{DateTimeError, EnumError};
 
 #[derive(Debug, Ord, PartialOrd, Eq, PartialEq, Default, Hash, Copy, Clone)]
+#[cfg_attr(feature = "serde", derive(serde::Deserialize, serde::Serialize))]
+#[cfg_attr(feature = "serde", serde(transparent))]
 pub struct DateTime {
     inner: u32,
 }

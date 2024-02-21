@@ -7,6 +7,7 @@ use std::ops::{Add, AddAssign, Sub, SubAssign};
 /// So `u32::MAX + 1 == u32::MAX` and `u32::MIN - 1 == u32::MIN`.
 #[derive(Debug, Clone, Copy, Ord, PartialOrd, Eq, PartialEq, Hash, Default)]
 #[cfg_attr(feature = "serde", derive(serde::Deserialize, serde::Serialize))]
+#[cfg_attr(feature = "serde", serde(transparent))]
 pub struct Gold {
     inner: u32,
 }

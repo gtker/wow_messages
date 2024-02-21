@@ -7,6 +7,7 @@ use std::ops::{Add, AddAssign, Sub, SubAssign};
 /// So `u8::MAX + 1 == u8::MAX` and `u8::MIN - 1 == u8::MIN`.
 #[derive(Debug, Clone, Copy, Ord, PartialOrd, Eq, PartialEq, Hash, Default)]
 #[cfg_attr(feature = "serde", derive(serde::Deserialize, serde::Serialize))]
+#[cfg_attr(feature = "serde", serde(transparent))]
 pub struct Level {
     inner: u8,
 }
