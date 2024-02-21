@@ -1,5 +1,6 @@
 use crate::base_printer::data::items::{Array, Field, FieldOptimization, Optimizations};
 use crate::base_printer::{Expansion, ImportFrom};
+use crate::rust_printer::print_serde_derive;
 use crate::rust_printer::writer::Writer;
 use std::collections::BTreeSet;
 
@@ -168,7 +169,7 @@ fn array_definitions(s: &mut Writer, arrays: &[Array]) {
         }
 
         s.wln("#[derive(Debug, Copy, Clone, Default)]");
-        s.wln("#[cfg_attr(feature = \"serde\", derive(serde::Deserialize, serde::Serialize))]");
+        print_serde_derive(s, true, false);
         s.open_curly(format!("pub struct {}", array.type_name));
 
         for e in array.field_info().fields() {
