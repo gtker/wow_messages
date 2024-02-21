@@ -8,6 +8,7 @@
 /// }
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone, Default)]
+#[cfg_attr(feature = "serde", serde(transparent))]
 pub struct SecurityFlag {
     inner: u8,
 }

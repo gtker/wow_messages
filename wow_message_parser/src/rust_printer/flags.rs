@@ -25,6 +25,7 @@ fn declaration(s: &mut Writer, e: &Definer, o: &Objects) {
 
     s.wln("#[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone, Default)]");
     print_serde_derive(s, e.tags().is_in_base());
+    s.wln("#[cfg_attr(feature = \"serde\", serde(transparent))]");
     s.new_flag(e.name(), e.ty().rust_str(), |_| {});
 }
 
