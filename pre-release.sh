@@ -6,6 +6,6 @@ export CARGO_INCREMENTAL=0
 
 cargo install cargo-hack --locked
 
-cargo hack test --feature-powerset -p $1
+cargo test --all-features -p $1
 cargo hack clippy --feature-powerset -p $1
 
