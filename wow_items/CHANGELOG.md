@@ -8,6 +8,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 <!-- next-header -->
 ## [Unreleased] - ReleaseDate
 
+## [0.2.0] - 2024-02-21
+
 ### Removed
 
 * BREAKING: `unobtainable` feature flag.
@@ -24,5 +26,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * First release.
 
 <!-- next-url -->
-[Unreleased]: https://github.com/gtker/wow_messages/compare/wow_items-v0.1.1...HEAD
+[Unreleased]: https://github.com/gtker/wow_messages/compare/wow_items-v0.2.0...HEAD
+[0.2.0]: https://github.com/gtker/wow_messages/compare/wow_items-v0.1.1...wow_items-v0.2.0
 [0.1.0]: https://github.com/gtker/wow_messages/releases/tag/wow_items-v0.1.0

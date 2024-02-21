@@ -1,7 +1,7 @@
 [package]
 name = "wow_world_base"
 description = "Base definitions and functions for World of Warcraft game servers"
-version = "0.1.1"
+version = "0.2.0"
 keywords = ["wow", "world-of-warcraft", "game", "definitions"]
 categories = ["network-programming", "game-development", "game-engines"]
 
