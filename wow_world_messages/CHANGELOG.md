@@ -17,6 +17,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 * BREAKING: `Server/ClientOpcodeMessage` now boxes any types larger than 8 bytes in order to avoid breaking the stack.
 
+### Removed
+
+* BREAKING: `Aura` types for TBC/Wrath.
+
 ## [0.2.0] - 2024-02-21
 
 ### Added

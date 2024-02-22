@@ -217,6 +217,8 @@ pub(crate) mod spell_cast_target_flags;
 pub use spell_cast_target_flags::*;
 pub use crate::shared::spline_flag_vanilla_tbc::*;
 pub use crate::shared::update_flag_vanilla_tbc::*;
+pub(crate) mod aura;
+pub use aura::*;
 pub use crate::shared::item_damage_type_vanilla_tbc_wrath::*;
 pub use crate::shared::item_socket_tbc_wrath::*;
 pub use crate::shared::item_spells_tbc_wrath::*;

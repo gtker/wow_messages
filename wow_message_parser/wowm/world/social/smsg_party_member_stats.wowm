@@ -142,6 +142,7 @@ struct Aura {
     u8 unknown;
 } {
     versions = "2.4.3";
+    rust_base_type = "true";
 }
 
 smsg SMSG_PARTY_MEMBER_STATS = 0x007E {
@@ -220,5 +221,6 @@ struct Aura {
     u8 unknown;
 } {
     versions = "3.3.5";
+    rust_base_type = "true";
 }
 

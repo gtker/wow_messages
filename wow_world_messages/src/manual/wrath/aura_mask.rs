@@ -16,7 +16,7 @@ impl AuraMask {
 
         for (i, aura) in auras.iter_mut().enumerate() {
             if (bit_pattern & (1 << i)) != 0 {
-                *aura = Some(Aura::read(&mut r)?);
+                *aura = Some(crate::util::wrath_aura_read(&mut r)?);
             }
         }
 
@@ -35,7 +35,7 @@ impl AuraMask {
 
         for &i in self.auras() {
             if let Some(aura) = i {
-                aura.write_into_vec(&mut v)?;
+                crate::util::wrath_aura_write_into_vec(&aura, &mut v)?;
             }
         }
 

@@ -124,8 +124,6 @@ pub use crate::shared::auction_enchantment_tbc_wrath::*;
 pub(crate) mod auction_list_item;
 pub use auction_list_item::*;
 pub use crate::shared::auction_sort_tbc_wrath::*;
-pub(crate) mod aura;
-pub use aura::*;
 pub(crate) mod aura_log;
 pub use aura_log::*;
 pub(crate) mod aura_update;

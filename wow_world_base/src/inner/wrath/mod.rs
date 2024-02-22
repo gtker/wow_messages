@@ -288,6 +288,8 @@ pub(crate) mod update_flag;
 pub use update_flag::*;
 pub(crate) mod victim_state;
 pub use victim_state::*;
+pub(crate) mod aura;
+pub use aura::*;
 pub use crate::shared::item_damage_type_vanilla_tbc_wrath::*;
 pub use crate::shared::item_socket_tbc_wrath::*;
 pub use crate::shared::item_spells_tbc_wrath::*;
