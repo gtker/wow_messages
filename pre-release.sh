@@ -6,6 +6,9 @@ export CARGO_INCREMENTAL=0
 
 cargo install cargo-hack --locked
 
+cargo gen
+git diff-files --quiet
+
 cargo test --all-features -p $1
 
 # Try to catch clippy lints early
