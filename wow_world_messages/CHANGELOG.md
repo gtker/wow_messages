@@ -8,6 +8,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 <!-- next-header -->
 ## [Unreleased] - ReleaseDate
 
+### Changed
+
+* BREAKING: `Server/ClientOpcodeMessage` now boxes any types larger than 8 bytes in order to avoid breaking the stack.
 
 ## [0.2.0] - 2024-02-21
 

@@ -142,7 +142,11 @@ pub(crate) fn definition(s: &mut Writer, v: &[&Container], ty: &str, version: Ve
             let ty = if e.empty_body() {
                 "".to_string()
             } else {
-                format!("({})", e.name())
+                if e.should_be_boxed() {
+                    format!("(Box<{}>)", e.name())
+                } else {
+                    format!("({})", e.name())
+                }
             };
             s.wln(format!(
                 "{enum_name}{ty},",
@@ -172,7 +176,13 @@ fn world_common_impls_read_opcodes(s: &mut Writer, v: &[&Container], size: &str,
                         enum_name = get_enumerator_name(e.name())
                     ));
             } else {
-                s.wln(format!("{opcode:#06X} => Ok(Self::{enum_name}(<{name} as crate::Message>::read_body::<crate::traits::private::Internal>(&mut r, body_size).map_err(|a| a.opcode_convert())?)),",
+                let (box_start, box_end) = if e.should_be_boxed() {
+                    ("Box::new(", ")")
+                } else {
+                    ("", "")
+                };
+
+                s.wln(format!("{opcode:#06X} => Ok(Self::{enum_name}({box_start}<{name} as crate::Message>::read_body::<crate::traits::private::Internal>(&mut r, body_size).map_err(|a| a.opcode_convert())?{box_end})),",
                               enum_name = get_enumerator_name(e.name())
                 ));
             }
@@ -409,9 +419,15 @@ pub(crate) fn common_impls_world(
                             "Self::{en} => crate::Message::to_test_case_string(&{name}{{}}),",
                         ));
                     } else {
-                        s.wln(format!(
-                            "Self::{en}(c) => crate::Message::to_test_case_string(c),",
-                        ));
+                        if container.should_be_boxed() {
+                            s.wln(format!(
+                                "Self::{en}(c) => crate::Message::to_test_case_string(c.as_ref()),",
+                            ));
+                        } else {
+                            s.wln(format!(
+                                "Self::{en}(c) => crate::Message::to_test_case_string(c),",
+                            ));
+                        }
                     }
                 }
 
@@ -641,7 +657,11 @@ fn print_froms(s: &mut Writer, v: &[&Container], ty: &str) {
                 let (variable, extra) = if e.empty_body() {
                     ("_", "")
                 } else {
-                    ("c", "(c)")
+                    if e.should_be_boxed() {
+                        ("c", "(Box::new(c))")
+                    } else {
+                        ("c", "(c)")
+                    }
                 };
 
                 s.body(format!("fn from({variable}: {}) -> Self", e.name()), |s| {

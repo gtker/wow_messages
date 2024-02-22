@@ -19,6 +19,9 @@ use crate::rust_printer::{
 };
 use std::cmp::Ordering;
 use std::collections::{BTreeMap, BTreeSet};
+use std::mem::size_of;
+use wow_world_base::shared::{DateTime, Guid};
+use wow_world_base::vanilla::Vector3d;
 
 #[derive(Debug, Clone, Copy, Eq, PartialEq, Ord, PartialOrd)]
 pub(crate) enum ContainerType {
@@ -125,6 +128,70 @@ impl Container {
         } else {
             false
         }
+    }
+
+    pub(crate) fn should_be_boxed(&self) -> bool {
+        self.rust_size() > 8 && self.tags().has_world_version()
+    }
+
+    pub(crate) fn rust_size(&self) -> i128 {
+        let mut size = 0;
+
+        for m in self.all_definitions() {
+            size += (match m.ty() {
+                Type::Integer(i) => i.size() as usize,
+                Type::Bool(_) => size_of::<bool>(),
+                Type::PackedGuid | Type::Guid => size_of::<Guid>(),
+                Type::NamedGuid => size_of::<u64>() + size_of::<Option<String>>(),
+                Type::DateTime => size_of::<DateTime>(),
+                Type::FloatingPoint => size_of::<f32>(),
+                Type::Enum { e, .. } | Type::Flag { e, .. } => e.ty().size() as usize,
+                Type::Gold => size_of::<u32>(),
+                Type::Population => size_of::<f32>(),
+                Type::Level => size_of::<u8>(),
+                Type::Level16 => size_of::<u16>(),
+                Type::Level32 => size_of::<u32>(),
+                Type::IpAddress => size_of::<u32>(),
+                Type::Seconds => size_of::<u32>(),
+                Type::Milliseconds => size_of::<u32>(),
+                Type::Spell => size_of::<u32>(),
+                Type::Spell16 => size_of::<u16>(),
+                Type::Item => size_of::<u32>(),
+
+                Type::CString | Type::SizedCString | Type::String => size_of::<String>(),
+
+                Type::MonsterMoveSplines => size_of::<Vec<Vector3d>>(),
+                Type::AuraMask => size_of::<[Option<u16>; 32]>(),
+                Type::EnchantMask => size_of::<[Option<u16>; 32]>(),
+
+                Type::AchievementDoneArray => size_of::<Vec<u8>>(),
+                Type::AchievementInProgressArray => size_of::<Vec<u8>>(),
+                Type::InspectTalentGearMask => size_of::<Vec<u8>>(),
+                Type::VariableItemRandomProperty => size_of::<u32>() + size_of::<Option<u32>>(),
+                Type::AddonArray => size_of::<[Option<u32>; 32]>(),
+                Type::CacheMask => size_of::<[Option<u32>; 32]>(),
+
+                Type::UpdateMask { .. } => size_of::<Vec<u8>>() + size_of::<BTreeMap<u8, u8>>(),
+
+                Type::Struct { e, .. } => e.rust_size() as usize,
+
+                Type::Array(array) => match array.size() {
+                    ArraySize::Fixed(size) => {
+                        size as usize
+                            * match array.ty() {
+                                ArrayType::Integer(i) => i.size() as usize,
+                                ArrayType::Struct(e) => e.rust_size() as usize,
+                                ArrayType::CString => size_of::<String>(),
+                                ArrayType::PackedGuid | ArrayType::Guid => size_of::<Guid>(),
+                                ArrayType::Spell => size_of::<u32>(),
+                            }
+                    }
+                    _ => size_of::<Vec<u8>>(),
+                },
+            } as i128);
+        }
+
+        size
     }
 
     pub(crate) fn opcode(&self) -> u32 {
