@@ -107,13 +107,32 @@ let d = if buf[0] & 0x80 != 0 {{
 
     let opcode_size = message_side.world_opcode_size();
     s.wln(format!(
-        "let mut buf = vec![0_u8; (d.size.saturating_sub({opcode_size})) as usize];"
+        "let mut buf = vec![0_u8; d.size.saturating_sub({opcode_size}) as usize];"
     ));
     s.wln(format!("r.read_exact(&mut buf){postfix}?;"));
     s.newline();
 
+    let size_into = match message_side {
+        MessageSide::Server => {
+            if version.wrath_or_greater() {
+                ""
+            } else {
+                if encrypted {
+                    ".into()"
+                } else {
+                    ""
+                }
+            }
+        }
+        MessageSide::Client => "",
+    };
+    let opcode_into = match message_side {
+        MessageSide::Server => ".into()",
+        MessageSide::Client => "",
+    };
+
     s.wln(format!(
-        "read_{side}_body(&mut buf.as_slice(), d.size.into(), d.opcode.into())"
+        "read_{side}_body(&mut buf.as_slice(), d.size{size_into}, d.opcode{opcode_into})"
     ));
 
     s.closing_curly_newline(); // ) -> Result<M
@@ -143,7 +162,7 @@ fn read_server_body<M: crate::{module}::ServerMessage>(
     if opcode == M::OPCODE {{
         let m = M::read_body::<crate::traits::private::Internal>(
             buf,
-            size.saturating_sub(2) as u32,
+            size.saturating_sub(2),
         );
         match m {{
             Ok(m) => Ok(m),
@@ -153,12 +172,13 @@ fn read_server_body<M: crate::{module}::ServerMessage>(
         Err(crate::errors::ExpectedOpcodeError::Opcode {{
             opcode,
             name: crate::{module}::opcode_to_name(opcode),
-            size: size.into(),
+            size,
         }})
     }}
 }}
 ",
     ));
+    s.newline();
 
     print_async_cfg(&mut s, &ImplType::types());
     s.block(format!(

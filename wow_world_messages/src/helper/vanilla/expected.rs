@@ -57,10 +57,7 @@ pub fn expect_client_message_encryption<M: crate::vanilla::ClientMessage, R: std
 }
 
 #[cfg(feature = "tokio")]
-pub async fn tokio_expect_server_message<
-    M: crate::vanilla::ServerMessage,
-    R: tokio::io::AsyncReadExt + Unpin + Send,
->(
+pub async fn tokio_expect_server_message<M: crate::vanilla::ServerMessage, R: tokio::io::AsyncReadExt + Unpin + Send>(
     r: &mut R,
 ) -> Result<M, crate::errors::ExpectedOpcodeError> {
     let mut header = [0_u8; 4];
@@ -74,10 +71,7 @@ pub async fn tokio_expect_server_message<
 }
 
 #[cfg(feature = "tokio")]
-pub async fn tokio_expect_client_message<
-    M: crate::vanilla::ClientMessage,
-    R: tokio::io::AsyncReadExt + Unpin + Send,
->(
+pub async fn tokio_expect_client_message<M: crate::vanilla::ClientMessage, R: tokio::io::AsyncReadExt + Unpin + Send>(
     r: &mut R,
 ) -> Result<M, crate::errors::ExpectedOpcodeError> {
     let mut header = [0_u8; 6];
@@ -91,10 +85,7 @@ pub async fn tokio_expect_client_message<
 }
 
 #[cfg(all(feature = "tokio", feature = "encryption"))]
-pub async fn tokio_expect_server_message_encryption<
-    M: crate::vanilla::ServerMessage,
-    R: tokio::io::AsyncReadExt + Unpin + Send,
->(
+pub async fn tokio_expect_server_message_encryption<M: crate::vanilla::ServerMessage, R: tokio::io::AsyncReadExt + Unpin + Send>(
     r: &mut R,
     d: &mut wow_srp::vanilla_header::DecrypterHalf,
 ) -> Result<M, crate::errors::ExpectedOpcodeError> {
@@ -109,10 +100,7 @@ pub async fn tokio_expect_server_message_encryption<
 }
 
 #[cfg(all(feature = "tokio", feature = "encryption"))]
-pub async fn tokio_expect_client_message_encryption<
-    M: crate::vanilla::ClientMessage,
-    R: tokio::io::AsyncReadExt + Unpin + Send,
->(
+pub async fn tokio_expect_client_message_encryption<M: crate::vanilla::ClientMessage, R: tokio::io::AsyncReadExt + Unpin + Send>(
     r: &mut R,
     d: &mut wow_srp::vanilla_header::DecrypterHalf,
 ) -> Result<M, crate::errors::ExpectedOpcodeError> {
@@ -127,10 +115,7 @@ pub async fn tokio_expect_client_message_encryption<
 }
 
 #[cfg(feature = "async-std")]
-pub async fn astd_expect_server_message<
-    M: crate::vanilla::ServerMessage,
-    R: async_std::io::ReadExt + Unpin + Send,
->(
+pub async fn astd_expect_server_message<M: crate::vanilla::ServerMessage, R: async_std::io::ReadExt + Unpin + Send>(
     r: &mut R,
 ) -> Result<M, crate::errors::ExpectedOpcodeError> {
     let mut header = [0_u8; 4];
@@ -144,10 +129,7 @@ pub async fn astd_expect_server_message<
 }
 
 #[cfg(feature = "async-std")]
-pub async fn astd_expect_client_message<
-    M: crate::vanilla::ClientMessage,
-    R: async_std::io::ReadExt + Unpin + Send,
->(
+pub async fn astd_expect_client_message<M: crate::vanilla::ClientMessage, R: async_std::io::ReadExt + Unpin + Send>(
     r: &mut R,
 ) -> Result<M, crate::errors::ExpectedOpcodeError> {
     let mut header = [0_u8; 6];
@@ -161,10 +143,7 @@ pub async fn astd_expect_client_message<
 }
 
 #[cfg(all(feature = "async-std", feature = "encryption"))]
-pub async fn astd_expect_server_message_encryption<
-    M: crate::vanilla::ServerMessage,
-    R: async_std::io::ReadExt + Unpin + Send,
->(
+pub async fn astd_expect_server_message_encryption<M: crate::vanilla::ServerMessage, R: async_std::io::ReadExt + Unpin + Send>(
     r: &mut R,
     d: &mut wow_srp::vanilla_header::DecrypterHalf,
 ) -> Result<M, crate::errors::ExpectedOpcodeError> {
@@ -179,10 +158,7 @@ pub async fn astd_expect_server_message_encryption<
 }
 
 #[cfg(all(feature = "async-std", feature = "encryption"))]
-pub async fn astd_expect_client_message_encryption<
-    M: crate::vanilla::ClientMessage,
-    R: async_std::io::ReadExt + Unpin + Send,
->(
+pub async fn astd_expect_client_message_encryption<M: crate::vanilla::ClientMessage, R: async_std::io::ReadExt + Unpin + Send>(
     r: &mut R,
     d: &mut wow_srp::vanilla_header::DecrypterHalf,
 ) -> Result<M, crate::errors::ExpectedOpcodeError> {
@@ -204,7 +180,10 @@ fn read_server_body<M: crate::vanilla::ServerMessage>(
 ) -> Result<M, crate::errors::ExpectedOpcodeError> {
     // Unable to match on associated const M::OPCODE, so we do if
     if opcode == M::OPCODE {
-        let m = M::read_body::<crate::traits::private::Internal>(buf, size.saturating_sub(2));
+        let m = M::read_body::<crate::traits::private::Internal>(
+            buf,
+            size.saturating_sub(2),
+        );
         match m {
             Ok(m) => Ok(m),
             Err(e) => Err(e.into()),
@@ -226,8 +205,10 @@ fn read_client_body<M: crate::vanilla::ClientMessage>(
 ) -> Result<M, crate::errors::ExpectedOpcodeError> {
     // Unable to match on associated const M::OPCODE, so we do if
     if opcode == M::OPCODE {
-        let m =
-            M::read_body::<crate::traits::private::Internal>(buf, size.saturating_sub(4) as u32);
+        let m = M::read_body::<crate::traits::private::Internal>(
+            buf,
+            size.saturating_sub(4) as u32,
+        );
         match m {
             Ok(m) => Ok(m),
             Err(e) => Err(e.into()),
