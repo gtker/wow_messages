@@ -4,6 +4,8 @@ use wow_world_base::DateTimeError;
 
 pub use wow_world_base::EnumError;
 
+pub(crate) const MAX_ALLOCATION_SIZE: u32 = 0x7F_FF_FF_FF;
+
 #[derive(Debug)]
 pub struct ParseError {
     opcode: u32,
@@ -50,6 +52,7 @@ impl Error for ParseError {
             ParseErrorKind::BufferSizeTooSmall(io) => Some(io),
             ParseErrorKind::DateTime(e) => Some(e),
             ParseErrorKind::InvalidSize { .. } => None,
+            ParseErrorKind::AllocationTooLargeError(_) => None,
         }
     }
 }
@@ -110,6 +113,7 @@ pub enum ParseErrorKind {
     String(std::string::FromUtf8Error),
     InvalidSize,
     BufferSizeTooSmall(std::io::Error),
+    AllocationTooLargeError(u64),
 }
 
 impl Display for ParseErrorKind {
@@ -123,6 +127,9 @@ impl Display for ParseErrorKind {
                 f.write_fmt(format_args!("buffer too small with io error: '{io}'"))
             }
             ParseErrorKind::DateTime(i) => i.fmt(f),
+            ParseErrorKind::AllocationTooLargeError(i) => {
+                write!(f, "message attempts to allocate buffer of size {i}")
+            }
         }
     }
 }

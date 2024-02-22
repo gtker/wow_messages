@@ -1,3 +1,4 @@
+use crate::errors::{ParseErrorKind, MAX_ALLOCATION_SIZE};
 use std::io::Read;
 
 pub fn read_c_string_to_vec<R: Read>(r: &mut R) -> Result<Vec<u8>, std::io::Error> {
@@ -19,13 +20,15 @@ pub fn read_c_string_to_vec<R: Read>(r: &mut R) -> Result<Vec<u8>, std::io::Erro
 pub fn read_sized_c_string_to_vec<R: Read>(
     r: &mut R,
     size: u32,
-) -> Result<Vec<u8>, std::io::Error> {
-    let mut v = vec![0_u8; (size - 1) as usize];
+) -> Result<Vec<u8>, ParseErrorKind> {
+    if size > MAX_ALLOCATION_SIZE {
+        return Err(ParseErrorKind::AllocationTooLargeError(size.into()));
+    }
 
+    let mut v = vec![0_u8; (size - 1) as usize];
     r.read_exact(&mut v)?;
 
-    let mut null_terminator = [0_u8; 1];
-    r.read_exact(&mut null_terminator)?;
+    let _null_terminator = read_bool_u8(r)?;
 
     Ok(v)
 }
