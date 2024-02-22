@@ -1,5 +1,7 @@
+#[rustfmt::skip]
 mod item;
 mod race_class;
+#[rustfmt::skip]
 mod spell;
 mod text_emote;
 

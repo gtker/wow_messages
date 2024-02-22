@@ -4,6 +4,7 @@ mod base;
 pub use base::*;
 
 #[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
+#[rustfmt::skip]
 mod shared;
 #[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
 pub(crate) use shared::*;

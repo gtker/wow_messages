@@ -1,7 +1,9 @@
 mod actions;
 mod base_stats;
 pub mod character_features;
+#[rustfmt::skip]
 mod creature_family;
+#[rustfmt::skip]
 pub mod exp;
 mod item;
 mod item_set;
@@ -10,7 +12,9 @@ mod map;
 mod player_race;
 pub mod position;
 mod skill;
+#[rustfmt::skip]
 mod skills;
+#[rustfmt::skip]
 mod spells;
 pub mod stats;
 pub mod trigger;

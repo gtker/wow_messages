@@ -1,3 +1,4 @@
+#[rustfmt::skip]
 mod triggers;
 
 use crate::extended::shared::{area_trigger, tbc_wrath_trigger, verify_trigger};

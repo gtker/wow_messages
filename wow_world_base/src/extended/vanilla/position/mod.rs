@@ -1,3 +1,4 @@
+#[rustfmt::skip]
 mod positions;
 
 use crate::extended::shared::{position, vanilla_starter_positions};

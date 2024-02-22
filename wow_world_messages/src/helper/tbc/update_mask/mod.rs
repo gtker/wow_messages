@@ -1,5 +1,7 @@
+#[rustfmt::skip]
 #[allow(clippy::missing_panics_doc)]
 mod impls;
+#[rustfmt::skip]
 mod indices;
 
 pub use indices::*;

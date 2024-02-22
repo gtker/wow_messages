@@ -40,10 +40,13 @@
 
 /// Version 2.4.3.8606.
 #[cfg(feature = "tbc")]
+#[rustfmt::skip]
 pub mod tbc;
 /// Version 1.12.x.
 #[cfg(feature = "vanilla")]
+#[rustfmt::skip]
 pub mod vanilla;
 /// Version 3.3.5.x.
 #[cfg(feature = "wrath")]
+#[rustfmt::skip]
 pub mod wrath;

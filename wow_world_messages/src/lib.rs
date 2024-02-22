@@ -87,6 +87,7 @@ pub(crate) mod util;
     clippy::missing_errors_doc,
     clippy::needless_borrows_for_generic_args
 )]
+#[rustfmt::skip]
 // Panics in testcase prints
 #[allow(clippy::never_loop)]
 mod world;

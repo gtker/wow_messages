@@ -1,4 +1,6 @@
+#[rustfmt::skip]
 mod impls;
+#[rustfmt::skip]
 mod indices;
 
 pub use indices::*;

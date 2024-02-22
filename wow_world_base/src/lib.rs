@@ -63,6 +63,7 @@ pub(crate) mod extended;
 #[cfg(feature = "extended")]
 pub use extended::top_level::*;
 
+#[rustfmt::skip]
 #[allow(unused, non_snake_case, clippy::missing_errors_doc)]
 pub(crate) mod inner;
 pub use inner::*;

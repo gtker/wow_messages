@@ -1,3 +1,4 @@
+#[rustfmt::skip]
 mod positions;
 
 use crate::extended::shared::{position, tbc_starter_positions, vanilla_starter_positions};
