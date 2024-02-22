@@ -2,16 +2,20 @@ use crate::wrath::InspectTalentGear;
 use std::io;
 use std::io::Read;
 
-#[derive(Debug, Hash, Clone, Ord, PartialOrd, Eq, PartialEq, Default)]
+#[derive(Debug, Hash, Copy, Clone, Ord, PartialOrd, Eq, PartialEq, Default)]
 pub struct InspectTalentGearMask {
-    inspect_talent_gears: Vec<Option<InspectTalentGear>>,
+    inspect_talent_gears: [Option<InspectTalentGear>; Self::MAX_CAPACITY],
 }
 
 impl InspectTalentGearMask {
     const MAX_CAPACITY: usize = 32;
 
     pub fn read(mut r: &mut impl Read) -> Result<Self, io::Error> {
-        let mut auras = vec![None; Self::MAX_CAPACITY];
+        let mut auras = [
+            None, None, None, None, None, None, None, None, None, None, None, None, None, None,
+            None, None, None, None, None, None, None, None, None, None, None, None, None, None,
+            None, None, None, None,
+        ];
         let bit_pattern: u32 = crate::util::read_u32_le(&mut r)?;
 
         for (i, aura) in auras.iter_mut().enumerate() {
@@ -42,7 +46,7 @@ impl InspectTalentGearMask {
         Ok(())
     }
 
-    pub fn inspect_talent_gears(&self) -> &[Option<InspectTalentGear>] {
+    pub const fn inspect_talent_gears(&self) -> &[Option<InspectTalentGear>] {
         self.inspect_talent_gears.as_slice()
     }
 
@@ -50,7 +54,7 @@ impl InspectTalentGearMask {
         self.inspect_talent_gears.as_mut_slice()
     }
 
-    pub fn size(&self) -> usize {
+    pub const fn size(&self) -> usize {
         const MASK_VARIABLE_SIZE: usize = std::mem::size_of::<u16>();
         let mut auras = 0;
 

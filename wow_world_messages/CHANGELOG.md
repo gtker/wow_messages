@@ -8,6 +8,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 <!-- next-header -->
 ## [Unreleased] - ReleaseDate
 
+### Added
+
+* `Copy` for `InspectTalentGearMask`.
+* `const` for `InspectTalentGearMask::inspect_talent_gears` and `InspectTalentGearMask::size`.
+
 ### Changed
 
 * BREAKING: `Server/ClientOpcodeMessage` now boxes any types larger than 8 bytes in order to avoid breaking the stack.
