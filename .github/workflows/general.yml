@@ -11,23 +11,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: actions-rs/toolchain@v1
-        with:
-          profile: minimal
-          toolchain: stable
-          override: true
-      - uses: actions-rs/cargo@v1
-        with:
-          command: check # "wow_items" bloats compile time significantly
-          args: --all-features --workspace --exclude 'wow_items' --exclude 'wow_spells'
-      - uses: actions-rs/cargo@v1
-        with:
-          command: clippy # "wow_items" bloats compile time significantly
-          args: --all-features --workspace --exclude 'wow_items' --exclude 'wow_spells'
-      - uses: actions-rs/cargo@v1
-        with:
-          command: test # "wow_items" bloats compile time significantly
-          args: --all-features --workspace --exclude 'wow_items' --exclude 'wow_spells'
+      - uses: dtolnay/rust-toolchain@stable
+      - run: cargo check --all-features --workspace --exclude 'wow_items' --exclude 'wow_spells'
+      - run: cargo clippy --all-features --workspace --exclude 'wow_items' --exclude 'wow_spells'
+      - run: cargo test --all-features --workspace --exclude 'wow_items' --exclude 'wow_spells'
   validate-ir:
     name: Validate Intermediate Representation
     runs-on: ubuntu-latest
