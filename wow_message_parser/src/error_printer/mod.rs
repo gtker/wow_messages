@@ -426,7 +426,7 @@ pub(crate) fn type_is_upcast_to_same(ty_name: &str, file_info: &FileInfo, ty: In
     let ty = ty.str();
     s.fileinfo(
         file_info,
-        format!("Type '{ty_name}' of integer type '{ty}' is upcast to the same type.", ),
+        format!("Type '{ty_name}' of integer type '{ty}' is upcast to the same type.",),
     );
 
     wowm_exit(s, TYPE_IS_UPCAST_TO_SAME)
