@@ -27,6 +27,12 @@ impl SMSG_PET_GUIDS {
         // guids: Guid[amount_of_guids]
         let guids = {
             let mut guids = Vec::with_capacity(amount_of_guids as usize);
+
+            let allocation_size = u64::from(amount_of_guids) * 8;
+            if allocation_size > crate::errors::MAX_ALLOCATION_SIZE_WRATH {
+                return Err(crate::errors::ParseErrorKind::AllocationTooLargeError(allocation_size));
+            }
+
             for _ in 0..amount_of_guids {
                 guids.push(crate::util::read_guid(&mut r)?);
             }

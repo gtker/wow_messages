@@ -37,6 +37,12 @@ impl SMSG_SPELLDISPELLOG {
         // spells: Spell[amount_of_spells]
         let spells = {
             let mut spells = Vec::with_capacity(amount_of_spells as usize);
+
+            let allocation_size = u64::from(amount_of_spells) * 4;
+            if allocation_size > crate::errors::MAX_ALLOCATION_SIZE {
+                return Err(crate::errors::ParseErrorKind::AllocationTooLargeError(allocation_size));
+            }
+
             for _ in 0..amount_of_spells {
                 spells.push(crate::util::read_u32_le(&mut r)?);
             }

@@ -81,6 +81,12 @@ impl SMSG_QUESTGIVER_QUEST_DETAILS {
         // choice_item_rewards: QuestItemReward[amount_of_choice_item_rewards]
         let choice_item_rewards = {
             let mut choice_item_rewards = Vec::with_capacity(amount_of_choice_item_rewards as usize);
+
+            let allocation_size = u64::from(amount_of_choice_item_rewards) * 8;
+            if allocation_size > crate::errors::MAX_ALLOCATION_SIZE {
+                return Err(crate::errors::ParseErrorKind::AllocationTooLargeError(allocation_size));
+            }
+
             for _ in 0..amount_of_choice_item_rewards {
                 choice_item_rewards.push(QuestItemReward::read(&mut r)?);
             }
@@ -93,6 +99,12 @@ impl SMSG_QUESTGIVER_QUEST_DETAILS {
         // item_rewards: QuestItemReward[amount_of_item_rewards]
         let item_rewards = {
             let mut item_rewards = Vec::with_capacity(amount_of_item_rewards as usize);
+
+            let allocation_size = u64::from(amount_of_item_rewards) * 8;
+            if allocation_size > crate::errors::MAX_ALLOCATION_SIZE {
+                return Err(crate::errors::ParseErrorKind::AllocationTooLargeError(allocation_size));
+            }
+
             for _ in 0..amount_of_item_rewards {
                 item_rewards.push(QuestItemReward::read(&mut r)?);
             }
@@ -111,6 +123,12 @@ impl SMSG_QUESTGIVER_QUEST_DETAILS {
         // emotes: QuestDetailsEmote[amount_of_emotes]
         let emotes = {
             let mut emotes = Vec::with_capacity(amount_of_emotes as usize);
+
+            let allocation_size = u64::from(amount_of_emotes) * 8;
+            if allocation_size > crate::errors::MAX_ALLOCATION_SIZE {
+                return Err(crate::errors::ParseErrorKind::AllocationTooLargeError(allocation_size));
+            }
+
             for _ in 0..amount_of_emotes {
                 emotes.push(QuestDetailsEmote::read(&mut r)?);
             }

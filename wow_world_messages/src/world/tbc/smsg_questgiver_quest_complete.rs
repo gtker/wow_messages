@@ -54,6 +54,12 @@ impl SMSG_QUESTGIVER_QUEST_COMPLETE {
         // item_rewards: QuestItemReward[amount_of_item_rewards]
         let item_rewards = {
             let mut item_rewards = Vec::with_capacity(amount_of_item_rewards as usize);
+
+            let allocation_size = u64::from(amount_of_item_rewards) * 8;
+            if allocation_size > crate::errors::MAX_ALLOCATION_SIZE {
+                return Err(crate::errors::ParseErrorKind::AllocationTooLargeError(allocation_size));
+            }
+
             for _ in 0..amount_of_item_rewards {
                 item_rewards.push(QuestItemReward::read(&mut r)?);
             }

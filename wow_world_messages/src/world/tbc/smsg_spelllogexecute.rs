@@ -40,6 +40,12 @@ impl SMSG_SPELLLOGEXECUTE {
         // logs: SpellLog[amount_of_effects]
         let logs = {
             let mut logs = Vec::with_capacity(amount_of_effects as usize);
+
+            let allocation_size = u64::from(amount_of_effects) * 8;
+            if allocation_size > crate::errors::MAX_ALLOCATION_SIZE {
+                return Err(crate::errors::ParseErrorKind::AllocationTooLargeError(allocation_size));
+            }
+
             for _ in 0..amount_of_effects {
                 logs.push(SpellLog::read(&mut r)?);
             }

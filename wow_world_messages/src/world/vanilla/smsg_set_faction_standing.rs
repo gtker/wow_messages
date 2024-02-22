@@ -29,6 +29,12 @@ impl SMSG_SET_FACTION_STANDING {
         // faction_standings: FactionStanding[amount_of_faction_standings]
         let faction_standings = {
             let mut faction_standings = Vec::with_capacity(amount_of_faction_standings as usize);
+
+            let allocation_size = u64::from(amount_of_faction_standings) * 6;
+            if allocation_size > crate::errors::MAX_ALLOCATION_SIZE {
+                return Err(crate::errors::ParseErrorKind::AllocationTooLargeError(allocation_size));
+            }
+
             for _ in 0..amount_of_faction_standings {
                 faction_standings.push(FactionStanding::read(&mut r)?);
             }

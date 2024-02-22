@@ -94,6 +94,12 @@ impl QuestPoi {
         // points: Vector2dUnsigned[amount_of_points]
         let points = {
             let mut points = Vec::with_capacity(amount_of_points as usize);
+
+            let allocation_size = u64::from(amount_of_points) * 8;
+            if allocation_size > crate::errors::MAX_ALLOCATION_SIZE_WRATH {
+                return Err(crate::errors::ParseErrorKind::AllocationTooLargeError(allocation_size));
+            }
+
             for _ in 0..amount_of_points {
                 points.push(Vector2dUnsigned::read(&mut r)?);
             }

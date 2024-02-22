@@ -35,6 +35,12 @@ impl SMSG_AUCTION_OWNER_LIST_RESULT {
         // auctions: AuctionListItem[count]
         let auctions = {
             let mut auctions = Vec::with_capacity(count as usize);
+
+            let allocation_size = u64::from(count) * 148;
+            if allocation_size > crate::errors::MAX_ALLOCATION_SIZE_WRATH {
+                return Err(crate::errors::ParseErrorKind::AllocationTooLargeError(allocation_size));
+            }
+
             for _ in 0..count {
                 auctions.push(AuctionListItem::read(&mut r)?);
             }

@@ -1,4 +1,4 @@
-use crate::errors::{ParseErrorKind, MAX_ALLOCATION_SIZE};
+use crate::errors::{ParseErrorKind, MAX_ALLOCATION_SIZE_WRATH};
 use std::io::Read;
 
 pub fn read_c_string_to_vec<R: Read>(r: &mut R) -> Result<Vec<u8>, std::io::Error> {
@@ -21,7 +21,7 @@ pub fn read_sized_c_string_to_vec<R: Read>(
     r: &mut R,
     size: u32,
 ) -> Result<Vec<u8>, ParseErrorKind> {
-    if size > MAX_ALLOCATION_SIZE {
+    if u64::from(size) > MAX_ALLOCATION_SIZE_WRATH {
         return Err(ParseErrorKind::AllocationTooLargeError(size.into()));
     }
 

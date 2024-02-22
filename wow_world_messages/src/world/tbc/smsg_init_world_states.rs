@@ -39,6 +39,12 @@ impl SMSG_INIT_WORLD_STATES {
         // states: WorldState[amount_of_states]
         let states = {
             let mut states = Vec::with_capacity(amount_of_states as usize);
+
+            let allocation_size = u64::from(amount_of_states) * 8;
+            if allocation_size > crate::errors::MAX_ALLOCATION_SIZE {
+                return Err(crate::errors::ParseErrorKind::AllocationTooLargeError(allocation_size));
+            }
+
             for _ in 0..amount_of_states {
                 states.push(WorldState::read(&mut r)?);
             }

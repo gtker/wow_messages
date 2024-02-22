@@ -47,6 +47,12 @@ impl MSG_LOOKING_FOR_GROUP_Server {
         // players_displayed: LfgPlayer[amount_of_players_displayed]
         let players_displayed = {
             let mut players_displayed = Vec::with_capacity(amount_of_players_displayed as usize);
+
+            let allocation_size = u64::from(amount_of_players_displayed) * 27;
+            if allocation_size > crate::errors::MAX_ALLOCATION_SIZE {
+                return Err(crate::errors::ParseErrorKind::AllocationTooLargeError(allocation_size));
+            }
+
             for _ in 0..amount_of_players_displayed {
                 players_displayed.push(LfgPlayer::read(&mut r)?);
             }

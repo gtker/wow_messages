@@ -32,6 +32,12 @@ impl SMSG_UPDATE_OBJECT {
         // objects: Object[amount_of_objects]
         let objects = {
             let mut objects = Vec::with_capacity(amount_of_objects as usize);
+
+            let allocation_size = u64::from(amount_of_objects);
+            if allocation_size > crate::errors::MAX_ALLOCATION_SIZE {
+                return Err(crate::errors::ParseErrorKind::AllocationTooLargeError(allocation_size));
+            }
+
             for _ in 0..amount_of_objects {
                 objects.push(Object::read(&mut r)?);
             }

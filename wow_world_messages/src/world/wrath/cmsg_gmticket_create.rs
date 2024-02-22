@@ -60,6 +60,12 @@ impl CMSG_GMTICKET_CREATE {
         // times: u32[num_of_times]
         let times = {
             let mut times = Vec::with_capacity(num_of_times as usize);
+
+            let allocation_size = u64::from(num_of_times) * 4;
+            if allocation_size > crate::errors::MAX_ALLOCATION_SIZE_WRATH {
+                return Err(crate::errors::ParseErrorKind::AllocationTooLargeError(allocation_size));
+            }
+
             for _ in 0..num_of_times {
                 times.push(crate::util::read_u32_le(&mut r)?);
             }

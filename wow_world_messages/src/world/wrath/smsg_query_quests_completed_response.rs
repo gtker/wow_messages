@@ -25,6 +25,12 @@ impl SMSG_QUERY_QUESTS_COMPLETED_RESPONSE {
         // reward_quests: u32[amount_of_reward_quests]
         let reward_quests = {
             let mut reward_quests = Vec::with_capacity(amount_of_reward_quests as usize);
+
+            let allocation_size = u64::from(amount_of_reward_quests) * 4;
+            if allocation_size > crate::errors::MAX_ALLOCATION_SIZE_WRATH {
+                return Err(crate::errors::ParseErrorKind::AllocationTooLargeError(allocation_size));
+            }
+
             for _ in 0..amount_of_reward_quests {
                 reward_quests.push(crate::util::read_u32_le(&mut r)?);
             }

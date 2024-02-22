@@ -105,6 +105,12 @@ impl SMSG_BATTLEFIELD_LIST {
         // battlegrounds: u32[number_of_battlegrounds]
         let battlegrounds = {
             let mut battlegrounds = Vec::with_capacity(number_of_battlegrounds as usize);
+
+            let allocation_size = u64::from(number_of_battlegrounds) * 4;
+            if allocation_size > crate::errors::MAX_ALLOCATION_SIZE_WRATH {
+                return Err(crate::errors::ParseErrorKind::AllocationTooLargeError(allocation_size));
+            }
+
             for _ in 0..number_of_battlegrounds {
                 battlegrounds.push(crate::util::read_u32_le(&mut r)?);
             }

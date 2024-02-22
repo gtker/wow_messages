@@ -29,6 +29,12 @@ impl SMSG_SET_FORCED_REACTIONS {
         // reactions: ForcedReaction[amount_of_reactions]
         let reactions = {
             let mut reactions = Vec::with_capacity(amount_of_reactions as usize);
+
+            let allocation_size = u64::from(amount_of_reactions) * 6;
+            if allocation_size > crate::errors::MAX_ALLOCATION_SIZE {
+                return Err(crate::errors::ParseErrorKind::AllocationTooLargeError(allocation_size));
+            }
+
             for _ in 0..amount_of_reactions {
                 reactions.push(ForcedReaction::read(&mut r)?);
             }

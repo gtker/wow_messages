@@ -27,6 +27,12 @@ impl SMSG_AUCTION_LIST_PENDING_SALES {
         // pending_sales: PendingAuctionSale[amount_of_pending_sales]
         let pending_sales = {
             let mut pending_sales = Vec::with_capacity(amount_of_pending_sales as usize);
+
+            let allocation_size = u64::from(amount_of_pending_sales) * 14;
+            if allocation_size > crate::errors::MAX_ALLOCATION_SIZE_WRATH {
+                return Err(crate::errors::ParseErrorKind::AllocationTooLargeError(allocation_size));
+            }
+
             for _ in 0..amount_of_pending_sales {
                 pending_sales.push(PendingAuctionSale::read(&mut r)?);
             }

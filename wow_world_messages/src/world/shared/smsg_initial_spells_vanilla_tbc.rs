@@ -37,6 +37,12 @@ impl SMSG_INITIAL_SPELLS {
         // initial_spells: InitialSpell[spell_count]
         let initial_spells = {
             let mut initial_spells = Vec::with_capacity(spell_count as usize);
+
+            let allocation_size = u64::from(spell_count) * 4;
+            if allocation_size > crate::errors::MAX_ALLOCATION_SIZE {
+                return Err(crate::errors::ParseErrorKind::AllocationTooLargeError(allocation_size));
+            }
+
             for _ in 0..spell_count {
                 initial_spells.push(InitialSpell::read(&mut r)?);
             }
@@ -49,6 +55,12 @@ impl SMSG_INITIAL_SPELLS {
         // cooldowns: CooldownSpell[cooldown_count]
         let cooldowns = {
             let mut cooldowns = Vec::with_capacity(cooldown_count as usize);
+
+            let allocation_size = u64::from(cooldown_count) * 14;
+            if allocation_size > crate::errors::MAX_ALLOCATION_SIZE {
+                return Err(crate::errors::ParseErrorKind::AllocationTooLargeError(allocation_size));
+            }
+
             for _ in 0..cooldown_count {
                 cooldowns.push(CooldownSpell::read(&mut r)?);
             }

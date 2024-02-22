@@ -31,6 +31,12 @@ impl MSG_BATTLEGROUND_PLAYER_POSITIONS_Server {
         // teammates: BattlegroundPlayerPosition[amount_of_teammates]
         let teammates = {
             let mut teammates = Vec::with_capacity(amount_of_teammates as usize);
+
+            let allocation_size = u64::from(amount_of_teammates) * 16;
+            if allocation_size > crate::errors::MAX_ALLOCATION_SIZE_WRATH {
+                return Err(crate::errors::ParseErrorKind::AllocationTooLargeError(allocation_size));
+            }
+
             for _ in 0..amount_of_teammates {
                 teammates.push(BattlegroundPlayerPosition::read(&mut r)?);
             }

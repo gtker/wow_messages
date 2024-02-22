@@ -49,6 +49,12 @@ impl SMSG_CALENDAR_SEND_CALENDAR {
         // invites: SendCalendarInvite[amount_of_invites]
         let invites = {
             let mut invites = Vec::with_capacity(amount_of_invites as usize);
+
+            let allocation_size = u64::from(amount_of_invites) * 20;
+            if allocation_size > crate::errors::MAX_ALLOCATION_SIZE_WRATH {
+                return Err(crate::errors::ParseErrorKind::AllocationTooLargeError(allocation_size));
+            }
+
             for _ in 0..amount_of_invites {
                 invites.push(SendCalendarInvite::read(&mut r)?);
             }
@@ -61,6 +67,12 @@ impl SMSG_CALENDAR_SEND_CALENDAR {
         // events: SendCalendarEvent[amount_of_events]
         let events = {
             let mut events = Vec::with_capacity(amount_of_events as usize);
+
+            let allocation_size = u64::from(amount_of_events) * 26;
+            if allocation_size > crate::errors::MAX_ALLOCATION_SIZE_WRATH {
+                return Err(crate::errors::ParseErrorKind::AllocationTooLargeError(allocation_size));
+            }
+
             for _ in 0..amount_of_events {
                 events.push(SendCalendarEvent::read(&mut r)?);
             }
@@ -79,6 +91,12 @@ impl SMSG_CALENDAR_SEND_CALENDAR {
         // instances: SendCalendarInstance[amount_of_instances]
         let instances = {
             let mut instances = Vec::with_capacity(amount_of_instances as usize);
+
+            let allocation_size = u64::from(amount_of_instances) * 20;
+            if allocation_size > crate::errors::MAX_ALLOCATION_SIZE_WRATH {
+                return Err(crate::errors::ParseErrorKind::AllocationTooLargeError(allocation_size));
+            }
+
             for _ in 0..amount_of_instances {
                 instances.push(SendCalendarInstance::read(&mut r)?);
             }
@@ -94,6 +112,12 @@ impl SMSG_CALENDAR_SEND_CALENDAR {
         // reset_times: SendCalendarResetTime[amount_of_reset_times]
         let reset_times = {
             let mut reset_times = Vec::with_capacity(amount_of_reset_times as usize);
+
+            let allocation_size = u64::from(amount_of_reset_times) * 12;
+            if allocation_size > crate::errors::MAX_ALLOCATION_SIZE_WRATH {
+                return Err(crate::errors::ParseErrorKind::AllocationTooLargeError(allocation_size));
+            }
+
             for _ in 0..amount_of_reset_times {
                 reset_times.push(SendCalendarResetTime::read(&mut r)?);
             }

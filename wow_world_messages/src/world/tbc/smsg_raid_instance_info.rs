@@ -29,6 +29,12 @@ impl SMSG_RAID_INSTANCE_INFO {
         // raid_infos: RaidInfo[amount_of_raid_infos]
         let raid_infos = {
             let mut raid_infos = Vec::with_capacity(amount_of_raid_infos as usize);
+
+            let allocation_size = u64::from(amount_of_raid_infos) * 16;
+            if allocation_size > crate::errors::MAX_ALLOCATION_SIZE {
+                return Err(crate::errors::ParseErrorKind::AllocationTooLargeError(allocation_size));
+            }
+
             for _ in 0..amount_of_raid_infos {
                 raid_infos.push(RaidInfo::read(&mut r)?);
             }

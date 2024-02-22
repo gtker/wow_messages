@@ -27,6 +27,12 @@ impl SMSG_QUEST_POI_QUERY_RESPONSE {
         // quests: QuestPoiList[amount_of_quests]
         let quests = {
             let mut quests = Vec::with_capacity(amount_of_quests as usize);
+
+            let allocation_size = u64::from(amount_of_quests) * 8;
+            if allocation_size > crate::errors::MAX_ALLOCATION_SIZE_WRATH {
+                return Err(crate::errors::ParseErrorKind::AllocationTooLargeError(allocation_size));
+            }
+
             for _ in 0..amount_of_quests {
                 quests.push(QuestPoiList::read(&mut r)?);
             }

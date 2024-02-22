@@ -25,6 +25,12 @@ impl SMSG_MOTD {
         // motds: CString[amount_of_motds]
         let motds = {
             let mut motds = Vec::with_capacity(amount_of_motds as usize);
+
+            let allocation_size = u64::from(amount_of_motds);
+            if allocation_size > crate::errors::MAX_ALLOCATION_SIZE_WRATH {
+                return Err(crate::errors::ParseErrorKind::AllocationTooLargeError(allocation_size));
+            }
+
             for _ in 0..amount_of_motds {
                 let s = crate::util::read_c_string_to_vec(&mut r)?;
                 motds.push(String::from_utf8(s)?);

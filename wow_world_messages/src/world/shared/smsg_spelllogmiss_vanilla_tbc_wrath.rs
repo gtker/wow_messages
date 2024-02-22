@@ -45,6 +45,12 @@ impl SMSG_SPELLLOGMISS {
         // targets: SpellLogMiss[amount_of_targets]
         let targets = {
             let mut targets = Vec::with_capacity(amount_of_targets as usize);
+
+            let allocation_size = u64::from(amount_of_targets) * 9;
+            if allocation_size > crate::errors::MAX_ALLOCATION_SIZE_WRATH {
+                return Err(crate::errors::ParseErrorKind::AllocationTooLargeError(allocation_size));
+            }
+
             for _ in 0..amount_of_targets {
                 targets.push(SpellLogMiss::read(&mut r)?);
             }

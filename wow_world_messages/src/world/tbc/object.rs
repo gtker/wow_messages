@@ -210,6 +210,12 @@ impl Object {
                 // guids: PackedGuid[count]
                 let guids = {
                     let mut guids = Vec::with_capacity(count as usize);
+
+                    let allocation_size = u64::from(count);
+                    if allocation_size > crate::errors::MAX_ALLOCATION_SIZE {
+                        return Err(crate::errors::ParseErrorKind::AllocationTooLargeError(allocation_size));
+                    }
+
                     for _ in 0..count {
                         guids.push(crate::util::read_packed_guid(&mut r)?);
                     }
@@ -227,6 +233,12 @@ impl Object {
                 // guids: PackedGuid[count]
                 let guids = {
                     let mut guids = Vec::with_capacity(count as usize);
+
+                    let allocation_size = u64::from(count);
+                    if allocation_size > crate::errors::MAX_ALLOCATION_SIZE {
+                        return Err(crate::errors::ParseErrorKind::AllocationTooLargeError(allocation_size));
+                    }
+
                     for _ in 0..count {
                         guids.push(crate::util::read_packed_guid(&mut r)?);
                     }

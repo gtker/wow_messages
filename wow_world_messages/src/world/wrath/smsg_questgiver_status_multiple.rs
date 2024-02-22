@@ -30,6 +30,12 @@ impl SMSG_QUESTGIVER_STATUS_MULTIPLE {
         // statuses: QuestGiverStatusReport[amount_of_statuses]
         let statuses = {
             let mut statuses = Vec::with_capacity(amount_of_statuses as usize);
+
+            let allocation_size = u64::from(amount_of_statuses) * 9;
+            if allocation_size > crate::errors::MAX_ALLOCATION_SIZE_WRATH {
+                return Err(crate::errors::ParseErrorKind::AllocationTooLargeError(allocation_size));
+            }
+
             for _ in 0..amount_of_statuses {
                 statuses.push(QuestGiverStatusReport::read(&mut r)?);
             }

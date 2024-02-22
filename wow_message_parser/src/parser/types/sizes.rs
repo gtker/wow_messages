@@ -67,6 +67,13 @@ impl Sizes {
         Self::default()
     }
 
+    pub(crate) fn exact(min: i128, max: i128) -> Self {
+        Self {
+            minimum: min,
+            maximum: max,
+        }
+    }
+
     pub(crate) fn inc(&mut self, minimum: i128, maximum: i128) {
         self.minimum = self.minimum.saturating_add(minimum);
         self.maximum = self.maximum.saturating_add(maximum);

@@ -29,6 +29,12 @@ impl SMSG_CALENDAR_ARENA_TEAM {
         // members: CalendarMember[amount_of_members]
         let members = {
             let mut members = Vec::with_capacity(amount_of_members as usize);
+
+            let allocation_size = u64::from(amount_of_members) * 2;
+            if allocation_size > crate::errors::MAX_ALLOCATION_SIZE_WRATH {
+                return Err(crate::errors::ParseErrorKind::AllocationTooLargeError(allocation_size));
+            }
+
             for _ in 0..amount_of_members {
                 members.push(CalendarMember::read(&mut r)?);
             }

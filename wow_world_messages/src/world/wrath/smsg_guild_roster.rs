@@ -54,6 +54,12 @@ impl SMSG_GUILD_ROSTER {
         // rights: GuildRights[amount_of_rights]
         let rights = {
             let mut rights = Vec::with_capacity(amount_of_rights as usize);
+
+            let allocation_size = u64::from(amount_of_rights) * 56;
+            if allocation_size > crate::errors::MAX_ALLOCATION_SIZE_WRATH {
+                return Err(crate::errors::ParseErrorKind::AllocationTooLargeError(allocation_size));
+            }
+
             for _ in 0..amount_of_rights {
                 rights.push(GuildRights::read(&mut r)?);
             }
@@ -63,6 +69,12 @@ impl SMSG_GUILD_ROSTER {
         // members: GuildMember[amount_of_members]
         let members = {
             let mut members = Vec::with_capacity(amount_of_members as usize);
+
+            let allocation_size = u64::from(amount_of_members) * 27;
+            if allocation_size > crate::errors::MAX_ALLOCATION_SIZE_WRATH {
+                return Err(crate::errors::ParseErrorKind::AllocationTooLargeError(allocation_size));
+            }
+
             for _ in 0..amount_of_members {
                 members.push(GuildMember::read(&mut r)?);
             }

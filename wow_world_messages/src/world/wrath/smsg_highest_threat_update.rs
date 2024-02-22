@@ -38,6 +38,12 @@ impl SMSG_HIGHEST_THREAT_UPDATE {
         // units: ThreatUpdateUnit[amount_of_units]
         let units = {
             let mut units = Vec::with_capacity(amount_of_units as usize);
+
+            let allocation_size = u64::from(amount_of_units) * 5;
+            if allocation_size > crate::errors::MAX_ALLOCATION_SIZE_WRATH {
+                return Err(crate::errors::ParseErrorKind::AllocationTooLargeError(allocation_size));
+            }
+
             for _ in 0..amount_of_units {
                 units.push(ThreatUpdateUnit::read(&mut r)?);
             }

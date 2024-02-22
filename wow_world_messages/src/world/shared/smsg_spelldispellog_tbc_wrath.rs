@@ -50,6 +50,12 @@ impl SMSG_SPELLDISPELLOG {
         // spells: DispelledSpell[amount_of_spells]
         let spells = {
             let mut spells = Vec::with_capacity(amount_of_spells as usize);
+
+            let allocation_size = u64::from(amount_of_spells) * 5;
+            if allocation_size > crate::errors::MAX_ALLOCATION_SIZE_WRATH {
+                return Err(crate::errors::ParseErrorKind::AllocationTooLargeError(allocation_size));
+            }
+
             for _ in 0..amount_of_spells {
                 spells.push(DispelledSpell::read(&mut r)?);
             }

@@ -37,6 +37,12 @@ impl SMSG_SPELL_UPDATE_CHAIN_TARGETS {
         // targets: Guid[amount_of_targets]
         let targets = {
             let mut targets = Vec::with_capacity(amount_of_targets as usize);
+
+            let allocation_size = u64::from(amount_of_targets) * 8;
+            if allocation_size > crate::errors::MAX_ALLOCATION_SIZE_WRATH {
+                return Err(crate::errors::ParseErrorKind::AllocationTooLargeError(allocation_size));
+            }
+
             for _ in 0..amount_of_targets {
                 targets.push(crate::util::read_guid(&mut r)?);
             }

@@ -101,6 +101,20 @@ impl StructMemberDefinition {
         self.is_manual_size_field.is_some()
     }
 
+    pub(crate) fn manual_size_field_max_value(&self) -> i128 {
+        match self.ty() {
+            Type::Integer(i) => i.largest_value(),
+            _ => panic!("invalid type for manual size field"),
+        }
+    }
+
+    pub(crate) fn manual_size_field_integer_size(&self) -> u8 {
+        match self.ty() {
+            Type::Integer(i) => i.size(),
+            _ => panic!("invalid type for manual size field"),
+        }
+    }
+
     pub(crate) fn tags(&self) -> &MemberTags {
         &self.tags
     }

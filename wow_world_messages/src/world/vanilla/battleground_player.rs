@@ -88,6 +88,12 @@ impl BattlegroundPlayer {
         // fields: u32[amount_of_extra_fields]
         let fields = {
             let mut fields = Vec::with_capacity(amount_of_extra_fields as usize);
+
+            let allocation_size = u64::from(amount_of_extra_fields) * 4;
+            if allocation_size > crate::errors::MAX_ALLOCATION_SIZE {
+                return Err(crate::errors::ParseErrorKind::AllocationTooLargeError(allocation_size));
+            }
+
             for _ in 0..amount_of_extra_fields {
                 fields.push(crate::util::read_u32_le(&mut r)?);
             }

@@ -1,6 +1,7 @@
 use crate::error_printer::invalid_integer_type;
 use crate::file_info::FileInfo;
 use crate::parser::types::parsed::parsed_ty::ParsedType;
+use crate::parser::types::sizes::Sizes;
 use crate::parser::types::version::AllVersions;
 use crate::rust_printer::field_name_to_rust_name;
 use std::cmp::Ordering;
@@ -66,6 +67,10 @@ impl IntegerType {
 
             IntegerType::U48 => 6,
         }
+    }
+
+    pub(crate) fn sizes(&self) -> Sizes {
+        Sizes::exact(self.size().into(), self.size().into())
     }
 
     pub(crate) fn smallest_value(&self) -> i128 {

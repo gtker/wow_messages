@@ -103,6 +103,12 @@ impl LfgPlayer {
         // members: LfgPlayerMember[amount_of_members]
         let members = {
             let mut members = Vec::with_capacity(amount_of_members as usize);
+
+            let allocation_size = u64::from(amount_of_members) * 5;
+            if allocation_size > crate::errors::MAX_ALLOCATION_SIZE {
+                return Err(crate::errors::ParseErrorKind::AllocationTooLargeError(allocation_size));
+            }
+
             for _ in 0..amount_of_members {
                 members.push(LfgPlayerMember::read(&mut r)?);
             }

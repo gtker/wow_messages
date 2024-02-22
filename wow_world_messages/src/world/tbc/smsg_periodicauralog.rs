@@ -45,6 +45,12 @@ impl SMSG_PERIODICAURALOG {
         // auras: AuraLog[amount_of_auras]
         let auras = {
             let mut auras = Vec::with_capacity(amount_of_auras as usize);
+
+            let allocation_size = u64::from(amount_of_auras) * 4;
+            if allocation_size > crate::errors::MAX_ALLOCATION_SIZE {
+                return Err(crate::errors::ParseErrorKind::AllocationTooLargeError(allocation_size));
+            }
+
             for _ in 0..amount_of_auras {
                 auras.push(AuraLog::read(&mut r)?);
             }

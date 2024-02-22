@@ -51,6 +51,12 @@ impl SMSG_GOSSIP_MESSAGE {
         // gossips: GossipItem[amount_of_gossip_items]
         let gossips = {
             let mut gossips = Vec::with_capacity(amount_of_gossip_items as usize);
+
+            let allocation_size = u64::from(amount_of_gossip_items) * 12;
+            if allocation_size > crate::errors::MAX_ALLOCATION_SIZE_WRATH {
+                return Err(crate::errors::ParseErrorKind::AllocationTooLargeError(allocation_size));
+            }
+
             for _ in 0..amount_of_gossip_items {
                 gossips.push(GossipItem::read(&mut r)?);
             }
@@ -63,6 +69,12 @@ impl SMSG_GOSSIP_MESSAGE {
         // quests: QuestItem[amount_of_quests]
         let quests = {
             let mut quests = Vec::with_capacity(amount_of_quests as usize);
+
+            let allocation_size = u64::from(amount_of_quests) * 18;
+            if allocation_size > crate::errors::MAX_ALLOCATION_SIZE_WRATH {
+                return Err(crate::errors::ParseErrorKind::AllocationTooLargeError(allocation_size));
+            }
+
             for _ in 0..amount_of_quests {
                 quests.push(QuestItem::read(&mut r)?);
             }

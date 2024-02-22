@@ -42,6 +42,12 @@ impl SMSG_TRAINER_LIST {
         // spells: TrainerSpell[amount_of_spells]
         let spells = {
             let mut spells = Vec::with_capacity(amount_of_spells as usize);
+
+            let allocation_size = u64::from(amount_of_spells) * 38;
+            if allocation_size > crate::errors::MAX_ALLOCATION_SIZE_WRATH {
+                return Err(crate::errors::ParseErrorKind::AllocationTooLargeError(allocation_size));
+            }
+
             for _ in 0..amount_of_spells {
                 spells.push(TrainerSpell::read(&mut r)?);
             }

@@ -35,6 +35,12 @@ impl MSG_QUERY_NEXT_MAIL_TIME_Server {
         // mails: ReceivedMail[amount_of_mails]
         let mails = {
             let mut mails = Vec::with_capacity(amount_of_mails as usize);
+
+            let allocation_size = u64::from(amount_of_mails) * 24;
+            if allocation_size > crate::errors::MAX_ALLOCATION_SIZE_WRATH {
+                return Err(crate::errors::ParseErrorKind::AllocationTooLargeError(allocation_size));
+            }
+
             for _ in 0..amount_of_mails {
                 mails.push(ReceivedMail::read(&mut r)?);
             }

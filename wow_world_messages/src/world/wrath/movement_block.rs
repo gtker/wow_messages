@@ -370,7 +370,7 @@ crate::util::vanilla_tbc_wrath_vector3d_write_into_vec(&position2, &mut w)?;
 }
 
 impl MovementBlock {
-    pub(crate) fn read<R: std::io::Read>(mut r: R) -> Result<Self, std::io::Error> {
+    pub(crate) fn read<R: std::io::Read>(mut r: R) -> Result<Self, crate::errors::ParseErrorKind> {
         // update_flag: UpdateFlag
         let update_flag = UpdateFlag::new(crate::util::read_u16_le(&mut r)?);
 
@@ -556,6 +556,12 @@ impl MovementBlock {
                 // nodes: Vector3d[amount_of_nodes]
                 let nodes = {
                     let mut nodes = Vec::with_capacity(amount_of_nodes as usize);
+
+                    let allocation_size = u64::from(amount_of_nodes) * 12;
+                    if allocation_size > crate::errors::MAX_ALLOCATION_SIZE_WRATH {
+                        return Err(crate::errors::ParseErrorKind::AllocationTooLargeError(allocation_size));
+                    }
+
                     for _ in 0..amount_of_nodes {
                         nodes.push(crate::util::vanilla_tbc_wrath_vector3d_read(&mut r)?);
                     }

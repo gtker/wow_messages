@@ -37,6 +37,12 @@ impl CMSG_AUCTION_LIST_BIDDER_ITEMS {
         // outbid_item_ids: u32[amount_of_outbid_items]
         let outbid_item_ids = {
             let mut outbid_item_ids = Vec::with_capacity(amount_of_outbid_items as usize);
+
+            let allocation_size = u64::from(amount_of_outbid_items) * 4;
+            if allocation_size > crate::errors::MAX_ALLOCATION_SIZE_WRATH {
+                return Err(crate::errors::ParseErrorKind::AllocationTooLargeError(allocation_size));
+            }
+
             for _ in 0..amount_of_outbid_items {
                 outbid_item_ids.push(crate::util::read_u32_le(&mut r)?);
             }

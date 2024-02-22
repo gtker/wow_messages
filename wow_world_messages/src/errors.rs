@@ -4,7 +4,11 @@ use wow_world_base::DateTimeError;
 
 pub use wow_world_base::EnumError;
 
-pub(crate) const MAX_ALLOCATION_SIZE: u32 = 0x7F_FF_FF_FF;
+#[cfg(any(feature = "vanilla", feature = "tbc"))]
+pub(crate) const MAX_ALLOCATION_SIZE: u64 = 0xFF_FF;
+
+#[cfg(feature = "wrath")]
+pub(crate) const MAX_ALLOCATION_SIZE_WRATH: u64 = 0x7F_FF_FF;
 
 #[derive(Debug)]
 pub struct ParseError {

@@ -207,6 +207,12 @@ impl SMSG_ITEM_QUERY_SINGLE_RESPONSE {
             // stats: ItemStat[amount_of_stats]
             let stats = {
                 let mut stats = Vec::with_capacity(amount_of_stats as usize);
+
+                let allocation_size = u64::from(amount_of_stats) * 8;
+                if allocation_size > crate::errors::MAX_ALLOCATION_SIZE_WRATH {
+                    return Err(crate::errors::ParseErrorKind::AllocationTooLargeError(allocation_size));
+                }
+
                 for _ in 0..amount_of_stats {
                     stats.push(crate::util::tbc_wrath_itemstat_read(&mut r)?);
                 }

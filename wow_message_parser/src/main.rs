@@ -83,6 +83,9 @@ const VALID_RANGE: &str = "valid_range";
 const MAXIMUM_LENGTH: &str = "maximum_length";
 const UNIMPLEMENTED: &str = "unimplemented";
 
+const MAX_ALLOCATION_SIZE: i128 = 0xFF_FF;
+const MAX_ALLOCATION_SIZE_WRATH: i128 = 0x7F_FF_FF;
+
 // Also used in /utils.rs
 const CSTRING_SMALLEST_ALLOWED: u8 = 1;
 const CSTRING_LARGEST_ALLOWED: u16 = 256; // 256 is a guess

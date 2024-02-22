@@ -1,4 +1,12 @@
+use crate::parser::types::definer::Definer;
+use crate::parser::types::objects::conversion::{get_container, get_definer};
+use crate::parser::types::parsed::parsed_container::ParsedContainer;
+use crate::parser::types::sizes::{
+    Sizes, GUID_SIZE, PACKED_GUID_MAX_SIZE, PACKED_GUID_MIN_SIZE, SPELL_SIZE,
+};
+use crate::parser::types::tags::ObjectTags;
 use crate::parser::types::IntegerType;
+use crate::{CSTRING_LARGEST_ALLOWED, CSTRING_SMALLEST_ALLOWED};
 
 #[derive(Debug, Eq, PartialEq, Clone)]
 pub(crate) enum ParsedArrayType {
@@ -80,6 +88,35 @@ impl ParsedArray {
 
     pub(crate) fn size(&self) -> ParsedArraySize {
         self.size.clone()
+    }
+
+    pub(crate) fn inner_sizes(
+        &self,
+        containers: &[ParsedContainer],
+        definers: &[Definer],
+        tags: &ObjectTags,
+    ) -> Sizes {
+        match self.ty() {
+            ParsedArrayType::Integer(i) => i.sizes(),
+            ParsedArrayType::Complex(s) => {
+                if let Some(definer) = get_definer(definers, s, tags) {
+                    definer.ty().sizes()
+                } else if let Some(container) = get_container(containers, s, tags) {
+                    container.create_sizes(containers, definers)
+                } else {
+                    panic!()
+                }
+            }
+            ParsedArrayType::CString => Sizes::exact(
+                CSTRING_SMALLEST_ALLOWED.into(),
+                CSTRING_LARGEST_ALLOWED.into(),
+            ),
+            ParsedArrayType::Guid => Sizes::exact(GUID_SIZE.into(), GUID_SIZE.into()),
+            ParsedArrayType::PackedGuid => {
+                Sizes::exact(PACKED_GUID_MIN_SIZE.into(), PACKED_GUID_MAX_SIZE.into())
+            }
+            ParsedArrayType::Spell => Sizes::exact(SPELL_SIZE.into(), SPELL_SIZE.into()),
+        }
     }
 
     pub(crate) fn str(&self) -> String {

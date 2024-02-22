@@ -15,7 +15,7 @@ use crate::rust_printer::structs::print_common_impls::print_size::{
 };
 use crate::rust_printer::writer::Writer;
 use crate::rust_printer::{get_new_flag_type_name, DefinerType};
-use crate::UTILITY_PATH;
+use crate::{MAX_ALLOCATION_SIZE, MAX_ALLOCATION_SIZE_WRATH, UTILITY_PATH};
 
 fn print_read_array(
     s: &mut Writer,
@@ -63,10 +63,42 @@ fn print_read_array(
             });
         }
         ArraySize::Variable(m) => {
+            let length = m.name();
+
             s.wln(format!(
                 "let mut {name} = Vec::with_capacity({length} as usize);",
-                length = m.name()
             ));
+            let object_min_size = array.ty().sizes().minimum();
+
+            let (max_size, max_alloc_size) = if e.tags().contains_wrath() {
+                ("MAX_ALLOCATION_SIZE_WRATH", MAX_ALLOCATION_SIZE_WRATH)
+            } else {
+                ("MAX_ALLOCATION_SIZE", MAX_ALLOCATION_SIZE)
+            };
+
+            if e.tags().has_world_version()
+                && m.manual_size_field_max_value() * object_min_size > max_alloc_size
+            {
+                s.newline();
+
+                let length = if m.manual_size_field_integer_size() < 8 {
+                    format!("u64::from({length})")
+                } else {
+                    length.to_string()
+                };
+
+                let multiply = if object_min_size == 1 {
+                    "".to_string()
+                } else {
+                    format!(" * {object_min_size}")
+                };
+
+                s.wln(format!("let allocation_size = {length}{multiply};"));
+
+                s.bodyn(format!("if allocation_size > crate::errors::{max_size}"), |s| {
+                    s.wln("return Err(crate::errors::ParseErrorKind::AllocationTooLargeError(allocation_size));");
+                });
+            }
 
             s.body(format!("for _ in 0..{length}", length = m.name()), |s| {
                 print_array_ty(s, array, d, prefix, postfix, false, None);
@@ -326,7 +358,7 @@ fn print_read_definition(
             });
         }
         Type::String => {
-            s.body_no_indent_or_space_with_semicolon( |s| {
+            s.body_no_indent_or_space_with_semicolon(|s| {
                 s.wln(format!(
                     "let {name} = crate::util::{prefix}read_u8_le(&mut r){postfix}?;",
                 ));

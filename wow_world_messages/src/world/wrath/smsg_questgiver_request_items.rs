@@ -100,6 +100,12 @@ impl SMSG_QUESTGIVER_REQUEST_ITEMS {
         // required_items: QuestItemRequirement[amount_of_required_items]
         let required_items = {
             let mut required_items = Vec::with_capacity(amount_of_required_items as usize);
+
+            let allocation_size = u64::from(amount_of_required_items) * 12;
+            if allocation_size > crate::errors::MAX_ALLOCATION_SIZE_WRATH {
+                return Err(crate::errors::ParseErrorKind::AllocationTooLargeError(allocation_size));
+            }
+
             for _ in 0..amount_of_required_items {
                 required_items.push(QuestItemRequirement::read(&mut r)?);
             }

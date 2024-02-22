@@ -26,6 +26,12 @@ impl SMSG_EXPECTED_SPAM_RECORDS {
         // records: CString[amount_of_records]
         let records = {
             let mut records = Vec::with_capacity(amount_of_records as usize);
+
+            let allocation_size = u64::from(amount_of_records);
+            if allocation_size > crate::errors::MAX_ALLOCATION_SIZE {
+                return Err(crate::errors::ParseErrorKind::AllocationTooLargeError(allocation_size));
+            }
+
             for _ in 0..amount_of_records {
                 let s = crate::util::read_c_string_to_vec(&mut r)?;
                 records.push(String::from_utf8(s)?);

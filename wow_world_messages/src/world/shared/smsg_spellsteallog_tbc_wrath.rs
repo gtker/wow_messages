@@ -49,6 +49,12 @@ impl SMSG_SPELLSTEALLOG {
         // spell_steals: SpellSteal[amount_of_spell_steals]
         let spell_steals = {
             let mut spell_steals = Vec::with_capacity(amount_of_spell_steals as usize);
+
+            let allocation_size = u64::from(amount_of_spell_steals) * 5;
+            if allocation_size > crate::errors::MAX_ALLOCATION_SIZE_WRATH {
+                return Err(crate::errors::ParseErrorKind::AllocationTooLargeError(allocation_size));
+            }
+
             for _ in 0..amount_of_spell_steals {
                 spell_steals.push(SpellSteal::read(&mut r)?);
             }

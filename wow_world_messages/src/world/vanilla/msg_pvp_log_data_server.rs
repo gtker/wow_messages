@@ -50,6 +50,12 @@ impl MSG_PVP_LOG_DATA_Server {
         // players: BattlegroundPlayer[amount_of_players]
         let players = {
             let mut players = Vec::with_capacity(amount_of_players as usize);
+
+            let allocation_size = u64::from(amount_of_players) * 32;
+            if allocation_size > crate::errors::MAX_ALLOCATION_SIZE {
+                return Err(crate::errors::ParseErrorKind::AllocationTooLargeError(allocation_size));
+            }
+
             for _ in 0..amount_of_players {
                 players.push(BattlegroundPlayer::read(&mut r)?);
             }

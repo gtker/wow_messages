@@ -3,7 +3,7 @@ use crate::file_info::FileInfo;
 use crate::parser::types::definer::Definer;
 use crate::parser::types::if_statement::DefinerUsage;
 use crate::parser::types::objects::conversion::{get_container, get_definer, get_related};
-use crate::parser::types::parsed::parsed_array::ParsedArrayType;
+use crate::parser::types::parsed::parsed_array::{ParsedArraySize, ParsedArrayType};
 use crate::parser::types::parsed::parsed_if_statement::ParsedIfStatement;
 use crate::parser::types::parsed::parsed_struct_member::{
     ParsedStructMember, ParsedStructMemberDefinition,
@@ -11,7 +11,7 @@ use crate::parser::types::parsed::parsed_struct_member::{
 use crate::parser::types::parsed::parsed_ty::ParsedType;
 use crate::parser::types::sizes::Sizes;
 use crate::parser::types::tags::ObjectTags;
-use crate::{ContainerType, DefinerType};
+use crate::{ContainerType, DefinerType, MAX_ALLOCATION_SIZE, MAX_ALLOCATION_SIZE_WRATH};
 
 #[derive(Debug, Clone)]
 pub(crate) struct ParsedContainer {
@@ -305,6 +305,10 @@ impl ParsedContainer {
         containers: &[Self],
         definers: &[Definer],
     ) -> bool {
+        if self.contains_type_that_can_have_allocation_too_large_error(containers, definers) {
+            return false;
+        }
+
         if self.contains_string_or_cstring() {
             return false;
         }
@@ -335,6 +339,46 @@ impl ParsedContainer {
         for d in self.all_definitions() {
             if d.ty() == &ParsedType::DateTime {
                 return true;
+            }
+        }
+
+        false
+    }
+
+    pub(crate) fn contains_type_that_can_have_allocation_too_large_error(
+        &self,
+        containers: &[Self],
+        definers: &[Definer],
+    ) -> bool {
+        for d in self.all_definitions() {
+            match d.ty() {
+                ParsedType::SizedCString => return true,
+                ParsedType::Array(array) => {
+                    if let ParsedArraySize::Variable(m) = array.size() {
+                        let field = self.get_field(&m);
+                        let size_field_max_value = match field.ty() {
+                            ParsedType::Integer(i) => i.largest_value(),
+                            _ => panic!(),
+                        };
+
+                        let object_min_size = array
+                            .inner_sizes(containers, definers, self.tags())
+                            .minimum();
+
+                        let max_size = if self.tags.contains_wrath() {
+                            MAX_ALLOCATION_SIZE_WRATH
+                        } else {
+                            MAX_ALLOCATION_SIZE
+                        };
+
+                        if self.tags().has_world_version()
+                            && size_field_max_value * object_min_size > max_size
+                        {
+                            return true;
+                        }
+                    }
+                }
+                _ => {}
             }
         }
 

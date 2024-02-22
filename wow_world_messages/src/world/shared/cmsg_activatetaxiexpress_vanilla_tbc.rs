@@ -38,6 +38,12 @@ impl CMSG_ACTIVATETAXIEXPRESS {
         // nodes: u32[node_count]
         let nodes = {
             let mut nodes = Vec::with_capacity(node_count as usize);
+
+            let allocation_size = u64::from(node_count) * 4;
+            if allocation_size > crate::errors::MAX_ALLOCATION_SIZE {
+                return Err(crate::errors::ParseErrorKind::AllocationTooLargeError(allocation_size));
+            }
+
             for _ in 0..node_count {
                 nodes.push(crate::util::read_u32_le(&mut r)?);
             }

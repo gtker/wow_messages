@@ -28,6 +28,12 @@ impl SMSG_EQUIPMENT_SET_LIST {
         // equipment_sets: EquipmentSetListItem[amount_of_equipment_sets]
         let equipment_sets = {
             let mut equipment_sets = Vec::with_capacity(amount_of_equipment_sets as usize);
+
+            let allocation_size = u64::from(amount_of_equipment_sets) * 162;
+            if allocation_size > crate::errors::MAX_ALLOCATION_SIZE_WRATH {
+                return Err(crate::errors::ParseErrorKind::AllocationTooLargeError(allocation_size));
+            }
+
             for _ in 0..amount_of_equipment_sets {
                 equipment_sets.push(EquipmentSetListItem::read(&mut r)?);
             }

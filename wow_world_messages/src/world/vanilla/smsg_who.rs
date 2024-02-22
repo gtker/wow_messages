@@ -35,6 +35,12 @@ impl SMSG_WHO {
         // players: WhoPlayer[listed_players]
         let players = {
             let mut players = Vec::with_capacity(listed_players as usize);
+
+            let allocation_size = u64::from(listed_players) * 16;
+            if allocation_size > crate::errors::MAX_ALLOCATION_SIZE {
+                return Err(crate::errors::ParseErrorKind::AllocationTooLargeError(allocation_size));
+            }
+
             for _ in 0..listed_players {
                 players.push(WhoPlayer::read(&mut r)?);
             }
