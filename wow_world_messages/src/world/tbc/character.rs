@@ -187,7 +187,7 @@ impl Character {
         let flags = crate::util::read_u32_le(&mut r)?;
 
         // first_login: Bool
-        let first_login = crate::util::read_u8_le(&mut r)? != 0;
+        let first_login = crate::util::read_bool_u8(&mut r)?;
 
         // pet_display_id: u32
         let pet_display_id = crate::util::read_u32_le(&mut r)?;

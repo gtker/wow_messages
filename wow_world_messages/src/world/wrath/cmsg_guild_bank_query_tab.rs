@@ -31,7 +31,7 @@ impl CMSG_GUILD_BANK_QUERY_TAB {
         let tab = crate::util::read_u8_le(&mut r)?;
 
         // full_update: Bool
-        let full_update = crate::util::read_u8_le(&mut r)? != 0;
+        let full_update = crate::util::read_bool_u8(&mut r)?;
 
         Ok(Self {
             bank,

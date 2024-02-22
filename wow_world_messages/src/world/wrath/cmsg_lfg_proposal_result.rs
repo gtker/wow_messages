@@ -24,7 +24,7 @@ impl CMSG_LFG_PROPOSAL_RESULT {
         let proposal_id = crate::util::read_u32_le(&mut r)?;
 
         // accept_join: Bool
-        let accept_join = crate::util::read_u8_le(&mut r)? != 0;
+        let accept_join = crate::util::read_bool_u8(&mut r)?;
 
         Ok(Self {
             proposal_id,

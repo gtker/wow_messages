@@ -103,7 +103,7 @@ impl TradeSlot {
         let stack_count = crate::util::read_u32_le(&mut r)?;
 
         // wrapped: Bool32
-        let wrapped = crate::util::read_u32_le(&mut r)? != 0;
+        let wrapped = crate::util::read_bool_u32(&mut r)?;
 
         // gift_wrapper: Guid
         let gift_wrapper = crate::util::read_guid(&mut r)?;

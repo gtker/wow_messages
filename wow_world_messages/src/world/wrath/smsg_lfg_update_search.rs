@@ -19,7 +19,7 @@ impl SMSG_LFG_UPDATE_SEARCH {
         }
 
         // in_lfg_queue: Bool
-        let in_lfg_queue = crate::util::read_u8_le(&mut r)? != 0;
+        let in_lfg_queue = crate::util::read_bool_u8(&mut r)?;
 
         Ok(Self {
             in_lfg_queue,

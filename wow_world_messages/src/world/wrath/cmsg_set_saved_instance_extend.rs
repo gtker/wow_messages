@@ -33,7 +33,7 @@ impl CMSG_SET_SAVED_INSTANCE_EXTEND {
         let difficulty = crate::util::read_u8_le(&mut r)?.try_into()?;
 
         // toggle_extend: Bool
-        let toggle_extend = crate::util::read_u8_le(&mut r)? != 0;
+        let toggle_extend = crate::util::read_bool_u8(&mut r)?;
 
         Ok(Self {
             map,

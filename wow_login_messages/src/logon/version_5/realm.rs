@@ -79,7 +79,7 @@ impl Realm {
         let realm_type = crate::util::read_u8_le(&mut r)?.try_into()?;
 
         // locked: Bool
-        let locked = crate::util::read_u8_le(&mut r)? != 0;
+        let locked = crate::util::read_bool_u8(&mut r)?;
 
         // flag: RealmFlag
         let flag = RealmFlag::new(crate::util::read_u8_le(&mut r)?);
@@ -127,7 +127,7 @@ impl Realm {
         let realm_type = crate::util::tokio_read_u8_le(&mut r).await?.try_into()?;
 
         // locked: Bool
-        let locked = crate::util::tokio_read_u8_le(&mut r).await? != 0;
+        let locked = crate::util::tokio_read_bool_u8(&mut r).await?;
 
         // flag: RealmFlag
         let flag = RealmFlag::new(crate::util::tokio_read_u8_le(&mut r).await?);
@@ -175,7 +175,7 @@ impl Realm {
         let realm_type = crate::util::astd_read_u8_le(&mut r).await?.try_into()?;
 
         // locked: Bool
-        let locked = crate::util::astd_read_u8_le(&mut r).await? != 0;
+        let locked = crate::util::astd_read_bool_u8(&mut r).await?;
 
         // flag: RealmFlag
         let flag = RealmFlag::new(crate::util::astd_read_u8_le(&mut r).await?);

@@ -34,10 +34,10 @@ impl CMSG_BATTLEMASTER_JOIN_ARENA {
         let arena_type = crate::util::read_u8_le(&mut r)?.try_into()?;
 
         // as_group: Bool
-        let as_group = crate::util::read_u8_le(&mut r)? != 0;
+        let as_group = crate::util::read_bool_u8(&mut r)?;
 
         // rated: Bool
-        let rated = crate::util::read_u8_le(&mut r)? != 0;
+        let rated = crate::util::read_bool_u8(&mut r)?;
 
         Ok(Self {
             battlemaster,

@@ -31,7 +31,7 @@ impl CMSG_REPAIR_ITEM {
         let item = crate::util::read_guid(&mut r)?;
 
         // from_guild_bank: Bool
-        let from_guild_bank = crate::util::read_u8_le(&mut r)? != 0;
+        let from_guild_bank = crate::util::read_bool_u8(&mut r)?;
 
         Ok(Self {
             npc,

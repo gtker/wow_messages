@@ -21,10 +21,10 @@ impl CMSG_VOICE_SESSION_ENABLE {
         }
 
         // voice_enabled: Bool
-        let voice_enabled = crate::util::read_u8_le(&mut r)? != 0;
+        let voice_enabled = crate::util::read_bool_u8(&mut r)?;
 
         // microphone_enabled: Bool
-        let microphone_enabled = crate::util::read_u8_le(&mut r)? != 0;
+        let microphone_enabled = crate::util::read_bool_u8(&mut r)?;
 
         Ok(Self {
             voice_enabled,

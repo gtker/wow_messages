@@ -34,7 +34,7 @@ impl CMSG_PET_RENAME {
         };
 
         // declined: Bool
-        let declined = crate::util::read_u8_le(&mut r)? != 0;
+        let declined = crate::util::read_bool_u8(&mut r)?;
 
         Ok(Self {
             pet,

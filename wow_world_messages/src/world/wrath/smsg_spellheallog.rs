@@ -54,7 +54,7 @@ impl SMSG_SPELLHEALLOG {
         let absorb = crate::util::read_u32_le(&mut r)?;
 
         // critical: Bool
-        let critical = crate::util::read_u8_le(&mut r)? != 0;
+        let critical = crate::util::read_bool_u8(&mut r)?;
 
         // unknown: u8
         let unknown = crate::util::read_u8_le(&mut r)?;

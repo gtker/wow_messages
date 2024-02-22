@@ -63,7 +63,7 @@ impl SMSG_TRADE_STATUS {
                 let inventory_result = (crate::util::read_u32_le(&mut r)? as u8).try_into()?;
 
                 // target_error: Bool
-                let target_error = crate::util::read_u8_le(&mut r)? != 0;
+                let target_error = crate::util::read_bool_u8(&mut r)?;
 
                 // item_limit_category_id: u32
                 let item_limit_category_id = crate::util::read_u32_le(&mut r)?;

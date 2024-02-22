@@ -30,6 +30,18 @@ pub async fn astd_read_c_string_to_vec<R: ReadExt + Unpin>(
     Ok(v)
 }
 
+pub async fn astd_read_bool_u8<R: ReadExt + Unpin + Unpin>(
+    mut r: R,
+) -> Result<bool, std::io::Error> {
+    let v = astd_read_u8_le(&mut r).await?;
+
+    Ok(match v {
+        0 => false,
+        1 => true,
+        v => panic!("invalid integer for bool: {v}"),
+    })
+}
+
 // u8
 pub async fn astd_read_u8_le<R: ReadExt + Unpin + Unpin>(mut r: R) -> Result<u8, std::io::Error> {
     let mut v = [0_u8; 1];

@@ -33,7 +33,7 @@ impl SMSG_PLAYED_TIME {
         let level_played_time = crate::util::read_u32_le(&mut r)?;
 
         // show_on_ui: Bool
-        let show_on_ui = crate::util::read_u8_le(&mut r)? != 0;
+        let show_on_ui = crate::util::read_bool_u8(&mut r)?;
 
         Ok(Self {
             total_played_time,

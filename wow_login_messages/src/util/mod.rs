@@ -42,6 +42,16 @@ pub fn read_c_string_to_vec<R: Read>(r: &mut R) -> Result<Vec<u8>, std::io::Erro
     Ok(v)
 }
 
+pub fn read_bool_u8<R: Read>(r: &mut R) -> Result<bool, std::io::Error> {
+    let v = read_u8_le(r)?;
+
+    Ok(match v {
+        0 => false,
+        1 => true,
+        v => panic!("invalid integer for bool: {v}"),
+    })
+}
+
 // u8
 pub fn read_u8_le<R: Read>(r: &mut R) -> Result<u8, std::io::Error> {
     let mut v = [0_u8; 1];

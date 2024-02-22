@@ -34,7 +34,7 @@ impl SMSG_BATTLEFIELD_MGR_ENTERED {
         let unknown2 = crate::util::read_u8_le(&mut r)?;
 
         // clear_afk: Bool
-        let clear_afk = crate::util::read_u8_le(&mut r)? != 0;
+        let clear_afk = crate::util::read_bool_u8(&mut r)?;
 
         Ok(Self {
             battle_id,

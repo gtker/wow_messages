@@ -19,7 +19,7 @@ impl SMSG_PLAYER_SKINNED {
         }
 
         // spirit_released: Bool
-        let spirit_released = crate::util::read_u8_le(&mut r)? != 0;
+        let spirit_released = crate::util::read_bool_u8(&mut r)?;
 
         Ok(Self {
             spirit_released,

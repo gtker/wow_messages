@@ -43,7 +43,7 @@ impl SMSG_START_MIRROR_TIMER {
         let scale = crate::util::read_u32_le(&mut r)?;
 
         // is_frozen: Bool
-        let is_frozen = crate::util::read_u8_le(&mut r)? != 0;
+        let is_frozen = crate::util::read_bool_u8(&mut r)?;
 
         // id: Spell
         let id = crate::util::read_u32_le(&mut r)?;

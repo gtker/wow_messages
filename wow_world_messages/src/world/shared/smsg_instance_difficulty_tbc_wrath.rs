@@ -24,7 +24,7 @@ impl SMSG_INSTANCE_DIFFICULTY {
         let difficulty = crate::util::read_u32_le(&mut r)?;
 
         // dynamic_difficulty: Bool32
-        let dynamic_difficulty = crate::util::read_u32_le(&mut r)? != 0;
+        let dynamic_difficulty = crate::util::read_bool_u32(&mut r)?;
 
         Ok(Self {
             difficulty,

@@ -272,7 +272,7 @@ impl LfgListPlayer {
             let mana = crate::util::read_u32_le(&mut r)?;
 
             // online: Bool32
-            let online = crate::util::read_u32_le(&mut r)? != 0;
+            let online = crate::util::read_bool_u32(&mut r)?;
 
             // average_item_level: u32
             let average_item_level = crate::util::read_u32_le(&mut r)?;
@@ -345,7 +345,7 @@ impl LfgListPlayer {
 
         let flags_group_leader = if flags.is_group_leader() {
             // is_looking_for_more: Bool
-            let is_looking_for_more = crate::util::read_u8_le(&mut r)? != 0;
+            let is_looking_for_more = crate::util::read_bool_u8(&mut r)?;
 
             Some(LfgListPlayer_LfgUpdateFlag_GroupLeader {
                 is_looking_for_more,

@@ -32,7 +32,7 @@ impl MSG_AUCTION_HELLO_Server {
         let auction_house = crate::util::read_u32_le(&mut r)?.try_into()?;
 
         // auction_house_enabled: Bool
-        let auction_house_enabled = crate::util::read_u8_le(&mut r)? != 0;
+        let auction_house_enabled = crate::util::read_bool_u8(&mut r)?;
 
         Ok(Self {
             auctioneer,

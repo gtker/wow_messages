@@ -44,7 +44,7 @@ impl LfgRole {
         let guid = crate::util::read_guid(&mut r)?;
 
         // ready: Bool
-        let ready = crate::util::read_u8_le(&mut r)? != 0;
+        let ready = crate::util::read_bool_u8(&mut r)?;
 
         // roles: u32
         let roles = crate::util::read_u32_le(&mut r)?;

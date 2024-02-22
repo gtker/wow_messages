@@ -39,7 +39,7 @@ impl SMSG_TRADE_STATUS_EXTENDED {
         }
 
         // self_player: Bool
-        let self_player = crate::util::read_u8_le(&mut r)? != 0;
+        let self_player = crate::util::read_bool_u8(&mut r)?;
 
         // trade_slot_count1: u32
         let trade_slot_count1 = crate::util::read_u32_le(&mut r)?;

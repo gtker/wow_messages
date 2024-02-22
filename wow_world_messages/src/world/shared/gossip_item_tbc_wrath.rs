@@ -68,7 +68,7 @@ impl GossipItem {
         let item_icon = crate::util::read_u8_le(&mut r)?;
 
         // coded: Bool
-        let coded = crate::util::read_u8_le(&mut r)? != 0;
+        let coded = crate::util::read_bool_u8(&mut r)?;
 
         // money_required: Gold
         let money_required = Gold::new(crate::util::read_u32_le(&mut r)?);

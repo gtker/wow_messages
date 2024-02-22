@@ -19,7 +19,7 @@ impl SMSG_GMRESPONSE_STATUS_UPDATE {
         }
 
         // show_survey: Bool
-        let show_survey = crate::util::read_u8_le(&mut r)? != 0;
+        let show_survey = crate::util::read_bool_u8(&mut r)?;
 
         Ok(Self {
             show_survey,

@@ -19,7 +19,7 @@ impl CMSG_OPT_OUT_OF_LOOT {
         }
 
         // pass_on_loot: Bool32
-        let pass_on_loot = crate::util::read_u32_le(&mut r)? != 0;
+        let pass_on_loot = crate::util::read_bool_u32(&mut r)?;
 
         Ok(Self {
             pass_on_loot,

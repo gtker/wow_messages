@@ -35,13 +35,13 @@ impl SMSG_BATTLEFIELD_MGR_QUEUE_REQUEST_RESPONSE {
         let area = crate::util::read_u32_le(&mut r)?.try_into()?;
 
         // queued: Bool
-        let queued = crate::util::read_u8_le(&mut r)? != 0;
+        let queued = crate::util::read_bool_u8(&mut r)?;
 
         // full: Bool
-        let full = crate::util::read_u8_le(&mut r)? != 0;
+        let full = crate::util::read_bool_u8(&mut r)?;
 
         // warmup: Bool
-        let warmup = crate::util::read_u8_le(&mut r)? != 0;
+        let warmup = crate::util::read_bool_u8(&mut r)?;
 
         Ok(Self {
             battle_id,

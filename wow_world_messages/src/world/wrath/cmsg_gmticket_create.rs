@@ -49,10 +49,10 @@ impl CMSG_GMTICKET_CREATE {
         };
 
         // needs_response: Bool
-        let needs_response = crate::util::read_u8_le(&mut r)? != 0;
+        let needs_response = crate::util::read_bool_u8(&mut r)?;
 
         // needs_more_help: Bool
-        let needs_more_help = crate::util::read_u8_le(&mut r)? != 0;
+        let needs_more_help = crate::util::read_bool_u8(&mut r)?;
 
         // num_of_times: u32
         let num_of_times = crate::util::read_u32_le(&mut r)?;

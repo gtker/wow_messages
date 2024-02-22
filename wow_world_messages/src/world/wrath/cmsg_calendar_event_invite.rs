@@ -41,10 +41,10 @@ impl CMSG_CALENDAR_EVENT_INVITE {
         };
 
         // pre_event: Bool
-        let pre_event = crate::util::read_u8_le(&mut r)? != 0;
+        let pre_event = crate::util::read_bool_u8(&mut r)?;
 
         // guild_event: Bool
-        let guild_event = crate::util::read_u8_le(&mut r)? != 0;
+        let guild_event = crate::util::read_bool_u8(&mut r)?;
 
         Ok(Self {
             event,

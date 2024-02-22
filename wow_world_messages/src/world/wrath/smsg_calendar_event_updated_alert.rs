@@ -45,7 +45,7 @@ impl SMSG_CALENDAR_EVENT_UPDATED_ALERT {
         }
 
         // show_alert: Bool
-        let show_alert = crate::util::read_u8_le(&mut r)? != 0;
+        let show_alert = crate::util::read_bool_u8(&mut r)?;
 
         // event_id: Guid
         let event_id = crate::util::read_guid(&mut r)?;

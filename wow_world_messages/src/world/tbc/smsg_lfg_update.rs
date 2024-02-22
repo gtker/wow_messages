@@ -30,10 +30,10 @@ impl SMSG_LFG_UPDATE {
         }
 
         // queued: Bool
-        let queued = crate::util::read_u8_le(&mut r)? != 0;
+        let queued = crate::util::read_bool_u8(&mut r)?;
 
         // is_looking_for_group: Bool
-        let is_looking_for_group = crate::util::read_u8_le(&mut r)? != 0;
+        let is_looking_for_group = crate::util::read_bool_u8(&mut r)?;
 
         // looking_for_more: LfgUpdateLookingForMore
         let looking_for_more = crate::util::read_u8_le(&mut r)?.try_into()?;

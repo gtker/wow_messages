@@ -54,7 +54,7 @@ impl GroupListMember {
         let guid = crate::util::read_guid(&mut r)?;
 
         // is_online: Bool
-        let is_online = crate::util::read_u8_le(&mut r)? != 0;
+        let is_online = crate::util::read_bool_u8(&mut r)?;
 
         // flags: u8
         let flags = crate::util::read_u8_le(&mut r)?;

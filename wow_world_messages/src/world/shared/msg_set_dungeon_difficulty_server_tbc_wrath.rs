@@ -32,7 +32,7 @@ impl MSG_SET_DUNGEON_DIFFICULTY_Server {
         let unknown1 = crate::util::read_u32_le(&mut r)?;
 
         // is_in_group: Bool32
-        let is_in_group = crate::util::read_u32_le(&mut r)? != 0;
+        let is_in_group = crate::util::read_bool_u32(&mut r)?;
 
         Ok(Self {
             difficulty,

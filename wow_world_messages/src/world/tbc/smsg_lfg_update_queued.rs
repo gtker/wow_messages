@@ -19,7 +19,7 @@ impl SMSG_LFG_UPDATE_QUEUED {
         }
 
         // queued: Bool
-        let queued = crate::util::read_u8_le(&mut r)? != 0;
+        let queued = crate::util::read_bool_u8(&mut r)?;
 
         Ok(Self {
             queued,

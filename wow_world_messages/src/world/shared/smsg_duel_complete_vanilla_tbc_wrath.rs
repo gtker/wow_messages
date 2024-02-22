@@ -19,7 +19,7 @@ impl SMSG_DUEL_COMPLETE {
         }
 
         // ended_without_interruption: Bool
-        let ended_without_interruption = crate::util::read_u8_le(&mut r)? != 0;
+        let ended_without_interruption = crate::util::read_bool_u8(&mut r)?;
 
         Ok(Self {
             ended_without_interruption,

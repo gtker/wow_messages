@@ -34,7 +34,7 @@ impl CMSG_BATTLEFIELD_LIST {
         let location = crate::util::read_u8_le(&mut r)?.try_into()?;
 
         // can_gain_exp: Bool
-        let can_gain_exp = crate::util::read_u8_le(&mut r)? != 0;
+        let can_gain_exp = crate::util::read_bool_u8(&mut r)?;
 
         Ok(Self {
             battleground_type,

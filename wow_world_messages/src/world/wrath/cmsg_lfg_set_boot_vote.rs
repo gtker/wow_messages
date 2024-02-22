@@ -19,7 +19,7 @@ impl CMSG_LFG_SET_BOOT_VOTE {
         }
 
         // agree_to_kick_player: Bool
-        let agree_to_kick_player = crate::util::read_u8_le(&mut r)? != 0;
+        let agree_to_kick_player = crate::util::read_bool_u8(&mut r)?;
 
         Ok(Self {
             agree_to_kick_player,

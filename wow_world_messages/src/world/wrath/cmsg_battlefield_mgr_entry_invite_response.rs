@@ -24,7 +24,7 @@ impl CMSG_BATTLEFIELD_MGR_ENTRY_INVITE_RESPONSE {
         let battle_id = crate::util::read_u32_le(&mut r)?;
 
         // accepted: Bool
-        let accepted = crate::util::read_u8_le(&mut r)? != 0;
+        let accepted = crate::util::read_bool_u8(&mut r)?;
 
         Ok(Self {
             battle_id,

@@ -26,7 +26,7 @@ impl SMSG_FEATURE_SYSTEM_STATUS {
         let complaint_status = crate::util::read_u8_le(&mut r)?.try_into()?;
 
         // voice_chat_enabled: Bool
-        let voice_chat_enabled = crate::util::read_u8_le(&mut r)? != 0;
+        let voice_chat_enabled = crate::util::read_bool_u8(&mut r)?;
 
         Ok(Self {
             complaint_status,

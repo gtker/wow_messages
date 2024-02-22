@@ -80,7 +80,7 @@ impl SMSG_QUESTGIVER_REQUEST_ITEMS {
         let emote = crate::util::read_u32_le(&mut r)?;
 
         // auto_finish: Bool32
-        let auto_finish = crate::util::read_u32_le(&mut r)? != 0;
+        let auto_finish = crate::util::read_bool_u32(&mut r)?;
 
         // suggested_players: u32
         let suggested_players = crate::util::read_u32_le(&mut r)?;

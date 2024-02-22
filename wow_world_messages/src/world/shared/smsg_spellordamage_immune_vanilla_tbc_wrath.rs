@@ -36,7 +36,7 @@ impl SMSG_SPELLORDAMAGE_IMMUNE {
         let id = crate::util::read_u32_le(&mut r)?;
 
         // debug_log_format: Bool
-        let debug_log_format = crate::util::read_u8_le(&mut r)? != 0;
+        let debug_log_format = crate::util::read_bool_u8(&mut r)?;
 
         Ok(Self {
             caster,

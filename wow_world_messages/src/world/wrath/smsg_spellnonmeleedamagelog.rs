@@ -75,7 +75,7 @@ impl SMSG_SPELLNONMELEEDAMAGELOG {
         let resisted = crate::util::read_u32_le(&mut r)?;
 
         // periodic_log: Bool
-        let periodic_log = crate::util::read_u8_le(&mut r)? != 0;
+        let periodic_log = crate::util::read_bool_u8(&mut r)?;
 
         // unused: u8
         let unused = crate::util::read_u8_le(&mut r)?;

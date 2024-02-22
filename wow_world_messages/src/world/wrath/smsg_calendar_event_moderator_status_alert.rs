@@ -36,7 +36,7 @@ impl SMSG_CALENDAR_EVENT_MODERATOR_STATUS_ALERT {
         let rank = crate::util::read_u8_le(&mut r)?;
 
         // show_alert: Bool
-        let show_alert = crate::util::read_u8_le(&mut r)? != 0;
+        let show_alert = crate::util::read_bool_u8(&mut r)?;
 
         Ok(Self {
             invitee,

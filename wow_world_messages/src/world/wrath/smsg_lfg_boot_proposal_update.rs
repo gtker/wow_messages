@@ -38,13 +38,13 @@ impl SMSG_LFG_BOOT_PROPOSAL_UPDATE {
         }
 
         // vote_in_progress: Bool
-        let vote_in_progress = crate::util::read_u8_le(&mut r)? != 0;
+        let vote_in_progress = crate::util::read_bool_u8(&mut r)?;
 
         // did_vote: Bool
-        let did_vote = crate::util::read_u8_le(&mut r)? != 0;
+        let did_vote = crate::util::read_bool_u8(&mut r)?;
 
         // agreed_with_kick: Bool
-        let agreed_with_kick = crate::util::read_u8_le(&mut r)? != 0;
+        let agreed_with_kick = crate::util::read_bool_u8(&mut r)?;
 
         // victim: Guid
         let victim = crate::util::read_guid(&mut r)?;

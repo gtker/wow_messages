@@ -82,7 +82,7 @@ impl SMSG_CAST_FAILED {
         let result = crate::util::read_u8_le(&mut r)?.try_into()?;
 
         // multiple_casts: Bool
-        let multiple_casts = crate::util::read_u8_le(&mut r)? != 0;
+        let multiple_casts = crate::util::read_bool_u8(&mut r)?;
 
         let result_if = match result {
             SpellCastResult::Success => SMSG_CAST_FAILED_SpellCastResult::Success,

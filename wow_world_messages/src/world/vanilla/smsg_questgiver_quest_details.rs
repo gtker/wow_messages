@@ -73,7 +73,7 @@ impl SMSG_QUESTGIVER_QUEST_DETAILS {
         };
 
         // auto_finish: Bool32
-        let auto_finish = crate::util::read_u32_le(&mut r)? != 0;
+        let auto_finish = crate::util::read_bool_u32(&mut r)?;
 
         // amount_of_choice_item_rewards: u32
         let amount_of_choice_item_rewards = crate::util::read_u32_le(&mut r)?;

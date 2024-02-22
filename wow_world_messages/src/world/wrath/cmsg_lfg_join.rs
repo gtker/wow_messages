@@ -34,10 +34,10 @@ impl CMSG_LFG_JOIN {
         let roles = crate::util::read_u32_le(&mut r)?;
 
         // no_partial_clear: Bool
-        let no_partial_clear = crate::util::read_u8_le(&mut r)? != 0;
+        let no_partial_clear = crate::util::read_bool_u8(&mut r)?;
 
         // achievements: Bool
-        let achievements = crate::util::read_u8_le(&mut r)? != 0;
+        let achievements = crate::util::read_bool_u8(&mut r)?;
 
         // amount_of_slots: u8
         let amount_of_slots = crate::util::read_u8_le(&mut r)?;

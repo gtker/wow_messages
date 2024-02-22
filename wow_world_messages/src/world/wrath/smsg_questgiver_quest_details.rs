@@ -115,7 +115,7 @@ impl SMSG_QUESTGIVER_QUEST_DETAILS {
         };
 
         // auto_finish: Bool
-        let auto_finish = crate::util::read_u8_le(&mut r)? != 0;
+        let auto_finish = crate::util::read_bool_u8(&mut r)?;
 
         // quest_flags: u32
         let quest_flags = crate::util::read_u32_le(&mut r)?;

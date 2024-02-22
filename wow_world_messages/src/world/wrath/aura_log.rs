@@ -198,7 +198,7 @@ impl AuraLog {
                 let resisted = crate::util::read_u32_le(&mut r)?;
 
                 // critical1: Bool
-                let critical1 = crate::util::read_u8_le(&mut r)? != 0;
+                let critical1 = crate::util::read_bool_u8(&mut r)?;
 
                 AuraLog_AuraType::PeriodicDamage {
                     absorb1,
@@ -224,7 +224,7 @@ impl AuraLog {
                 let absorb2 = crate::util::read_u32_le(&mut r)?;
 
                 // critical2: Bool
-                let critical2 = crate::util::read_u8_le(&mut r)? != 0;
+                let critical2 = crate::util::read_bool_u8(&mut r)?;
 
                 AuraLog_AuraType::PeriodicHeal {
                     absorb2,
@@ -255,7 +255,7 @@ impl AuraLog {
                 let absorb2 = crate::util::read_u32_le(&mut r)?;
 
                 // critical2: Bool
-                let critical2 = crate::util::read_u8_le(&mut r)? != 0;
+                let critical2 = crate::util::read_bool_u8(&mut r)?;
 
                 AuraLog_AuraType::ObsModHealth {
                     absorb2,
@@ -375,7 +375,7 @@ impl AuraLog {
                 let resisted = crate::util::read_u32_le(&mut r)?;
 
                 // critical1: Bool
-                let critical1 = crate::util::read_u8_le(&mut r)? != 0;
+                let critical1 = crate::util::read_bool_u8(&mut r)?;
 
                 AuraLog_AuraType::PeriodicDamagePercent {
                     absorb1,

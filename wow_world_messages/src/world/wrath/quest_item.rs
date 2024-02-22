@@ -67,7 +67,7 @@ impl QuestItem {
         let flags = crate::util::read_u32_le(&mut r)?;
 
         // repeatable: Bool
-        let repeatable = crate::util::read_u8_le(&mut r)? != 0;
+        let repeatable = crate::util::read_bool_u8(&mut r)?;
 
         // title: CString
         let title = {

@@ -39,7 +39,7 @@ impl CMSG_BATTLEMASTER_JOIN {
         let instance_id = crate::util::read_u32_le(&mut r)?;
 
         // join_as_group: Bool
-        let join_as_group = crate::util::read_u8_le(&mut r)? != 0;
+        let join_as_group = crate::util::read_bool_u8(&mut r)?;
 
         Ok(Self {
             guid,

@@ -64,7 +64,7 @@ impl CMSG_CALENDAR_UPDATE_EVENT {
         let event_type = crate::util::read_u8_le(&mut r)?;
 
         // repeatable: Bool
-        let repeatable = crate::util::read_u8_le(&mut r)? != 0;
+        let repeatable = crate::util::read_bool_u8(&mut r)?;
 
         // maximum_invites: u32
         let maximum_invites = crate::util::read_u32_le(&mut r)?;

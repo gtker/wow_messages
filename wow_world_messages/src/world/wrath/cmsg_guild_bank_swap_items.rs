@@ -84,7 +84,7 @@ impl CMSG_GUILD_BANK_SWAP_ITEMS {
                         let player_bag_slot = crate::util::read_u8_le(&mut r)?;
 
                         // bank_to_character_transfer: Bool
-                        let bank_to_character_transfer = crate::util::read_u8_le(&mut r)? != 0;
+                        let bank_to_character_transfer = crate::util::read_bool_u8(&mut r)?;
 
                         // split_amount: u32
                         let split_amount = crate::util::read_u32_le(&mut r)?;

@@ -31,7 +31,7 @@ impl CMSG_PET_SPELL_AUTOCAST {
         let id = crate::util::read_u32_le(&mut r)?;
 
         // autocast_enabled: Bool
-        let autocast_enabled = crate::util::read_u8_le(&mut r)? != 0;
+        let autocast_enabled = crate::util::read_bool_u8(&mut r)?;
 
         Ok(Self {
             guid,

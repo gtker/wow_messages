@@ -27,7 +27,7 @@ impl SMSG_PAUSE_MIRROR_TIMER {
         let timer = crate::util::read_u32_le(&mut r)?.try_into()?;
 
         // is_frozen: Bool
-        let is_frozen = crate::util::read_u8_le(&mut r)? != 0;
+        let is_frozen = crate::util::read_bool_u8(&mut r)?;
 
         Ok(Self {
             timer,

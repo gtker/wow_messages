@@ -41,7 +41,7 @@ impl SMSG_SPELLHEALLOG {
         let damage = crate::util::read_u32_le(&mut r)?;
 
         // critical: Bool
-        let critical = crate::util::read_u8_le(&mut r)? != 0;
+        let critical = crate::util::read_bool_u8(&mut r)?;
 
         Ok(Self {
             victim,

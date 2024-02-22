@@ -280,7 +280,7 @@ fn print_read_definition(
     match &d.ty() {
         Type::Bool(i) => {
             s.wln_no_indent(format!(
-                "{UTILITY_PATH}::{prefix}read_{ty}_le(&mut r){postfix}? != 0;",
+                "{UTILITY_PATH}::{prefix}read_bool_{ty}(&mut r){postfix}?;",
                 ty = i.rust_str(),
             ));
         }

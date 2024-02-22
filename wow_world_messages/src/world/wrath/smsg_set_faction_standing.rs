@@ -33,7 +33,7 @@ impl SMSG_SET_FACTION_STANDING {
         let refer_a_friend_bonus = crate::util::read_f32_le(&mut r)?;
 
         // any_rank_increased: Bool
-        let any_rank_increased = crate::util::read_u8_le(&mut r)? != 0;
+        let any_rank_increased = crate::util::read_bool_u8(&mut r)?;
 
         // amount_of_faction_standings: u32
         let amount_of_faction_standings = crate::util::read_u32_le(&mut r)?;

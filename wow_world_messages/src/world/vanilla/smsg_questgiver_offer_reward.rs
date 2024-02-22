@@ -67,7 +67,7 @@ impl SMSG_QUESTGIVER_OFFER_REWARD {
         };
 
         // auto_finish: Bool32
-        let auto_finish = crate::util::read_u32_le(&mut r)? != 0;
+        let auto_finish = crate::util::read_bool_u32(&mut r)?;
 
         // amount_of_emotes: u32
         let amount_of_emotes = crate::util::read_u32_le(&mut r)?;

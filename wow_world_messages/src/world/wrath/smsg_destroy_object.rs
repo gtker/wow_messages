@@ -29,7 +29,7 @@ impl SMSG_DESTROY_OBJECT {
         let guid = crate::util::read_guid(&mut r)?;
 
         // target_died: Bool
-        let target_died = crate::util::read_u8_le(&mut r)? != 0;
+        let target_died = crate::util::read_bool_u8(&mut r)?;
 
         Ok(Self {
             guid,

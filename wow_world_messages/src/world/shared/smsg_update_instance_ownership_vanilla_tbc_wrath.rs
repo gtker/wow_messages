@@ -19,7 +19,7 @@ impl SMSG_UPDATE_INSTANCE_OWNERSHIP {
         }
 
         // player_is_saved_to_a_raid: Bool32
-        let player_is_saved_to_a_raid = crate::util::read_u32_le(&mut r)? != 0;
+        let player_is_saved_to_a_raid = crate::util::read_bool_u32(&mut r)?;
 
         Ok(Self {
             player_is_saved_to_a_raid,

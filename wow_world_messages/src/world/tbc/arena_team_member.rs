@@ -79,7 +79,7 @@ impl ArenaTeamMember {
         let guid = crate::util::read_guid(&mut r)?;
 
         // online: Bool
-        let online = crate::util::read_u8_le(&mut r)? != 0;
+        let online = crate::util::read_bool_u8(&mut r)?;
 
         // name: CString
         let name = {

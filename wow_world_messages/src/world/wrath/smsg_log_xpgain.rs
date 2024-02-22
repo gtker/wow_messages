@@ -57,7 +57,7 @@ impl SMSG_LOG_XPGAIN {
         };
 
         // exp_includes_recruit_a_friend_bonus: Bool
-        let exp_includes_recruit_a_friend_bonus = crate::util::read_u8_le(&mut r)? != 0;
+        let exp_includes_recruit_a_friend_bonus = crate::util::read_bool_u8(&mut r)?;
 
         Ok(Self {
             target,

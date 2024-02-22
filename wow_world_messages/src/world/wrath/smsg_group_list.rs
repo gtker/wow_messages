@@ -111,7 +111,7 @@ impl SMSG_GROUP_LIST {
             let raid_difficulty = crate::util::read_u8_le(&mut r)?.try_into()?;
 
             // heroic: Bool
-            let heroic = crate::util::read_u8_le(&mut r)? != 0;
+            let heroic = crate::util::read_bool_u8(&mut r)?;
 
             Some(SMSG_GROUP_LIST_group_not_empty {
                 loot_setting,

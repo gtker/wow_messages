@@ -85,7 +85,7 @@ impl SMSG_BATTLEFIELD_STATUS {
         let client_instance_id = crate::util::read_u32_le(&mut r)?;
 
         // rated: Bool
-        let rated = crate::util::read_u8_le(&mut r)? != 0;
+        let rated = crate::util::read_bool_u8(&mut r)?;
 
         // status_id: StatusId
         let status_id = crate::util::read_u8_le(&mut r)?.try_into()?;

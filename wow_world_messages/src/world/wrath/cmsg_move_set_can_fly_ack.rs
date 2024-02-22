@@ -39,7 +39,7 @@ impl CMSG_MOVE_SET_CAN_FLY_ACK {
         let info = MovementInfo::read(&mut r)?;
 
         // applied: Bool32
-        let applied = crate::util::read_u32_le(&mut r)? != 0;
+        let applied = crate::util::read_bool_u32(&mut r)?;
 
         Ok(Self {
             player,

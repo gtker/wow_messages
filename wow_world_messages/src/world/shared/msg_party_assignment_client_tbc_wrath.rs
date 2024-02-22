@@ -29,7 +29,7 @@ impl MSG_PARTY_ASSIGNMENT_Client {
         let role = crate::util::read_u8_le(&mut r)?.try_into()?;
 
         // apply: Bool
-        let apply = crate::util::read_u8_le(&mut r)? != 0;
+        let apply = crate::util::read_bool_u8(&mut r)?;
 
         // player: Guid
         let player = crate::util::read_guid(&mut r)?;

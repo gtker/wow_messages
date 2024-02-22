@@ -25,7 +25,7 @@ impl SMSG_LOOT_MONEY_NOTIFY {
         let amount = crate::util::read_u32_le(&mut r)?;
 
         // alone: Bool
-        let alone = crate::util::read_u8_le(&mut r)? != 0;
+        let alone = crate::util::read_bool_u8(&mut r)?;
 
         Ok(Self {
             amount,

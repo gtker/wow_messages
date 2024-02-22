@@ -48,7 +48,7 @@ impl SMSG_LFG_PLAYER_REWARD {
         let dungeon_finished_entry = crate::util::read_u32_le(&mut r)?;
 
         // done: Bool
-        let done = crate::util::read_u8_le(&mut r)? != 0;
+        let done = crate::util::read_bool_u8(&mut r)?;
 
         // unknown1: u32
         let unknown1 = crate::util::read_u32_le(&mut r)?;

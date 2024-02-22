@@ -26,7 +26,7 @@ impl CMSG_CALENDAR_EVENT_SIGNUP {
         let event_id = crate::util::read_guid(&mut r)?;
 
         // tentative: Bool
-        let tentative = crate::util::read_u8_le(&mut r)? != 0;
+        let tentative = crate::util::read_bool_u8(&mut r)?;
 
         Ok(Self {
             event_id,

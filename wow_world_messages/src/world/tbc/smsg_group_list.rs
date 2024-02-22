@@ -48,7 +48,7 @@ impl SMSG_GROUP_LIST {
         let group_type = crate::util::read_u8_le(&mut r)?.try_into()?;
 
         // battleground_group: Bool
-        let battleground_group = crate::util::read_u8_le(&mut r)? != 0;
+        let battleground_group = crate::util::read_bool_u8(&mut r)?;
 
         // group_id: u8
         let group_id = crate::util::read_u8_le(&mut r)?;

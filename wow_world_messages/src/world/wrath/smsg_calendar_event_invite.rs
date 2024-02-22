@@ -70,7 +70,7 @@ impl SMSG_CALENDAR_EVENT_INVITE {
         };
 
         // is_sign_up: Bool
-        let is_sign_up = crate::util::read_u8_le(&mut r)? != 0;
+        let is_sign_up = crate::util::read_bool_u8(&mut r)?;
 
         Ok(Self {
             invitee,

@@ -90,7 +90,7 @@ impl SMSG_AUTH_RESPONSE {
                 let queue_position = crate::util::read_u32_le(&mut r)?;
 
                 // realm_has_free_character_migration: Bool
-                let realm_has_free_character_migration = crate::util::read_u8_le(&mut r)? != 0;
+                let realm_has_free_character_migration = crate::util::read_bool_u8(&mut r)?;
 
                 SMSG_AUTH_RESPONSE_WorldResult::AuthWaitQueue {
                     queue_position,

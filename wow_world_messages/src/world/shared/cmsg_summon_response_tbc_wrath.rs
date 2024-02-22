@@ -26,7 +26,7 @@ impl CMSG_SUMMON_RESPONSE {
         let summoner = crate::util::read_guid(&mut r)?;
 
         // agree: Bool
-        let agree = crate::util::read_u8_le(&mut r)? != 0;
+        let agree = crate::util::read_bool_u8(&mut r)?;
 
         Ok(Self {
             summoner,
