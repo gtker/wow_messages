@@ -621,9 +621,9 @@ impl Container {
 
                 Type::Population => ("crate::all::population".to_string(), name),
 
-                Type::Gold => (format!("crate::shared::gold_vanilla_tbc_wrath"), name),
+                Type::Gold => ("crate::shared::gold_vanilla_tbc_wrath".to_string(), name),
                 Type::Level | Type::Level16 | Type::Level32 => {
-                    (format!("crate::shared::level_vanilla_tbc_wrath"), name)
+                    ("crate::shared::level_vanilla_tbc_wrath".to_string(), name)
                 }
 
                 Type::Array(array) => {
@@ -806,25 +806,29 @@ impl Container {
                                     size,
                                 });
 
-                                if size < 4 {
-                                    offset += size;
-                                } else if size == 4 {
-                                    assert_eq!(offset, 0);
-
-                                    members.push(temp_definitions.clone());
-
-                                    temp_definitions.clear();
-                                } else {
-                                    assert_eq!(size % 4, 0);
-
-                                    members.push(temp_definitions.clone());
-                                    temp_definitions.clear();
-
-                                    for _ in 0..((size / 4) - 1) {
-                                        members.push(vec![]);
+                                match size.cmp(&4) {
+                                    Ordering::Less => {
+                                        offset += size;
                                     }
+                                    Ordering::Equal => {
+                                        assert_eq!(offset, 0);
 
-                                    offset = 0;
+                                        members.push(temp_definitions.clone());
+
+                                        temp_definitions.clear();
+                                    }
+                                    Ordering::Greater => {
+                                        assert_eq!(size % 4, 0);
+
+                                        members.push(temp_definitions.clone());
+                                        temp_definitions.clear();
+
+                                        for _ in 0..((size / 4) - 1) {
+                                            members.push(vec![]);
+                                        }
+
+                                        offset = 0;
+                                    }
                                 }
                             }
                             ArraySize::Variable(_) | ArraySize::Endless => {
@@ -873,6 +877,7 @@ impl Container {
         members
     }
 }
+
 #[derive(Clone, Debug)]
 pub(crate) struct UpdateMaskMember {
     pub member: StructMemberDefinition,

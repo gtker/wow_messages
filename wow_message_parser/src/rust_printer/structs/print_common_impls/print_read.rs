@@ -115,9 +115,7 @@ fn print_read_array(
                     "let mut buf = Vec::with_capacity({name}_decompressed_size as usize);"
                 ));
 
-                s.wln(format!(
-                    "let mut decoder = &mut flate2::read::ZlibDecoder::new(r);"
-                ));
+                s.wln("let mut decoder = &mut flate2::read::ZlibDecoder::new(r);");
                 // TODO: I want to know if this fails, should this be a separate error mode?
                 s.wln("decoder.read_to_end(&mut buf).unwrap();");
                 s.wln("let mut r = &buf[..];");
@@ -862,9 +860,7 @@ pub(crate) fn print_read(
         s.wln("let decompressed_buffer = vec![0; decompressed_size as usize];");
         s.wln("let mut r = &mut flate2::read::ZlibDecoder::new_with_buf(r, decompressed_buffer);");
 
-        s.wln(format!(
-            "let mut buf = Vec::with_capacity(decompressed_size as usize);"
-        ));
+        s.wln("let mut buf = Vec::with_capacity(decompressed_size as usize);");
         // TODO: I want to know if this fails, should this be a separate error mode?
         s.wln("r.read_to_end(&mut buf).unwrap();");
         s.wln("let mut r = &buf[..];");

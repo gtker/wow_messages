@@ -14,7 +14,7 @@ pub(crate) fn parse_value(s: &str) -> Option<i128> {
 
         let value = u64::from_be_bytes(bytes);
 
-        return Some(value.try_into().unwrap());
+        return Some(value.into());
     }
     let v = str::parse(s);
     if let Ok(v) = v {

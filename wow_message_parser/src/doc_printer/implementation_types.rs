@@ -15,10 +15,10 @@ fn print_implementation_type(table: &mut WriterTable<3>, ty: &Type) {
         Type::Integer(i) => {
             if let IntegerType::U48 = i {
                 table.add_row([
-                        name.as_ref(),
-                        "`u32` followed by `u16`. Work around for having control flow from two different variables that simplifies implementations.",
-                        format!("`unsigned int` followed by `unsigned short`").as_ref(),
-                    ]);
+                    name.as_ref(),
+                    "`u32` followed by `u16`. Work around for having control flow from two different variables that simplifies implementations.",
+                    "`unsigned int` followed by `unsigned short`",
+                ]);
                 return;
             }
 
@@ -49,8 +49,8 @@ fn print_implementation_type(table: &mut WriterTable<3>, ty: &Type) {
         Type::Guid => {
             table.add_row([
                 name,
-                format!("Unsigned 8 bit integer. Can be replaced with a `u64`."),
-                format!("`unsigned long long`"),
+                "Unsigned 8 bit integer. Can be replaced with a `u64`.".to_string(),
+                "`unsigned long long`".to_string(),
             ]);
         }
         Type::PackedGuid => table.add_row([

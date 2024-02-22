@@ -285,7 +285,7 @@ fn print_version_overlap(
                 };
 
                 for other_t in other_versions {
-                    if t.overlaps(&other_t) {
+                    if t.overlaps(other_t) {
                         if !has_overlapped {
                             has_overlapped = true;
                             s.w("    <-- Overlaps with: ");
@@ -310,7 +310,7 @@ fn print_version_overlap(
                     AllVersions::Login(_) => panic!(),
                 };
                 for other_t in other_versions {
-                    if t.overlaps(&other_t) {
+                    if t.overlaps(other_t) {
                         if !has_overlapped {
                             has_overlapped = true;
                             s.w("    <-- Overlaps with: ");
@@ -426,7 +426,7 @@ pub(crate) fn type_is_upcast_to_same(ty_name: &str, file_info: &FileInfo, ty: In
     let ty = ty.str();
     s.fileinfo(
         file_info,
-        format!("Type '{ty_name}' of integer type '{ty}' is upcast to the same type.",),
+        format!("Type '{ty_name}' of integer type '{ty}' is upcast to the same type.", ),
     );
 
     wowm_exit(s, TYPE_IS_UPCAST_TO_SAME)
@@ -438,7 +438,7 @@ pub(crate) fn flag_with_signed_type(ty_name: &str, file_info: &FileInfo, ty: Int
     let ty = ty.str();
     s.fileinfo(
         file_info,
-        format!("Flag '{ty_name}' has integer type '{ty}' which is signed. Only unsigned types are allowed for flags.",),
+        format!("Flag '{ty_name}' has integer type '{ty}' which is signed. Only unsigned types are allowed for flags.", ),
     );
 
     wowm_exit(s, FLAG_WITH_SIGNED_TYPE)
@@ -457,7 +457,7 @@ pub(crate) fn definer_with_invalid_value(
     let ty = ty.str();
     s.fileinfo(
         file_info,
-        format!("Definer '{ty_name}' has integer type '{ty}' with a minimum of '{min}' and a max of '{max}', but an enumerator with a value of {value}.",),
+        format!("Definer '{ty_name}' has integer type '{ty}' with a minimum of '{min}' and a max of '{max}', but an enumerator with a value of {value}.", ),
     );
 
     wowm_exit(s, DEFINER_WITH_INVALID_VALUE)
@@ -473,7 +473,7 @@ pub(crate) fn version_tags_overlap(
 
     s.fileinfo(
         file_info,
-        format!("Object '{ty_name}' already has version '{less_specific}' and tries to add '{version}'.",),
+        format!("Object '{ty_name}' already has version '{less_specific}' and tries to add '{version}'.", ),
     );
 
     wowm_exit(s, VERSION_TAGS_OVERLAP)

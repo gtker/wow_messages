@@ -228,8 +228,8 @@ async fn login_version_2(
 }
 
 fn get_proof(username: &str) -> SrpProof {
-    let username = NormalizedString::new(username.to_string()).unwrap();
-    let password = NormalizedString::new(username.to_string()).unwrap();
+    let password = NormalizedString::new(username).unwrap();
+    let username = NormalizedString::new(username).unwrap();
     SrpVerifier::from_username_and_password(username, password).into_proof()
 }
 
@@ -285,6 +285,7 @@ async fn login_version_3(
 
     print_version_2_3_realm_list(stream).await;
 }
+
 async fn login_version_8(
     mut stream: TcpStream,
     l: CMD_AUTH_LOGON_CHALLENGE_Client,

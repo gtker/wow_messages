@@ -166,7 +166,7 @@ fn print_try_from(s: &mut Writer, e: &Definer) {
                             "Self::new({ty_name}::from_le_bytes(value.to_le_bytes()))"
                         ));
                     } else {
-                        let converted_ty = if from_ty.contains("i") {
+                        let converted_ty = if from_ty.contains('i') {
                             from_ty.replace('i', "u")
                         } else {
                             from_ty.replace('u', "i")
@@ -185,15 +185,13 @@ fn print_try_from(s: &mut Writer, e: &Definer) {
                             s.wln("Ok(Self::new(a))")
                         }
                     }
+                } else if conversion_is_infallible {
+                    s.wln("Self::new(value.into())");
                 } else {
-                    if conversion_is_infallible {
-                        s.wln("Self::new(value.into())");
-                    } else {
-                        s.wln(format!(
-                            "let a = TryInto::<{ty_name}>::try_into(value).ok().ok_or(value)?;"
-                        ));
-                        s.wln("Ok(Self::new(a))")
-                    }
+                    s.wln(format!(
+                        "let a = TryInto::<{ty_name}>::try_into(value).ok().ok_or(value)?;"
+                    ));
+                    s.wln("Ok(Self::new(a))")
                 }
             });
         });

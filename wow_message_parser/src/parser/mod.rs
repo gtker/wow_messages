@@ -599,7 +599,7 @@ pub(crate) fn parse_enum(
         let value = identifier_and_value.next().unwrap();
 
         let mut kvs = ParsedTags::new();
-        while let Some(complex_key_value_pair) = item.next() {
+        for complex_key_value_pair in item {
             let mut complex_key_value_pair = complex_key_value_pair.into_inner();
             let identifier = complex_key_value_pair.next().unwrap();
             let text = complex_key_value_pair.next().unwrap();

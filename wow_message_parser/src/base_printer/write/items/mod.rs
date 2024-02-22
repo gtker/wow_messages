@@ -184,8 +184,8 @@ fn lib_functions(s: &mut Writer, ty_name: &str, things: &[GenericThing]) {
     ));
     s.bodyn(format!("pub fn lookup_{ty_lower}s_by_name(needle: &str) -> impl Iterator<Item = &'static {ty_name}> + '_"), |s| {
         s.body_closing_with(format!("all_{ty_lower}s().iter().filter(move |{ty_lower}|"), |s| {
-            s.wln(format!("let lower = {ty_lower}.{name_function}().to_ascii_lowercase();", ty_lower = ty_lower));
-            s.wln(format!("lower.contains(needle)"));
+            s.wln(format!("let lower = {ty_lower}.{name_function}().to_ascii_lowercase();"));
+            s.wln("lower.contains(needle)");
         }, ")");
     });
 
@@ -423,7 +423,7 @@ mod test {
 
 type Arrays<'a> = HashMap<(&'a ArrayInstances, &'static str), String>;
 
-fn get_default_values<'a>(things: &'a [GenericThing]) -> Arrays<'a> {
+fn get_default_values(things: &[GenericThing]) -> Arrays<'_> {
     let mut arrays = HashMap::new();
     for thing in things {
         for array in &thing.arrays {

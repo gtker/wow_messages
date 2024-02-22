@@ -67,11 +67,8 @@ impl Objects {
         let mut b = BTreeSet::new();
 
         for e in self.all_containers() {
-            match e.tags().try_all_rust_versions() {
-                Some(AllRustVersions::World(w)) => {
-                    b.append(&mut w.clone());
-                }
-                _ => {}
+            if let Some(AllRustVersions::World(w)) = e.tags().try_all_rust_versions() {
+                b.append(&mut w.clone());
             }
         }
 
@@ -103,11 +100,8 @@ impl Objects {
         let mut b = BTreeSet::new();
 
         for e in self.all_containers() {
-            match e.tags().try_all_rust_versions() {
-                Some(AllRustVersions::Login(l)) => {
-                    b.append(&mut l.clone());
-                }
-                _ => {}
+            if let Some(AllRustVersions::Login(l)) = e.tags().try_all_rust_versions() {
+                b.append(&mut l.clone());
             }
         }
 

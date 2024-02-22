@@ -191,18 +191,17 @@ impl IntegerType {
     ) -> bool {
         let size: i128 = self.size().into();
 
-        let signedness_differs = self.is_signed() != from_signed;
-
         if from_ty == "usize" {
-            false
-        } else if from_size > size && !signedness_differs {
+            return false;
+        }
+
+        let signedness_differs = self.is_signed() != from_signed;
+        if from_size > size && !signedness_differs {
             false
         } else if from_size < size && !signedness_differs {
             true
-        } else if signedness_differs && from_size == size {
-            true
         } else {
-            false
+            signedness_differs && from_size == size
         }
     }
 

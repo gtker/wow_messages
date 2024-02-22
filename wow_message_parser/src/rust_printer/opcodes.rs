@@ -62,18 +62,15 @@ fn any_container_is_pure_movement_info(v: &[&Container]) -> bool {
 }
 
 pub(crate) fn login_includes(s: &mut Writer, container_type: ContainerType) {
-    match container_type {
-        ContainerType::CLogin(_) => {
-            s.wln(format!(
-                "use crate::{{{SERVER_MESSAGE_TRAIT_NAME}, {CLIENT_MESSAGE_TRAIT_NAME}}};"
-            ));
+    if let ContainerType::CLogin(_) = container_type {
+        s.wln(format!(
+            "use crate::{{{SERVER_MESSAGE_TRAIT_NAME}, {CLIENT_MESSAGE_TRAIT_NAME}}};"
+        ));
 
-            s.wln(SYNC_IMPORT);
+        s.wln(SYNC_IMPORT);
 
-            s.wln("use super::*;");
-            s.wln("use crate::all::*;");
-        }
-        _ => {}
+        s.wln("use super::*;");
+        s.wln("use crate::all::*;");
     }
 }
 
@@ -83,48 +80,45 @@ pub(crate) fn world_includes(
     container_type: ContainerType,
     version: Version,
 ) {
-    match container_type {
-        ContainerType::CMsg(_) => {
-            s.wln(format!(
-                "use crate::{}::{{{}, {}}};",
-                major_version_to_string(&version.as_major_world()),
-                SERVER_MESSAGE_TRAIT_NAME,
-                CLIENT_MESSAGE_TRAIT_NAME,
-            ));
+    if let ContainerType::CMsg(_) = container_type {
+        s.wln(format!(
+            "use crate::{}::{{{}, {}}};",
+            major_version_to_string(&version.as_major_world()),
+            SERVER_MESSAGE_TRAIT_NAME,
+            CLIENT_MESSAGE_TRAIT_NAME,
+        ));
 
-            s.wln("#[cfg(feature = \"encryption\")]");
-            let import_path = version.as_major_world().encryption_path();
-            match version.as_major_world() {
-                MajorWorldVersion::Vanilla | MajorWorldVersion::BurningCrusade => {
-                    s.wln(format!(
-                        "use {import_path}::{{DecrypterHalf, EncrypterHalf}};"
-                    ));
-                }
-                MajorWorldVersion::Wrath => {
-                    s.wln(format!("use {import_path}::{{ClientEncrypterHalf, ClientDecrypterHalf, ServerEncrypterHalf, ServerDecrypterHalf}};"));
-                }
-            }
-
-            s.wln(SYNC_IMPORT);
-            s.newline();
-
-            if any_container_is_pure_movement_info(v) {
+        s.wln("#[cfg(feature = \"encryption\")]");
+        let import_path = version.as_major_world().encryption_path();
+        match version.as_major_world() {
+            MajorWorldVersion::Vanilla | MajorWorldVersion::BurningCrusade => {
                 s.wln(format!(
-                    "use {module_name}::MovementInfo;",
-                    module_name = get_import_path(version)
+                    "use {import_path}::{{DecrypterHalf, EncrypterHalf}};"
                 ));
             }
-
-            s.wln(format!("use {PARSE_ERROR_KIND};"));
-
-            s.wln(format!(
-                "use crate::{}::opcode_to_name;",
-                major_version_to_string(&version.as_major_world()),
-            ));
-
-            s.wln("use super::*;");
+            MajorWorldVersion::Wrath => {
+                s.wln(format!("use {import_path}::{{ClientEncrypterHalf, ClientDecrypterHalf, ServerEncrypterHalf, ServerDecrypterHalf}};"));
+            }
         }
-        _ => {}
+
+        s.wln(SYNC_IMPORT);
+        s.newline();
+
+        if any_container_is_pure_movement_info(v) {
+            s.wln(format!(
+                "use {module_name}::MovementInfo;",
+                module_name = get_import_path(version)
+            ));
+        }
+
+        s.wln(format!("use {PARSE_ERROR_KIND};"));
+
+        s.wln(format!(
+            "use crate::{}::opcode_to_name;",
+            major_version_to_string(&version.as_major_world()),
+        ));
+
+        s.wln("use super::*;");
     }
 
     s.newline();
@@ -175,8 +169,8 @@ fn world_common_impls_read_opcodes(s: &mut Writer, v: &[&Container], size: &str,
                 s.wln(
                     format!(
                         "{opcode:#06X} => crate::util::assert_empty(body_size, opcode, \"{name}\").map(|_| Self::{enum_name}),",
-                              enum_name = get_enumerator_name(e.name())
-                ));
+                        enum_name = get_enumerator_name(e.name())
+                    ));
             } else {
                 s.wln(format!("{opcode:#06X} => Ok(Self::{enum_name}(<{name} as crate::Message>::read_body::<crate::traits::private::Internal>(&mut r, body_size).map_err(|a| a.opcode_convert())?)),",
                               enum_name = get_enumerator_name(e.name())
@@ -625,7 +619,6 @@ pub(crate) fn common_impls_login(s: &mut Writer, v: &[&Container], ty: &str) {
                             postfix = it.postfix(),
                         ));
                     }
-
                 }
 
                 s.wln(format!("opcode => Err({EXPECTED_OPCODE_ERROR}::Opcode(opcode as u32)),"));

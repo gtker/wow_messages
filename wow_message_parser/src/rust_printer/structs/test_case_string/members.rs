@@ -244,7 +244,7 @@ fn print_member_definition(
             );
         }
         Type::Spell | Type::Spell16 | Type::Item => {
-            test_case_string::wlna(s, format!("{prefix}{name} = {{}};"), format!("{var_name}"));
+            test_case_string::wlna(s, format!("{prefix}{name} = {{}};"), var_name);
         }
         Type::Population => {
             test_case_string::wlna(s, format!("{prefix}{name} = {{}};"), format!("if {var_name}.as_int().to_string().contains(\'.\') {{ {var_name}.as_int().to_string() }} else {{ format!(\"{{}}.0\", {var_name}.as_int()) }}"));

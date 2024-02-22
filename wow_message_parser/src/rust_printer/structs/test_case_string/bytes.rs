@@ -63,14 +63,12 @@ fn print_bytes_members(s: &mut Writer, e: &Container) {
     s.newline();
 
     if e.tags().compressed() {
-        s.wln(format!(
-            "crate::util::write_bytes(&mut s, &mut bytes, 4, \"decompressed_size\", \"    \");"
-        ));
+        s.wln("crate::util::write_bytes(&mut s, &mut bytes, 4, \"decompressed_size\", \"    \");");
         s.wln("/* Compressed bytes */");
         s.bodyn("while bytes.len() != 0", |s| {
-            s.wln(format!(
-                "crate::util::write_bytes(&mut s, &mut bytes, 8, \"compressed_data\", \"    \");"
-            ));
+            s.wln(
+                "crate::util::write_bytes(&mut s, &mut bytes, 8, \"compressed_data\", \"    \");",
+            );
         });
 
         s.newline();
@@ -274,7 +272,6 @@ fn print_bytes_definition(
                             wln(s, format!("    /* {name}: {ty_name} {{i}} end */"));
                         }
                     }
-
                 });
 
                 wln(s, format!("    /* {name}: {ty_name} end */"));
@@ -302,7 +299,7 @@ fn print_bytes_definition(
                 "crate::util::write_bytes(&mut s, &mut bytes, 4, \"{name}_z\", {prefix_text});"
             ));
 
-            s.bodyn(format!("for v in v"), |s| {
+            s.bodyn("for v in v", |s| {
                 s.wln(format!("crate::util::write_bytes(&mut s, &mut bytes, 4, \"{name}_packed\", {prefix_text});"));
             });
 

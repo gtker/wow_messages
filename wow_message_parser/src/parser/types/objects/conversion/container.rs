@@ -615,7 +615,7 @@ fn convert_parsed_test_case_value_to_test_case_value(
                 ParsedArrayType::CString => {
                     let mut v = Vec::new();
                     for value in val.split(',') {
-                        let value = value.trim().replace("\"", "");
+                        let value = value.trim().replace('"', "");
                         if value.is_empty() {
                             continue;
                         }

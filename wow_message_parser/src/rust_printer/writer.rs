@@ -497,21 +497,21 @@ impl Writer {
 
         for (i, row) in table.header.iter().enumerate() {
             let pad = column_sizes[i];
-            self.w_no_indent(format!("| {row: <pad$} ", pad = pad));
+            self.w_no_indent(format!("| {row: <pad$} "));
         }
         self.wln_no_indent("|");
 
         for (i, _) in table.header.iter().enumerate() {
             let pad = column_sizes[i];
             let character = "-";
-            self.w_no_indent(format!("|-{character:-<pad$}-", pad = pad));
+            self.w_no_indent(format!("|-{character:-<pad$}-"));
         }
         self.wln_no_indent("|");
 
         for body in &table.body {
             for (i, row) in body.iter().enumerate() {
                 let pad = column_sizes[i];
-                self.w_no_indent(format!("| {row: <pad$} ", pad = pad));
+                self.w_no_indent(format!("| {row: <pad$} "));
             }
             self.wln_no_indent("|");
         }

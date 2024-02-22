@@ -190,7 +190,7 @@ fn print_try_from(s: &mut Writer, e: &Definer) {
         s.body(
             format!("fn try_from(value: {ty_name}) -> Result<Self, Self::Error>",),
             |s| {
-                s.wln(format!("Self::from_int(value)"));
+                s.wln("Self::from_int(value)");
             },
         );
     });
@@ -213,7 +213,7 @@ fn print_try_from(s: &mut Writer, e: &Definer) {
 
                     if conversion_is_infallible {
                         if *from_signed != e.ty().is_signed() {
-                            let converted_ty = if from_ty.contains("i") {
+                            let converted_ty = if from_ty.contains('i') {
                                 from_ty.replace('i', "u")
                             } else {
                                 from_ty.replace('u', "i")

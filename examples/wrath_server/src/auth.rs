@@ -117,8 +117,8 @@ async fn reconnect_version_8(
 }
 
 fn get_proof(username: &str) -> SrpProof {
-    let username = NormalizedString::new(username.to_string()).unwrap();
-    let password = NormalizedString::new(username.to_string()).unwrap();
+    let password = NormalizedString::new(username).unwrap();
+    let username = NormalizedString::new(username).unwrap();
     SrpVerifier::from_username_and_password(username, password).into_proof()
 }
 

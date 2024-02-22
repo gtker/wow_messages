@@ -7,13 +7,12 @@ pub(crate) fn create_mask_values(s: &mut Writer, e: &Container, words: &[Vec<Upd
 
     let version = e.tags().only_main_world_version().module_name();
     let size = words.iter().fold(0, |sum, a| {
-        if a.len() != 0 {
+        if !a.is_empty() {
             let size = match a[0].member.ty() {
                 Type::Guid => 2,
                 Type::Array(array) => {
                     let size = array.fixed_size() * array.ty().sizes().maximum();
-                    let size = size / 4;
-                    size
+                    size / 4
                 }
                 _ => 1,
             };
@@ -31,11 +30,10 @@ pub(crate) fn create_mask_values(s: &mut Writer, e: &Container, words: &[Vec<Upd
         for d in word {
             let name = d.member.name();
 
-            match d.member.ty() {
-                Type::Guid => s.wln(format!(
+            if d.member.ty() == &Type::Guid {
+                s.wln(format!(
                     "let ({name}_lower, {name}_upper) = self.{name}.to_u32s();"
-                )),
-                _ => {}
+                ));
             }
         }
     }

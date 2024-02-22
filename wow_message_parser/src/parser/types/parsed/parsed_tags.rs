@@ -68,7 +68,7 @@ impl ParsedTags {
             for c in comments {
                 v.add(c);
             }
-        } else if comments.len() != 0 {
+        } else if !comments.is_empty() {
             let mut t = TagString::new();
 
             for c in comments {
@@ -252,7 +252,7 @@ impl ParsedTags {
         } else if key == USED_IN_UPDATE_MASK {
             self.used_in_update_mask.insert(value);
         } else if key == VALID_RANGE {
-            let values = value.split(" ").collect::<Vec<_>>();
+            let values = value.split(' ').collect::<Vec<_>>();
             self.valid_range = Some((values[0].parse().unwrap(), values[1].parse().unwrap()));
         } else if key == MAXIMUM_LENGTH {
             self.maximum_length = Some(value.parse().unwrap());

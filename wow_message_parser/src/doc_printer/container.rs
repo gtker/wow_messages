@@ -835,7 +835,7 @@ fn get_integer_value(t: &IntegerType, value: &[u8]) -> i128 {
             b[1] = value[5];
             let b = u16::from_le_bytes(b);
 
-            ((a as u64) | ((b as u64) << 32)).try_into().unwrap()
+            ((a as u64) | ((b as u64) << 32)).into()
         }
     }
 }

@@ -49,11 +49,7 @@ pub(crate) fn container_to_update_mask_ir(e: &Container) -> IrUpdateMaskStruct {
 
     let members = members
         .iter()
-        .map(|a| {
-            a.iter()
-                .map(|a| IrUpdateMaskMember::from_member(a))
-                .collect()
-        })
+        .map(|a| a.iter().map(IrUpdateMaskMember::from_member).collect())
         .collect();
 
     IrUpdateMaskStruct {

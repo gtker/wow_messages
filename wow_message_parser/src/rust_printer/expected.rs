@@ -66,29 +66,28 @@ fn print_expect_message(
                 "let d = crate::util::{title_side}Header::from_array(header);"
             ));
         };
-    } else {
-        if encrypted {
-            s.wln("let mut buf = [0_u8; 4];");
-            s.wln(format!("r.read_exact(&mut buf){postfix}?;"));
+    } else if encrypted {
+        s.wln("let mut buf = [0_u8; 4];");
+        s.wln(format!("r.read_exact(&mut buf){postfix}?;"));
 
-            s.body_closing_with(
-                "let d = match d.attempt_decrypt_server_header(buf)",
-                |s| {
-                    s.wln("wow_srp::wrath_header::WrathServerAttempt::Header(h) => h,");
-                    s.body(
-                        "wow_srp::wrath_header::WrathServerAttempt::AdditionalByteRequired =>",
-                        |s| {
-                            s.wln("let mut lsb = [0_u8; 1];");
-                            s.wln(format!("r.read_exact(&mut lsb){postfix}?;"));
-                            s.wln("d.decrypt_large_server_header(lsb[0])");
-                        },
-                    );
-                },
-                ";",
-            );
-        } else {
-            s.block(format!(
-                "\
+        s.body_closing_with(
+            "let d = match d.attempt_decrypt_server_header(buf)",
+            |s| {
+                s.wln("wow_srp::wrath_header::WrathServerAttempt::Header(h) => h,");
+                s.body(
+                    "wow_srp::wrath_header::WrathServerAttempt::AdditionalByteRequired =>",
+                    |s| {
+                        s.wln("let mut lsb = [0_u8; 1];");
+                        s.wln(format!("r.read_exact(&mut lsb){postfix}?;"));
+                        s.wln("d.decrypt_large_server_header(lsb[0])");
+                    },
+                );
+            },
+            ";",
+        );
+    } else {
+        s.block(format!(
+            "\
 let mut buf = [0_u8; 4];
 r.read_exact(&mut buf){postfix}?;
 let d = if buf[0] & 0x80 != 0 {{
@@ -100,8 +99,7 @@ let d = if buf[0] & 0x80 != 0 {{
     crate::util::ServerHeader::from_array(buf)
 }};
 ",
-            ));
-        }
+        ));
     }
     s.newline();
 
@@ -116,12 +114,10 @@ let d = if buf[0] & 0x80 != 0 {{
         MessageSide::Server => {
             if version.wrath_or_greater() {
                 ""
+            } else if encrypted {
+                ".into()"
             } else {
-                if encrypted {
-                    ".into()"
-                } else {
-                    ""
-                }
+                ""
             }
         }
         MessageSide::Client => "",
