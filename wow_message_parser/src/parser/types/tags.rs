@@ -149,14 +149,14 @@ impl ObjectTags {
         self.rust_versions.is_some()
     }
 
-    pub(crate) fn logon_versions(&self) -> impl Iterator<Item = LoginVersion> {
+    pub(crate) fn logon_versions(&self) -> impl Iterator<Item=LoginVersion> {
         match &self.all_versions {
             AllVersions::Login(i) => i.clone().into_iter(),
             AllVersions::World(_) => BTreeSet::new().into_iter(),
         }
     }
 
-    pub(crate) fn world_versions(&self) -> impl Iterator<Item = WorldVersion> {
+    pub(crate) fn world_versions(&self) -> impl Iterator<Item=WorldVersion> {
         match &self.all_versions {
             AllVersions::World(w) => w.clone().into_iter(),
             AllVersions::Login(_) => BTreeSet::new().into_iter(),
@@ -167,7 +167,7 @@ impl ObjectTags {
         matches!(self.all_versions, AllVersions::World(_))
     }
 
-    pub(crate) fn main_versions(&self) -> impl Iterator<Item = Version> + '_ {
+    pub(crate) fn main_versions(&self) -> impl Iterator<Item=Version> + '_ {
         let world = self
             .world_versions()
             .filter_map(|a| a.try_as_major_world())
@@ -214,6 +214,15 @@ impl ObjectTags {
 
     pub(crate) fn has_login_version(&self) -> bool {
         matches!(self.all_versions, AllVersions::Login(_))
+    }
+
+    pub(crate) fn has_login_version_8_or_all(&self) -> bool {
+        match &self.all_versions {
+            AllVersions::Login(l) => {
+                l.contains(&LoginVersion::Specific(8)) || l.contains(&LoginVersion::All)
+            }
+            AllVersions::World(_) => false,
+        }
     }
 
     pub(crate) fn comment(&self) -> Option<&TagString> {
@@ -306,7 +315,7 @@ impl TagString {
                     name = s,
                     lower = s.to_lowercase()
                 )
-                .unwrap(),
+                    .unwrap(),
                 TagStringSymbol::Newline => {
                     v.push(current.clone());
                     current.clear();

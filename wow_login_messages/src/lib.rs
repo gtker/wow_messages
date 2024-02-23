@@ -119,6 +119,8 @@ use tokio::io::{AsyncReadExt, AsyncWriteExt};
 #[cfg(feature = "async-std")]
 use async_std::io::{ReadExt, WriteExt};
 
+#[allow(non_camel_case_types)]
+pub mod collective;
 pub mod errors;
 pub mod helper;
 #[allow(non_camel_case_types, unused, clippy::single_match)]

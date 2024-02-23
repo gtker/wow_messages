@@ -47,12 +47,13 @@ pub(crate) fn print_login_opcodes(
         ContainerType::SLogin(_) => SLOGIN_NAME,
         _ => unreachable!("invalid type passed to opcode printer"),
     };
+    let has_login_version_8 = v.iter().all(|a| a.tags().has_login_version_8_or_all());
 
-    login_includes(&mut s, container_type);
+    login_includes(&mut s, container_type, has_login_version_8);
 
     definition(&mut s, v, ty, (*version).into());
 
-    common_impls_login(&mut s, v, ty);
+    common_impls_login(&mut s, v, ty, has_login_version_8);
 
     s
 }
@@ -61,12 +62,20 @@ fn any_container_is_pure_movement_info(v: &[&Container]) -> bool {
     v.iter().any(|a| a.is_pure_movement_info())
 }
 
-pub(crate) fn login_includes(s: &mut Writer, container_type: ContainerType) {
+pub(crate) fn login_includes(
+    s: &mut Writer,
+    container_type: ContainerType,
+    has_login_version_8: bool,
+) {
     if let ContainerType::CLogin(_) = container_type {
         s.wln(format!(
             "use crate::{{{SERVER_MESSAGE_TRAIT_NAME}, {CLIENT_MESSAGE_TRAIT_NAME}}};"
         ));
         s.wln("use crate::Message;");
+
+        if has_login_version_8 {
+            s.wln("use crate::collective::CollectiveMessage;");
+        }
 
         s.wln(SYNC_IMPORT);
 
@@ -440,9 +449,9 @@ pub(crate) fn common_impls_world(
                     let name = container.name();
 
                     if container.empty_body() {
-                        s.wln(format!("Self::{en} => \"{name}\",",));
+                        s.wln(format!("Self::{en} => \"{name}\",", ));
                     } else {
-                        s.wln(format!("Self::{en}(_) => \"{name}\",",));
+                        s.wln(format!("Self::{en}(_) => \"{name}\",", ));
                     }
                 }
             });
@@ -569,7 +578,12 @@ fn world_movement_info(s: &mut Writer, v: &[&Container]) {
     });
 }
 
-pub(crate) fn common_impls_login(s: &mut Writer, v: &[&Container], ty: &str) {
+pub(crate) fn common_impls_login(
+    s: &mut Writer,
+    v: &[&Container],
+    ty: &str,
+    has_login_version_8: bool,
+) {
     let ty_name = format!("{ty}OpcodeMessage");
     let write_function = |s: &mut Writer| {
         s.bodyn("match self", |s| {
@@ -591,16 +605,43 @@ pub(crate) fn common_impls_login(s: &mut Writer, v: &[&Container], ty: &str) {
 
     write_into_vec(s, &ty_name, write_function, "pub(crate)");
 
+    print_login_impl_read(s, v, &ty_name, "", "", "");
+
+    if has_login_version_8 {
+        print_login_impl_read(
+            s,
+            v,
+            &ty_name,
+            "_protocol",
+            ", protocol_version: crate::all::ProtocolVersion",
+            ", protocol_version",
+        );
+    }
+
+    impl_display(s, v, ty);
+
+    print_froms(s, v, ty);
+}
+
+fn print_login_impl_read(
+    s: &mut Writer,
+    v: &[&Container],
+    ty_name: &str,
+    protocolfix: &str,
+    protocol_arg: &str,
+    protocol: &str,
+) {
     s.bodyn(format!("impl {ty_name}"), |s| {
         for it in ImplType::types() {
             let func = it.func();
             let read = it.read();
             let prefix = it.prefix();
+            let postfix = it.postfix();
             let error = "crate::errors::ExpectedOpcodeError";
 
             s.wln(it.cfg());
             s.open_curly(format!(
-                "pub {func}fn {prefix}read<R: {read}>(mut r: R) -> Result<Self, {error}>",
+                "pub {func}fn {prefix}read{protocolfix}<R: {read}>(mut r: R{protocol_arg}) -> Result<Self, {error}>",
             ));
             s.wln(format!(
                 "let opcode = crate::util::{prefix}read_u8_le(&mut r){postfix}?;",
@@ -616,20 +657,15 @@ pub(crate) fn common_impls_login(s: &mut Writer, v: &[&Container], ty: &str) {
                         _ => unreachable!()
                     };
 
+                    let enum_name = get_enumerator_name(e.name());
                     if e.empty_body() {
                         s.wln(format!(
                             "{opcode:#04X} => Ok(Self::{enum_name}),",
-                            enum_name = get_enumerator_name(e.name()),
-                            opcode = opcode,
                         ));
                     } else {
                         s.wln(format!(
-                            "{opcode:#04X} => Ok(Self::{enum_name}({name}::{prefix}read::<R, crate::private::Internal>(r){postfix}?)),",
+                            "{opcode:#04X} => Ok(Self::{enum_name}({name}::{prefix}read{protocolfix}::<R, crate::private::Internal>(r{protocol}){postfix}?)),",
                             name = e.name(),
-                            enum_name = get_enumerator_name(e.name()),
-                            opcode = opcode,
-                            prefix = it.prefix(),
-                            postfix = it.postfix(),
                         ));
                     }
                 }
@@ -639,10 +675,6 @@ pub(crate) fn common_impls_login(s: &mut Writer, v: &[&Container], ty: &str) {
             s.closing_curly_newline();
         }
     });
-
-    impl_display(s, v, ty);
-
-    print_froms(s, v, ty);
 }
 
 fn print_froms(s: &mut Writer, v: &[&Container], ty: &str) {

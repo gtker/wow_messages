@@ -1,5 +1,6 @@
 use crate::{ServerMessage, ClientMessage};
 use crate::Message;
+use crate::collective::CollectiveMessage;
 use std::io::{Read, Write};
 use super::*;
 use crate::all::*;
@@ -62,6 +63,48 @@ impl ClientOpcodeMessage {
             0x02 => Ok(Self::CMD_AUTH_RECONNECT_CHALLENGE(CMD_AUTH_RECONNECT_CHALLENGE_Client::astd_read::<R, crate::private::Internal>(r).await?)),
             0x03 => Ok(Self::CMD_AUTH_RECONNECT_PROOF(CMD_AUTH_RECONNECT_PROOF_Client::astd_read::<R, crate::private::Internal>(r).await?)),
             0x10 => Ok(Self::CMD_REALM_LIST(CMD_REALM_LIST_Client::astd_read::<R, crate::private::Internal>(r).await?)),
+            opcode => Err(crate::errors::ExpectedOpcodeError::Opcode(opcode as u32)),
+        }
+    }
+
+}
+
+impl ClientOpcodeMessage {
+    #[cfg(feature = "sync")]
+    pub fn read_protocol<R: std::io::Read>(mut r: R, protocol_version: crate::all::ProtocolVersion) -> Result<Self, crate::errors::ExpectedOpcodeError> {
+        let opcode = crate::util::read_u8_le(&mut r)?;
+        match opcode {
+            0x00 => Ok(Self::CMD_AUTH_LOGON_CHALLENGE(CMD_AUTH_LOGON_CHALLENGE_Client::read_protocol::<R, crate::private::Internal>(r, protocol_version)?)),
+            0x01 => Ok(Self::CMD_AUTH_LOGON_PROOF(CMD_AUTH_LOGON_PROOF_Client::read_protocol::<R, crate::private::Internal>(r, protocol_version)?)),
+            0x02 => Ok(Self::CMD_AUTH_RECONNECT_CHALLENGE(CMD_AUTH_RECONNECT_CHALLENGE_Client::read_protocol::<R, crate::private::Internal>(r, protocol_version)?)),
+            0x03 => Ok(Self::CMD_AUTH_RECONNECT_PROOF(CMD_AUTH_RECONNECT_PROOF_Client::read_protocol::<R, crate::private::Internal>(r, protocol_version)?)),
+            0x10 => Ok(Self::CMD_REALM_LIST(CMD_REALM_LIST_Client::read_protocol::<R, crate::private::Internal>(r, protocol_version)?)),
+            opcode => Err(crate::errors::ExpectedOpcodeError::Opcode(opcode as u32)),
+        }
+    }
+
+    #[cfg(feature = "tokio")]
+    pub async fn tokio_read_protocol<R: tokio::io::AsyncReadExt + Unpin + Send>(mut r: R, protocol_version: crate::all::ProtocolVersion) -> Result<Self, crate::errors::ExpectedOpcodeError> {
+        let opcode = crate::util::tokio_read_u8_le(&mut r).await?;
+        match opcode {
+            0x00 => Ok(Self::CMD_AUTH_LOGON_CHALLENGE(CMD_AUTH_LOGON_CHALLENGE_Client::tokio_read_protocol::<R, crate::private::Internal>(r, protocol_version).await?)),
+            0x01 => Ok(Self::CMD_AUTH_LOGON_PROOF(CMD_AUTH_LOGON_PROOF_Client::tokio_read_protocol::<R, crate::private::Internal>(r, protocol_version).await?)),
+            0x02 => Ok(Self::CMD_AUTH_RECONNECT_CHALLENGE(CMD_AUTH_RECONNECT_CHALLENGE_Client::tokio_read_protocol::<R, crate::private::Internal>(r, protocol_version).await?)),
+            0x03 => Ok(Self::CMD_AUTH_RECONNECT_PROOF(CMD_AUTH_RECONNECT_PROOF_Client::tokio_read_protocol::<R, crate::private::Internal>(r, protocol_version).await?)),
+            0x10 => Ok(Self::CMD_REALM_LIST(CMD_REALM_LIST_Client::tokio_read_protocol::<R, crate::private::Internal>(r, protocol_version).await?)),
+            opcode => Err(crate::errors::ExpectedOpcodeError::Opcode(opcode as u32)),
+        }
+    }
+
+    #[cfg(feature = "async-std")]
+    pub async fn astd_read_protocol<R: async_std::io::ReadExt + Unpin + Send>(mut r: R, protocol_version: crate::all::ProtocolVersion) -> Result<Self, crate::errors::ExpectedOpcodeError> {
+        let opcode = crate::util::astd_read_u8_le(&mut r).await?;
+        match opcode {
+            0x00 => Ok(Self::CMD_AUTH_LOGON_CHALLENGE(CMD_AUTH_LOGON_CHALLENGE_Client::astd_read_protocol::<R, crate::private::Internal>(r, protocol_version).await?)),
+            0x01 => Ok(Self::CMD_AUTH_LOGON_PROOF(CMD_AUTH_LOGON_PROOF_Client::astd_read_protocol::<R, crate::private::Internal>(r, protocol_version).await?)),
+            0x02 => Ok(Self::CMD_AUTH_RECONNECT_CHALLENGE(CMD_AUTH_RECONNECT_CHALLENGE_Client::astd_read_protocol::<R, crate::private::Internal>(r, protocol_version).await?)),
+            0x03 => Ok(Self::CMD_AUTH_RECONNECT_PROOF(CMD_AUTH_RECONNECT_PROOF_Client::astd_read_protocol::<R, crate::private::Internal>(r, protocol_version).await?)),
+            0x10 => Ok(Self::CMD_REALM_LIST(CMD_REALM_LIST_Client::astd_read_protocol::<R, crate::private::Internal>(r, protocol_version).await?)),
             opcode => Err(crate::errors::ExpectedOpcodeError::Opcode(opcode as u32)),
         }
     }
@@ -169,6 +212,48 @@ impl ServerOpcodeMessage {
             0x02 => Ok(Self::CMD_AUTH_RECONNECT_CHALLENGE(CMD_AUTH_RECONNECT_CHALLENGE_Server::astd_read::<R, crate::private::Internal>(r).await?)),
             0x03 => Ok(Self::CMD_AUTH_RECONNECT_PROOF(CMD_AUTH_RECONNECT_PROOF_Server::astd_read::<R, crate::private::Internal>(r).await?)),
             0x10 => Ok(Self::CMD_REALM_LIST(CMD_REALM_LIST_Server::astd_read::<R, crate::private::Internal>(r).await?)),
+            opcode => Err(crate::errors::ExpectedOpcodeError::Opcode(opcode as u32)),
+        }
+    }
+
+}
+
+impl ServerOpcodeMessage {
+    #[cfg(feature = "sync")]
+    pub fn read_protocol<R: std::io::Read>(mut r: R, protocol_version: crate::all::ProtocolVersion) -> Result<Self, crate::errors::ExpectedOpcodeError> {
+        let opcode = crate::util::read_u8_le(&mut r)?;
+        match opcode {
+            0x00 => Ok(Self::CMD_AUTH_LOGON_CHALLENGE(CMD_AUTH_LOGON_CHALLENGE_Server::read_protocol::<R, crate::private::Internal>(r, protocol_version)?)),
+            0x01 => Ok(Self::CMD_AUTH_LOGON_PROOF(CMD_AUTH_LOGON_PROOF_Server::read_protocol::<R, crate::private::Internal>(r, protocol_version)?)),
+            0x02 => Ok(Self::CMD_AUTH_RECONNECT_CHALLENGE(CMD_AUTH_RECONNECT_CHALLENGE_Server::read_protocol::<R, crate::private::Internal>(r, protocol_version)?)),
+            0x03 => Ok(Self::CMD_AUTH_RECONNECT_PROOF(CMD_AUTH_RECONNECT_PROOF_Server::read_protocol::<R, crate::private::Internal>(r, protocol_version)?)),
+            0x10 => Ok(Self::CMD_REALM_LIST(CMD_REALM_LIST_Server::read_protocol::<R, crate::private::Internal>(r, protocol_version)?)),
+            opcode => Err(crate::errors::ExpectedOpcodeError::Opcode(opcode as u32)),
+        }
+    }
+
+    #[cfg(feature = "tokio")]
+    pub async fn tokio_read_protocol<R: tokio::io::AsyncReadExt + Unpin + Send>(mut r: R, protocol_version: crate::all::ProtocolVersion) -> Result<Self, crate::errors::ExpectedOpcodeError> {
+        let opcode = crate::util::tokio_read_u8_le(&mut r).await?;
+        match opcode {
+            0x00 => Ok(Self::CMD_AUTH_LOGON_CHALLENGE(CMD_AUTH_LOGON_CHALLENGE_Server::tokio_read_protocol::<R, crate::private::Internal>(r, protocol_version).await?)),
+            0x01 => Ok(Self::CMD_AUTH_LOGON_PROOF(CMD_AUTH_LOGON_PROOF_Server::tokio_read_protocol::<R, crate::private::Internal>(r, protocol_version).await?)),
+            0x02 => Ok(Self::CMD_AUTH_RECONNECT_CHALLENGE(CMD_AUTH_RECONNECT_CHALLENGE_Server::tokio_read_protocol::<R, crate::private::Internal>(r, protocol_version).await?)),
+            0x03 => Ok(Self::CMD_AUTH_RECONNECT_PROOF(CMD_AUTH_RECONNECT_PROOF_Server::tokio_read_protocol::<R, crate::private::Internal>(r, protocol_version).await?)),
+            0x10 => Ok(Self::CMD_REALM_LIST(CMD_REALM_LIST_Server::tokio_read_protocol::<R, crate::private::Internal>(r, protocol_version).await?)),
+            opcode => Err(crate::errors::ExpectedOpcodeError::Opcode(opcode as u32)),
+        }
+    }
+
+    #[cfg(feature = "async-std")]
+    pub async fn astd_read_protocol<R: async_std::io::ReadExt + Unpin + Send>(mut r: R, protocol_version: crate::all::ProtocolVersion) -> Result<Self, crate::errors::ExpectedOpcodeError> {
+        let opcode = crate::util::astd_read_u8_le(&mut r).await?;
+        match opcode {
+            0x00 => Ok(Self::CMD_AUTH_LOGON_CHALLENGE(CMD_AUTH_LOGON_CHALLENGE_Server::astd_read_protocol::<R, crate::private::Internal>(r, protocol_version).await?)),
+            0x01 => Ok(Self::CMD_AUTH_LOGON_PROOF(CMD_AUTH_LOGON_PROOF_Server::astd_read_protocol::<R, crate::private::Internal>(r, protocol_version).await?)),
+            0x02 => Ok(Self::CMD_AUTH_RECONNECT_CHALLENGE(CMD_AUTH_RECONNECT_CHALLENGE_Server::astd_read_protocol::<R, crate::private::Internal>(r, protocol_version).await?)),
+            0x03 => Ok(Self::CMD_AUTH_RECONNECT_PROOF(CMD_AUTH_RECONNECT_PROOF_Server::astd_read_protocol::<R, crate::private::Internal>(r, protocol_version).await?)),
+            0x10 => Ok(Self::CMD_REALM_LIST(CMD_REALM_LIST_Server::astd_read_protocol::<R, crate::private::Internal>(r, protocol_version).await?)),
             opcode => Err(crate::errors::ExpectedOpcodeError::Opcode(opcode as u32)),
         }
     }
