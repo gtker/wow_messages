@@ -11,10 +11,6 @@ mod cmd_realm_list_server;
 
 use crate::all::ProtocolVersion;
 use crate::errors::CollectiveError;
-pub use crate::version_8::cmd_auth_logon_challenge_server::*;
-pub use crate::version_8::cmd_auth_logon_proof_client::*;
-pub use crate::version_8::cmd_auth_reconnect_challenge_server::*;
-pub use crate::version_8::cmd_auth_reconnect_proof_server::*;
 use crate::{errors, private, Message};
 
 pub trait CollectiveMessage: Message + Send + Sync {

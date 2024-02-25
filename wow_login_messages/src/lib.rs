@@ -129,6 +129,7 @@ pub(crate) mod logon;
 pub(crate) mod manual;
 pub(crate) mod util;
 
+pub use collective::*;
 pub use logon::*;
 
 /// Default used by the auth server.
