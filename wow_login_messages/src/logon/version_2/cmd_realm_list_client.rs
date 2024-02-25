@@ -1,3 +1,4 @@
+use crate::Message;
 use crate::ClientMessage;
 use std::io::{Read, Write};
 
@@ -72,7 +73,7 @@ impl CMD_REALM_LIST_Client {
 
 }
 
-impl ClientMessage for CMD_REALM_LIST_Client {
+impl Message for CMD_REALM_LIST_Client {
     const OPCODE: u8 = 0x10;
 
     #[cfg(feature = "sync")]
@@ -153,6 +154,7 @@ impl ClientMessage for CMD_REALM_LIST_Client {
 
 }
 
+impl ClientMessage for CMD_REALM_LIST_Client {}
 #[cfg(test)]
 mod test_version_2 {
     #![allow(clippy::missing_const_for_fn)]

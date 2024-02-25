@@ -503,7 +503,7 @@ pub(crate) fn impl_read_and_writable_login(
         }
     });
 
-    s.open_curly(format!("impl {trait_to_impl} for {type_name}",));
+    s.open_curly(format!("impl Message for {type_name}",));
     s.wln(format!("const OPCODE: u8 = {opcode:#04x};"));
     s.newline();
 
@@ -539,6 +539,8 @@ pub(crate) fn impl_read_and_writable_login(
     }
 
     s.closing_curly_newline(); // impl
+
+    s.wln(format!("impl {trait_to_impl} for {} {{}}", e.name()));
 }
 
 fn impl_read_write_struct(s: &mut Writer, e: &Container, o: &Objects) {

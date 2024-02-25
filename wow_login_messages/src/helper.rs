@@ -11,6 +11,8 @@
 #[cfg(any(feature = "sync", feature = "tokio", feature = "async-std"))]
 use crate::errors::ExpectedOpcodeError;
 #[cfg(any(feature = "sync", feature = "tokio", feature = "async-std"))]
+use crate::Message;
+#[cfg(any(feature = "sync", feature = "tokio", feature = "async-std"))]
 use crate::{ClientMessage, ServerMessage};
 
 use crate::logon::all::CMD_AUTH_LOGON_CHALLENGE_Client;

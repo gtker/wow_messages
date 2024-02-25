@@ -1,3 +1,4 @@
+use crate::Message;
 use crate::ClientMessage;
 use std::io::{Read, Write};
 
@@ -166,7 +167,7 @@ impl CMD_AUTH_RECONNECT_PROOF_Client {
 
 }
 
-impl ClientMessage for CMD_AUTH_RECONNECT_PROOF_Client {
+impl Message for CMD_AUTH_RECONNECT_PROOF_Client {
     const OPCODE: u8 = 0x03;
 
     #[cfg(feature = "sync")]
@@ -247,6 +248,7 @@ impl ClientMessage for CMD_AUTH_RECONNECT_PROOF_Client {
 
 }
 
+impl ClientMessage for CMD_AUTH_RECONNECT_PROOF_Client {}
 #[cfg(test)]
 mod test_version_2 {
     #![allow(clippy::missing_const_for_fn)]

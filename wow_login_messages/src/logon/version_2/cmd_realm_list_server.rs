@@ -1,3 +1,4 @@
+use crate::Message;
 use crate::ServerMessage;
 use std::io::{Read, Write};
 
@@ -167,7 +168,7 @@ impl CMD_REALM_LIST_Server {
 
 }
 
-impl ServerMessage for CMD_REALM_LIST_Server {
+impl Message for CMD_REALM_LIST_Server {
     const OPCODE: u8 = 0x10;
 
     #[cfg(feature = "sync")]
@@ -248,6 +249,7 @@ impl ServerMessage for CMD_REALM_LIST_Server {
 
 }
 
+impl ServerMessage for CMD_REALM_LIST_Server {}
 impl CMD_REALM_LIST_Server {
     pub(crate) fn size(&self) -> usize {
         2 // size: u16

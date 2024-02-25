@@ -8,7 +8,7 @@ use wow_login_messages::errors::ExpectedOpcodeError;
 use wow_login_messages::helper::{
     tokio_expect_client_message, tokio_read_initial_message, InitialMessage,
 };
-use wow_login_messages::ServerMessage;
+use wow_login_messages::Message;
 use wow_srp::normalized_string::NormalizedString;
 use wow_srp::server::{SrpProof, SrpServer, SrpVerifier};
 use wow_srp::{PublicKey, GENERATOR, LARGE_SAFE_PRIME_LITTLE_ENDIAN};

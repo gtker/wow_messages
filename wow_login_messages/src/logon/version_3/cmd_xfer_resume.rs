@@ -1,3 +1,4 @@
+use crate::Message;
 use crate::ClientMessage;
 use std::io::{Read, Write};
 
@@ -59,7 +60,7 @@ impl CMD_XFER_RESUME {
 
 }
 
-impl ClientMessage for CMD_XFER_RESUME {
+impl Message for CMD_XFER_RESUME {
     const OPCODE: u8 = 0x33;
 
     #[cfg(feature = "sync")]
@@ -140,6 +141,7 @@ impl ClientMessage for CMD_XFER_RESUME {
 
 }
 
+impl ClientMessage for CMD_XFER_RESUME {}
 #[cfg(test)]
 mod test {
     #![allow(clippy::missing_const_for_fn)]

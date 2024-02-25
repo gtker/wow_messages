@@ -1,3 +1,4 @@
+use crate::Message;
 use crate::ClientMessage;
 use std::io::{Read, Write};
 
@@ -249,7 +250,7 @@ impl CMD_AUTH_RECONNECT_CHALLENGE_Client {
 
 }
 
-impl ClientMessage for CMD_AUTH_RECONNECT_CHALLENGE_Client {
+impl Message for CMD_AUTH_RECONNECT_CHALLENGE_Client {
     const OPCODE: u8 = 0x02;
 
     #[cfg(feature = "sync")]
@@ -330,6 +331,7 @@ impl ClientMessage for CMD_AUTH_RECONNECT_CHALLENGE_Client {
 
 }
 
+impl ClientMessage for CMD_AUTH_RECONNECT_CHALLENGE_Client {}
 impl CMD_AUTH_RECONNECT_CHALLENGE_Client {
     pub(crate) fn size(&self) -> usize {
         1 // protocol_version: ProtocolVersion

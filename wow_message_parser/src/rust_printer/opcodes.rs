@@ -66,6 +66,7 @@ pub(crate) fn login_includes(s: &mut Writer, container_type: ContainerType) {
         s.wln(format!(
             "use crate::{{{SERVER_MESSAGE_TRAIT_NAME}, {CLIENT_MESSAGE_TRAIT_NAME}}};"
         ));
+        s.wln("use crate::Message;");
 
         s.wln(SYNC_IMPORT);
 
@@ -141,12 +142,10 @@ pub(crate) fn definition(s: &mut Writer, v: &[&Container], ty: &str, version: Ve
         for &e in v {
             let ty = if e.empty_body() {
                 "".to_string()
+            } else if e.should_be_boxed() {
+                format!("(Box<{}>)", e.name())
             } else {
-                if e.should_be_boxed() {
-                    format!("(Box<{}>)", e.name())
-                } else {
-                    format!("({})", e.name())
-                }
+                format!("({})", e.name())
             };
             s.wln(format!(
                 "{enum_name}{ty},",
@@ -418,16 +417,14 @@ pub(crate) fn common_impls_world(
                         s.wln(format!(
                             "Self::{en} => crate::Message::to_test_case_string(&{name}{{}}),",
                         ));
+                    } else if container.should_be_boxed() {
+                        s.wln(format!(
+                            "Self::{en}(c) => crate::Message::to_test_case_string(c.as_ref()),",
+                        ));
                     } else {
-                        if container.should_be_boxed() {
-                            s.wln(format!(
-                                "Self::{en}(c) => crate::Message::to_test_case_string(c.as_ref()),",
-                            ));
-                        } else {
-                            s.wln(format!(
-                                "Self::{en}(c) => crate::Message::to_test_case_string(c),",
-                            ));
-                        }
+                        s.wln(format!(
+                            "Self::{en}(c) => crate::Message::to_test_case_string(c),",
+                        ));
                     }
                 }
 
@@ -656,12 +653,10 @@ fn print_froms(s: &mut Writer, v: &[&Container], ty: &str) {
             |s| {
                 let (variable, extra) = if e.empty_body() {
                     ("_", "")
+                } else if e.should_be_boxed() {
+                    ("c", "(Box::new(c))")
                 } else {
-                    if e.should_be_boxed() {
-                        ("c", "(Box::new(c))")
-                    } else {
-                        ("c", "(c)")
-                    }
+                    ("c", "(c)")
                 };
 
                 s.body(format!("fn from({variable}: {}) -> Self", e.name()), |s| {

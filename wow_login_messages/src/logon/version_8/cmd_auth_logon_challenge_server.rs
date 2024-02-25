@@ -1,3 +1,4 @@
+use crate::Message;
 use crate::ServerMessage;
 use std::io::{Read, Write};
 
@@ -631,7 +632,7 @@ impl CMD_AUTH_LOGON_CHALLENGE_Server {
 
 }
 
-impl ServerMessage for CMD_AUTH_LOGON_CHALLENGE_Server {
+impl Message for CMD_AUTH_LOGON_CHALLENGE_Server {
     const OPCODE: u8 = 0x00;
 
     #[cfg(feature = "sync")]
@@ -712,6 +713,7 @@ impl ServerMessage for CMD_AUTH_LOGON_CHALLENGE_Server {
 
 }
 
+impl ServerMessage for CMD_AUTH_LOGON_CHALLENGE_Server {}
 impl CMD_AUTH_LOGON_CHALLENGE_Server {
     pub(crate) fn size(&self) -> usize {
         1 // protocol_version: u8

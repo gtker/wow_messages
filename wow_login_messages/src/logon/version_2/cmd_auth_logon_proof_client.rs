@@ -1,3 +1,4 @@
+use crate::Message;
 use crate::ClientMessage;
 use std::io::{Read, Write};
 
@@ -188,7 +189,7 @@ impl CMD_AUTH_LOGON_PROOF_Client {
 
 }
 
-impl ClientMessage for CMD_AUTH_LOGON_PROOF_Client {
+impl Message for CMD_AUTH_LOGON_PROOF_Client {
     const OPCODE: u8 = 0x01;
 
     #[cfg(feature = "sync")]
@@ -269,6 +270,7 @@ impl ClientMessage for CMD_AUTH_LOGON_PROOF_Client {
 
 }
 
+impl ClientMessage for CMD_AUTH_LOGON_PROOF_Client {}
 impl CMD_AUTH_LOGON_PROOF_Client {
     pub(crate) fn size(&self) -> usize {
         32 // client_public_key: u8[32]

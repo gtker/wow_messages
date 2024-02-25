@@ -133,17 +133,17 @@ pub use logon::*;
 /// Clients will automatically connect to this when no port is specified in the `realmlist.wtf`.
 pub const DEFAULT_PORT: u16 = 3724;
 
-/// Trait to write messages sent **from** the server.
+/// Trait for reading and writing messages.
 ///
-/// In order to read messages sent from the server use the [`ServerOpcodeMessage`](version_2::opcodes::ServerOpcodeMessage)
-/// with the correct version.
+/// Use either the [`ServerOpcodeMessage`](version_2::opcodes::ServerOpcodeMessage) for messages sent from the server,
+/// with the correct version, or [`ClientOpcodeMessage`](version_2::opcodes::ClientOpcodeMessage) for messages sent from the client.
 ///
 /// Do not be alarmed by the excessive boilerplate on the async functions,
 /// it is required for async functions in traits.
 ///
 /// This trait also has a bunch of hidden functions that are necessary for the [`helper`]
 /// and [`opcodes`](version_2::opcodes) modules to work.
-pub trait ServerMessage: Sized + private::Sealed {
+pub trait Message: Sized + private::Sealed {
     #[doc(hidden)]
     const OPCODE: u8;
 
@@ -198,70 +198,11 @@ pub trait ServerMessage: Sized + private::Sealed {
         Self: 'async_trait;
 }
 
-/// Trait to write messages sent **from** the client.
-///
-/// In order to read messages sent from the client use the [`ClientOpcodeMessage`](version_2::opcodes::ClientOpcodeMessage)
-/// with the correct version.
-///
-/// Do not be alarmed by the excessive boilerplate on the async functions,
-/// it is required for async functions in traits.
-///
-/// This trait also has a bunch of hidden functions that are necessary for the [`helper`]
-/// and [`opcodes`](version_2::opcodes) modules to work.
-pub trait ClientMessage: Sized + private::Sealed {
-    #[doc(hidden)]
-    const OPCODE: u8;
+/// Marker trait for messages sent **from** the server.
+pub trait ServerMessage: Message {}
 
-    #[doc(hidden)]
-    #[cfg(feature = "sync")]
-    fn read<R: std::io::Read, I: private::Sealed>(r: R) -> Result<Self, errors::ParseError>;
-
-    #[cfg(feature = "sync")]
-    fn write<W: std::io::Write>(&self, w: W) -> Result<(), std::io::Error>;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        None
-    }
-
-    #[doc(hidden)]
-    #[cfg(feature = "async-std")]
-    fn astd_read<'async_trait, R, I: private::Sealed>(
-        r: R,
-    ) -> Pin<Box<dyn Future<Output = Result<Self, errors::ParseError>> + Send + 'async_trait>>
-    where
-        R: 'async_trait + ReadExt + Unpin + Send,
-        Self: 'async_trait;
-
-    #[cfg(feature = "async-std")]
-    fn astd_write<'life0, 'async_trait, W>(
-        &'life0 self,
-        w: W,
-    ) -> Pin<Box<dyn Future<Output = Result<(), std::io::Error>> + Send + 'async_trait>>
-    where
-        W: 'async_trait + WriteExt + Unpin + Send,
-        'life0: 'async_trait,
-        Self: 'async_trait;
-
-    #[doc(hidden)]
-    #[cfg(feature = "tokio")]
-    fn tokio_read<'async_trait, R, I: private::Sealed>(
-        r: R,
-    ) -> Pin<Box<dyn Future<Output = Result<Self, errors::ParseError>> + Send + 'async_trait>>
-    where
-        R: 'async_trait + AsyncReadExt + Unpin + Send,
-        Self: 'async_trait;
-
-    #[cfg(feature = "tokio")]
-    fn tokio_write<'life0, 'async_trait, W>(
-        &'life0 self,
-        w: W,
-    ) -> Pin<Box<dyn Future<Output = Result<(), std::io::Error>> + Send + 'async_trait>>
-    where
-        W: 'async_trait + AsyncWriteExt + Unpin + Send,
-        'life0: 'async_trait,
-        Self: 'async_trait;
-}
+/// Marker trait for messages sent **from** the client.
+pub trait ClientMessage: Message {}
 
 #[doc(hidden)]
 pub(crate) mod private {

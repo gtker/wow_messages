@@ -1,4 +1,5 @@
 use crate::{ServerMessage, ClientMessage};
+use crate::Message;
 use std::io::{Read, Write};
 use super::*;
 use crate::all::*;

@@ -1,3 +1,4 @@
+use crate::Message;
 use crate::ServerMessage;
 use std::io::{Read, Write};
 
@@ -202,7 +203,7 @@ impl CMD_AUTH_RECONNECT_CHALLENGE_Server {
 
 }
 
-impl ServerMessage for CMD_AUTH_RECONNECT_CHALLENGE_Server {
+impl Message for CMD_AUTH_RECONNECT_CHALLENGE_Server {
     const OPCODE: u8 = 0x02;
 
     #[cfg(feature = "sync")]
@@ -283,6 +284,7 @@ impl ServerMessage for CMD_AUTH_RECONNECT_CHALLENGE_Server {
 
 }
 
+impl ServerMessage for CMD_AUTH_RECONNECT_CHALLENGE_Server {}
 impl CMD_AUTH_RECONNECT_CHALLENGE_Server {
     pub(crate) const fn size(&self) -> usize {
         self.result.size() // result: CMD_AUTH_RECONNECT_CHALLENGE_Server_LoginResult

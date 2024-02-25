@@ -1,3 +1,4 @@
+use crate::Message;
 use crate::ServerMessage;
 use std::io::{Read, Write};
 
@@ -92,7 +93,7 @@ impl CMD_XFER_DATA {
 
 }
 
-impl ServerMessage for CMD_XFER_DATA {
+impl Message for CMD_XFER_DATA {
     const OPCODE: u8 = 0x31;
 
     #[cfg(feature = "sync")]
@@ -173,6 +174,7 @@ impl ServerMessage for CMD_XFER_DATA {
 
 }
 
+impl ServerMessage for CMD_XFER_DATA {}
 impl CMD_XFER_DATA {
     pub(crate) fn size(&self) -> usize {
         2 // size: u16

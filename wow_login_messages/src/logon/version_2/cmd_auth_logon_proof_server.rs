@@ -1,3 +1,4 @@
+use crate::Message;
 use crate::ServerMessage;
 use std::io::{Read, Write};
 
@@ -185,7 +186,7 @@ impl CMD_AUTH_LOGON_PROOF_Server {
 
 }
 
-impl ServerMessage for CMD_AUTH_LOGON_PROOF_Server {
+impl Message for CMD_AUTH_LOGON_PROOF_Server {
     const OPCODE: u8 = 0x01;
 
     #[cfg(feature = "sync")]
@@ -266,6 +267,7 @@ impl ServerMessage for CMD_AUTH_LOGON_PROOF_Server {
 
 }
 
+impl ServerMessage for CMD_AUTH_LOGON_PROOF_Server {}
 impl CMD_AUTH_LOGON_PROOF_Server {
     pub(crate) const fn size(&self) -> usize {
         self.result.size() // result: CMD_AUTH_LOGON_PROOF_Server_LoginResult

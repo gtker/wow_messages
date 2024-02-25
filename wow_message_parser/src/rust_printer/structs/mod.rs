@@ -40,9 +40,11 @@ pub(crate) fn print_struct(e: &Container, o: &Objects) -> Writer {
 fn print_includes(s: &mut Writer, e: &Container, o: &Objects) {
     match e.container_type() {
         ContainerType::CLogin(_) => {
+            s.wln("use crate::Message;");
             s.wln(format!("use crate::{CLIENT_MESSAGE_TRAIT_NAME};"));
         }
         ContainerType::SLogin(_) => {
+            s.wln("use crate::Message;");
             s.wln(format!("use crate::{SERVER_MESSAGE_TRAIT_NAME};"));
         }
         ContainerType::Msg(_) | ContainerType::CMsg(_) | ContainerType::SMsg(_) => {

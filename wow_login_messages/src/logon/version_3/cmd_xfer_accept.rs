@@ -1,3 +1,4 @@
+use crate::Message;
 use crate::ClientMessage;
 use std::io::{Read, Write};
 
@@ -42,7 +43,7 @@ impl CMD_XFER_ACCEPT {
 
 }
 
-impl ClientMessage for CMD_XFER_ACCEPT {
+impl Message for CMD_XFER_ACCEPT {
     const OPCODE: u8 = 0x32;
 
     #[cfg(feature = "sync")]
@@ -123,6 +124,7 @@ impl ClientMessage for CMD_XFER_ACCEPT {
 
 }
 
+impl ClientMessage for CMD_XFER_ACCEPT {}
 #[cfg(test)]
 mod test {
     #![allow(clippy::missing_const_for_fn)]

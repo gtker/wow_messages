@@ -1,3 +1,4 @@
+use crate::Message;
 use crate::ClientMessage;
 use std::io::{Read, Write};
 
@@ -126,7 +127,7 @@ impl CMD_SURVEY_RESULT {
 
 }
 
-impl ClientMessage for CMD_SURVEY_RESULT {
+impl Message for CMD_SURVEY_RESULT {
     const OPCODE: u8 = 0x04;
 
     #[cfg(feature = "sync")]
@@ -207,6 +208,7 @@ impl ClientMessage for CMD_SURVEY_RESULT {
 
 }
 
+impl ClientMessage for CMD_SURVEY_RESULT {}
 impl CMD_SURVEY_RESULT {
     pub(crate) fn size(&self) -> usize {
         4 // survey_id: u32

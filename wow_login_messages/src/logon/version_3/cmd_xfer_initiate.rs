@@ -1,3 +1,4 @@
+use crate::Message;
 use crate::ServerMessage;
 use std::io::{Read, Write};
 
@@ -42,7 +43,7 @@ impl CMD_XFER_INITIATE {
 
 }
 
-impl ServerMessage for CMD_XFER_INITIATE {
+impl Message for CMD_XFER_INITIATE {
     const OPCODE: u8 = 0x30;
 
     #[cfg(feature = "sync")]
@@ -123,6 +124,7 @@ impl ServerMessage for CMD_XFER_INITIATE {
 
 }
 
+impl ServerMessage for CMD_XFER_INITIATE {}
 #[cfg(test)]
 mod test {
     #![allow(clippy::missing_const_for_fn)]
