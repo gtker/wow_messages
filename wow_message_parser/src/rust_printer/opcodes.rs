@@ -449,9 +449,9 @@ pub(crate) fn common_impls_world(
                     let name = container.name();
 
                     if container.empty_body() {
-                        s.wln(format!("Self::{en} => \"{name}\",", ));
+                        s.wln(format!("Self::{en} => \"{name}\",",));
                     } else {
-                        s.wln(format!("Self::{en}(_) => \"{name}\",", ));
+                        s.wln(format!("Self::{en}(_) => \"{name}\",",));
                     }
                 }
             });

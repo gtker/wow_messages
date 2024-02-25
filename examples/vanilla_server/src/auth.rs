@@ -80,9 +80,9 @@ async fn reconnect_version_8(
             checksum_salt: [0; 16],
         },
     }
-        .tokio_write(&mut stream)
-        .await
-        .unwrap();
+    .tokio_write(&mut stream)
+    .await
+    .unwrap();
 
     let l = tokio_expect_client_message::<CMD_AUTH_RECONNECT_PROOF_Client, _>(&mut stream)
         .await
@@ -99,9 +99,9 @@ async fn reconnect_version_8(
         CMD_AUTH_RECONNECT_PROOF_Server {
             result: LoginResult::FailBanned,
         }
-            .tokio_write(&mut stream)
-            .await
-            .unwrap();
+        .tokio_write(&mut stream)
+        .await
+        .unwrap();
 
         return;
     }
@@ -109,9 +109,9 @@ async fn reconnect_version_8(
     CMD_AUTH_RECONNECT_PROOF_Server {
         result: LoginResult::Success,
     }
-        .tokio_write(&mut stream)
-        .await
-        .unwrap();
+    .tokio_write(&mut stream)
+    .await
+    .unwrap();
 
     print_version_8_realm_list(stream).await;
 }
@@ -138,9 +138,9 @@ async fn reconnect_version_2(
             checksum_salt: [0; 16],
         },
     }
-        .tokio_write(&mut stream)
-        .await
-        .unwrap();
+    .tokio_write(&mut stream)
+    .await
+    .unwrap();
 
     let l = tokio_expect_client_message::<CMD_AUTH_RECONNECT_PROOF_Client, _>(&mut stream)
         .await
@@ -157,9 +157,9 @@ async fn reconnect_version_2(
         CMD_AUTH_RECONNECT_PROOF_Server {
             result: LoginResult::FailBanned,
         }
-            .tokio_write(&mut stream)
-            .await
-            .unwrap();
+        .tokio_write(&mut stream)
+        .await
+        .unwrap();
 
         return;
     }
@@ -167,9 +167,9 @@ async fn reconnect_version_2(
     CMD_AUTH_RECONNECT_PROOF_Server {
         result: LoginResult::Success,
     }
-        .tokio_write(&mut stream)
-        .await
-        .unwrap();
+    .tokio_write(&mut stream)
+    .await
+    .unwrap();
 
     print_version_2_3_realm_list(stream).await;
 }
@@ -195,9 +195,9 @@ async fn login_version_2(
             crc_salt: [0; 16],
         },
     }
-        .tokio_write(&mut stream)
-        .await
-        .unwrap();
+    .tokio_write(&mut stream)
+    .await
+    .unwrap();
     println!("Sent Logon Challenge");
 
     let l = tokio_expect_client_message::<CMD_AUTH_LOGON_PROOF_Client, _>(&mut stream)
@@ -217,9 +217,9 @@ async fn login_version_2(
             hardware_survey_id: 0,
         },
     }
-        .tokio_write(&mut stream)
-        .await
-        .unwrap();
+    .tokio_write(&mut stream)
+    .await
+    .unwrap();
     println!("Sent Logon Proof");
 
     users.lock().unwrap().insert(username, p);
@@ -254,9 +254,9 @@ async fn login_version_3(
             security_flag: CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlag::None,
         },
     }
-        .tokio_write(&mut stream)
-        .await
-        .unwrap();
+    .tokio_write(&mut stream)
+    .await
+    .unwrap();
     println!("Sent Logon Challenge");
 
     let l = tokio_expect_client_message::<CMD_AUTH_LOGON_PROOF_Client, _>(&mut stream)
@@ -276,9 +276,9 @@ async fn login_version_3(
             hardware_survey_id: 0,
         },
     }
-        .tokio_write(&mut stream)
-        .await
-        .unwrap();
+    .tokio_write(&mut stream)
+    .await
+    .unwrap();
     println!("Sent Logon Proof");
 
     users.lock().unwrap().insert(username.to_string(), p);
@@ -307,9 +307,9 @@ async fn login_version_8(
             security_flag: CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlag::empty(),
         },
     }
-        .tokio_write(&mut stream)
-        .await
-        .unwrap();
+    .tokio_write(&mut stream)
+    .await
+    .unwrap();
     println!("Sent Logon Challenge");
 
     let l = tokio_expect_client_message::<CMD_AUTH_LOGON_PROOF_Client, _>(&mut stream)
@@ -331,9 +331,9 @@ async fn login_version_8(
             unknown: 0,
         },
     }
-        .tokio_write(&mut stream)
-        .await
-        .unwrap();
+    .tokio_write(&mut stream)
+    .await
+    .unwrap();
     println!("Sent Logon Proof");
 
     users.lock().unwrap().insert(username.to_string(), p);
@@ -357,9 +357,9 @@ async fn print_version_2_3_realm_list(mut stream: TcpStream) {
                 realm_id: 0,
             }],
         }
-            .tokio_write(&mut stream)
-            .await
-            .unwrap();
+        .tokio_write(&mut stream)
+        .await
+        .unwrap();
         println!("Sent Version 2/3 Realm List");
     }
 }
