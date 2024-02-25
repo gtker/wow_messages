@@ -7,7 +7,7 @@ pub use wow_world_base::EnumError;
 #[cfg(any(feature = "vanilla", feature = "tbc"))]
 pub(crate) const MAX_ALLOCATION_SIZE: u64 = 0xFF_FF;
 
-#[cfg(feature = "wrath")]
+#[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
 pub(crate) const MAX_ALLOCATION_SIZE_WRATH: u64 = 0x7F_FF_FF;
 
 #[derive(Debug)]
