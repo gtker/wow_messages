@@ -164,7 +164,7 @@ async fn login_version_8(
             account_flag: AccountFlag::empty(),
             server_proof,
             hardware_survey_id: 0,
-            unknown_flags: 0,
+            unknown: 0,
         },
     }
     .tokio_write(&mut stream)

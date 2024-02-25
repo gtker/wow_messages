@@ -102,7 +102,7 @@ slogin CMD_AUTH_LOGON_PROOF_Server = 0x01 {
         u8[20] server_proof;
         AccountFlag account_flag;
         u32 hardware_survey_id;
-        u16 unknown_flags;
+        u16 unknown;
     }
     else {
         u16 padding = 0;
@@ -132,7 +132,7 @@ If result is equal to `SUCCESS`:
 | 0x02 | 20 / - | u8[20] | server_proof |  |
 | 0x16 | 4 / - | [AccountFlag](accountflag.md) | account_flag |  |
 | 0x1A | 4 / Little | u32 | hardware_survey_id |  |
-| 0x1E | 2 / Little | u16 | unknown_flags |  |
+| 0x1E | 2 / Little | u16 | unknown |  |
 
 Else: 
 | 0x20 | 2 / Little | u16 | padding |  |

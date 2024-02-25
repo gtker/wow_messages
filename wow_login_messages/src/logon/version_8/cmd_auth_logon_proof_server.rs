@@ -15,7 +15,7 @@ use crate::logon::version_8::{
 ///         u8[20] server_proof;
 ///         AccountFlag account_flag;
 ///         u32 hardware_survey_id;
-///         u16 unknown_flags;
+///         u16 unknown;
 ///     }
 ///     else {
 ///         u16 padding = 0;
@@ -53,7 +53,7 @@ impl CMD_AUTH_LOGON_PROOF_Server {
                 account_flag,
                 hardware_survey_id,
                 server_proof,
-                unknown_flags,
+                unknown,
             } => {
                 // server_proof: u8[20]
                 for i in server_proof.iter() {
@@ -66,8 +66,8 @@ impl CMD_AUTH_LOGON_PROOF_Server {
                 // hardware_survey_id: u32
                 w.write_all(&hardware_survey_id.to_le_bytes())?;
 
-                // unknown_flags: u16
-                w.write_all(&unknown_flags.to_le_bytes())?;
+                // unknown: u16
+                w.write_all(&unknown.to_le_bytes())?;
 
             }
             CMD_AUTH_LOGON_PROOF_Server_LoginResult::FailUnknown0 {
@@ -195,14 +195,14 @@ impl CMD_AUTH_LOGON_PROOF_Server {
                 // hardware_survey_id: u32
                 let hardware_survey_id = crate::util::read_u32_le(&mut r)?;
 
-                // unknown_flags: u16
-                let unknown_flags = crate::util::read_u16_le(&mut r)?;
+                // unknown: u16
+                let unknown = crate::util::read_u16_le(&mut r)?;
 
                 CMD_AUTH_LOGON_PROOF_Server_LoginResult::Success {
                     account_flag,
                     hardware_survey_id,
                     server_proof,
-                    unknown_flags,
+                    unknown,
                 }
             }
             LoginResult::FailUnknown0 => CMD_AUTH_LOGON_PROOF_Server_LoginResult::FailUnknown0,
@@ -248,14 +248,14 @@ impl CMD_AUTH_LOGON_PROOF_Server {
                 // hardware_survey_id: u32
                 let hardware_survey_id = crate::util::tokio_read_u32_le(&mut r).await?;
 
-                // unknown_flags: u16
-                let unknown_flags = crate::util::tokio_read_u16_le(&mut r).await?;
+                // unknown: u16
+                let unknown = crate::util::tokio_read_u16_le(&mut r).await?;
 
                 CMD_AUTH_LOGON_PROOF_Server_LoginResult::Success {
                     account_flag,
                     hardware_survey_id,
                     server_proof,
-                    unknown_flags,
+                    unknown,
                 }
             }
             LoginResult::FailUnknown0 => CMD_AUTH_LOGON_PROOF_Server_LoginResult::FailUnknown0,
@@ -301,14 +301,14 @@ impl CMD_AUTH_LOGON_PROOF_Server {
                 // hardware_survey_id: u32
                 let hardware_survey_id = crate::util::astd_read_u32_le(&mut r).await?;
 
-                // unknown_flags: u16
-                let unknown_flags = crate::util::astd_read_u16_le(&mut r).await?;
+                // unknown: u16
+                let unknown = crate::util::astd_read_u16_le(&mut r).await?;
 
                 CMD_AUTH_LOGON_PROOF_Server_LoginResult::Success {
                     account_flag,
                     hardware_survey_id,
                     server_proof,
-                    unknown_flags,
+                    unknown,
                 }
             }
             LoginResult::FailUnknown0 => CMD_AUTH_LOGON_PROOF_Server_LoginResult::FailUnknown0,
@@ -430,7 +430,7 @@ pub enum CMD_AUTH_LOGON_PROOF_Server_LoginResult {
         account_flag: AccountFlag,
         hardware_survey_id: u32,
         server_proof: [u8; 20],
-        unknown_flags: u16,
+        unknown: u16,
     },
     FailUnknown0,
     FailUnknown1,
@@ -516,7 +516,7 @@ impl CMD_AUTH_LOGON_PROOF_Server_LoginResult {
                 + 4 // account_flag: AccountFlag
                 + 4 // hardware_survey_id: u32
                 + 20 // server_proof: u8[20]
-                + 2 // unknown_flags: u16
+                + 2 // unknown: u16
             }
             Self::FailUnknown0 => {
                 1

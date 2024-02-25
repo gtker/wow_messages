@@ -13,6 +13,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 * BREAKING: `ServerMessage` and `ClientMessage` turned into marker traits with shared functionality moved into `Message`
   trait.
+* BREAKING: Renamed `unknown_flags` on version 8 `CMD_AUTH_LOGON_PROOF_Server` to `unknown` for consistency with other
+  messages.
 
 ## [0.4.0] - 2024-02-21
 
