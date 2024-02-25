@@ -357,6 +357,69 @@ impl ConstNamer {
     }
 }
 
+type Arrays<'a> = HashMap<(&'a ArrayInstances, &'static str), String>;
+
+fn get_default_values(things: &[GenericThing]) -> Arrays<'_> {
+    let mut arrays = HashMap::new();
+    for thing in things {
+        for array in &thing.arrays {
+            if array.is_default() {
+                continue;
+            }
+
+            if let Some(amount) = arrays.get_mut(&(&array.instances, array.type_name)) {
+                *amount += 1;
+            } else {
+                arrays.insert((&array.instances, array.type_name), 1);
+            }
+        }
+    }
+
+    // Ensure that most used consts have the shortest name
+    let mut arrays = arrays.into_iter().collect::<Vec<_>>();
+
+    arrays.sort_by(
+        |((value, integer), amount), ((value2, integer2), amount2)| {
+            let value = value2.cmp(value);
+            let integer = integer2.cmp(integer);
+
+            amount2.cmp(amount).then(value).then(integer)
+        },
+    );
+
+    let mut namer = ConstNamer::new();
+    let mut arrays_output = HashMap::new();
+    for (value, _) in arrays {
+        arrays_output.insert(value, namer.next());
+    }
+
+    arrays_output
+}
+
+fn print_arrays(arrays: &Arrays, sorted: &mut BTreeSet<String>) {
+    for ((array, ty_name), const_name) in arrays {
+        let mut s = Writer::new();
+        s.w(format!("const {const_name}:&[{ty_name}]=&["));
+
+        for instance in array.instances() {
+            s.w_no_indent(format!("{ty_name}{{"));
+
+            for field in instance.fields() {
+                s.w_no_indent(format!(
+                    "{}: {},",
+                    field.name,
+                    field.value.to_string_value()
+                ))
+            }
+
+            s.w_no_indent("},");
+        }
+
+        s.w_no_indent("];");
+        sorted.insert(s.into_inner());
+    }
+}
+
 #[cfg(test)]
 mod test {
     use crate::base_printer::write::items::ConstNamer;
@@ -418,68 +481,5 @@ mod test {
         assert_eq!("AZY", n.next());
         assert_eq!("AZZ", n.next());
         assert_eq!("BAA", n.next());
-    }
-}
-
-type Arrays<'a> = HashMap<(&'a ArrayInstances, &'static str), String>;
-
-fn get_default_values(things: &[GenericThing]) -> Arrays<'_> {
-    let mut arrays = HashMap::new();
-    for thing in things {
-        for array in &thing.arrays {
-            if array.is_default() {
-                continue;
-            }
-
-            if let Some(amount) = arrays.get_mut(&(&array.instances, array.type_name)) {
-                *amount += 1;
-            } else {
-                arrays.insert((&array.instances, array.type_name), 1);
-            }
-        }
-    }
-
-    // Ensure that most used consts have the shortest name
-    let mut arrays = arrays.into_iter().collect::<Vec<_>>();
-
-    arrays.sort_by(
-        |((value, integer), amount), ((value2, integer2), amount2)| {
-            let value = value2.cmp(value);
-            let integer = integer2.cmp(integer);
-
-            amount2.cmp(amount).then(value).then(integer)
-        },
-    );
-
-    let mut namer = ConstNamer::new();
-    let mut arrays_output = HashMap::new();
-    for (value, _) in arrays {
-        arrays_output.insert(value, namer.next());
-    }
-
-    arrays_output
-}
-
-fn print_arrays(arrays: &Arrays, sorted: &mut BTreeSet<String>) {
-    for ((array, ty_name), const_name) in arrays {
-        let mut s = Writer::new();
-        s.w(format!("const {const_name}:&[{ty_name}]=&["));
-
-        for instance in array.instances() {
-            s.w_no_indent(format!("{ty_name}{{"));
-
-            for field in instance.fields() {
-                s.w_no_indent(format!(
-                    "{}: {},",
-                    field.name,
-                    field.value.to_string_value()
-                ))
-            }
-
-            s.w_no_indent("},");
-        }
-
-        s.w_no_indent("];");
-        sorted.insert(s.into_inner());
     }
 }
