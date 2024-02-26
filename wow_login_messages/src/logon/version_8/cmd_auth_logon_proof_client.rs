@@ -24,8 +24,7 @@ use crate::logon::version_8::SecurityFlag;
 ///         u8[20] matrix_card_proof;
 ///     }
 ///     if (security_flag & AUTHENTICATOR) {
-///         u8 amount_of_tokens;
-///         u8[amount_of_tokens] tokens;
+///         String authenticator;
 ///     }
 /// }
 /// ```
@@ -90,13 +89,9 @@ impl CMD_AUTH_LOGON_PROOF_Client {
         }
 
         if let Some(if_statement) = &self.security_flag.authenticator {
-            // amount_of_tokens: u8
-            w.write_all(&(if_statement.tokens.len() as u8).to_le_bytes())?;
-
-            // tokens: u8[amount_of_tokens]
-            for i in if_statement.tokens.iter() {
-                w.write_all(&i.to_le_bytes())?;
-            }
+            // authenticator: String
+            w.write_all(&(if_statement.authenticator.len() as u8).to_le_bytes())?;
+            w.write_all(if_statement.authenticator.as_bytes())?;
 
         }
 
@@ -186,20 +181,15 @@ impl CMD_AUTH_LOGON_PROOF_Client {
         };
 
         let security_flag_authenticator = if security_flag.is_authenticator() {
-            // amount_of_tokens: u8
-            let amount_of_tokens = crate::util::read_u8_le(&mut r)?;
-
-            // tokens: u8[amount_of_tokens]
-            let tokens = {
-                let mut tokens = Vec::with_capacity(amount_of_tokens as usize);
-                for _ in 0..amount_of_tokens {
-                    tokens.push(crate::util::read_u8_le(&mut r)?);
-                }
-                tokens
+            // authenticator: String
+            let authenticator = {
+                let authenticator = crate::util::read_u8_le(&mut r)?;
+                let authenticator = crate::util::read_fixed_string_to_vec(&mut r, authenticator as usize)?;
+                String::from_utf8(authenticator)?
             };
 
             Some(CMD_AUTH_LOGON_PROOF_Client_SecurityFlag_Authenticator {
-                tokens,
+                authenticator,
             })
         }
         else {
@@ -301,20 +291,15 @@ impl CMD_AUTH_LOGON_PROOF_Client {
         };
 
         let security_flag_authenticator = if security_flag.is_authenticator() {
-            // amount_of_tokens: u8
-            let amount_of_tokens = crate::util::tokio_read_u8_le(&mut r).await?;
-
-            // tokens: u8[amount_of_tokens]
-            let tokens = {
-                let mut tokens = Vec::with_capacity(amount_of_tokens as usize);
-                for _ in 0..amount_of_tokens {
-                    tokens.push(crate::util::tokio_read_u8_le(&mut r).await?);
-                }
-                tokens
+            // authenticator: String
+            let authenticator = {
+                let authenticator = crate::util::tokio_read_u8_le(&mut r).await?;
+                let authenticator = crate::util::tokio_read_fixed_string_to_vec(&mut r, authenticator as usize).await?;
+                String::from_utf8(authenticator)?
             };
 
             Some(CMD_AUTH_LOGON_PROOF_Client_SecurityFlag_Authenticator {
-                tokens,
+                authenticator,
             })
         }
         else {
@@ -416,20 +401,15 @@ impl CMD_AUTH_LOGON_PROOF_Client {
         };
 
         let security_flag_authenticator = if security_flag.is_authenticator() {
-            // amount_of_tokens: u8
-            let amount_of_tokens = crate::util::astd_read_u8_le(&mut r).await?;
-
-            // tokens: u8[amount_of_tokens]
-            let tokens = {
-                let mut tokens = Vec::with_capacity(amount_of_tokens as usize);
-                for _ in 0..amount_of_tokens {
-                    tokens.push(crate::util::astd_read_u8_le(&mut r).await?);
-                }
-                tokens
+            // authenticator: String
+            let authenticator = {
+                let authenticator = crate::util::astd_read_u8_le(&mut r).await?;
+                let authenticator = crate::util::astd_read_fixed_string_to_vec(&mut r, authenticator as usize).await?;
+                String::from_utf8(authenticator)?
             };
 
             Some(CMD_AUTH_LOGON_PROOF_Client_SecurityFlag_Authenticator {
-                tokens,
+                authenticator,
             })
         }
         else {
@@ -720,13 +700,12 @@ impl CMD_AUTH_LOGON_PROOF_Client_SecurityFlag_MatrixCard {
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct CMD_AUTH_LOGON_PROOF_Client_SecurityFlag_Authenticator {
-    pub tokens: Vec<u8>,
+    pub authenticator: String,
 }
 
 impl CMD_AUTH_LOGON_PROOF_Client_SecurityFlag_Authenticator {
     pub(crate) fn size(&self) -> usize {
-        1 // amount_of_tokens: u8
-        + self.tokens.len() * core::mem::size_of::<u8>() // tokens: u8[amount_of_tokens]
+        self.authenticator.len() + 1 // authenticator: String
     }
 }
 

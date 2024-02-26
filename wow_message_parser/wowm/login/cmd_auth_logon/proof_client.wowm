@@ -334,10 +334,10 @@ clogin CMD_AUTH_LOGON_PROOF_Client = 0x01 {
         u8[20] matrix_card_proof;
     }
     if (security_flag & AUTHENTICATOR) {
-        u8 amount_of_tokens {
-            valid_range = "0 16";
-        }
-        u8[amount_of_tokens] tokens;
+        /// String entered by the user in the "Authenticator" popup.
+        /// Can be empty and up to 16 characters.
+        /// Is not used by the client in any way but just sent directly, so this could in theory be used for anything.
+        String authenticator;
     }
 } {
     login_versions = "8";

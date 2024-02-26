@@ -233,8 +233,7 @@ clogin CMD_AUTH_LOGON_PROOF_Client = 0x01 {
         u8[20] matrix_card_proof;
     }
     if (security_flag & AUTHENTICATOR) {
-        u8 amount_of_tokens;
-        u8[amount_of_tokens] tokens;
+        String authenticator;
     }
 }
 ```
@@ -276,8 +275,7 @@ If security_flag contains `AUTHENTICATOR`:
 
 | Offset | Size / Endianness | Type | Name | Comment |
 | ------ | ----------------- | ---- | ---- | ------- |
-| - | 1 / - | u8 | amount_of_tokens |  |
-| - | ? / - | u8[amount_of_tokens] | tokens |  |
+| - | - / - | String | authenticator | String entered by the user in the "Authenticator" popup.<br/>Can be empty and up to 16 characters.<br/>Is not used by the client in any way but just sent directly, so this could in theory be used for anything. |
 
 ### Examples
 
