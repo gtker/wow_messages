@@ -11,6 +11,9 @@ pub enum ClientOpcodeMessage {
     CMD_AUTH_RECONNECT_CHALLENGE(CMD_AUTH_RECONNECT_CHALLENGE_Client),
     CMD_AUTH_RECONNECT_PROOF(CMD_AUTH_RECONNECT_PROOF_Client),
     CMD_REALM_LIST(CMD_REALM_LIST_Client),
+    CMD_XFER_ACCEPT,
+    CMD_XFER_RESUME(CMD_XFER_RESUME),
+    CMD_XFER_CANCEL,
 }
 
 impl ClientOpcodeMessage {
@@ -21,6 +24,9 @@ impl ClientOpcodeMessage {
             Self::CMD_AUTH_RECONNECT_CHALLENGE(e) => e.write_into_vec(w)?,
             Self::CMD_AUTH_RECONNECT_PROOF(e) => e.write_into_vec(w)?,
             Self::CMD_REALM_LIST(e) => e.write_into_vec(w)?,
+            Self::CMD_XFER_ACCEPT => {}
+            Self::CMD_XFER_RESUME(e) => e.write_into_vec(w)?,
+            Self::CMD_XFER_CANCEL => {}
         }
 
         Ok(())
@@ -37,6 +43,9 @@ impl ClientOpcodeMessage {
             0x02 => Ok(Self::CMD_AUTH_RECONNECT_CHALLENGE(CMD_AUTH_RECONNECT_CHALLENGE_Client::read::<R, crate::private::Internal>(r)?)),
             0x03 => Ok(Self::CMD_AUTH_RECONNECT_PROOF(CMD_AUTH_RECONNECT_PROOF_Client::read::<R, crate::private::Internal>(r)?)),
             0x10 => Ok(Self::CMD_REALM_LIST(CMD_REALM_LIST_Client::read::<R, crate::private::Internal>(r)?)),
+            0x32 => Ok(Self::CMD_XFER_ACCEPT),
+            0x33 => Ok(Self::CMD_XFER_RESUME(CMD_XFER_RESUME::read::<R, crate::private::Internal>(r)?)),
+            0x34 => Ok(Self::CMD_XFER_CANCEL),
             opcode => Err(crate::errors::ExpectedOpcodeError::Opcode(opcode as u32)),
         }
     }
@@ -50,6 +59,9 @@ impl ClientOpcodeMessage {
             0x02 => Ok(Self::CMD_AUTH_RECONNECT_CHALLENGE(CMD_AUTH_RECONNECT_CHALLENGE_Client::tokio_read::<R, crate::private::Internal>(r).await?)),
             0x03 => Ok(Self::CMD_AUTH_RECONNECT_PROOF(CMD_AUTH_RECONNECT_PROOF_Client::tokio_read::<R, crate::private::Internal>(r).await?)),
             0x10 => Ok(Self::CMD_REALM_LIST(CMD_REALM_LIST_Client::tokio_read::<R, crate::private::Internal>(r).await?)),
+            0x32 => Ok(Self::CMD_XFER_ACCEPT),
+            0x33 => Ok(Self::CMD_XFER_RESUME(CMD_XFER_RESUME::tokio_read::<R, crate::private::Internal>(r).await?)),
+            0x34 => Ok(Self::CMD_XFER_CANCEL),
             opcode => Err(crate::errors::ExpectedOpcodeError::Opcode(opcode as u32)),
         }
     }
@@ -63,6 +75,9 @@ impl ClientOpcodeMessage {
             0x02 => Ok(Self::CMD_AUTH_RECONNECT_CHALLENGE(CMD_AUTH_RECONNECT_CHALLENGE_Client::astd_read::<R, crate::private::Internal>(r).await?)),
             0x03 => Ok(Self::CMD_AUTH_RECONNECT_PROOF(CMD_AUTH_RECONNECT_PROOF_Client::astd_read::<R, crate::private::Internal>(r).await?)),
             0x10 => Ok(Self::CMD_REALM_LIST(CMD_REALM_LIST_Client::astd_read::<R, crate::private::Internal>(r).await?)),
+            0x32 => Ok(Self::CMD_XFER_ACCEPT),
+            0x33 => Ok(Self::CMD_XFER_RESUME(CMD_XFER_RESUME::astd_read::<R, crate::private::Internal>(r).await?)),
+            0x34 => Ok(Self::CMD_XFER_CANCEL),
             opcode => Err(crate::errors::ExpectedOpcodeError::Opcode(opcode as u32)),
         }
     }
@@ -79,6 +94,9 @@ impl ClientOpcodeMessage {
             0x02 => Ok(Self::CMD_AUTH_RECONNECT_CHALLENGE(CMD_AUTH_RECONNECT_CHALLENGE_Client::read_protocol::<R, crate::private::Internal>(r, protocol_version)?)),
             0x03 => Ok(Self::CMD_AUTH_RECONNECT_PROOF(CMD_AUTH_RECONNECT_PROOF_Client::read_protocol::<R, crate::private::Internal>(r, protocol_version)?)),
             0x10 => Ok(Self::CMD_REALM_LIST(CMD_REALM_LIST_Client::read_protocol::<R, crate::private::Internal>(r, protocol_version)?)),
+            0x32 => Ok(Self::CMD_XFER_ACCEPT),
+            0x33 => Ok(Self::CMD_XFER_RESUME(CMD_XFER_RESUME::read_protocol::<R, crate::private::Internal>(r, protocol_version)?)),
+            0x34 => Ok(Self::CMD_XFER_CANCEL),
             opcode => Err(crate::errors::ExpectedOpcodeError::Opcode(opcode as u32)),
         }
     }
@@ -92,6 +110,9 @@ impl ClientOpcodeMessage {
             0x02 => Ok(Self::CMD_AUTH_RECONNECT_CHALLENGE(CMD_AUTH_RECONNECT_CHALLENGE_Client::tokio_read_protocol::<R, crate::private::Internal>(r, protocol_version).await?)),
             0x03 => Ok(Self::CMD_AUTH_RECONNECT_PROOF(CMD_AUTH_RECONNECT_PROOF_Client::tokio_read_protocol::<R, crate::private::Internal>(r, protocol_version).await?)),
             0x10 => Ok(Self::CMD_REALM_LIST(CMD_REALM_LIST_Client::tokio_read_protocol::<R, crate::private::Internal>(r, protocol_version).await?)),
+            0x32 => Ok(Self::CMD_XFER_ACCEPT),
+            0x33 => Ok(Self::CMD_XFER_RESUME(CMD_XFER_RESUME::tokio_read_protocol::<R, crate::private::Internal>(r, protocol_version).await?)),
+            0x34 => Ok(Self::CMD_XFER_CANCEL),
             opcode => Err(crate::errors::ExpectedOpcodeError::Opcode(opcode as u32)),
         }
     }
@@ -105,6 +126,9 @@ impl ClientOpcodeMessage {
             0x02 => Ok(Self::CMD_AUTH_RECONNECT_CHALLENGE(CMD_AUTH_RECONNECT_CHALLENGE_Client::astd_read_protocol::<R, crate::private::Internal>(r, protocol_version).await?)),
             0x03 => Ok(Self::CMD_AUTH_RECONNECT_PROOF(CMD_AUTH_RECONNECT_PROOF_Client::astd_read_protocol::<R, crate::private::Internal>(r, protocol_version).await?)),
             0x10 => Ok(Self::CMD_REALM_LIST(CMD_REALM_LIST_Client::astd_read_protocol::<R, crate::private::Internal>(r, protocol_version).await?)),
+            0x32 => Ok(Self::CMD_XFER_ACCEPT),
+            0x33 => Ok(Self::CMD_XFER_RESUME(CMD_XFER_RESUME::astd_read_protocol::<R, crate::private::Internal>(r, protocol_version).await?)),
+            0x34 => Ok(Self::CMD_XFER_CANCEL),
             opcode => Err(crate::errors::ExpectedOpcodeError::Opcode(opcode as u32)),
         }
     }
@@ -119,6 +143,9 @@ impl std::fmt::Display for ClientOpcodeMessage {
             ClientOpcodeMessage::CMD_AUTH_RECONNECT_CHALLENGE(_) => "CMD_AUTH_RECONNECT_CHALLENGE_Client",
             ClientOpcodeMessage::CMD_AUTH_RECONNECT_PROOF(_) => "CMD_AUTH_RECONNECT_PROOF_Client",
             ClientOpcodeMessage::CMD_REALM_LIST(_) => "CMD_REALM_LIST_Client",
+            ClientOpcodeMessage::CMD_XFER_ACCEPT => "CMD_XFER_ACCEPT",
+            ClientOpcodeMessage::CMD_XFER_RESUME(_) => "CMD_XFER_RESUME",
+            ClientOpcodeMessage::CMD_XFER_CANCEL => "CMD_XFER_CANCEL",
         })
     }
 }
@@ -153,6 +180,24 @@ impl From<CMD_REALM_LIST_Client> for ClientOpcodeMessage {
     }
 }
 
+impl From<CMD_XFER_ACCEPT> for ClientOpcodeMessage {
+    fn from(_: CMD_XFER_ACCEPT) -> Self {
+        Self::CMD_XFER_ACCEPT
+    }
+}
+
+impl From<CMD_XFER_RESUME> for ClientOpcodeMessage {
+    fn from(c: CMD_XFER_RESUME) -> Self {
+        Self::CMD_XFER_RESUME(c)
+    }
+}
+
+impl From<CMD_XFER_CANCEL> for ClientOpcodeMessage {
+    fn from(_: CMD_XFER_CANCEL) -> Self {
+        Self::CMD_XFER_CANCEL
+    }
+}
+
 #[derive(Debug, Clone, PartialEq)]
 pub enum ServerOpcodeMessage {
     CMD_AUTH_LOGON_CHALLENGE(CMD_AUTH_LOGON_CHALLENGE_Server),
@@ -160,6 +205,8 @@ pub enum ServerOpcodeMessage {
     CMD_AUTH_RECONNECT_CHALLENGE(CMD_AUTH_RECONNECT_CHALLENGE_Server),
     CMD_AUTH_RECONNECT_PROOF(CMD_AUTH_RECONNECT_PROOF_Server),
     CMD_REALM_LIST(CMD_REALM_LIST_Server),
+    CMD_XFER_INITIATE(CMD_XFER_INITIATE),
+    CMD_XFER_DATA(CMD_XFER_DATA),
 }
 
 impl ServerOpcodeMessage {
@@ -170,6 +217,8 @@ impl ServerOpcodeMessage {
             Self::CMD_AUTH_RECONNECT_CHALLENGE(e) => e.write_into_vec(w)?,
             Self::CMD_AUTH_RECONNECT_PROOF(e) => e.write_into_vec(w)?,
             Self::CMD_REALM_LIST(e) => e.write_into_vec(w)?,
+            Self::CMD_XFER_INITIATE(e) => e.write_into_vec(w)?,
+            Self::CMD_XFER_DATA(e) => e.write_into_vec(w)?,
         }
 
         Ok(())
@@ -186,6 +235,8 @@ impl ServerOpcodeMessage {
             0x02 => Ok(Self::CMD_AUTH_RECONNECT_CHALLENGE(CMD_AUTH_RECONNECT_CHALLENGE_Server::read::<R, crate::private::Internal>(r)?)),
             0x03 => Ok(Self::CMD_AUTH_RECONNECT_PROOF(CMD_AUTH_RECONNECT_PROOF_Server::read::<R, crate::private::Internal>(r)?)),
             0x10 => Ok(Self::CMD_REALM_LIST(CMD_REALM_LIST_Server::read::<R, crate::private::Internal>(r)?)),
+            0x30 => Ok(Self::CMD_XFER_INITIATE(CMD_XFER_INITIATE::read::<R, crate::private::Internal>(r)?)),
+            0x31 => Ok(Self::CMD_XFER_DATA(CMD_XFER_DATA::read::<R, crate::private::Internal>(r)?)),
             opcode => Err(crate::errors::ExpectedOpcodeError::Opcode(opcode as u32)),
         }
     }
@@ -199,6 +250,8 @@ impl ServerOpcodeMessage {
             0x02 => Ok(Self::CMD_AUTH_RECONNECT_CHALLENGE(CMD_AUTH_RECONNECT_CHALLENGE_Server::tokio_read::<R, crate::private::Internal>(r).await?)),
             0x03 => Ok(Self::CMD_AUTH_RECONNECT_PROOF(CMD_AUTH_RECONNECT_PROOF_Server::tokio_read::<R, crate::private::Internal>(r).await?)),
             0x10 => Ok(Self::CMD_REALM_LIST(CMD_REALM_LIST_Server::tokio_read::<R, crate::private::Internal>(r).await?)),
+            0x30 => Ok(Self::CMD_XFER_INITIATE(CMD_XFER_INITIATE::tokio_read::<R, crate::private::Internal>(r).await?)),
+            0x31 => Ok(Self::CMD_XFER_DATA(CMD_XFER_DATA::tokio_read::<R, crate::private::Internal>(r).await?)),
             opcode => Err(crate::errors::ExpectedOpcodeError::Opcode(opcode as u32)),
         }
     }
@@ -212,6 +265,8 @@ impl ServerOpcodeMessage {
             0x02 => Ok(Self::CMD_AUTH_RECONNECT_CHALLENGE(CMD_AUTH_RECONNECT_CHALLENGE_Server::astd_read::<R, crate::private::Internal>(r).await?)),
             0x03 => Ok(Self::CMD_AUTH_RECONNECT_PROOF(CMD_AUTH_RECONNECT_PROOF_Server::astd_read::<R, crate::private::Internal>(r).await?)),
             0x10 => Ok(Self::CMD_REALM_LIST(CMD_REALM_LIST_Server::astd_read::<R, crate::private::Internal>(r).await?)),
+            0x30 => Ok(Self::CMD_XFER_INITIATE(CMD_XFER_INITIATE::astd_read::<R, crate::private::Internal>(r).await?)),
+            0x31 => Ok(Self::CMD_XFER_DATA(CMD_XFER_DATA::astd_read::<R, crate::private::Internal>(r).await?)),
             opcode => Err(crate::errors::ExpectedOpcodeError::Opcode(opcode as u32)),
         }
     }
@@ -228,6 +283,8 @@ impl ServerOpcodeMessage {
             0x02 => Ok(Self::CMD_AUTH_RECONNECT_CHALLENGE(CMD_AUTH_RECONNECT_CHALLENGE_Server::read_protocol::<R, crate::private::Internal>(r, protocol_version)?)),
             0x03 => Ok(Self::CMD_AUTH_RECONNECT_PROOF(CMD_AUTH_RECONNECT_PROOF_Server::read_protocol::<R, crate::private::Internal>(r, protocol_version)?)),
             0x10 => Ok(Self::CMD_REALM_LIST(CMD_REALM_LIST_Server::read_protocol::<R, crate::private::Internal>(r, protocol_version)?)),
+            0x30 => Ok(Self::CMD_XFER_INITIATE(CMD_XFER_INITIATE::read_protocol::<R, crate::private::Internal>(r, protocol_version)?)),
+            0x31 => Ok(Self::CMD_XFER_DATA(CMD_XFER_DATA::read_protocol::<R, crate::private::Internal>(r, protocol_version)?)),
             opcode => Err(crate::errors::ExpectedOpcodeError::Opcode(opcode as u32)),
         }
     }
@@ -241,6 +298,8 @@ impl ServerOpcodeMessage {
             0x02 => Ok(Self::CMD_AUTH_RECONNECT_CHALLENGE(CMD_AUTH_RECONNECT_CHALLENGE_Server::tokio_read_protocol::<R, crate::private::Internal>(r, protocol_version).await?)),
             0x03 => Ok(Self::CMD_AUTH_RECONNECT_PROOF(CMD_AUTH_RECONNECT_PROOF_Server::tokio_read_protocol::<R, crate::private::Internal>(r, protocol_version).await?)),
             0x10 => Ok(Self::CMD_REALM_LIST(CMD_REALM_LIST_Server::tokio_read_protocol::<R, crate::private::Internal>(r, protocol_version).await?)),
+            0x30 => Ok(Self::CMD_XFER_INITIATE(CMD_XFER_INITIATE::tokio_read_protocol::<R, crate::private::Internal>(r, protocol_version).await?)),
+            0x31 => Ok(Self::CMD_XFER_DATA(CMD_XFER_DATA::tokio_read_protocol::<R, crate::private::Internal>(r, protocol_version).await?)),
             opcode => Err(crate::errors::ExpectedOpcodeError::Opcode(opcode as u32)),
         }
     }
@@ -254,6 +313,8 @@ impl ServerOpcodeMessage {
             0x02 => Ok(Self::CMD_AUTH_RECONNECT_CHALLENGE(CMD_AUTH_RECONNECT_CHALLENGE_Server::astd_read_protocol::<R, crate::private::Internal>(r, protocol_version).await?)),
             0x03 => Ok(Self::CMD_AUTH_RECONNECT_PROOF(CMD_AUTH_RECONNECT_PROOF_Server::astd_read_protocol::<R, crate::private::Internal>(r, protocol_version).await?)),
             0x10 => Ok(Self::CMD_REALM_LIST(CMD_REALM_LIST_Server::astd_read_protocol::<R, crate::private::Internal>(r, protocol_version).await?)),
+            0x30 => Ok(Self::CMD_XFER_INITIATE(CMD_XFER_INITIATE::astd_read_protocol::<R, crate::private::Internal>(r, protocol_version).await?)),
+            0x31 => Ok(Self::CMD_XFER_DATA(CMD_XFER_DATA::astd_read_protocol::<R, crate::private::Internal>(r, protocol_version).await?)),
             opcode => Err(crate::errors::ExpectedOpcodeError::Opcode(opcode as u32)),
         }
     }
@@ -268,6 +329,8 @@ impl std::fmt::Display for ServerOpcodeMessage {
             ServerOpcodeMessage::CMD_AUTH_RECONNECT_CHALLENGE(_) => "CMD_AUTH_RECONNECT_CHALLENGE_Server",
             ServerOpcodeMessage::CMD_AUTH_RECONNECT_PROOF(_) => "CMD_AUTH_RECONNECT_PROOF_Server",
             ServerOpcodeMessage::CMD_REALM_LIST(_) => "CMD_REALM_LIST_Server",
+            ServerOpcodeMessage::CMD_XFER_INITIATE(_) => "CMD_XFER_INITIATE",
+            ServerOpcodeMessage::CMD_XFER_DATA(_) => "CMD_XFER_DATA",
         })
     }
 }
@@ -299,6 +362,18 @@ impl From<CMD_AUTH_RECONNECT_PROOF_Server> for ServerOpcodeMessage {
 impl From<CMD_REALM_LIST_Server> for ServerOpcodeMessage {
     fn from(c: CMD_REALM_LIST_Server) -> Self {
         Self::CMD_REALM_LIST(c)
+    }
+}
+
+impl From<CMD_XFER_INITIATE> for ServerOpcodeMessage {
+    fn from(c: CMD_XFER_INITIATE) -> Self {
+        Self::CMD_XFER_INITIATE(c)
+    }
+}
+
+impl From<CMD_XFER_DATA> for ServerOpcodeMessage {
+    fn from(c: CMD_XFER_DATA) -> Self {
+        Self::CMD_XFER_DATA(c)
     }
 }
 

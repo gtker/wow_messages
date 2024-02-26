@@ -15,3 +15,8 @@ pub use crate::logon::version_2::cmd_auth_reconnect_proof_client::*;
 pub use crate::logon::version_5::cmd_auth_reconnect_proof_server::*;
 pub use crate::logon::version_2::cmd_realm_list_client::*;
 pub use crate::logon::version_6::cmd_realm_list_server::*;
+pub use crate::logon::version_2::cmd_xfer_accept::*;
+pub use crate::logon::version_2::cmd_xfer_cancel::*;
+pub use crate::logon::version_2::cmd_xfer_data::*;
+pub use crate::logon::version_2::cmd_xfer_initiate::*;
+pub use crate::logon::version_2::cmd_xfer_resume::*;

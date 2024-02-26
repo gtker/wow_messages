@@ -8,6 +8,11 @@ mod cmd_auth_reconnect_proof_client;
 mod cmd_auth_reconnect_proof_server;
 mod cmd_realm_list_client;
 mod cmd_realm_list_server;
+mod cmd_xfer_accept;
+mod cmd_xfer_cancel;
+mod cmd_xfer_data;
+mod cmd_xfer_initiate;
+mod cmd_xfer_resume;
 
 use crate::all::ProtocolVersion;
 use crate::errors::CollectiveError;
