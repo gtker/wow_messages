@@ -133,7 +133,6 @@ impl From<std::io::Error> for ExpectedOpcodeError {
 
 #[derive(Debug)]
 pub enum CollectiveError {
-    InvalidProtocolVersion,
     InvalidFieldSet,
     Io(std::io::Error),
 }
@@ -141,7 +140,6 @@ pub enum CollectiveError {
 impl Display for CollectiveError {
     fn fmt(&self, f: &mut Formatter<'_>) -> std::fmt::Result {
         match self {
-            CollectiveError::InvalidProtocolVersion => write!(f, "invalid protocol version"),
             CollectiveError::InvalidFieldSet => write!(f, "invalid field set in struct"),
             CollectiveError::Io(i) => i.fmt(f),
         }
