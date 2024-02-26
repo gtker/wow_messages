@@ -151,7 +151,7 @@ pub enum ServerOpcodeMessage {
     CMD_AUTH_LOGON_CHALLENGE(CMD_AUTH_LOGON_CHALLENGE_Server),
     CMD_AUTH_LOGON_PROOF(CMD_AUTH_LOGON_PROOF_Server),
     CMD_REALM_LIST(CMD_REALM_LIST_Server),
-    CMD_XFER_INITIATE,
+    CMD_XFER_INITIATE(CMD_XFER_INITIATE),
     CMD_XFER_DATA(CMD_XFER_DATA),
 }
 
@@ -161,7 +161,7 @@ impl ServerOpcodeMessage {
             Self::CMD_AUTH_LOGON_CHALLENGE(e) => e.write_into_vec(w)?,
             Self::CMD_AUTH_LOGON_PROOF(e) => e.write_into_vec(w)?,
             Self::CMD_REALM_LIST(e) => e.write_into_vec(w)?,
-            Self::CMD_XFER_INITIATE => {}
+            Self::CMD_XFER_INITIATE(e) => e.write_into_vec(w)?,
             Self::CMD_XFER_DATA(e) => e.write_into_vec(w)?,
         }
 
@@ -177,7 +177,7 @@ impl ServerOpcodeMessage {
             0x00 => Ok(Self::CMD_AUTH_LOGON_CHALLENGE(CMD_AUTH_LOGON_CHALLENGE_Server::read::<R, crate::private::Internal>(r)?)),
             0x01 => Ok(Self::CMD_AUTH_LOGON_PROOF(CMD_AUTH_LOGON_PROOF_Server::read::<R, crate::private::Internal>(r)?)),
             0x10 => Ok(Self::CMD_REALM_LIST(CMD_REALM_LIST_Server::read::<R, crate::private::Internal>(r)?)),
-            0x30 => Ok(Self::CMD_XFER_INITIATE),
+            0x30 => Ok(Self::CMD_XFER_INITIATE(CMD_XFER_INITIATE::read::<R, crate::private::Internal>(r)?)),
             0x31 => Ok(Self::CMD_XFER_DATA(CMD_XFER_DATA::read::<R, crate::private::Internal>(r)?)),
             opcode => Err(crate::errors::ExpectedOpcodeError::Opcode(opcode as u32)),
         }
@@ -190,7 +190,7 @@ impl ServerOpcodeMessage {
             0x00 => Ok(Self::CMD_AUTH_LOGON_CHALLENGE(CMD_AUTH_LOGON_CHALLENGE_Server::tokio_read::<R, crate::private::Internal>(r).await?)),
             0x01 => Ok(Self::CMD_AUTH_LOGON_PROOF(CMD_AUTH_LOGON_PROOF_Server::tokio_read::<R, crate::private::Internal>(r).await?)),
             0x10 => Ok(Self::CMD_REALM_LIST(CMD_REALM_LIST_Server::tokio_read::<R, crate::private::Internal>(r).await?)),
-            0x30 => Ok(Self::CMD_XFER_INITIATE),
+            0x30 => Ok(Self::CMD_XFER_INITIATE(CMD_XFER_INITIATE::tokio_read::<R, crate::private::Internal>(r).await?)),
             0x31 => Ok(Self::CMD_XFER_DATA(CMD_XFER_DATA::tokio_read::<R, crate::private::Internal>(r).await?)),
             opcode => Err(crate::errors::ExpectedOpcodeError::Opcode(opcode as u32)),
         }
@@ -203,7 +203,7 @@ impl ServerOpcodeMessage {
             0x00 => Ok(Self::CMD_AUTH_LOGON_CHALLENGE(CMD_AUTH_LOGON_CHALLENGE_Server::astd_read::<R, crate::private::Internal>(r).await?)),
             0x01 => Ok(Self::CMD_AUTH_LOGON_PROOF(CMD_AUTH_LOGON_PROOF_Server::astd_read::<R, crate::private::Internal>(r).await?)),
             0x10 => Ok(Self::CMD_REALM_LIST(CMD_REALM_LIST_Server::astd_read::<R, crate::private::Internal>(r).await?)),
-            0x30 => Ok(Self::CMD_XFER_INITIATE),
+            0x30 => Ok(Self::CMD_XFER_INITIATE(CMD_XFER_INITIATE::astd_read::<R, crate::private::Internal>(r).await?)),
             0x31 => Ok(Self::CMD_XFER_DATA(CMD_XFER_DATA::astd_read::<R, crate::private::Internal>(r).await?)),
             opcode => Err(crate::errors::ExpectedOpcodeError::Opcode(opcode as u32)),
         }
@@ -217,7 +217,7 @@ impl std::fmt::Display for ServerOpcodeMessage {
             ServerOpcodeMessage::CMD_AUTH_LOGON_CHALLENGE(_) => "CMD_AUTH_LOGON_CHALLENGE_Server",
             ServerOpcodeMessage::CMD_AUTH_LOGON_PROOF(_) => "CMD_AUTH_LOGON_PROOF_Server",
             ServerOpcodeMessage::CMD_REALM_LIST(_) => "CMD_REALM_LIST_Server",
-            ServerOpcodeMessage::CMD_XFER_INITIATE => "CMD_XFER_INITIATE",
+            ServerOpcodeMessage::CMD_XFER_INITIATE(_) => "CMD_XFER_INITIATE",
             ServerOpcodeMessage::CMD_XFER_DATA(_) => "CMD_XFER_DATA",
         })
     }
@@ -242,8 +242,8 @@ impl From<CMD_REALM_LIST_Server> for ServerOpcodeMessage {
 }
 
 impl From<CMD_XFER_INITIATE> for ServerOpcodeMessage {
-    fn from(_: CMD_XFER_INITIATE) -> Self {
-        Self::CMD_XFER_INITIATE
+    fn from(c: CMD_XFER_INITIATE) -> Self {
+        Self::CMD_XFER_INITIATE(c)
     }
 }
 

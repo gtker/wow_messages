@@ -1,6 +1,10 @@
 #tag_all login_versions "3";
 
-slogin CMD_XFER_INITIATE = 0x30 {}
+slogin CMD_XFER_INITIATE = 0x30 {
+    String filename;
+    u64 file_size;
+    u8[16] file_md5;
+}
 
 slogin CMD_XFER_DATA = 0x31 {
     u16 size;
