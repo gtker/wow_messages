@@ -1,5 +1,3 @@
-use crate::util::read_u8_le;
-
 use crate::all::ProtocolVersion;
 use crate::collective::CollectiveMessage;
 #[cfg(any(feature = "sync", feature = "tokio", feature = "async-std"))]
@@ -26,7 +24,7 @@ pub fn expect_client_message_protocol<M: ClientMessage + CollectiveMessage, R: s
     mut r: R,
     protocol_version: ProtocolVersion,
 ) -> Result<M, ExpectedOpcodeError> {
-    let opcode = read_u8_le(&mut r)?;
+    let opcode = crate::util::read_u8_le(&mut r)?;
 
     // Unable to match on associated const M::OPCODE, so we do if
     if opcode == M::OPCODE {
@@ -108,7 +106,7 @@ pub fn expect_server_message_protocol<M: ServerMessage + CollectiveMessage, R: s
     mut r: R,
     protocol_version: ProtocolVersion,
 ) -> Result<M, ExpectedOpcodeError> {
-    let opcode = read_u8_le(&mut r)?;
+    let opcode = crate::util::read_u8_le(&mut r)?;
 
     // Unable to match on associated const M::OPCODE, so we do if
     if opcode == M::OPCODE {

@@ -1,5 +1,3 @@
-use crate::util::read_u8_le;
-
 #[cfg(any(feature = "sync", feature = "tokio", feature = "async-std"))]
 use crate::errors::ExpectedOpcodeError;
 #[cfg(any(feature = "sync", feature = "tokio", feature = "async-std"))]
@@ -23,7 +21,7 @@ use crate::{ClientMessage, ServerMessage};
 pub fn expect_client_message<M: ClientMessage, R: std::io::Read>(
     mut r: R,
 ) -> Result<M, ExpectedOpcodeError> {
-    let opcode = read_u8_le(&mut r)?;
+    let opcode = crate::util::read_u8_le(&mut r)?;
 
     // Unable to match on associated const M::OPCODE, so we do if
     if opcode == M::OPCODE {
@@ -99,7 +97,7 @@ pub async fn astd_expect_client_message<
 pub fn expect_server_message<M: ServerMessage, R: std::io::Read>(
     mut r: R,
 ) -> Result<M, ExpectedOpcodeError> {
-    let opcode = read_u8_le(&mut r)?;
+    let opcode = crate::util::read_u8_le(&mut r)?;
 
     // Unable to match on associated const M::OPCODE, so we do if
     if opcode == M::OPCODE {
