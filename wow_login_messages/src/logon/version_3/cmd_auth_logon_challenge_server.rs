@@ -759,7 +759,7 @@ mod test_version_3 {
 
     }
 
-    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/challenge_server.wowm` line 105.
+    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/challenge_server.wowm` line 106.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn cmd_auth_logon_challenge_server0() {
@@ -779,7 +779,7 @@ mod test_version_3 {
         assert_eq!(dest, RAW0);
     }
 
-    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/challenge_server.wowm` line 105.
+    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/challenge_server.wowm` line 106.
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_cmd_auth_logon_challenge_server0() {
@@ -799,7 +799,7 @@ mod test_version_3 {
         assert_eq!(dest, RAW0);
     }
 
-    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/challenge_server.wowm` line 105.
+    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/challenge_server.wowm` line 106.
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_cmd_auth_logon_challenge_server0() {
@@ -855,7 +855,7 @@ mod test_version_3 {
 
     }
 
-    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/challenge_server.wowm` line 165.
+    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/challenge_server.wowm` line 166.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn cmd_auth_logon_challenge_server1() {
@@ -875,7 +875,7 @@ mod test_version_3 {
         assert_eq!(dest, RAW1);
     }
 
-    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/challenge_server.wowm` line 165.
+    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/challenge_server.wowm` line 166.
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_cmd_auth_logon_challenge_server1() {
@@ -895,7 +895,7 @@ mod test_version_3 {
         assert_eq!(dest, RAW1);
     }
 
-    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/challenge_server.wowm` line 165.
+    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/challenge_server.wowm` line 166.
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_cmd_auth_logon_challenge_server1() {
@@ -972,7 +972,7 @@ mod test_version_5 {
 
     }
 
-    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/challenge_server.wowm` line 105.
+    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/challenge_server.wowm` line 106.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn cmd_auth_logon_challenge_server0() {
@@ -992,7 +992,7 @@ mod test_version_5 {
         assert_eq!(dest, RAW0);
     }
 
-    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/challenge_server.wowm` line 105.
+    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/challenge_server.wowm` line 106.
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_cmd_auth_logon_challenge_server0() {
@@ -1012,7 +1012,7 @@ mod test_version_5 {
         assert_eq!(dest, RAW0);
     }
 
-    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/challenge_server.wowm` line 105.
+    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/challenge_server.wowm` line 106.
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_cmd_auth_logon_challenge_server0() {
@@ -1068,7 +1068,7 @@ mod test_version_5 {
 
     }
 
-    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/challenge_server.wowm` line 165.
+    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/challenge_server.wowm` line 166.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn cmd_auth_logon_challenge_server1() {
@@ -1088,7 +1088,7 @@ mod test_version_5 {
         assert_eq!(dest, RAW1);
     }
 
-    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/challenge_server.wowm` line 165.
+    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/challenge_server.wowm` line 166.
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_cmd_auth_logon_challenge_server1() {
@@ -1108,7 +1108,7 @@ mod test_version_5 {
         assert_eq!(dest, RAW1);
     }
 
-    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/challenge_server.wowm` line 165.
+    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/challenge_server.wowm` line 166.
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_cmd_auth_logon_challenge_server1() {
@@ -1185,7 +1185,7 @@ mod test_version_6 {
 
     }
 
-    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/challenge_server.wowm` line 105.
+    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/challenge_server.wowm` line 106.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn cmd_auth_logon_challenge_server0() {
@@ -1205,7 +1205,7 @@ mod test_version_6 {
         assert_eq!(dest, RAW0);
     }
 
-    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/challenge_server.wowm` line 105.
+    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/challenge_server.wowm` line 106.
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_cmd_auth_logon_challenge_server0() {
@@ -1225,7 +1225,7 @@ mod test_version_6 {
         assert_eq!(dest, RAW0);
     }
 
-    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/challenge_server.wowm` line 105.
+    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/challenge_server.wowm` line 106.
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_cmd_auth_logon_challenge_server0() {
@@ -1281,7 +1281,7 @@ mod test_version_6 {
 
     }
 
-    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/challenge_server.wowm` line 165.
+    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/challenge_server.wowm` line 166.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn cmd_auth_logon_challenge_server1() {
@@ -1301,7 +1301,7 @@ mod test_version_6 {
         assert_eq!(dest, RAW1);
     }
 
-    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/challenge_server.wowm` line 165.
+    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/challenge_server.wowm` line 166.
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_cmd_auth_logon_challenge_server1() {
@@ -1321,7 +1321,7 @@ mod test_version_6 {
         assert_eq!(dest, RAW1);
     }
 
-    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/challenge_server.wowm` line 165.
+    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/challenge_server.wowm` line 166.
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_cmd_auth_logon_challenge_server1() {
@@ -1398,7 +1398,7 @@ mod test_version_7 {
 
     }
 
-    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/challenge_server.wowm` line 105.
+    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/challenge_server.wowm` line 106.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn cmd_auth_logon_challenge_server0() {
@@ -1418,7 +1418,7 @@ mod test_version_7 {
         assert_eq!(dest, RAW0);
     }
 
-    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/challenge_server.wowm` line 105.
+    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/challenge_server.wowm` line 106.
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_cmd_auth_logon_challenge_server0() {
@@ -1438,7 +1438,7 @@ mod test_version_7 {
         assert_eq!(dest, RAW0);
     }
 
-    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/challenge_server.wowm` line 105.
+    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/challenge_server.wowm` line 106.
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_cmd_auth_logon_challenge_server0() {
@@ -1494,7 +1494,7 @@ mod test_version_7 {
 
     }
 
-    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/challenge_server.wowm` line 165.
+    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/challenge_server.wowm` line 166.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn cmd_auth_logon_challenge_server1() {
@@ -1514,7 +1514,7 @@ mod test_version_7 {
         assert_eq!(dest, RAW1);
     }
 
-    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/challenge_server.wowm` line 165.
+    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/challenge_server.wowm` line 166.
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_cmd_auth_logon_challenge_server1() {
@@ -1534,7 +1534,7 @@ mod test_version_7 {
         assert_eq!(dest, RAW1);
     }
 
-    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/challenge_server.wowm` line 165.
+    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/challenge_server.wowm` line 166.
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_cmd_auth_logon_challenge_server1() {
