@@ -48,6 +48,7 @@ pub struct Item {
     bonding: Bonding,
     description: &'static str,
     page_text: i16,
+    language: Language,
     page_text_material: PageTextMaterial,
     start_quest: i16,
     material: i8,
@@ -109,6 +110,7 @@ impl Item {
         bonding: Bonding,
         description: &'static str,
         page_text: i16,
+        language: Language,
         page_text_material: PageTextMaterial,
         start_quest: i16,
         material: i8,
@@ -167,6 +169,7 @@ impl Item {
             bonding,
             description,
             page_text,
+            language,
             page_text_material,
             start_quest,
             material,
@@ -282,6 +285,8 @@ impl Item {
     /// Returns `PvpRank::NoRank` except for specific item entries.
     pub const fn required_honor_rank(&self) -> PvpRank {
         match self.entry {
+            16367 | 16370 | 16394 | 16395 | 16398 | 16399 | 16400 | 16402 | 16404 | 16407 | 16411 | 16412 | 16488 | 16493 | 16495 | 16500 | 16511 | 16512 | 16517 | 16520 | 16529 | 17563 | 17565 | 17574 | 17575 | 17595 | 17597 | 17614 | 17615 => PvpRank::Rank8,
+            16438 | 16439 | 16445 | 16447 | 16458 | 16460 | 16461 | 16464 | 16469 | 16470 | 16481 | 16482 | 16537 | 16538 | 16546 | 16547 | 16553 | 16556 | 16557 | 16559 | 16570 | 16572 | 16575 | 16576 | 17582 | 17585 | 17587 | 17589 | 17606 | 17609 | 17619 | 17621 => PvpRank::Rank12,
             31667 => PvpRank::Pariah,
             _ => PvpRank::NoRank,
         }
@@ -368,18 +373,8 @@ impl Item {
         self.page_text as i32
     }
 
-    /// Returns `Language::Universal` except for specific item entries.
     pub const fn language(&self) -> Language {
-        match self.entry {
-            25 | 4992 | 4995 | 5917 | 6167 | 20010 | 21783 | 23798 => Language::Orcish,
-            745 | 957 | 1208 | 1252 | 1283 | 1284 | 1307 | 1319 | 1637 | 1656 | 1971 | 1972 | 2161 | 2223 | 2548 | 2560 | 2637 | 2666 | 2696 | 2720 | 2722 | 2724 | 2760 | 2794 | 2795 | 3085 | 3086 | 3087 | 3248 | 3250 | 3518 | 4130 | 4429 | 4432 | 4514 | 5351 | 5354 | 5455 | 5520 | 5622 | 5790 | 5882 | 5947 | 5998 | 6280 | 6332 | 6678 | 6743 | 6843 | 9244 | 9245 | 9250 | 9329 | 9330 | 9370 | 11108 | 11125 | 12771 | 12813 | 12820 | 12985 | 20009 | 20828 | 22979 | 23777 | 23780 | 23797 | 28303 | 30420 | 30973 => Language::Common,
-            5383 => Language::Demonic,
-            5594 => Language::Taurahe,
-            5839 | 9331 => Language::Darnassian,
-            20949 => Language::Draconic,
-            24237 => Language::Draenei,
-            _ => Language::Universal,
-        }
+        self.language
     }
 
     pub const fn page_text_material(&self) -> PageTextMaterial {
@@ -393,10 +388,10 @@ impl Item {
     /// Returns `0` except for specific item entries.
     pub const fn lock_id(&self) -> i32 {
         match self.entry {
-            2503 | 3746 => 2,
+            3746 => 2,
             4632 | 6354 | 6712 | 16882 => 5,
             4633 => 23,
-            4634 | 6355 | 7869 | 16883 => 24,
+            4634 | 5046 | 6355 | 7869 | 16883 => 24,
             4636 => 60,
             4637 | 13875 | 16884 => 61,
             4638 | 5758 | 5759 | 5760 => 62,
@@ -441,8 +436,8 @@ impl Item {
     /// Returns `Area::None` except for specific item entries.
     pub const fn area(&self) -> Area {
         match self.entry {
-            17306 | 17323 | 17324 | 17325 | 17326 | 17327 | 17328 | 17353 | 17422 | 17423 | 17442 | 17502 | 17503 | 17504 | 17505 | 17506 | 17507 | 17522 | 17542 | 17626 | 17642 | 17643 | 17689 | 21038 => Area::AlteracValley,
-            18266 | 18268 => Area::DireMaul,
+            17306 | 17323 | 17324 | 17325 | 17326 | 17327 | 17328 | 17353 | 17362 | 17363 | 17422 | 17423 | 17442 | 17502 | 17503 | 17504 | 17505 | 17506 | 17507 | 17522 | 17542 | 17626 | 17642 | 17643 | 17689 | 21038 => Area::AlteracValley,
+            18266 => Area::DireMaul,
             22736 => Area::Stratholme,
             24289 => Area::TheBlackMorass,
             31279 => Area::ShadowmoonValley,
@@ -455,7 +450,7 @@ impl Item {
     /// Returns `Map::EasternKingdoms` except for specific item entries.
     pub const fn map(&self) -> Map {
         match self.entry {
-            18266 | 18268 => Map::DireMaul,
+            18268 => Map::DireMaul,
             23857 | 23862 | 23864 | 23865 => Map::Karazhan,
             24494 => Map::TheBattleForMountHyjal,
             25853 => Map::TheEscapeFromDurnholde,
@@ -477,7 +472,7 @@ impl Item {
             756 | 778 | 1819 | 1893 | 1959 | 2901 | 9465 | 20723 | 30855 => 11,
             1500 => 21,
             5175 => 2,
-            5176 | 30845 => 4,
+            5176 => 4,
             5177 => 5,
             5178 => 3,
             5956 => 13,
