@@ -153,7 +153,7 @@ clogin CMD_AUTH_LOGON_PROOF_Client = 0x01 {
         u8[20] pin_hash;
     }
 } {
-    login_versions = "3 5 6 7";
+    login_versions = "3";
 }
 
 test CMD_AUTH_LOGON_PROOF_Client {
@@ -314,6 +314,29 @@ test CMD_AUTH_LOGON_PROOF_Client {
 ] {
     login_versions = "3";
 }
+
+/// Reply after successful [CMD_AUTH_LOGON_CHALLENGE_Server].
+clogin CMD_AUTH_LOGON_PROOF_Client = 0x01 {
+    u8[32] client_public_key;
+    u8[20] client_proof;
+    u8[20] crc_hash;
+    u8 number_of_telemetry_keys;
+    TelemetryKey[number_of_telemetry_keys] telemetry_keys;
+
+    SecurityFlag security_flag;
+    if (security_flag & PIN) {
+        u8[16] pin_salt;
+        u8[20] pin_hash;
+    }
+    if (security_flag & MATRIX_CARD) {
+        /// Client proof of matrix input.
+        /// Implementation details at `https://gist.github.com/barncastle/979c12a9c5e64d810a28ad1728e7e0f9`.
+        u8[20] matrix_card_proof;
+    }
+} {
+    login_versions = "5 6 7";
+}
+
 
 /// Reply after successful [CMD_AUTH_LOGON_CHALLENGE_Server].
 clogin CMD_AUTH_LOGON_PROOF_Client = 0x01 {

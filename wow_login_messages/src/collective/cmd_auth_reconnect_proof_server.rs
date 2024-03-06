@@ -1,6 +1,5 @@
 use crate::collective::CollectiveMessage;
 use crate::errors::CollectiveError;
-use crate::version_2::LoginResult;
 
 type Main = crate::version_8::CMD_AUTH_RECONNECT_PROOF_Server;
 type MainLoginResult = crate::version_8::LoginResult;
@@ -22,22 +21,22 @@ impl CollectiveMessage for Main {
     fn from_version_2(v: Self::Version2) -> Self {
         Self {
             result: match v.result {
-                LoginResult::Success => MainLoginResult::Success,
-                LoginResult::FailUnknown0 => MainLoginResult::FailUnknown0,
-                LoginResult::FailUnknown1 => MainLoginResult::FailUnknown1,
-                LoginResult::FailBanned => MainLoginResult::FailBanned,
-                LoginResult::FailUnknownAccount => MainLoginResult::FailUnknownAccount,
-                LoginResult::FailIncorrectPassword => MainLoginResult::FailIncorrectPassword,
-                LoginResult::FailAlreadyOnline => MainLoginResult::FailAlreadyOnline,
-                LoginResult::FailNoTime => MainLoginResult::FailNoTime,
-                LoginResult::FailDbBusy => MainLoginResult::FailDbBusy,
-                LoginResult::FailVersionInvalid => MainLoginResult::FailVersionInvalid,
-                LoginResult::LoginDownloadFile => MainLoginResult::LoginDownloadFile,
-                LoginResult::FailInvalidServer => MainLoginResult::FailInvalidServer,
-                LoginResult::FailSuspended => MainLoginResult::FailSuspended,
-                LoginResult::FailNoAccess => MainLoginResult::FailNoAccess,
-                LoginResult::SuccessSurvey => MainLoginResult::SuccessSurvey,
-                LoginResult::FailParentalcontrol => MainLoginResult::FailParentalcontrol,
+                V2MainLoginResult::Success => MainLoginResult::Success,
+                V2MainLoginResult::FailUnknown0 => MainLoginResult::FailUnknown0,
+                V2MainLoginResult::FailUnknown1 => MainLoginResult::FailUnknown1,
+                V2MainLoginResult::FailBanned => MainLoginResult::FailBanned,
+                V2MainLoginResult::FailUnknownAccount => MainLoginResult::FailUnknownAccount,
+                V2MainLoginResult::FailIncorrectPassword => MainLoginResult::FailIncorrectPassword,
+                V2MainLoginResult::FailAlreadyOnline => MainLoginResult::FailAlreadyOnline,
+                V2MainLoginResult::FailNoTime => MainLoginResult::FailNoTime,
+                V2MainLoginResult::FailDbBusy => MainLoginResult::FailDbBusy,
+                V2MainLoginResult::FailVersionInvalid => MainLoginResult::FailVersionInvalid,
+                V2MainLoginResult::LoginDownloadFile => MainLoginResult::LoginDownloadFile,
+                V2MainLoginResult::FailInvalidServer => MainLoginResult::FailInvalidServer,
+                V2MainLoginResult::FailSuspended => MainLoginResult::FailSuspended,
+                V2MainLoginResult::FailNoAccess => MainLoginResult::FailNoAccess,
+                V2MainLoginResult::SuccessSurvey => MainLoginResult::SuccessSurvey,
+                V2MainLoginResult::FailParentalcontrol => MainLoginResult::FailParentalcontrol,
             },
         }
     }
@@ -79,22 +78,22 @@ impl CollectiveMessage for Main {
     fn from_version_5(v: Self::Version5) -> Self {
         Self {
             result: match v.result {
-                LoginResult::Success => MainLoginResult::Success,
-                LoginResult::FailUnknown0 => MainLoginResult::FailUnknown0,
-                LoginResult::FailUnknown1 => MainLoginResult::FailUnknown1,
-                LoginResult::FailBanned => MainLoginResult::FailBanned,
-                LoginResult::FailUnknownAccount => MainLoginResult::FailUnknownAccount,
-                LoginResult::FailIncorrectPassword => MainLoginResult::FailIncorrectPassword,
-                LoginResult::FailAlreadyOnline => MainLoginResult::FailAlreadyOnline,
-                LoginResult::FailNoTime => MainLoginResult::FailNoTime,
-                LoginResult::FailDbBusy => MainLoginResult::FailDbBusy,
-                LoginResult::FailVersionInvalid => MainLoginResult::FailVersionInvalid,
-                LoginResult::LoginDownloadFile => MainLoginResult::LoginDownloadFile,
-                LoginResult::FailInvalidServer => MainLoginResult::FailInvalidServer,
-                LoginResult::FailSuspended => MainLoginResult::FailSuspended,
-                LoginResult::FailNoAccess => MainLoginResult::FailNoAccess,
-                LoginResult::SuccessSurvey => MainLoginResult::SuccessSurvey,
-                LoginResult::FailParentalcontrol => MainLoginResult::FailParentalcontrol,
+                V5MainLoginResult::Success => MainLoginResult::Success,
+                V5MainLoginResult::FailUnknown0 => MainLoginResult::FailUnknown0,
+                V5MainLoginResult::FailUnknown1 => MainLoginResult::FailUnknown1,
+                V5MainLoginResult::FailBanned => MainLoginResult::FailBanned,
+                V5MainLoginResult::FailUnknownAccount => MainLoginResult::FailUnknownAccount,
+                V5MainLoginResult::FailIncorrectPassword => MainLoginResult::FailIncorrectPassword,
+                V5MainLoginResult::FailAlreadyOnline => MainLoginResult::FailAlreadyOnline,
+                V5MainLoginResult::FailNoTime => MainLoginResult::FailNoTime,
+                V5MainLoginResult::FailDbBusy => MainLoginResult::FailDbBusy,
+                V5MainLoginResult::FailVersionInvalid => MainLoginResult::FailVersionInvalid,
+                V5MainLoginResult::LoginDownloadFile => MainLoginResult::LoginDownloadFile,
+                V5MainLoginResult::FailInvalidServer => MainLoginResult::FailInvalidServer,
+                V5MainLoginResult::FailSuspended => MainLoginResult::FailSuspended,
+                V5MainLoginResult::FailNoAccess => MainLoginResult::FailNoAccess,
+                V5MainLoginResult::SuccessSurvey => MainLoginResult::SuccessSurvey,
+                V5MainLoginResult::FailParentalcontrol => MainLoginResult::FailParentalcontrol,
             },
         }
     }

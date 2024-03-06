@@ -2,7 +2,17 @@ enum SecurityFlag : u8 {
     NONE = 0x0;
     PIN = 0x1;
 } {
-    login_versions = "3 5 6 7";
+    login_versions = "3";
+}
+
+flag SecurityFlag : u8 {
+    NONE = 0x00;
+    PIN = 0x01;
+    /// Matrix Card 2FA which requires a matrix card.
+    /// `https://forum.xentax.com/viewtopic.php?f=13&p=186022`
+    MATRIX_CARD = 0x02;
+} {
+    login_versions = "5 6 7";
 }
 
 flag SecurityFlag : u8 {

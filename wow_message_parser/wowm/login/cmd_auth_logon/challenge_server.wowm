@@ -100,7 +100,7 @@ slogin CMD_AUTH_LOGON_CHALLENGE_Server = 0x00 {
         }
     }
 } {
-    login_versions = "3 5 6 7";
+    login_versions = "3";
 }
 
 test CMD_AUTH_LOGON_CHALLENGE_Server {
@@ -214,6 +214,47 @@ test CMD_AUTH_LOGON_CHALLENGE_Server {
     0x00, /* Two factor fields enabled: False */
 ] {
     login_versions = "3";
+}
+
+slogin CMD_AUTH_LOGON_CHALLENGE_Server = 0x00 {
+    u8 protocol_version = 0;
+
+    LoginResult result;
+    if (result == SUCCESS) {
+        u8[32] server_public_key;
+        /// The only realistic values for the generator are well below 255, so there's no reason for this to anything other than 1.
+        u8 generator_length;
+        u8[generator_length] generator;
+        /// Client can not handle arrays greater than 32.
+        u8 large_safe_prime_length {
+            valid_range = "0 32";
+        }
+        u8[large_safe_prime_length] large_safe_prime;
+        u8[32] salt;
+        /// Used for the `crc_hash` in [CMD_AUTH_LOGON_PROOF_Client].
+        u8[16] crc_salt;
+
+        SecurityFlag security_flag;
+        if (security_flag & PIN) {
+            /// Used to randomize the layout of the PIN keypad.
+            u32 pin_grid_seed;
+            u8[16] pin_salt;
+        }
+        if (security_flag & MATRIX_CARD) {
+            /// Number of columns to display.
+            u8 width;
+            /// Number of rows to display.
+            u8 height;
+            /// Number of digits to be entered for each cell.
+            u8 digit_count;
+            /// Number of cells to complete.
+            u8 challenge_count;
+            /// Seed value used to randomize cell selection.
+            u64 seed;
+        }
+    }
+} {
+    login_versions = "5 6 7";
 }
 
 slogin CMD_AUTH_LOGON_CHALLENGE_Server = 0x00 {

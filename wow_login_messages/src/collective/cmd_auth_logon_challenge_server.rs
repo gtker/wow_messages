@@ -5,6 +5,8 @@ type Main = crate::version_8::CMD_AUTH_LOGON_CHALLENGE_Server;
 type MainLoginResult = crate::version_8::CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult;
 type MainSecurityFlag = crate::version_8::CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlag;
 type MainSecurityFlagPin = crate::version_8::CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlag_Pin;
+type MainSecurityFlagMatrixCard =
+    crate::version_8::CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlag_MatrixCard;
 
 type V2Main = crate::version_2::CMD_AUTH_LOGON_CHALLENGE_Server;
 type V2MainLoginResult = crate::version_2::CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult;
@@ -13,12 +15,19 @@ type V3Main = crate::version_3::CMD_AUTH_LOGON_CHALLENGE_Server;
 type V3MainLoginResult = crate::version_3::CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult;
 type V3MainSecurityFlag = crate::version_3::CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlag;
 
+type V5Main = crate::version_5::CMD_AUTH_LOGON_CHALLENGE_Server;
+type V5MainLoginResult = crate::version_5::CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult;
+type V5MainSecurityFlag = crate::version_5::CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlag;
+type V5MainSecurityFlagPin = crate::version_5::CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlag_Pin;
+type V5MainSecurityFlagMatrixCard =
+    crate::version_5::CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlag_MatrixCard;
+
 impl CollectiveMessage for Main {
     type Version2 = V2Main;
     type Version3 = V3Main;
-    type Version5 = Self::Version3;
-    type Version6 = Self::Version3;
-    type Version7 = Self::Version3;
+    type Version5 = V5Main;
+    type Version6 = Self::Version5;
+    type Version7 = Self::Version5;
     type Version8 = Self;
 
     fn from_version_2(v: Self::Version2) -> Self {
@@ -198,26 +207,143 @@ impl CollectiveMessage for Main {
     }
 
     fn from_version_5(v: Self::Version5) -> Self {
-        Self::from_version_3(v)
+        Self {
+            result: match v.result {
+                V5MainLoginResult::Success {
+                    crc_salt,
+                    generator,
+                    large_safe_prime,
+                    salt,
+                    security_flag,
+                    server_public_key,
+                } => MainLoginResult::Success {
+                    crc_salt,
+                    generator,
+                    large_safe_prime,
+                    salt,
+                    security_flag: MainSecurityFlag::from_version_5(security_flag),
+                    server_public_key,
+                },
+                V5MainLoginResult::FailUnknown0 => MainLoginResult::FailUnknown0,
+                V5MainLoginResult::FailUnknown1 => MainLoginResult::FailUnknown1,
+                V5MainLoginResult::FailBanned => MainLoginResult::FailBanned,
+                V5MainLoginResult::FailUnknownAccount => MainLoginResult::FailUnknownAccount,
+                V5MainLoginResult::FailIncorrectPassword => MainLoginResult::FailIncorrectPassword,
+                V5MainLoginResult::FailAlreadyOnline => MainLoginResult::FailAlreadyOnline,
+                V5MainLoginResult::FailNoTime => MainLoginResult::FailNoTime,
+                V5MainLoginResult::FailDbBusy => MainLoginResult::FailDbBusy,
+                V5MainLoginResult::FailVersionInvalid => MainLoginResult::FailVersionInvalid,
+                V5MainLoginResult::LoginDownloadFile => MainLoginResult::LoginDownloadFile,
+                V5MainLoginResult::FailInvalidServer => MainLoginResult::FailInvalidServer,
+                V5MainLoginResult::FailSuspended => MainLoginResult::FailSuspended,
+                V5MainLoginResult::FailNoAccess => MainLoginResult::FailNoAccess,
+                V5MainLoginResult::SuccessSurvey => MainLoginResult::SuccessSurvey,
+                V5MainLoginResult::FailParentalcontrol => MainLoginResult::FailParentalcontrol,
+            },
+        }
     }
 
     fn to_version_5(&self) -> Result<Self::Version5, CollectiveError> {
-        self.to_version_3()
+        Ok(V5Main {
+            result: match self.result.clone() {
+                MainLoginResult::Success {
+                    crc_salt,
+                    generator,
+                    large_safe_prime,
+                    salt,
+                    security_flag,
+                    server_public_key,
+                } => V5MainLoginResult::Success {
+                    crc_salt,
+                    generator,
+                    large_safe_prime,
+                    salt,
+                    security_flag: security_flag.to_version_5(),
+                    server_public_key,
+                },
+                MainLoginResult::FailUnknown0 => V5MainLoginResult::FailUnknown0,
+                MainLoginResult::FailUnknown1 => V5MainLoginResult::FailUnknown1,
+                MainLoginResult::FailBanned => V5MainLoginResult::FailBanned,
+                MainLoginResult::FailUnknownAccount => V5MainLoginResult::FailUnknownAccount,
+                MainLoginResult::FailIncorrectPassword => V5MainLoginResult::FailIncorrectPassword,
+                MainLoginResult::FailAlreadyOnline => V5MainLoginResult::FailAlreadyOnline,
+                MainLoginResult::FailNoTime => V5MainLoginResult::FailNoTime,
+                MainLoginResult::FailDbBusy => V5MainLoginResult::FailDbBusy,
+                MainLoginResult::FailVersionInvalid => V5MainLoginResult::FailVersionInvalid,
+                MainLoginResult::LoginDownloadFile => V5MainLoginResult::LoginDownloadFile,
+                MainLoginResult::FailInvalidServer => V5MainLoginResult::FailInvalidServer,
+                MainLoginResult::FailSuspended => V5MainLoginResult::FailSuspended,
+                MainLoginResult::FailNoAccess => V5MainLoginResult::FailNoAccess,
+                MainLoginResult::SuccessSurvey => V5MainLoginResult::SuccessSurvey,
+                MainLoginResult::FailParentalcontrol => V5MainLoginResult::FailParentalcontrol,
+                MainLoginResult::FailLockedEnforced => {
+                    return Err(CollectiveError::InvalidFieldSet)
+                }
+            },
+        })
     }
 
     fn from_version_6(v: Self::Version6) -> Self {
-        Self::from_version_3(v)
+        Self::from_version_5(v)
     }
 
     fn to_version_6(&self) -> Result<Self::Version6, CollectiveError> {
-        self.to_version_3()
+        self.to_version_5()
     }
 
     fn from_version_7(v: Self::Version7) -> Self {
-        Self::from_version_3(v)
+        Self::from_version_5(v)
     }
 
     fn to_version_7(&self) -> Result<Self::Version7, CollectiveError> {
-        self.to_version_3()
+        self.to_version_5()
+    }
+}
+
+impl MainSecurityFlag {
+    pub fn from_version_5(v: V5MainSecurityFlag) -> Self {
+        let mut security_flag = MainSecurityFlag::empty();
+
+        if let Some(pin) = v.get_pin() {
+            security_flag = security_flag.set_pin(MainSecurityFlagPin {
+                pin_grid_seed: pin.pin_grid_seed,
+                pin_salt: pin.pin_salt,
+            });
+        }
+
+        if let Some(matrix_card) = v.get_matrix_card() {
+            security_flag = security_flag.set_matrix_card(MainSecurityFlagMatrixCard {
+                challenge_count: matrix_card.challenge_count,
+                digit_count: matrix_card.digit_count,
+                height: matrix_card.height,
+                seed: matrix_card.seed,
+                width: matrix_card.width,
+            });
+        }
+
+        security_flag
+    }
+
+    pub fn to_version_5(&self) -> V5MainSecurityFlag {
+        let mut security_flag = V5MainSecurityFlag::empty();
+
+        if let Some(pin) = self.get_pin() {
+            security_flag = security_flag.set_pin(V5MainSecurityFlagPin {
+                pin_grid_seed: pin.pin_grid_seed,
+                pin_salt: pin.pin_salt,
+            });
+        }
+
+        if let Some(matrix_card) = self.get_matrix_card() {
+            security_flag = security_flag.set_matrix_card(V5MainSecurityFlagMatrixCard {
+                challenge_count: matrix_card.challenge_count,
+                digit_count: matrix_card.digit_count,
+                height: matrix_card.height,
+                seed: matrix_card.seed,
+                width: matrix_card.width,
+            });
+        }
+
+        security_flag
     }
 }

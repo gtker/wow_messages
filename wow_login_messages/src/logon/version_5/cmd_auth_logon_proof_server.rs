@@ -5,7 +5,7 @@ use std::io::{Read, Write};
 use crate::logon::version_2::LoginResult;
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
-/// Reply to [`CMD_AUTH_LOGON_PROOF_Client`](crate::logon::version_3::CMD_AUTH_LOGON_PROOF_Client).
+/// Reply to [`CMD_AUTH_LOGON_PROOF_Client`](crate::logon::version_5::CMD_AUTH_LOGON_PROOF_Client).
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/login/cmd_auth_logon/proof_server.wowm:35`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/login/cmd_auth_logon/proof_server.wowm#L35):
 /// ```text
 /// slogin CMD_AUTH_LOGON_PROOF_Server = 0x01 {

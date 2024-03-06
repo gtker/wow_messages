@@ -6,7 +6,7 @@
 /// }
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
-pub enum SecurityFlag {
+pub(crate) enum SecurityFlag {
     None,
     Pin,
 }
