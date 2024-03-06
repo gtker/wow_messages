@@ -15,6 +15,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   trait.
 * BREAKING: Renamed `unknown_flags` on version 8 `CMD_AUTH_LOGON_PROOF_Server` to `unknown` for consistency with other
   messages.
+* BREAKING: Version 5 `CMD_REALM_LIST_Server` is now the same as version 6/7.
 
 ## [0.4.0] - 2024-02-21
 

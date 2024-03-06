@@ -81,21 +81,11 @@ struct Realm {
 slogin CMD_REALM_LIST_Server = 0x10 {
     u16 size = self.size;
     u32 header_padding = 0;
-    u8 number_of_realms;
-    Realm[number_of_realms] realms;
-    u16 footer_padding = 0;
-} {
-    login_versions = "5";
-}
-
-slogin CMD_REALM_LIST_Server = 0x10 {
-    u16 size = self.size;
-    u32 header_padding = 0;
     u16 number_of_realms;
     Realm[number_of_realms] realms;
     u16 footer_padding = 0;
 } {
-    login_versions = "6 7";
+    login_versions = "5 6 7";
 }
 
 test CMD_REALM_LIST_Server {

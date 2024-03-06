@@ -14,7 +14,7 @@ use crate::logon::version_5::Realm;
 /// slogin CMD_REALM_LIST_Server = 0x10 {
 ///     u16 size = self.size;
 ///     u32 header_padding = 0;
-///     u8 number_of_realms;
+///     u16 number_of_realms;
 ///     Realm[number_of_realms] realms;
 ///     u16 footer_padding = 0;
 /// }
@@ -59,8 +59,8 @@ impl CMD_REALM_LIST_Server {
         // header_padding: u32
         w.write_all(&Self::HEADER_PADDING_VALUE.to_le_bytes())?;
 
-        // number_of_realms: u8
-        w.write_all(&(self.realms.len() as u8).to_le_bytes())?;
+        // number_of_realms: u16
+        w.write_all(&(self.realms.len() as u16).to_le_bytes())?;
 
         // realms: Realm[number_of_realms]
         for i in self.realms.iter() {
@@ -87,8 +87,8 @@ impl CMD_REALM_LIST_Server {
         let _header_padding = crate::util::read_u32_le(&mut r)?;
         // header_padding is expected to always be 0 (0)
 
-        // number_of_realms: u8
-        let number_of_realms = crate::util::read_u8_le(&mut r)?;
+        // number_of_realms: u16
+        let number_of_realms = crate::util::read_u16_le(&mut r)?;
 
         // realms: Realm[number_of_realms]
         let realms = {
@@ -118,8 +118,8 @@ impl CMD_REALM_LIST_Server {
         let _header_padding = crate::util::tokio_read_u32_le(&mut r).await?;
         // header_padding is expected to always be 0 (0)
 
-        // number_of_realms: u8
-        let number_of_realms = crate::util::tokio_read_u8_le(&mut r).await?;
+        // number_of_realms: u16
+        let number_of_realms = crate::util::tokio_read_u16_le(&mut r).await?;
 
         // realms: Realm[number_of_realms]
         let realms = {
@@ -149,8 +149,8 @@ impl CMD_REALM_LIST_Server {
         let _header_padding = crate::util::astd_read_u32_le(&mut r).await?;
         // header_padding is expected to always be 0 (0)
 
-        // number_of_realms: u8
-        let number_of_realms = crate::util::astd_read_u8_le(&mut r).await?;
+        // number_of_realms: u16
+        let number_of_realms = crate::util::astd_read_u16_le(&mut r).await?;
 
         // realms: Realm[number_of_realms]
         let realms = {
@@ -211,7 +211,7 @@ impl Message for CMD_REALM_LIST_Server {
         writeln!(s, "    {:#04X}, /* opcode */ ", bytes.next().unwrap()).unwrap();
         crate::util::write_bytes(&mut s, &mut bytes, 2, "size", "    ");
         crate::util::write_bytes(&mut s, &mut bytes, 4, "header_padding", "    ");
-        crate::util::write_bytes(&mut s, &mut bytes, 1, "number_of_realms", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, 2, "number_of_realms", "    ");
         if !self.realms.is_empty() {
             writeln!(s, "    /* realms: Realm[number_of_realms] start */").unwrap();
             for (i, v) in self.realms.iter().enumerate() {
@@ -233,7 +233,7 @@ impl Message for CMD_REALM_LIST_Server {
 
 
         writeln!(s, "] {{").unwrap();
-        writeln!(s, "    login_versions = \"{}\";", std::env::var("WOWM_TEST_CASE_LOGIN_VERSION").unwrap_or("5".to_string())).unwrap();
+        writeln!(s, "    login_versions = \"{}\";", std::env::var("WOWM_TEST_CASE_LOGIN_VERSION").unwrap_or("5 6 7".to_string())).unwrap();
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
@@ -322,7 +322,7 @@ impl CMD_REALM_LIST_Server {
     pub(crate) fn size(&self) -> usize {
         2 // size: u16
         + 4 // header_padding: u32
-        + 1 // number_of_realms: u8
+        + 2 // number_of_realms: u16
         + self.realms.iter().fold(0, |acc, x| acc + x.size()) // realms: Realm[number_of_realms]
         + 2 // footer_padding: u16
     }
