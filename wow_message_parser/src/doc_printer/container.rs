@@ -165,8 +165,9 @@ fn print_container_example_definition(
             s.w(format!("{b}, "));
         }
         Type::String => {
-            let length = *(bytes.take(1).collect::<Vec<_>>()[0]) as usize;
-            s.bytes(bytes.take(length));
+            let length = bytes.next().unwrap();
+            s.wln(format!("{length}, // string length"));
+            s.bytes(bytes.take((*length) as usize));
         }
         Type::Array(array) => {
             print_container_example_array(s, array, bytes, values, o, tags, prefix);

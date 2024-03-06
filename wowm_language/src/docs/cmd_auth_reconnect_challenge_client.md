@@ -66,6 +66,7 @@ Login messages have a header of 1 byte with an opcode. Some messages also have a
 66, 71, 110, 101, // locale: Locale EN_GB ("enGB")
 60, 0, 0, 0, // utc_timezone_offset: u32
 127, 0, 0, 1, // client_ip_address: IpAddress
+1, // string length
 65, // account_name: String
 ```
 #### Example 2
@@ -84,5 +85,6 @@ Login messages have a header of 1 byte with an opcode. Some messages also have a
 66, 71, 110, 101, // locale: Locale EN_GB ("enGB")
 60, 0, 0, 0, // utc_timezone_offset: u32
 127, 0, 0, 1, // client_ip_address: IpAddress
+16, // string length
 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, // account_name: String
 ```

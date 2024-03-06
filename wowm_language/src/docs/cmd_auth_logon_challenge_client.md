@@ -70,5 +70,6 @@ x86 Windows user on enGB attempting to log in with username 'A'.
 66, 71, 110, 101, // locale: Locale EN_GB ("enGB")
 60, 0, 0, 0, // utc_timezone_offset: u32
 127, 0, 0, 1, // client_ip_address: IpAddress
+1, // string length
 65, // account_name: String
 ```
