@@ -212,15 +212,15 @@ fn parsed_member_to_member(
             ))
         }
         ParsedStructMember::IfStatement(s) => {
-            let member = c.get_field_ty(s.conditional.variable_name()).str();
+            let member = c.get_field_ty(s.variable_name()).str();
             let definer = get_definer(definers, &member, c.tags()).unwrap();
 
-            match s.get_conditional().equation() {
+            match s.equation() {
                 Equation::Equals { values: value } | Equation::BitwiseAnd { values: value } => {
                     for v in value {
                         if definer.get_field_with_name(v).is_none() {
                             variable_in_if_not_found(
-                                s.conditional.variable_name(),
+                                s.variable_name(),
                                 v,
                                 &c.file_info,
                                 definer.name(),
@@ -231,7 +231,7 @@ fn parsed_member_to_member(
                 Equation::NotEquals { value } => {
                     if definer.get_field_with_name(value).is_none() {
                         variable_in_if_not_found(
-                            s.conditional.variable_name(),
+                            s.variable_name(),
                             value,
                             &c.file_info,
                             definer.name(),
@@ -429,7 +429,7 @@ pub(crate) fn check_if_statement_operators(e: &ParsedContainer, definers: &[Defi
 
                 let definer = get_definer(definers, ty, e.tags()).unwrap();
                 match definer.definer_ty() {
-                    DefinerType::Enum => match statement.get_conditional().equation() {
+                    DefinerType::Enum => match statement.equation() {
                         Equation::Equals { .. } | Equation::NotEquals { .. } => {}
                         Equation::BitwiseAnd { .. } => {
                             enum_has_bitwise_and(
@@ -440,7 +440,7 @@ pub(crate) fn check_if_statement_operators(e: &ParsedContainer, definers: &[Defi
                             );
                         }
                     },
-                    DefinerType::Flag => match statement.get_conditional().equation() {
+                    DefinerType::Flag => match statement.equation() {
                         Equation::Equals { .. } | Equation::NotEquals { .. } => {
                             flag_used_as_equals_or_not_equals(
                                 e.name(),

@@ -174,14 +174,6 @@ pub(crate) struct Conditional {
 }
 
 impl Conditional {
-    pub(crate) fn variable_name(&self) -> &str {
-        &self.variable_name
-    }
-
-    pub(crate) fn equation(&self) -> &Equation {
-        &self.equation
-    }
-
     pub(crate) fn new(conditions: &[Condition], ty_name: &str, file_info: &FileInfo) -> Self {
         let variable = &conditions[0];
         let variable_name = variable.value.clone();

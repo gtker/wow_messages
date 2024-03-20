@@ -1,4 +1,4 @@
-use crate::parser::types::if_statement::{Conditional, Operator};
+use crate::parser::types::if_statement::{Conditional, Equation, Operator};
 use crate::parser::types::parsed::parsed_struct_member::ParsedStructMember;
 use crate::parser::types::parsed::parsed_ty::ParsedType;
 
@@ -44,7 +44,7 @@ impl ParsedIfStatement {
     }
 
     pub(crate) fn variable_name(&self) -> &str {
-        self.conditional.variable_name()
+        &self.conditional.variable_name
     }
 
     pub(crate) fn set_original_ty(&mut self, original_ty: ParsedType) {
@@ -74,8 +74,8 @@ impl ParsedIfStatement {
             .chain(&self.else_statement_members)
     }
 
-    pub(crate) fn get_conditional(&self) -> &Conditional {
-        &self.conditional
+    pub(crate) fn equation(&self) -> &Equation {
+        &self.conditional.equation
     }
 }
 
