@@ -12,7 +12,7 @@ use types::definer::DefinerField;
 use crate::file_info::FileInfo;
 use crate::parser::types::definer::DefinerValue;
 use crate::parser::types::parsed::parsed_array::ParsedArray;
-use crate::parser::types::parsed::parsed_if_statement::ParsedIfStatement;
+use crate::parser::types::parsed::parsed_if_statement::{Condition, ParsedIfStatement};
 use crate::parser::types::parsed::parsed_optional::ParsedOptionalStatement;
 use crate::parser::types::parsed::parsed_struct_member::{
     ParsedStructMember, ParsedStructMemberDefinition,
@@ -23,7 +23,7 @@ use crate::parser::utility::parse_value;
 use crate::rust_printer::DefinerType;
 use crate::{error_printer, ParsedObjects, UNIMPLEMENTED};
 use types::container::ContainerType;
-use types::if_statement::{Condition, Conditional};
+use types::if_statement::Conditional;
 use types::parsed::parsed_container::ParsedContainer;
 use types::parsed::parsed_definer::ParsedDefiner;
 use types::parsed::parsed_test_case::{ParsedTestCase, ParsedTestCaseMember, ParsedTestValue};

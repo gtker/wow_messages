@@ -1,4 +1,4 @@
-use crate::parser::types::if_statement::Conditional;
+use crate::parser::types::if_statement::{Conditional, Operator};
 use crate::parser::types::parsed::parsed_struct_member::ParsedStructMember;
 use crate::parser::types::parsed::parsed_ty::ParsedType;
 
@@ -76,5 +76,22 @@ impl ParsedIfStatement {
 
     pub(crate) fn get_conditional(&self) -> &Conditional {
         &self.conditional
+    }
+}
+
+#[derive(Debug, Clone)]
+pub(crate) struct Condition {
+    pub value: String,
+    pub operator: Operator,
+    pub equals_value: String,
+}
+
+impl Condition {
+    pub(crate) fn new(value: &str, equals_value: &str, operator: Operator) -> Self {
+        Self {
+            value: value.to_string(),
+            operator,
+            equals_value: equals_value.to_string(),
+        }
     }
 }

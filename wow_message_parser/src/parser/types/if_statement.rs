@@ -1,5 +1,6 @@
 use crate::error_printer::non_matching_if_statement_variables;
 use crate::file_info::FileInfo;
+use crate::parser::types::parsed::parsed_if_statement::Condition;
 use crate::parser::types::struct_member::{StructMember, StructMemberDefinition};
 use crate::parser::types::ty::Type;
 use crate::rust_printer::field_name_to_rust_name;
@@ -243,23 +244,6 @@ impl Equation {
         match self {
             Equation::Equals { .. } | Equation::NotEquals { .. } => DefinerType::Enum,
             Equation::BitwiseAnd { .. } => DefinerType::Flag,
-        }
-    }
-}
-
-#[derive(Debug, Clone)]
-pub(crate) struct Condition {
-    pub value: String,
-    pub operator: Operator,
-    pub equals_value: String,
-}
-
-impl Condition {
-    pub(crate) fn new(value: &str, equals_value: &str, operator: Operator) -> Self {
-        Self {
-            value: value.to_string(),
-            operator,
-            equals_value: equals_value.to_string(),
         }
     }
 }
