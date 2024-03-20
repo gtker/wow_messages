@@ -4,7 +4,8 @@ use crate::parser::types::parsed::parsed_ty::ParsedType;
 
 #[derive(Debug, Clone)]
 pub(crate) struct ParsedIfStatement {
-    pub conditional: Conditional,
+    pub variable_name: String,
+    pub equation: Equation,
     pub members: Vec<ParsedStructMember>,
     pub else_ifs: Vec<ParsedIfStatement>,
     pub else_statement_members: Vec<ParsedStructMember>,
@@ -27,11 +28,12 @@ impl ParsedIfStatement {
         else_statement_members: Vec<ParsedStructMember>,
     ) -> Self {
         Self {
-            conditional,
+            variable_name: conditional.variable_name,
             members,
             else_ifs,
             else_statement_members,
             original_ty: None,
+            equation: conditional.equation,
         }
     }
 
@@ -44,7 +46,7 @@ impl ParsedIfStatement {
     }
 
     pub(crate) fn variable_name(&self) -> &str {
-        &self.conditional.variable_name
+        &self.variable_name
     }
 
     pub(crate) fn set_original_ty(&mut self, original_ty: ParsedType) {
@@ -75,7 +77,7 @@ impl ParsedIfStatement {
     }
 
     pub(crate) fn equation(&self) -> &Equation {
-        &self.conditional.equation
+        &self.equation
     }
 }
 
