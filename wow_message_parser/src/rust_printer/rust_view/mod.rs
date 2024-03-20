@@ -88,7 +88,7 @@ fn create_else_if_flag(
 
     // Create new Enum RustMember
     let rm = RustMember::new(
-        statement.name().to_string(),
+        statement.variable_name().to_string(),
         RustType::Enum {
             ty_name: get_new_flag_type_name(flag_ty_name, &field_name_to_rust_name(enumerator)),
             original_ty_name: flag_ty_name.clone(),
@@ -117,7 +117,7 @@ fn find_subject<'a>(
 ) -> &'a mut RustMember {
     let subject = current_scope
         .iter_mut()
-        .find(|a| statement.name() == a.name())
+        .find(|a| statement.variable_name() == a.name())
         .unwrap();
     subject
 }

@@ -72,7 +72,7 @@ pub(crate) fn print_if_statement_flag(
 ) {
     s.open_curly(format!(
         "if let Some(if_statement) = &{variable_prefix}{variable}.get_{variant}()",
-        variable = statement.name(),
+        variable = statement.variable_name(),
         variant = &statement.flag_get_enumerator().to_lowercase(),
     ));
     if statement.else_ifs().is_empty() {
@@ -85,7 +85,7 @@ pub(crate) fn print_if_statement_flag(
         let rd = e
             .rust_object()
             .rust_definer_with_variable_name_and_enumerator(
-                statement.name(),
+                statement.variable_name(),
                 &statement.flag_get_enumerator(),
             );
 
@@ -128,8 +128,8 @@ pub(crate) fn print_if_statement_enum(
 ) {
     s.open_curly(format!(
         "match &{prefix}{name}",
-        name = statement.name(),
-        prefix = match e.type_definition_in_same_scope(statement.name()) {
+        name = statement.variable_name(),
+        prefix = match e.type_definition_in_same_scope(statement.variable_name()) {
             false => "self.",
             true => variable_prefix,
         },
@@ -145,7 +145,7 @@ pub(crate) fn print_if_statement_enum(
 
     let rd = e
         .rust_object()
-        .rust_definer_with_variable_name_and_enumerator(statement.name(), enumerator_name);
+        .rust_definer_with_variable_name_and_enumerator(statement.variable_name(), enumerator_name);
 
     let mut unused_enumerators = false;
 

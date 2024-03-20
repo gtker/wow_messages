@@ -191,7 +191,7 @@ fn print_if_statement(
     inside_compressed_message: bool,
     depth: i32,
 ) {
-    let name = statement.name();
+    let name = statement.variable_name();
 
     s.w("if (");
 

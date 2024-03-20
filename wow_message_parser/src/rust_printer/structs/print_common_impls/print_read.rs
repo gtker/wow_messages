@@ -518,7 +518,7 @@ fn print_read_if_statement_flag(
 ) {
     s.open_curly(format!(
         "let {var_name}_{enumerator_name} = if {var_name}.is_{enumerator_name}()",
-        var_name = statement.name(),
+        var_name = statement.variable_name(),
         enumerator_name = statement.flag_get_enumerator().to_lowercase(),
     ));
 
@@ -535,7 +535,7 @@ fn print_read_if_statement_flag(
     let rd = e
         .rust_object()
         .rust_definer_with_variable_name_and_enumerator(
-            statement.name(),
+            statement.variable_name(),
             &statement.flag_get_enumerator(),
         );
     let new_ty_name = if statement.is_elseif_flag() {
@@ -564,7 +564,7 @@ fn print_read_if_statement_flag(
     for elseif in statement.else_ifs() {
         s.open_curly(format!(
             "else if {var_name}.is_{enumerator_name}()",
-            var_name = elseif.name(),
+            var_name = elseif.variable_name(),
             enumerator_name = elseif.flag_get_enumerator().to_lowercase(),
         ));
 
@@ -586,7 +586,7 @@ fn print_read_if_statement_flag(
         let rd = e
             .rust_object()
             .rust_definer_with_variable_name_and_enumerator(
-                elseif.name(),
+                elseif.variable_name(),
                 &elseif.flag_get_enumerator(),
             );
         let enumerator = rd.get_enumerator(&elseif.flag_get_enumerator());
@@ -614,7 +614,7 @@ fn print_read_if_statement_enum(
     prefix: &str,
     postfix: &str,
 ) {
-    let if_statement_variable_name = format!("{}_if", statement.name());
+    let if_statement_variable_name = format!("{}_if", statement.variable_name());
     let match_prefix = if !statement.part_of_separate_if_statement() {
         format!("let {if_statement_variable_name} = ")
     } else {
@@ -622,7 +622,7 @@ fn print_read_if_statement_enum(
     };
     s.open_curly(format!(
         "{match_prefix}match {name}",
-        name = statement.name()
+        name = statement.variable_name()
     ));
 
     let enumerator_name = match statement.equation() {
@@ -635,7 +635,7 @@ fn print_read_if_statement_enum(
 
     let rd = e
         .rust_object()
-        .rust_definer_with_variable_name_and_enumerator(statement.name(), enumerator_name);
+        .rust_definer_with_variable_name_and_enumerator(statement.variable_name(), enumerator_name);
 
     for enumerator in rd.enumerators() {
         if !enumerator.has_members_in_struct() {

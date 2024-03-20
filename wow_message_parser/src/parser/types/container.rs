@@ -221,7 +221,7 @@ impl Container {
                     }
                 }
                 StructMember::IfStatement(statement) => {
-                    if statement.name() == variable_name {
+                    if statement.variable_name() == variable_name {
                         *variable_scope = *current_scope;
                     }
 
@@ -307,7 +307,7 @@ impl Container {
                         && statement.definer_type() == DefinerType::Enum
                     {
                         for d in statement.all_definitions() {
-                            let variable_name = statement.name();
+                            let variable_name = statement.variable_name();
                             let definition_name = d.name();
                             v.push(format!("{variable_name}_if_{definition_name}"));
                         }

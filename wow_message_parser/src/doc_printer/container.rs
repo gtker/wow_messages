@@ -327,7 +327,7 @@ fn print_container_example_member(
             }
         }
         StructMember::IfStatement(statement) => {
-            let enum_value = *values.get(statement.name()).unwrap();
+            let enum_value = *values.get(statement.variable_name()).unwrap();
 
             let definer_ty = match statement.original_ty() {
                 Type::Enum { e, .. } | Type::Flag { e, .. } => e,
@@ -380,7 +380,7 @@ fn print_container_example_member(
                 }
             } else if !statement.else_ifs().is_empty() {
                 for elseif in statement.else_ifs() {
-                    let value = *values.get(elseif.name()).unwrap();
+                    let value = *values.get(elseif.variable_name()).unwrap();
 
                     if statement_set(elseif, value) {
                         for m in elseif.members() {
@@ -490,7 +490,10 @@ fn print_container_if_statement(
     tags: &ObjectTags,
     o: &Objects,
 ) {
-    s.w(format!("If {variable} ", variable = statement.name()));
+    s.w(format!(
+        "If {variable} ",
+        variable = statement.variable_name()
+    ));
     match statement.equation() {
         Equation::NotEquals { value } => {
             s.w(format!("is not equal to `{value}`"));

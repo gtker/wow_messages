@@ -84,10 +84,6 @@ impl IfStatement {
         &self.original_ty
     }
 
-    pub(crate) fn name(&self) -> &str {
-        &self.variable_name
-    }
-
     pub(crate) fn definer_type(&self) -> DefinerType {
         self.equation.definer_type()
     }
