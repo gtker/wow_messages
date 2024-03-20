@@ -1,7 +1,7 @@
 use crate::ir_printer::{IrFileInfo, IrIntegerType, IrTags};
 use crate::parser::types::array::{Array, ArraySize, ArrayType};
 use crate::parser::types::container::{Container, ContainerType, UpdateMaskMember};
-use crate::parser::types::if_statement::{Conditional, Equation, IfStatement};
+use crate::parser::types::if_statement::{Equation, IfStatement};
 use crate::parser::types::optional::OptionalStatement;
 use crate::parser::types::sizes::Sizes;
 use crate::parser::types::struct_member::{StructMember, StructMemberDefinition};
@@ -232,25 +232,9 @@ impl IrEquation {
 }
 
 #[derive(Clone, Debug, Serialize)]
-pub(crate) struct IrConditional {
+pub(crate) struct IrIfStatement {
     variable_name: String,
     equations: IrEquation,
-}
-
-impl IrConditional {
-    fn from_conditional(v: Conditional) -> Self {
-        let equations = IrEquation::from_equation(v.equation());
-
-        Self {
-            variable_name: v.variable_name().to_string(),
-            equations,
-        }
-    }
-}
-
-#[derive(Clone, Debug, Serialize)]
-pub(crate) struct IrIfStatement {
-    pub conditional: IrConditional,
     members: Vec<IrStructMember>,
     else_if_statements: Vec<IrIfStatement>,
     else_members: Vec<IrStructMember>,
@@ -279,7 +263,8 @@ impl IrIfStatement {
             .collect();
 
         Self {
-            conditional: IrConditional::from_conditional(v.conditional().clone()),
+            variable_name: v.conditional().variable_name().to_string(),
+            equations: IrEquation::from_equation(v.conditional().equation()),
             members,
             else_if_statements: else_ifs,
             else_members: else_statement_members,

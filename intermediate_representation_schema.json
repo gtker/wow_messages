@@ -1150,7 +1150,7 @@
         }
       }
     },
-    "conditional": {
+    "if_statement": {
       "properties": {
         "variable_name": {
           "type": "string"
@@ -1196,13 +1196,6 @@
               }
             }
           }
-        }
-      }
-    },
-    "if_statement": {
-      "properties": {
-        "conditional": {
-          "ref": "conditional"
         },
         "members": {
           "elements": {
