@@ -129,7 +129,7 @@ fn print_wowm_if_statement(
     f: impl Fn(&mut Writer),
 ) {
     let name = statement.name();
-    match statement.conditional().equation() {
+    match statement.equation() {
         Equation::Equals { values: value } => {
             for (i, v) in value.iter().enumerate() {
                 if i == 0 {

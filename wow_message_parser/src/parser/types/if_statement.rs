@@ -50,7 +50,7 @@ impl IfStatement {
     }
 
     pub(crate) fn flag_get_enumerator(&self) -> String {
-        match self.conditional().equation() {
+        match self.equation() {
             Equation::BitwiseAnd { values: value } => value[0].clone(),
             Equation::Equals { .. } | Equation::NotEquals { .. } => {
                 unreachable!("flag_get_enumerator was not flag")
@@ -63,7 +63,7 @@ impl IfStatement {
     }
 
     pub(crate) fn is_elseif_flag(&self) -> bool {
-        match self.conditional().equation() {
+        match self.equation() {
             Equation::BitwiseAnd { .. } => !self.else_ifs().is_empty(),
             Equation::Equals { .. } | Equation::NotEquals { .. } => false,
         }
@@ -125,8 +125,12 @@ impl IfStatement {
         v
     }
 
-    pub(crate) fn conditional(&self) -> &Conditional {
-        &self.conditional
+    pub(crate) fn variable_name(&self) -> &str {
+        &self.conditional.variable_name
+    }
+
+    pub(crate) fn equation(&self) -> &Equation {
+        &self.conditional.equation
     }
 
     pub(crate) fn contains(&self, m: &StructMember) -> bool {

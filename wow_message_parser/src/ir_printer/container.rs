@@ -263,8 +263,8 @@ impl IrIfStatement {
             .collect();
 
         Self {
-            variable_name: v.conditional().variable_name().to_string(),
-            equations: IrEquation::from_equation(v.conditional().equation()),
+            variable_name: v.variable_name().to_string(),
+            equations: IrEquation::from_equation(v.equation()),
             members,
             else_if_statements: else_ifs,
             else_members: else_statement_members,

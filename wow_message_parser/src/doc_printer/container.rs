@@ -336,7 +336,7 @@ fn print_container_example_member(
 
             let statement_set = |statement: &IfStatement, enum_value: i128| {
                 let mut set = false;
-                match statement.conditional().equation() {
+                match statement.equation() {
                     Equation::Equals { values: value } => {
                         for v in value {
                             let eq_value = definer_ty
@@ -491,7 +491,7 @@ fn print_container_if_statement(
     o: &Objects,
 ) {
     s.w(format!("If {variable} ", variable = statement.name()));
-    match statement.conditional().equation() {
+    match statement.equation() {
         Equation::NotEquals { value } => {
             s.w(format!("is not equal to `{value}`"));
         }

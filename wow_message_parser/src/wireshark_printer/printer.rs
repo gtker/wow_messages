@@ -195,7 +195,7 @@ fn print_if_statement(
 
     s.w("if (");
 
-    match statement.conditional().equation() {
+    match statement.equation() {
         Equation::Equals { values: value } => {
             for (i, v) in value.iter().enumerate() {
                 let enumerator = enumerator_name(&statement.original_ty().rust_str(), v);
@@ -246,7 +246,7 @@ fn print_if_statement(
     for elseif in statement.else_ifs() {
         s.w("else if (");
 
-        match elseif.conditional().equation() {
+        match elseif.equation() {
             Equation::Equals { values: value } => {
                 for (i, v) in value.iter().enumerate() {
                     let enumerator = enumerator_name(&statement.original_ty().rust_str(), v);

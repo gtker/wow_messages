@@ -456,7 +456,7 @@ fn print_write_if_enum_statement(
         },
     ));
 
-    let enumerator_name = match statement.conditional().equation() {
+    let enumerator_name = match statement.equation() {
         Equation::Equals { values: value } => &value[0],
         Equation::NotEquals { value } => value,
         Equation::BitwiseAnd { .. } => {
