@@ -208,7 +208,7 @@ impl IrStructMember {
 }
 
 #[derive(Clone, Debug, Serialize)]
-#[serde(tag = "equation_tag", content = "values")]
+#[serde(tag = "equation_tag")]
 pub(crate) enum IrEquation {
     Equals { value: Vec<String> },
     NotEquals { value: String },

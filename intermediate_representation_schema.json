@@ -1160,38 +1160,26 @@
           "mapping": {
             "Equals": {
               "properties": {
-                "values": {
-                  "properties": {
-                    "value": {
-                      "elements": {
-                        "type": "string"
-                      }
-                    }
+                "value": {
+                  "elements": {
+                    "type": "string"
                   }
                 }
               }
             },
             "BitwiseAnd": {
               "properties": {
-                "values": {
-                  "properties": {
-                    "value": {
-                      "elements": {
-                        "type": "string"
-                      }
-                    }
+                "value": {
+                  "elements": {
+                    "type": "string"
                   }
                 }
               }
             },
             "NotEquals": {
               "properties": {
-                "values": {
-                  "properties": {
-                    "value": {
-                      "type": "string"
-                    }
-                  }
+                "value": {
+                  "type": "string"
                 }
               }
             }
