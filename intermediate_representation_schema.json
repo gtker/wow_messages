@@ -924,19 +924,15 @@
       "mapping": {
         "Integer": {
           "properties": {
-            "content": {
+            "integer_type": {
               "ref": "integer_type"
             }
           }
         },
         "Struct": {
           "properties": {
-            "content": {
-              "properties": {
-                "struct_data": {
-                  "ref": "container"
-                }
-              }
+            "struct_data": {
+              "ref": "container"
             }
           }
         },

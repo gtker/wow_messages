@@ -447,9 +447,9 @@ impl IrArray {
 }
 
 #[derive(Clone, Debug, Serialize)]
-#[serde(tag = "array_type_tag", content = "content")]
+#[serde(tag = "array_type_tag")]
 pub(crate) enum IrArrayType {
-    Integer(IrIntegerType),
+    Integer { integer_type: IrIntegerType },
     Struct { struct_data: IrContainer },
     CString,
     Guid,
@@ -460,7 +460,9 @@ pub(crate) enum IrArrayType {
 impl IrArrayType {
     fn from_array_type(v: &ArrayType) -> Self {
         match v {
-            ArrayType::Integer(i) => Self::Integer(IrIntegerType::from_integer_type(i)),
+            ArrayType::Integer(i) => Self::Integer {
+                integer_type: IrIntegerType::from_integer_type(i),
+            },
             ArrayType::Struct(f) => Self::Struct {
                 struct_data: container_to_ir_no_tests(f),
             },
