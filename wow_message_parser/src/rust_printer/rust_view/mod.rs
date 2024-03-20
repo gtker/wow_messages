@@ -428,7 +428,7 @@ fn create_struct_member_definition(
         match m {
             ParsedStructMember::Definition(_) => {}
             ParsedStructMember::IfStatement(statement) => {
-                if statement.name() != name {
+                if statement.variable_name() != name {
                     continue;
                 }
 

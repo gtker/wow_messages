@@ -240,7 +240,8 @@ fn parsed_member_to_member(
                 }
             }
 
-            let separate_if_statement = c.enum_variable_used_in_separate_if_statements(s.name());
+            let separate_if_statement =
+                c.enum_variable_used_in_separate_if_statements(s.variable_name());
 
             StructMember::IfStatement(IfStatement::new(
                 s.conditional.variable_name,
@@ -302,7 +303,8 @@ fn parsed_if_statement_to_if_statement(
     let mut v = Vec::with_capacity(parsed.len());
 
     for p in parsed {
-        let separate_if_statement = c.enum_variable_used_in_separate_if_statements(p.name());
+        let separate_if_statement =
+            c.enum_variable_used_in_separate_if_statements(p.variable_name());
 
         v.push(IfStatement::new(
             p.conditional.variable_name,
@@ -420,7 +422,7 @@ pub(crate) fn check_if_statement_operators(e: &ParsedContainer, definers: &[Defi
     fn inner(m: &ParsedStructMember, e: &ParsedContainer, definers: &[Definer]) {
         match m {
             ParsedStructMember::IfStatement(statement) => {
-                let ty = match e.get_field_ty(statement.name()) {
+                let ty = match e.get_field_ty(statement.variable_name()) {
                     ParsedType::Identifier { s, .. } => s,
                     _ => unreachable!(),
                 };
@@ -432,7 +434,7 @@ pub(crate) fn check_if_statement_operators(e: &ParsedContainer, definers: &[Defi
                         Equation::BitwiseAnd { .. } => {
                             enum_has_bitwise_and(
                                 e.name(),
-                                statement.name(),
+                                statement.variable_name(),
                                 definer.name(),
                                 &e.file_info,
                             );
@@ -442,7 +444,7 @@ pub(crate) fn check_if_statement_operators(e: &ParsedContainer, definers: &[Defi
                         Equation::Equals { .. } | Equation::NotEquals { .. } => {
                             flag_used_as_equals_or_not_equals(
                                 e.name(),
-                                statement.name(),
+                                statement.variable_name(),
                                 definer.name(),
                                 &e.file_info,
                             );

@@ -80,7 +80,7 @@ impl ParsedContainer {
                     }
                 }
                 ParsedStructMember::IfStatement(statement) => {
-                    if statement.name() == variable_name {
+                    if statement.variable_name() == variable_name {
                         return Some(DefinerUsage::InIf);
                     }
 
@@ -437,7 +437,7 @@ impl ParsedContainer {
             match m {
                 ParsedStructMember::Definition(_) => {}
                 ParsedStructMember::IfStatement(statement) => {
-                    variables_used_in_if.push(statement.name().to_string());
+                    variables_used_in_if.push(statement.variable_name().to_string());
 
                     for m in statement.all_members() {
                         find_used_in_if(m, variables_used_in_if);
@@ -494,10 +494,10 @@ impl ParsedContainer {
             match m {
                 ParsedStructMember::Definition(_) => {}
                 ParsedStructMember::IfStatement(statement) => {
-                    statement.set_original_ty(c.get_field_ty(statement.name()).clone());
+                    statement.set_original_ty(c.get_field_ty(statement.variable_name()).clone());
 
                     for else_if in statement.else_ifs_mut() {
-                        else_if.set_original_ty(c.get_field_ty(else_if.name()).clone());
+                        else_if.set_original_ty(c.get_field_ty(else_if.variable_name()).clone());
                     }
 
                     for m in statement.all_members_mut() {
@@ -549,7 +549,7 @@ impl ParsedContainer {
             match b {
                 ParsedStructMember::Definition(_) => {}
                 ParsedStructMember::IfStatement(statement) => {
-                    if statement.name() == variable_name {
+                    if statement.variable_name() == variable_name {
                         *a += 1;
                     }
 

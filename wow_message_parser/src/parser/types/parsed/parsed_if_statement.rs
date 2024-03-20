@@ -43,7 +43,7 @@ impl ParsedIfStatement {
         &self.else_statement_members
     }
 
-    pub(crate) fn name(&self) -> &str {
+    pub(crate) fn variable_name(&self) -> &str {
         self.conditional.variable_name()
     }
 
