@@ -168,12 +168,20 @@ impl From<&str> for Operator {
 }
 
 #[derive(Debug, Clone)]
-pub(crate) struct Conditional {
-    pub variable_name: String,
-    pub equation: Equation,
+pub(crate) enum Equation {
+    Equals { values: Vec<String> },
+    NotEquals { value: String },
+    BitwiseAnd { values: Vec<String> },
 }
 
-impl Conditional {
+impl Equation {
+    pub(crate) fn definer_type(&self) -> DefinerType {
+        match self {
+            Equation::Equals { .. } | Equation::NotEquals { .. } => DefinerType::Enum,
+            Equation::BitwiseAnd { .. } => DefinerType::Flag,
+        }
+    }
+
     pub(crate) fn new(conditions: &[Condition], ty_name: &str, file_info: &FileInfo) -> Self {
         let variable = &conditions[0];
         let variable_name = variable.value.clone();
@@ -217,25 +225,6 @@ impl Conditional {
             }
         };
 
-        Self {
-            variable_name,
-            equation,
-        }
-    }
-}
-
-#[derive(Debug, Clone)]
-pub(crate) enum Equation {
-    Equals { values: Vec<String> },
-    NotEquals { value: String },
-    BitwiseAnd { values: Vec<String> },
-}
-
-impl Equation {
-    pub(crate) fn definer_type(&self) -> DefinerType {
-        match self {
-            Equation::Equals { .. } | Equation::NotEquals { .. } => DefinerType::Enum,
-            Equation::BitwiseAnd { .. } => DefinerType::Flag,
-        }
+        equation
     }
 }

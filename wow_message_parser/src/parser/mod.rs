@@ -11,6 +11,7 @@ use types::definer::DefinerField;
 
 use crate::file_info::FileInfo;
 use crate::parser::types::definer::DefinerValue;
+use crate::parser::types::if_statement::Equation;
 use crate::parser::types::parsed::parsed_array::ParsedArray;
 use crate::parser::types::parsed::parsed_if_statement::{Condition, ParsedIfStatement};
 use crate::parser::types::parsed::parsed_optional::ParsedOptionalStatement;
@@ -23,7 +24,6 @@ use crate::parser::utility::parse_value;
 use crate::rust_printer::DefinerType;
 use crate::{error_printer, ParsedObjects, UNIMPLEMENTED};
 use types::container::ContainerType;
-use types::if_statement::Conditional;
 use types::parsed::parsed_container::ParsedContainer;
 use types::parsed::parsed_definer::ParsedDefiner;
 use types::parsed::parsed_test_case::{ParsedTestCase, ParsedTestCaseMember, ParsedTestValue};
@@ -468,7 +468,8 @@ fn parse_struct_member(ts: Pair<Rule>, ty_name: &str, file_info: &FileInfo) -> P
                 let (conditions, members) =
                     parse_if_statement(&mut statement.into_inner(), ty_name, file_info);
                 else_ifs.push(ParsedIfStatement::new(
-                    Conditional::new(&conditions, ty_name, file_info),
+                    conditions[0].value.clone(),
+                    Equation::new(&conditions, ty_name, file_info),
                     members,
                     vec![],
                     vec![],
@@ -490,9 +491,10 @@ fn parse_struct_member(ts: Pair<Rule>, ty_name: &str, file_info: &FileInfo) -> P
                 Vec::new()
             };
 
-            let conditional = Conditional::new(&conditions, ty_name, file_info);
+            let equation = Equation::new(&conditions, ty_name, file_info);
             ParsedStructMember::IfStatement(ParsedIfStatement::new(
-                conditional,
+                conditions[0].value.clone(),
+                equation,
                 members,
                 else_ifs,
                 else_statement_members,

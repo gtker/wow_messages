@@ -1,4 +1,4 @@
-use crate::parser::types::if_statement::{Conditional, Equation, Operator};
+use crate::parser::types::if_statement::{Equation, Operator};
 use crate::parser::types::parsed::parsed_struct_member::ParsedStructMember;
 use crate::parser::types::parsed::parsed_ty::ParsedType;
 
@@ -22,18 +22,19 @@ impl PartialEq for ParsedIfStatement {
 
 impl ParsedIfStatement {
     pub(crate) fn new(
-        conditional: Conditional,
+        variable_name: String,
+        equation: Equation,
         members: Vec<ParsedStructMember>,
         else_ifs: Vec<ParsedIfStatement>,
         else_statement_members: Vec<ParsedStructMember>,
     ) -> Self {
         Self {
-            variable_name: conditional.variable_name,
+            variable_name,
             members,
             else_ifs,
             else_statement_members,
             original_ty: None,
-            equation: conditional.equation,
+            equation,
         }
     }
 
