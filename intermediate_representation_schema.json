@@ -919,19 +919,6 @@
         }
       }
     },
-    "array": {
-      "properties": {
-        "inner_type": {
-          "ref": "array_type"
-        },
-        "size": {
-          "ref": "array_size"
-        },
-        "compressed": {
-          "type": "boolean"
-        }
-      }
-    },
     "array_type": {
       "discriminator": "array_type_tag",
       "mapping": {
@@ -997,14 +984,14 @@
       "mapping": {
         "Integer": {
           "properties": {
-            "content": {
+            "integer_type": {
               "ref": "integer_type"
             }
           }
         },
         "Bool": {
           "properties": {
-            "content": {
+            "integer_type": {
               "ref": "integer_type"
             }
           }
@@ -1047,53 +1034,47 @@
         },
         "Array": {
           "properties": {
-            "content": {
-              "ref": "array"
+            "inner_type": {
+              "ref": "array_type"
+            },
+            "size": {
+              "ref": "array_size"
+            },
+            "compressed": {
+              "type": "boolean"
             }
           }
         },
         "Enum": {
           "properties": {
-            "content": {
-              "properties": {
-                "type_name": {
-                  "type": "string"
-                },
-                "integer_type": {
-                  "ref": "integer_type"
-                },
-                "upcast": {
-                  "type": "boolean"
-                }
-              }
+            "type_name": {
+              "type": "string"
+            },
+            "integer_type": {
+              "ref": "integer_type"
+            },
+            "upcast": {
+              "type": "boolean"
             }
           }
         },
         "Flag": {
           "properties": {
-            "content": {
-              "properties": {
-                "type_name": {
-                  "type": "string"
-                },
-                "integer_type": {
-                  "ref": "integer_type"
-                },
-                "upcast": {
-                  "type": "boolean"
-                }
-              }
+            "type_name": {
+              "type": "string"
+            },
+            "integer_type": {
+              "ref": "integer_type"
+            },
+            "upcast": {
+              "type": "boolean"
             }
           }
         },
         "Struct": {
           "properties": {
-            "content": {
-              "properties": {
-                "struct_data": {
-                  "ref": "container"
-                }
-              }
+            "struct_data": {
+              "ref": "container"
             }
           }
         },

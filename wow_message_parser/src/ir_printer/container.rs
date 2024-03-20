@@ -304,10 +304,14 @@ impl IrStructMemberDefinition {
 }
 
 #[derive(Clone, Debug, Serialize)]
-#[serde(tag = "data_type_tag", content = "content")]
+#[serde(tag = "data_type_tag")]
 pub(crate) enum IrType {
-    Integer(IrIntegerType),
-    Bool(IrIntegerType),
+    Integer {
+        integer_type: IrIntegerType,
+    },
+    Bool {
+        integer_type: IrIntegerType,
+    },
     DateTime,
     PackedGuid,
     Guid,
@@ -356,7 +360,9 @@ pub(crate) enum IrType {
 impl IrType {
     fn from_type(v: &Type) -> Self {
         match v {
-            Type::Integer(i) => Self::Integer(IrIntegerType::from_integer_type(i)),
+            Type::Integer(i) => Self::Integer {
+                integer_type: IrIntegerType::from_integer_type(i),
+            },
             Type::PackedGuid => Self::PackedGuid,
             Type::Guid => Self::Guid,
             Type::NamedGuid => Self::NamedGuid,
@@ -396,7 +402,9 @@ impl IrType {
                 struct_data: container_to_ir_no_tests(e),
             },
             Type::SizedCString => Self::SizedCString,
-            Type::Bool(i) => Self::Bool(IrIntegerType::from_integer_type(i)),
+            Type::Bool(i) => Self::Bool {
+                integer_type: IrIntegerType::from_integer_type(i),
+            },
             Type::DateTime => Self::DateTime,
             Type::AchievementDoneArray => Self::AchievementDoneArray,
             Type::AchievementInProgressArray => Self::AchievementInProgressArray,
