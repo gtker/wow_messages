@@ -243,7 +243,8 @@ fn parsed_member_to_member(
             let separate_if_statement = c.enum_variable_used_in_separate_if_statements(s.name());
 
             StructMember::IfStatement(IfStatement::new(
-                s.conditional,
+                s.conditional.variable_name,
+                s.conditional.equation,
                 parsed_members_to_members(c, s.members, containers, definers, tags, None),
                 parsed_if_statement_to_if_statement(c, s.else_ifs, containers, definers, tags),
                 parsed_members_to_members(
@@ -304,7 +305,8 @@ fn parsed_if_statement_to_if_statement(
         let separate_if_statement = c.enum_variable_used_in_separate_if_statements(p.name());
 
         v.push(IfStatement::new(
-            p.conditional,
+            p.conditional.variable_name,
+            p.conditional.equation,
             parsed_members_to_members(c, p.members, containers, definers, tags, None),
             parsed_if_statement_to_if_statement(c, p.else_ifs, containers, definers, tags),
             parsed_members_to_members(

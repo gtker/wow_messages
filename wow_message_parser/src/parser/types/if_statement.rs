@@ -13,7 +13,8 @@ pub(crate) enum DefinerUsage {
 
 #[derive(Debug, Clone)]
 pub(crate) struct IfStatement {
-    conditional: Conditional,
+    variable_name: String,
+    equation: Equation,
     members: Vec<StructMember>,
     else_ifs: Vec<IfStatement>,
     else_statement_members: Vec<StructMember>,
@@ -31,16 +32,18 @@ impl PartialEq for IfStatement {
 
 impl IfStatement {
     pub(crate) fn new(
-        conditional: Conditional,
+        variable_name: String,
+        equation: Equation,
         members: Vec<StructMember>,
         else_ifs: Vec<IfStatement>,
         else_statement_members: Vec<StructMember>,
         original_ty: Type,
         separate_if_statement: bool,
     ) -> Self {
-        let is_enum = conditional.definer_type() == DefinerType::Enum;
+        let is_enum = equation.definer_type() == DefinerType::Enum;
         Self {
-            conditional,
+            variable_name,
+            equation,
             members,
             else_ifs,
             else_statement_members,
@@ -82,11 +85,11 @@ impl IfStatement {
     }
 
     pub(crate) fn name(&self) -> &str {
-        &self.conditional.variable_name
+        &self.variable_name
     }
 
     pub(crate) fn definer_type(&self) -> DefinerType {
-        self.conditional.definer_type()
+        self.equation.definer_type()
     }
 
     pub(crate) fn else_ifs(&self) -> &[IfStatement] {
@@ -126,11 +129,11 @@ impl IfStatement {
     }
 
     pub(crate) fn variable_name(&self) -> &str {
-        &self.conditional.variable_name
+        &self.variable_name
     }
 
     pub(crate) fn equation(&self) -> &Equation {
-        &self.conditional.equation
+        &self.equation
     }
 
     pub(crate) fn contains(&self, m: &StructMember) -> bool {
@@ -169,8 +172,8 @@ impl From<&str> for Operator {
 
 #[derive(Debug, Clone)]
 pub(crate) struct Conditional {
-    variable_name: String,
-    equation: Equation,
+    pub variable_name: String,
+    pub equation: Equation,
 }
 
 impl Conditional {
@@ -180,13 +183,6 @@ impl Conditional {
 
     pub(crate) fn equation(&self) -> &Equation {
         &self.equation
-    }
-
-    pub(crate) fn definer_type(&self) -> DefinerType {
-        match self.equation() {
-            Equation::Equals { .. } | Equation::NotEquals { .. } => DefinerType::Enum,
-            Equation::BitwiseAnd { .. } => DefinerType::Flag,
-        }
     }
 
     pub(crate) fn new(conditions: &[Condition], ty_name: &str, file_info: &FileInfo) -> Self {
@@ -244,6 +240,15 @@ pub(crate) enum Equation {
     Equals { values: Vec<String> },
     NotEquals { value: String },
     BitwiseAnd { values: Vec<String> },
+}
+
+impl Equation {
+    pub(crate) fn definer_type(&self) -> DefinerType {
+        match self {
+            Equation::Equals { .. } | Equation::NotEquals { .. } => DefinerType::Enum,
+            Equation::BitwiseAnd { .. } => DefinerType::Flag,
+        }
+    }
 }
 
 #[derive(Debug, Clone)]
