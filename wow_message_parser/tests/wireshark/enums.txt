@@ -9241,3 +9241,169 @@ typedef enum {
     CAST_FLAGS_UNKNOWN9 = 0x100,
 } e_cast_flags;
 
+typedef enum {
+    REALM_TYPE_PLAYER_VS_ENVIRONMENT = 0x0,
+    REALM_TYPE_PLAYER_VS_PLAYER = 0x1,
+    REALM_TYPE_ROLEPLAYING = 0x6,
+    REALM_TYPE_ROLEPLAYING_PLAYER_VS_PLAYER = 0x8,
+} e_realm_type;
+static const value_string e_realm_type_strings[] =  {
+    { REALM_TYPE_PLAYER_VS_ENVIRONMENT, "Player Vs Environment" },
+    { REALM_TYPE_PLAYER_VS_PLAYER, "Player Vs Player" },
+    { REALM_TYPE_ROLEPLAYING, "Roleplaying" },
+    { REALM_TYPE_ROLEPLAYING_PLAYER_VS_PLAYER, "Roleplaying Player Vs Player" },
+    { 0, NULL }
+};
+
+typedef enum {
+    REALM_CATEGORY_DEFAULT = 0x0,
+    REALM_CATEGORY_ONE = 0x1,
+    REALM_CATEGORY_TWO = 0x2,
+    REALM_CATEGORY_THREE = 0x3,
+    REALM_CATEGORY_FIVE = 0x5,
+} e_realm_category;
+static const value_string e_realm_category_strings[] =  {
+    { REALM_CATEGORY_DEFAULT, "Default" },
+    { REALM_CATEGORY_ONE, "One" },
+    { REALM_CATEGORY_TWO, "Two" },
+    { REALM_CATEGORY_THREE, "Three" },
+    { REALM_CATEGORY_FIVE, "Five" },
+    { 0, NULL }
+};
+
+typedef enum {
+    PROTOCOL_VERSION_TWO = 0x2,
+    PROTOCOL_VERSION_THREE = 0x3,
+    PROTOCOL_VERSION_FIVE = 0x5,
+    PROTOCOL_VERSION_SIX = 0x6,
+    PROTOCOL_VERSION_SEVEN = 0x7,
+    PROTOCOL_VERSION_EIGHT = 0x8,
+} e_protocol_version;
+static const value_string e_protocol_version_strings[] =  {
+    { PROTOCOL_VERSION_TWO, "Two" },
+    { PROTOCOL_VERSION_THREE, "Three" },
+    { PROTOCOL_VERSION_FIVE, "Five" },
+    { PROTOCOL_VERSION_SIX, "Six" },
+    { PROTOCOL_VERSION_SEVEN, "Seven" },
+    { PROTOCOL_VERSION_EIGHT, "Eight" },
+    { 0, NULL }
+};
+
+typedef enum {
+    PLATFORM_X86 = 0x783836,
+    PLATFORM_POWER_PC = 0x505043,
+} e_platform;
+static const value_string e_platform_strings[] =  {
+    { PLATFORM_X86, "X86" },
+    { PLATFORM_POWER_PC, "Power Pc" },
+    { 0, NULL }
+};
+
+typedef enum {
+    OS_WINDOWS = 0x57696E,
+    OS_MAC_OS_X = 0x4F5358,
+} e_os;
+static const value_string e_os_strings[] =  {
+    { OS_WINDOWS, "Windows" },
+    { OS_MAC_OS_X, "Mac Os X" },
+    { 0, NULL }
+};
+
+typedef enum {
+    LOCALE_EN_GB = 0x656E4742,
+    LOCALE_EN_US = 0x656E5553,
+    LOCALE_ES_MX = 0x65734D58,
+    LOCALE_PT_BR = 0x70744252,
+    LOCALE_FR_FR = 0x66724652,
+    LOCALE_DE_DE = 0x64654445,
+    LOCALE_ES_ES = 0x65734553,
+    LOCALE_PT_PT = 0x70745054,
+    LOCALE_IT_IT = 0x69744954,
+    LOCALE_RU_RU = 0x72755255,
+    LOCALE_KO_KR = 0x6B6F4B52,
+    LOCALE_ZH_TW = 0x7A685457,
+    LOCALE_EN_TW = 0x656E5457,
+    LOCALE_EN_CN = 0x656E434E,
+} e_locale;
+static const value_string e_locale_strings[] =  {
+    { LOCALE_EN_GB, "En Gb" },
+    { LOCALE_EN_US, "En Us" },
+    { LOCALE_ES_MX, "Es Mx" },
+    { LOCALE_PT_BR, "Pt Br" },
+    { LOCALE_FR_FR, "Fr Fr" },
+    { LOCALE_DE_DE, "De De" },
+    { LOCALE_ES_ES, "Es Es" },
+    { LOCALE_PT_PT, "Pt Pt" },
+    { LOCALE_IT_IT, "It It" },
+    { LOCALE_RU_RU, "Ru Ru" },
+    { LOCALE_KO_KR, "Ko Kr" },
+    { LOCALE_ZH_TW, "Zh Tw" },
+    { LOCALE_EN_TW, "En Tw" },
+    { LOCALE_EN_CN, "En Cn" },
+    { 0, NULL }
+};
+
+typedef enum {
+    LOGIN_RESULT_SUCCESS = 0x00,
+    LOGIN_RESULT_FAIL_UNKNOWN0 = 0x01,
+    LOGIN_RESULT_FAIL_UNKNOWN1 = 0x02,
+    LOGIN_RESULT_FAIL_BANNED = 0x03,
+    LOGIN_RESULT_FAIL_UNKNOWN_ACCOUNT = 0x04,
+    LOGIN_RESULT_FAIL_INCORRECT_PASSWORD = 0x05,
+    LOGIN_RESULT_FAIL_ALREADY_ONLINE = 0x06,
+    LOGIN_RESULT_FAIL_NO_TIME = 0x07,
+    LOGIN_RESULT_FAIL_DB_BUSY = 0x08,
+    LOGIN_RESULT_FAIL_VERSION_INVALID = 0x09,
+    LOGIN_RESULT_LOGIN_DOWNLOAD_FILE = 0x0A,
+    LOGIN_RESULT_FAIL_INVALID_SERVER = 0x0B,
+    LOGIN_RESULT_FAIL_SUSPENDED = 0x0C,
+    LOGIN_RESULT_FAIL_NO_ACCESS = 0x0D,
+    LOGIN_RESULT_SUCCESS_SURVEY = 0x0E,
+    LOGIN_RESULT_FAIL_PARENTALCONTROL = 0x0F,
+    LOGIN_RESULT_FAIL_LOCKED_ENFORCED = 0x10,
+} e_login_result;
+static const value_string e_login_result_strings[] =  {
+    { LOGIN_RESULT_SUCCESS, "Success" },
+    { LOGIN_RESULT_FAIL_UNKNOWN0, "Fail Unknown0" },
+    { LOGIN_RESULT_FAIL_UNKNOWN1, "Fail Unknown1" },
+    { LOGIN_RESULT_FAIL_BANNED, "Fail Banned" },
+    { LOGIN_RESULT_FAIL_UNKNOWN_ACCOUNT, "Fail Unknown Account" },
+    { LOGIN_RESULT_FAIL_INCORRECT_PASSWORD, "Fail Incorrect Password" },
+    { LOGIN_RESULT_FAIL_ALREADY_ONLINE, "Fail Already Online" },
+    { LOGIN_RESULT_FAIL_NO_TIME, "Fail No Time" },
+    { LOGIN_RESULT_FAIL_DB_BUSY, "Fail Db Busy" },
+    { LOGIN_RESULT_FAIL_VERSION_INVALID, "Fail Version Invalid" },
+    { LOGIN_RESULT_LOGIN_DOWNLOAD_FILE, "Login Download File" },
+    { LOGIN_RESULT_FAIL_INVALID_SERVER, "Fail Invalid Server" },
+    { LOGIN_RESULT_FAIL_SUSPENDED, "Fail Suspended" },
+    { LOGIN_RESULT_FAIL_NO_ACCESS, "Fail No Access" },
+    { LOGIN_RESULT_SUCCESS_SURVEY, "Success Survey" },
+    { LOGIN_RESULT_FAIL_PARENTALCONTROL, "Fail Parentalcontrol" },
+    { LOGIN_RESULT_FAIL_LOCKED_ENFORCED, "Fail Locked Enforced" },
+    { 0, NULL }
+};
+
+
+typedef enum {
+    REALM_FLAG_NONE = 0x00,
+    REALM_FLAG_INVALID = 0x01,
+    REALM_FLAG_OFFLINE = 0x02,
+    REALM_FLAG_SPECIFY_BUILD = 0x04,
+    REALM_FLAG_FORCE_BLUE_RECOMMENDED = 0x20,
+    REALM_FLAG_FORCE_GREEN_RECOMMENDED = 0x40,
+    REALM_FLAG_FORCE_RED_FULL = 0x80,
+} e_realm_flag;
+
+typedef enum {
+    SECURITY_FLAG_NONE = 0x0,
+    SECURITY_FLAG_PIN = 0x1,
+    SECURITY_FLAG_MATRIX_CARD = 0x2,
+    SECURITY_FLAG_AUTHENTICATOR = 0x4,
+} e_security_flag;
+
+typedef enum {
+    ACCOUNT_FLAG_GM = 0x000001,
+    ACCOUNT_FLAG_TRIAL = 0x000008,
+    ACCOUNT_FLAG_PROPASS = 0x800000,
+} e_account_flag;
+

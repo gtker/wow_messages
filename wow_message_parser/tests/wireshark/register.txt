@@ -4762,3 +4762,429 @@
                 NULL, HFILL
             }
         },
+        { &hf_wow_account_flag,
+            { "Account Flag", "wow.account.flag",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_wow_account_name,
+            { "Account Name", "wow.account.name",
+                FT_STRINGZ, BASE_NONE, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_wow_address,
+            { "Address", "wow.address",
+                FT_STRINGZ, BASE_NONE, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_wow_authenticator,
+            { "Authenticator", "wow.authenticator",
+                FT_STRINGZ, BASE_NONE, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_wow_build,
+            { "Build", "wow.build",
+                FT_UINT16, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_wow_cd_key_proof,
+            { "Cd Key Proof", "wow.cd.key.proof",
+                FT_BYTES, BASE_NONE, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_wow_challenge_count,
+            { "Challenge Count", "wow.challenge.count",
+                FT_UINT8, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_wow_challenge_data,
+            { "Challenge Data", "wow.challenge.data",
+                FT_BYTES, BASE_NONE, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_wow_checksum_salt,
+            { "Checksum Salt", "wow.checksum.salt",
+                FT_BYTES, BASE_NONE, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_wow_client_checksum,
+            { "Client Checksum", "wow.client.checksum",
+                FT_BYTES, BASE_NONE, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_wow_client_ip_address,
+            { "Client Ip Address", "wow.client.ip.address",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_wow_client_proof,
+            { "Client Proof", "wow.client.proof",
+                FT_BYTES, BASE_NONE, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_wow_client_public_key,
+            { "Client Public Key", "wow.client.public.key",
+                FT_BYTES, BASE_NONE, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_wow_compressed_data_length,
+            { "Compressed Data Length", "wow.compressed.data.length",
+                FT_UINT16, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_wow_crc_hash,
+            { "Crc Hash", "wow.crc.hash",
+                FT_BYTES, BASE_NONE, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_wow_crc_salt,
+            { "Crc Salt", "wow.crc.salt",
+                FT_BYTES, BASE_NONE, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_wow_data,
+            { "Data", "wow.data",
+                FT_BYTES, BASE_NONE, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_wow_decompressed_size,
+            { "Decompressed Size", "wow.decompressed.size",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_wow_digit_count,
+            { "Digit Count", "wow.digit.count",
+                FT_UINT8, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_wow_error,
+            { "Error", "wow.error",
+                FT_UINT8, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_wow_file_md,
+            { "File Md", "wow.file.md",
+                FT_BYTES, BASE_NONE, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_wow_file_size,
+            { "File Size", "wow.file.size",
+                FT_UINT64, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_wow_filename,
+            { "Filename", "wow.filename",
+                FT_STRINGZ, BASE_NONE, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_wow_footer_padding,
+            { "Footer Padding", "wow.footer.padding",
+                FT_UINT16, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_wow_game_name,
+            { "Game Name", "wow.game.name",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_wow_generator,
+            { "Generator", "wow.generator",
+                FT_BYTES, BASE_NONE, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_wow_generator_length,
+            { "Generator Length", "wow.generator.length",
+                FT_UINT8, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_wow_hardware_survey_id,
+            { "Hardware Survey Id", "wow.hardware.survey.id",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_wow_header_padding,
+            { "Header Padding", "wow.header.padding",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_wow_height,
+            { "Height", "wow.height",
+                FT_UINT8, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_wow_key_count,
+            { "Key Count", "wow.key.count",
+                FT_UINT8, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_wow_large_safe_prime,
+            { "Large Safe Prime", "wow.large.safe.prime",
+                FT_BYTES, BASE_NONE, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_wow_large_safe_prime_length,
+            { "Large Safe Prime Length", "wow.large.safe.prime.length",
+                FT_UINT8, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_wow_locale,
+            { "Locale", "wow.locale",
+                FT_UINT32, BASE_HEX_DEC, VALS(e_locale_strings), 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_wow_locked,
+            { "Locked", "wow.locked",
+                FT_UINT8, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_wow_login_result,
+            { "Login Result", "wow.login.result",
+                FT_UINT8, BASE_HEX_DEC, VALS(e_login_result_strings), 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_wow_major,
+            { "Major", "wow.major",
+                FT_UINT8, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_wow_matrix_card_proof,
+            { "Matrix Card Proof", "wow.matrix.card.proof",
+                FT_BYTES, BASE_NONE, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_wow_minor,
+            { "Minor", "wow.minor",
+                FT_UINT8, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_wow_name,
+            { "Name", "wow.name",
+                FT_STRINGZ, BASE_NONE, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_wow_number_of_characters_on_realm,
+            { "Number Of Characters On Realm", "wow.number.of.characters.on.realm",
+                FT_UINT8, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_wow_number_of_realms,
+            { "Number Of Realms", "wow.number.of.realms",
+                FT_UINT16, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_wow_number_of_telemetry_keys,
+            { "Number Of Telemetry Keys", "wow.number.of.telemetry.keys",
+                FT_UINT8, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_wow_offset,
+            { "Offset", "wow.offset",
+                FT_UINT64, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_wow_os,
+            { "Os", "wow.os",
+                FT_UINT32, BASE_HEX_DEC, VALS(e_os_strings), 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_wow_padding,
+            { "Padding", "wow.padding",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_wow_patch,
+            { "Patch", "wow.patch",
+                FT_UINT8, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_wow_pin_grid_seed,
+            { "Pin Grid Seed", "wow.pin.grid.seed",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_wow_pin_hash,
+            { "Pin Hash", "wow.pin.hash",
+                FT_BYTES, BASE_NONE, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_wow_pin_salt,
+            { "Pin Salt", "wow.pin.salt",
+                FT_BYTES, BASE_NONE, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_wow_platform,
+            { "Platform", "wow.platform",
+                FT_UINT32, BASE_HEX_DEC, VALS(e_platform_strings), 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_wow_population,
+            { "Population", "wow.population",
+                FT_FLOAT, BASE_NONE, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_wow_proof_data,
+            { "Proof Data", "wow.proof.data",
+                FT_BYTES, BASE_NONE, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_wow_protocol_version,
+            { "Protocol Version", "wow.protocol.version",
+                FT_UINT8, BASE_HEX_DEC, VALS(e_protocol_version_strings), 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_wow_protocol_version_int,
+            { "Protocol Version Int", "wow.protocol.version.int",
+                FT_UINT8, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_wow_realm_category,
+            { "Realm Category", "wow.realm.category",
+                FT_UINT8, BASE_HEX_DEC, VALS(e_realm_category_strings), 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_wow_realm_flag,
+            { "Realm Flag", "wow.realm.flag",
+                FT_UINT8, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_wow_realm_id,
+            { "Realm Id", "wow.realm.id",
+                FT_UINT8, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_wow_realm_type,
+            { "Realm Type", "wow.realm.type",
+                FT_UINT8, BASE_HEX_DEC, VALS(e_realm_type_strings), 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_wow_required,
+            { "Required", "wow.required",
+                FT_UINT8, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_wow_salt,
+            { "Salt", "wow.salt",
+                FT_BYTES, BASE_NONE, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_wow_security_flag,
+            { "Security Flag", "wow.security.flag",
+                FT_UINT8, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_wow_seed,
+            { "Seed", "wow.seed",
+                FT_UINT64, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_wow_server_proof,
+            { "Server Proof", "wow.server.proof",
+                FT_BYTES, BASE_NONE, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_wow_server_public_key,
+            { "Server Public Key", "wow.server.public.key",
+                FT_BYTES, BASE_NONE, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_wow_size,
+            { "Size", "wow.size",
+                FT_UINT16, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_wow_survey_id,
+            { "Survey Id", "wow.survey.id",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_wow_unknown_bytes,
+            { "Unknown Bytes", "wow.unknown.bytes",
+                FT_BYTES, BASE_NONE, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_wow_unknown_int,
+            { "Unknown Int", "wow.unknown.int",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_wow_utc_timezone_offset,
+            { "Utc Timezone Offset", "wow.utc.timezone.offset",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_wow_width,
+            { "Width", "wow.width",
+                FT_UINT8, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },

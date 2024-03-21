@@ -404,7 +404,7 @@ impl AllRustVersions {
     }
 }
 
-#[derive(Debug, Ord, PartialOrd, Eq, PartialEq, Clone)]
+#[derive(Debug, PartialEq, Ord, PartialOrd, Eq, Clone)]
 pub enum AllVersions {
     Login(BTreeSet<LoginVersion>),
     World(BTreeSet<WorldVersion>),

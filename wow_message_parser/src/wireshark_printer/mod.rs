@@ -19,16 +19,23 @@ pub(crate) fn print_wireshark(o: &Objects) {
     let world_objects = types::get_wireshark_object(o.world_wireshark_containers());
     let mut world_imports = print_int_declarations(&world_objects);
     let mut world_enums = print_enums(&world_objects);
-    let mut world_register = print_register_info(&world_objects);
-    let (mut world_parser, mut world_variables) =
-        print_parser(&o.world_wireshark_messages(), &world_objects);
+    let mut world_register = print_register_info(&world_objects, false);
+    let (mut world_parser, mut world_variables) = print_parser(
+        &o.world_wireshark_messages(),
+        &o.world_wireshark_messages(),
+        &world_objects,
+    );
 
-    //let login_objects = types::get_wireshark_object(o.login_wireshark_containers());
-    let login_imports = Writer::new(); //  print_int_declarations(&login_objects);
-    let login_enums = Writer::new();
-    let login_register = Writer::new();
-    let login_parser = Writer::new();
-    let login_variables = Writer::new();
+    let login_objects = types::get_wireshark_object(o.login_wireshark_containers());
+    let login_imports = print_int_declarations(&login_objects);
+    let login_enums = print_enums(&login_objects);
+    let login_register = print_register_info(&login_objects, true);
+
+    let (login_parser, login_variables) = print_parser(
+        &o.login_wireshark_messages(),
+        &o.all_login_wireshark_messages(),
+        &login_objects,
+    );
 
     if let Ok(path) = std::env::var("WOWM_WIRESHARK") {
         let path = PathBuf::from(&path);
@@ -164,7 +171,7 @@ fn pretty_name(name: &str) -> String {
         .replace("Didnt", "Didn't")
 }
 
-fn name_to_hf(name: &str, ty: &Type) -> String {
+fn name_to_hf(name: &str, ty: &Type, is_login_type: bool) -> String {
     let mut name = match ty {
         Type::Flag { e, .. } | Type::Enum { e, .. } => e.name().to_snake_case(),
         Type::Struct { e } => e.name().to_string(),
@@ -215,14 +222,20 @@ fn name_to_hf(name: &str, ty: &Type) -> String {
             _ => panic!("Types with the same name but different types in wireshark printer"),
         }
     } else if name == "size" {
-        name += "_struct";
+        if !is_login_type {
+            name += "_struct";
+        }
     } else if name.starts_with("position") && matches!(ty, Type::Integer(IntegerType::U16)) {
         name += "_int";
-    } else if name == "item_slot" {
+    } else if name == "item_slot" || name == "protocol_version" {
         if let Type::Integer(_) = ty {
             name += "_int";
         }
     }
 
-    format!("hf_woww_{name}")
+    if is_login_type {
+        format!("hf_wow_{name}")
+    } else {
+        format!("hf_woww_{name}")
+    }
 }

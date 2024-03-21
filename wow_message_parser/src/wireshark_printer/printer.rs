@@ -3,6 +3,7 @@ use crate::parser::types::definer::Definer;
 use crate::parser::types::if_statement::{Equation, IfStatement};
 use crate::parser::types::struct_member::{StructMember, StructMemberDefinition};
 use crate::parser::types::ty::Type;
+use crate::parser::types::version::LoginVersion;
 use crate::parser::types::IntegerType;
 use crate::rust_printer::writer::Writer;
 use crate::wireshark_printer::types::{WiresharkMember, WiresharkObject, WiresharkType};
@@ -15,6 +16,7 @@ use std::fmt::UpperHex;
 
 pub(crate) fn print_parser(
     wireshark_messages: &[&Container],
+    all_relevant_messages: &[&Container],
     w: &WiresharkObject,
 ) -> (Writer, Writer) {
     let mut s = Writer::at_indentation(1);
@@ -41,25 +43,47 @@ pub(crate) fn print_parser(
             s.wln("ptv = ptvcursor_new(wmem_packet_scope(), tree, compressed_tvb, 0);");
         }
 
-        if is_server_name(e.name()) {
-            s.open_curly("if (WOWW_SERVER_TO_CLIENT)");
+        let versions = all_relevant_messages
+            .iter()
+            .filter(|a| a.name() == e.name())
+            .collect::<Vec<_>>();
 
-            print_message(&mut s, e, w, &mut variables, inside_compressed_message);
+        if versions.len() != 1 {
+            assert!(versions[0].tags().has_login_version());
 
-            s.closing_curly(); // if (WOWW_SERVER_TO_CLIENT)
+            s.open_curly("switch (*protocol_version)");
+            for version in &versions {
+                for v in version.tags().logon_versions() {
+                    match v {
+                        LoginVersion::Specific(i) => s.wln(format!("case {i}:")),
+                        LoginVersion::All => panic!(),
+                    }
+                }
+                s.inc_indent();
 
-            if let Some(e) = wireshark_messages
-                .iter()
-                .find(|a| a.name() == server_to_client_name(e.name()))
-            {
-                s.open_curly("else");
+                print_single_message(
+                    &mut s,
+                    w,
+                    all_relevant_messages,
+                    &mut variables,
+                    version,
+                    inside_compressed_message,
+                );
 
-                print_message(&mut s, e, w, &mut variables, inside_compressed_message);
-
-                s.closing_curly(); // else
+                s.dec_indent();
+                s.wln("break;");
             }
+
+            s.closing_curly();
         } else {
-            print_message(&mut s, e, w, &mut variables, inside_compressed_message);
+            print_single_message(
+                &mut s,
+                w,
+                all_relevant_messages,
+                &mut variables,
+                e,
+                inside_compressed_message,
+            );
         }
 
         if inside_compressed_message {
@@ -82,6 +106,41 @@ pub(crate) fn print_parser(
     s.closing_curly();
 
     (s, print_variables(variables))
+}
+
+fn print_single_message(
+    mut s: &mut Writer,
+    w: &WiresharkObject,
+    all_wireshark_messages: &[&Container],
+    mut variables: &mut Vec<String>,
+    e: &&Container,
+    inside_compressed_message: bool,
+) {
+    if is_server_name(e.name()) || e.tags().has_login_version() {
+        let prefix = if e.tags().has_login_version() {
+            "WOW"
+        } else {
+            "WOWW"
+        };
+        s.open_curly(format!("if ({prefix}_SERVER_TO_CLIENT)"));
+
+        print_message(&mut s, e, w, &mut variables, inside_compressed_message);
+
+        s.closing_curly(); // if (WOWW_SERVER_TO_CLIENT)
+
+        if let Some(e) = all_wireshark_messages
+            .iter()
+            .find(|a| a.name() == server_to_client_name(e.name()))
+        {
+            s.open_curly("else");
+
+            print_message(&mut s, e, w, &mut variables, inside_compressed_message);
+
+            s.closing_curly(); // else
+        }
+    } else {
+        print_message(&mut s, e, w, &mut variables, inside_compressed_message);
+    }
 }
 
 fn print_variables(mut v: Vec<String>) -> Writer {
@@ -130,7 +189,7 @@ fn print_member(
 ) {
     match m {
         StructMember::Definition(d) => {
-            let w = wo.get(&name_to_hf(d.name(), d.ty()));
+            let w = wo.get(&name_to_hf(d.name(), d.ty(), e.tags().has_login_version()));
             print_definition(
                 s,
                 e.name(),
@@ -367,17 +426,22 @@ fn print_definition(
                 len = i.size()
             ));
         }
-        Type::Spell | Type::Item | Type::DateTime => {
+        Type::IpAddress | Type::Spell | Type::Item | Type::DateTime => {
             let name = w.unwrap().name();
             s.wln(format!("ptvcursor_add(ptv, {name}, 4, ENC_LITTLE_ENDIAN);",));
         }
-        Type::FloatingPoint => {
+        Type::Population | Type::FloatingPoint => {
             let name = w.unwrap().name();
 
             s.wln(format!("ptvcursor_add(ptv, {name}, 4, ENC_LITTLE_ENDIAN);",));
         }
         Type::CString => {
             print_cstring(s, w);
+        }
+        Type::String => {
+            let name = w.unwrap().name();
+
+            s.wln(format!("add_string(ptv, &{name});"));
         }
         Type::SizedCString => {
             let name = w.unwrap().name();
@@ -500,7 +564,6 @@ fn print_definition(
         Type::MonsterMoveSplines => {
             s.wln("add_monster_move_spline(ptv);");
         }
-        Type::String { .. } => unreachable!("Strings are only in login messages"),
         Type::AchievementInProgressArray | Type::AchievementDoneArray => {
             unreachable!("achievement arrays are only in 3.3.5")
         }
@@ -518,12 +581,6 @@ fn print_definition(
         }
         Type::AddonArray => {
             unreachable!("addon array only in 2.4.3/3.3.5")
-        }
-        Type::IpAddress => {
-            unreachable!("ip addresses are only in login")
-        }
-        Type::Population => {
-            unreachable!("population only in login")
         }
         Type::CacheMask => {
             unreachable!("cache mask only in wrath")
@@ -599,15 +656,17 @@ fn print_definer(
     }
 }
 
-pub(crate) fn print_register_info(w: &WiresharkObject) -> Writer {
+pub(crate) fn print_register_info(w: &WiresharkObject, is_login_version: bool) -> Writer {
     let mut s = Writer::at_indentation(2);
+
+    let prefix = if is_login_version { "wow" } else { "woww" };
 
     for m in w.members() {
         s.wln(format!("{{ &{},", m.name()));
         s.inc_indent();
 
         s.wln(format!(
-            "{{ \"{pretty_name}\", \"woww.{ui_name}\",",
+            "{{ \"{pretty_name}\", \"{prefix}.{ui_name}\",",
             pretty_name = pretty_name(m.name_without_hf_woww()),
             ui_name = ui_name(m.name_without_hf_woww()),
         ));

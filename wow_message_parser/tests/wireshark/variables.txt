@@ -72,3 +72,12 @@
     guint32 update_flag = 0;
     guint32 update_type = 0;
     guint32 url_info = 0;
+    guint32 compressed_data_length = 0;
+    guint32 flag = 0;
+    guint32 generator_length = 0;
+    guint32 large_safe_prime_length = 0;
+    guint32 number_of_realms = 0;
+    guint32 number_of_telemetry_keys = 0;
+    guint32 result = 0;
+    guint32 security_flag = 0;
+    guint32 size = 0;

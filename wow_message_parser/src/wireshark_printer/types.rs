@@ -11,7 +11,11 @@ pub(crate) fn get_wireshark_object(containers: Vec<&Container>) -> WiresharkObje
     let decompressed_size_ty = Type::Integer(IntegerType::U32);
     let decompressed_size_name = "decompressed_size";
     objects.push(WiresharkMember::new(
-        wireshark_printer::name_to_hf(decompressed_size_name, &decompressed_size_ty),
+        wireshark_printer::name_to_hf(
+            decompressed_size_name,
+            &decompressed_size_ty,
+            containers[0].tags().has_login_version(),
+        ),
         WiresharkType::from_type(&decompressed_size_ty).unwrap(),
     ));
 
@@ -21,10 +25,11 @@ pub(crate) fn get_wireshark_object(containers: Vec<&Container>) -> WiresharkObje
         }
 
         for d in e.all_definitions() {
-            let name = wireshark_printer::name_to_hf(d.name(), d.ty());
+            let name =
+                wireshark_printer::name_to_hf(d.name(), d.ty(), e.tags().has_login_version());
 
             if let Some(m) = objects.get_mut(&name) {
-                if let Some(new_ty) = &WiresharkType::from_type(d.ty()) {
+                if let Some(new_ty) = WiresharkType::from_type(d.ty()) {
                     match m.ty_mut() {
                         WiresharkType::Integer(i) => {
                             let v = match new_ty {
@@ -32,19 +37,21 @@ pub(crate) fn get_wireshark_object(containers: Vec<&Container>) -> WiresharkObje
                                 _ => panic!("variable: '{name}' is int and {new_ty:#?}"),
                             };
 
-                            if v > i {
-                                *i = *v;
+                            if v > *i {
+                                *i = v;
                             }
                         }
                         WiresharkType::Enum(e, i) => match new_ty {
                             WiresharkType::Enum(v, new) => {
-                                if &*i < new {
-                                    *i = *new;
+                                if *i < new {
+                                    *i = new;
                                 }
-                                assert_eq!(e, v);
+                                if !e.tags().has_login_version() {
+                                    assert_eq!(*e, v);
+                                }
                             }
                             _ => panic!(
-                                "name '{}' m.ty() is '{:?}' and new_ty is '{:?}'",
+                                "name '{}' m.ty() is '{:#?}' and new_ty is '{:#?}'",
                                 name,
                                 m.ty(),
                                 new_ty
@@ -52,17 +59,23 @@ pub(crate) fn get_wireshark_object(containers: Vec<&Container>) -> WiresharkObje
                         },
                         WiresharkType::Flag(e) => match new_ty {
                             WiresharkType::Flag(v) => {
-                                assert_eq!(e, v);
+                                if e.tags().has_login_version()
+                                    && e.tags().all_versions() < v.tags().all_versions()
+                                {
+                                    *e = v;
+                                } else if !e.tags().has_login_version() {
+                                    assert_eq!(*e, v);
+                                }
                             }
                             _ => panic!(
-                                "name '{}' m.ty() is '{:?}' and new_ty is '{:?}'",
+                                "name '{}' m.ty() is '{:#?}' and new_ty is '{:#?}'",
                                 name,
                                 m.ty(),
                                 new_ty
                             ),
                         },
                         WiresharkType::Float | WiresharkType::Bytes | WiresharkType::String => {
-                            assert_eq!(m.ty(), new_ty)
+                            assert_eq!(m.ty(), &new_ty)
                         }
                     }
                 }
@@ -145,7 +158,11 @@ impl WiresharkMember {
         &self.name
     }
     pub(crate) fn name_without_hf_woww(&self) -> &str {
-        self.name.strip_prefix("hf_woww_").unwrap()
+        if let Some(p) = self.name.strip_prefix("hf_woww_") {
+            p
+        } else {
+            self.name.strip_prefix("hf_wow_").unwrap()
+        }
     }
     pub(crate) fn ty(&self) -> &WiresharkType {
         &self.ty
@@ -175,7 +192,14 @@ pub(crate) enum WiresharkType {
 impl WiresharkType {
     pub(crate) fn from_type(ty: &Type) -> Option<Self> {
         Some(match ty {
-            Type::Enum { e, upcast } => Self::Enum(e.clone(), upcast.unwrap_or(*e.ty())),
+            Type::Enum { e, upcast } => {
+                // There is a flag with the same enumerators
+                if e.name() == "SecurityFlag" {
+                    return None;
+                } else {
+                    Self::Enum(e.clone(), upcast.unwrap_or(*e.ty()))
+                }
+            }
             Type::Flag { e, .. } => Self::Flag(e.clone()),
             Type::Struct { .. } => return None,
             Type::Integer(v) => Self::Integer(*v),
@@ -203,6 +227,8 @@ impl WiresharkType {
                 ArrayType::CString => Self::String,
                 ArrayType::PackedGuid | ArrayType::Guid => Self::Integer(IntegerType::U64),
             },
+            Type::IpAddress => Self::Integer(IntegerType::U32),
+            Type::Population => Self::Float,
             Type::MonsterMoveSplines | Type::AuraMask | Type::UpdateMask { .. } => return None,
             Type::AchievementDoneArray | Type::AchievementInProgressArray => {
                 unreachable!("achievement arrays are only in 3.3.5")
@@ -221,12 +247,6 @@ impl WiresharkType {
             }
             Type::AddonArray => {
                 unreachable!("addon array only in 2.4.3/3.3.5")
-            }
-            Type::IpAddress => {
-                unreachable!("ip addresses are only in login")
-            }
-            Type::Population => {
-                unreachable!("population only in login")
             }
             Type::CacheMask => {
                 unreachable!("cache mask only in wrath")

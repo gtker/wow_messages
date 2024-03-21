@@ -179,6 +179,23 @@ impl Objects {
         v
     }
 
+    pub(crate) fn all_login_wireshark_messages(&self) -> Vec<&Container> {
+        let mut v = self
+            .messages()
+            .into_iter()
+            .filter(|a| {
+                matches!(
+                    a.container_type(),
+                    ContainerType::CLogin(_) | ContainerType::SLogin(_)
+                ) && a.tags().has_login_version()
+            })
+            .collect::<Vec<&Container>>();
+
+        v.sort_by(|a, b| a.name().cmp(b.name()));
+
+        v
+    }
+
     pub(crate) fn login_wireshark_messages(&self) -> Vec<&Container> {
         let mut v = self
             .login_wireshark_containers()
@@ -196,6 +213,12 @@ impl Objects {
         v
     }
 
+    pub(crate) fn login_wireshark_containers(&self) -> Vec<&Container> {
+        self.all_containers()
+            .filter(|e| e.tags().has_login_version_8_or_all() || e.name() == "CMD_SURVEY_RESULT")
+            .collect()
+    }
+
     pub(crate) fn world_wireshark_containers(&self) -> Vec<&Container> {
         self.all_containers()
             .filter(|e| {
@@ -203,12 +226,6 @@ impl Objects {
                     MajorWorldVersion::Vanilla.into(),
                 ))
             })
-            .collect()
-    }
-
-    pub(crate) fn login_wireshark_containers(&self) -> Vec<&Container> {
-        self.all_containers()
-            .filter(|e| e.tags().has_login_version())
             .collect()
     }
 
