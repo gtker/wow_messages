@@ -96,34 +96,6 @@ impl CMD_AUTH_RECONNECT_PROOF_Server {
 impl Message for CMD_AUTH_RECONNECT_PROOF_Server {
     const OPCODE: u8 = 0x03;
 
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        use std::fmt::Write;
-
-        let mut s = String::new();
-
-        writeln!(s, "test CMD_AUTH_RECONNECT_PROOF_Server {{").unwrap();
-        // Members
-        writeln!(s, "    result = {};", self.result.as_test_case_value()).unwrap();
-
-        writeln!(s, "}} [").unwrap();
-
-        let mut bytes: Vec<u8> = Vec::new();
-        self.write_into_vec(&mut bytes).unwrap();
-        let mut bytes = bytes.into_iter();
-
-        writeln!(s, "    {:#04X}, /* opcode */ ", bytes.next().unwrap()).unwrap();
-        crate::util::write_bytes(&mut s, &mut bytes, 1, "result", "    ");
-        crate::util::write_bytes(&mut s, &mut bytes, 2, "padding", "    ");
-
-
-        writeln!(s, "] {{").unwrap();
-        writeln!(s, "    login_versions = \"{}\";", std::env::var("WOWM_TEST_CASE_LOGIN_VERSION").unwrap_or("5 6 7".to_string())).unwrap();
-        writeln!(s, "}}\n").unwrap();
-
-        Some(s)
-    }
-
     #[cfg(feature = "sync")]
     fn read<R: std::io::Read, I: crate::private::Sealed>(r: R) -> Result<Self, crate::errors::ParseError> {
         Self::read_inner(r).map_err(|kind| crate::errors::ParseError::new(3, "CMD_AUTH_RECONNECT_PROOF_Server", kind))
@@ -203,3 +175,258 @@ impl Message for CMD_AUTH_RECONNECT_PROOF_Server {
 }
 
 impl ServerMessage for CMD_AUTH_RECONNECT_PROOF_Server {}
+#[cfg(test)]
+mod test_version_5 {
+    #![allow(clippy::missing_const_for_fn)]
+    use super::CMD_AUTH_RECONNECT_PROOF_Server;
+    use crate::all::*;
+    use super::*;
+    use super::super::*;
+    use crate::logon::version_5::opcodes::ServerOpcodeMessage;
+
+    const HEADER_SIZE: usize = 1;
+    fn assert(t: &CMD_AUTH_RECONNECT_PROOF_Server, expected: &CMD_AUTH_RECONNECT_PROOF_Server) {
+        assert_eq!(t.result, expected.result);
+    }
+
+    const RAW0: [u8; 4] = [ 0x03, 0x00, 0x00, 0x00, ];
+
+    pub(crate) fn expected0() -> CMD_AUTH_RECONNECT_PROOF_Server {
+        CMD_AUTH_RECONNECT_PROOF_Server {
+            result: LoginResult::Success,
+        }
+
+    }
+
+    // Generated from `wow_message_parser/wowm/login/cmd_auth_reconnect/proof_server.wowm` line 34.
+    #[cfg(feature = "sync")]
+    #[cfg_attr(feature = "sync", test)]
+    fn cmd_auth_reconnect_proof_server0() {
+        let expected = expected0();
+        let t = ServerOpcodeMessage::read(&mut std::io::Cursor::new(&RAW0)).unwrap();
+        let t = match t {
+            ServerOpcodeMessage::CMD_AUTH_RECONNECT_PROOF(t) => t,
+            opcode => panic!("incorrect opcode. Expected CMD_AUTH_RECONNECT_PROOF, got {opcode:#?}"),
+        };
+
+        assert(&t, &expected);
+        assert_eq!(3 + HEADER_SIZE, RAW0.len());
+
+        let mut dest = Vec::with_capacity(RAW0.len());
+        expected.write(&mut std::io::Cursor::new(&mut dest)).unwrap();
+
+        assert_eq!(dest, RAW0);
+    }
+
+    // Generated from `wow_message_parser/wowm/login/cmd_auth_reconnect/proof_server.wowm` line 34.
+    #[cfg(feature = "tokio")]
+    #[cfg_attr(feature = "tokio", tokio::test)]
+    async fn tokio_cmd_auth_reconnect_proof_server0() {
+        let expected = expected0();
+        let t = ServerOpcodeMessage::tokio_read(&mut std::io::Cursor::new(&RAW0)).await.unwrap();
+        let t = match t {
+            ServerOpcodeMessage::CMD_AUTH_RECONNECT_PROOF(t) => t,
+            opcode => panic!("incorrect opcode. Expected CMD_AUTH_RECONNECT_PROOF, got {opcode:#?}"),
+        };
+
+        assert(&t, &expected);
+        assert_eq!(3 + HEADER_SIZE, RAW0.len());
+
+        let mut dest = Vec::with_capacity(RAW0.len());
+        expected.tokio_write(&mut std::io::Cursor::new(&mut dest)).await.unwrap();
+
+        assert_eq!(dest, RAW0);
+    }
+
+    // Generated from `wow_message_parser/wowm/login/cmd_auth_reconnect/proof_server.wowm` line 34.
+    #[cfg(feature = "async-std")]
+    #[cfg_attr(feature = "async-std", async_std::test)]
+    async fn astd_cmd_auth_reconnect_proof_server0() {
+        let expected = expected0();
+        let t = ServerOpcodeMessage::astd_read(&mut async_std::io::Cursor::new(&RAW0)).await.unwrap();
+        let t = match t {
+            ServerOpcodeMessage::CMD_AUTH_RECONNECT_PROOF(t) => t,
+            opcode => panic!("incorrect opcode. Expected CMD_AUTH_RECONNECT_PROOF, got {opcode:#?}"),
+        };
+
+        assert(&t, &expected);
+        assert_eq!(3 + HEADER_SIZE, RAW0.len());
+
+        let mut dest = Vec::with_capacity(RAW0.len());
+        expected.astd_write(&mut async_std::io::Cursor::new(&mut dest)).await.unwrap();
+
+        assert_eq!(dest, RAW0);
+    }
+
+}
+
+#[cfg(test)]
+mod test_version_6 {
+    #![allow(clippy::missing_const_for_fn)]
+    use super::CMD_AUTH_RECONNECT_PROOF_Server;
+    use crate::all::*;
+    use super::*;
+    use super::super::*;
+    use crate::logon::version_6::opcodes::ServerOpcodeMessage;
+
+    const HEADER_SIZE: usize = 1;
+    fn assert(t: &CMD_AUTH_RECONNECT_PROOF_Server, expected: &CMD_AUTH_RECONNECT_PROOF_Server) {
+        assert_eq!(t.result, expected.result);
+    }
+
+    const RAW0: [u8; 4] = [ 0x03, 0x00, 0x00, 0x00, ];
+
+    pub(crate) fn expected0() -> CMD_AUTH_RECONNECT_PROOF_Server {
+        CMD_AUTH_RECONNECT_PROOF_Server {
+            result: LoginResult::Success,
+        }
+
+    }
+
+    // Generated from `wow_message_parser/wowm/login/cmd_auth_reconnect/proof_server.wowm` line 34.
+    #[cfg(feature = "sync")]
+    #[cfg_attr(feature = "sync", test)]
+    fn cmd_auth_reconnect_proof_server0() {
+        let expected = expected0();
+        let t = ServerOpcodeMessage::read(&mut std::io::Cursor::new(&RAW0)).unwrap();
+        let t = match t {
+            ServerOpcodeMessage::CMD_AUTH_RECONNECT_PROOF(t) => t,
+            opcode => panic!("incorrect opcode. Expected CMD_AUTH_RECONNECT_PROOF, got {opcode:#?}"),
+        };
+
+        assert(&t, &expected);
+        assert_eq!(3 + HEADER_SIZE, RAW0.len());
+
+        let mut dest = Vec::with_capacity(RAW0.len());
+        expected.write(&mut std::io::Cursor::new(&mut dest)).unwrap();
+
+        assert_eq!(dest, RAW0);
+    }
+
+    // Generated from `wow_message_parser/wowm/login/cmd_auth_reconnect/proof_server.wowm` line 34.
+    #[cfg(feature = "tokio")]
+    #[cfg_attr(feature = "tokio", tokio::test)]
+    async fn tokio_cmd_auth_reconnect_proof_server0() {
+        let expected = expected0();
+        let t = ServerOpcodeMessage::tokio_read(&mut std::io::Cursor::new(&RAW0)).await.unwrap();
+        let t = match t {
+            ServerOpcodeMessage::CMD_AUTH_RECONNECT_PROOF(t) => t,
+            opcode => panic!("incorrect opcode. Expected CMD_AUTH_RECONNECT_PROOF, got {opcode:#?}"),
+        };
+
+        assert(&t, &expected);
+        assert_eq!(3 + HEADER_SIZE, RAW0.len());
+
+        let mut dest = Vec::with_capacity(RAW0.len());
+        expected.tokio_write(&mut std::io::Cursor::new(&mut dest)).await.unwrap();
+
+        assert_eq!(dest, RAW0);
+    }
+
+    // Generated from `wow_message_parser/wowm/login/cmd_auth_reconnect/proof_server.wowm` line 34.
+    #[cfg(feature = "async-std")]
+    #[cfg_attr(feature = "async-std", async_std::test)]
+    async fn astd_cmd_auth_reconnect_proof_server0() {
+        let expected = expected0();
+        let t = ServerOpcodeMessage::astd_read(&mut async_std::io::Cursor::new(&RAW0)).await.unwrap();
+        let t = match t {
+            ServerOpcodeMessage::CMD_AUTH_RECONNECT_PROOF(t) => t,
+            opcode => panic!("incorrect opcode. Expected CMD_AUTH_RECONNECT_PROOF, got {opcode:#?}"),
+        };
+
+        assert(&t, &expected);
+        assert_eq!(3 + HEADER_SIZE, RAW0.len());
+
+        let mut dest = Vec::with_capacity(RAW0.len());
+        expected.astd_write(&mut async_std::io::Cursor::new(&mut dest)).await.unwrap();
+
+        assert_eq!(dest, RAW0);
+    }
+
+}
+
+#[cfg(test)]
+mod test_version_7 {
+    #![allow(clippy::missing_const_for_fn)]
+    use super::CMD_AUTH_RECONNECT_PROOF_Server;
+    use crate::all::*;
+    use super::*;
+    use super::super::*;
+    use crate::logon::version_7::opcodes::ServerOpcodeMessage;
+
+    const HEADER_SIZE: usize = 1;
+    fn assert(t: &CMD_AUTH_RECONNECT_PROOF_Server, expected: &CMD_AUTH_RECONNECT_PROOF_Server) {
+        assert_eq!(t.result, expected.result);
+    }
+
+    const RAW0: [u8; 4] = [ 0x03, 0x00, 0x00, 0x00, ];
+
+    pub(crate) fn expected0() -> CMD_AUTH_RECONNECT_PROOF_Server {
+        CMD_AUTH_RECONNECT_PROOF_Server {
+            result: LoginResult::Success,
+        }
+
+    }
+
+    // Generated from `wow_message_parser/wowm/login/cmd_auth_reconnect/proof_server.wowm` line 34.
+    #[cfg(feature = "sync")]
+    #[cfg_attr(feature = "sync", test)]
+    fn cmd_auth_reconnect_proof_server0() {
+        let expected = expected0();
+        let t = ServerOpcodeMessage::read(&mut std::io::Cursor::new(&RAW0)).unwrap();
+        let t = match t {
+            ServerOpcodeMessage::CMD_AUTH_RECONNECT_PROOF(t) => t,
+            opcode => panic!("incorrect opcode. Expected CMD_AUTH_RECONNECT_PROOF, got {opcode:#?}"),
+        };
+
+        assert(&t, &expected);
+        assert_eq!(3 + HEADER_SIZE, RAW0.len());
+
+        let mut dest = Vec::with_capacity(RAW0.len());
+        expected.write(&mut std::io::Cursor::new(&mut dest)).unwrap();
+
+        assert_eq!(dest, RAW0);
+    }
+
+    // Generated from `wow_message_parser/wowm/login/cmd_auth_reconnect/proof_server.wowm` line 34.
+    #[cfg(feature = "tokio")]
+    #[cfg_attr(feature = "tokio", tokio::test)]
+    async fn tokio_cmd_auth_reconnect_proof_server0() {
+        let expected = expected0();
+        let t = ServerOpcodeMessage::tokio_read(&mut std::io::Cursor::new(&RAW0)).await.unwrap();
+        let t = match t {
+            ServerOpcodeMessage::CMD_AUTH_RECONNECT_PROOF(t) => t,
+            opcode => panic!("incorrect opcode. Expected CMD_AUTH_RECONNECT_PROOF, got {opcode:#?}"),
+        };
+
+        assert(&t, &expected);
+        assert_eq!(3 + HEADER_SIZE, RAW0.len());
+
+        let mut dest = Vec::with_capacity(RAW0.len());
+        expected.tokio_write(&mut std::io::Cursor::new(&mut dest)).await.unwrap();
+
+        assert_eq!(dest, RAW0);
+    }
+
+    // Generated from `wow_message_parser/wowm/login/cmd_auth_reconnect/proof_server.wowm` line 34.
+    #[cfg(feature = "async-std")]
+    #[cfg_attr(feature = "async-std", async_std::test)]
+    async fn astd_cmd_auth_reconnect_proof_server0() {
+        let expected = expected0();
+        let t = ServerOpcodeMessage::astd_read(&mut async_std::io::Cursor::new(&RAW0)).await.unwrap();
+        let t = match t {
+            ServerOpcodeMessage::CMD_AUTH_RECONNECT_PROOF(t) => t,
+            opcode => panic!("incorrect opcode. Expected CMD_AUTH_RECONNECT_PROOF, got {opcode:#?}"),
+        };
+
+        assert(&t, &expected);
+        assert_eq!(3 + HEADER_SIZE, RAW0.len());
+
+        let mut dest = Vec::with_capacity(RAW0.len());
+        expected.astd_write(&mut async_std::io::Cursor::new(&mut dest)).await.unwrap();
+
+        assert_eq!(dest, RAW0);
+    }
+
+}
+

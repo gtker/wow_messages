@@ -31,6 +31,16 @@ slogin CMD_AUTH_RECONNECT_PROOF_Server = 0x03 {
     login_versions = "5 6 7";
 }
 
+test CMD_AUTH_RECONNECT_PROOF_Server {
+    result = SUCCESS;
+} [
+    0x03, /* opcode */ 
+    0x00, /* result */
+    0x00, 0x00, /* padding */
+] {
+    login_versions = "5";
+}
+
 /// Reply to [CMD_AUTH_RECONNECT_PROOF_Client].
 slogin CMD_AUTH_RECONNECT_PROOF_Server = 0x03 {
     LoginResult result;

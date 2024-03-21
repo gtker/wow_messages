@@ -583,126 +583,6 @@ impl CMD_AUTH_LOGON_CHALLENGE_Server {
 impl Message for CMD_AUTH_LOGON_CHALLENGE_Server {
     const OPCODE: u8 = 0x00;
 
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        use std::fmt::Write;
-
-        let mut s = String::new();
-
-        writeln!(s, "test CMD_AUTH_LOGON_CHALLENGE_Server {{").unwrap();
-        // Members
-        writeln!(s, "    result = {};", LoginResult::try_from(self.result.as_int()).unwrap().as_test_case_value()).unwrap();
-        match &self.result {
-            crate::logon::version_5::CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult::Success {
-                crc_salt,
-                generator,
-                large_safe_prime,
-                salt,
-                security_flag,
-                server_public_key,
-            } => {
-                writeln!(s, "    server_public_key = [").unwrap();
-                for v in server_public_key.as_slice() {
-                    write!(s, "{v:#04X}, ").unwrap();
-                }
-                writeln!(s, "    ];").unwrap();
-                writeln!(s, "    generator_length = {};", generator.len()).unwrap();
-                writeln!(s, "    generator = [").unwrap();
-                for v in generator.as_slice() {
-                    write!(s, "{v:#04X}, ").unwrap();
-                }
-                writeln!(s, "    ];").unwrap();
-                writeln!(s, "    large_safe_prime_length = {};", large_safe_prime.len()).unwrap();
-                writeln!(s, "    large_safe_prime = [").unwrap();
-                for v in large_safe_prime.as_slice() {
-                    write!(s, "{v:#04X}, ").unwrap();
-                }
-                writeln!(s, "    ];").unwrap();
-                writeln!(s, "    salt = [").unwrap();
-                for v in salt.as_slice() {
-                    write!(s, "{v:#04X}, ").unwrap();
-                }
-                writeln!(s, "    ];").unwrap();
-                writeln!(s, "    crc_salt = [").unwrap();
-                for v in crc_salt.as_slice() {
-                    write!(s, "{v:#04X}, ").unwrap();
-                }
-                writeln!(s, "    ];").unwrap();
-                writeln!(s, "    security_flag = {};", SecurityFlag::new(security_flag.as_int()).as_test_case_value()).unwrap();
-                if let Some(if_statement) = &security_flag.get_pin() {
-                    writeln!(s, "    pin_grid_seed = {};", if_statement.pin_grid_seed).unwrap();
-                    writeln!(s, "    pin_salt = [").unwrap();
-                    for v in if_statement.pin_salt.as_slice() {
-                        write!(s, "{v:#04X}, ").unwrap();
-                    }
-                    writeln!(s, "    ];").unwrap();
-                }
-
-                if let Some(if_statement) = &security_flag.get_matrix_card() {
-                    writeln!(s, "    width = {};", if_statement.width).unwrap();
-                    writeln!(s, "    height = {};", if_statement.height).unwrap();
-                    writeln!(s, "    digit_count = {};", if_statement.digit_count).unwrap();
-                    writeln!(s, "    challenge_count = {};", if_statement.challenge_count).unwrap();
-                    writeln!(s, "    seed = {};", if_statement.seed).unwrap();
-                }
-
-            }
-            _ => {}
-        }
-
-
-        writeln!(s, "}} [").unwrap();
-
-        let mut bytes: Vec<u8> = Vec::new();
-        self.write_into_vec(&mut bytes).unwrap();
-        let mut bytes = bytes.into_iter();
-
-        writeln!(s, "    {:#04X}, /* opcode */ ", bytes.next().unwrap()).unwrap();
-        crate::util::write_bytes(&mut s, &mut bytes, 1, "protocol_version", "    ");
-        crate::util::write_bytes(&mut s, &mut bytes, 1, "result", "    ");
-        match &self.result {
-            crate::logon::version_5::CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult::Success {
-                crc_salt,
-                generator,
-                large_safe_prime,
-                salt,
-                security_flag,
-                server_public_key,
-            } => {
-                crate::util::write_bytes(&mut s, &mut bytes, server_public_key.len(), "server_public_key", "    ");
-                crate::util::write_bytes(&mut s, &mut bytes, 1, "generator_length", "    ");
-                crate::util::write_bytes(&mut s, &mut bytes, generator.len(), "generator", "    ");
-                crate::util::write_bytes(&mut s, &mut bytes, 1, "large_safe_prime_length", "    ");
-                crate::util::write_bytes(&mut s, &mut bytes, large_safe_prime.len(), "large_safe_prime", "    ");
-                crate::util::write_bytes(&mut s, &mut bytes, salt.len(), "salt", "    ");
-                crate::util::write_bytes(&mut s, &mut bytes, crc_salt.len(), "crc_salt", "    ");
-                crate::util::write_bytes(&mut s, &mut bytes, 1, "security_flag", "    ");
-                if let Some(if_statement) = &security_flag.get_pin() {
-                    crate::util::write_bytes(&mut s, &mut bytes, 4, "pin_grid_seed", "    ");
-                    crate::util::write_bytes(&mut s, &mut bytes, if_statement.pin_salt.len(), "pin_salt", "    ");
-                }
-
-                if let Some(if_statement) = &security_flag.get_matrix_card() {
-                    crate::util::write_bytes(&mut s, &mut bytes, 1, "width", "    ");
-                    crate::util::write_bytes(&mut s, &mut bytes, 1, "height", "    ");
-                    crate::util::write_bytes(&mut s, &mut bytes, 1, "digit_count", "    ");
-                    crate::util::write_bytes(&mut s, &mut bytes, 1, "challenge_count", "    ");
-                    crate::util::write_bytes(&mut s, &mut bytes, 8, "seed", "    ");
-                }
-
-            }
-            _ => {}
-        }
-
-
-
-        writeln!(s, "] {{").unwrap();
-        writeln!(s, "    login_versions = \"{}\";", std::env::var("WOWM_TEST_CASE_LOGIN_VERSION").unwrap_or("5 6 7".to_string())).unwrap();
-        writeln!(s, "}}\n").unwrap();
-
-        Some(s)
-    }
-
     #[cfg(feature = "sync")]
     fn read<R: std::io::Read, I: crate::private::Sealed>(r: R) -> Result<Self, crate::errors::ParseError> {
         Self::read_inner(r).map_err(|kind| crate::errors::ParseError::new(0, "CMD_AUTH_LOGON_CHALLENGE_Server", kind))
@@ -1031,5 +911,386 @@ impl CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult {
             _ => 1,
         }
     }
+}
+
+#[cfg(test)]
+mod test_version_5 {
+    #![allow(clippy::missing_const_for_fn)]
+    use super::CMD_AUTH_LOGON_CHALLENGE_Server;
+    use crate::all::*;
+    use super::*;
+    use super::super::*;
+    use crate::logon::version_5::opcodes::ServerOpcodeMessage;
+
+    const HEADER_SIZE: usize = 1;
+    fn assert(t: &CMD_AUTH_LOGON_CHALLENGE_Server, expected: &CMD_AUTH_LOGON_CHALLENGE_Server) {
+        assert_eq!(t.result, expected.result);
+    }
+
+    const RAW0: [u8; 151] = [ 0x00, 0x00, 0x00, 0x3A, 0x2B, 0xED, 0xA2, 0xA9, 0x65,
+         0x25, 0x4E, 0x45, 0x04, 0xC3, 0xA8, 0xF6, 0x6A, 0x86, 0xC9, 0x51, 0x72,
+         0xD7, 0x63, 0x6B, 0x36, 0x89, 0xED, 0xC0, 0x3F, 0xFC, 0xC1, 0x42, 0xA5,
+         0x79, 0x32, 0x01, 0x07, 0x20, 0xB7, 0x9B, 0x3E, 0x2A, 0x87, 0x82, 0x3C,
+         0xAB, 0x8F, 0x5E, 0xBF, 0xBF, 0x8E, 0xB1, 0x01, 0x08, 0x53, 0x50, 0x06,
+         0x29, 0x8B, 0x5B, 0xAD, 0xBD, 0x5B, 0x53, 0xE1, 0x89, 0x5E, 0x64, 0x4B,
+         0x89, 0xAE, 0x78, 0x7C, 0x60, 0xDA, 0x14, 0x15, 0xDB, 0x82, 0x24, 0x43,
+         0x48, 0x47, 0x6C, 0x3F, 0xD3, 0xBC, 0x16, 0x3C, 0x59, 0x15, 0x80, 0x56,
+         0x05, 0x92, 0x3B, 0x52, 0x2E, 0x72, 0x12, 0x29, 0x52, 0x46, 0x0F, 0xB8,
+         0xED, 0x72, 0x47, 0xA9, 0xFF, 0x1F, 0xF2, 0xE4, 0x60, 0xFD, 0xFF, 0x7F,
+         0xF9, 0x03, 0x00, 0x00, 0x00, 0x00, 0x59, 0x1D, 0xA6, 0x0B, 0x34, 0xFD,
+         0x64, 0x5E, 0x38, 0x6C, 0x54, 0xC0, 0x18, 0xB6, 0xA7, 0x2F, 0x08, 0x08,
+         0x02, 0x01, 0xC2, 0xD8, 0x17, 0x38, 0x05, 0xFB, 0x54, 0x8F, ];
+
+    pub(crate) fn expected0() -> CMD_AUTH_LOGON_CHALLENGE_Server {
+        CMD_AUTH_LOGON_CHALLENGE_Server {
+            result: CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult::Success {
+                crc_salt: [ 0x46, 0x0F, 0xB8, 0xED, 0x72, 0x47, 0xA9, 0xFF, 0x1F,
+                     0xF2, 0xE4, 0x60, 0xFD, 0xFF, 0x7F, 0xF9, ],
+                generator: vec![ 0x07, ],
+                large_safe_prime: vec![ 0xB7, 0x9B, 0x3E, 0x2A, 0x87, 0x82, 0x3C,
+                     0xAB, 0x8F, 0x5E, 0xBF, 0xBF, 0x8E, 0xB1, 0x01, 0x08, 0x53,
+                     0x50, 0x06, 0x29, 0x8B, 0x5B, 0xAD, 0xBD, 0x5B, 0x53, 0xE1,
+                     0x89, 0x5E, 0x64, 0x4B, 0x89, ],
+                salt: [ 0xAE, 0x78, 0x7C, 0x60, 0xDA, 0x14, 0x15, 0xDB, 0x82, 0x24,
+                     0x43, 0x48, 0x47, 0x6C, 0x3F, 0xD3, 0xBC, 0x16, 0x3C, 0x59,
+                     0x15, 0x80, 0x56, 0x05, 0x92, 0x3B, 0x52, 0x2E, 0x72, 0x12,
+                     0x29, 0x52, ],
+                security_flag: CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlag::empty()
+                    .set_pin(CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlag_Pin {
+                        pin_grid_seed: 0x0,
+                        pin_salt: [ 0x59, 0x1D, 0xA6, 0x0B, 0x34, 0xFD, 0x64, 0x5E,
+                             0x38, 0x6C, 0x54, 0xC0, 0x18, 0xB6, 0xA7, 0x2F, ],
+                    })
+                    .set_matrix_card(CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlag_MatrixCard {
+                        challenge_count: 0x1,
+                        digit_count: 0x2,
+                        height: 0x8,
+                        seed: 0x8F54FB053817D8C2,
+                        width: 0x8,
+                    })
+                    ,
+                server_public_key: [ 0x3A, 0x2B, 0xED, 0xA2, 0xA9, 0x65, 0x25, 0x4E,
+                     0x45, 0x04, 0xC3, 0xA8, 0xF6, 0x6A, 0x86, 0xC9, 0x51, 0x72,
+                     0xD7, 0x63, 0x6B, 0x36, 0x89, 0xED, 0xC0, 0x3F, 0xFC, 0xC1,
+                     0x42, 0xA5, 0x79, 0x32, ],
+            },
+        }
+
+    }
+
+    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/challenge_server.wowm` line 260.
+    #[cfg(feature = "sync")]
+    #[cfg_attr(feature = "sync", test)]
+    fn cmd_auth_logon_challenge_server0() {
+        let expected = expected0();
+        let t = ServerOpcodeMessage::read(&mut std::io::Cursor::new(&RAW0)).unwrap();
+        let t = match t {
+            ServerOpcodeMessage::CMD_AUTH_LOGON_CHALLENGE(t) => t,
+            opcode => panic!("incorrect opcode. Expected CMD_AUTH_LOGON_CHALLENGE, got {opcode:#?}"),
+        };
+
+        assert(&t, &expected);
+        assert_eq!(t.size() + HEADER_SIZE, RAW0.len());
+
+        let mut dest = Vec::with_capacity(RAW0.len());
+        expected.write(&mut std::io::Cursor::new(&mut dest)).unwrap();
+
+        assert_eq!(dest, RAW0);
+    }
+
+    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/challenge_server.wowm` line 260.
+    #[cfg(feature = "tokio")]
+    #[cfg_attr(feature = "tokio", tokio::test)]
+    async fn tokio_cmd_auth_logon_challenge_server0() {
+        let expected = expected0();
+        let t = ServerOpcodeMessage::tokio_read(&mut std::io::Cursor::new(&RAW0)).await.unwrap();
+        let t = match t {
+            ServerOpcodeMessage::CMD_AUTH_LOGON_CHALLENGE(t) => t,
+            opcode => panic!("incorrect opcode. Expected CMD_AUTH_LOGON_CHALLENGE, got {opcode:#?}"),
+        };
+
+        assert(&t, &expected);
+        assert_eq!(t.size() + HEADER_SIZE, RAW0.len());
+
+        let mut dest = Vec::with_capacity(RAW0.len());
+        expected.tokio_write(&mut std::io::Cursor::new(&mut dest)).await.unwrap();
+
+        assert_eq!(dest, RAW0);
+    }
+
+    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/challenge_server.wowm` line 260.
+    #[cfg(feature = "async-std")]
+    #[cfg_attr(feature = "async-std", async_std::test)]
+    async fn astd_cmd_auth_logon_challenge_server0() {
+        let expected = expected0();
+        let t = ServerOpcodeMessage::astd_read(&mut async_std::io::Cursor::new(&RAW0)).await.unwrap();
+        let t = match t {
+            ServerOpcodeMessage::CMD_AUTH_LOGON_CHALLENGE(t) => t,
+            opcode => panic!("incorrect opcode. Expected CMD_AUTH_LOGON_CHALLENGE, got {opcode:#?}"),
+        };
+
+        assert(&t, &expected);
+        assert_eq!(t.size() + HEADER_SIZE, RAW0.len());
+
+        let mut dest = Vec::with_capacity(RAW0.len());
+        expected.astd_write(&mut async_std::io::Cursor::new(&mut dest)).await.unwrap();
+
+        assert_eq!(dest, RAW0);
+    }
+
+}
+
+#[cfg(test)]
+mod test_version_6 {
+    #![allow(clippy::missing_const_for_fn)]
+    use super::CMD_AUTH_LOGON_CHALLENGE_Server;
+    use crate::all::*;
+    use super::*;
+    use super::super::*;
+    use crate::logon::version_6::opcodes::ServerOpcodeMessage;
+
+    const HEADER_SIZE: usize = 1;
+    fn assert(t: &CMD_AUTH_LOGON_CHALLENGE_Server, expected: &CMD_AUTH_LOGON_CHALLENGE_Server) {
+        assert_eq!(t.result, expected.result);
+    }
+
+    const RAW0: [u8; 151] = [ 0x00, 0x00, 0x00, 0x3A, 0x2B, 0xED, 0xA2, 0xA9, 0x65,
+         0x25, 0x4E, 0x45, 0x04, 0xC3, 0xA8, 0xF6, 0x6A, 0x86, 0xC9, 0x51, 0x72,
+         0xD7, 0x63, 0x6B, 0x36, 0x89, 0xED, 0xC0, 0x3F, 0xFC, 0xC1, 0x42, 0xA5,
+         0x79, 0x32, 0x01, 0x07, 0x20, 0xB7, 0x9B, 0x3E, 0x2A, 0x87, 0x82, 0x3C,
+         0xAB, 0x8F, 0x5E, 0xBF, 0xBF, 0x8E, 0xB1, 0x01, 0x08, 0x53, 0x50, 0x06,
+         0x29, 0x8B, 0x5B, 0xAD, 0xBD, 0x5B, 0x53, 0xE1, 0x89, 0x5E, 0x64, 0x4B,
+         0x89, 0xAE, 0x78, 0x7C, 0x60, 0xDA, 0x14, 0x15, 0xDB, 0x82, 0x24, 0x43,
+         0x48, 0x47, 0x6C, 0x3F, 0xD3, 0xBC, 0x16, 0x3C, 0x59, 0x15, 0x80, 0x56,
+         0x05, 0x92, 0x3B, 0x52, 0x2E, 0x72, 0x12, 0x29, 0x52, 0x46, 0x0F, 0xB8,
+         0xED, 0x72, 0x47, 0xA9, 0xFF, 0x1F, 0xF2, 0xE4, 0x60, 0xFD, 0xFF, 0x7F,
+         0xF9, 0x03, 0x00, 0x00, 0x00, 0x00, 0x59, 0x1D, 0xA6, 0x0B, 0x34, 0xFD,
+         0x64, 0x5E, 0x38, 0x6C, 0x54, 0xC0, 0x18, 0xB6, 0xA7, 0x2F, 0x08, 0x08,
+         0x02, 0x01, 0xC2, 0xD8, 0x17, 0x38, 0x05, 0xFB, 0x54, 0x8F, ];
+
+    pub(crate) fn expected0() -> CMD_AUTH_LOGON_CHALLENGE_Server {
+        CMD_AUTH_LOGON_CHALLENGE_Server {
+            result: CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult::Success {
+                crc_salt: [ 0x46, 0x0F, 0xB8, 0xED, 0x72, 0x47, 0xA9, 0xFF, 0x1F,
+                     0xF2, 0xE4, 0x60, 0xFD, 0xFF, 0x7F, 0xF9, ],
+                generator: vec![ 0x07, ],
+                large_safe_prime: vec![ 0xB7, 0x9B, 0x3E, 0x2A, 0x87, 0x82, 0x3C,
+                     0xAB, 0x8F, 0x5E, 0xBF, 0xBF, 0x8E, 0xB1, 0x01, 0x08, 0x53,
+                     0x50, 0x06, 0x29, 0x8B, 0x5B, 0xAD, 0xBD, 0x5B, 0x53, 0xE1,
+                     0x89, 0x5E, 0x64, 0x4B, 0x89, ],
+                salt: [ 0xAE, 0x78, 0x7C, 0x60, 0xDA, 0x14, 0x15, 0xDB, 0x82, 0x24,
+                     0x43, 0x48, 0x47, 0x6C, 0x3F, 0xD3, 0xBC, 0x16, 0x3C, 0x59,
+                     0x15, 0x80, 0x56, 0x05, 0x92, 0x3B, 0x52, 0x2E, 0x72, 0x12,
+                     0x29, 0x52, ],
+                security_flag: CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlag::empty()
+                    .set_pin(CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlag_Pin {
+                        pin_grid_seed: 0x0,
+                        pin_salt: [ 0x59, 0x1D, 0xA6, 0x0B, 0x34, 0xFD, 0x64, 0x5E,
+                             0x38, 0x6C, 0x54, 0xC0, 0x18, 0xB6, 0xA7, 0x2F, ],
+                    })
+                    .set_matrix_card(CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlag_MatrixCard {
+                        challenge_count: 0x1,
+                        digit_count: 0x2,
+                        height: 0x8,
+                        seed: 0x8F54FB053817D8C2,
+                        width: 0x8,
+                    })
+                    ,
+                server_public_key: [ 0x3A, 0x2B, 0xED, 0xA2, 0xA9, 0x65, 0x25, 0x4E,
+                     0x45, 0x04, 0xC3, 0xA8, 0xF6, 0x6A, 0x86, 0xC9, 0x51, 0x72,
+                     0xD7, 0x63, 0x6B, 0x36, 0x89, 0xED, 0xC0, 0x3F, 0xFC, 0xC1,
+                     0x42, 0xA5, 0x79, 0x32, ],
+            },
+        }
+
+    }
+
+    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/challenge_server.wowm` line 260.
+    #[cfg(feature = "sync")]
+    #[cfg_attr(feature = "sync", test)]
+    fn cmd_auth_logon_challenge_server0() {
+        let expected = expected0();
+        let t = ServerOpcodeMessage::read(&mut std::io::Cursor::new(&RAW0)).unwrap();
+        let t = match t {
+            ServerOpcodeMessage::CMD_AUTH_LOGON_CHALLENGE(t) => t,
+            opcode => panic!("incorrect opcode. Expected CMD_AUTH_LOGON_CHALLENGE, got {opcode:#?}"),
+        };
+
+        assert(&t, &expected);
+        assert_eq!(t.size() + HEADER_SIZE, RAW0.len());
+
+        let mut dest = Vec::with_capacity(RAW0.len());
+        expected.write(&mut std::io::Cursor::new(&mut dest)).unwrap();
+
+        assert_eq!(dest, RAW0);
+    }
+
+    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/challenge_server.wowm` line 260.
+    #[cfg(feature = "tokio")]
+    #[cfg_attr(feature = "tokio", tokio::test)]
+    async fn tokio_cmd_auth_logon_challenge_server0() {
+        let expected = expected0();
+        let t = ServerOpcodeMessage::tokio_read(&mut std::io::Cursor::new(&RAW0)).await.unwrap();
+        let t = match t {
+            ServerOpcodeMessage::CMD_AUTH_LOGON_CHALLENGE(t) => t,
+            opcode => panic!("incorrect opcode. Expected CMD_AUTH_LOGON_CHALLENGE, got {opcode:#?}"),
+        };
+
+        assert(&t, &expected);
+        assert_eq!(t.size() + HEADER_SIZE, RAW0.len());
+
+        let mut dest = Vec::with_capacity(RAW0.len());
+        expected.tokio_write(&mut std::io::Cursor::new(&mut dest)).await.unwrap();
+
+        assert_eq!(dest, RAW0);
+    }
+
+    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/challenge_server.wowm` line 260.
+    #[cfg(feature = "async-std")]
+    #[cfg_attr(feature = "async-std", async_std::test)]
+    async fn astd_cmd_auth_logon_challenge_server0() {
+        let expected = expected0();
+        let t = ServerOpcodeMessage::astd_read(&mut async_std::io::Cursor::new(&RAW0)).await.unwrap();
+        let t = match t {
+            ServerOpcodeMessage::CMD_AUTH_LOGON_CHALLENGE(t) => t,
+            opcode => panic!("incorrect opcode. Expected CMD_AUTH_LOGON_CHALLENGE, got {opcode:#?}"),
+        };
+
+        assert(&t, &expected);
+        assert_eq!(t.size() + HEADER_SIZE, RAW0.len());
+
+        let mut dest = Vec::with_capacity(RAW0.len());
+        expected.astd_write(&mut async_std::io::Cursor::new(&mut dest)).await.unwrap();
+
+        assert_eq!(dest, RAW0);
+    }
+
+}
+
+#[cfg(test)]
+mod test_version_7 {
+    #![allow(clippy::missing_const_for_fn)]
+    use super::CMD_AUTH_LOGON_CHALLENGE_Server;
+    use crate::all::*;
+    use super::*;
+    use super::super::*;
+    use crate::logon::version_7::opcodes::ServerOpcodeMessage;
+
+    const HEADER_SIZE: usize = 1;
+    fn assert(t: &CMD_AUTH_LOGON_CHALLENGE_Server, expected: &CMD_AUTH_LOGON_CHALLENGE_Server) {
+        assert_eq!(t.result, expected.result);
+    }
+
+    const RAW0: [u8; 151] = [ 0x00, 0x00, 0x00, 0x3A, 0x2B, 0xED, 0xA2, 0xA9, 0x65,
+         0x25, 0x4E, 0x45, 0x04, 0xC3, 0xA8, 0xF6, 0x6A, 0x86, 0xC9, 0x51, 0x72,
+         0xD7, 0x63, 0x6B, 0x36, 0x89, 0xED, 0xC0, 0x3F, 0xFC, 0xC1, 0x42, 0xA5,
+         0x79, 0x32, 0x01, 0x07, 0x20, 0xB7, 0x9B, 0x3E, 0x2A, 0x87, 0x82, 0x3C,
+         0xAB, 0x8F, 0x5E, 0xBF, 0xBF, 0x8E, 0xB1, 0x01, 0x08, 0x53, 0x50, 0x06,
+         0x29, 0x8B, 0x5B, 0xAD, 0xBD, 0x5B, 0x53, 0xE1, 0x89, 0x5E, 0x64, 0x4B,
+         0x89, 0xAE, 0x78, 0x7C, 0x60, 0xDA, 0x14, 0x15, 0xDB, 0x82, 0x24, 0x43,
+         0x48, 0x47, 0x6C, 0x3F, 0xD3, 0xBC, 0x16, 0x3C, 0x59, 0x15, 0x80, 0x56,
+         0x05, 0x92, 0x3B, 0x52, 0x2E, 0x72, 0x12, 0x29, 0x52, 0x46, 0x0F, 0xB8,
+         0xED, 0x72, 0x47, 0xA9, 0xFF, 0x1F, 0xF2, 0xE4, 0x60, 0xFD, 0xFF, 0x7F,
+         0xF9, 0x03, 0x00, 0x00, 0x00, 0x00, 0x59, 0x1D, 0xA6, 0x0B, 0x34, 0xFD,
+         0x64, 0x5E, 0x38, 0x6C, 0x54, 0xC0, 0x18, 0xB6, 0xA7, 0x2F, 0x08, 0x08,
+         0x02, 0x01, 0xC2, 0xD8, 0x17, 0x38, 0x05, 0xFB, 0x54, 0x8F, ];
+
+    pub(crate) fn expected0() -> CMD_AUTH_LOGON_CHALLENGE_Server {
+        CMD_AUTH_LOGON_CHALLENGE_Server {
+            result: CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult::Success {
+                crc_salt: [ 0x46, 0x0F, 0xB8, 0xED, 0x72, 0x47, 0xA9, 0xFF, 0x1F,
+                     0xF2, 0xE4, 0x60, 0xFD, 0xFF, 0x7F, 0xF9, ],
+                generator: vec![ 0x07, ],
+                large_safe_prime: vec![ 0xB7, 0x9B, 0x3E, 0x2A, 0x87, 0x82, 0x3C,
+                     0xAB, 0x8F, 0x5E, 0xBF, 0xBF, 0x8E, 0xB1, 0x01, 0x08, 0x53,
+                     0x50, 0x06, 0x29, 0x8B, 0x5B, 0xAD, 0xBD, 0x5B, 0x53, 0xE1,
+                     0x89, 0x5E, 0x64, 0x4B, 0x89, ],
+                salt: [ 0xAE, 0x78, 0x7C, 0x60, 0xDA, 0x14, 0x15, 0xDB, 0x82, 0x24,
+                     0x43, 0x48, 0x47, 0x6C, 0x3F, 0xD3, 0xBC, 0x16, 0x3C, 0x59,
+                     0x15, 0x80, 0x56, 0x05, 0x92, 0x3B, 0x52, 0x2E, 0x72, 0x12,
+                     0x29, 0x52, ],
+                security_flag: CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlag::empty()
+                    .set_pin(CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlag_Pin {
+                        pin_grid_seed: 0x0,
+                        pin_salt: [ 0x59, 0x1D, 0xA6, 0x0B, 0x34, 0xFD, 0x64, 0x5E,
+                             0x38, 0x6C, 0x54, 0xC0, 0x18, 0xB6, 0xA7, 0x2F, ],
+                    })
+                    .set_matrix_card(CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlag_MatrixCard {
+                        challenge_count: 0x1,
+                        digit_count: 0x2,
+                        height: 0x8,
+                        seed: 0x8F54FB053817D8C2,
+                        width: 0x8,
+                    })
+                    ,
+                server_public_key: [ 0x3A, 0x2B, 0xED, 0xA2, 0xA9, 0x65, 0x25, 0x4E,
+                     0x45, 0x04, 0xC3, 0xA8, 0xF6, 0x6A, 0x86, 0xC9, 0x51, 0x72,
+                     0xD7, 0x63, 0x6B, 0x36, 0x89, 0xED, 0xC0, 0x3F, 0xFC, 0xC1,
+                     0x42, 0xA5, 0x79, 0x32, ],
+            },
+        }
+
+    }
+
+    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/challenge_server.wowm` line 260.
+    #[cfg(feature = "sync")]
+    #[cfg_attr(feature = "sync", test)]
+    fn cmd_auth_logon_challenge_server0() {
+        let expected = expected0();
+        let t = ServerOpcodeMessage::read(&mut std::io::Cursor::new(&RAW0)).unwrap();
+        let t = match t {
+            ServerOpcodeMessage::CMD_AUTH_LOGON_CHALLENGE(t) => t,
+            opcode => panic!("incorrect opcode. Expected CMD_AUTH_LOGON_CHALLENGE, got {opcode:#?}"),
+        };
+
+        assert(&t, &expected);
+        assert_eq!(t.size() + HEADER_SIZE, RAW0.len());
+
+        let mut dest = Vec::with_capacity(RAW0.len());
+        expected.write(&mut std::io::Cursor::new(&mut dest)).unwrap();
+
+        assert_eq!(dest, RAW0);
+    }
+
+    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/challenge_server.wowm` line 260.
+    #[cfg(feature = "tokio")]
+    #[cfg_attr(feature = "tokio", tokio::test)]
+    async fn tokio_cmd_auth_logon_challenge_server0() {
+        let expected = expected0();
+        let t = ServerOpcodeMessage::tokio_read(&mut std::io::Cursor::new(&RAW0)).await.unwrap();
+        let t = match t {
+            ServerOpcodeMessage::CMD_AUTH_LOGON_CHALLENGE(t) => t,
+            opcode => panic!("incorrect opcode. Expected CMD_AUTH_LOGON_CHALLENGE, got {opcode:#?}"),
+        };
+
+        assert(&t, &expected);
+        assert_eq!(t.size() + HEADER_SIZE, RAW0.len());
+
+        let mut dest = Vec::with_capacity(RAW0.len());
+        expected.tokio_write(&mut std::io::Cursor::new(&mut dest)).await.unwrap();
+
+        assert_eq!(dest, RAW0);
+    }
+
+    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/challenge_server.wowm` line 260.
+    #[cfg(feature = "async-std")]
+    #[cfg_attr(feature = "async-std", async_std::test)]
+    async fn astd_cmd_auth_logon_challenge_server0() {
+        let expected = expected0();
+        let t = ServerOpcodeMessage::astd_read(&mut async_std::io::Cursor::new(&RAW0)).await.unwrap();
+        let t = match t {
+            ServerOpcodeMessage::CMD_AUTH_LOGON_CHALLENGE(t) => t,
+            opcode => panic!("incorrect opcode. Expected CMD_AUTH_LOGON_CHALLENGE, got {opcode:#?}"),
+        };
+
+        assert(&t, &expected);
+        assert_eq!(t.size() + HEADER_SIZE, RAW0.len());
+
+        let mut dest = Vec::with_capacity(RAW0.len());
+        expected.astd_write(&mut async_std::io::Cursor::new(&mut dest)).await.unwrap();
+
+        assert_eq!(dest, RAW0);
+    }
+
 }
 

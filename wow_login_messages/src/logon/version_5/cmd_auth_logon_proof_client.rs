@@ -376,115 +376,6 @@ impl CMD_AUTH_LOGON_PROOF_Client {
 impl Message for CMD_AUTH_LOGON_PROOF_Client {
     const OPCODE: u8 = 0x01;
 
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        use std::fmt::Write;
-
-        let mut s = String::new();
-
-        writeln!(s, "test CMD_AUTH_LOGON_PROOF_Client {{").unwrap();
-        // Members
-        writeln!(s, "    client_public_key = [").unwrap();
-        for v in self.client_public_key.as_slice() {
-            write!(s, "{v:#04X}, ").unwrap();
-        }
-        writeln!(s, "    ];").unwrap();
-        writeln!(s, "    client_proof = [").unwrap();
-        for v in self.client_proof.as_slice() {
-            write!(s, "{v:#04X}, ").unwrap();
-        }
-        writeln!(s, "    ];").unwrap();
-        writeln!(s, "    crc_hash = [").unwrap();
-        for v in self.crc_hash.as_slice() {
-            write!(s, "{v:#04X}, ").unwrap();
-        }
-        writeln!(s, "    ];").unwrap();
-        writeln!(s, "    number_of_telemetry_keys = {};", self.telemetry_keys.len()).unwrap();
-        writeln!(s, "    telemetry_keys = [").unwrap();
-        for v in self.telemetry_keys.as_slice() {
-            writeln!(s, "        {{").unwrap();
-            // Members
-            writeln!(s, "            unknown1 = {};", v.unknown1).unwrap();
-            writeln!(s, "            unknown2 = {};", v.unknown2).unwrap();
-            writeln!(s, "            unknown3 = [").unwrap();
-            for v in v.unknown3.as_slice() {
-                write!(s, "{v:#04X}, ").unwrap();
-            }
-            writeln!(s, "            ];").unwrap();
-            writeln!(s, "            cd_key_proof = [").unwrap();
-            for v in v.cd_key_proof.as_slice() {
-                write!(s, "{v:#04X}, ").unwrap();
-            }
-            writeln!(s, "            ];").unwrap();
-
-            writeln!(s, "        }},").unwrap();
-        }
-        writeln!(s, "    ];").unwrap();
-        writeln!(s, "    security_flag = {};", SecurityFlag::new(self.security_flag.as_int()).as_test_case_value()).unwrap();
-        if let Some(if_statement) = &self.security_flag.get_pin() {
-            writeln!(s, "    pin_salt = [").unwrap();
-            for v in if_statement.pin_salt.as_slice() {
-                write!(s, "{v:#04X}, ").unwrap();
-            }
-            writeln!(s, "    ];").unwrap();
-            writeln!(s, "    pin_hash = [").unwrap();
-            for v in if_statement.pin_hash.as_slice() {
-                write!(s, "{v:#04X}, ").unwrap();
-            }
-            writeln!(s, "    ];").unwrap();
-        }
-
-        if let Some(if_statement) = &self.security_flag.get_matrix_card() {
-            writeln!(s, "    matrix_card_proof = [").unwrap();
-            for v in if_statement.matrix_card_proof.as_slice() {
-                write!(s, "{v:#04X}, ").unwrap();
-            }
-            writeln!(s, "    ];").unwrap();
-        }
-
-
-        writeln!(s, "}} [").unwrap();
-
-        let mut bytes: Vec<u8> = Vec::new();
-        self.write_into_vec(&mut bytes).unwrap();
-        let mut bytes = bytes.into_iter();
-
-        writeln!(s, "    {:#04X}, /* opcode */ ", bytes.next().unwrap()).unwrap();
-        crate::util::write_bytes(&mut s, &mut bytes, self.client_public_key.len(), "client_public_key", "    ");
-        crate::util::write_bytes(&mut s, &mut bytes, self.client_proof.len(), "client_proof", "    ");
-        crate::util::write_bytes(&mut s, &mut bytes, self.crc_hash.len(), "crc_hash", "    ");
-        crate::util::write_bytes(&mut s, &mut bytes, 1, "number_of_telemetry_keys", "    ");
-        if !self.telemetry_keys.is_empty() {
-            writeln!(s, "    /* telemetry_keys: TelemetryKey[number_of_telemetry_keys] start */").unwrap();
-            for (i, v) in self.telemetry_keys.iter().enumerate() {
-                writeln!(s, "    /* telemetry_keys: TelemetryKey[number_of_telemetry_keys] {i} start */").unwrap();
-                crate::util::write_bytes(&mut s, &mut bytes, 2, "unknown1", "        ");
-                crate::util::write_bytes(&mut s, &mut bytes, 4, "unknown2", "        ");
-                crate::util::write_bytes(&mut s, &mut bytes, v.unknown3.len(), "unknown3", "        ");
-                crate::util::write_bytes(&mut s, &mut bytes, v.cd_key_proof.len(), "cd_key_proof", "        ");
-                writeln!(s, "    /* telemetry_keys: TelemetryKey[number_of_telemetry_keys] {i} end */").unwrap();
-            }
-            writeln!(s, "    /* telemetry_keys: TelemetryKey[number_of_telemetry_keys] end */").unwrap();
-        }
-        crate::util::write_bytes(&mut s, &mut bytes, 1, "security_flag", "    ");
-        if let Some(if_statement) = &self.security_flag.get_pin() {
-            crate::util::write_bytes(&mut s, &mut bytes, if_statement.pin_salt.len(), "pin_salt", "    ");
-            crate::util::write_bytes(&mut s, &mut bytes, if_statement.pin_hash.len(), "pin_hash", "    ");
-        }
-
-        if let Some(if_statement) = &self.security_flag.get_matrix_card() {
-            crate::util::write_bytes(&mut s, &mut bytes, if_statement.matrix_card_proof.len(), "matrix_card_proof", "    ");
-        }
-
-
-
-        writeln!(s, "] {{").unwrap();
-        writeln!(s, "    login_versions = \"{}\";", std::env::var("WOWM_TEST_CASE_LOGIN_VERSION").unwrap_or("5 6 7".to_string())).unwrap();
-        writeln!(s, "}}\n").unwrap();
-
-        Some(s)
-    }
-
     #[cfg(feature = "sync")]
     fn read<R: std::io::Read, I: crate::private::Sealed>(r: R) -> Result<Self, crate::errors::ParseError> {
         Self::read_inner(r).map_err(|kind| crate::errors::ParseError::new(1, "CMD_AUTH_LOGON_PROOF_Client", kind))
@@ -704,5 +595,371 @@ impl CMD_AUTH_LOGON_PROOF_Client_SecurityFlag_MatrixCard {
     pub(crate) const fn size(&self) -> usize {
         20 // matrix_card_proof: u8[20]
     }
+}
+
+#[cfg(test)]
+mod test_version_5 {
+    #![allow(clippy::missing_const_for_fn)]
+    use super::CMD_AUTH_LOGON_PROOF_Client;
+    use crate::all::*;
+    use super::*;
+    use super::super::*;
+    use crate::logon::version_5::opcodes::ClientOpcodeMessage;
+
+    const HEADER_SIZE: usize = 1;
+    fn assert(t: &CMD_AUTH_LOGON_PROOF_Client, expected: &CMD_AUTH_LOGON_PROOF_Client) {
+        assert_eq!(t.client_public_key, expected.client_public_key);
+        assert_eq!(t.client_proof, expected.client_proof);
+        assert_eq!(t.crc_hash, expected.crc_hash);
+        assert_eq!(t.telemetry_keys, expected.telemetry_keys);
+        assert_eq!(t.security_flag, expected.security_flag);
+    }
+
+    const RAW0: [u8; 131] = [ 0x01, 0x04, 0x49, 0x57, 0xDD, 0x20, 0x51, 0x62, 0xF5,
+         0xFA, 0xFE, 0xB3, 0x67, 0x07, 0x72, 0x09, 0x51, 0x56, 0x20, 0x08, 0x08,
+         0x20, 0xC1, 0x26, 0xCA, 0xC8, 0xF7, 0x3B, 0x46, 0xFB, 0x88, 0x32, 0x06,
+         0x82, 0xC9, 0x97, 0x60, 0x42, 0xE4, 0x75, 0xF9, 0x7C, 0x60, 0x62, 0xE4,
+         0x54, 0x66, 0xA6, 0xFE, 0xDC, 0xE9, 0xAA, 0x7C, 0xFE, 0x74, 0xDA, 0x70,
+         0x88, 0xCC, 0x76, 0x24, 0xC4, 0x28, 0x88, 0xB5, 0xEF, 0xC4, 0x1D, 0xB4,
+         0x6B, 0xC5, 0x2C, 0xFB, 0x00, 0x03, 0xDD, 0x69, 0xF0, 0xF7, 0x58, 0x4C,
+         0x58, 0xF0, 0x86, 0x36, 0x3A, 0x1A, 0xBE, 0x6E, 0x1E, 0x4D, 0x5A, 0x4E,
+         0xC0, 0x56, 0x58, 0x88, 0xE6, 0x29, 0x01, 0x6C, 0xBF, 0x3D, 0xF7, 0x8E,
+         0x82, 0x93, 0x6F, 0x1D, 0xBE, 0xE5, 0x69, 0x34, 0xCD, 0x08, 0x82, 0x94,
+         0xEF, 0x5D, 0x0F, 0x96, 0x9F, 0xFC, 0x17, 0x0B, 0xE4, 0x42, 0x08, 0x2E,
+         0xD1, 0x10, ];
+
+    pub(crate) fn expected0() -> CMD_AUTH_LOGON_PROOF_Client {
+        CMD_AUTH_LOGON_PROOF_Client {
+            client_public_key: [ 0x04, 0x49, 0x57, 0xDD, 0x20, 0x51, 0x62, 0xF5,
+                 0xFA, 0xFE, 0xB3, 0x67, 0x07, 0x72, 0x09, 0x51, 0x56, 0x20, 0x08,
+                 0x08, 0x20, 0xC1, 0x26, 0xCA, 0xC8, 0xF7, 0x3B, 0x46, 0xFB, 0x88,
+                 0x32, 0x06, ],
+            client_proof: [ 0x82, 0xC9, 0x97, 0x60, 0x42, 0xE4, 0x75, 0xF9, 0x7C,
+                 0x60, 0x62, 0xE4, 0x54, 0x66, 0xA6, 0xFE, 0xDC, 0xE9, 0xAA, 0x7C, ],
+            crc_hash: [ 0xFE, 0x74, 0xDA, 0x70, 0x88, 0xCC, 0x76, 0x24, 0xC4, 0x28,
+                 0x88, 0xB5, 0xEF, 0xC4, 0x1D, 0xB4, 0x6B, 0xC5, 0x2C, 0xFB, ],
+            telemetry_keys: vec![ ],
+            security_flag: CMD_AUTH_LOGON_PROOF_Client_SecurityFlag::empty()
+                .set_pin(CMD_AUTH_LOGON_PROOF_Client_SecurityFlag_Pin {
+                    pin_hash: [ 0x5A, 0x4E, 0xC0, 0x56, 0x58, 0x88, 0xE6, 0x29, 0x01,
+                         0x6C, 0xBF, 0x3D, 0xF7, 0x8E, 0x82, 0x93, 0x6F, 0x1D, 0xBE,
+                         0xE5, ],
+                    pin_salt: [ 0xDD, 0x69, 0xF0, 0xF7, 0x58, 0x4C, 0x58, 0xF0, 0x86,
+                         0x36, 0x3A, 0x1A, 0xBE, 0x6E, 0x1E, 0x4D, ],
+                })
+                .set_matrix_card(CMD_AUTH_LOGON_PROOF_Client_SecurityFlag_MatrixCard {
+                    matrix_card_proof: [ 0x69, 0x34, 0xCD, 0x08, 0x82, 0x94, 0xEF,
+                         0x5D, 0x0F, 0x96, 0x9F, 0xFC, 0x17, 0x0B, 0xE4, 0x42, 0x08,
+                         0x2E, 0xD1, 0x10, ],
+                })
+                ,
+        }
+
+    }
+
+    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/proof_client.wowm` line 340.
+    #[cfg(feature = "sync")]
+    #[cfg_attr(feature = "sync", test)]
+    fn cmd_auth_logon_proof_client0() {
+        let expected = expected0();
+        let t = ClientOpcodeMessage::read(&mut std::io::Cursor::new(&RAW0)).unwrap();
+        let t = match t {
+            ClientOpcodeMessage::CMD_AUTH_LOGON_PROOF(t) => t,
+            opcode => panic!("incorrect opcode. Expected CMD_AUTH_LOGON_PROOF, got {opcode:#?}"),
+        };
+
+        assert(&t, &expected);
+        assert_eq!(t.size() + HEADER_SIZE, RAW0.len());
+
+        let mut dest = Vec::with_capacity(RAW0.len());
+        expected.write(&mut std::io::Cursor::new(&mut dest)).unwrap();
+
+        assert_eq!(dest, RAW0);
+    }
+
+    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/proof_client.wowm` line 340.
+    #[cfg(feature = "tokio")]
+    #[cfg_attr(feature = "tokio", tokio::test)]
+    async fn tokio_cmd_auth_logon_proof_client0() {
+        let expected = expected0();
+        let t = ClientOpcodeMessage::tokio_read(&mut std::io::Cursor::new(&RAW0)).await.unwrap();
+        let t = match t {
+            ClientOpcodeMessage::CMD_AUTH_LOGON_PROOF(t) => t,
+            opcode => panic!("incorrect opcode. Expected CMD_AUTH_LOGON_PROOF, got {opcode:#?}"),
+        };
+
+        assert(&t, &expected);
+        assert_eq!(t.size() + HEADER_SIZE, RAW0.len());
+
+        let mut dest = Vec::with_capacity(RAW0.len());
+        expected.tokio_write(&mut std::io::Cursor::new(&mut dest)).await.unwrap();
+
+        assert_eq!(dest, RAW0);
+    }
+
+    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/proof_client.wowm` line 340.
+    #[cfg(feature = "async-std")]
+    #[cfg_attr(feature = "async-std", async_std::test)]
+    async fn astd_cmd_auth_logon_proof_client0() {
+        let expected = expected0();
+        let t = ClientOpcodeMessage::astd_read(&mut async_std::io::Cursor::new(&RAW0)).await.unwrap();
+        let t = match t {
+            ClientOpcodeMessage::CMD_AUTH_LOGON_PROOF(t) => t,
+            opcode => panic!("incorrect opcode. Expected CMD_AUTH_LOGON_PROOF, got {opcode:#?}"),
+        };
+
+        assert(&t, &expected);
+        assert_eq!(t.size() + HEADER_SIZE, RAW0.len());
+
+        let mut dest = Vec::with_capacity(RAW0.len());
+        expected.astd_write(&mut async_std::io::Cursor::new(&mut dest)).await.unwrap();
+
+        assert_eq!(dest, RAW0);
+    }
+
+}
+
+#[cfg(test)]
+mod test_version_6 {
+    #![allow(clippy::missing_const_for_fn)]
+    use super::CMD_AUTH_LOGON_PROOF_Client;
+    use crate::all::*;
+    use super::*;
+    use super::super::*;
+    use crate::logon::version_6::opcodes::ClientOpcodeMessage;
+
+    const HEADER_SIZE: usize = 1;
+    fn assert(t: &CMD_AUTH_LOGON_PROOF_Client, expected: &CMD_AUTH_LOGON_PROOF_Client) {
+        assert_eq!(t.client_public_key, expected.client_public_key);
+        assert_eq!(t.client_proof, expected.client_proof);
+        assert_eq!(t.crc_hash, expected.crc_hash);
+        assert_eq!(t.telemetry_keys, expected.telemetry_keys);
+        assert_eq!(t.security_flag, expected.security_flag);
+    }
+
+    const RAW0: [u8; 131] = [ 0x01, 0x04, 0x49, 0x57, 0xDD, 0x20, 0x51, 0x62, 0xF5,
+         0xFA, 0xFE, 0xB3, 0x67, 0x07, 0x72, 0x09, 0x51, 0x56, 0x20, 0x08, 0x08,
+         0x20, 0xC1, 0x26, 0xCA, 0xC8, 0xF7, 0x3B, 0x46, 0xFB, 0x88, 0x32, 0x06,
+         0x82, 0xC9, 0x97, 0x60, 0x42, 0xE4, 0x75, 0xF9, 0x7C, 0x60, 0x62, 0xE4,
+         0x54, 0x66, 0xA6, 0xFE, 0xDC, 0xE9, 0xAA, 0x7C, 0xFE, 0x74, 0xDA, 0x70,
+         0x88, 0xCC, 0x76, 0x24, 0xC4, 0x28, 0x88, 0xB5, 0xEF, 0xC4, 0x1D, 0xB4,
+         0x6B, 0xC5, 0x2C, 0xFB, 0x00, 0x03, 0xDD, 0x69, 0xF0, 0xF7, 0x58, 0x4C,
+         0x58, 0xF0, 0x86, 0x36, 0x3A, 0x1A, 0xBE, 0x6E, 0x1E, 0x4D, 0x5A, 0x4E,
+         0xC0, 0x56, 0x58, 0x88, 0xE6, 0x29, 0x01, 0x6C, 0xBF, 0x3D, 0xF7, 0x8E,
+         0x82, 0x93, 0x6F, 0x1D, 0xBE, 0xE5, 0x69, 0x34, 0xCD, 0x08, 0x82, 0x94,
+         0xEF, 0x5D, 0x0F, 0x96, 0x9F, 0xFC, 0x17, 0x0B, 0xE4, 0x42, 0x08, 0x2E,
+         0xD1, 0x10, ];
+
+    pub(crate) fn expected0() -> CMD_AUTH_LOGON_PROOF_Client {
+        CMD_AUTH_LOGON_PROOF_Client {
+            client_public_key: [ 0x04, 0x49, 0x57, 0xDD, 0x20, 0x51, 0x62, 0xF5,
+                 0xFA, 0xFE, 0xB3, 0x67, 0x07, 0x72, 0x09, 0x51, 0x56, 0x20, 0x08,
+                 0x08, 0x20, 0xC1, 0x26, 0xCA, 0xC8, 0xF7, 0x3B, 0x46, 0xFB, 0x88,
+                 0x32, 0x06, ],
+            client_proof: [ 0x82, 0xC9, 0x97, 0x60, 0x42, 0xE4, 0x75, 0xF9, 0x7C,
+                 0x60, 0x62, 0xE4, 0x54, 0x66, 0xA6, 0xFE, 0xDC, 0xE9, 0xAA, 0x7C, ],
+            crc_hash: [ 0xFE, 0x74, 0xDA, 0x70, 0x88, 0xCC, 0x76, 0x24, 0xC4, 0x28,
+                 0x88, 0xB5, 0xEF, 0xC4, 0x1D, 0xB4, 0x6B, 0xC5, 0x2C, 0xFB, ],
+            telemetry_keys: vec![ ],
+            security_flag: CMD_AUTH_LOGON_PROOF_Client_SecurityFlag::empty()
+                .set_pin(CMD_AUTH_LOGON_PROOF_Client_SecurityFlag_Pin {
+                    pin_hash: [ 0x5A, 0x4E, 0xC0, 0x56, 0x58, 0x88, 0xE6, 0x29, 0x01,
+                         0x6C, 0xBF, 0x3D, 0xF7, 0x8E, 0x82, 0x93, 0x6F, 0x1D, 0xBE,
+                         0xE5, ],
+                    pin_salt: [ 0xDD, 0x69, 0xF0, 0xF7, 0x58, 0x4C, 0x58, 0xF0, 0x86,
+                         0x36, 0x3A, 0x1A, 0xBE, 0x6E, 0x1E, 0x4D, ],
+                })
+                .set_matrix_card(CMD_AUTH_LOGON_PROOF_Client_SecurityFlag_MatrixCard {
+                    matrix_card_proof: [ 0x69, 0x34, 0xCD, 0x08, 0x82, 0x94, 0xEF,
+                         0x5D, 0x0F, 0x96, 0x9F, 0xFC, 0x17, 0x0B, 0xE4, 0x42, 0x08,
+                         0x2E, 0xD1, 0x10, ],
+                })
+                ,
+        }
+
+    }
+
+    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/proof_client.wowm` line 340.
+    #[cfg(feature = "sync")]
+    #[cfg_attr(feature = "sync", test)]
+    fn cmd_auth_logon_proof_client0() {
+        let expected = expected0();
+        let t = ClientOpcodeMessage::read(&mut std::io::Cursor::new(&RAW0)).unwrap();
+        let t = match t {
+            ClientOpcodeMessage::CMD_AUTH_LOGON_PROOF(t) => t,
+            opcode => panic!("incorrect opcode. Expected CMD_AUTH_LOGON_PROOF, got {opcode:#?}"),
+        };
+
+        assert(&t, &expected);
+        assert_eq!(t.size() + HEADER_SIZE, RAW0.len());
+
+        let mut dest = Vec::with_capacity(RAW0.len());
+        expected.write(&mut std::io::Cursor::new(&mut dest)).unwrap();
+
+        assert_eq!(dest, RAW0);
+    }
+
+    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/proof_client.wowm` line 340.
+    #[cfg(feature = "tokio")]
+    #[cfg_attr(feature = "tokio", tokio::test)]
+    async fn tokio_cmd_auth_logon_proof_client0() {
+        let expected = expected0();
+        let t = ClientOpcodeMessage::tokio_read(&mut std::io::Cursor::new(&RAW0)).await.unwrap();
+        let t = match t {
+            ClientOpcodeMessage::CMD_AUTH_LOGON_PROOF(t) => t,
+            opcode => panic!("incorrect opcode. Expected CMD_AUTH_LOGON_PROOF, got {opcode:#?}"),
+        };
+
+        assert(&t, &expected);
+        assert_eq!(t.size() + HEADER_SIZE, RAW0.len());
+
+        let mut dest = Vec::with_capacity(RAW0.len());
+        expected.tokio_write(&mut std::io::Cursor::new(&mut dest)).await.unwrap();
+
+        assert_eq!(dest, RAW0);
+    }
+
+    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/proof_client.wowm` line 340.
+    #[cfg(feature = "async-std")]
+    #[cfg_attr(feature = "async-std", async_std::test)]
+    async fn astd_cmd_auth_logon_proof_client0() {
+        let expected = expected0();
+        let t = ClientOpcodeMessage::astd_read(&mut async_std::io::Cursor::new(&RAW0)).await.unwrap();
+        let t = match t {
+            ClientOpcodeMessage::CMD_AUTH_LOGON_PROOF(t) => t,
+            opcode => panic!("incorrect opcode. Expected CMD_AUTH_LOGON_PROOF, got {opcode:#?}"),
+        };
+
+        assert(&t, &expected);
+        assert_eq!(t.size() + HEADER_SIZE, RAW0.len());
+
+        let mut dest = Vec::with_capacity(RAW0.len());
+        expected.astd_write(&mut async_std::io::Cursor::new(&mut dest)).await.unwrap();
+
+        assert_eq!(dest, RAW0);
+    }
+
+}
+
+#[cfg(test)]
+mod test_version_7 {
+    #![allow(clippy::missing_const_for_fn)]
+    use super::CMD_AUTH_LOGON_PROOF_Client;
+    use crate::all::*;
+    use super::*;
+    use super::super::*;
+    use crate::logon::version_7::opcodes::ClientOpcodeMessage;
+
+    const HEADER_SIZE: usize = 1;
+    fn assert(t: &CMD_AUTH_LOGON_PROOF_Client, expected: &CMD_AUTH_LOGON_PROOF_Client) {
+        assert_eq!(t.client_public_key, expected.client_public_key);
+        assert_eq!(t.client_proof, expected.client_proof);
+        assert_eq!(t.crc_hash, expected.crc_hash);
+        assert_eq!(t.telemetry_keys, expected.telemetry_keys);
+        assert_eq!(t.security_flag, expected.security_flag);
+    }
+
+    const RAW0: [u8; 131] = [ 0x01, 0x04, 0x49, 0x57, 0xDD, 0x20, 0x51, 0x62, 0xF5,
+         0xFA, 0xFE, 0xB3, 0x67, 0x07, 0x72, 0x09, 0x51, 0x56, 0x20, 0x08, 0x08,
+         0x20, 0xC1, 0x26, 0xCA, 0xC8, 0xF7, 0x3B, 0x46, 0xFB, 0x88, 0x32, 0x06,
+         0x82, 0xC9, 0x97, 0x60, 0x42, 0xE4, 0x75, 0xF9, 0x7C, 0x60, 0x62, 0xE4,
+         0x54, 0x66, 0xA6, 0xFE, 0xDC, 0xE9, 0xAA, 0x7C, 0xFE, 0x74, 0xDA, 0x70,
+         0x88, 0xCC, 0x76, 0x24, 0xC4, 0x28, 0x88, 0xB5, 0xEF, 0xC4, 0x1D, 0xB4,
+         0x6B, 0xC5, 0x2C, 0xFB, 0x00, 0x03, 0xDD, 0x69, 0xF0, 0xF7, 0x58, 0x4C,
+         0x58, 0xF0, 0x86, 0x36, 0x3A, 0x1A, 0xBE, 0x6E, 0x1E, 0x4D, 0x5A, 0x4E,
+         0xC0, 0x56, 0x58, 0x88, 0xE6, 0x29, 0x01, 0x6C, 0xBF, 0x3D, 0xF7, 0x8E,
+         0x82, 0x93, 0x6F, 0x1D, 0xBE, 0xE5, 0x69, 0x34, 0xCD, 0x08, 0x82, 0x94,
+         0xEF, 0x5D, 0x0F, 0x96, 0x9F, 0xFC, 0x17, 0x0B, 0xE4, 0x42, 0x08, 0x2E,
+         0xD1, 0x10, ];
+
+    pub(crate) fn expected0() -> CMD_AUTH_LOGON_PROOF_Client {
+        CMD_AUTH_LOGON_PROOF_Client {
+            client_public_key: [ 0x04, 0x49, 0x57, 0xDD, 0x20, 0x51, 0x62, 0xF5,
+                 0xFA, 0xFE, 0xB3, 0x67, 0x07, 0x72, 0x09, 0x51, 0x56, 0x20, 0x08,
+                 0x08, 0x20, 0xC1, 0x26, 0xCA, 0xC8, 0xF7, 0x3B, 0x46, 0xFB, 0x88,
+                 0x32, 0x06, ],
+            client_proof: [ 0x82, 0xC9, 0x97, 0x60, 0x42, 0xE4, 0x75, 0xF9, 0x7C,
+                 0x60, 0x62, 0xE4, 0x54, 0x66, 0xA6, 0xFE, 0xDC, 0xE9, 0xAA, 0x7C, ],
+            crc_hash: [ 0xFE, 0x74, 0xDA, 0x70, 0x88, 0xCC, 0x76, 0x24, 0xC4, 0x28,
+                 0x88, 0xB5, 0xEF, 0xC4, 0x1D, 0xB4, 0x6B, 0xC5, 0x2C, 0xFB, ],
+            telemetry_keys: vec![ ],
+            security_flag: CMD_AUTH_LOGON_PROOF_Client_SecurityFlag::empty()
+                .set_pin(CMD_AUTH_LOGON_PROOF_Client_SecurityFlag_Pin {
+                    pin_hash: [ 0x5A, 0x4E, 0xC0, 0x56, 0x58, 0x88, 0xE6, 0x29, 0x01,
+                         0x6C, 0xBF, 0x3D, 0xF7, 0x8E, 0x82, 0x93, 0x6F, 0x1D, 0xBE,
+                         0xE5, ],
+                    pin_salt: [ 0xDD, 0x69, 0xF0, 0xF7, 0x58, 0x4C, 0x58, 0xF0, 0x86,
+                         0x36, 0x3A, 0x1A, 0xBE, 0x6E, 0x1E, 0x4D, ],
+                })
+                .set_matrix_card(CMD_AUTH_LOGON_PROOF_Client_SecurityFlag_MatrixCard {
+                    matrix_card_proof: [ 0x69, 0x34, 0xCD, 0x08, 0x82, 0x94, 0xEF,
+                         0x5D, 0x0F, 0x96, 0x9F, 0xFC, 0x17, 0x0B, 0xE4, 0x42, 0x08,
+                         0x2E, 0xD1, 0x10, ],
+                })
+                ,
+        }
+
+    }
+
+    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/proof_client.wowm` line 340.
+    #[cfg(feature = "sync")]
+    #[cfg_attr(feature = "sync", test)]
+    fn cmd_auth_logon_proof_client0() {
+        let expected = expected0();
+        let t = ClientOpcodeMessage::read(&mut std::io::Cursor::new(&RAW0)).unwrap();
+        let t = match t {
+            ClientOpcodeMessage::CMD_AUTH_LOGON_PROOF(t) => t,
+            opcode => panic!("incorrect opcode. Expected CMD_AUTH_LOGON_PROOF, got {opcode:#?}"),
+        };
+
+        assert(&t, &expected);
+        assert_eq!(t.size() + HEADER_SIZE, RAW0.len());
+
+        let mut dest = Vec::with_capacity(RAW0.len());
+        expected.write(&mut std::io::Cursor::new(&mut dest)).unwrap();
+
+        assert_eq!(dest, RAW0);
+    }
+
+    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/proof_client.wowm` line 340.
+    #[cfg(feature = "tokio")]
+    #[cfg_attr(feature = "tokio", tokio::test)]
+    async fn tokio_cmd_auth_logon_proof_client0() {
+        let expected = expected0();
+        let t = ClientOpcodeMessage::tokio_read(&mut std::io::Cursor::new(&RAW0)).await.unwrap();
+        let t = match t {
+            ClientOpcodeMessage::CMD_AUTH_LOGON_PROOF(t) => t,
+            opcode => panic!("incorrect opcode. Expected CMD_AUTH_LOGON_PROOF, got {opcode:#?}"),
+        };
+
+        assert(&t, &expected);
+        assert_eq!(t.size() + HEADER_SIZE, RAW0.len());
+
+        let mut dest = Vec::with_capacity(RAW0.len());
+        expected.tokio_write(&mut std::io::Cursor::new(&mut dest)).await.unwrap();
+
+        assert_eq!(dest, RAW0);
+    }
+
+    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/proof_client.wowm` line 340.
+    #[cfg(feature = "async-std")]
+    #[cfg_attr(feature = "async-std", async_std::test)]
+    async fn astd_cmd_auth_logon_proof_client0() {
+        let expected = expected0();
+        let t = ClientOpcodeMessage::astd_read(&mut async_std::io::Cursor::new(&RAW0)).await.unwrap();
+        let t = match t {
+            ClientOpcodeMessage::CMD_AUTH_LOGON_PROOF(t) => t,
+            opcode => panic!("incorrect opcode. Expected CMD_AUTH_LOGON_PROOF, got {opcode:#?}"),
+        };
+
+        assert(&t, &expected);
+        assert_eq!(t.size() + HEADER_SIZE, RAW0.len());
+
+        let mut dest = Vec::with_capacity(RAW0.len());
+        expected.astd_write(&mut async_std::io::Cursor::new(&mut dest)).await.unwrap();
+
+        assert_eq!(dest, RAW0);
+    }
+
 }
 
