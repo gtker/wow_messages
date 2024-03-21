@@ -24,6 +24,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 * `std::fmt::Display` for new enums.
+* `supports_pin`/`supports_matrix_card`/`supports_authenticator` functions for `ProtocolVersion` and `Version`.
 
 ### Changed
 
@@ -32,6 +33,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * BREAKING: `Locale`, `Os`, and `Platform` no longer have an `Other` enumerator.
 * BREAKING: Opcode types no longer implement `Eq`.
 * BREAKING: `Population::Other` changed from `u32` to `f32`.
+
+### Removed
+
 * BREAKING: Removed `print-testcase` feature and all associated functionality. All known versions have been identified
   and tests have been added.
 
