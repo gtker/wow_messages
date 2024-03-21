@@ -10,16 +10,19 @@ use crate::wireshark_printer::{
     clean_opcode_name, enum_name, enum_strings, enumerator_name, is_client_name, is_server_name,
     name_to_hf, pretty_name, server_to_client_name, ui_name,
 };
-use crate::{Container, ObjectTags, Objects};
+use crate::{Container, ObjectTags};
 use std::fmt::UpperHex;
 
-pub(crate) fn print_parser(o: &Objects, w: &WiresharkObject) -> (Writer, Writer) {
+pub(crate) fn print_parser(
+    wireshark_messages: &[&Container],
+    w: &WiresharkObject,
+) -> (Writer, Writer) {
     let mut s = Writer::at_indentation(1);
 
     let mut variables = Vec::new();
 
     s.open_curly("switch (header_opcode)");
-    for e in o.wireshark_messages() {
+    for e in wireshark_messages {
         if e.empty_body() || is_client_name(e.name()) {
             continue;
         }
@@ -41,23 +44,22 @@ pub(crate) fn print_parser(o: &Objects, w: &WiresharkObject) -> (Writer, Writer)
         if is_server_name(e.name()) {
             s.open_curly("if (WOWW_SERVER_TO_CLIENT)");
 
-            print_message(&mut s, e, w, o, &mut variables, inside_compressed_message);
+            print_message(&mut s, e, w, &mut variables, inside_compressed_message);
 
             s.closing_curly(); // if (WOWW_SERVER_TO_CLIENT)
 
-            let v = o.wireshark_messages();
-            if let Some(e) = v
+            if let Some(e) = wireshark_messages
                 .iter()
                 .find(|a| a.name() == server_to_client_name(e.name()))
             {
                 s.open_curly("else");
 
-                print_message(&mut s, e, w, o, &mut variables, inside_compressed_message);
+                print_message(&mut s, e, w, &mut variables, inside_compressed_message);
 
                 s.closing_curly(); // else
             }
         } else {
-            print_message(&mut s, e, w, o, &mut variables, inside_compressed_message);
+            print_message(&mut s, e, w, &mut variables, inside_compressed_message);
         }
 
         if inside_compressed_message {
@@ -99,7 +101,6 @@ fn print_message(
     s: &mut Writer,
     e: &Container,
     w: &WiresharkObject,
-    o: &Objects,
     variables: &mut Vec<String>,
     inside_compressed_message: bool,
 ) {
@@ -110,7 +111,6 @@ fn print_message(
             e,
             w,
             e.tags(),
-            o,
             variables,
             inside_compressed_message,
             0,
@@ -124,7 +124,6 @@ fn print_member(
     e: &Container,
     wo: &WiresharkObject,
     tags: &ObjectTags,
-    o: &Objects,
     variables: &mut Vec<String>,
     inside_compressed_message: bool,
     depth: i32,
@@ -137,7 +136,6 @@ fn print_member(
                 e.name(),
                 d,
                 w,
-                o,
                 wo,
                 variables,
                 inside_compressed_message,
@@ -150,7 +148,6 @@ fn print_member(
                 e,
                 wo,
                 tags,
-                o,
                 statement,
                 variables,
                 inside_compressed_message,
@@ -168,7 +165,6 @@ fn print_member(
                     e,
                     wo,
                     tags,
-                    o,
                     variables,
                     inside_compressed_message,
                     depth,
@@ -185,7 +181,6 @@ fn print_if_statement(
     e: &Container,
     wo: &WiresharkObject,
     tags: &ObjectTags,
-    o: &Objects,
     statement: &IfStatement,
     variables: &mut Vec<String>,
     inside_compressed_message: bool,
@@ -234,7 +229,6 @@ fn print_if_statement(
             e,
             wo,
             tags,
-            o,
             variables,
             inside_compressed_message,
             depth,
@@ -284,7 +278,6 @@ fn print_if_statement(
                 e,
                 wo,
                 tags,
-                o,
                 variables,
                 inside_compressed_message,
                 depth,
@@ -304,7 +297,6 @@ fn print_if_statement(
                 e,
                 wo,
                 tags,
-                o,
                 variables,
                 inside_compressed_message,
                 depth,
@@ -320,7 +312,6 @@ fn print_definition(
     container_name: &str,
     d: &StructMemberDefinition,
     w: Option<&WiresharkMember>,
-    o: &Objects,
     wo: &WiresharkObject,
     variables: &mut Vec<String>,
     inside_compressed_message: bool,
@@ -397,16 +388,7 @@ fn print_definition(
             print_definer(s, w, upcast, container_name, d.name(), variables, e);
         }
         Type::Struct { e } => {
-            print_container(
-                s,
-                o,
-                wo,
-                variables,
-                e,
-                inside_compressed_message,
-                None,
-                depth,
-            );
+            print_container(s, wo, variables, e, inside_compressed_message, None, depth);
         }
         Type::Array(array) => {
             if array.compressed() {
@@ -481,7 +463,6 @@ fn print_definition(
                     ArrayType::Struct(c) => {
                         print_container(
                             s,
-                            o,
                             wo,
                             variables,
                             c,
@@ -558,7 +539,6 @@ fn print_cstring(s: &mut Writer, w: Option<&WiresharkMember>) {
 
 fn print_container(
     s: &mut Writer,
-    o: &Objects,
     wo: &WiresharkObject,
     variables: &mut Vec<String>,
     e: &Container,
@@ -583,7 +563,6 @@ fn print_container(
             e,
             wo,
             e.tags(),
-            o,
             variables,
             inside_compressed_message,
             depth,

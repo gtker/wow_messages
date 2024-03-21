@@ -162,9 +162,9 @@ impl Objects {
         &self.structs
     }
 
-    pub(crate) fn wireshark_messages(&self) -> Vec<&Container> {
+    pub(crate) fn world_wireshark_messages(&self) -> Vec<&Container> {
         let mut v = self
-            .wireshark_containers()
+            .world_wireshark_containers()
             .into_iter()
             .filter(|a| {
                 matches!(
@@ -179,7 +179,7 @@ impl Objects {
         v
     }
 
-    pub(crate) fn wireshark_containers(&self) -> Vec<&Container> {
+    pub(crate) fn world_wireshark_containers(&self) -> Vec<&Container> {
         self.all_containers()
             .filter(|e| {
                 e.tags().fulfills_all(&ObjectTags::new_with_version(

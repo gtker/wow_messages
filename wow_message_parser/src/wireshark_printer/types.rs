@@ -1,10 +1,11 @@
 use crate::parser::types::array::ArrayType;
+use crate::parser::types::container::Container;
 use crate::parser::types::definer::Definer;
 use crate::parser::types::ty::Type;
 use crate::parser::types::IntegerType;
-use crate::{wireshark_printer, Objects};
+use crate::wireshark_printer;
 
-pub(crate) fn get_wireshark_object(o: &Objects) -> WiresharkObject {
+pub(crate) fn get_wireshark_object(containers: Vec<&Container>) -> WiresharkObject {
     let mut objects = WiresharkObject::new();
 
     let decompressed_size_ty = Type::Integer(IntegerType::U32);
@@ -14,7 +15,7 @@ pub(crate) fn get_wireshark_object(o: &Objects) -> WiresharkObject {
         WiresharkType::from_type(&decompressed_size_ty).unwrap(),
     ));
 
-    for e in o.wireshark_containers() {
+    for e in containers {
         if e.tags().used_in_update_mask() {
             continue;
         }

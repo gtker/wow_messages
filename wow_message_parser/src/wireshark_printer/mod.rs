@@ -16,11 +16,11 @@ use std::fs::read_to_string;
 use std::path::Path;
 
 pub(crate) fn print_wireshark(o: &Objects) {
-    let w = types::get_wireshark_object(o);
+    let w = types::get_wireshark_object(o.world_wireshark_containers());
     let imports = print_int_declarations(&w);
     let enums = print_enums(&w);
     let register = print_register_info(&w);
-    let (parser, variables) = print_parser(o, &w);
+    let (parser, variables) = print_parser(&o.world_wireshark_messages(), &w);
 
     if let Ok(path) = std::env::var("WOWM_WIRESHARK") {
         apply_to_wireshark_file(&imports, &enums, &register, &parser, &path, &variables);
