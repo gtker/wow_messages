@@ -3,7 +3,7 @@ use crate::ServerMessage;
 use std::io::{Read, Write};
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/login/cmd_xfer.wowm:9`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/login/cmd_xfer.wowm#L9):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/login/cmd_xfer.wowm:23`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/login/cmd_xfer.wowm#L23):
 /// ```text
 /// slogin CMD_XFER_DATA = 0x31 {
 ///     u16 size;
@@ -96,39 +96,6 @@ impl CMD_XFER_DATA {
 impl Message for CMD_XFER_DATA {
     const OPCODE: u8 = 0x31;
 
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        use std::fmt::Write;
-
-        let mut s = String::new();
-
-        writeln!(s, "test CMD_XFER_DATA {{").unwrap();
-        // Members
-        writeln!(s, "    size = {};", self.data.len()).unwrap();
-        writeln!(s, "    data = [").unwrap();
-        for v in self.data.as_slice() {
-            write!(s, "{v:#04X}, ").unwrap();
-        }
-        writeln!(s, "    ];").unwrap();
-
-        writeln!(s, "}} [").unwrap();
-
-        let mut bytes: Vec<u8> = Vec::new();
-        self.write_into_vec(&mut bytes).unwrap();
-        let mut bytes = bytes.into_iter();
-
-        writeln!(s, "    {:#04X}, /* opcode */ ", bytes.next().unwrap()).unwrap();
-        crate::util::write_bytes(&mut s, &mut bytes, 2, "size", "    ");
-        crate::util::write_bytes(&mut s, &mut bytes, self.data.len(), "data", "    ");
-
-
-        writeln!(s, "] {{").unwrap();
-        writeln!(s, "    login_versions = \"{}\";", std::env::var("WOWM_TEST_CASE_LOGIN_VERSION").unwrap_or("2 3 5 6 7 8".to_string())).unwrap();
-        writeln!(s, "}}\n").unwrap();
-
-        Some(s)
-    }
-
     #[cfg(feature = "sync")]
     fn read<R: std::io::Read, I: crate::private::Sealed>(r: R) -> Result<Self, crate::errors::ParseError> {
         Self::read_inner(r).map_err(|kind| crate::errors::ParseError::new(49, "CMD_XFER_DATA", kind))
@@ -213,5 +180,575 @@ impl CMD_XFER_DATA {
         2 // size: u16
         + self.data.len() * core::mem::size_of::<u8>() // data: u8[size]
     }
+}
+
+#[cfg(test)]
+mod test_version_2 {
+    #![allow(clippy::missing_const_for_fn)]
+    use super::CMD_XFER_DATA;
+    use crate::all::*;
+    use super::*;
+    use super::super::*;
+    use crate::logon::version_2::opcodes::ServerOpcodeMessage;
+
+    const HEADER_SIZE: usize = 1;
+    fn assert(t: &CMD_XFER_DATA, expected: &CMD_XFER_DATA) {
+        assert_eq!(t.data, expected.data);
+    }
+
+    const RAW0: [u8; 67] = [ 0x31, 0x40, 0x00, 0x4D, 0x50, 0x51, 0x1A, 0x2C, 0x00,
+         0x00, 0x00, 0x3C, 0xE0, 0x26, 0x00, 0x01, 0x00, 0x03, 0x00, 0xFC, 0xD9,
+         0x26, 0x00, 0xFC, 0xDD, 0x26, 0x00, 0x40, 0x00, 0x00, 0x00, 0x24, 0x00,
+         0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+         0x00, 0x00, 0x02, 0x78, 0xDA, 0xEC, 0x7D, 0x7B, 0x7C, 0x54, 0xC5, 0xF5,
+         0xF8, 0x6E, 0xF6, 0x86, 0x5C, 0x74, 0x25, 0x0B, 0xAE, 0xB8, ];
+
+    pub(crate) fn expected0() -> CMD_XFER_DATA {
+        CMD_XFER_DATA {
+            data: vec![ 0x4D, 0x50, 0x51, 0x1A, 0x2C, 0x00, 0x00, 0x00, 0x3C, 0xE0,
+                 0x26, 0x00, 0x01, 0x00, 0x03, 0x00, 0xFC, 0xD9, 0x26, 0x00, 0xFC,
+                 0xDD, 0x26, 0x00, 0x40, 0x00, 0x00, 0x00, 0x24, 0x00, 0x00, 0x00,
+                 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+                 0x00, 0x02, 0x78, 0xDA, 0xEC, 0x7D, 0x7B, 0x7C, 0x54, 0xC5, 0xF5,
+                 0xF8, 0x6E, 0xF6, 0x86, 0x5C, 0x74, 0x25, 0x0B, 0xAE, 0xB8, ],
+        }
+
+    }
+
+    // Generated from `wow_message_parser/wowm/login/cmd_xfer.wowm` line 31.
+    #[cfg(feature = "sync")]
+    #[cfg_attr(feature = "sync", test)]
+    fn cmd_xfer_data0() {
+        let expected = expected0();
+        let t = ServerOpcodeMessage::read(&mut std::io::Cursor::new(&RAW0)).unwrap();
+        let t = match t {
+            ServerOpcodeMessage::CMD_XFER_DATA(t) => t,
+            opcode => panic!("incorrect opcode. Expected CMD_XFER_DATA, got {opcode:#?}"),
+        };
+
+        assert(&t, &expected);
+        assert_eq!(t.size() + HEADER_SIZE, RAW0.len());
+
+        let mut dest = Vec::with_capacity(RAW0.len());
+        expected.write(&mut std::io::Cursor::new(&mut dest)).unwrap();
+
+        assert_eq!(dest, RAW0);
+    }
+
+    // Generated from `wow_message_parser/wowm/login/cmd_xfer.wowm` line 31.
+    #[cfg(feature = "tokio")]
+    #[cfg_attr(feature = "tokio", tokio::test)]
+    async fn tokio_cmd_xfer_data0() {
+        let expected = expected0();
+        let t = ServerOpcodeMessage::tokio_read(&mut std::io::Cursor::new(&RAW0)).await.unwrap();
+        let t = match t {
+            ServerOpcodeMessage::CMD_XFER_DATA(t) => t,
+            opcode => panic!("incorrect opcode. Expected CMD_XFER_DATA, got {opcode:#?}"),
+        };
+
+        assert(&t, &expected);
+        assert_eq!(t.size() + HEADER_SIZE, RAW0.len());
+
+        let mut dest = Vec::with_capacity(RAW0.len());
+        expected.tokio_write(&mut std::io::Cursor::new(&mut dest)).await.unwrap();
+
+        assert_eq!(dest, RAW0);
+    }
+
+    // Generated from `wow_message_parser/wowm/login/cmd_xfer.wowm` line 31.
+    #[cfg(feature = "async-std")]
+    #[cfg_attr(feature = "async-std", async_std::test)]
+    async fn astd_cmd_xfer_data0() {
+        let expected = expected0();
+        let t = ServerOpcodeMessage::astd_read(&mut async_std::io::Cursor::new(&RAW0)).await.unwrap();
+        let t = match t {
+            ServerOpcodeMessage::CMD_XFER_DATA(t) => t,
+            opcode => panic!("incorrect opcode. Expected CMD_XFER_DATA, got {opcode:#?}"),
+        };
+
+        assert(&t, &expected);
+        assert_eq!(t.size() + HEADER_SIZE, RAW0.len());
+
+        let mut dest = Vec::with_capacity(RAW0.len());
+        expected.astd_write(&mut async_std::io::Cursor::new(&mut dest)).await.unwrap();
+
+        assert_eq!(dest, RAW0);
+    }
+
+}
+
+#[cfg(test)]
+mod test_version_3 {
+    #![allow(clippy::missing_const_for_fn)]
+    use super::CMD_XFER_DATA;
+    use crate::all::*;
+    use super::*;
+    use super::super::*;
+    use crate::logon::version_3::opcodes::ServerOpcodeMessage;
+
+    const HEADER_SIZE: usize = 1;
+    fn assert(t: &CMD_XFER_DATA, expected: &CMD_XFER_DATA) {
+        assert_eq!(t.data, expected.data);
+    }
+
+    const RAW0: [u8; 67] = [ 0x31, 0x40, 0x00, 0x4D, 0x50, 0x51, 0x1A, 0x2C, 0x00,
+         0x00, 0x00, 0x3C, 0xE0, 0x26, 0x00, 0x01, 0x00, 0x03, 0x00, 0xFC, 0xD9,
+         0x26, 0x00, 0xFC, 0xDD, 0x26, 0x00, 0x40, 0x00, 0x00, 0x00, 0x24, 0x00,
+         0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+         0x00, 0x00, 0x02, 0x78, 0xDA, 0xEC, 0x7D, 0x7B, 0x7C, 0x54, 0xC5, 0xF5,
+         0xF8, 0x6E, 0xF6, 0x86, 0x5C, 0x74, 0x25, 0x0B, 0xAE, 0xB8, ];
+
+    pub(crate) fn expected0() -> CMD_XFER_DATA {
+        CMD_XFER_DATA {
+            data: vec![ 0x4D, 0x50, 0x51, 0x1A, 0x2C, 0x00, 0x00, 0x00, 0x3C, 0xE0,
+                 0x26, 0x00, 0x01, 0x00, 0x03, 0x00, 0xFC, 0xD9, 0x26, 0x00, 0xFC,
+                 0xDD, 0x26, 0x00, 0x40, 0x00, 0x00, 0x00, 0x24, 0x00, 0x00, 0x00,
+                 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+                 0x00, 0x02, 0x78, 0xDA, 0xEC, 0x7D, 0x7B, 0x7C, 0x54, 0xC5, 0xF5,
+                 0xF8, 0x6E, 0xF6, 0x86, 0x5C, 0x74, 0x25, 0x0B, 0xAE, 0xB8, ],
+        }
+
+    }
+
+    // Generated from `wow_message_parser/wowm/login/cmd_xfer.wowm` line 31.
+    #[cfg(feature = "sync")]
+    #[cfg_attr(feature = "sync", test)]
+    fn cmd_xfer_data0() {
+        let expected = expected0();
+        let t = ServerOpcodeMessage::read(&mut std::io::Cursor::new(&RAW0)).unwrap();
+        let t = match t {
+            ServerOpcodeMessage::CMD_XFER_DATA(t) => t,
+            opcode => panic!("incorrect opcode. Expected CMD_XFER_DATA, got {opcode:#?}"),
+        };
+
+        assert(&t, &expected);
+        assert_eq!(t.size() + HEADER_SIZE, RAW0.len());
+
+        let mut dest = Vec::with_capacity(RAW0.len());
+        expected.write(&mut std::io::Cursor::new(&mut dest)).unwrap();
+
+        assert_eq!(dest, RAW0);
+    }
+
+    // Generated from `wow_message_parser/wowm/login/cmd_xfer.wowm` line 31.
+    #[cfg(feature = "tokio")]
+    #[cfg_attr(feature = "tokio", tokio::test)]
+    async fn tokio_cmd_xfer_data0() {
+        let expected = expected0();
+        let t = ServerOpcodeMessage::tokio_read(&mut std::io::Cursor::new(&RAW0)).await.unwrap();
+        let t = match t {
+            ServerOpcodeMessage::CMD_XFER_DATA(t) => t,
+            opcode => panic!("incorrect opcode. Expected CMD_XFER_DATA, got {opcode:#?}"),
+        };
+
+        assert(&t, &expected);
+        assert_eq!(t.size() + HEADER_SIZE, RAW0.len());
+
+        let mut dest = Vec::with_capacity(RAW0.len());
+        expected.tokio_write(&mut std::io::Cursor::new(&mut dest)).await.unwrap();
+
+        assert_eq!(dest, RAW0);
+    }
+
+    // Generated from `wow_message_parser/wowm/login/cmd_xfer.wowm` line 31.
+    #[cfg(feature = "async-std")]
+    #[cfg_attr(feature = "async-std", async_std::test)]
+    async fn astd_cmd_xfer_data0() {
+        let expected = expected0();
+        let t = ServerOpcodeMessage::astd_read(&mut async_std::io::Cursor::new(&RAW0)).await.unwrap();
+        let t = match t {
+            ServerOpcodeMessage::CMD_XFER_DATA(t) => t,
+            opcode => panic!("incorrect opcode. Expected CMD_XFER_DATA, got {opcode:#?}"),
+        };
+
+        assert(&t, &expected);
+        assert_eq!(t.size() + HEADER_SIZE, RAW0.len());
+
+        let mut dest = Vec::with_capacity(RAW0.len());
+        expected.astd_write(&mut async_std::io::Cursor::new(&mut dest)).await.unwrap();
+
+        assert_eq!(dest, RAW0);
+    }
+
+}
+
+#[cfg(test)]
+mod test_version_5 {
+    #![allow(clippy::missing_const_for_fn)]
+    use super::CMD_XFER_DATA;
+    use crate::all::*;
+    use super::*;
+    use super::super::*;
+    use crate::logon::version_5::opcodes::ServerOpcodeMessage;
+
+    const HEADER_SIZE: usize = 1;
+    fn assert(t: &CMD_XFER_DATA, expected: &CMD_XFER_DATA) {
+        assert_eq!(t.data, expected.data);
+    }
+
+    const RAW0: [u8; 67] = [ 0x31, 0x40, 0x00, 0x4D, 0x50, 0x51, 0x1A, 0x2C, 0x00,
+         0x00, 0x00, 0x3C, 0xE0, 0x26, 0x00, 0x01, 0x00, 0x03, 0x00, 0xFC, 0xD9,
+         0x26, 0x00, 0xFC, 0xDD, 0x26, 0x00, 0x40, 0x00, 0x00, 0x00, 0x24, 0x00,
+         0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+         0x00, 0x00, 0x02, 0x78, 0xDA, 0xEC, 0x7D, 0x7B, 0x7C, 0x54, 0xC5, 0xF5,
+         0xF8, 0x6E, 0xF6, 0x86, 0x5C, 0x74, 0x25, 0x0B, 0xAE, 0xB8, ];
+
+    pub(crate) fn expected0() -> CMD_XFER_DATA {
+        CMD_XFER_DATA {
+            data: vec![ 0x4D, 0x50, 0x51, 0x1A, 0x2C, 0x00, 0x00, 0x00, 0x3C, 0xE0,
+                 0x26, 0x00, 0x01, 0x00, 0x03, 0x00, 0xFC, 0xD9, 0x26, 0x00, 0xFC,
+                 0xDD, 0x26, 0x00, 0x40, 0x00, 0x00, 0x00, 0x24, 0x00, 0x00, 0x00,
+                 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+                 0x00, 0x02, 0x78, 0xDA, 0xEC, 0x7D, 0x7B, 0x7C, 0x54, 0xC5, 0xF5,
+                 0xF8, 0x6E, 0xF6, 0x86, 0x5C, 0x74, 0x25, 0x0B, 0xAE, 0xB8, ],
+        }
+
+    }
+
+    // Generated from `wow_message_parser/wowm/login/cmd_xfer.wowm` line 31.
+    #[cfg(feature = "sync")]
+    #[cfg_attr(feature = "sync", test)]
+    fn cmd_xfer_data0() {
+        let expected = expected0();
+        let t = ServerOpcodeMessage::read(&mut std::io::Cursor::new(&RAW0)).unwrap();
+        let t = match t {
+            ServerOpcodeMessage::CMD_XFER_DATA(t) => t,
+            opcode => panic!("incorrect opcode. Expected CMD_XFER_DATA, got {opcode:#?}"),
+        };
+
+        assert(&t, &expected);
+        assert_eq!(t.size() + HEADER_SIZE, RAW0.len());
+
+        let mut dest = Vec::with_capacity(RAW0.len());
+        expected.write(&mut std::io::Cursor::new(&mut dest)).unwrap();
+
+        assert_eq!(dest, RAW0);
+    }
+
+    // Generated from `wow_message_parser/wowm/login/cmd_xfer.wowm` line 31.
+    #[cfg(feature = "tokio")]
+    #[cfg_attr(feature = "tokio", tokio::test)]
+    async fn tokio_cmd_xfer_data0() {
+        let expected = expected0();
+        let t = ServerOpcodeMessage::tokio_read(&mut std::io::Cursor::new(&RAW0)).await.unwrap();
+        let t = match t {
+            ServerOpcodeMessage::CMD_XFER_DATA(t) => t,
+            opcode => panic!("incorrect opcode. Expected CMD_XFER_DATA, got {opcode:#?}"),
+        };
+
+        assert(&t, &expected);
+        assert_eq!(t.size() + HEADER_SIZE, RAW0.len());
+
+        let mut dest = Vec::with_capacity(RAW0.len());
+        expected.tokio_write(&mut std::io::Cursor::new(&mut dest)).await.unwrap();
+
+        assert_eq!(dest, RAW0);
+    }
+
+    // Generated from `wow_message_parser/wowm/login/cmd_xfer.wowm` line 31.
+    #[cfg(feature = "async-std")]
+    #[cfg_attr(feature = "async-std", async_std::test)]
+    async fn astd_cmd_xfer_data0() {
+        let expected = expected0();
+        let t = ServerOpcodeMessage::astd_read(&mut async_std::io::Cursor::new(&RAW0)).await.unwrap();
+        let t = match t {
+            ServerOpcodeMessage::CMD_XFER_DATA(t) => t,
+            opcode => panic!("incorrect opcode. Expected CMD_XFER_DATA, got {opcode:#?}"),
+        };
+
+        assert(&t, &expected);
+        assert_eq!(t.size() + HEADER_SIZE, RAW0.len());
+
+        let mut dest = Vec::with_capacity(RAW0.len());
+        expected.astd_write(&mut async_std::io::Cursor::new(&mut dest)).await.unwrap();
+
+        assert_eq!(dest, RAW0);
+    }
+
+}
+
+#[cfg(test)]
+mod test_version_6 {
+    #![allow(clippy::missing_const_for_fn)]
+    use super::CMD_XFER_DATA;
+    use crate::all::*;
+    use super::*;
+    use super::super::*;
+    use crate::logon::version_6::opcodes::ServerOpcodeMessage;
+
+    const HEADER_SIZE: usize = 1;
+    fn assert(t: &CMD_XFER_DATA, expected: &CMD_XFER_DATA) {
+        assert_eq!(t.data, expected.data);
+    }
+
+    const RAW0: [u8; 67] = [ 0x31, 0x40, 0x00, 0x4D, 0x50, 0x51, 0x1A, 0x2C, 0x00,
+         0x00, 0x00, 0x3C, 0xE0, 0x26, 0x00, 0x01, 0x00, 0x03, 0x00, 0xFC, 0xD9,
+         0x26, 0x00, 0xFC, 0xDD, 0x26, 0x00, 0x40, 0x00, 0x00, 0x00, 0x24, 0x00,
+         0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+         0x00, 0x00, 0x02, 0x78, 0xDA, 0xEC, 0x7D, 0x7B, 0x7C, 0x54, 0xC5, 0xF5,
+         0xF8, 0x6E, 0xF6, 0x86, 0x5C, 0x74, 0x25, 0x0B, 0xAE, 0xB8, ];
+
+    pub(crate) fn expected0() -> CMD_XFER_DATA {
+        CMD_XFER_DATA {
+            data: vec![ 0x4D, 0x50, 0x51, 0x1A, 0x2C, 0x00, 0x00, 0x00, 0x3C, 0xE0,
+                 0x26, 0x00, 0x01, 0x00, 0x03, 0x00, 0xFC, 0xD9, 0x26, 0x00, 0xFC,
+                 0xDD, 0x26, 0x00, 0x40, 0x00, 0x00, 0x00, 0x24, 0x00, 0x00, 0x00,
+                 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+                 0x00, 0x02, 0x78, 0xDA, 0xEC, 0x7D, 0x7B, 0x7C, 0x54, 0xC5, 0xF5,
+                 0xF8, 0x6E, 0xF6, 0x86, 0x5C, 0x74, 0x25, 0x0B, 0xAE, 0xB8, ],
+        }
+
+    }
+
+    // Generated from `wow_message_parser/wowm/login/cmd_xfer.wowm` line 31.
+    #[cfg(feature = "sync")]
+    #[cfg_attr(feature = "sync", test)]
+    fn cmd_xfer_data0() {
+        let expected = expected0();
+        let t = ServerOpcodeMessage::read(&mut std::io::Cursor::new(&RAW0)).unwrap();
+        let t = match t {
+            ServerOpcodeMessage::CMD_XFER_DATA(t) => t,
+            opcode => panic!("incorrect opcode. Expected CMD_XFER_DATA, got {opcode:#?}"),
+        };
+
+        assert(&t, &expected);
+        assert_eq!(t.size() + HEADER_SIZE, RAW0.len());
+
+        let mut dest = Vec::with_capacity(RAW0.len());
+        expected.write(&mut std::io::Cursor::new(&mut dest)).unwrap();
+
+        assert_eq!(dest, RAW0);
+    }
+
+    // Generated from `wow_message_parser/wowm/login/cmd_xfer.wowm` line 31.
+    #[cfg(feature = "tokio")]
+    #[cfg_attr(feature = "tokio", tokio::test)]
+    async fn tokio_cmd_xfer_data0() {
+        let expected = expected0();
+        let t = ServerOpcodeMessage::tokio_read(&mut std::io::Cursor::new(&RAW0)).await.unwrap();
+        let t = match t {
+            ServerOpcodeMessage::CMD_XFER_DATA(t) => t,
+            opcode => panic!("incorrect opcode. Expected CMD_XFER_DATA, got {opcode:#?}"),
+        };
+
+        assert(&t, &expected);
+        assert_eq!(t.size() + HEADER_SIZE, RAW0.len());
+
+        let mut dest = Vec::with_capacity(RAW0.len());
+        expected.tokio_write(&mut std::io::Cursor::new(&mut dest)).await.unwrap();
+
+        assert_eq!(dest, RAW0);
+    }
+
+    // Generated from `wow_message_parser/wowm/login/cmd_xfer.wowm` line 31.
+    #[cfg(feature = "async-std")]
+    #[cfg_attr(feature = "async-std", async_std::test)]
+    async fn astd_cmd_xfer_data0() {
+        let expected = expected0();
+        let t = ServerOpcodeMessage::astd_read(&mut async_std::io::Cursor::new(&RAW0)).await.unwrap();
+        let t = match t {
+            ServerOpcodeMessage::CMD_XFER_DATA(t) => t,
+            opcode => panic!("incorrect opcode. Expected CMD_XFER_DATA, got {opcode:#?}"),
+        };
+
+        assert(&t, &expected);
+        assert_eq!(t.size() + HEADER_SIZE, RAW0.len());
+
+        let mut dest = Vec::with_capacity(RAW0.len());
+        expected.astd_write(&mut async_std::io::Cursor::new(&mut dest)).await.unwrap();
+
+        assert_eq!(dest, RAW0);
+    }
+
+}
+
+#[cfg(test)]
+mod test_version_7 {
+    #![allow(clippy::missing_const_for_fn)]
+    use super::CMD_XFER_DATA;
+    use crate::all::*;
+    use super::*;
+    use super::super::*;
+    use crate::logon::version_7::opcodes::ServerOpcodeMessage;
+
+    const HEADER_SIZE: usize = 1;
+    fn assert(t: &CMD_XFER_DATA, expected: &CMD_XFER_DATA) {
+        assert_eq!(t.data, expected.data);
+    }
+
+    const RAW0: [u8; 67] = [ 0x31, 0x40, 0x00, 0x4D, 0x50, 0x51, 0x1A, 0x2C, 0x00,
+         0x00, 0x00, 0x3C, 0xE0, 0x26, 0x00, 0x01, 0x00, 0x03, 0x00, 0xFC, 0xD9,
+         0x26, 0x00, 0xFC, 0xDD, 0x26, 0x00, 0x40, 0x00, 0x00, 0x00, 0x24, 0x00,
+         0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+         0x00, 0x00, 0x02, 0x78, 0xDA, 0xEC, 0x7D, 0x7B, 0x7C, 0x54, 0xC5, 0xF5,
+         0xF8, 0x6E, 0xF6, 0x86, 0x5C, 0x74, 0x25, 0x0B, 0xAE, 0xB8, ];
+
+    pub(crate) fn expected0() -> CMD_XFER_DATA {
+        CMD_XFER_DATA {
+            data: vec![ 0x4D, 0x50, 0x51, 0x1A, 0x2C, 0x00, 0x00, 0x00, 0x3C, 0xE0,
+                 0x26, 0x00, 0x01, 0x00, 0x03, 0x00, 0xFC, 0xD9, 0x26, 0x00, 0xFC,
+                 0xDD, 0x26, 0x00, 0x40, 0x00, 0x00, 0x00, 0x24, 0x00, 0x00, 0x00,
+                 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+                 0x00, 0x02, 0x78, 0xDA, 0xEC, 0x7D, 0x7B, 0x7C, 0x54, 0xC5, 0xF5,
+                 0xF8, 0x6E, 0xF6, 0x86, 0x5C, 0x74, 0x25, 0x0B, 0xAE, 0xB8, ],
+        }
+
+    }
+
+    // Generated from `wow_message_parser/wowm/login/cmd_xfer.wowm` line 31.
+    #[cfg(feature = "sync")]
+    #[cfg_attr(feature = "sync", test)]
+    fn cmd_xfer_data0() {
+        let expected = expected0();
+        let t = ServerOpcodeMessage::read(&mut std::io::Cursor::new(&RAW0)).unwrap();
+        let t = match t {
+            ServerOpcodeMessage::CMD_XFER_DATA(t) => t,
+            opcode => panic!("incorrect opcode. Expected CMD_XFER_DATA, got {opcode:#?}"),
+        };
+
+        assert(&t, &expected);
+        assert_eq!(t.size() + HEADER_SIZE, RAW0.len());
+
+        let mut dest = Vec::with_capacity(RAW0.len());
+        expected.write(&mut std::io::Cursor::new(&mut dest)).unwrap();
+
+        assert_eq!(dest, RAW0);
+    }
+
+    // Generated from `wow_message_parser/wowm/login/cmd_xfer.wowm` line 31.
+    #[cfg(feature = "tokio")]
+    #[cfg_attr(feature = "tokio", tokio::test)]
+    async fn tokio_cmd_xfer_data0() {
+        let expected = expected0();
+        let t = ServerOpcodeMessage::tokio_read(&mut std::io::Cursor::new(&RAW0)).await.unwrap();
+        let t = match t {
+            ServerOpcodeMessage::CMD_XFER_DATA(t) => t,
+            opcode => panic!("incorrect opcode. Expected CMD_XFER_DATA, got {opcode:#?}"),
+        };
+
+        assert(&t, &expected);
+        assert_eq!(t.size() + HEADER_SIZE, RAW0.len());
+
+        let mut dest = Vec::with_capacity(RAW0.len());
+        expected.tokio_write(&mut std::io::Cursor::new(&mut dest)).await.unwrap();
+
+        assert_eq!(dest, RAW0);
+    }
+
+    // Generated from `wow_message_parser/wowm/login/cmd_xfer.wowm` line 31.
+    #[cfg(feature = "async-std")]
+    #[cfg_attr(feature = "async-std", async_std::test)]
+    async fn astd_cmd_xfer_data0() {
+        let expected = expected0();
+        let t = ServerOpcodeMessage::astd_read(&mut async_std::io::Cursor::new(&RAW0)).await.unwrap();
+        let t = match t {
+            ServerOpcodeMessage::CMD_XFER_DATA(t) => t,
+            opcode => panic!("incorrect opcode. Expected CMD_XFER_DATA, got {opcode:#?}"),
+        };
+
+        assert(&t, &expected);
+        assert_eq!(t.size() + HEADER_SIZE, RAW0.len());
+
+        let mut dest = Vec::with_capacity(RAW0.len());
+        expected.astd_write(&mut async_std::io::Cursor::new(&mut dest)).await.unwrap();
+
+        assert_eq!(dest, RAW0);
+    }
+
+}
+
+#[cfg(test)]
+mod test_version_8 {
+    #![allow(clippy::missing_const_for_fn)]
+    use super::CMD_XFER_DATA;
+    use crate::all::*;
+    use super::*;
+    use super::super::*;
+    use crate::logon::version_8::opcodes::ServerOpcodeMessage;
+
+    const HEADER_SIZE: usize = 1;
+    fn assert(t: &CMD_XFER_DATA, expected: &CMD_XFER_DATA) {
+        assert_eq!(t.data, expected.data);
+    }
+
+    const RAW0: [u8; 67] = [ 0x31, 0x40, 0x00, 0x4D, 0x50, 0x51, 0x1A, 0x2C, 0x00,
+         0x00, 0x00, 0x3C, 0xE0, 0x26, 0x00, 0x01, 0x00, 0x03, 0x00, 0xFC, 0xD9,
+         0x26, 0x00, 0xFC, 0xDD, 0x26, 0x00, 0x40, 0x00, 0x00, 0x00, 0x24, 0x00,
+         0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+         0x00, 0x00, 0x02, 0x78, 0xDA, 0xEC, 0x7D, 0x7B, 0x7C, 0x54, 0xC5, 0xF5,
+         0xF8, 0x6E, 0xF6, 0x86, 0x5C, 0x74, 0x25, 0x0B, 0xAE, 0xB8, ];
+
+    pub(crate) fn expected0() -> CMD_XFER_DATA {
+        CMD_XFER_DATA {
+            data: vec![ 0x4D, 0x50, 0x51, 0x1A, 0x2C, 0x00, 0x00, 0x00, 0x3C, 0xE0,
+                 0x26, 0x00, 0x01, 0x00, 0x03, 0x00, 0xFC, 0xD9, 0x26, 0x00, 0xFC,
+                 0xDD, 0x26, 0x00, 0x40, 0x00, 0x00, 0x00, 0x24, 0x00, 0x00, 0x00,
+                 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+                 0x00, 0x02, 0x78, 0xDA, 0xEC, 0x7D, 0x7B, 0x7C, 0x54, 0xC5, 0xF5,
+                 0xF8, 0x6E, 0xF6, 0x86, 0x5C, 0x74, 0x25, 0x0B, 0xAE, 0xB8, ],
+        }
+
+    }
+
+    // Generated from `wow_message_parser/wowm/login/cmd_xfer.wowm` line 31.
+    #[cfg(feature = "sync")]
+    #[cfg_attr(feature = "sync", test)]
+    fn cmd_xfer_data0() {
+        let expected = expected0();
+        let t = ServerOpcodeMessage::read(&mut std::io::Cursor::new(&RAW0)).unwrap();
+        let t = match t {
+            ServerOpcodeMessage::CMD_XFER_DATA(t) => t,
+            opcode => panic!("incorrect opcode. Expected CMD_XFER_DATA, got {opcode:#?}"),
+        };
+
+        assert(&t, &expected);
+        assert_eq!(t.size() + HEADER_SIZE, RAW0.len());
+
+        let mut dest = Vec::with_capacity(RAW0.len());
+        expected.write(&mut std::io::Cursor::new(&mut dest)).unwrap();
+
+        assert_eq!(dest, RAW0);
+    }
+
+    // Generated from `wow_message_parser/wowm/login/cmd_xfer.wowm` line 31.
+    #[cfg(feature = "tokio")]
+    #[cfg_attr(feature = "tokio", tokio::test)]
+    async fn tokio_cmd_xfer_data0() {
+        let expected = expected0();
+        let t = ServerOpcodeMessage::tokio_read(&mut std::io::Cursor::new(&RAW0)).await.unwrap();
+        let t = match t {
+            ServerOpcodeMessage::CMD_XFER_DATA(t) => t,
+            opcode => panic!("incorrect opcode. Expected CMD_XFER_DATA, got {opcode:#?}"),
+        };
+
+        assert(&t, &expected);
+        assert_eq!(t.size() + HEADER_SIZE, RAW0.len());
+
+        let mut dest = Vec::with_capacity(RAW0.len());
+        expected.tokio_write(&mut std::io::Cursor::new(&mut dest)).await.unwrap();
+
+        assert_eq!(dest, RAW0);
+    }
+
+    // Generated from `wow_message_parser/wowm/login/cmd_xfer.wowm` line 31.
+    #[cfg(feature = "async-std")]
+    #[cfg_attr(feature = "async-std", async_std::test)]
+    async fn astd_cmd_xfer_data0() {
+        let expected = expected0();
+        let t = ServerOpcodeMessage::astd_read(&mut async_std::io::Cursor::new(&RAW0)).await.unwrap();
+        let t = match t {
+            ServerOpcodeMessage::CMD_XFER_DATA(t) => t,
+            opcode => panic!("incorrect opcode. Expected CMD_XFER_DATA, got {opcode:#?}"),
+        };
+
+        assert(&t, &expected);
+        assert_eq!(t.size() + HEADER_SIZE, RAW0.len());
+
+        let mut dest = Vec::with_capacity(RAW0.len());
+        expected.astd_write(&mut async_std::io::Cursor::new(&mut dest)).await.unwrap();
+
+        assert_eq!(dest, RAW0);
+    }
+
 }
 
