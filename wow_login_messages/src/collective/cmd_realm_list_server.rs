@@ -13,12 +13,15 @@ type V5Main = crate::version_5::CMD_REALM_LIST_Server;
 type V5MainRealm = crate::version_5::Realm;
 type V5MainRealmFlag = crate::version_5::RealmFlag;
 
+type V6Main = crate::version_6::CMD_REALM_LIST_Server;
+type V6MainRealm = V5MainRealm;
+
 impl CollectiveMessage for Main {
     type Version2 = V2Main;
     type Version3 = Self::Version2;
     type Version5 = V5Main;
-    type Version6 = Self::Version5;
-    type Version7 = Self::Version5;
+    type Version6 = V6Main;
+    type Version7 = Self::Version6;
     type Version8 = Self;
 
     fn from_version_2(v: Self::Version2) -> Self {
@@ -62,19 +65,27 @@ impl CollectiveMessage for Main {
     }
 
     fn from_version_6(v: Self::Version6) -> Self {
-        Self::from_version_5(v)
+        Self {
+            realms: v
+                .realms
+                .into_iter()
+                .map(MainRealm::from_version_6)
+                .collect(),
+        }
     }
 
     fn to_version_6(&self) -> Result<Self::Version6, CollectiveError> {
-        self.to_version_5()
+        Ok(Self::Version6 {
+            realms: self.realms.iter().map(|a| a.to_version_6()).collect(),
+        })
     }
 
     fn from_version_7(v: Self::Version7) -> Self {
-        Self::from_version_5(v)
+        Self::from_version_6(v)
     }
 
     fn to_version_7(&self) -> Result<Self::Version7, CollectiveError> {
-        self.to_version_5()
+        self.to_version_6()
     }
 }
 
@@ -120,6 +131,10 @@ impl MainRealm {
         }
     }
 
+    fn from_version_6(v: V6MainRealm) -> Self {
+        Self::from_version_5(v)
+    }
+
     fn to_version_5(&self) -> V5MainRealm {
         V5MainRealm {
             realm_type: self.realm_type,
@@ -132,6 +147,10 @@ impl MainRealm {
             category: self.category,
             realm_id: self.realm_id,
         }
+    }
+
+    fn to_version_6(&self) -> V6MainRealm {
+        self.to_version_5()
     }
 }
 

@@ -5,12 +5,12 @@ use std::io::{Read, Write};
 use crate::logon::version_5::Realm;
 
 #[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/login/cmd_realm/server.wowm:81`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/login/cmd_realm/server.wowm#L81):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/login/cmd_realm/server.wowm:151`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/login/cmd_realm/server.wowm#L151):
 /// ```text
 /// slogin CMD_REALM_LIST_Server = 0x10 {
 ///     u16 size = self.size;
 ///     u32 header_padding = 0;
-///     u8 number_of_realms;
+///     u16 number_of_realms;
 ///     Realm[number_of_realms] realms;
 ///     u16 footer_padding = 0;
 /// }
@@ -55,8 +55,8 @@ impl CMD_REALM_LIST_Server {
         // header_padding: u32
         w.write_all(&Self::HEADER_PADDING_VALUE.to_le_bytes())?;
 
-        // number_of_realms: u8
-        w.write_all(&(self.realms.len() as u8).to_le_bytes())?;
+        // number_of_realms: u16
+        w.write_all(&(self.realms.len() as u16).to_le_bytes())?;
 
         // realms: Realm[number_of_realms]
         for i in self.realms.iter() {
@@ -83,8 +83,8 @@ impl CMD_REALM_LIST_Server {
         let _header_padding = crate::util::read_u32_le(&mut r)?;
         // header_padding is expected to always be 0 (0)
 
-        // number_of_realms: u8
-        let number_of_realms = crate::util::read_u8_le(&mut r)?;
+        // number_of_realms: u16
+        let number_of_realms = crate::util::read_u16_le(&mut r)?;
 
         // realms: Realm[number_of_realms]
         let realms = {
@@ -114,8 +114,8 @@ impl CMD_REALM_LIST_Server {
         let _header_padding = crate::util::tokio_read_u32_le(&mut r).await?;
         // header_padding is expected to always be 0 (0)
 
-        // number_of_realms: u8
-        let number_of_realms = crate::util::tokio_read_u8_le(&mut r).await?;
+        // number_of_realms: u16
+        let number_of_realms = crate::util::tokio_read_u16_le(&mut r).await?;
 
         // realms: Realm[number_of_realms]
         let realms = {
@@ -145,8 +145,8 @@ impl CMD_REALM_LIST_Server {
         let _header_padding = crate::util::astd_read_u32_le(&mut r).await?;
         // header_padding is expected to always be 0 (0)
 
-        // number_of_realms: u8
-        let number_of_realms = crate::util::astd_read_u8_le(&mut r).await?;
+        // number_of_realms: u16
+        let number_of_realms = crate::util::astd_read_u16_le(&mut r).await?;
 
         // realms: Realm[number_of_realms]
         let realms = {
@@ -254,34 +254,34 @@ impl CMD_REALM_LIST_Server {
     pub(crate) fn size(&self) -> usize {
         2 // size: u16
         + 4 // header_padding: u32
-        + 1 // number_of_realms: u8
+        + 2 // number_of_realms: u16
         + self.realms.iter().fold(0, |acc, x| acc + x.size()) // realms: Realm[number_of_realms]
         + 2 // footer_padding: u16
     }
 }
 
 #[cfg(test)]
-mod test {
+mod test_version_6 {
     #![allow(clippy::missing_const_for_fn)]
     use super::CMD_REALM_LIST_Server;
     use crate::all::*;
     use super::*;
     use super::super::*;
-    use crate::logon::version_5::opcodes::ServerOpcodeMessage;
+    use crate::logon::version_6::opcodes::ServerOpcodeMessage;
 
     const HEADER_SIZE: usize = 1;
     fn assert(t: &CMD_REALM_LIST_Server, expected: &CMD_REALM_LIST_Server) {
         assert_eq!(t.realms, expected.realms);
     }
 
-    const RAW0: [u8; 83] = [ 0x10, 0x50, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0x00,
-         0x00, 0x00, 0x54, 0x65, 0x73, 0x74, 0x20, 0x52, 0x65, 0x61, 0x6C, 0x6D,
-         0x32, 0x00, 0x6C, 0x6F, 0x63, 0x61, 0x6C, 0x68, 0x6F, 0x73, 0x74, 0x3A,
-         0x38, 0x30, 0x38, 0x35, 0x00, 0x00, 0x00, 0x48, 0x43, 0x03, 0x01, 0x01,
+    const RAW0: [u8; 84] = [ 0x10, 0x51, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0x00,
          0x00, 0x00, 0x00, 0x54, 0x65, 0x73, 0x74, 0x20, 0x52, 0x65, 0x61, 0x6C,
-         0x6D, 0x00, 0x6C, 0x6F, 0x63, 0x61, 0x6C, 0x68, 0x6F, 0x73, 0x74, 0x3A,
-         0x38, 0x30, 0x38, 0x35, 0x00, 0x00, 0x00, 0x48, 0x43, 0x03, 0x02, 0x00,
-         0x00, 0x00, ];
+         0x6D, 0x32, 0x00, 0x6C, 0x6F, 0x63, 0x61, 0x6C, 0x68, 0x6F, 0x73, 0x74,
+         0x3A, 0x38, 0x30, 0x38, 0x35, 0x00, 0x00, 0x00, 0x48, 0x43, 0x03, 0x01,
+         0x01, 0x00, 0x00, 0x00, 0x54, 0x65, 0x73, 0x74, 0x20, 0x52, 0x65, 0x61,
+         0x6C, 0x6D, 0x00, 0x6C, 0x6F, 0x63, 0x61, 0x6C, 0x68, 0x6F, 0x73, 0x74,
+         0x3A, 0x38, 0x30, 0x38, 0x35, 0x00, 0x00, 0x00, 0x48, 0x43, 0x03, 0x02,
+         0x00, 0x00, 0x00, ];
 
     pub(crate) fn expected0() -> CMD_REALM_LIST_Server {
         CMD_REALM_LIST_Server {
@@ -315,7 +315,7 @@ mod test {
 
     }
 
-    // Generated from `wow_message_parser/wowm/login/cmd_realm/server.wowm` line 91.
+    // Generated from `wow_message_parser/wowm/login/cmd_realm/server.wowm` line 161.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn cmd_realm_list_server0() {
@@ -335,7 +335,7 @@ mod test {
         assert_eq!(dest, RAW0);
     }
 
-    // Generated from `wow_message_parser/wowm/login/cmd_realm/server.wowm` line 91.
+    // Generated from `wow_message_parser/wowm/login/cmd_realm/server.wowm` line 161.
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_cmd_realm_list_server0() {
@@ -355,7 +355,124 @@ mod test {
         assert_eq!(dest, RAW0);
     }
 
-    // Generated from `wow_message_parser/wowm/login/cmd_realm/server.wowm` line 91.
+    // Generated from `wow_message_parser/wowm/login/cmd_realm/server.wowm` line 161.
+    #[cfg(feature = "async-std")]
+    #[cfg_attr(feature = "async-std", async_std::test)]
+    async fn astd_cmd_realm_list_server0() {
+        let expected = expected0();
+        let t = ServerOpcodeMessage::astd_read(&mut async_std::io::Cursor::new(&RAW0)).await.unwrap();
+        let t = match t {
+            ServerOpcodeMessage::CMD_REALM_LIST(t) => t,
+            opcode => panic!("incorrect opcode. Expected CMD_REALM_LIST, got {opcode:#?}"),
+        };
+
+        assert(&t, &expected);
+        assert_eq!(t.size() + HEADER_SIZE, RAW0.len());
+
+        let mut dest = Vec::with_capacity(RAW0.len());
+        expected.astd_write(&mut async_std::io::Cursor::new(&mut dest)).await.unwrap();
+
+        assert_eq!(dest, RAW0);
+    }
+
+}
+
+#[cfg(test)]
+mod test_version_7 {
+    #![allow(clippy::missing_const_for_fn)]
+    use super::CMD_REALM_LIST_Server;
+    use crate::all::*;
+    use super::*;
+    use super::super::*;
+    use crate::logon::version_7::opcodes::ServerOpcodeMessage;
+
+    const HEADER_SIZE: usize = 1;
+    fn assert(t: &CMD_REALM_LIST_Server, expected: &CMD_REALM_LIST_Server) {
+        assert_eq!(t.realms, expected.realms);
+    }
+
+    const RAW0: [u8; 84] = [ 0x10, 0x51, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0x00,
+         0x00, 0x00, 0x00, 0x54, 0x65, 0x73, 0x74, 0x20, 0x52, 0x65, 0x61, 0x6C,
+         0x6D, 0x32, 0x00, 0x6C, 0x6F, 0x63, 0x61, 0x6C, 0x68, 0x6F, 0x73, 0x74,
+         0x3A, 0x38, 0x30, 0x38, 0x35, 0x00, 0x00, 0x00, 0x48, 0x43, 0x03, 0x01,
+         0x01, 0x00, 0x00, 0x00, 0x54, 0x65, 0x73, 0x74, 0x20, 0x52, 0x65, 0x61,
+         0x6C, 0x6D, 0x00, 0x6C, 0x6F, 0x63, 0x61, 0x6C, 0x68, 0x6F, 0x73, 0x74,
+         0x3A, 0x38, 0x30, 0x38, 0x35, 0x00, 0x00, 0x00, 0x48, 0x43, 0x03, 0x02,
+         0x00, 0x00, 0x00, ];
+
+    pub(crate) fn expected0() -> CMD_REALM_LIST_Server {
+        CMD_REALM_LIST_Server {
+            realms: vec![
+                Realm {
+                    realm_type: RealmType::PlayerVsEnvironment,
+                    locked: false, 
+                    flag: RealmFlag::empty()
+                        ,
+                    name: String::from("Test Realm2"),
+                    address: String::from("localhost:8085"),
+                    population: Population::GreenRecommended,
+                    number_of_characters_on_realm: 0x3,
+                    category: RealmCategory::One,
+                    realm_id: 0x1,
+                },
+                Realm {
+                    realm_type: RealmType::PlayerVsEnvironment,
+                    locked: false, 
+                    flag: RealmFlag::empty()
+                        ,
+                    name: String::from("Test Realm"),
+                    address: String::from("localhost:8085"),
+                    population: Population::GreenRecommended,
+                    number_of_characters_on_realm: 0x3,
+                    category: RealmCategory::Two,
+                    realm_id: 0x0,
+                },
+            ],
+        }
+
+    }
+
+    // Generated from `wow_message_parser/wowm/login/cmd_realm/server.wowm` line 161.
+    #[cfg(feature = "sync")]
+    #[cfg_attr(feature = "sync", test)]
+    fn cmd_realm_list_server0() {
+        let expected = expected0();
+        let t = ServerOpcodeMessage::read(&mut std::io::Cursor::new(&RAW0)).unwrap();
+        let t = match t {
+            ServerOpcodeMessage::CMD_REALM_LIST(t) => t,
+            opcode => panic!("incorrect opcode. Expected CMD_REALM_LIST, got {opcode:#?}"),
+        };
+
+        assert(&t, &expected);
+        assert_eq!(t.size() + HEADER_SIZE, RAW0.len());
+
+        let mut dest = Vec::with_capacity(RAW0.len());
+        expected.write(&mut std::io::Cursor::new(&mut dest)).unwrap();
+
+        assert_eq!(dest, RAW0);
+    }
+
+    // Generated from `wow_message_parser/wowm/login/cmd_realm/server.wowm` line 161.
+    #[cfg(feature = "tokio")]
+    #[cfg_attr(feature = "tokio", tokio::test)]
+    async fn tokio_cmd_realm_list_server0() {
+        let expected = expected0();
+        let t = ServerOpcodeMessage::tokio_read(&mut std::io::Cursor::new(&RAW0)).await.unwrap();
+        let t = match t {
+            ServerOpcodeMessage::CMD_REALM_LIST(t) => t,
+            opcode => panic!("incorrect opcode. Expected CMD_REALM_LIST, got {opcode:#?}"),
+        };
+
+        assert(&t, &expected);
+        assert_eq!(t.size() + HEADER_SIZE, RAW0.len());
+
+        let mut dest = Vec::with_capacity(RAW0.len());
+        expected.tokio_write(&mut std::io::Cursor::new(&mut dest)).await.unwrap();
+
+        assert_eq!(dest, RAW0);
+    }
+
+    // Generated from `wow_message_parser/wowm/login/cmd_realm/server.wowm` line 161.
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_cmd_realm_list_server0() {
