@@ -6,6 +6,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 <!-- next-header -->
+
 ## [Unreleased] - ReleaseDate
 
 ### Added
@@ -16,6 +17,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 * BREAKING: `Server/ClientOpcodeMessage` now boxes any types larger than 8 bytes in order to avoid breaking the stack.
+* BREAKING: Changed `BattlegroundBracket::Fourties` to `BattlegroundBracket::Forties`.
 
 ### Removed
 
@@ -56,7 +58,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * BREAKING: `DateTime::try_from` now returns `DateTimeError` instead of `EnumError`.
 * BREAKING: `DateTime::try_from` will now reject more invalid dates and times.
 * BREAKING: Added `DateTime` to `ParseErrorKind`.
-* BREAKING: `CacheMask` type is no longer an enum but a struct that also contains the `data` member from `SMSG_ACCOUNT_DATA_TIMES`.
+* BREAKING: `CacheMask` type is no longer an enum but a struct that also contains the `data` member
+  from `SMSG_ACCOUNT_DATA_TIMES`.
 * BREAKING: `Expansion` member `WrathOfTheLichLing` renamed to `WrathOfTheLichKing`.
 
 ### Removed
@@ -75,6 +78,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * First release.
 
 <!-- next-url -->
+
 [Unreleased]: https://github.com/gtker/wow_messages/compare/wow_world_messages-v0.2.0...HEAD
 
 [0.2.0]: https://github.com/gtker/wow_messages/compare/wow_world_messages-v0.1.1...wow_world_messages-v0.2.0

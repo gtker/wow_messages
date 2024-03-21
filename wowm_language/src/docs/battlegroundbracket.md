@@ -11,7 +11,7 @@ enum BattlegroundBracket : u8 {
     TENS = 0;
     TWENTIES = 1;
     THIRTIES = 2;
-    FOURTIES = 3;
+    FORTIES = 3;
     FIFTIES = 4;
     SIXTY = 5;
 }
@@ -24,7 +24,7 @@ The basic type is `u8`, a 1 byte (8 bit) integer.
 | `TENS` | 0 (0x00) | 10-19 |
 | `TWENTIES` | 1 (0x01) | 20-29 |
 | `THIRTIES` | 2 (0x02) | 30-39 |
-| `FOURTIES` | 3 (0x03) | 40-49 |
+| `FORTIES` | 3 (0x03) | 40-49 |
 | `FIFTIES` | 4 (0x04) | 50-59 |
 | `SIXTY` | 5 (0x05) | 60 |
 

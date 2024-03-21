@@ -6,7 +6,7 @@ enum BattlegroundBracket : u8 {
     /// 30-39
     THIRTIES = 2;
     /// 40-49
-    FOURTIES = 3;
+    FORTIES = 3;
     /// 50-59
     FIFTIES = 4;
     /// 60
