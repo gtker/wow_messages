@@ -3,7 +3,7 @@
 enum BuyResult : u8 {
     CANT_FIND_ITEM = 0;
     ITEM_ALREADY_SOLD = 1;
-    NOT_ENOUGHT_MONEY = 2;
+    NOT_ENOUGH_MONEY = 2;
     SELLER_DONT_LIKE_YOU = 4;
     DISTANCE_TOO_FAR = 5;
     ITEM_SOLD_OUT = 7;

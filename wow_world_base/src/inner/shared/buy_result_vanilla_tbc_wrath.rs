@@ -3,7 +3,7 @@
 /// enum BuyResult : u8 {
 ///     CANT_FIND_ITEM = 0;
 ///     ITEM_ALREADY_SOLD = 1;
-///     NOT_ENOUGHT_MONEY = 2;
+///     NOT_ENOUGH_MONEY = 2;
 ///     SELLER_DONT_LIKE_YOU = 4;
 ///     DISTANCE_TOO_FAR = 5;
 ///     ITEM_SOLD_OUT = 7;
@@ -17,7 +17,7 @@
 pub enum BuyResult {
     CantFindItem,
     ItemAlreadySold,
-    NotEnoughtMoney,
+    NotEnoughMoney,
     SellerDontLikeYou,
     DistanceTooFar,
     ItemSoldOut,
@@ -31,7 +31,7 @@ impl BuyResult {
         match self {
             Self::CantFindItem => 0x0,
             Self::ItemAlreadySold => 0x1,
-            Self::NotEnoughtMoney => 0x2,
+            Self::NotEnoughMoney => 0x2,
             Self::SellerDontLikeYou => 0x4,
             Self::DistanceTooFar => 0x5,
             Self::ItemSoldOut => 0x7,
@@ -45,7 +45,7 @@ impl BuyResult {
         [
             Self::CantFindItem,
             Self::ItemAlreadySold,
-            Self::NotEnoughtMoney,
+            Self::NotEnoughMoney,
             Self::SellerDontLikeYou,
             Self::DistanceTooFar,
             Self::ItemSoldOut,
@@ -59,7 +59,7 @@ impl BuyResult {
         match value {
             0 => Ok(Self::CantFindItem),
             1 => Ok(Self::ItemAlreadySold),
-            2 => Ok(Self::NotEnoughtMoney),
+            2 => Ok(Self::NotEnoughMoney),
             4 => Ok(Self::SellerDontLikeYou),
             5 => Ok(Self::DistanceTooFar),
             7 => Ok(Self::ItemSoldOut),
@@ -77,7 +77,7 @@ impl BuyResult {
         match self {
             Self::CantFindItem => "CANT_FIND_ITEM",
             Self::ItemAlreadySold => "ITEM_ALREADY_SOLD",
-            Self::NotEnoughtMoney => "NOT_ENOUGHT_MONEY",
+            Self::NotEnoughMoney => "NOT_ENOUGH_MONEY",
             Self::SellerDontLikeYou => "SELLER_DONT_LIKE_YOU",
             Self::DistanceTooFar => "DISTANCE_TOO_FAR",
             Self::ItemSoldOut => "ITEM_SOLD_OUT",
@@ -102,7 +102,7 @@ impl std::fmt::Display for BuyResult {
         match self {
             Self::CantFindItem => f.write_str("CantFindItem"),
             Self::ItemAlreadySold => f.write_str("ItemAlreadySold"),
-            Self::NotEnoughtMoney => f.write_str("NotEnoughtMoney"),
+            Self::NotEnoughMoney => f.write_str("NotEnoughMoney"),
             Self::SellerDontLikeYou => f.write_str("SellerDontLikeYou"),
             Self::DistanceTooFar => f.write_str("DistanceTooFar"),
             Self::ItemSoldOut => f.write_str("ItemSoldOut"),
