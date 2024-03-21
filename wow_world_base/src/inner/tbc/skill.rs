@@ -42,7 +42,7 @@
 ///     RIDING_WOLF = 149;
 ///     RIDING_TIGER = 150;
 ///     RIDING_RAM = 152;
-///     SWIMING = 155;
+///     SWIMMING = 155;
 ///     TWO_HANDED_MACES = 160;
 ///     UNARMED = 162;
 ///     MARKSMANSHIP = 163;
@@ -183,7 +183,7 @@ pub enum Skill {
     RidingWolf,
     RidingTiger,
     RidingRam,
-    Swiming,
+    Swimming,
     TwoHandedMaces,
     Unarmed,
     Marksmanship,
@@ -324,7 +324,7 @@ impl Skill {
             Self::RidingWolf => 0x95,
             Self::RidingTiger => 0x96,
             Self::RidingRam => 0x98,
-            Self::Swiming => 0x9b,
+            Self::Swimming => 0x9b,
             Self::TwoHandedMaces => 0xa0,
             Self::Unarmed => 0xa2,
             Self::Marksmanship => 0xa3,
@@ -465,7 +465,7 @@ impl Skill {
             Self::RidingWolf,
             Self::RidingTiger,
             Self::RidingRam,
-            Self::Swiming,
+            Self::Swimming,
             Self::TwoHandedMaces,
             Self::Unarmed,
             Self::Marksmanship,
@@ -606,7 +606,7 @@ impl Skill {
             149 => Ok(Self::RidingWolf),
             150 => Ok(Self::RidingTiger),
             152 => Ok(Self::RidingRam),
-            155 => Ok(Self::Swiming),
+            155 => Ok(Self::Swimming),
             160 => Ok(Self::TwoHandedMaces),
             162 => Ok(Self::Unarmed),
             163 => Ok(Self::Marksmanship),
@@ -751,7 +751,7 @@ impl Skill {
             Self::RidingWolf => "RIDING_WOLF",
             Self::RidingTiger => "RIDING_TIGER",
             Self::RidingRam => "RIDING_RAM",
-            Self::Swiming => "SWIMING",
+            Self::Swimming => "SWIMMING",
             Self::TwoHandedMaces => "TWO_HANDED_MACES",
             Self::Unarmed => "UNARMED",
             Self::Marksmanship => "MARKSMANSHIP",
@@ -903,7 +903,7 @@ impl std::fmt::Display for Skill {
             Self::RidingWolf => f.write_str("RidingWolf"),
             Self::RidingTiger => f.write_str("RidingTiger"),
             Self::RidingRam => f.write_str("RidingRam"),
-            Self::Swiming => f.write_str("Swiming"),
+            Self::Swimming => f.write_str("Swimming"),
             Self::TwoHandedMaces => f.write_str("TwoHandedMaces"),
             Self::Unarmed => f.write_str("Unarmed"),
             Self::Marksmanship => f.write_str("Marksmanship"),

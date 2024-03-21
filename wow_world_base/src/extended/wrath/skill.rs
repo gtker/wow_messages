@@ -143,7 +143,7 @@ impl Skill {
             | Skill::RidingWolf
             | Skill::RidingTiger
             | Skill::RidingRam
-            | Skill::Swiming
+            | Skill::Swimming
             | Skill::Cooking
             | Skill::RacialUnded
             | Skill::Fishing
