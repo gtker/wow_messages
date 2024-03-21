@@ -135,6 +135,10 @@ fn as_type(s: &mut Writer, e: &Definer, visibility_override: bool) {
 }
 
 fn testcase_string(s: &mut Writer, e: &Definer) {
+    if e.tags().has_login_version() {
+        return;
+    }
+
     let name = e.name();
     s.wln(CFG_TESTCASE);
     s.bodyn(format!("impl {name}"), |s| {

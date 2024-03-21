@@ -32,6 +32,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * BREAKING: `Locale`, `Os`, and `Platform` no longer have an `Other` enumerator.
 * BREAKING: Opcode types no longer implement `Eq`.
 * BREAKING: `Population::Other` changed from `u32` to `f32`.
+* BREAKING: Removed `print-testcase` feature and all associated functionality. All known versions have been identified
+  and tests have been added.
 
 ## [0.3.0] - 2023-05-20
 

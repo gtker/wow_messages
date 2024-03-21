@@ -11,41 +11,6 @@ pub struct SecurityFlag {
     inner: u8,
 }
 
-#[cfg(feature = "print-testcase")]
-impl SecurityFlag {
-    #[allow(clippy::missing_const_for_fn)]
-    pub fn as_test_case_value(&self) -> String {
-        let mut s = String::new();
-        let mut first = true;
-        if self.is_empty() {
-            use std::fmt::Write;
-            if !first {
-                write!(s, " | ").unwrap();
-            }
-            write!(s, "NONE").unwrap();
-            first = false;
-        }
-        if self.is_pin() {
-            use std::fmt::Write;
-            if !first {
-                write!(s, " | ").unwrap();
-            }
-            write!(s, "PIN").unwrap();
-            first = false;
-        }
-        if self.is_matrix_card() {
-            use std::fmt::Write;
-            if !first {
-                write!(s, " | ").unwrap();
-            }
-            write!(s, "MATRIX_CARD").unwrap();
-            first = false;
-        }
-        s
-    }
-
-}
-
 impl SecurityFlag {
     pub const fn new(inner: u8) -> Self {
         Self { inner }

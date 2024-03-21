@@ -507,8 +507,6 @@ pub(crate) fn impl_read_and_writable_login(
     s.wln(format!("const OPCODE: u8 = {opcode:#04x};"));
     s.newline();
 
-    print_to_testcase(s, e, e.should_print_test_case_string(o));
-
     for it in ImplType::types() {
         print_read_decl(s, it, false);
         if it.is_async() {

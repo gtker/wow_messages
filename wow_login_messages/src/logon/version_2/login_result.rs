@@ -105,31 +105,6 @@ impl LoginResult {
     }
 }
 
-#[cfg(feature = "print-testcase")]
-impl LoginResult {
-    pub const fn as_test_case_value(&self) -> &'static str {
-        match self {
-            Self::Success => "SUCCESS",
-            Self::FailUnknown0 => "FAIL_UNKNOWN0",
-            Self::FailUnknown1 => "FAIL_UNKNOWN1",
-            Self::FailBanned => "FAIL_BANNED",
-            Self::FailUnknownAccount => "FAIL_UNKNOWN_ACCOUNT",
-            Self::FailIncorrectPassword => "FAIL_INCORRECT_PASSWORD",
-            Self::FailAlreadyOnline => "FAIL_ALREADY_ONLINE",
-            Self::FailNoTime => "FAIL_NO_TIME",
-            Self::FailDbBusy => "FAIL_DB_BUSY",
-            Self::FailVersionInvalid => "FAIL_VERSION_INVALID",
-            Self::LoginDownloadFile => "LOGIN_DOWNLOAD_FILE",
-            Self::FailInvalidServer => "FAIL_INVALID_SERVER",
-            Self::FailSuspended => "FAIL_SUSPENDED",
-            Self::FailNoAccess => "FAIL_NO_ACCESS",
-            Self::SuccessSurvey => "SUCCESS_SURVEY",
-            Self::FailParentalcontrol => "FAIL_PARENTALCONTROL",
-        }
-    }
-
-}
-
 const NAME: &str = "LoginResult";
 
 impl Default for LoginResult {

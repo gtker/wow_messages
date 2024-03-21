@@ -50,20 +50,6 @@ impl RealmCategory {
     }
 }
 
-#[cfg(feature = "print-testcase")]
-impl RealmCategory {
-    pub const fn as_test_case_value(&self) -> &'static str {
-        match self {
-            Self::Default => "DEFAULT",
-            Self::One => "ONE",
-            Self::Two => "TWO",
-            Self::Three => "THREE",
-            Self::Five => "FIVE",
-        }
-    }
-
-}
-
 const NAME: &str = "RealmCategory";
 
 impl Default for RealmCategory {

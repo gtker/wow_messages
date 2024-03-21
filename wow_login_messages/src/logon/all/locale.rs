@@ -95,29 +95,6 @@ impl Locale {
     }
 }
 
-#[cfg(feature = "print-testcase")]
-impl Locale {
-    pub const fn as_test_case_value(&self) -> &'static str {
-        match self {
-            Self::EnGb => "EN_GB",
-            Self::EnUs => "EN_US",
-            Self::EsMx => "ES_MX",
-            Self::PtBr => "PT_BR",
-            Self::FrFr => "FR_FR",
-            Self::DeDe => "DE_DE",
-            Self::EsEs => "ES_ES",
-            Self::PtPt => "PT_PT",
-            Self::ItIt => "IT_IT",
-            Self::RuRu => "RU_RU",
-            Self::KoKr => "KO_KR",
-            Self::ZhTw => "ZH_TW",
-            Self::EnTw => "EN_TW",
-            Self::EnCn => "EN_CN",
-        }
-    }
-
-}
-
 const NAME: &str = "Locale";
 
 impl Default for Locale {

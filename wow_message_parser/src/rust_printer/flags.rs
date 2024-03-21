@@ -29,30 +29,32 @@ fn declaration(s: &mut Writer, e: &Definer, o: &Objects) {
 }
 
 fn common_impls(s: &mut Writer, e: &Definer, o: &Objects) {
-    s.wln(CFG_TESTCASE);
-    s.bodyn(format!("impl {name}", name = e.name()), |s| {
-        s.wln("#[allow(clippy::missing_const_for_fn)]");
-        s.funcn_pub("as_test_case_value(&self)", "String", |s| {
-            s.wln("let mut s = String::new();");
-            s.wln("let mut first = true;");
+    if !e.tags().has_login_version() {
+        s.wln(CFG_TESTCASE);
+        s.bodyn(format!("impl {name}", name = e.name()), |s| {
+            s.wln("#[allow(clippy::missing_const_for_fn)]");
+            s.funcn_pub("as_test_case_value(&self)", "String", |s| {
+                s.wln("let mut s = String::new();");
+                s.wln("let mut first = true;");
 
-            for field in e.fields() {
-                let conditional = if field.value().int() != 0 {
-                    format!("if self.is_{}()", field.function_name())
-                } else {
-                    "if self.is_empty()".to_string()
-                };
-                s.body(conditional, |s| {
-                    s.wln("use std::fmt::Write;");
-                    s.body("if !first", |s| s.wln("write!(s, \" | \").unwrap();"));
-                    s.wln(format!("write!(s, \"{}\").unwrap();", field.name()));
-                    s.wln("first = false;");
-                });
-            }
+                for field in e.fields() {
+                    let conditional = if field.value().int() != 0 {
+                        format!("if self.is_{}()", field.function_name())
+                    } else {
+                        "if self.is_empty()".to_string()
+                    };
+                    s.body(conditional, |s| {
+                        s.wln("use std::fmt::Write;");
+                        s.body("if !first", |s| s.wln("write!(s, \" | \").unwrap();"));
+                        s.wln(format!("write!(s, \"{}\").unwrap();", field.name()));
+                        s.wln("first = false;");
+                    });
+                }
 
-            s.wln("s");
+                s.wln("s");
+            });
         });
-    });
+    }
 
     s.bodyn(format!("impl {name}", name = e.name()), |s| {
         s.funcn_pub_const(

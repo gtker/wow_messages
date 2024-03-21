@@ -93,22 +93,3 @@ pub fn read_u64_le<R: Read>(r: &mut R) -> Result<u64, std::io::Error> {
     r.read_exact(&mut v)?;
     Ok(u64::from_le_bytes(v))
 }
-
-#[cfg(feature = "print-testcase")]
-pub(crate) fn write_bytes(
-    s: &mut String,
-    bytes: &mut impl Iterator<Item = u8>,
-    size: usize,
-    name: &str,
-    prefix: &str,
-) {
-    use std::fmt::Write;
-    let mut bytes = bytes.take(size);
-
-    write!(s, "{prefix}{:#04X}, ", bytes.next().unwrap()).unwrap();
-
-    for b in bytes {
-        write!(s, "{b:#04X}, ").unwrap();
-    }
-    writeln!(s, "/* {name} */").unwrap();
-}
