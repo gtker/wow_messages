@@ -667,7 +667,7 @@ pub(crate) fn print_int_declarations(w: &WiresharkObject) -> Writer {
     let mut s = Writer::new();
 
     for m in w.members() {
-        s.wln(format!("static int {} = -1;", m.name()));
+        s.wln(format!("static int {};", m.name()));
     }
 
     s
