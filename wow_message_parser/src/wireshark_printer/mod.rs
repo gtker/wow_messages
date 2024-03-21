@@ -120,6 +120,8 @@ fn enum_strings(name: &str) -> String {
 
 fn pretty_name(name: &str) -> String {
     name.to_title_case()
+        .replace("Doesnt", "Doesn't")
+        .replace("Didnt", "Didn't")
 }
 
 fn name_to_hf(name: &str, ty: &Type) -> String {
