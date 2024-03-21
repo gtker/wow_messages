@@ -15,6 +15,10 @@ pub(crate) fn get_wireshark_object(o: &Objects) -> WiresharkObject {
     ));
 
     for e in o.wireshark_containers() {
+        if e.tags().used_in_update_mask() {
+            continue;
+        }
+
         for d in e.all_definitions() {
             let name = wireshark_printer::name_to_hf(d.name(), d.ty());
 

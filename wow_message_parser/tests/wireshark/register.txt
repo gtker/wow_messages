@@ -1144,12 +1144,6 @@
                 NULL, HFILL
             }
         },
-        { &hf_woww_creator,
-            { "Creator", "woww.creator",
-                FT_UINT64, BASE_HEX_DEC, NULL, 0,
-                NULL, HFILL
-            }
-        },
         { &hf_woww_creature,
             { "Creature", "woww.creature",
                 FT_UINT64, BASE_HEX_DEC, NULL, 0,
@@ -1422,12 +1416,6 @@
         },
         { &hf_woww_enchantment,
             { "Enchantment", "woww.enchantment",
-                FT_UINT32, BASE_HEX_DEC, NULL, 0,
-                NULL, HFILL
-            }
-        },
-        { &hf_woww_enchants,
-            { "Enchants", "woww.enchants",
                 FT_UINT32, BASE_HEX_DEC, NULL, 0,
                 NULL, HFILL
             }
@@ -3004,12 +2992,6 @@
                 NULL, HFILL
             }
         },
-        { &hf_woww_padding,
-            { "Padding", "woww.padding",
-                FT_UINT32, BASE_HEX_DEC, NULL, 0,
-                NULL, HFILL
-            }
-        },
         { &hf_woww_page_id,
             { "Page Id", "woww.page.id",
                 FT_UINT32, BASE_HEX_DEC, NULL, 0,
@@ -3049,12 +3031,6 @@
         { &hf_woww_periodic_log,
             { "Periodic Log", "woww.periodic.log",
                 FT_UINT8, BASE_HEX_DEC, NULL, 0,
-                NULL, HFILL
-            }
-        },
-        { &hf_woww_permanent_bonus,
-            { "Permanent Bonus", "woww.permanent.bonus",
-                FT_UINT16, BASE_HEX_DEC, NULL, 0,
                 NULL, HFILL
             }
         },
@@ -3838,12 +3814,6 @@
                 NULL, HFILL
             }
         },
-        { &hf_woww_skill_step,
-            { "Skill Step", "woww.skill.step",
-                FT_UINT16, BASE_HEX_DEC, NULL, 0,
-                NULL, HFILL
-            }
-        },
         { &hf_woww_skin,
             { "Skin", "woww.skin",
                 FT_UINT8, BASE_HEX_DEC, NULL, 0,
@@ -4267,12 +4237,6 @@
         { &hf_woww_taxi_mask_node_known,
             { "Taxi Mask Node Known", "woww.taxi.mask.node.known",
                 FT_UINT8, BASE_HEX_DEC, NULL, 0,
-                NULL, HFILL
-            }
-        },
-        { &hf_woww_temporary_bonus,
-            { "Temporary Bonus", "woww.temporary.bonus",
-                FT_UINT16, BASE_HEX_DEC, NULL, 0,
                 NULL, HFILL
             }
         },
