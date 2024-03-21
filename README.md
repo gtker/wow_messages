@@ -30,7 +30,8 @@ Run `cargo overwrite` to overwrite the current regression test files with new ou
 
 The following environment variables can be used with the parser:
 
-* `WOWM_WIRESHARK`: must point to a valid `packet-woww.c` in a wireshark repo. This file will then be modified with the
+* `WOWM_WIRESHARK`: must point to a valid `epan/dissectors` folder in a wireshark repo. `packet-woww.c`
+  and `packet-wow.c` will then be modified with the
   auto generated Wireshark messages.
 * `WOWM_SQLITE_DB_PATH`: `wow_db_sqlite` directory. Writes the types and functions for `wow_world_base` `extended`.
 * `WOWM_PRINT_TEST_ERRORS`: when set errors testing that the application exists with a message will print error

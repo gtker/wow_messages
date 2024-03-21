@@ -63,6 +63,10 @@ impl Writer {
         self.inner
     }
 
+    pub(crate) fn append(&mut self, other: Self) {
+        self.inner += &other.inner;
+    }
+
     pub(crate) fn inner(&self) -> &str {
         assert_eq!(
             self.indentation_level, self.initial_indentation_level,
