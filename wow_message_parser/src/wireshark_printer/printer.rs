@@ -116,7 +116,7 @@ fn print_single_message(
     e: &&Container,
     inside_compressed_message: bool,
 ) {
-    if is_server_name(e.name()) || e.tags().has_login_version() {
+    if is_server_name(e.name()) {
         let prefix = if e.tags().has_login_version() {
             "WOW"
         } else {
