@@ -53,8 +53,6 @@ pub(crate) fn get_data_from_sqlite_file(sqlite_file: &Path, expansion: Expansion
     });
     let csv_directory = expansion.csv_data_directory();
 
-    let conn = Connection::open(sqlite_file).unwrap();
-
     let combinations = get_combinations(&csv_directory);
     let exp_per_level = get_exp_data(&csv_directory);
     let exploration_exp_per_level = get_exploration_exp_data(&csv_directory);
@@ -65,7 +63,7 @@ pub(crate) fn get_data_from_sqlite_file(sqlite_file: &Path, expansion: Expansion
     let positions = positions();
     let triggers = get_triggers(&csv_directory);
     let pet_names = get_pet_name_data(&csv_directory);
-    let items = get_items(&conn, expansion);
+    let items = get_items(&csv_directory, expansion);
 
     let spells = spell_thread.join().unwrap();
 

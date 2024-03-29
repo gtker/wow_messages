@@ -1,9 +1,9 @@
 use crate::base_printer::Expansion;
 use hashbrown::HashMap;
 use ordered_float::OrderedFloat;
-use rusqlite::Connection;
 use std::cmp::Ordering;
 use std::collections::BTreeSet;
+use std::path::Path;
 
 pub mod tbc;
 pub mod vanilla;
@@ -783,18 +783,11 @@ impl Value {
     }
 }
 
-fn i32_to_u32(v: i32) -> u32 {
-    u32::from_le_bytes(v.to_le_bytes())
-}
-
-pub(crate) fn get_items(
-    conn: &Connection,
-    expansion: Expansion,
-) -> (Vec<GenericThing>, Optimizations) {
+pub(crate) fn get_items(dir: &Path, expansion: Expansion) -> (Vec<GenericThing>, Optimizations) {
     match expansion {
-        Expansion::Vanilla => vanilla::vanilla(conn),
-        Expansion::BurningCrusade => tbc::tbc(conn),
-        Expansion::WrathOfTheLichKing => wrath::wrath(conn),
+        Expansion::Vanilla => vanilla::vanilla(dir),
+        Expansion::BurningCrusade => tbc::tbc(dir),
+        Expansion::WrathOfTheLichKing => wrath::wrath(dir),
     }
 }
 

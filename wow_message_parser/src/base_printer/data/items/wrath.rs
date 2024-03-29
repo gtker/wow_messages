@@ -1,73 +1,94 @@
+use crate::base_printer::data::get_fields;
 use crate::base_printer::data::items::vanilla::assertions;
 use crate::base_printer::data::items::{
     process_extra_flags, Array, ArrayField, ArrayInstance, ArrayInstances, Field, Optimizations,
     Value,
 };
-use crate::base_printer::data::{get_fields, items};
+use crate::base_printer::read_csv_file;
 use crate::base_printer::write::items::GenericThing;
-use rusqlite::Connection;
-use wow_world_base::wrath::{
-    AllowedClass, AllowedRace, Area, BagFamily, Bonding, Faction, Gold, InventoryType,
-    ItemClassAndSubClass, ItemFlag, ItemFlag2, ItemQuality, ItemSet, Language, Map,
-    PageTextMaterial, PvpRank, SheatheType, Skill, SpellSchool, SpellTriggerType,
-};
+use serde::Deserialize;
+use std::path::Path;
+use wow_world_base::wrath::Skill;
 
-pub struct WrathItem {
+#[derive(Deserialize)]
+struct WrathItem {
     pub entry: u32,
-    pub class_and_subclass: ItemClassAndSubClass,
-    pub sound_override_sub_class: i32,
     pub name: String,
+    pub class: i32,
+    pub subclass: i32,
+    #[serde(rename = "displayid")]
     pub display_id: u32,
-    pub quality: ItemQuality,
-    pub flags: ItemFlag,
-    pub flags2: ItemFlag2,
+    #[serde(rename = "Quality")]
+    pub quality: u32,
+    #[serde(rename = "Flags")]
+    pub flags: u32,
+    #[serde(rename = "Flags2")]
+    pub flags2: u32,
+    #[serde(rename = "BuyCount")]
     pub buy_count: i32,
-    pub buy_price: Gold,
-    pub sell_price: Gold,
-    pub inventory_type: InventoryType,
-    pub allowed_class: AllowedClass,
-    pub allowed_race: AllowedRace,
+    #[serde(rename = "BuyPrice")]
+    pub buy_price: u32,
+    #[serde(rename = "SellPrice")]
+    pub sell_price: u32,
+    #[serde(rename = "InventoryType")]
+    pub inventory_type: u32,
+    #[serde(rename = "AllowableClass")]
+    pub allowed_class: i32,
+    #[serde(rename = "AllowableRace")]
+    pub allowed_race: i32,
+    #[serde(rename = "ItemLevel")]
     pub item_level: i32,
+    #[serde(rename = "RequiredLevel")]
     pub required_level: i32,
-    pub required_skill: Skill,
+    #[serde(rename = "RequiredSkill")]
+    pub required_skill: u32,
+    #[serde(rename = "RequiredSkillRank")]
     pub required_skill_rank: i32,
+    #[serde(rename = "requiredspell")]
     pub required_spell: i32,
-    pub required_honor_rank: PvpRank,
+    #[serde(rename = "requiredhonorrank")]
+    pub required_honor_rank: u32,
+    #[serde(rename = "RequiredCityRank")]
     pub required_city_rank: i32,
-    pub required_faction: Faction,
+    #[serde(rename = "RequiredReputationFaction")]
+    pub required_faction: u32,
+    #[serde(rename = "RequiredReputationRank")]
     pub required_reputation_rank: i32,
+    #[serde(rename = "maxcount")]
     pub max_count: i32,
     pub stackable: i32,
+    #[serde(rename = "ContainerSlots")]
     pub container_slots: i32,
+
+    #[serde(rename = "StatsCount")]
     pub stats_count: i32,
-    pub stat_type1: u32,
+    pub stat_type1: i32,
     pub stat_value1: i32,
-    pub stat_type2: u32,
+    pub stat_type2: i32,
     pub stat_value2: i32,
-    pub stat_type3: u32,
+    pub stat_type3: i32,
     pub stat_value3: i32,
-    pub stat_type4: u32,
+    pub stat_type4: i32,
     pub stat_value4: i32,
-    pub stat_type5: u32,
+    pub stat_type5: i32,
     pub stat_value5: i32,
-    pub stat_type6: u32,
+    pub stat_type6: i32,
     pub stat_value6: i32,
-    pub stat_type7: u32,
+    pub stat_type7: i32,
     pub stat_value7: i32,
-    pub stat_type8: u32,
+    pub stat_type8: i32,
     pub stat_value8: i32,
-    pub stat_type9: u32,
+    pub stat_type9: i32,
     pub stat_value9: i32,
-    pub stat_type10: u32,
+    pub stat_type10: i32,
     pub stat_value10: i32,
-    pub scaling_stat_distribution: i32,
-    pub scaling_stat_value: i32,
+
     pub dmg_min1: f32,
     pub dmg_max1: f32,
-    pub dmg_type1: SpellSchool,
+    pub dmg_type1: u32,
     pub dmg_min2: f32,
     pub dmg_max2: f32,
-    pub dmg_type2: SpellSchool,
+    pub dmg_type2: u32,
     pub armor: i32,
     pub holy_res: i32,
     pub fire_res: i32,
@@ -77,916 +98,769 @@ pub struct WrathItem {
     pub arcane_res: i32,
     pub delay: i32,
     pub ammo_type: i32,
+    #[serde(rename = "RangedModRange")]
     pub ranged_mod_range: f32,
+    #[serde(rename = "spellid_1")]
     pub spell_id_1: i32,
-    pub spell_trigger_1: SpellTriggerType,
+    #[serde(rename = "spelltrigger_1")]
+    pub spell_trigger_1: u32,
+    #[serde(rename = "spellcharges_1")]
     pub spell_charges_1: i32,
+    #[serde(rename = "spellppmRate_1")]
     pub spell_ppm_rate_1: f32,
+    #[serde(rename = "spellcooldown_1")]
     pub spell_cooldown_1: i32,
+    #[serde(rename = "spellcategory_1")]
     pub spell_category_1: i32,
+    #[serde(rename = "spellcategorycooldown_1")]
     pub spell_category_cooldown_1: i32,
+    #[serde(rename = "spellid_2")]
     pub spell_id_2: i32,
-    pub spell_trigger_2: SpellTriggerType,
+    #[serde(rename = "spelltrigger_2")]
+    pub spell_trigger_2: u32,
+    #[serde(rename = "spellcharges_2")]
     pub spell_charges_2: i32,
+    #[serde(rename = "spellppmRate_2")]
     pub spell_ppm_rate_2: f32,
+    #[serde(rename = "spellcooldown_2")]
     pub spell_cooldown_2: i32,
+    #[serde(rename = "spellcategory_2")]
     pub spell_category_2: i32,
+    #[serde(rename = "spellcategorycooldown_2")]
     pub spell_category_cooldown_2: i32,
+    #[serde(rename = "spellid_3")]
     pub spell_id_3: i32,
-    pub spell_trigger_3: SpellTriggerType,
+    #[serde(rename = "spelltrigger_3")]
+    pub spell_trigger_3: u32,
+    #[serde(rename = "spellcharges_3")]
     pub spell_charges_3: i32,
+    #[serde(rename = "spellppmRate_3")]
     pub spell_ppm_rate_3: f32,
+    #[serde(rename = "spellcooldown_3")]
     pub spell_cooldown_3: i32,
+    #[serde(rename = "spellcategory_3")]
     pub spell_category_3: i32,
+    #[serde(rename = "spellcategorycooldown_3")]
     pub spell_category_cooldown_3: i32,
+    #[serde(rename = "spellid_4")]
     pub spell_id_4: i32,
-    pub spell_trigger_4: SpellTriggerType,
+    #[serde(rename = "spelltrigger_4")]
+    pub spell_trigger_4: u32,
+    #[serde(rename = "spellcharges_4")]
     pub spell_charges_4: i32,
+    #[serde(rename = "spellppmRate_4")]
     pub spell_ppm_rate_4: f32,
+    #[serde(rename = "spellcooldown_4")]
     pub spell_cooldown_4: i32,
+    #[serde(rename = "spellcategory_4")]
     pub spell_category_4: i32,
+    #[serde(rename = "spellcategorycooldown_4")]
     pub spell_category_cooldown_4: i32,
+    #[serde(rename = "spellid_5")]
     pub spell_id_5: i32,
-    pub spell_trigger_5: SpellTriggerType,
+    #[serde(rename = "spelltrigger_5")]
+    pub spell_trigger_5: u32,
+    #[serde(rename = "spellcharges_5")]
     pub spell_charges_5: i32,
+    #[serde(rename = "spellppmRate_5")]
     pub spell_ppm_rate_5: f32,
+    #[serde(rename = "spellcooldown_5")]
     pub spell_cooldown_5: i32,
+    #[serde(rename = "spellcategory_5")]
     pub spell_category_5: i32,
+    #[serde(rename = "spellcategorycooldown_5")]
     pub spell_category_cooldown_5: i32,
-    pub bonding: Bonding,
+    pub bonding: u32,
     pub description: String,
+    #[serde(rename = "PageText")]
     pub page_text: i32,
-    pub language: Language,
-    pub page_text_material: PageTextMaterial,
+    #[serde(rename = "LanguageID")]
+    pub language: u32,
+    #[serde(rename = "PageMaterial")]
+    pub page_text_material: u32,
+    #[serde(rename = "startquest")]
     pub start_quest: i32,
+    #[serde(rename = "lockid")]
     pub lock_id: i32,
+    #[serde(rename = "Material")]
     pub material: i32,
-    pub sheathe_type: SheatheType,
+    #[serde(rename = "sheath")]
+    pub sheathe_type: u32,
+    #[serde(rename = "RandomProperty")]
     pub random_property: i32,
-    pub random_suffix: i32,
     pub block: i32,
-    pub item_set: ItemSet,
+    #[serde(rename = "itemset")]
+    pub item_set: u32,
+    #[serde(rename = "MaxDurability")]
     pub max_durability: i32,
-    pub area: Area,
-    pub map: Map,
-    pub bag_family: BagFamily,
-    pub totem_category: i32,
-    pub socket_color_1: u32,
-    pub socket_content_1: u32,
-    pub socket_color_2: u32,
-    pub socket_content_2: u32,
-    pub socket_color_3: u32,
-    pub socket_content_3: u32,
-    pub socket_bonus: i32,
-    pub gem_properties: i32,
-    pub required_disenchant_skill: i32,
-    pub armor_damage_modifier: f32,
-    pub duration: i32,
-    pub item_limit_category: i32,
-    pub holiday_id: i32,
+    pub area: u32,
+    #[serde(rename = "Map")]
+    pub map: u32,
+    #[serde(rename = "BagFamily")]
+    pub bag_family: u32,
 
     #[allow(unused)] // This is used internally in cmangos, but has no utility outside of it
+    #[serde(rename = "ScriptName")]
     pub script_name: String,
 
+    #[serde(rename = "DisenchantID")]
     pub disenchant_id: i32,
+    #[serde(rename = "FoodType")]
     pub food_type: i32,
+    #[serde(rename = "minMoneyLoot")]
     pub min_money_loot: i32,
+    #[serde(rename = "maxMoneyLoot")]
     pub max_money_loot: i32,
+    #[serde(rename = "Duration")]
+    pub duration: i32,
+    #[serde(rename = "ExtraFlags")]
     pub extra_flags: i32,
+
+    #[serde(rename = "unk0")]
+    pub sound_override_sub_class: i32,
+    #[serde(rename = "RandomSuffix")]
+    pub random_suffix: i32,
+    #[serde(rename = "TotemCategory")]
+    pub totem_category: i32,
+    #[serde(rename = "socketColor_1")]
+    pub socket_color_1: u32,
+    #[serde(rename = "socketContent_1")]
+    pub socket_content_1: u32,
+    #[serde(rename = "socketColor_2")]
+    pub socket_color_2: u32,
+    #[serde(rename = "socketContent_2")]
+    pub socket_content_2: u32,
+    #[serde(rename = "socketColor_3")]
+    pub socket_color_3: u32,
+    #[serde(rename = "socketContent_3")]
+    pub socket_content_3: u32,
+    #[serde(rename = "socketBonus")]
+    pub socket_bonus: i32,
+    #[serde(rename = "GemProperties")]
+    pub gem_properties: i32,
+    #[serde(rename = "RequiredDisenchantSkill")]
+    pub required_disenchant_skill: i32,
+    #[serde(rename = "ArmorDamageModifier")]
+    pub armor_damage_modifier: f32,
+
+    #[serde(rename = "ScalingStatDistribution")]
+    pub scaling_stat_distribution: i32,
+    #[serde(rename = "ScalingStatValue")]
+    pub scaling_stat_value: i32,
+    #[serde(rename = "ItemLimitCategory")]
+    pub item_limit_category: i32,
+    #[serde(rename = "HolidayId")]
+    pub holiday_id: i32,
 }
 
-impl WrathItem {
-    pub fn into_generic_item(self) -> GenericThing {
-        let fields = vec![
-            Field::new("entry", Value::Uint(self.entry)),
-            Field::new(
-                "class_and_sub_class",
-                Value::WrathItemClassAndSubClass(self.class_and_subclass),
-            ),
-            Field::new(
-                "sound_override_sub_class",
-                Value::Int(self.sound_override_sub_class),
-            ),
-            Field::new("name", Value::String(self.name.clone())),
-            Field::new("display_id", Value::Uint(self.display_id)),
-            Field::new("quality", Value::WrathItemQuality(self.quality)),
-            Field::new("flags", Value::WrathItemFlag(self.flags)),
-            Field::new("flags2", Value::WrathItemFlag2(self.flags2)),
-            Field::new("buy_count", Value::Int(self.buy_count)),
-            Field::new("buy_price", Value::Gold(self.buy_price)),
-            Field::new("sell_price", Value::Gold(self.sell_price)),
-            Field::new("inventory_type", Value::InventoryType(self.inventory_type)),
-            Field::new(
-                "allowed_class",
-                Value::WrathAllowedClass(self.allowed_class),
-            ),
-            Field::new("allowed_race", Value::WrathAllowedRace(self.allowed_race)),
-            Field::new("item_level", Value::Int(self.item_level)),
-            Field::new("required_level", Value::Int(self.required_level)),
-            Field::new("required_skill", Value::WrathSkill(self.required_skill)),
-            Field::new("required_skill_rank", Value::Int(self.required_skill_rank)),
-            Field::new("required_spell", Value::Int(self.required_spell)),
-            Field::new(
-                "required_honor_rank",
-                Value::PvpRank(self.required_honor_rank),
-            ),
-            Field::new("required_city_rank", Value::Int(self.required_city_rank)),
-            Field::new(
-                "required_faction",
-                Value::WrathFaction(self.required_faction),
-            ),
-            Field::new(
-                "required_reputation_rank",
-                Value::Int(self.required_reputation_rank),
-            ),
-            Field::new("max_count", Value::Int(self.max_count)),
-            Field::new("stackable", Value::Int(self.stackable)),
-            Field::new("container_slots", Value::Int(self.container_slots)),
-            Field::new("stats_count", Value::Int(self.stats_count)),
-            Field::new(
-                "scaling_stat_distribution",
-                Value::Int(self.scaling_stat_distribution),
-            ),
-            Field::new("scaling_stat_value", Value::Int(self.scaling_stat_value)),
-            Field::new("armor", Value::Int(self.armor)),
-            Field::new("holy_res", Value::Int(self.holy_res)),
-            Field::new("fire_res", Value::Int(self.fire_res)),
-            Field::new("nature_res", Value::Int(self.nature_res)),
-            Field::new("frost_res", Value::Int(self.frost_res)),
-            Field::new("shadow_res", Value::Int(self.shadow_res)),
-            Field::new("arcane_res", Value::Int(self.arcane_res)),
-            Field::new("delay", Value::Int(self.delay)),
-            Field::new("ammo_type", Value::Int(self.ammo_type)),
-            Field::new("ranged_mod_range", Value::float(self.ranged_mod_range)),
-            Field::new("bonding", Value::Bonding(self.bonding)),
-            Field::new("description", Value::String(self.description)),
-            Field::new("page_text", Value::Int(self.page_text)),
-            Field::new("language", Value::TbcWrathLanguage(self.language)),
-            Field::new(
-                "page_text_material",
-                Value::TbcWrathPageTextMaterial(self.page_text_material),
-            ),
-            Field::new("start_quest", Value::Int(self.start_quest)),
-            Field::new("lock_id", Value::Int(self.lock_id)),
-            Field::new("material", Value::Int(self.material)),
-            Field::new("sheathe_type", Value::SheatheType(self.sheathe_type)),
-            Field::new("random_property", Value::Int(self.random_property)),
-            Field::new("random_suffix", Value::Int(self.random_suffix)),
-            Field::new("block", Value::Int(self.block)),
-            Field::new("item_set", Value::WrathItemSet(self.item_set)),
-            Field::new("max_durability", Value::Int(self.max_durability)),
-            Field::new("area", Value::WrathArea(self.area)),
-            Field::new("map", Value::WrathMap(self.map)),
-            Field::new("bag_family", Value::TbcWrathBagFamily(self.bag_family)),
-            Field::new("totem_category", Value::Int(self.totem_category)),
-            Field::new("socket_bonus", Value::Int(self.socket_bonus)),
-            Field::new("gem_properties", Value::Int(self.gem_properties)),
-            Field::new(
-                "required_disenchant_skill",
-                Value::Int(self.required_disenchant_skill),
-            ),
-            Field::new(
-                "armor_damage_modifier",
-                Value::float(self.armor_damage_modifier),
-            ),
-            Field::new("duration", Value::Int(self.duration)),
-            Field::new("item_limit_category", Value::Int(self.item_limit_category)),
-            Field::new("holiday_id", Value::Int(self.holiday_id)),
-            Field::new("disenchant_id", Value::Int(self.disenchant_id)),
-            Field::new("food_type", Value::Int(self.food_type)),
-            Field::new("min_money_loot", Value::Int(self.min_money_loot)),
-            Field::new("max_money_loot", Value::Int(self.max_money_loot)),
-            Field::new(
-                "extra_flags",
-                Value::Int(process_extra_flags(
-                    self.entry,
-                    self.extra_flags,
-                    &self.name,
-                )),
-            ),
-        ];
-
-        let arrays = vec![
-            Array::new(
-                "sockets",
-                "ItemSocket",
-                true,
-                ArrayInstances::new(vec![
-                    ArrayInstance::default_values(vec![
-                        ArrayField::new(
-                            "color",
-                            "socket_color_1",
-                            Value::Uint(self.socket_color_1),
-                        ),
-                        ArrayField::new(
-                            "content",
-                            "socket_content_1",
-                            Value::Uint(self.socket_content_1),
-                        ),
-                    ]),
-                    ArrayInstance::default_values(vec![
-                        ArrayField::new(
-                            "color",
-                            "socket_color_2",
-                            Value::Uint(self.socket_color_2),
-                        ),
-                        ArrayField::new(
-                            "content",
-                            "socket_content_2",
-                            Value::Uint(self.socket_content_2),
-                        ),
-                    ]),
-                    ArrayInstance::default_values(vec![
-                        ArrayField::new(
-                            "color",
-                            "socket_color_3",
-                            Value::Uint(self.socket_color_3),
-                        ),
-                        ArrayField::new(
-                            "content",
-                            "socket_content_3",
-                            Value::Uint(self.socket_content_3),
-                        ),
-                    ]),
-                ]),
-            ),
-            Array::new(
-                "damages",
-                "ItemDamageType",
-                true,
-                ArrayInstances::new(vec![
-                    ArrayInstance::new(
-                        self.dmg_min1 == 0.0 && self.dmg_max1 == 0.0,
-                        vec![
-                            ArrayField::new(
-                                "damage_minimum",
-                                "dmg_min1",
-                                Value::float(self.dmg_min1),
-                            ),
-                            ArrayField::new(
-                                "damage_maximum",
-                                "dmg_max1",
-                                Value::float(self.dmg_max1),
-                            ),
-                            ArrayField::new(
-                                "school",
-                                "dmg_type1",
-                                Value::SpellSchool(self.dmg_type1),
-                            ),
-                        ],
-                    ),
-                    ArrayInstance::new(
-                        self.dmg_min2 == 0.0 && self.dmg_max2 == 0.0,
-                        vec![
-                            ArrayField::new(
-                                "damage_minimum",
-                                "dmg_min2",
-                                Value::float(self.dmg_min2),
-                            ),
-                            ArrayField::new(
-                                "damage_maximum",
-                                "dmg_max2",
-                                Value::float(self.dmg_max2),
-                            ),
-                            ArrayField::new(
-                                "school",
-                                "dmg_type2",
-                                Value::SpellSchool(self.dmg_type2),
-                            ),
-                        ],
-                    ),
-                ]),
-            ),
-            Array::new(
-                "stats",
-                "ItemStat",
-                true,
-                ArrayInstances::new(vec![
-                    ArrayInstance::new(
-                        self.stat_value1 == 0,
-                        vec![
-                            ArrayField::new(
-                                "stat_type",
-                                "stat_type1",
-                                Value::Uint(self.stat_type1),
-                            ),
-                            ArrayField::new("value", "stat_value1", Value::Int(self.stat_value1)),
-                        ],
-                    ),
-                    ArrayInstance::new(
-                        self.stat_value2 == 0,
-                        vec![
-                            ArrayField::new(
-                                "stat_type",
-                                "stat_type2",
-                                Value::Uint(self.stat_type2),
-                            ),
-                            ArrayField::new("value", "stat_value2", Value::Int(self.stat_value2)),
-                        ],
-                    ),
-                    ArrayInstance::new(
-                        self.stat_value3 == 0,
-                        vec![
-                            ArrayField::new(
-                                "stat_type",
-                                "stat_type3",
-                                Value::Uint(self.stat_type3),
-                            ),
-                            ArrayField::new("value", "stat_value3", Value::Int(self.stat_value3)),
-                        ],
-                    ),
-                    ArrayInstance::new(
-                        self.stat_value4 == 0,
-                        vec![
-                            ArrayField::new(
-                                "stat_type",
-                                "stat_type4",
-                                Value::Uint(self.stat_type4),
-                            ),
-                            ArrayField::new("value", "stat_value4", Value::Int(self.stat_value4)),
-                        ],
-                    ),
-                    ArrayInstance::new(
-                        self.stat_value5 == 0,
-                        vec![
-                            ArrayField::new(
-                                "stat_type",
-                                "stat_type5",
-                                Value::Uint(self.stat_type5),
-                            ),
-                            ArrayField::new("value", "stat_value5", Value::Int(self.stat_value5)),
-                        ],
-                    ),
-                    ArrayInstance::new(
-                        self.stat_value6 == 0,
-                        vec![
-                            ArrayField::new(
-                                "stat_type",
-                                "stat_type6",
-                                Value::Uint(self.stat_type6),
-                            ),
-                            ArrayField::new("value", "stat_value6", Value::Int(self.stat_value6)),
-                        ],
-                    ),
-                    ArrayInstance::new(
-                        self.stat_value7 == 0,
-                        vec![
-                            ArrayField::new(
-                                "stat_type",
-                                "stat_type7",
-                                Value::Uint(self.stat_type7),
-                            ),
-                            ArrayField::new("value", "stat_value7", Value::Int(self.stat_value7)),
-                        ],
-                    ),
-                    ArrayInstance::new(
-                        self.stat_value8 == 0,
-                        vec![
-                            ArrayField::new(
-                                "stat_type",
-                                "stat_type8",
-                                Value::Uint(self.stat_type8),
-                            ),
-                            ArrayField::new("value", "stat_value8", Value::Int(self.stat_value8)),
-                        ],
-                    ),
-                    ArrayInstance::new(
-                        self.stat_value9 == 0,
-                        vec![
-                            ArrayField::new(
-                                "stat_type",
-                                "stat_type9",
-                                Value::Uint(self.stat_type9),
-                            ),
-                            ArrayField::new("value", "stat_value9", Value::Int(self.stat_value9)),
-                        ],
-                    ),
-                    ArrayInstance::new(
-                        self.stat_value10 == 0,
-                        vec![
-                            ArrayField::new(
-                                "stat_type",
-                                "stat_type10",
-                                Value::Uint(self.stat_type10),
-                            ),
-                            ArrayField::new("value", "stat_value10", Value::Int(self.stat_value10)),
-                        ],
-                    ),
-                ]),
-            ),
-            Array::new(
-                "spells",
-                "Spells",
-                false,
-                ArrayInstances::new(vec![
-                    ArrayInstance::new(
-                        self.spell_id_1 == 0,
-                        vec![
-                            ArrayField::new("spell", "spell_id_1", Value::Int(self.spell_id_1)),
-                            ArrayField::new(
-                                "spell_trigger",
-                                "spell_trigger_1",
-                                Value::TbcWrathSpellTriggerType(self.spell_trigger_1),
-                            ),
-                            ArrayField::new(
-                                "spell_charges",
-                                "spell_charges_1",
-                                Value::Int(self.spell_charges_1),
-                            ),
-                            ArrayField::new(
-                                "spell_ppm_rate",
-                                "spell_ppm_rate_1",
-                                Value::float(self.spell_ppm_rate_1),
-                            ),
-                            ArrayField::new(
-                                "spell_cooldown",
-                                "spell_cooldown_1",
-                                Value::Int(self.spell_cooldown_1),
-                            ),
-                            ArrayField::new(
-                                "spell_category",
-                                "spell_category_1",
-                                Value::Int(self.spell_category_1),
-                            ),
-                            ArrayField::new(
-                                "spell_category_cooldown",
-                                "spell_category_cooldown_1",
-                                Value::Int(self.spell_category_cooldown_1),
-                            ),
-                        ],
-                    ),
-                    ArrayInstance::new(
-                        self.spell_id_2 == 0,
-                        vec![
-                            ArrayField::new("spell", "spell_id_2", Value::Int(self.spell_id_2)),
-                            ArrayField::new(
-                                "spell_trigger",
-                                "spell_trigger_2",
-                                Value::TbcWrathSpellTriggerType(self.spell_trigger_2),
-                            ),
-                            ArrayField::new(
-                                "spell_charges",
-                                "spell_charges_2",
-                                Value::Int(self.spell_charges_2),
-                            ),
-                            ArrayField::new(
-                                "spell_ppm_rate",
-                                "spell_ppm_rate_2",
-                                Value::float(self.spell_ppm_rate_2),
-                            ),
-                            ArrayField::new(
-                                "spell_cooldown",
-                                "spell_cooldown_2",
-                                Value::Int(self.spell_cooldown_2),
-                            ),
-                            ArrayField::new(
-                                "spell_category",
-                                "spell_category_2",
-                                Value::Int(self.spell_category_2),
-                            ),
-                            ArrayField::new(
-                                "spell_category_cooldown",
-                                "spell_category_cooldown_2",
-                                Value::Int(self.spell_category_cooldown_2),
-                            ),
-                        ],
-                    ),
-                    ArrayInstance::new(
-                        self.spell_id_3 == 0,
-                        vec![
-                            ArrayField::new("spell", "spell_id_3", Value::Int(self.spell_id_3)),
-                            ArrayField::new(
-                                "spell_trigger",
-                                "spell_trigger_3",
-                                Value::TbcWrathSpellTriggerType(self.spell_trigger_3),
-                            ),
-                            ArrayField::new(
-                                "spell_charges",
-                                "spell_charges_3",
-                                Value::Int(self.spell_charges_3),
-                            ),
-                            ArrayField::new(
-                                "spell_ppm_rate",
-                                "spell_ppm_rate_3",
-                                Value::float(self.spell_ppm_rate_3),
-                            ),
-                            ArrayField::new(
-                                "spell_cooldown",
-                                "spell_cooldown_3",
-                                Value::Int(self.spell_cooldown_3),
-                            ),
-                            ArrayField::new(
-                                "spell_category",
-                                "spell_category_3",
-                                Value::Int(self.spell_category_3),
-                            ),
-                            ArrayField::new(
-                                "spell_category_cooldown",
-                                "spell_category_cooldown_3",
-                                Value::Int(self.spell_category_cooldown_3),
-                            ),
-                        ],
-                    ),
-                    ArrayInstance::new(
-                        self.spell_id_4 == 0,
-                        vec![
-                            ArrayField::new("spell", "spell_id_4", Value::Int(self.spell_id_4)),
-                            ArrayField::new(
-                                "spell_trigger",
-                                "spell_trigger_4",
-                                Value::TbcWrathSpellTriggerType(self.spell_trigger_4),
-                            ),
-                            ArrayField::new(
-                                "spell_charges",
-                                "spell_charges_4",
-                                Value::Int(self.spell_charges_4),
-                            ),
-                            ArrayField::new(
-                                "spell_ppm_rate",
-                                "spell_ppm_rate_4",
-                                Value::float(self.spell_ppm_rate_4),
-                            ),
-                            ArrayField::new(
-                                "spell_cooldown",
-                                "spell_cooldown_4",
-                                Value::Int(self.spell_cooldown_4),
-                            ),
-                            ArrayField::new(
-                                "spell_category",
-                                "spell_category_4",
-                                Value::Int(self.spell_category_4),
-                            ),
-                            ArrayField::new(
-                                "spell_category_cooldown",
-                                "spell_category_cooldown_4",
-                                Value::Int(self.spell_category_cooldown_4),
-                            ),
-                        ],
-                    ),
-                    ArrayInstance::new(
-                        self.spell_id_5 == 0,
-                        vec![
-                            ArrayField::new("spell", "spell_id_5", Value::Int(self.spell_id_5)),
-                            ArrayField::new(
-                                "spell_trigger",
-                                "spell_trigger_5",
-                                Value::TbcWrathSpellTriggerType(self.spell_trigger_5),
-                            ),
-                            ArrayField::new(
-                                "spell_charges",
-                                "spell_charges_5",
-                                Value::Int(self.spell_charges_5),
-                            ),
-                            ArrayField::new(
-                                "spell_ppm_rate",
-                                "spell_ppm_rate_5",
-                                Value::float(self.spell_ppm_rate_5),
-                            ),
-                            ArrayField::new(
-                                "spell_cooldown",
-                                "spell_cooldown_5",
-                                Value::Int(self.spell_cooldown_5),
-                            ),
-                            ArrayField::new(
-                                "spell_category",
-                                "spell_category_5",
-                                Value::Int(self.spell_category_5),
-                            ),
-                            ArrayField::new(
-                                "spell_category_cooldown",
-                                "spell_category_cooldown_5",
-                                Value::Int(self.spell_category_cooldown_5),
-                            ),
-                        ],
-                    ),
-                ]),
-            ),
-        ];
-
-        GenericThing::new(self.entry, self.extra_flags, self.name, fields, arrays)
-    }
-}
-
-pub fn wrath(conn: &Connection) -> (Vec<GenericThing>, Optimizations) {
-    assertions(conn);
-
-    let mut s = conn
-        .prepare(
-            "SELECT
-    entry,
-    class,
-    subclass,
-    unk0,
-    name,
-    displayid,
-    Quality,
-    Flags,
-    Flags2,
-    BuyCount,
-    BuyPrice,
-    SellPrice,
-    InventoryType,
-    AllowableClass,
-    AllowableRace,
-    ItemLevel,
-    RequiredLevel,
-    RequiredSkill,
-    RequiredSkillRank,
-    requiredspell,
-    requiredhonorrank,
-    RequiredCityRank,
-    RequiredReputationFaction,
-    RequiredReputationRank,
-    maxcount,
-    stackable,
-    ContainerSlots,
-    StatsCount,
-    stat_type1,
-    stat_value1,
-    stat_type2,
-    stat_value2,
-    stat_type3,
-    stat_value3,
-    stat_type4,
-    stat_value4,
-    stat_type5,
-    stat_value5,
-    stat_type6,
-    stat_value6,
-    stat_type7,
-    stat_value7,
-    stat_type8,
-    stat_value8,
-    stat_type9,
-    stat_value9,
-    stat_type10,
-    stat_value10,
-    ScalingStatDistribution,
-    ScalingStatValue,
-    dmg_min1,
-    dmg_max1,
-    dmg_type1,
-    dmg_min2,
-    dmg_max2,
-    dmg_type2,
-    armor,
-    holy_res,
-    fire_res,
-    nature_res,
-    frost_res,
-    shadow_res,
-    arcane_res,
-    delay,
-    ammo_type,
-    RangedModRange,
-    spellid_1,
-    spelltrigger_1,
-    spellcharges_1,
-    spellppmRate_1,
-    spellcooldown_1,
-    spellcategory_1,
-    spellcategorycooldown_1,
-    spellid_2,
-    spelltrigger_2,
-    spellcharges_2,
-    spellppmRate_2,
-    spellcooldown_2,
-    spellcategory_2,
-    spellcategorycooldown_2,
-    spellid_3,
-    spelltrigger_3,
-    spellcharges_3,
-    spellppmRate_3,
-    spellcooldown_3,
-    spellcategory_3,
-    spellcategorycooldown_3,
-    spellid_4,
-    spelltrigger_4,
-    spellcharges_4,
-    spellppmRate_4,
-    spellcooldown_4,
-    spellcategory_4,
-    spellcategorycooldown_4,
-    spellid_5,
-    spelltrigger_5,
-    spellcharges_5,
-    spellppmRate_5,
-    spellcooldown_5,
-    spellcategory_5,
-    spellcategorycooldown_5,
-    bonding,
-    description,
-    PageText,
-    LanguageID,
-    PageMaterial,
-    startquest,
-    lockid,
-    Material,
-    sheath,
-    RandomProperty,
-    RandomSuffix,
-    block,
-    itemset,
-    MaxDurability,
-    area,
-    Map,
-    BagFamily,
-    TotemCategory,
-    socketColor_1,
-    socketContent_1,
-    socketColor_2,
-    socketContent_2,
-    socketColor_3,
-    socketContent_3,
-    socketBonus,
-    GemProperties,
-    RequiredDisenchantSkill,
-    ArmorDamageModifier,
-    Duration,
-    ItemLimitCategory,
-    HolidayId,
-    ScriptName,
-    DisenchantID,
-    FoodType,
-    minMoneyLoot,
-    maxMoneyLoot,
-    ExtraFlags
-FROM
-    item_template;
-ORDER BY
-    entry
-    ",
-        )
-        .unwrap();
-
-    let r = s
-        .query_map([], |row| {
-            let class: u64 = row.get(1).unwrap();
-            let subclass: u64 = row.get(2).unwrap();
-
+pub fn wrath(dir: &Path) -> (Vec<GenericThing>, Optimizations) {
+    let items = read_csv_file::<WrathItem>(dir, "items");
+    let items: Vec<_> = items
+        .into_iter()
+        .map(|row| {
             let (required_skill, required_skill_rank) = {
-                let skill = row.get::<usize, u16>(17).unwrap();
+                let skill = row.required_skill;
                 let (skill, required_skill_level) = if skill == 40 || skill == 242 {
                     // Cmangos weirdly uses a non existent skill
                     (0, 0)
                 } else {
-                    (skill, row.get(18).unwrap())
+                    (skill, row.required_skill_rank)
                 };
                 (Skill::try_from(skill).unwrap(), required_skill_level)
             };
 
-            Ok(WrathItem {
-                entry: row.get(0).unwrap(),
-                class_and_subclass: wow_world_base::wrath::ItemClassAndSubClass::try_from(
-                    subclass << 32 | class,
-                )
-                .unwrap(),
-                sound_override_sub_class: row.get(3).unwrap(),
-                name: row.get(4).unwrap(),
-                display_id: row.get(5).unwrap(),
-                quality: ItemQuality::try_from(row.get::<usize, u8>(6).unwrap()).unwrap(),
-                flags: ItemFlag::new(row.get(7).unwrap()),
-                flags2: ItemFlag2::new(row.get(8).unwrap()),
-                buy_count: row.get(9).unwrap(),
-                buy_price: Gold::new(row.get(10).unwrap()),
-                sell_price: Gold::new(row.get(11).unwrap()),
-                inventory_type: InventoryType::try_from(row.get::<usize, u8>(12).unwrap()).unwrap(),
-                allowed_class: AllowedClass::new(items::i32_to_u32(row.get(13).unwrap())),
-                allowed_race: AllowedRace::new(items::i32_to_u32(row.get(14).unwrap())),
-                item_level: row.get(15).unwrap(),
-                required_level: row.get(16).unwrap(),
-                required_skill,
-                required_skill_rank,
-                required_spell: row.get(19).unwrap(),
-                required_honor_rank: PvpRank::try_from(row.get::<usize, u8>(20).unwrap()).unwrap(),
-                required_city_rank: row.get(21).unwrap(),
-                required_faction: Faction::try_from(row.get::<usize, u16>(22).unwrap()).unwrap(),
-                required_reputation_rank: row.get(23).unwrap(),
-                max_count: row.get(24).unwrap(),
-                stackable: row.get(25).unwrap(),
-                container_slots: row.get(26).unwrap(),
-                stats_count: row.get(27).unwrap(),
-                stat_type1: row.get(28).unwrap(),
-                stat_value1: row.get(29).unwrap(),
-                stat_type2: row.get(30).unwrap(),
-                stat_value2: row.get(31).unwrap(),
-                stat_type3: row.get(32).unwrap(),
-                stat_value3: row.get(33).unwrap(),
-                stat_type4: row.get(34).unwrap(),
-                stat_value4: row.get(35).unwrap(),
-                stat_type5: row.get(36).unwrap(),
-                stat_value5: row.get(37).unwrap(),
-                stat_type6: row.get(38).unwrap(),
-                stat_value6: row.get(39).unwrap(),
-                stat_type7: row.get(40).unwrap(),
-                stat_value7: row.get(41).unwrap(),
-                stat_type8: row.get(42).unwrap(),
-                stat_value8: row.get(43).unwrap(),
-                stat_type9: row.get(44).unwrap(),
-                stat_value9: row.get(45).unwrap(),
-                stat_type10: row.get(46).unwrap(),
-                stat_value10: row.get(47).unwrap(),
-                scaling_stat_distribution: row.get(48).unwrap(),
-                scaling_stat_value: row.get(49).unwrap(),
-                dmg_min1: row.get(50).unwrap(),
-                dmg_max1: row.get(51).unwrap(),
-                dmg_type1: SpellSchool::try_from(row.get::<usize, u8>(52).unwrap()).unwrap(),
-                dmg_min2: row.get(53).unwrap(),
-                dmg_max2: row.get(54).unwrap(),
-                dmg_type2: SpellSchool::try_from(row.get::<usize, u8>(55).unwrap()).unwrap(),
-                armor: row.get(56).unwrap(),
-                holy_res: row.get(57).unwrap(),
-                fire_res: row.get(58).unwrap(),
-                nature_res: row.get(59).unwrap(),
-                frost_res: row.get(60).unwrap(),
-                shadow_res: row.get(61).unwrap(),
-                arcane_res: row.get(62).unwrap(),
-                delay: row.get(63).unwrap(),
-                ammo_type: row.get(64).unwrap(),
-                ranged_mod_range: row.get(65).unwrap(),
-                spell_id_1: row.get(66).unwrap(),
-                spell_trigger_1: SpellTriggerType::try_from(row.get::<usize, u8>(67).unwrap())
-                    .unwrap(),
-                spell_charges_1: row.get(68).unwrap(),
-                spell_ppm_rate_1: row.get(69).unwrap(),
-                spell_cooldown_1: row.get(70).unwrap(),
-                spell_category_1: row.get(71).unwrap(),
-                spell_category_cooldown_1: row.get(72).unwrap(),
-                spell_id_2: row.get(73).unwrap(),
-                spell_trigger_2: SpellTriggerType::try_from(row.get::<usize, u8>(74).unwrap())
-                    .unwrap(),
-                spell_charges_2: row.get(75).unwrap(),
-                spell_ppm_rate_2: row.get(76).unwrap(),
-                spell_cooldown_2: row.get(77).unwrap(),
-                spell_category_2: row.get(78).unwrap(),
-                spell_category_cooldown_2: row.get(79).unwrap(),
-                spell_id_3: row.get(80).unwrap(),
-                spell_trigger_3: SpellTriggerType::try_from(row.get::<usize, u8>(81).unwrap())
-                    .unwrap(),
-                spell_charges_3: row.get(82).unwrap(),
-                spell_ppm_rate_3: row.get(83).unwrap(),
-                spell_cooldown_3: row.get(84).unwrap(),
-                spell_category_3: row.get(85).unwrap(),
-                spell_category_cooldown_3: row.get(86).unwrap(),
-                spell_id_4: row.get(87).unwrap(),
-                spell_trigger_4: SpellTriggerType::try_from(row.get::<usize, u8>(88).unwrap())
-                    .unwrap(),
-                spell_charges_4: row.get(89).unwrap(),
-                spell_ppm_rate_4: row.get(90).unwrap(),
-                spell_cooldown_4: row.get(91).unwrap(),
-                spell_category_4: row.get(92).unwrap(),
-                spell_category_cooldown_4: row.get(93).unwrap(),
-                spell_id_5: row.get(94).unwrap(),
-                spell_trigger_5: SpellTriggerType::try_from(row.get::<usize, u8>(95).unwrap())
-                    .unwrap(),
-                spell_charges_5: row.get(96).unwrap(),
-                spell_ppm_rate_5: row.get(97).unwrap(),
-                spell_cooldown_5: row.get(98).unwrap(),
-                spell_category_5: row.get(99).unwrap(),
-                spell_category_cooldown_5: row.get(100).unwrap(),
-                bonding: Bonding::try_from(row.get::<usize, u8>(101).unwrap()).unwrap(),
-                description: row.get(102).unwrap(),
-                page_text: row.get(103).unwrap(),
-                language: Language::try_from(row.get::<usize, u8>(104).unwrap()).unwrap(),
-                page_text_material: PageTextMaterial::try_from(row.get::<usize, u8>(105).unwrap())
-                    .unwrap(),
-                start_quest: row.get(106).unwrap(),
-                lock_id: row.get(107).unwrap(),
-                material: row.get(108).unwrap(),
-                sheathe_type: SheatheType::try_from(row.get::<usize, u8>(109).unwrap()).unwrap(),
-                random_property: row.get(110).unwrap(),
-                random_suffix: row.get(111).unwrap(),
-                block: row.get(112).unwrap(),
-                item_set: ItemSet::try_from(row.get::<usize, u16>(113).unwrap()).unwrap(),
-                max_durability: row.get(114).unwrap(),
-                area: Area::try_from(row.get::<usize, u32>(115).unwrap()).unwrap(),
-                map: Map::try_from(row.get::<usize, u32>(116).unwrap()).unwrap(),
-                bag_family: BagFamily::new(row.get::<usize, u32>(117).unwrap()),
-                totem_category: row.get(118).unwrap(),
-                socket_color_1: row.get(119).unwrap(),
-                socket_content_1: row.get(120).unwrap(),
-                socket_color_2: row.get(121).unwrap(),
-                socket_content_2: row.get(122).unwrap(),
-                socket_color_3: row.get(123).unwrap(),
-                socket_content_3: row.get(124).unwrap(),
-                socket_bonus: row.get(125).unwrap(),
-                gem_properties: row.get(126).unwrap(),
-                required_disenchant_skill: row.get(127).unwrap(),
-                armor_damage_modifier: row.get(128).unwrap(),
-                duration: row.get(129).unwrap(),
-                item_limit_category: row.get(130).unwrap(),
-                holiday_id: row.get(131).unwrap(),
-                script_name: row.get(132).unwrap(),
-                disenchant_id: row.get(133).unwrap(),
-                food_type: row.get(134).unwrap(),
-                min_money_loot: row.get(135).unwrap(),
-                max_money_loot: row.get(136).unwrap(),
-                extra_flags: row.get(137).unwrap(),
-            })
-        })
-        .unwrap();
+            let fields = vec![
+                Field::new("entry", Value::Uint(row.entry)),
+                Field::new(
+                    "class_and_sub_class",
+                    Value::WrathItemClassAndSubClass(
+                        wow_world_base::wrath::ItemClassAndSubClass::try_from(
+                            (row.subclass as u64) << 32 | row.class as u64,
+                        )
+                        .unwrap(),
+                    ),
+                ),
+                Field::new(
+                    "sound_override_sub_class",
+                    Value::Int(row.sound_override_sub_class),
+                ),
+                Field::new("name", Value::String(row.name.clone())),
+                Field::new("display_id", Value::Uint(row.display_id)),
+                Field::new(
+                    "quality",
+                    Value::WrathItemQuality(row.quality.try_into().unwrap()),
+                ),
+                Field::new("flags", Value::WrathItemFlag(row.flags.try_into().unwrap())),
+                Field::new(
+                    "flags2",
+                    Value::WrathItemFlag2(row.flags2.try_into().unwrap()),
+                ),
+                Field::new("buy_count", Value::Int(row.buy_count)),
+                Field::new("buy_price", Value::Gold(row.buy_price.try_into().unwrap())),
+                Field::new(
+                    "sell_price",
+                    Value::Gold(row.sell_price.try_into().unwrap()),
+                ),
+                Field::new(
+                    "inventory_type",
+                    Value::InventoryType(row.inventory_type.try_into().unwrap()),
+                ),
+                Field::new(
+                    "allowed_class",
+                    Value::WrathAllowedClass(row.allowed_class.try_into().unwrap()),
+                ),
+                Field::new(
+                    "allowed_race",
+                    Value::WrathAllowedRace(row.allowed_race.try_into().unwrap()),
+                ),
+                Field::new("item_level", Value::Int(row.item_level)),
+                Field::new("required_level", Value::Int(row.required_level)),
+                Field::new(
+                    "required_skill",
+                    Value::WrathSkill(required_skill.try_into().unwrap()),
+                ),
+                Field::new("required_skill_rank", Value::Int(required_skill_rank)),
+                Field::new("required_spell", Value::Int(row.required_spell)),
+                Field::new(
+                    "required_honor_rank",
+                    Value::PvpRank(row.required_honor_rank.try_into().unwrap()),
+                ),
+                Field::new("required_city_rank", Value::Int(row.required_city_rank)),
+                Field::new(
+                    "required_faction",
+                    Value::WrathFaction(row.required_faction.try_into().unwrap()),
+                ),
+                Field::new(
+                    "required_reputation_rank",
+                    Value::Int(row.required_reputation_rank),
+                ),
+                Field::new("max_count", Value::Int(row.max_count)),
+                Field::new("stackable", Value::Int(row.stackable)),
+                Field::new("container_slots", Value::Int(row.container_slots)),
+                Field::new("stats_count", Value::Int(row.stats_count)),
+                Field::new(
+                    "scaling_stat_distribution",
+                    Value::Int(row.scaling_stat_distribution),
+                ),
+                Field::new("scaling_stat_value", Value::Int(row.scaling_stat_value)),
+                Field::new("armor", Value::Int(row.armor)),
+                Field::new("holy_res", Value::Int(row.holy_res)),
+                Field::new("fire_res", Value::Int(row.fire_res)),
+                Field::new("nature_res", Value::Int(row.nature_res)),
+                Field::new("frost_res", Value::Int(row.frost_res)),
+                Field::new("shadow_res", Value::Int(row.shadow_res)),
+                Field::new("arcane_res", Value::Int(row.arcane_res)),
+                Field::new("delay", Value::Int(row.delay)),
+                Field::new("ammo_type", Value::Int(row.ammo_type)),
+                Field::new("ranged_mod_range", Value::float(row.ranged_mod_range)),
+                Field::new("bonding", Value::Bonding(row.bonding.try_into().unwrap())),
+                Field::new("description", Value::String(row.description)),
+                Field::new("page_text", Value::Int(row.page_text)),
+                Field::new(
+                    "language",
+                    Value::TbcWrathLanguage(row.language.try_into().unwrap()),
+                ),
+                Field::new(
+                    "page_text_material",
+                    Value::TbcWrathPageTextMaterial(row.page_text_material.try_into().unwrap()),
+                ),
+                Field::new("start_quest", Value::Int(row.start_quest)),
+                Field::new("lock_id", Value::Int(row.lock_id)),
+                Field::new("material", Value::Int(row.material)),
+                Field::new(
+                    "sheathe_type",
+                    Value::SheatheType(row.sheathe_type.try_into().unwrap()),
+                ),
+                Field::new("random_property", Value::Int(row.random_property)),
+                Field::new("random_suffix", Value::Int(row.random_suffix)),
+                Field::new("block", Value::Int(row.block)),
+                Field::new(
+                    "item_set",
+                    Value::WrathItemSet(row.item_set.try_into().unwrap()),
+                ),
+                Field::new("max_durability", Value::Int(row.max_durability)),
+                Field::new("area", Value::WrathArea(row.area.try_into().unwrap())),
+                Field::new("map", Value::WrathMap(row.map.try_into().unwrap())),
+                Field::new(
+                    "bag_family",
+                    Value::TbcWrathBagFamily(row.bag_family.try_into().unwrap()),
+                ),
+                Field::new("totem_category", Value::Int(row.totem_category)),
+                Field::new("socket_bonus", Value::Int(row.socket_bonus)),
+                Field::new("gem_properties", Value::Int(row.gem_properties)),
+                Field::new(
+                    "required_disenchant_skill",
+                    Value::Int(row.required_disenchant_skill),
+                ),
+                Field::new(
+                    "armor_damage_modifier",
+                    Value::float(row.armor_damage_modifier),
+                ),
+                Field::new("duration", Value::Int(row.duration)),
+                Field::new("item_limit_category", Value::Int(row.item_limit_category)),
+                Field::new("holiday_id", Value::Int(row.holiday_id)),
+                Field::new("disenchant_id", Value::Int(row.disenchant_id)),
+                Field::new("food_type", Value::Int(row.food_type)),
+                Field::new("min_money_loot", Value::Int(row.min_money_loot)),
+                Field::new("max_money_loot", Value::Int(row.max_money_loot)),
+                Field::new(
+                    "extra_flags",
+                    Value::Int(process_extra_flags(row.entry, row.extra_flags, &row.name)),
+                ),
+            ];
 
-    let items: Vec<_> = r.map(|a| a.unwrap().into_generic_item()).collect();
+            let arrays = vec![
+                Array::new(
+                    "sockets",
+                    "ItemSocket",
+                    true,
+                    ArrayInstances::new(vec![
+                        ArrayInstance::default_values(vec![
+                            ArrayField::new(
+                                "color",
+                                "socket_color_1",
+                                Value::Uint(row.socket_color_1),
+                            ),
+                            ArrayField::new(
+                                "content",
+                                "socket_content_1",
+                                Value::Uint(row.socket_content_1),
+                            ),
+                        ]),
+                        ArrayInstance::default_values(vec![
+                            ArrayField::new(
+                                "color",
+                                "socket_color_2",
+                                Value::Uint(row.socket_color_2),
+                            ),
+                            ArrayField::new(
+                                "content",
+                                "socket_content_2",
+                                Value::Uint(row.socket_content_2),
+                            ),
+                        ]),
+                        ArrayInstance::default_values(vec![
+                            ArrayField::new(
+                                "color",
+                                "socket_color_3",
+                                Value::Uint(row.socket_color_3),
+                            ),
+                            ArrayField::new(
+                                "content",
+                                "socket_content_3",
+                                Value::Uint(row.socket_content_3),
+                            ),
+                        ]),
+                    ]),
+                ),
+                Array::new(
+                    "damages",
+                    "ItemDamageType",
+                    true,
+                    ArrayInstances::new(vec![
+                        ArrayInstance::new(
+                            row.dmg_min1 == 0.0 && row.dmg_max1 == 0.0,
+                            vec![
+                                ArrayField::new(
+                                    "damage_minimum",
+                                    "dmg_min1",
+                                    Value::float(row.dmg_min1),
+                                ),
+                                ArrayField::new(
+                                    "damage_maximum",
+                                    "dmg_max1",
+                                    Value::float(row.dmg_max1),
+                                ),
+                                ArrayField::new(
+                                    "school",
+                                    "dmg_type1",
+                                    Value::SpellSchool(row.dmg_type1.try_into().unwrap()),
+                                ),
+                            ],
+                        ),
+                        ArrayInstance::new(
+                            row.dmg_min2 == 0.0 && row.dmg_max2 == 0.0,
+                            vec![
+                                ArrayField::new(
+                                    "damage_minimum",
+                                    "dmg_min2",
+                                    Value::float(row.dmg_min2),
+                                ),
+                                ArrayField::new(
+                                    "damage_maximum",
+                                    "dmg_max2",
+                                    Value::float(row.dmg_max2),
+                                ),
+                                ArrayField::new(
+                                    "school",
+                                    "dmg_type2",
+                                    Value::SpellSchool(row.dmg_type2.try_into().unwrap()),
+                                ),
+                            ],
+                        ),
+                    ]),
+                ),
+                Array::new(
+                    "stats",
+                    "ItemStat",
+                    true,
+                    ArrayInstances::new(vec![
+                        ArrayInstance::new(
+                            row.stat_value1 == 0,
+                            vec![
+                                ArrayField::new(
+                                    "stat_type",
+                                    "stat_type1",
+                                    Value::Uint(row.stat_type1.try_into().unwrap()),
+                                ),
+                                ArrayField::new(
+                                    "value",
+                                    "stat_value1",
+                                    Value::Int(row.stat_value1),
+                                ),
+                            ],
+                        ),
+                        ArrayInstance::new(
+                            row.stat_value2 == 0,
+                            vec![
+                                ArrayField::new(
+                                    "stat_type",
+                                    "stat_type2",
+                                    Value::Uint(row.stat_type2.try_into().unwrap()),
+                                ),
+                                ArrayField::new(
+                                    "value",
+                                    "stat_value2",
+                                    Value::Int(row.stat_value2),
+                                ),
+                            ],
+                        ),
+                        ArrayInstance::new(
+                            row.stat_value3 == 0,
+                            vec![
+                                ArrayField::new(
+                                    "stat_type",
+                                    "stat_type3",
+                                    Value::Uint(row.stat_type3.try_into().unwrap()),
+                                ),
+                                ArrayField::new(
+                                    "value",
+                                    "stat_value3",
+                                    Value::Int(row.stat_value3),
+                                ),
+                            ],
+                        ),
+                        ArrayInstance::new(
+                            row.stat_value4 == 0,
+                            vec![
+                                ArrayField::new(
+                                    "stat_type",
+                                    "stat_type4",
+                                    Value::Uint(row.stat_type4.try_into().unwrap()),
+                                ),
+                                ArrayField::new(
+                                    "value",
+                                    "stat_value4",
+                                    Value::Int(row.stat_value4),
+                                ),
+                            ],
+                        ),
+                        ArrayInstance::new(
+                            row.stat_value5 == 0,
+                            vec![
+                                ArrayField::new(
+                                    "stat_type",
+                                    "stat_type5",
+                                    Value::Uint(row.stat_type5.try_into().unwrap()),
+                                ),
+                                ArrayField::new(
+                                    "value",
+                                    "stat_value5",
+                                    Value::Int(row.stat_value5),
+                                ),
+                            ],
+                        ),
+                        ArrayInstance::new(
+                            row.stat_value6 == 0,
+                            vec![
+                                ArrayField::new(
+                                    "stat_type",
+                                    "stat_type6",
+                                    Value::Uint(row.stat_type6.try_into().unwrap()),
+                                ),
+                                ArrayField::new(
+                                    "value",
+                                    "stat_value6",
+                                    Value::Int(row.stat_value6),
+                                ),
+                            ],
+                        ),
+                        ArrayInstance::new(
+                            row.stat_value7 == 0,
+                            vec![
+                                ArrayField::new(
+                                    "stat_type",
+                                    "stat_type7",
+                                    Value::Uint(row.stat_type7.try_into().unwrap()),
+                                ),
+                                ArrayField::new(
+                                    "value",
+                                    "stat_value7",
+                                    Value::Int(row.stat_value7),
+                                ),
+                            ],
+                        ),
+                        ArrayInstance::new(
+                            row.stat_value8 == 0,
+                            vec![
+                                ArrayField::new(
+                                    "stat_type",
+                                    "stat_type8",
+                                    Value::Uint(row.stat_type8.try_into().unwrap()),
+                                ),
+                                ArrayField::new(
+                                    "value",
+                                    "stat_value8",
+                                    Value::Int(row.stat_value8),
+                                ),
+                            ],
+                        ),
+                        ArrayInstance::new(
+                            row.stat_value9 == 0,
+                            vec![
+                                ArrayField::new(
+                                    "stat_type",
+                                    "stat_type9",
+                                    Value::Uint(row.stat_type9.try_into().unwrap()),
+                                ),
+                                ArrayField::new(
+                                    "value",
+                                    "stat_value9",
+                                    Value::Int(row.stat_value9),
+                                ),
+                            ],
+                        ),
+                        ArrayInstance::new(
+                            row.stat_value10 == 0,
+                            vec![
+                                ArrayField::new(
+                                    "stat_type",
+                                    "stat_type10",
+                                    Value::Uint(row.stat_type10.try_into().unwrap()),
+                                ),
+                                ArrayField::new(
+                                    "value",
+                                    "stat_value10",
+                                    Value::Int(row.stat_value10),
+                                ),
+                            ],
+                        ),
+                    ]),
+                ),
+                Array::new(
+                    "spells",
+                    "Spells",
+                    false,
+                    ArrayInstances::new(vec![
+                        ArrayInstance::new(
+                            row.spell_id_1 == 0,
+                            vec![
+                                ArrayField::new("spell", "spell_id_1", Value::Int(row.spell_id_1)),
+                                ArrayField::new(
+                                    "spell_trigger",
+                                    "spell_trigger_1",
+                                    Value::TbcWrathSpellTriggerType(
+                                        row.spell_trigger_1.try_into().unwrap(),
+                                    ),
+                                ),
+                                ArrayField::new(
+                                    "spell_charges",
+                                    "spell_charges_1",
+                                    Value::Int(row.spell_charges_1),
+                                ),
+                                ArrayField::new(
+                                    "spell_ppm_rate",
+                                    "spell_ppm_rate_1",
+                                    Value::float(row.spell_ppm_rate_1),
+                                ),
+                                ArrayField::new(
+                                    "spell_cooldown",
+                                    "spell_cooldown_1",
+                                    Value::Int(row.spell_cooldown_1),
+                                ),
+                                ArrayField::new(
+                                    "spell_category",
+                                    "spell_category_1",
+                                    Value::Int(row.spell_category_1),
+                                ),
+                                ArrayField::new(
+                                    "spell_category_cooldown",
+                                    "spell_category_cooldown_1",
+                                    Value::Int(row.spell_category_cooldown_1),
+                                ),
+                            ],
+                        ),
+                        ArrayInstance::new(
+                            row.spell_id_2 == 0,
+                            vec![
+                                ArrayField::new("spell", "spell_id_2", Value::Int(row.spell_id_2)),
+                                ArrayField::new(
+                                    "spell_trigger",
+                                    "spell_trigger_2",
+                                    Value::TbcWrathSpellTriggerType(
+                                        row.spell_trigger_2.try_into().unwrap(),
+                                    ),
+                                ),
+                                ArrayField::new(
+                                    "spell_charges",
+                                    "spell_charges_2",
+                                    Value::Int(row.spell_charges_2),
+                                ),
+                                ArrayField::new(
+                                    "spell_ppm_rate",
+                                    "spell_ppm_rate_2",
+                                    Value::float(row.spell_ppm_rate_2),
+                                ),
+                                ArrayField::new(
+                                    "spell_cooldown",
+                                    "spell_cooldown_2",
+                                    Value::Int(row.spell_cooldown_2),
+                                ),
+                                ArrayField::new(
+                                    "spell_category",
+                                    "spell_category_2",
+                                    Value::Int(row.spell_category_2),
+                                ),
+                                ArrayField::new(
+                                    "spell_category_cooldown",
+                                    "spell_category_cooldown_2",
+                                    Value::Int(row.spell_category_cooldown_2),
+                                ),
+                            ],
+                        ),
+                        ArrayInstance::new(
+                            row.spell_id_3 == 0,
+                            vec![
+                                ArrayField::new("spell", "spell_id_3", Value::Int(row.spell_id_3)),
+                                ArrayField::new(
+                                    "spell_trigger",
+                                    "spell_trigger_3",
+                                    Value::TbcWrathSpellTriggerType(
+                                        row.spell_trigger_3.try_into().unwrap(),
+                                    ),
+                                ),
+                                ArrayField::new(
+                                    "spell_charges",
+                                    "spell_charges_3",
+                                    Value::Int(row.spell_charges_3),
+                                ),
+                                ArrayField::new(
+                                    "spell_ppm_rate",
+                                    "spell_ppm_rate_3",
+                                    Value::float(row.spell_ppm_rate_3),
+                                ),
+                                ArrayField::new(
+                                    "spell_cooldown",
+                                    "spell_cooldown_3",
+                                    Value::Int(row.spell_cooldown_3),
+                                ),
+                                ArrayField::new(
+                                    "spell_category",
+                                    "spell_category_3",
+                                    Value::Int(row.spell_category_3),
+                                ),
+                                ArrayField::new(
+                                    "spell_category_cooldown",
+                                    "spell_category_cooldown_3",
+                                    Value::Int(row.spell_category_cooldown_3),
+                                ),
+                            ],
+                        ),
+                        ArrayInstance::new(
+                            row.spell_id_4 == 0,
+                            vec![
+                                ArrayField::new("spell", "spell_id_4", Value::Int(row.spell_id_4)),
+                                ArrayField::new(
+                                    "spell_trigger",
+                                    "spell_trigger_4",
+                                    Value::TbcWrathSpellTriggerType(
+                                        row.spell_trigger_4.try_into().unwrap(),
+                                    ),
+                                ),
+                                ArrayField::new(
+                                    "spell_charges",
+                                    "spell_charges_4",
+                                    Value::Int(row.spell_charges_4),
+                                ),
+                                ArrayField::new(
+                                    "spell_ppm_rate",
+                                    "spell_ppm_rate_4",
+                                    Value::float(row.spell_ppm_rate_4),
+                                ),
+                                ArrayField::new(
+                                    "spell_cooldown",
+                                    "spell_cooldown_4",
+                                    Value::Int(row.spell_cooldown_4),
+                                ),
+                                ArrayField::new(
+                                    "spell_category",
+                                    "spell_category_4",
+                                    Value::Int(row.spell_category_4),
+                                ),
+                                ArrayField::new(
+                                    "spell_category_cooldown",
+                                    "spell_category_cooldown_4",
+                                    Value::Int(row.spell_category_cooldown_4),
+                                ),
+                            ],
+                        ),
+                        ArrayInstance::new(
+                            row.spell_id_5 == 0,
+                            vec![
+                                ArrayField::new("spell", "spell_id_5", Value::Int(row.spell_id_5)),
+                                ArrayField::new(
+                                    "spell_trigger",
+                                    "spell_trigger_5",
+                                    Value::TbcWrathSpellTriggerType(
+                                        row.spell_trigger_5.try_into().unwrap(),
+                                    ),
+                                ),
+                                ArrayField::new(
+                                    "spell_charges",
+                                    "spell_charges_5",
+                                    Value::Int(row.spell_charges_5),
+                                ),
+                                ArrayField::new(
+                                    "spell_ppm_rate",
+                                    "spell_ppm_rate_5",
+                                    Value::float(row.spell_ppm_rate_5),
+                                ),
+                                ArrayField::new(
+                                    "spell_cooldown",
+                                    "spell_cooldown_5",
+                                    Value::Int(row.spell_cooldown_5),
+                                ),
+                                ArrayField::new(
+                                    "spell_category",
+                                    "spell_category_5",
+                                    Value::Int(row.spell_category_5),
+                                ),
+                                ArrayField::new(
+                                    "spell_category_cooldown",
+                                    "spell_category_cooldown_5",
+                                    Value::Int(row.spell_category_cooldown_5),
+                                ),
+                            ],
+                        ),
+                    ]),
+                ),
+            ];
+
+            GenericThing::new(row.entry, row.extra_flags, row.name, fields, arrays)
+        })
+        .collect();
+
+    assertions(&items);
     let opt = Optimizations::new(&items, get_fields(&items));
     (items, opt)
 }
