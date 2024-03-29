@@ -24,3 +24,4 @@ rusqlite = { version = "0.29.0", features = ["bundled"] }
 wow_world_base = { workspace = true, features = ["vanilla", "tbc", "wrath"] }
 ordered-float = "3.4.0"
 hashbrown = "0.13.2"
+csv = "1.3.0"

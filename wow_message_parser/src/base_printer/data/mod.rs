@@ -5,13 +5,14 @@ pub(crate) mod spells;
 
 use super::position::{positions, RawPosition};
 use super::types::{Class, Race};
-use super::Expansion;
+use super::{read_csv_file, Expansion};
 use crate::base_printer::data::items::{get_items, Field, Optimizations};
 use crate::base_printer::data::pet_names::{get_pet_name_data, Pet, PetNames};
 use crate::base_printer::data::spells::get_spells;
 use crate::base_printer::write::items::GenericThing;
 use hashbrown::HashMap;
 use rusqlite::Connection;
+use serde::Deserialize;
 use std::collections::{BTreeMap, BTreeSet};
 use std::path::Path;
 
@@ -44,30 +45,26 @@ pub(crate) fn get_fields(things: &[GenericThing]) -> &[Field] {
     &things[0].fields
 }
 
-pub(crate) struct XpPerLevel {
-    pub level: u8,
-    pub exp: i32,
-}
-
 pub(crate) fn get_data_from_sqlite_file(sqlite_file: &Path, expansion: Expansion) -> Data {
     let spell_file = sqlite_file.to_path_buf();
     let spell_thread = std::thread::spawn(move || {
         let spell_conn = Connection::open(spell_file).unwrap();
         get_spells(&spell_conn, expansion)
     });
+    let csv_directory = expansion.csv_data_directory();
 
     let conn = Connection::open(sqlite_file).unwrap();
 
-    let combinations = get_combinations(&conn);
-    let exp_per_level = get_exp_data(&conn);
-    let exploration_exp_per_level = get_exploration_exp_data(&conn);
-    let base_stats = get_stat_data(&conn);
-    let skills = get_skill_data(&conn);
-    let initial_spells = get_initial_spell_data(&conn);
-    let actions = get_action_data(&conn);
+    let combinations = get_combinations(&csv_directory);
+    let exp_per_level = get_exp_data(&csv_directory);
+    let exploration_exp_per_level = get_exploration_exp_data(&csv_directory);
+    let base_stats = get_stat_data(&csv_directory);
+    let skills = get_skill_data(&csv_directory);
+    let initial_spells = get_initial_spell_data(&csv_directory);
+    let actions = get_action_data(&csv_directory);
     let positions = positions();
-    let triggers = get_triggers(&conn, expansion);
-    let pet_names = get_pet_name_data(&conn);
+    let triggers = get_triggers(&csv_directory);
+    let pet_names = get_pet_name_data(&csv_directory);
     let items = get_items(&conn, expansion);
 
     let spells = spell_thread.join().unwrap();
@@ -88,41 +85,18 @@ pub(crate) fn get_data_from_sqlite_file(sqlite_file: &Path, expansion: Expansion
     }
 }
 
-fn get_exploration_exp_data(conn: &Connection) -> Vec<XpPerLevel> {
-    conn.prepare("SELECT level, basexp FROM exploration_basexp;")
-        .unwrap()
-        .query_map([], |row| {
-            Ok(XpPerLevel {
-                level: row.get(0).unwrap(),
-                exp: row.get(1).unwrap(),
-            })
-        })
-        .unwrap()
-        .filter_map(|a| {
-            let a = a.unwrap();
-            if a.level == 0 {
-                None
-            } else {
-                Some(a)
-            }
-        })
-        .collect::<Vec<_>>()
+#[derive(Deserialize)]
+pub(crate) struct XpPerLevel {
+    pub level: u8,
+    pub exp: i32,
 }
 
-fn get_exp_data(conn: &Connection) -> Vec<XpPerLevel> {
-    let mut s = conn
-        .prepare("select lvl, xp_for_next_level from player_xp_for_level;")
-        .unwrap();
-    let xp = s
-        .query_map([], |row| {
-            Ok(XpPerLevel {
-                level: row.get(0).unwrap(),
-                exp: row.get(1).unwrap(),
-            })
-        })
-        .unwrap();
+fn get_exploration_exp_data(dir: &Path) -> Vec<XpPerLevel> {
+    read_csv_file(dir, "exploration_exp")
+}
 
-    xp.map(|a| a.unwrap()).collect()
+fn get_exp_data(dir: &Path) -> Vec<XpPerLevel> {
+    read_csv_file::<XpPerLevel>(dir, "level_exp")
 }
 
 #[derive(Debug, Clone, Copy, Ord, PartialOrd, Eq, PartialEq, Hash)]
@@ -144,40 +118,40 @@ pub(crate) struct BaseStatLevel {
     stats: BaseStats,
 }
 
-fn get_stat_data(conn: &Connection) -> HashMap<Combination, BTreeMap<u8, BaseStats>> {
-    let mut s = conn
-        .prepare(
-            "\
-SELECT
-    race, l.class, l.level, str, agi, sta, inte, spi, basehp, basemana
-FROM player_levelstats l
-    LEFT JOIN player_classlevelstats c
-        on l.level = c.level and l.class = c.class;",
-        )
-        .unwrap();
+#[derive(Deserialize)]
+struct StatData {
+    pub race: u8,
+    pub class: u8,
+    pub level: u8,
+    pub str: u8,
+    pub agi: u8,
+    pub sta: u8,
+    pub inte: u8,
+    pub spi: u8,
+    pub basehp: u32,
+    pub basemana: u32,
+}
 
-    let stats = s
-        .query_map([], |row| {
-            Ok(BaseStatLevel {
-                race: row.get::<usize, u8>(0).unwrap().try_into().unwrap(),
-                class: row.get::<usize, u8>(1).unwrap().try_into().unwrap(),
-                level: row.get(2).unwrap(),
-                stats: BaseStats {
-                    strength: row.get(3).unwrap(),
-                    agility: row.get(4).unwrap(),
-                    stamina: row.get(5).unwrap(),
-                    intellect: row.get(6).unwrap(),
-                    spirit: row.get(7).unwrap(),
-                    health: row.get(8).unwrap(),
-                    mana: row.get(9).unwrap(),
-                },
-            })
+fn get_stat_data(dir: &Path) -> HashMap<Combination, BTreeMap<u8, BaseStats>> {
+    let stats: Vec<_> = read_csv_file::<StatData>(dir, "stat_data")
+        .into_iter()
+        .map(|row| BaseStatLevel {
+            race: row.race.try_into().unwrap(),
+            class: row.class.try_into().unwrap(),
+            level: row.level,
+            stats: BaseStats {
+                strength: row.str,
+                agility: row.agi,
+                stamina: row.sta,
+                intellect: row.inte,
+                spirit: row.spi,
+                health: row.basehp,
+                mana: row.basemana,
+            },
         })
-        .unwrap();
+        .collect();
 
-    let stats: Vec<BaseStatLevel> = stats.map(|a| a.unwrap()).collect();
-
-    let combinations = get_combinations(conn);
+    let combinations = get_combinations(dir);
 
     let mut h = HashMap::new();
 
@@ -198,34 +172,20 @@ FROM player_levelstats l
     h
 }
 
+#[derive(Deserialize)]
 struct Skill {
+    #[serde(rename = "raceMask")]
     race_mask: u32,
+    #[serde(rename = "classMask")]
     class_mask: u32,
     skill: u32,
     note: String,
 }
 
-fn get_skill_data(conn: &Connection) -> HashMap<Combination, BTreeSet<(u32, String)>> {
-    let mut s = conn
-        .prepare(
-            "SELECT raceMask, classMask, skill, note FROM playercreateinfo_skills ORDER BY skill;
-",
-        )
-        .unwrap();
-    let skills = s
-        .query_map([], |row| {
-            Ok(Skill {
-                race_mask: row.get(0).unwrap(),
-                class_mask: row.get(1).unwrap(),
-                skill: row.get(2).unwrap(),
-                note: row.get(3).unwrap(),
-            })
-        })
-        .unwrap();
+fn get_skill_data(dir: &Path) -> HashMap<Combination, BTreeSet<(u32, String)>> {
+    let skills = read_csv_file::<Skill>(dir, "skills");
 
-    let skills: Vec<Skill> = skills.map(|a| a.unwrap()).collect();
-
-    let combinations = get_combinations(conn);
+    let combinations = get_combinations(dir);
     let mut h = HashMap::new();
 
     for combination in combinations {
@@ -251,6 +211,16 @@ fn get_skill_data(conn: &Connection) -> HashMap<Combination, BTreeSet<(u32, Stri
     h
 }
 
+#[derive(Deserialize)]
+struct CsvSpell {
+    race: u8,
+    class: u8,
+    #[serde(rename = "Spell")]
+    spell: u32,
+    #[serde(rename = "Note")]
+    note: String,
+}
+
 struct Spell {
     race: Race,
     class: Class,
@@ -258,24 +228,18 @@ struct Spell {
     note: String,
 }
 
-fn get_initial_spell_data(conn: &Connection) -> HashMap<Combination, BTreeSet<(u32, String)>> {
-    let mut s = conn
-        .prepare("SELECT race, class, Spell, Note FROM playercreateinfo_spell;")
-        .unwrap();
-    let spells: Vec<Spell> = s
-        .query_map([], |row| {
-            Ok(Spell {
-                race: row.get::<usize, u8>(0).unwrap().try_into().unwrap(),
-                class: row.get::<usize, u8>(1).unwrap().try_into().unwrap(),
-                spell: row.get(2).unwrap(),
-                note: row.get(3).unwrap(),
-            })
+fn get_initial_spell_data(dir: &Path) -> HashMap<Combination, BTreeSet<(u32, String)>> {
+    let spells = read_csv_file::<CsvSpell>(dir, "initial_spells")
+        .into_iter()
+        .map(|a| Spell {
+            race: a.race.try_into().unwrap(),
+            class: a.class.try_into().unwrap(),
+            spell: a.spell,
+            note: a.note,
         })
-        .unwrap()
-        .map(|a| a.unwrap())
-        .collect();
+        .collect::<Vec<_>>();
 
-    let combinations = get_combinations(conn);
+    let combinations = get_combinations(dir);
 
     let mut h = HashMap::new();
 
@@ -302,51 +266,47 @@ pub(crate) struct Combination {
 }
 
 #[derive(Debug, Clone, Copy, Ord, PartialOrd, Eq, PartialEq, Hash)]
-struct ActionRaceClass {
-    race: Race,
-    class: Class,
-    action: Action,
-}
-
-#[derive(Debug, Clone, Copy, Ord, PartialOrd, Eq, PartialEq, Hash)]
 pub(crate) struct Action {
     pub button: u8,
     pub action: u16,
     pub ty: u8,
 }
 
-fn get_action_data(conn: &Connection) -> HashMap<Combination, BTreeSet<Action>> {
-    let mut s = conn
-        .prepare("SELECT race, class, button, action, type FROM playercreateinfo_action;")
-        .unwrap();
-    let actions = s
-        .query_map([], |row| {
-            Ok(ActionRaceClass {
-                race: row.get::<usize, u8>(0).unwrap().try_into().unwrap(),
-                class: row.get::<usize, u8>(1).unwrap().try_into().unwrap(),
-                action: Action {
-                    button: row.get(2).unwrap(),
-                    action: row.get(3).unwrap(),
-                    ty: row.get(4).unwrap(),
-                },
-            })
-        })
-        .unwrap()
-        .map(|a| a.unwrap())
-        .collect::<Vec<_>>();
+#[derive(Deserialize)]
+pub(crate) struct CsvCombination {
+    pub race: u8,
+    pub class: u8,
+}
 
-    let combinations = get_combinations(conn);
+#[derive(Deserialize)]
+struct ActionRaceClass {
+    pub race: u8,
+    pub class: u8,
+    pub button: u8,
+    pub action: u16,
+    #[serde(rename = "type")]
+    pub ty: u8,
+}
+
+fn get_action_data(dir: &Path) -> HashMap<Combination, BTreeSet<Action>> {
+    let actions = read_csv_file::<ActionRaceClass>(dir, "actions");
+
+    let combinations = get_combinations(dir);
 
     let mut h = HashMap::new();
 
     for combination in combinations {
-        let actions = actions
-            .iter()
-            .filter(|a| a.class == combination.class && a.race == combination.race);
+        let actions = actions.iter().filter(|a| {
+            a.class == combination.class.as_int() && a.race == combination.race.as_int()
+        });
 
         let mut s = BTreeSet::new();
         for action in actions {
-            s.insert(action.action);
+            s.insert(Action {
+                button: action.button,
+                action: action.action,
+                ty: action.ty,
+            });
         }
         h.insert(combination, s);
     }
@@ -354,22 +314,15 @@ fn get_action_data(conn: &Connection) -> HashMap<Combination, BTreeSet<Action>> 
     h
 }
 
-fn get_combinations(conn: &Connection) -> Vec<Combination> {
-    let mut combinations = conn
-        .prepare("SELECT DISTINCT race, class FROM player_levelstats ORDER BY race, class;")
-        .unwrap();
-
-    let combinations = combinations
-        .query_map([], |row| {
-            Ok(Combination {
-                race: row.get::<usize, u8>(0).unwrap().try_into().unwrap(),
-                class: row.get::<usize, u8>(1).unwrap().try_into().unwrap(),
-            })
+fn get_combinations(dir: &Path) -> Vec<Combination> {
+    let mut combinations: Vec<_> = read_csv_file::<CsvCombination>(dir, "distinct_actions")
+        .iter()
+        .map(|a| Combination {
+            race: a.race.try_into().unwrap(),
+            class: a.class.try_into().unwrap(),
         })
-        .unwrap();
-    let mut combinations: Vec<_> = combinations.map(|a| a.unwrap()).collect();
+        .collect();
     combinations.sort_by(|a, b| a.race.cmp(&b.race).then(a.class.cmp(&b.class)));
-
     combinations
 }
 
@@ -411,184 +364,92 @@ impl Trigger {
     }
 }
 
-fn get_triggers(conn: &Connection, expansion: Expansion) -> Vec<Trigger> {
-    let mut taverns = conn
-        .prepare("SELECT id, name from areatrigger_tavern;")
-        .unwrap();
-    let taverns = taverns
-        .query_map([], |row| {
-            Ok(Trigger::Inn {
-                id: row.get(0).unwrap(),
-                name: row.get(1).unwrap(),
-            })
-        })
-        .unwrap();
+#[derive(Deserialize, Clone)]
+struct AreaTriggerTavern {
+    id: u32,
+    name: String,
+}
 
-    let mut quests = conn
-        .prepare("SELECT id, quest FROM areatrigger_involvedrelation;")
-        .unwrap();
-    let quests = quests
-        .query_map([], |row| {
-            Ok(Trigger::Quest {
-                id: row.get(0).unwrap(),
-                quest: row.get(1).unwrap(),
-            })
-        })
-        .unwrap();
+#[derive(Deserialize, Clone)]
+struct AreaTriggerQuest {
+    id: u32,
+    quest: u32,
+}
 
-    match expansion {
-        Expansion::Vanilla => {
-            let mut t = conn
-                .prepare(
-                    "\
-SELECT
-    id,
-    required_level,
-    required_item,
-    required_quest_done,
-    target_map,
-    target_position_x,
-    target_position_y,
-    target_position_z,
-    target_orientation,
-    status_failed_text,
-    name
-FROM
-    areatrigger_teleport;",
-                )
-                .unwrap();
-            t.query_map([], |row| {
-                Ok(Trigger::Teleport {
-                    id: row.get(0).unwrap(),
-                    required_level: row.get(1).unwrap(),
-                    required_item: row.get(2).unwrap(),
-                    required_quest: row.get(3).unwrap(),
-                    map: row.get(4).unwrap(),
-                    x: row.get(5).unwrap(),
-                    y: row.get(6).unwrap(),
-                    z: row.get(7).unwrap(),
-                    orientation: row.get(8).unwrap(),
-                    failed_text: row.get(9).unwrap(),
-                    heroic_keys: vec![],
-                    heroic_required_quest: 0,
-                    name: row.get(10).unwrap(),
-                })
-            })
-            .unwrap()
-            .chain(quests)
-            .chain(taverns)
-            .map(|a| a.unwrap())
-            .collect()
-        }
-        Expansion::BurningCrusade => {
-            let mut t = conn
-                .prepare(
-                    "\
-SELECT
-    id,
-    required_level,
-    required_item,
-    required_quest_done,
-    target_map,
-    target_position_x,
-    target_position_y,
-    target_position_z,
-    target_orientation,
-    status_failed_text,
-    heroic_key,
-    heroic_key2,
-    required_quest_done_heroic,
-    name
-FROM
-    areatrigger_teleport;",
-                )
-                .unwrap();
-            t.query_map([], |row| {
-                let mut heroic_keys = vec![];
-                let heroic_key: u32 = row.get(10).unwrap();
-                if heroic_key != 0 {
-                    heroic_keys.push(heroic_key);
-                }
-                let heroic_key2 = row.get(11).unwrap();
-                if heroic_key2 != 0 {
-                    heroic_keys.push(heroic_key2);
-                }
-                Ok(Trigger::Teleport {
-                    id: row.get(0).unwrap(),
-                    required_level: row.get(1).unwrap(),
-                    required_item: row.get(2).unwrap(),
-                    required_quest: row.get(3).unwrap(),
-                    map: row.get(4).unwrap(),
-                    x: row.get(5).unwrap(),
-                    y: row.get(6).unwrap(),
-                    z: row.get(7).unwrap(),
-                    orientation: row.get(8).unwrap(),
-                    failed_text: row.get(9).unwrap(),
-                    heroic_keys: vec![],
-                    heroic_required_quest: row.get(12).unwrap(),
-                    name: row.get(13).unwrap(),
-                })
-            })
-            .unwrap()
-            .chain(quests)
-            .chain(taverns)
-            .map(|a| a.unwrap())
-            .collect()
-        }
-        Expansion::WrathOfTheLichKing => {
-            let mut t = conn
-                .prepare(
-                    "\
-SELECT
-    id,
-    required_level,
-    required_item,
-    required_quest_done,
-    target_map,
-    target_position_x,
-    target_position_y,
-    target_position_z,
-    target_orientation,
-    heroic_key,
-    heroic_key2,
-    required_quest_done_heroic,
-    name
-FROM
-    areatrigger_teleport;",
-                )
-                .unwrap();
-            t.query_map([], |row| {
-                let mut heroic_keys = vec![];
-                let heroic_key = row.get(9).unwrap();
-                if heroic_key != 0 {
-                    heroic_keys.push(heroic_key);
-                }
-                let heroic_key2 = row.get(10).unwrap();
-                if heroic_key2 != 0 {
-                    heroic_keys.push(heroic_key2);
-                }
+#[derive(Deserialize, Clone)]
+struct AreaTriggerTeleport {
+    name: String,
+    id: u32,
+    #[serde(rename = "target_map")]
+    map: u32,
+    #[serde(rename = "target_position_x")]
+    x: f32,
+    #[serde(rename = "target_position_y")]
+    y: f32,
+    #[serde(rename = "target_position_z")]
+    z: f32,
+    #[serde(rename = "target_orientation")]
+    orientation: f32,
+    required_level: u8,
+    required_item: u32,
+    #[serde(rename = "required_quest_done")]
+    required_quest: u32,
+    #[serde(rename = "status_failed_text")]
+    failed_text: Option<String>,
+    // Below not required for vanilla
+    #[serde(default)]
+    heroic_key: u32,
+    #[serde(default)]
+    heroic_key2: u32,
+    #[serde(rename = "required_quest_done_heroic")]
+    #[serde(default)]
+    heroic_required_quest: u32,
+}
 
-                Ok(Trigger::Teleport {
-                    id: row.get(0).unwrap(),
-                    required_level: row.get(1).unwrap(),
-                    required_item: row.get(2).unwrap(),
-                    required_quest: row.get(3).unwrap(),
-                    map: row.get(4).unwrap(),
-                    x: row.get(5).unwrap(),
-                    y: row.get(6).unwrap(),
-                    z: row.get(7).unwrap(),
-                    orientation: row.get(8).unwrap(),
-                    failed_text: None,
-                    heroic_keys,
-                    heroic_required_quest: row.get(11).unwrap(),
-                    name: row.get(12).unwrap(),
-                })
-            })
-            .unwrap()
-            .chain(quests)
-            .chain(taverns)
-            .map(|a| a.unwrap())
-            .collect()
-        }
-    }
+fn get_triggers(dir: &Path) -> Vec<Trigger> {
+    let taverns = read_csv_file::<AreaTriggerTavern>(&dir, "tavern_triggers")
+        .into_iter()
+        .map(|row| Trigger::Inn {
+            id: row.id,
+            name: row.name,
+        });
+
+    let quests = read_csv_file::<AreaTriggerQuest>(&dir, "quest_triggers")
+        .into_iter()
+        .map(|row| Trigger::Quest {
+            id: row.id,
+            quest: row.quest,
+        });
+
+    let teleports = read_csv_file::<AreaTriggerTeleport>(&dir, "teleport_triggers")
+        .into_iter()
+        .map(|row| {
+            let mut heroic_keys = vec![];
+            let heroic_key = row.heroic_key;
+            if heroic_key != 0 {
+                heroic_keys.push(heroic_key);
+            }
+            let heroic_key2 = row.heroic_key2;
+            if heroic_key2 != 0 {
+                heroic_keys.push(heroic_key2);
+            }
+
+            Trigger::Teleport {
+                id: row.id,
+                map: row.map,
+                x: row.x,
+                y: row.y,
+                z: row.z,
+                orientation: row.orientation,
+                required_level: row.required_level,
+                required_item: row.required_item,
+                required_quest: row.required_quest,
+                failed_text: row.failed_text,
+                heroic_keys,
+                heroic_required_quest: row.heroic_required_quest,
+                name: row.name,
+            }
+        });
+
+    teleports.chain(quests).chain(taverns).collect()
 }

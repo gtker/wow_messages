@@ -1,5 +1,7 @@
-use rusqlite::Connection;
+use crate::base_printer::read_csv_file;
+use serde::Deserialize;
 use std::collections::BTreeMap;
+use std::path::Path;
 
 #[derive(Debug, Copy, Clone, Ord, PartialOrd, Eq, PartialEq, Hash)]
 pub(crate) enum Pet {
@@ -20,7 +22,7 @@ impl Pet {
             1863 => Pet::Succubus,
             17252 => Pet::Felguard,
             26125 => Pet::RisenGhoul,
-            v => panic!("Invalid warlock pet '{v}'"),
+            _ => panic!("Invalid warlock pet '{v}'"),
         }
     }
 }
@@ -30,18 +32,19 @@ pub(crate) struct PetNames {
     pub last_names: Vec<String>,
 }
 
-pub(crate) fn get_pet_name_data(conn: &Connection) -> BTreeMap<Pet, PetNames> {
-    let mut c = conn
-        .prepare("SELECT word, entry, half FROM pet_name_generation;")
-        .unwrap();
+#[derive(Deserialize, Clone)]
+struct PetNameGeneration {
+    pub word: String,
+    pub entry: u16,
+    pub half: u8,
+}
 
+pub(crate) fn get_pet_name_data(dir: &Path) -> BTreeMap<Pet, PetNames> {
     let mut map: BTreeMap<Pet, PetNames> = BTreeMap::new();
-
-    let mut rows = c.query([]).unwrap();
-    while let Ok(Some(row)) = rows.next() {
-        let entry: u16 = row.get(1).unwrap();
-        let word: String = row.get(0).unwrap();
-        let half: u8 = row.get(2).unwrap();
+    for row in read_csv_file::<PetNameGeneration>(&dir, "pet_names") {
+        let entry = row.entry;
+        let word: String = row.word;
+        let half: u8 = row.half;
 
         let pet = Pet::from_int(entry);
 

@@ -1301,21 +1301,21 @@ heroic_keys: None,heroic_required_quest: 0 },
     AreaTrigger::Square { position: Position::new(Map::Outland, -365.6, 3087.6, -14.6, 0.0), length: 11.4, width: 12.2, height: 15.6, yaw: 1.8 },
     &[
         Trigger::Teleport { location: Position::new(Map::HellfireCitadelRamparts, -1355.2, 1641.1, 68.2, 0.7),required_level: 55,required_item: 0,required_quest: 0,failed_text: Some("You must be at least level 55 to enter."),
-heroic_keys: None,heroic_required_quest: 0 },
+heroic_keys: Some(&[30637, 30622, ]),heroic_required_quest: 0 },
     ]
 )),
 (4151, (
     AreaTrigger::Square { position: Position::new(Map::Outland, -310.2, 3091.6, -4.2, 0.0), length: 8.3, width: 7.0, height: 17.4, yaw: 1.5 },
     &[
         Trigger::Teleport { location: Position::new(Map::HellfireCitadelTheShatteredHalls, -40.9, -19.8, -13.8, 1.1),required_level: 55,required_item: 0,required_quest: 0,failed_text: Some("You must be at least level 65 to enter."),
-heroic_keys: None,heroic_required_quest: 0 },
+heroic_keys: Some(&[30637, 30622, ]),heroic_required_quest: 0 },
     ]
 )),
 (4152, (
     AreaTrigger::Square { position: Position::new(Map::Outland, -307.3, 3170.5, 28.9, 0.0), length: 7.0, width: 13.8, height: 15.4, yaw: 2.1 },
     &[
         Trigger::Teleport { location: Position::new(Map::HellfireCitadelTheBloodFurnace, -4.0, 14.6, -44.8, 4.9),required_level: 55,required_item: 0,required_quest: 0,failed_text: Some("You must be at least level 55 to enter."),
-heroic_keys: None,heroic_required_quest: 0 },
+heroic_keys: Some(&[30637, 30622, ]),heroic_required_quest: 0 },
     ]
 )),
 (4153, (
@@ -1444,14 +1444,14 @@ heroic_keys: None,heroic_required_quest: 0 },
     AreaTrigger::Square { position: Position::new(Map::Kalimdor, -8777.4, -4156.9, -208.1, 0.0), length: 28.4, width: 55.1, height: 51.9, yaw: 1.9 },
     &[
         Trigger::Teleport { location: Position::new(Map::OpeningOfTheDarkPortal, -1491.6, 7056.5, 32.1, 1.7),required_level: 66,required_item: 0,required_quest: 10285,failed_text: Some("You must first save Thrall in Old Hillsbrad by helping him escape from Durnholde Keep before you may enter the Black Morass. You must also have The Burning Crusade installed."),
-heroic_keys: None,heroic_required_quest: 10298 },
+heroic_keys: Some(&[30635, ]),heroic_required_quest: 10298 },
     ]
 )),
 (4321, (
     AreaTrigger::Square { position: Position::new(Map::Kalimdor, -8326.3, -4047.4, -207.5, 0.0), length: 40.8, width: 21.4, height: 112.4, yaw: 2.2 },
     &[
         Trigger::Teleport { location: Position::new(Map::TheEscapeFromDurnholde, 2741.7, 1312.6, 14.0, 2.8),required_level: 66,required_item: 0,required_quest: 0,failed_text: Some("You must first complete the quest, \"The Caverns of Time,\" before you may enter Old Hillsbrad. You must also have The Burning Crusade installed."),
-heroic_keys: None,heroic_required_quest: 10285 },
+heroic_keys: Some(&[30635, ]),heroic_required_quest: 10285 },
     ]
 )),
 (4322, (
@@ -1505,21 +1505,21 @@ heroic_keys: None,heroic_required_quest: 0 },
     AreaTrigger::Square { position: Position::new(Map::Outland, 782.9, 6741.9, -72.5, 0.0), length: 29.8, width: 7.8, height: 33.9, yaw: 3.2 },
     &[
         Trigger::Teleport { location: Position::new(Map::CoilfangTheUnderbog, 9.7, -16.2, -2.8, 5.6),required_level: 55,required_item: 0,required_quest: 0,failed_text: Some("You must be at least level 55 to enter."),
-heroic_keys: None,heroic_required_quest: 0 },
+heroic_keys: Some(&[30623, ]),heroic_required_quest: 0 },
     ]
 )),
 (4364, (
     AreaTrigger::Square { position: Position::new(Map::Outland, 818.5, 6951.3, -80.6, 0.0), length: 30.6, width: 7.8, height: 29.7, yaw: 0.0 },
     &[
         Trigger::Teleport { location: Position::new(Map::CoilfangTheSteamvault, -13.8, 6.8, -4.3, 0.0),required_level: 55,required_item: 0,required_quest: 0,failed_text: Some("You must be at least level 65 to enter."),
-heroic_keys: None,heroic_required_quest: 0 },
+heroic_keys: Some(&[30623, ]),heroic_required_quest: 0 },
     ]
 )),
 (4365, (
     AreaTrigger::Square { position: Position::new(Map::Outland, 745.8, 7015.3, -72.1, 0.0), length: 12.2, width: 35.9, height: 24.1, yaw: 0.0 },
     &[
         Trigger::Teleport { location: Position::new(Map::CoilfangTheSlavePens, 120.1, -132.0, -0.8, 1.5),required_level: 55,required_item: 0,required_quest: 0,failed_text: Some("You must be at least level 55 to enter."),
-heroic_keys: None,heroic_required_quest: 0 },
+heroic_keys: Some(&[30623, ]),heroic_required_quest: 0 },
     ]
 )),
 (4366, (
@@ -1642,28 +1642,28 @@ heroic_keys: None,heroic_required_quest: 0 },
     AreaTrigger::Square { position: Position::new(Map::Outland, -3361.6, 5236.9, -101.0, 0.0), length: 26.3, width: 11.4, height: 19.6, yaw: 0.0 },
     &[
         Trigger::Teleport { location: Position::new(Map::AuchindounAuchenaiCrypts, -21.9, 0.2, -0.1, 0.0),required_level: 55,required_item: 0,required_quest: 0,failed_text: Some("You must be at least level 55 to enter."),
-heroic_keys: None,heroic_required_quest: 0 },
+heroic_keys: Some(&[30633, ]),heroic_required_quest: 0 },
     ]
 )),
 (4405, (
     AreaTrigger::Square { position: Position::new(Map::Outland, -3068.1, 4942.8, -101.0, 0.0), length: 12.3, width: 22.2, height: 27.1, yaw: 0.0 },
     &[
         Trigger::Teleport { location: Position::new(Map::AuchindounManaTombs, 0.0, 0.9, -1.0, 3.0),required_level: 55,required_item: 0,required_quest: 0,failed_text: Some("You must be at least level 55 to enter."),
-heroic_keys: None,heroic_required_quest: 0 },
+heroic_keys: Some(&[30633, ]),heroic_required_quest: 0 },
     ]
 )),
 (4406, (
     AreaTrigger::Square { position: Position::new(Map::Outland, -3362.4, 4650.3, -101.0, 0.0), length: 25.2, width: 9.6, height: 23.8, yaw: 0.0 },
     &[
         Trigger::Teleport { location: Position::new(Map::AuchindounSethekkHalls, -4.7, -0.1, 0.0, 0.0),required_level: 55,required_item: 0,required_quest: 0,failed_text: Some("You must be at least level 55 to enter."),
-heroic_keys: None,heroic_required_quest: 0 },
+heroic_keys: Some(&[30633, ]),heroic_required_quest: 0 },
     ]
 )),
 (4407, (
     AreaTrigger::Square { position: Position::new(Map::Outland, -3656.1, 4943.1, -101.0, 0.0), length: 12.2, width: 23.9, height: 26.7, yaw: 0.0 },
     &[
         Trigger::Teleport { location: Position::new(Map::AuchindounShadowLabyrinth, 0.5, -0.2, -1.1, 3.2),required_level: 65,required_item: 0,required_quest: 0,failed_text: Some("You must be at least level 65 to enter."),
-heroic_keys: None,heroic_required_quest: 0 },
+heroic_keys: Some(&[30633, ]),heroic_required_quest: 0 },
     ]
 )),
 (4409, (
@@ -1726,21 +1726,21 @@ heroic_keys: None,heroic_required_quest: 0 },
     AreaTrigger::Square { position: Position::new(Map::Outland, 3418.9, 1479.0, 184.1, 0.0), length: 9.3, width: 10.2, height: 24.0, yaw: 5.6 },
     &[
         Trigger::Teleport { location: Position::new(Map::TempestKeepTheBotanica, 40.0, -28.6, -1.1, 2.4),required_level: 68,required_item: 0,required_quest: 0,failed_text: Some("You must be at least level 65 to enter."),
-heroic_keys: None,heroic_required_quest: 0 },
+heroic_keys: Some(&[30634, ]),heroic_required_quest: 0 },
     ]
 )),
 (4468, (
     AreaTrigger::Square { position: Position::new(Map::Outland, 3314.8, 1325.9, 507.3, 0.0), length: 9.5, width: 10.6, height: 15.9, yaw: 5.1 },
     &[
         Trigger::Teleport { location: Position::new(Map::TempestKeepTheArcatraz, -1.2, 0.0, -0.2, 0.0),required_level: 68,required_item: 0,required_quest: 0,failed_text: Some("You must be at least level 65 to enter."),
-heroic_keys: None,heroic_required_quest: 0 },
+heroic_keys: Some(&[30634, ]),heroic_required_quest: 0 },
     ]
 )),
 (4469, (
     AreaTrigger::Square { position: Position::new(Map::Outland, 2861.4, 1545.4, 252.2, 0.0), length: 2.4, width: 11.1, height: 17.1, yaw: 3.9 },
     &[
         Trigger::Teleport { location: Position::new(Map::TempestKeepTheMechanar, -28.9, 0.7, -1.8, 0.0),required_level: 68,required_item: 0,required_quest: 0,failed_text: Some("You must be at least level 65 to enter."),
-heroic_keys: None,heroic_required_quest: 0 },
+heroic_keys: Some(&[30634, ]),heroic_required_quest: 0 },
     ]
 )),
 (4470, (

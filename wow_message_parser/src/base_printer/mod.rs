@@ -9,6 +9,7 @@ use crate::base_printer::write::items::{
 };
 use crate::path_utils::workspace_directory;
 use data::{get_data_from_sqlite_file, Data};
+use serde::de::DeserializeOwned;
 use std::path::{Path, PathBuf};
 
 #[derive(Debug, Copy, Clone, Ord, PartialOrd, Eq, PartialEq)]
@@ -56,6 +57,10 @@ impl Expansion {
             .join("src")
             .join(self.as_module_string())
             .join("data.rs")
+    }
+
+    pub fn csv_data_directory(&self) -> PathBuf {
+        PathBuf::from(env!("WOWM_SQLITE_DB_PATH")).join(self.as_module_string())
     }
 
     pub fn base_extended_path(&self) -> PathBuf {
@@ -254,4 +259,11 @@ fn write_spells(data: &Data, expansion: Expansion) {
         TY_NAME,
         optimizations,
     );
+}
+
+pub(crate) fn read_csv_file<T: DeserializeOwned>(dir: &Path, filename: &str) -> Vec<T> {
+    let dir = dir.join(format!("{filename}.csv"));
+    let mut r = csv::Reader::from_path(dir).expect(filename);
+
+    r.deserialize().map(|a| a.expect(filename)).collect()
 }
