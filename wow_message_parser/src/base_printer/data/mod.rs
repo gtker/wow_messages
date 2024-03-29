@@ -11,7 +11,6 @@ use crate::base_printer::data::pet_names::{get_pet_name_data, Pet, PetNames};
 use crate::base_printer::data::spells::get_spells;
 use crate::base_printer::write::items::GenericThing;
 use hashbrown::HashMap;
-use rusqlite::Connection;
 use serde::Deserialize;
 use std::collections::{BTreeMap, BTreeSet};
 use std::path::Path;
@@ -45,12 +44,9 @@ pub(crate) fn get_fields(things: &[GenericThing]) -> &[Field] {
     &things[0].fields
 }
 
-pub(crate) fn get_data_from_sqlite_file(sqlite_file: &Path, expansion: Expansion) -> Data {
-    let spell_file = sqlite_file.to_path_buf();
-    let spell_thread = std::thread::spawn(move || {
-        let spell_conn = Connection::open(spell_file).unwrap();
-        get_spells(&spell_conn, expansion)
-    });
+pub(crate) fn get_data_from_sqlite_file(expansion: Expansion) -> Data {
+    let spell_thread =
+        std::thread::spawn(move || get_spells(expansion, &expansion.csv_data_directory()));
     let csv_directory = expansion.csv_data_directory();
 
     let combinations = get_combinations(&csv_directory);

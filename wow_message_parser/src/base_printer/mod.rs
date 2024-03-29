@@ -156,7 +156,7 @@ pub(crate) fn print_base() {
             std::process::exit(1);
         }
 
-        let data = get_data_from_sqlite_file(&path, expansion);
+        let data = get_data_from_sqlite_file(expansion);
         std::thread::scope(|s| {
             s.spawn(|| write_to_files(&data, expansion));
 

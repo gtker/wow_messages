@@ -8,15 +8,12 @@ use crate::base_printer::data::spells::vanilla::vanilla;
 use crate::base_printer::data::spells::wrath::wrath;
 use crate::base_printer::write::items::GenericThing;
 use crate::base_printer::Expansion;
-use rusqlite::Connection;
+use std::path::Path;
 
-pub(crate) fn get_spells(
-    conn: &Connection,
-    expansion: Expansion,
-) -> (Vec<GenericThing>, Optimizations) {
+pub(crate) fn get_spells(expansion: Expansion, dir: &Path) -> (Vec<GenericThing>, Optimizations) {
     match expansion {
-        Expansion::Vanilla => vanilla(conn),
-        Expansion::BurningCrusade => tbc(conn),
-        Expansion::WrathOfTheLichKing => wrath(conn),
+        Expansion::Vanilla => vanilla(dir),
+        Expansion::BurningCrusade => tbc(dir),
+        Expansion::WrathOfTheLichKing => wrath(dir),
     }
 }

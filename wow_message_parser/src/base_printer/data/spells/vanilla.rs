@@ -2,24 +2,26 @@ use crate::base_printer::data::get_fields;
 use crate::base_printer::data::items::{
     Array, ArrayField, ArrayInstance, ArrayInstances, Field, Optimizations, Value,
 };
+use crate::base_printer::read_csv_file;
 use crate::base_printer::write::items::GenericThing;
-use rusqlite::Connection;
-use wow_world_base::vanilla::{
-    Attributes, AttributesEx1, AttributesEx2, AttributesEx3, AttributesEx4, AuraMod,
-};
+use serde::Deserialize;
+use std::path::Path;
 
+#[derive(Deserialize)]
+#[serde(rename_all = "PascalCase")]
 pub struct VanillaSpell {
     id: u32,
     school: i32,
     category: i32,
+    #[serde(rename = "CastUI")]
     cast_ui: i32,
     dispel: i32,
     mechanic: i32,
-    attributes: Attributes,
-    attributes_ex: AttributesEx1,
-    attributes_ex2: AttributesEx2,
-    attributes_ex3: AttributesEx3,
-    attributes_ex4: AttributesEx4,
+    attributes: u32,
+    attributes_ex: u32,
+    attributes_ex2: u32,
+    attributes_ex3: u32,
+    attributes_ex4: u32,
     stances: u32,
     stances_not: u32,
     targets: i32,
@@ -42,6 +44,7 @@ pub struct VanillaSpell {
     duration_index: i32,
     power_type: u32,
     mana_cost: i32,
+    #[serde(rename = "ManaCostPerlevel")]
     mana_cost_per_level: i32,
     mana_per_second: i32,
     mana_per_second_per_level: i32,
@@ -100,9 +103,9 @@ pub struct VanillaSpell {
     effect_radius_index1: i32,
     effect_radius_index2: i32,
     effect_radius_index3: i32,
-    effect_apply_aura_name1: AuraMod,
-    effect_apply_aura_name2: AuraMod,
-    effect_apply_aura_name3: AuraMod,
+    effect_apply_aura_name1: i32,
+    effect_apply_aura_name2: i32,
+    effect_apply_aura_name3: i32,
     effect_amplitude1: i32,
     effect_amplitude2: i32,
     effect_amplitude3: i32,
@@ -125,7 +128,9 @@ pub struct VanillaSpell {
     effect_points_per_combo_point2: f32,
     effect_points_per_combo_point3: f32,
     spell_visual: i32,
+    #[serde(rename = "SpellIconID")]
     spell_icon_id: i32,
+    #[serde(rename = "ActiveIconID")]
     active_icon_id: i32,
     spell_priority: i32,
 
@@ -181,907 +186,539 @@ pub struct VanillaSpell {
     attributes_serverside: i32,
 }
 
-impl VanillaSpell {
-    pub(crate) fn into_generic_spell(self) -> GenericThing {
-        let fields = vec![
-            Field::new("entry", Value::Uint(self.id)),
-            Field::new("school", Value::Int(self.school)),
-            Field::new("category", Value::Int(self.category)),
-            Field::new("cast_ui", Value::Int(self.cast_ui)),
-            Field::new("dispel", Value::Int(self.dispel)),
-            Field::new("mechanic", Value::Int(self.mechanic)),
-            Field::new("attributes", Value::VanillaAttributes(self.attributes)),
-            Field::new(
-                "attributes_ex",
-                Value::VanillaAttributesEx1(self.attributes_ex),
-            ),
-            Field::new(
-                "attributes_ex2",
-                Value::VanillaAttributesEx2(self.attributes_ex2),
-            ),
-            Field::new(
-                "attributes_ex3",
-                Value::VanillaAttributesEx3(self.attributes_ex3),
-            ),
-            Field::new(
-                "attributes_ex4",
-                Value::VanillaAttributesEx4(self.attributes_ex4),
-            ),
-            Field::new("stances", Value::Uint(self.stances)),
-            Field::new("stances_not", Value::Uint(self.stances_not)),
-            Field::new("targets", Value::Int(self.targets)),
-            Field::new(
-                "target_creature_type",
-                Value::Int(self.target_creature_type),
-            ),
-            Field::new(
-                "requires_spell_focus",
-                Value::Int(self.requires_spell_focus),
-            ),
-            Field::new("caster_aura_state", Value::Int(self.caster_aura_state)),
-            Field::new("target_aura_state", Value::Int(self.target_aura_state)),
-            Field::new("casting_time_index", Value::Int(self.casting_time_index)),
-            Field::new("recovery_time", Value::Int(self.recovery_time)),
-            Field::new(
-                "category_recovery_time",
-                Value::Int(self.category_recovery_time),
-            ),
-            Field::new("interrupt_flags", Value::Int(self.interrupt_flags)),
-            Field::new(
-                "aura_interrupt_flags",
-                Value::Int(self.aura_interrupt_flags),
-            ),
-            Field::new(
-                "channel_interrupt_flags",
-                Value::Int(self.channel_interrupt_flags),
-            ),
-            Field::new("proc_flags", Value::Int(self.proc_flags)),
-            Field::new("proc_chance", Value::Int(self.proc_chance)),
-            Field::new("proc_charges", Value::Int(self.proc_charges)),
-            Field::new("max_level", Value::Int(self.max_level)),
-            Field::new("base_level", Value::Int(self.base_level)),
-            Field::new("spell_level", Value::Int(self.spell_level)),
-            Field::new("duration_index", Value::Int(self.duration_index)),
-            Field::new("power_type", Value::Uint(self.power_type)),
-            Field::new("mana_cost", Value::Int(self.mana_cost)),
-            Field::new("mana_cost_per_level", Value::Int(self.mana_cost_per_level)),
-            Field::new("mana_per_second", Value::Int(self.mana_per_second)),
-            Field::new(
-                "mana_per_second_per_level",
-                Value::Int(self.mana_per_second_per_level),
-            ),
-            Field::new("range_index", Value::Int(self.range_index)),
-            Field::new("speed", Value::float(self.speed)),
-            Field::new("modal_next_spell", Value::Int(self.modal_next_spell)),
-            Field::new("stack_amount", Value::Int(self.stack_amount)),
-            Field::new("equipped_item_class", Value::Int(self.equipped_item_class)),
-            Field::new(
-                "equipped_item_sub_class_mask",
-                Value::Int(self.equipped_item_sub_class_mask),
-            ),
-            Field::new(
-                "equipped_item_inventory_type_mask",
-                Value::Int(self.equipped_item_inventory_type_mask),
-            ),
-            Field::new("spell_visual", Value::Int(self.spell_visual)),
-            Field::new("spell_icon_id", Value::Int(self.spell_icon_id)),
-            Field::new("active_icon_id", Value::Int(self.active_icon_id)),
-            Field::new("spell_priority", Value::Int(self.spell_priority)),
-            Field::new("spell_name", Value::String(self.spell_name.clone())),
-            Field::new("rank_text", Value::String(self.rank1.unwrap_or_default())),
-            Field::new(
-                "mana_cost_percentage",
-                Value::Int(self.mana_cost_percentage),
-            ),
-            Field::new(
-                "start_recovery_category",
-                Value::Int(self.start_recovery_category),
-            ),
-            Field::new("start_recovery_time", Value::Int(self.start_recovery_time)),
-            Field::new("max_target_level", Value::Int(self.max_target_level)),
-            Field::new("spell_family_name", Value::Int(self.spell_family_name)),
-            Field::new("spell_family_flags", Value::Int64(self.spell_family_flags)),
-            Field::new(
-                "max_affected_targets",
-                Value::Int(self.max_affected_targets),
-            ),
-            Field::new("dmg_class", Value::Int(self.dmg_class)),
-            Field::new("prevention_type", Value::Int(self.prevention_type)),
-            Field::new("stance_bar_order", Value::Int(self.stance_bar_order)),
-            Field::new("min_faction_id", Value::Int(self.min_faction_id)),
-            Field::new("min_reputation", Value::Int(self.min_reputation)),
-            Field::new(
-                "required_aura_vision",
-                Value::Int(self.required_aura_vision),
-            ),
-            Field::new("is_server_side", Value::Int(self.is_server_side)),
-            Field::new(
-                "attributes_serverside",
-                Value::Int(self.attributes_serverside),
-            ),
-        ];
+pub(crate) fn vanilla(dir: &Path) -> (Vec<GenericThing>, Optimizations) {
+    let spells: Vec<_> = read_csv_file::<VanillaSpell>(dir, "spells")
+        .into_iter()
+        .map(|row| {
+            let fields = vec![
+                Field::new("entry", Value::Uint(row.id)),
+                Field::new("school", Value::Int(row.school)),
+                Field::new("category", Value::Int(row.category)),
+                Field::new("cast_ui", Value::Int(row.cast_ui)),
+                Field::new("dispel", Value::Int(row.dispel)),
+                Field::new("mechanic", Value::Int(row.mechanic)),
+                Field::new(
+                    "attributes",
+                    Value::VanillaAttributes(row.attributes.try_into().unwrap()),
+                ),
+                Field::new(
+                    "attributes_ex",
+                    Value::VanillaAttributesEx1(row.attributes_ex.try_into().unwrap()),
+                ),
+                Field::new(
+                    "attributes_ex2",
+                    Value::VanillaAttributesEx2(row.attributes_ex2.try_into().unwrap()),
+                ),
+                Field::new(
+                    "attributes_ex3",
+                    Value::VanillaAttributesEx3(row.attributes_ex3.try_into().unwrap()),
+                ),
+                Field::new(
+                    "attributes_ex4",
+                    Value::VanillaAttributesEx4(row.attributes_ex4.try_into().unwrap()),
+                ),
+                Field::new("stances", Value::Uint(row.stances)),
+                Field::new("stances_not", Value::Uint(row.stances_not)),
+                Field::new("targets", Value::Int(row.targets)),
+                Field::new("target_creature_type", Value::Int(row.target_creature_type)),
+                Field::new("requires_spell_focus", Value::Int(row.requires_spell_focus)),
+                Field::new("caster_aura_state", Value::Int(row.caster_aura_state)),
+                Field::new("target_aura_state", Value::Int(row.target_aura_state)),
+                Field::new("casting_time_index", Value::Int(row.casting_time_index)),
+                Field::new("recovery_time", Value::Int(row.recovery_time)),
+                Field::new(
+                    "category_recovery_time",
+                    Value::Int(row.category_recovery_time),
+                ),
+                Field::new("interrupt_flags", Value::Int(row.interrupt_flags)),
+                Field::new("aura_interrupt_flags", Value::Int(row.aura_interrupt_flags)),
+                Field::new(
+                    "channel_interrupt_flags",
+                    Value::Int(row.channel_interrupt_flags),
+                ),
+                Field::new("proc_flags", Value::Int(row.proc_flags)),
+                Field::new("proc_chance", Value::Int(row.proc_chance)),
+                Field::new("proc_charges", Value::Int(row.proc_charges)),
+                Field::new("max_level", Value::Int(row.max_level)),
+                Field::new("base_level", Value::Int(row.base_level)),
+                Field::new("spell_level", Value::Int(row.spell_level)),
+                Field::new("duration_index", Value::Int(row.duration_index)),
+                Field::new("power_type", Value::Uint(row.power_type)),
+                Field::new("mana_cost", Value::Int(row.mana_cost)),
+                Field::new("mana_cost_per_level", Value::Int(row.mana_cost_per_level)),
+                Field::new("mana_per_second", Value::Int(row.mana_per_second)),
+                Field::new(
+                    "mana_per_second_per_level",
+                    Value::Int(row.mana_per_second_per_level),
+                ),
+                Field::new("range_index", Value::Int(row.range_index)),
+                Field::new("speed", Value::float(row.speed)),
+                Field::new("modal_next_spell", Value::Int(row.modal_next_spell)),
+                Field::new("stack_amount", Value::Int(row.stack_amount)),
+                Field::new("equipped_item_class", Value::Int(row.equipped_item_class)),
+                Field::new(
+                    "equipped_item_sub_class_mask",
+                    Value::Int(row.equipped_item_sub_class_mask),
+                ),
+                Field::new(
+                    "equipped_item_inventory_type_mask",
+                    Value::Int(row.equipped_item_inventory_type_mask),
+                ),
+                Field::new("spell_visual", Value::Int(row.spell_visual)),
+                Field::new("spell_icon_id", Value::Int(row.spell_icon_id)),
+                Field::new("active_icon_id", Value::Int(row.active_icon_id)),
+                Field::new("spell_priority", Value::Int(row.spell_priority)),
+                Field::new("spell_name", Value::String(row.spell_name.clone())),
+                Field::new("rank_text", Value::String(row.rank1.unwrap_or_default())),
+                Field::new("mana_cost_percentage", Value::Int(row.mana_cost_percentage)),
+                Field::new(
+                    "start_recovery_category",
+                    Value::Int(row.start_recovery_category),
+                ),
+                Field::new("start_recovery_time", Value::Int(row.start_recovery_time)),
+                Field::new("max_target_level", Value::Int(row.max_target_level)),
+                Field::new("spell_family_name", Value::Int(row.spell_family_name)),
+                Field::new("spell_family_flags", Value::Int64(row.spell_family_flags)),
+                Field::new("max_affected_targets", Value::Int(row.max_affected_targets)),
+                Field::new("dmg_class", Value::Int(row.dmg_class)),
+                Field::new("prevention_type", Value::Int(row.prevention_type)),
+                Field::new("stance_bar_order", Value::Int(row.stance_bar_order)),
+                Field::new("min_faction_id", Value::Int(row.min_faction_id)),
+                Field::new("min_reputation", Value::Int(row.min_reputation)),
+                Field::new("required_aura_vision", Value::Int(row.required_aura_vision)),
+                Field::new("is_server_side", Value::Int(row.is_server_side)),
+                Field::new(
+                    "attributes_serverside",
+                    Value::Int(row.attributes_serverside),
+                ),
+            ];
 
-        let arrays = vec![
-            Array::new(
-                "reagents",
-                "Reagent",
-                false,
-                ArrayInstances::new(vec![
-                    ArrayInstance::new(
-                        self.reagent_count1 == 0,
-                        vec![
-                            ArrayField::new("reagent", "reagent1", Value::Int(self.reagent1)),
-                            ArrayField::new(
-                                "amount",
-                                "reagent_count1",
-                                Value::Int(self.reagent_count1),
-                            ),
-                        ],
-                    ),
-                    ArrayInstance::new(
-                        self.reagent_count2 == 0,
-                        vec![
-                            ArrayField::new("reagent", "reagent2", Value::Int(self.reagent2)),
-                            ArrayField::new(
-                                "amount",
-                                "reagent_count2",
-                                Value::Int(self.reagent_count2),
-                            ),
-                        ],
-                    ),
-                    ArrayInstance::new(
-                        self.reagent_count3 == 0,
-                        vec![
-                            ArrayField::new("reagent", "reagent3", Value::Int(self.reagent3)),
-                            ArrayField::new(
-                                "amount",
-                                "reagent_count3",
-                                Value::Int(self.reagent_count3),
-                            ),
-                        ],
-                    ),
-                    ArrayInstance::new(
-                        self.reagent_count4 == 0,
-                        vec![
-                            ArrayField::new("reagent", "reagent4", Value::Int(self.reagent4)),
-                            ArrayField::new(
-                                "amount",
-                                "reagent_count4",
-                                Value::Int(self.reagent_count4),
-                            ),
-                        ],
-                    ),
-                    ArrayInstance::new(
-                        self.reagent_count5 == 0,
-                        vec![
-                            ArrayField::new("reagent", "reagent5", Value::Int(self.reagent5)),
-                            ArrayField::new(
-                                "amount",
-                                "reagent_count5",
-                                Value::Int(self.reagent_count5),
-                            ),
-                        ],
-                    ),
-                    ArrayInstance::new(
-                        self.reagent_count6 == 0,
-                        vec![
-                            ArrayField::new("reagent", "reagent6", Value::Int(self.reagent6)),
-                            ArrayField::new(
-                                "amount",
-                                "reagent_count6",
-                                Value::Int(self.reagent_count6),
-                            ),
-                        ],
-                    ),
-                    ArrayInstance::new(
-                        self.reagent_count7 == 0,
-                        vec![
-                            ArrayField::new("reagent", "reagent7", Value::Int(self.reagent7)),
-                            ArrayField::new(
-                                "amount",
-                                "reagent_count7",
-                                Value::Int(self.reagent_count7),
-                            ),
-                        ],
-                    ),
-                    ArrayInstance::new(
-                        self.reagent_count8 == 0,
-                        vec![
-                            ArrayField::new("reagent", "reagent8", Value::Int(self.reagent8)),
-                            ArrayField::new(
-                                "amount",
-                                "reagent_count8",
-                                Value::Int(self.reagent_count8),
-                            ),
-                        ],
-                    ),
-                ]),
-            ),
-            Array::new(
-                "effects",
-                "SpellEffects",
-                false,
-                ArrayInstances::new(vec![
-                    ArrayInstance::new(
-                        self.effect1 == 0,
-                        vec![
-                            ArrayField::new("effect", "effect1", Value::Int(self.effect1)),
-                            ArrayField::new(
-                                "die_sides",
-                                "effect_die_sides1",
-                                Value::Int(self.effect_die_sides1),
-                            ),
-                            ArrayField::new(
-                                "base_dice",
-                                "effect_base_dice1",
-                                Value::Int(self.effect_base_dice1),
-                            ),
-                            ArrayField::new(
-                                "dice_per_level",
-                                "effect_dice_per_level1",
-                                Value::float(self.effect_dice_per_level1),
-                            ),
-                            ArrayField::new(
-                                "real_points_per_level",
-                                "effect_real_points_per_level1",
-                                Value::float(self.effect_real_points_per_level1),
-                            ),
-                            ArrayField::new(
-                                "base_points",
-                                "effect_base_points1",
-                                Value::Int(self.effect_base_points1),
-                            ),
-                            ArrayField::new(
-                                "mechanic",
-                                "effect_mechanic1",
-                                Value::Int(self.effect_mechanic1),
-                            ),
-                            ArrayField::new(
-                                "implicit_target_a",
-                                "effect_implicit_target_a1",
-                                Value::Int(self.effect_implicit_target_a1),
-                            ),
-                            ArrayField::new(
-                                "implicit_target_b",
-                                "effect_implicit_target_b1",
-                                Value::Int(self.effect_implicit_target_b1),
-                            ),
-                            ArrayField::new(
-                                "radius_index",
-                                "effect_radius_index1",
-                                Value::Int(self.effect_radius_index1),
-                            ),
-                            ArrayField::new(
-                                "apply_aura_name",
-                                "effect_apply_aura_name1",
-                                Value::VanillaAuraMod(self.effect_apply_aura_name1),
-                            ),
-                            ArrayField::new(
-                                "amplitude",
-                                "effect_amplitude1",
-                                Value::Int(self.effect_amplitude1),
-                            ),
-                            ArrayField::new(
-                                "multiple_value",
-                                "effect_multiple_value1",
-                                Value::float(self.effect_multiple_value1),
-                            ),
-                            ArrayField::new(
-                                "chain_target",
-                                "effect_chain_target1",
-                                Value::Int(self.effect_chain_target1),
-                            ),
-                            ArrayField::new(
-                                "item_type",
-                                "effect_item_type1",
-                                Value::Uint(self.effect_item_type1),
-                            ),
-                            ArrayField::new(
-                                "misc_value",
-                                "effect_misc_value1",
-                                Value::Int(self.effect_misc_value1),
-                            ),
-                            ArrayField::new(
-                                "trigger_spell",
-                                "effect_trigger_spell1",
-                                Value::Int(self.effect_trigger_spell1),
-                            ),
-                            ArrayField::new(
-                                "effect_points_per_combo_point",
-                                "effect_points_per_combo_point1",
-                                Value::float(self.effect_points_per_combo_point1),
-                            ),
-                            ArrayField::new(
-                                "damage_multiplier",
-                                "dmg_multiplier1",
-                                Value::float(self.dmg_multiplier1),
-                            ),
-                        ],
-                    ),
-                    ArrayInstance::new(
-                        self.effect2 == 0,
-                        vec![
-                            ArrayField::new("effect", "effect2", Value::Int(self.effect2)),
-                            ArrayField::new(
-                                "die_sides",
-                                "effect_die_sides2",
-                                Value::Int(self.effect_die_sides2),
-                            ),
-                            ArrayField::new(
-                                "base_dice",
-                                "effect_base_dice2",
-                                Value::Int(self.effect_base_dice2),
-                            ),
-                            ArrayField::new(
-                                "dice_per_level",
-                                "effect_dice_per_level2",
-                                Value::float(self.effect_dice_per_level2),
-                            ),
-                            ArrayField::new(
-                                "real_points_per_level",
-                                "effect_real_points_per_level2",
-                                Value::float(self.effect_real_points_per_level2),
-                            ),
-                            ArrayField::new(
-                                "base_points",
-                                "effect_base_points2",
-                                Value::Int(self.effect_base_points2),
-                            ),
-                            ArrayField::new(
-                                "mechanic",
-                                "effect_mechanic2",
-                                Value::Int(self.effect_mechanic2),
-                            ),
-                            ArrayField::new(
-                                "implicit_target_a",
-                                "effect_implicit_target_a2",
-                                Value::Int(self.effect_implicit_target_a2),
-                            ),
-                            ArrayField::new(
-                                "implicit_target_b",
-                                "effect_implicit_target_b2",
-                                Value::Int(self.effect_implicit_target_b2),
-                            ),
-                            ArrayField::new(
-                                "radius_index",
-                                "effect_radius_index2",
-                                Value::Int(self.effect_radius_index2),
-                            ),
-                            ArrayField::new(
-                                "apply_aura_name",
-                                "effect_apply_aura_name2",
-                                Value::VanillaAuraMod(self.effect_apply_aura_name2),
-                            ),
-                            ArrayField::new(
-                                "amplitude",
-                                "effect_amplitude2",
-                                Value::Int(self.effect_amplitude2),
-                            ),
-                            ArrayField::new(
-                                "multiple_value",
-                                "effect_multiple_value2",
-                                Value::float(self.effect_multiple_value2),
-                            ),
-                            ArrayField::new(
-                                "chain_target",
-                                "effect_chain_target2",
-                                Value::Int(self.effect_chain_target2),
-                            ),
-                            ArrayField::new(
-                                "item_type",
-                                "effect_item_type2",
-                                Value::Uint(self.effect_item_type2),
-                            ),
-                            ArrayField::new(
-                                "misc_value",
-                                "effect_misc_value2",
-                                Value::Int(self.effect_misc_value2),
-                            ),
-                            ArrayField::new(
-                                "trigger_spell",
-                                "effect_trigger_spell2",
-                                Value::Int(self.effect_trigger_spell2),
-                            ),
-                            ArrayField::new(
-                                "effect_points_per_combo_point",
-                                "effect_points_per_combo_point2",
-                                Value::float(self.effect_points_per_combo_point2),
-                            ),
-                            ArrayField::new(
-                                "damage_multiplier",
-                                "dmg_multiplier2",
-                                Value::float(self.dmg_multiplier2),
-                            ),
-                        ],
-                    ),
-                    ArrayInstance::new(
-                        self.effect3 == 0,
-                        vec![
-                            ArrayField::new("effect", "effect3", Value::Int(self.effect3)),
-                            ArrayField::new(
-                                "die_sides",
-                                "effect_die_sides3",
-                                Value::Int(self.effect_die_sides3),
-                            ),
-                            ArrayField::new(
-                                "base_dice",
-                                "effect_base_dice3",
-                                Value::Int(self.effect_base_dice3),
-                            ),
-                            ArrayField::new(
-                                "dice_per_level",
-                                "effect_dice_per_level3",
-                                Value::float(self.effect_dice_per_level3),
-                            ),
-                            ArrayField::new(
-                                "real_points_per_level",
-                                "effect_real_points_per_level3",
-                                Value::float(self.effect_real_points_per_level3),
-                            ),
-                            ArrayField::new(
-                                "base_points",
-                                "effect_base_points3",
-                                Value::Int(self.effect_base_points3),
-                            ),
-                            ArrayField::new(
-                                "mechanic",
-                                "effect_mechanic3",
-                                Value::Int(self.effect_mechanic3),
-                            ),
-                            ArrayField::new(
-                                "implicit_target_a",
-                                "effect_implicit_target_a3",
-                                Value::Int(self.effect_implicit_target_a3),
-                            ),
-                            ArrayField::new(
-                                "implicit_target_b",
-                                "effect_implicit_target_b3",
-                                Value::Int(self.effect_implicit_target_b3),
-                            ),
-                            ArrayField::new(
-                                "radius_index",
-                                "effect_radius_index3",
-                                Value::Int(self.effect_radius_index3),
-                            ),
-                            ArrayField::new(
-                                "apply_aura_name",
-                                "effect_apply_aura_name3",
-                                Value::VanillaAuraMod(self.effect_apply_aura_name3),
-                            ),
-                            ArrayField::new(
-                                "amplitude",
-                                "effect_amplitude3",
-                                Value::Int(self.effect_amplitude3),
-                            ),
-                            ArrayField::new(
-                                "multiple_value",
-                                "effect_multiple_value3",
-                                Value::float(self.effect_multiple_value3),
-                            ),
-                            ArrayField::new(
-                                "chain_target",
-                                "effect_chain_target3",
-                                Value::Int(self.effect_chain_target3),
-                            ),
-                            ArrayField::new(
-                                "item_type",
-                                "effect_item_type3",
-                                Value::Uint(self.effect_item_type3),
-                            ),
-                            ArrayField::new(
-                                "misc_value",
-                                "effect_misc_value3",
-                                Value::Int(self.effect_misc_value3),
-                            ),
-                            ArrayField::new(
-                                "trigger_spell",
-                                "effect_trigger_spell3",
-                                Value::Int(self.effect_trigger_spell3),
-                            ),
-                            ArrayField::new(
-                                "effect_points_per_combo_point",
-                                "effect_points_per_combo_point3",
-                                Value::float(self.effect_points_per_combo_point3),
-                            ),
-                            ArrayField::new(
-                                "damage_multiplier",
-                                "dmg_multiplier3",
-                                Value::float(self.dmg_multiplier3),
-                            ),
-                        ],
-                    ),
-                ]),
-            ),
-            Array::new(
-                "totems",
-                "Totem",
-                false,
-                ArrayInstances::new(vec![
-                    ArrayInstance::default_values(vec![ArrayField::new(
-                        "totem",
-                        "totem1",
-                        Value::Int(self.totem1),
-                    )]),
-                    ArrayInstance::default_values(vec![ArrayField::new(
-                        "totem",
-                        "totem2",
-                        Value::Int(self.totem2),
-                    )]),
-                ]),
-            ),
-        ];
+            let arrays = vec![
+                Array::new(
+                    "reagents",
+                    "Reagent",
+                    false,
+                    ArrayInstances::new(vec![
+                        ArrayInstance::new(
+                            row.reagent_count1 == 0,
+                            vec![
+                                ArrayField::new("reagent", "reagent1", Value::Int(row.reagent1)),
+                                ArrayField::new(
+                                    "amount",
+                                    "reagent_count1",
+                                    Value::Int(row.reagent_count1),
+                                ),
+                            ],
+                        ),
+                        ArrayInstance::new(
+                            row.reagent_count2 == 0,
+                            vec![
+                                ArrayField::new("reagent", "reagent2", Value::Int(row.reagent2)),
+                                ArrayField::new(
+                                    "amount",
+                                    "reagent_count2",
+                                    Value::Int(row.reagent_count2),
+                                ),
+                            ],
+                        ),
+                        ArrayInstance::new(
+                            row.reagent_count3 == 0,
+                            vec![
+                                ArrayField::new("reagent", "reagent3", Value::Int(row.reagent3)),
+                                ArrayField::new(
+                                    "amount",
+                                    "reagent_count3",
+                                    Value::Int(row.reagent_count3),
+                                ),
+                            ],
+                        ),
+                        ArrayInstance::new(
+                            row.reagent_count4 == 0,
+                            vec![
+                                ArrayField::new("reagent", "reagent4", Value::Int(row.reagent4)),
+                                ArrayField::new(
+                                    "amount",
+                                    "reagent_count4",
+                                    Value::Int(row.reagent_count4),
+                                ),
+                            ],
+                        ),
+                        ArrayInstance::new(
+                            row.reagent_count5 == 0,
+                            vec![
+                                ArrayField::new("reagent", "reagent5", Value::Int(row.reagent5)),
+                                ArrayField::new(
+                                    "amount",
+                                    "reagent_count5",
+                                    Value::Int(row.reagent_count5),
+                                ),
+                            ],
+                        ),
+                        ArrayInstance::new(
+                            row.reagent_count6 == 0,
+                            vec![
+                                ArrayField::new("reagent", "reagent6", Value::Int(row.reagent6)),
+                                ArrayField::new(
+                                    "amount",
+                                    "reagent_count6",
+                                    Value::Int(row.reagent_count6),
+                                ),
+                            ],
+                        ),
+                        ArrayInstance::new(
+                            row.reagent_count7 == 0,
+                            vec![
+                                ArrayField::new("reagent", "reagent7", Value::Int(row.reagent7)),
+                                ArrayField::new(
+                                    "amount",
+                                    "reagent_count7",
+                                    Value::Int(row.reagent_count7),
+                                ),
+                            ],
+                        ),
+                        ArrayInstance::new(
+                            row.reagent_count8 == 0,
+                            vec![
+                                ArrayField::new("reagent", "reagent8", Value::Int(row.reagent8)),
+                                ArrayField::new(
+                                    "amount",
+                                    "reagent_count8",
+                                    Value::Int(row.reagent_count8),
+                                ),
+                            ],
+                        ),
+                    ]),
+                ),
+                Array::new(
+                    "effects",
+                    "SpellEffects",
+                    false,
+                    ArrayInstances::new(vec![
+                        ArrayInstance::new(
+                            row.effect1 == 0,
+                            vec![
+                                ArrayField::new("effect", "effect1", Value::Int(row.effect1)),
+                                ArrayField::new(
+                                    "die_sides",
+                                    "effect_die_sides1",
+                                    Value::Int(row.effect_die_sides1),
+                                ),
+                                ArrayField::new(
+                                    "base_dice",
+                                    "effect_base_dice1",
+                                    Value::Int(row.effect_base_dice1),
+                                ),
+                                ArrayField::new(
+                                    "dice_per_level",
+                                    "effect_dice_per_level1",
+                                    Value::float(row.effect_dice_per_level1),
+                                ),
+                                ArrayField::new(
+                                    "real_points_per_level",
+                                    "effect_real_points_per_level1",
+                                    Value::float(row.effect_real_points_per_level1),
+                                ),
+                                ArrayField::new(
+                                    "base_points",
+                                    "effect_base_points1",
+                                    Value::Int(row.effect_base_points1),
+                                ),
+                                ArrayField::new(
+                                    "mechanic",
+                                    "effect_mechanic1",
+                                    Value::Int(row.effect_mechanic1),
+                                ),
+                                ArrayField::new(
+                                    "implicit_target_a",
+                                    "effect_implicit_target_a1",
+                                    Value::Int(row.effect_implicit_target_a1),
+                                ),
+                                ArrayField::new(
+                                    "implicit_target_b",
+                                    "effect_implicit_target_b1",
+                                    Value::Int(row.effect_implicit_target_b1),
+                                ),
+                                ArrayField::new(
+                                    "radius_index",
+                                    "effect_radius_index1",
+                                    Value::Int(row.effect_radius_index1),
+                                ),
+                                ArrayField::new(
+                                    "apply_aura_name",
+                                    "effect_apply_aura_name1",
+                                    Value::VanillaAuraMod(
+                                        row.effect_apply_aura_name1.try_into().unwrap(),
+                                    ),
+                                ),
+                                ArrayField::new(
+                                    "amplitude",
+                                    "effect_amplitude1",
+                                    Value::Int(row.effect_amplitude1),
+                                ),
+                                ArrayField::new(
+                                    "multiple_value",
+                                    "effect_multiple_value1",
+                                    Value::float(row.effect_multiple_value1),
+                                ),
+                                ArrayField::new(
+                                    "chain_target",
+                                    "effect_chain_target1",
+                                    Value::Int(row.effect_chain_target1),
+                                ),
+                                ArrayField::new(
+                                    "item_type",
+                                    "effect_item_type1",
+                                    Value::Uint(row.effect_item_type1),
+                                ),
+                                ArrayField::new(
+                                    "misc_value",
+                                    "effect_misc_value1",
+                                    Value::Int(row.effect_misc_value1),
+                                ),
+                                ArrayField::new(
+                                    "trigger_spell",
+                                    "effect_trigger_spell1",
+                                    Value::Int(row.effect_trigger_spell1),
+                                ),
+                                ArrayField::new(
+                                    "effect_points_per_combo_point",
+                                    "effect_points_per_combo_point1",
+                                    Value::float(row.effect_points_per_combo_point1),
+                                ),
+                                ArrayField::new(
+                                    "damage_multiplier",
+                                    "dmg_multiplier1",
+                                    Value::float(row.dmg_multiplier1),
+                                ),
+                            ],
+                        ),
+                        ArrayInstance::new(
+                            row.effect2 == 0,
+                            vec![
+                                ArrayField::new("effect", "effect2", Value::Int(row.effect2)),
+                                ArrayField::new(
+                                    "die_sides",
+                                    "effect_die_sides2",
+                                    Value::Int(row.effect_die_sides2),
+                                ),
+                                ArrayField::new(
+                                    "base_dice",
+                                    "effect_base_dice2",
+                                    Value::Int(row.effect_base_dice2),
+                                ),
+                                ArrayField::new(
+                                    "dice_per_level",
+                                    "effect_dice_per_level2",
+                                    Value::float(row.effect_dice_per_level2),
+                                ),
+                                ArrayField::new(
+                                    "real_points_per_level",
+                                    "effect_real_points_per_level2",
+                                    Value::float(row.effect_real_points_per_level2),
+                                ),
+                                ArrayField::new(
+                                    "base_points",
+                                    "effect_base_points2",
+                                    Value::Int(row.effect_base_points2),
+                                ),
+                                ArrayField::new(
+                                    "mechanic",
+                                    "effect_mechanic2",
+                                    Value::Int(row.effect_mechanic2),
+                                ),
+                                ArrayField::new(
+                                    "implicit_target_a",
+                                    "effect_implicit_target_a2",
+                                    Value::Int(row.effect_implicit_target_a2),
+                                ),
+                                ArrayField::new(
+                                    "implicit_target_b",
+                                    "effect_implicit_target_b2",
+                                    Value::Int(row.effect_implicit_target_b2),
+                                ),
+                                ArrayField::new(
+                                    "radius_index",
+                                    "effect_radius_index2",
+                                    Value::Int(row.effect_radius_index2),
+                                ),
+                                ArrayField::new(
+                                    "apply_aura_name",
+                                    "effect_apply_aura_name2",
+                                    Value::VanillaAuraMod(
+                                        row.effect_apply_aura_name2.try_into().unwrap(),
+                                    ),
+                                ),
+                                ArrayField::new(
+                                    "amplitude",
+                                    "effect_amplitude2",
+                                    Value::Int(row.effect_amplitude2),
+                                ),
+                                ArrayField::new(
+                                    "multiple_value",
+                                    "effect_multiple_value2",
+                                    Value::float(row.effect_multiple_value2),
+                                ),
+                                ArrayField::new(
+                                    "chain_target",
+                                    "effect_chain_target2",
+                                    Value::Int(row.effect_chain_target2),
+                                ),
+                                ArrayField::new(
+                                    "item_type",
+                                    "effect_item_type2",
+                                    Value::Uint(row.effect_item_type2),
+                                ),
+                                ArrayField::new(
+                                    "misc_value",
+                                    "effect_misc_value2",
+                                    Value::Int(row.effect_misc_value2),
+                                ),
+                                ArrayField::new(
+                                    "trigger_spell",
+                                    "effect_trigger_spell2",
+                                    Value::Int(row.effect_trigger_spell2),
+                                ),
+                                ArrayField::new(
+                                    "effect_points_per_combo_point",
+                                    "effect_points_per_combo_point2",
+                                    Value::float(row.effect_points_per_combo_point2),
+                                ),
+                                ArrayField::new(
+                                    "damage_multiplier",
+                                    "dmg_multiplier2",
+                                    Value::float(row.dmg_multiplier2),
+                                ),
+                            ],
+                        ),
+                        ArrayInstance::new(
+                            row.effect3 == 0,
+                            vec![
+                                ArrayField::new("effect", "effect3", Value::Int(row.effect3)),
+                                ArrayField::new(
+                                    "die_sides",
+                                    "effect_die_sides3",
+                                    Value::Int(row.effect_die_sides3),
+                                ),
+                                ArrayField::new(
+                                    "base_dice",
+                                    "effect_base_dice3",
+                                    Value::Int(row.effect_base_dice3),
+                                ),
+                                ArrayField::new(
+                                    "dice_per_level",
+                                    "effect_dice_per_level3",
+                                    Value::float(row.effect_dice_per_level3),
+                                ),
+                                ArrayField::new(
+                                    "real_points_per_level",
+                                    "effect_real_points_per_level3",
+                                    Value::float(row.effect_real_points_per_level3),
+                                ),
+                                ArrayField::new(
+                                    "base_points",
+                                    "effect_base_points3",
+                                    Value::Int(row.effect_base_points3),
+                                ),
+                                ArrayField::new(
+                                    "mechanic",
+                                    "effect_mechanic3",
+                                    Value::Int(row.effect_mechanic3),
+                                ),
+                                ArrayField::new(
+                                    "implicit_target_a",
+                                    "effect_implicit_target_a3",
+                                    Value::Int(row.effect_implicit_target_a3),
+                                ),
+                                ArrayField::new(
+                                    "implicit_target_b",
+                                    "effect_implicit_target_b3",
+                                    Value::Int(row.effect_implicit_target_b3),
+                                ),
+                                ArrayField::new(
+                                    "radius_index",
+                                    "effect_radius_index3",
+                                    Value::Int(row.effect_radius_index3),
+                                ),
+                                ArrayField::new(
+                                    "apply_aura_name",
+                                    "effect_apply_aura_name3",
+                                    Value::VanillaAuraMod(
+                                        row.effect_apply_aura_name3.try_into().unwrap(),
+                                    ),
+                                ),
+                                ArrayField::new(
+                                    "amplitude",
+                                    "effect_amplitude3",
+                                    Value::Int(row.effect_amplitude3),
+                                ),
+                                ArrayField::new(
+                                    "multiple_value",
+                                    "effect_multiple_value3",
+                                    Value::float(row.effect_multiple_value3),
+                                ),
+                                ArrayField::new(
+                                    "chain_target",
+                                    "effect_chain_target3",
+                                    Value::Int(row.effect_chain_target3),
+                                ),
+                                ArrayField::new(
+                                    "item_type",
+                                    "effect_item_type3",
+                                    Value::Uint(row.effect_item_type3),
+                                ),
+                                ArrayField::new(
+                                    "misc_value",
+                                    "effect_misc_value3",
+                                    Value::Int(row.effect_misc_value3),
+                                ),
+                                ArrayField::new(
+                                    "trigger_spell",
+                                    "effect_trigger_spell3",
+                                    Value::Int(row.effect_trigger_spell3),
+                                ),
+                                ArrayField::new(
+                                    "effect_points_per_combo_point",
+                                    "effect_points_per_combo_point3",
+                                    Value::float(row.effect_points_per_combo_point3),
+                                ),
+                                ArrayField::new(
+                                    "damage_multiplier",
+                                    "dmg_multiplier3",
+                                    Value::float(row.dmg_multiplier3),
+                                ),
+                            ],
+                        ),
+                    ]),
+                ),
+                Array::new(
+                    "totems",
+                    "Totem",
+                    false,
+                    ArrayInstances::new(vec![
+                        ArrayInstance::default_values(vec![ArrayField::new(
+                            "totem",
+                            "totem1",
+                            Value::Int(row.totem1),
+                        )]),
+                        ArrayInstance::default_values(vec![ArrayField::new(
+                            "totem",
+                            "totem2",
+                            Value::Int(row.totem2),
+                        )]),
+                    ]),
+                ),
+            ];
 
-        GenericThing {
-            entry: self.id,
-            extra_flags: 0,
-            name: self.spell_name,
-            fields,
-            arrays,
-        }
-    }
-}
-
-fn assertions(conn: &Connection) {
-    let mut s = conn
-        .prepare(
-            "SELECT Id, SpellName FROM spell_template WHERE
-    (SpellName2 not null and SpellName2 != '') or
-    (Rank2 not null and Rank2 != '') or
-    (SpellName3 not null and SpellName3 != '') or
-    (Rank3 not null and Rank3 != '') or
-    (SpellName4 not null and SpellName4 != '') or
-    (Rank4 not null and Rank4 != '') or
-    (SpellName5 not null and SpellName5 != '') or
-    (Rank5 not null and Rank5 != '') or
-    (SpellName6 not null and SpellName6 != '') or
-    (Rank6 not null and Rank6 != '') or
-    (SpellName7 not null and SpellName7 != '') or
-    (Rank7 not null and Rank7 != '') or
-    (SpellName8 not null and SpellName8 != '') or
-    (Rank8 not null and Rank8 != '');
-    ",
-        )
-        .unwrap();
-
-    assert!(!s.exists([]).unwrap(), "The SpellName* and Rank* are assumed to be either an empty string or null. These fields are not included at all.");
-
-    let mut s = conn
-        .prepare("SELECT SpellName FROM spell_template;")
-        .unwrap();
-    let rows = s
-        .query_map([], |row| Ok(row.get::<usize, String>(0).unwrap()))
-        .unwrap();
-    let no_name_has_non_ascii_char = rows.map(|a| a.unwrap()).all(|a| a.is_ascii());
-    assert!(no_name_has_non_ascii_char);
-}
-
-pub(crate) fn vanilla(conn: &Connection) -> (Vec<GenericThing>, Optimizations) {
-    assertions(conn);
-
-    let mut s = conn
-        .prepare(
-            "SELECT
-    Id,
-    School,
-    Category,
-    CastUI,
-    Dispel,
-    Mechanic,
-    Attributes,
-    AttributesEx,
-    AttributesEx2,
-    AttributesEx3,
-    AttributesEx4,
-    Stances,
-    StancesNot,
-    Targets,
-    TargetCreatureType,
-    RequiresSpellFocus,
-    CasterAuraState,
-    TargetAuraState,
-    CastingTimeIndex,
-    RecoveryTime,
-    CategoryRecoveryTime,
-    InterruptFlags,
-    AuraInterruptFlags,
-    ChannelInterruptFlags,
-    ProcFlags,
-    ProcChance,
-    ProcCharges,
-    MaxLevel,
-    BaseLevel,
-    SpellLevel,
-    DurationIndex,
-    PowerType,
-    ManaCost,
-    ManaCostPerlevel,
-    ManaPerSecond,
-    ManaPerSecondPerLevel,
-    RangeIndex,
-    Speed,
-    ModalNextSpell,
-    StackAmount,
-    Totem1,
-    Totem2,
-    Reagent1,
-    Reagent2,
-    Reagent3,
-    Reagent4,
-    Reagent5,
-    Reagent6,
-    Reagent7,
-    Reagent8,
-    ReagentCount1,
-    ReagentCount2,
-    ReagentCount3,
-    ReagentCount4,
-    ReagentCount5,
-    ReagentCount6,
-    ReagentCount7,
-    ReagentCount8,
-    EquippedItemClass,
-    EquippedItemSubClassMask,
-    EquippedItemInventoryTypeMask,
-    Effect1,
-    Effect2,
-    Effect3,
-    EffectDieSides1,
-    EffectDieSides2,
-    EffectDieSides3,
-    EffectBaseDice1,
-    EffectBaseDice2,
-    EffectBaseDice3,
-    EffectDicePerLevel1,
-    EffectDicePerLevel2,
-    EffectDicePerLevel3,
-    EffectRealPointsPerLevel1,
-    EffectRealPointsPerLevel2,
-    EffectRealPointsPerLevel3,
-    EffectBasePoints1,
-    EffectBasePoints2,
-    EffectBasePoints3,
-    EffectMechanic1,
-    EffectMechanic2,
-    EffectMechanic3,
-    EffectImplicitTargetA1,
-    EffectImplicitTargetA2,
-    EffectImplicitTargetA3,
-    EffectImplicitTargetB1,
-    EffectImplicitTargetB2,
-    EffectImplicitTargetB3,
-    EffectRadiusIndex1,
-    EffectRadiusIndex2,
-    EffectRadiusIndex3,
-    EffectApplyAuraName1,
-    EffectApplyAuraName2,
-    EffectApplyAuraName3,
-    EffectAmplitude1,
-    EffectAmplitude2,
-    EffectAmplitude3,
-    EffectMultipleValue1,
-    EffectMultipleValue2,
-    EffectMultipleValue3,
-    EffectChainTarget1,
-    EffectChainTarget2,
-    EffectChainTarget3,
-    EffectItemType1,
-    EffectItemType2,
-    EffectItemType3,
-    EffectMiscValue1,
-    EffectMiscValue2,
-    EffectMiscValue3,
-    EffectTriggerSpell1,
-    EffectTriggerSpell2,
-    EffectTriggerSpell3,
-    EffectPointsPerComboPoint1,
-    EffectPointsPerComboPoint2,
-    EffectPointsPerComboPoint3,
-    SpellVisual,
-    SpellIconID,
-    ActiveIconID,
-    SpellPriority,
-    SpellName,
-    SpellName2,
-    SpellName3,
-    SpellName4,
-    SpellName5,
-    SpellName6,
-    SpellName7,
-    SpellName8,
-    Rank1,
-    Rank2,
-    Rank3,
-    Rank4,
-    Rank5,
-    Rank6,
-    Rank7,
-    Rank8,
-    ManaCostPercentage,
-    StartRecoveryCategory,
-    StartRecoveryTime,
-    MaxTargetLevel,
-    SpellFamilyName,
-    SpellFamilyFlags,
-    MaxAffectedTargets,
-    DmgClass,
-    PreventionType,
-    StanceBarOrder,
-    DmgMultiplier1,
-    DmgMultiplier2,
-    DmgMultiplier3,
-    MinFactionId,
-    MinReputation,
-    RequiredAuraVision,
-    IsServerSide,
-    AttributesServerside
-    FROM spell_template ORDER BY Id;",
-        )
-        .unwrap();
-
-    let r = s
-        .query_map([], |row| {
-            Ok(VanillaSpell {
-                id: row.get(0).unwrap(),
-                school: row.get(1).unwrap(),
-                category: row.get(2).unwrap(),
-                cast_ui: row.get(3).unwrap(),
-                dispel: row.get(4).unwrap(),
-                mechanic: row.get(5).unwrap(),
-                attributes: Attributes::new(row.get::<usize, u32>(6).unwrap()),
-                attributes_ex: AttributesEx1::new(row.get::<usize, u32>(7).unwrap()),
-                attributes_ex2: AttributesEx2::new(row.get::<usize, u32>(8).unwrap()),
-                attributes_ex3: AttributesEx3::new(row.get::<usize, u32>(9).unwrap()),
-                attributes_ex4: AttributesEx4::new(row.get::<usize, u32>(10).unwrap()),
-                stances: row.get(11).unwrap(),
-                stances_not: row.get(12).unwrap(),
-                targets: row.get(13).unwrap(),
-                target_creature_type: row.get(14).unwrap(),
-                requires_spell_focus: row.get(15).unwrap(),
-                caster_aura_state: row.get(16).unwrap(),
-                target_aura_state: row.get(17).unwrap(),
-                casting_time_index: row.get(18).unwrap(),
-                recovery_time: row.get(19).unwrap(),
-                category_recovery_time: row.get(20).unwrap(),
-                interrupt_flags: row.get(21).unwrap(),
-                aura_interrupt_flags: row.get(22).unwrap(),
-                channel_interrupt_flags: row.get(23).unwrap(),
-                proc_flags: row.get(24).unwrap(),
-                proc_chance: row.get(25).unwrap(),
-                proc_charges: row.get(26).unwrap(),
-                max_level: row.get(27).unwrap(),
-                base_level: row.get(28).unwrap(),
-                spell_level: row.get(29).unwrap(),
-                duration_index: row.get(30).unwrap(),
-                power_type: row.get(31).unwrap(),
-                mana_cost: row.get(32).unwrap(),
-                mana_cost_per_level: row.get(33).unwrap(),
-                mana_per_second: row.get(34).unwrap(),
-                mana_per_second_per_level: row.get(35).unwrap(),
-                range_index: row.get(36).unwrap(),
-                speed: row.get(37).unwrap(),
-                modal_next_spell: row.get(38).unwrap(),
-                stack_amount: row.get(39).unwrap(),
-                totem1: row.get(40).unwrap(),
-                totem2: row.get(41).unwrap(),
-                reagent1: row.get(42).unwrap(),
-                reagent2: row.get(43).unwrap(),
-                reagent3: row.get(44).unwrap(),
-                reagent4: row.get(45).unwrap(),
-                reagent5: row.get(46).unwrap(),
-                reagent6: row.get(47).unwrap(),
-                reagent7: row.get(48).unwrap(),
-                reagent8: row.get(49).unwrap(),
-                reagent_count1: row.get(50).unwrap(),
-                reagent_count2: row.get(51).unwrap(),
-                reagent_count3: row.get(52).unwrap(),
-                reagent_count4: row.get(53).unwrap(),
-                reagent_count5: row.get(54).unwrap(),
-                reagent_count6: row.get(55).unwrap(),
-                reagent_count7: row.get(56).unwrap(),
-                reagent_count8: row.get(57).unwrap(),
-                equipped_item_class: row.get(58).unwrap(),
-                equipped_item_sub_class_mask: row.get(59).unwrap(),
-                equipped_item_inventory_type_mask: row.get(60).unwrap(),
-                effect1: row.get(61).unwrap(),
-                effect2: row.get(62).unwrap(),
-                effect3: row.get(63).unwrap(),
-                effect_die_sides1: row.get(64).unwrap(),
-                effect_die_sides2: row.get(65).unwrap(),
-                effect_die_sides3: row.get(66).unwrap(),
-                effect_base_dice1: row.get(67).unwrap(),
-                effect_base_dice2: row.get(68).unwrap(),
-                effect_base_dice3: row.get(69).unwrap(),
-                effect_dice_per_level1: row.get(70).unwrap(),
-                effect_dice_per_level2: row.get(71).unwrap(),
-                effect_dice_per_level3: row.get(72).unwrap(),
-                effect_real_points_per_level1: row.get(73).unwrap(),
-                effect_real_points_per_level2: row.get(74).unwrap(),
-                effect_real_points_per_level3: row.get(75).unwrap(),
-                effect_base_points1: row.get(76).unwrap(),
-                effect_base_points2: row.get(77).unwrap(),
-                effect_base_points3: row.get(78).unwrap(),
-                effect_mechanic1: row.get(79).unwrap(),
-                effect_mechanic2: row.get(80).unwrap(),
-                effect_mechanic3: row.get(81).unwrap(),
-                effect_implicit_target_a1: row.get(82).unwrap(),
-                effect_implicit_target_a2: row.get(83).unwrap(),
-                effect_implicit_target_a3: row.get(84).unwrap(),
-                effect_implicit_target_b1: row.get(85).unwrap(),
-                effect_implicit_target_b2: row.get(86).unwrap(),
-                effect_implicit_target_b3: row.get(87).unwrap(),
-                effect_radius_index1: row.get(88).unwrap(),
-                effect_radius_index2: row.get(89).unwrap(),
-                effect_radius_index3: row.get(90).unwrap(),
-                effect_apply_aura_name1: AuraMod::try_from(row.get::<usize, u32>(91).unwrap())
-                    .unwrap(),
-                effect_apply_aura_name2: AuraMod::try_from(row.get::<usize, u32>(92).unwrap())
-                    .unwrap(),
-                effect_apply_aura_name3: AuraMod::try_from(row.get::<usize, u32>(93).unwrap())
-                    .unwrap(),
-                effect_amplitude1: row.get(94).unwrap(),
-                effect_amplitude2: row.get(95).unwrap(),
-                effect_amplitude3: row.get(96).unwrap(),
-                effect_multiple_value1: row.get(97).unwrap(),
-                effect_multiple_value2: row.get(98).unwrap(),
-                effect_multiple_value3: row.get(99).unwrap(),
-                effect_chain_target1: row.get(100).unwrap(),
-                effect_chain_target2: row.get(101).unwrap(),
-                effect_chain_target3: row.get(102).unwrap(),
-                effect_item_type1: row.get(103).unwrap(),
-                effect_item_type2: row.get(104).unwrap(),
-                effect_item_type3: row.get(105).unwrap(),
-                effect_misc_value1: row.get(106).unwrap(),
-                effect_misc_value2: row.get(107).unwrap(),
-                effect_misc_value3: row.get(108).unwrap(),
-                effect_trigger_spell1: row.get(109).unwrap(),
-                effect_trigger_spell2: row.get(110).unwrap(),
-                effect_trigger_spell3: row.get(111).unwrap(),
-                effect_points_per_combo_point1: row.get(112).unwrap(),
-                effect_points_per_combo_point2: row.get(113).unwrap(),
-                effect_points_per_combo_point3: row.get(114).unwrap(),
-                spell_visual: row.get(115).unwrap(),
-                spell_icon_id: row.get(116).unwrap(),
-                active_icon_id: row.get(117).unwrap(),
-                spell_priority: row.get(118).unwrap(),
-                spell_name: row.get(119).unwrap(),
-                spell_name2: row.get(120).unwrap(),
-                spell_name3: row.get(121).unwrap(),
-                spell_name4: row.get(122).unwrap(),
-                spell_name5: row.get(123).unwrap(),
-                spell_name6: row.get(124).unwrap(),
-                spell_name7: row.get(125).unwrap(),
-                spell_name8: row.get(126).unwrap(),
-                rank1: row.get(127).unwrap(),
-                rank2: row.get(128).unwrap(),
-                rank3: row.get(129).unwrap(),
-                rank4: row.get(130).unwrap(),
-                rank5: row.get(131).unwrap(),
-                rank6: row.get(132).unwrap(),
-                rank7: row.get(133).unwrap(),
-                rank8: row.get(134).unwrap(),
-                mana_cost_percentage: row.get(135).unwrap(),
-                start_recovery_category: row.get(136).unwrap(),
-                start_recovery_time: row.get(137).unwrap(),
-                max_target_level: row.get(138).unwrap(),
-                spell_family_name: row.get(139).unwrap(),
-                spell_family_flags: row.get(140).unwrap(),
-                max_affected_targets: row.get(141).unwrap(),
-                dmg_class: row.get(142).unwrap(),
-                prevention_type: row.get(143).unwrap(),
-                stance_bar_order: row.get(144).unwrap(),
-                dmg_multiplier1: row.get(145).unwrap(),
-                dmg_multiplier2: row.get(146).unwrap(),
-                dmg_multiplier3: row.get(147).unwrap(),
-                min_faction_id: row.get(148).unwrap(),
-                min_reputation: row.get(149).unwrap(),
-                required_aura_vision: row.get(150).unwrap(),
-                is_server_side: row.get(151).unwrap(),
-                attributes_serverside: row.get(152).unwrap(),
-            })
+            GenericThing {
+                entry: row.id,
+                extra_flags: 0,
+                name: row.spell_name,
+                fields,
+                arrays,
+            }
         })
-        .unwrap();
+        .collect();
 
-    let spells: Vec<_> = r.map(|a| a.unwrap().into_generic_spell()).collect();
     let optimizations = Optimizations::new(&spells, get_fields(&spells));
     (spells, optimizations)
 }
