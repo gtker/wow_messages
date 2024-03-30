@@ -90,6 +90,7 @@ pub(crate) fn print_write_field_array(
 
 pub(crate) fn print_write_field_integer(
     s: &mut Writer,
+    variable: &str,
     variable_name: &str,
     variable_prefix: &str,
     int_type: &IntegerType,
@@ -114,9 +115,7 @@ pub(crate) fn print_write_field_integer(
             "w.write_all(&({variable_prefix}{array}.len() as {basic_type}).to_le_bytes()){postfix}?;",
         ));
     } else {
-        s.wln(format!(
-            "w.write_all(&{variable_prefix}{variable_name}.to_le_bytes()){postfix}?;",
-        ));
+        s.wln(format!("w.write_all(&{variable}.to_le_bytes()){postfix}?;",));
     }
 }
 
@@ -153,10 +152,13 @@ pub(crate) fn print_write_definition(
 
     s.wln(format!("// {name}: {type_name}", type_name = d.ty().str()));
 
+    let variable = format!("{variable_prefix}{name}");
+
     match d.ty() {
         Type::Integer(int_type) => {
             print_write_field_integer(
                 s,
+                &variable,
                 d.name(),
                 variable_prefix,
                 int_type,
@@ -169,68 +171,60 @@ pub(crate) fn print_write_definition(
         }
         Type::Bool(i) => {
             s.wln(format!(
-                "w.write_all({ty}::from({reference}{variable_prefix}{name}).to_le_bytes().as_slice()){postfix}?;",
+                "w.write_all({ty}::from({reference}{variable}).to_le_bytes().as_slice()){postfix}?;",
                 reference = if variable_prefix.is_empty() { "*" } else { "" }, // non-self variables are &bool
                 ty = i.rust_str(),
             ));
         }
         Type::Level16 => {
             s.wln(format!(
-                "w.write_all(&u16::from({variable_prefix}{name}.as_int()).to_le_bytes()){postfix}?;",
+                "w.write_all(&u16::from({variable}.as_int()).to_le_bytes()){postfix}?;",
             ));
         }
         Type::Level32 => {
             s.wln(format!(
-                "w.write_all(&u32::from({variable_prefix}{name}.as_int()).to_le_bytes()){postfix}?;",
+                "w.write_all(&u32::from({variable}.as_int()).to_le_bytes()){postfix}?;",
             ));
         }
         Type::Level => {
             s.wln(format!(
-                "w.write_all(&{variable_prefix}{name}.as_int().to_le_bytes()){postfix}?;",
+                "w.write_all(&{variable}.as_int().to_le_bytes()){postfix}?;",
             ));
         }
         Type::Gold => {
             s.wln(format!(
-                "w.write_all(({variable_prefix}{name}.as_int()).to_le_bytes().as_slice()){postfix}?;",
+                "w.write_all(({variable}.as_int()).to_le_bytes().as_slice()){postfix}?;",
             ));
         }
         Type::Spell16 | Type::Item | Type::Spell => {
-            s.wln(format!(
-                "w.write_all(&{variable_prefix}{name}.to_le_bytes()){postfix}?;",
-            ));
+            s.wln(format!("w.write_all(&{variable}.to_le_bytes()){postfix}?;",));
         }
         Type::Seconds => {
             s.wln(format!(
-                "w.write_all(({variable_prefix}{name}.as_secs() as u32).to_le_bytes().as_slice()){postfix}?;",
+                "w.write_all(({variable}.as_secs() as u32).to_le_bytes().as_slice()){postfix}?;",
             ));
         }
         Type::Milliseconds => {
             s.wln(format!(
-                "w.write_all(({variable_prefix}{name}.as_millis() as u32).to_le_bytes().as_slice()){postfix}?;",
+                "w.write_all(({variable}.as_millis() as u32).to_le_bytes().as_slice()){postfix}?;",
             ));
         }
         Type::IpAddress => {
-            s.wln(format!(
-                "w.write_all(&{variable_prefix}{name}.octets()){postfix}?;",
-            ));
+            s.wln(format!("w.write_all(&{variable}.octets()){postfix}?;",));
         }
         Type::FloatingPoint => {
-            s.wln(format!(
-                "w.write_all(&{variable_prefix}{name}.to_le_bytes()){postfix}?;",
-            ));
+            s.wln(format!("w.write_all(&{variable}.to_le_bytes()){postfix}?;",));
         }
         Type::Population => {
             s.wln(format!(
-                "w.write_all(&{variable_prefix}{name}.as_int().to_le_bytes()){postfix}?;",
+                "w.write_all(&{variable}.as_int().to_le_bytes()){postfix}?;",
             ));
         }
         Type::SizedCString => {
             s.wln(format!(
-                "w.write_all(&(({variable_prefix}{name}.len() + 1) as u32).to_le_bytes()){postfix}?;",
+                "w.write_all(&(({variable}.len() + 1) as u32).to_le_bytes()){postfix}?;",
             ));
-            s.wln(format!(
-                "w.write_all({variable_prefix}{name}.as_bytes()){postfix}?;",
-            ));
+            s.wln(format!("w.write_all({variable}.as_bytes()){postfix}?;",));
             s.wln("// Null terminator");
             s.wln(format!("w.write_all(&[0]){postfix}?;",));
         }
@@ -238,21 +232,17 @@ pub(crate) fn print_write_definition(
         Type::CString => {
             s.wln("// TODO: Guard against strings that are already null-terminated");
             s.wln(format!(
-                "assert_ne!({variable_prefix}{name}.as_bytes().iter().next_back(), Some(&0_u8), \"String `{name}` must not be null-terminated.\");",
+                "assert_ne!({variable}.as_bytes().iter().next_back(), Some(&0_u8), \"String `{name}` must not be null-terminated.\");",
             ));
-            s.wln(format!(
-                "w.write_all({variable_prefix}{name}.as_bytes()){postfix}?;",
-            ));
+            s.wln(format!("w.write_all({variable}.as_bytes()){postfix}?;",));
             s.wln("// Null terminator");
             s.wln(format!("w.write_all(&[0]){postfix}?;"));
         }
         Type::String { .. } => {
             s.wln(format!(
-                "w.write_all(&({variable_prefix}{name}.len() as u8).to_le_bytes()){postfix}?;",
+                "w.write_all(&({variable}.len() as u8).to_le_bytes()){postfix}?;",
             ));
-            s.wln(format!(
-                "w.write_all({variable_prefix}{name}.as_bytes()){postfix}?;",
-            ));
+            s.wln(format!("w.write_all({variable}.as_bytes()){postfix}?;",));
         }
         Type::Array(array) => {
             print_write_field_array(s, d, variable_prefix, array, postfix);
@@ -265,56 +255,56 @@ pub(crate) fn print_write_definition(
 
             if matches!(integer, IntegerType::U48) {
                 s.wln(format!(
-                    "w.write_all(&({variable_prefix}{name}.as_int() as u32).to_le_bytes()){postfix}?;",
+                    "w.write_all(&({variable}.as_int() as u32).to_le_bytes()){postfix}?;",
                 ));
                 s.wln(format!(
-                    "w.write_all(&(({variable_prefix}{name}.as_int() >> 32) as u16).to_le_bytes()){postfix}?;",
+                    "w.write_all(&(({variable}.as_int() >> 32) as u16).to_le_bytes()){postfix}?;",
                 ));
             } else if upcast.is_none() || d.used_in_if() {
                 s.wln(format!(
-                    "w.write_all(&({variable_prefix}{name}.as_int().to_le_bytes())){postfix}?;",
+                    "w.write_all(&({variable}.as_int().to_le_bytes())){postfix}?;",
                 ));
             } else {
                 s.wln(format!(
-                        "w.write_all(&{ty}::from({variable_prefix}{name}.as_int()).to_le_bytes()){postfix}?;",
-                        ty = integer.rust_str(),
-                    ));
+                    "w.write_all(&{ty}::from({variable}.as_int()).to_le_bytes()){postfix}?;",
+                    ty = integer.rust_str(),
+                ));
             }
         }
         Type::PackedGuid => {
             s.wln(format!(
-                "crate::util::write_packed_guid(&{variable_prefix}{name}, &mut w)?;",
+                "crate::util::write_packed_guid(&{variable}, &mut w)?;",
             ));
         }
         Type::DateTime => {
             s.wln(format!(
-                "w.write_all(&{variable_prefix}{name}.as_int().to_le_bytes()){postfix}?;",
+                "w.write_all(&{variable}.as_int().to_le_bytes()){postfix}?;",
             ));
         }
         Type::Guid => {
             s.wln(format!(
-                "w.write_all(&{variable_prefix}{name}.guid().to_le_bytes()){postfix}?;",
+                "w.write_all(&{variable}.guid().to_le_bytes()){postfix}?;",
             ));
         }
 
         Type::MonsterMoveSplines => {
             s.wln(format!(
-                "crate::util::write_monster_move_spline({variable_prefix}{name}.as_slice(), &mut w){postfix}?;",
+                "crate::util::write_monster_move_spline({variable}.as_slice(), &mut w){postfix}?;",
             ));
         }
         Type::AchievementDoneArray => {
             s.wln(format!(
-                 "crate::util::write_achievement_done({variable_prefix}{name}.as_slice(), &mut w){postfix}?;",
-             ));
+                "crate::util::write_achievement_done({variable}.as_slice(), &mut w){postfix}?;",
+            ));
         }
         Type::AchievementInProgressArray => {
             s.wln(format!(
-                 "crate::util::write_achievement_in_progress({variable_prefix}{name}.as_slice(), &mut w){postfix}?;",
+                 "crate::util::write_achievement_in_progress({variable}.as_slice(), &mut w){postfix}?;",
              ));
         }
         Type::AddonArray => {
             s.wln(format!(
-                "crate::util::write_addon_array({variable_prefix}{name}.as_slice(), &mut w){postfix}?;",
+                "crate::util::write_addon_array({variable}.as_slice(), &mut w){postfix}?;",
             ));
         }
 
@@ -325,21 +315,15 @@ pub(crate) fn print_write_definition(
         | Type::InspectTalentGearMask
         | Type::UpdateMask { .. }
         | Type::AuraMask => {
-            s.wln(format!(
-                "{variable_prefix}{name}.write_into_vec(&mut w){postfix}?;",
-            ));
+            s.wln(format!("{variable}.write_into_vec(&mut w){postfix}?;",));
         }
 
         Type::Struct { e } => {
             if e.tags().is_in_base() {
                 let f = base_struct_write_name(e);
-                s.wln_no_indent(format!(
-                    "crate::util::{f}(&{variable_prefix}{name}, &mut w)?;",
-                ));
+                s.wln_no_indent(format!("crate::util::{f}(&{variable}, &mut w)?;",));
             } else {
-                s.wln(format!(
-                    "{variable_prefix}{name}.write_into_vec(&mut w){postfix}?;",
-                ));
+                s.wln(format!("{variable}.write_into_vec(&mut w){postfix}?;",));
             }
         }
     }
