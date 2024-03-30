@@ -44,7 +44,7 @@ pub(crate) fn get_fields(things: &[GenericThing]) -> &[Field] {
     &things[0].fields
 }
 
-pub(crate) fn get_data_from_sqlite_file(expansion: Expansion) -> Data {
+pub(crate) fn get_data_from_csv_files(expansion: Expansion) -> Data {
     let spell_thread =
         std::thread::spawn(move || get_spells(expansion, &expansion.csv_data_directory()));
     let csv_directory = expansion.csv_data_directory();

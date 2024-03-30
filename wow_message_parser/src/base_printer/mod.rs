@@ -8,7 +8,7 @@ use crate::base_printer::write::items::{
     write_constructors, write_definition, write_pub_use, write_things,
 };
 use crate::path_utils::workspace_directory;
-use data::{get_data_from_sqlite_file, Data};
+use data::{get_data_from_csv_files, Data};
 use serde::de::DeserializeOwned;
 use std::path::{Path, PathBuf};
 
@@ -60,7 +60,12 @@ impl Expansion {
     }
 
     pub fn csv_data_directory(&self) -> PathBuf {
-        PathBuf::from(env!("WOWM_SQLITE_DB_PATH")).join(self.as_module_string())
+        if let Some(s) = option_env!("WOWM_SQLITE_DB_PATH") {
+            PathBuf::from(s)
+        } else {
+            workspace_directory().join("../wow_db_sqlite")
+        }
+        .join(self.as_module_string())
     }
 
     pub fn base_extended_path(&self) -> PathBuf {
@@ -128,6 +133,14 @@ impl Expansion {
             .join(self.as_module_string())
             .join("mod.rs")
     }
+
+    pub fn values() -> [Self; 3] {
+        [
+            Self::Vanilla,
+            Self::BurningCrusade,
+            Self::WrathOfTheLichKing,
+        ]
+    }
 }
 
 pub(crate) fn print_base() {
@@ -143,20 +156,20 @@ pub(crate) fn print_base() {
         std::process::exit(1);
     }
 
-    fn run(path: &Path, expansion: Expansion) {
-        let filename = match expansion {
-            Expansion::Vanilla => "classic.sqlite",
-            Expansion::BurningCrusade => "tbc.sqlite",
-            Expansion::WrathOfTheLichKing => "wotlk.sqlite",
-        };
-        let path = path.join(filename);
+    for expansion in Expansion::values() {
+        let path = expansion.csv_data_directory();
         if !path.exists() {
-            println!("Unable to find `{filename}` in `wow_db_sqlite` directory.");
+            println!(
+                "Unable to find `{}` in `wow_db_sqlite` directory.",
+                path.display()
+            );
             println!("Exiting.");
             std::process::exit(1);
         }
+    }
 
-        let data = get_data_from_sqlite_file(expansion);
+    fn run(expansion: Expansion) {
+        let data = get_data_from_csv_files(expansion);
         std::thread::scope(|s| {
             s.spawn(|| write_to_files(&data, expansion));
 
@@ -166,9 +179,9 @@ pub(crate) fn print_base() {
     }
 
     std::thread::scope(|s| {
-        s.spawn(|| run(&sqlite_dir, Expansion::WrathOfTheLichKing));
-        s.spawn(|| run(&sqlite_dir, Expansion::BurningCrusade));
-        run(&sqlite_dir, Expansion::Vanilla);
+        s.spawn(|| run(Expansion::WrathOfTheLichKing));
+        s.spawn(|| run(Expansion::BurningCrusade));
+        run(Expansion::Vanilla);
     });
 }
 
@@ -263,7 +276,19 @@ fn write_spells(data: &Data, expansion: Expansion) {
 
 pub(crate) fn read_csv_file<T: DeserializeOwned>(dir: &Path, filename: &str) -> Vec<T> {
     let dir = dir.join(format!("{filename}.csv"));
-    let mut r = csv::Reader::from_path(dir).expect(filename);
+    let dir_display = dir.display();
 
-    r.deserialize().map(|a| a.expect(filename)).collect()
+    let mut r = match csv::Reader::from_path(&dir) {
+        Ok(e) => e,
+        Err(e) => {
+            panic!("unable to read {dir_display}: {e}");
+        }
+    };
+
+    r.deserialize()
+        .map(|a| match a {
+            Ok(a) => a,
+            Err(e) => panic!("unable to unwrap {dir_display}: {e}"),
+        })
+        .collect()
 }
