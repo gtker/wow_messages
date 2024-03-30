@@ -3,7 +3,6 @@ use std::io::{Read, Write};
 use crate::Guid;
 use crate::wrath::LfgJoinLockedDungeon;
 
-#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/lfg/smsg_lfg_party_info.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/lfg/smsg_lfg_party_info.wowm#L1):
 /// ```text
 /// struct LfgPartyInfo {
@@ -12,6 +11,7 @@ use crate::wrath::LfgJoinLockedDungeon;
 ///     LfgJoinLockedDungeon[amount_of_dungeons] dungeons;
 /// }
 /// ```
+#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct LfgPartyInfo {
     pub player: Guid,
     pub dungeons: Vec<LfgJoinLockedDungeon>,

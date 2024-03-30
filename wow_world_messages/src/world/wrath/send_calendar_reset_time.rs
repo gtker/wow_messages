@@ -2,7 +2,6 @@ use std::io::{Read, Write};
 
 use crate::wrath::Map;
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/calendar/smsg_calendar_send_calendar.wowm:33`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/calendar/smsg_calendar_send_calendar.wowm#L33):
 /// ```text
 /// struct SendCalendarResetTime {
@@ -11,6 +10,7 @@ use crate::wrath::Map;
 ///     u32 time_offset;
 /// }
 /// ```
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct SendCalendarResetTime {
     pub map: Map,
     pub period: u32,

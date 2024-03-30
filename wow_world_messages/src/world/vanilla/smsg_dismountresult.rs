@@ -2,13 +2,13 @@ use std::io::{Read, Write};
 
 use crate::vanilla::DismountResult;
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/mount/smsg_dismountresult.wowm:8`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/mount/smsg_dismountresult.wowm#L8):
 /// ```text
 /// smsg SMSG_DISMOUNTRESULT = 0x016F {
 ///     DismountResult result;
 /// }
 /// ```
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct SMSG_DISMOUNTRESULT {
     pub result: DismountResult,
 }

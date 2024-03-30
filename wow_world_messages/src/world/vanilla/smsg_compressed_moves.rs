@@ -3,13 +3,13 @@ use std::io::{Read, Write};
 
 use crate::vanilla::CompressedMove;
 
-#[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/movement/smsg/smsg_compressed_moves.wowm:48`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/movement/smsg/smsg_compressed_moves.wowm#L48):
 /// ```text
 /// smsg SMSG_COMPRESSED_MOVES = 0x02FB {
 ///     CompressedMove[-] moves;
 /// }
 /// ```
+#[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
 pub struct SMSG_COMPRESSED_MOVES {
     pub moves: Vec<CompressedMove>,
 }

@@ -1,6 +1,5 @@
 use std::io::{Read, Write};
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Sent immediately after logging in. Client expects reply in [`SMSG_QUERY_TIME_RESPONSE`](crate::vanilla::SMSG_QUERY_TIME_RESPONSE).
 /// This message and the [`SMSG_QUERY_TIME_RESPONSE`](crate::vanilla::SMSG_QUERY_TIME_RESPONSE) reply does not actually appear to set the time. Instead [`SMSG_LOGIN_SETTIMESPEED`](crate::vanilla::SMSG_LOGIN_SETTIMESPEED) seems to correctly set the time.
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/queries/cmsg_query_time.wowm:5`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/queries/cmsg_query_time.wowm#L5):
@@ -8,6 +7,7 @@ use std::io::{Read, Write};
 /// cmsg CMSG_QUERY_TIME = 0x01CE {
 /// }
 /// ```
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct CMSG_QUERY_TIME {
 }
 

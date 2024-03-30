@@ -2,7 +2,6 @@ use std::io::{Read, Write};
 
 use crate::Guid;
 
-#[derive(Debug, Clone, Copy, PartialEq, PartialOrd, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/battleground/msg_battleground_player_positions.wowm:5`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/battleground/msg_battleground_player_positions.wowm#L5):
 /// ```text
 /// struct BattlegroundPlayerPosition {
@@ -11,6 +10,7 @@ use crate::Guid;
 ///     f32 position_y;
 /// }
 /// ```
+#[derive(Debug, Clone, Copy, PartialEq, PartialOrd, Default)]
 pub struct BattlegroundPlayerPosition {
     pub player: Guid,
     pub position_x: f32,

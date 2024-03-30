@@ -2,13 +2,13 @@ use std::io::{Read, Write};
 
 use crate::Guid;
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/pvp/msg_inspect_honor_stats_client.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/pvp/msg_inspect_honor_stats_client.wowm#L3):
 /// ```text
 /// cmsg MSG_INSPECT_HONOR_STATS_Client = 0x02D6 {
 ///     Guid guid;
 /// }
 /// ```
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct MSG_INSPECT_HONOR_STATS_Client {
     pub guid: Guid,
 }

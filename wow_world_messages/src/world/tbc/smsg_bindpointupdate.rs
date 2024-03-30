@@ -4,7 +4,6 @@ use crate::tbc::{
     Area, Map, Vector3d,
 };
 
-#[derive(Debug, Clone, Copy, PartialEq, PartialOrd, Default)]
 /// Inform the client of a their hearthstone location.
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/movement/smsg/smsg_bindpointupdate.wowm:2`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/movement/smsg/smsg_bindpointupdate.wowm#L2):
 /// ```text
@@ -14,6 +13,7 @@ use crate::tbc::{
 ///     Area area;
 /// }
 /// ```
+#[derive(Debug, Clone, Copy, PartialEq, PartialOrd, Default)]
 pub struct SMSG_BINDPOINTUPDATE {
     pub position: Vector3d,
     pub map: Map,

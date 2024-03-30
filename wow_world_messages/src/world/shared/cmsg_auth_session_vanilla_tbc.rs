@@ -3,7 +3,6 @@ use std::io::{Read, Write};
 
 use crate::shared::addon_info_vanilla_tbc_wrath::AddonInfo;
 
-#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Sent after receiving [`SMSG_AUTH_CHALLENGE`](crate::vanilla::SMSG_AUTH_CHALLENGE).
 /// Followed by [`SMSG_AUTH_RESPONSE`](crate::vanilla::SMSG_AUTH_RESPONSE).
 /// This message is never encrypted.
@@ -18,6 +17,7 @@ use crate::shared::addon_info_vanilla_tbc_wrath::AddonInfo;
 ///     AddonInfo[-] addon_info;
 /// }
 /// ```
+#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct CMSG_AUTH_SESSION {
     pub build: u32,
     /// This is sent to the client in `CMD_REALM_LIST_Server`.

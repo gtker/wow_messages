@@ -5,7 +5,6 @@ use crate::tbc::{
     MovementFlags, MovementInfo, TransportInfo, Vector3d,
 };
 
-#[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/movement/msg/msg_move_start_strafe_left.wowm:81`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/movement/msg/msg_move_start_strafe_left.wowm#L81):
 /// ```text
 /// smsg MSG_MOVE_START_STRAFE_LEFT_Server = 0x00B8 {
@@ -13,6 +12,7 @@ use crate::tbc::{
 ///     MovementInfo info;
 /// }
 /// ```
+#[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
 pub struct MSG_MOVE_START_STRAFE_LEFT_Server {
     pub guid: Guid,
     pub info: MovementInfo,

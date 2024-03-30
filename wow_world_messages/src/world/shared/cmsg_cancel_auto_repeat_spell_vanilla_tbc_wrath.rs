@@ -1,11 +1,11 @@
 use std::io::{Read, Write};
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/spell/cmsg_cancel_auto_repeat_spell.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/spell/cmsg_cancel_auto_repeat_spell.wowm#L3):
 /// ```text
 /// cmsg CMSG_CANCEL_AUTO_REPEAT_SPELL = 0x026D {
 /// }
 /// ```
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct CMSG_CANCEL_AUTO_REPEAT_SPELL {
 }
 

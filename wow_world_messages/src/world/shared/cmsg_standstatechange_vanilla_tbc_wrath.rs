@@ -2,7 +2,6 @@ use std::io::{Read, Write};
 
 use wow_world_base::shared::unit_stand_state_vanilla_tbc_wrath::UnitStandState;
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Automatically sent by the client when it goes AFK.
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/social/cmsg_standstatechange.wowm:2`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/social/cmsg_standstatechange.wowm#L2):
 /// ```text
@@ -10,6 +9,7 @@ use wow_world_base::shared::unit_stand_state_vanilla_tbc_wrath::UnitStandState;
 ///     (u32)UnitStandState animation_state;
 /// }
 /// ```
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct CMSG_STANDSTATECHANGE {
     pub animation_state: UnitStandState,
 }

@@ -2,7 +2,6 @@ use std::io::{Read, Write};
 
 use crate::Guid;
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/spell/smsg_play_spell_visual.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/spell/smsg_play_spell_visual.wowm#L3):
 /// ```text
 /// smsg SMSG_PLAY_SPELL_VISUAL = 0x01F3 {
@@ -10,6 +9,7 @@ use crate::Guid;
 ///     u32 spell_art_kit;
 /// }
 /// ```
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct SMSG_PLAY_SPELL_VISUAL {
     pub guid: Guid,
     /// mangoszero/mangosone: index from SpellVisualKit.dbc. Set to 0xB3 when buying spells.

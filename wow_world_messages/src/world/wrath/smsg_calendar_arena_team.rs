@@ -4,7 +4,6 @@ use crate::Guid;
 use crate::shared::level_vanilla_tbc_wrath::Level;
 use crate::wrath::CalendarMember;
 
-#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/calendar/smsg_calendar_arena_team.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/calendar/smsg_calendar_arena_team.wowm#L1):
 /// ```text
 /// smsg SMSG_CALENDAR_ARENA_TEAM = 0x0439 {
@@ -12,6 +11,7 @@ use crate::wrath::CalendarMember;
 ///     CalendarMember[amount_of_members] members;
 /// }
 /// ```
+#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct SMSG_CALENDAR_ARENA_TEAM {
     pub members: Vec<CalendarMember>,
 }

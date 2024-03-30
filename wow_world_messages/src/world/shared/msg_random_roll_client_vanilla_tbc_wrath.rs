@@ -1,6 +1,5 @@
 use std::io::{Read, Write};
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/loot/msg_random_roll_client.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/loot/msg_random_roll_client.wowm#L3):
 /// ```text
 /// cmsg MSG_RANDOM_ROLL_Client = 0x01FB {
@@ -8,6 +7,7 @@ use std::io::{Read, Write};
 ///     u32 maximum;
 /// }
 /// ```
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct MSG_RANDOM_ROLL_Client {
     pub minimum: u32,
     pub maximum: u32,

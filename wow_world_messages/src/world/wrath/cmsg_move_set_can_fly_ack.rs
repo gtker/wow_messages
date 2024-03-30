@@ -5,7 +5,6 @@ use crate::wrath::{
     MovementFlags, MovementInfo, TransportInfo, Vector3d,
 };
 
-#[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/movement/cmsg/cmsg_move_set_can_fly_ack.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/movement/cmsg/cmsg_move_set_can_fly_ack.wowm#L1):
 /// ```text
 /// cmsg CMSG_MOVE_SET_CAN_FLY_ACK = 0x0345 {
@@ -15,6 +14,7 @@ use crate::wrath::{
 ///     Bool32 applied;
 /// }
 /// ```
+#[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
 pub struct CMSG_MOVE_SET_CAN_FLY_ACK {
     pub player: Guid,
     pub counter: u32,

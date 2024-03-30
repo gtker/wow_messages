@@ -5,7 +5,6 @@ use crate::wrath::{
     MovementFlags, MovementInfo, TransportInfo, Vector3d,
 };
 
-#[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/movement/msg/msg_move_jump.wowm:47`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/movement/msg/msg_move_jump.wowm#L47):
 /// ```text
 /// msg MSG_MOVE_JUMP = 0x00BB {
@@ -13,6 +12,7 @@ use crate::wrath::{
 ///     MovementInfo info;
 /// }
 /// ```
+#[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
 pub struct MSG_MOVE_JUMP {
     pub guid: Guid,
     pub info: MovementInfo,

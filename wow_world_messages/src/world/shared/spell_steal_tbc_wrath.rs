@@ -2,7 +2,6 @@ use std::io::{Read, Write};
 
 use wow_world_base::shared::spell_steal_action_tbc_wrath::SpellStealAction;
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/spell/smsg_spellsteallog.wowm:8`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/spell/smsg_spellsteallog.wowm#L8):
 /// ```text
 /// struct SpellSteal {
@@ -10,6 +9,7 @@ use wow_world_base::shared::spell_steal_action_tbc_wrath::SpellStealAction;
 ///     SpellStealAction action;
 /// }
 /// ```
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct SpellSteal {
     pub spell: u32,
     pub action: SpellStealAction,

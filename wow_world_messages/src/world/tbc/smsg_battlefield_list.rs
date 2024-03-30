@@ -3,7 +3,6 @@ use std::io::{Read, Write};
 use crate::Guid;
 use crate::tbc::BattlegroundType;
 
-#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/battleground/smsg_battlefield_list.wowm:42`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/battleground/smsg_battlefield_list.wowm#L42):
 /// ```text
 /// smsg SMSG_BATTLEFIELD_LIST = 0x023D {
@@ -13,6 +12,7 @@ use crate::tbc::BattlegroundType;
 ///     u32[number_of_battlegrounds] battlegrounds;
 /// }
 /// ```
+#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct SMSG_BATTLEFIELD_LIST {
     pub battlemaster: Guid,
     pub battleground_type: BattlegroundType,

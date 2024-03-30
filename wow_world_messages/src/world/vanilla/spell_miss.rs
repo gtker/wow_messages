@@ -3,7 +3,6 @@ use std::io::{Read, Write};
 use crate::Guid;
 use crate::vanilla::SpellMissInfo;
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/spell/spell_common.wowm:28`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/spell/spell_common.wowm#L28):
 /// ```text
 /// struct SpellMiss {
@@ -11,6 +10,7 @@ use crate::vanilla::SpellMissInfo;
 ///     SpellMissInfo miss_info;
 /// }
 /// ```
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct SpellMiss {
     pub target: Guid,
     pub miss_info: SpellMissInfo,

@@ -6,7 +6,6 @@ use crate::tbc::{
     NpcTextUpdateEmote, QuestItemRequirement,
 };
 
-#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/quest/smsg_questgiver_offer_reward.wowm:23`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/quest/smsg_questgiver_offer_reward.wowm#L23):
 /// ```text
 /// smsg SMSG_QUESTGIVER_OFFER_REWARD = 0x018D {
@@ -30,6 +29,7 @@ use crate::tbc::{
 ///     u32 title_reward;
 /// }
 /// ```
+#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct SMSG_QUESTGIVER_OFFER_REWARD {
     pub npc: Guid,
     pub quest_id: u32,

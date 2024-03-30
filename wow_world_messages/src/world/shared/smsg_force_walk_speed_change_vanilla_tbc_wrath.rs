@@ -2,7 +2,6 @@ use std::io::{Read, Write};
 
 use crate::Guid;
 
-#[derive(Debug, Clone, Copy, PartialEq, PartialOrd, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/movement/smsg/smsg_force_walk_speed_change.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/movement/smsg/smsg_force_walk_speed_change.wowm#L3):
 /// ```text
 /// smsg SMSG_FORCE_WALK_SPEED_CHANGE = 0x02DA {
@@ -11,6 +10,7 @@ use crate::Guid;
 ///     f32 speed;
 /// }
 /// ```
+#[derive(Debug, Clone, Copy, PartialEq, PartialOrd, Default)]
 pub struct SMSG_FORCE_WALK_SPEED_CHANGE {
     pub guid: Guid,
     /// cmangos/mangoszero/vmangos: set to 0

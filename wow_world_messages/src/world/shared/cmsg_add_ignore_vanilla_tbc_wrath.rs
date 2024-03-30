@@ -1,12 +1,12 @@
 use std::io::{Read, Write};
 
-#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/social/cmsg_add_ignore.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/social/cmsg_add_ignore.wowm#L3):
 /// ```text
 /// cmsg CMSG_ADD_IGNORE = 0x006C {
 ///     CString name;
 /// }
 /// ```
+#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct CMSG_ADD_IGNORE {
     pub name: String,
 }

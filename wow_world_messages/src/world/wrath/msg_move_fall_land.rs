@@ -5,7 +5,6 @@ use crate::wrath::{
     MovementFlags, MovementInfo, TransportInfo, Vector3d,
 };
 
-#[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/movement/msg/msg_move_fall_land.wowm:39`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/movement/msg/msg_move_fall_land.wowm#L39):
 /// ```text
 /// msg MSG_MOVE_FALL_LAND = 0x00C9 {
@@ -13,6 +12,7 @@ use crate::wrath::{
 ///     MovementInfo info;
 /// }
 /// ```
+#[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
 pub struct MSG_MOVE_FALL_LAND {
     pub guid: Guid,
     pub info: MovementInfo,

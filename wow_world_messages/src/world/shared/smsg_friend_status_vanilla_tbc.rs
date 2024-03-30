@@ -3,7 +3,6 @@ use std::io::{Read, Write};
 use crate::Guid;
 use wow_world_base::shared::friend_result_vanilla_tbc::FriendResult;
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/social/smsg_friend_status.wowm:33`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/social/smsg_friend_status.wowm#L33):
 /// ```text
 /// smsg SMSG_FRIEND_STATUS = 0x0068 {
@@ -11,6 +10,7 @@ use wow_world_base::shared::friend_result_vanilla_tbc::FriendResult;
 ///     Guid guid;
 /// }
 /// ```
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct SMSG_FRIEND_STATUS {
     pub result: FriendResult,
     pub guid: Guid,

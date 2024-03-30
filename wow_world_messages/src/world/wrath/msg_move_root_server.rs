@@ -5,7 +5,6 @@ use crate::wrath::{
     MovementFlags, MovementInfo, TransportInfo, Vector3d,
 };
 
-#[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
 /// There does not appear to be a CMSG version of this MSG.
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/movement/msg/msg_move_root.wowm:10`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/movement/msg/msg_move_root.wowm#L10):
 /// ```text
@@ -13,6 +12,7 @@ use crate::wrath::{
 ///     MovementInfo info;
 /// }
 /// ```
+#[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
 pub struct MSG_MOVE_ROOT_Server {
     pub info: MovementInfo,
 }

@@ -2,7 +2,6 @@ use std::io::{Read, Write};
 
 use std::time::Duration;
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/quest/smsg_questgiver_quest_details.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/quest/smsg_questgiver_quest_details.wowm#L1):
 /// ```text
 /// struct QuestDetailsEmote {
@@ -10,6 +9,7 @@ use std::time::Duration;
 ///     Milliseconds emote_delay;
 /// }
 /// ```
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct QuestDetailsEmote {
     pub emote: u32,
     pub emote_delay: Duration,

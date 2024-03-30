@@ -1,6 +1,5 @@
 use std::io::{Read, Write};
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/battleground/smsg_battlefield_mgr_ejected.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/battleground/smsg_battlefield_mgr_ejected.wowm#L1):
 /// ```text
 /// smsg SMSG_BATTLEFIELD_MGR_EJECTED = 0x04E6 {
@@ -10,6 +9,7 @@ use std::io::{Read, Write};
 ///     u8 relocated;
 /// }
 /// ```
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct SMSG_BATTLEFIELD_MGR_EJECTED {
     pub battle_id: u32,
     pub reason: u8,

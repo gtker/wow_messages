@@ -5,7 +5,6 @@ use crate::tbc::{
     DamageInfo, HitInfo,
 };
 
-#[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/combat/smsg_attackerstateupdate.wowm:41`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/combat/smsg_attackerstateupdate.wowm#L41):
 /// ```text
 /// smsg SMSG_ATTACKERSTATEUPDATE = 0x014A {
@@ -21,6 +20,7 @@ use crate::tbc::{
 ///     u32 blocked_amount;
 /// }
 /// ```
+#[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
 pub struct SMSG_ATTACKERSTATEUPDATE {
     pub hit_info: HitInfo,
     pub attacker: Guid,

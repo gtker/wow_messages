@@ -2,7 +2,6 @@ use std::io::{Read, Write};
 
 use crate::vanilla::InventoryType;
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/character_screen/smsg_char_enum.wowm:12`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/character_screen/smsg_char_enum.wowm#L12):
 /// ```text
 /// struct CharacterGear {
@@ -10,6 +9,7 @@ use crate::vanilla::InventoryType;
 ///     InventoryType inventory_type;
 /// }
 /// ```
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct CharacterGear {
     pub equipment_display_id: u32,
     pub inventory_type: InventoryType,

@@ -1,11 +1,11 @@
 use std::io::{Read, Write};
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/calendar/smsg_calendar_clear_pending_action.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/calendar/smsg_calendar_clear_pending_action.wowm#L1):
 /// ```text
 /// smsg SMSG_CALENDAR_CLEAR_PENDING_ACTION = 0x04BB {
 /// }
 /// ```
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct SMSG_CALENDAR_CLEAR_PENDING_ACTION {
 }
 

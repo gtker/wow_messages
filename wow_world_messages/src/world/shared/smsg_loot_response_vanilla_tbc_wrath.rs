@@ -7,7 +7,6 @@ use wow_world_base::shared::loot_method_error_vanilla_tbc_wrath::LootMethodError
 use wow_world_base::shared::loot_method_vanilla_tbc_wrath::LootMethod;
 use wow_world_base::shared::loot_slot_type_vanilla_tbc_wrath::LootSlotType;
 
-#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/loot/smsg_loot_response.wowm:73`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/loot/smsg_loot_response.wowm#L73):
 /// ```text
 /// smsg SMSG_LOOT_RESPONSE = 0x0160 {
@@ -21,6 +20,7 @@ use wow_world_base::shared::loot_slot_type_vanilla_tbc_wrath::LootSlotType;
 ///     LootItem[amount_of_items] items;
 /// }
 /// ```
+#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct SMSG_LOOT_RESPONSE {
     pub guid: Guid,
     pub loot_method: SMSG_LOOT_RESPONSE_LootMethod,

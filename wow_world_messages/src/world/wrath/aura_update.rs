@@ -4,7 +4,6 @@ use crate::Guid;
 use crate::shared::level_vanilla_tbc_wrath::Level;
 use crate::wrath::AuraFlag;
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/spell/smsg_aura_update_all.wowm:17`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/spell/smsg_aura_update_all.wowm#L17):
 /// ```text
 /// struct AuraUpdate {
@@ -22,6 +21,7 @@ use crate::wrath::AuraFlag;
 ///     }
 /// }
 /// ```
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct AuraUpdate {
     pub visual_slot: u8,
     pub spell: u32,

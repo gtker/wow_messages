@@ -2,7 +2,6 @@ use std::io::{Read, Write};
 
 use crate::Guid;
 
-#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/pet/smsg_pet_guids.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/pet/smsg_pet_guids.wowm#L1):
 /// ```text
 /// smsg SMSG_PET_GUIDS = 0x04AA {
@@ -10,6 +9,7 @@ use crate::Guid;
 ///     Guid[amount_of_guids] guids;
 /// }
 /// ```
+#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct SMSG_PET_GUIDS {
     pub guids: Vec<Guid>,
 }

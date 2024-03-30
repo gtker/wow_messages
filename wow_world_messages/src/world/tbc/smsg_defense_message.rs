@@ -2,7 +2,6 @@ use std::io::{Read, Write};
 
 use crate::tbc::Area;
 
-#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/chat/smsg_defense_message.wowm:8`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/chat/smsg_defense_message.wowm#L8):
 /// ```text
 /// smsg SMSG_DEFENSE_MESSAGE = 0x033A {
@@ -10,6 +9,7 @@ use crate::tbc::Area;
 ///     SizedCString message;
 /// }
 /// ```
+#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct SMSG_DEFENSE_MESSAGE {
     pub area: Area,
     pub message: String,

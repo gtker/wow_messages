@@ -1,6 +1,5 @@
 use std::io::{Read, Write};
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Only exists as a comment in azerothcore/trinitycore.
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/login_logout/smsg_redirect_client.wowm:2`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/login_logout/smsg_redirect_client.wowm#L2):
 /// ```text
@@ -11,6 +10,7 @@ use std::io::{Read, Write};
 ///     u8[20] hash;
 /// }
 /// ```
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct SMSG_REDIRECT_CLIENT {
     pub ip_address: u32,
     pub port: u16,

@@ -2,13 +2,13 @@ use std::io::{Read, Write};
 
 use crate::Guid;
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/gameobject/smsg_gameobject_reset_state.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/gameobject/smsg_gameobject_reset_state.wowm#L3):
 /// ```text
 /// smsg SMSG_GAMEOBJECT_RESET_STATE = 0x02A7 {
 ///     Guid guid;
 /// }
 /// ```
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct SMSG_GAMEOBJECT_RESET_STATE {
     pub guid: Guid,
 }

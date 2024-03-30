@@ -2,13 +2,13 @@ use std::io::{Read, Write};
 
 use crate::Guid;
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/trade/cmsg_initiate_trade.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/trade/cmsg_initiate_trade.wowm#L1):
 /// ```text
 /// cmsg CMSG_INITIATE_TRADE = 0x0116 {
 ///     Guid guid;
 /// }
 /// ```
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct CMSG_INITIATE_TRADE {
     pub guid: Guid,
 }

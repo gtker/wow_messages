@@ -2,7 +2,6 @@ use std::io::{Read, Write};
 
 use crate::Guid;
 
-#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/auction/cmsg/cmsg_auction_list_bidder_items.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/auction/cmsg/cmsg_auction_list_bidder_items.wowm#L3):
 /// ```text
 /// cmsg CMSG_AUCTION_LIST_BIDDER_ITEMS = 0x0264 {
@@ -12,6 +11,7 @@ use crate::Guid;
 ///     u32[amount_of_outbid_items] outbid_item_ids;
 /// }
 /// ```
+#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct CMSG_AUCTION_LIST_BIDDER_ITEMS {
     pub auctioneer: Guid,
     pub start_from_page: u32,

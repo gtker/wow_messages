@@ -1,6 +1,5 @@
 use std::io::{Read, Write};
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/spell/smsg_superceded_spell.wowm:8`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/spell/smsg_superceded_spell.wowm#L8):
 /// ```text
 /// smsg SMSG_SUPERCEDED_SPELL = 0x012C {
@@ -8,6 +7,7 @@ use std::io::{Read, Write};
 ///     Spell old;
 /// }
 /// ```
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct SMSG_SUPERCEDED_SPELL {
     pub new: u32,
     pub old: u32,

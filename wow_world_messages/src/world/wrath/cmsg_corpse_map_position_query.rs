@@ -1,12 +1,12 @@
 use std::io::{Read, Write};
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/queries/cmsg_corpse_map_position_query.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/queries/cmsg_corpse_map_position_query.wowm#L1):
 /// ```text
 /// cmsg CMSG_CORPSE_MAP_POSITION_QUERY = 0x04B6 {
 ///     u32 unknown;
 /// }
 /// ```
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct CMSG_CORPSE_MAP_POSITION_QUERY {
     pub unknown: u32,
 }

@@ -3,7 +3,6 @@ use std::io::{Read, Write};
 use crate::Guid;
 use wow_world_base::shared::join_arena_type_tbc_wrath::JoinArenaType;
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/battleground/cmsg_battlemaster_join_arena.wowm:9`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/battleground/cmsg_battlemaster_join_arena.wowm#L9):
 /// ```text
 /// cmsg CMSG_BATTLEMASTER_JOIN_ARENA = 0x0358 {
@@ -13,6 +12,7 @@ use wow_world_base::shared::join_arena_type_tbc_wrath::JoinArenaType;
 ///     Bool rated;
 /// }
 /// ```
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct CMSG_BATTLEMASTER_JOIN_ARENA {
     pub battlemaster: Guid,
     pub arena_type: JoinArenaType,

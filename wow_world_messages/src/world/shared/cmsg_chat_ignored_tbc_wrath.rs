@@ -2,7 +2,6 @@ use std::io::{Read, Write};
 
 use crate::Guid;
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/chat/cmsg_chat_ignored.wowm:7`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/chat/cmsg_chat_ignored.wowm#L7):
 /// ```text
 /// cmsg CMSG_CHAT_IGNORED = 0x0225 {
@@ -10,6 +9,7 @@ use crate::Guid;
 ///     u8 unknown;
 /// }
 /// ```
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct CMSG_CHAT_IGNORED {
     pub guid: Guid,
     /// mangosone/arcemu/trinitycore/azerothcore: probably related to spam reporting

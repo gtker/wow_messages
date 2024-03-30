@@ -7,7 +7,6 @@ use crate::tbc::{
     Area, Class, GuildBankRights, GuildMember, GuildMemberStatus, GuildRights,
 };
 
-#[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/guild/smsg_guild_roster.wowm:82`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/guild/smsg_guild_roster.wowm#L82):
 /// ```text
 /// smsg SMSG_GUILD_ROSTER = 0x008A {
@@ -19,6 +18,7 @@ use crate::tbc::{
 ///     GuildMember[amount_of_members] members;
 /// }
 /// ```
+#[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
 pub struct SMSG_GUILD_ROSTER {
     pub motd: String,
     pub guild_info: String,

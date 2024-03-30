@@ -1,6 +1,5 @@
 use std::io::{Read, Write};
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Only exists as comment in azerothcore/trinitycore.
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/battleground/smsg_battlefield_mgr_state_change.wowm:2`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/battleground/smsg_battlefield_mgr_state_change.wowm#L2):
 /// ```text
@@ -9,6 +8,7 @@ use std::io::{Read, Write};
 ///     u32 unknown2;
 /// }
 /// ```
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct SMSG_BATTLEFIELD_MGR_STATE_CHANGE {
     pub unknown1: u32,
     pub unknown2: u32,

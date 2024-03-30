@@ -1,12 +1,12 @@
 use std::io::{Read, Write};
 
-#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/social/smsg_group_decline.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/social/smsg_group_decline.wowm#L3):
 /// ```text
 /// smsg SMSG_GROUP_DECLINE = 0x0074 {
 ///     CString name;
 /// }
 /// ```
+#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct SMSG_GROUP_DECLINE {
     pub name: String,
 }

@@ -1,6 +1,5 @@
 use std::io::{Read, Write};
 
-#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/chat/cmsg_channel_moderator.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/chat/cmsg_channel_moderator.wowm#L3):
 /// ```text
 /// cmsg CMSG_CHANNEL_MODERATOR = 0x009F {
@@ -8,6 +7,7 @@ use std::io::{Read, Write};
 ///     CString player_name;
 /// }
 /// ```
+#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct CMSG_CHANNEL_MODERATOR {
     pub channel_name: String,
     pub player_name: String,

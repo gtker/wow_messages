@@ -2,7 +2,6 @@ use std::io::{Read, Write};
 
 use crate::Guid;
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/social/smsg_set_player_declined_names_result.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/social/smsg_set_player_declined_names_result.wowm#L1):
 /// ```text
 /// smsg SMSG_SET_PLAYER_DECLINED_NAMES_RESULT = 0x0419 {
@@ -10,6 +9,7 @@ use crate::Guid;
 ///     Guid guid;
 /// }
 /// ```
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct SMSG_SET_PLAYER_DECLINED_NAMES_RESULT {
     pub result: u32,
     pub guid: Guid,

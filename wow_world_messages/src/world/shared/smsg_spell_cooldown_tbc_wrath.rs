@@ -4,7 +4,6 @@ use crate::Guid;
 use crate::shared::spell_cooldown_status_vanilla_tbc_wrath::SpellCooldownStatus;
 use std::time::Duration;
 
-#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/spell/smsg_spell_cooldown.wowm:15`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/spell/smsg_spell_cooldown.wowm#L15):
 /// ```text
 /// smsg SMSG_SPELL_COOLDOWN = 0x0134 {
@@ -13,6 +12,7 @@ use std::time::Duration;
 ///     SpellCooldownStatus[-] cooldowns;
 /// }
 /// ```
+#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct SMSG_SPELL_COOLDOWN {
     pub guid: Guid,
     pub flags: u8,

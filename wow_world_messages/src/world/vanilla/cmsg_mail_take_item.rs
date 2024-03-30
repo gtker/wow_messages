@@ -2,7 +2,6 @@ use std::io::{Read, Write};
 
 use crate::Guid;
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/mail/cmsg_mail_take_item.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/mail/cmsg_mail_take_item.wowm#L1):
 /// ```text
 /// cmsg CMSG_MAIL_TAKE_ITEM = 0x0246 {
@@ -10,6 +9,7 @@ use crate::Guid;
 ///     u32 mail_id;
 /// }
 /// ```
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct CMSG_MAIL_TAKE_ITEM {
     pub mailbox: Guid,
     pub mail_id: u32,

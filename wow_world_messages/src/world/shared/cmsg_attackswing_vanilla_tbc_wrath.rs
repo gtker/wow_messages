@@ -2,7 +2,6 @@ use std::io::{Read, Write};
 
 use crate::Guid;
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Signals that client has right clicked an opponent and is in the attack stance.
 /// Server should reply with [`SMSG_ATTACKSTART`](crate::vanilla::SMSG_ATTACKSTART).
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/combat/cmsg_attackswing.wowm:5`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/combat/cmsg_attackswing.wowm#L5):
@@ -11,6 +10,7 @@ use crate::Guid;
 ///     Guid guid;
 /// }
 /// ```
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct CMSG_ATTACKSWING {
     pub guid: Guid,
 }

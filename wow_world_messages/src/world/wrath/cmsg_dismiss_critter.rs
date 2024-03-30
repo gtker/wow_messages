@@ -2,13 +2,13 @@ use std::io::{Read, Write};
 
 use crate::Guid;
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/pet/cmsg_dismiss_critter.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/pet/cmsg_dismiss_critter.wowm#L1):
 /// ```text
 /// cmsg CMSG_DISMISS_CRITTER = 0x048D {
 ///     Guid critter;
 /// }
 /// ```
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct CMSG_DISMISS_CRITTER {
     pub critter: Guid,
 }

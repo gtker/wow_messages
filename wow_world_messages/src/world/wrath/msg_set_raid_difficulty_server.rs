@@ -2,7 +2,6 @@ use std::io::{Read, Write};
 
 use crate::wrath::RaidDifficulty;
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/raid/msg_set_raid_difficulty.wowm:7`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/raid/msg_set_raid_difficulty.wowm#L7):
 /// ```text
 /// smsg MSG_SET_RAID_DIFFICULTY_Server = 0x04EB {
@@ -11,6 +10,7 @@ use crate::wrath::RaidDifficulty;
 ///     Bool32 in_group;
 /// }
 /// ```
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct MSG_SET_RAID_DIFFICULTY_Server {
     pub difficulty: RaidDifficulty,
     /// Emus set to 1.

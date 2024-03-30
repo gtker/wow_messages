@@ -2,7 +2,6 @@ use std::io::{Read, Write};
 
 use wow_world_base::shared::arena_type_tbc_wrath::ArenaType;
 
-#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/queries/smsg_arena_team_query_response.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/queries/smsg_arena_team_query_response.wowm#L1):
 /// ```text
 /// smsg SMSG_ARENA_TEAM_QUERY_RESPONSE = 0x034C {
@@ -16,6 +15,7 @@ use wow_world_base::shared::arena_type_tbc_wrath::ArenaType;
 ///     u32 border_color;
 /// }
 /// ```
+#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct SMSG_ARENA_TEAM_QUERY_RESPONSE {
     pub arena_team: u32,
     pub team_name: String,

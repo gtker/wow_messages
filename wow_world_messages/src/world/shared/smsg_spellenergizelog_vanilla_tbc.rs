@@ -3,7 +3,6 @@ use std::io::{Read, Write};
 use crate::Guid;
 use wow_world_base::shared::power_vanilla_tbc::Power;
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/spell/smsg_spellenergizelog.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/spell/smsg_spellenergizelog.wowm#L1):
 /// ```text
 /// smsg SMSG_SPELLENERGIZELOG = 0x0151 {
@@ -14,6 +13,7 @@ use wow_world_base::shared::power_vanilla_tbc::Power;
 ///     u32 damage;
 /// }
 /// ```
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct SMSG_SPELLENERGIZELOG {
     pub victim: Guid,
     pub caster: Guid,

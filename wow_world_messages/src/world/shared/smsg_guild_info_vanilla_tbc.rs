@@ -1,6 +1,5 @@
 use std::io::{Read, Write};
 
-#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/guild/smsg_guild_info.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/guild/smsg_guild_info.wowm#L1):
 /// ```text
 /// smsg SMSG_GUILD_INFO = 0x0088 {
@@ -12,6 +11,7 @@ use std::io::{Read, Write};
 ///     u32 amount_of_accounts_in_guild;
 /// }
 /// ```
+#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct SMSG_GUILD_INFO {
     pub guild_name: String,
     pub created_day: u32,

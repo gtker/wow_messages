@@ -5,7 +5,6 @@ use crate::wrath::{
 };
 use std::time::Duration;
 
-#[derive(Debug, Clone, Copy, PartialEq, PartialOrd, Default)]
 /// Sent when using the `worldport` console command.
 /// The 3.3.5 client includes some extra padding.
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/movement/cmsg/cmsg_world_teleport_3_3_5.wowm:5`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/movement/cmsg/cmsg_world_teleport_3_3_5.wowm#L5):
@@ -18,6 +17,7 @@ use std::time::Duration;
 ///     f32 orientation;
 /// }
 /// ```
+#[derive(Debug, Clone, Copy, PartialEq, PartialOrd, Default)]
 pub struct CMSG_WORLD_TELEPORT {
     pub time: Duration,
     pub map: Map,

@@ -1,6 +1,5 @@
 use std::io::{Read, Write};
 
-#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// All that exists of this is an implementation in cmangos-tbc.
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/lfg/smsg_kick_reason.wowm:10`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/lfg/smsg_kick_reason.wowm#L10):
 /// ```text
@@ -9,6 +8,7 @@ use std::io::{Read, Write};
 ///     CString text;
 /// }
 /// ```
+#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct SMSG_KICK_REASON {
     pub reason: u8,
     pub text: String,

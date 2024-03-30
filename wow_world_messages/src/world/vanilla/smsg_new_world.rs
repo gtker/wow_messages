@@ -4,7 +4,6 @@ use crate::vanilla::{
     Map, Vector3d,
 };
 
-#[derive(Debug, Clone, Copy, PartialEq, PartialOrd, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/movement/smsg/smsg_new_world.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/movement/smsg/smsg_new_world.wowm#L1):
 /// ```text
 /// smsg SMSG_NEW_WORLD = 0x003E {
@@ -13,6 +12,7 @@ use crate::vanilla::{
 ///     f32 orientation;
 /// }
 /// ```
+#[derive(Debug, Clone, Copy, PartialEq, PartialOrd, Default)]
 pub struct SMSG_NEW_WORLD {
     pub map: Map,
     pub position: Vector3d,

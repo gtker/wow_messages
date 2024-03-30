@@ -2,7 +2,6 @@ use std::io::{Read, Write};
 
 use crate::shared::level_vanilla_tbc_wrath::Level;
 
-#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/social/cmsg_who.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/social/cmsg_who.wowm#L3):
 /// ```text
 /// cmsg CMSG_WHO = 0x0062 {
@@ -18,6 +17,7 @@ use crate::shared::level_vanilla_tbc_wrath::Level;
 ///     CString[amount_of_strings] search_strings;
 /// }
 /// ```
+#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct CMSG_WHO {
     pub minimum_level: Level,
     pub maximum_level: Level,

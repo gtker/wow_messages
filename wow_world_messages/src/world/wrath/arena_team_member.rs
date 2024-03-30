@@ -4,7 +4,6 @@ use crate::Guid;
 use crate::shared::level_vanilla_tbc_wrath::Level;
 use crate::wrath::Class;
 
-#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/arena/smsg_arena_team_roster.wowm:17`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/arena/smsg_arena_team_roster.wowm#L17):
 /// ```text
 /// struct ArenaTeamMember {
@@ -20,6 +19,7 @@ use crate::wrath::Class;
 ///     u32 personal_rating;
 /// }
 /// ```
+#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct ArenaTeamMember {
     pub guid: Guid,
     pub online: bool,

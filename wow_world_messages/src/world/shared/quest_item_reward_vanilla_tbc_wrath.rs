@@ -1,6 +1,5 @@
 use std::io::{Read, Write};
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/quest/quest_common.wowm:134`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/quest/quest_common.wowm#L134):
 /// ```text
 /// struct QuestItemReward {
@@ -8,6 +7,7 @@ use std::io::{Read, Write};
 ///     u32 item_count;
 /// }
 /// ```
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct QuestItemReward {
     pub item: u32,
     pub item_count: u32,

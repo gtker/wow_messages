@@ -5,7 +5,6 @@ use crate::wrath::{
     PreviewTalent, Talent,
 };
 
-#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/spell/cmsg_learn_preview_talents_pet.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/spell/cmsg_learn_preview_talents_pet.wowm#L1):
 /// ```text
 /// cmsg CMSG_LEARN_PREVIEW_TALENTS_PET = 0x04C2 {
@@ -14,6 +13,7 @@ use crate::wrath::{
 ///     PreviewTalent[amount_of_talents] talents;
 /// }
 /// ```
+#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct CMSG_LEARN_PREVIEW_TALENTS_PET {
     pub pet: Guid,
     pub talents: Vec<PreviewTalent>,

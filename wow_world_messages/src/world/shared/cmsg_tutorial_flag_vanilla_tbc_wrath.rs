@@ -1,12 +1,12 @@
 use std::io::{Read, Write};
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/login_logout/cmsg_tutorial_flag.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/login_logout/cmsg_tutorial_flag.wowm#L3):
 /// ```text
 /// cmsg CMSG_TUTORIAL_FLAG = 0x00FE {
 ///     u32 tutorial_flag;
 /// }
 /// ```
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct CMSG_TUTORIAL_FLAG {
     /// arcemu indexes into the tutorials by dividing by 32 and modulo 32.
     pub tutorial_flag: u32,

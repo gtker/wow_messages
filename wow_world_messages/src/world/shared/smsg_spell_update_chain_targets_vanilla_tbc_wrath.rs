@@ -2,7 +2,6 @@ use std::io::{Read, Write};
 
 use crate::Guid;
 
-#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/spell/smsg_spell_update_chain_targets.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/spell/smsg_spell_update_chain_targets.wowm#L3):
 /// ```text
 /// smsg SMSG_SPELL_UPDATE_CHAIN_TARGETS = 0x0330 {
@@ -12,6 +11,7 @@ use crate::Guid;
 ///     Guid[amount_of_targets] targets;
 /// }
 /// ```
+#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct SMSG_SPELL_UPDATE_CHAIN_TARGETS {
     pub caster: Guid,
     pub spell: u32,

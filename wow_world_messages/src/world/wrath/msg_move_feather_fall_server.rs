@@ -5,7 +5,6 @@ use crate::wrath::{
     MovementFlags, MovementInfo, TransportInfo, Vector3d,
 };
 
-#[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/movement/msg/msg_move_feather_fall.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/movement/msg/msg_move_feather_fall.wowm#L1):
 /// ```text
 /// smsg MSG_MOVE_FEATHER_FALL_Server = 0x02B0 {
@@ -13,6 +12,7 @@ use crate::wrath::{
 ///     MovementInfo info;
 /// }
 /// ```
+#[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
 pub struct MSG_MOVE_FEATHER_FALL_Server {
     pub player: Guid,
     pub info: MovementInfo,

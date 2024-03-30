@@ -2,7 +2,6 @@ use std::io::{Read, Write};
 
 use crate::tbc::Skill;
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/update_mask/skill_info.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/update_mask/skill_info.wowm#L3):
 /// ```text
 /// struct SkillInfo {
@@ -14,6 +13,7 @@ use crate::tbc::Skill;
 ///     u16 temporary_bonus;
 /// }
 /// ```
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct SkillInfo {
     pub skill: Skill,
     pub skill_step: u16,

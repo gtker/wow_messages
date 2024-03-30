@@ -4,7 +4,6 @@ use crate::tbc::{
     CorpseQueryResult, Map, Vector3d,
 };
 
-#[derive(Debug, Clone, Copy, PartialEq, PartialOrd, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/queries/msg_corpse_query_server.wowm:8`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/queries/msg_corpse_query_server.wowm#L8):
 /// ```text
 /// smsg MSG_CORPSE_QUERY_Server = 0x0216 {
@@ -16,6 +15,7 @@ use crate::tbc::{
 ///     }
 /// }
 /// ```
+#[derive(Debug, Clone, Copy, PartialEq, PartialOrd, Default)]
 pub struct MSG_CORPSE_QUERY_Server {
     pub result: MSG_CORPSE_QUERY_Server_CorpseQueryResult,
 }

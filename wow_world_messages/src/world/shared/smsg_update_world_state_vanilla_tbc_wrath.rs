@@ -2,13 +2,13 @@ use std::io::{Read, Write};
 
 use crate::shared::world_state_vanilla_tbc_wrath::WorldState;
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/world/smsg_update_world_state.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/world/smsg_update_world_state.wowm#L3):
 /// ```text
 /// smsg SMSG_UPDATE_WORLD_STATE = 0x02C3 {
 ///     WorldState state;
 /// }
 /// ```
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct SMSG_UPDATE_WORLD_STATE {
     pub state: WorldState,
 }

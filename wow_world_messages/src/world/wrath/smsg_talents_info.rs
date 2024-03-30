@@ -4,7 +4,6 @@ use crate::wrath::{
     InspectTalent, Talent, TalentInfoSpec, TalentInfoType,
 };
 
-#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/spell/smsg_talents_info.wowm:17`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/spell/smsg_talents_info.wowm#L17):
 /// ```text
 /// smsg SMSG_TALENTS_INFO = 0x04C0 {
@@ -21,6 +20,7 @@ use crate::wrath::{
 ///     }
 /// }
 /// ```
+#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct SMSG_TALENTS_INFO {
     pub talent_type: SMSG_TALENTS_INFO_TalentInfoType,
     pub points_left: u32,

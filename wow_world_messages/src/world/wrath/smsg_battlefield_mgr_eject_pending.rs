@@ -1,6 +1,5 @@
 use std::io::{Read, Write};
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Only exists as a comment in azerothcore/trinitycore.
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/battleground/smsg_battlefield_mgr_eject_pending.wowm:2`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/battleground/smsg_battlefield_mgr_eject_pending.wowm#L2):
 /// ```text
@@ -8,6 +7,7 @@ use std::io::{Read, Write};
 ///     u32 unknown;
 /// }
 /// ```
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct SMSG_BATTLEFIELD_MGR_EJECT_PENDING {
     pub unknown: u32,
 }

@@ -1,7 +1,6 @@
 use crate::Message;
 use std::io::{Read, Write};
 
-#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Respond with [`SMSG_UPDATE_ACCOUNT_DATA_COMPLETE`](crate::wrath::SMSG_UPDATE_ACCOUNT_DATA_COMPLETE)
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/login_logout/cmsg_update_account_data.wowm:27`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/login_logout/cmsg_update_account_data.wowm#L27):
 /// ```text
@@ -11,6 +10,7 @@ use std::io::{Read, Write};
 ///     u8[-] compressed_data;
 /// }
 /// ```
+#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct CMSG_UPDATE_ACCOUNT_DATA {
     /// You can check this against the `CacheMask` to find out if this is character-specific data or account-wide data
     pub data_type: u32,

@@ -6,7 +6,6 @@ use crate::wrath::{
 };
 use std::time::Duration;
 
-#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/pet/smsg_pet_spells.wowm:40`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/pet/smsg_pet_spells.wowm#L40):
 /// ```text
 /// smsg SMSG_PET_SPELLS = 0x0179 {
@@ -26,6 +25,7 @@ use std::time::Duration;
 ///     }
 /// }
 /// ```
+#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct SMSG_PET_SPELLS {
     pub pet: Guid,
     pub action_bars: Option<SMSG_PET_SPELLS_action_bars>,

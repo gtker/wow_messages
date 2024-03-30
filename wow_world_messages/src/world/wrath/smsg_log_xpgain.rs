@@ -3,7 +3,6 @@ use std::io::{Read, Write};
 use crate::Guid;
 use crate::wrath::ExperienceAwardType;
 
-#[derive(Debug, Clone, Copy, PartialEq, PartialOrd, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/exp/smsg_log_xpgain.wowm:21`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/exp/smsg_log_xpgain.wowm#L21):
 /// ```text
 /// smsg SMSG_LOG_XPGAIN = 0x01D0 {
@@ -17,6 +16,7 @@ use crate::wrath::ExperienceAwardType;
 ///     Bool exp_includes_recruit_a_friend_bonus;
 /// }
 /// ```
+#[derive(Debug, Clone, Copy, PartialEq, PartialOrd, Default)]
 pub struct SMSG_LOG_XPGAIN {
     pub target: Guid,
     pub total_exp: u32,

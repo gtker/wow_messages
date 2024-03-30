@@ -4,13 +4,13 @@ use crate::tbc::{
     LfgData, LfgType,
 };
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/lfg/smsg_lfg_update_lfg.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/lfg/smsg_lfg_update_lfg.wowm#L1):
 /// ```text
 /// smsg SMSG_LFG_UPDATE_LFG = 0x036E {
 ///     LfgData[3] data;
 /// }
 /// ```
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct SMSG_LFG_UPDATE_LFG {
     pub data: [LfgData; 3],
 }

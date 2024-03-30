@@ -5,7 +5,6 @@ use crate::vanilla::{
     Class, Gender, Race,
 };
 
-#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Response to [`CMSG_NAME_QUERY`](crate::vanilla::CMSG_NAME_QUERY).
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/queries/smsg_name_query_response.wowm:2`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/queries/smsg_name_query_response.wowm#L2):
 /// ```text
@@ -18,6 +17,7 @@ use crate::vanilla::{
 ///     (u32)Class class;
 /// }
 /// ```
+#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct SMSG_NAME_QUERY_RESPONSE {
     pub guid: Guid,
     pub character_name: String,

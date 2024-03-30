@@ -5,7 +5,6 @@ use crate::wrath::{
     Map, Vector3d,
 };
 
-#[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/gamemaster/cmsg_gmticket_create.wowm:19`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/gamemaster/cmsg_gmticket_create.wowm#L19):
 /// ```text
 /// cmsg CMSG_GMTICKET_CREATE = 0x0205 {
@@ -19,6 +18,7 @@ use crate::wrath::{
 ///     u8[-] compressed_data;
 /// }
 /// ```
+#[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
 pub struct CMSG_GMTICKET_CREATE {
     pub map: Map,
     pub position: Vector3d,

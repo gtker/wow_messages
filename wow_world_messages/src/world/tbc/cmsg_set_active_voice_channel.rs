@@ -1,6 +1,5 @@
 use std::io::{Read, Write};
 
-#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/chat/cmsg_set_active_voice_channel.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/chat/cmsg_set_active_voice_channel.wowm#L1):
 /// ```text
 /// cmsg CMSG_SET_ACTIVE_VOICE_CHANNEL = 0x03D2 {
@@ -8,6 +7,7 @@ use std::io::{Read, Write};
 ///     CString unknown2;
 /// }
 /// ```
+#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct CMSG_SET_ACTIVE_VOICE_CHANNEL {
     pub unknown1: u32,
     pub unknown2: String,

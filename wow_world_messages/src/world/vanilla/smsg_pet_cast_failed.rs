@@ -2,7 +2,6 @@ use std::io::{Read, Write};
 
 use crate::vanilla::SpellCastResult;
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/pet/smsg_pet_cast_failed.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/pet/smsg_pet_cast_failed.wowm#L1):
 /// ```text
 /// smsg SMSG_PET_CAST_FAILED = 0x0138 {
@@ -11,6 +10,7 @@ use crate::vanilla::SpellCastResult;
 ///     SpellCastResult result;
 /// }
 /// ```
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct SMSG_PET_CAST_FAILED {
     pub id: u32,
     /// vmangos sets to 2 and cmangos sets to 0.

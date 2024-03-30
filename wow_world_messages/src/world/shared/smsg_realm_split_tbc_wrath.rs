@@ -2,7 +2,6 @@ use std::io::{Read, Write};
 
 use wow_world_base::shared::realm_split_state_tbc_wrath::RealmSplitState;
 
-#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/character_screen/smsg_realm_split.wowm:9`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/character_screen/smsg_realm_split.wowm#L9):
 /// ```text
 /// smsg SMSG_REALM_SPLIT = 0x038B {
@@ -11,6 +10,7 @@ use wow_world_base::shared::realm_split_state_tbc_wrath::RealmSplitState;
 ///     CString split_date;
 /// }
 /// ```
+#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct SMSG_REALM_SPLIT {
     /// ArcEmu/TrinityCore/mangosthree send realm_id from [`CMSG_REALM_SPLIT`](crate::tbc::CMSG_REALM_SPLIT) back.
     pub realm_id: u32,

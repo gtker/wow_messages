@@ -7,7 +7,6 @@ use crate::wrath::{
     Race,
 };
 
-#[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/lfg/smsg_update_lfg_list.wowm:107`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/lfg/smsg_update_lfg_list.wowm#L107):
 /// ```text
 /// smsg SMSG_UPDATE_LFG_LIST = 0x0360 {
@@ -26,6 +25,7 @@ use crate::wrath::{
 ///     LfgListPlayer[amount_of_players] players;
 /// }
 /// ```
+#[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
 pub struct SMSG_UPDATE_LFG_LIST {
     pub lfg_type: LfgType,
     pub dungeon_id: u32,

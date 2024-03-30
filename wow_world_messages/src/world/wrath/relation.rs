@@ -6,7 +6,6 @@ use crate::wrath::{
     Area, Class, FriendStatus, RelationType,
 };
 
-#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/social/smsg_contact_list.wowm:21`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/social/smsg_contact_list.wowm#L21):
 /// ```text
 /// struct Relation {
@@ -23,6 +22,7 @@ use crate::wrath::{
 ///     }
 /// }
 /// ```
+#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct Relation {
     pub guid: Guid,
     pub relation_mask: Relation_RelationType,

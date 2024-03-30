@@ -5,7 +5,6 @@ use crate::vanilla::{
     NewItemChatAlert, NewItemCreationType, NewItemSource,
 };
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/item/smsg_item_push_result.wowm:22`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/item/smsg_item_push_result.wowm#L22):
 /// ```text
 /// smsg SMSG_ITEM_PUSH_RESULT = 0x0166 {
@@ -21,6 +20,7 @@ use crate::vanilla::{
 ///     u32 item_count;
 /// }
 /// ```
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct SMSG_ITEM_PUSH_RESULT {
     pub guid: Guid,
     pub source: NewItemSource,

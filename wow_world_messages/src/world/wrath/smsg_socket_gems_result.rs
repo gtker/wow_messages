@@ -2,7 +2,6 @@ use std::io::{Read, Write};
 
 use crate::Guid;
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/item/smsg_socket_gems_result.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/item/smsg_socket_gems_result.wowm#L1):
 /// ```text
 /// smsg SMSG_SOCKET_GEMS_RESULT = 0x050B {
@@ -10,6 +9,7 @@ use crate::Guid;
 ///     u32[3] sockets;
 /// }
 /// ```
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct SMSG_SOCKET_GEMS_RESULT {
     pub item: Guid,
     pub sockets: [u32; 3],

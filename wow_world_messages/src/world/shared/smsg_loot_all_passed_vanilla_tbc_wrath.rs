@@ -2,7 +2,6 @@ use std::io::{Read, Write};
 
 use crate::Guid;
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/loot/smsg_loot_all_passed.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/loot/smsg_loot_all_passed.wowm#L3):
 /// ```text
 /// smsg SMSG_LOOT_ALL_PASSED = 0x029E {
@@ -13,6 +12,7 @@ use crate::Guid;
 ///     u32 item_random_suffix_id;
 /// }
 /// ```
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct SMSG_LOOT_ALL_PASSED {
     pub looted_target: Guid,
     pub loot_slot: u32,

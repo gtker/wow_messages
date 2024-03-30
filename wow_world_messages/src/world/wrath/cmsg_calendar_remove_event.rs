@@ -2,7 +2,6 @@ use std::io::{Read, Write};
 
 use crate::Guid;
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/calendar/cmsg_calendar_remove_event.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/calendar/cmsg_calendar_remove_event.wowm#L1):
 /// ```text
 /// cmsg CMSG_CALENDAR_REMOVE_EVENT = 0x042F {
@@ -11,6 +10,7 @@ use crate::Guid;
 ///     u32 flags;
 /// }
 /// ```
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct CMSG_CALENDAR_REMOVE_EVENT {
     pub event: Guid,
     pub invite_id: Guid,

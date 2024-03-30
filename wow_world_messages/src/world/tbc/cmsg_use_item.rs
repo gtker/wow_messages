@@ -5,7 +5,6 @@ use crate::tbc::{
     SpellCastTargetFlags, SpellCastTargets, Vector3d,
 };
 
-#[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/item/cmsg_use_item.wowm:10`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/item/cmsg_use_item.wowm#L10):
 /// ```text
 /// cmsg CMSG_USE_ITEM = 0x00AB {
@@ -17,6 +16,7 @@ use crate::tbc::{
 ///     SpellCastTargets targets;
 /// }
 /// ```
+#[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
 pub struct CMSG_USE_ITEM {
     pub bag_index: u8,
     pub bag_slot: u8,

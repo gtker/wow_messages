@@ -2,13 +2,13 @@ use std::io::{Read, Write};
 
 use wow_world_base::shared::gm_ticket_queue_status_vanilla_tbc_wrath::GmTicketQueueStatus;
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/gamemaster/smsg_gmticket_systemstatus.wowm:8`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/gamemaster/smsg_gmticket_systemstatus.wowm#L8):
 /// ```text
 /// smsg SMSG_GMTICKET_SYSTEMSTATUS = 0x021B {
 ///     GmTicketQueueStatus will_accept_tickets;
 /// }
 /// ```
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct SMSG_GMTICKET_SYSTEMSTATUS {
     /// vmangos: This only disables the ticket UI at client side and is not fully reliable are we sure this is a uint32? Should ask Zor
     pub will_accept_tickets: GmTicketQueueStatus,

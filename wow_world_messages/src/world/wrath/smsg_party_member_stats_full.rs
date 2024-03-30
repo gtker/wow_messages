@@ -6,7 +6,6 @@ use crate::wrath::{
     Area, AuraMask, GroupMemberOnlineStatus, GroupUpdateFlags, Power,
 };
 
-#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/social/smsg_party_member_stats_full.wowm:137`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/social/smsg_party_member_stats_full.wowm#L137):
 /// ```text
 /// smsg SMSG_PARTY_MEMBER_STATS_FULL = 0x02F2 {
@@ -75,6 +74,7 @@ use crate::wrath::{
 ///     }
 /// }
 /// ```
+#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct SMSG_PARTY_MEMBER_STATS_FULL {
     pub guid: Guid,
     pub mask: SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags,

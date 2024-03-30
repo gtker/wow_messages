@@ -2,7 +2,6 @@ use std::io::{Read, Write};
 
 use crate::Guid;
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/movement/smsg/smsg_move_unset_hover.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/movement/smsg/smsg_move_unset_hover.wowm#L3):
 /// ```text
 /// smsg SMSG_MOVE_UNSET_HOVER = 0x00F5 {
@@ -10,6 +9,7 @@ use crate::Guid;
 ///     u32 counter;
 /// }
 /// ```
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct SMSG_MOVE_UNSET_HOVER {
     pub guid: Guid,
     pub counter: u32,

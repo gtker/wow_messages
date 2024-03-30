@@ -2,13 +2,13 @@ use std::io::{Read, Write};
 
 use wow_world_base::shared::far_sight_operation_vanilla_tbc_wrath::FarSightOperation;
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/spell/cmsg_far_sight.wowm:8`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/spell/cmsg_far_sight.wowm#L8):
 /// ```text
 /// cmsg CMSG_FAR_SIGHT = 0x027A {
 ///     FarSightOperation operation;
 /// }
 /// ```
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct CMSG_FAR_SIGHT {
     pub operation: FarSightOperation,
 }

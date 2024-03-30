@@ -2,7 +2,6 @@ use std::io::{Read, Write};
 
 use crate::tbc::Addon;
 
-#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Banned addons are not properly implemented in the wowm. Sending any number other than 0 means that the packet is incomplete and thus invalid
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/login_logout/smsg_addon_info.wowm:81`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/login_logout/smsg_addon_info.wowm#L81):
 /// ```text
@@ -11,6 +10,7 @@ use crate::tbc::Addon;
 ///     u32 number_of_banned_addons = 0;
 /// }
 /// ```
+#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct SMSG_ADDON_INFO {
     pub addons: Vec<Addon>,
 }

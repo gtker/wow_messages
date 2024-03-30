@@ -1,6 +1,5 @@
 use std::io::{Read, Write};
 
-#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/calendar/smsg_calendar_command_result.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/calendar/smsg_calendar_command_result.wowm#L1):
 /// ```text
 /// smsg SMSG_CALENDAR_COMMAND_RESULT = 0x043D {
@@ -10,6 +9,7 @@ use std::io::{Read, Write};
 ///     u32 result;
 /// }
 /// ```
+#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct SMSG_CALENDAR_COMMAND_RESULT {
     /// All emus set to 0.
     pub unknown1: u32,

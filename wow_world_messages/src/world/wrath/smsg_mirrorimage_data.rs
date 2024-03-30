@@ -5,7 +5,6 @@ use crate::wrath::{
     Class, Gender, Race,
 };
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/spell/smsg_mirrorimage_data.wowm:18`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/spell/smsg_mirrorimage_data.wowm#L18):
 /// ```text
 /// smsg SMSG_MIRRORIMAGE_DATA = 0x0402 {
@@ -23,6 +22,7 @@ use crate::wrath::{
 ///     u32[11] display_ids;
 /// }
 /// ```
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct SMSG_MIRRORIMAGE_DATA {
     pub guid: Guid,
     pub display_id: u32,

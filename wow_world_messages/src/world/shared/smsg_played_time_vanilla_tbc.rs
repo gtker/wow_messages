@@ -1,6 +1,5 @@
 use std::io::{Read, Write};
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/social/smsg_played_time.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/social/smsg_played_time.wowm#L1):
 /// ```text
 /// smsg SMSG_PLAYED_TIME = 0x01CD {
@@ -8,6 +7,7 @@ use std::io::{Read, Write};
 ///     u32 level_played_time;
 /// }
 /// ```
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct SMSG_PLAYED_TIME {
     pub total_played_time: u32,
     pub level_played_time: u32,

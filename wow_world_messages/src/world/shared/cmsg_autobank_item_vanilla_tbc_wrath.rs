@@ -1,6 +1,5 @@
 use std::io::{Read, Write};
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/item/cmsg_autobank_item.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/item/cmsg_autobank_item.wowm#L3):
 /// ```text
 /// cmsg CMSG_AUTOBANK_ITEM = 0x0283 {
@@ -8,6 +7,7 @@ use std::io::{Read, Write};
 ///     u8 slot_index;
 /// }
 /// ```
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct CMSG_AUTOBANK_ITEM {
     pub bag_index: u8,
     pub slot_index: u8,

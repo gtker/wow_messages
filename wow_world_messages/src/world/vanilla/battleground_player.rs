@@ -3,7 +3,6 @@ use std::io::{Read, Write};
 use crate::Guid;
 use crate::vanilla::PvpRank;
 
-#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/pvp/msg_pvp_log_data_server.wowm:14`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/pvp/msg_pvp_log_data_server.wowm#L14):
 /// ```text
 /// struct BattlegroundPlayer {
@@ -17,6 +16,7 @@ use crate::vanilla::PvpRank;
 ///     u32[amount_of_extra_fields] fields;
 /// }
 /// ```
+#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct BattlegroundPlayer {
     pub player: Guid,
     pub rank: PvpRank,

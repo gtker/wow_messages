@@ -1,6 +1,5 @@
 use std::io::{Read, Write};
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/auction/smsg/smsg_auction_removed_notification.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/auction/smsg/smsg_auction_removed_notification.wowm#L3):
 /// ```text
 /// smsg SMSG_AUCTION_REMOVED_NOTIFICATION = 0x028D {
@@ -9,6 +8,7 @@ use std::io::{Read, Write};
 ///     u32 random_property_id;
 /// }
 /// ```
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct SMSG_AUCTION_REMOVED_NOTIFICATION {
     pub item: u32,
     pub item_template: u32,

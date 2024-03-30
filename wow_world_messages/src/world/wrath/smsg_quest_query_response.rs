@@ -6,7 +6,6 @@ use crate::wrath::{
     Faction, QuestItemRequirement, QuestItemReward, QuestObjective, Vector2d,
 };
 
-#[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/quest/smsg_quest_query_response.wowm:93`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/quest/smsg_quest_query_response.wowm#L93):
 /// ```text
 /// smsg SMSG_QUEST_QUERY_RESPONSE = 0x005D {
@@ -53,6 +52,7 @@ use crate::wrath::{
 ///     CString[4] objective_texts;
 /// }
 /// ```
+#[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
 pub struct SMSG_QUEST_QUERY_RESPONSE {
     pub quest_id: u32,
     /// Accepted values: 0, 1 or 2. 0==IsAutoComplete() (skip objectives/details)

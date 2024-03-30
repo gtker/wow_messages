@@ -4,7 +4,6 @@ use crate::wrath::{
     GmTicketEscalationStatus, GmTicketStatus,
 };
 
-#[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/gamemaster/smsg_gmticket_getticket.wowm:28`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/gamemaster/smsg_gmticket_getticket.wowm#L28):
 /// ```text
 /// smsg SMSG_GMTICKET_GETTICKET = 0x0212 {
@@ -21,6 +20,7 @@ use crate::wrath::{
 ///     }
 /// }
 /// ```
+#[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
 pub struct SMSG_GMTICKET_GETTICKET {
     pub status: SMSG_GMTICKET_GETTICKET_GmTicketStatus,
 }

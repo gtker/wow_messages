@@ -1,6 +1,5 @@
 use std::io::{Read, Write};
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Seed used by the client to prove in [`CMSG_AUTH_SESSION`](crate::vanilla::CMSG_AUTH_SESSION) that it has authenticated with the auth server.
 /// First thing sent when a client connects to the world server.
 /// This message is always unencrypted.
@@ -10,6 +9,7 @@ use std::io::{Read, Write};
 ///     u32 server_seed;
 /// }
 /// ```
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct SMSG_AUTH_CHALLENGE {
     pub server_seed: u32,
 }

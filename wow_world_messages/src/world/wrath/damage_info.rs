@@ -1,6 +1,5 @@
 use std::io::{Read, Write};
 
-#[derive(Debug, Clone, Copy, PartialEq, PartialOrd, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/combat/smsg_attackerstateupdate_3_3_5.wowm:41`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/combat/smsg_attackerstateupdate_3_3_5.wowm#L41):
 /// ```text
 /// struct DamageInfo {
@@ -9,6 +8,7 @@ use std::io::{Read, Write};
 ///     u32 damage_uint;
 /// }
 /// ```
+#[derive(Debug, Clone, Copy, PartialEq, PartialOrd, Default)]
 pub struct DamageInfo {
     pub spell_school_mask: u32,
     /// arcemu sends the same data in `damage_uint`.

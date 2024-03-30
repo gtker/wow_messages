@@ -3,7 +3,6 @@ use std::io::{Read, Write};
 use crate::Guid;
 use crate::vanilla::SpellSchool;
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/spell/smsg_spelldamageshield.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/spell/smsg_spelldamageshield.wowm#L1):
 /// ```text
 /// smsg SMSG_SPELLDAMAGESHIELD = 0x024F {
@@ -13,6 +12,7 @@ use crate::vanilla::SpellSchool;
 ///     (u32)SpellSchool school;
 /// }
 /// ```
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct SMSG_SPELLDAMAGESHIELD {
     pub victim: Guid,
     pub caster: Guid,

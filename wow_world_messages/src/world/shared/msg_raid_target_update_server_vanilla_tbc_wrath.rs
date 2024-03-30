@@ -5,7 +5,6 @@ use crate::shared::raid_target_update_vanilla_tbc_wrath::RaidTargetUpdate;
 use wow_world_base::shared::raid_target_index_vanilla_tbc_wrath::RaidTargetIndex;
 use wow_world_base::shared::raid_target_update_type_vanilla_tbc_wrath::RaidTargetUpdateType;
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/raid/raid_target.wowm:26`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/raid/raid_target.wowm#L26):
 /// ```text
 /// smsg MSG_RAID_TARGET_UPDATE_Server = 0x0321 {
@@ -18,6 +17,7 @@ use wow_world_base::shared::raid_target_update_type_vanilla_tbc_wrath::RaidTarge
 ///     }
 /// }
 /// ```
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct MSG_RAID_TARGET_UPDATE_Server {
     pub update_type: MSG_RAID_TARGET_UPDATE_Server_RaidTargetUpdateType,
 }

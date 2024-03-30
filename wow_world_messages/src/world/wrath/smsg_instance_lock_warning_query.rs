@@ -2,7 +2,6 @@ use std::io::{Read, Write};
 
 use std::time::Duration;
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/queries/smsg_instance_lock_warning_query.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/queries/smsg_instance_lock_warning_query.wowm#L1):
 /// ```text
 /// smsg SMSG_INSTANCE_LOCK_WARNING_QUERY = 0x0147 {
@@ -11,6 +10,7 @@ use std::time::Duration;
 ///     u8 unknown;
 /// }
 /// ```
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct SMSG_INSTANCE_LOCK_WARNING_QUERY {
     pub time: Duration,
     pub encounter_mask: u32,

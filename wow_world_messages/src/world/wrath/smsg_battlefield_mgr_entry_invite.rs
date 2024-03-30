@@ -3,7 +3,6 @@ use std::io::{Read, Write};
 use crate::wrath::Area;
 use std::time::Duration;
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/battleground/smsg_battlefield_mgr_entry_invite.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/battleground/smsg_battlefield_mgr_entry_invite.wowm#L1):
 /// ```text
 /// smsg SMSG_BATTLEFIELD_MGR_ENTRY_INVITE = 0x04DE {
@@ -12,6 +11,7 @@ use std::time::Duration;
 ///     Seconds accept_time;
 /// }
 /// ```
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct SMSG_BATTLEFIELD_MGR_ENTRY_INVITE {
     pub battle_id: u32,
     pub area: Area,

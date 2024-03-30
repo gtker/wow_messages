@@ -6,7 +6,6 @@ use crate::tbc::{
     Area, LfgMode, LfgPlayerMember,
 };
 
-#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/lfg/msg_looking_for_group.wowm:36`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/lfg/msg_looking_for_group.wowm#L36):
 /// ```text
 /// struct LfgPlayer {
@@ -20,6 +19,7 @@ use crate::tbc::{
 ///     LfgPlayerMember[amount_of_members] members;
 /// }
 /// ```
+#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct LfgPlayer {
     pub guid: Guid,
     pub level: Level,

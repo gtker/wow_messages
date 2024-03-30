@@ -6,7 +6,6 @@ use crate::wrath::{
     Area, Class, LfgUpdateFlag, Race,
 };
 
-#[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/lfg/smsg_update_lfg_list.wowm:49`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/lfg/smsg_update_lfg_list.wowm#L49):
 /// ```text
 /// struct LfgListPlayer {
@@ -62,6 +61,7 @@ use crate::wrath::{
 ///     u32 encounter_mask;
 /// }
 /// ```
+#[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
 pub struct LfgListPlayer {
     pub player: Guid,
     pub flags: LfgListPlayer_LfgUpdateFlag,

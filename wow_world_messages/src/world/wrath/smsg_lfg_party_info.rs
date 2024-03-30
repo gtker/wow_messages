@@ -5,7 +5,6 @@ use crate::wrath::{
     LfgJoinLockedDungeon, LfgPartyInfo,
 };
 
-#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/lfg/smsg_lfg_party_info.wowm:9`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/lfg/smsg_lfg_party_info.wowm#L9):
 /// ```text
 /// smsg SMSG_LFG_PARTY_INFO = 0x0372 {
@@ -13,6 +12,7 @@ use crate::wrath::{
 ///     LfgPartyInfo[amount_of_infos] infos;
 /// }
 /// ```
+#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct SMSG_LFG_PARTY_INFO {
     pub infos: Vec<LfgPartyInfo>,
 }

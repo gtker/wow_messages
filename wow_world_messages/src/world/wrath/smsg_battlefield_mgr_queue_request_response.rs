@@ -2,7 +2,6 @@ use std::io::{Read, Write};
 
 use crate::wrath::Area;
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/battleground/smsg_battlefield_mgr_queue_request_response.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/battleground/smsg_battlefield_mgr_queue_request_response.wowm#L1):
 /// ```text
 /// smsg SMSG_BATTLEFIELD_MGR_QUEUE_REQUEST_RESPONSE = 0x04E4 {
@@ -13,6 +12,7 @@ use crate::wrath::Area;
 ///     Bool warmup;
 /// }
 /// ```
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct SMSG_BATTLEFIELD_MGR_QUEUE_REQUEST_RESPONSE {
     pub battle_id: u32,
     pub area: Area,

@@ -1,6 +1,5 @@
 use std::io::{Read, Write};
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/common.wowm:825`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/common.wowm#L825):
 /// ```text
 /// struct NpcTextUpdateEmote {
@@ -8,6 +7,7 @@ use std::io::{Read, Write};
 ///     u32 emote;
 /// }
 /// ```
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct NpcTextUpdateEmote {
     pub delay: u32,
     pub emote: u32,

@@ -2,7 +2,6 @@ use std::io::{Read, Write};
 
 use crate::DateTime;
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Used in the `AchievementDoneArray` built-in type.
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/achievement/smsg_respond_inspect_achievements.wowm:17`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/achievement/smsg_respond_inspect_achievements.wowm#L17):
 /// ```text
@@ -11,6 +10,7 @@ use crate::DateTime;
 ///     DateTime time;
 /// }
 /// ```
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct AchievementDone {
     pub achievement: u32,
     pub time: DateTime,

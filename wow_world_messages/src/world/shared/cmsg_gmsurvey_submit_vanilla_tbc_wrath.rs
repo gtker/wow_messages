@@ -2,7 +2,6 @@ use std::io::{Read, Write};
 
 use crate::shared::gm_survey_question_vanilla_tbc_wrath::GmSurveyQuestion;
 
-#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/gamemaster/cmsg_gmsurvey_submit.wowm:14`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/gamemaster/cmsg_gmsurvey_submit.wowm#L14):
 /// ```text
 /// cmsg CMSG_GMSURVEY_SUBMIT = 0x032A {
@@ -11,6 +10,7 @@ use crate::shared::gm_survey_question_vanilla_tbc_wrath::GmSurveyQuestion;
 ///     CString answer_comment;
 /// }
 /// ```
+#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct CMSG_GMSURVEY_SUBMIT {
     /// cmangos: Survey ID: found in GMSurveySurveys.dbc
     pub survey_id: u32,

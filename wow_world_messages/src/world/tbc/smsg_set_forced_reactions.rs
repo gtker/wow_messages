@@ -4,7 +4,6 @@ use crate::tbc::{
     Faction, ForcedReaction,
 };
 
-#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/faction/smsg_set_forced_reactions.wowm:8`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/faction/smsg_set_forced_reactions.wowm#L8):
 /// ```text
 /// smsg SMSG_SET_FORCED_REACTIONS = 0x02A5 {
@@ -12,6 +11,7 @@ use crate::tbc::{
 ///     ForcedReaction[amount_of_reactions] reactions;
 /// }
 /// ```
+#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct SMSG_SET_FORCED_REACTIONS {
     pub reactions: Vec<ForcedReaction>,
 }

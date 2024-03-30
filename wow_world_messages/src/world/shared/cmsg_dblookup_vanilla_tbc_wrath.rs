@@ -1,6 +1,5 @@
 use std::io::{Read, Write};
 
-#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Executes a query directly on the world server.
 /// Not implemented on any major emulator.
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/debug/cmsg_dblookup.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/debug/cmsg_dblookup.wowm#L3):
@@ -9,6 +8,7 @@ use std::io::{Read, Write};
 ///     CString query;
 /// }
 /// ```
+#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct CMSG_DBLOOKUP {
     pub query: String,
 }

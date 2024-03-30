@@ -2,7 +2,6 @@ use std::io::{Read, Write};
 
 use crate::wrath::QuestPoiList;
 
-#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/quest/smsg_quest_poi_query_response.wowm:30`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/quest/smsg_quest_poi_query_response.wowm#L30):
 /// ```text
 /// smsg SMSG_QUEST_POI_QUERY_RESPONSE = 0x01E4 {
@@ -10,6 +9,7 @@ use crate::wrath::QuestPoiList;
 ///     QuestPoiList[amount_of_quests] quests;
 /// }
 /// ```
+#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct SMSG_QUEST_POI_QUERY_RESPONSE {
     pub quests: Vec<QuestPoiList>,
 }

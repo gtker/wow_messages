@@ -2,7 +2,6 @@ use std::io::{Read, Write};
 
 use crate::Guid;
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/auction/cmsg/cmsg_auction_list_owner_items.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/auction/cmsg/cmsg_auction_list_owner_items.wowm#L3):
 /// ```text
 /// cmsg CMSG_AUCTION_LIST_OWNER_ITEMS = 0x0259 {
@@ -10,6 +9,7 @@ use crate::Guid;
 ///     u32 list_from;
 /// }
 /// ```
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct CMSG_AUCTION_LIST_OWNER_ITEMS {
     pub auctioneer: Guid,
     pub list_from: u32,

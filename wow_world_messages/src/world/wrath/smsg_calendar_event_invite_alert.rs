@@ -4,7 +4,6 @@ use crate::{
     DateTime, Guid,
 };
 
-#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/calendar/smsg_calendar_event_invite_alert.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/calendar/smsg_calendar_event_invite_alert.wowm#L1):
 /// ```text
 /// smsg SMSG_CALENDAR_EVENT_INVITE_ALERT = 0x0440 {
@@ -21,6 +20,7 @@ use crate::{
 ///     PackedGuid invite_sender;
 /// }
 /// ```
+#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct SMSG_CALENDAR_EVENT_INVITE_ALERT {
     pub event_id: Guid,
     pub title: String,

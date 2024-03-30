@@ -4,7 +4,6 @@ use crate::wrath::{
     InspectTalent, Talent,
 };
 
-#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/spell/smsg_inspect_talent.wowm:9`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/spell/smsg_inspect_talent.wowm#L9):
 /// ```text
 /// struct InspectTalentSpec {
@@ -12,6 +11,7 @@ use crate::wrath::{
 ///     InspectTalent[amount_of_talents] talents;
 /// }
 /// ```
+#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct InspectTalentSpec {
     pub talents: Vec<InspectTalent>,
 }

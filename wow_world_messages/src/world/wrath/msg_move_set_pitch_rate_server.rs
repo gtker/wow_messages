@@ -5,7 +5,6 @@ use crate::wrath::{
     MovementFlags, MovementInfo, TransportInfo, Vector3d,
 };
 
-#[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/movement/msg/msg_move_set_pitch_rate.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/movement/msg/msg_move_set_pitch_rate.wowm#L1):
 /// ```text
 /// smsg MSG_MOVE_SET_PITCH_RATE_Server = 0x045B {
@@ -14,6 +13,7 @@ use crate::wrath::{
 ///     f32 new_speed;
 /// }
 /// ```
+#[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
 pub struct MSG_MOVE_SET_PITCH_RATE_Server {
     pub player: Guid,
     pub info: MovementInfo,

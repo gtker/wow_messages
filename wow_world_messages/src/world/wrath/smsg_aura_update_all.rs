@@ -6,7 +6,6 @@ use crate::wrath::{
     AuraFlag, AuraUpdate,
 };
 
-#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/spell/smsg_aura_update_all.wowm:34`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/spell/smsg_aura_update_all.wowm#L34):
 /// ```text
 /// smsg SMSG_AURA_UPDATE_ALL = 0x0495 {
@@ -14,6 +13,7 @@ use crate::wrath::{
 ///     AuraUpdate[-] aura_updates;
 /// }
 /// ```
+#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct SMSG_AURA_UPDATE_ALL {
     pub unit: Guid,
     pub aura_updates: Vec<AuraUpdate>,

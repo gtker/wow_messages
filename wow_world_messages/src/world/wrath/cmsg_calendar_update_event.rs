@@ -4,7 +4,6 @@ use crate::{
     DateTime, Guid,
 };
 
-#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/calendar/cmsg_calendar_update_event.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/calendar/cmsg_calendar_update_event.wowm#L1):
 /// ```text
 /// cmsg CMSG_CALENDAR_UPDATE_EVENT = 0x042E {
@@ -21,6 +20,7 @@ use crate::{
 ///     u32 flags;
 /// }
 /// ```
+#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct CMSG_CALENDAR_UPDATE_EVENT {
     pub event: Guid,
     pub invite_id: Guid,

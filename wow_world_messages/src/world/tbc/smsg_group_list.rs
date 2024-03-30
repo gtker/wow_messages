@@ -5,7 +5,6 @@ use crate::tbc::{
     DungeonDifficulty, GroupListMember, GroupLootSetting, GroupType, ItemQuality,
 };
 
-#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/social/smsg_group_list.wowm:46`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/social/smsg_group_list.wowm#L46):
 /// ```text
 /// smsg SMSG_GROUP_LIST = 0x007D {
@@ -25,6 +24,7 @@ use crate::tbc::{
 ///     }
 /// }
 /// ```
+#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct SMSG_GROUP_LIST {
     pub group_type: GroupType,
     pub battleground_group: bool,

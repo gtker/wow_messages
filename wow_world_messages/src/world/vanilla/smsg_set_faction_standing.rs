@@ -4,7 +4,6 @@ use crate::vanilla::{
     Faction, FactionStanding,
 };
 
-#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/faction/smsg_set_faction_standing.wowm:9`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/faction/smsg_set_faction_standing.wowm#L9):
 /// ```text
 /// smsg SMSG_SET_FACTION_STANDING = 0x0124 {
@@ -12,6 +11,7 @@ use crate::vanilla::{
 ///     FactionStanding[amount_of_faction_standings] faction_standings;
 /// }
 /// ```
+#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct SMSG_SET_FACTION_STANDING {
     pub faction_standings: Vec<FactionStanding>,
 }

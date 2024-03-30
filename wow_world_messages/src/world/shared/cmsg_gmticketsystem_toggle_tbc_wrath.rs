@@ -1,11 +1,11 @@
 use std::io::{Read, Write};
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/gamemaster/cmsg_gmticketsystem_toggle.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/gamemaster/cmsg_gmticketsystem_toggle.wowm#L1):
 /// ```text
 /// cmsg CMSG_GMTICKETSYSTEM_TOGGLE = 0x029A {
 /// }
 /// ```
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct CMSG_GMTICKETSYSTEM_TOGGLE {
 }
 

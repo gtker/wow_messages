@@ -3,7 +3,6 @@ use std::io::{Read, Write};
 use wow_world_base::shared::logout_result_vanilla_tbc_wrath::LogoutResult;
 use wow_world_base::shared::logout_speed_vanilla_tbc_wrath::LogoutSpeed;
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Reply to [`CMSG_LOGOUT_REQUEST`](crate::vanilla::CMSG_LOGOUT_REQUEST).
 /// The client expects to get an [`SMSG_LOGOUT_COMPLETE`](crate::vanilla::SMSG_LOGOUT_COMPLETE) when logout is complete.
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/login_logout/smsg_logout_response.wowm:18`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/login_logout/smsg_logout_response.wowm#L18):
@@ -13,6 +12,7 @@ use wow_world_base::shared::logout_speed_vanilla_tbc_wrath::LogoutSpeed;
 ///     LogoutSpeed speed;
 /// }
 /// ```
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct SMSG_LOGOUT_RESPONSE {
     pub result: LogoutResult,
     pub speed: LogoutSpeed,

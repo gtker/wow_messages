@@ -3,7 +3,6 @@ use std::io::{Read, Write};
 use crate::Guid;
 use crate::wrath::EncounterFrame;
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/raid/smsg_update_instance_encounter_unit.wowm:15`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/raid/smsg_update_instance_encounter_unit.wowm#L15):
 /// ```text
 /// smsg SMSG_UPDATE_INSTANCE_ENCOUNTER_UNIT = 0x0214 {
@@ -25,6 +24,7 @@ use crate::wrath::EncounterFrame;
 ///     }
 /// }
 /// ```
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct SMSG_UPDATE_INSTANCE_ENCOUNTER_UNIT {
     pub frame: SMSG_UPDATE_INSTANCE_ENCOUNTER_UNIT_EncounterFrame,
 }

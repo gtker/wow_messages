@@ -1,12 +1,12 @@
 use std::io::{Read, Write};
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/ping_pong/smsg_pong.wowm:2`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/ping_pong/smsg_pong.wowm#L2):
 /// ```text
 /// smsg SMSG_PONG = 0x01DD {
 ///     u32 sequence_id;
 /// }
 /// ```
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct SMSG_PONG {
     pub sequence_id: u32,
 }

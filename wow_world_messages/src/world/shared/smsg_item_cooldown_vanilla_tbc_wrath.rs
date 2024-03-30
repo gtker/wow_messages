@@ -2,7 +2,6 @@ use std::io::{Read, Write};
 
 use crate::Guid;
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/item/smsg_item_cooldown.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/item/smsg_item_cooldown.wowm#L3):
 /// ```text
 /// smsg SMSG_ITEM_COOLDOWN = 0x00B0 {
@@ -10,6 +9,7 @@ use crate::Guid;
 ///     Spell id;
 /// }
 /// ```
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct SMSG_ITEM_COOLDOWN {
     pub guid: Guid,
     pub id: u32,

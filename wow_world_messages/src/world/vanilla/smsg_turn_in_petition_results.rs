@@ -2,13 +2,13 @@ use std::io::{Read, Write};
 
 use crate::vanilla::PetitionResult;
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/guild/smsg_turn_in_petition_results.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/guild/smsg_turn_in_petition_results.wowm#L1):
 /// ```text
 /// smsg SMSG_TURN_IN_PETITION_RESULTS = 0x01C5 {
 ///     PetitionResult result;
 /// }
 /// ```
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct SMSG_TURN_IN_PETITION_RESULTS {
     pub result: PetitionResult,
 }

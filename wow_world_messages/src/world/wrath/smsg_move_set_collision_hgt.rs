@@ -2,7 +2,6 @@ use std::io::{Read, Write};
 
 use crate::Guid;
 
-#[derive(Debug, Clone, Copy, PartialEq, PartialOrd, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/movement/smsg/smsg_move_set_collision_hgt.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/movement/smsg/smsg_move_set_collision_hgt.wowm#L1):
 /// ```text
 /// smsg SMSG_MOVE_SET_COLLISION_HGT = 0x0516 {
@@ -11,6 +10,7 @@ use crate::Guid;
 ///     f32 collision_height;
 /// }
 /// ```
+#[derive(Debug, Clone, Copy, PartialEq, PartialOrd, Default)]
 pub struct SMSG_MOVE_SET_COLLISION_HGT {
     pub unit: Guid,
     pub packet_counter: u32,

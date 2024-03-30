@@ -4,7 +4,6 @@ use crate::Guid;
 use crate::shared::gold_vanilla_tbc_wrath::Gold;
 use crate::wrath::ItemRefundExtra;
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/item/smsg_item_refund_info_response.wowm:8`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/item/smsg_item_refund_info_response.wowm#L8):
 /// ```text
 /// smsg SMSG_ITEM_REFUND_INFO_RESPONSE = 0x04B2 {
@@ -17,6 +16,7 @@ use crate::wrath::ItemRefundExtra;
 ///     u32 time_since_loss;
 /// }
 /// ```
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct SMSG_ITEM_REFUND_INFO_RESPONSE {
     pub item: Guid,
     pub money_cost: Gold,

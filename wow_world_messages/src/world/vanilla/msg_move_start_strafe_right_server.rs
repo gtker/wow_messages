@@ -3,7 +3,6 @@ use std::io::{Read, Write};
 use crate::Guid;
 use crate::vanilla::MovementInfo;
 
-#[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/movement/msg/msg_move_start_strafe_right.wowm:46`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/movement/msg/msg_move_start_strafe_right.wowm#L46):
 /// ```text
 /// smsg MSG_MOVE_START_STRAFE_RIGHT_Server = 0x00B9 {
@@ -11,6 +10,7 @@ use crate::vanilla::MovementInfo;
 ///     MovementInfo info;
 /// }
 /// ```
+#[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
 pub struct MSG_MOVE_START_STRAFE_RIGHT_Server {
     pub guid: Guid,
     pub info: MovementInfo,

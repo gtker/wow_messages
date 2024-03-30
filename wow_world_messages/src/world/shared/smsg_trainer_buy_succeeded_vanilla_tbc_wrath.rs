@@ -2,7 +2,6 @@ use std::io::{Read, Write};
 
 use crate::Guid;
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/spell/smsg_trainer_buy_succeeded.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/spell/smsg_trainer_buy_succeeded.wowm#L3):
 /// ```text
 /// smsg SMSG_TRAINER_BUY_SUCCEEDED = 0x01B3 {
@@ -10,6 +9,7 @@ use crate::Guid;
 ///     Spell id;
 /// }
 /// ```
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct SMSG_TRAINER_BUY_SUCCEEDED {
     pub guid: Guid,
     pub id: u32,

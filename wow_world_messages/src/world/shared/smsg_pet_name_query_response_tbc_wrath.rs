@@ -2,7 +2,6 @@ use std::io::{Read, Write};
 
 use wow_world_base::shared::pet_query_disabled_names_tbc_wrath::PetQueryDisabledNames;
 
-#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/queries/smsg_pet_name_query_response.wowm:30`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/queries/smsg_pet_name_query_response.wowm#L30):
 /// ```text
 /// smsg SMSG_PET_NAME_QUERY_RESPONSE = 0x0053 {
@@ -15,6 +14,7 @@ use wow_world_base::shared::pet_query_disabled_names_tbc_wrath::PetQueryDisabled
 ///     }
 /// }
 /// ```
+#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct SMSG_PET_NAME_QUERY_RESPONSE {
     pub pet_number: u32,
     pub name: String,

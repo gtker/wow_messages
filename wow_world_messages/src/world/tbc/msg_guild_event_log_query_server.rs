@@ -5,7 +5,6 @@ use crate::tbc::{
     GuildEvent, GuildLogEvent,
 };
 
-#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/queries/msg_guild_event_log_query.wowm:27`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/queries/msg_guild_event_log_query.wowm#L27):
 /// ```text
 /// smsg MSG_GUILD_EVENT_LOG_QUERY_Server = 0x03FE {
@@ -13,6 +12,7 @@ use crate::tbc::{
 ///     GuildLogEvent[amount_of_events] events;
 /// }
 /// ```
+#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct MSG_GUILD_EVENT_LOG_QUERY_Server {
     pub events: Vec<GuildLogEvent>,
 }

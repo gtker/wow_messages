@@ -5,7 +5,6 @@ use crate::wrath::{
     BattlegroundType, RandomBg,
 };
 
-#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/battleground/smsg_battlefield_list.wowm:77`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/battleground/smsg_battlefield_list.wowm#L77):
 /// ```text
 /// smsg SMSG_BATTLEFIELD_LIST = 0x023D {
@@ -28,6 +27,7 @@ use crate::wrath::{
 ///     u32[number_of_battlegrounds] battlegrounds;
 /// }
 /// ```
+#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct SMSG_BATTLEFIELD_LIST {
     pub battlemaster: Guid,
     pub battleground_type: BattlegroundType,

@@ -4,7 +4,6 @@ use crate::tbc::{
     WeatherChangeType, WeatherType,
 };
 
-#[derive(Debug, Clone, Copy, PartialEq, PartialOrd, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/world/smsg_weather.wowm:44`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/world/smsg_weather.wowm#L44):
 /// ```text
 /// smsg SMSG_WEATHER = 0x02F4 {
@@ -13,6 +12,7 @@ use crate::tbc::{
 ///     WeatherChangeType change;
 /// }
 /// ```
+#[derive(Debug, Clone, Copy, PartialEq, PartialOrd, Default)]
 pub struct SMSG_WEATHER {
     pub weather_type: WeatherType,
     pub grade: f32,

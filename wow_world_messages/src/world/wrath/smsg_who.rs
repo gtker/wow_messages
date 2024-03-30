@@ -5,7 +5,6 @@ use crate::wrath::{
     Area, Class, Gender, Race, WhoPlayer,
 };
 
-#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/social/smsg_who.wowm:25`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/social/smsg_who.wowm#L25):
 /// ```text
 /// smsg SMSG_WHO = 0x0063 {
@@ -14,6 +13,7 @@ use crate::wrath::{
 ///     WhoPlayer[listed_players] players;
 /// }
 /// ```
+#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct SMSG_WHO {
     pub online_players: u32,
     pub players: Vec<WhoPlayer>,

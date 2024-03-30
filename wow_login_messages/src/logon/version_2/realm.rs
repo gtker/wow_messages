@@ -5,7 +5,6 @@ use crate::logon::version_2::{
     RealmCategory, RealmFlag, RealmType,
 };
 
-#[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/login/cmd_realm/server.wowm:44`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/login/cmd_realm/server.wowm#L44):
 /// ```text
 /// struct Realm {
@@ -19,6 +18,7 @@ use crate::logon::version_2::{
 ///     u8 realm_id;
 /// }
 /// ```
+#[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
 pub struct Realm {
     pub realm_type: RealmType,
     pub flag: RealmFlag,

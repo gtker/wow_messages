@@ -1,6 +1,5 @@
 use std::io::{Read, Write};
 
-#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/chat/cmsg_join_channel.wowm:32`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/chat/cmsg_join_channel.wowm#L32):
 /// ```text
 /// cmsg CMSG_JOIN_CHANNEL = 0x0097 {
@@ -11,6 +10,7 @@ use std::io::{Read, Write};
 ///     CString channel_password;
 /// }
 /// ```
+#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct CMSG_JOIN_CHANNEL {
     pub channel_id: u32,
     pub unknown1: u8,

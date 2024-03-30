@@ -2,7 +2,6 @@ use std::io::{Read, Write};
 
 use crate::Guid;
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/quest/cmsg_questgiver_choose_reward.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/quest/cmsg_questgiver_choose_reward.wowm#L3):
 /// ```text
 /// cmsg CMSG_QUESTGIVER_CHOOSE_REWARD = 0x018E {
@@ -11,6 +10,7 @@ use crate::Guid;
 ///     u32 reward;
 /// }
 /// ```
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct CMSG_QUESTGIVER_CHOOSE_REWARD {
     pub guid: Guid,
     pub quest_id: u32,

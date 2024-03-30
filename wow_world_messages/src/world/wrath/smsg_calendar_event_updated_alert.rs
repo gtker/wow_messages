@@ -4,7 +4,6 @@ use crate::{
     DateTime, Guid,
 };
 
-#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/calendar/smsg_calendar_event_updated_alert.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/calendar/smsg_calendar_event_updated_alert.wowm#L1):
 /// ```text
 /// smsg SMSG_CALENDAR_EVENT_UPDATED_ALERT = 0x0444 {
@@ -22,6 +21,7 @@ use crate::{
 ///     DateTime unknown_time;
 /// }
 /// ```
+#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct SMSG_CALENDAR_EVENT_UPDATED_ALERT {
     pub show_alert: bool,
     pub event_id: Guid,

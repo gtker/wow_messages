@@ -5,7 +5,6 @@ use crate::vanilla::{
     MovementFlags, MovementInfo, TransportInfo, Vector3d,
 };
 
-#[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/movement/msg/msg_move_start_pitch_down.wowm:20`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/movement/msg/msg_move_start_pitch_down.wowm#L20):
 /// ```text
 /// smsg MSG_MOVE_START_PITCH_DOWN_Server = 0x00C0 {
@@ -13,6 +12,7 @@ use crate::vanilla::{
 ///     MovementInfo info;
 /// }
 /// ```
+#[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
 pub struct MSG_MOVE_START_PITCH_DOWN_Server {
     pub guid: Guid,
     pub info: MovementInfo,

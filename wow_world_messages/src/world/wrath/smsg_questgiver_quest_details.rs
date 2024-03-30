@@ -7,7 +7,6 @@ use crate::wrath::{
 };
 use std::time::Duration;
 
-#[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/quest/smsg_questgiver_quest_details.wowm:60`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/quest/smsg_questgiver_quest_details.wowm#L60):
 /// ```text
 /// smsg SMSG_QUESTGIVER_QUEST_DETAILS = 0x0188 {
@@ -42,6 +41,7 @@ use std::time::Duration;
 ///     QuestDetailsEmote[amount_of_emotes] emotes;
 /// }
 /// ```
+#[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
 pub struct SMSG_QUESTGIVER_QUEST_DETAILS {
     pub guid: Guid,
     /// arcemu also sends guid2 if guid is a player. Otherwise sends 0.

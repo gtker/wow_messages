@@ -2,13 +2,13 @@ use std::io::{Read, Write};
 
 use crate::wrath::Area;
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/combat/smsg_zone_under_attack.wowm:13`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/combat/smsg_zone_under_attack.wowm#L13):
 /// ```text
 /// smsg SMSG_ZONE_UNDER_ATTACK = 0x0254 {
 ///     Area zone_id;
 /// }
 /// ```
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct SMSG_ZONE_UNDER_ATTACK {
     pub zone_id: Area,
 }

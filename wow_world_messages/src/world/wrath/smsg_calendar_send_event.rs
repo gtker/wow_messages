@@ -6,7 +6,6 @@ use crate::{
 use crate::shared::level_vanilla_tbc_wrath::Level;
 use crate::wrath::CalendarSendInvitee;
 
-#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/calendar/smsg_calendar_send_event.wowm:14`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/calendar/smsg_calendar_send_event.wowm#L14):
 /// ```text
 /// smsg SMSG_CALENDAR_SEND_EVENT = 0x0437 {
@@ -27,6 +26,7 @@ use crate::wrath::CalendarSendInvitee;
 ///     CalendarSendInvitee[amount_of_invitees] invitees;
 /// }
 /// ```
+#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct SMSG_CALENDAR_SEND_EVENT {
     pub send_type: u8,
     pub creator: Guid,

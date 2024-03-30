@@ -5,7 +5,6 @@ use crate::tbc::{
     MovementFlags, MovementInfo, TransportInfo, Vector3d,
 };
 
-#[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/movement/cmsg/cmsg_move_hover_ack.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/movement/cmsg/cmsg_move_hover_ack.wowm#L3):
 /// ```text
 /// cmsg CMSG_MOVE_HOVER_ACK = 0x00F6 {
@@ -15,6 +14,7 @@ use crate::tbc::{
 ///     u32 is_applied;
 /// }
 /// ```
+#[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
 pub struct CMSG_MOVE_HOVER_ACK {
     pub guid: Guid,
     pub counter: u32,

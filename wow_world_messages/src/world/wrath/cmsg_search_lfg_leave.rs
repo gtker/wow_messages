@@ -1,12 +1,12 @@
 use std::io::{Read, Write};
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/lfg/cmsg_search_lfg_leave.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/lfg/cmsg_search_lfg_leave.wowm#L1):
 /// ```text
 /// cmsg CMSG_SEARCH_LFG_LEAVE = 0x035F {
 ///     u32 dungeon_id;
 /// }
 /// ```
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct CMSG_SEARCH_LFG_LEAVE {
     pub dungeon_id: u32,
 }

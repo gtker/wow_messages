@@ -5,7 +5,6 @@ use crate::vanilla::{
     SpellCastTargetFlags, SpellCastTargets, Vector3d,
 };
 
-#[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/pet/cmsg_pet_cast_spell.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/pet/cmsg_pet_cast_spell.wowm#L1):
 /// ```text
 /// cmsg CMSG_PET_CAST_SPELL = 0x01F0 {
@@ -14,6 +13,7 @@ use crate::vanilla::{
 ///     SpellCastTargets targets;
 /// }
 /// ```
+#[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
 pub struct CMSG_PET_CAST_SPELL {
     pub guid: Guid,
     pub id: u32,

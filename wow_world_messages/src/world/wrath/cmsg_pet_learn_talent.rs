@@ -2,7 +2,6 @@ use std::io::{Read, Write};
 
 use crate::Guid;
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/spell/cmsg_pet_learn_talent.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/spell/cmsg_pet_learn_talent.wowm#L1):
 /// ```text
 /// cmsg CMSG_PET_LEARN_TALENT = 0x047A {
@@ -11,6 +10,7 @@ use crate::Guid;
 ///     u32 rank;
 /// }
 /// ```
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct CMSG_PET_LEARN_TALENT {
     pub pet: Guid,
     pub talent: u32,

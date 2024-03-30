@@ -1,6 +1,5 @@
 use std::io::{Read, Write};
 
-#[derive(Debug, Clone, Copy, PartialEq, PartialOrd, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/combat/smsg_attackerstateupdate.wowm:29`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/combat/smsg_attackerstateupdate.wowm#L29):
 /// ```text
 /// struct DamageInfo {
@@ -11,6 +10,7 @@ use std::io::{Read, Write};
 ///     u32 resist;
 /// }
 /// ```
+#[derive(Debug, Clone, Copy, PartialEq, PartialOrd, Default)]
 pub struct DamageInfo {
     pub spell_school_mask: u32,
     /// vmangos sends the same data in `damage_uint`.

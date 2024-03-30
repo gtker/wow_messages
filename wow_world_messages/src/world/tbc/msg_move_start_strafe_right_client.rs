@@ -5,13 +5,13 @@ use crate::tbc::{
     MovementFlags, MovementInfo, TransportInfo, Vector3d,
 };
 
-#[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/movement/msg/msg_move_start_strafe_right.wowm:7`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/movement/msg/msg_move_start_strafe_right.wowm#L7):
 /// ```text
 /// cmsg MSG_MOVE_START_STRAFE_RIGHT_Client = 0x00B9 {
 ///     MovementInfo info;
 /// }
 /// ```
+#[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
 pub struct MSG_MOVE_START_STRAFE_RIGHT_Client {
     pub info: MovementInfo,
 }

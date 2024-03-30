@@ -2,7 +2,6 @@ use std::io::{Read, Write};
 
 use wow_world_base::shared::guild_event_tbc_wrath::GuildEvent;
 
-#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/guild/smsg_guild_event.wowm:65`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/guild/smsg_guild_event.wowm#L65):
 /// ```text
 /// smsg SMSG_GUILD_EVENT = 0x0092 {
@@ -11,6 +10,7 @@ use wow_world_base::shared::guild_event_tbc_wrath::GuildEvent;
 ///     CString[amount_of_events] event_descriptions;
 /// }
 /// ```
+#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct SMSG_GUILD_EVENT {
     pub event: GuildEvent,
     pub event_descriptions: Vec<String>,

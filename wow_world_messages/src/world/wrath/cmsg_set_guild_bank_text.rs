@@ -1,6 +1,5 @@
 use std::io::{Read, Write};
 
-#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/guild_bank/cmsg_set_guild_bank_text.wowm:8`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/guild_bank/cmsg_set_guild_bank_text.wowm#L8):
 /// ```text
 /// cmsg CMSG_SET_GUILD_BANK_TEXT = 0x040B {
@@ -8,6 +7,7 @@ use std::io::{Read, Write};
 ///     CString text;
 /// }
 /// ```
+#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct CMSG_SET_GUILD_BANK_TEXT {
     pub tab: u8,
     pub text: String,

@@ -6,7 +6,6 @@ use crate::wrath::{
     Mail, MailListItem, MailListItemEnchant, MailType,
 };
 
-#[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/mail/smsg_mail_list_result.wowm:167`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/mail/smsg_mail_list_result.wowm#L167):
 /// ```text
 /// smsg SMSG_MAIL_LIST_RESULT = 0x023B {
@@ -15,6 +14,7 @@ use crate::wrath::{
 ///     Mail[amount_of_mails] mails;
 /// }
 /// ```
+#[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
 pub struct SMSG_MAIL_LIST_RESULT {
     /// azerothcore: this will display warning about undelivered mail to player if realCount > mailsCount
     pub real_mail_amount: u32,

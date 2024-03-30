@@ -3,7 +3,6 @@ use std::io::{Read, Write};
 use crate::Guid;
 use wow_world_base::shared::vector3d_vanilla_tbc_wrath::Vector3d;
 
-#[derive(Debug, Clone, Copy, PartialEq, PartialOrd, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/movement/common_movement.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/movement/common_movement.wowm#L3):
 /// ```text
 /// struct TransportInfo {
@@ -13,6 +12,7 @@ use wow_world_base::shared::vector3d_vanilla_tbc_wrath::Vector3d;
 ///     u32 timestamp;
 /// }
 /// ```
+#[derive(Debug, Clone, Copy, PartialEq, PartialOrd, Default)]
 pub struct TransportInfo {
     pub guid: Guid,
     pub position: Vector3d,

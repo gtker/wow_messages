@@ -1,6 +1,5 @@
 use std::io::{Read, Write};
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/guild/smsg_petition_showlist.wowm:17`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/guild/smsg_petition_showlist.wowm#L17):
 /// ```text
 /// struct PetitionShowlist {
@@ -11,6 +10,7 @@ use std::io::{Read, Write};
 ///     u32 unknown1;
 /// }
 /// ```
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct PetitionShowlist {
     pub index: u32,
     /// cmangos/vmangos/mangoszero: statically sets to guild charter item id (5863) and arena charter ids.

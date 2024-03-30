@@ -4,7 +4,6 @@ use crate::tbc::{
     Area, SpellCastResult,
 };
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/pet/smsg_pet_cast_failed.wowm:10`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/pet/smsg_pet_cast_failed.wowm#L10):
 /// ```text
 /// smsg SMSG_PET_CAST_FAILED = 0x0138 {
@@ -30,6 +29,7 @@ use crate::tbc::{
 ///     }
 /// }
 /// ```
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct SMSG_PET_CAST_FAILED {
     pub id: u32,
     pub result: SMSG_PET_CAST_FAILED_SpellCastResult,

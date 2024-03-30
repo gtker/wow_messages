@@ -5,7 +5,6 @@ use crate::tbc::{
     GmTicketType, Map, Vector3d,
 };
 
-#[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/gamemaster/cmsg_gmticket_create.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/gamemaster/cmsg_gmticket_create.wowm#L1):
 /// ```text
 /// cmsg CMSG_GMTICKET_CREATE = 0x0205 {
@@ -20,6 +19,7 @@ use crate::tbc::{
 ///     }
 /// }
 /// ```
+#[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
 pub struct CMSG_GMTICKET_CREATE {
     pub category: CMSG_GMTICKET_CREATE_GmTicketType,
     pub map: Map,

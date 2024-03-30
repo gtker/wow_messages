@@ -6,7 +6,6 @@ use crate::wrath::{
     UpdateMask, UpdateType, Vector3d,
 };
 
-#[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/gameobject/smsg_update_object_3_3_5.wowm:178`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/gameobject/smsg_update_object_3_3_5.wowm#L178):
 /// ```text
 /// struct Object {
@@ -33,6 +32,7 @@ use crate::wrath::{
 ///     }
 /// }
 /// ```
+#[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
 pub struct Object {
     pub update_type: Object_UpdateType,
 }

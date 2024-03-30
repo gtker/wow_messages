@@ -2,7 +2,6 @@ use crate::Message;
 use crate::ClientMessage;
 use std::io::{Read, Write};
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Reply to [`CMD_AUTH_RECONNECT_CHALLENGE_Server`](crate::logon::version_2::CMD_AUTH_RECONNECT_CHALLENGE_Server).
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/login/cmd_auth_reconnect/proof_client.wowm:4`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/login/cmd_auth_reconnect/proof_client.wowm#L4):
 /// ```text
@@ -13,6 +12,7 @@ use std::io::{Read, Write};
 ///     u8 key_count = 0;
 /// }
 /// ```
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct CMD_AUTH_RECONNECT_PROOF_Client {
     pub proof_data: [u8; 16],
     pub client_proof: [u8; 20],

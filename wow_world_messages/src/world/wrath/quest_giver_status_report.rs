@@ -3,7 +3,6 @@ use std::io::{Read, Write};
 use crate::Guid;
 use crate::wrath::QuestGiverStatus;
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/quest/smsg_questgiver_status_multiple.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/quest/smsg_questgiver_status_multiple.wowm#L1):
 /// ```text
 /// struct QuestGiverStatusReport {
@@ -11,6 +10,7 @@ use crate::wrath::QuestGiverStatus;
 ///     QuestGiverStatus dialog_status;
 /// }
 /// ```
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct QuestGiverStatusReport {
     pub npc: Guid,
     pub dialog_status: QuestGiverStatus,

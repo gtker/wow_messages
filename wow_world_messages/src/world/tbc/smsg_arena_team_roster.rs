@@ -6,7 +6,6 @@ use crate::tbc::{
     ArenaTeamMember, ArenaType, Class,
 };
 
-#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/arena/smsg_arena_team_roster.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/arena/smsg_arena_team_roster.wowm#L1):
 /// ```text
 /// smsg SMSG_ARENA_TEAM_ROSTER = 0x034E {
@@ -16,6 +15,7 @@ use crate::tbc::{
 ///     ArenaTeamMember[amount_of_members] members;
 /// }
 /// ```
+#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct SMSG_ARENA_TEAM_ROSTER {
     pub arena_team: u32,
     pub arena_type: ArenaType,

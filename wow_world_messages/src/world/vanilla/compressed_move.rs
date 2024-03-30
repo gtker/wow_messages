@@ -5,7 +5,6 @@ use crate::vanilla::{
     CompressedMoveOpcode, MonsterMove, MonsterMoveType, SplineFlag, Vector3d,
 };
 
-#[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/movement/smsg/smsg_compressed_moves.wowm:32`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/movement/smsg/smsg_compressed_moves.wowm#L32):
 /// ```text
 /// struct CompressedMove {
@@ -24,6 +23,7 @@ use crate::vanilla::{
 ///     }
 /// }
 /// ```
+#[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
 pub struct CompressedMove {
     pub opcode: CompressedMove_CompressedMoveOpcode,
     pub guid: Guid,

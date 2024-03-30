@@ -2,7 +2,6 @@ use std::io::{Read, Write};
 
 use crate::tbc::MailListItemEnchant;
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/mail/smsg_mail_list_result.wowm:87`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/mail/smsg_mail_list_result.wowm#L87):
 /// ```text
 /// struct MailListItem {
@@ -18,6 +17,7 @@ use crate::tbc::MailListItemEnchant;
 ///     u32 durability;
 /// }
 /// ```
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct MailListItem {
     pub item_index: u8,
     pub low_guid: u32,

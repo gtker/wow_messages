@@ -1,6 +1,5 @@
 use std::io::{Read, Write};
 
-#[derive(Debug, Clone, Copy, PartialEq, PartialOrd, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/social/msg_minimap_ping_client.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/social/msg_minimap_ping_client.wowm#L3):
 /// ```text
 /// cmsg MSG_MINIMAP_PING_Client = 0x01D5 {
@@ -8,6 +7,7 @@ use std::io::{Read, Write};
 ///     f32 position_y;
 /// }
 /// ```
+#[derive(Debug, Clone, Copy, PartialEq, PartialOrd, Default)]
 pub struct MSG_MINIMAP_PING_Client {
     pub position_x: f32,
     pub position_y: f32,

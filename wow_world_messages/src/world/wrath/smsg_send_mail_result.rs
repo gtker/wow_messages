@@ -4,7 +4,6 @@ use crate::wrath::{
     MailAction, MailResult, MailResultTwo,
 };
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/mail/smsg_send_mail_result.wowm:51`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/mail/smsg_send_mail_result.wowm#L51):
 /// ```text
 /// smsg SMSG_SEND_MAIL_RESULT = 0x0239 {
@@ -28,6 +27,7 @@ use crate::wrath::{
 ///     }
 /// }
 /// ```
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct SMSG_SEND_MAIL_RESULT {
     pub mail_id: u32,
     pub action: SMSG_SEND_MAIL_RESULT_MailAction,

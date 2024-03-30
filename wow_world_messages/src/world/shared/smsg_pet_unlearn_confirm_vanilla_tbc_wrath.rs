@@ -2,7 +2,6 @@ use std::io::{Read, Write};
 
 use crate::Guid;
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/pet/smsg_pet_unlearn_confirm.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/pet/smsg_pet_unlearn_confirm.wowm#L3):
 /// ```text
 /// smsg SMSG_PET_UNLEARN_CONFIRM = 0x02F1 {
@@ -10,6 +9,7 @@ use crate::Guid;
 ///     u32 talent_reset_cost;
 /// }
 /// ```
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct SMSG_PET_UNLEARN_CONFIRM {
     pub pet: Guid,
     pub talent_reset_cost: u32,

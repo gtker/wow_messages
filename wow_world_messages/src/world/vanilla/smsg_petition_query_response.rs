@@ -6,7 +6,6 @@ use crate::vanilla::{
     AllowedClass, AllowedRace,
 };
 
-#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/queries/smsg_petition_query_response.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/queries/smsg_petition_query_response.wowm#L1):
 /// ```text
 /// smsg SMSG_PETITION_QUERY_RESPONSE = 0x01C7 {
@@ -29,6 +28,7 @@ use crate::vanilla::{
 ///     u32 number_of_choices;
 /// }
 /// ```
+#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct SMSG_PETITION_QUERY_RESPONSE {
     pub petition_id: u32,
     pub charter_owner: Guid,

@@ -5,7 +5,6 @@ use crate::vanilla::{
     InventoryResult, TradeStatus,
 };
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/trade/smsg_trade_status.wowm:283`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/trade/smsg_trade_status.wowm#L283):
 /// ```text
 /// smsg SMSG_TRADE_STATUS = 0x0120 {
@@ -24,6 +23,7 @@ use crate::vanilla::{
 ///     }
 /// }
 /// ```
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct SMSG_TRADE_STATUS {
     pub status: SMSG_TRADE_STATUS_TradeStatus,
 }

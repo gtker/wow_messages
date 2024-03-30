@@ -4,7 +4,6 @@ use crate::vanilla::{
     BattlegroundBracket, Map, StatusId,
 };
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/battleground/smsg_battlefield_status.wowm:16`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/battleground/smsg_battlefield_status.wowm#L16):
 /// ```text
 /// smsg SMSG_BATTLEFIELD_STATUS = 0x02D4 {
@@ -28,6 +27,7 @@ use crate::vanilla::{
 ///     }
 /// }
 /// ```
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct SMSG_BATTLEFIELD_STATUS {
     /// vmangos: players can be in 3 queues at the same time (0..2)
     pub queue_slot: u32,

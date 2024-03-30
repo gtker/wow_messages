@@ -4,7 +4,6 @@ use crate::wrath::{
     Map, Vector3d,
 };
 
-#[derive(Debug, Clone, Copy, PartialEq, PartialOrd, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/resurrect/smsg_death_release_loc.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/resurrect/smsg_death_release_loc.wowm#L1):
 /// ```text
 /// smsg SMSG_DEATH_RELEASE_LOC = 0x0378 {
@@ -12,6 +11,7 @@ use crate::wrath::{
 ///     Vector3d position;
 /// }
 /// ```
+#[derive(Debug, Clone, Copy, PartialEq, PartialOrd, Default)]
 pub struct SMSG_DEATH_RELEASE_LOC {
     pub map: Map,
     pub position: Vector3d,

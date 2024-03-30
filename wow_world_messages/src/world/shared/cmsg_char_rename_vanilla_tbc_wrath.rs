@@ -2,7 +2,6 @@ use std::io::{Read, Write};
 
 use crate::Guid;
 
-#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Request of new name for character. This is only sent by the client if RENAME is set in the `CharacterFlags` of [`SMSG_CHAR_ENUM`](crate::vanilla::SMSG_CHAR_ENUM) and the client tries to login.
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/character_screen/cmsg_char_rename.wowm:4`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/character_screen/cmsg_char_rename.wowm#L4):
 /// ```text
@@ -11,6 +10,7 @@ use crate::Guid;
 ///     CString new_name;
 /// }
 /// ```
+#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct CMSG_CHAR_RENAME {
     pub character: Guid,
     pub new_name: String,

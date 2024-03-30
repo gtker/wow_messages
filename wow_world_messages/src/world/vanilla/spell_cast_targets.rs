@@ -5,7 +5,6 @@ use crate::vanilla::{
     SpellCastTargetFlags, Vector3d,
 };
 
-#[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/common.wowm:118`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/common.wowm#L118):
 /// ```text
 /// struct SpellCastTargets {
@@ -42,6 +41,7 @@ use crate::vanilla::{
 ///     }
 /// }
 /// ```
+#[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
 pub struct SpellCastTargets {
     pub target_flags: SpellCastTargets_SpellCastTargetFlags,
 }

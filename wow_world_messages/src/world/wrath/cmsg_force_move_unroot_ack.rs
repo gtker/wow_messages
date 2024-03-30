@@ -5,7 +5,6 @@ use crate::wrath::{
     MovementFlags, MovementInfo, TransportInfo, Vector3d,
 };
 
-#[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/movement/cmsg/cmsg_force_move_unroot_ack.wowm:17`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/movement/cmsg/cmsg_force_move_unroot_ack.wowm#L17):
 /// ```text
 /// cmsg CMSG_FORCE_MOVE_UNROOT_ACK = 0x00EB {
@@ -14,6 +13,7 @@ use crate::wrath::{
 ///     MovementInfo info;
 /// }
 /// ```
+#[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
 pub struct CMSG_FORCE_MOVE_UNROOT_ACK {
     pub guid: Guid,
     pub movement_counter: u32,

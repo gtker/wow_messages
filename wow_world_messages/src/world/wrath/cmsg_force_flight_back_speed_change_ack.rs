@@ -5,7 +5,6 @@ use crate::wrath::{
     MovementFlags, MovementInfo, TransportInfo, Vector3d,
 };
 
-#[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/movement/cmsg/cmsg_force_flight_back_speed_change_ack.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/movement/cmsg/cmsg_force_flight_back_speed_change_ack.wowm#L1):
 /// ```text
 /// cmsg CMSG_FORCE_FLIGHT_BACK_SPEED_CHANGE_ACK = 0x0384 {
@@ -15,6 +14,7 @@ use crate::wrath::{
 ///     f32 new_speed;
 /// }
 /// ```
+#[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
 pub struct CMSG_FORCE_FLIGHT_BACK_SPEED_CHANGE_ACK {
     pub player: Guid,
     pub counter: u32,

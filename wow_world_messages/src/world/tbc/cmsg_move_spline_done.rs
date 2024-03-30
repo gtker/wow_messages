@@ -5,7 +5,6 @@ use crate::tbc::{
     MovementFlags, MovementInfo, TransportInfo, Vector3d,
 };
 
-#[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/movement/cmsg/cmsg_move_spline_done.wowm:9`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/movement/cmsg/cmsg_move_spline_done.wowm#L9):
 /// ```text
 /// cmsg CMSG_MOVE_SPLINE_DONE = 0x02C9 {
@@ -13,6 +12,7 @@ use crate::tbc::{
 ///     u32 movement_counter;
 /// }
 /// ```
+#[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
 pub struct CMSG_MOVE_SPLINE_DONE {
     pub info: MovementInfo,
     pub movement_counter: u32,

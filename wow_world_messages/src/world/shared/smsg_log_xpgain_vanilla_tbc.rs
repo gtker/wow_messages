@@ -3,7 +3,6 @@ use std::io::{Read, Write};
 use crate::Guid;
 use wow_world_base::shared::experience_award_type_vanilla_tbc_wrath::ExperienceAwardType;
 
-#[derive(Debug, Clone, Copy, PartialEq, PartialOrd, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/exp/smsg_log_xpgain.wowm:8`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/exp/smsg_log_xpgain.wowm#L8):
 /// ```text
 /// smsg SMSG_LOG_XPGAIN = 0x01D0 {
@@ -16,6 +15,7 @@ use wow_world_base::shared::experience_award_type_vanilla_tbc_wrath::ExperienceA
 ///     }
 /// }
 /// ```
+#[derive(Debug, Clone, Copy, PartialEq, PartialOrd, Default)]
 pub struct SMSG_LOG_XPGAIN {
     pub target: Guid,
     pub total_exp: u32,

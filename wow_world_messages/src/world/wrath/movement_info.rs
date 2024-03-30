@@ -5,7 +5,6 @@ use crate::wrath::{
     MovementFlags, TransportInfo, Vector3d,
 };
 
-#[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/movement/common_movement_3_3_5.wowm:79`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/movement/common_movement_3_3_5.wowm#L79):
 /// ```text
 /// struct MovementInfo {
@@ -41,6 +40,7 @@ use crate::wrath::{
 ///     }
 /// }
 /// ```
+#[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
 pub struct MovementInfo {
     pub flags: MovementInfo_MovementFlags,
     pub timestamp: u32,

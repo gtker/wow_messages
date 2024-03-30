@@ -2,7 +2,6 @@ use std::io::{Read, Write};
 
 use crate::Guid;
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/item/smsg_buy_item.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/item/smsg_buy_item.wowm#L3):
 /// ```text
 /// smsg SMSG_BUY_ITEM = 0x01A4 {
@@ -12,6 +11,7 @@ use crate::Guid;
 ///     u32 amount_bought;
 /// }
 /// ```
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct SMSG_BUY_ITEM {
     pub guid: Guid,
     /// Starts at index 1.

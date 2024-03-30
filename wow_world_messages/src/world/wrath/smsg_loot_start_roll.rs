@@ -6,7 +6,6 @@ use crate::wrath::{
 };
 use std::time::Duration;
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/loot/smsg_loot_start_roll.wowm:22`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/loot/smsg_loot_start_roll.wowm#L22):
 /// ```text
 /// smsg SMSG_LOOT_START_ROLL = 0x02A1 {
@@ -20,6 +19,7 @@ use std::time::Duration;
 ///     RollFlags flags;
 /// }
 /// ```
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct SMSG_LOOT_START_ROLL {
     pub creature: Guid,
     pub map: Map,

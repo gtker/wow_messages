@@ -3,7 +3,6 @@ use std::io::{Read, Write};
 use crate::Guid;
 use wow_world_base::shared::roll_vote_tbc_wrath::RollVote;
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/loot/smsg_loot_roll_won.wowm:17`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/loot/smsg_loot_roll_won.wowm#L17):
 /// ```text
 /// smsg SMSG_LOOT_ROLL_WON = 0x029F {
@@ -17,6 +16,7 @@ use wow_world_base::shared::roll_vote_tbc_wrath::RollVote;
 ///     RollVote vote;
 /// }
 /// ```
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct SMSG_LOOT_ROLL_WON {
     pub looted_target: Guid,
     pub loot_slot: u32,

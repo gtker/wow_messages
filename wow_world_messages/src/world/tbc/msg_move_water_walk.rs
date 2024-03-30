@@ -5,7 +5,6 @@ use crate::tbc::{
     MovementFlags, MovementInfo, TransportInfo, Vector3d,
 };
 
-#[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/movement/msg/msg_move_water_walk.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/movement/msg/msg_move_water_walk.wowm#L1):
 /// ```text
 /// msg MSG_MOVE_WATER_WALK = 0x02B1 {
@@ -13,6 +12,7 @@ use crate::tbc::{
 ///     MovementInfo info;
 /// }
 /// ```
+#[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
 pub struct MSG_MOVE_WATER_WALK {
     pub player: Guid,
     pub info: MovementInfo,

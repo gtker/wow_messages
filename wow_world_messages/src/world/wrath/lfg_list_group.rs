@@ -3,7 +3,6 @@ use std::io::{Read, Write};
 use crate::Guid;
 use crate::wrath::LfgUpdateFlag;
 
-#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/lfg/smsg_update_lfg_list.wowm:33`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/lfg/smsg_update_lfg_list.wowm#L33):
 /// ```text
 /// struct LfgListGroup {
@@ -19,6 +18,7 @@ use crate::wrath::LfgUpdateFlag;
 ///     u32 encounter_mask;
 /// }
 /// ```
+#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct LfgListGroup {
     pub group: Guid,
     pub flags: LfgListGroup_LfgUpdateFlag,

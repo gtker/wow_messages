@@ -3,7 +3,6 @@ use std::io::{Read, Write};
 use crate::Guid;
 use std::time::Duration;
 
-#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/lfg/smsg_lfg_boot_proposal_update.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/lfg/smsg_lfg_boot_proposal_update.wowm#L1):
 /// ```text
 /// smsg SMSG_LFG_BOOT_PROPOSAL_UPDATE = 0x036D {
@@ -18,6 +17,7 @@ use std::time::Duration;
 ///     CString reason;
 /// }
 /// ```
+#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct SMSG_LFG_BOOT_PROPOSAL_UPDATE {
     pub vote_in_progress: bool,
     pub did_vote: bool,

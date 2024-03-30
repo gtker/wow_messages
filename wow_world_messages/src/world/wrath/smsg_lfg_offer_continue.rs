@@ -1,12 +1,12 @@
 use std::io::{Read, Write};
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/lfg/smsg_lfg_offer_continue.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/lfg/smsg_lfg_offer_continue.wowm#L1):
 /// ```text
 /// smsg SMSG_LFG_OFFER_CONTINUE = 0x0293 {
 ///     u32 dungeon_entry;
 /// }
 /// ```
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct SMSG_LFG_OFFER_CONTINUE {
     pub dungeon_entry: u32,
 }

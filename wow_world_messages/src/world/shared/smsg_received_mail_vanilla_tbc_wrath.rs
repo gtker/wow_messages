@@ -1,6 +1,5 @@
 use std::io::{Read, Write};
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// cmangos/vmangos/mangoszero: deliver undelivered mail
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/mail/smsg_received_mail.wowm:4`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/mail/smsg_received_mail.wowm#L4):
 /// ```text
@@ -8,6 +7,7 @@ use std::io::{Read, Write};
 ///     u32 unknown1;
 /// }
 /// ```
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct SMSG_RECEIVED_MAIL {
     /// cmangos/vmangos sends 0 as u32, mangoszero sends 0 as f32
     pub unknown1: u32,

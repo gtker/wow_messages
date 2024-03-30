@@ -5,7 +5,6 @@ use crate::wrath::{
     AuraLog, AuraType, SpellSchool,
 };
 
-#[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/spell/smsg_periodicauralog.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/spell/smsg_periodicauralog.wowm#L1):
 /// ```text
 /// smsg SMSG_PERIODICAURALOG = 0x024E {
@@ -16,6 +15,7 @@ use crate::wrath::{
 ///     AuraLog[amount_of_auras] auras;
 /// }
 /// ```
+#[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
 pub struct SMSG_PERIODICAURALOG {
     pub target: Guid,
     pub caster: Guid,

@@ -6,7 +6,6 @@ use crate::tbc::{
     Area, LfgMode, LfgPlayer, LfgPlayerMember, LfgType,
 };
 
-#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/lfg/msg_looking_for_group.wowm:49`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/lfg/msg_looking_for_group.wowm#L49):
 /// ```text
 /// smsg MSG_LOOKING_FOR_GROUP_Server = 0x01FF {
@@ -17,6 +16,7 @@ use crate::tbc::{
 ///     LfgPlayer[amount_of_players_displayed] players_displayed;
 /// }
 /// ```
+#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct MSG_LOOKING_FOR_GROUP_Server {
     pub lfg_type: LfgType,
     /// entry from LfgDunggeons.dbc

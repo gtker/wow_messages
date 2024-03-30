@@ -5,7 +5,6 @@ use crate::tbc::{
     ChatType, Language, NamedGuid, PlayerChatTag,
 };
 
-#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/chat/smsg_messagechat.wowm:84`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/chat/smsg_messagechat.wowm#L84):
 /// ```text
 /// smsg SMSG_MESSAGECHAT = 0x0096 {
@@ -37,6 +36,7 @@ use crate::tbc::{
 ///     PlayerChatTag tag;
 /// }
 /// ```
+#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct SMSG_MESSAGECHAT {
     pub chat_type: SMSG_MESSAGECHAT_ChatType,
     pub language: Language,

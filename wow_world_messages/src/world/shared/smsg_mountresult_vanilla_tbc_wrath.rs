@@ -2,7 +2,6 @@ use std::io::{Read, Write};
 
 use wow_world_base::shared::mount_result_vanilla_tbc_wrath::MountResult;
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// This is not used in any TBC emulator, but trinitycore has it implemented so it is assumed to be valid for TBC as well.
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/mount/smsg_mountresult.wowm:29`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/mount/smsg_mountresult.wowm#L29):
 /// ```text
@@ -10,6 +9,7 @@ use wow_world_base::shared::mount_result_vanilla_tbc_wrath::MountResult;
 ///     MountResult result;
 /// }
 /// ```
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct SMSG_MOUNTRESULT {
     pub result: MountResult,
 }

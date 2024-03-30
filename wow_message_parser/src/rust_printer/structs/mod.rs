@@ -92,12 +92,12 @@ fn print_includes(s: &mut Writer, e: &Container, o: &Objects) {
 }
 
 fn print_declaration(s: &mut Writer, e: &Container, o: &Objects) {
-    print_derives(s, &e.rust_object().all_members(), false);
-    print_serde_derive(s, e.tags().is_in_base(), false);
-
     print_docc_description_and_comment(s, e.tags(), o, e.tags());
 
     print_struct_wowm_definition(s, e);
+
+    print_derives(s, &e.rust_object().all_members(), false);
+    print_serde_derive(s, e.tags().is_in_base(), false);
 
     s.new_struct(e.name(), |s| {
         for member in e.rust_object().members_in_struct() {

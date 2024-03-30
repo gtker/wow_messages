@@ -2,7 +2,6 @@ use std::io::{Read, Write};
 
 use crate::Guid;
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/movement/msg/msg_move_time_skipped.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/movement/msg/msg_move_time_skipped.wowm#L1):
 /// ```text
 /// smsg MSG_MOVE_TIME_SKIPPED_Server = 0x0319 {
@@ -10,6 +9,7 @@ use crate::Guid;
 ///     u32 time_skipped;
 /// }
 /// ```
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct MSG_MOVE_TIME_SKIPPED_Server {
     pub player: Guid,
     pub time_skipped: u32,

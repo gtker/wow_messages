@@ -1,6 +1,5 @@
 use std::io::{Read, Write};
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Immediately logs out the client of the world and makes it send [`CMSG_CHAR_ENUM`](crate::vanilla::CMSG_CHAR_ENUM).
 /// Normally the client will send [`CMSG_LOGOUT_REQUEST`](crate::vanilla::CMSG_LOGOUT_REQUEST) and the server will reply with an [`SMSG_LOGOUT_RESPONSE`](crate::vanilla::SMSG_LOGOUT_RESPONSE) before this message, but sending it unprompted will also immediately send the client to the character screen.
 /// The client always seems to send 2 [`CMSG_CANCEL_TRADE`](crate::vanilla::CMSG_CANCEL_TRADE) immediately after receiving this mesage, but before sending [`CMSG_CHAR_ENUM`](crate::vanilla::CMSG_CHAR_ENUM).
@@ -10,6 +9,7 @@ use std::io::{Read, Write};
 /// smsg SMSG_LOGOUT_COMPLETE = 0x004D {
 /// }
 /// ```
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct SMSG_LOGOUT_COMPLETE {
 }
 

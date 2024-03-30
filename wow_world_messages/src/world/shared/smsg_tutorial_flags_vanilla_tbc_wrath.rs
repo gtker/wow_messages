@@ -1,6 +1,5 @@
 use std::io::{Read, Write};
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Data for which tutorials the client has passed.
 /// All bits set means that all tutorials have been passed.
 /// Must be sent after [`SMSG_LOGIN_VERIFY_WORLD`](crate::vanilla::SMSG_LOGIN_VERIFY_WORLD) otherwise the client will SEGFAULT.
@@ -10,6 +9,7 @@ use std::io::{Read, Write};
 ///     u32[8] tutorial_data;
 /// }
 /// ```
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct SMSG_TUTORIAL_FLAGS {
     pub tutorial_data: [u32; 8],
 }

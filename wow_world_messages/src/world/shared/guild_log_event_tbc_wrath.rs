@@ -3,7 +3,6 @@ use std::io::{Read, Write};
 use crate::Guid;
 use wow_world_base::shared::guild_event_tbc_wrath::GuildEvent;
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/queries/msg_guild_event_log_query.wowm:9`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/queries/msg_guild_event_log_query.wowm#L9):
 /// ```text
 /// struct GuildLogEvent {
@@ -20,6 +19,7 @@ use wow_world_base::shared::guild_event_tbc_wrath::GuildEvent;
 ///     u32 unix_time;
 /// }
 /// ```
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct GuildLogEvent {
     pub event: GuildLogEvent_GuildEvent,
     pub player1: Guid,

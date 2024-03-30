@@ -3,7 +3,6 @@ use std::io::{Read, Write};
 use crate::shared::gold_vanilla_tbc_wrath::Gold;
 use crate::shared::guild_bank_rights_tbc_wrath::GuildBankRights;
 
-#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/guild/cmsg_guild_rank.wowm:16`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/guild/cmsg_guild_rank.wowm#L16):
 /// ```text
 /// cmsg CMSG_GUILD_RANK = 0x0231 {
@@ -14,6 +13,7 @@ use crate::shared::guild_bank_rights_tbc_wrath::GuildBankRights;
 ///     GuildBankRights[6] bank_tab_rights;
 /// }
 /// ```
+#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct CMSG_GUILD_RANK {
     pub rank_id: u32,
     pub rights: u32,

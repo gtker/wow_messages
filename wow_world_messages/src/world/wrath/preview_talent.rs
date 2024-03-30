@@ -2,7 +2,6 @@ use std::io::{Read, Write};
 
 use crate::wrath::Talent;
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/spell/cmsg_learn_preview_talents.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/spell/cmsg_learn_preview_talents.wowm#L1):
 /// ```text
 /// struct PreviewTalent {
@@ -10,6 +9,7 @@ use crate::wrath::Talent;
 ///     u32 rank;
 /// }
 /// ```
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct PreviewTalent {
     pub talent: Talent,
     pub rank: u32,

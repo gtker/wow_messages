@@ -5,7 +5,6 @@ use crate::{
 };
 use crate::wrath::Map;
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/calendar/smsg_calendar_raid_lockout_added.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/calendar/smsg_calendar_raid_lockout_added.wowm#L1):
 /// ```text
 /// smsg SMSG_CALENDAR_RAID_LOCKOUT_ADDED = 0x043E {
@@ -16,6 +15,7 @@ use crate::wrath::Map;
 ///     Guid instance_id;
 /// }
 /// ```
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct SMSG_CALENDAR_RAID_LOCKOUT_ADDED {
     pub time: DateTime,
     pub map: Map,

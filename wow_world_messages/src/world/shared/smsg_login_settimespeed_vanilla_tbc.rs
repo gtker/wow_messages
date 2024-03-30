@@ -2,7 +2,6 @@ use std::io::{Read, Write};
 
 use crate::DateTime;
 
-#[derive(Debug, Clone, Copy, PartialEq, PartialOrd, Default)]
 /// Tells the client what the datetime is and how fast time passes.
 /// The client also asks for the datetime with [`CMSG_QUERY_TIME`](crate::vanilla::CMSG_QUERY_TIME) and gets a reply from [`SMSG_QUERY_TIME_RESPONSE`](crate::vanilla::SMSG_QUERY_TIME_RESPONSE), but this does not appear to change anything in the client.
 /// Despite sending this as the very first message after the client logs in it will still send a [`CMSG_QUERY_TIME`](crate::vanilla::CMSG_QUERY_TIME).
@@ -13,6 +12,7 @@ use crate::DateTime;
 ///     f32 timescale;
 /// }
 /// ```
+#[derive(Debug, Clone, Copy, PartialEq, PartialOrd, Default)]
 pub struct SMSG_LOGIN_SETTIMESPEED {
     /// Current server datetime.
     /// Running the client with `-console` verifies that this message in this format sets the correct datetime. [`SMSG_QUERY_TIME_RESPONSE`](crate::vanilla::SMSG_QUERY_TIME_RESPONSE) will not set this.

@@ -6,7 +6,6 @@ use crate::wrath::{
     Area, Class, FriendStatus, Relation, RelationType,
 };
 
-#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/social/smsg_contact_list.wowm:38`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/social/smsg_contact_list.wowm#L38):
 /// ```text
 /// smsg SMSG_CONTACT_LIST = 0x0067 {
@@ -15,6 +14,7 @@ use crate::wrath::{
 ///     Relation[amount_of_relations] relations;
 /// }
 /// ```
+#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct SMSG_CONTACT_LIST {
     /// Indicates which kinds of relations are being sent in this list
     pub list_mask: RelationType,

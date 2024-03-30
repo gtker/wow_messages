@@ -2,7 +2,6 @@ use std::io::{Read, Write};
 
 use wow_world_base::shared::sheath_state_vanilla_tbc_wrath::SheathState;
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Says which weapon the client pulls out.
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/client_set/cmsg_setsheathed.wowm:12`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/client_set/cmsg_setsheathed.wowm#L12):
 /// ```text
@@ -10,6 +9,7 @@ use wow_world_base::shared::sheath_state_vanilla_tbc_wrath::SheathState;
 ///     (u32)SheathState sheathed;
 /// }
 /// ```
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct CMSG_SETSHEATHED {
     pub sheathed: SheathState,
 }

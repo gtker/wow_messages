@@ -5,7 +5,6 @@ use crate::wrath::{
     ChatType, Language, NamedGuid, PlayerChatTag,
 };
 
-#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/chat/smsg_gm_messagechat.wowm:40`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/chat/smsg_gm_messagechat.wowm#L40):
 /// ```text
 /// smsg SMSG_GM_MESSAGECHAT = 0x03B3 {
@@ -53,6 +52,7 @@ use crate::wrath::{
 ///     }
 /// }
 /// ```
+#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct SMSG_GM_MESSAGECHAT {
     pub chat_type: SMSG_GM_MESSAGECHAT_ChatType,
     pub language: Language,

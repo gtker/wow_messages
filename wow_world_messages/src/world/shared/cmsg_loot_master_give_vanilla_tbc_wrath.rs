@@ -2,7 +2,6 @@ use std::io::{Read, Write};
 
 use crate::Guid;
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/loot/cmsg_loot_master_give.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/loot/cmsg_loot_master_give.wowm#L3):
 /// ```text
 /// cmsg CMSG_LOOT_MASTER_GIVE = 0x02A3 {
@@ -11,6 +10,7 @@ use crate::Guid;
 ///     Guid player;
 /// }
 /// ```
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct CMSG_LOOT_MASTER_GIVE {
     pub loot: Guid,
     pub slot_id: u8,

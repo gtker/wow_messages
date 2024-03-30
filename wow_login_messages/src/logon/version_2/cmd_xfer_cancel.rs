@@ -2,12 +2,12 @@ use crate::Message;
 use crate::ClientMessage;
 use std::io::{Read, Write};
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/login/cmd_xfer.wowm:69`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/login/cmd_xfer.wowm#L69):
 /// ```text
 /// clogin CMD_XFER_CANCEL = 0x34 {
 /// }
 /// ```
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct CMD_XFER_CANCEL {
 }
 

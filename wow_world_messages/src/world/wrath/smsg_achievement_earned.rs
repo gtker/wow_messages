@@ -4,7 +4,6 @@ use crate::{
     DateTime, Guid,
 };
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/achievement/smsg_achievement_earned.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/achievement/smsg_achievement_earned.wowm#L1):
 /// ```text
 /// smsg SMSG_ACHIEVEMENT_EARNED = 0x0468 {
@@ -14,6 +13,7 @@ use crate::{
 ///     u32 unknown;
 /// }
 /// ```
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct SMSG_ACHIEVEMENT_EARNED {
     pub player: Guid,
     pub achievement: u32,

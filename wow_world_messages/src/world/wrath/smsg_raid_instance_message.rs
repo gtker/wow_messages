@@ -4,7 +4,6 @@ use crate::wrath::{
     Map, RaidDifficulty, RaidInstanceMessage,
 };
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/raid/smsg_raid_instance_message.wowm:37`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/raid/smsg_raid_instance_message.wowm#L37):
 /// ```text
 /// smsg SMSG_RAID_INSTANCE_MESSAGE = 0x02FA {
@@ -14,6 +13,7 @@ use crate::wrath::{
 ///     u32 time_left;
 /// }
 /// ```
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct SMSG_RAID_INSTANCE_MESSAGE {
     pub message_type: RaidInstanceMessage,
     pub map: Map,

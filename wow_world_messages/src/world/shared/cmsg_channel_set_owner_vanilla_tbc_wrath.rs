@@ -1,6 +1,5 @@
 use std::io::{Read, Write};
 
-#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/chat/cmsg_channel_set_owner.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/chat/cmsg_channel_set_owner.wowm#L3):
 /// ```text
 /// cmsg CMSG_CHANNEL_SET_OWNER = 0x009D {
@@ -8,6 +7,7 @@ use std::io::{Read, Write};
 ///     CString new_owner;
 /// }
 /// ```
+#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct CMSG_CHANNEL_SET_OWNER {
     pub channel_name: String,
     pub new_owner: String,

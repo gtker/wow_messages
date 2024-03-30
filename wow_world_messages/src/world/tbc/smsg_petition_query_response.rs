@@ -3,7 +3,6 @@ use std::io::{Read, Write};
 use crate::Guid;
 use crate::tbc::CharterType;
 
-#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/queries/smsg_petition_query_response.wowm:46`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/queries/smsg_petition_query_response.wowm#L46):
 /// ```text
 /// smsg SMSG_PETITION_QUERY_RESPONSE = 0x01C7 {
@@ -26,6 +25,7 @@ use crate::tbc::CharterType;
 ///     (u32)CharterType charter_type;
 /// }
 /// ```
+#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct SMSG_PETITION_QUERY_RESPONSE {
     pub petition_id: u32,
     pub charter_owner: Guid,

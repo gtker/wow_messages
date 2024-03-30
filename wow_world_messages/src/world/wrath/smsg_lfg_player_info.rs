@@ -4,7 +4,6 @@ use crate::wrath::{
     LfgAvailableDungeon, LfgJoinLockedDungeon, LfgQuestReward,
 };
 
-#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/lfg/smsg_lfg_player_info.wowm:22`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/lfg/smsg_lfg_player_info.wowm#L22):
 /// ```text
 /// smsg SMSG_LFG_PLAYER_INFO = 0x036F {
@@ -14,6 +13,7 @@ use crate::wrath::{
 ///     LfgJoinLockedDungeon[amount_of_locked_dungeons] locked_dungeons;
 /// }
 /// ```
+#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct SMSG_LFG_PLAYER_INFO {
     pub available_dungeons: Vec<LfgAvailableDungeon>,
     pub locked_dungeons: Vec<LfgJoinLockedDungeon>,

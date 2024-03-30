@@ -2,7 +2,6 @@ use std::io::{Read, Write};
 
 use crate::Guid;
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/spell/smsg_totem_created.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/spell/smsg_totem_created.wowm#L1):
 /// ```text
 /// smsg SMSG_TOTEM_CREATED = 0x0412 {
@@ -12,6 +11,7 @@ use crate::Guid;
 ///     Spell spell;
 /// }
 /// ```
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct SMSG_TOTEM_CREATED {
     pub slot: u8,
     pub totem: Guid,

@@ -2,7 +2,6 @@ use std::io::{Read, Write};
 
 use crate::Guid;
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/social/smsg_crossed_inebriation_threshold.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/social/smsg_crossed_inebriation_threshold.wowm#L1):
 /// ```text
 /// smsg SMSG_CROSSED_INEBRIATION_THRESHOLD = 0x03C0 {
@@ -11,6 +10,7 @@ use crate::Guid;
 ///     Item item;
 /// }
 /// ```
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct SMSG_CROSSED_INEBRIATION_THRESHOLD {
     pub player: Guid,
     pub state: u32,

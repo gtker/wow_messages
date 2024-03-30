@@ -5,7 +5,6 @@ use crate::wrath::{
 };
 use std::time::Duration;
 
-#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/spell/smsg_initial_spells.wowm:43`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/spell/smsg_initial_spells.wowm#L43):
 /// ```text
 /// smsg SMSG_INITIAL_SPELLS = 0x012A {
@@ -16,6 +15,7 @@ use std::time::Duration;
 ///     CooldownSpell[cooldown_count] cooldowns;
 /// }
 /// ```
+#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct SMSG_INITIAL_SPELLS {
     /// cmangos/mangoszero: sets to 0
     pub unknown1: u8,

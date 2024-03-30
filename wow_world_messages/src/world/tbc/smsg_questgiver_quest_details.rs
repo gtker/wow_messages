@@ -7,7 +7,6 @@ use crate::tbc::{
 };
 use std::time::Duration;
 
-#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/quest/smsg_questgiver_quest_details.wowm:27`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/quest/smsg_questgiver_quest_details.wowm#L27):
 /// ```text
 /// smsg SMSG_QUESTGIVER_QUEST_DETAILS = 0x0188 {
@@ -31,6 +30,7 @@ use std::time::Duration;
 ///     QuestDetailsEmote[amount_of_emotes] emotes;
 /// }
 /// ```
+#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct SMSG_QUESTGIVER_QUEST_DETAILS {
     pub guid: Guid,
     pub quest_id: u32,

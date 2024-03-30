@@ -2,7 +2,6 @@ use std::io::{Read, Write};
 
 use crate::tbc::Faction;
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/faction/cmsg_set_faction_inactive.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/faction/cmsg_set_faction_inactive.wowm#L1):
 /// ```text
 /// cmsg CMSG_SET_FACTION_INACTIVE = 0x0317 {
@@ -10,6 +9,7 @@ use crate::tbc::Faction;
 ///     Bool inactive;
 /// }
 /// ```
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct CMSG_SET_FACTION_INACTIVE {
     pub faction: Faction,
     pub inactive: bool,

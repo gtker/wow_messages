@@ -3,7 +3,6 @@ use std::io::{Read, Write};
 use crate::Guid;
 use crate::tbc::Map;
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/battleground/cmsg_battlemaster_join.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/battleground/cmsg_battlemaster_join.wowm#L1):
 /// ```text
 /// cmsg CMSG_BATTLEMASTER_JOIN = 0x02EE {
@@ -13,6 +12,7 @@ use crate::tbc::Map;
 ///     Bool join_as_group;
 /// }
 /// ```
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct CMSG_BATTLEMASTER_JOIN {
     /// vmangos: battlemaster guid, or player guid if joining queue from BG portal
     pub guid: Guid,

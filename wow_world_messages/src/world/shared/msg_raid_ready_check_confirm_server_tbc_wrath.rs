@@ -2,7 +2,6 @@ use std::io::{Read, Write};
 
 use crate::Guid;
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/raid/msg_raid_ready_check_confirm.wowm:9`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/raid/msg_raid_ready_check_confirm.wowm#L9):
 /// ```text
 /// smsg MSG_RAID_READY_CHECK_CONFIRM_Server = 0x03AE {
@@ -10,6 +9,7 @@ use crate::Guid;
 ///     u8 state;
 /// }
 /// ```
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct MSG_RAID_READY_CHECK_CONFIRM_Server {
     pub player: Guid,
     pub state: u8,

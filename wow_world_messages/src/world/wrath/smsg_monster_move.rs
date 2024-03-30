@@ -5,7 +5,6 @@ use crate::wrath::{
     MonsterMoveType, SplineFlag, Vector3d,
 };
 
-#[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/movement/smsg/smsg_monster_move.wowm:31`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/movement/smsg/smsg_monster_move.wowm#L31):
 /// ```text
 /// smsg SMSG_MONSTER_MOVE = 0x00DD {
@@ -36,6 +35,7 @@ use crate::wrath::{
 ///     MonsterMoveSplines splines;
 /// }
 /// ```
+#[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
 pub struct SMSG_MONSTER_MOVE {
     pub guid: Guid,
     /// cmangos-wotlk sets to 0

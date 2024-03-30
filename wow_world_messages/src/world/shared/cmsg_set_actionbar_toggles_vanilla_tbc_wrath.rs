@@ -1,12 +1,12 @@
 use std::io::{Read, Write};
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/login_logout/cmsg_set_actionbar_toggles.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/login_logout/cmsg_set_actionbar_toggles.wowm#L3):
 /// ```text
 /// cmsg CMSG_SET_ACTIONBAR_TOGGLES = 0x02BF {
 ///     u8 action_bar;
 /// }
 /// ```
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct CMSG_SET_ACTIONBAR_TOGGLES {
     /// Emulators set PLAYER_FIELD_BYTES`2` to this unless it's 0.
     pub action_bar: u8,

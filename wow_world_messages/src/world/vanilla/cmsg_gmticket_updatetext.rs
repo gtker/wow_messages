@@ -2,7 +2,6 @@ use std::io::{Read, Write};
 
 use crate::vanilla::GmTicketType;
 
-#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/gamemaster/cmsg_gmticket_updatetext.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/gamemaster/cmsg_gmticket_updatetext.wowm#L1):
 /// ```text
 /// cmsg CMSG_GMTICKET_UPDATETEXT = 0x0207 {
@@ -10,6 +9,7 @@ use crate::vanilla::GmTicketType;
 ///     CString message;
 /// }
 /// ```
+#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct CMSG_GMTICKET_UPDATETEXT {
     /// cmangos does not have this field, vmangos does.
     pub ticket_type: GmTicketType,

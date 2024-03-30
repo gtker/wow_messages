@@ -4,7 +4,6 @@ use crate::tbc::{
     Faction, FactionStanding,
 };
 
-#[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/faction/smsg_set_faction_standing.wowm:16`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/faction/smsg_set_faction_standing.wowm#L16):
 /// ```text
 /// smsg SMSG_SET_FACTION_STANDING = 0x0124 {
@@ -13,6 +12,7 @@ use crate::tbc::{
 ///     FactionStanding[amount_of_faction_standings] faction_standings;
 /// }
 /// ```
+#[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
 pub struct SMSG_SET_FACTION_STANDING {
     /// All emus set to 0.
     pub refer_a_friend_bonus: f32,

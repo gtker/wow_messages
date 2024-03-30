@@ -1,6 +1,5 @@
 use std::io::{Read, Write};
 
-#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Never actually sent in any emulator.
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/chat/smsg_chat_player_ambiguous.wowm:2`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/chat/smsg_chat_player_ambiguous.wowm#L2):
 /// ```text
@@ -8,6 +7,7 @@ use std::io::{Read, Write};
 ///     CString player;
 /// }
 /// ```
+#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct SMSG_CHAT_PLAYER_AMBIGUOUS {
     pub player: String,
 }

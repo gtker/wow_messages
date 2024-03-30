@@ -1,6 +1,5 @@
 use std::io::{Read, Write};
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/battleground/smsg_battlefield_mgr_queue_invite.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/battleground/smsg_battlefield_mgr_queue_invite.wowm#L1):
 /// ```text
 /// smsg SMSG_BATTLEFIELD_MGR_QUEUE_INVITE = 0x04E1 {
@@ -8,6 +7,7 @@ use std::io::{Read, Write};
 ///     u8 warmup;
 /// }
 /// ```
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct SMSG_BATTLEFIELD_MGR_QUEUE_INVITE {
     pub battle_id: u32,
     /// Possibly not used.

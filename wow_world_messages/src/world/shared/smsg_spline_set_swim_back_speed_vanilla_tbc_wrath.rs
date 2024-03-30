@@ -2,7 +2,6 @@ use std::io::{Read, Write};
 
 use crate::Guid;
 
-#[derive(Debug, Clone, Copy, PartialEq, PartialOrd, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/movement/smsg/smsg_spline_set_swim_back_speed.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/movement/smsg/smsg_spline_set_swim_back_speed.wowm#L3):
 /// ```text
 /// smsg SMSG_SPLINE_SET_SWIM_BACK_SPEED = 0x0302 {
@@ -10,6 +9,7 @@ use crate::Guid;
 ///     f32 speed;
 /// }
 /// ```
+#[derive(Debug, Clone, Copy, PartialEq, PartialOrd, Default)]
 pub struct SMSG_SPLINE_SET_SWIM_BACK_SPEED {
     pub guid: Guid,
     pub speed: f32,

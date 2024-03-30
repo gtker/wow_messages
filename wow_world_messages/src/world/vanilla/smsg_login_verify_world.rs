@@ -4,7 +4,6 @@ use crate::vanilla::{
     Map, Vector3d,
 };
 
-#[derive(Debug, Clone, Copy, PartialEq, PartialOrd, Default)]
 /// Message to the client that is has successfully logged into the world and that it should load the map and coordinates.
 /// The positions and orientations do not matter since they can be overwritten in the [`SMSG_UPDATE_OBJECT`](crate::vanilla::SMSG_UPDATE_OBJECT), but the map determines which map the client loads and this is not changeable in [`SMSG_UPDATE_OBJECT`](crate::vanilla::SMSG_UPDATE_OBJECT).
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/character_screen/smsg_login_verify_world.wowm:4`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/character_screen/smsg_login_verify_world.wowm#L4):
@@ -15,6 +14,7 @@ use crate::vanilla::{
 ///     f32 orientation;
 /// }
 /// ```
+#[derive(Debug, Clone, Copy, PartialEq, PartialOrd, Default)]
 pub struct SMSG_LOGIN_VERIFY_WORLD {
     pub map: Map,
     pub position: Vector3d,

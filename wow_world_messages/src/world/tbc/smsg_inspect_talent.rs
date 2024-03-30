@@ -2,7 +2,6 @@ use std::io::{Read, Write};
 
 use crate::Guid;
 
-#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/spell/smsg_inspect_talent.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/spell/smsg_inspect_talent.wowm#L1):
 /// ```text
 /// smsg SMSG_INSPECT_TALENT = 0x03F3 {
@@ -10,6 +9,7 @@ use crate::Guid;
 ///     u8[-] talent_data;
 /// }
 /// ```
+#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct SMSG_INSPECT_TALENT {
     pub player: Guid,
     pub talent_data: Vec<u8>,

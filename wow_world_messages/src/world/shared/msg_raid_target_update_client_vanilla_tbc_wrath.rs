@@ -3,7 +3,6 @@ use std::io::{Read, Write};
 use crate::Guid;
 use wow_world_base::shared::raid_target_index_vanilla_tbc_wrath::RaidTargetIndex;
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/raid/raid_target.wowm:35`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/raid/raid_target.wowm#L35):
 /// ```text
 /// cmsg MSG_RAID_TARGET_UPDATE_Client = 0x0321 {
@@ -13,6 +12,7 @@ use wow_world_base::shared::raid_target_index_vanilla_tbc_wrath::RaidTargetIndex
 ///     }
 /// }
 /// ```
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct MSG_RAID_TARGET_UPDATE_Client {
     pub target_index: MSG_RAID_TARGET_UPDATE_Client_RaidTargetIndex,
 }

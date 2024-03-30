@@ -6,7 +6,6 @@ use crate::tbc::{
     Area, Class, GuildMemberStatus,
 };
 
-#[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/guild/smsg_guild_roster.wowm:35`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/guild/smsg_guild_roster.wowm#L35):
 /// ```text
 /// struct GuildMember {
@@ -25,6 +24,7 @@ use crate::tbc::{
 ///     CString officer_note;
 /// }
 /// ```
+#[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
 pub struct GuildMember {
     pub guid: Guid,
     pub status: GuildMember_GuildMemberStatus,

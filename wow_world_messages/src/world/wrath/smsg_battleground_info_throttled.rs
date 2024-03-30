@@ -1,12 +1,12 @@
 use std::io::{Read, Write};
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Only exists as a comment in azerothcore.
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/battleground/smsg_battleground_info_throttled.wowm:2`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/battleground/smsg_battleground_info_throttled.wowm#L2):
 /// ```text
 /// smsg SMSG_BATTLEGROUND_INFO_THROTTLED = 0x04A6 {
 /// }
 /// ```
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct SMSG_BATTLEGROUND_INFO_THROTTLED {
 }
 

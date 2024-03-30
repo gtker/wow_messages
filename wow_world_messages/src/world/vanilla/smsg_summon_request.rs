@@ -4,7 +4,6 @@ use crate::Guid;
 use crate::vanilla::Area;
 use std::time::Duration;
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/spell/smsg_summon_request.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/spell/smsg_summon_request.wowm#L3):
 /// ```text
 /// smsg SMSG_SUMMON_REQUEST = 0x02AB {
@@ -13,6 +12,7 @@ use std::time::Duration;
 ///     Milliseconds auto_decline_time;
 /// }
 /// ```
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct SMSG_SUMMON_REQUEST {
     pub summoner: Guid,
     pub area: Area,

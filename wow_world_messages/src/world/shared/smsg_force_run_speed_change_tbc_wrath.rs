@@ -2,7 +2,6 @@ use std::io::{Read, Write};
 
 use crate::Guid;
 
-#[derive(Debug, Clone, Copy, PartialEq, PartialOrd, Default)]
 /// Tells the client that the running speed has changed.
 /// Client replies with [`CMSG_FORCE_RUN_SPEED_CHANGE_ACK`](crate::tbc::CMSG_FORCE_RUN_SPEED_CHANGE_ACK).
 /// vmangos sends this message to the client being changed and [`SMSG_SPLINE_SET_RUN_SPEED`](crate::vanilla::SMSG_SPLINE_SET_RUN_SPEED) to others.
@@ -15,6 +14,7 @@ use crate::Guid;
 ///     f32 speed;
 /// }
 /// ```
+#[derive(Debug, Clone, Copy, PartialEq, PartialOrd, Default)]
 pub struct SMSG_FORCE_RUN_SPEED_CHANGE {
     pub guid: Guid,
     /// cmangos/mangoszero/vmangos: set to 0

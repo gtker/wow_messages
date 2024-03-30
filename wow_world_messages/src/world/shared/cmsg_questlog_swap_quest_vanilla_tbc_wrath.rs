@@ -1,6 +1,5 @@
 use std::io::{Read, Write};
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/quest/cmsg_questlog_swap_quest.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/quest/cmsg_questlog_swap_quest.wowm#L3):
 /// ```text
 /// cmsg CMSG_QUESTLOG_SWAP_QUEST = 0x0193 {
@@ -8,6 +7,7 @@ use std::io::{Read, Write};
 ///     u8 slot2;
 /// }
 /// ```
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct CMSG_QUESTLOG_SWAP_QUEST {
     pub slot1: u8,
     pub slot2: u8,

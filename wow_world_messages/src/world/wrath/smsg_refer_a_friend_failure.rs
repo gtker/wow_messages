@@ -2,7 +2,6 @@ use std::io::{Read, Write};
 
 use crate::wrath::ReferAFriendError;
 
-#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/social/smsg_refer_a_friend_failure.wowm:30`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/social/smsg_refer_a_friend_failure.wowm#L30):
 /// ```text
 /// smsg SMSG_REFER_A_FRIEND_FAILURE = 0x0421 {
@@ -12,6 +11,7 @@ use crate::wrath::ReferAFriendError;
 ///     }
 /// }
 /// ```
+#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct SMSG_REFER_A_FRIEND_FAILURE {
     pub error: SMSG_REFER_A_FRIEND_FAILURE_ReferAFriendError,
 }

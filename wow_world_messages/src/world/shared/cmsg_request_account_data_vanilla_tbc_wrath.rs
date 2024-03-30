@@ -1,6 +1,5 @@
 use std::io::{Read, Write};
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Respond with [`SMSG_UPDATE_ACCOUNT_DATA`](crate::tbc::SMSG_UPDATE_ACCOUNT_DATA)
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/login_logout/cmsg_request_account_data.wowm:2`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/login_logout/cmsg_request_account_data.wowm#L2):
 /// ```text
@@ -8,6 +7,7 @@ use std::io::{Read, Write};
 ///     u32 data_type;
 /// }
 /// ```
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct CMSG_REQUEST_ACCOUNT_DATA {
     /// The type of account data being requested. You can check this against the `CacheMask` to know if this is character-specific data or account-wide data.
     pub data_type: u32,

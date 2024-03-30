@@ -1,6 +1,5 @@
 use std::io::{Read, Write};
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/chat/cmsg_voice_session_enable.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/chat/cmsg_voice_session_enable.wowm#L3):
 /// ```text
 /// cmsg CMSG_VOICE_SESSION_ENABLE = 0x03AF {
@@ -8,6 +7,7 @@ use std::io::{Read, Write};
 ///     Bool microphone_enabled;
 /// }
 /// ```
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct CMSG_VOICE_SESSION_ENABLE {
     pub voice_enabled: bool,
     pub microphone_enabled: bool,

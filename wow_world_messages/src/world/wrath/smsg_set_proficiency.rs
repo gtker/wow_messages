@@ -2,7 +2,6 @@ use std::io::{Read, Write};
 
 use crate::wrath::ItemClass;
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/item/smsg_set_proficiency.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/item/smsg_set_proficiency.wowm#L1):
 /// ```text
 /// smsg SMSG_SET_PROFICIENCY = 0x0127 {
@@ -10,6 +9,7 @@ use crate::wrath::ItemClass;
 ///     u32 item_sub_class_mask;
 /// }
 /// ```
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct SMSG_SET_PROFICIENCY {
     pub class: ItemClass,
     pub item_sub_class_mask: u32,

@@ -2,13 +2,13 @@ use std::io::{Read, Write};
 
 use crate::Guid;
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/achievement/cmsg_query_inspect_achievements.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/achievement/cmsg_query_inspect_achievements.wowm#L1):
 /// ```text
 /// cmsg CMSG_QUERY_INSPECT_ACHIEVEMENTS = 0x046B {
 ///     PackedGuid player;
 /// }
 /// ```
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct CMSG_QUERY_INSPECT_ACHIEVEMENTS {
     pub player: Guid,
 }

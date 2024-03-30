@@ -2,7 +2,6 @@ use std::io::{Read, Write};
 
 use crate::Guid;
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/guild_bank/cmsg_guild_banker_activate.wowm:8`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/guild_bank/cmsg_guild_banker_activate.wowm#L8):
 /// ```text
 /// cmsg CMSG_GUILD_BANKER_ACTIVATE = 0x03E6 {
@@ -10,6 +9,7 @@ use crate::Guid;
 ///     Bool full_update;
 /// }
 /// ```
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct CMSG_GUILD_BANKER_ACTIVATE {
     pub bank: Guid,
     pub full_update: bool,

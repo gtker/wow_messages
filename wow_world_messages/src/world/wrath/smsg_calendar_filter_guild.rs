@@ -4,7 +4,6 @@ use crate::Guid;
 use crate::shared::level_vanilla_tbc_wrath::Level;
 use crate::wrath::CalendarMember;
 
-#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/calendar/smsg_calendar_filter_guild.wowm:8`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/calendar/smsg_calendar_filter_guild.wowm#L8):
 /// ```text
 /// smsg SMSG_CALENDAR_FILTER_GUILD = 0x0438 {
@@ -12,6 +11,7 @@ use crate::wrath::CalendarMember;
 ///     CalendarMember[amount_of_members] members;
 /// }
 /// ```
+#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct SMSG_CALENDAR_FILTER_GUILD {
     pub members: Vec<CalendarMember>,
 }

@@ -4,7 +4,6 @@ use crate::tbc::{
     BillingPlanFlags, Expansion, WorldResult,
 };
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Response to [`CMSG_AUTH_SESSION`](crate::vanilla::CMSG_AUTH_SESSION).
 /// Usually followed by [`CMSG_CHAR_ENUM`](crate::vanilla::CMSG_CHAR_ENUM) if login was successful (`AUTH_OK`).
 /// vmangos/cmangos/mangoszero all have a variant of this message that contains fields from `AUTH_OK` for `AUTH_WAIT_QUEUE` as well (`https://github.com/vmangos/core/blob/cd896d43712ceafecdbd8f005846d7f676e55b4f/src/game/World.cpp#L322`) but this does not seem to be actually be a real thing.
@@ -23,6 +22,7 @@ use crate::tbc::{
 ///     }
 /// }
 /// ```
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct SMSG_AUTH_RESPONSE {
     pub result: SMSG_AUTH_RESPONSE_WorldResult,
 }

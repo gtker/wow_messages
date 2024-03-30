@@ -6,7 +6,6 @@ use crate::{
 use crate::shared::level_vanilla_tbc_wrath::Level;
 use crate::wrath::CalendarStatusTime;
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/calendar/smsg_calendar_event_invite.wowm:8`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/calendar/smsg_calendar_event_invite.wowm#L8):
 /// ```text
 /// smsg SMSG_CALENDAR_EVENT_INVITE = 0x043A {
@@ -22,6 +21,7 @@ use crate::wrath::CalendarStatusTime;
 ///     Bool is_sign_up;
 /// }
 /// ```
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct SMSG_CALENDAR_EVENT_INVITE {
     pub invitee: Guid,
     pub event_id: Guid,

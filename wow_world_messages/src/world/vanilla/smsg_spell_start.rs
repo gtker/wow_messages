@@ -5,7 +5,6 @@ use crate::vanilla::{
     CastFlags, SpellCastTargetFlags, SpellCastTargets, Vector3d,
 };
 
-#[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/spell/smsg_spell_start.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/spell/smsg_spell_start.wowm#L1):
 /// ```text
 /// smsg SMSG_SPELL_START = 0x0131 {
@@ -21,6 +20,7 @@ use crate::vanilla::{
 ///     }
 /// }
 /// ```
+#[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
 pub struct SMSG_SPELL_START {
     /// cmangos/vmangos/mangoszero: if cast item is used, set this to guid of cast item, otherwise set it to same as caster.
     pub cast_item: Guid,

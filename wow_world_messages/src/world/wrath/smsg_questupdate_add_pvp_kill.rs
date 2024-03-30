@@ -1,6 +1,5 @@
 use std::io::{Read, Write};
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/quest/smsg_questupdate_add_pvp_kill.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/quest/smsg_questupdate_add_pvp_kill.wowm#L1):
 /// ```text
 /// smsg SMSG_QUESTUPDATE_ADD_PVP_KILL = 0x046F {
@@ -9,6 +8,7 @@ use std::io::{Read, Write};
 ///     u32 players_slain;
 /// }
 /// ```
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct SMSG_QUESTUPDATE_ADD_PVP_KILL {
     pub quest_id: u32,
     pub count: u32,

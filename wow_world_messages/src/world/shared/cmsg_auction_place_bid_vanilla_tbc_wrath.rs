@@ -3,7 +3,6 @@ use std::io::{Read, Write};
 use crate::Guid;
 use crate::shared::gold_vanilla_tbc_wrath::Gold;
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/auction/cmsg/cmsg_auction_place_bid.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/auction/cmsg/cmsg_auction_place_bid.wowm#L3):
 /// ```text
 /// cmsg CMSG_AUCTION_PLACE_BID = 0x025A {
@@ -12,6 +11,7 @@ use crate::shared::gold_vanilla_tbc_wrath::Gold;
 ///     Gold price;
 /// }
 /// ```
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct CMSG_AUCTION_PLACE_BID {
     pub auctioneer: Guid,
     pub auction_id: u32,

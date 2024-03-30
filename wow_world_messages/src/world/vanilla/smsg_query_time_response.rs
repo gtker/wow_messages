@@ -1,6 +1,5 @@
 use std::io::{Read, Write};
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Reply to [`CMSG_QUERY_TIME`](crate::vanilla::CMSG_QUERY_TIME).
 /// [`CMSG_QUERY_TIME`](crate::vanilla::CMSG_QUERY_TIME) and this reply does not actually appear to set the time. Instead [`SMSG_LOGIN_SETTIMESPEED`](crate::vanilla::SMSG_LOGIN_SETTIMESPEED) seems to correctly set the time. Running the client with `-console` will print the date when [`SMSG_LOGIN_SETTIMESPEED`](crate::vanilla::SMSG_LOGIN_SETTIMESPEED) is received, but not when this message is received.
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/queries/smsg_query_time_response.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/queries/smsg_query_time_response.wowm#L3):
@@ -9,6 +8,7 @@ use std::io::{Read, Write};
 ///     u32 time;
 /// }
 /// ```
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct SMSG_QUERY_TIME_RESPONSE {
     /// Seconds since 1970, 1st of January (Unix Time).
     pub time: u32,

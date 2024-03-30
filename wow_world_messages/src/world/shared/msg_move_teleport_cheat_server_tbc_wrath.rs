@@ -2,7 +2,6 @@ use std::io::{Read, Write};
 
 use wow_world_base::shared::vector3d_vanilla_tbc_wrath::Vector3d;
 
-#[derive(Debug, Clone, Copy, PartialEq, PartialOrd, Default)]
 /// There does not appear to be a CMSG version of this MSG.
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/movement/msg/msg_move_teleport_cheat.wowm:2`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/movement/msg/msg_move_teleport_cheat.wowm#L2):
 /// ```text
@@ -11,6 +10,7 @@ use wow_world_base::shared::vector3d_vanilla_tbc_wrath::Vector3d;
 ///     f32 orientation;
 /// }
 /// ```
+#[derive(Debug, Clone, Copy, PartialEq, PartialOrd, Default)]
 pub struct MSG_MOVE_TELEPORT_CHEAT_Server {
     pub position: Vector3d,
     pub orientation: f32,

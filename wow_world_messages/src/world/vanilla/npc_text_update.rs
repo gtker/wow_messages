@@ -4,7 +4,6 @@ use crate::vanilla::{
     Language, NpcTextUpdateEmote,
 };
 
-#[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/gossip/smsg_npc_text_update.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/gossip/smsg_npc_text_update.wowm#L1):
 /// ```text
 /// struct NpcTextUpdate {
@@ -14,6 +13,7 @@ use crate::vanilla::{
 ///     NpcTextUpdateEmote[3] emotes;
 /// }
 /// ```
+#[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
 pub struct NpcTextUpdate {
     pub probability: f32,
     pub texts: [String; 2],

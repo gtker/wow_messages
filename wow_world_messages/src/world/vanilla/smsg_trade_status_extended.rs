@@ -4,7 +4,6 @@ use crate::Guid;
 use crate::shared::gold_vanilla_tbc_wrath::Gold;
 use crate::vanilla::TradeSlot;
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/trade/smsg_trade_status_extended.wowm:21`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/trade/smsg_trade_status_extended.wowm#L21):
 /// ```text
 /// smsg SMSG_TRADE_STATUS_EXTENDED = 0x0121 {
@@ -16,6 +15,7 @@ use crate::vanilla::TradeSlot;
 ///     TradeSlot[7] trade_slots;
 /// }
 /// ```
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct SMSG_TRADE_STATUS_EXTENDED {
     /// cmangos/vmangos/mangoszero: send trader or own trade windows state (last need for proper show spell apply to non-trade slot)
     pub self_player: bool,

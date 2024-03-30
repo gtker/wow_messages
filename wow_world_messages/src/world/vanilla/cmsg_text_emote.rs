@@ -3,7 +3,6 @@ use std::io::{Read, Write};
 use crate::Guid;
 use crate::vanilla::TextEmote;
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Sent to notify the server that the client wants to perform an emote like /dance or /cry.
 /// Server responds with [`SMSG_TEXT_EMOTE`](crate::vanilla::SMSG_TEXT_EMOTE) and [`SMSG_EMOTE`](crate::vanilla::SMSG_EMOTE).
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/chat/cmsg_text_emote.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/chat/cmsg_text_emote.wowm#L3):
@@ -14,6 +13,7 @@ use crate::vanilla::TextEmote;
 ///     Guid target;
 /// }
 /// ```
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct CMSG_TEXT_EMOTE {
     pub text_emote: TextEmote,
     pub emote: u32,

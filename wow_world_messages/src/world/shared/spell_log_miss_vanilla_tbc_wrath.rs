@@ -3,7 +3,6 @@ use std::io::{Read, Write};
 use crate::Guid;
 use wow_world_base::shared::spell_miss_info_vanilla_tbc_wrath::SpellMissInfo;
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/spell/smsg_spelllogmiss.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/spell/smsg_spelllogmiss.wowm#L1):
 /// ```text
 /// struct SpellLogMiss {
@@ -11,6 +10,7 @@ use wow_world_base::shared::spell_miss_info_vanilla_tbc_wrath::SpellMissInfo;
 ///     SpellMissInfo miss_info;
 /// }
 /// ```
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct SpellLogMiss {
     pub target: Guid,
     pub miss_info: SpellMissInfo,

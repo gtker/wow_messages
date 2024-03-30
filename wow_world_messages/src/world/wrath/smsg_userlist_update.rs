@@ -2,7 +2,6 @@ use std::io::{Read, Write};
 
 use crate::Guid;
 
-#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/social/smsg_userlist_update.wowm:11`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/social/smsg_userlist_update.wowm#L11):
 /// ```text
 /// smsg SMSG_USERLIST_UPDATE = 0x03F2 {
@@ -13,6 +12,7 @@ use crate::Guid;
 ///     CString name;
 /// }
 /// ```
+#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct SMSG_USERLIST_UPDATE {
     pub player: Guid,
     pub player_flags: u8,

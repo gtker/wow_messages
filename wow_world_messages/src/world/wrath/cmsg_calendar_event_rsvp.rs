@@ -3,7 +3,6 @@ use std::io::{Read, Write};
 use crate::Guid;
 use crate::wrath::CalendarStatus;
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/calendar/cmsg_calendar_event_rsvp.wowm:16`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/calendar/cmsg_calendar_event_rsvp.wowm#L16):
 /// ```text
 /// cmsg CMSG_CALENDAR_EVENT_RSVP = 0x0432 {
@@ -12,6 +11,7 @@ use crate::wrath::CalendarStatus;
 ///     (u32)CalendarStatus status;
 /// }
 /// ```
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct CMSG_CALENDAR_EVENT_RSVP {
     pub event: Guid,
     pub invite_id: Guid,

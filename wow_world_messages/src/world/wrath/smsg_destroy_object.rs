@@ -2,7 +2,6 @@ use std::io::{Read, Write};
 
 use crate::Guid;
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Immediately removes an object from the presence of the player.
 /// Used by vmangos for logout.
 /// azerothcore: If the following bool is true, the client will call `void CGUnit_C::OnDeath()` for this object. `OnDeath()` does for eg trigger death animation and interrupts certain spells/missiles/auras/sounds...
@@ -13,6 +12,7 @@ use crate::Guid;
 ///     Bool target_died;
 /// }
 /// ```
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct SMSG_DESTROY_OBJECT {
     pub guid: Guid,
     pub target_died: bool,

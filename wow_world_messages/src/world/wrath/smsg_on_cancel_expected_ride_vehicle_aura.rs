@@ -1,11 +1,11 @@
 use std::io::{Read, Write};
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/vehicle/smsg_on_cancel_expected_ride_vehicle_aura.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/vehicle/smsg_on_cancel_expected_ride_vehicle_aura.wowm#L1):
 /// ```text
 /// smsg SMSG_ON_CANCEL_EXPECTED_RIDE_VEHICLE_AURA = 0x049D {
 /// }
 /// ```
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct SMSG_ON_CANCEL_EXPECTED_RIDE_VEHICLE_AURA {
 }
 

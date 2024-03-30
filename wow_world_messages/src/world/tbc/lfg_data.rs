@@ -2,7 +2,6 @@ use std::io::{Read, Write};
 
 use crate::tbc::LfgType;
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/lfg/smsg_lfg_update.wowm:8`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/lfg/smsg_lfg_update.wowm#L8):
 /// ```text
 /// struct LfgData {
@@ -10,6 +9,7 @@ use crate::tbc::LfgType;
 ///     (u16)LfgType lfg_type;
 /// }
 /// ```
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct LfgData {
     pub entry: u16,
     pub lfg_type: LfgType,

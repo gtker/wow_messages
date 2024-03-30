@@ -2,7 +2,6 @@ use std::io::{Read, Write};
 
 use crate::Guid;
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/item/cmsg_socket_gems.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/item/cmsg_socket_gems.wowm#L1):
 /// ```text
 /// cmsg CMSG_SOCKET_GEMS = 0x0347 {
@@ -10,6 +9,7 @@ use crate::Guid;
 ///     Guid[3] gems;
 /// }
 /// ```
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct CMSG_SOCKET_GEMS {
     pub item: Guid,
     pub gems: [Guid; 3],

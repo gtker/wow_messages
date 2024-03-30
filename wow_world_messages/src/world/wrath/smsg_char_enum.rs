@@ -7,7 +7,6 @@ use crate::wrath::{
     Map, Race, Vector3d,
 };
 
-#[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/character_screen/smsg_char_enum_3_3_5.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/character_screen/smsg_char_enum_3_3_5.wowm#L3):
 /// ```text
 /// smsg SMSG_CHAR_ENUM = 0x003B {
@@ -15,6 +14,7 @@ use crate::wrath::{
 ///     Character[amount_of_characters] characters;
 /// }
 /// ```
+#[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
 pub struct SMSG_CHAR_ENUM {
     pub characters: Vec<Character>,
 }

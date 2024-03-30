@@ -1,6 +1,5 @@
 use std::io::{Read, Write};
 
-#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/social/smsg_ignore_list.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/social/smsg_ignore_list.wowm#L3):
 /// ```text
 /// smsg SMSG_IGNORE_LIST = 0x006B {
@@ -8,6 +7,7 @@ use std::io::{Read, Write};
 ///     u64[amount_of_ignored] ignored;
 /// }
 /// ```
+#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct SMSG_IGNORE_LIST {
     pub ignored: Vec<u64>,
 }

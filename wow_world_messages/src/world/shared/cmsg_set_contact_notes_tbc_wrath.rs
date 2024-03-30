@@ -2,7 +2,6 @@ use std::io::{Read, Write};
 
 use crate::Guid;
 
-#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/social/cmsg_set_contact_notes.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/social/cmsg_set_contact_notes.wowm#L1):
 /// ```text
 /// cmsg CMSG_SET_CONTACT_NOTES = 0x006B {
@@ -10,6 +9,7 @@ use crate::Guid;
 ///     CString note;
 /// }
 /// ```
+#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct CMSG_SET_CONTACT_NOTES {
     pub player: Guid,
     pub note: String,

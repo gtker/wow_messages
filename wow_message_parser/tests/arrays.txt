@@ -2,7 +2,6 @@ use std::io::{Read, Write};
 
 use crate::vanilla::StructWithAllBuiltInTypes;
 
-#[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/tests/impl_levels.wowm:62`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/tests/impl_levels.wowm#L62):
 /// ```text
 /// struct Arrays {
@@ -18,6 +17,7 @@ use crate::vanilla::StructWithAllBuiltInTypes;
 ///     CString[index] variable_cstring_array;
 /// }
 /// ```
+#[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
 pub struct Arrays {
     pub basic_fixed_array: [u8; 20],
     pub simple_2byte_fixed_array: [u16; 16],

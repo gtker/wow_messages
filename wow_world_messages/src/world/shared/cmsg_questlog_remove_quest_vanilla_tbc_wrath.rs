@@ -1,12 +1,12 @@
 use std::io::{Read, Write};
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/quest/cmsg_questlog_remove_quest.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/quest/cmsg_questlog_remove_quest.wowm#L3):
 /// ```text
 /// cmsg CMSG_QUESTLOG_REMOVE_QUEST = 0x0194 {
 ///     u8 slot;
 /// }
 /// ```
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct CMSG_QUESTLOG_REMOVE_QUEST {
     pub slot: u8,
 }

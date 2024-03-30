@@ -2,7 +2,6 @@ use std::io::{Read, Write};
 
 use wow_world_base::shared::timer_type_vanilla_tbc_wrath::TimerType;
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// According to cmangos: 'Default UI handler for this is bugged, args dont match. Gotta do a full update with `SMSG_START_MIRROR_TIMER` to avoid lua errors.
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/spell/smsg_pause_mirror_timer.wowm:4`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/spell/smsg_pause_mirror_timer.wowm#L4):
 /// ```text
@@ -11,6 +10,7 @@ use wow_world_base::shared::timer_type_vanilla_tbc_wrath::TimerType;
 ///     Bool is_frozen;
 /// }
 /// ```
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct SMSG_PAUSE_MIRROR_TIMER {
     pub timer: TimerType,
     pub is_frozen: bool,

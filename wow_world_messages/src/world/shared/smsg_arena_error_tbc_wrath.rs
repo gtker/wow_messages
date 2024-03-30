@@ -2,7 +2,6 @@ use std::io::{Read, Write};
 
 use wow_world_base::shared::arena_type_tbc_wrath::ArenaType;
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/arena/smsg_arena_error.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/arena/smsg_arena_error.wowm#L1):
 /// ```text
 /// smsg SMSG_ARENA_ERROR = 0x0376 {
@@ -10,6 +9,7 @@ use wow_world_base::shared::arena_type_tbc_wrath::ArenaType;
 ///     ArenaType arena_type;
 /// }
 /// ```
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct SMSG_ARENA_ERROR {
     pub unknown: u32,
     pub arena_type: ArenaType,

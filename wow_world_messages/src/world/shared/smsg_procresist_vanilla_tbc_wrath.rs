@@ -3,7 +3,6 @@ use std::io::{Read, Write};
 use crate::Guid;
 use wow_world_base::shared::log_format_vanilla_tbc_wrath::LogFormat;
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// According to cmangos/azerothcore/trinitycore/mangostwo. Not present in vmangos.
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/combat/smsg_procresist.wowm:9`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/combat/smsg_procresist.wowm#L9):
 /// ```text
@@ -14,6 +13,7 @@ use wow_world_base::shared::log_format_vanilla_tbc_wrath::LogFormat;
 ///     LogFormat log_format;
 /// }
 /// ```
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct SMSG_PROCRESIST {
     pub caster: Guid,
     pub target: Guid,

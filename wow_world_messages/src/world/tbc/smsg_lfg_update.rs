@@ -4,7 +4,6 @@ use crate::tbc::{
     LfgData, LfgType, LfgUpdateLookingForMore,
 };
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/lfg/smsg_lfg_update.wowm:15`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/lfg/smsg_lfg_update.wowm#L15):
 /// ```text
 /// smsg SMSG_LFG_UPDATE = 0x036C {
@@ -16,6 +15,7 @@ use crate::tbc::{
 ///     }
 /// }
 /// ```
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct SMSG_LFG_UPDATE {
     pub queued: bool,
     pub is_looking_for_group: bool,

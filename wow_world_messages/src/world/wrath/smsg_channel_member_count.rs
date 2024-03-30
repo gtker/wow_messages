@@ -1,6 +1,5 @@
 use std::io::{Read, Write};
 
-#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/chat/smsg_channel_member_count.wowm:9`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/chat/smsg_channel_member_count.wowm#L9):
 /// ```text
 /// smsg SMSG_CHANNEL_MEMBER_COUNT = 0x03D5 {
@@ -9,6 +8,7 @@ use std::io::{Read, Write};
 ///     u32 amount_of_members;
 /// }
 /// ```
+#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct SMSG_CHANNEL_MEMBER_COUNT {
     pub channel: String,
     pub flags: u8,

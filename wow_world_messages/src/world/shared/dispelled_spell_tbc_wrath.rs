@@ -2,7 +2,6 @@ use std::io::{Read, Write};
 
 use wow_world_base::shared::dispel_method_tbc_wrath::DispelMethod;
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/spell/smsg_spelldispellog.wowm:29`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/spell/smsg_spelldispellog.wowm#L29):
 /// ```text
 /// struct DispelledSpell {
@@ -10,6 +9,7 @@ use wow_world_base::shared::dispel_method_tbc_wrath::DispelMethod;
 ///     DispelMethod method;
 /// }
 /// ```
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct DispelledSpell {
     pub spell: u32,
     pub method: DispelMethod,

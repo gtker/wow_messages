@@ -5,7 +5,6 @@ use crate::tbc::{
     QuestGiverStatus, QuestGiverStatusReport,
 };
 
-#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/quest/smsg_questgiver_status_multiple.wowm:8`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/quest/smsg_questgiver_status_multiple.wowm#L8):
 /// ```text
 /// smsg SMSG_QUESTGIVER_STATUS_MULTIPLE = 0x0417 {
@@ -13,6 +12,7 @@ use crate::tbc::{
 ///     QuestGiverStatusReport[amount_of_statuses] statuses;
 /// }
 /// ```
+#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct SMSG_QUESTGIVER_STATUS_MULTIPLE {
     pub statuses: Vec<QuestGiverStatusReport>,
 }

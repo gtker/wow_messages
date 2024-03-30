@@ -2,7 +2,6 @@ use std::io::{Read, Write};
 
 use std::time::Duration;
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/cinematic/smsg_override_light.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/cinematic/smsg_override_light.wowm#L1):
 /// ```text
 /// smsg SMSG_OVERRIDE_LIGHT = 0x0411 {
@@ -11,6 +10,7 @@ use std::time::Duration;
 ///     Seconds fade_in_time;
 /// }
 /// ```
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct SMSG_OVERRIDE_LIGHT {
     pub default_id: u32,
     pub id_override: u32,

@@ -4,7 +4,6 @@ use crate::wrath::{
     GuildBankSocket, VariableItemRandomProperty,
 };
 
-#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/guild_bank/smsg_guild_bank_list.wowm:57`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/guild_bank/smsg_guild_bank_list.wowm#L57):
 /// ```text
 /// struct GuildBankSlot {
@@ -19,6 +18,7 @@ use crate::wrath::{
 ///     GuildBankSocket[amount_of_sockets] sockets;
 /// }
 /// ```
+#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct GuildBankSlot {
     pub slot: u8,
     pub item: u32,

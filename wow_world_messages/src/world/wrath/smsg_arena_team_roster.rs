@@ -6,7 +6,6 @@ use crate::wrath::{
     ArenaTeamMember, ArenaType, Class,
 };
 
-#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/arena/smsg_arena_team_roster.wowm:32`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/arena/smsg_arena_team_roster.wowm#L32):
 /// ```text
 /// smsg SMSG_ARENA_TEAM_ROSTER = 0x034E {
@@ -17,6 +16,7 @@ use crate::wrath::{
 ///     ArenaTeamMember[amount_of_members] members;
 /// }
 /// ```
+#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct SMSG_ARENA_TEAM_ROSTER {
     pub arena_team: u32,
     /// arcemu: new 3.0.8.

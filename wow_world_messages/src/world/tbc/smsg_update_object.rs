@@ -6,7 +6,6 @@ use crate::tbc::{
     UpdateFlag, UpdateMask, UpdateType, Vector3d,
 };
 
-#[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/gameobject/smsg_update_object_2_4_3.wowm:115`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/gameobject/smsg_update_object_2_4_3.wowm#L115):
 /// ```text
 /// smsg SMSG_UPDATE_OBJECT = 0x00A9 {
@@ -15,6 +14,7 @@ use crate::tbc::{
 ///     Object[amount_of_objects] objects;
 /// }
 /// ```
+#[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
 pub struct SMSG_UPDATE_OBJECT {
     pub has_transport: u8,
     pub objects: Vec<Object>,

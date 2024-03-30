@@ -2,7 +2,6 @@ use std::io::{Read, Write};
 
 use crate::wrath::PlayerInviteStatus;
 
-#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/social/smsg_group_invite.wowm:14`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/social/smsg_group_invite.wowm#L14):
 /// ```text
 /// smsg SMSG_GROUP_INVITE = 0x006F {
@@ -15,6 +14,7 @@ use crate::wrath::PlayerInviteStatus;
 ///     }
 /// }
 /// ```
+#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct SMSG_GROUP_INVITE {
     pub status: PlayerInviteStatus,
     pub name: String,

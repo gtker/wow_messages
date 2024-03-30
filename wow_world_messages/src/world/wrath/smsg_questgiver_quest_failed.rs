@@ -2,7 +2,6 @@ use std::io::{Read, Write};
 
 use crate::wrath::QuestFailedReason;
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/quest/smsg_questgiver_questfailed.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/quest/smsg_questgiver_questfailed.wowm#L3):
 /// ```text
 /// smsg SMSG_QUESTGIVER_QUEST_FAILED = 0x0192 {
@@ -10,6 +9,7 @@ use crate::wrath::QuestFailedReason;
 ///     QuestFailedReason reason;
 /// }
 /// ```
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct SMSG_QUESTGIVER_QUEST_FAILED {
     pub quest_id: u32,
     pub reason: QuestFailedReason,

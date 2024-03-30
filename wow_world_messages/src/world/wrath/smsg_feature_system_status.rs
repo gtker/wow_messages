@@ -2,7 +2,6 @@ use std::io::{Read, Write};
 
 use crate::wrath::ComplaintStatus;
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/social/smsg_feature_system_status.wowm:16`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/social/smsg_feature_system_status.wowm#L16):
 /// ```text
 /// smsg SMSG_FEATURE_SYSTEM_STATUS = 0x03C9 {
@@ -10,6 +9,7 @@ use crate::wrath::ComplaintStatus;
 ///     Bool voice_chat_enabled;
 /// }
 /// ```
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct SMSG_FEATURE_SYSTEM_STATUS {
     pub complaint_status: ComplaintStatus,
     pub voice_chat_enabled: bool,

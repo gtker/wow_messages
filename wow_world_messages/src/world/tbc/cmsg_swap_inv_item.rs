@@ -2,7 +2,6 @@ use std::io::{Read, Write};
 
 use crate::tbc::ItemSlot;
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/item/cmsg_swap_inv_item.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/item/cmsg_swap_inv_item.wowm#L1):
 /// ```text
 /// cmsg CMSG_SWAP_INV_ITEM = 0x010D {
@@ -10,6 +9,7 @@ use crate::tbc::ItemSlot;
 ///     ItemSlot destination_slot;
 /// }
 /// ```
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct CMSG_SWAP_INV_ITEM {
     pub source_slot: ItemSlot,
     pub destination_slot: ItemSlot,

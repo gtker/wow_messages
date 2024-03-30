@@ -5,7 +5,6 @@ use crate::{
 };
 use std::time::Duration;
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/achievement/smsg_criteria_update.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/achievement/smsg_criteria_update.wowm#L1):
 /// ```text
 /// smsg SMSG_CRITERIA_UPDATE = 0x046A {
@@ -18,6 +17,7 @@ use std::time::Duration;
 ///     u32 unknown;
 /// }
 /// ```
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct SMSG_CRITERIA_UPDATE {
     pub achievement: u32,
     /// trinitycore/azerothcore: This is a u32 passed to the `appendPackGUID` function which promotes it to u64.

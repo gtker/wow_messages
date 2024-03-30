@@ -2,7 +2,6 @@ use std::io::{Read, Write};
 
 use crate::vanilla::SpellCastTargets;
 
-#[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/item/cmsg_use_item.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/item/cmsg_use_item.wowm#L1):
 /// ```text
 /// cmsg CMSG_USE_ITEM = 0x00AB {
@@ -12,6 +11,7 @@ use crate::vanilla::SpellCastTargets;
 ///     SpellCastTargets targets;
 /// }
 /// ```
+#[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
 pub struct CMSG_USE_ITEM {
     pub bag_index: u8,
     pub bag_slot: u8,

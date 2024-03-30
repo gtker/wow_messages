@@ -2,7 +2,6 @@ use std::io::{Read, Write};
 
 use std::time::Duration;
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/spell/smsg_spell_cooldown.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/spell/smsg_spell_cooldown.wowm#L1):
 /// ```text
 /// struct SpellCooldownStatus {
@@ -10,6 +9,7 @@ use std::time::Duration;
 ///     Milliseconds cooldown_time;
 /// }
 /// ```
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct SpellCooldownStatus {
     pub id: u32,
     pub cooldown_time: Duration,

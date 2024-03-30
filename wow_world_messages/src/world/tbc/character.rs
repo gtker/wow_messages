@@ -7,7 +7,6 @@ use crate::tbc::{
     Vector3d,
 };
 
-#[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/character_screen/smsg_char_enum_2_4_3.wowm:8`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/character_screen/smsg_char_enum_2_4_3.wowm#L8):
 /// ```text
 /// struct Character {
@@ -34,6 +33,7 @@ use crate::tbc::{
 ///     CharacterGear[20] equipment;
 /// }
 /// ```
+#[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
 pub struct Character {
     pub guid: Guid,
     pub name: String,

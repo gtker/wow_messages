@@ -1,6 +1,5 @@
 use std::io::{Read, Write};
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/login_logout/cmsg_time_sync_resp.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/login_logout/cmsg_time_sync_resp.wowm#L3):
 /// ```text
 /// cmsg CMSG_TIME_SYNC_RESP = 0x0391 {
@@ -8,6 +7,7 @@ use std::io::{Read, Write};
 ///     u32 client_ticks;
 /// }
 /// ```
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct CMSG_TIME_SYNC_RESP {
     /// Can be used to check if the client is still properly in sync
     /// This should be the same as the counter sent in [`SMSG_TIME_SYNC_REQ`](crate::tbc::SMSG_TIME_SYNC_REQ).

@@ -2,13 +2,13 @@ use std::io::{Read, Write};
 
 use crate::wrath::LfgTeleportLocation;
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/lfg/cmsg_lfg_teleport.wowm:8`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/lfg/cmsg_lfg_teleport.wowm#L8):
 /// ```text
 /// cmsg CMSG_LFG_TELEPORT = 0x0370 {
 ///     LfgTeleportLocation location;
 /// }
 /// ```
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct CMSG_LFG_TELEPORT {
     pub location: LfgTeleportLocation,
 }

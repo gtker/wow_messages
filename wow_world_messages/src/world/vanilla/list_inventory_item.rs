@@ -2,7 +2,6 @@ use std::io::{Read, Write};
 
 use crate::shared::gold_vanilla_tbc_wrath::Gold;
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/item/smsg_list_inventory.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/item/smsg_list_inventory.wowm#L1):
 /// ```text
 /// struct ListInventoryItem {
@@ -15,6 +14,7 @@ use crate::shared::gold_vanilla_tbc_wrath::Gold;
 ///     u32 durability;
 /// }
 /// ```
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct ListInventoryItem {
     pub item_stack_count: u32,
     pub item: u32,

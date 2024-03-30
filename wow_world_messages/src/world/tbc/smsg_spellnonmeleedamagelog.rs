@@ -5,7 +5,6 @@ use crate::tbc::{
     HitInfo, SpellSchool,
 };
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/spell/smsg_spellnonmeleedamagelog.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/spell/smsg_spellnonmeleedamagelog.wowm#L1):
 /// ```text
 /// smsg SMSG_SPELLNONMELEEDAMAGELOG = 0x0250 {
@@ -23,6 +22,7 @@ use crate::tbc::{
 ///     u8 extend_flag;
 /// }
 /// ```
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct SMSG_SPELLNONMELEEDAMAGELOG {
     pub target: Guid,
     pub attacker: Guid,

@@ -2,7 +2,6 @@ use std::io::{Read, Write};
 
 use wow_world_base::shared::inventory_type_vanilla_tbc_wrath::InventoryType;
 
-#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/queries/smsg_item_name_query_response.wowm:8`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/queries/smsg_item_name_query_response.wowm#L8):
 /// ```text
 /// smsg SMSG_ITEM_NAME_QUERY_RESPONSE = 0x02C5 {
@@ -11,6 +10,7 @@ use wow_world_base::shared::inventory_type_vanilla_tbc_wrath::InventoryType;
 ///     InventoryType inventory_type;
 /// }
 /// ```
+#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct SMSG_ITEM_NAME_QUERY_RESPONSE {
     pub item: u32,
     pub item_name: String,

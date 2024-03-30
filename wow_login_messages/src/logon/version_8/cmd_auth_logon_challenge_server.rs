@@ -6,7 +6,6 @@ use crate::logon::version_8::{
     LoginResult, SecurityFlag,
 };
 
-#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/login/cmd_auth_logon/challenge_server.wowm:300`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/login/cmd_auth_logon/challenge_server.wowm#L300):
 /// ```text
 /// slogin CMD_AUTH_LOGON_CHALLENGE_Server = 0x00 {
@@ -38,6 +37,7 @@ use crate::logon::version_8::{
 ///     }
 /// }
 /// ```
+#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct CMD_AUTH_LOGON_CHALLENGE_Server {
     pub result: CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult,
 }

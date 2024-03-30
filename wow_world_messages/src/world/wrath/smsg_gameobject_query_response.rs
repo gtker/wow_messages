@@ -1,6 +1,5 @@
 use std::io::{Read, Write};
 
-#[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/queries/smsg_gameobject_query_response.wowm:38`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/queries/smsg_gameobject_query_response.wowm#L38):
 /// ```text
 /// smsg SMSG_GAMEOBJECT_QUERY_RESPONSE = 0x005F {
@@ -21,6 +20,7 @@ use std::io::{Read, Write};
 ///     }
 /// }
 /// ```
+#[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
 pub struct SMSG_GAMEOBJECT_QUERY_RESPONSE {
     /// When the `found` optional is not present all emulators bitwise OR the entry with `0x80000000`.``
     pub entry_id: u32,

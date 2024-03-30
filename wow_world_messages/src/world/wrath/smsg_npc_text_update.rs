@@ -4,7 +4,6 @@ use crate::wrath::{
     Language, NpcTextUpdate, NpcTextUpdateEmote,
 };
 
-#[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/gossip/smsg_npc_text_update.wowm:10`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/gossip/smsg_npc_text_update.wowm#L10):
 /// ```text
 /// smsg SMSG_NPC_TEXT_UPDATE = 0x0180 {
@@ -12,6 +11,7 @@ use crate::wrath::{
 ///     NpcTextUpdate[8] texts;
 /// }
 /// ```
+#[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
 pub struct SMSG_NPC_TEXT_UPDATE {
     pub text_id: u32,
     pub texts: [NpcTextUpdate; 8],

@@ -2,7 +2,6 @@ use std::io::{Read, Write};
 
 use crate::wrath::LfgQuestReward;
 
-#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/lfg/smsg_lfg_player_info.wowm:9`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/lfg/smsg_lfg_player_info.wowm#L9):
 /// ```text
 /// struct LfgAvailableDungeon {
@@ -16,6 +15,7 @@ use crate::wrath::LfgQuestReward;
 ///     LfgQuestReward[amount_of_rewards] rewards;
 /// }
 /// ```
+#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct LfgAvailableDungeon {
     pub dungeon_entry: u32,
     pub done: bool,

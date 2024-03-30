@@ -1,12 +1,12 @@
 use std::io::{Read, Write};
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/spell/smsg_add_rune_power.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/spell/smsg_add_rune_power.wowm#L1):
 /// ```text
 /// smsg SMSG_ADD_RUNE_POWER = 0x0488 {
 ///     u32 rune;
 /// }
 /// ```
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct SMSG_ADD_RUNE_POWER {
     /// Emus bitshifts 1 by the rune index instead of directly sending the index.
     /// mangostwo: mask (0x00-0x3F probably)

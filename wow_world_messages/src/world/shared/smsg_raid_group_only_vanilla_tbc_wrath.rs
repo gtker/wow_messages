@@ -2,7 +2,6 @@ use std::io::{Read, Write};
 
 use wow_world_base::shared::raid_group_error_vanilla_tbc_wrath::RaidGroupError;
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// used when player leaves raid group inside instance
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/social/smsg_raid_group_only.wowm:9`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/social/smsg_raid_group_only.wowm#L9):
 /// ```text
@@ -11,6 +10,7 @@ use wow_world_base::shared::raid_group_error_vanilla_tbc_wrath::RaidGroupError;
 ///     RaidGroupError error;
 /// }
 /// ```
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct SMSG_RAID_GROUP_ONLY {
     pub homebind_timer: u32,
     pub error: RaidGroupError,

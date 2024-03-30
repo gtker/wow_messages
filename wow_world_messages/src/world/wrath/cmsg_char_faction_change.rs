@@ -5,7 +5,6 @@ use crate::wrath::{
     Gender, Race,
 };
 
-#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/character_screen/cmsg_char_faction_change.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/character_screen/cmsg_char_faction_change.wowm#L1):
 /// ```text
 /// cmsg CMSG_CHAR_FACTION_CHANGE = 0x04D9 {
@@ -20,6 +19,7 @@ use crate::wrath::{
 ///     Race race;
 /// }
 /// ```
+#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct CMSG_CHAR_FACTION_CHANGE {
     pub guid: Guid,
     pub name: String,

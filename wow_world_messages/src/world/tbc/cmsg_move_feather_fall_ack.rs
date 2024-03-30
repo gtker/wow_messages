@@ -5,7 +5,6 @@ use crate::tbc::{
     MovementFlags, MovementInfo, TransportInfo, Vector3d,
 };
 
-#[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/movement/cmsg/cmsg_move_feather_fall_ack.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/movement/cmsg/cmsg_move_feather_fall_ack.wowm#L1):
 /// ```text
 /// cmsg CMSG_MOVE_FEATHER_FALL_ACK = 0x02CF {
@@ -15,6 +14,7 @@ use crate::tbc::{
 ///     u32 apply;
 /// }
 /// ```
+#[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
 pub struct CMSG_MOVE_FEATHER_FALL_ACK {
     pub guid: Guid,
     pub movement_counter: u32,

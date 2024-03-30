@@ -4,7 +4,6 @@ use crate::Guid;
 use crate::shared::gold_vanilla_tbc_wrath::Gold;
 use crate::shared::mail_item_tbc_wrath::MailItem;
 
-#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/mail/cmsg_send_mail.wowm:28`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/mail/cmsg_send_mail.wowm#L28):
 /// ```text
 /// cmsg CMSG_SEND_MAIL = 0x0238 {
@@ -22,6 +21,7 @@ use crate::shared::mail_item_tbc_wrath::MailItem;
 ///     u32 unknown4;
 /// }
 /// ```
+#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct CMSG_SEND_MAIL {
     pub mailbox: Guid,
     pub receiver: String,

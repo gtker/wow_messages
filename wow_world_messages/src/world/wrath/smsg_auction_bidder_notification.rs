@@ -3,7 +3,6 @@ use std::io::{Read, Write};
 use crate::Guid;
 use crate::wrath::AuctionHouse;
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/auction/smsg/smsg_auction_bidder_notification.wowm:39`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/auction/smsg/smsg_auction_bidder_notification.wowm#L39):
 /// ```text
 /// smsg SMSG_AUCTION_BIDDER_NOTIFICATION = 0x025E {
@@ -17,6 +16,7 @@ use crate::wrath::AuctionHouse;
 ///     u32 item_random_property_id;
 /// }
 /// ```
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct SMSG_AUCTION_BIDDER_NOTIFICATION {
     pub auction_house: AuctionHouse,
     pub auction_id: u32,

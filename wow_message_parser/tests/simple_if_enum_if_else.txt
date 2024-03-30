@@ -2,7 +2,6 @@ use std::io::{Read, Write};
 
 use crate::vanilla::SimpleEnum;
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/tests/impl_levels.wowm:110`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/tests/impl_levels.wowm#L110):
 /// ```text
 /// struct SimpleIfEnumIfElse {
@@ -16,6 +15,7 @@ use crate::vanilla::SimpleEnum;
 ///     }
 /// }
 /// ```
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct SimpleIfEnumIfElse {
     pub enum: SimpleIfEnumIfElse_SimpleEnum,
 }

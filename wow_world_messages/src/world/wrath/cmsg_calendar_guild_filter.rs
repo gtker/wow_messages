@@ -2,7 +2,6 @@ use std::io::{Read, Write};
 
 use crate::shared::level_vanilla_tbc_wrath::Level;
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/calendar/cmsg_calendar_guild_filter.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/calendar/cmsg_calendar_guild_filter.wowm#L1):
 /// ```text
 /// cmsg CMSG_CALENDAR_GUILD_FILTER = 0x042B {
@@ -11,6 +10,7 @@ use crate::shared::level_vanilla_tbc_wrath::Level;
 ///     u32 minimum_rank;
 /// }
 /// ```
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct CMSG_CALENDAR_GUILD_FILTER {
     pub minimum_level: Level,
     pub maximum_level: Level,

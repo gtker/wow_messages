@@ -2,13 +2,13 @@ use std::io::{Read, Write};
 
 use crate::vanilla::MovementInfo;
 
-#[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/movement/msg/msg_move_stop.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/movement/msg/msg_move_stop.wowm#L1):
 /// ```text
 /// cmsg MSG_MOVE_STOP_Client = 0x00B7 {
 ///     MovementInfo info;
 /// }
 /// ```
+#[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
 pub struct MSG_MOVE_STOP_Client {
     pub info: MovementInfo,
 }

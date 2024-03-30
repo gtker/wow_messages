@@ -1,6 +1,5 @@
 use std::io::{Read, Write};
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Only exists as comment in azerothcore/trinitycore.
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/spell/smsg_talents_involuntarily_reset.wowm:2`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/spell/smsg_talents_involuntarily_reset.wowm#L2):
 /// ```text
@@ -8,6 +7,7 @@ use std::io::{Read, Write};
 ///     u8 unknown;
 /// }
 /// ```
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct SMSG_TALENTS_INVOLUNTARILY_RESET {
     pub unknown: u8,
 }

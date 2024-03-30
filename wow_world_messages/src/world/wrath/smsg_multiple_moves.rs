@@ -5,7 +5,6 @@ use crate::wrath::{
     MiniMoveMessage, MiniMoveOpcode,
 };
 
-#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/movement/smsg/smsg_multiple_moves.wowm:20`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/movement/smsg/smsg_multiple_moves.wowm#L20):
 /// ```text
 /// smsg SMSG_MULTIPLE_MOVES = 0x051E {
@@ -13,6 +12,7 @@ use crate::wrath::{
 ///     MiniMoveMessage[-] moves;
 /// }
 /// ```
+#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct SMSG_MULTIPLE_MOVES {
     pub moves: Vec<MiniMoveMessage>,
 }

@@ -1,6 +1,5 @@
 use std::io::{Read, Write};
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/character_screen/smsg_auth_challenge.wowm:21`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/character_screen/smsg_auth_challenge.wowm#L21):
 /// ```text
 /// smsg SMSG_AUTH_CHALLENGE = 0x01EC {
@@ -9,6 +8,7 @@ use std::io::{Read, Write};
 ///     u8[32] seed;
 /// }
 /// ```
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct SMSG_AUTH_CHALLENGE {
     /// TrinityCore/ArcEmu/mangostwo always set to 1.
     /// TrinityCore/mangostwo: 1...31

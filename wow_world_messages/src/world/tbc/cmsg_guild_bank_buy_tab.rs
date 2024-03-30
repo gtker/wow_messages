@@ -2,7 +2,6 @@ use std::io::{Read, Write};
 
 use crate::Guid;
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/guild_bank/cmsg_guild_bank_buy_tab.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/guild_bank/cmsg_guild_bank_buy_tab.wowm#L1):
 /// ```text
 /// cmsg CMSG_GUILD_BANK_BUY_TAB = 0x03E9 {
@@ -10,6 +9,7 @@ use crate::Guid;
 ///     u8 tab;
 /// }
 /// ```
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct CMSG_GUILD_BANK_BUY_TAB {
     pub banker: Guid,
     pub tab: u8,

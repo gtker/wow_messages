@@ -5,7 +5,6 @@ use crate::wrath::{
     GroupLootSetting, ItemQuality,
 };
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/social/cmsg_loot_method.wowm:17`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/social/cmsg_loot_method.wowm#L17):
 /// ```text
 /// cmsg CMSG_LOOT_METHOD = 0x007A {
@@ -14,6 +13,7 @@ use crate::wrath::{
 ///     (u32)ItemQuality loot_threshold;
 /// }
 /// ```
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct CMSG_LOOT_METHOD {
     pub loot_setting: GroupLootSetting,
     pub loot_master: Guid,

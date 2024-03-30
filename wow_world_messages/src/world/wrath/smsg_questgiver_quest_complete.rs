@@ -3,7 +3,6 @@ use std::io::{Read, Write};
 use crate::shared::gold_vanilla_tbc_wrath::Gold;
 use crate::wrath::QuestItemReward;
 
-#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/quest/smsg_questgiver_quest_complete.wowm:30`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/quest/smsg_questgiver_quest_complete.wowm#L30):
 /// ```text
 /// smsg SMSG_QUESTGIVER_QUEST_COMPLETE = 0x0191 {
@@ -18,6 +17,7 @@ use crate::wrath::QuestItemReward;
 ///     QuestItemReward[amount_of_item_rewards] item_rewards;
 /// }
 /// ```
+#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct SMSG_QUESTGIVER_QUEST_COMPLETE {
     pub quest_id: u32,
     /// cmangos/vmangos/mangoszero: set to 0x03

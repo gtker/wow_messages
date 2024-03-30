@@ -1,6 +1,5 @@
 use std::io::{Read, Write};
 
-#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/quest/smsg_query_quests_completed_response.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/quest/smsg_query_quests_completed_response.wowm#L1):
 /// ```text
 /// smsg SMSG_QUERY_QUESTS_COMPLETED_RESPONSE = 0x0501 {
@@ -8,6 +7,7 @@ use std::io::{Read, Write};
 ///     u32[amount_of_reward_quests] reward_quests;
 /// }
 /// ```
+#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct SMSG_QUERY_QUESTS_COMPLETED_RESPONSE {
     pub reward_quests: Vec<u32>,
 }

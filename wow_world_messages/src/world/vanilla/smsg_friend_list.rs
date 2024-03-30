@@ -6,7 +6,6 @@ use crate::vanilla::{
     Area, Class, Friend, FriendStatus,
 };
 
-#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/social/smsg_friend_list.wowm:21`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/social/smsg_friend_list.wowm#L21):
 /// ```text
 /// smsg SMSG_FRIEND_LIST = 0x0067 {
@@ -14,6 +13,7 @@ use crate::vanilla::{
 ///     Friend[amount_of_friends] friends;
 /// }
 /// ```
+#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct SMSG_FRIEND_LIST {
     pub friends: Vec<Friend>,
 }

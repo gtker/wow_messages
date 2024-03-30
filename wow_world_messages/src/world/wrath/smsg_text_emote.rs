@@ -3,7 +3,6 @@ use std::io::{Read, Write};
 use crate::Guid;
 use crate::wrath::TextEmote;
 
-#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/chat/smsg_text_emote.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/chat/smsg_text_emote.wowm#L1):
 /// ```text
 /// smsg SMSG_TEXT_EMOTE = 0x0105 {
@@ -13,6 +12,7 @@ use crate::wrath::TextEmote;
 ///     SizedCString name;
 /// }
 /// ```
+#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct SMSG_TEXT_EMOTE {
     pub guid: Guid,
     pub text_emote: TextEmote,

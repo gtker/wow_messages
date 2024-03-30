@@ -2,7 +2,6 @@ use std::io::{Read, Write};
 
 use wow_world_base::shared::vector3d_vanilla_tbc_wrath::Vector3d;
 
-#[derive(Debug, Clone, Copy, PartialEq, PartialOrd, Default)]
 /// vmangos/mangoszero: write in client console: setrawpos x y z o. For now, it is implemented like worldport but on the same map. Consider using `MSG_MOVE_SET_RAW_POSITION_ACK`.
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/movement/cmsg/cmsg_move_set_raw_position.wowm:4`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/movement/cmsg/cmsg_move_set_raw_position.wowm#L4):
 /// ```text
@@ -11,6 +10,7 @@ use wow_world_base::shared::vector3d_vanilla_tbc_wrath::Vector3d;
 ///     f32 orientation;
 /// }
 /// ```
+#[derive(Debug, Clone, Copy, PartialEq, PartialOrd, Default)]
 pub struct CMSG_MOVE_SET_RAW_POSITION {
     pub position: Vector3d,
     pub orientation: f32,

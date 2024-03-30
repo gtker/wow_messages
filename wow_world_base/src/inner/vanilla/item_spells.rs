@@ -2,8 +2,6 @@ use std::io::{Read, Write};
 
 use crate::vanilla::SpellTriggerType;
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
-#[cfg_attr(feature = "serde", derive(serde::Deserialize, serde::Serialize))]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/queries/smsg_item_query_single_response.wowm:40`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/queries/smsg_item_query_single_response.wowm#L40):
 /// ```text
 /// struct ItemSpells {
@@ -15,6 +13,8 @@ use crate::vanilla::SpellTriggerType;
 ///     i32 spell_category_cooldown;
 /// }
 /// ```
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
+#[cfg_attr(feature = "serde", derive(serde::Deserialize, serde::Serialize))]
 pub struct ItemSpells {
     pub spell: u32,
     pub spell_trigger: SpellTriggerType,

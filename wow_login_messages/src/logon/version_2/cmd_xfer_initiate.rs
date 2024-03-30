@@ -2,7 +2,6 @@ use crate::Message;
 use crate::ServerMessage;
 use std::io::{Read, Write};
 
-#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/login/cmd_xfer.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/login/cmd_xfer.wowm#L1):
 /// ```text
 /// slogin CMD_XFER_INITIATE = 0x30 {
@@ -11,6 +10,7 @@ use std::io::{Read, Write};
 ///     u8[16] file_md5;
 /// }
 /// ```
+#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct CMD_XFER_INITIATE {
     pub filename: String,
     pub file_size: u64,

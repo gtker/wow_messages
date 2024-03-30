@@ -1,12 +1,12 @@
 use std::io::{Read, Write};
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/loot/cmsg_opt_out_of_loot.wowm:7`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/loot/cmsg_opt_out_of_loot.wowm#L7):
 /// ```text
 /// cmsg CMSG_OPT_OUT_OF_LOOT = 0x0409 {
 ///     Bool32 pass_on_loot;
 /// }
 /// ```
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct CMSG_OPT_OUT_OF_LOOT {
     pub pass_on_loot: bool,
 }

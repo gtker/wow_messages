@@ -1,6 +1,5 @@
 use std::io::{Read, Write};
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/arena/smsg_arena_team_stats.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/arena/smsg_arena_team_stats.wowm#L1):
 /// ```text
 /// smsg SMSG_ARENA_TEAM_STATS = 0x035B {
@@ -13,6 +12,7 @@ use std::io::{Read, Write};
 ///     u32 ranking;
 /// }
 /// ```
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct SMSG_ARENA_TEAM_STATS {
     pub arena_team: u32,
     pub rating: u32,

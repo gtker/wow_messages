@@ -1,12 +1,12 @@
 use std::io::{Read, Write};
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Resets `Release spirit` timer clientside.
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/resurrect/smsg_forced_death_update.wowm:2`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/resurrect/smsg_forced_death_update.wowm#L2):
 /// ```text
 /// smsg SMSG_FORCED_DEATH_UPDATE = 0x037A {
 /// }
 /// ```
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct SMSG_FORCED_DEATH_UPDATE {
 }
 

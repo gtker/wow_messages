@@ -3,7 +3,6 @@ use std::io::{Read, Write};
 use crate::Guid;
 use crate::shared::battleground_player_position_vanilla_tbc_wrath::BattlegroundPlayerPosition;
 
-#[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/battleground/msg_battleground_player_positions.wowm:13`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/battleground/msg_battleground_player_positions.wowm#L13):
 /// ```text
 /// smsg MSG_BATTLEGROUND_PLAYER_POSITIONS_Server = 0x02E9 {
@@ -13,6 +12,7 @@ use crate::shared::battleground_player_position_vanilla_tbc_wrath::BattlegroundP
 ///     BattlegroundPlayerPosition[amount_of_carriers] carriers;
 /// }
 /// ```
+#[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
 pub struct MSG_BATTLEGROUND_PLAYER_POSITIONS_Server {
     pub teammates: Vec<BattlegroundPlayerPosition>,
     pub carriers: Vec<BattlegroundPlayerPosition>,

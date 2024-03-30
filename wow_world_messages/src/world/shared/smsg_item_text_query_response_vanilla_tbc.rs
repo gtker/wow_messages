@@ -1,6 +1,5 @@
 use std::io::{Read, Write};
 
-#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/queries/smsg_item_text_query_response.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/queries/smsg_item_text_query_response.wowm#L1):
 /// ```text
 /// smsg SMSG_ITEM_TEXT_QUERY_RESPONSE = 0x0244 {
@@ -8,6 +7,7 @@ use std::io::{Read, Write};
 ///     CString text;
 /// }
 /// ```
+#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct SMSG_ITEM_TEXT_QUERY_RESPONSE {
     pub item_text_id: u32,
     /// mangoszero: CString TODO max length 8000

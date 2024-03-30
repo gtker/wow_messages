@@ -2,7 +2,6 @@ use std::io::{Read, Write};
 
 use crate::Guid;
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Command to log into the specified character.
 /// This is sent after the client has been authenticated and served the character list with [`SMSG_CHAR_ENUM`](crate::vanilla::SMSG_CHAR_ENUM).
 /// If the player receives a [`SMSG_CHARACTER_LOGIN_FAILED`](crate::vanilla::SMSG_CHARACTER_LOGIN_FAILED) it will return to the character screen and send a [`CMSG_CHAR_ENUM`](crate::vanilla::CMSG_CHAR_ENUM).
@@ -12,6 +11,7 @@ use crate::Guid;
 ///     Guid guid;
 /// }
 /// ```
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct CMSG_PLAYER_LOGIN {
     pub guid: Guid,
 }

@@ -2,7 +2,6 @@ use std::io::{Read, Write};
 
 use crate::Guid;
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/gameobject/smsg_gameobject_custom_anim.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/gameobject/smsg_gameobject_custom_anim.wowm#L3):
 /// ```text
 /// smsg SMSG_GAMEOBJECT_CUSTOM_ANIM = 0x00B3 {
@@ -10,6 +9,7 @@ use crate::Guid;
 ///     u32 animation_id;
 /// }
 /// ```
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct SMSG_GAMEOBJECT_CUSTOM_ANIM {
     pub guid: Guid,
     pub animation_id: u32,

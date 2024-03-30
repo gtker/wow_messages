@@ -1,12 +1,12 @@
 use std::io::{Read, Write};
 
-#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/warden/cmsg_warden_data.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/warden/cmsg_warden_data.wowm#L1):
 /// ```text
 /// cmsg CMSG_WARDEN_DATA = 0x02E7 {
 ///     u8[-] encrypted_data;
 /// }
 /// ```
+#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct CMSG_WARDEN_DATA {
     pub encrypted_data: Vec<u8>,
 }

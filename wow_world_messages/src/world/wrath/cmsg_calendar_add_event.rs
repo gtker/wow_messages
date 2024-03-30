@@ -5,7 +5,6 @@ use crate::{
 };
 use crate::wrath::CalendarInvitee;
 
-#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/calendar/cmsg_calendar_add_event.wowm:9`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/calendar/cmsg_calendar_add_event.wowm#L9):
 /// ```text
 /// cmsg CMSG_CALENDAR_ADD_EVENT = 0x042D {
@@ -22,6 +21,7 @@ use crate::wrath::CalendarInvitee;
 ///     CalendarInvitee[amount_of_invitees] invitees;
 /// }
 /// ```
+#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct CMSG_CALENDAR_ADD_EVENT {
     pub title: String,
     pub description: String,

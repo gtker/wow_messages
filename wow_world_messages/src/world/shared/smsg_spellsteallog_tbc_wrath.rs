@@ -4,7 +4,6 @@ use crate::Guid;
 use crate::shared::spell_steal_tbc_wrath::SpellSteal;
 use wow_world_base::shared::spell_steal_action_tbc_wrath::SpellStealAction;
 
-#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/spell/smsg_spellsteallog.wowm:15`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/spell/smsg_spellsteallog.wowm#L15):
 /// ```text
 /// smsg SMSG_SPELLSTEALLOG = 0x0333 {
@@ -16,6 +15,7 @@ use wow_world_base::shared::spell_steal_action_tbc_wrath::SpellStealAction;
 ///     SpellSteal[amount_of_spell_steals] spell_steals;
 /// }
 /// ```
+#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct SMSG_SPELLSTEALLOG {
     pub victim: Guid,
     pub caster: Guid,

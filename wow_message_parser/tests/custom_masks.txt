@@ -4,7 +4,6 @@ use crate::vanilla::{
     AuraMask, UpdateMask,
 };
 
-#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/tests/impl_levels.wowm:213`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/tests/impl_levels.wowm#L213):
 /// ```text
 /// struct CustomMasks {
@@ -12,6 +11,7 @@ use crate::vanilla::{
 ///     AuraMask aura_mask;
 /// }
 /// ```
+#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct CustomMasks {
     pub update_mask: UpdateMask,
     pub aura_mask: AuraMask,

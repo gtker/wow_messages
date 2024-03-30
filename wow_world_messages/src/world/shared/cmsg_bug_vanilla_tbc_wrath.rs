@@ -1,6 +1,5 @@
 use std::io::{Read, Write};
 
-#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/gamemaster/cmsg_bug.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/gamemaster/cmsg_bug.wowm#L3):
 /// ```text
 /// cmsg CMSG_BUG = 0x01CA {
@@ -9,6 +8,7 @@ use std::io::{Read, Write};
 ///     SizedCString bug_type;
 /// }
 /// ```
+#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct CMSG_BUG {
     /// cmangos/vmangos/mangoszero: If 0 received bug report, else received suggestion
     pub suggestion: u32,

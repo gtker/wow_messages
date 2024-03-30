@@ -1,6 +1,5 @@
 use std::io::{Read, Write};
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Sent as response to [`CMSG_CALENDAR_GET_NUM_PENDING`](crate::wrath::CMSG_CALENDAR_GET_NUM_PENDING)
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/calendar/smsg_calendar_send_num_pending.wowm:4`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/calendar/smsg_calendar_send_num_pending.wowm#L4):
 /// ```text
@@ -8,6 +7,7 @@ use std::io::{Read, Write};
 ///     u32 pending_events;
 /// }
 /// ```
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct SMSG_CALENDAR_SEND_NUM_PENDING {
     /// Number of calendar items that require attention, e.g. pending invites
     pub pending_events: u32,

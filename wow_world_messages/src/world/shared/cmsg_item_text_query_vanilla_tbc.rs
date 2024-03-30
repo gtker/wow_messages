@@ -1,6 +1,5 @@
 use std::io::{Read, Write};
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/queries/cmsg_item_text_query.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/queries/cmsg_item_text_query.wowm#L1):
 /// ```text
 /// cmsg CMSG_ITEM_TEXT_QUERY = 0x0243 {
@@ -9,6 +8,7 @@ use std::io::{Read, Write};
 ///     u32 unknown1;
 /// }
 /// ```
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct CMSG_ITEM_TEXT_QUERY {
     pub item_text_id: u32,
     /// vmangos/cmangos/mangoszero: this value can be item id in bag, but it is also mail id

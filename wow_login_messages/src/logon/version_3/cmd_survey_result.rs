@@ -2,7 +2,6 @@ use crate::Message;
 use crate::ClientMessage;
 use std::io::{Read, Write};
 
-#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/login/survey_result.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/login/survey_result.wowm#L3):
 /// ```text
 /// clogin CMD_SURVEY_RESULT = 0x04 {
@@ -12,6 +11,7 @@ use std::io::{Read, Write};
 ///     u8[compressed_data_length] data;
 /// }
 /// ```
+#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct CMD_SURVEY_RESULT {
     pub survey_id: u32,
     pub error: u8,

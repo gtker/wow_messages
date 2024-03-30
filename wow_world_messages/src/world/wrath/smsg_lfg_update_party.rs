@@ -4,7 +4,6 @@ use crate::wrath::{
     LfgJoinStatus, LfgUpdateType,
 };
 
-#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/lfg/smsg_lfg_update_party.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/lfg/smsg_lfg_update_party.wowm#L1):
 /// ```text
 /// smsg SMSG_LFG_UPDATE_PARTY = 0x0368 {
@@ -21,6 +20,7 @@ use crate::wrath::{
 ///     }
 /// }
 /// ```
+#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct SMSG_LFG_UPDATE_PARTY {
     pub update_type: LfgUpdateType,
     pub join_status: SMSG_LFG_UPDATE_PARTY_LfgJoinStatus,

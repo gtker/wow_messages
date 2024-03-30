@@ -6,7 +6,6 @@ use crate::vanilla::{
     GossipItem, QuestItem,
 };
 
-#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/gossip/smsg_gossip_message.wowm:12`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/gossip/smsg_gossip_message.wowm#L12):
 /// ```text
 /// smsg SMSG_GOSSIP_MESSAGE = 0x017D {
@@ -18,6 +17,7 @@ use crate::vanilla::{
 ///     QuestItem[amount_of_quests] quests;
 /// }
 /// ```
+#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct SMSG_GOSSIP_MESSAGE {
     pub guid: Guid,
     pub title_text_id: u32,

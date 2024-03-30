@@ -2,13 +2,13 @@ use std::io::{Read, Write};
 
 use wow_world_base::shared::gm_ticket_status_response_vanilla_tbc_wrath::GmTicketStatusResponse;
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/gamemaster/smsg_gm_ticket_status_update.wowm:9`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/gamemaster/smsg_gm_ticket_status_update.wowm#L9):
 /// ```text
 /// smsg SMSG_GM_TICKET_STATUS_UPDATE = 0x0328 {
 ///     GmTicketStatusResponse response;
 /// }
 /// ```
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct SMSG_GM_TICKET_STATUS_UPDATE {
     pub response: GmTicketStatusResponse,
 }

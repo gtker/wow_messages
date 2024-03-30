@@ -4,7 +4,6 @@ use crate::wrath::{
     Area, Map, Vector2dUnsigned,
 };
 
-#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/quest/smsg_quest_poi_query_response.wowm:16`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/quest/smsg_quest_poi_query_response.wowm#L16):
 /// ```text
 /// struct QuestPoi {
@@ -19,6 +18,7 @@ use crate::wrath::{
 ///     Vector2dUnsigned[amount_of_points] points;
 /// }
 /// ```
+#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct QuestPoi {
     pub id: u32,
     pub objective_id: u32,

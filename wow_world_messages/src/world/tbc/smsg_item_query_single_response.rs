@@ -10,7 +10,6 @@ use crate::tbc::{
 };
 use std::time::Duration;
 
-#[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/queries/smsg_item_query_single_response.wowm:657`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/queries/smsg_item_query_single_response.wowm#L657):
 /// ```text
 /// smsg SMSG_ITEM_QUERY_SINGLE_RESPONSE = 0x0058 {
@@ -81,6 +80,7 @@ use std::time::Duration;
 ///     }
 /// }
 /// ```
+#[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
 pub struct SMSG_ITEM_QUERY_SINGLE_RESPONSE {
     pub item: u32,
     pub found: Option<SMSG_ITEM_QUERY_SINGLE_RESPONSE_found>,

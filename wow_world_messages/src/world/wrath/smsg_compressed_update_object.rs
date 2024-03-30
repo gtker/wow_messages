@@ -7,7 +7,6 @@ use crate::wrath::{
     UpdateFlag, UpdateMask, UpdateType, Vector3d,
 };
 
-#[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
 /// Compressed version of [`SMSG_UPDATE_OBJECT`](crate::wrath::SMSG_UPDATE_OBJECT). Has the same fields when uncompressed
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/gameobject/smsg_update_compressed_object.wowm:12`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/gameobject/smsg_update_compressed_object.wowm#L12):
 /// ```text
@@ -16,6 +15,7 @@ use crate::wrath::{
 ///     Object[amount_of_objects] objects;
 /// }
 /// ```
+#[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
 pub struct SMSG_COMPRESSED_UPDATE_OBJECT {
     pub objects: Vec<Object>,
 }

@@ -2,7 +2,6 @@ use std::io::{Read, Write};
 
 use crate::Guid;
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/pet/cmsg_stable_swap_pet.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/pet/cmsg_stable_swap_pet.wowm#L3):
 /// ```text
 /// cmsg CMSG_STABLE_SWAP_PET = 0x0275 {
@@ -10,6 +9,7 @@ use crate::Guid;
 ///     u32 pet_slot;
 /// }
 /// ```
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct CMSG_STABLE_SWAP_PET {
     pub npc: Guid,
     pub pet_slot: u32,

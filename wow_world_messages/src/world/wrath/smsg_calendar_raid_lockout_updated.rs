@@ -4,7 +4,6 @@ use crate::DateTime;
 use crate::wrath::Map;
 use std::time::Duration;
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/calendar/smsg_calendar_raid_lockout_updated.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/calendar/smsg_calendar_raid_lockout_updated.wowm#L1):
 /// ```text
 /// smsg SMSG_CALENDAR_RAID_LOCKOUT_UPDATED = 0x0471 {
@@ -15,6 +14,7 @@ use std::time::Duration;
 ///     Seconds new_time_to_update;
 /// }
 /// ```
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct SMSG_CALENDAR_RAID_LOCKOUT_UPDATED {
     pub current_time: DateTime,
     pub map: Map,

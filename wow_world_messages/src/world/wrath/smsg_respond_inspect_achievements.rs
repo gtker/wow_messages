@@ -5,7 +5,6 @@ use crate::wrath::{
     AchievementDone, AchievementInProgress,
 };
 
-#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/achievement/smsg_respond_inspect_achievements.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/achievement/smsg_respond_inspect_achievements.wowm#L1):
 /// ```text
 /// smsg SMSG_RESPOND_INSPECT_ACHIEVEMENTS = 0x046C {
@@ -14,6 +13,7 @@ use crate::wrath::{
 ///     AchievementInProgressArray in_progress;
 /// }
 /// ```
+#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct SMSG_RESPOND_INSPECT_ACHIEVEMENTS {
     pub player: Guid,
     pub done: Vec<AchievementDone>,

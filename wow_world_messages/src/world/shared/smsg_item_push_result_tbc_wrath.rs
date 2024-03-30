@@ -5,7 +5,6 @@ use wow_world_base::shared::new_item_chat_alert_vanilla_tbc_wrath::NewItemChatAl
 use wow_world_base::shared::new_item_creation_type_vanilla_tbc_wrath::NewItemCreationType;
 use wow_world_base::shared::new_item_source_vanilla_tbc_wrath::NewItemSource;
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/item/smsg_item_push_result.wowm:69`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/item/smsg_item_push_result.wowm#L69):
 /// ```text
 /// smsg SMSG_ITEM_PUSH_RESULT = 0x0166 {
@@ -22,6 +21,7 @@ use wow_world_base::shared::new_item_source_vanilla_tbc_wrath::NewItemSource;
 ///     u32 item_count_in_inventory;
 /// }
 /// ```
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct SMSG_ITEM_PUSH_RESULT {
     pub guid: Guid,
     pub source: NewItemSource,

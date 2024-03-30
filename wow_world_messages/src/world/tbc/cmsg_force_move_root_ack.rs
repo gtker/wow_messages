@@ -5,7 +5,6 @@ use crate::tbc::{
     MovementFlags, MovementInfo, TransportInfo, Vector3d,
 };
 
-#[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/movement/cmsg/cmsg_force_move_root_ack.wowm:9`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/movement/cmsg/cmsg_force_move_root_ack.wowm#L9):
 /// ```text
 /// cmsg CMSG_FORCE_MOVE_ROOT_ACK = 0x00E9 {
@@ -14,6 +13,7 @@ use crate::tbc::{
 ///     MovementInfo info;
 /// }
 /// ```
+#[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
 pub struct CMSG_FORCE_MOVE_ROOT_ACK {
     pub guid: Guid,
     pub movement_counter: u32,

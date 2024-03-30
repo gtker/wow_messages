@@ -2,7 +2,6 @@ use std::io::{Read, Write};
 
 use crate::tbc::Area;
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/exp/smsg_exploration_experience.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/exp/smsg_exploration_experience.wowm#L1):
 /// ```text
 /// smsg SMSG_EXPLORATION_EXPERIENCE = 0x01F8 {
@@ -10,6 +9,7 @@ use crate::tbc::Area;
 ///     u32 experience;
 /// }
 /// ```
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct SMSG_EXPLORATION_EXPERIENCE {
     pub area: Area,
     pub experience: u32,

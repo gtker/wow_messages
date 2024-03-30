@@ -1,6 +1,5 @@
 use std::io::{Read, Write};
 
-#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Not implemented in Wrath or TBC emus. Only implemented in cmangos.
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/chat/smsg_expected_spam_records.wowm:4`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/chat/smsg_expected_spam_records.wowm#L4):
 /// ```text
@@ -9,6 +8,7 @@ use std::io::{Read, Write};
 ///     CString[amount_of_records] records;
 /// }
 /// ```
+#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct SMSG_EXPECTED_SPAM_RECORDS {
     pub records: Vec<String>,
 }

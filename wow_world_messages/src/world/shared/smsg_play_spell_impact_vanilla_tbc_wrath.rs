@@ -2,7 +2,6 @@ use std::io::{Read, Write};
 
 use crate::Guid;
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/spell/smsg_play_spell_impact.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/spell/smsg_play_spell_impact.wowm#L3):
 /// ```text
 /// smsg SMSG_PLAY_SPELL_IMPACT = 0x01F7 {
@@ -10,6 +9,7 @@ use crate::Guid;
 ///     u32 spell_visual_kit;
 /// }
 /// ```
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct SMSG_PLAY_SPELL_IMPACT {
     pub guid: Guid,
     /// mangoszero/mangosone/azerothcore: index from SpellVisualKit.dbc. Used for visual effect on player with 0x016A

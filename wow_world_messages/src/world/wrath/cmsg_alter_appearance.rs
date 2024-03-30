@@ -1,6 +1,5 @@
 use std::io::{Read, Write};
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/character_screen/cmsg_alter_appearance.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/character_screen/cmsg_alter_appearance.wowm#L1):
 /// ```text
 /// cmsg CMSG_ALTER_APPEARANCE = 0x0426 {
@@ -9,6 +8,7 @@ use std::io::{Read, Write};
 ///     u32 facial_hair;
 /// }
 /// ```
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct CMSG_ALTER_APPEARANCE {
     pub hair: u32,
     pub hair_color: u32,

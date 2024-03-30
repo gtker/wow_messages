@@ -4,7 +4,6 @@ use crate::wrath::{
     AchievementDone, AchievementInProgress,
 };
 
-#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/achievement/smsg_respond_inspect_achievements.wowm:9`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/achievement/smsg_respond_inspect_achievements.wowm#L9):
 /// ```text
 /// smsg SMSG_ALL_ACHIEVEMENT_DATA = 0x047D {
@@ -12,6 +11,7 @@ use crate::wrath::{
 ///     AchievementInProgressArray in_progress;
 /// }
 /// ```
+#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct SMSG_ALL_ACHIEVEMENT_DATA {
     pub done: Vec<AchievementDone>,
     pub in_progress: Vec<AchievementInProgress>,

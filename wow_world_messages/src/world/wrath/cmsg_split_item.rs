@@ -1,6 +1,5 @@
 use std::io::{Read, Write};
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/item/cmsg_split_item.wowm:13`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/item/cmsg_split_item.wowm#L13):
 /// ```text
 /// cmsg CMSG_SPLIT_ITEM = 0x010E {
@@ -11,6 +10,7 @@ use std::io::{Read, Write};
 ///     u32 amount;
 /// }
 /// ```
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct CMSG_SPLIT_ITEM {
     pub source_bag: u8,
     pub source_slot: u8,

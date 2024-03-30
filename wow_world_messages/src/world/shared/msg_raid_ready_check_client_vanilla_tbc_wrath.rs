@@ -1,6 +1,5 @@
 use std::io::{Read, Write};
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/raid/msg_raid_ready_check.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/raid/msg_raid_ready_check.wowm#L3):
 /// ```text
 /// cmsg MSG_RAID_READY_CHECK_Client = 0x0322 {
@@ -9,6 +8,7 @@ use std::io::{Read, Write};
 ///     }
 /// }
 /// ```
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct MSG_RAID_READY_CHECK_Client {
     pub answer: Option<MSG_RAID_READY_CHECK_Client_answer>,
 }

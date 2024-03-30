@@ -2,7 +2,6 @@ use std::io::{Read, Write};
 
 use crate::DateTime;
 
-#[derive(Debug, Clone, Copy, PartialEq, PartialOrd, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/login_logout/smsg_login_settimespeed.wowm:28`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/login_logout/smsg_login_settimespeed.wowm#L28):
 /// ```text
 /// smsg SMSG_LOGIN_SETTIMESPEED = 0x0042 {
@@ -11,6 +10,7 @@ use crate::DateTime;
 ///     u32 unknown1;
 /// }
 /// ```
+#[derive(Debug, Clone, Copy, PartialEq, PartialOrd, Default)]
 pub struct SMSG_LOGIN_SETTIMESPEED {
     /// Current server datetime.
     /// Running the client with `-console` verifies that this message in this format sets the correct datetime. [`SMSG_QUERY_TIME_RESPONSE`](crate::tbc::SMSG_QUERY_TIME_RESPONSE) will not set this.

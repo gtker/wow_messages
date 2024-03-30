@@ -5,7 +5,6 @@ use crate::vanilla::{
     MonsterMoveType, SplineFlag, Vector3d,
 };
 
-#[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/movement/smsg/smsg_compressed_moves.wowm:12`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/movement/smsg/smsg_compressed_moves.wowm#L12):
 /// ```text
 /// struct MonsterMove {
@@ -28,6 +27,7 @@ use crate::vanilla::{
 ///     }
 /// }
 /// ```
+#[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
 pub struct MonsterMove {
     pub spline_point: Vector3d,
     pub spline_id: u32,

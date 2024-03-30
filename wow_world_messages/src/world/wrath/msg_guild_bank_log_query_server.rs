@@ -3,7 +3,6 @@ use std::io::{Read, Write};
 use crate::Guid;
 use crate::wrath::MoneyLogItem;
 
-#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/queries/msg_guild_bank_log_query.wowm:31`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/queries/msg_guild_bank_log_query.wowm#L31):
 /// ```text
 /// smsg MSG_GUILD_BANK_LOG_QUERY_Server = 0x03EE {
@@ -13,6 +12,7 @@ use crate::wrath::MoneyLogItem;
 ///     MoneyLogItem[amount_of_money_logs] money_logs;
 /// }
 /// ```
+#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct MSG_GUILD_BANK_LOG_QUERY_Server {
     pub unix_time: u32,
     pub slot: u8,

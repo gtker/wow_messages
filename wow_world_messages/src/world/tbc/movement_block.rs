@@ -5,7 +5,6 @@ use crate::tbc::{
     MovementFlags, SplineFlag, TransportInfo, UpdateFlag, Vector3d,
 };
 
-#[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/gameobject/smsg_update_object_2_4_3.wowm:14`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/gameobject/smsg_update_object_2_4_3.wowm#L14):
 /// ```text
 /// struct MovementBlock {
@@ -81,6 +80,7 @@ use crate::tbc::{
 ///     }
 /// }
 /// ```
+#[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
 pub struct MovementBlock {
     pub update_flag: MovementBlock_UpdateFlag,
 }

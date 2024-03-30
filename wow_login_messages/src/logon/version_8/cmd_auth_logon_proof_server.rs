@@ -6,7 +6,6 @@ use crate::logon::version_8::{
     AccountFlag, LoginResult,
 };
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/login/cmd_auth_logon/proof_server.wowm:61`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/login/cmd_auth_logon/proof_server.wowm#L61):
 /// ```text
 /// slogin CMD_AUTH_LOGON_PROOF_Server = 0x01 {
@@ -22,6 +21,7 @@ use crate::logon::version_8::{
 ///     }
 /// }
 /// ```
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct CMD_AUTH_LOGON_PROOF_Server {
     pub result: CMD_AUTH_LOGON_PROOF_Server_LoginResult,
 }

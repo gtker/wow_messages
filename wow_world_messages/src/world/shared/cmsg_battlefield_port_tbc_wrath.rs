@@ -2,7 +2,6 @@ use std::io::{Read, Write};
 
 use wow_world_base::shared::battlefield_port_action_vanilla_tbc_wrath::BattlefieldPortAction;
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/battleground/cmsg_battlefield_port.wowm:21`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/battleground/cmsg_battlefield_port.wowm#L21):
 /// ```text
 /// cmsg CMSG_BATTLEFIELD_PORT = 0x02D5 {
@@ -13,6 +12,7 @@ use wow_world_base::shared::battlefield_port_action_vanilla_tbc_wrath::Battlefie
 ///     BattlefieldPortAction action;
 /// }
 /// ```
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct CMSG_BATTLEFIELD_PORT {
     /// mangosone/mangos-tbc/azerothcore: arenatype if arena
     pub arena_type: u8,

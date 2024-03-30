@@ -2,7 +2,6 @@ use std::io::{Read, Write};
 
 use crate::wrath::Talent;
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/spell/cmsg_learn_talent.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/spell/cmsg_learn_talent.wowm#L1):
 /// ```text
 /// cmsg CMSG_LEARN_TALENT = 0x0251 {
@@ -10,6 +9,7 @@ use crate::wrath::Talent;
 ///     u32 requested_rank;
 /// }
 /// ```
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct CMSG_LEARN_TALENT {
     pub talent: Talent,
     pub requested_rank: u32,

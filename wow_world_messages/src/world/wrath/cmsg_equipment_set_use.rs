@@ -3,13 +3,13 @@ use std::io::{Read, Write};
 use crate::Guid;
 use crate::wrath::EquipmentSet;
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/item/cmsg_equipment_set_use.wowm:9`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/item/cmsg_equipment_set_use.wowm#L9):
 /// ```text
 /// cmsg CMSG_EQUIPMENT_SET_USE = 0x04D5 {
 ///     EquipmentSet[19] sets;
 /// }
 /// ```
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct CMSG_EQUIPMENT_SET_USE {
     pub sets: [EquipmentSet; 19],
 }

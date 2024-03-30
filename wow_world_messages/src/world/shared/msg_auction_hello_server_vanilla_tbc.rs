@@ -3,7 +3,6 @@ use std::io::{Read, Write};
 use crate::Guid;
 use wow_world_base::shared::auction_house_vanilla_tbc_wrath::AuctionHouse;
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/auction/msg/msg_auction_hello_server.wowm:8`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/auction/msg/msg_auction_hello_server.wowm#L8):
 /// ```text
 /// smsg MSG_AUCTION_HELLO_Server = 0x0255 {
@@ -11,6 +10,7 @@ use wow_world_base::shared::auction_house_vanilla_tbc_wrath::AuctionHouse;
 ///     AuctionHouse auction_house;
 /// }
 /// ```
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct MSG_AUCTION_HELLO_Server {
     pub auctioneer: Guid,
     pub auction_house: AuctionHouse,

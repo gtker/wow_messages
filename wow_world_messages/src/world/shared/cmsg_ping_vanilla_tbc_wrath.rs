@@ -1,6 +1,5 @@
 use std::io::{Read, Write};
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/ping_pong/cmsg_ping.wowm:7`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/ping_pong/cmsg_ping.wowm#L7):
 /// ```text
 /// cmsg CMSG_PING = 0x01DC {
@@ -8,6 +7,7 @@ use std::io::{Read, Write};
 ///     u32 round_time_in_ms;
 /// }
 /// ```
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct CMSG_PING {
     pub sequence_id: u32,
     pub round_time_in_ms: u32,

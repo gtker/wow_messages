@@ -4,7 +4,6 @@ use crate::wrath::{
     InstanceResetFailedReason, Map,
 };
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/raid/smsg_instance_reset_failed.wowm:13`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/raid/smsg_instance_reset_failed.wowm#L13):
 /// ```text
 /// smsg SMSG_INSTANCE_RESET_FAILED = 0x031F {
@@ -12,6 +11,7 @@ use crate::wrath::{
 ///     Map map;
 /// }
 /// ```
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct SMSG_INSTANCE_RESET_FAILED {
     pub reason: InstanceResetFailedReason,
     pub map: Map,

@@ -3,7 +3,6 @@ use std::io::{Read, Write};
 use crate::Guid;
 use crate::shared::gold_vanilla_tbc_wrath::Gold;
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/guild_bank/cmsg_guild_bank_withdraw_money.wowm:8`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/guild_bank/cmsg_guild_bank_withdraw_money.wowm#L8):
 /// ```text
 /// cmsg CMSG_GUILD_BANK_WITHDRAW_MONEY = 0x03ED {
@@ -11,6 +10,7 @@ use crate::shared::gold_vanilla_tbc_wrath::Gold;
 ///     Gold money;
 /// }
 /// ```
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct CMSG_GUILD_BANK_WITHDRAW_MONEY {
     pub bank: Guid,
     pub money: Gold,

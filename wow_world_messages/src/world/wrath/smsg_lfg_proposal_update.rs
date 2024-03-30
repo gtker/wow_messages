@@ -2,7 +2,6 @@ use std::io::{Read, Write};
 
 use crate::wrath::LfgProposal;
 
-#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/lfg/smsg_lfg_proposal_update.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/lfg/smsg_lfg_proposal_update.wowm#L1):
 /// ```text
 /// smsg SMSG_LFG_PROPOSAL_UPDATE = 0x0361 {
@@ -15,6 +14,7 @@ use crate::wrath::LfgProposal;
 ///     LfgProposal[amount_of_proposals] proposals;
 /// }
 /// ```
+#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct SMSG_LFG_PROPOSAL_UPDATE {
     pub dungeon_id: u32,
     pub proposal_state: u8,

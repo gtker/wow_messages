@@ -2,7 +2,6 @@ use std::io::{Read, Write};
 
 use crate::Guid;
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/guild/msg_save_guild_emblem_client.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/guild/msg_save_guild_emblem_client.wowm#L3):
 /// ```text
 /// cmsg MSG_SAVE_GUILD_EMBLEM_Client = 0x01F1 {
@@ -14,6 +13,7 @@ use crate::Guid;
 ///     u32 background_color;
 /// }
 /// ```
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct MSG_SAVE_GUILD_EMBLEM_Client {
     pub vendor: Guid,
     pub emblem_style: u32,

@@ -4,7 +4,6 @@ use std::io::{Read, Write};
 
 use crate::logon::version_5::Realm;
 
-#[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/login/cmd_realm/server.wowm:151`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/login/cmd_realm/server.wowm#L151):
 /// ```text
 /// slogin CMD_REALM_LIST_Server = 0x10 {
@@ -15,6 +14,7 @@ use crate::logon::version_5::Realm;
 ///     u16 footer_padding = 0;
 /// }
 /// ```
+#[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
 pub struct CMD_REALM_LIST_Server {
     pub realms: Vec<Realm>,
 }

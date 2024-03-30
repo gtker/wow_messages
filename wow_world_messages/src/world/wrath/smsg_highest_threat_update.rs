@@ -3,7 +3,6 @@ use std::io::{Read, Write};
 use crate::Guid;
 use crate::wrath::ThreatUpdateUnit;
 
-#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/threat/smsg_highest_threat_update.wowm:8`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/threat/smsg_highest_threat_update.wowm#L8):
 /// ```text
 /// smsg SMSG_HIGHEST_THREAT_UPDATE = 0x0482 {
@@ -13,6 +12,7 @@ use crate::wrath::ThreatUpdateUnit;
 ///     ThreatUpdateUnit[amount_of_units] units;
 /// }
 /// ```
+#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct SMSG_HIGHEST_THREAT_UPDATE {
     pub unit: Guid,
     pub new_victim: Guid,

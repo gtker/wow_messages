@@ -4,13 +4,13 @@ use crate::tbc::{
     LfgData, LfgType,
 };
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/lfg/cmsg_set_looking_for_more.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/lfg/cmsg_set_looking_for_more.wowm#L1):
 /// ```text
 /// cmsg CMSG_SET_LOOKING_FOR_MORE = 0x0365 {
 ///     LfgData data;
 /// }
 /// ```
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct CMSG_SET_LOOKING_FOR_MORE {
     pub data: LfgData,
 }

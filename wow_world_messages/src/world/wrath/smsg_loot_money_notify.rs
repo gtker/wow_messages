@@ -1,6 +1,5 @@
 use std::io::{Read, Write};
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/loot/smsg_loot_money_notify.wowm:7`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/loot/smsg_loot_money_notify.wowm#L7):
 /// ```text
 /// smsg SMSG_LOOT_MONEY_NOTIFY = 0x0163 {
@@ -8,6 +7,7 @@ use std::io::{Read, Write};
 ///     Bool alone;
 /// }
 /// ```
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct SMSG_LOOT_MONEY_NOTIFY {
     pub amount: u32,
     /// Controls the text displayed in chat. False is 'Your share is...' and true is 'You loot...'

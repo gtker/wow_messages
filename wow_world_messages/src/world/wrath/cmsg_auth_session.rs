@@ -1,7 +1,6 @@
 use crate::Message;
 use std::io::{Read, Write};
 
-#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Sent after receiving [`SMSG_AUTH_CHALLENGE`](crate::wrath::SMSG_AUTH_CHALLENGE).
 /// This message is never encrypted.
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/character_screen/cmsg_auth_session.wowm:144`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/character_screen/cmsg_auth_session.wowm#L144):
@@ -20,6 +19,7 @@ use std::io::{Read, Write};
 ///     u8[-] addon_info;
 /// }
 /// ```
+#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct CMSG_AUTH_SESSION {
     pub client_build: u32,
     pub login_server_id: u32,

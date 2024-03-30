@@ -2,7 +2,6 @@ use std::io::{Read, Write};
 
 use crate::wrath::CreatureFamily;
 
-#[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/queries/smsg_creature_query_response.wowm:61`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/queries/smsg_creature_query_response.wowm#L61):
 /// ```text
 /// smsg SMSG_CREATURE_QUERY_RESPONSE = 0x0061 {
@@ -29,6 +28,7 @@ use crate::wrath::CreatureFamily;
 ///     }
 /// }
 /// ```
+#[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
 pub struct SMSG_CREATURE_QUERY_RESPONSE {
     /// When the `found` optional is not present all emulators bitwise OR the entry with `0x80000000`.``
     pub creature_entry: u32,

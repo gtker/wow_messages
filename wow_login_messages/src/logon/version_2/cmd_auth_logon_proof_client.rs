@@ -4,7 +4,6 @@ use std::io::{Read, Write};
 
 use crate::logon::version_2::TelemetryKey;
 
-#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Reply after successful [`CMD_AUTH_LOGON_CHALLENGE_Server`](crate::logon::version_2::CMD_AUTH_LOGON_CHALLENGE_Server).
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/login/cmd_auth_logon/proof_client.wowm:13`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/login/cmd_auth_logon/proof_client.wowm#L13):
 /// ```text
@@ -16,6 +15,7 @@ use crate::logon::version_2::TelemetryKey;
 ///     TelemetryKey[number_of_telemetry_keys] telemetry_keys;
 /// }
 /// ```
+#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct CMD_AUTH_LOGON_PROOF_Client {
     pub client_public_key: [u8; 32],
     pub client_proof: [u8; 20],
