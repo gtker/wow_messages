@@ -126,14 +126,20 @@ pub(crate) fn print_if_statement_enum(
     prefix: &str,
     print_function: impl Fn(&mut Writer, &Container, &StructMember, &str, &str),
 ) {
-    s.open_curly(format!(
-        "match &{prefix}{name}",
-        name = statement.variable_name(),
-        prefix = match e.type_definition_in_same_scope(statement.variable_name()) {
-            false => "self.",
-            true => variable_prefix,
-        },
-    ));
+    let variable = if e.single_rust_definer().is_some() {
+        "self".to_string()
+    } else {
+        format!(
+            "{prefix}{name}",
+            name = statement.variable_name(),
+            prefix = match e.type_definition_in_same_scope(statement.variable_name()) {
+                false => "self.",
+                true => variable_prefix,
+            },
+        )
+    };
+
+    s.open_curly(format!("match &{variable}",));
 
     let enumerator_name = match statement.equation() {
         Equation::Equals { values: value } => &value[0],
@@ -149,6 +155,12 @@ pub(crate) fn print_if_statement_enum(
 
     let mut unused_enumerators = false;
 
+    let new_enum = if e.single_rust_definer().is_some() {
+        e.name()
+    } else {
+        rd.ty_name()
+    };
+
     for enumerator in rd.enumerators() {
         if !enumerator.has_members() {
             unused_enumerators = true;
@@ -160,7 +172,6 @@ pub(crate) fn print_if_statement_enum(
 
         s.open_curly(format!(
             "{import_path}::{new_enum}::{variant}",
-            new_enum = rd.ty_name(),
             variant = enumerator.rust_name(),
         ));
         for m in enumerator.members_in_struct() {
@@ -262,13 +273,13 @@ fn print_member_definition(
                 format!("u32::from_be_bytes({var_name}.octets())"),
             );
         }
-        Type::Enum { e, upcast } => {
-            let ty = e.name();
+        Type::Enum { e: definer, upcast } => {
+            let ty = definer.name();
             let extra = if !d.used_in_if() {
                 format!("{var_name}.as_test_case_value()")
             } else {
                 let extra = if upcast.is_some() {
-                    format!("as {}", e.ty().rust_str())
+                    format!("as {}", definer.ty().rust_str())
                 } else {
                     "".to_string()
                 };

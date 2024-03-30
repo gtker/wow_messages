@@ -435,7 +435,7 @@ impl Message for CMD_AUTH_LOGON_PROOF_Server {
 impl ServerMessage for CMD_AUTH_LOGON_PROOF_Server {}
 impl CMD_AUTH_LOGON_PROOF_Server {
     pub(crate) const fn size(&self) -> usize {
-        match self {
+        (match self {
             Self::Success {
                 ..
             } => {
@@ -509,8 +509,7 @@ impl CMD_AUTH_LOGON_PROOF_Server {
                 1
                 + 2 // padding: u16
             }
-        }
- // result: CMD_AUTH_LOGON_PROOF_Server_LoginResult
+        }) // result: CMD_AUTH_LOGON_PROOF_Server_LoginResult
     }
 }
 

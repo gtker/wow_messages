@@ -282,7 +282,7 @@ impl Message for CMD_AUTH_LOGON_PROOF_Server {
 impl ServerMessage for CMD_AUTH_LOGON_PROOF_Server {}
 impl CMD_AUTH_LOGON_PROOF_Server {
     pub(crate) const fn size(&self) -> usize {
-        match self {
+        (match self {
             Self::Success {
                 ..
             } => {
@@ -291,8 +291,7 @@ impl CMD_AUTH_LOGON_PROOF_Server {
                 + 20 // server_proof: u8[20]
             }
             _ => 1,
-        }
- // result: CMD_AUTH_LOGON_PROOF_Server_LoginResult
+        }) // result: CMD_AUTH_LOGON_PROOF_Server_LoginResult
     }
 }
 

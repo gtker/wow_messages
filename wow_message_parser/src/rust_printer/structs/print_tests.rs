@@ -479,14 +479,20 @@ fn print_value(
             s.inc_indent();
 
             for multiple in members {
-                s.wln(format!("{} {{", c.name()));
-                s.inc_indent();
+                if c.single_rust_definer().is_none() {
+                    s.wln(format!("{} {{", c.name()));
+                    s.inc_indent();
+                }
 
                 for m in c.rust_object().members_in_struct() {
                     print_value(s, m, multiple, c, version);
                 }
 
-                s.closing_curly_with(",");
+                if c.single_rust_definer().is_none() {
+                    s.closing_curly_with(",");
+                } else {
+                    s.w_no_indent(",");
+                }
             }
 
             s.dec_indent();

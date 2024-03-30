@@ -77,7 +77,10 @@ pub(crate) fn print_size_of_ty_rust_view(s: &mut Writer, m: &RustMember, prefix:
                 let mut t = Writer::at_indentation(s.indentation_level());
                 print_size_for_new_enum_inner(&mut t, &rd);
                 t.set_indentation_level(s.indentation_level());
-                t.into_inner().trim_start().to_string()
+                let mut t = t.into_inner().trim_start().trim_end().to_string();
+                t.insert_str(0, "(");
+                t += ")";
+                t
             } else if !is_simple {
                 format!("{prefix}{name}.size()")
             } else {

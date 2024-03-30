@@ -300,7 +300,7 @@ impl Message for CMD_AUTH_RECONNECT_CHALLENGE_Server {
 impl ServerMessage for CMD_AUTH_RECONNECT_CHALLENGE_Server {}
 impl CMD_AUTH_RECONNECT_CHALLENGE_Server {
     pub(crate) const fn size(&self) -> usize {
-        match self {
+        (match self {
             Self::Success {
                 ..
             } => {
@@ -309,8 +309,7 @@ impl CMD_AUTH_RECONNECT_CHALLENGE_Server {
                 + 16 // checksum_salt: u8[16]
             }
             _ => 1,
-        }
- // result: CMD_AUTH_RECONNECT_CHALLENGE_Server_LoginResult
+        }) // result: CMD_AUTH_RECONNECT_CHALLENGE_Server_LoginResult
     }
 }
 
