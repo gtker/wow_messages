@@ -375,7 +375,7 @@ impl LfgListGroup_LfgUpdateFlag {
         }
         + {
             if let Some(s) = &self.roles {
-                s.size()
+                3
             } else {
                 0
             }
@@ -397,11 +397,5 @@ impl LfgListGroup_LfgUpdateFlag_Comment {
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct LfgListGroup_LfgUpdateFlag_Roles {
     pub roles: [u8; 3],
-}
-
-impl LfgListGroup_LfgUpdateFlag_Roles {
-    pub(crate) const fn size(&self) -> usize {
-        3 // roles: u8[3]
-    }
 }
 

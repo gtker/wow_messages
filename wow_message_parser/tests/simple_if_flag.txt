@@ -148,7 +148,7 @@ impl SimpleIfFlag_SimpleFlag {
         1 // inner
         + {
             if let Some(s) = &self.zero {
-                s.size()
+                1
             } else {
                 0
             }
@@ -159,11 +159,5 @@ impl SimpleIfFlag_SimpleFlag {
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct SimpleIfFlag_SimpleFlag_Zero {
     pub basic: u8,
-}
-
-impl SimpleIfFlag_SimpleFlag_Zero {
-    pub(crate) const fn size(&self) -> usize {
-        1 // basic: u8
-    }
 }
 

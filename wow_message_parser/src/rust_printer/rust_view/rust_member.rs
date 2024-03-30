@@ -30,6 +30,9 @@ impl RustMember {
         v.push(self);
         v
     }
+    pub(crate) fn is_constant(&self) -> Option<i128> {
+        self.ty().is_constant()
+    }
 
     pub(crate) fn is_single_rust_definer(&self) -> bool {
         matches!(

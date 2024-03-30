@@ -306,7 +306,11 @@ fn print_size_for_new_flag(s: &mut Writer, rd: &RustDefiner) {
                         name = enumerator.name().to_lowercase()
                     ),
                     |s| {
-                        s.wln("s.size()");
+                        if let Some(size) = enumerator.is_constant() {
+                            s.wln(size.to_string());
+                        } else {
+                            s.wln("s.size()");
+                        }
                     },
                     |s| {
                         s.wln("0");
@@ -335,13 +339,15 @@ fn print_types_for_new_flag(s: &mut Writer, rd: &RustDefiner) {
             }
         });
 
-        let const_fn = enumerator
-            .members_in_struct()
-            .iter()
-            .all(|a| a.ty().size_is_const_fn());
-        variable_size(s, &new_type_name, "size", const_fn, |s| {
-            print_rust_members_sizes(s, enumerator.members(), None, "self.");
-        });
+        if enumerator.is_constant().is_none() {
+            let const_fn = enumerator
+                .members_in_struct()
+                .iter()
+                .all(|a| a.ty().size_is_const_fn());
+            variable_size(s, &new_type_name, "size", const_fn, |s| {
+                print_rust_members_sizes(s, enumerator.members(), None, "self.");
+            });
+        }
     }
 }
 

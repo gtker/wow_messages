@@ -405,7 +405,7 @@ impl AuraUpdate_AuraFlag {
         }
         + {
             if let Some(s) = &self.duration {
-                s.size()
+                8
             } else {
                 0
             }
@@ -428,12 +428,5 @@ impl AuraUpdate_AuraFlag_NotCaster {
 pub struct AuraUpdate_AuraFlag_Duration {
     pub duration: u32,
     pub time_left: u32,
-}
-
-impl AuraUpdate_AuraFlag_Duration {
-    pub(crate) const fn size(&self) -> usize {
-        4 // duration: u32
-        + 4 // time_left: u32
-    }
 }
 

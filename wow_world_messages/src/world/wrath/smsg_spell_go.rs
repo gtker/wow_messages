@@ -1265,42 +1265,42 @@ impl SMSG_SPELL_GO_GameobjectCastFlags {
         4 // inner
         + {
             if let Some(s) = &self.ammo {
-                s.size()
+                8
             } else {
                 0
             }
         }
         + {
             if let Some(s) = &self.dest_location {
-                s.size()
+                1
             } else {
                 0
             }
         }
         + {
             if let Some(s) = &self.power_update {
-                s.size()
+                4
             } else {
                 0
             }
         }
         + {
             if let Some(s) = &self.adjust_missile {
-                s.size()
+                8
             } else {
                 0
             }
         }
         + {
             if let Some(s) = &self.visual_chain {
-                s.size()
+                8
             } else {
                 0
             }
         }
         + {
             if let Some(s) = &self.rune_update {
-                s.size()
+                8
             } else {
                 0
             }
@@ -1314,33 +1314,14 @@ pub struct SMSG_SPELL_GO_GameobjectCastFlags_Ammo {
     pub ammo_inventory_type: u32,
 }
 
-impl SMSG_SPELL_GO_GameobjectCastFlags_Ammo {
-    pub(crate) const fn size(&self) -> usize {
-        4 // ammo_display_id: u32
-        + 4 // ammo_inventory_type: u32
-    }
-}
-
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct SMSG_SPELL_GO_GameobjectCastFlags_DestLocation {
     pub unknown3: u8,
 }
 
-impl SMSG_SPELL_GO_GameobjectCastFlags_DestLocation {
-    pub(crate) const fn size(&self) -> usize {
-        1 // unknown3: u8
-    }
-}
-
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct SMSG_SPELL_GO_GameobjectCastFlags_PowerUpdate {
     pub power: Power,
-}
-
-impl SMSG_SPELL_GO_GameobjectCastFlags_PowerUpdate {
-    pub(crate) const fn size(&self) -> usize {
-        4 // power: Power
-    }
 }
 
 #[derive(Debug, Clone, Copy, PartialEq, PartialOrd, Default)]
@@ -1349,24 +1330,10 @@ pub struct SMSG_SPELL_GO_GameobjectCastFlags_AdjustMissile {
     pub elevation: f32,
 }
 
-impl SMSG_SPELL_GO_GameobjectCastFlags_AdjustMissile {
-    pub(crate) const fn size(&self) -> usize {
-        4 // delay_trajectory: u32
-        + 4 // elevation: f32
-    }
-}
-
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct SMSG_SPELL_GO_GameobjectCastFlags_VisualChain {
     pub unknown1: u32,
     pub unknown2: u32,
-}
-
-impl SMSG_SPELL_GO_GameobjectCastFlags_VisualChain {
-    pub(crate) const fn size(&self) -> usize {
-        4 // unknown1: u32
-        + 4 // unknown2: u32
-    }
 }
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
@@ -1374,13 +1341,5 @@ pub struct SMSG_SPELL_GO_GameobjectCastFlags_RuneUpdate {
     pub rune_cooldowns: [u8; 6],
     pub rune_mask_after_cast: u8,
     pub rune_mask_initial: u8,
-}
-
-impl SMSG_SPELL_GO_GameobjectCastFlags_RuneUpdate {
-    pub(crate) const fn size(&self) -> usize {
-        6 // rune_cooldowns: u8[6]
-        + 1 // rune_mask_after_cast: u8
-        + 1 // rune_mask_initial: u8
-    }
 }
 

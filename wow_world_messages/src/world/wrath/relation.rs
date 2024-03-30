@@ -335,7 +335,7 @@ impl Relation_RelationType {
         4 // inner
         + {
             if let Some(s) = &self.friend {
-                s.size()
+                13
             } else {
                 0
             }
@@ -346,11 +346,5 @@ impl Relation_RelationType {
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct Relation_RelationType_Friend {
     pub status: Relation_FriendStatus,
-}
-
-impl Relation_RelationType_Friend {
-    pub(crate) const fn size(&self) -> usize {
-        self.status.size() // status: Relation_FriendStatus
-    }
 }
 

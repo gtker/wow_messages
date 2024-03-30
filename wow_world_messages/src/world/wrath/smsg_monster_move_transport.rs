@@ -1309,14 +1309,14 @@ impl SMSG_MONSTER_MOVE_TRANSPORT_SplineFlag {
         4 // inner
         + {
             if let Some(s) = &self.parabolic {
-                s.size()
+                8
             } else {
                 0
             }
         }
         + {
             if let Some(s) = &self.enter_cycle {
-                s.size()
+                8
             } else {
                 0
             }
@@ -1330,23 +1330,9 @@ pub struct SMSG_MONSTER_MOVE_TRANSPORT_SplineFlag_Parabolic {
     pub vertical_acceleration: f32,
 }
 
-impl SMSG_MONSTER_MOVE_TRANSPORT_SplineFlag_Parabolic {
-    pub(crate) const fn size(&self) -> usize {
-        4 // effect_start_time: u32
-        + 4 // vertical_acceleration: f32
-    }
-}
-
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct SMSG_MONSTER_MOVE_TRANSPORT_SplineFlag_EnterCycle {
     pub animation_id: u32,
     pub animation_start_time: u32,
-}
-
-impl SMSG_MONSTER_MOVE_TRANSPORT_SplineFlag_EnterCycle {
-    pub(crate) const fn size(&self) -> usize {
-        4 // animation_id: u32
-        + 4 // animation_start_time: u32
-    }
 }
 

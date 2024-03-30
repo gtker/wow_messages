@@ -745,7 +745,7 @@ impl LfgListPlayer_LfgUpdateFlag {
         4 // inner
         + {
             if let Some(s) = &self.character_info {
-                s.size()
+                86
             } else {
                 0
             }
@@ -759,35 +759,35 @@ impl LfgListPlayer_LfgUpdateFlag {
         }
         + {
             if let Some(s) = &self.group_leader {
-                s.size()
+                1
             } else {
                 0
             }
         }
         + {
             if let Some(s) = &self.group_guid {
-                s.size()
+                8
             } else {
                 0
             }
         }
         + {
             if let Some(s) = &self.roles {
-                s.size()
+                1
             } else {
                 0
             }
         }
         + {
             if let Some(s) = &self.area {
-                s.size()
+                4
             } else {
                 0
             }
         }
         + {
             if let Some(s) = &self.status {
-                s.size()
+                1
             } else {
                 0
             }
@@ -825,37 +825,6 @@ pub struct LfgListPlayer_LfgUpdateFlag_CharacterInfo {
     pub talents2: u8,
 }
 
-impl LfgListPlayer_LfgUpdateFlag_CharacterInfo {
-    pub(crate) const fn size(&self) -> usize {
-        4 // agility: u32
-        + 4 // armor: u32
-        + 4 // attack_power: u32
-        + 4 // average_item_level: u32
-        + 4 // block_rating: u32
-        + 1 // class: Class
-        + 4 // crit_rating_melee: u32
-        + 4 // crit_rating_ranged: u32
-        + 4 // crit_rating_spell: u32
-        + 4 // defense_skill: u32
-        + 4 // dodge_rating: u32
-        + 4 // expertise_rating: u32
-        + 4 // haste_rating: u32
-        + 4 // health: u32
-        + 1 // level: Level
-        + 4 // mana: u32
-        + 4 // mana_per_5_seconds: f32
-        + 4 // mana_per_5_seconds_combat: f32
-        + 4 // online: Bool32
-        + 4 // parry_rating: u32
-        + 1 // race: Race
-        + 4 // spell_damage: u32
-        + 4 // spell_heal: u32
-        + 1 // talents0: u8
-        + 1 // talents1: u8
-        + 1 // talents2: u8
-    }
-}
-
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct LfgListPlayer_LfgUpdateFlag_Comment {
     pub comment: String,
@@ -872,21 +841,9 @@ pub struct LfgListPlayer_LfgUpdateFlag_GroupLeader {
     pub is_looking_for_more: bool,
 }
 
-impl LfgListPlayer_LfgUpdateFlag_GroupLeader {
-    pub(crate) const fn size(&self) -> usize {
-        1 // is_looking_for_more: Bool
-    }
-}
-
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct LfgListPlayer_LfgUpdateFlag_GroupGuid {
     pub group: Guid,
-}
-
-impl LfgListPlayer_LfgUpdateFlag_GroupGuid {
-    pub(crate) const fn size(&self) -> usize {
-        8 // group: Guid
-    }
 }
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
@@ -894,31 +851,13 @@ pub struct LfgListPlayer_LfgUpdateFlag_Roles {
     pub roles: u8,
 }
 
-impl LfgListPlayer_LfgUpdateFlag_Roles {
-    pub(crate) const fn size(&self) -> usize {
-        1 // roles: u8
-    }
-}
-
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct LfgListPlayer_LfgUpdateFlag_Area {
     pub area: Area,
 }
 
-impl LfgListPlayer_LfgUpdateFlag_Area {
-    pub(crate) const fn size(&self) -> usize {
-        4 // area: Area
-    }
-}
-
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct LfgListPlayer_LfgUpdateFlag_Status {
     pub unknown1: u8,
-}
-
-impl LfgListPlayer_LfgUpdateFlag_Status {
-    pub(crate) const fn size(&self) -> usize {
-        1 // unknown1: u8
-    }
 }
 

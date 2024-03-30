@@ -961,14 +961,14 @@ impl SpellCastTargets_SpellCastTargetFlags {
         }
         + {
             if let Some(s) = &self.source_location {
-                s.size()
+                12
             } else {
                 0
             }
         }
         + {
             if let Some(s) = &self.dest_location {
-                s.size()
+                12
             } else {
                 0
             }
@@ -1002,21 +1002,9 @@ pub struct SpellCastTargets_SpellCastTargetFlags_SourceLocation {
     pub source: Vector3d,
 }
 
-impl SpellCastTargets_SpellCastTargetFlags_SourceLocation {
-    pub(crate) const fn size(&self) -> usize {
-        12 // source: Vector3d
-    }
-}
-
 #[derive(Debug, Clone, Copy, PartialEq, PartialOrd, Default)]
 pub struct SpellCastTargets_SpellCastTargetFlags_DestLocation {
     pub destination: Vector3d,
-}
-
-impl SpellCastTargets_SpellCastTargetFlags_DestLocation {
-    pub(crate) const fn size(&self) -> usize {
-        12 // destination: Vector3d
-    }
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]

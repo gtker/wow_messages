@@ -71,6 +71,37 @@ pub(crate) enum RustType {
 }
 
 impl RustType {
+    pub(crate) fn is_constant(&self) -> Option<i128> {
+        match self {
+            RustType::Enum {
+                int_ty,
+                enumerators,
+                ..
+            }
+            | RustType::Flag {
+                int_ty,
+                enumerators,
+                ..
+            } => {
+                let mut size = 0;
+
+                for enumerator in enumerators {
+                    if let Some(i) = enumerator.is_constant() {
+                        if i > size {
+                            size = i;
+                        }
+                    } else {
+                        return None;
+                    }
+                }
+
+                Some(size + int_ty.sizes().is_constant().unwrap())
+            }
+            RustType::Struct { sizes, .. } => sizes.is_constant(),
+            _ => self.to_type().sizes().is_constant(),
+        }
+    }
+
     pub(crate) fn str(&self) -> String {
         match self {
             RustType::Array { array, .. } => array.str(),
@@ -119,11 +150,9 @@ impl RustType {
             RustType::IpAddress => Type::IpAddress,
             RustType::Seconds => Type::Seconds,
             RustType::Milliseconds => Type::Milliseconds,
+            RustType::Array { array, .. } => Type::Array(array.clone()),
 
-            RustType::Array { .. }
-            | RustType::Enum { .. }
-            | RustType::Flag { .. }
-            | RustType::Struct { .. } => {
+            RustType::Enum { .. } | RustType::Flag { .. } | RustType::Struct { .. } => {
                 panic!("invalid conversion")
             }
             RustType::Population => Type::Population,

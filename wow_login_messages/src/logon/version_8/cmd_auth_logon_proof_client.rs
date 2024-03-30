@@ -652,14 +652,14 @@ impl CMD_AUTH_LOGON_PROOF_Client_SecurityFlag {
         1 // inner
         + {
             if let Some(s) = &self.pin {
-                s.size()
+                36
             } else {
                 0
             }
         }
         + {
             if let Some(s) = &self.matrix_card {
-                s.size()
+                20
             } else {
                 0
             }
@@ -680,22 +680,9 @@ pub struct CMD_AUTH_LOGON_PROOF_Client_SecurityFlag_Pin {
     pub pin_salt: [u8; 16],
 }
 
-impl CMD_AUTH_LOGON_PROOF_Client_SecurityFlag_Pin {
-    pub(crate) const fn size(&self) -> usize {
-        20 // pin_hash: u8[20]
-        + 16 // pin_salt: u8[16]
-    }
-}
-
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct CMD_AUTH_LOGON_PROOF_Client_SecurityFlag_MatrixCard {
     pub matrix_card_proof: [u8; 20],
-}
-
-impl CMD_AUTH_LOGON_PROOF_Client_SecurityFlag_MatrixCard {
-    pub(crate) const fn size(&self) -> usize {
-        20 // matrix_card_proof: u8[20]
-    }
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]

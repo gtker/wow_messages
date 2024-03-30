@@ -472,7 +472,7 @@ impl Realm_RealmFlag {
         1 // inner
         + {
             if let Some(s) = &self.specify_build {
-                s.size()
+                5
             } else {
                 0
             }
@@ -483,11 +483,5 @@ impl Realm_RealmFlag {
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct Realm_RealmFlag_SpecifyBuild {
     pub version: Version,
-}
-
-impl Realm_RealmFlag_SpecifyBuild {
-    pub(crate) const fn size(&self) -> usize {
-        5 // version: Version
-    }
 }
 

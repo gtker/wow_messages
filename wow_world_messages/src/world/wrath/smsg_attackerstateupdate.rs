@@ -1288,35 +1288,35 @@ impl SMSG_ATTACKERSTATEUPDATE_HitInfo {
         4 // inner
         + {
             if let Some(s) = &self.unk1 {
-                s.size()
+                48
             } else {
                 0
             }
         }
         + {
             if let Some(s) = &self.all_absorb {
-                s.size()
+                4
             } else {
                 0
             }
         }
         + {
             if let Some(s) = &self.all_resist {
-                s.size()
+                4
             } else {
                 0
             }
         }
         + {
             if let Some(s) = &self.block {
-                s.size()
+                4
             } else {
                 0
             }
         }
         + {
             if let Some(s) = &self.unk19 {
-                s.size()
+                4
             } else {
                 0
             }
@@ -1340,32 +1340,9 @@ pub struct SMSG_ATTACKERSTATEUPDATE_HitInfo_Unk1 {
     pub unknown9: f32,
 }
 
-impl SMSG_ATTACKERSTATEUPDATE_HitInfo_Unk1 {
-    pub(crate) const fn size(&self) -> usize {
-        4 // unknown10: f32
-        + 4 // unknown11: f32
-        + 4 // unknown12: f32
-        + 4 // unknown13: f32
-        + 4 // unknown14: f32
-        + 4 // unknown15: u32
-        + 4 // unknown4: u32
-        + 4 // unknown5: f32
-        + 4 // unknown6: f32
-        + 4 // unknown7: f32
-        + 4 // unknown8: f32
-        + 4 // unknown9: f32
-    }
-}
-
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct SMSG_ATTACKERSTATEUPDATE_HitInfo_AllAbsorb {
     pub absorb: u32,
-}
-
-impl SMSG_ATTACKERSTATEUPDATE_HitInfo_AllAbsorb {
-    pub(crate) const fn size(&self) -> usize {
-        4 // absorb: u32
-    }
 }
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
@@ -1373,31 +1350,13 @@ pub struct SMSG_ATTACKERSTATEUPDATE_HitInfo_AllResist {
     pub resist: u32,
 }
 
-impl SMSG_ATTACKERSTATEUPDATE_HitInfo_AllResist {
-    pub(crate) const fn size(&self) -> usize {
-        4 // resist: u32
-    }
-}
-
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct SMSG_ATTACKERSTATEUPDATE_HitInfo_Block {
     pub blocked_amount: u32,
 }
 
-impl SMSG_ATTACKERSTATEUPDATE_HitInfo_Block {
-    pub(crate) const fn size(&self) -> usize {
-        4 // blocked_amount: u32
-    }
-}
-
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct SMSG_ATTACKERSTATEUPDATE_HitInfo_Unk19 {
     pub unknown3: u32,
-}
-
-impl SMSG_ATTACKERSTATEUPDATE_HitInfo_Unk19 {
-    pub(crate) const fn size(&self) -> usize {
-        4 // unknown3: u32
-    }
 }
 

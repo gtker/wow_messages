@@ -1615,21 +1615,21 @@ impl MovementInfo_MovementFlags {
         6 // inner
         + {
             if let Some(s) = &self.falling {
-                s.size()
+                16
             } else {
                 0
             }
         }
         + {
             if let Some(s) = &self.swimming {
-                s.size()
+                10
             } else {
                 0
             }
         }
         + {
             if let Some(s) = &self.spline_elevation {
-                s.size()
+                4
             } else {
                 0
             }
@@ -1652,23 +1652,8 @@ pub struct MovementInfo_MovementFlags_Falling {
     pub z_speed: f32,
 }
 
-impl MovementInfo_MovementFlags_Falling {
-    pub(crate) const fn size(&self) -> usize {
-        4 // cos_angle: f32
-        + 4 // sin_angle: f32
-        + 4 // xy_speed: f32
-        + 4 // z_speed: f32
-    }
-}
-
 #[derive(Debug, Clone, Copy, PartialEq, PartialOrd, Default)]
 pub struct MovementInfo_MovementFlags_SplineElevation {
     pub spline_elevation: f32,
-}
-
-impl MovementInfo_MovementFlags_SplineElevation {
-    pub(crate) const fn size(&self) -> usize {
-        4 // spline_elevation: f32
-    }
 }
 

@@ -1724,63 +1724,63 @@ impl SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags {
         4 // inner
         + {
             if let Some(s) = &self.status {
-                s.size()
+                1
             } else {
                 0
             }
         }
         + {
             if let Some(s) = &self.cur_hp {
-                s.size()
+                4
             } else {
                 0
             }
         }
         + {
             if let Some(s) = &self.max_hp {
-                s.size()
+                4
             } else {
                 0
             }
         }
         + {
             if let Some(s) = &self.power_type {
-                s.size()
+                1
             } else {
                 0
             }
         }
         + {
             if let Some(s) = &self.cur_power {
-                s.size()
+                2
             } else {
                 0
             }
         }
         + {
             if let Some(s) = &self.max_power {
-                s.size()
+                2
             } else {
                 0
             }
         }
         + {
             if let Some(s) = &self.level {
-                s.size()
+                2
             } else {
                 0
             }
         }
         + {
             if let Some(s) = &self.zone {
-                s.size()
+                4
             } else {
                 0
             }
         }
         + {
             if let Some(s) = &self.position {
-                s.size()
+                4
             } else {
                 0
             }
@@ -1794,7 +1794,7 @@ impl SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags {
         }
         + {
             if let Some(s) = &self.pet_guid {
-                s.size()
+                8
             } else {
                 0
             }
@@ -1808,42 +1808,42 @@ impl SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags {
         }
         + {
             if let Some(s) = &self.pet_model_id {
-                s.size()
+                2
             } else {
                 0
             }
         }
         + {
             if let Some(s) = &self.pet_cur_hp {
-                s.size()
+                4
             } else {
                 0
             }
         }
         + {
             if let Some(s) = &self.pet_max_hp {
-                s.size()
+                4
             } else {
                 0
             }
         }
         + {
             if let Some(s) = &self.pet_power_type {
-                s.size()
+                1
             } else {
                 0
             }
         }
         + {
             if let Some(s) = &self.pet_cur_power {
-                s.size()
+                2
             } else {
                 0
             }
         }
         + {
             if let Some(s) = &self.pet_max_power {
-                s.size()
+                2
             } else {
                 0
             }
@@ -1857,7 +1857,7 @@ impl SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags {
         }
         + {
             if let Some(s) = &self.vehicle_seat {
-                s.size()
+                4
             } else {
                 0
             }
@@ -1870,21 +1870,9 @@ pub struct SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_Status {
     pub status: GroupMemberOnlineStatus,
 }
 
-impl SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_Status {
-    pub(crate) const fn size(&self) -> usize {
-        1 // status: GroupMemberOnlineStatus
-    }
-}
-
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_CurHp {
     pub current_health: u32,
-}
-
-impl SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_CurHp {
-    pub(crate) const fn size(&self) -> usize {
-        4 // current_health: u32
-    }
 }
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
@@ -1892,21 +1880,9 @@ pub struct SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_MaxHp {
     pub max_health: u32,
 }
 
-impl SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_MaxHp {
-    pub(crate) const fn size(&self) -> usize {
-        4 // max_health: u32
-    }
-}
-
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_PowerType {
     pub power: Power,
-}
-
-impl SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_PowerType {
-    pub(crate) const fn size(&self) -> usize {
-        1 // power: Power
-    }
 }
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
@@ -1914,21 +1890,9 @@ pub struct SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_CurPower {
     pub current_power: u16,
 }
 
-impl SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_CurPower {
-    pub(crate) const fn size(&self) -> usize {
-        2 // current_power: u16
-    }
-}
-
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_MaxPower {
     pub max_power: u16,
-}
-
-impl SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_MaxPower {
-    pub(crate) const fn size(&self) -> usize {
-        2 // max_power: u16
-    }
 }
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
@@ -1936,34 +1900,15 @@ pub struct SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_Level {
     pub level: Level,
 }
 
-impl SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_Level {
-    pub(crate) const fn size(&self) -> usize {
-        2 // level: Level16
-    }
-}
-
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_Zone {
     pub area: Area,
-}
-
-impl SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_Zone {
-    pub(crate) const fn size(&self) -> usize {
-        4 // area: Area
-    }
 }
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_Position {
     pub position_x: u16,
     pub position_y: u16,
-}
-
-impl SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_Position {
-    pub(crate) const fn size(&self) -> usize {
-        2 // position_x: u16
-        + 2 // position_y: u16
-    }
 }
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
@@ -1982,12 +1927,6 @@ pub struct SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_PetGuid {
     pub pet: Guid,
 }
 
-impl SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_PetGuid {
-    pub(crate) const fn size(&self) -> usize {
-        8 // pet: Guid
-    }
-}
-
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_PetName {
     pub pet_name: String,
@@ -2004,21 +1943,9 @@ pub struct SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_PetModelId {
     pub pet_display_id: u16,
 }
 
-impl SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_PetModelId {
-    pub(crate) const fn size(&self) -> usize {
-        2 // pet_display_id: u16
-    }
-}
-
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_PetCurHp {
     pub pet_current_health: u32,
-}
-
-impl SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_PetCurHp {
-    pub(crate) const fn size(&self) -> usize {
-        4 // pet_current_health: u32
-    }
 }
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
@@ -2026,21 +1953,9 @@ pub struct SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_PetMaxHp {
     pub pet_max_health: u32,
 }
 
-impl SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_PetMaxHp {
-    pub(crate) const fn size(&self) -> usize {
-        4 // pet_max_health: u32
-    }
-}
-
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_PetPowerType {
     pub pet_power_type: Power,
-}
-
-impl SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_PetPowerType {
-    pub(crate) const fn size(&self) -> usize {
-        1 // pet_power_type: Power
-    }
 }
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
@@ -2048,21 +1963,9 @@ pub struct SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_PetCurPower {
     pub pet_current_power: u16,
 }
 
-impl SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_PetCurPower {
-    pub(crate) const fn size(&self) -> usize {
-        2 // pet_current_power: u16
-    }
-}
-
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_PetMaxPower {
     pub pet_max_power: u16,
-}
-
-impl SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_PetMaxPower {
-    pub(crate) const fn size(&self) -> usize {
-        2 // pet_max_power: u16
-    }
 }
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
@@ -2079,11 +1982,5 @@ impl SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_PetAuras {
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_VehicleSeat {
     pub transport: u32,
-}
-
-impl SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_VehicleSeat {
-    pub(crate) const fn size(&self) -> usize {
-        4 // transport: u32
-    }
 }
 

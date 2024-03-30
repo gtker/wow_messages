@@ -23,6 +23,19 @@ impl RustEnumerator {
 
         v
     }
+    pub(crate) fn is_constant(&self) -> Option<i128> {
+        let mut size = 0;
+        for m in self.members() {
+            if let Some(i) = m.is_constant() {
+                size += i;
+            } else {
+                return None;
+            }
+        }
+
+        Some(size)
+    }
+
     pub(crate) fn name(&self) -> &str {
         &self.name
     }

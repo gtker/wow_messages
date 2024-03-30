@@ -242,7 +242,7 @@ impl FlagIfElseIf_SimpleFlag {
         1 // inner
         + {
             if let Some(s) = &self.one {
-                s.size()
+                1
             } else {
                 0
             }
@@ -253,12 +253,6 @@ impl FlagIfElseIf_SimpleFlag {
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct FlagIfElseIf_SimpleFlag_One {
     pub if_one: u8,
-}
-
-impl FlagIfElseIf_SimpleFlag_One {
-    pub(crate) const fn size(&self) -> usize {
-        1 // if_one: u8
-    }
 }
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord)]
@@ -412,14 +406,14 @@ impl FlagIfElseIf_UpdateFlag {
         1 // inner
         + {
             if let Some(s) = &self.one_if {
-                s.size()
+                3
             } else {
                 0
             }
         }
         + {
             if let Some(s) = &self.eight_if {
-                s.size()
+                1
             } else {
                 0
             }
@@ -430,11 +424,5 @@ impl FlagIfElseIf_UpdateFlag {
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct FlagIfElseIf_UpdateFlag_EightIf {
     pub last_if: u8,
-}
-
-impl FlagIfElseIf_UpdateFlag_EightIf {
-    pub(crate) const fn size(&self) -> usize {
-        1 // last_if: u8
-    }
 }
 

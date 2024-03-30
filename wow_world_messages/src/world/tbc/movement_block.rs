@@ -1441,7 +1441,7 @@ impl MovementBlock_SplineFlag {
         4 // inner
         + {
             if let Some(s) = &self.final_angle {
-                s.size()
+                16
             } else {
                 0
             }
@@ -2166,21 +2166,21 @@ impl MovementBlock_MovementFlags {
         }
         + {
             if let Some(s) = &self.jumping {
-                s.size()
+                16
             } else {
                 0
             }
         }
         + {
             if let Some(s) = &self.swimming {
-                s.size()
+                8
             } else {
                 0
             }
         }
         + {
             if let Some(s) = &self.spline_elevation {
-                s.size()
+                4
             } else {
                 0
             }
@@ -2214,24 +2214,9 @@ pub struct MovementBlock_MovementFlags_Jumping {
     pub z_speed: f32,
 }
 
-impl MovementBlock_MovementFlags_Jumping {
-    pub(crate) const fn size(&self) -> usize {
-        4 // cos_angle: f32
-        + 4 // sin_angle: f32
-        + 4 // xy_speed: f32
-        + 4 // z_speed: f32
-    }
-}
-
 #[derive(Debug, Clone, Copy, PartialEq, PartialOrd, Default)]
 pub struct MovementBlock_MovementFlags_SplineElevation {
     pub spline_elevation: f32,
-}
-
-impl MovementBlock_MovementFlags_SplineElevation {
-    pub(crate) const fn size(&self) -> usize {
-        4 // spline_elevation: f32
-    }
 }
 
 #[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
@@ -2557,7 +2542,7 @@ impl MovementBlock_UpdateFlag {
         1 // inner
         + {
             if let Some(s) = &self.transport {
-                s.size()
+                4
             } else {
                 0
             }
@@ -2571,14 +2556,14 @@ impl MovementBlock_UpdateFlag {
         }
         + {
             if let Some(s) = &self.high_guid {
-                s.size()
+                8
             } else {
                 0
             }
         }
         + {
             if let Some(s) = &self.all {
-                s.size()
+                4
             } else {
                 0
             }
@@ -2598,12 +2583,6 @@ pub struct MovementBlock_UpdateFlag_Transport {
     pub transport_progress_in_ms: u32,
 }
 
-impl MovementBlock_UpdateFlag_Transport {
-    pub(crate) const fn size(&self) -> usize {
-        4 // transport_progress_in_ms: u32
-    }
-}
-
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct MovementBlock_UpdateFlag_MeleeAttacking {
     pub guid: Guid,
@@ -2621,21 +2600,8 @@ pub struct MovementBlock_UpdateFlag_HighGuid {
     pub unknown1: u32,
 }
 
-impl MovementBlock_UpdateFlag_HighGuid {
-    pub(crate) const fn size(&self) -> usize {
-        4 // unknown0: u32
-        + 4 // unknown1: u32
-    }
-}
-
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct MovementBlock_UpdateFlag_All {
     pub unknown2: u32,
-}
-
-impl MovementBlock_UpdateFlag_All {
-    pub(crate) const fn size(&self) -> usize {
-        4 // unknown2: u32
-    }
 }
 

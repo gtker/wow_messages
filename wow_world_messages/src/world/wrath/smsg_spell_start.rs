@@ -1278,21 +1278,21 @@ impl SMSG_SPELL_START_CastFlags {
         4 // inner
         + {
             if let Some(s) = &self.ammo {
-                s.size()
+                8
             } else {
                 0
             }
         }
         + {
             if let Some(s) = &self.power_left_self {
-                s.size()
+                4
             } else {
                 0
             }
         }
         + {
             if let Some(s) = &self.unknown_23 {
-                s.size()
+                8
             } else {
                 0
             }
@@ -1306,34 +1306,14 @@ pub struct SMSG_SPELL_START_CastFlags_Ammo {
     pub ammo_inventory_type: u32,
 }
 
-impl SMSG_SPELL_START_CastFlags_Ammo {
-    pub(crate) const fn size(&self) -> usize {
-        4 // ammo_display_id: u32
-        + 4 // ammo_inventory_type: u32
-    }
-}
-
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct SMSG_SPELL_START_CastFlags_PowerLeftSelf {
     pub power: Power,
-}
-
-impl SMSG_SPELL_START_CastFlags_PowerLeftSelf {
-    pub(crate) const fn size(&self) -> usize {
-        4 // power: Power
-    }
 }
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct SMSG_SPELL_START_CastFlags_Unknown23 {
     pub unknown1: u32,
     pub unknown2: u32,
-}
-
-impl SMSG_SPELL_START_CastFlags_Unknown23 {
-    pub(crate) const fn size(&self) -> usize {
-        4 // unknown1: u32
-        + 4 // unknown2: u32
-    }
 }
 
