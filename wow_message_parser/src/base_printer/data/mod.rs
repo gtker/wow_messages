@@ -52,10 +52,10 @@ pub(crate) fn get_data_from_csv_files(expansion: Expansion) -> Data {
     let combinations = get_combinations(&csv_directory);
     let exp_per_level = get_exp_data(&csv_directory);
     let exploration_exp_per_level = get_exploration_exp_data(&csv_directory);
-    let base_stats = get_stat_data(&csv_directory);
-    let skills = get_skill_data(&csv_directory);
-    let initial_spells = get_initial_spell_data(&csv_directory);
-    let actions = get_action_data(&csv_directory);
+    let base_stats = get_stat_data(&csv_directory, &combinations);
+    let skills = get_skill_data(&csv_directory, &combinations);
+    let initial_spells = get_initial_spell_data(&csv_directory, &combinations);
+    let actions = get_action_data(&csv_directory, &combinations);
     let positions = positions();
     let triggers = get_triggers(&csv_directory);
     let pet_names = get_pet_name_data(&csv_directory);
@@ -126,7 +126,10 @@ struct StatData {
     pub basemana: u32,
 }
 
-fn get_stat_data(dir: &Path) -> HashMap<Combination, BTreeMap<u8, BaseStats>> {
+fn get_stat_data(
+    dir: &Path,
+    combinations: &[Combination],
+) -> HashMap<Combination, BTreeMap<u8, BaseStats>> {
     let stats: Vec<_> = read_csv_file::<StatData>(dir, "stat_data")
         .into_iter()
         .map(|row| BaseStatLevel {
@@ -145,8 +148,6 @@ fn get_stat_data(dir: &Path) -> HashMap<Combination, BTreeMap<u8, BaseStats>> {
         })
         .collect();
 
-    let combinations = get_combinations(dir);
-
     let mut h = HashMap::new();
 
     for combination in combinations {
@@ -160,7 +161,7 @@ fn get_stat_data(dir: &Path) -> HashMap<Combination, BTreeMap<u8, BaseStats>> {
             s.insert(stat.level, stat.stats);
         }
 
-        h.insert(combination, s);
+        h.insert(*combination, s);
     }
 
     h
@@ -176,10 +177,12 @@ struct Skill {
     note: String,
 }
 
-fn get_skill_data(dir: &Path) -> HashMap<Combination, BTreeSet<(u32, String)>> {
+fn get_skill_data(
+    dir: &Path,
+    combinations: &[Combination],
+) -> HashMap<Combination, BTreeSet<(u32, String)>> {
     let skills = read_csv_file::<Skill>(dir, "skills");
 
-    let combinations = get_combinations(dir);
     let mut h = HashMap::new();
 
     for combination in combinations {
@@ -199,7 +202,7 @@ fn get_skill_data(dir: &Path) -> HashMap<Combination, BTreeSet<(u32, String)>> {
             s.insert((skill.skill, skill.note.clone()));
         }
 
-        h.insert(combination, s);
+        h.insert(*combination, s);
     }
 
     h
@@ -222,7 +225,10 @@ struct Spell {
     note: String,
 }
 
-fn get_initial_spell_data(dir: &Path) -> HashMap<Combination, BTreeSet<(u32, String)>> {
+fn get_initial_spell_data(
+    dir: &Path,
+    combinations: &[Combination],
+) -> HashMap<Combination, BTreeSet<(u32, String)>> {
     let spells = read_csv_file::<CsvSpell>(dir, "initial_spells")
         .into_iter()
         .map(|a| Spell {
@@ -232,8 +238,6 @@ fn get_initial_spell_data(dir: &Path) -> HashMap<Combination, BTreeSet<(u32, Str
             note: a.note,
         })
         .collect::<Vec<_>>();
-
-    let combinations = get_combinations(dir);
 
     let mut h = HashMap::new();
 
@@ -247,7 +251,7 @@ fn get_initial_spell_data(dir: &Path) -> HashMap<Combination, BTreeSet<(u32, Str
             s.insert((spell.spell, spell.note.clone()));
         }
 
-        h.insert(combination, s);
+        h.insert(*combination, s);
     }
 
     h
@@ -282,10 +286,11 @@ struct ActionRaceClass {
     pub ty: u8,
 }
 
-fn get_action_data(dir: &Path) -> HashMap<Combination, BTreeSet<Action>> {
+fn get_action_data(
+    dir: &Path,
+    combinations: &[Combination],
+) -> HashMap<Combination, BTreeSet<Action>> {
     let actions = read_csv_file::<ActionRaceClass>(dir, "actions");
-
-    let combinations = get_combinations(dir);
 
     let mut h = HashMap::new();
 
@@ -302,7 +307,7 @@ fn get_action_data(dir: &Path) -> HashMap<Combination, BTreeSet<Action>> {
                 ty: action.ty,
             });
         }
-        h.insert(combination, s);
+        h.insert(*combination, s);
     }
 
     h
