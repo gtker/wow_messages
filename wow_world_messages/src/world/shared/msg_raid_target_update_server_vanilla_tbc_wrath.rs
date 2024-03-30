@@ -17,9 +17,14 @@ use wow_world_base::shared::raid_target_update_type_vanilla_tbc_wrath::RaidTarge
 ///     }
 /// }
 /// ```
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
-pub struct MSG_RAID_TARGET_UPDATE_Server {
-    pub update_type: MSG_RAID_TARGET_UPDATE_Server_RaidTargetUpdateType,
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord)]
+pub enum MSG_RAID_TARGET_UPDATE_Server {
+    Partial {
+        raid_target: RaidTargetUpdate,
+    },
+    Full {
+        raid_targets: [RaidTargetUpdate; 8],
+    },
 }
 
 impl crate::private::Sealed for MSG_RAID_TARGET_UPDATE_Server {}
@@ -37,7 +42,7 @@ impl MSG_RAID_TARGET_UPDATE_Server {
                 // raid_target: RaidTargetUpdate
                 let raid_target = RaidTargetUpdate::read(&mut r)?;
 
-                MSG_RAID_TARGET_UPDATE_Server_RaidTargetUpdateType::Partial {
+                MSG_RAID_TARGET_UPDATE_Server::Partial {
                     raid_target,
                 }
             }
@@ -51,15 +56,13 @@ impl MSG_RAID_TARGET_UPDATE_Server {
                     raid_targets
                 };
 
-                MSG_RAID_TARGET_UPDATE_Server_RaidTargetUpdateType::Full {
+                MSG_RAID_TARGET_UPDATE_Server::Full {
                     raid_targets,
                 }
             }
         };
 
-        Ok(Self {
-            update_type: update_type_if,
-        })
+        Ok(update_type_if)
     }
 
 }
@@ -81,9 +84,9 @@ impl crate::Message for MSG_RAID_TARGET_UPDATE_Server {
 
         writeln!(s, "test MSG_RAID_TARGET_UPDATE_Server {{").unwrap();
         // Members
-        writeln!(s, "    update_type = {};", RaidTargetUpdateType::try_from(self.update_type.as_int()).unwrap().as_test_case_value()).unwrap();
-        match &self.update_type {
-            crate::shared::msg_raid_target_update_server_vanilla_tbc_wrath::MSG_RAID_TARGET_UPDATE_Server_RaidTargetUpdateType::Partial {
+        writeln!(s, "    update_type = {};", RaidTargetUpdateType::try_from(self.as_int()).unwrap().as_test_case_value()).unwrap();
+        match &self {
+            crate::shared::msg_raid_target_update_server_vanilla_tbc_wrath::MSG_RAID_TARGET_UPDATE_Server::Partial {
                 raid_target,
             } => {
                 // raid_target: RaidTargetUpdate
@@ -94,7 +97,7 @@ impl crate::Message for MSG_RAID_TARGET_UPDATE_Server {
 
                 writeln!(s, "    }};").unwrap();
             }
-            crate::shared::msg_raid_target_update_server_vanilla_tbc_wrath::MSG_RAID_TARGET_UPDATE_Server_RaidTargetUpdateType::Full {
+            crate::shared::msg_raid_target_update_server_vanilla_tbc_wrath::MSG_RAID_TARGET_UPDATE_Server::Full {
                 raid_targets,
             } => {
                 writeln!(s, "    raid_targets = [").unwrap();
@@ -122,8 +125,8 @@ impl crate::Message for MSG_RAID_TARGET_UPDATE_Server {
         let mut bytes = bytes.into_iter();
 
         crate::util::write_bytes(&mut s, &mut bytes, 1, "update_type", "    ");
-        match &self.update_type {
-            crate::shared::msg_raid_target_update_server_vanilla_tbc_wrath::MSG_RAID_TARGET_UPDATE_Server_RaidTargetUpdateType::Partial {
+        match &self {
+            crate::shared::msg_raid_target_update_server_vanilla_tbc_wrath::MSG_RAID_TARGET_UPDATE_Server::Partial {
                 raid_target,
             } => {
                 writeln!(s, "    /* raid_target: RaidTargetUpdate start */").unwrap();
@@ -131,7 +134,7 @@ impl crate::Message for MSG_RAID_TARGET_UPDATE_Server {
                 crate::util::write_bytes(&mut s, &mut bytes, 8, "guid", "        ");
                 writeln!(s, "    /* raid_target: RaidTargetUpdate end */").unwrap();
             }
-            crate::shared::msg_raid_target_update_server_vanilla_tbc_wrath::MSG_RAID_TARGET_UPDATE_Server_RaidTargetUpdateType::Full {
+            crate::shared::msg_raid_target_update_server_vanilla_tbc_wrath::MSG_RAID_TARGET_UPDATE_Server::Full {
                 raid_targets,
             } => {
                 writeln!(s, "    /* raid_targets: RaidTargetUpdate[8] start */").unwrap();
@@ -160,17 +163,17 @@ impl crate::Message for MSG_RAID_TARGET_UPDATE_Server {
 
     fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
         // update_type: RaidTargetUpdateType
-        w.write_all(&(self.update_type.as_int().to_le_bytes()))?;
+        w.write_all(&(self.as_int().to_le_bytes()))?;
 
-        match &self.update_type {
-            MSG_RAID_TARGET_UPDATE_Server_RaidTargetUpdateType::Partial {
+        match &self {
+            MSG_RAID_TARGET_UPDATE_Server::Partial {
                 raid_target,
             } => {
                 // raid_target: RaidTargetUpdate
                 raid_target.write_into_vec(&mut w)?;
 
             }
-            MSG_RAID_TARGET_UPDATE_Server_RaidTargetUpdateType::Full {
+            MSG_RAID_TARGET_UPDATE_Server::Full {
                 raid_targets,
             } => {
                 // raid_targets: RaidTargetUpdate[8]
@@ -201,51 +204,7 @@ impl crate::wrath::ServerMessage for MSG_RAID_TARGET_UPDATE_Server {}
 
 impl MSG_RAID_TARGET_UPDATE_Server {
     pub(crate) const fn size(&self) -> usize {
-        self.update_type.size() // update_type: MSG_RAID_TARGET_UPDATE_Server_RaidTargetUpdateType
-    }
-}
-
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord)]
-pub enum MSG_RAID_TARGET_UPDATE_Server_RaidTargetUpdateType {
-    Partial {
-        raid_target: RaidTargetUpdate,
-    },
-    Full {
-        raid_targets: [RaidTargetUpdate; 8],
-    },
-}
-
-impl Default for MSG_RAID_TARGET_UPDATE_Server_RaidTargetUpdateType {
-    fn default() -> Self {
-        // First enumerator without any fields
-        Self::Partial {
-            raid_target: Default::default(),
-        }
-    }
-}
-
-impl MSG_RAID_TARGET_UPDATE_Server_RaidTargetUpdateType {
-    pub(crate) const fn as_int(&self) -> u8 {
-        match self {
-            Self::Partial { .. } => 0,
-            Self::Full { .. } => 1,
-        }
-    }
-
-}
-
-impl std::fmt::Display for MSG_RAID_TARGET_UPDATE_Server_RaidTargetUpdateType {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
-            Self::Partial{ .. } => f.write_str("Partial"),
-            Self::Full{ .. } => f.write_str("Full"),
-        }
-    }
-}
-
-impl MSG_RAID_TARGET_UPDATE_Server_RaidTargetUpdateType {
-    pub(crate) const fn size(&self) -> usize {
-        match self {
+        (match self {
             Self::Partial {
                 ..
             } => {
@@ -258,6 +217,34 @@ impl MSG_RAID_TARGET_UPDATE_Server_RaidTargetUpdateType {
                 1
                 + 8 * 9 // raid_targets: RaidTargetUpdate[8]
             }
+        }) // update_type: MSG_RAID_TARGET_UPDATE_Server
+    }
+}
+
+impl Default for MSG_RAID_TARGET_UPDATE_Server {
+    fn default() -> Self {
+        // First enumerator without any fields
+        Self::Partial {
+            raid_target: Default::default(),
+        }
+    }
+}
+
+impl MSG_RAID_TARGET_UPDATE_Server {
+    pub(crate) const fn as_int(&self) -> u8 {
+        match self {
+            Self::Partial { .. } => 0,
+            Self::Full { .. } => 1,
+        }
+    }
+
+}
+
+impl std::fmt::Display for MSG_RAID_TARGET_UPDATE_Server {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        match self {
+            Self::Partial{ .. } => f.write_str("Partial"),
+            Self::Full{ .. } => f.write_str("Full"),
         }
     }
 }

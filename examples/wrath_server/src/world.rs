@@ -51,13 +51,11 @@ async fn handle(mut stream: TcpStream, users: Arc<Mutex<HashMap<String, SrpServe
         )
         .unwrap();
 
-    SMSG_AUTH_RESPONSE {
-        result: SMSG_AUTH_RESPONSE_WorldResult::AuthOk {
-            billing_flags: BillingPlanFlags::empty(),
-            billing_rested: 0,
-            billing_time: 0,
-            expansion: Expansion::WrathOfTheLichKing,
-        },
+    SMSG_AUTH_RESPONSE::AuthOk {
+        billing_flags: BillingPlanFlags::empty(),
+        billing_rested: 0,
+        billing_time: 0,
+        expansion: Expansion::WrathOfTheLichKing,
     }
     .tokio_write_encrypted_server(&mut stream, encryption.encrypter())
     .await
@@ -199,13 +197,11 @@ async fn handle(mut stream: TcpStream, users: Arc<Mutex<HashMap<String, SrpServe
         .set_self();
 
     SMSG_UPDATE_OBJECT {
-        objects: vec![Object {
-            update_type: Object_UpdateType::CreateObject2 {
-                guid3: Guid::new(4),
-                mask2: UpdateMask::Player(update_mask),
-                movement2: MovementBlock { update_flag },
-                object_type: ObjectType::Player,
-            },
+        objects: vec![Object::CreateObject2 {
+            guid3: Guid::new(4),
+            mask2: UpdateMask::Player(update_mask),
+            movement2: MovementBlock { update_flag },
+            object_type: ObjectType::Player,
         }],
     }
     .tokio_write_encrypted_server(&mut stream, encryption.encrypter())

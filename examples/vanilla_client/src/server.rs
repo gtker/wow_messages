@@ -8,8 +8,8 @@ use wow_world_messages::vanilla::AddonInfo;
 use wow_world_messages::vanilla::ClientMessage;
 use wow_world_messages::vanilla::{expect_server_message, expect_server_message_encryption};
 use wow_world_messages::vanilla::{
-    SMSG_AUTH_RESPONSE_WorldResult, CMSG_AUTH_SESSION, CMSG_CHAR_ENUM, CMSG_PLAYER_LOGIN,
-    SMSG_AUTH_CHALLENGE, SMSG_AUTH_RESPONSE, SMSG_CHAR_ENUM,
+    CMSG_AUTH_SESSION, CMSG_CHAR_ENUM, CMSG_PLAYER_LOGIN, SMSG_AUTH_CHALLENGE, SMSG_AUTH_RESPONSE,
+    SMSG_CHAR_ENUM,
 };
 
 pub fn server(
@@ -47,7 +47,7 @@ pub fn server(
         expect_server_message_encryption::<SMSG_AUTH_RESPONSE, _>(&mut stream, crypto.decrypter())
             .unwrap();
 
-    if !matches!(s.result, SMSG_AUTH_RESPONSE_WorldResult::AuthOk { .. }) {
+    if !matches!(s, SMSG_AUTH_RESPONSE::AuthOk { .. }) {
         panic!()
     }
     CMSG_CHAR_ENUM {}

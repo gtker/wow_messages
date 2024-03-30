@@ -26,7 +26,7 @@ fn print_struct_member(
 ) {
     match m {
         StructMember::Definition(d) => {
-            print_member_definition(s, d, variable_prefix, prefix);
+            print_member_definition(s, d, variable_prefix, prefix, e);
         }
         StructMember::IfStatement(statement) => match statement.definer_type() {
             DefinerType::Enum => {
@@ -126,17 +126,15 @@ pub(crate) fn print_if_statement_enum(
     prefix: &str,
     print_function: impl Fn(&mut Writer, &Container, &StructMember, &str, &str),
 ) {
+    let name = statement.variable_name();
+    let variable_prefix = match e.type_definition_in_same_scope(statement.variable_name()) {
+        false => "self.",
+        true => variable_prefix,
+    };
     let variable = if e.single_rust_definer().is_some() {
-        "self".to_string()
+        variable_prefix.strip_suffix('.').unwrap().to_string()
     } else {
-        format!(
-            "{prefix}{name}",
-            name = statement.variable_name(),
-            prefix = match e.type_definition_in_same_scope(statement.variable_name()) {
-                false => "self.",
-                true => variable_prefix,
-            },
-        )
+        format!("{variable_prefix}{name}",)
     };
 
     s.open_curly(format!("match &{variable}",));
@@ -196,6 +194,7 @@ fn print_member_definition(
     d: &StructMemberDefinition,
     variable_prefix: &str,
     prefix: &str,
+    e: &Container,
 ) {
     if d.value().is_some() || d.is_manual_size_field() {
         return;
@@ -278,6 +277,13 @@ fn print_member_definition(
                 } else {
                     "".to_string()
                 };
+                let var_name = if e.single_rust_definer().is_none() {
+                    var_name
+                } else {
+                    let (var, _) = var_name.rsplit_once('.').unwrap();
+                    var.to_string()
+                };
+
                 format!("{ty}::try_from({var_name}.as_int(){extra}).unwrap().as_test_case_value()")
             };
 

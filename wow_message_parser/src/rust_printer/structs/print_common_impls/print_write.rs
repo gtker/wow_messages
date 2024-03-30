@@ -155,7 +155,8 @@ pub(crate) fn print_write_definition(
 
     let variable = if let Some(rd) = e.single_rust_definer() {
         if rd.inner().name() == d.name() {
-            "self".to_string()
+            let (var, _) = variable_prefix.rsplit_once('.').unwrap();
+            var.to_string()
         } else {
             format!("{variable_prefix}{name}")
         }
@@ -440,17 +441,19 @@ fn print_write_if_enum_statement(
     prefix: &str,
     postfix: &str,
 ) {
+    let variable = format!(
+        "{prefix}{name}",
+        name = statement.variable_name(),
+        prefix = match e.type_definition_in_same_scope(statement.variable_name()) {
+            false => "self.",
+            true => variable_prefix,
+        },
+    );
     let variable = if e.single_rust_definer().is_none() {
-        format!(
-            "{prefix}{name}",
-            name = statement.variable_name(),
-            prefix = match e.type_definition_in_same_scope(statement.variable_name()) {
-                false => "self.",
-                true => variable_prefix,
-            },
-        )
+        variable
     } else {
-        "self".to_string()
+        let (var, _) = variable.rsplit_once('.').unwrap();
+        var.to_string()
     };
 
     s.open_curly(format!("match &{variable}",));

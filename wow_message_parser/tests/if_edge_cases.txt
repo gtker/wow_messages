@@ -24,160 +24,8 @@ use crate::vanilla::TEnum;
 ///     }
 /// }
 /// ```
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
-pub struct IfEdgeCases {
-    pub t: IfEdgeCases_TEnum,
-}
-
-impl IfEdgeCases {
-    pub(crate) fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
-        // t: TEnum
-        w.write_all(&(self.t.as_int().to_le_bytes()))?;
-
-        match &self.t {
-            IfEdgeCases_TEnum::Zero {
-                basic1,
-            } => {
-                // basic1: u8
-                w.write_all(&basic1.to_le_bytes())?;
-
-            }
-            IfEdgeCases_TEnum::One {
-                basic1,
-            } => {
-                // basic1: u8
-                w.write_all(&basic1.to_le_bytes())?;
-
-            }
-            IfEdgeCases_TEnum::Two {
-                basic1,
-            } => {
-                // basic1: u8
-                w.write_all(&basic1.to_le_bytes())?;
-
-            }
-            IfEdgeCases_TEnum::Three {
-                basic3,
-            } => {
-                // basic3: u8
-                w.write_all(&basic3.to_le_bytes())?;
-
-            }
-            IfEdgeCases_TEnum::Four {
-                basic3,
-            } => {
-                // basic3: u8
-                w.write_all(&basic3.to_le_bytes())?;
-
-            }
-            IfEdgeCases_TEnum::Five {
-                basic5,
-            } => {
-                // basic5: u8
-                w.write_all(&basic5.to_le_bytes())?;
-
-            }
-            IfEdgeCases_TEnum::Six {
-                basic5,
-            } => {
-                // basic5: u8
-                w.write_all(&basic5.to_le_bytes())?;
-
-            }
-            IfEdgeCases_TEnum::Rest {
-                rest,
-            } => {
-                // rest: u8
-                w.write_all(&rest.to_le_bytes())?;
-
-            }
-        }
-
-        Ok(())
-    }
-}
-
-impl IfEdgeCases {
-    pub(crate) fn read<R: std::io::Read>(mut r: R) -> Result<Self, crate::errors::ParseErrorKind> {
-        // t: TEnum
-        let t = crate::util::read_u8_le(&mut r)?.try_into()?;
-
-        let t_if = match t {
-            TEnum::Zero => {
-                // basic1: u8
-                let basic1 = crate::util::read_u8_le(&mut r)?;
-
-                IfEdgeCases_TEnum::Zero {
-                    basic1,
-                }
-            }
-            TEnum::One => {
-                // basic1: u8
-                let basic1 = crate::util::read_u8_le(&mut r)?;
-
-                IfEdgeCases_TEnum::One {
-                    basic1,
-                }
-            }
-            TEnum::Two => {
-                // basic1: u8
-                let basic1 = crate::util::read_u8_le(&mut r)?;
-
-                IfEdgeCases_TEnum::Two {
-                    basic1,
-                }
-            }
-            TEnum::Three => {
-                // basic3: u8
-                let basic3 = crate::util::read_u8_le(&mut r)?;
-
-                IfEdgeCases_TEnum::Three {
-                    basic3,
-                }
-            }
-            TEnum::Four => {
-                // basic3: u8
-                let basic3 = crate::util::read_u8_le(&mut r)?;
-
-                IfEdgeCases_TEnum::Four {
-                    basic3,
-                }
-            }
-            TEnum::Five => {
-                // basic5: u8
-                let basic5 = crate::util::read_u8_le(&mut r)?;
-
-                IfEdgeCases_TEnum::Five {
-                    basic5,
-                }
-            }
-            TEnum::Six => {
-                // basic5: u8
-                let basic5 = crate::util::read_u8_le(&mut r)?;
-
-                IfEdgeCases_TEnum::Six {
-                    basic5,
-                }
-            }
-            TEnum::Rest => {
-                // rest: u8
-                let rest = crate::util::read_u8_le(&mut r)?;
-
-                IfEdgeCases_TEnum::Rest {
-                    rest,
-                }
-            }
-        };
-
-        Ok(Self {
-            t: t_if,
-        })
-    }
-
-}
-
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord)]
-pub enum IfEdgeCases_TEnum {
+pub enum IfEdgeCases {
     Zero {
         basic1: u8,
     },
@@ -204,7 +52,152 @@ pub enum IfEdgeCases_TEnum {
     },
 }
 
-impl Default for IfEdgeCases_TEnum {
+impl IfEdgeCases {
+    pub(crate) fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
+        // t: TEnum
+        w.write_all(&(self.as_int().to_le_bytes()))?;
+
+        match &self {
+            IfEdgeCases::Zero {
+                basic1,
+            } => {
+                // basic1: u8
+                w.write_all(&basic1.to_le_bytes())?;
+
+            }
+            IfEdgeCases::One {
+                basic1,
+            } => {
+                // basic1: u8
+                w.write_all(&basic1.to_le_bytes())?;
+
+            }
+            IfEdgeCases::Two {
+                basic1,
+            } => {
+                // basic1: u8
+                w.write_all(&basic1.to_le_bytes())?;
+
+            }
+            IfEdgeCases::Three {
+                basic3,
+            } => {
+                // basic3: u8
+                w.write_all(&basic3.to_le_bytes())?;
+
+            }
+            IfEdgeCases::Four {
+                basic3,
+            } => {
+                // basic3: u8
+                w.write_all(&basic3.to_le_bytes())?;
+
+            }
+            IfEdgeCases::Five {
+                basic5,
+            } => {
+                // basic5: u8
+                w.write_all(&basic5.to_le_bytes())?;
+
+            }
+            IfEdgeCases::Six {
+                basic5,
+            } => {
+                // basic5: u8
+                w.write_all(&basic5.to_le_bytes())?;
+
+            }
+            IfEdgeCases::Rest {
+                rest,
+            } => {
+                // rest: u8
+                w.write_all(&rest.to_le_bytes())?;
+
+            }
+        }
+
+        Ok(())
+    }
+}
+
+impl IfEdgeCases {
+    pub(crate) fn read<R: std::io::Read>(mut r: R) -> Result<Self, crate::errors::ParseErrorKind> {
+        // t: TEnum
+        let t = crate::util::read_u8_le(&mut r)?.try_into()?;
+
+        let t_if = match t {
+            TEnum::Zero => {
+                // basic1: u8
+                let basic1 = crate::util::read_u8_le(&mut r)?;
+
+                IfEdgeCases::Zero {
+                    basic1,
+                }
+            }
+            TEnum::One => {
+                // basic1: u8
+                let basic1 = crate::util::read_u8_le(&mut r)?;
+
+                IfEdgeCases::One {
+                    basic1,
+                }
+            }
+            TEnum::Two => {
+                // basic1: u8
+                let basic1 = crate::util::read_u8_le(&mut r)?;
+
+                IfEdgeCases::Two {
+                    basic1,
+                }
+            }
+            TEnum::Three => {
+                // basic3: u8
+                let basic3 = crate::util::read_u8_le(&mut r)?;
+
+                IfEdgeCases::Three {
+                    basic3,
+                }
+            }
+            TEnum::Four => {
+                // basic3: u8
+                let basic3 = crate::util::read_u8_le(&mut r)?;
+
+                IfEdgeCases::Four {
+                    basic3,
+                }
+            }
+            TEnum::Five => {
+                // basic5: u8
+                let basic5 = crate::util::read_u8_le(&mut r)?;
+
+                IfEdgeCases::Five {
+                    basic5,
+                }
+            }
+            TEnum::Six => {
+                // basic5: u8
+                let basic5 = crate::util::read_u8_le(&mut r)?;
+
+                IfEdgeCases::Six {
+                    basic5,
+                }
+            }
+            TEnum::Rest => {
+                // rest: u8
+                let rest = crate::util::read_u8_le(&mut r)?;
+
+                IfEdgeCases::Rest {
+                    rest,
+                }
+            }
+        };
+
+        Ok(t_if)
+    }
+
+}
+
+impl Default for IfEdgeCases {
     fn default() -> Self {
         // First enumerator without any fields
         Self::Zero {
@@ -213,7 +206,7 @@ impl Default for IfEdgeCases_TEnum {
     }
 }
 
-impl IfEdgeCases_TEnum {
+impl IfEdgeCases {
     pub(crate) const fn as_int(&self) -> u8 {
         match self {
             Self::Zero { .. } => 0,
@@ -229,7 +222,7 @@ impl IfEdgeCases_TEnum {
 
 }
 
-impl std::fmt::Display for IfEdgeCases_TEnum {
+impl std::fmt::Display for IfEdgeCases {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match self {
             Self::Zero{ .. } => f.write_str("Zero"),
@@ -240,61 +233,6 @@ impl std::fmt::Display for IfEdgeCases_TEnum {
             Self::Five{ .. } => f.write_str("Five"),
             Self::Six{ .. } => f.write_str("Six"),
             Self::Rest{ .. } => f.write_str("Rest"),
-        }
-    }
-}
-
-impl IfEdgeCases_TEnum {
-    pub(crate) const fn size(&self) -> usize {
-        match self {
-            Self::Zero {
-                ..
-            } => {
-                1
-                + 1 // basic1: u8
-            }
-            Self::One {
-                ..
-            } => {
-                1
-                + 1 // basic1: u8
-            }
-            Self::Two {
-                ..
-            } => {
-                1
-                + 1 // basic1: u8
-            }
-            Self::Three {
-                ..
-            } => {
-                1
-                + 1 // basic3: u8
-            }
-            Self::Four {
-                ..
-            } => {
-                1
-                + 1 // basic3: u8
-            }
-            Self::Five {
-                ..
-            } => {
-                1
-                + 1 // basic5: u8
-            }
-            Self::Six {
-                ..
-            } => {
-                1
-                + 1 // basic5: u8
-            }
-            Self::Rest {
-                ..
-            } => {
-                1
-                + 1 // rest: u8
-            }
         }
     }
 }

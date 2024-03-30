@@ -20,9 +20,20 @@ use crate::wrath::{
 ///     }
 /// }
 /// ```
-#[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
-pub struct SMSG_GMTICKET_GETTICKET {
-    pub status: SMSG_GMTICKET_GETTICKET_GmTicketStatus,
+#[derive(Debug, Clone, PartialEq, PartialOrd)]
+pub enum SMSG_GMTICKET_GETTICKET {
+    DbError,
+    HasText {
+        days_since_last_updated: f32,
+        days_since_oldest_ticket_creation: f32,
+        days_since_ticket_creation: f32,
+        escalation_status: GmTicketEscalationStatus,
+        id: u32,
+        need_more_help: bool,
+        read_by_gm: bool,
+        text: String,
+    },
+    Default,
 }
 
 impl crate::private::Sealed for SMSG_GMTICKET_GETTICKET {}
@@ -36,7 +47,7 @@ impl SMSG_GMTICKET_GETTICKET {
         let status = crate::util::read_u32_le(&mut r)?.try_into()?;
 
         let status_if = match status {
-            GmTicketStatus::DbError => SMSG_GMTICKET_GETTICKET_GmTicketStatus::DbError,
+            GmTicketStatus::DbError => SMSG_GMTICKET_GETTICKET::DbError,
             GmTicketStatus::HasText => {
                 // id: u32
                 let id = crate::util::read_u32_le(&mut r)?;
@@ -65,7 +76,7 @@ impl SMSG_GMTICKET_GETTICKET {
                 // read_by_gm: Bool
                 let read_by_gm = crate::util::read_bool_u8(&mut r)?;
 
-                SMSG_GMTICKET_GETTICKET_GmTicketStatus::HasText {
+                SMSG_GMTICKET_GETTICKET::HasText {
                     days_since_last_updated,
                     days_since_oldest_ticket_creation,
                     days_since_ticket_creation,
@@ -76,12 +87,10 @@ impl SMSG_GMTICKET_GETTICKET {
                     text,
                 }
             }
-            GmTicketStatus::Default => SMSG_GMTICKET_GETTICKET_GmTicketStatus::Default,
+            GmTicketStatus::Default => SMSG_GMTICKET_GETTICKET::Default,
         };
 
-        Ok(Self {
-            status: status_if,
-        })
+        Ok(status_if)
     }
 
 }
@@ -103,9 +112,9 @@ impl crate::Message for SMSG_GMTICKET_GETTICKET {
 
         writeln!(s, "test SMSG_GMTICKET_GETTICKET {{").unwrap();
         // Members
-        writeln!(s, "    status = {};", GmTicketStatus::try_from(self.status.as_int()).unwrap().as_test_case_value()).unwrap();
-        match &self.status {
-            crate::wrath::SMSG_GMTICKET_GETTICKET_GmTicketStatus::HasText {
+        writeln!(s, "    status = {};", GmTicketStatus::try_from(self.as_int()).unwrap().as_test_case_value()).unwrap();
+        match &self {
+            crate::wrath::SMSG_GMTICKET_GETTICKET::HasText {
                 days_since_last_updated,
                 days_since_oldest_ticket_creation,
                 days_since_ticket_creation,
@@ -139,8 +148,8 @@ impl crate::Message for SMSG_GMTICKET_GETTICKET {
         let mut bytes = bytes.into_iter();
 
         crate::util::write_bytes(&mut s, &mut bytes, 4, "status", "    ");
-        match &self.status {
-            crate::wrath::SMSG_GMTICKET_GETTICKET_GmTicketStatus::HasText {
+        match &self {
+            crate::wrath::SMSG_GMTICKET_GETTICKET::HasText {
                 days_since_last_updated,
                 days_since_oldest_ticket_creation,
                 days_since_ticket_creation,
@@ -177,10 +186,10 @@ impl crate::Message for SMSG_GMTICKET_GETTICKET {
 
     fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
         // status: GmTicketStatus
-        w.write_all(&(self.status.as_int().to_le_bytes()))?;
+        w.write_all(&(self.as_int().to_le_bytes()))?;
 
-        match &self.status {
-            SMSG_GMTICKET_GETTICKET_GmTicketStatus::HasText {
+        match &self {
+            SMSG_GMTICKET_GETTICKET::HasText {
                 days_since_last_updated,
                 days_since_oldest_ticket_creation,
                 days_since_ticket_creation,
@@ -236,57 +245,7 @@ impl crate::wrath::ServerMessage for SMSG_GMTICKET_GETTICKET {}
 
 impl SMSG_GMTICKET_GETTICKET {
     pub(crate) fn size(&self) -> usize {
-        self.status.size() // status: SMSG_GMTICKET_GETTICKET_GmTicketStatus
-    }
-}
-
-#[derive(Debug, Clone, PartialEq, PartialOrd)]
-pub enum SMSG_GMTICKET_GETTICKET_GmTicketStatus {
-    DbError,
-    HasText {
-        days_since_last_updated: f32,
-        days_since_oldest_ticket_creation: f32,
-        days_since_ticket_creation: f32,
-        escalation_status: GmTicketEscalationStatus,
-        id: u32,
-        need_more_help: bool,
-        read_by_gm: bool,
-        text: String,
-    },
-    Default,
-}
-
-impl Default for SMSG_GMTICKET_GETTICKET_GmTicketStatus {
-    fn default() -> Self {
-        // First enumerator without any fields
-        Self::DbError
-    }
-}
-
-impl SMSG_GMTICKET_GETTICKET_GmTicketStatus {
-    pub(crate) const fn as_int(&self) -> u32 {
-        match self {
-            Self::DbError => 0,
-            Self::HasText { .. } => 6,
-            Self::Default => 10,
-        }
-    }
-
-}
-
-impl std::fmt::Display for SMSG_GMTICKET_GETTICKET_GmTicketStatus {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
-            Self::DbError => f.write_str("DbError"),
-            Self::HasText{ .. } => f.write_str("HasText"),
-            Self::Default => f.write_str("Default"),
-        }
-    }
-}
-
-impl SMSG_GMTICKET_GETTICKET_GmTicketStatus {
-    pub(crate) fn size(&self) -> usize {
-        match self {
+        (match self {
             Self::HasText {
                 text,
                 ..
@@ -302,6 +261,34 @@ impl SMSG_GMTICKET_GETTICKET_GmTicketStatus {
                 + text.len() + 1 // text: CString
             }
             _ => 4,
+        }) // status: SMSG_GMTICKET_GETTICKET
+    }
+}
+
+impl Default for SMSG_GMTICKET_GETTICKET {
+    fn default() -> Self {
+        // First enumerator without any fields
+        Self::DbError
+    }
+}
+
+impl SMSG_GMTICKET_GETTICKET {
+    pub(crate) const fn as_int(&self) -> u32 {
+        match self {
+            Self::DbError => 0,
+            Self::HasText { .. } => 6,
+            Self::Default => 10,
+        }
+    }
+
+}
+
+impl std::fmt::Display for SMSG_GMTICKET_GETTICKET {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        match self {
+            Self::DbError => f.write_str("DbError"),
+            Self::HasText{ .. } => f.write_str("HasText"),
+            Self::Default => f.write_str("Default"),
         }
     }
 }

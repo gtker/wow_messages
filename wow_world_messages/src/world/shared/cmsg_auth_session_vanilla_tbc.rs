@@ -30,10 +30,7 @@ pub struct CMSG_AUTH_SESSION {
 
 impl crate::private::Sealed for CMSG_AUTH_SESSION {}
 impl CMSG_AUTH_SESSION {
-    fn read_inner(
-        mut r: &mut &[u8],
-        body_size: u32,
-    ) -> Result<Self, crate::errors::ParseErrorKind> {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
         if !(37..=65827).contains(&body_size) {
             return Err(crate::errors::ParseErrorKind::InvalidSize);
         }
@@ -93,6 +90,7 @@ impl CMSG_AUTH_SESSION {
             addon_info,
         })
     }
+
 }
 
 impl crate::Message for CMSG_AUTH_SESSION {
@@ -116,11 +114,7 @@ impl crate::Message for CMSG_AUTH_SESSION {
 
         // username: CString
         // TODO: Guard against strings that are already null-terminated
-        assert_ne!(
-            self.username.as_bytes().iter().next_back(),
-            Some(&0_u8),
-            "String `username` must not be null-terminated."
-        );
+        assert_ne!(self.username.as_bytes().iter().next_back(), Some(&0_u8), "String `username` must not be null-terminated.");
         w.write_all(self.username.as_bytes())?;
         // Null terminator
         w.write_all(&[0])?;
@@ -144,13 +138,10 @@ impl crate::Message for CMSG_AUTH_SESSION {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(
-        r: &mut &[u8],
-        body_size: u32,
-    ) -> Result<Self, crate::errors::ParseError> {
-        Self::read_inner(r, body_size)
-            .map_err(|a| crate::errors::ParseError::new(493, "CMSG_AUTH_SESSION", body_size, a))
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size).map_err(|a| crate::errors::ParseError::new(493, "CMSG_AUTH_SESSION", body_size, a))
     }
+
 }
 
 #[cfg(feature = "vanilla")]
@@ -192,14 +183,12 @@ impl crate::vanilla::ClientMessage for CMSG_AUTH_SESSION {
     fn tokio_write_unencrypted_client<'s, 'async_trait, W>(
         &'s self,
         mut w: W,
-    ) -> std::pin::Pin<
-        Box<dyn std::future::Future<Output = Result<(), std::io::Error>> + Send + 'async_trait>,
-    >
+    ) -> std::pin::Pin<Box<dyn std::future::Future<Output = Result<(), std::io::Error>> + Send + 'async_trait>>
     where
         W: 'async_trait + tokio::io::AsyncWriteExt + Unpin + Send,
         's: 'async_trait,
         Self: Sync + 'async_trait,
-    {
+     {
         Box::pin(async move {
             let mut v = Vec::with_capacity(1024);
             let mut s = &mut v;
@@ -219,15 +208,13 @@ impl crate::vanilla::ClientMessage for CMSG_AUTH_SESSION {
         &'s self,
         mut w: W,
         e: &'e mut wow_srp::vanilla_header::EncrypterHalf,
-    ) -> std::pin::Pin<
-        Box<dyn std::future::Future<Output = Result<(), std::io::Error>> + Send + 'async_trait>,
-    >
+    ) -> std::pin::Pin<Box<dyn std::future::Future<Output = Result<(), std::io::Error>> + Send + 'async_trait>>
     where
         W: 'async_trait + tokio::io::AsyncWriteExt + Unpin + Send,
         's: 'async_trait,
         'e: 'async_trait,
         Self: Sync + 'async_trait,
-    {
+     {
         Box::pin(async move {
             let mut v = Vec::with_capacity(1024);
             let mut s = &mut v;
@@ -247,14 +234,12 @@ impl crate::vanilla::ClientMessage for CMSG_AUTH_SESSION {
     fn astd_write_unencrypted_client<'s, 'async_trait, W>(
         &'s self,
         mut w: W,
-    ) -> std::pin::Pin<
-        Box<dyn std::future::Future<Output = Result<(), std::io::Error>> + Send + 'async_trait>,
-    >
+    ) -> std::pin::Pin<Box<dyn std::future::Future<Output = Result<(), std::io::Error>> + Send + 'async_trait>>
     where
         W: 'async_trait + async_std::io::WriteExt + Unpin + Send,
         's: 'async_trait,
         Self: Sync + 'async_trait,
-    {
+     {
         Box::pin(async move {
             let mut v = Vec::with_capacity(1024);
             let mut s = &mut v;
@@ -274,15 +259,13 @@ impl crate::vanilla::ClientMessage for CMSG_AUTH_SESSION {
         &'s self,
         mut w: W,
         e: &'e mut wow_srp::vanilla_header::EncrypterHalf,
-    ) -> std::pin::Pin<
-        Box<dyn std::future::Future<Output = Result<(), std::io::Error>> + Send + 'async_trait>,
-    >
+    ) -> std::pin::Pin<Box<dyn std::future::Future<Output = Result<(), std::io::Error>> + Send + 'async_trait>>
     where
         W: 'async_trait + async_std::io::WriteExt + Unpin + Send,
         's: 'async_trait,
         'e: 'async_trait,
         Self: Sync + 'async_trait,
-    {
+     {
         Box::pin(async move {
             let mut v = Vec::with_capacity(1024);
             let mut s = &mut v;
@@ -297,6 +280,7 @@ impl crate::vanilla::ClientMessage for CMSG_AUTH_SESSION {
             w.write_all(&v).await
         })
     }
+
 }
 
 #[cfg(feature = "tbc")]
@@ -338,14 +322,12 @@ impl crate::tbc::ClientMessage for CMSG_AUTH_SESSION {
     fn tokio_write_unencrypted_client<'s, 'async_trait, W>(
         &'s self,
         mut w: W,
-    ) -> std::pin::Pin<
-        Box<dyn std::future::Future<Output = Result<(), std::io::Error>> + Send + 'async_trait>,
-    >
+    ) -> std::pin::Pin<Box<dyn std::future::Future<Output = Result<(), std::io::Error>> + Send + 'async_trait>>
     where
         W: 'async_trait + tokio::io::AsyncWriteExt + Unpin + Send,
         's: 'async_trait,
         Self: Sync + 'async_trait,
-    {
+     {
         Box::pin(async move {
             let mut v = Vec::with_capacity(1024);
             let mut s = &mut v;
@@ -365,15 +347,13 @@ impl crate::tbc::ClientMessage for CMSG_AUTH_SESSION {
         &'s self,
         mut w: W,
         e: &'e mut wow_srp::tbc_header::EncrypterHalf,
-    ) -> std::pin::Pin<
-        Box<dyn std::future::Future<Output = Result<(), std::io::Error>> + Send + 'async_trait>,
-    >
+    ) -> std::pin::Pin<Box<dyn std::future::Future<Output = Result<(), std::io::Error>> + Send + 'async_trait>>
     where
         W: 'async_trait + tokio::io::AsyncWriteExt + Unpin + Send,
         's: 'async_trait,
         'e: 'async_trait,
         Self: Sync + 'async_trait,
-    {
+     {
         Box::pin(async move {
             let mut v = Vec::with_capacity(1024);
             let mut s = &mut v;
@@ -393,14 +373,12 @@ impl crate::tbc::ClientMessage for CMSG_AUTH_SESSION {
     fn astd_write_unencrypted_client<'s, 'async_trait, W>(
         &'s self,
         mut w: W,
-    ) -> std::pin::Pin<
-        Box<dyn std::future::Future<Output = Result<(), std::io::Error>> + Send + 'async_trait>,
-    >
+    ) -> std::pin::Pin<Box<dyn std::future::Future<Output = Result<(), std::io::Error>> + Send + 'async_trait>>
     where
         W: 'async_trait + async_std::io::WriteExt + Unpin + Send,
         's: 'async_trait,
         Self: Sync + 'async_trait,
-    {
+     {
         Box::pin(async move {
             let mut v = Vec::with_capacity(1024);
             let mut s = &mut v;
@@ -420,15 +398,13 @@ impl crate::tbc::ClientMessage for CMSG_AUTH_SESSION {
         &'s self,
         mut w: W,
         e: &'e mut wow_srp::tbc_header::EncrypterHalf,
-    ) -> std::pin::Pin<
-        Box<dyn std::future::Future<Output = Result<(), std::io::Error>> + Send + 'async_trait>,
-    >
+    ) -> std::pin::Pin<Box<dyn std::future::Future<Output = Result<(), std::io::Error>> + Send + 'async_trait>>
     where
         W: 'async_trait + async_std::io::WriteExt + Unpin + Send,
         's: 'async_trait,
         'e: 'async_trait,
         Self: Sync + 'async_trait,
-    {
+     {
         Box::pin(async move {
             let mut v = Vec::with_capacity(1024);
             let mut s = &mut v;
@@ -443,6 +419,7 @@ impl crate::tbc::ClientMessage for CMSG_AUTH_SESSION {
             w.write_all(&v).await
         })
     }
+
 }
 
 impl CMSG_AUTH_SESSION {
@@ -452,35 +429,35 @@ impl CMSG_AUTH_SESSION {
         + self.username.len() + 1 // username: CString
         + 4 // client_seed: u32
         + 20 // client_proof: u8[20]
-        + crate::util::zlib_compressed_size(self.addon_info.iter().fold(Vec::new(), |mut acc, x| { x.write_into_vec(&mut acc).unwrap(); acc } ).as_slice()) + 4
-        // addon_info: AddonInfo[-]
+        + crate::util::zlib_compressed_size(self.addon_info.iter().fold(Vec::new(), |mut acc, x| { x.write_into_vec(&mut acc).unwrap(); acc } ).as_slice()) + 4 // addon_info: AddonInfo[-]
     }
 }
 
 #[cfg(all(feature = "vanilla", test))]
 mod test_vanilla {
     #![allow(clippy::missing_const_for_fn)]
-    use super::super::*;
     use super::CMSG_AUTH_SESSION;
     use super::*;
+    use super::super::*;
     use crate::vanilla::opcodes::ClientOpcodeMessage;
     use crate::vanilla::{ClientMessage, ServerMessage};
 
     const HEADER_SIZE: usize = 2 + 4;
-    const RAW0: [u8; 174] = [
-        0x00, 0xAC, 0xED, 0x01, 0x00, 0x00, 0xF3, 0x16, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x41,
-        0x00, 0x88, 0x02, 0xD8, 0x49, 0x88, 0x9D, 0xEF, 0x05, 0x25, 0xBB, 0xC1, 0xAB, 0xA7, 0x8A,
-        0xDB, 0xA4, 0xFB, 0xA3, 0xE7, 0x7E, 0x67, 0xAC, 0xEA, 0xC6, 0x56, 0x01, 0x00, 0x00, 0x78,
-        0x9C, 0x75, 0xCC, 0xBD, 0x0E, 0xC2, 0x30, 0x0C, 0x04, 0xE0, 0xF2, 0x1E, 0xBC, 0x0C, 0x61,
-        0x40, 0x95, 0xC8, 0x42, 0xC3, 0x8C, 0x4C, 0xE2, 0x22, 0x0B, 0xC7, 0xA9, 0x8C, 0xCB, 0x4F,
-        0x9F, 0x1E, 0x16, 0x24, 0x06, 0x73, 0xEB, 0x77, 0x77, 0x81, 0x69, 0x59, 0x40, 0xCB, 0x69,
-        0x33, 0x67, 0xA3, 0x26, 0xC7, 0xBE, 0x5B, 0xD5, 0xC7, 0x7A, 0xDF, 0x7D, 0x12, 0xBE, 0x16,
-        0xC0, 0x8C, 0x71, 0x24, 0xE4, 0x12, 0x49, 0xA8, 0xC2, 0xE4, 0x95, 0x48, 0x0A, 0xC9, 0xC5,
-        0x3D, 0xD8, 0xB6, 0x7A, 0x06, 0x4B, 0xF8, 0x34, 0x0F, 0x15, 0x46, 0x73, 0x67, 0xBB, 0x38,
-        0xCC, 0x7A, 0xC7, 0x97, 0x8B, 0xBD, 0xDC, 0x26, 0xCC, 0xFE, 0x30, 0x42, 0xD6, 0xE6, 0xCA,
-        0x01, 0xA8, 0xB8, 0x90, 0x80, 0x51, 0xFC, 0xB7, 0xA4, 0x50, 0x70, 0xB8, 0x12, 0xF3, 0x3F,
-        0x26, 0x41, 0xFD, 0xB5, 0x37, 0x90, 0x19, 0x66, 0x8F,
-    ];
+    const RAW0: [u8; 174] = [ 0x00, 0xAC, 0xED, 0x01, 0x00, 0x00, 0xF3, 0x16, 0x00,
+         0x00, 0x00, 0x00, 0x00, 0x00, 0x41, 0x00, 0x88, 0x02, 0xD8, 0x49, 0x88,
+         0x9D, 0xEF, 0x05, 0x25, 0xBB, 0xC1, 0xAB, 0xA7, 0x8A, 0xDB, 0xA4, 0xFB,
+         0xA3, 0xE7, 0x7E, 0x67, 0xAC, 0xEA, 0xC6, 0x56, 0x01, 0x00, 0x00, 0x78,
+         0x9C, 0x75, 0xCC, 0xBD, 0x0E, 0xC2, 0x30, 0x0C, 0x04, 0xE0, 0xF2, 0x1E,
+         0xBC, 0x0C, 0x61, 0x40, 0x95, 0xC8, 0x42, 0xC3, 0x8C, 0x4C, 0xE2, 0x22,
+         0x0B, 0xC7, 0xA9, 0x8C, 0xCB, 0x4F, 0x9F, 0x1E, 0x16, 0x24, 0x06, 0x73,
+         0xEB, 0x77, 0x77, 0x81, 0x69, 0x59, 0x40, 0xCB, 0x69, 0x33, 0x67, 0xA3,
+         0x26, 0xC7, 0xBE, 0x5B, 0xD5, 0xC7, 0x7A, 0xDF, 0x7D, 0x12, 0xBE, 0x16,
+         0xC0, 0x8C, 0x71, 0x24, 0xE4, 0x12, 0x49, 0xA8, 0xC2, 0xE4, 0x95, 0x48,
+         0x0A, 0xC9, 0xC5, 0x3D, 0xD8, 0xB6, 0x7A, 0x06, 0x4B, 0xF8, 0x34, 0x0F,
+         0x15, 0x46, 0x73, 0x67, 0xBB, 0x38, 0xCC, 0x7A, 0xC7, 0x97, 0x8B, 0xBD,
+         0xDC, 0x26, 0xCC, 0xFE, 0x30, 0x42, 0xD6, 0xE6, 0xCA, 0x01, 0xA8, 0xB8,
+         0x90, 0x80, 0x51, 0xFC, 0xB7, 0xA4, 0x50, 0x70, 0xB8, 0x12, 0xF3, 0x3F,
+         0x26, 0x41, 0xFD, 0xB5, 0x37, 0x90, 0x19, 0x66, 0x8F, ];
 
     pub(crate) fn expected0() -> CMSG_AUTH_SESSION {
         CMSG_AUTH_SESSION {
@@ -488,10 +465,8 @@ mod test_vanilla {
             server_id: 0x0,
             username: String::from("A"),
             client_seed: 0x49D80288,
-            client_proof: [
-                0x88, 0x9D, 0xEF, 0x05, 0x25, 0xBB, 0xC1, 0xAB, 0xA7, 0x8A, 0xDB, 0xA4, 0xFB, 0xA3,
-                0xE7, 0x7E, 0x67, 0xAC, 0xEA, 0xC6,
-            ],
+            client_proof: [ 0x88, 0x9D, 0xEF, 0x05, 0x25, 0xBB, 0xC1, 0xAB, 0xA7,
+                 0x8A, 0xDB, 0xA4, 0xFB, 0xA3, 0xE7, 0x7E, 0x67, 0xAC, 0xEA, 0xC6, ],
             addon_info: vec![
                 AddonInfo {
                     addon_name: String::from("Blizzard_AuctionUI"),
@@ -567,6 +542,7 @@ mod test_vanilla {
                 },
             ],
         }
+
     }
 
     // Generated from `wow_message_parser/wowm/world/character_screen/cmsg_auth_session.wowm` line 27.
@@ -582,17 +558,12 @@ mod test_vanilla {
 
         assert_eq!(t.as_ref(), &expected);
         let mut dest = Vec::with_capacity(RAW0.len());
-        expected
-            .write_unencrypted_client(&mut std::io::Cursor::new(&mut dest))
-            .unwrap();
+        expected.write_unencrypted_client(&mut std::io::Cursor::new(&mut dest)).unwrap();
 
         let s = ClientOpcodeMessage::read_unencrypted(&mut std::io::Cursor::new(&dest)).unwrap();
         let s = match s {
             ClientOpcodeMessage::CMSG_AUTH_SESSION(s) => s,
-            opcode => panic!(
-                "incorrect opcode. Expected CMSG_AUTH_SESSION, got {opcode:#?}",
-                opcode = opcode
-            ),
+            opcode => panic!("incorrect opcode. Expected CMSG_AUTH_SESSION, got {opcode:#?}", opcode = opcode),
         };
 
         assert_eq!(t, s);
@@ -603,9 +574,7 @@ mod test_vanilla {
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_cmsg_auth_session0() {
         let expected = expected0();
-        let t = ClientOpcodeMessage::tokio_read_unencrypted(&mut std::io::Cursor::new(&RAW0))
-            .await
-            .unwrap();
+        let t = ClientOpcodeMessage::tokio_read_unencrypted(&mut std::io::Cursor::new(&RAW0)).await.unwrap();
         let t = match t {
             ClientOpcodeMessage::CMSG_AUTH_SESSION(t) => t,
             opcode => panic!("incorrect opcode. Expected CMSG_AUTH_SESSION, got {opcode:#?}"),
@@ -613,20 +582,12 @@ mod test_vanilla {
 
         assert_eq!(t.as_ref(), &expected);
         let mut dest = Vec::with_capacity(RAW0.len());
-        expected
-            .tokio_write_unencrypted_client(&mut std::io::Cursor::new(&mut dest))
-            .await
-            .unwrap();
+        expected.tokio_write_unencrypted_client(&mut std::io::Cursor::new(&mut dest)).await.unwrap();
 
-        let s = ClientOpcodeMessage::tokio_read_unencrypted(&mut std::io::Cursor::new(&dest))
-            .await
-            .unwrap();
+        let s = ClientOpcodeMessage::tokio_read_unencrypted(&mut std::io::Cursor::new(&dest)).await.unwrap();
         let s = match s {
             ClientOpcodeMessage::CMSG_AUTH_SESSION(s) => s,
-            opcode => panic!(
-                "incorrect opcode. Expected CMSG_AUTH_SESSION, got {opcode:#?}",
-                opcode = opcode
-            ),
+            opcode => panic!("incorrect opcode. Expected CMSG_AUTH_SESSION, got {opcode:#?}", opcode = opcode),
         };
 
         assert_eq!(t, s);
@@ -637,9 +598,7 @@ mod test_vanilla {
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_cmsg_auth_session0() {
         let expected = expected0();
-        let t = ClientOpcodeMessage::astd_read_unencrypted(&mut async_std::io::Cursor::new(&RAW0))
-            .await
-            .unwrap();
+        let t = ClientOpcodeMessage::astd_read_unencrypted(&mut async_std::io::Cursor::new(&RAW0)).await.unwrap();
         let t = match t {
             ClientOpcodeMessage::CMSG_AUTH_SESSION(t) => t,
             opcode => panic!("incorrect opcode. Expected CMSG_AUTH_SESSION, got {opcode:#?}"),
@@ -647,50 +606,44 @@ mod test_vanilla {
 
         assert_eq!(t.as_ref(), &expected);
         let mut dest = Vec::with_capacity(RAW0.len());
-        expected
-            .astd_write_unencrypted_client(&mut async_std::io::Cursor::new(&mut dest))
-            .await
-            .unwrap();
+        expected.astd_write_unencrypted_client(&mut async_std::io::Cursor::new(&mut dest)).await.unwrap();
 
-        let s = ClientOpcodeMessage::astd_read_unencrypted(&mut async_std::io::Cursor::new(&dest))
-            .await
-            .unwrap();
+        let s = ClientOpcodeMessage::astd_read_unencrypted(&mut async_std::io::Cursor::new(&dest)).await.unwrap();
         let s = match s {
             ClientOpcodeMessage::CMSG_AUTH_SESSION(s) => s,
-            opcode => panic!(
-                "incorrect opcode. Expected CMSG_AUTH_SESSION, got {opcode:#?}",
-                opcode = opcode
-            ),
+            opcode => panic!("incorrect opcode. Expected CMSG_AUTH_SESSION, got {opcode:#?}", opcode = opcode),
         };
 
         assert_eq!(t, s);
     }
+
 }
 
 #[cfg(all(feature = "tbc", test))]
 mod test_tbc {
     #![allow(clippy::missing_const_for_fn)]
-    use super::super::*;
     use super::CMSG_AUTH_SESSION;
     use super::*;
+    use super::super::*;
     use crate::tbc::opcodes::ClientOpcodeMessage;
     use crate::tbc::{ClientMessage, ServerMessage};
 
     const HEADER_SIZE: usize = 2 + 4;
-    const RAW0: [u8; 174] = [
-        0x00, 0xAC, 0xED, 0x01, 0x00, 0x00, 0xF3, 0x16, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x41,
-        0x00, 0x88, 0x02, 0xD8, 0x49, 0x88, 0x9D, 0xEF, 0x05, 0x25, 0xBB, 0xC1, 0xAB, 0xA7, 0x8A,
-        0xDB, 0xA4, 0xFB, 0xA3, 0xE7, 0x7E, 0x67, 0xAC, 0xEA, 0xC6, 0x56, 0x01, 0x00, 0x00, 0x78,
-        0x9C, 0x75, 0xCC, 0xBD, 0x0E, 0xC2, 0x30, 0x0C, 0x04, 0xE0, 0xF2, 0x1E, 0xBC, 0x0C, 0x61,
-        0x40, 0x95, 0xC8, 0x42, 0xC3, 0x8C, 0x4C, 0xE2, 0x22, 0x0B, 0xC7, 0xA9, 0x8C, 0xCB, 0x4F,
-        0x9F, 0x1E, 0x16, 0x24, 0x06, 0x73, 0xEB, 0x77, 0x77, 0x81, 0x69, 0x59, 0x40, 0xCB, 0x69,
-        0x33, 0x67, 0xA3, 0x26, 0xC7, 0xBE, 0x5B, 0xD5, 0xC7, 0x7A, 0xDF, 0x7D, 0x12, 0xBE, 0x16,
-        0xC0, 0x8C, 0x71, 0x24, 0xE4, 0x12, 0x49, 0xA8, 0xC2, 0xE4, 0x95, 0x48, 0x0A, 0xC9, 0xC5,
-        0x3D, 0xD8, 0xB6, 0x7A, 0x06, 0x4B, 0xF8, 0x34, 0x0F, 0x15, 0x46, 0x73, 0x67, 0xBB, 0x38,
-        0xCC, 0x7A, 0xC7, 0x97, 0x8B, 0xBD, 0xDC, 0x26, 0xCC, 0xFE, 0x30, 0x42, 0xD6, 0xE6, 0xCA,
-        0x01, 0xA8, 0xB8, 0x90, 0x80, 0x51, 0xFC, 0xB7, 0xA4, 0x50, 0x70, 0xB8, 0x12, 0xF3, 0x3F,
-        0x26, 0x41, 0xFD, 0xB5, 0x37, 0x90, 0x19, 0x66, 0x8F,
-    ];
+    const RAW0: [u8; 174] = [ 0x00, 0xAC, 0xED, 0x01, 0x00, 0x00, 0xF3, 0x16, 0x00,
+         0x00, 0x00, 0x00, 0x00, 0x00, 0x41, 0x00, 0x88, 0x02, 0xD8, 0x49, 0x88,
+         0x9D, 0xEF, 0x05, 0x25, 0xBB, 0xC1, 0xAB, 0xA7, 0x8A, 0xDB, 0xA4, 0xFB,
+         0xA3, 0xE7, 0x7E, 0x67, 0xAC, 0xEA, 0xC6, 0x56, 0x01, 0x00, 0x00, 0x78,
+         0x9C, 0x75, 0xCC, 0xBD, 0x0E, 0xC2, 0x30, 0x0C, 0x04, 0xE0, 0xF2, 0x1E,
+         0xBC, 0x0C, 0x61, 0x40, 0x95, 0xC8, 0x42, 0xC3, 0x8C, 0x4C, 0xE2, 0x22,
+         0x0B, 0xC7, 0xA9, 0x8C, 0xCB, 0x4F, 0x9F, 0x1E, 0x16, 0x24, 0x06, 0x73,
+         0xEB, 0x77, 0x77, 0x81, 0x69, 0x59, 0x40, 0xCB, 0x69, 0x33, 0x67, 0xA3,
+         0x26, 0xC7, 0xBE, 0x5B, 0xD5, 0xC7, 0x7A, 0xDF, 0x7D, 0x12, 0xBE, 0x16,
+         0xC0, 0x8C, 0x71, 0x24, 0xE4, 0x12, 0x49, 0xA8, 0xC2, 0xE4, 0x95, 0x48,
+         0x0A, 0xC9, 0xC5, 0x3D, 0xD8, 0xB6, 0x7A, 0x06, 0x4B, 0xF8, 0x34, 0x0F,
+         0x15, 0x46, 0x73, 0x67, 0xBB, 0x38, 0xCC, 0x7A, 0xC7, 0x97, 0x8B, 0xBD,
+         0xDC, 0x26, 0xCC, 0xFE, 0x30, 0x42, 0xD6, 0xE6, 0xCA, 0x01, 0xA8, 0xB8,
+         0x90, 0x80, 0x51, 0xFC, 0xB7, 0xA4, 0x50, 0x70, 0xB8, 0x12, 0xF3, 0x3F,
+         0x26, 0x41, 0xFD, 0xB5, 0x37, 0x90, 0x19, 0x66, 0x8F, ];
 
     pub(crate) fn expected0() -> CMSG_AUTH_SESSION {
         CMSG_AUTH_SESSION {
@@ -698,10 +651,8 @@ mod test_tbc {
             server_id: 0x0,
             username: String::from("A"),
             client_seed: 0x49D80288,
-            client_proof: [
-                0x88, 0x9D, 0xEF, 0x05, 0x25, 0xBB, 0xC1, 0xAB, 0xA7, 0x8A, 0xDB, 0xA4, 0xFB, 0xA3,
-                0xE7, 0x7E, 0x67, 0xAC, 0xEA, 0xC6,
-            ],
+            client_proof: [ 0x88, 0x9D, 0xEF, 0x05, 0x25, 0xBB, 0xC1, 0xAB, 0xA7,
+                 0x8A, 0xDB, 0xA4, 0xFB, 0xA3, 0xE7, 0x7E, 0x67, 0xAC, 0xEA, 0xC6, ],
             addon_info: vec![
                 AddonInfo {
                     addon_name: String::from("Blizzard_AuctionUI"),
@@ -777,6 +728,7 @@ mod test_tbc {
                 },
             ],
         }
+
     }
 
     // Generated from `wow_message_parser/wowm/world/character_screen/cmsg_auth_session.wowm` line 27.
@@ -792,17 +744,12 @@ mod test_tbc {
 
         assert_eq!(t.as_ref(), &expected);
         let mut dest = Vec::with_capacity(RAW0.len());
-        expected
-            .write_unencrypted_client(&mut std::io::Cursor::new(&mut dest))
-            .unwrap();
+        expected.write_unencrypted_client(&mut std::io::Cursor::new(&mut dest)).unwrap();
 
         let s = ClientOpcodeMessage::read_unencrypted(&mut std::io::Cursor::new(&dest)).unwrap();
         let s = match s {
             ClientOpcodeMessage::CMSG_AUTH_SESSION(s) => s,
-            opcode => panic!(
-                "incorrect opcode. Expected CMSG_AUTH_SESSION, got {opcode:#?}",
-                opcode = opcode
-            ),
+            opcode => panic!("incorrect opcode. Expected CMSG_AUTH_SESSION, got {opcode:#?}", opcode = opcode),
         };
 
         assert_eq!(t, s);
@@ -813,9 +760,7 @@ mod test_tbc {
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_cmsg_auth_session0() {
         let expected = expected0();
-        let t = ClientOpcodeMessage::tokio_read_unencrypted(&mut std::io::Cursor::new(&RAW0))
-            .await
-            .unwrap();
+        let t = ClientOpcodeMessage::tokio_read_unencrypted(&mut std::io::Cursor::new(&RAW0)).await.unwrap();
         let t = match t {
             ClientOpcodeMessage::CMSG_AUTH_SESSION(t) => t,
             opcode => panic!("incorrect opcode. Expected CMSG_AUTH_SESSION, got {opcode:#?}"),
@@ -823,20 +768,12 @@ mod test_tbc {
 
         assert_eq!(t.as_ref(), &expected);
         let mut dest = Vec::with_capacity(RAW0.len());
-        expected
-            .tokio_write_unencrypted_client(&mut std::io::Cursor::new(&mut dest))
-            .await
-            .unwrap();
+        expected.tokio_write_unencrypted_client(&mut std::io::Cursor::new(&mut dest)).await.unwrap();
 
-        let s = ClientOpcodeMessage::tokio_read_unencrypted(&mut std::io::Cursor::new(&dest))
-            .await
-            .unwrap();
+        let s = ClientOpcodeMessage::tokio_read_unencrypted(&mut std::io::Cursor::new(&dest)).await.unwrap();
         let s = match s {
             ClientOpcodeMessage::CMSG_AUTH_SESSION(s) => s,
-            opcode => panic!(
-                "incorrect opcode. Expected CMSG_AUTH_SESSION, got {opcode:#?}",
-                opcode = opcode
-            ),
+            opcode => panic!("incorrect opcode. Expected CMSG_AUTH_SESSION, got {opcode:#?}", opcode = opcode),
         };
 
         assert_eq!(t, s);
@@ -847,9 +784,7 @@ mod test_tbc {
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_cmsg_auth_session0() {
         let expected = expected0();
-        let t = ClientOpcodeMessage::astd_read_unencrypted(&mut async_std::io::Cursor::new(&RAW0))
-            .await
-            .unwrap();
+        let t = ClientOpcodeMessage::astd_read_unencrypted(&mut async_std::io::Cursor::new(&RAW0)).await.unwrap();
         let t = match t {
             ClientOpcodeMessage::CMSG_AUTH_SESSION(t) => t,
             opcode => panic!("incorrect opcode. Expected CMSG_AUTH_SESSION, got {opcode:#?}"),
@@ -857,22 +792,16 @@ mod test_tbc {
 
         assert_eq!(t.as_ref(), &expected);
         let mut dest = Vec::with_capacity(RAW0.len());
-        expected
-            .astd_write_unencrypted_client(&mut async_std::io::Cursor::new(&mut dest))
-            .await
-            .unwrap();
+        expected.astd_write_unencrypted_client(&mut async_std::io::Cursor::new(&mut dest)).await.unwrap();
 
-        let s = ClientOpcodeMessage::astd_read_unencrypted(&mut async_std::io::Cursor::new(&dest))
-            .await
-            .unwrap();
+        let s = ClientOpcodeMessage::astd_read_unencrypted(&mut async_std::io::Cursor::new(&dest)).await.unwrap();
         let s = match s {
             ClientOpcodeMessage::CMSG_AUTH_SESSION(s) => s,
-            opcode => panic!(
-                "incorrect opcode. Expected CMSG_AUTH_SESSION, got {opcode:#?}",
-                opcode = opcode
-            ),
+            opcode => panic!("incorrect opcode. Expected CMSG_AUTH_SESSION, got {opcode:#?}", opcode = opcode),
         };
 
         assert_eq!(t, s);
     }
+
 }
+

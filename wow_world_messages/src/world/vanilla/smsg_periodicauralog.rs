@@ -92,9 +92,9 @@ impl crate::Message for SMSG_PERIODICAURALOG {
         for v in self.auras.as_slice() {
             writeln!(s, "        {{").unwrap();
             // Members
-            writeln!(s, "            aura_type = {};", AuraType::try_from(v.aura_type.as_int()).unwrap().as_test_case_value()).unwrap();
-            match &v.aura_type {
-                crate::vanilla::AuraLog_AuraType::PeriodicDamage {
+            writeln!(s, "            aura_type = {};", AuraType::try_from(v.as_int()).unwrap().as_test_case_value()).unwrap();
+            match &v {
+                crate::vanilla::AuraLog::PeriodicDamage {
                     absorbed,
                     damage1,
                     resisted,
@@ -105,31 +105,31 @@ impl crate::Message for SMSG_PERIODICAURALOG {
                     writeln!(s, "            absorbed = {};", absorbed).unwrap();
                     writeln!(s, "            resisted = {};", resisted).unwrap();
                 }
-                crate::vanilla::AuraLog_AuraType::PeriodicHeal {
+                crate::vanilla::AuraLog::PeriodicHeal {
                     damage2,
                 } => {
                     writeln!(s, "            damage2 = {};", damage2).unwrap();
                 }
-                crate::vanilla::AuraLog_AuraType::ObsModHealth {
+                crate::vanilla::AuraLog::ObsModHealth {
                     damage2,
                 } => {
                     writeln!(s, "            damage2 = {};", damage2).unwrap();
                 }
-                crate::vanilla::AuraLog_AuraType::ObsModMana {
+                crate::vanilla::AuraLog::ObsModMana {
                     damage3,
                     misc_value1,
                 } => {
                     writeln!(s, "            misc_value1 = {};", misc_value1).unwrap();
                     writeln!(s, "            damage3 = {};", damage3).unwrap();
                 }
-                crate::vanilla::AuraLog_AuraType::PeriodicEnergize {
+                crate::vanilla::AuraLog::PeriodicEnergize {
                     damage3,
                     misc_value1,
                 } => {
                     writeln!(s, "            misc_value1 = {};", misc_value1).unwrap();
                     writeln!(s, "            damage3 = {};", damage3).unwrap();
                 }
-                crate::vanilla::AuraLog_AuraType::PeriodicManaLeech {
+                crate::vanilla::AuraLog::PeriodicManaLeech {
                     damage,
                     gain_multiplier,
                     misc_value2,
@@ -138,7 +138,7 @@ impl crate::Message for SMSG_PERIODICAURALOG {
                     writeln!(s, "            damage = {};", damage).unwrap();
                     writeln!(s, "            gain_multiplier = {};", if gain_multiplier.to_string().contains('.') { gain_multiplier.to_string() } else { format!("{}.0", gain_multiplier) }).unwrap();
                 }
-                crate::vanilla::AuraLog_AuraType::PeriodicDamagePercent {
+                crate::vanilla::AuraLog::PeriodicDamagePercent {
                     absorbed,
                     damage1,
                     resisted,
@@ -176,8 +176,8 @@ impl crate::Message for SMSG_PERIODICAURALOG {
             for (i, v) in self.auras.iter().enumerate() {
                 writeln!(s, "    /* auras: AuraLog[amount_of_auras] {i} start */").unwrap();
                 crate::util::write_bytes(&mut s, &mut bytes, 4, "aura_type", "        ");
-                match &v.aura_type {
-                    crate::vanilla::AuraLog_AuraType::PeriodicDamage {
+                match &v {
+                    crate::vanilla::AuraLog::PeriodicDamage {
                         absorbed,
                         damage1,
                         resisted,
@@ -188,31 +188,31 @@ impl crate::Message for SMSG_PERIODICAURALOG {
                         crate::util::write_bytes(&mut s, &mut bytes, 4, "absorbed", "        ");
                         crate::util::write_bytes(&mut s, &mut bytes, 4, "resisted", "        ");
                     }
-                    crate::vanilla::AuraLog_AuraType::PeriodicHeal {
+                    crate::vanilla::AuraLog::PeriodicHeal {
                         damage2,
                     } => {
                         crate::util::write_bytes(&mut s, &mut bytes, 4, "damage2", "        ");
                     }
-                    crate::vanilla::AuraLog_AuraType::ObsModHealth {
+                    crate::vanilla::AuraLog::ObsModHealth {
                         damage2,
                     } => {
                         crate::util::write_bytes(&mut s, &mut bytes, 4, "damage2", "        ");
                     }
-                    crate::vanilla::AuraLog_AuraType::ObsModMana {
+                    crate::vanilla::AuraLog::ObsModMana {
                         damage3,
                         misc_value1,
                     } => {
                         crate::util::write_bytes(&mut s, &mut bytes, 4, "misc_value1", "        ");
                         crate::util::write_bytes(&mut s, &mut bytes, 4, "damage3", "        ");
                     }
-                    crate::vanilla::AuraLog_AuraType::PeriodicEnergize {
+                    crate::vanilla::AuraLog::PeriodicEnergize {
                         damage3,
                         misc_value1,
                     } => {
                         crate::util::write_bytes(&mut s, &mut bytes, 4, "misc_value1", "        ");
                         crate::util::write_bytes(&mut s, &mut bytes, 4, "damage3", "        ");
                     }
-                    crate::vanilla::AuraLog_AuraType::PeriodicManaLeech {
+                    crate::vanilla::AuraLog::PeriodicManaLeech {
                         damage,
                         gain_multiplier,
                         misc_value2,
@@ -221,7 +221,7 @@ impl crate::Message for SMSG_PERIODICAURALOG {
                         crate::util::write_bytes(&mut s, &mut bytes, 4, "damage", "        ");
                         crate::util::write_bytes(&mut s, &mut bytes, 4, "gain_multiplier", "        ");
                     }
-                    crate::vanilla::AuraLog_AuraType::PeriodicDamagePercent {
+                    crate::vanilla::AuraLog::PeriodicDamagePercent {
                         absorbed,
                         damage1,
                         resisted,

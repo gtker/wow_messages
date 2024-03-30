@@ -11,9 +11,24 @@ use crate::wrath::ReferAFriendError;
 ///     }
 /// }
 /// ```
-#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
-pub struct SMSG_REFER_A_FRIEND_FAILURE {
-    pub error: SMSG_REFER_A_FRIEND_FAILURE_ReferAFriendError,
+#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord)]
+pub enum SMSG_REFER_A_FRIEND_FAILURE {
+    None,
+    NotReferredBy,
+    TargetTooHigh,
+    InsufficientGrantableLevels,
+    TooFar,
+    DifferentFaction,
+    NotNow,
+    GrantLevelMax,
+    NoTarget,
+    NotInGroup {
+        target_name: String,
+    },
+    SummonLevelMax,
+    SummonCooldown,
+    InsufficientExpansionLevel,
+    SummonOffline,
 }
 
 impl crate::private::Sealed for SMSG_REFER_A_FRIEND_FAILURE {}
@@ -27,15 +42,15 @@ impl SMSG_REFER_A_FRIEND_FAILURE {
         let error = (crate::util::read_u32_le(&mut r)? as u8).try_into()?;
 
         let error_if = match error {
-            ReferAFriendError::None => SMSG_REFER_A_FRIEND_FAILURE_ReferAFriendError::None,
-            ReferAFriendError::NotReferredBy => SMSG_REFER_A_FRIEND_FAILURE_ReferAFriendError::NotReferredBy,
-            ReferAFriendError::TargetTooHigh => SMSG_REFER_A_FRIEND_FAILURE_ReferAFriendError::TargetTooHigh,
-            ReferAFriendError::InsufficientGrantableLevels => SMSG_REFER_A_FRIEND_FAILURE_ReferAFriendError::InsufficientGrantableLevels,
-            ReferAFriendError::TooFar => SMSG_REFER_A_FRIEND_FAILURE_ReferAFriendError::TooFar,
-            ReferAFriendError::DifferentFaction => SMSG_REFER_A_FRIEND_FAILURE_ReferAFriendError::DifferentFaction,
-            ReferAFriendError::NotNow => SMSG_REFER_A_FRIEND_FAILURE_ReferAFriendError::NotNow,
-            ReferAFriendError::GrantLevelMax => SMSG_REFER_A_FRIEND_FAILURE_ReferAFriendError::GrantLevelMax,
-            ReferAFriendError::NoTarget => SMSG_REFER_A_FRIEND_FAILURE_ReferAFriendError::NoTarget,
+            ReferAFriendError::None => SMSG_REFER_A_FRIEND_FAILURE::None,
+            ReferAFriendError::NotReferredBy => SMSG_REFER_A_FRIEND_FAILURE::NotReferredBy,
+            ReferAFriendError::TargetTooHigh => SMSG_REFER_A_FRIEND_FAILURE::TargetTooHigh,
+            ReferAFriendError::InsufficientGrantableLevels => SMSG_REFER_A_FRIEND_FAILURE::InsufficientGrantableLevels,
+            ReferAFriendError::TooFar => SMSG_REFER_A_FRIEND_FAILURE::TooFar,
+            ReferAFriendError::DifferentFaction => SMSG_REFER_A_FRIEND_FAILURE::DifferentFaction,
+            ReferAFriendError::NotNow => SMSG_REFER_A_FRIEND_FAILURE::NotNow,
+            ReferAFriendError::GrantLevelMax => SMSG_REFER_A_FRIEND_FAILURE::GrantLevelMax,
+            ReferAFriendError::NoTarget => SMSG_REFER_A_FRIEND_FAILURE::NoTarget,
             ReferAFriendError::NotInGroup => {
                 // target_name: CString
                 let target_name = {
@@ -43,19 +58,17 @@ impl SMSG_REFER_A_FRIEND_FAILURE {
                     String::from_utf8(target_name)?
                 };
 
-                SMSG_REFER_A_FRIEND_FAILURE_ReferAFriendError::NotInGroup {
+                SMSG_REFER_A_FRIEND_FAILURE::NotInGroup {
                     target_name,
                 }
             }
-            ReferAFriendError::SummonLevelMax => SMSG_REFER_A_FRIEND_FAILURE_ReferAFriendError::SummonLevelMax,
-            ReferAFriendError::SummonCooldown => SMSG_REFER_A_FRIEND_FAILURE_ReferAFriendError::SummonCooldown,
-            ReferAFriendError::InsufficientExpansionLevel => SMSG_REFER_A_FRIEND_FAILURE_ReferAFriendError::InsufficientExpansionLevel,
-            ReferAFriendError::SummonOffline => SMSG_REFER_A_FRIEND_FAILURE_ReferAFriendError::SummonOffline,
+            ReferAFriendError::SummonLevelMax => SMSG_REFER_A_FRIEND_FAILURE::SummonLevelMax,
+            ReferAFriendError::SummonCooldown => SMSG_REFER_A_FRIEND_FAILURE::SummonCooldown,
+            ReferAFriendError::InsufficientExpansionLevel => SMSG_REFER_A_FRIEND_FAILURE::InsufficientExpansionLevel,
+            ReferAFriendError::SummonOffline => SMSG_REFER_A_FRIEND_FAILURE::SummonOffline,
         };
 
-        Ok(Self {
-            error: error_if,
-        })
+        Ok(error_if)
     }
 
 }
@@ -77,9 +90,9 @@ impl crate::Message for SMSG_REFER_A_FRIEND_FAILURE {
 
         writeln!(s, "test SMSG_REFER_A_FRIEND_FAILURE {{").unwrap();
         // Members
-        writeln!(s, "    error = {};", ReferAFriendError::try_from(self.error.as_int()as u8).unwrap().as_test_case_value()).unwrap();
-        match &self.error {
-            crate::wrath::SMSG_REFER_A_FRIEND_FAILURE_ReferAFriendError::NotInGroup {
+        writeln!(s, "    error = {};", ReferAFriendError::try_from(self.as_int()as u8).unwrap().as_test_case_value()).unwrap();
+        match &self {
+            crate::wrath::SMSG_REFER_A_FRIEND_FAILURE::NotInGroup {
                 target_name,
             } => {
                 writeln!(s, "    target_name = \"{}\";", target_name).unwrap();
@@ -99,8 +112,8 @@ impl crate::Message for SMSG_REFER_A_FRIEND_FAILURE {
         let mut bytes = bytes.into_iter();
 
         crate::util::write_bytes(&mut s, &mut bytes, 4, "error", "    ");
-        match &self.error {
-            crate::wrath::SMSG_REFER_A_FRIEND_FAILURE_ReferAFriendError::NotInGroup {
+        match &self {
+            crate::wrath::SMSG_REFER_A_FRIEND_FAILURE::NotInGroup {
                 target_name,
             } => {
                 crate::util::write_bytes(&mut s, &mut bytes, target_name.len() + 1, "target_name", "    ");
@@ -123,10 +136,10 @@ impl crate::Message for SMSG_REFER_A_FRIEND_FAILURE {
 
     fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
         // error: ReferAFriendError
-        w.write_all(&(self.error.as_int().to_le_bytes()))?;
+        w.write_all(&(self.as_int().to_le_bytes()))?;
 
-        match &self.error {
-            SMSG_REFER_A_FRIEND_FAILURE_ReferAFriendError::NotInGroup {
+        match &self {
+            SMSG_REFER_A_FRIEND_FAILURE::NotInGroup {
                 target_name,
             } => {
                 // target_name: CString
@@ -154,38 +167,26 @@ impl crate::wrath::ServerMessage for SMSG_REFER_A_FRIEND_FAILURE {}
 
 impl SMSG_REFER_A_FRIEND_FAILURE {
     pub(crate) fn size(&self) -> usize {
-        self.error.size() // error: SMSG_REFER_A_FRIEND_FAILURE_ReferAFriendError
+        (match self {
+            Self::NotInGroup {
+                target_name,
+            } => {
+                4
+                + target_name.len() + 1 // target_name: CString
+            }
+            _ => 4,
+        }) // error: SMSG_REFER_A_FRIEND_FAILURE
     }
 }
 
-#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord)]
-pub enum SMSG_REFER_A_FRIEND_FAILURE_ReferAFriendError {
-    None,
-    NotReferredBy,
-    TargetTooHigh,
-    InsufficientGrantableLevels,
-    TooFar,
-    DifferentFaction,
-    NotNow,
-    GrantLevelMax,
-    NoTarget,
-    NotInGroup {
-        target_name: String,
-    },
-    SummonLevelMax,
-    SummonCooldown,
-    InsufficientExpansionLevel,
-    SummonOffline,
-}
-
-impl Default for SMSG_REFER_A_FRIEND_FAILURE_ReferAFriendError {
+impl Default for SMSG_REFER_A_FRIEND_FAILURE {
     fn default() -> Self {
         // First enumerator without any fields
         Self::None
     }
 }
 
-impl SMSG_REFER_A_FRIEND_FAILURE_ReferAFriendError {
+impl SMSG_REFER_A_FRIEND_FAILURE {
     pub(crate) const fn as_int(&self) -> u32 {
         match self {
             Self::None => 0,
@@ -207,7 +208,7 @@ impl SMSG_REFER_A_FRIEND_FAILURE_ReferAFriendError {
 
 }
 
-impl std::fmt::Display for SMSG_REFER_A_FRIEND_FAILURE_ReferAFriendError {
+impl std::fmt::Display for SMSG_REFER_A_FRIEND_FAILURE {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match self {
             Self::None => f.write_str("None"),
@@ -224,20 +225,6 @@ impl std::fmt::Display for SMSG_REFER_A_FRIEND_FAILURE_ReferAFriendError {
             Self::SummonCooldown => f.write_str("SummonCooldown"),
             Self::InsufficientExpansionLevel => f.write_str("InsufficientExpansionLevel"),
             Self::SummonOffline => f.write_str("SummonOffline"),
-        }
-    }
-}
-
-impl SMSG_REFER_A_FRIEND_FAILURE_ReferAFriendError {
-    pub(crate) fn size(&self) -> usize {
-        match self {
-            Self::NotInGroup {
-                target_name,
-            } => {
-                4
-                + target_name.len() + 1 // target_name: CString
-            }
-            _ => 4,
         }
     }
 }

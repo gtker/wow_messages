@@ -36,600 +36,8 @@ use crate::wrath::{
 ///     }
 /// }
 /// ```
-#[derive(Debug, Clone, Copy, PartialEq, PartialOrd, Default)]
-pub struct AuraLog {
-    pub aura_type: AuraLog_AuraType,
-}
-
-impl AuraLog {
-    pub(crate) fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
-        // aura_type: AuraType
-        w.write_all(&(self.aura_type.as_int().to_le_bytes()))?;
-
-        match &self.aura_type {
-            AuraLog_AuraType::PeriodicDamage {
-                absorb1,
-                critical1,
-                damage1,
-                overkill_damage,
-                resisted,
-                school,
-            } => {
-                // damage1: u32
-                w.write_all(&damage1.to_le_bytes())?;
-
-                // overkill_damage: u32
-                w.write_all(&overkill_damage.to_le_bytes())?;
-
-                // school: SpellSchool
-                w.write_all(&(school.as_int().to_le_bytes()))?;
-
-                // absorb1: u32
-                w.write_all(&absorb1.to_le_bytes())?;
-
-                // resisted: u32
-                w.write_all(&resisted.to_le_bytes())?;
-
-                // critical1: Bool
-                w.write_all(u8::from(*critical1).to_le_bytes().as_slice())?;
-
-            }
-            AuraLog_AuraType::PeriodicHeal {
-                absorb2,
-                critical2,
-                damage2,
-                over_damage,
-            } => {
-                // damage2: u32
-                w.write_all(&damage2.to_le_bytes())?;
-
-                // over_damage: u32
-                w.write_all(&over_damage.to_le_bytes())?;
-
-                // absorb2: u32
-                w.write_all(&absorb2.to_le_bytes())?;
-
-                // critical2: Bool
-                w.write_all(u8::from(*critical2).to_le_bytes().as_slice())?;
-
-            }
-            AuraLog_AuraType::ObsModHealth {
-                absorb2,
-                critical2,
-                damage2,
-                over_damage,
-            } => {
-                // damage2: u32
-                w.write_all(&damage2.to_le_bytes())?;
-
-                // over_damage: u32
-                w.write_all(&over_damage.to_le_bytes())?;
-
-                // absorb2: u32
-                w.write_all(&absorb2.to_le_bytes())?;
-
-                // critical2: Bool
-                w.write_all(u8::from(*critical2).to_le_bytes().as_slice())?;
-
-            }
-            AuraLog_AuraType::PeriodicEnergize {
-                damage3,
-                misc_value1,
-            } => {
-                // misc_value1: u32
-                w.write_all(&misc_value1.to_le_bytes())?;
-
-                // damage3: u32
-                w.write_all(&damage3.to_le_bytes())?;
-
-            }
-            AuraLog_AuraType::PeriodicManaLeech {
-                damage4,
-                gain_multiplier,
-                misc_value2,
-            } => {
-                // misc_value2: u32
-                w.write_all(&misc_value2.to_le_bytes())?;
-
-                // damage4: u32
-                w.write_all(&damage4.to_le_bytes())?;
-
-                // gain_multiplier: f32
-                w.write_all(&gain_multiplier.to_le_bytes())?;
-
-            }
-            AuraLog_AuraType::PeriodicDamagePercent {
-                absorb1,
-                critical1,
-                damage1,
-                overkill_damage,
-                resisted,
-                school,
-            } => {
-                // damage1: u32
-                w.write_all(&damage1.to_le_bytes())?;
-
-                // overkill_damage: u32
-                w.write_all(&overkill_damage.to_le_bytes())?;
-
-                // school: SpellSchool
-                w.write_all(&(school.as_int().to_le_bytes()))?;
-
-                // absorb1: u32
-                w.write_all(&absorb1.to_le_bytes())?;
-
-                // resisted: u32
-                w.write_all(&resisted.to_le_bytes())?;
-
-                // critical1: Bool
-                w.write_all(u8::from(*critical1).to_le_bytes().as_slice())?;
-
-            }
-            _ => {}
-        }
-
-        Ok(())
-    }
-}
-
-impl AuraLog {
-    pub(crate) fn read<R: std::io::Read>(mut r: R) -> Result<Self, crate::errors::ParseErrorKind> {
-        // aura_type: AuraType
-        let aura_type = crate::util::read_u32_le(&mut r)?.try_into()?;
-
-        let aura_type_if = match aura_type {
-            AuraType::None => AuraLog_AuraType::None,
-            AuraType::BindSight => AuraLog_AuraType::BindSight,
-            AuraType::ModPossess => AuraLog_AuraType::ModPossess,
-            AuraType::PeriodicDamage => {
-                // damage1: u32
-                let damage1 = crate::util::read_u32_le(&mut r)?;
-
-                // overkill_damage: u32
-                let overkill_damage = crate::util::read_u32_le(&mut r)?;
-
-                // school: SpellSchool
-                let school = crate::util::read_u8_le(&mut r)?.try_into()?;
-
-                // absorb1: u32
-                let absorb1 = crate::util::read_u32_le(&mut r)?;
-
-                // resisted: u32
-                let resisted = crate::util::read_u32_le(&mut r)?;
-
-                // critical1: Bool
-                let critical1 = crate::util::read_bool_u8(&mut r)?;
-
-                AuraLog_AuraType::PeriodicDamage {
-                    absorb1,
-                    critical1,
-                    damage1,
-                    overkill_damage,
-                    resisted,
-                    school,
-                }
-            }
-            AuraType::Dummy => AuraLog_AuraType::Dummy,
-            AuraType::ModConfuse => AuraLog_AuraType::ModConfuse,
-            AuraType::ModCharm => AuraLog_AuraType::ModCharm,
-            AuraType::ModFear => AuraLog_AuraType::ModFear,
-            AuraType::PeriodicHeal => {
-                // damage2: u32
-                let damage2 = crate::util::read_u32_le(&mut r)?;
-
-                // over_damage: u32
-                let over_damage = crate::util::read_u32_le(&mut r)?;
-
-                // absorb2: u32
-                let absorb2 = crate::util::read_u32_le(&mut r)?;
-
-                // critical2: Bool
-                let critical2 = crate::util::read_bool_u8(&mut r)?;
-
-                AuraLog_AuraType::PeriodicHeal {
-                    absorb2,
-                    critical2,
-                    damage2,
-                    over_damage,
-                }
-            }
-            AuraType::ModAttackspeed => AuraLog_AuraType::ModAttackspeed,
-            AuraType::ModThreat => AuraLog_AuraType::ModThreat,
-            AuraType::ModTaunt => AuraLog_AuraType::ModTaunt,
-            AuraType::ModStun => AuraLog_AuraType::ModStun,
-            AuraType::ModDamageDone => AuraLog_AuraType::ModDamageDone,
-            AuraType::ModDamageTaken => AuraLog_AuraType::ModDamageTaken,
-            AuraType::DamageShield => AuraLog_AuraType::DamageShield,
-            AuraType::ModStealth => AuraLog_AuraType::ModStealth,
-            AuraType::ModStealthDetect => AuraLog_AuraType::ModStealthDetect,
-            AuraType::ModInvisibility => AuraLog_AuraType::ModInvisibility,
-            AuraType::ModInvisibilityDetect => AuraLog_AuraType::ModInvisibilityDetect,
-            AuraType::ObsModHealth => {
-                // damage2: u32
-                let damage2 = crate::util::read_u32_le(&mut r)?;
-
-                // over_damage: u32
-                let over_damage = crate::util::read_u32_le(&mut r)?;
-
-                // absorb2: u32
-                let absorb2 = crate::util::read_u32_le(&mut r)?;
-
-                // critical2: Bool
-                let critical2 = crate::util::read_bool_u8(&mut r)?;
-
-                AuraLog_AuraType::ObsModHealth {
-                    absorb2,
-                    critical2,
-                    damage2,
-                    over_damage,
-                }
-            }
-            AuraType::ObsModPower => AuraLog_AuraType::ObsModPower,
-            AuraType::ModResistance => AuraLog_AuraType::ModResistance,
-            AuraType::PeriodicTriggerSpell => AuraLog_AuraType::PeriodicTriggerSpell,
-            AuraType::PeriodicEnergize => {
-                // misc_value1: u32
-                let misc_value1 = crate::util::read_u32_le(&mut r)?;
-
-                // damage3: u32
-                let damage3 = crate::util::read_u32_le(&mut r)?;
-
-                AuraLog_AuraType::PeriodicEnergize {
-                    damage3,
-                    misc_value1,
-                }
-            }
-            AuraType::ModPacify => AuraLog_AuraType::ModPacify,
-            AuraType::ModRoot => AuraLog_AuraType::ModRoot,
-            AuraType::ModSilence => AuraLog_AuraType::ModSilence,
-            AuraType::ReflectSpells => AuraLog_AuraType::ReflectSpells,
-            AuraType::ModStat => AuraLog_AuraType::ModStat,
-            AuraType::ModSkill => AuraLog_AuraType::ModSkill,
-            AuraType::ModIncreaseSpeed => AuraLog_AuraType::ModIncreaseSpeed,
-            AuraType::ModIncreaseMountedSpeed => AuraLog_AuraType::ModIncreaseMountedSpeed,
-            AuraType::ModDecreaseSpeed => AuraLog_AuraType::ModDecreaseSpeed,
-            AuraType::ModIncreaseHealth => AuraLog_AuraType::ModIncreaseHealth,
-            AuraType::ModIncreaseEnergy => AuraLog_AuraType::ModIncreaseEnergy,
-            AuraType::ModShapeshift => AuraLog_AuraType::ModShapeshift,
-            AuraType::EffectImmunity => AuraLog_AuraType::EffectImmunity,
-            AuraType::StateImmunity => AuraLog_AuraType::StateImmunity,
-            AuraType::SchoolImmunity => AuraLog_AuraType::SchoolImmunity,
-            AuraType::DamageImmunity => AuraLog_AuraType::DamageImmunity,
-            AuraType::DispelImmunity => AuraLog_AuraType::DispelImmunity,
-            AuraType::ProcTriggerSpell => AuraLog_AuraType::ProcTriggerSpell,
-            AuraType::ProcTriggerDamage => AuraLog_AuraType::ProcTriggerDamage,
-            AuraType::TrackCreatures => AuraLog_AuraType::TrackCreatures,
-            AuraType::TrackResources => AuraLog_AuraType::TrackResources,
-            AuraType::Unknown46 => AuraLog_AuraType::Unknown46,
-            AuraType::ModParryPercent => AuraLog_AuraType::ModParryPercent,
-            AuraType::PeriodicTriggerSpellFromClient => AuraLog_AuraType::PeriodicTriggerSpellFromClient,
-            AuraType::ModDodgePercent => AuraLog_AuraType::ModDodgePercent,
-            AuraType::ModCriticalHealingAmount => AuraLog_AuraType::ModCriticalHealingAmount,
-            AuraType::ModBlockPercent => AuraLog_AuraType::ModBlockPercent,
-            AuraType::ModWeaponCritPercent => AuraLog_AuraType::ModWeaponCritPercent,
-            AuraType::PeriodicLeech => AuraLog_AuraType::PeriodicLeech,
-            AuraType::ModHitChance => AuraLog_AuraType::ModHitChance,
-            AuraType::ModSpellHitChance => AuraLog_AuraType::ModSpellHitChance,
-            AuraType::Transform => AuraLog_AuraType::Transform,
-            AuraType::ModSpellCritChance => AuraLog_AuraType::ModSpellCritChance,
-            AuraType::ModIncreaseSwimSpeed => AuraLog_AuraType::ModIncreaseSwimSpeed,
-            AuraType::ModDamageDoneCreature => AuraLog_AuraType::ModDamageDoneCreature,
-            AuraType::ModPacifySilence => AuraLog_AuraType::ModPacifySilence,
-            AuraType::ModScale => AuraLog_AuraType::ModScale,
-            AuraType::PeriodicHealthFunnel => AuraLog_AuraType::PeriodicHealthFunnel,
-            AuraType::Unknown63 => AuraLog_AuraType::Unknown63,
-            AuraType::PeriodicManaLeech => {
-                // misc_value2: u32
-                let misc_value2 = crate::util::read_u32_le(&mut r)?;
-
-                // damage4: u32
-                let damage4 = crate::util::read_u32_le(&mut r)?;
-
-                // gain_multiplier: f32
-                let gain_multiplier = crate::util::read_f32_le(&mut r)?;
-
-                AuraLog_AuraType::PeriodicManaLeech {
-                    damage4,
-                    gain_multiplier,
-                    misc_value2,
-                }
-            }
-            AuraType::ModCastingSpeedNotStack => AuraLog_AuraType::ModCastingSpeedNotStack,
-            AuraType::FeignDeath => AuraLog_AuraType::FeignDeath,
-            AuraType::ModDisarm => AuraLog_AuraType::ModDisarm,
-            AuraType::ModStalked => AuraLog_AuraType::ModStalked,
-            AuraType::SchoolAbsorb => AuraLog_AuraType::SchoolAbsorb,
-            AuraType::ExtraAttacks => AuraLog_AuraType::ExtraAttacks,
-            AuraType::ModSpellCritChanceSchool => AuraLog_AuraType::ModSpellCritChanceSchool,
-            AuraType::ModPowerCostSchoolPct => AuraLog_AuraType::ModPowerCostSchoolPct,
-            AuraType::ModPowerCostSchool => AuraLog_AuraType::ModPowerCostSchool,
-            AuraType::ReflectSpellsSchool => AuraLog_AuraType::ReflectSpellsSchool,
-            AuraType::ModLanguage => AuraLog_AuraType::ModLanguage,
-            AuraType::FarSight => AuraLog_AuraType::FarSight,
-            AuraType::MechanicImmunity => AuraLog_AuraType::MechanicImmunity,
-            AuraType::Mounted => AuraLog_AuraType::Mounted,
-            AuraType::ModDamagePercentDone => AuraLog_AuraType::ModDamagePercentDone,
-            AuraType::ModPercentStat => AuraLog_AuraType::ModPercentStat,
-            AuraType::SplitDamagePct => AuraLog_AuraType::SplitDamagePct,
-            AuraType::WaterBreathing => AuraLog_AuraType::WaterBreathing,
-            AuraType::ModBaseResistance => AuraLog_AuraType::ModBaseResistance,
-            AuraType::ModRegen => AuraLog_AuraType::ModRegen,
-            AuraType::ModPowerRegen => AuraLog_AuraType::ModPowerRegen,
-            AuraType::ChannelDeathItem => AuraLog_AuraType::ChannelDeathItem,
-            AuraType::ModDamagePercentTaken => AuraLog_AuraType::ModDamagePercentTaken,
-            AuraType::ModHealthRegenPercent => AuraLog_AuraType::ModHealthRegenPercent,
-            AuraType::PeriodicDamagePercent => {
-                // damage1: u32
-                let damage1 = crate::util::read_u32_le(&mut r)?;
-
-                // overkill_damage: u32
-                let overkill_damage = crate::util::read_u32_le(&mut r)?;
-
-                // school: SpellSchool
-                let school = crate::util::read_u8_le(&mut r)?.try_into()?;
-
-                // absorb1: u32
-                let absorb1 = crate::util::read_u32_le(&mut r)?;
-
-                // resisted: u32
-                let resisted = crate::util::read_u32_le(&mut r)?;
-
-                // critical1: Bool
-                let critical1 = crate::util::read_bool_u8(&mut r)?;
-
-                AuraLog_AuraType::PeriodicDamagePercent {
-                    absorb1,
-                    critical1,
-                    damage1,
-                    overkill_damage,
-                    resisted,
-                    school,
-                }
-            }
-            AuraType::Unknown90 => AuraLog_AuraType::Unknown90,
-            AuraType::ModDetectRange => AuraLog_AuraType::ModDetectRange,
-            AuraType::PreventsFleeing => AuraLog_AuraType::PreventsFleeing,
-            AuraType::ModUnattackable => AuraLog_AuraType::ModUnattackable,
-            AuraType::InterruptRegen => AuraLog_AuraType::InterruptRegen,
-            AuraType::Ghost => AuraLog_AuraType::Ghost,
-            AuraType::SpellMagnet => AuraLog_AuraType::SpellMagnet,
-            AuraType::ManaShield => AuraLog_AuraType::ManaShield,
-            AuraType::ModSkillTalent => AuraLog_AuraType::ModSkillTalent,
-            AuraType::ModAttackPower => AuraLog_AuraType::ModAttackPower,
-            AuraType::AurasVisible => AuraLog_AuraType::AurasVisible,
-            AuraType::ModResistancePct => AuraLog_AuraType::ModResistancePct,
-            AuraType::ModMeleeAttackPowerVersus => AuraLog_AuraType::ModMeleeAttackPowerVersus,
-            AuraType::ModTotalThreat => AuraLog_AuraType::ModTotalThreat,
-            AuraType::WaterWalk => AuraLog_AuraType::WaterWalk,
-            AuraType::FeatherFall => AuraLog_AuraType::FeatherFall,
-            AuraType::Hover => AuraLog_AuraType::Hover,
-            AuraType::AddFlatModifier => AuraLog_AuraType::AddFlatModifier,
-            AuraType::AddPctModifier => AuraLog_AuraType::AddPctModifier,
-            AuraType::AddTargetTrigger => AuraLog_AuraType::AddTargetTrigger,
-            AuraType::ModPowerRegenPercent => AuraLog_AuraType::ModPowerRegenPercent,
-            AuraType::AddCasterHitTrigger => AuraLog_AuraType::AddCasterHitTrigger,
-            AuraType::OverrideClassScripts => AuraLog_AuraType::OverrideClassScripts,
-            AuraType::ModRangedDamageTaken => AuraLog_AuraType::ModRangedDamageTaken,
-            AuraType::ModRangedDamageTakenPct => AuraLog_AuraType::ModRangedDamageTakenPct,
-            AuraType::ModHealing => AuraLog_AuraType::ModHealing,
-            AuraType::ModRegenDuringCombat => AuraLog_AuraType::ModRegenDuringCombat,
-            AuraType::ModMechanicResistance => AuraLog_AuraType::ModMechanicResistance,
-            AuraType::ModHealingPct => AuraLog_AuraType::ModHealingPct,
-            AuraType::Unknown119 => AuraLog_AuraType::Unknown119,
-            AuraType::Untrackable => AuraLog_AuraType::Untrackable,
-            AuraType::Empathy => AuraLog_AuraType::Empathy,
-            AuraType::ModOffhandDamagePct => AuraLog_AuraType::ModOffhandDamagePct,
-            AuraType::ModTargetResistance => AuraLog_AuraType::ModTargetResistance,
-            AuraType::ModRangedAttackPower => AuraLog_AuraType::ModRangedAttackPower,
-            AuraType::ModMeleeDamageTaken => AuraLog_AuraType::ModMeleeDamageTaken,
-            AuraType::ModMeleeDamageTakenPct => AuraLog_AuraType::ModMeleeDamageTakenPct,
-            AuraType::RangedAttackPowerAttackerBonus => AuraLog_AuraType::RangedAttackPowerAttackerBonus,
-            AuraType::ModPossessPet => AuraLog_AuraType::ModPossessPet,
-            AuraType::ModSpeedAlways => AuraLog_AuraType::ModSpeedAlways,
-            AuraType::ModMountedSpeedAlways => AuraLog_AuraType::ModMountedSpeedAlways,
-            AuraType::ModRangedAttackPowerVersus => AuraLog_AuraType::ModRangedAttackPowerVersus,
-            AuraType::ModIncreaseEnergyPercent => AuraLog_AuraType::ModIncreaseEnergyPercent,
-            AuraType::ModIncreaseHealthPercent => AuraLog_AuraType::ModIncreaseHealthPercent,
-            AuraType::ModManaRegenInterrupt => AuraLog_AuraType::ModManaRegenInterrupt,
-            AuraType::ModHealingDone => AuraLog_AuraType::ModHealingDone,
-            AuraType::ModHealingDonePercent => AuraLog_AuraType::ModHealingDonePercent,
-            AuraType::ModTotalStatPercentage => AuraLog_AuraType::ModTotalStatPercentage,
-            AuraType::ModMeleeHaste => AuraLog_AuraType::ModMeleeHaste,
-            AuraType::ForceReaction => AuraLog_AuraType::ForceReaction,
-            AuraType::ModRangedHaste => AuraLog_AuraType::ModRangedHaste,
-            AuraType::ModRangedAmmoHaste => AuraLog_AuraType::ModRangedAmmoHaste,
-            AuraType::ModBaseResistancePct => AuraLog_AuraType::ModBaseResistancePct,
-            AuraType::ModResistanceExclusive => AuraLog_AuraType::ModResistanceExclusive,
-            AuraType::SafeFall => AuraLog_AuraType::SafeFall,
-            AuraType::ModPetTalentPoints => AuraLog_AuraType::ModPetTalentPoints,
-            AuraType::AllowTamePetType => AuraLog_AuraType::AllowTamePetType,
-            AuraType::MechanicImmunityMask => AuraLog_AuraType::MechanicImmunityMask,
-            AuraType::RetainComboPoints => AuraLog_AuraType::RetainComboPoints,
-            AuraType::ReducePushback => AuraLog_AuraType::ReducePushback,
-            AuraType::ModShieldBlockvaluePct => AuraLog_AuraType::ModShieldBlockvaluePct,
-            AuraType::TrackStealthed => AuraLog_AuraType::TrackStealthed,
-            AuraType::ModDetectedRange => AuraLog_AuraType::ModDetectedRange,
-            AuraType::SplitDamageFlat => AuraLog_AuraType::SplitDamageFlat,
-            AuraType::ModStealthLevel => AuraLog_AuraType::ModStealthLevel,
-            AuraType::ModWaterBreathing => AuraLog_AuraType::ModWaterBreathing,
-            AuraType::ModReputationGain => AuraLog_AuraType::ModReputationGain,
-            AuraType::PetDamageMulti => AuraLog_AuraType::PetDamageMulti,
-            AuraType::ModShieldBlockvalue => AuraLog_AuraType::ModShieldBlockvalue,
-            AuraType::NoPvpCredit => AuraLog_AuraType::NoPvpCredit,
-            AuraType::ModAoeAvoidance => AuraLog_AuraType::ModAoeAvoidance,
-            AuraType::ModHealthRegenInCombat => AuraLog_AuraType::ModHealthRegenInCombat,
-            AuraType::PowerBurn => AuraLog_AuraType::PowerBurn,
-            AuraType::ModCritDamageBonus => AuraLog_AuraType::ModCritDamageBonus,
-            AuraType::Unknown164 => AuraLog_AuraType::Unknown164,
-            AuraType::MeleeAttackPowerAttackerBonus => AuraLog_AuraType::MeleeAttackPowerAttackerBonus,
-            AuraType::ModAttackPowerPct => AuraLog_AuraType::ModAttackPowerPct,
-            AuraType::ModRangedAttackPowerPct => AuraLog_AuraType::ModRangedAttackPowerPct,
-            AuraType::ModDamageDoneVersus => AuraLog_AuraType::ModDamageDoneVersus,
-            AuraType::ModCritPercentVersus => AuraLog_AuraType::ModCritPercentVersus,
-            AuraType::DetectAmore => AuraLog_AuraType::DetectAmore,
-            AuraType::ModSpeedNotStack => AuraLog_AuraType::ModSpeedNotStack,
-            AuraType::ModMountedSpeedNotStack => AuraLog_AuraType::ModMountedSpeedNotStack,
-            AuraType::Unknown173 => AuraLog_AuraType::Unknown173,
-            AuraType::ModSpellDamageOfStatPercent => AuraLog_AuraType::ModSpellDamageOfStatPercent,
-            AuraType::ModSpellHealingOfStatPercent => AuraLog_AuraType::ModSpellHealingOfStatPercent,
-            AuraType::SpiritOfRedemption => AuraLog_AuraType::SpiritOfRedemption,
-            AuraType::AoeCharm => AuraLog_AuraType::AoeCharm,
-            AuraType::ModDebuffResistance => AuraLog_AuraType::ModDebuffResistance,
-            AuraType::ModAttackerSpellCritChance => AuraLog_AuraType::ModAttackerSpellCritChance,
-            AuraType::ModFlatSpellDamageVersus => AuraLog_AuraType::ModFlatSpellDamageVersus,
-            AuraType::Unknown181 => AuraLog_AuraType::Unknown181,
-            AuraType::ModResistanceOfStatPercent => AuraLog_AuraType::ModResistanceOfStatPercent,
-            AuraType::ModCriticalThreat => AuraLog_AuraType::ModCriticalThreat,
-            AuraType::ModAttackerMeleeHitChance => AuraLog_AuraType::ModAttackerMeleeHitChance,
-            AuraType::ModAttackerRangedHitChance => AuraLog_AuraType::ModAttackerRangedHitChance,
-            AuraType::ModAttackerSpellHitChance => AuraLog_AuraType::ModAttackerSpellHitChance,
-            AuraType::ModAttackerMeleeCritChance => AuraLog_AuraType::ModAttackerMeleeCritChance,
-            AuraType::ModAttackerRangedCritChance => AuraLog_AuraType::ModAttackerRangedCritChance,
-            AuraType::ModRating => AuraLog_AuraType::ModRating,
-            AuraType::ModFactionReputationGain => AuraLog_AuraType::ModFactionReputationGain,
-            AuraType::UseNormalMovementSpeed => AuraLog_AuraType::UseNormalMovementSpeed,
-            AuraType::ModMeleeRangedHaste => AuraLog_AuraType::ModMeleeRangedHaste,
-            AuraType::MeleeSlow => AuraLog_AuraType::MeleeSlow,
-            AuraType::ModTargetAbsorbSchool => AuraLog_AuraType::ModTargetAbsorbSchool,
-            AuraType::ModTargetAbilityAbsorbSchool => AuraLog_AuraType::ModTargetAbilityAbsorbSchool,
-            AuraType::ModCooldown => AuraLog_AuraType::ModCooldown,
-            AuraType::ModAttackerSpellAndWeaponCritChance => AuraLog_AuraType::ModAttackerSpellAndWeaponCritChance,
-            AuraType::Unknown198 => AuraLog_AuraType::Unknown198,
-            AuraType::ModIncreasesSpellPctToHit => AuraLog_AuraType::ModIncreasesSpellPctToHit,
-            AuraType::ModXpPct => AuraLog_AuraType::ModXpPct,
-            AuraType::Fly => AuraLog_AuraType::Fly,
-            AuraType::IgnoreCombatResult => AuraLog_AuraType::IgnoreCombatResult,
-            AuraType::ModAttackerMeleeCritDamage => AuraLog_AuraType::ModAttackerMeleeCritDamage,
-            AuraType::ModAttackerRangedCritDamage => AuraLog_AuraType::ModAttackerRangedCritDamage,
-            AuraType::ModSchoolCritDmgTaken => AuraLog_AuraType::ModSchoolCritDmgTaken,
-            AuraType::ModIncreaseVehicleFlightSpeed => AuraLog_AuraType::ModIncreaseVehicleFlightSpeed,
-            AuraType::ModIncreaseMountedFlightSpeed => AuraLog_AuraType::ModIncreaseMountedFlightSpeed,
-            AuraType::ModIncreaseFlightSpeed => AuraLog_AuraType::ModIncreaseFlightSpeed,
-            AuraType::ModMountedFlightSpeedAlways => AuraLog_AuraType::ModMountedFlightSpeedAlways,
-            AuraType::ModVehicleSpeedAlways => AuraLog_AuraType::ModVehicleSpeedAlways,
-            AuraType::ModFlightSpeedNotStack => AuraLog_AuraType::ModFlightSpeedNotStack,
-            AuraType::ModRangedAttackPowerOfStatPercent => AuraLog_AuraType::ModRangedAttackPowerOfStatPercent,
-            AuraType::ModRageFromDamageDealt => AuraLog_AuraType::ModRageFromDamageDealt,
-            AuraType::Unknown214 => AuraLog_AuraType::Unknown214,
-            AuraType::ArenaPreparation => AuraLog_AuraType::ArenaPreparation,
-            AuraType::HasteSpells => AuraLog_AuraType::HasteSpells,
-            AuraType::ModMeleeHaste2 => AuraLog_AuraType::ModMeleeHaste2,
-            AuraType::HasteRanged => AuraLog_AuraType::HasteRanged,
-            AuraType::ModManaRegenFromStat => AuraLog_AuraType::ModManaRegenFromStat,
-            AuraType::ModRatingFromStat => AuraLog_AuraType::ModRatingFromStat,
-            AuraType::ModDetaunt => AuraLog_AuraType::ModDetaunt,
-            AuraType::Unknown222 => AuraLog_AuraType::Unknown222,
-            AuraType::RaidProcFromCharge => AuraLog_AuraType::RaidProcFromCharge,
-            AuraType::Unknown224 => AuraLog_AuraType::Unknown224,
-            AuraType::RaidProcFromChargeWithValue => AuraLog_AuraType::RaidProcFromChargeWithValue,
-            AuraType::PeriodicDummy => AuraLog_AuraType::PeriodicDummy,
-            AuraType::PeriodicTriggerSpellWithValue => AuraLog_AuraType::PeriodicTriggerSpellWithValue,
-            AuraType::DetectStealth => AuraLog_AuraType::DetectStealth,
-            AuraType::ModAoeDamageAvoidance => AuraLog_AuraType::ModAoeDamageAvoidance,
-            AuraType::Unknown230 => AuraLog_AuraType::Unknown230,
-            AuraType::ProcTriggerSpellWithValue => AuraLog_AuraType::ProcTriggerSpellWithValue,
-            AuraType::MechanicDurationMod => AuraLog_AuraType::MechanicDurationMod,
-            AuraType::ChangeModelForAllHumanoids => AuraLog_AuraType::ChangeModelForAllHumanoids,
-            AuraType::MechanicDurationModNotStack => AuraLog_AuraType::MechanicDurationModNotStack,
-            AuraType::ModDispelResist => AuraLog_AuraType::ModDispelResist,
-            AuraType::ControlVehicle => AuraLog_AuraType::ControlVehicle,
-            AuraType::ModSpellDamageOfAttackPower => AuraLog_AuraType::ModSpellDamageOfAttackPower,
-            AuraType::ModSpellHealingOfAttackPower => AuraLog_AuraType::ModSpellHealingOfAttackPower,
-            AuraType::ModScale2 => AuraLog_AuraType::ModScale2,
-            AuraType::ModExpertise => AuraLog_AuraType::ModExpertise,
-            AuraType::ForceMoveForward => AuraLog_AuraType::ForceMoveForward,
-            AuraType::ModSpellDamageFromHealing => AuraLog_AuraType::ModSpellDamageFromHealing,
-            AuraType::ModFaction => AuraLog_AuraType::ModFaction,
-            AuraType::ComprehendLanguage => AuraLog_AuraType::ComprehendLanguage,
-            AuraType::ModAuraDurationByDispel => AuraLog_AuraType::ModAuraDurationByDispel,
-            AuraType::ModAuraDurationByDispelNotStack => AuraLog_AuraType::ModAuraDurationByDispelNotStack,
-            AuraType::CloneCaster => AuraLog_AuraType::CloneCaster,
-            AuraType::ModCombatResultChance => AuraLog_AuraType::ModCombatResultChance,
-            AuraType::ConvertRune => AuraLog_AuraType::ConvertRune,
-            AuraType::ModIncreaseHealth2 => AuraLog_AuraType::ModIncreaseHealth2,
-            AuraType::ModEnemyDodge => AuraLog_AuraType::ModEnemyDodge,
-            AuraType::ModSpeedSlowAll => AuraLog_AuraType::ModSpeedSlowAll,
-            AuraType::ModBlockCritChance => AuraLog_AuraType::ModBlockCritChance,
-            AuraType::ModDisarmOffhand => AuraLog_AuraType::ModDisarmOffhand,
-            AuraType::ModMechanicDamageTakenPercent => AuraLog_AuraType::ModMechanicDamageTakenPercent,
-            AuraType::NoReagentUse => AuraLog_AuraType::NoReagentUse,
-            AuraType::ModTargetResistBySpellClass => AuraLog_AuraType::ModTargetResistBySpellClass,
-            AuraType::Unknown258 => AuraLog_AuraType::Unknown258,
-            AuraType::ModHotPct => AuraLog_AuraType::ModHotPct,
-            AuraType::ScreenEffect => AuraLog_AuraType::ScreenEffect,
-            AuraType::Phase => AuraLog_AuraType::Phase,
-            AuraType::AbilityIgnoreAurastate => AuraLog_AuraType::AbilityIgnoreAurastate,
-            AuraType::AllowOnlyAbility => AuraLog_AuraType::AllowOnlyAbility,
-            AuraType::Unknown264 => AuraLog_AuraType::Unknown264,
-            AuraType::Unknown265 => AuraLog_AuraType::Unknown265,
-            AuraType::Unknown266 => AuraLog_AuraType::Unknown266,
-            AuraType::ModImmuneAuraApplySchool => AuraLog_AuraType::ModImmuneAuraApplySchool,
-            AuraType::ModAttackPowerOfStatPercent => AuraLog_AuraType::ModAttackPowerOfStatPercent,
-            AuraType::ModIgnoreTargetResist => AuraLog_AuraType::ModIgnoreTargetResist,
-            AuraType::ModAbilityIgnoreTargetResist => AuraLog_AuraType::ModAbilityIgnoreTargetResist,
-            AuraType::ModDamageFromCaster => AuraLog_AuraType::ModDamageFromCaster,
-            AuraType::IgnoreMeleeReset => AuraLog_AuraType::IgnoreMeleeReset,
-            AuraType::XRay => AuraLog_AuraType::XRay,
-            AuraType::AbilityConsumeNoAmmo => AuraLog_AuraType::AbilityConsumeNoAmmo,
-            AuraType::ModIgnoreShapeshift => AuraLog_AuraType::ModIgnoreShapeshift,
-            AuraType::ModDamageDoneForMechanic => AuraLog_AuraType::ModDamageDoneForMechanic,
-            AuraType::ModMaxAffectedTargets => AuraLog_AuraType::ModMaxAffectedTargets,
-            AuraType::ModDisarmRanged => AuraLog_AuraType::ModDisarmRanged,
-            AuraType::InitializeImages => AuraLog_AuraType::InitializeImages,
-            AuraType::ModArmorPenetrationPct => AuraLog_AuraType::ModArmorPenetrationPct,
-            AuraType::ModHonorGainPct => AuraLog_AuraType::ModHonorGainPct,
-            AuraType::ModBaseHealthPct => AuraLog_AuraType::ModBaseHealthPct,
-            AuraType::ModHealingReceived => AuraLog_AuraType::ModHealingReceived,
-            AuraType::Linked => AuraLog_AuraType::Linked,
-            AuraType::ModAttackPowerOfArmor => AuraLog_AuraType::ModAttackPowerOfArmor,
-            AuraType::AbilityPeriodicCrit => AuraLog_AuraType::AbilityPeriodicCrit,
-            AuraType::DeflectSpells => AuraLog_AuraType::DeflectSpells,
-            AuraType::IgnoreHitDirection => AuraLog_AuraType::IgnoreHitDirection,
-            AuraType::PreventDurabilityLoss => AuraLog_AuraType::PreventDurabilityLoss,
-            AuraType::ModCritPct => AuraLog_AuraType::ModCritPct,
-            AuraType::ModXpQuestPct => AuraLog_AuraType::ModXpQuestPct,
-            AuraType::OpenStable => AuraLog_AuraType::OpenStable,
-            AuraType::OverrideSpells => AuraLog_AuraType::OverrideSpells,
-            AuraType::PreventRegeneratePower => AuraLog_AuraType::PreventRegeneratePower,
-            AuraType::Unknown295 => AuraLog_AuraType::Unknown295,
-            AuraType::SetVehicleId => AuraLog_AuraType::SetVehicleId,
-            AuraType::BlockSpellFamily => AuraLog_AuraType::BlockSpellFamily,
-            AuraType::Strangulate => AuraLog_AuraType::Strangulate,
-            AuraType::Unknown299 => AuraLog_AuraType::Unknown299,
-            AuraType::ShareDamagePct => AuraLog_AuraType::ShareDamagePct,
-            AuraType::SchoolHealAbsorb => AuraLog_AuraType::SchoolHealAbsorb,
-            AuraType::Unknown302 => AuraLog_AuraType::Unknown302,
-            AuraType::ModDamageDoneVersusAurastate => AuraLog_AuraType::ModDamageDoneVersusAurastate,
-            AuraType::ModFakeInebriate => AuraLog_AuraType::ModFakeInebriate,
-            AuraType::ModMinimumSpeed => AuraLog_AuraType::ModMinimumSpeed,
-            AuraType::Unknown306 => AuraLog_AuraType::Unknown306,
-            AuraType::HealAbsorbTest => AuraLog_AuraType::HealAbsorbTest,
-            AuraType::ModCritChanceForCaster => AuraLog_AuraType::ModCritChanceForCaster,
-            AuraType::Unknown309 => AuraLog_AuraType::Unknown309,
-            AuraType::ModCreatureAoeDamageAvoidance => AuraLog_AuraType::ModCreatureAoeDamageAvoidance,
-            AuraType::Unknown311 => AuraLog_AuraType::Unknown311,
-            AuraType::Unknown312 => AuraLog_AuraType::Unknown312,
-            AuraType::Unknown313 => AuraLog_AuraType::Unknown313,
-            AuraType::PreventResurrection => AuraLog_AuraType::PreventResurrection,
-            AuraType::UnderwaterWalking => AuraLog_AuraType::UnderwaterWalking,
-            AuraType::PeriodicHaste => AuraLog_AuraType::PeriodicHaste,
-        };
-
-        Ok(Self {
-            aura_type: aura_type_if,
-        })
-    }
-
-}
-
-impl AuraLog {
-    pub(crate) const fn size(&self) -> usize {
-        self.aura_type.size() // aura_type: AuraLog_AuraType
-    }
-}
-
 #[derive(Debug, Clone, Copy, PartialEq, PartialOrd)]
-pub enum AuraLog_AuraType {
+pub enum AuraLog {
     None,
     BindSight,
     ModPossess,
@@ -980,14 +388,656 @@ pub enum AuraLog_AuraType {
     PeriodicHaste,
 }
 
-impl Default for AuraLog_AuraType {
+impl AuraLog {
+    pub(crate) fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
+        // aura_type: AuraType
+        w.write_all(&(self.as_int().to_le_bytes()))?;
+
+        match &self {
+            AuraLog::PeriodicDamage {
+                absorb1,
+                critical1,
+                damage1,
+                overkill_damage,
+                resisted,
+                school,
+            } => {
+                // damage1: u32
+                w.write_all(&damage1.to_le_bytes())?;
+
+                // overkill_damage: u32
+                w.write_all(&overkill_damage.to_le_bytes())?;
+
+                // school: SpellSchool
+                w.write_all(&(school.as_int().to_le_bytes()))?;
+
+                // absorb1: u32
+                w.write_all(&absorb1.to_le_bytes())?;
+
+                // resisted: u32
+                w.write_all(&resisted.to_le_bytes())?;
+
+                // critical1: Bool
+                w.write_all(u8::from(*critical1).to_le_bytes().as_slice())?;
+
+            }
+            AuraLog::PeriodicHeal {
+                absorb2,
+                critical2,
+                damage2,
+                over_damage,
+            } => {
+                // damage2: u32
+                w.write_all(&damage2.to_le_bytes())?;
+
+                // over_damage: u32
+                w.write_all(&over_damage.to_le_bytes())?;
+
+                // absorb2: u32
+                w.write_all(&absorb2.to_le_bytes())?;
+
+                // critical2: Bool
+                w.write_all(u8::from(*critical2).to_le_bytes().as_slice())?;
+
+            }
+            AuraLog::ObsModHealth {
+                absorb2,
+                critical2,
+                damage2,
+                over_damage,
+            } => {
+                // damage2: u32
+                w.write_all(&damage2.to_le_bytes())?;
+
+                // over_damage: u32
+                w.write_all(&over_damage.to_le_bytes())?;
+
+                // absorb2: u32
+                w.write_all(&absorb2.to_le_bytes())?;
+
+                // critical2: Bool
+                w.write_all(u8::from(*critical2).to_le_bytes().as_slice())?;
+
+            }
+            AuraLog::PeriodicEnergize {
+                damage3,
+                misc_value1,
+            } => {
+                // misc_value1: u32
+                w.write_all(&misc_value1.to_le_bytes())?;
+
+                // damage3: u32
+                w.write_all(&damage3.to_le_bytes())?;
+
+            }
+            AuraLog::PeriodicManaLeech {
+                damage4,
+                gain_multiplier,
+                misc_value2,
+            } => {
+                // misc_value2: u32
+                w.write_all(&misc_value2.to_le_bytes())?;
+
+                // damage4: u32
+                w.write_all(&damage4.to_le_bytes())?;
+
+                // gain_multiplier: f32
+                w.write_all(&gain_multiplier.to_le_bytes())?;
+
+            }
+            AuraLog::PeriodicDamagePercent {
+                absorb1,
+                critical1,
+                damage1,
+                overkill_damage,
+                resisted,
+                school,
+            } => {
+                // damage1: u32
+                w.write_all(&damage1.to_le_bytes())?;
+
+                // overkill_damage: u32
+                w.write_all(&overkill_damage.to_le_bytes())?;
+
+                // school: SpellSchool
+                w.write_all(&(school.as_int().to_le_bytes()))?;
+
+                // absorb1: u32
+                w.write_all(&absorb1.to_le_bytes())?;
+
+                // resisted: u32
+                w.write_all(&resisted.to_le_bytes())?;
+
+                // critical1: Bool
+                w.write_all(u8::from(*critical1).to_le_bytes().as_slice())?;
+
+            }
+            _ => {}
+        }
+
+        Ok(())
+    }
+}
+
+impl AuraLog {
+    pub(crate) fn read<R: std::io::Read>(mut r: R) -> Result<Self, crate::errors::ParseErrorKind> {
+        // aura_type: AuraType
+        let aura_type = crate::util::read_u32_le(&mut r)?.try_into()?;
+
+        let aura_type_if = match aura_type {
+            AuraType::None => AuraLog::None,
+            AuraType::BindSight => AuraLog::BindSight,
+            AuraType::ModPossess => AuraLog::ModPossess,
+            AuraType::PeriodicDamage => {
+                // damage1: u32
+                let damage1 = crate::util::read_u32_le(&mut r)?;
+
+                // overkill_damage: u32
+                let overkill_damage = crate::util::read_u32_le(&mut r)?;
+
+                // school: SpellSchool
+                let school = crate::util::read_u8_le(&mut r)?.try_into()?;
+
+                // absorb1: u32
+                let absorb1 = crate::util::read_u32_le(&mut r)?;
+
+                // resisted: u32
+                let resisted = crate::util::read_u32_le(&mut r)?;
+
+                // critical1: Bool
+                let critical1 = crate::util::read_bool_u8(&mut r)?;
+
+                AuraLog::PeriodicDamage {
+                    absorb1,
+                    critical1,
+                    damage1,
+                    overkill_damage,
+                    resisted,
+                    school,
+                }
+            }
+            AuraType::Dummy => AuraLog::Dummy,
+            AuraType::ModConfuse => AuraLog::ModConfuse,
+            AuraType::ModCharm => AuraLog::ModCharm,
+            AuraType::ModFear => AuraLog::ModFear,
+            AuraType::PeriodicHeal => {
+                // damage2: u32
+                let damage2 = crate::util::read_u32_le(&mut r)?;
+
+                // over_damage: u32
+                let over_damage = crate::util::read_u32_le(&mut r)?;
+
+                // absorb2: u32
+                let absorb2 = crate::util::read_u32_le(&mut r)?;
+
+                // critical2: Bool
+                let critical2 = crate::util::read_bool_u8(&mut r)?;
+
+                AuraLog::PeriodicHeal {
+                    absorb2,
+                    critical2,
+                    damage2,
+                    over_damage,
+                }
+            }
+            AuraType::ModAttackspeed => AuraLog::ModAttackspeed,
+            AuraType::ModThreat => AuraLog::ModThreat,
+            AuraType::ModTaunt => AuraLog::ModTaunt,
+            AuraType::ModStun => AuraLog::ModStun,
+            AuraType::ModDamageDone => AuraLog::ModDamageDone,
+            AuraType::ModDamageTaken => AuraLog::ModDamageTaken,
+            AuraType::DamageShield => AuraLog::DamageShield,
+            AuraType::ModStealth => AuraLog::ModStealth,
+            AuraType::ModStealthDetect => AuraLog::ModStealthDetect,
+            AuraType::ModInvisibility => AuraLog::ModInvisibility,
+            AuraType::ModInvisibilityDetect => AuraLog::ModInvisibilityDetect,
+            AuraType::ObsModHealth => {
+                // damage2: u32
+                let damage2 = crate::util::read_u32_le(&mut r)?;
+
+                // over_damage: u32
+                let over_damage = crate::util::read_u32_le(&mut r)?;
+
+                // absorb2: u32
+                let absorb2 = crate::util::read_u32_le(&mut r)?;
+
+                // critical2: Bool
+                let critical2 = crate::util::read_bool_u8(&mut r)?;
+
+                AuraLog::ObsModHealth {
+                    absorb2,
+                    critical2,
+                    damage2,
+                    over_damage,
+                }
+            }
+            AuraType::ObsModPower => AuraLog::ObsModPower,
+            AuraType::ModResistance => AuraLog::ModResistance,
+            AuraType::PeriodicTriggerSpell => AuraLog::PeriodicTriggerSpell,
+            AuraType::PeriodicEnergize => {
+                // misc_value1: u32
+                let misc_value1 = crate::util::read_u32_le(&mut r)?;
+
+                // damage3: u32
+                let damage3 = crate::util::read_u32_le(&mut r)?;
+
+                AuraLog::PeriodicEnergize {
+                    damage3,
+                    misc_value1,
+                }
+            }
+            AuraType::ModPacify => AuraLog::ModPacify,
+            AuraType::ModRoot => AuraLog::ModRoot,
+            AuraType::ModSilence => AuraLog::ModSilence,
+            AuraType::ReflectSpells => AuraLog::ReflectSpells,
+            AuraType::ModStat => AuraLog::ModStat,
+            AuraType::ModSkill => AuraLog::ModSkill,
+            AuraType::ModIncreaseSpeed => AuraLog::ModIncreaseSpeed,
+            AuraType::ModIncreaseMountedSpeed => AuraLog::ModIncreaseMountedSpeed,
+            AuraType::ModDecreaseSpeed => AuraLog::ModDecreaseSpeed,
+            AuraType::ModIncreaseHealth => AuraLog::ModIncreaseHealth,
+            AuraType::ModIncreaseEnergy => AuraLog::ModIncreaseEnergy,
+            AuraType::ModShapeshift => AuraLog::ModShapeshift,
+            AuraType::EffectImmunity => AuraLog::EffectImmunity,
+            AuraType::StateImmunity => AuraLog::StateImmunity,
+            AuraType::SchoolImmunity => AuraLog::SchoolImmunity,
+            AuraType::DamageImmunity => AuraLog::DamageImmunity,
+            AuraType::DispelImmunity => AuraLog::DispelImmunity,
+            AuraType::ProcTriggerSpell => AuraLog::ProcTriggerSpell,
+            AuraType::ProcTriggerDamage => AuraLog::ProcTriggerDamage,
+            AuraType::TrackCreatures => AuraLog::TrackCreatures,
+            AuraType::TrackResources => AuraLog::TrackResources,
+            AuraType::Unknown46 => AuraLog::Unknown46,
+            AuraType::ModParryPercent => AuraLog::ModParryPercent,
+            AuraType::PeriodicTriggerSpellFromClient => AuraLog::PeriodicTriggerSpellFromClient,
+            AuraType::ModDodgePercent => AuraLog::ModDodgePercent,
+            AuraType::ModCriticalHealingAmount => AuraLog::ModCriticalHealingAmount,
+            AuraType::ModBlockPercent => AuraLog::ModBlockPercent,
+            AuraType::ModWeaponCritPercent => AuraLog::ModWeaponCritPercent,
+            AuraType::PeriodicLeech => AuraLog::PeriodicLeech,
+            AuraType::ModHitChance => AuraLog::ModHitChance,
+            AuraType::ModSpellHitChance => AuraLog::ModSpellHitChance,
+            AuraType::Transform => AuraLog::Transform,
+            AuraType::ModSpellCritChance => AuraLog::ModSpellCritChance,
+            AuraType::ModIncreaseSwimSpeed => AuraLog::ModIncreaseSwimSpeed,
+            AuraType::ModDamageDoneCreature => AuraLog::ModDamageDoneCreature,
+            AuraType::ModPacifySilence => AuraLog::ModPacifySilence,
+            AuraType::ModScale => AuraLog::ModScale,
+            AuraType::PeriodicHealthFunnel => AuraLog::PeriodicHealthFunnel,
+            AuraType::Unknown63 => AuraLog::Unknown63,
+            AuraType::PeriodicManaLeech => {
+                // misc_value2: u32
+                let misc_value2 = crate::util::read_u32_le(&mut r)?;
+
+                // damage4: u32
+                let damage4 = crate::util::read_u32_le(&mut r)?;
+
+                // gain_multiplier: f32
+                let gain_multiplier = crate::util::read_f32_le(&mut r)?;
+
+                AuraLog::PeriodicManaLeech {
+                    damage4,
+                    gain_multiplier,
+                    misc_value2,
+                }
+            }
+            AuraType::ModCastingSpeedNotStack => AuraLog::ModCastingSpeedNotStack,
+            AuraType::FeignDeath => AuraLog::FeignDeath,
+            AuraType::ModDisarm => AuraLog::ModDisarm,
+            AuraType::ModStalked => AuraLog::ModStalked,
+            AuraType::SchoolAbsorb => AuraLog::SchoolAbsorb,
+            AuraType::ExtraAttacks => AuraLog::ExtraAttacks,
+            AuraType::ModSpellCritChanceSchool => AuraLog::ModSpellCritChanceSchool,
+            AuraType::ModPowerCostSchoolPct => AuraLog::ModPowerCostSchoolPct,
+            AuraType::ModPowerCostSchool => AuraLog::ModPowerCostSchool,
+            AuraType::ReflectSpellsSchool => AuraLog::ReflectSpellsSchool,
+            AuraType::ModLanguage => AuraLog::ModLanguage,
+            AuraType::FarSight => AuraLog::FarSight,
+            AuraType::MechanicImmunity => AuraLog::MechanicImmunity,
+            AuraType::Mounted => AuraLog::Mounted,
+            AuraType::ModDamagePercentDone => AuraLog::ModDamagePercentDone,
+            AuraType::ModPercentStat => AuraLog::ModPercentStat,
+            AuraType::SplitDamagePct => AuraLog::SplitDamagePct,
+            AuraType::WaterBreathing => AuraLog::WaterBreathing,
+            AuraType::ModBaseResistance => AuraLog::ModBaseResistance,
+            AuraType::ModRegen => AuraLog::ModRegen,
+            AuraType::ModPowerRegen => AuraLog::ModPowerRegen,
+            AuraType::ChannelDeathItem => AuraLog::ChannelDeathItem,
+            AuraType::ModDamagePercentTaken => AuraLog::ModDamagePercentTaken,
+            AuraType::ModHealthRegenPercent => AuraLog::ModHealthRegenPercent,
+            AuraType::PeriodicDamagePercent => {
+                // damage1: u32
+                let damage1 = crate::util::read_u32_le(&mut r)?;
+
+                // overkill_damage: u32
+                let overkill_damage = crate::util::read_u32_le(&mut r)?;
+
+                // school: SpellSchool
+                let school = crate::util::read_u8_le(&mut r)?.try_into()?;
+
+                // absorb1: u32
+                let absorb1 = crate::util::read_u32_le(&mut r)?;
+
+                // resisted: u32
+                let resisted = crate::util::read_u32_le(&mut r)?;
+
+                // critical1: Bool
+                let critical1 = crate::util::read_bool_u8(&mut r)?;
+
+                AuraLog::PeriodicDamagePercent {
+                    absorb1,
+                    critical1,
+                    damage1,
+                    overkill_damage,
+                    resisted,
+                    school,
+                }
+            }
+            AuraType::Unknown90 => AuraLog::Unknown90,
+            AuraType::ModDetectRange => AuraLog::ModDetectRange,
+            AuraType::PreventsFleeing => AuraLog::PreventsFleeing,
+            AuraType::ModUnattackable => AuraLog::ModUnattackable,
+            AuraType::InterruptRegen => AuraLog::InterruptRegen,
+            AuraType::Ghost => AuraLog::Ghost,
+            AuraType::SpellMagnet => AuraLog::SpellMagnet,
+            AuraType::ManaShield => AuraLog::ManaShield,
+            AuraType::ModSkillTalent => AuraLog::ModSkillTalent,
+            AuraType::ModAttackPower => AuraLog::ModAttackPower,
+            AuraType::AurasVisible => AuraLog::AurasVisible,
+            AuraType::ModResistancePct => AuraLog::ModResistancePct,
+            AuraType::ModMeleeAttackPowerVersus => AuraLog::ModMeleeAttackPowerVersus,
+            AuraType::ModTotalThreat => AuraLog::ModTotalThreat,
+            AuraType::WaterWalk => AuraLog::WaterWalk,
+            AuraType::FeatherFall => AuraLog::FeatherFall,
+            AuraType::Hover => AuraLog::Hover,
+            AuraType::AddFlatModifier => AuraLog::AddFlatModifier,
+            AuraType::AddPctModifier => AuraLog::AddPctModifier,
+            AuraType::AddTargetTrigger => AuraLog::AddTargetTrigger,
+            AuraType::ModPowerRegenPercent => AuraLog::ModPowerRegenPercent,
+            AuraType::AddCasterHitTrigger => AuraLog::AddCasterHitTrigger,
+            AuraType::OverrideClassScripts => AuraLog::OverrideClassScripts,
+            AuraType::ModRangedDamageTaken => AuraLog::ModRangedDamageTaken,
+            AuraType::ModRangedDamageTakenPct => AuraLog::ModRangedDamageTakenPct,
+            AuraType::ModHealing => AuraLog::ModHealing,
+            AuraType::ModRegenDuringCombat => AuraLog::ModRegenDuringCombat,
+            AuraType::ModMechanicResistance => AuraLog::ModMechanicResistance,
+            AuraType::ModHealingPct => AuraLog::ModHealingPct,
+            AuraType::Unknown119 => AuraLog::Unknown119,
+            AuraType::Untrackable => AuraLog::Untrackable,
+            AuraType::Empathy => AuraLog::Empathy,
+            AuraType::ModOffhandDamagePct => AuraLog::ModOffhandDamagePct,
+            AuraType::ModTargetResistance => AuraLog::ModTargetResistance,
+            AuraType::ModRangedAttackPower => AuraLog::ModRangedAttackPower,
+            AuraType::ModMeleeDamageTaken => AuraLog::ModMeleeDamageTaken,
+            AuraType::ModMeleeDamageTakenPct => AuraLog::ModMeleeDamageTakenPct,
+            AuraType::RangedAttackPowerAttackerBonus => AuraLog::RangedAttackPowerAttackerBonus,
+            AuraType::ModPossessPet => AuraLog::ModPossessPet,
+            AuraType::ModSpeedAlways => AuraLog::ModSpeedAlways,
+            AuraType::ModMountedSpeedAlways => AuraLog::ModMountedSpeedAlways,
+            AuraType::ModRangedAttackPowerVersus => AuraLog::ModRangedAttackPowerVersus,
+            AuraType::ModIncreaseEnergyPercent => AuraLog::ModIncreaseEnergyPercent,
+            AuraType::ModIncreaseHealthPercent => AuraLog::ModIncreaseHealthPercent,
+            AuraType::ModManaRegenInterrupt => AuraLog::ModManaRegenInterrupt,
+            AuraType::ModHealingDone => AuraLog::ModHealingDone,
+            AuraType::ModHealingDonePercent => AuraLog::ModHealingDonePercent,
+            AuraType::ModTotalStatPercentage => AuraLog::ModTotalStatPercentage,
+            AuraType::ModMeleeHaste => AuraLog::ModMeleeHaste,
+            AuraType::ForceReaction => AuraLog::ForceReaction,
+            AuraType::ModRangedHaste => AuraLog::ModRangedHaste,
+            AuraType::ModRangedAmmoHaste => AuraLog::ModRangedAmmoHaste,
+            AuraType::ModBaseResistancePct => AuraLog::ModBaseResistancePct,
+            AuraType::ModResistanceExclusive => AuraLog::ModResistanceExclusive,
+            AuraType::SafeFall => AuraLog::SafeFall,
+            AuraType::ModPetTalentPoints => AuraLog::ModPetTalentPoints,
+            AuraType::AllowTamePetType => AuraLog::AllowTamePetType,
+            AuraType::MechanicImmunityMask => AuraLog::MechanicImmunityMask,
+            AuraType::RetainComboPoints => AuraLog::RetainComboPoints,
+            AuraType::ReducePushback => AuraLog::ReducePushback,
+            AuraType::ModShieldBlockvaluePct => AuraLog::ModShieldBlockvaluePct,
+            AuraType::TrackStealthed => AuraLog::TrackStealthed,
+            AuraType::ModDetectedRange => AuraLog::ModDetectedRange,
+            AuraType::SplitDamageFlat => AuraLog::SplitDamageFlat,
+            AuraType::ModStealthLevel => AuraLog::ModStealthLevel,
+            AuraType::ModWaterBreathing => AuraLog::ModWaterBreathing,
+            AuraType::ModReputationGain => AuraLog::ModReputationGain,
+            AuraType::PetDamageMulti => AuraLog::PetDamageMulti,
+            AuraType::ModShieldBlockvalue => AuraLog::ModShieldBlockvalue,
+            AuraType::NoPvpCredit => AuraLog::NoPvpCredit,
+            AuraType::ModAoeAvoidance => AuraLog::ModAoeAvoidance,
+            AuraType::ModHealthRegenInCombat => AuraLog::ModHealthRegenInCombat,
+            AuraType::PowerBurn => AuraLog::PowerBurn,
+            AuraType::ModCritDamageBonus => AuraLog::ModCritDamageBonus,
+            AuraType::Unknown164 => AuraLog::Unknown164,
+            AuraType::MeleeAttackPowerAttackerBonus => AuraLog::MeleeAttackPowerAttackerBonus,
+            AuraType::ModAttackPowerPct => AuraLog::ModAttackPowerPct,
+            AuraType::ModRangedAttackPowerPct => AuraLog::ModRangedAttackPowerPct,
+            AuraType::ModDamageDoneVersus => AuraLog::ModDamageDoneVersus,
+            AuraType::ModCritPercentVersus => AuraLog::ModCritPercentVersus,
+            AuraType::DetectAmore => AuraLog::DetectAmore,
+            AuraType::ModSpeedNotStack => AuraLog::ModSpeedNotStack,
+            AuraType::ModMountedSpeedNotStack => AuraLog::ModMountedSpeedNotStack,
+            AuraType::Unknown173 => AuraLog::Unknown173,
+            AuraType::ModSpellDamageOfStatPercent => AuraLog::ModSpellDamageOfStatPercent,
+            AuraType::ModSpellHealingOfStatPercent => AuraLog::ModSpellHealingOfStatPercent,
+            AuraType::SpiritOfRedemption => AuraLog::SpiritOfRedemption,
+            AuraType::AoeCharm => AuraLog::AoeCharm,
+            AuraType::ModDebuffResistance => AuraLog::ModDebuffResistance,
+            AuraType::ModAttackerSpellCritChance => AuraLog::ModAttackerSpellCritChance,
+            AuraType::ModFlatSpellDamageVersus => AuraLog::ModFlatSpellDamageVersus,
+            AuraType::Unknown181 => AuraLog::Unknown181,
+            AuraType::ModResistanceOfStatPercent => AuraLog::ModResistanceOfStatPercent,
+            AuraType::ModCriticalThreat => AuraLog::ModCriticalThreat,
+            AuraType::ModAttackerMeleeHitChance => AuraLog::ModAttackerMeleeHitChance,
+            AuraType::ModAttackerRangedHitChance => AuraLog::ModAttackerRangedHitChance,
+            AuraType::ModAttackerSpellHitChance => AuraLog::ModAttackerSpellHitChance,
+            AuraType::ModAttackerMeleeCritChance => AuraLog::ModAttackerMeleeCritChance,
+            AuraType::ModAttackerRangedCritChance => AuraLog::ModAttackerRangedCritChance,
+            AuraType::ModRating => AuraLog::ModRating,
+            AuraType::ModFactionReputationGain => AuraLog::ModFactionReputationGain,
+            AuraType::UseNormalMovementSpeed => AuraLog::UseNormalMovementSpeed,
+            AuraType::ModMeleeRangedHaste => AuraLog::ModMeleeRangedHaste,
+            AuraType::MeleeSlow => AuraLog::MeleeSlow,
+            AuraType::ModTargetAbsorbSchool => AuraLog::ModTargetAbsorbSchool,
+            AuraType::ModTargetAbilityAbsorbSchool => AuraLog::ModTargetAbilityAbsorbSchool,
+            AuraType::ModCooldown => AuraLog::ModCooldown,
+            AuraType::ModAttackerSpellAndWeaponCritChance => AuraLog::ModAttackerSpellAndWeaponCritChance,
+            AuraType::Unknown198 => AuraLog::Unknown198,
+            AuraType::ModIncreasesSpellPctToHit => AuraLog::ModIncreasesSpellPctToHit,
+            AuraType::ModXpPct => AuraLog::ModXpPct,
+            AuraType::Fly => AuraLog::Fly,
+            AuraType::IgnoreCombatResult => AuraLog::IgnoreCombatResult,
+            AuraType::ModAttackerMeleeCritDamage => AuraLog::ModAttackerMeleeCritDamage,
+            AuraType::ModAttackerRangedCritDamage => AuraLog::ModAttackerRangedCritDamage,
+            AuraType::ModSchoolCritDmgTaken => AuraLog::ModSchoolCritDmgTaken,
+            AuraType::ModIncreaseVehicleFlightSpeed => AuraLog::ModIncreaseVehicleFlightSpeed,
+            AuraType::ModIncreaseMountedFlightSpeed => AuraLog::ModIncreaseMountedFlightSpeed,
+            AuraType::ModIncreaseFlightSpeed => AuraLog::ModIncreaseFlightSpeed,
+            AuraType::ModMountedFlightSpeedAlways => AuraLog::ModMountedFlightSpeedAlways,
+            AuraType::ModVehicleSpeedAlways => AuraLog::ModVehicleSpeedAlways,
+            AuraType::ModFlightSpeedNotStack => AuraLog::ModFlightSpeedNotStack,
+            AuraType::ModRangedAttackPowerOfStatPercent => AuraLog::ModRangedAttackPowerOfStatPercent,
+            AuraType::ModRageFromDamageDealt => AuraLog::ModRageFromDamageDealt,
+            AuraType::Unknown214 => AuraLog::Unknown214,
+            AuraType::ArenaPreparation => AuraLog::ArenaPreparation,
+            AuraType::HasteSpells => AuraLog::HasteSpells,
+            AuraType::ModMeleeHaste2 => AuraLog::ModMeleeHaste2,
+            AuraType::HasteRanged => AuraLog::HasteRanged,
+            AuraType::ModManaRegenFromStat => AuraLog::ModManaRegenFromStat,
+            AuraType::ModRatingFromStat => AuraLog::ModRatingFromStat,
+            AuraType::ModDetaunt => AuraLog::ModDetaunt,
+            AuraType::Unknown222 => AuraLog::Unknown222,
+            AuraType::RaidProcFromCharge => AuraLog::RaidProcFromCharge,
+            AuraType::Unknown224 => AuraLog::Unknown224,
+            AuraType::RaidProcFromChargeWithValue => AuraLog::RaidProcFromChargeWithValue,
+            AuraType::PeriodicDummy => AuraLog::PeriodicDummy,
+            AuraType::PeriodicTriggerSpellWithValue => AuraLog::PeriodicTriggerSpellWithValue,
+            AuraType::DetectStealth => AuraLog::DetectStealth,
+            AuraType::ModAoeDamageAvoidance => AuraLog::ModAoeDamageAvoidance,
+            AuraType::Unknown230 => AuraLog::Unknown230,
+            AuraType::ProcTriggerSpellWithValue => AuraLog::ProcTriggerSpellWithValue,
+            AuraType::MechanicDurationMod => AuraLog::MechanicDurationMod,
+            AuraType::ChangeModelForAllHumanoids => AuraLog::ChangeModelForAllHumanoids,
+            AuraType::MechanicDurationModNotStack => AuraLog::MechanicDurationModNotStack,
+            AuraType::ModDispelResist => AuraLog::ModDispelResist,
+            AuraType::ControlVehicle => AuraLog::ControlVehicle,
+            AuraType::ModSpellDamageOfAttackPower => AuraLog::ModSpellDamageOfAttackPower,
+            AuraType::ModSpellHealingOfAttackPower => AuraLog::ModSpellHealingOfAttackPower,
+            AuraType::ModScale2 => AuraLog::ModScale2,
+            AuraType::ModExpertise => AuraLog::ModExpertise,
+            AuraType::ForceMoveForward => AuraLog::ForceMoveForward,
+            AuraType::ModSpellDamageFromHealing => AuraLog::ModSpellDamageFromHealing,
+            AuraType::ModFaction => AuraLog::ModFaction,
+            AuraType::ComprehendLanguage => AuraLog::ComprehendLanguage,
+            AuraType::ModAuraDurationByDispel => AuraLog::ModAuraDurationByDispel,
+            AuraType::ModAuraDurationByDispelNotStack => AuraLog::ModAuraDurationByDispelNotStack,
+            AuraType::CloneCaster => AuraLog::CloneCaster,
+            AuraType::ModCombatResultChance => AuraLog::ModCombatResultChance,
+            AuraType::ConvertRune => AuraLog::ConvertRune,
+            AuraType::ModIncreaseHealth2 => AuraLog::ModIncreaseHealth2,
+            AuraType::ModEnemyDodge => AuraLog::ModEnemyDodge,
+            AuraType::ModSpeedSlowAll => AuraLog::ModSpeedSlowAll,
+            AuraType::ModBlockCritChance => AuraLog::ModBlockCritChance,
+            AuraType::ModDisarmOffhand => AuraLog::ModDisarmOffhand,
+            AuraType::ModMechanicDamageTakenPercent => AuraLog::ModMechanicDamageTakenPercent,
+            AuraType::NoReagentUse => AuraLog::NoReagentUse,
+            AuraType::ModTargetResistBySpellClass => AuraLog::ModTargetResistBySpellClass,
+            AuraType::Unknown258 => AuraLog::Unknown258,
+            AuraType::ModHotPct => AuraLog::ModHotPct,
+            AuraType::ScreenEffect => AuraLog::ScreenEffect,
+            AuraType::Phase => AuraLog::Phase,
+            AuraType::AbilityIgnoreAurastate => AuraLog::AbilityIgnoreAurastate,
+            AuraType::AllowOnlyAbility => AuraLog::AllowOnlyAbility,
+            AuraType::Unknown264 => AuraLog::Unknown264,
+            AuraType::Unknown265 => AuraLog::Unknown265,
+            AuraType::Unknown266 => AuraLog::Unknown266,
+            AuraType::ModImmuneAuraApplySchool => AuraLog::ModImmuneAuraApplySchool,
+            AuraType::ModAttackPowerOfStatPercent => AuraLog::ModAttackPowerOfStatPercent,
+            AuraType::ModIgnoreTargetResist => AuraLog::ModIgnoreTargetResist,
+            AuraType::ModAbilityIgnoreTargetResist => AuraLog::ModAbilityIgnoreTargetResist,
+            AuraType::ModDamageFromCaster => AuraLog::ModDamageFromCaster,
+            AuraType::IgnoreMeleeReset => AuraLog::IgnoreMeleeReset,
+            AuraType::XRay => AuraLog::XRay,
+            AuraType::AbilityConsumeNoAmmo => AuraLog::AbilityConsumeNoAmmo,
+            AuraType::ModIgnoreShapeshift => AuraLog::ModIgnoreShapeshift,
+            AuraType::ModDamageDoneForMechanic => AuraLog::ModDamageDoneForMechanic,
+            AuraType::ModMaxAffectedTargets => AuraLog::ModMaxAffectedTargets,
+            AuraType::ModDisarmRanged => AuraLog::ModDisarmRanged,
+            AuraType::InitializeImages => AuraLog::InitializeImages,
+            AuraType::ModArmorPenetrationPct => AuraLog::ModArmorPenetrationPct,
+            AuraType::ModHonorGainPct => AuraLog::ModHonorGainPct,
+            AuraType::ModBaseHealthPct => AuraLog::ModBaseHealthPct,
+            AuraType::ModHealingReceived => AuraLog::ModHealingReceived,
+            AuraType::Linked => AuraLog::Linked,
+            AuraType::ModAttackPowerOfArmor => AuraLog::ModAttackPowerOfArmor,
+            AuraType::AbilityPeriodicCrit => AuraLog::AbilityPeriodicCrit,
+            AuraType::DeflectSpells => AuraLog::DeflectSpells,
+            AuraType::IgnoreHitDirection => AuraLog::IgnoreHitDirection,
+            AuraType::PreventDurabilityLoss => AuraLog::PreventDurabilityLoss,
+            AuraType::ModCritPct => AuraLog::ModCritPct,
+            AuraType::ModXpQuestPct => AuraLog::ModXpQuestPct,
+            AuraType::OpenStable => AuraLog::OpenStable,
+            AuraType::OverrideSpells => AuraLog::OverrideSpells,
+            AuraType::PreventRegeneratePower => AuraLog::PreventRegeneratePower,
+            AuraType::Unknown295 => AuraLog::Unknown295,
+            AuraType::SetVehicleId => AuraLog::SetVehicleId,
+            AuraType::BlockSpellFamily => AuraLog::BlockSpellFamily,
+            AuraType::Strangulate => AuraLog::Strangulate,
+            AuraType::Unknown299 => AuraLog::Unknown299,
+            AuraType::ShareDamagePct => AuraLog::ShareDamagePct,
+            AuraType::SchoolHealAbsorb => AuraLog::SchoolHealAbsorb,
+            AuraType::Unknown302 => AuraLog::Unknown302,
+            AuraType::ModDamageDoneVersusAurastate => AuraLog::ModDamageDoneVersusAurastate,
+            AuraType::ModFakeInebriate => AuraLog::ModFakeInebriate,
+            AuraType::ModMinimumSpeed => AuraLog::ModMinimumSpeed,
+            AuraType::Unknown306 => AuraLog::Unknown306,
+            AuraType::HealAbsorbTest => AuraLog::HealAbsorbTest,
+            AuraType::ModCritChanceForCaster => AuraLog::ModCritChanceForCaster,
+            AuraType::Unknown309 => AuraLog::Unknown309,
+            AuraType::ModCreatureAoeDamageAvoidance => AuraLog::ModCreatureAoeDamageAvoidance,
+            AuraType::Unknown311 => AuraLog::Unknown311,
+            AuraType::Unknown312 => AuraLog::Unknown312,
+            AuraType::Unknown313 => AuraLog::Unknown313,
+            AuraType::PreventResurrection => AuraLog::PreventResurrection,
+            AuraType::UnderwaterWalking => AuraLog::UnderwaterWalking,
+            AuraType::PeriodicHaste => AuraLog::PeriodicHaste,
+        };
+
+        Ok(aura_type_if)
+    }
+
+}
+
+impl AuraLog {
+    pub(crate) const fn size(&self) -> usize {
+        (match self {
+            Self::PeriodicDamage {
+                ..
+            } => {
+                4
+                + 4 // absorb1: u32
+                + 1 // critical1: Bool
+                + 4 // damage1: u32
+                + 4 // overkill_damage: u32
+                + 4 // resisted: u32
+                + 1 // school: SpellSchool
+            }
+            Self::PeriodicHeal {
+                ..
+            } => {
+                4
+                + 4 // absorb2: u32
+                + 1 // critical2: Bool
+                + 4 // damage2: u32
+                + 4 // over_damage: u32
+            }
+            Self::ObsModHealth {
+                ..
+            } => {
+                4
+                + 4 // absorb2: u32
+                + 1 // critical2: Bool
+                + 4 // damage2: u32
+                + 4 // over_damage: u32
+            }
+            Self::PeriodicEnergize {
+                ..
+            } => {
+                4
+                + 4 // damage3: u32
+                + 4 // misc_value1: u32
+            }
+            Self::PeriodicManaLeech {
+                ..
+            } => {
+                4
+                + 4 // damage4: u32
+                + 4 // gain_multiplier: f32
+                + 4 // misc_value2: u32
+            }
+            Self::PeriodicDamagePercent {
+                ..
+            } => {
+                4
+                + 4 // absorb1: u32
+                + 1 // critical1: Bool
+                + 4 // damage1: u32
+                + 4 // overkill_damage: u32
+                + 4 // resisted: u32
+                + 1 // school: SpellSchool
+            }
+            _ => 4,
+        }) // aura_type: AuraLog
+    }
+}
+
+impl Default for AuraLog {
     fn default() -> Self {
         // First enumerator without any fields
         Self::None
     }
 }
 
-impl AuraLog_AuraType {
+impl AuraLog {
     pub(crate) const fn as_int(&self) -> u32 {
         match self {
             Self::None => 0,
@@ -1312,7 +1362,7 @@ impl AuraLog_AuraType {
 
 }
 
-impl std::fmt::Display for AuraLog_AuraType {
+impl std::fmt::Display for AuraLog {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match self {
             Self::None => f.write_str("None"),
@@ -1632,69 +1682,6 @@ impl std::fmt::Display for AuraLog_AuraType {
             Self::PreventResurrection => f.write_str("PreventResurrection"),
             Self::UnderwaterWalking => f.write_str("UnderwaterWalking"),
             Self::PeriodicHaste => f.write_str("PeriodicHaste"),
-        }
-    }
-}
-
-impl AuraLog_AuraType {
-    pub(crate) const fn size(&self) -> usize {
-        match self {
-            Self::PeriodicDamage {
-                ..
-            } => {
-                4
-                + 4 // absorb1: u32
-                + 1 // critical1: Bool
-                + 4 // damage1: u32
-                + 4 // overkill_damage: u32
-                + 4 // resisted: u32
-                + 1 // school: SpellSchool
-            }
-            Self::PeriodicHeal {
-                ..
-            } => {
-                4
-                + 4 // absorb2: u32
-                + 1 // critical2: Bool
-                + 4 // damage2: u32
-                + 4 // over_damage: u32
-            }
-            Self::ObsModHealth {
-                ..
-            } => {
-                4
-                + 4 // absorb2: u32
-                + 1 // critical2: Bool
-                + 4 // damage2: u32
-                + 4 // over_damage: u32
-            }
-            Self::PeriodicEnergize {
-                ..
-            } => {
-                4
-                + 4 // damage3: u32
-                + 4 // misc_value1: u32
-            }
-            Self::PeriodicManaLeech {
-                ..
-            } => {
-                4
-                + 4 // damage4: u32
-                + 4 // gain_multiplier: f32
-                + 4 // misc_value2: u32
-            }
-            Self::PeriodicDamagePercent {
-                ..
-            } => {
-                4
-                + 4 // absorb1: u32
-                + 1 // critical1: Bool
-                + 4 // damage1: u32
-                + 4 // overkill_damage: u32
-                + 4 // resisted: u32
-                + 1 // school: SpellSchool
-            }
-            _ => 4,
         }
     }
 }

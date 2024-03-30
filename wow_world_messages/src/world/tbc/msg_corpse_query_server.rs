@@ -15,9 +15,14 @@ use crate::tbc::{
 ///     }
 /// }
 /// ```
-#[derive(Debug, Clone, Copy, PartialEq, PartialOrd, Default)]
-pub struct MSG_CORPSE_QUERY_Server {
-    pub result: MSG_CORPSE_QUERY_Server_CorpseQueryResult,
+#[derive(Debug, Clone, Copy, PartialEq, PartialOrd)]
+pub enum MSG_CORPSE_QUERY_Server {
+    NotFound,
+    Found {
+        corpse_map: Map,
+        map: Map,
+        position: Vector3d,
+    },
 }
 
 impl crate::private::Sealed for MSG_CORPSE_QUERY_Server {}
@@ -31,7 +36,7 @@ impl MSG_CORPSE_QUERY_Server {
         let result = crate::util::read_u8_le(&mut r)?.try_into()?;
 
         let result_if = match result {
-            CorpseQueryResult::NotFound => MSG_CORPSE_QUERY_Server_CorpseQueryResult::NotFound,
+            CorpseQueryResult::NotFound => MSG_CORPSE_QUERY_Server::NotFound,
             CorpseQueryResult::Found => {
                 // map: Map
                 let map = crate::util::read_u32_le(&mut r)?.try_into()?;
@@ -42,7 +47,7 @@ impl MSG_CORPSE_QUERY_Server {
                 // corpse_map: Map
                 let corpse_map = crate::util::read_u32_le(&mut r)?.try_into()?;
 
-                MSG_CORPSE_QUERY_Server_CorpseQueryResult::Found {
+                MSG_CORPSE_QUERY_Server::Found {
                     corpse_map,
                     map,
                     position,
@@ -50,9 +55,7 @@ impl MSG_CORPSE_QUERY_Server {
             }
         };
 
-        Ok(Self {
-            result: result_if,
-        })
+        Ok(result_if)
     }
 
 }
@@ -74,9 +77,9 @@ impl crate::Message for MSG_CORPSE_QUERY_Server {
 
         writeln!(s, "test MSG_CORPSE_QUERY_Server {{").unwrap();
         // Members
-        writeln!(s, "    result = {};", CorpseQueryResult::try_from(self.result.as_int()).unwrap().as_test_case_value()).unwrap();
-        match &self.result {
-            crate::tbc::MSG_CORPSE_QUERY_Server_CorpseQueryResult::Found {
+        writeln!(s, "    result = {};", CorpseQueryResult::try_from(self.as_int()).unwrap().as_test_case_value()).unwrap();
+        match &self {
+            crate::tbc::MSG_CORPSE_QUERY_Server::Found {
                 corpse_map,
                 map,
                 position,
@@ -107,8 +110,8 @@ impl crate::Message for MSG_CORPSE_QUERY_Server {
         let mut bytes = bytes.into_iter();
 
         crate::util::write_bytes(&mut s, &mut bytes, 1, "result", "    ");
-        match &self.result {
-            crate::tbc::MSG_CORPSE_QUERY_Server_CorpseQueryResult::Found {
+        match &self {
+            crate::tbc::MSG_CORPSE_QUERY_Server::Found {
                 corpse_map,
                 map,
                 position,
@@ -139,10 +142,10 @@ impl crate::Message for MSG_CORPSE_QUERY_Server {
 
     fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
         // result: CorpseQueryResult
-        w.write_all(&(self.result.as_int().to_le_bytes()))?;
+        w.write_all(&(self.as_int().to_le_bytes()))?;
 
-        match &self.result {
-            MSG_CORPSE_QUERY_Server_CorpseQueryResult::Found {
+        match &self {
+            MSG_CORPSE_QUERY_Server::Found {
                 corpse_map,
                 map,
                 position,
@@ -174,49 +177,7 @@ impl crate::tbc::ServerMessage for MSG_CORPSE_QUERY_Server {}
 
 impl MSG_CORPSE_QUERY_Server {
     pub(crate) const fn size(&self) -> usize {
-        self.result.size() // result: MSG_CORPSE_QUERY_Server_CorpseQueryResult
-    }
-}
-
-#[derive(Debug, Clone, Copy, PartialEq, PartialOrd)]
-pub enum MSG_CORPSE_QUERY_Server_CorpseQueryResult {
-    NotFound,
-    Found {
-        corpse_map: Map,
-        map: Map,
-        position: Vector3d,
-    },
-}
-
-impl Default for MSG_CORPSE_QUERY_Server_CorpseQueryResult {
-    fn default() -> Self {
-        // First enumerator without any fields
-        Self::NotFound
-    }
-}
-
-impl MSG_CORPSE_QUERY_Server_CorpseQueryResult {
-    pub(crate) const fn as_int(&self) -> u8 {
-        match self {
-            Self::NotFound => 0,
-            Self::Found { .. } => 1,
-        }
-    }
-
-}
-
-impl std::fmt::Display for MSG_CORPSE_QUERY_Server_CorpseQueryResult {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
-            Self::NotFound => f.write_str("NotFound"),
-            Self::Found{ .. } => f.write_str("Found"),
-        }
-    }
-}
-
-impl MSG_CORPSE_QUERY_Server_CorpseQueryResult {
-    pub(crate) const fn size(&self) -> usize {
-        match self {
+        (match self {
             Self::Found {
                 ..
             } => {
@@ -226,6 +187,32 @@ impl MSG_CORPSE_QUERY_Server_CorpseQueryResult {
                 + 12 // position: Vector3d
             }
             _ => 1,
+        }) // result: MSG_CORPSE_QUERY_Server
+    }
+}
+
+impl Default for MSG_CORPSE_QUERY_Server {
+    fn default() -> Self {
+        // First enumerator without any fields
+        Self::NotFound
+    }
+}
+
+impl MSG_CORPSE_QUERY_Server {
+    pub(crate) const fn as_int(&self) -> u8 {
+        match self {
+            Self::NotFound => 0,
+            Self::Found { .. } => 1,
+        }
+    }
+
+}
+
+impl std::fmt::Display for MSG_CORPSE_QUERY_Server {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        match self {
+            Self::NotFound => f.write_str("NotFound"),
+            Self::Found{ .. } => f.write_str("Found"),
         }
     }
 }

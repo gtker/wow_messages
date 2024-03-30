@@ -13,9 +13,12 @@ use crate::tbc::{
 ///     }
 /// }
 /// ```
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
-pub struct SMSG_LFG_UPDATE_LFM {
-    pub looking_for_more: SMSG_LFG_UPDATE_LFM_LfgUpdateLookingForMore,
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord)]
+pub enum SMSG_LFG_UPDATE_LFM {
+    NotLookingForMore,
+    LookingForMore {
+        data: LfgData,
+    },
 }
 
 impl crate::private::Sealed for SMSG_LFG_UPDATE_LFM {}
@@ -29,20 +32,18 @@ impl SMSG_LFG_UPDATE_LFM {
         let looking_for_more = crate::util::read_u8_le(&mut r)?.try_into()?;
 
         let looking_for_more_if = match looking_for_more {
-            LfgUpdateLookingForMore::NotLookingForMore => SMSG_LFG_UPDATE_LFM_LfgUpdateLookingForMore::NotLookingForMore,
+            LfgUpdateLookingForMore::NotLookingForMore => SMSG_LFG_UPDATE_LFM::NotLookingForMore,
             LfgUpdateLookingForMore::LookingForMore => {
                 // data: LfgData
                 let data = LfgData::read(&mut r)?;
 
-                SMSG_LFG_UPDATE_LFM_LfgUpdateLookingForMore::LookingForMore {
+                SMSG_LFG_UPDATE_LFM::LookingForMore {
                     data,
                 }
             }
         };
 
-        Ok(Self {
-            looking_for_more: looking_for_more_if,
-        })
+        Ok(looking_for_more_if)
     }
 
 }
@@ -64,9 +65,9 @@ impl crate::Message for SMSG_LFG_UPDATE_LFM {
 
         writeln!(s, "test SMSG_LFG_UPDATE_LFM {{").unwrap();
         // Members
-        writeln!(s, "    looking_for_more = {};", LfgUpdateLookingForMore::try_from(self.looking_for_more.as_int()).unwrap().as_test_case_value()).unwrap();
-        match &self.looking_for_more {
-            crate::tbc::SMSG_LFG_UPDATE_LFM_LfgUpdateLookingForMore::LookingForMore {
+        writeln!(s, "    looking_for_more = {};", LfgUpdateLookingForMore::try_from(self.as_int()).unwrap().as_test_case_value()).unwrap();
+        match &self {
+            crate::tbc::SMSG_LFG_UPDATE_LFM::LookingForMore {
                 data,
             } => {
                 // data: LfgData
@@ -92,8 +93,8 @@ impl crate::Message for SMSG_LFG_UPDATE_LFM {
         let mut bytes = bytes.into_iter();
 
         crate::util::write_bytes(&mut s, &mut bytes, 1, "looking_for_more", "    ");
-        match &self.looking_for_more {
-            crate::tbc::SMSG_LFG_UPDATE_LFM_LfgUpdateLookingForMore::LookingForMore {
+        match &self {
+            crate::tbc::SMSG_LFG_UPDATE_LFM::LookingForMore {
                 data,
             } => {
                 writeln!(s, "    /* data: LfgData start */").unwrap();
@@ -119,10 +120,10 @@ impl crate::Message for SMSG_LFG_UPDATE_LFM {
 
     fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
         // looking_for_more: LfgUpdateLookingForMore
-        w.write_all(&(self.looking_for_more.as_int().to_le_bytes()))?;
+        w.write_all(&(self.as_int().to_le_bytes()))?;
 
-        match &self.looking_for_more {
-            SMSG_LFG_UPDATE_LFM_LfgUpdateLookingForMore::LookingForMore {
+        match &self {
+            SMSG_LFG_UPDATE_LFM::LookingForMore {
                 data,
             } => {
                 // data: LfgData
@@ -146,26 +147,26 @@ impl crate::tbc::ServerMessage for SMSG_LFG_UPDATE_LFM {}
 
 impl SMSG_LFG_UPDATE_LFM {
     pub(crate) const fn size(&self) -> usize {
-        self.looking_for_more.size() // looking_for_more: SMSG_LFG_UPDATE_LFM_LfgUpdateLookingForMore
+        (match self {
+            Self::LookingForMore {
+                ..
+            } => {
+                1
+                + 4 // data: LfgData
+            }
+            _ => 1,
+        }) // looking_for_more: SMSG_LFG_UPDATE_LFM
     }
 }
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord)]
-pub enum SMSG_LFG_UPDATE_LFM_LfgUpdateLookingForMore {
-    NotLookingForMore,
-    LookingForMore {
-        data: LfgData,
-    },
-}
-
-impl Default for SMSG_LFG_UPDATE_LFM_LfgUpdateLookingForMore {
+impl Default for SMSG_LFG_UPDATE_LFM {
     fn default() -> Self {
         // First enumerator without any fields
         Self::NotLookingForMore
     }
 }
 
-impl SMSG_LFG_UPDATE_LFM_LfgUpdateLookingForMore {
+impl SMSG_LFG_UPDATE_LFM {
     pub(crate) const fn as_int(&self) -> u8 {
         match self {
             Self::NotLookingForMore => 0,
@@ -175,25 +176,11 @@ impl SMSG_LFG_UPDATE_LFM_LfgUpdateLookingForMore {
 
 }
 
-impl std::fmt::Display for SMSG_LFG_UPDATE_LFM_LfgUpdateLookingForMore {
+impl std::fmt::Display for SMSG_LFG_UPDATE_LFM {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match self {
             Self::NotLookingForMore => f.write_str("NotLookingForMore"),
             Self::LookingForMore{ .. } => f.write_str("LookingForMore"),
-        }
-    }
-}
-
-impl SMSG_LFG_UPDATE_LFM_LfgUpdateLookingForMore {
-    pub(crate) const fn size(&self) -> usize {
-        match self {
-            Self::LookingForMore {
-                ..
-            } => {
-                1
-                + 4 // data: LfgData
-            }
-            _ => 1,
         }
     }
 }

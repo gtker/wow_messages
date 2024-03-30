@@ -11,18 +11,22 @@ use crate::vanilla::SimpleEnum;
 ///     }
 /// }
 /// ```
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
-pub struct SimpleIfEnum {
-    pub enum: SimpleIfEnum_SimpleEnum,
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord)]
+pub enum SimpleIfEnum {
+    Zero {
+        basic: u8,
+    },
+    One,
+    Two,
 }
 
 impl SimpleIfEnum {
     pub(crate) fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
         // enum: SimpleEnum
-        w.write_all(&(self.enum.as_int().to_le_bytes()))?;
+        w.write_all(&(self.as_int().to_le_bytes()))?;
 
-        match &self.enum {
-            SimpleIfEnum_SimpleEnum::Zero {
+        match &self {
+            SimpleIfEnum::Zero {
                 basic,
             } => {
                 // basic: u8
@@ -46,44 +50,41 @@ impl SimpleIfEnum {
                 // basic: u8
                 let basic = crate::util::read_u8_le(&mut r)?;
 
-                SimpleIfEnum_SimpleEnum::Zero {
+                SimpleIfEnum::Zero {
                     basic,
                 }
             }
-            SimpleEnum::One => SimpleIfEnum_SimpleEnum::One,
-            SimpleEnum::Two => SimpleIfEnum_SimpleEnum::Two,
+            SimpleEnum::One => SimpleIfEnum::One,
+            SimpleEnum::Two => SimpleIfEnum::Two,
         };
 
-        Ok(Self {
-            enum: enum_if,
-        })
+        Ok(enum_if)
     }
 
 }
 
 impl SimpleIfEnum {
     pub(crate) const fn size(&self) -> usize {
-        self.enum.size() // enum: SimpleIfEnum_SimpleEnum
+        (match self {
+            Self::Zero {
+                ..
+            } => {
+                1
+                + 1 // basic: u8
+            }
+            _ => 1,
+        }) // enum: SimpleIfEnum
     }
 }
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord)]
-pub enum SimpleIfEnum_SimpleEnum {
-    Zero {
-        basic: u8,
-    },
-    One,
-    Two,
-}
-
-impl Default for SimpleIfEnum_SimpleEnum {
+impl Default for SimpleIfEnum {
     fn default() -> Self {
         // First enumerator without any fields
         Self::One
     }
 }
 
-impl SimpleIfEnum_SimpleEnum {
+impl SimpleIfEnum {
     pub(crate) const fn as_int(&self) -> u8 {
         match self {
             Self::Zero { .. } => 0,
@@ -94,26 +95,12 @@ impl SimpleIfEnum_SimpleEnum {
 
 }
 
-impl std::fmt::Display for SimpleIfEnum_SimpleEnum {
+impl std::fmt::Display for SimpleIfEnum {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match self {
             Self::Zero{ .. } => f.write_str("Zero"),
             Self::One => f.write_str("One"),
             Self::Two => f.write_str("Two"),
-        }
-    }
-}
-
-impl SimpleIfEnum_SimpleEnum {
-    pub(crate) const fn size(&self) -> usize {
-        match self {
-            Self::Zero {
-                ..
-            } => {
-                1
-                + 1 // basic: u8
-            }
-            _ => 1,
         }
     }
 }

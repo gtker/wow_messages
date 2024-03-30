@@ -85,14 +85,14 @@ impl crate::Message for SMSG_SPELLLOGEXECUTE {
         for v in self.logs.as_slice() {
             writeln!(s, "        {{").unwrap();
             // Members
-            writeln!(s, "            effect = {};", SpellEffect::try_from(v.effect.as_int()).unwrap().as_test_case_value()).unwrap();
-            match &v.effect {
-                crate::vanilla::SpellLog_SpellEffect::Instakill {
+            writeln!(s, "            effect = {};", SpellEffect::try_from(v.as_int()).unwrap().as_test_case_value()).unwrap();
+            match &v {
+                crate::vanilla::SpellLog::Instakill {
                     target7,
                 } => {
                     writeln!(s, "            target7 = {};", target7.guid()).unwrap();
                 }
-                crate::vanilla::SpellLog_SpellEffect::PowerDrain {
+                crate::vanilla::SpellLog::PowerDrain {
                     amount,
                     multiplier,
                     power,
@@ -103,7 +103,7 @@ impl crate::Message for SMSG_SPELLLOGEXECUTE {
                     writeln!(s, "            power = {};", power.as_test_case_value()).unwrap();
                     writeln!(s, "            multiplier = {};", if multiplier.to_string().contains('.') { multiplier.to_string() } else { format!("{}.0", multiplier) }).unwrap();
                 }
-                crate::vanilla::SpellLog_SpellEffect::Heal {
+                crate::vanilla::SpellLog::Heal {
                     heal_amount,
                     heal_critical,
                     target2,
@@ -112,29 +112,29 @@ impl crate::Message for SMSG_SPELLLOGEXECUTE {
                     writeln!(s, "            heal_amount = {};", heal_amount).unwrap();
                     writeln!(s, "            heal_critical = {};", heal_critical).unwrap();
                 }
-                crate::vanilla::SpellLog_SpellEffect::Resurrect {
+                crate::vanilla::SpellLog::Resurrect {
                     target7,
                 } => {
                     writeln!(s, "            target7 = {};", target7.guid()).unwrap();
                 }
-                crate::vanilla::SpellLog_SpellEffect::AddExtraAttacks {
+                crate::vanilla::SpellLog::AddExtraAttacks {
                     extra_attacks,
                     target4,
                 } => {
                     writeln!(s, "            target4 = {};", target4.guid()).unwrap();
                     writeln!(s, "            extra_attacks = {};", extra_attacks).unwrap();
                 }
-                crate::vanilla::SpellLog_SpellEffect::CreateItem {
+                crate::vanilla::SpellLog::CreateItem {
                     item,
                 } => {
                     writeln!(s, "            item = {};", item).unwrap();
                 }
-                crate::vanilla::SpellLog_SpellEffect::Summon {
+                crate::vanilla::SpellLog::Summon {
                     target7,
                 } => {
                     writeln!(s, "            target7 = {};", target7.guid()).unwrap();
                 }
-                crate::vanilla::SpellLog_SpellEffect::Energize {
+                crate::vanilla::SpellLog::Energize {
                     energize_amount,
                     energize_power,
                     target3,
@@ -143,47 +143,47 @@ impl crate::Message for SMSG_SPELLLOGEXECUTE {
                     writeln!(s, "            energize_amount = {};", energize_amount).unwrap();
                     writeln!(s, "            energize_power = {};", energize_power).unwrap();
                 }
-                crate::vanilla::SpellLog_SpellEffect::OpenLock {
+                crate::vanilla::SpellLog::OpenLock {
                     target7,
                 } => {
                     writeln!(s, "            target7 = {};", target7.guid()).unwrap();
                 }
-                crate::vanilla::SpellLog_SpellEffect::Dispel {
+                crate::vanilla::SpellLog::Dispel {
                     target7,
                 } => {
                     writeln!(s, "            target7 = {};", target7.guid()).unwrap();
                 }
-                crate::vanilla::SpellLog_SpellEffect::SummonWild {
+                crate::vanilla::SpellLog::SummonWild {
                     target7,
                 } => {
                     writeln!(s, "            target7 = {};", target7.guid()).unwrap();
                 }
-                crate::vanilla::SpellLog_SpellEffect::SummonGuardian {
+                crate::vanilla::SpellLog::SummonGuardian {
                     target7,
                 } => {
                     writeln!(s, "            target7 = {};", target7.guid()).unwrap();
                 }
-                crate::vanilla::SpellLog_SpellEffect::TransDoor {
+                crate::vanilla::SpellLog::TransDoor {
                     target7,
                 } => {
                     writeln!(s, "            target7 = {};", target7.guid()).unwrap();
                 }
-                crate::vanilla::SpellLog_SpellEffect::SummonPet {
+                crate::vanilla::SpellLog::SummonPet {
                     target7,
                 } => {
                     writeln!(s, "            target7 = {};", target7.guid()).unwrap();
                 }
-                crate::vanilla::SpellLog_SpellEffect::OpenLockItem {
+                crate::vanilla::SpellLog::OpenLockItem {
                     target7,
                 } => {
                     writeln!(s, "            target7 = {};", target7.guid()).unwrap();
                 }
-                crate::vanilla::SpellLog_SpellEffect::Threat {
+                crate::vanilla::SpellLog::Threat {
                     target7,
                 } => {
                     writeln!(s, "            target7 = {};", target7.guid()).unwrap();
                 }
-                crate::vanilla::SpellLog_SpellEffect::HealMaxHealth {
+                crate::vanilla::SpellLog::HealMaxHealth {
                     heal_amount,
                     heal_critical,
                     target2,
@@ -192,104 +192,104 @@ impl crate::Message for SMSG_SPELLLOGEXECUTE {
                     writeln!(s, "            heal_amount = {};", heal_amount).unwrap();
                     writeln!(s, "            heal_critical = {};", heal_critical).unwrap();
                 }
-                crate::vanilla::SpellLog_SpellEffect::InterruptCast {
+                crate::vanilla::SpellLog::InterruptCast {
                     interrupted_spell,
                     target5,
                 } => {
                     writeln!(s, "            target5 = {};", target5.guid()).unwrap();
                     writeln!(s, "            interrupted_spell = {};", interrupted_spell).unwrap();
                 }
-                crate::vanilla::SpellLog_SpellEffect::Distract {
+                crate::vanilla::SpellLog::Distract {
                     target7,
                 } => {
                     writeln!(s, "            target7 = {};", target7.guid()).unwrap();
                 }
-                crate::vanilla::SpellLog_SpellEffect::SummonPossessed {
+                crate::vanilla::SpellLog::SummonPossessed {
                     target7,
                 } => {
                     writeln!(s, "            target7 = {};", target7.guid()).unwrap();
                 }
-                crate::vanilla::SpellLog_SpellEffect::SummonTotem {
+                crate::vanilla::SpellLog::SummonTotem {
                     target7,
                 } => {
                     writeln!(s, "            target7 = {};", target7.guid()).unwrap();
                 }
-                crate::vanilla::SpellLog_SpellEffect::SummonObjectWild {
+                crate::vanilla::SpellLog::SummonObjectWild {
                     target7,
                 } => {
                     writeln!(s, "            target7 = {};", target7.guid()).unwrap();
                 }
-                crate::vanilla::SpellLog_SpellEffect::Sanctuary {
+                crate::vanilla::SpellLog::Sanctuary {
                     target7,
                 } => {
                     writeln!(s, "            target7 = {};", target7.guid()).unwrap();
                 }
-                crate::vanilla::SpellLog_SpellEffect::SummonTotemSlot1 {
+                crate::vanilla::SpellLog::SummonTotemSlot1 {
                     target7,
                 } => {
                     writeln!(s, "            target7 = {};", target7.guid()).unwrap();
                 }
-                crate::vanilla::SpellLog_SpellEffect::SummonTotemSlot2 {
+                crate::vanilla::SpellLog::SummonTotemSlot2 {
                     target7,
                 } => {
                     writeln!(s, "            target7 = {};", target7.guid()).unwrap();
                 }
-                crate::vanilla::SpellLog_SpellEffect::SummonTotemSlot3 {
+                crate::vanilla::SpellLog::SummonTotemSlot3 {
                     target7,
                 } => {
                     writeln!(s, "            target7 = {};", target7.guid()).unwrap();
                 }
-                crate::vanilla::SpellLog_SpellEffect::SummonTotemSlot4 {
+                crate::vanilla::SpellLog::SummonTotemSlot4 {
                     target7,
                 } => {
                     writeln!(s, "            target7 = {};", target7.guid()).unwrap();
                 }
-                crate::vanilla::SpellLog_SpellEffect::ThreatAll {
+                crate::vanilla::SpellLog::ThreatAll {
                     target7,
                 } => {
                     writeln!(s, "            target7 = {};", target7.guid()).unwrap();
                 }
-                crate::vanilla::SpellLog_SpellEffect::SummonCritter {
+                crate::vanilla::SpellLog::SummonCritter {
                     target7,
                 } => {
                     writeln!(s, "            target7 = {};", target7.guid()).unwrap();
                 }
-                crate::vanilla::SpellLog_SpellEffect::FeedPet {
+                crate::vanilla::SpellLog::FeedPet {
                     feed_pet_item,
                 } => {
                     writeln!(s, "            feed_pet_item = {};", feed_pet_item).unwrap();
                 }
-                crate::vanilla::SpellLog_SpellEffect::DismissPet {
+                crate::vanilla::SpellLog::DismissPet {
                     target7,
                 } => {
                     writeln!(s, "            target7 = {};", target7.guid()).unwrap();
                 }
-                crate::vanilla::SpellLog_SpellEffect::SummonObjectSlot1 {
+                crate::vanilla::SpellLog::SummonObjectSlot1 {
                     target7,
                 } => {
                     writeln!(s, "            target7 = {};", target7.guid()).unwrap();
                 }
-                crate::vanilla::SpellLog_SpellEffect::SummonObjectSlot2 {
+                crate::vanilla::SpellLog::SummonObjectSlot2 {
                     target7,
                 } => {
                     writeln!(s, "            target7 = {};", target7.guid()).unwrap();
                 }
-                crate::vanilla::SpellLog_SpellEffect::SummonObjectSlot3 {
+                crate::vanilla::SpellLog::SummonObjectSlot3 {
                     target7,
                 } => {
                     writeln!(s, "            target7 = {};", target7.guid()).unwrap();
                 }
-                crate::vanilla::SpellLog_SpellEffect::SummonObjectSlot4 {
+                crate::vanilla::SpellLog::SummonObjectSlot4 {
                     target7,
                 } => {
                     writeln!(s, "            target7 = {};", target7.guid()).unwrap();
                 }
-                crate::vanilla::SpellLog_SpellEffect::DispelMechanic {
+                crate::vanilla::SpellLog::DispelMechanic {
                     target7,
                 } => {
                     writeln!(s, "            target7 = {};", target7.guid()).unwrap();
                 }
-                crate::vanilla::SpellLog_SpellEffect::DurabilityDamage {
+                crate::vanilla::SpellLog::DurabilityDamage {
                     item_to_damage,
                     target6,
                     unknown5,
@@ -298,32 +298,32 @@ impl crate::Message for SMSG_SPELLLOGEXECUTE {
                     writeln!(s, "            item_to_damage = {};", item_to_damage).unwrap();
                     writeln!(s, "            unknown5 = {};", unknown5).unwrap();
                 }
-                crate::vanilla::SpellLog_SpellEffect::SummonDemon {
+                crate::vanilla::SpellLog::SummonDemon {
                     target7,
                 } => {
                     writeln!(s, "            target7 = {};", target7.guid()).unwrap();
                 }
-                crate::vanilla::SpellLog_SpellEffect::ResurrectNew {
+                crate::vanilla::SpellLog::ResurrectNew {
                     target7,
                 } => {
                     writeln!(s, "            target7 = {};", target7.guid()).unwrap();
                 }
-                crate::vanilla::SpellLog_SpellEffect::AttackMe {
+                crate::vanilla::SpellLog::AttackMe {
                     target7,
                 } => {
                     writeln!(s, "            target7 = {};", target7.guid()).unwrap();
                 }
-                crate::vanilla::SpellLog_SpellEffect::SkinPlayerCorpse {
+                crate::vanilla::SpellLog::SkinPlayerCorpse {
                     target7,
                 } => {
                     writeln!(s, "            target7 = {};", target7.guid()).unwrap();
                 }
-                crate::vanilla::SpellLog_SpellEffect::ModifyThreatPercent {
+                crate::vanilla::SpellLog::ModifyThreatPercent {
                     target7,
                 } => {
                     writeln!(s, "            target7 = {};", target7.guid()).unwrap();
                 }
-                crate::vanilla::SpellLog_SpellEffect::Unknown126 {
+                crate::vanilla::SpellLog::Unknown126 {
                     target7,
                 } => {
                     writeln!(s, "            target7 = {};", target7.guid()).unwrap();
@@ -355,13 +355,13 @@ impl crate::Message for SMSG_SPELLLOGEXECUTE {
                 writeln!(s, "    /* logs: SpellLog[amount_of_effects] {i} start */").unwrap();
                 crate::util::write_bytes(&mut s, &mut bytes, 4, "effect", "        ");
                 crate::util::write_bytes(&mut s, &mut bytes, 4, "amount_of_logs", "        ");
-                match &v.effect {
-                    crate::vanilla::SpellLog_SpellEffect::Instakill {
+                match &v {
+                    crate::vanilla::SpellLog::Instakill {
                         target7,
                     } => {
                         crate::util::write_bytes(&mut s, &mut bytes, 8, "target7", "        ");
                     }
-                    crate::vanilla::SpellLog_SpellEffect::PowerDrain {
+                    crate::vanilla::SpellLog::PowerDrain {
                         amount,
                         multiplier,
                         power,
@@ -372,7 +372,7 @@ impl crate::Message for SMSG_SPELLLOGEXECUTE {
                         crate::util::write_bytes(&mut s, &mut bytes, 4, "power", "        ");
                         crate::util::write_bytes(&mut s, &mut bytes, 4, "multiplier", "        ");
                     }
-                    crate::vanilla::SpellLog_SpellEffect::Heal {
+                    crate::vanilla::SpellLog::Heal {
                         heal_amount,
                         heal_critical,
                         target2,
@@ -381,29 +381,29 @@ impl crate::Message for SMSG_SPELLLOGEXECUTE {
                         crate::util::write_bytes(&mut s, &mut bytes, 4, "heal_amount", "        ");
                         crate::util::write_bytes(&mut s, &mut bytes, 4, "heal_critical", "        ");
                     }
-                    crate::vanilla::SpellLog_SpellEffect::Resurrect {
+                    crate::vanilla::SpellLog::Resurrect {
                         target7,
                     } => {
                         crate::util::write_bytes(&mut s, &mut bytes, 8, "target7", "        ");
                     }
-                    crate::vanilla::SpellLog_SpellEffect::AddExtraAttacks {
+                    crate::vanilla::SpellLog::AddExtraAttacks {
                         extra_attacks,
                         target4,
                     } => {
                         crate::util::write_bytes(&mut s, &mut bytes, 8, "target4", "        ");
                         crate::util::write_bytes(&mut s, &mut bytes, 4, "extra_attacks", "        ");
                     }
-                    crate::vanilla::SpellLog_SpellEffect::CreateItem {
+                    crate::vanilla::SpellLog::CreateItem {
                         item,
                     } => {
                         crate::util::write_bytes(&mut s, &mut bytes, 4, "item", "        ");
                     }
-                    crate::vanilla::SpellLog_SpellEffect::Summon {
+                    crate::vanilla::SpellLog::Summon {
                         target7,
                     } => {
                         crate::util::write_bytes(&mut s, &mut bytes, 8, "target7", "        ");
                     }
-                    crate::vanilla::SpellLog_SpellEffect::Energize {
+                    crate::vanilla::SpellLog::Energize {
                         energize_amount,
                         energize_power,
                         target3,
@@ -412,47 +412,47 @@ impl crate::Message for SMSG_SPELLLOGEXECUTE {
                         crate::util::write_bytes(&mut s, &mut bytes, 4, "energize_amount", "        ");
                         crate::util::write_bytes(&mut s, &mut bytes, 4, "energize_power", "        ");
                     }
-                    crate::vanilla::SpellLog_SpellEffect::OpenLock {
+                    crate::vanilla::SpellLog::OpenLock {
                         target7,
                     } => {
                         crate::util::write_bytes(&mut s, &mut bytes, 8, "target7", "        ");
                     }
-                    crate::vanilla::SpellLog_SpellEffect::Dispel {
+                    crate::vanilla::SpellLog::Dispel {
                         target7,
                     } => {
                         crate::util::write_bytes(&mut s, &mut bytes, 8, "target7", "        ");
                     }
-                    crate::vanilla::SpellLog_SpellEffect::SummonWild {
+                    crate::vanilla::SpellLog::SummonWild {
                         target7,
                     } => {
                         crate::util::write_bytes(&mut s, &mut bytes, 8, "target7", "        ");
                     }
-                    crate::vanilla::SpellLog_SpellEffect::SummonGuardian {
+                    crate::vanilla::SpellLog::SummonGuardian {
                         target7,
                     } => {
                         crate::util::write_bytes(&mut s, &mut bytes, 8, "target7", "        ");
                     }
-                    crate::vanilla::SpellLog_SpellEffect::TransDoor {
+                    crate::vanilla::SpellLog::TransDoor {
                         target7,
                     } => {
                         crate::util::write_bytes(&mut s, &mut bytes, 8, "target7", "        ");
                     }
-                    crate::vanilla::SpellLog_SpellEffect::SummonPet {
+                    crate::vanilla::SpellLog::SummonPet {
                         target7,
                     } => {
                         crate::util::write_bytes(&mut s, &mut bytes, 8, "target7", "        ");
                     }
-                    crate::vanilla::SpellLog_SpellEffect::OpenLockItem {
+                    crate::vanilla::SpellLog::OpenLockItem {
                         target7,
                     } => {
                         crate::util::write_bytes(&mut s, &mut bytes, 8, "target7", "        ");
                     }
-                    crate::vanilla::SpellLog_SpellEffect::Threat {
+                    crate::vanilla::SpellLog::Threat {
                         target7,
                     } => {
                         crate::util::write_bytes(&mut s, &mut bytes, 8, "target7", "        ");
                     }
-                    crate::vanilla::SpellLog_SpellEffect::HealMaxHealth {
+                    crate::vanilla::SpellLog::HealMaxHealth {
                         heal_amount,
                         heal_critical,
                         target2,
@@ -461,104 +461,104 @@ impl crate::Message for SMSG_SPELLLOGEXECUTE {
                         crate::util::write_bytes(&mut s, &mut bytes, 4, "heal_amount", "        ");
                         crate::util::write_bytes(&mut s, &mut bytes, 4, "heal_critical", "        ");
                     }
-                    crate::vanilla::SpellLog_SpellEffect::InterruptCast {
+                    crate::vanilla::SpellLog::InterruptCast {
                         interrupted_spell,
                         target5,
                     } => {
                         crate::util::write_bytes(&mut s, &mut bytes, 8, "target5", "        ");
                         crate::util::write_bytes(&mut s, &mut bytes, 4, "interrupted_spell", "        ");
                     }
-                    crate::vanilla::SpellLog_SpellEffect::Distract {
+                    crate::vanilla::SpellLog::Distract {
                         target7,
                     } => {
                         crate::util::write_bytes(&mut s, &mut bytes, 8, "target7", "        ");
                     }
-                    crate::vanilla::SpellLog_SpellEffect::SummonPossessed {
+                    crate::vanilla::SpellLog::SummonPossessed {
                         target7,
                     } => {
                         crate::util::write_bytes(&mut s, &mut bytes, 8, "target7", "        ");
                     }
-                    crate::vanilla::SpellLog_SpellEffect::SummonTotem {
+                    crate::vanilla::SpellLog::SummonTotem {
                         target7,
                     } => {
                         crate::util::write_bytes(&mut s, &mut bytes, 8, "target7", "        ");
                     }
-                    crate::vanilla::SpellLog_SpellEffect::SummonObjectWild {
+                    crate::vanilla::SpellLog::SummonObjectWild {
                         target7,
                     } => {
                         crate::util::write_bytes(&mut s, &mut bytes, 8, "target7", "        ");
                     }
-                    crate::vanilla::SpellLog_SpellEffect::Sanctuary {
+                    crate::vanilla::SpellLog::Sanctuary {
                         target7,
                     } => {
                         crate::util::write_bytes(&mut s, &mut bytes, 8, "target7", "        ");
                     }
-                    crate::vanilla::SpellLog_SpellEffect::SummonTotemSlot1 {
+                    crate::vanilla::SpellLog::SummonTotemSlot1 {
                         target7,
                     } => {
                         crate::util::write_bytes(&mut s, &mut bytes, 8, "target7", "        ");
                     }
-                    crate::vanilla::SpellLog_SpellEffect::SummonTotemSlot2 {
+                    crate::vanilla::SpellLog::SummonTotemSlot2 {
                         target7,
                     } => {
                         crate::util::write_bytes(&mut s, &mut bytes, 8, "target7", "        ");
                     }
-                    crate::vanilla::SpellLog_SpellEffect::SummonTotemSlot3 {
+                    crate::vanilla::SpellLog::SummonTotemSlot3 {
                         target7,
                     } => {
                         crate::util::write_bytes(&mut s, &mut bytes, 8, "target7", "        ");
                     }
-                    crate::vanilla::SpellLog_SpellEffect::SummonTotemSlot4 {
+                    crate::vanilla::SpellLog::SummonTotemSlot4 {
                         target7,
                     } => {
                         crate::util::write_bytes(&mut s, &mut bytes, 8, "target7", "        ");
                     }
-                    crate::vanilla::SpellLog_SpellEffect::ThreatAll {
+                    crate::vanilla::SpellLog::ThreatAll {
                         target7,
                     } => {
                         crate::util::write_bytes(&mut s, &mut bytes, 8, "target7", "        ");
                     }
-                    crate::vanilla::SpellLog_SpellEffect::SummonCritter {
+                    crate::vanilla::SpellLog::SummonCritter {
                         target7,
                     } => {
                         crate::util::write_bytes(&mut s, &mut bytes, 8, "target7", "        ");
                     }
-                    crate::vanilla::SpellLog_SpellEffect::FeedPet {
+                    crate::vanilla::SpellLog::FeedPet {
                         feed_pet_item,
                     } => {
                         crate::util::write_bytes(&mut s, &mut bytes, 4, "feed_pet_item", "        ");
                     }
-                    crate::vanilla::SpellLog_SpellEffect::DismissPet {
+                    crate::vanilla::SpellLog::DismissPet {
                         target7,
                     } => {
                         crate::util::write_bytes(&mut s, &mut bytes, 8, "target7", "        ");
                     }
-                    crate::vanilla::SpellLog_SpellEffect::SummonObjectSlot1 {
+                    crate::vanilla::SpellLog::SummonObjectSlot1 {
                         target7,
                     } => {
                         crate::util::write_bytes(&mut s, &mut bytes, 8, "target7", "        ");
                     }
-                    crate::vanilla::SpellLog_SpellEffect::SummonObjectSlot2 {
+                    crate::vanilla::SpellLog::SummonObjectSlot2 {
                         target7,
                     } => {
                         crate::util::write_bytes(&mut s, &mut bytes, 8, "target7", "        ");
                     }
-                    crate::vanilla::SpellLog_SpellEffect::SummonObjectSlot3 {
+                    crate::vanilla::SpellLog::SummonObjectSlot3 {
                         target7,
                     } => {
                         crate::util::write_bytes(&mut s, &mut bytes, 8, "target7", "        ");
                     }
-                    crate::vanilla::SpellLog_SpellEffect::SummonObjectSlot4 {
+                    crate::vanilla::SpellLog::SummonObjectSlot4 {
                         target7,
                     } => {
                         crate::util::write_bytes(&mut s, &mut bytes, 8, "target7", "        ");
                     }
-                    crate::vanilla::SpellLog_SpellEffect::DispelMechanic {
+                    crate::vanilla::SpellLog::DispelMechanic {
                         target7,
                     } => {
                         crate::util::write_bytes(&mut s, &mut bytes, 8, "target7", "        ");
                     }
-                    crate::vanilla::SpellLog_SpellEffect::DurabilityDamage {
+                    crate::vanilla::SpellLog::DurabilityDamage {
                         item_to_damage,
                         target6,
                         unknown5,
@@ -567,32 +567,32 @@ impl crate::Message for SMSG_SPELLLOGEXECUTE {
                         crate::util::write_bytes(&mut s, &mut bytes, 4, "item_to_damage", "        ");
                         crate::util::write_bytes(&mut s, &mut bytes, 4, "unknown5", "        ");
                     }
-                    crate::vanilla::SpellLog_SpellEffect::SummonDemon {
+                    crate::vanilla::SpellLog::SummonDemon {
                         target7,
                     } => {
                         crate::util::write_bytes(&mut s, &mut bytes, 8, "target7", "        ");
                     }
-                    crate::vanilla::SpellLog_SpellEffect::ResurrectNew {
+                    crate::vanilla::SpellLog::ResurrectNew {
                         target7,
                     } => {
                         crate::util::write_bytes(&mut s, &mut bytes, 8, "target7", "        ");
                     }
-                    crate::vanilla::SpellLog_SpellEffect::AttackMe {
+                    crate::vanilla::SpellLog::AttackMe {
                         target7,
                     } => {
                         crate::util::write_bytes(&mut s, &mut bytes, 8, "target7", "        ");
                     }
-                    crate::vanilla::SpellLog_SpellEffect::SkinPlayerCorpse {
+                    crate::vanilla::SpellLog::SkinPlayerCorpse {
                         target7,
                     } => {
                         crate::util::write_bytes(&mut s, &mut bytes, 8, "target7", "        ");
                     }
-                    crate::vanilla::SpellLog_SpellEffect::ModifyThreatPercent {
+                    crate::vanilla::SpellLog::ModifyThreatPercent {
                         target7,
                     } => {
                         crate::util::write_bytes(&mut s, &mut bytes, 8, "target7", "        ");
                     }
-                    crate::vanilla::SpellLog_SpellEffect::Unknown126 {
+                    crate::vanilla::SpellLog::Unknown126 {
                         target7,
                     } => {
                         crate::util::write_bytes(&mut s, &mut bytes, 8, "target7", "        ");

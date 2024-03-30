@@ -13,9 +13,13 @@ use crate::wrath::ItemTextQuery;
 ///     }
 /// }
 /// ```
-#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
-pub struct SMSG_ITEM_TEXT_QUERY_RESPONSE {
-    pub query: SMSG_ITEM_TEXT_QUERY_RESPONSE_ItemTextQuery,
+#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord)]
+pub enum SMSG_ITEM_TEXT_QUERY_RESPONSE {
+    HasText {
+        item: Guid,
+        text: String,
+    },
+    NoText,
 }
 
 impl crate::private::Sealed for SMSG_ITEM_TEXT_QUERY_RESPONSE {}
@@ -39,17 +43,15 @@ impl SMSG_ITEM_TEXT_QUERY_RESPONSE {
                     String::from_utf8(text)?
                 };
 
-                SMSG_ITEM_TEXT_QUERY_RESPONSE_ItemTextQuery::HasText {
+                SMSG_ITEM_TEXT_QUERY_RESPONSE::HasText {
                     item,
                     text,
                 }
             }
-            ItemTextQuery::NoText => SMSG_ITEM_TEXT_QUERY_RESPONSE_ItemTextQuery::NoText,
+            ItemTextQuery::NoText => SMSG_ITEM_TEXT_QUERY_RESPONSE::NoText,
         };
 
-        Ok(Self {
-            query: query_if,
-        })
+        Ok(query_if)
     }
 
 }
@@ -71,9 +73,9 @@ impl crate::Message for SMSG_ITEM_TEXT_QUERY_RESPONSE {
 
         writeln!(s, "test SMSG_ITEM_TEXT_QUERY_RESPONSE {{").unwrap();
         // Members
-        writeln!(s, "    query = {};", ItemTextQuery::try_from(self.query.as_int()).unwrap().as_test_case_value()).unwrap();
-        match &self.query {
-            crate::wrath::SMSG_ITEM_TEXT_QUERY_RESPONSE_ItemTextQuery::HasText {
+        writeln!(s, "    query = {};", ItemTextQuery::try_from(self.as_int()).unwrap().as_test_case_value()).unwrap();
+        match &self {
+            crate::wrath::SMSG_ITEM_TEXT_QUERY_RESPONSE::HasText {
                 item,
                 text,
             } => {
@@ -95,8 +97,8 @@ impl crate::Message for SMSG_ITEM_TEXT_QUERY_RESPONSE {
         let mut bytes = bytes.into_iter();
 
         crate::util::write_bytes(&mut s, &mut bytes, 1, "query", "    ");
-        match &self.query {
-            crate::wrath::SMSG_ITEM_TEXT_QUERY_RESPONSE_ItemTextQuery::HasText {
+        match &self {
+            crate::wrath::SMSG_ITEM_TEXT_QUERY_RESPONSE::HasText {
                 item,
                 text,
             } => {
@@ -121,10 +123,10 @@ impl crate::Message for SMSG_ITEM_TEXT_QUERY_RESPONSE {
 
     fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
         // query: ItemTextQuery
-        w.write_all(&(self.query.as_int().to_le_bytes()))?;
+        w.write_all(&(self.as_int().to_le_bytes()))?;
 
-        match &self.query {
-            SMSG_ITEM_TEXT_QUERY_RESPONSE_ItemTextQuery::HasText {
+        match &self {
+            SMSG_ITEM_TEXT_QUERY_RESPONSE::HasText {
                 item,
                 text,
             } => {
@@ -156,48 +158,7 @@ impl crate::wrath::ServerMessage for SMSG_ITEM_TEXT_QUERY_RESPONSE {}
 
 impl SMSG_ITEM_TEXT_QUERY_RESPONSE {
     pub(crate) fn size(&self) -> usize {
-        self.query.size() // query: SMSG_ITEM_TEXT_QUERY_RESPONSE_ItemTextQuery
-    }
-}
-
-#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord)]
-pub enum SMSG_ITEM_TEXT_QUERY_RESPONSE_ItemTextQuery {
-    HasText {
-        item: Guid,
-        text: String,
-    },
-    NoText,
-}
-
-impl Default for SMSG_ITEM_TEXT_QUERY_RESPONSE_ItemTextQuery {
-    fn default() -> Self {
-        // First enumerator without any fields
-        Self::NoText
-    }
-}
-
-impl SMSG_ITEM_TEXT_QUERY_RESPONSE_ItemTextQuery {
-    pub(crate) const fn as_int(&self) -> u8 {
-        match self {
-            Self::HasText { .. } => 0,
-            Self::NoText => 1,
-        }
-    }
-
-}
-
-impl std::fmt::Display for SMSG_ITEM_TEXT_QUERY_RESPONSE_ItemTextQuery {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
-            Self::HasText{ .. } => f.write_str("HasText"),
-            Self::NoText => f.write_str("NoText"),
-        }
-    }
-}
-
-impl SMSG_ITEM_TEXT_QUERY_RESPONSE_ItemTextQuery {
-    pub(crate) fn size(&self) -> usize {
-        match self {
+        (match self {
             Self::HasText {
                 text,
                 ..
@@ -207,6 +168,32 @@ impl SMSG_ITEM_TEXT_QUERY_RESPONSE_ItemTextQuery {
                 + text.len() + 1 // text: CString
             }
             _ => 1,
+        }) // query: SMSG_ITEM_TEXT_QUERY_RESPONSE
+    }
+}
+
+impl Default for SMSG_ITEM_TEXT_QUERY_RESPONSE {
+    fn default() -> Self {
+        // First enumerator without any fields
+        Self::NoText
+    }
+}
+
+impl SMSG_ITEM_TEXT_QUERY_RESPONSE {
+    pub(crate) const fn as_int(&self) -> u8 {
+        match self {
+            Self::HasText { .. } => 0,
+            Self::NoText => 1,
+        }
+    }
+
+}
+
+impl std::fmt::Display for SMSG_ITEM_TEXT_QUERY_RESPONSE {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        match self {
+            Self::HasText{ .. } => f.write_str("HasText"),
+            Self::NoText => f.write_str("NoText"),
         }
     }
 }

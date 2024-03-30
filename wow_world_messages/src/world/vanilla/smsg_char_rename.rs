@@ -14,182 +14,8 @@ use crate::vanilla::WorldResult;
 ///     }
 /// }
 /// ```
-#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
-pub struct SMSG_CHAR_RENAME {
-    pub result: SMSG_CHAR_RENAME_WorldResult,
-}
-
-impl crate::private::Sealed for SMSG_CHAR_RENAME {}
-impl SMSG_CHAR_RENAME {
-    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
-        if !(1..=265).contains(&body_size) {
-            return Err(crate::errors::ParseErrorKind::InvalidSize);
-        }
-
-        // result: WorldResult
-        let result = crate::util::read_u8_le(&mut r)?.try_into()?;
-
-        let result_if = match result {
-            WorldResult::ResponseSuccess => {
-                // character: Guid
-                let character = crate::util::read_guid(&mut r)?;
-
-                // new_name: CString
-                let new_name = {
-                    let new_name = crate::util::read_c_string_to_vec(&mut r)?;
-                    String::from_utf8(new_name)?
-                };
-
-                SMSG_CHAR_RENAME_WorldResult::ResponseSuccess {
-                    character,
-                    new_name,
-                }
-            }
-            WorldResult::ResponseFailure => SMSG_CHAR_RENAME_WorldResult::ResponseFailure,
-            WorldResult::ResponseCancelled => SMSG_CHAR_RENAME_WorldResult::ResponseCancelled,
-            WorldResult::ResponseDisconnected => SMSG_CHAR_RENAME_WorldResult::ResponseDisconnected,
-            WorldResult::ResponseFailedToConnect => SMSG_CHAR_RENAME_WorldResult::ResponseFailedToConnect,
-            WorldResult::ResponseConnected => SMSG_CHAR_RENAME_WorldResult::ResponseConnected,
-            WorldResult::ResponseVersionMismatch => SMSG_CHAR_RENAME_WorldResult::ResponseVersionMismatch,
-            WorldResult::CstatusConnecting => SMSG_CHAR_RENAME_WorldResult::CstatusConnecting,
-            WorldResult::CstatusNegotiatingSecurity => SMSG_CHAR_RENAME_WorldResult::CstatusNegotiatingSecurity,
-            WorldResult::CstatusNegotiationComplete => SMSG_CHAR_RENAME_WorldResult::CstatusNegotiationComplete,
-            WorldResult::CstatusNegotiationFailed => SMSG_CHAR_RENAME_WorldResult::CstatusNegotiationFailed,
-            WorldResult::CstatusAuthenticating => SMSG_CHAR_RENAME_WorldResult::CstatusAuthenticating,
-            WorldResult::AuthOk => SMSG_CHAR_RENAME_WorldResult::AuthOk,
-            WorldResult::AuthFailed => SMSG_CHAR_RENAME_WorldResult::AuthFailed,
-            WorldResult::AuthReject => SMSG_CHAR_RENAME_WorldResult::AuthReject,
-            WorldResult::AuthBadServerProof => SMSG_CHAR_RENAME_WorldResult::AuthBadServerProof,
-            WorldResult::AuthUnavailable => SMSG_CHAR_RENAME_WorldResult::AuthUnavailable,
-            WorldResult::AuthSystemError => SMSG_CHAR_RENAME_WorldResult::AuthSystemError,
-            WorldResult::AuthBillingError => SMSG_CHAR_RENAME_WorldResult::AuthBillingError,
-            WorldResult::AuthBillingExpired => SMSG_CHAR_RENAME_WorldResult::AuthBillingExpired,
-            WorldResult::AuthVersionMismatch => SMSG_CHAR_RENAME_WorldResult::AuthVersionMismatch,
-            WorldResult::AuthUnknownAccount => SMSG_CHAR_RENAME_WorldResult::AuthUnknownAccount,
-            WorldResult::AuthIncorrectPassword => SMSG_CHAR_RENAME_WorldResult::AuthIncorrectPassword,
-            WorldResult::AuthSessionExpired => SMSG_CHAR_RENAME_WorldResult::AuthSessionExpired,
-            WorldResult::AuthServerShuttingDown => SMSG_CHAR_RENAME_WorldResult::AuthServerShuttingDown,
-            WorldResult::AuthAlreadyLoggingIn => SMSG_CHAR_RENAME_WorldResult::AuthAlreadyLoggingIn,
-            WorldResult::AuthLoginServerNotFound => SMSG_CHAR_RENAME_WorldResult::AuthLoginServerNotFound,
-            WorldResult::AuthWaitQueue => SMSG_CHAR_RENAME_WorldResult::AuthWaitQueue,
-            WorldResult::AuthBanned => SMSG_CHAR_RENAME_WorldResult::AuthBanned,
-            WorldResult::AuthAlreadyOnline => SMSG_CHAR_RENAME_WorldResult::AuthAlreadyOnline,
-            WorldResult::AuthNoTime => SMSG_CHAR_RENAME_WorldResult::AuthNoTime,
-            WorldResult::AuthDbBusy => SMSG_CHAR_RENAME_WorldResult::AuthDbBusy,
-            WorldResult::AuthSuspended => SMSG_CHAR_RENAME_WorldResult::AuthSuspended,
-            WorldResult::AuthParentalControl => SMSG_CHAR_RENAME_WorldResult::AuthParentalControl,
-            WorldResult::RealmListInProgress => SMSG_CHAR_RENAME_WorldResult::RealmListInProgress,
-            WorldResult::RealmListSuccess => SMSG_CHAR_RENAME_WorldResult::RealmListSuccess,
-            WorldResult::RealmListFailed => SMSG_CHAR_RENAME_WorldResult::RealmListFailed,
-            WorldResult::RealmListInvalid => SMSG_CHAR_RENAME_WorldResult::RealmListInvalid,
-            WorldResult::RealmListRealmNotFound => SMSG_CHAR_RENAME_WorldResult::RealmListRealmNotFound,
-            WorldResult::AccountCreateInProgress => SMSG_CHAR_RENAME_WorldResult::AccountCreateInProgress,
-            WorldResult::AccountCreateSuccess => SMSG_CHAR_RENAME_WorldResult::AccountCreateSuccess,
-            WorldResult::AccountCreateFailed => SMSG_CHAR_RENAME_WorldResult::AccountCreateFailed,
-            WorldResult::CharListRetrieving => SMSG_CHAR_RENAME_WorldResult::CharListRetrieving,
-            WorldResult::CharListRetrieved => SMSG_CHAR_RENAME_WorldResult::CharListRetrieved,
-            WorldResult::CharListFailed => SMSG_CHAR_RENAME_WorldResult::CharListFailed,
-            WorldResult::CharCreateInProgress => SMSG_CHAR_RENAME_WorldResult::CharCreateInProgress,
-            WorldResult::CharCreateSuccess => SMSG_CHAR_RENAME_WorldResult::CharCreateSuccess,
-            WorldResult::CharCreateError => SMSG_CHAR_RENAME_WorldResult::CharCreateError,
-            WorldResult::CharCreateFailed => SMSG_CHAR_RENAME_WorldResult::CharCreateFailed,
-            WorldResult::CharCreateNameInUse => SMSG_CHAR_RENAME_WorldResult::CharCreateNameInUse,
-            WorldResult::CharCreateDisabled => SMSG_CHAR_RENAME_WorldResult::CharCreateDisabled,
-            WorldResult::CharCreatePvpTeamsViolation => SMSG_CHAR_RENAME_WorldResult::CharCreatePvpTeamsViolation,
-            WorldResult::CharCreateServerLimit => SMSG_CHAR_RENAME_WorldResult::CharCreateServerLimit,
-            WorldResult::CharCreateAccountLimit => SMSG_CHAR_RENAME_WorldResult::CharCreateAccountLimit,
-            WorldResult::CharCreateServerQueue => SMSG_CHAR_RENAME_WorldResult::CharCreateServerQueue,
-            WorldResult::CharCreateOnlyExisting => SMSG_CHAR_RENAME_WorldResult::CharCreateOnlyExisting,
-            WorldResult::CharDeleteInProgress => SMSG_CHAR_RENAME_WorldResult::CharDeleteInProgress,
-            WorldResult::CharDeleteSuccess => SMSG_CHAR_RENAME_WorldResult::CharDeleteSuccess,
-            WorldResult::CharDeleteFailed => SMSG_CHAR_RENAME_WorldResult::CharDeleteFailed,
-            WorldResult::CharDeleteFailedLockedForTransfer => SMSG_CHAR_RENAME_WorldResult::CharDeleteFailedLockedForTransfer,
-            WorldResult::CharLoginInProgress => SMSG_CHAR_RENAME_WorldResult::CharLoginInProgress,
-            WorldResult::CharLoginSuccess => SMSG_CHAR_RENAME_WorldResult::CharLoginSuccess,
-            WorldResult::CharLoginNoWorld => SMSG_CHAR_RENAME_WorldResult::CharLoginNoWorld,
-            WorldResult::CharLoginDuplicateCharacter => SMSG_CHAR_RENAME_WorldResult::CharLoginDuplicateCharacter,
-            WorldResult::CharLoginNoInstances => SMSG_CHAR_RENAME_WorldResult::CharLoginNoInstances,
-            WorldResult::CharLoginFailed => SMSG_CHAR_RENAME_WorldResult::CharLoginFailed,
-            WorldResult::CharLoginDisabled => SMSG_CHAR_RENAME_WorldResult::CharLoginDisabled,
-            WorldResult::CharLoginNoCharacter => SMSG_CHAR_RENAME_WorldResult::CharLoginNoCharacter,
-            WorldResult::CharLoginLockedForTransfer => SMSG_CHAR_RENAME_WorldResult::CharLoginLockedForTransfer,
-            WorldResult::CharNameNoName => SMSG_CHAR_RENAME_WorldResult::CharNameNoName,
-            WorldResult::CharNameTooShort => SMSG_CHAR_RENAME_WorldResult::CharNameTooShort,
-            WorldResult::CharNameTooLong => SMSG_CHAR_RENAME_WorldResult::CharNameTooLong,
-            WorldResult::CharNameOnlyLetters => SMSG_CHAR_RENAME_WorldResult::CharNameOnlyLetters,
-            WorldResult::CharNameMixedLanguages => SMSG_CHAR_RENAME_WorldResult::CharNameMixedLanguages,
-            WorldResult::CharNameProfane => SMSG_CHAR_RENAME_WorldResult::CharNameProfane,
-            WorldResult::CharNameReserved => SMSG_CHAR_RENAME_WorldResult::CharNameReserved,
-            WorldResult::CharNameInvalidApostrophe => SMSG_CHAR_RENAME_WorldResult::CharNameInvalidApostrophe,
-            WorldResult::CharNameMultipleApostrophes => SMSG_CHAR_RENAME_WorldResult::CharNameMultipleApostrophes,
-            WorldResult::CharNameThreeConsecutive => SMSG_CHAR_RENAME_WorldResult::CharNameThreeConsecutive,
-            WorldResult::CharNameInvalidSpace => SMSG_CHAR_RENAME_WorldResult::CharNameInvalidSpace,
-            WorldResult::CharNameSuccess => SMSG_CHAR_RENAME_WorldResult::CharNameSuccess,
-            WorldResult::CharNameFailure => SMSG_CHAR_RENAME_WorldResult::CharNameFailure,
-        };
-
-        Ok(Self {
-            result: result_if,
-        })
-    }
-
-}
-
-impl crate::Message for SMSG_CHAR_RENAME {
-    const OPCODE: u32 = 0x02c8;
-
-    #[cfg(feature = "print-testcase")]
-    fn message_name(&self) -> &'static str {
-        "SMSG_CHAR_RENAME"
-    }
-
-    fn size_without_header(&self) -> u32 {
-        self.size() as u32
-    }
-
-    fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
-        // result: WorldResult
-        w.write_all(&(self.result.as_int().to_le_bytes()))?;
-
-        match &self.result {
-            SMSG_CHAR_RENAME_WorldResult::ResponseSuccess {
-                character,
-                new_name,
-            } => {
-                // character: Guid
-                w.write_all(&character.guid().to_le_bytes())?;
-
-                // new_name: CString
-                // TODO: Guard against strings that are already null-terminated
-                assert_ne!(new_name.as_bytes().iter().next_back(), Some(&0_u8), "String `new_name` must not be null-terminated.");
-                w.write_all(new_name.as_bytes())?;
-                // Null terminator
-                w.write_all(&[0])?;
-
-            }
-            _ => {}
-        }
-
-        Ok(())
-    }
-
-    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        Self::read_inner(r, body_size).map_err(|a| crate::errors::ParseError::new(712, "SMSG_CHAR_RENAME", body_size, a))
-    }
-
-}
-
-#[cfg(feature = "vanilla")]
-impl crate::vanilla::ServerMessage for SMSG_CHAR_RENAME {}
-
-impl SMSG_CHAR_RENAME {
-    pub(crate) fn size(&self) -> usize {
-        self.result.size() // result: SMSG_CHAR_RENAME_WorldResult
-    }
-}
-
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord)]
-pub enum SMSG_CHAR_RENAME_WorldResult {
+pub enum SMSG_CHAR_RENAME {
     ResponseSuccess {
         character: Guid,
         new_name: String,
@@ -277,14 +103,191 @@ pub enum SMSG_CHAR_RENAME_WorldResult {
     CharNameFailure,
 }
 
-impl Default for SMSG_CHAR_RENAME_WorldResult {
+impl crate::private::Sealed for SMSG_CHAR_RENAME {}
+impl SMSG_CHAR_RENAME {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
+        if !(1..=265).contains(&body_size) {
+            return Err(crate::errors::ParseErrorKind::InvalidSize);
+        }
+
+        // result: WorldResult
+        let result = crate::util::read_u8_le(&mut r)?.try_into()?;
+
+        let result_if = match result {
+            WorldResult::ResponseSuccess => {
+                // character: Guid
+                let character = crate::util::read_guid(&mut r)?;
+
+                // new_name: CString
+                let new_name = {
+                    let new_name = crate::util::read_c_string_to_vec(&mut r)?;
+                    String::from_utf8(new_name)?
+                };
+
+                SMSG_CHAR_RENAME::ResponseSuccess {
+                    character,
+                    new_name,
+                }
+            }
+            WorldResult::ResponseFailure => SMSG_CHAR_RENAME::ResponseFailure,
+            WorldResult::ResponseCancelled => SMSG_CHAR_RENAME::ResponseCancelled,
+            WorldResult::ResponseDisconnected => SMSG_CHAR_RENAME::ResponseDisconnected,
+            WorldResult::ResponseFailedToConnect => SMSG_CHAR_RENAME::ResponseFailedToConnect,
+            WorldResult::ResponseConnected => SMSG_CHAR_RENAME::ResponseConnected,
+            WorldResult::ResponseVersionMismatch => SMSG_CHAR_RENAME::ResponseVersionMismatch,
+            WorldResult::CstatusConnecting => SMSG_CHAR_RENAME::CstatusConnecting,
+            WorldResult::CstatusNegotiatingSecurity => SMSG_CHAR_RENAME::CstatusNegotiatingSecurity,
+            WorldResult::CstatusNegotiationComplete => SMSG_CHAR_RENAME::CstatusNegotiationComplete,
+            WorldResult::CstatusNegotiationFailed => SMSG_CHAR_RENAME::CstatusNegotiationFailed,
+            WorldResult::CstatusAuthenticating => SMSG_CHAR_RENAME::CstatusAuthenticating,
+            WorldResult::AuthOk => SMSG_CHAR_RENAME::AuthOk,
+            WorldResult::AuthFailed => SMSG_CHAR_RENAME::AuthFailed,
+            WorldResult::AuthReject => SMSG_CHAR_RENAME::AuthReject,
+            WorldResult::AuthBadServerProof => SMSG_CHAR_RENAME::AuthBadServerProof,
+            WorldResult::AuthUnavailable => SMSG_CHAR_RENAME::AuthUnavailable,
+            WorldResult::AuthSystemError => SMSG_CHAR_RENAME::AuthSystemError,
+            WorldResult::AuthBillingError => SMSG_CHAR_RENAME::AuthBillingError,
+            WorldResult::AuthBillingExpired => SMSG_CHAR_RENAME::AuthBillingExpired,
+            WorldResult::AuthVersionMismatch => SMSG_CHAR_RENAME::AuthVersionMismatch,
+            WorldResult::AuthUnknownAccount => SMSG_CHAR_RENAME::AuthUnknownAccount,
+            WorldResult::AuthIncorrectPassword => SMSG_CHAR_RENAME::AuthIncorrectPassword,
+            WorldResult::AuthSessionExpired => SMSG_CHAR_RENAME::AuthSessionExpired,
+            WorldResult::AuthServerShuttingDown => SMSG_CHAR_RENAME::AuthServerShuttingDown,
+            WorldResult::AuthAlreadyLoggingIn => SMSG_CHAR_RENAME::AuthAlreadyLoggingIn,
+            WorldResult::AuthLoginServerNotFound => SMSG_CHAR_RENAME::AuthLoginServerNotFound,
+            WorldResult::AuthWaitQueue => SMSG_CHAR_RENAME::AuthWaitQueue,
+            WorldResult::AuthBanned => SMSG_CHAR_RENAME::AuthBanned,
+            WorldResult::AuthAlreadyOnline => SMSG_CHAR_RENAME::AuthAlreadyOnline,
+            WorldResult::AuthNoTime => SMSG_CHAR_RENAME::AuthNoTime,
+            WorldResult::AuthDbBusy => SMSG_CHAR_RENAME::AuthDbBusy,
+            WorldResult::AuthSuspended => SMSG_CHAR_RENAME::AuthSuspended,
+            WorldResult::AuthParentalControl => SMSG_CHAR_RENAME::AuthParentalControl,
+            WorldResult::RealmListInProgress => SMSG_CHAR_RENAME::RealmListInProgress,
+            WorldResult::RealmListSuccess => SMSG_CHAR_RENAME::RealmListSuccess,
+            WorldResult::RealmListFailed => SMSG_CHAR_RENAME::RealmListFailed,
+            WorldResult::RealmListInvalid => SMSG_CHAR_RENAME::RealmListInvalid,
+            WorldResult::RealmListRealmNotFound => SMSG_CHAR_RENAME::RealmListRealmNotFound,
+            WorldResult::AccountCreateInProgress => SMSG_CHAR_RENAME::AccountCreateInProgress,
+            WorldResult::AccountCreateSuccess => SMSG_CHAR_RENAME::AccountCreateSuccess,
+            WorldResult::AccountCreateFailed => SMSG_CHAR_RENAME::AccountCreateFailed,
+            WorldResult::CharListRetrieving => SMSG_CHAR_RENAME::CharListRetrieving,
+            WorldResult::CharListRetrieved => SMSG_CHAR_RENAME::CharListRetrieved,
+            WorldResult::CharListFailed => SMSG_CHAR_RENAME::CharListFailed,
+            WorldResult::CharCreateInProgress => SMSG_CHAR_RENAME::CharCreateInProgress,
+            WorldResult::CharCreateSuccess => SMSG_CHAR_RENAME::CharCreateSuccess,
+            WorldResult::CharCreateError => SMSG_CHAR_RENAME::CharCreateError,
+            WorldResult::CharCreateFailed => SMSG_CHAR_RENAME::CharCreateFailed,
+            WorldResult::CharCreateNameInUse => SMSG_CHAR_RENAME::CharCreateNameInUse,
+            WorldResult::CharCreateDisabled => SMSG_CHAR_RENAME::CharCreateDisabled,
+            WorldResult::CharCreatePvpTeamsViolation => SMSG_CHAR_RENAME::CharCreatePvpTeamsViolation,
+            WorldResult::CharCreateServerLimit => SMSG_CHAR_RENAME::CharCreateServerLimit,
+            WorldResult::CharCreateAccountLimit => SMSG_CHAR_RENAME::CharCreateAccountLimit,
+            WorldResult::CharCreateServerQueue => SMSG_CHAR_RENAME::CharCreateServerQueue,
+            WorldResult::CharCreateOnlyExisting => SMSG_CHAR_RENAME::CharCreateOnlyExisting,
+            WorldResult::CharDeleteInProgress => SMSG_CHAR_RENAME::CharDeleteInProgress,
+            WorldResult::CharDeleteSuccess => SMSG_CHAR_RENAME::CharDeleteSuccess,
+            WorldResult::CharDeleteFailed => SMSG_CHAR_RENAME::CharDeleteFailed,
+            WorldResult::CharDeleteFailedLockedForTransfer => SMSG_CHAR_RENAME::CharDeleteFailedLockedForTransfer,
+            WorldResult::CharLoginInProgress => SMSG_CHAR_RENAME::CharLoginInProgress,
+            WorldResult::CharLoginSuccess => SMSG_CHAR_RENAME::CharLoginSuccess,
+            WorldResult::CharLoginNoWorld => SMSG_CHAR_RENAME::CharLoginNoWorld,
+            WorldResult::CharLoginDuplicateCharacter => SMSG_CHAR_RENAME::CharLoginDuplicateCharacter,
+            WorldResult::CharLoginNoInstances => SMSG_CHAR_RENAME::CharLoginNoInstances,
+            WorldResult::CharLoginFailed => SMSG_CHAR_RENAME::CharLoginFailed,
+            WorldResult::CharLoginDisabled => SMSG_CHAR_RENAME::CharLoginDisabled,
+            WorldResult::CharLoginNoCharacter => SMSG_CHAR_RENAME::CharLoginNoCharacter,
+            WorldResult::CharLoginLockedForTransfer => SMSG_CHAR_RENAME::CharLoginLockedForTransfer,
+            WorldResult::CharNameNoName => SMSG_CHAR_RENAME::CharNameNoName,
+            WorldResult::CharNameTooShort => SMSG_CHAR_RENAME::CharNameTooShort,
+            WorldResult::CharNameTooLong => SMSG_CHAR_RENAME::CharNameTooLong,
+            WorldResult::CharNameOnlyLetters => SMSG_CHAR_RENAME::CharNameOnlyLetters,
+            WorldResult::CharNameMixedLanguages => SMSG_CHAR_RENAME::CharNameMixedLanguages,
+            WorldResult::CharNameProfane => SMSG_CHAR_RENAME::CharNameProfane,
+            WorldResult::CharNameReserved => SMSG_CHAR_RENAME::CharNameReserved,
+            WorldResult::CharNameInvalidApostrophe => SMSG_CHAR_RENAME::CharNameInvalidApostrophe,
+            WorldResult::CharNameMultipleApostrophes => SMSG_CHAR_RENAME::CharNameMultipleApostrophes,
+            WorldResult::CharNameThreeConsecutive => SMSG_CHAR_RENAME::CharNameThreeConsecutive,
+            WorldResult::CharNameInvalidSpace => SMSG_CHAR_RENAME::CharNameInvalidSpace,
+            WorldResult::CharNameSuccess => SMSG_CHAR_RENAME::CharNameSuccess,
+            WorldResult::CharNameFailure => SMSG_CHAR_RENAME::CharNameFailure,
+        };
+
+        Ok(result_if)
+    }
+
+}
+
+impl crate::Message for SMSG_CHAR_RENAME {
+    const OPCODE: u32 = 0x02c8;
+
+    #[cfg(feature = "print-testcase")]
+    fn message_name(&self) -> &'static str {
+        "SMSG_CHAR_RENAME"
+    }
+
+    fn size_without_header(&self) -> u32 {
+        self.size() as u32
+    }
+
+    fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
+        // result: WorldResult
+        w.write_all(&(self.as_int().to_le_bytes()))?;
+
+        match &self {
+            SMSG_CHAR_RENAME::ResponseSuccess {
+                character,
+                new_name,
+            } => {
+                // character: Guid
+                w.write_all(&character.guid().to_le_bytes())?;
+
+                // new_name: CString
+                // TODO: Guard against strings that are already null-terminated
+                assert_ne!(new_name.as_bytes().iter().next_back(), Some(&0_u8), "String `new_name` must not be null-terminated.");
+                w.write_all(new_name.as_bytes())?;
+                // Null terminator
+                w.write_all(&[0])?;
+
+            }
+            _ => {}
+        }
+
+        Ok(())
+    }
+
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size).map_err(|a| crate::errors::ParseError::new(712, "SMSG_CHAR_RENAME", body_size, a))
+    }
+
+}
+
+#[cfg(feature = "vanilla")]
+impl crate::vanilla::ServerMessage for SMSG_CHAR_RENAME {}
+
+impl SMSG_CHAR_RENAME {
+    pub(crate) fn size(&self) -> usize {
+        (match self {
+            Self::ResponseSuccess {
+                new_name,
+                ..
+            } => {
+                1
+                + 8 // character: Guid
+                + new_name.len() + 1 // new_name: CString
+            }
+            _ => 1,
+        }) // result: SMSG_CHAR_RENAME
+    }
+}
+
+impl Default for SMSG_CHAR_RENAME {
     fn default() -> Self {
         // First enumerator without any fields
         Self::ResponseFailure
     }
 }
 
-impl SMSG_CHAR_RENAME_WorldResult {
+impl SMSG_CHAR_RENAME {
     pub(crate) const fn as_int(&self) -> u8 {
         match self {
             Self::ResponseSuccess { .. } => 0,
@@ -374,7 +377,7 @@ impl SMSG_CHAR_RENAME_WorldResult {
 
 }
 
-impl std::fmt::Display for SMSG_CHAR_RENAME_WorldResult {
+impl std::fmt::Display for SMSG_CHAR_RENAME {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match self {
             Self::ResponseSuccess{ .. } => f.write_str("ResponseSuccess"),
@@ -463,22 +466,6 @@ impl std::fmt::Display for SMSG_CHAR_RENAME_WorldResult {
     }
 }
 
-impl SMSG_CHAR_RENAME_WorldResult {
-    pub(crate) fn size(&self) -> usize {
-        match self {
-            Self::ResponseSuccess {
-                new_name,
-                ..
-            } => {
-                1
-                + 8 // character: Guid
-                + new_name.len() + 1 // new_name: CString
-            }
-            _ => 1,
-        }
-    }
-}
-
 #[cfg(test)]
 mod test {
     #![allow(clippy::missing_const_for_fn)]
@@ -493,10 +480,7 @@ mod test {
     const RAW0: [u8; 5] = [ 0x00, 0x03, 0xC8, 0x02, 0x47, ];
 
     pub(crate) fn expected0() -> SMSG_CHAR_RENAME {
-        SMSG_CHAR_RENAME {
-            result: SMSG_CHAR_RENAME_WorldResult::CharNameTooLong,
-        }
-
+        SMSG_CHAR_RENAME::CharNameTooLong
     }
 
     // Generated from `wow_message_parser/wowm/world/character_screen/smsg_char_rename.wowm` line 12.
@@ -564,13 +548,10 @@ mod test {
          0x00, ];
 
     pub(crate) fn expected1() -> SMSG_CHAR_RENAME {
-        SMSG_CHAR_RENAME {
-            result: SMSG_CHAR_RENAME_WorldResult::ResponseSuccess {
-                character: Guid::new(0xDEADBEEF),
-                new_name: String::from("Deadbeef"),
-            },
+        SMSG_CHAR_RENAME::ResponseSuccess {
+            character: Guid::new(0xDEADBEEF),
+            new_name: String::from("Deadbeef"),
         }
-
     }
 
     // Generated from `wow_message_parser/wowm/world/character_screen/smsg_char_rename.wowm` line 22.

@@ -20,6 +20,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * BREAKING: Changed `BattlegroundBracket::Fourties` to `BattlegroundBracket::Forties`.
 * BREAKING: Changed `BuyResult::NotEnoughtMoney` to `BuyResult::NotEnoughMoney`.
 * BREAKING: Changed `Skill::Swiming` to `Skill::Swimming`.
+* BREAKING: Message structs that only consisted of a single field with an enum have been converted to enums.
 
 ### Removed
 

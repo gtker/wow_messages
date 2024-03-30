@@ -18,9 +18,445 @@ use crate::wrath::InventoryResult;
 ///     }
 /// }
 /// ```
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
-pub struct SMSG_INVENTORY_CHANGE_FAILURE {
-    pub result: SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult,
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord)]
+pub enum SMSG_INVENTORY_CHANGE_FAILURE {
+    Ok,
+    CantEquipLevelI {
+        bag_type_subclass: u8,
+        item1: Guid,
+        item2: Guid,
+        required_level: Level,
+    },
+    CantEquipSkill {
+        bag_type_subclass: u8,
+        item1: Guid,
+        item2: Guid,
+    },
+    ItemDoesntGoToSlot {
+        bag_type_subclass: u8,
+        item1: Guid,
+        item2: Guid,
+    },
+    BagFull {
+        bag_type_subclass: u8,
+        item1: Guid,
+        item2: Guid,
+    },
+    NonemptyBagOverOtherBag {
+        bag_type_subclass: u8,
+        item1: Guid,
+        item2: Guid,
+    },
+    CantTradeEquipBags {
+        bag_type_subclass: u8,
+        item1: Guid,
+        item2: Guid,
+    },
+    OnlyAmmoCanGoHere {
+        bag_type_subclass: u8,
+        item1: Guid,
+        item2: Guid,
+    },
+    NoRequiredProficiency {
+        bag_type_subclass: u8,
+        item1: Guid,
+        item2: Guid,
+    },
+    NoEquipmentSlotAvailable {
+        bag_type_subclass: u8,
+        item1: Guid,
+        item2: Guid,
+    },
+    YouCanNeverUseThatItem {
+        bag_type_subclass: u8,
+        item1: Guid,
+        item2: Guid,
+    },
+    YouCanNeverUseThatItem2 {
+        bag_type_subclass: u8,
+        item1: Guid,
+        item2: Guid,
+    },
+    NoEquipmentSlotAvailable2 {
+        bag_type_subclass: u8,
+        item1: Guid,
+        item2: Guid,
+    },
+    CantEquipWithTwohanded {
+        bag_type_subclass: u8,
+        item1: Guid,
+        item2: Guid,
+    },
+    CantDualWield {
+        bag_type_subclass: u8,
+        item1: Guid,
+        item2: Guid,
+    },
+    ItemDoesntGoIntoBag {
+        bag_type_subclass: u8,
+        item1: Guid,
+        item2: Guid,
+    },
+    ItemDoesntGoIntoBag2 {
+        bag_type_subclass: u8,
+        item1: Guid,
+        item2: Guid,
+    },
+    CantCarryMoreOfThis {
+        bag_type_subclass: u8,
+        item1: Guid,
+        item2: Guid,
+    },
+    NoEquipmentSlotAvailable3 {
+        bag_type_subclass: u8,
+        item1: Guid,
+        item2: Guid,
+    },
+    ItemCantStack {
+        bag_type_subclass: u8,
+        item1: Guid,
+        item2: Guid,
+    },
+    ItemCantBeEquipped {
+        bag_type_subclass: u8,
+        item1: Guid,
+        item2: Guid,
+    },
+    ItemsCantBeSwapped {
+        bag_type_subclass: u8,
+        item1: Guid,
+        item2: Guid,
+    },
+    SlotIsEmpty {
+        bag_type_subclass: u8,
+        item1: Guid,
+        item2: Guid,
+    },
+    ItemNotFound {
+        bag_type_subclass: u8,
+        item1: Guid,
+        item2: Guid,
+    },
+    CantDropSoulbound {
+        bag_type_subclass: u8,
+        item1: Guid,
+        item2: Guid,
+    },
+    OutOfRange {
+        bag_type_subclass: u8,
+        item1: Guid,
+        item2: Guid,
+    },
+    TriedToSplitMoreThanCount {
+        bag_type_subclass: u8,
+        item1: Guid,
+        item2: Guid,
+    },
+    CouldntSplitItems {
+        bag_type_subclass: u8,
+        item1: Guid,
+        item2: Guid,
+    },
+    MissingReagent {
+        bag_type_subclass: u8,
+        item1: Guid,
+        item2: Guid,
+    },
+    NotEnoughMoney {
+        bag_type_subclass: u8,
+        item1: Guid,
+        item2: Guid,
+    },
+    NotABag {
+        bag_type_subclass: u8,
+        item1: Guid,
+        item2: Guid,
+    },
+    CanOnlyDoWithEmptyBags {
+        bag_type_subclass: u8,
+        item1: Guid,
+        item2: Guid,
+    },
+    DontOwnThatItem {
+        bag_type_subclass: u8,
+        item1: Guid,
+        item2: Guid,
+    },
+    CanEquipOnly1Quiver {
+        bag_type_subclass: u8,
+        item1: Guid,
+        item2: Guid,
+    },
+    MustPurchaseThatBagSlot {
+        bag_type_subclass: u8,
+        item1: Guid,
+        item2: Guid,
+    },
+    TooFarAwayFromBank {
+        bag_type_subclass: u8,
+        item1: Guid,
+        item2: Guid,
+    },
+    ItemLocked {
+        bag_type_subclass: u8,
+        item1: Guid,
+        item2: Guid,
+    },
+    YouAreStunned {
+        bag_type_subclass: u8,
+        item1: Guid,
+        item2: Guid,
+    },
+    YouAreDead {
+        bag_type_subclass: u8,
+        item1: Guid,
+        item2: Guid,
+    },
+    CantDoRightNow {
+        bag_type_subclass: u8,
+        item1: Guid,
+        item2: Guid,
+    },
+    IntBagError {
+        bag_type_subclass: u8,
+        item1: Guid,
+        item2: Guid,
+    },
+    CanEquipOnly1Bolt {
+        bag_type_subclass: u8,
+        item1: Guid,
+        item2: Guid,
+    },
+    CanEquipOnly1Ammopouch {
+        bag_type_subclass: u8,
+        item1: Guid,
+        item2: Guid,
+    },
+    StackableCantBeWrapped {
+        bag_type_subclass: u8,
+        item1: Guid,
+        item2: Guid,
+    },
+    EquippedCantBeWrapped {
+        bag_type_subclass: u8,
+        item1: Guid,
+        item2: Guid,
+    },
+    WrappedCantBeWrapped {
+        bag_type_subclass: u8,
+        item1: Guid,
+        item2: Guid,
+    },
+    BoundCantBeWrapped {
+        bag_type_subclass: u8,
+        item1: Guid,
+        item2: Guid,
+    },
+    UniqueCantBeWrapped {
+        bag_type_subclass: u8,
+        item1: Guid,
+        item2: Guid,
+    },
+    BagsCantBeWrapped {
+        bag_type_subclass: u8,
+        item1: Guid,
+        item2: Guid,
+    },
+    AlreadyLooted {
+        bag_type_subclass: u8,
+        item1: Guid,
+        item2: Guid,
+    },
+    InventoryFull {
+        bag_type_subclass: u8,
+        item1: Guid,
+        item2: Guid,
+    },
+    BankFull {
+        bag_type_subclass: u8,
+        item1: Guid,
+        item2: Guid,
+    },
+    ItemIsCurrentlySoldOut {
+        bag_type_subclass: u8,
+        item1: Guid,
+        item2: Guid,
+    },
+    BagFull3 {
+        bag_type_subclass: u8,
+        item1: Guid,
+        item2: Guid,
+    },
+    ItemNotFound2 {
+        bag_type_subclass: u8,
+        item1: Guid,
+        item2: Guid,
+    },
+    ItemCantStack2 {
+        bag_type_subclass: u8,
+        item1: Guid,
+        item2: Guid,
+    },
+    BagFull4 {
+        bag_type_subclass: u8,
+        item1: Guid,
+        item2: Guid,
+    },
+    ItemSoldOut {
+        bag_type_subclass: u8,
+        item1: Guid,
+        item2: Guid,
+    },
+    ObjectIsBusy {
+        bag_type_subclass: u8,
+        item1: Guid,
+        item2: Guid,
+    },
+    None {
+        bag_type_subclass: u8,
+        item1: Guid,
+        item2: Guid,
+    },
+    NotInCombat {
+        bag_type_subclass: u8,
+        item1: Guid,
+        item2: Guid,
+    },
+    NotWhileDisarmed {
+        bag_type_subclass: u8,
+        item1: Guid,
+        item2: Guid,
+    },
+    BagFull6 {
+        bag_type_subclass: u8,
+        item1: Guid,
+        item2: Guid,
+    },
+    CantEquipRank {
+        bag_type_subclass: u8,
+        item1: Guid,
+        item2: Guid,
+    },
+    CantEquipReputation {
+        bag_type_subclass: u8,
+        item1: Guid,
+        item2: Guid,
+    },
+    TooManySpecialBags {
+        bag_type_subclass: u8,
+        item1: Guid,
+        item2: Guid,
+    },
+    LootCantLootThatNow {
+        bag_type_subclass: u8,
+        item1: Guid,
+        item2: Guid,
+    },
+    ItemUniqueEquipable {
+        bag_type_subclass: u8,
+        item1: Guid,
+        item2: Guid,
+    },
+    VendorMissingTurnins {
+        bag_type_subclass: u8,
+        item1: Guid,
+        item2: Guid,
+    },
+    NotEnoughHonorPoints {
+        bag_type_subclass: u8,
+        item1: Guid,
+        item2: Guid,
+    },
+    NotEnoughArenaPoints {
+        bag_type_subclass: u8,
+        item1: Guid,
+        item2: Guid,
+    },
+    ItemMaxCountSocketed {
+        bag_type_subclass: u8,
+        item1: Guid,
+        item2: Guid,
+    },
+    MailBoundItem {
+        bag_type_subclass: u8,
+        item1: Guid,
+        item2: Guid,
+    },
+    NoSplitWhileProspecting {
+        bag_type_subclass: u8,
+        item1: Guid,
+        item2: Guid,
+    },
+    ItemMaxCountEquippedSocketed {
+        bag_type_subclass: u8,
+        item1: Guid,
+        item2: Guid,
+    },
+    ItemUniqueEquippableSocketed {
+        bag_type_subclass: u8,
+        item1: Guid,
+        item2: Guid,
+    },
+    TooMuchGold {
+        bag_type_subclass: u8,
+        item1: Guid,
+        item2: Guid,
+    },
+    NotDuringArenaMatch {
+        bag_type_subclass: u8,
+        item1: Guid,
+        item2: Guid,
+    },
+    CannotTradeThat {
+        bag_type_subclass: u8,
+        item1: Guid,
+        item2: Guid,
+    },
+    PersonalArenaRatingTooLow {
+        bag_type_subclass: u8,
+        item1: Guid,
+        item2: Guid,
+    },
+    EventAutoequipBindConfirm {
+        bag_type_subclass: u8,
+        item1: Guid,
+        item2: Guid,
+    },
+    ArtefactsOnlyForOwnCharacters {
+        bag_type_subclass: u8,
+        item1: Guid,
+        item2: Guid,
+    },
+    ItemMaxLimitCategoryCountExceeded {
+        bag_type_subclass: u8,
+        item1: Guid,
+        item2: Guid,
+    },
+    ItemMaxLimitCategorySocketedExceeded {
+        bag_type_subclass: u8,
+        item1: Guid,
+        item2: Guid,
+    },
+    ScalingStatItemLevelExceeded {
+        bag_type_subclass: u8,
+        item1: Guid,
+        item2: Guid,
+    },
+    PurchaseLevelTooLow {
+        bag_type_subclass: u8,
+        item1: Guid,
+        item2: Guid,
+    },
+    CantEquipNeedTalent {
+        bag_type_subclass: u8,
+        item1: Guid,
+        item2: Guid,
+    },
+    ItemMaxLimitCategoryEquippedExceeded {
+        bag_type_subclass: u8,
+        item1: Guid,
+        item2: Guid,
+    },
 }
 
 impl crate::private::Sealed for SMSG_INVENTORY_CHANGE_FAILURE {}
@@ -1182,11 +1618,11 @@ impl SMSG_INVENTORY_CHANGE_FAILURE {
 
         let result_if = match result {
             InventoryResult::Ok => {
-                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::Ok {
+                SMSG_INVENTORY_CHANGE_FAILURE::Ok {
                 }
             }
             InventoryResult::CantEquipLevelI => {
-                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::CantEquipLevelI {
+                SMSG_INVENTORY_CHANGE_FAILURE::CantEquipLevelI {
                     bag_type_subclass: result_if_bag_type_subclass,
                     item1: result_if_item1,
                     item2: result_if_item2,
@@ -1194,602 +1630,602 @@ impl SMSG_INVENTORY_CHANGE_FAILURE {
                 }
             }
             InventoryResult::CantEquipSkill => {
-                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::CantEquipSkill {
+                SMSG_INVENTORY_CHANGE_FAILURE::CantEquipSkill {
                     bag_type_subclass: result_if_bag_type_subclass,
                     item1: result_if_item1,
                     item2: result_if_item2,
                 }
             }
             InventoryResult::ItemDoesntGoToSlot => {
-                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ItemDoesntGoToSlot {
+                SMSG_INVENTORY_CHANGE_FAILURE::ItemDoesntGoToSlot {
                     bag_type_subclass: result_if_bag_type_subclass,
                     item1: result_if_item1,
                     item2: result_if_item2,
                 }
             }
             InventoryResult::BagFull => {
-                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::BagFull {
+                SMSG_INVENTORY_CHANGE_FAILURE::BagFull {
                     bag_type_subclass: result_if_bag_type_subclass,
                     item1: result_if_item1,
                     item2: result_if_item2,
                 }
             }
             InventoryResult::NonemptyBagOverOtherBag => {
-                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::NonemptyBagOverOtherBag {
+                SMSG_INVENTORY_CHANGE_FAILURE::NonemptyBagOverOtherBag {
                     bag_type_subclass: result_if_bag_type_subclass,
                     item1: result_if_item1,
                     item2: result_if_item2,
                 }
             }
             InventoryResult::CantTradeEquipBags => {
-                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::CantTradeEquipBags {
+                SMSG_INVENTORY_CHANGE_FAILURE::CantTradeEquipBags {
                     bag_type_subclass: result_if_bag_type_subclass,
                     item1: result_if_item1,
                     item2: result_if_item2,
                 }
             }
             InventoryResult::OnlyAmmoCanGoHere => {
-                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::OnlyAmmoCanGoHere {
+                SMSG_INVENTORY_CHANGE_FAILURE::OnlyAmmoCanGoHere {
                     bag_type_subclass: result_if_bag_type_subclass,
                     item1: result_if_item1,
                     item2: result_if_item2,
                 }
             }
             InventoryResult::NoRequiredProficiency => {
-                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::NoRequiredProficiency {
+                SMSG_INVENTORY_CHANGE_FAILURE::NoRequiredProficiency {
                     bag_type_subclass: result_if_bag_type_subclass,
                     item1: result_if_item1,
                     item2: result_if_item2,
                 }
             }
             InventoryResult::NoEquipmentSlotAvailable => {
-                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::NoEquipmentSlotAvailable {
+                SMSG_INVENTORY_CHANGE_FAILURE::NoEquipmentSlotAvailable {
                     bag_type_subclass: result_if_bag_type_subclass,
                     item1: result_if_item1,
                     item2: result_if_item2,
                 }
             }
             InventoryResult::YouCanNeverUseThatItem => {
-                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::YouCanNeverUseThatItem {
+                SMSG_INVENTORY_CHANGE_FAILURE::YouCanNeverUseThatItem {
                     bag_type_subclass: result_if_bag_type_subclass,
                     item1: result_if_item1,
                     item2: result_if_item2,
                 }
             }
             InventoryResult::YouCanNeverUseThatItem2 => {
-                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::YouCanNeverUseThatItem2 {
+                SMSG_INVENTORY_CHANGE_FAILURE::YouCanNeverUseThatItem2 {
                     bag_type_subclass: result_if_bag_type_subclass,
                     item1: result_if_item1,
                     item2: result_if_item2,
                 }
             }
             InventoryResult::NoEquipmentSlotAvailable2 => {
-                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::NoEquipmentSlotAvailable2 {
+                SMSG_INVENTORY_CHANGE_FAILURE::NoEquipmentSlotAvailable2 {
                     bag_type_subclass: result_if_bag_type_subclass,
                     item1: result_if_item1,
                     item2: result_if_item2,
                 }
             }
             InventoryResult::CantEquipWithTwohanded => {
-                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::CantEquipWithTwohanded {
+                SMSG_INVENTORY_CHANGE_FAILURE::CantEquipWithTwohanded {
                     bag_type_subclass: result_if_bag_type_subclass,
                     item1: result_if_item1,
                     item2: result_if_item2,
                 }
             }
             InventoryResult::CantDualWield => {
-                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::CantDualWield {
+                SMSG_INVENTORY_CHANGE_FAILURE::CantDualWield {
                     bag_type_subclass: result_if_bag_type_subclass,
                     item1: result_if_item1,
                     item2: result_if_item2,
                 }
             }
             InventoryResult::ItemDoesntGoIntoBag => {
-                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ItemDoesntGoIntoBag {
+                SMSG_INVENTORY_CHANGE_FAILURE::ItemDoesntGoIntoBag {
                     bag_type_subclass: result_if_bag_type_subclass,
                     item1: result_if_item1,
                     item2: result_if_item2,
                 }
             }
             InventoryResult::ItemDoesntGoIntoBag2 => {
-                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ItemDoesntGoIntoBag2 {
+                SMSG_INVENTORY_CHANGE_FAILURE::ItemDoesntGoIntoBag2 {
                     bag_type_subclass: result_if_bag_type_subclass,
                     item1: result_if_item1,
                     item2: result_if_item2,
                 }
             }
             InventoryResult::CantCarryMoreOfThis => {
-                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::CantCarryMoreOfThis {
+                SMSG_INVENTORY_CHANGE_FAILURE::CantCarryMoreOfThis {
                     bag_type_subclass: result_if_bag_type_subclass,
                     item1: result_if_item1,
                     item2: result_if_item2,
                 }
             }
             InventoryResult::NoEquipmentSlotAvailable3 => {
-                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::NoEquipmentSlotAvailable3 {
+                SMSG_INVENTORY_CHANGE_FAILURE::NoEquipmentSlotAvailable3 {
                     bag_type_subclass: result_if_bag_type_subclass,
                     item1: result_if_item1,
                     item2: result_if_item2,
                 }
             }
             InventoryResult::ItemCantStack => {
-                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ItemCantStack {
+                SMSG_INVENTORY_CHANGE_FAILURE::ItemCantStack {
                     bag_type_subclass: result_if_bag_type_subclass,
                     item1: result_if_item1,
                     item2: result_if_item2,
                 }
             }
             InventoryResult::ItemCantBeEquipped => {
-                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ItemCantBeEquipped {
+                SMSG_INVENTORY_CHANGE_FAILURE::ItemCantBeEquipped {
                     bag_type_subclass: result_if_bag_type_subclass,
                     item1: result_if_item1,
                     item2: result_if_item2,
                 }
             }
             InventoryResult::ItemsCantBeSwapped => {
-                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ItemsCantBeSwapped {
+                SMSG_INVENTORY_CHANGE_FAILURE::ItemsCantBeSwapped {
                     bag_type_subclass: result_if_bag_type_subclass,
                     item1: result_if_item1,
                     item2: result_if_item2,
                 }
             }
             InventoryResult::SlotIsEmpty => {
-                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::SlotIsEmpty {
+                SMSG_INVENTORY_CHANGE_FAILURE::SlotIsEmpty {
                     bag_type_subclass: result_if_bag_type_subclass,
                     item1: result_if_item1,
                     item2: result_if_item2,
                 }
             }
             InventoryResult::ItemNotFound => {
-                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ItemNotFound {
+                SMSG_INVENTORY_CHANGE_FAILURE::ItemNotFound {
                     bag_type_subclass: result_if_bag_type_subclass,
                     item1: result_if_item1,
                     item2: result_if_item2,
                 }
             }
             InventoryResult::CantDropSoulbound => {
-                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::CantDropSoulbound {
+                SMSG_INVENTORY_CHANGE_FAILURE::CantDropSoulbound {
                     bag_type_subclass: result_if_bag_type_subclass,
                     item1: result_if_item1,
                     item2: result_if_item2,
                 }
             }
             InventoryResult::OutOfRange => {
-                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::OutOfRange {
+                SMSG_INVENTORY_CHANGE_FAILURE::OutOfRange {
                     bag_type_subclass: result_if_bag_type_subclass,
                     item1: result_if_item1,
                     item2: result_if_item2,
                 }
             }
             InventoryResult::TriedToSplitMoreThanCount => {
-                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::TriedToSplitMoreThanCount {
+                SMSG_INVENTORY_CHANGE_FAILURE::TriedToSplitMoreThanCount {
                     bag_type_subclass: result_if_bag_type_subclass,
                     item1: result_if_item1,
                     item2: result_if_item2,
                 }
             }
             InventoryResult::CouldntSplitItems => {
-                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::CouldntSplitItems {
+                SMSG_INVENTORY_CHANGE_FAILURE::CouldntSplitItems {
                     bag_type_subclass: result_if_bag_type_subclass,
                     item1: result_if_item1,
                     item2: result_if_item2,
                 }
             }
             InventoryResult::MissingReagent => {
-                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::MissingReagent {
+                SMSG_INVENTORY_CHANGE_FAILURE::MissingReagent {
                     bag_type_subclass: result_if_bag_type_subclass,
                     item1: result_if_item1,
                     item2: result_if_item2,
                 }
             }
             InventoryResult::NotEnoughMoney => {
-                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::NotEnoughMoney {
+                SMSG_INVENTORY_CHANGE_FAILURE::NotEnoughMoney {
                     bag_type_subclass: result_if_bag_type_subclass,
                     item1: result_if_item1,
                     item2: result_if_item2,
                 }
             }
             InventoryResult::NotABag => {
-                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::NotABag {
+                SMSG_INVENTORY_CHANGE_FAILURE::NotABag {
                     bag_type_subclass: result_if_bag_type_subclass,
                     item1: result_if_item1,
                     item2: result_if_item2,
                 }
             }
             InventoryResult::CanOnlyDoWithEmptyBags => {
-                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::CanOnlyDoWithEmptyBags {
+                SMSG_INVENTORY_CHANGE_FAILURE::CanOnlyDoWithEmptyBags {
                     bag_type_subclass: result_if_bag_type_subclass,
                     item1: result_if_item1,
                     item2: result_if_item2,
                 }
             }
             InventoryResult::DontOwnThatItem => {
-                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::DontOwnThatItem {
+                SMSG_INVENTORY_CHANGE_FAILURE::DontOwnThatItem {
                     bag_type_subclass: result_if_bag_type_subclass,
                     item1: result_if_item1,
                     item2: result_if_item2,
                 }
             }
             InventoryResult::CanEquipOnly1Quiver => {
-                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::CanEquipOnly1Quiver {
+                SMSG_INVENTORY_CHANGE_FAILURE::CanEquipOnly1Quiver {
                     bag_type_subclass: result_if_bag_type_subclass,
                     item1: result_if_item1,
                     item2: result_if_item2,
                 }
             }
             InventoryResult::MustPurchaseThatBagSlot => {
-                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::MustPurchaseThatBagSlot {
+                SMSG_INVENTORY_CHANGE_FAILURE::MustPurchaseThatBagSlot {
                     bag_type_subclass: result_if_bag_type_subclass,
                     item1: result_if_item1,
                     item2: result_if_item2,
                 }
             }
             InventoryResult::TooFarAwayFromBank => {
-                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::TooFarAwayFromBank {
+                SMSG_INVENTORY_CHANGE_FAILURE::TooFarAwayFromBank {
                     bag_type_subclass: result_if_bag_type_subclass,
                     item1: result_if_item1,
                     item2: result_if_item2,
                 }
             }
             InventoryResult::ItemLocked => {
-                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ItemLocked {
+                SMSG_INVENTORY_CHANGE_FAILURE::ItemLocked {
                     bag_type_subclass: result_if_bag_type_subclass,
                     item1: result_if_item1,
                     item2: result_if_item2,
                 }
             }
             InventoryResult::YouAreStunned => {
-                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::YouAreStunned {
+                SMSG_INVENTORY_CHANGE_FAILURE::YouAreStunned {
                     bag_type_subclass: result_if_bag_type_subclass,
                     item1: result_if_item1,
                     item2: result_if_item2,
                 }
             }
             InventoryResult::YouAreDead => {
-                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::YouAreDead {
+                SMSG_INVENTORY_CHANGE_FAILURE::YouAreDead {
                     bag_type_subclass: result_if_bag_type_subclass,
                     item1: result_if_item1,
                     item2: result_if_item2,
                 }
             }
             InventoryResult::CantDoRightNow => {
-                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::CantDoRightNow {
+                SMSG_INVENTORY_CHANGE_FAILURE::CantDoRightNow {
                     bag_type_subclass: result_if_bag_type_subclass,
                     item1: result_if_item1,
                     item2: result_if_item2,
                 }
             }
             InventoryResult::IntBagError => {
-                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::IntBagError {
+                SMSG_INVENTORY_CHANGE_FAILURE::IntBagError {
                     bag_type_subclass: result_if_bag_type_subclass,
                     item1: result_if_item1,
                     item2: result_if_item2,
                 }
             }
             InventoryResult::CanEquipOnly1Bolt => {
-                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::CanEquipOnly1Bolt {
+                SMSG_INVENTORY_CHANGE_FAILURE::CanEquipOnly1Bolt {
                     bag_type_subclass: result_if_bag_type_subclass,
                     item1: result_if_item1,
                     item2: result_if_item2,
                 }
             }
             InventoryResult::CanEquipOnly1Ammopouch => {
-                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::CanEquipOnly1Ammopouch {
+                SMSG_INVENTORY_CHANGE_FAILURE::CanEquipOnly1Ammopouch {
                     bag_type_subclass: result_if_bag_type_subclass,
                     item1: result_if_item1,
                     item2: result_if_item2,
                 }
             }
             InventoryResult::StackableCantBeWrapped => {
-                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::StackableCantBeWrapped {
+                SMSG_INVENTORY_CHANGE_FAILURE::StackableCantBeWrapped {
                     bag_type_subclass: result_if_bag_type_subclass,
                     item1: result_if_item1,
                     item2: result_if_item2,
                 }
             }
             InventoryResult::EquippedCantBeWrapped => {
-                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::EquippedCantBeWrapped {
+                SMSG_INVENTORY_CHANGE_FAILURE::EquippedCantBeWrapped {
                     bag_type_subclass: result_if_bag_type_subclass,
                     item1: result_if_item1,
                     item2: result_if_item2,
                 }
             }
             InventoryResult::WrappedCantBeWrapped => {
-                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::WrappedCantBeWrapped {
+                SMSG_INVENTORY_CHANGE_FAILURE::WrappedCantBeWrapped {
                     bag_type_subclass: result_if_bag_type_subclass,
                     item1: result_if_item1,
                     item2: result_if_item2,
                 }
             }
             InventoryResult::BoundCantBeWrapped => {
-                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::BoundCantBeWrapped {
+                SMSG_INVENTORY_CHANGE_FAILURE::BoundCantBeWrapped {
                     bag_type_subclass: result_if_bag_type_subclass,
                     item1: result_if_item1,
                     item2: result_if_item2,
                 }
             }
             InventoryResult::UniqueCantBeWrapped => {
-                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::UniqueCantBeWrapped {
+                SMSG_INVENTORY_CHANGE_FAILURE::UniqueCantBeWrapped {
                     bag_type_subclass: result_if_bag_type_subclass,
                     item1: result_if_item1,
                     item2: result_if_item2,
                 }
             }
             InventoryResult::BagsCantBeWrapped => {
-                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::BagsCantBeWrapped {
+                SMSG_INVENTORY_CHANGE_FAILURE::BagsCantBeWrapped {
                     bag_type_subclass: result_if_bag_type_subclass,
                     item1: result_if_item1,
                     item2: result_if_item2,
                 }
             }
             InventoryResult::AlreadyLooted => {
-                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::AlreadyLooted {
+                SMSG_INVENTORY_CHANGE_FAILURE::AlreadyLooted {
                     bag_type_subclass: result_if_bag_type_subclass,
                     item1: result_if_item1,
                     item2: result_if_item2,
                 }
             }
             InventoryResult::InventoryFull => {
-                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::InventoryFull {
+                SMSG_INVENTORY_CHANGE_FAILURE::InventoryFull {
                     bag_type_subclass: result_if_bag_type_subclass,
                     item1: result_if_item1,
                     item2: result_if_item2,
                 }
             }
             InventoryResult::BankFull => {
-                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::BankFull {
+                SMSG_INVENTORY_CHANGE_FAILURE::BankFull {
                     bag_type_subclass: result_if_bag_type_subclass,
                     item1: result_if_item1,
                     item2: result_if_item2,
                 }
             }
             InventoryResult::ItemIsCurrentlySoldOut => {
-                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ItemIsCurrentlySoldOut {
+                SMSG_INVENTORY_CHANGE_FAILURE::ItemIsCurrentlySoldOut {
                     bag_type_subclass: result_if_bag_type_subclass,
                     item1: result_if_item1,
                     item2: result_if_item2,
                 }
             }
             InventoryResult::BagFull3 => {
-                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::BagFull3 {
+                SMSG_INVENTORY_CHANGE_FAILURE::BagFull3 {
                     bag_type_subclass: result_if_bag_type_subclass,
                     item1: result_if_item1,
                     item2: result_if_item2,
                 }
             }
             InventoryResult::ItemNotFound2 => {
-                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ItemNotFound2 {
+                SMSG_INVENTORY_CHANGE_FAILURE::ItemNotFound2 {
                     bag_type_subclass: result_if_bag_type_subclass,
                     item1: result_if_item1,
                     item2: result_if_item2,
                 }
             }
             InventoryResult::ItemCantStack2 => {
-                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ItemCantStack2 {
+                SMSG_INVENTORY_CHANGE_FAILURE::ItemCantStack2 {
                     bag_type_subclass: result_if_bag_type_subclass,
                     item1: result_if_item1,
                     item2: result_if_item2,
                 }
             }
             InventoryResult::BagFull4 => {
-                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::BagFull4 {
+                SMSG_INVENTORY_CHANGE_FAILURE::BagFull4 {
                     bag_type_subclass: result_if_bag_type_subclass,
                     item1: result_if_item1,
                     item2: result_if_item2,
                 }
             }
             InventoryResult::ItemSoldOut => {
-                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ItemSoldOut {
+                SMSG_INVENTORY_CHANGE_FAILURE::ItemSoldOut {
                     bag_type_subclass: result_if_bag_type_subclass,
                     item1: result_if_item1,
                     item2: result_if_item2,
                 }
             }
             InventoryResult::ObjectIsBusy => {
-                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ObjectIsBusy {
+                SMSG_INVENTORY_CHANGE_FAILURE::ObjectIsBusy {
                     bag_type_subclass: result_if_bag_type_subclass,
                     item1: result_if_item1,
                     item2: result_if_item2,
                 }
             }
             InventoryResult::None => {
-                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::None {
+                SMSG_INVENTORY_CHANGE_FAILURE::None {
                     bag_type_subclass: result_if_bag_type_subclass,
                     item1: result_if_item1,
                     item2: result_if_item2,
                 }
             }
             InventoryResult::NotInCombat => {
-                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::NotInCombat {
+                SMSG_INVENTORY_CHANGE_FAILURE::NotInCombat {
                     bag_type_subclass: result_if_bag_type_subclass,
                     item1: result_if_item1,
                     item2: result_if_item2,
                 }
             }
             InventoryResult::NotWhileDisarmed => {
-                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::NotWhileDisarmed {
+                SMSG_INVENTORY_CHANGE_FAILURE::NotWhileDisarmed {
                     bag_type_subclass: result_if_bag_type_subclass,
                     item1: result_if_item1,
                     item2: result_if_item2,
                 }
             }
             InventoryResult::BagFull6 => {
-                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::BagFull6 {
+                SMSG_INVENTORY_CHANGE_FAILURE::BagFull6 {
                     bag_type_subclass: result_if_bag_type_subclass,
                     item1: result_if_item1,
                     item2: result_if_item2,
                 }
             }
             InventoryResult::CantEquipRank => {
-                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::CantEquipRank {
+                SMSG_INVENTORY_CHANGE_FAILURE::CantEquipRank {
                     bag_type_subclass: result_if_bag_type_subclass,
                     item1: result_if_item1,
                     item2: result_if_item2,
                 }
             }
             InventoryResult::CantEquipReputation => {
-                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::CantEquipReputation {
+                SMSG_INVENTORY_CHANGE_FAILURE::CantEquipReputation {
                     bag_type_subclass: result_if_bag_type_subclass,
                     item1: result_if_item1,
                     item2: result_if_item2,
                 }
             }
             InventoryResult::TooManySpecialBags => {
-                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::TooManySpecialBags {
+                SMSG_INVENTORY_CHANGE_FAILURE::TooManySpecialBags {
                     bag_type_subclass: result_if_bag_type_subclass,
                     item1: result_if_item1,
                     item2: result_if_item2,
                 }
             }
             InventoryResult::LootCantLootThatNow => {
-                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::LootCantLootThatNow {
+                SMSG_INVENTORY_CHANGE_FAILURE::LootCantLootThatNow {
                     bag_type_subclass: result_if_bag_type_subclass,
                     item1: result_if_item1,
                     item2: result_if_item2,
                 }
             }
             InventoryResult::ItemUniqueEquipable => {
-                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ItemUniqueEquipable {
+                SMSG_INVENTORY_CHANGE_FAILURE::ItemUniqueEquipable {
                     bag_type_subclass: result_if_bag_type_subclass,
                     item1: result_if_item1,
                     item2: result_if_item2,
                 }
             }
             InventoryResult::VendorMissingTurnins => {
-                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::VendorMissingTurnins {
+                SMSG_INVENTORY_CHANGE_FAILURE::VendorMissingTurnins {
                     bag_type_subclass: result_if_bag_type_subclass,
                     item1: result_if_item1,
                     item2: result_if_item2,
                 }
             }
             InventoryResult::NotEnoughHonorPoints => {
-                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::NotEnoughHonorPoints {
+                SMSG_INVENTORY_CHANGE_FAILURE::NotEnoughHonorPoints {
                     bag_type_subclass: result_if_bag_type_subclass,
                     item1: result_if_item1,
                     item2: result_if_item2,
                 }
             }
             InventoryResult::NotEnoughArenaPoints => {
-                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::NotEnoughArenaPoints {
+                SMSG_INVENTORY_CHANGE_FAILURE::NotEnoughArenaPoints {
                     bag_type_subclass: result_if_bag_type_subclass,
                     item1: result_if_item1,
                     item2: result_if_item2,
                 }
             }
             InventoryResult::ItemMaxCountSocketed => {
-                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ItemMaxCountSocketed {
+                SMSG_INVENTORY_CHANGE_FAILURE::ItemMaxCountSocketed {
                     bag_type_subclass: result_if_bag_type_subclass,
                     item1: result_if_item1,
                     item2: result_if_item2,
                 }
             }
             InventoryResult::MailBoundItem => {
-                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::MailBoundItem {
+                SMSG_INVENTORY_CHANGE_FAILURE::MailBoundItem {
                     bag_type_subclass: result_if_bag_type_subclass,
                     item1: result_if_item1,
                     item2: result_if_item2,
                 }
             }
             InventoryResult::NoSplitWhileProspecting => {
-                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::NoSplitWhileProspecting {
+                SMSG_INVENTORY_CHANGE_FAILURE::NoSplitWhileProspecting {
                     bag_type_subclass: result_if_bag_type_subclass,
                     item1: result_if_item1,
                     item2: result_if_item2,
                 }
             }
             InventoryResult::ItemMaxCountEquippedSocketed => {
-                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ItemMaxCountEquippedSocketed {
+                SMSG_INVENTORY_CHANGE_FAILURE::ItemMaxCountEquippedSocketed {
                     bag_type_subclass: result_if_bag_type_subclass,
                     item1: result_if_item1,
                     item2: result_if_item2,
                 }
             }
             InventoryResult::ItemUniqueEquippableSocketed => {
-                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ItemUniqueEquippableSocketed {
+                SMSG_INVENTORY_CHANGE_FAILURE::ItemUniqueEquippableSocketed {
                     bag_type_subclass: result_if_bag_type_subclass,
                     item1: result_if_item1,
                     item2: result_if_item2,
                 }
             }
             InventoryResult::TooMuchGold => {
-                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::TooMuchGold {
+                SMSG_INVENTORY_CHANGE_FAILURE::TooMuchGold {
                     bag_type_subclass: result_if_bag_type_subclass,
                     item1: result_if_item1,
                     item2: result_if_item2,
                 }
             }
             InventoryResult::NotDuringArenaMatch => {
-                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::NotDuringArenaMatch {
+                SMSG_INVENTORY_CHANGE_FAILURE::NotDuringArenaMatch {
                     bag_type_subclass: result_if_bag_type_subclass,
                     item1: result_if_item1,
                     item2: result_if_item2,
                 }
             }
             InventoryResult::CannotTradeThat => {
-                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::CannotTradeThat {
+                SMSG_INVENTORY_CHANGE_FAILURE::CannotTradeThat {
                     bag_type_subclass: result_if_bag_type_subclass,
                     item1: result_if_item1,
                     item2: result_if_item2,
                 }
             }
             InventoryResult::PersonalArenaRatingTooLow => {
-                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::PersonalArenaRatingTooLow {
+                SMSG_INVENTORY_CHANGE_FAILURE::PersonalArenaRatingTooLow {
                     bag_type_subclass: result_if_bag_type_subclass,
                     item1: result_if_item1,
                     item2: result_if_item2,
                 }
             }
             InventoryResult::EventAutoequipBindConfirm => {
-                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::EventAutoequipBindConfirm {
+                SMSG_INVENTORY_CHANGE_FAILURE::EventAutoequipBindConfirm {
                     bag_type_subclass: result_if_bag_type_subclass,
                     item1: result_if_item1,
                     item2: result_if_item2,
                 }
             }
             InventoryResult::ArtefactsOnlyForOwnCharacters => {
-                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ArtefactsOnlyForOwnCharacters {
+                SMSG_INVENTORY_CHANGE_FAILURE::ArtefactsOnlyForOwnCharacters {
                     bag_type_subclass: result_if_bag_type_subclass,
                     item1: result_if_item1,
                     item2: result_if_item2,
                 }
             }
             InventoryResult::ItemMaxLimitCategoryCountExceeded => {
-                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ItemMaxLimitCategoryCountExceeded {
+                SMSG_INVENTORY_CHANGE_FAILURE::ItemMaxLimitCategoryCountExceeded {
                     bag_type_subclass: result_if_bag_type_subclass,
                     item1: result_if_item1,
                     item2: result_if_item2,
                 }
             }
             InventoryResult::ItemMaxLimitCategorySocketedExceeded => {
-                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ItemMaxLimitCategorySocketedExceeded {
+                SMSG_INVENTORY_CHANGE_FAILURE::ItemMaxLimitCategorySocketedExceeded {
                     bag_type_subclass: result_if_bag_type_subclass,
                     item1: result_if_item1,
                     item2: result_if_item2,
                 }
             }
             InventoryResult::ScalingStatItemLevelExceeded => {
-                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ScalingStatItemLevelExceeded {
+                SMSG_INVENTORY_CHANGE_FAILURE::ScalingStatItemLevelExceeded {
                     bag_type_subclass: result_if_bag_type_subclass,
                     item1: result_if_item1,
                     item2: result_if_item2,
                 }
             }
             InventoryResult::PurchaseLevelTooLow => {
-                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::PurchaseLevelTooLow {
+                SMSG_INVENTORY_CHANGE_FAILURE::PurchaseLevelTooLow {
                     bag_type_subclass: result_if_bag_type_subclass,
                     item1: result_if_item1,
                     item2: result_if_item2,
                 }
             }
             InventoryResult::CantEquipNeedTalent => {
-                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::CantEquipNeedTalent {
+                SMSG_INVENTORY_CHANGE_FAILURE::CantEquipNeedTalent {
                     bag_type_subclass: result_if_bag_type_subclass,
                     item1: result_if_item1,
                     item2: result_if_item2,
                 }
             }
             InventoryResult::ItemMaxLimitCategoryEquippedExceeded => {
-                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ItemMaxLimitCategoryEquippedExceeded {
+                SMSG_INVENTORY_CHANGE_FAILURE::ItemMaxLimitCategoryEquippedExceeded {
                     bag_type_subclass: result_if_bag_type_subclass,
                     item1: result_if_item1,
                     item2: result_if_item2,
@@ -1797,9 +2233,7 @@ impl SMSG_INVENTORY_CHANGE_FAILURE {
             }
         };
 
-        Ok(Self {
-            result: result_if,
-        })
+        Ok(result_if)
     }
 
 }
@@ -1821,9 +2255,9 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
 
         writeln!(s, "test SMSG_INVENTORY_CHANGE_FAILURE {{").unwrap();
         // Members
-        writeln!(s, "    result = {};", InventoryResult::try_from(self.result.as_int()).unwrap().as_test_case_value()).unwrap();
-        match &self.result {
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::CantEquipLevelI {
+        writeln!(s, "    result = {};", InventoryResult::try_from(self.as_int()).unwrap().as_test_case_value()).unwrap();
+        match &self {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::CantEquipLevelI {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -1833,7 +2267,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 writeln!(s, "    item2 = {};", item2.guid()).unwrap();
                 writeln!(s, "    bag_type_subclass = {};", bag_type_subclass).unwrap();
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::CantEquipSkill {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::CantEquipSkill {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -1842,7 +2276,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 writeln!(s, "    item2 = {};", item2.guid()).unwrap();
                 writeln!(s, "    bag_type_subclass = {};", bag_type_subclass).unwrap();
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ItemDoesntGoToSlot {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::ItemDoesntGoToSlot {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -1851,7 +2285,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 writeln!(s, "    item2 = {};", item2.guid()).unwrap();
                 writeln!(s, "    bag_type_subclass = {};", bag_type_subclass).unwrap();
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::BagFull {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::BagFull {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -1860,7 +2294,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 writeln!(s, "    item2 = {};", item2.guid()).unwrap();
                 writeln!(s, "    bag_type_subclass = {};", bag_type_subclass).unwrap();
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::NonemptyBagOverOtherBag {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::NonemptyBagOverOtherBag {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -1869,7 +2303,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 writeln!(s, "    item2 = {};", item2.guid()).unwrap();
                 writeln!(s, "    bag_type_subclass = {};", bag_type_subclass).unwrap();
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::CantTradeEquipBags {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::CantTradeEquipBags {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -1878,7 +2312,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 writeln!(s, "    item2 = {};", item2.guid()).unwrap();
                 writeln!(s, "    bag_type_subclass = {};", bag_type_subclass).unwrap();
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::OnlyAmmoCanGoHere {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::OnlyAmmoCanGoHere {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -1887,7 +2321,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 writeln!(s, "    item2 = {};", item2.guid()).unwrap();
                 writeln!(s, "    bag_type_subclass = {};", bag_type_subclass).unwrap();
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::NoRequiredProficiency {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::NoRequiredProficiency {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -1896,7 +2330,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 writeln!(s, "    item2 = {};", item2.guid()).unwrap();
                 writeln!(s, "    bag_type_subclass = {};", bag_type_subclass).unwrap();
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::NoEquipmentSlotAvailable {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::NoEquipmentSlotAvailable {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -1905,7 +2339,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 writeln!(s, "    item2 = {};", item2.guid()).unwrap();
                 writeln!(s, "    bag_type_subclass = {};", bag_type_subclass).unwrap();
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::YouCanNeverUseThatItem {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::YouCanNeverUseThatItem {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -1914,7 +2348,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 writeln!(s, "    item2 = {};", item2.guid()).unwrap();
                 writeln!(s, "    bag_type_subclass = {};", bag_type_subclass).unwrap();
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::YouCanNeverUseThatItem2 {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::YouCanNeverUseThatItem2 {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -1923,7 +2357,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 writeln!(s, "    item2 = {};", item2.guid()).unwrap();
                 writeln!(s, "    bag_type_subclass = {};", bag_type_subclass).unwrap();
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::NoEquipmentSlotAvailable2 {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::NoEquipmentSlotAvailable2 {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -1932,7 +2366,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 writeln!(s, "    item2 = {};", item2.guid()).unwrap();
                 writeln!(s, "    bag_type_subclass = {};", bag_type_subclass).unwrap();
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::CantEquipWithTwohanded {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::CantEquipWithTwohanded {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -1941,7 +2375,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 writeln!(s, "    item2 = {};", item2.guid()).unwrap();
                 writeln!(s, "    bag_type_subclass = {};", bag_type_subclass).unwrap();
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::CantDualWield {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::CantDualWield {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -1950,7 +2384,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 writeln!(s, "    item2 = {};", item2.guid()).unwrap();
                 writeln!(s, "    bag_type_subclass = {};", bag_type_subclass).unwrap();
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ItemDoesntGoIntoBag {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::ItemDoesntGoIntoBag {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -1959,7 +2393,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 writeln!(s, "    item2 = {};", item2.guid()).unwrap();
                 writeln!(s, "    bag_type_subclass = {};", bag_type_subclass).unwrap();
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ItemDoesntGoIntoBag2 {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::ItemDoesntGoIntoBag2 {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -1968,7 +2402,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 writeln!(s, "    item2 = {};", item2.guid()).unwrap();
                 writeln!(s, "    bag_type_subclass = {};", bag_type_subclass).unwrap();
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::CantCarryMoreOfThis {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::CantCarryMoreOfThis {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -1977,7 +2411,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 writeln!(s, "    item2 = {};", item2.guid()).unwrap();
                 writeln!(s, "    bag_type_subclass = {};", bag_type_subclass).unwrap();
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::NoEquipmentSlotAvailable3 {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::NoEquipmentSlotAvailable3 {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -1986,7 +2420,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 writeln!(s, "    item2 = {};", item2.guid()).unwrap();
                 writeln!(s, "    bag_type_subclass = {};", bag_type_subclass).unwrap();
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ItemCantStack {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::ItemCantStack {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -1995,7 +2429,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 writeln!(s, "    item2 = {};", item2.guid()).unwrap();
                 writeln!(s, "    bag_type_subclass = {};", bag_type_subclass).unwrap();
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ItemCantBeEquipped {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::ItemCantBeEquipped {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -2004,7 +2438,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 writeln!(s, "    item2 = {};", item2.guid()).unwrap();
                 writeln!(s, "    bag_type_subclass = {};", bag_type_subclass).unwrap();
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ItemsCantBeSwapped {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::ItemsCantBeSwapped {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -2013,7 +2447,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 writeln!(s, "    item2 = {};", item2.guid()).unwrap();
                 writeln!(s, "    bag_type_subclass = {};", bag_type_subclass).unwrap();
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::SlotIsEmpty {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::SlotIsEmpty {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -2022,7 +2456,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 writeln!(s, "    item2 = {};", item2.guid()).unwrap();
                 writeln!(s, "    bag_type_subclass = {};", bag_type_subclass).unwrap();
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ItemNotFound {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::ItemNotFound {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -2031,7 +2465,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 writeln!(s, "    item2 = {};", item2.guid()).unwrap();
                 writeln!(s, "    bag_type_subclass = {};", bag_type_subclass).unwrap();
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::CantDropSoulbound {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::CantDropSoulbound {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -2040,7 +2474,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 writeln!(s, "    item2 = {};", item2.guid()).unwrap();
                 writeln!(s, "    bag_type_subclass = {};", bag_type_subclass).unwrap();
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::OutOfRange {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::OutOfRange {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -2049,7 +2483,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 writeln!(s, "    item2 = {};", item2.guid()).unwrap();
                 writeln!(s, "    bag_type_subclass = {};", bag_type_subclass).unwrap();
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::TriedToSplitMoreThanCount {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::TriedToSplitMoreThanCount {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -2058,7 +2492,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 writeln!(s, "    item2 = {};", item2.guid()).unwrap();
                 writeln!(s, "    bag_type_subclass = {};", bag_type_subclass).unwrap();
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::CouldntSplitItems {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::CouldntSplitItems {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -2067,7 +2501,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 writeln!(s, "    item2 = {};", item2.guid()).unwrap();
                 writeln!(s, "    bag_type_subclass = {};", bag_type_subclass).unwrap();
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::MissingReagent {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::MissingReagent {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -2076,7 +2510,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 writeln!(s, "    item2 = {};", item2.guid()).unwrap();
                 writeln!(s, "    bag_type_subclass = {};", bag_type_subclass).unwrap();
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::NotEnoughMoney {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::NotEnoughMoney {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -2085,7 +2519,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 writeln!(s, "    item2 = {};", item2.guid()).unwrap();
                 writeln!(s, "    bag_type_subclass = {};", bag_type_subclass).unwrap();
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::NotABag {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::NotABag {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -2094,7 +2528,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 writeln!(s, "    item2 = {};", item2.guid()).unwrap();
                 writeln!(s, "    bag_type_subclass = {};", bag_type_subclass).unwrap();
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::CanOnlyDoWithEmptyBags {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::CanOnlyDoWithEmptyBags {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -2103,7 +2537,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 writeln!(s, "    item2 = {};", item2.guid()).unwrap();
                 writeln!(s, "    bag_type_subclass = {};", bag_type_subclass).unwrap();
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::DontOwnThatItem {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::DontOwnThatItem {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -2112,7 +2546,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 writeln!(s, "    item2 = {};", item2.guid()).unwrap();
                 writeln!(s, "    bag_type_subclass = {};", bag_type_subclass).unwrap();
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::CanEquipOnly1Quiver {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::CanEquipOnly1Quiver {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -2121,7 +2555,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 writeln!(s, "    item2 = {};", item2.guid()).unwrap();
                 writeln!(s, "    bag_type_subclass = {};", bag_type_subclass).unwrap();
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::MustPurchaseThatBagSlot {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::MustPurchaseThatBagSlot {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -2130,7 +2564,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 writeln!(s, "    item2 = {};", item2.guid()).unwrap();
                 writeln!(s, "    bag_type_subclass = {};", bag_type_subclass).unwrap();
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::TooFarAwayFromBank {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::TooFarAwayFromBank {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -2139,7 +2573,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 writeln!(s, "    item2 = {};", item2.guid()).unwrap();
                 writeln!(s, "    bag_type_subclass = {};", bag_type_subclass).unwrap();
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ItemLocked {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::ItemLocked {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -2148,7 +2582,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 writeln!(s, "    item2 = {};", item2.guid()).unwrap();
                 writeln!(s, "    bag_type_subclass = {};", bag_type_subclass).unwrap();
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::YouAreStunned {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::YouAreStunned {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -2157,7 +2591,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 writeln!(s, "    item2 = {};", item2.guid()).unwrap();
                 writeln!(s, "    bag_type_subclass = {};", bag_type_subclass).unwrap();
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::YouAreDead {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::YouAreDead {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -2166,7 +2600,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 writeln!(s, "    item2 = {};", item2.guid()).unwrap();
                 writeln!(s, "    bag_type_subclass = {};", bag_type_subclass).unwrap();
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::CantDoRightNow {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::CantDoRightNow {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -2175,7 +2609,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 writeln!(s, "    item2 = {};", item2.guid()).unwrap();
                 writeln!(s, "    bag_type_subclass = {};", bag_type_subclass).unwrap();
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::IntBagError {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::IntBagError {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -2184,7 +2618,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 writeln!(s, "    item2 = {};", item2.guid()).unwrap();
                 writeln!(s, "    bag_type_subclass = {};", bag_type_subclass).unwrap();
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::CanEquipOnly1Bolt {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::CanEquipOnly1Bolt {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -2193,7 +2627,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 writeln!(s, "    item2 = {};", item2.guid()).unwrap();
                 writeln!(s, "    bag_type_subclass = {};", bag_type_subclass).unwrap();
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::CanEquipOnly1Ammopouch {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::CanEquipOnly1Ammopouch {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -2202,7 +2636,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 writeln!(s, "    item2 = {};", item2.guid()).unwrap();
                 writeln!(s, "    bag_type_subclass = {};", bag_type_subclass).unwrap();
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::StackableCantBeWrapped {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::StackableCantBeWrapped {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -2211,7 +2645,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 writeln!(s, "    item2 = {};", item2.guid()).unwrap();
                 writeln!(s, "    bag_type_subclass = {};", bag_type_subclass).unwrap();
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::EquippedCantBeWrapped {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::EquippedCantBeWrapped {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -2220,7 +2654,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 writeln!(s, "    item2 = {};", item2.guid()).unwrap();
                 writeln!(s, "    bag_type_subclass = {};", bag_type_subclass).unwrap();
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::WrappedCantBeWrapped {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::WrappedCantBeWrapped {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -2229,7 +2663,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 writeln!(s, "    item2 = {};", item2.guid()).unwrap();
                 writeln!(s, "    bag_type_subclass = {};", bag_type_subclass).unwrap();
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::BoundCantBeWrapped {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::BoundCantBeWrapped {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -2238,7 +2672,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 writeln!(s, "    item2 = {};", item2.guid()).unwrap();
                 writeln!(s, "    bag_type_subclass = {};", bag_type_subclass).unwrap();
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::UniqueCantBeWrapped {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::UniqueCantBeWrapped {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -2247,7 +2681,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 writeln!(s, "    item2 = {};", item2.guid()).unwrap();
                 writeln!(s, "    bag_type_subclass = {};", bag_type_subclass).unwrap();
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::BagsCantBeWrapped {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::BagsCantBeWrapped {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -2256,7 +2690,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 writeln!(s, "    item2 = {};", item2.guid()).unwrap();
                 writeln!(s, "    bag_type_subclass = {};", bag_type_subclass).unwrap();
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::AlreadyLooted {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::AlreadyLooted {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -2265,7 +2699,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 writeln!(s, "    item2 = {};", item2.guid()).unwrap();
                 writeln!(s, "    bag_type_subclass = {};", bag_type_subclass).unwrap();
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::InventoryFull {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::InventoryFull {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -2274,7 +2708,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 writeln!(s, "    item2 = {};", item2.guid()).unwrap();
                 writeln!(s, "    bag_type_subclass = {};", bag_type_subclass).unwrap();
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::BankFull {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::BankFull {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -2283,7 +2717,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 writeln!(s, "    item2 = {};", item2.guid()).unwrap();
                 writeln!(s, "    bag_type_subclass = {};", bag_type_subclass).unwrap();
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ItemIsCurrentlySoldOut {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::ItemIsCurrentlySoldOut {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -2292,7 +2726,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 writeln!(s, "    item2 = {};", item2.guid()).unwrap();
                 writeln!(s, "    bag_type_subclass = {};", bag_type_subclass).unwrap();
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::BagFull3 {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::BagFull3 {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -2301,7 +2735,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 writeln!(s, "    item2 = {};", item2.guid()).unwrap();
                 writeln!(s, "    bag_type_subclass = {};", bag_type_subclass).unwrap();
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ItemNotFound2 {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::ItemNotFound2 {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -2310,7 +2744,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 writeln!(s, "    item2 = {};", item2.guid()).unwrap();
                 writeln!(s, "    bag_type_subclass = {};", bag_type_subclass).unwrap();
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ItemCantStack2 {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::ItemCantStack2 {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -2319,7 +2753,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 writeln!(s, "    item2 = {};", item2.guid()).unwrap();
                 writeln!(s, "    bag_type_subclass = {};", bag_type_subclass).unwrap();
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::BagFull4 {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::BagFull4 {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -2328,7 +2762,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 writeln!(s, "    item2 = {};", item2.guid()).unwrap();
                 writeln!(s, "    bag_type_subclass = {};", bag_type_subclass).unwrap();
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ItemSoldOut {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::ItemSoldOut {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -2337,7 +2771,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 writeln!(s, "    item2 = {};", item2.guid()).unwrap();
                 writeln!(s, "    bag_type_subclass = {};", bag_type_subclass).unwrap();
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ObjectIsBusy {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::ObjectIsBusy {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -2346,7 +2780,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 writeln!(s, "    item2 = {};", item2.guid()).unwrap();
                 writeln!(s, "    bag_type_subclass = {};", bag_type_subclass).unwrap();
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::None {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::None {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -2355,7 +2789,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 writeln!(s, "    item2 = {};", item2.guid()).unwrap();
                 writeln!(s, "    bag_type_subclass = {};", bag_type_subclass).unwrap();
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::NotInCombat {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::NotInCombat {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -2364,7 +2798,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 writeln!(s, "    item2 = {};", item2.guid()).unwrap();
                 writeln!(s, "    bag_type_subclass = {};", bag_type_subclass).unwrap();
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::NotWhileDisarmed {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::NotWhileDisarmed {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -2373,7 +2807,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 writeln!(s, "    item2 = {};", item2.guid()).unwrap();
                 writeln!(s, "    bag_type_subclass = {};", bag_type_subclass).unwrap();
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::BagFull6 {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::BagFull6 {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -2382,7 +2816,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 writeln!(s, "    item2 = {};", item2.guid()).unwrap();
                 writeln!(s, "    bag_type_subclass = {};", bag_type_subclass).unwrap();
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::CantEquipRank {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::CantEquipRank {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -2391,7 +2825,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 writeln!(s, "    item2 = {};", item2.guid()).unwrap();
                 writeln!(s, "    bag_type_subclass = {};", bag_type_subclass).unwrap();
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::CantEquipReputation {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::CantEquipReputation {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -2400,7 +2834,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 writeln!(s, "    item2 = {};", item2.guid()).unwrap();
                 writeln!(s, "    bag_type_subclass = {};", bag_type_subclass).unwrap();
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::TooManySpecialBags {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::TooManySpecialBags {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -2409,7 +2843,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 writeln!(s, "    item2 = {};", item2.guid()).unwrap();
                 writeln!(s, "    bag_type_subclass = {};", bag_type_subclass).unwrap();
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::LootCantLootThatNow {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::LootCantLootThatNow {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -2418,7 +2852,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 writeln!(s, "    item2 = {};", item2.guid()).unwrap();
                 writeln!(s, "    bag_type_subclass = {};", bag_type_subclass).unwrap();
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ItemUniqueEquipable {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::ItemUniqueEquipable {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -2427,7 +2861,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 writeln!(s, "    item2 = {};", item2.guid()).unwrap();
                 writeln!(s, "    bag_type_subclass = {};", bag_type_subclass).unwrap();
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::VendorMissingTurnins {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::VendorMissingTurnins {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -2436,7 +2870,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 writeln!(s, "    item2 = {};", item2.guid()).unwrap();
                 writeln!(s, "    bag_type_subclass = {};", bag_type_subclass).unwrap();
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::NotEnoughHonorPoints {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::NotEnoughHonorPoints {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -2445,7 +2879,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 writeln!(s, "    item2 = {};", item2.guid()).unwrap();
                 writeln!(s, "    bag_type_subclass = {};", bag_type_subclass).unwrap();
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::NotEnoughArenaPoints {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::NotEnoughArenaPoints {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -2454,7 +2888,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 writeln!(s, "    item2 = {};", item2.guid()).unwrap();
                 writeln!(s, "    bag_type_subclass = {};", bag_type_subclass).unwrap();
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ItemMaxCountSocketed {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::ItemMaxCountSocketed {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -2463,7 +2897,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 writeln!(s, "    item2 = {};", item2.guid()).unwrap();
                 writeln!(s, "    bag_type_subclass = {};", bag_type_subclass).unwrap();
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::MailBoundItem {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::MailBoundItem {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -2472,7 +2906,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 writeln!(s, "    item2 = {};", item2.guid()).unwrap();
                 writeln!(s, "    bag_type_subclass = {};", bag_type_subclass).unwrap();
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::NoSplitWhileProspecting {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::NoSplitWhileProspecting {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -2481,7 +2915,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 writeln!(s, "    item2 = {};", item2.guid()).unwrap();
                 writeln!(s, "    bag_type_subclass = {};", bag_type_subclass).unwrap();
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ItemMaxCountEquippedSocketed {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::ItemMaxCountEquippedSocketed {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -2490,7 +2924,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 writeln!(s, "    item2 = {};", item2.guid()).unwrap();
                 writeln!(s, "    bag_type_subclass = {};", bag_type_subclass).unwrap();
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ItemUniqueEquippableSocketed {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::ItemUniqueEquippableSocketed {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -2499,7 +2933,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 writeln!(s, "    item2 = {};", item2.guid()).unwrap();
                 writeln!(s, "    bag_type_subclass = {};", bag_type_subclass).unwrap();
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::TooMuchGold {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::TooMuchGold {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -2508,7 +2942,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 writeln!(s, "    item2 = {};", item2.guid()).unwrap();
                 writeln!(s, "    bag_type_subclass = {};", bag_type_subclass).unwrap();
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::NotDuringArenaMatch {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::NotDuringArenaMatch {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -2517,7 +2951,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 writeln!(s, "    item2 = {};", item2.guid()).unwrap();
                 writeln!(s, "    bag_type_subclass = {};", bag_type_subclass).unwrap();
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::CannotTradeThat {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::CannotTradeThat {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -2526,7 +2960,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 writeln!(s, "    item2 = {};", item2.guid()).unwrap();
                 writeln!(s, "    bag_type_subclass = {};", bag_type_subclass).unwrap();
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::PersonalArenaRatingTooLow {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::PersonalArenaRatingTooLow {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -2535,7 +2969,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 writeln!(s, "    item2 = {};", item2.guid()).unwrap();
                 writeln!(s, "    bag_type_subclass = {};", bag_type_subclass).unwrap();
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::EventAutoequipBindConfirm {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::EventAutoequipBindConfirm {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -2544,7 +2978,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 writeln!(s, "    item2 = {};", item2.guid()).unwrap();
                 writeln!(s, "    bag_type_subclass = {};", bag_type_subclass).unwrap();
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ArtefactsOnlyForOwnCharacters {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::ArtefactsOnlyForOwnCharacters {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -2553,7 +2987,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 writeln!(s, "    item2 = {};", item2.guid()).unwrap();
                 writeln!(s, "    bag_type_subclass = {};", bag_type_subclass).unwrap();
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ItemMaxLimitCategoryCountExceeded {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::ItemMaxLimitCategoryCountExceeded {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -2562,7 +2996,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 writeln!(s, "    item2 = {};", item2.guid()).unwrap();
                 writeln!(s, "    bag_type_subclass = {};", bag_type_subclass).unwrap();
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ItemMaxLimitCategorySocketedExceeded {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::ItemMaxLimitCategorySocketedExceeded {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -2571,7 +3005,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 writeln!(s, "    item2 = {};", item2.guid()).unwrap();
                 writeln!(s, "    bag_type_subclass = {};", bag_type_subclass).unwrap();
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ScalingStatItemLevelExceeded {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::ScalingStatItemLevelExceeded {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -2580,7 +3014,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 writeln!(s, "    item2 = {};", item2.guid()).unwrap();
                 writeln!(s, "    bag_type_subclass = {};", bag_type_subclass).unwrap();
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::PurchaseLevelTooLow {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::PurchaseLevelTooLow {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -2589,7 +3023,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 writeln!(s, "    item2 = {};", item2.guid()).unwrap();
                 writeln!(s, "    bag_type_subclass = {};", bag_type_subclass).unwrap();
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::CantEquipNeedTalent {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::CantEquipNeedTalent {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -2598,7 +3032,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 writeln!(s, "    item2 = {};", item2.guid()).unwrap();
                 writeln!(s, "    bag_type_subclass = {};", bag_type_subclass).unwrap();
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ItemMaxLimitCategoryEquippedExceeded {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::ItemMaxLimitCategoryEquippedExceeded {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -2610,8 +3044,8 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
             _ => {}
         }
 
-        match &self.result {
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::CantEquipLevelI {
+        match &self {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::CantEquipLevelI {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -2619,517 +3053,517 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
             } => {
                 writeln!(s, "    required_level = {};", required_level.as_int()).unwrap();
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::CantEquipSkill {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::CantEquipSkill {
                 bag_type_subclass,
                 item1,
                 item2,
             } => {
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ItemDoesntGoToSlot {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::ItemDoesntGoToSlot {
                 bag_type_subclass,
                 item1,
                 item2,
             } => {
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::BagFull {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::BagFull {
                 bag_type_subclass,
                 item1,
                 item2,
             } => {
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::NonemptyBagOverOtherBag {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::NonemptyBagOverOtherBag {
                 bag_type_subclass,
                 item1,
                 item2,
             } => {
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::CantTradeEquipBags {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::CantTradeEquipBags {
                 bag_type_subclass,
                 item1,
                 item2,
             } => {
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::OnlyAmmoCanGoHere {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::OnlyAmmoCanGoHere {
                 bag_type_subclass,
                 item1,
                 item2,
             } => {
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::NoRequiredProficiency {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::NoRequiredProficiency {
                 bag_type_subclass,
                 item1,
                 item2,
             } => {
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::NoEquipmentSlotAvailable {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::NoEquipmentSlotAvailable {
                 bag_type_subclass,
                 item1,
                 item2,
             } => {
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::YouCanNeverUseThatItem {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::YouCanNeverUseThatItem {
                 bag_type_subclass,
                 item1,
                 item2,
             } => {
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::YouCanNeverUseThatItem2 {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::YouCanNeverUseThatItem2 {
                 bag_type_subclass,
                 item1,
                 item2,
             } => {
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::NoEquipmentSlotAvailable2 {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::NoEquipmentSlotAvailable2 {
                 bag_type_subclass,
                 item1,
                 item2,
             } => {
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::CantEquipWithTwohanded {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::CantEquipWithTwohanded {
                 bag_type_subclass,
                 item1,
                 item2,
             } => {
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::CantDualWield {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::CantDualWield {
                 bag_type_subclass,
                 item1,
                 item2,
             } => {
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ItemDoesntGoIntoBag {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::ItemDoesntGoIntoBag {
                 bag_type_subclass,
                 item1,
                 item2,
             } => {
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ItemDoesntGoIntoBag2 {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::ItemDoesntGoIntoBag2 {
                 bag_type_subclass,
                 item1,
                 item2,
             } => {
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::CantCarryMoreOfThis {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::CantCarryMoreOfThis {
                 bag_type_subclass,
                 item1,
                 item2,
             } => {
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::NoEquipmentSlotAvailable3 {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::NoEquipmentSlotAvailable3 {
                 bag_type_subclass,
                 item1,
                 item2,
             } => {
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ItemCantStack {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::ItemCantStack {
                 bag_type_subclass,
                 item1,
                 item2,
             } => {
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ItemCantBeEquipped {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::ItemCantBeEquipped {
                 bag_type_subclass,
                 item1,
                 item2,
             } => {
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ItemsCantBeSwapped {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::ItemsCantBeSwapped {
                 bag_type_subclass,
                 item1,
                 item2,
             } => {
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::SlotIsEmpty {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::SlotIsEmpty {
                 bag_type_subclass,
                 item1,
                 item2,
             } => {
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ItemNotFound {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::ItemNotFound {
                 bag_type_subclass,
                 item1,
                 item2,
             } => {
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::CantDropSoulbound {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::CantDropSoulbound {
                 bag_type_subclass,
                 item1,
                 item2,
             } => {
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::OutOfRange {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::OutOfRange {
                 bag_type_subclass,
                 item1,
                 item2,
             } => {
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::TriedToSplitMoreThanCount {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::TriedToSplitMoreThanCount {
                 bag_type_subclass,
                 item1,
                 item2,
             } => {
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::CouldntSplitItems {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::CouldntSplitItems {
                 bag_type_subclass,
                 item1,
                 item2,
             } => {
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::MissingReagent {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::MissingReagent {
                 bag_type_subclass,
                 item1,
                 item2,
             } => {
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::NotEnoughMoney {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::NotEnoughMoney {
                 bag_type_subclass,
                 item1,
                 item2,
             } => {
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::NotABag {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::NotABag {
                 bag_type_subclass,
                 item1,
                 item2,
             } => {
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::CanOnlyDoWithEmptyBags {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::CanOnlyDoWithEmptyBags {
                 bag_type_subclass,
                 item1,
                 item2,
             } => {
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::DontOwnThatItem {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::DontOwnThatItem {
                 bag_type_subclass,
                 item1,
                 item2,
             } => {
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::CanEquipOnly1Quiver {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::CanEquipOnly1Quiver {
                 bag_type_subclass,
                 item1,
                 item2,
             } => {
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::MustPurchaseThatBagSlot {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::MustPurchaseThatBagSlot {
                 bag_type_subclass,
                 item1,
                 item2,
             } => {
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::TooFarAwayFromBank {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::TooFarAwayFromBank {
                 bag_type_subclass,
                 item1,
                 item2,
             } => {
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ItemLocked {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::ItemLocked {
                 bag_type_subclass,
                 item1,
                 item2,
             } => {
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::YouAreStunned {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::YouAreStunned {
                 bag_type_subclass,
                 item1,
                 item2,
             } => {
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::YouAreDead {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::YouAreDead {
                 bag_type_subclass,
                 item1,
                 item2,
             } => {
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::CantDoRightNow {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::CantDoRightNow {
                 bag_type_subclass,
                 item1,
                 item2,
             } => {
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::IntBagError {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::IntBagError {
                 bag_type_subclass,
                 item1,
                 item2,
             } => {
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::CanEquipOnly1Bolt {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::CanEquipOnly1Bolt {
                 bag_type_subclass,
                 item1,
                 item2,
             } => {
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::CanEquipOnly1Ammopouch {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::CanEquipOnly1Ammopouch {
                 bag_type_subclass,
                 item1,
                 item2,
             } => {
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::StackableCantBeWrapped {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::StackableCantBeWrapped {
                 bag_type_subclass,
                 item1,
                 item2,
             } => {
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::EquippedCantBeWrapped {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::EquippedCantBeWrapped {
                 bag_type_subclass,
                 item1,
                 item2,
             } => {
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::WrappedCantBeWrapped {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::WrappedCantBeWrapped {
                 bag_type_subclass,
                 item1,
                 item2,
             } => {
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::BoundCantBeWrapped {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::BoundCantBeWrapped {
                 bag_type_subclass,
                 item1,
                 item2,
             } => {
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::UniqueCantBeWrapped {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::UniqueCantBeWrapped {
                 bag_type_subclass,
                 item1,
                 item2,
             } => {
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::BagsCantBeWrapped {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::BagsCantBeWrapped {
                 bag_type_subclass,
                 item1,
                 item2,
             } => {
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::AlreadyLooted {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::AlreadyLooted {
                 bag_type_subclass,
                 item1,
                 item2,
             } => {
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::InventoryFull {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::InventoryFull {
                 bag_type_subclass,
                 item1,
                 item2,
             } => {
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::BankFull {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::BankFull {
                 bag_type_subclass,
                 item1,
                 item2,
             } => {
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ItemIsCurrentlySoldOut {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::ItemIsCurrentlySoldOut {
                 bag_type_subclass,
                 item1,
                 item2,
             } => {
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::BagFull3 {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::BagFull3 {
                 bag_type_subclass,
                 item1,
                 item2,
             } => {
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ItemNotFound2 {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::ItemNotFound2 {
                 bag_type_subclass,
                 item1,
                 item2,
             } => {
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ItemCantStack2 {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::ItemCantStack2 {
                 bag_type_subclass,
                 item1,
                 item2,
             } => {
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::BagFull4 {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::BagFull4 {
                 bag_type_subclass,
                 item1,
                 item2,
             } => {
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ItemSoldOut {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::ItemSoldOut {
                 bag_type_subclass,
                 item1,
                 item2,
             } => {
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ObjectIsBusy {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::ObjectIsBusy {
                 bag_type_subclass,
                 item1,
                 item2,
             } => {
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::None {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::None {
                 bag_type_subclass,
                 item1,
                 item2,
             } => {
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::NotInCombat {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::NotInCombat {
                 bag_type_subclass,
                 item1,
                 item2,
             } => {
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::NotWhileDisarmed {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::NotWhileDisarmed {
                 bag_type_subclass,
                 item1,
                 item2,
             } => {
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::BagFull6 {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::BagFull6 {
                 bag_type_subclass,
                 item1,
                 item2,
             } => {
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::CantEquipRank {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::CantEquipRank {
                 bag_type_subclass,
                 item1,
                 item2,
             } => {
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::CantEquipReputation {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::CantEquipReputation {
                 bag_type_subclass,
                 item1,
                 item2,
             } => {
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::TooManySpecialBags {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::TooManySpecialBags {
                 bag_type_subclass,
                 item1,
                 item2,
             } => {
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::LootCantLootThatNow {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::LootCantLootThatNow {
                 bag_type_subclass,
                 item1,
                 item2,
             } => {
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ItemUniqueEquipable {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::ItemUniqueEquipable {
                 bag_type_subclass,
                 item1,
                 item2,
             } => {
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::VendorMissingTurnins {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::VendorMissingTurnins {
                 bag_type_subclass,
                 item1,
                 item2,
             } => {
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::NotEnoughHonorPoints {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::NotEnoughHonorPoints {
                 bag_type_subclass,
                 item1,
                 item2,
             } => {
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::NotEnoughArenaPoints {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::NotEnoughArenaPoints {
                 bag_type_subclass,
                 item1,
                 item2,
             } => {
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ItemMaxCountSocketed {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::ItemMaxCountSocketed {
                 bag_type_subclass,
                 item1,
                 item2,
             } => {
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::MailBoundItem {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::MailBoundItem {
                 bag_type_subclass,
                 item1,
                 item2,
             } => {
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::NoSplitWhileProspecting {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::NoSplitWhileProspecting {
                 bag_type_subclass,
                 item1,
                 item2,
             } => {
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ItemMaxCountEquippedSocketed {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::ItemMaxCountEquippedSocketed {
                 bag_type_subclass,
                 item1,
                 item2,
             } => {
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ItemUniqueEquippableSocketed {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::ItemUniqueEquippableSocketed {
                 bag_type_subclass,
                 item1,
                 item2,
             } => {
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::TooMuchGold {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::TooMuchGold {
                 bag_type_subclass,
                 item1,
                 item2,
             } => {
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::NotDuringArenaMatch {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::NotDuringArenaMatch {
                 bag_type_subclass,
                 item1,
                 item2,
             } => {
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::CannotTradeThat {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::CannotTradeThat {
                 bag_type_subclass,
                 item1,
                 item2,
             } => {
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::PersonalArenaRatingTooLow {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::PersonalArenaRatingTooLow {
                 bag_type_subclass,
                 item1,
                 item2,
             } => {
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::EventAutoequipBindConfirm {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::EventAutoequipBindConfirm {
                 bag_type_subclass,
                 item1,
                 item2,
             } => {
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ArtefactsOnlyForOwnCharacters {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::ArtefactsOnlyForOwnCharacters {
                 bag_type_subclass,
                 item1,
                 item2,
             } => {
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ItemMaxLimitCategoryCountExceeded {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::ItemMaxLimitCategoryCountExceeded {
                 bag_type_subclass,
                 item1,
                 item2,
             } => {
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ItemMaxLimitCategorySocketedExceeded {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::ItemMaxLimitCategorySocketedExceeded {
                 bag_type_subclass,
                 item1,
                 item2,
             } => {
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ScalingStatItemLevelExceeded {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::ScalingStatItemLevelExceeded {
                 bag_type_subclass,
                 item1,
                 item2,
             } => {
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::PurchaseLevelTooLow {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::PurchaseLevelTooLow {
                 bag_type_subclass,
                 item1,
                 item2,
             } => {
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::CantEquipNeedTalent {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::CantEquipNeedTalent {
                 bag_type_subclass,
                 item1,
                 item2,
             } => {
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ItemMaxLimitCategoryEquippedExceeded {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::ItemMaxLimitCategoryEquippedExceeded {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -3150,8 +3584,8 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
         let mut bytes = bytes.into_iter();
 
         crate::util::write_bytes(&mut s, &mut bytes, 1, "result", "    ");
-        match &self.result {
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::CantEquipLevelI {
+        match &self {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::CantEquipLevelI {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -3161,7 +3595,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 crate::util::write_bytes(&mut s, &mut bytes, 8, "item2", "    ");
                 crate::util::write_bytes(&mut s, &mut bytes, 1, "bag_type_subclass", "    ");
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::CantEquipSkill {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::CantEquipSkill {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -3170,7 +3604,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 crate::util::write_bytes(&mut s, &mut bytes, 8, "item2", "    ");
                 crate::util::write_bytes(&mut s, &mut bytes, 1, "bag_type_subclass", "    ");
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ItemDoesntGoToSlot {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::ItemDoesntGoToSlot {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -3179,7 +3613,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 crate::util::write_bytes(&mut s, &mut bytes, 8, "item2", "    ");
                 crate::util::write_bytes(&mut s, &mut bytes, 1, "bag_type_subclass", "    ");
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::BagFull {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::BagFull {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -3188,7 +3622,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 crate::util::write_bytes(&mut s, &mut bytes, 8, "item2", "    ");
                 crate::util::write_bytes(&mut s, &mut bytes, 1, "bag_type_subclass", "    ");
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::NonemptyBagOverOtherBag {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::NonemptyBagOverOtherBag {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -3197,7 +3631,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 crate::util::write_bytes(&mut s, &mut bytes, 8, "item2", "    ");
                 crate::util::write_bytes(&mut s, &mut bytes, 1, "bag_type_subclass", "    ");
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::CantTradeEquipBags {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::CantTradeEquipBags {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -3206,7 +3640,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 crate::util::write_bytes(&mut s, &mut bytes, 8, "item2", "    ");
                 crate::util::write_bytes(&mut s, &mut bytes, 1, "bag_type_subclass", "    ");
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::OnlyAmmoCanGoHere {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::OnlyAmmoCanGoHere {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -3215,7 +3649,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 crate::util::write_bytes(&mut s, &mut bytes, 8, "item2", "    ");
                 crate::util::write_bytes(&mut s, &mut bytes, 1, "bag_type_subclass", "    ");
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::NoRequiredProficiency {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::NoRequiredProficiency {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -3224,7 +3658,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 crate::util::write_bytes(&mut s, &mut bytes, 8, "item2", "    ");
                 crate::util::write_bytes(&mut s, &mut bytes, 1, "bag_type_subclass", "    ");
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::NoEquipmentSlotAvailable {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::NoEquipmentSlotAvailable {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -3233,7 +3667,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 crate::util::write_bytes(&mut s, &mut bytes, 8, "item2", "    ");
                 crate::util::write_bytes(&mut s, &mut bytes, 1, "bag_type_subclass", "    ");
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::YouCanNeverUseThatItem {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::YouCanNeverUseThatItem {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -3242,7 +3676,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 crate::util::write_bytes(&mut s, &mut bytes, 8, "item2", "    ");
                 crate::util::write_bytes(&mut s, &mut bytes, 1, "bag_type_subclass", "    ");
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::YouCanNeverUseThatItem2 {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::YouCanNeverUseThatItem2 {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -3251,7 +3685,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 crate::util::write_bytes(&mut s, &mut bytes, 8, "item2", "    ");
                 crate::util::write_bytes(&mut s, &mut bytes, 1, "bag_type_subclass", "    ");
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::NoEquipmentSlotAvailable2 {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::NoEquipmentSlotAvailable2 {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -3260,7 +3694,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 crate::util::write_bytes(&mut s, &mut bytes, 8, "item2", "    ");
                 crate::util::write_bytes(&mut s, &mut bytes, 1, "bag_type_subclass", "    ");
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::CantEquipWithTwohanded {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::CantEquipWithTwohanded {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -3269,7 +3703,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 crate::util::write_bytes(&mut s, &mut bytes, 8, "item2", "    ");
                 crate::util::write_bytes(&mut s, &mut bytes, 1, "bag_type_subclass", "    ");
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::CantDualWield {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::CantDualWield {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -3278,7 +3712,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 crate::util::write_bytes(&mut s, &mut bytes, 8, "item2", "    ");
                 crate::util::write_bytes(&mut s, &mut bytes, 1, "bag_type_subclass", "    ");
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ItemDoesntGoIntoBag {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::ItemDoesntGoIntoBag {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -3287,7 +3721,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 crate::util::write_bytes(&mut s, &mut bytes, 8, "item2", "    ");
                 crate::util::write_bytes(&mut s, &mut bytes, 1, "bag_type_subclass", "    ");
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ItemDoesntGoIntoBag2 {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::ItemDoesntGoIntoBag2 {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -3296,7 +3730,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 crate::util::write_bytes(&mut s, &mut bytes, 8, "item2", "    ");
                 crate::util::write_bytes(&mut s, &mut bytes, 1, "bag_type_subclass", "    ");
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::CantCarryMoreOfThis {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::CantCarryMoreOfThis {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -3305,7 +3739,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 crate::util::write_bytes(&mut s, &mut bytes, 8, "item2", "    ");
                 crate::util::write_bytes(&mut s, &mut bytes, 1, "bag_type_subclass", "    ");
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::NoEquipmentSlotAvailable3 {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::NoEquipmentSlotAvailable3 {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -3314,7 +3748,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 crate::util::write_bytes(&mut s, &mut bytes, 8, "item2", "    ");
                 crate::util::write_bytes(&mut s, &mut bytes, 1, "bag_type_subclass", "    ");
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ItemCantStack {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::ItemCantStack {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -3323,7 +3757,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 crate::util::write_bytes(&mut s, &mut bytes, 8, "item2", "    ");
                 crate::util::write_bytes(&mut s, &mut bytes, 1, "bag_type_subclass", "    ");
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ItemCantBeEquipped {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::ItemCantBeEquipped {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -3332,7 +3766,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 crate::util::write_bytes(&mut s, &mut bytes, 8, "item2", "    ");
                 crate::util::write_bytes(&mut s, &mut bytes, 1, "bag_type_subclass", "    ");
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ItemsCantBeSwapped {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::ItemsCantBeSwapped {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -3341,7 +3775,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 crate::util::write_bytes(&mut s, &mut bytes, 8, "item2", "    ");
                 crate::util::write_bytes(&mut s, &mut bytes, 1, "bag_type_subclass", "    ");
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::SlotIsEmpty {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::SlotIsEmpty {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -3350,7 +3784,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 crate::util::write_bytes(&mut s, &mut bytes, 8, "item2", "    ");
                 crate::util::write_bytes(&mut s, &mut bytes, 1, "bag_type_subclass", "    ");
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ItemNotFound {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::ItemNotFound {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -3359,7 +3793,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 crate::util::write_bytes(&mut s, &mut bytes, 8, "item2", "    ");
                 crate::util::write_bytes(&mut s, &mut bytes, 1, "bag_type_subclass", "    ");
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::CantDropSoulbound {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::CantDropSoulbound {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -3368,7 +3802,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 crate::util::write_bytes(&mut s, &mut bytes, 8, "item2", "    ");
                 crate::util::write_bytes(&mut s, &mut bytes, 1, "bag_type_subclass", "    ");
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::OutOfRange {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::OutOfRange {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -3377,7 +3811,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 crate::util::write_bytes(&mut s, &mut bytes, 8, "item2", "    ");
                 crate::util::write_bytes(&mut s, &mut bytes, 1, "bag_type_subclass", "    ");
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::TriedToSplitMoreThanCount {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::TriedToSplitMoreThanCount {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -3386,7 +3820,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 crate::util::write_bytes(&mut s, &mut bytes, 8, "item2", "    ");
                 crate::util::write_bytes(&mut s, &mut bytes, 1, "bag_type_subclass", "    ");
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::CouldntSplitItems {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::CouldntSplitItems {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -3395,7 +3829,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 crate::util::write_bytes(&mut s, &mut bytes, 8, "item2", "    ");
                 crate::util::write_bytes(&mut s, &mut bytes, 1, "bag_type_subclass", "    ");
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::MissingReagent {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::MissingReagent {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -3404,7 +3838,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 crate::util::write_bytes(&mut s, &mut bytes, 8, "item2", "    ");
                 crate::util::write_bytes(&mut s, &mut bytes, 1, "bag_type_subclass", "    ");
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::NotEnoughMoney {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::NotEnoughMoney {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -3413,7 +3847,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 crate::util::write_bytes(&mut s, &mut bytes, 8, "item2", "    ");
                 crate::util::write_bytes(&mut s, &mut bytes, 1, "bag_type_subclass", "    ");
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::NotABag {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::NotABag {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -3422,7 +3856,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 crate::util::write_bytes(&mut s, &mut bytes, 8, "item2", "    ");
                 crate::util::write_bytes(&mut s, &mut bytes, 1, "bag_type_subclass", "    ");
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::CanOnlyDoWithEmptyBags {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::CanOnlyDoWithEmptyBags {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -3431,7 +3865,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 crate::util::write_bytes(&mut s, &mut bytes, 8, "item2", "    ");
                 crate::util::write_bytes(&mut s, &mut bytes, 1, "bag_type_subclass", "    ");
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::DontOwnThatItem {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::DontOwnThatItem {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -3440,7 +3874,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 crate::util::write_bytes(&mut s, &mut bytes, 8, "item2", "    ");
                 crate::util::write_bytes(&mut s, &mut bytes, 1, "bag_type_subclass", "    ");
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::CanEquipOnly1Quiver {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::CanEquipOnly1Quiver {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -3449,7 +3883,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 crate::util::write_bytes(&mut s, &mut bytes, 8, "item2", "    ");
                 crate::util::write_bytes(&mut s, &mut bytes, 1, "bag_type_subclass", "    ");
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::MustPurchaseThatBagSlot {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::MustPurchaseThatBagSlot {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -3458,7 +3892,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 crate::util::write_bytes(&mut s, &mut bytes, 8, "item2", "    ");
                 crate::util::write_bytes(&mut s, &mut bytes, 1, "bag_type_subclass", "    ");
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::TooFarAwayFromBank {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::TooFarAwayFromBank {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -3467,7 +3901,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 crate::util::write_bytes(&mut s, &mut bytes, 8, "item2", "    ");
                 crate::util::write_bytes(&mut s, &mut bytes, 1, "bag_type_subclass", "    ");
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ItemLocked {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::ItemLocked {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -3476,7 +3910,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 crate::util::write_bytes(&mut s, &mut bytes, 8, "item2", "    ");
                 crate::util::write_bytes(&mut s, &mut bytes, 1, "bag_type_subclass", "    ");
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::YouAreStunned {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::YouAreStunned {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -3485,7 +3919,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 crate::util::write_bytes(&mut s, &mut bytes, 8, "item2", "    ");
                 crate::util::write_bytes(&mut s, &mut bytes, 1, "bag_type_subclass", "    ");
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::YouAreDead {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::YouAreDead {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -3494,7 +3928,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 crate::util::write_bytes(&mut s, &mut bytes, 8, "item2", "    ");
                 crate::util::write_bytes(&mut s, &mut bytes, 1, "bag_type_subclass", "    ");
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::CantDoRightNow {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::CantDoRightNow {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -3503,7 +3937,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 crate::util::write_bytes(&mut s, &mut bytes, 8, "item2", "    ");
                 crate::util::write_bytes(&mut s, &mut bytes, 1, "bag_type_subclass", "    ");
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::IntBagError {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::IntBagError {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -3512,7 +3946,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 crate::util::write_bytes(&mut s, &mut bytes, 8, "item2", "    ");
                 crate::util::write_bytes(&mut s, &mut bytes, 1, "bag_type_subclass", "    ");
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::CanEquipOnly1Bolt {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::CanEquipOnly1Bolt {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -3521,7 +3955,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 crate::util::write_bytes(&mut s, &mut bytes, 8, "item2", "    ");
                 crate::util::write_bytes(&mut s, &mut bytes, 1, "bag_type_subclass", "    ");
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::CanEquipOnly1Ammopouch {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::CanEquipOnly1Ammopouch {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -3530,7 +3964,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 crate::util::write_bytes(&mut s, &mut bytes, 8, "item2", "    ");
                 crate::util::write_bytes(&mut s, &mut bytes, 1, "bag_type_subclass", "    ");
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::StackableCantBeWrapped {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::StackableCantBeWrapped {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -3539,7 +3973,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 crate::util::write_bytes(&mut s, &mut bytes, 8, "item2", "    ");
                 crate::util::write_bytes(&mut s, &mut bytes, 1, "bag_type_subclass", "    ");
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::EquippedCantBeWrapped {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::EquippedCantBeWrapped {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -3548,7 +3982,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 crate::util::write_bytes(&mut s, &mut bytes, 8, "item2", "    ");
                 crate::util::write_bytes(&mut s, &mut bytes, 1, "bag_type_subclass", "    ");
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::WrappedCantBeWrapped {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::WrappedCantBeWrapped {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -3557,7 +3991,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 crate::util::write_bytes(&mut s, &mut bytes, 8, "item2", "    ");
                 crate::util::write_bytes(&mut s, &mut bytes, 1, "bag_type_subclass", "    ");
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::BoundCantBeWrapped {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::BoundCantBeWrapped {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -3566,7 +4000,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 crate::util::write_bytes(&mut s, &mut bytes, 8, "item2", "    ");
                 crate::util::write_bytes(&mut s, &mut bytes, 1, "bag_type_subclass", "    ");
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::UniqueCantBeWrapped {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::UniqueCantBeWrapped {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -3575,7 +4009,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 crate::util::write_bytes(&mut s, &mut bytes, 8, "item2", "    ");
                 crate::util::write_bytes(&mut s, &mut bytes, 1, "bag_type_subclass", "    ");
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::BagsCantBeWrapped {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::BagsCantBeWrapped {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -3584,7 +4018,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 crate::util::write_bytes(&mut s, &mut bytes, 8, "item2", "    ");
                 crate::util::write_bytes(&mut s, &mut bytes, 1, "bag_type_subclass", "    ");
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::AlreadyLooted {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::AlreadyLooted {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -3593,7 +4027,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 crate::util::write_bytes(&mut s, &mut bytes, 8, "item2", "    ");
                 crate::util::write_bytes(&mut s, &mut bytes, 1, "bag_type_subclass", "    ");
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::InventoryFull {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::InventoryFull {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -3602,7 +4036,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 crate::util::write_bytes(&mut s, &mut bytes, 8, "item2", "    ");
                 crate::util::write_bytes(&mut s, &mut bytes, 1, "bag_type_subclass", "    ");
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::BankFull {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::BankFull {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -3611,7 +4045,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 crate::util::write_bytes(&mut s, &mut bytes, 8, "item2", "    ");
                 crate::util::write_bytes(&mut s, &mut bytes, 1, "bag_type_subclass", "    ");
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ItemIsCurrentlySoldOut {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::ItemIsCurrentlySoldOut {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -3620,7 +4054,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 crate::util::write_bytes(&mut s, &mut bytes, 8, "item2", "    ");
                 crate::util::write_bytes(&mut s, &mut bytes, 1, "bag_type_subclass", "    ");
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::BagFull3 {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::BagFull3 {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -3629,7 +4063,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 crate::util::write_bytes(&mut s, &mut bytes, 8, "item2", "    ");
                 crate::util::write_bytes(&mut s, &mut bytes, 1, "bag_type_subclass", "    ");
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ItemNotFound2 {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::ItemNotFound2 {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -3638,7 +4072,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 crate::util::write_bytes(&mut s, &mut bytes, 8, "item2", "    ");
                 crate::util::write_bytes(&mut s, &mut bytes, 1, "bag_type_subclass", "    ");
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ItemCantStack2 {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::ItemCantStack2 {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -3647,7 +4081,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 crate::util::write_bytes(&mut s, &mut bytes, 8, "item2", "    ");
                 crate::util::write_bytes(&mut s, &mut bytes, 1, "bag_type_subclass", "    ");
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::BagFull4 {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::BagFull4 {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -3656,7 +4090,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 crate::util::write_bytes(&mut s, &mut bytes, 8, "item2", "    ");
                 crate::util::write_bytes(&mut s, &mut bytes, 1, "bag_type_subclass", "    ");
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ItemSoldOut {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::ItemSoldOut {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -3665,7 +4099,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 crate::util::write_bytes(&mut s, &mut bytes, 8, "item2", "    ");
                 crate::util::write_bytes(&mut s, &mut bytes, 1, "bag_type_subclass", "    ");
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ObjectIsBusy {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::ObjectIsBusy {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -3674,7 +4108,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 crate::util::write_bytes(&mut s, &mut bytes, 8, "item2", "    ");
                 crate::util::write_bytes(&mut s, &mut bytes, 1, "bag_type_subclass", "    ");
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::None {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::None {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -3683,7 +4117,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 crate::util::write_bytes(&mut s, &mut bytes, 8, "item2", "    ");
                 crate::util::write_bytes(&mut s, &mut bytes, 1, "bag_type_subclass", "    ");
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::NotInCombat {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::NotInCombat {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -3692,7 +4126,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 crate::util::write_bytes(&mut s, &mut bytes, 8, "item2", "    ");
                 crate::util::write_bytes(&mut s, &mut bytes, 1, "bag_type_subclass", "    ");
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::NotWhileDisarmed {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::NotWhileDisarmed {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -3701,7 +4135,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 crate::util::write_bytes(&mut s, &mut bytes, 8, "item2", "    ");
                 crate::util::write_bytes(&mut s, &mut bytes, 1, "bag_type_subclass", "    ");
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::BagFull6 {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::BagFull6 {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -3710,7 +4144,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 crate::util::write_bytes(&mut s, &mut bytes, 8, "item2", "    ");
                 crate::util::write_bytes(&mut s, &mut bytes, 1, "bag_type_subclass", "    ");
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::CantEquipRank {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::CantEquipRank {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -3719,7 +4153,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 crate::util::write_bytes(&mut s, &mut bytes, 8, "item2", "    ");
                 crate::util::write_bytes(&mut s, &mut bytes, 1, "bag_type_subclass", "    ");
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::CantEquipReputation {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::CantEquipReputation {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -3728,7 +4162,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 crate::util::write_bytes(&mut s, &mut bytes, 8, "item2", "    ");
                 crate::util::write_bytes(&mut s, &mut bytes, 1, "bag_type_subclass", "    ");
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::TooManySpecialBags {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::TooManySpecialBags {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -3737,7 +4171,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 crate::util::write_bytes(&mut s, &mut bytes, 8, "item2", "    ");
                 crate::util::write_bytes(&mut s, &mut bytes, 1, "bag_type_subclass", "    ");
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::LootCantLootThatNow {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::LootCantLootThatNow {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -3746,7 +4180,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 crate::util::write_bytes(&mut s, &mut bytes, 8, "item2", "    ");
                 crate::util::write_bytes(&mut s, &mut bytes, 1, "bag_type_subclass", "    ");
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ItemUniqueEquipable {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::ItemUniqueEquipable {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -3755,7 +4189,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 crate::util::write_bytes(&mut s, &mut bytes, 8, "item2", "    ");
                 crate::util::write_bytes(&mut s, &mut bytes, 1, "bag_type_subclass", "    ");
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::VendorMissingTurnins {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::VendorMissingTurnins {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -3764,7 +4198,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 crate::util::write_bytes(&mut s, &mut bytes, 8, "item2", "    ");
                 crate::util::write_bytes(&mut s, &mut bytes, 1, "bag_type_subclass", "    ");
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::NotEnoughHonorPoints {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::NotEnoughHonorPoints {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -3773,7 +4207,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 crate::util::write_bytes(&mut s, &mut bytes, 8, "item2", "    ");
                 crate::util::write_bytes(&mut s, &mut bytes, 1, "bag_type_subclass", "    ");
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::NotEnoughArenaPoints {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::NotEnoughArenaPoints {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -3782,7 +4216,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 crate::util::write_bytes(&mut s, &mut bytes, 8, "item2", "    ");
                 crate::util::write_bytes(&mut s, &mut bytes, 1, "bag_type_subclass", "    ");
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ItemMaxCountSocketed {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::ItemMaxCountSocketed {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -3791,7 +4225,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 crate::util::write_bytes(&mut s, &mut bytes, 8, "item2", "    ");
                 crate::util::write_bytes(&mut s, &mut bytes, 1, "bag_type_subclass", "    ");
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::MailBoundItem {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::MailBoundItem {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -3800,7 +4234,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 crate::util::write_bytes(&mut s, &mut bytes, 8, "item2", "    ");
                 crate::util::write_bytes(&mut s, &mut bytes, 1, "bag_type_subclass", "    ");
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::NoSplitWhileProspecting {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::NoSplitWhileProspecting {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -3809,7 +4243,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 crate::util::write_bytes(&mut s, &mut bytes, 8, "item2", "    ");
                 crate::util::write_bytes(&mut s, &mut bytes, 1, "bag_type_subclass", "    ");
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ItemMaxCountEquippedSocketed {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::ItemMaxCountEquippedSocketed {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -3818,7 +4252,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 crate::util::write_bytes(&mut s, &mut bytes, 8, "item2", "    ");
                 crate::util::write_bytes(&mut s, &mut bytes, 1, "bag_type_subclass", "    ");
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ItemUniqueEquippableSocketed {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::ItemUniqueEquippableSocketed {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -3827,7 +4261,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 crate::util::write_bytes(&mut s, &mut bytes, 8, "item2", "    ");
                 crate::util::write_bytes(&mut s, &mut bytes, 1, "bag_type_subclass", "    ");
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::TooMuchGold {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::TooMuchGold {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -3836,7 +4270,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 crate::util::write_bytes(&mut s, &mut bytes, 8, "item2", "    ");
                 crate::util::write_bytes(&mut s, &mut bytes, 1, "bag_type_subclass", "    ");
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::NotDuringArenaMatch {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::NotDuringArenaMatch {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -3845,7 +4279,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 crate::util::write_bytes(&mut s, &mut bytes, 8, "item2", "    ");
                 crate::util::write_bytes(&mut s, &mut bytes, 1, "bag_type_subclass", "    ");
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::CannotTradeThat {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::CannotTradeThat {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -3854,7 +4288,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 crate::util::write_bytes(&mut s, &mut bytes, 8, "item2", "    ");
                 crate::util::write_bytes(&mut s, &mut bytes, 1, "bag_type_subclass", "    ");
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::PersonalArenaRatingTooLow {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::PersonalArenaRatingTooLow {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -3863,7 +4297,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 crate::util::write_bytes(&mut s, &mut bytes, 8, "item2", "    ");
                 crate::util::write_bytes(&mut s, &mut bytes, 1, "bag_type_subclass", "    ");
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::EventAutoequipBindConfirm {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::EventAutoequipBindConfirm {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -3872,7 +4306,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 crate::util::write_bytes(&mut s, &mut bytes, 8, "item2", "    ");
                 crate::util::write_bytes(&mut s, &mut bytes, 1, "bag_type_subclass", "    ");
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ArtefactsOnlyForOwnCharacters {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::ArtefactsOnlyForOwnCharacters {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -3881,7 +4315,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 crate::util::write_bytes(&mut s, &mut bytes, 8, "item2", "    ");
                 crate::util::write_bytes(&mut s, &mut bytes, 1, "bag_type_subclass", "    ");
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ItemMaxLimitCategoryCountExceeded {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::ItemMaxLimitCategoryCountExceeded {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -3890,7 +4324,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 crate::util::write_bytes(&mut s, &mut bytes, 8, "item2", "    ");
                 crate::util::write_bytes(&mut s, &mut bytes, 1, "bag_type_subclass", "    ");
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ItemMaxLimitCategorySocketedExceeded {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::ItemMaxLimitCategorySocketedExceeded {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -3899,7 +4333,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 crate::util::write_bytes(&mut s, &mut bytes, 8, "item2", "    ");
                 crate::util::write_bytes(&mut s, &mut bytes, 1, "bag_type_subclass", "    ");
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ScalingStatItemLevelExceeded {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::ScalingStatItemLevelExceeded {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -3908,7 +4342,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 crate::util::write_bytes(&mut s, &mut bytes, 8, "item2", "    ");
                 crate::util::write_bytes(&mut s, &mut bytes, 1, "bag_type_subclass", "    ");
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::PurchaseLevelTooLow {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::PurchaseLevelTooLow {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -3917,7 +4351,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 crate::util::write_bytes(&mut s, &mut bytes, 8, "item2", "    ");
                 crate::util::write_bytes(&mut s, &mut bytes, 1, "bag_type_subclass", "    ");
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::CantEquipNeedTalent {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::CantEquipNeedTalent {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -3926,7 +4360,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 crate::util::write_bytes(&mut s, &mut bytes, 8, "item2", "    ");
                 crate::util::write_bytes(&mut s, &mut bytes, 1, "bag_type_subclass", "    ");
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ItemMaxLimitCategoryEquippedExceeded {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::ItemMaxLimitCategoryEquippedExceeded {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -3938,8 +4372,8 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
             _ => {}
         }
 
-        match &self.result {
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::CantEquipLevelI {
+        match &self {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::CantEquipLevelI {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -3947,517 +4381,517 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
             } => {
                 crate::util::write_bytes(&mut s, &mut bytes, 4, "required_level", "    ");
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::CantEquipSkill {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::CantEquipSkill {
                 bag_type_subclass,
                 item1,
                 item2,
             } => {
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ItemDoesntGoToSlot {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::ItemDoesntGoToSlot {
                 bag_type_subclass,
                 item1,
                 item2,
             } => {
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::BagFull {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::BagFull {
                 bag_type_subclass,
                 item1,
                 item2,
             } => {
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::NonemptyBagOverOtherBag {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::NonemptyBagOverOtherBag {
                 bag_type_subclass,
                 item1,
                 item2,
             } => {
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::CantTradeEquipBags {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::CantTradeEquipBags {
                 bag_type_subclass,
                 item1,
                 item2,
             } => {
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::OnlyAmmoCanGoHere {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::OnlyAmmoCanGoHere {
                 bag_type_subclass,
                 item1,
                 item2,
             } => {
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::NoRequiredProficiency {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::NoRequiredProficiency {
                 bag_type_subclass,
                 item1,
                 item2,
             } => {
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::NoEquipmentSlotAvailable {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::NoEquipmentSlotAvailable {
                 bag_type_subclass,
                 item1,
                 item2,
             } => {
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::YouCanNeverUseThatItem {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::YouCanNeverUseThatItem {
                 bag_type_subclass,
                 item1,
                 item2,
             } => {
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::YouCanNeverUseThatItem2 {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::YouCanNeverUseThatItem2 {
                 bag_type_subclass,
                 item1,
                 item2,
             } => {
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::NoEquipmentSlotAvailable2 {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::NoEquipmentSlotAvailable2 {
                 bag_type_subclass,
                 item1,
                 item2,
             } => {
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::CantEquipWithTwohanded {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::CantEquipWithTwohanded {
                 bag_type_subclass,
                 item1,
                 item2,
             } => {
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::CantDualWield {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::CantDualWield {
                 bag_type_subclass,
                 item1,
                 item2,
             } => {
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ItemDoesntGoIntoBag {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::ItemDoesntGoIntoBag {
                 bag_type_subclass,
                 item1,
                 item2,
             } => {
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ItemDoesntGoIntoBag2 {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::ItemDoesntGoIntoBag2 {
                 bag_type_subclass,
                 item1,
                 item2,
             } => {
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::CantCarryMoreOfThis {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::CantCarryMoreOfThis {
                 bag_type_subclass,
                 item1,
                 item2,
             } => {
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::NoEquipmentSlotAvailable3 {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::NoEquipmentSlotAvailable3 {
                 bag_type_subclass,
                 item1,
                 item2,
             } => {
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ItemCantStack {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::ItemCantStack {
                 bag_type_subclass,
                 item1,
                 item2,
             } => {
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ItemCantBeEquipped {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::ItemCantBeEquipped {
                 bag_type_subclass,
                 item1,
                 item2,
             } => {
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ItemsCantBeSwapped {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::ItemsCantBeSwapped {
                 bag_type_subclass,
                 item1,
                 item2,
             } => {
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::SlotIsEmpty {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::SlotIsEmpty {
                 bag_type_subclass,
                 item1,
                 item2,
             } => {
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ItemNotFound {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::ItemNotFound {
                 bag_type_subclass,
                 item1,
                 item2,
             } => {
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::CantDropSoulbound {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::CantDropSoulbound {
                 bag_type_subclass,
                 item1,
                 item2,
             } => {
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::OutOfRange {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::OutOfRange {
                 bag_type_subclass,
                 item1,
                 item2,
             } => {
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::TriedToSplitMoreThanCount {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::TriedToSplitMoreThanCount {
                 bag_type_subclass,
                 item1,
                 item2,
             } => {
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::CouldntSplitItems {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::CouldntSplitItems {
                 bag_type_subclass,
                 item1,
                 item2,
             } => {
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::MissingReagent {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::MissingReagent {
                 bag_type_subclass,
                 item1,
                 item2,
             } => {
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::NotEnoughMoney {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::NotEnoughMoney {
                 bag_type_subclass,
                 item1,
                 item2,
             } => {
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::NotABag {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::NotABag {
                 bag_type_subclass,
                 item1,
                 item2,
             } => {
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::CanOnlyDoWithEmptyBags {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::CanOnlyDoWithEmptyBags {
                 bag_type_subclass,
                 item1,
                 item2,
             } => {
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::DontOwnThatItem {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::DontOwnThatItem {
                 bag_type_subclass,
                 item1,
                 item2,
             } => {
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::CanEquipOnly1Quiver {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::CanEquipOnly1Quiver {
                 bag_type_subclass,
                 item1,
                 item2,
             } => {
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::MustPurchaseThatBagSlot {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::MustPurchaseThatBagSlot {
                 bag_type_subclass,
                 item1,
                 item2,
             } => {
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::TooFarAwayFromBank {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::TooFarAwayFromBank {
                 bag_type_subclass,
                 item1,
                 item2,
             } => {
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ItemLocked {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::ItemLocked {
                 bag_type_subclass,
                 item1,
                 item2,
             } => {
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::YouAreStunned {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::YouAreStunned {
                 bag_type_subclass,
                 item1,
                 item2,
             } => {
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::YouAreDead {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::YouAreDead {
                 bag_type_subclass,
                 item1,
                 item2,
             } => {
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::CantDoRightNow {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::CantDoRightNow {
                 bag_type_subclass,
                 item1,
                 item2,
             } => {
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::IntBagError {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::IntBagError {
                 bag_type_subclass,
                 item1,
                 item2,
             } => {
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::CanEquipOnly1Bolt {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::CanEquipOnly1Bolt {
                 bag_type_subclass,
                 item1,
                 item2,
             } => {
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::CanEquipOnly1Ammopouch {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::CanEquipOnly1Ammopouch {
                 bag_type_subclass,
                 item1,
                 item2,
             } => {
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::StackableCantBeWrapped {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::StackableCantBeWrapped {
                 bag_type_subclass,
                 item1,
                 item2,
             } => {
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::EquippedCantBeWrapped {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::EquippedCantBeWrapped {
                 bag_type_subclass,
                 item1,
                 item2,
             } => {
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::WrappedCantBeWrapped {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::WrappedCantBeWrapped {
                 bag_type_subclass,
                 item1,
                 item2,
             } => {
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::BoundCantBeWrapped {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::BoundCantBeWrapped {
                 bag_type_subclass,
                 item1,
                 item2,
             } => {
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::UniqueCantBeWrapped {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::UniqueCantBeWrapped {
                 bag_type_subclass,
                 item1,
                 item2,
             } => {
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::BagsCantBeWrapped {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::BagsCantBeWrapped {
                 bag_type_subclass,
                 item1,
                 item2,
             } => {
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::AlreadyLooted {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::AlreadyLooted {
                 bag_type_subclass,
                 item1,
                 item2,
             } => {
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::InventoryFull {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::InventoryFull {
                 bag_type_subclass,
                 item1,
                 item2,
             } => {
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::BankFull {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::BankFull {
                 bag_type_subclass,
                 item1,
                 item2,
             } => {
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ItemIsCurrentlySoldOut {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::ItemIsCurrentlySoldOut {
                 bag_type_subclass,
                 item1,
                 item2,
             } => {
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::BagFull3 {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::BagFull3 {
                 bag_type_subclass,
                 item1,
                 item2,
             } => {
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ItemNotFound2 {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::ItemNotFound2 {
                 bag_type_subclass,
                 item1,
                 item2,
             } => {
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ItemCantStack2 {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::ItemCantStack2 {
                 bag_type_subclass,
                 item1,
                 item2,
             } => {
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::BagFull4 {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::BagFull4 {
                 bag_type_subclass,
                 item1,
                 item2,
             } => {
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ItemSoldOut {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::ItemSoldOut {
                 bag_type_subclass,
                 item1,
                 item2,
             } => {
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ObjectIsBusy {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::ObjectIsBusy {
                 bag_type_subclass,
                 item1,
                 item2,
             } => {
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::None {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::None {
                 bag_type_subclass,
                 item1,
                 item2,
             } => {
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::NotInCombat {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::NotInCombat {
                 bag_type_subclass,
                 item1,
                 item2,
             } => {
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::NotWhileDisarmed {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::NotWhileDisarmed {
                 bag_type_subclass,
                 item1,
                 item2,
             } => {
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::BagFull6 {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::BagFull6 {
                 bag_type_subclass,
                 item1,
                 item2,
             } => {
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::CantEquipRank {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::CantEquipRank {
                 bag_type_subclass,
                 item1,
                 item2,
             } => {
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::CantEquipReputation {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::CantEquipReputation {
                 bag_type_subclass,
                 item1,
                 item2,
             } => {
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::TooManySpecialBags {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::TooManySpecialBags {
                 bag_type_subclass,
                 item1,
                 item2,
             } => {
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::LootCantLootThatNow {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::LootCantLootThatNow {
                 bag_type_subclass,
                 item1,
                 item2,
             } => {
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ItemUniqueEquipable {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::ItemUniqueEquipable {
                 bag_type_subclass,
                 item1,
                 item2,
             } => {
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::VendorMissingTurnins {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::VendorMissingTurnins {
                 bag_type_subclass,
                 item1,
                 item2,
             } => {
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::NotEnoughHonorPoints {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::NotEnoughHonorPoints {
                 bag_type_subclass,
                 item1,
                 item2,
             } => {
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::NotEnoughArenaPoints {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::NotEnoughArenaPoints {
                 bag_type_subclass,
                 item1,
                 item2,
             } => {
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ItemMaxCountSocketed {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::ItemMaxCountSocketed {
                 bag_type_subclass,
                 item1,
                 item2,
             } => {
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::MailBoundItem {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::MailBoundItem {
                 bag_type_subclass,
                 item1,
                 item2,
             } => {
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::NoSplitWhileProspecting {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::NoSplitWhileProspecting {
                 bag_type_subclass,
                 item1,
                 item2,
             } => {
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ItemMaxCountEquippedSocketed {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::ItemMaxCountEquippedSocketed {
                 bag_type_subclass,
                 item1,
                 item2,
             } => {
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ItemUniqueEquippableSocketed {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::ItemUniqueEquippableSocketed {
                 bag_type_subclass,
                 item1,
                 item2,
             } => {
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::TooMuchGold {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::TooMuchGold {
                 bag_type_subclass,
                 item1,
                 item2,
             } => {
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::NotDuringArenaMatch {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::NotDuringArenaMatch {
                 bag_type_subclass,
                 item1,
                 item2,
             } => {
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::CannotTradeThat {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::CannotTradeThat {
                 bag_type_subclass,
                 item1,
                 item2,
             } => {
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::PersonalArenaRatingTooLow {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::PersonalArenaRatingTooLow {
                 bag_type_subclass,
                 item1,
                 item2,
             } => {
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::EventAutoequipBindConfirm {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::EventAutoequipBindConfirm {
                 bag_type_subclass,
                 item1,
                 item2,
             } => {
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ArtefactsOnlyForOwnCharacters {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::ArtefactsOnlyForOwnCharacters {
                 bag_type_subclass,
                 item1,
                 item2,
             } => {
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ItemMaxLimitCategoryCountExceeded {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::ItemMaxLimitCategoryCountExceeded {
                 bag_type_subclass,
                 item1,
                 item2,
             } => {
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ItemMaxLimitCategorySocketedExceeded {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::ItemMaxLimitCategorySocketedExceeded {
                 bag_type_subclass,
                 item1,
                 item2,
             } => {
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ScalingStatItemLevelExceeded {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::ScalingStatItemLevelExceeded {
                 bag_type_subclass,
                 item1,
                 item2,
             } => {
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::PurchaseLevelTooLow {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::PurchaseLevelTooLow {
                 bag_type_subclass,
                 item1,
                 item2,
             } => {
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::CantEquipNeedTalent {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::CantEquipNeedTalent {
                 bag_type_subclass,
                 item1,
                 item2,
             } => {
             }
-            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ItemMaxLimitCategoryEquippedExceeded {
+            crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE::ItemMaxLimitCategoryEquippedExceeded {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -4481,10 +4915,10 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
 
     fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
         // result: InventoryResult
-        w.write_all(&(self.result.as_int().to_le_bytes()))?;
+        w.write_all(&(self.as_int().to_le_bytes()))?;
 
-        match &self.result {
-            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::CantEquipLevelI {
+        match &self {
+            SMSG_INVENTORY_CHANGE_FAILURE::CantEquipLevelI {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -4500,7 +4934,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 w.write_all(&bag_type_subclass.to_le_bytes())?;
 
             }
-            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::CantEquipSkill {
+            SMSG_INVENTORY_CHANGE_FAILURE::CantEquipSkill {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -4515,7 +4949,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 w.write_all(&bag_type_subclass.to_le_bytes())?;
 
             }
-            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ItemDoesntGoToSlot {
+            SMSG_INVENTORY_CHANGE_FAILURE::ItemDoesntGoToSlot {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -4530,7 +4964,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 w.write_all(&bag_type_subclass.to_le_bytes())?;
 
             }
-            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::BagFull {
+            SMSG_INVENTORY_CHANGE_FAILURE::BagFull {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -4545,7 +4979,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 w.write_all(&bag_type_subclass.to_le_bytes())?;
 
             }
-            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::NonemptyBagOverOtherBag {
+            SMSG_INVENTORY_CHANGE_FAILURE::NonemptyBagOverOtherBag {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -4560,7 +4994,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 w.write_all(&bag_type_subclass.to_le_bytes())?;
 
             }
-            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::CantTradeEquipBags {
+            SMSG_INVENTORY_CHANGE_FAILURE::CantTradeEquipBags {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -4575,7 +5009,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 w.write_all(&bag_type_subclass.to_le_bytes())?;
 
             }
-            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::OnlyAmmoCanGoHere {
+            SMSG_INVENTORY_CHANGE_FAILURE::OnlyAmmoCanGoHere {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -4590,7 +5024,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 w.write_all(&bag_type_subclass.to_le_bytes())?;
 
             }
-            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::NoRequiredProficiency {
+            SMSG_INVENTORY_CHANGE_FAILURE::NoRequiredProficiency {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -4605,7 +5039,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 w.write_all(&bag_type_subclass.to_le_bytes())?;
 
             }
-            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::NoEquipmentSlotAvailable {
+            SMSG_INVENTORY_CHANGE_FAILURE::NoEquipmentSlotAvailable {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -4620,7 +5054,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 w.write_all(&bag_type_subclass.to_le_bytes())?;
 
             }
-            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::YouCanNeverUseThatItem {
+            SMSG_INVENTORY_CHANGE_FAILURE::YouCanNeverUseThatItem {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -4635,7 +5069,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 w.write_all(&bag_type_subclass.to_le_bytes())?;
 
             }
-            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::YouCanNeverUseThatItem2 {
+            SMSG_INVENTORY_CHANGE_FAILURE::YouCanNeverUseThatItem2 {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -4650,7 +5084,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 w.write_all(&bag_type_subclass.to_le_bytes())?;
 
             }
-            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::NoEquipmentSlotAvailable2 {
+            SMSG_INVENTORY_CHANGE_FAILURE::NoEquipmentSlotAvailable2 {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -4665,7 +5099,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 w.write_all(&bag_type_subclass.to_le_bytes())?;
 
             }
-            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::CantEquipWithTwohanded {
+            SMSG_INVENTORY_CHANGE_FAILURE::CantEquipWithTwohanded {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -4680,7 +5114,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 w.write_all(&bag_type_subclass.to_le_bytes())?;
 
             }
-            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::CantDualWield {
+            SMSG_INVENTORY_CHANGE_FAILURE::CantDualWield {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -4695,7 +5129,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 w.write_all(&bag_type_subclass.to_le_bytes())?;
 
             }
-            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ItemDoesntGoIntoBag {
+            SMSG_INVENTORY_CHANGE_FAILURE::ItemDoesntGoIntoBag {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -4710,7 +5144,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 w.write_all(&bag_type_subclass.to_le_bytes())?;
 
             }
-            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ItemDoesntGoIntoBag2 {
+            SMSG_INVENTORY_CHANGE_FAILURE::ItemDoesntGoIntoBag2 {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -4725,7 +5159,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 w.write_all(&bag_type_subclass.to_le_bytes())?;
 
             }
-            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::CantCarryMoreOfThis {
+            SMSG_INVENTORY_CHANGE_FAILURE::CantCarryMoreOfThis {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -4740,7 +5174,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 w.write_all(&bag_type_subclass.to_le_bytes())?;
 
             }
-            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::NoEquipmentSlotAvailable3 {
+            SMSG_INVENTORY_CHANGE_FAILURE::NoEquipmentSlotAvailable3 {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -4755,7 +5189,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 w.write_all(&bag_type_subclass.to_le_bytes())?;
 
             }
-            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ItemCantStack {
+            SMSG_INVENTORY_CHANGE_FAILURE::ItemCantStack {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -4770,7 +5204,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 w.write_all(&bag_type_subclass.to_le_bytes())?;
 
             }
-            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ItemCantBeEquipped {
+            SMSG_INVENTORY_CHANGE_FAILURE::ItemCantBeEquipped {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -4785,7 +5219,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 w.write_all(&bag_type_subclass.to_le_bytes())?;
 
             }
-            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ItemsCantBeSwapped {
+            SMSG_INVENTORY_CHANGE_FAILURE::ItemsCantBeSwapped {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -4800,7 +5234,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 w.write_all(&bag_type_subclass.to_le_bytes())?;
 
             }
-            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::SlotIsEmpty {
+            SMSG_INVENTORY_CHANGE_FAILURE::SlotIsEmpty {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -4815,7 +5249,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 w.write_all(&bag_type_subclass.to_le_bytes())?;
 
             }
-            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ItemNotFound {
+            SMSG_INVENTORY_CHANGE_FAILURE::ItemNotFound {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -4830,7 +5264,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 w.write_all(&bag_type_subclass.to_le_bytes())?;
 
             }
-            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::CantDropSoulbound {
+            SMSG_INVENTORY_CHANGE_FAILURE::CantDropSoulbound {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -4845,7 +5279,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 w.write_all(&bag_type_subclass.to_le_bytes())?;
 
             }
-            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::OutOfRange {
+            SMSG_INVENTORY_CHANGE_FAILURE::OutOfRange {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -4860,7 +5294,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 w.write_all(&bag_type_subclass.to_le_bytes())?;
 
             }
-            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::TriedToSplitMoreThanCount {
+            SMSG_INVENTORY_CHANGE_FAILURE::TriedToSplitMoreThanCount {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -4875,7 +5309,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 w.write_all(&bag_type_subclass.to_le_bytes())?;
 
             }
-            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::CouldntSplitItems {
+            SMSG_INVENTORY_CHANGE_FAILURE::CouldntSplitItems {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -4890,7 +5324,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 w.write_all(&bag_type_subclass.to_le_bytes())?;
 
             }
-            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::MissingReagent {
+            SMSG_INVENTORY_CHANGE_FAILURE::MissingReagent {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -4905,7 +5339,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 w.write_all(&bag_type_subclass.to_le_bytes())?;
 
             }
-            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::NotEnoughMoney {
+            SMSG_INVENTORY_CHANGE_FAILURE::NotEnoughMoney {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -4920,7 +5354,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 w.write_all(&bag_type_subclass.to_le_bytes())?;
 
             }
-            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::NotABag {
+            SMSG_INVENTORY_CHANGE_FAILURE::NotABag {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -4935,7 +5369,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 w.write_all(&bag_type_subclass.to_le_bytes())?;
 
             }
-            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::CanOnlyDoWithEmptyBags {
+            SMSG_INVENTORY_CHANGE_FAILURE::CanOnlyDoWithEmptyBags {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -4950,7 +5384,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 w.write_all(&bag_type_subclass.to_le_bytes())?;
 
             }
-            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::DontOwnThatItem {
+            SMSG_INVENTORY_CHANGE_FAILURE::DontOwnThatItem {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -4965,7 +5399,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 w.write_all(&bag_type_subclass.to_le_bytes())?;
 
             }
-            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::CanEquipOnly1Quiver {
+            SMSG_INVENTORY_CHANGE_FAILURE::CanEquipOnly1Quiver {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -4980,7 +5414,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 w.write_all(&bag_type_subclass.to_le_bytes())?;
 
             }
-            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::MustPurchaseThatBagSlot {
+            SMSG_INVENTORY_CHANGE_FAILURE::MustPurchaseThatBagSlot {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -4995,7 +5429,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 w.write_all(&bag_type_subclass.to_le_bytes())?;
 
             }
-            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::TooFarAwayFromBank {
+            SMSG_INVENTORY_CHANGE_FAILURE::TooFarAwayFromBank {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -5010,7 +5444,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 w.write_all(&bag_type_subclass.to_le_bytes())?;
 
             }
-            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ItemLocked {
+            SMSG_INVENTORY_CHANGE_FAILURE::ItemLocked {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -5025,7 +5459,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 w.write_all(&bag_type_subclass.to_le_bytes())?;
 
             }
-            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::YouAreStunned {
+            SMSG_INVENTORY_CHANGE_FAILURE::YouAreStunned {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -5040,7 +5474,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 w.write_all(&bag_type_subclass.to_le_bytes())?;
 
             }
-            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::YouAreDead {
+            SMSG_INVENTORY_CHANGE_FAILURE::YouAreDead {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -5055,7 +5489,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 w.write_all(&bag_type_subclass.to_le_bytes())?;
 
             }
-            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::CantDoRightNow {
+            SMSG_INVENTORY_CHANGE_FAILURE::CantDoRightNow {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -5070,7 +5504,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 w.write_all(&bag_type_subclass.to_le_bytes())?;
 
             }
-            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::IntBagError {
+            SMSG_INVENTORY_CHANGE_FAILURE::IntBagError {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -5085,7 +5519,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 w.write_all(&bag_type_subclass.to_le_bytes())?;
 
             }
-            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::CanEquipOnly1Bolt {
+            SMSG_INVENTORY_CHANGE_FAILURE::CanEquipOnly1Bolt {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -5100,7 +5534,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 w.write_all(&bag_type_subclass.to_le_bytes())?;
 
             }
-            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::CanEquipOnly1Ammopouch {
+            SMSG_INVENTORY_CHANGE_FAILURE::CanEquipOnly1Ammopouch {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -5115,7 +5549,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 w.write_all(&bag_type_subclass.to_le_bytes())?;
 
             }
-            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::StackableCantBeWrapped {
+            SMSG_INVENTORY_CHANGE_FAILURE::StackableCantBeWrapped {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -5130,7 +5564,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 w.write_all(&bag_type_subclass.to_le_bytes())?;
 
             }
-            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::EquippedCantBeWrapped {
+            SMSG_INVENTORY_CHANGE_FAILURE::EquippedCantBeWrapped {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -5145,7 +5579,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 w.write_all(&bag_type_subclass.to_le_bytes())?;
 
             }
-            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::WrappedCantBeWrapped {
+            SMSG_INVENTORY_CHANGE_FAILURE::WrappedCantBeWrapped {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -5160,7 +5594,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 w.write_all(&bag_type_subclass.to_le_bytes())?;
 
             }
-            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::BoundCantBeWrapped {
+            SMSG_INVENTORY_CHANGE_FAILURE::BoundCantBeWrapped {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -5175,7 +5609,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 w.write_all(&bag_type_subclass.to_le_bytes())?;
 
             }
-            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::UniqueCantBeWrapped {
+            SMSG_INVENTORY_CHANGE_FAILURE::UniqueCantBeWrapped {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -5190,7 +5624,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 w.write_all(&bag_type_subclass.to_le_bytes())?;
 
             }
-            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::BagsCantBeWrapped {
+            SMSG_INVENTORY_CHANGE_FAILURE::BagsCantBeWrapped {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -5205,7 +5639,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 w.write_all(&bag_type_subclass.to_le_bytes())?;
 
             }
-            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::AlreadyLooted {
+            SMSG_INVENTORY_CHANGE_FAILURE::AlreadyLooted {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -5220,7 +5654,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 w.write_all(&bag_type_subclass.to_le_bytes())?;
 
             }
-            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::InventoryFull {
+            SMSG_INVENTORY_CHANGE_FAILURE::InventoryFull {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -5235,7 +5669,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 w.write_all(&bag_type_subclass.to_le_bytes())?;
 
             }
-            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::BankFull {
+            SMSG_INVENTORY_CHANGE_FAILURE::BankFull {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -5250,7 +5684,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 w.write_all(&bag_type_subclass.to_le_bytes())?;
 
             }
-            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ItemIsCurrentlySoldOut {
+            SMSG_INVENTORY_CHANGE_FAILURE::ItemIsCurrentlySoldOut {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -5265,7 +5699,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 w.write_all(&bag_type_subclass.to_le_bytes())?;
 
             }
-            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::BagFull3 {
+            SMSG_INVENTORY_CHANGE_FAILURE::BagFull3 {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -5280,7 +5714,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 w.write_all(&bag_type_subclass.to_le_bytes())?;
 
             }
-            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ItemNotFound2 {
+            SMSG_INVENTORY_CHANGE_FAILURE::ItemNotFound2 {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -5295,7 +5729,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 w.write_all(&bag_type_subclass.to_le_bytes())?;
 
             }
-            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ItemCantStack2 {
+            SMSG_INVENTORY_CHANGE_FAILURE::ItemCantStack2 {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -5310,7 +5744,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 w.write_all(&bag_type_subclass.to_le_bytes())?;
 
             }
-            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::BagFull4 {
+            SMSG_INVENTORY_CHANGE_FAILURE::BagFull4 {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -5325,7 +5759,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 w.write_all(&bag_type_subclass.to_le_bytes())?;
 
             }
-            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ItemSoldOut {
+            SMSG_INVENTORY_CHANGE_FAILURE::ItemSoldOut {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -5340,7 +5774,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 w.write_all(&bag_type_subclass.to_le_bytes())?;
 
             }
-            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ObjectIsBusy {
+            SMSG_INVENTORY_CHANGE_FAILURE::ObjectIsBusy {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -5355,7 +5789,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 w.write_all(&bag_type_subclass.to_le_bytes())?;
 
             }
-            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::None {
+            SMSG_INVENTORY_CHANGE_FAILURE::None {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -5370,7 +5804,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 w.write_all(&bag_type_subclass.to_le_bytes())?;
 
             }
-            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::NotInCombat {
+            SMSG_INVENTORY_CHANGE_FAILURE::NotInCombat {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -5385,7 +5819,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 w.write_all(&bag_type_subclass.to_le_bytes())?;
 
             }
-            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::NotWhileDisarmed {
+            SMSG_INVENTORY_CHANGE_FAILURE::NotWhileDisarmed {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -5400,7 +5834,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 w.write_all(&bag_type_subclass.to_le_bytes())?;
 
             }
-            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::BagFull6 {
+            SMSG_INVENTORY_CHANGE_FAILURE::BagFull6 {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -5415,7 +5849,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 w.write_all(&bag_type_subclass.to_le_bytes())?;
 
             }
-            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::CantEquipRank {
+            SMSG_INVENTORY_CHANGE_FAILURE::CantEquipRank {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -5430,7 +5864,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 w.write_all(&bag_type_subclass.to_le_bytes())?;
 
             }
-            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::CantEquipReputation {
+            SMSG_INVENTORY_CHANGE_FAILURE::CantEquipReputation {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -5445,7 +5879,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 w.write_all(&bag_type_subclass.to_le_bytes())?;
 
             }
-            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::TooManySpecialBags {
+            SMSG_INVENTORY_CHANGE_FAILURE::TooManySpecialBags {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -5460,7 +5894,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 w.write_all(&bag_type_subclass.to_le_bytes())?;
 
             }
-            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::LootCantLootThatNow {
+            SMSG_INVENTORY_CHANGE_FAILURE::LootCantLootThatNow {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -5475,7 +5909,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 w.write_all(&bag_type_subclass.to_le_bytes())?;
 
             }
-            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ItemUniqueEquipable {
+            SMSG_INVENTORY_CHANGE_FAILURE::ItemUniqueEquipable {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -5490,7 +5924,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 w.write_all(&bag_type_subclass.to_le_bytes())?;
 
             }
-            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::VendorMissingTurnins {
+            SMSG_INVENTORY_CHANGE_FAILURE::VendorMissingTurnins {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -5505,7 +5939,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 w.write_all(&bag_type_subclass.to_le_bytes())?;
 
             }
-            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::NotEnoughHonorPoints {
+            SMSG_INVENTORY_CHANGE_FAILURE::NotEnoughHonorPoints {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -5520,7 +5954,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 w.write_all(&bag_type_subclass.to_le_bytes())?;
 
             }
-            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::NotEnoughArenaPoints {
+            SMSG_INVENTORY_CHANGE_FAILURE::NotEnoughArenaPoints {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -5535,7 +5969,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 w.write_all(&bag_type_subclass.to_le_bytes())?;
 
             }
-            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ItemMaxCountSocketed {
+            SMSG_INVENTORY_CHANGE_FAILURE::ItemMaxCountSocketed {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -5550,7 +5984,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 w.write_all(&bag_type_subclass.to_le_bytes())?;
 
             }
-            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::MailBoundItem {
+            SMSG_INVENTORY_CHANGE_FAILURE::MailBoundItem {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -5565,7 +5999,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 w.write_all(&bag_type_subclass.to_le_bytes())?;
 
             }
-            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::NoSplitWhileProspecting {
+            SMSG_INVENTORY_CHANGE_FAILURE::NoSplitWhileProspecting {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -5580,7 +6014,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 w.write_all(&bag_type_subclass.to_le_bytes())?;
 
             }
-            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ItemMaxCountEquippedSocketed {
+            SMSG_INVENTORY_CHANGE_FAILURE::ItemMaxCountEquippedSocketed {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -5595,7 +6029,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 w.write_all(&bag_type_subclass.to_le_bytes())?;
 
             }
-            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ItemUniqueEquippableSocketed {
+            SMSG_INVENTORY_CHANGE_FAILURE::ItemUniqueEquippableSocketed {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -5610,7 +6044,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 w.write_all(&bag_type_subclass.to_le_bytes())?;
 
             }
-            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::TooMuchGold {
+            SMSG_INVENTORY_CHANGE_FAILURE::TooMuchGold {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -5625,7 +6059,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 w.write_all(&bag_type_subclass.to_le_bytes())?;
 
             }
-            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::NotDuringArenaMatch {
+            SMSG_INVENTORY_CHANGE_FAILURE::NotDuringArenaMatch {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -5640,7 +6074,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 w.write_all(&bag_type_subclass.to_le_bytes())?;
 
             }
-            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::CannotTradeThat {
+            SMSG_INVENTORY_CHANGE_FAILURE::CannotTradeThat {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -5655,7 +6089,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 w.write_all(&bag_type_subclass.to_le_bytes())?;
 
             }
-            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::PersonalArenaRatingTooLow {
+            SMSG_INVENTORY_CHANGE_FAILURE::PersonalArenaRatingTooLow {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -5670,7 +6104,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 w.write_all(&bag_type_subclass.to_le_bytes())?;
 
             }
-            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::EventAutoequipBindConfirm {
+            SMSG_INVENTORY_CHANGE_FAILURE::EventAutoequipBindConfirm {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -5685,7 +6119,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 w.write_all(&bag_type_subclass.to_le_bytes())?;
 
             }
-            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ArtefactsOnlyForOwnCharacters {
+            SMSG_INVENTORY_CHANGE_FAILURE::ArtefactsOnlyForOwnCharacters {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -5700,7 +6134,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 w.write_all(&bag_type_subclass.to_le_bytes())?;
 
             }
-            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ItemMaxLimitCategoryCountExceeded {
+            SMSG_INVENTORY_CHANGE_FAILURE::ItemMaxLimitCategoryCountExceeded {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -5715,7 +6149,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 w.write_all(&bag_type_subclass.to_le_bytes())?;
 
             }
-            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ItemMaxLimitCategorySocketedExceeded {
+            SMSG_INVENTORY_CHANGE_FAILURE::ItemMaxLimitCategorySocketedExceeded {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -5730,7 +6164,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 w.write_all(&bag_type_subclass.to_le_bytes())?;
 
             }
-            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ScalingStatItemLevelExceeded {
+            SMSG_INVENTORY_CHANGE_FAILURE::ScalingStatItemLevelExceeded {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -5745,7 +6179,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 w.write_all(&bag_type_subclass.to_le_bytes())?;
 
             }
-            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::PurchaseLevelTooLow {
+            SMSG_INVENTORY_CHANGE_FAILURE::PurchaseLevelTooLow {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -5760,7 +6194,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 w.write_all(&bag_type_subclass.to_le_bytes())?;
 
             }
-            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::CantEquipNeedTalent {
+            SMSG_INVENTORY_CHANGE_FAILURE::CantEquipNeedTalent {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -5775,7 +6209,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 w.write_all(&bag_type_subclass.to_le_bytes())?;
 
             }
-            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ItemMaxLimitCategoryEquippedExceeded {
+            SMSG_INVENTORY_CHANGE_FAILURE::ItemMaxLimitCategoryEquippedExceeded {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -5793,8 +6227,8 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
             _ => {}
         }
 
-        match &self.result {
-            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::CantEquipLevelI {
+        match &self {
+            SMSG_INVENTORY_CHANGE_FAILURE::CantEquipLevelI {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -5804,517 +6238,517 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 w.write_all(&u32::from(required_level.as_int()).to_le_bytes())?;
 
             }
-            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::CantEquipSkill {
+            SMSG_INVENTORY_CHANGE_FAILURE::CantEquipSkill {
                 bag_type_subclass,
                 item1,
                 item2,
             } => {
             }
-            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ItemDoesntGoToSlot {
+            SMSG_INVENTORY_CHANGE_FAILURE::ItemDoesntGoToSlot {
                 bag_type_subclass,
                 item1,
                 item2,
             } => {
             }
-            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::BagFull {
+            SMSG_INVENTORY_CHANGE_FAILURE::BagFull {
                 bag_type_subclass,
                 item1,
                 item2,
             } => {
             }
-            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::NonemptyBagOverOtherBag {
+            SMSG_INVENTORY_CHANGE_FAILURE::NonemptyBagOverOtherBag {
                 bag_type_subclass,
                 item1,
                 item2,
             } => {
             }
-            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::CantTradeEquipBags {
+            SMSG_INVENTORY_CHANGE_FAILURE::CantTradeEquipBags {
                 bag_type_subclass,
                 item1,
                 item2,
             } => {
             }
-            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::OnlyAmmoCanGoHere {
+            SMSG_INVENTORY_CHANGE_FAILURE::OnlyAmmoCanGoHere {
                 bag_type_subclass,
                 item1,
                 item2,
             } => {
             }
-            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::NoRequiredProficiency {
+            SMSG_INVENTORY_CHANGE_FAILURE::NoRequiredProficiency {
                 bag_type_subclass,
                 item1,
                 item2,
             } => {
             }
-            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::NoEquipmentSlotAvailable {
+            SMSG_INVENTORY_CHANGE_FAILURE::NoEquipmentSlotAvailable {
                 bag_type_subclass,
                 item1,
                 item2,
             } => {
             }
-            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::YouCanNeverUseThatItem {
+            SMSG_INVENTORY_CHANGE_FAILURE::YouCanNeverUseThatItem {
                 bag_type_subclass,
                 item1,
                 item2,
             } => {
             }
-            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::YouCanNeverUseThatItem2 {
+            SMSG_INVENTORY_CHANGE_FAILURE::YouCanNeverUseThatItem2 {
                 bag_type_subclass,
                 item1,
                 item2,
             } => {
             }
-            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::NoEquipmentSlotAvailable2 {
+            SMSG_INVENTORY_CHANGE_FAILURE::NoEquipmentSlotAvailable2 {
                 bag_type_subclass,
                 item1,
                 item2,
             } => {
             }
-            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::CantEquipWithTwohanded {
+            SMSG_INVENTORY_CHANGE_FAILURE::CantEquipWithTwohanded {
                 bag_type_subclass,
                 item1,
                 item2,
             } => {
             }
-            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::CantDualWield {
+            SMSG_INVENTORY_CHANGE_FAILURE::CantDualWield {
                 bag_type_subclass,
                 item1,
                 item2,
             } => {
             }
-            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ItemDoesntGoIntoBag {
+            SMSG_INVENTORY_CHANGE_FAILURE::ItemDoesntGoIntoBag {
                 bag_type_subclass,
                 item1,
                 item2,
             } => {
             }
-            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ItemDoesntGoIntoBag2 {
+            SMSG_INVENTORY_CHANGE_FAILURE::ItemDoesntGoIntoBag2 {
                 bag_type_subclass,
                 item1,
                 item2,
             } => {
             }
-            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::CantCarryMoreOfThis {
+            SMSG_INVENTORY_CHANGE_FAILURE::CantCarryMoreOfThis {
                 bag_type_subclass,
                 item1,
                 item2,
             } => {
             }
-            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::NoEquipmentSlotAvailable3 {
+            SMSG_INVENTORY_CHANGE_FAILURE::NoEquipmentSlotAvailable3 {
                 bag_type_subclass,
                 item1,
                 item2,
             } => {
             }
-            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ItemCantStack {
+            SMSG_INVENTORY_CHANGE_FAILURE::ItemCantStack {
                 bag_type_subclass,
                 item1,
                 item2,
             } => {
             }
-            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ItemCantBeEquipped {
+            SMSG_INVENTORY_CHANGE_FAILURE::ItemCantBeEquipped {
                 bag_type_subclass,
                 item1,
                 item2,
             } => {
             }
-            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ItemsCantBeSwapped {
+            SMSG_INVENTORY_CHANGE_FAILURE::ItemsCantBeSwapped {
                 bag_type_subclass,
                 item1,
                 item2,
             } => {
             }
-            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::SlotIsEmpty {
+            SMSG_INVENTORY_CHANGE_FAILURE::SlotIsEmpty {
                 bag_type_subclass,
                 item1,
                 item2,
             } => {
             }
-            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ItemNotFound {
+            SMSG_INVENTORY_CHANGE_FAILURE::ItemNotFound {
                 bag_type_subclass,
                 item1,
                 item2,
             } => {
             }
-            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::CantDropSoulbound {
+            SMSG_INVENTORY_CHANGE_FAILURE::CantDropSoulbound {
                 bag_type_subclass,
                 item1,
                 item2,
             } => {
             }
-            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::OutOfRange {
+            SMSG_INVENTORY_CHANGE_FAILURE::OutOfRange {
                 bag_type_subclass,
                 item1,
                 item2,
             } => {
             }
-            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::TriedToSplitMoreThanCount {
+            SMSG_INVENTORY_CHANGE_FAILURE::TriedToSplitMoreThanCount {
                 bag_type_subclass,
                 item1,
                 item2,
             } => {
             }
-            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::CouldntSplitItems {
+            SMSG_INVENTORY_CHANGE_FAILURE::CouldntSplitItems {
                 bag_type_subclass,
                 item1,
                 item2,
             } => {
             }
-            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::MissingReagent {
+            SMSG_INVENTORY_CHANGE_FAILURE::MissingReagent {
                 bag_type_subclass,
                 item1,
                 item2,
             } => {
             }
-            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::NotEnoughMoney {
+            SMSG_INVENTORY_CHANGE_FAILURE::NotEnoughMoney {
                 bag_type_subclass,
                 item1,
                 item2,
             } => {
             }
-            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::NotABag {
+            SMSG_INVENTORY_CHANGE_FAILURE::NotABag {
                 bag_type_subclass,
                 item1,
                 item2,
             } => {
             }
-            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::CanOnlyDoWithEmptyBags {
+            SMSG_INVENTORY_CHANGE_FAILURE::CanOnlyDoWithEmptyBags {
                 bag_type_subclass,
                 item1,
                 item2,
             } => {
             }
-            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::DontOwnThatItem {
+            SMSG_INVENTORY_CHANGE_FAILURE::DontOwnThatItem {
                 bag_type_subclass,
                 item1,
                 item2,
             } => {
             }
-            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::CanEquipOnly1Quiver {
+            SMSG_INVENTORY_CHANGE_FAILURE::CanEquipOnly1Quiver {
                 bag_type_subclass,
                 item1,
                 item2,
             } => {
             }
-            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::MustPurchaseThatBagSlot {
+            SMSG_INVENTORY_CHANGE_FAILURE::MustPurchaseThatBagSlot {
                 bag_type_subclass,
                 item1,
                 item2,
             } => {
             }
-            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::TooFarAwayFromBank {
+            SMSG_INVENTORY_CHANGE_FAILURE::TooFarAwayFromBank {
                 bag_type_subclass,
                 item1,
                 item2,
             } => {
             }
-            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ItemLocked {
+            SMSG_INVENTORY_CHANGE_FAILURE::ItemLocked {
                 bag_type_subclass,
                 item1,
                 item2,
             } => {
             }
-            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::YouAreStunned {
+            SMSG_INVENTORY_CHANGE_FAILURE::YouAreStunned {
                 bag_type_subclass,
                 item1,
                 item2,
             } => {
             }
-            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::YouAreDead {
+            SMSG_INVENTORY_CHANGE_FAILURE::YouAreDead {
                 bag_type_subclass,
                 item1,
                 item2,
             } => {
             }
-            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::CantDoRightNow {
+            SMSG_INVENTORY_CHANGE_FAILURE::CantDoRightNow {
                 bag_type_subclass,
                 item1,
                 item2,
             } => {
             }
-            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::IntBagError {
+            SMSG_INVENTORY_CHANGE_FAILURE::IntBagError {
                 bag_type_subclass,
                 item1,
                 item2,
             } => {
             }
-            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::CanEquipOnly1Bolt {
+            SMSG_INVENTORY_CHANGE_FAILURE::CanEquipOnly1Bolt {
                 bag_type_subclass,
                 item1,
                 item2,
             } => {
             }
-            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::CanEquipOnly1Ammopouch {
+            SMSG_INVENTORY_CHANGE_FAILURE::CanEquipOnly1Ammopouch {
                 bag_type_subclass,
                 item1,
                 item2,
             } => {
             }
-            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::StackableCantBeWrapped {
+            SMSG_INVENTORY_CHANGE_FAILURE::StackableCantBeWrapped {
                 bag_type_subclass,
                 item1,
                 item2,
             } => {
             }
-            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::EquippedCantBeWrapped {
+            SMSG_INVENTORY_CHANGE_FAILURE::EquippedCantBeWrapped {
                 bag_type_subclass,
                 item1,
                 item2,
             } => {
             }
-            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::WrappedCantBeWrapped {
+            SMSG_INVENTORY_CHANGE_FAILURE::WrappedCantBeWrapped {
                 bag_type_subclass,
                 item1,
                 item2,
             } => {
             }
-            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::BoundCantBeWrapped {
+            SMSG_INVENTORY_CHANGE_FAILURE::BoundCantBeWrapped {
                 bag_type_subclass,
                 item1,
                 item2,
             } => {
             }
-            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::UniqueCantBeWrapped {
+            SMSG_INVENTORY_CHANGE_FAILURE::UniqueCantBeWrapped {
                 bag_type_subclass,
                 item1,
                 item2,
             } => {
             }
-            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::BagsCantBeWrapped {
+            SMSG_INVENTORY_CHANGE_FAILURE::BagsCantBeWrapped {
                 bag_type_subclass,
                 item1,
                 item2,
             } => {
             }
-            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::AlreadyLooted {
+            SMSG_INVENTORY_CHANGE_FAILURE::AlreadyLooted {
                 bag_type_subclass,
                 item1,
                 item2,
             } => {
             }
-            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::InventoryFull {
+            SMSG_INVENTORY_CHANGE_FAILURE::InventoryFull {
                 bag_type_subclass,
                 item1,
                 item2,
             } => {
             }
-            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::BankFull {
+            SMSG_INVENTORY_CHANGE_FAILURE::BankFull {
                 bag_type_subclass,
                 item1,
                 item2,
             } => {
             }
-            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ItemIsCurrentlySoldOut {
+            SMSG_INVENTORY_CHANGE_FAILURE::ItemIsCurrentlySoldOut {
                 bag_type_subclass,
                 item1,
                 item2,
             } => {
             }
-            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::BagFull3 {
+            SMSG_INVENTORY_CHANGE_FAILURE::BagFull3 {
                 bag_type_subclass,
                 item1,
                 item2,
             } => {
             }
-            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ItemNotFound2 {
+            SMSG_INVENTORY_CHANGE_FAILURE::ItemNotFound2 {
                 bag_type_subclass,
                 item1,
                 item2,
             } => {
             }
-            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ItemCantStack2 {
+            SMSG_INVENTORY_CHANGE_FAILURE::ItemCantStack2 {
                 bag_type_subclass,
                 item1,
                 item2,
             } => {
             }
-            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::BagFull4 {
+            SMSG_INVENTORY_CHANGE_FAILURE::BagFull4 {
                 bag_type_subclass,
                 item1,
                 item2,
             } => {
             }
-            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ItemSoldOut {
+            SMSG_INVENTORY_CHANGE_FAILURE::ItemSoldOut {
                 bag_type_subclass,
                 item1,
                 item2,
             } => {
             }
-            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ObjectIsBusy {
+            SMSG_INVENTORY_CHANGE_FAILURE::ObjectIsBusy {
                 bag_type_subclass,
                 item1,
                 item2,
             } => {
             }
-            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::None {
+            SMSG_INVENTORY_CHANGE_FAILURE::None {
                 bag_type_subclass,
                 item1,
                 item2,
             } => {
             }
-            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::NotInCombat {
+            SMSG_INVENTORY_CHANGE_FAILURE::NotInCombat {
                 bag_type_subclass,
                 item1,
                 item2,
             } => {
             }
-            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::NotWhileDisarmed {
+            SMSG_INVENTORY_CHANGE_FAILURE::NotWhileDisarmed {
                 bag_type_subclass,
                 item1,
                 item2,
             } => {
             }
-            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::BagFull6 {
+            SMSG_INVENTORY_CHANGE_FAILURE::BagFull6 {
                 bag_type_subclass,
                 item1,
                 item2,
             } => {
             }
-            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::CantEquipRank {
+            SMSG_INVENTORY_CHANGE_FAILURE::CantEquipRank {
                 bag_type_subclass,
                 item1,
                 item2,
             } => {
             }
-            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::CantEquipReputation {
+            SMSG_INVENTORY_CHANGE_FAILURE::CantEquipReputation {
                 bag_type_subclass,
                 item1,
                 item2,
             } => {
             }
-            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::TooManySpecialBags {
+            SMSG_INVENTORY_CHANGE_FAILURE::TooManySpecialBags {
                 bag_type_subclass,
                 item1,
                 item2,
             } => {
             }
-            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::LootCantLootThatNow {
+            SMSG_INVENTORY_CHANGE_FAILURE::LootCantLootThatNow {
                 bag_type_subclass,
                 item1,
                 item2,
             } => {
             }
-            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ItemUniqueEquipable {
+            SMSG_INVENTORY_CHANGE_FAILURE::ItemUniqueEquipable {
                 bag_type_subclass,
                 item1,
                 item2,
             } => {
             }
-            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::VendorMissingTurnins {
+            SMSG_INVENTORY_CHANGE_FAILURE::VendorMissingTurnins {
                 bag_type_subclass,
                 item1,
                 item2,
             } => {
             }
-            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::NotEnoughHonorPoints {
+            SMSG_INVENTORY_CHANGE_FAILURE::NotEnoughHonorPoints {
                 bag_type_subclass,
                 item1,
                 item2,
             } => {
             }
-            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::NotEnoughArenaPoints {
+            SMSG_INVENTORY_CHANGE_FAILURE::NotEnoughArenaPoints {
                 bag_type_subclass,
                 item1,
                 item2,
             } => {
             }
-            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ItemMaxCountSocketed {
+            SMSG_INVENTORY_CHANGE_FAILURE::ItemMaxCountSocketed {
                 bag_type_subclass,
                 item1,
                 item2,
             } => {
             }
-            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::MailBoundItem {
+            SMSG_INVENTORY_CHANGE_FAILURE::MailBoundItem {
                 bag_type_subclass,
                 item1,
                 item2,
             } => {
             }
-            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::NoSplitWhileProspecting {
+            SMSG_INVENTORY_CHANGE_FAILURE::NoSplitWhileProspecting {
                 bag_type_subclass,
                 item1,
                 item2,
             } => {
             }
-            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ItemMaxCountEquippedSocketed {
+            SMSG_INVENTORY_CHANGE_FAILURE::ItemMaxCountEquippedSocketed {
                 bag_type_subclass,
                 item1,
                 item2,
             } => {
             }
-            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ItemUniqueEquippableSocketed {
+            SMSG_INVENTORY_CHANGE_FAILURE::ItemUniqueEquippableSocketed {
                 bag_type_subclass,
                 item1,
                 item2,
             } => {
             }
-            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::TooMuchGold {
+            SMSG_INVENTORY_CHANGE_FAILURE::TooMuchGold {
                 bag_type_subclass,
                 item1,
                 item2,
             } => {
             }
-            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::NotDuringArenaMatch {
+            SMSG_INVENTORY_CHANGE_FAILURE::NotDuringArenaMatch {
                 bag_type_subclass,
                 item1,
                 item2,
             } => {
             }
-            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::CannotTradeThat {
+            SMSG_INVENTORY_CHANGE_FAILURE::CannotTradeThat {
                 bag_type_subclass,
                 item1,
                 item2,
             } => {
             }
-            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::PersonalArenaRatingTooLow {
+            SMSG_INVENTORY_CHANGE_FAILURE::PersonalArenaRatingTooLow {
                 bag_type_subclass,
                 item1,
                 item2,
             } => {
             }
-            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::EventAutoequipBindConfirm {
+            SMSG_INVENTORY_CHANGE_FAILURE::EventAutoequipBindConfirm {
                 bag_type_subclass,
                 item1,
                 item2,
             } => {
             }
-            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ArtefactsOnlyForOwnCharacters {
+            SMSG_INVENTORY_CHANGE_FAILURE::ArtefactsOnlyForOwnCharacters {
                 bag_type_subclass,
                 item1,
                 item2,
             } => {
             }
-            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ItemMaxLimitCategoryCountExceeded {
+            SMSG_INVENTORY_CHANGE_FAILURE::ItemMaxLimitCategoryCountExceeded {
                 bag_type_subclass,
                 item1,
                 item2,
             } => {
             }
-            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ItemMaxLimitCategorySocketedExceeded {
+            SMSG_INVENTORY_CHANGE_FAILURE::ItemMaxLimitCategorySocketedExceeded {
                 bag_type_subclass,
                 item1,
                 item2,
             } => {
             }
-            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ScalingStatItemLevelExceeded {
+            SMSG_INVENTORY_CHANGE_FAILURE::ScalingStatItemLevelExceeded {
                 bag_type_subclass,
                 item1,
                 item2,
             } => {
             }
-            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::PurchaseLevelTooLow {
+            SMSG_INVENTORY_CHANGE_FAILURE::PurchaseLevelTooLow {
                 bag_type_subclass,
                 item1,
                 item2,
             } => {
             }
-            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::CantEquipNeedTalent {
+            SMSG_INVENTORY_CHANGE_FAILURE::CantEquipNeedTalent {
                 bag_type_subclass,
                 item1,
                 item2,
             } => {
             }
-            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ItemMaxLimitCategoryEquippedExceeded {
+            SMSG_INVENTORY_CHANGE_FAILURE::ItemMaxLimitCategoryEquippedExceeded {
                 bag_type_subclass,
                 item1,
                 item2,
@@ -6337,652 +6771,7 @@ impl crate::wrath::ServerMessage for SMSG_INVENTORY_CHANGE_FAILURE {}
 
 impl SMSG_INVENTORY_CHANGE_FAILURE {
     pub(crate) const fn size(&self) -> usize {
-        self.result.size() // result: SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult
-    }
-}
-
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord)]
-pub enum SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult {
-    Ok,
-    CantEquipLevelI {
-        bag_type_subclass: u8,
-        item1: Guid,
-        item2: Guid,
-        required_level: Level,
-    },
-    CantEquipSkill {
-        bag_type_subclass: u8,
-        item1: Guid,
-        item2: Guid,
-    },
-    ItemDoesntGoToSlot {
-        bag_type_subclass: u8,
-        item1: Guid,
-        item2: Guid,
-    },
-    BagFull {
-        bag_type_subclass: u8,
-        item1: Guid,
-        item2: Guid,
-    },
-    NonemptyBagOverOtherBag {
-        bag_type_subclass: u8,
-        item1: Guid,
-        item2: Guid,
-    },
-    CantTradeEquipBags {
-        bag_type_subclass: u8,
-        item1: Guid,
-        item2: Guid,
-    },
-    OnlyAmmoCanGoHere {
-        bag_type_subclass: u8,
-        item1: Guid,
-        item2: Guid,
-    },
-    NoRequiredProficiency {
-        bag_type_subclass: u8,
-        item1: Guid,
-        item2: Guid,
-    },
-    NoEquipmentSlotAvailable {
-        bag_type_subclass: u8,
-        item1: Guid,
-        item2: Guid,
-    },
-    YouCanNeverUseThatItem {
-        bag_type_subclass: u8,
-        item1: Guid,
-        item2: Guid,
-    },
-    YouCanNeverUseThatItem2 {
-        bag_type_subclass: u8,
-        item1: Guid,
-        item2: Guid,
-    },
-    NoEquipmentSlotAvailable2 {
-        bag_type_subclass: u8,
-        item1: Guid,
-        item2: Guid,
-    },
-    CantEquipWithTwohanded {
-        bag_type_subclass: u8,
-        item1: Guid,
-        item2: Guid,
-    },
-    CantDualWield {
-        bag_type_subclass: u8,
-        item1: Guid,
-        item2: Guid,
-    },
-    ItemDoesntGoIntoBag {
-        bag_type_subclass: u8,
-        item1: Guid,
-        item2: Guid,
-    },
-    ItemDoesntGoIntoBag2 {
-        bag_type_subclass: u8,
-        item1: Guid,
-        item2: Guid,
-    },
-    CantCarryMoreOfThis {
-        bag_type_subclass: u8,
-        item1: Guid,
-        item2: Guid,
-    },
-    NoEquipmentSlotAvailable3 {
-        bag_type_subclass: u8,
-        item1: Guid,
-        item2: Guid,
-    },
-    ItemCantStack {
-        bag_type_subclass: u8,
-        item1: Guid,
-        item2: Guid,
-    },
-    ItemCantBeEquipped {
-        bag_type_subclass: u8,
-        item1: Guid,
-        item2: Guid,
-    },
-    ItemsCantBeSwapped {
-        bag_type_subclass: u8,
-        item1: Guid,
-        item2: Guid,
-    },
-    SlotIsEmpty {
-        bag_type_subclass: u8,
-        item1: Guid,
-        item2: Guid,
-    },
-    ItemNotFound {
-        bag_type_subclass: u8,
-        item1: Guid,
-        item2: Guid,
-    },
-    CantDropSoulbound {
-        bag_type_subclass: u8,
-        item1: Guid,
-        item2: Guid,
-    },
-    OutOfRange {
-        bag_type_subclass: u8,
-        item1: Guid,
-        item2: Guid,
-    },
-    TriedToSplitMoreThanCount {
-        bag_type_subclass: u8,
-        item1: Guid,
-        item2: Guid,
-    },
-    CouldntSplitItems {
-        bag_type_subclass: u8,
-        item1: Guid,
-        item2: Guid,
-    },
-    MissingReagent {
-        bag_type_subclass: u8,
-        item1: Guid,
-        item2: Guid,
-    },
-    NotEnoughMoney {
-        bag_type_subclass: u8,
-        item1: Guid,
-        item2: Guid,
-    },
-    NotABag {
-        bag_type_subclass: u8,
-        item1: Guid,
-        item2: Guid,
-    },
-    CanOnlyDoWithEmptyBags {
-        bag_type_subclass: u8,
-        item1: Guid,
-        item2: Guid,
-    },
-    DontOwnThatItem {
-        bag_type_subclass: u8,
-        item1: Guid,
-        item2: Guid,
-    },
-    CanEquipOnly1Quiver {
-        bag_type_subclass: u8,
-        item1: Guid,
-        item2: Guid,
-    },
-    MustPurchaseThatBagSlot {
-        bag_type_subclass: u8,
-        item1: Guid,
-        item2: Guid,
-    },
-    TooFarAwayFromBank {
-        bag_type_subclass: u8,
-        item1: Guid,
-        item2: Guid,
-    },
-    ItemLocked {
-        bag_type_subclass: u8,
-        item1: Guid,
-        item2: Guid,
-    },
-    YouAreStunned {
-        bag_type_subclass: u8,
-        item1: Guid,
-        item2: Guid,
-    },
-    YouAreDead {
-        bag_type_subclass: u8,
-        item1: Guid,
-        item2: Guid,
-    },
-    CantDoRightNow {
-        bag_type_subclass: u8,
-        item1: Guid,
-        item2: Guid,
-    },
-    IntBagError {
-        bag_type_subclass: u8,
-        item1: Guid,
-        item2: Guid,
-    },
-    CanEquipOnly1Bolt {
-        bag_type_subclass: u8,
-        item1: Guid,
-        item2: Guid,
-    },
-    CanEquipOnly1Ammopouch {
-        bag_type_subclass: u8,
-        item1: Guid,
-        item2: Guid,
-    },
-    StackableCantBeWrapped {
-        bag_type_subclass: u8,
-        item1: Guid,
-        item2: Guid,
-    },
-    EquippedCantBeWrapped {
-        bag_type_subclass: u8,
-        item1: Guid,
-        item2: Guid,
-    },
-    WrappedCantBeWrapped {
-        bag_type_subclass: u8,
-        item1: Guid,
-        item2: Guid,
-    },
-    BoundCantBeWrapped {
-        bag_type_subclass: u8,
-        item1: Guid,
-        item2: Guid,
-    },
-    UniqueCantBeWrapped {
-        bag_type_subclass: u8,
-        item1: Guid,
-        item2: Guid,
-    },
-    BagsCantBeWrapped {
-        bag_type_subclass: u8,
-        item1: Guid,
-        item2: Guid,
-    },
-    AlreadyLooted {
-        bag_type_subclass: u8,
-        item1: Guid,
-        item2: Guid,
-    },
-    InventoryFull {
-        bag_type_subclass: u8,
-        item1: Guid,
-        item2: Guid,
-    },
-    BankFull {
-        bag_type_subclass: u8,
-        item1: Guid,
-        item2: Guid,
-    },
-    ItemIsCurrentlySoldOut {
-        bag_type_subclass: u8,
-        item1: Guid,
-        item2: Guid,
-    },
-    BagFull3 {
-        bag_type_subclass: u8,
-        item1: Guid,
-        item2: Guid,
-    },
-    ItemNotFound2 {
-        bag_type_subclass: u8,
-        item1: Guid,
-        item2: Guid,
-    },
-    ItemCantStack2 {
-        bag_type_subclass: u8,
-        item1: Guid,
-        item2: Guid,
-    },
-    BagFull4 {
-        bag_type_subclass: u8,
-        item1: Guid,
-        item2: Guid,
-    },
-    ItemSoldOut {
-        bag_type_subclass: u8,
-        item1: Guid,
-        item2: Guid,
-    },
-    ObjectIsBusy {
-        bag_type_subclass: u8,
-        item1: Guid,
-        item2: Guid,
-    },
-    None {
-        bag_type_subclass: u8,
-        item1: Guid,
-        item2: Guid,
-    },
-    NotInCombat {
-        bag_type_subclass: u8,
-        item1: Guid,
-        item2: Guid,
-    },
-    NotWhileDisarmed {
-        bag_type_subclass: u8,
-        item1: Guid,
-        item2: Guid,
-    },
-    BagFull6 {
-        bag_type_subclass: u8,
-        item1: Guid,
-        item2: Guid,
-    },
-    CantEquipRank {
-        bag_type_subclass: u8,
-        item1: Guid,
-        item2: Guid,
-    },
-    CantEquipReputation {
-        bag_type_subclass: u8,
-        item1: Guid,
-        item2: Guid,
-    },
-    TooManySpecialBags {
-        bag_type_subclass: u8,
-        item1: Guid,
-        item2: Guid,
-    },
-    LootCantLootThatNow {
-        bag_type_subclass: u8,
-        item1: Guid,
-        item2: Guid,
-    },
-    ItemUniqueEquipable {
-        bag_type_subclass: u8,
-        item1: Guid,
-        item2: Guid,
-    },
-    VendorMissingTurnins {
-        bag_type_subclass: u8,
-        item1: Guid,
-        item2: Guid,
-    },
-    NotEnoughHonorPoints {
-        bag_type_subclass: u8,
-        item1: Guid,
-        item2: Guid,
-    },
-    NotEnoughArenaPoints {
-        bag_type_subclass: u8,
-        item1: Guid,
-        item2: Guid,
-    },
-    ItemMaxCountSocketed {
-        bag_type_subclass: u8,
-        item1: Guid,
-        item2: Guid,
-    },
-    MailBoundItem {
-        bag_type_subclass: u8,
-        item1: Guid,
-        item2: Guid,
-    },
-    NoSplitWhileProspecting {
-        bag_type_subclass: u8,
-        item1: Guid,
-        item2: Guid,
-    },
-    ItemMaxCountEquippedSocketed {
-        bag_type_subclass: u8,
-        item1: Guid,
-        item2: Guid,
-    },
-    ItemUniqueEquippableSocketed {
-        bag_type_subclass: u8,
-        item1: Guid,
-        item2: Guid,
-    },
-    TooMuchGold {
-        bag_type_subclass: u8,
-        item1: Guid,
-        item2: Guid,
-    },
-    NotDuringArenaMatch {
-        bag_type_subclass: u8,
-        item1: Guid,
-        item2: Guid,
-    },
-    CannotTradeThat {
-        bag_type_subclass: u8,
-        item1: Guid,
-        item2: Guid,
-    },
-    PersonalArenaRatingTooLow {
-        bag_type_subclass: u8,
-        item1: Guid,
-        item2: Guid,
-    },
-    EventAutoequipBindConfirm {
-        bag_type_subclass: u8,
-        item1: Guid,
-        item2: Guid,
-    },
-    ArtefactsOnlyForOwnCharacters {
-        bag_type_subclass: u8,
-        item1: Guid,
-        item2: Guid,
-    },
-    ItemMaxLimitCategoryCountExceeded {
-        bag_type_subclass: u8,
-        item1: Guid,
-        item2: Guid,
-    },
-    ItemMaxLimitCategorySocketedExceeded {
-        bag_type_subclass: u8,
-        item1: Guid,
-        item2: Guid,
-    },
-    ScalingStatItemLevelExceeded {
-        bag_type_subclass: u8,
-        item1: Guid,
-        item2: Guid,
-    },
-    PurchaseLevelTooLow {
-        bag_type_subclass: u8,
-        item1: Guid,
-        item2: Guid,
-    },
-    CantEquipNeedTalent {
-        bag_type_subclass: u8,
-        item1: Guid,
-        item2: Guid,
-    },
-    ItemMaxLimitCategoryEquippedExceeded {
-        bag_type_subclass: u8,
-        item1: Guid,
-        item2: Guid,
-    },
-}
-
-impl Default for SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult {
-    fn default() -> Self {
-        // First enumerator without any fields
-        Self::Ok
-    }
-}
-
-impl SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult {
-    pub(crate) const fn as_int(&self) -> u8 {
-        match self {
-            Self::Ok => 0,
-            Self::CantEquipLevelI { .. } => 1,
-            Self::CantEquipSkill { .. } => 2,
-            Self::ItemDoesntGoToSlot { .. } => 3,
-            Self::BagFull { .. } => 4,
-            Self::NonemptyBagOverOtherBag { .. } => 5,
-            Self::CantTradeEquipBags { .. } => 6,
-            Self::OnlyAmmoCanGoHere { .. } => 7,
-            Self::NoRequiredProficiency { .. } => 8,
-            Self::NoEquipmentSlotAvailable { .. } => 9,
-            Self::YouCanNeverUseThatItem { .. } => 10,
-            Self::YouCanNeverUseThatItem2 { .. } => 11,
-            Self::NoEquipmentSlotAvailable2 { .. } => 12,
-            Self::CantEquipWithTwohanded { .. } => 13,
-            Self::CantDualWield { .. } => 14,
-            Self::ItemDoesntGoIntoBag { .. } => 15,
-            Self::ItemDoesntGoIntoBag2 { .. } => 16,
-            Self::CantCarryMoreOfThis { .. } => 17,
-            Self::NoEquipmentSlotAvailable3 { .. } => 18,
-            Self::ItemCantStack { .. } => 19,
-            Self::ItemCantBeEquipped { .. } => 20,
-            Self::ItemsCantBeSwapped { .. } => 21,
-            Self::SlotIsEmpty { .. } => 22,
-            Self::ItemNotFound { .. } => 23,
-            Self::CantDropSoulbound { .. } => 24,
-            Self::OutOfRange { .. } => 25,
-            Self::TriedToSplitMoreThanCount { .. } => 26,
-            Self::CouldntSplitItems { .. } => 27,
-            Self::MissingReagent { .. } => 28,
-            Self::NotEnoughMoney { .. } => 29,
-            Self::NotABag { .. } => 30,
-            Self::CanOnlyDoWithEmptyBags { .. } => 31,
-            Self::DontOwnThatItem { .. } => 32,
-            Self::CanEquipOnly1Quiver { .. } => 33,
-            Self::MustPurchaseThatBagSlot { .. } => 34,
-            Self::TooFarAwayFromBank { .. } => 35,
-            Self::ItemLocked { .. } => 36,
-            Self::YouAreStunned { .. } => 37,
-            Self::YouAreDead { .. } => 38,
-            Self::CantDoRightNow { .. } => 39,
-            Self::IntBagError { .. } => 40,
-            Self::CanEquipOnly1Bolt { .. } => 41,
-            Self::CanEquipOnly1Ammopouch { .. } => 42,
-            Self::StackableCantBeWrapped { .. } => 43,
-            Self::EquippedCantBeWrapped { .. } => 44,
-            Self::WrappedCantBeWrapped { .. } => 45,
-            Self::BoundCantBeWrapped { .. } => 46,
-            Self::UniqueCantBeWrapped { .. } => 47,
-            Self::BagsCantBeWrapped { .. } => 48,
-            Self::AlreadyLooted { .. } => 49,
-            Self::InventoryFull { .. } => 50,
-            Self::BankFull { .. } => 51,
-            Self::ItemIsCurrentlySoldOut { .. } => 52,
-            Self::BagFull3 { .. } => 53,
-            Self::ItemNotFound2 { .. } => 54,
-            Self::ItemCantStack2 { .. } => 55,
-            Self::BagFull4 { .. } => 56,
-            Self::ItemSoldOut { .. } => 57,
-            Self::ObjectIsBusy { .. } => 58,
-            Self::None { .. } => 59,
-            Self::NotInCombat { .. } => 60,
-            Self::NotWhileDisarmed { .. } => 61,
-            Self::BagFull6 { .. } => 62,
-            Self::CantEquipRank { .. } => 63,
-            Self::CantEquipReputation { .. } => 64,
-            Self::TooManySpecialBags { .. } => 65,
-            Self::LootCantLootThatNow { .. } => 66,
-            Self::ItemUniqueEquipable { .. } => 67,
-            Self::VendorMissingTurnins { .. } => 68,
-            Self::NotEnoughHonorPoints { .. } => 69,
-            Self::NotEnoughArenaPoints { .. } => 70,
-            Self::ItemMaxCountSocketed { .. } => 71,
-            Self::MailBoundItem { .. } => 72,
-            Self::NoSplitWhileProspecting { .. } => 73,
-            Self::ItemMaxCountEquippedSocketed { .. } => 75,
-            Self::ItemUniqueEquippableSocketed { .. } => 76,
-            Self::TooMuchGold { .. } => 77,
-            Self::NotDuringArenaMatch { .. } => 78,
-            Self::CannotTradeThat { .. } => 79,
-            Self::PersonalArenaRatingTooLow { .. } => 80,
-            Self::EventAutoequipBindConfirm { .. } => 81,
-            Self::ArtefactsOnlyForOwnCharacters { .. } => 82,
-            Self::ItemMaxLimitCategoryCountExceeded { .. } => 84,
-            Self::ItemMaxLimitCategorySocketedExceeded { .. } => 85,
-            Self::ScalingStatItemLevelExceeded { .. } => 86,
-            Self::PurchaseLevelTooLow { .. } => 87,
-            Self::CantEquipNeedTalent { .. } => 88,
-            Self::ItemMaxLimitCategoryEquippedExceeded { .. } => 89,
-        }
-    }
-
-}
-
-impl std::fmt::Display for SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
-            Self::Ok => f.write_str("Ok"),
-            Self::CantEquipLevelI{ .. } => f.write_str("CantEquipLevelI"),
-            Self::CantEquipSkill{ .. } => f.write_str("CantEquipSkill"),
-            Self::ItemDoesntGoToSlot{ .. } => f.write_str("ItemDoesntGoToSlot"),
-            Self::BagFull{ .. } => f.write_str("BagFull"),
-            Self::NonemptyBagOverOtherBag{ .. } => f.write_str("NonemptyBagOverOtherBag"),
-            Self::CantTradeEquipBags{ .. } => f.write_str("CantTradeEquipBags"),
-            Self::OnlyAmmoCanGoHere{ .. } => f.write_str("OnlyAmmoCanGoHere"),
-            Self::NoRequiredProficiency{ .. } => f.write_str("NoRequiredProficiency"),
-            Self::NoEquipmentSlotAvailable{ .. } => f.write_str("NoEquipmentSlotAvailable"),
-            Self::YouCanNeverUseThatItem{ .. } => f.write_str("YouCanNeverUseThatItem"),
-            Self::YouCanNeverUseThatItem2{ .. } => f.write_str("YouCanNeverUseThatItem2"),
-            Self::NoEquipmentSlotAvailable2{ .. } => f.write_str("NoEquipmentSlotAvailable2"),
-            Self::CantEquipWithTwohanded{ .. } => f.write_str("CantEquipWithTwohanded"),
-            Self::CantDualWield{ .. } => f.write_str("CantDualWield"),
-            Self::ItemDoesntGoIntoBag{ .. } => f.write_str("ItemDoesntGoIntoBag"),
-            Self::ItemDoesntGoIntoBag2{ .. } => f.write_str("ItemDoesntGoIntoBag2"),
-            Self::CantCarryMoreOfThis{ .. } => f.write_str("CantCarryMoreOfThis"),
-            Self::NoEquipmentSlotAvailable3{ .. } => f.write_str("NoEquipmentSlotAvailable3"),
-            Self::ItemCantStack{ .. } => f.write_str("ItemCantStack"),
-            Self::ItemCantBeEquipped{ .. } => f.write_str("ItemCantBeEquipped"),
-            Self::ItemsCantBeSwapped{ .. } => f.write_str("ItemsCantBeSwapped"),
-            Self::SlotIsEmpty{ .. } => f.write_str("SlotIsEmpty"),
-            Self::ItemNotFound{ .. } => f.write_str("ItemNotFound"),
-            Self::CantDropSoulbound{ .. } => f.write_str("CantDropSoulbound"),
-            Self::OutOfRange{ .. } => f.write_str("OutOfRange"),
-            Self::TriedToSplitMoreThanCount{ .. } => f.write_str("TriedToSplitMoreThanCount"),
-            Self::CouldntSplitItems{ .. } => f.write_str("CouldntSplitItems"),
-            Self::MissingReagent{ .. } => f.write_str("MissingReagent"),
-            Self::NotEnoughMoney{ .. } => f.write_str("NotEnoughMoney"),
-            Self::NotABag{ .. } => f.write_str("NotABag"),
-            Self::CanOnlyDoWithEmptyBags{ .. } => f.write_str("CanOnlyDoWithEmptyBags"),
-            Self::DontOwnThatItem{ .. } => f.write_str("DontOwnThatItem"),
-            Self::CanEquipOnly1Quiver{ .. } => f.write_str("CanEquipOnly1Quiver"),
-            Self::MustPurchaseThatBagSlot{ .. } => f.write_str("MustPurchaseThatBagSlot"),
-            Self::TooFarAwayFromBank{ .. } => f.write_str("TooFarAwayFromBank"),
-            Self::ItemLocked{ .. } => f.write_str("ItemLocked"),
-            Self::YouAreStunned{ .. } => f.write_str("YouAreStunned"),
-            Self::YouAreDead{ .. } => f.write_str("YouAreDead"),
-            Self::CantDoRightNow{ .. } => f.write_str("CantDoRightNow"),
-            Self::IntBagError{ .. } => f.write_str("IntBagError"),
-            Self::CanEquipOnly1Bolt{ .. } => f.write_str("CanEquipOnly1Bolt"),
-            Self::CanEquipOnly1Ammopouch{ .. } => f.write_str("CanEquipOnly1Ammopouch"),
-            Self::StackableCantBeWrapped{ .. } => f.write_str("StackableCantBeWrapped"),
-            Self::EquippedCantBeWrapped{ .. } => f.write_str("EquippedCantBeWrapped"),
-            Self::WrappedCantBeWrapped{ .. } => f.write_str("WrappedCantBeWrapped"),
-            Self::BoundCantBeWrapped{ .. } => f.write_str("BoundCantBeWrapped"),
-            Self::UniqueCantBeWrapped{ .. } => f.write_str("UniqueCantBeWrapped"),
-            Self::BagsCantBeWrapped{ .. } => f.write_str("BagsCantBeWrapped"),
-            Self::AlreadyLooted{ .. } => f.write_str("AlreadyLooted"),
-            Self::InventoryFull{ .. } => f.write_str("InventoryFull"),
-            Self::BankFull{ .. } => f.write_str("BankFull"),
-            Self::ItemIsCurrentlySoldOut{ .. } => f.write_str("ItemIsCurrentlySoldOut"),
-            Self::BagFull3{ .. } => f.write_str("BagFull3"),
-            Self::ItemNotFound2{ .. } => f.write_str("ItemNotFound2"),
-            Self::ItemCantStack2{ .. } => f.write_str("ItemCantStack2"),
-            Self::BagFull4{ .. } => f.write_str("BagFull4"),
-            Self::ItemSoldOut{ .. } => f.write_str("ItemSoldOut"),
-            Self::ObjectIsBusy{ .. } => f.write_str("ObjectIsBusy"),
-            Self::None{ .. } => f.write_str("None"),
-            Self::NotInCombat{ .. } => f.write_str("NotInCombat"),
-            Self::NotWhileDisarmed{ .. } => f.write_str("NotWhileDisarmed"),
-            Self::BagFull6{ .. } => f.write_str("BagFull6"),
-            Self::CantEquipRank{ .. } => f.write_str("CantEquipRank"),
-            Self::CantEquipReputation{ .. } => f.write_str("CantEquipReputation"),
-            Self::TooManySpecialBags{ .. } => f.write_str("TooManySpecialBags"),
-            Self::LootCantLootThatNow{ .. } => f.write_str("LootCantLootThatNow"),
-            Self::ItemUniqueEquipable{ .. } => f.write_str("ItemUniqueEquipable"),
-            Self::VendorMissingTurnins{ .. } => f.write_str("VendorMissingTurnins"),
-            Self::NotEnoughHonorPoints{ .. } => f.write_str("NotEnoughHonorPoints"),
-            Self::NotEnoughArenaPoints{ .. } => f.write_str("NotEnoughArenaPoints"),
-            Self::ItemMaxCountSocketed{ .. } => f.write_str("ItemMaxCountSocketed"),
-            Self::MailBoundItem{ .. } => f.write_str("MailBoundItem"),
-            Self::NoSplitWhileProspecting{ .. } => f.write_str("NoSplitWhileProspecting"),
-            Self::ItemMaxCountEquippedSocketed{ .. } => f.write_str("ItemMaxCountEquippedSocketed"),
-            Self::ItemUniqueEquippableSocketed{ .. } => f.write_str("ItemUniqueEquippableSocketed"),
-            Self::TooMuchGold{ .. } => f.write_str("TooMuchGold"),
-            Self::NotDuringArenaMatch{ .. } => f.write_str("NotDuringArenaMatch"),
-            Self::CannotTradeThat{ .. } => f.write_str("CannotTradeThat"),
-            Self::PersonalArenaRatingTooLow{ .. } => f.write_str("PersonalArenaRatingTooLow"),
-            Self::EventAutoequipBindConfirm{ .. } => f.write_str("EventAutoequipBindConfirm"),
-            Self::ArtefactsOnlyForOwnCharacters{ .. } => f.write_str("ArtefactsOnlyForOwnCharacters"),
-            Self::ItemMaxLimitCategoryCountExceeded{ .. } => f.write_str("ItemMaxLimitCategoryCountExceeded"),
-            Self::ItemMaxLimitCategorySocketedExceeded{ .. } => f.write_str("ItemMaxLimitCategorySocketedExceeded"),
-            Self::ScalingStatItemLevelExceeded{ .. } => f.write_str("ScalingStatItemLevelExceeded"),
-            Self::PurchaseLevelTooLow{ .. } => f.write_str("PurchaseLevelTooLow"),
-            Self::CantEquipNeedTalent{ .. } => f.write_str("CantEquipNeedTalent"),
-            Self::ItemMaxLimitCategoryEquippedExceeded{ .. } => f.write_str("ItemMaxLimitCategoryEquippedExceeded"),
-        }
-    }
-}
-
-impl SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult {
-    pub(crate) const fn size(&self) -> usize {
-        match self {
+        (match self {
             Self::CantEquipLevelI {
                 ..
             } => {
@@ -7681,6 +7470,204 @@ impl SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult {
                 + 8 // item2: Guid
             }
             _ => 1,
+        }) // result: SMSG_INVENTORY_CHANGE_FAILURE
+    }
+}
+
+impl Default for SMSG_INVENTORY_CHANGE_FAILURE {
+    fn default() -> Self {
+        // First enumerator without any fields
+        Self::Ok
+    }
+}
+
+impl SMSG_INVENTORY_CHANGE_FAILURE {
+    pub(crate) const fn as_int(&self) -> u8 {
+        match self {
+            Self::Ok => 0,
+            Self::CantEquipLevelI { .. } => 1,
+            Self::CantEquipSkill { .. } => 2,
+            Self::ItemDoesntGoToSlot { .. } => 3,
+            Self::BagFull { .. } => 4,
+            Self::NonemptyBagOverOtherBag { .. } => 5,
+            Self::CantTradeEquipBags { .. } => 6,
+            Self::OnlyAmmoCanGoHere { .. } => 7,
+            Self::NoRequiredProficiency { .. } => 8,
+            Self::NoEquipmentSlotAvailable { .. } => 9,
+            Self::YouCanNeverUseThatItem { .. } => 10,
+            Self::YouCanNeverUseThatItem2 { .. } => 11,
+            Self::NoEquipmentSlotAvailable2 { .. } => 12,
+            Self::CantEquipWithTwohanded { .. } => 13,
+            Self::CantDualWield { .. } => 14,
+            Self::ItemDoesntGoIntoBag { .. } => 15,
+            Self::ItemDoesntGoIntoBag2 { .. } => 16,
+            Self::CantCarryMoreOfThis { .. } => 17,
+            Self::NoEquipmentSlotAvailable3 { .. } => 18,
+            Self::ItemCantStack { .. } => 19,
+            Self::ItemCantBeEquipped { .. } => 20,
+            Self::ItemsCantBeSwapped { .. } => 21,
+            Self::SlotIsEmpty { .. } => 22,
+            Self::ItemNotFound { .. } => 23,
+            Self::CantDropSoulbound { .. } => 24,
+            Self::OutOfRange { .. } => 25,
+            Self::TriedToSplitMoreThanCount { .. } => 26,
+            Self::CouldntSplitItems { .. } => 27,
+            Self::MissingReagent { .. } => 28,
+            Self::NotEnoughMoney { .. } => 29,
+            Self::NotABag { .. } => 30,
+            Self::CanOnlyDoWithEmptyBags { .. } => 31,
+            Self::DontOwnThatItem { .. } => 32,
+            Self::CanEquipOnly1Quiver { .. } => 33,
+            Self::MustPurchaseThatBagSlot { .. } => 34,
+            Self::TooFarAwayFromBank { .. } => 35,
+            Self::ItemLocked { .. } => 36,
+            Self::YouAreStunned { .. } => 37,
+            Self::YouAreDead { .. } => 38,
+            Self::CantDoRightNow { .. } => 39,
+            Self::IntBagError { .. } => 40,
+            Self::CanEquipOnly1Bolt { .. } => 41,
+            Self::CanEquipOnly1Ammopouch { .. } => 42,
+            Self::StackableCantBeWrapped { .. } => 43,
+            Self::EquippedCantBeWrapped { .. } => 44,
+            Self::WrappedCantBeWrapped { .. } => 45,
+            Self::BoundCantBeWrapped { .. } => 46,
+            Self::UniqueCantBeWrapped { .. } => 47,
+            Self::BagsCantBeWrapped { .. } => 48,
+            Self::AlreadyLooted { .. } => 49,
+            Self::InventoryFull { .. } => 50,
+            Self::BankFull { .. } => 51,
+            Self::ItemIsCurrentlySoldOut { .. } => 52,
+            Self::BagFull3 { .. } => 53,
+            Self::ItemNotFound2 { .. } => 54,
+            Self::ItemCantStack2 { .. } => 55,
+            Self::BagFull4 { .. } => 56,
+            Self::ItemSoldOut { .. } => 57,
+            Self::ObjectIsBusy { .. } => 58,
+            Self::None { .. } => 59,
+            Self::NotInCombat { .. } => 60,
+            Self::NotWhileDisarmed { .. } => 61,
+            Self::BagFull6 { .. } => 62,
+            Self::CantEquipRank { .. } => 63,
+            Self::CantEquipReputation { .. } => 64,
+            Self::TooManySpecialBags { .. } => 65,
+            Self::LootCantLootThatNow { .. } => 66,
+            Self::ItemUniqueEquipable { .. } => 67,
+            Self::VendorMissingTurnins { .. } => 68,
+            Self::NotEnoughHonorPoints { .. } => 69,
+            Self::NotEnoughArenaPoints { .. } => 70,
+            Self::ItemMaxCountSocketed { .. } => 71,
+            Self::MailBoundItem { .. } => 72,
+            Self::NoSplitWhileProspecting { .. } => 73,
+            Self::ItemMaxCountEquippedSocketed { .. } => 75,
+            Self::ItemUniqueEquippableSocketed { .. } => 76,
+            Self::TooMuchGold { .. } => 77,
+            Self::NotDuringArenaMatch { .. } => 78,
+            Self::CannotTradeThat { .. } => 79,
+            Self::PersonalArenaRatingTooLow { .. } => 80,
+            Self::EventAutoequipBindConfirm { .. } => 81,
+            Self::ArtefactsOnlyForOwnCharacters { .. } => 82,
+            Self::ItemMaxLimitCategoryCountExceeded { .. } => 84,
+            Self::ItemMaxLimitCategorySocketedExceeded { .. } => 85,
+            Self::ScalingStatItemLevelExceeded { .. } => 86,
+            Self::PurchaseLevelTooLow { .. } => 87,
+            Self::CantEquipNeedTalent { .. } => 88,
+            Self::ItemMaxLimitCategoryEquippedExceeded { .. } => 89,
+        }
+    }
+
+}
+
+impl std::fmt::Display for SMSG_INVENTORY_CHANGE_FAILURE {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        match self {
+            Self::Ok => f.write_str("Ok"),
+            Self::CantEquipLevelI{ .. } => f.write_str("CantEquipLevelI"),
+            Self::CantEquipSkill{ .. } => f.write_str("CantEquipSkill"),
+            Self::ItemDoesntGoToSlot{ .. } => f.write_str("ItemDoesntGoToSlot"),
+            Self::BagFull{ .. } => f.write_str("BagFull"),
+            Self::NonemptyBagOverOtherBag{ .. } => f.write_str("NonemptyBagOverOtherBag"),
+            Self::CantTradeEquipBags{ .. } => f.write_str("CantTradeEquipBags"),
+            Self::OnlyAmmoCanGoHere{ .. } => f.write_str("OnlyAmmoCanGoHere"),
+            Self::NoRequiredProficiency{ .. } => f.write_str("NoRequiredProficiency"),
+            Self::NoEquipmentSlotAvailable{ .. } => f.write_str("NoEquipmentSlotAvailable"),
+            Self::YouCanNeverUseThatItem{ .. } => f.write_str("YouCanNeverUseThatItem"),
+            Self::YouCanNeverUseThatItem2{ .. } => f.write_str("YouCanNeverUseThatItem2"),
+            Self::NoEquipmentSlotAvailable2{ .. } => f.write_str("NoEquipmentSlotAvailable2"),
+            Self::CantEquipWithTwohanded{ .. } => f.write_str("CantEquipWithTwohanded"),
+            Self::CantDualWield{ .. } => f.write_str("CantDualWield"),
+            Self::ItemDoesntGoIntoBag{ .. } => f.write_str("ItemDoesntGoIntoBag"),
+            Self::ItemDoesntGoIntoBag2{ .. } => f.write_str("ItemDoesntGoIntoBag2"),
+            Self::CantCarryMoreOfThis{ .. } => f.write_str("CantCarryMoreOfThis"),
+            Self::NoEquipmentSlotAvailable3{ .. } => f.write_str("NoEquipmentSlotAvailable3"),
+            Self::ItemCantStack{ .. } => f.write_str("ItemCantStack"),
+            Self::ItemCantBeEquipped{ .. } => f.write_str("ItemCantBeEquipped"),
+            Self::ItemsCantBeSwapped{ .. } => f.write_str("ItemsCantBeSwapped"),
+            Self::SlotIsEmpty{ .. } => f.write_str("SlotIsEmpty"),
+            Self::ItemNotFound{ .. } => f.write_str("ItemNotFound"),
+            Self::CantDropSoulbound{ .. } => f.write_str("CantDropSoulbound"),
+            Self::OutOfRange{ .. } => f.write_str("OutOfRange"),
+            Self::TriedToSplitMoreThanCount{ .. } => f.write_str("TriedToSplitMoreThanCount"),
+            Self::CouldntSplitItems{ .. } => f.write_str("CouldntSplitItems"),
+            Self::MissingReagent{ .. } => f.write_str("MissingReagent"),
+            Self::NotEnoughMoney{ .. } => f.write_str("NotEnoughMoney"),
+            Self::NotABag{ .. } => f.write_str("NotABag"),
+            Self::CanOnlyDoWithEmptyBags{ .. } => f.write_str("CanOnlyDoWithEmptyBags"),
+            Self::DontOwnThatItem{ .. } => f.write_str("DontOwnThatItem"),
+            Self::CanEquipOnly1Quiver{ .. } => f.write_str("CanEquipOnly1Quiver"),
+            Self::MustPurchaseThatBagSlot{ .. } => f.write_str("MustPurchaseThatBagSlot"),
+            Self::TooFarAwayFromBank{ .. } => f.write_str("TooFarAwayFromBank"),
+            Self::ItemLocked{ .. } => f.write_str("ItemLocked"),
+            Self::YouAreStunned{ .. } => f.write_str("YouAreStunned"),
+            Self::YouAreDead{ .. } => f.write_str("YouAreDead"),
+            Self::CantDoRightNow{ .. } => f.write_str("CantDoRightNow"),
+            Self::IntBagError{ .. } => f.write_str("IntBagError"),
+            Self::CanEquipOnly1Bolt{ .. } => f.write_str("CanEquipOnly1Bolt"),
+            Self::CanEquipOnly1Ammopouch{ .. } => f.write_str("CanEquipOnly1Ammopouch"),
+            Self::StackableCantBeWrapped{ .. } => f.write_str("StackableCantBeWrapped"),
+            Self::EquippedCantBeWrapped{ .. } => f.write_str("EquippedCantBeWrapped"),
+            Self::WrappedCantBeWrapped{ .. } => f.write_str("WrappedCantBeWrapped"),
+            Self::BoundCantBeWrapped{ .. } => f.write_str("BoundCantBeWrapped"),
+            Self::UniqueCantBeWrapped{ .. } => f.write_str("UniqueCantBeWrapped"),
+            Self::BagsCantBeWrapped{ .. } => f.write_str("BagsCantBeWrapped"),
+            Self::AlreadyLooted{ .. } => f.write_str("AlreadyLooted"),
+            Self::InventoryFull{ .. } => f.write_str("InventoryFull"),
+            Self::BankFull{ .. } => f.write_str("BankFull"),
+            Self::ItemIsCurrentlySoldOut{ .. } => f.write_str("ItemIsCurrentlySoldOut"),
+            Self::BagFull3{ .. } => f.write_str("BagFull3"),
+            Self::ItemNotFound2{ .. } => f.write_str("ItemNotFound2"),
+            Self::ItemCantStack2{ .. } => f.write_str("ItemCantStack2"),
+            Self::BagFull4{ .. } => f.write_str("BagFull4"),
+            Self::ItemSoldOut{ .. } => f.write_str("ItemSoldOut"),
+            Self::ObjectIsBusy{ .. } => f.write_str("ObjectIsBusy"),
+            Self::None{ .. } => f.write_str("None"),
+            Self::NotInCombat{ .. } => f.write_str("NotInCombat"),
+            Self::NotWhileDisarmed{ .. } => f.write_str("NotWhileDisarmed"),
+            Self::BagFull6{ .. } => f.write_str("BagFull6"),
+            Self::CantEquipRank{ .. } => f.write_str("CantEquipRank"),
+            Self::CantEquipReputation{ .. } => f.write_str("CantEquipReputation"),
+            Self::TooManySpecialBags{ .. } => f.write_str("TooManySpecialBags"),
+            Self::LootCantLootThatNow{ .. } => f.write_str("LootCantLootThatNow"),
+            Self::ItemUniqueEquipable{ .. } => f.write_str("ItemUniqueEquipable"),
+            Self::VendorMissingTurnins{ .. } => f.write_str("VendorMissingTurnins"),
+            Self::NotEnoughHonorPoints{ .. } => f.write_str("NotEnoughHonorPoints"),
+            Self::NotEnoughArenaPoints{ .. } => f.write_str("NotEnoughArenaPoints"),
+            Self::ItemMaxCountSocketed{ .. } => f.write_str("ItemMaxCountSocketed"),
+            Self::MailBoundItem{ .. } => f.write_str("MailBoundItem"),
+            Self::NoSplitWhileProspecting{ .. } => f.write_str("NoSplitWhileProspecting"),
+            Self::ItemMaxCountEquippedSocketed{ .. } => f.write_str("ItemMaxCountEquippedSocketed"),
+            Self::ItemUniqueEquippableSocketed{ .. } => f.write_str("ItemUniqueEquippableSocketed"),
+            Self::TooMuchGold{ .. } => f.write_str("TooMuchGold"),
+            Self::NotDuringArenaMatch{ .. } => f.write_str("NotDuringArenaMatch"),
+            Self::CannotTradeThat{ .. } => f.write_str("CannotTradeThat"),
+            Self::PersonalArenaRatingTooLow{ .. } => f.write_str("PersonalArenaRatingTooLow"),
+            Self::EventAutoequipBindConfirm{ .. } => f.write_str("EventAutoequipBindConfirm"),
+            Self::ArtefactsOnlyForOwnCharacters{ .. } => f.write_str("ArtefactsOnlyForOwnCharacters"),
+            Self::ItemMaxLimitCategoryCountExceeded{ .. } => f.write_str("ItemMaxLimitCategoryCountExceeded"),
+            Self::ItemMaxLimitCategorySocketedExceeded{ .. } => f.write_str("ItemMaxLimitCategorySocketedExceeded"),
+            Self::ScalingStatItemLevelExceeded{ .. } => f.write_str("ScalingStatItemLevelExceeded"),
+            Self::PurchaseLevelTooLow{ .. } => f.write_str("PurchaseLevelTooLow"),
+            Self::CantEquipNeedTalent{ .. } => f.write_str("CantEquipNeedTalent"),
+            Self::ItemMaxLimitCategoryEquippedExceeded{ .. } => f.write_str("ItemMaxLimitCategoryEquippedExceeded"),
         }
     }
 }

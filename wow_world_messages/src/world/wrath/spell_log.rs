@@ -61,570 +61,8 @@ use crate::wrath::{
 ///     }
 /// }
 /// ```
-#[derive(Debug, Clone, Copy, PartialEq, PartialOrd, Default)]
-pub struct SpellLog {
-    pub effect: SpellLog_SpellEffect,
-}
-
-impl SpellLog {
-    /// The field `amount_of_logs` is constantly specified to be:
-    ///
-    /// | Format | Value |
-    /// | ------ | ----- |
-    /// | Decimal | `1` |
-    /// | Hex | `0x01` |
-    /// | Original | `1` |
-    ///
-    /// **This field is not in the Rust struct, but is written as this constant value.**
-    pub const AMOUNT_OF_LOGS_VALUE: u32 = 0x01;
-
-}
-
-impl SpellLog {
-    pub(crate) fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
-        // effect: SpellEffect
-        w.write_all(&(self.effect.as_int().to_le_bytes()))?;
-
-        // amount_of_logs: u32
-        w.write_all(&Self::AMOUNT_OF_LOGS_VALUE.to_le_bytes())?;
-
-        match &self.effect {
-            SpellLog_SpellEffect::PowerDrain {
-                amount,
-                multiplier,
-                power,
-                target1,
-            } => {
-                // target1: PackedGuid
-                crate::util::write_packed_guid(&target1, &mut w)?;
-
-                // amount: u32
-                w.write_all(&amount.to_le_bytes())?;
-
-                // power: Power
-                w.write_all(&u32::from(power.as_int()).to_le_bytes())?;
-
-                // multiplier: f32
-                w.write_all(&multiplier.to_le_bytes())?;
-
-            }
-            SpellLog_SpellEffect::Resurrect {
-                resurrect_guid,
-            } => {
-                // resurrect_guid: PackedGuid
-                crate::util::write_packed_guid(&resurrect_guid, &mut w)?;
-
-            }
-            SpellLog_SpellEffect::AddExtraAttacks {
-                extra_attacks,
-                target4,
-            } => {
-                // target4: PackedGuid
-                crate::util::write_packed_guid(&target4, &mut w)?;
-
-                // extra_attacks: u32
-                w.write_all(&extra_attacks.to_le_bytes())?;
-
-            }
-            SpellLog_SpellEffect::CreateItem {
-                item,
-            } => {
-                // item: Item
-                w.write_all(&item.to_le_bytes())?;
-
-            }
-            SpellLog_SpellEffect::Summon {
-                summon_target,
-            } => {
-                // summon_target: PackedGuid
-                crate::util::write_packed_guid(&summon_target, &mut w)?;
-
-            }
-            SpellLog_SpellEffect::OpenLock {
-                lock_target,
-            } => {
-                // lock_target: PackedGuid
-                crate::util::write_packed_guid(&lock_target, &mut w)?;
-
-            }
-            SpellLog_SpellEffect::TransDoor {
-                summon_target,
-            } => {
-                // summon_target: PackedGuid
-                crate::util::write_packed_guid(&summon_target, &mut w)?;
-
-            }
-            SpellLog_SpellEffect::SummonPet {
-                summon_target,
-            } => {
-                // summon_target: PackedGuid
-                crate::util::write_packed_guid(&summon_target, &mut w)?;
-
-            }
-            SpellLog_SpellEffect::InterruptCast {
-                interrupted_spell,
-                target5,
-            } => {
-                // target5: PackedGuid
-                crate::util::write_packed_guid(&target5, &mut w)?;
-
-                // interrupted_spell: Spell
-                w.write_all(&interrupted_spell.to_le_bytes())?;
-
-            }
-            SpellLog_SpellEffect::SummonObjectWild {
-                summon_target,
-            } => {
-                // summon_target: PackedGuid
-                crate::util::write_packed_guid(&summon_target, &mut w)?;
-
-            }
-            SpellLog_SpellEffect::CreateHouse {
-                summon_target,
-            } => {
-                // summon_target: PackedGuid
-                crate::util::write_packed_guid(&summon_target, &mut w)?;
-
-            }
-            SpellLog_SpellEffect::Duel {
-                summon_target,
-            } => {
-                // summon_target: PackedGuid
-                crate::util::write_packed_guid(&summon_target, &mut w)?;
-
-            }
-            SpellLog_SpellEffect::FeedPet {
-                pet_feed_guid,
-            } => {
-                // pet_feed_guid: PackedGuid
-                crate::util::write_packed_guid(&pet_feed_guid, &mut w)?;
-
-            }
-            SpellLog_SpellEffect::DismissPet {
-                pet_dismiss_guid,
-            } => {
-                // pet_dismiss_guid: PackedGuid
-                crate::util::write_packed_guid(&pet_dismiss_guid, &mut w)?;
-
-            }
-            SpellLog_SpellEffect::SummonObjectSlot1 {
-                summon_target,
-            } => {
-                // summon_target: PackedGuid
-                crate::util::write_packed_guid(&summon_target, &mut w)?;
-
-            }
-            SpellLog_SpellEffect::SummonObjectSlot2 {
-                summon_target,
-            } => {
-                // summon_target: PackedGuid
-                crate::util::write_packed_guid(&summon_target, &mut w)?;
-
-            }
-            SpellLog_SpellEffect::SummonObjectSlot3 {
-                summon_target,
-            } => {
-                // summon_target: PackedGuid
-                crate::util::write_packed_guid(&summon_target, &mut w)?;
-
-            }
-            SpellLog_SpellEffect::SummonObjectSlot4 {
-                summon_target,
-            } => {
-                // summon_target: PackedGuid
-                crate::util::write_packed_guid(&summon_target, &mut w)?;
-
-            }
-            SpellLog_SpellEffect::DurabilityDamage {
-                item_to_damage,
-                target6,
-                unknown5,
-            } => {
-                // target6: PackedGuid
-                crate::util::write_packed_guid(&target6, &mut w)?;
-
-                // item_to_damage: Item
-                w.write_all(&item_to_damage.to_le_bytes())?;
-
-                // unknown5: u32
-                w.write_all(&unknown5.to_le_bytes())?;
-
-            }
-            SpellLog_SpellEffect::ResurrectNew {
-                resurrect_guid,
-            } => {
-                // resurrect_guid: PackedGuid
-                crate::util::write_packed_guid(&resurrect_guid, &mut w)?;
-
-            }
-            _ => {}
-        }
-
-        Ok(())
-    }
-}
-
-impl SpellLog {
-    pub(crate) fn read<R: std::io::Read>(mut r: R) -> Result<Self, crate::errors::ParseErrorKind> {
-        // effect: SpellEffect
-        let effect = crate::util::read_u32_le(&mut r)?.try_into()?;
-
-        // amount_of_logs: u32
-        let _amount_of_logs = crate::util::read_u32_le(&mut r)?;
-        // amount_of_logs is expected to always be 1 (1)
-
-        let effect_if = match effect {
-            SpellEffect::None => SpellLog_SpellEffect::None,
-            SpellEffect::Instakill => SpellLog_SpellEffect::Instakill,
-            SpellEffect::SchoolDamage => SpellLog_SpellEffect::SchoolDamage,
-            SpellEffect::Dummy => SpellLog_SpellEffect::Dummy,
-            SpellEffect::PortalTeleport => SpellLog_SpellEffect::PortalTeleport,
-            SpellEffect::TeleportUnits => SpellLog_SpellEffect::TeleportUnits,
-            SpellEffect::ApplyAura => SpellLog_SpellEffect::ApplyAura,
-            SpellEffect::EnvironmentalDamage => SpellLog_SpellEffect::EnvironmentalDamage,
-            SpellEffect::PowerDrain => {
-                // target1: PackedGuid
-                let target1 = crate::util::read_packed_guid(&mut r)?;
-
-                // amount: u32
-                let amount = crate::util::read_u32_le(&mut r)?;
-
-                // power: Power
-                let power = (crate::util::read_u32_le(&mut r)? as u8).try_into()?;
-
-                // multiplier: f32
-                let multiplier = crate::util::read_f32_le(&mut r)?;
-
-                SpellLog_SpellEffect::PowerDrain {
-                    amount,
-                    multiplier,
-                    power,
-                    target1,
-                }
-            }
-            SpellEffect::HealthLeech => SpellLog_SpellEffect::HealthLeech,
-            SpellEffect::Heal => SpellLog_SpellEffect::Heal,
-            SpellEffect::Bind => SpellLog_SpellEffect::Bind,
-            SpellEffect::Portal => SpellLog_SpellEffect::Portal,
-            SpellEffect::RitualBase => SpellLog_SpellEffect::RitualBase,
-            SpellEffect::RitualSpecialize => SpellLog_SpellEffect::RitualSpecialize,
-            SpellEffect::RitualActivatePortal => SpellLog_SpellEffect::RitualActivatePortal,
-            SpellEffect::QuestComplete => SpellLog_SpellEffect::QuestComplete,
-            SpellEffect::WeaponDamageNoschool => SpellLog_SpellEffect::WeaponDamageNoschool,
-            SpellEffect::Resurrect => {
-                // resurrect_guid: PackedGuid
-                let resurrect_guid = crate::util::read_packed_guid(&mut r)?;
-
-                SpellLog_SpellEffect::Resurrect {
-                    resurrect_guid,
-                }
-            }
-            SpellEffect::AddExtraAttacks => {
-                // target4: PackedGuid
-                let target4 = crate::util::read_packed_guid(&mut r)?;
-
-                // extra_attacks: u32
-                let extra_attacks = crate::util::read_u32_le(&mut r)?;
-
-                SpellLog_SpellEffect::AddExtraAttacks {
-                    extra_attacks,
-                    target4,
-                }
-            }
-            SpellEffect::Dodge => SpellLog_SpellEffect::Dodge,
-            SpellEffect::Evade => SpellLog_SpellEffect::Evade,
-            SpellEffect::Parry => SpellLog_SpellEffect::Parry,
-            SpellEffect::Block => SpellLog_SpellEffect::Block,
-            SpellEffect::CreateItem => {
-                // item: Item
-                let item = crate::util::read_u32_le(&mut r)?;
-
-                SpellLog_SpellEffect::CreateItem {
-                    item,
-                }
-            }
-            SpellEffect::Weapon => SpellLog_SpellEffect::Weapon,
-            SpellEffect::Defense => SpellLog_SpellEffect::Defense,
-            SpellEffect::PersistentAreaAura => SpellLog_SpellEffect::PersistentAreaAura,
-            SpellEffect::Summon => {
-                // summon_target: PackedGuid
-                let summon_target = crate::util::read_packed_guid(&mut r)?;
-
-                SpellLog_SpellEffect::Summon {
-                    summon_target,
-                }
-            }
-            SpellEffect::Leap => SpellLog_SpellEffect::Leap,
-            SpellEffect::Energize => SpellLog_SpellEffect::Energize,
-            SpellEffect::WeaponPercentDamage => SpellLog_SpellEffect::WeaponPercentDamage,
-            SpellEffect::TriggerMissile => SpellLog_SpellEffect::TriggerMissile,
-            SpellEffect::OpenLock => {
-                // lock_target: PackedGuid
-                let lock_target = crate::util::read_packed_guid(&mut r)?;
-
-                SpellLog_SpellEffect::OpenLock {
-                    lock_target,
-                }
-            }
-            SpellEffect::SummonChangeItem => SpellLog_SpellEffect::SummonChangeItem,
-            SpellEffect::ApplyAreaAuraParty => SpellLog_SpellEffect::ApplyAreaAuraParty,
-            SpellEffect::LearnSpell => SpellLog_SpellEffect::LearnSpell,
-            SpellEffect::SpellDefense => SpellLog_SpellEffect::SpellDefense,
-            SpellEffect::Dispel => SpellLog_SpellEffect::Dispel,
-            SpellEffect::Language => SpellLog_SpellEffect::Language,
-            SpellEffect::DualWield => SpellLog_SpellEffect::DualWield,
-            SpellEffect::Jump => SpellLog_SpellEffect::Jump,
-            SpellEffect::Jump2 => SpellLog_SpellEffect::Jump2,
-            SpellEffect::TeleportUnitsFaceCaster => SpellLog_SpellEffect::TeleportUnitsFaceCaster,
-            SpellEffect::SkillStep => SpellLog_SpellEffect::SkillStep,
-            SpellEffect::AddHonor => SpellLog_SpellEffect::AddHonor,
-            SpellEffect::Spawn => SpellLog_SpellEffect::Spawn,
-            SpellEffect::TradeSkill => SpellLog_SpellEffect::TradeSkill,
-            SpellEffect::Stealth => SpellLog_SpellEffect::Stealth,
-            SpellEffect::Detect => SpellLog_SpellEffect::Detect,
-            SpellEffect::TransDoor => {
-                // summon_target: PackedGuid
-                let summon_target = crate::util::read_packed_guid(&mut r)?;
-
-                SpellLog_SpellEffect::TransDoor {
-                    summon_target,
-                }
-            }
-            SpellEffect::ForceCriticalHit => SpellLog_SpellEffect::ForceCriticalHit,
-            SpellEffect::GuaranteeHit => SpellLog_SpellEffect::GuaranteeHit,
-            SpellEffect::EnchantItem => SpellLog_SpellEffect::EnchantItem,
-            SpellEffect::EnchantItemTemporary => SpellLog_SpellEffect::EnchantItemTemporary,
-            SpellEffect::Tamecreature => SpellLog_SpellEffect::Tamecreature,
-            SpellEffect::SummonPet => {
-                // summon_target: PackedGuid
-                let summon_target = crate::util::read_packed_guid(&mut r)?;
-
-                SpellLog_SpellEffect::SummonPet {
-                    summon_target,
-                }
-            }
-            SpellEffect::LearnPetSpell => SpellLog_SpellEffect::LearnPetSpell,
-            SpellEffect::WeaponDamage => SpellLog_SpellEffect::WeaponDamage,
-            SpellEffect::CreateRandomItem => SpellLog_SpellEffect::CreateRandomItem,
-            SpellEffect::Proficiency => SpellLog_SpellEffect::Proficiency,
-            SpellEffect::SendEvent => SpellLog_SpellEffect::SendEvent,
-            SpellEffect::PowerBurn => SpellLog_SpellEffect::PowerBurn,
-            SpellEffect::Threat => SpellLog_SpellEffect::Threat,
-            SpellEffect::TriggerSpell => SpellLog_SpellEffect::TriggerSpell,
-            SpellEffect::ApplyAreaAuraRaid => SpellLog_SpellEffect::ApplyAreaAuraRaid,
-            SpellEffect::RestoreItemCharges => SpellLog_SpellEffect::RestoreItemCharges,
-            SpellEffect::HealMaxHealth => SpellLog_SpellEffect::HealMaxHealth,
-            SpellEffect::InterruptCast => {
-                // target5: PackedGuid
-                let target5 = crate::util::read_packed_guid(&mut r)?;
-
-                // interrupted_spell: Spell
-                let interrupted_spell = crate::util::read_u32_le(&mut r)?;
-
-                SpellLog_SpellEffect::InterruptCast {
-                    interrupted_spell,
-                    target5,
-                }
-            }
-            SpellEffect::Distract => SpellLog_SpellEffect::Distract,
-            SpellEffect::Pull => SpellLog_SpellEffect::Pull,
-            SpellEffect::Pickpocket => SpellLog_SpellEffect::Pickpocket,
-            SpellEffect::AddFarsight => SpellLog_SpellEffect::AddFarsight,
-            SpellEffect::UntrainTalents => SpellLog_SpellEffect::UntrainTalents,
-            SpellEffect::ApplyGlyph => SpellLog_SpellEffect::ApplyGlyph,
-            SpellEffect::HealMechanical => SpellLog_SpellEffect::HealMechanical,
-            SpellEffect::SummonObjectWild => {
-                // summon_target: PackedGuid
-                let summon_target = crate::util::read_packed_guid(&mut r)?;
-
-                SpellLog_SpellEffect::SummonObjectWild {
-                    summon_target,
-                }
-            }
-            SpellEffect::ScriptEffect => SpellLog_SpellEffect::ScriptEffect,
-            SpellEffect::Attack => SpellLog_SpellEffect::Attack,
-            SpellEffect::Sanctuary => SpellLog_SpellEffect::Sanctuary,
-            SpellEffect::AddComboPoints => SpellLog_SpellEffect::AddComboPoints,
-            SpellEffect::CreateHouse => {
-                // summon_target: PackedGuid
-                let summon_target = crate::util::read_packed_guid(&mut r)?;
-
-                SpellLog_SpellEffect::CreateHouse {
-                    summon_target,
-                }
-            }
-            SpellEffect::BindSight => SpellLog_SpellEffect::BindSight,
-            SpellEffect::Duel => {
-                // summon_target: PackedGuid
-                let summon_target = crate::util::read_packed_guid(&mut r)?;
-
-                SpellLog_SpellEffect::Duel {
-                    summon_target,
-                }
-            }
-            SpellEffect::Stuck => SpellLog_SpellEffect::Stuck,
-            SpellEffect::SummonPlayer => SpellLog_SpellEffect::SummonPlayer,
-            SpellEffect::ActivateObject => SpellLog_SpellEffect::ActivateObject,
-            SpellEffect::WmoDamage => SpellLog_SpellEffect::WmoDamage,
-            SpellEffect::WmoRepair => SpellLog_SpellEffect::WmoRepair,
-            SpellEffect::WmoChange => SpellLog_SpellEffect::WmoChange,
-            SpellEffect::KillCreditPersonal => SpellLog_SpellEffect::KillCreditPersonal,
-            SpellEffect::ThreatAll => SpellLog_SpellEffect::ThreatAll,
-            SpellEffect::EnchantHeldItem => SpellLog_SpellEffect::EnchantHeldItem,
-            SpellEffect::BreakPlayerTargeting => SpellLog_SpellEffect::BreakPlayerTargeting,
-            SpellEffect::SelfResurrect => SpellLog_SpellEffect::SelfResurrect,
-            SpellEffect::Skinning => SpellLog_SpellEffect::Skinning,
-            SpellEffect::Charge => SpellLog_SpellEffect::Charge,
-            SpellEffect::SummonAllTotems => SpellLog_SpellEffect::SummonAllTotems,
-            SpellEffect::KnockBack => SpellLog_SpellEffect::KnockBack,
-            SpellEffect::Disenchant => SpellLog_SpellEffect::Disenchant,
-            SpellEffect::Inebriate => SpellLog_SpellEffect::Inebriate,
-            SpellEffect::FeedPet => {
-                // pet_feed_guid: PackedGuid
-                let pet_feed_guid = crate::util::read_packed_guid(&mut r)?;
-
-                SpellLog_SpellEffect::FeedPet {
-                    pet_feed_guid,
-                }
-            }
-            SpellEffect::DismissPet => {
-                // pet_dismiss_guid: PackedGuid
-                let pet_dismiss_guid = crate::util::read_packed_guid(&mut r)?;
-
-                SpellLog_SpellEffect::DismissPet {
-                    pet_dismiss_guid,
-                }
-            }
-            SpellEffect::Reputation => SpellLog_SpellEffect::Reputation,
-            SpellEffect::SummonObjectSlot1 => {
-                // summon_target: PackedGuid
-                let summon_target = crate::util::read_packed_guid(&mut r)?;
-
-                SpellLog_SpellEffect::SummonObjectSlot1 {
-                    summon_target,
-                }
-            }
-            SpellEffect::SummonObjectSlot2 => {
-                // summon_target: PackedGuid
-                let summon_target = crate::util::read_packed_guid(&mut r)?;
-
-                SpellLog_SpellEffect::SummonObjectSlot2 {
-                    summon_target,
-                }
-            }
-            SpellEffect::SummonObjectSlot3 => {
-                // summon_target: PackedGuid
-                let summon_target = crate::util::read_packed_guid(&mut r)?;
-
-                SpellLog_SpellEffect::SummonObjectSlot3 {
-                    summon_target,
-                }
-            }
-            SpellEffect::SummonObjectSlot4 => {
-                // summon_target: PackedGuid
-                let summon_target = crate::util::read_packed_guid(&mut r)?;
-
-                SpellLog_SpellEffect::SummonObjectSlot4 {
-                    summon_target,
-                }
-            }
-            SpellEffect::DispelMechanic => SpellLog_SpellEffect::DispelMechanic,
-            SpellEffect::SummonDeadPet => SpellLog_SpellEffect::SummonDeadPet,
-            SpellEffect::DestroyAllTotems => SpellLog_SpellEffect::DestroyAllTotems,
-            SpellEffect::DurabilityDamage => {
-                // target6: PackedGuid
-                let target6 = crate::util::read_packed_guid(&mut r)?;
-
-                // item_to_damage: Item
-                let item_to_damage = crate::util::read_u32_le(&mut r)?;
-
-                // unknown5: u32
-                let unknown5 = crate::util::read_u32_le(&mut r)?;
-
-                SpellLog_SpellEffect::DurabilityDamage {
-                    item_to_damage,
-                    target6,
-                    unknown5,
-                }
-            }
-            SpellEffect::Unknown112 => SpellLog_SpellEffect::Unknown112,
-            SpellEffect::ResurrectNew => {
-                // resurrect_guid: PackedGuid
-                let resurrect_guid = crate::util::read_packed_guid(&mut r)?;
-
-                SpellLog_SpellEffect::ResurrectNew {
-                    resurrect_guid,
-                }
-            }
-            SpellEffect::AttackMe => SpellLog_SpellEffect::AttackMe,
-            SpellEffect::DurabilityDamagePct => SpellLog_SpellEffect::DurabilityDamagePct,
-            SpellEffect::SkinPlayerCorpse => SpellLog_SpellEffect::SkinPlayerCorpse,
-            SpellEffect::SpiritHeal => SpellLog_SpellEffect::SpiritHeal,
-            SpellEffect::Skill => SpellLog_SpellEffect::Skill,
-            SpellEffect::ApplyAreaAuraPet => SpellLog_SpellEffect::ApplyAreaAuraPet,
-            SpellEffect::TeleportGraveyard => SpellLog_SpellEffect::TeleportGraveyard,
-            SpellEffect::NormalizedWeaponDmg => SpellLog_SpellEffect::NormalizedWeaponDmg,
-            SpellEffect::Unknown122 => SpellLog_SpellEffect::Unknown122,
-            SpellEffect::SendTaxi => SpellLog_SpellEffect::SendTaxi,
-            SpellEffect::PlayerPull => SpellLog_SpellEffect::PlayerPull,
-            SpellEffect::ModifyThreatPercent => SpellLog_SpellEffect::ModifyThreatPercent,
-            SpellEffect::StealBeneficialBuff => SpellLog_SpellEffect::StealBeneficialBuff,
-            SpellEffect::Prospecting => SpellLog_SpellEffect::Prospecting,
-            SpellEffect::ApplyAreaAuraFriend => SpellLog_SpellEffect::ApplyAreaAuraFriend,
-            SpellEffect::ApplyAreaAuraEnemy => SpellLog_SpellEffect::ApplyAreaAuraEnemy,
-            SpellEffect::RedirectThreat => SpellLog_SpellEffect::RedirectThreat,
-            SpellEffect::PlaySound => SpellLog_SpellEffect::PlaySound,
-            SpellEffect::PlayMusic => SpellLog_SpellEffect::PlayMusic,
-            SpellEffect::UnlearnSpecialization => SpellLog_SpellEffect::UnlearnSpecialization,
-            SpellEffect::KillCreditGroup => SpellLog_SpellEffect::KillCreditGroup,
-            SpellEffect::CallPet => SpellLog_SpellEffect::CallPet,
-            SpellEffect::HealPct => SpellLog_SpellEffect::HealPct,
-            SpellEffect::EnergizePct => SpellLog_SpellEffect::EnergizePct,
-            SpellEffect::LeapBack => SpellLog_SpellEffect::LeapBack,
-            SpellEffect::ClearQuest => SpellLog_SpellEffect::ClearQuest,
-            SpellEffect::ForceCast => SpellLog_SpellEffect::ForceCast,
-            SpellEffect::ForceCastWithValue => SpellLog_SpellEffect::ForceCastWithValue,
-            SpellEffect::TriggerSpellWithValue => SpellLog_SpellEffect::TriggerSpellWithValue,
-            SpellEffect::ApplyAreaAuraOwner => SpellLog_SpellEffect::ApplyAreaAuraOwner,
-            SpellEffect::KnockbackFromPosition => SpellLog_SpellEffect::KnockbackFromPosition,
-            SpellEffect::GravityPull => SpellLog_SpellEffect::GravityPull,
-            SpellEffect::ActivateRune => SpellLog_SpellEffect::ActivateRune,
-            SpellEffect::QuestFail => SpellLog_SpellEffect::QuestFail,
-            SpellEffect::Unknown148 => SpellLog_SpellEffect::Unknown148,
-            SpellEffect::Charge2 => SpellLog_SpellEffect::Charge2,
-            SpellEffect::QuestOffer => SpellLog_SpellEffect::QuestOffer,
-            SpellEffect::TriggerSpell2 => SpellLog_SpellEffect::TriggerSpell2,
-            SpellEffect::Unknown152 => SpellLog_SpellEffect::Unknown152,
-            SpellEffect::CreatePet => SpellLog_SpellEffect::CreatePet,
-            SpellEffect::TeachTaxiNode => SpellLog_SpellEffect::TeachTaxiNode,
-            SpellEffect::TitanGrip => SpellLog_SpellEffect::TitanGrip,
-            SpellEffect::EnchantItemPrismatic => SpellLog_SpellEffect::EnchantItemPrismatic,
-            SpellEffect::CreateItem2 => SpellLog_SpellEffect::CreateItem2,
-            SpellEffect::Milling => SpellLog_SpellEffect::Milling,
-            SpellEffect::AllowRenamePet => SpellLog_SpellEffect::AllowRenamePet,
-            SpellEffect::Unknown160 => SpellLog_SpellEffect::Unknown160,
-            SpellEffect::TalentSpecCount => SpellLog_SpellEffect::TalentSpecCount,
-            SpellEffect::TalentSpecSelect => SpellLog_SpellEffect::TalentSpecSelect,
-            SpellEffect::Unknown163 => SpellLog_SpellEffect::Unknown163,
-            SpellEffect::CancelAura => SpellLog_SpellEffect::CancelAura,
-        };
-
-        Ok(Self {
-            effect: effect_if,
-        })
-    }
-
-}
-
-impl SpellLog {
-    pub(crate) const fn size(&self) -> usize {
-        self.effect.size() // effect: SpellLog_SpellEffect
-        + 4 // amount_of_logs: u32
-    }
-}
-
 #[derive(Debug, Clone, Copy, PartialEq, PartialOrd)]
-pub enum SpellLog_SpellEffect {
+pub enum SpellLog {
     None,
     Instakill,
     SchoolDamage,
@@ -839,14 +277,702 @@ pub enum SpellLog_SpellEffect {
     CancelAura,
 }
 
-impl Default for SpellLog_SpellEffect {
+impl SpellLog {
+    /// The field `amount_of_logs` is constantly specified to be:
+    ///
+    /// | Format | Value |
+    /// | ------ | ----- |
+    /// | Decimal | `1` |
+    /// | Hex | `0x01` |
+    /// | Original | `1` |
+    ///
+    /// **This field is not in the Rust struct, but is written as this constant value.**
+    pub const AMOUNT_OF_LOGS_VALUE: u32 = 0x01;
+
+}
+
+impl SpellLog {
+    pub(crate) fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
+        // effect: SpellEffect
+        w.write_all(&(self.as_int().to_le_bytes()))?;
+
+        // amount_of_logs: u32
+        w.write_all(&Self::AMOUNT_OF_LOGS_VALUE.to_le_bytes())?;
+
+        match &self {
+            SpellLog::PowerDrain {
+                amount,
+                multiplier,
+                power,
+                target1,
+            } => {
+                // target1: PackedGuid
+                crate::util::write_packed_guid(&target1, &mut w)?;
+
+                // amount: u32
+                w.write_all(&amount.to_le_bytes())?;
+
+                // power: Power
+                w.write_all(&u32::from(power.as_int()).to_le_bytes())?;
+
+                // multiplier: f32
+                w.write_all(&multiplier.to_le_bytes())?;
+
+            }
+            SpellLog::Resurrect {
+                resurrect_guid,
+            } => {
+                // resurrect_guid: PackedGuid
+                crate::util::write_packed_guid(&resurrect_guid, &mut w)?;
+
+            }
+            SpellLog::AddExtraAttacks {
+                extra_attacks,
+                target4,
+            } => {
+                // target4: PackedGuid
+                crate::util::write_packed_guid(&target4, &mut w)?;
+
+                // extra_attacks: u32
+                w.write_all(&extra_attacks.to_le_bytes())?;
+
+            }
+            SpellLog::CreateItem {
+                item,
+            } => {
+                // item: Item
+                w.write_all(&item.to_le_bytes())?;
+
+            }
+            SpellLog::Summon {
+                summon_target,
+            } => {
+                // summon_target: PackedGuid
+                crate::util::write_packed_guid(&summon_target, &mut w)?;
+
+            }
+            SpellLog::OpenLock {
+                lock_target,
+            } => {
+                // lock_target: PackedGuid
+                crate::util::write_packed_guid(&lock_target, &mut w)?;
+
+            }
+            SpellLog::TransDoor {
+                summon_target,
+            } => {
+                // summon_target: PackedGuid
+                crate::util::write_packed_guid(&summon_target, &mut w)?;
+
+            }
+            SpellLog::SummonPet {
+                summon_target,
+            } => {
+                // summon_target: PackedGuid
+                crate::util::write_packed_guid(&summon_target, &mut w)?;
+
+            }
+            SpellLog::InterruptCast {
+                interrupted_spell,
+                target5,
+            } => {
+                // target5: PackedGuid
+                crate::util::write_packed_guid(&target5, &mut w)?;
+
+                // interrupted_spell: Spell
+                w.write_all(&interrupted_spell.to_le_bytes())?;
+
+            }
+            SpellLog::SummonObjectWild {
+                summon_target,
+            } => {
+                // summon_target: PackedGuid
+                crate::util::write_packed_guid(&summon_target, &mut w)?;
+
+            }
+            SpellLog::CreateHouse {
+                summon_target,
+            } => {
+                // summon_target: PackedGuid
+                crate::util::write_packed_guid(&summon_target, &mut w)?;
+
+            }
+            SpellLog::Duel {
+                summon_target,
+            } => {
+                // summon_target: PackedGuid
+                crate::util::write_packed_guid(&summon_target, &mut w)?;
+
+            }
+            SpellLog::FeedPet {
+                pet_feed_guid,
+            } => {
+                // pet_feed_guid: PackedGuid
+                crate::util::write_packed_guid(&pet_feed_guid, &mut w)?;
+
+            }
+            SpellLog::DismissPet {
+                pet_dismiss_guid,
+            } => {
+                // pet_dismiss_guid: PackedGuid
+                crate::util::write_packed_guid(&pet_dismiss_guid, &mut w)?;
+
+            }
+            SpellLog::SummonObjectSlot1 {
+                summon_target,
+            } => {
+                // summon_target: PackedGuid
+                crate::util::write_packed_guid(&summon_target, &mut w)?;
+
+            }
+            SpellLog::SummonObjectSlot2 {
+                summon_target,
+            } => {
+                // summon_target: PackedGuid
+                crate::util::write_packed_guid(&summon_target, &mut w)?;
+
+            }
+            SpellLog::SummonObjectSlot3 {
+                summon_target,
+            } => {
+                // summon_target: PackedGuid
+                crate::util::write_packed_guid(&summon_target, &mut w)?;
+
+            }
+            SpellLog::SummonObjectSlot4 {
+                summon_target,
+            } => {
+                // summon_target: PackedGuid
+                crate::util::write_packed_guid(&summon_target, &mut w)?;
+
+            }
+            SpellLog::DurabilityDamage {
+                item_to_damage,
+                target6,
+                unknown5,
+            } => {
+                // target6: PackedGuid
+                crate::util::write_packed_guid(&target6, &mut w)?;
+
+                // item_to_damage: Item
+                w.write_all(&item_to_damage.to_le_bytes())?;
+
+                // unknown5: u32
+                w.write_all(&unknown5.to_le_bytes())?;
+
+            }
+            SpellLog::ResurrectNew {
+                resurrect_guid,
+            } => {
+                // resurrect_guid: PackedGuid
+                crate::util::write_packed_guid(&resurrect_guid, &mut w)?;
+
+            }
+            _ => {}
+        }
+
+        Ok(())
+    }
+}
+
+impl SpellLog {
+    pub(crate) fn read<R: std::io::Read>(mut r: R) -> Result<Self, crate::errors::ParseErrorKind> {
+        // effect: SpellEffect
+        let effect = crate::util::read_u32_le(&mut r)?.try_into()?;
+
+        // amount_of_logs: u32
+        let _amount_of_logs = crate::util::read_u32_le(&mut r)?;
+        // amount_of_logs is expected to always be 1 (1)
+
+        let effect_if = match effect {
+            SpellEffect::None => SpellLog::None,
+            SpellEffect::Instakill => SpellLog::Instakill,
+            SpellEffect::SchoolDamage => SpellLog::SchoolDamage,
+            SpellEffect::Dummy => SpellLog::Dummy,
+            SpellEffect::PortalTeleport => SpellLog::PortalTeleport,
+            SpellEffect::TeleportUnits => SpellLog::TeleportUnits,
+            SpellEffect::ApplyAura => SpellLog::ApplyAura,
+            SpellEffect::EnvironmentalDamage => SpellLog::EnvironmentalDamage,
+            SpellEffect::PowerDrain => {
+                // target1: PackedGuid
+                let target1 = crate::util::read_packed_guid(&mut r)?;
+
+                // amount: u32
+                let amount = crate::util::read_u32_le(&mut r)?;
+
+                // power: Power
+                let power = (crate::util::read_u32_le(&mut r)? as u8).try_into()?;
+
+                // multiplier: f32
+                let multiplier = crate::util::read_f32_le(&mut r)?;
+
+                SpellLog::PowerDrain {
+                    amount,
+                    multiplier,
+                    power,
+                    target1,
+                }
+            }
+            SpellEffect::HealthLeech => SpellLog::HealthLeech,
+            SpellEffect::Heal => SpellLog::Heal,
+            SpellEffect::Bind => SpellLog::Bind,
+            SpellEffect::Portal => SpellLog::Portal,
+            SpellEffect::RitualBase => SpellLog::RitualBase,
+            SpellEffect::RitualSpecialize => SpellLog::RitualSpecialize,
+            SpellEffect::RitualActivatePortal => SpellLog::RitualActivatePortal,
+            SpellEffect::QuestComplete => SpellLog::QuestComplete,
+            SpellEffect::WeaponDamageNoschool => SpellLog::WeaponDamageNoschool,
+            SpellEffect::Resurrect => {
+                // resurrect_guid: PackedGuid
+                let resurrect_guid = crate::util::read_packed_guid(&mut r)?;
+
+                SpellLog::Resurrect {
+                    resurrect_guid,
+                }
+            }
+            SpellEffect::AddExtraAttacks => {
+                // target4: PackedGuid
+                let target4 = crate::util::read_packed_guid(&mut r)?;
+
+                // extra_attacks: u32
+                let extra_attacks = crate::util::read_u32_le(&mut r)?;
+
+                SpellLog::AddExtraAttacks {
+                    extra_attacks,
+                    target4,
+                }
+            }
+            SpellEffect::Dodge => SpellLog::Dodge,
+            SpellEffect::Evade => SpellLog::Evade,
+            SpellEffect::Parry => SpellLog::Parry,
+            SpellEffect::Block => SpellLog::Block,
+            SpellEffect::CreateItem => {
+                // item: Item
+                let item = crate::util::read_u32_le(&mut r)?;
+
+                SpellLog::CreateItem {
+                    item,
+                }
+            }
+            SpellEffect::Weapon => SpellLog::Weapon,
+            SpellEffect::Defense => SpellLog::Defense,
+            SpellEffect::PersistentAreaAura => SpellLog::PersistentAreaAura,
+            SpellEffect::Summon => {
+                // summon_target: PackedGuid
+                let summon_target = crate::util::read_packed_guid(&mut r)?;
+
+                SpellLog::Summon {
+                    summon_target,
+                }
+            }
+            SpellEffect::Leap => SpellLog::Leap,
+            SpellEffect::Energize => SpellLog::Energize,
+            SpellEffect::WeaponPercentDamage => SpellLog::WeaponPercentDamage,
+            SpellEffect::TriggerMissile => SpellLog::TriggerMissile,
+            SpellEffect::OpenLock => {
+                // lock_target: PackedGuid
+                let lock_target = crate::util::read_packed_guid(&mut r)?;
+
+                SpellLog::OpenLock {
+                    lock_target,
+                }
+            }
+            SpellEffect::SummonChangeItem => SpellLog::SummonChangeItem,
+            SpellEffect::ApplyAreaAuraParty => SpellLog::ApplyAreaAuraParty,
+            SpellEffect::LearnSpell => SpellLog::LearnSpell,
+            SpellEffect::SpellDefense => SpellLog::SpellDefense,
+            SpellEffect::Dispel => SpellLog::Dispel,
+            SpellEffect::Language => SpellLog::Language,
+            SpellEffect::DualWield => SpellLog::DualWield,
+            SpellEffect::Jump => SpellLog::Jump,
+            SpellEffect::Jump2 => SpellLog::Jump2,
+            SpellEffect::TeleportUnitsFaceCaster => SpellLog::TeleportUnitsFaceCaster,
+            SpellEffect::SkillStep => SpellLog::SkillStep,
+            SpellEffect::AddHonor => SpellLog::AddHonor,
+            SpellEffect::Spawn => SpellLog::Spawn,
+            SpellEffect::TradeSkill => SpellLog::TradeSkill,
+            SpellEffect::Stealth => SpellLog::Stealth,
+            SpellEffect::Detect => SpellLog::Detect,
+            SpellEffect::TransDoor => {
+                // summon_target: PackedGuid
+                let summon_target = crate::util::read_packed_guid(&mut r)?;
+
+                SpellLog::TransDoor {
+                    summon_target,
+                }
+            }
+            SpellEffect::ForceCriticalHit => SpellLog::ForceCriticalHit,
+            SpellEffect::GuaranteeHit => SpellLog::GuaranteeHit,
+            SpellEffect::EnchantItem => SpellLog::EnchantItem,
+            SpellEffect::EnchantItemTemporary => SpellLog::EnchantItemTemporary,
+            SpellEffect::Tamecreature => SpellLog::Tamecreature,
+            SpellEffect::SummonPet => {
+                // summon_target: PackedGuid
+                let summon_target = crate::util::read_packed_guid(&mut r)?;
+
+                SpellLog::SummonPet {
+                    summon_target,
+                }
+            }
+            SpellEffect::LearnPetSpell => SpellLog::LearnPetSpell,
+            SpellEffect::WeaponDamage => SpellLog::WeaponDamage,
+            SpellEffect::CreateRandomItem => SpellLog::CreateRandomItem,
+            SpellEffect::Proficiency => SpellLog::Proficiency,
+            SpellEffect::SendEvent => SpellLog::SendEvent,
+            SpellEffect::PowerBurn => SpellLog::PowerBurn,
+            SpellEffect::Threat => SpellLog::Threat,
+            SpellEffect::TriggerSpell => SpellLog::TriggerSpell,
+            SpellEffect::ApplyAreaAuraRaid => SpellLog::ApplyAreaAuraRaid,
+            SpellEffect::RestoreItemCharges => SpellLog::RestoreItemCharges,
+            SpellEffect::HealMaxHealth => SpellLog::HealMaxHealth,
+            SpellEffect::InterruptCast => {
+                // target5: PackedGuid
+                let target5 = crate::util::read_packed_guid(&mut r)?;
+
+                // interrupted_spell: Spell
+                let interrupted_spell = crate::util::read_u32_le(&mut r)?;
+
+                SpellLog::InterruptCast {
+                    interrupted_spell,
+                    target5,
+                }
+            }
+            SpellEffect::Distract => SpellLog::Distract,
+            SpellEffect::Pull => SpellLog::Pull,
+            SpellEffect::Pickpocket => SpellLog::Pickpocket,
+            SpellEffect::AddFarsight => SpellLog::AddFarsight,
+            SpellEffect::UntrainTalents => SpellLog::UntrainTalents,
+            SpellEffect::ApplyGlyph => SpellLog::ApplyGlyph,
+            SpellEffect::HealMechanical => SpellLog::HealMechanical,
+            SpellEffect::SummonObjectWild => {
+                // summon_target: PackedGuid
+                let summon_target = crate::util::read_packed_guid(&mut r)?;
+
+                SpellLog::SummonObjectWild {
+                    summon_target,
+                }
+            }
+            SpellEffect::ScriptEffect => SpellLog::ScriptEffect,
+            SpellEffect::Attack => SpellLog::Attack,
+            SpellEffect::Sanctuary => SpellLog::Sanctuary,
+            SpellEffect::AddComboPoints => SpellLog::AddComboPoints,
+            SpellEffect::CreateHouse => {
+                // summon_target: PackedGuid
+                let summon_target = crate::util::read_packed_guid(&mut r)?;
+
+                SpellLog::CreateHouse {
+                    summon_target,
+                }
+            }
+            SpellEffect::BindSight => SpellLog::BindSight,
+            SpellEffect::Duel => {
+                // summon_target: PackedGuid
+                let summon_target = crate::util::read_packed_guid(&mut r)?;
+
+                SpellLog::Duel {
+                    summon_target,
+                }
+            }
+            SpellEffect::Stuck => SpellLog::Stuck,
+            SpellEffect::SummonPlayer => SpellLog::SummonPlayer,
+            SpellEffect::ActivateObject => SpellLog::ActivateObject,
+            SpellEffect::WmoDamage => SpellLog::WmoDamage,
+            SpellEffect::WmoRepair => SpellLog::WmoRepair,
+            SpellEffect::WmoChange => SpellLog::WmoChange,
+            SpellEffect::KillCreditPersonal => SpellLog::KillCreditPersonal,
+            SpellEffect::ThreatAll => SpellLog::ThreatAll,
+            SpellEffect::EnchantHeldItem => SpellLog::EnchantHeldItem,
+            SpellEffect::BreakPlayerTargeting => SpellLog::BreakPlayerTargeting,
+            SpellEffect::SelfResurrect => SpellLog::SelfResurrect,
+            SpellEffect::Skinning => SpellLog::Skinning,
+            SpellEffect::Charge => SpellLog::Charge,
+            SpellEffect::SummonAllTotems => SpellLog::SummonAllTotems,
+            SpellEffect::KnockBack => SpellLog::KnockBack,
+            SpellEffect::Disenchant => SpellLog::Disenchant,
+            SpellEffect::Inebriate => SpellLog::Inebriate,
+            SpellEffect::FeedPet => {
+                // pet_feed_guid: PackedGuid
+                let pet_feed_guid = crate::util::read_packed_guid(&mut r)?;
+
+                SpellLog::FeedPet {
+                    pet_feed_guid,
+                }
+            }
+            SpellEffect::DismissPet => {
+                // pet_dismiss_guid: PackedGuid
+                let pet_dismiss_guid = crate::util::read_packed_guid(&mut r)?;
+
+                SpellLog::DismissPet {
+                    pet_dismiss_guid,
+                }
+            }
+            SpellEffect::Reputation => SpellLog::Reputation,
+            SpellEffect::SummonObjectSlot1 => {
+                // summon_target: PackedGuid
+                let summon_target = crate::util::read_packed_guid(&mut r)?;
+
+                SpellLog::SummonObjectSlot1 {
+                    summon_target,
+                }
+            }
+            SpellEffect::SummonObjectSlot2 => {
+                // summon_target: PackedGuid
+                let summon_target = crate::util::read_packed_guid(&mut r)?;
+
+                SpellLog::SummonObjectSlot2 {
+                    summon_target,
+                }
+            }
+            SpellEffect::SummonObjectSlot3 => {
+                // summon_target: PackedGuid
+                let summon_target = crate::util::read_packed_guid(&mut r)?;
+
+                SpellLog::SummonObjectSlot3 {
+                    summon_target,
+                }
+            }
+            SpellEffect::SummonObjectSlot4 => {
+                // summon_target: PackedGuid
+                let summon_target = crate::util::read_packed_guid(&mut r)?;
+
+                SpellLog::SummonObjectSlot4 {
+                    summon_target,
+                }
+            }
+            SpellEffect::DispelMechanic => SpellLog::DispelMechanic,
+            SpellEffect::SummonDeadPet => SpellLog::SummonDeadPet,
+            SpellEffect::DestroyAllTotems => SpellLog::DestroyAllTotems,
+            SpellEffect::DurabilityDamage => {
+                // target6: PackedGuid
+                let target6 = crate::util::read_packed_guid(&mut r)?;
+
+                // item_to_damage: Item
+                let item_to_damage = crate::util::read_u32_le(&mut r)?;
+
+                // unknown5: u32
+                let unknown5 = crate::util::read_u32_le(&mut r)?;
+
+                SpellLog::DurabilityDamage {
+                    item_to_damage,
+                    target6,
+                    unknown5,
+                }
+            }
+            SpellEffect::Unknown112 => SpellLog::Unknown112,
+            SpellEffect::ResurrectNew => {
+                // resurrect_guid: PackedGuid
+                let resurrect_guid = crate::util::read_packed_guid(&mut r)?;
+
+                SpellLog::ResurrectNew {
+                    resurrect_guid,
+                }
+            }
+            SpellEffect::AttackMe => SpellLog::AttackMe,
+            SpellEffect::DurabilityDamagePct => SpellLog::DurabilityDamagePct,
+            SpellEffect::SkinPlayerCorpse => SpellLog::SkinPlayerCorpse,
+            SpellEffect::SpiritHeal => SpellLog::SpiritHeal,
+            SpellEffect::Skill => SpellLog::Skill,
+            SpellEffect::ApplyAreaAuraPet => SpellLog::ApplyAreaAuraPet,
+            SpellEffect::TeleportGraveyard => SpellLog::TeleportGraveyard,
+            SpellEffect::NormalizedWeaponDmg => SpellLog::NormalizedWeaponDmg,
+            SpellEffect::Unknown122 => SpellLog::Unknown122,
+            SpellEffect::SendTaxi => SpellLog::SendTaxi,
+            SpellEffect::PlayerPull => SpellLog::PlayerPull,
+            SpellEffect::ModifyThreatPercent => SpellLog::ModifyThreatPercent,
+            SpellEffect::StealBeneficialBuff => SpellLog::StealBeneficialBuff,
+            SpellEffect::Prospecting => SpellLog::Prospecting,
+            SpellEffect::ApplyAreaAuraFriend => SpellLog::ApplyAreaAuraFriend,
+            SpellEffect::ApplyAreaAuraEnemy => SpellLog::ApplyAreaAuraEnemy,
+            SpellEffect::RedirectThreat => SpellLog::RedirectThreat,
+            SpellEffect::PlaySound => SpellLog::PlaySound,
+            SpellEffect::PlayMusic => SpellLog::PlayMusic,
+            SpellEffect::UnlearnSpecialization => SpellLog::UnlearnSpecialization,
+            SpellEffect::KillCreditGroup => SpellLog::KillCreditGroup,
+            SpellEffect::CallPet => SpellLog::CallPet,
+            SpellEffect::HealPct => SpellLog::HealPct,
+            SpellEffect::EnergizePct => SpellLog::EnergizePct,
+            SpellEffect::LeapBack => SpellLog::LeapBack,
+            SpellEffect::ClearQuest => SpellLog::ClearQuest,
+            SpellEffect::ForceCast => SpellLog::ForceCast,
+            SpellEffect::ForceCastWithValue => SpellLog::ForceCastWithValue,
+            SpellEffect::TriggerSpellWithValue => SpellLog::TriggerSpellWithValue,
+            SpellEffect::ApplyAreaAuraOwner => SpellLog::ApplyAreaAuraOwner,
+            SpellEffect::KnockbackFromPosition => SpellLog::KnockbackFromPosition,
+            SpellEffect::GravityPull => SpellLog::GravityPull,
+            SpellEffect::ActivateRune => SpellLog::ActivateRune,
+            SpellEffect::QuestFail => SpellLog::QuestFail,
+            SpellEffect::Unknown148 => SpellLog::Unknown148,
+            SpellEffect::Charge2 => SpellLog::Charge2,
+            SpellEffect::QuestOffer => SpellLog::QuestOffer,
+            SpellEffect::TriggerSpell2 => SpellLog::TriggerSpell2,
+            SpellEffect::Unknown152 => SpellLog::Unknown152,
+            SpellEffect::CreatePet => SpellLog::CreatePet,
+            SpellEffect::TeachTaxiNode => SpellLog::TeachTaxiNode,
+            SpellEffect::TitanGrip => SpellLog::TitanGrip,
+            SpellEffect::EnchantItemPrismatic => SpellLog::EnchantItemPrismatic,
+            SpellEffect::CreateItem2 => SpellLog::CreateItem2,
+            SpellEffect::Milling => SpellLog::Milling,
+            SpellEffect::AllowRenamePet => SpellLog::AllowRenamePet,
+            SpellEffect::Unknown160 => SpellLog::Unknown160,
+            SpellEffect::TalentSpecCount => SpellLog::TalentSpecCount,
+            SpellEffect::TalentSpecSelect => SpellLog::TalentSpecSelect,
+            SpellEffect::Unknown163 => SpellLog::Unknown163,
+            SpellEffect::CancelAura => SpellLog::CancelAura,
+        };
+
+        Ok(effect_if)
+    }
+
+}
+
+impl SpellLog {
+    pub(crate) const fn size(&self) -> usize {
+        (match self {
+            Self::PowerDrain {
+                target1,
+                ..
+            } => {
+                4
+                + 4 // amount: u32
+                + 4 // multiplier: f32
+                + 4 // power: Power
+                + crate::util::packed_guid_size(&target1) // target1: PackedGuid
+            }
+            Self::Resurrect {
+                resurrect_guid,
+            } => {
+                4
+                + crate::util::packed_guid_size(&resurrect_guid) // resurrect_guid: PackedGuid
+            }
+            Self::AddExtraAttacks {
+                target4,
+                ..
+            } => {
+                4
+                + 4 // extra_attacks: u32
+                + crate::util::packed_guid_size(&target4) // target4: PackedGuid
+            }
+            Self::CreateItem {
+                ..
+            } => {
+                4
+                + 4 // item: Item
+            }
+            Self::Summon {
+                summon_target,
+            } => {
+                4
+                + crate::util::packed_guid_size(&summon_target) // summon_target: PackedGuid
+            }
+            Self::OpenLock {
+                lock_target,
+            } => {
+                4
+                + crate::util::packed_guid_size(&lock_target) // lock_target: PackedGuid
+            }
+            Self::TransDoor {
+                summon_target,
+            } => {
+                4
+                + crate::util::packed_guid_size(&summon_target) // summon_target: PackedGuid
+            }
+            Self::SummonPet {
+                summon_target,
+            } => {
+                4
+                + crate::util::packed_guid_size(&summon_target) // summon_target: PackedGuid
+            }
+            Self::InterruptCast {
+                target5,
+                ..
+            } => {
+                4
+                + 4 // interrupted_spell: Spell
+                + crate::util::packed_guid_size(&target5) // target5: PackedGuid
+            }
+            Self::SummonObjectWild {
+                summon_target,
+            } => {
+                4
+                + crate::util::packed_guid_size(&summon_target) // summon_target: PackedGuid
+            }
+            Self::CreateHouse {
+                summon_target,
+            } => {
+                4
+                + crate::util::packed_guid_size(&summon_target) // summon_target: PackedGuid
+            }
+            Self::Duel {
+                summon_target,
+            } => {
+                4
+                + crate::util::packed_guid_size(&summon_target) // summon_target: PackedGuid
+            }
+            Self::FeedPet {
+                pet_feed_guid,
+            } => {
+                4
+                + crate::util::packed_guid_size(&pet_feed_guid) // pet_feed_guid: PackedGuid
+            }
+            Self::DismissPet {
+                pet_dismiss_guid,
+            } => {
+                4
+                + crate::util::packed_guid_size(&pet_dismiss_guid) // pet_dismiss_guid: PackedGuid
+            }
+            Self::SummonObjectSlot1 {
+                summon_target,
+            } => {
+                4
+                + crate::util::packed_guid_size(&summon_target) // summon_target: PackedGuid
+            }
+            Self::SummonObjectSlot2 {
+                summon_target,
+            } => {
+                4
+                + crate::util::packed_guid_size(&summon_target) // summon_target: PackedGuid
+            }
+            Self::SummonObjectSlot3 {
+                summon_target,
+            } => {
+                4
+                + crate::util::packed_guid_size(&summon_target) // summon_target: PackedGuid
+            }
+            Self::SummonObjectSlot4 {
+                summon_target,
+            } => {
+                4
+                + crate::util::packed_guid_size(&summon_target) // summon_target: PackedGuid
+            }
+            Self::DurabilityDamage {
+                target6,
+                ..
+            } => {
+                4
+                + 4 // item_to_damage: Item
+                + crate::util::packed_guid_size(&target6) // target6: PackedGuid
+                + 4 // unknown5: u32
+            }
+            Self::ResurrectNew {
+                resurrect_guid,
+            } => {
+                4
+                + crate::util::packed_guid_size(&resurrect_guid) // resurrect_guid: PackedGuid
+            }
+            _ => 4,
+        }) // effect: SpellLog
+        + 4 // amount_of_logs: u32
+    }
+}
+
+impl Default for SpellLog {
     fn default() -> Self {
         // First enumerator without any fields
         Self::None
     }
 }
 
-impl SpellLog_SpellEffect {
+impl SpellLog {
     pub(crate) const fn as_int(&self) -> u32 {
         match self {
             Self::None => 0,
@@ -1019,7 +1145,7 @@ impl SpellLog_SpellEffect {
 
 }
 
-impl std::fmt::Display for SpellLog_SpellEffect {
+impl std::fmt::Display for SpellLog {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match self {
             Self::None => f.write_str("None"),
@@ -1187,145 +1313,6 @@ impl std::fmt::Display for SpellLog_SpellEffect {
             Self::TalentSpecSelect => f.write_str("TalentSpecSelect"),
             Self::Unknown163 => f.write_str("Unknown163"),
             Self::CancelAura => f.write_str("CancelAura"),
-        }
-    }
-}
-
-impl SpellLog_SpellEffect {
-    pub(crate) const fn size(&self) -> usize {
-        match self {
-            Self::PowerDrain {
-                target1,
-                ..
-            } => {
-                4
-                + 4 // amount: u32
-                + 4 // multiplier: f32
-                + 4 // power: Power
-                + crate::util::packed_guid_size(&target1) // target1: PackedGuid
-            }
-            Self::Resurrect {
-                resurrect_guid,
-            } => {
-                4
-                + crate::util::packed_guid_size(&resurrect_guid) // resurrect_guid: PackedGuid
-            }
-            Self::AddExtraAttacks {
-                target4,
-                ..
-            } => {
-                4
-                + 4 // extra_attacks: u32
-                + crate::util::packed_guid_size(&target4) // target4: PackedGuid
-            }
-            Self::CreateItem {
-                ..
-            } => {
-                4
-                + 4 // item: Item
-            }
-            Self::Summon {
-                summon_target,
-            } => {
-                4
-                + crate::util::packed_guid_size(&summon_target) // summon_target: PackedGuid
-            }
-            Self::OpenLock {
-                lock_target,
-            } => {
-                4
-                + crate::util::packed_guid_size(&lock_target) // lock_target: PackedGuid
-            }
-            Self::TransDoor {
-                summon_target,
-            } => {
-                4
-                + crate::util::packed_guid_size(&summon_target) // summon_target: PackedGuid
-            }
-            Self::SummonPet {
-                summon_target,
-            } => {
-                4
-                + crate::util::packed_guid_size(&summon_target) // summon_target: PackedGuid
-            }
-            Self::InterruptCast {
-                target5,
-                ..
-            } => {
-                4
-                + 4 // interrupted_spell: Spell
-                + crate::util::packed_guid_size(&target5) // target5: PackedGuid
-            }
-            Self::SummonObjectWild {
-                summon_target,
-            } => {
-                4
-                + crate::util::packed_guid_size(&summon_target) // summon_target: PackedGuid
-            }
-            Self::CreateHouse {
-                summon_target,
-            } => {
-                4
-                + crate::util::packed_guid_size(&summon_target) // summon_target: PackedGuid
-            }
-            Self::Duel {
-                summon_target,
-            } => {
-                4
-                + crate::util::packed_guid_size(&summon_target) // summon_target: PackedGuid
-            }
-            Self::FeedPet {
-                pet_feed_guid,
-            } => {
-                4
-                + crate::util::packed_guid_size(&pet_feed_guid) // pet_feed_guid: PackedGuid
-            }
-            Self::DismissPet {
-                pet_dismiss_guid,
-            } => {
-                4
-                + crate::util::packed_guid_size(&pet_dismiss_guid) // pet_dismiss_guid: PackedGuid
-            }
-            Self::SummonObjectSlot1 {
-                summon_target,
-            } => {
-                4
-                + crate::util::packed_guid_size(&summon_target) // summon_target: PackedGuid
-            }
-            Self::SummonObjectSlot2 {
-                summon_target,
-            } => {
-                4
-                + crate::util::packed_guid_size(&summon_target) // summon_target: PackedGuid
-            }
-            Self::SummonObjectSlot3 {
-                summon_target,
-            } => {
-                4
-                + crate::util::packed_guid_size(&summon_target) // summon_target: PackedGuid
-            }
-            Self::SummonObjectSlot4 {
-                summon_target,
-            } => {
-                4
-                + crate::util::packed_guid_size(&summon_target) // summon_target: PackedGuid
-            }
-            Self::DurabilityDamage {
-                target6,
-                ..
-            } => {
-                4
-                + 4 // item_to_damage: Item
-                + crate::util::packed_guid_size(&target6) // target6: PackedGuid
-                + 4 // unknown5: u32
-            }
-            Self::ResurrectNew {
-                resurrect_guid,
-            } => {
-                4
-                + crate::util::packed_guid_size(&resurrect_guid) // resurrect_guid: PackedGuid
-            }
-            _ => 4,
         }
     }
 }

@@ -122,45 +122,43 @@ mod test {
         SMSG_UPDATE_OBJECT {
             has_transport: 0x0,
             objects: vec![
-                Object {
-                    update_type: Object_UpdateType::CreateObject2 {
-                        guid3: Guid::new(0x4),
-                        mask2: UpdateMask::Player(UpdatePlayer::builder()
-                            .set_object_guid(Guid::new(4))
-                            .set_unit_health(100)
-                            .set_unit_bytes_0(1.try_into().unwrap(), 1.try_into().unwrap(), 1.try_into().unwrap(), 1.try_into().unwrap())
-                            .finalize()
-                        ),
-                        movement2: MovementBlock {
-                            update_flag: MovementBlock_UpdateFlag::empty()
-                                .set_living(MovementBlock_UpdateFlag_Living::Living {
-                                    backwards_running_speed: 4.5_f32,
-                                    backwards_swimming_speed: 0_f32,
-                                    fall_time: 0_f32,
-                                    flags: MovementBlock_MovementFlags::empty()
-                                        ,
-                                    living_orientation: 0_f32,
-                                    living_position: Vector3d {
-                                        x: -8949.95_f32,
-                                        y: -132.493_f32,
-                                        z: 83.5312_f32,
-                                    },
-                                    running_speed: 7_f32,
-                                    swimming_speed: 0_f32,
-                                    timestamp: 0x0,
-                                    turn_rate: 3.1415927_f32,
-                                    walking_speed: 1_f32,
-                                })
-                                .set_all(MovementBlock_UpdateFlag_All {
-                                    unknown1: 0x1,
-                                })
-                                .set_self()
-                                ,
-                        },
-                        object_type: ObjectType::Player,
+                Object::CreateObject2 {
+                    guid3: Guid::new(0x4),
+                    mask2: UpdateMask::Player(UpdatePlayer::builder()
+                        .set_object_guid(Guid::new(4))
+                        .set_unit_health(100)
+                        .set_unit_bytes_0(1.try_into().unwrap(), 1.try_into().unwrap(), 1.try_into().unwrap(), 1.try_into().unwrap())
+                        .finalize()
+                    ),
+                    movement2: MovementBlock {
+                        update_flag: MovementBlock_UpdateFlag::empty()
+                            .set_living(MovementBlock_UpdateFlag_Living::Living {
+                                backwards_running_speed: 4.5_f32,
+                                backwards_swimming_speed: 0_f32,
+                                fall_time: 0_f32,
+                                flags: MovementBlock_MovementFlags::empty()
+                                    ,
+                                living_orientation: 0_f32,
+                                living_position: Vector3d {
+                                    x: -8949.95_f32,
+                                    y: -132.493_f32,
+                                    z: 83.5312_f32,
+                                },
+                                running_speed: 7_f32,
+                                swimming_speed: 0_f32,
+                                timestamp: 0x0,
+                                turn_rate: 3.1415927_f32,
+                                walking_speed: 1_f32,
+                            })
+                            .set_all(MovementBlock_UpdateFlag_All {
+                                unknown1: 0x1,
+                            })
+                            .set_self()
+                            ,
                     },
-                },
-            ],
+                    object_type: ObjectType::Player,
+                }
+,            ],
         }
 
     }
@@ -242,51 +240,49 @@ mod test {
         SMSG_UPDATE_OBJECT {
             has_transport: 0x0,
             objects: vec![
-                Object {
-                    update_type: Object_UpdateType::CreateObject2 {
-                        guid3: Guid::new(0x4),
-                        mask2: UpdateMask::Player(UpdatePlayer::builder()
-                            .set_object_guid(Guid::new(4))
-                            .set_object_scale_x(1.0)
-                            .set_unit_health(100)
-                            .set_unit_maxhealth(100)
-                            .set_unit_level(1)
-                            .set_unit_factiontemplate(1)
-                            .set_unit_bytes_0(1.try_into().unwrap(), 1.try_into().unwrap(), 1.try_into().unwrap(), 1.try_into().unwrap())
-                            .set_unit_displayid(50)
-                            .set_unit_nativedisplayid(50)
-                            .finalize()
-                        ),
-                        movement2: MovementBlock {
-                            update_flag: MovementBlock_UpdateFlag::empty()
-                                .set_living(MovementBlock_UpdateFlag_Living::Living {
-                                    backwards_running_speed: 4.5_f32,
-                                    backwards_swimming_speed: 0_f32,
-                                    fall_time: 0_f32,
-                                    flags: MovementBlock_MovementFlags::empty()
-                                        ,
-                                    living_orientation: 0_f32,
-                                    living_position: Vector3d {
-                                        x: -8949.95_f32,
-                                        y: -132.493_f32,
-                                        z: 83.5312_f32,
-                                    },
-                                    running_speed: 7_f32,
-                                    swimming_speed: 0_f32,
-                                    timestamp: 0x0,
-                                    turn_rate: 3.1415927_f32,
-                                    walking_speed: 1_f32,
-                                })
-                                .set_all(MovementBlock_UpdateFlag_All {
-                                    unknown1: 0x1,
-                                })
-                                .set_self()
-                                ,
-                        },
-                        object_type: ObjectType::Player,
+                Object::CreateObject2 {
+                    guid3: Guid::new(0x4),
+                    mask2: UpdateMask::Player(UpdatePlayer::builder()
+                        .set_object_guid(Guid::new(4))
+                        .set_object_scale_x(1.0)
+                        .set_unit_health(100)
+                        .set_unit_maxhealth(100)
+                        .set_unit_level(1)
+                        .set_unit_factiontemplate(1)
+                        .set_unit_bytes_0(1.try_into().unwrap(), 1.try_into().unwrap(), 1.try_into().unwrap(), 1.try_into().unwrap())
+                        .set_unit_displayid(50)
+                        .set_unit_nativedisplayid(50)
+                        .finalize()
+                    ),
+                    movement2: MovementBlock {
+                        update_flag: MovementBlock_UpdateFlag::empty()
+                            .set_living(MovementBlock_UpdateFlag_Living::Living {
+                                backwards_running_speed: 4.5_f32,
+                                backwards_swimming_speed: 0_f32,
+                                fall_time: 0_f32,
+                                flags: MovementBlock_MovementFlags::empty()
+                                    ,
+                                living_orientation: 0_f32,
+                                living_position: Vector3d {
+                                    x: -8949.95_f32,
+                                    y: -132.493_f32,
+                                    z: 83.5312_f32,
+                                },
+                                running_speed: 7_f32,
+                                swimming_speed: 0_f32,
+                                timestamp: 0x0,
+                                turn_rate: 3.1415927_f32,
+                                walking_speed: 1_f32,
+                            })
+                            .set_all(MovementBlock_UpdateFlag_All {
+                                unknown1: 0x1,
+                            })
+                            .set_self()
+                            ,
                     },
-                },
-            ],
+                    object_type: ObjectType::Player,
+                }
+,            ],
         }
 
     }

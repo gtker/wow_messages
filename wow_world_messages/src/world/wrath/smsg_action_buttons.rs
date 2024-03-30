@@ -13,9 +13,15 @@ use crate::wrath::{
 ///     }
 /// }
 /// ```
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
-pub struct SMSG_ACTION_BUTTONS {
-    pub behavior: SMSG_ACTION_BUTTONS_ActionBarBehavior,
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord)]
+pub enum SMSG_ACTION_BUTTONS {
+    Initial {
+        data: [ActionButton; 144],
+    },
+    Set {
+        data: [ActionButton; 144],
+    },
+    Clear,
 }
 
 impl crate::private::Sealed for SMSG_ACTION_BUTTONS {}
@@ -39,7 +45,7 @@ impl SMSG_ACTION_BUTTONS {
                     data
                 };
 
-                SMSG_ACTION_BUTTONS_ActionBarBehavior::Initial {
+                SMSG_ACTION_BUTTONS::Initial {
                     data,
                 }
             }
@@ -53,16 +59,14 @@ impl SMSG_ACTION_BUTTONS {
                     data
                 };
 
-                SMSG_ACTION_BUTTONS_ActionBarBehavior::Set {
+                SMSG_ACTION_BUTTONS::Set {
                     data,
                 }
             }
-            ActionBarBehavior::Clear => SMSG_ACTION_BUTTONS_ActionBarBehavior::Clear,
+            ActionBarBehavior::Clear => SMSG_ACTION_BUTTONS::Clear,
         };
 
-        Ok(Self {
-            behavior: behavior_if,
-        })
+        Ok(behavior_if)
     }
 
 }
@@ -84,9 +88,9 @@ impl crate::Message for SMSG_ACTION_BUTTONS {
 
         writeln!(s, "test SMSG_ACTION_BUTTONS {{").unwrap();
         // Members
-        writeln!(s, "    behavior = {};", ActionBarBehavior::try_from(self.behavior.as_int()).unwrap().as_test_case_value()).unwrap();
-        match &self.behavior {
-            crate::wrath::SMSG_ACTION_BUTTONS_ActionBarBehavior::Initial {
+        writeln!(s, "    behavior = {};", ActionBarBehavior::try_from(self.as_int()).unwrap().as_test_case_value()).unwrap();
+        match &self {
+            crate::wrath::SMSG_ACTION_BUTTONS::Initial {
                 data,
             } => {
                 writeln!(s, "    data = [").unwrap();
@@ -101,7 +105,7 @@ impl crate::Message for SMSG_ACTION_BUTTONS {
                 }
                 writeln!(s, "    ];").unwrap();
             }
-            crate::wrath::SMSG_ACTION_BUTTONS_ActionBarBehavior::Set {
+            crate::wrath::SMSG_ACTION_BUTTONS::Set {
                 data,
             } => {
                 writeln!(s, "    data = [").unwrap();
@@ -131,8 +135,8 @@ impl crate::Message for SMSG_ACTION_BUTTONS {
         let mut bytes = bytes.into_iter();
 
         crate::util::write_bytes(&mut s, &mut bytes, 1, "behavior", "    ");
-        match &self.behavior {
-            crate::wrath::SMSG_ACTION_BUTTONS_ActionBarBehavior::Initial {
+        match &self {
+            crate::wrath::SMSG_ACTION_BUTTONS::Initial {
                 data,
             } => {
                 writeln!(s, "    /* data: ActionButton[144] start */").unwrap();
@@ -145,7 +149,7 @@ impl crate::Message for SMSG_ACTION_BUTTONS {
                 }
                 writeln!(s, "    /* data: ActionButton[144] end */").unwrap();
             }
-            crate::wrath::SMSG_ACTION_BUTTONS_ActionBarBehavior::Set {
+            crate::wrath::SMSG_ACTION_BUTTONS::Set {
                 data,
             } => {
                 writeln!(s, "    /* data: ActionButton[144] start */").unwrap();
@@ -176,10 +180,10 @@ impl crate::Message for SMSG_ACTION_BUTTONS {
 
     fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
         // behavior: ActionBarBehavior
-        w.write_all(&(self.behavior.as_int().to_le_bytes()))?;
+        w.write_all(&(self.as_int().to_le_bytes()))?;
 
-        match &self.behavior {
-            SMSG_ACTION_BUTTONS_ActionBarBehavior::Initial {
+        match &self {
+            SMSG_ACTION_BUTTONS::Initial {
                 data,
             } => {
                 // data: ActionButton[144]
@@ -188,7 +192,7 @@ impl crate::Message for SMSG_ACTION_BUTTONS {
                 }
 
             }
-            SMSG_ACTION_BUTTONS_ActionBarBehavior::Set {
+            SMSG_ACTION_BUTTONS::Set {
                 data,
             } => {
                 // data: ActionButton[144]
@@ -214,52 +218,7 @@ impl crate::wrath::ServerMessage for SMSG_ACTION_BUTTONS {}
 
 impl SMSG_ACTION_BUTTONS {
     pub(crate) const fn size(&self) -> usize {
-        self.behavior.size() // behavior: SMSG_ACTION_BUTTONS_ActionBarBehavior
-    }
-}
-
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord)]
-pub enum SMSG_ACTION_BUTTONS_ActionBarBehavior {
-    Initial {
-        data: [ActionButton; 144],
-    },
-    Set {
-        data: [ActionButton; 144],
-    },
-    Clear,
-}
-
-impl Default for SMSG_ACTION_BUTTONS_ActionBarBehavior {
-    fn default() -> Self {
-        // First enumerator without any fields
-        Self::Clear
-    }
-}
-
-impl SMSG_ACTION_BUTTONS_ActionBarBehavior {
-    pub(crate) const fn as_int(&self) -> u8 {
-        match self {
-            Self::Initial { .. } => 0,
-            Self::Set { .. } => 1,
-            Self::Clear => 2,
-        }
-    }
-
-}
-
-impl std::fmt::Display for SMSG_ACTION_BUTTONS_ActionBarBehavior {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
-            Self::Initial{ .. } => f.write_str("Initial"),
-            Self::Set{ .. } => f.write_str("Set"),
-            Self::Clear => f.write_str("Clear"),
-        }
-    }
-}
-
-impl SMSG_ACTION_BUTTONS_ActionBarBehavior {
-    pub(crate) const fn size(&self) -> usize {
-        match self {
+        (match self {
             Self::Initial {
                 ..
             } => {
@@ -273,6 +232,34 @@ impl SMSG_ACTION_BUTTONS_ActionBarBehavior {
                 + 144 * 4 // data: ActionButton[144]
             }
             _ => 1,
+        }) // behavior: SMSG_ACTION_BUTTONS
+    }
+}
+
+impl Default for SMSG_ACTION_BUTTONS {
+    fn default() -> Self {
+        // First enumerator without any fields
+        Self::Clear
+    }
+}
+
+impl SMSG_ACTION_BUTTONS {
+    pub(crate) const fn as_int(&self) -> u8 {
+        match self {
+            Self::Initial { .. } => 0,
+            Self::Set { .. } => 1,
+            Self::Clear => 2,
+        }
+    }
+
+}
+
+impl std::fmt::Display for SMSG_ACTION_BUTTONS {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        match self {
+            Self::Initial{ .. } => f.write_str("Initial"),
+            Self::Set{ .. } => f.write_str("Set"),
+            Self::Clear => f.write_str("Clear"),
         }
     }
 }

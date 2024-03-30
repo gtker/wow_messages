@@ -19,197 +19,8 @@ use crate::vanilla::WorldResult;
 ///     }
 /// }
 /// ```
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
-pub struct SMSG_AUTH_RESPONSE {
-    pub result: SMSG_AUTH_RESPONSE_WorldResult,
-}
-
-impl crate::private::Sealed for SMSG_AUTH_RESPONSE {}
-impl SMSG_AUTH_RESPONSE {
-    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
-        if !(1..=10).contains(&body_size) {
-            return Err(crate::errors::ParseErrorKind::InvalidSize);
-        }
-
-        // result: WorldResult
-        let result = crate::util::read_u8_le(&mut r)?.try_into()?;
-
-        let result_if = match result {
-            WorldResult::ResponseSuccess => SMSG_AUTH_RESPONSE_WorldResult::ResponseSuccess,
-            WorldResult::ResponseFailure => SMSG_AUTH_RESPONSE_WorldResult::ResponseFailure,
-            WorldResult::ResponseCancelled => SMSG_AUTH_RESPONSE_WorldResult::ResponseCancelled,
-            WorldResult::ResponseDisconnected => SMSG_AUTH_RESPONSE_WorldResult::ResponseDisconnected,
-            WorldResult::ResponseFailedToConnect => SMSG_AUTH_RESPONSE_WorldResult::ResponseFailedToConnect,
-            WorldResult::ResponseConnected => SMSG_AUTH_RESPONSE_WorldResult::ResponseConnected,
-            WorldResult::ResponseVersionMismatch => SMSG_AUTH_RESPONSE_WorldResult::ResponseVersionMismatch,
-            WorldResult::CstatusConnecting => SMSG_AUTH_RESPONSE_WorldResult::CstatusConnecting,
-            WorldResult::CstatusNegotiatingSecurity => SMSG_AUTH_RESPONSE_WorldResult::CstatusNegotiatingSecurity,
-            WorldResult::CstatusNegotiationComplete => SMSG_AUTH_RESPONSE_WorldResult::CstatusNegotiationComplete,
-            WorldResult::CstatusNegotiationFailed => SMSG_AUTH_RESPONSE_WorldResult::CstatusNegotiationFailed,
-            WorldResult::CstatusAuthenticating => SMSG_AUTH_RESPONSE_WorldResult::CstatusAuthenticating,
-            WorldResult::AuthOk => {
-                // billing_time: u32
-                let billing_time = crate::util::read_u32_le(&mut r)?;
-
-                // billing_flags: u8
-                let billing_flags = crate::util::read_u8_le(&mut r)?;
-
-                // billing_rested: u32
-                let billing_rested = crate::util::read_u32_le(&mut r)?;
-
-                SMSG_AUTH_RESPONSE_WorldResult::AuthOk {
-                    billing_flags,
-                    billing_rested,
-                    billing_time,
-                }
-            }
-            WorldResult::AuthFailed => SMSG_AUTH_RESPONSE_WorldResult::AuthFailed,
-            WorldResult::AuthReject => SMSG_AUTH_RESPONSE_WorldResult::AuthReject,
-            WorldResult::AuthBadServerProof => SMSG_AUTH_RESPONSE_WorldResult::AuthBadServerProof,
-            WorldResult::AuthUnavailable => SMSG_AUTH_RESPONSE_WorldResult::AuthUnavailable,
-            WorldResult::AuthSystemError => SMSG_AUTH_RESPONSE_WorldResult::AuthSystemError,
-            WorldResult::AuthBillingError => SMSG_AUTH_RESPONSE_WorldResult::AuthBillingError,
-            WorldResult::AuthBillingExpired => SMSG_AUTH_RESPONSE_WorldResult::AuthBillingExpired,
-            WorldResult::AuthVersionMismatch => SMSG_AUTH_RESPONSE_WorldResult::AuthVersionMismatch,
-            WorldResult::AuthUnknownAccount => SMSG_AUTH_RESPONSE_WorldResult::AuthUnknownAccount,
-            WorldResult::AuthIncorrectPassword => SMSG_AUTH_RESPONSE_WorldResult::AuthIncorrectPassword,
-            WorldResult::AuthSessionExpired => SMSG_AUTH_RESPONSE_WorldResult::AuthSessionExpired,
-            WorldResult::AuthServerShuttingDown => SMSG_AUTH_RESPONSE_WorldResult::AuthServerShuttingDown,
-            WorldResult::AuthAlreadyLoggingIn => SMSG_AUTH_RESPONSE_WorldResult::AuthAlreadyLoggingIn,
-            WorldResult::AuthLoginServerNotFound => SMSG_AUTH_RESPONSE_WorldResult::AuthLoginServerNotFound,
-            WorldResult::AuthWaitQueue => {
-                // queue_position: u32
-                let queue_position = crate::util::read_u32_le(&mut r)?;
-
-                SMSG_AUTH_RESPONSE_WorldResult::AuthWaitQueue {
-                    queue_position,
-                }
-            }
-            WorldResult::AuthBanned => SMSG_AUTH_RESPONSE_WorldResult::AuthBanned,
-            WorldResult::AuthAlreadyOnline => SMSG_AUTH_RESPONSE_WorldResult::AuthAlreadyOnline,
-            WorldResult::AuthNoTime => SMSG_AUTH_RESPONSE_WorldResult::AuthNoTime,
-            WorldResult::AuthDbBusy => SMSG_AUTH_RESPONSE_WorldResult::AuthDbBusy,
-            WorldResult::AuthSuspended => SMSG_AUTH_RESPONSE_WorldResult::AuthSuspended,
-            WorldResult::AuthParentalControl => SMSG_AUTH_RESPONSE_WorldResult::AuthParentalControl,
-            WorldResult::RealmListInProgress => SMSG_AUTH_RESPONSE_WorldResult::RealmListInProgress,
-            WorldResult::RealmListSuccess => SMSG_AUTH_RESPONSE_WorldResult::RealmListSuccess,
-            WorldResult::RealmListFailed => SMSG_AUTH_RESPONSE_WorldResult::RealmListFailed,
-            WorldResult::RealmListInvalid => SMSG_AUTH_RESPONSE_WorldResult::RealmListInvalid,
-            WorldResult::RealmListRealmNotFound => SMSG_AUTH_RESPONSE_WorldResult::RealmListRealmNotFound,
-            WorldResult::AccountCreateInProgress => SMSG_AUTH_RESPONSE_WorldResult::AccountCreateInProgress,
-            WorldResult::AccountCreateSuccess => SMSG_AUTH_RESPONSE_WorldResult::AccountCreateSuccess,
-            WorldResult::AccountCreateFailed => SMSG_AUTH_RESPONSE_WorldResult::AccountCreateFailed,
-            WorldResult::CharListRetrieving => SMSG_AUTH_RESPONSE_WorldResult::CharListRetrieving,
-            WorldResult::CharListRetrieved => SMSG_AUTH_RESPONSE_WorldResult::CharListRetrieved,
-            WorldResult::CharListFailed => SMSG_AUTH_RESPONSE_WorldResult::CharListFailed,
-            WorldResult::CharCreateInProgress => SMSG_AUTH_RESPONSE_WorldResult::CharCreateInProgress,
-            WorldResult::CharCreateSuccess => SMSG_AUTH_RESPONSE_WorldResult::CharCreateSuccess,
-            WorldResult::CharCreateError => SMSG_AUTH_RESPONSE_WorldResult::CharCreateError,
-            WorldResult::CharCreateFailed => SMSG_AUTH_RESPONSE_WorldResult::CharCreateFailed,
-            WorldResult::CharCreateNameInUse => SMSG_AUTH_RESPONSE_WorldResult::CharCreateNameInUse,
-            WorldResult::CharCreateDisabled => SMSG_AUTH_RESPONSE_WorldResult::CharCreateDisabled,
-            WorldResult::CharCreatePvpTeamsViolation => SMSG_AUTH_RESPONSE_WorldResult::CharCreatePvpTeamsViolation,
-            WorldResult::CharCreateServerLimit => SMSG_AUTH_RESPONSE_WorldResult::CharCreateServerLimit,
-            WorldResult::CharCreateAccountLimit => SMSG_AUTH_RESPONSE_WorldResult::CharCreateAccountLimit,
-            WorldResult::CharCreateServerQueue => SMSG_AUTH_RESPONSE_WorldResult::CharCreateServerQueue,
-            WorldResult::CharCreateOnlyExisting => SMSG_AUTH_RESPONSE_WorldResult::CharCreateOnlyExisting,
-            WorldResult::CharDeleteInProgress => SMSG_AUTH_RESPONSE_WorldResult::CharDeleteInProgress,
-            WorldResult::CharDeleteSuccess => SMSG_AUTH_RESPONSE_WorldResult::CharDeleteSuccess,
-            WorldResult::CharDeleteFailed => SMSG_AUTH_RESPONSE_WorldResult::CharDeleteFailed,
-            WorldResult::CharDeleteFailedLockedForTransfer => SMSG_AUTH_RESPONSE_WorldResult::CharDeleteFailedLockedForTransfer,
-            WorldResult::CharLoginInProgress => SMSG_AUTH_RESPONSE_WorldResult::CharLoginInProgress,
-            WorldResult::CharLoginSuccess => SMSG_AUTH_RESPONSE_WorldResult::CharLoginSuccess,
-            WorldResult::CharLoginNoWorld => SMSG_AUTH_RESPONSE_WorldResult::CharLoginNoWorld,
-            WorldResult::CharLoginDuplicateCharacter => SMSG_AUTH_RESPONSE_WorldResult::CharLoginDuplicateCharacter,
-            WorldResult::CharLoginNoInstances => SMSG_AUTH_RESPONSE_WorldResult::CharLoginNoInstances,
-            WorldResult::CharLoginFailed => SMSG_AUTH_RESPONSE_WorldResult::CharLoginFailed,
-            WorldResult::CharLoginDisabled => SMSG_AUTH_RESPONSE_WorldResult::CharLoginDisabled,
-            WorldResult::CharLoginNoCharacter => SMSG_AUTH_RESPONSE_WorldResult::CharLoginNoCharacter,
-            WorldResult::CharLoginLockedForTransfer => SMSG_AUTH_RESPONSE_WorldResult::CharLoginLockedForTransfer,
-            WorldResult::CharNameNoName => SMSG_AUTH_RESPONSE_WorldResult::CharNameNoName,
-            WorldResult::CharNameTooShort => SMSG_AUTH_RESPONSE_WorldResult::CharNameTooShort,
-            WorldResult::CharNameTooLong => SMSG_AUTH_RESPONSE_WorldResult::CharNameTooLong,
-            WorldResult::CharNameOnlyLetters => SMSG_AUTH_RESPONSE_WorldResult::CharNameOnlyLetters,
-            WorldResult::CharNameMixedLanguages => SMSG_AUTH_RESPONSE_WorldResult::CharNameMixedLanguages,
-            WorldResult::CharNameProfane => SMSG_AUTH_RESPONSE_WorldResult::CharNameProfane,
-            WorldResult::CharNameReserved => SMSG_AUTH_RESPONSE_WorldResult::CharNameReserved,
-            WorldResult::CharNameInvalidApostrophe => SMSG_AUTH_RESPONSE_WorldResult::CharNameInvalidApostrophe,
-            WorldResult::CharNameMultipleApostrophes => SMSG_AUTH_RESPONSE_WorldResult::CharNameMultipleApostrophes,
-            WorldResult::CharNameThreeConsecutive => SMSG_AUTH_RESPONSE_WorldResult::CharNameThreeConsecutive,
-            WorldResult::CharNameInvalidSpace => SMSG_AUTH_RESPONSE_WorldResult::CharNameInvalidSpace,
-            WorldResult::CharNameSuccess => SMSG_AUTH_RESPONSE_WorldResult::CharNameSuccess,
-            WorldResult::CharNameFailure => SMSG_AUTH_RESPONSE_WorldResult::CharNameFailure,
-        };
-
-        Ok(Self {
-            result: result_if,
-        })
-    }
-
-}
-
-impl crate::Message for SMSG_AUTH_RESPONSE {
-    const OPCODE: u32 = 0x01ee;
-
-    #[cfg(feature = "print-testcase")]
-    fn message_name(&self) -> &'static str {
-        "SMSG_AUTH_RESPONSE"
-    }
-
-    fn size_without_header(&self) -> u32 {
-        self.size() as u32
-    }
-
-    fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
-        // result: WorldResult
-        w.write_all(&(self.result.as_int().to_le_bytes()))?;
-
-        match &self.result {
-            SMSG_AUTH_RESPONSE_WorldResult::AuthOk {
-                billing_flags,
-                billing_rested,
-                billing_time,
-            } => {
-                // billing_time: u32
-                w.write_all(&billing_time.to_le_bytes())?;
-
-                // billing_flags: u8
-                w.write_all(&billing_flags.to_le_bytes())?;
-
-                // billing_rested: u32
-                w.write_all(&billing_rested.to_le_bytes())?;
-
-            }
-            SMSG_AUTH_RESPONSE_WorldResult::AuthWaitQueue {
-                queue_position,
-            } => {
-                // queue_position: u32
-                w.write_all(&queue_position.to_le_bytes())?;
-
-            }
-            _ => {}
-        }
-
-        Ok(())
-    }
-
-    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        Self::read_inner(r, body_size).map_err(|a| crate::errors::ParseError::new(494, "SMSG_AUTH_RESPONSE", body_size, a))
-    }
-
-}
-
-#[cfg(feature = "vanilla")]
-impl crate::vanilla::ServerMessage for SMSG_AUTH_RESPONSE {}
-
-impl SMSG_AUTH_RESPONSE {
-    pub(crate) const fn size(&self) -> usize {
-        self.result.size() // result: SMSG_AUTH_RESPONSE_WorldResult
-    }
-}
-
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord)]
-pub enum SMSG_AUTH_RESPONSE_WorldResult {
+pub enum SMSG_AUTH_RESPONSE {
     ResponseSuccess,
     ResponseFailure,
     ResponseCancelled,
@@ -300,14 +111,212 @@ pub enum SMSG_AUTH_RESPONSE_WorldResult {
     CharNameFailure,
 }
 
-impl Default for SMSG_AUTH_RESPONSE_WorldResult {
+impl crate::private::Sealed for SMSG_AUTH_RESPONSE {}
+impl SMSG_AUTH_RESPONSE {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
+        if !(1..=10).contains(&body_size) {
+            return Err(crate::errors::ParseErrorKind::InvalidSize);
+        }
+
+        // result: WorldResult
+        let result = crate::util::read_u8_le(&mut r)?.try_into()?;
+
+        let result_if = match result {
+            WorldResult::ResponseSuccess => SMSG_AUTH_RESPONSE::ResponseSuccess,
+            WorldResult::ResponseFailure => SMSG_AUTH_RESPONSE::ResponseFailure,
+            WorldResult::ResponseCancelled => SMSG_AUTH_RESPONSE::ResponseCancelled,
+            WorldResult::ResponseDisconnected => SMSG_AUTH_RESPONSE::ResponseDisconnected,
+            WorldResult::ResponseFailedToConnect => SMSG_AUTH_RESPONSE::ResponseFailedToConnect,
+            WorldResult::ResponseConnected => SMSG_AUTH_RESPONSE::ResponseConnected,
+            WorldResult::ResponseVersionMismatch => SMSG_AUTH_RESPONSE::ResponseVersionMismatch,
+            WorldResult::CstatusConnecting => SMSG_AUTH_RESPONSE::CstatusConnecting,
+            WorldResult::CstatusNegotiatingSecurity => SMSG_AUTH_RESPONSE::CstatusNegotiatingSecurity,
+            WorldResult::CstatusNegotiationComplete => SMSG_AUTH_RESPONSE::CstatusNegotiationComplete,
+            WorldResult::CstatusNegotiationFailed => SMSG_AUTH_RESPONSE::CstatusNegotiationFailed,
+            WorldResult::CstatusAuthenticating => SMSG_AUTH_RESPONSE::CstatusAuthenticating,
+            WorldResult::AuthOk => {
+                // billing_time: u32
+                let billing_time = crate::util::read_u32_le(&mut r)?;
+
+                // billing_flags: u8
+                let billing_flags = crate::util::read_u8_le(&mut r)?;
+
+                // billing_rested: u32
+                let billing_rested = crate::util::read_u32_le(&mut r)?;
+
+                SMSG_AUTH_RESPONSE::AuthOk {
+                    billing_flags,
+                    billing_rested,
+                    billing_time,
+                }
+            }
+            WorldResult::AuthFailed => SMSG_AUTH_RESPONSE::AuthFailed,
+            WorldResult::AuthReject => SMSG_AUTH_RESPONSE::AuthReject,
+            WorldResult::AuthBadServerProof => SMSG_AUTH_RESPONSE::AuthBadServerProof,
+            WorldResult::AuthUnavailable => SMSG_AUTH_RESPONSE::AuthUnavailable,
+            WorldResult::AuthSystemError => SMSG_AUTH_RESPONSE::AuthSystemError,
+            WorldResult::AuthBillingError => SMSG_AUTH_RESPONSE::AuthBillingError,
+            WorldResult::AuthBillingExpired => SMSG_AUTH_RESPONSE::AuthBillingExpired,
+            WorldResult::AuthVersionMismatch => SMSG_AUTH_RESPONSE::AuthVersionMismatch,
+            WorldResult::AuthUnknownAccount => SMSG_AUTH_RESPONSE::AuthUnknownAccount,
+            WorldResult::AuthIncorrectPassword => SMSG_AUTH_RESPONSE::AuthIncorrectPassword,
+            WorldResult::AuthSessionExpired => SMSG_AUTH_RESPONSE::AuthSessionExpired,
+            WorldResult::AuthServerShuttingDown => SMSG_AUTH_RESPONSE::AuthServerShuttingDown,
+            WorldResult::AuthAlreadyLoggingIn => SMSG_AUTH_RESPONSE::AuthAlreadyLoggingIn,
+            WorldResult::AuthLoginServerNotFound => SMSG_AUTH_RESPONSE::AuthLoginServerNotFound,
+            WorldResult::AuthWaitQueue => {
+                // queue_position: u32
+                let queue_position = crate::util::read_u32_le(&mut r)?;
+
+                SMSG_AUTH_RESPONSE::AuthWaitQueue {
+                    queue_position,
+                }
+            }
+            WorldResult::AuthBanned => SMSG_AUTH_RESPONSE::AuthBanned,
+            WorldResult::AuthAlreadyOnline => SMSG_AUTH_RESPONSE::AuthAlreadyOnline,
+            WorldResult::AuthNoTime => SMSG_AUTH_RESPONSE::AuthNoTime,
+            WorldResult::AuthDbBusy => SMSG_AUTH_RESPONSE::AuthDbBusy,
+            WorldResult::AuthSuspended => SMSG_AUTH_RESPONSE::AuthSuspended,
+            WorldResult::AuthParentalControl => SMSG_AUTH_RESPONSE::AuthParentalControl,
+            WorldResult::RealmListInProgress => SMSG_AUTH_RESPONSE::RealmListInProgress,
+            WorldResult::RealmListSuccess => SMSG_AUTH_RESPONSE::RealmListSuccess,
+            WorldResult::RealmListFailed => SMSG_AUTH_RESPONSE::RealmListFailed,
+            WorldResult::RealmListInvalid => SMSG_AUTH_RESPONSE::RealmListInvalid,
+            WorldResult::RealmListRealmNotFound => SMSG_AUTH_RESPONSE::RealmListRealmNotFound,
+            WorldResult::AccountCreateInProgress => SMSG_AUTH_RESPONSE::AccountCreateInProgress,
+            WorldResult::AccountCreateSuccess => SMSG_AUTH_RESPONSE::AccountCreateSuccess,
+            WorldResult::AccountCreateFailed => SMSG_AUTH_RESPONSE::AccountCreateFailed,
+            WorldResult::CharListRetrieving => SMSG_AUTH_RESPONSE::CharListRetrieving,
+            WorldResult::CharListRetrieved => SMSG_AUTH_RESPONSE::CharListRetrieved,
+            WorldResult::CharListFailed => SMSG_AUTH_RESPONSE::CharListFailed,
+            WorldResult::CharCreateInProgress => SMSG_AUTH_RESPONSE::CharCreateInProgress,
+            WorldResult::CharCreateSuccess => SMSG_AUTH_RESPONSE::CharCreateSuccess,
+            WorldResult::CharCreateError => SMSG_AUTH_RESPONSE::CharCreateError,
+            WorldResult::CharCreateFailed => SMSG_AUTH_RESPONSE::CharCreateFailed,
+            WorldResult::CharCreateNameInUse => SMSG_AUTH_RESPONSE::CharCreateNameInUse,
+            WorldResult::CharCreateDisabled => SMSG_AUTH_RESPONSE::CharCreateDisabled,
+            WorldResult::CharCreatePvpTeamsViolation => SMSG_AUTH_RESPONSE::CharCreatePvpTeamsViolation,
+            WorldResult::CharCreateServerLimit => SMSG_AUTH_RESPONSE::CharCreateServerLimit,
+            WorldResult::CharCreateAccountLimit => SMSG_AUTH_RESPONSE::CharCreateAccountLimit,
+            WorldResult::CharCreateServerQueue => SMSG_AUTH_RESPONSE::CharCreateServerQueue,
+            WorldResult::CharCreateOnlyExisting => SMSG_AUTH_RESPONSE::CharCreateOnlyExisting,
+            WorldResult::CharDeleteInProgress => SMSG_AUTH_RESPONSE::CharDeleteInProgress,
+            WorldResult::CharDeleteSuccess => SMSG_AUTH_RESPONSE::CharDeleteSuccess,
+            WorldResult::CharDeleteFailed => SMSG_AUTH_RESPONSE::CharDeleteFailed,
+            WorldResult::CharDeleteFailedLockedForTransfer => SMSG_AUTH_RESPONSE::CharDeleteFailedLockedForTransfer,
+            WorldResult::CharLoginInProgress => SMSG_AUTH_RESPONSE::CharLoginInProgress,
+            WorldResult::CharLoginSuccess => SMSG_AUTH_RESPONSE::CharLoginSuccess,
+            WorldResult::CharLoginNoWorld => SMSG_AUTH_RESPONSE::CharLoginNoWorld,
+            WorldResult::CharLoginDuplicateCharacter => SMSG_AUTH_RESPONSE::CharLoginDuplicateCharacter,
+            WorldResult::CharLoginNoInstances => SMSG_AUTH_RESPONSE::CharLoginNoInstances,
+            WorldResult::CharLoginFailed => SMSG_AUTH_RESPONSE::CharLoginFailed,
+            WorldResult::CharLoginDisabled => SMSG_AUTH_RESPONSE::CharLoginDisabled,
+            WorldResult::CharLoginNoCharacter => SMSG_AUTH_RESPONSE::CharLoginNoCharacter,
+            WorldResult::CharLoginLockedForTransfer => SMSG_AUTH_RESPONSE::CharLoginLockedForTransfer,
+            WorldResult::CharNameNoName => SMSG_AUTH_RESPONSE::CharNameNoName,
+            WorldResult::CharNameTooShort => SMSG_AUTH_RESPONSE::CharNameTooShort,
+            WorldResult::CharNameTooLong => SMSG_AUTH_RESPONSE::CharNameTooLong,
+            WorldResult::CharNameOnlyLetters => SMSG_AUTH_RESPONSE::CharNameOnlyLetters,
+            WorldResult::CharNameMixedLanguages => SMSG_AUTH_RESPONSE::CharNameMixedLanguages,
+            WorldResult::CharNameProfane => SMSG_AUTH_RESPONSE::CharNameProfane,
+            WorldResult::CharNameReserved => SMSG_AUTH_RESPONSE::CharNameReserved,
+            WorldResult::CharNameInvalidApostrophe => SMSG_AUTH_RESPONSE::CharNameInvalidApostrophe,
+            WorldResult::CharNameMultipleApostrophes => SMSG_AUTH_RESPONSE::CharNameMultipleApostrophes,
+            WorldResult::CharNameThreeConsecutive => SMSG_AUTH_RESPONSE::CharNameThreeConsecutive,
+            WorldResult::CharNameInvalidSpace => SMSG_AUTH_RESPONSE::CharNameInvalidSpace,
+            WorldResult::CharNameSuccess => SMSG_AUTH_RESPONSE::CharNameSuccess,
+            WorldResult::CharNameFailure => SMSG_AUTH_RESPONSE::CharNameFailure,
+        };
+
+        Ok(result_if)
+    }
+
+}
+
+impl crate::Message for SMSG_AUTH_RESPONSE {
+    const OPCODE: u32 = 0x01ee;
+
+    #[cfg(feature = "print-testcase")]
+    fn message_name(&self) -> &'static str {
+        "SMSG_AUTH_RESPONSE"
+    }
+
+    fn size_without_header(&self) -> u32 {
+        self.size() as u32
+    }
+
+    fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
+        // result: WorldResult
+        w.write_all(&(self.as_int().to_le_bytes()))?;
+
+        match &self {
+            SMSG_AUTH_RESPONSE::AuthOk {
+                billing_flags,
+                billing_rested,
+                billing_time,
+            } => {
+                // billing_time: u32
+                w.write_all(&billing_time.to_le_bytes())?;
+
+                // billing_flags: u8
+                w.write_all(&billing_flags.to_le_bytes())?;
+
+                // billing_rested: u32
+                w.write_all(&billing_rested.to_le_bytes())?;
+
+            }
+            SMSG_AUTH_RESPONSE::AuthWaitQueue {
+                queue_position,
+            } => {
+                // queue_position: u32
+                w.write_all(&queue_position.to_le_bytes())?;
+
+            }
+            _ => {}
+        }
+
+        Ok(())
+    }
+
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size).map_err(|a| crate::errors::ParseError::new(494, "SMSG_AUTH_RESPONSE", body_size, a))
+    }
+
+}
+
+#[cfg(feature = "vanilla")]
+impl crate::vanilla::ServerMessage for SMSG_AUTH_RESPONSE {}
+
+impl SMSG_AUTH_RESPONSE {
+    pub(crate) const fn size(&self) -> usize {
+        (match self {
+            Self::AuthOk {
+                ..
+            } => {
+                1
+                + 1 // billing_flags: u8
+                + 4 // billing_rested: u32
+                + 4 // billing_time: u32
+            }
+            Self::AuthWaitQueue {
+                ..
+            } => {
+                1
+                + 4 // queue_position: u32
+            }
+            _ => 1,
+        }) // result: SMSG_AUTH_RESPONSE
+    }
+}
+
+impl Default for SMSG_AUTH_RESPONSE {
     fn default() -> Self {
         // First enumerator without any fields
         Self::ResponseSuccess
     }
 }
 
-impl SMSG_AUTH_RESPONSE_WorldResult {
+impl SMSG_AUTH_RESPONSE {
     pub(crate) const fn as_int(&self) -> u8 {
         match self {
             Self::ResponseSuccess => 0,
@@ -397,7 +406,7 @@ impl SMSG_AUTH_RESPONSE_WorldResult {
 
 }
 
-impl std::fmt::Display for SMSG_AUTH_RESPONSE_WorldResult {
+impl std::fmt::Display for SMSG_AUTH_RESPONSE {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match self {
             Self::ResponseSuccess => f.write_str("ResponseSuccess"),
@@ -486,28 +495,6 @@ impl std::fmt::Display for SMSG_AUTH_RESPONSE_WorldResult {
     }
 }
 
-impl SMSG_AUTH_RESPONSE_WorldResult {
-    pub(crate) const fn size(&self) -> usize {
-        match self {
-            Self::AuthOk {
-                ..
-            } => {
-                1
-                + 1 // billing_flags: u8
-                + 4 // billing_rested: u32
-                + 4 // billing_time: u32
-            }
-            Self::AuthWaitQueue {
-                ..
-            } => {
-                1
-                + 4 // queue_position: u32
-            }
-            _ => 1,
-        }
-    }
-}
-
 #[cfg(test)]
 mod test {
     #![allow(clippy::missing_const_for_fn)]
@@ -521,10 +508,7 @@ mod test {
     const RAW0: [u8; 5] = [ 0x00, 0x03, 0xEE, 0x01, 0x0D, ];
 
     pub(crate) fn expected0() -> SMSG_AUTH_RESPONSE {
-        SMSG_AUTH_RESPONSE {
-            result: SMSG_AUTH_RESPONSE_WorldResult::AuthFailed,
-        }
-
+        SMSG_AUTH_RESPONSE::AuthFailed
     }
 
     // Generated from `wow_message_parser/wowm/world/character_screen/smsg_auth_response.wowm` line 19.
@@ -590,12 +574,9 @@ mod test {
     const RAW1: [u8; 9] = [ 0x00, 0x07, 0xEE, 0x01, 0x1B, 0xEF, 0xBE, 0xAD, 0xDE, ];
 
     pub(crate) fn expected1() -> SMSG_AUTH_RESPONSE {
-        SMSG_AUTH_RESPONSE {
-            result: SMSG_AUTH_RESPONSE_WorldResult::AuthWaitQueue {
-                queue_position: 0xDEADBEEF,
-            },
+        SMSG_AUTH_RESPONSE::AuthWaitQueue {
+            queue_position: 0xDEADBEEF,
         }
-
     }
 
     // Generated from `wow_message_parser/wowm/world/character_screen/smsg_auth_response.wowm` line 30.
@@ -662,14 +643,11 @@ mod test {
          0x00, 0x00, 0x00, 0x00, 0x00, ];
 
     pub(crate) fn expected2() -> SMSG_AUTH_RESPONSE {
-        SMSG_AUTH_RESPONSE {
-            result: SMSG_AUTH_RESPONSE_WorldResult::AuthOk {
-                billing_flags: 0x0,
-                billing_rested: 0x0,
-                billing_time: 0xDEADBEEF,
-            },
+        SMSG_AUTH_RESPONSE::AuthOk {
+            billing_flags: 0x0,
+            billing_rested: 0x0,
+            billing_time: 0xDEADBEEF,
         }
-
     }
 
     // Generated from `wow_message_parser/wowm/world/character_screen/smsg_auth_response.wowm` line 43.

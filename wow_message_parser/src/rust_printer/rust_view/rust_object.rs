@@ -53,8 +53,7 @@ impl RustObject {
         let definers = self.get_rust_definers();
         let amount_of_members_in_struct = self.members_in_struct().count();
 
-        if definers.len() == 1 && amount_of_members_in_struct == 1 && self.name.starts_with("CMD_")
-        {
+        if definers.len() == 1 && amount_of_members_in_struct == 1 {
             Some(definers[0])
         } else {
             None

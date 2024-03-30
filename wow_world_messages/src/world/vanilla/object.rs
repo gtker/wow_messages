@@ -32,18 +32,43 @@ use crate::vanilla::{
 ///     }
 /// }
 /// ```
-#[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
-pub struct Object {
-    pub update_type: Object_UpdateType,
+#[derive(Debug, Clone, PartialEq, PartialOrd)]
+pub enum Object {
+    Values {
+        guid1: Guid,
+        mask1: UpdateMask,
+    },
+    Movement {
+        guid2: Guid,
+        movement1: MovementBlock,
+    },
+    CreateObject {
+        guid3: Guid,
+        mask2: UpdateMask,
+        movement2: MovementBlock,
+        object_type: ObjectType,
+    },
+    CreateObject2 {
+        guid3: Guid,
+        mask2: UpdateMask,
+        movement2: MovementBlock,
+        object_type: ObjectType,
+    },
+    OutOfRangeObjects {
+        guids: Vec<Guid>,
+    },
+    NearObjects {
+        guids: Vec<Guid>,
+    },
 }
 
 impl Object {
     pub(crate) fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
         // update_type: UpdateType
-        w.write_all(&(self.update_type.as_int().to_le_bytes()))?;
+        w.write_all(&(self.as_int().to_le_bytes()))?;
 
-        match &self.update_type {
-            Object_UpdateType::Values {
+        match &self {
+            Object::Values {
                 guid1,
                 mask1,
             } => {
@@ -54,7 +79,7 @@ impl Object {
                 mask1.write_into_vec(&mut w)?;
 
             }
-            Object_UpdateType::Movement {
+            Object::Movement {
                 guid2,
                 movement1,
             } => {
@@ -65,7 +90,7 @@ impl Object {
                 movement1.write_into_vec(&mut w)?;
 
             }
-            Object_UpdateType::CreateObject {
+            Object::CreateObject {
                 guid3,
                 mask2,
                 movement2,
@@ -84,7 +109,7 @@ impl Object {
                 mask2.write_into_vec(&mut w)?;
 
             }
-            Object_UpdateType::CreateObject2 {
+            Object::CreateObject2 {
                 guid3,
                 mask2,
                 movement2,
@@ -103,7 +128,7 @@ impl Object {
                 mask2.write_into_vec(&mut w)?;
 
             }
-            Object_UpdateType::OutOfRangeObjects {
+            Object::OutOfRangeObjects {
                 guids,
             } => {
                 // count: u32
@@ -115,7 +140,7 @@ impl Object {
                 }
 
             }
-            Object_UpdateType::NearObjects {
+            Object::NearObjects {
                 guids,
             } => {
                 // count: u32
@@ -146,7 +171,7 @@ impl Object {
                 // mask1: UpdateMask
                 let mask1 = UpdateMask::read(&mut r)?;
 
-                Object_UpdateType::Values {
+                Object::Values {
                     guid1,
                     mask1,
                 }
@@ -158,7 +183,7 @@ impl Object {
                 // movement1: MovementBlock
                 let movement1 = MovementBlock::read(&mut r)?;
 
-                Object_UpdateType::Movement {
+                Object::Movement {
                     guid2,
                     movement1,
                 }
@@ -176,7 +201,7 @@ impl Object {
                 // mask2: UpdateMask
                 let mask2 = UpdateMask::read(&mut r)?;
 
-                Object_UpdateType::CreateObject {
+                Object::CreateObject {
                     guid3,
                     mask2,
                     movement2,
@@ -196,7 +221,7 @@ impl Object {
                 // mask2: UpdateMask
                 let mask2 = UpdateMask::read(&mut r)?;
 
-                Object_UpdateType::CreateObject2 {
+                Object::CreateObject2 {
                     guid3,
                     mask2,
                     movement2,
@@ -222,7 +247,7 @@ impl Object {
                     guids
                 };
 
-                Object_UpdateType::OutOfRangeObjects {
+                Object::OutOfRangeObjects {
                     guids,
                 }
             }
@@ -245,95 +270,20 @@ impl Object {
                     guids
                 };
 
-                Object_UpdateType::NearObjects {
+                Object::NearObjects {
                     guids,
                 }
             }
         };
 
-        Ok(Self {
-            update_type: update_type_if,
-        })
+        Ok(update_type_if)
     }
 
 }
 
 impl Object {
     pub(crate) fn size(&self) -> usize {
-        self.update_type.size() // update_type: Object_UpdateType
-    }
-}
-
-#[derive(Debug, Clone, PartialEq, PartialOrd)]
-pub enum Object_UpdateType {
-    Values {
-        guid1: Guid,
-        mask1: UpdateMask,
-    },
-    Movement {
-        guid2: Guid,
-        movement1: MovementBlock,
-    },
-    CreateObject {
-        guid3: Guid,
-        mask2: UpdateMask,
-        movement2: MovementBlock,
-        object_type: ObjectType,
-    },
-    CreateObject2 {
-        guid3: Guid,
-        mask2: UpdateMask,
-        movement2: MovementBlock,
-        object_type: ObjectType,
-    },
-    OutOfRangeObjects {
-        guids: Vec<Guid>,
-    },
-    NearObjects {
-        guids: Vec<Guid>,
-    },
-}
-
-impl Default for Object_UpdateType {
-    fn default() -> Self {
-        // First enumerator without any fields
-        Self::Values {
-            guid1: Default::default(),
-            mask1: Default::default(),
-        }
-    }
-}
-
-impl Object_UpdateType {
-    pub(crate) const fn as_int(&self) -> u8 {
-        match self {
-            Self::Values { .. } => 0,
-            Self::Movement { .. } => 1,
-            Self::CreateObject { .. } => 2,
-            Self::CreateObject2 { .. } => 3,
-            Self::OutOfRangeObjects { .. } => 4,
-            Self::NearObjects { .. } => 5,
-        }
-    }
-
-}
-
-impl std::fmt::Display for Object_UpdateType {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
-            Self::Values{ .. } => f.write_str("Values"),
-            Self::Movement{ .. } => f.write_str("Movement"),
-            Self::CreateObject{ .. } => f.write_str("CreateObject"),
-            Self::CreateObject2{ .. } => f.write_str("CreateObject2"),
-            Self::OutOfRangeObjects{ .. } => f.write_str("OutOfRangeObjects"),
-            Self::NearObjects{ .. } => f.write_str("NearObjects"),
-        }
-    }
-}
-
-impl Object_UpdateType {
-    pub(crate) fn size(&self) -> usize {
-        match self {
+        (match self {
             Self::Values {
                 guid1,
                 mask1,
@@ -388,6 +338,43 @@ impl Object_UpdateType {
                 + 4 // count: u32
                 + guids.iter().fold(0, |acc, x| acc + crate::util::packed_guid_size(x)) // guids: PackedGuid[count]
             }
+        }) // update_type: Object
+    }
+}
+
+impl Default for Object {
+    fn default() -> Self {
+        // First enumerator without any fields
+        Self::Values {
+            guid1: Default::default(),
+            mask1: Default::default(),
+        }
+    }
+}
+
+impl Object {
+    pub(crate) const fn as_int(&self) -> u8 {
+        match self {
+            Self::Values { .. } => 0,
+            Self::Movement { .. } => 1,
+            Self::CreateObject { .. } => 2,
+            Self::CreateObject2 { .. } => 3,
+            Self::OutOfRangeObjects { .. } => 4,
+            Self::NearObjects { .. } => 5,
+        }
+    }
+
+}
+
+impl std::fmt::Display for Object {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        match self {
+            Self::Values{ .. } => f.write_str("Values"),
+            Self::Movement{ .. } => f.write_str("Movement"),
+            Self::CreateObject{ .. } => f.write_str("CreateObject"),
+            Self::CreateObject2{ .. } => f.write_str("CreateObject2"),
+            Self::OutOfRangeObjects{ .. } => f.write_str("OutOfRangeObjects"),
+            Self::NearObjects{ .. } => f.write_str("NearObjects"),
         }
     }
 }

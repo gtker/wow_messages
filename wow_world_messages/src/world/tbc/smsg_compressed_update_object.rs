@@ -88,16 +88,16 @@ impl crate::Message for SMSG_COMPRESSED_UPDATE_OBJECT {
         for v in self.objects.as_slice() {
             writeln!(s, "        {{").unwrap();
             // Members
-            writeln!(s, "            update_type = {};", UpdateType::try_from(v.update_type.as_int()).unwrap().as_test_case_value()).unwrap();
-            match &v.update_type {
-                crate::tbc::Object_UpdateType::Values {
+            writeln!(s, "            update_type = {};", UpdateType::try_from(v.as_int()).unwrap().as_test_case_value()).unwrap();
+            match &v {
+                crate::tbc::Object::Values {
                     guid1,
                     mask1,
                 } => {
                     writeln!(s, "            guid1 = {};", guid1.guid()).unwrap();
                     panic!("unsupported type for test case printing: 'UpdateMask' for variable 'mask1'");
                 }
-                crate::tbc::Object_UpdateType::Movement {
+                crate::tbc::Object::Movement {
                     guid2,
                     movement1,
                 } => {
@@ -282,7 +282,7 @@ impl crate::Message for SMSG_COMPRESSED_UPDATE_OBJECT {
 
                     writeln!(s, "            }};").unwrap();
                 }
-                crate::tbc::Object_UpdateType::CreateObject {
+                crate::tbc::Object::CreateObject {
                     guid3,
                     mask2,
                     movement2,
@@ -471,7 +471,7 @@ impl crate::Message for SMSG_COMPRESSED_UPDATE_OBJECT {
                     writeln!(s, "            }};").unwrap();
                     panic!("unsupported type for test case printing: 'UpdateMask' for variable 'mask2'");
                 }
-                crate::tbc::Object_UpdateType::CreateObject2 {
+                crate::tbc::Object::CreateObject2 {
                     guid3,
                     mask2,
                     movement2,
@@ -660,7 +660,7 @@ impl crate::Message for SMSG_COMPRESSED_UPDATE_OBJECT {
                     writeln!(s, "            }};").unwrap();
                     panic!("unsupported type for test case printing: 'UpdateMask' for variable 'mask2'");
                 }
-                crate::tbc::Object_UpdateType::OutOfRangeObjects {
+                crate::tbc::Object::OutOfRangeObjects {
                     guids,
                 } => {
                     writeln!(s, "            count = {};", guids.len()).unwrap();
@@ -670,7 +670,7 @@ impl crate::Message for SMSG_COMPRESSED_UPDATE_OBJECT {
                     }
                     writeln!(s, "            ];").unwrap();
                 }
-                crate::tbc::Object_UpdateType::NearObjects {
+                crate::tbc::Object::NearObjects {
                     guids,
                 } => {
                     writeln!(s, "            count = {};", guids.len()).unwrap();

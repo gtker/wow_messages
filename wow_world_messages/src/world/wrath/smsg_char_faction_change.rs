@@ -22,341 +22,8 @@ use crate::wrath::{
 ///     }
 /// }
 /// ```
-#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
-pub struct SMSG_CHAR_FACTION_CHANGE {
-    pub result: SMSG_CHAR_FACTION_CHANGE_WorldResult,
-}
-
-impl crate::private::Sealed for SMSG_CHAR_FACTION_CHANGE {}
-impl SMSG_CHAR_FACTION_CHANGE {
-    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
-        if !(1..=272).contains(&body_size) {
-            return Err(crate::errors::ParseErrorKind::InvalidSize);
-        }
-
-        // result: WorldResult
-        let result = crate::util::read_u8_le(&mut r)?.try_into()?;
-
-        let result_if = match result {
-            WorldResult::ResponseSuccess => {
-                // guid: Guid
-                let guid = crate::util::read_guid(&mut r)?;
-
-                // name: CString
-                let name = {
-                    let name = crate::util::read_c_string_to_vec(&mut r)?;
-                    String::from_utf8(name)?
-                };
-
-                // gender: Gender
-                let gender = crate::util::read_u8_le(&mut r)?.try_into()?;
-
-                // skin_color: u8
-                let skin_color = crate::util::read_u8_le(&mut r)?;
-
-                // face: u8
-                let face = crate::util::read_u8_le(&mut r)?;
-
-                // hair_style: u8
-                let hair_style = crate::util::read_u8_le(&mut r)?;
-
-                // hair_color: u8
-                let hair_color = crate::util::read_u8_le(&mut r)?;
-
-                // facial_hair: u8
-                let facial_hair = crate::util::read_u8_le(&mut r)?;
-
-                // race: Race
-                let race = crate::util::read_u8_le(&mut r)?.try_into()?;
-
-                SMSG_CHAR_FACTION_CHANGE_WorldResult::ResponseSuccess {
-                    face,
-                    facial_hair,
-                    gender,
-                    guid,
-                    hair_color,
-                    hair_style,
-                    name,
-                    race,
-                    skin_color,
-                }
-            }
-            WorldResult::ResponseFailure => SMSG_CHAR_FACTION_CHANGE_WorldResult::ResponseFailure,
-            WorldResult::ResponseCancelled => SMSG_CHAR_FACTION_CHANGE_WorldResult::ResponseCancelled,
-            WorldResult::ResponseDisconnected => SMSG_CHAR_FACTION_CHANGE_WorldResult::ResponseDisconnected,
-            WorldResult::ResponseFailedToConnect => SMSG_CHAR_FACTION_CHANGE_WorldResult::ResponseFailedToConnect,
-            WorldResult::ResponseConnected => SMSG_CHAR_FACTION_CHANGE_WorldResult::ResponseConnected,
-            WorldResult::ResponseVersionMismatch => SMSG_CHAR_FACTION_CHANGE_WorldResult::ResponseVersionMismatch,
-            WorldResult::CstatusConnecting => SMSG_CHAR_FACTION_CHANGE_WorldResult::CstatusConnecting,
-            WorldResult::CstatusNegotiatingSecurity => SMSG_CHAR_FACTION_CHANGE_WorldResult::CstatusNegotiatingSecurity,
-            WorldResult::CstatusNegotiationComplete => SMSG_CHAR_FACTION_CHANGE_WorldResult::CstatusNegotiationComplete,
-            WorldResult::CstatusNegotiationFailed => SMSG_CHAR_FACTION_CHANGE_WorldResult::CstatusNegotiationFailed,
-            WorldResult::CstatusAuthenticating => SMSG_CHAR_FACTION_CHANGE_WorldResult::CstatusAuthenticating,
-            WorldResult::AuthOk => SMSG_CHAR_FACTION_CHANGE_WorldResult::AuthOk,
-            WorldResult::AuthFailed => SMSG_CHAR_FACTION_CHANGE_WorldResult::AuthFailed,
-            WorldResult::AuthReject => SMSG_CHAR_FACTION_CHANGE_WorldResult::AuthReject,
-            WorldResult::AuthBadServerProof => SMSG_CHAR_FACTION_CHANGE_WorldResult::AuthBadServerProof,
-            WorldResult::AuthUnavailable => SMSG_CHAR_FACTION_CHANGE_WorldResult::AuthUnavailable,
-            WorldResult::AuthSystemError => SMSG_CHAR_FACTION_CHANGE_WorldResult::AuthSystemError,
-            WorldResult::AuthBillingError => SMSG_CHAR_FACTION_CHANGE_WorldResult::AuthBillingError,
-            WorldResult::AuthBillingExpired => SMSG_CHAR_FACTION_CHANGE_WorldResult::AuthBillingExpired,
-            WorldResult::AuthVersionMismatch => SMSG_CHAR_FACTION_CHANGE_WorldResult::AuthVersionMismatch,
-            WorldResult::AuthUnknownAccount => SMSG_CHAR_FACTION_CHANGE_WorldResult::AuthUnknownAccount,
-            WorldResult::AuthIncorrectPassword => SMSG_CHAR_FACTION_CHANGE_WorldResult::AuthIncorrectPassword,
-            WorldResult::AuthSessionExpired => SMSG_CHAR_FACTION_CHANGE_WorldResult::AuthSessionExpired,
-            WorldResult::AuthServerShuttingDown => SMSG_CHAR_FACTION_CHANGE_WorldResult::AuthServerShuttingDown,
-            WorldResult::AuthAlreadyLoggingIn => SMSG_CHAR_FACTION_CHANGE_WorldResult::AuthAlreadyLoggingIn,
-            WorldResult::AuthLoginServerNotFound => SMSG_CHAR_FACTION_CHANGE_WorldResult::AuthLoginServerNotFound,
-            WorldResult::AuthWaitQueue => SMSG_CHAR_FACTION_CHANGE_WorldResult::AuthWaitQueue,
-            WorldResult::AuthBanned => SMSG_CHAR_FACTION_CHANGE_WorldResult::AuthBanned,
-            WorldResult::AuthAlreadyOnline => SMSG_CHAR_FACTION_CHANGE_WorldResult::AuthAlreadyOnline,
-            WorldResult::AuthNoTime => SMSG_CHAR_FACTION_CHANGE_WorldResult::AuthNoTime,
-            WorldResult::AuthDbBusy => SMSG_CHAR_FACTION_CHANGE_WorldResult::AuthDbBusy,
-            WorldResult::AuthSuspended => SMSG_CHAR_FACTION_CHANGE_WorldResult::AuthSuspended,
-            WorldResult::AuthParentalControl => SMSG_CHAR_FACTION_CHANGE_WorldResult::AuthParentalControl,
-            WorldResult::AuthLockedEnforced => SMSG_CHAR_FACTION_CHANGE_WorldResult::AuthLockedEnforced,
-            WorldResult::RealmListInProgress => SMSG_CHAR_FACTION_CHANGE_WorldResult::RealmListInProgress,
-            WorldResult::RealmListSuccess => SMSG_CHAR_FACTION_CHANGE_WorldResult::RealmListSuccess,
-            WorldResult::RealmListFailed => SMSG_CHAR_FACTION_CHANGE_WorldResult::RealmListFailed,
-            WorldResult::RealmListInvalid => SMSG_CHAR_FACTION_CHANGE_WorldResult::RealmListInvalid,
-            WorldResult::RealmListRealmNotFound => SMSG_CHAR_FACTION_CHANGE_WorldResult::RealmListRealmNotFound,
-            WorldResult::AccountCreateInProgress => SMSG_CHAR_FACTION_CHANGE_WorldResult::AccountCreateInProgress,
-            WorldResult::AccountCreateSuccess => SMSG_CHAR_FACTION_CHANGE_WorldResult::AccountCreateSuccess,
-            WorldResult::AccountCreateFailed => SMSG_CHAR_FACTION_CHANGE_WorldResult::AccountCreateFailed,
-            WorldResult::CharListRetrieving => SMSG_CHAR_FACTION_CHANGE_WorldResult::CharListRetrieving,
-            WorldResult::CharListRetrieved => SMSG_CHAR_FACTION_CHANGE_WorldResult::CharListRetrieved,
-            WorldResult::CharListFailed => SMSG_CHAR_FACTION_CHANGE_WorldResult::CharListFailed,
-            WorldResult::CharCreateInProgress => SMSG_CHAR_FACTION_CHANGE_WorldResult::CharCreateInProgress,
-            WorldResult::CharCreateSuccess => SMSG_CHAR_FACTION_CHANGE_WorldResult::CharCreateSuccess,
-            WorldResult::CharCreateError => SMSG_CHAR_FACTION_CHANGE_WorldResult::CharCreateError,
-            WorldResult::CharCreateFailed => SMSG_CHAR_FACTION_CHANGE_WorldResult::CharCreateFailed,
-            WorldResult::CharCreateNameInUse => SMSG_CHAR_FACTION_CHANGE_WorldResult::CharCreateNameInUse,
-            WorldResult::CharCreateDisabled => SMSG_CHAR_FACTION_CHANGE_WorldResult::CharCreateDisabled,
-            WorldResult::CharCreatePvpTeamsViolation => SMSG_CHAR_FACTION_CHANGE_WorldResult::CharCreatePvpTeamsViolation,
-            WorldResult::CharCreateServerLimit => SMSG_CHAR_FACTION_CHANGE_WorldResult::CharCreateServerLimit,
-            WorldResult::CharCreateAccountLimit => SMSG_CHAR_FACTION_CHANGE_WorldResult::CharCreateAccountLimit,
-            WorldResult::CharCreateServerQueue => SMSG_CHAR_FACTION_CHANGE_WorldResult::CharCreateServerQueue,
-            WorldResult::CharCreateOnlyExisting => SMSG_CHAR_FACTION_CHANGE_WorldResult::CharCreateOnlyExisting,
-            WorldResult::CharCreateExpansion => SMSG_CHAR_FACTION_CHANGE_WorldResult::CharCreateExpansion,
-            WorldResult::CharCreateExpansionClass => SMSG_CHAR_FACTION_CHANGE_WorldResult::CharCreateExpansionClass,
-            WorldResult::CharCreateLevelRequirement => SMSG_CHAR_FACTION_CHANGE_WorldResult::CharCreateLevelRequirement,
-            WorldResult::CharCreateUniqueClassLimit => SMSG_CHAR_FACTION_CHANGE_WorldResult::CharCreateUniqueClassLimit,
-            WorldResult::CharCreateCharacterInGuild => SMSG_CHAR_FACTION_CHANGE_WorldResult::CharCreateCharacterInGuild,
-            WorldResult::CharCreateRestrictedRaceclass => SMSG_CHAR_FACTION_CHANGE_WorldResult::CharCreateRestrictedRaceclass,
-            WorldResult::CharCreateCharacterChooseRace => SMSG_CHAR_FACTION_CHANGE_WorldResult::CharCreateCharacterChooseRace,
-            WorldResult::CharCreateCharacterArenaLeader => SMSG_CHAR_FACTION_CHANGE_WorldResult::CharCreateCharacterArenaLeader,
-            WorldResult::CharCreateCharacterDeleteMail => SMSG_CHAR_FACTION_CHANGE_WorldResult::CharCreateCharacterDeleteMail,
-            WorldResult::CharCreateCharacterSwapFaction => SMSG_CHAR_FACTION_CHANGE_WorldResult::CharCreateCharacterSwapFaction,
-            WorldResult::CharCreateCharacterRaceOnly => SMSG_CHAR_FACTION_CHANGE_WorldResult::CharCreateCharacterRaceOnly,
-            WorldResult::CharCreateCharacterGoldLimit => SMSG_CHAR_FACTION_CHANGE_WorldResult::CharCreateCharacterGoldLimit,
-            WorldResult::CharCreateForceLogin => SMSG_CHAR_FACTION_CHANGE_WorldResult::CharCreateForceLogin,
-            WorldResult::CharDeleteInProgress => SMSG_CHAR_FACTION_CHANGE_WorldResult::CharDeleteInProgress,
-            WorldResult::CharDeleteSuccess => SMSG_CHAR_FACTION_CHANGE_WorldResult::CharDeleteSuccess,
-            WorldResult::CharDeleteFailed => SMSG_CHAR_FACTION_CHANGE_WorldResult::CharDeleteFailed,
-            WorldResult::CharDeleteFailedLockedForTransfer => SMSG_CHAR_FACTION_CHANGE_WorldResult::CharDeleteFailedLockedForTransfer,
-            WorldResult::CharDeleteFailedGuildLeader => SMSG_CHAR_FACTION_CHANGE_WorldResult::CharDeleteFailedGuildLeader,
-            WorldResult::CharDeleteFailedArenaCaptain => SMSG_CHAR_FACTION_CHANGE_WorldResult::CharDeleteFailedArenaCaptain,
-            WorldResult::CharLoginInProgress => SMSG_CHAR_FACTION_CHANGE_WorldResult::CharLoginInProgress,
-            WorldResult::CharLoginSuccess => SMSG_CHAR_FACTION_CHANGE_WorldResult::CharLoginSuccess,
-            WorldResult::CharLoginNoWorld => SMSG_CHAR_FACTION_CHANGE_WorldResult::CharLoginNoWorld,
-            WorldResult::CharLoginDuplicateCharacter => SMSG_CHAR_FACTION_CHANGE_WorldResult::CharLoginDuplicateCharacter,
-            WorldResult::CharLoginNoInstances => SMSG_CHAR_FACTION_CHANGE_WorldResult::CharLoginNoInstances,
-            WorldResult::CharLoginFailed => SMSG_CHAR_FACTION_CHANGE_WorldResult::CharLoginFailed,
-            WorldResult::CharLoginDisabled => SMSG_CHAR_FACTION_CHANGE_WorldResult::CharLoginDisabled,
-            WorldResult::CharLoginNoCharacter => SMSG_CHAR_FACTION_CHANGE_WorldResult::CharLoginNoCharacter,
-            WorldResult::CharLoginLockedForTransfer => SMSG_CHAR_FACTION_CHANGE_WorldResult::CharLoginLockedForTransfer,
-            WorldResult::CharLoginLockedByBilling => SMSG_CHAR_FACTION_CHANGE_WorldResult::CharLoginLockedByBilling,
-            WorldResult::CharLoginLockedByMobileAh => SMSG_CHAR_FACTION_CHANGE_WorldResult::CharLoginLockedByMobileAh,
-            WorldResult::CharNameSuccess => SMSG_CHAR_FACTION_CHANGE_WorldResult::CharNameSuccess,
-            WorldResult::CharNameFailure => SMSG_CHAR_FACTION_CHANGE_WorldResult::CharNameFailure,
-            WorldResult::CharNameNoName => SMSG_CHAR_FACTION_CHANGE_WorldResult::CharNameNoName,
-            WorldResult::CharNameTooShort => SMSG_CHAR_FACTION_CHANGE_WorldResult::CharNameTooShort,
-            WorldResult::CharNameTooLong => SMSG_CHAR_FACTION_CHANGE_WorldResult::CharNameTooLong,
-            WorldResult::CharNameInvalidCharacter => SMSG_CHAR_FACTION_CHANGE_WorldResult::CharNameInvalidCharacter,
-            WorldResult::CharNameMixedLanguages => SMSG_CHAR_FACTION_CHANGE_WorldResult::CharNameMixedLanguages,
-            WorldResult::CharNameProfane => SMSG_CHAR_FACTION_CHANGE_WorldResult::CharNameProfane,
-            WorldResult::CharNameReserved => SMSG_CHAR_FACTION_CHANGE_WorldResult::CharNameReserved,
-            WorldResult::CharNameInvalidApostrophe => SMSG_CHAR_FACTION_CHANGE_WorldResult::CharNameInvalidApostrophe,
-            WorldResult::CharNameMultipleApostrophes => SMSG_CHAR_FACTION_CHANGE_WorldResult::CharNameMultipleApostrophes,
-            WorldResult::CharNameThreeConsecutive => SMSG_CHAR_FACTION_CHANGE_WorldResult::CharNameThreeConsecutive,
-            WorldResult::CharNameInvalidSpace => SMSG_CHAR_FACTION_CHANGE_WorldResult::CharNameInvalidSpace,
-            WorldResult::CharNameConsecutiveSpaces => SMSG_CHAR_FACTION_CHANGE_WorldResult::CharNameConsecutiveSpaces,
-            WorldResult::CharNameRussianConsecutiveSilentCharacters => SMSG_CHAR_FACTION_CHANGE_WorldResult::CharNameRussianConsecutiveSilentCharacters,
-            WorldResult::CharNameRussianSilentCharacterAtBeginningOrEnd => SMSG_CHAR_FACTION_CHANGE_WorldResult::CharNameRussianSilentCharacterAtBeginningOrEnd,
-            WorldResult::CharNameDeclensionDoesntMatchBaseName => SMSG_CHAR_FACTION_CHANGE_WorldResult::CharNameDeclensionDoesntMatchBaseName,
-        };
-
-        Ok(Self {
-            result: result_if,
-        })
-    }
-
-}
-
-impl crate::Message for SMSG_CHAR_FACTION_CHANGE {
-    const OPCODE: u32 = 0x04da;
-
-    #[cfg(feature = "print-testcase")]
-    fn message_name(&self) -> &'static str {
-        "SMSG_CHAR_FACTION_CHANGE"
-    }
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        use std::fmt::Write;
-        use crate::traits::Message;
-
-        let mut s = String::new();
-
-        writeln!(s, "test SMSG_CHAR_FACTION_CHANGE {{").unwrap();
-        // Members
-        writeln!(s, "    result = {};", WorldResult::try_from(self.result.as_int()).unwrap().as_test_case_value()).unwrap();
-        match &self.result {
-            crate::wrath::SMSG_CHAR_FACTION_CHANGE_WorldResult::ResponseSuccess {
-                face,
-                facial_hair,
-                gender,
-                guid,
-                hair_color,
-                hair_style,
-                name,
-                race,
-                skin_color,
-            } => {
-                writeln!(s, "    guid = {};", guid.guid()).unwrap();
-                writeln!(s, "    name = \"{}\";", name).unwrap();
-                writeln!(s, "    gender = {};", gender.as_test_case_value()).unwrap();
-                writeln!(s, "    skin_color = {};", skin_color).unwrap();
-                writeln!(s, "    face = {};", face).unwrap();
-                writeln!(s, "    hair_style = {};", hair_style).unwrap();
-                writeln!(s, "    hair_color = {};", hair_color).unwrap();
-                writeln!(s, "    facial_hair = {};", facial_hair).unwrap();
-                writeln!(s, "    race = {};", race.as_test_case_value()).unwrap();
-            }
-            _ => {}
-        }
-
-
-        writeln!(s, "}} [").unwrap();
-
-        let [a, b] = (u16::try_from(self.size() + 2).unwrap()).to_be_bytes();
-        writeln!(s, "    {a:#04X}, {b:#04X}, /* size */").unwrap();
-        let [a, b] = 1242_u16.to_le_bytes();
-        writeln!(s, "    {a:#04X}, {b:#04X}, /* opcode */").unwrap();
-        let mut bytes: Vec<u8> = Vec::new();
-        self.write_into_vec(&mut bytes).unwrap();
-        let mut bytes = bytes.into_iter();
-
-        crate::util::write_bytes(&mut s, &mut bytes, 1, "result", "    ");
-        match &self.result {
-            crate::wrath::SMSG_CHAR_FACTION_CHANGE_WorldResult::ResponseSuccess {
-                face,
-                facial_hair,
-                gender,
-                guid,
-                hair_color,
-                hair_style,
-                name,
-                race,
-                skin_color,
-            } => {
-                crate::util::write_bytes(&mut s, &mut bytes, 8, "guid", "    ");
-                crate::util::write_bytes(&mut s, &mut bytes, name.len() + 1, "name", "    ");
-                crate::util::write_bytes(&mut s, &mut bytes, 1, "gender", "    ");
-                crate::util::write_bytes(&mut s, &mut bytes, 1, "skin_color", "    ");
-                crate::util::write_bytes(&mut s, &mut bytes, 1, "face", "    ");
-                crate::util::write_bytes(&mut s, &mut bytes, 1, "hair_style", "    ");
-                crate::util::write_bytes(&mut s, &mut bytes, 1, "hair_color", "    ");
-                crate::util::write_bytes(&mut s, &mut bytes, 1, "facial_hair", "    ");
-                crate::util::write_bytes(&mut s, &mut bytes, 1, "race", "    ");
-            }
-            _ => {}
-        }
-
-
-
-        writeln!(s, "] {{").unwrap();
-        writeln!(s, "    versions = \"{}\";", std::env::var("WOWM_TEST_CASE_WORLD_VERSION").unwrap_or("3.3.5".to_string())).unwrap();
-        writeln!(s, "}}\n").unwrap();
-
-        Some(s)
-    }
-
-    fn size_without_header(&self) -> u32 {
-        self.size() as u32
-    }
-
-    fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
-        // result: WorldResult
-        w.write_all(&(self.result.as_int().to_le_bytes()))?;
-
-        match &self.result {
-            SMSG_CHAR_FACTION_CHANGE_WorldResult::ResponseSuccess {
-                face,
-                facial_hair,
-                gender,
-                guid,
-                hair_color,
-                hair_style,
-                name,
-                race,
-                skin_color,
-            } => {
-                // guid: Guid
-                w.write_all(&guid.guid().to_le_bytes())?;
-
-                // name: CString
-                // TODO: Guard against strings that are already null-terminated
-                assert_ne!(name.as_bytes().iter().next_back(), Some(&0_u8), "String `name` must not be null-terminated.");
-                w.write_all(name.as_bytes())?;
-                // Null terminator
-                w.write_all(&[0])?;
-
-                // gender: Gender
-                w.write_all(&(gender.as_int().to_le_bytes()))?;
-
-                // skin_color: u8
-                w.write_all(&skin_color.to_le_bytes())?;
-
-                // face: u8
-                w.write_all(&face.to_le_bytes())?;
-
-                // hair_style: u8
-                w.write_all(&hair_style.to_le_bytes())?;
-
-                // hair_color: u8
-                w.write_all(&hair_color.to_le_bytes())?;
-
-                // facial_hair: u8
-                w.write_all(&facial_hair.to_le_bytes())?;
-
-                // race: Race
-                w.write_all(&(race.as_int().to_le_bytes()))?;
-
-            }
-            _ => {}
-        }
-
-        Ok(())
-    }
-
-    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        Self::read_inner(r, body_size).map_err(|a| crate::errors::ParseError::new(1242, "SMSG_CHAR_FACTION_CHANGE", body_size, a))
-    }
-
-}
-
-#[cfg(feature = "wrath")]
-impl crate::wrath::ServerMessage for SMSG_CHAR_FACTION_CHANGE {}
-
-impl SMSG_CHAR_FACTION_CHANGE {
-    pub(crate) fn size(&self) -> usize {
-        self.result.size() // result: SMSG_CHAR_FACTION_CHANGE_WorldResult
-    }
-}
-
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord)]
-pub enum SMSG_CHAR_FACTION_CHANGE_WorldResult {
+pub enum SMSG_CHAR_FACTION_CHANGE {
     ResponseSuccess {
         face: u8,
         facial_hair: u8,
@@ -473,14 +140,357 @@ pub enum SMSG_CHAR_FACTION_CHANGE_WorldResult {
     CharNameDeclensionDoesntMatchBaseName,
 }
 
-impl Default for SMSG_CHAR_FACTION_CHANGE_WorldResult {
+impl crate::private::Sealed for SMSG_CHAR_FACTION_CHANGE {}
+impl SMSG_CHAR_FACTION_CHANGE {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
+        if !(1..=272).contains(&body_size) {
+            return Err(crate::errors::ParseErrorKind::InvalidSize);
+        }
+
+        // result: WorldResult
+        let result = crate::util::read_u8_le(&mut r)?.try_into()?;
+
+        let result_if = match result {
+            WorldResult::ResponseSuccess => {
+                // guid: Guid
+                let guid = crate::util::read_guid(&mut r)?;
+
+                // name: CString
+                let name = {
+                    let name = crate::util::read_c_string_to_vec(&mut r)?;
+                    String::from_utf8(name)?
+                };
+
+                // gender: Gender
+                let gender = crate::util::read_u8_le(&mut r)?.try_into()?;
+
+                // skin_color: u8
+                let skin_color = crate::util::read_u8_le(&mut r)?;
+
+                // face: u8
+                let face = crate::util::read_u8_le(&mut r)?;
+
+                // hair_style: u8
+                let hair_style = crate::util::read_u8_le(&mut r)?;
+
+                // hair_color: u8
+                let hair_color = crate::util::read_u8_le(&mut r)?;
+
+                // facial_hair: u8
+                let facial_hair = crate::util::read_u8_le(&mut r)?;
+
+                // race: Race
+                let race = crate::util::read_u8_le(&mut r)?.try_into()?;
+
+                SMSG_CHAR_FACTION_CHANGE::ResponseSuccess {
+                    face,
+                    facial_hair,
+                    gender,
+                    guid,
+                    hair_color,
+                    hair_style,
+                    name,
+                    race,
+                    skin_color,
+                }
+            }
+            WorldResult::ResponseFailure => SMSG_CHAR_FACTION_CHANGE::ResponseFailure,
+            WorldResult::ResponseCancelled => SMSG_CHAR_FACTION_CHANGE::ResponseCancelled,
+            WorldResult::ResponseDisconnected => SMSG_CHAR_FACTION_CHANGE::ResponseDisconnected,
+            WorldResult::ResponseFailedToConnect => SMSG_CHAR_FACTION_CHANGE::ResponseFailedToConnect,
+            WorldResult::ResponseConnected => SMSG_CHAR_FACTION_CHANGE::ResponseConnected,
+            WorldResult::ResponseVersionMismatch => SMSG_CHAR_FACTION_CHANGE::ResponseVersionMismatch,
+            WorldResult::CstatusConnecting => SMSG_CHAR_FACTION_CHANGE::CstatusConnecting,
+            WorldResult::CstatusNegotiatingSecurity => SMSG_CHAR_FACTION_CHANGE::CstatusNegotiatingSecurity,
+            WorldResult::CstatusNegotiationComplete => SMSG_CHAR_FACTION_CHANGE::CstatusNegotiationComplete,
+            WorldResult::CstatusNegotiationFailed => SMSG_CHAR_FACTION_CHANGE::CstatusNegotiationFailed,
+            WorldResult::CstatusAuthenticating => SMSG_CHAR_FACTION_CHANGE::CstatusAuthenticating,
+            WorldResult::AuthOk => SMSG_CHAR_FACTION_CHANGE::AuthOk,
+            WorldResult::AuthFailed => SMSG_CHAR_FACTION_CHANGE::AuthFailed,
+            WorldResult::AuthReject => SMSG_CHAR_FACTION_CHANGE::AuthReject,
+            WorldResult::AuthBadServerProof => SMSG_CHAR_FACTION_CHANGE::AuthBadServerProof,
+            WorldResult::AuthUnavailable => SMSG_CHAR_FACTION_CHANGE::AuthUnavailable,
+            WorldResult::AuthSystemError => SMSG_CHAR_FACTION_CHANGE::AuthSystemError,
+            WorldResult::AuthBillingError => SMSG_CHAR_FACTION_CHANGE::AuthBillingError,
+            WorldResult::AuthBillingExpired => SMSG_CHAR_FACTION_CHANGE::AuthBillingExpired,
+            WorldResult::AuthVersionMismatch => SMSG_CHAR_FACTION_CHANGE::AuthVersionMismatch,
+            WorldResult::AuthUnknownAccount => SMSG_CHAR_FACTION_CHANGE::AuthUnknownAccount,
+            WorldResult::AuthIncorrectPassword => SMSG_CHAR_FACTION_CHANGE::AuthIncorrectPassword,
+            WorldResult::AuthSessionExpired => SMSG_CHAR_FACTION_CHANGE::AuthSessionExpired,
+            WorldResult::AuthServerShuttingDown => SMSG_CHAR_FACTION_CHANGE::AuthServerShuttingDown,
+            WorldResult::AuthAlreadyLoggingIn => SMSG_CHAR_FACTION_CHANGE::AuthAlreadyLoggingIn,
+            WorldResult::AuthLoginServerNotFound => SMSG_CHAR_FACTION_CHANGE::AuthLoginServerNotFound,
+            WorldResult::AuthWaitQueue => SMSG_CHAR_FACTION_CHANGE::AuthWaitQueue,
+            WorldResult::AuthBanned => SMSG_CHAR_FACTION_CHANGE::AuthBanned,
+            WorldResult::AuthAlreadyOnline => SMSG_CHAR_FACTION_CHANGE::AuthAlreadyOnline,
+            WorldResult::AuthNoTime => SMSG_CHAR_FACTION_CHANGE::AuthNoTime,
+            WorldResult::AuthDbBusy => SMSG_CHAR_FACTION_CHANGE::AuthDbBusy,
+            WorldResult::AuthSuspended => SMSG_CHAR_FACTION_CHANGE::AuthSuspended,
+            WorldResult::AuthParentalControl => SMSG_CHAR_FACTION_CHANGE::AuthParentalControl,
+            WorldResult::AuthLockedEnforced => SMSG_CHAR_FACTION_CHANGE::AuthLockedEnforced,
+            WorldResult::RealmListInProgress => SMSG_CHAR_FACTION_CHANGE::RealmListInProgress,
+            WorldResult::RealmListSuccess => SMSG_CHAR_FACTION_CHANGE::RealmListSuccess,
+            WorldResult::RealmListFailed => SMSG_CHAR_FACTION_CHANGE::RealmListFailed,
+            WorldResult::RealmListInvalid => SMSG_CHAR_FACTION_CHANGE::RealmListInvalid,
+            WorldResult::RealmListRealmNotFound => SMSG_CHAR_FACTION_CHANGE::RealmListRealmNotFound,
+            WorldResult::AccountCreateInProgress => SMSG_CHAR_FACTION_CHANGE::AccountCreateInProgress,
+            WorldResult::AccountCreateSuccess => SMSG_CHAR_FACTION_CHANGE::AccountCreateSuccess,
+            WorldResult::AccountCreateFailed => SMSG_CHAR_FACTION_CHANGE::AccountCreateFailed,
+            WorldResult::CharListRetrieving => SMSG_CHAR_FACTION_CHANGE::CharListRetrieving,
+            WorldResult::CharListRetrieved => SMSG_CHAR_FACTION_CHANGE::CharListRetrieved,
+            WorldResult::CharListFailed => SMSG_CHAR_FACTION_CHANGE::CharListFailed,
+            WorldResult::CharCreateInProgress => SMSG_CHAR_FACTION_CHANGE::CharCreateInProgress,
+            WorldResult::CharCreateSuccess => SMSG_CHAR_FACTION_CHANGE::CharCreateSuccess,
+            WorldResult::CharCreateError => SMSG_CHAR_FACTION_CHANGE::CharCreateError,
+            WorldResult::CharCreateFailed => SMSG_CHAR_FACTION_CHANGE::CharCreateFailed,
+            WorldResult::CharCreateNameInUse => SMSG_CHAR_FACTION_CHANGE::CharCreateNameInUse,
+            WorldResult::CharCreateDisabled => SMSG_CHAR_FACTION_CHANGE::CharCreateDisabled,
+            WorldResult::CharCreatePvpTeamsViolation => SMSG_CHAR_FACTION_CHANGE::CharCreatePvpTeamsViolation,
+            WorldResult::CharCreateServerLimit => SMSG_CHAR_FACTION_CHANGE::CharCreateServerLimit,
+            WorldResult::CharCreateAccountLimit => SMSG_CHAR_FACTION_CHANGE::CharCreateAccountLimit,
+            WorldResult::CharCreateServerQueue => SMSG_CHAR_FACTION_CHANGE::CharCreateServerQueue,
+            WorldResult::CharCreateOnlyExisting => SMSG_CHAR_FACTION_CHANGE::CharCreateOnlyExisting,
+            WorldResult::CharCreateExpansion => SMSG_CHAR_FACTION_CHANGE::CharCreateExpansion,
+            WorldResult::CharCreateExpansionClass => SMSG_CHAR_FACTION_CHANGE::CharCreateExpansionClass,
+            WorldResult::CharCreateLevelRequirement => SMSG_CHAR_FACTION_CHANGE::CharCreateLevelRequirement,
+            WorldResult::CharCreateUniqueClassLimit => SMSG_CHAR_FACTION_CHANGE::CharCreateUniqueClassLimit,
+            WorldResult::CharCreateCharacterInGuild => SMSG_CHAR_FACTION_CHANGE::CharCreateCharacterInGuild,
+            WorldResult::CharCreateRestrictedRaceclass => SMSG_CHAR_FACTION_CHANGE::CharCreateRestrictedRaceclass,
+            WorldResult::CharCreateCharacterChooseRace => SMSG_CHAR_FACTION_CHANGE::CharCreateCharacterChooseRace,
+            WorldResult::CharCreateCharacterArenaLeader => SMSG_CHAR_FACTION_CHANGE::CharCreateCharacterArenaLeader,
+            WorldResult::CharCreateCharacterDeleteMail => SMSG_CHAR_FACTION_CHANGE::CharCreateCharacterDeleteMail,
+            WorldResult::CharCreateCharacterSwapFaction => SMSG_CHAR_FACTION_CHANGE::CharCreateCharacterSwapFaction,
+            WorldResult::CharCreateCharacterRaceOnly => SMSG_CHAR_FACTION_CHANGE::CharCreateCharacterRaceOnly,
+            WorldResult::CharCreateCharacterGoldLimit => SMSG_CHAR_FACTION_CHANGE::CharCreateCharacterGoldLimit,
+            WorldResult::CharCreateForceLogin => SMSG_CHAR_FACTION_CHANGE::CharCreateForceLogin,
+            WorldResult::CharDeleteInProgress => SMSG_CHAR_FACTION_CHANGE::CharDeleteInProgress,
+            WorldResult::CharDeleteSuccess => SMSG_CHAR_FACTION_CHANGE::CharDeleteSuccess,
+            WorldResult::CharDeleteFailed => SMSG_CHAR_FACTION_CHANGE::CharDeleteFailed,
+            WorldResult::CharDeleteFailedLockedForTransfer => SMSG_CHAR_FACTION_CHANGE::CharDeleteFailedLockedForTransfer,
+            WorldResult::CharDeleteFailedGuildLeader => SMSG_CHAR_FACTION_CHANGE::CharDeleteFailedGuildLeader,
+            WorldResult::CharDeleteFailedArenaCaptain => SMSG_CHAR_FACTION_CHANGE::CharDeleteFailedArenaCaptain,
+            WorldResult::CharLoginInProgress => SMSG_CHAR_FACTION_CHANGE::CharLoginInProgress,
+            WorldResult::CharLoginSuccess => SMSG_CHAR_FACTION_CHANGE::CharLoginSuccess,
+            WorldResult::CharLoginNoWorld => SMSG_CHAR_FACTION_CHANGE::CharLoginNoWorld,
+            WorldResult::CharLoginDuplicateCharacter => SMSG_CHAR_FACTION_CHANGE::CharLoginDuplicateCharacter,
+            WorldResult::CharLoginNoInstances => SMSG_CHAR_FACTION_CHANGE::CharLoginNoInstances,
+            WorldResult::CharLoginFailed => SMSG_CHAR_FACTION_CHANGE::CharLoginFailed,
+            WorldResult::CharLoginDisabled => SMSG_CHAR_FACTION_CHANGE::CharLoginDisabled,
+            WorldResult::CharLoginNoCharacter => SMSG_CHAR_FACTION_CHANGE::CharLoginNoCharacter,
+            WorldResult::CharLoginLockedForTransfer => SMSG_CHAR_FACTION_CHANGE::CharLoginLockedForTransfer,
+            WorldResult::CharLoginLockedByBilling => SMSG_CHAR_FACTION_CHANGE::CharLoginLockedByBilling,
+            WorldResult::CharLoginLockedByMobileAh => SMSG_CHAR_FACTION_CHANGE::CharLoginLockedByMobileAh,
+            WorldResult::CharNameSuccess => SMSG_CHAR_FACTION_CHANGE::CharNameSuccess,
+            WorldResult::CharNameFailure => SMSG_CHAR_FACTION_CHANGE::CharNameFailure,
+            WorldResult::CharNameNoName => SMSG_CHAR_FACTION_CHANGE::CharNameNoName,
+            WorldResult::CharNameTooShort => SMSG_CHAR_FACTION_CHANGE::CharNameTooShort,
+            WorldResult::CharNameTooLong => SMSG_CHAR_FACTION_CHANGE::CharNameTooLong,
+            WorldResult::CharNameInvalidCharacter => SMSG_CHAR_FACTION_CHANGE::CharNameInvalidCharacter,
+            WorldResult::CharNameMixedLanguages => SMSG_CHAR_FACTION_CHANGE::CharNameMixedLanguages,
+            WorldResult::CharNameProfane => SMSG_CHAR_FACTION_CHANGE::CharNameProfane,
+            WorldResult::CharNameReserved => SMSG_CHAR_FACTION_CHANGE::CharNameReserved,
+            WorldResult::CharNameInvalidApostrophe => SMSG_CHAR_FACTION_CHANGE::CharNameInvalidApostrophe,
+            WorldResult::CharNameMultipleApostrophes => SMSG_CHAR_FACTION_CHANGE::CharNameMultipleApostrophes,
+            WorldResult::CharNameThreeConsecutive => SMSG_CHAR_FACTION_CHANGE::CharNameThreeConsecutive,
+            WorldResult::CharNameInvalidSpace => SMSG_CHAR_FACTION_CHANGE::CharNameInvalidSpace,
+            WorldResult::CharNameConsecutiveSpaces => SMSG_CHAR_FACTION_CHANGE::CharNameConsecutiveSpaces,
+            WorldResult::CharNameRussianConsecutiveSilentCharacters => SMSG_CHAR_FACTION_CHANGE::CharNameRussianConsecutiveSilentCharacters,
+            WorldResult::CharNameRussianSilentCharacterAtBeginningOrEnd => SMSG_CHAR_FACTION_CHANGE::CharNameRussianSilentCharacterAtBeginningOrEnd,
+            WorldResult::CharNameDeclensionDoesntMatchBaseName => SMSG_CHAR_FACTION_CHANGE::CharNameDeclensionDoesntMatchBaseName,
+        };
+
+        Ok(result_if)
+    }
+
+}
+
+impl crate::Message for SMSG_CHAR_FACTION_CHANGE {
+    const OPCODE: u32 = 0x04da;
+
+    #[cfg(feature = "print-testcase")]
+    fn message_name(&self) -> &'static str {
+        "SMSG_CHAR_FACTION_CHANGE"
+    }
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
+        use std::fmt::Write;
+        use crate::traits::Message;
+
+        let mut s = String::new();
+
+        writeln!(s, "test SMSG_CHAR_FACTION_CHANGE {{").unwrap();
+        // Members
+        writeln!(s, "    result = {};", WorldResult::try_from(self.as_int()).unwrap().as_test_case_value()).unwrap();
+        match &self {
+            crate::wrath::SMSG_CHAR_FACTION_CHANGE::ResponseSuccess {
+                face,
+                facial_hair,
+                gender,
+                guid,
+                hair_color,
+                hair_style,
+                name,
+                race,
+                skin_color,
+            } => {
+                writeln!(s, "    guid = {};", guid.guid()).unwrap();
+                writeln!(s, "    name = \"{}\";", name).unwrap();
+                writeln!(s, "    gender = {};", gender.as_test_case_value()).unwrap();
+                writeln!(s, "    skin_color = {};", skin_color).unwrap();
+                writeln!(s, "    face = {};", face).unwrap();
+                writeln!(s, "    hair_style = {};", hair_style).unwrap();
+                writeln!(s, "    hair_color = {};", hair_color).unwrap();
+                writeln!(s, "    facial_hair = {};", facial_hair).unwrap();
+                writeln!(s, "    race = {};", race.as_test_case_value()).unwrap();
+            }
+            _ => {}
+        }
+
+
+        writeln!(s, "}} [").unwrap();
+
+        let [a, b] = (u16::try_from(self.size() + 2).unwrap()).to_be_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, /* size */").unwrap();
+        let [a, b] = 1242_u16.to_le_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, /* opcode */").unwrap();
+        let mut bytes: Vec<u8> = Vec::new();
+        self.write_into_vec(&mut bytes).unwrap();
+        let mut bytes = bytes.into_iter();
+
+        crate::util::write_bytes(&mut s, &mut bytes, 1, "result", "    ");
+        match &self {
+            crate::wrath::SMSG_CHAR_FACTION_CHANGE::ResponseSuccess {
+                face,
+                facial_hair,
+                gender,
+                guid,
+                hair_color,
+                hair_style,
+                name,
+                race,
+                skin_color,
+            } => {
+                crate::util::write_bytes(&mut s, &mut bytes, 8, "guid", "    ");
+                crate::util::write_bytes(&mut s, &mut bytes, name.len() + 1, "name", "    ");
+                crate::util::write_bytes(&mut s, &mut bytes, 1, "gender", "    ");
+                crate::util::write_bytes(&mut s, &mut bytes, 1, "skin_color", "    ");
+                crate::util::write_bytes(&mut s, &mut bytes, 1, "face", "    ");
+                crate::util::write_bytes(&mut s, &mut bytes, 1, "hair_style", "    ");
+                crate::util::write_bytes(&mut s, &mut bytes, 1, "hair_color", "    ");
+                crate::util::write_bytes(&mut s, &mut bytes, 1, "facial_hair", "    ");
+                crate::util::write_bytes(&mut s, &mut bytes, 1, "race", "    ");
+            }
+            _ => {}
+        }
+
+
+
+        writeln!(s, "] {{").unwrap();
+        writeln!(s, "    versions = \"{}\";", std::env::var("WOWM_TEST_CASE_WORLD_VERSION").unwrap_or("3.3.5".to_string())).unwrap();
+        writeln!(s, "}}\n").unwrap();
+
+        Some(s)
+    }
+
+    fn size_without_header(&self) -> u32 {
+        self.size() as u32
+    }
+
+    fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
+        // result: WorldResult
+        w.write_all(&(self.as_int().to_le_bytes()))?;
+
+        match &self {
+            SMSG_CHAR_FACTION_CHANGE::ResponseSuccess {
+                face,
+                facial_hair,
+                gender,
+                guid,
+                hair_color,
+                hair_style,
+                name,
+                race,
+                skin_color,
+            } => {
+                // guid: Guid
+                w.write_all(&guid.guid().to_le_bytes())?;
+
+                // name: CString
+                // TODO: Guard against strings that are already null-terminated
+                assert_ne!(name.as_bytes().iter().next_back(), Some(&0_u8), "String `name` must not be null-terminated.");
+                w.write_all(name.as_bytes())?;
+                // Null terminator
+                w.write_all(&[0])?;
+
+                // gender: Gender
+                w.write_all(&(gender.as_int().to_le_bytes()))?;
+
+                // skin_color: u8
+                w.write_all(&skin_color.to_le_bytes())?;
+
+                // face: u8
+                w.write_all(&face.to_le_bytes())?;
+
+                // hair_style: u8
+                w.write_all(&hair_style.to_le_bytes())?;
+
+                // hair_color: u8
+                w.write_all(&hair_color.to_le_bytes())?;
+
+                // facial_hair: u8
+                w.write_all(&facial_hair.to_le_bytes())?;
+
+                // race: Race
+                w.write_all(&(race.as_int().to_le_bytes()))?;
+
+            }
+            _ => {}
+        }
+
+        Ok(())
+    }
+
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size).map_err(|a| crate::errors::ParseError::new(1242, "SMSG_CHAR_FACTION_CHANGE", body_size, a))
+    }
+
+}
+
+#[cfg(feature = "wrath")]
+impl crate::wrath::ServerMessage for SMSG_CHAR_FACTION_CHANGE {}
+
+impl SMSG_CHAR_FACTION_CHANGE {
+    pub(crate) fn size(&self) -> usize {
+        (match self {
+            Self::ResponseSuccess {
+                name,
+                ..
+            } => {
+                1
+                + 1 // face: u8
+                + 1 // facial_hair: u8
+                + 1 // gender: Gender
+                + 8 // guid: Guid
+                + 1 // hair_color: u8
+                + 1 // hair_style: u8
+                + name.len() + 1 // name: CString
+                + 1 // race: Race
+                + 1 // skin_color: u8
+            }
+            _ => 1,
+        }) // result: SMSG_CHAR_FACTION_CHANGE
+    }
+}
+
+impl Default for SMSG_CHAR_FACTION_CHANGE {
     fn default() -> Self {
         // First enumerator without any fields
         Self::ResponseFailure
     }
 }
 
-impl SMSG_CHAR_FACTION_CHANGE_WorldResult {
+impl SMSG_CHAR_FACTION_CHANGE {
     pub(crate) const fn as_int(&self) -> u8 {
         match self {
             Self::ResponseSuccess { .. } => 0,
@@ -592,7 +602,7 @@ impl SMSG_CHAR_FACTION_CHANGE_WorldResult {
 
 }
 
-impl std::fmt::Display for SMSG_CHAR_FACTION_CHANGE_WorldResult {
+impl std::fmt::Display for SMSG_CHAR_FACTION_CHANGE {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match self {
             Self::ResponseSuccess{ .. } => f.write_str("ResponseSuccess"),
@@ -699,29 +709,6 @@ impl std::fmt::Display for SMSG_CHAR_FACTION_CHANGE_WorldResult {
             Self::CharNameRussianConsecutiveSilentCharacters => f.write_str("CharNameRussianConsecutiveSilentCharacters"),
             Self::CharNameRussianSilentCharacterAtBeginningOrEnd => f.write_str("CharNameRussianSilentCharacterAtBeginningOrEnd"),
             Self::CharNameDeclensionDoesntMatchBaseName => f.write_str("CharNameDeclensionDoesntMatchBaseName"),
-        }
-    }
-}
-
-impl SMSG_CHAR_FACTION_CHANGE_WorldResult {
-    pub(crate) fn size(&self) -> usize {
-        match self {
-            Self::ResponseSuccess {
-                name,
-                ..
-            } => {
-                1
-                + 1 // face: u8
-                + 1 // facial_hair: u8
-                + 1 // gender: Gender
-                + 8 // guid: Guid
-                + 1 // hair_color: u8
-                + 1 // hair_style: u8
-                + name.len() + 1 // name: CString
-                + 1 // race: Race
-                + 1 // skin_color: u8
-            }
-            _ => 1,
         }
     }
 }

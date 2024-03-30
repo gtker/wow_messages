@@ -15,32 +15,40 @@ use crate::vanilla::SimpleEnum;
 ///     }
 /// }
 /// ```
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
-pub struct SimpleIfEnumIfElse {
-    pub enum: SimpleIfEnumIfElse_SimpleEnum,
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord)]
+pub enum SimpleIfEnumIfElse {
+    Zero {
+        basic: u8,
+    },
+    One {
+        basic: u8,
+    },
+    Two {
+        other: u16,
+    },
 }
 
 impl SimpleIfEnumIfElse {
     pub(crate) fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
         // enum: SimpleEnum
-        w.write_all(&(self.enum.as_int().to_le_bytes()))?;
+        w.write_all(&(self.as_int().to_le_bytes()))?;
 
-        match &self.enum {
-            SimpleIfEnumIfElse_SimpleEnum::Zero {
+        match &self {
+            SimpleIfEnumIfElse::Zero {
                 basic,
             } => {
                 // basic: u8
                 w.write_all(&basic.to_le_bytes())?;
 
             }
-            SimpleIfEnumIfElse_SimpleEnum::One {
+            SimpleIfEnumIfElse::One {
                 basic,
             } => {
                 // basic: u8
                 w.write_all(&basic.to_le_bytes())?;
 
             }
-            SimpleIfEnumIfElse_SimpleEnum::Two {
+            SimpleIfEnumIfElse::Two {
                 other,
             } => {
                 // other: u16
@@ -63,7 +71,7 @@ impl SimpleIfEnumIfElse {
                 // basic: u8
                 let basic = crate::util::read_u8_le(&mut r)?;
 
-                SimpleIfEnumIfElse_SimpleEnum::Zero {
+                SimpleIfEnumIfElse::Zero {
                     basic,
                 }
             }
@@ -71,7 +79,7 @@ impl SimpleIfEnumIfElse {
                 // basic: u8
                 let basic = crate::util::read_u8_le(&mut r)?;
 
-                SimpleIfEnumIfElse_SimpleEnum::One {
+                SimpleIfEnumIfElse::One {
                     basic,
                 }
             }
@@ -79,71 +87,20 @@ impl SimpleIfEnumIfElse {
                 // other: u16
                 let other = crate::util::read_u16_le(&mut r)?;
 
-                SimpleIfEnumIfElse_SimpleEnum::Two {
+                SimpleIfEnumIfElse::Two {
                     other,
                 }
             }
         };
 
-        Ok(Self {
-            enum: enum_if,
-        })
+        Ok(enum_if)
     }
 
 }
 
 impl SimpleIfEnumIfElse {
     pub(crate) const fn size(&self) -> usize {
-        self.enum.size() // enum: SimpleIfEnumIfElse_SimpleEnum
-    }
-}
-
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord)]
-pub enum SimpleIfEnumIfElse_SimpleEnum {
-    Zero {
-        basic: u8,
-    },
-    One {
-        basic: u8,
-    },
-    Two {
-        other: u16,
-    },
-}
-
-impl Default for SimpleIfEnumIfElse_SimpleEnum {
-    fn default() -> Self {
-        // First enumerator without any fields
-        Self::Zero {
-            basic: Default::default(),
-        }
-    }
-}
-
-impl SimpleIfEnumIfElse_SimpleEnum {
-    pub(crate) const fn as_int(&self) -> u8 {
-        match self {
-            Self::Zero { .. } => 0,
-            Self::One { .. } => 1,
-            Self::Two { .. } => 2,
-        }
-    }
-
-}
-
-impl std::fmt::Display for SimpleIfEnumIfElse_SimpleEnum {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
-            Self::Zero{ .. } => f.write_str("Zero"),
-            Self::One{ .. } => f.write_str("One"),
-            Self::Two{ .. } => f.write_str("Two"),
-        }
-    }
-}
-
-impl SimpleIfEnumIfElse_SimpleEnum {
-    pub(crate) const fn size(&self) -> usize {
-        match self {
+        (match self {
             Self::Zero {
                 ..
             } => {
@@ -162,6 +119,36 @@ impl SimpleIfEnumIfElse_SimpleEnum {
                 1
                 + 2 // other: u16
             }
+        }) // enum: SimpleIfEnumIfElse
+    }
+}
+
+impl Default for SimpleIfEnumIfElse {
+    fn default() -> Self {
+        // First enumerator without any fields
+        Self::Zero {
+            basic: Default::default(),
+        }
+    }
+}
+
+impl SimpleIfEnumIfElse {
+    pub(crate) const fn as_int(&self) -> u8 {
+        match self {
+            Self::Zero { .. } => 0,
+            Self::One { .. } => 1,
+            Self::Two { .. } => 2,
+        }
+    }
+
+}
+
+impl std::fmt::Display for SimpleIfEnumIfElse {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        match self {
+            Self::Zero{ .. } => f.write_str("Zero"),
+            Self::One{ .. } => f.write_str("One"),
+            Self::Two{ .. } => f.write_str("Two"),
         }
     }
 }

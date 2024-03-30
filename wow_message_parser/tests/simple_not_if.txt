@@ -11,25 +11,31 @@ use crate::vanilla::SimpleEnum;
 ///     }
 /// }
 /// ```
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
-pub struct SimpleIfEnumNot {
-    pub enum: SimpleIfEnumNot_SimpleEnum,
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord)]
+pub enum SimpleIfEnumNot {
+    Zero,
+    One {
+        others: u8,
+    },
+    Two {
+        others: u8,
+    },
 }
 
 impl SimpleIfEnumNot {
     pub(crate) fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
         // enum: SimpleEnum
-        w.write_all(&(self.enum.as_int().to_le_bytes()))?;
+        w.write_all(&(self.as_int().to_le_bytes()))?;
 
-        match &self.enum {
-            SimpleIfEnumNot_SimpleEnum::One {
+        match &self {
+            SimpleIfEnumNot::One {
                 others,
             } => {
                 // others: u8
                 w.write_all(&others.to_le_bytes())?;
 
             }
-            SimpleIfEnumNot_SimpleEnum::Two {
+            SimpleIfEnumNot::Two {
                 others,
             } => {
                 // others: u8
@@ -49,12 +55,12 @@ impl SimpleIfEnumNot {
         let enum = crate::util::read_u8_le(&mut r)?.try_into()?;
 
         let enum_if = match enum {
-            SimpleEnum::Zero => SimpleIfEnumNot_SimpleEnum::Zero,
+            SimpleEnum::Zero => SimpleIfEnumNot::Zero,
             SimpleEnum::One => {
                 // others: u8
                 let others = crate::util::read_u8_le(&mut r)?;
 
-                SimpleIfEnumNot_SimpleEnum::One {
+                SimpleIfEnumNot::One {
                     others,
                 }
             }
@@ -62,67 +68,20 @@ impl SimpleIfEnumNot {
                 // others: u8
                 let others = crate::util::read_u8_le(&mut r)?;
 
-                SimpleIfEnumNot_SimpleEnum::Two {
+                SimpleIfEnumNot::Two {
                     others,
                 }
             }
         };
 
-        Ok(Self {
-            enum: enum_if,
-        })
+        Ok(enum_if)
     }
 
 }
 
 impl SimpleIfEnumNot {
     pub(crate) const fn size(&self) -> usize {
-        self.enum.size() // enum: SimpleIfEnumNot_SimpleEnum
-    }
-}
-
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord)]
-pub enum SimpleIfEnumNot_SimpleEnum {
-    Zero,
-    One {
-        others: u8,
-    },
-    Two {
-        others: u8,
-    },
-}
-
-impl Default for SimpleIfEnumNot_SimpleEnum {
-    fn default() -> Self {
-        // First enumerator without any fields
-        Self::Zero
-    }
-}
-
-impl SimpleIfEnumNot_SimpleEnum {
-    pub(crate) const fn as_int(&self) -> u8 {
-        match self {
-            Self::Zero => 0,
-            Self::One { .. } => 1,
-            Self::Two { .. } => 2,
-        }
-    }
-
-}
-
-impl std::fmt::Display for SimpleIfEnumNot_SimpleEnum {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
-            Self::Zero => f.write_str("Zero"),
-            Self::One{ .. } => f.write_str("One"),
-            Self::Two{ .. } => f.write_str("Two"),
-        }
-    }
-}
-
-impl SimpleIfEnumNot_SimpleEnum {
-    pub(crate) const fn size(&self) -> usize {
-        match self {
+        (match self {
             Self::One {
                 ..
             } => {
@@ -136,6 +95,34 @@ impl SimpleIfEnumNot_SimpleEnum {
                 + 1 // others: u8
             }
             _ => 1,
+        }) // enum: SimpleIfEnumNot
+    }
+}
+
+impl Default for SimpleIfEnumNot {
+    fn default() -> Self {
+        // First enumerator without any fields
+        Self::Zero
+    }
+}
+
+impl SimpleIfEnumNot {
+    pub(crate) const fn as_int(&self) -> u8 {
+        match self {
+            Self::Zero => 0,
+            Self::One { .. } => 1,
+            Self::Two { .. } => 2,
+        }
+    }
+
+}
+
+impl std::fmt::Display for SimpleIfEnumNot {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        match self {
+            Self::Zero => f.write_str("Zero"),
+            Self::One{ .. } => f.write_str("One"),
+            Self::Two{ .. } => f.write_str("Two"),
         }
     }
 }
