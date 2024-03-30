@@ -88,10 +88,6 @@ mod test {
     use crate::vanilla::{ClientMessage, ServerMessage};
 
     const HEADER_SIZE: usize = 2 + 2;
-    fn assert(t: &SMSG_IGNORE_LIST, expected: &SMSG_IGNORE_LIST) {
-        assert_eq!(t.ignored, expected.ignored);
-    }
-
     const RAW0: [u8; 13] = [ 0x00, 0x0B, 0x6B, 0x00, 0x01, 0xEF, 0xBE, 0xAD, 0xDE,
          0xFE, 0x0F, 0xDC, 0xBA, ];
 
@@ -113,7 +109,7 @@ mod test {
             opcode => panic!("incorrect opcode. Expected SMSG_IGNORE_LIST, got {opcode:#?}"),
         };
 
-        assert(&t, &expected);
+        assert_eq!(t.as_ref(), &expected);
         assert_eq!(t.size() + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());
@@ -133,7 +129,7 @@ mod test {
             opcode => panic!("incorrect opcode. Expected SMSG_IGNORE_LIST, got {opcode:#?}"),
         };
 
-        assert(&t, &expected);
+        assert_eq!(t.as_ref(), &expected);
         assert_eq!(t.size() + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());
@@ -153,7 +149,7 @@ mod test {
             opcode => panic!("incorrect opcode. Expected SMSG_IGNORE_LIST, got {opcode:#?}"),
         };
 
-        assert(&t, &expected);
+        assert_eq!(t.as_ref(), &expected);
         assert_eq!(t.size() + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());
@@ -183,7 +179,7 @@ mod test {
             opcode => panic!("incorrect opcode. Expected SMSG_IGNORE_LIST, got {opcode:#?}"),
         };
 
-        assert(&t, &expected);
+        assert_eq!(t.as_ref(), &expected);
         assert_eq!(t.size() + HEADER_SIZE, RAW1.len());
 
         let mut dest = Vec::with_capacity(RAW1.len());
@@ -203,7 +199,7 @@ mod test {
             opcode => panic!("incorrect opcode. Expected SMSG_IGNORE_LIST, got {opcode:#?}"),
         };
 
-        assert(&t, &expected);
+        assert_eq!(t.as_ref(), &expected);
         assert_eq!(t.size() + HEADER_SIZE, RAW1.len());
 
         let mut dest = Vec::with_capacity(RAW1.len());
@@ -223,7 +219,7 @@ mod test {
             opcode => panic!("incorrect opcode. Expected SMSG_IGNORE_LIST, got {opcode:#?}"),
         };
 
-        assert(&t, &expected);
+        assert_eq!(t.as_ref(), &expected);
         assert_eq!(t.size() + HEADER_SIZE, RAW1.len());
 
         let mut dest = Vec::with_capacity(RAW1.len());

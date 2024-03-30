@@ -93,11 +93,6 @@ mod test_vanilla {
     use crate::vanilla::{ClientMessage, ServerMessage};
 
     const HEADER_SIZE: usize = 2 + 2;
-    fn assert(t: &SMSG_SPLINE_SET_RUN_SPEED, expected: &SMSG_SPLINE_SET_RUN_SPEED) {
-        assert_eq!(t.guid, expected.guid);
-        assert_eq!(t.speed, expected.speed);
-    }
-
     const RAW0: [u8; 10] = [ 0x00, 0x08, 0xFE, 0x02, 0x01, 0x06, 0x00, 0x00, 0xE0,
          0x40, ];
 
@@ -120,7 +115,7 @@ mod test_vanilla {
             opcode => panic!("incorrect opcode. Expected SMSG_SPLINE_SET_RUN_SPEED, got {opcode:#?}"),
         };
 
-        assert(&t, &expected);
+        assert_eq!(t.as_ref(), &expected);
         assert_eq!(t.size() + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());
@@ -140,7 +135,7 @@ mod test_vanilla {
             opcode => panic!("incorrect opcode. Expected SMSG_SPLINE_SET_RUN_SPEED, got {opcode:#?}"),
         };
 
-        assert(&t, &expected);
+        assert_eq!(t.as_ref(), &expected);
         assert_eq!(t.size() + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());
@@ -160,7 +155,7 @@ mod test_vanilla {
             opcode => panic!("incorrect opcode. Expected SMSG_SPLINE_SET_RUN_SPEED, got {opcode:#?}"),
         };
 
-        assert(&t, &expected);
+        assert_eq!(t.as_ref(), &expected);
         assert_eq!(t.size() + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());
@@ -182,11 +177,6 @@ mod test_tbc {
     use crate::tbc::{ClientMessage, ServerMessage};
 
     const HEADER_SIZE: usize = 2 + 2;
-    fn assert(t: &SMSG_SPLINE_SET_RUN_SPEED, expected: &SMSG_SPLINE_SET_RUN_SPEED) {
-        assert_eq!(t.guid, expected.guid);
-        assert_eq!(t.speed, expected.speed);
-    }
-
     const RAW0: [u8; 10] = [ 0x00, 0x08, 0xFE, 0x02, 0x01, 0x06, 0x00, 0x00, 0xE0,
          0x40, ];
 
@@ -209,7 +199,7 @@ mod test_tbc {
             opcode => panic!("incorrect opcode. Expected SMSG_SPLINE_SET_RUN_SPEED, got {opcode:#?}"),
         };
 
-        assert(&t, &expected);
+        assert_eq!(t.as_ref(), &expected);
         assert_eq!(t.size() + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());
@@ -229,7 +219,7 @@ mod test_tbc {
             opcode => panic!("incorrect opcode. Expected SMSG_SPLINE_SET_RUN_SPEED, got {opcode:#?}"),
         };
 
-        assert(&t, &expected);
+        assert_eq!(t.as_ref(), &expected);
         assert_eq!(t.size() + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());
@@ -249,7 +239,7 @@ mod test_tbc {
             opcode => panic!("incorrect opcode. Expected SMSG_SPLINE_SET_RUN_SPEED, got {opcode:#?}"),
         };
 
-        assert(&t, &expected);
+        assert_eq!(t.as_ref(), &expected);
         assert_eq!(t.size() + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());
@@ -271,11 +261,6 @@ mod test_wrath {
     use crate::wrath::{ClientMessage, ServerMessage};
 
     const HEADER_SIZE: usize = 2 + 2;
-    fn assert(t: &SMSG_SPLINE_SET_RUN_SPEED, expected: &SMSG_SPLINE_SET_RUN_SPEED) {
-        assert_eq!(t.guid, expected.guid);
-        assert_eq!(t.speed, expected.speed);
-    }
-
     const RAW0: [u8; 10] = [ 0x00, 0x08, 0xFE, 0x02, 0x01, 0x06, 0x00, 0x00, 0xE0,
          0x40, ];
 
@@ -298,7 +283,7 @@ mod test_wrath {
             opcode => panic!("incorrect opcode. Expected SMSG_SPLINE_SET_RUN_SPEED, got {opcode:#?}"),
         };
 
-        assert(&t, &expected);
+        assert_eq!(t.as_ref(), &expected);
         assert_eq!(t.size() + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());
@@ -318,7 +303,7 @@ mod test_wrath {
             opcode => panic!("incorrect opcode. Expected SMSG_SPLINE_SET_RUN_SPEED, got {opcode:#?}"),
         };
 
-        assert(&t, &expected);
+        assert_eq!(t.as_ref(), &expected);
         assert_eq!(t.size() + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());
@@ -338,7 +323,7 @@ mod test_wrath {
             opcode => panic!("incorrect opcode. Expected SMSG_SPLINE_SET_RUN_SPEED, got {opcode:#?}"),
         };
 
-        assert(&t, &expected);
+        assert_eq!(t.as_ref(), &expected);
         assert_eq!(t.size() + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());

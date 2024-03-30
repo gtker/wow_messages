@@ -384,11 +384,6 @@ mod test_vanilla {
     use crate::vanilla::{ClientMessage, ServerMessage};
 
     const HEADER_SIZE: usize = 2 + 4;
-    fn assert(t: &CMSG_UPDATE_ACCOUNT_DATA, expected: &CMSG_UPDATE_ACCOUNT_DATA) {
-        assert_eq!(t.data_type, expected.data_type);
-        assert_eq!(t.compressed_data, expected.compressed_data);
-    }
-
     const RAW0: [u8; 14] = [ 0x00, 0x0C, 0x0B, 0x02, 0x00, 0x00, 0x06, 0x00, 0x00,
          0x00, 0x00, 0x00, 0x00, 0x00, ];
 
@@ -411,7 +406,7 @@ mod test_vanilla {
             opcode => panic!("incorrect opcode. Expected CMSG_UPDATE_ACCOUNT_DATA, got {opcode:#?}"),
         };
 
-        assert(&t, &expected);
+        assert_eq!(t.as_ref(), &expected);
         let mut dest = Vec::with_capacity(RAW0.len());
         expected.write_unencrypted_client(&mut std::io::Cursor::new(&mut dest)).unwrap();
 
@@ -435,7 +430,7 @@ mod test_vanilla {
             opcode => panic!("incorrect opcode. Expected CMSG_UPDATE_ACCOUNT_DATA, got {opcode:#?}"),
         };
 
-        assert(&t, &expected);
+        assert_eq!(t.as_ref(), &expected);
         let mut dest = Vec::with_capacity(RAW0.len());
         expected.tokio_write_unencrypted_client(&mut std::io::Cursor::new(&mut dest)).await.unwrap();
 
@@ -459,7 +454,7 @@ mod test_vanilla {
             opcode => panic!("incorrect opcode. Expected CMSG_UPDATE_ACCOUNT_DATA, got {opcode:#?}"),
         };
 
-        assert(&t, &expected);
+        assert_eq!(t.as_ref(), &expected);
         let mut dest = Vec::with_capacity(RAW0.len());
         expected.astd_write_unencrypted_client(&mut async_std::io::Cursor::new(&mut dest)).await.unwrap();
 
@@ -1059,7 +1054,7 @@ mod test_vanilla {
             opcode => panic!("incorrect opcode. Expected CMSG_UPDATE_ACCOUNT_DATA, got {opcode:#?}"),
         };
 
-        assert(&t, &expected);
+        assert_eq!(t.as_ref(), &expected);
         let mut dest = Vec::with_capacity(RAW1.len());
         expected.write_unencrypted_client(&mut std::io::Cursor::new(&mut dest)).unwrap();
 
@@ -1083,7 +1078,7 @@ mod test_vanilla {
             opcode => panic!("incorrect opcode. Expected CMSG_UPDATE_ACCOUNT_DATA, got {opcode:#?}"),
         };
 
-        assert(&t, &expected);
+        assert_eq!(t.as_ref(), &expected);
         let mut dest = Vec::with_capacity(RAW1.len());
         expected.tokio_write_unencrypted_client(&mut std::io::Cursor::new(&mut dest)).await.unwrap();
 
@@ -1107,7 +1102,7 @@ mod test_vanilla {
             opcode => panic!("incorrect opcode. Expected CMSG_UPDATE_ACCOUNT_DATA, got {opcode:#?}"),
         };
 
-        assert(&t, &expected);
+        assert_eq!(t.as_ref(), &expected);
         let mut dest = Vec::with_capacity(RAW1.len());
         expected.astd_write_unencrypted_client(&mut async_std::io::Cursor::new(&mut dest)).await.unwrap();
 
@@ -1132,11 +1127,6 @@ mod test_tbc {
     use crate::tbc::{ClientMessage, ServerMessage};
 
     const HEADER_SIZE: usize = 2 + 4;
-    fn assert(t: &CMSG_UPDATE_ACCOUNT_DATA, expected: &CMSG_UPDATE_ACCOUNT_DATA) {
-        assert_eq!(t.data_type, expected.data_type);
-        assert_eq!(t.compressed_data, expected.compressed_data);
-    }
-
     const RAW0: [u8; 14] = [ 0x00, 0x0C, 0x0B, 0x02, 0x00, 0x00, 0x06, 0x00, 0x00,
          0x00, 0x00, 0x00, 0x00, 0x00, ];
 
@@ -1159,7 +1149,7 @@ mod test_tbc {
             opcode => panic!("incorrect opcode. Expected CMSG_UPDATE_ACCOUNT_DATA, got {opcode:#?}"),
         };
 
-        assert(&t, &expected);
+        assert_eq!(t.as_ref(), &expected);
         let mut dest = Vec::with_capacity(RAW0.len());
         expected.write_unencrypted_client(&mut std::io::Cursor::new(&mut dest)).unwrap();
 
@@ -1183,7 +1173,7 @@ mod test_tbc {
             opcode => panic!("incorrect opcode. Expected CMSG_UPDATE_ACCOUNT_DATA, got {opcode:#?}"),
         };
 
-        assert(&t, &expected);
+        assert_eq!(t.as_ref(), &expected);
         let mut dest = Vec::with_capacity(RAW0.len());
         expected.tokio_write_unencrypted_client(&mut std::io::Cursor::new(&mut dest)).await.unwrap();
 
@@ -1207,7 +1197,7 @@ mod test_tbc {
             opcode => panic!("incorrect opcode. Expected CMSG_UPDATE_ACCOUNT_DATA, got {opcode:#?}"),
         };
 
-        assert(&t, &expected);
+        assert_eq!(t.as_ref(), &expected);
         let mut dest = Vec::with_capacity(RAW0.len());
         expected.astd_write_unencrypted_client(&mut async_std::io::Cursor::new(&mut dest)).await.unwrap();
 
@@ -1807,7 +1797,7 @@ mod test_tbc {
             opcode => panic!("incorrect opcode. Expected CMSG_UPDATE_ACCOUNT_DATA, got {opcode:#?}"),
         };
 
-        assert(&t, &expected);
+        assert_eq!(t.as_ref(), &expected);
         let mut dest = Vec::with_capacity(RAW1.len());
         expected.write_unencrypted_client(&mut std::io::Cursor::new(&mut dest)).unwrap();
 
@@ -1831,7 +1821,7 @@ mod test_tbc {
             opcode => panic!("incorrect opcode. Expected CMSG_UPDATE_ACCOUNT_DATA, got {opcode:#?}"),
         };
 
-        assert(&t, &expected);
+        assert_eq!(t.as_ref(), &expected);
         let mut dest = Vec::with_capacity(RAW1.len());
         expected.tokio_write_unencrypted_client(&mut std::io::Cursor::new(&mut dest)).await.unwrap();
 
@@ -1855,7 +1845,7 @@ mod test_tbc {
             opcode => panic!("incorrect opcode. Expected CMSG_UPDATE_ACCOUNT_DATA, got {opcode:#?}"),
         };
 
-        assert(&t, &expected);
+        assert_eq!(t.as_ref(), &expected);
         let mut dest = Vec::with_capacity(RAW1.len());
         expected.astd_write_unencrypted_client(&mut async_std::io::Cursor::new(&mut dest)).await.unwrap();
 

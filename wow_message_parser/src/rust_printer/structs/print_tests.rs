@@ -56,21 +56,6 @@ pub(super) fn print_tests(s: &mut Writer, e: &Container, o: &Objects) {
             _ => unimplemented!(),
         }
 
-        if !e.empty_body() && e.single_rust_definer().is_none() {
-            s.bodyn(
-                format!("fn assert(t: &{ty}, expected: &{ty})", ty = e.name()),
-                |s| {
-                    // Better error reporting when something is wrong.
-                    for m in e.rust_object().members_in_struct() {
-                        s.wln(format!(
-                            "assert_eq!(t.{field}, expected.{field});",
-                            field = m.name()
-                        ));
-                    }
-                },
-            );
-        }
-
         for (i, t) in e.tests(o).iter().enumerate() {
             s.w(format!("const RAW{}: [u8; {}] = [", i, t.raw_bytes().len()));
             s.inc_indent();
@@ -250,10 +235,13 @@ fn print_test_case(s: &mut Writer, t: &TestCase, e: &Container, it: ImplType, i:
     });
     s.newline();
 
-    if !e.empty_body() && e.single_rust_definer().is_none() {
-        s.wln("assert(&t, &expected);");
-    } else if e.single_rust_definer().is_some() {
-        s.wln("assert_eq!(&t, &expected);");
+    if !e.empty_body() {
+        let t = if e.should_be_boxed() {
+            "t.as_ref()"
+        } else {
+            "&t"
+        };
+        s.wln(format!("assert_eq!({t}, &expected);"));
     }
 
     let compressed = e.tags().compressed() || e.contains_compressed_variable();

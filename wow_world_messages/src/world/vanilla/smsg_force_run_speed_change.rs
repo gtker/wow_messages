@@ -100,12 +100,6 @@ mod test {
     use crate::vanilla::{ClientMessage, ServerMessage};
 
     const HEADER_SIZE: usize = 2 + 2;
-    fn assert(t: &SMSG_FORCE_RUN_SPEED_CHANGE, expected: &SMSG_FORCE_RUN_SPEED_CHANGE) {
-        assert_eq!(t.guid, expected.guid);
-        assert_eq!(t.move_event, expected.move_event);
-        assert_eq!(t.speed, expected.speed);
-    }
-
     const RAW0: [u8; 14] = [ 0x00, 0x0C, 0xE2, 0x00, 0x01, 0x06, 0x00, 0x00, 0x00,
          0x00, 0x00, 0x00, 0xE0, 0x40, ];
 
@@ -129,7 +123,7 @@ mod test {
             opcode => panic!("incorrect opcode. Expected SMSG_FORCE_RUN_SPEED_CHANGE, got {opcode:#?}"),
         };
 
-        assert(&t, &expected);
+        assert_eq!(t.as_ref(), &expected);
         assert_eq!(t.size() + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());
@@ -149,7 +143,7 @@ mod test {
             opcode => panic!("incorrect opcode. Expected SMSG_FORCE_RUN_SPEED_CHANGE, got {opcode:#?}"),
         };
 
-        assert(&t, &expected);
+        assert_eq!(t.as_ref(), &expected);
         assert_eq!(t.size() + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());
@@ -169,7 +163,7 @@ mod test {
             opcode => panic!("incorrect opcode. Expected SMSG_FORCE_RUN_SPEED_CHANGE, got {opcode:#?}"),
         };
 
-        assert(&t, &expected);
+        assert_eq!(t.as_ref(), &expected);
         assert_eq!(t.size() + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());

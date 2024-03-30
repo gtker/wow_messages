@@ -156,19 +156,6 @@ mod test {
     use crate::vanilla::{ClientMessage, ServerMessage};
 
     const HEADER_SIZE: usize = 2 + 2;
-    fn assert(t: &SMSG_ITEM_PUSH_RESULT, expected: &SMSG_ITEM_PUSH_RESULT) {
-        assert_eq!(t.guid, expected.guid);
-        assert_eq!(t.source, expected.source);
-        assert_eq!(t.creation_type, expected.creation_type);
-        assert_eq!(t.alert_chat, expected.alert_chat);
-        assert_eq!(t.bag_slot, expected.bag_slot);
-        assert_eq!(t.item_slot, expected.item_slot);
-        assert_eq!(t.item, expected.item);
-        assert_eq!(t.item_suffix_factor, expected.item_suffix_factor);
-        assert_eq!(t.item_random_property_id, expected.item_random_property_id);
-        assert_eq!(t.item_count, expected.item_count);
-    }
-
     const RAW0: [u8; 45] = [ 0x00, 0x2B, 0x66, 0x01, 0x04, 0x00, 0x00, 0x00, 0x00,
          0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x01, 0x00, 0x00, 0x00, 0x01,
          0x00, 0x00, 0x00, 0xFF, 0x18, 0x00, 0x00, 0x00, 0x60, 0x31, 0x00, 0x00,
@@ -201,7 +188,7 @@ mod test {
             opcode => panic!("incorrect opcode. Expected SMSG_ITEM_PUSH_RESULT, got {opcode:#?}"),
         };
 
-        assert(&t, &expected);
+        assert_eq!(t.as_ref(), &expected);
         assert_eq!(41 + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());
@@ -221,7 +208,7 @@ mod test {
             opcode => panic!("incorrect opcode. Expected SMSG_ITEM_PUSH_RESULT, got {opcode:#?}"),
         };
 
-        assert(&t, &expected);
+        assert_eq!(t.as_ref(), &expected);
         assert_eq!(41 + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());
@@ -241,7 +228,7 @@ mod test {
             opcode => panic!("incorrect opcode. Expected SMSG_ITEM_PUSH_RESULT, got {opcode:#?}"),
         };
 
-        assert(&t, &expected);
+        assert_eq!(t.as_ref(), &expected);
         assert_eq!(41 + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());

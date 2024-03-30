@@ -85,11 +85,6 @@ mod test {
     use crate::vanilla::{ClientMessage, ServerMessage};
 
     const HEADER_SIZE: usize = 2 + 4;
-    fn assert(t: &CMSG_CAST_SPELL, expected: &CMSG_CAST_SPELL) {
-        assert_eq!(t.spell, expected.spell);
-        assert_eq!(t.targets, expected.targets);
-    }
-
     const RAW0: [u8; 12] = [ 0x00, 0x0A, 0x2E, 0x01, 0x00, 0x00, 0x78, 0x50, 0x00,
          0x00, 0x00, 0x00, ];
 
@@ -115,7 +110,7 @@ mod test {
             opcode => panic!("incorrect opcode. Expected CMSG_CAST_SPELL, got {opcode:#?}"),
         };
 
-        assert(&t, &expected);
+        assert_eq!(t.as_ref(), &expected);
         assert_eq!(t.size() + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());
@@ -135,7 +130,7 @@ mod test {
             opcode => panic!("incorrect opcode. Expected CMSG_CAST_SPELL, got {opcode:#?}"),
         };
 
-        assert(&t, &expected);
+        assert_eq!(t.as_ref(), &expected);
         assert_eq!(t.size() + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());
@@ -155,7 +150,7 @@ mod test {
             opcode => panic!("incorrect opcode. Expected CMSG_CAST_SPELL, got {opcode:#?}"),
         };
 
-        assert(&t, &expected);
+        assert_eq!(t.as_ref(), &expected);
         assert_eq!(t.size() + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());

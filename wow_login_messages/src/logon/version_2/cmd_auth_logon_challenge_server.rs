@@ -58,7 +58,6 @@ impl CMD_AUTH_LOGON_CHALLENGE_Server {
     ///
     /// **This field is not in the Rust struct, but is written as this constant value.**
     pub const PROTOCOL_VERSION_VALUE: u8 = 0x00;
-
 }
 
 impl CMD_AUTH_LOGON_CHALLENGE_Server {
@@ -110,7 +109,6 @@ impl CMD_AUTH_LOGON_CHALLENGE_Server {
                 for i in crc_salt.iter() {
                     w.write_all(&i.to_le_bytes())?;
                 }
-
             }
             _ => {}
         }
@@ -190,7 +188,9 @@ impl CMD_AUTH_LOGON_CHALLENGE_Server {
             LoginResult::FailUnknown1 => CMD_AUTH_LOGON_CHALLENGE_Server::FailUnknown1,
             LoginResult::FailBanned => CMD_AUTH_LOGON_CHALLENGE_Server::FailBanned,
             LoginResult::FailUnknownAccount => CMD_AUTH_LOGON_CHALLENGE_Server::FailUnknownAccount,
-            LoginResult::FailIncorrectPassword => CMD_AUTH_LOGON_CHALLENGE_Server::FailIncorrectPassword,
+            LoginResult::FailIncorrectPassword => {
+                CMD_AUTH_LOGON_CHALLENGE_Server::FailIncorrectPassword
+            }
             LoginResult::FailAlreadyOnline => CMD_AUTH_LOGON_CHALLENGE_Server::FailAlreadyOnline,
             LoginResult::FailNoTime => CMD_AUTH_LOGON_CHALLENGE_Server::FailNoTime,
             LoginResult::FailDbBusy => CMD_AUTH_LOGON_CHALLENGE_Server::FailDbBusy,
@@ -200,14 +200,18 @@ impl CMD_AUTH_LOGON_CHALLENGE_Server {
             LoginResult::FailSuspended => CMD_AUTH_LOGON_CHALLENGE_Server::FailSuspended,
             LoginResult::FailNoAccess => CMD_AUTH_LOGON_CHALLENGE_Server::FailNoAccess,
             LoginResult::SuccessSurvey => CMD_AUTH_LOGON_CHALLENGE_Server::SuccessSurvey,
-            LoginResult::FailParentalcontrol => CMD_AUTH_LOGON_CHALLENGE_Server::FailParentalcontrol,
+            LoginResult::FailParentalcontrol => {
+                CMD_AUTH_LOGON_CHALLENGE_Server::FailParentalcontrol
+            }
         };
 
         Ok(result_if)
     }
 
     #[cfg(feature = "tokio")]
-    async fn tokio_read_inner<R: tokio::io::AsyncReadExt + Unpin + Send>(mut r: R) -> Result<Self, crate::errors::ParseErrorKind> {
+    async fn tokio_read_inner<R: tokio::io::AsyncReadExt + Unpin + Send>(
+        mut r: R,
+    ) -> Result<Self, crate::errors::ParseErrorKind> {
         // protocol_version: u8
         let _protocol_version = crate::util::tokio_read_u8_le(&mut r).await?;
         // protocol_version is expected to always be 0 (0)
@@ -274,7 +278,9 @@ impl CMD_AUTH_LOGON_CHALLENGE_Server {
             LoginResult::FailUnknown1 => CMD_AUTH_LOGON_CHALLENGE_Server::FailUnknown1,
             LoginResult::FailBanned => CMD_AUTH_LOGON_CHALLENGE_Server::FailBanned,
             LoginResult::FailUnknownAccount => CMD_AUTH_LOGON_CHALLENGE_Server::FailUnknownAccount,
-            LoginResult::FailIncorrectPassword => CMD_AUTH_LOGON_CHALLENGE_Server::FailIncorrectPassword,
+            LoginResult::FailIncorrectPassword => {
+                CMD_AUTH_LOGON_CHALLENGE_Server::FailIncorrectPassword
+            }
             LoginResult::FailAlreadyOnline => CMD_AUTH_LOGON_CHALLENGE_Server::FailAlreadyOnline,
             LoginResult::FailNoTime => CMD_AUTH_LOGON_CHALLENGE_Server::FailNoTime,
             LoginResult::FailDbBusy => CMD_AUTH_LOGON_CHALLENGE_Server::FailDbBusy,
@@ -284,14 +290,18 @@ impl CMD_AUTH_LOGON_CHALLENGE_Server {
             LoginResult::FailSuspended => CMD_AUTH_LOGON_CHALLENGE_Server::FailSuspended,
             LoginResult::FailNoAccess => CMD_AUTH_LOGON_CHALLENGE_Server::FailNoAccess,
             LoginResult::SuccessSurvey => CMD_AUTH_LOGON_CHALLENGE_Server::SuccessSurvey,
-            LoginResult::FailParentalcontrol => CMD_AUTH_LOGON_CHALLENGE_Server::FailParentalcontrol,
+            LoginResult::FailParentalcontrol => {
+                CMD_AUTH_LOGON_CHALLENGE_Server::FailParentalcontrol
+            }
         };
 
         Ok(result_if)
     }
 
     #[cfg(feature = "async-std")]
-    async fn astd_read_inner<R: async_std::io::ReadExt + Unpin + Send>(mut r: R) -> Result<Self, crate::errors::ParseErrorKind> {
+    async fn astd_read_inner<R: async_std::io::ReadExt + Unpin + Send>(
+        mut r: R,
+    ) -> Result<Self, crate::errors::ParseErrorKind> {
         // protocol_version: u8
         let _protocol_version = crate::util::astd_read_u8_le(&mut r).await?;
         // protocol_version is expected to always be 0 (0)
@@ -358,7 +368,9 @@ impl CMD_AUTH_LOGON_CHALLENGE_Server {
             LoginResult::FailUnknown1 => CMD_AUTH_LOGON_CHALLENGE_Server::FailUnknown1,
             LoginResult::FailBanned => CMD_AUTH_LOGON_CHALLENGE_Server::FailBanned,
             LoginResult::FailUnknownAccount => CMD_AUTH_LOGON_CHALLENGE_Server::FailUnknownAccount,
-            LoginResult::FailIncorrectPassword => CMD_AUTH_LOGON_CHALLENGE_Server::FailIncorrectPassword,
+            LoginResult::FailIncorrectPassword => {
+                CMD_AUTH_LOGON_CHALLENGE_Server::FailIncorrectPassword
+            }
             LoginResult::FailAlreadyOnline => CMD_AUTH_LOGON_CHALLENGE_Server::FailAlreadyOnline,
             LoginResult::FailNoTime => CMD_AUTH_LOGON_CHALLENGE_Server::FailNoTime,
             LoginResult::FailDbBusy => CMD_AUTH_LOGON_CHALLENGE_Server::FailDbBusy,
@@ -368,20 +380,25 @@ impl CMD_AUTH_LOGON_CHALLENGE_Server {
             LoginResult::FailSuspended => CMD_AUTH_LOGON_CHALLENGE_Server::FailSuspended,
             LoginResult::FailNoAccess => CMD_AUTH_LOGON_CHALLENGE_Server::FailNoAccess,
             LoginResult::SuccessSurvey => CMD_AUTH_LOGON_CHALLENGE_Server::SuccessSurvey,
-            LoginResult::FailParentalcontrol => CMD_AUTH_LOGON_CHALLENGE_Server::FailParentalcontrol,
+            LoginResult::FailParentalcontrol => {
+                CMD_AUTH_LOGON_CHALLENGE_Server::FailParentalcontrol
+            }
         };
 
         Ok(result_if)
     }
-
 }
 
 impl Message for CMD_AUTH_LOGON_CHALLENGE_Server {
     const OPCODE: u8 = 0x00;
 
     #[cfg(feature = "sync")]
-    fn read<R: std::io::Read, I: crate::private::Sealed>(r: R) -> Result<Self, crate::errors::ParseError> {
-        Self::read_inner(r).map_err(|kind| crate::errors::ParseError::new(0, "CMD_AUTH_LOGON_CHALLENGE_Server", kind))
+    fn read<R: std::io::Read, I: crate::private::Sealed>(
+        r: R,
+    ) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r).map_err(|kind| {
+            crate::errors::ParseError::new(0, "CMD_AUTH_LOGON_CHALLENGE_Server", kind)
+        })
     }
 
     #[cfg(feature = "sync")]
@@ -394,28 +411,36 @@ impl Message for CMD_AUTH_LOGON_CHALLENGE_Server {
     #[cfg(feature = "tokio")]
     fn tokio_read<'async_trait, R, I: crate::private::Sealed>(
         r: R,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = Result<Self, crate::errors::ParseError>>
-            + Send + 'async_trait,
-    >> where
+    ) -> core::pin::Pin<
+        Box<
+            dyn core::future::Future<Output = Result<Self, crate::errors::ParseError>>
+                + Send
+                + 'async_trait,
+        >,
+    >
+    where
         R: 'async_trait + tokio::io::AsyncReadExt + Unpin + Send,
         Self: 'async_trait,
-     {
-        Box::pin(async move {Self::tokio_read_inner(r).await.map_err(|kind| crate::errors::ParseError::new(0, "CMD_AUTH_LOGON_CHALLENGE_Server", kind))})
+    {
+        Box::pin(async move {
+            Self::tokio_read_inner(r).await.map_err(|kind| {
+                crate::errors::ParseError::new(0, "CMD_AUTH_LOGON_CHALLENGE_Server", kind)
+            })
+        })
     }
 
     #[cfg(feature = "tokio")]
     fn tokio_write<'life0, 'async_trait, W>(
         &'life0 self,
         mut w: W,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = Result<(), std::io::Error>>
-            + Send + 'async_trait
-    >> where
+    ) -> core::pin::Pin<
+        Box<dyn core::future::Future<Output = Result<(), std::io::Error>> + Send + 'async_trait>,
+    >
+    where
         W: 'async_trait + tokio::io::AsyncWriteExt + Unpin + Send,
         'life0: 'async_trait,
         Self: 'async_trait,
-     {
+    {
         Box::pin(async move {
             let mut v = Vec::with_capacity(self.size() + 1);
             self.write_into_vec(&mut v)?;
@@ -426,35 +451,42 @@ impl Message for CMD_AUTH_LOGON_CHALLENGE_Server {
     #[cfg(feature = "async-std")]
     fn astd_read<'async_trait, R, I: crate::private::Sealed>(
         r: R,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = Result<Self, crate::errors::ParseError>>
-            + Send + 'async_trait,
-    >> where
+    ) -> core::pin::Pin<
+        Box<
+            dyn core::future::Future<Output = Result<Self, crate::errors::ParseError>>
+                + Send
+                + 'async_trait,
+        >,
+    >
+    where
         R: 'async_trait + async_std::io::ReadExt + Unpin + Send,
         Self: 'async_trait,
-     {
-        Box::pin(async move {Self::astd_read_inner(r).await.map_err(|kind| crate::errors::ParseError::new(0, "CMD_AUTH_LOGON_CHALLENGE_Server", kind))})
+    {
+        Box::pin(async move {
+            Self::astd_read_inner(r).await.map_err(|kind| {
+                crate::errors::ParseError::new(0, "CMD_AUTH_LOGON_CHALLENGE_Server", kind)
+            })
+        })
     }
 
     #[cfg(feature = "async-std")]
     fn astd_write<'life0, 'async_trait, W>(
         &'life0 self,
         mut w: W,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = Result<(), std::io::Error>>
-            + Send + 'async_trait
-    >> where
+    ) -> core::pin::Pin<
+        Box<dyn core::future::Future<Output = Result<(), std::io::Error>> + Send + 'async_trait>,
+    >
+    where
         W: 'async_trait + async_std::io::WriteExt + Unpin + Send,
         'life0: 'async_trait,
         Self: 'async_trait,
-     {
+    {
         Box::pin(async move {
             let mut v = Vec::with_capacity(self.size() + 1);
             self.write_into_vec(&mut v)?;
             w.write_all(&v).await
         })
     }
-
 }
 
 impl ServerMessage for CMD_AUTH_LOGON_CHALLENGE_Server {}
@@ -509,13 +541,12 @@ impl CMD_AUTH_LOGON_CHALLENGE_Server {
             Self::FailParentalcontrol => 15,
         }
     }
-
 }
 
 impl std::fmt::Display for CMD_AUTH_LOGON_CHALLENGE_Server {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match self {
-            Self::Success{ .. } => f.write_str("Success"),
+            Self::Success { .. } => f.write_str("Success"),
             Self::FailUnknown0 => f.write_str("FailUnknown0"),
             Self::FailUnknown1 => f.write_str("FailUnknown1"),
             Self::FailBanned => f.write_str("FailBanned"),
@@ -538,41 +569,46 @@ impl std::fmt::Display for CMD_AUTH_LOGON_CHALLENGE_Server {
 #[cfg(test)]
 mod test {
     #![allow(clippy::missing_const_for_fn)]
-    use super::CMD_AUTH_LOGON_CHALLENGE_Server;
-    use crate::all::*;
-    use super::*;
     use super::super::*;
+    use super::CMD_AUTH_LOGON_CHALLENGE_Server;
+    use super::*;
+    use crate::all::*;
     use crate::logon::version_2::opcodes::ServerOpcodeMessage;
 
     const HEADER_SIZE: usize = 1;
-    const RAW0: [u8; 118] = [ 0x00, 0x00, 0x00, 0x49, 0xD8, 0xC2, 0xBC, 0x68, 0x5C,
-         0x2B, 0xCE, 0x4A, 0xF4, 0xFA, 0x07, 0x0A, 0x47, 0x93, 0x78, 0x58, 0x78,
-         0x46, 0xB5, 0x83, 0xD4, 0x41, 0x82, 0x9E, 0x24, 0xD8, 0x87, 0xCE, 0xDA,
-         0x34, 0x46, 0x01, 0x07, 0x20, 0xB7, 0x9B, 0x3E, 0x2A, 0x87, 0x82, 0x3C,
-         0xAB, 0x8F, 0x5E, 0xBF, 0xBF, 0x8E, 0xB1, 0x01, 0x08, 0x53, 0x50, 0x06,
-         0x29, 0x8B, 0x5B, 0xAD, 0xBD, 0x5B, 0x53, 0xE1, 0x89, 0x5E, 0x64, 0x4B,
-         0x89, 0xC7, 0x09, 0x87, 0x7D, 0x8C, 0x65, 0x52, 0x66, 0xA5, 0x7D, 0xB8,
-         0x65, 0x3D, 0x6E, 0xA6, 0x2B, 0xB5, 0x54, 0xF2, 0x0B, 0xCF, 0x74, 0xD6,
-         0x4A, 0x77, 0xA7, 0xD3, 0x3D, 0xF3, 0x30, 0x90, 0x87, 0xBA, 0xA3, 0x1E,
-         0x99, 0xA0, 0x0B, 0x21, 0x57, 0xFC, 0x37, 0x3F, 0xB3, 0x69, 0xCD, 0xD2,
-         0xF1, ];
+    const RAW0: [u8; 118] = [
+        0x00, 0x00, 0x00, 0x49, 0xD8, 0xC2, 0xBC, 0x68, 0x5C, 0x2B, 0xCE, 0x4A, 0xF4, 0xFA, 0x07,
+        0x0A, 0x47, 0x93, 0x78, 0x58, 0x78, 0x46, 0xB5, 0x83, 0xD4, 0x41, 0x82, 0x9E, 0x24, 0xD8,
+        0x87, 0xCE, 0xDA, 0x34, 0x46, 0x01, 0x07, 0x20, 0xB7, 0x9B, 0x3E, 0x2A, 0x87, 0x82, 0x3C,
+        0xAB, 0x8F, 0x5E, 0xBF, 0xBF, 0x8E, 0xB1, 0x01, 0x08, 0x53, 0x50, 0x06, 0x29, 0x8B, 0x5B,
+        0xAD, 0xBD, 0x5B, 0x53, 0xE1, 0x89, 0x5E, 0x64, 0x4B, 0x89, 0xC7, 0x09, 0x87, 0x7D, 0x8C,
+        0x65, 0x52, 0x66, 0xA5, 0x7D, 0xB8, 0x65, 0x3D, 0x6E, 0xA6, 0x2B, 0xB5, 0x54, 0xF2, 0x0B,
+        0xCF, 0x74, 0xD6, 0x4A, 0x77, 0xA7, 0xD3, 0x3D, 0xF3, 0x30, 0x90, 0x87, 0xBA, 0xA3, 0x1E,
+        0x99, 0xA0, 0x0B, 0x21, 0x57, 0xFC, 0x37, 0x3F, 0xB3, 0x69, 0xCD, 0xD2, 0xF1,
+    ];
 
     pub(crate) fn expected0() -> CMD_AUTH_LOGON_CHALLENGE_Server {
         CMD_AUTH_LOGON_CHALLENGE_Server::Success {
-            crc_salt: [ 0xBA, 0xA3, 0x1E, 0x99, 0xA0, 0x0B, 0x21, 0x57, 0xFC, 0x37,
-                 0x3F, 0xB3, 0x69, 0xCD, 0xD2, 0xF1, ],
-            generator: vec![ 0x07, ],
-            large_safe_prime: vec![ 0xB7, 0x9B, 0x3E, 0x2A, 0x87, 0x82, 0x3C, 0xAB,
-                 0x8F, 0x5E, 0xBF, 0xBF, 0x8E, 0xB1, 0x01, 0x08, 0x53, 0x50, 0x06,
-                 0x29, 0x8B, 0x5B, 0xAD, 0xBD, 0x5B, 0x53, 0xE1, 0x89, 0x5E, 0x64,
-                 0x4B, 0x89, ],
-            salt: [ 0xC7, 0x09, 0x87, 0x7D, 0x8C, 0x65, 0x52, 0x66, 0xA5, 0x7D, 0xB8,
-                 0x65, 0x3D, 0x6E, 0xA6, 0x2B, 0xB5, 0x54, 0xF2, 0x0B, 0xCF, 0x74,
-                 0xD6, 0x4A, 0x77, 0xA7, 0xD3, 0x3D, 0xF3, 0x30, 0x90, 0x87, ],
-            server_public_key: [ 0x49, 0xD8, 0xC2, 0xBC, 0x68, 0x5C, 0x2B, 0xCE,
-                 0x4A, 0xF4, 0xFA, 0x07, 0x0A, 0x47, 0x93, 0x78, 0x58, 0x78, 0x46,
-                 0xB5, 0x83, 0xD4, 0x41, 0x82, 0x9E, 0x24, 0xD8, 0x87, 0xCE, 0xDA,
-                 0x34, 0x46, ],
+            crc_salt: [
+                0xBA, 0xA3, 0x1E, 0x99, 0xA0, 0x0B, 0x21, 0x57, 0xFC, 0x37, 0x3F, 0xB3, 0x69, 0xCD,
+                0xD2, 0xF1,
+            ],
+            generator: vec![0x07],
+            large_safe_prime: vec![
+                0xB7, 0x9B, 0x3E, 0x2A, 0x87, 0x82, 0x3C, 0xAB, 0x8F, 0x5E, 0xBF, 0xBF, 0x8E, 0xB1,
+                0x01, 0x08, 0x53, 0x50, 0x06, 0x29, 0x8B, 0x5B, 0xAD, 0xBD, 0x5B, 0x53, 0xE1, 0x89,
+                0x5E, 0x64, 0x4B, 0x89,
+            ],
+            salt: [
+                0xC7, 0x09, 0x87, 0x7D, 0x8C, 0x65, 0x52, 0x66, 0xA5, 0x7D, 0xB8, 0x65, 0x3D, 0x6E,
+                0xA6, 0x2B, 0xB5, 0x54, 0xF2, 0x0B, 0xCF, 0x74, 0xD6, 0x4A, 0x77, 0xA7, 0xD3, 0x3D,
+                0xF3, 0x30, 0x90, 0x87,
+            ],
+            server_public_key: [
+                0x49, 0xD8, 0xC2, 0xBC, 0x68, 0x5C, 0x2B, 0xCE, 0x4A, 0xF4, 0xFA, 0x07, 0x0A, 0x47,
+                0x93, 0x78, 0x58, 0x78, 0x46, 0xB5, 0x83, 0xD4, 0x41, 0x82, 0x9E, 0x24, 0xD8, 0x87,
+                0xCE, 0xDA, 0x34, 0x46,
+            ],
         }
     }
 
@@ -584,14 +620,18 @@ mod test {
         let t = ServerOpcodeMessage::read(&mut std::io::Cursor::new(&RAW0)).unwrap();
         let t = match t {
             ServerOpcodeMessage::CMD_AUTH_LOGON_CHALLENGE(t) => t,
-            opcode => panic!("incorrect opcode. Expected CMD_AUTH_LOGON_CHALLENGE, got {opcode:#?}"),
+            opcode => {
+                panic!("incorrect opcode. Expected CMD_AUTH_LOGON_CHALLENGE, got {opcode:#?}")
+            }
         };
 
         assert_eq!(&t, &expected);
         assert_eq!(t.size() + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());
-        expected.write(&mut std::io::Cursor::new(&mut dest)).unwrap();
+        expected
+            .write(&mut std::io::Cursor::new(&mut dest))
+            .unwrap();
 
         assert_eq!(dest, RAW0);
     }
@@ -601,17 +641,24 @@ mod test {
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_cmd_auth_logon_challenge_server0() {
         let expected = expected0();
-        let t = ServerOpcodeMessage::tokio_read(&mut std::io::Cursor::new(&RAW0)).await.unwrap();
+        let t = ServerOpcodeMessage::tokio_read(&mut std::io::Cursor::new(&RAW0))
+            .await
+            .unwrap();
         let t = match t {
             ServerOpcodeMessage::CMD_AUTH_LOGON_CHALLENGE(t) => t,
-            opcode => panic!("incorrect opcode. Expected CMD_AUTH_LOGON_CHALLENGE, got {opcode:#?}"),
+            opcode => {
+                panic!("incorrect opcode. Expected CMD_AUTH_LOGON_CHALLENGE, got {opcode:#?}")
+            }
         };
 
         assert_eq!(&t, &expected);
         assert_eq!(t.size() + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());
-        expected.tokio_write(&mut std::io::Cursor::new(&mut dest)).await.unwrap();
+        expected
+            .tokio_write(&mut std::io::Cursor::new(&mut dest))
+            .await
+            .unwrap();
 
         assert_eq!(dest, RAW0);
     }
@@ -621,20 +668,25 @@ mod test {
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_cmd_auth_logon_challenge_server0() {
         let expected = expected0();
-        let t = ServerOpcodeMessage::astd_read(&mut async_std::io::Cursor::new(&RAW0)).await.unwrap();
+        let t = ServerOpcodeMessage::astd_read(&mut async_std::io::Cursor::new(&RAW0))
+            .await
+            .unwrap();
         let t = match t {
             ServerOpcodeMessage::CMD_AUTH_LOGON_CHALLENGE(t) => t,
-            opcode => panic!("incorrect opcode. Expected CMD_AUTH_LOGON_CHALLENGE, got {opcode:#?}"),
+            opcode => {
+                panic!("incorrect opcode. Expected CMD_AUTH_LOGON_CHALLENGE, got {opcode:#?}")
+            }
         };
 
         assert_eq!(&t, &expected);
         assert_eq!(t.size() + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());
-        expected.astd_write(&mut async_std::io::Cursor::new(&mut dest)).await.unwrap();
+        expected
+            .astd_write(&mut async_std::io::Cursor::new(&mut dest))
+            .await
+            .unwrap();
 
         assert_eq!(dest, RAW0);
     }
-
 }
-

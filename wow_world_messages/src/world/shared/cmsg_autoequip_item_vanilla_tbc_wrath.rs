@@ -81,11 +81,6 @@ mod test_vanilla {
     use crate::vanilla::{ClientMessage, ServerMessage};
 
     const HEADER_SIZE: usize = 2 + 4;
-    fn assert(t: &CMSG_AUTOEQUIP_ITEM, expected: &CMSG_AUTOEQUIP_ITEM) {
-        assert_eq!(t.source_bag, expected.source_bag);
-        assert_eq!(t.source_slot, expected.source_slot);
-    }
-
     const RAW0: [u8; 8] = [ 0x00, 0x06, 0x0A, 0x01, 0x00, 0x00, 0xFF, 0x18, ];
 
     pub(crate) fn expected0() -> CMSG_AUTOEQUIP_ITEM {
@@ -107,7 +102,7 @@ mod test_vanilla {
             opcode => panic!("incorrect opcode. Expected CMSG_AUTOEQUIP_ITEM, got {opcode:#?}"),
         };
 
-        assert(&t, &expected);
+        assert_eq!(&t, &expected);
         assert_eq!(2 + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());
@@ -127,7 +122,7 @@ mod test_vanilla {
             opcode => panic!("incorrect opcode. Expected CMSG_AUTOEQUIP_ITEM, got {opcode:#?}"),
         };
 
-        assert(&t, &expected);
+        assert_eq!(&t, &expected);
         assert_eq!(2 + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());
@@ -147,7 +142,7 @@ mod test_vanilla {
             opcode => panic!("incorrect opcode. Expected CMSG_AUTOEQUIP_ITEM, got {opcode:#?}"),
         };
 
-        assert(&t, &expected);
+        assert_eq!(&t, &expected);
         assert_eq!(2 + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());
@@ -168,11 +163,6 @@ mod test_tbc {
     use crate::tbc::{ClientMessage, ServerMessage};
 
     const HEADER_SIZE: usize = 2 + 4;
-    fn assert(t: &CMSG_AUTOEQUIP_ITEM, expected: &CMSG_AUTOEQUIP_ITEM) {
-        assert_eq!(t.source_bag, expected.source_bag);
-        assert_eq!(t.source_slot, expected.source_slot);
-    }
-
     const RAW0: [u8; 8] = [ 0x00, 0x06, 0x0A, 0x01, 0x00, 0x00, 0xFF, 0x18, ];
 
     pub(crate) fn expected0() -> CMSG_AUTOEQUIP_ITEM {
@@ -194,7 +184,7 @@ mod test_tbc {
             opcode => panic!("incorrect opcode. Expected CMSG_AUTOEQUIP_ITEM, got {opcode:#?}"),
         };
 
-        assert(&t, &expected);
+        assert_eq!(&t, &expected);
         assert_eq!(2 + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());
@@ -214,7 +204,7 @@ mod test_tbc {
             opcode => panic!("incorrect opcode. Expected CMSG_AUTOEQUIP_ITEM, got {opcode:#?}"),
         };
 
-        assert(&t, &expected);
+        assert_eq!(&t, &expected);
         assert_eq!(2 + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());
@@ -234,7 +224,7 @@ mod test_tbc {
             opcode => panic!("incorrect opcode. Expected CMSG_AUTOEQUIP_ITEM, got {opcode:#?}"),
         };
 
-        assert(&t, &expected);
+        assert_eq!(&t, &expected);
         assert_eq!(2 + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());
@@ -255,11 +245,6 @@ mod test_wrath {
     use crate::wrath::{ClientMessage, ServerMessage};
 
     const HEADER_SIZE: usize = 2 + 4;
-    fn assert(t: &CMSG_AUTOEQUIP_ITEM, expected: &CMSG_AUTOEQUIP_ITEM) {
-        assert_eq!(t.source_bag, expected.source_bag);
-        assert_eq!(t.source_slot, expected.source_slot);
-    }
-
     const RAW0: [u8; 8] = [ 0x00, 0x06, 0x0A, 0x01, 0x00, 0x00, 0xFF, 0x18, ];
 
     pub(crate) fn expected0() -> CMSG_AUTOEQUIP_ITEM {
@@ -281,7 +266,7 @@ mod test_wrath {
             opcode => panic!("incorrect opcode. Expected CMSG_AUTOEQUIP_ITEM, got {opcode:#?}"),
         };
 
-        assert(&t, &expected);
+        assert_eq!(&t, &expected);
         assert_eq!(2 + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());
@@ -301,7 +286,7 @@ mod test_wrath {
             opcode => panic!("incorrect opcode. Expected CMSG_AUTOEQUIP_ITEM, got {opcode:#?}"),
         };
 
-        assert(&t, &expected);
+        assert_eq!(&t, &expected);
         assert_eq!(2 + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());
@@ -321,7 +306,7 @@ mod test_wrath {
             opcode => panic!("incorrect opcode. Expected CMSG_AUTOEQUIP_ITEM, got {opcode:#?}"),
         };
 
-        assert(&t, &expected);
+        assert_eq!(&t, &expected);
         assert_eq!(2 + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());

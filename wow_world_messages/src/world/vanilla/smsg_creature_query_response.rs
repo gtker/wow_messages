@@ -259,10 +259,6 @@ mod test {
     use crate::vanilla::{ClientMessage, ServerMessage};
 
     const HEADER_SIZE: usize = 2 + 2;
-    fn assert(t: &SMSG_CREATURE_QUERY_RESPONSE, expected: &SMSG_CREATURE_QUERY_RESPONSE) {
-        assert_eq!(t.creature_entry, expected.creature_entry);
-    }
-
     const RAW0: [u8; 48] = [ 0x00, 0x2E, 0x61, 0x00, 0x45, 0x00, 0x00, 0x00, 0x54,
          0x68, 0x69, 0x6E, 0x67, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
          0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
@@ -303,7 +299,7 @@ mod test {
             opcode => panic!("incorrect opcode. Expected SMSG_CREATURE_QUERY_RESPONSE, got {opcode:#?}"),
         };
 
-        assert(&t, &expected);
+        assert_eq!(t.as_ref(), &expected);
         assert_eq!(t.size() + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());
@@ -323,7 +319,7 @@ mod test {
             opcode => panic!("incorrect opcode. Expected SMSG_CREATURE_QUERY_RESPONSE, got {opcode:#?}"),
         };
 
-        assert(&t, &expected);
+        assert_eq!(t.as_ref(), &expected);
         assert_eq!(t.size() + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());
@@ -343,7 +339,7 @@ mod test {
             opcode => panic!("incorrect opcode. Expected SMSG_CREATURE_QUERY_RESPONSE, got {opcode:#?}"),
         };
 
-        assert(&t, &expected);
+        assert_eq!(t.as_ref(), &expected);
         assert_eq!(t.size() + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());

@@ -246,10 +246,6 @@ mod test {
     use crate::vanilla::{ClientMessage, ServerMessage};
 
     const HEADER_SIZE: usize = 2 + 2;
-    fn assert(t: &SMSG_COMPRESSED_MOVES, expected: &SMSG_COMPRESSED_MOVES) {
-        assert_eq!(t.moves, expected.moves);
-    }
-
     const RAW0: [u8; 52] = [ 0x00, 0x32, 0xFB, 0x02, 0x2E, 0x00, 0x00, 0x00, 0x78,
          0x01, 0xD3, 0xBD, 0xCB, 0xC0, 0x28, 0x91, 0xB7, 0x9A, 0xFB, 0xD8, 0xBA,
          0x58, 0xE6, 0xC3, 0x2B, 0xD4, 0x97, 0x3B, 0x31, 0x20, 0x03, 0x46, 0x20,
@@ -300,7 +296,7 @@ mod test {
             opcode => panic!("incorrect opcode. Expected SMSG_COMPRESSED_MOVES, got {opcode:#?}"),
         };
 
-        assert(&t, &expected);
+        assert_eq!(t.as_ref(), &expected);
         let mut dest = Vec::with_capacity(RAW0.len());
         expected.write_unencrypted_server(&mut std::io::Cursor::new(&mut dest)).unwrap();
 
@@ -324,7 +320,7 @@ mod test {
             opcode => panic!("incorrect opcode. Expected SMSG_COMPRESSED_MOVES, got {opcode:#?}"),
         };
 
-        assert(&t, &expected);
+        assert_eq!(t.as_ref(), &expected);
         let mut dest = Vec::with_capacity(RAW0.len());
         expected.tokio_write_unencrypted_server(&mut std::io::Cursor::new(&mut dest)).await.unwrap();
 
@@ -348,7 +344,7 @@ mod test {
             opcode => panic!("incorrect opcode. Expected SMSG_COMPRESSED_MOVES, got {opcode:#?}"),
         };
 
-        assert(&t, &expected);
+        assert_eq!(t.as_ref(), &expected);
         let mut dest = Vec::with_capacity(RAW0.len());
         expected.astd_write_unencrypted_server(&mut async_std::io::Cursor::new(&mut dest)).await.unwrap();
 
@@ -424,7 +420,7 @@ mod test {
             opcode => panic!("incorrect opcode. Expected SMSG_COMPRESSED_MOVES, got {opcode:#?}"),
         };
 
-        assert(&t, &expected);
+        assert_eq!(t.as_ref(), &expected);
         let mut dest = Vec::with_capacity(RAW1.len());
         expected.write_unencrypted_server(&mut std::io::Cursor::new(&mut dest)).unwrap();
 
@@ -448,7 +444,7 @@ mod test {
             opcode => panic!("incorrect opcode. Expected SMSG_COMPRESSED_MOVES, got {opcode:#?}"),
         };
 
-        assert(&t, &expected);
+        assert_eq!(t.as_ref(), &expected);
         let mut dest = Vec::with_capacity(RAW1.len());
         expected.tokio_write_unencrypted_server(&mut std::io::Cursor::new(&mut dest)).await.unwrap();
 
@@ -472,7 +468,7 @@ mod test {
             opcode => panic!("incorrect opcode. Expected SMSG_COMPRESSED_MOVES, got {opcode:#?}"),
         };
 
-        assert(&t, &expected);
+        assert_eq!(t.as_ref(), &expected);
         let mut dest = Vec::with_capacity(RAW1.len());
         expected.astd_write_unencrypted_server(&mut async_std::io::Cursor::new(&mut dest)).await.unwrap();
 

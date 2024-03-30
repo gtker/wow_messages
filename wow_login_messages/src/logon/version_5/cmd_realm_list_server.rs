@@ -270,10 +270,6 @@ mod test {
     use crate::logon::version_5::opcodes::ServerOpcodeMessage;
 
     const HEADER_SIZE: usize = 1;
-    fn assert(t: &CMD_REALM_LIST_Server, expected: &CMD_REALM_LIST_Server) {
-        assert_eq!(t.realms, expected.realms);
-    }
-
     const RAW0: [u8; 83] = [ 0x10, 0x50, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0x00,
          0x00, 0x00, 0x54, 0x65, 0x73, 0x74, 0x20, 0x52, 0x65, 0x61, 0x6C, 0x6D,
          0x32, 0x00, 0x6C, 0x6F, 0x63, 0x61, 0x6C, 0x68, 0x6F, 0x73, 0x74, 0x3A,
@@ -326,7 +322,7 @@ mod test {
             opcode => panic!("incorrect opcode. Expected CMD_REALM_LIST, got {opcode:#?}"),
         };
 
-        assert(&t, &expected);
+        assert_eq!(&t, &expected);
         assert_eq!(t.size() + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());
@@ -346,7 +342,7 @@ mod test {
             opcode => panic!("incorrect opcode. Expected CMD_REALM_LIST, got {opcode:#?}"),
         };
 
-        assert(&t, &expected);
+        assert_eq!(&t, &expected);
         assert_eq!(t.size() + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());
@@ -366,7 +362,7 @@ mod test {
             opcode => panic!("incorrect opcode. Expected CMD_REALM_LIST, got {opcode:#?}"),
         };
 
-        assert(&t, &expected);
+        assert_eq!(&t, &expected);
         assert_eq!(t.size() + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());

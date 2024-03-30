@@ -81,10 +81,6 @@ mod test_vanilla {
     use crate::vanilla::{ClientMessage, ServerMessage};
 
     const HEADER_SIZE: usize = 2 + 2;
-    fn assert(t: &SMSG_ACCOUNT_DATA_TIMES, expected: &SMSG_ACCOUNT_DATA_TIMES) {
-        assert_eq!(t.data, expected.data);
-    }
-
     const RAW0: [u8; 132] = [ 0x00, 0x82, 0x09, 0x02, 0x00, 0x00, 0x00, 0x00, 0x00,
          0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
          0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
@@ -118,7 +114,7 @@ mod test_vanilla {
             opcode => panic!("incorrect opcode. Expected SMSG_ACCOUNT_DATA_TIMES, got {opcode:#?}"),
         };
 
-        assert(&t, &expected);
+        assert_eq!(t.as_ref(), &expected);
         assert_eq!(128 + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());
@@ -138,7 +134,7 @@ mod test_vanilla {
             opcode => panic!("incorrect opcode. Expected SMSG_ACCOUNT_DATA_TIMES, got {opcode:#?}"),
         };
 
-        assert(&t, &expected);
+        assert_eq!(t.as_ref(), &expected);
         assert_eq!(128 + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());
@@ -158,7 +154,7 @@ mod test_vanilla {
             opcode => panic!("incorrect opcode. Expected SMSG_ACCOUNT_DATA_TIMES, got {opcode:#?}"),
         };
 
-        assert(&t, &expected);
+        assert_eq!(t.as_ref(), &expected);
         assert_eq!(128 + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());
@@ -179,10 +175,6 @@ mod test_tbc {
     use crate::tbc::{ClientMessage, ServerMessage};
 
     const HEADER_SIZE: usize = 2 + 2;
-    fn assert(t: &SMSG_ACCOUNT_DATA_TIMES, expected: &SMSG_ACCOUNT_DATA_TIMES) {
-        assert_eq!(t.data, expected.data);
-    }
-
     const RAW0: [u8; 132] = [ 0x00, 0x82, 0x09, 0x02, 0x00, 0x00, 0x00, 0x00, 0x00,
          0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
          0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
@@ -216,7 +208,7 @@ mod test_tbc {
             opcode => panic!("incorrect opcode. Expected SMSG_ACCOUNT_DATA_TIMES, got {opcode:#?}"),
         };
 
-        assert(&t, &expected);
+        assert_eq!(t.as_ref(), &expected);
         assert_eq!(128 + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());
@@ -236,7 +228,7 @@ mod test_tbc {
             opcode => panic!("incorrect opcode. Expected SMSG_ACCOUNT_DATA_TIMES, got {opcode:#?}"),
         };
 
-        assert(&t, &expected);
+        assert_eq!(t.as_ref(), &expected);
         assert_eq!(128 + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());
@@ -256,7 +248,7 @@ mod test_tbc {
             opcode => panic!("incorrect opcode. Expected SMSG_ACCOUNT_DATA_TIMES, got {opcode:#?}"),
         };
 
-        assert(&t, &expected);
+        assert_eq!(t.as_ref(), &expected);
         assert_eq!(128 + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());

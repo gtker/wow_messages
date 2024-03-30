@@ -98,12 +98,6 @@ mod test {
     use crate::vanilla::{ClientMessage, ServerMessage};
 
     const HEADER_SIZE: usize = 2 + 2;
-    fn assert(t: &MSG_MOVE_TELEPORT_ACK_Server, expected: &MSG_MOVE_TELEPORT_ACK_Server) {
-        assert_eq!(t.guid, expected.guid);
-        assert_eq!(t.movement_counter, expected.movement_counter);
-        assert_eq!(t.info, expected.info);
-    }
-
     const RAW0: [u8; 38] = [ 0x00, 0x24, 0xC7, 0x00, 0x01, 0x17, 0x00, 0x00, 0x00,
          0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x87,
          0x45, 0x00, 0xA0, 0x25, 0xC5, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
@@ -140,7 +134,7 @@ mod test {
             opcode => panic!("incorrect opcode. Expected MSG_MOVE_TELEPORT_ACK, got {opcode:#?}"),
         };
 
-        assert(&t, &expected);
+        assert_eq!(t.as_ref(), &expected);
         assert_eq!(t.size() + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());
@@ -160,7 +154,7 @@ mod test {
             opcode => panic!("incorrect opcode. Expected MSG_MOVE_TELEPORT_ACK, got {opcode:#?}"),
         };
 
-        assert(&t, &expected);
+        assert_eq!(t.as_ref(), &expected);
         assert_eq!(t.size() + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());
@@ -180,7 +174,7 @@ mod test {
             opcode => panic!("incorrect opcode. Expected MSG_MOVE_TELEPORT_ACK, got {opcode:#?}"),
         };
 
-        assert(&t, &expected);
+        assert_eq!(t.as_ref(), &expected);
         assert_eq!(t.size() + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());

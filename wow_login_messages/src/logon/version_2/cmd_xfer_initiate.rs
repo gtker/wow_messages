@@ -221,12 +221,6 @@ mod test_version_2 {
     use crate::logon::version_2::opcodes::ServerOpcodeMessage;
 
     const HEADER_SIZE: usize = 1;
-    fn assert(t: &CMD_XFER_INITIATE, expected: &CMD_XFER_INITIATE) {
-        assert_eq!(t.filename, expected.filename);
-        assert_eq!(t.file_size, expected.file_size);
-        assert_eq!(t.file_md5, expected.file_md5);
-    }
-
     const RAW0: [u8; 31] = [ 0x30, 0x05, 0x50, 0x61, 0x74, 0x63, 0x68, 0xBC, 0x09,
          0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x11, 0x5B, 0x55, 0x59, 0x7F, 0xB7,
          0xDF, 0x0E, 0x86, 0xD9, 0xB3, 0xAE, 0x5A, 0xEB, 0xCB, 0x62, ];
@@ -252,7 +246,7 @@ mod test_version_2 {
             opcode => panic!("incorrect opcode. Expected CMD_XFER_INITIATE, got {opcode:#?}"),
         };
 
-        assert(&t, &expected);
+        assert_eq!(&t, &expected);
         assert_eq!(t.size() + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());
@@ -272,7 +266,7 @@ mod test_version_2 {
             opcode => panic!("incorrect opcode. Expected CMD_XFER_INITIATE, got {opcode:#?}"),
         };
 
-        assert(&t, &expected);
+        assert_eq!(&t, &expected);
         assert_eq!(t.size() + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());
@@ -292,7 +286,7 @@ mod test_version_2 {
             opcode => panic!("incorrect opcode. Expected CMD_XFER_INITIATE, got {opcode:#?}"),
         };
 
-        assert(&t, &expected);
+        assert_eq!(&t, &expected);
         assert_eq!(t.size() + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());
@@ -313,12 +307,6 @@ mod test_version_3 {
     use crate::logon::version_3::opcodes::ServerOpcodeMessage;
 
     const HEADER_SIZE: usize = 1;
-    fn assert(t: &CMD_XFER_INITIATE, expected: &CMD_XFER_INITIATE) {
-        assert_eq!(t.filename, expected.filename);
-        assert_eq!(t.file_size, expected.file_size);
-        assert_eq!(t.file_md5, expected.file_md5);
-    }
-
     const RAW0: [u8; 31] = [ 0x30, 0x05, 0x50, 0x61, 0x74, 0x63, 0x68, 0xBC, 0x09,
          0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x11, 0x5B, 0x55, 0x59, 0x7F, 0xB7,
          0xDF, 0x0E, 0x86, 0xD9, 0xB3, 0xAE, 0x5A, 0xEB, 0xCB, 0x62, ];
@@ -344,7 +332,7 @@ mod test_version_3 {
             opcode => panic!("incorrect opcode. Expected CMD_XFER_INITIATE, got {opcode:#?}"),
         };
 
-        assert(&t, &expected);
+        assert_eq!(&t, &expected);
         assert_eq!(t.size() + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());
@@ -364,7 +352,7 @@ mod test_version_3 {
             opcode => panic!("incorrect opcode. Expected CMD_XFER_INITIATE, got {opcode:#?}"),
         };
 
-        assert(&t, &expected);
+        assert_eq!(&t, &expected);
         assert_eq!(t.size() + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());
@@ -384,7 +372,7 @@ mod test_version_3 {
             opcode => panic!("incorrect opcode. Expected CMD_XFER_INITIATE, got {opcode:#?}"),
         };
 
-        assert(&t, &expected);
+        assert_eq!(&t, &expected);
         assert_eq!(t.size() + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());
@@ -405,12 +393,6 @@ mod test_version_5 {
     use crate::logon::version_5::opcodes::ServerOpcodeMessage;
 
     const HEADER_SIZE: usize = 1;
-    fn assert(t: &CMD_XFER_INITIATE, expected: &CMD_XFER_INITIATE) {
-        assert_eq!(t.filename, expected.filename);
-        assert_eq!(t.file_size, expected.file_size);
-        assert_eq!(t.file_md5, expected.file_md5);
-    }
-
     const RAW0: [u8; 31] = [ 0x30, 0x05, 0x50, 0x61, 0x74, 0x63, 0x68, 0xBC, 0x09,
          0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x11, 0x5B, 0x55, 0x59, 0x7F, 0xB7,
          0xDF, 0x0E, 0x86, 0xD9, 0xB3, 0xAE, 0x5A, 0xEB, 0xCB, 0x62, ];
@@ -436,7 +418,7 @@ mod test_version_5 {
             opcode => panic!("incorrect opcode. Expected CMD_XFER_INITIATE, got {opcode:#?}"),
         };
 
-        assert(&t, &expected);
+        assert_eq!(&t, &expected);
         assert_eq!(t.size() + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());
@@ -456,7 +438,7 @@ mod test_version_5 {
             opcode => panic!("incorrect opcode. Expected CMD_XFER_INITIATE, got {opcode:#?}"),
         };
 
-        assert(&t, &expected);
+        assert_eq!(&t, &expected);
         assert_eq!(t.size() + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());
@@ -476,7 +458,7 @@ mod test_version_5 {
             opcode => panic!("incorrect opcode. Expected CMD_XFER_INITIATE, got {opcode:#?}"),
         };
 
-        assert(&t, &expected);
+        assert_eq!(&t, &expected);
         assert_eq!(t.size() + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());
@@ -497,12 +479,6 @@ mod test_version_6 {
     use crate::logon::version_6::opcodes::ServerOpcodeMessage;
 
     const HEADER_SIZE: usize = 1;
-    fn assert(t: &CMD_XFER_INITIATE, expected: &CMD_XFER_INITIATE) {
-        assert_eq!(t.filename, expected.filename);
-        assert_eq!(t.file_size, expected.file_size);
-        assert_eq!(t.file_md5, expected.file_md5);
-    }
-
     const RAW0: [u8; 31] = [ 0x30, 0x05, 0x50, 0x61, 0x74, 0x63, 0x68, 0xBC, 0x09,
          0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x11, 0x5B, 0x55, 0x59, 0x7F, 0xB7,
          0xDF, 0x0E, 0x86, 0xD9, 0xB3, 0xAE, 0x5A, 0xEB, 0xCB, 0x62, ];
@@ -528,7 +504,7 @@ mod test_version_6 {
             opcode => panic!("incorrect opcode. Expected CMD_XFER_INITIATE, got {opcode:#?}"),
         };
 
-        assert(&t, &expected);
+        assert_eq!(&t, &expected);
         assert_eq!(t.size() + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());
@@ -548,7 +524,7 @@ mod test_version_6 {
             opcode => panic!("incorrect opcode. Expected CMD_XFER_INITIATE, got {opcode:#?}"),
         };
 
-        assert(&t, &expected);
+        assert_eq!(&t, &expected);
         assert_eq!(t.size() + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());
@@ -568,7 +544,7 @@ mod test_version_6 {
             opcode => panic!("incorrect opcode. Expected CMD_XFER_INITIATE, got {opcode:#?}"),
         };
 
-        assert(&t, &expected);
+        assert_eq!(&t, &expected);
         assert_eq!(t.size() + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());
@@ -589,12 +565,6 @@ mod test_version_7 {
     use crate::logon::version_7::opcodes::ServerOpcodeMessage;
 
     const HEADER_SIZE: usize = 1;
-    fn assert(t: &CMD_XFER_INITIATE, expected: &CMD_XFER_INITIATE) {
-        assert_eq!(t.filename, expected.filename);
-        assert_eq!(t.file_size, expected.file_size);
-        assert_eq!(t.file_md5, expected.file_md5);
-    }
-
     const RAW0: [u8; 31] = [ 0x30, 0x05, 0x50, 0x61, 0x74, 0x63, 0x68, 0xBC, 0x09,
          0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x11, 0x5B, 0x55, 0x59, 0x7F, 0xB7,
          0xDF, 0x0E, 0x86, 0xD9, 0xB3, 0xAE, 0x5A, 0xEB, 0xCB, 0x62, ];
@@ -620,7 +590,7 @@ mod test_version_7 {
             opcode => panic!("incorrect opcode. Expected CMD_XFER_INITIATE, got {opcode:#?}"),
         };
 
-        assert(&t, &expected);
+        assert_eq!(&t, &expected);
         assert_eq!(t.size() + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());
@@ -640,7 +610,7 @@ mod test_version_7 {
             opcode => panic!("incorrect opcode. Expected CMD_XFER_INITIATE, got {opcode:#?}"),
         };
 
-        assert(&t, &expected);
+        assert_eq!(&t, &expected);
         assert_eq!(t.size() + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());
@@ -660,7 +630,7 @@ mod test_version_7 {
             opcode => panic!("incorrect opcode. Expected CMD_XFER_INITIATE, got {opcode:#?}"),
         };
 
-        assert(&t, &expected);
+        assert_eq!(&t, &expected);
         assert_eq!(t.size() + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());
@@ -681,12 +651,6 @@ mod test_version_8 {
     use crate::logon::version_8::opcodes::ServerOpcodeMessage;
 
     const HEADER_SIZE: usize = 1;
-    fn assert(t: &CMD_XFER_INITIATE, expected: &CMD_XFER_INITIATE) {
-        assert_eq!(t.filename, expected.filename);
-        assert_eq!(t.file_size, expected.file_size);
-        assert_eq!(t.file_md5, expected.file_md5);
-    }
-
     const RAW0: [u8; 31] = [ 0x30, 0x05, 0x50, 0x61, 0x74, 0x63, 0x68, 0xBC, 0x09,
          0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x11, 0x5B, 0x55, 0x59, 0x7F, 0xB7,
          0xDF, 0x0E, 0x86, 0xD9, 0xB3, 0xAE, 0x5A, 0xEB, 0xCB, 0x62, ];
@@ -712,7 +676,7 @@ mod test_version_8 {
             opcode => panic!("incorrect opcode. Expected CMD_XFER_INITIATE, got {opcode:#?}"),
         };
 
-        assert(&t, &expected);
+        assert_eq!(&t, &expected);
         assert_eq!(t.size() + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());
@@ -732,7 +696,7 @@ mod test_version_8 {
             opcode => panic!("incorrect opcode. Expected CMD_XFER_INITIATE, got {opcode:#?}"),
         };
 
-        assert(&t, &expected);
+        assert_eq!(&t, &expected);
         assert_eq!(t.size() + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());
@@ -752,7 +716,7 @@ mod test_version_8 {
             opcode => panic!("incorrect opcode. Expected CMD_XFER_INITIATE, got {opcode:#?}"),
         };
 
-        assert(&t, &expected);
+        assert_eq!(&t, &expected);
         assert_eq!(t.size() + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());

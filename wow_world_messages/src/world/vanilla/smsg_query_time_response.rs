@@ -69,10 +69,6 @@ mod test {
     use crate::vanilla::{ClientMessage, ServerMessage};
 
     const HEADER_SIZE: usize = 2 + 2;
-    fn assert(t: &SMSG_QUERY_TIME_RESPONSE, expected: &SMSG_QUERY_TIME_RESPONSE) {
-        assert_eq!(t.time, expected.time);
-    }
-
     const RAW0: [u8; 8] = [ 0x00, 0x06, 0xCF, 0x01, 0x94, 0x98, 0x50, 0x61, ];
 
     pub(crate) fn expected0() -> SMSG_QUERY_TIME_RESPONSE {
@@ -93,7 +89,7 @@ mod test {
             opcode => panic!("incorrect opcode. Expected SMSG_QUERY_TIME_RESPONSE, got {opcode:#?}"),
         };
 
-        assert(&t, &expected);
+        assert_eq!(&t, &expected);
         assert_eq!(4 + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());
@@ -113,7 +109,7 @@ mod test {
             opcode => panic!("incorrect opcode. Expected SMSG_QUERY_TIME_RESPONSE, got {opcode:#?}"),
         };
 
-        assert(&t, &expected);
+        assert_eq!(&t, &expected);
         assert_eq!(4 + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());
@@ -133,7 +129,7 @@ mod test {
             opcode => panic!("incorrect opcode. Expected SMSG_QUERY_TIME_RESPONSE, got {opcode:#?}"),
         };
 
-        assert(&t, &expected);
+        assert_eq!(&t, &expected);
         assert_eq!(4 + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());

@@ -187,18 +187,6 @@ mod test {
     use crate::vanilla::{ClientMessage, ServerMessage};
 
     const HEADER_SIZE: usize = 2 + 4;
-    fn assert(t: &CMSG_CHAR_CREATE, expected: &CMSG_CHAR_CREATE) {
-        assert_eq!(t.name, expected.name);
-        assert_eq!(t.race, expected.race);
-        assert_eq!(t.class, expected.class);
-        assert_eq!(t.gender, expected.gender);
-        assert_eq!(t.skin_color, expected.skin_color);
-        assert_eq!(t.face, expected.face);
-        assert_eq!(t.hair_style, expected.hair_style);
-        assert_eq!(t.hair_color, expected.hair_color);
-        assert_eq!(t.facial_hair, expected.facial_hair);
-    }
-
     const RAW0: [u8; 24] = [ 0x00, 0x16, 0x36, 0x00, 0x00, 0x00, 0x44, 0x65, 0x61,
          0x64, 0x62, 0x65, 0x65, 0x66, 0x00, 0x01, 0x01, 0x01, 0x08, 0x00, 0x0E,
          0x02, 0x04, 0x00, ];
@@ -229,7 +217,7 @@ mod test {
             opcode => panic!("incorrect opcode. Expected CMSG_CHAR_CREATE, got {opcode:#?}"),
         };
 
-        assert(&t, &expected);
+        assert_eq!(t.as_ref(), &expected);
         assert_eq!(t.size() + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());
@@ -249,7 +237,7 @@ mod test {
             opcode => panic!("incorrect opcode. Expected CMSG_CHAR_CREATE, got {opcode:#?}"),
         };
 
-        assert(&t, &expected);
+        assert_eq!(t.as_ref(), &expected);
         assert_eq!(t.size() + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());
@@ -269,7 +257,7 @@ mod test {
             opcode => panic!("incorrect opcode. Expected CMSG_CHAR_CREATE, got {opcode:#?}"),
         };
 
-        assert(&t, &expected);
+        assert_eq!(t.as_ref(), &expected);
         assert_eq!(t.size() + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());

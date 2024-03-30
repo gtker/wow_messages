@@ -143,12 +143,6 @@ mod test_vanilla {
     use crate::vanilla::{ClientMessage, ServerMessage};
 
     const HEADER_SIZE: usize = 2 + 2;
-    fn assert(t: &SMSG_INITIAL_SPELLS, expected: &SMSG_INITIAL_SPELLS) {
-        assert_eq!(t.unknown1, expected.unknown1);
-        assert_eq!(t.initial_spells, expected.initial_spells);
-        assert_eq!(t.cooldowns, expected.cooldowns);
-    }
-
     const RAW0: [u8; 169] = [ 0x00, 0xA7, 0x2A, 0x01, 0x00, 0x28, 0x00, 0x4E, 0x00,
          0x00, 0x00, 0x51, 0x00, 0x00, 0x00, 0x6B, 0x00, 0x00, 0x00, 0xC4, 0x00,
          0x00, 0x00, 0xC6, 0x00, 0x00, 0x00, 0xC9, 0x00, 0x00, 0x00, 0xCB, 0x00,
@@ -346,7 +340,7 @@ mod test_vanilla {
             opcode => panic!("incorrect opcode. Expected SMSG_INITIAL_SPELLS, got {opcode:#?}"),
         };
 
-        assert(&t, &expected);
+        assert_eq!(t.as_ref(), &expected);
         assert_eq!(t.size() + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());
@@ -366,7 +360,7 @@ mod test_vanilla {
             opcode => panic!("incorrect opcode. Expected SMSG_INITIAL_SPELLS, got {opcode:#?}"),
         };
 
-        assert(&t, &expected);
+        assert_eq!(t.as_ref(), &expected);
         assert_eq!(t.size() + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());
@@ -386,7 +380,7 @@ mod test_vanilla {
             opcode => panic!("incorrect opcode. Expected SMSG_INITIAL_SPELLS, got {opcode:#?}"),
         };
 
-        assert(&t, &expected);
+        assert_eq!(t.as_ref(), &expected);
         assert_eq!(t.size() + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());
@@ -407,12 +401,6 @@ mod test_tbc {
     use crate::tbc::{ClientMessage, ServerMessage};
 
     const HEADER_SIZE: usize = 2 + 2;
-    fn assert(t: &SMSG_INITIAL_SPELLS, expected: &SMSG_INITIAL_SPELLS) {
-        assert_eq!(t.unknown1, expected.unknown1);
-        assert_eq!(t.initial_spells, expected.initial_spells);
-        assert_eq!(t.cooldowns, expected.cooldowns);
-    }
-
     const RAW0: [u8; 169] = [ 0x00, 0xA7, 0x2A, 0x01, 0x00, 0x28, 0x00, 0x4E, 0x00,
          0x00, 0x00, 0x51, 0x00, 0x00, 0x00, 0x6B, 0x00, 0x00, 0x00, 0xC4, 0x00,
          0x00, 0x00, 0xC6, 0x00, 0x00, 0x00, 0xC9, 0x00, 0x00, 0x00, 0xCB, 0x00,
@@ -610,7 +598,7 @@ mod test_tbc {
             opcode => panic!("incorrect opcode. Expected SMSG_INITIAL_SPELLS, got {opcode:#?}"),
         };
 
-        assert(&t, &expected);
+        assert_eq!(t.as_ref(), &expected);
         assert_eq!(t.size() + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());
@@ -630,7 +618,7 @@ mod test_tbc {
             opcode => panic!("incorrect opcode. Expected SMSG_INITIAL_SPELLS, got {opcode:#?}"),
         };
 
-        assert(&t, &expected);
+        assert_eq!(t.as_ref(), &expected);
         assert_eq!(t.size() + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());
@@ -650,7 +638,7 @@ mod test_tbc {
             opcode => panic!("incorrect opcode. Expected SMSG_INITIAL_SPELLS, got {opcode:#?}"),
         };
 
-        assert(&t, &expected);
+        assert_eq!(t.as_ref(), &expected);
         assert_eq!(t.size() + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());

@@ -96,11 +96,6 @@ mod test {
     use crate::vanilla::{ClientMessage, ServerMessage};
 
     const HEADER_SIZE: usize = 2 + 4;
-    fn assert(t: &CMSG_JOIN_CHANNEL, expected: &CMSG_JOIN_CHANNEL) {
-        assert_eq!(t.channel_name, expected.channel_name);
-        assert_eq!(t.channel_password, expected.channel_password);
-    }
-
     const RAW0: [u8; 31] = [ 0x00, 0x1D, 0x97, 0x00, 0x00, 0x00, 0x47, 0x65, 0x6E,
          0x65, 0x72, 0x61, 0x6C, 0x20, 0x2D, 0x20, 0x45, 0x6C, 0x77, 0x79, 0x6E,
          0x6E, 0x20, 0x46, 0x6F, 0x72, 0x65, 0x73, 0x74, 0x00, 0x00, ];
@@ -124,7 +119,7 @@ mod test {
             opcode => panic!("incorrect opcode. Expected CMSG_JOIN_CHANNEL, got {opcode:#?}"),
         };
 
-        assert(&t, &expected);
+        assert_eq!(t.as_ref(), &expected);
         assert_eq!(t.size() + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());
@@ -144,7 +139,7 @@ mod test {
             opcode => panic!("incorrect opcode. Expected CMSG_JOIN_CHANNEL, got {opcode:#?}"),
         };
 
-        assert(&t, &expected);
+        assert_eq!(t.as_ref(), &expected);
         assert_eq!(t.size() + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());
@@ -164,7 +159,7 @@ mod test {
             opcode => panic!("incorrect opcode. Expected CMSG_JOIN_CHANNEL, got {opcode:#?}"),
         };
 
-        assert(&t, &expected);
+        assert_eq!(t.as_ref(), &expected);
         assert_eq!(t.size() + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());
@@ -197,7 +192,7 @@ mod test {
             opcode => panic!("incorrect opcode. Expected CMSG_JOIN_CHANNEL, got {opcode:#?}"),
         };
 
-        assert(&t, &expected);
+        assert_eq!(t.as_ref(), &expected);
         assert_eq!(t.size() + HEADER_SIZE, RAW1.len());
 
         let mut dest = Vec::with_capacity(RAW1.len());
@@ -217,7 +212,7 @@ mod test {
             opcode => panic!("incorrect opcode. Expected CMSG_JOIN_CHANNEL, got {opcode:#?}"),
         };
 
-        assert(&t, &expected);
+        assert_eq!(t.as_ref(), &expected);
         assert_eq!(t.size() + HEADER_SIZE, RAW1.len());
 
         let mut dest = Vec::with_capacity(RAW1.len());
@@ -237,7 +232,7 @@ mod test {
             opcode => panic!("incorrect opcode. Expected CMSG_JOIN_CHANNEL, got {opcode:#?}"),
         };
 
-        assert(&t, &expected);
+        assert_eq!(t.as_ref(), &expected);
         assert_eq!(t.size() + HEADER_SIZE, RAW1.len());
 
         let mut dest = Vec::with_capacity(RAW1.len());

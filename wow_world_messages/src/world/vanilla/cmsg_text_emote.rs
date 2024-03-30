@@ -91,12 +91,6 @@ mod test {
     use crate::vanilla::{ClientMessage, ServerMessage};
 
     const HEADER_SIZE: usize = 2 + 4;
-    fn assert(t: &CMSG_TEXT_EMOTE, expected: &CMSG_TEXT_EMOTE) {
-        assert_eq!(t.text_emote, expected.text_emote);
-        assert_eq!(t.emote, expected.emote);
-        assert_eq!(t.target, expected.target);
-    }
-
     const RAW0: [u8; 22] = [ 0x00, 0x14, 0x04, 0x01, 0x00, 0x00, 0x22, 0x00, 0x00,
          0x00, 0xFF, 0xFF, 0xFF, 0xFF, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
          0x00, ];
@@ -121,7 +115,7 @@ mod test {
             opcode => panic!("incorrect opcode. Expected CMSG_TEXT_EMOTE, got {opcode:#?}"),
         };
 
-        assert(&t, &expected);
+        assert_eq!(t.as_ref(), &expected);
         assert_eq!(16 + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());
@@ -141,7 +135,7 @@ mod test {
             opcode => panic!("incorrect opcode. Expected CMSG_TEXT_EMOTE, got {opcode:#?}"),
         };
 
-        assert(&t, &expected);
+        assert_eq!(t.as_ref(), &expected);
         assert_eq!(16 + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());
@@ -161,7 +155,7 @@ mod test {
             opcode => panic!("incorrect opcode. Expected CMSG_TEXT_EMOTE, got {opcode:#?}"),
         };
 
-        assert(&t, &expected);
+        assert_eq!(t.as_ref(), &expected);
         assert_eq!(16 + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());

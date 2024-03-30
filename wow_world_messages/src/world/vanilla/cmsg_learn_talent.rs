@@ -77,11 +77,6 @@ mod test {
     use crate::vanilla::{ClientMessage, ServerMessage};
 
     const HEADER_SIZE: usize = 2 + 4;
-    fn assert(t: &CMSG_LEARN_TALENT, expected: &CMSG_LEARN_TALENT) {
-        assert_eq!(t.talent, expected.talent);
-        assert_eq!(t.requested_rank, expected.requested_rank);
-    }
-
     const RAW0: [u8; 14] = [ 0x00, 0x0C, 0x51, 0x02, 0x00, 0x00, 0x9E, 0x00, 0x00,
          0x00, 0x00, 0x00, 0x00, 0x00, ];
 
@@ -104,7 +99,7 @@ mod test {
             opcode => panic!("incorrect opcode. Expected CMSG_LEARN_TALENT, got {opcode:#?}"),
         };
 
-        assert(&t, &expected);
+        assert_eq!(&t, &expected);
         assert_eq!(8 + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());
@@ -124,7 +119,7 @@ mod test {
             opcode => panic!("incorrect opcode. Expected CMSG_LEARN_TALENT, got {opcode:#?}"),
         };
 
-        assert(&t, &expected);
+        assert_eq!(&t, &expected);
         assert_eq!(8 + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());
@@ -144,7 +139,7 @@ mod test {
             opcode => panic!("incorrect opcode. Expected CMSG_LEARN_TALENT, got {opcode:#?}"),
         };
 
-        assert(&t, &expected);
+        assert_eq!(&t, &expected);
         assert_eq!(8 + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());

@@ -88,12 +88,6 @@ mod test {
     use crate::vanilla::{ClientMessage, ServerMessage};
 
     const HEADER_SIZE: usize = 2 + 2;
-    fn assert(t: &SMSG_NEW_WORLD, expected: &SMSG_NEW_WORLD) {
-        assert_eq!(t.map, expected.map);
-        assert_eq!(t.position, expected.position);
-        assert_eq!(t.orientation, expected.orientation);
-    }
-
     const RAW0: [u8; 24] = [ 0x00, 0x16, 0x3E, 0x00, 0x01, 0x00, 0x00, 0x00, 0x00,
          0xA0, 0xBA, 0x44, 0x00, 0xEC, 0x89, 0xC5, 0xCD, 0xCC, 0xB8, 0x41, 0xCD,
          0xCC, 0x4C, 0x3E, ];
@@ -122,7 +116,7 @@ mod test {
             opcode => panic!("incorrect opcode. Expected SMSG_NEW_WORLD, got {opcode:#?}"),
         };
 
-        assert(&t, &expected);
+        assert_eq!(t.as_ref(), &expected);
         assert_eq!(20 + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());
@@ -142,7 +136,7 @@ mod test {
             opcode => panic!("incorrect opcode. Expected SMSG_NEW_WORLD, got {opcode:#?}"),
         };
 
-        assert(&t, &expected);
+        assert_eq!(t.as_ref(), &expected);
         assert_eq!(20 + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());
@@ -162,7 +156,7 @@ mod test {
             opcode => panic!("incorrect opcode. Expected SMSG_NEW_WORLD, got {opcode:#?}"),
         };
 
-        assert(&t, &expected);
+        assert_eq!(t.as_ref(), &expected);
         assert_eq!(20 + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());

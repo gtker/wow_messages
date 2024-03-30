@@ -84,11 +84,6 @@ mod test_vanilla {
     use crate::vanilla::{ClientMessage, ServerMessage};
 
     const HEADER_SIZE: usize = 2 + 2;
-    fn assert(t: &SMSG_ATTACKSTART, expected: &SMSG_ATTACKSTART) {
-        assert_eq!(t.attacker, expected.attacker);
-        assert_eq!(t.victim, expected.victim);
-    }
-
     const RAW0: [u8; 20] = [ 0x00, 0x12, 0x43, 0x01, 0x17, 0x00, 0x00, 0x00, 0x00,
          0x00, 0x00, 0x00, 0x64, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, ];
 
@@ -111,7 +106,7 @@ mod test_vanilla {
             opcode => panic!("incorrect opcode. Expected SMSG_ATTACKSTART, got {opcode:#?}"),
         };
 
-        assert(&t, &expected);
+        assert_eq!(t.as_ref(), &expected);
         assert_eq!(16 + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());
@@ -131,7 +126,7 @@ mod test_vanilla {
             opcode => panic!("incorrect opcode. Expected SMSG_ATTACKSTART, got {opcode:#?}"),
         };
 
-        assert(&t, &expected);
+        assert_eq!(t.as_ref(), &expected);
         assert_eq!(16 + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());
@@ -151,7 +146,7 @@ mod test_vanilla {
             opcode => panic!("incorrect opcode. Expected SMSG_ATTACKSTART, got {opcode:#?}"),
         };
 
-        assert(&t, &expected);
+        assert_eq!(t.as_ref(), &expected);
         assert_eq!(16 + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());
@@ -173,11 +168,6 @@ mod test_tbc {
     use crate::tbc::{ClientMessage, ServerMessage};
 
     const HEADER_SIZE: usize = 2 + 2;
-    fn assert(t: &SMSG_ATTACKSTART, expected: &SMSG_ATTACKSTART) {
-        assert_eq!(t.attacker, expected.attacker);
-        assert_eq!(t.victim, expected.victim);
-    }
-
     const RAW0: [u8; 20] = [ 0x00, 0x12, 0x43, 0x01, 0x17, 0x00, 0x00, 0x00, 0x00,
          0x00, 0x00, 0x00, 0x64, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, ];
 
@@ -200,7 +190,7 @@ mod test_tbc {
             opcode => panic!("incorrect opcode. Expected SMSG_ATTACKSTART, got {opcode:#?}"),
         };
 
-        assert(&t, &expected);
+        assert_eq!(t.as_ref(), &expected);
         assert_eq!(16 + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());
@@ -220,7 +210,7 @@ mod test_tbc {
             opcode => panic!("incorrect opcode. Expected SMSG_ATTACKSTART, got {opcode:#?}"),
         };
 
-        assert(&t, &expected);
+        assert_eq!(t.as_ref(), &expected);
         assert_eq!(16 + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());
@@ -240,7 +230,7 @@ mod test_tbc {
             opcode => panic!("incorrect opcode. Expected SMSG_ATTACKSTART, got {opcode:#?}"),
         };
 
-        assert(&t, &expected);
+        assert_eq!(t.as_ref(), &expected);
         assert_eq!(16 + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());
@@ -262,11 +252,6 @@ mod test_wrath {
     use crate::wrath::{ClientMessage, ServerMessage};
 
     const HEADER_SIZE: usize = 2 + 2;
-    fn assert(t: &SMSG_ATTACKSTART, expected: &SMSG_ATTACKSTART) {
-        assert_eq!(t.attacker, expected.attacker);
-        assert_eq!(t.victim, expected.victim);
-    }
-
     const RAW0: [u8; 20] = [ 0x00, 0x12, 0x43, 0x01, 0x17, 0x00, 0x00, 0x00, 0x00,
          0x00, 0x00, 0x00, 0x64, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, ];
 
@@ -289,7 +274,7 @@ mod test_wrath {
             opcode => panic!("incorrect opcode. Expected SMSG_ATTACKSTART, got {opcode:#?}"),
         };
 
-        assert(&t, &expected);
+        assert_eq!(t.as_ref(), &expected);
         assert_eq!(16 + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());
@@ -309,7 +294,7 @@ mod test_wrath {
             opcode => panic!("incorrect opcode. Expected SMSG_ATTACKSTART, got {opcode:#?}"),
         };
 
-        assert(&t, &expected);
+        assert_eq!(t.as_ref(), &expected);
         assert_eq!(16 + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());
@@ -329,7 +314,7 @@ mod test_wrath {
             opcode => panic!("incorrect opcode. Expected SMSG_ATTACKSTART, got {opcode:#?}"),
         };
 
-        assert(&t, &expected);
+        assert_eq!(t.as_ref(), &expected);
         assert_eq!(16 + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());

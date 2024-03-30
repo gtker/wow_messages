@@ -1261,13 +1261,6 @@ mod test {
     use crate::vanilla::{ClientMessage, ServerMessage};
 
     const HEADER_SIZE: usize = 2 + 2;
-    fn assert(t: &SMSG_MESSAGECHAT, expected: &SMSG_MESSAGECHAT) {
-        assert_eq!(t.chat_type, expected.chat_type);
-        assert_eq!(t.language, expected.language);
-        assert_eq!(t.message, expected.message);
-        assert_eq!(t.tag, expected.tag);
-    }
-
     const RAW0: [u8; 53] = [ 0x00, 0x33, 0x96, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
          0x05, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x05, 0x00, 0x00, 0x00,
          0x00, 0x00, 0x00, 0x00, 0x17, 0x00, 0x00, 0x00, 0x54, 0x68, 0x69, 0x73,
@@ -1298,7 +1291,7 @@ mod test {
             opcode => panic!("incorrect opcode. Expected SMSG_MESSAGECHAT, got {opcode:#?}"),
         };
 
-        assert(&t, &expected);
+        assert_eq!(t.as_ref(), &expected);
         assert_eq!(t.size() + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());
@@ -1318,7 +1311,7 @@ mod test {
             opcode => panic!("incorrect opcode. Expected SMSG_MESSAGECHAT, got {opcode:#?}"),
         };
 
-        assert(&t, &expected);
+        assert_eq!(t.as_ref(), &expected);
         assert_eq!(t.size() + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());
@@ -1338,7 +1331,7 @@ mod test {
             opcode => panic!("incorrect opcode. Expected SMSG_MESSAGECHAT, got {opcode:#?}"),
         };
 
-        assert(&t, &expected);
+        assert_eq!(t.as_ref(), &expected);
         assert_eq!(t.size() + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());

@@ -75,10 +75,6 @@ mod test {
     use crate::vanilla::{ClientMessage, ServerMessage};
 
     const HEADER_SIZE: usize = 2 + 4;
-    fn assert(t: &MSG_MOVE_START_TURN_RIGHT_Client, expected: &MSG_MOVE_START_TURN_RIGHT_Client) {
-        assert_eq!(t.info, expected.info);
-    }
-
     const RAW0: [u8; 34] = [ 0x00, 0x20, 0xBD, 0x00, 0x00, 0x00, 0x20, 0x00, 0x00,
          0x00, 0xFB, 0xBE, 0x79, 0x01, 0xCD, 0xD7, 0x0B, 0xC6, 0x35, 0x7E, 0x04,
          0xC3, 0xF9, 0x0F, 0xA7, 0x42, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
@@ -114,7 +110,7 @@ mod test {
             opcode => panic!("incorrect opcode. Expected MSG_MOVE_START_TURN_RIGHT, got {opcode:#?}"),
         };
 
-        assert(&t, &expected);
+        assert_eq!(t.as_ref(), &expected);
         assert_eq!(t.size() + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());
@@ -134,7 +130,7 @@ mod test {
             opcode => panic!("incorrect opcode. Expected MSG_MOVE_START_TURN_RIGHT, got {opcode:#?}"),
         };
 
-        assert(&t, &expected);
+        assert_eq!(t.as_ref(), &expected);
         assert_eq!(t.size() + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());
@@ -154,7 +150,7 @@ mod test {
             opcode => panic!("incorrect opcode. Expected MSG_MOVE_START_TURN_RIGHT, got {opcode:#?}"),
         };
 
-        assert(&t, &expected);
+        assert_eq!(t.as_ref(), &expected);
         assert_eq!(t.size() + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());

@@ -165,9 +165,6 @@ mod test_version_2 {
     use crate::logon::version_2::opcodes::ClientOpcodeMessage;
 
     const HEADER_SIZE: usize = 1;
-    fn assert(t: &CMD_REALM_LIST_Client, expected: &CMD_REALM_LIST_Client) {
-    }
-
     const RAW0: [u8; 5] = [ 0x10, 0x00, 0x00, 0x00, 0x00, ];
 
     pub(crate) fn expected0() -> CMD_REALM_LIST_Client {
@@ -187,7 +184,7 @@ mod test_version_2 {
             opcode => panic!("incorrect opcode. Expected CMD_REALM_LIST, got {opcode:#?}"),
         };
 
-        assert(&t, &expected);
+        assert_eq!(&t, &expected);
         assert_eq!(4 + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());
@@ -207,7 +204,7 @@ mod test_version_2 {
             opcode => panic!("incorrect opcode. Expected CMD_REALM_LIST, got {opcode:#?}"),
         };
 
-        assert(&t, &expected);
+        assert_eq!(&t, &expected);
         assert_eq!(4 + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());
@@ -227,7 +224,7 @@ mod test_version_2 {
             opcode => panic!("incorrect opcode. Expected CMD_REALM_LIST, got {opcode:#?}"),
         };
 
-        assert(&t, &expected);
+        assert_eq!(&t, &expected);
         assert_eq!(4 + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());
@@ -248,9 +245,6 @@ mod test_version_3 {
     use crate::logon::version_3::opcodes::ClientOpcodeMessage;
 
     const HEADER_SIZE: usize = 1;
-    fn assert(t: &CMD_REALM_LIST_Client, expected: &CMD_REALM_LIST_Client) {
-    }
-
     const RAW0: [u8; 5] = [ 0x10, 0x00, 0x00, 0x00, 0x00, ];
 
     pub(crate) fn expected0() -> CMD_REALM_LIST_Client {
@@ -270,7 +264,7 @@ mod test_version_3 {
             opcode => panic!("incorrect opcode. Expected CMD_REALM_LIST, got {opcode:#?}"),
         };
 
-        assert(&t, &expected);
+        assert_eq!(&t, &expected);
         assert_eq!(4 + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());
@@ -290,7 +284,7 @@ mod test_version_3 {
             opcode => panic!("incorrect opcode. Expected CMD_REALM_LIST, got {opcode:#?}"),
         };
 
-        assert(&t, &expected);
+        assert_eq!(&t, &expected);
         assert_eq!(4 + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());
@@ -310,7 +304,7 @@ mod test_version_3 {
             opcode => panic!("incorrect opcode. Expected CMD_REALM_LIST, got {opcode:#?}"),
         };
 
-        assert(&t, &expected);
+        assert_eq!(&t, &expected);
         assert_eq!(4 + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());
@@ -331,9 +325,6 @@ mod test_version_5 {
     use crate::logon::version_5::opcodes::ClientOpcodeMessage;
 
     const HEADER_SIZE: usize = 1;
-    fn assert(t: &CMD_REALM_LIST_Client, expected: &CMD_REALM_LIST_Client) {
-    }
-
     const RAW0: [u8; 5] = [ 0x10, 0x00, 0x00, 0x00, 0x00, ];
 
     pub(crate) fn expected0() -> CMD_REALM_LIST_Client {
@@ -353,7 +344,7 @@ mod test_version_5 {
             opcode => panic!("incorrect opcode. Expected CMD_REALM_LIST, got {opcode:#?}"),
         };
 
-        assert(&t, &expected);
+        assert_eq!(&t, &expected);
         assert_eq!(4 + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());
@@ -373,7 +364,7 @@ mod test_version_5 {
             opcode => panic!("incorrect opcode. Expected CMD_REALM_LIST, got {opcode:#?}"),
         };
 
-        assert(&t, &expected);
+        assert_eq!(&t, &expected);
         assert_eq!(4 + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());
@@ -393,7 +384,7 @@ mod test_version_5 {
             opcode => panic!("incorrect opcode. Expected CMD_REALM_LIST, got {opcode:#?}"),
         };
 
-        assert(&t, &expected);
+        assert_eq!(&t, &expected);
         assert_eq!(4 + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());
@@ -414,9 +405,6 @@ mod test_version_6 {
     use crate::logon::version_6::opcodes::ClientOpcodeMessage;
 
     const HEADER_SIZE: usize = 1;
-    fn assert(t: &CMD_REALM_LIST_Client, expected: &CMD_REALM_LIST_Client) {
-    }
-
     const RAW0: [u8; 5] = [ 0x10, 0x00, 0x00, 0x00, 0x00, ];
 
     pub(crate) fn expected0() -> CMD_REALM_LIST_Client {
@@ -436,7 +424,7 @@ mod test_version_6 {
             opcode => panic!("incorrect opcode. Expected CMD_REALM_LIST, got {opcode:#?}"),
         };
 
-        assert(&t, &expected);
+        assert_eq!(&t, &expected);
         assert_eq!(4 + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());
@@ -456,7 +444,7 @@ mod test_version_6 {
             opcode => panic!("incorrect opcode. Expected CMD_REALM_LIST, got {opcode:#?}"),
         };
 
-        assert(&t, &expected);
+        assert_eq!(&t, &expected);
         assert_eq!(4 + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());
@@ -476,7 +464,7 @@ mod test_version_6 {
             opcode => panic!("incorrect opcode. Expected CMD_REALM_LIST, got {opcode:#?}"),
         };
 
-        assert(&t, &expected);
+        assert_eq!(&t, &expected);
         assert_eq!(4 + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());
@@ -497,9 +485,6 @@ mod test_version_7 {
     use crate::logon::version_7::opcodes::ClientOpcodeMessage;
 
     const HEADER_SIZE: usize = 1;
-    fn assert(t: &CMD_REALM_LIST_Client, expected: &CMD_REALM_LIST_Client) {
-    }
-
     const RAW0: [u8; 5] = [ 0x10, 0x00, 0x00, 0x00, 0x00, ];
 
     pub(crate) fn expected0() -> CMD_REALM_LIST_Client {
@@ -519,7 +504,7 @@ mod test_version_7 {
             opcode => panic!("incorrect opcode. Expected CMD_REALM_LIST, got {opcode:#?}"),
         };
 
-        assert(&t, &expected);
+        assert_eq!(&t, &expected);
         assert_eq!(4 + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());
@@ -539,7 +524,7 @@ mod test_version_7 {
             opcode => panic!("incorrect opcode. Expected CMD_REALM_LIST, got {opcode:#?}"),
         };
 
-        assert(&t, &expected);
+        assert_eq!(&t, &expected);
         assert_eq!(4 + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());
@@ -559,7 +544,7 @@ mod test_version_7 {
             opcode => panic!("incorrect opcode. Expected CMD_REALM_LIST, got {opcode:#?}"),
         };
 
-        assert(&t, &expected);
+        assert_eq!(&t, &expected);
         assert_eq!(4 + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());
@@ -580,9 +565,6 @@ mod test_version_8 {
     use crate::logon::version_8::opcodes::ClientOpcodeMessage;
 
     const HEADER_SIZE: usize = 1;
-    fn assert(t: &CMD_REALM_LIST_Client, expected: &CMD_REALM_LIST_Client) {
-    }
-
     const RAW0: [u8; 5] = [ 0x10, 0x00, 0x00, 0x00, 0x00, ];
 
     pub(crate) fn expected0() -> CMD_REALM_LIST_Client {
@@ -602,7 +584,7 @@ mod test_version_8 {
             opcode => panic!("incorrect opcode. Expected CMD_REALM_LIST, got {opcode:#?}"),
         };
 
-        assert(&t, &expected);
+        assert_eq!(&t, &expected);
         assert_eq!(4 + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());
@@ -622,7 +604,7 @@ mod test_version_8 {
             opcode => panic!("incorrect opcode. Expected CMD_REALM_LIST, got {opcode:#?}"),
         };
 
-        assert(&t, &expected);
+        assert_eq!(&t, &expected);
         assert_eq!(4 + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());
@@ -642,7 +624,7 @@ mod test_version_8 {
             opcode => panic!("incorrect opcode. Expected CMD_REALM_LIST, got {opcode:#?}"),
         };
 
-        assert(&t, &expected);
+        assert_eq!(&t, &expected);
         assert_eq!(4 + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());

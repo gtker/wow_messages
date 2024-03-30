@@ -99,10 +99,6 @@ mod test_tbc {
     use crate::tbc::{ClientMessage, ServerMessage};
 
     const HEADER_SIZE: usize = 2 + 2;
-    fn assert(t: &SMSG_MOTD, expected: &SMSG_MOTD) {
-        assert_eq!(t.motds, expected.motds);
-    }
-
     const RAW0: [u8; 118] = [ 0x00, 0x74, 0x3D, 0x03, 0x02, 0x00, 0x00, 0x00, 0x57,
          0x65, 0x6C, 0x63, 0x6F, 0x6D, 0x65, 0x20, 0x74, 0x6F, 0x20, 0x61, 0x6E,
          0x20, 0x41, 0x7A, 0x65, 0x72, 0x6F, 0x74, 0x68, 0x43, 0x6F, 0x72, 0x65,
@@ -133,7 +129,7 @@ mod test_tbc {
             opcode => panic!("incorrect opcode. Expected SMSG_MOTD, got {opcode:#?}"),
         };
 
-        assert(&t, &expected);
+        assert_eq!(t.as_ref(), &expected);
         assert_eq!(t.size() + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());
@@ -153,7 +149,7 @@ mod test_tbc {
             opcode => panic!("incorrect opcode. Expected SMSG_MOTD, got {opcode:#?}"),
         };
 
-        assert(&t, &expected);
+        assert_eq!(t.as_ref(), &expected);
         assert_eq!(t.size() + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());
@@ -173,7 +169,7 @@ mod test_tbc {
             opcode => panic!("incorrect opcode. Expected SMSG_MOTD, got {opcode:#?}"),
         };
 
-        assert(&t, &expected);
+        assert_eq!(t.as_ref(), &expected);
         assert_eq!(t.size() + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());
@@ -194,10 +190,6 @@ mod test_wrath {
     use crate::wrath::{ClientMessage, ServerMessage};
 
     const HEADER_SIZE: usize = 2 + 2;
-    fn assert(t: &SMSG_MOTD, expected: &SMSG_MOTD) {
-        assert_eq!(t.motds, expected.motds);
-    }
-
     const RAW0: [u8; 118] = [ 0x00, 0x74, 0x3D, 0x03, 0x02, 0x00, 0x00, 0x00, 0x57,
          0x65, 0x6C, 0x63, 0x6F, 0x6D, 0x65, 0x20, 0x74, 0x6F, 0x20, 0x61, 0x6E,
          0x20, 0x41, 0x7A, 0x65, 0x72, 0x6F, 0x74, 0x68, 0x43, 0x6F, 0x72, 0x65,
@@ -228,7 +220,7 @@ mod test_wrath {
             opcode => panic!("incorrect opcode. Expected SMSG_MOTD, got {opcode:#?}"),
         };
 
-        assert(&t, &expected);
+        assert_eq!(t.as_ref(), &expected);
         assert_eq!(t.size() + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());
@@ -248,7 +240,7 @@ mod test_wrath {
             opcode => panic!("incorrect opcode. Expected SMSG_MOTD, got {opcode:#?}"),
         };
 
-        assert(&t, &expected);
+        assert_eq!(t.as_ref(), &expected);
         assert_eq!(t.size() + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());
@@ -268,7 +260,7 @@ mod test_wrath {
             opcode => panic!("incorrect opcode. Expected SMSG_MOTD, got {opcode:#?}"),
         };
 
-        assert(&t, &expected);
+        assert_eq!(t.as_ref(), &expected);
         assert_eq!(t.size() + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());

@@ -518,10 +518,6 @@ mod test {
     use crate::vanilla::{ClientMessage, ServerMessage};
 
     const HEADER_SIZE: usize = 2 + 2;
-    fn assert(t: &SMSG_AUTH_RESPONSE, expected: &SMSG_AUTH_RESPONSE) {
-        assert_eq!(t.result, expected.result);
-    }
-
     const RAW0: [u8; 5] = [ 0x00, 0x03, 0xEE, 0x01, 0x0D, ];
 
     pub(crate) fn expected0() -> SMSG_AUTH_RESPONSE {
@@ -542,7 +538,7 @@ mod test {
             opcode => panic!("incorrect opcode. Expected SMSG_AUTH_RESPONSE, got {opcode:#?}"),
         };
 
-        assert(&t, &expected);
+        assert_eq!(t.as_ref(), &expected);
         assert_eq!(t.size() + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());
@@ -562,7 +558,7 @@ mod test {
             opcode => panic!("incorrect opcode. Expected SMSG_AUTH_RESPONSE, got {opcode:#?}"),
         };
 
-        assert(&t, &expected);
+        assert_eq!(t.as_ref(), &expected);
         assert_eq!(t.size() + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());
@@ -582,7 +578,7 @@ mod test {
             opcode => panic!("incorrect opcode. Expected SMSG_AUTH_RESPONSE, got {opcode:#?}"),
         };
 
-        assert(&t, &expected);
+        assert_eq!(t.as_ref(), &expected);
         assert_eq!(t.size() + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());
@@ -613,7 +609,7 @@ mod test {
             opcode => panic!("incorrect opcode. Expected SMSG_AUTH_RESPONSE, got {opcode:#?}"),
         };
 
-        assert(&t, &expected);
+        assert_eq!(t.as_ref(), &expected);
         assert_eq!(t.size() + HEADER_SIZE, RAW1.len());
 
         let mut dest = Vec::with_capacity(RAW1.len());
@@ -633,7 +629,7 @@ mod test {
             opcode => panic!("incorrect opcode. Expected SMSG_AUTH_RESPONSE, got {opcode:#?}"),
         };
 
-        assert(&t, &expected);
+        assert_eq!(t.as_ref(), &expected);
         assert_eq!(t.size() + HEADER_SIZE, RAW1.len());
 
         let mut dest = Vec::with_capacity(RAW1.len());
@@ -653,7 +649,7 @@ mod test {
             opcode => panic!("incorrect opcode. Expected SMSG_AUTH_RESPONSE, got {opcode:#?}"),
         };
 
-        assert(&t, &expected);
+        assert_eq!(t.as_ref(), &expected);
         assert_eq!(t.size() + HEADER_SIZE, RAW1.len());
 
         let mut dest = Vec::with_capacity(RAW1.len());
@@ -687,7 +683,7 @@ mod test {
             opcode => panic!("incorrect opcode. Expected SMSG_AUTH_RESPONSE, got {opcode:#?}"),
         };
 
-        assert(&t, &expected);
+        assert_eq!(t.as_ref(), &expected);
         assert_eq!(t.size() + HEADER_SIZE, RAW2.len());
 
         let mut dest = Vec::with_capacity(RAW2.len());
@@ -707,7 +703,7 @@ mod test {
             opcode => panic!("incorrect opcode. Expected SMSG_AUTH_RESPONSE, got {opcode:#?}"),
         };
 
-        assert(&t, &expected);
+        assert_eq!(t.as_ref(), &expected);
         assert_eq!(t.size() + HEADER_SIZE, RAW2.len());
 
         let mut dest = Vec::with_capacity(RAW2.len());
@@ -727,7 +723,7 @@ mod test {
             opcode => panic!("incorrect opcode. Expected SMSG_AUTH_RESPONSE, got {opcode:#?}"),
         };
 
-        assert(&t, &expected);
+        assert_eq!(t.as_ref(), &expected);
         assert_eq!(t.size() + HEADER_SIZE, RAW2.len());
 
         let mut dest = Vec::with_capacity(RAW2.len());

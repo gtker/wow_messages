@@ -175,18 +175,6 @@ mod test {
     use crate::vanilla::{ClientMessage, ServerMessage};
 
     const HEADER_SIZE: usize = 2 + 2;
-    fn assert(t: &SMSG_ATTACKERSTATEUPDATE, expected: &SMSG_ATTACKERSTATEUPDATE) {
-        assert_eq!(t.hit_info, expected.hit_info);
-        assert_eq!(t.attacker, expected.attacker);
-        assert_eq!(t.target, expected.target);
-        assert_eq!(t.total_damage, expected.total_damage);
-        assert_eq!(t.damages, expected.damages);
-        assert_eq!(t.damage_state, expected.damage_state);
-        assert_eq!(t.unknown1, expected.unknown1);
-        assert_eq!(t.spell_id, expected.spell_id);
-        assert_eq!(t.blocked_amount, expected.blocked_amount);
-    }
-
     const RAW0: [u8; 53] = [ 0x00, 0x33, 0x4A, 0x01, 0x80, 0x00, 0x00, 0x00, 0x01,
          0x17, 0x01, 0x64, 0x39, 0x05, 0x00, 0x00, 0x01, 0x00, 0x00, 0x00, 0x00,
          0x00, 0x80, 0xA6, 0x44, 0x34, 0x05, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
@@ -227,7 +215,7 @@ mod test {
             opcode => panic!("incorrect opcode. Expected SMSG_ATTACKERSTATEUPDATE, got {opcode:#?}"),
         };
 
-        assert(&t, &expected);
+        assert_eq!(t.as_ref(), &expected);
         assert_eq!(t.size() + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());
@@ -247,7 +235,7 @@ mod test {
             opcode => panic!("incorrect opcode. Expected SMSG_ATTACKERSTATEUPDATE, got {opcode:#?}"),
         };
 
-        assert(&t, &expected);
+        assert_eq!(t.as_ref(), &expected);
         assert_eq!(t.size() + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());
@@ -267,7 +255,7 @@ mod test {
             opcode => panic!("incorrect opcode. Expected SMSG_ATTACKERSTATEUPDATE, got {opcode:#?}"),
         };
 
-        assert(&t, &expected);
+        assert_eq!(t.as_ref(), &expected);
         assert_eq!(t.size() + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());
