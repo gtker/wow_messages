@@ -97,7 +97,6 @@ pub async fn astd_expect_client_message_protocol<
 ///
 /// let server = expect_server_message::<CMD_AUTH_LOGON_PROOF_Server, _>(&mut reader)?;
 /// // We can now use the message
-/// let login_result = server.result;
 /// # Ok(())
 /// # }
 /// ```

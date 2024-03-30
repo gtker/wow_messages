@@ -16,9 +16,28 @@ use crate::logon::version_2::LoginResult;
 ///     }
 /// }
 /// ```
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
-pub struct CMD_AUTH_LOGON_PROOF_Server {
-    pub result: CMD_AUTH_LOGON_PROOF_Server_LoginResult,
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord)]
+pub enum CMD_AUTH_LOGON_PROOF_Server {
+    Success {
+        hardware_survey_id: u32,
+        server_proof: [u8; 20],
+        unknown: u16,
+    },
+    FailUnknown0,
+    FailUnknown1,
+    FailBanned,
+    FailUnknownAccount,
+    FailIncorrectPassword,
+    FailAlreadyOnline,
+    FailNoTime,
+    FailDbBusy,
+    FailVersionInvalid,
+    LoginDownloadFile,
+    FailInvalidServer,
+    FailSuspended,
+    FailNoAccess,
+    SuccessSurvey,
+    FailParentalcontrol,
 }
 
 impl CMD_AUTH_LOGON_PROOF_Server {
@@ -27,10 +46,10 @@ impl CMD_AUTH_LOGON_PROOF_Server {
         w.write_all(&Self::OPCODE.to_le_bytes())?;
 
         // result: LoginResult
-        w.write_all(&(self.result.as_int().to_le_bytes()))?;
+        w.write_all(&(self.as_int().to_le_bytes()))?;
 
-        match &self.result {
-            CMD_AUTH_LOGON_PROOF_Server_LoginResult::Success {
+        match &self {
+            CMD_AUTH_LOGON_PROOF_Server::Success {
                 hardware_survey_id,
                 server_proof,
                 unknown,
@@ -77,32 +96,30 @@ impl CMD_AUTH_LOGON_PROOF_Server {
                 // unknown: u16
                 let unknown = crate::util::read_u16_le(&mut r)?;
 
-                CMD_AUTH_LOGON_PROOF_Server_LoginResult::Success {
+                CMD_AUTH_LOGON_PROOF_Server::Success {
                     hardware_survey_id,
                     server_proof,
                     unknown,
                 }
             }
-            LoginResult::FailUnknown0 => CMD_AUTH_LOGON_PROOF_Server_LoginResult::FailUnknown0,
-            LoginResult::FailUnknown1 => CMD_AUTH_LOGON_PROOF_Server_LoginResult::FailUnknown1,
-            LoginResult::FailBanned => CMD_AUTH_LOGON_PROOF_Server_LoginResult::FailBanned,
-            LoginResult::FailUnknownAccount => CMD_AUTH_LOGON_PROOF_Server_LoginResult::FailUnknownAccount,
-            LoginResult::FailIncorrectPassword => CMD_AUTH_LOGON_PROOF_Server_LoginResult::FailIncorrectPassword,
-            LoginResult::FailAlreadyOnline => CMD_AUTH_LOGON_PROOF_Server_LoginResult::FailAlreadyOnline,
-            LoginResult::FailNoTime => CMD_AUTH_LOGON_PROOF_Server_LoginResult::FailNoTime,
-            LoginResult::FailDbBusy => CMD_AUTH_LOGON_PROOF_Server_LoginResult::FailDbBusy,
-            LoginResult::FailVersionInvalid => CMD_AUTH_LOGON_PROOF_Server_LoginResult::FailVersionInvalid,
-            LoginResult::LoginDownloadFile => CMD_AUTH_LOGON_PROOF_Server_LoginResult::LoginDownloadFile,
-            LoginResult::FailInvalidServer => CMD_AUTH_LOGON_PROOF_Server_LoginResult::FailInvalidServer,
-            LoginResult::FailSuspended => CMD_AUTH_LOGON_PROOF_Server_LoginResult::FailSuspended,
-            LoginResult::FailNoAccess => CMD_AUTH_LOGON_PROOF_Server_LoginResult::FailNoAccess,
-            LoginResult::SuccessSurvey => CMD_AUTH_LOGON_PROOF_Server_LoginResult::SuccessSurvey,
-            LoginResult::FailParentalcontrol => CMD_AUTH_LOGON_PROOF_Server_LoginResult::FailParentalcontrol,
+            LoginResult::FailUnknown0 => CMD_AUTH_LOGON_PROOF_Server::FailUnknown0,
+            LoginResult::FailUnknown1 => CMD_AUTH_LOGON_PROOF_Server::FailUnknown1,
+            LoginResult::FailBanned => CMD_AUTH_LOGON_PROOF_Server::FailBanned,
+            LoginResult::FailUnknownAccount => CMD_AUTH_LOGON_PROOF_Server::FailUnknownAccount,
+            LoginResult::FailIncorrectPassword => CMD_AUTH_LOGON_PROOF_Server::FailIncorrectPassword,
+            LoginResult::FailAlreadyOnline => CMD_AUTH_LOGON_PROOF_Server::FailAlreadyOnline,
+            LoginResult::FailNoTime => CMD_AUTH_LOGON_PROOF_Server::FailNoTime,
+            LoginResult::FailDbBusy => CMD_AUTH_LOGON_PROOF_Server::FailDbBusy,
+            LoginResult::FailVersionInvalid => CMD_AUTH_LOGON_PROOF_Server::FailVersionInvalid,
+            LoginResult::LoginDownloadFile => CMD_AUTH_LOGON_PROOF_Server::LoginDownloadFile,
+            LoginResult::FailInvalidServer => CMD_AUTH_LOGON_PROOF_Server::FailInvalidServer,
+            LoginResult::FailSuspended => CMD_AUTH_LOGON_PROOF_Server::FailSuspended,
+            LoginResult::FailNoAccess => CMD_AUTH_LOGON_PROOF_Server::FailNoAccess,
+            LoginResult::SuccessSurvey => CMD_AUTH_LOGON_PROOF_Server::SuccessSurvey,
+            LoginResult::FailParentalcontrol => CMD_AUTH_LOGON_PROOF_Server::FailParentalcontrol,
         };
 
-        Ok(Self {
-            result: result_if,
-        })
+        Ok(result_if)
     }
 
     #[cfg(feature = "tokio")]
@@ -125,32 +142,30 @@ impl CMD_AUTH_LOGON_PROOF_Server {
                 // unknown: u16
                 let unknown = crate::util::tokio_read_u16_le(&mut r).await?;
 
-                CMD_AUTH_LOGON_PROOF_Server_LoginResult::Success {
+                CMD_AUTH_LOGON_PROOF_Server::Success {
                     hardware_survey_id,
                     server_proof,
                     unknown,
                 }
             }
-            LoginResult::FailUnknown0 => CMD_AUTH_LOGON_PROOF_Server_LoginResult::FailUnknown0,
-            LoginResult::FailUnknown1 => CMD_AUTH_LOGON_PROOF_Server_LoginResult::FailUnknown1,
-            LoginResult::FailBanned => CMD_AUTH_LOGON_PROOF_Server_LoginResult::FailBanned,
-            LoginResult::FailUnknownAccount => CMD_AUTH_LOGON_PROOF_Server_LoginResult::FailUnknownAccount,
-            LoginResult::FailIncorrectPassword => CMD_AUTH_LOGON_PROOF_Server_LoginResult::FailIncorrectPassword,
-            LoginResult::FailAlreadyOnline => CMD_AUTH_LOGON_PROOF_Server_LoginResult::FailAlreadyOnline,
-            LoginResult::FailNoTime => CMD_AUTH_LOGON_PROOF_Server_LoginResult::FailNoTime,
-            LoginResult::FailDbBusy => CMD_AUTH_LOGON_PROOF_Server_LoginResult::FailDbBusy,
-            LoginResult::FailVersionInvalid => CMD_AUTH_LOGON_PROOF_Server_LoginResult::FailVersionInvalid,
-            LoginResult::LoginDownloadFile => CMD_AUTH_LOGON_PROOF_Server_LoginResult::LoginDownloadFile,
-            LoginResult::FailInvalidServer => CMD_AUTH_LOGON_PROOF_Server_LoginResult::FailInvalidServer,
-            LoginResult::FailSuspended => CMD_AUTH_LOGON_PROOF_Server_LoginResult::FailSuspended,
-            LoginResult::FailNoAccess => CMD_AUTH_LOGON_PROOF_Server_LoginResult::FailNoAccess,
-            LoginResult::SuccessSurvey => CMD_AUTH_LOGON_PROOF_Server_LoginResult::SuccessSurvey,
-            LoginResult::FailParentalcontrol => CMD_AUTH_LOGON_PROOF_Server_LoginResult::FailParentalcontrol,
+            LoginResult::FailUnknown0 => CMD_AUTH_LOGON_PROOF_Server::FailUnknown0,
+            LoginResult::FailUnknown1 => CMD_AUTH_LOGON_PROOF_Server::FailUnknown1,
+            LoginResult::FailBanned => CMD_AUTH_LOGON_PROOF_Server::FailBanned,
+            LoginResult::FailUnknownAccount => CMD_AUTH_LOGON_PROOF_Server::FailUnknownAccount,
+            LoginResult::FailIncorrectPassword => CMD_AUTH_LOGON_PROOF_Server::FailIncorrectPassword,
+            LoginResult::FailAlreadyOnline => CMD_AUTH_LOGON_PROOF_Server::FailAlreadyOnline,
+            LoginResult::FailNoTime => CMD_AUTH_LOGON_PROOF_Server::FailNoTime,
+            LoginResult::FailDbBusy => CMD_AUTH_LOGON_PROOF_Server::FailDbBusy,
+            LoginResult::FailVersionInvalid => CMD_AUTH_LOGON_PROOF_Server::FailVersionInvalid,
+            LoginResult::LoginDownloadFile => CMD_AUTH_LOGON_PROOF_Server::LoginDownloadFile,
+            LoginResult::FailInvalidServer => CMD_AUTH_LOGON_PROOF_Server::FailInvalidServer,
+            LoginResult::FailSuspended => CMD_AUTH_LOGON_PROOF_Server::FailSuspended,
+            LoginResult::FailNoAccess => CMD_AUTH_LOGON_PROOF_Server::FailNoAccess,
+            LoginResult::SuccessSurvey => CMD_AUTH_LOGON_PROOF_Server::SuccessSurvey,
+            LoginResult::FailParentalcontrol => CMD_AUTH_LOGON_PROOF_Server::FailParentalcontrol,
         };
 
-        Ok(Self {
-            result: result_if,
-        })
+        Ok(result_if)
     }
 
     #[cfg(feature = "async-std")]
@@ -173,32 +188,30 @@ impl CMD_AUTH_LOGON_PROOF_Server {
                 // unknown: u16
                 let unknown = crate::util::astd_read_u16_le(&mut r).await?;
 
-                CMD_AUTH_LOGON_PROOF_Server_LoginResult::Success {
+                CMD_AUTH_LOGON_PROOF_Server::Success {
                     hardware_survey_id,
                     server_proof,
                     unknown,
                 }
             }
-            LoginResult::FailUnknown0 => CMD_AUTH_LOGON_PROOF_Server_LoginResult::FailUnknown0,
-            LoginResult::FailUnknown1 => CMD_AUTH_LOGON_PROOF_Server_LoginResult::FailUnknown1,
-            LoginResult::FailBanned => CMD_AUTH_LOGON_PROOF_Server_LoginResult::FailBanned,
-            LoginResult::FailUnknownAccount => CMD_AUTH_LOGON_PROOF_Server_LoginResult::FailUnknownAccount,
-            LoginResult::FailIncorrectPassword => CMD_AUTH_LOGON_PROOF_Server_LoginResult::FailIncorrectPassword,
-            LoginResult::FailAlreadyOnline => CMD_AUTH_LOGON_PROOF_Server_LoginResult::FailAlreadyOnline,
-            LoginResult::FailNoTime => CMD_AUTH_LOGON_PROOF_Server_LoginResult::FailNoTime,
-            LoginResult::FailDbBusy => CMD_AUTH_LOGON_PROOF_Server_LoginResult::FailDbBusy,
-            LoginResult::FailVersionInvalid => CMD_AUTH_LOGON_PROOF_Server_LoginResult::FailVersionInvalid,
-            LoginResult::LoginDownloadFile => CMD_AUTH_LOGON_PROOF_Server_LoginResult::LoginDownloadFile,
-            LoginResult::FailInvalidServer => CMD_AUTH_LOGON_PROOF_Server_LoginResult::FailInvalidServer,
-            LoginResult::FailSuspended => CMD_AUTH_LOGON_PROOF_Server_LoginResult::FailSuspended,
-            LoginResult::FailNoAccess => CMD_AUTH_LOGON_PROOF_Server_LoginResult::FailNoAccess,
-            LoginResult::SuccessSurvey => CMD_AUTH_LOGON_PROOF_Server_LoginResult::SuccessSurvey,
-            LoginResult::FailParentalcontrol => CMD_AUTH_LOGON_PROOF_Server_LoginResult::FailParentalcontrol,
+            LoginResult::FailUnknown0 => CMD_AUTH_LOGON_PROOF_Server::FailUnknown0,
+            LoginResult::FailUnknown1 => CMD_AUTH_LOGON_PROOF_Server::FailUnknown1,
+            LoginResult::FailBanned => CMD_AUTH_LOGON_PROOF_Server::FailBanned,
+            LoginResult::FailUnknownAccount => CMD_AUTH_LOGON_PROOF_Server::FailUnknownAccount,
+            LoginResult::FailIncorrectPassword => CMD_AUTH_LOGON_PROOF_Server::FailIncorrectPassword,
+            LoginResult::FailAlreadyOnline => CMD_AUTH_LOGON_PROOF_Server::FailAlreadyOnline,
+            LoginResult::FailNoTime => CMD_AUTH_LOGON_PROOF_Server::FailNoTime,
+            LoginResult::FailDbBusy => CMD_AUTH_LOGON_PROOF_Server::FailDbBusy,
+            LoginResult::FailVersionInvalid => CMD_AUTH_LOGON_PROOF_Server::FailVersionInvalid,
+            LoginResult::LoginDownloadFile => CMD_AUTH_LOGON_PROOF_Server::LoginDownloadFile,
+            LoginResult::FailInvalidServer => CMD_AUTH_LOGON_PROOF_Server::FailInvalidServer,
+            LoginResult::FailSuspended => CMD_AUTH_LOGON_PROOF_Server::FailSuspended,
+            LoginResult::FailNoAccess => CMD_AUTH_LOGON_PROOF_Server::FailNoAccess,
+            LoginResult::SuccessSurvey => CMD_AUTH_LOGON_PROOF_Server::SuccessSurvey,
+            LoginResult::FailParentalcontrol => CMD_AUTH_LOGON_PROOF_Server::FailParentalcontrol,
         };
 
-        Ok(Self {
-            result: result_if,
-        })
+        Ok(result_if)
     }
 
 }
@@ -287,42 +300,29 @@ impl Message for CMD_AUTH_LOGON_PROOF_Server {
 impl ServerMessage for CMD_AUTH_LOGON_PROOF_Server {}
 impl CMD_AUTH_LOGON_PROOF_Server {
     pub(crate) const fn size(&self) -> usize {
-        self.result.size() // result: CMD_AUTH_LOGON_PROOF_Server_LoginResult
+        match self {
+            Self::Success {
+                ..
+            } => {
+                1
+                + 4 // hardware_survey_id: u32
+                + 20 // server_proof: u8[20]
+                + 2 // unknown: u16
+            }
+            _ => 1,
+        }
+ // result: CMD_AUTH_LOGON_PROOF_Server_LoginResult
     }
 }
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord)]
-pub enum CMD_AUTH_LOGON_PROOF_Server_LoginResult {
-    Success {
-        hardware_survey_id: u32,
-        server_proof: [u8; 20],
-        unknown: u16,
-    },
-    FailUnknown0,
-    FailUnknown1,
-    FailBanned,
-    FailUnknownAccount,
-    FailIncorrectPassword,
-    FailAlreadyOnline,
-    FailNoTime,
-    FailDbBusy,
-    FailVersionInvalid,
-    LoginDownloadFile,
-    FailInvalidServer,
-    FailSuspended,
-    FailNoAccess,
-    SuccessSurvey,
-    FailParentalcontrol,
-}
-
-impl Default for CMD_AUTH_LOGON_PROOF_Server_LoginResult {
+impl Default for CMD_AUTH_LOGON_PROOF_Server {
     fn default() -> Self {
         // First enumerator without any fields
         Self::FailUnknown0
     }
 }
 
-impl CMD_AUTH_LOGON_PROOF_Server_LoginResult {
+impl CMD_AUTH_LOGON_PROOF_Server {
     pub(crate) const fn as_int(&self) -> u8 {
         match self {
             Self::Success { .. } => 0,
@@ -346,7 +346,7 @@ impl CMD_AUTH_LOGON_PROOF_Server_LoginResult {
 
 }
 
-impl std::fmt::Display for CMD_AUTH_LOGON_PROOF_Server_LoginResult {
+impl std::fmt::Display for CMD_AUTH_LOGON_PROOF_Server {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match self {
             Self::Success{ .. } => f.write_str("Success"),
@@ -369,22 +369,6 @@ impl std::fmt::Display for CMD_AUTH_LOGON_PROOF_Server_LoginResult {
     }
 }
 
-impl CMD_AUTH_LOGON_PROOF_Server_LoginResult {
-    pub(crate) const fn size(&self) -> usize {
-        match self {
-            Self::Success {
-                ..
-            } => {
-                1
-                + 4 // hardware_survey_id: u32
-                + 20 // server_proof: u8[20]
-                + 2 // unknown: u16
-            }
-            _ => 1,
-        }
-    }
-}
-
 #[cfg(test)]
 mod test_version_5 {
     #![allow(clippy::missing_const_for_fn)]
@@ -395,25 +379,17 @@ mod test_version_5 {
     use crate::logon::version_5::opcodes::ServerOpcodeMessage;
 
     const HEADER_SIZE: usize = 1;
-    fn assert(t: &CMD_AUTH_LOGON_PROOF_Server, expected: &CMD_AUTH_LOGON_PROOF_Server) {
-        assert_eq!(t.result, expected.result);
-    }
-
     const RAW0: [u8; 28] = [ 0x01, 0x00, 0x19, 0xFF, 0xE9, 0xFA, 0x64, 0xA9, 0x9B,
          0xAF, 0xF6, 0xB3, 0x8D, 0x9C, 0x11, 0xAB, 0xDC, 0xAE, 0x80, 0xC4, 0xD2,
          0xE7, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, ];
 
     pub(crate) fn expected0() -> CMD_AUTH_LOGON_PROOF_Server {
-        CMD_AUTH_LOGON_PROOF_Server {
-            result: CMD_AUTH_LOGON_PROOF_Server_LoginResult::Success {
-                hardware_survey_id: 0x0,
-                server_proof: [ 0x19, 0xFF, 0xE9, 0xFA, 0x64, 0xA9, 0x9B, 0xAF, 0xF6,
-                     0xB3, 0x8D, 0x9C, 0x11, 0xAB, 0xDC, 0xAE, 0x80, 0xC4, 0xD2,
-                     0xE7, ],
-                unknown: 0x0,
-            },
+        CMD_AUTH_LOGON_PROOF_Server::Success {
+            hardware_survey_id: 0x0,
+            server_proof: [ 0x19, 0xFF, 0xE9, 0xFA, 0x64, 0xA9, 0x9B, 0xAF, 0xF6,
+                 0xB3, 0x8D, 0x9C, 0x11, 0xAB, 0xDC, 0xAE, 0x80, 0xC4, 0xD2, 0xE7, ],
+            unknown: 0x0,
         }
-
     }
 
     // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/proof_server.wowm` line 46.
@@ -427,7 +403,7 @@ mod test_version_5 {
             opcode => panic!("incorrect opcode. Expected CMD_AUTH_LOGON_PROOF, got {opcode:#?}"),
         };
 
-        assert(&t, &expected);
+        assert_eq!(&t, &expected);
         assert_eq!(t.size() + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());
@@ -447,7 +423,7 @@ mod test_version_5 {
             opcode => panic!("incorrect opcode. Expected CMD_AUTH_LOGON_PROOF, got {opcode:#?}"),
         };
 
-        assert(&t, &expected);
+        assert_eq!(&t, &expected);
         assert_eq!(t.size() + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());
@@ -467,7 +443,7 @@ mod test_version_5 {
             opcode => panic!("incorrect opcode. Expected CMD_AUTH_LOGON_PROOF, got {opcode:#?}"),
         };
 
-        assert(&t, &expected);
+        assert_eq!(&t, &expected);
         assert_eq!(t.size() + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());
@@ -488,25 +464,17 @@ mod test_version_6 {
     use crate::logon::version_6::opcodes::ServerOpcodeMessage;
 
     const HEADER_SIZE: usize = 1;
-    fn assert(t: &CMD_AUTH_LOGON_PROOF_Server, expected: &CMD_AUTH_LOGON_PROOF_Server) {
-        assert_eq!(t.result, expected.result);
-    }
-
     const RAW0: [u8; 28] = [ 0x01, 0x00, 0x19, 0xFF, 0xE9, 0xFA, 0x64, 0xA9, 0x9B,
          0xAF, 0xF6, 0xB3, 0x8D, 0x9C, 0x11, 0xAB, 0xDC, 0xAE, 0x80, 0xC4, 0xD2,
          0xE7, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, ];
 
     pub(crate) fn expected0() -> CMD_AUTH_LOGON_PROOF_Server {
-        CMD_AUTH_LOGON_PROOF_Server {
-            result: CMD_AUTH_LOGON_PROOF_Server_LoginResult::Success {
-                hardware_survey_id: 0x0,
-                server_proof: [ 0x19, 0xFF, 0xE9, 0xFA, 0x64, 0xA9, 0x9B, 0xAF, 0xF6,
-                     0xB3, 0x8D, 0x9C, 0x11, 0xAB, 0xDC, 0xAE, 0x80, 0xC4, 0xD2,
-                     0xE7, ],
-                unknown: 0x0,
-            },
+        CMD_AUTH_LOGON_PROOF_Server::Success {
+            hardware_survey_id: 0x0,
+            server_proof: [ 0x19, 0xFF, 0xE9, 0xFA, 0x64, 0xA9, 0x9B, 0xAF, 0xF6,
+                 0xB3, 0x8D, 0x9C, 0x11, 0xAB, 0xDC, 0xAE, 0x80, 0xC4, 0xD2, 0xE7, ],
+            unknown: 0x0,
         }
-
     }
 
     // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/proof_server.wowm` line 46.
@@ -520,7 +488,7 @@ mod test_version_6 {
             opcode => panic!("incorrect opcode. Expected CMD_AUTH_LOGON_PROOF, got {opcode:#?}"),
         };
 
-        assert(&t, &expected);
+        assert_eq!(&t, &expected);
         assert_eq!(t.size() + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());
@@ -540,7 +508,7 @@ mod test_version_6 {
             opcode => panic!("incorrect opcode. Expected CMD_AUTH_LOGON_PROOF, got {opcode:#?}"),
         };
 
-        assert(&t, &expected);
+        assert_eq!(&t, &expected);
         assert_eq!(t.size() + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());
@@ -560,7 +528,7 @@ mod test_version_6 {
             opcode => panic!("incorrect opcode. Expected CMD_AUTH_LOGON_PROOF, got {opcode:#?}"),
         };
 
-        assert(&t, &expected);
+        assert_eq!(&t, &expected);
         assert_eq!(t.size() + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());
@@ -581,25 +549,17 @@ mod test_version_7 {
     use crate::logon::version_7::opcodes::ServerOpcodeMessage;
 
     const HEADER_SIZE: usize = 1;
-    fn assert(t: &CMD_AUTH_LOGON_PROOF_Server, expected: &CMD_AUTH_LOGON_PROOF_Server) {
-        assert_eq!(t.result, expected.result);
-    }
-
     const RAW0: [u8; 28] = [ 0x01, 0x00, 0x19, 0xFF, 0xE9, 0xFA, 0x64, 0xA9, 0x9B,
          0xAF, 0xF6, 0xB3, 0x8D, 0x9C, 0x11, 0xAB, 0xDC, 0xAE, 0x80, 0xC4, 0xD2,
          0xE7, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, ];
 
     pub(crate) fn expected0() -> CMD_AUTH_LOGON_PROOF_Server {
-        CMD_AUTH_LOGON_PROOF_Server {
-            result: CMD_AUTH_LOGON_PROOF_Server_LoginResult::Success {
-                hardware_survey_id: 0x0,
-                server_proof: [ 0x19, 0xFF, 0xE9, 0xFA, 0x64, 0xA9, 0x9B, 0xAF, 0xF6,
-                     0xB3, 0x8D, 0x9C, 0x11, 0xAB, 0xDC, 0xAE, 0x80, 0xC4, 0xD2,
-                     0xE7, ],
-                unknown: 0x0,
-            },
+        CMD_AUTH_LOGON_PROOF_Server::Success {
+            hardware_survey_id: 0x0,
+            server_proof: [ 0x19, 0xFF, 0xE9, 0xFA, 0x64, 0xA9, 0x9B, 0xAF, 0xF6,
+                 0xB3, 0x8D, 0x9C, 0x11, 0xAB, 0xDC, 0xAE, 0x80, 0xC4, 0xD2, 0xE7, ],
+            unknown: 0x0,
         }
-
     }
 
     // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/proof_server.wowm` line 46.
@@ -613,7 +573,7 @@ mod test_version_7 {
             opcode => panic!("incorrect opcode. Expected CMD_AUTH_LOGON_PROOF, got {opcode:#?}"),
         };
 
-        assert(&t, &expected);
+        assert_eq!(&t, &expected);
         assert_eq!(t.size() + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());
@@ -633,7 +593,7 @@ mod test_version_7 {
             opcode => panic!("incorrect opcode. Expected CMD_AUTH_LOGON_PROOF, got {opcode:#?}"),
         };
 
-        assert(&t, &expected);
+        assert_eq!(&t, &expected);
         assert_eq!(t.size() + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());
@@ -653,7 +613,7 @@ mod test_version_7 {
             opcode => panic!("incorrect opcode. Expected CMD_AUTH_LOGON_PROOF, got {opcode:#?}"),
         };
 
-        assert(&t, &expected);
+        assert_eq!(&t, &expected);
         assert_eq!(t.size() + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());

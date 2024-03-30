@@ -97,6 +97,7 @@ fn create_else_if_flag(
             is_simple: false,
             is_elseif: true,
             separate_if_statements: false,
+            is_single_rust_definer: false,
         },
         struct_ty_name.to_string(),
         true,
@@ -372,6 +373,7 @@ fn create_struct_member_definition(
                     is_elseif: false,
                     separate_if_statements: e
                         .enum_type_used_in_separate_if_statements(definer.name()),
+                    is_single_rust_definer: false,
                 }
             } else {
                 let enumerators = add_types();
@@ -469,12 +471,30 @@ pub(crate) fn create_rust_object(
         set_simple_objects_name(m, e.name());
     }
 
-    RustObject::new(
+    let mut r = RustObject::new(
         e.name().to_string(),
         v,
         optional,
         e.create_sizes(containers, definers),
-    )
+    );
+
+    if r.single_rust_definer().is_none() {
+        return r;
+    }
+
+    for m in r.members_mut() {
+        match &mut m.ty {
+            RustType::Enum {
+                is_single_rust_definer,
+                ..
+            } => {
+                *is_single_rust_definer = true;
+            }
+            _ => {}
+        }
+    }
+
+    r
 }
 
 fn set_simple_objects_name(m: &mut RustMember, struct_ty_name: &str) {

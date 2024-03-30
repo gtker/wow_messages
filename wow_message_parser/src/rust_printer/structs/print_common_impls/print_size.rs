@@ -3,6 +3,7 @@ use crate::parser::types::container::Container;
 use crate::rust_printer::rust_view::rust_member::RustMember;
 use crate::rust_printer::rust_view::rust_object::RustObject;
 use crate::rust_printer::rust_view::rust_type::RustType;
+use crate::rust_printer::structs::print_new_types::print_size_for_new_enum_inner;
 use crate::rust_printer::writer::Writer;
 
 pub(crate) fn print_rust_members_sizes(
@@ -66,9 +67,24 @@ pub(crate) fn print_size_of_ty_rust_view(s: &mut Writer, m: &RustMember, prefix:
             format!("{prefix}{name}.size()")
         }
         RustType::Enum {
-            is_simple, int_ty, ..
+            is_simple,
+            int_ty,
+            is_single_rust_definer,
+            ..
+        } => {
+            if *is_single_rust_definer {
+                let rd = RustObject::get_rust_definer_from_ty(m).unwrap();
+                let mut t = Writer::at_indentation(s.indentation_level());
+                print_size_for_new_enum_inner(&mut t, &rd);
+                t.set_indentation_level(s.indentation_level());
+                t.into_inner().trim_start().to_string()
+            } else if !is_simple {
+                format!("{prefix}{name}.size()")
+            } else {
+                int_ty.size().to_string()
+            }
         }
-        | RustType::Flag {
+        RustType::Flag {
             is_simple, int_ty, ..
         } => {
             if !is_simple {

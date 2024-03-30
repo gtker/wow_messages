@@ -56,7 +56,7 @@ pub(super) fn print_tests(s: &mut Writer, e: &Container, o: &Objects) {
             _ => unimplemented!(),
         }
 
-        if !e.empty_body() {
+        if !e.empty_body() && e.single_rust_definer().is_none() {
             s.bodyn(
                 format!("fn assert(t: &{ty}, expected: &{ty})", ty = e.name()),
                 |s| {
@@ -83,7 +83,7 @@ pub(super) fn print_tests(s: &mut Writer, e: &Container, o: &Objects) {
             s.wln_no_indent(" ];\n");
 
             s.funcn(format!("expected{i}()"), t.subject(), |s| {
-                s.bodyn(t.subject(), |s| {
+                fn test_case(s: &mut Writer, e: &Container, t: &TestCase, version: Version) {
                     for m in e.rust_object().members_in_struct() {
                         print_value(s, m, t.members(), e, version);
                     }
@@ -110,7 +110,13 @@ pub(super) fn print_tests(s: &mut Writer, e: &Container, o: &Objects) {
                             s.wln(format!("{optional_name}: None,"))
                         }
                     }
-                });
+                }
+
+                if e.single_rust_definer().is_some() {
+                    test_case(s, e, t, version);
+                } else {
+                    s.bodyn(t.subject(), |s| test_case(s, e, t, version));
+                };
             });
 
             for it in ImplType::types() {
@@ -244,8 +250,10 @@ fn print_test_case(s: &mut Writer, t: &TestCase, e: &Container, it: ImplType, i:
     });
     s.newline();
 
-    if !e.empty_body() {
+    if !e.empty_body() && e.single_rust_definer().is_none() {
         s.wln("assert(&t, &expected);");
+    } else if e.single_rust_definer().is_some() {
+        s.wln("assert_eq!(&t, &expected);");
     }
 
     let compressed = e.tags().compressed() || e.contains_compressed_variable();
@@ -371,7 +379,17 @@ fn print_value(
     version: Version,
 ) {
     let member = TestCase::get_member(t, m.name());
-    s.w(format!("{name}: ", name = m.name(),));
+    let should_print_name = if let Some(rd) = e.single_rust_definer() {
+        rd.variable_name() != m.name()
+    } else {
+        true
+    };
+
+    if should_print_name {
+        s.w(format!("{name}: ", name = m.name(),));
+    } else {
+        s.w("");
+    }
 
     match member.value() {
         TestValue::Number(i) => {
@@ -564,11 +582,12 @@ fn print_value(
             s.closing_curly_with(",");
         }
         TestValue::Enum(i) => {
-            s.w_no_indent(format!(
-                "{ty}::{enumerator}",
-                ty = m.ty(),
-                enumerator = i.rust_name(),
-            ));
+            let ty = if e.single_rust_definer().is_none() {
+                m.ty().rust_str()
+            } else {
+                e.name().to_string()
+            };
+            s.w_no_indent(format!("{ty}::{enumerator}", enumerator = i.rust_name(),));
 
             let subvars = match m.ty() {
                 RustType::Enum { enumerators, .. } => enumerators
@@ -579,7 +598,11 @@ fn print_value(
                 _ => unreachable!("{} is not an enum", m.ty()),
             };
             if subvars.is_empty() {
-                s.wln_no_indent(",");
+                if should_print_name {
+                    s.wln_no_indent(",");
+                } else {
+                    s.newline();
+                }
                 return;
             }
 
@@ -590,7 +613,11 @@ fn print_value(
                 print_value(s, sf, t, e, version);
             }
 
-            s.closing_curly_with(",");
+            if should_print_name {
+                s.closing_curly_with(",");
+            } else {
+                s.closing_curly();
+            }
         }
         TestValue::UpdateMask(fields) => {
             let ty = fields

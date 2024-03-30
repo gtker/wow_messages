@@ -15,9 +15,28 @@ use crate::logon::version_8::LoginResult;
 ///     }
 /// }
 /// ```
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
-pub struct CMD_AUTH_RECONNECT_CHALLENGE_Server {
-    pub result: CMD_AUTH_RECONNECT_CHALLENGE_Server_LoginResult,
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord)]
+pub enum CMD_AUTH_RECONNECT_CHALLENGE_Server {
+    Success {
+        challenge_data: [u8; 16],
+        checksum_salt: [u8; 16],
+    },
+    FailUnknown0,
+    FailUnknown1,
+    FailBanned,
+    FailUnknownAccount,
+    FailIncorrectPassword,
+    FailAlreadyOnline,
+    FailNoTime,
+    FailDbBusy,
+    FailVersionInvalid,
+    LoginDownloadFile,
+    FailInvalidServer,
+    FailSuspended,
+    FailNoAccess,
+    SuccessSurvey,
+    FailParentalcontrol,
+    FailLockedEnforced,
 }
 
 impl CMD_AUTH_RECONNECT_CHALLENGE_Server {
@@ -26,10 +45,10 @@ impl CMD_AUTH_RECONNECT_CHALLENGE_Server {
         w.write_all(&Self::OPCODE.to_le_bytes())?;
 
         // result: LoginResult
-        w.write_all(&(self.result.as_int().to_le_bytes()))?;
+        w.write_all(&(self.as_int().to_le_bytes()))?;
 
-        match &self.result {
-            CMD_AUTH_RECONNECT_CHALLENGE_Server_LoginResult::Success {
+        match &self {
+            CMD_AUTH_RECONNECT_CHALLENGE_Server::Success {
                 challenge_data,
                 checksum_salt,
             } => {
@@ -75,32 +94,30 @@ impl CMD_AUTH_RECONNECT_CHALLENGE_Server {
                     checksum_salt
                 };
 
-                CMD_AUTH_RECONNECT_CHALLENGE_Server_LoginResult::Success {
+                CMD_AUTH_RECONNECT_CHALLENGE_Server::Success {
                     challenge_data,
                     checksum_salt,
                 }
             }
-            LoginResult::FailUnknown0 => CMD_AUTH_RECONNECT_CHALLENGE_Server_LoginResult::FailUnknown0,
-            LoginResult::FailUnknown1 => CMD_AUTH_RECONNECT_CHALLENGE_Server_LoginResult::FailUnknown1,
-            LoginResult::FailBanned => CMD_AUTH_RECONNECT_CHALLENGE_Server_LoginResult::FailBanned,
-            LoginResult::FailUnknownAccount => CMD_AUTH_RECONNECT_CHALLENGE_Server_LoginResult::FailUnknownAccount,
-            LoginResult::FailIncorrectPassword => CMD_AUTH_RECONNECT_CHALLENGE_Server_LoginResult::FailIncorrectPassword,
-            LoginResult::FailAlreadyOnline => CMD_AUTH_RECONNECT_CHALLENGE_Server_LoginResult::FailAlreadyOnline,
-            LoginResult::FailNoTime => CMD_AUTH_RECONNECT_CHALLENGE_Server_LoginResult::FailNoTime,
-            LoginResult::FailDbBusy => CMD_AUTH_RECONNECT_CHALLENGE_Server_LoginResult::FailDbBusy,
-            LoginResult::FailVersionInvalid => CMD_AUTH_RECONNECT_CHALLENGE_Server_LoginResult::FailVersionInvalid,
-            LoginResult::LoginDownloadFile => CMD_AUTH_RECONNECT_CHALLENGE_Server_LoginResult::LoginDownloadFile,
-            LoginResult::FailInvalidServer => CMD_AUTH_RECONNECT_CHALLENGE_Server_LoginResult::FailInvalidServer,
-            LoginResult::FailSuspended => CMD_AUTH_RECONNECT_CHALLENGE_Server_LoginResult::FailSuspended,
-            LoginResult::FailNoAccess => CMD_AUTH_RECONNECT_CHALLENGE_Server_LoginResult::FailNoAccess,
-            LoginResult::SuccessSurvey => CMD_AUTH_RECONNECT_CHALLENGE_Server_LoginResult::SuccessSurvey,
-            LoginResult::FailParentalcontrol => CMD_AUTH_RECONNECT_CHALLENGE_Server_LoginResult::FailParentalcontrol,
-            LoginResult::FailLockedEnforced => CMD_AUTH_RECONNECT_CHALLENGE_Server_LoginResult::FailLockedEnforced,
+            LoginResult::FailUnknown0 => CMD_AUTH_RECONNECT_CHALLENGE_Server::FailUnknown0,
+            LoginResult::FailUnknown1 => CMD_AUTH_RECONNECT_CHALLENGE_Server::FailUnknown1,
+            LoginResult::FailBanned => CMD_AUTH_RECONNECT_CHALLENGE_Server::FailBanned,
+            LoginResult::FailUnknownAccount => CMD_AUTH_RECONNECT_CHALLENGE_Server::FailUnknownAccount,
+            LoginResult::FailIncorrectPassword => CMD_AUTH_RECONNECT_CHALLENGE_Server::FailIncorrectPassword,
+            LoginResult::FailAlreadyOnline => CMD_AUTH_RECONNECT_CHALLENGE_Server::FailAlreadyOnline,
+            LoginResult::FailNoTime => CMD_AUTH_RECONNECT_CHALLENGE_Server::FailNoTime,
+            LoginResult::FailDbBusy => CMD_AUTH_RECONNECT_CHALLENGE_Server::FailDbBusy,
+            LoginResult::FailVersionInvalid => CMD_AUTH_RECONNECT_CHALLENGE_Server::FailVersionInvalid,
+            LoginResult::LoginDownloadFile => CMD_AUTH_RECONNECT_CHALLENGE_Server::LoginDownloadFile,
+            LoginResult::FailInvalidServer => CMD_AUTH_RECONNECT_CHALLENGE_Server::FailInvalidServer,
+            LoginResult::FailSuspended => CMD_AUTH_RECONNECT_CHALLENGE_Server::FailSuspended,
+            LoginResult::FailNoAccess => CMD_AUTH_RECONNECT_CHALLENGE_Server::FailNoAccess,
+            LoginResult::SuccessSurvey => CMD_AUTH_RECONNECT_CHALLENGE_Server::SuccessSurvey,
+            LoginResult::FailParentalcontrol => CMD_AUTH_RECONNECT_CHALLENGE_Server::FailParentalcontrol,
+            LoginResult::FailLockedEnforced => CMD_AUTH_RECONNECT_CHALLENGE_Server::FailLockedEnforced,
         };
 
-        Ok(Self {
-            result: result_if,
-        })
+        Ok(result_if)
     }
 
     #[cfg(feature = "tokio")]
@@ -124,32 +141,30 @@ impl CMD_AUTH_RECONNECT_CHALLENGE_Server {
                     checksum_salt
                 };
 
-                CMD_AUTH_RECONNECT_CHALLENGE_Server_LoginResult::Success {
+                CMD_AUTH_RECONNECT_CHALLENGE_Server::Success {
                     challenge_data,
                     checksum_salt,
                 }
             }
-            LoginResult::FailUnknown0 => CMD_AUTH_RECONNECT_CHALLENGE_Server_LoginResult::FailUnknown0,
-            LoginResult::FailUnknown1 => CMD_AUTH_RECONNECT_CHALLENGE_Server_LoginResult::FailUnknown1,
-            LoginResult::FailBanned => CMD_AUTH_RECONNECT_CHALLENGE_Server_LoginResult::FailBanned,
-            LoginResult::FailUnknownAccount => CMD_AUTH_RECONNECT_CHALLENGE_Server_LoginResult::FailUnknownAccount,
-            LoginResult::FailIncorrectPassword => CMD_AUTH_RECONNECT_CHALLENGE_Server_LoginResult::FailIncorrectPassword,
-            LoginResult::FailAlreadyOnline => CMD_AUTH_RECONNECT_CHALLENGE_Server_LoginResult::FailAlreadyOnline,
-            LoginResult::FailNoTime => CMD_AUTH_RECONNECT_CHALLENGE_Server_LoginResult::FailNoTime,
-            LoginResult::FailDbBusy => CMD_AUTH_RECONNECT_CHALLENGE_Server_LoginResult::FailDbBusy,
-            LoginResult::FailVersionInvalid => CMD_AUTH_RECONNECT_CHALLENGE_Server_LoginResult::FailVersionInvalid,
-            LoginResult::LoginDownloadFile => CMD_AUTH_RECONNECT_CHALLENGE_Server_LoginResult::LoginDownloadFile,
-            LoginResult::FailInvalidServer => CMD_AUTH_RECONNECT_CHALLENGE_Server_LoginResult::FailInvalidServer,
-            LoginResult::FailSuspended => CMD_AUTH_RECONNECT_CHALLENGE_Server_LoginResult::FailSuspended,
-            LoginResult::FailNoAccess => CMD_AUTH_RECONNECT_CHALLENGE_Server_LoginResult::FailNoAccess,
-            LoginResult::SuccessSurvey => CMD_AUTH_RECONNECT_CHALLENGE_Server_LoginResult::SuccessSurvey,
-            LoginResult::FailParentalcontrol => CMD_AUTH_RECONNECT_CHALLENGE_Server_LoginResult::FailParentalcontrol,
-            LoginResult::FailLockedEnforced => CMD_AUTH_RECONNECT_CHALLENGE_Server_LoginResult::FailLockedEnforced,
+            LoginResult::FailUnknown0 => CMD_AUTH_RECONNECT_CHALLENGE_Server::FailUnknown0,
+            LoginResult::FailUnknown1 => CMD_AUTH_RECONNECT_CHALLENGE_Server::FailUnknown1,
+            LoginResult::FailBanned => CMD_AUTH_RECONNECT_CHALLENGE_Server::FailBanned,
+            LoginResult::FailUnknownAccount => CMD_AUTH_RECONNECT_CHALLENGE_Server::FailUnknownAccount,
+            LoginResult::FailIncorrectPassword => CMD_AUTH_RECONNECT_CHALLENGE_Server::FailIncorrectPassword,
+            LoginResult::FailAlreadyOnline => CMD_AUTH_RECONNECT_CHALLENGE_Server::FailAlreadyOnline,
+            LoginResult::FailNoTime => CMD_AUTH_RECONNECT_CHALLENGE_Server::FailNoTime,
+            LoginResult::FailDbBusy => CMD_AUTH_RECONNECT_CHALLENGE_Server::FailDbBusy,
+            LoginResult::FailVersionInvalid => CMD_AUTH_RECONNECT_CHALLENGE_Server::FailVersionInvalid,
+            LoginResult::LoginDownloadFile => CMD_AUTH_RECONNECT_CHALLENGE_Server::LoginDownloadFile,
+            LoginResult::FailInvalidServer => CMD_AUTH_RECONNECT_CHALLENGE_Server::FailInvalidServer,
+            LoginResult::FailSuspended => CMD_AUTH_RECONNECT_CHALLENGE_Server::FailSuspended,
+            LoginResult::FailNoAccess => CMD_AUTH_RECONNECT_CHALLENGE_Server::FailNoAccess,
+            LoginResult::SuccessSurvey => CMD_AUTH_RECONNECT_CHALLENGE_Server::SuccessSurvey,
+            LoginResult::FailParentalcontrol => CMD_AUTH_RECONNECT_CHALLENGE_Server::FailParentalcontrol,
+            LoginResult::FailLockedEnforced => CMD_AUTH_RECONNECT_CHALLENGE_Server::FailLockedEnforced,
         };
 
-        Ok(Self {
-            result: result_if,
-        })
+        Ok(result_if)
     }
 
     #[cfg(feature = "async-std")]
@@ -173,32 +188,30 @@ impl CMD_AUTH_RECONNECT_CHALLENGE_Server {
                     checksum_salt
                 };
 
-                CMD_AUTH_RECONNECT_CHALLENGE_Server_LoginResult::Success {
+                CMD_AUTH_RECONNECT_CHALLENGE_Server::Success {
                     challenge_data,
                     checksum_salt,
                 }
             }
-            LoginResult::FailUnknown0 => CMD_AUTH_RECONNECT_CHALLENGE_Server_LoginResult::FailUnknown0,
-            LoginResult::FailUnknown1 => CMD_AUTH_RECONNECT_CHALLENGE_Server_LoginResult::FailUnknown1,
-            LoginResult::FailBanned => CMD_AUTH_RECONNECT_CHALLENGE_Server_LoginResult::FailBanned,
-            LoginResult::FailUnknownAccount => CMD_AUTH_RECONNECT_CHALLENGE_Server_LoginResult::FailUnknownAccount,
-            LoginResult::FailIncorrectPassword => CMD_AUTH_RECONNECT_CHALLENGE_Server_LoginResult::FailIncorrectPassword,
-            LoginResult::FailAlreadyOnline => CMD_AUTH_RECONNECT_CHALLENGE_Server_LoginResult::FailAlreadyOnline,
-            LoginResult::FailNoTime => CMD_AUTH_RECONNECT_CHALLENGE_Server_LoginResult::FailNoTime,
-            LoginResult::FailDbBusy => CMD_AUTH_RECONNECT_CHALLENGE_Server_LoginResult::FailDbBusy,
-            LoginResult::FailVersionInvalid => CMD_AUTH_RECONNECT_CHALLENGE_Server_LoginResult::FailVersionInvalid,
-            LoginResult::LoginDownloadFile => CMD_AUTH_RECONNECT_CHALLENGE_Server_LoginResult::LoginDownloadFile,
-            LoginResult::FailInvalidServer => CMD_AUTH_RECONNECT_CHALLENGE_Server_LoginResult::FailInvalidServer,
-            LoginResult::FailSuspended => CMD_AUTH_RECONNECT_CHALLENGE_Server_LoginResult::FailSuspended,
-            LoginResult::FailNoAccess => CMD_AUTH_RECONNECT_CHALLENGE_Server_LoginResult::FailNoAccess,
-            LoginResult::SuccessSurvey => CMD_AUTH_RECONNECT_CHALLENGE_Server_LoginResult::SuccessSurvey,
-            LoginResult::FailParentalcontrol => CMD_AUTH_RECONNECT_CHALLENGE_Server_LoginResult::FailParentalcontrol,
-            LoginResult::FailLockedEnforced => CMD_AUTH_RECONNECT_CHALLENGE_Server_LoginResult::FailLockedEnforced,
+            LoginResult::FailUnknown0 => CMD_AUTH_RECONNECT_CHALLENGE_Server::FailUnknown0,
+            LoginResult::FailUnknown1 => CMD_AUTH_RECONNECT_CHALLENGE_Server::FailUnknown1,
+            LoginResult::FailBanned => CMD_AUTH_RECONNECT_CHALLENGE_Server::FailBanned,
+            LoginResult::FailUnknownAccount => CMD_AUTH_RECONNECT_CHALLENGE_Server::FailUnknownAccount,
+            LoginResult::FailIncorrectPassword => CMD_AUTH_RECONNECT_CHALLENGE_Server::FailIncorrectPassword,
+            LoginResult::FailAlreadyOnline => CMD_AUTH_RECONNECT_CHALLENGE_Server::FailAlreadyOnline,
+            LoginResult::FailNoTime => CMD_AUTH_RECONNECT_CHALLENGE_Server::FailNoTime,
+            LoginResult::FailDbBusy => CMD_AUTH_RECONNECT_CHALLENGE_Server::FailDbBusy,
+            LoginResult::FailVersionInvalid => CMD_AUTH_RECONNECT_CHALLENGE_Server::FailVersionInvalid,
+            LoginResult::LoginDownloadFile => CMD_AUTH_RECONNECT_CHALLENGE_Server::LoginDownloadFile,
+            LoginResult::FailInvalidServer => CMD_AUTH_RECONNECT_CHALLENGE_Server::FailInvalidServer,
+            LoginResult::FailSuspended => CMD_AUTH_RECONNECT_CHALLENGE_Server::FailSuspended,
+            LoginResult::FailNoAccess => CMD_AUTH_RECONNECT_CHALLENGE_Server::FailNoAccess,
+            LoginResult::SuccessSurvey => CMD_AUTH_RECONNECT_CHALLENGE_Server::SuccessSurvey,
+            LoginResult::FailParentalcontrol => CMD_AUTH_RECONNECT_CHALLENGE_Server::FailParentalcontrol,
+            LoginResult::FailLockedEnforced => CMD_AUTH_RECONNECT_CHALLENGE_Server::FailLockedEnforced,
         };
 
-        Ok(Self {
-            result: result_if,
-        })
+        Ok(result_if)
     }
 
 }
@@ -287,42 +300,28 @@ impl Message for CMD_AUTH_RECONNECT_CHALLENGE_Server {
 impl ServerMessage for CMD_AUTH_RECONNECT_CHALLENGE_Server {}
 impl CMD_AUTH_RECONNECT_CHALLENGE_Server {
     pub(crate) const fn size(&self) -> usize {
-        self.result.size() // result: CMD_AUTH_RECONNECT_CHALLENGE_Server_LoginResult
+        match self {
+            Self::Success {
+                ..
+            } => {
+                1
+                + 16 // challenge_data: u8[16]
+                + 16 // checksum_salt: u8[16]
+            }
+            _ => 1,
+        }
+ // result: CMD_AUTH_RECONNECT_CHALLENGE_Server_LoginResult
     }
 }
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord)]
-pub enum CMD_AUTH_RECONNECT_CHALLENGE_Server_LoginResult {
-    Success {
-        challenge_data: [u8; 16],
-        checksum_salt: [u8; 16],
-    },
-    FailUnknown0,
-    FailUnknown1,
-    FailBanned,
-    FailUnknownAccount,
-    FailIncorrectPassword,
-    FailAlreadyOnline,
-    FailNoTime,
-    FailDbBusy,
-    FailVersionInvalid,
-    LoginDownloadFile,
-    FailInvalidServer,
-    FailSuspended,
-    FailNoAccess,
-    SuccessSurvey,
-    FailParentalcontrol,
-    FailLockedEnforced,
-}
-
-impl Default for CMD_AUTH_RECONNECT_CHALLENGE_Server_LoginResult {
+impl Default for CMD_AUTH_RECONNECT_CHALLENGE_Server {
     fn default() -> Self {
         // First enumerator without any fields
         Self::FailUnknown0
     }
 }
 
-impl CMD_AUTH_RECONNECT_CHALLENGE_Server_LoginResult {
+impl CMD_AUTH_RECONNECT_CHALLENGE_Server {
     pub(crate) const fn as_int(&self) -> u8 {
         match self {
             Self::Success { .. } => 0,
@@ -347,7 +346,7 @@ impl CMD_AUTH_RECONNECT_CHALLENGE_Server_LoginResult {
 
 }
 
-impl std::fmt::Display for CMD_AUTH_RECONNECT_CHALLENGE_Server_LoginResult {
+impl std::fmt::Display for CMD_AUTH_RECONNECT_CHALLENGE_Server {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match self {
             Self::Success{ .. } => f.write_str("Success"),
@@ -371,21 +370,6 @@ impl std::fmt::Display for CMD_AUTH_RECONNECT_CHALLENGE_Server_LoginResult {
     }
 }
 
-impl CMD_AUTH_RECONNECT_CHALLENGE_Server_LoginResult {
-    pub(crate) const fn size(&self) -> usize {
-        match self {
-            Self::Success {
-                ..
-            } => {
-                1
-                + 16 // challenge_data: u8[16]
-                + 16 // checksum_salt: u8[16]
-            }
-            _ => 1,
-        }
-    }
-}
-
 #[cfg(test)]
 mod test {
     #![allow(clippy::missing_const_for_fn)]
@@ -396,25 +380,18 @@ mod test {
     use crate::logon::version_8::opcodes::ServerOpcodeMessage;
 
     const HEADER_SIZE: usize = 1;
-    fn assert(t: &CMD_AUTH_RECONNECT_CHALLENGE_Server, expected: &CMD_AUTH_RECONNECT_CHALLENGE_Server) {
-        assert_eq!(t.result, expected.result);
-    }
-
     const RAW0: [u8; 34] = [ 0x02, 0x00, 0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06,
          0x07, 0x08, 0x09, 0x0A, 0x0B, 0x0C, 0x0D, 0x0E, 0x0F, 0xFF, 0xFE, 0xFD,
          0xFC, 0xFB, 0xFA, 0xF9, 0xF8, 0xF7, 0xF6, 0xF5, 0xF4, 0xF3, 0xF2, 0xF1,
          0xF0, ];
 
     pub(crate) fn expected0() -> CMD_AUTH_RECONNECT_CHALLENGE_Server {
-        CMD_AUTH_RECONNECT_CHALLENGE_Server {
-            result: CMD_AUTH_RECONNECT_CHALLENGE_Server_LoginResult::Success {
-                challenge_data: [ 0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07,
-                     0x08, 0x09, 0x0A, 0x0B, 0x0C, 0x0D, 0x0E, 0x0F, ],
-                checksum_salt: [ 0xFF, 0xFE, 0xFD, 0xFC, 0xFB, 0xFA, 0xF9, 0xF8,
-                     0xF7, 0xF6, 0xF5, 0xF4, 0xF3, 0xF2, 0xF1, 0xF0, ],
-            },
+        CMD_AUTH_RECONNECT_CHALLENGE_Server::Success {
+            challenge_data: [ 0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08,
+                 0x09, 0x0A, 0x0B, 0x0C, 0x0D, 0x0E, 0x0F, ],
+            checksum_salt: [ 0xFF, 0xFE, 0xFD, 0xFC, 0xFB, 0xFA, 0xF9, 0xF8, 0xF7,
+                 0xF6, 0xF5, 0xF4, 0xF3, 0xF2, 0xF1, 0xF0, ],
         }
-
     }
 
     // Generated from `wow_message_parser/wowm/login/cmd_auth_reconnect/challenge_server.wowm` line 45.
@@ -428,7 +405,7 @@ mod test {
             opcode => panic!("incorrect opcode. Expected CMD_AUTH_RECONNECT_CHALLENGE, got {opcode:#?}"),
         };
 
-        assert(&t, &expected);
+        assert_eq!(&t, &expected);
         assert_eq!(t.size() + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());
@@ -448,7 +425,7 @@ mod test {
             opcode => panic!("incorrect opcode. Expected CMD_AUTH_RECONNECT_CHALLENGE, got {opcode:#?}"),
         };
 
-        assert(&t, &expected);
+        assert_eq!(&t, &expected);
         assert_eq!(t.size() + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());
@@ -468,7 +445,7 @@ mod test {
             opcode => panic!("incorrect opcode. Expected CMD_AUTH_RECONNECT_CHALLENGE, got {opcode:#?}"),
         };
 
-        assert(&t, &expected);
+        assert_eq!(&t, &expected);
         assert_eq!(t.size() + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());
@@ -480,10 +457,7 @@ mod test {
     const RAW1: [u8; 2] = [ 0x02, 0x03, ];
 
     pub(crate) fn expected1() -> CMD_AUTH_RECONNECT_CHALLENGE_Server {
-        CMD_AUTH_RECONNECT_CHALLENGE_Server {
-            result: CMD_AUTH_RECONNECT_CHALLENGE_Server_LoginResult::FailBanned,
-        }
-
+        CMD_AUTH_RECONNECT_CHALLENGE_Server::FailBanned
     }
 
     // Generated from `wow_message_parser/wowm/login/cmd_auth_reconnect/challenge_server.wowm` line 58.
@@ -497,7 +471,7 @@ mod test {
             opcode => panic!("incorrect opcode. Expected CMD_AUTH_RECONNECT_CHALLENGE, got {opcode:#?}"),
         };
 
-        assert(&t, &expected);
+        assert_eq!(&t, &expected);
         assert_eq!(t.size() + HEADER_SIZE, RAW1.len());
 
         let mut dest = Vec::with_capacity(RAW1.len());
@@ -517,7 +491,7 @@ mod test {
             opcode => panic!("incorrect opcode. Expected CMD_AUTH_RECONNECT_CHALLENGE, got {opcode:#?}"),
         };
 
-        assert(&t, &expected);
+        assert_eq!(&t, &expected);
         assert_eq!(t.size() + HEADER_SIZE, RAW1.len());
 
         let mut dest = Vec::with_capacity(RAW1.len());
@@ -537,7 +511,7 @@ mod test {
             opcode => panic!("incorrect opcode. Expected CMD_AUTH_RECONNECT_CHALLENGE, got {opcode:#?}"),
         };
 
-        assert(&t, &expected);
+        assert_eq!(&t, &expected);
         assert_eq!(t.size() + HEADER_SIZE, RAW1.len());
 
         let mut dest = Vec::with_capacity(RAW1.len());

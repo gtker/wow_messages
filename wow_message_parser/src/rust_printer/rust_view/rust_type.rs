@@ -34,6 +34,7 @@ pub(crate) enum RustType {
         is_simple: bool,
         is_elseif: bool,
         separate_if_statements: bool,
+        is_single_rust_definer: bool,
     },
     Flag {
         ty_name: String,

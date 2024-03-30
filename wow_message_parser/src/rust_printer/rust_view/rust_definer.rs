@@ -4,7 +4,7 @@ use crate::rust_printer::rust_view::rust_member::RustMember;
 use crate::rust_printer::rust_view::rust_type::RustType;
 use crate::rust_printer::DefinerType;
 
-#[derive(Debug, Clone)]
+#[derive(Debug, Copy, Clone)]
 pub(crate) struct RustDefiner<'a> {
     inner: &'a RustMember,
     definer_type: DefinerType,

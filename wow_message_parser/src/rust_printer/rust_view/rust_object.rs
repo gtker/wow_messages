@@ -33,6 +33,9 @@ impl RustObject {
     pub(crate) fn members(&self) -> &[RustMember] {
         &self.members
     }
+    pub(crate) fn members_mut(&mut self) -> &mut [RustMember] {
+        &mut self.members
+    }
     pub(crate) fn members_in_struct(&self) -> impl Iterator<Item = &RustMember> {
         self.members.iter().filter(|a| a.in_rust_type)
     }
@@ -46,7 +49,19 @@ impl RustObject {
         self.sizes
     }
 
-    fn get_rust_definer_from_ty(m: &RustMember) -> Option<RustDefiner> {
+    pub(crate) fn single_rust_definer(&self) -> Option<RustDefiner> {
+        let definers = self.get_rust_definers();
+        let amount_of_members_in_struct = self.members_in_struct().count();
+
+        if definers.len() == 1 && amount_of_members_in_struct == 1 && self.name.starts_with("CMD_")
+        {
+            Some(definers[0])
+        } else {
+            None
+        }
+    }
+
+    pub(crate) fn get_rust_definer_from_ty(m: &RustMember) -> Option<RustDefiner> {
         let (
             ty_name,
             original_ty_name,
@@ -65,6 +80,7 @@ impl RustObject {
                 is_simple,
                 is_elseif,
                 separate_if_statements,
+                ..
             } => (
                 ty_name,
                 original_ty_name,

@@ -147,12 +147,21 @@ pub(crate) fn print_write_definition(
     variable_prefix: &str,
     d: &StructMemberDefinition,
     postfix: &str,
+    e: &Container,
 ) {
     let name = d.name();
 
     s.wln(format!("// {name}: {type_name}", type_name = d.ty().str()));
 
-    let variable = format!("{variable_prefix}{name}");
+    let variable = if let Some(rd) = e.single_rust_definer() {
+        if rd.inner().name() == d.name() {
+            "self".to_string()
+        } else {
+            format!("{variable_prefix}{name}")
+        }
+    } else {
+        format!("{variable_prefix}{name}")
+    };
 
     match d.ty() {
         Type::Integer(int_type) => {
@@ -395,7 +404,7 @@ pub(crate) fn print_write_field(
 ) {
     match field {
         StructMember::Definition(d) => {
-            print_write_definition(s, variable_prefix, d, postfix);
+            print_write_definition(s, variable_prefix, d, postfix, e);
         }
         StructMember::IfStatement(statement) => match statement.definer_type() {
             DefinerType::Enum => {
@@ -431,14 +440,20 @@ fn print_write_if_enum_statement(
     prefix: &str,
     postfix: &str,
 ) {
-    s.open_curly(format!(
-        "match &{prefix}{name}",
-        name = statement.variable_name(),
-        prefix = match e.type_definition_in_same_scope(statement.variable_name()) {
-            false => "self.",
-            true => variable_prefix,
-        },
-    ));
+    let variable = if e.single_rust_definer().is_none() {
+        format!(
+            "{prefix}{name}",
+            name = statement.variable_name(),
+            prefix = match e.type_definition_in_same_scope(statement.variable_name()) {
+                false => "self.",
+                true => variable_prefix,
+            },
+        )
+    } else {
+        "self".to_string()
+    };
+
+    s.open_curly(format!("match &{variable}",));
 
     let enumerator_name = match statement.equation() {
         Equation::Equals { values: value } => &value[0],
@@ -461,9 +476,14 @@ fn print_write_if_enum_statement(
             continue;
         }
 
+        let new_enum = if e.single_rust_definer().is_none() {
+            rd.ty_name()
+        } else {
+            e.name()
+        };
+
         s.open_curly(format!(
             "{new_enum}::{variant}",
-            new_enum = rd.ty_name(),
             variant = enumerator.rust_name(),
         ));
         for m in enumerator.members_in_struct() {

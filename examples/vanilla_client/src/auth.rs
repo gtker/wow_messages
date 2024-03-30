@@ -5,8 +5,7 @@ use wow_login_messages::all::{
 };
 use wow_login_messages::helper::expect_server_message;
 use wow_login_messages::version_2::{
-    CMD_AUTH_LOGON_PROOF_Server, CMD_AUTH_LOGON_PROOF_Server_LoginResult, CMD_REALM_LIST_Client,
-    CMD_REALM_LIST_Server,
+    CMD_AUTH_LOGON_PROOF_Server, CMD_REALM_LIST_Client, CMD_REALM_LIST_Server,
 };
 use wow_login_messages::version_3::{
     CMD_AUTH_LOGON_CHALLENGE_Server, CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult,
@@ -75,8 +74,7 @@ pub fn auth(
     .unwrap();
 
     let s = expect_server_message::<CMD_AUTH_LOGON_PROOF_Server, _>(&mut auth_server).unwrap();
-    let c = if let CMD_AUTH_LOGON_PROOF_Server_LoginResult::Success { server_proof, .. } = s.result
-    {
+    let c = if let CMD_AUTH_LOGON_PROOF_Server::Success { server_proof, .. } = s {
         c.verify_server_proof(server_proof).unwrap()
     } else {
         panic!()

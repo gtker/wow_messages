@@ -12,6 +12,7 @@ use crate::parser::types::tags::ObjectTags;
 use crate::parser::types::test_case::TestCase;
 use crate::parser::types::ty::Type;
 use crate::parser::types::version::{AllRustVersions, LoginVersion, MajorWorldVersion, Version};
+use crate::rust_printer::rust_view::rust_definer::RustDefiner;
 use crate::rust_printer::rust_view::rust_object::RustObject;
 use crate::rust_printer::{
     DefinerType, LOGIN_CLIENT_MESSAGE_ENUM_NAME, LOGIN_SERVER_MESSAGE_ENUM_NAME,
@@ -105,6 +106,10 @@ impl Container {
             rust_object_view,
             objects_used_in,
         }
+    }
+
+    pub(crate) fn single_rust_definer(&self) -> Option<RustDefiner> {
+        self.rust_object().single_rust_definer()
     }
 
     pub(crate) fn empty_body(&self) -> bool {

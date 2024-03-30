@@ -18,6 +18,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * BREAKING: Protocol version 5, 6, and 7 now also have matrix cards.
 * BREAKING: `CMD_AUTH_LOGON_PROOF_Client` field `authenticator` is now a `String` from `Vec<u8>`.
 * BREAKING: Version 5 `CMD_REALM_LIST_Server` is now the same as version 6/7.
+* BREAKING: Message structs that only consisted of a single field with an enum have been converted to enums.
 
 ## [0.4.0] - 2024-02-21
 

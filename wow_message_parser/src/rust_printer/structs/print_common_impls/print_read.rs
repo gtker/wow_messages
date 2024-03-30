@@ -638,11 +638,16 @@ fn print_read_if_statement_enum(
         .rust_definer_with_variable_name_and_enumerator(statement.variable_name(), enumerator_name);
 
     for enumerator in rd.enumerators() {
+        let new_enum = if e.single_rust_definer().is_none() {
+            rd.ty_name()
+        } else {
+            e.name()
+        };
+
         if !enumerator.has_members_in_struct() {
             let result = if !statement.part_of_separate_if_statement() {
                 format!(
                     "{new_enum}::{enumerator},",
-                    new_enum = rd.ty_name(),
                     enumerator = enumerator.rust_name()
                 )
             } else {
@@ -678,7 +683,6 @@ fn print_read_if_statement_enum(
         if !statement.part_of_separate_if_statement() {
             s.open_curly(format!(
                 "{new_enum}::{enumerator}",
-                new_enum = rd.ty_name(),
                 enumerator = enumerator.rust_name()
             ));
 
@@ -875,26 +879,30 @@ pub(crate) fn print_read(
     print_read_final_flag(s, &rust_definers);
     print_read_final_enums(s, &rust_definers);
 
-    if let Some(object_create_overwrite) = object_create_overwrite {
-        s.open_curly(format!("Ok({object_create_overwrite}"));
+    if let Some(rd) = e.single_rust_definer() {
+        s.wln(format!("Ok({}_if)", rd.variable_name()));
     } else {
-        s.open_curly("Ok(Self");
-    }
-
-    for f in e.rust_object().members_in_struct() {
-        if let RustType::Enum { is_simple, .. } = f.ty() {
-            if !is_simple {
-                s.wln(format!("{name}: {name}_if,", name = f.name()));
-                continue;
-            }
+        if let Some(object_create_overwrite) = object_create_overwrite {
+            s.open_curly(format!("Ok({object_create_overwrite}"));
+        } else {
+            s.open_curly("Ok(Self");
         }
-        s.wln(format!("{name},", name = f.name()));
-    }
 
-    if let Some(optional) = e.rust_object().optional() {
-        s.wln(format!("{name},", name = optional.name()));
-    }
+        for f in e.rust_object().members_in_struct() {
+            if let RustType::Enum { is_simple, .. } = f.ty() {
+                if !is_simple {
+                    s.wln(format!("{name}: {name}_if,", name = f.name()));
+                    continue;
+                }
+            }
+            s.wln(format!("{name},", name = f.name()));
+        }
 
-    s.dec_indent();
-    s.wln("})");
+        if let Some(optional) = e.rust_object().optional() {
+            s.wln(format!("{name},", name = optional.name()));
+        }
+
+        s.dec_indent();
+        s.wln("})");
+    }
 }

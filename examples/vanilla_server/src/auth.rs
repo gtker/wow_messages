@@ -74,11 +74,9 @@ async fn reconnect_version_8(
         .unwrap()
         .reconnect_challenge_data();
 
-    CMD_AUTH_RECONNECT_CHALLENGE_Server {
-        result: CMD_AUTH_RECONNECT_CHALLENGE_Server_LoginResult::Success {
-            challenge_data: server_reconnect_challenge_data,
-            checksum_salt: [0; 16],
-        },
+    CMD_AUTH_RECONNECT_CHALLENGE_Server::Success {
+        challenge_data: server_reconnect_challenge_data,
+        checksum_salt: [0; 16],
     }
     .tokio_write(&mut stream)
     .await
@@ -132,11 +130,9 @@ async fn reconnect_version_2(
         .unwrap()
         .reconnect_challenge_data();
 
-    CMD_AUTH_RECONNECT_CHALLENGE_Server {
-        result: CMD_AUTH_RECONNECT_CHALLENGE_Server_LoginResult::Success {
-            challenge_data: server_reconnect_challenge_data,
-            checksum_salt: [0; 16],
-        },
+    CMD_AUTH_RECONNECT_CHALLENGE_Server::Success {
+        challenge_data: server_reconnect_challenge_data,
+        checksum_salt: [0; 16],
     }
     .tokio_write(&mut stream)
     .await
@@ -186,14 +182,12 @@ async fn login_version_2(
 
     let username = l.account_name;
 
-    CMD_AUTH_LOGON_CHALLENGE_Server {
-        result: CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult::Success {
-            server_public_key: *p.server_public_key(),
-            generator: vec![GENERATOR],
-            large_safe_prime: LARGE_SAFE_PRIME_LITTLE_ENDIAN.into(),
-            salt: *p.salt(),
-            crc_salt: [0; 16],
-        },
+    CMD_AUTH_LOGON_CHALLENGE_Server::Success {
+        server_public_key: *p.server_public_key(),
+        generator: vec![GENERATOR],
+        large_safe_prime: LARGE_SAFE_PRIME_LITTLE_ENDIAN.into(),
+        salt: *p.salt(),
+        crc_salt: [0; 16],
     }
     .tokio_write(&mut stream)
     .await
@@ -211,11 +205,9 @@ async fn login_version_2(
         )
         .unwrap();
 
-    CMD_AUTH_LOGON_PROOF_Server {
-        result: CMD_AUTH_LOGON_PROOF_Server_LoginResult::Success {
-            server_proof: proof,
-            hardware_survey_id: 0,
-        },
+    CMD_AUTH_LOGON_PROOF_Server::Success {
+        server_proof: proof,
+        hardware_survey_id: 0,
     }
     .tokio_write(&mut stream)
     .await
@@ -270,11 +262,9 @@ async fn login_version_3(
         )
         .unwrap();
 
-    CMD_AUTH_LOGON_PROOF_Server {
-        result: CMD_AUTH_LOGON_PROOF_Server_LoginResult::Success {
-            server_proof: proof,
-            hardware_survey_id: 0,
-        },
+    CMD_AUTH_LOGON_PROOF_Server::Success {
+        server_proof: proof,
+        hardware_survey_id: 0,
     }
     .tokio_write(&mut stream)
     .await
@@ -323,13 +313,11 @@ async fn login_version_8(
         )
         .unwrap();
 
-    CMD_AUTH_LOGON_PROOF_Server {
-        result: CMD_AUTH_LOGON_PROOF_Server_LoginResult::Success {
-            account_flag: AccountFlag::empty(),
-            server_proof,
-            hardware_survey_id: 0,
-            unknown: 0,
-        },
+    CMD_AUTH_LOGON_PROOF_Server::Success {
+        account_flag: AccountFlag::empty(),
+        server_proof,
+        hardware_survey_id: 0,
+        unknown: 0,
     }
     .tokio_write(&mut stream)
     .await

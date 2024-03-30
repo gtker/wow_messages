@@ -4,6 +4,7 @@ use crate::parser::types::objects::Objects;
 use crate::parser::types::tags::MemberTags;
 use crate::rust_printer::rust_view::rust_member::RustMember;
 use crate::rust_printer::rust_view::rust_type::RustType;
+use crate::rust_printer::structs::print_new_types::print_new_enum_declaration;
 use crate::rust_printer::writer::Writer;
 use crate::rust_printer::{
     print_docc_description_and_comment, print_member_docc_description_and_comment,
@@ -96,29 +97,33 @@ fn print_declaration(s: &mut Writer, e: &Container, o: &Objects) {
 
     print_struct_wowm_definition(s, e);
 
-    print_derives(s, &e.rust_object().all_members(), false);
-    print_serde_derive(s, e.tags().is_in_base(), false);
+    if let Some(rd) = e.single_rust_definer() {
+        print_new_enum_declaration(s, &rd, e.name());
+    } else {
+        print_derives(s, &e.rust_object().all_members(), false);
+        print_serde_derive(s, e.tags().is_in_base(), false);
 
-    s.new_struct(e.name(), |s| {
-        for member in e.rust_object().members_in_struct() {
-            print_member_docc_description_and_comment(s, member.tags(), o, e.tags());
+        s.new_struct(e.name(), |s| {
+            for member in e.rust_object().members_in_struct() {
+                print_member_docc_description_and_comment(s, member.tags(), o, e.tags());
 
-            s.wln(format!(
-                "pub {name}: {ty},",
-                name = member.name(),
-                ty = member.ty(),
-            ));
-        }
+                s.wln(format!(
+                    "pub {name}: {ty},",
+                    name = member.name(),
+                    ty = member.ty(),
+                ));
+            }
 
-        if let Some(optional) = e.rust_object().optional() {
-            print_member_docc_description_and_comment(s, &MemberTags::new(), o, e.tags());
-            s.wln(format!(
-                "pub {name}: Option<{ty}>,",
-                name = optional.name(),
-                ty = optional.ty()
-            ));
-        }
-    });
+            if let Some(optional) = e.rust_object().optional() {
+                print_member_docc_description_and_comment(s, &MemberTags::new(), o, e.tags());
+                s.wln(format!(
+                    "pub {name}: Option<{ty}>,",
+                    name = optional.name(),
+                    ty = optional.ty()
+                ));
+            }
+        });
+    }
 }
 
 fn print_struct_wowm_definition(s: &mut Writer, e: &Container) {

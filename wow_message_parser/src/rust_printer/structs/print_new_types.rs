@@ -13,17 +13,28 @@ pub(crate) fn print_new_types(s: &mut Writer, e: &Container) {
     for rd in e.rust_object().get_rust_definers() {
         match rd.definer_type() {
             DefinerType::Enum => {
-                print_new_enum_declaration(s, &rd);
-
-                if !rd.is_elseif() {
-                    print_default_for_new_enum(s, &rd);
+                if e.single_rust_definer().is_none() {
+                    print_new_enum_declaration(s, &rd, rd.ty_name());
                 }
 
-                s.bodyn(format!("impl {name}", name = rd.ty_name()), |s| {
+                let ty_name = if e.single_rust_definer().is_some() {
+                    e.name()
+                } else {
+                    rd.ty_name()
+                };
+
+                if !rd.is_elseif() {
+                    print_default_for_new_enum(s, &rd, ty_name);
+                }
+
+                s.bodyn(format!("impl {ty_name}"), |s| {
                     print_enum_as_int(s, &rd);
                 });
-                print_enum_display(s, &rd);
-                print_size_for_new_enum(s, &rd);
+                print_enum_display(s, &rd, ty_name);
+
+                if e.single_rust_definer().is_none() {
+                    print_size_for_new_enum(s, &rd, ty_name);
+                }
             }
             DefinerType::Flag => {
                 print_new_flag_declaration(s, &rd);
@@ -339,9 +350,9 @@ fn print_types_for_new_flag(s: &mut Writer, rd: &RustDefiner) {
     }
 }
 
-fn print_new_enum_declaration(s: &mut Writer, rd: &RustDefiner) {
+pub(crate) fn print_new_enum_declaration(s: &mut Writer, rd: &RustDefiner, ty_name: &str) {
     print_derives(s, &rd.all_members(), true);
-    s.new_enum("pub", rd.ty_name(), |s| {
+    s.new_enum("pub", ty_name, |s| {
         for enumerator in rd.enumerators() {
             s.w(enumerator.rust_name());
 
@@ -361,94 +372,95 @@ fn print_new_enum_declaration(s: &mut Writer, rd: &RustDefiner) {
     });
 }
 
-fn print_default_for_new_enum(s: &mut Writer, rd: &RustDefiner) {
-    s.bodyn(
-        format!("impl Default for {name}", name = rd.ty_name()),
-        |s| {
-            s.body("fn default() -> Self", |s| {
-                s.wln("// First enumerator without any fields");
-                let enumerator = if let Some(enumerator) =
-                    rd.enumerators().iter().find(|a| !a.has_members_in_struct())
-                {
-                    enumerator
-                } else {
-                    rd.enumerators().first().unwrap()
-                };
+fn print_default_for_new_enum(s: &mut Writer, rd: &RustDefiner, ty_name: &str) {
+    s.bodyn(format!("impl Default for {ty_name}"), |s| {
+        s.body("fn default() -> Self", |s| {
+            s.wln("// First enumerator without any fields");
+            let enumerator = if let Some(enumerator) =
+                rd.enumerators().iter().find(|a| !a.has_members_in_struct())
+            {
+                enumerator
+            } else {
+                rd.enumerators().first().unwrap()
+            };
 
-                if enumerator.has_members_in_struct() {
-                    s.open_curly(format!("Self::{}", enumerator.rust_name()));
+            if enumerator.has_members_in_struct() {
+                s.open_curly(format!("Self::{}", enumerator.rust_name()));
 
-                    for m in enumerator.members_in_struct() {
-                        match m.ty() {
-                            RustType::Array { array, .. } => match array.size() {
-                                ArraySize::Fixed(v) => {
-                                    s.wln(format!(
-                                        "{name}: [Default::default(); {size}],",
-                                        name = m.name(),
-                                        size = v
-                                    ));
-                                }
-                                _ => s.wln(format!("{name}: Default::default(),", name = m.name())),
-                            },
+                for m in enumerator.members_in_struct() {
+                    match m.ty() {
+                        RustType::Array { array, .. } => match array.size() {
+                            ArraySize::Fixed(v) => {
+                                s.wln(format!(
+                                    "{name}: [Default::default(); {size}],",
+                                    name = m.name(),
+                                    size = v
+                                ));
+                            }
                             _ => s.wln(format!("{name}: Default::default(),", name = m.name())),
-                        }
+                        },
+                        _ => s.wln(format!("{name}: Default::default(),", name = m.name())),
                     }
-
-                    s.closing_curly();
-                } else {
-                    s.wln(format!("Self::{}", enumerator.rust_name()));
-                }
-            });
-        },
-    );
-}
-
-fn print_size_for_new_enum(s: &mut Writer, re: &RustDefiner) {
-    variable_size(s, re.ty_name(), "size", re.size_is_const_fn(), |s| {
-        s.body("match self", |s| {
-            for enumerator in re.enumerators() {
-                if !enumerator.has_members() {
-                    continue;
                 }
 
-                let name = enumerator.rust_name();
-                if enumerator.has_members_in_struct() {
-                    s.open_curly(format!("Self::{name}"));
-
-                    for m in enumerator.members_in_struct() {
-                        if m.ty().size_requires_variable() {
-                            s.wln(format!("{},", m.name()));
-                        }
-                    }
-
-                    if enumerator
-                        .members_in_struct()
-                        .iter()
-                        .any(|a| !a.ty().size_requires_variable())
-                    {
-                        s.wln("..");
-                    }
-
-                    s.closing_curly_with(" => {");
-                    s.inc_indent();
-                } else {
-                    s.open_curly(format!("Self::{name} =>"));
-                }
-
-                if re.is_elseif() {
-                    s.wln("// Not an actual enum sent over the wire");
-                } else {
-                    s.wln(format!("{}", re.int_ty().size()));
-                }
-
-                print_rust_members_sizes(s, enumerator.members(), Some(re.is_elseif()), "");
                 s.closing_curly();
-            }
-
-            if re.enumerators().iter().any(|a| !a.has_members()) {
-                s.wln(format!("_ => {},", re.int_ty().size()));
+            } else {
+                s.wln(format!("Self::{}", enumerator.rust_name()));
             }
         });
+    });
+}
+
+pub(crate) fn print_size_for_new_enum_inner(s: &mut Writer, re: &RustDefiner) {
+    s.body("match self", |s| {
+        for enumerator in re.enumerators() {
+            if !enumerator.has_members() {
+                continue;
+            }
+
+            let name = enumerator.rust_name();
+            if enumerator.has_members_in_struct() {
+                s.open_curly(format!("Self::{name}"));
+
+                for m in enumerator.members_in_struct() {
+                    if m.ty().size_requires_variable() {
+                        s.wln(format!("{},", m.name()));
+                    }
+                }
+
+                if enumerator
+                    .members_in_struct()
+                    .iter()
+                    .any(|a| !a.ty().size_requires_variable())
+                {
+                    s.wln("..");
+                }
+
+                s.closing_curly_with(" => {");
+                s.inc_indent();
+            } else {
+                s.open_curly(format!("Self::{name} =>"));
+            }
+
+            if re.is_elseif() {
+                s.wln("// Not an actual enum sent over the wire");
+            } else {
+                s.wln(format!("{}", re.int_ty().size()));
+            }
+
+            print_rust_members_sizes(s, enumerator.members(), Some(re.is_elseif()), "");
+            s.closing_curly();
+        }
+
+        if re.enumerators().iter().any(|a| !a.has_members()) {
+            s.wln(format!("_ => {},", re.int_ty().size()));
+        }
+    });
+}
+
+fn print_size_for_new_enum(s: &mut Writer, re: &RustDefiner, ty_name: &str) {
+    variable_size(s, ty_name, "size", re.size_is_const_fn(), |s| {
+        print_size_for_new_enum_inner(s, re)
     });
 }
 
@@ -470,8 +482,8 @@ fn print_enum_as_int(s: &mut Writer, rd: &RustDefiner) {
     });
 }
 
-fn print_enum_display(s: &mut Writer, rd: &RustDefiner) {
-    s.impl_for("std::fmt::Display", rd.ty_name(), |s| {
+fn print_enum_display(s: &mut Writer, rd: &RustDefiner, ty_name: &str) {
+    s.impl_for("std::fmt::Display", ty_name, |s| {
         s.body(
             "fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result",
             |s| {

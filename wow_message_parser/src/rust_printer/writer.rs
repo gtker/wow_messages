@@ -379,6 +379,14 @@ impl Writer {
         self.indentation_level += 1;
     }
 
+    pub(crate) fn set_indentation_level(&mut self, level: u8) {
+        self.indentation_level = level;
+    }
+
+    pub(crate) fn indentation_level(&self) -> u8 {
+        self.indentation_level
+    }
+
     pub(crate) fn wln<S: AsRef<str>>(&mut self, s: S) {
         self.w(s);
         self.newline();

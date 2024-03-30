@@ -9,7 +9,6 @@ type MainSecurityFlagMatrixCard =
     crate::version_8::CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlag_MatrixCard;
 
 type V2Main = crate::version_2::CMD_AUTH_LOGON_CHALLENGE_Server;
-type V2MainLoginResult = crate::version_2::CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult;
 
 type V3Main = crate::version_3::CMD_AUTH_LOGON_CHALLENGE_Server;
 type V3MainLoginResult = crate::version_3::CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult;
@@ -32,8 +31,8 @@ impl CollectiveMessage for Main {
 
     fn from_version_2(v: Self::Version2) -> Self {
         Self {
-            result: match v.result {
-                V2MainLoginResult::Success {
+            result: match v {
+                V2Main::Success {
                     crc_salt,
                     generator,
                     large_safe_prime,
@@ -47,61 +46,59 @@ impl CollectiveMessage for Main {
                     security_flag: Default::default(),
                     server_public_key,
                 },
-                V2MainLoginResult::FailUnknown0 => MainLoginResult::FailUnknown0,
-                V2MainLoginResult::FailUnknown1 => MainLoginResult::FailUnknown1,
-                V2MainLoginResult::FailBanned => MainLoginResult::FailBanned,
-                V2MainLoginResult::FailUnknownAccount => MainLoginResult::FailUnknownAccount,
-                V2MainLoginResult::FailIncorrectPassword => MainLoginResult::FailIncorrectPassword,
-                V2MainLoginResult::FailAlreadyOnline => MainLoginResult::FailAlreadyOnline,
-                V2MainLoginResult::FailNoTime => MainLoginResult::FailNoTime,
-                V2MainLoginResult::FailDbBusy => MainLoginResult::FailDbBusy,
-                V2MainLoginResult::FailVersionInvalid => MainLoginResult::FailVersionInvalid,
-                V2MainLoginResult::LoginDownloadFile => MainLoginResult::LoginDownloadFile,
-                V2MainLoginResult::FailInvalidServer => MainLoginResult::FailInvalidServer,
-                V2MainLoginResult::FailSuspended => MainLoginResult::FailSuspended,
-                V2MainLoginResult::FailNoAccess => MainLoginResult::FailNoAccess,
-                V2MainLoginResult::SuccessSurvey => MainLoginResult::SuccessSurvey,
-                V2MainLoginResult::FailParentalcontrol => MainLoginResult::FailParentalcontrol,
+                V2Main::FailUnknown0 => MainLoginResult::FailUnknown0,
+                V2Main::FailUnknown1 => MainLoginResult::FailUnknown1,
+                V2Main::FailBanned => MainLoginResult::FailBanned,
+                V2Main::FailUnknownAccount => MainLoginResult::FailUnknownAccount,
+                V2Main::FailIncorrectPassword => MainLoginResult::FailIncorrectPassword,
+                V2Main::FailAlreadyOnline => MainLoginResult::FailAlreadyOnline,
+                V2Main::FailNoTime => MainLoginResult::FailNoTime,
+                V2Main::FailDbBusy => MainLoginResult::FailDbBusy,
+                V2Main::FailVersionInvalid => MainLoginResult::FailVersionInvalid,
+                V2Main::LoginDownloadFile => MainLoginResult::LoginDownloadFile,
+                V2Main::FailInvalidServer => MainLoginResult::FailInvalidServer,
+                V2Main::FailSuspended => MainLoginResult::FailSuspended,
+                V2Main::FailNoAccess => MainLoginResult::FailNoAccess,
+                V2Main::SuccessSurvey => MainLoginResult::SuccessSurvey,
+                V2Main::FailParentalcontrol => MainLoginResult::FailParentalcontrol,
             },
         }
     }
 
     fn to_version_2(&self) -> Result<Self::Version2, CollectiveError> {
-        Ok(Self::Version2 {
-            result: match &self.result {
-                MainLoginResult::Success {
-                    crc_salt,
-                    generator,
-                    large_safe_prime,
-                    salt,
-                    server_public_key,
-                    ..
-                } => V2MainLoginResult::Success {
-                    crc_salt: *crc_salt,
-                    generator: generator.clone(),
-                    large_safe_prime: large_safe_prime.clone(),
-                    salt: *salt,
-                    server_public_key: *server_public_key,
-                },
-                MainLoginResult::FailUnknown0 => V2MainLoginResult::FailUnknown0,
-                MainLoginResult::FailUnknown1 => V2MainLoginResult::FailUnknown1,
-                MainLoginResult::FailBanned => V2MainLoginResult::FailBanned,
-                MainLoginResult::FailUnknownAccount => V2MainLoginResult::FailUnknownAccount,
-                MainLoginResult::FailIncorrectPassword => V2MainLoginResult::FailIncorrectPassword,
-                MainLoginResult::FailAlreadyOnline => V2MainLoginResult::FailAlreadyOnline,
-                MainLoginResult::FailNoTime => V2MainLoginResult::FailNoTime,
-                MainLoginResult::FailDbBusy => V2MainLoginResult::FailDbBusy,
-                MainLoginResult::FailVersionInvalid => V2MainLoginResult::FailVersionInvalid,
-                MainLoginResult::LoginDownloadFile => V2MainLoginResult::LoginDownloadFile,
-                MainLoginResult::FailInvalidServer => V2MainLoginResult::FailInvalidServer,
-                MainLoginResult::FailSuspended => V2MainLoginResult::FailSuspended,
-                MainLoginResult::FailNoAccess => V2MainLoginResult::FailNoAccess,
-                MainLoginResult::SuccessSurvey => V2MainLoginResult::SuccessSurvey,
-                MainLoginResult::FailParentalcontrol => V2MainLoginResult::FailParentalcontrol,
-                MainLoginResult::FailLockedEnforced => {
-                    return Err(CollectiveError::InvalidFieldSet);
-                }
+        Ok(match &self.result {
+            MainLoginResult::Success {
+                crc_salt,
+                generator,
+                large_safe_prime,
+                salt,
+                server_public_key,
+                ..
+            } => V2Main::Success {
+                crc_salt: *crc_salt,
+                generator: generator.clone(),
+                large_safe_prime: large_safe_prime.clone(),
+                salt: *salt,
+                server_public_key: *server_public_key,
             },
+            MainLoginResult::FailUnknown0 => V2Main::FailUnknown0,
+            MainLoginResult::FailUnknown1 => V2Main::FailUnknown1,
+            MainLoginResult::FailBanned => V2Main::FailBanned,
+            MainLoginResult::FailUnknownAccount => V2Main::FailUnknownAccount,
+            MainLoginResult::FailIncorrectPassword => V2Main::FailIncorrectPassword,
+            MainLoginResult::FailAlreadyOnline => V2Main::FailAlreadyOnline,
+            MainLoginResult::FailNoTime => V2Main::FailNoTime,
+            MainLoginResult::FailDbBusy => V2Main::FailDbBusy,
+            MainLoginResult::FailVersionInvalid => V2Main::FailVersionInvalid,
+            MainLoginResult::LoginDownloadFile => V2Main::LoginDownloadFile,
+            MainLoginResult::FailInvalidServer => V2Main::FailInvalidServer,
+            MainLoginResult::FailSuspended => V2Main::FailSuspended,
+            MainLoginResult::FailNoAccess => V2Main::FailNoAccess,
+            MainLoginResult::SuccessSurvey => V2Main::SuccessSurvey,
+            MainLoginResult::FailParentalcontrol => V2Main::FailParentalcontrol,
+            MainLoginResult::FailLockedEnforced => {
+                return Err(CollectiveError::InvalidFieldSet);
+            }
         })
     }
 
