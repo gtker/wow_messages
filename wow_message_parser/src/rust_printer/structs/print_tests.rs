@@ -379,11 +379,7 @@ fn print_value(
     version: Version,
 ) {
     let member = TestCase::get_member(t, m.name());
-    let should_print_name = if let Some(rd) = e.single_rust_definer() {
-        rd.variable_name() != m.name()
-    } else {
-        true
-    };
+    let should_print_name = !m.is_single_rust_definer();
 
     if should_print_name {
         s.w(format!("{name}: ", name = m.name(),));
@@ -588,21 +584,28 @@ fn print_value(
             s.closing_curly_with(",");
         }
         TestValue::Enum(i) => {
-            let ty = if e.single_rust_definer().is_none() {
+            let (subvars, is_single_rust_definer) = match m.ty() {
+                RustType::Enum {
+                    enumerators,
+                    is_single_rust_definer,
+                    ..
+                } => (
+                    enumerators
+                        .iter()
+                        .find(|a| a.name() == i.original_string())
+                        .unwrap()
+                        .members_in_struct(),
+                    *is_single_rust_definer,
+                ),
+                _ => unreachable!("{} is not an enum", m.ty()),
+            };
+            let ty = if !is_single_rust_definer {
                 m.ty().rust_str()
             } else {
                 e.name().to_string()
             };
             s.w_no_indent(format!("{ty}::{enumerator}", enumerator = i.rust_name(),));
 
-            let subvars = match m.ty() {
-                RustType::Enum { enumerators, .. } => enumerators
-                    .iter()
-                    .find(|a| a.name() == i.original_string())
-                    .unwrap()
-                    .members_in_struct(),
-                _ => unreachable!("{} is not an enum", m.ty()),
-            };
             if subvars.is_empty() {
                 if should_print_name {
                     s.wln_no_indent(",");

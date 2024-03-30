@@ -291,7 +291,7 @@ impl CMD_AUTH_LOGON_PROOF_Server {
                 + 20 // server_proof: u8[20]
             }
             _ => 1,
-        }) // result: CMD_AUTH_LOGON_PROOF_Server_LoginResult
+        }) // result: CMD_AUTH_LOGON_PROOF_Server
     }
 }
 

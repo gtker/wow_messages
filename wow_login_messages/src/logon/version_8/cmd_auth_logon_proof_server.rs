@@ -509,7 +509,7 @@ impl CMD_AUTH_LOGON_PROOF_Server {
                 1
                 + 2 // padding: u16
             }
-        }) // result: CMD_AUTH_LOGON_PROOF_Server_LoginResult
+        }) // result: CMD_AUTH_LOGON_PROOF_Server
     }
 }
 

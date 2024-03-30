@@ -486,8 +486,10 @@ pub(crate) fn create_rust_object(
         match &mut m.ty {
             RustType::Enum {
                 is_single_rust_definer,
+                ty_name,
                 ..
             } => {
+                *ty_name = e.name().to_string();
                 *is_single_rust_definer = true;
             }
             _ => {}

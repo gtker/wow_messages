@@ -15,6 +15,7 @@ pub(crate) struct RustDefiner<'a> {
     is_elseif: bool,
     original_ty_name: &'a str,
     has_separate_if_statements: bool,
+    is_single_rust_definer: bool,
 }
 
 impl<'a> RustDefiner<'a> {
@@ -63,6 +64,10 @@ impl<'a> RustDefiner<'a> {
     pub(crate) fn is_simple(&self) -> bool {
         self.is_simple && !self.is_elseif
     }
+    pub(crate) fn is_single_rust_definer(&self) -> bool {
+        self.is_single_rust_definer
+    }
+
     pub(crate) fn is_elseif(&self) -> bool {
         self.is_elseif
     }
@@ -128,6 +133,7 @@ impl<'a> RustDefiner<'a> {
         is_elseif: bool,
         original_ty_name: &'a str,
         has_separate_if_statements: bool,
+        is_single_rust_definer: bool,
     ) -> Self {
         Self {
             inner,
@@ -139,6 +145,7 @@ impl<'a> RustDefiner<'a> {
             is_elseif,
             original_ty_name,
             has_separate_if_statements,
+            is_single_rust_definer,
         }
     }
 }

@@ -476,12 +476,7 @@ fn print_write_if_enum_statement(
             continue;
         }
 
-        let new_enum = if e.single_rust_definer().is_none() {
-            rd.ty_name()
-        } else {
-            e.name()
-        };
-
+        let new_enum = rd.ty_name();
         s.open_curly(format!(
             "{new_enum}::{variant}",
             variant = enumerator.rust_name(),

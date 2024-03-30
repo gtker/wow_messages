@@ -71,6 +71,7 @@ impl RustObject {
             definer_type,
             is_elseif,
             has_separate_if_statements,
+            is_single_rust_definer,
         ) = match m.ty() {
             RustType::Enum {
                 ty_name,
@@ -80,6 +81,7 @@ impl RustObject {
                 is_simple,
                 is_elseif,
                 separate_if_statements,
+                is_single_rust_definer,
                 ..
             } => (
                 ty_name,
@@ -90,6 +92,7 @@ impl RustObject {
                 DefinerType::Enum,
                 is_elseif,
                 separate_if_statements,
+                is_single_rust_definer,
             ),
             RustType::Flag {
                 ty_name,
@@ -107,6 +110,7 @@ impl RustObject {
                 DefinerType::Flag,
                 is_elseif,
                 &false,
+                &false,
             ),
             _ => return None,
         };
@@ -121,6 +125,7 @@ impl RustObject {
             *is_elseif,
             original_ty_name.as_str(),
             *has_separate_if_statements,
+            *is_single_rust_definer,
         ))
     }
 

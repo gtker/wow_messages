@@ -310,7 +310,7 @@ impl CMD_AUTH_LOGON_PROOF_Server {
                 + 2 // unknown: u16
             }
             _ => 1,
-        }) // result: CMD_AUTH_LOGON_PROOF_Server_LoginResult
+        }) // result: CMD_AUTH_LOGON_PROOF_Server
     }
 }
 

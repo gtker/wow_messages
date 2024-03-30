@@ -13,27 +13,22 @@ pub(crate) fn print_new_types(s: &mut Writer, e: &Container) {
     for rd in e.rust_object().get_rust_definers() {
         match rd.definer_type() {
             DefinerType::Enum => {
-                if e.single_rust_definer().is_none() {
+                if !rd.is_single_rust_definer() {
                     print_new_enum_declaration(s, &rd, rd.ty_name());
                 }
 
-                let ty_name = if e.single_rust_definer().is_some() {
-                    e.name()
-                } else {
-                    rd.ty_name()
-                };
-
                 if !rd.is_elseif() {
-                    print_default_for_new_enum(s, &rd, ty_name);
+                    print_default_for_new_enum(s, &rd);
                 }
 
+                let ty_name = rd.ty_name();
                 s.bodyn(format!("impl {ty_name}"), |s| {
                     print_enum_as_int(s, &rd);
                 });
-                print_enum_display(s, &rd, ty_name);
+                print_enum_display(s, &rd);
 
-                if e.single_rust_definer().is_none() {
-                    print_size_for_new_enum(s, &rd, ty_name);
+                if !rd.is_single_rust_definer() {
+                    print_size_for_new_enum(s, &rd);
                 }
             }
             DefinerType::Flag => {
@@ -372,7 +367,8 @@ pub(crate) fn print_new_enum_declaration(s: &mut Writer, rd: &RustDefiner, ty_na
     });
 }
 
-fn print_default_for_new_enum(s: &mut Writer, rd: &RustDefiner, ty_name: &str) {
+fn print_default_for_new_enum(s: &mut Writer, rd: &RustDefiner) {
+    let ty_name = rd.ty_name();
     s.bodyn(format!("impl Default for {ty_name}"), |s| {
         s.body("fn default() -> Self", |s| {
             s.wln("// First enumerator without any fields");
@@ -458,8 +454,8 @@ pub(crate) fn print_size_for_new_enum_inner(s: &mut Writer, re: &RustDefiner) {
     });
 }
 
-fn print_size_for_new_enum(s: &mut Writer, re: &RustDefiner, ty_name: &str) {
-    variable_size(s, ty_name, "size", re.size_is_const_fn(), |s| {
+fn print_size_for_new_enum(s: &mut Writer, re: &RustDefiner) {
+    variable_size(s, re.ty_name(), "size", re.size_is_const_fn(), |s| {
         print_size_for_new_enum_inner(s, re)
     });
 }
@@ -482,8 +478,8 @@ fn print_enum_as_int(s: &mut Writer, rd: &RustDefiner) {
     });
 }
 
-fn print_enum_display(s: &mut Writer, rd: &RustDefiner, ty_name: &str) {
-    s.impl_for("std::fmt::Display", ty_name, |s| {
+fn print_enum_display(s: &mut Writer, rd: &RustDefiner) {
+    s.impl_for("std::fmt::Display", rd.ty_name(), |s| {
         s.body(
             "fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result",
             |s| {

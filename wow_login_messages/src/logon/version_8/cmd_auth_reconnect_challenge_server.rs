@@ -309,7 +309,7 @@ impl CMD_AUTH_RECONNECT_CHALLENGE_Server {
                 + 16 // checksum_salt: u8[16]
             }
             _ => 1,
-        }) // result: CMD_AUTH_RECONNECT_CHALLENGE_Server_LoginResult
+        }) // result: CMD_AUTH_RECONNECT_CHALLENGE_Server
     }
 }
 

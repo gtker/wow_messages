@@ -155,12 +155,7 @@ pub(crate) fn print_if_statement_enum(
 
     let mut unused_enumerators = false;
 
-    let new_enum = if e.single_rust_definer().is_some() {
-        e.name()
-    } else {
-        rd.ty_name()
-    };
-
+    let new_enum = rd.ty_name();
     for enumerator in rd.enumerators() {
         if !enumerator.has_members() {
             unused_enumerators = true;

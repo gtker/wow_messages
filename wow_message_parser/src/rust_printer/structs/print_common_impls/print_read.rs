@@ -637,13 +637,8 @@ fn print_read_if_statement_enum(
         .rust_object()
         .rust_definer_with_variable_name_and_enumerator(statement.variable_name(), enumerator_name);
 
+    let new_enum = rd.ty_name();
     for enumerator in rd.enumerators() {
-        let new_enum = if e.single_rust_definer().is_none() {
-            rd.ty_name()
-        } else {
-            e.name()
-        };
-
         if !enumerator.has_members_in_struct() {
             let result = if !statement.part_of_separate_if_statement() {
                 format!(

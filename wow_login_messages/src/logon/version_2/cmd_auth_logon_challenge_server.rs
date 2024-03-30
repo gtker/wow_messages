@@ -477,7 +477,7 @@ impl CMD_AUTH_LOGON_CHALLENGE_Server {
                 + 32 // server_public_key: u8[32]
             }
             _ => 1,
-        }) // result: CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult
+        }) // result: CMD_AUTH_LOGON_CHALLENGE_Server
     }
 }
 

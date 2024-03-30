@@ -31,6 +31,16 @@ impl RustMember {
         v
     }
 
+    pub(crate) fn is_single_rust_definer(&self) -> bool {
+        matches!(
+            self.ty(),
+            RustType::Enum {
+                is_single_rust_definer: true,
+                ..
+            }
+        )
+    }
+
     pub(crate) fn all_members_without_self(&self) -> Vec<&RustMember> {
         let mut v = Vec::new();
 
