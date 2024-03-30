@@ -95,7 +95,7 @@ impl crate::Message for MSG_MOVE_TELEPORT_CHEAT_Server {
 
     fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
         // position: Vector3d
-crate::util::vanilla_tbc_wrath_vector3d_write_into_vec(&self.position, &mut w)?;
+        crate::util::vanilla_tbc_wrath_vector3d_write_into_vec(&self.position, &mut w)?;
 
         // orientation: f32
         w.write_all(&self.orientation.to_le_bytes())?;

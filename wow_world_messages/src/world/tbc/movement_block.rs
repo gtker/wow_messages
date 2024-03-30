@@ -118,7 +118,7 @@ impl MovementBlock {
                     w.write_all(&timestamp.to_le_bytes())?;
 
                     // living_position: Vector3d
-crate::util::vanilla_tbc_wrath_vector3d_write_into_vec(&living_position, &mut w)?;
+                    crate::util::vanilla_tbc_wrath_vector3d_write_into_vec(&living_position, &mut w)?;
 
                     // living_orientation: f32
                     w.write_all(&living_orientation.to_le_bytes())?;
@@ -220,7 +220,7 @@ crate::util::vanilla_tbc_wrath_vector3d_write_into_vec(&living_position, &mut w)
                                     spline_final_point,
                                 } => {
                                     // spline_final_point: Vector3d
-crate::util::vanilla_tbc_wrath_vector3d_write_into_vec(&spline_final_point, &mut w)?;
+                                    crate::util::vanilla_tbc_wrath_vector3d_write_into_vec(&spline_final_point, &mut w)?;
 
                                 }
                             }
@@ -244,7 +244,7 @@ crate::util::vanilla_tbc_wrath_vector3d_write_into_vec(&spline_final_point, &mut
                         }
 
                         // final_node: Vector3d
-crate::util::vanilla_tbc_wrath_vector3d_write_into_vec(&if_statement.final_node, &mut w)?;
+                        crate::util::vanilla_tbc_wrath_vector3d_write_into_vec(&if_statement.final_node, &mut w)?;
 
                     }
 
@@ -254,7 +254,7 @@ crate::util::vanilla_tbc_wrath_vector3d_write_into_vec(&if_statement.final_node,
                     position,
                 } => {
                     // position: Vector3d
-crate::util::vanilla_tbc_wrath_vector3d_write_into_vec(&position, &mut w)?;
+                    crate::util::vanilla_tbc_wrath_vector3d_write_into_vec(&position, &mut w)?;
 
                     // orientation: f32
                     w.write_all(&orientation.to_le_bytes())?;

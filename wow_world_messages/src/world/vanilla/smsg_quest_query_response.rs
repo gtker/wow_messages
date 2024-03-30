@@ -450,7 +450,7 @@ impl crate::Message for SMSG_QUEST_QUERY_RESPONSE {
         w.write_all(&self.point_map_id.to_le_bytes())?;
 
         // position: Vector2d
-crate::util::vanilla_tbc_wrath_vector2d_write_into_vec(&self.position, &mut w)?;
+        crate::util::vanilla_tbc_wrath_vector2d_write_into_vec(&self.position, &mut w)?;
 
         // point_opt: u32
         w.write_all(&self.point_opt.to_le_bytes())?;

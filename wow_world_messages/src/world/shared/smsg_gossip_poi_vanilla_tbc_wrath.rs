@@ -122,7 +122,7 @@ impl crate::Message for SMSG_GOSSIP_POI {
         w.write_all(&self.flags.to_le_bytes())?;
 
         // position: Vector2d
-crate::util::vanilla_tbc_wrath_vector2d_write_into_vec(&self.position, &mut w)?;
+        crate::util::vanilla_tbc_wrath_vector2d_write_into_vec(&self.position, &mut w)?;
 
         // icon: u32
         w.write_all(&self.icon.to_le_bytes())?;

@@ -237,7 +237,7 @@ impl crate::Message for CMSG_GMTICKET_CREATE {
         w.write_all(&(self.map.as_int().to_le_bytes()))?;
 
         // position: Vector3d
-crate::util::vanilla_tbc_wrath_vector3d_write_into_vec(&self.position, &mut w)?;
+        crate::util::vanilla_tbc_wrath_vector3d_write_into_vec(&self.position, &mut w)?;
 
         // message: CString
         // TODO: Guard against strings that are already null-terminated

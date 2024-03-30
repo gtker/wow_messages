@@ -331,7 +331,7 @@ pub(crate) fn print_write_definition(
         Type::Struct { e } => {
             if e.tags().is_in_base() {
                 let f = base_struct_write_name(e);
-                s.wln_no_indent(format!("crate::util::{f}(&{variable}, &mut w)?;",));
+                s.wln(format!("crate::util::{f}(&{variable}, &mut w)?;",));
             } else {
                 s.wln(format!("{variable}.write_into_vec(&mut w){postfix}?;",));
             }

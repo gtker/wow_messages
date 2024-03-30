@@ -105,7 +105,7 @@ impl crate::Message for SMSG_BINDPOINTUPDATE {
 
     fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
         // position: Vector3d
-crate::util::vanilla_tbc_wrath_vector3d_write_into_vec(&self.position, &mut w)?;
+        crate::util::vanilla_tbc_wrath_vector3d_write_into_vec(&self.position, &mut w)?;
 
         // map: Map
         w.write_all(&(self.map.as_int().to_le_bytes()))?;

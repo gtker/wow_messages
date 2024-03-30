@@ -135,7 +135,7 @@ impl MovementBlock {
                     w.write_all(&timestamp.to_le_bytes())?;
 
                     // position: Vector3d
-crate::util::vanilla_tbc_wrath_vector3d_write_into_vec(&position, &mut w)?;
+                    crate::util::vanilla_tbc_wrath_vector3d_write_into_vec(&position, &mut w)?;
 
                     // orientation: f32
                     w.write_all(&orientation.to_le_bytes())?;
@@ -264,7 +264,7 @@ crate::util::vanilla_tbc_wrath_vector3d_write_into_vec(&position, &mut w)?;
                                     spline_final_point,
                                 } => {
                                     // spline_final_point: Vector3d
-crate::util::vanilla_tbc_wrath_vector3d_write_into_vec(&spline_final_point, &mut w)?;
+                                    crate::util::vanilla_tbc_wrath_vector3d_write_into_vec(&spline_final_point, &mut w)?;
 
                                 }
                             }
@@ -288,7 +288,7 @@ crate::util::vanilla_tbc_wrath_vector3d_write_into_vec(&spline_final_point, &mut
                         }
 
                         // final_node: Vector3d
-crate::util::vanilla_tbc_wrath_vector3d_write_into_vec(&if_statement.final_node, &mut w)?;
+                        crate::util::vanilla_tbc_wrath_vector3d_write_into_vec(&if_statement.final_node, &mut w)?;
 
                     }
 
@@ -303,7 +303,7 @@ crate::util::vanilla_tbc_wrath_vector3d_write_into_vec(&if_statement.final_node,
                     crate::util::write_packed_guid(&transport_guid, &mut w)?;
 
                     // position1: Vector3d
-crate::util::vanilla_tbc_wrath_vector3d_write_into_vec(&position1, &mut w)?;
+                    crate::util::vanilla_tbc_wrath_vector3d_write_into_vec(&position1, &mut w)?;
 
                     // orientation1: f32
                     w.write_all(&orientation1.to_le_bytes())?;
@@ -317,7 +317,7 @@ crate::util::vanilla_tbc_wrath_vector3d_write_into_vec(&position1, &mut w)?;
                     position2,
                 } => {
                     // position2: Vector3d
-crate::util::vanilla_tbc_wrath_vector3d_write_into_vec(&position2, &mut w)?;
+                    crate::util::vanilla_tbc_wrath_vector3d_write_into_vec(&position2, &mut w)?;
 
                     // orientation2: f32
                     w.write_all(&orientation2.to_le_bytes())?;

@@ -97,13 +97,13 @@ impl SpellCastTargets {
 
         if let Some(if_statement) = &self.target_flags.source_location {
             // source: Vector3d
-crate::util::vanilla_tbc_wrath_vector3d_write_into_vec(&if_statement.source, &mut w)?;
+            crate::util::vanilla_tbc_wrath_vector3d_write_into_vec(&if_statement.source, &mut w)?;
 
         }
 
         if let Some(if_statement) = &self.target_flags.dest_location {
             // destination: Vector3d
-crate::util::vanilla_tbc_wrath_vector3d_write_into_vec(&if_statement.destination, &mut w)?;
+            crate::util::vanilla_tbc_wrath_vector3d_write_into_vec(&if_statement.destination, &mut w)?;
 
         }
 

@@ -37,7 +37,7 @@ pub struct MonsterMove {
 impl MonsterMove {
     pub(crate) fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
         // spline_point: Vector3d
-crate::util::vanilla_tbc_wrath_vector3d_write_into_vec(&self.spline_point, &mut w)?;
+        crate::util::vanilla_tbc_wrath_vector3d_write_into_vec(&self.spline_point, &mut w)?;
 
         // spline_id: u32
         w.write_all(&self.spline_id.to_le_bytes())?;
@@ -59,7 +59,7 @@ crate::util::vanilla_tbc_wrath_vector3d_write_into_vec(&self.spline_point, &mut 
                 splines,
             } => {
                 // position: Vector3d
-crate::util::vanilla_tbc_wrath_vector3d_write_into_vec(&position, &mut w)?;
+                crate::util::vanilla_tbc_wrath_vector3d_write_into_vec(&position, &mut w)?;
 
             }
             MonsterMove_MonsterMoveType::FacingTarget {

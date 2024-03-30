@@ -109,7 +109,7 @@ impl crate::Message for SMSG_SET_PROJECTILE_POSITION {
         w.write_all(&self.amount_of_casts.to_le_bytes())?;
 
         // position: Vector3d
-crate::util::vanilla_tbc_wrath_vector3d_write_into_vec(&self.position, &mut w)?;
+        crate::util::vanilla_tbc_wrath_vector3d_write_into_vec(&self.position, &mut w)?;
 
         Ok(())
     }

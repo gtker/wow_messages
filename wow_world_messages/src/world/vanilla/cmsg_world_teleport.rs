@@ -72,7 +72,7 @@ impl crate::Message for CMSG_WORLD_TELEPORT {
         w.write_all(&(self.map.as_int().to_le_bytes()))?;
 
         // position: Vector3d
-crate::util::vanilla_tbc_wrath_vector3d_write_into_vec(&self.position, &mut w)?;
+        crate::util::vanilla_tbc_wrath_vector3d_write_into_vec(&self.position, &mut w)?;
 
         // orientation: f32
         w.write_all(&self.orientation.to_le_bytes())?;

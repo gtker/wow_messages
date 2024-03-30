@@ -150,10 +150,10 @@ impl crate::Message for CMSG_UPDATE_MISSILE_TRAJECTORY {
         w.write_all(&self.speed.to_le_bytes())?;
 
         // position: Vector3d
-crate::util::vanilla_tbc_wrath_vector3d_write_into_vec(&self.position, &mut w)?;
+        crate::util::vanilla_tbc_wrath_vector3d_write_into_vec(&self.position, &mut w)?;
 
         // target: Vector3d
-crate::util::vanilla_tbc_wrath_vector3d_write_into_vec(&self.target, &mut w)?;
+        crate::util::vanilla_tbc_wrath_vector3d_write_into_vec(&self.target, &mut w)?;
 
         Ok(())
     }

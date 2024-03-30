@@ -159,7 +159,7 @@ impl crate::Message for MSG_CORPSE_QUERY_Server {
                 w.write_all(&(map.as_int().to_le_bytes()))?;
 
                 // position: Vector3d
-crate::util::vanilla_tbc_wrath_vector3d_write_into_vec(&position, &mut w)?;
+                crate::util::vanilla_tbc_wrath_vector3d_write_into_vec(&position, &mut w)?;
 
                 // corpse_map: Map
                 w.write_all(&(corpse_map.as_int().to_le_bytes()))?;

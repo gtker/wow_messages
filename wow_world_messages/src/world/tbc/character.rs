@@ -104,7 +104,7 @@ impl Character {
         w.write_all(&(self.map.as_int().to_le_bytes()))?;
 
         // position: Vector3d
-crate::util::vanilla_tbc_wrath_vector3d_write_into_vec(&self.position, &mut w)?;
+        crate::util::vanilla_tbc_wrath_vector3d_write_into_vec(&self.position, &mut w)?;
 
         // guild_id: u32
         w.write_all(&self.guild_id.to_le_bytes())?;

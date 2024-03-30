@@ -98,7 +98,7 @@ impl crate::Message for SMSG_PET_DISMISS_SOUND {
         w.write_all(&self.sound_id.to_le_bytes())?;
 
         // position: Vector3d
-crate::util::vanilla_tbc_wrath_vector3d_write_into_vec(&self.position, &mut w)?;
+        crate::util::vanilla_tbc_wrath_vector3d_write_into_vec(&self.position, &mut w)?;
 
         Ok(())
     }

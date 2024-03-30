@@ -260,7 +260,7 @@ impl crate::Message for SMSG_MONSTER_MOVE_TRANSPORT {
         crate::util::write_packed_guid(&self.transport, &mut w)?;
 
         // spline_point: Vector3d
-crate::util::vanilla_tbc_wrath_vector3d_write_into_vec(&self.spline_point, &mut w)?;
+        crate::util::vanilla_tbc_wrath_vector3d_write_into_vec(&self.spline_point, &mut w)?;
 
         // spline_id: u32
         w.write_all(&self.spline_id.to_le_bytes())?;
@@ -273,7 +273,7 @@ crate::util::vanilla_tbc_wrath_vector3d_write_into_vec(&self.spline_point, &mut 
                 position,
             } => {
                 // position: Vector3d
-crate::util::vanilla_tbc_wrath_vector3d_write_into_vec(&position, &mut w)?;
+                crate::util::vanilla_tbc_wrath_vector3d_write_into_vec(&position, &mut w)?;
 
             }
             SMSG_MONSTER_MOVE_TRANSPORT_MonsterMoveType::FacingTarget {

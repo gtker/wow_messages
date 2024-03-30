@@ -120,7 +120,7 @@ impl crate::Message for CMSG_UPDATE_PROJECTILE_POSITION {
         w.write_all(&self.cast_count.to_le_bytes())?;
 
         // position: Vector3d
-crate::util::vanilla_tbc_wrath_vector3d_write_into_vec(&self.position, &mut w)?;
+        crate::util::vanilla_tbc_wrath_vector3d_write_into_vec(&self.position, &mut w)?;
 
         Ok(())
     }
