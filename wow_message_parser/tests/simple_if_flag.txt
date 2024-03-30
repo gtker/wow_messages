@@ -11,19 +11,15 @@ use crate::vanilla::SimpleFlag;
 ///     }
 /// }
 /// ```
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord)]
-pub enum SimpleIfFlag {
-    Zero {
-        basic: u8,
-    },
-    One,
-    Two,
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
+pub struct SimpleIfFlag {
+    pub flag: SimpleIfFlag_SimpleFlag,
 }
 
 impl SimpleIfFlag {
     pub(crate) fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
         // flag: SimpleFlag
-        w.write_all(&(self.as_int().to_le_bytes()))?;
+        w.write_all(&(self.flag.as_int().to_le_bytes()))?;
 
         if let Some(if_statement) = &self.flag.zero {
             // basic: u8
@@ -57,7 +53,9 @@ impl SimpleIfFlag {
             zero: flag_zero,
         };
 
-        Ok(flag_if)
+        Ok(Self {
+            flag,
+        })
     }
 
 }

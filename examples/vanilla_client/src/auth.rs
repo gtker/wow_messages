@@ -8,8 +8,8 @@ use wow_login_messages::version_2::{
     CMD_AUTH_LOGON_PROOF_Server, CMD_REALM_LIST_Client, CMD_REALM_LIST_Server,
 };
 use wow_login_messages::version_3::{
-    CMD_AUTH_LOGON_CHALLENGE_Server, CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult,
-    CMD_AUTH_LOGON_PROOF_Client, CMD_AUTH_LOGON_PROOF_Client_SecurityFlag,
+    CMD_AUTH_LOGON_CHALLENGE_Server, CMD_AUTH_LOGON_PROOF_Client,
+    CMD_AUTH_LOGON_PROOF_Client_SecurityFlag,
 };
 use wow_login_messages::Message;
 use wow_srp::client::SrpClientChallenge;
@@ -39,13 +39,13 @@ pub fn auth(
 
     let s = expect_server_message::<CMD_AUTH_LOGON_CHALLENGE_Server, _>(&mut auth_server).unwrap();
 
-    let c = if let CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult::Success {
+    let c = if let CMD_AUTH_LOGON_CHALLENGE_Server::Success {
         generator,
         large_safe_prime,
         salt,
         server_public_key,
         ..
-    } = s.result
+    } = s
     {
         let generator = generator[0];
         let large_safe_prime = large_safe_prime.try_into().unwrap();

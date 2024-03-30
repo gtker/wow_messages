@@ -236,15 +236,13 @@ async fn login_version_3(
     let p = get_proof(&l.account_name);
     let username = l.account_name;
 
-    CMD_AUTH_LOGON_CHALLENGE_Server {
-        result: CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult::Success {
-            server_public_key: *p.server_public_key(),
-            generator: vec![GENERATOR],
-            large_safe_prime: LARGE_SAFE_PRIME_LITTLE_ENDIAN.into(),
-            salt: *p.salt(),
-            crc_salt: [0; 16],
-            security_flag: CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlag::None,
-        },
+    CMD_AUTH_LOGON_CHALLENGE_Server::Success {
+        server_public_key: *p.server_public_key(),
+        generator: vec![GENERATOR],
+        large_safe_prime: LARGE_SAFE_PRIME_LITTLE_ENDIAN.into(),
+        salt: *p.salt(),
+        crc_salt: [0; 16],
+        security_flag: CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlag::None,
     }
     .tokio_write(&mut stream)
     .await
@@ -287,15 +285,13 @@ async fn login_version_8(
     let p = get_proof(&l.account_name);
     let username = l.account_name;
 
-    CMD_AUTH_LOGON_CHALLENGE_Server {
-        result: CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult::Success {
-            server_public_key: *p.server_public_key(),
-            generator: vec![GENERATOR],
-            large_safe_prime: LARGE_SAFE_PRIME_LITTLE_ENDIAN.into(),
-            salt: *p.salt(),
-            crc_salt: [0; 16],
-            security_flag: CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlag::empty(),
-        },
+    CMD_AUTH_LOGON_CHALLENGE_Server::Success {
+        server_public_key: *p.server_public_key(),
+        generator: vec![GENERATOR],
+        large_safe_prime: LARGE_SAFE_PRIME_LITTLE_ENDIAN.into(),
+        salt: *p.salt(),
+        crc_salt: [0; 16],
+        security_flag: CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlag::empty(),
     }
     .tokio_write(&mut stream)
     .await

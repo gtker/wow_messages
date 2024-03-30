@@ -51,13 +51,20 @@ impl RustObject {
 
     pub(crate) fn single_rust_definer(&self) -> Option<RustDefiner> {
         let definers = self.get_rust_definers();
-        let amount_of_members_in_struct = self.members_in_struct().count();
+        let amount_of_members_in_struct: Vec<_> = self.members_in_struct().collect();
 
-        if definers.len() == 1 && amount_of_members_in_struct == 1 {
-            Some(definers[0])
-        } else {
-            None
+        match amount_of_members_in_struct.as_slice() {
+            [one] => {
+                if let Some(rd) = definers.iter().find(|a| a.variable_name() == one.name()) {
+                    if rd.definer_type() == DefinerType::Enum && !rd.is_elseif() {
+                        return Some(*rd);
+                    }
+                }
+            }
+            _ => {}
         }
+
+        None
     }
 
     pub(crate) fn get_rust_definer_from_ty(m: &RustMember) -> Option<RustDefiner> {

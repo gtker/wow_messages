@@ -452,8 +452,11 @@ fn print_write_if_enum_statement(
     let variable = if e.single_rust_definer().is_none() {
         variable
     } else {
-        let (var, _) = variable.rsplit_once('.').unwrap();
-        var.to_string()
+        if let Some((var, _)) = variable.rsplit_once('.') {
+            var.to_string()
+        } else {
+            variable
+        }
     };
 
     s.open_curly(format!("match &{variable}",));
