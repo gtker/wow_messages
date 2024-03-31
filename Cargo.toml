@@ -15,7 +15,7 @@ resolver = "2"
 [workspace.package]
 license = "MIT OR Apache-2.0"
 edition = "2021"
-repository = "https://www.github.com/gtker/wow_messages"
+repository = "https://github.com/gtker/wow_messages"
 authors = ["Gtker <github@gtker.com"]
 
 [workspace.dependencies]
