@@ -130,26 +130,3 @@ impl From<std::io::Error> for ExpectedOpcodeError {
         Self::Io(e)
     }
 }
-
-#[derive(Debug)]
-pub enum CollectiveError {
-    InvalidFieldSet,
-    Io(std::io::Error),
-}
-
-impl Display for CollectiveError {
-    fn fmt(&self, f: &mut Formatter<'_>) -> std::fmt::Result {
-        match self {
-            CollectiveError::InvalidFieldSet => write!(f, "invalid field set in struct"),
-            CollectiveError::Io(i) => i.fmt(f),
-        }
-    }
-}
-
-impl Error for CollectiveError {}
-
-impl From<std::io::Error> for CollectiveError {
-    fn from(value: std::io::Error) -> Self {
-        Self::Io(value)
-    }
-}

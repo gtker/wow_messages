@@ -15,7 +15,6 @@ mod cmd_xfer_initiate;
 mod cmd_xfer_resume;
 
 use crate::all::ProtocolVersion;
-use crate::errors::CollectiveError;
 use crate::{errors, private, Message};
 
 pub trait CollectiveMessage: Message + Send + Sync {
@@ -27,19 +26,19 @@ pub trait CollectiveMessage: Message + Send + Sync {
     type Version8: Message + Send + Sync;
 
     fn from_version_2(v: Self::Version2) -> Self;
-    fn to_version_2(&self) -> Result<Self::Version2, CollectiveError>;
+    fn to_version_2(&self) -> Self::Version2;
 
     fn from_version_3(v: Self::Version3) -> Self;
-    fn to_version_3(&self) -> Result<Self::Version3, CollectiveError>;
+    fn to_version_3(&self) -> Self::Version3;
 
     fn from_version_5(v: Self::Version5) -> Self;
-    fn to_version_5(&self) -> Result<Self::Version5, CollectiveError>;
+    fn to_version_5(&self) -> Self::Version5;
 
     fn from_version_6(v: Self::Version6) -> Self;
-    fn to_version_6(&self) -> Result<Self::Version6, CollectiveError>;
+    fn to_version_6(&self) -> Self::Version6;
 
     fn from_version_7(v: Self::Version7) -> Self;
-    fn to_version_7(&self) -> Result<Self::Version7, CollectiveError>;
+    fn to_version_7(&self) -> Self::Version7;
 
     #[doc(hidden)]
     #[cfg(feature = "sync")]
@@ -62,13 +61,13 @@ pub trait CollectiveMessage: Message + Send + Sync {
         &self,
         w: W,
         protocol_version: ProtocolVersion,
-    ) -> Result<(), CollectiveError> {
+    ) -> Result<(), std::io::Error> {
         match protocol_version {
-            ProtocolVersion::Two => self.to_version_2()?.write(w)?,
-            ProtocolVersion::Three => self.to_version_3()?.write(w)?,
-            ProtocolVersion::Five => self.to_version_5()?.write(w)?,
-            ProtocolVersion::Six => self.to_version_6()?.write(w)?,
-            ProtocolVersion::Seven => self.to_version_7()?.write(w)?,
+            ProtocolVersion::Two => self.to_version_2().write(w)?,
+            ProtocolVersion::Three => self.to_version_3().write(w)?,
+            ProtocolVersion::Five => self.to_version_5().write(w)?,
+            ProtocolVersion::Six => self.to_version_6().write(w)?,
+            ProtocolVersion::Seven => self.to_version_7().write(w)?,
             ProtocolVersion::Eight => self.write(w)?,
         }
 
@@ -119,7 +118,7 @@ pub trait CollectiveMessage: Message + Send + Sync {
         w: W,
         protocol_version: ProtocolVersion,
     ) -> std::pin::Pin<
-        Box<dyn std::future::Future<Output = Result<(), CollectiveError>> + Send + 'async_trait>,
+        Box<dyn std::future::Future<Output = Result<(), std::io::Error>> + Send + 'async_trait>,
     >
     where
         W: 'async_trait + async_std::io::WriteExt + Unpin + Send,
@@ -128,11 +127,11 @@ pub trait CollectiveMessage: Message + Send + Sync {
     {
         Box::pin(async move {
             match protocol_version {
-                ProtocolVersion::Two => self.to_version_2()?.astd_write(w).await?,
-                ProtocolVersion::Three => self.to_version_3()?.astd_write(w).await?,
-                ProtocolVersion::Five => self.to_version_5()?.astd_write(w).await?,
-                ProtocolVersion::Six => self.to_version_6()?.astd_write(w).await?,
-                ProtocolVersion::Seven => self.to_version_7()?.astd_write(w).await?,
+                ProtocolVersion::Two => self.to_version_2().astd_write(w).await?,
+                ProtocolVersion::Three => self.to_version_3().astd_write(w).await?,
+                ProtocolVersion::Five => self.to_version_5().astd_write(w).await?,
+                ProtocolVersion::Six => self.to_version_6().astd_write(w).await?,
+                ProtocolVersion::Seven => self.to_version_7().astd_write(w).await?,
                 ProtocolVersion::Eight => self.astd_write(w).await?,
             }
 
@@ -184,7 +183,7 @@ pub trait CollectiveMessage: Message + Send + Sync {
         w: W,
         protocol_version: ProtocolVersion,
     ) -> std::pin::Pin<
-        Box<dyn std::future::Future<Output = Result<(), CollectiveError>> + Send + 'async_trait>,
+        Box<dyn std::future::Future<Output = Result<(), std::io::Error>> + Send + 'async_trait>,
     >
     where
         W: 'async_trait + tokio::io::AsyncWriteExt + Unpin + Send,
@@ -193,11 +192,11 @@ pub trait CollectiveMessage: Message + Send + Sync {
     {
         Box::pin(async move {
             match protocol_version {
-                ProtocolVersion::Two => self.to_version_2()?.tokio_write(w).await?,
-                ProtocolVersion::Three => self.to_version_3()?.tokio_write(w).await?,
-                ProtocolVersion::Five => self.to_version_5()?.tokio_write(w).await?,
-                ProtocolVersion::Six => self.to_version_6()?.tokio_write(w).await?,
-                ProtocolVersion::Seven => self.to_version_7()?.tokio_write(w).await?,
+                ProtocolVersion::Two => self.to_version_2().tokio_write(w).await?,
+                ProtocolVersion::Three => self.to_version_3().tokio_write(w).await?,
+                ProtocolVersion::Five => self.to_version_5().tokio_write(w).await?,
+                ProtocolVersion::Six => self.to_version_6().tokio_write(w).await?,
+                ProtocolVersion::Seven => self.to_version_7().tokio_write(w).await?,
                 ProtocolVersion::Eight => self.tokio_write(w).await?,
             }
 

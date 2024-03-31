@@ -1,5 +1,4 @@
 use crate::collective::CollectiveMessage;
-use crate::errors::CollectiveError;
 
 type Main = crate::version_8::CMD_AUTH_RECONNECT_PROOF_Server;
 type MainLoginResult = crate::version_8::LoginResult;
@@ -41,8 +40,8 @@ impl CollectiveMessage for Main {
         }
     }
 
-    fn to_version_2(&self) -> Result<Self::Version2, CollectiveError> {
-        Ok(Self::Version2 {
+    fn to_version_2(&self) -> Self::Version2 {
+        Self::Version2 {
             result: match self.result {
                 MainLoginResult::Success => V2MainLoginResult::Success,
                 MainLoginResult::FailUnknown0 => V2MainLoginResult::FailUnknown0,
@@ -60,18 +59,16 @@ impl CollectiveMessage for Main {
                 MainLoginResult::FailNoAccess => V2MainLoginResult::FailNoAccess,
                 MainLoginResult::SuccessSurvey => V2MainLoginResult::SuccessSurvey,
                 MainLoginResult::FailParentalcontrol => V2MainLoginResult::FailParentalcontrol,
-                MainLoginResult::FailLockedEnforced => {
-                    return Err(CollectiveError::InvalidFieldSet);
-                }
+                MainLoginResult::FailLockedEnforced => V2MainLoginResult::FailParentalcontrol,
             },
-        })
+        }
     }
 
     fn from_version_3(v: Self::Version3) -> Self {
         Self::from_version_2(v)
     }
 
-    fn to_version_3(&self) -> Result<Self::Version3, CollectiveError> {
+    fn to_version_3(&self) -> Self::Version3 {
         self.to_version_2()
     }
 
@@ -98,8 +95,8 @@ impl CollectiveMessage for Main {
         }
     }
 
-    fn to_version_5(&self) -> Result<Self::Version5, CollectiveError> {
-        Ok(Self::Version5 {
+    fn to_version_5(&self) -> Self::Version5 {
+        Self::Version5 {
             result: match self.result {
                 MainLoginResult::Success => V5MainLoginResult::Success,
                 MainLoginResult::FailUnknown0 => V5MainLoginResult::FailUnknown0,
@@ -117,18 +114,16 @@ impl CollectiveMessage for Main {
                 MainLoginResult::FailNoAccess => V5MainLoginResult::FailNoAccess,
                 MainLoginResult::SuccessSurvey => V5MainLoginResult::SuccessSurvey,
                 MainLoginResult::FailParentalcontrol => V5MainLoginResult::FailParentalcontrol,
-                MainLoginResult::FailLockedEnforced => {
-                    return Err(CollectiveError::InvalidFieldSet);
-                }
+                MainLoginResult::FailLockedEnforced => V5MainLoginResult::FailParentalcontrol,
             },
-        })
+        }
     }
 
     fn from_version_6(v: Self::Version6) -> Self {
         Self::from_version_5(v)
     }
 
-    fn to_version_6(&self) -> Result<Self::Version6, CollectiveError> {
+    fn to_version_6(&self) -> Self::Version6 {
         self.to_version_5()
     }
 
@@ -136,7 +131,7 @@ impl CollectiveMessage for Main {
         Self::from_version_5(v)
     }
 
-    fn to_version_7(&self) -> Result<Self::Version7, CollectiveError> {
+    fn to_version_7(&self) -> Self::Version7 {
         self.to_version_5()
     }
 }

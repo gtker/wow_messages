@@ -1,5 +1,4 @@
 use crate::collective::CollectiveMessage;
-use crate::errors::CollectiveError;
 
 type Main = crate::version_8::CMD_AUTH_LOGON_PROOF_Server;
 
@@ -44,8 +43,8 @@ impl CollectiveMessage for Main {
         }
     }
 
-    fn to_version_2(&self) -> Result<Self::Version2, CollectiveError> {
-        Ok(match &self {
+    fn to_version_2(&self) -> Self::Version2 {
+        match &self {
             Main::Success {
                 hardware_survey_id,
                 server_proof,
@@ -69,17 +68,15 @@ impl CollectiveMessage for Main {
             Main::FailNoAccess => V2Main::FailNoAccess,
             Main::SuccessSurvey => V2Main::SuccessSurvey,
             Main::FailParentalcontrol => V2Main::FailParentalcontrol,
-            Main::FailLockedEnforced => {
-                return Err(CollectiveError::InvalidFieldSet);
-            }
-        })
+            Main::FailLockedEnforced => V2Main::FailParentalcontrol,
+        }
     }
 
     fn from_version_3(v: Self::Version3) -> Self {
         Self::from_version_2(v)
     }
 
-    fn to_version_3(&self) -> Result<Self::Version3, CollectiveError> {
+    fn to_version_3(&self) -> Self::Version3 {
         self.to_version_2()
     }
 
@@ -113,8 +110,8 @@ impl CollectiveMessage for Main {
         }
     }
 
-    fn to_version_5(&self) -> Result<Self::Version5, CollectiveError> {
-        Ok(match *self {
+    fn to_version_5(&self) -> Self::Version5 {
+        match *self {
             Main::Success {
                 hardware_survey_id,
                 server_proof,
@@ -140,17 +137,15 @@ impl CollectiveMessage for Main {
             Main::FailNoAccess => V5Main::FailNoAccess,
             Main::SuccessSurvey => V5Main::SuccessSurvey,
             Main::FailParentalcontrol => V5Main::FailParentalcontrol,
-            Main::FailLockedEnforced => {
-                return Err(CollectiveError::InvalidFieldSet);
-            }
-        })
+            Main::FailLockedEnforced => V5Main::FailParentalcontrol,
+        }
     }
 
     fn from_version_6(v: Self::Version6) -> Self {
         Self::from_version_5(v)
     }
 
-    fn to_version_6(&self) -> Result<Self::Version6, CollectiveError> {
+    fn to_version_6(&self) -> Self::Version6 {
         self.to_version_5()
     }
 
@@ -158,7 +153,7 @@ impl CollectiveMessage for Main {
         Self::from_version_5(v)
     }
 
-    fn to_version_7(&self) -> Result<Self::Version7, CollectiveError> {
+    fn to_version_7(&self) -> Self::Version7 {
         self.to_version_5()
     }
 }

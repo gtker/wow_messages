@@ -1,5 +1,4 @@
 use crate::collective::CollectiveMessage;
-use crate::errors::CollectiveError;
 
 type Main = crate::version_8::CMD_REALM_LIST_Server;
 type MainRealm = crate::version_8::Realm;
@@ -34,17 +33,17 @@ impl CollectiveMessage for Main {
         }
     }
 
-    fn to_version_2(&self) -> Result<Self::Version2, CollectiveError> {
-        Ok(Self::Version2 {
+    fn to_version_2(&self) -> Self::Version2 {
+        Self::Version2 {
             realms: self.realms.iter().map(|a| a.to_version_2()).collect(),
-        })
+        }
     }
 
     fn from_version_3(v: Self::Version3) -> Self {
         Self::from_version_2(v)
     }
 
-    fn to_version_3(&self) -> Result<Self::Version3, CollectiveError> {
+    fn to_version_3(&self) -> Self::Version3 {
         self.to_version_2()
     }
 
@@ -58,10 +57,10 @@ impl CollectiveMessage for Main {
         }
     }
 
-    fn to_version_5(&self) -> Result<Self::Version5, CollectiveError> {
-        Ok(Self::Version5 {
+    fn to_version_5(&self) -> Self::Version5 {
+        Self::Version5 {
             realms: self.realms.iter().map(|a| a.to_version_5()).collect(),
-        })
+        }
     }
 
     fn from_version_6(v: Self::Version6) -> Self {
@@ -74,17 +73,17 @@ impl CollectiveMessage for Main {
         }
     }
 
-    fn to_version_6(&self) -> Result<Self::Version6, CollectiveError> {
-        Ok(Self::Version6 {
+    fn to_version_6(&self) -> Self::Version6 {
+        Self::Version6 {
             realms: self.realms.iter().map(|a| a.to_version_6()).collect(),
-        })
+        }
     }
 
     fn from_version_7(v: Self::Version7) -> Self {
         Self::from_version_6(v)
     }
 
-    fn to_version_7(&self) -> Result<Self::Version7, CollectiveError> {
+    fn to_version_7(&self) -> Self::Version7 {
         self.to_version_6()
     }
 }

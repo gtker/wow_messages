@@ -1,5 +1,4 @@
 use crate::collective::CollectiveMessage;
-use crate::errors::CollectiveError;
 
 type Main = crate::version_8::CMD_AUTH_RECONNECT_CHALLENGE_Server;
 
@@ -17,15 +16,15 @@ impl CollectiveMessage for Main {
         Main::from_version_2(v)
     }
 
-    fn to_version_2(&self) -> Result<Self::Version2, CollectiveError> {
-        Ok(self.to_version_2()?)
+    fn to_version_2(&self) -> Self::Version2 {
+        self.to_version_2()
     }
 
     fn from_version_3(v: Self::Version3) -> Self {
         Self::from_version_2(v)
     }
 
-    fn to_version_3(&self) -> Result<Self::Version3, CollectiveError> {
+    fn to_version_3(&self) -> Self::Version3 {
         self.to_version_2()
     }
 
@@ -33,7 +32,7 @@ impl CollectiveMessage for Main {
         Self::from_version_2(v)
     }
 
-    fn to_version_5(&self) -> Result<Self::Version5, CollectiveError> {
+    fn to_version_5(&self) -> Self::Version5 {
         self.to_version_2()
     }
 
@@ -41,7 +40,7 @@ impl CollectiveMessage for Main {
         Self::from_version_2(v)
     }
 
-    fn to_version_6(&self) -> Result<Self::Version6, CollectiveError> {
+    fn to_version_6(&self) -> Self::Version6 {
         self.to_version_2()
     }
 
@@ -49,7 +48,7 @@ impl CollectiveMessage for Main {
         Self::from_version_2(v)
     }
 
-    fn to_version_7(&self) -> Result<Self::Version7, CollectiveError> {
+    fn to_version_7(&self) -> Self::Version7 {
         self.to_version_2()
     }
 }
@@ -83,8 +82,8 @@ impl Main {
     }
 
     #[allow(clippy::wrong_self_convention)]
-    const fn to_version_2(&self) -> Result<V2Main, CollectiveError> {
-        Ok(match self {
+    const fn to_version_2(&self) -> V2Main {
+        match self {
             Main::Success {
                 challenge_data,
                 checksum_salt,
@@ -107,7 +106,7 @@ impl Main {
             Main::FailNoAccess => V2Main::FailNoAccess,
             Main::SuccessSurvey => V2Main::SuccessSurvey,
             Main::FailParentalcontrol => V2Main::FailParentalcontrol,
-            Main::FailLockedEnforced => return Err(CollectiveError::InvalidFieldSet),
-        })
+            Main::FailLockedEnforced => V2Main::FailParentalcontrol,
+        }
     }
 }
