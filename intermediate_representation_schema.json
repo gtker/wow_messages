@@ -347,6 +347,41 @@
             "ref": "test_case"
           }
         }
+      },
+      "optionalProperties": {
+        "prepared_objects": {
+          "metadata": {
+            "description": "Present for objects that contain if statements. Is a structured representation of the object where fields that are inside if statements will be put inside the enumerators they are present in. This is used for example when wanting to represent conditionally present fields through e.g. discriminated unions or inheritance."
+          },
+          "elements": {
+            "ref": "prepared_object"
+          }
+        }
+      }
+    },
+    "prepared_object": {
+      "metadata": {
+        "description": "Represents a field in the object, and the fields for each enumerator if it's an enum/flag."
+      },
+      "properties": {
+        "name": {
+          "metadata": {
+            "description": "Name inside the object. Search through the original object to get type and other information."
+          },
+          "type": "string"
+        }
+      },
+      "optionalProperties": {
+        "enumerators": {
+          "metadata": {
+            "description": "If this is present the field contains other fields."
+          },
+          "values": {
+            "elements": {
+              "ref": "prepared_object"
+            }
+          }
+        }
       }
     },
     "update_mask_struct": {

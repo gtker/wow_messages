@@ -10,9 +10,13 @@ use crate::parser::types::test_case::{
 };
 use crate::parser::types::ty::Type;
 use crate::parser::types::ContainerValue;
+use crate::rust_printer::rust_view::rust_member::RustMember;
+use crate::rust_printer::rust_view::rust_object::RustObject;
+use crate::rust_printer::rust_view::rust_type::RustType;
 use crate::rust_printer::UpdateMaskObjectType;
 use crate::Objects;
 use serde::Serialize;
+use std::collections::BTreeMap;
 
 pub(crate) fn containers_to_ir(containers: &[Container], o: &Objects) -> Vec<IrContainer> {
     containers.iter().map(|a| container_to_ir(a, o)).collect()
@@ -38,6 +42,7 @@ fn container_to_ir_no_tests(e: &Container) -> IrContainer {
         tags: IrTags::from_tags(e.tags()),
         tests: Vec::new(),
         file_info: IrFileInfo::from_file_info(e.file_info()),
+        prepared_objects: rust_object_to_prepared_objects(e.rust_object()),
         only_has_io_error: e.only_has_io_errors(),
         has_manual_size_field,
         manual_size_subtraction: e.manual_size_field_subtraction(),
@@ -123,6 +128,61 @@ impl IrSizes {
 }
 
 #[derive(Clone, Debug, Serialize)]
+pub(crate) struct IrPreparedObject {
+    name: String,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    enumerators: Option<BTreeMap<String, Vec<IrPreparedObject>>>,
+}
+
+pub(crate) fn rust_object_to_prepared_objects(e: &RustObject) -> Option<Vec<IrPreparedObject>> {
+    fn inner(m: &RustMember, v: &mut Vec<IrPreparedObject>, is_some: &mut bool) {
+        let enumerators = match m.ty() {
+            RustType::Flag { enumerators, .. } | RustType::Enum { enumerators, .. } => {
+                let mut map = BTreeMap::new();
+
+                for enumerator in enumerators {
+                    let mut fields = Vec::new();
+
+                    for field in enumerator.members() {
+                        inner(field, &mut fields, is_some);
+                    }
+
+                    if !fields.is_empty() {
+                        map.insert(enumerator.name().to_string(), fields);
+                    }
+                }
+
+                if !map.is_empty() {
+                    *is_some = true;
+                    Some(map)
+                } else {
+                    None
+                }
+            }
+            _ => None,
+        };
+
+        v.push(IrPreparedObject {
+            name: m.name().to_string(),
+            enumerators,
+        });
+    }
+
+    let mut v = Vec::new();
+    let mut is_some = false;
+
+    for m in e.members() {
+        inner(m, &mut v, &mut is_some);
+    }
+
+    if is_some {
+        Some(v)
+    } else {
+        None
+    }
+}
+
+#[derive(Clone, Debug, Serialize)]
 pub(crate) struct IrContainer {
     name: String,
     object_type: IrContainerType,
@@ -134,6 +194,8 @@ pub(crate) struct IrContainer {
     only_has_io_error: bool,
     has_manual_size_field: bool,
     manual_size_subtraction: Option<u16>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    prepared_objects: Option<Vec<IrPreparedObject>>,
 }
 
 #[derive(Debug, Serialize)]
