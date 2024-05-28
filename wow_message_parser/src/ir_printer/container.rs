@@ -134,8 +134,8 @@ pub(crate) struct IrPreparedObject {
     enumerators: Option<BTreeMap<String, Vec<IrPreparedObject>>>,
 }
 
-pub(crate) fn rust_object_to_prepared_objects(e: &RustObject) -> Option<Vec<IrPreparedObject>> {
-    fn inner(m: &RustMember, v: &mut Vec<IrPreparedObject>, is_some: &mut bool) {
+pub(crate) fn rust_object_to_prepared_objects(e: &RustObject) -> Vec<IrPreparedObject> {
+    fn inner(m: &RustMember, v: &mut Vec<IrPreparedObject>) {
         let enumerators = match m.ty() {
             RustType::Flag { enumerators, .. } | RustType::Enum { enumerators, .. } => {
                 let mut map = BTreeMap::new();
@@ -144,7 +144,7 @@ pub(crate) fn rust_object_to_prepared_objects(e: &RustObject) -> Option<Vec<IrPr
                     let mut fields = Vec::new();
 
                     for field in enumerator.members() {
-                        inner(field, &mut fields, is_some);
+                        inner(field, &mut fields);
                     }
 
                     if !fields.is_empty() {
@@ -153,7 +153,6 @@ pub(crate) fn rust_object_to_prepared_objects(e: &RustObject) -> Option<Vec<IrPr
                 }
 
                 if !map.is_empty() {
-                    *is_some = true;
                     Some(map)
                 } else {
                     None
@@ -169,17 +168,12 @@ pub(crate) fn rust_object_to_prepared_objects(e: &RustObject) -> Option<Vec<IrPr
     }
 
     let mut v = Vec::new();
-    let mut is_some = false;
 
     for m in e.members() {
-        inner(m, &mut v, &mut is_some);
+        inner(m, &mut v);
     }
 
-    if is_some {
-        Some(v)
-    } else {
-        None
-    }
+    v
 }
 
 #[derive(Clone, Debug, Serialize)]
@@ -194,8 +188,7 @@ pub(crate) struct IrContainer {
     only_has_io_error: bool,
     has_manual_size_field: bool,
     manual_size_subtraction: Option<u16>,
-    #[serde(skip_serializing_if = "Option::is_none")]
-    prepared_objects: Option<Vec<IrPreparedObject>>,
+    prepared_objects: Vec<IrPreparedObject>,
 }
 
 #[derive(Debug, Serialize)]
