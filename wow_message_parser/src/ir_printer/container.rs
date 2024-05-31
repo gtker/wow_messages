@@ -1,3 +1,4 @@
+use crate::ir_printer::definer::IrDefinerType;
 use crate::ir_printer::{IrFileInfo, IrIntegerType, IrTags};
 use crate::parser::types::array::{Array, ArraySize, ArrayType};
 use crate::parser::types::container::{Container, ContainerType, UpdateMaskMember};
@@ -263,47 +264,33 @@ impl IrStructMember {
     }
 }
 
-#[derive(Clone, Debug, Serialize)]
-#[serde(tag = "equation_tag")]
-pub(crate) enum IrEquation {
-    Equals { value: Vec<String> },
-    BitwiseAnd { value: Vec<String> },
-}
-
-impl IrEquation {
-    fn from_equation(v: &Equation, definer: &Definer) -> Self {
-        match v {
-            Equation::Equals { values: value } => IrEquation::Equals {
-                value: value.clone(),
-            },
-            Equation::NotEquals { value } => IrEquation::Equals {
-                value: definer
-                    .fields()
-                    .iter()
-                    .filter_map(|d| {
-                        if d.name() == value {
-                            None
-                        } else {
-                            Some(d.name().to_string())
-                        }
-                    })
-                    .collect(),
-            },
-            Equation::BitwiseAnd { values: value } => IrEquation::BitwiseAnd {
-                value: value.clone(),
-            },
-        }
+fn values_from_equation(v: &Equation, definer: &Definer) -> Vec<String> {
+    match v {
+        Equation::Equals { values: value } => value.clone(),
+        Equation::NotEquals { value } => definer
+            .fields()
+            .iter()
+            .filter_map(|d| {
+                if d.name() == value {
+                    None
+                } else {
+                    Some(d.name().to_string())
+                }
+            })
+            .collect(),
+        Equation::BitwiseAnd { values: value } => value.clone(),
     }
 }
 
 #[derive(Clone, Debug, Serialize)]
 pub(crate) struct IrIfStatement {
     variable_name: String,
-    equations: IrEquation,
+    values: Vec<String>,
     members: Vec<IrStructMember>,
     else_if_statements: Vec<IrIfStatement>,
     else_members: Vec<IrStructMember>,
     original_type: IrType,
+    definer_type: IrDefinerType,
     part_of_separate_if_statement: bool,
     is_else_if_flag: bool,
 }
@@ -329,11 +316,12 @@ impl IrIfStatement {
 
         Self {
             variable_name: v.variable_name().to_string(),
-            equations: IrEquation::from_equation(v.equation(), v.original_ty().definer()),
+            values: values_from_equation(v.equation(), v.original_ty().definer()),
             members,
             else_if_statements: else_ifs,
             else_members: else_statement_members,
             original_type: IrType::from_type(v.original_ty()),
+            definer_type: IrDefinerType::from_definer_type(v.original_ty().definer().definer_ty()),
             part_of_separate_if_statement: v.part_of_separate_if_statement(),
             is_else_if_flag: v.is_elseif_flag(),
         }

@@ -1165,27 +1165,15 @@
         "variable_name": {
           "type": "string"
         },
-        "equations": {
-          "discriminator": "equation_tag",
-          "mapping": {
-            "Equals": {
-              "properties": {
-                "value": {
-                  "elements": {
-                    "type": "string"
-                  }
-                }
-              }
-            },
-            "BitwiseAnd": {
-              "properties": {
-                "value": {
-                  "elements": {
-                    "type": "string"
-                  }
-                }
-              }
-            }
+        "definer_type": {
+          "enum": [
+            "Flag",
+            "Enum"
+          ]
+        },
+        "values": {
+          "elements": {
+            "type": "string"
           }
         },
         "members": {

@@ -41,14 +41,14 @@ pub(crate) fn definer_to_ir(e: &Definer) -> IrDefiner {
     }
 }
 
-#[derive(Debug, Serialize)]
-enum IrDefinerType {
+#[derive(Clone, Copy, Debug, Serialize)]
+pub(crate) enum IrDefinerType {
     Enum,
     Flag,
 }
 
 impl IrDefinerType {
-    fn from_definer_type(v: DefinerType) -> Self {
+    pub(crate) fn from_definer_type(v: DefinerType) -> Self {
         match v {
             DefinerType::Enum => IrDefinerType::Enum,
             DefinerType::Flag => IrDefinerType::Flag,
