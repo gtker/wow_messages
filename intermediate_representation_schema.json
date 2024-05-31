@@ -212,43 +212,49 @@
     "world_objects": {
       "properties": {
         "enums": {
-          "ref": "enums"
+          "elements": {
+            "ref": "definer"
+          }
         },
         "flags": {
-          "ref": "flags"
+          "elements": {
+            "ref": "definer"
+          }
         },
         "structs": {
-          "ref": "structs"
+          "elements": {
+            "ref": "container"
+          }
         },
         "messages": {
-          "ref": "messages"
+          "elements": {
+            "ref": "container"
+          }
         }
       }
     },
     "login_objects": {
       "properties": {
         "enums": {
-          "ref": "enums"
+          "elements": {
+            "ref": "definer"
+          }
         },
         "flags": {
-          "ref": "flags"
+          "elements": {
+            "ref": "definer"
+          }
         },
         "structs": {
-          "ref": "structs"
+          "elements": {
+            "ref": "container"
+          }
         },
         "messages": {
-          "ref": "messages"
+          "elements": {
+            "ref": "container"
+          }
         }
-      }
-    },
-    "enums": {
-      "elements": {
-        "ref": "definer"
-      }
-    },
-    "flags": {
-      "elements": {
-        "ref": "definer"
       }
     },
     "definer": {
@@ -285,16 +291,6 @@
         "file_info": {
           "ref": "file_info"
         }
-      }
-    },
-    "structs": {
-      "elements": {
-        "ref": "container"
-      }
-    },
-    "messages": {
-      "elements": {
-        "ref": "container"
       }
     },
     "sizes": {
