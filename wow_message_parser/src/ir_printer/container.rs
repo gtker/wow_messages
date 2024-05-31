@@ -1,6 +1,7 @@
 use crate::ir_printer::{IrFileInfo, IrIntegerType, IrTags};
 use crate::parser::types::array::{Array, ArraySize, ArrayType};
 use crate::parser::types::container::{Container, ContainerType, UpdateMaskMember};
+use crate::parser::types::definer::Definer;
 use crate::parser::types::if_statement::{Equation, IfStatement};
 use crate::parser::types::optional::OptionalStatement;
 use crate::parser::types::sizes::Sizes;
@@ -266,18 +267,27 @@ impl IrStructMember {
 #[serde(tag = "equation_tag")]
 pub(crate) enum IrEquation {
     Equals { value: Vec<String> },
-    NotEquals { value: String },
     BitwiseAnd { value: Vec<String> },
 }
 
 impl IrEquation {
-    fn from_equation(v: &Equation) -> Self {
+    fn from_equation(v: &Equation, definer: &Definer) -> Self {
         match v {
             Equation::Equals { values: value } => IrEquation::Equals {
                 value: value.clone(),
             },
-            Equation::NotEquals { value } => IrEquation::NotEquals {
-                value: value.clone(),
+            Equation::NotEquals { value } => IrEquation::Equals {
+                value: definer
+                    .fields()
+                    .iter()
+                    .filter_map(|d| {
+                        if d.name() == value {
+                            None
+                        } else {
+                            Some(d.name().to_string())
+                        }
+                    })
+                    .collect(),
             },
             Equation::BitwiseAnd { values: value } => IrEquation::BitwiseAnd {
                 value: value.clone(),
@@ -319,7 +329,7 @@ impl IrIfStatement {
 
         Self {
             variable_name: v.variable_name().to_string(),
-            equations: IrEquation::from_equation(v.equation()),
+            equations: IrEquation::from_equation(v.equation(), v.original_ty().definer()),
             members,
             else_if_statements: else_ifs,
             else_members: else_statement_members,

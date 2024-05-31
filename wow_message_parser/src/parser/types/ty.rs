@@ -247,6 +247,13 @@ impl Type {
         }
     }
 
+    pub(crate) fn definer(&self) -> &Definer {
+        match self {
+            Type::Enum { e, .. } | Type::Flag { e, .. } => e,
+            _ => panic!("type {self:?} does not have definer"),
+        }
+    }
+
     pub(crate) fn doc_endian_str(&self) -> String {
         match self {
             Type::Bool(i) | Type::Integer(i) => i.doc_endian_str().to_string(),
