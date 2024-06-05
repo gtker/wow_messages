@@ -1182,11 +1182,6 @@
             "ref": "if_statement"
           }
         },
-        "else_members": {
-          "elements": {
-            "ref": "struct_member"
-          }
-        },
         "original_type": {
           "ref": "data_type"
         },

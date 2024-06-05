@@ -182,6 +182,15 @@ impl Equation {
         }
     }
 
+    pub(crate) fn contains_enumerator(&self, enumerator: &str) -> bool {
+        match self {
+            Equation::NotEquals { value } => value == enumerator,
+            Equation::Equals { values } | Equation::BitwiseAnd { values } => {
+                values.iter().any(|a| a == enumerator)
+            }
+        }
+    }
+
     pub(crate) fn new(conditions: &[Condition], ty_name: &str, file_info: &FileInfo) -> Self {
         let variable = &conditions[0];
         let variable_name = variable.value.clone();

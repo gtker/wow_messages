@@ -288,7 +288,6 @@ pub(crate) struct IrIfStatement {
     values: Vec<String>,
     members: Vec<IrStructMember>,
     else_if_statements: Vec<IrIfStatement>,
-    else_members: Vec<IrStructMember>,
     original_type: IrType,
     definer_type: IrDefinerType,
     part_of_separate_if_statement: bool,
@@ -302,24 +301,50 @@ impl IrIfStatement {
             .iter()
             .map(IrStructMember::from_struct_member)
             .collect();
-        let else_ifs = v
+        let mut else_ifs: Vec<_> = v
             .else_ifs()
             .iter()
             .map(IrIfStatement::from_statement)
             .collect();
 
-        let else_statement_members = v
+        let else_statement_members: Vec<_> = v
             .else_members()
             .iter()
             .map(IrStructMember::from_struct_member)
             .collect();
+
+        let mut else_conditions = Vec::new();
+        for enumerator in v.original_ty().definer().fields() {
+            if !v.equation().contains_enumerator(enumerator.name())
+                && !v
+                    .else_ifs()
+                    .iter()
+                    .any(|a| a.equation().contains_enumerator(enumerator.name()))
+            {
+                else_conditions.push(enumerator.name().to_string());
+            }
+        }
+
+        if !else_statement_members.is_empty() {
+            else_ifs.push(IrIfStatement {
+                variable_name: v.variable_name().to_string(),
+                values: else_conditions,
+                members: else_statement_members,
+                else_if_statements: vec![],
+                original_type: IrType::from_type(v.original_ty()),
+                definer_type: IrDefinerType::from_definer_type(
+                    v.original_ty().definer().definer_ty(),
+                ),
+                part_of_separate_if_statement: v.part_of_separate_if_statement(),
+                is_else_if_flag: v.is_elseif_flag(),
+            });
+        }
 
         Self {
             variable_name: v.variable_name().to_string(),
             values: values_from_equation(v.equation(), v.original_ty().definer()),
             members,
             else_if_statements: else_ifs,
-            else_members: else_statement_members,
             original_type: IrType::from_type(v.original_ty()),
             definer_type: IrDefinerType::from_definer_type(v.original_ty().definer().definer_ty()),
             part_of_separate_if_statement: v.part_of_separate_if_statement(),
