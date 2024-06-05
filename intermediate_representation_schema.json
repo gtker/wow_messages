@@ -4,7 +4,7 @@
       "ref": "schema_version"
     },
     "world": {
-      "ref": "world_objects"
+      "ref": "objects"
     },
     "integer_type_information": {
       "values": {
@@ -29,7 +29,7 @@
       }
     },
     "login": {
-      "ref": "login_objects"
+      "ref": "objects"
     },
     "vanilla_update_mask": {
       "elements": {
@@ -209,31 +209,7 @@
         }
       }
     },
-    "world_objects": {
-      "properties": {
-        "enums": {
-          "elements": {
-            "ref": "definer"
-          }
-        },
-        "flags": {
-          "elements": {
-            "ref": "definer"
-          }
-        },
-        "structs": {
-          "elements": {
-            "ref": "container"
-          }
-        },
-        "messages": {
-          "elements": {
-            "ref": "container"
-          }
-        }
-      }
-    },
-    "login_objects": {
+    "objects": {
       "properties": {
         "enums": {
           "elements": {
