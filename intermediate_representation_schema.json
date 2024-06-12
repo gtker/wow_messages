@@ -319,6 +319,10 @@
             "ref": "test_case"
           }
         },
+        "optional": {
+          "nullable": true,
+          "ref": "optional_members"
+        },
         "prepared_objects": {
           "metadata": {
             "description": "Is a structured representation of the object where fields that are inside if statements will be put inside the enumerators they are present in. This is used for example when wanting to represent conditionally present fields through e.g. discriminated unions or inheritance."
@@ -884,13 +888,6 @@
           "properties": {
             "struct_member_content": {
               "ref": "if_statement"
-            }
-          }
-        },
-        "Optional": {
-          "properties": {
-            "struct_member_content": {
-              "ref": "optional_members"
             }
           }
         }

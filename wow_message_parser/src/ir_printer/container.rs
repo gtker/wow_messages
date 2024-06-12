@@ -28,7 +28,7 @@ fn container_to_ir_no_tests(e: &Container) -> IrContainer {
     let members = e
         .members()
         .iter()
-        .map(IrStructMember::from_struct_member)
+        .filter_map(IrStructMember::from_struct_member)
         .collect();
 
     let has_manual_size_field = e
@@ -48,7 +48,22 @@ fn container_to_ir_no_tests(e: &Container) -> IrContainer {
         only_has_io_error: e.only_has_io_errors(),
         has_manual_size_field,
         manual_size_subtraction: e.manual_size_field_subtraction(),
+        optional: get_optional(e.members()),
     }
+}
+
+fn get_optional(members: &[StructMember]) -> Option<IrOptionalStatement> {
+    for member in members {
+        match member {
+            StructMember::Definition(_) => {}
+            StructMember::IfStatement(_) => {}
+            StructMember::OptionalStatement(optional) => {
+                return Some(IrOptionalStatement::from_optional(optional));
+            }
+        }
+    }
+
+    None
 }
 
 pub(crate) fn container_to_update_mask_ir(e: &Container) -> IrUpdateMaskStruct {
@@ -191,6 +206,7 @@ pub(crate) struct IrContainer {
     has_manual_size_field: bool,
     manual_size_subtraction: Option<u16>,
     prepared_objects: Vec<IrPreparedObject>,
+    optional: Option<IrOptionalStatement>,
 }
 
 #[derive(Debug, Serialize)]
@@ -230,7 +246,7 @@ impl IrOptionalStatement {
         let members = v
             .members()
             .iter()
-            .map(IrStructMember::from_struct_member)
+            .filter_map(IrStructMember::from_struct_member)
             .collect();
 
         Self {
@@ -245,21 +261,18 @@ impl IrOptionalStatement {
 pub(crate) enum IrStructMember {
     Definition(Box<IrStructMemberDefinition>),
     IfStatement(IrIfStatement),
-    Optional(IrOptionalStatement),
 }
 
 impl IrStructMember {
-    fn from_struct_member(v: &StructMember) -> Self {
+    fn from_struct_member(v: &StructMember) -> Option<Self> {
         match v {
-            StructMember::Definition(d) => {
-                Self::Definition(Box::new(IrStructMemberDefinition::from_definition(d)))
-            }
+            StructMember::Definition(d) => Some(Self::Definition(Box::new(
+                IrStructMemberDefinition::from_definition(d),
+            ))),
             StructMember::IfStatement(statement) => {
-                Self::IfStatement(IrIfStatement::from_statement(statement))
+                Some(Self::IfStatement(IrIfStatement::from_statement(statement)))
             }
-            StructMember::OptionalStatement(optional) => {
-                Self::Optional(IrOptionalStatement::from_optional(optional))
-            }
+            StructMember::OptionalStatement(_) => None,
         }
     }
 }
@@ -299,7 +312,7 @@ impl IrIfStatement {
         let members = v
             .members()
             .iter()
-            .map(IrStructMember::from_struct_member)
+            .filter_map(IrStructMember::from_struct_member)
             .collect();
         let mut else_ifs: Vec<_> = v
             .else_ifs()
@@ -310,7 +323,7 @@ impl IrIfStatement {
         let else_statement_members: Vec<_> = v
             .else_members()
             .iter()
-            .map(IrStructMember::from_struct_member)
+            .filter_map(IrStructMember::from_struct_member)
             .collect();
 
         let mut else_conditions = Vec::new();
