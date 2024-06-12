@@ -13,7 +13,7 @@ use crate::parser::types::test_case::{
 use crate::parser::types::ty::Type;
 use crate::parser::types::ContainerValue;
 use crate::rust_printer::rust_view::rust_member::RustMember;
-use crate::rust_printer::rust_view::rust_object::RustObject;
+use crate::rust_printer::rust_view::rust_optional::RustOptional;
 use crate::rust_printer::rust_view::rust_type::RustType;
 use crate::rust_printer::UpdateMaskObjectType;
 use crate::Objects;
@@ -44,21 +44,27 @@ fn container_to_ir_no_tests(e: &Container) -> IrContainer {
         tags: IrTags::from_tags(e.tags()),
         tests: Vec::new(),
         file_info: IrFileInfo::from_file_info(e.file_info()),
-        prepared_objects: rust_object_to_prepared_objects(e.rust_object()),
+        prepared_objects: rust_object_to_prepared_objects(e.rust_object().members()),
         only_has_io_error: e.only_has_io_errors(),
         has_manual_size_field,
         manual_size_subtraction: e.manual_size_field_subtraction(),
-        optional: get_optional(e.members()),
+        optional: get_optional(e.members(), e.rust_object().optional()),
     }
 }
 
-fn get_optional(members: &[StructMember]) -> Option<IrOptionalStatement> {
+fn get_optional(
+    members: &[StructMember],
+    rust_optional: Option<&RustOptional>,
+) -> Option<IrOptionalStatement> {
     for member in members {
         match member {
             StructMember::Definition(_) => {}
             StructMember::IfStatement(_) => {}
             StructMember::OptionalStatement(optional) => {
-                return Some(IrOptionalStatement::from_optional(optional));
+                return Some(IrOptionalStatement::from_optional(
+                    optional,
+                    rust_optional.unwrap(),
+                ));
             }
         }
     }
@@ -151,7 +157,7 @@ pub(crate) struct IrPreparedObject {
     enumerators: Option<BTreeMap<String, Vec<IrPreparedObject>>>,
 }
 
-pub(crate) fn rust_object_to_prepared_objects(e: &RustObject) -> Vec<IrPreparedObject> {
+pub(crate) fn rust_object_to_prepared_objects(members: &[RustMember]) -> Vec<IrPreparedObject> {
     fn inner(m: &RustMember, v: &mut Vec<IrPreparedObject>) {
         let enumerators = match m.ty() {
             RustType::Flag { enumerators, .. } | RustType::Enum { enumerators, .. } => {
@@ -186,7 +192,7 @@ pub(crate) fn rust_object_to_prepared_objects(e: &RustObject) -> Vec<IrPreparedO
 
     let mut v = Vec::new();
 
-    for m in e.members() {
+    for m in members {
         inner(m, &mut v);
     }
 
@@ -239,10 +245,11 @@ impl IrUpdateMaskMember {
 pub(crate) struct IrOptionalStatement {
     name: String,
     members: Vec<IrStructMember>,
+    prepared_objects: Vec<IrPreparedObject>,
 }
 
 impl IrOptionalStatement {
-    fn from_optional(v: &OptionalStatement) -> Self {
+    fn from_optional(v: &OptionalStatement, rust_optional: &RustOptional) -> Self {
         let members = v
             .members()
             .iter()
@@ -252,6 +259,7 @@ impl IrOptionalStatement {
         Self {
             name: v.name().to_string(),
             members,
+            prepared_objects: rust_object_to_prepared_objects(rust_optional.members()),
         }
     }
 }
