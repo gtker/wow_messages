@@ -12085,7 +12085,6 @@ impl ServerOpcodeMessage {
             Self::SMSG_MESSAGECHAT(c) => crate::Message::to_test_case_string(c.as_ref()),
             Self::SMSG_CHANNEL_NOTIFY(c) => crate::Message::to_test_case_string(c.as_ref()),
             Self::SMSG_CHANNEL_LIST(c) => crate::Message::to_test_case_string(c.as_ref()),
-            Self::SMSG_UPDATE_OBJECT(c) => crate::Message::to_test_case_string(c.as_ref()),
             Self::SMSG_DESTROY_OBJECT(c) => crate::Message::to_test_case_string(c.as_ref()),
             Self::SMSG_READ_ITEM_OK(c) => crate::Message::to_test_case_string(c),
             Self::SMSG_READ_ITEM_FAILED(c) => crate::Message::to_test_case_string(c),

@@ -203,3 +203,90 @@ smsg SMSG_UPDATE_OBJECT = 0x0A9 {
     Object[amount_of_objects] objects;
 }
 
+test SMSG_UPDATE_OBJECT {
+    objects = [
+        {
+            update_type = CREATE_OBJECT2;
+            guid3 = 8;
+            object_type = PLAYER;
+            movement2 = {
+                update_flag = LIVING | SELF;
+                flags = NONE;
+                timestamp = 0;
+                position = {
+                    x = -8949.95;
+                    y = -132.493;
+                    z = 83.5312;
+                };
+                orientation = 0.0;
+                fall_time = 0;
+                walking_speed = 1.0;
+                running_speed = 70.0;
+                backwards_running_speed = 4.5;
+                swimming_speed = 0.0;
+                backwards_swimming_speed = 0.0;
+                flight_speed = 0.0;
+                backwards_flight_speed = 0.0;
+                turn_rate = 3.14159;
+                pitch_rate = 0.0;
+            };
+            mask2 = {
+                OBJECT_GUID = 8;
+                OBJECT_TYPE = 0x19;
+                UNIT_FACTIONTEMPLATE = 1;
+                UNIT_DISPLAYID = 0x4D0C;
+                UNIT_NATIVEDISPLAYID = 0x4D0C;
+            };
+        }
+    ];
+} [
+    /* header */
+    0x00, 0x73,            /* size (115) */
+    0xa9, 0x00,            /* opcode (169) */
+    0x01, 0x00, 0x00, 0x00,      /* number of objects */
+
+    /* start of object */
+    0x03,               /* CREATE_OBJECT2 (trinity uses this for creating new objects */
+                     /* and CREATE_OBJECT for existing objects? not sure) */
+    0x01, 0x08,            /* packed guid (id: 8) */
+    0x04,               /* player object type */
+
+    /* movement block */
+    0x21, 0x00,            /* update flag self | update flag living */
+    0x00, 0x00, 0x00, 0x00,      /* movement flags */
+    0x00, 0x00,            /* movement flags cont. */
+    0x00, 0x00, 0x00, 0x00,      /* timestamp (trinity uses unix epoch, caching related?) */
+    0xcd, 0xd7, 0x0b, 0xc6,      /* x pos (-8949.95) */
+    0x35, 0x7e, 0x04, 0xc3,      /* y pos (-132.493) */
+    0xf9, 0x0f, 0xa7, 0x42,      /* z pos (83.5312) */
+    0x00, 0x00, 0x00, 0x00,      /* orientation */
+    0x00, 0x00, 0x00, 0x00,      /* fall time */
+    0x00, 0x00, 0x80, 0x3f,      /* walk speed (1.0f) */
+    0x00, 0x00, 0x8c, 0x42,      /* run speed (70.0f) */
+    0x00, 0x00, 0x90, 0x40,      /* reverse speed (4.5f) */
+    0x00, 0x00, 0x00, 0x00,      /* swim speed (0.0f) */
+    0x00, 0x00, 0x00, 0x00,      /* swim reverse speed (0.0f) */
+    0x00, 0x00, 0x00, 0x00,      /* flight speed (0.0f) */
+    0x00, 0x00, 0x00, 0x00,      /* flight reverse speed (0.0f) */
+    0xd0, 0x0f, 0x49, 0x40,      /* turn speed (3.14159) */
+    0x00, 0x00, 0x00, 0x00,      /* pitch rate (0.0f) */
+
+    /* update/values block */
+    0x03,                /* size of mask (measured in uint32, 3*4 = 12 byte mask) */
+
+    /* mask */
+    0x07, 0x00, 0x00, 0x00,       /* OBJECT_TYPE | OBJECT_GUID (size=2) */
+    0x00, 0x00, 0x80, 0x00,       /* UNIT_FACTIONTEMPLATE */
+    0x18, 0x00, 0x00, 0x00,       /* UNIT_DISPLAYID | UNIT_NATIVEDISPLAYID */
+
+    /* OBJECT_GUID */
+    0x08, 0x00, 0x00, 0x00,       /* low guid (id: 8) */
+    0x00, 0x00, 0x00, 0x00,       /* high guid (2 MSB = 0x0000 for player, haven't tested this much) */
+    /* OBJECT_TYPE */
+    0x19, 0x00, 0x00, 0x00,
+
+    /* not including any of these seems to cause a segfault */
+    0x01, 0x00, 0x00, 0x00,       /* UNIT_FACTIONTEMPLATE (race, 0x1 = human) */
+    0x0c, 0x4d, 0x00, 0x00,       /* UNIT_DISPLAYID (0x4D0C = human female) */
+    0x0c, 0x4d, 0x00, 0x00,       /* UNIT_NATIVEDISPLAYID (same as above) */
+]
