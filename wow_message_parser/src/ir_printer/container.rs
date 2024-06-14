@@ -155,6 +155,8 @@ pub(crate) struct IrPreparedObject {
     name: String,
     #[serde(skip_serializing_if = "Option::is_none")]
     enumerators: Option<BTreeMap<String, Vec<IrPreparedObject>>>,
+    is_elseif_flag: bool,
+    enum_part_of_separate_statements: bool,
 }
 
 pub(crate) fn rust_object_to_prepared_objects(members: &[RustMember]) -> Vec<IrPreparedObject> {
@@ -184,9 +186,20 @@ pub(crate) fn rust_object_to_prepared_objects(members: &[RustMember]) -> Vec<IrP
             _ => None,
         };
 
+        let (enum_part_of_separate_statements, is_elseif_flag) = match m.ty() {
+            RustType::Flag { is_elseif, .. } => (false, *is_elseif),
+            RustType::Enum {
+                separate_if_statements,
+                ..
+            } => (*separate_if_statements, false),
+            _ => (false, false),
+        };
+
         v.push(IrPreparedObject {
             name: m.name().to_string(),
             enumerators,
+            is_elseif_flag,
+            enum_part_of_separate_statements,
         });
     }
 

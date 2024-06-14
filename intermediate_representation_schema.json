@@ -343,6 +343,12 @@
             "description": "Name inside the object. Search through the original object to get type and other information."
           },
           "type": "string"
+        },
+        "is_elseif_flag": {
+          "type": "boolean"
+        },
+        "enum_part_of_separate_statements": {
+          "type": "boolean"
         }
       },
       "optionalProperties": {
