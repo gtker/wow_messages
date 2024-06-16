@@ -361,6 +361,9 @@
               "ref": "prepared_object"
             }
           }
+        },
+        "definer_type": {
+          "ref": "definer_type"
         }
       }
     },
@@ -1141,10 +1144,7 @@
           "type": "string"
         },
         "definer_type": {
-          "enum": [
-            "Flag",
-            "Enum"
-          ]
+          "ref": "definer_type"
         },
         "values": {
           "elements": {

@@ -157,6 +157,8 @@ pub(crate) struct IrPreparedObject {
     enumerators: Option<BTreeMap<String, Vec<IrPreparedObject>>>,
     is_elseif_flag: bool,
     enum_part_of_separate_statements: bool,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    definer_type: Option<IrDefinerType>,
 }
 
 pub(crate) fn rust_object_to_prepared_objects(members: &[RustMember]) -> Vec<IrPreparedObject> {
@@ -200,6 +202,11 @@ pub(crate) fn rust_object_to_prepared_objects(members: &[RustMember]) -> Vec<IrP
             enumerators,
             is_elseif_flag,
             enum_part_of_separate_statements,
+            definer_type: if let Some(dt) = m.definer_type() {
+                Some(IrDefinerType::from_definer_type(dt))
+            } else {
+                None
+            },
         });
     }
 

@@ -3,6 +3,7 @@ use crate::parser::types::struct_member::StructMember;
 use crate::parser::types::tags::MemberTags;
 use crate::rust_printer::rust_view::rust_enumerator::RustEnumerator;
 use crate::rust_printer::rust_view::rust_type::RustType;
+use crate::rust_printer::DefinerType;
 
 #[derive(Debug, Clone)]
 pub(crate) struct RustMember {
@@ -32,6 +33,14 @@ impl RustMember {
     }
     pub(crate) fn is_constant(&self) -> Option<i128> {
         self.ty().is_constant()
+    }
+
+    pub(crate) fn definer_type(&self) -> Option<DefinerType> {
+        match self.ty {
+            RustType::Enum { .. } => Some(DefinerType::Enum),
+            RustType::Flag { .. } => Some(DefinerType::Flag),
+            _ => None,
+        }
     }
 
     pub(crate) fn is_single_rust_definer(&self) -> bool {
