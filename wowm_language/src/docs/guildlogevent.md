@@ -13,8 +13,8 @@ struct GuildLogEvent {
         || event == LEFT) {
         Guid player2;
     }
-    else if (event == PROMOTE_PLAYER
-        || event == DEMOTE_PLAYER) {
+    else if (event == PROMOTION
+        || event == DEMOTION) {
         u8 new_rank;
     }
     u32 unix_time;
@@ -34,8 +34,8 @@ is equal to `LEFT`:
 | ------ | ----------------- | ---- | ---- | ------- |
 | 0x09 | 8 / Little | [Guid](../types/packed-guid.md) | player2 |  |
 
-Else If event is equal to `PROMOTE_PLAYER` **or** 
-is equal to `DEMOTE_PLAYER`:
+Else If event is equal to `PROMOTION` **or** 
+is equal to `DEMOTION`:
 
 | Offset | Size / Endianness | Type | Name | Comment |
 | ------ | ----------------- | ---- | ---- | ------- |

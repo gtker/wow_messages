@@ -669,7 +669,7 @@ enum SpellEffect : u32 {
     SUMMON_PET = 56;
     LEARN_PET_SPELL = 57;
     WEAPON_DAMAGE = 58;
-    CREATE_RANDOM_ITEM = 59;
+    OPEN_LOCK_ITEM = 59;
     PROFICIENCY = 60;
     SEND_EVENT = 61;
     POWER_BURN = 62;
@@ -767,7 +767,7 @@ enum SpellEffect : u32 {
     TEACH_TAXI_NODE = 154;
     TITAN_GRIP = 155;
     ENCHANT_ITEM_PRISMATIC = 156;
-    CREATE_ITEM_2 = 157;
+    CREATE_ITEM2 = 157;
     MILLING = 158;
     ALLOW_RENAME_PET = 159;
     UNKNOWN160 = 160;
@@ -841,7 +841,7 @@ The basic type is `u32`, a 4 byte (32 bit) little endian integer.
 | `SUMMON_PET` | 56 (0x38) |  |
 | `LEARN_PET_SPELL` | 57 (0x39) |  |
 | `WEAPON_DAMAGE` | 58 (0x3A) |  |
-| `CREATE_RANDOM_ITEM` | 59 (0x3B) |  |
+| `OPEN_LOCK_ITEM` | 59 (0x3B) |  |
 | `PROFICIENCY` | 60 (0x3C) |  |
 | `SEND_EVENT` | 61 (0x3D) |  |
 | `POWER_BURN` | 62 (0x3E) |  |
@@ -939,7 +939,7 @@ The basic type is `u32`, a 4 byte (32 bit) little endian integer.
 | `TEACH_TAXI_NODE` | 154 (0x9A) |  |
 | `TITAN_GRIP` | 155 (0x9B) |  |
 | `ENCHANT_ITEM_PRISMATIC` | 156 (0x9C) |  |
-| `CREATE_ITEM_2` | 157 (0x9D) |  |
+| `CREATE_ITEM2` | 157 (0x9D) |  |
 | `MILLING` | 158 (0x9E) |  |
 | `ALLOW_RENAME_PET` | 159 (0x9F) |  |
 | `UNKNOWN160` | 160 (0xA0) |  |

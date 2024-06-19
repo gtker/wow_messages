@@ -135,6 +135,11 @@ impl crate::Message for SMSG_SPELLLOGEXECUTE {
                 } => {
                     writeln!(s, "            summon_target = {};", summon_target.guid()).unwrap();
                 }
+                crate::wrath::SpellLog::OpenLockItem {
+                    lock_target,
+                } => {
+                    writeln!(s, "            lock_target = {};", lock_target.guid()).unwrap();
+                }
                 crate::wrath::SpellLog::InterruptCast {
                     interrupted_spell,
                     target5,
@@ -200,6 +205,11 @@ impl crate::Message for SMSG_SPELLLOGEXECUTE {
                     resurrect_guid,
                 } => {
                     writeln!(s, "            resurrect_guid = {};", resurrect_guid.guid()).unwrap();
+                }
+                crate::wrath::SpellLog::CreateItem2 {
+                    item,
+                } => {
+                    writeln!(s, "            item = {};", item).unwrap();
                 }
                 _ => {}
             }
@@ -277,6 +287,11 @@ impl crate::Message for SMSG_SPELLLOGEXECUTE {
                     } => {
                         crate::util::write_bytes(&mut s, &mut bytes, crate::util::packed_guid_size(&summon_target), "summon_target", "        ");
                     }
+                    crate::wrath::SpellLog::OpenLockItem {
+                        lock_target,
+                    } => {
+                        crate::util::write_bytes(&mut s, &mut bytes, crate::util::packed_guid_size(&lock_target), "lock_target", "        ");
+                    }
                     crate::wrath::SpellLog::InterruptCast {
                         interrupted_spell,
                         target5,
@@ -342,6 +357,11 @@ impl crate::Message for SMSG_SPELLLOGEXECUTE {
                         resurrect_guid,
                     } => {
                         crate::util::write_bytes(&mut s, &mut bytes, crate::util::packed_guid_size(&resurrect_guid), "resurrect_guid", "        ");
+                    }
+                    crate::wrath::SpellLog::CreateItem2 {
+                        item,
+                    } => {
+                        crate::util::write_bytes(&mut s, &mut bytes, 4, "item", "        ");
                     }
                     _ => {}
                 }

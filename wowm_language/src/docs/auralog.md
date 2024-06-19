@@ -172,7 +172,7 @@ struct AuraLog {
         u32 absorb2;
         Bool critical2;
     }
-    else if (aura_type == OBS_MOD_MANA
+    else if (aura_type == OBS_MOD_POWER
         || aura_type == PERIODIC_ENERGIZE) {
         u32 misc_value1;
         u32 damage3;
@@ -212,7 +212,7 @@ is equal to `OBS_MOD_HEALTH`:
 | 0x1E | 4 / Little | u32 | absorb2 |  |
 | 0x22 | 1 / - | Bool | critical2 | new 3.1.2 critical tick |
 
-Else If aura_type is equal to `OBS_MOD_MANA` **or** 
+Else If aura_type is equal to `OBS_MOD_POWER` **or** 
 is equal to `PERIODIC_ENERGIZE`:
 
 | Offset | Size / Endianness | Type | Name | Comment |

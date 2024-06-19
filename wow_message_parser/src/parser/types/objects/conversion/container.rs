@@ -215,29 +215,10 @@ fn parsed_member_to_member(
             let member = c.get_field_ty(s.variable_name()).str();
             let definer = get_definer(definers, &member, c.tags()).unwrap();
 
-            match s.equation() {
-                Equation::Equals { values: value } | Equation::BitwiseAnd { values: value } => {
-                    for v in value {
-                        if definer.get_field_with_name(v).is_none() {
-                            variable_in_if_not_found(
-                                s.variable_name(),
-                                v,
-                                &c.file_info,
-                                definer.name(),
-                            );
-                        }
-                    }
-                }
-                Equation::NotEquals { value } => {
-                    if definer.get_field_with_name(value).is_none() {
-                        variable_in_if_not_found(
-                            s.variable_name(),
-                            value,
-                            &c.file_info,
-                            definer.name(),
-                        );
-                    }
-                }
+            validate_equation(&c, &s, definer);
+
+            for elseif in s.else_ifs() {
+                validate_equation(&c, &elseif, definer);
             }
 
             let separate_if_statement =
@@ -265,6 +246,23 @@ fn parsed_member_to_member(
                 o.name,
                 parsed_members_to_members(c, o.members, containers, definers, tags, None),
             ))
+        }
+    }
+}
+
+fn validate_equation(c: &&ParsedContainer, s: &ParsedIfStatement, definer: &Definer) {
+    match s.equation() {
+        Equation::Equals { values: value } | Equation::BitwiseAnd { values: value } => {
+            for v in value {
+                if definer.get_field_with_name(v).is_none() {
+                    variable_in_if_not_found(s.variable_name(), v, &c.file_info, definer.name());
+                }
+            }
+        }
+        Equation::NotEquals { value } => {
+            if definer.get_field_with_name(value).is_none() {
+                variable_in_if_not_found(s.variable_name(), value, &c.file_info, definer.name());
+            }
         }
     }
 }

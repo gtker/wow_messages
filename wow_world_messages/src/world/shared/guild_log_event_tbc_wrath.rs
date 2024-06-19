@@ -12,8 +12,8 @@ use wow_world_base::shared::guild_event_tbc_wrath::GuildEvent;
 ///         || event == LEFT) {
 ///         Guid player2;
 ///     }
-///     else if (event == PROMOTE_PLAYER
-///         || event == DEMOTE_PLAYER) {
+///     else if (event == PROMOTION
+///         || event == DEMOTION) {
 ///         u8 new_rank;
 ///     }
 ///     u32 unix_time;
@@ -35,6 +35,20 @@ impl GuildLogEvent {
         w.write_all(&self.player1.guid().to_le_bytes())?;
 
         match &self.event {
+            GuildLogEvent_GuildEvent::Promotion {
+                new_rank,
+            } => {
+                // new_rank: u8
+                w.write_all(&new_rank.to_le_bytes())?;
+
+            }
+            GuildLogEvent_GuildEvent::Demotion {
+                new_rank,
+            } => {
+                // new_rank: u8
+                w.write_all(&new_rank.to_le_bytes())?;
+
+            }
             GuildLogEvent_GuildEvent::Joined {
                 player2,
             } => {
@@ -68,8 +82,22 @@ impl GuildLogEvent {
         let player1 = crate::util::read_guid(&mut r)?;
 
         let event_if = match event {
-            GuildEvent::Promotion => GuildLogEvent_GuildEvent::Promotion,
-            GuildEvent::Demotion => GuildLogEvent_GuildEvent::Demotion,
+            GuildEvent::Promotion => {
+                // new_rank: u8
+                let new_rank = crate::util::read_u8_le(&mut r)?;
+
+                GuildLogEvent_GuildEvent::Promotion {
+                    new_rank,
+                }
+            }
+            GuildEvent::Demotion => {
+                // new_rank: u8
+                let new_rank = crate::util::read_u8_le(&mut r)?;
+
+                GuildLogEvent_GuildEvent::Demotion {
+                    new_rank,
+                }
+            }
             GuildEvent::Motd => GuildLogEvent_GuildEvent::Motd,
             GuildEvent::Joined => {
                 // player2: Guid
@@ -126,8 +154,12 @@ impl GuildLogEvent {
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord)]
 pub enum GuildLogEvent_GuildEvent {
-    Promotion,
-    Demotion,
+    Promotion {
+        new_rank: u8,
+    },
+    Demotion {
+        new_rank: u8,
+    },
     Motd,
     Joined {
         player2: Guid,
@@ -155,15 +187,15 @@ pub enum GuildLogEvent_GuildEvent {
 impl Default for GuildLogEvent_GuildEvent {
     fn default() -> Self {
         // First enumerator without any fields
-        Self::Promotion
+        Self::Motd
     }
 }
 
 impl GuildLogEvent_GuildEvent {
     pub(crate) const fn as_int(&self) -> u8 {
         match self {
-            Self::Promotion => 0,
-            Self::Demotion => 1,
+            Self::Promotion { .. } => 0,
+            Self::Demotion { .. } => 1,
             Self::Motd => 2,
             Self::Joined { .. } => 3,
             Self::Left { .. } => 4,
@@ -190,8 +222,8 @@ impl GuildLogEvent_GuildEvent {
 impl std::fmt::Display for GuildLogEvent_GuildEvent {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match self {
-            Self::Promotion => f.write_str("Promotion"),
-            Self::Demotion => f.write_str("Demotion"),
+            Self::Promotion{ .. } => f.write_str("Promotion"),
+            Self::Demotion{ .. } => f.write_str("Demotion"),
             Self::Motd => f.write_str("Motd"),
             Self::Joined{ .. } => f.write_str("Joined"),
             Self::Left{ .. } => f.write_str("Left"),
@@ -217,6 +249,18 @@ impl std::fmt::Display for GuildLogEvent_GuildEvent {
 impl GuildLogEvent_GuildEvent {
     pub(crate) const fn size(&self) -> usize {
         match self {
+            Self::Promotion {
+                ..
+            } => {
+                1
+                + 1 // new_rank: u8
+            }
+            Self::Demotion {
+                ..
+            } => {
+                1
+                + 1 // new_rank: u8
+            }
             Self::Joined {
                 ..
             } => {

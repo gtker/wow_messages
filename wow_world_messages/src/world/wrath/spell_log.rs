@@ -142,7 +142,9 @@ pub enum SpellLog {
     },
     LearnPetSpell,
     WeaponDamage,
-    CreateRandomItem,
+    OpenLockItem {
+        lock_target: Guid,
+    },
     Proficiency,
     SendEvent,
     PowerBurn,
@@ -267,7 +269,9 @@ pub enum SpellLog {
     TeachTaxiNode,
     TitanGrip,
     EnchantItemPrismatic,
-    CreateItem2,
+    CreateItem2 {
+        item: u32,
+    },
     Milling,
     AllowRenamePet,
     Unknown160,
@@ -372,6 +376,13 @@ impl SpellLog {
                 crate::util::write_packed_guid(&summon_target, &mut w)?;
 
             }
+            SpellLog::OpenLockItem {
+                lock_target,
+            } => {
+                // lock_target: PackedGuid
+                crate::util::write_packed_guid(&lock_target, &mut w)?;
+
+            }
             SpellLog::InterruptCast {
                 interrupted_spell,
                 target5,
@@ -466,6 +477,13 @@ impl SpellLog {
             } => {
                 // resurrect_guid: PackedGuid
                 crate::util::write_packed_guid(&resurrect_guid, &mut w)?;
+
+            }
+            SpellLog::CreateItem2 {
+                item,
+            } => {
+                // item: Item
+                w.write_all(&item.to_le_bytes())?;
 
             }
             _ => {}
@@ -616,7 +634,14 @@ impl SpellLog {
             }
             SpellEffect::LearnPetSpell => SpellLog::LearnPetSpell,
             SpellEffect::WeaponDamage => SpellLog::WeaponDamage,
-            SpellEffect::CreateRandomItem => SpellLog::CreateRandomItem,
+            SpellEffect::OpenLockItem => {
+                // lock_target: PackedGuid
+                let lock_target = crate::util::read_packed_guid(&mut r)?;
+
+                SpellLog::OpenLockItem {
+                    lock_target,
+                }
+            }
             SpellEffect::Proficiency => SpellLog::Proficiency,
             SpellEffect::SendEvent => SpellLog::SendEvent,
             SpellEffect::PowerBurn => SpellLog::PowerBurn,
@@ -810,7 +835,14 @@ impl SpellLog {
             SpellEffect::TeachTaxiNode => SpellLog::TeachTaxiNode,
             SpellEffect::TitanGrip => SpellLog::TitanGrip,
             SpellEffect::EnchantItemPrismatic => SpellLog::EnchantItemPrismatic,
-            SpellEffect::CreateItem2 => SpellLog::CreateItem2,
+            SpellEffect::CreateItem2 => {
+                // item: Item
+                let item = crate::util::read_u32_le(&mut r)?;
+
+                SpellLog::CreateItem2 {
+                    item,
+                }
+            }
             SpellEffect::Milling => SpellLog::Milling,
             SpellEffect::AllowRenamePet => SpellLog::AllowRenamePet,
             SpellEffect::Unknown160 => SpellLog::Unknown160,
@@ -881,6 +913,12 @@ impl SpellLog {
             } => {
                 4
                 + crate::util::packed_guid_size(&summon_target) // summon_target: PackedGuid
+            }
+            Self::OpenLockItem {
+                lock_target,
+            } => {
+                4
+                + crate::util::packed_guid_size(&lock_target) // lock_target: PackedGuid
             }
             Self::InterruptCast {
                 target5,
@@ -959,6 +997,12 @@ impl SpellLog {
                 4
                 + crate::util::packed_guid_size(&resurrect_guid) // resurrect_guid: PackedGuid
             }
+            Self::CreateItem2 {
+                ..
+            } => {
+                4
+                + 4 // item: Item
+            }
             _ => 4,
         }) // effect: SpellLog
         + 4 // amount_of_logs: u32
@@ -1034,7 +1078,7 @@ impl SpellLog {
             Self::SummonPet { .. } => 56,
             Self::LearnPetSpell => 57,
             Self::WeaponDamage => 58,
-            Self::CreateRandomItem => 59,
+            Self::OpenLockItem { .. } => 59,
             Self::Proficiency => 60,
             Self::SendEvent => 61,
             Self::PowerBurn => 62,
@@ -1132,7 +1176,7 @@ impl SpellLog {
             Self::TeachTaxiNode => 154,
             Self::TitanGrip => 155,
             Self::EnchantItemPrismatic => 156,
-            Self::CreateItem2 => 157,
+            Self::CreateItem2 { .. } => 157,
             Self::Milling => 158,
             Self::AllowRenamePet => 159,
             Self::Unknown160 => 160,
@@ -1207,7 +1251,7 @@ impl std::fmt::Display for SpellLog {
             Self::SummonPet{ .. } => f.write_str("SummonPet"),
             Self::LearnPetSpell => f.write_str("LearnPetSpell"),
             Self::WeaponDamage => f.write_str("WeaponDamage"),
-            Self::CreateRandomItem => f.write_str("CreateRandomItem"),
+            Self::OpenLockItem{ .. } => f.write_str("OpenLockItem"),
             Self::Proficiency => f.write_str("Proficiency"),
             Self::SendEvent => f.write_str("SendEvent"),
             Self::PowerBurn => f.write_str("PowerBurn"),
@@ -1305,7 +1349,7 @@ impl std::fmt::Display for SpellLog {
             Self::TeachTaxiNode => f.write_str("TeachTaxiNode"),
             Self::TitanGrip => f.write_str("TitanGrip"),
             Self::EnchantItemPrismatic => f.write_str("EnchantItemPrismatic"),
-            Self::CreateItem2 => f.write_str("CreateItem2"),
+            Self::CreateItem2{ .. } => f.write_str("CreateItem2"),
             Self::Milling => f.write_str("Milling"),
             Self::AllowRenamePet => f.write_str("AllowRenamePet"),
             Self::Unknown160 => f.write_str("Unknown160"),

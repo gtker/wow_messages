@@ -60,7 +60,7 @@
 ///     SUMMON_PET = 56;
 ///     LEARN_PET_SPELL = 57;
 ///     WEAPON_DAMAGE = 58;
-///     CREATE_RANDOM_ITEM = 59;
+///     OPEN_LOCK_ITEM = 59;
 ///     PROFICIENCY = 60;
 ///     SEND_EVENT = 61;
 ///     POWER_BURN = 62;
@@ -158,7 +158,7 @@
 ///     TEACH_TAXI_NODE = 154;
 ///     TITAN_GRIP = 155;
 ///     ENCHANT_ITEM_PRISMATIC = 156;
-///     CREATE_ITEM_2 = 157;
+///     CREATE_ITEM2 = 157;
 ///     MILLING = 158;
 ///     ALLOW_RENAME_PET = 159;
 ///     UNKNOWN160 = 160;
@@ -230,7 +230,7 @@ pub enum SpellEffect {
     SummonPet,
     LearnPetSpell,
     WeaponDamage,
-    CreateRandomItem,
+    OpenLockItem,
     Proficiency,
     SendEvent,
     PowerBurn,
@@ -401,7 +401,7 @@ impl SpellEffect {
             Self::SummonPet => 0x38,
             Self::LearnPetSpell => 0x39,
             Self::WeaponDamage => 0x3a,
-            Self::CreateRandomItem => 0x3b,
+            Self::OpenLockItem => 0x3b,
             Self::Proficiency => 0x3c,
             Self::SendEvent => 0x3d,
             Self::PowerBurn => 0x3e,
@@ -571,7 +571,7 @@ impl SpellEffect {
             Self::SummonPet,
             Self::LearnPetSpell,
             Self::WeaponDamage,
-            Self::CreateRandomItem,
+            Self::OpenLockItem,
             Self::Proficiency,
             Self::SendEvent,
             Self::PowerBurn,
@@ -741,7 +741,7 @@ impl SpellEffect {
             56 => Ok(Self::SummonPet),
             57 => Ok(Self::LearnPetSpell),
             58 => Ok(Self::WeaponDamage),
-            59 => Ok(Self::CreateRandomItem),
+            59 => Ok(Self::OpenLockItem),
             60 => Ok(Self::Proficiency),
             61 => Ok(Self::SendEvent),
             62 => Ok(Self::PowerBurn),
@@ -915,7 +915,7 @@ impl SpellEffect {
             Self::SummonPet => "SUMMON_PET",
             Self::LearnPetSpell => "LEARN_PET_SPELL",
             Self::WeaponDamage => "WEAPON_DAMAGE",
-            Self::CreateRandomItem => "CREATE_RANDOM_ITEM",
+            Self::OpenLockItem => "OPEN_LOCK_ITEM",
             Self::Proficiency => "PROFICIENCY",
             Self::SendEvent => "SEND_EVENT",
             Self::PowerBurn => "POWER_BURN",
@@ -1013,7 +1013,7 @@ impl SpellEffect {
             Self::TeachTaxiNode => "TEACH_TAXI_NODE",
             Self::TitanGrip => "TITAN_GRIP",
             Self::EnchantItemPrismatic => "ENCHANT_ITEM_PRISMATIC",
-            Self::CreateItem2 => "CREATE_ITEM_2",
+            Self::CreateItem2 => "CREATE_ITEM2",
             Self::Milling => "MILLING",
             Self::AllowRenamePet => "ALLOW_RENAME_PET",
             Self::Unknown160 => "UNKNOWN160",
@@ -1096,7 +1096,7 @@ impl std::fmt::Display for SpellEffect {
             Self::SummonPet => f.write_str("SummonPet"),
             Self::LearnPetSpell => f.write_str("LearnPetSpell"),
             Self::WeaponDamage => f.write_str("WeaponDamage"),
-            Self::CreateRandomItem => f.write_str("CreateRandomItem"),
+            Self::OpenLockItem => f.write_str("OpenLockItem"),
             Self::Proficiency => f.write_str("Proficiency"),
             Self::SendEvent => f.write_str("SendEvent"),
             Self::PowerBurn => f.write_str("PowerBurn"),

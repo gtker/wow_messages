@@ -68,6 +68,16 @@ impl crate::Message for MSG_GUILD_EVENT_LOG_QUERY_Server {
             writeln!(s, "            event = {};", GuildEvent::try_from(v.event.as_int()).unwrap().as_test_case_value()).unwrap();
             writeln!(s, "            player1 = {};", v.player1.guid()).unwrap();
             match &v.event {
+                crate::shared::guild_log_event_tbc_wrath::GuildLogEvent_GuildEvent::Promotion {
+                    new_rank,
+                } => {
+                    writeln!(s, "            new_rank = {};", new_rank).unwrap();
+                }
+                crate::shared::guild_log_event_tbc_wrath::GuildLogEvent_GuildEvent::Demotion {
+                    new_rank,
+                } => {
+                    writeln!(s, "            new_rank = {};", new_rank).unwrap();
+                }
                 crate::shared::guild_log_event_tbc_wrath::GuildLogEvent_GuildEvent::Joined {
                     player2,
                 } => {
@@ -105,6 +115,16 @@ impl crate::Message for MSG_GUILD_EVENT_LOG_QUERY_Server {
                 crate::util::write_bytes(&mut s, &mut bytes, 1, "event", "        ");
                 crate::util::write_bytes(&mut s, &mut bytes, 8, "player1", "        ");
                 match &v.event {
+                    crate::shared::guild_log_event_tbc_wrath::GuildLogEvent_GuildEvent::Promotion {
+                        new_rank,
+                    } => {
+                        crate::util::write_bytes(&mut s, &mut bytes, 1, "new_rank", "        ");
+                    }
+                    crate::shared::guild_log_event_tbc_wrath::GuildLogEvent_GuildEvent::Demotion {
+                        new_rank,
+                    } => {
+                        crate::util::write_bytes(&mut s, &mut bytes, 1, "new_rank", "        ");
+                    }
                     crate::shared::guild_log_event_tbc_wrath::GuildLogEvent_GuildEvent::Joined {
                         player2,
                     } => {

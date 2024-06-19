@@ -974,7 +974,7 @@ struct AuraLog {
         u32 absorb2;
         /// new 3.1.2 critical tick
         Bool critical2;
-    } else if (aura_type == OBS_MOD_MANA
+    } else if (aura_type == OBS_MOD_POWER
             || aura_type == PERIODIC_ENERGIZE)
     {
         /// vmangos: A miscvalue that is dependent on what the aura will do, this is usually decided by the AuraType, ie: with AuraType::SPELL_AURA_MOD_BASE_RESISTANCE_PCT this value could be SpellSchoolMask::SPELL_SCHOOL_MASK_NORMAL which would tell the aura that it should change armor.  If Modifier::m_auraname would have been AuraType::SPELL_AURA_MOUNTED then m_miscvalue would have decided which model the mount should have

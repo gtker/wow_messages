@@ -24,7 +24,7 @@ use crate::wrath::{
 ///         u32 absorb2;
 ///         Bool critical2;
 ///     }
-///     else if (aura_type == OBS_MOD_MANA
+///     else if (aura_type == OBS_MOD_POWER
 ///         || aura_type == PERIODIC_ENERGIZE) {
 ///         u32 misc_value1;
 ///         u32 damage3;
@@ -76,7 +76,10 @@ pub enum AuraLog {
         damage2: u32,
         over_damage: u32,
     },
-    ObsModPower,
+    ObsModPower {
+        damage3: u32,
+        misc_value1: u32,
+    },
     ModResistance,
     PeriodicTriggerSpell,
     PeriodicEnergize {
@@ -459,6 +462,17 @@ impl AuraLog {
                 w.write_all(u8::from(*critical2).to_le_bytes().as_slice())?;
 
             }
+            AuraLog::ObsModPower {
+                damage3,
+                misc_value1,
+            } => {
+                // misc_value1: u32
+                w.write_all(&misc_value1.to_le_bytes())?;
+
+                // damage3: u32
+                w.write_all(&damage3.to_le_bytes())?;
+
+            }
             AuraLog::PeriodicEnergize {
                 damage3,
                 misc_value1,
@@ -611,7 +625,18 @@ impl AuraLog {
                     over_damage,
                 }
             }
-            AuraType::ObsModPower => AuraLog::ObsModPower,
+            AuraType::ObsModPower => {
+                // misc_value1: u32
+                let misc_value1 = crate::util::read_u32_le(&mut r)?;
+
+                // damage3: u32
+                let damage3 = crate::util::read_u32_le(&mut r)?;
+
+                AuraLog::ObsModPower {
+                    damage3,
+                    misc_value1,
+                }
+            }
             AuraType::ModResistance => AuraLog::ModResistance,
             AuraType::PeriodicTriggerSpell => AuraLog::PeriodicTriggerSpell,
             AuraType::PeriodicEnergize => {
@@ -999,6 +1024,13 @@ impl AuraLog {
                 + 4 // damage2: u32
                 + 4 // over_damage: u32
             }
+            Self::ObsModPower {
+                ..
+            } => {
+                4
+                + 4 // damage3: u32
+                + 4 // misc_value1: u32
+            }
             Self::PeriodicEnergize {
                 ..
             } => {
@@ -1061,7 +1093,7 @@ impl AuraLog {
             Self::ModInvisibility => 18,
             Self::ModInvisibilityDetect => 19,
             Self::ObsModHealth { .. } => 20,
-            Self::ObsModPower => 21,
+            Self::ObsModPower { .. } => 21,
             Self::ModResistance => 22,
             Self::PeriodicTriggerSpell => 23,
             Self::PeriodicEnergize { .. } => 24,
@@ -1386,7 +1418,7 @@ impl std::fmt::Display for AuraLog {
             Self::ModInvisibility => f.write_str("ModInvisibility"),
             Self::ModInvisibilityDetect => f.write_str("ModInvisibilityDetect"),
             Self::ObsModHealth{ .. } => f.write_str("ObsModHealth"),
-            Self::ObsModPower => f.write_str("ObsModPower"),
+            Self::ObsModPower{ .. } => f.write_str("ObsModPower"),
             Self::ModResistance => f.write_str("ModResistance"),
             Self::PeriodicTriggerSpell => f.write_str("PeriodicTriggerSpell"),
             Self::PeriodicEnergize{ .. } => f.write_str("PeriodicEnergize"),

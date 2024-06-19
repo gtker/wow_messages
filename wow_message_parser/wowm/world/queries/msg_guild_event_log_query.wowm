@@ -14,8 +14,8 @@ struct GuildLogEvent {
     {
         Guid player2;
     }
-    else if (event == PROMOTE_PLAYER
-          || event == DEMOTE_PLAYER)
+    else if (event == PROMOTION
+          || event == DEMOTION)
     {
         u8 new_rank;
     }

@@ -131,6 +131,13 @@ impl crate::Message for SMSG_PERIODICAURALOG {
                     writeln!(s, "            absorb2 = {};", absorb2).unwrap();
                     writeln!(s, "            critical2 = {};", if *critical2 { "TRUE" } else { "FALSE" }).unwrap();
                 }
+                crate::wrath::AuraLog::ObsModPower {
+                    damage3,
+                    misc_value1,
+                } => {
+                    writeln!(s, "            misc_value1 = {};", misc_value1).unwrap();
+                    writeln!(s, "            damage3 = {};", damage3).unwrap();
+                }
                 crate::wrath::AuraLog::PeriodicEnergize {
                     damage3,
                     misc_value1,
@@ -226,6 +233,13 @@ impl crate::Message for SMSG_PERIODICAURALOG {
                         crate::util::write_bytes(&mut s, &mut bytes, 4, "over_damage", "        ");
                         crate::util::write_bytes(&mut s, &mut bytes, 4, "absorb2", "        ");
                         crate::util::write_bytes(&mut s, &mut bytes, 1, "critical2", "        ");
+                    }
+                    crate::wrath::AuraLog::ObsModPower {
+                        damage3,
+                        misc_value1,
+                    } => {
+                        crate::util::write_bytes(&mut s, &mut bytes, 4, "misc_value1", "        ");
+                        crate::util::write_bytes(&mut s, &mut bytes, 4, "damage3", "        ");
                     }
                     crate::wrath::AuraLog::PeriodicEnergize {
                         damage3,
