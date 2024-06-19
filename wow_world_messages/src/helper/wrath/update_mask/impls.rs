@@ -2144,7 +2144,7 @@ impl UpdatePlayerBuilder {
         self
     }
 
-    pub fn set_player_bytes2(mut self, a: u8, b: u8, c: u8, d: u8) -> Self {
+    pub fn set_player_bytes2_glow(mut self, a: u8, b: u8, c: u8, d: u8) -> Self {
         self.set_bytes(1229, a, b, c, d);
         self
     }
@@ -5811,11 +5811,11 @@ impl UpdatePlayer {
         self.get_int(1228)
     }
 
-    pub fn set_player_bytes2(&mut self, a: u8, b: u8, c: u8, d: u8) {
+    pub fn set_player_bytes2_glow(&mut self, a: u8, b: u8, c: u8, d: u8) {
         self.set_bytes(1229, a, b, c, d);
     }
 
-    pub fn player_bytes2(&self) -> Option<(u8, u8, u8, u8)> {
+    pub fn player_bytes2_glow(&self) -> Option<(u8, u8, u8, u8)> {
         self.get_bytes(1229)
     }
 

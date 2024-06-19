@@ -2043,7 +2043,7 @@ pub(crate) const FIELDS: &[UpdateMaskMember] = &[
     ),
     UpdateMaskMember::new(
         UpdateMaskObjectType::Player,
-        "BYTES2",
+        "BYTES2_GLOW",
         0x04cd,
         1,
         UpdateMaskDataType::bytes(),
