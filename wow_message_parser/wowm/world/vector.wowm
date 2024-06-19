@@ -1,4 +1,4 @@
-#tag_all versions "1 2 3";
+#tag_all versions "*";
 #tag_all rust_base_type "true";
 
 struct Vector3d {

@@ -2,7 +2,9 @@ use std::collections::BTreeSet;
 use std::fmt::Write;
 
 use crate::file_utils::{get_import_path, get_shared_module_name};
-use crate::parser::types::version::{AllRustVersions, AllVersions, MajorWorldVersion, Version};
+use crate::parser::types::version::{
+    AllRustVersions, AllVersions, MajorWorldVersion, Version, TBC, VANILLA, WRATH,
+};
 use crate::parser::types::version::{LoginVersion, WorldVersion};
 use crate::Objects;
 
@@ -40,6 +42,12 @@ impl ObjectTags {
             AllVersions::Login(l) => Some(AllRustVersions::Login(l.clone())),
             AllVersions::World(l) => {
                 let mut b = BTreeSet::new();
+                if l.contains(&WorldVersion::All) {
+                    b.insert(MajorWorldVersion::Vanilla);
+                    b.insert(MajorWorldVersion::BurningCrusade);
+                    b.insert(MajorWorldVersion::Wrath);
+                }
+
                 for v in l {
                     if let Some(v) = v.try_as_major_world() {
                         b.insert(v);
@@ -158,7 +166,17 @@ impl ObjectTags {
 
     pub(crate) fn world_versions(&self) -> impl Iterator<Item = WorldVersion> {
         match &self.all_versions {
-            AllVersions::World(w) => w.clone().into_iter(),
+            AllVersions::World(w) => {
+                if w.contains(&WorldVersion::All) {
+                    let mut w = BTreeSet::new();
+                    w.insert(VANILLA);
+                    w.insert(TBC);
+                    w.insert(WRATH);
+                    w.into_iter()
+                } else {
+                    w.clone().into_iter()
+                }
+            }
             AllVersions::Login(_) => BTreeSet::new().into_iter(),
         }
     }

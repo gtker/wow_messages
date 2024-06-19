@@ -5,9 +5,9 @@ use core::option::Option;
 use core::option::Option::Some;
 use std::collections::BTreeSet;
 
-const VANILLA: WorldVersion = WorldVersion::Minor(1, 12);
-const TBC: WorldVersion = WorldVersion::Exact(2, 4, 3, 8606);
-const WRATH: WorldVersion = WorldVersion::Exact(3, 3, 5, 12340);
+pub(crate) const VANILLA: WorldVersion = WorldVersion::Minor(1, 12);
+pub(crate) const TBC: WorldVersion = WorldVersion::Exact(2, 4, 3, 8606);
+pub(crate) const WRATH: WorldVersion = WorldVersion::Exact(3, 3, 5, 12340);
 
 #[derive(Debug, Eq, PartialEq, Copy, Clone)]
 pub enum WorldVersion {
