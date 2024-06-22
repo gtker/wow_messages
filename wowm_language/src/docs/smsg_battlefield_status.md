@@ -38,41 +38,6 @@ SMSG have a header of 4 bytes.
 | 0x00   | 2 / Big           | uint16 | size   | Size of the rest of the message including the opcode field but not including the size field.|
 | 0x02   | 2 / Little        | uint16 | opcode | Opcode that determines which fields the message contains.|
 
-### Body
-
-| Offset | Size / Endianness | Type | Name | Comment |
-| ------ | ----------------- | ---- | ---- | ------- |
-| 0x04 | 4 / Little | u32 | queue_slot | vmangos: players can be in 3 queues at the same time (0..2) |
-| 0x08 | 4 / - | [Map](map.md) | map |  |
-
-If map is not equal to `EASTERN_KINGDOMS`:
-
-| Offset | Size / Endianness | Type | Name | Comment |
-| ------ | ----------------- | ---- | ---- | ------- |
-| 0x0C | 1 / - | [BattlegroundBracket](battlegroundbracket.md) | bracket |  |
-| 0x0D | 4 / Little | u32 | client_instance_id |  |
-| 0x11 | 1 / - | [StatusId](statusid.md) | status_id |  |
-
-If status_id is equal to `WAIT_QUEUE`:
-
-| Offset | Size / Endianness | Type | Name | Comment |
-| ------ | ----------------- | ---- | ---- | ------- |
-| 0x12 | 4 / Little | u32 | average_wait_time_in_ms |  |
-| 0x16 | 4 / Little | u32 | time_in_queue_in_ms |  |
-
-Else If status_id is equal to `WAIT_JOIN`:
-
-| Offset | Size / Endianness | Type | Name | Comment |
-| ------ | ----------------- | ---- | ---- | ------- |
-| 0x1A | 4 / Little | u32 | time_to_remove_in_queue_in_ms |  |
-
-Else If status_id is equal to `IN_PROGRESS`:
-
-| Offset | Size / Endianness | Type | Name | Comment |
-| ------ | ----------------- | ---- | ---- | ------- |
-| 0x1E | 4 / Little | u32 | time_to_bg_autoleave_in_ms |  |
-| 0x22 | 4 / Little | u32 | time_to_bg_start_in_ms |  |
-
 ## Client Version 2.4.3
 
 mangosone treats `arena_type`, `unknown1`, `battleground_type_id`, and `unknown2` as one big u64 and does not send any fields after these if all fields are 0.

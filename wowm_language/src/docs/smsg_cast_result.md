@@ -36,36 +36,3 @@ SMSG have a header of 4 bytes.
 | 0x00   | 2 / Big           | uint16 | size   | Size of the rest of the message including the opcode field but not including the size field.|
 | 0x02   | 2 / Little        | uint16 | opcode | Opcode that determines which fields the message contains.|
 
-### Body
-
-| Offset | Size / Endianness | Type | Name | Comment |
-| ------ | ----------------- | ---- | ---- | ------- |
-| 0x04 | 4 / Little | Spell | spell |  |
-| 0x08 | 1 / - | [SimpleSpellCastResult](simplespellcastresult.md) | result |  |
-
-If result is not equal to `FAILURE`:
-
-| Offset | Size / Endianness | Type | Name | Comment |
-| ------ | ----------------- | ---- | ---- | ------- |
-| 0x09 | 1 / - | [CastFailureReason](castfailurereason.md) | reason |  |
-
-If reason is equal to `REQUIRES_SPELL_FOCUS`:
-
-| Offset | Size / Endianness | Type | Name | Comment |
-| ------ | ----------------- | ---- | ---- | ------- |
-| 0x0A | 4 / Little | u32 | required_spell_focus |  |
-
-Else If reason is equal to `REQUIRES_AREA`:
-
-| Offset | Size / Endianness | Type | Name | Comment |
-| ------ | ----------------- | ---- | ---- | ------- |
-| 0x0E | 4 / - | [Area](area.md) | area |  |
-
-Else If reason is equal to `EQUIPPED_ITEM_CLASS`:
-
-| Offset | Size / Endianness | Type | Name | Comment |
-| ------ | ----------------- | ---- | ---- | ------- |
-| 0x12 | 4 / Little | u32 | equipped_item_class |  |
-| 0x16 | 4 / Little | u32 | equipped_item_subclass_mask |  |
-| 0x1A | 4 / Little | u32 | equipped_item_inventory_type_mask |  |
-

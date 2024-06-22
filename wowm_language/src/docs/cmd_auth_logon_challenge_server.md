@@ -111,33 +111,6 @@ Login messages have a header of 1 byte with an opcode. Some messages also have a
 | ------ | ----------------- | ------ | ------ | ----------- |
 | 0x00   | 1 / -             | uint8  | opcode | Opcode that determines which fields the message contains.|
 
-### Body
-
-| Offset | Size / Endianness | Type | Name | Comment |
-| ------ | ----------------- | ---- | ---- | ------- |
-| 0x01 | 1 / - | u8 | protocol_version | Mangos statically sets this to 0. |
-| 0x02 | 1 / - | [LoginResult](loginresult.md) | result |  |
-
-If result is equal to `SUCCESS`:
-
-| Offset | Size / Endianness | Type | Name | Comment |
-| ------ | ----------------- | ---- | ---- | ------- |
-| 0x03 | 32 / - | u8[32] | server_public_key |  |
-| 0x23 | 1 / - | u8 | generator_length | The only realistic values for the generator are well below 255, so there's no reason for this to anything other than 1. |
-| 0x24 | ? / - | u8[generator_length] | generator |  |
-| - | 1 / - | u8 | large_safe_prime_length | Client can not handle arrays greater than 32. |
-| - | ? / - | u8[large_safe_prime_length] | large_safe_prime |  |
-| - | 32 / - | u8[32] | salt |  |
-| - | 16 / - | u8[16] | crc_salt | Used for the `crc_hash` in [CMD_AUTH_LOGON_PROOF_Client](./cmd_auth_logon_proof_client.md). |
-| - | 1 / - | [SecurityFlag](securityflag.md) | security_flag |  |
-
-If security_flag is equal to `PIN`:
-
-| Offset | Size / Endianness | Type | Name | Comment |
-| ------ | ----------------- | ---- | ---- | ------- |
-| - | 4 / Little | u32 | pin_grid_seed | Used to randomize the layout of the PIN keypad. |
-| - | 16 / - | u8[16] | pin_salt |  |
-
 ### Examples
 
 #### Example 1
@@ -220,43 +193,6 @@ Login messages have a header of 1 byte with an opcode. Some messages also have a
 | ------ | ----------------- | ------ | ------ | ----------- |
 | 0x00   | 1 / -             | uint8  | opcode | Opcode that determines which fields the message contains.|
 
-### Body
-
-| Offset | Size / Endianness | Type | Name | Comment |
-| ------ | ----------------- | ---- | ---- | ------- |
-| 0x01 | 1 / - | u8 | protocol_version |  |
-| 0x02 | 1 / - | [LoginResult](loginresult.md) | result |  |
-
-If result is equal to `SUCCESS`:
-
-| Offset | Size / Endianness | Type | Name | Comment |
-| ------ | ----------------- | ---- | ---- | ------- |
-| 0x03 | 32 / - | u8[32] | server_public_key |  |
-| 0x23 | 1 / - | u8 | generator_length | The only realistic values for the generator are well below 255, so there's no reason for this to anything other than 1. |
-| 0x24 | ? / - | u8[generator_length] | generator |  |
-| - | 1 / - | u8 | large_safe_prime_length | Client can not handle arrays greater than 32. |
-| - | ? / - | u8[large_safe_prime_length] | large_safe_prime |  |
-| - | 32 / - | u8[32] | salt |  |
-| - | 16 / - | u8[16] | crc_salt | Used for the `crc_hash` in [CMD_AUTH_LOGON_PROOF_Client](./cmd_auth_logon_proof_client.md). |
-| - | 1 / - | [SecurityFlag](securityflag.md) | security_flag |  |
-
-If security_flag contains `PIN`:
-
-| Offset | Size / Endianness | Type | Name | Comment |
-| ------ | ----------------- | ---- | ---- | ------- |
-| - | 4 / Little | u32 | pin_grid_seed | Used to randomize the layout of the PIN keypad. |
-| - | 16 / - | u8[16] | pin_salt |  |
-
-If security_flag contains `MATRIX_CARD`:
-
-| Offset | Size / Endianness | Type | Name | Comment |
-| ------ | ----------------- | ---- | ---- | ------- |
-| - | 1 / - | u8 | width | Number of columns to display. |
-| - | 1 / - | u8 | height | Number of rows to display. |
-| - | 1 / - | u8 | digit_count | Number of digits to be entered for each cell. |
-| - | 1 / - | u8 | challenge_count | Number of cells to complete. |
-| - | 8 / Little | u64 | seed | Seed value used to randomize cell selection. |
-
 ### Examples
 
 #### Example 1
@@ -328,49 +264,6 @@ Login messages have a header of 1 byte with an opcode. Some messages also have a
 | Offset | Size / Endianness | Type   | Name   | Description |
 | ------ | ----------------- | ------ | ------ | ----------- |
 | 0x00   | 1 / -             | uint8  | opcode | Opcode that determines which fields the message contains.|
-
-### Body
-
-| Offset | Size / Endianness | Type | Name | Comment |
-| ------ | ----------------- | ---- | ---- | ------- |
-| 0x01 | 1 / - | u8 | protocol_version |  |
-| 0x02 | 1 / - | [LoginResult](loginresult.md) | result |  |
-
-If result is equal to `SUCCESS`:
-
-| Offset | Size / Endianness | Type | Name | Comment |
-| ------ | ----------------- | ---- | ---- | ------- |
-| 0x03 | 32 / - | u8[32] | server_public_key |  |
-| 0x23 | 1 / - | u8 | generator_length | The only realistic values for the generator are well below 255, so there's no reason for this to anything other than 1. |
-| 0x24 | ? / - | u8[generator_length] | generator |  |
-| - | 1 / - | u8 | large_safe_prime_length | Client can not handle arrays greater than 32. |
-| - | ? / - | u8[large_safe_prime_length] | large_safe_prime |  |
-| - | 32 / - | u8[32] | salt |  |
-| - | 16 / - | u8[16] | crc_salt | Used for the `crc_hash` in [CMD_AUTH_LOGON_PROOF_Client](./cmd_auth_logon_proof_client.md). |
-| - | 1 / - | [SecurityFlag](securityflag.md) | security_flag |  |
-
-If security_flag contains `PIN`:
-
-| Offset | Size / Endianness | Type | Name | Comment |
-| ------ | ----------------- | ---- | ---- | ------- |
-| - | 4 / Little | u32 | pin_grid_seed | Used to randomize the layout of the PIN keypad. |
-| - | 16 / - | u8[16] | pin_salt |  |
-
-If security_flag contains `MATRIX_CARD`:
-
-| Offset | Size / Endianness | Type | Name | Comment |
-| ------ | ----------------- | ---- | ---- | ------- |
-| - | 1 / - | u8 | width | Number of columns to display. |
-| - | 1 / - | u8 | height | Number of rows to display. |
-| - | 1 / - | u8 | digit_count | Number of digits to be entered for each cell. |
-| - | 1 / - | u8 | challenge_count | Number of cells to complete. |
-| - | 8 / Little | u64 | seed | Seed value used to randomize cell selection. |
-
-If security_flag contains `AUTHENTICATOR`:
-
-| Offset | Size / Endianness | Type | Name | Comment |
-| ------ | ----------------- | ---- | ---- | ------- |
-| - | 1 / - | u8 | required | Dictates if the authenticator is in use and not just assigned to the account. |
 
 ### Examples
 

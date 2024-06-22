@@ -676,6 +676,18 @@ fn print_container_item_header(s: &mut Writer) {
 }
 
 fn print_container_body(s: &mut Writer, e: &Container, o: &Objects) {
+    if e.members().iter().any(|m| match m {
+        StructMember::Definition(_) => false,
+        StructMember::IfStatement(statement) => statement.all_members().any(|m| match m {
+            StructMember::Definition(_) => false,
+            StructMember::IfStatement(_) => true,
+            StructMember::OptionalStatement(_) => false,
+        }),
+        StructMember::OptionalStatement(_) => false,
+    }) {
+        return;
+    }
+
     s.wln("### Body");
     s.newline();
 

@@ -20,28 +20,6 @@ struct Relation {
     }
 }
 ```
-### Body
-
-| Offset | Size / Endianness | Type | Name | Comment |
-| ------ | ----------------- | ---- | ---- | ------- |
-| 0x00 | 8 / Little | [Guid](../types/packed-guid.md) | guid |  |
-| 0x08 | 4 / - | [RelationType](relationtype.md) | relation_mask |  |
-| 0x0C | - / - | CString | note |  |
-
-If relation_mask contains `FRIEND`:
-
-| Offset | Size / Endianness | Type | Name | Comment |
-| ------ | ----------------- | ---- | ---- | ------- |
-| - | 1 / - | [FriendStatus](friendstatus.md) | status |  |
-
-If status is equal to `ONLINE`:
-
-| Offset | Size / Endianness | Type | Name | Comment |
-| ------ | ----------------- | ---- | ---- | ------- |
-| - | 4 / - | [Area](area.md) | area |  |
-| - | 4 / Little | Level32 | level |  |
-| - | 4 / - | [Class](class.md) | class |  |
-
 
 Used in:
 * [SMSG_CONTACT_LIST](smsg_contact_list.md)
@@ -66,28 +44,6 @@ struct Relation {
     }
 }
 ```
-### Body
-
-| Offset | Size / Endianness | Type | Name | Comment |
-| ------ | ----------------- | ---- | ---- | ------- |
-| 0x00 | 8 / Little | [Guid](../types/packed-guid.md) | guid |  |
-| 0x08 | 4 / - | [RelationType](relationtype.md) | relation_mask |  |
-| 0x0C | - / - | CString | note |  |
-
-If relation_mask contains `FRIEND`:
-
-| Offset | Size / Endianness | Type | Name | Comment |
-| ------ | ----------------- | ---- | ---- | ------- |
-| - | 1 / - | [FriendStatus](friendstatus.md) | status |  |
-
-If status is equal to `ONLINE`:
-
-| Offset | Size / Endianness | Type | Name | Comment |
-| ------ | ----------------- | ---- | ---- | ------- |
-| - | 4 / - | [Area](area.md) | area |  |
-| - | 4 / Little | Level32 | level |  |
-| - | 4 / - | [Class](class.md) | class |  |
-
 
 Used in:
 * [SMSG_CONTACT_LIST](smsg_contact_list.md)

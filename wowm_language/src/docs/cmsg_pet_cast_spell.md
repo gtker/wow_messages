@@ -97,29 +97,3 @@ CMSG have a header of 6 bytes.
 | 0x00   | 2 / Big           | uint16 | size   | Size of the rest of the message including the opcode field but not including the size field.|
 | 0x02   | 4 / Little        | uint32 | opcode | Opcode that determines which fields the message contains.|
 
-### Body
-
-| Offset | Size / Endianness | Type | Name | Comment |
-| ------ | ----------------- | ---- | ---- | ------- |
-| 0x06 | 8 / Little | [Guid](../types/packed-guid.md) | guid |  |
-| 0x0E | 1 / - | u8 | cast_count |  |
-| 0x0F | 4 / Little | Spell | id |  |
-| 0x13 | 1 / - | [ClientCastFlags](clientcastflags.md) | cast_flags |  |
-| 0x14 | - / - | [SpellCastTargets](spellcasttargets.md) | targets |  |
-
-If cast_flags is equal to `EXTRA`:
-
-| Offset | Size / Endianness | Type | Name | Comment |
-| ------ | ----------------- | ---- | ---- | ------- |
-| - | 4 / Little | f32 | elevation |  |
-| - | 4 / Little | f32 | speed |  |
-| - | 1 / - | [ClientMovementData](clientmovementdata.md) | movement_data |  |
-
-If movement_data is equal to `PRESENT`:
-
-| Offset | Size / Endianness | Type | Name | Comment |
-| ------ | ----------------- | ---- | ---- | ------- |
-| - | 4 / Little | u32 | opcode |  |
-| - | - / - | [PackedGuid](../types/packed-guid.md) | movement |  |
-| - | - / - | [MovementInfo](movementinfo.md) | info |  |
-
