@@ -19,6 +19,7 @@ contains the generated library.
 Python code will be shown in this document to provide examples of how libraries could be implemented.
 If you want to use the Python library then just bypass this and
 [use the library directly](https://github.com/gtker/wow_messages_python/) instead.
+A [C# library is available here](https://github.com/gtker/wow_messages_csharp/).
 
 ## Message Layout
 
