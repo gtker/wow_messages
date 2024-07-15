@@ -2,7 +2,7 @@ use std::io::{Read, Write};
 
 use crate::wrath::Object;
 
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/gameobject/smsg_update_object_3_3_5.wowm:201`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/gameobject/smsg_update_object_3_3_5.wowm#L201):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/gameobject/smsg_update_object_3_3_5.wowm:199`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/gameobject/smsg_update_object_3_3_5.wowm#L199):
 /// ```text
 /// smsg SMSG_UPDATE_OBJECT = 0x00A9 {
 ///     u32 amount_of_objects;
@@ -154,7 +154,7 @@ mod test {
 
     }
 
-    // Generated from `wow_message_parser/wowm/world/gameobject/smsg_update_object_3_3_5.wowm` line 206.
+    // Generated from `wow_message_parser/wowm/world/gameobject/smsg_update_object_3_3_5.wowm` line 204.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn smsg_update_object0() {
@@ -174,7 +174,7 @@ mod test {
         assert_eq!(dest, RAW0);
     }
 
-    // Generated from `wow_message_parser/wowm/world/gameobject/smsg_update_object_3_3_5.wowm` line 206.
+    // Generated from `wow_message_parser/wowm/world/gameobject/smsg_update_object_3_3_5.wowm` line 204.
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_smsg_update_object0() {
@@ -194,7 +194,7 @@ mod test {
         assert_eq!(dest, RAW0);
     }
 
-    // Generated from `wow_message_parser/wowm/world/gameobject/smsg_update_object_3_3_5.wowm` line 206.
+    // Generated from `wow_message_parser/wowm/world/gameobject/smsg_update_object_3_3_5.wowm` line 204.
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_smsg_update_object0() {

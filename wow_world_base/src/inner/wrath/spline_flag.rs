@@ -2,38 +2,30 @@
 /// ```text
 /// flag SplineFlag : u32 {
 ///     NONE = 0x00000000;
-///     DONE = 0x00000001;
-///     FALLING = 0x00000002;
-///     UNKNOWN3 = 0x00000004;
-///     UNKNOWN4 = 0x00000008;
-///     UNKNOWN5 = 0x00000010;
-///     UNKNOWN6 = 0x00000020;
-///     UNKNOWN7 = 0x00000040;
-///     UNKNOWN8 = 0x00000080;
-///     RUNMODE = 0x00000100;
-///     FLYING = 0x00000200;
+///     DONE = 0x00000100;
+///     FALLING = 0x00000200;
 ///     NO_SPLINE = 0x00000400;
 ///     PARABOLIC = 0x00000800;
-///     UNKNOWN13 = 0x00001000;
-///     UNKNOWN14 = 0x00002000;
-///     UNKNOWN15 = 0x00004000;
-///     UNKNOWN16 = 0x00008000;
-///     FINAL_POINT = 0x00010000;
-///     FINAL_TARGET = 0x00020000;
-///     FINAL_ANGLE = 0x00040000;
-///     UNKNOWN19 = 0x00080000;
-///     CYCLIC = 0x00100000;
-///     ENTER_CYCLE = 0x00200000;
+///     WALK_MODE = 0x00001000;
+///     FLYING = 0x00002000;
+///     ORIENTATION_FIXED = 0x00004000;
+///     FINAL_POINT = 0x00008000;
+///     FINAL_TARGET = 0x00010000;
+///     FINAL_ANGLE = 0x00020000;
+///     CATMULLROM = 0x00040000;
+///     CYCLIC = 0x00080000;
+///     ENTER_CYCLE = 0x00100000;
+///     ANIMATION = 0x00200000;
 ///     FROZEN = 0x00400000;
-///     UNKNOWN23 = 0x00800000;
-///     UNKNOWN24 = 0x01000000;
-///     UNKNOWN25 = 0x02000000;
-///     UNKNOWN26 = 0x04000000;
-///     UNKNOWN27 = 0x08000000;
-///     UNKNOWN28 = 0x10000000;
-///     UNKNOWN29 = 0x20000000;
-///     UNKNOWN30 = 0x40000000;
-///     UNKNOWN31 = 0x80000000;
+///     TRANSPORT_ENTER = 0x00800000;
+///     TRANSPORT_EXIT = 0x01000000;
+///     UNKNOWN7 = 0x02000000;
+///     UNKNOWN8 = 0x04000000;
+///     ORIENTATION_INVERSED = 0x08000000;
+///     UNKNOWN10 = 0x10000000;
+///     UNKNOWN11 = 0x20000000;
+///     UNKNOWN12 = 0x40000000;
+///     UNKNOWN13 = 0x80000000;
 /// }
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone, Default)]
@@ -73,70 +65,6 @@ impl SplineFlag {
             write!(s, "FALLING").unwrap();
             first = false;
         }
-        if self.is_unknown3() {
-            use std::fmt::Write;
-            if !first {
-                write!(s, " | ").unwrap();
-            }
-            write!(s, "UNKNOWN3").unwrap();
-            first = false;
-        }
-        if self.is_unknown4() {
-            use std::fmt::Write;
-            if !first {
-                write!(s, " | ").unwrap();
-            }
-            write!(s, "UNKNOWN4").unwrap();
-            first = false;
-        }
-        if self.is_unknown5() {
-            use std::fmt::Write;
-            if !first {
-                write!(s, " | ").unwrap();
-            }
-            write!(s, "UNKNOWN5").unwrap();
-            first = false;
-        }
-        if self.is_unknown6() {
-            use std::fmt::Write;
-            if !first {
-                write!(s, " | ").unwrap();
-            }
-            write!(s, "UNKNOWN6").unwrap();
-            first = false;
-        }
-        if self.is_unknown7() {
-            use std::fmt::Write;
-            if !first {
-                write!(s, " | ").unwrap();
-            }
-            write!(s, "UNKNOWN7").unwrap();
-            first = false;
-        }
-        if self.is_unknown8() {
-            use std::fmt::Write;
-            if !first {
-                write!(s, " | ").unwrap();
-            }
-            write!(s, "UNKNOWN8").unwrap();
-            first = false;
-        }
-        if self.is_runmode() {
-            use std::fmt::Write;
-            if !first {
-                write!(s, " | ").unwrap();
-            }
-            write!(s, "RUNMODE").unwrap();
-            first = false;
-        }
-        if self.is_flying() {
-            use std::fmt::Write;
-            if !first {
-                write!(s, " | ").unwrap();
-            }
-            write!(s, "FLYING").unwrap();
-            first = false;
-        }
         if self.is_no_spline() {
             use std::fmt::Write;
             if !first {
@@ -153,36 +81,28 @@ impl SplineFlag {
             write!(s, "PARABOLIC").unwrap();
             first = false;
         }
-        if self.is_unknown13() {
+        if self.is_walk_mode() {
             use std::fmt::Write;
             if !first {
                 write!(s, " | ").unwrap();
             }
-            write!(s, "UNKNOWN13").unwrap();
+            write!(s, "WALK_MODE").unwrap();
             first = false;
         }
-        if self.is_unknown14() {
+        if self.is_flying() {
             use std::fmt::Write;
             if !first {
                 write!(s, " | ").unwrap();
             }
-            write!(s, "UNKNOWN14").unwrap();
+            write!(s, "FLYING").unwrap();
             first = false;
         }
-        if self.is_unknown15() {
+        if self.is_orientation_fixed() {
             use std::fmt::Write;
             if !first {
                 write!(s, " | ").unwrap();
             }
-            write!(s, "UNKNOWN15").unwrap();
-            first = false;
-        }
-        if self.is_unknown16() {
-            use std::fmt::Write;
-            if !first {
-                write!(s, " | ").unwrap();
-            }
-            write!(s, "UNKNOWN16").unwrap();
+            write!(s, "ORIENTATION_FIXED").unwrap();
             first = false;
         }
         if self.is_final_point() {
@@ -209,12 +129,12 @@ impl SplineFlag {
             write!(s, "FINAL_ANGLE").unwrap();
             first = false;
         }
-        if self.is_unknown19() {
+        if self.is_catmullrom() {
             use std::fmt::Write;
             if !first {
                 write!(s, " | ").unwrap();
             }
-            write!(s, "UNKNOWN19").unwrap();
+            write!(s, "CATMULLROM").unwrap();
             first = false;
         }
         if self.is_cyclic() {
@@ -233,6 +153,14 @@ impl SplineFlag {
             write!(s, "ENTER_CYCLE").unwrap();
             first = false;
         }
+        if self.is_animation() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, " | ").unwrap();
+            }
+            write!(s, "ANIMATION").unwrap();
+            first = false;
+        }
         if self.is_frozen() {
             use std::fmt::Write;
             if !first {
@@ -241,76 +169,76 @@ impl SplineFlag {
             write!(s, "FROZEN").unwrap();
             first = false;
         }
-        if self.is_unknown23() {
+        if self.is_transport_enter() {
             use std::fmt::Write;
             if !first {
                 write!(s, " | ").unwrap();
             }
-            write!(s, "UNKNOWN23").unwrap();
+            write!(s, "TRANSPORT_ENTER").unwrap();
             first = false;
         }
-        if self.is_unknown24() {
+        if self.is_transport_exit() {
             use std::fmt::Write;
             if !first {
                 write!(s, " | ").unwrap();
             }
-            write!(s, "UNKNOWN24").unwrap();
+            write!(s, "TRANSPORT_EXIT").unwrap();
             first = false;
         }
-        if self.is_unknown25() {
+        if self.is_unknown7() {
             use std::fmt::Write;
             if !first {
                 write!(s, " | ").unwrap();
             }
-            write!(s, "UNKNOWN25").unwrap();
+            write!(s, "UNKNOWN7").unwrap();
             first = false;
         }
-        if self.is_unknown26() {
+        if self.is_unknown8() {
             use std::fmt::Write;
             if !first {
                 write!(s, " | ").unwrap();
             }
-            write!(s, "UNKNOWN26").unwrap();
+            write!(s, "UNKNOWN8").unwrap();
             first = false;
         }
-        if self.is_unknown27() {
+        if self.is_orientation_inversed() {
             use std::fmt::Write;
             if !first {
                 write!(s, " | ").unwrap();
             }
-            write!(s, "UNKNOWN27").unwrap();
+            write!(s, "ORIENTATION_INVERSED").unwrap();
             first = false;
         }
-        if self.is_unknown28() {
+        if self.is_unknown10() {
             use std::fmt::Write;
             if !first {
                 write!(s, " | ").unwrap();
             }
-            write!(s, "UNKNOWN28").unwrap();
+            write!(s, "UNKNOWN10").unwrap();
             first = false;
         }
-        if self.is_unknown29() {
+        if self.is_unknown11() {
             use std::fmt::Write;
             if !first {
                 write!(s, " | ").unwrap();
             }
-            write!(s, "UNKNOWN29").unwrap();
+            write!(s, "UNKNOWN11").unwrap();
             first = false;
         }
-        if self.is_unknown30() {
+        if self.is_unknown12() {
             use std::fmt::Write;
             if !first {
                 write!(s, " | ").unwrap();
             }
-            write!(s, "UNKNOWN30").unwrap();
+            write!(s, "UNKNOWN12").unwrap();
             first = false;
         }
-        if self.is_unknown31() {
+        if self.is_unknown13() {
             use std::fmt::Write;
             if !first {
                 write!(s, " | ").unwrap();
             }
-            write!(s, "UNKNOWN31").unwrap();
+            write!(s, "UNKNOWN13").unwrap();
             first = false;
         }
         s
@@ -324,38 +252,30 @@ impl SplineFlag {
     }
 
     pub const NONE: u32 = 0x00;
-    pub const DONE: u32 = 0x01;
-    pub const FALLING: u32 = 0x02;
-    pub const UNKNOWN3: u32 = 0x04;
-    pub const UNKNOWN4: u32 = 0x08;
-    pub const UNKNOWN5: u32 = 0x10;
-    pub const UNKNOWN6: u32 = 0x20;
-    pub const UNKNOWN7: u32 = 0x40;
-    pub const UNKNOWN8: u32 = 0x80;
-    pub const RUNMODE: u32 = 0x100;
-    pub const FLYING: u32 = 0x200;
+    pub const DONE: u32 = 0x100;
+    pub const FALLING: u32 = 0x200;
     pub const NO_SPLINE: u32 = 0x400;
     pub const PARABOLIC: u32 = 0x800;
-    pub const UNKNOWN13: u32 = 0x1000;
-    pub const UNKNOWN14: u32 = 0x2000;
-    pub const UNKNOWN15: u32 = 0x4000;
-    pub const UNKNOWN16: u32 = 0x8000;
-    pub const FINAL_POINT: u32 = 0x10000;
-    pub const FINAL_TARGET: u32 = 0x20000;
-    pub const FINAL_ANGLE: u32 = 0x40000;
-    pub const UNKNOWN19: u32 = 0x80000;
-    pub const CYCLIC: u32 = 0x100000;
-    pub const ENTER_CYCLE: u32 = 0x200000;
+    pub const WALK_MODE: u32 = 0x1000;
+    pub const FLYING: u32 = 0x2000;
+    pub const ORIENTATION_FIXED: u32 = 0x4000;
+    pub const FINAL_POINT: u32 = 0x8000;
+    pub const FINAL_TARGET: u32 = 0x10000;
+    pub const FINAL_ANGLE: u32 = 0x20000;
+    pub const CATMULLROM: u32 = 0x40000;
+    pub const CYCLIC: u32 = 0x80000;
+    pub const ENTER_CYCLE: u32 = 0x100000;
+    pub const ANIMATION: u32 = 0x200000;
     pub const FROZEN: u32 = 0x400000;
-    pub const UNKNOWN23: u32 = 0x800000;
-    pub const UNKNOWN24: u32 = 0x1000000;
-    pub const UNKNOWN25: u32 = 0x2000000;
-    pub const UNKNOWN26: u32 = 0x4000000;
-    pub const UNKNOWN27: u32 = 0x8000000;
-    pub const UNKNOWN28: u32 = 0x10000000;
-    pub const UNKNOWN29: u32 = 0x20000000;
-    pub const UNKNOWN30: u32 = 0x40000000;
-    pub const UNKNOWN31: u32 = 0x80000000;
+    pub const TRANSPORT_ENTER: u32 = 0x800000;
+    pub const TRANSPORT_EXIT: u32 = 0x1000000;
+    pub const UNKNOWN7: u32 = 0x2000000;
+    pub const UNKNOWN8: u32 = 0x4000000;
+    pub const ORIENTATION_INVERSED: u32 = 0x8000000;
+    pub const UNKNOWN10: u32 = 0x10000000;
+    pub const UNKNOWN11: u32 = 0x20000000;
+    pub const UNKNOWN12: u32 = 0x40000000;
+    pub const UNKNOWN13: u32 = 0x80000000;
 
     pub const fn empty() -> Self {
         Self { inner: 0 }
@@ -370,36 +290,28 @@ impl SplineFlag {
             inner: Self::NONE
                 | Self::DONE
                 | Self::FALLING
-                | Self::UNKNOWN3
-                | Self::UNKNOWN4
-                | Self::UNKNOWN5
-                | Self::UNKNOWN6
-                | Self::UNKNOWN7
-                | Self::UNKNOWN8
-                | Self::RUNMODE
-                | Self::FLYING
                 | Self::NO_SPLINE
                 | Self::PARABOLIC
-                | Self::UNKNOWN13
-                | Self::UNKNOWN14
-                | Self::UNKNOWN15
-                | Self::UNKNOWN16
+                | Self::WALK_MODE
+                | Self::FLYING
+                | Self::ORIENTATION_FIXED
                 | Self::FINAL_POINT
                 | Self::FINAL_TARGET
                 | Self::FINAL_ANGLE
-                | Self::UNKNOWN19
+                | Self::CATMULLROM
                 | Self::CYCLIC
                 | Self::ENTER_CYCLE
+                | Self::ANIMATION
                 | Self::FROZEN
-                | Self::UNKNOWN23
-                | Self::UNKNOWN24
-                | Self::UNKNOWN25
-                | Self::UNKNOWN26
-                | Self::UNKNOWN27
-                | Self::UNKNOWN28
-                | Self::UNKNOWN29
-                | Self::UNKNOWN30
-                | Self::UNKNOWN31
+                | Self::TRANSPORT_ENTER
+                | Self::TRANSPORT_EXIT
+                | Self::UNKNOWN7
+                | Self::UNKNOWN8
+                | Self::ORIENTATION_INVERSED
+                | Self::UNKNOWN10
+                | Self::UNKNOWN11
+                | Self::UNKNOWN12
+                | Self::UNKNOWN13
         }
     }
 
@@ -440,151 +352,6 @@ impl SplineFlag {
         *self
     }
 
-    pub const fn is_unknown3(&self) -> bool {
-        (self.inner & Self::UNKNOWN3) != 0
-    }
-
-    pub const fn new_unknown3() -> Self {
-        Self { inner: Self::UNKNOWN3 }
-    }
-
-    pub fn set_unknown3(&mut self) -> Self {
-        self.inner |= Self::UNKNOWN3;
-        *self
-    }
-
-    pub fn clear_unknown3(&mut self) -> Self {
-        self.inner &= Self::UNKNOWN3.reverse_bits();
-        *self
-    }
-
-    pub const fn is_unknown4(&self) -> bool {
-        (self.inner & Self::UNKNOWN4) != 0
-    }
-
-    pub const fn new_unknown4() -> Self {
-        Self { inner: Self::UNKNOWN4 }
-    }
-
-    pub fn set_unknown4(&mut self) -> Self {
-        self.inner |= Self::UNKNOWN4;
-        *self
-    }
-
-    pub fn clear_unknown4(&mut self) -> Self {
-        self.inner &= Self::UNKNOWN4.reverse_bits();
-        *self
-    }
-
-    pub const fn is_unknown5(&self) -> bool {
-        (self.inner & Self::UNKNOWN5) != 0
-    }
-
-    pub const fn new_unknown5() -> Self {
-        Self { inner: Self::UNKNOWN5 }
-    }
-
-    pub fn set_unknown5(&mut self) -> Self {
-        self.inner |= Self::UNKNOWN5;
-        *self
-    }
-
-    pub fn clear_unknown5(&mut self) -> Self {
-        self.inner &= Self::UNKNOWN5.reverse_bits();
-        *self
-    }
-
-    pub const fn is_unknown6(&self) -> bool {
-        (self.inner & Self::UNKNOWN6) != 0
-    }
-
-    pub const fn new_unknown6() -> Self {
-        Self { inner: Self::UNKNOWN6 }
-    }
-
-    pub fn set_unknown6(&mut self) -> Self {
-        self.inner |= Self::UNKNOWN6;
-        *self
-    }
-
-    pub fn clear_unknown6(&mut self) -> Self {
-        self.inner &= Self::UNKNOWN6.reverse_bits();
-        *self
-    }
-
-    pub const fn is_unknown7(&self) -> bool {
-        (self.inner & Self::UNKNOWN7) != 0
-    }
-
-    pub const fn new_unknown7() -> Self {
-        Self { inner: Self::UNKNOWN7 }
-    }
-
-    pub fn set_unknown7(&mut self) -> Self {
-        self.inner |= Self::UNKNOWN7;
-        *self
-    }
-
-    pub fn clear_unknown7(&mut self) -> Self {
-        self.inner &= Self::UNKNOWN7.reverse_bits();
-        *self
-    }
-
-    pub const fn is_unknown8(&self) -> bool {
-        (self.inner & Self::UNKNOWN8) != 0
-    }
-
-    pub const fn new_unknown8() -> Self {
-        Self { inner: Self::UNKNOWN8 }
-    }
-
-    pub fn set_unknown8(&mut self) -> Self {
-        self.inner |= Self::UNKNOWN8;
-        *self
-    }
-
-    pub fn clear_unknown8(&mut self) -> Self {
-        self.inner &= Self::UNKNOWN8.reverse_bits();
-        *self
-    }
-
-    pub const fn is_runmode(&self) -> bool {
-        (self.inner & Self::RUNMODE) != 0
-    }
-
-    pub const fn new_runmode() -> Self {
-        Self { inner: Self::RUNMODE }
-    }
-
-    pub fn set_runmode(&mut self) -> Self {
-        self.inner |= Self::RUNMODE;
-        *self
-    }
-
-    pub fn clear_runmode(&mut self) -> Self {
-        self.inner &= Self::RUNMODE.reverse_bits();
-        *self
-    }
-
-    pub const fn is_flying(&self) -> bool {
-        (self.inner & Self::FLYING) != 0
-    }
-
-    /// vmangos: Smooth movement(Catmullrom interpolation mode), flying animation
-    pub const fn new_flying() -> Self {
-        Self { inner: Self::FLYING }
-    }
-
-    pub fn set_flying(&mut self) -> Self {
-        self.inner |= Self::FLYING;
-        *self
-    }
-
-    pub fn clear_flying(&mut self) -> Self {
-        self.inner &= Self::FLYING.reverse_bits();
-        *self
-    }
-
     pub const fn is_no_spline(&self) -> bool {
         (self.inner & Self::NO_SPLINE) != 0
     }
@@ -621,75 +388,57 @@ impl SplineFlag {
         *self
     }
 
-    pub const fn is_unknown13(&self) -> bool {
-        (self.inner & Self::UNKNOWN13) != 0
+    pub const fn is_walk_mode(&self) -> bool {
+        (self.inner & Self::WALK_MODE) != 0
     }
 
-    pub const fn new_unknown13() -> Self {
-        Self { inner: Self::UNKNOWN13 }
+    pub const fn new_walk_mode() -> Self {
+        Self { inner: Self::WALK_MODE }
     }
 
-    pub fn set_unknown13(&mut self) -> Self {
-        self.inner |= Self::UNKNOWN13;
+    pub fn set_walk_mode(&mut self) -> Self {
+        self.inner |= Self::WALK_MODE;
         *self
     }
 
-    pub fn clear_unknown13(&mut self) -> Self {
-        self.inner &= Self::UNKNOWN13.reverse_bits();
+    pub fn clear_walk_mode(&mut self) -> Self {
+        self.inner &= Self::WALK_MODE.reverse_bits();
         *self
     }
 
-    pub const fn is_unknown14(&self) -> bool {
-        (self.inner & Self::UNKNOWN14) != 0
+    pub const fn is_flying(&self) -> bool {
+        (self.inner & Self::FLYING) != 0
     }
 
-    pub const fn new_unknown14() -> Self {
-        Self { inner: Self::UNKNOWN14 }
+    pub const fn new_flying() -> Self {
+        Self { inner: Self::FLYING }
     }
 
-    pub fn set_unknown14(&mut self) -> Self {
-        self.inner |= Self::UNKNOWN14;
+    pub fn set_flying(&mut self) -> Self {
+        self.inner |= Self::FLYING;
         *self
     }
 
-    pub fn clear_unknown14(&mut self) -> Self {
-        self.inner &= Self::UNKNOWN14.reverse_bits();
+    pub fn clear_flying(&mut self) -> Self {
+        self.inner &= Self::FLYING.reverse_bits();
         *self
     }
 
-    pub const fn is_unknown15(&self) -> bool {
-        (self.inner & Self::UNKNOWN15) != 0
+    pub const fn is_orientation_fixed(&self) -> bool {
+        (self.inner & Self::ORIENTATION_FIXED) != 0
     }
 
-    pub const fn new_unknown15() -> Self {
-        Self { inner: Self::UNKNOWN15 }
+    pub const fn new_orientation_fixed() -> Self {
+        Self { inner: Self::ORIENTATION_FIXED }
     }
 
-    pub fn set_unknown15(&mut self) -> Self {
-        self.inner |= Self::UNKNOWN15;
+    pub fn set_orientation_fixed(&mut self) -> Self {
+        self.inner |= Self::ORIENTATION_FIXED;
         *self
     }
 
-    pub fn clear_unknown15(&mut self) -> Self {
-        self.inner &= Self::UNKNOWN15.reverse_bits();
-        *self
-    }
-
-    pub const fn is_unknown16(&self) -> bool {
-        (self.inner & Self::UNKNOWN16) != 0
-    }
-
-    pub const fn new_unknown16() -> Self {
-        Self { inner: Self::UNKNOWN16 }
-    }
-
-    pub fn set_unknown16(&mut self) -> Self {
-        self.inner |= Self::UNKNOWN16;
-        *self
-    }
-
-    pub fn clear_unknown16(&mut self) -> Self {
-        self.inner &= Self::UNKNOWN16.reverse_bits();
+    pub fn clear_orientation_fixed(&mut self) -> Self {
+        self.inner &= Self::ORIENTATION_FIXED.reverse_bits();
         *self
     }
 
@@ -747,22 +496,22 @@ impl SplineFlag {
         *self
     }
 
-    pub const fn is_unknown19(&self) -> bool {
-        (self.inner & Self::UNKNOWN19) != 0
+    pub const fn is_catmullrom(&self) -> bool {
+        (self.inner & Self::CATMULLROM) != 0
     }
 
-    /// vmangos: exists, but unknown what it does
-    pub const fn new_unknown19() -> Self {
-        Self { inner: Self::UNKNOWN19 }
+    /// azerothcore: Used Catmullrom interpolation mode
+    pub const fn new_catmullrom() -> Self {
+        Self { inner: Self::CATMULLROM }
     }
 
-    pub fn set_unknown19(&mut self) -> Self {
-        self.inner |= Self::UNKNOWN19;
+    pub fn set_catmullrom(&mut self) -> Self {
+        self.inner |= Self::CATMULLROM;
         *self
     }
 
-    pub fn clear_unknown19(&mut self) -> Self {
-        self.inner &= Self::UNKNOWN19.reverse_bits();
+    pub fn clear_catmullrom(&mut self) -> Self {
+        self.inner &= Self::CATMULLROM.reverse_bits();
         *self
     }
 
@@ -770,7 +519,7 @@ impl SplineFlag {
         (self.inner & Self::CYCLIC) != 0
     }
 
-    /// vmangos: Movement by cycled spline
+    /// azerothcore: Movement by cycled spline
     pub const fn new_cyclic() -> Self {
         Self { inner: Self::CYCLIC }
     }
@@ -789,7 +538,7 @@ impl SplineFlag {
         (self.inner & Self::ENTER_CYCLE) != 0
     }
 
-    /// vmangos: Everytimes appears with cyclic flag in monster move packet, erases first spline vertex after first cycle done
+    /// azerothcore: Everytimes appears with cyclic flag in monster move packet, erases first spline vertex after first cycle done
     pub const fn new_enter_cycle() -> Self {
         Self { inner: Self::ENTER_CYCLE }
     }
@@ -801,6 +550,25 @@ impl SplineFlag {
 
     pub fn clear_enter_cycle(&mut self) -> Self {
         self.inner &= Self::ENTER_CYCLE.reverse_bits();
+        *self
+    }
+
+    pub const fn is_animation(&self) -> bool {
+        (self.inner & Self::ANIMATION) != 0
+    }
+
+    /// azerothcore: Plays animation after some time passed
+    pub const fn new_animation() -> Self {
+        Self { inner: Self::ANIMATION }
+    }
+
+    pub fn set_animation(&mut self) -> Self {
+        self.inner |= Self::ANIMATION;
+        *self
+    }
+
+    pub fn clear_animation(&mut self) -> Self {
+        self.inner &= Self::ANIMATION.reverse_bits();
         *self
     }
 
@@ -823,166 +591,166 @@ impl SplineFlag {
         *self
     }
 
-    pub const fn is_unknown23(&self) -> bool {
-        (self.inner & Self::UNKNOWN23) != 0
+    pub const fn is_transport_enter(&self) -> bool {
+        (self.inner & Self::TRANSPORT_ENTER) != 0
     }
 
-    pub const fn new_unknown23() -> Self {
-        Self { inner: Self::UNKNOWN23 }
+    pub const fn new_transport_enter() -> Self {
+        Self { inner: Self::TRANSPORT_ENTER }
     }
 
-    pub fn set_unknown23(&mut self) -> Self {
-        self.inner |= Self::UNKNOWN23;
+    pub fn set_transport_enter(&mut self) -> Self {
+        self.inner |= Self::TRANSPORT_ENTER;
         *self
     }
 
-    pub fn clear_unknown23(&mut self) -> Self {
-        self.inner &= Self::UNKNOWN23.reverse_bits();
+    pub fn clear_transport_enter(&mut self) -> Self {
+        self.inner &= Self::TRANSPORT_ENTER.reverse_bits();
         *self
     }
 
-    pub const fn is_unknown24(&self) -> bool {
-        (self.inner & Self::UNKNOWN24) != 0
+    pub const fn is_transport_exit(&self) -> bool {
+        (self.inner & Self::TRANSPORT_EXIT) != 0
     }
 
-    pub const fn new_unknown24() -> Self {
-        Self { inner: Self::UNKNOWN24 }
+    pub const fn new_transport_exit() -> Self {
+        Self { inner: Self::TRANSPORT_EXIT }
     }
 
-    pub fn set_unknown24(&mut self) -> Self {
-        self.inner |= Self::UNKNOWN24;
+    pub fn set_transport_exit(&mut self) -> Self {
+        self.inner |= Self::TRANSPORT_EXIT;
         *self
     }
 
-    pub fn clear_unknown24(&mut self) -> Self {
-        self.inner &= Self::UNKNOWN24.reverse_bits();
+    pub fn clear_transport_exit(&mut self) -> Self {
+        self.inner &= Self::TRANSPORT_EXIT.reverse_bits();
         *self
     }
 
-    pub const fn is_unknown25(&self) -> bool {
-        (self.inner & Self::UNKNOWN25) != 0
+    pub const fn is_unknown7(&self) -> bool {
+        (self.inner & Self::UNKNOWN7) != 0
     }
 
     /// vmangos: exists, but unknown what it does
-    pub const fn new_unknown25() -> Self {
-        Self { inner: Self::UNKNOWN25 }
+    pub const fn new_unknown7() -> Self {
+        Self { inner: Self::UNKNOWN7 }
     }
 
-    pub fn set_unknown25(&mut self) -> Self {
-        self.inner |= Self::UNKNOWN25;
+    pub fn set_unknown7(&mut self) -> Self {
+        self.inner |= Self::UNKNOWN7;
         *self
     }
 
-    pub fn clear_unknown25(&mut self) -> Self {
-        self.inner &= Self::UNKNOWN25.reverse_bits();
+    pub fn clear_unknown7(&mut self) -> Self {
+        self.inner &= Self::UNKNOWN7.reverse_bits();
         *self
     }
 
-    pub const fn is_unknown26(&self) -> bool {
-        (self.inner & Self::UNKNOWN26) != 0
+    pub const fn is_unknown8(&self) -> bool {
+        (self.inner & Self::UNKNOWN8) != 0
     }
 
-    pub const fn new_unknown26() -> Self {
-        Self { inner: Self::UNKNOWN26 }
+    pub const fn new_unknown8() -> Self {
+        Self { inner: Self::UNKNOWN8 }
     }
 
-    pub fn set_unknown26(&mut self) -> Self {
-        self.inner |= Self::UNKNOWN26;
+    pub fn set_unknown8(&mut self) -> Self {
+        self.inner |= Self::UNKNOWN8;
         *self
     }
 
-    pub fn clear_unknown26(&mut self) -> Self {
-        self.inner &= Self::UNKNOWN26.reverse_bits();
+    pub fn clear_unknown8(&mut self) -> Self {
+        self.inner &= Self::UNKNOWN8.reverse_bits();
         *self
     }
 
-    pub const fn is_unknown27(&self) -> bool {
-        (self.inner & Self::UNKNOWN27) != 0
+    pub const fn is_orientation_inversed(&self) -> bool {
+        (self.inner & Self::ORIENTATION_INVERSED) != 0
     }
 
-    pub const fn new_unknown27() -> Self {
-        Self { inner: Self::UNKNOWN27 }
+    pub const fn new_orientation_inversed() -> Self {
+        Self { inner: Self::ORIENTATION_INVERSED }
     }
 
-    pub fn set_unknown27(&mut self) -> Self {
-        self.inner |= Self::UNKNOWN27;
+    pub fn set_orientation_inversed(&mut self) -> Self {
+        self.inner |= Self::ORIENTATION_INVERSED;
         *self
     }
 
-    pub fn clear_unknown27(&mut self) -> Self {
-        self.inner &= Self::UNKNOWN27.reverse_bits();
+    pub fn clear_orientation_inversed(&mut self) -> Self {
+        self.inner &= Self::ORIENTATION_INVERSED.reverse_bits();
         *self
     }
 
-    pub const fn is_unknown28(&self) -> bool {
-        (self.inner & Self::UNKNOWN28) != 0
+    pub const fn is_unknown10(&self) -> bool {
+        (self.inner & Self::UNKNOWN10) != 0
     }
 
-    pub const fn new_unknown28() -> Self {
-        Self { inner: Self::UNKNOWN28 }
+    pub const fn new_unknown10() -> Self {
+        Self { inner: Self::UNKNOWN10 }
     }
 
-    pub fn set_unknown28(&mut self) -> Self {
-        self.inner |= Self::UNKNOWN28;
+    pub fn set_unknown10(&mut self) -> Self {
+        self.inner |= Self::UNKNOWN10;
         *self
     }
 
-    pub fn clear_unknown28(&mut self) -> Self {
-        self.inner &= Self::UNKNOWN28.reverse_bits();
+    pub fn clear_unknown10(&mut self) -> Self {
+        self.inner &= Self::UNKNOWN10.reverse_bits();
         *self
     }
 
-    pub const fn is_unknown29(&self) -> bool {
-        (self.inner & Self::UNKNOWN29) != 0
+    pub const fn is_unknown11(&self) -> bool {
+        (self.inner & Self::UNKNOWN11) != 0
     }
 
-    pub const fn new_unknown29() -> Self {
-        Self { inner: Self::UNKNOWN29 }
+    pub const fn new_unknown11() -> Self {
+        Self { inner: Self::UNKNOWN11 }
     }
 
-    pub fn set_unknown29(&mut self) -> Self {
-        self.inner |= Self::UNKNOWN29;
+    pub fn set_unknown11(&mut self) -> Self {
+        self.inner |= Self::UNKNOWN11;
         *self
     }
 
-    pub fn clear_unknown29(&mut self) -> Self {
-        self.inner &= Self::UNKNOWN29.reverse_bits();
+    pub fn clear_unknown11(&mut self) -> Self {
+        self.inner &= Self::UNKNOWN11.reverse_bits();
         *self
     }
 
-    pub const fn is_unknown30(&self) -> bool {
-        (self.inner & Self::UNKNOWN30) != 0
+    pub const fn is_unknown12(&self) -> bool {
+        (self.inner & Self::UNKNOWN12) != 0
     }
 
-    pub const fn new_unknown30() -> Self {
-        Self { inner: Self::UNKNOWN30 }
+    pub const fn new_unknown12() -> Self {
+        Self { inner: Self::UNKNOWN12 }
     }
 
-    pub fn set_unknown30(&mut self) -> Self {
-        self.inner |= Self::UNKNOWN30;
+    pub fn set_unknown12(&mut self) -> Self {
+        self.inner |= Self::UNKNOWN12;
         *self
     }
 
-    pub fn clear_unknown30(&mut self) -> Self {
-        self.inner &= Self::UNKNOWN30.reverse_bits();
+    pub fn clear_unknown12(&mut self) -> Self {
+        self.inner &= Self::UNKNOWN12.reverse_bits();
         *self
     }
 
-    pub const fn is_unknown31(&self) -> bool {
-        (self.inner & Self::UNKNOWN31) != 0
+    pub const fn is_unknown13(&self) -> bool {
+        (self.inner & Self::UNKNOWN13) != 0
     }
 
-    pub const fn new_unknown31() -> Self {
-        Self { inner: Self::UNKNOWN31 }
+    pub const fn new_unknown13() -> Self {
+        Self { inner: Self::UNKNOWN13 }
     }
 
-    pub fn set_unknown31(&mut self) -> Self {
-        self.inner |= Self::UNKNOWN31;
+    pub fn set_unknown13(&mut self) -> Self {
+        self.inner |= Self::UNKNOWN13;
         *self
     }
 
-    pub fn clear_unknown31(&mut self) -> Self {
-        self.inner &= Self::UNKNOWN31.reverse_bits();
+    pub fn clear_unknown13(&mut self) -> Self {
+        self.inner &= Self::UNKNOWN13.reverse_bits();
         *self
     }
 
