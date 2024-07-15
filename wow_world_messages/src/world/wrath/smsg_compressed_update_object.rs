@@ -250,6 +250,10 @@ impl crate::Message for SMSG_COMPRESSED_UPDATE_OBJECT {
                                     writeln!(s, "                time_passed = {};", if_statement.time_passed).unwrap();
                                     writeln!(s, "                duration = {};", if_statement.duration).unwrap();
                                     writeln!(s, "                id = {};", if_statement.id).unwrap();
+                                    writeln!(s, "                duration_mod = {};", if if_statement.duration_mod.to_string().contains('.') { if_statement.duration_mod.to_string() } else { format!("{}.0", if_statement.duration_mod) }).unwrap();
+                                    writeln!(s, "                duration_mod_next = {};", if if_statement.duration_mod_next.to_string().contains('.') { if_statement.duration_mod_next.to_string() } else { format!("{}.0", if_statement.duration_mod_next) }).unwrap();
+                                    writeln!(s, "                vertical_acceleration = {};", if if_statement.vertical_acceleration.to_string().contains('.') { if_statement.vertical_acceleration.to_string() } else { format!("{}.0", if_statement.vertical_acceleration) }).unwrap();
+                                    writeln!(s, "                effect_start_time = {};", if if_statement.effect_start_time.to_string().contains('.') { if_statement.effect_start_time.to_string() } else { format!("{}.0", if_statement.effect_start_time) }).unwrap();
                                     writeln!(s, "                amount_of_nodes = {};", if_statement.nodes.len()).unwrap();
                                     writeln!(s, "                nodes = [").unwrap();
                                     for v in if_statement.nodes.as_slice() {
@@ -262,6 +266,7 @@ impl crate::Message for SMSG_COMPRESSED_UPDATE_OBJECT {
                                         writeln!(s, "                    }},").unwrap();
                                     }
                                     writeln!(s, "                ];").unwrap();
+                                    writeln!(s, "                mode = {};", if_statement.mode).unwrap();
                                     // final_node: Vector3d
                                     writeln!(s, "                final_node = {{").unwrap();
                                     // Members
@@ -278,6 +283,7 @@ impl crate::Message for SMSG_COMPRESSED_UPDATE_OBJECT {
                                 orientation1,
                                 position1,
                                 transport_guid,
+                                transport_offset,
                             } => {
                                 writeln!(s, "                transport_guid = {};", transport_guid.guid()).unwrap();
                                 // position1: Vector3d
@@ -286,6 +292,14 @@ impl crate::Message for SMSG_COMPRESSED_UPDATE_OBJECT {
                                 writeln!(s, "                    x = {};", if position1.x.to_string().contains('.') { position1.x.to_string() } else { format!("{}.0", position1.x) }).unwrap();
                                 writeln!(s, "                    y = {};", if position1.y.to_string().contains('.') { position1.y.to_string() } else { format!("{}.0", position1.y) }).unwrap();
                                 writeln!(s, "                    z = {};", if position1.z.to_string().contains('.') { position1.z.to_string() } else { format!("{}.0", position1.z) }).unwrap();
+
+                                writeln!(s, "                }};").unwrap();
+                                // transport_offset: Vector3d
+                                writeln!(s, "                transport_offset = {{").unwrap();
+                                // Members
+                                writeln!(s, "                    x = {};", if transport_offset.x.to_string().contains('.') { transport_offset.x.to_string() } else { format!("{}.0", transport_offset.x) }).unwrap();
+                                writeln!(s, "                    y = {};", if transport_offset.y.to_string().contains('.') { transport_offset.y.to_string() } else { format!("{}.0", transport_offset.y) }).unwrap();
+                                writeln!(s, "                    z = {};", if transport_offset.z.to_string().contains('.') { transport_offset.z.to_string() } else { format!("{}.0", transport_offset.z) }).unwrap();
 
                                 writeln!(s, "                }};").unwrap();
                                 writeln!(s, "                orientation1 = {};", if orientation1.to_string().contains('.') { orientation1.to_string() } else { format!("{}.0", orientation1) }).unwrap();
@@ -499,6 +513,10 @@ impl crate::Message for SMSG_COMPRESSED_UPDATE_OBJECT {
                                     writeln!(s, "                time_passed = {};", if_statement.time_passed).unwrap();
                                     writeln!(s, "                duration = {};", if_statement.duration).unwrap();
                                     writeln!(s, "                id = {};", if_statement.id).unwrap();
+                                    writeln!(s, "                duration_mod = {};", if if_statement.duration_mod.to_string().contains('.') { if_statement.duration_mod.to_string() } else { format!("{}.0", if_statement.duration_mod) }).unwrap();
+                                    writeln!(s, "                duration_mod_next = {};", if if_statement.duration_mod_next.to_string().contains('.') { if_statement.duration_mod_next.to_string() } else { format!("{}.0", if_statement.duration_mod_next) }).unwrap();
+                                    writeln!(s, "                vertical_acceleration = {};", if if_statement.vertical_acceleration.to_string().contains('.') { if_statement.vertical_acceleration.to_string() } else { format!("{}.0", if_statement.vertical_acceleration) }).unwrap();
+                                    writeln!(s, "                effect_start_time = {};", if if_statement.effect_start_time.to_string().contains('.') { if_statement.effect_start_time.to_string() } else { format!("{}.0", if_statement.effect_start_time) }).unwrap();
                                     writeln!(s, "                amount_of_nodes = {};", if_statement.nodes.len()).unwrap();
                                     writeln!(s, "                nodes = [").unwrap();
                                     for v in if_statement.nodes.as_slice() {
@@ -511,6 +529,7 @@ impl crate::Message for SMSG_COMPRESSED_UPDATE_OBJECT {
                                         writeln!(s, "                    }},").unwrap();
                                     }
                                     writeln!(s, "                ];").unwrap();
+                                    writeln!(s, "                mode = {};", if_statement.mode).unwrap();
                                     // final_node: Vector3d
                                     writeln!(s, "                final_node = {{").unwrap();
                                     // Members
@@ -527,6 +546,7 @@ impl crate::Message for SMSG_COMPRESSED_UPDATE_OBJECT {
                                 orientation1,
                                 position1,
                                 transport_guid,
+                                transport_offset,
                             } => {
                                 writeln!(s, "                transport_guid = {};", transport_guid.guid()).unwrap();
                                 // position1: Vector3d
@@ -535,6 +555,14 @@ impl crate::Message for SMSG_COMPRESSED_UPDATE_OBJECT {
                                 writeln!(s, "                    x = {};", if position1.x.to_string().contains('.') { position1.x.to_string() } else { format!("{}.0", position1.x) }).unwrap();
                                 writeln!(s, "                    y = {};", if position1.y.to_string().contains('.') { position1.y.to_string() } else { format!("{}.0", position1.y) }).unwrap();
                                 writeln!(s, "                    z = {};", if position1.z.to_string().contains('.') { position1.z.to_string() } else { format!("{}.0", position1.z) }).unwrap();
+
+                                writeln!(s, "                }};").unwrap();
+                                // transport_offset: Vector3d
+                                writeln!(s, "                transport_offset = {{").unwrap();
+                                // Members
+                                writeln!(s, "                    x = {};", if transport_offset.x.to_string().contains('.') { transport_offset.x.to_string() } else { format!("{}.0", transport_offset.x) }).unwrap();
+                                writeln!(s, "                    y = {};", if transport_offset.y.to_string().contains('.') { transport_offset.y.to_string() } else { format!("{}.0", transport_offset.y) }).unwrap();
+                                writeln!(s, "                    z = {};", if transport_offset.z.to_string().contains('.') { transport_offset.z.to_string() } else { format!("{}.0", transport_offset.z) }).unwrap();
 
                                 writeln!(s, "                }};").unwrap();
                                 writeln!(s, "                orientation1 = {};", if orientation1.to_string().contains('.') { orientation1.to_string() } else { format!("{}.0", orientation1) }).unwrap();
@@ -749,6 +777,10 @@ impl crate::Message for SMSG_COMPRESSED_UPDATE_OBJECT {
                                     writeln!(s, "                time_passed = {};", if_statement.time_passed).unwrap();
                                     writeln!(s, "                duration = {};", if_statement.duration).unwrap();
                                     writeln!(s, "                id = {};", if_statement.id).unwrap();
+                                    writeln!(s, "                duration_mod = {};", if if_statement.duration_mod.to_string().contains('.') { if_statement.duration_mod.to_string() } else { format!("{}.0", if_statement.duration_mod) }).unwrap();
+                                    writeln!(s, "                duration_mod_next = {};", if if_statement.duration_mod_next.to_string().contains('.') { if_statement.duration_mod_next.to_string() } else { format!("{}.0", if_statement.duration_mod_next) }).unwrap();
+                                    writeln!(s, "                vertical_acceleration = {};", if if_statement.vertical_acceleration.to_string().contains('.') { if_statement.vertical_acceleration.to_string() } else { format!("{}.0", if_statement.vertical_acceleration) }).unwrap();
+                                    writeln!(s, "                effect_start_time = {};", if if_statement.effect_start_time.to_string().contains('.') { if_statement.effect_start_time.to_string() } else { format!("{}.0", if_statement.effect_start_time) }).unwrap();
                                     writeln!(s, "                amount_of_nodes = {};", if_statement.nodes.len()).unwrap();
                                     writeln!(s, "                nodes = [").unwrap();
                                     for v in if_statement.nodes.as_slice() {
@@ -761,6 +793,7 @@ impl crate::Message for SMSG_COMPRESSED_UPDATE_OBJECT {
                                         writeln!(s, "                    }},").unwrap();
                                     }
                                     writeln!(s, "                ];").unwrap();
+                                    writeln!(s, "                mode = {};", if_statement.mode).unwrap();
                                     // final_node: Vector3d
                                     writeln!(s, "                final_node = {{").unwrap();
                                     // Members
@@ -777,6 +810,7 @@ impl crate::Message for SMSG_COMPRESSED_UPDATE_OBJECT {
                                 orientation1,
                                 position1,
                                 transport_guid,
+                                transport_offset,
                             } => {
                                 writeln!(s, "                transport_guid = {};", transport_guid.guid()).unwrap();
                                 // position1: Vector3d
@@ -785,6 +819,14 @@ impl crate::Message for SMSG_COMPRESSED_UPDATE_OBJECT {
                                 writeln!(s, "                    x = {};", if position1.x.to_string().contains('.') { position1.x.to_string() } else { format!("{}.0", position1.x) }).unwrap();
                                 writeln!(s, "                    y = {};", if position1.y.to_string().contains('.') { position1.y.to_string() } else { format!("{}.0", position1.y) }).unwrap();
                                 writeln!(s, "                    z = {};", if position1.z.to_string().contains('.') { position1.z.to_string() } else { format!("{}.0", position1.z) }).unwrap();
+
+                                writeln!(s, "                }};").unwrap();
+                                // transport_offset: Vector3d
+                                writeln!(s, "                transport_offset = {{").unwrap();
+                                // Members
+                                writeln!(s, "                    x = {};", if transport_offset.x.to_string().contains('.') { transport_offset.x.to_string() } else { format!("{}.0", transport_offset.x) }).unwrap();
+                                writeln!(s, "                    y = {};", if transport_offset.y.to_string().contains('.') { transport_offset.y.to_string() } else { format!("{}.0", transport_offset.y) }).unwrap();
+                                writeln!(s, "                    z = {};", if transport_offset.z.to_string().contains('.') { transport_offset.z.to_string() } else { format!("{}.0", transport_offset.z) }).unwrap();
 
                                 writeln!(s, "                }};").unwrap();
                                 writeln!(s, "                orientation1 = {};", if orientation1.to_string().contains('.') { orientation1.to_string() } else { format!("{}.0", orientation1) }).unwrap();
