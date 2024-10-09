@@ -23,6 +23,11 @@ print-testcase = []
 [dependencies]
 serde = { version = "1", optional = true, default-features = false, features = ["derive"] }
 
+[dependencies.chrono]
+version = "0.4"
+default-features = false
+optional = true
+
 [package.metadata.docs.rs]
 all-features = true
 rustdoc-args = ["--cfg", "docsrs"]

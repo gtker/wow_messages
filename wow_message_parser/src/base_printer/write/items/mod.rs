@@ -29,6 +29,7 @@ use std::path::Path;
 
 pub struct GenericThing {
     pub entry: u32,
+    #[expect(dead_code)]
     pub extra_flags: i32,
     pub name: String,
     pub fields: Vec<Field>,
