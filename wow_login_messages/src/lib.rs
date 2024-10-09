@@ -86,14 +86,14 @@
 //! ## Other Work
 //!
 //! * [`vMaNGOS` (C++)](https://github.com/vmangos/core/blob/ce164f3eb32c75b244482070fbaf3ada1110e6be/src/realmd/AuthSocket.cpp#L65)
-//! and `MaNGOS` derivatives in general have a relatively complete list of messages for popular versions,
-//! but they are not available as a library.
+//!   and `MaNGOS` derivatives in general have a relatively complete list of messages for popular versions,
+//!   but they are not available as a library.
 //! * [Ember (C++)](https://github.com/EmberEmu/Ember/blob/418aaac1d32a65384cfb399c97640c1f25afa69c/src/login/grunt/client/LoginChallenge.h#L37)
-//! has all messages for 1.12, although some work will probably be required in order to use it as a standalone library.
+//!   has all messages for 1.12, although some work will probably be required in order to use it as a standalone library.
 //! * [Shadowburn (Erlang)](https://gitlab.com/shadowburn/shadowburn/-/blob/ac905fabf56579b3bda6f16689c74f544da043e2/apps/logind/lib/authenticator.ex#L173)
-//! has messages for 1.12, although they are not in the form of a library.
+//!   has messages for 1.12, although they are not in the form of a library.
 //! * [gophercraft (Go)](https://github.com/superp00t/gophercraft/blob/382259f45bc9bfc4209af87ae1cd174d76fd4ce2/auth/AuthLogonChallenge_C.go#L13)
-//! seems to have most messages in a library format.
+//!   seems to have most messages in a library format.
 //!
 
 #![forbid(unsafe_code)]
