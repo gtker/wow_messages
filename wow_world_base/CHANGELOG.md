@@ -8,6 +8,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 <!-- next-header -->
 ## [Unreleased] - ReleaseDate
 
+## [0.3.0] - 2024-10-10
+
 ### Added
 
 * `Aura` types for Wrath and TBC.
@@ -52,7 +54,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * First release.
 
 <!-- next-url -->
-[Unreleased]: https://github.com/gtker/wow_messages/compare/wow_world_base-v0.2.0...HEAD
+[Unreleased]: https://github.com/gtker/wow_messages/compare/wow_world_base-v0.3.0...HEAD
+[0.3.0]: https://github.com/gtker/wow_messages/compare/wow_world_base-v0.2.0...wow_world_base-v0.3.0
 
 [0.2.0]: https://github.com/gtker/wow_messages/compare/wow_world_base-v0.1.1...wow_world_base-v0.2.0
 
