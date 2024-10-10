@@ -6,8 +6,14 @@ export CARGO_INCREMENTAL=0
 
 cargo install cargo-hack --locked
 
+# CHANGELOG and Cargo.toml are changed
+git stash
+
 cargo gen
 git diff-files --quiet
+
+# CHANGELOG and Cargo.toml are changed
+git stash pop
 
 cargo test --all-features -p $1
 
