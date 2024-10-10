@@ -12,7 +12,7 @@
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum ProtocolVersion {
     /// Used for login by `1.1.2.4125`.
-    /// Used for reconnect by `1.1.2.4125`, `1.12.1.5875`, `2.0.0.6080`, and 2.0.1.6180`.
+    /// Used for reconnect by `1.1.2.4125`, `1.12.1.5875`, `2.0.0.6080`, and `2.0.1.6180`.
     Two,
     /// Used for login by `1.12.1.5875`, `2.0.0.6080`, and `2.0.1.6180`.
     Three,

@@ -21,7 +21,7 @@ The basic type is `u8`, a 1 byte (8 bit) integer.
 ### Enumerators
 | Enumerator | Value  | Comment |
 | --------- | -------- | ------- |
-| `TWO` | 2 (0x02) | Used for login by `1.1.2.4125`.<br/>Used for reconnect by `1.1.2.4125`, `1.12.1.5875`, `2.0.0.6080`, and 2.0.1.6180`. |
+| `TWO` | 2 (0x02) | Used for login by `1.1.2.4125`.<br/>Used for reconnect by `1.1.2.4125`, `1.12.1.5875`, `2.0.0.6080`, and `2.0.1.6180`. |
 | `THREE` | 3 (0x03) | Used for login by `1.12.1.5875`, `2.0.0.6080`, and `2.0.1.6180`. |
 | `FIVE` | 5 (0x05) | Used for login and reconnect by `2.0.3.6299`. |
 | `SIX` | 6 (0x06) | Used for login and reconnect by `2.0.5.6320`, `2.0.7.6383`, `2.0.8.6403`, `2.0.10.6448`, `2.0.12.6546`, `2.1.0.6692`, `2.1.0.6729`, `2.1.1.6739`, `2.1.2.6803`, `2.1.3.6898`, `2.2.0.7272`, `2.2.2.7318`, `2.2.2.7318`, and `2.2.3.7359`. |
