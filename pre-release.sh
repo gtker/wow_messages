@@ -9,7 +9,9 @@ cargo install cargo-hack --locked
 if [ -z "${DRY_RUN}" ]; then
     echo "DRY_RUN not set"
     # CHANGELOG and Cargo.toml are changed
+    git status
     git stash
+    git status
 else
     echo "DRY_RUN set"
 fi
@@ -21,7 +23,9 @@ git diff-files --quiet
 if [ -z "${DRY_RUN}" ]; then
     echo "DRY_RUN not set"
     # CHANGELOG and Cargo.toml are changed
+    git status
     git stash pop
+    git status
 else
     echo "DRY_RUN set"
 fi
