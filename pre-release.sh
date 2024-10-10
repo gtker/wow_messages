@@ -6,14 +6,25 @@ export CARGO_INCREMENTAL=0
 
 cargo install cargo-hack --locked
 
-# CHANGELOG and Cargo.toml are changed
-git stash
+if [ -z "${DRY_RUN}" ]; then
+    echo "DRY_RUN not set"
+    # CHANGELOG and Cargo.toml are changed
+    git stash
+else
+    echo "DRY_RUN set"
+fi
 
 cargo gen
 git diff-files --quiet
 
-# CHANGELOG and Cargo.toml are changed
-git stash pop
+
+if [ -z "${DRY_RUN}" ]; then
+    echo "DRY_RUN not set"
+    # CHANGELOG and Cargo.toml are changed
+    git stash pop
+else
+    echo "DRY_RUN set"
+fi
 
 cargo test --all-features -p $1
 
