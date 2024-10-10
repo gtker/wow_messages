@@ -85,7 +85,9 @@ pub(crate) mod util;
     clippy::needless_borrow,
     clippy::identity_op,
     clippy::missing_errors_doc,
-    clippy::needless_borrows_for_generic_args
+    clippy::needless_borrows_for_generic_args,
+    clippy::doc_lazy_continuation,
+    clippy::doc_markdown
 )]
 #[rustfmt::skip]
 // Panics in testcase prints
