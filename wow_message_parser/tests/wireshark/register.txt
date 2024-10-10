@@ -5178,7 +5178,7 @@
         },
         { &hf_wow_utc_timezone_offset,
             { "Utc Timezone Offset", "wow.utc.timezone.offset",
-                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                FT_INT32, BASE_DEC, NULL, 0,
                 NULL, HFILL
             }
         },

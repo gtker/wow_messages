@@ -18,7 +18,7 @@ clogin CMD_AUTH_RECONNECT_CHALLENGE_Client = 0x02 {
     Platform platform;
     Os os;
     Locale locale;
-    u32 utc_timezone_offset;
+    i32 utc_timezone_offset;
     IpAddress client_ip_address;
     String account_name;
 }
@@ -44,7 +44,7 @@ Login messages have a header of 1 byte with an opcode. Some messages also have a
 | 0x0D | 4 / - | [Platform](platform.md) | platform |  |
 | 0x11 | 4 / - | [Os](os.md) | os |  |
 | 0x15 | 4 / - | [Locale](locale.md) | locale |  |
-| 0x19 | 4 / Little | u32 | utc_timezone_offset | Offset in minutes from UTC time. 180 would be UTC+3 |
+| 0x19 | 4 / Little | i32 | utc_timezone_offset | Offset in minutes from UTC time. 180 would be UTC+3 |
 | 0x1D | 4 / Big | IpAddress | client_ip_address |  |
 | 0x21 | - / - | String | account_name | Real clients can send a maximum of 16 UTF-8 characters. This is not necessarily 16 bytes since one character can be more than one byte.<br/>Real clients will send a fully uppercased username, and will perform authentication calculations on the uppercased version.<br/>Uppercasing in regards to non-ASCII values is little weird. See `https://docs.rs/wow_srp/latest/wow_srp/normalized_string/index.html` for more info. |
 
@@ -64,7 +64,7 @@ Login messages have a header of 1 byte with an opcode. Some messages also have a
 54, 56, 120, 0, // platform: Platform X86 ("\0x86")
 110, 105, 87, 0, // os: Os WINDOWS ("\0Win")
 66, 71, 110, 101, // locale: Locale EN_GB ("enGB")
-60, 0, 0, 0, // utc_timezone_offset: u32
+60, 0, 0, 0, // utc_timezone_offset: i32
 127, 0, 0, 1, // client_ip_address: IpAddress
 1, // string length
 65, // account_name: String
@@ -83,7 +83,7 @@ Login messages have a header of 1 byte with an opcode. Some messages also have a
 54, 56, 120, 0, // platform: Platform X86 ("\0x86")
 110, 105, 87, 0, // os: Os WINDOWS ("\0Win")
 66, 71, 110, 101, // locale: Locale EN_GB ("enGB")
-60, 0, 0, 0, // utc_timezone_offset: u32
+60, 0, 0, 0, // utc_timezone_offset: i32
 127, 0, 0, 1, // client_ip_address: IpAddress
 16, // string length
 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, // account_name: String

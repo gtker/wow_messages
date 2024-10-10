@@ -79,3 +79,8 @@ pub async fn tokio_read_u64_le<R: AsyncReadExt + Unpin>(r: &mut R) -> Result<u64
     r.read_exact(&mut v).await?;
     Ok(u64::from_le_bytes(v))
 }
+
+// i32
+pub async fn tokio_read_i32_le<R: AsyncReadExt + Unpin>(r: &mut R) -> Result<i32, std::io::Error> {
+    r.read_i32_le().await
+}

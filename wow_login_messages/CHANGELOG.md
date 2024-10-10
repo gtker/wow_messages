@@ -19,6 +19,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * BREAKING: `CMD_AUTH_LOGON_PROOF_Client` field `authenticator` is now a `String` from `Vec<u8>`.
 * BREAKING: Version 5 `CMD_REALM_LIST_Server` is now the same as version 6/7.
 * BREAKING: Message structs that only consisted of a single field with an enum have been converted to enums.
+* BREAKING: `utc_timezone_offset` in `CMD_AUTH_LOGON_CHALLENGE_Client`/`CMD_AUTH_RECONNECT_CHALLENGE_Client` is now a signed integer.
 
 ## [0.4.0] - 2024-02-21
 

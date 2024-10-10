@@ -93,3 +93,11 @@ pub fn read_u64_le<R: Read>(r: &mut R) -> Result<u64, std::io::Error> {
     r.read_exact(&mut v)?;
     Ok(u64::from_le_bytes(v))
 }
+
+// i32
+pub fn read_i32_le<R: Read>(r: &mut R) -> Result<i32, std::io::Error> {
+    let mut v = [0_u8; 4];
+    r.read_exact(&mut v)?;
+    Ok(i32::from_le_bytes(v))
+}
+

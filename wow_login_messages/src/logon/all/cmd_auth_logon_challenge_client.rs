@@ -19,7 +19,7 @@ use std::net::Ipv4Addr;
 ///     Platform platform;
 ///     Os os;
 ///     Locale locale;
-///     u32 utc_timezone_offset;
+///     i32 utc_timezone_offset;
 ///     IpAddress client_ip_address;
 ///     String account_name;
 /// }
@@ -33,7 +33,7 @@ pub struct CMD_AUTH_LOGON_CHALLENGE_Client {
     pub os: Os,
     pub locale: Locale,
     /// Offset in minutes from UTC time. 180 would be UTC+3
-    pub utc_timezone_offset: u32,
+    pub utc_timezone_offset: i32,
     pub client_ip_address: Ipv4Addr,
     /// Real clients can send a maximum of 16 UTF-8 characters. This is not necessarily 16 bytes since one character can be more than one byte.
     /// Real clients will send a fully uppercased username, and will perform authentication calculations on the uppercased version.
@@ -81,7 +81,7 @@ impl CMD_AUTH_LOGON_CHALLENGE_Client {
         // locale: Locale
         w.write_all(&(self.locale.as_int().to_le_bytes()))?;
 
-        // utc_timezone_offset: u32
+        // utc_timezone_offset: i32
         w.write_all(&self.utc_timezone_offset.to_le_bytes())?;
 
         // client_ip_address: IpAddress
@@ -123,8 +123,8 @@ impl CMD_AUTH_LOGON_CHALLENGE_Client {
         // locale: Locale
         let locale = crate::util::read_u32_le(&mut r)?.try_into()?;
 
-        // utc_timezone_offset: u32
-        let utc_timezone_offset = crate::util::read_u32_le(&mut r)?;
+        // utc_timezone_offset: i32
+        let utc_timezone_offset = crate::util::read_i32_le(&mut r)?;
 
         // client_ip_address: IpAddress
         let client_ip_address = Ipv4Addr::from(crate::util::read_u32_be(&mut r)?);
@@ -173,8 +173,8 @@ impl CMD_AUTH_LOGON_CHALLENGE_Client {
         // locale: Locale
         let locale = crate::util::tokio_read_u32_le(&mut r).await?.try_into()?;
 
-        // utc_timezone_offset: u32
-        let utc_timezone_offset = crate::util::tokio_read_u32_le(&mut r).await?;
+        // utc_timezone_offset: i32
+        let utc_timezone_offset = crate::util::tokio_read_i32_le(&mut r).await?;
 
         // client_ip_address: IpAddress
         let client_ip_address = Ipv4Addr::from(crate::util::tokio_read_u32_be(&mut r).await?);
@@ -223,8 +223,8 @@ impl CMD_AUTH_LOGON_CHALLENGE_Client {
         // locale: Locale
         let locale = crate::util::astd_read_u32_le(&mut r).await?.try_into()?;
 
-        // utc_timezone_offset: u32
-        let utc_timezone_offset = crate::util::astd_read_u32_le(&mut r).await?;
+        // utc_timezone_offset: i32
+        let utc_timezone_offset = crate::util::astd_read_i32_le(&mut r).await?;
 
         // client_ip_address: IpAddress
         let client_ip_address = Ipv4Addr::from(crate::util::astd_read_u32_be(&mut r).await?);
@@ -341,7 +341,7 @@ impl CMD_AUTH_LOGON_CHALLENGE_Client {
         + 4 // platform: Platform
         + 4 // os: Os
         + 4 // locale: Locale
-        + 4 // utc_timezone_offset: u32
+        + 4 // utc_timezone_offset: i32
         + 4 // client_ip_address: IpAddress
         + self.account_name.len() + 1 // account_name: String
     }

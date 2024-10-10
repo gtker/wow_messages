@@ -49,6 +49,7 @@ Login messages use the following types, including enums, flags, and structs:
 | `u16`        | Unsigned 16 bit integer. Min value 0, max value 65536.                                                                                                            | `unsigned short`          |
 | `u32`        | Unsigned 32 bit integer. Min value 0, max value 4294967296.                                                                                                       | `unsigned int`            |
 | `u64`        | Unsigned 64 bit integer. Min value 0, max value 18446744073709551616.                                                                                             | `unsigned long long`      |
+| `i32`        | Unsigned 32 bit integer. Min value -2147483648, max value 4294967296.                                                                                             | `signed int`              |
 | `Bool`       | Unsigned 1 bit integer. 0 means `false` and all other values mean `true`.                                                                                         | `unsigned char`           |
 | `CString`    | UTF-8 string type that is terminated by a zero byte value.                                                                                                        | `char*`                   |
 | `String`     | UTF-8 string type of exactly length `len`.                                                                                                                        | `unsigned char` + `char*` |
