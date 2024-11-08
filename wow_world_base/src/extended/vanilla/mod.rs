@@ -5,7 +5,6 @@ pub mod character_features;
 mod creature_family;
 #[rustfmt::skip]
 pub mod exp;
-mod item;
 mod item_set;
 mod items;
 mod map;

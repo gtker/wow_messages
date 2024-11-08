@@ -7,7 +7,6 @@ mod class;
 mod creature_family;
 #[rustfmt::skip]
 pub mod exp;
-mod item;
 mod item_quality;
 mod item_set;
 mod items;
