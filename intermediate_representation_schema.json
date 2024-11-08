@@ -1060,6 +1060,9 @@
             "integer_type": {
               "ref": "integer_type"
             },
+            "tags": {
+              "ref": "object_tags"
+            },
             "upcast": {
               "type": "boolean"
             }
@@ -1072,6 +1075,9 @@
             },
             "integer_type": {
               "ref": "integer_type"
+            },
+            "tags": {
+              "ref": "object_tags"
             },
             "upcast": {
               "type": "boolean"

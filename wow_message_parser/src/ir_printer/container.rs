@@ -443,11 +443,13 @@ pub(crate) enum IrType {
     Enum {
         type_name: String,
         integer_type: IrIntegerType,
+        tags: IrTags,
         upcast: bool,
     },
     Flag {
         type_name: String,
         integer_type: IrIntegerType,
+        tags: IrTags,
         upcast: bool,
     },
     Struct {
@@ -501,6 +503,7 @@ impl IrType {
                 Self::Enum {
                     type_name: e.name().to_string(),
                     integer_type,
+                    tags: IrTags::from_tags(e.tags()),
                     upcast,
                 }
             }
@@ -514,6 +517,7 @@ impl IrType {
                 Self::Flag {
                     type_name: e.name().to_string(),
                     integer_type,
+                    tags: IrTags::from_tags(e.tags()),
                     upcast,
                 }
             }
