@@ -22,6 +22,7 @@ pub(crate) fn constructor(
         ImportFrom::ItemsConstructors,
         ty_name,
         optimizations,
+        false,
     );
 
     print_empty_arrays(s, &items[0].arrays);

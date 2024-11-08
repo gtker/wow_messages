@@ -8,6 +8,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 <!-- next-header -->
 ## [Unreleased] - ReleaseDate
 
+### Added
+
+* `Spell`s from `wow_world_base`. These types were heavily optimized for this specific crate, so there's no reason for them to be in the base crate.
+
 ## [0.2.0] - 2024-02-21
 
 ### Changed

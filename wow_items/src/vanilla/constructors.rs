@@ -1,7 +1,11 @@
 use wow_world_base::vanilla::{
     AllowedClass, AllowedRace, BagFamily, Bonding, Faction, Gold, InventoryType, 
-    Item, ItemClassAndSubClass, ItemDamageType, ItemFlag, ItemQuality, ItemSet, 
-    Language, PageTextMaterial, PvpRank, SheatheType, Skill, Spells,
+    ItemClassAndSubClass, ItemDamageType, ItemFlag, ItemQuality, ItemSet, Language, 
+    PageTextMaterial, PvpRank, SheatheType, Skill,
+};
+
+use crate::vanilla::definition::{
+    Item, Spells,
 };
 
 const EMPTY_ITEMDAMAGETYPE:&[ItemDamageType]=&[];

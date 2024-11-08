@@ -23,6 +23,7 @@ pub(crate) fn all_items(
         ImportFrom::Items,
         ty_name,
         optimizations,
+        false,
     );
 
     print_data(s, items, arrays, optimizations, ty_name);

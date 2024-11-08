@@ -1,7 +1,11 @@
 use wow_world_base::wrath::{
     AllowedClass, AllowedRace, BagFamily, Bonding, Faction, Gold, InventoryType, 
-    Item, ItemClassAndSubClass, ItemDamageType, ItemFlag, ItemFlag2, ItemQuality, 
-    ItemSet, ItemSocket, ItemStat, PageTextMaterial, SheatheType, Skill, Spells,
+    ItemClassAndSubClass, ItemDamageType, ItemFlag, ItemFlag2, ItemQuality, ItemSet, 
+    ItemSocket, ItemStat, PageTextMaterial, SheatheType, Skill,
+};
+
+use crate::wrath::definition::{
+    Item, Spells,
 };
 
 const EMPTY_ITEMSOCKET:&[ItemSocket]=&[];

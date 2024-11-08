@@ -63,7 +63,7 @@ pub(crate) fn write_string_to_file(s: &str, filename: &Path) {
 }
 
 pub(crate) fn overwrite_if_not_same_contents(s: &str, filename: &Path) {
-    let f = read_to_string(filename).unwrap();
+    let f = read_to_string(filename).expect(&format!("unable to read {}", filename.display()));
     if f != s {
         write_string_to_file(s, filename);
     }

@@ -1,7 +1,11 @@
 use wow_world_base::tbc::{
     AllowedClass, AllowedRace, BagFamily, Bonding, Faction, Gold, InventoryType, 
-    Item, ItemClassAndSubClass, ItemDamageType, ItemFlag, ItemQuality, ItemSet, 
-    ItemSocket, ItemStat, Language, PageTextMaterial, SheatheType, Skill, Spells,
+    ItemClassAndSubClass, ItemDamageType, ItemFlag, ItemQuality, ItemSet, ItemSocket, 
+    ItemStat, Language, PageTextMaterial, SheatheType, Skill,
+};
+
+use crate::tbc::definition::{
+    Item, Spells,
 };
 
 const EMPTY_ITEMSOCKET:&[ItemSocket]=&[];

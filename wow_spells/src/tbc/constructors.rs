@@ -1,4 +1,8 @@
 use wow_world_base::tbc::{
+
+};
+
+use crate::tbc::definition::{
     Reagent, Spell, SpellEffects, Totem, TotemCategory,
 };
 

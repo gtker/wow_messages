@@ -21,6 +21,7 @@ pub(crate) fn definition(
         ImportFrom::Definition,
         ty_name,
         optimizations,
+        false,
     );
 
     struct_definition(s, fields, arrays, ty_name, optimizations);
@@ -37,15 +38,9 @@ pub(crate) fn includes(
     import_location: ImportFrom,
     ty_name: &str,
     optimizations: &Optimizations,
+    pub_use: bool,
 ) {
     let mut set = BTreeSet::new();
-
-    match import_location {
-        ImportFrom::ItemPubUse | ImportFrom::ItemsConstructors | ImportFrom::Items => {
-            set.insert(ty_name);
-        }
-        ImportFrom::Definition => {}
-    }
 
     if import_location == ImportFrom::Items {
         s.wln("use super::constructors::*;");
@@ -57,11 +52,6 @@ pub(crate) fn includes(
         }
         ImportFrom::Definition => "crate",
     };
-    s.wln(format!(
-        "use {location}::{}::{{",
-        expansion.as_module_string()
-    ));
-    s.inc_indent();
 
     for (field_index, e) in fields.iter().enumerate() {
         if matches!(
@@ -81,10 +71,17 @@ pub(crate) fn includes(
         }
     }
 
+    let mut crate_set = BTreeSet::new();
+    crate_set.insert(ty_name);
+
     for array in arrays {
         match import_location {
             ImportFrom::Items | ImportFrom::ItemPubUse | ImportFrom::ItemsConstructors => {
-                set.insert(array.type_name);
+                if array.import_only {
+                    set.insert(array.type_name);
+                } else {
+                    crate_set.insert(array.type_name);
+                }
             }
             ImportFrom::Definition => {
                 if array.import_only {
@@ -105,6 +102,14 @@ pub(crate) fn includes(
         }
     }
 
+    let pub_use = if pub_use { "pub " } else { "" };
+
+    s.wln(format!(
+        "{pub_use}use {location}::{}::{{",
+        expansion.as_module_string()
+    ));
+    s.inc_indent();
+
     for (i, e) in set.iter().enumerate() {
         let extra = if i == (set.len() - 1) { "" } else { " " };
 
@@ -112,9 +117,23 @@ pub(crate) fn includes(
     }
     s.newline();
 
-    s.dec_indent();
-    s.wln("};");
+    s.closing_curly_with(";");
     s.newline();
+
+    if !matches!(import_location, ImportFrom::Definition) {
+        s.wln(format!("{pub_use}use crate::{}::definition::{{", expansion.as_module_string()));
+        s.inc_indent();
+
+        for (i, e) in crate_set.iter().enumerate() {
+            let extra = if i == (crate_set.len() - 1) { "" } else { " " };
+
+            s.w_break_at(format!("{e},{extra}"));
+        }
+        s.newline();
+
+        s.closing_curly_with(";");
+        s.newline();
+    }
 }
 
 fn struct_definition(
@@ -238,7 +257,7 @@ fn impl_block(
                 }
 
                 for array in arrays {
-                    s.wln(format!("{},", array.variable_name,));
+                    s.wln(format!("{},", array.variable_name, ));
                 }
             },
         );
@@ -410,7 +429,7 @@ fn getters_and_setters(
 
         s.pub_const_fn(
             array.variable_name,
-            format!("&[{}]", array.type_name,),
+            format!("&[{}]", array.type_name, ),
             |s| {
                 s.wln(format!("self.{}", array.variable_name));
             },

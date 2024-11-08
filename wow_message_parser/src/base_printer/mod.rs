@@ -78,11 +78,10 @@ impl Expansion {
 
     pub fn item_definition_path(&self) -> PathBuf {
         workspace_directory()
-            .join("wow_world_base")
+            .join("wow_items")
             .join("src")
-            .join("manual")
             .join(self.as_module_string())
-            .join("item.rs")
+            .join("definition.rs")
     }
 
     pub fn item_constructor_path(&self) -> PathBuf {
@@ -111,11 +110,10 @@ impl Expansion {
 
     pub fn spell_definition_path(&self) -> PathBuf {
         workspace_directory()
-            .join("wow_world_base")
+            .join("wow_spells")
             .join("src")
-            .join("manual")
             .join(self.as_module_string())
-            .join("spell.rs")
+            .join("definition.rs")
     }
 
     pub fn spell_constructor_path(&self) -> PathBuf {

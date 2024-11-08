@@ -1,6 +1,9 @@
 use wow_world_base::vanilla::{
-    Attributes, AttributesEx1, AttributesEx2, AttributesEx3, Reagent, Spell, SpellEffects, 
-    Totem,
+    Attributes, AttributesEx1, AttributesEx2, AttributesEx3,
+};
+
+use crate::vanilla::definition::{
+    Reagent, Spell, SpellEffects, Totem,
 };
 
 const EMPTY_REAGENT:&[Reagent]=&[];
