@@ -88,3 +88,40 @@ decompressed_data = zlib.decompress(data)
 
 compressed_data = zlib.compress(decompressed_data)
 ```
+
+In order to create an uncompressed zlib stream, the following python code can be used:
+```python
+def adler32(data: bytes) -> int:
+    MOD_ADLER = 65521
+    a = 1
+    b = 0
+
+    for i in range(0, len(data)):
+        a = (a + data[i]) % MOD_ADLER
+        b = (b + a) % MOD_ADLER
+
+    return b << 16 | a
+
+def create_zlib_stream(data: bytes) -> bytes:
+    b = bytearray([
+        0x78, 0x01, # zlib header
+        0x01, # BFINAL and no compression
+    ])
+    length = len(data)
+    b.append(length & 0xff)
+    b.append((length & 0xff00) >> 8)
+
+    nlength = length ^ 0xffff
+    b.append(nlength & 0xff)
+    b.append((nlength & 0xff00) >> 8)
+
+    b += (data)
+
+    b += (adler32(data).to_bytes(4, "big"))
+
+    return b
+
+print(create_zlib_stream(data))
+```
+
+This can be used instead of a library for compressing, although decompression will probably still require a library.
