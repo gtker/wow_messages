@@ -256,7 +256,7 @@ fn print_container_example_definition(
             for b in b {
                 s.w(format!("{b}, "));
             }
-            s.w(" // SizedCString.length");
+            s.wln(" // SizedCString.length");
 
             let mut b = bytes.next().unwrap();
             while *b != 0 {
