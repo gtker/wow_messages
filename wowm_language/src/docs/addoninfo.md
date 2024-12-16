@@ -1,6 +1,6 @@
 # AddonInfo
 
-## Client Version 1, Client Version 2, Client Version 3.3.5
+## Client Version 1, Client Version 2
 
 ### Wowm Representation
 

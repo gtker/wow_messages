@@ -136,7 +136,7 @@ pub use wow_world_base::shared::relation_type_tbc_wrath::*;
 pub use wow_world_base::shared::spline_flag_vanilla_tbc::*;
 pub use wow_world_base::shared::update_flag_vanilla_tbc::*;
 pub use crate::shared::addon_tbc_wrath::*;
-pub use crate::shared::addon_info_vanilla_tbc_wrath::*;
+pub use crate::shared::addon_info_vanilla_tbc::*;
 pub(crate) mod arena_team_member;
 pub use arena_team_member::*;
 pub use crate::shared::auction_enchantment_tbc_wrath::*;

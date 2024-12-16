@@ -4,7 +4,7 @@ struct AddonInfo {
     u32 addon_crc;
     u32 addon_extra_crc;
 } {
-    versions = "1 2 3.3.5";
+    versions = "1 2";
 }
 
 /// Sent after receiving [SMSG_AUTH_CHALLENGE].

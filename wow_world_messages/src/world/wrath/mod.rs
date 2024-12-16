@@ -117,7 +117,6 @@ pub use achievement_in_progress::*;
 pub(crate) mod action_button;
 pub use action_button::*;
 pub use crate::shared::addon_tbc_wrath::*;
-pub use crate::shared::addon_info_vanilla_tbc_wrath::*;
 pub(crate) mod arena_team_member;
 pub use arena_team_member::*;
 pub use crate::shared::auction_enchantment_tbc_wrath::*;

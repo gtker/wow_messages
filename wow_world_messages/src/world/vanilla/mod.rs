@@ -98,7 +98,7 @@ pub use wow_world_base::shared::spline_flag_vanilla_tbc::*;
 pub use wow_world_base::shared::update_flag_vanilla_tbc::*;
 pub(crate) mod addon;
 pub use addon::*;
-pub use crate::shared::addon_info_vanilla_tbc_wrath::*;
+pub use crate::shared::addon_info_vanilla_tbc::*;
 pub(crate) mod auction_list_item;
 pub use auction_list_item::*;
 pub(crate) mod aura_log;
