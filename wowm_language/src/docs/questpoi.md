@@ -34,4 +34,5 @@ struct QuestPoi {
 
 
 Used in:
+* [QuestPoiList](questpoilist.md)
 

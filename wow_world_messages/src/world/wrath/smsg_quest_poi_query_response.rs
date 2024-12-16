@@ -1,6 +1,8 @@
 use std::io::{Read, Write};
 
-use crate::wrath::QuestPoiList;
+use crate::wrath::{
+    Area, Map, QuestPoi, QuestPoiList, Vector2dUnsigned,
+};
 
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/quest/smsg_quest_poi_query_response.wowm:30`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/quest/smsg_quest_poi_query_response.wowm#L30):
 /// ```text
@@ -69,7 +71,33 @@ impl crate::Message for SMSG_QUEST_POI_QUERY_RESPONSE {
             writeln!(s, "        {{").unwrap();
             // Members
             writeln!(s, "            quest_id = {};", v.quest_id).unwrap();
-            writeln!(s, "            amount_of_pois = {};", v.amount_of_pois).unwrap();
+            writeln!(s, "            amount_of_pois = {};", v.pois.len()).unwrap();
+            writeln!(s, "            pois = [").unwrap();
+            for v in v.pois.as_slice() {
+                writeln!(s, "                {{").unwrap();
+                // Members
+                writeln!(s, "                    id = {};", v.id).unwrap();
+                writeln!(s, "                    objective_id = {};", v.objective_id).unwrap();
+                writeln!(s, "                    map = {};", v.map.as_test_case_value()).unwrap();
+                writeln!(s, "                    area = {};", v.area.as_test_case_value()).unwrap();
+                writeln!(s, "                    floor_id = {};", v.floor_id).unwrap();
+                writeln!(s, "                    unknown1 = {};", v.unknown1).unwrap();
+                writeln!(s, "                    unknown2 = {};", v.unknown2).unwrap();
+                writeln!(s, "                    amount_of_points = {};", v.points.len()).unwrap();
+                writeln!(s, "                    points = [").unwrap();
+                for v in v.points.as_slice() {
+                    writeln!(s, "                        {{").unwrap();
+                    // Members
+                    writeln!(s, "                            x = {};", v.x).unwrap();
+                    writeln!(s, "                            y = {};", v.y).unwrap();
+
+                    writeln!(s, "                        }},").unwrap();
+                }
+                writeln!(s, "                    ];").unwrap();
+
+                writeln!(s, "                }},").unwrap();
+            }
+            writeln!(s, "            ];").unwrap();
 
             writeln!(s, "        }},").unwrap();
         }
@@ -92,6 +120,32 @@ impl crate::Message for SMSG_QUEST_POI_QUERY_RESPONSE {
                 writeln!(s, "    /* quests: QuestPoiList[amount_of_quests] {i} start */").unwrap();
                 crate::util::write_bytes(&mut s, &mut bytes, 4, "quest_id", "        ");
                 crate::util::write_bytes(&mut s, &mut bytes, 4, "amount_of_pois", "        ");
+                if !v.pois.is_empty() {
+                    writeln!(s, "    /* pois: QuestPoi[amount_of_pois] start */").unwrap();
+                    for (i, v) in v.pois.iter().enumerate() {
+                        writeln!(s, "    /* pois: QuestPoi[amount_of_pois] {i} start */").unwrap();
+                        crate::util::write_bytes(&mut s, &mut bytes, 4, "id", "            ");
+                        crate::util::write_bytes(&mut s, &mut bytes, 4, "objective_id", "            ");
+                        crate::util::write_bytes(&mut s, &mut bytes, 4, "map", "            ");
+                        crate::util::write_bytes(&mut s, &mut bytes, 4, "area", "            ");
+                        crate::util::write_bytes(&mut s, &mut bytes, 4, "floor_id", "            ");
+                        crate::util::write_bytes(&mut s, &mut bytes, 4, "unknown1", "            ");
+                        crate::util::write_bytes(&mut s, &mut bytes, 4, "unknown2", "            ");
+                        crate::util::write_bytes(&mut s, &mut bytes, 4, "amount_of_points", "            ");
+                        if !v.points.is_empty() {
+                            writeln!(s, "    /* points: Vector2dUnsigned[amount_of_points] start */").unwrap();
+                            for (i, v) in v.points.iter().enumerate() {
+                                writeln!(s, "    /* points: Vector2dUnsigned[amount_of_points] {i} start */").unwrap();
+                                crate::util::write_bytes(&mut s, &mut bytes, 4, "x", "                ");
+                                crate::util::write_bytes(&mut s, &mut bytes, 4, "y", "                ");
+                                writeln!(s, "    /* points: Vector2dUnsigned[amount_of_points] {i} end */").unwrap();
+                            }
+                            writeln!(s, "    /* points: Vector2dUnsigned[amount_of_points] end */").unwrap();
+                        }
+                        writeln!(s, "    /* pois: QuestPoi[amount_of_pois] {i} end */").unwrap();
+                    }
+                    writeln!(s, "    /* pois: QuestPoi[amount_of_pois] end */").unwrap();
+                }
                 writeln!(s, "    /* quests: QuestPoiList[amount_of_quests] {i} end */").unwrap();
             }
             writeln!(s, "    /* quests: QuestPoiList[amount_of_quests] end */").unwrap();
@@ -133,7 +187,7 @@ impl crate::wrath::ServerMessage for SMSG_QUEST_POI_QUERY_RESPONSE {}
 impl SMSG_QUEST_POI_QUERY_RESPONSE {
     pub(crate) fn size(&self) -> usize {
         4 // amount_of_quests: u32
-        + self.quests.len() * 8 // quests: QuestPoiList[amount_of_quests]
+        + self.quests.iter().fold(0, |acc, x| acc + x.size()) // quests: QuestPoiList[amount_of_quests]
     }
 }
 
