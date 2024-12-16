@@ -34,4 +34,5 @@ struct SendCalendarHoliday {
 
 
 Used in:
+* [SMSG_CALENDAR_SEND_CALENDAR](smsg_calendar_send_calendar.md)
 

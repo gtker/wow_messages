@@ -65,6 +65,7 @@ smsg SMSG_CALENDAR_SEND_CALENDAR = 0x0436 {
     u32 amount_of_reset_times;
     SendCalendarResetTime[amount_of_reset_times] reset_times;
     u32 amount_of_holidays;
+    SendCalendarHoliday[amount_of_holidays] holidays;
 } {
     versions = "3.3.5";
 }

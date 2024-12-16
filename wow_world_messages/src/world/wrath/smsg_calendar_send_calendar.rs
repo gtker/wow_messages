@@ -4,7 +4,8 @@ use crate::{
     DateTime, Guid,
 };
 use crate::wrath::{
-    Map, SendCalendarEvent, SendCalendarInstance, SendCalendarInvite, SendCalendarResetTime,
+    Map, SendCalendarEvent, SendCalendarHoliday, SendCalendarInstance, SendCalendarInvite, 
+    SendCalendarResetTime,
 };
 
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/calendar/smsg_calendar_send_calendar.wowm:55`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/calendar/smsg_calendar_send_calendar.wowm#L55):
@@ -22,6 +23,7 @@ use crate::wrath::{
 ///     u32 amount_of_reset_times;
 ///     SendCalendarResetTime[amount_of_reset_times] reset_times;
 ///     u32 amount_of_holidays;
+///     SendCalendarHoliday[amount_of_holidays] holidays;
 /// }
 /// ```
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
@@ -33,7 +35,7 @@ pub struct SMSG_CALENDAR_SEND_CALENDAR {
     pub instances: Vec<SendCalendarInstance>,
     pub relative_time: u32,
     pub reset_times: Vec<SendCalendarResetTime>,
-    pub amount_of_holidays: u32,
+    pub holidays: Vec<SendCalendarHoliday>,
 }
 
 impl crate::private::Sealed for SMSG_CALENDAR_SEND_CALENDAR {}
@@ -127,6 +129,21 @@ impl SMSG_CALENDAR_SEND_CALENDAR {
         // amount_of_holidays: u32
         let amount_of_holidays = crate::util::read_u32_le(&mut r)?;
 
+        // holidays: SendCalendarHoliday[amount_of_holidays]
+        let holidays = {
+            let mut holidays = Vec::with_capacity(amount_of_holidays as usize);
+
+            let allocation_size = u64::from(amount_of_holidays) * 205;
+            if allocation_size > crate::errors::MAX_ALLOCATION_SIZE_WRATH {
+                return Err(crate::errors::ParseErrorKind::AllocationTooLargeError(allocation_size));
+            }
+
+            for _ in 0..amount_of_holidays {
+                holidays.push(SendCalendarHoliday::read(&mut r)?);
+            }
+            holidays
+        };
+
         Ok(Self {
             invites,
             events,
@@ -135,7 +152,7 @@ impl SMSG_CALENDAR_SEND_CALENDAR {
             instances,
             relative_time,
             reset_times,
-            amount_of_holidays,
+            holidays,
         })
     }
 
@@ -217,7 +234,36 @@ impl crate::Message for SMSG_CALENDAR_SEND_CALENDAR {
             writeln!(s, "        }},").unwrap();
         }
         writeln!(s, "    ];").unwrap();
-        writeln!(s, "    amount_of_holidays = {};", self.amount_of_holidays).unwrap();
+        writeln!(s, "    amount_of_holidays = {};", self.holidays.len()).unwrap();
+        writeln!(s, "    holidays = [").unwrap();
+        for v in self.holidays.as_slice() {
+            writeln!(s, "        {{").unwrap();
+            // Members
+            writeln!(s, "            holiday_id = {};", v.holiday_id).unwrap();
+            writeln!(s, "            region = {};", v.region).unwrap();
+            writeln!(s, "            looping = {};", v.looping).unwrap();
+            writeln!(s, "            priority = {};", v.priority).unwrap();
+            writeln!(s, "            calendar_filter_type = {};", v.calendar_filter_type).unwrap();
+            writeln!(s, "            holiday_days = [").unwrap();
+            for v in v.holiday_days.as_slice() {
+                write!(s, "{v:#04X}, ").unwrap();
+            }
+            writeln!(s, "            ];").unwrap();
+            writeln!(s, "            durations = [").unwrap();
+            for v in v.durations.as_slice() {
+                write!(s, "{v:#04X}, ").unwrap();
+            }
+            writeln!(s, "            ];").unwrap();
+            writeln!(s, "            flags = [").unwrap();
+            for v in v.flags.as_slice() {
+                write!(s, "{v:#04X}, ").unwrap();
+            }
+            writeln!(s, "            ];").unwrap();
+            writeln!(s, "            texture_file_name = \"{}\";", v.texture_file_name).unwrap();
+
+            writeln!(s, "        }},").unwrap();
+        }
+        writeln!(s, "    ];").unwrap();
 
         writeln!(s, "}} [").unwrap();
 
@@ -289,6 +335,35 @@ impl crate::Message for SMSG_CALENDAR_SEND_CALENDAR {
             writeln!(s, "    /* reset_times: SendCalendarResetTime[amount_of_reset_times] end */").unwrap();
         }
         crate::util::write_bytes(&mut s, &mut bytes, 4, "amount_of_holidays", "    ");
+        if !self.holidays.is_empty() {
+            writeln!(s, "    /* holidays: SendCalendarHoliday[amount_of_holidays] start */").unwrap();
+            for (i, v) in self.holidays.iter().enumerate() {
+                writeln!(s, "    /* holidays: SendCalendarHoliday[amount_of_holidays] {i} start */").unwrap();
+                crate::util::write_bytes(&mut s, &mut bytes, 4, "holiday_id", "        ");
+                crate::util::write_bytes(&mut s, &mut bytes, 4, "region", "        ");
+                crate::util::write_bytes(&mut s, &mut bytes, 4, "looping", "        ");
+                crate::util::write_bytes(&mut s, &mut bytes, 4, "priority", "        ");
+                crate::util::write_bytes(&mut s, &mut bytes, 4, "calendar_filter_type", "        ");
+                writeln!(s, "    /* holiday_days: u32[26] start */").unwrap();
+                for (i, v) in v.holiday_days.iter().enumerate() {
+                    crate::util::write_bytes(&mut s, &mut bytes, 4, &format!("holiday_days {i}"), "        ");
+                }
+                writeln!(s, "    /* holiday_days: u32[26] end */").unwrap();
+                writeln!(s, "    /* durations: u32[10] start */").unwrap();
+                for (i, v) in v.durations.iter().enumerate() {
+                    crate::util::write_bytes(&mut s, &mut bytes, 4, &format!("durations {i}"), "        ");
+                }
+                writeln!(s, "    /* durations: u32[10] end */").unwrap();
+                writeln!(s, "    /* flags: u32[10] start */").unwrap();
+                for (i, v) in v.flags.iter().enumerate() {
+                    crate::util::write_bytes(&mut s, &mut bytes, 4, &format!("flags {i}"), "        ");
+                }
+                writeln!(s, "    /* flags: u32[10] end */").unwrap();
+                crate::util::write_bytes(&mut s, &mut bytes, v.texture_file_name.len() + 1, "texture_file_name", "        ");
+                writeln!(s, "    /* holidays: SendCalendarHoliday[amount_of_holidays] {i} end */").unwrap();
+            }
+            writeln!(s, "    /* holidays: SendCalendarHoliday[amount_of_holidays] end */").unwrap();
+        }
 
 
         writeln!(s, "] {{").unwrap();
@@ -345,7 +420,12 @@ impl crate::Message for SMSG_CALENDAR_SEND_CALENDAR {
         }
 
         // amount_of_holidays: u32
-        w.write_all(&self.amount_of_holidays.to_le_bytes())?;
+        w.write_all(&(self.holidays.len() as u32).to_le_bytes())?;
+
+        // holidays: SendCalendarHoliday[amount_of_holidays]
+        for i in self.holidays.iter() {
+            i.write_into_vec(&mut w)?;
+        }
 
         Ok(())
     }
@@ -373,6 +453,7 @@ impl SMSG_CALENDAR_SEND_CALENDAR {
         + 4 // amount_of_reset_times: u32
         + self.reset_times.len() * 12 // reset_times: SendCalendarResetTime[amount_of_reset_times]
         + 4 // amount_of_holidays: u32
+        + self.holidays.iter().fold(0, |acc, x| acc + x.size()) // holidays: SendCalendarHoliday[amount_of_holidays]
     }
 }
 

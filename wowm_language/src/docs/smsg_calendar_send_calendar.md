@@ -19,6 +19,7 @@ smsg SMSG_CALENDAR_SEND_CALENDAR = 0x0436 {
     u32 amount_of_reset_times;
     SendCalendarResetTime[amount_of_reset_times] reset_times;
     u32 amount_of_holidays;
+    SendCalendarHoliday[amount_of_holidays] holidays;
 }
 ```
 ### Header
@@ -48,4 +49,5 @@ SMSG have a header of 4 bytes.
 | - | 4 / Little | u32 | amount_of_reset_times |  |
 | - | ? / - | [SendCalendarResetTime](sendcalendarresettime.md)[amount_of_reset_times] | reset_times |  |
 | - | 4 / Little | u32 | amount_of_holidays |  |
+| - | ? / - | [SendCalendarHoliday](sendcalendarholiday.md)[amount_of_holidays] | holidays |  |
 
