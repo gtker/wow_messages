@@ -11,10 +11,9 @@ use crate::vanilla::{
 ///     CString name;
 ///     CString guild;
 ///     Level32 level;
-///     Class class;
-///     Race race;
+///     (u32)Class class;
+///     (u32)Race race;
 ///     Area area;
-///     u32 party_status;
 /// }
 /// ```
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
@@ -25,7 +24,6 @@ pub struct WhoPlayer {
     pub class: Class,
     pub race: Race,
     pub area: Area,
-    pub party_status: u32,
 }
 
 impl WhoPlayer {
@@ -48,16 +46,13 @@ impl WhoPlayer {
         w.write_all(&u32::from(self.level.as_int()).to_le_bytes())?;
 
         // class: Class
-        w.write_all(&(self.class.as_int().to_le_bytes()))?;
+        w.write_all(&u32::from(self.class.as_int()).to_le_bytes())?;
 
         // race: Race
-        w.write_all(&(self.race.as_int().to_le_bytes()))?;
+        w.write_all(&u32::from(self.race.as_int()).to_le_bytes())?;
 
         // area: Area
         w.write_all(&(self.area.as_int().to_le_bytes()))?;
-
-        // party_status: u32
-        w.write_all(&self.party_status.to_le_bytes())?;
 
         Ok(())
     }
@@ -81,16 +76,13 @@ impl WhoPlayer {
         let level = Level::new(crate::util::read_u32_le(&mut r)? as u8);
 
         // class: Class
-        let class = crate::util::read_u8_le(&mut r)?.try_into()?;
+        let class = (crate::util::read_u32_le(&mut r)? as u8).try_into()?;
 
         // race: Race
-        let race = crate::util::read_u8_le(&mut r)?.try_into()?;
+        let race = (crate::util::read_u32_le(&mut r)? as u8).try_into()?;
 
         // area: Area
         let area = crate::util::read_u32_le(&mut r)?.try_into()?;
-
-        // party_status: u32
-        let party_status = crate::util::read_u32_le(&mut r)?;
 
         Ok(Self {
             name,
@@ -99,7 +91,6 @@ impl WhoPlayer {
             class,
             race,
             area,
-            party_status,
         })
     }
 
@@ -110,10 +101,9 @@ impl WhoPlayer {
         self.name.len() + 1 // name: CString
         + self.guild.len() + 1 // guild: CString
         + 4 // level: Level32
-        + 1 // class: Class
-        + 1 // race: Race
+        + 4 // class: Class
+        + 4 // race: Race
         + 4 // area: Area
-        + 4 // party_status: u32
     }
 }
 
