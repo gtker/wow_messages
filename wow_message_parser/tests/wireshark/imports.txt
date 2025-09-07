@@ -502,7 +502,6 @@ static int hf_woww_page_text;
 static int hf_woww_page_text_material;
 static int hf_woww_party_operation;
 static int hf_woww_party_result;
-static int hf_woww_party_status;
 static int hf_woww_periodic_log;
 static int hf_woww_pet;
 static int hf_woww_pet_command_state;

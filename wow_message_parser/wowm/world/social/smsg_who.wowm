@@ -2,10 +2,9 @@ struct WhoPlayer {
     CString name;
     CString guild;
     Level32 level;
-    Class class;
-    Race race;
+    (u32)Class class;
+    (u32)Race race;
     Area area;
-    u32 party_status;
 } {
     versions = "1.12";
 }

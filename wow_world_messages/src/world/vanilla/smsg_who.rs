@@ -5,7 +5,7 @@ use crate::vanilla::{
     Area, Class, Race, WhoPlayer,
 };
 
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/social/smsg_who.wowm:25`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/social/smsg_who.wowm#L25):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/social/smsg_who.wowm:24`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/social/smsg_who.wowm#L24):
 /// ```text
 /// smsg SMSG_WHO = 0x0063 {
 ///     u32 listed_players;
@@ -36,7 +36,7 @@ impl SMSG_WHO {
         let players = {
             let mut players = Vec::with_capacity(listed_players as usize);
 
-            let allocation_size = u64::from(listed_players) * 16;
+            let allocation_size = u64::from(listed_players) * 18;
             if allocation_size > crate::errors::MAX_ALLOCATION_SIZE {
                 return Err(crate::errors::ParseErrorKind::AllocationTooLargeError(allocation_size));
             }
@@ -84,7 +84,6 @@ impl crate::Message for SMSG_WHO {
             writeln!(s, "            class = {};", v.class.as_test_case_value()).unwrap();
             writeln!(s, "            race = {};", v.race.as_test_case_value()).unwrap();
             writeln!(s, "            area = {};", v.area.as_test_case_value()).unwrap();
-            writeln!(s, "            party_status = {};", v.party_status).unwrap();
 
             writeln!(s, "        }},").unwrap();
         }
@@ -109,10 +108,9 @@ impl crate::Message for SMSG_WHO {
                 crate::util::write_bytes(&mut s, &mut bytes, v.name.len() + 1, "name", "        ");
                 crate::util::write_bytes(&mut s, &mut bytes, v.guild.len() + 1, "guild", "        ");
                 crate::util::write_bytes(&mut s, &mut bytes, 4, "level", "        ");
-                crate::util::write_bytes(&mut s, &mut bytes, 1, "class", "        ");
-                crate::util::write_bytes(&mut s, &mut bytes, 1, "race", "        ");
+                crate::util::write_bytes(&mut s, &mut bytes, 4, "class", "        ");
+                crate::util::write_bytes(&mut s, &mut bytes, 4, "race", "        ");
                 crate::util::write_bytes(&mut s, &mut bytes, 4, "area", "        ");
-                crate::util::write_bytes(&mut s, &mut bytes, 4, "party_status", "        ");
                 writeln!(s, "    /* players: WhoPlayer[listed_players] {i} end */").unwrap();
             }
             writeln!(s, "    /* players: WhoPlayer[listed_players] end */").unwrap();
