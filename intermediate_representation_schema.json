@@ -1,12 +1,21 @@
 {
   "properties": {
     "version": {
+      "metadata": {
+        "description": "Version of schema."
+      },
       "ref": "schema_version"
     },
     "world": {
+      "metadata": {
+        "description": "Objects used for world messages."
+      },
       "ref": "objects"
     },
     "integer_type_information": {
+      "metadata": {
+        "description": "List of integer sizes used and amount of bits. Will be removed in the future."
+      },
       "values": {
         "properties": {
           "size": {
@@ -19,29 +28,47 @@
       }
     },
     "distinct_login_versions_other_than_all": {
+      "metadata": {
+        "description": "List of login versions that have messages, except for all."
+      },
       "elements": {
         "type": "uint8"
       }
     },
     "login_version_opcodes": {
+      "metadata": {
+        "description": "Map of login opcodes and message names."
+      },
       "values": {
         "type": "uint8"
       }
     },
     "login": {
+      "metadata": {
+        "description": "Objects used for login messages."
+      },
       "ref": "objects"
     },
     "vanilla_update_mask": {
+      "metadata": {
+        "description": "UpdateMask type definitions for 1.12."
+      },
       "elements": {
         "ref": "update_mask"
       }
     },
     "tbc_update_mask": {
+      "metadata": {
+        "description": "UpdateMask type definitions for 2.4.3."
+      },
       "elements": {
         "ref": "update_mask"
       }
     },
     "wrath_update_mask": {
+      "metadata": {
+        "description": "UpdateMask type definitions for 3.3.5."
+      },
       "elements": {
         "ref": "update_mask"
       }
@@ -659,18 +686,33 @@
       },
       "optionalProperties": {
         "comment": {
+          "metadata": {
+            "description": "Explanatory comment for object."
+          },
           "type": "string"
         },
         "unimplemented": {
+          "metadata": {
+            "description": "Object isn't implemented. Unused."
+          },
           "type": "boolean"
         },
         "compressed": {
+          "metadata": {
+            "description": "Object body consists of uint32 with decompressed size followed by compressed bytes of members."
+          },
           "type": "boolean"
         },
         "non_network_type": {
+          "metadata": {
+            "description": "Not sent in a network message but used in e.g. a DBC file or otherwise in the client."
+          },
           "type": "boolean"
         },
         "used_in_update_mask": {
+          "metadata": {
+            "description": "Object is used by UpdateMask type."
+          },
           "type": "boolean"
         }
       }
@@ -678,9 +720,15 @@
     "member_tags": {
       "optionalProperties": {
         "comment": {
+          "metadata": {
+            "description": "Explanatory comment for member."
+          },
           "type": "string"
         },
         "display": {
+          "metadata": {
+            "description": "Pretty printed string of definer enumerator."
+          },
           "type": "string"
         },
         "maximum_length": {
@@ -790,6 +838,9 @@
       ]
     },
     "file_info": {
+      "metadata": {
+        "description": "File information about the original .wowm definition."
+      },
       "properties": {
         "file_name": {
           "type": "string"
@@ -803,6 +854,9 @@
       }
     },
     "value": {
+      "metadata": {
+        "description": "Literal integer value."
+      },
       "properties": {
         "value": {
           "metadata": {
@@ -847,6 +901,9 @@
           "properties": {}
         },
         "CLogin": {
+          "metadata": {
+            "description": "Login message sent by the client."
+          },
           "properties": {
             "opcode": {
               "type": "uint16"
@@ -854,6 +911,9 @@
           }
         },
         "SLogin": {
+          "metadata": {
+            "description": "Login message sent by the server."
+          },
           "properties": {
             "opcode": {
               "type": "uint16"
@@ -861,6 +921,9 @@
           }
         },
         "Msg": {
+          "metadata": {
+            "description": "World message sent by either the server or the client."
+          },
           "properties": {
             "opcode": {
               "type": "uint16"
@@ -868,6 +931,9 @@
           }
         },
         "CMsg": {
+          "metadata": {
+            "description": "World message sent by the client."
+          },
           "properties": {
             "opcode": {
               "type": "uint16"
@@ -875,6 +941,9 @@
           }
         },
         "SMsg": {
+          "metadata": {
+            "description": "World message sent by the server."
+          },
           "properties": {
             "opcode": {
               "type": "uint16"
@@ -911,6 +980,9 @@
           "ref": "data_type"
         },
         "constant_value": {
+          "metadata": {
+            "description": "This is set if the field is ignored by the client or can only have a single value."
+          },
           "ref": "value",
           "nullable": true
         },
@@ -919,10 +991,16 @@
           "nullable": true
         },
         "used_as_size_in": {
+          "metadata": {
+            "description": "This is set if the variable is used as the size in an array variable."
+          },
           "type": "string",
           "nullable": true
         },
         "used_in_if": {
+          "metadata": {
+            "description": "This is set if the variable is as the definer in an if statement."
+          },
           "type": "boolean"
         },
         "tags": {
@@ -951,12 +1029,18 @@
           "properties": {}
         },
         "Guid": {
+          "metadata": {
+            "description": "64-bit integer."
+          },
           "properties": {}
         },
         "PackedGuid": {
           "properties": {}
         },
         "Spell": {
+          "metadata": {
+            "description": "32-bit integer."
+          },
           "properties": {}
         }
       }
@@ -965,16 +1049,22 @@
       "discriminator": "array_size_tag",
       "mapping": {
         "Fixed": {
+          "metadata": {
+            "description": "Arrays that always have an exact amount of elements."
+          },
           "properties": {
             "size": {
               "metadata": {
-                "description": "JSON Typedef does not support integers larger than unsigned 32 bit, so this is a string"
+                "description": "Amount of elements in the array. JSON Typedef does not support integers larger than unsigned 32 bit, so this is a string."
               },
               "type": "string"
             }
           }
         },
         "Variable": {
+          "metadata": {
+            "description": "Arrays that have a variable amount of elements, determined by the value in a previous variable."
+          },
           "properties": {
             "size": {
               "type": "string"
@@ -982,6 +1072,9 @@
           }
         },
         "Endless": {
+          "metadata": {
+            "description": "Arrays that have a variable amount of elements, determined by if there are still unread bytes remaining."
+          },
           "properties": {}
         }
       }
@@ -1004,21 +1097,36 @@
           }
         },
         "Population": {
+          "metadata": {
+            "description": "32-bit floating point."
+          },
           "properties": {}
         },
         "DateTime": {
+          "metadata": {
+            "description": "32-bit integer."
+          },
           "properties": {}
         },
         "PackedGuid": {
           "properties": {}
         },
         "Guid": {
+          "metadata": {
+            "description": "64-bit integer."
+          },
           "properties": {}
         },
         "NamedGuid": {
+          "metadata": {
+            "description": "64-bit integer followed by a CString if the value isn't zero."
+          },
           "properties": {}
         },
         "FloatingPoint": {
+          "metadata": {
+            "description": "32-bit floating point."
+          },
           "properties": {}
         },
         "CString": {
@@ -1031,12 +1139,21 @@
           "properties": {}
         },
         "Spell": {
+          "metadata": {
+            "description": "32-bit integer."
+          },
           "properties": {}
         },
         "Spell16": {
+          "metadata": {
+            "description": "16-bit integer."
+          },
           "properties": {}
         },
         "Item": {
+          "metadata": {
+            "description": "32-bit integer."
+          },
           "properties": {}
         },
         "Array": {
@@ -1113,15 +1230,27 @@
           "properties": {}
         },
         "Gold": {
+          "metadata": {
+            "description": "32-bit integer."
+          },
           "properties": {}
         },
         "Level": {
+          "metadata": {
+            "description": "Level serialized as 8-bit value."
+          },
           "properties": {}
         },
         "Level16": {
+          "metadata": {
+            "description": "Level serialized as 16-bit value."
+          },
           "properties": {}
         },
         "Level32": {
+          "metadata": {
+            "description": "Level serialized as 32-bit value."
+          },
           "properties": {}
         },
         "VariableItemRandomProperty": {
@@ -1131,12 +1260,21 @@
           "properties": {}
         },
         "IpAddress": {
+          "metadata": {
+            "description": "32-bit big endian integer."
+          },
           "properties": {}
         },
         "Seconds": {
+          "metadata": {
+            "description": "32-bit integer."
+          },
           "properties": {}
         },
         "Milliseconds": {
+          "metadata": {
+            "description": "32-bit integer."
+          },
           "properties": {}
         },
         "CacheMask": {
@@ -1150,9 +1288,15 @@
           "type": "string"
         },
         "definer_type": {
+          "metadata": {
+            "description": "Flag or enum. Flag means that more values can be active at the same time. Enum means that only a single can be active at the same time."
+          },
           "ref": "definer_type"
         },
         "values": {
+          "metadata": {
+            "description": "Enumerators that apply to this if statement."
+          },
           "elements": {
             "type": "string"
           }
@@ -1168,12 +1312,21 @@
           }
         },
         "original_type": {
+          "metadata": {
+            "description": "Original type used in the if statement."
+          },
           "ref": "data_type"
         },
         "part_of_separate_if_statement": {
+          "metadata": {
+            "description": "The same definer has multiple disconnected if statements in the same body. This is significant since it means that a definer can be more than just one enumerator."
+          },
           "type": "boolean"
         },
         "is_else_if_flag": {
+          "metadata": {
+            "description": "Is definer type flag and has else if statements. This is significant since from a normal flag since it means that some bits should not be able to be set at the same time."
+          },
           "type": "boolean"
         }
       }
