@@ -17,7 +17,7 @@ use crate::rust_printer::writer::Writer;
 use crate::rust_printer::DefinerType;
 use crate::should_not_write_object_docs;
 use hashbrown::HashMap;
-use std::collections::{BTreeMap, BTreeSet};
+use std::collections::BTreeSet;
 use std::fs::read_to_string;
 use std::path::PathBuf;
 
@@ -175,8 +175,8 @@ fn print_containers<'a>(
     files: &mut HashMap<PathBuf, String>,
     o: &Objects,
 ) {
-    let mut login_containers = BTreeMap::new();
-    let mut world_containers = BTreeMap::new();
+    let mut login_containers = BTreeSet::new();
+    let mut world_containers = BTreeSet::new();
 
     for container in containers {
         let path = format!(
@@ -195,46 +195,25 @@ fn print_containers<'a>(
             path = path,
         );
 
-        let mut definers: Vec<String> = container
-            .all_definers()
-            .iter()
-            .map(|a| {
-                let name = a.name();
-                let path = format!("{}.md", name.to_lowercase());
-
-                format!("    - [{name}](docs/{path})")
-            })
-            .collect();
-        definers.sort();
-        definers.dedup();
-
         if container.tags().has_login_version() {
-            login_containers.insert(bullet_point, definers);
+            login_containers.insert(bullet_point);
         } else {
-            world_containers.insert(bullet_point, definers);
+            world_containers.insert(bullet_point);
         }
     }
 
     if !login_containers.is_empty() {
         s.wln(LOGIN_CONTAINER_HEADER);
-        for (i, definers) in login_containers {
+        for i in login_containers {
             s.wln(&i);
-
-            for definer in definers {
-                s.wln(definer);
-            }
         }
         s.newline();
     }
 
     if !world_containers.is_empty() {
         s.wln(WORLD_CONTAINER_HEADER);
-        for (i, definers) in world_containers {
+        for i in world_containers {
             s.wln(&i);
-
-            for definer in definers {
-                s.wln(definer);
-            }
         }
         s.newline();
     }

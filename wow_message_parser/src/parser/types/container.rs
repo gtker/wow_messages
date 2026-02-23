@@ -4,7 +4,6 @@ use crate::file_utils::{
 };
 use crate::parser::types::array::{ArraySize, ArrayType};
 use crate::parser::types::compare_name_and_tags;
-use crate::parser::types::definer::Definer;
 use crate::parser::types::objects::Objects;
 use crate::parser::types::sizes::Sizes;
 use crate::parser::types::struct_member::{StructMember, StructMemberDefinition};
@@ -476,21 +475,6 @@ impl Container {
         for m in self.members() {
             inner(m, &mut v);
         }
-
-        v
-    }
-
-    pub(crate) fn all_definers(&self) -> Vec<&Definer> {
-        let mut v = Vec::new();
-        for d in self.all_definitions_transitively() {
-            match d.ty() {
-                Type::Enum { e, .. } => v.push(e),
-                Type::Flag { e, .. } => v.push(e),
-                _ => {}
-            }
-        }
-
-        v.sort_by(|a, b| a.name().cmp(b.name()));
 
         v
     }
