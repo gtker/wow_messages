@@ -4,7 +4,7 @@ use crate::base_printer::write::items::definition::includes;
 use crate::base_printer::write::items::GenericThing;
 use crate::base_printer::{Expansion, ImportFrom};
 use crate::rust_printer::writer::Writer;
-use hashbrown::HashMap;
+use std::collections::HashMap;
 use std::cmp::Ordering;
 
 pub(crate) fn all_items(

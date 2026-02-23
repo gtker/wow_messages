@@ -16,7 +16,7 @@ use crate::path_utils::{doc_summary_path, docs_directory};
 use crate::rust_printer::writer::Writer;
 use crate::rust_printer::DefinerType;
 use crate::should_not_write_object_docs;
-use hashbrown::HashMap;
+use std::collections::HashMap;
 use std::collections::BTreeSet;
 use std::fs::read_to_string;
 use std::path::PathBuf;

@@ -7,7 +7,7 @@ use crate::parser::types::tags::{MemberTags, ObjectTags};
 use crate::parser::types::{compare_name_and_tags, IntegerType};
 use crate::parser::utility;
 use crate::rust_printer::{field_name_to_rust_name, DefinerType};
-use hashbrown::HashMap;
+use std::collections::HashMap;
 use std::cmp::Ordering;
 
 #[derive(Debug, Eq, PartialEq, Clone)]

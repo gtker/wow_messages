@@ -1,5 +1,5 @@
 use crate::base_printer::Expansion;
-use hashbrown::HashMap;
+use std::collections::HashMap;
 use ordered_float::OrderedFloat;
 use std::cmp::Ordering;
 use std::collections::BTreeSet;
