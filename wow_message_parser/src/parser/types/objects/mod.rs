@@ -138,7 +138,7 @@ impl Objects {
         &self.flags
     }
 
-    pub(crate) fn all_objects(&self) -> impl Iterator<Item = Object> + '_ {
+    pub(crate) fn all_objects(&self) -> impl Iterator<Item = Object<'_>> + '_ {
         self.enums
             .iter()
             .map(Object::Enum)

@@ -107,7 +107,7 @@ impl Container {
         }
     }
 
-    pub(crate) fn single_rust_definer(&self) -> Option<RustDefiner> {
+    pub(crate) fn single_rust_definer(&self) -> Option<RustDefiner<'_>> {
         self.rust_object().single_rust_definer()
     }
 

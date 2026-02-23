@@ -49,7 +49,7 @@ impl RustObject {
         self.sizes
     }
 
-    pub(crate) fn single_rust_definer(&self) -> Option<RustDefiner> {
+    pub(crate) fn single_rust_definer(&self) -> Option<RustDefiner<'_>> {
         let definers = self.get_rust_definers();
         let amount_of_members_in_struct: Vec<_> = self.members_in_struct().collect();
 
@@ -67,7 +67,7 @@ impl RustObject {
         None
     }
 
-    pub(crate) fn get_rust_definer_from_ty(m: &RustMember) -> Option<RustDefiner> {
+    pub(crate) fn get_rust_definer_from_ty(m: &RustMember) -> Option<RustDefiner<'_>> {
         let (
             ty_name,
             original_ty_name,
@@ -135,7 +135,7 @@ impl RustObject {
         ))
     }
 
-    pub(crate) fn rust_definers_in_global_scope(&self) -> Vec<RustDefiner> {
+    pub(crate) fn rust_definers_in_global_scope(&self) -> Vec<RustDefiner<'_>> {
         let mut v = Vec::new();
 
         for m in self.members_in_struct() {
@@ -147,7 +147,7 @@ impl RustObject {
         v
     }
 
-    pub(crate) fn rust_definers_in_enumerator(&self, enumerator_name: &str) -> Vec<RustDefiner> {
+    pub(crate) fn rust_definers_in_enumerator(&self, enumerator_name: &str) -> Vec<RustDefiner<'_>> {
         let mut v = Vec::new();
 
         fn inner<'a>(m: &'a RustMember, enumerator_name: &str, v: &mut Vec<RustDefiner<'a>>) {
@@ -200,7 +200,7 @@ impl RustObject {
         v
     }
 
-    pub(crate) fn rust_definers_in_namespace(&self, ty_name: &str) -> Vec<RustDefiner> {
+    pub(crate) fn rust_definers_in_namespace(&self, ty_name: &str) -> Vec<RustDefiner<'_>> {
         let rd = self.get_rust_definer(ty_name);
 
         let mut v = Vec::new();
@@ -216,7 +216,7 @@ impl RustObject {
         v
     }
 
-    pub(crate) fn get_rust_definers(&self) -> Vec<RustDefiner> {
+    pub(crate) fn get_rust_definers(&self) -> Vec<RustDefiner<'_>> {
         fn inner<'a>(m: &'a RustMember, v: &mut Vec<RustDefiner<'a>>) {
             if let Some(rd) = RustObject::get_rust_definer_from_ty(m) {
                 for enumerator in rd.enumerators() {
@@ -291,7 +291,7 @@ impl RustObject {
         unreachable!()
     }
 
-    pub(crate) fn get_rust_definer(&self, name: &str) -> RustDefiner {
+    pub(crate) fn get_rust_definer(&self, name: &str) -> RustDefiner<'_> {
         let member = self.get_complex_definer_ty(name);
 
         Self::get_rust_definer_from_ty(member).unwrap()
