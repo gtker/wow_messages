@@ -17,6 +17,7 @@ enum CinematicSequenceId : u32 {
     GNOME = 101;
     TROLL = 121;
     TAUREN = 141;
+    SCRY_CAM = 161;
 }
 ```
 ### Type
@@ -33,6 +34,7 @@ The basic type is `u32`, a 4 byte (32 bit) little endian integer.
 | `GNOME` | 101 (0x65) |  |
 | `TROLL` | 121 (0x79) |  |
 | `TAUREN` | 141 (0x8D) |  |
+| `SCRY_CAM` | 161 (0xA1) |  |
 
 Used in:
 * [SMSG_TRIGGER_CINEMATIC](smsg_trigger_cinematic.md)

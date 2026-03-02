@@ -8,6 +8,7 @@ enum CinematicSequenceId : u32 {
     GNOME = 101;
     TROLL = 121;
     TAUREN = 141;
+    SCRY_CAM = 161;
 } {
     versions = "1.12";
 }
