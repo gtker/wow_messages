@@ -1,5 +1,5 @@
 enum CinematicSequenceId : u32 {
-    GOBLIN = 0;
+    PALANTIR_OF_AZORA = 1;
     UNDEAD = 2;
     ORC = 21;
     DWARF = 41;
