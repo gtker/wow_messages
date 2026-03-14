@@ -16,8 +16,8 @@ use crate::path_utils::{doc_summary_path, docs_directory};
 use crate::rust_printer::writer::Writer;
 use crate::rust_printer::DefinerType;
 use crate::should_not_write_object_docs;
-use std::collections::HashMap;
 use std::collections::BTreeSet;
+use std::collections::HashMap;
 use std::fs::read_to_string;
 use std::path::PathBuf;
 
@@ -134,11 +134,6 @@ fn print_definers<'a>(
         };
 
         create_or_append_hashmap(&definer_inner, full_path, files);
-
-        let is_used_in_object = !definer.objects_used_in().is_empty();
-        if is_used_in_object {
-            continue;
-        }
 
         let bullet_point = format!(
             "- [{name}](docs/{path})",
