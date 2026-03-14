@@ -1,0 +1,2412 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>ItemSet - Wowm Language</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon-de23e50b.svg">
+        <link rel="shortcut icon" href="../favicon-8114d1fc.png">
+        <link rel="stylesheet" href="../css/variables-8adf115d.css">
+        <link rel="stylesheet" href="../css/general-2459343d.css">
+        <link rel="stylesheet" href="../css/chrome-ae938929.css">
+        <link rel="stylesheet" href="../css/print-9e4910d8.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../fonts/fonts-9644e21d.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="mdbook-highlight-css" href="../highlight-493f70e1.css">
+        <link rel="stylesheet" id="mdbook-tomorrow-night-css" href="../tomorrow-night-4c0ae647.css">
+        <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="../ayu-highlight-3fdfc3ac.css">
+
+        <!-- Custom theme stylesheets -->
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "../";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+            window.path_to_searchindex_js = "../searchindex-3f6cba53.js";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../toc-0cb513c6.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="mdbook-body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="mdbook-sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("mdbook-sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+                sidebar_toggle.checked = false;
+            }
+            if (sidebar === 'visible') {
+                sidebar_toggle.checked = true;
+            } else {
+                html.classList.remove('sidebar-visible');
+            }
+        </script>
+
+        <nav id="mdbook-sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../toc.html"></iframe>
+            </noscript>
+            <div id="mdbook-sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="mdbook-page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="mdbook-menu-bar-hover-placeholder"></div>
+                <div id="mdbook-menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="mdbook-sidebar-toggle" class="icon-button" for="mdbook-sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="mdbook-sidebar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"/></svg></span>
+                        </label>
+                        <button id="mdbook-theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="mdbook-theme-list">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M371.3 367.1c27.3-3.9 51.9-19.4 67.2-42.9L600.2 74.1c12.6-19.5 9.4-45.3-7.6-61.2S549.7-4.4 531.1 9.6L294.4 187.2c-24 18-38.2 46.1-38.4 76.1L371.3 367.1zm-19.6 25.4l-116-104.4C175.9 290.3 128 339.6 128 400c0 3.9 .2 7.8 .6 11.6c1.8 17.5-10.2 36.4-27.8 36.4H96c-17.7 0-32 14.3-32 32s14.3 32 32 32H240c61.9 0 112-50.1 112-112c0-2.5-.1-5-.2-7.5z"/></svg></span>
+                        </button>
+                        <ul id="mdbook-theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-ayu">Ayu</button></li>
+                        </ul>
+                        <button id="mdbook-search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="mdbook-searchbar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352c79.5 0 144-64.5 144-144s-64.5-144-144-144S64 128.5 64 208s64.5 144 144 144z"/></svg></span>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Wowm Language</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <span class=fa-svg id="print-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M128 0C92.7 0 64 28.7 64 64v96h64V64H354.7L384 93.3V160h64V93.3c0-17-6.7-33.3-18.7-45.3L400 18.7C388 6.7 371.7 0 354.7 0H128zM384 352v32 64H128V384 368 352H384zm64 32h32c17.7 0 32-14.3 32-32V256c0-35.3-28.7-64-64-64H64c-35.3 0-64 28.7-64 64v96c0 17.7 14.3 32 32 32H64v64c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V384zm-16-88c-13.3 0-24-10.7-24-24s10.7-24 24-24s24 10.7 24 24s-10.7 24-24 24z"/></svg></span>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="mdbook-search-wrapper" class="hidden">
+                    <form id="mdbook-searchbar-outer" class="searchbar-outer">
+                        <div class="search-wrapper">
+                            <input type="search" id="mdbook-searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="mdbook-searchresults-outer" aria-describedby="searchresults-header">
+                            <div class="spinner-wrapper">
+                                <span class=fa-svg id="fa-spin"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M304 48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zm0 416c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM48 304c26.5 0 48-21.5 48-48s-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48zm464-48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM142.9 437c18.7-18.7 18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zm0-294.2c18.7-18.7 18.7-49.1 0-67.9S93.7 56.2 75 75s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zM369.1 437c18.7 18.7 49.1 18.7 67.9 0s18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9z"/></svg></span>
+                            </div>
+                        </div>
+                    </form>
+                    <div id="mdbook-searchresults-outer" class="searchresults-outer hidden">
+                        <div id="mdbook-searchresults-header" class="searchresults-header"></div>
+                        <ul id="mdbook-searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('mdbook-sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('mdbook-sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#mdbook-sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="mdbook-content" class="content">
+                    <main>
+                        <h1 id="itemset"><a class="header" href="#itemset">ItemSet</a></h1>
+<h2 id="client-version-112"><a class="header" href="#client-version-112">Client Version 1.12</a></h2>
+<h3 id="wowm-representation"><a class="header" href="#wowm-representation">Wowm Representation</a></h3>
+<p>Autogenerated from <code>wowm</code> file at <a href="https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/item/item_sets.wowm#L1"><code>wow_message_parser/wowm/world/item/item_sets.wowm:1</code></a>.</p>
+<pre><code class="language-rust ignore">enum ItemSet : u16 {
+    NONE = 0;
+    THE_GLADIATOR = 1;
+    DAL_RENDS_ARMS = 41;
+    SPIDERS_KISS = 65;
+    THE_POSTMASTER = 81;
+    CADAVEROUS_GARB = 121;
+    NECROPILE_RAIMENT = 122;
+    BLOODMAIL_REGALIA = 123;
+    DEATHBONE_GUARDIAN = 124;
+    VOLCANIC_ARMOR = 141;
+    STORMSHROUD_ARMOR = 142;
+    DEVILSAUR_ARMOR = 143;
+    IRONFEATHER_ARMOR = 144;
+    DEFIAS_LEATHER = 161;
+    EMBRACE_OF_THE_VIPER = 162;
+    CHAIN_OF_THE_SCARLET_CRUSADE = 163;
+    MAGISTERS_REGALIA = 181;
+    VESTMENTS_OF_THE_DEVOUT = 182;
+    DREADMIST_RAIMENT = 183;
+    SHADOWCRAFT_ARMOR = 184;
+    WILDHEART_RAIMENT = 185;
+    BEASTSTALKER_ARMOR = 186;
+    THE_ELEMENTS = 187;
+    LIGHTFORGE_ARMOR = 188;
+    BATTLEGEAR_OF_VALOR = 189;
+    ARCANIST_REGALIA = 201;
+    VESTMENTS_OF_PROPHECY = 202;
+    FELHEART_RAIMENT = 203;
+    NIGHTSLAYER_ARMOR = 204;
+    CENARION_RAIMENT = 205;
+    GIANTSTALKER_ARMOR = 206;
+    THE_EARTHFURY = 207;
+    LAWBRINGER_ARMOR = 208;
+    BATTLEGEAR_OF_MIGHT = 209;
+    NETHERWIND_REGALIA = 210;
+    VESTMENTS_OF_TRANSCENDENCE = 211;
+    NEMESIS_RAIMENT = 212;
+    BLOODFANG_ARMOR = 213;
+    STORMRAGE_RAIMENT = 214;
+    DRAGONSTALKER_ARMOR = 215;
+    THE_TEN_STORMS = 216;
+    JUDGEMENT_ARMOR = 217;
+    BATTLEGEAR_OF_WRATH = 218;
+    GARB_OF_THERO_SHAN = 221;
+    SHARD_OF_THE_GODS = 241;
+    SPIRIT_OF_ESKHANDAR = 261;
+    CHAMPIONS_BATTLEGEAR = 281;
+    LIEUTENANT_COMMANDERS_BATTLEGEAR = 282;
+    CHAMPIONS_EARTHSHAKER = 301;
+    IMPERIAL_PLATE = 321;
+    CHAMPIONS_REGALIA = 341;
+    CHAMPIONS_RAIMENT = 342;
+    LIEUTENANT_COMMANDERS_REGALIA = 343;
+    LIEUTENANT_COMMANDERS_RAIMENT = 344;
+    CHAMPIONS_THREADS = 345;
+    LIEUTENANT_COMMANDERS_THREADS = 346;
+    CHAMPIONS_VESTMENTS = 347;
+    LIEUTENANT_COMMANDERS_VESTMENTS = 348;
+    CHAMPIONS_PURSUIT = 361;
+    LIEUTENANT_COMMANDERS_PURSUIT = 362;
+    LIEUTENANT_COMMANDERS_SANCTUARY = 381;
+    CHAMPIONS_SANCTUARY = 382;
+    WARLORDS_BATTLEGEAR = 383;
+    FIELD_MARSHALS_BATTLEGEAR = 384;
+    WARLORDS_EARTHSHAKER = 386;
+    WARLORDS_REGALIA = 387;
+    FIELD_MARSHALS_REGALIA = 388;
+    FIELD_MARSHALS_RAIMENT = 389;
+    WARLORDS_RAIMENT = 390;
+    WARLORDS_THREADS = 391;
+    FIELD_MARSHALS_THREADS = 392;
+    WARLORDS_VESTMENTS = 393;
+    FIELD_MARSHALS_VESTMENTS = 394;
+    FIELD_MARSHALS_PURSUIT = 395;
+    WARLORDS_PURSUIT = 396;
+    FIELD_MARSHALS_SANCTUARY = 397;
+    WARLORDS_SANCTUARY = 398;
+    LIEUTENANT_COMMANDERS_AEGIS = 401;
+    FIELD_MARSHALS_AEGIS = 402;
+    BLOODVINE_GARB = 421;
+    PRIMAL_BATSKIN = 441;
+    BLOOD_TIGER_HARNESS = 442;
+    BLOODSOUL_EMBRACE = 443;
+    THE_DARKSOUL = 444;
+    THE_TWIN_BLADES_OF_HAKKARI = 461;
+    ZANZILS_CONCENTRATION = 462;
+    PRIMAL_BLESSING = 463;
+    OVERLORDS_RESOLUTION = 464;
+    PRAYER_OF_THE_PRIMAL = 465;
+    MAJOR_MOJO_INFUSION = 466;
+    THE_HIGHLANDERS_RESOLUTION = 467;
+    THE_HIGHLANDERS_RESOLVE = 468;
+    THE_HIGHLANDERS_DETERMINATION = 469;
+    THE_HIGHLANDERS_FORTITUDE = 470;
+    THE_HIGHLANDERS_PURPOSE = 471;
+    THE_HIGHLANDERS_WILL = 472;
+    THE_HIGHLANDERS_INTENT = 473;
+    VINDICATORS_BATTLEGEAR = 474;
+    FREETHINKERS_ARMOR = 475;
+    AUGURS_REGALIA = 476;
+    PREDATORS_ARMOR = 477;
+    MADCAPS_OUTFIT = 478;
+    HARUSPEXS_GARB = 479;
+    CONFESSORS_RAIMENT = 480;
+    DEMONIACS_THREADS = 481;
+    ILLUSIONISTS_ATTIRE = 482;
+    THE_DEFILERS_DETERMINATION = 483;
+    THE_DEFILERS_FORTITUDE = 484;
+    THE_DEFILERS_INTENT = 485;
+    THE_DEFILERS_PURPOSE = 486;
+    THE_DEFILERS_RESOLUTION = 487;
+    THE_DEFILERS_WILL = 488;
+    BLACK_DRAGON_MAIL = 489;
+    GREEN_DRAGON_MAIL = 490;
+    BLUE_DRAGON_MAIL = 491;
+    TWILIGHT_TRAPPINGS = 492;
+    GENESIS_RAIMENT = 493;
+    SYMBOLS_OF_UNENDING_LIFE = 494;
+    BATTLEGEAR_OF_UNYIELDING_STRENGTH = 495;
+    CONQUERORS_BATTLEGEAR = 496;
+    DEATHDEALERS_EMBRACE = 497;
+    EMBLEMS_OF_VEILED_SHADOWS = 498;
+    DOOMCALLERS_ATTIRE = 499;
+    IMPLEMENTS_OF_UNSPOKEN_NAMES = 500;
+    STORMCALLERS_GARB = 501;
+    GIFT_OF_THE_GATHERING_STORM = 502;
+    ENIGMA_VESTMENTS = 503;
+    TRAPPINGS_OF_VAULTED_SECRETS = 504;
+    AVENGERS_BATTLEGEAR = 505;
+    BATTLEGEAR_OF_ETERNAL_JUSTICE = 506;
+    GARMENTS_OF_THE_ORACLE = 507;
+    FINERY_OF_INFINITE_WISDOM = 508;
+    STRIKERS_GARB = 509;
+    TRAPPINGS_OF_THE_UNSEEN_PATH = 510;
+    BATTLEGEAR_OF_HEROISM = 511;
+    DARKMANTLE_ARMOR = 512;
+    FERALHEART_RAIMENT = 513;
+    VESTMENTS_OF_THE_VIRTUOUS = 514;
+    BEASTMASTER_ARMOR = 515;
+    SOULFORGE_ARMOR = 516;
+    SORCERERS_REGALIA = 517;
+    DEATHMIST_RAIMENT = 518;
+    THE_FIVE_THUNDERS = 519;
+    IRONWEAVE_BATTLESUIT = 520;
+    DREAMWALKER_RAIMENT = 521;
+    CHAMPIONS_GUARD = 522;
+    DREADNAUGHTS_BATTLEGEAR = 523;
+    BONESCYTHE_ARMOR = 524;
+    VESTMENTS_OF_FAITH = 525;
+    FROSTFIRE_REGALIA = 526;
+    THE_EARTHSHATTERER = 527;
+    REDEMPTION_ARMOR = 528;
+    PLAGUEHEART_RAIMENT = 529;
+    CRYPTSTALKER_ARMOR = 530;
+    BATTLEGEAR_OF_UNDEAD_SLAYING = 533;
+    UNDEAD_SLAYERS_ARMOR = 534;
+    GARB_OF_THE_UNDEAD_SLAYER = 535;
+    REGALIA_OF_UNDEAD_CLEANSING = 536;
+    CHAMPIONS_BATTLEARMOR = 537;
+    CHAMPIONS_STORMCALLER = 538;
+    CHAMPIONS_REFUGE = 539;
+    CHAMPIONS_INVESTITURE = 540;
+    CHAMPIONS_DREADGEAR = 541;
+    CHAMPIONS_ARCANUM = 542;
+    CHAMPIONS_PURSUANCE = 543;
+    LIEUTENANT_COMMANDERS_REDOUBT = 544;
+    LIEUTENANT_COMMANDERS_BATTLEARMOR = 545;
+    LIEUTENANT_COMMANDERS_ARCANUM = 546;
+    LIEUTENANT_COMMANDERS_DREADGEAR = 547;
+    LIEUTENANT_COMMANDERS_GUARD = 548;
+    LIEUTENANT_COMMANDERS_INVESTITURE = 549;
+    LIEUTENANT_COMMANDERS_PURSUANCE = 550;
+    LIEUTENANT_COMMANDERS_REFUGE = 551;
+}</code></pre>
+<h3 id="type"><a class="header" href="#type">Type</a></h3>
+<p>The basic type is <code>u16</code>, a 2 byte (16 bit) little endian integer.</p>
+<h3 id="enumerators"><a class="header" href="#enumerators">Enumerators</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Enumerator</th><th>Value</th><th>Comment</th><th>Display</th></tr>
+</thead>
+<tbody>
+<tr><td><code>NONE</code></td><td>0 (0x00)</td><td></td><td></td></tr>
+<tr><td><code>THE_GLADIATOR</code></td><td>1 (0x01)</td><td></td><td></td></tr>
+<tr><td><code>DAL_RENDS_ARMS</code></td><td>41 (0x29)</td><td></td><td>Dal’Rend’s Arms</td></tr>
+<tr><td><code>SPIDERS_KISS</code></td><td>65 (0x41)</td><td></td><td>Spider’s Kiss</td></tr>
+<tr><td><code>THE_POSTMASTER</code></td><td>81 (0x51)</td><td></td><td></td></tr>
+<tr><td><code>CADAVEROUS_GARB</code></td><td>121 (0x79)</td><td></td><td></td></tr>
+<tr><td><code>NECROPILE_RAIMENT</code></td><td>122 (0x7A)</td><td></td><td></td></tr>
+<tr><td><code>BLOODMAIL_REGALIA</code></td><td>123 (0x7B)</td><td></td><td></td></tr>
+<tr><td><code>DEATHBONE_GUARDIAN</code></td><td>124 (0x7C)</td><td></td><td></td></tr>
+<tr><td><code>VOLCANIC_ARMOR</code></td><td>141 (0x8D)</td><td></td><td></td></tr>
+<tr><td><code>STORMSHROUD_ARMOR</code></td><td>142 (0x8E)</td><td></td><td></td></tr>
+<tr><td><code>DEVILSAUR_ARMOR</code></td><td>143 (0x8F)</td><td></td><td></td></tr>
+<tr><td><code>IRONFEATHER_ARMOR</code></td><td>144 (0x90)</td><td></td><td></td></tr>
+<tr><td><code>DEFIAS_LEATHER</code></td><td>161 (0xA1)</td><td></td><td></td></tr>
+<tr><td><code>EMBRACE_OF_THE_VIPER</code></td><td>162 (0xA2)</td><td></td><td></td></tr>
+<tr><td><code>CHAIN_OF_THE_SCARLET_CRUSADE</code></td><td>163 (0xA3)</td><td></td><td></td></tr>
+<tr><td><code>MAGISTERS_REGALIA</code></td><td>181 (0xB5)</td><td></td><td>Magister’s Regalia</td></tr>
+<tr><td><code>VESTMENTS_OF_THE_DEVOUT</code></td><td>182 (0xB6)</td><td></td><td></td></tr>
+<tr><td><code>DREADMIST_RAIMENT</code></td><td>183 (0xB7)</td><td></td><td></td></tr>
+<tr><td><code>SHADOWCRAFT_ARMOR</code></td><td>184 (0xB8)</td><td></td><td></td></tr>
+<tr><td><code>WILDHEART_RAIMENT</code></td><td>185 (0xB9)</td><td></td><td></td></tr>
+<tr><td><code>BEASTSTALKER_ARMOR</code></td><td>186 (0xBA)</td><td></td><td></td></tr>
+<tr><td><code>THE_ELEMENTS</code></td><td>187 (0xBB)</td><td></td><td></td></tr>
+<tr><td><code>LIGHTFORGE_ARMOR</code></td><td>188 (0xBC)</td><td></td><td></td></tr>
+<tr><td><code>BATTLEGEAR_OF_VALOR</code></td><td>189 (0xBD)</td><td></td><td></td></tr>
+<tr><td><code>ARCANIST_REGALIA</code></td><td>201 (0xC9)</td><td></td><td></td></tr>
+<tr><td><code>VESTMENTS_OF_PROPHECY</code></td><td>202 (0xCA)</td><td></td><td></td></tr>
+<tr><td><code>FELHEART_RAIMENT</code></td><td>203 (0xCB)</td><td></td><td></td></tr>
+<tr><td><code>NIGHTSLAYER_ARMOR</code></td><td>204 (0xCC)</td><td></td><td></td></tr>
+<tr><td><code>CENARION_RAIMENT</code></td><td>205 (0xCD)</td><td></td><td></td></tr>
+<tr><td><code>GIANTSTALKER_ARMOR</code></td><td>206 (0xCE)</td><td></td><td></td></tr>
+<tr><td><code>THE_EARTHFURY</code></td><td>207 (0xCF)</td><td></td><td></td></tr>
+<tr><td><code>LAWBRINGER_ARMOR</code></td><td>208 (0xD0)</td><td></td><td></td></tr>
+<tr><td><code>BATTLEGEAR_OF_MIGHT</code></td><td>209 (0xD1)</td><td></td><td></td></tr>
+<tr><td><code>NETHERWIND_REGALIA</code></td><td>210 (0xD2)</td><td></td><td></td></tr>
+<tr><td><code>VESTMENTS_OF_TRANSCENDENCE</code></td><td>211 (0xD3)</td><td></td><td></td></tr>
+<tr><td><code>NEMESIS_RAIMENT</code></td><td>212 (0xD4)</td><td></td><td></td></tr>
+<tr><td><code>BLOODFANG_ARMOR</code></td><td>213 (0xD5)</td><td></td><td></td></tr>
+<tr><td><code>STORMRAGE_RAIMENT</code></td><td>214 (0xD6)</td><td></td><td></td></tr>
+<tr><td><code>DRAGONSTALKER_ARMOR</code></td><td>215 (0xD7)</td><td></td><td></td></tr>
+<tr><td><code>THE_TEN_STORMS</code></td><td>216 (0xD8)</td><td></td><td></td></tr>
+<tr><td><code>JUDGEMENT_ARMOR</code></td><td>217 (0xD9)</td><td></td><td></td></tr>
+<tr><td><code>BATTLEGEAR_OF_WRATH</code></td><td>218 (0xDA)</td><td></td><td></td></tr>
+<tr><td><code>GARB_OF_THERO_SHAN</code></td><td>221 (0xDD)</td><td></td><td>Garb of Thero-shan</td></tr>
+<tr><td><code>SHARD_OF_THE_GODS</code></td><td>241 (0xF1)</td><td></td><td></td></tr>
+<tr><td><code>SPIRIT_OF_ESKHANDAR</code></td><td>261 (0x105)</td><td></td><td></td></tr>
+<tr><td><code>CHAMPIONS_BATTLEGEAR</code></td><td>281 (0x119)</td><td></td><td>Champion’s Battlegear</td></tr>
+<tr><td><code>LIEUTENANT_COMMANDERS_BATTLEGEAR</code></td><td>282 (0x11A)</td><td></td><td>Lieutenant Commander’s Battlegear</td></tr>
+<tr><td><code>CHAMPIONS_EARTHSHAKER</code></td><td>301 (0x12D)</td><td></td><td>Champion’s Earthshaker</td></tr>
+<tr><td><code>IMPERIAL_PLATE</code></td><td>321 (0x141)</td><td></td><td></td></tr>
+<tr><td><code>CHAMPIONS_REGALIA</code></td><td>341 (0x155)</td><td></td><td>Champion’s Regalia</td></tr>
+<tr><td><code>CHAMPIONS_RAIMENT</code></td><td>342 (0x156)</td><td></td><td>Champion’s Raiment</td></tr>
+<tr><td><code>LIEUTENANT_COMMANDERS_REGALIA</code></td><td>343 (0x157)</td><td></td><td>Lieutenant Commander’s Regalia</td></tr>
+<tr><td><code>LIEUTENANT_COMMANDERS_RAIMENT</code></td><td>344 (0x158)</td><td></td><td>Lieutenant Commander’s Raiment</td></tr>
+<tr><td><code>CHAMPIONS_THREADS</code></td><td>345 (0x159)</td><td></td><td>Champion’s Threads</td></tr>
+<tr><td><code>LIEUTENANT_COMMANDERS_THREADS</code></td><td>346 (0x15A)</td><td></td><td>Lieutenant Commander’s Threads</td></tr>
+<tr><td><code>CHAMPIONS_VESTMENTS</code></td><td>347 (0x15B)</td><td></td><td>Champion’s Vestments</td></tr>
+<tr><td><code>LIEUTENANT_COMMANDERS_VESTMENTS</code></td><td>348 (0x15C)</td><td></td><td>Lieutenant Commander’s Vestments</td></tr>
+<tr><td><code>CHAMPIONS_PURSUIT</code></td><td>361 (0x169)</td><td></td><td>Champion’s Pursuit</td></tr>
+<tr><td><code>LIEUTENANT_COMMANDERS_PURSUIT</code></td><td>362 (0x16A)</td><td></td><td>Lieutenant Commander’s Pursuit</td></tr>
+<tr><td><code>LIEUTENANT_COMMANDERS_SANCTUARY</code></td><td>381 (0x17D)</td><td></td><td>Lieutenant Commander’s Sanctuary</td></tr>
+<tr><td><code>CHAMPIONS_SANCTUARY</code></td><td>382 (0x17E)</td><td></td><td>Champion’s Sanctuary</td></tr>
+<tr><td><code>WARLORDS_BATTLEGEAR</code></td><td>383 (0x17F)</td><td></td><td>Warlord’s Battlegear</td></tr>
+<tr><td><code>FIELD_MARSHALS_BATTLEGEAR</code></td><td>384 (0x180)</td><td></td><td>Field Marshal’s Battlegear</td></tr>
+<tr><td><code>WARLORDS_EARTHSHAKER</code></td><td>386 (0x182)</td><td></td><td>Warlord’s Earthshaker</td></tr>
+<tr><td><code>WARLORDS_REGALIA</code></td><td>387 (0x183)</td><td></td><td>Warlord’s Regalia</td></tr>
+<tr><td><code>FIELD_MARSHALS_REGALIA</code></td><td>388 (0x184)</td><td></td><td>Field Marshal’s Regalia</td></tr>
+<tr><td><code>FIELD_MARSHALS_RAIMENT</code></td><td>389 (0x185)</td><td></td><td>Field Marshal’s Raiment</td></tr>
+<tr><td><code>WARLORDS_RAIMENT</code></td><td>390 (0x186)</td><td></td><td>Warlord’s Raiment</td></tr>
+<tr><td><code>WARLORDS_THREADS</code></td><td>391 (0x187)</td><td></td><td>Warlord’s Threads</td></tr>
+<tr><td><code>FIELD_MARSHALS_THREADS</code></td><td>392 (0x188)</td><td></td><td>Field Marshal’s Threads</td></tr>
+<tr><td><code>WARLORDS_VESTMENTS</code></td><td>393 (0x189)</td><td></td><td>Warlord’s Vestments</td></tr>
+<tr><td><code>FIELD_MARSHALS_VESTMENTS</code></td><td>394 (0x18A)</td><td></td><td>Field Marshal’s Vestments</td></tr>
+<tr><td><code>FIELD_MARSHALS_PURSUIT</code></td><td>395 (0x18B)</td><td></td><td>Field Marshal’s Pursuit</td></tr>
+<tr><td><code>WARLORDS_PURSUIT</code></td><td>396 (0x18C)</td><td></td><td>Warlord’s Pursuit</td></tr>
+<tr><td><code>FIELD_MARSHALS_SANCTUARY</code></td><td>397 (0x18D)</td><td></td><td>Field Marshal’s Sanctuary</td></tr>
+<tr><td><code>WARLORDS_SANCTUARY</code></td><td>398 (0x18E)</td><td></td><td>Warlord’s Sanctuary</td></tr>
+<tr><td><code>LIEUTENANT_COMMANDERS_AEGIS</code></td><td>401 (0x191)</td><td></td><td>Lieutenant Commander’s Aegis</td></tr>
+<tr><td><code>FIELD_MARSHALS_AEGIS</code></td><td>402 (0x192)</td><td></td><td>Field Marshal’s Aegis</td></tr>
+<tr><td><code>BLOODVINE_GARB</code></td><td>421 (0x1A5)</td><td></td><td></td></tr>
+<tr><td><code>PRIMAL_BATSKIN</code></td><td>441 (0x1B9)</td><td></td><td></td></tr>
+<tr><td><code>BLOOD_TIGER_HARNESS</code></td><td>442 (0x1BA)</td><td></td><td></td></tr>
+<tr><td><code>BLOODSOUL_EMBRACE</code></td><td>443 (0x1BB)</td><td></td><td></td></tr>
+<tr><td><code>THE_DARKSOUL</code></td><td>444 (0x1BC)</td><td></td><td></td></tr>
+<tr><td><code>THE_TWIN_BLADES_OF_HAKKARI</code></td><td>461 (0x1CD)</td><td></td><td></td></tr>
+<tr><td><code>ZANZILS_CONCENTRATION</code></td><td>462 (0x1CE)</td><td></td><td>Zanzil’s Concentration</td></tr>
+<tr><td><code>PRIMAL_BLESSING</code></td><td>463 (0x1CF)</td><td></td><td></td></tr>
+<tr><td><code>OVERLORDS_RESOLUTION</code></td><td>464 (0x1D0)</td><td></td><td>Overlord’s Resolution</td></tr>
+<tr><td><code>PRAYER_OF_THE_PRIMAL</code></td><td>465 (0x1D1)</td><td></td><td></td></tr>
+<tr><td><code>MAJOR_MOJO_INFUSION</code></td><td>466 (0x1D2)</td><td></td><td></td></tr>
+<tr><td><code>THE_HIGHLANDERS_RESOLUTION</code></td><td>467 (0x1D3)</td><td></td><td>The Highlander’s Resolution</td></tr>
+<tr><td><code>THE_HIGHLANDERS_RESOLVE</code></td><td>468 (0x1D4)</td><td></td><td>The Highlander’s Resolve</td></tr>
+<tr><td><code>THE_HIGHLANDERS_DETERMINATION</code></td><td>469 (0x1D5)</td><td></td><td>The Highlander’s Determination</td></tr>
+<tr><td><code>THE_HIGHLANDERS_FORTITUDE</code></td><td>470 (0x1D6)</td><td></td><td>The Highlander’s Fortitude</td></tr>
+<tr><td><code>THE_HIGHLANDERS_PURPOSE</code></td><td>471 (0x1D7)</td><td></td><td>The Highlander’s Purpose</td></tr>
+<tr><td><code>THE_HIGHLANDERS_WILL</code></td><td>472 (0x1D8)</td><td></td><td>The Highlander’s Will</td></tr>
+<tr><td><code>THE_HIGHLANDERS_INTENT</code></td><td>473 (0x1D9)</td><td></td><td>The Highlander’s Intent</td></tr>
+<tr><td><code>VINDICATORS_BATTLEGEAR</code></td><td>474 (0x1DA)</td><td></td><td>Vindicator’s Battlegear</td></tr>
+<tr><td><code>FREETHINKERS_ARMOR</code></td><td>475 (0x1DB)</td><td></td><td>Freethinker’s Armor</td></tr>
+<tr><td><code>AUGURS_REGALIA</code></td><td>476 (0x1DC)</td><td></td><td>Augur’s Regalia</td></tr>
+<tr><td><code>PREDATORS_ARMOR</code></td><td>477 (0x1DD)</td><td></td><td>Predator’s Armor</td></tr>
+<tr><td><code>MADCAPS_OUTFIT</code></td><td>478 (0x1DE)</td><td></td><td>Madcap’s Outfit</td></tr>
+<tr><td><code>HARUSPEXS_GARB</code></td><td>479 (0x1DF)</td><td></td><td>Haruspex’s Garb</td></tr>
+<tr><td><code>CONFESSORS_RAIMENT</code></td><td>480 (0x1E0)</td><td></td><td>Confessor’s Raiment</td></tr>
+<tr><td><code>DEMONIACS_THREADS</code></td><td>481 (0x1E1)</td><td></td><td>Demoniac’s Threads</td></tr>
+<tr><td><code>ILLUSIONISTS_ATTIRE</code></td><td>482 (0x1E2)</td><td></td><td>Illusionist’s Attire</td></tr>
+<tr><td><code>THE_DEFILERS_DETERMINATION</code></td><td>483 (0x1E3)</td><td></td><td>The Defiler’s Determination</td></tr>
+<tr><td><code>THE_DEFILERS_FORTITUDE</code></td><td>484 (0x1E4)</td><td></td><td>The Defiler’s Fortitude</td></tr>
+<tr><td><code>THE_DEFILERS_INTENT</code></td><td>485 (0x1E5)</td><td></td><td>The Defiler’s Intent</td></tr>
+<tr><td><code>THE_DEFILERS_PURPOSE</code></td><td>486 (0x1E6)</td><td></td><td>The Defiler’s Purpose</td></tr>
+<tr><td><code>THE_DEFILERS_RESOLUTION</code></td><td>487 (0x1E7)</td><td></td><td>The Defiler’s Resolution</td></tr>
+<tr><td><code>THE_DEFILERS_WILL</code></td><td>488 (0x1E8)</td><td></td><td>The Defiler’s Will</td></tr>
+<tr><td><code>BLACK_DRAGON_MAIL</code></td><td>489 (0x1E9)</td><td></td><td></td></tr>
+<tr><td><code>GREEN_DRAGON_MAIL</code></td><td>490 (0x1EA)</td><td></td><td></td></tr>
+<tr><td><code>BLUE_DRAGON_MAIL</code></td><td>491 (0x1EB)</td><td></td><td></td></tr>
+<tr><td><code>TWILIGHT_TRAPPINGS</code></td><td>492 (0x1EC)</td><td></td><td></td></tr>
+<tr><td><code>GENESIS_RAIMENT</code></td><td>493 (0x1ED)</td><td></td><td></td></tr>
+<tr><td><code>SYMBOLS_OF_UNENDING_LIFE</code></td><td>494 (0x1EE)</td><td></td><td></td></tr>
+<tr><td><code>BATTLEGEAR_OF_UNYIELDING_STRENGTH</code></td><td>495 (0x1EF)</td><td></td><td></td></tr>
+<tr><td><code>CONQUERORS_BATTLEGEAR</code></td><td>496 (0x1F0)</td><td></td><td>Conqueror’s Battlegear</td></tr>
+<tr><td><code>DEATHDEALERS_EMBRACE</code></td><td>497 (0x1F1)</td><td></td><td>Deathdealer’s Embrace</td></tr>
+<tr><td><code>EMBLEMS_OF_VEILED_SHADOWS</code></td><td>498 (0x1F2)</td><td></td><td></td></tr>
+<tr><td><code>DOOMCALLERS_ATTIRE</code></td><td>499 (0x1F3)</td><td></td><td>Doomcaller’s Attire</td></tr>
+<tr><td><code>IMPLEMENTS_OF_UNSPOKEN_NAMES</code></td><td>500 (0x1F4)</td><td></td><td></td></tr>
+<tr><td><code>STORMCALLERS_GARB</code></td><td>501 (0x1F5)</td><td></td><td>Stormcaller’s Garb</td></tr>
+<tr><td><code>GIFT_OF_THE_GATHERING_STORM</code></td><td>502 (0x1F6)</td><td></td><td></td></tr>
+<tr><td><code>ENIGMA_VESTMENTS</code></td><td>503 (0x1F7)</td><td></td><td></td></tr>
+<tr><td><code>TRAPPINGS_OF_VAULTED_SECRETS</code></td><td>504 (0x1F8)</td><td></td><td></td></tr>
+<tr><td><code>AVENGERS_BATTLEGEAR</code></td><td>505 (0x1F9)</td><td></td><td>Avenger’s Battlegear</td></tr>
+<tr><td><code>BATTLEGEAR_OF_ETERNAL_JUSTICE</code></td><td>506 (0x1FA)</td><td></td><td></td></tr>
+<tr><td><code>GARMENTS_OF_THE_ORACLE</code></td><td>507 (0x1FB)</td><td></td><td></td></tr>
+<tr><td><code>FINERY_OF_INFINITE_WISDOM</code></td><td>508 (0x1FC)</td><td></td><td></td></tr>
+<tr><td><code>STRIKERS_GARB</code></td><td>509 (0x1FD)</td><td></td><td>Striker’s Garb</td></tr>
+<tr><td><code>TRAPPINGS_OF_THE_UNSEEN_PATH</code></td><td>510 (0x1FE)</td><td></td><td></td></tr>
+<tr><td><code>BATTLEGEAR_OF_HEROISM</code></td><td>511 (0x1FF)</td><td></td><td></td></tr>
+<tr><td><code>DARKMANTLE_ARMOR</code></td><td>512 (0x200)</td><td></td><td></td></tr>
+<tr><td><code>FERALHEART_RAIMENT</code></td><td>513 (0x201)</td><td></td><td></td></tr>
+<tr><td><code>VESTMENTS_OF_THE_VIRTUOUS</code></td><td>514 (0x202)</td><td></td><td></td></tr>
+<tr><td><code>BEASTMASTER_ARMOR</code></td><td>515 (0x203)</td><td></td><td></td></tr>
+<tr><td><code>SOULFORGE_ARMOR</code></td><td>516 (0x204)</td><td></td><td></td></tr>
+<tr><td><code>SORCERERS_REGALIA</code></td><td>517 (0x205)</td><td></td><td>Sorcerer’s Regalia</td></tr>
+<tr><td><code>DEATHMIST_RAIMENT</code></td><td>518 (0x206)</td><td></td><td></td></tr>
+<tr><td><code>THE_FIVE_THUNDERS</code></td><td>519 (0x207)</td><td></td><td></td></tr>
+<tr><td><code>IRONWEAVE_BATTLESUIT</code></td><td>520 (0x208)</td><td></td><td></td></tr>
+<tr><td><code>DREAMWALKER_RAIMENT</code></td><td>521 (0x209)</td><td></td><td></td></tr>
+<tr><td><code>CHAMPIONS_GUARD</code></td><td>522 (0x20A)</td><td></td><td>Champion’s Guard</td></tr>
+<tr><td><code>DREADNAUGHTS_BATTLEGEAR</code></td><td>523 (0x20B)</td><td></td><td>Dreadnaught’s Battlegear</td></tr>
+<tr><td><code>BONESCYTHE_ARMOR</code></td><td>524 (0x20C)</td><td></td><td></td></tr>
+<tr><td><code>VESTMENTS_OF_FAITH</code></td><td>525 (0x20D)</td><td></td><td></td></tr>
+<tr><td><code>FROSTFIRE_REGALIA</code></td><td>526 (0x20E)</td><td></td><td></td></tr>
+<tr><td><code>THE_EARTHSHATTERER</code></td><td>527 (0x20F)</td><td></td><td></td></tr>
+<tr><td><code>REDEMPTION_ARMOR</code></td><td>528 (0x210)</td><td></td><td></td></tr>
+<tr><td><code>PLAGUEHEART_RAIMENT</code></td><td>529 (0x211)</td><td></td><td></td></tr>
+<tr><td><code>CRYPTSTALKER_ARMOR</code></td><td>530 (0x212)</td><td></td><td></td></tr>
+<tr><td><code>BATTLEGEAR_OF_UNDEAD_SLAYING</code></td><td>533 (0x215)</td><td></td><td></td></tr>
+<tr><td><code>UNDEAD_SLAYERS_ARMOR</code></td><td>534 (0x216)</td><td></td><td>Undead Slayer’s Armor</td></tr>
+<tr><td><code>GARB_OF_THE_UNDEAD_SLAYER</code></td><td>535 (0x217)</td><td></td><td></td></tr>
+<tr><td><code>REGALIA_OF_UNDEAD_CLEANSING</code></td><td>536 (0x218)</td><td></td><td></td></tr>
+<tr><td><code>CHAMPIONS_BATTLEARMOR</code></td><td>537 (0x219)</td><td></td><td>Champion’s Battlearmor</td></tr>
+<tr><td><code>CHAMPIONS_STORMCALLER</code></td><td>538 (0x21A)</td><td></td><td>Champion’s Stormcaller</td></tr>
+<tr><td><code>CHAMPIONS_REFUGE</code></td><td>539 (0x21B)</td><td></td><td>Champion’s Refuge</td></tr>
+<tr><td><code>CHAMPIONS_INVESTITURE</code></td><td>540 (0x21C)</td><td></td><td>Champion’s Investiture</td></tr>
+<tr><td><code>CHAMPIONS_DREADGEAR</code></td><td>541 (0x21D)</td><td></td><td>Champion’s Dreadgear</td></tr>
+<tr><td><code>CHAMPIONS_ARCANUM</code></td><td>542 (0x21E)</td><td></td><td>Champion’s Arcanum</td></tr>
+<tr><td><code>CHAMPIONS_PURSUANCE</code></td><td>543 (0x21F)</td><td></td><td>Champion’s Pursuance</td></tr>
+<tr><td><code>LIEUTENANT_COMMANDERS_REDOUBT</code></td><td>544 (0x220)</td><td></td><td>Lieutenant Commander’s Redoubt</td></tr>
+<tr><td><code>LIEUTENANT_COMMANDERS_BATTLEARMOR</code></td><td>545 (0x221)</td><td></td><td>Lieutenant Commander’s Battlearmor</td></tr>
+<tr><td><code>LIEUTENANT_COMMANDERS_ARCANUM</code></td><td>546 (0x222)</td><td></td><td>Lieutenant Commander’s Arcanum</td></tr>
+<tr><td><code>LIEUTENANT_COMMANDERS_DREADGEAR</code></td><td>547 (0x223)</td><td></td><td>Lieutenant Commander’s Dreadgear</td></tr>
+<tr><td><code>LIEUTENANT_COMMANDERS_GUARD</code></td><td>548 (0x224)</td><td></td><td>Lieutenant Commander’s Guard</td></tr>
+<tr><td><code>LIEUTENANT_COMMANDERS_INVESTITURE</code></td><td>549 (0x225)</td><td></td><td>Lieutenant Commander’s Investiture</td></tr>
+<tr><td><code>LIEUTENANT_COMMANDERS_PURSUANCE</code></td><td>550 (0x226)</td><td></td><td>Lieutenant Commander’s Pursuance</td></tr>
+<tr><td><code>LIEUTENANT_COMMANDERS_REFUGE</code></td><td>551 (0x227)</td><td></td><td>Lieutenant Commander’s Refuge</td></tr>
+</tbody>
+</table>
+</div>
+<p>Used in:</p>
+<ul>
+<li><a href="smsg_item_query_single_response.html">SMSG_ITEM_QUERY_SINGLE_RESPONSE</a></li>
+</ul>
+<h2 id="client-version-243"><a class="header" href="#client-version-243">Client Version 2.4.3</a></h2>
+<h3 id="wowm-representation-1"><a class="header" href="#wowm-representation-1">Wowm Representation</a></h3>
+<p>Autogenerated from <code>wowm</code> file at <a href="https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/item/item_sets.wowm#L350"><code>wow_message_parser/wowm/world/item/item_sets.wowm:350</code></a>.</p>
+<pre><code class="language-rust ignore">enum ItemSet : u16 {
+    NONE = 0;
+    THE_GLADIATOR = 1;
+    DAL_RENDS_ARMS = 41;
+    SPIDERS_KISS = 65;
+    THE_POSTMASTER = 81;
+    CADAVEROUS_GARB = 121;
+    NECROPILE_RAIMENT = 122;
+    BLOODMAIL_REGALIA = 123;
+    DEATHBONE_GUARDIAN = 124;
+    VOLCANIC_ARMOR = 141;
+    STORMSHROUD_ARMOR = 142;
+    DEVILSAUR_ARMOR = 143;
+    IRONFEATHER_ARMOR = 144;
+    DEFIAS_LEATHER = 161;
+    EMBRACE_OF_THE_VIPER = 162;
+    CHAIN_OF_THE_SCARLET_CRUSADE = 163;
+    MAGISTERS_REGALIA = 181;
+    VESTMENTS_OF_THE_DEVOUT = 182;
+    DREADMIST_RAIMENT = 183;
+    SHADOWCRAFT_ARMOR = 184;
+    WILDHEART_RAIMENT = 185;
+    BEASTSTALKER_ARMOR = 186;
+    THE_ELEMENTS = 187;
+    LIGHTFORGE_ARMOR = 188;
+    BATTLEGEAR_OF_VALOR = 189;
+    ARCANIST_REGALIA = 201;
+    VESTMENTS_OF_PROPHECY = 202;
+    FELHEART_RAIMENT = 203;
+    NIGHTSLAYER_ARMOR = 204;
+    CENARION_RAIMENT = 205;
+    GIANTSTALKER_ARMOR = 206;
+    THE_EARTHFURY = 207;
+    LAWBRINGER_ARMOR = 208;
+    BATTLEGEAR_OF_MIGHT = 209;
+    NETHERWIND_REGALIA = 210;
+    VESTMENTS_OF_TRANSCENDENCE = 211;
+    NEMESIS_RAIMENT = 212;
+    BLOODFANG_ARMOR = 213;
+    STORMRAGE_RAIMENT = 214;
+    DRAGONSTALKER_ARMOR = 215;
+    THE_TEN_STORMS = 216;
+    JUDGEMENT_ARMOR = 217;
+    BATTLEGEAR_OF_WRATH = 218;
+    GARB_OF_THERO_SHAN = 221;
+    SHARD_OF_THE_GODS = 241;
+    SPIRIT_OF_ESKHANDAR = 261;
+    CHAMPIONS_BATTLEGEAR = 281;
+    LIEUTENANT_COMMANDERS_BATTLEGEAR = 282;
+    CHAMPIONS_EARTHSHAKER = 301;
+    IMPERIAL_PLATE = 321;
+    CHAMPIONS_REGALIA = 341;
+    CHAMPIONS_RAIMENT = 342;
+    LIEUTENANT_COMMANDERS_REGALIA = 343;
+    LIEUTENANT_COMMANDERS_RAIMENT = 344;
+    CHAMPIONS_THREADS = 345;
+    LIEUTENANT_COMMANDERS_THREADS = 346;
+    CHAMPIONS_VESTMENTS = 347;
+    LIEUTENANT_COMMANDERS_VESTMENTS = 348;
+    CHAMPIONS_PURSUIT = 361;
+    LIEUTENANT_COMMANDERS_PURSUIT = 362;
+    LIEUTENANT_COMMANDERS_SANCTUARY = 381;
+    CHAMPIONS_SANCTUARY = 382;
+    WARLORDS_BATTLEGEAR = 383;
+    FIELD_MARSHALS_BATTLEGEAR = 384;
+    WARLORDS_EARTHSHAKER = 386;
+    WARLORDS_REGALIA = 387;
+    FIELD_MARSHALS_REGALIA = 388;
+    FIELD_MARSHALS_RAIMENT = 389;
+    WARLORDS_RAIMENT = 390;
+    WARLORDS_THREADS = 391;
+    FIELD_MARSHALS_THREADS = 392;
+    WARLORDS_VESTMENTS = 393;
+    FIELD_MARSHALS_VESTMENTS = 394;
+    FIELD_MARSHALS_PURSUIT = 395;
+    WARLORDS_PURSUIT = 396;
+    FIELD_MARSHALS_SANCTUARY = 397;
+    WARLORDS_SANCTUARY = 398;
+    LIEUTENANT_COMMANDERS_AEGIS = 401;
+    FIELD_MARSHALS_AEGIS = 402;
+    BLOODVINE_GARB = 421;
+    PRIMAL_BATSKIN = 441;
+    BLOOD_TIGER_HARNESS = 442;
+    BLOODSOUL_EMBRACE = 443;
+    THE_DARKSOUL = 444;
+    THE_TWIN_BLADES_OF_HAKKARI = 461;
+    ZANZILS_CONCENTRATION = 462;
+    PRIMAL_BLESSING = 463;
+    OVERLORDS_RESOLUTION = 464;
+    PRAYER_OF_THE_PRIMAL = 465;
+    MAJOR_MOJO_INFUSION = 466;
+    THE_HIGHLANDERS_RESOLUTION = 467;
+    THE_HIGHLANDERS_RESOLVE = 468;
+    THE_HIGHLANDERS_DETERMINATION = 469;
+    THE_HIGHLANDERS_FORTITUDE = 470;
+    THE_HIGHLANDERS_PURPOSE = 471;
+    THE_HIGHLANDERS_WILL = 472;
+    THE_HIGHLANDERS_INTENT = 473;
+    VINDICATORS_BATTLEGEAR = 474;
+    FREETHINKERS_ARMOR = 475;
+    AUGURS_REGALIA = 476;
+    PREDATORS_ARMOR = 477;
+    MADCAPS_OUTFIT = 478;
+    HARUSPEXS_GARB = 479;
+    CONFESSORS_RAIMENT = 480;
+    DEMONIACS_THREADS = 481;
+    ILLUSIONISTS_ATTIRE = 482;
+    THE_DEFILERS_DETERMINATION = 483;
+    THE_DEFILERS_FORTITUDE = 484;
+    THE_DEFILERS_INTENT = 485;
+    THE_DEFILERS_PURPOSE = 486;
+    THE_DEFILERS_RESOLUTION = 487;
+    THE_DEFILERS_WILL = 488;
+    BLACK_DRAGON_MAIL = 489;
+    GREEN_DRAGON_MAIL = 490;
+    BLUE_DRAGON_MAIL = 491;
+    TWILIGHT_TRAPPINGS = 492;
+    GENESIS_RAIMENT = 493;
+    SYMBOLS_OF_UNENDING_LIFE = 494;
+    BATTLEGEAR_OF_UNYIELDING_STRENGTH = 495;
+    CONQUERORS_BATTLEGEAR = 496;
+    DEATHDEALERS_EMBRACE = 497;
+    EMBLEMS_OF_VEILED_SHADOWS = 498;
+    DOOMCALLERS_ATTIRE = 499;
+    IMPLEMENTS_OF_UNSPOKEN_NAMES = 500;
+    STORMCALLERS_GARB = 501;
+    GIFT_OF_THE_GATHERING_STORM = 502;
+    ENIGMA_VESTMENTS = 503;
+    TRAPPINGS_OF_VAULTED_SECRETS = 504;
+    AVENGERS_BATTLEGEAR = 505;
+    BATTLEGEAR_OF_ETERNAL_JUSTICE = 506;
+    GARMENTS_OF_THE_ORACLE = 507;
+    FINERY_OF_INFINITE_WISDOM = 508;
+    STRIKERS_GARB = 509;
+    TRAPPINGS_OF_THE_UNSEEN_PATH = 510;
+    BATTLEGEAR_OF_HEROISM = 511;
+    DARKMANTLE_ARMOR = 512;
+    FERALHEART_RAIMENT = 513;
+    VESTMENTS_OF_THE_VIRTUOUS = 514;
+    BEASTMASTER_ARMOR = 515;
+    SOULFORGE_ARMOR = 516;
+    SORCERERS_REGALIA = 517;
+    DEATHMIST_RAIMENT = 518;
+    THE_FIVE_THUNDERS = 519;
+    IRONWEAVE_BATTLESUIT = 520;
+    DREAMWALKER_RAIMENT = 521;
+    CHAMPIONS_GUARD = 522;
+    DREADNAUGHTS_BATTLEGEAR = 523;
+    BONESCYTHE_ARMOR = 524;
+    VESTMENTS_OF_FAITH = 525;
+    FROSTFIRE_REGALIA = 526;
+    THE_EARTHSHATTERER = 527;
+    REDEMPTION_ARMOR = 528;
+    PLAGUEHEART_RAIMENT = 529;
+    CRYPTSTALKER_ARMOR = 530;
+    BATTLEGEAR_OF_UNDEAD_SLAYING = 533;
+    UNDEAD_SLAYERS_ARMOR = 534;
+    GARB_OF_THE_UNDEAD_SLAYER = 535;
+    REGALIA_OF_UNDEAD_CLEANSING = 536;
+    CHAMPIONS_BATTLEARMOR = 537;
+    CHAMPIONS_STORMCALLER = 538;
+    CHAMPIONS_REFUGE = 539;
+    CHAMPIONS_INVESTITURE = 540;
+    CHAMPIONS_DREADGEAR = 541;
+    CHAMPIONS_ARCANUM = 542;
+    CHAMPIONS_PURSUANCE = 543;
+    LIEUTENANT_COMMANDERS_REDOUBT = 544;
+    LIEUTENANT_COMMANDERS_BATTLEARMOR = 545;
+    LIEUTENANT_COMMANDERS_ARCANUM = 546;
+    LIEUTENANT_COMMANDERS_DREADGEAR = 547;
+    LIEUTENANT_COMMANDERS_GUARD = 548;
+    LIEUTENANT_COMMANDERS_INVESTITURE = 549;
+    LIEUTENANT_COMMANDERS_PURSUANCE = 550;
+    LIEUTENANT_COMMANDERS_REFUGE = 551;
+    WRATH_OF_SPELLFIRE = 552;
+    SHADOWS_EMBRACE = 553;
+    PRIMAL_MOONCLOTH = 554;
+    NETHERWEAVE_VESTMENTS = 555;
+    IMBUED_NETHERWEAVE = 556;
+    SOULCLOTH_EMBRACE = 557;
+    ARCANOWEAVE_VESTMENTS = 558;
+    SPELLSTRIKE_INFUSION = 559;
+    FEL_IRON_PLATE = 560;
+    FEL_IRON_CHAIN = 561;
+    ADAMANTITE_BATTLEGEAR = 562;
+    ENCHANTED_ADAMANTITE_ARMOR = 563;
+    FLAME_GUARD = 564;
+    KHORIUM_WARD = 565;
+    BURNING_RAGE = 566;
+    GLADIATORS_BATTLEGEAR = 567;
+    GLADIATORS_DREADGEAR = 568;
+    FAITH_IN_FELSTEEL = 569;
+    THE_UNYIELDING = 570;
+    WHITEMEND_WISDOM = 571;
+    BATTLECAST_GARB = 572;
+    FEL_SKIN = 573;
+    STRENGTH_OF_THE_CLEFTHOOF = 574;
+    FELSTALKER_ARMOR = 575;
+    FURY_OF_THE_NETHER = 576;
+    GLADIATORS_VESTMENTS = 577;
+    GLADIATORS_EARTHSHAKER = 578;
+    GLADIATORS_REGALIA = 579;
+    GLADIATORS_THUNDERFIST = 580;
+    GLADIATORS_RAIMENT = 581;
+    GLADIATORS_AEGIS = 582;
+    GLADIATORS_VINDICATION = 583;
+    GLADIATORS_SANCTUARY = 584;
+    GLADIATORS_WILDHIDE = 585;
+    GLADIATORS_PURSUIT = 586;
+    HIGH_WARLORDS_AEGIS = 587;
+    HIGH_WARLORDS_BATTLEGEAR = 588;
+    GRAND_MARSHALS_AEGIS = 589;
+    GRAND_MARSHALS_BATTLEGEAR = 590;
+    GRAND_MARSHALS_DREADGEAR = 591;
+    HIGH_WARLORDS_DREADGEAR = 592;
+    GRAND_MARSHALS_EARTHSHAKER = 593;
+    HIGH_WARLORDS_EARTHSHAKER = 594;
+    GRAND_MARSHALS_PURSUIT = 595;
+    HIGH_WARLORDS_PURSUIT = 596;
+    GRAND_MARSHALS_RAIMENT = 597;
+    HIGH_WARLORDS_RAIMENT = 598;
+    GRAND_MARSHALS_REGALIA = 599;
+    HIGH_WARLORDS_REGALIA = 600;
+    GRAND_MARSHALS_SANCTUARY = 601;
+    HIGH_WARLORDS_SANCTUARY = 602;
+    GRAND_MARSHALS_THUNDERFIST = 603;
+    HIGH_WARLORDS_THUNDERFIST = 604;
+    GRAND_MARSHALS_VESTMENTS = 605;
+    HIGH_WARLORDS_VESTMENTS = 606;
+    GRAND_MARSHALS_VINDICATION = 607;
+    HIGH_WARLORDS_VINDICATION = 608;
+    GRAND_MARSHALS_WILDHIDE = 609;
+    HIGH_WARLORDS_WILDHIDE = 610;
+    FELSCALE_ARMOR = 611;
+    SCALED_DRAENIC_ARMOR = 612;
+    THICK_DRAENIC_ARMOR = 613;
+    WILD_DRAENISH_ARMOR = 614;
+    GLADIATORS_FELSHROUD = 615;
+    NETHERSCALE_ARMOR = 616;
+    NETHERSTRIKE_ARMOR = 617;
+    WINDHAWK_ARMOR = 618;
+    PRIMAL_INTENT = 619;
+    ASSASSINATION_ARMOR = 620;
+    NETHERBLADE = 621;
+    DEATHMANTLE = 622;
+    RIGHTEOUS_ARMOR = 623;
+    JUSTICAR_RAIMENT = 624;
+    JUSTICAR_ARMOR = 625;
+    JUSTICAR_BATTLEGEAR = 626;
+    CRYSTALFORGE_RAIMENT = 627;
+    CRYSTALFORGE_ARMOR = 628;
+    CRYSTALFORGE_BATTLEGEAR = 629;
+    TIDEFURY_RAIMENT = 630;
+    CYCLONE_RAIMENT = 631;
+    CYCLONE_REGALIA = 632;
+    CYCLONE_HARNESS = 633;
+    CATACLYSM_RAIMENT = 634;
+    CATACLYSM_REGALIA = 635;
+    CATACLYSM_HARNESS = 636;
+    MOONGLADE_RAIMENT = 637;
+    MALORNE_RAIMENT = 638;
+    MALORNE_REGALIA = 639;
+    MALORNE_HARNESS = 640;
+    NORDRASSIL_HARNESS = 641;
+    NORDRASSIL_RAIMENT = 642;
+    NORDRASSIL_REGALIA = 643;
+    OBLIVION_RAIMENT = 644;
+    VOIDHEART_RAIMENT = 645;
+    CORRUPTOR_RAIMENT = 646;
+    INCANTERS_REGALIA = 647;
+    ALDOR_REGALIA = 648;
+    TIRISFAL_REGALIA = 649;
+    BEAST_LORD_ARMOR = 650;
+    DEMON_STALKER_ARMOR = 651;
+    RIFT_STALKER_ARMOR = 652;
+    BOLD_ARMOR = 653;
+    WARBRINGER_ARMOR = 654;
+    WARBRINGER_BATTLEGEAR = 655;
+    DESTROYER_ARMOR = 656;
+    DESTROYER_BATTLEGEAR = 657;
+    MANA_ETCHED_REGALIA = 658;
+    WASTEWALKER_ARMOR = 659;
+    DESOLATION_BATTLEGEAR = 660;
+    DOOMPLATE_BATTLEGEAR = 661;
+    HALLOWED_RAIMENT = 662;
+    INCARNATE_RAIMENT = 663;
+    INCARNATE_REGALIA = 664;
+    AVATAR_RAIMENT = 665;
+    AVATAR_REGALIA = 666;
+    THE_TWIN_STARS = 667;
+    SLAYERS_ARMOR = 668;
+    GRONNSTALKERS_ARMOR = 669;
+    MALEFIC_RAIMENT = 670;
+    TEMPEST_REGALIA = 671;
+    ONSLAUGHT_BATTLEGEAR = 672;
+    ONSLAUGHT_ARMOR = 673;
+    ABSOLUTION_REGALIA = 674;
+    VESTMENTS_OF_ABSOLUTION = 675;
+    THUNDERHEART_HARNESS = 676;
+    THUNDERHEART_REGALIA = 677;
+    THUNDERHEART_RAIMENT = 678;
+    LIGHTBRINGER_ARMOR = 679;
+    LIGHTBRINGER_BATTLEGEAR = 680;
+    LIGHTBRINGER_RAIMENT = 681;
+    SKYSHATTER_HARNESS = 682;
+    SKYSHATTER_RAIMENT = 683;
+    SKYSHATTER_REGALIA = 684;
+    GLADIATORS_REFUGE = 685;
+    GLADIATORS_WARTIDE = 686;
+    GLADIATORS_INVESTITURE = 687;
+    GRAND_MARSHALS_REFUGE = 688;
+    HIGH_WARLORDS_REFUGE = 689;
+    GLADIATORS_REDEMPTION = 690;
+    GRAND_MARSHALS_INVESTITURE = 691;
+    HIGH_WARLORDS_INVESTITURE = 692;
+    GRAND_MARSHALS_REDEMPTION = 693;
+    HIGH_WARLORDS_REDEMPTION = 694;
+    GRAND_MARSHALS_WARTIDE = 695;
+    HIGH_WARLORDS_WARTIDE = 696;
+    CHAMPIONS_REDOUBT = 697;
+    WARLORDS_AEGIS = 698;
+    THE_TWIN_BLADES_OF_AZZINOTH = 699;
+    MERCILESS_GLADIATORS_AEGIS = 700;
+    MERCILESS_GLADIATORS_BATTLEGEAR = 701;
+    MERCILESS_GLADIATORS_DREADGEAR = 702;
+    MERCILESS_GLADIATORS_EARTHSHAKER = 703;
+    MERCILESS_GLADIATORS_FELSHROUD = 704;
+    MERCILESS_GLADIATORS_INVESTITURE = 705;
+    MERCILESS_GLADIATORS_PURSUIT = 706;
+    MERCILESS_GLADIATORS_RAIMENT = 707;
+    MERCILESS_GLADIATORS_REDEMPTION = 708;
+    MERCILESS_GLADIATORS_REFUGE = 709;
+    MERCILESS_GLADIATORS_REGALIA = 710;
+    MERCILESS_GLADIATORS_SANCTUARY = 711;
+    MERCILESS_GLADIATORS_THUNDERFIST = 712;
+    MERCILESS_GLADIATORS_VESTMENTS = 713;
+    MERCILESS_GLADIATORS_VINDICATION = 714;
+    MERCILESS_GLADIATORS_WARTIDE = 715;
+    MERCILESS_GLADIATORS_WILDHIDE = 716;
+    FIELD_MARSHALS_EARTHSHAKER = 717;
+    LIEUTENANT_COMMANDERS_EARTHSHAKER = 718;
+    THE_FISTS_OF_FURY = 719;
+    VENGEFUL_GLADIATORS_REFUGE = 720;
+    VENGEFUL_GLADIATORS_SANCTUARY = 721;
+    VENGEFUL_GLADIATORS_WILDHIDE = 722;
+    VENGEFUL_GLADIATORS_PURSUIT = 723;
+    VENGEFUL_GLADIATORS_REGALIA = 724;
+    VENGEFUL_GLADIATORS_REDEMPTION = 725;
+    VENGEFUL_GLADIATORS_VINDICATION = 726;
+    VENGEFUL_GLADIATORS_AEGIS = 727;
+    VENGEFUL_GLADIATORS_INVESTITURE = 728;
+    VENGEFUL_GLADIATORS_RAIMENT = 729;
+    VENGEFUL_GLADIATORS_VESTMENTS = 730;
+    VENGEFUL_GLADIATORS_WARTIDE = 731;
+    VENGEFUL_GLADIATORS_EARTHSHAKER = 732;
+    VENGEFUL_GLADIATORS_THUNDERFIST = 733;
+    VENGEFUL_GLADIATORS_DREADGEAR = 734;
+    VENGEFUL_GLADIATORS_FELSHROUD = 735;
+    VENGEFUL_GLADIATORS_BATTLEGEAR = 736;
+    LATROS_FLURRY = 737;
+    DREADWEAVE_BATTLEGEAR = 738;
+    MOONCLOTH_BATTLEGEAR = 739;
+    SATIN_BATTLEGEAR = 740;
+    EVOKERS_SILK_BATTLEGEAR = 741;
+    DRAGONHIDE_BATTLEGEAR = 742;
+    WYRMHIDE_BATTLEGEAR = 743;
+    KODOHIDE_BATTLEGEAR = 744;
+    OPPORTUNISTS_BATTLEGEAR = 745;
+    SEERS_MAIL_BATTLEGEAR = 746;
+    SEERS_RINGMAIL_BATTLEGEAR = 747;
+    SEERS_LINKED_BATTLEGEAR = 748;
+    STALKERS_CHAIN_BATTLEGEAR = 749;
+    SAVAGE_PLATE_BATTLEGEAR = 750;
+    CRUSADERS_ORNAMENTED_BATTLEGEAR = 751;
+    CRUSADERS_SCALED_BATTLEGEAR = 752;
+}</code></pre>
+<h3 id="type-1"><a class="header" href="#type-1">Type</a></h3>
+<p>The basic type is <code>u16</code>, a 2 byte (16 bit) little endian integer.</p>
+<h3 id="enumerators-1"><a class="header" href="#enumerators-1">Enumerators</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Enumerator</th><th>Value</th><th>Comment</th><th>Display</th></tr>
+</thead>
+<tbody>
+<tr><td><code>NONE</code></td><td>0 (0x00)</td><td></td><td></td></tr>
+<tr><td><code>THE_GLADIATOR</code></td><td>1 (0x01)</td><td></td><td></td></tr>
+<tr><td><code>DAL_RENDS_ARMS</code></td><td>41 (0x29)</td><td></td><td>Dal’Rend’s Arms</td></tr>
+<tr><td><code>SPIDERS_KISS</code></td><td>65 (0x41)</td><td></td><td>Spider’s Kiss</td></tr>
+<tr><td><code>THE_POSTMASTER</code></td><td>81 (0x51)</td><td></td><td></td></tr>
+<tr><td><code>CADAVEROUS_GARB</code></td><td>121 (0x79)</td><td></td><td></td></tr>
+<tr><td><code>NECROPILE_RAIMENT</code></td><td>122 (0x7A)</td><td></td><td></td></tr>
+<tr><td><code>BLOODMAIL_REGALIA</code></td><td>123 (0x7B)</td><td></td><td></td></tr>
+<tr><td><code>DEATHBONE_GUARDIAN</code></td><td>124 (0x7C)</td><td></td><td></td></tr>
+<tr><td><code>VOLCANIC_ARMOR</code></td><td>141 (0x8D)</td><td></td><td></td></tr>
+<tr><td><code>STORMSHROUD_ARMOR</code></td><td>142 (0x8E)</td><td></td><td></td></tr>
+<tr><td><code>DEVILSAUR_ARMOR</code></td><td>143 (0x8F)</td><td></td><td></td></tr>
+<tr><td><code>IRONFEATHER_ARMOR</code></td><td>144 (0x90)</td><td></td><td></td></tr>
+<tr><td><code>DEFIAS_LEATHER</code></td><td>161 (0xA1)</td><td></td><td></td></tr>
+<tr><td><code>EMBRACE_OF_THE_VIPER</code></td><td>162 (0xA2)</td><td></td><td></td></tr>
+<tr><td><code>CHAIN_OF_THE_SCARLET_CRUSADE</code></td><td>163 (0xA3)</td><td></td><td></td></tr>
+<tr><td><code>MAGISTERS_REGALIA</code></td><td>181 (0xB5)</td><td></td><td>Magister’s Regalia</td></tr>
+<tr><td><code>VESTMENTS_OF_THE_DEVOUT</code></td><td>182 (0xB6)</td><td></td><td></td></tr>
+<tr><td><code>DREADMIST_RAIMENT</code></td><td>183 (0xB7)</td><td></td><td></td></tr>
+<tr><td><code>SHADOWCRAFT_ARMOR</code></td><td>184 (0xB8)</td><td></td><td></td></tr>
+<tr><td><code>WILDHEART_RAIMENT</code></td><td>185 (0xB9)</td><td></td><td></td></tr>
+<tr><td><code>BEASTSTALKER_ARMOR</code></td><td>186 (0xBA)</td><td></td><td></td></tr>
+<tr><td><code>THE_ELEMENTS</code></td><td>187 (0xBB)</td><td></td><td></td></tr>
+<tr><td><code>LIGHTFORGE_ARMOR</code></td><td>188 (0xBC)</td><td></td><td></td></tr>
+<tr><td><code>BATTLEGEAR_OF_VALOR</code></td><td>189 (0xBD)</td><td></td><td></td></tr>
+<tr><td><code>ARCANIST_REGALIA</code></td><td>201 (0xC9)</td><td></td><td></td></tr>
+<tr><td><code>VESTMENTS_OF_PROPHECY</code></td><td>202 (0xCA)</td><td></td><td></td></tr>
+<tr><td><code>FELHEART_RAIMENT</code></td><td>203 (0xCB)</td><td></td><td></td></tr>
+<tr><td><code>NIGHTSLAYER_ARMOR</code></td><td>204 (0xCC)</td><td></td><td></td></tr>
+<tr><td><code>CENARION_RAIMENT</code></td><td>205 (0xCD)</td><td></td><td></td></tr>
+<tr><td><code>GIANTSTALKER_ARMOR</code></td><td>206 (0xCE)</td><td></td><td></td></tr>
+<tr><td><code>THE_EARTHFURY</code></td><td>207 (0xCF)</td><td></td><td></td></tr>
+<tr><td><code>LAWBRINGER_ARMOR</code></td><td>208 (0xD0)</td><td></td><td></td></tr>
+<tr><td><code>BATTLEGEAR_OF_MIGHT</code></td><td>209 (0xD1)</td><td></td><td></td></tr>
+<tr><td><code>NETHERWIND_REGALIA</code></td><td>210 (0xD2)</td><td></td><td></td></tr>
+<tr><td><code>VESTMENTS_OF_TRANSCENDENCE</code></td><td>211 (0xD3)</td><td></td><td></td></tr>
+<tr><td><code>NEMESIS_RAIMENT</code></td><td>212 (0xD4)</td><td></td><td></td></tr>
+<tr><td><code>BLOODFANG_ARMOR</code></td><td>213 (0xD5)</td><td></td><td></td></tr>
+<tr><td><code>STORMRAGE_RAIMENT</code></td><td>214 (0xD6)</td><td></td><td></td></tr>
+<tr><td><code>DRAGONSTALKER_ARMOR</code></td><td>215 (0xD7)</td><td></td><td></td></tr>
+<tr><td><code>THE_TEN_STORMS</code></td><td>216 (0xD8)</td><td></td><td></td></tr>
+<tr><td><code>JUDGEMENT_ARMOR</code></td><td>217 (0xD9)</td><td></td><td></td></tr>
+<tr><td><code>BATTLEGEAR_OF_WRATH</code></td><td>218 (0xDA)</td><td></td><td></td></tr>
+<tr><td><code>GARB_OF_THERO_SHAN</code></td><td>221 (0xDD)</td><td></td><td>Garb of Thero-shan</td></tr>
+<tr><td><code>SHARD_OF_THE_GODS</code></td><td>241 (0xF1)</td><td></td><td></td></tr>
+<tr><td><code>SPIRIT_OF_ESKHANDAR</code></td><td>261 (0x105)</td><td></td><td></td></tr>
+<tr><td><code>CHAMPIONS_BATTLEGEAR</code></td><td>281 (0x119)</td><td></td><td>Champion’s Battlegear</td></tr>
+<tr><td><code>LIEUTENANT_COMMANDERS_BATTLEGEAR</code></td><td>282 (0x11A)</td><td></td><td>Lieutenant Commander’s Battlegear</td></tr>
+<tr><td><code>CHAMPIONS_EARTHSHAKER</code></td><td>301 (0x12D)</td><td></td><td>Champion’s Earthshaker</td></tr>
+<tr><td><code>IMPERIAL_PLATE</code></td><td>321 (0x141)</td><td></td><td></td></tr>
+<tr><td><code>CHAMPIONS_REGALIA</code></td><td>341 (0x155)</td><td></td><td>Champion’s Regalia</td></tr>
+<tr><td><code>CHAMPIONS_RAIMENT</code></td><td>342 (0x156)</td><td></td><td>Champion’s Raiment</td></tr>
+<tr><td><code>LIEUTENANT_COMMANDERS_REGALIA</code></td><td>343 (0x157)</td><td></td><td>Lieutenant Commander’s Regalia</td></tr>
+<tr><td><code>LIEUTENANT_COMMANDERS_RAIMENT</code></td><td>344 (0x158)</td><td></td><td>Lieutenant Commander’s Raiment</td></tr>
+<tr><td><code>CHAMPIONS_THREADS</code></td><td>345 (0x159)</td><td></td><td>Champion’s Threads</td></tr>
+<tr><td><code>LIEUTENANT_COMMANDERS_THREADS</code></td><td>346 (0x15A)</td><td></td><td>Lieutenant Commander’s Threads</td></tr>
+<tr><td><code>CHAMPIONS_VESTMENTS</code></td><td>347 (0x15B)</td><td></td><td>Champion’s Vestments</td></tr>
+<tr><td><code>LIEUTENANT_COMMANDERS_VESTMENTS</code></td><td>348 (0x15C)</td><td></td><td>Lieutenant Commander’s Vestments</td></tr>
+<tr><td><code>CHAMPIONS_PURSUIT</code></td><td>361 (0x169)</td><td></td><td>Champion’s Pursuit</td></tr>
+<tr><td><code>LIEUTENANT_COMMANDERS_PURSUIT</code></td><td>362 (0x16A)</td><td></td><td>Lieutenant Commander’s Pursuit</td></tr>
+<tr><td><code>LIEUTENANT_COMMANDERS_SANCTUARY</code></td><td>381 (0x17D)</td><td></td><td>Lieutenant Commander’s Sanctuary</td></tr>
+<tr><td><code>CHAMPIONS_SANCTUARY</code></td><td>382 (0x17E)</td><td></td><td>Champion’s Sanctuary</td></tr>
+<tr><td><code>WARLORDS_BATTLEGEAR</code></td><td>383 (0x17F)</td><td></td><td>Warlord’s Battlegear</td></tr>
+<tr><td><code>FIELD_MARSHALS_BATTLEGEAR</code></td><td>384 (0x180)</td><td></td><td>Field Marshal’s Battlegear</td></tr>
+<tr><td><code>WARLORDS_EARTHSHAKER</code></td><td>386 (0x182)</td><td></td><td>Warlord’s Earthshaker</td></tr>
+<tr><td><code>WARLORDS_REGALIA</code></td><td>387 (0x183)</td><td></td><td>Warlord’s Regalia</td></tr>
+<tr><td><code>FIELD_MARSHALS_REGALIA</code></td><td>388 (0x184)</td><td></td><td>Field Marshal’s Regalia</td></tr>
+<tr><td><code>FIELD_MARSHALS_RAIMENT</code></td><td>389 (0x185)</td><td></td><td>Field Marshal’s Raiment</td></tr>
+<tr><td><code>WARLORDS_RAIMENT</code></td><td>390 (0x186)</td><td></td><td>Warlord’s Raiment</td></tr>
+<tr><td><code>WARLORDS_THREADS</code></td><td>391 (0x187)</td><td></td><td>Warlord’s Threads</td></tr>
+<tr><td><code>FIELD_MARSHALS_THREADS</code></td><td>392 (0x188)</td><td></td><td>Field Marshal’s Threads</td></tr>
+<tr><td><code>WARLORDS_VESTMENTS</code></td><td>393 (0x189)</td><td></td><td>Warlord’s Vestments</td></tr>
+<tr><td><code>FIELD_MARSHALS_VESTMENTS</code></td><td>394 (0x18A)</td><td></td><td>Field Marshal’s Vestments</td></tr>
+<tr><td><code>FIELD_MARSHALS_PURSUIT</code></td><td>395 (0x18B)</td><td></td><td>Field Marshal’s Pursuit</td></tr>
+<tr><td><code>WARLORDS_PURSUIT</code></td><td>396 (0x18C)</td><td></td><td>Warlord’s Pursuit</td></tr>
+<tr><td><code>FIELD_MARSHALS_SANCTUARY</code></td><td>397 (0x18D)</td><td></td><td>Field Marshal’s Sanctuary</td></tr>
+<tr><td><code>WARLORDS_SANCTUARY</code></td><td>398 (0x18E)</td><td></td><td>Warlord’s Sanctuary</td></tr>
+<tr><td><code>LIEUTENANT_COMMANDERS_AEGIS</code></td><td>401 (0x191)</td><td></td><td>Lieutenant Commander’s Aegis</td></tr>
+<tr><td><code>FIELD_MARSHALS_AEGIS</code></td><td>402 (0x192)</td><td></td><td>Field Marshal’s Aegis</td></tr>
+<tr><td><code>BLOODVINE_GARB</code></td><td>421 (0x1A5)</td><td></td><td></td></tr>
+<tr><td><code>PRIMAL_BATSKIN</code></td><td>441 (0x1B9)</td><td></td><td></td></tr>
+<tr><td><code>BLOOD_TIGER_HARNESS</code></td><td>442 (0x1BA)</td><td></td><td></td></tr>
+<tr><td><code>BLOODSOUL_EMBRACE</code></td><td>443 (0x1BB)</td><td></td><td></td></tr>
+<tr><td><code>THE_DARKSOUL</code></td><td>444 (0x1BC)</td><td></td><td></td></tr>
+<tr><td><code>THE_TWIN_BLADES_OF_HAKKARI</code></td><td>461 (0x1CD)</td><td></td><td></td></tr>
+<tr><td><code>ZANZILS_CONCENTRATION</code></td><td>462 (0x1CE)</td><td></td><td>Zanzil’s Concentration</td></tr>
+<tr><td><code>PRIMAL_BLESSING</code></td><td>463 (0x1CF)</td><td></td><td></td></tr>
+<tr><td><code>OVERLORDS_RESOLUTION</code></td><td>464 (0x1D0)</td><td></td><td>Overlord’s Resolution</td></tr>
+<tr><td><code>PRAYER_OF_THE_PRIMAL</code></td><td>465 (0x1D1)</td><td></td><td></td></tr>
+<tr><td><code>MAJOR_MOJO_INFUSION</code></td><td>466 (0x1D2)</td><td></td><td></td></tr>
+<tr><td><code>THE_HIGHLANDERS_RESOLUTION</code></td><td>467 (0x1D3)</td><td></td><td>The Highlander’s Resolution</td></tr>
+<tr><td><code>THE_HIGHLANDERS_RESOLVE</code></td><td>468 (0x1D4)</td><td></td><td>The Highlander’s Resolve</td></tr>
+<tr><td><code>THE_HIGHLANDERS_DETERMINATION</code></td><td>469 (0x1D5)</td><td></td><td>The Highlander’s Determination</td></tr>
+<tr><td><code>THE_HIGHLANDERS_FORTITUDE</code></td><td>470 (0x1D6)</td><td></td><td>The Highlander’s Fortitude</td></tr>
+<tr><td><code>THE_HIGHLANDERS_PURPOSE</code></td><td>471 (0x1D7)</td><td></td><td>The Highlander’s Purpose</td></tr>
+<tr><td><code>THE_HIGHLANDERS_WILL</code></td><td>472 (0x1D8)</td><td></td><td>The Highlander’s Will</td></tr>
+<tr><td><code>THE_HIGHLANDERS_INTENT</code></td><td>473 (0x1D9)</td><td></td><td>The Highlander’s Intent</td></tr>
+<tr><td><code>VINDICATORS_BATTLEGEAR</code></td><td>474 (0x1DA)</td><td></td><td>Vindicator’s Battlegear</td></tr>
+<tr><td><code>FREETHINKERS_ARMOR</code></td><td>475 (0x1DB)</td><td></td><td>Freethinker’s Armor</td></tr>
+<tr><td><code>AUGURS_REGALIA</code></td><td>476 (0x1DC)</td><td></td><td>Augur’s Regalia</td></tr>
+<tr><td><code>PREDATORS_ARMOR</code></td><td>477 (0x1DD)</td><td></td><td>Predator’s Armor</td></tr>
+<tr><td><code>MADCAPS_OUTFIT</code></td><td>478 (0x1DE)</td><td></td><td>Madcap’s Outfit</td></tr>
+<tr><td><code>HARUSPEXS_GARB</code></td><td>479 (0x1DF)</td><td></td><td>Haruspex’s Garb</td></tr>
+<tr><td><code>CONFESSORS_RAIMENT</code></td><td>480 (0x1E0)</td><td></td><td>Confessor’s Raiment</td></tr>
+<tr><td><code>DEMONIACS_THREADS</code></td><td>481 (0x1E1)</td><td></td><td>Demoniac’s Threads</td></tr>
+<tr><td><code>ILLUSIONISTS_ATTIRE</code></td><td>482 (0x1E2)</td><td></td><td>Illusionist’s Attire</td></tr>
+<tr><td><code>THE_DEFILERS_DETERMINATION</code></td><td>483 (0x1E3)</td><td></td><td>The Defiler’s Determination</td></tr>
+<tr><td><code>THE_DEFILERS_FORTITUDE</code></td><td>484 (0x1E4)</td><td></td><td>The Defiler’s Fortitude</td></tr>
+<tr><td><code>THE_DEFILERS_INTENT</code></td><td>485 (0x1E5)</td><td></td><td>The Defiler’s Intent</td></tr>
+<tr><td><code>THE_DEFILERS_PURPOSE</code></td><td>486 (0x1E6)</td><td></td><td>The Defiler’s Purpose</td></tr>
+<tr><td><code>THE_DEFILERS_RESOLUTION</code></td><td>487 (0x1E7)</td><td></td><td>The Defiler’s Resolution</td></tr>
+<tr><td><code>THE_DEFILERS_WILL</code></td><td>488 (0x1E8)</td><td></td><td>The Defiler’s Will</td></tr>
+<tr><td><code>BLACK_DRAGON_MAIL</code></td><td>489 (0x1E9)</td><td></td><td></td></tr>
+<tr><td><code>GREEN_DRAGON_MAIL</code></td><td>490 (0x1EA)</td><td></td><td></td></tr>
+<tr><td><code>BLUE_DRAGON_MAIL</code></td><td>491 (0x1EB)</td><td></td><td></td></tr>
+<tr><td><code>TWILIGHT_TRAPPINGS</code></td><td>492 (0x1EC)</td><td></td><td></td></tr>
+<tr><td><code>GENESIS_RAIMENT</code></td><td>493 (0x1ED)</td><td></td><td></td></tr>
+<tr><td><code>SYMBOLS_OF_UNENDING_LIFE</code></td><td>494 (0x1EE)</td><td></td><td></td></tr>
+<tr><td><code>BATTLEGEAR_OF_UNYIELDING_STRENGTH</code></td><td>495 (0x1EF)</td><td></td><td></td></tr>
+<tr><td><code>CONQUERORS_BATTLEGEAR</code></td><td>496 (0x1F0)</td><td></td><td>Conqueror’s Battlegear</td></tr>
+<tr><td><code>DEATHDEALERS_EMBRACE</code></td><td>497 (0x1F1)</td><td></td><td>Deathdealer’s Embrace</td></tr>
+<tr><td><code>EMBLEMS_OF_VEILED_SHADOWS</code></td><td>498 (0x1F2)</td><td></td><td></td></tr>
+<tr><td><code>DOOMCALLERS_ATTIRE</code></td><td>499 (0x1F3)</td><td></td><td>Doomcaller’s Attire</td></tr>
+<tr><td><code>IMPLEMENTS_OF_UNSPOKEN_NAMES</code></td><td>500 (0x1F4)</td><td></td><td></td></tr>
+<tr><td><code>STORMCALLERS_GARB</code></td><td>501 (0x1F5)</td><td></td><td>Stormcaller’s Garb</td></tr>
+<tr><td><code>GIFT_OF_THE_GATHERING_STORM</code></td><td>502 (0x1F6)</td><td></td><td></td></tr>
+<tr><td><code>ENIGMA_VESTMENTS</code></td><td>503 (0x1F7)</td><td></td><td></td></tr>
+<tr><td><code>TRAPPINGS_OF_VAULTED_SECRETS</code></td><td>504 (0x1F8)</td><td></td><td></td></tr>
+<tr><td><code>AVENGERS_BATTLEGEAR</code></td><td>505 (0x1F9)</td><td></td><td>Avenger’s Battlegear</td></tr>
+<tr><td><code>BATTLEGEAR_OF_ETERNAL_JUSTICE</code></td><td>506 (0x1FA)</td><td></td><td></td></tr>
+<tr><td><code>GARMENTS_OF_THE_ORACLE</code></td><td>507 (0x1FB)</td><td></td><td></td></tr>
+<tr><td><code>FINERY_OF_INFINITE_WISDOM</code></td><td>508 (0x1FC)</td><td></td><td></td></tr>
+<tr><td><code>STRIKERS_GARB</code></td><td>509 (0x1FD)</td><td></td><td>Striker’s Garb</td></tr>
+<tr><td><code>TRAPPINGS_OF_THE_UNSEEN_PATH</code></td><td>510 (0x1FE)</td><td></td><td></td></tr>
+<tr><td><code>BATTLEGEAR_OF_HEROISM</code></td><td>511 (0x1FF)</td><td></td><td></td></tr>
+<tr><td><code>DARKMANTLE_ARMOR</code></td><td>512 (0x200)</td><td></td><td></td></tr>
+<tr><td><code>FERALHEART_RAIMENT</code></td><td>513 (0x201)</td><td></td><td></td></tr>
+<tr><td><code>VESTMENTS_OF_THE_VIRTUOUS</code></td><td>514 (0x202)</td><td></td><td></td></tr>
+<tr><td><code>BEASTMASTER_ARMOR</code></td><td>515 (0x203)</td><td></td><td></td></tr>
+<tr><td><code>SOULFORGE_ARMOR</code></td><td>516 (0x204)</td><td></td><td></td></tr>
+<tr><td><code>SORCERERS_REGALIA</code></td><td>517 (0x205)</td><td></td><td>Sorcerer’s Regalia</td></tr>
+<tr><td><code>DEATHMIST_RAIMENT</code></td><td>518 (0x206)</td><td></td><td></td></tr>
+<tr><td><code>THE_FIVE_THUNDERS</code></td><td>519 (0x207)</td><td></td><td></td></tr>
+<tr><td><code>IRONWEAVE_BATTLESUIT</code></td><td>520 (0x208)</td><td></td><td></td></tr>
+<tr><td><code>DREAMWALKER_RAIMENT</code></td><td>521 (0x209)</td><td></td><td></td></tr>
+<tr><td><code>CHAMPIONS_GUARD</code></td><td>522 (0x20A)</td><td></td><td>Champion’s Guard</td></tr>
+<tr><td><code>DREADNAUGHTS_BATTLEGEAR</code></td><td>523 (0x20B)</td><td></td><td>Dreadnaught’s Battlegear</td></tr>
+<tr><td><code>BONESCYTHE_ARMOR</code></td><td>524 (0x20C)</td><td></td><td></td></tr>
+<tr><td><code>VESTMENTS_OF_FAITH</code></td><td>525 (0x20D)</td><td></td><td></td></tr>
+<tr><td><code>FROSTFIRE_REGALIA</code></td><td>526 (0x20E)</td><td></td><td></td></tr>
+<tr><td><code>THE_EARTHSHATTERER</code></td><td>527 (0x20F)</td><td></td><td></td></tr>
+<tr><td><code>REDEMPTION_ARMOR</code></td><td>528 (0x210)</td><td></td><td></td></tr>
+<tr><td><code>PLAGUEHEART_RAIMENT</code></td><td>529 (0x211)</td><td></td><td></td></tr>
+<tr><td><code>CRYPTSTALKER_ARMOR</code></td><td>530 (0x212)</td><td></td><td></td></tr>
+<tr><td><code>BATTLEGEAR_OF_UNDEAD_SLAYING</code></td><td>533 (0x215)</td><td></td><td></td></tr>
+<tr><td><code>UNDEAD_SLAYERS_ARMOR</code></td><td>534 (0x216)</td><td></td><td>Undead Slayer’s Armor</td></tr>
+<tr><td><code>GARB_OF_THE_UNDEAD_SLAYER</code></td><td>535 (0x217)</td><td></td><td></td></tr>
+<tr><td><code>REGALIA_OF_UNDEAD_CLEANSING</code></td><td>536 (0x218)</td><td></td><td></td></tr>
+<tr><td><code>CHAMPIONS_BATTLEARMOR</code></td><td>537 (0x219)</td><td></td><td>Champion’s Battlearmor</td></tr>
+<tr><td><code>CHAMPIONS_STORMCALLER</code></td><td>538 (0x21A)</td><td></td><td>Champion’s Stormcaller</td></tr>
+<tr><td><code>CHAMPIONS_REFUGE</code></td><td>539 (0x21B)</td><td></td><td>Champion’s Refuge</td></tr>
+<tr><td><code>CHAMPIONS_INVESTITURE</code></td><td>540 (0x21C)</td><td></td><td>Champion’s Investiture</td></tr>
+<tr><td><code>CHAMPIONS_DREADGEAR</code></td><td>541 (0x21D)</td><td></td><td>Champion’s Dreadgear</td></tr>
+<tr><td><code>CHAMPIONS_ARCANUM</code></td><td>542 (0x21E)</td><td></td><td>Champion’s Arcanum</td></tr>
+<tr><td><code>CHAMPIONS_PURSUANCE</code></td><td>543 (0x21F)</td><td></td><td>Champion’s Pursuance</td></tr>
+<tr><td><code>LIEUTENANT_COMMANDERS_REDOUBT</code></td><td>544 (0x220)</td><td></td><td>Lieutenant Commander’s Redoubt</td></tr>
+<tr><td><code>LIEUTENANT_COMMANDERS_BATTLEARMOR</code></td><td>545 (0x221)</td><td></td><td>Lieutenant Commander’s Battlearmor</td></tr>
+<tr><td><code>LIEUTENANT_COMMANDERS_ARCANUM</code></td><td>546 (0x222)</td><td></td><td>Lieutenant Commander’s Arcanum</td></tr>
+<tr><td><code>LIEUTENANT_COMMANDERS_DREADGEAR</code></td><td>547 (0x223)</td><td></td><td>Lieutenant Commander’s Dreadgear</td></tr>
+<tr><td><code>LIEUTENANT_COMMANDERS_GUARD</code></td><td>548 (0x224)</td><td></td><td>Lieutenant Commander’s Guard</td></tr>
+<tr><td><code>LIEUTENANT_COMMANDERS_INVESTITURE</code></td><td>549 (0x225)</td><td></td><td>Lieutenant Commander’s Investiture</td></tr>
+<tr><td><code>LIEUTENANT_COMMANDERS_PURSUANCE</code></td><td>550 (0x226)</td><td></td><td>Lieutenant Commander’s Pursuance</td></tr>
+<tr><td><code>LIEUTENANT_COMMANDERS_REFUGE</code></td><td>551 (0x227)</td><td></td><td>Lieutenant Commander’s Refuge</td></tr>
+<tr><td><code>WRATH_OF_SPELLFIRE</code></td><td>552 (0x228)</td><td></td><td></td></tr>
+<tr><td><code>SHADOWS_EMBRACE</code></td><td>553 (0x229)</td><td></td><td>Shadow’s Embrace</td></tr>
+<tr><td><code>PRIMAL_MOONCLOTH</code></td><td>554 (0x22A)</td><td></td><td></td></tr>
+<tr><td><code>NETHERWEAVE_VESTMENTS</code></td><td>555 (0x22B)</td><td></td><td></td></tr>
+<tr><td><code>IMBUED_NETHERWEAVE</code></td><td>556 (0x22C)</td><td></td><td></td></tr>
+<tr><td><code>SOULCLOTH_EMBRACE</code></td><td>557 (0x22D)</td><td></td><td></td></tr>
+<tr><td><code>ARCANOWEAVE_VESTMENTS</code></td><td>558 (0x22E)</td><td></td><td></td></tr>
+<tr><td><code>SPELLSTRIKE_INFUSION</code></td><td>559 (0x22F)</td><td></td><td></td></tr>
+<tr><td><code>FEL_IRON_PLATE</code></td><td>560 (0x230)</td><td></td><td></td></tr>
+<tr><td><code>FEL_IRON_CHAIN</code></td><td>561 (0x231)</td><td></td><td></td></tr>
+<tr><td><code>ADAMANTITE_BATTLEGEAR</code></td><td>562 (0x232)</td><td></td><td></td></tr>
+<tr><td><code>ENCHANTED_ADAMANTITE_ARMOR</code></td><td>563 (0x233)</td><td></td><td></td></tr>
+<tr><td><code>FLAME_GUARD</code></td><td>564 (0x234)</td><td></td><td></td></tr>
+<tr><td><code>KHORIUM_WARD</code></td><td>565 (0x235)</td><td></td><td></td></tr>
+<tr><td><code>BURNING_RAGE</code></td><td>566 (0x236)</td><td></td><td></td></tr>
+<tr><td><code>GLADIATORS_BATTLEGEAR</code></td><td>567 (0x237)</td><td></td><td>Gladiator’s Battlegear</td></tr>
+<tr><td><code>GLADIATORS_DREADGEAR</code></td><td>568 (0x238)</td><td></td><td>Gladiator’s Dreadgear</td></tr>
+<tr><td><code>FAITH_IN_FELSTEEL</code></td><td>569 (0x239)</td><td></td><td></td></tr>
+<tr><td><code>THE_UNYIELDING</code></td><td>570 (0x23A)</td><td></td><td></td></tr>
+<tr><td><code>WHITEMEND_WISDOM</code></td><td>571 (0x23B)</td><td></td><td></td></tr>
+<tr><td><code>BATTLECAST_GARB</code></td><td>572 (0x23C)</td><td></td><td></td></tr>
+<tr><td><code>FEL_SKIN</code></td><td>573 (0x23D)</td><td></td><td></td></tr>
+<tr><td><code>STRENGTH_OF_THE_CLEFTHOOF</code></td><td>574 (0x23E)</td><td></td><td></td></tr>
+<tr><td><code>FELSTALKER_ARMOR</code></td><td>575 (0x23F)</td><td></td><td></td></tr>
+<tr><td><code>FURY_OF_THE_NETHER</code></td><td>576 (0x240)</td><td></td><td></td></tr>
+<tr><td><code>GLADIATORS_VESTMENTS</code></td><td>577 (0x241)</td><td></td><td>Gladiator’s Vestments</td></tr>
+<tr><td><code>GLADIATORS_EARTHSHAKER</code></td><td>578 (0x242)</td><td></td><td>Gladiator’s Earthshaker</td></tr>
+<tr><td><code>GLADIATORS_REGALIA</code></td><td>579 (0x243)</td><td></td><td>Gladiator’s Regalia</td></tr>
+<tr><td><code>GLADIATORS_THUNDERFIST</code></td><td>580 (0x244)</td><td></td><td>Gladiator’s Thunderfist</td></tr>
+<tr><td><code>GLADIATORS_RAIMENT</code></td><td>581 (0x245)</td><td></td><td>Gladiator’s Raiment</td></tr>
+<tr><td><code>GLADIATORS_AEGIS</code></td><td>582 (0x246)</td><td></td><td>Gladiator’s Aegis</td></tr>
+<tr><td><code>GLADIATORS_VINDICATION</code></td><td>583 (0x247)</td><td></td><td>Gladiator’s Vindication</td></tr>
+<tr><td><code>GLADIATORS_SANCTUARY</code></td><td>584 (0x248)</td><td></td><td>Gladiator’s Sanctuary</td></tr>
+<tr><td><code>GLADIATORS_WILDHIDE</code></td><td>585 (0x249)</td><td></td><td>Gladiator’s Wildhide</td></tr>
+<tr><td><code>GLADIATORS_PURSUIT</code></td><td>586 (0x24A)</td><td></td><td>Gladiator’s Pursuit</td></tr>
+<tr><td><code>HIGH_WARLORDS_AEGIS</code></td><td>587 (0x24B)</td><td></td><td>High Warlord’s Aegis</td></tr>
+<tr><td><code>HIGH_WARLORDS_BATTLEGEAR</code></td><td>588 (0x24C)</td><td></td><td>High Warlord’s Battlegear</td></tr>
+<tr><td><code>GRAND_MARSHALS_AEGIS</code></td><td>589 (0x24D)</td><td></td><td>Grand Marshal’s Aegis</td></tr>
+<tr><td><code>GRAND_MARSHALS_BATTLEGEAR</code></td><td>590 (0x24E)</td><td></td><td>Grand Marshal’s Battlegear</td></tr>
+<tr><td><code>GRAND_MARSHALS_DREADGEAR</code></td><td>591 (0x24F)</td><td></td><td>Grand Marshal’s Dreadgear</td></tr>
+<tr><td><code>HIGH_WARLORDS_DREADGEAR</code></td><td>592 (0x250)</td><td></td><td>High Warlord’s Dreadgear</td></tr>
+<tr><td><code>GRAND_MARSHALS_EARTHSHAKER</code></td><td>593 (0x251)</td><td></td><td>Grand Marshal’s Earthshaker</td></tr>
+<tr><td><code>HIGH_WARLORDS_EARTHSHAKER</code></td><td>594 (0x252)</td><td></td><td>High Warlord’s Earthshaker</td></tr>
+<tr><td><code>GRAND_MARSHALS_PURSUIT</code></td><td>595 (0x253)</td><td></td><td>Grand Marshal’s Pursuit</td></tr>
+<tr><td><code>HIGH_WARLORDS_PURSUIT</code></td><td>596 (0x254)</td><td></td><td>High Warlord’s Pursuit</td></tr>
+<tr><td><code>GRAND_MARSHALS_RAIMENT</code></td><td>597 (0x255)</td><td></td><td>Grand Marshal’s Raiment</td></tr>
+<tr><td><code>HIGH_WARLORDS_RAIMENT</code></td><td>598 (0x256)</td><td></td><td>High Warlord’s Raiment</td></tr>
+<tr><td><code>GRAND_MARSHALS_REGALIA</code></td><td>599 (0x257)</td><td></td><td>Grand Marshal’s Regalia</td></tr>
+<tr><td><code>HIGH_WARLORDS_REGALIA</code></td><td>600 (0x258)</td><td></td><td>High Warlord’s Regalia</td></tr>
+<tr><td><code>GRAND_MARSHALS_SANCTUARY</code></td><td>601 (0x259)</td><td></td><td>Grand Marshal’s Sanctuary</td></tr>
+<tr><td><code>HIGH_WARLORDS_SANCTUARY</code></td><td>602 (0x25A)</td><td></td><td>High Warlord’s Sanctuary</td></tr>
+<tr><td><code>GRAND_MARSHALS_THUNDERFIST</code></td><td>603 (0x25B)</td><td></td><td>Grand Marshal’s Thunderfist</td></tr>
+<tr><td><code>HIGH_WARLORDS_THUNDERFIST</code></td><td>604 (0x25C)</td><td></td><td>High Warlord’s Thunderfist</td></tr>
+<tr><td><code>GRAND_MARSHALS_VESTMENTS</code></td><td>605 (0x25D)</td><td></td><td>Grand Marshal’s Vestments</td></tr>
+<tr><td><code>HIGH_WARLORDS_VESTMENTS</code></td><td>606 (0x25E)</td><td></td><td>High Warlord’s Vestments</td></tr>
+<tr><td><code>GRAND_MARSHALS_VINDICATION</code></td><td>607 (0x25F)</td><td></td><td>Grand Marshal’s Vindication</td></tr>
+<tr><td><code>HIGH_WARLORDS_VINDICATION</code></td><td>608 (0x260)</td><td></td><td>High Warlord’s Vindication</td></tr>
+<tr><td><code>GRAND_MARSHALS_WILDHIDE</code></td><td>609 (0x261)</td><td></td><td>Grand Marshal’s Wildhide</td></tr>
+<tr><td><code>HIGH_WARLORDS_WILDHIDE</code></td><td>610 (0x262)</td><td></td><td>High Warlord’s Wildhide</td></tr>
+<tr><td><code>FELSCALE_ARMOR</code></td><td>611 (0x263)</td><td></td><td></td></tr>
+<tr><td><code>SCALED_DRAENIC_ARMOR</code></td><td>612 (0x264)</td><td></td><td></td></tr>
+<tr><td><code>THICK_DRAENIC_ARMOR</code></td><td>613 (0x265)</td><td></td><td></td></tr>
+<tr><td><code>WILD_DRAENISH_ARMOR</code></td><td>614 (0x266)</td><td></td><td></td></tr>
+<tr><td><code>GLADIATORS_FELSHROUD</code></td><td>615 (0x267)</td><td></td><td>Gladiator’s Felshroud</td></tr>
+<tr><td><code>NETHERSCALE_ARMOR</code></td><td>616 (0x268)</td><td></td><td></td></tr>
+<tr><td><code>NETHERSTRIKE_ARMOR</code></td><td>617 (0x269)</td><td></td><td></td></tr>
+<tr><td><code>WINDHAWK_ARMOR</code></td><td>618 (0x26A)</td><td></td><td></td></tr>
+<tr><td><code>PRIMAL_INTENT</code></td><td>619 (0x26B)</td><td></td><td></td></tr>
+<tr><td><code>ASSASSINATION_ARMOR</code></td><td>620 (0x26C)</td><td></td><td></td></tr>
+<tr><td><code>NETHERBLADE</code></td><td>621 (0x26D)</td><td></td><td></td></tr>
+<tr><td><code>DEATHMANTLE</code></td><td>622 (0x26E)</td><td></td><td></td></tr>
+<tr><td><code>RIGHTEOUS_ARMOR</code></td><td>623 (0x26F)</td><td></td><td></td></tr>
+<tr><td><code>JUSTICAR_RAIMENT</code></td><td>624 (0x270)</td><td></td><td></td></tr>
+<tr><td><code>JUSTICAR_ARMOR</code></td><td>625 (0x271)</td><td></td><td></td></tr>
+<tr><td><code>JUSTICAR_BATTLEGEAR</code></td><td>626 (0x272)</td><td></td><td></td></tr>
+<tr><td><code>CRYSTALFORGE_RAIMENT</code></td><td>627 (0x273)</td><td></td><td></td></tr>
+<tr><td><code>CRYSTALFORGE_ARMOR</code></td><td>628 (0x274)</td><td></td><td></td></tr>
+<tr><td><code>CRYSTALFORGE_BATTLEGEAR</code></td><td>629 (0x275)</td><td></td><td></td></tr>
+<tr><td><code>TIDEFURY_RAIMENT</code></td><td>630 (0x276)</td><td></td><td></td></tr>
+<tr><td><code>CYCLONE_RAIMENT</code></td><td>631 (0x277)</td><td></td><td></td></tr>
+<tr><td><code>CYCLONE_REGALIA</code></td><td>632 (0x278)</td><td></td><td></td></tr>
+<tr><td><code>CYCLONE_HARNESS</code></td><td>633 (0x279)</td><td></td><td></td></tr>
+<tr><td><code>CATACLYSM_RAIMENT</code></td><td>634 (0x27A)</td><td></td><td></td></tr>
+<tr><td><code>CATACLYSM_REGALIA</code></td><td>635 (0x27B)</td><td></td><td></td></tr>
+<tr><td><code>CATACLYSM_HARNESS</code></td><td>636 (0x27C)</td><td></td><td></td></tr>
+<tr><td><code>MOONGLADE_RAIMENT</code></td><td>637 (0x27D)</td><td></td><td></td></tr>
+<tr><td><code>MALORNE_RAIMENT</code></td><td>638 (0x27E)</td><td></td><td></td></tr>
+<tr><td><code>MALORNE_REGALIA</code></td><td>639 (0x27F)</td><td></td><td></td></tr>
+<tr><td><code>MALORNE_HARNESS</code></td><td>640 (0x280)</td><td></td><td></td></tr>
+<tr><td><code>NORDRASSIL_HARNESS</code></td><td>641 (0x281)</td><td></td><td></td></tr>
+<tr><td><code>NORDRASSIL_RAIMENT</code></td><td>642 (0x282)</td><td></td><td></td></tr>
+<tr><td><code>NORDRASSIL_REGALIA</code></td><td>643 (0x283)</td><td></td><td></td></tr>
+<tr><td><code>OBLIVION_RAIMENT</code></td><td>644 (0x284)</td><td></td><td></td></tr>
+<tr><td><code>VOIDHEART_RAIMENT</code></td><td>645 (0x285)</td><td></td><td></td></tr>
+<tr><td><code>CORRUPTOR_RAIMENT</code></td><td>646 (0x286)</td><td></td><td></td></tr>
+<tr><td><code>INCANTERS_REGALIA</code></td><td>647 (0x287)</td><td></td><td>Incanter’s Regalia</td></tr>
+<tr><td><code>ALDOR_REGALIA</code></td><td>648 (0x288)</td><td></td><td></td></tr>
+<tr><td><code>TIRISFAL_REGALIA</code></td><td>649 (0x289)</td><td></td><td></td></tr>
+<tr><td><code>BEAST_LORD_ARMOR</code></td><td>650 (0x28A)</td><td></td><td></td></tr>
+<tr><td><code>DEMON_STALKER_ARMOR</code></td><td>651 (0x28B)</td><td></td><td></td></tr>
+<tr><td><code>RIFT_STALKER_ARMOR</code></td><td>652 (0x28C)</td><td></td><td></td></tr>
+<tr><td><code>BOLD_ARMOR</code></td><td>653 (0x28D)</td><td></td><td></td></tr>
+<tr><td><code>WARBRINGER_ARMOR</code></td><td>654 (0x28E)</td><td></td><td></td></tr>
+<tr><td><code>WARBRINGER_BATTLEGEAR</code></td><td>655 (0x28F)</td><td></td><td></td></tr>
+<tr><td><code>DESTROYER_ARMOR</code></td><td>656 (0x290)</td><td></td><td></td></tr>
+<tr><td><code>DESTROYER_BATTLEGEAR</code></td><td>657 (0x291)</td><td></td><td></td></tr>
+<tr><td><code>MANA_ETCHED_REGALIA</code></td><td>658 (0x292)</td><td></td><td>Mana-Etched Regalia</td></tr>
+<tr><td><code>WASTEWALKER_ARMOR</code></td><td>659 (0x293)</td><td></td><td></td></tr>
+<tr><td><code>DESOLATION_BATTLEGEAR</code></td><td>660 (0x294)</td><td></td><td></td></tr>
+<tr><td><code>DOOMPLATE_BATTLEGEAR</code></td><td>661 (0x295)</td><td></td><td></td></tr>
+<tr><td><code>HALLOWED_RAIMENT</code></td><td>662 (0x296)</td><td></td><td></td></tr>
+<tr><td><code>INCARNATE_RAIMENT</code></td><td>663 (0x297)</td><td></td><td></td></tr>
+<tr><td><code>INCARNATE_REGALIA</code></td><td>664 (0x298)</td><td></td><td></td></tr>
+<tr><td><code>AVATAR_RAIMENT</code></td><td>665 (0x299)</td><td></td><td></td></tr>
+<tr><td><code>AVATAR_REGALIA</code></td><td>666 (0x29A)</td><td></td><td></td></tr>
+<tr><td><code>THE_TWIN_STARS</code></td><td>667 (0x29B)</td><td></td><td></td></tr>
+<tr><td><code>SLAYERS_ARMOR</code></td><td>668 (0x29C)</td><td></td><td>Slayer’s Armor</td></tr>
+<tr><td><code>GRONNSTALKERS_ARMOR</code></td><td>669 (0x29D)</td><td></td><td>Gronnstalker’s Armor</td></tr>
+<tr><td><code>MALEFIC_RAIMENT</code></td><td>670 (0x29E)</td><td></td><td></td></tr>
+<tr><td><code>TEMPEST_REGALIA</code></td><td>671 (0x29F)</td><td></td><td></td></tr>
+<tr><td><code>ONSLAUGHT_BATTLEGEAR</code></td><td>672 (0x2A0)</td><td></td><td></td></tr>
+<tr><td><code>ONSLAUGHT_ARMOR</code></td><td>673 (0x2A1)</td><td></td><td></td></tr>
+<tr><td><code>ABSOLUTION_REGALIA</code></td><td>674 (0x2A2)</td><td></td><td></td></tr>
+<tr><td><code>VESTMENTS_OF_ABSOLUTION</code></td><td>675 (0x2A3)</td><td></td><td></td></tr>
+<tr><td><code>THUNDERHEART_HARNESS</code></td><td>676 (0x2A4)</td><td></td><td></td></tr>
+<tr><td><code>THUNDERHEART_REGALIA</code></td><td>677 (0x2A5)</td><td></td><td></td></tr>
+<tr><td><code>THUNDERHEART_RAIMENT</code></td><td>678 (0x2A6)</td><td></td><td></td></tr>
+<tr><td><code>LIGHTBRINGER_ARMOR</code></td><td>679 (0x2A7)</td><td></td><td></td></tr>
+<tr><td><code>LIGHTBRINGER_BATTLEGEAR</code></td><td>680 (0x2A8)</td><td></td><td></td></tr>
+<tr><td><code>LIGHTBRINGER_RAIMENT</code></td><td>681 (0x2A9)</td><td></td><td></td></tr>
+<tr><td><code>SKYSHATTER_HARNESS</code></td><td>682 (0x2AA)</td><td></td><td></td></tr>
+<tr><td><code>SKYSHATTER_RAIMENT</code></td><td>683 (0x2AB)</td><td></td><td></td></tr>
+<tr><td><code>SKYSHATTER_REGALIA</code></td><td>684 (0x2AC)</td><td></td><td></td></tr>
+<tr><td><code>GLADIATORS_REFUGE</code></td><td>685 (0x2AD)</td><td></td><td>Gladiator’s Refuge</td></tr>
+<tr><td><code>GLADIATORS_WARTIDE</code></td><td>686 (0x2AE)</td><td></td><td>Gladiator’s Wartide</td></tr>
+<tr><td><code>GLADIATORS_INVESTITURE</code></td><td>687 (0x2AF)</td><td></td><td>Gladiator’s Investiture</td></tr>
+<tr><td><code>GRAND_MARSHALS_REFUGE</code></td><td>688 (0x2B0)</td><td></td><td>Grand Marshal’s Refuge</td></tr>
+<tr><td><code>HIGH_WARLORDS_REFUGE</code></td><td>689 (0x2B1)</td><td></td><td>High Warlord’s Refuge</td></tr>
+<tr><td><code>GLADIATORS_REDEMPTION</code></td><td>690 (0x2B2)</td><td></td><td>Gladiator’s Redemption</td></tr>
+<tr><td><code>GRAND_MARSHALS_INVESTITURE</code></td><td>691 (0x2B3)</td><td></td><td>Grand Marshal’s Investiture</td></tr>
+<tr><td><code>HIGH_WARLORDS_INVESTITURE</code></td><td>692 (0x2B4)</td><td></td><td>High Warlord’s Investiture</td></tr>
+<tr><td><code>GRAND_MARSHALS_REDEMPTION</code></td><td>693 (0x2B5)</td><td></td><td>Grand Marshal’s Redemption</td></tr>
+<tr><td><code>HIGH_WARLORDS_REDEMPTION</code></td><td>694 (0x2B6)</td><td></td><td>High Warlord’s Redemption</td></tr>
+<tr><td><code>GRAND_MARSHALS_WARTIDE</code></td><td>695 (0x2B7)</td><td></td><td>Grand Marshal’s Wartide</td></tr>
+<tr><td><code>HIGH_WARLORDS_WARTIDE</code></td><td>696 (0x2B8)</td><td></td><td>High Warlord’s Wartide</td></tr>
+<tr><td><code>CHAMPIONS_REDOUBT</code></td><td>697 (0x2B9)</td><td></td><td>Champion’s Redoubt</td></tr>
+<tr><td><code>WARLORDS_AEGIS</code></td><td>698 (0x2BA)</td><td></td><td>Warlord’s Aegis</td></tr>
+<tr><td><code>THE_TWIN_BLADES_OF_AZZINOTH</code></td><td>699 (0x2BB)</td><td></td><td></td></tr>
+<tr><td><code>MERCILESS_GLADIATORS_AEGIS</code></td><td>700 (0x2BC)</td><td></td><td>Merciless Gladiator’s Aegis</td></tr>
+<tr><td><code>MERCILESS_GLADIATORS_BATTLEGEAR</code></td><td>701 (0x2BD)</td><td></td><td>Merciless Gladiator’s Battlegear</td></tr>
+<tr><td><code>MERCILESS_GLADIATORS_DREADGEAR</code></td><td>702 (0x2BE)</td><td></td><td>Merciless Gladiator’s Dreadgear</td></tr>
+<tr><td><code>MERCILESS_GLADIATORS_EARTHSHAKER</code></td><td>703 (0x2BF)</td><td></td><td>Merciless Gladiator’s Earthshaker</td></tr>
+<tr><td><code>MERCILESS_GLADIATORS_FELSHROUD</code></td><td>704 (0x2C0)</td><td></td><td>Merciless Gladiator’s Felshroud</td></tr>
+<tr><td><code>MERCILESS_GLADIATORS_INVESTITURE</code></td><td>705 (0x2C1)</td><td></td><td>Merciless Gladiator’s Investiture</td></tr>
+<tr><td><code>MERCILESS_GLADIATORS_PURSUIT</code></td><td>706 (0x2C2)</td><td></td><td>Merciless Gladiator’s Pursuit</td></tr>
+<tr><td><code>MERCILESS_GLADIATORS_RAIMENT</code></td><td>707 (0x2C3)</td><td></td><td>Merciless Gladiator’s Raiment</td></tr>
+<tr><td><code>MERCILESS_GLADIATORS_REDEMPTION</code></td><td>708 (0x2C4)</td><td></td><td>Merciless Gladiator’s Redemption</td></tr>
+<tr><td><code>MERCILESS_GLADIATORS_REFUGE</code></td><td>709 (0x2C5)</td><td></td><td>Merciless Gladiator’s Refuge</td></tr>
+<tr><td><code>MERCILESS_GLADIATORS_REGALIA</code></td><td>710 (0x2C6)</td><td></td><td>Merciless Gladiator’s Regalia</td></tr>
+<tr><td><code>MERCILESS_GLADIATORS_SANCTUARY</code></td><td>711 (0x2C7)</td><td></td><td>Merciless Gladiator’s Sanctuary</td></tr>
+<tr><td><code>MERCILESS_GLADIATORS_THUNDERFIST</code></td><td>712 (0x2C8)</td><td></td><td>Merciless Gladiator’s Thunderfist</td></tr>
+<tr><td><code>MERCILESS_GLADIATORS_VESTMENTS</code></td><td>713 (0x2C9)</td><td></td><td>Merciless Gladiator’s Vestments</td></tr>
+<tr><td><code>MERCILESS_GLADIATORS_VINDICATION</code></td><td>714 (0x2CA)</td><td></td><td>Merciless Gladiator’s Vindication</td></tr>
+<tr><td><code>MERCILESS_GLADIATORS_WARTIDE</code></td><td>715 (0x2CB)</td><td></td><td>Merciless Gladiator’s Wartide</td></tr>
+<tr><td><code>MERCILESS_GLADIATORS_WILDHIDE</code></td><td>716 (0x2CC)</td><td></td><td>Merciless Gladiator’s Wildhide</td></tr>
+<tr><td><code>FIELD_MARSHALS_EARTHSHAKER</code></td><td>717 (0x2CD)</td><td></td><td>Field Marshal’s Earthshaker</td></tr>
+<tr><td><code>LIEUTENANT_COMMANDERS_EARTHSHAKER</code></td><td>718 (0x2CE)</td><td></td><td>Lieutenant Commander’s Earthshaker</td></tr>
+<tr><td><code>THE_FISTS_OF_FURY</code></td><td>719 (0x2CF)</td><td></td><td></td></tr>
+<tr><td><code>VENGEFUL_GLADIATORS_REFUGE</code></td><td>720 (0x2D0)</td><td></td><td>Vengeful Gladiator’s Refuge</td></tr>
+<tr><td><code>VENGEFUL_GLADIATORS_SANCTUARY</code></td><td>721 (0x2D1)</td><td></td><td>Vengeful Gladiator’s Sanctuary</td></tr>
+<tr><td><code>VENGEFUL_GLADIATORS_WILDHIDE</code></td><td>722 (0x2D2)</td><td></td><td>Vengeful Gladiator’s Wildhide</td></tr>
+<tr><td><code>VENGEFUL_GLADIATORS_PURSUIT</code></td><td>723 (0x2D3)</td><td></td><td>Vengeful Gladiator’s Pursuit</td></tr>
+<tr><td><code>VENGEFUL_GLADIATORS_REGALIA</code></td><td>724 (0x2D4)</td><td></td><td>Vengeful Gladiator’s Regalia</td></tr>
+<tr><td><code>VENGEFUL_GLADIATORS_REDEMPTION</code></td><td>725 (0x2D5)</td><td></td><td>Vengeful Gladiator’s Redemption</td></tr>
+<tr><td><code>VENGEFUL_GLADIATORS_VINDICATION</code></td><td>726 (0x2D6)</td><td></td><td>Vengeful Gladiator’s Vindication</td></tr>
+<tr><td><code>VENGEFUL_GLADIATORS_AEGIS</code></td><td>727 (0x2D7)</td><td></td><td>Vengeful Gladiator’s Aegis</td></tr>
+<tr><td><code>VENGEFUL_GLADIATORS_INVESTITURE</code></td><td>728 (0x2D8)</td><td></td><td>Vengeful Gladiator’s Investiture</td></tr>
+<tr><td><code>VENGEFUL_GLADIATORS_RAIMENT</code></td><td>729 (0x2D9)</td><td></td><td>Vengeful Gladiator’s Raiment</td></tr>
+<tr><td><code>VENGEFUL_GLADIATORS_VESTMENTS</code></td><td>730 (0x2DA)</td><td></td><td>Vengeful Gladiator’s Vestments</td></tr>
+<tr><td><code>VENGEFUL_GLADIATORS_WARTIDE</code></td><td>731 (0x2DB)</td><td></td><td>Vengeful Gladiator’s Wartide</td></tr>
+<tr><td><code>VENGEFUL_GLADIATORS_EARTHSHAKER</code></td><td>732 (0x2DC)</td><td></td><td>Vengeful Gladiator’s Earthshaker</td></tr>
+<tr><td><code>VENGEFUL_GLADIATORS_THUNDERFIST</code></td><td>733 (0x2DD)</td><td></td><td>Vengeful Gladiator’s Thunderfist</td></tr>
+<tr><td><code>VENGEFUL_GLADIATORS_DREADGEAR</code></td><td>734 (0x2DE)</td><td></td><td>Vengeful Gladiator’s Dreadgear</td></tr>
+<tr><td><code>VENGEFUL_GLADIATORS_FELSHROUD</code></td><td>735 (0x2DF)</td><td></td><td>Vengeful Gladiator’s Felshroud</td></tr>
+<tr><td><code>VENGEFUL_GLADIATORS_BATTLEGEAR</code></td><td>736 (0x2E0)</td><td></td><td>Vengeful Gladiator’s Battlegear</td></tr>
+<tr><td><code>LATROS_FLURRY</code></td><td>737 (0x2E1)</td><td></td><td>Latro’s Flurry</td></tr>
+<tr><td><code>DREADWEAVE_BATTLEGEAR</code></td><td>738 (0x2E2)</td><td></td><td></td></tr>
+<tr><td><code>MOONCLOTH_BATTLEGEAR</code></td><td>739 (0x2E3)</td><td></td><td></td></tr>
+<tr><td><code>SATIN_BATTLEGEAR</code></td><td>740 (0x2E4)</td><td></td><td></td></tr>
+<tr><td><code>EVOKERS_SILK_BATTLEGEAR</code></td><td>741 (0x2E5)</td><td></td><td>Evoker’s Silk Battlegear</td></tr>
+<tr><td><code>DRAGONHIDE_BATTLEGEAR</code></td><td>742 (0x2E6)</td><td></td><td></td></tr>
+<tr><td><code>WYRMHIDE_BATTLEGEAR</code></td><td>743 (0x2E7)</td><td></td><td></td></tr>
+<tr><td><code>KODOHIDE_BATTLEGEAR</code></td><td>744 (0x2E8)</td><td></td><td></td></tr>
+<tr><td><code>OPPORTUNISTS_BATTLEGEAR</code></td><td>745 (0x2E9)</td><td></td><td>Opportunist’s Battlegear</td></tr>
+<tr><td><code>SEERS_MAIL_BATTLEGEAR</code></td><td>746 (0x2EA)</td><td></td><td>Seer’s Mail Battlegear</td></tr>
+<tr><td><code>SEERS_RINGMAIL_BATTLEGEAR</code></td><td>747 (0x2EB)</td><td></td><td>Seer’s Ringmail Battlegear</td></tr>
+<tr><td><code>SEERS_LINKED_BATTLEGEAR</code></td><td>748 (0x2EC)</td><td></td><td>Seer’s Linked Battlegear</td></tr>
+<tr><td><code>STALKERS_CHAIN_BATTLEGEAR</code></td><td>749 (0x2ED)</td><td></td><td>Stalker’s Chain Battlegear</td></tr>
+<tr><td><code>SAVAGE_PLATE_BATTLEGEAR</code></td><td>750 (0x2EE)</td><td></td><td></td></tr>
+<tr><td><code>CRUSADERS_ORNAMENTED_BATTLEGEAR</code></td><td>751 (0x2EF)</td><td></td><td>Crusader’s Ornamented Battlegear</td></tr>
+<tr><td><code>CRUSADERS_SCALED_BATTLEGEAR</code></td><td>752 (0x2F0)</td><td></td><td>Crusader’s Scaled Battlegear</td></tr>
+</tbody>
+</table>
+</div>
+<p>Used in:</p>
+<ul>
+<li><a href="smsg_item_query_single_response.html">SMSG_ITEM_QUERY_SINGLE_RESPONSE</a></li>
+</ul>
+<h2 id="client-version-335"><a class="header" href="#client-version-335">Client Version 3.3.5</a></h2>
+<h3 id="wowm-representation-2"><a class="header" href="#wowm-representation-2">Wowm Representation</a></h3>
+<p>Autogenerated from <code>wowm</code> file at <a href="https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/item/item_sets.wowm#L1102"><code>wow_message_parser/wowm/world/item/item_sets.wowm:1102</code></a>.</p>
+<pre><code class="language-rust ignore">enum ItemSet : u16 {
+    NONE = 0;
+    THE_GLADIATOR = 1;
+    DAL_RENDS_ARMS = 41;
+    SPIDERS_KISS = 65;
+    THE_POSTMASTER = 81;
+    CADAVEROUS_GARB = 121;
+    NECROPILE_RAIMENT = 122;
+    BLOODMAIL_REGALIA = 123;
+    DEATHBONE_GUARDIAN = 124;
+    VOLCANIC_ARMOR = 141;
+    STORMSHROUD_ARMOR = 142;
+    DEVILSAUR_ARMOR = 143;
+    IRONFEATHER_ARMOR = 144;
+    DEFIAS_LEATHER = 161;
+    EMBRACE_OF_THE_VIPER = 162;
+    CHAIN_OF_THE_SCARLET_CRUSADE = 163;
+    MAGISTERS_REGALIA = 181;
+    VESTMENTS_OF_THE_DEVOUT = 182;
+    DREADMIST_RAIMENT = 183;
+    SHADOWCRAFT_ARMOR = 184;
+    WILDHEART_RAIMENT = 185;
+    BEASTSTALKER_ARMOR = 186;
+    THE_ELEMENTS = 187;
+    LIGHTFORGE_ARMOR = 188;
+    BATTLEGEAR_OF_VALOR = 189;
+    ARCANIST_REGALIA = 201;
+    VESTMENTS_OF_PROPHECY = 202;
+    FELHEART_RAIMENT = 203;
+    NIGHTSLAYER_ARMOR = 204;
+    CENARION_RAIMENT = 205;
+    GIANTSTALKER_ARMOR = 206;
+    THE_EARTHFURY = 207;
+    LAWBRINGER_ARMOR = 208;
+    BATTLEGEAR_OF_MIGHT = 209;
+    NETHERWIND_REGALIA = 210;
+    VESTMENTS_OF_TRANSCENDENCE = 211;
+    NEMESIS_RAIMENT = 212;
+    BLOODFANG_ARMOR = 213;
+    STORMRAGE_RAIMENT = 214;
+    DRAGONSTALKER_ARMOR = 215;
+    THE_TEN_STORMS = 216;
+    JUDGEMENT_ARMOR = 217;
+    BATTLEGEAR_OF_WRATH = 218;
+    GARB_OF_THERO_SHAN = 221;
+    SHARD_OF_THE_GODS = 241;
+    SPIRIT_OF_ESKHANDAR = 261;
+    CHAMPIONS_BATTLEGEAR = 281;
+    LIEUTENANT_COMMANDERS_BATTLEGEAR = 282;
+    CHAMPIONS_EARTHSHAKER = 301;
+    IMPERIAL_PLATE = 321;
+    CHAMPIONS_REGALIA = 341;
+    CHAMPIONS_RAIMENT = 342;
+    LIEUTENANT_COMMANDERS_REGALIA = 343;
+    LIEUTENANT_COMMANDERS_RAIMENT = 344;
+    CHAMPIONS_THREADS = 345;
+    LIEUTENANT_COMMANDERS_THREADS = 346;
+    CHAMPIONS_VESTMENTS = 347;
+    LIEUTENANT_COMMANDERS_VESTMENTS = 348;
+    CHAMPIONS_PURSUIT = 361;
+    LIEUTENANT_COMMANDERS_PURSUIT = 362;
+    LIEUTENANT_COMMANDERS_SANCTUARY = 381;
+    CHAMPIONS_SANCTUARY = 382;
+    WARLORDS_BATTLEGEAR = 383;
+    FIELD_MARSHALS_BATTLEGEAR = 384;
+    WARLORDS_EARTHSHAKER = 386;
+    WARLORDS_REGALIA = 387;
+    FIELD_MARSHALS_REGALIA = 388;
+    FIELD_MARSHALS_RAIMENT = 389;
+    WARLORDS_RAIMENT = 390;
+    WARLORDS_THREADS = 391;
+    FIELD_MARSHALS_THREADS = 392;
+    WARLORDS_VESTMENTS = 393;
+    FIELD_MARSHALS_VESTMENTS = 394;
+    FIELD_MARSHALS_PURSUIT = 395;
+    WARLORDS_PURSUIT = 396;
+    FIELD_MARSHALS_SANCTUARY = 397;
+    WARLORDS_SANCTUARY = 398;
+    LIEUTENANT_COMMANDERS_AEGIS = 401;
+    FIELD_MARSHALS_AEGIS = 402;
+    BLOODVINE_GARB = 421;
+    PRIMAL_BATSKIN = 441;
+    BLOOD_TIGER_HARNESS = 442;
+    BLOODSOUL_EMBRACE = 443;
+    THE_DARKSOUL = 444;
+    THE_TWIN_BLADES_OF_HAKKARI = 461;
+    ZANZILS_CONCENTRATION = 462;
+    PRIMAL_BLESSING = 463;
+    OVERLORDS_RESOLUTION = 464;
+    PRAYER_OF_THE_PRIMAL = 465;
+    MAJOR_MOJO_INFUSION = 466;
+    THE_HIGHLANDERS_RESOLUTION = 467;
+    THE_HIGHLANDERS_RESOLVE = 468;
+    THE_HIGHLANDERS_DETERMINATION = 469;
+    THE_HIGHLANDERS_FORTITUDE = 470;
+    THE_HIGHLANDERS_PURPOSE = 471;
+    THE_HIGHLANDERS_WILL = 472;
+    THE_HIGHLANDERS_INTENT = 473;
+    VINDICATORS_BATTLEGEAR = 474;
+    FREETHINKERS_ARMOR = 475;
+    AUGURS_REGALIA = 476;
+    PREDATORS_ARMOR = 477;
+    MADCAPS_OUTFIT = 478;
+    HARUSPEXS_GARB = 479;
+    CONFESSORS_RAIMENT = 480;
+    DEMONIACS_THREADS = 481;
+    ILLUSIONISTS_ATTIRE = 482;
+    THE_DEFILERS_DETERMINATION = 483;
+    THE_DEFILERS_FORTITUDE = 484;
+    THE_DEFILERS_INTENT = 485;
+    THE_DEFILERS_PURPOSE = 486;
+    THE_DEFILERS_RESOLUTION = 487;
+    THE_DEFILERS_WILL = 488;
+    BLACK_DRAGON_MAIL = 489;
+    GREEN_DRAGON_MAIL = 490;
+    BLUE_DRAGON_MAIL = 491;
+    TWILIGHT_TRAPPINGS = 492;
+    GENESIS_RAIMENT = 493;
+    SYMBOLS_OF_UNENDING_LIFE = 494;
+    BATTLEGEAR_OF_UNYIELDING_STRENGTH = 495;
+    CONQUERORS_BATTLEGEAR = 496;
+    DEATHDEALERS_EMBRACE = 497;
+    EMBLEMS_OF_VEILED_SHADOWS = 498;
+    DOOMCALLERS_ATTIRE = 499;
+    IMPLEMENTS_OF_UNSPOKEN_NAMES = 500;
+    STORMCALLERS_GARB = 501;
+    GIFT_OF_THE_GATHERING_STORM = 502;
+    ENIGMA_VESTMENTS = 503;
+    TRAPPINGS_OF_VAULTED_SECRETS = 504;
+    AVENGERS_BATTLEGEAR = 505;
+    BATTLEGEAR_OF_ETERNAL_JUSTICE = 506;
+    GARMENTS_OF_THE_ORACLE = 507;
+    FINERY_OF_INFINITE_WISDOM = 508;
+    STRIKERS_GARB = 509;
+    TRAPPINGS_OF_THE_UNSEEN_PATH = 510;
+    BATTLEGEAR_OF_HEROISM = 511;
+    DARKMANTLE_ARMOR = 512;
+    FERALHEART_RAIMENT = 513;
+    VESTMENTS_OF_THE_VIRTUOUS = 514;
+    BEASTMASTER_ARMOR = 515;
+    SOULFORGE_ARMOR = 516;
+    SORCERERS_REGALIA = 517;
+    DEATHMIST_RAIMENT = 518;
+    THE_FIVE_THUNDERS = 519;
+    IRONWEAVE_BATTLESUIT = 520;
+    DREAMWALKER_RAIMENT = 521;
+    CHAMPIONS_GUARD = 522;
+    DREADNAUGHTS_BATTLEGEAR = 523;
+    BONESCYTHE_ARMOR = 524;
+    VESTMENTS_OF_FAITH = 525;
+    FROSTFIRE_REGALIA = 526;
+    THE_EARTHSHATTERER = 527;
+    REDEMPTION_ARMOR = 528;
+    PLAGUEHEART_RAIMENT = 529;
+    CRYPTSTALKER_ARMOR = 530;
+    BATTLEGEAR_OF_UNDEAD_SLAYING = 533;
+    UNDEAD_SLAYERS_ARMOR = 534;
+    GARB_OF_THE_UNDEAD_SLAYER = 535;
+    REGALIA_OF_UNDEAD_CLEANSING = 536;
+    CHAMPIONS_BATTLEARMOR = 537;
+    CHAMPIONS_STORMCALLER = 538;
+    CHAMPIONS_REFUGE = 539;
+    CHAMPIONS_INVESTITURE = 540;
+    CHAMPIONS_DREADGEAR = 541;
+    CHAMPIONS_ARCANUM = 542;
+    CHAMPIONS_PURSUANCE = 543;
+    LIEUTENANT_COMMANDERS_REDOUBT = 544;
+    LIEUTENANT_COMMANDERS_BATTLEARMOR = 545;
+    LIEUTENANT_COMMANDERS_ARCANUM = 546;
+    LIEUTENANT_COMMANDERS_DREADGEAR = 547;
+    LIEUTENANT_COMMANDERS_GUARD = 548;
+    LIEUTENANT_COMMANDERS_INVESTITURE = 549;
+    LIEUTENANT_COMMANDERS_PURSUANCE = 550;
+    LIEUTENANT_COMMANDERS_REFUGE = 551;
+    WRATH_OF_SPELLFIRE = 552;
+    SHADOWS_EMBRACE = 553;
+    PRIMAL_MOONCLOTH = 554;
+    NETHERWEAVE_VESTMENTS = 555;
+    IMBUED_NETHERWEAVE = 556;
+    SOULCLOTH_EMBRACE = 557;
+    ARCANOWEAVE_VESTMENTS = 558;
+    SPELLSTRIKE_INFUSION = 559;
+    FEL_IRON_PLATE = 560;
+    FEL_IRON_CHAIN = 561;
+    ADAMANTITE_BATTLEGEAR = 562;
+    ENCHANTED_ADAMANTITE_ARMOR = 563;
+    FLAME_GUARD = 564;
+    KHORIUM_WARD = 565;
+    BURNING_RAGE = 566;
+    GLADIATORS_BATTLEGEAR = 567;
+    GLADIATORS_DREADGEAR = 568;
+    FAITH_IN_FELSTEEL = 569;
+    THE_UNYIELDING = 570;
+    WHITEMEND_WISDOM = 571;
+    BATTLECAST_GARB = 572;
+    FEL_SKIN = 573;
+    STRENGTH_OF_THE_CLEFTHOOF = 574;
+    FELSTALKER_ARMOR = 575;
+    FURY_OF_THE_NETHER = 576;
+    GLADIATORS_VESTMENTS = 577;
+    GLADIATORS_EARTHSHAKER = 578;
+    GLADIATORS_REGALIA = 579;
+    GLADIATORS_THUNDERFIST = 580;
+    GLADIATORS_RAIMENT = 581;
+    GLADIATORS_AEGIS = 582;
+    GLADIATORS_VINDICATION = 583;
+    GLADIATORS_SANCTUARY = 584;
+    GLADIATORS_WILDHIDE = 585;
+    GLADIATORS_PURSUIT = 586;
+    HIGH_WARLORDS_AEGIS = 587;
+    HIGH_WARLORDS_BATTLEGEAR = 588;
+    GRAND_MARSHALS_AEGIS = 589;
+    GRAND_MARSHALS_BATTLEGEAR = 590;
+    GRAND_MARSHALS_DREADGEAR = 591;
+    HIGH_WARLORDS_DREADGEAR = 592;
+    GRAND_MARSHALS_EARTHSHAKER = 593;
+    HIGH_WARLORDS_EARTHSHAKER = 594;
+    GRAND_MARSHALS_PURSUIT = 595;
+    HIGH_WARLORDS_PURSUIT = 596;
+    GRAND_MARSHALS_RAIMENT = 597;
+    HIGH_WARLORDS_RAIMENT = 598;
+    GRAND_MARSHALS_REGALIA = 599;
+    HIGH_WARLORDS_REGALIA = 600;
+    GRAND_MARSHALS_SANCTUARY = 601;
+    HIGH_WARLORDS_SANCTUARY = 602;
+    GRAND_MARSHALS_THUNDERFIST = 603;
+    HIGH_WARLORDS_THUNDERFIST = 604;
+    GRAND_MARSHALS_VESTMENTS = 605;
+    HIGH_WARLORDS_VESTMENTS = 606;
+    GRAND_MARSHALS_VINDICATION = 607;
+    HIGH_WARLORDS_VINDICATION = 608;
+    GRAND_MARSHALS_WILDHIDE = 609;
+    HIGH_WARLORDS_WILDHIDE = 610;
+    FELSCALE_ARMOR = 611;
+    SCALED_DRAENIC_ARMOR = 612;
+    THICK_DRAENIC_ARMOR = 613;
+    WILD_DRAENISH_ARMOR = 614;
+    GLADIATORS_FELSHROUD = 615;
+    NETHERSCALE_ARMOR = 616;
+    NETHERSTRIKE_ARMOR = 617;
+    WINDHAWK_ARMOR = 618;
+    PRIMAL_INTENT = 619;
+    ASSASSINATION_ARMOR = 620;
+    NETHERBLADE = 621;
+    DEATHMANTLE = 622;
+    RIGHTEOUS_ARMOR = 623;
+    JUSTICAR_RAIMENT = 624;
+    JUSTICAR_ARMOR = 625;
+    JUSTICAR_BATTLEGEAR = 626;
+    CRYSTALFORGE_RAIMENT = 627;
+    CRYSTALFORGE_ARMOR = 628;
+    CRYSTALFORGE_BATTLEGEAR = 629;
+    TIDEFURY_RAIMENT = 630;
+    CYCLONE_RAIMENT = 631;
+    CYCLONE_REGALIA = 632;
+    CYCLONE_HARNESS = 633;
+    CATACLYSM_RAIMENT = 634;
+    CATACLYSM_REGALIA = 635;
+    CATACLYSM_HARNESS = 636;
+    MOONGLADE_RAIMENT = 637;
+    MALORNE_RAIMENT = 638;
+    MALORNE_REGALIA = 639;
+    MALORNE_HARNESS = 640;
+    NORDRASSIL_HARNESS = 641;
+    NORDRASSIL_RAIMENT = 642;
+    NORDRASSIL_REGALIA = 643;
+    OBLIVION_RAIMENT = 644;
+    VOIDHEART_RAIMENT = 645;
+    CORRUPTOR_RAIMENT = 646;
+    INCANTERS_REGALIA = 647;
+    ALDOR_REGALIA = 648;
+    TIRISFAL_REGALIA = 649;
+    BEAST_LORD_ARMOR = 650;
+    DEMON_STALKER_ARMOR = 651;
+    RIFT_STALKER_ARMOR = 652;
+    BOLD_ARMOR = 653;
+    WARBRINGER_ARMOR = 654;
+    WARBRINGER_BATTLEGEAR = 655;
+    DESTROYER_ARMOR = 656;
+    DESTROYER_BATTLEGEAR = 657;
+    MANA_ETCHED_REGALIA = 658;
+    WASTEWALKER_ARMOR = 659;
+    DESOLATION_BATTLEGEAR = 660;
+    DOOMPLATE_BATTLEGEAR = 661;
+    HALLOWED_RAIMENT = 662;
+    INCARNATE_RAIMENT = 663;
+    INCARNATE_REGALIA = 664;
+    AVATAR_RAIMENT = 665;
+    AVATAR_REGALIA = 666;
+    THE_TWIN_STARS = 667;
+    SLAYERS_ARMOR = 668;
+    GRONNSTALKERS_ARMOR = 669;
+    MALEFIC_RAIMENT = 670;
+    TEMPEST_REGALIA = 671;
+    ONSLAUGHT_BATTLEGEAR = 672;
+    ONSLAUGHT_ARMOR = 673;
+    ABSOLUTION_REGALIA = 674;
+    VESTMENTS_OF_ABSOLUTION = 675;
+    THUNDERHEART_HARNESS = 676;
+    THUNDERHEART_REGALIA = 677;
+    THUNDERHEART_RAIMENT = 678;
+    LIGHTBRINGER_ARMOR = 679;
+    LIGHTBRINGER_BATTLEGEAR = 680;
+    LIGHTBRINGER_RAIMENT = 681;
+    SKYSHATTER_HARNESS = 682;
+    SKYSHATTER_RAIMENT = 683;
+    SKYSHATTER_REGALIA = 684;
+    GLADIATORS_REFUGE = 685;
+    GLADIATORS_WARTIDE = 686;
+    GLADIATORS_INVESTITURE = 687;
+    GRAND_MARSHALS_REFUGE = 688;
+    HIGH_WARLORDS_REFUGE = 689;
+    GLADIATORS_REDEMPTION = 690;
+    GRAND_MARSHALS_INVESTITURE = 691;
+    HIGH_WARLORDS_INVESTITURE = 692;
+    GRAND_MARSHALS_REDEMPTION = 693;
+    HIGH_WARLORDS_REDEMPTION = 694;
+    GRAND_MARSHALS_WARTIDE = 695;
+    HIGH_WARLORDS_WARTIDE = 696;
+    CHAMPIONS_REDOUBT = 697;
+    WARLORDS_AEGIS = 698;
+    THE_TWIN_BLADES_OF_AZZINOTH = 699;
+    MERCILESS_GLADIATORS_AEGIS = 700;
+    MERCILESS_GLADIATORS_BATTLEGEAR = 701;
+    MERCILESS_GLADIATORS_DREADGEAR = 702;
+    MERCILESS_GLADIATORS_EARTHSHAKER = 703;
+    MERCILESS_GLADIATORS_FELSHROUD = 704;
+    MERCILESS_GLADIATORS_INVESTITURE = 705;
+    MERCILESS_GLADIATORS_PURSUIT = 706;
+    MERCILESS_GLADIATORS_RAIMENT = 707;
+    MERCILESS_GLADIATORS_REDEMPTION = 708;
+    MERCILESS_GLADIATORS_REFUGE = 709;
+    MERCILESS_GLADIATORS_REGALIA = 710;
+    MERCILESS_GLADIATORS_SANCTUARY = 711;
+    MERCILESS_GLADIATORS_THUNDERFIST = 712;
+    MERCILESS_GLADIATORS_VESTMENTS = 713;
+    MERCILESS_GLADIATORS_VINDICATION = 714;
+    MERCILESS_GLADIATORS_WARTIDE = 715;
+    MERCILESS_GLADIATORS_WILDHIDE = 716;
+    FIELD_MARSHALS_EARTHSHAKER = 717;
+    LIEUTENANT_COMMANDERS_EARTHSHAKER = 718;
+    THE_FISTS_OF_FURY = 719;
+    VENGEFUL_GLADIATORS_REFUGE = 720;
+    VENGEFUL_GLADIATORS_SANCTUARY = 721;
+    VENGEFUL_GLADIATORS_WILDHIDE = 722;
+    VENGEFUL_GLADIATORS_PURSUIT = 723;
+    VENGEFUL_GLADIATORS_REGALIA = 724;
+    VENGEFUL_GLADIATORS_REDEMPTION = 725;
+    VENGEFUL_GLADIATORS_VINDICATION = 726;
+    VENGEFUL_GLADIATORS_AEGIS = 727;
+    VENGEFUL_GLADIATORS_INVESTITURE = 728;
+    VENGEFUL_GLADIATORS_RAIMENT = 729;
+    VENGEFUL_GLADIATORS_VESTMENTS = 730;
+    VENGEFUL_GLADIATORS_WARTIDE = 731;
+    VENGEFUL_GLADIATORS_EARTHSHAKER = 732;
+    VENGEFUL_GLADIATORS_THUNDERFIST = 733;
+    VENGEFUL_GLADIATORS_DREADGEAR = 734;
+    VENGEFUL_GLADIATORS_FELSHROUD = 735;
+    VENGEFUL_GLADIATORS_BATTLEGEAR = 736;
+    LATROS_FLURRY = 737;
+    DREADWEAVE_BATTLEGEAR = 738;
+    MOONCLOTH_BATTLEGEAR = 739;
+    SATIN_BATTLEGEAR = 740;
+    EVOKERS_SILK_BATTLEGEAR = 741;
+    DRAGONHIDE_BATTLEGEAR = 742;
+    WYRMHIDE_BATTLEGEAR = 743;
+    KODOHIDE_BATTLEGEAR = 744;
+    OPPORTUNISTS_BATTLEGEAR = 745;
+    SEERS_MAIL_BATTLEGEAR = 746;
+    SEERS_RINGMAIL_BATTLEGEAR = 747;
+    SEERS_LINKED_BATTLEGEAR = 748;
+    STALKERS_CHAIN_BATTLEGEAR = 749;
+    SAVAGE_PLATE_BATTLEGEAR = 750;
+    CRUSADERS_ORNAMENTED_BATTLEGEAR = 751;
+    CRUSADERS_SCALED_BATTLEGEAR = 752;
+    BOREAN_EMBRACE = 754;
+    NERUBIAN_HIVE = 755;
+    FROSTSCALE_BINDING = 756;
+    ICEBORNE_EMBRACE = 757;
+    RAINES_REVENGE = 759;
+    GLADIATORS_DREADPLATE = 760;
+    WINTER_GARB = 761;
+    BREWFEST_GARB = 762;
+    FROSTWOVEN_POWER = 763;
+    DUSKWEAVER = 764;
+    GLADIATORS_BATTLEGEAR2 = 765;
+    GLADIATORS_VINDICATION2 = 766;
+    GLADIATORS_REDEMPTION2 = 767;
+    GLADIATORS_DESECRATION = 768;
+    GLADIATORS_THUNDERFIST2 = 769;
+    GLADIATORS_EARTHSHAKER2 = 770;
+    GLADIATORS_WARTIDE2 = 771;
+    GLADIATORS_PURSUIT2 = 772;
+    GLADIATORS_REFUGE2 = 773;
+    GLADIATORS_WILDHIDE2 = 774;
+    GLADIATORS_SANCTUARY2 = 775;
+    GLADIATORS_VESTMENTS2 = 776;
+    GLADIATORS_INVESTITURE2 = 777;
+    GLADIATORS_RAIMENT2 = 778;
+    GLADIATORS_REGALIA2 = 779;
+    GLADIATORS_FELSHROUD2 = 780;
+    BLESSED_REGALIA_OF_UNDEAD_CLEANSING = 781;
+    UNDEAD_SLAYERS_BLESSED_ARMOR = 782;
+    BLESSED_GARB_OF_THE_UNDEAD_SLAYER = 783;
+    BLESSED_BATTLEGEAR_OF_UNDEAD_SLAYING = 784;
+    MIDSUMMER_REVELER = 785;
+    DREADNAUGHT_PLATE = 787;
+    DREADNAUGHT_BATTLEGEAR = 788;
+    REDEMPTION_BATTLEGEAR = 789;
+    REDEMPTION_REGALIA = 790;
+    REDEMPTION_PLATE = 791;
+    SCOURGEBORNE_BATTLEGEAR = 792;
+    SCOURGEBORNE_PLATE = 793;
+    CRYPTSTALKER_BATTLEGEAR = 794;
+    EARTHSHATTER_BATTLEGEAR = 795;
+    EARTHSHATTER_GARB = 796;
+    EARTHSHATTER_REGALIA = 797;
+    DREAMWALKER_BATTLEGEAR = 798;
+    DREAMWALKER_REGALIA = 799;
+    DREAMWALKER_GARB = 800;
+    BONESCYTHE_BATTLEGEAR = 801;
+    PLAGUEHEART_GARB = 802;
+    FROSTFIRE_GARB = 803;
+    REGALIA_OF_FAITH = 804;
+    GARB_OF_FAITH = 805;
+    SPRING_TUXEDO = 812;
+    EVISCERATORS_BATTLEGEAR = 813;
+    ORNATE_SARONITE_BATTLEGEAR = 814;
+    OVERCASTER_BATTLEGEAR = 815;
+    SAVAGE_SARONITE_BATTLEGEAR = 816;
+    STORMHIDE_BATTLEGEAR = 817;
+    SWIFTARROW_BATTLEGEAR = 818;
+    FROSTSAVAGE_BATTLEGEAR = 819;
+    AEGIS_BATTLEGEAR = 820;
+    AEGIS_PLATE = 821;
+    AEGIS_REGALIA = 822;
+    WORLDBREAKER_BATTLEGEAR = 823;
+    WORLDBREAKER_GARB = 824;
+    WORLDBREAKER_REGALIA = 825;
+    TERRORBLADE_BATTLEGEAR = 826;
+    NIGHTSONG_BATTLEGEAR = 827;
+    NIGHTSONG_GARB = 828;
+    NIGHTSONG_REGALIA = 829;
+    SIEGEBREAKER_BATTLEGEAR = 830;
+    SIEGEBREAKER_PLATE = 831;
+    SANCTIFICATION_GARB = 832;
+    SANCTIFICATION_REGALIA = 833;
+    DARKRUNED_BATTLEGEAR = 834;
+    DARKRUNED_PLATE = 835;
+    KIRIN_TOR_GARB = 836;
+    DEATHBRINGER_GARB = 837;
+    SCOURGESTALKER_BATTLEGEAR = 838;
+    KHADGARS_REGALIA = 843;
+    SUNSTRIDERS_REGALIA = 844;
+    GUL_DANS_REGALIA = 845;
+    KEL_THUZADS_REGALIA = 846;
+    VELENS_RAIMENT = 847;
+    ZABRAS_RAIMENT = 848;
+    VELENS_REGALIA = 849;
+    ZABRAS_REGALIA = 850;
+    MALFURIONS_GARB = 851;
+    RUNETOTEMS_GARB = 852;
+    MALFURIONS_REGALIA = 853;
+    RUNETOTEMS_REGALIA = 854;
+    MALFURIONS_BATTLEGEAR = 855;
+    RUNETOTEMS_BATTLEGEAR = 856;
+    VANCLEEFS_BATTLEGEAR = 857;
+    GARONAS_BATTLEGEAR = 858;
+    WINDRUNNERS_BATTLEGEAR = 859;
+    WINDRUNNERS_PURSUIT = 860;
+    NOBUNDOS_GARB = 861;
+    THRALLS_GARB = 862;
+    THRALLS_REGALIA = 863;
+    NOBUNDOS_REGALIA = 864;
+    NOBUNDOS_BATTLEGEAR = 865;
+    THRALLS_BATTLEGEAR = 866;
+    WRYNNS_BATTLEGEAR = 867;
+    HELLSCREAMS_BATTLEGEAR = 868;
+    WRYNNS_PLATE = 869;
+    HELLSCREAMS_PLATE = 870;
+    THASSARIANS_BATTLEGEAR = 871;
+    KOLTIRAS_BATTLEGEAR = 872;
+    THASSARIANS_PLATE = 873;
+    KOLTIRAS_PLATE = 874;
+    TURALYONS_GARB = 875;
+    LIADRINS_GARB = 876;
+    TURALYONS_BATTLEGEAR = 877;
+    LIADRINS_BATTLEGEAR = 878;
+    TURALYONS_PLATE = 879;
+    LIADRINS_PLATE = 880;
+    PURIFIED_SHARD_OF_THE_GODS = 881;
+    SHINY_SHARD_OF_THE_GODS = 882;
+    BLOODMAGES_REGALIA = 883;
+    DARK_COVENS_REGALIA = 884;
+    CRIMSON_ACOLYTES_RAIMENT = 885;
+    CRIMSON_ACOLYTES_REGALIA = 886;
+    LASHERWEAVE_GARB = 887;
+    LASHERWEAVE_REGALIA = 888;
+    LASHERWEAVE_BATTLEGEAR = 889;
+    SHADOWBLADES_BATTLEGEAR = 890;
+    AHN_KAHAR_BLOOD_HUNTERS_BATTLEGEAR = 891;
+    FROST_WITCHS_GARB = 892;
+    FROST_WITCHS_REGALIA = 893;
+    FROST_WITCHS_BATTLEGEAR = 894;
+    YMIRJAR_LORDS_BATTLEGEAR = 895;
+    YMIRJAR_LORDS_PLATE = 896;
+    SCOURGELORDS_BATTLEGEAR = 897;
+    SCOURGELORDS_PLATE = 898;
+    LIGHTSWORN_GARB = 899;
+    LIGHTSWORN_BATTLEGEAR = 900;
+    LIGHTSWORN_PLATE = 901;
+}</code></pre>
+<h3 id="type-2"><a class="header" href="#type-2">Type</a></h3>
+<p>The basic type is <code>u16</code>, a 2 byte (16 bit) little endian integer.</p>
+<h3 id="enumerators-2"><a class="header" href="#enumerators-2">Enumerators</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Enumerator</th><th>Value</th><th>Comment</th><th>Display</th></tr>
+</thead>
+<tbody>
+<tr><td><code>NONE</code></td><td>0 (0x00)</td><td></td><td></td></tr>
+<tr><td><code>THE_GLADIATOR</code></td><td>1 (0x01)</td><td></td><td></td></tr>
+<tr><td><code>DAL_RENDS_ARMS</code></td><td>41 (0x29)</td><td></td><td>Dal’Rend’s Arms</td></tr>
+<tr><td><code>SPIDERS_KISS</code></td><td>65 (0x41)</td><td></td><td>Spider’s Kiss</td></tr>
+<tr><td><code>THE_POSTMASTER</code></td><td>81 (0x51)</td><td></td><td></td></tr>
+<tr><td><code>CADAVEROUS_GARB</code></td><td>121 (0x79)</td><td></td><td></td></tr>
+<tr><td><code>NECROPILE_RAIMENT</code></td><td>122 (0x7A)</td><td></td><td></td></tr>
+<tr><td><code>BLOODMAIL_REGALIA</code></td><td>123 (0x7B)</td><td></td><td></td></tr>
+<tr><td><code>DEATHBONE_GUARDIAN</code></td><td>124 (0x7C)</td><td></td><td></td></tr>
+<tr><td><code>VOLCANIC_ARMOR</code></td><td>141 (0x8D)</td><td></td><td></td></tr>
+<tr><td><code>STORMSHROUD_ARMOR</code></td><td>142 (0x8E)</td><td></td><td></td></tr>
+<tr><td><code>DEVILSAUR_ARMOR</code></td><td>143 (0x8F)</td><td></td><td></td></tr>
+<tr><td><code>IRONFEATHER_ARMOR</code></td><td>144 (0x90)</td><td></td><td></td></tr>
+<tr><td><code>DEFIAS_LEATHER</code></td><td>161 (0xA1)</td><td></td><td></td></tr>
+<tr><td><code>EMBRACE_OF_THE_VIPER</code></td><td>162 (0xA2)</td><td></td><td></td></tr>
+<tr><td><code>CHAIN_OF_THE_SCARLET_CRUSADE</code></td><td>163 (0xA3)</td><td></td><td></td></tr>
+<tr><td><code>MAGISTERS_REGALIA</code></td><td>181 (0xB5)</td><td></td><td>Magister’s Regalia</td></tr>
+<tr><td><code>VESTMENTS_OF_THE_DEVOUT</code></td><td>182 (0xB6)</td><td></td><td></td></tr>
+<tr><td><code>DREADMIST_RAIMENT</code></td><td>183 (0xB7)</td><td></td><td></td></tr>
+<tr><td><code>SHADOWCRAFT_ARMOR</code></td><td>184 (0xB8)</td><td></td><td></td></tr>
+<tr><td><code>WILDHEART_RAIMENT</code></td><td>185 (0xB9)</td><td></td><td></td></tr>
+<tr><td><code>BEASTSTALKER_ARMOR</code></td><td>186 (0xBA)</td><td></td><td></td></tr>
+<tr><td><code>THE_ELEMENTS</code></td><td>187 (0xBB)</td><td></td><td></td></tr>
+<tr><td><code>LIGHTFORGE_ARMOR</code></td><td>188 (0xBC)</td><td></td><td></td></tr>
+<tr><td><code>BATTLEGEAR_OF_VALOR</code></td><td>189 (0xBD)</td><td></td><td></td></tr>
+<tr><td><code>ARCANIST_REGALIA</code></td><td>201 (0xC9)</td><td></td><td></td></tr>
+<tr><td><code>VESTMENTS_OF_PROPHECY</code></td><td>202 (0xCA)</td><td></td><td></td></tr>
+<tr><td><code>FELHEART_RAIMENT</code></td><td>203 (0xCB)</td><td></td><td></td></tr>
+<tr><td><code>NIGHTSLAYER_ARMOR</code></td><td>204 (0xCC)</td><td></td><td></td></tr>
+<tr><td><code>CENARION_RAIMENT</code></td><td>205 (0xCD)</td><td></td><td></td></tr>
+<tr><td><code>GIANTSTALKER_ARMOR</code></td><td>206 (0xCE)</td><td></td><td></td></tr>
+<tr><td><code>THE_EARTHFURY</code></td><td>207 (0xCF)</td><td></td><td></td></tr>
+<tr><td><code>LAWBRINGER_ARMOR</code></td><td>208 (0xD0)</td><td></td><td></td></tr>
+<tr><td><code>BATTLEGEAR_OF_MIGHT</code></td><td>209 (0xD1)</td><td></td><td></td></tr>
+<tr><td><code>NETHERWIND_REGALIA</code></td><td>210 (0xD2)</td><td></td><td></td></tr>
+<tr><td><code>VESTMENTS_OF_TRANSCENDENCE</code></td><td>211 (0xD3)</td><td></td><td></td></tr>
+<tr><td><code>NEMESIS_RAIMENT</code></td><td>212 (0xD4)</td><td></td><td></td></tr>
+<tr><td><code>BLOODFANG_ARMOR</code></td><td>213 (0xD5)</td><td></td><td></td></tr>
+<tr><td><code>STORMRAGE_RAIMENT</code></td><td>214 (0xD6)</td><td></td><td></td></tr>
+<tr><td><code>DRAGONSTALKER_ARMOR</code></td><td>215 (0xD7)</td><td></td><td></td></tr>
+<tr><td><code>THE_TEN_STORMS</code></td><td>216 (0xD8)</td><td></td><td></td></tr>
+<tr><td><code>JUDGEMENT_ARMOR</code></td><td>217 (0xD9)</td><td></td><td></td></tr>
+<tr><td><code>BATTLEGEAR_OF_WRATH</code></td><td>218 (0xDA)</td><td></td><td></td></tr>
+<tr><td><code>GARB_OF_THERO_SHAN</code></td><td>221 (0xDD)</td><td></td><td>Garb of Thero-shan</td></tr>
+<tr><td><code>SHARD_OF_THE_GODS</code></td><td>241 (0xF1)</td><td></td><td></td></tr>
+<tr><td><code>SPIRIT_OF_ESKHANDAR</code></td><td>261 (0x105)</td><td></td><td></td></tr>
+<tr><td><code>CHAMPIONS_BATTLEGEAR</code></td><td>281 (0x119)</td><td></td><td>Champion’s Battlegear</td></tr>
+<tr><td><code>LIEUTENANT_COMMANDERS_BATTLEGEAR</code></td><td>282 (0x11A)</td><td></td><td>Lieutenant Commander’s Battlegear</td></tr>
+<tr><td><code>CHAMPIONS_EARTHSHAKER</code></td><td>301 (0x12D)</td><td></td><td>Champion’s Earthshaker</td></tr>
+<tr><td><code>IMPERIAL_PLATE</code></td><td>321 (0x141)</td><td></td><td></td></tr>
+<tr><td><code>CHAMPIONS_REGALIA</code></td><td>341 (0x155)</td><td></td><td>Champion’s Regalia</td></tr>
+<tr><td><code>CHAMPIONS_RAIMENT</code></td><td>342 (0x156)</td><td></td><td>Champion’s Raiment</td></tr>
+<tr><td><code>LIEUTENANT_COMMANDERS_REGALIA</code></td><td>343 (0x157)</td><td></td><td>Lieutenant Commander’s Regalia</td></tr>
+<tr><td><code>LIEUTENANT_COMMANDERS_RAIMENT</code></td><td>344 (0x158)</td><td></td><td>Lieutenant Commander’s Raiment</td></tr>
+<tr><td><code>CHAMPIONS_THREADS</code></td><td>345 (0x159)</td><td></td><td>Champion’s Threads</td></tr>
+<tr><td><code>LIEUTENANT_COMMANDERS_THREADS</code></td><td>346 (0x15A)</td><td></td><td>Lieutenant Commander’s Threads</td></tr>
+<tr><td><code>CHAMPIONS_VESTMENTS</code></td><td>347 (0x15B)</td><td></td><td>Champion’s Vestments</td></tr>
+<tr><td><code>LIEUTENANT_COMMANDERS_VESTMENTS</code></td><td>348 (0x15C)</td><td></td><td>Lieutenant Commander’s Vestments</td></tr>
+<tr><td><code>CHAMPIONS_PURSUIT</code></td><td>361 (0x169)</td><td></td><td>Champion’s Pursuit</td></tr>
+<tr><td><code>LIEUTENANT_COMMANDERS_PURSUIT</code></td><td>362 (0x16A)</td><td></td><td>Lieutenant Commander’s Pursuit</td></tr>
+<tr><td><code>LIEUTENANT_COMMANDERS_SANCTUARY</code></td><td>381 (0x17D)</td><td></td><td>Lieutenant Commander’s Sanctuary</td></tr>
+<tr><td><code>CHAMPIONS_SANCTUARY</code></td><td>382 (0x17E)</td><td></td><td>Champion’s Sanctuary</td></tr>
+<tr><td><code>WARLORDS_BATTLEGEAR</code></td><td>383 (0x17F)</td><td></td><td>Warlord’s Battlegear</td></tr>
+<tr><td><code>FIELD_MARSHALS_BATTLEGEAR</code></td><td>384 (0x180)</td><td></td><td>Field Marshal’s Battlegear</td></tr>
+<tr><td><code>WARLORDS_EARTHSHAKER</code></td><td>386 (0x182)</td><td></td><td>Warlord’s Earthshaker</td></tr>
+<tr><td><code>WARLORDS_REGALIA</code></td><td>387 (0x183)</td><td></td><td>Warlord’s Regalia</td></tr>
+<tr><td><code>FIELD_MARSHALS_REGALIA</code></td><td>388 (0x184)</td><td></td><td>Field Marshal’s Regalia</td></tr>
+<tr><td><code>FIELD_MARSHALS_RAIMENT</code></td><td>389 (0x185)</td><td></td><td>Field Marshal’s Raiment</td></tr>
+<tr><td><code>WARLORDS_RAIMENT</code></td><td>390 (0x186)</td><td></td><td>Warlord’s Raiment</td></tr>
+<tr><td><code>WARLORDS_THREADS</code></td><td>391 (0x187)</td><td></td><td>Warlord’s Threads</td></tr>
+<tr><td><code>FIELD_MARSHALS_THREADS</code></td><td>392 (0x188)</td><td></td><td>Field Marshal’s Threads</td></tr>
+<tr><td><code>WARLORDS_VESTMENTS</code></td><td>393 (0x189)</td><td></td><td>Warlord’s Vestments</td></tr>
+<tr><td><code>FIELD_MARSHALS_VESTMENTS</code></td><td>394 (0x18A)</td><td></td><td>Field Marshal’s Vestments</td></tr>
+<tr><td><code>FIELD_MARSHALS_PURSUIT</code></td><td>395 (0x18B)</td><td></td><td>Field Marshal’s Pursuit</td></tr>
+<tr><td><code>WARLORDS_PURSUIT</code></td><td>396 (0x18C)</td><td></td><td>Warlord’s Pursuit</td></tr>
+<tr><td><code>FIELD_MARSHALS_SANCTUARY</code></td><td>397 (0x18D)</td><td></td><td>Field Marshal’s Sanctuary</td></tr>
+<tr><td><code>WARLORDS_SANCTUARY</code></td><td>398 (0x18E)</td><td></td><td>Warlord’s Sanctuary</td></tr>
+<tr><td><code>LIEUTENANT_COMMANDERS_AEGIS</code></td><td>401 (0x191)</td><td></td><td>Lieutenant Commander’s Aegis</td></tr>
+<tr><td><code>FIELD_MARSHALS_AEGIS</code></td><td>402 (0x192)</td><td></td><td>Field Marshal’s Aegis</td></tr>
+<tr><td><code>BLOODVINE_GARB</code></td><td>421 (0x1A5)</td><td></td><td></td></tr>
+<tr><td><code>PRIMAL_BATSKIN</code></td><td>441 (0x1B9)</td><td></td><td></td></tr>
+<tr><td><code>BLOOD_TIGER_HARNESS</code></td><td>442 (0x1BA)</td><td></td><td></td></tr>
+<tr><td><code>BLOODSOUL_EMBRACE</code></td><td>443 (0x1BB)</td><td></td><td></td></tr>
+<tr><td><code>THE_DARKSOUL</code></td><td>444 (0x1BC)</td><td></td><td></td></tr>
+<tr><td><code>THE_TWIN_BLADES_OF_HAKKARI</code></td><td>461 (0x1CD)</td><td></td><td></td></tr>
+<tr><td><code>ZANZILS_CONCENTRATION</code></td><td>462 (0x1CE)</td><td></td><td>Zanzil’s Concentration</td></tr>
+<tr><td><code>PRIMAL_BLESSING</code></td><td>463 (0x1CF)</td><td></td><td></td></tr>
+<tr><td><code>OVERLORDS_RESOLUTION</code></td><td>464 (0x1D0)</td><td></td><td>Overlord’s Resolution</td></tr>
+<tr><td><code>PRAYER_OF_THE_PRIMAL</code></td><td>465 (0x1D1)</td><td></td><td></td></tr>
+<tr><td><code>MAJOR_MOJO_INFUSION</code></td><td>466 (0x1D2)</td><td></td><td></td></tr>
+<tr><td><code>THE_HIGHLANDERS_RESOLUTION</code></td><td>467 (0x1D3)</td><td></td><td>The Highlander’s Resolution</td></tr>
+<tr><td><code>THE_HIGHLANDERS_RESOLVE</code></td><td>468 (0x1D4)</td><td></td><td>The Highlander’s Resolve</td></tr>
+<tr><td><code>THE_HIGHLANDERS_DETERMINATION</code></td><td>469 (0x1D5)</td><td></td><td>The Highlander’s Determination</td></tr>
+<tr><td><code>THE_HIGHLANDERS_FORTITUDE</code></td><td>470 (0x1D6)</td><td></td><td>The Highlander’s Fortitude</td></tr>
+<tr><td><code>THE_HIGHLANDERS_PURPOSE</code></td><td>471 (0x1D7)</td><td></td><td>The Highlander’s Purpose</td></tr>
+<tr><td><code>THE_HIGHLANDERS_WILL</code></td><td>472 (0x1D8)</td><td></td><td>The Highlander’s Will</td></tr>
+<tr><td><code>THE_HIGHLANDERS_INTENT</code></td><td>473 (0x1D9)</td><td></td><td>The Highlander’s Intent</td></tr>
+<tr><td><code>VINDICATORS_BATTLEGEAR</code></td><td>474 (0x1DA)</td><td></td><td>Vindicator’s Battlegear</td></tr>
+<tr><td><code>FREETHINKERS_ARMOR</code></td><td>475 (0x1DB)</td><td></td><td>Freethinker’s Armor</td></tr>
+<tr><td><code>AUGURS_REGALIA</code></td><td>476 (0x1DC)</td><td></td><td>Augur’s Regalia</td></tr>
+<tr><td><code>PREDATORS_ARMOR</code></td><td>477 (0x1DD)</td><td></td><td>Predator’s Armor</td></tr>
+<tr><td><code>MADCAPS_OUTFIT</code></td><td>478 (0x1DE)</td><td></td><td>Madcap’s Outfit</td></tr>
+<tr><td><code>HARUSPEXS_GARB</code></td><td>479 (0x1DF)</td><td></td><td>Haruspex’s Garb</td></tr>
+<tr><td><code>CONFESSORS_RAIMENT</code></td><td>480 (0x1E0)</td><td></td><td>Confessor’s Raiment</td></tr>
+<tr><td><code>DEMONIACS_THREADS</code></td><td>481 (0x1E1)</td><td></td><td>Demoniac’s Threads</td></tr>
+<tr><td><code>ILLUSIONISTS_ATTIRE</code></td><td>482 (0x1E2)</td><td></td><td>Illusionist’s Attire</td></tr>
+<tr><td><code>THE_DEFILERS_DETERMINATION</code></td><td>483 (0x1E3)</td><td></td><td>The Defiler’s Determination</td></tr>
+<tr><td><code>THE_DEFILERS_FORTITUDE</code></td><td>484 (0x1E4)</td><td></td><td>The Defiler’s Fortitude</td></tr>
+<tr><td><code>THE_DEFILERS_INTENT</code></td><td>485 (0x1E5)</td><td></td><td>The Defiler’s Intent</td></tr>
+<tr><td><code>THE_DEFILERS_PURPOSE</code></td><td>486 (0x1E6)</td><td></td><td>The Defiler’s Purpose</td></tr>
+<tr><td><code>THE_DEFILERS_RESOLUTION</code></td><td>487 (0x1E7)</td><td></td><td>The Defiler’s Resolution</td></tr>
+<tr><td><code>THE_DEFILERS_WILL</code></td><td>488 (0x1E8)</td><td></td><td>The Defiler’s Will</td></tr>
+<tr><td><code>BLACK_DRAGON_MAIL</code></td><td>489 (0x1E9)</td><td></td><td></td></tr>
+<tr><td><code>GREEN_DRAGON_MAIL</code></td><td>490 (0x1EA)</td><td></td><td></td></tr>
+<tr><td><code>BLUE_DRAGON_MAIL</code></td><td>491 (0x1EB)</td><td></td><td></td></tr>
+<tr><td><code>TWILIGHT_TRAPPINGS</code></td><td>492 (0x1EC)</td><td></td><td></td></tr>
+<tr><td><code>GENESIS_RAIMENT</code></td><td>493 (0x1ED)</td><td></td><td></td></tr>
+<tr><td><code>SYMBOLS_OF_UNENDING_LIFE</code></td><td>494 (0x1EE)</td><td></td><td></td></tr>
+<tr><td><code>BATTLEGEAR_OF_UNYIELDING_STRENGTH</code></td><td>495 (0x1EF)</td><td></td><td></td></tr>
+<tr><td><code>CONQUERORS_BATTLEGEAR</code></td><td>496 (0x1F0)</td><td></td><td>Conqueror’s Battlegear</td></tr>
+<tr><td><code>DEATHDEALERS_EMBRACE</code></td><td>497 (0x1F1)</td><td></td><td>Deathdealer’s Embrace</td></tr>
+<tr><td><code>EMBLEMS_OF_VEILED_SHADOWS</code></td><td>498 (0x1F2)</td><td></td><td></td></tr>
+<tr><td><code>DOOMCALLERS_ATTIRE</code></td><td>499 (0x1F3)</td><td></td><td>Doomcaller’s Attire</td></tr>
+<tr><td><code>IMPLEMENTS_OF_UNSPOKEN_NAMES</code></td><td>500 (0x1F4)</td><td></td><td></td></tr>
+<tr><td><code>STORMCALLERS_GARB</code></td><td>501 (0x1F5)</td><td></td><td>Stormcaller’s Garb</td></tr>
+<tr><td><code>GIFT_OF_THE_GATHERING_STORM</code></td><td>502 (0x1F6)</td><td></td><td></td></tr>
+<tr><td><code>ENIGMA_VESTMENTS</code></td><td>503 (0x1F7)</td><td></td><td></td></tr>
+<tr><td><code>TRAPPINGS_OF_VAULTED_SECRETS</code></td><td>504 (0x1F8)</td><td></td><td></td></tr>
+<tr><td><code>AVENGERS_BATTLEGEAR</code></td><td>505 (0x1F9)</td><td></td><td>Avenger’s Battlegear</td></tr>
+<tr><td><code>BATTLEGEAR_OF_ETERNAL_JUSTICE</code></td><td>506 (0x1FA)</td><td></td><td></td></tr>
+<tr><td><code>GARMENTS_OF_THE_ORACLE</code></td><td>507 (0x1FB)</td><td></td><td></td></tr>
+<tr><td><code>FINERY_OF_INFINITE_WISDOM</code></td><td>508 (0x1FC)</td><td></td><td></td></tr>
+<tr><td><code>STRIKERS_GARB</code></td><td>509 (0x1FD)</td><td></td><td>Striker’s Garb</td></tr>
+<tr><td><code>TRAPPINGS_OF_THE_UNSEEN_PATH</code></td><td>510 (0x1FE)</td><td></td><td></td></tr>
+<tr><td><code>BATTLEGEAR_OF_HEROISM</code></td><td>511 (0x1FF)</td><td></td><td></td></tr>
+<tr><td><code>DARKMANTLE_ARMOR</code></td><td>512 (0x200)</td><td></td><td></td></tr>
+<tr><td><code>FERALHEART_RAIMENT</code></td><td>513 (0x201)</td><td></td><td></td></tr>
+<tr><td><code>VESTMENTS_OF_THE_VIRTUOUS</code></td><td>514 (0x202)</td><td></td><td></td></tr>
+<tr><td><code>BEASTMASTER_ARMOR</code></td><td>515 (0x203)</td><td></td><td></td></tr>
+<tr><td><code>SOULFORGE_ARMOR</code></td><td>516 (0x204)</td><td></td><td></td></tr>
+<tr><td><code>SORCERERS_REGALIA</code></td><td>517 (0x205)</td><td></td><td>Sorcerer’s Regalia</td></tr>
+<tr><td><code>DEATHMIST_RAIMENT</code></td><td>518 (0x206)</td><td></td><td></td></tr>
+<tr><td><code>THE_FIVE_THUNDERS</code></td><td>519 (0x207)</td><td></td><td></td></tr>
+<tr><td><code>IRONWEAVE_BATTLESUIT</code></td><td>520 (0x208)</td><td></td><td></td></tr>
+<tr><td><code>DREAMWALKER_RAIMENT</code></td><td>521 (0x209)</td><td></td><td></td></tr>
+<tr><td><code>CHAMPIONS_GUARD</code></td><td>522 (0x20A)</td><td></td><td>Champion’s Guard</td></tr>
+<tr><td><code>DREADNAUGHTS_BATTLEGEAR</code></td><td>523 (0x20B)</td><td></td><td>Dreadnaught’s Battlegear</td></tr>
+<tr><td><code>BONESCYTHE_ARMOR</code></td><td>524 (0x20C)</td><td></td><td></td></tr>
+<tr><td><code>VESTMENTS_OF_FAITH</code></td><td>525 (0x20D)</td><td></td><td></td></tr>
+<tr><td><code>FROSTFIRE_REGALIA</code></td><td>526 (0x20E)</td><td></td><td></td></tr>
+<tr><td><code>THE_EARTHSHATTERER</code></td><td>527 (0x20F)</td><td></td><td></td></tr>
+<tr><td><code>REDEMPTION_ARMOR</code></td><td>528 (0x210)</td><td></td><td></td></tr>
+<tr><td><code>PLAGUEHEART_RAIMENT</code></td><td>529 (0x211)</td><td></td><td></td></tr>
+<tr><td><code>CRYPTSTALKER_ARMOR</code></td><td>530 (0x212)</td><td></td><td></td></tr>
+<tr><td><code>BATTLEGEAR_OF_UNDEAD_SLAYING</code></td><td>533 (0x215)</td><td></td><td></td></tr>
+<tr><td><code>UNDEAD_SLAYERS_ARMOR</code></td><td>534 (0x216)</td><td></td><td>Undead Slayer’s Armor</td></tr>
+<tr><td><code>GARB_OF_THE_UNDEAD_SLAYER</code></td><td>535 (0x217)</td><td></td><td></td></tr>
+<tr><td><code>REGALIA_OF_UNDEAD_CLEANSING</code></td><td>536 (0x218)</td><td></td><td></td></tr>
+<tr><td><code>CHAMPIONS_BATTLEARMOR</code></td><td>537 (0x219)</td><td></td><td>Champion’s Battlearmor</td></tr>
+<tr><td><code>CHAMPIONS_STORMCALLER</code></td><td>538 (0x21A)</td><td></td><td>Champion’s Stormcaller</td></tr>
+<tr><td><code>CHAMPIONS_REFUGE</code></td><td>539 (0x21B)</td><td></td><td>Champion’s Refuge</td></tr>
+<tr><td><code>CHAMPIONS_INVESTITURE</code></td><td>540 (0x21C)</td><td></td><td>Champion’s Investiture</td></tr>
+<tr><td><code>CHAMPIONS_DREADGEAR</code></td><td>541 (0x21D)</td><td></td><td>Champion’s Dreadgear</td></tr>
+<tr><td><code>CHAMPIONS_ARCANUM</code></td><td>542 (0x21E)</td><td></td><td>Champion’s Arcanum</td></tr>
+<tr><td><code>CHAMPIONS_PURSUANCE</code></td><td>543 (0x21F)</td><td></td><td>Champion’s Pursuance</td></tr>
+<tr><td><code>LIEUTENANT_COMMANDERS_REDOUBT</code></td><td>544 (0x220)</td><td></td><td>Lieutenant Commander’s Redoubt</td></tr>
+<tr><td><code>LIEUTENANT_COMMANDERS_BATTLEARMOR</code></td><td>545 (0x221)</td><td></td><td>Lieutenant Commander’s Battlearmor</td></tr>
+<tr><td><code>LIEUTENANT_COMMANDERS_ARCANUM</code></td><td>546 (0x222)</td><td></td><td>Lieutenant Commander’s Arcanum</td></tr>
+<tr><td><code>LIEUTENANT_COMMANDERS_DREADGEAR</code></td><td>547 (0x223)</td><td></td><td>Lieutenant Commander’s Dreadgear</td></tr>
+<tr><td><code>LIEUTENANT_COMMANDERS_GUARD</code></td><td>548 (0x224)</td><td></td><td>Lieutenant Commander’s Guard</td></tr>
+<tr><td><code>LIEUTENANT_COMMANDERS_INVESTITURE</code></td><td>549 (0x225)</td><td></td><td>Lieutenant Commander’s Investiture</td></tr>
+<tr><td><code>LIEUTENANT_COMMANDERS_PURSUANCE</code></td><td>550 (0x226)</td><td></td><td>Lieutenant Commander’s Pursuance</td></tr>
+<tr><td><code>LIEUTENANT_COMMANDERS_REFUGE</code></td><td>551 (0x227)</td><td></td><td>Lieutenant Commander’s Refuge</td></tr>
+<tr><td><code>WRATH_OF_SPELLFIRE</code></td><td>552 (0x228)</td><td></td><td></td></tr>
+<tr><td><code>SHADOWS_EMBRACE</code></td><td>553 (0x229)</td><td></td><td>Shadow’s Embrace</td></tr>
+<tr><td><code>PRIMAL_MOONCLOTH</code></td><td>554 (0x22A)</td><td></td><td></td></tr>
+<tr><td><code>NETHERWEAVE_VESTMENTS</code></td><td>555 (0x22B)</td><td></td><td></td></tr>
+<tr><td><code>IMBUED_NETHERWEAVE</code></td><td>556 (0x22C)</td><td></td><td></td></tr>
+<tr><td><code>SOULCLOTH_EMBRACE</code></td><td>557 (0x22D)</td><td></td><td></td></tr>
+<tr><td><code>ARCANOWEAVE_VESTMENTS</code></td><td>558 (0x22E)</td><td></td><td></td></tr>
+<tr><td><code>SPELLSTRIKE_INFUSION</code></td><td>559 (0x22F)</td><td></td><td></td></tr>
+<tr><td><code>FEL_IRON_PLATE</code></td><td>560 (0x230)</td><td></td><td></td></tr>
+<tr><td><code>FEL_IRON_CHAIN</code></td><td>561 (0x231)</td><td></td><td></td></tr>
+<tr><td><code>ADAMANTITE_BATTLEGEAR</code></td><td>562 (0x232)</td><td></td><td></td></tr>
+<tr><td><code>ENCHANTED_ADAMANTITE_ARMOR</code></td><td>563 (0x233)</td><td></td><td></td></tr>
+<tr><td><code>FLAME_GUARD</code></td><td>564 (0x234)</td><td></td><td></td></tr>
+<tr><td><code>KHORIUM_WARD</code></td><td>565 (0x235)</td><td></td><td></td></tr>
+<tr><td><code>BURNING_RAGE</code></td><td>566 (0x236)</td><td></td><td></td></tr>
+<tr><td><code>GLADIATORS_BATTLEGEAR</code></td><td>567 (0x237)</td><td></td><td>Gladiator’s Battlegear</td></tr>
+<tr><td><code>GLADIATORS_DREADGEAR</code></td><td>568 (0x238)</td><td></td><td>Gladiator’s Dreadgear</td></tr>
+<tr><td><code>FAITH_IN_FELSTEEL</code></td><td>569 (0x239)</td><td></td><td></td></tr>
+<tr><td><code>THE_UNYIELDING</code></td><td>570 (0x23A)</td><td></td><td></td></tr>
+<tr><td><code>WHITEMEND_WISDOM</code></td><td>571 (0x23B)</td><td></td><td></td></tr>
+<tr><td><code>BATTLECAST_GARB</code></td><td>572 (0x23C)</td><td></td><td></td></tr>
+<tr><td><code>FEL_SKIN</code></td><td>573 (0x23D)</td><td></td><td></td></tr>
+<tr><td><code>STRENGTH_OF_THE_CLEFTHOOF</code></td><td>574 (0x23E)</td><td></td><td></td></tr>
+<tr><td><code>FELSTALKER_ARMOR</code></td><td>575 (0x23F)</td><td></td><td></td></tr>
+<tr><td><code>FURY_OF_THE_NETHER</code></td><td>576 (0x240)</td><td></td><td></td></tr>
+<tr><td><code>GLADIATORS_VESTMENTS</code></td><td>577 (0x241)</td><td></td><td>Gladiator’s Vestments</td></tr>
+<tr><td><code>GLADIATORS_EARTHSHAKER</code></td><td>578 (0x242)</td><td></td><td>Gladiator’s Earthshaker</td></tr>
+<tr><td><code>GLADIATORS_REGALIA</code></td><td>579 (0x243)</td><td></td><td>Gladiator’s Regalia</td></tr>
+<tr><td><code>GLADIATORS_THUNDERFIST</code></td><td>580 (0x244)</td><td></td><td>Gladiator’s Thunderfist</td></tr>
+<tr><td><code>GLADIATORS_RAIMENT</code></td><td>581 (0x245)</td><td></td><td>Gladiator’s Raiment</td></tr>
+<tr><td><code>GLADIATORS_AEGIS</code></td><td>582 (0x246)</td><td></td><td>Gladiator’s Aegis</td></tr>
+<tr><td><code>GLADIATORS_VINDICATION</code></td><td>583 (0x247)</td><td></td><td>Gladiator’s Vindication</td></tr>
+<tr><td><code>GLADIATORS_SANCTUARY</code></td><td>584 (0x248)</td><td></td><td>Gladiator’s Sanctuary</td></tr>
+<tr><td><code>GLADIATORS_WILDHIDE</code></td><td>585 (0x249)</td><td></td><td>Gladiator’s Wildhide</td></tr>
+<tr><td><code>GLADIATORS_PURSUIT</code></td><td>586 (0x24A)</td><td></td><td>Gladiator’s Pursuit</td></tr>
+<tr><td><code>HIGH_WARLORDS_AEGIS</code></td><td>587 (0x24B)</td><td></td><td>High Warlord’s Aegis</td></tr>
+<tr><td><code>HIGH_WARLORDS_BATTLEGEAR</code></td><td>588 (0x24C)</td><td></td><td>High Warlord’s Battlegear</td></tr>
+<tr><td><code>GRAND_MARSHALS_AEGIS</code></td><td>589 (0x24D)</td><td></td><td>Grand Marshal’s Aegis</td></tr>
+<tr><td><code>GRAND_MARSHALS_BATTLEGEAR</code></td><td>590 (0x24E)</td><td></td><td>Grand Marshal’s Battlegear</td></tr>
+<tr><td><code>GRAND_MARSHALS_DREADGEAR</code></td><td>591 (0x24F)</td><td></td><td>Grand Marshal’s Dreadgear</td></tr>
+<tr><td><code>HIGH_WARLORDS_DREADGEAR</code></td><td>592 (0x250)</td><td></td><td>High Warlord’s Dreadgear</td></tr>
+<tr><td><code>GRAND_MARSHALS_EARTHSHAKER</code></td><td>593 (0x251)</td><td></td><td>Grand Marshal’s Earthshaker</td></tr>
+<tr><td><code>HIGH_WARLORDS_EARTHSHAKER</code></td><td>594 (0x252)</td><td></td><td>High Warlord’s Earthshaker</td></tr>
+<tr><td><code>GRAND_MARSHALS_PURSUIT</code></td><td>595 (0x253)</td><td></td><td>Grand Marshal’s Pursuit</td></tr>
+<tr><td><code>HIGH_WARLORDS_PURSUIT</code></td><td>596 (0x254)</td><td></td><td>High Warlord’s Pursuit</td></tr>
+<tr><td><code>GRAND_MARSHALS_RAIMENT</code></td><td>597 (0x255)</td><td></td><td>Grand Marshal’s Raiment</td></tr>
+<tr><td><code>HIGH_WARLORDS_RAIMENT</code></td><td>598 (0x256)</td><td></td><td>High Warlord’s Raiment</td></tr>
+<tr><td><code>GRAND_MARSHALS_REGALIA</code></td><td>599 (0x257)</td><td></td><td>Grand Marshal’s Regalia</td></tr>
+<tr><td><code>HIGH_WARLORDS_REGALIA</code></td><td>600 (0x258)</td><td></td><td>High Warlord’s Regalia</td></tr>
+<tr><td><code>GRAND_MARSHALS_SANCTUARY</code></td><td>601 (0x259)</td><td></td><td>Grand Marshal’s Sanctuary</td></tr>
+<tr><td><code>HIGH_WARLORDS_SANCTUARY</code></td><td>602 (0x25A)</td><td></td><td>High Warlord’s Sanctuary</td></tr>
+<tr><td><code>GRAND_MARSHALS_THUNDERFIST</code></td><td>603 (0x25B)</td><td></td><td>Grand Marshal’s Thunderfist</td></tr>
+<tr><td><code>HIGH_WARLORDS_THUNDERFIST</code></td><td>604 (0x25C)</td><td></td><td>High Warlord’s Thunderfist</td></tr>
+<tr><td><code>GRAND_MARSHALS_VESTMENTS</code></td><td>605 (0x25D)</td><td></td><td>Grand Marshal’s Vestments</td></tr>
+<tr><td><code>HIGH_WARLORDS_VESTMENTS</code></td><td>606 (0x25E)</td><td></td><td>High Warlord’s Vestments</td></tr>
+<tr><td><code>GRAND_MARSHALS_VINDICATION</code></td><td>607 (0x25F)</td><td></td><td>Grand Marshal’s Vindication</td></tr>
+<tr><td><code>HIGH_WARLORDS_VINDICATION</code></td><td>608 (0x260)</td><td></td><td>High Warlord’s Vindication</td></tr>
+<tr><td><code>GRAND_MARSHALS_WILDHIDE</code></td><td>609 (0x261)</td><td></td><td>Grand Marshal’s Wildhide</td></tr>
+<tr><td><code>HIGH_WARLORDS_WILDHIDE</code></td><td>610 (0x262)</td><td></td><td>High Warlord’s Wildhide</td></tr>
+<tr><td><code>FELSCALE_ARMOR</code></td><td>611 (0x263)</td><td></td><td></td></tr>
+<tr><td><code>SCALED_DRAENIC_ARMOR</code></td><td>612 (0x264)</td><td></td><td></td></tr>
+<tr><td><code>THICK_DRAENIC_ARMOR</code></td><td>613 (0x265)</td><td></td><td></td></tr>
+<tr><td><code>WILD_DRAENISH_ARMOR</code></td><td>614 (0x266)</td><td></td><td></td></tr>
+<tr><td><code>GLADIATORS_FELSHROUD</code></td><td>615 (0x267)</td><td></td><td>Gladiator’s Felshroud</td></tr>
+<tr><td><code>NETHERSCALE_ARMOR</code></td><td>616 (0x268)</td><td></td><td></td></tr>
+<tr><td><code>NETHERSTRIKE_ARMOR</code></td><td>617 (0x269)</td><td></td><td></td></tr>
+<tr><td><code>WINDHAWK_ARMOR</code></td><td>618 (0x26A)</td><td></td><td></td></tr>
+<tr><td><code>PRIMAL_INTENT</code></td><td>619 (0x26B)</td><td></td><td></td></tr>
+<tr><td><code>ASSASSINATION_ARMOR</code></td><td>620 (0x26C)</td><td></td><td></td></tr>
+<tr><td><code>NETHERBLADE</code></td><td>621 (0x26D)</td><td></td><td></td></tr>
+<tr><td><code>DEATHMANTLE</code></td><td>622 (0x26E)</td><td></td><td></td></tr>
+<tr><td><code>RIGHTEOUS_ARMOR</code></td><td>623 (0x26F)</td><td></td><td></td></tr>
+<tr><td><code>JUSTICAR_RAIMENT</code></td><td>624 (0x270)</td><td></td><td></td></tr>
+<tr><td><code>JUSTICAR_ARMOR</code></td><td>625 (0x271)</td><td></td><td></td></tr>
+<tr><td><code>JUSTICAR_BATTLEGEAR</code></td><td>626 (0x272)</td><td></td><td></td></tr>
+<tr><td><code>CRYSTALFORGE_RAIMENT</code></td><td>627 (0x273)</td><td></td><td></td></tr>
+<tr><td><code>CRYSTALFORGE_ARMOR</code></td><td>628 (0x274)</td><td></td><td></td></tr>
+<tr><td><code>CRYSTALFORGE_BATTLEGEAR</code></td><td>629 (0x275)</td><td></td><td></td></tr>
+<tr><td><code>TIDEFURY_RAIMENT</code></td><td>630 (0x276)</td><td></td><td></td></tr>
+<tr><td><code>CYCLONE_RAIMENT</code></td><td>631 (0x277)</td><td></td><td></td></tr>
+<tr><td><code>CYCLONE_REGALIA</code></td><td>632 (0x278)</td><td></td><td></td></tr>
+<tr><td><code>CYCLONE_HARNESS</code></td><td>633 (0x279)</td><td></td><td></td></tr>
+<tr><td><code>CATACLYSM_RAIMENT</code></td><td>634 (0x27A)</td><td></td><td></td></tr>
+<tr><td><code>CATACLYSM_REGALIA</code></td><td>635 (0x27B)</td><td></td><td></td></tr>
+<tr><td><code>CATACLYSM_HARNESS</code></td><td>636 (0x27C)</td><td></td><td></td></tr>
+<tr><td><code>MOONGLADE_RAIMENT</code></td><td>637 (0x27D)</td><td></td><td></td></tr>
+<tr><td><code>MALORNE_RAIMENT</code></td><td>638 (0x27E)</td><td></td><td></td></tr>
+<tr><td><code>MALORNE_REGALIA</code></td><td>639 (0x27F)</td><td></td><td></td></tr>
+<tr><td><code>MALORNE_HARNESS</code></td><td>640 (0x280)</td><td></td><td></td></tr>
+<tr><td><code>NORDRASSIL_HARNESS</code></td><td>641 (0x281)</td><td></td><td></td></tr>
+<tr><td><code>NORDRASSIL_RAIMENT</code></td><td>642 (0x282)</td><td></td><td></td></tr>
+<tr><td><code>NORDRASSIL_REGALIA</code></td><td>643 (0x283)</td><td></td><td></td></tr>
+<tr><td><code>OBLIVION_RAIMENT</code></td><td>644 (0x284)</td><td></td><td></td></tr>
+<tr><td><code>VOIDHEART_RAIMENT</code></td><td>645 (0x285)</td><td></td><td></td></tr>
+<tr><td><code>CORRUPTOR_RAIMENT</code></td><td>646 (0x286)</td><td></td><td></td></tr>
+<tr><td><code>INCANTERS_REGALIA</code></td><td>647 (0x287)</td><td></td><td>Incanter’s Regalia</td></tr>
+<tr><td><code>ALDOR_REGALIA</code></td><td>648 (0x288)</td><td></td><td></td></tr>
+<tr><td><code>TIRISFAL_REGALIA</code></td><td>649 (0x289)</td><td></td><td></td></tr>
+<tr><td><code>BEAST_LORD_ARMOR</code></td><td>650 (0x28A)</td><td></td><td></td></tr>
+<tr><td><code>DEMON_STALKER_ARMOR</code></td><td>651 (0x28B)</td><td></td><td></td></tr>
+<tr><td><code>RIFT_STALKER_ARMOR</code></td><td>652 (0x28C)</td><td></td><td></td></tr>
+<tr><td><code>BOLD_ARMOR</code></td><td>653 (0x28D)</td><td></td><td></td></tr>
+<tr><td><code>WARBRINGER_ARMOR</code></td><td>654 (0x28E)</td><td></td><td></td></tr>
+<tr><td><code>WARBRINGER_BATTLEGEAR</code></td><td>655 (0x28F)</td><td></td><td></td></tr>
+<tr><td><code>DESTROYER_ARMOR</code></td><td>656 (0x290)</td><td></td><td></td></tr>
+<tr><td><code>DESTROYER_BATTLEGEAR</code></td><td>657 (0x291)</td><td></td><td></td></tr>
+<tr><td><code>MANA_ETCHED_REGALIA</code></td><td>658 (0x292)</td><td></td><td>Mana-Etched Regalia</td></tr>
+<tr><td><code>WASTEWALKER_ARMOR</code></td><td>659 (0x293)</td><td></td><td></td></tr>
+<tr><td><code>DESOLATION_BATTLEGEAR</code></td><td>660 (0x294)</td><td></td><td></td></tr>
+<tr><td><code>DOOMPLATE_BATTLEGEAR</code></td><td>661 (0x295)</td><td></td><td></td></tr>
+<tr><td><code>HALLOWED_RAIMENT</code></td><td>662 (0x296)</td><td></td><td></td></tr>
+<tr><td><code>INCARNATE_RAIMENT</code></td><td>663 (0x297)</td><td></td><td></td></tr>
+<tr><td><code>INCARNATE_REGALIA</code></td><td>664 (0x298)</td><td></td><td></td></tr>
+<tr><td><code>AVATAR_RAIMENT</code></td><td>665 (0x299)</td><td></td><td></td></tr>
+<tr><td><code>AVATAR_REGALIA</code></td><td>666 (0x29A)</td><td></td><td></td></tr>
+<tr><td><code>THE_TWIN_STARS</code></td><td>667 (0x29B)</td><td></td><td></td></tr>
+<tr><td><code>SLAYERS_ARMOR</code></td><td>668 (0x29C)</td><td></td><td>Slayer’s Armor</td></tr>
+<tr><td><code>GRONNSTALKERS_ARMOR</code></td><td>669 (0x29D)</td><td></td><td>Gronnstalker’s Armor</td></tr>
+<tr><td><code>MALEFIC_RAIMENT</code></td><td>670 (0x29E)</td><td></td><td></td></tr>
+<tr><td><code>TEMPEST_REGALIA</code></td><td>671 (0x29F)</td><td></td><td></td></tr>
+<tr><td><code>ONSLAUGHT_BATTLEGEAR</code></td><td>672 (0x2A0)</td><td></td><td></td></tr>
+<tr><td><code>ONSLAUGHT_ARMOR</code></td><td>673 (0x2A1)</td><td></td><td></td></tr>
+<tr><td><code>ABSOLUTION_REGALIA</code></td><td>674 (0x2A2)</td><td></td><td></td></tr>
+<tr><td><code>VESTMENTS_OF_ABSOLUTION</code></td><td>675 (0x2A3)</td><td></td><td></td></tr>
+<tr><td><code>THUNDERHEART_HARNESS</code></td><td>676 (0x2A4)</td><td></td><td></td></tr>
+<tr><td><code>THUNDERHEART_REGALIA</code></td><td>677 (0x2A5)</td><td></td><td></td></tr>
+<tr><td><code>THUNDERHEART_RAIMENT</code></td><td>678 (0x2A6)</td><td></td><td></td></tr>
+<tr><td><code>LIGHTBRINGER_ARMOR</code></td><td>679 (0x2A7)</td><td></td><td></td></tr>
+<tr><td><code>LIGHTBRINGER_BATTLEGEAR</code></td><td>680 (0x2A8)</td><td></td><td></td></tr>
+<tr><td><code>LIGHTBRINGER_RAIMENT</code></td><td>681 (0x2A9)</td><td></td><td></td></tr>
+<tr><td><code>SKYSHATTER_HARNESS</code></td><td>682 (0x2AA)</td><td></td><td></td></tr>
+<tr><td><code>SKYSHATTER_RAIMENT</code></td><td>683 (0x2AB)</td><td></td><td></td></tr>
+<tr><td><code>SKYSHATTER_REGALIA</code></td><td>684 (0x2AC)</td><td></td><td></td></tr>
+<tr><td><code>GLADIATORS_REFUGE</code></td><td>685 (0x2AD)</td><td></td><td>Gladiator’s Refuge</td></tr>
+<tr><td><code>GLADIATORS_WARTIDE</code></td><td>686 (0x2AE)</td><td></td><td>Gladiator’s Wartide</td></tr>
+<tr><td><code>GLADIATORS_INVESTITURE</code></td><td>687 (0x2AF)</td><td></td><td>Gladiator’s Investiture</td></tr>
+<tr><td><code>GRAND_MARSHALS_REFUGE</code></td><td>688 (0x2B0)</td><td></td><td>Grand Marshal’s Refuge</td></tr>
+<tr><td><code>HIGH_WARLORDS_REFUGE</code></td><td>689 (0x2B1)</td><td></td><td>High Warlord’s Refuge</td></tr>
+<tr><td><code>GLADIATORS_REDEMPTION</code></td><td>690 (0x2B2)</td><td></td><td>Gladiator’s Redemption</td></tr>
+<tr><td><code>GRAND_MARSHALS_INVESTITURE</code></td><td>691 (0x2B3)</td><td></td><td>Grand Marshal’s Investiture</td></tr>
+<tr><td><code>HIGH_WARLORDS_INVESTITURE</code></td><td>692 (0x2B4)</td><td></td><td>High Warlord’s Investiture</td></tr>
+<tr><td><code>GRAND_MARSHALS_REDEMPTION</code></td><td>693 (0x2B5)</td><td></td><td>Grand Marshal’s Redemption</td></tr>
+<tr><td><code>HIGH_WARLORDS_REDEMPTION</code></td><td>694 (0x2B6)</td><td></td><td>High Warlord’s Redemption</td></tr>
+<tr><td><code>GRAND_MARSHALS_WARTIDE</code></td><td>695 (0x2B7)</td><td></td><td>Grand Marshal’s Wartide</td></tr>
+<tr><td><code>HIGH_WARLORDS_WARTIDE</code></td><td>696 (0x2B8)</td><td></td><td>High Warlord’s Wartide</td></tr>
+<tr><td><code>CHAMPIONS_REDOUBT</code></td><td>697 (0x2B9)</td><td></td><td>Champion’s Redoubt</td></tr>
+<tr><td><code>WARLORDS_AEGIS</code></td><td>698 (0x2BA)</td><td></td><td>Warlord’s Aegis</td></tr>
+<tr><td><code>THE_TWIN_BLADES_OF_AZZINOTH</code></td><td>699 (0x2BB)</td><td></td><td></td></tr>
+<tr><td><code>MERCILESS_GLADIATORS_AEGIS</code></td><td>700 (0x2BC)</td><td></td><td>Merciless Gladiator’s Aegis</td></tr>
+<tr><td><code>MERCILESS_GLADIATORS_BATTLEGEAR</code></td><td>701 (0x2BD)</td><td></td><td>Merciless Gladiator’s Battlegear</td></tr>
+<tr><td><code>MERCILESS_GLADIATORS_DREADGEAR</code></td><td>702 (0x2BE)</td><td></td><td>Merciless Gladiator’s Dreadgear</td></tr>
+<tr><td><code>MERCILESS_GLADIATORS_EARTHSHAKER</code></td><td>703 (0x2BF)</td><td></td><td>Merciless Gladiator’s Earthshaker</td></tr>
+<tr><td><code>MERCILESS_GLADIATORS_FELSHROUD</code></td><td>704 (0x2C0)</td><td></td><td>Merciless Gladiator’s Felshroud</td></tr>
+<tr><td><code>MERCILESS_GLADIATORS_INVESTITURE</code></td><td>705 (0x2C1)</td><td></td><td>Merciless Gladiator’s Investiture</td></tr>
+<tr><td><code>MERCILESS_GLADIATORS_PURSUIT</code></td><td>706 (0x2C2)</td><td></td><td>Merciless Gladiator’s Pursuit</td></tr>
+<tr><td><code>MERCILESS_GLADIATORS_RAIMENT</code></td><td>707 (0x2C3)</td><td></td><td>Merciless Gladiator’s Raiment</td></tr>
+<tr><td><code>MERCILESS_GLADIATORS_REDEMPTION</code></td><td>708 (0x2C4)</td><td></td><td>Merciless Gladiator’s Redemption</td></tr>
+<tr><td><code>MERCILESS_GLADIATORS_REFUGE</code></td><td>709 (0x2C5)</td><td></td><td>Merciless Gladiator’s Refuge</td></tr>
+<tr><td><code>MERCILESS_GLADIATORS_REGALIA</code></td><td>710 (0x2C6)</td><td></td><td>Merciless Gladiator’s Regalia</td></tr>
+<tr><td><code>MERCILESS_GLADIATORS_SANCTUARY</code></td><td>711 (0x2C7)</td><td></td><td>Merciless Gladiator’s Sanctuary</td></tr>
+<tr><td><code>MERCILESS_GLADIATORS_THUNDERFIST</code></td><td>712 (0x2C8)</td><td></td><td>Merciless Gladiator’s Thunderfist</td></tr>
+<tr><td><code>MERCILESS_GLADIATORS_VESTMENTS</code></td><td>713 (0x2C9)</td><td></td><td>Merciless Gladiator’s Vestments</td></tr>
+<tr><td><code>MERCILESS_GLADIATORS_VINDICATION</code></td><td>714 (0x2CA)</td><td></td><td>Merciless Gladiator’s Vindication</td></tr>
+<tr><td><code>MERCILESS_GLADIATORS_WARTIDE</code></td><td>715 (0x2CB)</td><td></td><td>Merciless Gladiator’s Wartide</td></tr>
+<tr><td><code>MERCILESS_GLADIATORS_WILDHIDE</code></td><td>716 (0x2CC)</td><td></td><td>Merciless Gladiator’s Wildhide</td></tr>
+<tr><td><code>FIELD_MARSHALS_EARTHSHAKER</code></td><td>717 (0x2CD)</td><td></td><td>Field Marshal’s Earthshaker</td></tr>
+<tr><td><code>LIEUTENANT_COMMANDERS_EARTHSHAKER</code></td><td>718 (0x2CE)</td><td></td><td>Lieutenant Commander’s Earthshaker</td></tr>
+<tr><td><code>THE_FISTS_OF_FURY</code></td><td>719 (0x2CF)</td><td></td><td></td></tr>
+<tr><td><code>VENGEFUL_GLADIATORS_REFUGE</code></td><td>720 (0x2D0)</td><td></td><td>Vengeful Gladiator’s Refuge</td></tr>
+<tr><td><code>VENGEFUL_GLADIATORS_SANCTUARY</code></td><td>721 (0x2D1)</td><td></td><td>Vengeful Gladiator’s Sanctuary</td></tr>
+<tr><td><code>VENGEFUL_GLADIATORS_WILDHIDE</code></td><td>722 (0x2D2)</td><td></td><td>Vengeful Gladiator’s Wildhide</td></tr>
+<tr><td><code>VENGEFUL_GLADIATORS_PURSUIT</code></td><td>723 (0x2D3)</td><td></td><td>Vengeful Gladiator’s Pursuit</td></tr>
+<tr><td><code>VENGEFUL_GLADIATORS_REGALIA</code></td><td>724 (0x2D4)</td><td></td><td>Vengeful Gladiator’s Regalia</td></tr>
+<tr><td><code>VENGEFUL_GLADIATORS_REDEMPTION</code></td><td>725 (0x2D5)</td><td></td><td>Vengeful Gladiator’s Redemption</td></tr>
+<tr><td><code>VENGEFUL_GLADIATORS_VINDICATION</code></td><td>726 (0x2D6)</td><td></td><td>Vengeful Gladiator’s Vindication</td></tr>
+<tr><td><code>VENGEFUL_GLADIATORS_AEGIS</code></td><td>727 (0x2D7)</td><td></td><td>Vengeful Gladiator’s Aegis</td></tr>
+<tr><td><code>VENGEFUL_GLADIATORS_INVESTITURE</code></td><td>728 (0x2D8)</td><td></td><td>Vengeful Gladiator’s Investiture</td></tr>
+<tr><td><code>VENGEFUL_GLADIATORS_RAIMENT</code></td><td>729 (0x2D9)</td><td></td><td>Vengeful Gladiator’s Raiment</td></tr>
+<tr><td><code>VENGEFUL_GLADIATORS_VESTMENTS</code></td><td>730 (0x2DA)</td><td></td><td>Vengeful Gladiator’s Vestments</td></tr>
+<tr><td><code>VENGEFUL_GLADIATORS_WARTIDE</code></td><td>731 (0x2DB)</td><td></td><td>Vengeful Gladiator’s Wartide</td></tr>
+<tr><td><code>VENGEFUL_GLADIATORS_EARTHSHAKER</code></td><td>732 (0x2DC)</td><td></td><td>Vengeful Gladiator’s Earthshaker</td></tr>
+<tr><td><code>VENGEFUL_GLADIATORS_THUNDERFIST</code></td><td>733 (0x2DD)</td><td></td><td>Vengeful Gladiator’s Thunderfist</td></tr>
+<tr><td><code>VENGEFUL_GLADIATORS_DREADGEAR</code></td><td>734 (0x2DE)</td><td></td><td>Vengeful Gladiator’s Dreadgear</td></tr>
+<tr><td><code>VENGEFUL_GLADIATORS_FELSHROUD</code></td><td>735 (0x2DF)</td><td></td><td>Vengeful Gladiator’s Felshroud</td></tr>
+<tr><td><code>VENGEFUL_GLADIATORS_BATTLEGEAR</code></td><td>736 (0x2E0)</td><td></td><td>Vengeful Gladiator’s Battlegear</td></tr>
+<tr><td><code>LATROS_FLURRY</code></td><td>737 (0x2E1)</td><td></td><td>Latro’s Flurry</td></tr>
+<tr><td><code>DREADWEAVE_BATTLEGEAR</code></td><td>738 (0x2E2)</td><td></td><td></td></tr>
+<tr><td><code>MOONCLOTH_BATTLEGEAR</code></td><td>739 (0x2E3)</td><td></td><td></td></tr>
+<tr><td><code>SATIN_BATTLEGEAR</code></td><td>740 (0x2E4)</td><td></td><td></td></tr>
+<tr><td><code>EVOKERS_SILK_BATTLEGEAR</code></td><td>741 (0x2E5)</td><td></td><td>Evoker’s Silk Battlegear</td></tr>
+<tr><td><code>DRAGONHIDE_BATTLEGEAR</code></td><td>742 (0x2E6)</td><td></td><td></td></tr>
+<tr><td><code>WYRMHIDE_BATTLEGEAR</code></td><td>743 (0x2E7)</td><td></td><td></td></tr>
+<tr><td><code>KODOHIDE_BATTLEGEAR</code></td><td>744 (0x2E8)</td><td></td><td></td></tr>
+<tr><td><code>OPPORTUNISTS_BATTLEGEAR</code></td><td>745 (0x2E9)</td><td></td><td>Opportunist’s Battlegear</td></tr>
+<tr><td><code>SEERS_MAIL_BATTLEGEAR</code></td><td>746 (0x2EA)</td><td></td><td>Seer’s Mail Battlegear</td></tr>
+<tr><td><code>SEERS_RINGMAIL_BATTLEGEAR</code></td><td>747 (0x2EB)</td><td></td><td>Seer’s Ringmail Battlegear</td></tr>
+<tr><td><code>SEERS_LINKED_BATTLEGEAR</code></td><td>748 (0x2EC)</td><td></td><td>Seer’s Linked Battlegear</td></tr>
+<tr><td><code>STALKERS_CHAIN_BATTLEGEAR</code></td><td>749 (0x2ED)</td><td></td><td>Stalker’s Chain Battlegear</td></tr>
+<tr><td><code>SAVAGE_PLATE_BATTLEGEAR</code></td><td>750 (0x2EE)</td><td></td><td></td></tr>
+<tr><td><code>CRUSADERS_ORNAMENTED_BATTLEGEAR</code></td><td>751 (0x2EF)</td><td></td><td>Crusader’s Ornamented Battlegear</td></tr>
+<tr><td><code>CRUSADERS_SCALED_BATTLEGEAR</code></td><td>752 (0x2F0)</td><td></td><td>Crusader’s Scaled Battlegear</td></tr>
+<tr><td><code>BOREAN_EMBRACE</code></td><td>754 (0x2F2)</td><td></td><td></td></tr>
+<tr><td><code>NERUBIAN_HIVE</code></td><td>755 (0x2F3)</td><td></td><td></td></tr>
+<tr><td><code>FROSTSCALE_BINDING</code></td><td>756 (0x2F4)</td><td></td><td></td></tr>
+<tr><td><code>ICEBORNE_EMBRACE</code></td><td>757 (0x2F5)</td><td></td><td></td></tr>
+<tr><td><code>RAINES_REVENGE</code></td><td>759 (0x2F7)</td><td></td><td>Raine’s Revenge</td></tr>
+<tr><td><code>GLADIATORS_DREADPLATE</code></td><td>760 (0x2F8)</td><td></td><td>Gladiator’s Dreadplate</td></tr>
+<tr><td><code>WINTER_GARB</code></td><td>761 (0x2F9)</td><td></td><td></td></tr>
+<tr><td><code>BREWFEST_GARB</code></td><td>762 (0x2FA)</td><td></td><td></td></tr>
+<tr><td><code>FROSTWOVEN_POWER</code></td><td>763 (0x2FB)</td><td></td><td></td></tr>
+<tr><td><code>DUSKWEAVER</code></td><td>764 (0x2FC)</td><td></td><td></td></tr>
+<tr><td><code>GLADIATORS_BATTLEGEAR2</code></td><td>765 (0x2FD)</td><td></td><td>Gladiator’s Battlegear</td></tr>
+<tr><td><code>GLADIATORS_VINDICATION2</code></td><td>766 (0x2FE)</td><td></td><td>Gladiator’s Vindication</td></tr>
+<tr><td><code>GLADIATORS_REDEMPTION2</code></td><td>767 (0x2FF)</td><td></td><td>Gladiator’s Redemption</td></tr>
+<tr><td><code>GLADIATORS_DESECRATION</code></td><td>768 (0x300)</td><td></td><td>Gladiator’s Desecration</td></tr>
+<tr><td><code>GLADIATORS_THUNDERFIST2</code></td><td>769 (0x301)</td><td></td><td>Gladiator’s Thunderfist</td></tr>
+<tr><td><code>GLADIATORS_EARTHSHAKER2</code></td><td>770 (0x302)</td><td></td><td>Gladiator’s Earthshaker</td></tr>
+<tr><td><code>GLADIATORS_WARTIDE2</code></td><td>771 (0x303)</td><td></td><td>Gladiator’s Wartide</td></tr>
+<tr><td><code>GLADIATORS_PURSUIT2</code></td><td>772 (0x304)</td><td></td><td>Gladiator’s Pursuit</td></tr>
+<tr><td><code>GLADIATORS_REFUGE2</code></td><td>773 (0x305)</td><td></td><td>Gladiator’s Refuge</td></tr>
+<tr><td><code>GLADIATORS_WILDHIDE2</code></td><td>774 (0x306)</td><td></td><td>Gladiator’s Wildhide</td></tr>
+<tr><td><code>GLADIATORS_SANCTUARY2</code></td><td>775 (0x307)</td><td></td><td>Gladiator’s Sanctuary</td></tr>
+<tr><td><code>GLADIATORS_VESTMENTS2</code></td><td>776 (0x308)</td><td></td><td>Gladiator’s Vestments</td></tr>
+<tr><td><code>GLADIATORS_INVESTITURE2</code></td><td>777 (0x309)</td><td></td><td>Gladiator’s Investiture</td></tr>
+<tr><td><code>GLADIATORS_RAIMENT2</code></td><td>778 (0x30A)</td><td></td><td>Gladiator’s Raiment</td></tr>
+<tr><td><code>GLADIATORS_REGALIA2</code></td><td>779 (0x30B)</td><td></td><td>Gladiator’s Regalia</td></tr>
+<tr><td><code>GLADIATORS_FELSHROUD2</code></td><td>780 (0x30C)</td><td></td><td>Gladiator’s Felshroud</td></tr>
+<tr><td><code>BLESSED_REGALIA_OF_UNDEAD_CLEANSING</code></td><td>781 (0x30D)</td><td></td><td></td></tr>
+<tr><td><code>UNDEAD_SLAYERS_BLESSED_ARMOR</code></td><td>782 (0x30E)</td><td></td><td>Undead Slayer’s Blessed Armor</td></tr>
+<tr><td><code>BLESSED_GARB_OF_THE_UNDEAD_SLAYER</code></td><td>783 (0x30F)</td><td></td><td></td></tr>
+<tr><td><code>BLESSED_BATTLEGEAR_OF_UNDEAD_SLAYING</code></td><td>784 (0x310)</td><td></td><td></td></tr>
+<tr><td><code>MIDSUMMER_REVELER</code></td><td>785 (0x311)</td><td></td><td></td></tr>
+<tr><td><code>DREADNAUGHT_PLATE</code></td><td>787 (0x313)</td><td></td><td></td></tr>
+<tr><td><code>DREADNAUGHT_BATTLEGEAR</code></td><td>788 (0x314)</td><td></td><td></td></tr>
+<tr><td><code>REDEMPTION_BATTLEGEAR</code></td><td>789 (0x315)</td><td></td><td></td></tr>
+<tr><td><code>REDEMPTION_REGALIA</code></td><td>790 (0x316)</td><td></td><td></td></tr>
+<tr><td><code>REDEMPTION_PLATE</code></td><td>791 (0x317)</td><td></td><td></td></tr>
+<tr><td><code>SCOURGEBORNE_BATTLEGEAR</code></td><td>792 (0x318)</td><td></td><td></td></tr>
+<tr><td><code>SCOURGEBORNE_PLATE</code></td><td>793 (0x319)</td><td></td><td></td></tr>
+<tr><td><code>CRYPTSTALKER_BATTLEGEAR</code></td><td>794 (0x31A)</td><td></td><td></td></tr>
+<tr><td><code>EARTHSHATTER_BATTLEGEAR</code></td><td>795 (0x31B)</td><td></td><td></td></tr>
+<tr><td><code>EARTHSHATTER_GARB</code></td><td>796 (0x31C)</td><td></td><td></td></tr>
+<tr><td><code>EARTHSHATTER_REGALIA</code></td><td>797 (0x31D)</td><td></td><td></td></tr>
+<tr><td><code>DREAMWALKER_BATTLEGEAR</code></td><td>798 (0x31E)</td><td></td><td></td></tr>
+<tr><td><code>DREAMWALKER_REGALIA</code></td><td>799 (0x31F)</td><td></td><td></td></tr>
+<tr><td><code>DREAMWALKER_GARB</code></td><td>800 (0x320)</td><td></td><td></td></tr>
+<tr><td><code>BONESCYTHE_BATTLEGEAR</code></td><td>801 (0x321)</td><td></td><td></td></tr>
+<tr><td><code>PLAGUEHEART_GARB</code></td><td>802 (0x322)</td><td></td><td></td></tr>
+<tr><td><code>FROSTFIRE_GARB</code></td><td>803 (0x323)</td><td></td><td></td></tr>
+<tr><td><code>REGALIA_OF_FAITH</code></td><td>804 (0x324)</td><td></td><td></td></tr>
+<tr><td><code>GARB_OF_FAITH</code></td><td>805 (0x325)</td><td></td><td></td></tr>
+<tr><td><code>SPRING_TUXEDO</code></td><td>812 (0x32C)</td><td></td><td></td></tr>
+<tr><td><code>EVISCERATORS_BATTLEGEAR</code></td><td>813 (0x32D)</td><td></td><td>Eviscerator’s Battlegear</td></tr>
+<tr><td><code>ORNATE_SARONITE_BATTLEGEAR</code></td><td>814 (0x32E)</td><td></td><td></td></tr>
+<tr><td><code>OVERCASTER_BATTLEGEAR</code></td><td>815 (0x32F)</td><td></td><td></td></tr>
+<tr><td><code>SAVAGE_SARONITE_BATTLEGEAR</code></td><td>816 (0x330)</td><td></td><td></td></tr>
+<tr><td><code>STORMHIDE_BATTLEGEAR</code></td><td>817 (0x331)</td><td></td><td></td></tr>
+<tr><td><code>SWIFTARROW_BATTLEGEAR</code></td><td>818 (0x332)</td><td></td><td></td></tr>
+<tr><td><code>FROSTSAVAGE_BATTLEGEAR</code></td><td>819 (0x333)</td><td></td><td></td></tr>
+<tr><td><code>AEGIS_BATTLEGEAR</code></td><td>820 (0x334)</td><td></td><td></td></tr>
+<tr><td><code>AEGIS_PLATE</code></td><td>821 (0x335)</td><td></td><td></td></tr>
+<tr><td><code>AEGIS_REGALIA</code></td><td>822 (0x336)</td><td></td><td></td></tr>
+<tr><td><code>WORLDBREAKER_BATTLEGEAR</code></td><td>823 (0x337)</td><td></td><td></td></tr>
+<tr><td><code>WORLDBREAKER_GARB</code></td><td>824 (0x338)</td><td></td><td></td></tr>
+<tr><td><code>WORLDBREAKER_REGALIA</code></td><td>825 (0x339)</td><td></td><td></td></tr>
+<tr><td><code>TERRORBLADE_BATTLEGEAR</code></td><td>826 (0x33A)</td><td></td><td></td></tr>
+<tr><td><code>NIGHTSONG_BATTLEGEAR</code></td><td>827 (0x33B)</td><td></td><td></td></tr>
+<tr><td><code>NIGHTSONG_GARB</code></td><td>828 (0x33C)</td><td></td><td></td></tr>
+<tr><td><code>NIGHTSONG_REGALIA</code></td><td>829 (0x33D)</td><td></td><td></td></tr>
+<tr><td><code>SIEGEBREAKER_BATTLEGEAR</code></td><td>830 (0x33E)</td><td></td><td></td></tr>
+<tr><td><code>SIEGEBREAKER_PLATE</code></td><td>831 (0x33F)</td><td></td><td></td></tr>
+<tr><td><code>SANCTIFICATION_GARB</code></td><td>832 (0x340)</td><td></td><td></td></tr>
+<tr><td><code>SANCTIFICATION_REGALIA</code></td><td>833 (0x341)</td><td></td><td></td></tr>
+<tr><td><code>DARKRUNED_BATTLEGEAR</code></td><td>834 (0x342)</td><td></td><td></td></tr>
+<tr><td><code>DARKRUNED_PLATE</code></td><td>835 (0x343)</td><td></td><td></td></tr>
+<tr><td><code>KIRIN_TOR_GARB</code></td><td>836 (0x344)</td><td></td><td></td></tr>
+<tr><td><code>DEATHBRINGER_GARB</code></td><td>837 (0x345)</td><td></td><td></td></tr>
+<tr><td><code>SCOURGESTALKER_BATTLEGEAR</code></td><td>838 (0x346)</td><td></td><td></td></tr>
+<tr><td><code>KHADGARS_REGALIA</code></td><td>843 (0x34B)</td><td></td><td>Khadgar’s Regalia</td></tr>
+<tr><td><code>SUNSTRIDERS_REGALIA</code></td><td>844 (0x34C)</td><td></td><td>Sunstrider’s Regalia</td></tr>
+<tr><td><code>GUL_DANS_REGALIA</code></td><td>845 (0x34D)</td><td></td><td>Gul’dan’s Regalia</td></tr>
+<tr><td><code>KEL_THUZADS_REGALIA</code></td><td>846 (0x34E)</td><td></td><td>Kel’Thuzad’s Regalia</td></tr>
+<tr><td><code>VELENS_RAIMENT</code></td><td>847 (0x34F)</td><td></td><td>Velen’s Raiment</td></tr>
+<tr><td><code>ZABRAS_RAIMENT</code></td><td>848 (0x350)</td><td></td><td>Zabra’s Raiment</td></tr>
+<tr><td><code>VELENS_REGALIA</code></td><td>849 (0x351)</td><td></td><td>Velen’s Regalia</td></tr>
+<tr><td><code>ZABRAS_REGALIA</code></td><td>850 (0x352)</td><td></td><td>Zabra’s Regalia</td></tr>
+<tr><td><code>MALFURIONS_GARB</code></td><td>851 (0x353)</td><td></td><td>Malfurion’s Garb</td></tr>
+<tr><td><code>RUNETOTEMS_GARB</code></td><td>852 (0x354)</td><td></td><td>Runetotem’s Garb</td></tr>
+<tr><td><code>MALFURIONS_REGALIA</code></td><td>853 (0x355)</td><td></td><td>Malfurion’s Regalia</td></tr>
+<tr><td><code>RUNETOTEMS_REGALIA</code></td><td>854 (0x356)</td><td></td><td>Runetotem’s Regalia</td></tr>
+<tr><td><code>MALFURIONS_BATTLEGEAR</code></td><td>855 (0x357)</td><td></td><td>Malfurion’s Battlegear</td></tr>
+<tr><td><code>RUNETOTEMS_BATTLEGEAR</code></td><td>856 (0x358)</td><td></td><td>Runetotem’s Battlegear</td></tr>
+<tr><td><code>VANCLEEFS_BATTLEGEAR</code></td><td>857 (0x359)</td><td></td><td>VanCleef’s Battlegear</td></tr>
+<tr><td><code>GARONAS_BATTLEGEAR</code></td><td>858 (0x35A)</td><td></td><td>Garona’s Battlegear</td></tr>
+<tr><td><code>WINDRUNNERS_BATTLEGEAR</code></td><td>859 (0x35B)</td><td></td><td>Windrunner’s Battlegear</td></tr>
+<tr><td><code>WINDRUNNERS_PURSUIT</code></td><td>860 (0x35C)</td><td></td><td>Windrunner’s Pursuit</td></tr>
+<tr><td><code>NOBUNDOS_GARB</code></td><td>861 (0x35D)</td><td></td><td>Nobundo’s Garb</td></tr>
+<tr><td><code>THRALLS_GARB</code></td><td>862 (0x35E)</td><td></td><td>Thrall’s Garb</td></tr>
+<tr><td><code>THRALLS_REGALIA</code></td><td>863 (0x35F)</td><td></td><td>Thrall’s Regalia</td></tr>
+<tr><td><code>NOBUNDOS_REGALIA</code></td><td>864 (0x360)</td><td></td><td>Nobundo’s Regalia</td></tr>
+<tr><td><code>NOBUNDOS_BATTLEGEAR</code></td><td>865 (0x361)</td><td></td><td>Nobundo’s Battlegear</td></tr>
+<tr><td><code>THRALLS_BATTLEGEAR</code></td><td>866 (0x362)</td><td></td><td>Thrall’s Battlegear</td></tr>
+<tr><td><code>WRYNNS_BATTLEGEAR</code></td><td>867 (0x363)</td><td></td><td>Wrynn’s Battlegear</td></tr>
+<tr><td><code>HELLSCREAMS_BATTLEGEAR</code></td><td>868 (0x364)</td><td></td><td>Hellscream’s Battlegear</td></tr>
+<tr><td><code>WRYNNS_PLATE</code></td><td>869 (0x365)</td><td></td><td>Wrynn’s Plate</td></tr>
+<tr><td><code>HELLSCREAMS_PLATE</code></td><td>870 (0x366)</td><td></td><td>Hellscream’s Plate</td></tr>
+<tr><td><code>THASSARIANS_BATTLEGEAR</code></td><td>871 (0x367)</td><td></td><td>Thassarian’s Battlegear</td></tr>
+<tr><td><code>KOLTIRAS_BATTLEGEAR</code></td><td>872 (0x368)</td><td></td><td>Koltira’s Battlegear</td></tr>
+<tr><td><code>THASSARIANS_PLATE</code></td><td>873 (0x369)</td><td></td><td>Thassarian’s Plate</td></tr>
+<tr><td><code>KOLTIRAS_PLATE</code></td><td>874 (0x36A)</td><td></td><td>Koltira’s Plate</td></tr>
+<tr><td><code>TURALYONS_GARB</code></td><td>875 (0x36B)</td><td></td><td>Turalyon’s Garb</td></tr>
+<tr><td><code>LIADRINS_GARB</code></td><td>876 (0x36C)</td><td></td><td>Liadrin’s Garb</td></tr>
+<tr><td><code>TURALYONS_BATTLEGEAR</code></td><td>877 (0x36D)</td><td></td><td>Turalyon’s Battlegear</td></tr>
+<tr><td><code>LIADRINS_BATTLEGEAR</code></td><td>878 (0x36E)</td><td></td><td>Liadrin’s Battlegear</td></tr>
+<tr><td><code>TURALYONS_PLATE</code></td><td>879 (0x36F)</td><td></td><td>Turalyon’s Plate</td></tr>
+<tr><td><code>LIADRINS_PLATE</code></td><td>880 (0x370)</td><td></td><td>Liadrin’s Plate</td></tr>
+<tr><td><code>PURIFIED_SHARD_OF_THE_GODS</code></td><td>881 (0x371)</td><td></td><td></td></tr>
+<tr><td><code>SHINY_SHARD_OF_THE_GODS</code></td><td>882 (0x372)</td><td></td><td></td></tr>
+<tr><td><code>BLOODMAGES_REGALIA</code></td><td>883 (0x373)</td><td></td><td>Bloodmage’s Regalia</td></tr>
+<tr><td><code>DARK_COVENS_REGALIA</code></td><td>884 (0x374)</td><td></td><td>Dark Coven’s Regalia</td></tr>
+<tr><td><code>CRIMSON_ACOLYTES_RAIMENT</code></td><td>885 (0x375)</td><td></td><td>Crimson Acolyte’s Raiment</td></tr>
+<tr><td><code>CRIMSON_ACOLYTES_REGALIA</code></td><td>886 (0x376)</td><td></td><td>Crimson Acolyte’s Regalia</td></tr>
+<tr><td><code>LASHERWEAVE_GARB</code></td><td>887 (0x377)</td><td></td><td></td></tr>
+<tr><td><code>LASHERWEAVE_REGALIA</code></td><td>888 (0x378)</td><td></td><td></td></tr>
+<tr><td><code>LASHERWEAVE_BATTLEGEAR</code></td><td>889 (0x379)</td><td></td><td></td></tr>
+<tr><td><code>SHADOWBLADES_BATTLEGEAR</code></td><td>890 (0x37A)</td><td></td><td>Shadowblade’s Battlegear</td></tr>
+<tr><td><code>AHN_KAHAR_BLOOD_HUNTERS_BATTLEGEAR</code></td><td>891 (0x37B)</td><td></td><td>Ahn’Kahar Blood Hunter’s Battlegear</td></tr>
+<tr><td><code>FROST_WITCHS_GARB</code></td><td>892 (0x37C)</td><td></td><td>Frost Witch’s Garb</td></tr>
+<tr><td><code>FROST_WITCHS_REGALIA</code></td><td>893 (0x37D)</td><td></td><td>Frost Witch’s Regalia</td></tr>
+<tr><td><code>FROST_WITCHS_BATTLEGEAR</code></td><td>894 (0x37E)</td><td></td><td>Frost Witch’s Battlegear</td></tr>
+<tr><td><code>YMIRJAR_LORDS_BATTLEGEAR</code></td><td>895 (0x37F)</td><td></td><td>Ymirjar Lord’s Battlegear</td></tr>
+<tr><td><code>YMIRJAR_LORDS_PLATE</code></td><td>896 (0x380)</td><td></td><td>Ymirjar Lord’s Plate</td></tr>
+<tr><td><code>SCOURGELORDS_BATTLEGEAR</code></td><td>897 (0x381)</td><td></td><td>Scourgelord’s Battlegear</td></tr>
+<tr><td><code>SCOURGELORDS_PLATE</code></td><td>898 (0x382)</td><td></td><td>Scourgelord’s Plate</td></tr>
+<tr><td><code>LIGHTSWORN_GARB</code></td><td>899 (0x383)</td><td></td><td></td></tr>
+<tr><td><code>LIGHTSWORN_BATTLEGEAR</code></td><td>900 (0x384)</td><td></td><td></td></tr>
+<tr><td><code>LIGHTSWORN_PLATE</code></td><td>901 (0x385)</td><td></td><td></td></tr>
+</tbody>
+</table>
+</div>
+<p>Used in:</p>
+<ul>
+<li><a href="smsg_item_query_single_response.html">SMSG_ITEM_QUERY_SINGLE_RESPONSE</a></li>
+</ul>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../docs/itemrefundresult.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
+                            </a>
+
+                            <a rel="next prefetch" href="../docs/itemslot.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../docs/itemrefundresult.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
+                    </a>
+
+                    <a rel="next prefetch" href="../docs/itemslot.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+                    </a>
+            </nav>
+
+        </div>
+
+        <template id=fa-eye><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M288 32c-80.8 0-145.5 36.8-192.6 80.6C48.6 156 17.3 208 2.5 243.7c-3.3 7.9-3.3 16.7 0 24.6C17.3 304 48.6 356 95.4 399.4C142.5 443.2 207.2 480 288 480s145.5-36.8 192.6-80.6c46.8-43.5 78.1-95.4 93-131.1c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C433.5 68.8 368.8 32 288 32zM432 256c0 79.5-64.5 144-144 144s-144-64.5-144-144s64.5-144 144-144s144 64.5 144 144zM288 192c0 35.3-28.7 64-64 64c-11.5 0-22.3-3-31.6-8.4c-.2 2.8-.4 5.5-.4 8.4c0 53 43 96 96 96s96-43 96-96s-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6z"/></svg></span></template>
+        <template id=fa-eye-slash><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M38.8 5.1C28.4-3.1 13.3-1.2 5.1 9.2S-1.2 34.7 9.2 42.9l592 464c10.4 8.2 25.5 6.3 33.7-4.1s6.3-25.5-4.1-33.7L525.6 386.7c39.6-40.6 66.4-86.1 79.9-118.4c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C465.5 68.8 400.8 32 320 32c-68.2 0-125 26.3-169.3 60.8L38.8 5.1zM223.1 149.5C248.6 126.2 282.7 112 320 112c79.5 0 144 64.5 144 144c0 24.9-6.3 48.3-17.4 68.7L408 294.5c5.2-11.8 8-24.8 8-38.5c0-53-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6c0 10.2-2.4 19.8-6.6 28.3l-90.3-70.8zm223.1 298L373 389.9c-16.4 6.5-34.3 10.1-53 10.1c-79.5 0-144-64.5-144-144c0-6.9 .5-13.6 1.4-20.2L83.1 161.5C60.3 191.2 44 220.8 34.5 243.7c-3.3 7.9-3.3 16.7 0 24.6c14.9 35.7 46.2 87.7 93 131.1C174.5 443.2 239.2 480 320 480c47.8 0 89.9-12.9 126.2-32.5z"/></svg></span></template>
+        <template id=fa-copy><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M502.6 70.63l-61.25-61.25C435.4 3.371 427.2 0 418.7 0H255.1c-35.35 0-64 28.66-64 64l.0195 256C192 355.4 220.7 384 256 384h192c35.2 0 64-28.8 64-64V93.25C512 84.77 508.6 76.63 502.6 70.63zM464 320c0 8.836-7.164 16-16 16H255.1c-8.838 0-16-7.164-16-16L239.1 64.13c0-8.836 7.164-16 16-16h128L384 96c0 17.67 14.33 32 32 32h47.1V320zM272 448c0 8.836-7.164 16-16 16H63.1c-8.838 0-16-7.164-16-16L47.98 192.1c0-8.836 7.164-16 16-16H160V128H63.99c-35.35 0-64 28.65-64 64l.0098 256C.002 483.3 28.66 512 64 512h192c35.2 0 64-28.8 64-64v-32h-47.1L272 448z"/></svg></span></template>
+        <template id=fa-play><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M73 39c-14.8-9.1-33.4-9.4-48.5-.9S0 62.6 0 80V432c0 17.4 9.4 33.4 24.5 41.9s33.7 8.1 48.5-.9L361 297c14.3-8.7 23-24.2 23-41s-8.7-32.2-23-41L73 39z"/></svg></span></template>
+        <template id=fa-clock-rotate-left><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M75 75L41 41C25.9 25.9 0 36.6 0 57.9V168c0 13.3 10.7 24 24 24H134.1c21.4 0 32.1-25.9 17-41l-30.8-30.8C155 85.5 203 64 256 64c106 0 192 86 192 192s-86 192-192 192c-40.8 0-78.6-12.7-109.7-34.4c-14.5-10.1-34.4-6.6-44.6 7.9s-6.6 34.4 7.9 44.6C151.2 495 201.7 512 256 512c141.4 0 256-114.6 256-256S397.4 0 256 0C185.3 0 121.3 28.7 75 75zm181 53c-13.3 0-24 10.7-24 24V256c0 6.4 2.5 12.5 7 17l72 72c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-65-65V152c0-13.3-10.7-24-24-24z"/></svg></span></template>
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr-ef4e11c1.min.js"></script>
+        <script src="../mark-09e88c2c.min.js"></script>
+        <script src="../searcher-c2a407aa.js"></script>
+
+        <script src="../clipboard-1626706a.min.js"></script>
+        <script src="../highlight-abc7f01d.js"></script>
+        <script src="../book-a0b12cfe.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+
+    </div>
+    </body>
+</html>

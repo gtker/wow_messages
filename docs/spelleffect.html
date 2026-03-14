@@ -1,0 +1,1192 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>SpellEffect - Wowm Language</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon-de23e50b.svg">
+        <link rel="shortcut icon" href="../favicon-8114d1fc.png">
+        <link rel="stylesheet" href="../css/variables-8adf115d.css">
+        <link rel="stylesheet" href="../css/general-2459343d.css">
+        <link rel="stylesheet" href="../css/chrome-ae938929.css">
+        <link rel="stylesheet" href="../css/print-9e4910d8.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../fonts/fonts-9644e21d.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="mdbook-highlight-css" href="../highlight-493f70e1.css">
+        <link rel="stylesheet" id="mdbook-tomorrow-night-css" href="../tomorrow-night-4c0ae647.css">
+        <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="../ayu-highlight-3fdfc3ac.css">
+
+        <!-- Custom theme stylesheets -->
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "../";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+            window.path_to_searchindex_js = "../searchindex-3f6cba53.js";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../toc-0cb513c6.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="mdbook-body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="mdbook-sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("mdbook-sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+                sidebar_toggle.checked = false;
+            }
+            if (sidebar === 'visible') {
+                sidebar_toggle.checked = true;
+            } else {
+                html.classList.remove('sidebar-visible');
+            }
+        </script>
+
+        <nav id="mdbook-sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../toc.html"></iframe>
+            </noscript>
+            <div id="mdbook-sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="mdbook-page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="mdbook-menu-bar-hover-placeholder"></div>
+                <div id="mdbook-menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="mdbook-sidebar-toggle" class="icon-button" for="mdbook-sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="mdbook-sidebar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"/></svg></span>
+                        </label>
+                        <button id="mdbook-theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="mdbook-theme-list">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M371.3 367.1c27.3-3.9 51.9-19.4 67.2-42.9L600.2 74.1c12.6-19.5 9.4-45.3-7.6-61.2S549.7-4.4 531.1 9.6L294.4 187.2c-24 18-38.2 46.1-38.4 76.1L371.3 367.1zm-19.6 25.4l-116-104.4C175.9 290.3 128 339.6 128 400c0 3.9 .2 7.8 .6 11.6c1.8 17.5-10.2 36.4-27.8 36.4H96c-17.7 0-32 14.3-32 32s14.3 32 32 32H240c61.9 0 112-50.1 112-112c0-2.5-.1-5-.2-7.5z"/></svg></span>
+                        </button>
+                        <ul id="mdbook-theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-ayu">Ayu</button></li>
+                        </ul>
+                        <button id="mdbook-search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="mdbook-searchbar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352c79.5 0 144-64.5 144-144s-64.5-144-144-144S64 128.5 64 208s64.5 144 144 144z"/></svg></span>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Wowm Language</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <span class=fa-svg id="print-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M128 0C92.7 0 64 28.7 64 64v96h64V64H354.7L384 93.3V160h64V93.3c0-17-6.7-33.3-18.7-45.3L400 18.7C388 6.7 371.7 0 354.7 0H128zM384 352v32 64H128V384 368 352H384zm64 32h32c17.7 0 32-14.3 32-32V256c0-35.3-28.7-64-64-64H64c-35.3 0-64 28.7-64 64v96c0 17.7 14.3 32 32 32H64v64c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V384zm-16-88c-13.3 0-24-10.7-24-24s10.7-24 24-24s24 10.7 24 24s-10.7 24-24 24z"/></svg></span>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="mdbook-search-wrapper" class="hidden">
+                    <form id="mdbook-searchbar-outer" class="searchbar-outer">
+                        <div class="search-wrapper">
+                            <input type="search" id="mdbook-searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="mdbook-searchresults-outer" aria-describedby="searchresults-header">
+                            <div class="spinner-wrapper">
+                                <span class=fa-svg id="fa-spin"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M304 48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zm0 416c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM48 304c26.5 0 48-21.5 48-48s-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48zm464-48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM142.9 437c18.7-18.7 18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zm0-294.2c18.7-18.7 18.7-49.1 0-67.9S93.7 56.2 75 75s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zM369.1 437c18.7 18.7 49.1 18.7 67.9 0s18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9z"/></svg></span>
+                            </div>
+                        </div>
+                    </form>
+                    <div id="mdbook-searchresults-outer" class="searchresults-outer hidden">
+                        <div id="mdbook-searchresults-header" class="searchresults-header"></div>
+                        <ul id="mdbook-searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('mdbook-sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('mdbook-sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#mdbook-sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="mdbook-content" class="content">
+                    <main>
+                        <h1 id="spelleffect"><a class="header" href="#spelleffect">SpellEffect</a></h1>
+<h2 id="client-version-112"><a class="header" href="#client-version-112">Client Version 1.12</a></h2>
+<h3 id="wowm-representation"><a class="header" href="#wowm-representation">Wowm Representation</a></h3>
+<p>Autogenerated from <code>wowm</code> file at <a href="https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/spell/smsg_spelllogexecute.wowm#L10"><code>wow_message_parser/wowm/world/spell/smsg_spelllogexecute.wowm:10</code></a>.</p>
+<pre><code class="language-rust ignore">enum SpellEffect : u32 {
+    NONE = 0;
+    INSTAKILL = 1;
+    SCHOOL_DAMAGE = 2;
+    DUMMY = 3;
+    PORTAL_TELEPORT = 4;
+    TELEPORT_UNITS = 5;
+    APPLY_AURA = 6;
+    ENVIRONMENTAL_DAMAGE = 7;
+    POWER_DRAIN = 8;
+    HEALTH_LEECH = 9;
+    HEAL = 10;
+    BIND = 11;
+    PORTAL = 12;
+    RITUAL_BASE = 13;
+    RITUAL_SPECIALIZE = 14;
+    RITUAL_ACTIVATE_PORTAL = 15;
+    QUEST_COMPLETE = 16;
+    WEAPON_DAMAGE_NOSCHOOL = 17;
+    RESURRECT = 18;
+    ADD_EXTRA_ATTACKS = 19;
+    DODGE = 20;
+    EVADE = 21;
+    PARRY = 22;
+    BLOCK = 23;
+    CREATE_ITEM = 24;
+    WEAPON = 25;
+    DEFENSE = 26;
+    PERSISTENT_AREA_AURA = 27;
+    SUMMON = 28;
+    LEAP = 29;
+    ENERGIZE = 30;
+    WEAPON_PERCENT_DAMAGE = 31;
+    TRIGGER_MISSILE = 32;
+    OPEN_LOCK = 33;
+    SUMMON_CHANGE_ITEM = 34;
+    APPLY_AREA_AURA_PARTY = 35;
+    LEARN_SPELL = 36;
+    SPELL_DEFENSE = 37;
+    DISPEL = 38;
+    LANGUAGE = 39;
+    DUAL_WIELD = 40;
+    SUMMON_WILD = 41;
+    SUMMON_GUARDIAN = 42;
+    TELEPORT_UNITS_FACE_CASTER = 43;
+    SKILL_STEP = 44;
+    ADD_HONOR = 45;
+    SPAWN = 46;
+    TRADE_SKILL = 47;
+    STEALTH = 48;
+    DETECT = 49;
+    TRANS_DOOR = 50;
+    FORCE_CRITICAL_HIT = 51;
+    GUARANTEE_HIT = 52;
+    ENCHANT_ITEM = 53;
+    ENCHANT_ITEM_TEMPORARY = 54;
+    TAMECREATURE = 55;
+    SUMMON_PET = 56;
+    LEARN_PET_SPELL = 57;
+    WEAPON_DAMAGE = 58;
+    OPEN_LOCK_ITEM = 59;
+    PROFICIENCY = 60;
+    SEND_EVENT = 61;
+    POWER_BURN = 62;
+    THREAT = 63;
+    TRIGGER_SPELL = 64;
+    HEALTH_FUNNEL = 65;
+    POWER_FUNNEL = 66;
+    HEAL_MAX_HEALTH = 67;
+    INTERRUPT_CAST = 68;
+    DISTRACT = 69;
+    PULL = 70;
+    PICKPOCKET = 71;
+    ADD_FARSIGHT = 72;
+    SUMMON_POSSESSED = 73;
+    SUMMON_TOTEM = 74;
+    HEAL_MECHANICAL = 75;
+    SUMMON_OBJECT_WILD = 76;
+    SCRIPT_EFFECT = 77;
+    ATTACK = 78;
+    SANCTUARY = 79;
+    ADD_COMBO_POINTS = 80;
+    CREATE_HOUSE = 81;
+    BIND_SIGHT = 82;
+    DUEL = 83;
+    STUCK = 84;
+    SUMMON_PLAYER = 85;
+    ACTIVATE_OBJECT = 86;
+    SUMMON_TOTEM_SLOT1 = 87;
+    SUMMON_TOTEM_SLOT2 = 88;
+    SUMMON_TOTEM_SLOT3 = 89;
+    SUMMON_TOTEM_SLOT4 = 90;
+    THREAT_ALL = 91;
+    ENCHANT_HELD_ITEM = 92;
+    SUMMON_PHANTASM = 93;
+    SELF_RESURRECT = 94;
+    SKINNING = 95;
+    CHARGE = 96;
+    SUMMON_CRITTER = 97;
+    KNOCK_BACK = 98;
+    DISENCHANT = 99;
+    INEBRIATE = 100;
+    FEED_PET = 101;
+    DISMISS_PET = 102;
+    REPUTATION = 103;
+    SUMMON_OBJECT_SLOT1 = 104;
+    SUMMON_OBJECT_SLOT2 = 105;
+    SUMMON_OBJECT_SLOT3 = 106;
+    SUMMON_OBJECT_SLOT4 = 107;
+    DISPEL_MECHANIC = 108;
+    SUMMON_DEAD_PET = 109;
+    DESTROY_ALL_TOTEMS = 110;
+    DURABILITY_DAMAGE = 111;
+    SUMMON_DEMON = 112;
+    RESURRECT_NEW = 113;
+    ATTACK_ME = 114;
+    DURABILITY_DAMAGE_PCT = 115;
+    SKIN_PLAYER_CORPSE = 116;
+    SPIRIT_HEAL = 117;
+    SKILL = 118;
+    APPLY_AREA_AURA_PET = 119;
+    TELEPORT_GRAVEYARD = 120;
+    NORMALIZED_WEAPON_DMG = 121;
+    UNKNOWN122 = 122;
+    SEND_TAXI = 123;
+    PLAYER_PULL = 124;
+    MODIFY_THREAT_PERCENT = 125;
+    UNKNOWN126 = 126;
+    UNKNOWN127 = 127;
+}</code></pre>
+<h3 id="type"><a class="header" href="#type">Type</a></h3>
+<p>The basic type is <code>u32</code>, a 4 byte (32 bit) little endian integer.</p>
+<h3 id="enumerators"><a class="header" href="#enumerators">Enumerators</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Enumerator</th><th>Value</th><th>Comment</th></tr>
+</thead>
+<tbody>
+<tr><td><code>NONE</code></td><td>0 (0x00)</td><td></td></tr>
+<tr><td><code>INSTAKILL</code></td><td>1 (0x01)</td><td></td></tr>
+<tr><td><code>SCHOOL_DAMAGE</code></td><td>2 (0x02)</td><td></td></tr>
+<tr><td><code>DUMMY</code></td><td>3 (0x03)</td><td></td></tr>
+<tr><td><code>PORTAL_TELEPORT</code></td><td>4 (0x04)</td><td></td></tr>
+<tr><td><code>TELEPORT_UNITS</code></td><td>5 (0x05)</td><td></td></tr>
+<tr><td><code>APPLY_AURA</code></td><td>6 (0x06)</td><td></td></tr>
+<tr><td><code>ENVIRONMENTAL_DAMAGE</code></td><td>7 (0x07)</td><td></td></tr>
+<tr><td><code>POWER_DRAIN</code></td><td>8 (0x08)</td><td></td></tr>
+<tr><td><code>HEALTH_LEECH</code></td><td>9 (0x09)</td><td></td></tr>
+<tr><td><code>HEAL</code></td><td>10 (0x0A)</td><td></td></tr>
+<tr><td><code>BIND</code></td><td>11 (0x0B)</td><td></td></tr>
+<tr><td><code>PORTAL</code></td><td>12 (0x0C)</td><td></td></tr>
+<tr><td><code>RITUAL_BASE</code></td><td>13 (0x0D)</td><td></td></tr>
+<tr><td><code>RITUAL_SPECIALIZE</code></td><td>14 (0x0E)</td><td></td></tr>
+<tr><td><code>RITUAL_ACTIVATE_PORTAL</code></td><td>15 (0x0F)</td><td></td></tr>
+<tr><td><code>QUEST_COMPLETE</code></td><td>16 (0x10)</td><td></td></tr>
+<tr><td><code>WEAPON_DAMAGE_NOSCHOOL</code></td><td>17 (0x11)</td><td></td></tr>
+<tr><td><code>RESURRECT</code></td><td>18 (0x12)</td><td></td></tr>
+<tr><td><code>ADD_EXTRA_ATTACKS</code></td><td>19 (0x13)</td><td></td></tr>
+<tr><td><code>DODGE</code></td><td>20 (0x14)</td><td></td></tr>
+<tr><td><code>EVADE</code></td><td>21 (0x15)</td><td></td></tr>
+<tr><td><code>PARRY</code></td><td>22 (0x16)</td><td></td></tr>
+<tr><td><code>BLOCK</code></td><td>23 (0x17)</td><td></td></tr>
+<tr><td><code>CREATE_ITEM</code></td><td>24 (0x18)</td><td></td></tr>
+<tr><td><code>WEAPON</code></td><td>25 (0x19)</td><td></td></tr>
+<tr><td><code>DEFENSE</code></td><td>26 (0x1A)</td><td></td></tr>
+<tr><td><code>PERSISTENT_AREA_AURA</code></td><td>27 (0x1B)</td><td></td></tr>
+<tr><td><code>SUMMON</code></td><td>28 (0x1C)</td><td></td></tr>
+<tr><td><code>LEAP</code></td><td>29 (0x1D)</td><td></td></tr>
+<tr><td><code>ENERGIZE</code></td><td>30 (0x1E)</td><td></td></tr>
+<tr><td><code>WEAPON_PERCENT_DAMAGE</code></td><td>31 (0x1F)</td><td></td></tr>
+<tr><td><code>TRIGGER_MISSILE</code></td><td>32 (0x20)</td><td></td></tr>
+<tr><td><code>OPEN_LOCK</code></td><td>33 (0x21)</td><td></td></tr>
+<tr><td><code>SUMMON_CHANGE_ITEM</code></td><td>34 (0x22)</td><td></td></tr>
+<tr><td><code>APPLY_AREA_AURA_PARTY</code></td><td>35 (0x23)</td><td></td></tr>
+<tr><td><code>LEARN_SPELL</code></td><td>36 (0x24)</td><td></td></tr>
+<tr><td><code>SPELL_DEFENSE</code></td><td>37 (0x25)</td><td></td></tr>
+<tr><td><code>DISPEL</code></td><td>38 (0x26)</td><td></td></tr>
+<tr><td><code>LANGUAGE</code></td><td>39 (0x27)</td><td></td></tr>
+<tr><td><code>DUAL_WIELD</code></td><td>40 (0x28)</td><td></td></tr>
+<tr><td><code>SUMMON_WILD</code></td><td>41 (0x29)</td><td></td></tr>
+<tr><td><code>SUMMON_GUARDIAN</code></td><td>42 (0x2A)</td><td></td></tr>
+<tr><td><code>TELEPORT_UNITS_FACE_CASTER</code></td><td>43 (0x2B)</td><td></td></tr>
+<tr><td><code>SKILL_STEP</code></td><td>44 (0x2C)</td><td></td></tr>
+<tr><td><code>ADD_HONOR</code></td><td>45 (0x2D)</td><td></td></tr>
+<tr><td><code>SPAWN</code></td><td>46 (0x2E)</td><td></td></tr>
+<tr><td><code>TRADE_SKILL</code></td><td>47 (0x2F)</td><td></td></tr>
+<tr><td><code>STEALTH</code></td><td>48 (0x30)</td><td></td></tr>
+<tr><td><code>DETECT</code></td><td>49 (0x31)</td><td></td></tr>
+<tr><td><code>TRANS_DOOR</code></td><td>50 (0x32)</td><td></td></tr>
+<tr><td><code>FORCE_CRITICAL_HIT</code></td><td>51 (0x33)</td><td></td></tr>
+<tr><td><code>GUARANTEE_HIT</code></td><td>52 (0x34)</td><td></td></tr>
+<tr><td><code>ENCHANT_ITEM</code></td><td>53 (0x35)</td><td></td></tr>
+<tr><td><code>ENCHANT_ITEM_TEMPORARY</code></td><td>54 (0x36)</td><td></td></tr>
+<tr><td><code>TAMECREATURE</code></td><td>55 (0x37)</td><td></td></tr>
+<tr><td><code>SUMMON_PET</code></td><td>56 (0x38)</td><td></td></tr>
+<tr><td><code>LEARN_PET_SPELL</code></td><td>57 (0x39)</td><td></td></tr>
+<tr><td><code>WEAPON_DAMAGE</code></td><td>58 (0x3A)</td><td></td></tr>
+<tr><td><code>OPEN_LOCK_ITEM</code></td><td>59 (0x3B)</td><td></td></tr>
+<tr><td><code>PROFICIENCY</code></td><td>60 (0x3C)</td><td></td></tr>
+<tr><td><code>SEND_EVENT</code></td><td>61 (0x3D)</td><td></td></tr>
+<tr><td><code>POWER_BURN</code></td><td>62 (0x3E)</td><td></td></tr>
+<tr><td><code>THREAT</code></td><td>63 (0x3F)</td><td></td></tr>
+<tr><td><code>TRIGGER_SPELL</code></td><td>64 (0x40)</td><td></td></tr>
+<tr><td><code>HEALTH_FUNNEL</code></td><td>65 (0x41)</td><td></td></tr>
+<tr><td><code>POWER_FUNNEL</code></td><td>66 (0x42)</td><td></td></tr>
+<tr><td><code>HEAL_MAX_HEALTH</code></td><td>67 (0x43)</td><td></td></tr>
+<tr><td><code>INTERRUPT_CAST</code></td><td>68 (0x44)</td><td></td></tr>
+<tr><td><code>DISTRACT</code></td><td>69 (0x45)</td><td></td></tr>
+<tr><td><code>PULL</code></td><td>70 (0x46)</td><td></td></tr>
+<tr><td><code>PICKPOCKET</code></td><td>71 (0x47)</td><td></td></tr>
+<tr><td><code>ADD_FARSIGHT</code></td><td>72 (0x48)</td><td></td></tr>
+<tr><td><code>SUMMON_POSSESSED</code></td><td>73 (0x49)</td><td></td></tr>
+<tr><td><code>SUMMON_TOTEM</code></td><td>74 (0x4A)</td><td></td></tr>
+<tr><td><code>HEAL_MECHANICAL</code></td><td>75 (0x4B)</td><td></td></tr>
+<tr><td><code>SUMMON_OBJECT_WILD</code></td><td>76 (0x4C)</td><td></td></tr>
+<tr><td><code>SCRIPT_EFFECT</code></td><td>77 (0x4D)</td><td></td></tr>
+<tr><td><code>ATTACK</code></td><td>78 (0x4E)</td><td></td></tr>
+<tr><td><code>SANCTUARY</code></td><td>79 (0x4F)</td><td></td></tr>
+<tr><td><code>ADD_COMBO_POINTS</code></td><td>80 (0x50)</td><td></td></tr>
+<tr><td><code>CREATE_HOUSE</code></td><td>81 (0x51)</td><td></td></tr>
+<tr><td><code>BIND_SIGHT</code></td><td>82 (0x52)</td><td></td></tr>
+<tr><td><code>DUEL</code></td><td>83 (0x53)</td><td></td></tr>
+<tr><td><code>STUCK</code></td><td>84 (0x54)</td><td></td></tr>
+<tr><td><code>SUMMON_PLAYER</code></td><td>85 (0x55)</td><td></td></tr>
+<tr><td><code>ACTIVATE_OBJECT</code></td><td>86 (0x56)</td><td></td></tr>
+<tr><td><code>SUMMON_TOTEM_SLOT1</code></td><td>87 (0x57)</td><td></td></tr>
+<tr><td><code>SUMMON_TOTEM_SLOT2</code></td><td>88 (0x58)</td><td></td></tr>
+<tr><td><code>SUMMON_TOTEM_SLOT3</code></td><td>89 (0x59)</td><td></td></tr>
+<tr><td><code>SUMMON_TOTEM_SLOT4</code></td><td>90 (0x5A)</td><td></td></tr>
+<tr><td><code>THREAT_ALL</code></td><td>91 (0x5B)</td><td></td></tr>
+<tr><td><code>ENCHANT_HELD_ITEM</code></td><td>92 (0x5C)</td><td></td></tr>
+<tr><td><code>SUMMON_PHANTASM</code></td><td>93 (0x5D)</td><td></td></tr>
+<tr><td><code>SELF_RESURRECT</code></td><td>94 (0x5E)</td><td></td></tr>
+<tr><td><code>SKINNING</code></td><td>95 (0x5F)</td><td></td></tr>
+<tr><td><code>CHARGE</code></td><td>96 (0x60)</td><td></td></tr>
+<tr><td><code>SUMMON_CRITTER</code></td><td>97 (0x61)</td><td></td></tr>
+<tr><td><code>KNOCK_BACK</code></td><td>98 (0x62)</td><td></td></tr>
+<tr><td><code>DISENCHANT</code></td><td>99 (0x63)</td><td></td></tr>
+<tr><td><code>INEBRIATE</code></td><td>100 (0x64)</td><td></td></tr>
+<tr><td><code>FEED_PET</code></td><td>101 (0x65)</td><td></td></tr>
+<tr><td><code>DISMISS_PET</code></td><td>102 (0x66)</td><td></td></tr>
+<tr><td><code>REPUTATION</code></td><td>103 (0x67)</td><td></td></tr>
+<tr><td><code>SUMMON_OBJECT_SLOT1</code></td><td>104 (0x68)</td><td></td></tr>
+<tr><td><code>SUMMON_OBJECT_SLOT2</code></td><td>105 (0x69)</td><td></td></tr>
+<tr><td><code>SUMMON_OBJECT_SLOT3</code></td><td>106 (0x6A)</td><td></td></tr>
+<tr><td><code>SUMMON_OBJECT_SLOT4</code></td><td>107 (0x6B)</td><td></td></tr>
+<tr><td><code>DISPEL_MECHANIC</code></td><td>108 (0x6C)</td><td></td></tr>
+<tr><td><code>SUMMON_DEAD_PET</code></td><td>109 (0x6D)</td><td></td></tr>
+<tr><td><code>DESTROY_ALL_TOTEMS</code></td><td>110 (0x6E)</td><td></td></tr>
+<tr><td><code>DURABILITY_DAMAGE</code></td><td>111 (0x6F)</td><td></td></tr>
+<tr><td><code>SUMMON_DEMON</code></td><td>112 (0x70)</td><td></td></tr>
+<tr><td><code>RESURRECT_NEW</code></td><td>113 (0x71)</td><td></td></tr>
+<tr><td><code>ATTACK_ME</code></td><td>114 (0x72)</td><td></td></tr>
+<tr><td><code>DURABILITY_DAMAGE_PCT</code></td><td>115 (0x73)</td><td></td></tr>
+<tr><td><code>SKIN_PLAYER_CORPSE</code></td><td>116 (0x74)</td><td></td></tr>
+<tr><td><code>SPIRIT_HEAL</code></td><td>117 (0x75)</td><td></td></tr>
+<tr><td><code>SKILL</code></td><td>118 (0x76)</td><td></td></tr>
+<tr><td><code>APPLY_AREA_AURA_PET</code></td><td>119 (0x77)</td><td></td></tr>
+<tr><td><code>TELEPORT_GRAVEYARD</code></td><td>120 (0x78)</td><td></td></tr>
+<tr><td><code>NORMALIZED_WEAPON_DMG</code></td><td>121 (0x79)</td><td></td></tr>
+<tr><td><code>UNKNOWN122</code></td><td>122 (0x7A)</td><td></td></tr>
+<tr><td><code>SEND_TAXI</code></td><td>123 (0x7B)</td><td></td></tr>
+<tr><td><code>PLAYER_PULL</code></td><td>124 (0x7C)</td><td></td></tr>
+<tr><td><code>MODIFY_THREAT_PERCENT</code></td><td>125 (0x7D)</td><td></td></tr>
+<tr><td><code>UNKNOWN126</code></td><td>126 (0x7E)</td><td></td></tr>
+<tr><td><code>UNKNOWN127</code></td><td>127 (0x7F)</td><td></td></tr>
+</tbody>
+</table>
+</div>
+<p>Used in:</p>
+<ul>
+<li><a href="spelllog.html">SpellLog</a></li>
+</ul>
+<h2 id="client-version-243"><a class="header" href="#client-version-243">Client Version 2.4.3</a></h2>
+<h3 id="wowm-representation-1"><a class="header" href="#wowm-representation-1">Wowm Representation</a></h3>
+<p>Autogenerated from <code>wowm</code> file at <a href="https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/spell/smsg_spelllogexecute.wowm#L215"><code>wow_message_parser/wowm/world/spell/smsg_spelllogexecute.wowm:215</code></a>.</p>
+<pre><code class="language-rust ignore">enum SpellEffect : u32 {
+    NONE = 0;
+    INSTAKILL = 1;
+    SCHOOL_DAMAGE = 2;
+    DUMMY = 3;
+    PORTAL_TELEPORT = 4;
+    TELEPORT_UNITS = 5;
+    APPLY_AURA = 6;
+    ENVIRONMENTAL_DAMAGE = 7;
+    POWER_DRAIN = 8;
+    HEALTH_LEECH = 9;
+    HEAL = 10;
+    BIND = 11;
+    PORTAL = 12;
+    RITUAL_BASE = 13;
+    RITUAL_SPECIALIZE = 14;
+    RITUAL_ACTIVATE_PORTAL = 15;
+    QUEST_COMPLETE = 16;
+    WEAPON_DAMAGE_NOSCHOOL = 17;
+    RESURRECT = 18;
+    ADD_EXTRA_ATTACKS = 19;
+    DODGE = 20;
+    EVADE = 21;
+    PARRY = 22;
+    BLOCK = 23;
+    CREATE_ITEM = 24;
+    WEAPON = 25;
+    DEFENSE = 26;
+    PERSISTENT_AREA_AURA = 27;
+    SUMMON = 28;
+    LEAP = 29;
+    ENERGIZE = 30;
+    WEAPON_PERCENT_DAMAGE = 31;
+    TRIGGER_MISSILE = 32;
+    OPEN_LOCK = 33;
+    SUMMON_CHANGE_ITEM = 34;
+    APPLY_AREA_AURA_PARTY = 35;
+    LEARN_SPELL = 36;
+    SPELL_DEFENSE = 37;
+    DISPEL = 38;
+    LANGUAGE = 39;
+    DUAL_WIELD = 40;
+    UNKNOWN41 = 41;
+    UNKNOWN42 = 42;
+    TELEPORT_UNITS_FACE_CASTER = 43;
+    SKILL_STEP = 44;
+    UNDEFINED_45 = 45;
+    SPAWN = 46;
+    TRADE_SKILL = 47;
+    STEALTH = 48;
+    DETECT = 49;
+    TRANS_DOOR = 50;
+    FORCE_CRITICAL_HIT = 51;
+    GUARANTEE_HIT = 52;
+    ENCHANT_ITEM = 53;
+    ENCHANT_ITEM_TEMPORARY = 54;
+    TAMECREATURE = 55;
+    SUMMON_PET = 56;
+    LEARN_PET_SPELL = 57;
+    WEAPON_DAMAGE = 58;
+    OPEN_LOCK_ITEM = 59;
+    PROFICIENCY = 60;
+    SEND_EVENT = 61;
+    POWER_BURN = 62;
+    THREAT = 63;
+    TRIGGER_SPELL = 64;
+    HEALTH_FUNNEL = 65;
+    POWER_FUNNEL = 66;
+    HEAL_MAX_HEALTH = 67;
+    INTERRUPT_CAST = 68;
+    DISTRACT = 69;
+    PULL = 70;
+    PICKPOCKET = 71;
+    ADD_FARSIGHT = 72;
+    UNKNOWN73 = 73;
+    UNKNOWN74 = 74;
+    HEAL_MECHANICAL = 75;
+    SUMMON_OBJECT_WILD = 76;
+    SCRIPT_EFFECT = 77;
+    ATTACK = 78;
+    SANCTUARY = 79;
+    ADD_COMBO_POINTS = 80;
+    CREATE_HOUSE = 81;
+    BIND_SIGHT = 82;
+    DUEL = 83;
+    STUCK = 84;
+    SUMMON_PLAYER = 85;
+    ACTIVATE_OBJECT = 86;
+    UNKNOWN87 = 87;
+    UNKNOWN88 = 88;
+    UNKNOWN89 = 89;
+    UNKNOWN90 = 90;
+    THREAT_ALL = 91;
+    ENCHANT_HELD_ITEM = 92;
+    UNKNOWN93 = 93;
+    SELF_RESURRECT = 94;
+    SKINNING = 95;
+    CHARGE = 96;
+    UNKNOWN97 = 97;
+    KNOCK_BACK = 98;
+    DISENCHANT = 99;
+    INEBRIATE = 100;
+    FEED_PET = 101;
+    DISMISS_PET = 102;
+    REPUTATION = 103;
+    SUMMON_OBJECT_SLOT1 = 104;
+    SUMMON_OBJECT_SLOT2 = 105;
+    SUMMON_OBJECT_SLOT3 = 106;
+    SUMMON_OBJECT_SLOT4 = 107;
+    DISPEL_MECHANIC = 108;
+    SUMMON_DEAD_PET = 109;
+    DESTROY_ALL_TOTEMS = 110;
+    DURABILITY_DAMAGE = 111;
+    UNKNOWN112 = 112;
+    RESURRECT_NEW = 113;
+    ATTACK_ME = 114;
+    DURABILITY_DAMAGE_PCT = 115;
+    SKIN_PLAYER_CORPSE = 116;
+    SPIRIT_HEAL = 117;
+    SKILL = 118;
+    APPLY_AREA_AURA_PET = 119;
+    TELEPORT_GRAVEYARD = 120;
+    NORMALIZED_WEAPON_DMG = 121;
+    UNKNOWN122 = 122;
+    SEND_TAXI = 123;
+    PLAYER_PULL = 124;
+    MODIFY_THREAT_PERCENT = 125;
+    STEAL_BENEFICIAL_BUFF = 126;
+    PROSPECTING = 127;
+    APPLY_AREA_AURA_FRIEND = 128;
+    APPLY_AREA_AURA_ENEMY = 129;
+    REDIRECT_THREAT = 130;
+    PLAY_SOUND = 131;
+    PLAY_MUSIC = 132;
+    UNLEARN_SPECIALIZATION = 133;
+    KILL_CREDIT_GROUP = 134;
+    CALL_PET = 135;
+    HEAL_PCT = 136;
+    ENERGIZE_PCT = 137;
+    LEAP_BACK = 138;
+    CLEAR_QUEST = 139;
+    FORCE_CAST = 140;
+    UNKNOWN141 = 141;
+    TRIGGER_SPELL_WITH_VALUE = 142;
+    APPLY_AREA_AURA_OWNER = 143;
+    KNOCKBACK_FROM_POSITION = 144;
+    UNKNOWN145 = 145;
+    UNKNOWN146 = 146;
+    QUEST_FAIL = 147;
+    UNKNOWN148 = 148;
+    CHARGE2 = 149;
+    UNKNOWN150 = 150;
+    TRIGGER_SPELL_2 = 151;
+    UNKNOWN152 = 152;
+    UNKNOWN153 = 153;
+}</code></pre>
+<h3 id="type-1"><a class="header" href="#type-1">Type</a></h3>
+<p>The basic type is <code>u32</code>, a 4 byte (32 bit) little endian integer.</p>
+<h3 id="enumerators-1"><a class="header" href="#enumerators-1">Enumerators</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Enumerator</th><th>Value</th><th>Comment</th></tr>
+</thead>
+<tbody>
+<tr><td><code>NONE</code></td><td>0 (0x00)</td><td></td></tr>
+<tr><td><code>INSTAKILL</code></td><td>1 (0x01)</td><td></td></tr>
+<tr><td><code>SCHOOL_DAMAGE</code></td><td>2 (0x02)</td><td></td></tr>
+<tr><td><code>DUMMY</code></td><td>3 (0x03)</td><td></td></tr>
+<tr><td><code>PORTAL_TELEPORT</code></td><td>4 (0x04)</td><td></td></tr>
+<tr><td><code>TELEPORT_UNITS</code></td><td>5 (0x05)</td><td></td></tr>
+<tr><td><code>APPLY_AURA</code></td><td>6 (0x06)</td><td></td></tr>
+<tr><td><code>ENVIRONMENTAL_DAMAGE</code></td><td>7 (0x07)</td><td></td></tr>
+<tr><td><code>POWER_DRAIN</code></td><td>8 (0x08)</td><td></td></tr>
+<tr><td><code>HEALTH_LEECH</code></td><td>9 (0x09)</td><td></td></tr>
+<tr><td><code>HEAL</code></td><td>10 (0x0A)</td><td></td></tr>
+<tr><td><code>BIND</code></td><td>11 (0x0B)</td><td></td></tr>
+<tr><td><code>PORTAL</code></td><td>12 (0x0C)</td><td></td></tr>
+<tr><td><code>RITUAL_BASE</code></td><td>13 (0x0D)</td><td></td></tr>
+<tr><td><code>RITUAL_SPECIALIZE</code></td><td>14 (0x0E)</td><td></td></tr>
+<tr><td><code>RITUAL_ACTIVATE_PORTAL</code></td><td>15 (0x0F)</td><td></td></tr>
+<tr><td><code>QUEST_COMPLETE</code></td><td>16 (0x10)</td><td></td></tr>
+<tr><td><code>WEAPON_DAMAGE_NOSCHOOL</code></td><td>17 (0x11)</td><td></td></tr>
+<tr><td><code>RESURRECT</code></td><td>18 (0x12)</td><td></td></tr>
+<tr><td><code>ADD_EXTRA_ATTACKS</code></td><td>19 (0x13)</td><td></td></tr>
+<tr><td><code>DODGE</code></td><td>20 (0x14)</td><td></td></tr>
+<tr><td><code>EVADE</code></td><td>21 (0x15)</td><td></td></tr>
+<tr><td><code>PARRY</code></td><td>22 (0x16)</td><td></td></tr>
+<tr><td><code>BLOCK</code></td><td>23 (0x17)</td><td></td></tr>
+<tr><td><code>CREATE_ITEM</code></td><td>24 (0x18)</td><td></td></tr>
+<tr><td><code>WEAPON</code></td><td>25 (0x19)</td><td></td></tr>
+<tr><td><code>DEFENSE</code></td><td>26 (0x1A)</td><td></td></tr>
+<tr><td><code>PERSISTENT_AREA_AURA</code></td><td>27 (0x1B)</td><td></td></tr>
+<tr><td><code>SUMMON</code></td><td>28 (0x1C)</td><td></td></tr>
+<tr><td><code>LEAP</code></td><td>29 (0x1D)</td><td></td></tr>
+<tr><td><code>ENERGIZE</code></td><td>30 (0x1E)</td><td></td></tr>
+<tr><td><code>WEAPON_PERCENT_DAMAGE</code></td><td>31 (0x1F)</td><td></td></tr>
+<tr><td><code>TRIGGER_MISSILE</code></td><td>32 (0x20)</td><td></td></tr>
+<tr><td><code>OPEN_LOCK</code></td><td>33 (0x21)</td><td></td></tr>
+<tr><td><code>SUMMON_CHANGE_ITEM</code></td><td>34 (0x22)</td><td></td></tr>
+<tr><td><code>APPLY_AREA_AURA_PARTY</code></td><td>35 (0x23)</td><td></td></tr>
+<tr><td><code>LEARN_SPELL</code></td><td>36 (0x24)</td><td></td></tr>
+<tr><td><code>SPELL_DEFENSE</code></td><td>37 (0x25)</td><td></td></tr>
+<tr><td><code>DISPEL</code></td><td>38 (0x26)</td><td></td></tr>
+<tr><td><code>LANGUAGE</code></td><td>39 (0x27)</td><td></td></tr>
+<tr><td><code>DUAL_WIELD</code></td><td>40 (0x28)</td><td></td></tr>
+<tr><td><code>UNKNOWN41</code></td><td>41 (0x29)</td><td>old SPELL_EFFECT_SUMMON_WILD</td></tr>
+<tr><td><code>UNKNOWN42</code></td><td>42 (0x2A)</td><td>old SPELL_EFFECT_SUMMON_GUARDIAN</td></tr>
+<tr><td><code>TELEPORT_UNITS_FACE_CASTER</code></td><td>43 (0x2B)</td><td></td></tr>
+<tr><td><code>SKILL_STEP</code></td><td>44 (0x2C)</td><td></td></tr>
+<tr><td><code>UNDEFINED_45</code></td><td>45 (0x2D)</td><td></td></tr>
+<tr><td><code>SPAWN</code></td><td>46 (0x2E)</td><td></td></tr>
+<tr><td><code>TRADE_SKILL</code></td><td>47 (0x2F)</td><td></td></tr>
+<tr><td><code>STEALTH</code></td><td>48 (0x30)</td><td></td></tr>
+<tr><td><code>DETECT</code></td><td>49 (0x31)</td><td></td></tr>
+<tr><td><code>TRANS_DOOR</code></td><td>50 (0x32)</td><td></td></tr>
+<tr><td><code>FORCE_CRITICAL_HIT</code></td><td>51 (0x33)</td><td></td></tr>
+<tr><td><code>GUARANTEE_HIT</code></td><td>52 (0x34)</td><td></td></tr>
+<tr><td><code>ENCHANT_ITEM</code></td><td>53 (0x35)</td><td></td></tr>
+<tr><td><code>ENCHANT_ITEM_TEMPORARY</code></td><td>54 (0x36)</td><td></td></tr>
+<tr><td><code>TAMECREATURE</code></td><td>55 (0x37)</td><td></td></tr>
+<tr><td><code>SUMMON_PET</code></td><td>56 (0x38)</td><td></td></tr>
+<tr><td><code>LEARN_PET_SPELL</code></td><td>57 (0x39)</td><td></td></tr>
+<tr><td><code>WEAPON_DAMAGE</code></td><td>58 (0x3A)</td><td></td></tr>
+<tr><td><code>OPEN_LOCK_ITEM</code></td><td>59 (0x3B)</td><td></td></tr>
+<tr><td><code>PROFICIENCY</code></td><td>60 (0x3C)</td><td></td></tr>
+<tr><td><code>SEND_EVENT</code></td><td>61 (0x3D)</td><td></td></tr>
+<tr><td><code>POWER_BURN</code></td><td>62 (0x3E)</td><td></td></tr>
+<tr><td><code>THREAT</code></td><td>63 (0x3F)</td><td></td></tr>
+<tr><td><code>TRIGGER_SPELL</code></td><td>64 (0x40)</td><td></td></tr>
+<tr><td><code>HEALTH_FUNNEL</code></td><td>65 (0x41)</td><td></td></tr>
+<tr><td><code>POWER_FUNNEL</code></td><td>66 (0x42)</td><td></td></tr>
+<tr><td><code>HEAL_MAX_HEALTH</code></td><td>67 (0x43)</td><td></td></tr>
+<tr><td><code>INTERRUPT_CAST</code></td><td>68 (0x44)</td><td></td></tr>
+<tr><td><code>DISTRACT</code></td><td>69 (0x45)</td><td></td></tr>
+<tr><td><code>PULL</code></td><td>70 (0x46)</td><td></td></tr>
+<tr><td><code>PICKPOCKET</code></td><td>71 (0x47)</td><td></td></tr>
+<tr><td><code>ADD_FARSIGHT</code></td><td>72 (0x48)</td><td></td></tr>
+<tr><td><code>UNKNOWN73</code></td><td>73 (0x49)</td><td>old SPELL_EFFECT_SUMMON_POSSESSED</td></tr>
+<tr><td><code>UNKNOWN74</code></td><td>74 (0x4A)</td><td>old SPELL_EFFECT_SUMMON_TOTEM</td></tr>
+<tr><td><code>HEAL_MECHANICAL</code></td><td>75 (0x4B)</td><td></td></tr>
+<tr><td><code>SUMMON_OBJECT_WILD</code></td><td>76 (0x4C)</td><td></td></tr>
+<tr><td><code>SCRIPT_EFFECT</code></td><td>77 (0x4D)</td><td></td></tr>
+<tr><td><code>ATTACK</code></td><td>78 (0x4E)</td><td></td></tr>
+<tr><td><code>SANCTUARY</code></td><td>79 (0x4F)</td><td></td></tr>
+<tr><td><code>ADD_COMBO_POINTS</code></td><td>80 (0x50)</td><td></td></tr>
+<tr><td><code>CREATE_HOUSE</code></td><td>81 (0x51)</td><td></td></tr>
+<tr><td><code>BIND_SIGHT</code></td><td>82 (0x52)</td><td></td></tr>
+<tr><td><code>DUEL</code></td><td>83 (0x53)</td><td></td></tr>
+<tr><td><code>STUCK</code></td><td>84 (0x54)</td><td></td></tr>
+<tr><td><code>SUMMON_PLAYER</code></td><td>85 (0x55)</td><td></td></tr>
+<tr><td><code>ACTIVATE_OBJECT</code></td><td>86 (0x56)</td><td></td></tr>
+<tr><td><code>UNKNOWN87</code></td><td>87 (0x57)</td><td>old SPELL_EFFECT_SUMMON_TOTEM_SLOT1</td></tr>
+<tr><td><code>UNKNOWN88</code></td><td>88 (0x58)</td><td>old SPELL_EFFECT_SUMMON_TOTEM_SLOT2</td></tr>
+<tr><td><code>UNKNOWN89</code></td><td>89 (0x59)</td><td>old SPELL_EFFECT_SUMMON_TOTEM_SLOT3</td></tr>
+<tr><td><code>UNKNOWN90</code></td><td>90 (0x5A)</td><td>old SPELL_EFFECT_SUMMON_TOTEM_SLOT4</td></tr>
+<tr><td><code>THREAT_ALL</code></td><td>91 (0x5B)</td><td></td></tr>
+<tr><td><code>ENCHANT_HELD_ITEM</code></td><td>92 (0x5C)</td><td></td></tr>
+<tr><td><code>UNKNOWN93</code></td><td>93 (0x5D)</td><td>old SPELL_EFFECT_SUMMON_PHANTASM</td></tr>
+<tr><td><code>SELF_RESURRECT</code></td><td>94 (0x5E)</td><td></td></tr>
+<tr><td><code>SKINNING</code></td><td>95 (0x5F)</td><td></td></tr>
+<tr><td><code>CHARGE</code></td><td>96 (0x60)</td><td></td></tr>
+<tr><td><code>UNKNOWN97</code></td><td>97 (0x61)</td><td>old SPELL_EFFECT_SUMMON_CRITTER</td></tr>
+<tr><td><code>KNOCK_BACK</code></td><td>98 (0x62)</td><td></td></tr>
+<tr><td><code>DISENCHANT</code></td><td>99 (0x63)</td><td></td></tr>
+<tr><td><code>INEBRIATE</code></td><td>100 (0x64)</td><td></td></tr>
+<tr><td><code>FEED_PET</code></td><td>101 (0x65)</td><td></td></tr>
+<tr><td><code>DISMISS_PET</code></td><td>102 (0x66)</td><td></td></tr>
+<tr><td><code>REPUTATION</code></td><td>103 (0x67)</td><td></td></tr>
+<tr><td><code>SUMMON_OBJECT_SLOT1</code></td><td>104 (0x68)</td><td></td></tr>
+<tr><td><code>SUMMON_OBJECT_SLOT2</code></td><td>105 (0x69)</td><td></td></tr>
+<tr><td><code>SUMMON_OBJECT_SLOT3</code></td><td>106 (0x6A)</td><td></td></tr>
+<tr><td><code>SUMMON_OBJECT_SLOT4</code></td><td>107 (0x6B)</td><td></td></tr>
+<tr><td><code>DISPEL_MECHANIC</code></td><td>108 (0x6C)</td><td></td></tr>
+<tr><td><code>SUMMON_DEAD_PET</code></td><td>109 (0x6D)</td><td></td></tr>
+<tr><td><code>DESTROY_ALL_TOTEMS</code></td><td>110 (0x6E)</td><td></td></tr>
+<tr><td><code>DURABILITY_DAMAGE</code></td><td>111 (0x6F)</td><td></td></tr>
+<tr><td><code>UNKNOWN112</code></td><td>112 (0x70)</td><td>old SPELL_EFFECT_SUMMON_DEMON</td></tr>
+<tr><td><code>RESURRECT_NEW</code></td><td>113 (0x71)</td><td></td></tr>
+<tr><td><code>ATTACK_ME</code></td><td>114 (0x72)</td><td></td></tr>
+<tr><td><code>DURABILITY_DAMAGE_PCT</code></td><td>115 (0x73)</td><td></td></tr>
+<tr><td><code>SKIN_PLAYER_CORPSE</code></td><td>116 (0x74)</td><td></td></tr>
+<tr><td><code>SPIRIT_HEAL</code></td><td>117 (0x75)</td><td></td></tr>
+<tr><td><code>SKILL</code></td><td>118 (0x76)</td><td></td></tr>
+<tr><td><code>APPLY_AREA_AURA_PET</code></td><td>119 (0x77)</td><td></td></tr>
+<tr><td><code>TELEPORT_GRAVEYARD</code></td><td>120 (0x78)</td><td></td></tr>
+<tr><td><code>NORMALIZED_WEAPON_DMG</code></td><td>121 (0x79)</td><td></td></tr>
+<tr><td><code>UNKNOWN122</code></td><td>122 (0x7A)</td><td></td></tr>
+<tr><td><code>SEND_TAXI</code></td><td>123 (0x7B)</td><td></td></tr>
+<tr><td><code>PLAYER_PULL</code></td><td>124 (0x7C)</td><td></td></tr>
+<tr><td><code>MODIFY_THREAT_PERCENT</code></td><td>125 (0x7D)</td><td></td></tr>
+<tr><td><code>STEAL_BENEFICIAL_BUFF</code></td><td>126 (0x7E)</td><td></td></tr>
+<tr><td><code>PROSPECTING</code></td><td>127 (0x7F)</td><td></td></tr>
+<tr><td><code>APPLY_AREA_AURA_FRIEND</code></td><td>128 (0x80)</td><td></td></tr>
+<tr><td><code>APPLY_AREA_AURA_ENEMY</code></td><td>129 (0x81)</td><td></td></tr>
+<tr><td><code>REDIRECT_THREAT</code></td><td>130 (0x82)</td><td></td></tr>
+<tr><td><code>PLAY_SOUND</code></td><td>131 (0x83)</td><td></td></tr>
+<tr><td><code>PLAY_MUSIC</code></td><td>132 (0x84)</td><td></td></tr>
+<tr><td><code>UNLEARN_SPECIALIZATION</code></td><td>133 (0x85)</td><td></td></tr>
+<tr><td><code>KILL_CREDIT_GROUP</code></td><td>134 (0x86)</td><td></td></tr>
+<tr><td><code>CALL_PET</code></td><td>135 (0x87)</td><td></td></tr>
+<tr><td><code>HEAL_PCT</code></td><td>136 (0x88)</td><td></td></tr>
+<tr><td><code>ENERGIZE_PCT</code></td><td>137 (0x89)</td><td></td></tr>
+<tr><td><code>LEAP_BACK</code></td><td>138 (0x8A)</td><td></td></tr>
+<tr><td><code>CLEAR_QUEST</code></td><td>139 (0x8B)</td><td></td></tr>
+<tr><td><code>FORCE_CAST</code></td><td>140 (0x8C)</td><td></td></tr>
+<tr><td><code>UNKNOWN141</code></td><td>141 (0x8D)</td><td></td></tr>
+<tr><td><code>TRIGGER_SPELL_WITH_VALUE</code></td><td>142 (0x8E)</td><td></td></tr>
+<tr><td><code>APPLY_AREA_AURA_OWNER</code></td><td>143 (0x8F)</td><td></td></tr>
+<tr><td><code>KNOCKBACK_FROM_POSITION</code></td><td>144 (0x90)</td><td></td></tr>
+<tr><td><code>UNKNOWN145</code></td><td>145 (0x91)</td><td></td></tr>
+<tr><td><code>UNKNOWN146</code></td><td>146 (0x92)</td><td></td></tr>
+<tr><td><code>QUEST_FAIL</code></td><td>147 (0x93)</td><td></td></tr>
+<tr><td><code>UNKNOWN148</code></td><td>148 (0x94)</td><td></td></tr>
+<tr><td><code>CHARGE2</code></td><td>149 (0x95)</td><td></td></tr>
+<tr><td><code>UNKNOWN150</code></td><td>150 (0x96)</td><td></td></tr>
+<tr><td><code>TRIGGER_SPELL_2</code></td><td>151 (0x97)</td><td></td></tr>
+<tr><td><code>UNKNOWN152</code></td><td>152 (0x98)</td><td></td></tr>
+<tr><td><code>UNKNOWN153</code></td><td>153 (0x99)</td><td></td></tr>
+</tbody>
+</table>
+</div>
+<p>Used in:</p>
+<ul>
+<li><a href="spelllog.html">SpellLog</a></li>
+</ul>
+<h2 id="client-version-335"><a class="header" href="#client-version-335">Client Version 3.3.5</a></h2>
+<h3 id="wowm-representation-2"><a class="header" href="#wowm-representation-2">Wowm Representation</a></h3>
+<p>Autogenerated from <code>wowm</code> file at <a href="https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/spell/smsg_spelllogexecute.wowm#L431"><code>wow_message_parser/wowm/world/spell/smsg_spelllogexecute.wowm:431</code></a>.</p>
+<pre><code class="language-rust ignore">enum SpellEffect : u32 {
+    NONE = 0;
+    INSTAKILL = 1;
+    SCHOOL_DAMAGE = 2;
+    DUMMY = 3;
+    PORTAL_TELEPORT = 4;
+    TELEPORT_UNITS = 5;
+    APPLY_AURA = 6;
+    ENVIRONMENTAL_DAMAGE = 7;
+    POWER_DRAIN = 8;
+    HEALTH_LEECH = 9;
+    HEAL = 10;
+    BIND = 11;
+    PORTAL = 12;
+    RITUAL_BASE = 13;
+    RITUAL_SPECIALIZE = 14;
+    RITUAL_ACTIVATE_PORTAL = 15;
+    QUEST_COMPLETE = 16;
+    WEAPON_DAMAGE_NOSCHOOL = 17;
+    RESURRECT = 18;
+    ADD_EXTRA_ATTACKS = 19;
+    DODGE = 20;
+    EVADE = 21;
+    PARRY = 22;
+    BLOCK = 23;
+    CREATE_ITEM = 24;
+    WEAPON = 25;
+    DEFENSE = 26;
+    PERSISTENT_AREA_AURA = 27;
+    SUMMON = 28;
+    LEAP = 29;
+    ENERGIZE = 30;
+    WEAPON_PERCENT_DAMAGE = 31;
+    TRIGGER_MISSILE = 32;
+    OPEN_LOCK = 33;
+    SUMMON_CHANGE_ITEM = 34;
+    APPLY_AREA_AURA_PARTY = 35;
+    LEARN_SPELL = 36;
+    SPELL_DEFENSE = 37;
+    DISPEL = 38;
+    LANGUAGE = 39;
+    DUAL_WIELD = 40;
+    JUMP = 41;
+    JUMP2 = 42;
+    TELEPORT_UNITS_FACE_CASTER = 43;
+    SKILL_STEP = 44;
+    ADD_HONOR = 45;
+    SPAWN = 46;
+    TRADE_SKILL = 47;
+    STEALTH = 48;
+    DETECT = 49;
+    TRANS_DOOR = 50;
+    FORCE_CRITICAL_HIT = 51;
+    GUARANTEE_HIT = 52;
+    ENCHANT_ITEM = 53;
+    ENCHANT_ITEM_TEMPORARY = 54;
+    TAMECREATURE = 55;
+    SUMMON_PET = 56;
+    LEARN_PET_SPELL = 57;
+    WEAPON_DAMAGE = 58;
+    OPEN_LOCK_ITEM = 59;
+    PROFICIENCY = 60;
+    SEND_EVENT = 61;
+    POWER_BURN = 62;
+    THREAT = 63;
+    TRIGGER_SPELL = 64;
+    APPLY_AREA_AURA_RAID = 65;
+    RESTORE_ITEM_CHARGES = 66;
+    HEAL_MAX_HEALTH = 67;
+    INTERRUPT_CAST = 68;
+    DISTRACT = 69;
+    PULL = 70;
+    PICKPOCKET = 71;
+    ADD_FARSIGHT = 72;
+    UNTRAIN_TALENTS = 73;
+    APPLY_GLYPH = 74;
+    HEAL_MECHANICAL = 75;
+    SUMMON_OBJECT_WILD = 76;
+    SCRIPT_EFFECT = 77;
+    ATTACK = 78;
+    SANCTUARY = 79;
+    ADD_COMBO_POINTS = 80;
+    CREATE_HOUSE = 81;
+    BIND_SIGHT = 82;
+    DUEL = 83;
+    STUCK = 84;
+    SUMMON_PLAYER = 85;
+    ACTIVATE_OBJECT = 86;
+    WMO_DAMAGE = 87;
+    WMO_REPAIR = 88;
+    WMO_CHANGE = 89;
+    KILL_CREDIT_PERSONAL = 90;
+    THREAT_ALL = 91;
+    ENCHANT_HELD_ITEM = 92;
+    BREAK_PLAYER_TARGETING = 93;
+    SELF_RESURRECT = 94;
+    SKINNING = 95;
+    CHARGE = 96;
+    SUMMON_ALL_TOTEMS = 97;
+    KNOCK_BACK = 98;
+    DISENCHANT = 99;
+    INEBRIATE = 100;
+    FEED_PET = 101;
+    DISMISS_PET = 102;
+    REPUTATION = 103;
+    SUMMON_OBJECT_SLOT1 = 104;
+    SUMMON_OBJECT_SLOT2 = 105;
+    SUMMON_OBJECT_SLOT3 = 106;
+    SUMMON_OBJECT_SLOT4 = 107;
+    DISPEL_MECHANIC = 108;
+    SUMMON_DEAD_PET = 109;
+    DESTROY_ALL_TOTEMS = 110;
+    DURABILITY_DAMAGE = 111;
+    UNKNOWN112 = 112;
+    RESURRECT_NEW = 113;
+    ATTACK_ME = 114;
+    DURABILITY_DAMAGE_PCT = 115;
+    SKIN_PLAYER_CORPSE = 116;
+    SPIRIT_HEAL = 117;
+    SKILL = 118;
+    APPLY_AREA_AURA_PET = 119;
+    TELEPORT_GRAVEYARD = 120;
+    NORMALIZED_WEAPON_DMG = 121;
+    UNKNOWN122 = 122;
+    SEND_TAXI = 123;
+    PLAYER_PULL = 124;
+    MODIFY_THREAT_PERCENT = 125;
+    STEAL_BENEFICIAL_BUFF = 126;
+    PROSPECTING = 127;
+    APPLY_AREA_AURA_FRIEND = 128;
+    APPLY_AREA_AURA_ENEMY = 129;
+    REDIRECT_THREAT = 130;
+    PLAY_SOUND = 131;
+    PLAY_MUSIC = 132;
+    UNLEARN_SPECIALIZATION = 133;
+    KILL_CREDIT_GROUP = 134;
+    CALL_PET = 135;
+    HEAL_PCT = 136;
+    ENERGIZE_PCT = 137;
+    LEAP_BACK = 138;
+    CLEAR_QUEST = 139;
+    FORCE_CAST = 140;
+    FORCE_CAST_WITH_VALUE = 141;
+    TRIGGER_SPELL_WITH_VALUE = 142;
+    APPLY_AREA_AURA_OWNER = 143;
+    KNOCKBACK_FROM_POSITION = 144;
+    GRAVITY_PULL = 145;
+    ACTIVATE_RUNE = 146;
+    QUEST_FAIL = 147;
+    UNKNOWN148 = 148;
+    CHARGE2 = 149;
+    QUEST_OFFER = 150;
+    TRIGGER_SPELL_2 = 151;
+    UNKNOWN152 = 152;
+    CREATE_PET = 153;
+    TEACH_TAXI_NODE = 154;
+    TITAN_GRIP = 155;
+    ENCHANT_ITEM_PRISMATIC = 156;
+    CREATE_ITEM2 = 157;
+    MILLING = 158;
+    ALLOW_RENAME_PET = 159;
+    UNKNOWN160 = 160;
+    TALENT_SPEC_COUNT = 161;
+    TALENT_SPEC_SELECT = 162;
+    UNKNOWN163 = 163;
+    CANCEL_AURA = 164;
+}</code></pre>
+<h3 id="type-2"><a class="header" href="#type-2">Type</a></h3>
+<p>The basic type is <code>u32</code>, a 4 byte (32 bit) little endian integer.</p>
+<h3 id="enumerators-2"><a class="header" href="#enumerators-2">Enumerators</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Enumerator</th><th>Value</th><th>Comment</th></tr>
+</thead>
+<tbody>
+<tr><td><code>NONE</code></td><td>0 (0x00)</td><td></td></tr>
+<tr><td><code>INSTAKILL</code></td><td>1 (0x01)</td><td></td></tr>
+<tr><td><code>SCHOOL_DAMAGE</code></td><td>2 (0x02)</td><td></td></tr>
+<tr><td><code>DUMMY</code></td><td>3 (0x03)</td><td></td></tr>
+<tr><td><code>PORTAL_TELEPORT</code></td><td>4 (0x04)</td><td></td></tr>
+<tr><td><code>TELEPORT_UNITS</code></td><td>5 (0x05)</td><td></td></tr>
+<tr><td><code>APPLY_AURA</code></td><td>6 (0x06)</td><td></td></tr>
+<tr><td><code>ENVIRONMENTAL_DAMAGE</code></td><td>7 (0x07)</td><td></td></tr>
+<tr><td><code>POWER_DRAIN</code></td><td>8 (0x08)</td><td></td></tr>
+<tr><td><code>HEALTH_LEECH</code></td><td>9 (0x09)</td><td></td></tr>
+<tr><td><code>HEAL</code></td><td>10 (0x0A)</td><td></td></tr>
+<tr><td><code>BIND</code></td><td>11 (0x0B)</td><td></td></tr>
+<tr><td><code>PORTAL</code></td><td>12 (0x0C)</td><td></td></tr>
+<tr><td><code>RITUAL_BASE</code></td><td>13 (0x0D)</td><td></td></tr>
+<tr><td><code>RITUAL_SPECIALIZE</code></td><td>14 (0x0E)</td><td></td></tr>
+<tr><td><code>RITUAL_ACTIVATE_PORTAL</code></td><td>15 (0x0F)</td><td></td></tr>
+<tr><td><code>QUEST_COMPLETE</code></td><td>16 (0x10)</td><td></td></tr>
+<tr><td><code>WEAPON_DAMAGE_NOSCHOOL</code></td><td>17 (0x11)</td><td></td></tr>
+<tr><td><code>RESURRECT</code></td><td>18 (0x12)</td><td></td></tr>
+<tr><td><code>ADD_EXTRA_ATTACKS</code></td><td>19 (0x13)</td><td></td></tr>
+<tr><td><code>DODGE</code></td><td>20 (0x14)</td><td></td></tr>
+<tr><td><code>EVADE</code></td><td>21 (0x15)</td><td></td></tr>
+<tr><td><code>PARRY</code></td><td>22 (0x16)</td><td></td></tr>
+<tr><td><code>BLOCK</code></td><td>23 (0x17)</td><td></td></tr>
+<tr><td><code>CREATE_ITEM</code></td><td>24 (0x18)</td><td></td></tr>
+<tr><td><code>WEAPON</code></td><td>25 (0x19)</td><td></td></tr>
+<tr><td><code>DEFENSE</code></td><td>26 (0x1A)</td><td></td></tr>
+<tr><td><code>PERSISTENT_AREA_AURA</code></td><td>27 (0x1B)</td><td></td></tr>
+<tr><td><code>SUMMON</code></td><td>28 (0x1C)</td><td></td></tr>
+<tr><td><code>LEAP</code></td><td>29 (0x1D)</td><td></td></tr>
+<tr><td><code>ENERGIZE</code></td><td>30 (0x1E)</td><td></td></tr>
+<tr><td><code>WEAPON_PERCENT_DAMAGE</code></td><td>31 (0x1F)</td><td></td></tr>
+<tr><td><code>TRIGGER_MISSILE</code></td><td>32 (0x20)</td><td></td></tr>
+<tr><td><code>OPEN_LOCK</code></td><td>33 (0x21)</td><td></td></tr>
+<tr><td><code>SUMMON_CHANGE_ITEM</code></td><td>34 (0x22)</td><td></td></tr>
+<tr><td><code>APPLY_AREA_AURA_PARTY</code></td><td>35 (0x23)</td><td></td></tr>
+<tr><td><code>LEARN_SPELL</code></td><td>36 (0x24)</td><td></td></tr>
+<tr><td><code>SPELL_DEFENSE</code></td><td>37 (0x25)</td><td></td></tr>
+<tr><td><code>DISPEL</code></td><td>38 (0x26)</td><td></td></tr>
+<tr><td><code>LANGUAGE</code></td><td>39 (0x27)</td><td></td></tr>
+<tr><td><code>DUAL_WIELD</code></td><td>40 (0x28)</td><td></td></tr>
+<tr><td><code>JUMP</code></td><td>41 (0x29)</td><td></td></tr>
+<tr><td><code>JUMP2</code></td><td>42 (0x2A)</td><td></td></tr>
+<tr><td><code>TELEPORT_UNITS_FACE_CASTER</code></td><td>43 (0x2B)</td><td></td></tr>
+<tr><td><code>SKILL_STEP</code></td><td>44 (0x2C)</td><td></td></tr>
+<tr><td><code>ADD_HONOR</code></td><td>45 (0x2D)</td><td></td></tr>
+<tr><td><code>SPAWN</code></td><td>46 (0x2E)</td><td></td></tr>
+<tr><td><code>TRADE_SKILL</code></td><td>47 (0x2F)</td><td></td></tr>
+<tr><td><code>STEALTH</code></td><td>48 (0x30)</td><td></td></tr>
+<tr><td><code>DETECT</code></td><td>49 (0x31)</td><td></td></tr>
+<tr><td><code>TRANS_DOOR</code></td><td>50 (0x32)</td><td></td></tr>
+<tr><td><code>FORCE_CRITICAL_HIT</code></td><td>51 (0x33)</td><td></td></tr>
+<tr><td><code>GUARANTEE_HIT</code></td><td>52 (0x34)</td><td></td></tr>
+<tr><td><code>ENCHANT_ITEM</code></td><td>53 (0x35)</td><td></td></tr>
+<tr><td><code>ENCHANT_ITEM_TEMPORARY</code></td><td>54 (0x36)</td><td></td></tr>
+<tr><td><code>TAMECREATURE</code></td><td>55 (0x37)</td><td></td></tr>
+<tr><td><code>SUMMON_PET</code></td><td>56 (0x38)</td><td></td></tr>
+<tr><td><code>LEARN_PET_SPELL</code></td><td>57 (0x39)</td><td></td></tr>
+<tr><td><code>WEAPON_DAMAGE</code></td><td>58 (0x3A)</td><td></td></tr>
+<tr><td><code>OPEN_LOCK_ITEM</code></td><td>59 (0x3B)</td><td></td></tr>
+<tr><td><code>PROFICIENCY</code></td><td>60 (0x3C)</td><td></td></tr>
+<tr><td><code>SEND_EVENT</code></td><td>61 (0x3D)</td><td></td></tr>
+<tr><td><code>POWER_BURN</code></td><td>62 (0x3E)</td><td></td></tr>
+<tr><td><code>THREAT</code></td><td>63 (0x3F)</td><td></td></tr>
+<tr><td><code>TRIGGER_SPELL</code></td><td>64 (0x40)</td><td></td></tr>
+<tr><td><code>APPLY_AREA_AURA_RAID</code></td><td>65 (0x41)</td><td></td></tr>
+<tr><td><code>RESTORE_ITEM_CHARGES</code></td><td>66 (0x42)</td><td></td></tr>
+<tr><td><code>HEAL_MAX_HEALTH</code></td><td>67 (0x43)</td><td></td></tr>
+<tr><td><code>INTERRUPT_CAST</code></td><td>68 (0x44)</td><td></td></tr>
+<tr><td><code>DISTRACT</code></td><td>69 (0x45)</td><td></td></tr>
+<tr><td><code>PULL</code></td><td>70 (0x46)</td><td></td></tr>
+<tr><td><code>PICKPOCKET</code></td><td>71 (0x47)</td><td></td></tr>
+<tr><td><code>ADD_FARSIGHT</code></td><td>72 (0x48)</td><td></td></tr>
+<tr><td><code>UNTRAIN_TALENTS</code></td><td>73 (0x49)</td><td></td></tr>
+<tr><td><code>APPLY_GLYPH</code></td><td>74 (0x4A)</td><td></td></tr>
+<tr><td><code>HEAL_MECHANICAL</code></td><td>75 (0x4B)</td><td></td></tr>
+<tr><td><code>SUMMON_OBJECT_WILD</code></td><td>76 (0x4C)</td><td></td></tr>
+<tr><td><code>SCRIPT_EFFECT</code></td><td>77 (0x4D)</td><td></td></tr>
+<tr><td><code>ATTACK</code></td><td>78 (0x4E)</td><td></td></tr>
+<tr><td><code>SANCTUARY</code></td><td>79 (0x4F)</td><td></td></tr>
+<tr><td><code>ADD_COMBO_POINTS</code></td><td>80 (0x50)</td><td></td></tr>
+<tr><td><code>CREATE_HOUSE</code></td><td>81 (0x51)</td><td></td></tr>
+<tr><td><code>BIND_SIGHT</code></td><td>82 (0x52)</td><td></td></tr>
+<tr><td><code>DUEL</code></td><td>83 (0x53)</td><td></td></tr>
+<tr><td><code>STUCK</code></td><td>84 (0x54)</td><td></td></tr>
+<tr><td><code>SUMMON_PLAYER</code></td><td>85 (0x55)</td><td></td></tr>
+<tr><td><code>ACTIVATE_OBJECT</code></td><td>86 (0x56)</td><td></td></tr>
+<tr><td><code>WMO_DAMAGE</code></td><td>87 (0x57)</td><td></td></tr>
+<tr><td><code>WMO_REPAIR</code></td><td>88 (0x58)</td><td></td></tr>
+<tr><td><code>WMO_CHANGE</code></td><td>89 (0x59)</td><td></td></tr>
+<tr><td><code>KILL_CREDIT_PERSONAL</code></td><td>90 (0x5A)</td><td></td></tr>
+<tr><td><code>THREAT_ALL</code></td><td>91 (0x5B)</td><td></td></tr>
+<tr><td><code>ENCHANT_HELD_ITEM</code></td><td>92 (0x5C)</td><td></td></tr>
+<tr><td><code>BREAK_PLAYER_TARGETING</code></td><td>93 (0x5D)</td><td></td></tr>
+<tr><td><code>SELF_RESURRECT</code></td><td>94 (0x5E)</td><td></td></tr>
+<tr><td><code>SKINNING</code></td><td>95 (0x5F)</td><td></td></tr>
+<tr><td><code>CHARGE</code></td><td>96 (0x60)</td><td></td></tr>
+<tr><td><code>SUMMON_ALL_TOTEMS</code></td><td>97 (0x61)</td><td></td></tr>
+<tr><td><code>KNOCK_BACK</code></td><td>98 (0x62)</td><td></td></tr>
+<tr><td><code>DISENCHANT</code></td><td>99 (0x63)</td><td></td></tr>
+<tr><td><code>INEBRIATE</code></td><td>100 (0x64)</td><td></td></tr>
+<tr><td><code>FEED_PET</code></td><td>101 (0x65)</td><td></td></tr>
+<tr><td><code>DISMISS_PET</code></td><td>102 (0x66)</td><td></td></tr>
+<tr><td><code>REPUTATION</code></td><td>103 (0x67)</td><td></td></tr>
+<tr><td><code>SUMMON_OBJECT_SLOT1</code></td><td>104 (0x68)</td><td></td></tr>
+<tr><td><code>SUMMON_OBJECT_SLOT2</code></td><td>105 (0x69)</td><td></td></tr>
+<tr><td><code>SUMMON_OBJECT_SLOT3</code></td><td>106 (0x6A)</td><td></td></tr>
+<tr><td><code>SUMMON_OBJECT_SLOT4</code></td><td>107 (0x6B)</td><td></td></tr>
+<tr><td><code>DISPEL_MECHANIC</code></td><td>108 (0x6C)</td><td></td></tr>
+<tr><td><code>SUMMON_DEAD_PET</code></td><td>109 (0x6D)</td><td></td></tr>
+<tr><td><code>DESTROY_ALL_TOTEMS</code></td><td>110 (0x6E)</td><td></td></tr>
+<tr><td><code>DURABILITY_DAMAGE</code></td><td>111 (0x6F)</td><td></td></tr>
+<tr><td><code>UNKNOWN112</code></td><td>112 (0x70)</td><td>old SPELL_EFFECT_SUMMON_DEMON</td></tr>
+<tr><td><code>RESURRECT_NEW</code></td><td>113 (0x71)</td><td></td></tr>
+<tr><td><code>ATTACK_ME</code></td><td>114 (0x72)</td><td></td></tr>
+<tr><td><code>DURABILITY_DAMAGE_PCT</code></td><td>115 (0x73)</td><td></td></tr>
+<tr><td><code>SKIN_PLAYER_CORPSE</code></td><td>116 (0x74)</td><td></td></tr>
+<tr><td><code>SPIRIT_HEAL</code></td><td>117 (0x75)</td><td></td></tr>
+<tr><td><code>SKILL</code></td><td>118 (0x76)</td><td></td></tr>
+<tr><td><code>APPLY_AREA_AURA_PET</code></td><td>119 (0x77)</td><td></td></tr>
+<tr><td><code>TELEPORT_GRAVEYARD</code></td><td>120 (0x78)</td><td></td></tr>
+<tr><td><code>NORMALIZED_WEAPON_DMG</code></td><td>121 (0x79)</td><td></td></tr>
+<tr><td><code>UNKNOWN122</code></td><td>122 (0x7A)</td><td></td></tr>
+<tr><td><code>SEND_TAXI</code></td><td>123 (0x7B)</td><td></td></tr>
+<tr><td><code>PLAYER_PULL</code></td><td>124 (0x7C)</td><td></td></tr>
+<tr><td><code>MODIFY_THREAT_PERCENT</code></td><td>125 (0x7D)</td><td></td></tr>
+<tr><td><code>STEAL_BENEFICIAL_BUFF</code></td><td>126 (0x7E)</td><td></td></tr>
+<tr><td><code>PROSPECTING</code></td><td>127 (0x7F)</td><td></td></tr>
+<tr><td><code>APPLY_AREA_AURA_FRIEND</code></td><td>128 (0x80)</td><td></td></tr>
+<tr><td><code>APPLY_AREA_AURA_ENEMY</code></td><td>129 (0x81)</td><td></td></tr>
+<tr><td><code>REDIRECT_THREAT</code></td><td>130 (0x82)</td><td></td></tr>
+<tr><td><code>PLAY_SOUND</code></td><td>131 (0x83)</td><td></td></tr>
+<tr><td><code>PLAY_MUSIC</code></td><td>132 (0x84)</td><td></td></tr>
+<tr><td><code>UNLEARN_SPECIALIZATION</code></td><td>133 (0x85)</td><td></td></tr>
+<tr><td><code>KILL_CREDIT_GROUP</code></td><td>134 (0x86)</td><td></td></tr>
+<tr><td><code>CALL_PET</code></td><td>135 (0x87)</td><td></td></tr>
+<tr><td><code>HEAL_PCT</code></td><td>136 (0x88)</td><td></td></tr>
+<tr><td><code>ENERGIZE_PCT</code></td><td>137 (0x89)</td><td></td></tr>
+<tr><td><code>LEAP_BACK</code></td><td>138 (0x8A)</td><td></td></tr>
+<tr><td><code>CLEAR_QUEST</code></td><td>139 (0x8B)</td><td></td></tr>
+<tr><td><code>FORCE_CAST</code></td><td>140 (0x8C)</td><td></td></tr>
+<tr><td><code>FORCE_CAST_WITH_VALUE</code></td><td>141 (0x8D)</td><td></td></tr>
+<tr><td><code>TRIGGER_SPELL_WITH_VALUE</code></td><td>142 (0x8E)</td><td></td></tr>
+<tr><td><code>APPLY_AREA_AURA_OWNER</code></td><td>143 (0x8F)</td><td></td></tr>
+<tr><td><code>KNOCKBACK_FROM_POSITION</code></td><td>144 (0x90)</td><td></td></tr>
+<tr><td><code>GRAVITY_PULL</code></td><td>145 (0x91)</td><td></td></tr>
+<tr><td><code>ACTIVATE_RUNE</code></td><td>146 (0x92)</td><td></td></tr>
+<tr><td><code>QUEST_FAIL</code></td><td>147 (0x93)</td><td></td></tr>
+<tr><td><code>UNKNOWN148</code></td><td>148 (0x94)</td><td></td></tr>
+<tr><td><code>CHARGE2</code></td><td>149 (0x95)</td><td></td></tr>
+<tr><td><code>QUEST_OFFER</code></td><td>150 (0x96)</td><td></td></tr>
+<tr><td><code>TRIGGER_SPELL_2</code></td><td>151 (0x97)</td><td></td></tr>
+<tr><td><code>UNKNOWN152</code></td><td>152 (0x98)</td><td></td></tr>
+<tr><td><code>CREATE_PET</code></td><td>153 (0x99)</td><td></td></tr>
+<tr><td><code>TEACH_TAXI_NODE</code></td><td>154 (0x9A)</td><td></td></tr>
+<tr><td><code>TITAN_GRIP</code></td><td>155 (0x9B)</td><td></td></tr>
+<tr><td><code>ENCHANT_ITEM_PRISMATIC</code></td><td>156 (0x9C)</td><td></td></tr>
+<tr><td><code>CREATE_ITEM2</code></td><td>157 (0x9D)</td><td></td></tr>
+<tr><td><code>MILLING</code></td><td>158 (0x9E)</td><td></td></tr>
+<tr><td><code>ALLOW_RENAME_PET</code></td><td>159 (0x9F)</td><td></td></tr>
+<tr><td><code>UNKNOWN160</code></td><td>160 (0xA0)</td><td></td></tr>
+<tr><td><code>TALENT_SPEC_COUNT</code></td><td>161 (0xA1)</td><td></td></tr>
+<tr><td><code>TALENT_SPEC_SELECT</code></td><td>162 (0xA2)</td><td></td></tr>
+<tr><td><code>UNKNOWN163</code></td><td>163 (0xA3)</td><td></td></tr>
+<tr><td><code>CANCEL_AURA</code></td><td>164 (0xA4)</td><td></td></tr>
+</tbody>
+</table>
+</div>
+<p>Used in:</p>
+<ul>
+<li><a href="spelllog.html">SpellLog</a></li>
+</ul>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../docs/spellcasttargetflags.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
+                            </a>
+
+                            <a rel="next prefetch" href="../docs/spellmissinfo.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../docs/spellcasttargetflags.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
+                    </a>
+
+                    <a rel="next prefetch" href="../docs/spellmissinfo.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+                    </a>
+            </nav>
+
+        </div>
+
+        <template id=fa-eye><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M288 32c-80.8 0-145.5 36.8-192.6 80.6C48.6 156 17.3 208 2.5 243.7c-3.3 7.9-3.3 16.7 0 24.6C17.3 304 48.6 356 95.4 399.4C142.5 443.2 207.2 480 288 480s145.5-36.8 192.6-80.6c46.8-43.5 78.1-95.4 93-131.1c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C433.5 68.8 368.8 32 288 32zM432 256c0 79.5-64.5 144-144 144s-144-64.5-144-144s64.5-144 144-144s144 64.5 144 144zM288 192c0 35.3-28.7 64-64 64c-11.5 0-22.3-3-31.6-8.4c-.2 2.8-.4 5.5-.4 8.4c0 53 43 96 96 96s96-43 96-96s-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6z"/></svg></span></template>
+        <template id=fa-eye-slash><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M38.8 5.1C28.4-3.1 13.3-1.2 5.1 9.2S-1.2 34.7 9.2 42.9l592 464c10.4 8.2 25.5 6.3 33.7-4.1s6.3-25.5-4.1-33.7L525.6 386.7c39.6-40.6 66.4-86.1 79.9-118.4c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C465.5 68.8 400.8 32 320 32c-68.2 0-125 26.3-169.3 60.8L38.8 5.1zM223.1 149.5C248.6 126.2 282.7 112 320 112c79.5 0 144 64.5 144 144c0 24.9-6.3 48.3-17.4 68.7L408 294.5c5.2-11.8 8-24.8 8-38.5c0-53-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6c0 10.2-2.4 19.8-6.6 28.3l-90.3-70.8zm223.1 298L373 389.9c-16.4 6.5-34.3 10.1-53 10.1c-79.5 0-144-64.5-144-144c0-6.9 .5-13.6 1.4-20.2L83.1 161.5C60.3 191.2 44 220.8 34.5 243.7c-3.3 7.9-3.3 16.7 0 24.6c14.9 35.7 46.2 87.7 93 131.1C174.5 443.2 239.2 480 320 480c47.8 0 89.9-12.9 126.2-32.5z"/></svg></span></template>
+        <template id=fa-copy><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M502.6 70.63l-61.25-61.25C435.4 3.371 427.2 0 418.7 0H255.1c-35.35 0-64 28.66-64 64l.0195 256C192 355.4 220.7 384 256 384h192c35.2 0 64-28.8 64-64V93.25C512 84.77 508.6 76.63 502.6 70.63zM464 320c0 8.836-7.164 16-16 16H255.1c-8.838 0-16-7.164-16-16L239.1 64.13c0-8.836 7.164-16 16-16h128L384 96c0 17.67 14.33 32 32 32h47.1V320zM272 448c0 8.836-7.164 16-16 16H63.1c-8.838 0-16-7.164-16-16L47.98 192.1c0-8.836 7.164-16 16-16H160V128H63.99c-35.35 0-64 28.65-64 64l.0098 256C.002 483.3 28.66 512 64 512h192c35.2 0 64-28.8 64-64v-32h-47.1L272 448z"/></svg></span></template>
+        <template id=fa-play><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M73 39c-14.8-9.1-33.4-9.4-48.5-.9S0 62.6 0 80V432c0 17.4 9.4 33.4 24.5 41.9s33.7 8.1 48.5-.9L361 297c14.3-8.7 23-24.2 23-41s-8.7-32.2-23-41L73 39z"/></svg></span></template>
+        <template id=fa-clock-rotate-left><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M75 75L41 41C25.9 25.9 0 36.6 0 57.9V168c0 13.3 10.7 24 24 24H134.1c21.4 0 32.1-25.9 17-41l-30.8-30.8C155 85.5 203 64 256 64c106 0 192 86 192 192s-86 192-192 192c-40.8 0-78.6-12.7-109.7-34.4c-14.5-10.1-34.4-6.6-44.6 7.9s-6.6 34.4 7.9 44.6C151.2 495 201.7 512 256 512c141.4 0 256-114.6 256-256S397.4 0 256 0C185.3 0 121.3 28.7 75 75zm181 53c-13.3 0-24 10.7-24 24V256c0 6.4 2.5 12.5 7 17l72 72c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-65-65V152c0-13.3-10.7-24-24-24z"/></svg></span></template>
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr-ef4e11c1.min.js"></script>
+        <script src="../mark-09e88c2c.min.js"></script>
+        <script src="../searcher-c2a407aa.js"></script>
+
+        <script src="../clipboard-1626706a.min.js"></script>
+        <script src="../highlight-abc7f01d.js"></script>
+        <script src="../book-a0b12cfe.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+
+    </div>
+    </body>
+</html>

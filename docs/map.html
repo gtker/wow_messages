@@ -1,0 +1,893 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Map - Wowm Language</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon-de23e50b.svg">
+        <link rel="shortcut icon" href="../favicon-8114d1fc.png">
+        <link rel="stylesheet" href="../css/variables-8adf115d.css">
+        <link rel="stylesheet" href="../css/general-2459343d.css">
+        <link rel="stylesheet" href="../css/chrome-ae938929.css">
+        <link rel="stylesheet" href="../css/print-9e4910d8.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../fonts/fonts-9644e21d.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="mdbook-highlight-css" href="../highlight-493f70e1.css">
+        <link rel="stylesheet" id="mdbook-tomorrow-night-css" href="../tomorrow-night-4c0ae647.css">
+        <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="../ayu-highlight-3fdfc3ac.css">
+
+        <!-- Custom theme stylesheets -->
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "../";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+            window.path_to_searchindex_js = "../searchindex-3f6cba53.js";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../toc-0cb513c6.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="mdbook-body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="mdbook-sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("mdbook-sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+                sidebar_toggle.checked = false;
+            }
+            if (sidebar === 'visible') {
+                sidebar_toggle.checked = true;
+            } else {
+                html.classList.remove('sidebar-visible');
+            }
+        </script>
+
+        <nav id="mdbook-sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../toc.html"></iframe>
+            </noscript>
+            <div id="mdbook-sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="mdbook-page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="mdbook-menu-bar-hover-placeholder"></div>
+                <div id="mdbook-menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="mdbook-sidebar-toggle" class="icon-button" for="mdbook-sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="mdbook-sidebar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"/></svg></span>
+                        </label>
+                        <button id="mdbook-theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="mdbook-theme-list">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M371.3 367.1c27.3-3.9 51.9-19.4 67.2-42.9L600.2 74.1c12.6-19.5 9.4-45.3-7.6-61.2S549.7-4.4 531.1 9.6L294.4 187.2c-24 18-38.2 46.1-38.4 76.1L371.3 367.1zm-19.6 25.4l-116-104.4C175.9 290.3 128 339.6 128 400c0 3.9 .2 7.8 .6 11.6c1.8 17.5-10.2 36.4-27.8 36.4H96c-17.7 0-32 14.3-32 32s14.3 32 32 32H240c61.9 0 112-50.1 112-112c0-2.5-.1-5-.2-7.5z"/></svg></span>
+                        </button>
+                        <ul id="mdbook-theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-ayu">Ayu</button></li>
+                        </ul>
+                        <button id="mdbook-search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="mdbook-searchbar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352c79.5 0 144-64.5 144-144s-64.5-144-144-144S64 128.5 64 208s64.5 144 144 144z"/></svg></span>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Wowm Language</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <span class=fa-svg id="print-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M128 0C92.7 0 64 28.7 64 64v96h64V64H354.7L384 93.3V160h64V93.3c0-17-6.7-33.3-18.7-45.3L400 18.7C388 6.7 371.7 0 354.7 0H128zM384 352v32 64H128V384 368 352H384zm64 32h32c17.7 0 32-14.3 32-32V256c0-35.3-28.7-64-64-64H64c-35.3 0-64 28.7-64 64v96c0 17.7 14.3 32 32 32H64v64c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V384zm-16-88c-13.3 0-24-10.7-24-24s10.7-24 24-24s24 10.7 24 24s-10.7 24-24 24z"/></svg></span>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="mdbook-search-wrapper" class="hidden">
+                    <form id="mdbook-searchbar-outer" class="searchbar-outer">
+                        <div class="search-wrapper">
+                            <input type="search" id="mdbook-searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="mdbook-searchresults-outer" aria-describedby="searchresults-header">
+                            <div class="spinner-wrapper">
+                                <span class=fa-svg id="fa-spin"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M304 48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zm0 416c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM48 304c26.5 0 48-21.5 48-48s-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48zm464-48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM142.9 437c18.7-18.7 18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zm0-294.2c18.7-18.7 18.7-49.1 0-67.9S93.7 56.2 75 75s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zM369.1 437c18.7 18.7 49.1 18.7 67.9 0s18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9z"/></svg></span>
+                            </div>
+                        </div>
+                    </form>
+                    <div id="mdbook-searchresults-outer" class="searchresults-outer hidden">
+                        <div id="mdbook-searchresults-header" class="searchresults-header"></div>
+                        <ul id="mdbook-searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('mdbook-sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('mdbook-sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#mdbook-sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="mdbook-content" class="content">
+                    <main>
+                        <h1 id="map"><a class="header" href="#map">Map</a></h1>
+<h2 id="client-version-112"><a class="header" href="#client-version-112">Client Version 1.12</a></h2>
+<h3 id="wowm-representation"><a class="header" href="#wowm-representation">Wowm Representation</a></h3>
+<p>Autogenerated from <code>wowm</code> file at <a href="https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/enums/map.wowm#L1"><code>wow_message_parser/wowm/world/enums/map.wowm:1</code></a>.</p>
+<pre><code class="language-rust ignore">enum Map : u32 {
+    EASTERN_KINGDOMS = 0;
+    KALIMDOR = 1;
+    TESTING = 13;
+    SCOTT_TEST = 25;
+    CASH_TEST = 29;
+    ALTERAC_VALLEY = 30;
+    SHADOWFANG_KEEP = 33;
+    STORMWIND_STOCKADE = 34;
+    STORMWIND_PRISON = 35;
+    DEADMINES = 36;
+    AZSHARA_CRATER = 37;
+    COLLINS_TEST = 42;
+    WAILING_CAVERNS = 43;
+    MONASTERY_UNUSED = 44;
+    RAZORFEN_KRAUL = 47;
+    BLACKFATHOM_DEEPS = 48;
+    ULDAMAN = 70;
+    GNOMEREGAN = 90;
+    SUNKEN_TEMPLE = 109;
+    RAZORFEN_DOWNS = 129;
+    EMERALD_DREAM = 169;
+    SCARLET_MONASTERY = 189;
+    ZUL_FARRAK = 209;
+    BLACKROCK_SPIRE = 229;
+    BLACKROCK_DEPTHS = 230;
+    ONYXIAS_LAIR = 249;
+    OPENING_OF_THE_DARK_PORTAL = 269;
+    SCHOLOMANCE = 289;
+    ZUL_GURUB = 309;
+    STRATHOLME = 329;
+    MARAUDON = 349;
+    DEEPRUN_TRAM = 369;
+    RAGEFIRE_CHASM = 389;
+    MOLTEN_CORE = 409;
+    DIRE_MAUL = 429;
+    ALLIANCE_PVP_BARRACKS = 449;
+    HORDE_PVP_BARRACKS = 450;
+    DEVELOPMENT_LAND = 451;
+    BLACKWING_LAIR = 469;
+    WARSONG_GULCH = 489;
+    RUINS_OF_AHN_QIRAJ = 509;
+    ARATHI_BASIN = 529;
+    AHN_QIRAJ_TEMPLE = 531;
+    NAXXRAMAS = 533;
+}</code></pre>
+<h3 id="type"><a class="header" href="#type">Type</a></h3>
+<p>The basic type is <code>u32</code>, a 4 byte (32 bit) little endian integer.</p>
+<h3 id="enumerators"><a class="header" href="#enumerators">Enumerators</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Enumerator</th><th>Value</th><th>Comment</th><th>Display</th></tr>
+</thead>
+<tbody>
+<tr><td><code>EASTERN_KINGDOMS</code></td><td>0 (0x00)</td><td></td><td>Eastern Kingdoms</td></tr>
+<tr><td><code>KALIMDOR</code></td><td>1 (0x01)</td><td></td><td>Kalimdor</td></tr>
+<tr><td><code>TESTING</code></td><td>13 (0x0D)</td><td></td><td>Testing</td></tr>
+<tr><td><code>SCOTT_TEST</code></td><td>25 (0x19)</td><td></td><td>Scott Test</td></tr>
+<tr><td><code>CASH_TEST</code></td><td>29 (0x1D)</td><td></td><td>CashTest</td></tr>
+<tr><td><code>ALTERAC_VALLEY</code></td><td>30 (0x1E)</td><td></td><td>Alterac Valley</td></tr>
+<tr><td><code>SHADOWFANG_KEEP</code></td><td>33 (0x21)</td><td></td><td>Shadowfang Keep</td></tr>
+<tr><td><code>STORMWIND_STOCKADE</code></td><td>34 (0x22)</td><td></td><td>Stormwind Stockade</td></tr>
+<tr><td><code>STORMWIND_PRISON</code></td><td>35 (0x23)</td><td></td><td>Stormwind Prison</td></tr>
+<tr><td><code>DEADMINES</code></td><td>36 (0x24)</td><td></td><td>Deadmines</td></tr>
+<tr><td><code>AZSHARA_CRATER</code></td><td>37 (0x25)</td><td></td><td>Azshara Crater</td></tr>
+<tr><td><code>COLLINS_TEST</code></td><td>42 (0x2A)</td><td></td><td>Collin’s Test</td></tr>
+<tr><td><code>WAILING_CAVERNS</code></td><td>43 (0x2B)</td><td></td><td>Wailing Caverns</td></tr>
+<tr><td><code>MONASTERY_UNUSED</code></td><td>44 (0x2C)</td><td></td><td><unused> Monastery</unused></td></tr>
+<tr><td><code>RAZORFEN_KRAUL</code></td><td>47 (0x2F)</td><td></td><td>Razorfen Kraul</td></tr>
+<tr><td><code>BLACKFATHOM_DEEPS</code></td><td>48 (0x30)</td><td></td><td>Blackfathom Deeps</td></tr>
+<tr><td><code>ULDAMAN</code></td><td>70 (0x46)</td><td></td><td>Uldaman</td></tr>
+<tr><td><code>GNOMEREGAN</code></td><td>90 (0x5A)</td><td></td><td>Gnomeregan</td></tr>
+<tr><td><code>SUNKEN_TEMPLE</code></td><td>109 (0x6D)</td><td></td><td>Sunken Temple</td></tr>
+<tr><td><code>RAZORFEN_DOWNS</code></td><td>129 (0x81)</td><td></td><td>Razorfen Downs</td></tr>
+<tr><td><code>EMERALD_DREAM</code></td><td>169 (0xA9)</td><td></td><td>Emerald Dream</td></tr>
+<tr><td><code>SCARLET_MONASTERY</code></td><td>189 (0xBD)</td><td></td><td>Scarlet Monastery</td></tr>
+<tr><td><code>ZUL_FARRAK</code></td><td>209 (0xD1)</td><td></td><td>Zul’Farrak</td></tr>
+<tr><td><code>BLACKROCK_SPIRE</code></td><td>229 (0xE5)</td><td></td><td>Blackrock Spire</td></tr>
+<tr><td><code>BLACKROCK_DEPTHS</code></td><td>230 (0xE6)</td><td></td><td>Blackrock Depths</td></tr>
+<tr><td><code>ONYXIAS_LAIR</code></td><td>249 (0xF9)</td><td></td><td>Onyxia’s Lair</td></tr>
+<tr><td><code>OPENING_OF_THE_DARK_PORTAL</code></td><td>269 (0x10D)</td><td>Also called ‘Caverns of Time’ in Vanilla. Named this way for consistency across versions.</td><td>Opening of the Dark Portal</td></tr>
+<tr><td><code>SCHOLOMANCE</code></td><td>289 (0x121)</td><td></td><td>Scholomance</td></tr>
+<tr><td><code>ZUL_GURUB</code></td><td>309 (0x135)</td><td></td><td>Zul’Gurub</td></tr>
+<tr><td><code>STRATHOLME</code></td><td>329 (0x149)</td><td></td><td>Stratholme</td></tr>
+<tr><td><code>MARAUDON</code></td><td>349 (0x15D)</td><td></td><td>Maraudon</td></tr>
+<tr><td><code>DEEPRUN_TRAM</code></td><td>369 (0x171)</td><td></td><td>Deeprun Tram</td></tr>
+<tr><td><code>RAGEFIRE_CHASM</code></td><td>389 (0x185)</td><td></td><td>Ragefire Chasm</td></tr>
+<tr><td><code>MOLTEN_CORE</code></td><td>409 (0x199)</td><td></td><td>Molten Core</td></tr>
+<tr><td><code>DIRE_MAUL</code></td><td>429 (0x1AD)</td><td></td><td>Dire Maul</td></tr>
+<tr><td><code>ALLIANCE_PVP_BARRACKS</code></td><td>449 (0x1C1)</td><td></td><td>Alliance PVP Barracks</td></tr>
+<tr><td><code>HORDE_PVP_BARRACKS</code></td><td>450 (0x1C2)</td><td></td><td>Horde PVP Barracks</td></tr>
+<tr><td><code>DEVELOPMENT_LAND</code></td><td>451 (0x1C3)</td><td></td><td>Development Land</td></tr>
+<tr><td><code>BLACKWING_LAIR</code></td><td>469 (0x1D5)</td><td></td><td>Blackwing Lair</td></tr>
+<tr><td><code>WARSONG_GULCH</code></td><td>489 (0x1E9)</td><td></td><td>Warsong Gulch</td></tr>
+<tr><td><code>RUINS_OF_AHN_QIRAJ</code></td><td>509 (0x1FD)</td><td></td><td>Ruins of Ahn’Qiraj</td></tr>
+<tr><td><code>ARATHI_BASIN</code></td><td>529 (0x211)</td><td></td><td>Arathi Basin</td></tr>
+<tr><td><code>AHN_QIRAJ_TEMPLE</code></td><td>531 (0x213)</td><td></td><td>Ahn’Qiraj Temple</td></tr>
+<tr><td><code>NAXXRAMAS</code></td><td>533 (0x215)</td><td></td><td>Naxxramas</td></tr>
+</tbody>
+</table>
+</div>
+<p>Used in:</p>
+<ul>
+<li><a href="cmsg_battlefield_join.html">CMSG_BATTLEFIELD_JOIN</a></li>
+<li><a href="cmsg_battlefield_list.html">CMSG_BATTLEFIELD_LIST</a></li>
+<li><a href="cmsg_battlefield_port.html">CMSG_BATTLEFIELD_PORT</a></li>
+<li><a href="cmsg_battlemaster_join.html">CMSG_BATTLEMASTER_JOIN</a></li>
+<li><a href="cmsg_gmticket_create.html">CMSG_GMTICKET_CREATE</a></li>
+<li><a href="cmsg_leave_battlefield.html">CMSG_LEAVE_BATTLEFIELD</a></li>
+<li><a href="cmsg_world_teleport.html">CMSG_WORLD_TELEPORT</a></li>
+<li><a href="character.html">Character</a></li>
+<li><a href="msg_corpse_query_server.html">MSG_CORPSE_QUERY_Server</a></li>
+<li><a href="raidinfo.html">RaidInfo</a></li>
+<li><a href="smsg_battlefield_list.html">SMSG_BATTLEFIELD_LIST</a></li>
+<li><a href="smsg_battlefield_status.html">SMSG_BATTLEFIELD_STATUS</a></li>
+<li><a href="smsg_bindpointupdate.html">SMSG_BINDPOINTUPDATE</a></li>
+<li><a href="smsg_init_world_states.html">SMSG_INIT_WORLD_STATES</a></li>
+<li><a href="smsg_instance_reset.html">SMSG_INSTANCE_RESET</a></li>
+<li><a href="smsg_instance_reset_failed.html">SMSG_INSTANCE_RESET_FAILED</a></li>
+<li><a href="smsg_item_query_single_response.html">SMSG_ITEM_QUERY_SINGLE_RESPONSE</a></li>
+<li><a href="smsg_login_verify_world.html">SMSG_LOGIN_VERIFY_WORLD</a></li>
+<li><a href="smsg_new_world.html">SMSG_NEW_WORLD</a></li>
+<li><a href="smsg_raid_instance_message.html">SMSG_RAID_INSTANCE_MESSAGE</a></li>
+<li><a href="smsg_transfer_aborted.html">SMSG_TRANSFER_ABORTED</a></li>
+<li><a href="smsg_transfer_pending.html">SMSG_TRANSFER_PENDING</a></li>
+<li><a href="smsg_update_last_instance.html">SMSG_UPDATE_LAST_INSTANCE</a></li>
+</ul>
+<h2 id="client-version-243"><a class="header" href="#client-version-243">Client Version 2.4.3</a></h2>
+<h3 id="wowm-representation-1"><a class="header" href="#wowm-representation-1">Wowm Representation</a></h3>
+<p>Autogenerated from <code>wowm</code> file at <a href="https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/enums/map.wowm#L140"><code>wow_message_parser/wowm/world/enums/map.wowm:140</code></a>.</p>
+<pre><code class="language-rust ignore">enum Map : u32 {
+    EASTERN_KINGDOMS = 0;
+    KALIMDOR = 1;
+    TESTING = 13;
+    SCOTT_TEST = 25;
+    CASH_TEST = 29;
+    ALTERAC_VALLEY = 30;
+    SHADOWFANG_KEEP = 33;
+    STORMWIND_STOCKADE = 34;
+    STORMWIND_PRISON = 35;
+    DEADMINES = 36;
+    AZSHARA_CRATER = 37;
+    COLLINS_TEST = 42;
+    WAILING_CAVERNS = 43;
+    MONASTERY_UNUSED = 44;
+    RAZORFEN_KRAUL = 47;
+    BLACKFATHOM_DEEPS = 48;
+    ULDAMAN = 70;
+    GNOMEREGAN = 90;
+    SUNKEN_TEMPLE = 109;
+    RAZORFEN_DOWNS = 129;
+    EMERALD_DREAM = 169;
+    SCARLET_MONASTERY = 189;
+    ZUL_FARRAK = 209;
+    BLACKROCK_SPIRE = 229;
+    BLACKROCK_DEPTHS = 230;
+    ONYXIAS_LAIR = 249;
+    OPENING_OF_THE_DARK_PORTAL = 269;
+    SCHOLOMANCE = 289;
+    ZUL_GURUB = 309;
+    STRATHOLME = 329;
+    MARAUDON = 349;
+    DEEPRUN_TRAM = 369;
+    RAGEFIRE_CHASM = 389;
+    MOLTEN_CORE = 409;
+    DIRE_MAUL = 429;
+    ALLIANCE_PVP_BARRACKS = 449;
+    HORDE_PVP_BARRACKS = 450;
+    DEVELOPMENT_LAND = 451;
+    BLACKWING_LAIR = 469;
+    WARSONG_GULCH = 489;
+    RUINS_OF_AHN_QIRAJ = 509;
+    ARATHI_BASIN = 529;
+    OUTLAND = 530;
+    AHN_QIRAJ_TEMPLE = 531;
+    KARAZHAN = 532;
+    NAXXRAMAS = 533;
+    THE_BATTLE_FOR_MOUNT_HYJAL = 534;
+    HELLFIRE_CITADEL_THE_SHATTERED_HALLS = 540;
+    HELLFIRE_CITADEL_THE_BLOOD_FURNACE = 542;
+    HELLFIRE_CITADEL_RAMPARTS = 543;
+    MAGTHERIDONS_LAIR = 544;
+    COILFANG_THE_STEAMVAULT = 545;
+    COILFANG_THE_UNDERBOG = 546;
+    COILFANG_THE_SLAVE_PENS = 547;
+    COILFANG_SERPENTSHRINE_CAVERN = 548;
+    TEMPEST_KEEP = 550;
+    TEMPEST_KEEP_THE_ARCATRAZ = 552;
+    TEMPEST_KEEP_THE_BOTANICA = 553;
+    TEMPEST_KEEP_THE_MECHANAR = 554;
+    AUCHINDOUN_SHADOW_LABYRINTH = 555;
+    AUCHINDOUN_SETHEKK_HALLS = 556;
+    AUCHINDOUN_MANA_TOMBS = 557;
+    AUCHINDOUN_AUCHENAI_CRYPTS = 558;
+    NAGRAND_ARENA = 559;
+    THE_ESCAPE_FROM_DURNHOLDE = 560;
+    BLADES_EDGE_ARENA = 562;
+    BLACK_TEMPLE = 564;
+    GRUULS_LAIR = 565;
+    EYE_OF_THE_STORM = 566;
+    ZUL_AMAN = 568;
+    RUINS_OF_LORDAERON = 572;
+    THE_SUNWELL = 580;
+    TRANSPORT_RUT_THERAN_TO_AUBERDINE = 582;
+    TRANSPORT_MENETHIL_TO_THERAMORE = 584;
+    MAGISTERS_TERRACE = 585;
+    TRANSPORT_EXODAR_TO_AUBERDINE = 586;
+    TRANSPORT_FEATHERMOON_FERRY = 587;
+    TRANSPORT_MENETHIL_TO_AUBERDINE = 588;
+    TRANSPORT_ORGRIMMAR_TO_GROM_GOL = 589;
+    TRANSPORT_GROM_GOL_TO_UNDERCITY = 590;
+    TRANSPORT_UNDERCITY_TO_ORGRIMMAR = 591;
+    TRANSPORT_BOOTY_BAY_TO_RATCHET = 593;
+    SUNWELL_FIX_UNUSED = 598;
+}</code></pre>
+<h3 id="type-1"><a class="header" href="#type-1">Type</a></h3>
+<p>The basic type is <code>u32</code>, a 4 byte (32 bit) little endian integer.</p>
+<h3 id="enumerators-1"><a class="header" href="#enumerators-1">Enumerators</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Enumerator</th><th>Value</th><th>Comment</th><th>Display</th></tr>
+</thead>
+<tbody>
+<tr><td><code>EASTERN_KINGDOMS</code></td><td>0 (0x00)</td><td></td><td>Eastern Kingdoms</td></tr>
+<tr><td><code>KALIMDOR</code></td><td>1 (0x01)</td><td></td><td>Kalimdor</td></tr>
+<tr><td><code>TESTING</code></td><td>13 (0x0D)</td><td></td><td>Testing</td></tr>
+<tr><td><code>SCOTT_TEST</code></td><td>25 (0x19)</td><td></td><td>Scott Test</td></tr>
+<tr><td><code>CASH_TEST</code></td><td>29 (0x1D)</td><td></td><td>CashTest</td></tr>
+<tr><td><code>ALTERAC_VALLEY</code></td><td>30 (0x1E)</td><td></td><td>Alterac Valley</td></tr>
+<tr><td><code>SHADOWFANG_KEEP</code></td><td>33 (0x21)</td><td></td><td>Shadowfang Keep</td></tr>
+<tr><td><code>STORMWIND_STOCKADE</code></td><td>34 (0x22)</td><td></td><td>Stormwind Stockade</td></tr>
+<tr><td><code>STORMWIND_PRISON</code></td><td>35 (0x23)</td><td></td><td>Stormwind Prison</td></tr>
+<tr><td><code>DEADMINES</code></td><td>36 (0x24)</td><td></td><td>Deadmines</td></tr>
+<tr><td><code>AZSHARA_CRATER</code></td><td>37 (0x25)</td><td></td><td>Azshara Crater</td></tr>
+<tr><td><code>COLLINS_TEST</code></td><td>42 (0x2A)</td><td></td><td>Collin’s Test</td></tr>
+<tr><td><code>WAILING_CAVERNS</code></td><td>43 (0x2B)</td><td></td><td>Wailing Caverns</td></tr>
+<tr><td><code>MONASTERY_UNUSED</code></td><td>44 (0x2C)</td><td></td><td><unused> Monastery</unused></td></tr>
+<tr><td><code>RAZORFEN_KRAUL</code></td><td>47 (0x2F)</td><td></td><td>Razorfen Kraul</td></tr>
+<tr><td><code>BLACKFATHOM_DEEPS</code></td><td>48 (0x30)</td><td></td><td>Blackfathom Deeps</td></tr>
+<tr><td><code>ULDAMAN</code></td><td>70 (0x46)</td><td></td><td>Uldaman</td></tr>
+<tr><td><code>GNOMEREGAN</code></td><td>90 (0x5A)</td><td></td><td>Gnomeregan</td></tr>
+<tr><td><code>SUNKEN_TEMPLE</code></td><td>109 (0x6D)</td><td></td><td>Sunken Temple</td></tr>
+<tr><td><code>RAZORFEN_DOWNS</code></td><td>129 (0x81)</td><td></td><td>Razorfen Downs</td></tr>
+<tr><td><code>EMERALD_DREAM</code></td><td>169 (0xA9)</td><td></td><td>Emerald Dream</td></tr>
+<tr><td><code>SCARLET_MONASTERY</code></td><td>189 (0xBD)</td><td></td><td>Scarlet Monastery</td></tr>
+<tr><td><code>ZUL_FARRAK</code></td><td>209 (0xD1)</td><td></td><td>Zul’Farrak</td></tr>
+<tr><td><code>BLACKROCK_SPIRE</code></td><td>229 (0xE5)</td><td></td><td>Blackrock Spire</td></tr>
+<tr><td><code>BLACKROCK_DEPTHS</code></td><td>230 (0xE6)</td><td></td><td>Blackrock Depths</td></tr>
+<tr><td><code>ONYXIAS_LAIR</code></td><td>249 (0xF9)</td><td></td><td>Onyxia’s Lair</td></tr>
+<tr><td><code>OPENING_OF_THE_DARK_PORTAL</code></td><td>269 (0x10D)</td><td></td><td>Opening of the Dark Portal</td></tr>
+<tr><td><code>SCHOLOMANCE</code></td><td>289 (0x121)</td><td></td><td>Scholomance</td></tr>
+<tr><td><code>ZUL_GURUB</code></td><td>309 (0x135)</td><td></td><td>Zul’Gurub</td></tr>
+<tr><td><code>STRATHOLME</code></td><td>329 (0x149)</td><td></td><td>Stratholme</td></tr>
+<tr><td><code>MARAUDON</code></td><td>349 (0x15D)</td><td></td><td>Maraudon</td></tr>
+<tr><td><code>DEEPRUN_TRAM</code></td><td>369 (0x171)</td><td></td><td>Deeprun Tram</td></tr>
+<tr><td><code>RAGEFIRE_CHASM</code></td><td>389 (0x185)</td><td></td><td>Ragefire Chasm</td></tr>
+<tr><td><code>MOLTEN_CORE</code></td><td>409 (0x199)</td><td></td><td>Molten Core</td></tr>
+<tr><td><code>DIRE_MAUL</code></td><td>429 (0x1AD)</td><td></td><td>Dire Maul</td></tr>
+<tr><td><code>ALLIANCE_PVP_BARRACKS</code></td><td>449 (0x1C1)</td><td></td><td>Alliance PVP Barracks</td></tr>
+<tr><td><code>HORDE_PVP_BARRACKS</code></td><td>450 (0x1C2)</td><td></td><td>Horde PVP Barracks</td></tr>
+<tr><td><code>DEVELOPMENT_LAND</code></td><td>451 (0x1C3)</td><td></td><td>Development Land</td></tr>
+<tr><td><code>BLACKWING_LAIR</code></td><td>469 (0x1D5)</td><td></td><td>Blackwing Lair</td></tr>
+<tr><td><code>WARSONG_GULCH</code></td><td>489 (0x1E9)</td><td></td><td>Warsong Gulch</td></tr>
+<tr><td><code>RUINS_OF_AHN_QIRAJ</code></td><td>509 (0x1FD)</td><td></td><td>Ruins of Ahn’Qiraj</td></tr>
+<tr><td><code>ARATHI_BASIN</code></td><td>529 (0x211)</td><td></td><td>Arathi Basin</td></tr>
+<tr><td><code>OUTLAND</code></td><td>530 (0x212)</td><td></td><td>Outland</td></tr>
+<tr><td><code>AHN_QIRAJ_TEMPLE</code></td><td>531 (0x213)</td><td></td><td>Ahn’Qiraj Temple</td></tr>
+<tr><td><code>KARAZHAN</code></td><td>532 (0x214)</td><td></td><td>Karazhan</td></tr>
+<tr><td><code>NAXXRAMAS</code></td><td>533 (0x215)</td><td></td><td>Naxxramas</td></tr>
+<tr><td><code>THE_BATTLE_FOR_MOUNT_HYJAL</code></td><td>534 (0x216)</td><td></td><td>The Battle for Mount Hyjal</td></tr>
+<tr><td><code>HELLFIRE_CITADEL_THE_SHATTERED_HALLS</code></td><td>540 (0x21C)</td><td></td><td>Hellfire Citadel: The Shattered Halls</td></tr>
+<tr><td><code>HELLFIRE_CITADEL_THE_BLOOD_FURNACE</code></td><td>542 (0x21E)</td><td></td><td>Hellfire Citadel: The Blood Furnace</td></tr>
+<tr><td><code>HELLFIRE_CITADEL_RAMPARTS</code></td><td>543 (0x21F)</td><td></td><td>Hellfire Citadel: Ramparts</td></tr>
+<tr><td><code>MAGTHERIDONS_LAIR</code></td><td>544 (0x220)</td><td></td><td>Magtheridon’s Lair</td></tr>
+<tr><td><code>COILFANG_THE_STEAMVAULT</code></td><td>545 (0x221)</td><td></td><td>Coilfang: The Steamvault</td></tr>
+<tr><td><code>COILFANG_THE_UNDERBOG</code></td><td>546 (0x222)</td><td></td><td>Coilfang: The Underbog</td></tr>
+<tr><td><code>COILFANG_THE_SLAVE_PENS</code></td><td>547 (0x223)</td><td></td><td>Coilfang: The Slave Pens</td></tr>
+<tr><td><code>COILFANG_SERPENTSHRINE_CAVERN</code></td><td>548 (0x224)</td><td></td><td>Coilfang: Serpentshrine Cavern</td></tr>
+<tr><td><code>TEMPEST_KEEP</code></td><td>550 (0x226)</td><td></td><td>Tempest Keep</td></tr>
+<tr><td><code>TEMPEST_KEEP_THE_ARCATRAZ</code></td><td>552 (0x228)</td><td></td><td>Tempest Keep: The Arcatraz</td></tr>
+<tr><td><code>TEMPEST_KEEP_THE_BOTANICA</code></td><td>553 (0x229)</td><td></td><td>Tempest Keep: The Botanica</td></tr>
+<tr><td><code>TEMPEST_KEEP_THE_MECHANAR</code></td><td>554 (0x22A)</td><td></td><td>Tempest Keep: The Mechanar</td></tr>
+<tr><td><code>AUCHINDOUN_SHADOW_LABYRINTH</code></td><td>555 (0x22B)</td><td></td><td>Auchindoun: Shadow Labyrinth</td></tr>
+<tr><td><code>AUCHINDOUN_SETHEKK_HALLS</code></td><td>556 (0x22C)</td><td></td><td>Auchindoun: Sethekk Halls</td></tr>
+<tr><td><code>AUCHINDOUN_MANA_TOMBS</code></td><td>557 (0x22D)</td><td></td><td>Auchindoun: Mana-Tombs</td></tr>
+<tr><td><code>AUCHINDOUN_AUCHENAI_CRYPTS</code></td><td>558 (0x22E)</td><td></td><td>Auchindoun: Auchenai Crypts</td></tr>
+<tr><td><code>NAGRAND_ARENA</code></td><td>559 (0x22F)</td><td></td><td>Nagrand Arena</td></tr>
+<tr><td><code>THE_ESCAPE_FROM_DURNHOLDE</code></td><td>560 (0x230)</td><td></td><td>The Escape From Durnholde</td></tr>
+<tr><td><code>BLADES_EDGE_ARENA</code></td><td>562 (0x232)</td><td></td><td>Blade’s Edge Arena</td></tr>
+<tr><td><code>BLACK_TEMPLE</code></td><td>564 (0x234)</td><td></td><td>Black Temple</td></tr>
+<tr><td><code>GRUULS_LAIR</code></td><td>565 (0x235)</td><td></td><td>Gruul’s Lair</td></tr>
+<tr><td><code>EYE_OF_THE_STORM</code></td><td>566 (0x236)</td><td></td><td>Eye of the Storm</td></tr>
+<tr><td><code>ZUL_AMAN</code></td><td>568 (0x238)</td><td></td><td>Zul’Aman</td></tr>
+<tr><td><code>RUINS_OF_LORDAERON</code></td><td>572 (0x23C)</td><td></td><td>Ruins of Lordaeron</td></tr>
+<tr><td><code>THE_SUNWELL</code></td><td>580 (0x244)</td><td></td><td>The Sunwell</td></tr>
+<tr><td><code>TRANSPORT_RUT_THERAN_TO_AUBERDINE</code></td><td>582 (0x246)</td><td></td><td>Transport: Rut’theran to Auberdine</td></tr>
+<tr><td><code>TRANSPORT_MENETHIL_TO_THERAMORE</code></td><td>584 (0x248)</td><td></td><td>Transport: Menethil to Theramore</td></tr>
+<tr><td><code>MAGISTERS_TERRACE</code></td><td>585 (0x249)</td><td></td><td>Magister’s Terrace</td></tr>
+<tr><td><code>TRANSPORT_EXODAR_TO_AUBERDINE</code></td><td>586 (0x24A)</td><td></td><td>Transport: Exodar to Auberdine</td></tr>
+<tr><td><code>TRANSPORT_FEATHERMOON_FERRY</code></td><td>587 (0x24B)</td><td></td><td>Transport: Feathermoon Ferry</td></tr>
+<tr><td><code>TRANSPORT_MENETHIL_TO_AUBERDINE</code></td><td>588 (0x24C)</td><td></td><td>Transport: Menethil to Auberdine</td></tr>
+<tr><td><code>TRANSPORT_ORGRIMMAR_TO_GROM_GOL</code></td><td>589 (0x24D)</td><td></td><td>Transport: Orgrimmar to Grom’Gol</td></tr>
+<tr><td><code>TRANSPORT_GROM_GOL_TO_UNDERCITY</code></td><td>590 (0x24E)</td><td></td><td>Transport: Grom’Gol to Undercity</td></tr>
+<tr><td><code>TRANSPORT_UNDERCITY_TO_ORGRIMMAR</code></td><td>591 (0x24F)</td><td></td><td>Transport: Undercity to Orgrimmar</td></tr>
+<tr><td><code>TRANSPORT_BOOTY_BAY_TO_RATCHET</code></td><td>593 (0x251)</td><td></td><td>Transport: Booty Bay to Ratchet</td></tr>
+<tr><td><code>SUNWELL_FIX_UNUSED</code></td><td>598 (0x256)</td><td></td><td>Sunwell Fix (Unused)</td></tr>
+</tbody>
+</table>
+</div>
+<p>Used in:</p>
+<ul>
+<li><a href="cmsg_battlefield_list.html">CMSG_BATTLEFIELD_LIST</a></li>
+<li><a href="cmsg_battlemaster_join.html">CMSG_BATTLEMASTER_JOIN</a></li>
+<li><a href="cmsg_gmticket_create.html">CMSG_GMTICKET_CREATE</a></li>
+<li><a href="cmsg_leave_battlefield.html">CMSG_LEAVE_BATTLEFIELD</a></li>
+<li><a href="cmsg_world_teleport.html">CMSG_WORLD_TELEPORT</a></li>
+<li><a href="character.html">Character</a></li>
+<li><a href="msg_corpse_query_server.html">MSG_CORPSE_QUERY_Server</a></li>
+<li><a href="raidinfo.html">RaidInfo</a></li>
+<li><a href="smsg_bindpointupdate.html">SMSG_BINDPOINTUPDATE</a></li>
+<li><a href="smsg_death_release_loc.html">SMSG_DEATH_RELEASE_LOC</a></li>
+<li><a href="smsg_init_world_states.html">SMSG_INIT_WORLD_STATES</a></li>
+<li><a href="smsg_instance_reset.html">SMSG_INSTANCE_RESET</a></li>
+<li><a href="smsg_instance_reset_failed.html">SMSG_INSTANCE_RESET_FAILED</a></li>
+<li><a href="smsg_item_query_single_response.html">SMSG_ITEM_QUERY_SINGLE_RESPONSE</a></li>
+<li><a href="smsg_login_verify_world.html">SMSG_LOGIN_VERIFY_WORLD</a></li>
+<li><a href="smsg_new_world.html">SMSG_NEW_WORLD</a></li>
+<li><a href="smsg_raid_instance_message.html">SMSG_RAID_INSTANCE_MESSAGE</a></li>
+<li><a href="smsg_reset_failed_notify.html">SMSG_RESET_FAILED_NOTIFY</a></li>
+<li><a href="smsg_transfer_aborted.html">SMSG_TRANSFER_ABORTED</a></li>
+<li><a href="smsg_transfer_pending.html">SMSG_TRANSFER_PENDING</a></li>
+<li><a href="smsg_update_last_instance.html">SMSG_UPDATE_LAST_INSTANCE</a></li>
+</ul>
+<h2 id="client-version-335"><a class="header" href="#client-version-335">Client Version 3.3.5</a></h2>
+<h3 id="wowm-representation-2"><a class="header" href="#wowm-representation-2">Wowm Representation</a></h3>
+<p>Autogenerated from <code>wowm</code> file at <a href="https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/enums/map.wowm#L395"><code>wow_message_parser/wowm/world/enums/map.wowm:395</code></a>.</p>
+<pre><code class="language-rust ignore">enum Map : u32 {
+    EASTERN_KINGDOMS = 0;
+    KALIMDOR = 1;
+    TESTING = 13;
+    SCOTT_TEST = 25;
+    ALTERAC_VALLEY = 30;
+    SHADOWFANG_KEEP = 33;
+    STORMWIND_STOCKADE = 34;
+    STORMWIND_PRISON = 35;
+    DEADMINES = 36;
+    AZSHARA_CRATER = 37;
+    COLLINS_TEST = 42;
+    WAILING_CAVERNS = 43;
+    MONASTERY_UNUSED = 44;
+    RAZORFEN_KRAUL = 47;
+    BLACKFATHOM_DEEPS = 48;
+    ULDAMAN = 70;
+    GNOMEREGAN = 90;
+    SUNKEN_TEMPLE = 109;
+    RAZORFEN_DOWNS = 129;
+    EMERALD_DREAM = 169;
+    SCARLET_MONASTERY = 189;
+    ZUL_FARRAK = 209;
+    BLACKROCK_SPIRE = 229;
+    BLACKROCK_DEPTHS = 230;
+    ONYXIAS_LAIR = 249;
+    OPENING_OF_THE_DARK_PORTAL = 269;
+    SCHOLOMANCE = 289;
+    ZUL_GURUB = 309;
+    STRATHOLME = 329;
+    MARAUDON = 349;
+    DEEPRUN_TRAM = 369;
+    RAGEFIRE_CHASM = 389;
+    MOLTEN_CORE = 409;
+    DIRE_MAUL = 429;
+    ALLIANCE_PVP_BARRACKS = 449;
+    HORDE_PVP_BARRACKS = 450;
+    DEVELOPMENT_LAND = 451;
+    BLACKWING_LAIR = 469;
+    WARSONG_GULCH = 489;
+    RUINS_OF_AHN_QIRAJ = 509;
+    ARATHI_BASIN = 529;
+    OUTLAND = 530;
+    AHN_QIRAJ_TEMPLE = 531;
+    KARAZHAN = 532;
+    NAXXRAMAS = 533;
+    THE_BATTLE_FOR_MOUNT_HYJAL = 534;
+    HELLFIRE_CITADEL_THE_SHATTERED_HALLS = 540;
+    HELLFIRE_CITADEL_THE_BLOOD_FURNACE = 542;
+    HELLFIRE_CITADEL_RAMPARTS = 543;
+    MAGTHERIDONS_LAIR = 544;
+    COILFANG_THE_STEAMVAULT = 545;
+    COILFANG_THE_UNDERBOG = 546;
+    COILFANG_THE_SLAVE_PENS = 547;
+    COILFANG_SERPENTSHRINE_CAVERN = 548;
+    TEMPEST_KEEP = 550;
+    TEMPEST_KEEP_THE_ARCATRAZ = 552;
+    TEMPEST_KEEP_THE_BOTANICA = 553;
+    TEMPEST_KEEP_THE_MECHANAR = 554;
+    AUCHINDOUN_SHADOW_LABYRINTH = 555;
+    AUCHINDOUN_SETHEKK_HALLS = 556;
+    AUCHINDOUN_MANA_TOMBS = 557;
+    AUCHINDOUN_AUCHENAI_CRYPTS = 558;
+    NAGRAND_ARENA = 559;
+    THE_ESCAPE_FROM_DURNHOLDE = 560;
+    BLADES_EDGE_ARENA = 562;
+    BLACK_TEMPLE = 564;
+    GRUULS_LAIR = 565;
+    EYE_OF_THE_STORM = 566;
+    ZUL_AMAN = 568;
+    NORTHREND = 571;
+    RUINS_OF_LORDAERON = 572;
+    EXTERIORTEST = 573;
+    UTGARDE_KEEP = 574;
+    UTGARDE_PINNACLE = 575;
+    THE_NEXUS = 576;
+    THE_OCULUS = 578;
+    THE_SUNWELL = 580;
+    TRANSPORT_RUT_THERAN_TO_AUBERDINE = 582;
+    TRANSPORT_MENETHIL_TO_THERAMORE = 584;
+    MAGISTERS_TERRACE = 585;
+    TRANSPORT_EXODAR_TO_AUBERDINE = 586;
+    TRANSPORT_FEATHERMOON_FERRY = 587;
+    TRANSPORT_MENETHIL_TO_AUBERDINE = 588;
+    TRANSPORT_ORGRIMMAR_TO_GROM_GOL = 589;
+    TRANSPORT_GROM_GOL_TO_UNDERCITY = 590;
+    TRANSPORT_UNDERCITY_TO_ORGRIMMAR = 591;
+    TRANSPORT_BOREAN_TUNDRA_TEST = 592;
+    TRANSPORT_BOOTY_BAY_TO_RATCHET = 593;
+    TRANSPORT_HOWLING_FJORD_SISTER_MERCY_QUEST = 594;
+    THE_CULLING_OF_STRATHOLME = 595;
+    TRANSPORT_NAGLFAR = 596;
+    CRAIG_TEST = 597;
+    SUNWELL_FIX_UNUSED = 598;
+    HALLS_OF_STONE = 599;
+    DRAK_THARON_KEEP = 600;
+    AZJOL_NERUB = 601;
+    HALLS_OF_LIGHTNING = 602;
+    ULDUAR = 603;
+    GUNDRAK = 604;
+    DEVELOPMENT_LAND_NON_WEIGHTED_TEXTURES = 605;
+    QA_AND_DVD = 606;
+    STRAND_OF_THE_ANCIENTS = 607;
+    VIOLET_HOLD = 608;
+    EBON_HOLD = 609;
+    TRANSPORT_TIRISFAL_TO_VENGEANCE_LANDING = 610;
+    TRANSPORT_MENETHIL_TO_VALGARDE = 612;
+    TRANSPORT_ORGRIMMAR_TO_WARSONG_HOLD = 613;
+    TRANSPORT_STORMWIND_TO_VALIANCE_KEEP = 614;
+    THE_OBSIDIAN_SANCTUM = 615;
+    THE_EYE_OF_ETERNITY = 616;
+    DALARAN_SEWERS = 617;
+    THE_RING_OF_VALOR = 618;
+    AHN_KAHET_THE_OLD_KINGDOM = 619;
+    TRANSPORT_MOA_KI_TO_UNU_PE = 620;
+    TRANSPORT_MOA_KI_TO_KAMAGUA = 621;
+    TRANSPORT_ORGRIMS_HAMMER = 622;
+    TRANSPORT_THE_SKYBREAKER = 623;
+    VAULT_OF_ARCHAVON = 624;
+    ISLE_OF_CONQUEST = 628;
+    ICECROWN_CITADEL = 631;
+    THE_FORGE_OF_SOULS = 632;
+    TRANSPORT_ALLIANCE_AIRSHIP_BG = 641;
+    TRANSPORT_HORDEAIRSHIPBG = 642;
+    TRANSPORT_ORGRIMMAR_TO_THUNDER_BLUFF = 647;
+    TRIAL_OF_THE_CRUSADER = 649;
+    TRIAL_OF_THE_CHAMPION = 650;
+    PIT_OF_SARON = 658;
+    HALLS_OF_REFLECTION = 668;
+    TRANSPORT_THE_SKYBREAKER_ICECROWN_CITADEL_RAID = 672;
+    TRANSPORT_ORGRIMS_HAMMER_ICECROWN_CITADEL_RAID = 673;
+    TRANSPORT_THE_SKYBREAKER_IC_DUNGEON = 712;
+    TRANSPORT_ORGRIMS_HAMMER_IC_DUNGEON = 713;
+    TRANSPORT_THE_MIGHTY_WIND_ICECROWN_CITADEL_RAID = 718;
+    STORMWIND = 723;
+    THE_RUBY_SANCTUM = 724;
+}</code></pre>
+<h3 id="type-2"><a class="header" href="#type-2">Type</a></h3>
+<p>The basic type is <code>u32</code>, a 4 byte (32 bit) little endian integer.</p>
+<h3 id="enumerators-2"><a class="header" href="#enumerators-2">Enumerators</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Enumerator</th><th>Value</th><th>Comment</th><th>Display</th></tr>
+</thead>
+<tbody>
+<tr><td><code>EASTERN_KINGDOMS</code></td><td>0 (0x00)</td><td></td><td>Eastern Kingdoms</td></tr>
+<tr><td><code>KALIMDOR</code></td><td>1 (0x01)</td><td></td><td>Kalimdor</td></tr>
+<tr><td><code>TESTING</code></td><td>13 (0x0D)</td><td></td><td>Testing</td></tr>
+<tr><td><code>SCOTT_TEST</code></td><td>25 (0x19)</td><td></td><td>Scott Test</td></tr>
+<tr><td><code>ALTERAC_VALLEY</code></td><td>30 (0x1E)</td><td></td><td>Alterac Valley</td></tr>
+<tr><td><code>SHADOWFANG_KEEP</code></td><td>33 (0x21)</td><td></td><td>Shadowfang Keep</td></tr>
+<tr><td><code>STORMWIND_STOCKADE</code></td><td>34 (0x22)</td><td></td><td>Stormwind Stockade</td></tr>
+<tr><td><code>STORMWIND_PRISON</code></td><td>35 (0x23)</td><td></td><td>Stormwind Prison</td></tr>
+<tr><td><code>DEADMINES</code></td><td>36 (0x24)</td><td></td><td>Deadmines</td></tr>
+<tr><td><code>AZSHARA_CRATER</code></td><td>37 (0x25)</td><td></td><td>Azshara Crater</td></tr>
+<tr><td><code>COLLINS_TEST</code></td><td>42 (0x2A)</td><td></td><td>Collin’s Test</td></tr>
+<tr><td><code>WAILING_CAVERNS</code></td><td>43 (0x2B)</td><td></td><td>Wailing Caverns</td></tr>
+<tr><td><code>MONASTERY_UNUSED</code></td><td>44 (0x2C)</td><td></td><td><unused> Monastery</unused></td></tr>
+<tr><td><code>RAZORFEN_KRAUL</code></td><td>47 (0x2F)</td><td></td><td>Razorfen Kraul</td></tr>
+<tr><td><code>BLACKFATHOM_DEEPS</code></td><td>48 (0x30)</td><td></td><td>Blackfathom Deeps</td></tr>
+<tr><td><code>ULDAMAN</code></td><td>70 (0x46)</td><td></td><td>Uldaman</td></tr>
+<tr><td><code>GNOMEREGAN</code></td><td>90 (0x5A)</td><td></td><td>Gnomeregan</td></tr>
+<tr><td><code>SUNKEN_TEMPLE</code></td><td>109 (0x6D)</td><td></td><td>Sunken Temple</td></tr>
+<tr><td><code>RAZORFEN_DOWNS</code></td><td>129 (0x81)</td><td></td><td>Razorfen Downs</td></tr>
+<tr><td><code>EMERALD_DREAM</code></td><td>169 (0xA9)</td><td></td><td>Emerald Dream</td></tr>
+<tr><td><code>SCARLET_MONASTERY</code></td><td>189 (0xBD)</td><td></td><td>Scarlet Monastery</td></tr>
+<tr><td><code>ZUL_FARRAK</code></td><td>209 (0xD1)</td><td></td><td>Zul’Farrak</td></tr>
+<tr><td><code>BLACKROCK_SPIRE</code></td><td>229 (0xE5)</td><td></td><td>Blackrock Spire</td></tr>
+<tr><td><code>BLACKROCK_DEPTHS</code></td><td>230 (0xE6)</td><td></td><td>Blackrock Depths</td></tr>
+<tr><td><code>ONYXIAS_LAIR</code></td><td>249 (0xF9)</td><td></td><td>Onyxia’s Lair</td></tr>
+<tr><td><code>OPENING_OF_THE_DARK_PORTAL</code></td><td>269 (0x10D)</td><td></td><td>Opening of the Dark Portal</td></tr>
+<tr><td><code>SCHOLOMANCE</code></td><td>289 (0x121)</td><td></td><td>Scholomance</td></tr>
+<tr><td><code>ZUL_GURUB</code></td><td>309 (0x135)</td><td></td><td>Zul’Gurub</td></tr>
+<tr><td><code>STRATHOLME</code></td><td>329 (0x149)</td><td></td><td>Stratholme</td></tr>
+<tr><td><code>MARAUDON</code></td><td>349 (0x15D)</td><td></td><td>Maraudon</td></tr>
+<tr><td><code>DEEPRUN_TRAM</code></td><td>369 (0x171)</td><td></td><td>Deeprun Tram</td></tr>
+<tr><td><code>RAGEFIRE_CHASM</code></td><td>389 (0x185)</td><td></td><td>Ragefire Chasm</td></tr>
+<tr><td><code>MOLTEN_CORE</code></td><td>409 (0x199)</td><td></td><td>Molten Core</td></tr>
+<tr><td><code>DIRE_MAUL</code></td><td>429 (0x1AD)</td><td></td><td>Dire Maul</td></tr>
+<tr><td><code>ALLIANCE_PVP_BARRACKS</code></td><td>449 (0x1C1)</td><td></td><td>Alliance PVP Barracks</td></tr>
+<tr><td><code>HORDE_PVP_BARRACKS</code></td><td>450 (0x1C2)</td><td></td><td>Horde PVP Barracks</td></tr>
+<tr><td><code>DEVELOPMENT_LAND</code></td><td>451 (0x1C3)</td><td>Map files not present on 3.3.5 client, so loading the map will crash the client.</td><td>Development Land</td></tr>
+<tr><td><code>BLACKWING_LAIR</code></td><td>469 (0x1D5)</td><td></td><td>Blackwing Lair</td></tr>
+<tr><td><code>WARSONG_GULCH</code></td><td>489 (0x1E9)</td><td></td><td>Warsong Gulch</td></tr>
+<tr><td><code>RUINS_OF_AHN_QIRAJ</code></td><td>509 (0x1FD)</td><td></td><td>Ruins of Ahn’Qiraj</td></tr>
+<tr><td><code>ARATHI_BASIN</code></td><td>529 (0x211)</td><td></td><td>Arathi Basin</td></tr>
+<tr><td><code>OUTLAND</code></td><td>530 (0x212)</td><td></td><td>Outland</td></tr>
+<tr><td><code>AHN_QIRAJ_TEMPLE</code></td><td>531 (0x213)</td><td></td><td>Ahn’Qiraj Temple</td></tr>
+<tr><td><code>KARAZHAN</code></td><td>532 (0x214)</td><td></td><td>Karazhan</td></tr>
+<tr><td><code>NAXXRAMAS</code></td><td>533 (0x215)</td><td></td><td>Naxxramas</td></tr>
+<tr><td><code>THE_BATTLE_FOR_MOUNT_HYJAL</code></td><td>534 (0x216)</td><td></td><td>The Battle for Mount Hyjal</td></tr>
+<tr><td><code>HELLFIRE_CITADEL_THE_SHATTERED_HALLS</code></td><td>540 (0x21C)</td><td></td><td>Hellfire Citadel: The Shattered Halls</td></tr>
+<tr><td><code>HELLFIRE_CITADEL_THE_BLOOD_FURNACE</code></td><td>542 (0x21E)</td><td></td><td>Hellfire Citadel: The Blood Furnace</td></tr>
+<tr><td><code>HELLFIRE_CITADEL_RAMPARTS</code></td><td>543 (0x21F)</td><td></td><td>Hellfire Citadel: Ramparts</td></tr>
+<tr><td><code>MAGTHERIDONS_LAIR</code></td><td>544 (0x220)</td><td></td><td>Magtheridon’s Lair</td></tr>
+<tr><td><code>COILFANG_THE_STEAMVAULT</code></td><td>545 (0x221)</td><td></td><td>Coilfang: The Steamvault</td></tr>
+<tr><td><code>COILFANG_THE_UNDERBOG</code></td><td>546 (0x222)</td><td></td><td>Coilfang: The Underbog</td></tr>
+<tr><td><code>COILFANG_THE_SLAVE_PENS</code></td><td>547 (0x223)</td><td></td><td>Coilfang: The Slave Pens</td></tr>
+<tr><td><code>COILFANG_SERPENTSHRINE_CAVERN</code></td><td>548 (0x224)</td><td></td><td>Coilfang: Serpentshrine Cavern</td></tr>
+<tr><td><code>TEMPEST_KEEP</code></td><td>550 (0x226)</td><td></td><td>Tempest Keep</td></tr>
+<tr><td><code>TEMPEST_KEEP_THE_ARCATRAZ</code></td><td>552 (0x228)</td><td></td><td>Tempest Keep: The Arcatraz</td></tr>
+<tr><td><code>TEMPEST_KEEP_THE_BOTANICA</code></td><td>553 (0x229)</td><td></td><td>Tempest Keep: The Botanica</td></tr>
+<tr><td><code>TEMPEST_KEEP_THE_MECHANAR</code></td><td>554 (0x22A)</td><td></td><td>Tempest Keep: The Mechanar</td></tr>
+<tr><td><code>AUCHINDOUN_SHADOW_LABYRINTH</code></td><td>555 (0x22B)</td><td></td><td>Auchindoun: Shadow Labyrinth</td></tr>
+<tr><td><code>AUCHINDOUN_SETHEKK_HALLS</code></td><td>556 (0x22C)</td><td></td><td>Auchindoun: Sethekk Halls</td></tr>
+<tr><td><code>AUCHINDOUN_MANA_TOMBS</code></td><td>557 (0x22D)</td><td></td><td>Auchindoun: Mana-Tombs</td></tr>
+<tr><td><code>AUCHINDOUN_AUCHENAI_CRYPTS</code></td><td>558 (0x22E)</td><td></td><td>Auchindoun: Auchenai Crypts</td></tr>
+<tr><td><code>NAGRAND_ARENA</code></td><td>559 (0x22F)</td><td></td><td>Nagrand Arena</td></tr>
+<tr><td><code>THE_ESCAPE_FROM_DURNHOLDE</code></td><td>560 (0x230)</td><td></td><td>The Escape From Durnholde</td></tr>
+<tr><td><code>BLADES_EDGE_ARENA</code></td><td>562 (0x232)</td><td></td><td>Blade’s Edge Arena</td></tr>
+<tr><td><code>BLACK_TEMPLE</code></td><td>564 (0x234)</td><td></td><td>Black Temple</td></tr>
+<tr><td><code>GRUULS_LAIR</code></td><td>565 (0x235)</td><td></td><td>Gruul’s Lair</td></tr>
+<tr><td><code>EYE_OF_THE_STORM</code></td><td>566 (0x236)</td><td></td><td>Eye of the Storm</td></tr>
+<tr><td><code>ZUL_AMAN</code></td><td>568 (0x238)</td><td></td><td>Zul’Aman</td></tr>
+<tr><td><code>NORTHREND</code></td><td>571 (0x23B)</td><td></td><td>Northrend</td></tr>
+<tr><td><code>RUINS_OF_LORDAERON</code></td><td>572 (0x23C)</td><td></td><td>Ruins of Lordaeron</td></tr>
+<tr><td><code>EXTERIORTEST</code></td><td>573 (0x23D)</td><td></td><td>ExteriorTest</td></tr>
+<tr><td><code>UTGARDE_KEEP</code></td><td>574 (0x23E)</td><td></td><td>Utgarde Keep</td></tr>
+<tr><td><code>UTGARDE_PINNACLE</code></td><td>575 (0x23F)</td><td></td><td>Utgarde Pinnacle</td></tr>
+<tr><td><code>THE_NEXUS</code></td><td>576 (0x240)</td><td></td><td>The Nexus</td></tr>
+<tr><td><code>THE_OCULUS</code></td><td>578 (0x242)</td><td></td><td>The Oculus</td></tr>
+<tr><td><code>THE_SUNWELL</code></td><td>580 (0x244)</td><td></td><td>The Sunwell</td></tr>
+<tr><td><code>TRANSPORT_RUT_THERAN_TO_AUBERDINE</code></td><td>582 (0x246)</td><td></td><td>Transport: Rut’theran to Auberdine</td></tr>
+<tr><td><code>TRANSPORT_MENETHIL_TO_THERAMORE</code></td><td>584 (0x248)</td><td></td><td>Transport: Menethil to Theramore</td></tr>
+<tr><td><code>MAGISTERS_TERRACE</code></td><td>585 (0x249)</td><td></td><td>Magister’s Terrace</td></tr>
+<tr><td><code>TRANSPORT_EXODAR_TO_AUBERDINE</code></td><td>586 (0x24A)</td><td></td><td>Transport: Exodar to Auberdine</td></tr>
+<tr><td><code>TRANSPORT_FEATHERMOON_FERRY</code></td><td>587 (0x24B)</td><td></td><td>Transport: Feathermoon Ferry</td></tr>
+<tr><td><code>TRANSPORT_MENETHIL_TO_AUBERDINE</code></td><td>588 (0x24C)</td><td></td><td>Transport: Menethil to Auberdine</td></tr>
+<tr><td><code>TRANSPORT_ORGRIMMAR_TO_GROM_GOL</code></td><td>589 (0x24D)</td><td></td><td>Transport: Orgrimmar to Grom’Gol</td></tr>
+<tr><td><code>TRANSPORT_GROM_GOL_TO_UNDERCITY</code></td><td>590 (0x24E)</td><td></td><td>Transport: Grom’Gol to Undercity</td></tr>
+<tr><td><code>TRANSPORT_UNDERCITY_TO_ORGRIMMAR</code></td><td>591 (0x24F)</td><td></td><td>Transport: Undercity to Orgrimmar</td></tr>
+<tr><td><code>TRANSPORT_BOREAN_TUNDRA_TEST</code></td><td>592 (0x250)</td><td></td><td>Transport: Borean Tundra Test</td></tr>
+<tr><td><code>TRANSPORT_BOOTY_BAY_TO_RATCHET</code></td><td>593 (0x251)</td><td></td><td>Transport: Booty Bay to Ratchet</td></tr>
+<tr><td><code>TRANSPORT_HOWLING_FJORD_SISTER_MERCY_QUEST</code></td><td>594 (0x252)</td><td></td><td>Transport: Howling Fjord Sister Mercy (Quest)</td></tr>
+<tr><td><code>THE_CULLING_OF_STRATHOLME</code></td><td>595 (0x253)</td><td></td><td>The Culling of Stratholme</td></tr>
+<tr><td><code>TRANSPORT_NAGLFAR</code></td><td>596 (0x254)</td><td></td><td>Transport: Naglfar</td></tr>
+<tr><td><code>CRAIG_TEST</code></td><td>597 (0x255)</td><td></td><td>Craig Test</td></tr>
+<tr><td><code>SUNWELL_FIX_UNUSED</code></td><td>598 (0x256)</td><td></td><td>Sunwell Fix (Unused)</td></tr>
+<tr><td><code>HALLS_OF_STONE</code></td><td>599 (0x257)</td><td></td><td>Halls of Stone</td></tr>
+<tr><td><code>DRAK_THARON_KEEP</code></td><td>600 (0x258)</td><td></td><td>Drak’Tharon Keep</td></tr>
+<tr><td><code>AZJOL_NERUB</code></td><td>601 (0x259)</td><td></td><td>Azjol-Nerub</td></tr>
+<tr><td><code>HALLS_OF_LIGHTNING</code></td><td>602 (0x25A)</td><td></td><td>Halls of Lightning</td></tr>
+<tr><td><code>ULDUAR</code></td><td>603 (0x25B)</td><td></td><td>Ulduar</td></tr>
+<tr><td><code>GUNDRAK</code></td><td>604 (0x25C)</td><td></td><td>Gundrak</td></tr>
+<tr><td><code>DEVELOPMENT_LAND_NON_WEIGHTED_TEXTURES</code></td><td>605 (0x25D)</td><td></td><td>Development Land (non-weighted textures)</td></tr>
+<tr><td><code>QA_AND_DVD</code></td><td>606 (0x25E)</td><td></td><td>QA and DVD</td></tr>
+<tr><td><code>STRAND_OF_THE_ANCIENTS</code></td><td>607 (0x25F)</td><td></td><td>Strand of the Ancients</td></tr>
+<tr><td><code>VIOLET_HOLD</code></td><td>608 (0x260)</td><td></td><td>Violet Hold</td></tr>
+<tr><td><code>EBON_HOLD</code></td><td>609 (0x261)</td><td></td><td>Ebon Hold</td></tr>
+<tr><td><code>TRANSPORT_TIRISFAL_TO_VENGEANCE_LANDING</code></td><td>610 (0x262)</td><td></td><td>Transport: Tirisfal to Vengeance Landing</td></tr>
+<tr><td><code>TRANSPORT_MENETHIL_TO_VALGARDE</code></td><td>612 (0x264)</td><td></td><td>Transport: Menethil to Valgarde</td></tr>
+<tr><td><code>TRANSPORT_ORGRIMMAR_TO_WARSONG_HOLD</code></td><td>613 (0x265)</td><td></td><td>Transport: Orgrimmar to Warsong Hold</td></tr>
+<tr><td><code>TRANSPORT_STORMWIND_TO_VALIANCE_KEEP</code></td><td>614 (0x266)</td><td></td><td>Transport: Stormwind to Valiance Keep</td></tr>
+<tr><td><code>THE_OBSIDIAN_SANCTUM</code></td><td>615 (0x267)</td><td></td><td>The Obsidian Sanctum</td></tr>
+<tr><td><code>THE_EYE_OF_ETERNITY</code></td><td>616 (0x268)</td><td></td><td>The Eye of Eternity</td></tr>
+<tr><td><code>DALARAN_SEWERS</code></td><td>617 (0x269)</td><td></td><td>Dalaran Sewers</td></tr>
+<tr><td><code>THE_RING_OF_VALOR</code></td><td>618 (0x26A)</td><td></td><td>The Ring of Valor</td></tr>
+<tr><td><code>AHN_KAHET_THE_OLD_KINGDOM</code></td><td>619 (0x26B)</td><td></td><td>Ahn’kahet: The Old Kingdom</td></tr>
+<tr><td><code>TRANSPORT_MOA_KI_TO_UNU_PE</code></td><td>620 (0x26C)</td><td></td><td>Transport: Moa’ki to Unu’pe</td></tr>
+<tr><td><code>TRANSPORT_MOA_KI_TO_KAMAGUA</code></td><td>621 (0x26D)</td><td></td><td>Transport: Moa’ki to Kamagua</td></tr>
+<tr><td><code>TRANSPORT_ORGRIMS_HAMMER</code></td><td>622 (0x26E)</td><td></td><td>Transport: Orgrim’s Hammer</td></tr>
+<tr><td><code>TRANSPORT_THE_SKYBREAKER</code></td><td>623 (0x26F)</td><td></td><td>Transport: The Skybreaker</td></tr>
+<tr><td><code>VAULT_OF_ARCHAVON</code></td><td>624 (0x270)</td><td></td><td>Vault of Archavon</td></tr>
+<tr><td><code>ISLE_OF_CONQUEST</code></td><td>628 (0x274)</td><td></td><td>Isle of Conquest</td></tr>
+<tr><td><code>ICECROWN_CITADEL</code></td><td>631 (0x277)</td><td></td><td>Icecrown Citadel</td></tr>
+<tr><td><code>THE_FORGE_OF_SOULS</code></td><td>632 (0x278)</td><td></td><td>The Forge of Souls</td></tr>
+<tr><td><code>TRANSPORT_ALLIANCE_AIRSHIP_BG</code></td><td>641 (0x281)</td><td></td><td>Transport: Alliance Airship BG</td></tr>
+<tr><td><code>TRANSPORT_HORDEAIRSHIPBG</code></td><td>642 (0x282)</td><td></td><td>Transport: HordeAirshipBG</td></tr>
+<tr><td><code>TRANSPORT_ORGRIMMAR_TO_THUNDER_BLUFF</code></td><td>647 (0x287)</td><td></td><td>Transport: Orgrimmar to Thunder Bluff</td></tr>
+<tr><td><code>TRIAL_OF_THE_CRUSADER</code></td><td>649 (0x289)</td><td></td><td>Trial of the Crusader</td></tr>
+<tr><td><code>TRIAL_OF_THE_CHAMPION</code></td><td>650 (0x28A)</td><td></td><td>Trial of the Champion</td></tr>
+<tr><td><code>PIT_OF_SARON</code></td><td>658 (0x292)</td><td></td><td>Pit of Saron</td></tr>
+<tr><td><code>HALLS_OF_REFLECTION</code></td><td>668 (0x29C)</td><td></td><td>Halls of Reflection</td></tr>
+<tr><td><code>TRANSPORT_THE_SKYBREAKER_ICECROWN_CITADEL_RAID</code></td><td>672 (0x2A0)</td><td></td><td>Transport: The Skybreaker (Icecrown Citadel Raid)</td></tr>
+<tr><td><code>TRANSPORT_ORGRIMS_HAMMER_ICECROWN_CITADEL_RAID</code></td><td>673 (0x2A1)</td><td></td><td>Transport: Orgrim’s Hammer (Icecrown Citadel Raid)</td></tr>
+<tr><td><code>TRANSPORT_THE_SKYBREAKER_IC_DUNGEON</code></td><td>712 (0x2C8)</td><td></td><td>Transport: The Skybreaker (IC Dungeon)</td></tr>
+<tr><td><code>TRANSPORT_ORGRIMS_HAMMER_IC_DUNGEON</code></td><td>713 (0x2C9)</td><td></td><td>Transport: Orgrim’s Hammer (IC Dungeon)</td></tr>
+<tr><td><code>TRANSPORT_THE_MIGHTY_WIND_ICECROWN_CITADEL_RAID</code></td><td>718 (0x2CE)</td><td></td><td>Transport: The Mighty Wind (Icecrown Citadel Raid)</td></tr>
+<tr><td><code>STORMWIND</code></td><td>723 (0x2D3)</td><td></td><td>Stormwind</td></tr>
+<tr><td><code>THE_RUBY_SANCTUM</code></td><td>724 (0x2D4)</td><td></td><td>The Ruby Sanctum</td></tr>
+</tbody>
+</table>
+</div>
+<p>Used in:</p>
+<ul>
+<li><a href="cmsg_battlemaster_join.html">CMSG_BATTLEMASTER_JOIN</a></li>
+<li><a href="cmsg_gmticket_create.html">CMSG_GMTICKET_CREATE</a></li>
+<li><a href="cmsg_gm_report_lag.html">CMSG_GM_REPORT_LAG</a></li>
+<li><a href="cmsg_leave_battlefield.html">CMSG_LEAVE_BATTLEFIELD</a></li>
+<li><a href="cmsg_set_saved_instance_extend.html">CMSG_SET_SAVED_INSTANCE_EXTEND</a></li>
+<li><a href="cmsg_world_teleport.html">CMSG_WORLD_TELEPORT</a></li>
+<li><a href="character.html">Character</a></li>
+<li><a href="msg_corpse_query_server.html">MSG_CORPSE_QUERY_Server</a></li>
+<li><a href="questpoi.html">QuestPoi</a></li>
+<li><a href="raidinfo.html">RaidInfo</a></li>
+<li><a href="smsg_battlefield_status.html">SMSG_BATTLEFIELD_STATUS</a></li>
+<li><a href="smsg_bindpointupdate.html">SMSG_BINDPOINTUPDATE</a></li>
+<li><a href="smsg_calendar_raid_lockout_added.html">SMSG_CALENDAR_RAID_LOCKOUT_ADDED</a></li>
+<li><a href="smsg_calendar_raid_lockout_removed.html">SMSG_CALENDAR_RAID_LOCKOUT_REMOVED</a></li>
+<li><a href="smsg_calendar_raid_lockout_updated.html">SMSG_CALENDAR_RAID_LOCKOUT_UPDATED</a></li>
+<li><a href="smsg_death_release_loc.html">SMSG_DEATH_RELEASE_LOC</a></li>
+<li><a href="smsg_init_world_states.html">SMSG_INIT_WORLD_STATES</a></li>
+<li><a href="smsg_instance_reset.html">SMSG_INSTANCE_RESET</a></li>
+<li><a href="smsg_instance_reset_failed.html">SMSG_INSTANCE_RESET_FAILED</a></li>
+<li><a href="smsg_item_query_single_response.html">SMSG_ITEM_QUERY_SINGLE_RESPONSE</a></li>
+<li><a href="smsg_login_verify_world.html">SMSG_LOGIN_VERIFY_WORLD</a></li>
+<li><a href="smsg_loot_start_roll.html">SMSG_LOOT_START_ROLL</a></li>
+<li><a href="smsg_new_world.html">SMSG_NEW_WORLD</a></li>
+<li><a href="smsg_raid_instance_message.html">SMSG_RAID_INSTANCE_MESSAGE</a></li>
+<li><a href="smsg_reset_failed_notify.html">SMSG_RESET_FAILED_NOTIFY</a></li>
+<li><a href="smsg_transfer_aborted.html">SMSG_TRANSFER_ABORTED</a></li>
+<li><a href="smsg_transfer_pending.html">SMSG_TRANSFER_PENDING</a></li>
+<li><a href="smsg_update_last_instance.html">SMSG_UPDATE_LAST_INSTANCE</a></li>
+<li><a href="sendcalendarinstance.html">SendCalendarInstance</a></li>
+<li><a href="sendcalendarresettime.html">SendCalendarResetTime</a></li>
+</ul>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../docs/mailtype.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
+                            </a>
+
+                            <a rel="next prefetch" href="../docs/meetingstonefailure.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../docs/mailtype.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
+                    </a>
+
+                    <a rel="next prefetch" href="../docs/meetingstonefailure.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+                    </a>
+            </nav>
+
+        </div>
+
+        <template id=fa-eye><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M288 32c-80.8 0-145.5 36.8-192.6 80.6C48.6 156 17.3 208 2.5 243.7c-3.3 7.9-3.3 16.7 0 24.6C17.3 304 48.6 356 95.4 399.4C142.5 443.2 207.2 480 288 480s145.5-36.8 192.6-80.6c46.8-43.5 78.1-95.4 93-131.1c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C433.5 68.8 368.8 32 288 32zM432 256c0 79.5-64.5 144-144 144s-144-64.5-144-144s64.5-144 144-144s144 64.5 144 144zM288 192c0 35.3-28.7 64-64 64c-11.5 0-22.3-3-31.6-8.4c-.2 2.8-.4 5.5-.4 8.4c0 53 43 96 96 96s96-43 96-96s-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6z"/></svg></span></template>
+        <template id=fa-eye-slash><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M38.8 5.1C28.4-3.1 13.3-1.2 5.1 9.2S-1.2 34.7 9.2 42.9l592 464c10.4 8.2 25.5 6.3 33.7-4.1s6.3-25.5-4.1-33.7L525.6 386.7c39.6-40.6 66.4-86.1 79.9-118.4c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C465.5 68.8 400.8 32 320 32c-68.2 0-125 26.3-169.3 60.8L38.8 5.1zM223.1 149.5C248.6 126.2 282.7 112 320 112c79.5 0 144 64.5 144 144c0 24.9-6.3 48.3-17.4 68.7L408 294.5c5.2-11.8 8-24.8 8-38.5c0-53-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6c0 10.2-2.4 19.8-6.6 28.3l-90.3-70.8zm223.1 298L373 389.9c-16.4 6.5-34.3 10.1-53 10.1c-79.5 0-144-64.5-144-144c0-6.9 .5-13.6 1.4-20.2L83.1 161.5C60.3 191.2 44 220.8 34.5 243.7c-3.3 7.9-3.3 16.7 0 24.6c14.9 35.7 46.2 87.7 93 131.1C174.5 443.2 239.2 480 320 480c47.8 0 89.9-12.9 126.2-32.5z"/></svg></span></template>
+        <template id=fa-copy><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M502.6 70.63l-61.25-61.25C435.4 3.371 427.2 0 418.7 0H255.1c-35.35 0-64 28.66-64 64l.0195 256C192 355.4 220.7 384 256 384h192c35.2 0 64-28.8 64-64V93.25C512 84.77 508.6 76.63 502.6 70.63zM464 320c0 8.836-7.164 16-16 16H255.1c-8.838 0-16-7.164-16-16L239.1 64.13c0-8.836 7.164-16 16-16h128L384 96c0 17.67 14.33 32 32 32h47.1V320zM272 448c0 8.836-7.164 16-16 16H63.1c-8.838 0-16-7.164-16-16L47.98 192.1c0-8.836 7.164-16 16-16H160V128H63.99c-35.35 0-64 28.65-64 64l.0098 256C.002 483.3 28.66 512 64 512h192c35.2 0 64-28.8 64-64v-32h-47.1L272 448z"/></svg></span></template>
+        <template id=fa-play><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M73 39c-14.8-9.1-33.4-9.4-48.5-.9S0 62.6 0 80V432c0 17.4 9.4 33.4 24.5 41.9s33.7 8.1 48.5-.9L361 297c14.3-8.7 23-24.2 23-41s-8.7-32.2-23-41L73 39z"/></svg></span></template>
+        <template id=fa-clock-rotate-left><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M75 75L41 41C25.9 25.9 0 36.6 0 57.9V168c0 13.3 10.7 24 24 24H134.1c21.4 0 32.1-25.9 17-41l-30.8-30.8C155 85.5 203 64 256 64c106 0 192 86 192 192s-86 192-192 192c-40.8 0-78.6-12.7-109.7-34.4c-14.5-10.1-34.4-6.6-44.6 7.9s-6.6 34.4 7.9 44.6C151.2 495 201.7 512 256 512c141.4 0 256-114.6 256-256S397.4 0 256 0C185.3 0 121.3 28.7 75 75zm181 53c-13.3 0-24 10.7-24 24V256c0 6.4 2.5 12.5 7 17l72 72c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-65-65V152c0-13.3-10.7-24-24-24z"/></svg></span></template>
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr-ef4e11c1.min.js"></script>
+        <script src="../mark-09e88c2c.min.js"></script>
+        <script src="../searcher-c2a407aa.js"></script>
+
+        <script src="../clipboard-1626706a.min.js"></script>
+        <script src="../highlight-abc7f01d.js"></script>
+        <script src="../book-a0b12cfe.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+
+    </div>
+    </body>
+</html>

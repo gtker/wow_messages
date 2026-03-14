@@ -1,0 +1,866 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>WorldResult - Wowm Language</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon-de23e50b.svg">
+        <link rel="shortcut icon" href="../favicon-8114d1fc.png">
+        <link rel="stylesheet" href="../css/variables-8adf115d.css">
+        <link rel="stylesheet" href="../css/general-2459343d.css">
+        <link rel="stylesheet" href="../css/chrome-ae938929.css">
+        <link rel="stylesheet" href="../css/print-9e4910d8.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../fonts/fonts-9644e21d.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="mdbook-highlight-css" href="../highlight-493f70e1.css">
+        <link rel="stylesheet" id="mdbook-tomorrow-night-css" href="../tomorrow-night-4c0ae647.css">
+        <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="../ayu-highlight-3fdfc3ac.css">
+
+        <!-- Custom theme stylesheets -->
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "../";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+            window.path_to_searchindex_js = "../searchindex-3f6cba53.js";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../toc-0cb513c6.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="mdbook-body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="mdbook-sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("mdbook-sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+                sidebar_toggle.checked = false;
+            }
+            if (sidebar === 'visible') {
+                sidebar_toggle.checked = true;
+            } else {
+                html.classList.remove('sidebar-visible');
+            }
+        </script>
+
+        <nav id="mdbook-sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../toc.html"></iframe>
+            </noscript>
+            <div id="mdbook-sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="mdbook-page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="mdbook-menu-bar-hover-placeholder"></div>
+                <div id="mdbook-menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="mdbook-sidebar-toggle" class="icon-button" for="mdbook-sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="mdbook-sidebar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"/></svg></span>
+                        </label>
+                        <button id="mdbook-theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="mdbook-theme-list">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M371.3 367.1c27.3-3.9 51.9-19.4 67.2-42.9L600.2 74.1c12.6-19.5 9.4-45.3-7.6-61.2S549.7-4.4 531.1 9.6L294.4 187.2c-24 18-38.2 46.1-38.4 76.1L371.3 367.1zm-19.6 25.4l-116-104.4C175.9 290.3 128 339.6 128 400c0 3.9 .2 7.8 .6 11.6c1.8 17.5-10.2 36.4-27.8 36.4H96c-17.7 0-32 14.3-32 32s14.3 32 32 32H240c61.9 0 112-50.1 112-112c0-2.5-.1-5-.2-7.5z"/></svg></span>
+                        </button>
+                        <ul id="mdbook-theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-ayu">Ayu</button></li>
+                        </ul>
+                        <button id="mdbook-search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="mdbook-searchbar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352c79.5 0 144-64.5 144-144s-64.5-144-144-144S64 128.5 64 208s64.5 144 144 144z"/></svg></span>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Wowm Language</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <span class=fa-svg id="print-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M128 0C92.7 0 64 28.7 64 64v96h64V64H354.7L384 93.3V160h64V93.3c0-17-6.7-33.3-18.7-45.3L400 18.7C388 6.7 371.7 0 354.7 0H128zM384 352v32 64H128V384 368 352H384zm64 32h32c17.7 0 32-14.3 32-32V256c0-35.3-28.7-64-64-64H64c-35.3 0-64 28.7-64 64v96c0 17.7 14.3 32 32 32H64v64c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V384zm-16-88c-13.3 0-24-10.7-24-24s10.7-24 24-24s24 10.7 24 24s-10.7 24-24 24z"/></svg></span>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="mdbook-search-wrapper" class="hidden">
+                    <form id="mdbook-searchbar-outer" class="searchbar-outer">
+                        <div class="search-wrapper">
+                            <input type="search" id="mdbook-searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="mdbook-searchresults-outer" aria-describedby="searchresults-header">
+                            <div class="spinner-wrapper">
+                                <span class=fa-svg id="fa-spin"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M304 48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zm0 416c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM48 304c26.5 0 48-21.5 48-48s-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48zm464-48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM142.9 437c18.7-18.7 18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zm0-294.2c18.7-18.7 18.7-49.1 0-67.9S93.7 56.2 75 75s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zM369.1 437c18.7 18.7 49.1 18.7 67.9 0s18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9z"/></svg></span>
+                            </div>
+                        </div>
+                    </form>
+                    <div id="mdbook-searchresults-outer" class="searchresults-outer hidden">
+                        <div id="mdbook-searchresults-header" class="searchresults-header"></div>
+                        <ul id="mdbook-searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('mdbook-sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('mdbook-sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#mdbook-sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="mdbook-content" class="content">
+                    <main>
+                        <h1 id="worldresult"><a class="header" href="#worldresult">WorldResult</a></h1>
+<h2 id="client-version-1"><a class="header" href="#client-version-1">Client Version 1</a></h2>
+<h3 id="wowm-representation"><a class="header" href="#wowm-representation">Wowm Representation</a></h3>
+<p>Autogenerated from <code>wowm</code> file at <a href="https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/enums/world_result.wowm#L1"><code>wow_message_parser/wowm/world/enums/world_result.wowm:1</code></a>.</p>
+<pre><code class="language-rust ignore">enum WorldResult : u8 {
+    RESPONSE_SUCCESS = 0x00;
+    RESPONSE_FAILURE = 0x01;
+    RESPONSE_CANCELLED = 0x02;
+    RESPONSE_DISCONNECTED = 0x03;
+    RESPONSE_FAILED_TO_CONNECT = 0x04;
+    RESPONSE_CONNECTED = 0x05;
+    RESPONSE_VERSION_MISMATCH = 0x06;
+    CSTATUS_CONNECTING = 0x07;
+    CSTATUS_NEGOTIATING_SECURITY = 0x08;
+    CSTATUS_NEGOTIATION_COMPLETE = 0x09;
+    CSTATUS_NEGOTIATION_FAILED = 0x0A;
+    CSTATUS_AUTHENTICATING = 0x0B;
+    AUTH_OK = 0x0C;
+    AUTH_FAILED = 0x0D;
+    AUTH_REJECT = 0x0E;
+    AUTH_BAD_SERVER_PROOF = 0x0F;
+    AUTH_UNAVAILABLE = 0x10;
+    AUTH_SYSTEM_ERROR = 0x11;
+    AUTH_BILLING_ERROR = 0x12;
+    AUTH_BILLING_EXPIRED = 0x13;
+    AUTH_VERSION_MISMATCH = 0x14;
+    AUTH_UNKNOWN_ACCOUNT = 0x15;
+    AUTH_INCORRECT_PASSWORD = 0x16;
+    AUTH_SESSION_EXPIRED = 0x17;
+    AUTH_SERVER_SHUTTING_DOWN = 0x18;
+    AUTH_ALREADY_LOGGING_IN = 0x19;
+    AUTH_LOGIN_SERVER_NOT_FOUND = 0x1A;
+    AUTH_WAIT_QUEUE = 0x1B;
+    AUTH_BANNED = 0x1C;
+    AUTH_ALREADY_ONLINE = 0x1D;
+    AUTH_NO_TIME = 0x1E;
+    AUTH_DB_BUSY = 0x1F;
+    AUTH_SUSPENDED = 0x20;
+    AUTH_PARENTAL_CONTROL = 0x21;
+    REALM_LIST_IN_PROGRESS = 0x22;
+    REALM_LIST_SUCCESS = 0x23;
+    REALM_LIST_FAILED = 0x24;
+    REALM_LIST_INVALID = 0x25;
+    REALM_LIST_REALM_NOT_FOUND = 0x26;
+    ACCOUNT_CREATE_IN_PROGRESS = 0x27;
+    ACCOUNT_CREATE_SUCCESS = 0x28;
+    ACCOUNT_CREATE_FAILED = 0x29;
+    CHAR_LIST_RETRIEVING = 0x2A;
+    CHAR_LIST_RETRIEVED = 0x2B;
+    CHAR_LIST_FAILED = 0x2C;
+    CHAR_CREATE_IN_PROGRESS = 0x2D;
+    CHAR_CREATE_SUCCESS = 0x2E;
+    CHAR_CREATE_ERROR = 0x2F;
+    CHAR_CREATE_FAILED = 0x30;
+    CHAR_CREATE_NAME_IN_USE = 0x31;
+    CHAR_CREATE_DISABLED = 0x32;
+    CHAR_CREATE_PVP_TEAMS_VIOLATION = 0x33;
+    CHAR_CREATE_SERVER_LIMIT = 0x34;
+    CHAR_CREATE_ACCOUNT_LIMIT = 0x35;
+    CHAR_CREATE_SERVER_QUEUE = 0x36;
+    CHAR_CREATE_ONLY_EXISTING = 0x37;
+    CHAR_DELETE_IN_PROGRESS = 0x38;
+    CHAR_DELETE_SUCCESS = 0x39;
+    CHAR_DELETE_FAILED = 0x3A;
+    CHAR_DELETE_FAILED_LOCKED_FOR_TRANSFER = 0x3B;
+    CHAR_LOGIN_IN_PROGRESS = 0x3C;
+    CHAR_LOGIN_SUCCESS = 0x3D;
+    CHAR_LOGIN_NO_WORLD = 0x3E;
+    CHAR_LOGIN_DUPLICATE_CHARACTER = 0x3F;
+    CHAR_LOGIN_NO_INSTANCES = 0x40;
+    CHAR_LOGIN_FAILED = 0x41;
+    CHAR_LOGIN_DISABLED = 0x42;
+    CHAR_LOGIN_NO_CHARACTER = 0x43;
+    CHAR_LOGIN_LOCKED_FOR_TRANSFER = 0x44;
+    CHAR_NAME_NO_NAME = 0x45;
+    CHAR_NAME_TOO_SHORT = 0x46;
+    CHAR_NAME_TOO_LONG = 0x47;
+    CHAR_NAME_ONLY_LETTERS = 0x48;
+    CHAR_NAME_MIXED_LANGUAGES = 0x49;
+    CHAR_NAME_PROFANE = 0x4A;
+    CHAR_NAME_RESERVED = 0x4B;
+    CHAR_NAME_INVALID_APOSTROPHE = 0x4C;
+    CHAR_NAME_MULTIPLE_APOSTROPHES = 0x4D;
+    CHAR_NAME_THREE_CONSECUTIVE = 0x4E;
+    CHAR_NAME_INVALID_SPACE = 0x4F;
+    CHAR_NAME_SUCCESS = 0x50;
+    CHAR_NAME_FAILURE = 0x51;
+}</code></pre>
+<h3 id="type"><a class="header" href="#type">Type</a></h3>
+<p>The basic type is <code>u8</code>, a 1 byte (8 bit) integer.</p>
+<h3 id="enumerators"><a class="header" href="#enumerators">Enumerators</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Enumerator</th><th>Value</th><th>Comment</th></tr>
+</thead>
+<tbody>
+<tr><td><code>RESPONSE_SUCCESS</code></td><td>0 (0x00)</td><td>Shows <code>Success</code> with <code>Okay</code> button.</td></tr>
+<tr><td><code>RESPONSE_FAILURE</code></td><td>1 (0x01)</td><td>Shows <code>Failure</code> with <code>Okay</code> button.</td></tr>
+<tr><td><code>RESPONSE_CANCELLED</code></td><td>2 (0x02)</td><td>Shows <code>Cancelled</code> with <code>Okay</code> button.</td></tr>
+<tr><td><code>RESPONSE_DISCONNECTED</code></td><td>3 (0x03)</td><td>Shows <code>Disconnected from server</code> with <code>Okay</code> button.</td></tr>
+<tr><td><code>RESPONSE_FAILED_TO_CONNECT</code></td><td>4 (0x04)</td><td>Shows <code>Failed to connect. Please be sure that your computer is currently connected to the internet, and that no security features on your system might be blocking traffic. See www.wow-europe.com/en/support for more information.</code> with <code>Okay</code> button.</td></tr>
+<tr><td><code>RESPONSE_CONNECTED</code></td><td>5 (0x05)</td><td>Shows <code>Connected</code> with <code>Okay</code> button.</td></tr>
+<tr><td><code>RESPONSE_VERSION_MISMATCH</code></td><td>6 (0x06)</td><td>Shows <code>Wrong client version</code> with <code>Okay</code> button.</td></tr>
+<tr><td><code>CSTATUS_CONNECTING</code></td><td>7 (0x07)</td><td>Shows <code>Connecting to server...</code> with <code>Okay</code> button.</td></tr>
+<tr><td><code>CSTATUS_NEGOTIATING_SECURITY</code></td><td>8 (0x08)</td><td>Shows <code>Negotiating security</code> with <code>Okay</code> button.</td></tr>
+<tr><td><code>CSTATUS_NEGOTIATION_COMPLETE</code></td><td>9 (0x09)</td><td>Shows <code>Security negotiation complete</code> with <code>Okay</code> button.</td></tr>
+<tr><td><code>CSTATUS_NEGOTIATION_FAILED</code></td><td>10 (0x0A)</td><td>Shows <code>Security negotiation failed</code> with <code>Okay</code> button.</td></tr>
+<tr><td><code>CSTATUS_AUTHENTICATING</code></td><td>11 (0x0B)</td><td>Shows <code>Authenticating</code> with <code>Okay</code> button.</td></tr>
+<tr><td><code>AUTH_OK</code></td><td>12 (0x0C)</td><td>Shows <code>Authentication Successful</code> with <code>Okay</code> button.</td></tr>
+<tr><td><code>AUTH_FAILED</code></td><td>13 (0x0D)</td><td>Shows <code>Authentication failed</code> with <code>Okay</code> button.</td></tr>
+<tr><td><code>AUTH_REJECT</code></td><td>14 (0x0E)</td><td>Shows <code>Login unavailable - Please contact Technical Support at http://www.wow-europe.com/en/support/</code> with <code>Okay</code> button.</td></tr>
+<tr><td><code>AUTH_BAD_SERVER_PROOF</code></td><td>15 (0x0F)</td><td>Shows <code>Server is not valid</code> with <code>Okay</code> button.</td></tr>
+<tr><td><code>AUTH_UNAVAILABLE</code></td><td>16 (0x10)</td><td>Shows <code>System unavailable - Please try again later</code> with <code>Okay</code> button.</td></tr>
+<tr><td><code>AUTH_SYSTEM_ERROR</code></td><td>17 (0x11)</td><td></td></tr>
+<tr><td><code>AUTH_BILLING_ERROR</code></td><td>18 (0x12)</td><td>Shows <code>Billing system error</code> with <code>Okay</code> button.</td></tr>
+<tr><td><code>AUTH_BILLING_EXPIRED</code></td><td>19 (0x13)</td><td>Shows <code>Account billing has expired</code> with <code>Okay</code> button.</td></tr>
+<tr><td><code>AUTH_VERSION_MISMATCH</code></td><td>20 (0x14)</td><td>Shows <code>Wrong client version</code> with <code>Okay</code> button.</td></tr>
+<tr><td><code>AUTH_UNKNOWN_ACCOUNT</code></td><td>21 (0x15)</td><td>Shows <code>Unknown account</code> with <code>Okay</code> button.</td></tr>
+<tr><td><code>AUTH_INCORRECT_PASSWORD</code></td><td>22 (0x16)</td><td>Shows <code>Incorrect Password</code> with <code>Okay</code> button.</td></tr>
+<tr><td><code>AUTH_SESSION_EXPIRED</code></td><td>23 (0x17)</td><td>Shows <code>Session Expired</code> with <code>Okay</code> button.</td></tr>
+<tr><td><code>AUTH_SERVER_SHUTTING_DOWN</code></td><td>24 (0x18)</td><td></td></tr>
+<tr><td><code>AUTH_ALREADY_LOGGING_IN</code></td><td>25 (0x19)</td><td>Shows <code>Already Logging In</code> with <code>Okay</code> button.</td></tr>
+<tr><td><code>AUTH_LOGIN_SERVER_NOT_FOUND</code></td><td>26 (0x1A)</td><td>Shows <code>Invalid Login Server</code> with <code>Okay</code> button.</td></tr>
+<tr><td><code>AUTH_WAIT_QUEUE</code></td><td>27 (0x1B)</td><td>If this is sent without a <code>queue_position</code> field it will either reuse the one from before or use 0.</td></tr>
+<tr><td><code>AUTH_BANNED</code></td><td>28 (0x1C)</td><td>Shows <code>This account has been banned for violating the Terms of Use Agreement- http://www.wow-europe.com/en/lega. Please contact our GM department at http://www.wow-europe.com/en/support/ for more information.</code> with <code>Okay</code> button.</td></tr>
+<tr><td><code>AUTH_ALREADY_ONLINE</code></td><td>29 (0x1D)</td><td>Shows <code>This character is still logged on. If this character is not logged in and you continue to experience this issue for more than 15 minutes, please contact our Technical Support Department at http://www.wow-europe.com/en/support/</code> with <code>Okay</code> button.</td></tr>
+<tr><td><code>AUTH_NO_TIME</code></td><td>30 (0x1E)</td><td>Shows <code>Your World of Warcraft subscription has expired. You will need to reactivate your account. To do so, please visit http://signup.wow-europe.com/ for more information.</code> with <code>Okay</code> button.</td></tr>
+<tr><td><code>AUTH_DB_BUSY</code></td><td>31 (0x1F)</td><td>Shows <code>This session has timed out. Please try again at a later time or check the status of our WoW realms at http://www.wow-europe.com/en/serverstatus</code> with <code>Okay</code> button.</td></tr>
+<tr><td><code>AUTH_SUSPENDED</code></td><td>32 (0x20)</td><td>Shows ‘This account has been temporarily suspended for violating the Terms of Use Agreement - <code>http://www.wow-europe.com/en/legal</code>. Please contact our GM department at <code>http://www.wow-europe.com/en/support/</code> for more information.’ with ‘Okay’ button.</td></tr>
+<tr><td><code>AUTH_PARENTAL_CONTROL</code></td><td>33 (0x21)</td><td>Shows ‘Access to this account has been blocked by parental controls. Your settings may be changed in your preferences at <code>http://www.worldofwarcraft.com</code>.’ with ‘Okay’ button.</td></tr>
+<tr><td><code>REALM_LIST_IN_PROGRESS</code></td><td>34 (0x22)</td><td>Shows ‘Retrieving realm list’ with ‘Okay’ button.</td></tr>
+<tr><td><code>REALM_LIST_SUCCESS</code></td><td>35 (0x23)</td><td>Shows ‘Realm list retrieved’ with ‘Okay’ button.</td></tr>
+<tr><td><code>REALM_LIST_FAILED</code></td><td>36 (0x24)</td><td>Shows ‘Unable to connect to realm list server’ with ‘Okay’ button.</td></tr>
+<tr><td><code>REALM_LIST_INVALID</code></td><td>37 (0x25)</td><td>Shows ‘Invalid realm list’ with ‘Okay’ button.</td></tr>
+<tr><td><code>REALM_LIST_REALM_NOT_FOUND</code></td><td>38 (0x26)</td><td>Shows ‘The game server you have chosen is currently down. Use the Change Realm button to choose another Realm. Check <code>http://www.wow-europe.com/en/serverstatus</code> for current server status.’ with ‘Okay’ button.</td></tr>
+<tr><td><code>ACCOUNT_CREATE_IN_PROGRESS</code></td><td>39 (0x27)</td><td>Shows ‘Creating account’ with ‘Okay’ button.</td></tr>
+<tr><td><code>ACCOUNT_CREATE_SUCCESS</code></td><td>40 (0x28)</td><td>Shows ‘Account created’ with ‘Okay’ button.</td></tr>
+<tr><td><code>ACCOUNT_CREATE_FAILED</code></td><td>41 (0x29)</td><td>Shows ‘Account creation failed’ with ‘Okay’ button.</td></tr>
+<tr><td><code>CHAR_LIST_RETRIEVING</code></td><td>42 (0x2A)</td><td>Shows ‘Retrieving character list’ with ‘Okay’ button.</td></tr>
+<tr><td><code>CHAR_LIST_RETRIEVED</code></td><td>43 (0x2B)</td><td>Shows ‘Character list retrieved’ with ‘Okay’ button.</td></tr>
+<tr><td><code>CHAR_LIST_FAILED</code></td><td>44 (0x2C)</td><td>Shows ‘Error retrieving character list’ with ‘Okay’ button.</td></tr>
+<tr><td><code>CHAR_CREATE_IN_PROGRESS</code></td><td>45 (0x2D)</td><td>Shows ‘Creating character’ with ‘Okay’ button.</td></tr>
+<tr><td><code>CHAR_CREATE_SUCCESS</code></td><td>46 (0x2E)</td><td></td></tr>
+<tr><td><code>CHAR_CREATE_ERROR</code></td><td>47 (0x2F)</td><td></td></tr>
+<tr><td><code>CHAR_CREATE_FAILED</code></td><td>48 (0x30)</td><td>Shows ‘Character creation failed’ with ‘Okay’ button.</td></tr>
+<tr><td><code>CHAR_CREATE_NAME_IN_USE</code></td><td>49 (0x31)</td><td>Shows ‘That name is unavailable’ with ‘Okay’ button.</td></tr>
+<tr><td><code>CHAR_CREATE_DISABLED</code></td><td>50 (0x32)</td><td>Shows ‘Creation of that race and/or class is currently disabled.’ with ‘Okay’ button.</td></tr>
+<tr><td><code>CHAR_CREATE_PVP_TEAMS_VIOLATION</code></td><td>51 (0x33)</td><td>Shows ‘You cannot have both a Horde and an Alliance character on the same PvP realm’ with ‘Okay’ button.</td></tr>
+<tr><td><code>CHAR_CREATE_SERVER_LIMIT</code></td><td>52 (0x34)</td><td></td></tr>
+<tr><td><code>CHAR_CREATE_ACCOUNT_LIMIT</code></td><td>53 (0x35)</td><td>Shows ‘You already have the maximum number of characters allowed on this account.’ with ‘Okay’ button.</td></tr>
+<tr><td><code>CHAR_CREATE_SERVER_QUEUE</code></td><td>54 (0x36)</td><td></td></tr>
+<tr><td><code>CHAR_CREATE_ONLY_EXISTING</code></td><td>55 (0x37)</td><td>Shows ‘Only players who already have characters on this realm are currently allowed to create characters.’ with ‘Okay’ button.</td></tr>
+<tr><td><code>CHAR_DELETE_IN_PROGRESS</code></td><td>56 (0x38)</td><td>Shows ‘Deleting character’ with ‘Okay’ button.</td></tr>
+<tr><td><code>CHAR_DELETE_SUCCESS</code></td><td>57 (0x39)</td><td>Shows ‘Character deleted’ with ‘Okay’ button.</td></tr>
+<tr><td><code>CHAR_DELETE_FAILED</code></td><td>58 (0x3A)</td><td>Shows ‘Character deletion failed’ with ‘Okay’ button.</td></tr>
+<tr><td><code>CHAR_DELETE_FAILED_LOCKED_FOR_TRANSFER</code></td><td>59 (0x3B)</td><td>Shows ‘Your character is currently locked as part of the paid character transfer process.’ with ‘Okay’ button.</td></tr>
+<tr><td><code>CHAR_LOGIN_IN_PROGRESS</code></td><td>60 (0x3C)</td><td>Shows ‘Entering the World of Warcraft’ with ‘Okay’ button.</td></tr>
+<tr><td><code>CHAR_LOGIN_SUCCESS</code></td><td>61 (0x3D)</td><td>Shows ‘Login successful’ with ‘Okay’ button.</td></tr>
+<tr><td><code>CHAR_LOGIN_NO_WORLD</code></td><td>62 (0x3E)</td><td>Shows ‘World server is down’ with ‘Okay’ button.</td></tr>
+<tr><td><code>CHAR_LOGIN_DUPLICATE_CHARACTER</code></td><td>63 (0x3F)</td><td>Shows ‘A character with that name already exists’ with ‘Okay’ button.</td></tr>
+<tr><td><code>CHAR_LOGIN_NO_INSTANCES</code></td><td>64 (0x40)</td><td>Shows ‘No instance servers are available’ with ‘Okay’ button.</td></tr>
+<tr><td><code>CHAR_LOGIN_FAILED</code></td><td>65 (0x41)</td><td>Shows ‘Login failed’ with ‘Okay’ button.</td></tr>
+<tr><td><code>CHAR_LOGIN_DISABLED</code></td><td>66 (0x42)</td><td>Shows ‘Login for that race, class or character is currently disabled.’ with ‘Okay’ button.</td></tr>
+<tr><td><code>CHAR_LOGIN_NO_CHARACTER</code></td><td>67 (0x43)</td><td>Shows ‘Character not found’ with ‘Okay’ button.</td></tr>
+<tr><td><code>CHAR_LOGIN_LOCKED_FOR_TRANSFER</code></td><td>68 (0x44)</td><td>Shows ‘Your character is currently locked as part of the paid character transfer process.’ with ‘Okay’ button.</td></tr>
+<tr><td><code>CHAR_NAME_NO_NAME</code></td><td>69 (0x45)</td><td>Shows ‘Enter a name for your character’ with ‘Okay’ button.</td></tr>
+<tr><td><code>CHAR_NAME_TOO_SHORT</code></td><td>70 (0x46)</td><td>Shows ‘Names must be at least 2 characters’ with ‘Okay’ button.</td></tr>
+<tr><td><code>CHAR_NAME_TOO_LONG</code></td><td>71 (0x47)</td><td>Shows ‘Names must be no more than 12 characters’ with ‘Okay’ button.</td></tr>
+<tr><td><code>CHAR_NAME_ONLY_LETTERS</code></td><td>72 (0x48)</td><td>Shows ‘Names can only contain letters’ with ‘Okay’ button.</td></tr>
+<tr><td><code>CHAR_NAME_MIXED_LANGUAGES</code></td><td>73 (0x49)</td><td>Shows ‘Names must contain only one language’ with ‘Okay’ button.</td></tr>
+<tr><td><code>CHAR_NAME_PROFANE</code></td><td>74 (0x4A)</td><td>Shows ‘That name contains profanity’ with ‘Okay’ button.</td></tr>
+<tr><td><code>CHAR_NAME_RESERVED</code></td><td>75 (0x4B)</td><td>Shows ‘That name is unavailable’ with ‘Okay’ button.</td></tr>
+<tr><td><code>CHAR_NAME_INVALID_APOSTROPHE</code></td><td>76 (0x4C)</td><td>Shows ‘You cannot use an apostrophe as the first or last character of your name’ with ‘Okay’ button.</td></tr>
+<tr><td><code>CHAR_NAME_MULTIPLE_APOSTROPHES</code></td><td>77 (0x4D)</td><td>Shows ‘You can only have one apostrophe’ with ‘Okay’ button.</td></tr>
+<tr><td><code>CHAR_NAME_THREE_CONSECUTIVE</code></td><td>78 (0x4E)</td><td>Shows ‘You cannot use the same letter three times consecutively’ with ‘Okay’ button.</td></tr>
+<tr><td><code>CHAR_NAME_INVALID_SPACE</code></td><td>79 (0x4F)</td><td>Shows ‘You cannot use a space as the first or last character of your name’ with ‘Okay’ button.</td></tr>
+<tr><td><code>CHAR_NAME_SUCCESS</code></td><td>80 (0x50)</td><td>Shows an empty box with ‘Okay’ button.</td></tr>
+<tr><td><code>CHAR_NAME_FAILURE</code></td><td>81 (0x51)</td><td>Shows ‘Invalid character name’ with ‘Okay’ button.</td></tr>
+</tbody>
+</table>
+</div>
+<p>Used in:</p>
+<ul>
+<li><a href="smsg_auth_response.html">SMSG_AUTH_RESPONSE</a></li>
+<li><a href="smsg_character_login_failed.html">SMSG_CHARACTER_LOGIN_FAILED</a></li>
+<li><a href="smsg_char_create.html">SMSG_CHAR_CREATE</a></li>
+<li><a href="smsg_char_delete.html">SMSG_CHAR_DELETE</a></li>
+<li><a href="smsg_char_rename.html">SMSG_CHAR_RENAME</a></li>
+</ul>
+<h2 id="client-version-243"><a class="header" href="#client-version-243">Client Version 2.4.3</a></h2>
+<h3 id="wowm-representation-1"><a class="header" href="#wowm-representation-1">Wowm Representation</a></h3>
+<p>Autogenerated from <code>wowm</code> file at <a href="https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/enums/world_result.wowm#L164"><code>wow_message_parser/wowm/world/enums/world_result.wowm:164</code></a>.</p>
+<pre><code class="language-rust ignore">enum WorldResult : u8 {
+    RESPONSE_SUCCESS = 0x00;
+    RESPONSE_FAILURE = 0x01;
+    RESPONSE_CANCELLED = 0x02;
+    RESPONSE_DISCONNECTED = 0x03;
+    RESPONSE_FAILED_TO_CONNECT = 0x04;
+    RESPONSE_CONNECTED = 0x05;
+    RESPONSE_VERSION_MISMATCH = 0x06;
+    CSTATUS_CONNECTING = 0x07;
+    CSTATUS_NEGOTIATING_SECURITY = 0x08;
+    CSTATUS_NEGOTIATION_COMPLETE = 0x09;
+    CSTATUS_NEGOTIATION_FAILED = 0x0A;
+    CSTATUS_AUTHENTICATING = 0x0B;
+    AUTH_OK = 0x0C;
+    AUTH_FAILED = 0x0D;
+    AUTH_REJECT = 0x0E;
+    AUTH_BAD_SERVER_PROOF = 0x0F;
+    AUTH_UNAVAILABLE = 0x10;
+    AUTH_SYSTEM_ERROR = 0x11;
+    AUTH_BILLING_ERROR = 0x12;
+    AUTH_BILLING_EXPIRED = 0x13;
+    AUTH_VERSION_MISMATCH = 0x14;
+    AUTH_UNKNOWN_ACCOUNT = 0x15;
+    AUTH_INCORRECT_PASSWORD = 0x16;
+    AUTH_SESSION_EXPIRED = 0x17;
+    AUTH_SERVER_SHUTTING_DOWN = 0x18;
+    AUTH_ALREADY_LOGGING_IN = 0x19;
+    AUTH_LOGIN_SERVER_NOT_FOUND = 0x1A;
+    AUTH_WAIT_QUEUE = 0x1B;
+    AUTH_BANNED = 0x1C;
+    AUTH_ALREADY_ONLINE = 0x1D;
+    AUTH_NO_TIME = 0x1E;
+    AUTH_DB_BUSY = 0x1F;
+    AUTH_SUSPENDED = 0x20;
+    AUTH_PARENTAL_CONTROL = 0x21;
+    AUTH_LOCKED_ENFORCED = 0x22;
+    REALM_LIST_IN_PROGRESS = 0x23;
+    REALM_LIST_SUCCESS = 0x24;
+    REALM_LIST_FAILED = 0x25;
+    REALM_LIST_INVALID = 0x26;
+    REALM_LIST_REALM_NOT_FOUND = 0x27;
+    ACCOUNT_CREATE_IN_PROGRESS = 0x28;
+    ACCOUNT_CREATE_SUCCESS = 0x29;
+    ACCOUNT_CREATE_FAILED = 0x2A;
+    CHAR_LIST_RETRIEVING = 0x2B;
+    CHAR_LIST_RETRIEVED = 0x2C;
+    CHAR_LIST_FAILED = 0x2D;
+    CHAR_CREATE_IN_PROGRESS = 0x2E;
+    CHAR_CREATE_SUCCESS = 0x2F;
+    CHAR_CREATE_ERROR = 0x30;
+    CHAR_CREATE_FAILED = 0x31;
+    CHAR_CREATE_NAME_IN_USE = 0x32;
+    CHAR_CREATE_DISABLED = 0x33;
+    CHAR_CREATE_PVP_TEAMS_VIOLATION = 0x34;
+    CHAR_CREATE_SERVER_LIMIT = 0x35;
+    CHAR_CREATE_ACCOUNT_LIMIT = 0x36;
+    CHAR_CREATE_SERVER_QUEUE = 0x37;
+    CHAR_CREATE_ONLY_EXISTING = 0x38;
+    CHAR_CREATE_EXPANSION = 0x39;
+    CHAR_DELETE_IN_PROGRESS = 0x3A;
+    CHAR_DELETE_SUCCESS = 0x3B;
+    CHAR_DELETE_FAILED = 0x3C;
+    CHAR_DELETE_FAILED_LOCKED_FOR_TRANSFER = 0x3D;
+    CHAR_DELETE_FAILED_GUILD_LEADER = 0x3E;
+    CHAR_DELETE_FAILED_ARENA_CAPTAIN = 0x3F;
+    CHAR_LOGIN_IN_PROGRESS = 0x40;
+    CHAR_LOGIN_SUCCESS = 0x41;
+    CHAR_LOGIN_NO_WORLD = 0x42;
+    CHAR_LOGIN_DUPLICATE_CHARACTER = 0x43;
+    CHAR_LOGIN_NO_INSTANCES = 0x44;
+    CHAR_LOGIN_FAILED = 0x45;
+    CHAR_LOGIN_DISABLED = 0x46;
+    CHAR_LOGIN_NO_CHARACTER = 0x47;
+    CHAR_LOGIN_LOCKED_FOR_TRANSFER = 0x48;
+    CHAR_LOGIN_LOCKED_BY_BILLING = 0x49;
+    CHAR_NAME_SUCCESS = 0x4A;
+    CHAR_NAME_FAILURE = 0x4B;
+    CHAR_NAME_NO_NAME = 0x4C;
+    CHAR_NAME_TOO_SHORT = 0x4D;
+    CHAR_NAME_TOO_LONG = 0x4E;
+    CHAR_NAME_INVALID_CHARACTER = 0x4F;
+    CHAR_NAME_MIXED_LANGUAGES = 0x50;
+    CHAR_NAME_PROFANE = 0x51;
+    CHAR_NAME_RESERVED = 0x52;
+    CHAR_NAME_INVALID_APOSTROPHE = 0x53;
+    CHAR_NAME_MULTIPLE_APOSTROPHES = 0x54;
+    CHAR_NAME_THREE_CONSECUTIVE = 0x55;
+    CHAR_NAME_INVALID_SPACE = 0x56;
+    CHAR_NAME_CONSECUTIVE_SPACES = 0x57;
+    CHAR_NAME_RUSSIAN_CONSECUTIVE_SILENT_CHARACTERS = 0x58;
+    CHAR_NAME_RUSSIAN_SILENT_CHARACTER_AT_BEGINNING_OR_END = 0x59;
+    CHAR_NAME_DECLENSION_DOESNT_MATCH_BASE_NAME = 0x5A;
+}</code></pre>
+<h3 id="type-1"><a class="header" href="#type-1">Type</a></h3>
+<p>The basic type is <code>u8</code>, a 1 byte (8 bit) integer.</p>
+<h3 id="enumerators-1"><a class="header" href="#enumerators-1">Enumerators</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Enumerator</th><th>Value</th><th>Comment</th></tr>
+</thead>
+<tbody>
+<tr><td><code>RESPONSE_SUCCESS</code></td><td>0 (0x00)</td><td></td></tr>
+<tr><td><code>RESPONSE_FAILURE</code></td><td>1 (0x01)</td><td></td></tr>
+<tr><td><code>RESPONSE_CANCELLED</code></td><td>2 (0x02)</td><td></td></tr>
+<tr><td><code>RESPONSE_DISCONNECTED</code></td><td>3 (0x03)</td><td></td></tr>
+<tr><td><code>RESPONSE_FAILED_TO_CONNECT</code></td><td>4 (0x04)</td><td></td></tr>
+<tr><td><code>RESPONSE_CONNECTED</code></td><td>5 (0x05)</td><td></td></tr>
+<tr><td><code>RESPONSE_VERSION_MISMATCH</code></td><td>6 (0x06)</td><td></td></tr>
+<tr><td><code>CSTATUS_CONNECTING</code></td><td>7 (0x07)</td><td></td></tr>
+<tr><td><code>CSTATUS_NEGOTIATING_SECURITY</code></td><td>8 (0x08)</td><td></td></tr>
+<tr><td><code>CSTATUS_NEGOTIATION_COMPLETE</code></td><td>9 (0x09)</td><td></td></tr>
+<tr><td><code>CSTATUS_NEGOTIATION_FAILED</code></td><td>10 (0x0A)</td><td></td></tr>
+<tr><td><code>CSTATUS_AUTHENTICATING</code></td><td>11 (0x0B)</td><td></td></tr>
+<tr><td><code>AUTH_OK</code></td><td>12 (0x0C)</td><td></td></tr>
+<tr><td><code>AUTH_FAILED</code></td><td>13 (0x0D)</td><td></td></tr>
+<tr><td><code>AUTH_REJECT</code></td><td>14 (0x0E)</td><td></td></tr>
+<tr><td><code>AUTH_BAD_SERVER_PROOF</code></td><td>15 (0x0F)</td><td></td></tr>
+<tr><td><code>AUTH_UNAVAILABLE</code></td><td>16 (0x10)</td><td></td></tr>
+<tr><td><code>AUTH_SYSTEM_ERROR</code></td><td>17 (0x11)</td><td></td></tr>
+<tr><td><code>AUTH_BILLING_ERROR</code></td><td>18 (0x12)</td><td></td></tr>
+<tr><td><code>AUTH_BILLING_EXPIRED</code></td><td>19 (0x13)</td><td></td></tr>
+<tr><td><code>AUTH_VERSION_MISMATCH</code></td><td>20 (0x14)</td><td></td></tr>
+<tr><td><code>AUTH_UNKNOWN_ACCOUNT</code></td><td>21 (0x15)</td><td></td></tr>
+<tr><td><code>AUTH_INCORRECT_PASSWORD</code></td><td>22 (0x16)</td><td></td></tr>
+<tr><td><code>AUTH_SESSION_EXPIRED</code></td><td>23 (0x17)</td><td></td></tr>
+<tr><td><code>AUTH_SERVER_SHUTTING_DOWN</code></td><td>24 (0x18)</td><td></td></tr>
+<tr><td><code>AUTH_ALREADY_LOGGING_IN</code></td><td>25 (0x19)</td><td></td></tr>
+<tr><td><code>AUTH_LOGIN_SERVER_NOT_FOUND</code></td><td>26 (0x1A)</td><td></td></tr>
+<tr><td><code>AUTH_WAIT_QUEUE</code></td><td>27 (0x1B)</td><td></td></tr>
+<tr><td><code>AUTH_BANNED</code></td><td>28 (0x1C)</td><td></td></tr>
+<tr><td><code>AUTH_ALREADY_ONLINE</code></td><td>29 (0x1D)</td><td></td></tr>
+<tr><td><code>AUTH_NO_TIME</code></td><td>30 (0x1E)</td><td></td></tr>
+<tr><td><code>AUTH_DB_BUSY</code></td><td>31 (0x1F)</td><td></td></tr>
+<tr><td><code>AUTH_SUSPENDED</code></td><td>32 (0x20)</td><td></td></tr>
+<tr><td><code>AUTH_PARENTAL_CONTROL</code></td><td>33 (0x21)</td><td></td></tr>
+<tr><td><code>AUTH_LOCKED_ENFORCED</code></td><td>34 (0x22)</td><td></td></tr>
+<tr><td><code>REALM_LIST_IN_PROGRESS</code></td><td>35 (0x23)</td><td></td></tr>
+<tr><td><code>REALM_LIST_SUCCESS</code></td><td>36 (0x24)</td><td></td></tr>
+<tr><td><code>REALM_LIST_FAILED</code></td><td>37 (0x25)</td><td></td></tr>
+<tr><td><code>REALM_LIST_INVALID</code></td><td>38 (0x26)</td><td></td></tr>
+<tr><td><code>REALM_LIST_REALM_NOT_FOUND</code></td><td>39 (0x27)</td><td></td></tr>
+<tr><td><code>ACCOUNT_CREATE_IN_PROGRESS</code></td><td>40 (0x28)</td><td></td></tr>
+<tr><td><code>ACCOUNT_CREATE_SUCCESS</code></td><td>41 (0x29)</td><td></td></tr>
+<tr><td><code>ACCOUNT_CREATE_FAILED</code></td><td>42 (0x2A)</td><td></td></tr>
+<tr><td><code>CHAR_LIST_RETRIEVING</code></td><td>43 (0x2B)</td><td></td></tr>
+<tr><td><code>CHAR_LIST_RETRIEVED</code></td><td>44 (0x2C)</td><td></td></tr>
+<tr><td><code>CHAR_LIST_FAILED</code></td><td>45 (0x2D)</td><td></td></tr>
+<tr><td><code>CHAR_CREATE_IN_PROGRESS</code></td><td>46 (0x2E)</td><td></td></tr>
+<tr><td><code>CHAR_CREATE_SUCCESS</code></td><td>47 (0x2F)</td><td></td></tr>
+<tr><td><code>CHAR_CREATE_ERROR</code></td><td>48 (0x30)</td><td></td></tr>
+<tr><td><code>CHAR_CREATE_FAILED</code></td><td>49 (0x31)</td><td></td></tr>
+<tr><td><code>CHAR_CREATE_NAME_IN_USE</code></td><td>50 (0x32)</td><td></td></tr>
+<tr><td><code>CHAR_CREATE_DISABLED</code></td><td>51 (0x33)</td><td></td></tr>
+<tr><td><code>CHAR_CREATE_PVP_TEAMS_VIOLATION</code></td><td>52 (0x34)</td><td></td></tr>
+<tr><td><code>CHAR_CREATE_SERVER_LIMIT</code></td><td>53 (0x35)</td><td></td></tr>
+<tr><td><code>CHAR_CREATE_ACCOUNT_LIMIT</code></td><td>54 (0x36)</td><td></td></tr>
+<tr><td><code>CHAR_CREATE_SERVER_QUEUE</code></td><td>55 (0x37)</td><td></td></tr>
+<tr><td><code>CHAR_CREATE_ONLY_EXISTING</code></td><td>56 (0x38)</td><td></td></tr>
+<tr><td><code>CHAR_CREATE_EXPANSION</code></td><td>57 (0x39)</td><td></td></tr>
+<tr><td><code>CHAR_DELETE_IN_PROGRESS</code></td><td>58 (0x3A)</td><td></td></tr>
+<tr><td><code>CHAR_DELETE_SUCCESS</code></td><td>59 (0x3B)</td><td></td></tr>
+<tr><td><code>CHAR_DELETE_FAILED</code></td><td>60 (0x3C)</td><td></td></tr>
+<tr><td><code>CHAR_DELETE_FAILED_LOCKED_FOR_TRANSFER</code></td><td>61 (0x3D)</td><td></td></tr>
+<tr><td><code>CHAR_DELETE_FAILED_GUILD_LEADER</code></td><td>62 (0x3E)</td><td></td></tr>
+<tr><td><code>CHAR_DELETE_FAILED_ARENA_CAPTAIN</code></td><td>63 (0x3F)</td><td></td></tr>
+<tr><td><code>CHAR_LOGIN_IN_PROGRESS</code></td><td>64 (0x40)</td><td></td></tr>
+<tr><td><code>CHAR_LOGIN_SUCCESS</code></td><td>65 (0x41)</td><td></td></tr>
+<tr><td><code>CHAR_LOGIN_NO_WORLD</code></td><td>66 (0x42)</td><td></td></tr>
+<tr><td><code>CHAR_LOGIN_DUPLICATE_CHARACTER</code></td><td>67 (0x43)</td><td></td></tr>
+<tr><td><code>CHAR_LOGIN_NO_INSTANCES</code></td><td>68 (0x44)</td><td></td></tr>
+<tr><td><code>CHAR_LOGIN_FAILED</code></td><td>69 (0x45)</td><td></td></tr>
+<tr><td><code>CHAR_LOGIN_DISABLED</code></td><td>70 (0x46)</td><td></td></tr>
+<tr><td><code>CHAR_LOGIN_NO_CHARACTER</code></td><td>71 (0x47)</td><td></td></tr>
+<tr><td><code>CHAR_LOGIN_LOCKED_FOR_TRANSFER</code></td><td>72 (0x48)</td><td></td></tr>
+<tr><td><code>CHAR_LOGIN_LOCKED_BY_BILLING</code></td><td>73 (0x49)</td><td></td></tr>
+<tr><td><code>CHAR_NAME_SUCCESS</code></td><td>74 (0x4A)</td><td></td></tr>
+<tr><td><code>CHAR_NAME_FAILURE</code></td><td>75 (0x4B)</td><td></td></tr>
+<tr><td><code>CHAR_NAME_NO_NAME</code></td><td>76 (0x4C)</td><td></td></tr>
+<tr><td><code>CHAR_NAME_TOO_SHORT</code></td><td>77 (0x4D)</td><td></td></tr>
+<tr><td><code>CHAR_NAME_TOO_LONG</code></td><td>78 (0x4E)</td><td></td></tr>
+<tr><td><code>CHAR_NAME_INVALID_CHARACTER</code></td><td>79 (0x4F)</td><td></td></tr>
+<tr><td><code>CHAR_NAME_MIXED_LANGUAGES</code></td><td>80 (0x50)</td><td></td></tr>
+<tr><td><code>CHAR_NAME_PROFANE</code></td><td>81 (0x51)</td><td></td></tr>
+<tr><td><code>CHAR_NAME_RESERVED</code></td><td>82 (0x52)</td><td></td></tr>
+<tr><td><code>CHAR_NAME_INVALID_APOSTROPHE</code></td><td>83 (0x53)</td><td></td></tr>
+<tr><td><code>CHAR_NAME_MULTIPLE_APOSTROPHES</code></td><td>84 (0x54)</td><td></td></tr>
+<tr><td><code>CHAR_NAME_THREE_CONSECUTIVE</code></td><td>85 (0x55)</td><td></td></tr>
+<tr><td><code>CHAR_NAME_INVALID_SPACE</code></td><td>86 (0x56)</td><td></td></tr>
+<tr><td><code>CHAR_NAME_CONSECUTIVE_SPACES</code></td><td>87 (0x57)</td><td></td></tr>
+<tr><td><code>CHAR_NAME_RUSSIAN_CONSECUTIVE_SILENT_CHARACTERS</code></td><td>88 (0x58)</td><td></td></tr>
+<tr><td><code>CHAR_NAME_RUSSIAN_SILENT_CHARACTER_AT_BEGINNING_OR_END</code></td><td>89 (0x59)</td><td></td></tr>
+<tr><td><code>CHAR_NAME_DECLENSION_DOESNT_MATCH_BASE_NAME</code></td><td>90 (0x5A)</td><td></td></tr>
+</tbody>
+</table>
+</div>
+<p>Used in:</p>
+<ul>
+<li><a href="smsg_auth_response.html">SMSG_AUTH_RESPONSE</a></li>
+<li><a href="smsg_character_login_failed.html">SMSG_CHARACTER_LOGIN_FAILED</a></li>
+<li><a href="smsg_char_create.html">SMSG_CHAR_CREATE</a></li>
+<li><a href="smsg_char_delete.html">SMSG_CHAR_DELETE</a></li>
+<li><a href="smsg_char_rename.html">SMSG_CHAR_RENAME</a></li>
+</ul>
+<h2 id="client-version-335"><a class="header" href="#client-version-335">Client Version 3.3.5</a></h2>
+<h3 id="wowm-representation-2"><a class="header" href="#wowm-representation-2">Wowm Representation</a></h3>
+<p>Autogenerated from <code>wowm</code> file at <a href="https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/enums/world_result.wowm#L269"><code>wow_message_parser/wowm/world/enums/world_result.wowm:269</code></a>.</p>
+<pre><code class="language-rust ignore">enum WorldResult : u8 {
+    RESPONSE_SUCCESS = 0x00;
+    RESPONSE_FAILURE = 0x01;
+    RESPONSE_CANCELLED = 0x02;
+    RESPONSE_DISCONNECTED = 0x03;
+    RESPONSE_FAILED_TO_CONNECT = 0x04;
+    RESPONSE_CONNECTED = 0x05;
+    RESPONSE_VERSION_MISMATCH = 0x06;
+    CSTATUS_CONNECTING = 0x07;
+    CSTATUS_NEGOTIATING_SECURITY = 0x08;
+    CSTATUS_NEGOTIATION_COMPLETE = 0x09;
+    CSTATUS_NEGOTIATION_FAILED = 0x0A;
+    CSTATUS_AUTHENTICATING = 0x0B;
+    AUTH_OK = 0x0C;
+    AUTH_FAILED = 0x0D;
+    AUTH_REJECT = 0x0E;
+    AUTH_BAD_SERVER_PROOF = 0x0F;
+    AUTH_UNAVAILABLE = 0x10;
+    AUTH_SYSTEM_ERROR = 0x11;
+    AUTH_BILLING_ERROR = 0x12;
+    AUTH_BILLING_EXPIRED = 0x13;
+    AUTH_VERSION_MISMATCH = 0x14;
+    AUTH_UNKNOWN_ACCOUNT = 0x15;
+    AUTH_INCORRECT_PASSWORD = 0x16;
+    AUTH_SESSION_EXPIRED = 0x17;
+    AUTH_SERVER_SHUTTING_DOWN = 0x18;
+    AUTH_ALREADY_LOGGING_IN = 0x19;
+    AUTH_LOGIN_SERVER_NOT_FOUND = 0x1A;
+    AUTH_WAIT_QUEUE = 0x1B;
+    AUTH_BANNED = 0x1C;
+    AUTH_ALREADY_ONLINE = 0x1D;
+    AUTH_NO_TIME = 0x1E;
+    AUTH_DB_BUSY = 0x1F;
+    AUTH_SUSPENDED = 0x20;
+    AUTH_PARENTAL_CONTROL = 0x21;
+    AUTH_LOCKED_ENFORCED = 0x22;
+    REALM_LIST_IN_PROGRESS = 0x23;
+    REALM_LIST_SUCCESS = 0x24;
+    REALM_LIST_FAILED = 0x25;
+    REALM_LIST_INVALID = 0x26;
+    REALM_LIST_REALM_NOT_FOUND = 0x27;
+    ACCOUNT_CREATE_IN_PROGRESS = 0x28;
+    ACCOUNT_CREATE_SUCCESS = 0x29;
+    ACCOUNT_CREATE_FAILED = 0x2A;
+    CHAR_LIST_RETRIEVING = 0x2B;
+    CHAR_LIST_RETRIEVED = 0x2C;
+    CHAR_LIST_FAILED = 0x2D;
+    CHAR_CREATE_IN_PROGRESS = 0x2E;
+    CHAR_CREATE_SUCCESS = 0x2F;
+    CHAR_CREATE_ERROR = 0x30;
+    CHAR_CREATE_FAILED = 0x31;
+    CHAR_CREATE_NAME_IN_USE = 0x32;
+    CHAR_CREATE_DISABLED = 0x33;
+    CHAR_CREATE_PVP_TEAMS_VIOLATION = 0x34;
+    CHAR_CREATE_SERVER_LIMIT = 0x35;
+    CHAR_CREATE_ACCOUNT_LIMIT = 0x36;
+    CHAR_CREATE_SERVER_QUEUE = 0x37;
+    CHAR_CREATE_ONLY_EXISTING = 0x38;
+    CHAR_CREATE_EXPANSION = 0x39;
+    CHAR_CREATE_EXPANSION_CLASS = 0x3A;
+    CHAR_CREATE_LEVEL_REQUIREMENT = 0x3B;
+    CHAR_CREATE_UNIQUE_CLASS_LIMIT = 0x3C;
+    CHAR_CREATE_CHARACTER_IN_GUILD = 0x3D;
+    CHAR_CREATE_RESTRICTED_RACECLASS = 0x3E;
+    CHAR_CREATE_CHARACTER_CHOOSE_RACE = 0x3F;
+    CHAR_CREATE_CHARACTER_ARENA_LEADER = 0x40;
+    CHAR_CREATE_CHARACTER_DELETE_MAIL = 0x41;
+    CHAR_CREATE_CHARACTER_SWAP_FACTION = 0x42;
+    CHAR_CREATE_CHARACTER_RACE_ONLY = 0x43;
+    CHAR_CREATE_CHARACTER_GOLD_LIMIT = 0x44;
+    CHAR_CREATE_FORCE_LOGIN = 0x45;
+    CHAR_DELETE_IN_PROGRESS = 0x46;
+    CHAR_DELETE_SUCCESS = 0x47;
+    CHAR_DELETE_FAILED = 0x48;
+    CHAR_DELETE_FAILED_LOCKED_FOR_TRANSFER = 0x49;
+    CHAR_DELETE_FAILED_GUILD_LEADER = 0x4A;
+    CHAR_DELETE_FAILED_ARENA_CAPTAIN = 0x4B;
+    CHAR_LOGIN_IN_PROGRESS = 0x4C;
+    CHAR_LOGIN_SUCCESS = 0x4D;
+    CHAR_LOGIN_NO_WORLD = 0x4E;
+    CHAR_LOGIN_DUPLICATE_CHARACTER = 0x4F;
+    CHAR_LOGIN_NO_INSTANCES = 0x50;
+    CHAR_LOGIN_FAILED = 0x51;
+    CHAR_LOGIN_DISABLED = 0x52;
+    CHAR_LOGIN_NO_CHARACTER = 0x53;
+    CHAR_LOGIN_LOCKED_FOR_TRANSFER = 0x54;
+    CHAR_LOGIN_LOCKED_BY_BILLING = 0x55;
+    CHAR_LOGIN_LOCKED_BY_MOBILE_AH = 0x56;
+    CHAR_NAME_SUCCESS = 0x57;
+    CHAR_NAME_FAILURE = 0x58;
+    CHAR_NAME_NO_NAME = 0x59;
+    CHAR_NAME_TOO_SHORT = 0x5A;
+    CHAR_NAME_TOO_LONG = 0x5B;
+    CHAR_NAME_INVALID_CHARACTER = 0x5C;
+    CHAR_NAME_MIXED_LANGUAGES = 0x5D;
+    CHAR_NAME_PROFANE = 0x5E;
+    CHAR_NAME_RESERVED = 0x5F;
+    CHAR_NAME_INVALID_APOSTROPHE = 0x60;
+    CHAR_NAME_MULTIPLE_APOSTROPHES = 0x61;
+    CHAR_NAME_THREE_CONSECUTIVE = 0x62;
+    CHAR_NAME_INVALID_SPACE = 0x63;
+    CHAR_NAME_CONSECUTIVE_SPACES = 0x64;
+    CHAR_NAME_RUSSIAN_CONSECUTIVE_SILENT_CHARACTERS = 0x65;
+    CHAR_NAME_RUSSIAN_SILENT_CHARACTER_AT_BEGINNING_OR_END = 0x66;
+    CHAR_NAME_DECLENSION_DOESNT_MATCH_BASE_NAME = 0x67;
+}</code></pre>
+<h3 id="type-2"><a class="header" href="#type-2">Type</a></h3>
+<p>The basic type is <code>u8</code>, a 1 byte (8 bit) integer.</p>
+<h3 id="enumerators-2"><a class="header" href="#enumerators-2">Enumerators</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Enumerator</th><th>Value</th><th>Comment</th></tr>
+</thead>
+<tbody>
+<tr><td><code>RESPONSE_SUCCESS</code></td><td>0 (0x00)</td><td></td></tr>
+<tr><td><code>RESPONSE_FAILURE</code></td><td>1 (0x01)</td><td></td></tr>
+<tr><td><code>RESPONSE_CANCELLED</code></td><td>2 (0x02)</td><td></td></tr>
+<tr><td><code>RESPONSE_DISCONNECTED</code></td><td>3 (0x03)</td><td></td></tr>
+<tr><td><code>RESPONSE_FAILED_TO_CONNECT</code></td><td>4 (0x04)</td><td></td></tr>
+<tr><td><code>RESPONSE_CONNECTED</code></td><td>5 (0x05)</td><td></td></tr>
+<tr><td><code>RESPONSE_VERSION_MISMATCH</code></td><td>6 (0x06)</td><td></td></tr>
+<tr><td><code>CSTATUS_CONNECTING</code></td><td>7 (0x07)</td><td></td></tr>
+<tr><td><code>CSTATUS_NEGOTIATING_SECURITY</code></td><td>8 (0x08)</td><td></td></tr>
+<tr><td><code>CSTATUS_NEGOTIATION_COMPLETE</code></td><td>9 (0x09)</td><td></td></tr>
+<tr><td><code>CSTATUS_NEGOTIATION_FAILED</code></td><td>10 (0x0A)</td><td></td></tr>
+<tr><td><code>CSTATUS_AUTHENTICATING</code></td><td>11 (0x0B)</td><td></td></tr>
+<tr><td><code>AUTH_OK</code></td><td>12 (0x0C)</td><td></td></tr>
+<tr><td><code>AUTH_FAILED</code></td><td>13 (0x0D)</td><td></td></tr>
+<tr><td><code>AUTH_REJECT</code></td><td>14 (0x0E)</td><td></td></tr>
+<tr><td><code>AUTH_BAD_SERVER_PROOF</code></td><td>15 (0x0F)</td><td></td></tr>
+<tr><td><code>AUTH_UNAVAILABLE</code></td><td>16 (0x10)</td><td></td></tr>
+<tr><td><code>AUTH_SYSTEM_ERROR</code></td><td>17 (0x11)</td><td></td></tr>
+<tr><td><code>AUTH_BILLING_ERROR</code></td><td>18 (0x12)</td><td></td></tr>
+<tr><td><code>AUTH_BILLING_EXPIRED</code></td><td>19 (0x13)</td><td></td></tr>
+<tr><td><code>AUTH_VERSION_MISMATCH</code></td><td>20 (0x14)</td><td></td></tr>
+<tr><td><code>AUTH_UNKNOWN_ACCOUNT</code></td><td>21 (0x15)</td><td></td></tr>
+<tr><td><code>AUTH_INCORRECT_PASSWORD</code></td><td>22 (0x16)</td><td></td></tr>
+<tr><td><code>AUTH_SESSION_EXPIRED</code></td><td>23 (0x17)</td><td></td></tr>
+<tr><td><code>AUTH_SERVER_SHUTTING_DOWN</code></td><td>24 (0x18)</td><td></td></tr>
+<tr><td><code>AUTH_ALREADY_LOGGING_IN</code></td><td>25 (0x19)</td><td></td></tr>
+<tr><td><code>AUTH_LOGIN_SERVER_NOT_FOUND</code></td><td>26 (0x1A)</td><td></td></tr>
+<tr><td><code>AUTH_WAIT_QUEUE</code></td><td>27 (0x1B)</td><td></td></tr>
+<tr><td><code>AUTH_BANNED</code></td><td>28 (0x1C)</td><td></td></tr>
+<tr><td><code>AUTH_ALREADY_ONLINE</code></td><td>29 (0x1D)</td><td></td></tr>
+<tr><td><code>AUTH_NO_TIME</code></td><td>30 (0x1E)</td><td></td></tr>
+<tr><td><code>AUTH_DB_BUSY</code></td><td>31 (0x1F)</td><td></td></tr>
+<tr><td><code>AUTH_SUSPENDED</code></td><td>32 (0x20)</td><td></td></tr>
+<tr><td><code>AUTH_PARENTAL_CONTROL</code></td><td>33 (0x21)</td><td></td></tr>
+<tr><td><code>AUTH_LOCKED_ENFORCED</code></td><td>34 (0x22)</td><td></td></tr>
+<tr><td><code>REALM_LIST_IN_PROGRESS</code></td><td>35 (0x23)</td><td></td></tr>
+<tr><td><code>REALM_LIST_SUCCESS</code></td><td>36 (0x24)</td><td></td></tr>
+<tr><td><code>REALM_LIST_FAILED</code></td><td>37 (0x25)</td><td></td></tr>
+<tr><td><code>REALM_LIST_INVALID</code></td><td>38 (0x26)</td><td></td></tr>
+<tr><td><code>REALM_LIST_REALM_NOT_FOUND</code></td><td>39 (0x27)</td><td></td></tr>
+<tr><td><code>ACCOUNT_CREATE_IN_PROGRESS</code></td><td>40 (0x28)</td><td></td></tr>
+<tr><td><code>ACCOUNT_CREATE_SUCCESS</code></td><td>41 (0x29)</td><td></td></tr>
+<tr><td><code>ACCOUNT_CREATE_FAILED</code></td><td>42 (0x2A)</td><td></td></tr>
+<tr><td><code>CHAR_LIST_RETRIEVING</code></td><td>43 (0x2B)</td><td></td></tr>
+<tr><td><code>CHAR_LIST_RETRIEVED</code></td><td>44 (0x2C)</td><td></td></tr>
+<tr><td><code>CHAR_LIST_FAILED</code></td><td>45 (0x2D)</td><td></td></tr>
+<tr><td><code>CHAR_CREATE_IN_PROGRESS</code></td><td>46 (0x2E)</td><td></td></tr>
+<tr><td><code>CHAR_CREATE_SUCCESS</code></td><td>47 (0x2F)</td><td></td></tr>
+<tr><td><code>CHAR_CREATE_ERROR</code></td><td>48 (0x30)</td><td></td></tr>
+<tr><td><code>CHAR_CREATE_FAILED</code></td><td>49 (0x31)</td><td></td></tr>
+<tr><td><code>CHAR_CREATE_NAME_IN_USE</code></td><td>50 (0x32)</td><td></td></tr>
+<tr><td><code>CHAR_CREATE_DISABLED</code></td><td>51 (0x33)</td><td></td></tr>
+<tr><td><code>CHAR_CREATE_PVP_TEAMS_VIOLATION</code></td><td>52 (0x34)</td><td></td></tr>
+<tr><td><code>CHAR_CREATE_SERVER_LIMIT</code></td><td>53 (0x35)</td><td></td></tr>
+<tr><td><code>CHAR_CREATE_ACCOUNT_LIMIT</code></td><td>54 (0x36)</td><td></td></tr>
+<tr><td><code>CHAR_CREATE_SERVER_QUEUE</code></td><td>55 (0x37)</td><td></td></tr>
+<tr><td><code>CHAR_CREATE_ONLY_EXISTING</code></td><td>56 (0x38)</td><td></td></tr>
+<tr><td><code>CHAR_CREATE_EXPANSION</code></td><td>57 (0x39)</td><td></td></tr>
+<tr><td><code>CHAR_CREATE_EXPANSION_CLASS</code></td><td>58 (0x3A)</td><td></td></tr>
+<tr><td><code>CHAR_CREATE_LEVEL_REQUIREMENT</code></td><td>59 (0x3B)</td><td></td></tr>
+<tr><td><code>CHAR_CREATE_UNIQUE_CLASS_LIMIT</code></td><td>60 (0x3C)</td><td></td></tr>
+<tr><td><code>CHAR_CREATE_CHARACTER_IN_GUILD</code></td><td>61 (0x3D)</td><td></td></tr>
+<tr><td><code>CHAR_CREATE_RESTRICTED_RACECLASS</code></td><td>62 (0x3E)</td><td></td></tr>
+<tr><td><code>CHAR_CREATE_CHARACTER_CHOOSE_RACE</code></td><td>63 (0x3F)</td><td></td></tr>
+<tr><td><code>CHAR_CREATE_CHARACTER_ARENA_LEADER</code></td><td>64 (0x40)</td><td></td></tr>
+<tr><td><code>CHAR_CREATE_CHARACTER_DELETE_MAIL</code></td><td>65 (0x41)</td><td></td></tr>
+<tr><td><code>CHAR_CREATE_CHARACTER_SWAP_FACTION</code></td><td>66 (0x42)</td><td></td></tr>
+<tr><td><code>CHAR_CREATE_CHARACTER_RACE_ONLY</code></td><td>67 (0x43)</td><td></td></tr>
+<tr><td><code>CHAR_CREATE_CHARACTER_GOLD_LIMIT</code></td><td>68 (0x44)</td><td></td></tr>
+<tr><td><code>CHAR_CREATE_FORCE_LOGIN</code></td><td>69 (0x45)</td><td></td></tr>
+<tr><td><code>CHAR_DELETE_IN_PROGRESS</code></td><td>70 (0x46)</td><td></td></tr>
+<tr><td><code>CHAR_DELETE_SUCCESS</code></td><td>71 (0x47)</td><td></td></tr>
+<tr><td><code>CHAR_DELETE_FAILED</code></td><td>72 (0x48)</td><td></td></tr>
+<tr><td><code>CHAR_DELETE_FAILED_LOCKED_FOR_TRANSFER</code></td><td>73 (0x49)</td><td></td></tr>
+<tr><td><code>CHAR_DELETE_FAILED_GUILD_LEADER</code></td><td>74 (0x4A)</td><td></td></tr>
+<tr><td><code>CHAR_DELETE_FAILED_ARENA_CAPTAIN</code></td><td>75 (0x4B)</td><td></td></tr>
+<tr><td><code>CHAR_LOGIN_IN_PROGRESS</code></td><td>76 (0x4C)</td><td></td></tr>
+<tr><td><code>CHAR_LOGIN_SUCCESS</code></td><td>77 (0x4D)</td><td></td></tr>
+<tr><td><code>CHAR_LOGIN_NO_WORLD</code></td><td>78 (0x4E)</td><td></td></tr>
+<tr><td><code>CHAR_LOGIN_DUPLICATE_CHARACTER</code></td><td>79 (0x4F)</td><td></td></tr>
+<tr><td><code>CHAR_LOGIN_NO_INSTANCES</code></td><td>80 (0x50)</td><td></td></tr>
+<tr><td><code>CHAR_LOGIN_FAILED</code></td><td>81 (0x51)</td><td></td></tr>
+<tr><td><code>CHAR_LOGIN_DISABLED</code></td><td>82 (0x52)</td><td></td></tr>
+<tr><td><code>CHAR_LOGIN_NO_CHARACTER</code></td><td>83 (0x53)</td><td></td></tr>
+<tr><td><code>CHAR_LOGIN_LOCKED_FOR_TRANSFER</code></td><td>84 (0x54)</td><td></td></tr>
+<tr><td><code>CHAR_LOGIN_LOCKED_BY_BILLING</code></td><td>85 (0x55)</td><td></td></tr>
+<tr><td><code>CHAR_LOGIN_LOCKED_BY_MOBILE_AH</code></td><td>86 (0x56)</td><td></td></tr>
+<tr><td><code>CHAR_NAME_SUCCESS</code></td><td>87 (0x57)</td><td></td></tr>
+<tr><td><code>CHAR_NAME_FAILURE</code></td><td>88 (0x58)</td><td></td></tr>
+<tr><td><code>CHAR_NAME_NO_NAME</code></td><td>89 (0x59)</td><td></td></tr>
+<tr><td><code>CHAR_NAME_TOO_SHORT</code></td><td>90 (0x5A)</td><td></td></tr>
+<tr><td><code>CHAR_NAME_TOO_LONG</code></td><td>91 (0x5B)</td><td></td></tr>
+<tr><td><code>CHAR_NAME_INVALID_CHARACTER</code></td><td>92 (0x5C)</td><td></td></tr>
+<tr><td><code>CHAR_NAME_MIXED_LANGUAGES</code></td><td>93 (0x5D)</td><td></td></tr>
+<tr><td><code>CHAR_NAME_PROFANE</code></td><td>94 (0x5E)</td><td></td></tr>
+<tr><td><code>CHAR_NAME_RESERVED</code></td><td>95 (0x5F)</td><td></td></tr>
+<tr><td><code>CHAR_NAME_INVALID_APOSTROPHE</code></td><td>96 (0x60)</td><td></td></tr>
+<tr><td><code>CHAR_NAME_MULTIPLE_APOSTROPHES</code></td><td>97 (0x61)</td><td></td></tr>
+<tr><td><code>CHAR_NAME_THREE_CONSECUTIVE</code></td><td>98 (0x62)</td><td></td></tr>
+<tr><td><code>CHAR_NAME_INVALID_SPACE</code></td><td>99 (0x63)</td><td></td></tr>
+<tr><td><code>CHAR_NAME_CONSECUTIVE_SPACES</code></td><td>100 (0x64)</td><td></td></tr>
+<tr><td><code>CHAR_NAME_RUSSIAN_CONSECUTIVE_SILENT_CHARACTERS</code></td><td>101 (0x65)</td><td></td></tr>
+<tr><td><code>CHAR_NAME_RUSSIAN_SILENT_CHARACTER_AT_BEGINNING_OR_END</code></td><td>102 (0x66)</td><td></td></tr>
+<tr><td><code>CHAR_NAME_DECLENSION_DOESNT_MATCH_BASE_NAME</code></td><td>103 (0x67)</td><td></td></tr>
+</tbody>
+</table>
+</div>
+<p>Used in:</p>
+<ul>
+<li><a href="smsg_auth_response.html">SMSG_AUTH_RESPONSE</a></li>
+<li><a href="smsg_character_login_failed.html">SMSG_CHARACTER_LOGIN_FAILED</a></li>
+<li><a href="smsg_char_create.html">SMSG_CHAR_CREATE</a></li>
+<li><a href="smsg_char_customize.html">SMSG_CHAR_CUSTOMIZE</a></li>
+<li><a href="smsg_char_delete.html">SMSG_CHAR_DELETE</a></li>
+<li><a href="smsg_char_faction_change.html">SMSG_CHAR_FACTION_CHANGE</a></li>
+<li><a href="smsg_char_rename.html">SMSG_CHAR_RENAME</a></li>
+</ul>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../docs/weathertype.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
+                            </a>
+
+                            <a rel="next prefetch" href="../docs/cmd_auth_logon_challenge_client.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../docs/weathertype.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
+                    </a>
+
+                    <a rel="next prefetch" href="../docs/cmd_auth_logon_challenge_client.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+                    </a>
+            </nav>
+
+        </div>
+
+        <template id=fa-eye><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M288 32c-80.8 0-145.5 36.8-192.6 80.6C48.6 156 17.3 208 2.5 243.7c-3.3 7.9-3.3 16.7 0 24.6C17.3 304 48.6 356 95.4 399.4C142.5 443.2 207.2 480 288 480s145.5-36.8 192.6-80.6c46.8-43.5 78.1-95.4 93-131.1c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C433.5 68.8 368.8 32 288 32zM432 256c0 79.5-64.5 144-144 144s-144-64.5-144-144s64.5-144 144-144s144 64.5 144 144zM288 192c0 35.3-28.7 64-64 64c-11.5 0-22.3-3-31.6-8.4c-.2 2.8-.4 5.5-.4 8.4c0 53 43 96 96 96s96-43 96-96s-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6z"/></svg></span></template>
+        <template id=fa-eye-slash><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M38.8 5.1C28.4-3.1 13.3-1.2 5.1 9.2S-1.2 34.7 9.2 42.9l592 464c10.4 8.2 25.5 6.3 33.7-4.1s6.3-25.5-4.1-33.7L525.6 386.7c39.6-40.6 66.4-86.1 79.9-118.4c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C465.5 68.8 400.8 32 320 32c-68.2 0-125 26.3-169.3 60.8L38.8 5.1zM223.1 149.5C248.6 126.2 282.7 112 320 112c79.5 0 144 64.5 144 144c0 24.9-6.3 48.3-17.4 68.7L408 294.5c5.2-11.8 8-24.8 8-38.5c0-53-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6c0 10.2-2.4 19.8-6.6 28.3l-90.3-70.8zm223.1 298L373 389.9c-16.4 6.5-34.3 10.1-53 10.1c-79.5 0-144-64.5-144-144c0-6.9 .5-13.6 1.4-20.2L83.1 161.5C60.3 191.2 44 220.8 34.5 243.7c-3.3 7.9-3.3 16.7 0 24.6c14.9 35.7 46.2 87.7 93 131.1C174.5 443.2 239.2 480 320 480c47.8 0 89.9-12.9 126.2-32.5z"/></svg></span></template>
+        <template id=fa-copy><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M502.6 70.63l-61.25-61.25C435.4 3.371 427.2 0 418.7 0H255.1c-35.35 0-64 28.66-64 64l.0195 256C192 355.4 220.7 384 256 384h192c35.2 0 64-28.8 64-64V93.25C512 84.77 508.6 76.63 502.6 70.63zM464 320c0 8.836-7.164 16-16 16H255.1c-8.838 0-16-7.164-16-16L239.1 64.13c0-8.836 7.164-16 16-16h128L384 96c0 17.67 14.33 32 32 32h47.1V320zM272 448c0 8.836-7.164 16-16 16H63.1c-8.838 0-16-7.164-16-16L47.98 192.1c0-8.836 7.164-16 16-16H160V128H63.99c-35.35 0-64 28.65-64 64l.0098 256C.002 483.3 28.66 512 64 512h192c35.2 0 64-28.8 64-64v-32h-47.1L272 448z"/></svg></span></template>
+        <template id=fa-play><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M73 39c-14.8-9.1-33.4-9.4-48.5-.9S0 62.6 0 80V432c0 17.4 9.4 33.4 24.5 41.9s33.7 8.1 48.5-.9L361 297c14.3-8.7 23-24.2 23-41s-8.7-32.2-23-41L73 39z"/></svg></span></template>
+        <template id=fa-clock-rotate-left><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M75 75L41 41C25.9 25.9 0 36.6 0 57.9V168c0 13.3 10.7 24 24 24H134.1c21.4 0 32.1-25.9 17-41l-30.8-30.8C155 85.5 203 64 256 64c106 0 192 86 192 192s-86 192-192 192c-40.8 0-78.6-12.7-109.7-34.4c-14.5-10.1-34.4-6.6-44.6 7.9s-6.6 34.4 7.9 44.6C151.2 495 201.7 512 256 512c141.4 0 256-114.6 256-256S397.4 0 256 0C185.3 0 121.3 28.7 75 75zm181 53c-13.3 0-24 10.7-24 24V256c0 6.4 2.5 12.5 7 17l72 72c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-65-65V152c0-13.3-10.7-24-24-24z"/></svg></span></template>
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr-ef4e11c1.min.js"></script>
+        <script src="../mark-09e88c2c.min.js"></script>
+        <script src="../searcher-c2a407aa.js"></script>
+
+        <script src="../clipboard-1626706a.min.js"></script>
+        <script src="../highlight-abc7f01d.js"></script>
+        <script src="../book-a0b12cfe.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+
+    </div>
+    </body>
+</html>

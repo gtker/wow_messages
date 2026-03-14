@@ -1,0 +1,548 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>CastFailureReason - Wowm Language</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon-de23e50b.svg">
+        <link rel="shortcut icon" href="../favicon-8114d1fc.png">
+        <link rel="stylesheet" href="../css/variables-8adf115d.css">
+        <link rel="stylesheet" href="../css/general-2459343d.css">
+        <link rel="stylesheet" href="../css/chrome-ae938929.css">
+        <link rel="stylesheet" href="../css/print-9e4910d8.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../fonts/fonts-9644e21d.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="mdbook-highlight-css" href="../highlight-493f70e1.css">
+        <link rel="stylesheet" id="mdbook-tomorrow-night-css" href="../tomorrow-night-4c0ae647.css">
+        <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="../ayu-highlight-3fdfc3ac.css">
+
+        <!-- Custom theme stylesheets -->
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "../";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+            window.path_to_searchindex_js = "../searchindex-3f6cba53.js";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../toc-0cb513c6.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="mdbook-body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="mdbook-sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("mdbook-sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+                sidebar_toggle.checked = false;
+            }
+            if (sidebar === 'visible') {
+                sidebar_toggle.checked = true;
+            } else {
+                html.classList.remove('sidebar-visible');
+            }
+        </script>
+
+        <nav id="mdbook-sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../toc.html"></iframe>
+            </noscript>
+            <div id="mdbook-sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="mdbook-page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="mdbook-menu-bar-hover-placeholder"></div>
+                <div id="mdbook-menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="mdbook-sidebar-toggle" class="icon-button" for="mdbook-sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="mdbook-sidebar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"/></svg></span>
+                        </label>
+                        <button id="mdbook-theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="mdbook-theme-list">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M371.3 367.1c27.3-3.9 51.9-19.4 67.2-42.9L600.2 74.1c12.6-19.5 9.4-45.3-7.6-61.2S549.7-4.4 531.1 9.6L294.4 187.2c-24 18-38.2 46.1-38.4 76.1L371.3 367.1zm-19.6 25.4l-116-104.4C175.9 290.3 128 339.6 128 400c0 3.9 .2 7.8 .6 11.6c1.8 17.5-10.2 36.4-27.8 36.4H96c-17.7 0-32 14.3-32 32s14.3 32 32 32H240c61.9 0 112-50.1 112-112c0-2.5-.1-5-.2-7.5z"/></svg></span>
+                        </button>
+                        <ul id="mdbook-theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-ayu">Ayu</button></li>
+                        </ul>
+                        <button id="mdbook-search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="mdbook-searchbar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352c79.5 0 144-64.5 144-144s-64.5-144-144-144S64 128.5 64 208s64.5 144 144 144z"/></svg></span>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Wowm Language</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <span class=fa-svg id="print-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M128 0C92.7 0 64 28.7 64 64v96h64V64H354.7L384 93.3V160h64V93.3c0-17-6.7-33.3-18.7-45.3L400 18.7C388 6.7 371.7 0 354.7 0H128zM384 352v32 64H128V384 368 352H384zm64 32h32c17.7 0 32-14.3 32-32V256c0-35.3-28.7-64-64-64H64c-35.3 0-64 28.7-64 64v96c0 17.7 14.3 32 32 32H64v64c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V384zm-16-88c-13.3 0-24-10.7-24-24s10.7-24 24-24s24 10.7 24 24s-10.7 24-24 24z"/></svg></span>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="mdbook-search-wrapper" class="hidden">
+                    <form id="mdbook-searchbar-outer" class="searchbar-outer">
+                        <div class="search-wrapper">
+                            <input type="search" id="mdbook-searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="mdbook-searchresults-outer" aria-describedby="searchresults-header">
+                            <div class="spinner-wrapper">
+                                <span class=fa-svg id="fa-spin"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M304 48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zm0 416c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM48 304c26.5 0 48-21.5 48-48s-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48zm464-48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM142.9 437c18.7-18.7 18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zm0-294.2c18.7-18.7 18.7-49.1 0-67.9S93.7 56.2 75 75s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zM369.1 437c18.7 18.7 49.1 18.7 67.9 0s18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9z"/></svg></span>
+                            </div>
+                        </div>
+                    </form>
+                    <div id="mdbook-searchresults-outer" class="searchresults-outer hidden">
+                        <div id="mdbook-searchresults-header" class="searchresults-header"></div>
+                        <ul id="mdbook-searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('mdbook-sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('mdbook-sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#mdbook-sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="mdbook-content" class="content">
+                    <main>
+                        <h1 id="castfailurereason"><a class="header" href="#castfailurereason">CastFailureReason</a></h1>
+<h2 id="client-version-112"><a class="header" href="#client-version-112">Client Version 1.12</a></h2>
+<h3 id="wowm-representation"><a class="header" href="#wowm-representation">Wowm Representation</a></h3>
+<p>Autogenerated from <code>wowm</code> file at <a href="https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/spell/smsg_cast_result.wowm#L8"><code>wow_message_parser/wowm/world/spell/smsg_cast_result.wowm:8</code></a>.</p>
+<pre><code class="language-rust ignore">enum CastFailureReason : u8 {
+    AFFECTING_COMBAT = 0x00;
+    ALREADY_AT_FULL_HEALTH = 0x01;
+    ALREADY_AT_FULL_POWER = 0x02;
+    ALREADY_BEING_TAMED = 0x03;
+    ALREADY_HAVE_CHARM = 0x04;
+    ALREADY_HAVE_SUMMON = 0x05;
+    ALREADY_OPEN = 0x06;
+    AURA_BOUNCED = 0x07;
+    AUTOTRACK_INTERRUPTED = 0x08;
+    BAD_IMPLICIT_TARGETS = 0x09;
+    BAD_TARGETS = 0x0a;
+    CANT_BE_CHARMED = 0x0b;
+    CANT_BE_DISENCHANTED = 0x0c;
+    CANT_BE_PROSPECTED = 0x0d;
+    CANT_CAST_ON_TAPPED = 0x0e;
+    CANT_DUEL_WHILE_INVISIBLE = 0x0f;
+    CANT_DUEL_WHILE_STEALTHED = 0x10;
+    CANT_STEALTH = 0x11;
+    CASTER_AURASTATE = 0x12;
+    CASTER_DEAD = 0x13;
+    CHARMED = 0x14;
+    CHEST_IN_USE = 0x15;
+    CONFUSED = 0x16;
+    DONT_REPORT = 0x17;
+    EQUIPPED_ITEM = 0x18;
+    EQUIPPED_ITEM_CLASS = 0x19;
+    EQUIPPED_ITEM_CLASS_MAINHAND = 0x1a;
+    EQUIPPED_ITEM_CLASS_OFFHAND = 0x1b;
+    ERROR = 0x1c;
+    FIZZLE = 0x1d;
+    FLEEING = 0x1e;
+    FOOD_LOWLEVEL = 0x1f;
+    HIGHLEVEL = 0x20;
+    HUNGER_SATIATED = 0x21;
+    IMMUNE = 0x22;
+    INTERRUPTED = 0x23;
+    INTERRUPTED_COMBAT = 0x24;
+    ITEM_ALREADY_ENCHANTED = 0x25;
+    ITEM_GONE = 0x26;
+    ITEM_NOT_FOUND = 0x27;
+    ITEM_NOT_READY = 0x28;
+    LEVEL_REQUIREMENT = 0x29;
+    LINE_OF_SIGHT = 0x2a;
+    LOWLEVEL = 0x2b;
+    LOW_CASTLEVEL = 0x2c;
+    MAINHAND_EMPTY = 0x2d;
+    MOVING = 0x2e;
+    NEED_AMMO = 0x2f;
+    NEED_AMMO_POUCH = 0x30;
+    NEED_EXOTIC_AMMO = 0x31;
+    NOPATH = 0x32;
+    NOT_BEHIND = 0x33;
+    NOT_FISHABLE = 0x34;
+    NOT_HERE = 0x35;
+    NOT_INFRONT = 0x36;
+    NOT_IN_CONTROL = 0x37;
+    NOT_KNOWN = 0x38;
+    NOT_MOUNTED = 0x39;
+    NOT_ON_TAXI = 0x3a;
+    NOT_ON_TRANSPORT = 0x3b;
+    NOT_READY = 0x3c;
+    NOT_SHAPESHIFT = 0x3d;
+    NOT_STANDING = 0x3e;
+    NOT_TRADEABLE = 0x3f;
+    NOT_TRADING = 0x40;
+    NOT_UNSHEATHED = 0x41;
+    NOT_WHILE_GHOST = 0x42;
+    NO_AMMO = 0x43;
+    NO_CHARGES_REMAIN = 0x44;
+    NO_CHAMPION = 0x45;
+    NO_COMBO_POINTS = 0x46;
+    NO_DUELING = 0x47;
+    NO_ENDURANCE = 0x48;
+    NO_FISH = 0x49;
+    NO_ITEMS_WHILE_SHAPESHIFTED = 0x4a;
+    NO_MOUNTS_ALLOWED = 0x4b;
+    NO_PET = 0x4c;
+    NO_POWER = 0x4d;
+    NOTHING_TO_DISPEL = 0x4e;
+    NOTHING_TO_STEAL = 0x4f;
+    ONLY_ABOVEWATER = 0x50;
+    ONLY_DAYTIME = 0x51;
+    ONLY_INDOORS = 0x52;
+    ONLY_MOUNTED = 0x53;
+    ONLY_NIGHTTIME = 0x54;
+    ONLY_OUTDOORS = 0x55;
+    ONLY_SHAPESHIFT = 0x56;
+    ONLY_STEALTHED = 0x57;
+    ONLY_UNDERWATER = 0x58;
+    OUT_OF_RANGE = 0x59;
+    PACIFIED = 0x5a;
+    POSSESSED = 0x5b;
+    REAGENTS = 0x5c;
+    REQUIRES_AREA = 0x5d;
+    REQUIRES_SPELL_FOCUS = 0x5e;
+    ROOTED = 0x5f;
+    SILENCED = 0x60;
+    SPELL_IN_PROGRESS = 0x61;
+    SPELL_LEARNED = 0x62;
+    SPELL_UNAVAILABLE = 0x63;
+    STUNNED = 0x64;
+    TARGETS_DEAD = 0x65;
+    TARGET_AFFECTING_COMBAT = 0x66;
+    TARGET_AURASTATE = 0x67;
+    TARGET_DUELING = 0x68;
+    TARGET_ENEMY = 0x69;
+    TARGET_ENRAGED = 0x6a;
+    TARGET_FRIENDLY = 0x6b;
+    TARGET_IN_COMBAT = 0x6c;
+    TARGET_IS_PLAYER = 0x6d;
+    TARGET_NOT_DEAD = 0x6e;
+    TARGET_NOT_IN_PARTY = 0x6f;
+    TARGET_NOT_LOOTED = 0x70;
+    TARGET_NOT_PLAYER = 0x71;
+    TARGET_NO_POCKETS = 0x72;
+    TARGET_NO_WEAPONS = 0x73;
+    TARGET_UNSKINNABLE = 0x74;
+    THIRST_SATIATED = 0x75;
+    TOO_CLOSE = 0x76;
+    TOO_MANY_OF_ITEM = 0x77;
+    TOTEMS = 0x78;
+    TRAINING_POINTS = 0x79;
+    TRY_AGAIN = 0x7a;
+    UNIT_NOT_BEHIND = 0x7b;
+    UNIT_NOT_INFRONT = 0x7c;
+    WRONG_PET_FOOD = 0x7d;
+    NOT_WHILE_FATIGUED = 0x7e;
+    TARGET_NOT_IN_INSTANCE = 0x7f;
+    NOT_WHILE_TRADING = 0x80;
+    TARGET_NOT_IN_RAID = 0x81;
+    DISENCHANT_WHILE_LOOTING = 0x82;
+    PROSPECT_WHILE_LOOTING = 0x83;
+    PROSPECT_NEED_MORE = 0x84;
+    TARGET_FREEFORALL = 0x85;
+    NO_EDIBLE_CORPSES = 0x86;
+    ONLY_BATTLEGROUNDS = 0x87;
+    TARGET_NOT_GHOST = 0x88;
+    TOO_MANY_SKILLS = 0x89;
+    TRANSFORM_UNUSABLE = 0x8a;
+    WRONG_WEATHER = 0x8b;
+    DAMAGE_IMMUNE = 0x8c;
+    PREVENTED_BY_MECHANIC = 0x8d;
+    PLAY_TIME = 0x8e;
+    REPUTATION = 0x8f;
+    MIN_SKILL = 0x90;
+    UNKNOWN = 0x91;
+}</code></pre>
+<h3 id="type"><a class="header" href="#type">Type</a></h3>
+<p>The basic type is <code>u8</code>, a 1 byte (8 bit) integer.</p>
+<h3 id="enumerators"><a class="header" href="#enumerators">Enumerators</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Enumerator</th><th>Value</th><th>Comment</th></tr>
+</thead>
+<tbody>
+<tr><td><code>AFFECTING_COMBAT</code></td><td>0 (0x00)</td><td>You are in combat</td></tr>
+<tr><td><code>ALREADY_AT_FULL_HEALTH</code></td><td>1 (0x01)</td><td>You are already at full Health.</td></tr>
+<tr><td><code>ALREADY_AT_FULL_POWER</code></td><td>2 (0x02)</td><td>You are already at full %s.</td></tr>
+<tr><td><code>ALREADY_BEING_TAMED</code></td><td>3 (0x03)</td><td>That creature is already being tamed</td></tr>
+<tr><td><code>ALREADY_HAVE_CHARM</code></td><td>4 (0x04)</td><td>You already control a charmed creature</td></tr>
+<tr><td><code>ALREADY_HAVE_SUMMON</code></td><td>5 (0x05)</td><td>You already control a summoned creature</td></tr>
+<tr><td><code>ALREADY_OPEN</code></td><td>6 (0x06)</td><td>Already open</td></tr>
+<tr><td><code>AURA_BOUNCED</code></td><td>7 (0x07)</td><td>A more powerful spell is already active</td></tr>
+<tr><td><code>AUTOTRACK_INTERRUPTED</code></td><td>8 (0x08)</td><td>Message is hidden/unused</td></tr>
+<tr><td><code>BAD_IMPLICIT_TARGETS</code></td><td>9 (0x09)</td><td>You have no target.</td></tr>
+<tr><td><code>BAD_TARGETS</code></td><td>10 (0x0A)</td><td>Invalid target</td></tr>
+<tr><td><code>CANT_BE_CHARMED</code></td><td>11 (0x0B)</td><td>Target can’t be charmed</td></tr>
+<tr><td><code>CANT_BE_DISENCHANTED</code></td><td>12 (0x0C)</td><td>Item cannot be disenchanted</td></tr>
+<tr><td><code>CANT_BE_PROSPECTED</code></td><td>13 (0x0D)</td><td>There are no gems in this</td></tr>
+<tr><td><code>CANT_CAST_ON_TAPPED</code></td><td>14 (0x0E)</td><td>Target is tapped</td></tr>
+<tr><td><code>CANT_DUEL_WHILE_INVISIBLE</code></td><td>15 (0x0F)</td><td>You can’t start a duel while invisible</td></tr>
+<tr><td><code>CANT_DUEL_WHILE_STEALTHED</code></td><td>16 (0x10)</td><td>You can’t start a duel while stealthed</td></tr>
+<tr><td><code>CANT_STEALTH</code></td><td>17 (0x11)</td><td>You are too close to enemies</td></tr>
+<tr><td><code>CASTER_AURASTATE</code></td><td>18 (0x12)</td><td>You can’t do that yet</td></tr>
+<tr><td><code>CASTER_DEAD</code></td><td>19 (0x13)</td><td>You are dead</td></tr>
+<tr><td><code>CHARMED</code></td><td>20 (0x14)</td><td>Can’t do that while charmed</td></tr>
+<tr><td><code>CHEST_IN_USE</code></td><td>21 (0x15)</td><td>That is already being used</td></tr>
+<tr><td><code>CONFUSED</code></td><td>22 (0x16)</td><td>Can’t do that while confused</td></tr>
+<tr><td><code>DONT_REPORT</code></td><td>23 (0x17)</td><td>Message is hidden/unused</td></tr>
+<tr><td><code>EQUIPPED_ITEM</code></td><td>24 (0x18)</td><td>Must have the proper item equipped</td></tr>
+<tr><td><code>EQUIPPED_ITEM_CLASS</code></td><td>25 (0x19)</td><td>Must have a %s equipped</td></tr>
+<tr><td><code>EQUIPPED_ITEM_CLASS_MAINHAND</code></td><td>26 (0x1A)</td><td>Must have a %s equipped in the main hand</td></tr>
+<tr><td><code>EQUIPPED_ITEM_CLASS_OFFHAND</code></td><td>27 (0x1B)</td><td>Must have a %s equipped in the offhand</td></tr>
+<tr><td><code>ERROR</code></td><td>28 (0x1C)</td><td>Internal error</td></tr>
+<tr><td><code>FIZZLE</code></td><td>29 (0x1D)</td><td>Fizzled</td></tr>
+<tr><td><code>FLEEING</code></td><td>30 (0x1E)</td><td>Can’t do that while fleeing</td></tr>
+<tr><td><code>FOOD_LOWLEVEL</code></td><td>31 (0x1F)</td><td>That food’s level is not high enough for your pet</td></tr>
+<tr><td><code>HIGHLEVEL</code></td><td>32 (0x20)</td><td>Target is too high level</td></tr>
+<tr><td><code>HUNGER_SATIATED</code></td><td>33 (0x21)</td><td>Message is hidden/unused</td></tr>
+<tr><td><code>IMMUNE</code></td><td>34 (0x22)</td><td>Immune</td></tr>
+<tr><td><code>INTERRUPTED</code></td><td>35 (0x23)</td><td>Interrupted</td></tr>
+<tr><td><code>INTERRUPTED_COMBAT</code></td><td>36 (0x24)</td><td>Interrupted</td></tr>
+<tr><td><code>ITEM_ALREADY_ENCHANTED</code></td><td>37 (0x25)</td><td>Item is already enchanted</td></tr>
+<tr><td><code>ITEM_GONE</code></td><td>38 (0x26)</td><td>Item is gone</td></tr>
+<tr><td><code>ITEM_NOT_FOUND</code></td><td>39 (0x27)</td><td>Tried to enchant an item that didn’t exist</td></tr>
+<tr><td><code>ITEM_NOT_READY</code></td><td>40 (0x28)</td><td>Item is not ready yet.</td></tr>
+<tr><td><code>LEVEL_REQUIREMENT</code></td><td>41 (0x29)</td><td>You are not high enough level</td></tr>
+<tr><td><code>LINE_OF_SIGHT</code></td><td>42 (0x2A)</td><td>Target not in line of sight</td></tr>
+<tr><td><code>LOWLEVEL</code></td><td>43 (0x2B)</td><td>Target is too low level</td></tr>
+<tr><td><code>LOW_CASTLEVEL</code></td><td>44 (0x2C)</td><td>Skill not high enough</td></tr>
+<tr><td><code>MAINHAND_EMPTY</code></td><td>45 (0x2D)</td><td>Your weapon hand is empty</td></tr>
+<tr><td><code>MOVING</code></td><td>46 (0x2E)</td><td>Can’t do that while moving</td></tr>
+<tr><td><code>NEED_AMMO</code></td><td>47 (0x2F)</td><td>Ammo needs to be in the paper doll ammo slot before it can be fired</td></tr>
+<tr><td><code>NEED_AMMO_POUCH</code></td><td>48 (0x30)</td><td>Requires: %s</td></tr>
+<tr><td><code>NEED_EXOTIC_AMMO</code></td><td>49 (0x31)</td><td>Requires exotic ammo: %s</td></tr>
+<tr><td><code>NOPATH</code></td><td>50 (0x32)</td><td>No path available</td></tr>
+<tr><td><code>NOT_BEHIND</code></td><td>51 (0x33)</td><td>You must be behind your target</td></tr>
+<tr><td><code>NOT_FISHABLE</code></td><td>52 (0x34)</td><td>Your cast didn’t land in fishable water</td></tr>
+<tr><td><code>NOT_HERE</code></td><td>53 (0x35)</td><td>You can’t use that here</td></tr>
+<tr><td><code>NOT_INFRONT</code></td><td>54 (0x36)</td><td>You must be in front of your target</td></tr>
+<tr><td><code>NOT_IN_CONTROL</code></td><td>55 (0x37)</td><td>You are not in control of your actions</td></tr>
+<tr><td><code>NOT_KNOWN</code></td><td>56 (0x38)</td><td>Spell not learned</td></tr>
+<tr><td><code>NOT_MOUNTED</code></td><td>57 (0x39)</td><td>You are mounted</td></tr>
+<tr><td><code>NOT_ON_TAXI</code></td><td>58 (0x3A)</td><td>You are in flight</td></tr>
+<tr><td><code>NOT_ON_TRANSPORT</code></td><td>59 (0x3B)</td><td>You are on a transport</td></tr>
+<tr><td><code>NOT_READY</code></td><td>60 (0x3C)</td><td>Spell is not ready yet.</td></tr>
+<tr><td><code>NOT_SHAPESHIFT</code></td><td>61 (0x3D)</td><td>You are in shapeshift form</td></tr>
+<tr><td><code>NOT_STANDING</code></td><td>62 (0x3E)</td><td>You must be standing to do that</td></tr>
+<tr><td><code>NOT_TRADEABLE</code></td><td>63 (0x3F)</td><td>You can only use this on an object you own</td></tr>
+<tr><td><code>NOT_TRADING</code></td><td>64 (0x40)</td><td>Tried to enchant a trade item, but not trading</td></tr>
+<tr><td><code>NOT_UNSHEATHED</code></td><td>65 (0x41)</td><td>You have to be unsheathed to do that!</td></tr>
+<tr><td><code>NOT_WHILE_GHOST</code></td><td>66 (0x42)</td><td>Can’t cast as ghost</td></tr>
+<tr><td><code>NO_AMMO</code></td><td>67 (0x43)</td><td>Out of ammo</td></tr>
+<tr><td><code>NO_CHARGES_REMAIN</code></td><td>68 (0x44)</td><td>No charges remain</td></tr>
+<tr><td><code>NO_CHAMPION</code></td><td>69 (0x45)</td><td>You haven’t selected a champion</td></tr>
+<tr><td><code>NO_COMBO_POINTS</code></td><td>70 (0x46)</td><td>That ability requires combo points</td></tr>
+<tr><td><code>NO_DUELING</code></td><td>71 (0x47)</td><td>Dueling isn’t allowed here</td></tr>
+<tr><td><code>NO_ENDURANCE</code></td><td>72 (0x48)</td><td>Not enough endurance</td></tr>
+<tr><td><code>NO_FISH</code></td><td>73 (0x49)</td><td>There aren’t any fish here</td></tr>
+<tr><td><code>NO_ITEMS_WHILE_SHAPESHIFTED</code></td><td>74 (0x4A)</td><td>Can’t use items while shapeshifted</td></tr>
+<tr><td><code>NO_MOUNTS_ALLOWED</code></td><td>75 (0x4B)</td><td>You can’t mount here</td></tr>
+<tr><td><code>NO_PET</code></td><td>76 (0x4C)</td><td>You do not have a pet</td></tr>
+<tr><td><code>NO_POWER</code></td><td>77 (0x4D)</td><td>Dynamic pre-defined messages, no args: Not enough mana, Not enough rage, etc</td></tr>
+<tr><td><code>NOTHING_TO_DISPEL</code></td><td>78 (0x4E)</td><td>Nothing to dispel</td></tr>
+<tr><td><code>NOTHING_TO_STEAL</code></td><td>79 (0x4F)</td><td>Nothing to steal</td></tr>
+<tr><td><code>ONLY_ABOVEWATER</code></td><td>80 (0x50)</td><td>Cannot use while swimming</td></tr>
+<tr><td><code>ONLY_DAYTIME</code></td><td>81 (0x51)</td><td>Can only use during the day</td></tr>
+<tr><td><code>ONLY_INDOORS</code></td><td>82 (0x52)</td><td>Can only use indoors</td></tr>
+<tr><td><code>ONLY_MOUNTED</code></td><td>83 (0x53)</td><td>Can only use while mounted</td></tr>
+<tr><td><code>ONLY_NIGHTTIME</code></td><td>84 (0x54)</td><td>Can only use during the night</td></tr>
+<tr><td><code>ONLY_OUTDOORS</code></td><td>85 (0x55)</td><td>Can only use outside</td></tr>
+<tr><td><code>ONLY_SHAPESHIFT</code></td><td>86 (0x56)</td><td>Must be in %s</td></tr>
+<tr><td><code>ONLY_STEALTHED</code></td><td>87 (0x57)</td><td>You must be in stealth mode</td></tr>
+<tr><td><code>ONLY_UNDERWATER</code></td><td>88 (0x58)</td><td>Can only use while swimming</td></tr>
+<tr><td><code>OUT_OF_RANGE</code></td><td>89 (0x59)</td><td>Out of range.</td></tr>
+<tr><td><code>PACIFIED</code></td><td>90 (0x5A)</td><td>Can’t use that ability while pacified</td></tr>
+<tr><td><code>POSSESSED</code></td><td>91 (0x5B)</td><td>You are possessed</td></tr>
+<tr><td><code>REAGENTS</code></td><td>92 (0x5C)</td><td>Message is hidden/unused, supposedly implemented client-side only</td></tr>
+<tr><td><code>REQUIRES_AREA</code></td><td>93 (0x5D)</td><td>You need to be in %s</td></tr>
+<tr><td><code>REQUIRES_SPELL_FOCUS</code></td><td>94 (0x5E)</td><td>Requires %s</td></tr>
+<tr><td><code>ROOTED</code></td><td>95 (0x5F)</td><td>You are unable to move</td></tr>
+<tr><td><code>SILENCED</code></td><td>96 (0x60)</td><td>Can’t do that while silenced</td></tr>
+<tr><td><code>SPELL_IN_PROGRESS</code></td><td>97 (0x61)</td><td>Another action is in progress</td></tr>
+<tr><td><code>SPELL_LEARNED</code></td><td>98 (0x62)</td><td>You have already learned the spell</td></tr>
+<tr><td><code>SPELL_UNAVAILABLE</code></td><td>99 (0x63)</td><td>The spell is not available to you</td></tr>
+<tr><td><code>STUNNED</code></td><td>100 (0x64)</td><td>Can’t do that while stunned</td></tr>
+<tr><td><code>TARGETS_DEAD</code></td><td>101 (0x65)</td><td>Your target is dead</td></tr>
+<tr><td><code>TARGET_AFFECTING_COMBAT</code></td><td>102 (0x66)</td><td>Target is in combat</td></tr>
+<tr><td><code>TARGET_AURASTATE</code></td><td>103 (0x67)</td><td>You can’t do that yet</td></tr>
+<tr><td><code>TARGET_DUELING</code></td><td>104 (0x68)</td><td>Target is currently dueling</td></tr>
+<tr><td><code>TARGET_ENEMY</code></td><td>105 (0x69)</td><td>Target is hostile</td></tr>
+<tr><td><code>TARGET_ENRAGED</code></td><td>106 (0x6A)</td><td>Target is too enraged to be charmed</td></tr>
+<tr><td><code>TARGET_FRIENDLY</code></td><td>107 (0x6B)</td><td>Target is friendly</td></tr>
+<tr><td><code>TARGET_IN_COMBAT</code></td><td>108 (0x6C)</td><td>The target can’t be in combat</td></tr>
+<tr><td><code>TARGET_IS_PLAYER</code></td><td>109 (0x6D)</td><td>Can’t target players</td></tr>
+<tr><td><code>TARGET_NOT_DEAD</code></td><td>110 (0x6E)</td><td>Target is alive</td></tr>
+<tr><td><code>TARGET_NOT_IN_PARTY</code></td><td>111 (0x6F)</td><td>Target is not in your party</td></tr>
+<tr><td><code>TARGET_NOT_LOOTED</code></td><td>112 (0x70)</td><td>Creature must be looted first</td></tr>
+<tr><td><code>TARGET_NOT_PLAYER</code></td><td>113 (0x71)</td><td>Target is not a player</td></tr>
+<tr><td><code>TARGET_NO_POCKETS</code></td><td>114 (0x72)</td><td>No pockets to pick</td></tr>
+<tr><td><code>TARGET_NO_WEAPONS</code></td><td>115 (0x73)</td><td>Target has no weapons equipped</td></tr>
+<tr><td><code>TARGET_UNSKINNABLE</code></td><td>116 (0x74)</td><td>Creature is not skinnable</td></tr>
+<tr><td><code>THIRST_SATIATED</code></td><td>117 (0x75)</td><td>Message is hidden/unused</td></tr>
+<tr><td><code>TOO_CLOSE</code></td><td>118 (0x76)</td><td>Target too close</td></tr>
+<tr><td><code>TOO_MANY_OF_ITEM</code></td><td>119 (0x77)</td><td>You have too many of that item already</td></tr>
+<tr><td><code>TOTEMS</code></td><td>120 (0x78)</td><td>Message is hidden/unused, supposedly implemented client-side only</td></tr>
+<tr><td><code>TRAINING_POINTS</code></td><td>121 (0x79)</td><td>Not enough training points</td></tr>
+<tr><td><code>TRY_AGAIN</code></td><td>122 (0x7A)</td><td>Failed attempt</td></tr>
+<tr><td><code>UNIT_NOT_BEHIND</code></td><td>123 (0x7B)</td><td>Target needs to be behind you</td></tr>
+<tr><td><code>UNIT_NOT_INFRONT</code></td><td>124 (0x7C)</td><td>Target needs to be in front of you</td></tr>
+<tr><td><code>WRONG_PET_FOOD</code></td><td>125 (0x7D)</td><td>Your pet doesn’t like that food</td></tr>
+<tr><td><code>NOT_WHILE_FATIGUED</code></td><td>126 (0x7E)</td><td>Can’t cast while fatigued</td></tr>
+<tr><td><code>TARGET_NOT_IN_INSTANCE</code></td><td>127 (0x7F)</td><td>Target must be in this instance</td></tr>
+<tr><td><code>NOT_WHILE_TRADING</code></td><td>128 (0x80)</td><td>Can’t cast while trading</td></tr>
+<tr><td><code>TARGET_NOT_IN_RAID</code></td><td>129 (0x81)</td><td>Target is not in your party or raid group</td></tr>
+<tr><td><code>DISENCHANT_WHILE_LOOTING</code></td><td>130 (0x82)</td><td>Cannot disenchant while looting</td></tr>
+<tr><td><code>PROSPECT_WHILE_LOOTING</code></td><td>131 (0x83)</td><td>Cannot prospect while looting</td></tr>
+<tr><td><code>PROSPECT_NEED_MORE</code></td><td>132 (0x84)</td><td>Message is hidden/unused, supposedly implemented client-side only</td></tr>
+<tr><td><code>TARGET_FREEFORALL</code></td><td>133 (0x85)</td><td>Target is currently in free-for-all PvP combat</td></tr>
+<tr><td><code>NO_EDIBLE_CORPSES</code></td><td>134 (0x86)</td><td>There are no nearby corpses to eat</td></tr>
+<tr><td><code>ONLY_BATTLEGROUNDS</code></td><td>135 (0x87)</td><td>Can only use in battlegrounds</td></tr>
+<tr><td><code>TARGET_NOT_GHOST</code></td><td>136 (0x88)</td><td>Target is not a ghost</td></tr>
+<tr><td><code>TOO_MANY_SKILLS</code></td><td>137 (0x89)</td><td>Your pet can’t learn any more skills</td></tr>
+<tr><td><code>TRANSFORM_UNUSABLE</code></td><td>138 (0x8A)</td><td>You can’t use the new item</td></tr>
+<tr><td><code>WRONG_WEATHER</code></td><td>139 (0x8B)</td><td>The weather isn’t right for that</td></tr>
+<tr><td><code>DAMAGE_IMMUNE</code></td><td>140 (0x8C)</td><td>You can’t do that while you are immune</td></tr>
+<tr><td><code>PREVENTED_BY_MECHANIC</code></td><td>141 (0x8D)</td><td>Can’t do that while %s</td></tr>
+<tr><td><code>PLAY_TIME</code></td><td>142 (0x8E)</td><td>Maximum play time exceeded</td></tr>
+<tr><td><code>REPUTATION</code></td><td>143 (0x8F)</td><td>Your reputation isn’t high enough</td></tr>
+<tr><td><code>MIN_SKILL</code></td><td>144 (0x90)</td><td>Your skill is not high enough.  Requires %s (%d).</td></tr>
+<tr><td><code>UNKNOWN</code></td><td>145 (0x91)</td><td>Generic out of bounds response:  Unknown reason</td></tr>
+</tbody>
+</table>
+</div>
+<p>Used in:</p>
+<ul>
+<li><a href="smsg_cast_result.html">SMSG_CAST_RESULT</a></li>
+</ul>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../docs/calendarstatus.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
+                            </a>
+
+                            <a rel="next prefetch" href="../docs/castflags.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../docs/calendarstatus.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
+                    </a>
+
+                    <a rel="next prefetch" href="../docs/castflags.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+                    </a>
+            </nav>
+
+        </div>
+
+        <template id=fa-eye><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M288 32c-80.8 0-145.5 36.8-192.6 80.6C48.6 156 17.3 208 2.5 243.7c-3.3 7.9-3.3 16.7 0 24.6C17.3 304 48.6 356 95.4 399.4C142.5 443.2 207.2 480 288 480s145.5-36.8 192.6-80.6c46.8-43.5 78.1-95.4 93-131.1c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C433.5 68.8 368.8 32 288 32zM432 256c0 79.5-64.5 144-144 144s-144-64.5-144-144s64.5-144 144-144s144 64.5 144 144zM288 192c0 35.3-28.7 64-64 64c-11.5 0-22.3-3-31.6-8.4c-.2 2.8-.4 5.5-.4 8.4c0 53 43 96 96 96s96-43 96-96s-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6z"/></svg></span></template>
+        <template id=fa-eye-slash><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M38.8 5.1C28.4-3.1 13.3-1.2 5.1 9.2S-1.2 34.7 9.2 42.9l592 464c10.4 8.2 25.5 6.3 33.7-4.1s6.3-25.5-4.1-33.7L525.6 386.7c39.6-40.6 66.4-86.1 79.9-118.4c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C465.5 68.8 400.8 32 320 32c-68.2 0-125 26.3-169.3 60.8L38.8 5.1zM223.1 149.5C248.6 126.2 282.7 112 320 112c79.5 0 144 64.5 144 144c0 24.9-6.3 48.3-17.4 68.7L408 294.5c5.2-11.8 8-24.8 8-38.5c0-53-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6c0 10.2-2.4 19.8-6.6 28.3l-90.3-70.8zm223.1 298L373 389.9c-16.4 6.5-34.3 10.1-53 10.1c-79.5 0-144-64.5-144-144c0-6.9 .5-13.6 1.4-20.2L83.1 161.5C60.3 191.2 44 220.8 34.5 243.7c-3.3 7.9-3.3 16.7 0 24.6c14.9 35.7 46.2 87.7 93 131.1C174.5 443.2 239.2 480 320 480c47.8 0 89.9-12.9 126.2-32.5z"/></svg></span></template>
+        <template id=fa-copy><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M502.6 70.63l-61.25-61.25C435.4 3.371 427.2 0 418.7 0H255.1c-35.35 0-64 28.66-64 64l.0195 256C192 355.4 220.7 384 256 384h192c35.2 0 64-28.8 64-64V93.25C512 84.77 508.6 76.63 502.6 70.63zM464 320c0 8.836-7.164 16-16 16H255.1c-8.838 0-16-7.164-16-16L239.1 64.13c0-8.836 7.164-16 16-16h128L384 96c0 17.67 14.33 32 32 32h47.1V320zM272 448c0 8.836-7.164 16-16 16H63.1c-8.838 0-16-7.164-16-16L47.98 192.1c0-8.836 7.164-16 16-16H160V128H63.99c-35.35 0-64 28.65-64 64l.0098 256C.002 483.3 28.66 512 64 512h192c35.2 0 64-28.8 64-64v-32h-47.1L272 448z"/></svg></span></template>
+        <template id=fa-play><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M73 39c-14.8-9.1-33.4-9.4-48.5-.9S0 62.6 0 80V432c0 17.4 9.4 33.4 24.5 41.9s33.7 8.1 48.5-.9L361 297c14.3-8.7 23-24.2 23-41s-8.7-32.2-23-41L73 39z"/></svg></span></template>
+        <template id=fa-clock-rotate-left><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M75 75L41 41C25.9 25.9 0 36.6 0 57.9V168c0 13.3 10.7 24 24 24H134.1c21.4 0 32.1-25.9 17-41l-30.8-30.8C155 85.5 203 64 256 64c106 0 192 86 192 192s-86 192-192 192c-40.8 0-78.6-12.7-109.7-34.4c-14.5-10.1-34.4-6.6-44.6 7.9s-6.6 34.4 7.9 44.6C151.2 495 201.7 512 256 512c141.4 0 256-114.6 256-256S397.4 0 256 0C185.3 0 121.3 28.7 75 75zm181 53c-13.3 0-24 10.7-24 24V256c0 6.4 2.5 12.5 7 17l72 72c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-65-65V152c0-13.3-10.7-24-24-24z"/></svg></span></template>
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr-ef4e11c1.min.js"></script>
+        <script src="../mark-09e88c2c.min.js"></script>
+        <script src="../searcher-c2a407aa.js"></script>
+
+        <script src="../clipboard-1626706a.min.js"></script>
+        <script src="../highlight-abc7f01d.js"></script>
+        <script src="../book-a0b12cfe.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+
+    </div>
+    </body>
+</html>

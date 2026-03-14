@@ -1,0 +1,339 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Implementing world messages - Wowm Language</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon-de23e50b.svg">
+        <link rel="shortcut icon" href="../favicon-8114d1fc.png">
+        <link rel="stylesheet" href="../css/variables-8adf115d.css">
+        <link rel="stylesheet" href="../css/general-2459343d.css">
+        <link rel="stylesheet" href="../css/chrome-ae938929.css">
+        <link rel="stylesheet" href="../css/print-9e4910d8.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../fonts/fonts-9644e21d.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="mdbook-highlight-css" href="../highlight-493f70e1.css">
+        <link rel="stylesheet" id="mdbook-tomorrow-night-css" href="../tomorrow-night-4c0ae647.css">
+        <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="../ayu-highlight-3fdfc3ac.css">
+
+        <!-- Custom theme stylesheets -->
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "../";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+            window.path_to_searchindex_js = "../searchindex-3f6cba53.js";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../toc-0cb513c6.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="mdbook-body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="mdbook-sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("mdbook-sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+                sidebar_toggle.checked = false;
+            }
+            if (sidebar === 'visible') {
+                sidebar_toggle.checked = true;
+            } else {
+                html.classList.remove('sidebar-visible');
+            }
+        </script>
+
+        <nav id="mdbook-sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../toc.html"></iframe>
+            </noscript>
+            <div id="mdbook-sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="mdbook-page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="mdbook-menu-bar-hover-placeholder"></div>
+                <div id="mdbook-menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="mdbook-sidebar-toggle" class="icon-button" for="mdbook-sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="mdbook-sidebar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"/></svg></span>
+                        </label>
+                        <button id="mdbook-theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="mdbook-theme-list">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M371.3 367.1c27.3-3.9 51.9-19.4 67.2-42.9L600.2 74.1c12.6-19.5 9.4-45.3-7.6-61.2S549.7-4.4 531.1 9.6L294.4 187.2c-24 18-38.2 46.1-38.4 76.1L371.3 367.1zm-19.6 25.4l-116-104.4C175.9 290.3 128 339.6 128 400c0 3.9 .2 7.8 .6 11.6c1.8 17.5-10.2 36.4-27.8 36.4H96c-17.7 0-32 14.3-32 32s14.3 32 32 32H240c61.9 0 112-50.1 112-112c0-2.5-.1-5-.2-7.5z"/></svg></span>
+                        </button>
+                        <ul id="mdbook-theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-ayu">Ayu</button></li>
+                        </ul>
+                        <button id="mdbook-search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="mdbook-searchbar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352c79.5 0 144-64.5 144-144s-64.5-144-144-144S64 128.5 64 208s64.5 144 144 144z"/></svg></span>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Wowm Language</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <span class=fa-svg id="print-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M128 0C92.7 0 64 28.7 64 64v96h64V64H354.7L384 93.3V160h64V93.3c0-17-6.7-33.3-18.7-45.3L400 18.7C388 6.7 371.7 0 354.7 0H128zM384 352v32 64H128V384 368 352H384zm64 32h32c17.7 0 32-14.3 32-32V256c0-35.3-28.7-64-64-64H64c-35.3 0-64 28.7-64 64v96c0 17.7 14.3 32 32 32H64v64c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V384zm-16-88c-13.3 0-24-10.7-24-24s10.7-24 24-24s24 10.7 24 24s-10.7 24-24 24z"/></svg></span>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="mdbook-search-wrapper" class="hidden">
+                    <form id="mdbook-searchbar-outer" class="searchbar-outer">
+                        <div class="search-wrapper">
+                            <input type="search" id="mdbook-searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="mdbook-searchresults-outer" aria-describedby="searchresults-header">
+                            <div class="spinner-wrapper">
+                                <span class=fa-svg id="fa-spin"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M304 48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zm0 416c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM48 304c26.5 0 48-21.5 48-48s-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48zm464-48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM142.9 437c18.7-18.7 18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zm0-294.2c18.7-18.7 18.7-49.1 0-67.9S93.7 56.2 75 75s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zM369.1 437c18.7 18.7 49.1 18.7 67.9 0s18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9z"/></svg></span>
+                            </div>
+                        </div>
+                    </form>
+                    <div id="mdbook-searchresults-outer" class="searchresults-outer hidden">
+                        <div id="mdbook-searchresults-header" class="searchresults-header"></div>
+                        <ul id="mdbook-searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('mdbook-sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('mdbook-sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#mdbook-sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="mdbook-content" class="content">
+                    <main>
+                        <h1 id="implementing-world-messages"><a class="header" href="#implementing-world-messages">Implementing world messages</a></h1>
+<p>If you have <a href="./implementing_login.html">autogenerated the login messages</a> you will have a reasonable base for proceeding with the world messages, however this is not a requirement.</p>
+<p>The world message data can be found in
+the <a href="https://github.com/gtker/wow_messages/blob/main/intermediate_representation.json"><code>intermediate_representation.json</code></a>
+file.
+The <a href="https://github.com/gtker/wow_messages/blob/main/intermediate_representation_schema.json"><code>intermediate_representation_schema.json</code></a>
+contains a <a href="https://jsontypedef.com/">JSON type def</a> schema for the <code>intermediate_representation.json</code>.
+The <a href="https://github.com/jsontypedef/json-typedef-codegen"><code>json-typedef-codegen</code></a> program can be used to generate
+bindings for many popular languages.</p>
+<p>The <a href="https://github.com/gtker/wow_messages_python"><code>wow_messages_python</code> repository</a> contains the Python code used to
+generate the Python message library.
+It can be used as inspiration for your own implementation.
+The <a href="https://github.com/gtker/wow_messages_python/tree/main/generator"><code>generator</code> directory</a> contains the actual code
+generation,
+and the <a href="https://github.com/gtker/wow_messages_python/tree/main/wow_world_messages"><code>wow_world_messages</code> directory</a>
+contains the generated library.</p>
+<p>Python code will be shown in this document to provide examples of how libraries could be implemented.
+If you want to use the Python library then just bypass this and
+<a href="https://github.com/gtker/wow_messages_python/">use the library directly</a> instead.
+A <a href="https://github.com/gtker/wow_messages_csharp/">C# library is available here</a>.</p>
+<h2 id="message-layout"><a class="header" href="#message-layout">Message Layout</a></h2>
+<p>For Vanilla and TBC, all messages start with a 2 byte <strong>big endian</strong> size field.</p>
+<p>For Wrath, all messages from the client (<code>CMSG</code>) start with a 2 byte <strong>big endian</strong> size field,
+but at some unknown point in Wrath the possibility of having <code>SMSG</code> with 3 byte opcode was added.
+If the most significant (first) byte of the size field has the most significant bit set
+(that is, <code>first_size_byte &amp; 0x80 != 0</code>) the size field is 3 bytes instead of 2.
+When sending messages from the server you must handle this special case for messages that are larger than <code>0x7FF</code> bytes.</p>
+<p>For all versions, messages sent from the server (<code>SMSG</code>) have a 2 byte opcode field and messages sent
+from the client (<code>CMSG</code>) have a 4 byte opcode field.</p>
+<p>For all versions, the size field contains the size of the opcode field and the size of the remaining message body.</p>
+<p>So in the case of the <code>CMSG_PLAYER_LOGIN</code> message:</p>
+<pre><code class="language-rust ignore">test CMSG_PLAYER_LOGIN {
+    guid = 0xDEADBEEF;
+} [
+    0x00, 0x0C, /* size */
+    0x3D, 0x00, 0x00, 0x00, /* opcode */
+    0xEF, 0xBE, 0xAD, 0xDE, 0x00, 0x00, 0x00, 0x00, /* guid */
+]</code></pre>
+<p>Has a single <code>Guid</code> field (of 8 bytes), but the reported size is <code>0x0C</code>/<code>12</code> because it includes the 4 byte opcode
+field.</p>
+<h2 id="encryption"><a class="header" href="#encryption">Encryption</a></h2>
+<p><code>SMSG_AUTH_CHALLENGE</code> and <code>CMSG_AUTH_RESPONSE</code> are sent in plain text and used to negotiate a simple header
+encryption based on the session key.
+It is <a href="https://gtker.com/implementation-guide-for-the-world-of-warcraft-flavor-of-srp6/#world-packet-header-encryption">described in detail for 1.12 in this blog post</a>
+The <a href="https://github.com/gtker/wow_srp"><code>wow_srp</code></a> library written in Rust has implementations for Vanilla (1.12), TBC (2.4.3), and Wrath (3.3.5).</p>
+<p><code>CMSG_PING</code> and <code>SMSG_PONG</code> can also be sent unencrypted if the client has not yet received a reply to <code>CMSG_AUTH_SESSION</code>.
+These four messages are the only messages that can be sent unencrypted.</p>
+<h2 id="types-used-for-login-messages"><a class="header" href="#types-used-for-login-messages">Types used for login messages</a></h2>
+<p>World messages use the following types, including enums, flags, and structs:</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Type</th><th>Purpose</th><th>C Name</th></tr>
+</thead>
+<tbody>
+<tr><td><code>u8</code></td><td>Unsigned 8 bit integer. Min value 0, max value 256.</td><td><code>unsigned char</code></td></tr>
+<tr><td><code>u16</code></td><td>Unsigned 16 bit integer. Min value 0, max value 65536.</td><td><code>unsigned short</code></td></tr>
+<tr><td><code>u32</code></td><td>Unsigned 32 bit integer. Min value 0, max value 4294967296.</td><td><code>unsigned int</code></td></tr>
+<tr><td><code>u64</code></td><td>Unsigned 64 bit integer. Min value 0, max value 18446744073709551616.</td><td><code>unsigned long long</code></td></tr>
+<tr><td><code>i32</code></td><td>Unsigned 32 bit integer. Min value -2147483648, max value 4294967296.</td><td><code>signed int</code></td></tr>
+<tr><td><code>Bool</code></td><td>Unsigned 1 bit integer. 0 means <code>false</code> and all other values mean <code>true</code>.</td><td><code>unsigned char</code></td></tr>
+<tr><td><code>Bool32</code></td><td>Unsigned 4 bit integer. 0 means <code>false</code> and all other values mean <code>true</code>.</td><td><code>unsigned int</code></td></tr>
+<tr><td><code>PackedGuid</code></td><td>Guid sent in the “packed” format. See <a href="../types/packed-guid.html">PackedGuid</a>.</td><td>-</td></tr>
+<tr><td><code>Guid</code></td><td>Unsigned 8 bit integer. Can be replaced with a <code>u64</code>.</td><td><code>unsigned long long</code></td></tr>
+<tr><td><code>NamedGuid</code></td><td>A <code>Guid</code> (<code>u64</code>) followed by a <code>CString</code> if the value of the <code>Guid</code> is not <code>0</code>.</td><td>-</td></tr>
+<tr><td><code>DateTime</code></td><td><code>u32</code> in a special format. See <a href="../types/datetime.html">DateTime</a>.</td><td><code>unsigned int</code></td></tr>
+<tr><td><code>f32</code></td><td>Floating point value of 4 bytes.</td><td><code>f32</code></td></tr>
+<tr><td><code>CString</code></td><td>UTF-8 string type that is terminated by a zero byte value.</td><td><code>char*</code></td></tr>
+<tr><td><code>SizedCString</code></td><td>A <code>u32</code> field that determines the size of the string followed by a UTF-8 string type that is terminated by a zero byte value.</td><td><code>unsigned int</code> + <code>char*</code></td></tr>
+<tr><td><code>UpdateMask</code></td><td>Update values sent in a relatively complex format. See <a href="../types/update-mask.html">UpdateMask</a>.</td><td>-</td></tr>
+<tr><td><code>MonsterMoveSplines</code></td><td>Array of positions. See <a href="../types/monster-move-spline">MonsterMoveSpline</a>.</td><td>-</td></tr>
+<tr><td><code>AuraMask</code></td><td>Aura values sent using a mask. See <a href="../types/aura-mask.html">Masks</a>.</td><td>-</td></tr>
+<tr><td><code>AchievementDoneArray</code></td><td>Array that terminates on a sentinel value. See <a href="../types/achievement-done-array.html">AchievementDoneArray</a></td><td>-</td></tr>
+<tr><td><code>AchievementInProgressArray</code></td><td>Array that terminates on a sentinel value. See <a href="../types/achievement-done-array.html">AchievementInProgressArray</a></td><td>-</td></tr>
+<tr><td><code>EnchantMask</code></td><td>Enchant values sent using a mask. See <a href="../types/enchant-mask.html">EnchantMasks</a>.</td><td>-</td></tr>
+<tr><td><code>InspectTalentGearMask</code></td><td><a href="../docs/inspecttalentgear.html">InspectTalentGear</a> values sent using a mask. See <a href="../types/inspect-talent-gear-mask.html">Masks</a>.</td><td>-</td></tr>
+<tr><td><code>Gold</code></td><td>Alias for <code>u32</code>.</td><td><code>unsigned int</code></td></tr>
+<tr><td><code>Level</code></td><td>Alias for <code>u8</code>.</td><td><code>unsigned char</code></td></tr>
+<tr><td><code>Level16</code></td><td>Alias for <code>u16</code>.</td><td><code>unsigned short</code></td></tr>
+<tr><td><code>Level32</code></td><td>Alias for <code>u32</code>.</td><td><code>unsigned int</code></td></tr>
+<tr><td><code>VariableItemRandomProperty</code></td><td>A <code>u32</code> followed by another <code>u32</code> if the first value is not equal to <code>0</code>.</td><td>-</td></tr>
+<tr><td><code>AddonArray</code></td><td>Array of <a href="../docs/addon.html">Addon</a>s for TBC and Wrath that rely on externally knowing the amount of array members. See <a href="../types/addon-array.html">AddonArray</a>.</td><td>-</td></tr>
+<tr><td><code>Seconds</code></td><td>Alias for <code>u32</code>.</td><td><code>unsigned int</code></td></tr>
+<tr><td><code>Milliseconds</code></td><td>Alias for <code>u32</code>.</td><td><code>unsigned int</code></td></tr>
+<tr><td><code>Spell</code></td><td>Alias for <code>u32</code> that represents a spell.</td><td><code>unsigned int</code></td></tr>
+<tr><td><code>Spell16</code></td><td>Alias for <code>u16</code> that represents a spell.</td><td><code>unsigned short</code></td></tr>
+<tr><td><code>Item</code></td><td>Alias for <code>u32</code> that represents an item entry.</td><td><code>unsigned int</code></td></tr>
+<tr><td><code>CacheMask</code></td><td>Client info sent using a mask. See <a href="../types/cache-mask.html">CacheMask</a>.</td><td>-</td></tr>
+</tbody>
+</table>
+</div>
+<h2 id="library-layout"><a class="header" href="#library-layout">Library layout</a></h2>
+<p>Consider what you want the layout of the library to look like regarding files and directories.</p>
+<p>You will likely want to limit yourself to a limited set of client versions such as Vanilla (1.12), TBC (2.4.3), and Wrath (3.3.5).</p>
+<p>The exact layout of your library will depend on the scope.
+For the Python library I decided to have a single <code>wow_world_messages</code> package with a module each for Vanilla, TBC, and Wrath.</p>
+<p>This is the layout of the Python library:</p>
+<pre><code class="language-text">├── README.md
+└── wow_world_messages
+    ├── __init__.py
+    ├── wrath.py
+    ├── tbc.py
+    ├── util.py
+    └── vanilla.py
+</code></pre>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../ir/implementing_login.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
+                            </a>
+
+                            <a rel="next prefetch" href="../docs/accountflag.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../ir/implementing_login.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
+                    </a>
+
+                    <a rel="next prefetch" href="../docs/accountflag.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+                    </a>
+            </nav>
+
+        </div>
+
+        <template id=fa-eye><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M288 32c-80.8 0-145.5 36.8-192.6 80.6C48.6 156 17.3 208 2.5 243.7c-3.3 7.9-3.3 16.7 0 24.6C17.3 304 48.6 356 95.4 399.4C142.5 443.2 207.2 480 288 480s145.5-36.8 192.6-80.6c46.8-43.5 78.1-95.4 93-131.1c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C433.5 68.8 368.8 32 288 32zM432 256c0 79.5-64.5 144-144 144s-144-64.5-144-144s64.5-144 144-144s144 64.5 144 144zM288 192c0 35.3-28.7 64-64 64c-11.5 0-22.3-3-31.6-8.4c-.2 2.8-.4 5.5-.4 8.4c0 53 43 96 96 96s96-43 96-96s-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6z"/></svg></span></template>
+        <template id=fa-eye-slash><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M38.8 5.1C28.4-3.1 13.3-1.2 5.1 9.2S-1.2 34.7 9.2 42.9l592 464c10.4 8.2 25.5 6.3 33.7-4.1s6.3-25.5-4.1-33.7L525.6 386.7c39.6-40.6 66.4-86.1 79.9-118.4c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C465.5 68.8 400.8 32 320 32c-68.2 0-125 26.3-169.3 60.8L38.8 5.1zM223.1 149.5C248.6 126.2 282.7 112 320 112c79.5 0 144 64.5 144 144c0 24.9-6.3 48.3-17.4 68.7L408 294.5c5.2-11.8 8-24.8 8-38.5c0-53-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6c0 10.2-2.4 19.8-6.6 28.3l-90.3-70.8zm223.1 298L373 389.9c-16.4 6.5-34.3 10.1-53 10.1c-79.5 0-144-64.5-144-144c0-6.9 .5-13.6 1.4-20.2L83.1 161.5C60.3 191.2 44 220.8 34.5 243.7c-3.3 7.9-3.3 16.7 0 24.6c14.9 35.7 46.2 87.7 93 131.1C174.5 443.2 239.2 480 320 480c47.8 0 89.9-12.9 126.2-32.5z"/></svg></span></template>
+        <template id=fa-copy><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M502.6 70.63l-61.25-61.25C435.4 3.371 427.2 0 418.7 0H255.1c-35.35 0-64 28.66-64 64l.0195 256C192 355.4 220.7 384 256 384h192c35.2 0 64-28.8 64-64V93.25C512 84.77 508.6 76.63 502.6 70.63zM464 320c0 8.836-7.164 16-16 16H255.1c-8.838 0-16-7.164-16-16L239.1 64.13c0-8.836 7.164-16 16-16h128L384 96c0 17.67 14.33 32 32 32h47.1V320zM272 448c0 8.836-7.164 16-16 16H63.1c-8.838 0-16-7.164-16-16L47.98 192.1c0-8.836 7.164-16 16-16H160V128H63.99c-35.35 0-64 28.65-64 64l.0098 256C.002 483.3 28.66 512 64 512h192c35.2 0 64-28.8 64-64v-32h-47.1L272 448z"/></svg></span></template>
+        <template id=fa-play><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M73 39c-14.8-9.1-33.4-9.4-48.5-.9S0 62.6 0 80V432c0 17.4 9.4 33.4 24.5 41.9s33.7 8.1 48.5-.9L361 297c14.3-8.7 23-24.2 23-41s-8.7-32.2-23-41L73 39z"/></svg></span></template>
+        <template id=fa-clock-rotate-left><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M75 75L41 41C25.9 25.9 0 36.6 0 57.9V168c0 13.3 10.7 24 24 24H134.1c21.4 0 32.1-25.9 17-41l-30.8-30.8C155 85.5 203 64 256 64c106 0 192 86 192 192s-86 192-192 192c-40.8 0-78.6-12.7-109.7-34.4c-14.5-10.1-34.4-6.6-44.6 7.9s-6.6 34.4 7.9 44.6C151.2 495 201.7 512 256 512c141.4 0 256-114.6 256-256S397.4 0 256 0C185.3 0 121.3 28.7 75 75zm181 53c-13.3 0-24 10.7-24 24V256c0 6.4 2.5 12.5 7 17l72 72c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-65-65V152c0-13.3-10.7-24-24-24z"/></svg></span></template>
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr-ef4e11c1.min.js"></script>
+        <script src="../mark-09e88c2c.min.js"></script>
+        <script src="../searcher-c2a407aa.js"></script>
+
+        <script src="../clipboard-1626706a.min.js"></script>
+        <script src="../highlight-abc7f01d.js"></script>
+        <script src="../book-a0b12cfe.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+
+    </div>
+    </body>
+</html>

@@ -1,0 +1,2151 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Faction - Wowm Language</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon-de23e50b.svg">
+        <link rel="shortcut icon" href="../favicon-8114d1fc.png">
+        <link rel="stylesheet" href="../css/variables-8adf115d.css">
+        <link rel="stylesheet" href="../css/general-2459343d.css">
+        <link rel="stylesheet" href="../css/chrome-ae938929.css">
+        <link rel="stylesheet" href="../css/print-9e4910d8.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../fonts/fonts-9644e21d.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="mdbook-highlight-css" href="../highlight-493f70e1.css">
+        <link rel="stylesheet" id="mdbook-tomorrow-night-css" href="../tomorrow-night-4c0ae647.css">
+        <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="../ayu-highlight-3fdfc3ac.css">
+
+        <!-- Custom theme stylesheets -->
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "../";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+            window.path_to_searchindex_js = "../searchindex-3f6cba53.js";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../toc-0cb513c6.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="mdbook-body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="mdbook-sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("mdbook-sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+                sidebar_toggle.checked = false;
+            }
+            if (sidebar === 'visible') {
+                sidebar_toggle.checked = true;
+            } else {
+                html.classList.remove('sidebar-visible');
+            }
+        </script>
+
+        <nav id="mdbook-sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../toc.html"></iframe>
+            </noscript>
+            <div id="mdbook-sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="mdbook-page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="mdbook-menu-bar-hover-placeholder"></div>
+                <div id="mdbook-menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="mdbook-sidebar-toggle" class="icon-button" for="mdbook-sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="mdbook-sidebar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"/></svg></span>
+                        </label>
+                        <button id="mdbook-theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="mdbook-theme-list">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M371.3 367.1c27.3-3.9 51.9-19.4 67.2-42.9L600.2 74.1c12.6-19.5 9.4-45.3-7.6-61.2S549.7-4.4 531.1 9.6L294.4 187.2c-24 18-38.2 46.1-38.4 76.1L371.3 367.1zm-19.6 25.4l-116-104.4C175.9 290.3 128 339.6 128 400c0 3.9 .2 7.8 .6 11.6c1.8 17.5-10.2 36.4-27.8 36.4H96c-17.7 0-32 14.3-32 32s14.3 32 32 32H240c61.9 0 112-50.1 112-112c0-2.5-.1-5-.2-7.5z"/></svg></span>
+                        </button>
+                        <ul id="mdbook-theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-ayu">Ayu</button></li>
+                        </ul>
+                        <button id="mdbook-search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="mdbook-searchbar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352c79.5 0 144-64.5 144-144s-64.5-144-144-144S64 128.5 64 208s64.5 144 144 144z"/></svg></span>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Wowm Language</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <span class=fa-svg id="print-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M128 0C92.7 0 64 28.7 64 64v96h64V64H354.7L384 93.3V160h64V93.3c0-17-6.7-33.3-18.7-45.3L400 18.7C388 6.7 371.7 0 354.7 0H128zM384 352v32 64H128V384 368 352H384zm64 32h32c17.7 0 32-14.3 32-32V256c0-35.3-28.7-64-64-64H64c-35.3 0-64 28.7-64 64v96c0 17.7 14.3 32 32 32H64v64c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V384zm-16-88c-13.3 0-24-10.7-24-24s10.7-24 24-24s24 10.7 24 24s-10.7 24-24 24z"/></svg></span>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="mdbook-search-wrapper" class="hidden">
+                    <form id="mdbook-searchbar-outer" class="searchbar-outer">
+                        <div class="search-wrapper">
+                            <input type="search" id="mdbook-searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="mdbook-searchresults-outer" aria-describedby="searchresults-header">
+                            <div class="spinner-wrapper">
+                                <span class=fa-svg id="fa-spin"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M304 48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zm0 416c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM48 304c26.5 0 48-21.5 48-48s-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48zm464-48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM142.9 437c18.7-18.7 18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zm0-294.2c18.7-18.7 18.7-49.1 0-67.9S93.7 56.2 75 75s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zM369.1 437c18.7 18.7 49.1 18.7 67.9 0s18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9z"/></svg></span>
+                            </div>
+                        </div>
+                    </form>
+                    <div id="mdbook-searchresults-outer" class="searchresults-outer hidden">
+                        <div id="mdbook-searchresults-header" class="searchresults-header"></div>
+                        <ul id="mdbook-searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('mdbook-sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('mdbook-sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#mdbook-sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="mdbook-content" class="content">
+                    <main>
+                        <h1 id="faction"><a class="header" href="#faction">Faction</a></h1>
+<h2 id="client-version-112"><a class="header" href="#client-version-112">Client Version 1.12</a></h2>
+<h3 id="wowm-representation"><a class="header" href="#wowm-representation">Wowm Representation</a></h3>
+<p>Autogenerated from <code>wowm</code> file at <a href="https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/faction/faction.wowm#L1"><code>wow_message_parser/wowm/world/faction/faction.wowm:1</code></a>.</p>
+<pre><code class="language-rust ignore">enum Faction : u16 {
+    NONE = 0;
+    PLAYER_HUMAN = 1;
+    PLAYER_ORC = 2;
+    PLAYER_DWARF = 3;
+    PLAYER_NIGHT_ELF = 4;
+    PLAYER_UNDEAD = 5;
+    PLAYER_TAUREN = 6;
+    CREATURE = 7;
+    PLAYER_GNOME = 8;
+    PLAYER_TROLL = 9;
+    MONSTER = 14;
+    DEFIAS_BROTHERHOOD = 15;
+    GNOLL_RIVERPAW = 16;
+    GNOLL_REDRIDGE = 17;
+    GNOLL_SHADOWHIDE = 18;
+    MURLOC = 19;
+    UNDEAD_SCOURGE = 20;
+    BOOTY_BAY = 21;
+    BEAST_SPIDER = 22;
+    BEAST_BOAR = 23;
+    WORGEN = 24;
+    KOBOLD = 25;
+    TROLL_BLOODSCALP = 26;
+    TROLL_SKULLSPLITTER = 27;
+    PREY = 28;
+    BEAST_WOLF = 29;
+    DEFIAS_BROTHERHOOD_TRAITOR = 30;
+    FRIENDLY = 31;
+    TROGG = 32;
+    TROLL_FROSTMANE = 33;
+    ORC_BLACKROCK = 34;
+    VILLIAN = 35;
+    VICTIM = 36;
+    BEAST_BEAR = 37;
+    OGRE = 38;
+    KURZENS_MERCENARIES = 39;
+    ESCORTEE = 40;
+    VENTURE_COMPANY = 41;
+    BEAST_RAPTOR = 42;
+    BASILISK = 43;
+    DRAGONFLIGHT_GREEN = 44;
+    LOST_ONES = 45;
+    BLACKSMITHING_ARMORSMITHING = 46;
+    IRONFORGE = 47;
+    DARK_IRON_DWARVES = 48;
+    HUMAN_NIGHT_WATCH = 49;
+    DRAGONFLIGHT_RED = 50;
+    GNOLL_MOSSHIDE = 51;
+    ORC_DRAGONMAW = 52;
+    GNOME_LEPER = 53;
+    GNOMEREGAN_EXILES = 54;
+    LEOPARD = 55;
+    SCARLET_CRUSADE = 56;
+    GNOLL_ROTHIDE = 57;
+    BEAST_GORILLA = 58;
+    THORIUM_BROTHERHOOD = 59;
+    NAGA = 60;
+    DALARAN = 61;
+    FORLORN_SPIRIT = 62;
+    DARKHOWL = 63;
+    GRELL = 64;
+    FURBOLG = 65;
+    HORDE_GENERIC = 66;
+    HORDE = 67;
+    UNDERCITY = 68;
+    DARNASSUS = 69;
+    SYNDICATE = 70;
+    HILLSBRAD_MILITIA = 71;
+    STORMWIND = 72;
+    DEMON = 73;
+    ELEMENTAL = 74;
+    SPIRIT = 75;
+    ORGRIMMAR = 76;
+    TREASURE = 77;
+    GNOLL_MUDSNOUT = 78;
+    HILLSBRAD_SOUTHSHORE_MAYOR = 79;
+    DRAGONFLIGHT_BLACK = 80;
+    THUNDER_BLUFF = 81;
+    TROLL_WITHERBARK = 82;
+    LEATHERWORKING_ELEMENTAL = 83;
+    QUILBOAR_RAZORMANE = 84;
+    QUILBOAR_BRISTLEBACK = 85;
+    LEATHERWORKING_DRAGONSCALE = 86;
+    BLOODSAIL_BUCCANEERS = 87;
+    BLACKFATHOM = 88;
+    MAKRURA = 89;
+    CENTAUR_KOLKAR = 90;
+    CENTAUR_GALAK = 91;
+    GELKIS_CLAN_CENTAUR = 92;
+    MAGRAM_CLAN_CENTAUR = 93;
+    MARAUDINE = 94;
+    THERAMORE = 108;
+    QUILBOAR_RAZORFEN = 109;
+    QUILBOAR_RAZORMANE_2 = 110;
+    QUILBOAR_DEATHSHEAD = 111;
+    ENEMY = 128;
+    AMBIENT = 148;
+    NETHERGARDE_CARAVAN = 168;
+    STEAMWHEEDLE_CARTEL = 169;
+    ALLIANCE_GENERIC = 189;
+    NETHERGARDE = 209;
+    WAILING_CAVERNS = 229;
+    SILITHID = 249;
+    SILVERMOON_REMNANT = 269;
+    ZANDALAR_TRIBE = 270;
+    BLACKSMITHING_WEAPONSMITHING = 289;
+    SCORPID = 309;
+    BEAST_BAT = 310;
+    TITAN = 311;
+    TASKMASTER_FIZZULE = 329;
+    RAVENHOLDT = 349;
+    GADGETZAN = 369;
+    GNOMEREGAN_BUG = 389;
+    HARPY = 409;
+    BURNING_BLADE = 429;
+    SHADOWSILK_POACHER = 449;
+    SEARING_SPIDER = 450;
+    ALLIANCE = 469;
+    RATCHET = 470;
+    WILDHAMMER_CLAN = 471;
+    GOBLIN_DARK_IRON_BAR_PATRON = 489;
+    THE_LEAGUE_OF_ARATHOR = 509;
+    THE_DEFILERS = 510;
+    GIANT = 511;
+    ARGENT_DAWN = 529;
+    DARKSPEAR_TROLLS = 530;
+    DRAGONFLIGHT_BRONZE = 531;
+    DRAGONFLIGHT_BLUE = 532;
+    LEATHERWORKING_TRIBAL = 549;
+    ENGINEERING_GOBLIN = 550;
+    ENGINEERING_GNOME = 551;
+    BLACKSMITHING_HAMMERSMITHING = 569;
+    BLACKSMITHING_AXESMITHING = 570;
+    BLACKSMITHING_SWORDSMITHING = 571;
+    TROLL_VILEBRANCH = 572;
+    SOUTHSEA_FREEBOOTERS = 573;
+    CAER_DARROW = 574;
+    FURBOLG_UNCORRUPTED = 575;
+    TIMBERMAW_HOLD = 576;
+    EVERLOOK = 577;
+    WINTERSABER_TRAINERS = 589;
+    CENARION_CIRCLE = 609;
+    SHATTERSPEAR_TROLLS = 629;
+    RAVASAUR_TRAINERS = 630;
+    MAJORDOMO_EXECUTUS = 649;
+    BEAST_CARRION_BIRD = 669;
+    BEAST_CAT = 670;
+    BEAST_CRAB = 671;
+    BEAST_CROCILISK = 672;
+    BEAST_HYENA = 673;
+    BEAST_OWL = 674;
+    BEAST_SCORPID = 675;
+    BEAST_TALLSTRIDER = 676;
+    BEAST_TURTLE = 677;
+    BEAST_WIND_SERPENT = 678;
+    TRAINING_DUMMY = 679;
+    DRAGONFLIGHT_BLACK_BAIT = 689;
+    BATTLEGROUND_NEUTRAL = 709;
+    FROSTWOLF_CLAN = 729;
+    STORMPIKE_GUARD = 730;
+    HYDRAXIAN_WATERLORDS = 749;
+    SULFURON_FIRELORDS = 750;
+    GIZLOCKS_DUMMY = 769;
+    GIZLOCKS_CHARM = 770;
+    GIZLOCK = 771;
+    MORO_GAI = 789;
+    SPIRIT_GUIDE_ALLIANCE = 790;
+    SHEN_DRALAR = 809;
+    OGRE_CAPTAIN_KROMCRUSH = 829;
+    SPIRIT_GUIDE_HORDE = 849;
+    JAEDENAR = 869;
+    WARSONG_OUTRIDERS = 889;
+    SILVERWING_SENTINELS = 890;
+    ALLIANCE_FORCES = 891;
+    HORDE_FORCES = 892;
+    REVANTUSK_TROLLS = 893;
+    DARKMOON_FAIRE = 909;
+    BROOD_OF_NOZDORMU = 910;
+    MIGHT_OF_KALIMDOR = 912;
+    ARMIES_OF_C_THUN = 915;
+    SILITHID_ATTACKERS = 916;
+    THE_IRONFORGE_BRIGADE = 917;
+    RC_ENEMIES = 918;
+    RC_OBJECTS = 919;
+    RED = 920;
+    BLUE = 921;
+    SCOURGE_INVADERS = 928;
+    TEST_FACTION_NOT_A_REAL_FACTION = 931;
+    TOWOW_FLAG = 950;
+    TOWOW_FLAG_TRIGGER_ALLIANCE_DND = 951;
+    TOWOW_FLAG_TRIGGER_HORDE_DND = 954;
+}</code></pre>
+<h3 id="type"><a class="header" href="#type">Type</a></h3>
+<p>The basic type is <code>u16</code>, a 2 byte (16 bit) little endian integer.</p>
+<h3 id="enumerators"><a class="header" href="#enumerators">Enumerators</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Enumerator</th><th>Value</th><th>Comment</th><th>Display</th></tr>
+</thead>
+<tbody>
+<tr><td><code>NONE</code></td><td>0 (0x00)</td><td></td><td></td></tr>
+<tr><td><code>PLAYER_HUMAN</code></td><td>1 (0x01)</td><td></td><td>PLAYER, Human</td></tr>
+<tr><td><code>PLAYER_ORC</code></td><td>2 (0x02)</td><td></td><td>PLAYER, Orc</td></tr>
+<tr><td><code>PLAYER_DWARF</code></td><td>3 (0x03)</td><td></td><td>PLAYER, Dwarf</td></tr>
+<tr><td><code>PLAYER_NIGHT_ELF</code></td><td>4 (0x04)</td><td></td><td>PLAYER, Night Elf</td></tr>
+<tr><td><code>PLAYER_UNDEAD</code></td><td>5 (0x05)</td><td></td><td>PLAYER, Undead</td></tr>
+<tr><td><code>PLAYER_TAUREN</code></td><td>6 (0x06)</td><td></td><td>PLAYER, Tauren</td></tr>
+<tr><td><code>CREATURE</code></td><td>7 (0x07)</td><td></td><td></td></tr>
+<tr><td><code>PLAYER_GNOME</code></td><td>8 (0x08)</td><td></td><td>PLAYER, Gnome</td></tr>
+<tr><td><code>PLAYER_TROLL</code></td><td>9 (0x09)</td><td></td><td>PLAYER, Troll</td></tr>
+<tr><td><code>MONSTER</code></td><td>14 (0x0E)</td><td></td><td></td></tr>
+<tr><td><code>DEFIAS_BROTHERHOOD</code></td><td>15 (0x0F)</td><td></td><td></td></tr>
+<tr><td><code>GNOLL_RIVERPAW</code></td><td>16 (0x10)</td><td></td><td>Gnoll - Riverpaw</td></tr>
+<tr><td><code>GNOLL_REDRIDGE</code></td><td>17 (0x11)</td><td></td><td>Gnoll - Redridge</td></tr>
+<tr><td><code>GNOLL_SHADOWHIDE</code></td><td>18 (0x12)</td><td></td><td>Gnoll - Shadowhide</td></tr>
+<tr><td><code>MURLOC</code></td><td>19 (0x13)</td><td></td><td></td></tr>
+<tr><td><code>UNDEAD_SCOURGE</code></td><td>20 (0x14)</td><td></td><td>Undead, Scourge</td></tr>
+<tr><td><code>BOOTY_BAY</code></td><td>21 (0x15)</td><td></td><td></td></tr>
+<tr><td><code>BEAST_SPIDER</code></td><td>22 (0x16)</td><td></td><td>Beast - Spider</td></tr>
+<tr><td><code>BEAST_BOAR</code></td><td>23 (0x17)</td><td></td><td>Beast - Boar</td></tr>
+<tr><td><code>WORGEN</code></td><td>24 (0x18)</td><td></td><td></td></tr>
+<tr><td><code>KOBOLD</code></td><td>25 (0x19)</td><td></td><td></td></tr>
+<tr><td><code>TROLL_BLOODSCALP</code></td><td>26 (0x1A)</td><td></td><td>Troll, Bloodscalp</td></tr>
+<tr><td><code>TROLL_SKULLSPLITTER</code></td><td>27 (0x1B)</td><td></td><td>Troll, Skullsplitter</td></tr>
+<tr><td><code>PREY</code></td><td>28 (0x1C)</td><td></td><td></td></tr>
+<tr><td><code>BEAST_WOLF</code></td><td>29 (0x1D)</td><td></td><td>Beast - Wolf</td></tr>
+<tr><td><code>DEFIAS_BROTHERHOOD_TRAITOR</code></td><td>30 (0x1E)</td><td></td><td></td></tr>
+<tr><td><code>FRIENDLY</code></td><td>31 (0x1F)</td><td></td><td></td></tr>
+<tr><td><code>TROGG</code></td><td>32 (0x20)</td><td></td><td></td></tr>
+<tr><td><code>TROLL_FROSTMANE</code></td><td>33 (0x21)</td><td></td><td>Troll, Frostmane</td></tr>
+<tr><td><code>ORC_BLACKROCK</code></td><td>34 (0x22)</td><td></td><td>Orc, Blackrock</td></tr>
+<tr><td><code>VILLIAN</code></td><td>35 (0x23)</td><td></td><td></td></tr>
+<tr><td><code>VICTIM</code></td><td>36 (0x24)</td><td></td><td></td></tr>
+<tr><td><code>BEAST_BEAR</code></td><td>37 (0x25)</td><td></td><td>Beast - Bear</td></tr>
+<tr><td><code>OGRE</code></td><td>38 (0x26)</td><td></td><td></td></tr>
+<tr><td><code>KURZENS_MERCENARIES</code></td><td>39 (0x27)</td><td></td><td>Kurzen’s Mercenaries</td></tr>
+<tr><td><code>ESCORTEE</code></td><td>40 (0x28)</td><td></td><td></td></tr>
+<tr><td><code>VENTURE_COMPANY</code></td><td>41 (0x29)</td><td></td><td></td></tr>
+<tr><td><code>BEAST_RAPTOR</code></td><td>42 (0x2A)</td><td></td><td>Beast - Raptor</td></tr>
+<tr><td><code>BASILISK</code></td><td>43 (0x2B)</td><td></td><td></td></tr>
+<tr><td><code>DRAGONFLIGHT_GREEN</code></td><td>44 (0x2C)</td><td></td><td>Dragonflight, Green</td></tr>
+<tr><td><code>LOST_ONES</code></td><td>45 (0x2D)</td><td></td><td></td></tr>
+<tr><td><code>BLACKSMITHING_ARMORSMITHING</code></td><td>46 (0x2E)</td><td></td><td>Blacksmithing - Armorsmithing</td></tr>
+<tr><td><code>IRONFORGE</code></td><td>47 (0x2F)</td><td></td><td></td></tr>
+<tr><td><code>DARK_IRON_DWARVES</code></td><td>48 (0x30)</td><td></td><td></td></tr>
+<tr><td><code>HUMAN_NIGHT_WATCH</code></td><td>49 (0x31)</td><td></td><td>Human, Night Watch</td></tr>
+<tr><td><code>DRAGONFLIGHT_RED</code></td><td>50 (0x32)</td><td></td><td>Dragonflight, Red</td></tr>
+<tr><td><code>GNOLL_MOSSHIDE</code></td><td>51 (0x33)</td><td></td><td>Gnoll - Mosshide</td></tr>
+<tr><td><code>ORC_DRAGONMAW</code></td><td>52 (0x34)</td><td></td><td>Orc, Dragonmaw</td></tr>
+<tr><td><code>GNOME_LEPER</code></td><td>53 (0x35)</td><td></td><td>Gnome - Leper</td></tr>
+<tr><td><code>GNOMEREGAN_EXILES</code></td><td>54 (0x36)</td><td></td><td></td></tr>
+<tr><td><code>LEOPARD</code></td><td>55 (0x37)</td><td></td><td></td></tr>
+<tr><td><code>SCARLET_CRUSADE</code></td><td>56 (0x38)</td><td></td><td></td></tr>
+<tr><td><code>GNOLL_ROTHIDE</code></td><td>57 (0x39)</td><td></td><td>Gnoll - Rothide</td></tr>
+<tr><td><code>BEAST_GORILLA</code></td><td>58 (0x3A)</td><td></td><td>Beast - Gorilla</td></tr>
+<tr><td><code>THORIUM_BROTHERHOOD</code></td><td>59 (0x3B)</td><td></td><td></td></tr>
+<tr><td><code>NAGA</code></td><td>60 (0x3C)</td><td></td><td></td></tr>
+<tr><td><code>DALARAN</code></td><td>61 (0x3D)</td><td></td><td></td></tr>
+<tr><td><code>FORLORN_SPIRIT</code></td><td>62 (0x3E)</td><td></td><td></td></tr>
+<tr><td><code>DARKHOWL</code></td><td>63 (0x3F)</td><td></td><td></td></tr>
+<tr><td><code>GRELL</code></td><td>64 (0x40)</td><td></td><td></td></tr>
+<tr><td><code>FURBOLG</code></td><td>65 (0x41)</td><td></td><td></td></tr>
+<tr><td><code>HORDE_GENERIC</code></td><td>66 (0x42)</td><td></td><td></td></tr>
+<tr><td><code>HORDE</code></td><td>67 (0x43)</td><td></td><td></td></tr>
+<tr><td><code>UNDERCITY</code></td><td>68 (0x44)</td><td></td><td></td></tr>
+<tr><td><code>DARNASSUS</code></td><td>69 (0x45)</td><td></td><td></td></tr>
+<tr><td><code>SYNDICATE</code></td><td>70 (0x46)</td><td></td><td></td></tr>
+<tr><td><code>HILLSBRAD_MILITIA</code></td><td>71 (0x47)</td><td></td><td></td></tr>
+<tr><td><code>STORMWIND</code></td><td>72 (0x48)</td><td></td><td></td></tr>
+<tr><td><code>DEMON</code></td><td>73 (0x49)</td><td></td><td></td></tr>
+<tr><td><code>ELEMENTAL</code></td><td>74 (0x4A)</td><td></td><td></td></tr>
+<tr><td><code>SPIRIT</code></td><td>75 (0x4B)</td><td></td><td></td></tr>
+<tr><td><code>ORGRIMMAR</code></td><td>76 (0x4C)</td><td></td><td></td></tr>
+<tr><td><code>TREASURE</code></td><td>77 (0x4D)</td><td></td><td></td></tr>
+<tr><td><code>GNOLL_MUDSNOUT</code></td><td>78 (0x4E)</td><td></td><td>Gnoll - Mudsnout</td></tr>
+<tr><td><code>HILLSBRAD_SOUTHSHORE_MAYOR</code></td><td>79 (0x4F)</td><td></td><td>HIllsbrad, Southshore Mayor</td></tr>
+<tr><td><code>DRAGONFLIGHT_BLACK</code></td><td>80 (0x50)</td><td></td><td>Dragonflight, Black</td></tr>
+<tr><td><code>THUNDER_BLUFF</code></td><td>81 (0x51)</td><td></td><td></td></tr>
+<tr><td><code>TROLL_WITHERBARK</code></td><td>82 (0x52)</td><td></td><td>Troll, Witherbark</td></tr>
+<tr><td><code>LEATHERWORKING_ELEMENTAL</code></td><td>83 (0x53)</td><td></td><td>Leatherworking - Elemental</td></tr>
+<tr><td><code>QUILBOAR_RAZORMANE</code></td><td>84 (0x54)</td><td></td><td>Quilboar, Razormane</td></tr>
+<tr><td><code>QUILBOAR_BRISTLEBACK</code></td><td>85 (0x55)</td><td></td><td>Quilboar, Bristleback</td></tr>
+<tr><td><code>LEATHERWORKING_DRAGONSCALE</code></td><td>86 (0x56)</td><td></td><td>Leatherworking - Dragonscale</td></tr>
+<tr><td><code>BLOODSAIL_BUCCANEERS</code></td><td>87 (0x57)</td><td></td><td></td></tr>
+<tr><td><code>BLACKFATHOM</code></td><td>88 (0x58)</td><td></td><td></td></tr>
+<tr><td><code>MAKRURA</code></td><td>89 (0x59)</td><td></td><td></td></tr>
+<tr><td><code>CENTAUR_KOLKAR</code></td><td>90 (0x5A)</td><td></td><td>Centaur, Kolkar</td></tr>
+<tr><td><code>CENTAUR_GALAK</code></td><td>91 (0x5B)</td><td></td><td>Centaur, Galak</td></tr>
+<tr><td><code>GELKIS_CLAN_CENTAUR</code></td><td>92 (0x5C)</td><td></td><td></td></tr>
+<tr><td><code>MAGRAM_CLAN_CENTAUR</code></td><td>93 (0x5D)</td><td></td><td></td></tr>
+<tr><td><code>MARAUDINE</code></td><td>94 (0x5E)</td><td></td><td></td></tr>
+<tr><td><code>THERAMORE</code></td><td>108 (0x6C)</td><td></td><td></td></tr>
+<tr><td><code>QUILBOAR_RAZORFEN</code></td><td>109 (0x6D)</td><td></td><td>Quilboar, Razorfen</td></tr>
+<tr><td><code>QUILBOAR_RAZORMANE_2</code></td><td>110 (0x6E)</td><td></td><td>Quilboar, Razormane 2</td></tr>
+<tr><td><code>QUILBOAR_DEATHSHEAD</code></td><td>111 (0x6F)</td><td></td><td>Quilboar, Deathshead</td></tr>
+<tr><td><code>ENEMY</code></td><td>128 (0x80)</td><td></td><td></td></tr>
+<tr><td><code>AMBIENT</code></td><td>148 (0x94)</td><td></td><td></td></tr>
+<tr><td><code>NETHERGARDE_CARAVAN</code></td><td>168 (0xA8)</td><td></td><td></td></tr>
+<tr><td><code>STEAMWHEEDLE_CARTEL</code></td><td>169 (0xA9)</td><td></td><td></td></tr>
+<tr><td><code>ALLIANCE_GENERIC</code></td><td>189 (0xBD)</td><td></td><td></td></tr>
+<tr><td><code>NETHERGARDE</code></td><td>209 (0xD1)</td><td></td><td></td></tr>
+<tr><td><code>WAILING_CAVERNS</code></td><td>229 (0xE5)</td><td></td><td></td></tr>
+<tr><td><code>SILITHID</code></td><td>249 (0xF9)</td><td></td><td></td></tr>
+<tr><td><code>SILVERMOON_REMNANT</code></td><td>269 (0x10D)</td><td></td><td></td></tr>
+<tr><td><code>ZANDALAR_TRIBE</code></td><td>270 (0x10E)</td><td></td><td></td></tr>
+<tr><td><code>BLACKSMITHING_WEAPONSMITHING</code></td><td>289 (0x121)</td><td></td><td>Blacksmithing - Weaponsmithing</td></tr>
+<tr><td><code>SCORPID</code></td><td>309 (0x135)</td><td></td><td></td></tr>
+<tr><td><code>BEAST_BAT</code></td><td>310 (0x136)</td><td></td><td>Beast - Bat</td></tr>
+<tr><td><code>TITAN</code></td><td>311 (0x137)</td><td></td><td></td></tr>
+<tr><td><code>TASKMASTER_FIZZULE</code></td><td>329 (0x149)</td><td></td><td></td></tr>
+<tr><td><code>RAVENHOLDT</code></td><td>349 (0x15D)</td><td></td><td></td></tr>
+<tr><td><code>GADGETZAN</code></td><td>369 (0x171)</td><td></td><td></td></tr>
+<tr><td><code>GNOMEREGAN_BUG</code></td><td>389 (0x185)</td><td></td><td></td></tr>
+<tr><td><code>HARPY</code></td><td>409 (0x199)</td><td></td><td></td></tr>
+<tr><td><code>BURNING_BLADE</code></td><td>429 (0x1AD)</td><td></td><td></td></tr>
+<tr><td><code>SHADOWSILK_POACHER</code></td><td>449 (0x1C1)</td><td></td><td></td></tr>
+<tr><td><code>SEARING_SPIDER</code></td><td>450 (0x1C2)</td><td></td><td></td></tr>
+<tr><td><code>ALLIANCE</code></td><td>469 (0x1D5)</td><td></td><td></td></tr>
+<tr><td><code>RATCHET</code></td><td>470 (0x1D6)</td><td></td><td></td></tr>
+<tr><td><code>WILDHAMMER_CLAN</code></td><td>471 (0x1D7)</td><td></td><td></td></tr>
+<tr><td><code>GOBLIN_DARK_IRON_BAR_PATRON</code></td><td>489 (0x1E9)</td><td></td><td>Goblin, Dark Iron Bar Patron</td></tr>
+<tr><td><code>THE_LEAGUE_OF_ARATHOR</code></td><td>509 (0x1FD)</td><td></td><td></td></tr>
+<tr><td><code>THE_DEFILERS</code></td><td>510 (0x1FE)</td><td></td><td></td></tr>
+<tr><td><code>GIANT</code></td><td>511 (0x1FF)</td><td></td><td></td></tr>
+<tr><td><code>ARGENT_DAWN</code></td><td>529 (0x211)</td><td></td><td></td></tr>
+<tr><td><code>DARKSPEAR_TROLLS</code></td><td>530 (0x212)</td><td></td><td></td></tr>
+<tr><td><code>DRAGONFLIGHT_BRONZE</code></td><td>531 (0x213)</td><td></td><td>Dragonflight, Bronze</td></tr>
+<tr><td><code>DRAGONFLIGHT_BLUE</code></td><td>532 (0x214)</td><td></td><td>Dragonflight, Blue</td></tr>
+<tr><td><code>LEATHERWORKING_TRIBAL</code></td><td>549 (0x225)</td><td></td><td>Leatherworking - Tribal</td></tr>
+<tr><td><code>ENGINEERING_GOBLIN</code></td><td>550 (0x226)</td><td></td><td>Engineering - Goblin</td></tr>
+<tr><td><code>ENGINEERING_GNOME</code></td><td>551 (0x227)</td><td></td><td>Engineering - Gnome</td></tr>
+<tr><td><code>BLACKSMITHING_HAMMERSMITHING</code></td><td>569 (0x239)</td><td></td><td>Blacksmithing - Hammersmithing</td></tr>
+<tr><td><code>BLACKSMITHING_AXESMITHING</code></td><td>570 (0x23A)</td><td></td><td>Blacksmithing - Axesmithing</td></tr>
+<tr><td><code>BLACKSMITHING_SWORDSMITHING</code></td><td>571 (0x23B)</td><td></td><td>Blacksmithing - Swordsmithing</td></tr>
+<tr><td><code>TROLL_VILEBRANCH</code></td><td>572 (0x23C)</td><td></td><td>Troll, Vilebranch</td></tr>
+<tr><td><code>SOUTHSEA_FREEBOOTERS</code></td><td>573 (0x23D)</td><td></td><td></td></tr>
+<tr><td><code>CAER_DARROW</code></td><td>574 (0x23E)</td><td></td><td></td></tr>
+<tr><td><code>FURBOLG_UNCORRUPTED</code></td><td>575 (0x23F)</td><td></td><td>Furbolg, Uncorrupted</td></tr>
+<tr><td><code>TIMBERMAW_HOLD</code></td><td>576 (0x240)</td><td></td><td></td></tr>
+<tr><td><code>EVERLOOK</code></td><td>577 (0x241)</td><td></td><td></td></tr>
+<tr><td><code>WINTERSABER_TRAINERS</code></td><td>589 (0x24D)</td><td></td><td></td></tr>
+<tr><td><code>CENARION_CIRCLE</code></td><td>609 (0x261)</td><td></td><td></td></tr>
+<tr><td><code>SHATTERSPEAR_TROLLS</code></td><td>629 (0x275)</td><td></td><td></td></tr>
+<tr><td><code>RAVASAUR_TRAINERS</code></td><td>630 (0x276)</td><td></td><td></td></tr>
+<tr><td><code>MAJORDOMO_EXECUTUS</code></td><td>649 (0x289)</td><td></td><td></td></tr>
+<tr><td><code>BEAST_CARRION_BIRD</code></td><td>669 (0x29D)</td><td></td><td>Beast - Carrion Bird</td></tr>
+<tr><td><code>BEAST_CAT</code></td><td>670 (0x29E)</td><td></td><td>Beast - Cat</td></tr>
+<tr><td><code>BEAST_CRAB</code></td><td>671 (0x29F)</td><td></td><td>Beast - Crab</td></tr>
+<tr><td><code>BEAST_CROCILISK</code></td><td>672 (0x2A0)</td><td></td><td>Beast - Crocilisk</td></tr>
+<tr><td><code>BEAST_HYENA</code></td><td>673 (0x2A1)</td><td></td><td>Beast - Hyena</td></tr>
+<tr><td><code>BEAST_OWL</code></td><td>674 (0x2A2)</td><td></td><td>Beast - Owl</td></tr>
+<tr><td><code>BEAST_SCORPID</code></td><td>675 (0x2A3)</td><td></td><td>Beast - Scorpid</td></tr>
+<tr><td><code>BEAST_TALLSTRIDER</code></td><td>676 (0x2A4)</td><td></td><td>Beast - Tallstrider</td></tr>
+<tr><td><code>BEAST_TURTLE</code></td><td>677 (0x2A5)</td><td></td><td>Beast - Turtle</td></tr>
+<tr><td><code>BEAST_WIND_SERPENT</code></td><td>678 (0x2A6)</td><td></td><td>Beast - Wind Serpent</td></tr>
+<tr><td><code>TRAINING_DUMMY</code></td><td>679 (0x2A7)</td><td></td><td></td></tr>
+<tr><td><code>DRAGONFLIGHT_BLACK_BAIT</code></td><td>689 (0x2B1)</td><td></td><td>Dragonflight, Black - Bait</td></tr>
+<tr><td><code>BATTLEGROUND_NEUTRAL</code></td><td>709 (0x2C5)</td><td></td><td></td></tr>
+<tr><td><code>FROSTWOLF_CLAN</code></td><td>729 (0x2D9)</td><td></td><td></td></tr>
+<tr><td><code>STORMPIKE_GUARD</code></td><td>730 (0x2DA)</td><td></td><td></td></tr>
+<tr><td><code>HYDRAXIAN_WATERLORDS</code></td><td>749 (0x2ED)</td><td></td><td></td></tr>
+<tr><td><code>SULFURON_FIRELORDS</code></td><td>750 (0x2EE)</td><td></td><td></td></tr>
+<tr><td><code>GIZLOCKS_DUMMY</code></td><td>769 (0x301)</td><td></td><td>Gizlock’s Dummy</td></tr>
+<tr><td><code>GIZLOCKS_CHARM</code></td><td>770 (0x302)</td><td></td><td>Gizlock’s Charm</td></tr>
+<tr><td><code>GIZLOCK</code></td><td>771 (0x303)</td><td></td><td></td></tr>
+<tr><td><code>MORO_GAI</code></td><td>789 (0x315)</td><td></td><td>Moro’gai</td></tr>
+<tr><td><code>SPIRIT_GUIDE_ALLIANCE</code></td><td>790 (0x316)</td><td></td><td>Spirit Guide - Alliance</td></tr>
+<tr><td><code>SHEN_DRALAR</code></td><td>809 (0x329)</td><td></td><td>Shen’dralar</td></tr>
+<tr><td><code>OGRE_CAPTAIN_KROMCRUSH</code></td><td>829 (0x33D)</td><td></td><td>Ogre (Captain Kromcrush)</td></tr>
+<tr><td><code>SPIRIT_GUIDE_HORDE</code></td><td>849 (0x351)</td><td></td><td>Spirit Guide - Horde</td></tr>
+<tr><td><code>JAEDENAR</code></td><td>869 (0x365)</td><td></td><td></td></tr>
+<tr><td><code>WARSONG_OUTRIDERS</code></td><td>889 (0x379)</td><td></td><td></td></tr>
+<tr><td><code>SILVERWING_SENTINELS</code></td><td>890 (0x37A)</td><td></td><td></td></tr>
+<tr><td><code>ALLIANCE_FORCES</code></td><td>891 (0x37B)</td><td></td><td></td></tr>
+<tr><td><code>HORDE_FORCES</code></td><td>892 (0x37C)</td><td></td><td></td></tr>
+<tr><td><code>REVANTUSK_TROLLS</code></td><td>893 (0x37D)</td><td></td><td></td></tr>
+<tr><td><code>DARKMOON_FAIRE</code></td><td>909 (0x38D)</td><td></td><td></td></tr>
+<tr><td><code>BROOD_OF_NOZDORMU</code></td><td>910 (0x38E)</td><td></td><td></td></tr>
+<tr><td><code>MIGHT_OF_KALIMDOR</code></td><td>912 (0x390)</td><td></td><td></td></tr>
+<tr><td><code>ARMIES_OF_C_THUN</code></td><td>915 (0x393)</td><td></td><td>Armies of C’Thun</td></tr>
+<tr><td><code>SILITHID_ATTACKERS</code></td><td>916 (0x394)</td><td></td><td></td></tr>
+<tr><td><code>THE_IRONFORGE_BRIGADE</code></td><td>917 (0x395)</td><td></td><td></td></tr>
+<tr><td><code>RC_ENEMIES</code></td><td>918 (0x396)</td><td></td><td></td></tr>
+<tr><td><code>RC_OBJECTS</code></td><td>919 (0x397)</td><td></td><td></td></tr>
+<tr><td><code>RED</code></td><td>920 (0x398)</td><td></td><td></td></tr>
+<tr><td><code>BLUE</code></td><td>921 (0x399)</td><td></td><td></td></tr>
+<tr><td><code>SCOURGE_INVADERS</code></td><td>928 (0x3A0)</td><td></td><td></td></tr>
+<tr><td><code>TEST_FACTION_NOT_A_REAL_FACTION</code></td><td>931 (0x3A3)</td><td></td><td>Test Faction (not a real faction)</td></tr>
+<tr><td><code>TOWOW_FLAG</code></td><td>950 (0x3B6)</td><td></td><td>ToWoW - Flag</td></tr>
+<tr><td><code>TOWOW_FLAG_TRIGGER_ALLIANCE_DND</code></td><td>951 (0x3B7)</td><td></td><td>ToWoW - Flag Trigger Alliance (DND)</td></tr>
+<tr><td><code>TOWOW_FLAG_TRIGGER_HORDE_DND</code></td><td>954 (0x3BA)</td><td></td><td>ToWoW - Flag Trigger Horde (DND)</td></tr>
+</tbody>
+</table>
+</div>
+<p>Used in:</p>
+<ul>
+<li><a href="cmsg_set_faction_atwar.html">CMSG_SET_FACTION_ATWAR</a></li>
+<li><a href="cmsg_set_faction_inactive.html">CMSG_SET_FACTION_INACTIVE</a></li>
+<li><a href="cmsg_set_watched_faction.html">CMSG_SET_WATCHED_FACTION</a></li>
+<li><a href="factionstanding.html">FactionStanding</a></li>
+<li><a href="forcedreaction.html">ForcedReaction</a></li>
+<li><a href="smsg_item_query_single_response.html">SMSG_ITEM_QUERY_SINGLE_RESPONSE</a></li>
+<li><a href="smsg_quest_query_response.html">SMSG_QUEST_QUERY_RESPONSE</a></li>
+<li><a href="smsg_set_faction_visible.html">SMSG_SET_FACTION_VISIBLE</a></li>
+</ul>
+<h2 id="client-version-243"><a class="header" href="#client-version-243">Client Version 2.4.3</a></h2>
+<h3 id="wowm-representation-1"><a class="header" href="#wowm-representation-1">Wowm Representation</a></h3>
+<p>Autogenerated from <code>wowm</code> file at <a href="https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/faction/faction.wowm#L358"><code>wow_message_parser/wowm/world/faction/faction.wowm:358</code></a>.</p>
+<pre><code class="language-rust ignore">enum Faction : u16 {
+    NONE = 0;
+    PLAYER_HUMAN = 1;
+    PLAYER_ORC = 2;
+    PLAYER_DWARF = 3;
+    PLAYER_NIGHT_ELF = 4;
+    PLAYER_UNDEAD = 5;
+    PLAYER_TAUREN = 6;
+    CREATURE = 7;
+    PLAYER_GNOME = 8;
+    PLAYER_TROLL = 9;
+    MONSTER = 14;
+    DEFIAS_BROTHERHOOD = 15;
+    GNOLL_RIVERPAW = 16;
+    GNOLL_REDRIDGE = 17;
+    GNOLL_SHADOWHIDE = 18;
+    MURLOC = 19;
+    UNDEAD_SCOURGE = 20;
+    BOOTY_BAY = 21;
+    BEAST_SPIDER = 22;
+    BEAST_BOAR = 23;
+    WORGEN = 24;
+    KOBOLD = 25;
+    TROLL_BLOODSCALP = 26;
+    TROLL_SKULLSPLITTER = 27;
+    PREY = 28;
+    BEAST_WOLF = 29;
+    DEFIAS_BROTHERHOOD_TRAITOR = 30;
+    FRIENDLY = 31;
+    TROGG = 32;
+    TROLL_FROSTMANE = 33;
+    ORC_BLACKROCK = 34;
+    VILLIAN = 35;
+    VICTIM = 36;
+    BEAST_BEAR = 37;
+    OGRE = 38;
+    KURZENS_MERCENARIES = 39;
+    ESCORTEE = 40;
+    VENTURE_COMPANY = 41;
+    BEAST_RAPTOR = 42;
+    BASILISK = 43;
+    DRAGONFLIGHT_GREEN = 44;
+    LOST_ONES = 45;
+    BLACKSMITHING_ARMORSMITHING = 46;
+    IRONFORGE = 47;
+    DARK_IRON_DWARVES = 48;
+    HUMAN_NIGHT_WATCH = 49;
+    DRAGONFLIGHT_RED = 50;
+    GNOLL_MOSSHIDE = 51;
+    ORC_DRAGONMAW = 52;
+    GNOME_LEPER = 53;
+    GNOMEREGAN_EXILES = 54;
+    LEOPARD = 55;
+    SCARLET_CRUSADE = 56;
+    GNOLL_ROTHIDE = 57;
+    BEAST_GORILLA = 58;
+    THORIUM_BROTHERHOOD = 59;
+    NAGA = 60;
+    DALARAN = 61;
+    FORLORN_SPIRIT = 62;
+    DARKHOWL = 63;
+    GRELL = 64;
+    FURBOLG = 65;
+    HORDE_GENERIC = 66;
+    HORDE = 67;
+    UNDERCITY = 68;
+    DARNASSUS = 69;
+    SYNDICATE = 70;
+    HILLSBRAD_MILITIA = 71;
+    STORMWIND = 72;
+    DEMON = 73;
+    ELEMENTAL = 74;
+    SPIRIT = 75;
+    ORGRIMMAR = 76;
+    TREASURE = 77;
+    GNOLL_MUDSNOUT = 78;
+    HILLSBRAD_SOUTHSHORE_MAYOR = 79;
+    DRAGONFLIGHT_BLACK = 80;
+    THUNDER_BLUFF = 81;
+    TROLL_WITHERBARK = 82;
+    LEATHERWORKING_ELEMENTAL = 83;
+    QUILBOAR_RAZORMANE = 84;
+    QUILBOAR_BRISTLEBACK = 85;
+    LEATHERWORKING_DRAGONSCALE = 86;
+    BLOODSAIL_BUCCANEERS = 87;
+    BLACKFATHOM = 88;
+    MAKRURA = 89;
+    CENTAUR_KOLKAR = 90;
+    CENTAUR_GALAK = 91;
+    GELKIS_CLAN_CENTAUR = 92;
+    MAGRAM_CLAN_CENTAUR = 93;
+    MARAUDINE = 94;
+    THERAMORE = 108;
+    QUILBOAR_RAZORFEN = 109;
+    QUILBOAR_RAZORMANE_2 = 110;
+    QUILBOAR_DEATHSHEAD = 111;
+    ENEMY = 128;
+    AMBIENT = 148;
+    NETHERGARDE_CARAVAN = 168;
+    STEAMWHEEDLE_CARTEL = 169;
+    ALLIANCE_GENERIC = 189;
+    NETHERGARDE = 209;
+    WAILING_CAVERNS = 229;
+    SILITHID = 249;
+    SILVERMOON_REMNANT = 269;
+    ZANDALAR_TRIBE = 270;
+    BLACKSMITHING_WEAPONSMITHING = 289;
+    SCORPID = 309;
+    BEAST_BAT = 310;
+    TITAN = 311;
+    TASKMASTER_FIZZULE = 329;
+    RAVENHOLDT = 349;
+    GADGETZAN = 369;
+    GNOMEREGAN_BUG = 389;
+    HARPY = 409;
+    BURNING_BLADE = 429;
+    SHADOWSILK_POACHER = 449;
+    SEARING_SPIDER = 450;
+    ALLIANCE = 469;
+    RATCHET = 470;
+    WILDHAMMER_CLAN = 471;
+    GOBLIN_DARK_IRON_BAR_PATRON = 489;
+    THE_LEAGUE_OF_ARATHOR = 509;
+    THE_DEFILERS = 510;
+    GIANT = 511;
+    ARGENT_DAWN = 529;
+    DARKSPEAR_TROLLS = 530;
+    DRAGONFLIGHT_BRONZE = 531;
+    DRAGONFLIGHT_BLUE = 532;
+    LEATHERWORKING_TRIBAL = 549;
+    ENGINEERING_GOBLIN = 550;
+    ENGINEERING_GNOME = 551;
+    BLACKSMITHING_HAMMERSMITHING = 569;
+    BLACKSMITHING_AXESMITHING = 570;
+    BLACKSMITHING_SWORDSMITHING = 571;
+    TROLL_VILEBRANCH = 572;
+    SOUTHSEA_FREEBOOTERS = 573;
+    CAER_DARROW = 574;
+    FURBOLG_UNCORRUPTED = 575;
+    TIMBERMAW_HOLD = 576;
+    EVERLOOK = 577;
+    WINTERSABER_TRAINERS = 589;
+    CENARION_CIRCLE = 609;
+    SHATTERSPEAR_TROLLS = 629;
+    RAVASAUR_TRAINERS = 630;
+    MAJORDOMO_EXECUTUS = 649;
+    BEAST_CARRION_BIRD = 669;
+    BEAST_CAT = 670;
+    BEAST_CRAB = 671;
+    BEAST_CROCILISK = 672;
+    BEAST_HYENA = 673;
+    BEAST_OWL = 674;
+    BEAST_SCORPID = 675;
+    BEAST_TALLSTRIDER = 676;
+    BEAST_TURTLE = 677;
+    BEAST_WIND_SERPENT = 678;
+    TRAINING_DUMMY = 679;
+    DRAGONFLIGHT_BLACK_BAIT = 689;
+    BATTLEGROUND_NEUTRAL = 709;
+    FROSTWOLF_CLAN = 729;
+    STORMPIKE_GUARD = 730;
+    HYDRAXIAN_WATERLORDS = 749;
+    SULFURON_FIRELORDS = 750;
+    GIZLOCKS_DUMMY = 769;
+    GIZLOCKS_CHARM = 770;
+    GIZLOCK = 771;
+    MORO_GAI = 789;
+    SPIRIT_GUIDE_ALLIANCE = 790;
+    SHEN_DRALAR = 809;
+    OGRE_CAPTAIN_KROMCRUSH = 829;
+    SPIRIT_GUIDE_HORDE = 849;
+    JAEDENAR = 869;
+    WARSONG_OUTRIDERS = 889;
+    SILVERWING_SENTINELS = 890;
+    ALLIANCE_FORCES = 891;
+    HORDE_FORCES = 892;
+    REVANTUSK_TROLLS = 893;
+    DARKMOON_FAIRE = 909;
+    BROOD_OF_NOZDORMU = 910;
+    SILVERMOON_CITY = 911;
+    MIGHT_OF_KALIMDOR = 912;
+    PLAYER_BLOOD_ELF = 914;
+    ARMIES_OF_C_THUN = 915;
+    SILITHID_ATTACKERS = 916;
+    THE_IRONFORGE_BRIGADE = 917;
+    RC_ENEMIES = 918;
+    RC_OBJECTS = 919;
+    RED = 920;
+    BLUE = 921;
+    TRANQUILLIEN = 922;
+    FARSTRIDERS = 923;
+    DEPRECATED = 924;
+    SUNSTRIDERS = 925;
+    MAGISTERS_GUILD = 926;
+    PLAYER_DRAENEI = 927;
+    SCOURGE_INVADERS = 928;
+    BLOODMAUL_CLAN = 929;
+    EXODAR = 930;
+    TEST_FACTION_NOT_A_REAL_FACTION = 931;
+    THE_ALDOR = 932;
+    THE_CONSORTIUM = 933;
+    THE_SCRYERS = 934;
+    THE_SHA_TAR = 935;
+    SHATTRATH_CITY = 936;
+    TROLL_FOREST = 937;
+    THE_OMENAI = 938;
+    DEPRECATED1 = 939;
+    THE_SONS_OF_LOTHAR = 940;
+    THE_MAG_HAR = 941;
+    CENARION_EXPEDITION = 942;
+    FEL_ORC = 943;
+    FEL_ORC_GHOST = 944;
+    SONS_OF_LOTHAR_GHOSTS = 945;
+    HONOR_HOLD = 946;
+    THRALLMAR = 947;
+    TEST_FACTION_2 = 948;
+    TEST_FACTION_1 = 949;
+    TOWOW_FLAG = 950;
+    TOWOW_FLAG_TRIGGER_ALLIANCE_DND = 951;
+    TEST_FACTION_3 = 952;
+    TEST_FACTION_4 = 953;
+    TOWOW_FLAG_TRIGGER_HORDE_DND = 954;
+    BROKEN = 955;
+    ETHEREUM = 956;
+    EARTH_ELEMENTAL = 957;
+    FIGHTING_ROBOTS = 958;
+    ACTOR_GOOD = 959;
+    ACTOR_EVIL = 960;
+    STILLPINE_FURBOLG = 961;
+    CRAZED_OWLKIN = 962;
+    CHESS_ALLIANCE = 963;
+    CHESS_HORDE = 964;
+    MONSTER_SPAR = 965;
+    MONSTER_SPAR_BUDDY = 966;
+    THE_VIOLET_EYE = 967;
+    SUNHAWKS = 968;
+    HAND_OF_ARGUS = 969;
+    SPOREGGAR = 970;
+    FUNGAL_GIANT = 971;
+    SPORE_BAT = 972;
+    MONSTER_PREDATOR = 973;
+    MONSTER_PREY = 974;
+    VOID_ANOMALY = 975;
+    HYJAL_DEFENDERS = 976;
+    HYJAL_INVADERS = 977;
+    KURENAI = 978;
+    EARTHEN_RING = 979;
+    OUTLAND = 980;
+    ARAKKOA = 981;
+    ZANGARMARSH_BANNER_ALLIANCE = 982;
+    ZANGARMARSH_BANNER_HORDE = 983;
+    ZANGARMARSH_BANNER_NEUTRAL = 984;
+    CAVERNS_OF_TIME_THRALL = 985;
+    CAVERNS_OF_TIME_DURNHOLDE = 986;
+    CAVERNS_OF_TIME_SOUTHSHORE_GUARDS = 987;
+    SHADOW_COUNCIL_COVERT = 988;
+    KEEPERS_OF_TIME = 989;
+    THE_SCALE_OF_THE_SANDS = 990;
+    DARK_PORTAL_DEFENDER_ALLIANCE = 991;
+    DARK_PORTAL_DEFENDER_HORDE = 992;
+    DARK_PORTAL_ATTACKER_LEGION = 993;
+    INCITER_TRIGGER = 994;
+    INCITER_TRIGGER_2 = 995;
+    INCITER_TRIGGER_3 = 996;
+    INCITER_TRIGGER_4 = 997;
+    INCITER_TRIGGER_5 = 998;
+    MANA_CREATURE = 999;
+    KHADGARS_SERVANT = 1000;
+    BLADESPIRE_CLAN = 1001;
+    ETHEREUM_SPARBUDDY = 1002;
+    PROTECTORATE = 1003;
+    ARCANE_ANNIHILATOR_DNR = 1004;
+    FRIENDLY_HIDDEN = 1005;
+    KIRIN_VAR_DATHRIC = 1006;
+    KIRIN_VAR_BELMARA = 1007;
+    KIRIN_VAR_LUMINRATH = 1008;
+    KIRIN_VAR_COHLIEN = 1009;
+    SERVANT_OF_ILLIDAN = 1010;
+    LOWER_CITY = 1011;
+    ASHTONGUE_DEATHSWORN = 1012;
+    SPIRITS_OF_SHADOWMOON_1 = 1013;
+    SPIRITS_OF_SHADOWMOON_2 = 1014;
+    NETHERWING = 1015;
+    WYRMCULT = 1016;
+    TREANT = 1017;
+    LEOTHERAS_DEMON_I = 1018;
+    LEOTHERAS_DEMON_II = 1019;
+    LEOTHERAS_DEMON_III = 1020;
+    LEOTHERAS_DEMON_IV = 1021;
+    LEOTHERAS_DEMON_V = 1022;
+    AZALOTH = 1023;
+    ROCK_FLAYER = 1024;
+    FLAYER_HUNTER = 1025;
+    SHADOWMOON_SHADE = 1026;
+    LEGION_COMMUNICATOR = 1027;
+    RAVENSWOOD_ANCIENTS = 1028;
+    CHESS_FRIENDLY_TO_ALL_CHESS = 1029;
+    BLACK_TEMPLE_GATES_ILLIDARI = 1030;
+    SHA_TARI_SKYGUARD = 1031;
+    AREA_52 = 1032;
+    MAIEV = 1033;
+    SKETTIS_SHADOWY_ARAKKOA = 1034;
+    SKETTIS_ARAKKOA = 1035;
+    DRAGONMAW_ENEMY = 1036;
+    REUSE = 1037;
+    OGRI_LA = 1038;
+    RAVAGER = 1039;
+    REUSE1 = 1040;
+    FRENZY = 1041;
+    SKYGUARD_ENEMY = 1042;
+    SKUNK_PETUNIA = 1043;
+    THERAMORE_DESERTER = 1044;
+    TROLL_AMANI = 1049;
+    CTF_FLAGS = 1059;
+    RAM_RACING_POWERUP_DND = 1069;
+    RAM_RACING_TRAP_DND = 1070;
+    CRAIGS_SQUIRRELS = 1071;
+    HOLIDAY_WATER_BARREL = 1074;
+    HOLIDAY_GENERIC = 1075;
+    SHATTERED_SUN_OFFENSIVE = 1077;
+    FIGHTING_VANITY_PET = 1078;
+    MONSTER_FORCE_REACTION = 1080;
+    OBJECT_FORCE_REACTION = 1081;
+    HOLIDAY_MONSTER = 1087;
+}</code></pre>
+<h3 id="type-1"><a class="header" href="#type-1">Type</a></h3>
+<p>The basic type is <code>u16</code>, a 2 byte (16 bit) little endian integer.</p>
+<h3 id="enumerators-1"><a class="header" href="#enumerators-1">Enumerators</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Enumerator</th><th>Value</th><th>Comment</th><th>Display</th></tr>
+</thead>
+<tbody>
+<tr><td><code>NONE</code></td><td>0 (0x00)</td><td></td><td></td></tr>
+<tr><td><code>PLAYER_HUMAN</code></td><td>1 (0x01)</td><td></td><td>PLAYER, Human</td></tr>
+<tr><td><code>PLAYER_ORC</code></td><td>2 (0x02)</td><td></td><td>PLAYER, Orc</td></tr>
+<tr><td><code>PLAYER_DWARF</code></td><td>3 (0x03)</td><td></td><td>PLAYER, Dwarf</td></tr>
+<tr><td><code>PLAYER_NIGHT_ELF</code></td><td>4 (0x04)</td><td></td><td>PLAYER, Night Elf</td></tr>
+<tr><td><code>PLAYER_UNDEAD</code></td><td>5 (0x05)</td><td></td><td>PLAYER, Undead</td></tr>
+<tr><td><code>PLAYER_TAUREN</code></td><td>6 (0x06)</td><td></td><td>PLAYER, Tauren</td></tr>
+<tr><td><code>CREATURE</code></td><td>7 (0x07)</td><td></td><td></td></tr>
+<tr><td><code>PLAYER_GNOME</code></td><td>8 (0x08)</td><td></td><td>PLAYER, Gnome</td></tr>
+<tr><td><code>PLAYER_TROLL</code></td><td>9 (0x09)</td><td></td><td>PLAYER, Troll</td></tr>
+<tr><td><code>MONSTER</code></td><td>14 (0x0E)</td><td></td><td></td></tr>
+<tr><td><code>DEFIAS_BROTHERHOOD</code></td><td>15 (0x0F)</td><td></td><td></td></tr>
+<tr><td><code>GNOLL_RIVERPAW</code></td><td>16 (0x10)</td><td></td><td>Gnoll - Riverpaw</td></tr>
+<tr><td><code>GNOLL_REDRIDGE</code></td><td>17 (0x11)</td><td></td><td>Gnoll - Redridge</td></tr>
+<tr><td><code>GNOLL_SHADOWHIDE</code></td><td>18 (0x12)</td><td></td><td>Gnoll - Shadowhide</td></tr>
+<tr><td><code>MURLOC</code></td><td>19 (0x13)</td><td></td><td></td></tr>
+<tr><td><code>UNDEAD_SCOURGE</code></td><td>20 (0x14)</td><td></td><td>Undead, Scourge</td></tr>
+<tr><td><code>BOOTY_BAY</code></td><td>21 (0x15)</td><td></td><td></td></tr>
+<tr><td><code>BEAST_SPIDER</code></td><td>22 (0x16)</td><td></td><td>Beast - Spider</td></tr>
+<tr><td><code>BEAST_BOAR</code></td><td>23 (0x17)</td><td></td><td>Beast - Boar</td></tr>
+<tr><td><code>WORGEN</code></td><td>24 (0x18)</td><td></td><td></td></tr>
+<tr><td><code>KOBOLD</code></td><td>25 (0x19)</td><td></td><td></td></tr>
+<tr><td><code>TROLL_BLOODSCALP</code></td><td>26 (0x1A)</td><td></td><td>Troll, Bloodscalp</td></tr>
+<tr><td><code>TROLL_SKULLSPLITTER</code></td><td>27 (0x1B)</td><td></td><td>Troll, Skullsplitter</td></tr>
+<tr><td><code>PREY</code></td><td>28 (0x1C)</td><td></td><td></td></tr>
+<tr><td><code>BEAST_WOLF</code></td><td>29 (0x1D)</td><td></td><td>Beast - Wolf</td></tr>
+<tr><td><code>DEFIAS_BROTHERHOOD_TRAITOR</code></td><td>30 (0x1E)</td><td></td><td></td></tr>
+<tr><td><code>FRIENDLY</code></td><td>31 (0x1F)</td><td></td><td></td></tr>
+<tr><td><code>TROGG</code></td><td>32 (0x20)</td><td></td><td></td></tr>
+<tr><td><code>TROLL_FROSTMANE</code></td><td>33 (0x21)</td><td></td><td>Troll, Frostmane</td></tr>
+<tr><td><code>ORC_BLACKROCK</code></td><td>34 (0x22)</td><td></td><td>Orc, Blackrock</td></tr>
+<tr><td><code>VILLIAN</code></td><td>35 (0x23)</td><td></td><td></td></tr>
+<tr><td><code>VICTIM</code></td><td>36 (0x24)</td><td></td><td></td></tr>
+<tr><td><code>BEAST_BEAR</code></td><td>37 (0x25)</td><td></td><td>Beast - Bear</td></tr>
+<tr><td><code>OGRE</code></td><td>38 (0x26)</td><td></td><td></td></tr>
+<tr><td><code>KURZENS_MERCENARIES</code></td><td>39 (0x27)</td><td></td><td>Kurzen’s Mercenaries</td></tr>
+<tr><td><code>ESCORTEE</code></td><td>40 (0x28)</td><td></td><td></td></tr>
+<tr><td><code>VENTURE_COMPANY</code></td><td>41 (0x29)</td><td></td><td></td></tr>
+<tr><td><code>BEAST_RAPTOR</code></td><td>42 (0x2A)</td><td></td><td>Beast - Raptor</td></tr>
+<tr><td><code>BASILISK</code></td><td>43 (0x2B)</td><td></td><td></td></tr>
+<tr><td><code>DRAGONFLIGHT_GREEN</code></td><td>44 (0x2C)</td><td></td><td>Dragonflight, Green</td></tr>
+<tr><td><code>LOST_ONES</code></td><td>45 (0x2D)</td><td></td><td></td></tr>
+<tr><td><code>BLACKSMITHING_ARMORSMITHING</code></td><td>46 (0x2E)</td><td></td><td>Blacksmithing - Armorsmithing</td></tr>
+<tr><td><code>IRONFORGE</code></td><td>47 (0x2F)</td><td></td><td></td></tr>
+<tr><td><code>DARK_IRON_DWARVES</code></td><td>48 (0x30)</td><td></td><td></td></tr>
+<tr><td><code>HUMAN_NIGHT_WATCH</code></td><td>49 (0x31)</td><td></td><td>Human, Night Watch</td></tr>
+<tr><td><code>DRAGONFLIGHT_RED</code></td><td>50 (0x32)</td><td></td><td>Dragonflight, Red</td></tr>
+<tr><td><code>GNOLL_MOSSHIDE</code></td><td>51 (0x33)</td><td></td><td>Gnoll - Mosshide</td></tr>
+<tr><td><code>ORC_DRAGONMAW</code></td><td>52 (0x34)</td><td></td><td>Orc, Dragonmaw</td></tr>
+<tr><td><code>GNOME_LEPER</code></td><td>53 (0x35)</td><td></td><td>Gnome - Leper</td></tr>
+<tr><td><code>GNOMEREGAN_EXILES</code></td><td>54 (0x36)</td><td></td><td></td></tr>
+<tr><td><code>LEOPARD</code></td><td>55 (0x37)</td><td></td><td></td></tr>
+<tr><td><code>SCARLET_CRUSADE</code></td><td>56 (0x38)</td><td></td><td></td></tr>
+<tr><td><code>GNOLL_ROTHIDE</code></td><td>57 (0x39)</td><td></td><td>Gnoll - Rothide</td></tr>
+<tr><td><code>BEAST_GORILLA</code></td><td>58 (0x3A)</td><td></td><td>Beast - Gorilla</td></tr>
+<tr><td><code>THORIUM_BROTHERHOOD</code></td><td>59 (0x3B)</td><td></td><td></td></tr>
+<tr><td><code>NAGA</code></td><td>60 (0x3C)</td><td></td><td></td></tr>
+<tr><td><code>DALARAN</code></td><td>61 (0x3D)</td><td></td><td></td></tr>
+<tr><td><code>FORLORN_SPIRIT</code></td><td>62 (0x3E)</td><td></td><td></td></tr>
+<tr><td><code>DARKHOWL</code></td><td>63 (0x3F)</td><td></td><td></td></tr>
+<tr><td><code>GRELL</code></td><td>64 (0x40)</td><td></td><td></td></tr>
+<tr><td><code>FURBOLG</code></td><td>65 (0x41)</td><td></td><td></td></tr>
+<tr><td><code>HORDE_GENERIC</code></td><td>66 (0x42)</td><td></td><td></td></tr>
+<tr><td><code>HORDE</code></td><td>67 (0x43)</td><td></td><td></td></tr>
+<tr><td><code>UNDERCITY</code></td><td>68 (0x44)</td><td></td><td></td></tr>
+<tr><td><code>DARNASSUS</code></td><td>69 (0x45)</td><td></td><td></td></tr>
+<tr><td><code>SYNDICATE</code></td><td>70 (0x46)</td><td></td><td></td></tr>
+<tr><td><code>HILLSBRAD_MILITIA</code></td><td>71 (0x47)</td><td></td><td></td></tr>
+<tr><td><code>STORMWIND</code></td><td>72 (0x48)</td><td></td><td></td></tr>
+<tr><td><code>DEMON</code></td><td>73 (0x49)</td><td></td><td></td></tr>
+<tr><td><code>ELEMENTAL</code></td><td>74 (0x4A)</td><td></td><td></td></tr>
+<tr><td><code>SPIRIT</code></td><td>75 (0x4B)</td><td></td><td></td></tr>
+<tr><td><code>ORGRIMMAR</code></td><td>76 (0x4C)</td><td></td><td></td></tr>
+<tr><td><code>TREASURE</code></td><td>77 (0x4D)</td><td></td><td></td></tr>
+<tr><td><code>GNOLL_MUDSNOUT</code></td><td>78 (0x4E)</td><td></td><td>Gnoll - Mudsnout</td></tr>
+<tr><td><code>HILLSBRAD_SOUTHSHORE_MAYOR</code></td><td>79 (0x4F)</td><td></td><td>HIllsbrad, Southshore Mayor</td></tr>
+<tr><td><code>DRAGONFLIGHT_BLACK</code></td><td>80 (0x50)</td><td></td><td>Dragonflight, Black</td></tr>
+<tr><td><code>THUNDER_BLUFF</code></td><td>81 (0x51)</td><td></td><td></td></tr>
+<tr><td><code>TROLL_WITHERBARK</code></td><td>82 (0x52)</td><td></td><td>Troll, Witherbark</td></tr>
+<tr><td><code>LEATHERWORKING_ELEMENTAL</code></td><td>83 (0x53)</td><td></td><td>Leatherworking - Elemental</td></tr>
+<tr><td><code>QUILBOAR_RAZORMANE</code></td><td>84 (0x54)</td><td></td><td>Quilboar, Razormane</td></tr>
+<tr><td><code>QUILBOAR_BRISTLEBACK</code></td><td>85 (0x55)</td><td></td><td>Quilboar, Bristleback</td></tr>
+<tr><td><code>LEATHERWORKING_DRAGONSCALE</code></td><td>86 (0x56)</td><td></td><td>Leatherworking - Dragonscale</td></tr>
+<tr><td><code>BLOODSAIL_BUCCANEERS</code></td><td>87 (0x57)</td><td></td><td></td></tr>
+<tr><td><code>BLACKFATHOM</code></td><td>88 (0x58)</td><td></td><td></td></tr>
+<tr><td><code>MAKRURA</code></td><td>89 (0x59)</td><td></td><td></td></tr>
+<tr><td><code>CENTAUR_KOLKAR</code></td><td>90 (0x5A)</td><td></td><td>Centaur, Kolkar</td></tr>
+<tr><td><code>CENTAUR_GALAK</code></td><td>91 (0x5B)</td><td></td><td>Centaur, Galak</td></tr>
+<tr><td><code>GELKIS_CLAN_CENTAUR</code></td><td>92 (0x5C)</td><td></td><td></td></tr>
+<tr><td><code>MAGRAM_CLAN_CENTAUR</code></td><td>93 (0x5D)</td><td></td><td></td></tr>
+<tr><td><code>MARAUDINE</code></td><td>94 (0x5E)</td><td></td><td></td></tr>
+<tr><td><code>THERAMORE</code></td><td>108 (0x6C)</td><td></td><td></td></tr>
+<tr><td><code>QUILBOAR_RAZORFEN</code></td><td>109 (0x6D)</td><td></td><td>Quilboar, Razorfen</td></tr>
+<tr><td><code>QUILBOAR_RAZORMANE_2</code></td><td>110 (0x6E)</td><td></td><td>Quilboar, Razormane 2</td></tr>
+<tr><td><code>QUILBOAR_DEATHSHEAD</code></td><td>111 (0x6F)</td><td></td><td>Quilboar, Deathshead</td></tr>
+<tr><td><code>ENEMY</code></td><td>128 (0x80)</td><td></td><td></td></tr>
+<tr><td><code>AMBIENT</code></td><td>148 (0x94)</td><td></td><td></td></tr>
+<tr><td><code>NETHERGARDE_CARAVAN</code></td><td>168 (0xA8)</td><td></td><td></td></tr>
+<tr><td><code>STEAMWHEEDLE_CARTEL</code></td><td>169 (0xA9)</td><td></td><td></td></tr>
+<tr><td><code>ALLIANCE_GENERIC</code></td><td>189 (0xBD)</td><td></td><td></td></tr>
+<tr><td><code>NETHERGARDE</code></td><td>209 (0xD1)</td><td></td><td></td></tr>
+<tr><td><code>WAILING_CAVERNS</code></td><td>229 (0xE5)</td><td></td><td></td></tr>
+<tr><td><code>SILITHID</code></td><td>249 (0xF9)</td><td></td><td></td></tr>
+<tr><td><code>SILVERMOON_REMNANT</code></td><td>269 (0x10D)</td><td></td><td></td></tr>
+<tr><td><code>ZANDALAR_TRIBE</code></td><td>270 (0x10E)</td><td></td><td></td></tr>
+<tr><td><code>BLACKSMITHING_WEAPONSMITHING</code></td><td>289 (0x121)</td><td></td><td>Blacksmithing - Weaponsmithing</td></tr>
+<tr><td><code>SCORPID</code></td><td>309 (0x135)</td><td></td><td></td></tr>
+<tr><td><code>BEAST_BAT</code></td><td>310 (0x136)</td><td></td><td>Beast - Bat</td></tr>
+<tr><td><code>TITAN</code></td><td>311 (0x137)</td><td></td><td></td></tr>
+<tr><td><code>TASKMASTER_FIZZULE</code></td><td>329 (0x149)</td><td></td><td></td></tr>
+<tr><td><code>RAVENHOLDT</code></td><td>349 (0x15D)</td><td></td><td></td></tr>
+<tr><td><code>GADGETZAN</code></td><td>369 (0x171)</td><td></td><td></td></tr>
+<tr><td><code>GNOMEREGAN_BUG</code></td><td>389 (0x185)</td><td></td><td></td></tr>
+<tr><td><code>HARPY</code></td><td>409 (0x199)</td><td></td><td></td></tr>
+<tr><td><code>BURNING_BLADE</code></td><td>429 (0x1AD)</td><td></td><td></td></tr>
+<tr><td><code>SHADOWSILK_POACHER</code></td><td>449 (0x1C1)</td><td></td><td></td></tr>
+<tr><td><code>SEARING_SPIDER</code></td><td>450 (0x1C2)</td><td></td><td></td></tr>
+<tr><td><code>ALLIANCE</code></td><td>469 (0x1D5)</td><td></td><td></td></tr>
+<tr><td><code>RATCHET</code></td><td>470 (0x1D6)</td><td></td><td></td></tr>
+<tr><td><code>WILDHAMMER_CLAN</code></td><td>471 (0x1D7)</td><td></td><td></td></tr>
+<tr><td><code>GOBLIN_DARK_IRON_BAR_PATRON</code></td><td>489 (0x1E9)</td><td></td><td>Goblin, Dark Iron Bar Patron</td></tr>
+<tr><td><code>THE_LEAGUE_OF_ARATHOR</code></td><td>509 (0x1FD)</td><td></td><td></td></tr>
+<tr><td><code>THE_DEFILERS</code></td><td>510 (0x1FE)</td><td></td><td></td></tr>
+<tr><td><code>GIANT</code></td><td>511 (0x1FF)</td><td></td><td></td></tr>
+<tr><td><code>ARGENT_DAWN</code></td><td>529 (0x211)</td><td></td><td></td></tr>
+<tr><td><code>DARKSPEAR_TROLLS</code></td><td>530 (0x212)</td><td></td><td></td></tr>
+<tr><td><code>DRAGONFLIGHT_BRONZE</code></td><td>531 (0x213)</td><td></td><td>Dragonflight, Bronze</td></tr>
+<tr><td><code>DRAGONFLIGHT_BLUE</code></td><td>532 (0x214)</td><td></td><td>Dragonflight, Blue</td></tr>
+<tr><td><code>LEATHERWORKING_TRIBAL</code></td><td>549 (0x225)</td><td></td><td>Leatherworking - Tribal</td></tr>
+<tr><td><code>ENGINEERING_GOBLIN</code></td><td>550 (0x226)</td><td></td><td>Engineering - Goblin</td></tr>
+<tr><td><code>ENGINEERING_GNOME</code></td><td>551 (0x227)</td><td></td><td>Engineering - Gnome</td></tr>
+<tr><td><code>BLACKSMITHING_HAMMERSMITHING</code></td><td>569 (0x239)</td><td></td><td>Blacksmithing - Hammersmithing</td></tr>
+<tr><td><code>BLACKSMITHING_AXESMITHING</code></td><td>570 (0x23A)</td><td></td><td>Blacksmithing - Axesmithing</td></tr>
+<tr><td><code>BLACKSMITHING_SWORDSMITHING</code></td><td>571 (0x23B)</td><td></td><td>Blacksmithing - Swordsmithing</td></tr>
+<tr><td><code>TROLL_VILEBRANCH</code></td><td>572 (0x23C)</td><td></td><td>Troll, Vilebranch</td></tr>
+<tr><td><code>SOUTHSEA_FREEBOOTERS</code></td><td>573 (0x23D)</td><td></td><td></td></tr>
+<tr><td><code>CAER_DARROW</code></td><td>574 (0x23E)</td><td></td><td></td></tr>
+<tr><td><code>FURBOLG_UNCORRUPTED</code></td><td>575 (0x23F)</td><td></td><td>Furbolg, Uncorrupted</td></tr>
+<tr><td><code>TIMBERMAW_HOLD</code></td><td>576 (0x240)</td><td></td><td></td></tr>
+<tr><td><code>EVERLOOK</code></td><td>577 (0x241)</td><td></td><td></td></tr>
+<tr><td><code>WINTERSABER_TRAINERS</code></td><td>589 (0x24D)</td><td></td><td></td></tr>
+<tr><td><code>CENARION_CIRCLE</code></td><td>609 (0x261)</td><td></td><td></td></tr>
+<tr><td><code>SHATTERSPEAR_TROLLS</code></td><td>629 (0x275)</td><td></td><td></td></tr>
+<tr><td><code>RAVASAUR_TRAINERS</code></td><td>630 (0x276)</td><td></td><td></td></tr>
+<tr><td><code>MAJORDOMO_EXECUTUS</code></td><td>649 (0x289)</td><td></td><td></td></tr>
+<tr><td><code>BEAST_CARRION_BIRD</code></td><td>669 (0x29D)</td><td></td><td>Beast - Carrion Bird</td></tr>
+<tr><td><code>BEAST_CAT</code></td><td>670 (0x29E)</td><td></td><td>Beast - Cat</td></tr>
+<tr><td><code>BEAST_CRAB</code></td><td>671 (0x29F)</td><td></td><td>Beast - Crab</td></tr>
+<tr><td><code>BEAST_CROCILISK</code></td><td>672 (0x2A0)</td><td></td><td>Beast - Crocilisk</td></tr>
+<tr><td><code>BEAST_HYENA</code></td><td>673 (0x2A1)</td><td></td><td>Beast - Hyena</td></tr>
+<tr><td><code>BEAST_OWL</code></td><td>674 (0x2A2)</td><td></td><td>Beast - Owl</td></tr>
+<tr><td><code>BEAST_SCORPID</code></td><td>675 (0x2A3)</td><td></td><td>Beast - Scorpid</td></tr>
+<tr><td><code>BEAST_TALLSTRIDER</code></td><td>676 (0x2A4)</td><td></td><td>Beast - Tallstrider</td></tr>
+<tr><td><code>BEAST_TURTLE</code></td><td>677 (0x2A5)</td><td></td><td>Beast - Turtle</td></tr>
+<tr><td><code>BEAST_WIND_SERPENT</code></td><td>678 (0x2A6)</td><td></td><td>Beast - Wind Serpent</td></tr>
+<tr><td><code>TRAINING_DUMMY</code></td><td>679 (0x2A7)</td><td></td><td></td></tr>
+<tr><td><code>DRAGONFLIGHT_BLACK_BAIT</code></td><td>689 (0x2B1)</td><td></td><td>Dragonflight, Black - Bait</td></tr>
+<tr><td><code>BATTLEGROUND_NEUTRAL</code></td><td>709 (0x2C5)</td><td></td><td></td></tr>
+<tr><td><code>FROSTWOLF_CLAN</code></td><td>729 (0x2D9)</td><td></td><td></td></tr>
+<tr><td><code>STORMPIKE_GUARD</code></td><td>730 (0x2DA)</td><td></td><td></td></tr>
+<tr><td><code>HYDRAXIAN_WATERLORDS</code></td><td>749 (0x2ED)</td><td></td><td></td></tr>
+<tr><td><code>SULFURON_FIRELORDS</code></td><td>750 (0x2EE)</td><td></td><td></td></tr>
+<tr><td><code>GIZLOCKS_DUMMY</code></td><td>769 (0x301)</td><td></td><td>Gizlock’s Dummy</td></tr>
+<tr><td><code>GIZLOCKS_CHARM</code></td><td>770 (0x302)</td><td></td><td>Gizlock’s Charm</td></tr>
+<tr><td><code>GIZLOCK</code></td><td>771 (0x303)</td><td></td><td></td></tr>
+<tr><td><code>MORO_GAI</code></td><td>789 (0x315)</td><td></td><td>Moro’gai</td></tr>
+<tr><td><code>SPIRIT_GUIDE_ALLIANCE</code></td><td>790 (0x316)</td><td></td><td>Spirit Guide - Alliance</td></tr>
+<tr><td><code>SHEN_DRALAR</code></td><td>809 (0x329)</td><td></td><td>Shen’dralar</td></tr>
+<tr><td><code>OGRE_CAPTAIN_KROMCRUSH</code></td><td>829 (0x33D)</td><td></td><td>Ogre (Captain Kromcrush)</td></tr>
+<tr><td><code>SPIRIT_GUIDE_HORDE</code></td><td>849 (0x351)</td><td></td><td>Spirit Guide - Horde</td></tr>
+<tr><td><code>JAEDENAR</code></td><td>869 (0x365)</td><td></td><td></td></tr>
+<tr><td><code>WARSONG_OUTRIDERS</code></td><td>889 (0x379)</td><td></td><td></td></tr>
+<tr><td><code>SILVERWING_SENTINELS</code></td><td>890 (0x37A)</td><td></td><td></td></tr>
+<tr><td><code>ALLIANCE_FORCES</code></td><td>891 (0x37B)</td><td></td><td></td></tr>
+<tr><td><code>HORDE_FORCES</code></td><td>892 (0x37C)</td><td></td><td></td></tr>
+<tr><td><code>REVANTUSK_TROLLS</code></td><td>893 (0x37D)</td><td></td><td></td></tr>
+<tr><td><code>DARKMOON_FAIRE</code></td><td>909 (0x38D)</td><td></td><td></td></tr>
+<tr><td><code>BROOD_OF_NOZDORMU</code></td><td>910 (0x38E)</td><td></td><td></td></tr>
+<tr><td><code>SILVERMOON_CITY</code></td><td>911 (0x38F)</td><td></td><td></td></tr>
+<tr><td><code>MIGHT_OF_KALIMDOR</code></td><td>912 (0x390)</td><td></td><td></td></tr>
+<tr><td><code>PLAYER_BLOOD_ELF</code></td><td>914 (0x392)</td><td></td><td>PLAYER, Blood Elf</td></tr>
+<tr><td><code>ARMIES_OF_C_THUN</code></td><td>915 (0x393)</td><td></td><td>Armies of C’Thun</td></tr>
+<tr><td><code>SILITHID_ATTACKERS</code></td><td>916 (0x394)</td><td></td><td></td></tr>
+<tr><td><code>THE_IRONFORGE_BRIGADE</code></td><td>917 (0x395)</td><td></td><td></td></tr>
+<tr><td><code>RC_ENEMIES</code></td><td>918 (0x396)</td><td></td><td></td></tr>
+<tr><td><code>RC_OBJECTS</code></td><td>919 (0x397)</td><td></td><td></td></tr>
+<tr><td><code>RED</code></td><td>920 (0x398)</td><td></td><td></td></tr>
+<tr><td><code>BLUE</code></td><td>921 (0x399)</td><td></td><td></td></tr>
+<tr><td><code>TRANQUILLIEN</code></td><td>922 (0x39A)</td><td></td><td></td></tr>
+<tr><td><code>FARSTRIDERS</code></td><td>923 (0x39B)</td><td></td><td></td></tr>
+<tr><td><code>DEPRECATED</code></td><td>924 (0x39C)</td><td></td><td></td></tr>
+<tr><td><code>SUNSTRIDERS</code></td><td>925 (0x39D)</td><td></td><td></td></tr>
+<tr><td><code>MAGISTERS_GUILD</code></td><td>926 (0x39E)</td><td></td><td>Magister’s Guild</td></tr>
+<tr><td><code>PLAYER_DRAENEI</code></td><td>927 (0x39F)</td><td></td><td>PLAYER, Draenei</td></tr>
+<tr><td><code>SCOURGE_INVADERS</code></td><td>928 (0x3A0)</td><td></td><td></td></tr>
+<tr><td><code>BLOODMAUL_CLAN</code></td><td>929 (0x3A1)</td><td></td><td></td></tr>
+<tr><td><code>EXODAR</code></td><td>930 (0x3A2)</td><td></td><td></td></tr>
+<tr><td><code>TEST_FACTION_NOT_A_REAL_FACTION</code></td><td>931 (0x3A3)</td><td></td><td>Test Faction (not a real faction)</td></tr>
+<tr><td><code>THE_ALDOR</code></td><td>932 (0x3A4)</td><td></td><td></td></tr>
+<tr><td><code>THE_CONSORTIUM</code></td><td>933 (0x3A5)</td><td></td><td></td></tr>
+<tr><td><code>THE_SCRYERS</code></td><td>934 (0x3A6)</td><td></td><td></td></tr>
+<tr><td><code>THE_SHA_TAR</code></td><td>935 (0x3A7)</td><td></td><td>The Sha’tar</td></tr>
+<tr><td><code>SHATTRATH_CITY</code></td><td>936 (0x3A8)</td><td></td><td></td></tr>
+<tr><td><code>TROLL_FOREST</code></td><td>937 (0x3A9)</td><td></td><td>Troll, Forest</td></tr>
+<tr><td><code>THE_OMENAI</code></td><td>938 (0x3AA)</td><td></td><td></td></tr>
+<tr><td><code>DEPRECATED1</code></td><td>939 (0x3AB)</td><td></td><td></td></tr>
+<tr><td><code>THE_SONS_OF_LOTHAR</code></td><td>940 (0x3AC)</td><td></td><td></td></tr>
+<tr><td><code>THE_MAG_HAR</code></td><td>941 (0x3AD)</td><td></td><td>The Mag’har</td></tr>
+<tr><td><code>CENARION_EXPEDITION</code></td><td>942 (0x3AE)</td><td></td><td></td></tr>
+<tr><td><code>FEL_ORC</code></td><td>943 (0x3AF)</td><td></td><td></td></tr>
+<tr><td><code>FEL_ORC_GHOST</code></td><td>944 (0x3B0)</td><td></td><td></td></tr>
+<tr><td><code>SONS_OF_LOTHAR_GHOSTS</code></td><td>945 (0x3B1)</td><td></td><td></td></tr>
+<tr><td><code>HONOR_HOLD</code></td><td>946 (0x3B2)</td><td></td><td></td></tr>
+<tr><td><code>THRALLMAR</code></td><td>947 (0x3B3)</td><td></td><td></td></tr>
+<tr><td><code>TEST_FACTION_2</code></td><td>948 (0x3B4)</td><td></td><td></td></tr>
+<tr><td><code>TEST_FACTION_1</code></td><td>949 (0x3B5)</td><td></td><td></td></tr>
+<tr><td><code>TOWOW_FLAG</code></td><td>950 (0x3B6)</td><td></td><td>ToWoW - Flag</td></tr>
+<tr><td><code>TOWOW_FLAG_TRIGGER_ALLIANCE_DND</code></td><td>951 (0x3B7)</td><td></td><td>ToWoW - Flag Trigger Alliance (DND)</td></tr>
+<tr><td><code>TEST_FACTION_3</code></td><td>952 (0x3B8)</td><td></td><td></td></tr>
+<tr><td><code>TEST_FACTION_4</code></td><td>953 (0x3B9)</td><td></td><td></td></tr>
+<tr><td><code>TOWOW_FLAG_TRIGGER_HORDE_DND</code></td><td>954 (0x3BA)</td><td></td><td>ToWoW - Flag Trigger Horde (DND)</td></tr>
+<tr><td><code>BROKEN</code></td><td>955 (0x3BB)</td><td></td><td></td></tr>
+<tr><td><code>ETHEREUM</code></td><td>956 (0x3BC)</td><td></td><td></td></tr>
+<tr><td><code>EARTH_ELEMENTAL</code></td><td>957 (0x3BD)</td><td></td><td></td></tr>
+<tr><td><code>FIGHTING_ROBOTS</code></td><td>958 (0x3BE)</td><td></td><td></td></tr>
+<tr><td><code>ACTOR_GOOD</code></td><td>959 (0x3BF)</td><td></td><td></td></tr>
+<tr><td><code>ACTOR_EVIL</code></td><td>960 (0x3C0)</td><td></td><td></td></tr>
+<tr><td><code>STILLPINE_FURBOLG</code></td><td>961 (0x3C1)</td><td></td><td></td></tr>
+<tr><td><code>CRAZED_OWLKIN</code></td><td>962 (0x3C2)</td><td></td><td></td></tr>
+<tr><td><code>CHESS_ALLIANCE</code></td><td>963 (0x3C3)</td><td></td><td></td></tr>
+<tr><td><code>CHESS_HORDE</code></td><td>964 (0x3C4)</td><td></td><td></td></tr>
+<tr><td><code>MONSTER_SPAR</code></td><td>965 (0x3C5)</td><td></td><td></td></tr>
+<tr><td><code>MONSTER_SPAR_BUDDY</code></td><td>966 (0x3C6)</td><td></td><td></td></tr>
+<tr><td><code>THE_VIOLET_EYE</code></td><td>967 (0x3C7)</td><td></td><td></td></tr>
+<tr><td><code>SUNHAWKS</code></td><td>968 (0x3C8)</td><td></td><td></td></tr>
+<tr><td><code>HAND_OF_ARGUS</code></td><td>969 (0x3C9)</td><td></td><td></td></tr>
+<tr><td><code>SPOREGGAR</code></td><td>970 (0x3CA)</td><td></td><td></td></tr>
+<tr><td><code>FUNGAL_GIANT</code></td><td>971 (0x3CB)</td><td></td><td></td></tr>
+<tr><td><code>SPORE_BAT</code></td><td>972 (0x3CC)</td><td></td><td></td></tr>
+<tr><td><code>MONSTER_PREDATOR</code></td><td>973 (0x3CD)</td><td></td><td>Monster, Predator</td></tr>
+<tr><td><code>MONSTER_PREY</code></td><td>974 (0x3CE)</td><td></td><td>Monster, Prey</td></tr>
+<tr><td><code>VOID_ANOMALY</code></td><td>975 (0x3CF)</td><td></td><td></td></tr>
+<tr><td><code>HYJAL_DEFENDERS</code></td><td>976 (0x3D0)</td><td></td><td></td></tr>
+<tr><td><code>HYJAL_INVADERS</code></td><td>977 (0x3D1)</td><td></td><td></td></tr>
+<tr><td><code>KURENAI</code></td><td>978 (0x3D2)</td><td></td><td></td></tr>
+<tr><td><code>EARTHEN_RING</code></td><td>979 (0x3D3)</td><td></td><td></td></tr>
+<tr><td><code>OUTLAND</code></td><td>980 (0x3D4)</td><td></td><td></td></tr>
+<tr><td><code>ARAKKOA</code></td><td>981 (0x3D5)</td><td></td><td></td></tr>
+<tr><td><code>ZANGARMARSH_BANNER_ALLIANCE</code></td><td>982 (0x3D6)</td><td></td><td>Zangarmarsh Banner (Alliance)</td></tr>
+<tr><td><code>ZANGARMARSH_BANNER_HORDE</code></td><td>983 (0x3D7)</td><td></td><td>Zangarmarsh Banner (Horde)</td></tr>
+<tr><td><code>ZANGARMARSH_BANNER_NEUTRAL</code></td><td>984 (0x3D8)</td><td></td><td>Zangarmarsh Banner (Neutral)</td></tr>
+<tr><td><code>CAVERNS_OF_TIME_THRALL</code></td><td>985 (0x3D9)</td><td></td><td>Caverns of Time - Thrall</td></tr>
+<tr><td><code>CAVERNS_OF_TIME_DURNHOLDE</code></td><td>986 (0x3DA)</td><td></td><td>Caverns of Time - Durnholde</td></tr>
+<tr><td><code>CAVERNS_OF_TIME_SOUTHSHORE_GUARDS</code></td><td>987 (0x3DB)</td><td></td><td>Caverns of Time - Southshore Guards</td></tr>
+<tr><td><code>SHADOW_COUNCIL_COVERT</code></td><td>988 (0x3DC)</td><td></td><td></td></tr>
+<tr><td><code>KEEPERS_OF_TIME</code></td><td>989 (0x3DD)</td><td></td><td></td></tr>
+<tr><td><code>THE_SCALE_OF_THE_SANDS</code></td><td>990 (0x3DE)</td><td></td><td></td></tr>
+<tr><td><code>DARK_PORTAL_DEFENDER_ALLIANCE</code></td><td>991 (0x3DF)</td><td></td><td>Dark Portal Defender, Alliance</td></tr>
+<tr><td><code>DARK_PORTAL_DEFENDER_HORDE</code></td><td>992 (0x3E0)</td><td></td><td>Dark Portal Defender, Horde</td></tr>
+<tr><td><code>DARK_PORTAL_ATTACKER_LEGION</code></td><td>993 (0x3E1)</td><td></td><td>Dark Portal Attacker, Legion</td></tr>
+<tr><td><code>INCITER_TRIGGER</code></td><td>994 (0x3E2)</td><td></td><td></td></tr>
+<tr><td><code>INCITER_TRIGGER_2</code></td><td>995 (0x3E3)</td><td></td><td></td></tr>
+<tr><td><code>INCITER_TRIGGER_3</code></td><td>996 (0x3E4)</td><td></td><td></td></tr>
+<tr><td><code>INCITER_TRIGGER_4</code></td><td>997 (0x3E5)</td><td></td><td></td></tr>
+<tr><td><code>INCITER_TRIGGER_5</code></td><td>998 (0x3E6)</td><td></td><td></td></tr>
+<tr><td><code>MANA_CREATURE</code></td><td>999 (0x3E7)</td><td></td><td></td></tr>
+<tr><td><code>KHADGARS_SERVANT</code></td><td>1000 (0x3E8)</td><td></td><td>Khadgar’s Servant</td></tr>
+<tr><td><code>BLADESPIRE_CLAN</code></td><td>1001 (0x3E9)</td><td></td><td></td></tr>
+<tr><td><code>ETHEREUM_SPARBUDDY</code></td><td>1002 (0x3EA)</td><td></td><td></td></tr>
+<tr><td><code>PROTECTORATE</code></td><td>1003 (0x3EB)</td><td></td><td></td></tr>
+<tr><td><code>ARCANE_ANNIHILATOR_DNR</code></td><td>1004 (0x3EC)</td><td></td><td>Arcane Annihilator (DNR)</td></tr>
+<tr><td><code>FRIENDLY_HIDDEN</code></td><td>1005 (0x3ED)</td><td></td><td>Friendly, Hidden</td></tr>
+<tr><td><code>KIRIN_VAR_DATHRIC</code></td><td>1006 (0x3EE)</td><td></td><td>Kirin’Var - Dathric</td></tr>
+<tr><td><code>KIRIN_VAR_BELMARA</code></td><td>1007 (0x3EF)</td><td></td><td>Kirin’Var - Belmara</td></tr>
+<tr><td><code>KIRIN_VAR_LUMINRATH</code></td><td>1008 (0x3F0)</td><td></td><td>Kirin’Var - Luminrath</td></tr>
+<tr><td><code>KIRIN_VAR_COHLIEN</code></td><td>1009 (0x3F1)</td><td></td><td>Kirin’Var - Cohlien</td></tr>
+<tr><td><code>SERVANT_OF_ILLIDAN</code></td><td>1010 (0x3F2)</td><td></td><td></td></tr>
+<tr><td><code>LOWER_CITY</code></td><td>1011 (0x3F3)</td><td></td><td></td></tr>
+<tr><td><code>ASHTONGUE_DEATHSWORN</code></td><td>1012 (0x3F4)</td><td></td><td></td></tr>
+<tr><td><code>SPIRITS_OF_SHADOWMOON_1</code></td><td>1013 (0x3F5)</td><td></td><td></td></tr>
+<tr><td><code>SPIRITS_OF_SHADOWMOON_2</code></td><td>1014 (0x3F6)</td><td></td><td></td></tr>
+<tr><td><code>NETHERWING</code></td><td>1015 (0x3F7)</td><td></td><td></td></tr>
+<tr><td><code>WYRMCULT</code></td><td>1016 (0x3F8)</td><td></td><td></td></tr>
+<tr><td><code>TREANT</code></td><td>1017 (0x3F9)</td><td></td><td></td></tr>
+<tr><td><code>LEOTHERAS_DEMON_I</code></td><td>1018 (0x3FA)</td><td></td><td></td></tr>
+<tr><td><code>LEOTHERAS_DEMON_II</code></td><td>1019 (0x3FB)</td><td></td><td></td></tr>
+<tr><td><code>LEOTHERAS_DEMON_III</code></td><td>1020 (0x3FC)</td><td></td><td></td></tr>
+<tr><td><code>LEOTHERAS_DEMON_IV</code></td><td>1021 (0x3FD)</td><td></td><td></td></tr>
+<tr><td><code>LEOTHERAS_DEMON_V</code></td><td>1022 (0x3FE)</td><td></td><td></td></tr>
+<tr><td><code>AZALOTH</code></td><td>1023 (0x3FF)</td><td></td><td></td></tr>
+<tr><td><code>ROCK_FLAYER</code></td><td>1024 (0x400)</td><td></td><td></td></tr>
+<tr><td><code>FLAYER_HUNTER</code></td><td>1025 (0x401)</td><td></td><td></td></tr>
+<tr><td><code>SHADOWMOON_SHADE</code></td><td>1026 (0x402)</td><td></td><td></td></tr>
+<tr><td><code>LEGION_COMMUNICATOR</code></td><td>1027 (0x403)</td><td></td><td></td></tr>
+<tr><td><code>RAVENSWOOD_ANCIENTS</code></td><td>1028 (0x404)</td><td></td><td></td></tr>
+<tr><td><code>CHESS_FRIENDLY_TO_ALL_CHESS</code></td><td>1029 (0x405)</td><td></td><td>Chess, Friendly to All Chess</td></tr>
+<tr><td><code>BLACK_TEMPLE_GATES_ILLIDARI</code></td><td>1030 (0x406)</td><td></td><td>Black Temple Gates - Illidari</td></tr>
+<tr><td><code>SHA_TARI_SKYGUARD</code></td><td>1031 (0x407)</td><td></td><td>Sha’tari Skyguard</td></tr>
+<tr><td><code>AREA_52</code></td><td>1032 (0x408)</td><td></td><td></td></tr>
+<tr><td><code>MAIEV</code></td><td>1033 (0x409)</td><td></td><td></td></tr>
+<tr><td><code>SKETTIS_SHADOWY_ARAKKOA</code></td><td>1034 (0x40A)</td><td></td><td></td></tr>
+<tr><td><code>SKETTIS_ARAKKOA</code></td><td>1035 (0x40B)</td><td></td><td></td></tr>
+<tr><td><code>DRAGONMAW_ENEMY</code></td><td>1036 (0x40C)</td><td></td><td></td></tr>
+<tr><td><code>REUSE</code></td><td>1037 (0x40D)</td><td></td><td></td></tr>
+<tr><td><code>OGRI_LA</code></td><td>1038 (0x40E)</td><td></td><td>Ogri’la</td></tr>
+<tr><td><code>RAVAGER</code></td><td>1039 (0x40F)</td><td></td><td></td></tr>
+<tr><td><code>REUSE1</code></td><td>1040 (0x410)</td><td></td><td></td></tr>
+<tr><td><code>FRENZY</code></td><td>1041 (0x411)</td><td></td><td></td></tr>
+<tr><td><code>SKYGUARD_ENEMY</code></td><td>1042 (0x412)</td><td></td><td></td></tr>
+<tr><td><code>SKUNK_PETUNIA</code></td><td>1043 (0x413)</td><td></td><td>Skunk, Petunia</td></tr>
+<tr><td><code>THERAMORE_DESERTER</code></td><td>1044 (0x414)</td><td></td><td></td></tr>
+<tr><td><code>TROLL_AMANI</code></td><td>1049 (0x419)</td><td></td><td>Troll, Amani</td></tr>
+<tr><td><code>CTF_FLAGS</code></td><td>1059 (0x423)</td><td></td><td>CTF - Flags</td></tr>
+<tr><td><code>RAM_RACING_POWERUP_DND</code></td><td>1069 (0x42D)</td><td></td><td></td></tr>
+<tr><td><code>RAM_RACING_TRAP_DND</code></td><td>1070 (0x42E)</td><td></td><td></td></tr>
+<tr><td><code>CRAIGS_SQUIRRELS</code></td><td>1071 (0x42F)</td><td></td><td>Craig’s Squirrels</td></tr>
+<tr><td><code>HOLIDAY_WATER_BARREL</code></td><td>1074 (0x432)</td><td></td><td>Holiday - Water Barrel</td></tr>
+<tr><td><code>HOLIDAY_GENERIC</code></td><td>1075 (0x433)</td><td></td><td>Holiday - Generic</td></tr>
+<tr><td><code>SHATTERED_SUN_OFFENSIVE</code></td><td>1077 (0x435)</td><td></td><td></td></tr>
+<tr><td><code>FIGHTING_VANITY_PET</code></td><td>1078 (0x436)</td><td></td><td></td></tr>
+<tr><td><code>MONSTER_FORCE_REACTION</code></td><td>1080 (0x438)</td><td></td><td>Monster, Force Reaction</td></tr>
+<tr><td><code>OBJECT_FORCE_REACTION</code></td><td>1081 (0x439)</td><td></td><td>Object, Force Reaction</td></tr>
+<tr><td><code>HOLIDAY_MONSTER</code></td><td>1087 (0x43F)</td><td></td><td></td></tr>
+</tbody>
+</table>
+</div>
+<p>Used in:</p>
+<ul>
+<li><a href="cmsg_set_faction_atwar.html">CMSG_SET_FACTION_ATWAR</a></li>
+<li><a href="cmsg_set_faction_inactive.html">CMSG_SET_FACTION_INACTIVE</a></li>
+<li><a href="cmsg_set_watched_faction.html">CMSG_SET_WATCHED_FACTION</a></li>
+<li><a href="factionstanding.html">FactionStanding</a></li>
+<li><a href="forcedreaction.html">ForcedReaction</a></li>
+<li><a href="smsg_item_query_single_response.html">SMSG_ITEM_QUERY_SINGLE_RESPONSE</a></li>
+<li><a href="smsg_quest_query_response.html">SMSG_QUEST_QUERY_RESPONSE</a></li>
+<li><a href="smsg_set_faction_visible.html">SMSG_SET_FACTION_VISIBLE</a></li>
+</ul>
+<h2 id="client-version-335"><a class="header" href="#client-version-335">Client Version 3.3.5</a></h2>
+<h3 id="wowm-representation-2"><a class="header" href="#wowm-representation-2">Wowm Representation</a></h3>
+<p>Autogenerated from <code>wowm</code> file at <a href="https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/faction/faction.wowm#L919"><code>wow_message_parser/wowm/world/faction/faction.wowm:919</code></a>.</p>
+<pre><code class="language-rust ignore">enum Faction : u16 {
+    NONE = 0;
+    PLAYER_HUMAN = 1;
+    PLAYER_ORC = 2;
+    PLAYER_DWARF = 3;
+    PLAYER_NIGHT_ELF = 4;
+    PLAYER_UNDEAD = 5;
+    PLAYER_TAUREN = 6;
+    CREATURE = 7;
+    PLAYER_GNOME = 8;
+    PLAYER_TROLL = 9;
+    MONSTER = 14;
+    DEFIAS_BROTHERHOOD = 15;
+    GNOLL_RIVERPAW = 16;
+    GNOLL_REDRIDGE = 17;
+    GNOLL_SHADOWHIDE = 18;
+    MURLOC = 19;
+    UNDEAD_SCOURGE = 20;
+    BOOTY_BAY = 21;
+    BEAST_SPIDER = 22;
+    BEAST_BOAR = 23;
+    WORGEN = 24;
+    KOBOLD = 25;
+    TROLL_BLOODSCALP = 26;
+    TROLL_SKULLSPLITTER = 27;
+    PREY = 28;
+    BEAST_WOLF = 29;
+    DEFIAS_BROTHERHOOD_TRAITOR = 30;
+    FRIENDLY = 31;
+    TROGG = 32;
+    TROLL_FROSTMANE = 33;
+    ORC_BLACKROCK = 34;
+    VILLIAN = 35;
+    VICTIM = 36;
+    BEAST_BEAR = 37;
+    OGRE = 38;
+    KURZENS_MERCENARIES = 39;
+    ESCORTEE = 40;
+    VENTURE_COMPANY = 41;
+    BEAST_RAPTOR = 42;
+    BASILISK = 43;
+    DRAGONFLIGHT_GREEN = 44;
+    LOST_ONES = 45;
+    BLACKSMITHING_ARMORSMITHING = 46;
+    IRONFORGE = 47;
+    DARK_IRON_DWARVES = 48;
+    HUMAN_NIGHT_WATCH = 49;
+    DRAGONFLIGHT_RED = 50;
+    GNOLL_MOSSHIDE = 51;
+    ORC_DRAGONMAW = 52;
+    GNOME_LEPER = 53;
+    GNOMEREGAN_EXILES = 54;
+    LEOPARD = 55;
+    SCARLET_CRUSADE = 56;
+    GNOLL_ROTHIDE = 57;
+    BEAST_GORILLA = 58;
+    THORIUM_BROTHERHOOD = 59;
+    NAGA = 60;
+    DALARAN = 61;
+    FORLORN_SPIRIT = 62;
+    DARKHOWL = 63;
+    GRELL = 64;
+    FURBOLG = 65;
+    HORDE_GENERIC = 66;
+    HORDE = 67;
+    UNDERCITY = 68;
+    DARNASSUS = 69;
+    SYNDICATE = 70;
+    HILLSBRAD_MILITIA = 71;
+    STORMWIND = 72;
+    DEMON = 73;
+    ELEMENTAL = 74;
+    SPIRIT = 75;
+    ORGRIMMAR = 76;
+    TREASURE = 77;
+    GNOLL_MUDSNOUT = 78;
+    HILLSBRAD_SOUTHSHORE_MAYOR = 79;
+    DRAGONFLIGHT_BLACK = 80;
+    THUNDER_BLUFF = 81;
+    TROLL_WITHERBARK = 82;
+    LEATHERWORKING_ELEMENTAL = 83;
+    QUILBOAR_RAZORMANE = 84;
+    QUILBOAR_BRISTLEBACK = 85;
+    LEATHERWORKING_DRAGONSCALE = 86;
+    BLOODSAIL_BUCCANEERS = 87;
+    BLACKFATHOM = 88;
+    MAKRURA = 89;
+    CENTAUR_KOLKAR = 90;
+    CENTAUR_GALAK = 91;
+    GELKIS_CLAN_CENTAUR = 92;
+    MAGRAM_CLAN_CENTAUR = 93;
+    MARAUDINE = 94;
+    THERAMORE = 108;
+    QUILBOAR_RAZORFEN = 109;
+    QUILBOAR_RAZORMANE_2 = 110;
+    QUILBOAR_DEATHSHEAD = 111;
+    ENEMY = 128;
+    AMBIENT = 148;
+    NETHERGARDE_CARAVAN = 168;
+    STEAMWHEEDLE_CARTEL = 169;
+    ALLIANCE_GENERIC = 189;
+    NETHERGARDE = 209;
+    WAILING_CAVERNS = 229;
+    SILITHID = 249;
+    SILVERMOON_REMNANT = 269;
+    ZANDALAR_TRIBE = 270;
+    BLACKSMITHING_WEAPONSMITHING = 289;
+    SCORPID = 309;
+    BEAST_BAT = 310;
+    TITAN = 311;
+    TASKMASTER_FIZZULE = 329;
+    RAVENHOLDT = 349;
+    GADGETZAN = 369;
+    GNOMEREGAN_BUG = 389;
+    HARPY = 409;
+    BURNING_BLADE = 429;
+    SHADOWSILK_POACHER = 449;
+    SEARING_SPIDER = 450;
+    ALLIANCE = 469;
+    RATCHET = 470;
+    WILDHAMMER_CLAN = 471;
+    GOBLIN_DARK_IRON_BAR_PATRON = 489;
+    THE_LEAGUE_OF_ARATHOR = 509;
+    THE_DEFILERS = 510;
+    GIANT = 511;
+    ARGENT_DAWN = 529;
+    DARKSPEAR_TROLLS = 530;
+    DRAGONFLIGHT_BRONZE = 531;
+    DRAGONFLIGHT_BLUE = 532;
+    LEATHERWORKING_TRIBAL = 549;
+    ENGINEERING_GOBLIN = 550;
+    ENGINEERING_GNOME = 551;
+    BLACKSMITHING_HAMMERSMITHING = 569;
+    BLACKSMITHING_AXESMITHING = 570;
+    BLACKSMITHING_SWORDSMITHING = 571;
+    TROLL_VILEBRANCH = 572;
+    SOUTHSEA_FREEBOOTERS = 573;
+    CAER_DARROW = 574;
+    FURBOLG_UNCORRUPTED = 575;
+    TIMBERMAW_HOLD = 576;
+    EVERLOOK = 577;
+    WINTERSABER_TRAINERS = 589;
+    CENARION_CIRCLE = 609;
+    SHATTERSPEAR_TROLLS = 629;
+    RAVASAUR_TRAINERS = 630;
+    MAJORDOMO_EXECUTUS = 649;
+    BEAST_CARRION_BIRD = 669;
+    BEAST_CAT = 670;
+    BEAST_CRAB = 671;
+    BEAST_CROCILISK = 672;
+    BEAST_HYENA = 673;
+    BEAST_OWL = 674;
+    BEAST_SCORPID = 675;
+    BEAST_TALLSTRIDER = 676;
+    BEAST_TURTLE = 677;
+    BEAST_WIND_SERPENT = 678;
+    TRAINING_DUMMY = 679;
+    DRAGONFLIGHT_BLACK_BAIT = 689;
+    BATTLEGROUND_NEUTRAL = 709;
+    FROSTWOLF_CLAN = 729;
+    STORMPIKE_GUARD = 730;
+    HYDRAXIAN_WATERLORDS = 749;
+    SULFURON_FIRELORDS = 750;
+    GIZLOCKS_DUMMY = 769;
+    GIZLOCKS_CHARM = 770;
+    GIZLOCK = 771;
+    MORO_GAI = 789;
+    SPIRIT_GUIDE_ALLIANCE = 790;
+    SHEN_DRALAR = 809;
+    OGRE_CAPTAIN_KROMCRUSH = 829;
+    SPIRIT_GUIDE_HORDE = 849;
+    JAEDENAR = 869;
+    WARSONG_OUTRIDERS = 889;
+    SILVERWING_SENTINELS = 890;
+    ALLIANCE_FORCES = 891;
+    HORDE_FORCES = 892;
+    REVANTUSK_TROLLS = 893;
+    DARKMOON_FAIRE = 909;
+    BROOD_OF_NOZDORMU = 910;
+    SILVERMOON_CITY = 911;
+    MIGHT_OF_KALIMDOR = 912;
+    PLAYER_BLOOD_ELF = 914;
+    ARMIES_OF_C_THUN = 915;
+    SILITHID_ATTACKERS = 916;
+    THE_IRONFORGE_BRIGADE = 917;
+    RC_ENEMIES = 918;
+    RC_OBJECTS = 919;
+    RED = 920;
+    BLUE = 921;
+    TRANQUILLIEN = 922;
+    FARSTRIDERS = 923;
+    DEPRECATED = 924;
+    SUNSTRIDERS = 925;
+    MAGISTERS_GUILD = 926;
+    PLAYER_DRAENEI = 927;
+    SCOURGE_INVADERS = 928;
+    BLOODMAUL_CLAN = 929;
+    EXODAR = 930;
+    TEST_FACTION_NOT_A_REAL_FACTION = 931;
+    THE_ALDOR = 932;
+    THE_CONSORTIUM = 933;
+    THE_SCRYERS = 934;
+    THE_SHA_TAR = 935;
+    SHATTRATH_CITY = 936;
+    TROLL_FOREST = 937;
+    THE_OMENAI = 938;
+    DEPRECATED1 = 939;
+    THE_SONS_OF_LOTHAR = 940;
+    THE_MAG_HAR = 941;
+    CENARION_EXPEDITION = 942;
+    FEL_ORC = 943;
+    FEL_ORC_GHOST = 944;
+    SONS_OF_LOTHAR_GHOSTS = 945;
+    HONOR_HOLD = 946;
+    THRALLMAR = 947;
+    TEST_FACTION_2 = 948;
+    TEST_FACTION_1 = 949;
+    TOWOW_FLAG = 950;
+    TOWOW_FLAG_TRIGGER_ALLIANCE_DND = 951;
+    TEST_FACTION_3 = 952;
+    TEST_FACTION_4 = 953;
+    TOWOW_FLAG_TRIGGER_HORDE_DND = 954;
+    BROKEN = 955;
+    ETHEREUM = 956;
+    EARTH_ELEMENTAL = 957;
+    FIGHTING_ROBOTS = 958;
+    ACTOR_GOOD = 959;
+    ACTOR_EVIL = 960;
+    STILLPINE_FURBOLG = 961;
+    CRAZED_OWLKIN = 962;
+    CHESS_ALLIANCE = 963;
+    CHESS_HORDE = 964;
+    MONSTER_SPAR = 965;
+    MONSTER_SPAR_BUDDY = 966;
+    THE_VIOLET_EYE = 967;
+    SUNHAWKS = 968;
+    HAND_OF_ARGUS = 969;
+    SPOREGGAR = 970;
+    FUNGAL_GIANT = 971;
+    SPORE_BAT = 972;
+    MONSTER_PREDATOR = 973;
+    MONSTER_PREY = 974;
+    VOID_ANOMALY = 975;
+    HYJAL_DEFENDERS = 976;
+    HYJAL_INVADERS = 977;
+    KURENAI = 978;
+    EARTHEN_RING = 979;
+    THE_BURNING_CRUSADE = 980;
+    ARAKKOA = 981;
+    ZANGARMARSH_BANNER_ALLIANCE = 982;
+    ZANGARMARSH_BANNER_HORDE = 983;
+    ZANGARMARSH_BANNER_NEUTRAL = 984;
+    CAVERNS_OF_TIME_THRALL = 985;
+    CAVERNS_OF_TIME_DURNHOLDE = 986;
+    CAVERNS_OF_TIME_SOUTHSHORE_GUARDS = 987;
+    SHADOW_COUNCIL_COVERT = 988;
+    KEEPERS_OF_TIME = 989;
+    THE_SCALE_OF_THE_SANDS = 990;
+    DARK_PORTAL_DEFENDER_ALLIANCE = 991;
+    DARK_PORTAL_DEFENDER_HORDE = 992;
+    DARK_PORTAL_ATTACKER_LEGION = 993;
+    INCITER_TRIGGER = 994;
+    INCITER_TRIGGER_2 = 995;
+    INCITER_TRIGGER_3 = 996;
+    INCITER_TRIGGER_4 = 997;
+    INCITER_TRIGGER_5 = 998;
+    MANA_CREATURE = 999;
+    KHADGARS_SERVANT = 1000;
+    BLADESPIRE_CLAN = 1001;
+    ETHEREUM_SPARBUDDY = 1002;
+    PROTECTORATE = 1003;
+    ARCANE_ANNIHILATOR_DNR = 1004;
+    FRIENDLY_HIDDEN = 1005;
+    KIRIN_VAR_DATHRIC = 1006;
+    KIRIN_VAR_BELMARA = 1007;
+    KIRIN_VAR_LUMINRATH = 1008;
+    KIRIN_VAR_COHLIEN = 1009;
+    SERVANT_OF_ILLIDAN = 1010;
+    LOWER_CITY = 1011;
+    ASHTONGUE_DEATHSWORN = 1012;
+    SPIRITS_OF_SHADOWMOON_1 = 1013;
+    SPIRITS_OF_SHADOWMOON_2 = 1014;
+    NETHERWING = 1015;
+    WYRMCULT = 1016;
+    TREANT = 1017;
+    LEOTHERAS_DEMON_I = 1018;
+    LEOTHERAS_DEMON_II = 1019;
+    LEOTHERAS_DEMON_III = 1020;
+    LEOTHERAS_DEMON_IV = 1021;
+    LEOTHERAS_DEMON_V = 1022;
+    AZALOTH = 1023;
+    ROCK_FLAYER = 1024;
+    FLAYER_HUNTER = 1025;
+    SHADOWMOON_SHADE = 1026;
+    LEGION_COMMUNICATOR = 1027;
+    RAVENSWOOD_ANCIENTS = 1028;
+    CHESS_FRIENDLY_TO_ALL_CHESS = 1029;
+    BLACK_TEMPLE_GATES_ILLIDARI = 1030;
+    SHA_TARI_SKYGUARD = 1031;
+    AREA_52 = 1032;
+    MAIEV = 1033;
+    SKETTIS_SHADOWY_ARAKKOA = 1034;
+    SKETTIS_ARAKKOA = 1035;
+    DRAGONMAW_ENEMY = 1036;
+    ALLIANCE_VANGUARD = 1037;
+    OGRI_LA = 1038;
+    RAVAGER = 1039;
+    REUSE = 1040;
+    FRENZY = 1041;
+    SKYGUARD_ENEMY = 1042;
+    SKUNK_PETUNIA = 1043;
+    THERAMORE_DESERTER = 1044;
+    VRYKUL = 1045;
+    NORTHSEA_PIRATES = 1046;
+    TUSKARR = 1047;
+    UNUSED = 1048;
+    TROLL_AMANI = 1049;
+    VALIANCE_EXPEDITION = 1050;
+    UNUSED1 = 1051;
+    HORDE_EXPEDITION = 1052;
+    WESTGUARD = 1053;
+    SPOTTED_GRYPHON = 1054;
+    TAMED_PLAGUEHOUND = 1055;
+    VRYKUL_ANCIENT_SPIRIT_1 = 1056;
+    VRYKUL_ANCIENT_SIPRIT_2 = 1057;
+    VRYKUL_ANCIENT_SIPRIT_3 = 1058;
+    CTF_FLAG_ALLIANCE = 1059;
+    TEST = 1060;
+    VRYKUL1 = 1061;
+    VRYKUL_GLADIATOR = 1062;
+    VALGARDE_COMBATANT = 1063;
+    THE_TAUNKA = 1064;
+    MONSTER_ZONE_FORCE_REACTION_1 = 1065;
+    MONSTER_ZONE_FORCE_REACTION_2 = 1066;
+    THE_HAND_OF_VENGEANCE = 1067;
+    EXPLORERS__LEAGUE = 1068;
+    RAM_RACING_POWERUP_DND = 1069;
+    RAM_RACING_TRAP_DND = 1070;
+    CRAIGS_SQUIRRELS = 1071;
+    REUSE1 = 1072;
+    THE_KALU_AK = 1073;
+    HOLIDAY_WATER_BARREL = 1074;
+    HOLIDAY_GENERIC = 1075;
+    IRON_DWARVES = 1076;
+    SHATTERED_SUN_OFFENSIVE = 1077;
+    FIGHTING_VANITY_PET = 1078;
+    MURLOC_WINTERFIN = 1079;
+    FRIENDLY_FORCE_REACTION = 1080;
+    OBJECT_FORCE_REACTION = 1081;
+    REUSE2 = 1082;
+    REUSE4 = 1083;
+    VRYKUL_SEA = 1084;
+    WARSONG_OFFENSIVE = 1085;
+    POACHER = 1086;
+    HOLIDAY_MONSTER = 1087;
+    FURBOLG_REDFANG = 1088;
+    FURBOLG_FROSTPAW = 1089;
+    KIRIN_TOR = 1090;
+    THE_WYRMREST_ACCORD = 1091;
+    AZJOL_NERUB = 1092;
+    REUSE8 = 1093;
+    THE_SILVER_COVENANT = 1094;
+    GRIZZLY_HILLS_TRAPPER = 1095;
+    REUSE16 = 1096;
+    WRATH_OF_THE_LICH_KING = 1097;
+    KNIGHTS_OF_THE_EBON_BLADE = 1098;
+    WRATHGATE_SCOURGE = 1099;
+    WRATHGATE_ALLIANCE = 1100;
+    WRATHGATE_HORDE = 1101;
+    CTF_FLAG_HORDE = 1102;
+    CTF_FLAG_NEUTRAL = 1103;
+    FRENZYHEART_TRIBE = 1104;
+    THE_ORACLES = 1105;
+    ARGENT_CRUSADE = 1106;
+    TROLL_DRAKKARI = 1107;
+    COT_ARTHAS = 1108;
+    COT_STRATHOLME_CITIZEN = 1109;
+    COT_SCOURGE = 1110;
+    FREYA = 1111;
+    MOUNT_TAXI_ALLIANCE = 1112;
+    MOUNT_TAXI_HORDE = 1113;
+    MOUNT_TAXI_NEUTRAL = 1114;
+    ELEMENTAL_WATER = 1115;
+    ELEMENTAL_AIR = 1116;
+    SHOLAZAR_BASIN = 1117;
+    CLASSIC = 1118;
+    THE_SONS_OF_HODIR = 1119;
+    IRON_GIANTS = 1120;
+    FROST_VRYKUL = 1121;
+    EARTHEN = 1122;
+    MONSTER_REFEREE = 1123;
+    THE_SUNREAVERS = 1124;
+    HYLDSMEET = 1125;
+    THE_FROSTBORN = 1126;
+    ORGRIMMAR_ALEX_TEST = 1127;
+    TRANQUILLIEN_CONVERSION = 1136;
+    WINTERSABER_CONVERSION = 1137;
+    HATES_EVERYTHING = 1145;
+    SILVER_COVENANT_CONVERSION = 1154;
+    SUNREAVERS_CONVERSION = 1155;
+    THE_ASHEN_VERDICT = 1156;
+    CTF_FLAG_ALLIANCE_2 = 1159;
+    CTF_FLAG_HORDE_2 = 1160;
+}</code></pre>
+<h3 id="type-2"><a class="header" href="#type-2">Type</a></h3>
+<p>The basic type is <code>u16</code>, a 2 byte (16 bit) little endian integer.</p>
+<h3 id="enumerators-2"><a class="header" href="#enumerators-2">Enumerators</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Enumerator</th><th>Value</th><th>Comment</th><th>Display</th></tr>
+</thead>
+<tbody>
+<tr><td><code>NONE</code></td><td>0 (0x00)</td><td></td><td></td></tr>
+<tr><td><code>PLAYER_HUMAN</code></td><td>1 (0x01)</td><td></td><td>PLAYER, Human</td></tr>
+<tr><td><code>PLAYER_ORC</code></td><td>2 (0x02)</td><td></td><td>PLAYER, Orc</td></tr>
+<tr><td><code>PLAYER_DWARF</code></td><td>3 (0x03)</td><td></td><td>PLAYER, Dwarf</td></tr>
+<tr><td><code>PLAYER_NIGHT_ELF</code></td><td>4 (0x04)</td><td></td><td>PLAYER, Night Elf</td></tr>
+<tr><td><code>PLAYER_UNDEAD</code></td><td>5 (0x05)</td><td></td><td>PLAYER, Undead</td></tr>
+<tr><td><code>PLAYER_TAUREN</code></td><td>6 (0x06)</td><td></td><td>PLAYER, Tauren</td></tr>
+<tr><td><code>CREATURE</code></td><td>7 (0x07)</td><td></td><td></td></tr>
+<tr><td><code>PLAYER_GNOME</code></td><td>8 (0x08)</td><td></td><td>PLAYER, Gnome</td></tr>
+<tr><td><code>PLAYER_TROLL</code></td><td>9 (0x09)</td><td></td><td>PLAYER, Troll</td></tr>
+<tr><td><code>MONSTER</code></td><td>14 (0x0E)</td><td></td><td></td></tr>
+<tr><td><code>DEFIAS_BROTHERHOOD</code></td><td>15 (0x0F)</td><td></td><td></td></tr>
+<tr><td><code>GNOLL_RIVERPAW</code></td><td>16 (0x10)</td><td></td><td>Gnoll - Riverpaw</td></tr>
+<tr><td><code>GNOLL_REDRIDGE</code></td><td>17 (0x11)</td><td></td><td>Gnoll - Redridge</td></tr>
+<tr><td><code>GNOLL_SHADOWHIDE</code></td><td>18 (0x12)</td><td></td><td>Gnoll - Shadowhide</td></tr>
+<tr><td><code>MURLOC</code></td><td>19 (0x13)</td><td></td><td></td></tr>
+<tr><td><code>UNDEAD_SCOURGE</code></td><td>20 (0x14)</td><td></td><td>Undead, Scourge</td></tr>
+<tr><td><code>BOOTY_BAY</code></td><td>21 (0x15)</td><td></td><td></td></tr>
+<tr><td><code>BEAST_SPIDER</code></td><td>22 (0x16)</td><td></td><td>Beast - Spider</td></tr>
+<tr><td><code>BEAST_BOAR</code></td><td>23 (0x17)</td><td></td><td>Beast - Boar</td></tr>
+<tr><td><code>WORGEN</code></td><td>24 (0x18)</td><td></td><td></td></tr>
+<tr><td><code>KOBOLD</code></td><td>25 (0x19)</td><td></td><td></td></tr>
+<tr><td><code>TROLL_BLOODSCALP</code></td><td>26 (0x1A)</td><td></td><td>Troll, Bloodscalp</td></tr>
+<tr><td><code>TROLL_SKULLSPLITTER</code></td><td>27 (0x1B)</td><td></td><td>Troll, Skullsplitter</td></tr>
+<tr><td><code>PREY</code></td><td>28 (0x1C)</td><td></td><td></td></tr>
+<tr><td><code>BEAST_WOLF</code></td><td>29 (0x1D)</td><td></td><td>Beast - Wolf</td></tr>
+<tr><td><code>DEFIAS_BROTHERHOOD_TRAITOR</code></td><td>30 (0x1E)</td><td></td><td></td></tr>
+<tr><td><code>FRIENDLY</code></td><td>31 (0x1F)</td><td></td><td></td></tr>
+<tr><td><code>TROGG</code></td><td>32 (0x20)</td><td></td><td></td></tr>
+<tr><td><code>TROLL_FROSTMANE</code></td><td>33 (0x21)</td><td></td><td>Troll, Frostmane</td></tr>
+<tr><td><code>ORC_BLACKROCK</code></td><td>34 (0x22)</td><td></td><td>Orc, Blackrock</td></tr>
+<tr><td><code>VILLIAN</code></td><td>35 (0x23)</td><td></td><td></td></tr>
+<tr><td><code>VICTIM</code></td><td>36 (0x24)</td><td></td><td></td></tr>
+<tr><td><code>BEAST_BEAR</code></td><td>37 (0x25)</td><td></td><td>Beast - Bear</td></tr>
+<tr><td><code>OGRE</code></td><td>38 (0x26)</td><td></td><td></td></tr>
+<tr><td><code>KURZENS_MERCENARIES</code></td><td>39 (0x27)</td><td></td><td>Kurzen’s Mercenaries</td></tr>
+<tr><td><code>ESCORTEE</code></td><td>40 (0x28)</td><td></td><td></td></tr>
+<tr><td><code>VENTURE_COMPANY</code></td><td>41 (0x29)</td><td></td><td></td></tr>
+<tr><td><code>BEAST_RAPTOR</code></td><td>42 (0x2A)</td><td></td><td>Beast - Raptor</td></tr>
+<tr><td><code>BASILISK</code></td><td>43 (0x2B)</td><td></td><td></td></tr>
+<tr><td><code>DRAGONFLIGHT_GREEN</code></td><td>44 (0x2C)</td><td></td><td>Dragonflight, Green</td></tr>
+<tr><td><code>LOST_ONES</code></td><td>45 (0x2D)</td><td></td><td></td></tr>
+<tr><td><code>BLACKSMITHING_ARMORSMITHING</code></td><td>46 (0x2E)</td><td></td><td>Blacksmithing - Armorsmithing</td></tr>
+<tr><td><code>IRONFORGE</code></td><td>47 (0x2F)</td><td></td><td></td></tr>
+<tr><td><code>DARK_IRON_DWARVES</code></td><td>48 (0x30)</td><td></td><td></td></tr>
+<tr><td><code>HUMAN_NIGHT_WATCH</code></td><td>49 (0x31)</td><td></td><td>Human, Night Watch</td></tr>
+<tr><td><code>DRAGONFLIGHT_RED</code></td><td>50 (0x32)</td><td></td><td>Dragonflight, Red</td></tr>
+<tr><td><code>GNOLL_MOSSHIDE</code></td><td>51 (0x33)</td><td></td><td>Gnoll - Mosshide</td></tr>
+<tr><td><code>ORC_DRAGONMAW</code></td><td>52 (0x34)</td><td></td><td>Orc, Dragonmaw</td></tr>
+<tr><td><code>GNOME_LEPER</code></td><td>53 (0x35)</td><td></td><td>Gnome - Leper</td></tr>
+<tr><td><code>GNOMEREGAN_EXILES</code></td><td>54 (0x36)</td><td></td><td></td></tr>
+<tr><td><code>LEOPARD</code></td><td>55 (0x37)</td><td></td><td></td></tr>
+<tr><td><code>SCARLET_CRUSADE</code></td><td>56 (0x38)</td><td></td><td></td></tr>
+<tr><td><code>GNOLL_ROTHIDE</code></td><td>57 (0x39)</td><td></td><td>Gnoll - Rothide</td></tr>
+<tr><td><code>BEAST_GORILLA</code></td><td>58 (0x3A)</td><td></td><td>Beast - Gorilla</td></tr>
+<tr><td><code>THORIUM_BROTHERHOOD</code></td><td>59 (0x3B)</td><td></td><td></td></tr>
+<tr><td><code>NAGA</code></td><td>60 (0x3C)</td><td></td><td></td></tr>
+<tr><td><code>DALARAN</code></td><td>61 (0x3D)</td><td></td><td></td></tr>
+<tr><td><code>FORLORN_SPIRIT</code></td><td>62 (0x3E)</td><td></td><td></td></tr>
+<tr><td><code>DARKHOWL</code></td><td>63 (0x3F)</td><td></td><td></td></tr>
+<tr><td><code>GRELL</code></td><td>64 (0x40)</td><td></td><td></td></tr>
+<tr><td><code>FURBOLG</code></td><td>65 (0x41)</td><td></td><td></td></tr>
+<tr><td><code>HORDE_GENERIC</code></td><td>66 (0x42)</td><td></td><td></td></tr>
+<tr><td><code>HORDE</code></td><td>67 (0x43)</td><td></td><td></td></tr>
+<tr><td><code>UNDERCITY</code></td><td>68 (0x44)</td><td></td><td></td></tr>
+<tr><td><code>DARNASSUS</code></td><td>69 (0x45)</td><td></td><td></td></tr>
+<tr><td><code>SYNDICATE</code></td><td>70 (0x46)</td><td></td><td></td></tr>
+<tr><td><code>HILLSBRAD_MILITIA</code></td><td>71 (0x47)</td><td></td><td></td></tr>
+<tr><td><code>STORMWIND</code></td><td>72 (0x48)</td><td></td><td></td></tr>
+<tr><td><code>DEMON</code></td><td>73 (0x49)</td><td></td><td></td></tr>
+<tr><td><code>ELEMENTAL</code></td><td>74 (0x4A)</td><td></td><td></td></tr>
+<tr><td><code>SPIRIT</code></td><td>75 (0x4B)</td><td></td><td></td></tr>
+<tr><td><code>ORGRIMMAR</code></td><td>76 (0x4C)</td><td></td><td></td></tr>
+<tr><td><code>TREASURE</code></td><td>77 (0x4D)</td><td></td><td></td></tr>
+<tr><td><code>GNOLL_MUDSNOUT</code></td><td>78 (0x4E)</td><td></td><td>Gnoll - Mudsnout</td></tr>
+<tr><td><code>HILLSBRAD_SOUTHSHORE_MAYOR</code></td><td>79 (0x4F)</td><td></td><td>HIllsbrad, Southshore Mayor</td></tr>
+<tr><td><code>DRAGONFLIGHT_BLACK</code></td><td>80 (0x50)</td><td></td><td>Dragonflight, Black</td></tr>
+<tr><td><code>THUNDER_BLUFF</code></td><td>81 (0x51)</td><td></td><td></td></tr>
+<tr><td><code>TROLL_WITHERBARK</code></td><td>82 (0x52)</td><td></td><td>Troll, Witherbark</td></tr>
+<tr><td><code>LEATHERWORKING_ELEMENTAL</code></td><td>83 (0x53)</td><td></td><td>Leatherworking - Elemental</td></tr>
+<tr><td><code>QUILBOAR_RAZORMANE</code></td><td>84 (0x54)</td><td></td><td>Quilboar, Razormane</td></tr>
+<tr><td><code>QUILBOAR_BRISTLEBACK</code></td><td>85 (0x55)</td><td></td><td>Quilboar, Bristleback</td></tr>
+<tr><td><code>LEATHERWORKING_DRAGONSCALE</code></td><td>86 (0x56)</td><td></td><td>Leatherworking - Dragonscale</td></tr>
+<tr><td><code>BLOODSAIL_BUCCANEERS</code></td><td>87 (0x57)</td><td></td><td></td></tr>
+<tr><td><code>BLACKFATHOM</code></td><td>88 (0x58)</td><td></td><td></td></tr>
+<tr><td><code>MAKRURA</code></td><td>89 (0x59)</td><td></td><td></td></tr>
+<tr><td><code>CENTAUR_KOLKAR</code></td><td>90 (0x5A)</td><td></td><td>Centaur, Kolkar</td></tr>
+<tr><td><code>CENTAUR_GALAK</code></td><td>91 (0x5B)</td><td></td><td>Centaur, Galak</td></tr>
+<tr><td><code>GELKIS_CLAN_CENTAUR</code></td><td>92 (0x5C)</td><td></td><td></td></tr>
+<tr><td><code>MAGRAM_CLAN_CENTAUR</code></td><td>93 (0x5D)</td><td></td><td></td></tr>
+<tr><td><code>MARAUDINE</code></td><td>94 (0x5E)</td><td></td><td></td></tr>
+<tr><td><code>THERAMORE</code></td><td>108 (0x6C)</td><td></td><td></td></tr>
+<tr><td><code>QUILBOAR_RAZORFEN</code></td><td>109 (0x6D)</td><td></td><td>Quilboar, Razorfen</td></tr>
+<tr><td><code>QUILBOAR_RAZORMANE_2</code></td><td>110 (0x6E)</td><td></td><td>Quilboar, Razormane 2</td></tr>
+<tr><td><code>QUILBOAR_DEATHSHEAD</code></td><td>111 (0x6F)</td><td></td><td>Quilboar, Deathshead</td></tr>
+<tr><td><code>ENEMY</code></td><td>128 (0x80)</td><td></td><td></td></tr>
+<tr><td><code>AMBIENT</code></td><td>148 (0x94)</td><td></td><td></td></tr>
+<tr><td><code>NETHERGARDE_CARAVAN</code></td><td>168 (0xA8)</td><td></td><td></td></tr>
+<tr><td><code>STEAMWHEEDLE_CARTEL</code></td><td>169 (0xA9)</td><td></td><td></td></tr>
+<tr><td><code>ALLIANCE_GENERIC</code></td><td>189 (0xBD)</td><td></td><td></td></tr>
+<tr><td><code>NETHERGARDE</code></td><td>209 (0xD1)</td><td></td><td></td></tr>
+<tr><td><code>WAILING_CAVERNS</code></td><td>229 (0xE5)</td><td></td><td></td></tr>
+<tr><td><code>SILITHID</code></td><td>249 (0xF9)</td><td></td><td></td></tr>
+<tr><td><code>SILVERMOON_REMNANT</code></td><td>269 (0x10D)</td><td></td><td></td></tr>
+<tr><td><code>ZANDALAR_TRIBE</code></td><td>270 (0x10E)</td><td></td><td></td></tr>
+<tr><td><code>BLACKSMITHING_WEAPONSMITHING</code></td><td>289 (0x121)</td><td></td><td>Blacksmithing - Weaponsmithing</td></tr>
+<tr><td><code>SCORPID</code></td><td>309 (0x135)</td><td></td><td></td></tr>
+<tr><td><code>BEAST_BAT</code></td><td>310 (0x136)</td><td></td><td>Beast - Bat</td></tr>
+<tr><td><code>TITAN</code></td><td>311 (0x137)</td><td></td><td></td></tr>
+<tr><td><code>TASKMASTER_FIZZULE</code></td><td>329 (0x149)</td><td></td><td></td></tr>
+<tr><td><code>RAVENHOLDT</code></td><td>349 (0x15D)</td><td></td><td></td></tr>
+<tr><td><code>GADGETZAN</code></td><td>369 (0x171)</td><td></td><td></td></tr>
+<tr><td><code>GNOMEREGAN_BUG</code></td><td>389 (0x185)</td><td></td><td></td></tr>
+<tr><td><code>HARPY</code></td><td>409 (0x199)</td><td></td><td></td></tr>
+<tr><td><code>BURNING_BLADE</code></td><td>429 (0x1AD)</td><td></td><td></td></tr>
+<tr><td><code>SHADOWSILK_POACHER</code></td><td>449 (0x1C1)</td><td></td><td></td></tr>
+<tr><td><code>SEARING_SPIDER</code></td><td>450 (0x1C2)</td><td></td><td></td></tr>
+<tr><td><code>ALLIANCE</code></td><td>469 (0x1D5)</td><td></td><td></td></tr>
+<tr><td><code>RATCHET</code></td><td>470 (0x1D6)</td><td></td><td></td></tr>
+<tr><td><code>WILDHAMMER_CLAN</code></td><td>471 (0x1D7)</td><td></td><td></td></tr>
+<tr><td><code>GOBLIN_DARK_IRON_BAR_PATRON</code></td><td>489 (0x1E9)</td><td></td><td>Goblin, Dark Iron Bar Patron</td></tr>
+<tr><td><code>THE_LEAGUE_OF_ARATHOR</code></td><td>509 (0x1FD)</td><td></td><td></td></tr>
+<tr><td><code>THE_DEFILERS</code></td><td>510 (0x1FE)</td><td></td><td></td></tr>
+<tr><td><code>GIANT</code></td><td>511 (0x1FF)</td><td></td><td></td></tr>
+<tr><td><code>ARGENT_DAWN</code></td><td>529 (0x211)</td><td></td><td></td></tr>
+<tr><td><code>DARKSPEAR_TROLLS</code></td><td>530 (0x212)</td><td></td><td></td></tr>
+<tr><td><code>DRAGONFLIGHT_BRONZE</code></td><td>531 (0x213)</td><td></td><td>Dragonflight, Bronze</td></tr>
+<tr><td><code>DRAGONFLIGHT_BLUE</code></td><td>532 (0x214)</td><td></td><td>Dragonflight, Blue</td></tr>
+<tr><td><code>LEATHERWORKING_TRIBAL</code></td><td>549 (0x225)</td><td></td><td>Leatherworking - Tribal</td></tr>
+<tr><td><code>ENGINEERING_GOBLIN</code></td><td>550 (0x226)</td><td></td><td>Engineering - Goblin</td></tr>
+<tr><td><code>ENGINEERING_GNOME</code></td><td>551 (0x227)</td><td></td><td>Engineering - Gnome</td></tr>
+<tr><td><code>BLACKSMITHING_HAMMERSMITHING</code></td><td>569 (0x239)</td><td></td><td>Blacksmithing - Hammersmithing</td></tr>
+<tr><td><code>BLACKSMITHING_AXESMITHING</code></td><td>570 (0x23A)</td><td></td><td>Blacksmithing - Axesmithing</td></tr>
+<tr><td><code>BLACKSMITHING_SWORDSMITHING</code></td><td>571 (0x23B)</td><td></td><td>Blacksmithing - Swordsmithing</td></tr>
+<tr><td><code>TROLL_VILEBRANCH</code></td><td>572 (0x23C)</td><td></td><td>Troll, Vilebranch</td></tr>
+<tr><td><code>SOUTHSEA_FREEBOOTERS</code></td><td>573 (0x23D)</td><td></td><td></td></tr>
+<tr><td><code>CAER_DARROW</code></td><td>574 (0x23E)</td><td></td><td></td></tr>
+<tr><td><code>FURBOLG_UNCORRUPTED</code></td><td>575 (0x23F)</td><td></td><td>Furbolg, Uncorrupted</td></tr>
+<tr><td><code>TIMBERMAW_HOLD</code></td><td>576 (0x240)</td><td></td><td></td></tr>
+<tr><td><code>EVERLOOK</code></td><td>577 (0x241)</td><td></td><td></td></tr>
+<tr><td><code>WINTERSABER_TRAINERS</code></td><td>589 (0x24D)</td><td></td><td></td></tr>
+<tr><td><code>CENARION_CIRCLE</code></td><td>609 (0x261)</td><td></td><td></td></tr>
+<tr><td><code>SHATTERSPEAR_TROLLS</code></td><td>629 (0x275)</td><td></td><td></td></tr>
+<tr><td><code>RAVASAUR_TRAINERS</code></td><td>630 (0x276)</td><td></td><td></td></tr>
+<tr><td><code>MAJORDOMO_EXECUTUS</code></td><td>649 (0x289)</td><td></td><td></td></tr>
+<tr><td><code>BEAST_CARRION_BIRD</code></td><td>669 (0x29D)</td><td></td><td>Beast - Carrion Bird</td></tr>
+<tr><td><code>BEAST_CAT</code></td><td>670 (0x29E)</td><td></td><td>Beast - Cat</td></tr>
+<tr><td><code>BEAST_CRAB</code></td><td>671 (0x29F)</td><td></td><td>Beast - Crab</td></tr>
+<tr><td><code>BEAST_CROCILISK</code></td><td>672 (0x2A0)</td><td></td><td>Beast - Crocilisk</td></tr>
+<tr><td><code>BEAST_HYENA</code></td><td>673 (0x2A1)</td><td></td><td>Beast - Hyena</td></tr>
+<tr><td><code>BEAST_OWL</code></td><td>674 (0x2A2)</td><td></td><td>Beast - Owl</td></tr>
+<tr><td><code>BEAST_SCORPID</code></td><td>675 (0x2A3)</td><td></td><td>Beast - Scorpid</td></tr>
+<tr><td><code>BEAST_TALLSTRIDER</code></td><td>676 (0x2A4)</td><td></td><td>Beast - Tallstrider</td></tr>
+<tr><td><code>BEAST_TURTLE</code></td><td>677 (0x2A5)</td><td></td><td>Beast - Turtle</td></tr>
+<tr><td><code>BEAST_WIND_SERPENT</code></td><td>678 (0x2A6)</td><td></td><td>Beast - Wind Serpent</td></tr>
+<tr><td><code>TRAINING_DUMMY</code></td><td>679 (0x2A7)</td><td></td><td></td></tr>
+<tr><td><code>DRAGONFLIGHT_BLACK_BAIT</code></td><td>689 (0x2B1)</td><td></td><td>Dragonflight, Black - Bait</td></tr>
+<tr><td><code>BATTLEGROUND_NEUTRAL</code></td><td>709 (0x2C5)</td><td></td><td></td></tr>
+<tr><td><code>FROSTWOLF_CLAN</code></td><td>729 (0x2D9)</td><td></td><td></td></tr>
+<tr><td><code>STORMPIKE_GUARD</code></td><td>730 (0x2DA)</td><td></td><td></td></tr>
+<tr><td><code>HYDRAXIAN_WATERLORDS</code></td><td>749 (0x2ED)</td><td></td><td></td></tr>
+<tr><td><code>SULFURON_FIRELORDS</code></td><td>750 (0x2EE)</td><td></td><td></td></tr>
+<tr><td><code>GIZLOCKS_DUMMY</code></td><td>769 (0x301)</td><td></td><td>Gizlock’s Dummy</td></tr>
+<tr><td><code>GIZLOCKS_CHARM</code></td><td>770 (0x302)</td><td></td><td>Gizlock’s Charm</td></tr>
+<tr><td><code>GIZLOCK</code></td><td>771 (0x303)</td><td></td><td></td></tr>
+<tr><td><code>MORO_GAI</code></td><td>789 (0x315)</td><td></td><td>Moro’gai</td></tr>
+<tr><td><code>SPIRIT_GUIDE_ALLIANCE</code></td><td>790 (0x316)</td><td></td><td>Spirit Guide - Alliance</td></tr>
+<tr><td><code>SHEN_DRALAR</code></td><td>809 (0x329)</td><td></td><td>Shen’dralar</td></tr>
+<tr><td><code>OGRE_CAPTAIN_KROMCRUSH</code></td><td>829 (0x33D)</td><td></td><td>Ogre (Captain Kromcrush)</td></tr>
+<tr><td><code>SPIRIT_GUIDE_HORDE</code></td><td>849 (0x351)</td><td></td><td>Spirit Guide - Horde</td></tr>
+<tr><td><code>JAEDENAR</code></td><td>869 (0x365)</td><td></td><td></td></tr>
+<tr><td><code>WARSONG_OUTRIDERS</code></td><td>889 (0x379)</td><td></td><td></td></tr>
+<tr><td><code>SILVERWING_SENTINELS</code></td><td>890 (0x37A)</td><td></td><td></td></tr>
+<tr><td><code>ALLIANCE_FORCES</code></td><td>891 (0x37B)</td><td></td><td></td></tr>
+<tr><td><code>HORDE_FORCES</code></td><td>892 (0x37C)</td><td></td><td></td></tr>
+<tr><td><code>REVANTUSK_TROLLS</code></td><td>893 (0x37D)</td><td></td><td></td></tr>
+<tr><td><code>DARKMOON_FAIRE</code></td><td>909 (0x38D)</td><td></td><td></td></tr>
+<tr><td><code>BROOD_OF_NOZDORMU</code></td><td>910 (0x38E)</td><td></td><td></td></tr>
+<tr><td><code>SILVERMOON_CITY</code></td><td>911 (0x38F)</td><td></td><td></td></tr>
+<tr><td><code>MIGHT_OF_KALIMDOR</code></td><td>912 (0x390)</td><td></td><td></td></tr>
+<tr><td><code>PLAYER_BLOOD_ELF</code></td><td>914 (0x392)</td><td></td><td>PLAYER, Blood Elf</td></tr>
+<tr><td><code>ARMIES_OF_C_THUN</code></td><td>915 (0x393)</td><td></td><td>Armies of C’Thun</td></tr>
+<tr><td><code>SILITHID_ATTACKERS</code></td><td>916 (0x394)</td><td></td><td></td></tr>
+<tr><td><code>THE_IRONFORGE_BRIGADE</code></td><td>917 (0x395)</td><td></td><td></td></tr>
+<tr><td><code>RC_ENEMIES</code></td><td>918 (0x396)</td><td></td><td></td></tr>
+<tr><td><code>RC_OBJECTS</code></td><td>919 (0x397)</td><td></td><td></td></tr>
+<tr><td><code>RED</code></td><td>920 (0x398)</td><td></td><td></td></tr>
+<tr><td><code>BLUE</code></td><td>921 (0x399)</td><td></td><td></td></tr>
+<tr><td><code>TRANQUILLIEN</code></td><td>922 (0x39A)</td><td></td><td></td></tr>
+<tr><td><code>FARSTRIDERS</code></td><td>923 (0x39B)</td><td></td><td></td></tr>
+<tr><td><code>DEPRECATED</code></td><td>924 (0x39C)</td><td></td><td></td></tr>
+<tr><td><code>SUNSTRIDERS</code></td><td>925 (0x39D)</td><td></td><td></td></tr>
+<tr><td><code>MAGISTERS_GUILD</code></td><td>926 (0x39E)</td><td></td><td>Magister’s Guild</td></tr>
+<tr><td><code>PLAYER_DRAENEI</code></td><td>927 (0x39F)</td><td></td><td>PLAYER, Draenei</td></tr>
+<tr><td><code>SCOURGE_INVADERS</code></td><td>928 (0x3A0)</td><td></td><td></td></tr>
+<tr><td><code>BLOODMAUL_CLAN</code></td><td>929 (0x3A1)</td><td></td><td></td></tr>
+<tr><td><code>EXODAR</code></td><td>930 (0x3A2)</td><td></td><td></td></tr>
+<tr><td><code>TEST_FACTION_NOT_A_REAL_FACTION</code></td><td>931 (0x3A3)</td><td></td><td>Test Faction (not a real faction)</td></tr>
+<tr><td><code>THE_ALDOR</code></td><td>932 (0x3A4)</td><td></td><td></td></tr>
+<tr><td><code>THE_CONSORTIUM</code></td><td>933 (0x3A5)</td><td></td><td></td></tr>
+<tr><td><code>THE_SCRYERS</code></td><td>934 (0x3A6)</td><td></td><td></td></tr>
+<tr><td><code>THE_SHA_TAR</code></td><td>935 (0x3A7)</td><td></td><td>The Sha’tar</td></tr>
+<tr><td><code>SHATTRATH_CITY</code></td><td>936 (0x3A8)</td><td></td><td></td></tr>
+<tr><td><code>TROLL_FOREST</code></td><td>937 (0x3A9)</td><td></td><td>Troll, Forest</td></tr>
+<tr><td><code>THE_OMENAI</code></td><td>938 (0x3AA)</td><td></td><td></td></tr>
+<tr><td><code>DEPRECATED1</code></td><td>939 (0x3AB)</td><td></td><td></td></tr>
+<tr><td><code>THE_SONS_OF_LOTHAR</code></td><td>940 (0x3AC)</td><td></td><td></td></tr>
+<tr><td><code>THE_MAG_HAR</code></td><td>941 (0x3AD)</td><td></td><td>The Mag’har</td></tr>
+<tr><td><code>CENARION_EXPEDITION</code></td><td>942 (0x3AE)</td><td></td><td></td></tr>
+<tr><td><code>FEL_ORC</code></td><td>943 (0x3AF)</td><td></td><td></td></tr>
+<tr><td><code>FEL_ORC_GHOST</code></td><td>944 (0x3B0)</td><td></td><td></td></tr>
+<tr><td><code>SONS_OF_LOTHAR_GHOSTS</code></td><td>945 (0x3B1)</td><td></td><td></td></tr>
+<tr><td><code>HONOR_HOLD</code></td><td>946 (0x3B2)</td><td></td><td></td></tr>
+<tr><td><code>THRALLMAR</code></td><td>947 (0x3B3)</td><td></td><td></td></tr>
+<tr><td><code>TEST_FACTION_2</code></td><td>948 (0x3B4)</td><td></td><td></td></tr>
+<tr><td><code>TEST_FACTION_1</code></td><td>949 (0x3B5)</td><td></td><td></td></tr>
+<tr><td><code>TOWOW_FLAG</code></td><td>950 (0x3B6)</td><td></td><td>ToWoW - Flag</td></tr>
+<tr><td><code>TOWOW_FLAG_TRIGGER_ALLIANCE_DND</code></td><td>951 (0x3B7)</td><td></td><td>ToWoW - Flag Trigger Alliance (DND)</td></tr>
+<tr><td><code>TEST_FACTION_3</code></td><td>952 (0x3B8)</td><td></td><td></td></tr>
+<tr><td><code>TEST_FACTION_4</code></td><td>953 (0x3B9)</td><td></td><td></td></tr>
+<tr><td><code>TOWOW_FLAG_TRIGGER_HORDE_DND</code></td><td>954 (0x3BA)</td><td></td><td>ToWoW - Flag Trigger Horde (DND)</td></tr>
+<tr><td><code>BROKEN</code></td><td>955 (0x3BB)</td><td></td><td></td></tr>
+<tr><td><code>ETHEREUM</code></td><td>956 (0x3BC)</td><td></td><td></td></tr>
+<tr><td><code>EARTH_ELEMENTAL</code></td><td>957 (0x3BD)</td><td></td><td></td></tr>
+<tr><td><code>FIGHTING_ROBOTS</code></td><td>958 (0x3BE)</td><td></td><td></td></tr>
+<tr><td><code>ACTOR_GOOD</code></td><td>959 (0x3BF)</td><td></td><td></td></tr>
+<tr><td><code>ACTOR_EVIL</code></td><td>960 (0x3C0)</td><td></td><td></td></tr>
+<tr><td><code>STILLPINE_FURBOLG</code></td><td>961 (0x3C1)</td><td></td><td></td></tr>
+<tr><td><code>CRAZED_OWLKIN</code></td><td>962 (0x3C2)</td><td></td><td></td></tr>
+<tr><td><code>CHESS_ALLIANCE</code></td><td>963 (0x3C3)</td><td></td><td></td></tr>
+<tr><td><code>CHESS_HORDE</code></td><td>964 (0x3C4)</td><td></td><td></td></tr>
+<tr><td><code>MONSTER_SPAR</code></td><td>965 (0x3C5)</td><td></td><td></td></tr>
+<tr><td><code>MONSTER_SPAR_BUDDY</code></td><td>966 (0x3C6)</td><td></td><td></td></tr>
+<tr><td><code>THE_VIOLET_EYE</code></td><td>967 (0x3C7)</td><td></td><td></td></tr>
+<tr><td><code>SUNHAWKS</code></td><td>968 (0x3C8)</td><td></td><td></td></tr>
+<tr><td><code>HAND_OF_ARGUS</code></td><td>969 (0x3C9)</td><td></td><td></td></tr>
+<tr><td><code>SPOREGGAR</code></td><td>970 (0x3CA)</td><td></td><td></td></tr>
+<tr><td><code>FUNGAL_GIANT</code></td><td>971 (0x3CB)</td><td></td><td></td></tr>
+<tr><td><code>SPORE_BAT</code></td><td>972 (0x3CC)</td><td></td><td></td></tr>
+<tr><td><code>MONSTER_PREDATOR</code></td><td>973 (0x3CD)</td><td></td><td>Monster, Predator</td></tr>
+<tr><td><code>MONSTER_PREY</code></td><td>974 (0x3CE)</td><td></td><td>Monster, Prey</td></tr>
+<tr><td><code>VOID_ANOMALY</code></td><td>975 (0x3CF)</td><td></td><td></td></tr>
+<tr><td><code>HYJAL_DEFENDERS</code></td><td>976 (0x3D0)</td><td></td><td></td></tr>
+<tr><td><code>HYJAL_INVADERS</code></td><td>977 (0x3D1)</td><td></td><td></td></tr>
+<tr><td><code>KURENAI</code></td><td>978 (0x3D2)</td><td></td><td></td></tr>
+<tr><td><code>EARTHEN_RING</code></td><td>979 (0x3D3)</td><td></td><td></td></tr>
+<tr><td><code>THE_BURNING_CRUSADE</code></td><td>980 (0x3D4)</td><td></td><td></td></tr>
+<tr><td><code>ARAKKOA</code></td><td>981 (0x3D5)</td><td></td><td></td></tr>
+<tr><td><code>ZANGARMARSH_BANNER_ALLIANCE</code></td><td>982 (0x3D6)</td><td></td><td>Zangarmarsh Banner (Alliance)</td></tr>
+<tr><td><code>ZANGARMARSH_BANNER_HORDE</code></td><td>983 (0x3D7)</td><td></td><td>Zangarmarsh Banner (Horde)</td></tr>
+<tr><td><code>ZANGARMARSH_BANNER_NEUTRAL</code></td><td>984 (0x3D8)</td><td></td><td>Zangarmarsh Banner (Neutral)</td></tr>
+<tr><td><code>CAVERNS_OF_TIME_THRALL</code></td><td>985 (0x3D9)</td><td></td><td>Caverns of Time - Thrall</td></tr>
+<tr><td><code>CAVERNS_OF_TIME_DURNHOLDE</code></td><td>986 (0x3DA)</td><td></td><td>Caverns of Time - Durnholde</td></tr>
+<tr><td><code>CAVERNS_OF_TIME_SOUTHSHORE_GUARDS</code></td><td>987 (0x3DB)</td><td></td><td>Caverns of Time - Southshore Guards</td></tr>
+<tr><td><code>SHADOW_COUNCIL_COVERT</code></td><td>988 (0x3DC)</td><td></td><td></td></tr>
+<tr><td><code>KEEPERS_OF_TIME</code></td><td>989 (0x3DD)</td><td></td><td></td></tr>
+<tr><td><code>THE_SCALE_OF_THE_SANDS</code></td><td>990 (0x3DE)</td><td></td><td></td></tr>
+<tr><td><code>DARK_PORTAL_DEFENDER_ALLIANCE</code></td><td>991 (0x3DF)</td><td></td><td>Dark Portal Defender, Alliance</td></tr>
+<tr><td><code>DARK_PORTAL_DEFENDER_HORDE</code></td><td>992 (0x3E0)</td><td></td><td>Dark Portal Defender, Horde</td></tr>
+<tr><td><code>DARK_PORTAL_ATTACKER_LEGION</code></td><td>993 (0x3E1)</td><td></td><td>Dark Portal Attacker, Legion</td></tr>
+<tr><td><code>INCITER_TRIGGER</code></td><td>994 (0x3E2)</td><td></td><td></td></tr>
+<tr><td><code>INCITER_TRIGGER_2</code></td><td>995 (0x3E3)</td><td></td><td></td></tr>
+<tr><td><code>INCITER_TRIGGER_3</code></td><td>996 (0x3E4)</td><td></td><td></td></tr>
+<tr><td><code>INCITER_TRIGGER_4</code></td><td>997 (0x3E5)</td><td></td><td></td></tr>
+<tr><td><code>INCITER_TRIGGER_5</code></td><td>998 (0x3E6)</td><td></td><td></td></tr>
+<tr><td><code>MANA_CREATURE</code></td><td>999 (0x3E7)</td><td></td><td></td></tr>
+<tr><td><code>KHADGARS_SERVANT</code></td><td>1000 (0x3E8)</td><td></td><td>Khadgar’s Servant</td></tr>
+<tr><td><code>BLADESPIRE_CLAN</code></td><td>1001 (0x3E9)</td><td></td><td></td></tr>
+<tr><td><code>ETHEREUM_SPARBUDDY</code></td><td>1002 (0x3EA)</td><td></td><td></td></tr>
+<tr><td><code>PROTECTORATE</code></td><td>1003 (0x3EB)</td><td></td><td></td></tr>
+<tr><td><code>ARCANE_ANNIHILATOR_DNR</code></td><td>1004 (0x3EC)</td><td></td><td>Arcane Annihilator (DNR)</td></tr>
+<tr><td><code>FRIENDLY_HIDDEN</code></td><td>1005 (0x3ED)</td><td></td><td>Friendly, Hidden</td></tr>
+<tr><td><code>KIRIN_VAR_DATHRIC</code></td><td>1006 (0x3EE)</td><td></td><td>Kirin’Var - Dathric</td></tr>
+<tr><td><code>KIRIN_VAR_BELMARA</code></td><td>1007 (0x3EF)</td><td></td><td>Kirin’Var - Belmara</td></tr>
+<tr><td><code>KIRIN_VAR_LUMINRATH</code></td><td>1008 (0x3F0)</td><td></td><td>Kirin’Var - Luminrath</td></tr>
+<tr><td><code>KIRIN_VAR_COHLIEN</code></td><td>1009 (0x3F1)</td><td></td><td>Kirin’Var - Cohlien</td></tr>
+<tr><td><code>SERVANT_OF_ILLIDAN</code></td><td>1010 (0x3F2)</td><td></td><td></td></tr>
+<tr><td><code>LOWER_CITY</code></td><td>1011 (0x3F3)</td><td></td><td></td></tr>
+<tr><td><code>ASHTONGUE_DEATHSWORN</code></td><td>1012 (0x3F4)</td><td></td><td></td></tr>
+<tr><td><code>SPIRITS_OF_SHADOWMOON_1</code></td><td>1013 (0x3F5)</td><td></td><td></td></tr>
+<tr><td><code>SPIRITS_OF_SHADOWMOON_2</code></td><td>1014 (0x3F6)</td><td></td><td></td></tr>
+<tr><td><code>NETHERWING</code></td><td>1015 (0x3F7)</td><td></td><td></td></tr>
+<tr><td><code>WYRMCULT</code></td><td>1016 (0x3F8)</td><td></td><td></td></tr>
+<tr><td><code>TREANT</code></td><td>1017 (0x3F9)</td><td></td><td></td></tr>
+<tr><td><code>LEOTHERAS_DEMON_I</code></td><td>1018 (0x3FA)</td><td></td><td></td></tr>
+<tr><td><code>LEOTHERAS_DEMON_II</code></td><td>1019 (0x3FB)</td><td></td><td></td></tr>
+<tr><td><code>LEOTHERAS_DEMON_III</code></td><td>1020 (0x3FC)</td><td></td><td></td></tr>
+<tr><td><code>LEOTHERAS_DEMON_IV</code></td><td>1021 (0x3FD)</td><td></td><td></td></tr>
+<tr><td><code>LEOTHERAS_DEMON_V</code></td><td>1022 (0x3FE)</td><td></td><td></td></tr>
+<tr><td><code>AZALOTH</code></td><td>1023 (0x3FF)</td><td></td><td></td></tr>
+<tr><td><code>ROCK_FLAYER</code></td><td>1024 (0x400)</td><td></td><td></td></tr>
+<tr><td><code>FLAYER_HUNTER</code></td><td>1025 (0x401)</td><td></td><td></td></tr>
+<tr><td><code>SHADOWMOON_SHADE</code></td><td>1026 (0x402)</td><td></td><td></td></tr>
+<tr><td><code>LEGION_COMMUNICATOR</code></td><td>1027 (0x403)</td><td></td><td></td></tr>
+<tr><td><code>RAVENSWOOD_ANCIENTS</code></td><td>1028 (0x404)</td><td></td><td></td></tr>
+<tr><td><code>CHESS_FRIENDLY_TO_ALL_CHESS</code></td><td>1029 (0x405)</td><td></td><td>Chess, Friendly to All Chess</td></tr>
+<tr><td><code>BLACK_TEMPLE_GATES_ILLIDARI</code></td><td>1030 (0x406)</td><td></td><td>Black Temple Gates - Illidari</td></tr>
+<tr><td><code>SHA_TARI_SKYGUARD</code></td><td>1031 (0x407)</td><td></td><td>Sha’tari Skyguard</td></tr>
+<tr><td><code>AREA_52</code></td><td>1032 (0x408)</td><td></td><td></td></tr>
+<tr><td><code>MAIEV</code></td><td>1033 (0x409)</td><td></td><td></td></tr>
+<tr><td><code>SKETTIS_SHADOWY_ARAKKOA</code></td><td>1034 (0x40A)</td><td></td><td></td></tr>
+<tr><td><code>SKETTIS_ARAKKOA</code></td><td>1035 (0x40B)</td><td></td><td></td></tr>
+<tr><td><code>DRAGONMAW_ENEMY</code></td><td>1036 (0x40C)</td><td></td><td></td></tr>
+<tr><td><code>ALLIANCE_VANGUARD</code></td><td>1037 (0x40D)</td><td></td><td></td></tr>
+<tr><td><code>OGRI_LA</code></td><td>1038 (0x40E)</td><td></td><td>Ogri’la</td></tr>
+<tr><td><code>RAVAGER</code></td><td>1039 (0x40F)</td><td></td><td></td></tr>
+<tr><td><code>REUSE</code></td><td>1040 (0x410)</td><td></td><td></td></tr>
+<tr><td><code>FRENZY</code></td><td>1041 (0x411)</td><td></td><td></td></tr>
+<tr><td><code>SKYGUARD_ENEMY</code></td><td>1042 (0x412)</td><td></td><td></td></tr>
+<tr><td><code>SKUNK_PETUNIA</code></td><td>1043 (0x413)</td><td></td><td>Skunk, Petunia</td></tr>
+<tr><td><code>THERAMORE_DESERTER</code></td><td>1044 (0x414)</td><td></td><td></td></tr>
+<tr><td><code>VRYKUL</code></td><td>1045 (0x415)</td><td></td><td></td></tr>
+<tr><td><code>NORTHSEA_PIRATES</code></td><td>1046 (0x416)</td><td></td><td></td></tr>
+<tr><td><code>TUSKARR</code></td><td>1047 (0x417)</td><td></td><td></td></tr>
+<tr><td><code>UNUSED</code></td><td>1048 (0x418)</td><td></td><td></td></tr>
+<tr><td><code>TROLL_AMANI</code></td><td>1049 (0x419)</td><td></td><td>Troll, Amani</td></tr>
+<tr><td><code>VALIANCE_EXPEDITION</code></td><td>1050 (0x41A)</td><td></td><td></td></tr>
+<tr><td><code>UNUSED1</code></td><td>1051 (0x41B)</td><td></td><td></td></tr>
+<tr><td><code>HORDE_EXPEDITION</code></td><td>1052 (0x41C)</td><td></td><td></td></tr>
+<tr><td><code>WESTGUARD</code></td><td>1053 (0x41D)</td><td></td><td></td></tr>
+<tr><td><code>SPOTTED_GRYPHON</code></td><td>1054 (0x41E)</td><td></td><td></td></tr>
+<tr><td><code>TAMED_PLAGUEHOUND</code></td><td>1055 (0x41F)</td><td></td><td></td></tr>
+<tr><td><code>VRYKUL_ANCIENT_SPIRIT_1</code></td><td>1056 (0x420)</td><td></td><td>Vrykul (Ancient Spirit 1)</td></tr>
+<tr><td><code>VRYKUL_ANCIENT_SIPRIT_2</code></td><td>1057 (0x421)</td><td></td><td>Vrykul (Ancient Siprit 2)</td></tr>
+<tr><td><code>VRYKUL_ANCIENT_SIPRIT_3</code></td><td>1058 (0x422)</td><td></td><td>Vrykul (Ancient Siprit 3)</td></tr>
+<tr><td><code>CTF_FLAG_ALLIANCE</code></td><td>1059 (0x423)</td><td></td><td>CTF - Flag - Alliance</td></tr>
+<tr><td><code>TEST</code></td><td>1060 (0x424)</td><td></td><td></td></tr>
+<tr><td><code>VRYKUL1</code></td><td>1061 (0x425)</td><td></td><td></td></tr>
+<tr><td><code>VRYKUL_GLADIATOR</code></td><td>1062 (0x426)</td><td></td><td></td></tr>
+<tr><td><code>VALGARDE_COMBATANT</code></td><td>1063 (0x427)</td><td></td><td></td></tr>
+<tr><td><code>THE_TAUNKA</code></td><td>1064 (0x428)</td><td></td><td></td></tr>
+<tr><td><code>MONSTER_ZONE_FORCE_REACTION_1</code></td><td>1065 (0x429)</td><td></td><td>Monster, Zone Force Reaction 1</td></tr>
+<tr><td><code>MONSTER_ZONE_FORCE_REACTION_2</code></td><td>1066 (0x42A)</td><td></td><td>Monster, Zone Force Reaction 2</td></tr>
+<tr><td><code>THE_HAND_OF_VENGEANCE</code></td><td>1067 (0x42B)</td><td></td><td></td></tr>
+<tr><td><code>EXPLORERS__LEAGUE</code></td><td>1068 (0x42C)</td><td></td><td>Explorers’ League</td></tr>
+<tr><td><code>RAM_RACING_POWERUP_DND</code></td><td>1069 (0x42D)</td><td></td><td></td></tr>
+<tr><td><code>RAM_RACING_TRAP_DND</code></td><td>1070 (0x42E)</td><td></td><td></td></tr>
+<tr><td><code>CRAIGS_SQUIRRELS</code></td><td>1071 (0x42F)</td><td></td><td>Craig’s Squirrels</td></tr>
+<tr><td><code>REUSE1</code></td><td>1072 (0x430)</td><td></td><td></td></tr>
+<tr><td><code>THE_KALU_AK</code></td><td>1073 (0x431)</td><td></td><td>The Kalu’ak</td></tr>
+<tr><td><code>HOLIDAY_WATER_BARREL</code></td><td>1074 (0x432)</td><td></td><td>Holiday - Water Barrel</td></tr>
+<tr><td><code>HOLIDAY_GENERIC</code></td><td>1075 (0x433)</td><td></td><td>Holiday - Generic</td></tr>
+<tr><td><code>IRON_DWARVES</code></td><td>1076 (0x434)</td><td></td><td></td></tr>
+<tr><td><code>SHATTERED_SUN_OFFENSIVE</code></td><td>1077 (0x435)</td><td></td><td></td></tr>
+<tr><td><code>FIGHTING_VANITY_PET</code></td><td>1078 (0x436)</td><td></td><td></td></tr>
+<tr><td><code>MURLOC_WINTERFIN</code></td><td>1079 (0x437)</td><td></td><td>Murloc, Winterfin</td></tr>
+<tr><td><code>FRIENDLY_FORCE_REACTION</code></td><td>1080 (0x438)</td><td></td><td>Friendly, Force Reaction</td></tr>
+<tr><td><code>OBJECT_FORCE_REACTION</code></td><td>1081 (0x439)</td><td></td><td>Object, Force Reaction</td></tr>
+<tr><td><code>REUSE2</code></td><td>1082 (0x43A)</td><td></td><td></td></tr>
+<tr><td><code>REUSE4</code></td><td>1083 (0x43B)</td><td></td><td></td></tr>
+<tr><td><code>VRYKUL_SEA</code></td><td>1084 (0x43C)</td><td></td><td>Vrykul, Sea</td></tr>
+<tr><td><code>WARSONG_OFFENSIVE</code></td><td>1085 (0x43D)</td><td></td><td></td></tr>
+<tr><td><code>POACHER</code></td><td>1086 (0x43E)</td><td></td><td></td></tr>
+<tr><td><code>HOLIDAY_MONSTER</code></td><td>1087 (0x43F)</td><td></td><td></td></tr>
+<tr><td><code>FURBOLG_REDFANG</code></td><td>1088 (0x440)</td><td></td><td>Furbolg, Redfang</td></tr>
+<tr><td><code>FURBOLG_FROSTPAW</code></td><td>1089 (0x441)</td><td></td><td>Furbolg, Frostpaw</td></tr>
+<tr><td><code>KIRIN_TOR</code></td><td>1090 (0x442)</td><td></td><td></td></tr>
+<tr><td><code>THE_WYRMREST_ACCORD</code></td><td>1091 (0x443)</td><td></td><td></td></tr>
+<tr><td><code>AZJOL_NERUB</code></td><td>1092 (0x444)</td><td></td><td>Azjol-Nerub</td></tr>
+<tr><td><code>REUSE8</code></td><td>1093 (0x445)</td><td></td><td></td></tr>
+<tr><td><code>THE_SILVER_COVENANT</code></td><td>1094 (0x446)</td><td></td><td></td></tr>
+<tr><td><code>GRIZZLY_HILLS_TRAPPER</code></td><td>1095 (0x447)</td><td></td><td></td></tr>
+<tr><td><code>REUSE16</code></td><td>1096 (0x448)</td><td></td><td></td></tr>
+<tr><td><code>WRATH_OF_THE_LICH_KING</code></td><td>1097 (0x449)</td><td></td><td></td></tr>
+<tr><td><code>KNIGHTS_OF_THE_EBON_BLADE</code></td><td>1098 (0x44A)</td><td></td><td></td></tr>
+<tr><td><code>WRATHGATE_SCOURGE</code></td><td>1099 (0x44B)</td><td></td><td></td></tr>
+<tr><td><code>WRATHGATE_ALLIANCE</code></td><td>1100 (0x44C)</td><td></td><td></td></tr>
+<tr><td><code>WRATHGATE_HORDE</code></td><td>1101 (0x44D)</td><td></td><td></td></tr>
+<tr><td><code>CTF_FLAG_HORDE</code></td><td>1102 (0x44E)</td><td></td><td>CTF - Flag - Horde</td></tr>
+<tr><td><code>CTF_FLAG_NEUTRAL</code></td><td>1103 (0x44F)</td><td></td><td>CTF - Flag - Neutral</td></tr>
+<tr><td><code>FRENZYHEART_TRIBE</code></td><td>1104 (0x450)</td><td></td><td></td></tr>
+<tr><td><code>THE_ORACLES</code></td><td>1105 (0x451)</td><td></td><td></td></tr>
+<tr><td><code>ARGENT_CRUSADE</code></td><td>1106 (0x452)</td><td></td><td></td></tr>
+<tr><td><code>TROLL_DRAKKARI</code></td><td>1107 (0x453)</td><td></td><td>Troll, Drakkari</td></tr>
+<tr><td><code>COT_ARTHAS</code></td><td>1108 (0x454)</td><td></td><td></td></tr>
+<tr><td><code>COT_STRATHOLME_CITIZEN</code></td><td>1109 (0x455)</td><td></td><td></td></tr>
+<tr><td><code>COT_SCOURGE</code></td><td>1110 (0x456)</td><td></td><td></td></tr>
+<tr><td><code>FREYA</code></td><td>1111 (0x457)</td><td></td><td></td></tr>
+<tr><td><code>MOUNT_TAXI_ALLIANCE</code></td><td>1112 (0x458)</td><td></td><td>Mount - Taxi - Alliance</td></tr>
+<tr><td><code>MOUNT_TAXI_HORDE</code></td><td>1113 (0x459)</td><td></td><td>Mount - Taxi - Horde</td></tr>
+<tr><td><code>MOUNT_TAXI_NEUTRAL</code></td><td>1114 (0x45A)</td><td></td><td>Mount - Taxi - Neutral</td></tr>
+<tr><td><code>ELEMENTAL_WATER</code></td><td>1115 (0x45B)</td><td></td><td>Elemental, Water</td></tr>
+<tr><td><code>ELEMENTAL_AIR</code></td><td>1116 (0x45C)</td><td></td><td>Elemental, Air</td></tr>
+<tr><td><code>SHOLAZAR_BASIN</code></td><td>1117 (0x45D)</td><td></td><td></td></tr>
+<tr><td><code>CLASSIC</code></td><td>1118 (0x45E)</td><td></td><td></td></tr>
+<tr><td><code>THE_SONS_OF_HODIR</code></td><td>1119 (0x45F)</td><td></td><td></td></tr>
+<tr><td><code>IRON_GIANTS</code></td><td>1120 (0x460)</td><td></td><td></td></tr>
+<tr><td><code>FROST_VRYKUL</code></td><td>1121 (0x461)</td><td></td><td></td></tr>
+<tr><td><code>EARTHEN</code></td><td>1122 (0x462)</td><td></td><td></td></tr>
+<tr><td><code>MONSTER_REFEREE</code></td><td>1123 (0x463)</td><td></td><td></td></tr>
+<tr><td><code>THE_SUNREAVERS</code></td><td>1124 (0x464)</td><td></td><td></td></tr>
+<tr><td><code>HYLDSMEET</code></td><td>1125 (0x465)</td><td></td><td></td></tr>
+<tr><td><code>THE_FROSTBORN</code></td><td>1126 (0x466)</td><td></td><td></td></tr>
+<tr><td><code>ORGRIMMAR_ALEX_TEST</code></td><td>1127 (0x467)</td><td></td><td>Orgrimmar (Alex Test)</td></tr>
+<tr><td><code>TRANQUILLIEN_CONVERSION</code></td><td>1136 (0x470)</td><td></td><td></td></tr>
+<tr><td><code>WINTERSABER_CONVERSION</code></td><td>1137 (0x471)</td><td></td><td></td></tr>
+<tr><td><code>HATES_EVERYTHING</code></td><td>1145 (0x479)</td><td></td><td></td></tr>
+<tr><td><code>SILVER_COVENANT_CONVERSION</code></td><td>1154 (0x482)</td><td></td><td></td></tr>
+<tr><td><code>SUNREAVERS_CONVERSION</code></td><td>1155 (0x483)</td><td></td><td></td></tr>
+<tr><td><code>THE_ASHEN_VERDICT</code></td><td>1156 (0x484)</td><td></td><td></td></tr>
+<tr><td><code>CTF_FLAG_ALLIANCE_2</code></td><td>1159 (0x487)</td><td></td><td>CTF - Flag - Alliance 2</td></tr>
+<tr><td><code>CTF_FLAG_HORDE_2</code></td><td>1160 (0x488)</td><td></td><td>CTF - Flag - Horde 2</td></tr>
+</tbody>
+</table>
+</div>
+<p>Used in:</p>
+<ul>
+<li><a href="cmsg_set_faction_atwar.html">CMSG_SET_FACTION_ATWAR</a></li>
+<li><a href="cmsg_set_faction_inactive.html">CMSG_SET_FACTION_INACTIVE</a></li>
+<li><a href="cmsg_set_watched_faction.html">CMSG_SET_WATCHED_FACTION</a></li>
+<li><a href="factionstanding.html">FactionStanding</a></li>
+<li><a href="forcedreaction.html">ForcedReaction</a></li>
+<li><a href="smsg_item_query_single_response.html">SMSG_ITEM_QUERY_SINGLE_RESPONSE</a></li>
+<li><a href="smsg_quest_query_response.html">SMSG_QUEST_QUERY_RESPONSE</a></li>
+<li><a href="smsg_set_faction_visible.html">SMSG_SET_FACTION_VISIBLE</a></li>
+</ul>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../docs/factionflag.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
+                            </a>
+
+                            <a rel="next prefetch" href="../docs/farsightoperation.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../docs/factionflag.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
+                    </a>
+
+                    <a rel="next prefetch" href="../docs/farsightoperation.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+                    </a>
+            </nav>
+
+        </div>
+
+        <template id=fa-eye><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M288 32c-80.8 0-145.5 36.8-192.6 80.6C48.6 156 17.3 208 2.5 243.7c-3.3 7.9-3.3 16.7 0 24.6C17.3 304 48.6 356 95.4 399.4C142.5 443.2 207.2 480 288 480s145.5-36.8 192.6-80.6c46.8-43.5 78.1-95.4 93-131.1c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C433.5 68.8 368.8 32 288 32zM432 256c0 79.5-64.5 144-144 144s-144-64.5-144-144s64.5-144 144-144s144 64.5 144 144zM288 192c0 35.3-28.7 64-64 64c-11.5 0-22.3-3-31.6-8.4c-.2 2.8-.4 5.5-.4 8.4c0 53 43 96 96 96s96-43 96-96s-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6z"/></svg></span></template>
+        <template id=fa-eye-slash><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M38.8 5.1C28.4-3.1 13.3-1.2 5.1 9.2S-1.2 34.7 9.2 42.9l592 464c10.4 8.2 25.5 6.3 33.7-4.1s6.3-25.5-4.1-33.7L525.6 386.7c39.6-40.6 66.4-86.1 79.9-118.4c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C465.5 68.8 400.8 32 320 32c-68.2 0-125 26.3-169.3 60.8L38.8 5.1zM223.1 149.5C248.6 126.2 282.7 112 320 112c79.5 0 144 64.5 144 144c0 24.9-6.3 48.3-17.4 68.7L408 294.5c5.2-11.8 8-24.8 8-38.5c0-53-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6c0 10.2-2.4 19.8-6.6 28.3l-90.3-70.8zm223.1 298L373 389.9c-16.4 6.5-34.3 10.1-53 10.1c-79.5 0-144-64.5-144-144c0-6.9 .5-13.6 1.4-20.2L83.1 161.5C60.3 191.2 44 220.8 34.5 243.7c-3.3 7.9-3.3 16.7 0 24.6c14.9 35.7 46.2 87.7 93 131.1C174.5 443.2 239.2 480 320 480c47.8 0 89.9-12.9 126.2-32.5z"/></svg></span></template>
+        <template id=fa-copy><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M502.6 70.63l-61.25-61.25C435.4 3.371 427.2 0 418.7 0H255.1c-35.35 0-64 28.66-64 64l.0195 256C192 355.4 220.7 384 256 384h192c35.2 0 64-28.8 64-64V93.25C512 84.77 508.6 76.63 502.6 70.63zM464 320c0 8.836-7.164 16-16 16H255.1c-8.838 0-16-7.164-16-16L239.1 64.13c0-8.836 7.164-16 16-16h128L384 96c0 17.67 14.33 32 32 32h47.1V320zM272 448c0 8.836-7.164 16-16 16H63.1c-8.838 0-16-7.164-16-16L47.98 192.1c0-8.836 7.164-16 16-16H160V128H63.99c-35.35 0-64 28.65-64 64l.0098 256C.002 483.3 28.66 512 64 512h192c35.2 0 64-28.8 64-64v-32h-47.1L272 448z"/></svg></span></template>
+        <template id=fa-play><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M73 39c-14.8-9.1-33.4-9.4-48.5-.9S0 62.6 0 80V432c0 17.4 9.4 33.4 24.5 41.9s33.7 8.1 48.5-.9L361 297c14.3-8.7 23-24.2 23-41s-8.7-32.2-23-41L73 39z"/></svg></span></template>
+        <template id=fa-clock-rotate-left><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M75 75L41 41C25.9 25.9 0 36.6 0 57.9V168c0 13.3 10.7 24 24 24H134.1c21.4 0 32.1-25.9 17-41l-30.8-30.8C155 85.5 203 64 256 64c106 0 192 86 192 192s-86 192-192 192c-40.8 0-78.6-12.7-109.7-34.4c-14.5-10.1-34.4-6.6-44.6 7.9s-6.6 34.4 7.9 44.6C151.2 495 201.7 512 256 512c141.4 0 256-114.6 256-256S397.4 0 256 0C185.3 0 121.3 28.7 75 75zm181 53c-13.3 0-24 10.7-24 24V256c0 6.4 2.5 12.5 7 17l72 72c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-65-65V152c0-13.3-10.7-24-24-24z"/></svg></span></template>
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr-ef4e11c1.min.js"></script>
+        <script src="../mark-09e88c2c.min.js"></script>
+        <script src="../searcher-c2a407aa.js"></script>
+
+        <script src="../clipboard-1626706a.min.js"></script>
+        <script src="../highlight-abc7f01d.js"></script>
+        <script src="../book-a0b12cfe.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+
+    </div>
+    </body>
+</html>
