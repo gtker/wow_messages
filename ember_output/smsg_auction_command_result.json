@@ -1,0 +1,15 @@
+{
+  "name": "AuctionCommandResult",
+  "opcode": "smsg_auction_command_result",
+  "direction": "server",
+  "fields": [
+    {
+      "name": "auction_id",
+      "type": "uint32"
+    },
+    {
+      "name": "action",
+      "type": "AuctionCommandAction"
+    }
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "name": "BuyFailed",
+  "opcode": "smsg_buy_failed",
+  "direction": "server",
+  "fields": [
+    {
+      "name": "guid",
+      "type": "uint64"
+    },
+    {
+      "name": "item",
+      "type": "Item"
+    },
+    {
+      "name": "result",
+      "type": "BuyResult"
+    }
+  ]
+}

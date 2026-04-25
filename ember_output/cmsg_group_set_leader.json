@@ -1,0 +1,11 @@
+{
+  "name": "GroupSetLeader",
+  "opcode": "cmsg_group_set_leader",
+  "direction": "client",
+  "fields": [
+    {
+      "name": "guid",
+      "type": "uint64"
+    }
+  ]
+}

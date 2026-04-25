@@ -1,0 +1,6 @@
+{
+  "name": "Attackstop",
+  "opcode": "cmsg_attackstop",
+  "direction": "client",
+  "fields": []
+}

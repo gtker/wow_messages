@@ -1,0 +1,15 @@
+{
+  "name": "BattlefieldStatus",
+  "opcode": "smsg_battlefield_status",
+  "direction": "server",
+  "fields": [
+    {
+      "name": "queue_slot",
+      "type": "uint32"
+    },
+    {
+      "name": "map",
+      "type": "Map"
+    }
+  ]
+}

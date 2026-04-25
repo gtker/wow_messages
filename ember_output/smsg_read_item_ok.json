@@ -1,0 +1,11 @@
+{
+  "name": "ReadItemOk",
+  "opcode": "smsg_read_item_ok",
+  "direction": "server",
+  "fields": [
+    {
+      "name": "guid",
+      "type": "uint64"
+    }
+  ]
+}

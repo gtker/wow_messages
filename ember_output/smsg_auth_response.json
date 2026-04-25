@@ -1,0 +1,11 @@
+{
+  "name": "AuthResponse",
+  "opcode": "smsg_auth_response",
+  "direction": "server",
+  "fields": [
+    {
+      "name": "result",
+      "type": "WorldResult"
+    }
+  ]
+}

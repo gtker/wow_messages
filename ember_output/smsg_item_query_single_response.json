@@ -1,0 +1,11 @@
+{
+  "name": "ItemQuerySingleResponse",
+  "opcode": "smsg_item_query_single_response",
+  "direction": "server",
+  "fields": [
+    {
+      "name": "item",
+      "type": "Item"
+    }
+  ]
+}

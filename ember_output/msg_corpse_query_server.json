@@ -1,0 +1,11 @@
+{
+  "name": "CorpseQueryServer",
+  "opcode": "msg_corpse_query_server",
+  "direction": "server",
+  "fields": [
+    {
+      "name": "result",
+      "type": "CorpseQueryResult"
+    }
+  ]
+}

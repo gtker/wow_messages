@@ -1,0 +1,11 @@
+{
+  "name": "GuildQuery",
+  "opcode": "cmsg_guild_query",
+  "direction": "client",
+  "fields": [
+    {
+      "name": "guild_id",
+      "type": "uint32"
+    }
+  ]
+}

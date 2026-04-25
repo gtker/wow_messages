@@ -1,0 +1,11 @@
+{
+  "name": "QuestgiverStatusQuery",
+  "opcode": "cmsg_questgiver_status_query",
+  "direction": "client",
+  "fields": [
+    {
+      "name": "guid",
+      "type": "uint64"
+    }
+  ]
+}

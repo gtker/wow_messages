@@ -1,0 +1,11 @@
+{
+  "name": "FarSight",
+  "opcode": "cmsg_far_sight",
+  "direction": "client",
+  "fields": [
+    {
+      "name": "operation",
+      "type": "FarSightOperation"
+    }
+  ]
+}

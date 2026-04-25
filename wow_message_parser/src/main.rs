@@ -31,6 +31,7 @@ use parser::types::objects::Objects;
 use rust_printer::print_struct;
 
 use crate::doc_printer::print_docs;
+use crate::ember_printer::write_ember_schema;
 use crate::file_utils::create_and_overwrite_if_not_same_contents;
 use crate::file_utils::mod_files::ModFiles;
 use crate::ir_printer::write_intermediate_representation;
@@ -61,6 +62,7 @@ mod wowm_printer;
 
 mod path_utils;
 
+mod ember_printer;
 pub mod error_printer;
 #[cfg(test)]
 mod test;
@@ -136,6 +138,8 @@ fn load_and_print_wowm_files() {
     write_world_opcodes(&o);
 
     write_intermediate_representation(&o);
+
+    write_ember_schema(&o);
 
     print_update_mask();
 

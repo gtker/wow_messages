@@ -1,0 +1,6 @@
+{
+  "name": "LogoutCancelAck",
+  "opcode": "smsg_logout_cancel_ack",
+  "direction": "server",
+  "fields": []
+}

@@ -1,0 +1,11 @@
+{
+  "name": "DelFriend",
+  "opcode": "cmsg_del_friend",
+  "direction": "client",
+  "fields": [
+    {
+      "name": "guid",
+      "type": "uint64"
+    }
+  ]
+}

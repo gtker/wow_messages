@@ -1,0 +1,19 @@
+{
+  "name": "NewWorld",
+  "opcode": "smsg_new_world",
+  "direction": "server",
+  "fields": [
+    {
+      "name": "map",
+      "type": "Map"
+    },
+    {
+      "name": "position",
+      "type": "Vector3d"
+    },
+    {
+      "name": "orientation",
+      "type": "float"
+    }
+  ]
+}

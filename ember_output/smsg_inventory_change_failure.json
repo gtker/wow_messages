@@ -1,0 +1,11 @@
+{
+  "name": "InventoryChangeFailure",
+  "opcode": "smsg_inventory_change_failure",
+  "direction": "server",
+  "fields": [
+    {
+      "name": "result",
+      "type": "InventoryResult"
+    }
+  ]
+}

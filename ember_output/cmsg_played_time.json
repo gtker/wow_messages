@@ -1,0 +1,6 @@
+{
+  "name": "PlayedTime",
+  "opcode": "cmsg_played_time",
+  "direction": "client",
+  "fields": []
+}

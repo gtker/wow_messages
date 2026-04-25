@@ -1,0 +1,15 @@
+{
+  "name": "MoveNotActiveMover",
+  "opcode": "cmsg_move_not_active_mover",
+  "direction": "client",
+  "fields": [
+    {
+      "name": "old_mover",
+      "type": "uint64"
+    },
+    {
+      "name": "info",
+      "type": "MovementInfo"
+    }
+  ]
+}

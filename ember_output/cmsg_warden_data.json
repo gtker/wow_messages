@@ -1,0 +1,6 @@
+{
+  "name": "WardenData",
+  "opcode": "cmsg_warden_data",
+  "direction": "client",
+  "fields": []
+}

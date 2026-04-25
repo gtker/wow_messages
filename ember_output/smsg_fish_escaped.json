@@ -1,0 +1,6 @@
+{
+  "name": "FishEscaped",
+  "opcode": "smsg_fish_escaped",
+  "direction": "server",
+  "fields": []
+}

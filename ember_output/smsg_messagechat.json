@@ -1,0 +1,23 @@
+{
+  "name": "Messagechat",
+  "opcode": "smsg_messagechat",
+  "direction": "server",
+  "fields": [
+    {
+      "name": "chat_type",
+      "type": "ChatType"
+    },
+    {
+      "name": "language",
+      "type": "Language"
+    },
+    {
+      "name": "message",
+      "type": "PrefixedString32"
+    },
+    {
+      "name": "tag",
+      "type": "PlayerChatTag"
+    }
+  ]
+}

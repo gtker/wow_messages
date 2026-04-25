@@ -1,0 +1,11 @@
+{
+  "name": "Whois",
+  "opcode": "cmsg_whois",
+  "direction": "client",
+  "fields": [
+    {
+      "name": "character",
+      "type": "CString"
+    }
+  ]
+}

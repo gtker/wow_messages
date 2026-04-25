@@ -1,0 +1,6 @@
+{
+  "name": "LootClearMoney",
+  "opcode": "smsg_loot_clear_money",
+  "direction": "server",
+  "fields": []
+}

@@ -1,0 +1,14 @@
+{
+  "name": "AccountDataTimes",
+  "opcode": "smsg_account_data_times",
+  "direction": "server",
+  "fields": [
+    {
+      "name": "data",
+      "type": "u32",
+      "array": {
+        "size": 32
+      }
+    }
+  ]
+}

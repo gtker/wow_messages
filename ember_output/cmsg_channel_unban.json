@@ -1,0 +1,15 @@
+{
+  "name": "ChannelUnban",
+  "opcode": "cmsg_channel_unban",
+  "direction": "client",
+  "fields": [
+    {
+      "name": "channel_name",
+      "type": "CString"
+    },
+    {
+      "name": "player_name",
+      "type": "CString"
+    }
+  ]
+}

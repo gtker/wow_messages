@@ -1,0 +1,15 @@
+{
+  "name": "PauseMirrorTimer",
+  "opcode": "smsg_pause_mirror_timer",
+  "direction": "server",
+  "fields": [
+    {
+      "name": "timer",
+      "type": "TimerType"
+    },
+    {
+      "name": "is_frozen",
+      "type": "Bool"
+    }
+  ]
+}

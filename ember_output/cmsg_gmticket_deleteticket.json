@@ -1,0 +1,6 @@
+{
+  "name": "GmticketDeleteticket",
+  "opcode": "cmsg_gmticket_deleteticket",
+  "direction": "client",
+  "fields": []
+}

@@ -1,0 +1,6 @@
+{
+  "name": "MeetingstoneInfo",
+  "opcode": "cmsg_meetingstone_info",
+  "direction": "client",
+  "fields": []
+}

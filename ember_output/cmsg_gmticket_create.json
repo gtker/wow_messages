@@ -1,0 +1,27 @@
+{
+  "name": "GmticketCreate",
+  "opcode": "cmsg_gmticket_create",
+  "direction": "client",
+  "fields": [
+    {
+      "name": "category",
+      "type": "GmTicketType"
+    },
+    {
+      "name": "map",
+      "type": "Map"
+    },
+    {
+      "name": "position",
+      "type": "Vector3d"
+    },
+    {
+      "name": "message",
+      "type": "CString"
+    },
+    {
+      "name": "reserved_for_future_use",
+      "type": "CString"
+    }
+  ]
+}

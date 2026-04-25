@@ -1,0 +1,11 @@
+{
+  "name": "GmticketGetticket",
+  "opcode": "smsg_gmticket_getticket",
+  "direction": "server",
+  "fields": [
+    {
+      "name": "status",
+      "type": "GmTicketStatus"
+    }
+  ]
+}

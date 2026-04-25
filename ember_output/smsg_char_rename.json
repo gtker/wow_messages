@@ -1,0 +1,11 @@
+{
+  "name": "CharRename",
+  "opcode": "smsg_char_rename",
+  "direction": "server",
+  "fields": [
+    {
+      "name": "result",
+      "type": "WorldResult"
+    }
+  ]
+}

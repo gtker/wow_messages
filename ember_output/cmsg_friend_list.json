@@ -1,0 +1,6 @@
+{
+  "name": "FriendList",
+  "opcode": "cmsg_friend_list",
+  "direction": "client",
+  "fields": []
+}

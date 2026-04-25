@@ -1,0 +1,6 @@
+{
+  "name": "TogglePvp",
+  "opcode": "cmsg_toggle_pvp",
+  "direction": "client",
+  "fields": []
+}

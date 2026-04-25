@@ -1,0 +1,30 @@
+{
+  "name": "AuthSession",
+  "opcode": "cmsg_auth_session",
+  "direction": "client",
+  "fields": [
+    {
+      "name": "build",
+      "type": "uint32"
+    },
+    {
+      "name": "server_id",
+      "type": "uint32"
+    },
+    {
+      "name": "username",
+      "type": "CString"
+    },
+    {
+      "name": "client_seed",
+      "type": "uint32"
+    },
+    {
+      "name": "client_proof",
+      "type": "u8",
+      "array": {
+        "size": 20
+      }
+    }
+  ]
+}

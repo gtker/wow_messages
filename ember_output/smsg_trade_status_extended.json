@@ -1,0 +1,34 @@
+{
+  "name": "TradeStatusExtended",
+  "opcode": "smsg_trade_status_extended",
+  "direction": "server",
+  "fields": [
+    {
+      "name": "self_player",
+      "type": "Bool"
+    },
+    {
+      "name": "trade_slot_count1",
+      "type": "uint32"
+    },
+    {
+      "name": "trade_slot_count2",
+      "type": "uint32"
+    },
+    {
+      "name": "money_in_trade",
+      "type": "Gold"
+    },
+    {
+      "name": "spell_on_lowest_slot",
+      "type": "Spell"
+    },
+    {
+      "name": "trade_slots",
+      "type": "TradeSlot",
+      "array": {
+        "size": 7
+      }
+    }
+  ]
+}

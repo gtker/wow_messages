@@ -1,0 +1,6 @@
+{
+  "name": "QueryNextMailTimeClient",
+  "opcode": "msg_query_next_mail_time_client",
+  "direction": "server",
+  "fields": []
+}

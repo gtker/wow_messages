@@ -1,0 +1,19 @@
+{
+  "name": "MoveKnockBackAck",
+  "opcode": "cmsg_move_knock_back_ack",
+  "direction": "client",
+  "fields": [
+    {
+      "name": "guid",
+      "type": "uint64"
+    },
+    {
+      "name": "counter",
+      "type": "uint32"
+    },
+    {
+      "name": "info",
+      "type": "MovementInfo"
+    }
+  ]
+}

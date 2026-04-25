@@ -1,0 +1,6 @@
+{
+  "name": "WardenData",
+  "opcode": "smsg_warden_data",
+  "direction": "server",
+  "fields": []
+}

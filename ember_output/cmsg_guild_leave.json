@@ -1,0 +1,6 @@
+{
+  "name": "GuildLeave",
+  "opcode": "cmsg_guild_leave",
+  "direction": "client",
+  "fields": []
+}

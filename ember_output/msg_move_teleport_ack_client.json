@@ -1,0 +1,19 @@
+{
+  "name": "MoveTeleportAckClient",
+  "opcode": "msg_move_teleport_ack_client",
+  "direction": "server",
+  "fields": [
+    {
+      "name": "guid",
+      "type": "PackedGuid"
+    },
+    {
+      "name": "movement_counter",
+      "type": "uint32"
+    },
+    {
+      "name": "time",
+      "type": "Milliseconds"
+    }
+  ]
+}

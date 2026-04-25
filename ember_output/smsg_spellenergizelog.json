@@ -1,0 +1,27 @@
+{
+  "name": "Spellenergizelog",
+  "opcode": "smsg_spellenergizelog",
+  "direction": "server",
+  "fields": [
+    {
+      "name": "victim",
+      "type": "PackedGuid"
+    },
+    {
+      "name": "caster",
+      "type": "PackedGuid"
+    },
+    {
+      "name": "spell",
+      "type": "Spell"
+    },
+    {
+      "name": "power",
+      "type": "Power"
+    },
+    {
+      "name": "damage",
+      "type": "uint32"
+    }
+  ]
+}

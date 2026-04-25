@@ -1,0 +1,11 @@
+{
+  "name": "CreatureQueryResponse",
+  "opcode": "smsg_creature_query_response",
+  "direction": "server",
+  "fields": [
+    {
+      "name": "creature_entry",
+      "type": "uint32"
+    }
+  ]
+}

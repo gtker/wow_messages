@@ -1,0 +1,15 @@
+{
+  "name": "ResurrectResponse",
+  "opcode": "cmsg_resurrect_response",
+  "direction": "client",
+  "fields": [
+    {
+      "name": "guid",
+      "type": "uint64"
+    },
+    {
+      "name": "status",
+      "type": "uint8"
+    }
+  ]
+}

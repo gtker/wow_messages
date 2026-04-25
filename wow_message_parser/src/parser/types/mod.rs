@@ -117,6 +117,21 @@ impl IntegerType {
         }
     }
 
+    pub(crate) fn ember_str(&self) -> &str {
+        match self {
+            IntegerType::U8 => "uint8",
+            IntegerType::U16 => "uint16",
+            IntegerType::U32 => "uint32",
+            IntegerType::U64 => "uint64",
+            IntegerType::I32 => "int32",
+            IntegerType::I8 => "int8",
+            IntegerType::I16 => "int16",
+            IntegerType::I64 => "int64",
+
+            IntegerType::U48 => "uint48",
+        }
+    }
+
     pub(crate) fn rust_str(&self) -> &str {
         match self {
             IntegerType::U8 => "u8",

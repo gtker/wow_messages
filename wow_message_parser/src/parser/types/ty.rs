@@ -120,6 +120,16 @@ impl Type {
         }
     }
 
+    pub(crate) fn ember_str(&self) -> String {
+        match self {
+            Type::Array(s) => s.ember_str(),
+            Type::Enum { e, .. } | Type::Flag { e, .. } => e.name().to_string(),
+            Type::Struct { e } => e.name().to_string(),
+
+            _ => self.to_parsed_type().ember_str(),
+        }
+    }
+
     fn to_parsed_type(&self) -> ParsedType {
         match self {
             Type::Integer(i) => ParsedType::Integer(*i),

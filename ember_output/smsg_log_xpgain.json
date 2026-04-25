@@ -1,0 +1,19 @@
+{
+  "name": "LogXpgain",
+  "opcode": "smsg_log_xpgain",
+  "direction": "server",
+  "fields": [
+    {
+      "name": "target",
+      "type": "uint64"
+    },
+    {
+      "name": "total_exp",
+      "type": "uint32"
+    },
+    {
+      "name": "exp_type",
+      "type": "ExperienceAwardType"
+    }
+  ]
+}

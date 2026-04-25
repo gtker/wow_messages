@@ -1,0 +1,6 @@
+{
+  "name": "LogoutComplete",
+  "opcode": "smsg_logout_complete",
+  "direction": "server",
+  "fields": []
+}

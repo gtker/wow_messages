@@ -1,0 +1,11 @@
+{
+  "name": "PetSpells",
+  "opcode": "smsg_pet_spells",
+  "direction": "server",
+  "fields": [
+    {
+      "name": "pet",
+      "type": "uint64"
+    }
+  ]
+}

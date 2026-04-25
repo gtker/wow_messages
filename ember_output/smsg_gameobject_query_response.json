@@ -1,0 +1,11 @@
+{
+  "name": "GameobjectQueryResponse",
+  "opcode": "smsg_gameobject_query_response",
+  "direction": "server",
+  "fields": [
+    {
+      "name": "entry_id",
+      "type": "uint32"
+    }
+  ]
+}

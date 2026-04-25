@@ -1,0 +1,15 @@
+{
+  "name": "SendMailResult",
+  "opcode": "smsg_send_mail_result",
+  "direction": "server",
+  "fields": [
+    {
+      "name": "mail_id",
+      "type": "uint32"
+    },
+    {
+      "name": "action",
+      "type": "MailAction"
+    }
+  ]
+}

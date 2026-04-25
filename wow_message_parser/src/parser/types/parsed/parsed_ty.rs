@@ -136,6 +136,48 @@ impl ParsedType {
         }
     }
 
+    pub(crate) fn ember_str(&self) -> String {
+        match self {
+            ParsedType::Integer(i) => i.ember_str().to_string(),
+            ParsedType::CString => Type::C_STRING_NAME.to_string(),
+            ParsedType::String => Type::STRING_NAME.to_string(),
+            ParsedType::Array(a) => a.str(),
+            ParsedType::Identifier { s, .. } => s.clone(),
+            ParsedType::FloatingPoint => "float".to_string(),
+            ParsedType::PackedGuid => Type::PACKED_GUID_NAME.to_string(),
+            ParsedType::Guid => "uint64".to_string(),
+            ParsedType::UpdateMask => Type::UPDATE_MASK_NAME.to_string(),
+            ParsedType::AuraMask => Type::AURA_MASK_NAME.to_string(),
+            ParsedType::SizedCString => "PrefixedString32".to_string(),
+            ParsedType::Bool(i) => bool_ty_to_string(i),
+            ParsedType::DateTime => Type::DATE_TIME_NAME.to_string(),
+            ParsedType::AchievementDoneArray => Type::ACHIEVEMENT_DONE_ARRAY_NAME.to_string(),
+            ParsedType::AchievementInProgressArray => {
+                Type::ACHIEVEMENT_IN_PROGRESS_ARRAY_NAME.to_string()
+            }
+            ParsedType::MonsterMoveSpline => Type::MONSTER_MOVE_SPLINES_NAME.to_string(),
+            ParsedType::EnchantMask => Type::ENCHANT_MASK_NAME.to_string(),
+            ParsedType::InspectTalentGearMask => Type::INSPECT_TALENT_GEAR_MASK_NAME.to_string(),
+            ParsedType::Gold => Type::GOLD_NAME.to_string(),
+            ParsedType::Level => Type::LEVEL_NAME.to_string(),
+            ParsedType::Level16 => Type::LEVEL_NAME16.to_string(),
+            ParsedType::Level32 => Type::LEVEL_NAME32.to_string(),
+            ParsedType::NamedGuid => Type::NAMED_GUID_NAME.to_string(),
+            ParsedType::VariableItemRandomProperty => {
+                Type::VARIABLE_ITEM_RANDOM_PROPERTY_NAME.to_string()
+            }
+            ParsedType::AddonArray => Type::ADDON_ARRAY_NAME.to_string(),
+            ParsedType::IpAddress => Type::IP_ADDRESS_NAME.to_string(),
+            ParsedType::Seconds => Type::SECONDS_NAME.to_string(),
+            ParsedType::Milliseconds => Type::MILLISECONDS_NAME.to_string(),
+            ParsedType::Population => Type::POPULATION_NAME.to_string(),
+            ParsedType::Spell => Type::SPELL_NAME.to_string(),
+            ParsedType::Spell16 => Type::SPELL16_NAME.to_string(),
+            ParsedType::Item => Type::ITEM_NAME.to_string(),
+            ParsedType::CacheMask => Type::CACHE_MASK_NAME.to_string(),
+        }
+    }
+
     pub(crate) fn min_max_size(&self) -> (i128, i128) {
         match self {
             ParsedType::Integer(i) | ParsedType::Bool(i) => (i.size().into(), i.size().into()),

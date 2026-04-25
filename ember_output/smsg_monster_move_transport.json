@@ -1,0 +1,39 @@
+{
+  "name": "MonsterMoveTransport",
+  "opcode": "smsg_monster_move_transport",
+  "direction": "server",
+  "fields": [
+    {
+      "name": "guid",
+      "type": "PackedGuid"
+    },
+    {
+      "name": "transport",
+      "type": "PackedGuid"
+    },
+    {
+      "name": "spline_point",
+      "type": "Vector3d"
+    },
+    {
+      "name": "spline_id",
+      "type": "uint32"
+    },
+    {
+      "name": "move_type",
+      "type": "MonsterMoveType"
+    },
+    {
+      "name": "spline_flags",
+      "type": "SplineFlag"
+    },
+    {
+      "name": "duration",
+      "type": "uint32"
+    },
+    {
+      "name": "splines",
+      "type": "MonsterMoveSplines"
+    }
+  ]
+}

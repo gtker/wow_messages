@@ -1,0 +1,11 @@
+{
+  "name": "AuctionHelloClient",
+  "opcode": "msg_auction_hello_client",
+  "direction": "server",
+  "fields": [
+    {
+      "name": "auctioneer",
+      "type": "uint64"
+    }
+  ]
+}

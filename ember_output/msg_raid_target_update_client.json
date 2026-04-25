@@ -1,0 +1,11 @@
+{
+  "name": "RaidTargetUpdateClient",
+  "opcode": "msg_raid_target_update_client",
+  "direction": "server",
+  "fields": [
+    {
+      "name": "target_index",
+      "type": "RaidTargetIndex"
+    }
+  ]
+}

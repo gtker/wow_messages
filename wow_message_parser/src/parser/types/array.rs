@@ -121,6 +121,10 @@ impl Array {
         format!("{}[{}]", self.inner.str(), self.size.str())
     }
 
+    pub(crate) fn ember_str(&self) -> String {
+        self.inner.str().to_string()
+    }
+
     pub(crate) fn compressed(&self) -> bool {
         self.compressed
     }

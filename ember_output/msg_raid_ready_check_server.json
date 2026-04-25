@@ -1,0 +1,6 @@
+{
+  "name": "RaidReadyCheckServer",
+  "opcode": "msg_raid_ready_check_server",
+  "direction": "server",
+  "fields": []
+}

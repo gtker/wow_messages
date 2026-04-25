@@ -1,0 +1,11 @@
+{
+  "name": "UpdateLastInstance",
+  "opcode": "smsg_update_last_instance",
+  "direction": "server",
+  "fields": [
+    {
+      "name": "map",
+      "type": "Map"
+    }
+  ]
+}

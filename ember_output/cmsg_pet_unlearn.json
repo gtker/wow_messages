@@ -1,0 +1,11 @@
+{
+  "name": "PetUnlearn",
+  "opcode": "cmsg_pet_unlearn",
+  "direction": "client",
+  "fields": [
+    {
+      "name": "pet",
+      "type": "uint64"
+    }
+  ]
+}

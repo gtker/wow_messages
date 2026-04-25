@@ -1,0 +1,15 @@
+{
+  "name": "CastResult",
+  "opcode": "smsg_cast_result",
+  "direction": "server",
+  "fields": [
+    {
+      "name": "spell",
+      "type": "Spell"
+    },
+    {
+      "name": "result",
+      "type": "SimpleSpellCastResult"
+    }
+  ]
+}

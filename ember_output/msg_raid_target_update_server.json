@@ -1,0 +1,11 @@
+{
+  "name": "RaidTargetUpdateServer",
+  "opcode": "msg_raid_target_update_server",
+  "direction": "server",
+  "fields": [
+    {
+      "name": "update_type",
+      "type": "RaidTargetUpdateType"
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "name": "LootResponse",
+  "opcode": "smsg_loot_response",
+  "direction": "server",
+  "fields": [
+    {
+      "name": "guid",
+      "type": "uint64"
+    },
+    {
+      "name": "loot_method",
+      "type": "LootMethod"
+    },
+    {
+      "name": "gold",
+      "type": "Gold"
+    },
+    {
+      "name": "amount_of_items",
+      "type": "uint8"
+    },
+    {
+      "name": "items",
+      "type": "LootItem",
+      "array": {
+        "count_field": "amount_of_items"
+      }
+    }
+  ]
+}

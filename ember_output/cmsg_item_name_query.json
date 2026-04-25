@@ -1,0 +1,15 @@
+{
+  "name": "ItemNameQuery",
+  "opcode": "cmsg_item_name_query",
+  "direction": "client",
+  "fields": [
+    {
+      "name": "item",
+      "type": "Item"
+    },
+    {
+      "name": "guid",
+      "type": "uint64"
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "name": "GroupUninviteGuid",
+  "opcode": "cmsg_group_uninvite_guid",
+  "direction": "client",
+  "fields": [
+    {
+      "name": "guid",
+      "type": "uint64"
+    }
+  ]
+}

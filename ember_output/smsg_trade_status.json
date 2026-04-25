@@ -1,0 +1,11 @@
+{
+  "name": "TradeStatus",
+  "opcode": "smsg_trade_status",
+  "direction": "server",
+  "fields": [
+    {
+      "name": "status",
+      "type": "TradeStatus"
+    }
+  ]
+}

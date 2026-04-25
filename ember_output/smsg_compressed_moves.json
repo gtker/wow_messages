@@ -1,0 +1,6 @@
+{
+  "name": "CompressedMoves",
+  "opcode": "smsg_compressed_moves",
+  "direction": "server",
+  "fields": []
+}

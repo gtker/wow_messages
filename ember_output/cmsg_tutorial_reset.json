@@ -1,0 +1,6 @@
+{
+  "name": "TutorialReset",
+  "opcode": "cmsg_tutorial_reset",
+  "direction": "client",
+  "fields": []
+}

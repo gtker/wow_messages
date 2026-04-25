@@ -1,0 +1,7216 @@
+{
+  "types": {
+    "AccountDataType": {
+      "kind": "enum",
+      "underlying": "uint8",
+      "values": {
+        "GLOBAL_BINDINGS_CACHE": 2,
+        "GLOBAL_CONFIG_CACHE": 0,
+        "GLOBAL_MACROS_CACHE": 4,
+        "NUM_ACCOUNT_DATA_TYPES": 8,
+        "PER_CHARACTER_BINDINGS_CACHE": 3,
+        "PER_CHARACTER_CHAT_CACHE": 7,
+        "PER_CHARACTER_CONFIG_CACHE": 1,
+        "PER_CHARACTER_LAYOUT_CACHE": 6,
+        "PER_CHARACTER_MACROS_CACHE": 5
+      }
+    },
+    "ActivateTaxiReply": {
+      "kind": "enum",
+      "underlying": "uint32",
+      "values": {
+        "NOT_ENOUGH_MONEY": 3,
+        "NOT_STANDING": 12,
+        "NOT_VISITED": 6,
+        "NO_SUCH_PATH": 2,
+        "NO_VENDOR_NEARBY": 5,
+        "OK": 0,
+        "PLAYER_ALREADY_MOUNTED": 8,
+        "PLAYER_BUSY": 7,
+        "PLAYER_MOVING": 10,
+        "PLAYER_SHAPE_SHIFTED": 9,
+        "SAME_NODE": 11,
+        "TOO_FAR_AWAY": 4,
+        "UNSPECIFIED_SERVER_ERROR": 1
+      }
+    },
+    "Addon": {
+      "kind": "struct",
+      "fields": [
+        {
+          "name": "addon_type",
+          "type": "AddonType"
+        },
+        {
+          "name": "info_block",
+          "type": "InfoBlock"
+        },
+        {
+          "name": "url_info",
+          "type": "UrlInfo"
+        }
+      ]
+    },
+    "AddonInfo": {
+      "kind": "struct",
+      "fields": [
+        {
+          "name": "addon_name",
+          "type": "CString"
+        },
+        {
+          "name": "addon_has_signature",
+          "type": "uint8"
+        },
+        {
+          "name": "addon_crc",
+          "type": "uint32"
+        },
+        {
+          "name": "addon_extra_crc",
+          "type": "uint32"
+        }
+      ]
+    },
+    "AddonType": {
+      "kind": "enum",
+      "underlying": "uint8",
+      "values": {
+        "BANNED": 0,
+        "BLIZZARD": 2,
+        "ENABLED": 1
+      }
+    },
+    "AiReaction": {
+      "kind": "enum",
+      "underlying": "uint32",
+      "values": {
+        "AFRAID": 3,
+        "ALERT": 0,
+        "DESTROY": 4,
+        "FRIENDLY": 1,
+        "HOSTILE": 2
+      }
+    },
+    "AllowedClass": {
+      "kind": "flags",
+      "underlying": "uint32",
+      "values": {
+        "ALL": 0,
+        "DRUID": 1024,
+        "HUNTER": 4,
+        "MAGE": 128,
+        "PALADIN": 2,
+        "PRIEST": 16,
+        "ROGUE": 8,
+        "SHAMAN": 64,
+        "WARLOCK": 256,
+        "WARRIOR": 1
+      }
+    },
+    "AllowedRace": {
+      "kind": "flags",
+      "underlying": "uint32",
+      "values": {
+        "ALL": 0,
+        "DWARF": 4,
+        "GNOME": 64,
+        "GOBLIN": 256,
+        "HUMAN": 1,
+        "NIGHT_ELF": 8,
+        "ORC": 2,
+        "TAUREN": 32,
+        "TROLL": 128,
+        "UNDEAD": 16
+      }
+    },
+    "Area": {
+      "kind": "enum",
+      "underlying": "uint32",
+      "values": {
+        "ABYSSAL_SANDS": 1939,
+        "ADDLES_STEAD": 536,
+        "AERIE_PEAK": 348,
+        "AGAMAND_FAMILY_CRYPT": 158,
+        "AGAMAND_MILLS": 157,
+        "AGAMA_GOR": 1700,
+        "AGAMA_GOR_UNUSED": 1603,
+        "AGMONDS_END": 345,
+        "AGOL_WATHA": 1884,
+        "AHN_QIRAJ": 3428,
+        "ALCAZ_ISLAND": 2079,
+        "ALDRASSIL": 256,
+        "ALEXSTON_FARMSTEAD": 219,
+        "ALGAZ_GATE": 145,
+        "ALGAZ_STATION": 925,
+        "ALTAR_OF_HIR_EEK": 3378,
+        "ALTAR_OF_STORMS0": 255,
+        "ALTAR_OF_STORMS1": 1441,
+        "ALTAR_OF_THE_BLOOD_GOD": 3384,
+        "ALTERAC_MOUNTAINS": 36,
+        "ALTERAC_VALLEY0": 2597,
+        "ALTERAC_VALLEY1": 2839,
+        "ALTHERS_MILL": 97,
+        "AMBERMILL": 233,
+        "AMBERSTILL_RANCH": 803,
+        "AMETH_ARAN": 447,
+        "ANGERFANG_ENCAMPMENT": 1036,
+        "ANGOR_FORTRESS": 338,
+        "ANVILMAR": 77,
+        "APOCRYPHANS_REST": 337,
+        "ARATHI_BASIN": 3358,
+        "ARATHI_HIGHLANDS": 45,
+        "ARIDENS_CAMP": 2560,
+        "ASHENVALE": 331,
+        "ASTRANAAR": 415,
+        "AUBERDINE": 442,
+        "AZSHARA": 16,
+        "AZSHARA_CRATER": 268,
+        "AZURELODE_MINE0": 288,
+        "AZURELODE_MINE1": 2379,
+        "BADLANDS": 3,
+        "BAEL_DUN_DIGSITE": 404,
+        "BAEL_DUN_KEEP": 2157,
+        "BAEL_MODAN": 359,
+        "BALIA_MAH_RUINS": 127,
+        "BALNIR_FARMSTEAD": 165,
+        "BAL_LAL_RUINS": 123,
+        "BAN_ETHIL_BARROW_DEN": 262,
+        "BAN_ETHIL_HOLLOW": 736,
+        "BAN_THALLOW_BARROW_DEN": 2254,
+        "BARADIN_BAY": 298,
+        "BASHAL_ARAN": 446,
+        "BATHRANS_HAUNT": 411,
+        "BATTLE_RING": 2177,
+        "BAY_OF_STORMS": 1227,
+        "BEARS_HEAD": 1224,
+        "BEEZILS_WRECK": 501,
+        "BEGGARS_HAUNT": 576,
+        "BERENS_PERIL": 231,
+        "BITTER_REACHES": 2497,
+        "BLACKCHAR_CAVE": 1957,
+        "BLACKFATHOM_DEEPS0": 719,
+        "BLACKFATHOM_DEEPS1": 2797,
+        "BLACKROCK_DEPTHS": 1584,
+        "BLACKROCK_MOUNTAIN0": 25,
+        "BLACKROCK_MOUNTAIN1": 254,
+        "BLACKROCK_MOUNTAIN2": 1445,
+        "BLACKROCK_PASS": 2417,
+        "BLACKROCK_SPIRE": 1583,
+        "BLACKROCK_STRONGHOLD": 252,
+        "BLACKSMITH": 3421,
+        "BLACKTHORN_RIDGE": 1701,
+        "BLACKTHORN_RIDGE_UNUSED": 1601,
+        "BLACKWATER_COVE": 7,
+        "BLACKWATER_SHIPWRECKS": 322,
+        "BLACKWING_LAIR": 2677,
+        "BLACKWOLF_RIVER": 636,
+        "BLACKWOOD_DEN": 455,
+        "BLACKWOOD_LAKE": 2624,
+        "BLACK_CHANNEL_MARSH": 1018,
+        "BLADEFIST_BAY": 374,
+        "BLASTED_LANDS": 4,
+        "BLOODFEN_BURROW": 498,
+        "BLOODHOOF_VILLAGE": 222,
+        "BLOODSAIL_COMPOUND": 1739,
+        "BLOODTOOTH_CAMP": 2357,
+        "BLOODVENOM_FALLS": 1765,
+        "BLOODVENOM_POST": 1997,
+        "BLOODVENOM_RIVER": 1764,
+        "BLUEFEN": 507,
+        "BLUEGILL_MARSH": 1022,
+        "BOGENS_LEDGE": 1887,
+        "BOLGANS_HOLE": 600,
+        "BONES_OF_GRAKKAROND": 3257,
+        "BOOTY_BAY": 35,
+        "BOUGH_SHADOW": 438,
+        "BOULDERFIST_HALL": 316,
+        "BOULDERSLIDE_CAVERN": 3157,
+        "BOULDERSLIDE_RAVINE": 2540,
+        "BOULDER_GOR": 1858,
+        "BOULDER_LODE_MINE": 381,
+        "BRACKENWALL_VILLAGE": 496,
+        "BRACKWELL_PUMPKIN_PATCH": 62,
+        "BRAMBLEBLADE_RAVINE": 358,
+        "BRAMBLESCAR": 1698,
+        "BRAMBLESCAR_UNUSED": 1602,
+        "BRAVE_WIND_MESA": 471,
+        "BREWNALL_VILLAGE": 137,
+        "BRIGHTWATER_LAKE": 162,
+        "BRIGHTWOOD_GROVE": 242,
+        "BRILL": 159,
+        "BRILL_TOWN_HALL": 2118,
+        "BROKEN_PILLAR": 1938,
+        "BROKEN_SPEAR_VILLAGE": 2217,
+        "BRONZEBEARD_ENCAMPMENT": 3427,
+        "BROWMAN_MILL": 2269,
+        "BUCKLEBREE_FARM": 926,
+        "BURNING_BLADE_COVEN": 365,
+        "BURNING_STEPPES": 46,
+        "CAER_DARROW": 2298,
+        "CAER_DARROW_UNUSED": 395,
+        "CAMP_APARAJE": 2538,
+        "CAMP_BOFF": 342,
+        "CAMP_CAGG": 344,
+        "CAMP_E_THOK": 480,
+        "CAMP_KOSH": 341,
+        "CAMP_MOJACHE": 1099,
+        "CAMP_NARACHE": 221,
+        "CAMP_TAURAJO": 378,
+        "CAMP_WURG": 343,
+        "CAVERNS_OF_TIME0": 1941,
+        "CAVERNS_OF_TIME1": 2300,
+        "CENARION_ENCLAVE": 1658,
+        "CENARION_ENCLAVE_UNUSED": 700,
+        "CENARION_HOLD": 3425,
+        "CHAMPIONS_HALL": 2918,
+        "CHILLWIND_CAMP": 3197,
+        "CHILLWIND_POINT": 1684,
+        "CHILL_BREEZE_VALLEY": 801,
+        "CHUNK_TEST": 2877,
+        "CIRCLE_OF_EAST_BINDING": 333,
+        "CIRCLE_OF_INNER_BINDING": 335,
+        "CIRCLE_OF_OUTER_BINDING": 336,
+        "CIRCLE_OF_WEST_BINDING": 334,
+        "CITY": 3459,
+        "CLIFFSPRING_FALLS": 445,
+        "CLIFFSPRING_RIVER": 456,
+        "COLDRIDGE_PASS": 800,
+        "COLDRIDGE_VALLEY": 132,
+        "COLDTOOTH_MINE": 2963,
+        "COLD_HEARTH_MANOR": 166,
+        "CORINS_CROSSING": 2264,
+        "CORRAHNS_DAGGER": 1679,
+        "CRAFTSMENS_TERRACE": 1659,
+        "CRAFTSMENS_TERRACE_UNUSED": 696,
+        "CRAGPOOL_LAKE": 463,
+        "CROWN_GUARD_TOWER": 2263,
+        "CRUSADER_OUTPOST": 167,
+        "CRUSHRIDGE_HOLD": 282,
+        "CRYSTALVEIN_MINE": 310,
+        "CRYSTAL_LAKE": 18,
+        "DABYRIES_FARMSTEAD": 315,
+        "DALARAN": 279,
+        "DALSONS_TEARS": 200,
+        "DANDREDS_FOLD": 1682,
+        "DARKCLOUD_PINNACLE": 2097,
+        "DARKMIST_CAVERN": 499,
+        "DARKSHIRE": 42,
+        "DARKSHORE": 148,
+        "DARKSPEAR_STRAND": 393,
+        "DARKWHISPER_GORGE": 2256,
+        "DARNASSUS": 1657,
+        "DARNASSUS_UNUSED": 187,
+        "DARROWMERE_LAKE0": 2297,
+        "DARROWMERE_LAKE1": 2299,
+        "DARROWMERE_LAKE_UNUSED": 394,
+        "DARROWSHIRE": 2262,
+        "DARROW_HILL0": 1056,
+        "DARROW_HILL1": 2375,
+        "DAWNING_WOOD_CATACOMBS": 2098,
+        "DEADEYE_SHORE": 375,
+        "DEADMANS_CROSSING": 2697,
+        "DEADWIND_PASS": 41,
+        "DEADWIND_RAVINE": 2558,
+        "DEADWOOD_VILLAGE": 1761,
+        "DEAD_MANS_HOLE": 49,
+        "DEATHKNELL": 154,
+        "DEEPRUN_TRAM": 2257,
+        "DEEPWATER_TAVERN": 2104,
+        "DEEP_ELEM_MINE": 213,
+        "DEFILERS_DEN": 3418,
+        "DELETE_ME0": 495,
+        "DELETE_ME1": 877,
+        "DEMONTS_PLACE": 921,
+        "DEMON_FALL_CANYON": 435,
+        "DEMON_FALL_RIDGE": 436,
+        "DESIGNER_ISLAND": 151,
+        "DESOLACE": 405,
+        "DIAMONDHEAD_RIVER": 2559,
+        "DIREFORGE_HILL": 1016,
+        "DIRE_MAUL0": 2557,
+        "DIRE_MAUL1": 2577,
+        "DOLANAAR": 186,
+        "DRACO_DAR": 2421,
+        "DRAENIL_DUR_VILLAGE": 1779,
+        "DRAGONMAW_GATES": 1038,
+        "DREADMAUL_HOLD": 1437,
+        "DREADMAUL_POST": 1439,
+        "DREADMAUL_ROCK": 249,
+        "DREADMIST_DEN": 2138,
+        "DREADMIST_PEAK": 384,
+        "DREADMURK_SHORE": 518,
+        "DREAM_BOUGH": 1111,
+        "DRYGULCH_RAVINE": 370,
+        "DRYWHISKER_GORGE": 318,
+        "DUNEMAUL_COMPOUND": 983,
+        "DUN_ALGAZ0": 269,
+        "DUN_ALGAZ1": 836,
+        "DUN_ALGAZ2": 837,
+        "DUN_BALDAR": 2959,
+        "DUN_BALDAR_PASS": 3299,
+        "DUN_GAROK0": 290,
+        "DUN_GAROK1": 2371,
+        "DUN_MANDARR": 2248,
+        "DUN_MODR": 205,
+        "DUN_MOROGH": 1,
+        "DURNHOLDE_KEEP0": 275,
+        "DURNHOLDE_KEEP1": 2370,
+        "DUROTAR": 14,
+        "DUSKWOOD": 10,
+        "DUSTBELCH_GROTTO": 347,
+        "DUSTFIRE_VALLEY": 1959,
+        "DUSTWALLOW_BAY": 516,
+        "DUSTWALLOW_MARSH": 15,
+        "DUSTWIND_CAVE": 371,
+        "DUSTWIND_GULCH": 1898,
+        "EASTERN_PLAGUELANDS": 139,
+        "EASTERN_STRAND0": 294,
+        "EASTERN_STRAND1": 2373,
+        "EASTMOON_RUINS": 984,
+        "EASTVALE_LOGGING_CAMP": 88,
+        "EASTWALL_GATE": 2625,
+        "EASTWALL_TOWER": 2271,
+        "EAST_PILLAR": 1109,
+        "ECHO_ISLES": 368,
+        "ECHO_RIDGE_MINE": 34,
+        "EDGE_OF_MADNESS": 3398,
+        "ELDER_RISE": 1639,
+        "ELDER_RISE_UNUSED": 476,
+        "ELWYNN_FOREST": 12,
+        "EMBERSTRIFES_DEN": 2158,
+        "EMERALD_FOREST": 1397,
+        "EMERALD_SANCTUARY": 2479,
+        "ETHEL_RETHOR": 2405,
+        "EVERLOOK": 2255,
+        "FALDIRS_COVE": 327,
+        "FALFARREN_RIVER": 433,
+        "FALLEN_SKY_LAKE": 422,
+        "FALLOW_SANCTUARY": 76,
+        "FAOLS_REST": 173,
+        "FARGODEEP_MINE": 57,
+        "FARM": 3420,
+        "FAR_WATCH_POST": 379,
+        "FEATHERBEARDS_HOVEL": 1880,
+        "FEATHERMOON_STRONGHOLD": 1116,
+        "FELFIRE_HILL": 434,
+        "FELPAW_VILLAGE": 1762,
+        "FELSTONE_FIELD": 199,
+        "FELWOOD": 361,
+        "FEL_ROCK": 258,
+        "FENRIS_ISLE": 172,
+        "FENRIS_KEEP": 235,
+        "FERALAS": 357,
+        "FERAL_SCAR_VALE": 1105,
+        "FIELD_OF_GIANTS": 390,
+        "FIELD_OF_STRIFE": 3057,
+        "FIREWATCH_RIDGE": 1442,
+        "FIRE_PLUME_RIDGE": 537,
+        "FIRE_SCAR_SHRINE": 417,
+        "FIRE_STONE_MESA": 472,
+        "FLAME_CREST": 251,
+        "FOOTHOLD_CITADEL": 514,
+        "FORESTS_EDGE": 60,
+        "FOREST_SONG": 2358,
+        "FORLORN_RIDGE": 1233,
+        "FORLORN_ROWE": 243,
+        "FRAYFEATHER_HIGHLANDS": 1106,
+        "FRAY_ISLAND": 720,
+        "FREEWIND_POST": 484,
+        "FROSTFIRE_HOT_SPRINGS": 2246,
+        "FROSTMANE_HOLD": 135,
+        "FROSTSABER_ROCK": 2241,
+        "FROSTWHISPER_GORGE": 2249,
+        "FROSTWOLF_GRAVEYARD": 3297,
+        "FROSTWOLF_KEEP": 2978,
+        "FROSTWOLF_PASS": 3298,
+        "FROSTWOLF_VILLAGE": 2961,
+        "FROST_DAGGER_PASS": 3017,
+        "FUNGAL_ROCK": 542,
+        "FURLBROWS_PUMPKIN_FARM": 109,
+        "GADGETZAN": 976,
+        "GAHRRONS_WITHERING": 201,
+        "GALAK_HOLD": 486,
+        "GALARDELL_VALLEY": 1000,
+        "GALLOWS_CORNER": 1357,
+        "GALLOWS_END_TAVERN": 2119,
+        "GARRENS_HAUNT": 164,
+        "GARRISON_ARMORY": 1457,
+        "GATES_OF_AHN_QIRAJ": 3478,
+        "GATES_OF_IRONFORGE": 809,
+        "GAVINS_NAZE": 1677,
+        "GELKIS_VILLAGE": 606,
+        "GENERALS_TERRACE": 3449,
+        "GHOST_WALKER_POST": 597,
+        "GILLIJIMS_ISLE": 408,
+        "GM_ISLAND": 876,
+        "GNARLPINE_HOLD": 261,
+        "GNOMEREGAN0": 133,
+        "GNOMEREGAN1": 721,
+        "GOLAKKA_HOT_SPRINGS": 543,
+        "GOLDSHIRE": 87,
+        "GOLD_COAST_QUARRY": 113,
+        "GOLD_MINE": 3423,
+        "GOLD_ROAD": 458,
+        "GOL_BOLAR_QUARRY": 134,
+        "GORDUNNI_OUTPOST": 1103,
+        "GORNIA": 2238,
+        "GO_SHEK_FARM": 314,
+        "GREATWOOD_VALE": 469,
+        "GREENPAW_VILLAGE": 2359,
+        "GRIMESILT_DIG_SITE": 247,
+        "GRIMTOTEM_COMPOUND": 1100,
+        "GRIMTOTEM_POST": 2537,
+        "GRIM_BATOL": 1037,
+        "GRIZZLEPAW_RIDGE": 936,
+        "GROL_DOM_FARM": 1704,
+        "GROL_DOM_FARM_UNUSED": 1598,
+        "GROM_GOL_BASE_CAMP": 117,
+        "GROSH_GOK_COMPOUND": 2937,
+        "GROVE_OF_THE_ANCIENTS": 448,
+        "GROWLESS_CAVE": 1683,
+        "GUNSTANS_POST": 991,
+        "GUNTHERS_RETREAT": 163,
+        "GURUBASHI_ARENA": 1741,
+        "HAKKARI_GROUNDS": 3380,
+        "HALDARR_ENCAMPMENT": 1236,
+        "HALL_OF_LEGENDS": 2917,
+        "HAMMERFALL": 321,
+        "HAMMERTOES_DIGSITE": 346,
+        "HEARTHGLEN": 190,
+        "HELMS_BED_LAKE": 212,
+        "HEROES_VIGIL": 56,
+        "HETAERAS_CLUTCH": 1222,
+        "HIDDEN_PATH": 638,
+        "HIGHPERCH": 482,
+        "HIGH_WILDERNESS": 1136,
+        "HILLSBRAD": 287,
+        "HILLSBRAD_FIELDS0": 286,
+        "HILLSBRAD_FIELDS1": 2372,
+        "HILLSBRAD_FOOTHILLS": 267,
+        "HIRI_WATHA": 1885,
+        "HIVE_ASHI": 2742,
+        "HIVE_REGAL": 2744,
+        "HIVE_ZORA": 2743,
+        "HONORS_STAND": 1702,
+        "HONORS_STAND_UNUSED": 1600,
+        "HUNTER_RISE": 1641,
+        "HUNTER_RISE_UNUSED": 474,
+        "HYJAL": 616,
+        "ICEBLOOD_GARRISON": 2977,
+        "ICEBLOOD_GRAVEYARD": 3300,
+        "ICEFLOW_LAKE": 211,
+        "ICEWING_BUNKER": 3304,
+        "ICEWING_CAVERN": 3058,
+        "ICEWING_PASS": 2960,
+        "ICE_THISTLE_HILLS": 2247,
+        "IDLEWIND_LAKE": 1107,
+        "IRIS_LAKE": 424,
+        "IRONBANDS_COMPOUND": 716,
+        "IRONBANDS_EXCAVATION_SITE": 142,
+        "IRONBEARDS_TOMB": 309,
+        "IRONCLAD_COVE": 1582,
+        "IRONCLAD_PRISON": 515,
+        "IRONDEEP_MINE": 2957,
+        "IRONFORGE": 1537,
+        "IRONSTONE_CAMP": 3037,
+        "IRONSTONE_PLATEAU": 1943,
+        "IRONTREE_CAVERN": 1768,
+        "IRONTREE_WOODS": 1767,
+        "ISLAND_OF_DOCTOR_LAPIDIS": 409,
+        "ISLE_OF_DREAD": 1121,
+        "ITHARIUSS_CAVE": 1777,
+        "JADEFIRE_GLEN": 2480,
+        "JADEFIRE_RUN": 2618,
+        "JADEMIR_LAKE": 1112,
+        "JAEDENAR": 1763,
+        "JAGGEDSWINE_FARM": 1297,
+        "JAGGED_REEF": 1230,
+        "JAGUERO_ISLE": 297,
+        "JANEIROS_POINT": 312,
+        "JANGOLODE_MINE": 111,
+        "JASPERLODE_MINE": 54,
+        "JEFF_NE_QUADRANT_CHANGED": 81,
+        "JEFF_NW_QUADRANT": 82,
+        "JEFF_SE_QUADRANT": 83,
+        "JEFF_SW_QUADRANT": 84,
+        "JERODS_LANDING": 797,
+        "JINTHA_ALOR": 354,
+        "KAL_AI_RUINS": 125,
+        "KARAZHAN": 2562,
+        "KARGATH": 340,
+        "KARGATHIA_KEEP": 2637,
+        "KHARANOS": 131,
+        "KODO_GRAVEYARD": 596,
+        "KODO_ROCK": 637,
+        "KOLKAR_CRAG": 366,
+        "KOLKAR_VILLAGE": 609,
+        "KORMEKS_HUT": 2407,
+        "KUL_TIRAS": 21,
+        "KURZENS_COMPOUND": 101,
+        "LAKERIDGE_HIGHWAY": 1001,
+        "LAKESHIRE": 69,
+        "LAKE_AL_AMETH": 259,
+        "LAKE_ELUNE_ARA": 656,
+        "LAKE_EVERSTILL": 68,
+        "LAKE_FALATHIM": 441,
+        "LAKE_KEL_THERIL": 2251,
+        "LAKE_MENNAR": 1234,
+        "LAKE_MERELDAR": 2621,
+        "LAKE_NAZFERITI": 37,
+        "LAKKARI_TAR_PITS": 538,
+        "LANDS_END_BEACH": 987,
+        "LARISS_PAVILION": 2518,
+        "LEGASH_ENCAMPMENT": 1219,
+        "LETHLOR_RAVINE": 339,
+        "LIGHTHOUSE": 26,
+        "LIGHTS_HOPE_CHAPEL": 2268,
+        "LOCH_MODAN": 38,
+        "LONGSHORE": 2,
+        "LORDAMERE_INTERNMENT_CAMP": 278,
+        "LORDAMERE_LAKE0": 170,
+        "LORDAMERE_LAKE1": 1338,
+        "LORDAMERE_LAKE2": 1339,
+        "LOST_POINT": 506,
+        "LOST_RIGGER_COVE": 1336,
+        "LOWER_WILDS": 1137,
+        "LOWER_WILDS_UNUSED": 1118,
+        "LUMBER_MILL": 3422,
+        "LUSHWATER_OASIS": 387,
+        "MAESTRAS_POST": 413,
+        "MAGRAM_VILLAGE": 604,
+        "MALAKA_JIN": 2539,
+        "MALDENS_ORCHARD": 238,
+        "MANNOROC_COVEN": 602,
+        "MANOR_MISTMANTLE": 1098,
+        "MANTLE_ROCK": 473,
+        "MARAUDON": 2100,
+        "MARDENHOLDE_KEEP": 203,
+        "MARSHALS_REFUGE": 541,
+        "MAZRA_ALOR": 2274,
+        "MAZTHORIL": 2245,
+        "MENETHIL_BAY": 299,
+        "MENETHIL_HARBOR": 150,
+        "MENETHIL_KEEP": 2103,
+        "MIRAGE_FLATS": 1879,
+        "MIRAGE_RACEWAY": 2240,
+        "MIRKFALLON_LAKE": 464,
+        "MIRROR_LAKE": 92,
+        "MIRROR_LAKE_ORCHARD": 89,
+        "MISTS_EDGE": 452,
+        "MISTVALE_VALLEY": 1737,
+        "MISTY_PINE_REFUGE": 138,
+        "MISTY_REED_POST": 1978,
+        "MISTY_REED_STRAND": 300,
+        "MISTY_SHORE": 1681,
+        "MISTY_VALLEY": 116,
+        "MIZJAH_RUINS": 129,
+        "MOGGLE_POINT": 500,
+        "MOK_GORDUN": 1104,
+        "MOLTEN_CORE": 2717,
+        "MOONBROOK": 20,
+        "MOONGLADE": 493,
+        "MOONWELL": 425,
+        "MOON_HORROR_DEN": 3139,
+        "MORGANS_PLOT": 2563,
+        "MORGANS_VIGIL": 2418,
+        "MORLOS_ARAN": 2478,
+        "MORSHAN_BASE_CAMP": 1599,
+        "MOSH_OGG_OGRE_MOUND": 105,
+        "MOSSHIDE_FEN": 1020,
+        "MO_GROSH_STRONGHOLD": 143,
+        "MULGORE": 215,
+        "MYSTRAL_LAKE": 421,
+        "NAXXRAMAS": 3456,
+        "NAZE_OF_SHIRVALLAH": 3381,
+        "NEK_MANI_WELLSPRING": 1738,
+        "NESINGWARYS_EXPEDITION": 100,
+        "NETHANDER_STEAD0": 289,
+        "NETHANDER_STEAD1": 2374,
+        "NETHERGARDE_KEEP": 1438,
+        "NIGHTHAVEN": 2361,
+        "NIGHTMARE_VALE": 811,
+        "NIGHTSONG_WOODS": 2457,
+        "NIGHT_RUN": 428,
+        "NIGHT_WEBS_HOLLOW": 155,
+        "NIJELS_POINT": 608,
+        "NINE": 30,
+        "NONE": 0,
+        "NOONSHADE_RUINS": 1937,
+        "NORTHDALE": 2272,
+        "NORTHFOLD_MANOR": 313,
+        "NORTHPASS_TOWER": 2275,
+        "NORTHRIDGE_LUMBER_CAMP": 192,
+        "NORTHSHIRE_ABBEY": 24,
+        "NORTHSHIRE_RIVER": 23,
+        "NORTHSHIRE_VALLEY": 9,
+        "NORTHSHIRE_VINEYARDS": 59,
+        "NORTHWATCH_HOLD": 385,
+        "NORTH_GATE_OUTPOST": 808,
+        "NORTH_GATE_PASS0": 807,
+        "NORTH_GATE_PASS1": 838,
+        "NORTH_POINT_TOWER": 504,
+        "NORTH_TIDES_HOLLOW": 928,
+        "NORTH_TIDES_RUN": 305,
+        "NOT_USED_DEADMINES": 1518,
+        "OLD_HILLSBRAD_FOOTHILLS": 2367,
+        "OLSENS_FARTHING": 229,
+        "ONEIROS": 1113,
+        "ONYXIAS_LAIR": 2159,
+        "ONYXIAS_LAIR_UNUSED": 512,
+        "ON_MAP_DUNGEON0": 65,
+        "ON_MAP_DUNGEON1": 66,
+        "ON_MAP_DUNGEON2": 67,
+        "ON_MAP_DUNGEON3": 210,
+        "ON_MAP_DUNGEON4": 2817,
+        "ORGRIMMAR": 1637,
+        "ORGRIMMAR_UNUSED": 407,
+        "ORTELLS_HIDEOUT": 3447,
+        "OUTLAND": 676,
+        "OWL_WING_THICKET": 2250,
+        "O_BREENS_CAMP": 323,
+        "PAGLES_POINTE": 3419,
+        "PALEMANE_ROCK": 818,
+        "PESTILENT_SCAR": 2622,
+        "PLAGUEMIST_RAVINE": 1882,
+        "PLAGUEWOOD": 2277,
+        "POOLS_OF_ARLITHRIEN": 478,
+        "POOL_OF_TEARS": 74,
+        "PROGRAMMER_ISLE": 22,
+        "PURGATION_ISLE": 896,
+        "PYREWOOD_VILLAGE": 204,
+        "QUEL_DANIL_LODGE": 350,
+        "QUEL_LITHIEN_LODGE": 2276,
+        "RAGEFIRE_CHASM": 2437,
+        "RAGE_SCAR_HOLD": 1115,
+        "RANAZJAR_ISLE": 2406,
+        "RAPTOR_GROUNDS": 1697,
+        "RAPTOR_GROUNDS_UNUSED": 1597,
+        "RAPTOR_RIDGE": 1017,
+        "RATCHET": 392,
+        "RAVAGED_CARAVAN": 224,
+        "RAVAGED_TWILIGHT_CAMP": 3100,
+        "RAVENCREST_MONUMENT": 1232,
+        "RAVENHOLDT_MANOR": 3486,
+        "RAVEN_HILL": 94,
+        "RAVEN_HILL_CEMETERY": 492,
+        "RAYNEWOOD_RETREAT": 426,
+        "RAZORFEN_DOWNS0": 722,
+        "RAZORFEN_DOWNS1": 1316,
+        "RAZORFEN_KRAUL0": 491,
+        "RAZORFEN_KRAUL1": 1717,
+        "RAZORMANE_GROUNDS": 816,
+        "RAZORWIND_CANYON": 410,
+        "RAZOR_HILL": 362,
+        "RAZOR_HILL_BARRACKS": 2337,
+        "REBEL_CAMP": 99,
+        "REDRIDGE_CANYONS": 95,
+        "REDRIDGE_MOUNTAINS": 44,
+        "RED_CLOUD_MESA": 220,
+        "RED_ROCKS": 225,
+        "REFUGE_POINTE": 320,
+        "REMTRAVELS_EXCAVATION": 450,
+        "RENDERS_CAMP": 996,
+        "RENDERS_ROCK": 998,
+        "RENDERS_VALLEY": 997,
+        "RETHBAN_CAVERNS": 98,
+        "RETHRESS_SANCTUM": 3138,
+        "REVANTUSK_VILLAGE": 3317,
+        "RIDGEPOINT_TOWER": 798,
+        "RISE_OF_THE_DEFILER": 2517,
+        "ROCKTUSK_FARM": 1296,
+        "ROCK_OF_DUROTAN": 3318,
+        "ROGUEFEATHER_DEN": 487,
+        "ROLANDS_DOOM": 2161,
+        "RUINS_OF_ABORAZ": 311,
+        "RUINS_OF_AHN_QIRAJ0": 3429,
+        "RUINS_OF_AHN_QIRAJ1": 3454,
+        "RUINS_OF_ALTERAC": 281,
+        "RUINS_OF_ANDORHAL": 193,
+        "RUINS_OF_CONSTELLAS": 2481,
+        "RUINS_OF_ELDARATH": 1221,
+        "RUINS_OF_ISILDIEN": 2522,
+        "RUINS_OF_JUBUWAL": 477,
+        "RUINS_OF_LORDAERON": 153,
+        "RUINS_OF_MATHYSTRA": 443,
+        "RUINS_OF_RAVENWIND": 1114,
+        "RUINS_OF_SOLARSAL": 1117,
+        "RUINS_OF_THAURISSAN": 250,
+        "RUINS_OF_ZUL_KUNDA": 102,
+        "RUINS_OF_ZUL_MAMWE": 103,
+        "RUT_THERAN_VILLAGE": 702,
+        "SALDEANS_FARM": 107,
+        "SALTSPRAY_GLEN": 1023,
+        "SANDSORROW_WATCH": 979,
+        "SARDOR_ISLE": 1120,
+        "SARGERON": 603,
+        "SAR_THERIS_STRAND": 598,
+        "SATYRNAAR": 430,
+        "SCALEBEARDS_CAVE": 3140,
+        "SCARAB_TERRACE": 3448,
+        "SCARLET_BASE_CAMP": 2265,
+        "SCARLET_MONASTERY": 796,
+        "SCARLET_WATCH_POST": 459,
+        "SCHOLOMANCE": 2057,
+        "SCHOOL_OF_NECROMANCY": 195,
+        "SCOURGEHOLD": 2278,
+        "SCRABBLESCREWS_CAMP": 2617,
+        "SCUTTLE_COAST": 373,
+        "SEARING_GORGE": 51,
+        "SENTINEL_HILL": 108,
+        "SENTRY_POINT": 503,
+        "SEN_JIN_VILLAGE": 367,
+        "SERADANE": 356,
+        "SERPENTS_COIL": 1440,
+        "SHADOWBREAK_RAVINE": 2198,
+        "SHADOWFANG_KEEP0": 209,
+        "SHADOWFANG_KEEP1": 236,
+        "SHADOWGLEN": 188,
+        "SHADOWPREY_VILLAGE": 2408,
+        "SHADOWSONG_SHRINE": 1235,
+        "SHADOWTHREAD_CAVE": 257,
+        "SHADOW_GRAVE": 2117,
+        "SHADOW_HOLD": 1770,
+        "SHADRA_ALOR": 353,
+        "SHADRA_ZAAR": 3379,
+        "SHADY_REST_INN": 403,
+        "SHALZARUS_LAIR": 3117,
+        "SHAOL_WATHA": 1917,
+        "SHATTER_SCAR_VALE": 1766,
+        "SHELL_BEACH": 303,
+        "SHIMMER_RIDGE": 802,
+        "SHINDIGGERS_CAMP": 1881,
+        "SHRINE_OF_REMULOS": 2362,
+        "SHRINE_OF_THE_DECEIVER": 1771,
+        "SHRINE_OF_THE_DORMANT_FLAME": 640,
+        "SHRINE_OF_THE_FALLEN_WARRIOR": 2757,
+        "SILITHUS": 1377,
+        "SILVERPINE_FOREST": 130,
+        "SILVERWIND_REFUGE": 420,
+        "SILVERWING_GROVE": 3319,
+        "SILVERWING_HOLD": 3321,
+        "SILVERWING_OUTPOST": 2360,
+        "SILVER_STREAM_MINE": 149,
+        "SISHIR_CANYON": 2541,
+        "SKULK_ROCK": 351,
+        "SKULL_ROCK": 817,
+        "SKYLINE_RIDGE": 399,
+        "SLAUGHTER_HOLLOW": 283,
+        "SLEEPING_GORGE": 2938,
+        "SLITHER_ROCK": 2419,
+        "SNOWFALL_GRAVEYARD": 3301,
+        "SOFERAS_NAZE": 1678,
+        "SOLLIDEN_FARMSTEAD": 156,
+        "SORROWMURK": 1778,
+        "SORROW_HILL": 197,
+        "SOUTHBREAK_SHORE": 1940,
+        "SOUTHERN_BARRENS": 1156,
+        "SOUTHERN_GOLD_ROAD": 1157,
+        "SOUTHERN_SAVAGE_COAST": 1578,
+        "SOUTHFURY_RIVER0": 377,
+        "SOUTHFURY_RIVER1": 814,
+        "SOUTHFURY_RIVER2": 815,
+        "SOUTHFURY_RIVER3": 878,
+        "SOUTHFURY_RIVER4": 879,
+        "SOUTHMOON_RUINS": 992,
+        "SOUTHPOINT_TOWER0": 285,
+        "SOUTHPOINT_TOWER1": 2376,
+        "SOUTHRIDGE_BEACH": 1231,
+        "SOUTHSHORE0": 271,
+        "SOUTHSHORE1": 2369,
+        "SOUTHWIND_VILLAGE": 2738,
+        "SOUTH_GATE_OUTPOST": 806,
+        "SOUTH_GATE_PASS0": 805,
+        "SOUTH_GATE_PASS1": 839,
+        "SOUTH_SEAS0": 2317,
+        "SOUTH_SEAS1": 2338,
+        "SOUTH_SEAS_UNUSED": 296,
+        "SOUTH_TIDES_RUN": 306,
+        "SPIRIT_DEN": 1742,
+        "SPIRIT_RISE": 1640,
+        "SPIRIT_RISE_UNUSED": 475,
+        "SPIRIT_ROCK": 639,
+        "SPLINTERSPEAR_JUNCTION": 1780,
+        "SPLINTERTREE_POST": 431,
+        "SPLITHOOF_CRAG": 481,
+        "SPLITHOOF_HOLD": 1557,
+        "STABLES": 3424,
+        "STAGALBOG": 1797,
+        "STAGALBOG_CAVE": 1817,
+        "STAGHELM_POINT": 3426,
+        "STARBREEZE_VILLAGE": 260,
+        "STARFALL_VILLAGE": 2253,
+        "STEAMWHEEDLE_PORT": 977,
+        "STEELGRILLS_DEPOT": 189,
+        "STENDELS_POND": 919,
+        "STILLWATER_POND": 810,
+        "STONARD": 75,
+        "STONEBULL_LAKE": 223,
+        "STONEHEARTH_BUNKER": 3305,
+        "STONEHEARTH_GRAVEYARD": 3302,
+        "STONEHEARTH_OUTPOST": 2958,
+        "STONEMAUL_RUINS": 508,
+        "STONESPLINTER_VALLEY": 923,
+        "STONETALON_MOUNTAINS": 406,
+        "STONETALON_PEAK": 467,
+        "STONEWATCH": 70,
+        "STONEWATCH_FALLS": 71,
+        "STONEWATCH_KEEP": 2099,
+        "STONEWATCH_TOWER": 999,
+        "STONEWROUGHT_DAM": 146,
+        "STONEWROUGHT_PASS": 2838,
+        "STONE_CAIRN_LAKE": 86,
+        "STORMPIKE_GRAVEYARD": 3303,
+        "STORMRAGE_BARROW_DENS": 2363,
+        "STORMWIND_CITY": 1519,
+        "STORMWIND_MOUNTAINS": 80,
+        "STOUTLAGER_INN": 2101,
+        "STRAHNBRAD": 280,
+        "STRANGLETHORN_VALE": 33,
+        "STRATHOLME0": 2017,
+        "STRATHOLME1": 2279,
+        "STROMGARDE_KEEP": 324,
+        "SUNDOWN_MARSH": 1024,
+        "SUNKEN_TEMPLE": 1417,
+        "SUN_ROCK_RETREAT": 460,
+        "SWAMPLIGHT_MANOR": 497,
+        "SWAMP_OF_SORROWS": 8,
+        "TAHONDA_RUINS": 3039,
+        "TALONBRANCH_GLADE": 1998,
+        "TALRENDIS_POINT": 3137,
+        "TANARIS": 440,
+        "TANNER_CAMP": 1958,
+        "TARREN_MILL0": 272,
+        "TARREN_MILL1": 2368,
+        "TELDRASSIL": 141,
+        "TEMPLE_OF_ARKKORAN": 1226,
+        "TEMPLE_OF_BETHEKK": 3382,
+        "TEMPLE_OF_ELUNE_UNUSED": 699,
+        "TEMPLE_OF_ZIN_MALOR": 1223,
+        "TERRACE_OF_REPOSE": 161,
+        "TERRORDALE": 2627,
+        "TERRORWEB_TUNNEL": 2626,
+        "TERROR_RUN": 539,
+        "TERROR_WING_PATH": 2420,
+        "TEST_AZSHARA": 1218,
+        "TETHRIS_ARAN": 2404,
+        "THALANAAR": 489,
+        "THALASSIAN_BASE_CAMP": 1220,
+        "THANDOL_SPAN0": 330,
+        "THANDOL_SPAN1": 880,
+        "THANDOL_SPAN2": 881,
+        "THELGEN_ROCK": 1021,
+        "THELSAMAR": 144,
+        "THERAMORE_ISLE": 513,
+        "THE_ALTAR_OF_ZUL": 355,
+        "THE_BARRENS": 17,
+        "THE_BLACK_MORASS": 2366,
+        "THE_BLOODFIRE_PIT": 3383,
+        "THE_BULWARK0": 152,
+        "THE_BULWARK1": 813,
+        "THE_CAPE_OF_STRANGLETHORN": 1577,
+        "THE_CAULDRON": 246,
+        "THE_CEMETARY": 32,
+        "THE_CHARRED_VALE": 465,
+        "THE_CLEFT": 263,
+        "THE_COIL": 3377,
+        "THE_COMB": 3452,
+        "THE_CREEPING_RUIN": 1886,
+        "THE_CRIMSON_VEIL": 1757,
+        "THE_CROSSROADS": 380,
+        "THE_CRYSTAL_SHORE": 302,
+        "THE_CRYSTAL_VALE": 2740,
+        "THE_DAGGER_HILLS": 920,
+        "THE_DAMSELS_LUCK": 1759,
+        "THE_DARKENED_BANK": 799,
+        "THE_DARK_PORTAL": 72,
+        "THE_DAWNING_ISLES": 232,
+        "THE_DEADMINES": 1581,
+        "THE_DEAD_ACRE": 917,
+        "THE_DEAD_FIELD": 240,
+        "THE_DECREPIT_FERRY": 237,
+        "THE_DEN": 364,
+        "THE_DEN_OF_FLAME": 509,
+        "THE_DOR_DANIL_BARROW_DEN": 432,
+        "THE_DRAGONMURK": 510,
+        "THE_DROWNED_REEF": 328,
+        "THE_DRY_HILLS": 383,
+        "THE_DUSTBOWL": 1878,
+        "THE_DUST_PLAINS": 922,
+        "THE_FARSTRIDER_LODGE": 147,
+        "THE_FOOTHILL_CAVERNS": 277,
+        "THE_FORBIDDING_SEA0": 308,
+        "THE_FORBIDDING_SEA1": 2400,
+        "THE_FORBIDDING_SEA2": 2401,
+        "THE_FORBIDDING_SEA3": 2402,
+        "THE_FORBIDDING_SEA4": 2403,
+        "THE_FORGOTTEN_COAST": 1108,
+        "THE_FORGOTTEN_POOLS": 386,
+        "THE_FUNGAL_VALE": 2258,
+        "THE_GAPING_CHASM": 981,
+        "THE_GOLDEN_PLAINS": 820,
+        "THE_GREAT_LIFT0": 485,
+        "THE_GREAT_LIFT1": 1718,
+        "THE_GREAT_SEA0": 207,
+        "THE_GREAT_SEA1": 214,
+        "THE_GREAT_SEA10": 2397,
+        "THE_GREAT_SEA11": 2398,
+        "THE_GREAT_SEA12": 2399,
+        "THE_GREAT_SEA2": 332,
+        "THE_GREAT_SEA3": 2318,
+        "THE_GREAT_SEA4": 2319,
+        "THE_GREAT_SEA5": 2320,
+        "THE_GREAT_SEA6": 2321,
+        "THE_GREAT_SEA7": 2339,
+        "THE_GREAT_SEA8": 2364,
+        "THE_GREAT_SEA9": 2365,
+        "THE_GREEN_BELT0": 1019,
+        "THE_GREEN_BELT1": 1025,
+        "THE_GREYMANE_WALL": 230,
+        "THE_GRIZZLED_DEN": 136,
+        "THE_HARBORAGE": 657,
+        "THE_HATCHERY": 3451,
+        "THE_HEADLAND": 1680,
+        "THE_HIDDEN_GROVE": 2242,
+        "THE_HINTERLANDS": 47,
+        "THE_HOWLING_VALE": 419,
+        "THE_HUSHED_BANK": 1097,
+        "THE_INFECTIS_SCAR": 2623,
+        "THE_IVAR_PATCH": 239,
+        "THE_JANSEN_STEAD": 916,
+        "THE_LOCH": 556,
+        "THE_LONG_WASH": 453,
+        "THE_LOST_FLEET": 1039,
+        "THE_MACLURE_VINEYARDS": 64,
+        "THE_MAKERS_TERRACE": 1897,
+        "THE_MARRIS_STEAD": 2260,
+        "THE_MARSHLANDS": 1942,
+        "THE_MASTERS_CELLAR": 2837,
+        "THE_MASTERS_GLAIVE": 449,
+        "THE_MAUL": 3217,
+        "THE_MAUL_UNUSED": 3237,
+        "THE_MERCHANT_COAST": 391,
+        "THE_MOLSEN_FARM": 918,
+        "THE_MORSHAN_RAMPART": 1703,
+        "THE_NORTH_COAST": 168,
+        "THE_NOXIOUS_GLADE": 2270,
+        "THE_NOXIOUS_LAIR": 982,
+        "THE_ORACLE_GLADE": 264,
+        "THE_OVERLOOK_CLIFFS": 307,
+        "THE_PILLAR_OF_ASH": 253,
+        "THE_POOLS_OF_VISION": 2197,
+        "THE_POOLS_OF_VISION_UNUSED": 2137,
+        "THE_QUAGMIRE": 2302,
+        "THE_RESERVOIR": 3450,
+        "THE_RIPTIDE": 1758,
+        "THE_ROLLING_PLAINS": 821,
+        "THE_ROTTING_ORCHARD": 241,
+        "THE_RUINED_REACHES": 1256,
+        "THE_RUINS_OF_KEL_THERIL": 2252,
+        "THE_RUINS_OF_ORDIL_ARAN": 412,
+        "THE_RUINS_OF_STARDUST": 418,
+        "THE_RUMBLE_CAGE": 2857,
+        "THE_RUSTMAUL_DIG_SITE": 479,
+        "THE_SANCTUM": 326,
+        "THE_SAVAGE_COAST": 301,
+        "THE_SCARAB_DAIS": 2741,
+        "THE_SCARAB_WALL": 2737,
+        "THE_SCARLET_BASILICA": 2267,
+        "THE_SCREECHING_CANYON": 483,
+        "THE_SEA_OF_CINDERS": 1444,
+        "THE_SEPULCHER": 228,
+        "THE_SHADY_NOOK": 427,
+        "THE_SHATTERED_STRAND": 1228,
+        "THE_SHIFTING_MIRE": 1798,
+        "THE_SHIMMERING_FLATS": 439,
+        "THE_SHINING_STRAND": 927,
+        "THE_SHRINE_OF_AESSINA": 416,
+        "THE_SKITTERING_DARK": 226,
+        "THE_SLAG_PIT": 1443,
+        "THE_SLITHERING_SCAR": 540,
+        "THE_SLUDGE_FEN": 382,
+        "THE_STAGNANT_OASIS": 388,
+        "THE_STOCKADE": 717,
+        "THE_STOCKPILE": 106,
+        "THE_STONEFIELD_FARM": 63,
+        "THE_SWARMING_PILLAR": 3097,
+        "THE_TAINTED_SCAR": 73,
+        "THE_TALONDEEP_PATH0": 1276,
+        "THE_TALONDEEP_PATH1": 1277,
+        "THE_TALON_DEN": 468,
+        "THE_TEMPLE_GARDENS": 1661,
+        "THE_TEMPLE_GARDENS_UNUSED": 698,
+        "THE_TEMPLE_OF_ATAL_HAKKAR": 1477,
+        "THE_TIDUS_STAIR": 401,
+        "THE_TOWER_OF_ARATHOR": 325,
+        "THE_TUNDRID_HILLS": 804,
+        "THE_TWIN_COLOSSALS": 1119,
+        "THE_UNDERCROFT": 2261,
+        "THE_UPLANDS": 284,
+        "THE_VEILED_CLEFT": 3338,
+        "THE_VEILED_SEA0": 457,
+        "THE_VEILED_SEA1": 2322,
+        "THE_VEILED_SEA2": 2323,
+        "THE_VEILED_SEA3": 2324,
+        "THE_VEILED_SEA4": 2325,
+        "THE_VEILED_SEA5": 2326,
+        "THE_VEILED_SEA6": 2477,
+        "THE_VENTURE_CO_MINE": 360,
+        "THE_VERDANT_FIELDS": 956,
+        "THE_VICE": 2561,
+        "THE_VILE_REEF": 104,
+        "THE_WEATHERED_NOOK": 488,
+        "THE_WEEPING_CAVE": 198,
+        "THE_WHIPPLE_ESTATE": 244,
+        "THE_WORLD_TREE": 13,
+        "THE_WRITHING_DEEP": 1101,
+        "THE_WRITHING_HAUNT": 202,
+        "THE_YORGEN_FARMSTEAD": 245,
+        "THE_ZORAM_STRAND": 414,
+        "THIEVES_CAMP": 53,
+        "THISTLEFUR_VILLAGE": 2301,
+        "THISTLESHRUB_VALLEY": 980,
+        "THONDRORIL_RIVER0": 2619,
+        "THONDRORIL_RIVER1": 2620,
+        "THORADINS_WALL0": 293,
+        "THORADINS_WALL1": 1057,
+        "THORADINS_WALL2": 1857,
+        "THORADINS_WALL3": 2377,
+        "THORIUM_POINT": 1446,
+        "THORN_HILL": 1699,
+        "THOUSAND_NEEDLES": 400,
+        "THREE_CORNERS": 1002,
+        "THUNDERBREW_DISTILLERY": 2102,
+        "THUNDERHORN_WATER_WELL": 397,
+        "THUNDER_AXE_FORTRESS": 599,
+        "THUNDER_BLUFF": 1638,
+        "THUNDER_BLUFF_UNUSED": 470,
+        "THUNDER_FALLS": 61,
+        "THUNDER_RIDGE": 369,
+        "TIDEFURY_COVE": 517,
+        "TIMBERMAW_HOLD0": 1216,
+        "TIMBERMAW_HOLD1": 1769,
+        "TIMBERMAW_POST": 2243,
+        "TIRAGARDE_KEEP": 372,
+        "TIRISFAL_GLADES": 85,
+        "TKASHI_RUINS": 126,
+        "TOR_KREN_FARM": 2979,
+        "TOWER_OF_ALTHALAXX": 444,
+        "TOWER_OF_AZORA": 91,
+        "TOWER_OF_ELDARA": 1229,
+        "TOWER_OF_ILGALAR": 96,
+        "TOWER_POINT": 2962,
+        "TRADESMENS_TERRACE": 1662,
+        "TRADESMENS_TERRACE_UNUSED": 697,
+        "TRANQUIL_GARDENS_CEMETERY": 121,
+        "TROLLBANE_HALL": 3417,
+        "TWILIGHTS_RUN": 3446,
+        "TWILIGHT_BASE_CAMP": 2739,
+        "TWILIGHT_GROVE": 856,
+        "TWILIGHT_OUTPOST": 3099,
+        "TWILIGHT_POST": 3098,
+        "TWILIGHT_SHORE": 2078,
+        "TWILIGHT_VALE": 2077,
+        "TYRS_HAND": 2266,
+        "ULDAMAN0": 1337,
+        "ULDAMAN1": 1517,
+        "ULDUM": 989,
+        "UNDERCITY": 1497,
+        "UNUSED_ALCAZ_ISLAND": 1196,
+        "UNUSED_ALTERAC_VALLEY": 2777,
+        "UNUSED_IRONCLADCOVE": 208,
+        "UNUSED_IRONCLAD_COVE_003": 1580,
+        "UNUSED_SHADOWFANG_KEEP_003": 2037,
+        "UNUSED_STONEWROUGHT_PASS": 276,
+        "UNUSED_STRATHOLME": 2280,
+        "UNUSED_THE_DEADMINES_002": 1579,
+        "UNUSED_THE_MARRIS_STEAD": 2259,
+        "UN_GORO_CRATER": 490,
+        "URSOLAN": 1225,
+        "UTHERS_TOMB": 196,
+        "VALGANS_FIELD": 227,
+        "VALLEY_OF_BONES": 2657,
+        "VALLEY_OF_FANGS": 1877,
+        "VALLEY_OF_HEROES": 1617,
+        "VALLEY_OF_HEROES_UNUSED": 55,
+        "VALLEY_OF_KINGS": 924,
+        "VALLEY_OF_SPEARS": 607,
+        "VALLEY_OF_THE_BLOODFURIES": 466,
+        "VALLEY_OF_THE_WATCHERS": 990,
+        "VALLEY_OF_TRIALS": 363,
+        "VALORMOK": 1237,
+        "VALORS_REST": 3077,
+        "VALORWIND_LAKE": 1883,
+        "VANNDIR_ENCAMPMENT": 1217,
+        "VENOMWEB_VALE": 812,
+        "VENTURE_CO_BASE_CAMP": 1740,
+        "VENTURE_CO_OPERATIONS_CENTER": 1760,
+        "VERDANTIS_RIVER": 2521,
+        "VUL_GOL_OGRE_MOUND": 93,
+        "WAILING_CAVERNS": 718,
+        "WARRIORS_TERRACE": 1660,
+        "WARRIORS_TERRACE_UNUSED": 701,
+        "WARSONG_GULCH": 3277,
+        "WARSONG_LABOR_CAMP": 3177,
+        "WARSONG_LUMBER_CAMP": 437,
+        "WARSONG_LUMBER_MILL": 3320,
+        "WATCHERS_TERRACE": 3453,
+        "WATERSPRING_FIELD": 985,
+        "WAVESTRIDER_BEACH": 988,
+        "WEAZELS_CRATER": 3038,
+        "WEBWINDER_PATH": 1076,
+        "WELLSPRING_LAKE": 266,
+        "WELLSPRING_RIVER": 265,
+        "WESTBROOK_GARRISON": 120,
+        "WESTERN_PLAGUELANDS": 28,
+        "WESTERN_STRAND0": 295,
+        "WESTERN_STRAND1": 2378,
+        "WESTFALL0": 40,
+        "WESTFALL1": 206,
+        "WESTFALL_LIGHTHOUSE": 115,
+        "WEST_PILLAR": 1110,
+        "WEST_POINT_TOWER": 505,
+        "WETLANDS": 11,
+        "WHELGARS_EXCAVATION_SITE": 118,
+        "WHISPERING_GARDENS": 160,
+        "WHISPERING_SHORE": 169,
+        "WHITEREACH_POST": 2237,
+        "WILDBEND_RIVER": 454,
+        "WILDHAMMER_KEEP": 349,
+        "WILDMANE_WATER_WELL": 398,
+        "WILDPAW_CAVERN": 3337,
+        "WILDPAW_RIDGE": 3306,
+        "WILDWIND_LAKE": 1102,
+        "WILD_SHORE": 43,
+        "WINDBREAK_CANYON": 2303,
+        "WINDFURY_RIDGE": 819,
+        "WINDSHEAR_CRAG": 461,
+        "WINDSHEAR_MINE": 2160,
+        "WINTERAX_HOLD": 2964,
+        "WINTERFALL_VILLAGE": 2244,
+        "WINTERHOOF_WATER_WELL": 396,
+        "WINTERSPRING": 618,
+        "WITCH_HILL": 502,
+        "WITHERBARK_CAVERNS": 1837,
+        "WITHERBARK_VILLAGE": 317,
+        "WOODPAW_DEN": 2520,
+        "WOODPAW_HILLS": 2519,
+        "WYRMBOG": 511,
+        "XAVIAN": 429,
+        "YOJAMBA_ISLE": 3357,
+        "ZALASHJIS_DEN": 986,
+        "ZANES_EYE_CRATER": 2239,
+        "ZANZAS_RISE": 3397,
+        "ZIATAJAI_RUINS": 128,
+        "ZORAMGAR_OUTPOST": 2897,
+        "ZUL_FARRAK0": 978,
+        "ZUL_FARRAK1": 1176,
+        "ZUL_GURUB0": 19,
+        "ZUL_GURUB1": 1977,
+        "ZUL_MASHAR": 2273,
+        "ZUN_WATHA": 352,
+        "ZUULDAIA_RUINS": 122
+      }
+    },
+    "AreaFlags": {
+      "kind": "flags",
+      "underlying": "uint16",
+      "values": {
+        "CITY": 256,
+        "CITY_ALLOW_DUELS": 64,
+        "CITY_SLAVE": 32,
+        "DEVELOPMENT": 4,
+        "SNOW": 1,
+        "TEST": 512,
+        "UNK": 2,
+        "UNK2": 8,
+        "UNK3": 16,
+        "UNK4": 128
+      }
+    },
+    "AttackHand": {
+      "kind": "enum",
+      "underlying": "uint8",
+      "values": {
+        "MAIN_HAND": 0,
+        "OFF_HAND": 1
+      }
+    },
+    "Attributes": {
+      "kind": "flags",
+      "underlying": "uint32",
+      "values": {
+        "ALLOW_CAST_WHILE_DEAD": 8388608,
+        "ALLOW_WHILE_MOUNTED": 16777216,
+        "ALLOW_WHILE_SITTING": 134217728,
+        "AURA_IS_DEBUFF": 67108864,
+        "CANCELS_AUTO_ATTACK_COMBAT": 1048576,
+        "COOLDOWN_ON_EVENT": 33554432,
+        "DAYTIME_ONLY": 4096,
+        "DO_NOT_DISPLAY": 128,
+        "DO_NOT_LOG": 256,
+        "DO_NOT_SHEATH": 262144,
+        "HEARTBEAT_RESIST": 1073741824,
+        "HELD_ITEM_ONLY": 512,
+        "IS_ABILITY": 16,
+        "IS_TRADESKILL": 32,
+        "NEED_EXOTIC_AMMO": 8,
+        "NIGHT_ONLY": 8192,
+        "NONE": 0,
+        "NOT_IN_COMBAT_ONLY_PEACEFUL": 268435456,
+        "NOT_SHAPESHIFT": 65536,
+        "NO_ACTIVE_DEFENSE": 2097152,
+        "NO_AURA_CANCEL": 2147483648,
+        "NO_IMMUNITIES": 536870912,
+        "ONLY_INDOORS": 16384,
+        "ONLY_OUTDOORS": 32768,
+        "ONLY_STEALTHED": 131072,
+        "ON_NEXT_SWING": 1024,
+        "ON_NEXT_SWING_NO_DAMAGE": 4,
+        "PASSIVE": 64,
+        "PROC_FAILURE_BURNS_CHARGE": 1,
+        "SCALES_WITH_CREATURE_LEVEL": 524288,
+        "TRACK_TARGET_IN_CAST_PLAYER_ONLY": 4194304,
+        "USES_RANGED_SLOT": 2,
+        "WEARER_CASTS_PROC_TRIGGER": 2048
+      }
+    },
+    "AttributesEx1": {
+      "kind": "flags",
+      "underlying": "uint32",
+      "values": {
+        "ALLOW_WHILE_STEALTHED": 32,
+        "AURA_STAYS_AFTER_COMBAT": 33554432,
+        "AURA_UNIQUE": 2048,
+        "CAST_WHEN_LEARNED": 2147483648,
+        "COMBO_ON_BLOCK": 1073741824,
+        "DISCOUNT_POWER_ON_MISS": 134217728,
+        "DISMISS_PET_FIRST": 1,
+        "EXCLUDE_CASTER": 524288,
+        "FAILURE_BREAKS_STEALTH": 4096,
+        "FINISHING_MOVE_DAMAGE": 1048576,
+        "FINISHING_MOVE_DURATION": 4194304,
+        "IMMUNITY_PURGES_EFFECT": 32768,
+        "IMMUNITY_TO_HOSTILE_AND_FRIENDLY_EFFECTS": 65536,
+        "INITIATES_COMBAT_ENABLES_AUTO_ATTACK": 512,
+        "IS_CHANNELED": 4,
+        "IS_SELF_CHANNELED": 64,
+        "NAME_IN_CHANNEL_BAR": 536870912,
+        "NONE": 0,
+        "NO_AURA_ICON": 268435456,
+        "NO_AUTOCAST_AI": 131072,
+        "NO_REDIRECTION": 8,
+        "NO_REFLECTION": 128,
+        "NO_SKILL_INCREASE": 16,
+        "NO_THREAT": 1024,
+        "ONLY_PEACEFUL_TARGETS": 256,
+        "PREVENTS_ANIM": 262144,
+        "REQUIRE_ALL_TARGETS": 67108864,
+        "SPECIAL_SKILLUP": 16777216,
+        "THREAT_ONLY_ON_MISS": 2097152,
+        "TOGGLE_FARSIGHT": 8192,
+        "TRACK_TARGET_IN_CHANNEL": 16384,
+        "UNK23": 8388608,
+        "USE_ALL_MANA": 2
+      }
+    },
+    "AttributesEx2": {
+      "kind": "flags",
+      "underlying": "uint32",
+      "values": {
+        "ACTIVE_THREAT": 1073741824,
+        "ALLOW_DEAD_TARGET": 1,
+        "ALLOW_LOW_LEVEL_BUFF": 8,
+        "ALLOW_WHILE_INVISIBLE": 16384,
+        "ALLOW_WHILE_NOT_SHAPESHIFTED": 524288,
+        "ALWAYS_CAST_AS_UNIT": 512,
+        "AUTO_REPEAT": 32,
+        "CANNOT_CAST_ON_TAPPED": 64,
+        "CANT_CRIT": 536870912,
+        "CHAIN_FROM_CASTER": 4096,
+        "DONT_BLOCK_MANA_REGEN": 33554432,
+        "DO_NOT_REPORT_SPELL_FAILURE": 128,
+        "DO_NOT_RESET_COMBAT_TIMERS": 131072,
+        "ENCHANT_OWN_ITEM_ONLY": 8192,
+        "FAIL_ON_ALL_TARGETS_IMMUNE": 2097152,
+        "IGNORE_LINE_OF_SIGHT": 4,
+        "IGNORE_WEAPONSKILL": 134217728,
+        "INCLUDE_IN_ADVANCED_COMBAT_LOG": 256,
+        "INITIATE_COMBAT_POST_CAST": 1048576,
+        "ITEM_CAST_WITH_OWNER_SKILL": 16777216,
+        "NONE": 0,
+        "NOT_AN_ACTION": 268435456,
+        "NO_ACTIVE_PETS": 65536,
+        "NO_INITIAL_THREAT": 4194304,
+        "NO_SCHOOL_IMMUNITIES": 67108864,
+        "NO_SHAPESHIFT_UI": 2,
+        "NO_TARGET_PER_SECOND_COSTS": 2048,
+        "PROC_COOLDOWN_ON_FAILURE": 8388608,
+        "REQ_DEAD_PET": 262144,
+        "RETAIN_ITEM_CAST": 2147483648,
+        "SPECIAL_TAMING_FLAG": 1024,
+        "UNK15": 32768,
+        "USE_SHAPESHIFT_BAR": 16
+      }
+    },
+    "AttributesEx3": {
+      "kind": "flags",
+      "underlying": "uint32",
+      "values": {
+        "ALLOW_AURA_WHILE_DEAD": 1048576,
+        "ALWAYS_HIT": 262144,
+        "CAN_PROC_FROM_PROCS": 67108864,
+        "CASTING_CANCELS_AUTOREPEAT": 4194304,
+        "COMPLETELY_BLOCKED": 8,
+        "DOT_STACKING_RULE": 128,
+        "DO_NOT_DISPLAY_RANGE": 1073741824,
+        "HIDE_CHANNEL_BAR": 8192,
+        "HIDE_IN_RAID_FILTER": 16384,
+        "IGNORE_CASTER_AND_TARGET_RESTRICTIONS": 268435456,
+        "IGNORE_CASTER_MODIFIERS": 536870912,
+        "INSTANT_TARGET_PROCS": 524288,
+        "NONE": 0,
+        "NORMAL_RANGED_ATTACK": 32768,
+        "NOT_A_PROC": 512,
+        "NOT_ON_AOE_IMMUNE": 2147483648,
+        "NO_AVOIDANCE": 64,
+        "NO_CASTING_BAR_TEXT": 4,
+        "NO_DAMAGE_HISTORY": 8388608,
+        "NO_DURABILITY_LOSS": 32,
+        "NO_PROC_EQUIP_REQUIREMENT": 2,
+        "NO_RES_TIMER": 16,
+        "ONLY_BATTLEGROUNDS": 2048,
+        "ONLY_ON_GHOSTS": 4096,
+        "ONLY_ON_PLAYER": 256,
+        "ONLY_PROC_ON_CASTER": 134217728,
+        "ONLY_PROC_OUTDOORS": 2097152,
+        "PVP_ENABLING": 1,
+        "REQUIRES_MAIN_HAND_WEAPON": 1024,
+        "REQUIRES_OFFHAND_WEAPON": 16777216,
+        "SUPPRESS_CASTER_PROCS": 65536,
+        "SUPPRESS_TARGET_PROCS": 131072,
+        "TREAT_AS_PERIODIC": 33554432
+      }
+    },
+    "AttributesEx4": {
+      "kind": "flags",
+      "underlying": "uint32",
+      "values": {
+        "ALLOW_CAST_WHILE_CASTING": 128,
+        "ALLOW_CLIENT_TARGETING": 32,
+        "AURA_EXPIRES_OFFLINE": 4,
+        "CANNOT_BE_STOLEN": 64,
+        "CLASS_TRIGGER_ONLY_ON_TARGET": 2,
+        "COMBAT_FEEDBACK_WHEN_USABLE": 512,
+        "IGNORE_DAMAGE_TAKEN_MODIFIERS": 256,
+        "NONE": 0,
+        "NO_CAST_LOG": 1,
+        "NO_HARMFUL_THREAT": 16,
+        "NO_HELPFUL_THREAT": 8,
+        "NO_PARTIAL_IMMUNITY": 2048,
+        "WEAPON_SPEED_COST_SCALING": 1024
+      }
+    },
+    "AuctionCommandAction": {
+      "kind": "enum",
+      "underlying": "uint32",
+      "values": {
+        "BID_PLACED": 2,
+        "REMOVED": 1,
+        "STARTED": 0
+      }
+    },
+    "AuctionCommandResult": {
+      "kind": "enum",
+      "underlying": "uint32",
+      "values": {
+        "ERR_BID_INCREMENT": 7,
+        "ERR_BID_OWN": 10,
+        "ERR_DATABASE": 2,
+        "ERR_HIGHER_BID": 5,
+        "ERR_INVENTORY": 1,
+        "ERR_ITEM_NOT_FOUND": 4,
+        "ERR_NOT_ENOUGH_MONEY": 3,
+        "ERR_RESTRICTED_ACCOUNT": 13,
+        "OK": 0
+      }
+    },
+    "AuctionCommandResultTwo": {
+      "kind": "enum",
+      "underlying": "uint32",
+      "values": {
+        "ERR_BID_INCREMENT": 7,
+        "ERR_BID_OWN": 10,
+        "ERR_DATABASE": 2,
+        "ERR_HIGHER_BID": 5,
+        "ERR_INVENTORY": 1,
+        "ERR_ITEM_NOT_FOUND": 4,
+        "ERR_NOT_ENOUGH_MONEY": 3,
+        "ERR_RESTRICTED_ACCOUNT": 13,
+        "OK": 0
+      }
+    },
+    "AuctionHouse": {
+      "kind": "enum",
+      "underlying": "uint32",
+      "values": {
+        "ALLIANCE": 2,
+        "DARNASSUS": 3,
+        "GOBLIN": 7,
+        "HORDE": 6,
+        "STORMWIND": 1,
+        "THUNDER_BLUFF": 5,
+        "UNDERCITY": 4
+      }
+    },
+    "AuctionListItem": {
+      "kind": "struct",
+      "fields": [
+        {
+          "name": "id",
+          "type": "uint32"
+        },
+        {
+          "name": "item",
+          "type": "Item"
+        },
+        {
+          "name": "item_enchantment",
+          "type": "uint32"
+        },
+        {
+          "name": "item_random_property_id",
+          "type": "uint32"
+        },
+        {
+          "name": "item_suffix_factor",
+          "type": "uint32"
+        },
+        {
+          "name": "item_count",
+          "type": "uint32"
+        },
+        {
+          "name": "item_charges",
+          "type": "uint32"
+        },
+        {
+          "name": "item_owner",
+          "type": "uint64"
+        },
+        {
+          "name": "start_bid",
+          "type": "uint32"
+        },
+        {
+          "name": "minimum_bid",
+          "type": "uint32"
+        },
+        {
+          "name": "buyout_amount",
+          "type": "uint32"
+        },
+        {
+          "name": "time_left",
+          "type": "Milliseconds"
+        },
+        {
+          "name": "highest_bidder",
+          "type": "uint64"
+        },
+        {
+          "name": "highest_bid",
+          "type": "uint32"
+        }
+      ]
+    },
+    "AuraLog": {
+      "kind": "struct",
+      "fields": [
+        {
+          "name": "aura_type",
+          "type": "AuraType"
+        }
+      ]
+    },
+    "AuraMod": {
+      "kind": "enum",
+      "underlying": "uint32",
+      "values": {
+        "ADD_CASTER_HIT_TRIGGER": 111,
+        "ADD_FLAT_MODIFIER": 107,
+        "ADD_PCT_MODIFIER": 108,
+        "ADD_TARGET_TRIGGER": 109,
+        "ALLOW_CHAMPION_SPELLS": 173,
+        "AOE_CHARM": 177,
+        "AURAS_VISIBLE": 100,
+        "BIND_SIGHT": 1,
+        "CHANNEL_DEATH_ITEM": 86,
+        "CHARISMA": 145,
+        "DAMAGE_IMMUNITY": 40,
+        "DAMAGE_SHIELD": 15,
+        "DETECT_AMORE": 170,
+        "DISPEL_IMMUNITY": 41,
+        "DUMMY": 4,
+        "EFFECT_IMMUNITY": 37,
+        "EMPATHY": 121,
+        "EXTRA_ATTACKS": 70,
+        "FAR_SIGHT": 76,
+        "FEATHER_FALL": 105,
+        "FEIGN_DEATH": 66,
+        "FORCE_REACTION": 139,
+        "GHOST": 95,
+        "HOVER": 106,
+        "INTERRUPT_REGEN": 94,
+        "MANA_SHIELD": 97,
+        "MECHANIC_IMMUNITY": 77,
+        "MECHANIC_IMMUNITY_MASK": 147,
+        "MELEE_ATTACK_POWER_ATTACKER_BONUS": 165,
+        "MOD_AOE_AVOIDANCE": 160,
+        "MOD_ATTACKER_MELEE_CRIT_CHANCE": 187,
+        "MOD_ATTACKER_MELEE_HIT_CHANCE": 184,
+        "MOD_ATTACKER_RANGED_CRIT_CHANCE": 188,
+        "MOD_ATTACKER_RANGED_HIT_CHANCE": 185,
+        "MOD_ATTACKER_SPELL_CRIT_CHANCE": 179,
+        "MOD_ATTACKER_SPELL_HIT_CHANCE": 186,
+        "MOD_ATTACKSPEED": 9,
+        "MOD_ATTACK_POWER": 99,
+        "MOD_ATTACK_POWER_PCT": 166,
+        "MOD_BASE_RESISTANCE": 83,
+        "MOD_BASE_RESISTANCE_PCT": 142,
+        "MOD_BLOCK_PERCENT": 51,
+        "MOD_BLOCK_SKILL": 50,
+        "MOD_CASTING_SPEED_NOT_STACK": 65,
+        "MOD_CHARM": 6,
+        "MOD_CONFUSE": 5,
+        "MOD_CRITICAL_THREAT": 183,
+        "MOD_CRIT_DAMAGE_BONUS": 163,
+        "MOD_CRIT_PERCENT": 52,
+        "MOD_CRIT_PERCENT_VERSUS": 169,
+        "MOD_DAMAGE_DONE": 13,
+        "MOD_DAMAGE_DONE_CREATURE": 59,
+        "MOD_DAMAGE_DONE_VERSUS": 168,
+        "MOD_DAMAGE_PERCENT_DONE": 79,
+        "MOD_DAMAGE_PERCENT_TAKEN": 87,
+        "MOD_DAMAGE_TAKEN": 14,
+        "MOD_DEBUFF_RESISTANCE": 178,
+        "MOD_DECREASE_SPEED": 33,
+        "MOD_DETECTED_RANGE": 152,
+        "MOD_DETECT_RANGE": 91,
+        "MOD_DISARM": 67,
+        "MOD_DODGE_PERCENT": 49,
+        "MOD_DODGE_SKILL": 48,
+        "MOD_FACTION_REPUTATION_GAIN": 190,
+        "MOD_FEAR": 7,
+        "MOD_FLAT_SPELL_CRIT_DAMAGE_VERSUS": 181,
+        "MOD_FLAT_SPELL_DAMAGE_VERSUS": 180,
+        "MOD_HEALING": 115,
+        "MOD_HEALING_DONE": 135,
+        "MOD_HEALING_DONE_PERCENT": 136,
+        "MOD_HEALING_PCT": 118,
+        "MOD_HEALTH_REGEN_IN_COMBAT": 161,
+        "MOD_HEALTH_REGEN_PERCENT": 88,
+        "MOD_HIT_CHANCE": 54,
+        "MOD_INCREASE_ENERGY": 35,
+        "MOD_INCREASE_ENERGY_PERCENT": 132,
+        "MOD_INCREASE_HEALTH": 34,
+        "MOD_INCREASE_HEALTH_PERCENT": 133,
+        "MOD_INCREASE_MOUNTED_SPEED": 32,
+        "MOD_INCREASE_SPEED": 31,
+        "MOD_INCREASE_SWIM_SPEED": 58,
+        "MOD_INVISIBILITY": 18,
+        "MOD_INVISIBILITY_DETECTION": 19,
+        "MOD_LANGUAGE": 75,
+        "MOD_MANA_REGEN_INTERRUPT": 134,
+        "MOD_MECHANIC_RESISTANCE": 117,
+        "MOD_MELEE_ATTACK_POWER_VERSUS": 102,
+        "MOD_MELEE_DAMAGE_TAKEN": 125,
+        "MOD_MELEE_DAMAGE_TAKEN_PCT": 126,
+        "MOD_MELEE_HASTE": 138,
+        "MOD_MOUNTED_SPEED_ALWAYS": 130,
+        "MOD_MOUNTED_SPEED_NOT_STACK": 172,
+        "MOD_OFFHAND_DAMAGE_PCT": 122,
+        "MOD_PACIFY": 25,
+        "MOD_PACIFY_SILENCE": 60,
+        "MOD_PARRY_PERCENT": 47,
+        "MOD_PARRY_SKILL": 46,
+        "MOD_PERCENT_STAT": 80,
+        "MOD_POSSESS": 2,
+        "MOD_POSSESS_PET": 128,
+        "MOD_POWER_COST_SCHOOL": 73,
+        "MOD_POWER_COST_SCHOOL_PCT": 72,
+        "MOD_POWER_REGEN": 85,
+        "MOD_POWER_REGEN_PERCENT": 110,
+        "MOD_RANGED_AMMO_HASTE": 141,
+        "MOD_RANGED_ATTACK_POWER": 124,
+        "MOD_RANGED_ATTACK_POWER_PCT": 167,
+        "MOD_RANGED_ATTACK_POWER_VERSUS": 131,
+        "MOD_RANGED_DAMAGE_TAKEN": 113,
+        "MOD_RANGED_DAMAGE_TAKEN_PCT": 114,
+        "MOD_RANGED_HASTE": 140,
+        "MOD_RATING": 189,
+        "MOD_REGEN": 84,
+        "MOD_REGEN_DURING_COMBAT": 116,
+        "MOD_REPUTATION_GAIN": 156,
+        "MOD_RESISTANCE": 22,
+        "MOD_RESISTANCE_EXCLUSIVE": 143,
+        "MOD_RESISTANCE_OF_STAT_PERCENT": 182,
+        "MOD_RESISTANCE_PCT": 101,
+        "MOD_RESIST_CHANCE": 90,
+        "MOD_ROOT": 26,
+        "MOD_SCALE": 61,
+        "MOD_SHAPESHIFT": 36,
+        "MOD_SHIELD_BLOCKVALUE": 158,
+        "MOD_SHIELD_BLOCKVALUE_PCT": 150,
+        "MOD_SILENCE": 27,
+        "MOD_SKILL": 30,
+        "MOD_SKILL_TALENT": 98,
+        "MOD_SPEED_ALWAYS": 129,
+        "MOD_SPEED_NOT_STACK": 171,
+        "MOD_SPELL_CRIT_CHANCE": 57,
+        "MOD_SPELL_CRIT_CHANCE_SCHOOL": 71,
+        "MOD_SPELL_DAMAGE_OF_STAT_PERCENT": 174,
+        "MOD_SPELL_HEALING_OF_STAT_PERCENT": 175,
+        "MOD_SPELL_HIT_CHANCE": 55,
+        "MOD_STALKED": 68,
+        "MOD_STAT": 29,
+        "MOD_STEALTH": 16,
+        "MOD_STEALTH_DETECT": 17,
+        "MOD_STEALTH_LEVEL": 154,
+        "MOD_STUN": 12,
+        "MOD_TARGET_RESISTANCE": 123,
+        "MOD_TAUNT": 11,
+        "MOD_THREAT": 10,
+        "MOD_TOTAL_STAT_PERCENTAGE": 137,
+        "MOD_TOTAL_THREAT": 103,
+        "MOD_UNATTACKABLE": 93,
+        "MOD_WATER_BREATHING": 155,
+        "MOUNTED": 78,
+        "NONE": 0,
+        "NO_PVP_CREDIT": 159,
+        "OBS_MOD_HEALTH": 20,
+        "OBS_MOD_MANA": 21,
+        "OVERRIDE_CLASS_SCRIPTS": 112,
+        "PERIODIC_DAMAGE": 3,
+        "PERIODIC_DAMAGE_PERCENT": 89,
+        "PERIODIC_ENERGIZE": 24,
+        "PERIODIC_HEAL": 8,
+        "PERIODIC_HEALTH_FUNNEL": 62,
+        "PERIODIC_LEECH": 53,
+        "PERIODIC_MANA_FUNNEL": 63,
+        "PERIODIC_MANA_LEECH": 64,
+        "PERIODIC_TRIGGER_SPELL": 23,
+        "PERSUADED": 146,
+        "PET_DAMAGE_MULTI": 157,
+        "POWER_BURN_MANA": 162,
+        "PREVENTS_FLEEING": 92,
+        "PROC_TRIGGER_DAMAGE": 43,
+        "PROC_TRIGGER_SPELL": 42,
+        "RANGED_ATTACK_POWER_ATTACKER_BONUS": 127,
+        "REFLECT_SPELLS": 28,
+        "REFLECT_SPELLS_SCHOOL": 74,
+        "RESIST_PUSHBACK": 149,
+        "RETAIN_COMBO_POINTS": 148,
+        "SAFE_FALL": 144,
+        "SCHOOL_ABSORB": 69,
+        "SCHOOL_IMMUNITY": 39,
+        "SHARE_PET_TRACKING": 119,
+        "SPELL_MAGNET": 96,
+        "SPIRIT_OF_REDEMPTION": 176,
+        "SPLIT_DAMAGE_FLAT": 153,
+        "SPLIT_DAMAGE_PCT": 81,
+        "STATE_IMMUNITY": 38,
+        "TRACK_CREATURES": 44,
+        "TRACK_RESOURCES": 45,
+        "TRACK_STEALTHED": 151,
+        "TRANSFORM": 56,
+        "UNKNOWN164": 164,
+        "UNTRACKABLE": 120,
+        "USE_NORMAL_MOVEMENT_SPEED": 191,
+        "WATER_BREATHING": 82,
+        "WATER_WALK": 104
+      }
+    },
+    "AuraType": {
+      "kind": "enum",
+      "underlying": "uint32",
+      "values": {
+        "ADD_CASTER_HIT_TRIGGER": 111,
+        "ADD_FLAT_MODIFIER": 107,
+        "ADD_PCT_MODIFIER": 108,
+        "ADD_TARGET_TRIGGER": 109,
+        "ALLOW_CHAMPION_SPELLS": 173,
+        "AOE_CHARM": 177,
+        "AURAS_VISIBLE": 100,
+        "BIND_SIGHT": 1,
+        "CHANNEL_DEATH_ITEM": 86,
+        "CHARISMA": 145,
+        "DAMAGE_IMMUNITY": 40,
+        "DAMAGE_SHIELD": 15,
+        "DETECT_AMORE": 170,
+        "DISPEL_IMMUNITY": 41,
+        "DUMMY": 4,
+        "EFFECT_IMMUNITY": 37,
+        "EMPATHY": 121,
+        "EXTRA_ATTACKS": 70,
+        "FAR_SIGHT": 76,
+        "FEATHER_FALL": 105,
+        "FEIGN_DEATH": 66,
+        "FORCE_REACTION": 139,
+        "GHOST": 95,
+        "HOVER": 106,
+        "INTERRUPT_REGEN": 94,
+        "MANA_SHIELD": 97,
+        "MECHANIC_IMMUNITY": 77,
+        "MECHANIC_IMMUNITY_MASK": 147,
+        "MELEE_ATTACK_POWER_ATTACKER_BONUS": 165,
+        "MOD_AOE_AVOIDANCE": 160,
+        "MOD_ATTACKER_MELEE_CRIT_CHANCE": 187,
+        "MOD_ATTACKER_MELEE_HIT_CHANCE": 184,
+        "MOD_ATTACKER_RANGED_CRIT_CHANCE": 188,
+        "MOD_ATTACKER_RANGED_HIT_CHANCE": 185,
+        "MOD_ATTACKER_SPELL_CRIT_CHANCE": 179,
+        "MOD_ATTACKER_SPELL_HIT_CHANCE": 186,
+        "MOD_ATTACKSPEED": 9,
+        "MOD_ATTACK_POWER": 99,
+        "MOD_ATTACK_POWER_PCT": 166,
+        "MOD_BASE_RESISTANCE": 83,
+        "MOD_BASE_RESISTANCE_PCT": 142,
+        "MOD_BLOCK_PERCENT": 51,
+        "MOD_BLOCK_SKILL": 50,
+        "MOD_CASTING_SPEED_NOT_STACK": 65,
+        "MOD_CHARM": 6,
+        "MOD_CONFUSE": 5,
+        "MOD_CRITICAL_THREAT": 183,
+        "MOD_CRIT_DAMAGE_BONUS": 163,
+        "MOD_CRIT_PERCENT": 52,
+        "MOD_CRIT_PERCENT_VERSUS": 169,
+        "MOD_DAMAGE_DONE": 13,
+        "MOD_DAMAGE_DONE_CREATURE": 59,
+        "MOD_DAMAGE_DONE_VERSUS": 168,
+        "MOD_DAMAGE_PERCENT_DONE": 79,
+        "MOD_DAMAGE_PERCENT_TAKEN": 87,
+        "MOD_DAMAGE_TAKEN": 14,
+        "MOD_DEBUFF_RESISTANCE": 178,
+        "MOD_DECREASE_SPEED": 33,
+        "MOD_DETECTED_RANGE": 152,
+        "MOD_DETECT_RANGE": 91,
+        "MOD_DISARM": 67,
+        "MOD_DODGE_PERCENT": 49,
+        "MOD_FACTION_REPUTATION_GAIN": 190,
+        "MOD_FEAR": 7,
+        "MOD_FLAT_SPELL_CRIT_DAMAGE_VERSUS": 181,
+        "MOD_FLAT_SPELL_DAMAGE_VERSUS": 180,
+        "MOD_HEALING": 115,
+        "MOD_HEALING_DONE": 135,
+        "MOD_HEALING_DONE_PERCENT": 136,
+        "MOD_HEALING_PCT": 118,
+        "MOD_HEALTH_REGEN_IN_COMBAT": 161,
+        "MOD_HEALTH_REGEN_PERCENT": 88,
+        "MOD_HIT_CHANCE": 54,
+        "MOD_INCREASE_ENERGY": 35,
+        "MOD_INCREASE_ENERGY_PERCENT": 132,
+        "MOD_INCREASE_HEALTH": 34,
+        "MOD_INCREASE_HEALTH_PERCENT": 133,
+        "MOD_INCREASE_MOUNTED_SPEED": 32,
+        "MOD_INCREASE_SPEED": 31,
+        "MOD_INCREASE_SWIM_SPEED": 58,
+        "MOD_INVISIBILITY": 18,
+        "MOD_INVISIBILITY_DETECTION": 19,
+        "MOD_LANGUAGE": 75,
+        "MOD_MANA_REGEN_INTERRUPT": 134,
+        "MOD_MECHANIC_RESISTANCE": 117,
+        "MOD_MELEE_ATTACK_POWER_VERSUS": 102,
+        "MOD_MELEE_DAMAGE_TAKEN": 125,
+        "MOD_MELEE_DAMAGE_TAKEN_PCT": 126,
+        "MOD_MELEE_HASTE": 138,
+        "MOD_MOUNTED_SPEED_ALWAYS": 130,
+        "MOD_MOUNTED_SPEED_NOT_STACK": 172,
+        "MOD_OFFHAND_DAMAGE_PCT": 122,
+        "MOD_PACIFY": 25,
+        "MOD_PACIFY_SILENCE": 60,
+        "MOD_PARRY_PERCENT": 47,
+        "MOD_PERCENT_STAT": 80,
+        "MOD_POSSESS": 2,
+        "MOD_POSSESS_PET": 128,
+        "MOD_POWER_COST_SCHOOL": 73,
+        "MOD_POWER_COST_SCHOOL_PCT": 72,
+        "MOD_POWER_REGEN": 85,
+        "MOD_POWER_REGEN_PERCENT": 110,
+        "MOD_RANGED_AMMO_HASTE": 141,
+        "MOD_RANGED_ATTACK_POWER": 124,
+        "MOD_RANGED_ATTACK_POWER_PCT": 167,
+        "MOD_RANGED_ATTACK_POWER_VERSUS": 131,
+        "MOD_RANGED_DAMAGE_TAKEN": 113,
+        "MOD_RANGED_DAMAGE_TAKEN_PCT": 114,
+        "MOD_RANGED_HASTE": 140,
+        "MOD_RATING": 189,
+        "MOD_REGEN": 84,
+        "MOD_REGEN_DURING_COMBAT": 116,
+        "MOD_REPUTATION_GAIN": 156,
+        "MOD_RESISTANCE": 22,
+        "MOD_RESISTANCE_EXCLUSIVE": 143,
+        "MOD_RESISTANCE_OF_STAT_PERCENT": 182,
+        "MOD_RESISTANCE_PCT": 101,
+        "MOD_RESIST_CHANCE": 90,
+        "MOD_ROOT": 26,
+        "MOD_SCALE": 61,
+        "MOD_SHAPESHIFT": 36,
+        "MOD_SHIELD_BLOCKVALUE": 158,
+        "MOD_SHIELD_BLOCKVALUE_PCT": 150,
+        "MOD_SILENCE": 27,
+        "MOD_SKILL": 30,
+        "MOD_SKILL_TALENT": 98,
+        "MOD_SPEED_ALWAYS": 129,
+        "MOD_SPEED_NOT_STACK": 171,
+        "MOD_SPELL_CRIT_CHANCE": 57,
+        "MOD_SPELL_CRIT_CHANCE_SCHOOL": 71,
+        "MOD_SPELL_DAMAGE_OF_STAT_PERCENT": 174,
+        "MOD_SPELL_HEALING_OF_STAT_PERCENT": 175,
+        "MOD_SPELL_HIT_CHANCE": 55,
+        "MOD_STALKED": 68,
+        "MOD_STAT": 29,
+        "MOD_STEALTH": 16,
+        "MOD_STEALTH_DETECT": 17,
+        "MOD_STEALTH_LEVEL": 154,
+        "MOD_STUN": 12,
+        "MOD_TARGET_RESISTANCE": 123,
+        "MOD_TAUNT": 11,
+        "MOD_THREAT": 10,
+        "MOD_TOTAL_STAT_PERCENTAGE": 137,
+        "MOD_TOTAL_THREAT": 103,
+        "MOD_UNATTACKABLE": 93,
+        "MOD_WATER_BREATHING": 155,
+        "MOUNTED": 78,
+        "NONE": 0,
+        "NO_PVP_CREDIT": 159,
+        "OBS_MOD_HEALTH": 20,
+        "OBS_MOD_MANA": 21,
+        "OVERRIDE_CLASS_SCRIPTS": 112,
+        "PERIODIC_DAMAGE": 3,
+        "PERIODIC_DAMAGE_PERCENT": 89,
+        "PERIODIC_ENERGIZE": 24,
+        "PERIODIC_HEAL": 8,
+        "PERIODIC_HEALTH_FUNNEL": 62,
+        "PERIODIC_LEECH": 53,
+        "PERIODIC_MANA_FUNNEL": 63,
+        "PERIODIC_MANA_LEECH": 64,
+        "PERIODIC_TRIGGER_SPELL": 23,
+        "PERSUADED": 146,
+        "PET_DAMAGE_MULTI": 157,
+        "POWER_BURN_MANA": 162,
+        "PREVENTS_FLEEING": 92,
+        "PROC_TRIGGER_DAMAGE": 43,
+        "PROC_TRIGGER_SPELL": 42,
+        "RANGED_ATTACK_POWER_ATTACKER_BONUS": 127,
+        "REFLECT_SPELLS": 28,
+        "REFLECT_SPELLS_SCHOOL": 74,
+        "RESIST_PUSHBACK": 149,
+        "RETAIN_COMBO_POINTS": 148,
+        "SAFE_FALL": 144,
+        "SCHOOL_ABSORB": 69,
+        "SCHOOL_IMMUNITY": 39,
+        "SHARE_PET_TRACKING": 119,
+        "SPELL_MAGNET": 96,
+        "SPIRIT_OF_REDEMPTION": 176,
+        "SPLIT_DAMAGE_FLAT": 153,
+        "SPLIT_DAMAGE_PCT": 81,
+        "STATE_IMMUNITY": 38,
+        "TRACK_CREATURES": 44,
+        "TRACK_RESOURCES": 45,
+        "TRACK_STEALTHED": 151,
+        "TRANSFORM": 56,
+        "UNKNOWN164": 164,
+        "UNKNOWN46": 46,
+        "UNKNOWN48": 48,
+        "UNTRACKABLE": 120,
+        "USE_NORMAL_MOVEMENT_SPEED": 191,
+        "WATER_BREATHING": 82,
+        "WATER_WALK": 104
+      }
+    },
+    "BagFamily": {
+      "kind": "enum",
+      "underlying": "uint8",
+      "values": {
+        "ARROWS": 1,
+        "BULLETS": 2,
+        "ENCHANTING_SUPPLIES": 7,
+        "ENGINEERING_SUPPLIES": 8,
+        "HERBS": 6,
+        "KEYS": 9,
+        "NONE": 0,
+        "SOUL_SHARDS": 3,
+        "UNKNOWN4": 4,
+        "UNKNOWN5": 5
+      }
+    },
+    "BattlefieldPortAction": {
+      "kind": "enum",
+      "underlying": "uint8",
+      "values": {
+        "ENTER_BATTLE": 1,
+        "LEAVE_QUEUE": 0
+      }
+    },
+    "BattlegroundBracket": {
+      "kind": "enum",
+      "underlying": "uint8",
+      "values": {
+        "FIFTIES": 4,
+        "FORTIES": 3,
+        "SIXTY": 5,
+        "TENS": 0,
+        "THIRTIES": 2,
+        "TWENTIES": 1
+      }
+    },
+    "BattlegroundEndStatus": {
+      "kind": "enum",
+      "underlying": "uint8",
+      "values": {
+        "ENDED": 1,
+        "NOT_ENDED": 0
+      }
+    },
+    "BattlegroundPlayer": {
+      "kind": "struct",
+      "fields": [
+        {
+          "name": "player",
+          "type": "uint64"
+        },
+        {
+          "name": "rank",
+          "type": "PvpRank"
+        },
+        {
+          "name": "killing_blows",
+          "type": "uint32"
+        },
+        {
+          "name": "honorable_kills",
+          "type": "uint32"
+        },
+        {
+          "name": "deaths",
+          "type": "uint32"
+        },
+        {
+          "name": "bonus_honor",
+          "type": "uint32"
+        },
+        {
+          "name": "amount_of_extra_fields",
+          "type": "uint32"
+        },
+        {
+          "name": "fields",
+          "type": "u32",
+          "array": {
+            "count_field": "amount_of_extra_fields"
+          }
+        }
+      ]
+    },
+    "BattlegroundPlayerPosition": {
+      "kind": "struct",
+      "fields": [
+        {
+          "name": "player",
+          "type": "uint64"
+        },
+        {
+          "name": "position_x",
+          "type": "float"
+        },
+        {
+          "name": "position_y",
+          "type": "float"
+        }
+      ]
+    },
+    "BattlegroundWinner": {
+      "kind": "enum",
+      "underlying": "uint8",
+      "values": {
+        "ALLIANCE": 1,
+        "HORDE": 0,
+        "NONE": 2
+      }
+    },
+    "BgTypeId": {
+      "kind": "enum",
+      "underlying": "uint32",
+      "values": {
+        "NOT_ELIGIBLE": 0,
+        "QUEUED_FOR_AB": 3,
+        "QUEUED_FOR_AV": 1,
+        "QUEUED_FOR_WSG": 2,
+        "REMOVE_FROM_QUEUE": 4294967294
+      }
+    },
+    "Bonding": {
+      "kind": "enum",
+      "underlying": "uint8",
+      "values": {
+        "EQUIP": 2,
+        "NO_BIND": 0,
+        "PICK_UP": 1,
+        "QUEST_ITEM": 4,
+        "QUEST_ITEM1": 5,
+        "USE": 3
+      }
+    },
+    "BuyBankSlotResult": {
+      "kind": "enum",
+      "underlying": "uint32",
+      "values": {
+        "FAILED_TOO_MANY": 0,
+        "INSUFFICIENT_FUNDS": 1,
+        "NOT_BANKER": 2,
+        "OK": 3
+      }
+    },
+    "BuyResult": {
+      "kind": "enum",
+      "underlying": "uint8",
+      "values": {
+        "CANT_CARRY_MORE": 8,
+        "CANT_FIND_ITEM": 0,
+        "DISTANCE_TOO_FAR": 5,
+        "ITEM_ALREADY_SOLD": 1,
+        "ITEM_SOLD_OUT": 7,
+        "NOT_ENOUGH_MONEY": 2,
+        "RANK_REQUIRE": 11,
+        "REPUTATION_REQUIRE": 12,
+        "SELLER_DONT_LIKE_YOU": 4
+      }
+    },
+    "BuybackSlot": {
+      "kind": "enum",
+      "underlying": "uint32",
+      "values": {
+        "SLOT1": 69,
+        "SLOT10": 78,
+        "SLOT11": 79,
+        "SLOT12": 80,
+        "SLOT13": 81,
+        "SLOT2": 70,
+        "SLOT3": 71,
+        "SLOT4": 72,
+        "SLOT5": 73,
+        "SLOT6": 74,
+        "SLOT7": 75,
+        "SLOT8": 76,
+        "SLOT9": 77
+      }
+    },
+    "CString": {
+      "kind": "string",
+      "encoding": "null_terminated"
+    },
+    "CastFailureReason": {
+      "kind": "enum",
+      "underlying": "uint8",
+      "values": {
+        "AFFECTING_COMBAT": 0,
+        "ALREADY_AT_FULL_HEALTH": 1,
+        "ALREADY_AT_FULL_POWER": 2,
+        "ALREADY_BEING_TAMED": 3,
+        "ALREADY_HAVE_CHARM": 4,
+        "ALREADY_HAVE_SUMMON": 5,
+        "ALREADY_OPEN": 6,
+        "AURA_BOUNCED": 7,
+        "AUTOTRACK_INTERRUPTED": 8,
+        "BAD_IMPLICIT_TARGETS": 9,
+        "BAD_TARGETS": 10,
+        "CANT_BE_CHARMED": 11,
+        "CANT_BE_DISENCHANTED": 12,
+        "CANT_BE_PROSPECTED": 13,
+        "CANT_CAST_ON_TAPPED": 14,
+        "CANT_DUEL_WHILE_INVISIBLE": 15,
+        "CANT_DUEL_WHILE_STEALTHED": 16,
+        "CANT_STEALTH": 17,
+        "CASTER_AURASTATE": 18,
+        "CASTER_DEAD": 19,
+        "CHARMED": 20,
+        "CHEST_IN_USE": 21,
+        "CONFUSED": 22,
+        "DAMAGE_IMMUNE": 140,
+        "DISENCHANT_WHILE_LOOTING": 130,
+        "DONT_REPORT": 23,
+        "EQUIPPED_ITEM": 24,
+        "EQUIPPED_ITEM_CLASS": 25,
+        "EQUIPPED_ITEM_CLASS_MAINHAND": 26,
+        "EQUIPPED_ITEM_CLASS_OFFHAND": 27,
+        "ERROR": 28,
+        "FIZZLE": 29,
+        "FLEEING": 30,
+        "FOOD_LOWLEVEL": 31,
+        "HIGHLEVEL": 32,
+        "HUNGER_SATIATED": 33,
+        "IMMUNE": 34,
+        "INTERRUPTED": 35,
+        "INTERRUPTED_COMBAT": 36,
+        "ITEM_ALREADY_ENCHANTED": 37,
+        "ITEM_GONE": 38,
+        "ITEM_NOT_FOUND": 39,
+        "ITEM_NOT_READY": 40,
+        "LEVEL_REQUIREMENT": 41,
+        "LINE_OF_SIGHT": 42,
+        "LOWLEVEL": 43,
+        "LOW_CASTLEVEL": 44,
+        "MAINHAND_EMPTY": 45,
+        "MIN_SKILL": 144,
+        "MOVING": 46,
+        "NEED_AMMO": 47,
+        "NEED_AMMO_POUCH": 48,
+        "NEED_EXOTIC_AMMO": 49,
+        "NOPATH": 50,
+        "NOTHING_TO_DISPEL": 78,
+        "NOTHING_TO_STEAL": 79,
+        "NOT_BEHIND": 51,
+        "NOT_FISHABLE": 52,
+        "NOT_HERE": 53,
+        "NOT_INFRONT": 54,
+        "NOT_IN_CONTROL": 55,
+        "NOT_KNOWN": 56,
+        "NOT_MOUNTED": 57,
+        "NOT_ON_TAXI": 58,
+        "NOT_ON_TRANSPORT": 59,
+        "NOT_READY": 60,
+        "NOT_SHAPESHIFT": 61,
+        "NOT_STANDING": 62,
+        "NOT_TRADEABLE": 63,
+        "NOT_TRADING": 64,
+        "NOT_UNSHEATHED": 65,
+        "NOT_WHILE_FATIGUED": 126,
+        "NOT_WHILE_GHOST": 66,
+        "NOT_WHILE_TRADING": 128,
+        "NO_AMMO": 67,
+        "NO_CHAMPION": 69,
+        "NO_CHARGES_REMAIN": 68,
+        "NO_COMBO_POINTS": 70,
+        "NO_DUELING": 71,
+        "NO_EDIBLE_CORPSES": 134,
+        "NO_ENDURANCE": 72,
+        "NO_FISH": 73,
+        "NO_ITEMS_WHILE_SHAPESHIFTED": 74,
+        "NO_MOUNTS_ALLOWED": 75,
+        "NO_PET": 76,
+        "NO_POWER": 77,
+        "ONLY_ABOVEWATER": 80,
+        "ONLY_BATTLEGROUNDS": 135,
+        "ONLY_DAYTIME": 81,
+        "ONLY_INDOORS": 82,
+        "ONLY_MOUNTED": 83,
+        "ONLY_NIGHTTIME": 84,
+        "ONLY_OUTDOORS": 85,
+        "ONLY_SHAPESHIFT": 86,
+        "ONLY_STEALTHED": 87,
+        "ONLY_UNDERWATER": 88,
+        "OUT_OF_RANGE": 89,
+        "PACIFIED": 90,
+        "PLAY_TIME": 142,
+        "POSSESSED": 91,
+        "PREVENTED_BY_MECHANIC": 141,
+        "PROSPECT_NEED_MORE": 132,
+        "PROSPECT_WHILE_LOOTING": 131,
+        "REAGENTS": 92,
+        "REPUTATION": 143,
+        "REQUIRES_AREA": 93,
+        "REQUIRES_SPELL_FOCUS": 94,
+        "ROOTED": 95,
+        "SILENCED": 96,
+        "SPELL_IN_PROGRESS": 97,
+        "SPELL_LEARNED": 98,
+        "SPELL_UNAVAILABLE": 99,
+        "STUNNED": 100,
+        "TARGETS_DEAD": 101,
+        "TARGET_AFFECTING_COMBAT": 102,
+        "TARGET_AURASTATE": 103,
+        "TARGET_DUELING": 104,
+        "TARGET_ENEMY": 105,
+        "TARGET_ENRAGED": 106,
+        "TARGET_FREEFORALL": 133,
+        "TARGET_FRIENDLY": 107,
+        "TARGET_IN_COMBAT": 108,
+        "TARGET_IS_PLAYER": 109,
+        "TARGET_NOT_DEAD": 110,
+        "TARGET_NOT_GHOST": 136,
+        "TARGET_NOT_IN_INSTANCE": 127,
+        "TARGET_NOT_IN_PARTY": 111,
+        "TARGET_NOT_IN_RAID": 129,
+        "TARGET_NOT_LOOTED": 112,
+        "TARGET_NOT_PLAYER": 113,
+        "TARGET_NO_POCKETS": 114,
+        "TARGET_NO_WEAPONS": 115,
+        "TARGET_UNSKINNABLE": 116,
+        "THIRST_SATIATED": 117,
+        "TOO_CLOSE": 118,
+        "TOO_MANY_OF_ITEM": 119,
+        "TOO_MANY_SKILLS": 137,
+        "TOTEMS": 120,
+        "TRAINING_POINTS": 121,
+        "TRANSFORM_UNUSABLE": 138,
+        "TRY_AGAIN": 122,
+        "UNIT_NOT_BEHIND": 123,
+        "UNIT_NOT_INFRONT": 124,
+        "UNKNOWN": 145,
+        "WRONG_PET_FOOD": 125,
+        "WRONG_WEATHER": 139
+      }
+    },
+    "CastFlags": {
+      "kind": "flags",
+      "underlying": "uint16",
+      "values": {
+        "AMMO": 32,
+        "HIDDEN_COMBATLOG": 1,
+        "NONE": 0,
+        "UNKNOWN2": 2,
+        "UNKNOWN3": 4,
+        "UNKNOWN4": 8,
+        "UNKNOWN5": 16,
+        "UNKNOWN7": 64,
+        "UNKNOWN8": 128,
+        "UNKNOWN9": 256
+      }
+    },
+    "ChannelFlags": {
+      "kind": "flags",
+      "underlying": "uint8",
+      "values": {
+        "CITY": 32,
+        "CUSTOM": 1,
+        "GENERAL": 16,
+        "LFG": 64,
+        "NONE": 0,
+        "NOT_LFG": 8,
+        "TRADE": 4,
+        "VOICE": 128
+      }
+    },
+    "ChannelMember": {
+      "kind": "struct",
+      "fields": [
+        {
+          "name": "guid",
+          "type": "uint64"
+        },
+        {
+          "name": "member_flags",
+          "type": "ChannelMemberFlags"
+        }
+      ]
+    },
+    "ChannelMemberFlags": {
+      "kind": "flags",
+      "underlying": "uint8",
+      "values": {
+        "CUSTOM": 32,
+        "MICROPHONE_MUTE": 64,
+        "MODERATOR": 4,
+        "MUTED": 16,
+        "NONE": 0,
+        "OWNER": 1,
+        "VOICED": 8
+      }
+    },
+    "Character": {
+      "kind": "struct",
+      "fields": [
+        {
+          "name": "guid",
+          "type": "uint64"
+        },
+        {
+          "name": "name",
+          "type": "CString"
+        },
+        {
+          "name": "race",
+          "type": "Race"
+        },
+        {
+          "name": "class",
+          "type": "Class"
+        },
+        {
+          "name": "gender",
+          "type": "Gender"
+        },
+        {
+          "name": "skin",
+          "type": "uint8"
+        },
+        {
+          "name": "face",
+          "type": "uint8"
+        },
+        {
+          "name": "hair_style",
+          "type": "uint8"
+        },
+        {
+          "name": "hair_color",
+          "type": "uint8"
+        },
+        {
+          "name": "facial_hair",
+          "type": "uint8"
+        },
+        {
+          "name": "level",
+          "type": "Level"
+        },
+        {
+          "name": "area",
+          "type": "Area"
+        },
+        {
+          "name": "map",
+          "type": "Map"
+        },
+        {
+          "name": "position",
+          "type": "Vector3d"
+        },
+        {
+          "name": "guild_id",
+          "type": "uint32"
+        },
+        {
+          "name": "flags",
+          "type": "CharacterFlags"
+        },
+        {
+          "name": "first_login",
+          "type": "Bool"
+        },
+        {
+          "name": "pet_display_id",
+          "type": "uint32"
+        },
+        {
+          "name": "pet_level",
+          "type": "Level32"
+        },
+        {
+          "name": "pet_family",
+          "type": "CreatureFamily"
+        },
+        {
+          "name": "equipment",
+          "type": "CharacterGear",
+          "array": {
+            "size": 19
+          }
+        },
+        {
+          "name": "first_bag_display_id",
+          "type": "uint32"
+        },
+        {
+          "name": "first_bag_inventory_id",
+          "type": "uint8"
+        }
+      ]
+    },
+    "CharacterFlags": {
+      "kind": "flags",
+      "underlying": "uint32",
+      "values": {
+        "GHOST": 8192,
+        "HIDE_CLOAK": 2048,
+        "HIDE_HELM": 1024,
+        "LOCKED_FOR_TRANSFER": 4,
+        "NONE": 0,
+        "RENAME": 16384
+      }
+    },
+    "CharacterGear": {
+      "kind": "struct",
+      "fields": [
+        {
+          "name": "equipment_display_id",
+          "type": "uint32"
+        },
+        {
+          "name": "inventory_type",
+          "type": "InventoryType"
+        }
+      ]
+    },
+    "CharacterRaceFlags": {
+      "kind": "flags",
+      "underlying": "uint8",
+      "values": {
+        "BARE_FEET": 2,
+        "CAN_CURRENT_FORM_MOUNT": 4,
+        "NONE": 0,
+        "NOT_PLAYABLE": 1,
+        "UNKNOWN2": 8
+      }
+    },
+    "ChatNotify": {
+      "kind": "enum",
+      "underlying": "uint8",
+      "values": {
+        "ANNOUNCEMENTS_OFF_NOTICE": 14,
+        "ANNOUNCEMENTS_ON_NOTICE": 13,
+        "BANNED_NOTICE": 19,
+        "CHANNEL_OWNER_NOTICE": 11,
+        "INVALID_NAME_NOTICE": 27,
+        "INVITE_NOTICE": 24,
+        "INVITE_WRONG_FACTION_NOTICE": 25,
+        "JOINED_NOTICE": 0,
+        "LEFT_NOTICE": 1,
+        "MODERATION_OFF_NOTICE": 16,
+        "MODERATION_ON_NOTICE": 15,
+        "MODE_CHANGE_NOTICE": 12,
+        "MUTED_NOTICE": 17,
+        "NOT_MEMBER_NOTICE": 5,
+        "NOT_MODERATED_NOTICE": 28,
+        "NOT_MODERATOR_NOTICE": 6,
+        "NOT_OWNER_NOTICE": 10,
+        "OWNER_CHANGED_NOTICE": 8,
+        "PASSWORD_CHANGED_NOTICE": 7,
+        "PLAYER_ALREADY_MEMBER_NOTICE": 23,
+        "PLAYER_BANNED_NOTICE": 20,
+        "PLAYER_INVITED_NOTICE": 29,
+        "PLAYER_INVITE_BANNED_NOTICE": 30,
+        "PLAYER_KICKED_NOTICE": 18,
+        "PLAYER_NOT_BANNED_NOTICE": 22,
+        "PLAYER_NOT_FOUND_NOTICE": 9,
+        "PLAYER_UNBANNED_NOTICE": 21,
+        "THROTTLED_NOTICE": 31,
+        "WRONG_FACTION_NOTICE": 26,
+        "WRONG_PASSWORD_NOTICE": 4,
+        "YOU_JOINED_NOTICE": 2,
+        "YOU_LEFT_NOTICE": 3
+      }
+    },
+    "ChatType": {
+      "kind": "enum",
+      "underlying": "uint8",
+      "values": {
+        "AFK": 20,
+        "BATTLEGROUND": 92,
+        "BATTLEGROUND_LEADER": 93,
+        "BG_SYSTEM_ALLIANCE": 83,
+        "BG_SYSTEM_HORDE": 84,
+        "BG_SYSTEM_NEUTRAL": 82,
+        "CHANNEL": 14,
+        "CHANNEL_JOIN": 15,
+        "CHANNEL_LEAVE": 16,
+        "CHANNEL_LIST": 17,
+        "CHANNEL_NOTICE": 18,
+        "CHANNEL_NOTICE_USER": 19,
+        "DND": 21,
+        "EMOTE": 8,
+        "GUILD": 3,
+        "IGNORED": 22,
+        "LOOT": 24,
+        "MONSTER_EMOTE": 13,
+        "MONSTER_SAY": 11,
+        "MONSTER_WHISPER": 26,
+        "MONSTER_YELL": 12,
+        "OFFICER": 4,
+        "PARTY": 1,
+        "RAID": 2,
+        "RAID_BOSS_EMOTE": 90,
+        "RAID_BOSS_WHISPER": 89,
+        "RAID_LEADER": 87,
+        "RAID_WARNING": 88,
+        "SAY": 0,
+        "SKILL": 23,
+        "SYSTEM": 10,
+        "TEXT_EMOTE": 9,
+        "WHISPER": 6,
+        "WHISPER_INFORM": 7,
+        "YELL": 5
+      }
+    },
+    "CinematicSequenceId": {
+      "kind": "enum",
+      "underlying": "uint32",
+      "values": {
+        "DWARF": 41,
+        "GNOME": 101,
+        "GOBLIN": 0,
+        "HUMAN": 81,
+        "NIGHT_ELF": 61,
+        "ORC": 21,
+        "TAUREN": 141,
+        "TROLL": 121,
+        "UNDEAD": 2
+      }
+    },
+    "Class": {
+      "kind": "enum",
+      "underlying": "uint8",
+      "values": {
+        "DRUID": 11,
+        "HUNTER": 3,
+        "MAGE": 8,
+        "PALADIN": 2,
+        "PRIEST": 5,
+        "ROGUE": 4,
+        "SHAMAN": 7,
+        "WARLOCK": 9,
+        "WARRIOR": 1
+      }
+    },
+    "ClientLanguage": {
+      "kind": "enum",
+      "underlying": "uint8",
+      "values": {
+        "CHINESE": 4,
+        "ENGLISH": 0,
+        "FRENCH": 2,
+        "GERMAN": 3,
+        "KOREAN": 1,
+        "SPANISH_LATIN_AMERICA": 7,
+        "SPANISH_SPAIN": 6,
+        "TAIWANESE": 5
+      }
+    },
+    "CompressedMove": {
+      "kind": "struct",
+      "fields": [
+        {
+          "name": "size",
+          "type": "uint8"
+        },
+        {
+          "name": "opcode",
+          "type": "CompressedMoveOpcode"
+        },
+        {
+          "name": "guid",
+          "type": "PackedGuid"
+        }
+      ]
+    },
+    "CompressedMoveOpcode": {
+      "kind": "enum",
+      "underlying": "uint16",
+      "values": {
+        "SMSG_MONSTER_MOVE": 221,
+        "SMSG_MONSTER_MOVE_TRANSPORT": 686,
+        "SMSG_SPLINE_MOVE_SET_RUN_MODE": 781,
+        "SMSG_SPLINE_MOVE_SET_WALK_MODE": 782,
+        "SMSG_SPLINE_MOVE_UNROOT": 772,
+        "SMSG_SPLINE_SET_RUN_SPEED": 766
+      }
+    },
+    "CooldownSpell": {
+      "kind": "struct",
+      "fields": [
+        {
+          "name": "spell_id",
+          "type": "uint16"
+        },
+        {
+          "name": "item_id",
+          "type": "uint16"
+        },
+        {
+          "name": "spell_category",
+          "type": "uint16"
+        },
+        {
+          "name": "cooldown",
+          "type": "Milliseconds"
+        },
+        {
+          "name": "category_cooldown",
+          "type": "Milliseconds"
+        }
+      ]
+    },
+    "CorpseQueryResult": {
+      "kind": "enum",
+      "underlying": "uint8",
+      "values": {
+        "FOUND": 1,
+        "NOT_FOUND": 0
+      }
+    },
+    "CreatureFamily": {
+      "kind": "enum",
+      "underlying": "uint8",
+      "values": {
+        "BAT": 24,
+        "BEAR": 4,
+        "BOAR": 5,
+        "CARRION_BIRD": 7,
+        "CAT": 2,
+        "CRAB": 8,
+        "CROCOLISK": 6,
+        "DOOMGUARD": 19,
+        "FELHUNTER": 15,
+        "GORILLA": 9,
+        "HYENA": 25,
+        "IMP": 23,
+        "NONE": 0,
+        "OWL": 26,
+        "RAPTOR": 11,
+        "REMOTE_CONTROL": 28,
+        "SCORPID": 20,
+        "SPIDER": 3,
+        "SUCCUBUS": 17,
+        "TALLSTRIDER": 12,
+        "TURTLE": 21,
+        "VOIDWALKER": 16,
+        "WIND_SERPENT": 27,
+        "WOLF": 1
+      }
+    },
+    "DamageInfo": {
+      "kind": "struct",
+      "fields": [
+        {
+          "name": "spell_school_mask",
+          "type": "uint32"
+        },
+        {
+          "name": "damage_float",
+          "type": "float"
+        },
+        {
+          "name": "damage_uint",
+          "type": "uint32"
+        },
+        {
+          "name": "absorb",
+          "type": "uint32"
+        },
+        {
+          "name": "resist",
+          "type": "uint32"
+        }
+      ]
+    },
+    "DefaultChannelFlags": {
+      "kind": "flags",
+      "underlying": "uint32",
+      "values": {
+        "CITY_ONLY": 16,
+        "CITY_ONLY_2": 32,
+        "DEFENCE": 65536,
+        "GLOBAL": 4,
+        "INITIAL": 1,
+        "NONE": 0,
+        "TRADE": 8,
+        "UNSELECTED": 262144,
+        "ZONE_DEPENDENCY": 2
+      }
+    },
+    "DismountResult": {
+      "kind": "enum",
+      "underlying": "uint32",
+      "values": {
+        "NOT_MOUNTED": 1,
+        "OK": 3
+      }
+    },
+    "DuelWinnerReason": {
+      "kind": "enum",
+      "underlying": "uint8",
+      "values": {
+        "FLED": 1,
+        "WON": 0
+      }
+    },
+    "Emote": {
+      "kind": "enum",
+      "underlying": "uint32",
+      "values": {
+        "ONESHOT_APPLAUD": 21,
+        "ONESHOT_ATTACK1H": 36,
+        "ONESHOT_ATTACK2HLOOSE": 38,
+        "ONESHOT_ATTACK2HTIGHT": 37,
+        "ONESHOT_ATTACKOFF": 389,
+        "ONESHOT_ATTACKOFFPIERCE": 390,
+        "ONESHOT_ATTACKTHROWN": 61,
+        "ONESHOT_ATTACKUNARMED": 35,
+        "ONESHOT_BATTLEROAR": 53,
+        "ONESHOT_BEG": 20,
+        "ONESHOT_BOW": 2,
+        "ONESHOT_CHEER": 4,
+        "ONESHOT_CHEER_NOSHEATHE": 71,
+        "ONESHOT_CHICKEN": 19,
+        "ONESHOT_CREATURE_SPECIAL": 393,
+        "ONESHOT_CRY": 18,
+        "ONESHOT_CUSTOMSPELL01": 402,
+        "ONESHOT_CUSTOMSPELL02": 403,
+        "ONESHOT_CUSTOMSPELL03": 404,
+        "ONESHOT_CUSTOMSPELL04": 405,
+        "ONESHOT_CUSTOMSPELL05": 406,
+        "ONESHOT_CUSTOMSPELL06": 407,
+        "ONESHOT_CUSTOMSPELL07": 408,
+        "ONESHOT_CUSTOMSPELL08": 409,
+        "ONESHOT_CUSTOMSPELL09": 410,
+        "ONESHOT_CUSTOMSPELL10": 411,
+        "ONESHOT_DANCE": 94,
+        "ONESHOT_DANCESPECIAL": 401,
+        "ONESHOT_DROWN": 387,
+        "ONESHOT_EAT": 7,
+        "ONESHOT_EAT_NOSHEATHE": 92,
+        "ONESHOT_EXCLAMATION": 5,
+        "ONESHOT_FISHING": 380,
+        "ONESHOT_FLEX": 23,
+        "ONESHOT_JUMPEND": 395,
+        "ONESHOT_JUMPLANDRUN": 394,
+        "ONESHOT_JUMPSTART": 399,
+        "ONESHOT_KICK": 60,
+        "ONESHOT_KISS": 17,
+        "ONESHOT_KNEEL": 16,
+        "ONESHOT_LAND": 293,
+        "ONESHOT_LAUGH": 11,
+        "ONESHOT_LAUGH_NOSHEATHE": 153,
+        "ONESHOT_LIFTOFF": 254,
+        "ONESHOT_LOOT": 381,
+        "ONESHOT_MOUNTSPECIAL": 377,
+        "ONESHOT_NO": 274,
+        "ONESHOT_NONE": 0,
+        "ONESHOT_PARRYSHIELD": 43,
+        "ONESHOT_PARRYUNARMED": 39,
+        "ONESHOT_POINT": 25,
+        "ONESHOT_POINT_NOSHEATHE": 397,
+        "ONESHOT_QUESTION": 6,
+        "ONESHOT_READY1H": 45,
+        "ONESHOT_READYBOW": 48,
+        "ONESHOT_READYRIFLE": 213,
+        "ONESHOT_READYUNARMED": 44,
+        "ONESHOT_ROAR": 15,
+        "ONESHOT_RUDE": 14,
+        "ONESHOT_SALUTE": 66,
+        "ONESHOT_SALUTE_NOSHEATH": 113,
+        "ONESHOT_SHOUT": 22,
+        "ONESHOT_SHY": 24,
+        "ONESHOT_SPECIALATTACK1H": 54,
+        "ONESHOT_SPELLCAST": 51,
+        "ONESHOT_SPELLPRECAST": 50,
+        "ONESHOT_STOMP": 388,
+        "ONESHOT_SUBMERGE": 374,
+        "ONESHOT_TALK": 1,
+        "ONESHOT_TALK_NOSHEATHE": 396,
+        "ONESHOT_TRAIN": 275,
+        "ONESHOT_WAVE": 3,
+        "ONESHOT_WAVE_NOSHEATHE": 70,
+        "ONESHOT_WOUND": 33,
+        "ONESHOT_WOUNDCRITICAL": 34,
+        "ONESHOT_YES": 273,
+        "STATE_APPLAUD": 253,
+        "STATE_AT_EASE": 313,
+        "STATE_CANNIBALIZE": 398,
+        "STATE_DANCE": 10,
+        "STATE_DANCESPECIAL": 400,
+        "STATE_DEAD": 65,
+        "STATE_DROWNED": 383,
+        "STATE_EAT_NO_SHEATHE": 423,
+        "STATE_EXCLAIM": 412,
+        "STATE_FISHING": 379,
+        "STATE_HOLD_BOW": 384,
+        "STATE_HOLD_RIFLE": 385,
+        "STATE_HOLD_THROWN": 386,
+        "STATE_KNEEL": 68,
+        "STATE_LAUGH": 392,
+        "STATE_NONE": 30,
+        "STATE_POINT": 29,
+        "STATE_READY1H": 333,
+        "STATE_READY2H": 375,
+        "STATE_READYBOW": 376,
+        "STATE_READYRIFLE": 214,
+        "STATE_READYUNARMED": 27,
+        "STATE_ROAR": 391,
+        "STATE_SIT": 13,
+        "STATE_SIT_CHAIR_MED": 415,
+        "STATE_SLEEP": 12,
+        "STATE_SPELLEFFECT_HOLD": 422,
+        "STATE_SPELLKNEELSTART": 353,
+        "STATE_SPELLPRECAST": 193,
+        "STATE_STAND": 26,
+        "STATE_STUN": 64,
+        "STATE_STUN_NOSHEATHE": 93,
+        "STATE_SUBMERGED": 373,
+        "STATE_TALK": 378,
+        "STATE_USESTANDING": 69,
+        "STATE_USESTANDING_NOSHEATHE": 133,
+        "STATE_WHIRLWIND": 382,
+        "STATE_WORK": 173,
+        "STATE_WORK_CHOPWOOD": 234,
+        "STATE_WORK_MINING": 233,
+        "STATE_WORK_SHEATHED": 28
+      }
+    },
+    "EmoteFlags": {
+      "kind": "flags",
+      "underlying": "uint8",
+      "values": {
+        "EXCLAMATION": 32,
+        "LAUGH": 128,
+        "QUESTION": 16,
+        "SHOUT": 64,
+        "TALK": 8
+      }
+    },
+    "EmoteSpecProc": {
+      "kind": "enum",
+      "underlying": "uint8",
+      "values": {
+        "LOOP": 1,
+        "LOOP_WITH_SOUND": 2,
+        "NO_LOOP": 0
+      }
+    },
+    "EnvironmentalDamageType": {
+      "kind": "enum",
+      "underlying": "uint8",
+      "values": {
+        "DROWNING": 1,
+        "EXHAUSTED": 0,
+        "FALL": 2,
+        "FIRE": 5,
+        "LAVA": 3,
+        "SLIME": 4
+      }
+    },
+    "ExperienceAwardType": {
+      "kind": "enum",
+      "underlying": "uint8",
+      "values": {
+        "KILL": 0,
+        "NON_KILL": 1
+      }
+    },
+    "Faction": {
+      "kind": "enum",
+      "underlying": "uint16",
+      "values": {
+        "ALLIANCE": 469,
+        "ALLIANCE_FORCES": 891,
+        "ALLIANCE_GENERIC": 189,
+        "AMBIENT": 148,
+        "ARGENT_DAWN": 529,
+        "ARMIES_OF_C_THUN": 915,
+        "BASILISK": 43,
+        "BATTLEGROUND_NEUTRAL": 709,
+        "BEAST_BAT": 310,
+        "BEAST_BEAR": 37,
+        "BEAST_BOAR": 23,
+        "BEAST_CARRION_BIRD": 669,
+        "BEAST_CAT": 670,
+        "BEAST_CRAB": 671,
+        "BEAST_CROCILISK": 672,
+        "BEAST_GORILLA": 58,
+        "BEAST_HYENA": 673,
+        "BEAST_OWL": 674,
+        "BEAST_RAPTOR": 42,
+        "BEAST_SCORPID": 675,
+        "BEAST_SPIDER": 22,
+        "BEAST_TALLSTRIDER": 676,
+        "BEAST_TURTLE": 677,
+        "BEAST_WIND_SERPENT": 678,
+        "BEAST_WOLF": 29,
+        "BLACKFATHOM": 88,
+        "BLACKSMITHING_ARMORSMITHING": 46,
+        "BLACKSMITHING_AXESMITHING": 570,
+        "BLACKSMITHING_HAMMERSMITHING": 569,
+        "BLACKSMITHING_SWORDSMITHING": 571,
+        "BLACKSMITHING_WEAPONSMITHING": 289,
+        "BLOODSAIL_BUCCANEERS": 87,
+        "BLUE": 921,
+        "BOOTY_BAY": 21,
+        "BROOD_OF_NOZDORMU": 910,
+        "BURNING_BLADE": 429,
+        "CAER_DARROW": 574,
+        "CENARION_CIRCLE": 609,
+        "CENTAUR_GALAK": 91,
+        "CENTAUR_KOLKAR": 90,
+        "CREATURE": 7,
+        "DALARAN": 61,
+        "DARKHOWL": 63,
+        "DARKMOON_FAIRE": 909,
+        "DARKSPEAR_TROLLS": 530,
+        "DARK_IRON_DWARVES": 48,
+        "DARNASSUS": 69,
+        "DEFIAS_BROTHERHOOD": 15,
+        "DEFIAS_BROTHERHOOD_TRAITOR": 30,
+        "DEMON": 73,
+        "DRAGONFLIGHT_BLACK": 80,
+        "DRAGONFLIGHT_BLACK_BAIT": 689,
+        "DRAGONFLIGHT_BLUE": 532,
+        "DRAGONFLIGHT_BRONZE": 531,
+        "DRAGONFLIGHT_GREEN": 44,
+        "DRAGONFLIGHT_RED": 50,
+        "ELEMENTAL": 74,
+        "ENEMY": 128,
+        "ENGINEERING_GNOME": 551,
+        "ENGINEERING_GOBLIN": 550,
+        "ESCORTEE": 40,
+        "EVERLOOK": 577,
+        "FORLORN_SPIRIT": 62,
+        "FRIENDLY": 31,
+        "FROSTWOLF_CLAN": 729,
+        "FURBOLG": 65,
+        "FURBOLG_UNCORRUPTED": 575,
+        "GADGETZAN": 369,
+        "GELKIS_CLAN_CENTAUR": 92,
+        "GIANT": 511,
+        "GIZLOCK": 771,
+        "GIZLOCKS_CHARM": 770,
+        "GIZLOCKS_DUMMY": 769,
+        "GNOLL_MOSSHIDE": 51,
+        "GNOLL_MUDSNOUT": 78,
+        "GNOLL_REDRIDGE": 17,
+        "GNOLL_RIVERPAW": 16,
+        "GNOLL_ROTHIDE": 57,
+        "GNOLL_SHADOWHIDE": 18,
+        "GNOMEREGAN_BUG": 389,
+        "GNOMEREGAN_EXILES": 54,
+        "GNOME_LEPER": 53,
+        "GOBLIN_DARK_IRON_BAR_PATRON": 489,
+        "GRELL": 64,
+        "HARPY": 409,
+        "HILLSBRAD_MILITIA": 71,
+        "HILLSBRAD_SOUTHSHORE_MAYOR": 79,
+        "HORDE": 67,
+        "HORDE_FORCES": 892,
+        "HORDE_GENERIC": 66,
+        "HUMAN_NIGHT_WATCH": 49,
+        "HYDRAXIAN_WATERLORDS": 749,
+        "IRONFORGE": 47,
+        "JAEDENAR": 869,
+        "KOBOLD": 25,
+        "KURZENS_MERCENARIES": 39,
+        "LEATHERWORKING_DRAGONSCALE": 86,
+        "LEATHERWORKING_ELEMENTAL": 83,
+        "LEATHERWORKING_TRIBAL": 549,
+        "LEOPARD": 55,
+        "LOST_ONES": 45,
+        "MAGRAM_CLAN_CENTAUR": 93,
+        "MAJORDOMO_EXECUTUS": 649,
+        "MAKRURA": 89,
+        "MARAUDINE": 94,
+        "MIGHT_OF_KALIMDOR": 912,
+        "MONSTER": 14,
+        "MORO_GAI": 789,
+        "MURLOC": 19,
+        "NAGA": 60,
+        "NETHERGARDE": 209,
+        "NETHERGARDE_CARAVAN": 168,
+        "NONE": 0,
+        "OGRE": 38,
+        "OGRE_CAPTAIN_KROMCRUSH": 829,
+        "ORC_BLACKROCK": 34,
+        "ORC_DRAGONMAW": 52,
+        "ORGRIMMAR": 76,
+        "PLAYER_DWARF": 3,
+        "PLAYER_GNOME": 8,
+        "PLAYER_HUMAN": 1,
+        "PLAYER_NIGHT_ELF": 4,
+        "PLAYER_ORC": 2,
+        "PLAYER_TAUREN": 6,
+        "PLAYER_TROLL": 9,
+        "PLAYER_UNDEAD": 5,
+        "PREY": 28,
+        "QUILBOAR_BRISTLEBACK": 85,
+        "QUILBOAR_DEATHSHEAD": 111,
+        "QUILBOAR_RAZORFEN": 109,
+        "QUILBOAR_RAZORMANE": 84,
+        "QUILBOAR_RAZORMANE_2": 110,
+        "RATCHET": 470,
+        "RAVASAUR_TRAINERS": 630,
+        "RAVENHOLDT": 349,
+        "RC_ENEMIES": 918,
+        "RC_OBJECTS": 919,
+        "RED": 920,
+        "REVANTUSK_TROLLS": 893,
+        "SCARLET_CRUSADE": 56,
+        "SCORPID": 309,
+        "SCOURGE_INVADERS": 928,
+        "SEARING_SPIDER": 450,
+        "SHADOWSILK_POACHER": 449,
+        "SHATTERSPEAR_TROLLS": 629,
+        "SHEN_DRALAR": 809,
+        "SILITHID": 249,
+        "SILITHID_ATTACKERS": 916,
+        "SILVERMOON_REMNANT": 269,
+        "SILVERWING_SENTINELS": 890,
+        "SOUTHSEA_FREEBOOTERS": 573,
+        "SPIRIT": 75,
+        "SPIRIT_GUIDE_ALLIANCE": 790,
+        "SPIRIT_GUIDE_HORDE": 849,
+        "STEAMWHEEDLE_CARTEL": 169,
+        "STORMPIKE_GUARD": 730,
+        "STORMWIND": 72,
+        "SULFURON_FIRELORDS": 750,
+        "SYNDICATE": 70,
+        "TASKMASTER_FIZZULE": 329,
+        "TEST_FACTION_NOT_A_REAL_FACTION": 931,
+        "THERAMORE": 108,
+        "THE_DEFILERS": 510,
+        "THE_IRONFORGE_BRIGADE": 917,
+        "THE_LEAGUE_OF_ARATHOR": 509,
+        "THORIUM_BROTHERHOOD": 59,
+        "THUNDER_BLUFF": 81,
+        "TIMBERMAW_HOLD": 576,
+        "TITAN": 311,
+        "TOWOW_FLAG": 950,
+        "TOWOW_FLAG_TRIGGER_ALLIANCE_DND": 951,
+        "TOWOW_FLAG_TRIGGER_HORDE_DND": 954,
+        "TRAINING_DUMMY": 679,
+        "TREASURE": 77,
+        "TROGG": 32,
+        "TROLL_BLOODSCALP": 26,
+        "TROLL_FROSTMANE": 33,
+        "TROLL_SKULLSPLITTER": 27,
+        "TROLL_VILEBRANCH": 572,
+        "TROLL_WITHERBARK": 82,
+        "UNDEAD_SCOURGE": 20,
+        "UNDERCITY": 68,
+        "VENTURE_COMPANY": 41,
+        "VICTIM": 36,
+        "VILLIAN": 35,
+        "WAILING_CAVERNS": 229,
+        "WARSONG_OUTRIDERS": 889,
+        "WILDHAMMER_CLAN": 471,
+        "WINTERSABER_TRAINERS": 589,
+        "WORGEN": 24,
+        "ZANDALAR_TRIBE": 270
+      }
+    },
+    "FactionFlag": {
+      "kind": "flags",
+      "underlying": "uint8",
+      "values": {
+        "AT_WAR": 2,
+        "HIDDEN": 4,
+        "INACTIVE": 32,
+        "INVISIBLE_FORCED": 8,
+        "PEACE_FORCED": 16,
+        "RIVAL": 64,
+        "VISIBLE": 1
+      }
+    },
+    "FactionInitializer": {
+      "kind": "struct",
+      "fields": [
+        {
+          "name": "flag",
+          "type": "FactionFlag"
+        },
+        {
+          "name": "standing",
+          "type": "uint32"
+        }
+      ]
+    },
+    "FactionStanding": {
+      "kind": "struct",
+      "fields": [
+        {
+          "name": "faction",
+          "type": "Faction"
+        },
+        {
+          "name": "standing",
+          "type": "uint32"
+        }
+      ]
+    },
+    "FarSightOperation": {
+      "kind": "enum",
+      "underlying": "uint8",
+      "values": {
+        "ADD": 1,
+        "REMOVE": 0
+      }
+    },
+    "FluidSpeed": {
+      "kind": "enum",
+      "underlying": "uint8",
+      "values": {
+        "RAPID": 8,
+        "SLOW": 4,
+        "STILL": 0
+      }
+    },
+    "ForcedReaction": {
+      "kind": "struct",
+      "fields": [
+        {
+          "name": "faction",
+          "type": "Faction"
+        },
+        {
+          "name": "reputation_rank",
+          "type": "uint32"
+        }
+      ]
+    },
+    "Friend": {
+      "kind": "struct",
+      "fields": [
+        {
+          "name": "guid",
+          "type": "uint64"
+        },
+        {
+          "name": "status",
+          "type": "FriendStatus"
+        }
+      ]
+    },
+    "FriendResult": {
+      "kind": "enum",
+      "underlying": "uint8",
+      "values": {
+        "ADDED_OFFLINE": 7,
+        "ADDED_ONLINE": 6,
+        "ALREADY": 8,
+        "DB_ERROR": 0,
+        "ENEMY": 10,
+        "IGNORE_ADDED": 15,
+        "IGNORE_ALREADY": 14,
+        "IGNORE_AMBIGUOUS": 17,
+        "IGNORE_FULL": 11,
+        "IGNORE_NOT_FOUND": 13,
+        "IGNORE_REMOVED": 16,
+        "IGNORE_SELF": 12,
+        "LIST_FULL": 1,
+        "MUTE_ADDED": 22,
+        "MUTE_ALREADY": 21,
+        "MUTE_AMBIGUOUS": 24,
+        "MUTE_FULL": 18,
+        "MUTE_NOT_FOUND": 20,
+        "MUTE_REMOVED": 23,
+        "MUTE_SELF": 19,
+        "NOT_FOUND": 4,
+        "OFFLINE": 3,
+        "ONLINE": 2,
+        "REMOVED": 5,
+        "SELF": 9,
+        "UNKNOWN19": 25,
+        "UNKNOWN20": 26
+      }
+    },
+    "FriendStatus": {
+      "kind": "enum",
+      "underlying": "uint8",
+      "values": {
+        "AFK": 2,
+        "DND": 4,
+        "OFFLINE": 0,
+        "ONLINE": 1,
+        "UNKNOWN3": 3
+      }
+    },
+    "Gender": {
+      "kind": "enum",
+      "underlying": "uint8",
+      "values": {
+        "FEMALE": 1,
+        "MALE": 0,
+        "NONE": 2
+      }
+    },
+    "GmSurveyQuestion": {
+      "kind": "struct",
+      "fields": [
+        {
+          "name": "question_id",
+          "type": "uint32"
+        },
+        {
+          "name": "answer",
+          "type": "uint8"
+        },
+        {
+          "name": "comment",
+          "type": "CString"
+        }
+      ]
+    },
+    "GmTicketEscalationStatus": {
+      "kind": "enum",
+      "underlying": "uint8",
+      "values": {
+        "GMTICKET_ASSIGNEDTOGM_STATUS_ASSIGNED": 1,
+        "GMTICKET_ASSIGNEDTOGM_STATUS_ESCALATED": 2,
+        "GMTICKET_ASSIGNEDTOGM_STATUS_NOT_ASSIGNED": 0
+      }
+    },
+    "GmTicketQueueStatus": {
+      "kind": "enum",
+      "underlying": "uint32",
+      "values": {
+        "DISABLED": 0,
+        "ENABLED": 1
+      }
+    },
+    "GmTicketResponse": {
+      "kind": "enum",
+      "underlying": "uint32",
+      "values": {
+        "ALREADY_EXIST": 1,
+        "CREATE_ERROR": 3,
+        "CREATE_SUCCESS": 2,
+        "NOT_EXIST": 0,
+        "TICKET_DELETED": 9,
+        "UPDATE_ERROR": 5,
+        "UPDATE_SUCCESS": 4
+      }
+    },
+    "GmTicketStatus": {
+      "kind": "enum",
+      "underlying": "uint32",
+      "values": {
+        "DB_ERROR": 0,
+        "DEFAULT": 10,
+        "HAS_TEXT": 6
+      }
+    },
+    "GmTicketStatusResponse": {
+      "kind": "enum",
+      "underlying": "uint32",
+      "values": {
+        "CLOSED": 2,
+        "SURVEY": 3,
+        "UPDATED": 1
+      }
+    },
+    "GmTicketType": {
+      "kind": "enum",
+      "underlying": "uint8",
+      "values": {
+        "ACCOUNT_BILLING": 9,
+        "BEHAVIOR_HARASSMENT": 2,
+        "CHARACTER": 10,
+        "ENVIRONMENTAL": 5,
+        "GUILD": 3,
+        "ITEM": 4,
+        "NONQUEST_CREEP": 6,
+        "QUEST_QUESTNPC": 7,
+        "STUCK": 1,
+        "TECHNICAL": 8
+      }
+    },
+    "GossipItem": {
+      "kind": "struct",
+      "fields": [
+        {
+          "name": "id",
+          "type": "uint32"
+        },
+        {
+          "name": "item_icon",
+          "type": "uint8"
+        },
+        {
+          "name": "coded",
+          "type": "Bool"
+        },
+        {
+          "name": "message",
+          "type": "CString"
+        }
+      ]
+    },
+    "GroupListMember": {
+      "kind": "struct",
+      "fields": [
+        {
+          "name": "name",
+          "type": "CString"
+        },
+        {
+          "name": "guid",
+          "type": "uint64"
+        },
+        {
+          "name": "is_online",
+          "type": "Bool"
+        },
+        {
+          "name": "flags",
+          "type": "uint8"
+        }
+      ]
+    },
+    "GroupLootSetting": {
+      "kind": "enum",
+      "underlying": "uint8",
+      "values": {
+        "FREE_FOR_ALL": 0,
+        "GROUP_LOOT": 3,
+        "MASTER_LOOT": 2,
+        "NEED_BEFORE_GREED": 4,
+        "ROUND_ROBIN": 1
+      }
+    },
+    "GroupMemberOnlineStatus": {
+      "kind": "flags",
+      "underlying": "uint8",
+      "values": {
+        "AFK": 64,
+        "DEAD": 4,
+        "DND": 128,
+        "GHOST": 8,
+        "OFFLINE": 0,
+        "ONLINE": 1,
+        "PVP": 2,
+        "PVP_FFA": 16,
+        "ZONE_OUT": 32
+      }
+    },
+    "GroupType": {
+      "kind": "enum",
+      "underlying": "uint8",
+      "values": {
+        "NORMAL": 0,
+        "RAID": 1
+      }
+    },
+    "GroupUpdateFlags": {
+      "kind": "flags",
+      "underlying": "uint32",
+      "values": {
+        "AURAS": 512,
+        "AURAS_2": 1024,
+        "CUR_HP": 2,
+        "CUR_POWER": 16,
+        "LEVEL": 64,
+        "MAX_HP": 4,
+        "MAX_POWER": 32,
+        "MODE_OFFLINE": 268435456,
+        "NONE": 0,
+        "PET_AURAS": 524288,
+        "PET_AURAS_2": 1048576,
+        "PET_CUR_HP": 16384,
+        "PET_CUR_POWER": 131072,
+        "PET_GUID": 2048,
+        "PET_MAX_HP": 32768,
+        "PET_MAX_POWER": 262144,
+        "PET_MODEL_ID": 8192,
+        "PET_NAME": 4096,
+        "PET_POWER_TYPE": 65536,
+        "POSITION": 256,
+        "POWER_TYPE": 8,
+        "STATUS": 1,
+        "ZONE": 128
+      }
+    },
+    "GuildCommand": {
+      "kind": "enum",
+      "underlying": "uint8",
+      "values": {
+        "CREATE": 0,
+        "FOUNDER": 14,
+        "INVITE": 1,
+        "QUIT": 3,
+        "UNKNOWN19": 19,
+        "UNKNOWN20": 20
+      }
+    },
+    "GuildCommandResult": {
+      "kind": "enum",
+      "underlying": "uint8",
+      "values": {
+        "ALREADY_INVITED_TO_GUILD_S": 5,
+        "ALREADY_IN_GUILD": 2,
+        "ALREADY_IN_GUILD_S": 3,
+        "GUILD_INTERNAL": 1,
+        "GUILD_NAME_EXISTS_S": 7,
+        "GUILD_NAME_INVALID": 6,
+        "GUILD_NOT_ALLIED": 12,
+        "GUILD_PERMISSIONS_OR_LEADER": 8,
+        "GUILD_PLAYER_NOT_FOUND_S": 11,
+        "GUILD_PLAYER_NOT_IN_GUILD": 9,
+        "GUILD_PLAYER_NOT_IN_GUILD_S": 10,
+        "GUILD_RANK_TOO_HIGH_S": 13,
+        "GUILD_RANK_TOO_LOW_S": 14,
+        "INVITED_TO_GUILD": 4,
+        "PLAYER_NO_MORE_IN_GUILD": 0
+      }
+    },
+    "GuildEmblemResult": {
+      "kind": "enum",
+      "underlying": "uint32",
+      "values": {
+        "INVALID_TABARD_COLORS": 1,
+        "NOT_ENOUGH_MONEY": 4,
+        "NOT_GUILD_MASTER": 3,
+        "NO_GUILD": 2,
+        "NO_MESSAGE": 5,
+        "SUCCESS": 0
+      }
+    },
+    "GuildEvent": {
+      "kind": "enum",
+      "underlying": "uint8",
+      "values": {
+        "DEMOTION": 1,
+        "DISBANDED": 8,
+        "JOINED": 3,
+        "LEADER_CHANGED": 7,
+        "LEADER_IS": 6,
+        "LEFT": 4,
+        "MOTD": 2,
+        "PROMOTION": 0,
+        "REMOVED": 5,
+        "ROSTER_UPDATE": 11,
+        "SIGNED_OFF": 13,
+        "SIGNED_ON": 12,
+        "TABARD_CHANGED": 9,
+        "UNKNOWN10": 10
+      }
+    },
+    "GuildMember": {
+      "kind": "struct",
+      "fields": [
+        {
+          "name": "guid",
+          "type": "uint64"
+        },
+        {
+          "name": "status",
+          "type": "GuildMemberStatus"
+        },
+        {
+          "name": "name",
+          "type": "CString"
+        },
+        {
+          "name": "rank",
+          "type": "uint32"
+        },
+        {
+          "name": "level",
+          "type": "Level"
+        },
+        {
+          "name": "class",
+          "type": "Class"
+        },
+        {
+          "name": "area",
+          "type": "Area"
+        },
+        {
+          "name": "public_note",
+          "type": "CString"
+        },
+        {
+          "name": "officer_note",
+          "type": "CString"
+        }
+      ]
+    },
+    "GuildMemberStatus": {
+      "kind": "enum",
+      "underlying": "uint8",
+      "values": {
+        "OFFLINE": 0,
+        "ONLINE": 1
+      }
+    },
+    "HitInfo": {
+      "kind": "enum",
+      "underlying": "uint32",
+      "values": {
+        "ABSORB": 32,
+        "AFFECTS_VICTIM": 2,
+        "CRITICAL_HIT": 128,
+        "CRUSHING": 32768,
+        "EARLY_CRITICAL_HIT": 8,
+        "GLANCING": 16384,
+        "LEFT_SWING": 4,
+        "MISS": 16,
+        "NORMAL_SWING": 0,
+        "NO_ACTION": 65536,
+        "RESIST": 64,
+        "SWING_NO_HIT_SOUND": 524288,
+        "UNK1": 1,
+        "UNK10": 8192,
+        "UNK9": 256
+      }
+    },
+    "InfoBlock": {
+      "kind": "enum",
+      "underlying": "uint8",
+      "values": {
+        "AVAILABLE": 1,
+        "UNAVAILABLE": 0
+      }
+    },
+    "InitialSpell": {
+      "kind": "struct",
+      "fields": [
+        {
+          "name": "spell_id",
+          "type": "uint16"
+        },
+        {
+          "name": "unknown1",
+          "type": "uint16"
+        }
+      ]
+    },
+    "InstanceResetFailedReason": {
+      "kind": "enum",
+      "underlying": "uint8",
+      "values": {
+        "GENERAL": 0,
+        "OFFLINE": 1,
+        "SILENTLY": 3,
+        "ZONING": 2
+      }
+    },
+    "InstanceType": {
+      "kind": "enum",
+      "underlying": "uint8",
+      "values": {
+        "BATTLEGROUND": 3,
+        "BATTLEGROUND2": 5,
+        "GROUP_INSTANCE": 1,
+        "NORMAL": 0,
+        "RAID_INSTANCE": 2,
+        "WORLD_ZONE": 4
+      }
+    },
+    "InventoryResult": {
+      "kind": "enum",
+      "underlying": "uint8",
+      "values": {
+        "ALREADY_LOOTED": 49,
+        "BAGS_CANT_BE_WRAPPED": 48,
+        "BAG_FULL": 4,
+        "BAG_FULL3": 53,
+        "BAG_FULL4": 56,
+        "BAG_FULL6": 62,
+        "BANK_FULL": 51,
+        "BOUND_CANT_BE_WRAPPED": 46,
+        "CANT_CARRY_MORE_OF_THIS": 17,
+        "CANT_DO_RIGHT_NOW": 39,
+        "CANT_DROP_SOULBOUND": 24,
+        "CANT_DUAL_WIELD": 14,
+        "CANT_EQUIP_LEVEL_I": 1,
+        "CANT_EQUIP_RANK": 63,
+        "CANT_EQUIP_REPUTATION": 64,
+        "CANT_EQUIP_SKILL": 2,
+        "CANT_EQUIP_WITH_TWOHANDED": 13,
+        "CANT_TRADE_EQUIP_BAGS": 6,
+        "CAN_EQUIP_ONLY1_AMMOPOUCH": 42,
+        "CAN_EQUIP_ONLY1_BOLT": 41,
+        "CAN_EQUIP_ONLY1_QUIVER": 33,
+        "CAN_ONLY_DO_WITH_EMPTY_BAGS": 31,
+        "COULDNT_SPLIT_ITEMS": 27,
+        "DONT_OWN_THAT_ITEM": 32,
+        "EQUIPPED_CANT_BE_WRAPPED": 44,
+        "INT_BAG_ERROR": 40,
+        "INVENTORY_FULL": 50,
+        "ITEMS_CANT_BE_SWAPPED": 21,
+        "ITEM_CANT_BE_EQUIPPED": 20,
+        "ITEM_CANT_STACK": 19,
+        "ITEM_CANT_STACK2": 55,
+        "ITEM_DOESNT_GO_INTO_BAG": 15,
+        "ITEM_DOESNT_GO_INTO_BAG2": 16,
+        "ITEM_DOESNT_GO_TO_SLOT": 3,
+        "ITEM_IS_CURRENTLY_SOLD_OUT": 52,
+        "ITEM_LOCKED": 36,
+        "ITEM_NOT_FOUND": 23,
+        "ITEM_NOT_FOUND2": 54,
+        "ITEM_SOLD_OUT": 57,
+        "LOOT_CANT_LOOT_THAT_NOW": 66,
+        "MISSING_REAGENT": 28,
+        "MUST_PURCHASE_THAT_BAG_SLOT": 34,
+        "NONE": 59,
+        "NONEMPTY_BAG_OVER_OTHER_BAG": 5,
+        "NOT_A_BAG": 30,
+        "NOT_ENOUGH_MONEY": 29,
+        "NOT_IN_COMBAT": 60,
+        "NOT_WHILE_DISARMED": 61,
+        "NO_EQUIPMENT_SLOT_AVAILABLE": 9,
+        "NO_EQUIPMENT_SLOT_AVAILABLE2": 12,
+        "NO_EQUIPMENT_SLOT_AVAILABLE3": 18,
+        "NO_REQUIRED_PROFICIENCY": 8,
+        "OBJECT_IS_BUSY": 58,
+        "OK": 0,
+        "ONLY_AMMO_CAN_GO_HERE": 7,
+        "OUT_OF_RANGE": 25,
+        "SLOT_IS_EMPTY": 22,
+        "STACKABLE_CANT_BE_WRAPPED": 43,
+        "TOO_FAR_AWAY_FROM_BANK": 35,
+        "TOO_MANY_SPECIAL_BAGS": 65,
+        "TRIED_TO_SPLIT_MORE_THAN_COUNT": 26,
+        "UNIQUE_CANT_BE_WRAPPED": 47,
+        "WRAPPED_CANT_BE_WRAPPED": 45,
+        "YOU_ARE_DEAD": 38,
+        "YOU_ARE_STUNNED": 37,
+        "YOU_CAN_NEVER_USE_THAT_ITEM": 10,
+        "YOU_CAN_NEVER_USE_THAT_ITEM2": 11
+      }
+    },
+    "InventoryType": {
+      "kind": "enum",
+      "underlying": "uint8",
+      "values": {
+        "AMMO": 24,
+        "BAG": 18,
+        "BODY": 4,
+        "CHEST": 5,
+        "CLOAK": 16,
+        "FEET": 8,
+        "FINGER": 11,
+        "HANDS": 10,
+        "HEAD": 1,
+        "HOLDABLE": 23,
+        "LEGS": 7,
+        "NECK": 2,
+        "NON_EQUIP": 0,
+        "QUIVER": 27,
+        "RANGED": 15,
+        "RANGED_RIGHT": 26,
+        "RELIC": 28,
+        "ROBE": 20,
+        "SHIELD": 14,
+        "SHOULDERS": 3,
+        "TABARD": 19,
+        "THROWN": 25,
+        "TRINKET": 12,
+        "TWO_HANDED_WEAPON": 17,
+        "WAIST": 6,
+        "WEAPON": 13,
+        "WEAPON_MAIN_HAND": 21,
+        "WEAPON_OFF_HAND": 22,
+        "WRISTS": 9
+      }
+    },
+    "ItemClass": {
+      "kind": "enum",
+      "underlying": "uint8",
+      "values": {
+        "ARMOR": 4,
+        "CONSUMABLE": 0,
+        "CONTAINER": 1,
+        "GEM": 3,
+        "GENERIC": 8,
+        "KEY": 13,
+        "MISC": 15,
+        "MONEY": 10,
+        "PERMANENT": 14,
+        "PROJECTILE": 6,
+        "QUEST": 12,
+        "QUIVER": 11,
+        "REAGENT": 5,
+        "RECIPE": 9,
+        "TRADE_GOODS": 7,
+        "WEAPON": 2
+      }
+    },
+    "ItemClassAndSubClass": {
+      "kind": "enum",
+      "underlying": "uint64",
+      "values": {
+        "ALCHEMY_RECIPE": 25769803785,
+        "AMMO_POUCH": 12884901899,
+        "ARROW": 8589934598,
+        "BAG": 1,
+        "BLACKSMITHING_RECIPE": 17179869193,
+        "BOLT_OBSOLETE": 4294967302,
+        "BOOK": 9,
+        "BOW": 8589934594,
+        "BUCKLER_OBSOLETE": 21474836484,
+        "BULLET": 12884901894,
+        "CHEESE_OR_BREAD_OBSOLETE": 4294967296,
+        "CLOTH_ARMOR": 4294967300,
+        "CONSUMABLE": 0,
+        "COOKING_RECIPE": 21474836489,
+        "CROSSBOW": 77309411330,
+        "DAGGER": 64424509442,
+        "DEVICE_TRADE_GOOD": 12884901895,
+        "ENCHANTING_BAG": 12884901889,
+        "ENCHANTING_RECIPE": 34359738377,
+        "ENGINEERING_BAG": 17179869185,
+        "ENGINEERING_RECIPE": 12884901897,
+        "EXPLOSIVE_TRADE_GOOD": 8589934599,
+        "FIRST_AID_RECIPE": 30064771081,
+        "FISHING_POLE": 85899345922,
+        "FISHING_RECIPE": 38654705673,
+        "FIST_WEAPON": 55834574850,
+        "GENERIC_OBSOLETE": 8,
+        "GUN": 12884901890,
+        "HERB_BAG": 8589934593,
+        "IDOL": 34359738372,
+        "JEWELRY_OBSOLETE": 3,
+        "JUNK": 15,
+        "KEY": 13,
+        "LEATHERWORKING_RECIPE": 4294967305,
+        "LEATHER_ARMOR": 8589934596,
+        "LIBRAM": 30064771076,
+        "LIQUID_OBSOLETE": 8589934592,
+        "LOCKPICK": 4294967309,
+        "MAIL_ARMOR": 12884901892,
+        "MISCELLANEOUS_ARMOR": 4,
+        "MISCELLANEOUS_WEAPON": 60129542146,
+        "MONEY_OBSOLETE": 10,
+        "OBSOLETE_WEAPON": 38654705666,
+        "ONE_HANDED_AXE": 2,
+        "ONE_HANDED_EXOTIC": 47244640258,
+        "ONE_HANDED_MACE": 17179869186,
+        "ONE_HANDED_SWORD": 30064771074,
+        "PART_TRADE_GOOD": 4294967303,
+        "PERMANENT": 14,
+        "PLATE_ARMOR": 17179869188,
+        "POLEARM": 25769803778,
+        "QUEST": 12,
+        "QUIVER": 8589934603,
+        "QUIVER_OBSOLETE": 11,
+        "QUIVER_OBSOLETE1": 4294967307,
+        "REAGENT": 5,
+        "SHIELD": 25769803780,
+        "SOUL_BAG": 4294967297,
+        "SPEAR": 73014444034,
+        "STAFF": 42949672962,
+        "TAILORING_RECIPE": 8589934601,
+        "THROWN": 68719476738,
+        "THROWN_OBSOLETE": 17179869190,
+        "TOTEM": 38654705668,
+        "TRADE_GOOD": 7,
+        "TWO_HANDED_AXE": 4294967298,
+        "TWO_HANDED_EXOTIC": 51539607554,
+        "TWO_HANDED_MACE": 21474836482,
+        "TWO_HANDED_SWORD": 34359738370,
+        "WAND": 81604378626,
+        "WAND_OBSOLETE": 6
+      }
+    },
+    "ItemDamageType": {
+      "kind": "struct",
+      "fields": [
+        {
+          "name": "damage_minimum",
+          "type": "float"
+        },
+        {
+          "name": "damage_maximum",
+          "type": "float"
+        },
+        {
+          "name": "school",
+          "type": "SpellSchool"
+        }
+      ]
+    },
+    "ItemEnvTypes": {
+      "kind": "enum",
+      "underlying": "uint8",
+      "values": {
+        "METAL_WEAPON": 1,
+        "SHIELD": 0,
+        "WOOD_WEAPON": 2
+      }
+    },
+    "ItemFlag": {
+      "kind": "flags",
+      "underlying": "uint32",
+      "values": {
+        "CHARTER": 8192,
+        "CONJURED": 2,
+        "DEPRECATED": 16,
+        "HAS_TEXT": 16384,
+        "IGNORE_BAG_SPACE": 1024,
+        "INDESTRUCTIBLE": 32,
+        "INT_BONUS_INSTEAD": 256,
+        "LOOTABLE": 4,
+        "NONE": 0,
+        "NO_CREATOR": 131072,
+        "NO_DISENCHANT": 32768,
+        "NO_EQUIP_COOLDOWN": 128,
+        "NO_PICKUP": 1,
+        "PARTY_LOOT": 2048,
+        "PLAYER_CAST": 64,
+        "REAL_DURATION": 65536,
+        "WRAPPER": 512
+      }
+    },
+    "ItemQuality": {
+      "kind": "enum",
+      "underlying": "uint8",
+      "values": {
+        "ARTIFACT": 6,
+        "EPIC": 4,
+        "LEGENDARY": 5,
+        "NORMAL": 1,
+        "POOR": 0,
+        "RARE": 3,
+        "UNCOMMON": 2
+      }
+    },
+    "ItemSet": {
+      "kind": "enum",
+      "underlying": "uint16",
+      "values": {
+        "ARCANIST_REGALIA": 201,
+        "AUGURS_REGALIA": 476,
+        "AVENGERS_BATTLEGEAR": 505,
+        "BATTLEGEAR_OF_ETERNAL_JUSTICE": 506,
+        "BATTLEGEAR_OF_HEROISM": 511,
+        "BATTLEGEAR_OF_MIGHT": 209,
+        "BATTLEGEAR_OF_UNDEAD_SLAYING": 533,
+        "BATTLEGEAR_OF_UNYIELDING_STRENGTH": 495,
+        "BATTLEGEAR_OF_VALOR": 189,
+        "BATTLEGEAR_OF_WRATH": 218,
+        "BEASTMASTER_ARMOR": 515,
+        "BEASTSTALKER_ARMOR": 186,
+        "BLACK_DRAGON_MAIL": 489,
+        "BLOODFANG_ARMOR": 213,
+        "BLOODMAIL_REGALIA": 123,
+        "BLOODSOUL_EMBRACE": 443,
+        "BLOODVINE_GARB": 421,
+        "BLOOD_TIGER_HARNESS": 442,
+        "BLUE_DRAGON_MAIL": 491,
+        "BONESCYTHE_ARMOR": 524,
+        "CADAVEROUS_GARB": 121,
+        "CENARION_RAIMENT": 205,
+        "CHAIN_OF_THE_SCARLET_CRUSADE": 163,
+        "CHAMPIONS_ARCANUM": 542,
+        "CHAMPIONS_BATTLEARMOR": 537,
+        "CHAMPIONS_BATTLEGEAR": 281,
+        "CHAMPIONS_DREADGEAR": 541,
+        "CHAMPIONS_EARTHSHAKER": 301,
+        "CHAMPIONS_GUARD": 522,
+        "CHAMPIONS_INVESTITURE": 540,
+        "CHAMPIONS_PURSUANCE": 543,
+        "CHAMPIONS_PURSUIT": 361,
+        "CHAMPIONS_RAIMENT": 342,
+        "CHAMPIONS_REFUGE": 539,
+        "CHAMPIONS_REGALIA": 341,
+        "CHAMPIONS_SANCTUARY": 382,
+        "CHAMPIONS_STORMCALLER": 538,
+        "CHAMPIONS_THREADS": 345,
+        "CHAMPIONS_VESTMENTS": 347,
+        "CONFESSORS_RAIMENT": 480,
+        "CONQUERORS_BATTLEGEAR": 496,
+        "CRYPTSTALKER_ARMOR": 530,
+        "DAL_RENDS_ARMS": 41,
+        "DARKMANTLE_ARMOR": 512,
+        "DEATHBONE_GUARDIAN": 124,
+        "DEATHDEALERS_EMBRACE": 497,
+        "DEATHMIST_RAIMENT": 518,
+        "DEFIAS_LEATHER": 161,
+        "DEMONIACS_THREADS": 481,
+        "DEVILSAUR_ARMOR": 143,
+        "DOOMCALLERS_ATTIRE": 499,
+        "DRAGONSTALKER_ARMOR": 215,
+        "DREADMIST_RAIMENT": 183,
+        "DREADNAUGHTS_BATTLEGEAR": 523,
+        "DREAMWALKER_RAIMENT": 521,
+        "EMBLEMS_OF_VEILED_SHADOWS": 498,
+        "EMBRACE_OF_THE_VIPER": 162,
+        "ENIGMA_VESTMENTS": 503,
+        "FELHEART_RAIMENT": 203,
+        "FERALHEART_RAIMENT": 513,
+        "FIELD_MARSHALS_AEGIS": 402,
+        "FIELD_MARSHALS_BATTLEGEAR": 384,
+        "FIELD_MARSHALS_PURSUIT": 395,
+        "FIELD_MARSHALS_RAIMENT": 389,
+        "FIELD_MARSHALS_REGALIA": 388,
+        "FIELD_MARSHALS_SANCTUARY": 397,
+        "FIELD_MARSHALS_THREADS": 392,
+        "FIELD_MARSHALS_VESTMENTS": 394,
+        "FINERY_OF_INFINITE_WISDOM": 508,
+        "FREETHINKERS_ARMOR": 475,
+        "FROSTFIRE_REGALIA": 526,
+        "GARB_OF_THERO_SHAN": 221,
+        "GARB_OF_THE_UNDEAD_SLAYER": 535,
+        "GARMENTS_OF_THE_ORACLE": 507,
+        "GENESIS_RAIMENT": 493,
+        "GIANTSTALKER_ARMOR": 206,
+        "GIFT_OF_THE_GATHERING_STORM": 502,
+        "GREEN_DRAGON_MAIL": 490,
+        "HARUSPEXS_GARB": 479,
+        "ILLUSIONISTS_ATTIRE": 482,
+        "IMPERIAL_PLATE": 321,
+        "IMPLEMENTS_OF_UNSPOKEN_NAMES": 500,
+        "IRONFEATHER_ARMOR": 144,
+        "IRONWEAVE_BATTLESUIT": 520,
+        "JUDGEMENT_ARMOR": 217,
+        "LAWBRINGER_ARMOR": 208,
+        "LIEUTENANT_COMMANDERS_AEGIS": 401,
+        "LIEUTENANT_COMMANDERS_ARCANUM": 546,
+        "LIEUTENANT_COMMANDERS_BATTLEARMOR": 545,
+        "LIEUTENANT_COMMANDERS_BATTLEGEAR": 282,
+        "LIEUTENANT_COMMANDERS_DREADGEAR": 547,
+        "LIEUTENANT_COMMANDERS_GUARD": 548,
+        "LIEUTENANT_COMMANDERS_INVESTITURE": 549,
+        "LIEUTENANT_COMMANDERS_PURSUANCE": 550,
+        "LIEUTENANT_COMMANDERS_PURSUIT": 362,
+        "LIEUTENANT_COMMANDERS_RAIMENT": 344,
+        "LIEUTENANT_COMMANDERS_REDOUBT": 544,
+        "LIEUTENANT_COMMANDERS_REFUGE": 551,
+        "LIEUTENANT_COMMANDERS_REGALIA": 343,
+        "LIEUTENANT_COMMANDERS_SANCTUARY": 381,
+        "LIEUTENANT_COMMANDERS_THREADS": 346,
+        "LIEUTENANT_COMMANDERS_VESTMENTS": 348,
+        "LIGHTFORGE_ARMOR": 188,
+        "MADCAPS_OUTFIT": 478,
+        "MAGISTERS_REGALIA": 181,
+        "MAJOR_MOJO_INFUSION": 466,
+        "NECROPILE_RAIMENT": 122,
+        "NEMESIS_RAIMENT": 212,
+        "NETHERWIND_REGALIA": 210,
+        "NIGHTSLAYER_ARMOR": 204,
+        "NONE": 0,
+        "OVERLORDS_RESOLUTION": 464,
+        "PLAGUEHEART_RAIMENT": 529,
+        "PRAYER_OF_THE_PRIMAL": 465,
+        "PREDATORS_ARMOR": 477,
+        "PRIMAL_BATSKIN": 441,
+        "PRIMAL_BLESSING": 463,
+        "REDEMPTION_ARMOR": 528,
+        "REGALIA_OF_UNDEAD_CLEANSING": 536,
+        "SHADOWCRAFT_ARMOR": 184,
+        "SHARD_OF_THE_GODS": 241,
+        "SORCERERS_REGALIA": 517,
+        "SOULFORGE_ARMOR": 516,
+        "SPIDERS_KISS": 65,
+        "SPIRIT_OF_ESKHANDAR": 261,
+        "STORMCALLERS_GARB": 501,
+        "STORMRAGE_RAIMENT": 214,
+        "STORMSHROUD_ARMOR": 142,
+        "STRIKERS_GARB": 509,
+        "SYMBOLS_OF_UNENDING_LIFE": 494,
+        "THE_DARKSOUL": 444,
+        "THE_DEFILERS_DETERMINATION": 483,
+        "THE_DEFILERS_FORTITUDE": 484,
+        "THE_DEFILERS_INTENT": 485,
+        "THE_DEFILERS_PURPOSE": 486,
+        "THE_DEFILERS_RESOLUTION": 487,
+        "THE_DEFILERS_WILL": 488,
+        "THE_EARTHFURY": 207,
+        "THE_EARTHSHATTERER": 527,
+        "THE_ELEMENTS": 187,
+        "THE_FIVE_THUNDERS": 519,
+        "THE_GLADIATOR": 1,
+        "THE_HIGHLANDERS_DETERMINATION": 469,
+        "THE_HIGHLANDERS_FORTITUDE": 470,
+        "THE_HIGHLANDERS_INTENT": 473,
+        "THE_HIGHLANDERS_PURPOSE": 471,
+        "THE_HIGHLANDERS_RESOLUTION": 467,
+        "THE_HIGHLANDERS_RESOLVE": 468,
+        "THE_HIGHLANDERS_WILL": 472,
+        "THE_POSTMASTER": 81,
+        "THE_TEN_STORMS": 216,
+        "THE_TWIN_BLADES_OF_HAKKARI": 461,
+        "TRAPPINGS_OF_THE_UNSEEN_PATH": 510,
+        "TRAPPINGS_OF_VAULTED_SECRETS": 504,
+        "TWILIGHT_TRAPPINGS": 492,
+        "UNDEAD_SLAYERS_ARMOR": 534,
+        "VESTMENTS_OF_FAITH": 525,
+        "VESTMENTS_OF_PROPHECY": 202,
+        "VESTMENTS_OF_THE_DEVOUT": 182,
+        "VESTMENTS_OF_THE_VIRTUOUS": 514,
+        "VESTMENTS_OF_TRANSCENDENCE": 211,
+        "VINDICATORS_BATTLEGEAR": 474,
+        "VOLCANIC_ARMOR": 141,
+        "WARLORDS_BATTLEGEAR": 383,
+        "WARLORDS_EARTHSHAKER": 386,
+        "WARLORDS_PURSUIT": 396,
+        "WARLORDS_RAIMENT": 390,
+        "WARLORDS_REGALIA": 387,
+        "WARLORDS_SANCTUARY": 398,
+        "WARLORDS_THREADS": 391,
+        "WARLORDS_VESTMENTS": 393,
+        "WILDHEART_RAIMENT": 185,
+        "ZANZILS_CONCENTRATION": 462
+      }
+    },
+    "ItemSlot": {
+      "kind": "enum",
+      "underlying": "uint8",
+      "values": {
+        "BACK": 14,
+        "BAG1": 19,
+        "BAG2": 20,
+        "BAG3": 21,
+        "BAG4": 22,
+        "BANK_1": 39,
+        "BANK_10": 48,
+        "BANK_11": 49,
+        "BANK_12": 50,
+        "BANK_13": 51,
+        "BANK_14": 52,
+        "BANK_15": 53,
+        "BANK_16": 54,
+        "BANK_17": 55,
+        "BANK_18": 56,
+        "BANK_19": 57,
+        "BANK_2": 40,
+        "BANK_20": 58,
+        "BANK_21": 59,
+        "BANK_22": 60,
+        "BANK_23": 61,
+        "BANK_24": 62,
+        "BANK_3": 41,
+        "BANK_4": 42,
+        "BANK_5": 43,
+        "BANK_6": 44,
+        "BANK_7": 45,
+        "BANK_8": 46,
+        "BANK_9": 47,
+        "BANK_BAG_SLOT_1": 63,
+        "BANK_BAG_SLOT_2": 64,
+        "BANK_BAG_SLOT_3": 65,
+        "BANK_BAG_SLOT_4": 66,
+        "BANK_BAG_SLOT_5": 67,
+        "BANK_BAG_SLOT_6": 68,
+        "BOOTS": 7,
+        "CHEST": 4,
+        "HANDS": 9,
+        "HEAD": 0,
+        "INVENTORY_0": 23,
+        "INVENTORY_1": 24,
+        "INVENTORY_10": 33,
+        "INVENTORY_11": 34,
+        "INVENTORY_12": 35,
+        "INVENTORY_13": 36,
+        "INVENTORY_14": 37,
+        "INVENTORY_15": 38,
+        "INVENTORY_2": 25,
+        "INVENTORY_3": 26,
+        "INVENTORY_4": 27,
+        "INVENTORY_5": 28,
+        "INVENTORY_6": 29,
+        "INVENTORY_7": 30,
+        "INVENTORY_8": 31,
+        "INVENTORY_9": 32,
+        "KEYRING_1": 81,
+        "KEYRING_10": 90,
+        "KEYRING_11": 91,
+        "KEYRING_12": 92,
+        "KEYRING_13": 93,
+        "KEYRING_14": 94,
+        "KEYRING_15": 95,
+        "KEYRING_16": 96,
+        "KEYRING_17": 97,
+        "KEYRING_18": 98,
+        "KEYRING_19": 99,
+        "KEYRING_2": 82,
+        "KEYRING_20": 100,
+        "KEYRING_21": 101,
+        "KEYRING_22": 102,
+        "KEYRING_23": 103,
+        "KEYRING_24": 104,
+        "KEYRING_25": 105,
+        "KEYRING_26": 106,
+        "KEYRING_27": 107,
+        "KEYRING_28": 108,
+        "KEYRING_29": 109,
+        "KEYRING_3": 83,
+        "KEYRING_30": 110,
+        "KEYRING_31": 111,
+        "KEYRING_32": 112,
+        "KEYRING_4": 84,
+        "KEYRING_5": 85,
+        "KEYRING_6": 86,
+        "KEYRING_7": 87,
+        "KEYRING_8": 88,
+        "KEYRING_9": 89,
+        "LEGS": 6,
+        "MAIN_HAND": 15,
+        "NECK": 1,
+        "OFF_HAND": 16,
+        "RANGED_OR_RELIC": 17,
+        "RING1": 10,
+        "RING2": 11,
+        "SHIRT": 3,
+        "SHOULDERS": 2,
+        "TABARD": 18,
+        "TRINKET1": 12,
+        "TRINKET2": 13,
+        "VENDOR_BUYBACK_1": 69,
+        "VENDOR_BUYBACK_10": 78,
+        "VENDOR_BUYBACK_11": 79,
+        "VENDOR_BUYBACK_12": 80,
+        "VENDOR_BUYBACK_2": 70,
+        "VENDOR_BUYBACK_3": 71,
+        "VENDOR_BUYBACK_4": 72,
+        "VENDOR_BUYBACK_5": 73,
+        "VENDOR_BUYBACK_6": 74,
+        "VENDOR_BUYBACK_7": 75,
+        "VENDOR_BUYBACK_8": 76,
+        "VENDOR_BUYBACK_9": 77,
+        "WAIST": 5,
+        "WRIST": 8
+      }
+    },
+    "ItemSpells": {
+      "kind": "struct",
+      "fields": [
+        {
+          "name": "spell",
+          "type": "Spell"
+        },
+        {
+          "name": "spell_trigger",
+          "type": "SpellTriggerType"
+        },
+        {
+          "name": "spell_charges",
+          "type": "int32"
+        },
+        {
+          "name": "spell_cooldown",
+          "type": "int32"
+        },
+        {
+          "name": "spell_category",
+          "type": "uint32"
+        },
+        {
+          "name": "spell_category_cooldown",
+          "type": "int32"
+        }
+      ]
+    },
+    "ItemStat": {
+      "kind": "struct",
+      "fields": [
+        {
+          "name": "stat_type",
+          "type": "ItemStatType"
+        },
+        {
+          "name": "value",
+          "type": "int32"
+        }
+      ]
+    },
+    "ItemStatType": {
+      "kind": "enum",
+      "underlying": "uint8",
+      "values": {
+        "AGILITY": 3,
+        "HEALTH": 1,
+        "INTELLECT": 5,
+        "MANA": 0,
+        "SPIRIT": 6,
+        "STAMINA": 7,
+        "STRENGTH": 4
+      }
+    },
+    "ItemWeaponClass": {
+      "kind": "enum",
+      "underlying": "uint8",
+      "values": {
+        "ITEM": 0,
+        "WEAPON": 1
+      }
+    },
+    "KeyVersion": {
+      "kind": "enum",
+      "underlying": "uint8",
+      "values": {
+        "EIGHT": 8,
+        "FIVE": 5,
+        "FOUR": 4,
+        "NINE": 9,
+        "ONE": 1,
+        "SEVEN": 7,
+        "SIX": 6,
+        "THREE": 3,
+        "TWO": 2,
+        "ZERO": 0
+      }
+    },
+    "Language": {
+      "kind": "enum",
+      "underlying": "uint32",
+      "values": {
+        "ADDON": 4294967295,
+        "COMMON": 7,
+        "DARNASSIAN": 2,
+        "DEMONIC": 8,
+        "DRACONIC": 11,
+        "DWARVISH": 6,
+        "GNOMISH": 13,
+        "GUTTERSPEAK": 33,
+        "KALIMAG": 12,
+        "ORCISH": 1,
+        "TAURAHE": 3,
+        "THALASSIAN": 10,
+        "TITAN": 9,
+        "TROLL": 14,
+        "UNIVERSAL": 0
+      }
+    },
+    "LfgFaction": {
+      "kind": "enum",
+      "underlying": "int8",
+      "values": {
+        "ALLIANCE": 1,
+        "HORDE": 0,
+        "NEUTRAL": -1
+      }
+    },
+    "ListInventoryItem": {
+      "kind": "struct",
+      "fields": [
+        {
+          "name": "item_stack_count",
+          "type": "uint32"
+        },
+        {
+          "name": "item",
+          "type": "Item"
+        },
+        {
+          "name": "item_display_id",
+          "type": "uint32"
+        },
+        {
+          "name": "max_items",
+          "type": "uint32"
+        },
+        {
+          "name": "price",
+          "type": "Gold"
+        },
+        {
+          "name": "max_durability",
+          "type": "uint32"
+        },
+        {
+          "name": "durability",
+          "type": "uint32"
+        }
+      ]
+    },
+    "LockType": {
+      "kind": "enum",
+      "underlying": "uint8",
+      "values": {
+        "ITEM_REQUIRED": 1,
+        "LOCKTYPE_REFERENCE": 2,
+        "NONE": 0
+      }
+    },
+    "LogFormat": {
+      "kind": "enum",
+      "underlying": "uint8",
+      "values": {
+        "DEBUG": 1,
+        "DEFAULT": 0
+      }
+    },
+    "LogoutResult": {
+      "kind": "enum",
+      "underlying": "uint32",
+      "values": {
+        "FAILURE_FROZEN_BY_GM": 2,
+        "FAILURE_IN_COMBAT": 1,
+        "FAILURE_JUMPING_OR_FALLING": 3,
+        "SUCCESS": 0
+      }
+    },
+    "LogoutSpeed": {
+      "kind": "enum",
+      "underlying": "uint8",
+      "values": {
+        "DELAYED": 0,
+        "INSTANT": 1
+      }
+    },
+    "LootItem": {
+      "kind": "struct",
+      "fields": [
+        {
+          "name": "index",
+          "type": "uint8"
+        },
+        {
+          "name": "item",
+          "type": "Item"
+        },
+        {
+          "name": "ty",
+          "type": "LootSlotType"
+        }
+      ]
+    },
+    "LootMethod": {
+      "kind": "enum",
+      "underlying": "uint8",
+      "values": {
+        "CORPSE": 1,
+        "DISENCHANTING": 4,
+        "ERROR": 0,
+        "FISHING": 3,
+        "FISHINGHOLE": 20,
+        "FISHING_FAIL": 21,
+        "INSIGNIA": 22,
+        "PICKPOCKETING": 2,
+        "SKINNING": 6
+      }
+    },
+    "LootMethodError": {
+      "kind": "enum",
+      "underlying": "uint8",
+      "values": {
+        "ALREADY_PICKPOCKETED": 15,
+        "BAD_FACING": 5,
+        "DIDNT_KILL": 0,
+        "LOCKED": 6,
+        "MASTER_INV_FULL": 12,
+        "MASTER_OTHER": 14,
+        "MASTER_UNIQUE_ITEM": 13,
+        "NOTSTANDING": 8,
+        "NOT_WHILE_SHAPESHIFTED": 16,
+        "PLAYER_NOT_FOUND": 10,
+        "PLAY_TIME_EXCEEDED": 11,
+        "STUNNED": 9,
+        "TOO_FAR": 4
+      }
+    },
+    "LootSlotType": {
+      "kind": "enum",
+      "underlying": "uint8",
+      "values": {
+        "TYPE_ALLOW_LOOT": 0,
+        "TYPE_LOCKED": 3,
+        "TYPE_MASTER": 2,
+        "TYPE_OWNER": 4,
+        "TYPE_ROLL_ONGOING": 1
+      }
+    },
+    "Mail": {
+      "kind": "struct",
+      "fields": [
+        {
+          "name": "message_id",
+          "type": "uint32"
+        },
+        {
+          "name": "message_type",
+          "type": "MailType"
+        },
+        {
+          "name": "subject",
+          "type": "CString"
+        },
+        {
+          "name": "item_text_id",
+          "type": "uint32"
+        },
+        {
+          "name": "unknown1",
+          "type": "uint32"
+        },
+        {
+          "name": "stationery",
+          "type": "uint32"
+        },
+        {
+          "name": "item",
+          "type": "Item"
+        },
+        {
+          "name": "item_enchant_id",
+          "type": "uint32"
+        },
+        {
+          "name": "item_random_property_id",
+          "type": "uint32"
+        },
+        {
+          "name": "item_suffix_factor",
+          "type": "uint32"
+        },
+        {
+          "name": "item_stack_size",
+          "type": "uint8"
+        },
+        {
+          "name": "item_spell_charges",
+          "type": "uint32"
+        },
+        {
+          "name": "max_durability",
+          "type": "uint32"
+        },
+        {
+          "name": "durability",
+          "type": "uint32"
+        },
+        {
+          "name": "money",
+          "type": "Gold"
+        },
+        {
+          "name": "cash_on_delivery_amount",
+          "type": "uint32"
+        },
+        {
+          "name": "checked_timestamp",
+          "type": "uint32"
+        },
+        {
+          "name": "expiration_time",
+          "type": "float"
+        },
+        {
+          "name": "mail_template_id",
+          "type": "uint32"
+        }
+      ]
+    },
+    "MailAction": {
+      "kind": "enum",
+      "underlying": "uint32",
+      "values": {
+        "DELETED": 4,
+        "ITEM_TAKEN": 2,
+        "MADE_PERMANENT": 5,
+        "MONEY_TAKEN": 1,
+        "RETURNED_TO_SENDER": 3,
+        "SEND": 0
+      }
+    },
+    "MailMessageType": {
+      "kind": "enum",
+      "underlying": "uint32",
+      "values": {
+        "AUCTION": 2,
+        "CREATURE": 3,
+        "GAMEOBJECT": 4,
+        "ITEM": 5,
+        "NORMAL": 0
+      }
+    },
+    "MailResult": {
+      "kind": "enum",
+      "underlying": "uint32",
+      "values": {
+        "ERR_CANNOT_SEND_TO_SELF": 2,
+        "ERR_CANT_SEND_WRAPPED_COD": 16,
+        "ERR_DISABLED_FOR_TRIAL_ACC": 14,
+        "ERR_EQUIP_ERROR": 1,
+        "ERR_INTERNAL_ERROR": 6,
+        "ERR_MAIL_AND_CHAT_SUSPENDED": 17,
+        "ERR_MAIL_ATTACHMENT_INVALID": 19,
+        "ERR_NOT_ENOUGH_MONEY": 3,
+        "ERR_NOT_YOUR_TEAM": 5,
+        "ERR_RECIPIENT_CAP_REACHED": 15,
+        "ERR_RECIPIENT_NOT_FOUND": 4,
+        "ERR_TOO_MANY_ATTACHMENTS": 18,
+        "OK": 0
+      }
+    },
+    "MailResultTwo": {
+      "kind": "enum",
+      "underlying": "uint32",
+      "values": {
+        "ERR_CANNOT_SEND_TO_SELF": 2,
+        "ERR_CANT_SEND_WRAPPED_COD": 16,
+        "ERR_DISABLED_FOR_TRIAL_ACC": 14,
+        "ERR_EQUIP_ERROR": 1,
+        "ERR_INTERNAL_ERROR": 6,
+        "ERR_MAIL_AND_CHAT_SUSPENDED": 17,
+        "ERR_MAIL_ATTACHMENT_INVALID": 19,
+        "ERR_NOT_ENOUGH_MONEY": 3,
+        "ERR_NOT_YOUR_TEAM": 5,
+        "ERR_RECIPIENT_CAP_REACHED": 15,
+        "ERR_RECIPIENT_NOT_FOUND": 4,
+        "ERR_TOO_MANY_ATTACHMENTS": 18,
+        "OK": 0
+      }
+    },
+    "MailType": {
+      "kind": "enum",
+      "underlying": "uint8",
+      "values": {
+        "AUCTION": 2,
+        "CREATURE": 3,
+        "GAMEOBJECT": 4,
+        "ITEM": 5,
+        "NORMAL": 0
+      }
+    },
+    "Map": {
+      "kind": "enum",
+      "underlying": "uint32",
+      "values": {
+        "AHN_QIRAJ_TEMPLE": 531,
+        "ALLIANCE_PVP_BARRACKS": 449,
+        "ALTERAC_VALLEY": 30,
+        "ARATHI_BASIN": 529,
+        "AZSHARA_CRATER": 37,
+        "BLACKFATHOM_DEEPS": 48,
+        "BLACKROCK_DEPTHS": 230,
+        "BLACKROCK_SPIRE": 229,
+        "BLACKWING_LAIR": 469,
+        "CASH_TEST": 29,
+        "COLLINS_TEST": 42,
+        "DEADMINES": 36,
+        "DEEPRUN_TRAM": 369,
+        "DEVELOPMENT_LAND": 451,
+        "DIRE_MAUL": 429,
+        "EASTERN_KINGDOMS": 0,
+        "EMERALD_DREAM": 169,
+        "GNOMEREGAN": 90,
+        "HORDE_PVP_BARRACKS": 450,
+        "KALIMDOR": 1,
+        "MARAUDON": 349,
+        "MOLTEN_CORE": 409,
+        "MONASTERY_UNUSED": 44,
+        "NAXXRAMAS": 533,
+        "ONYXIAS_LAIR": 249,
+        "OPENING_OF_THE_DARK_PORTAL": 269,
+        "RAGEFIRE_CHASM": 389,
+        "RAZORFEN_DOWNS": 129,
+        "RAZORFEN_KRAUL": 47,
+        "RUINS_OF_AHN_QIRAJ": 509,
+        "SCARLET_MONASTERY": 189,
+        "SCHOLOMANCE": 289,
+        "SCOTT_TEST": 25,
+        "SHADOWFANG_KEEP": 33,
+        "STORMWIND_PRISON": 35,
+        "STORMWIND_STOCKADE": 34,
+        "STRATHOLME": 329,
+        "SUNKEN_TEMPLE": 109,
+        "TESTING": 13,
+        "ULDAMAN": 70,
+        "WAILING_CAVERNS": 43,
+        "WARSONG_GULCH": 489,
+        "ZUL_FARRAK": 209,
+        "ZUL_GURUB": 309
+      }
+    },
+    "MeetingStoneFailure": {
+      "kind": "enum",
+      "underlying": "uint8",
+      "values": {
+        "MEETINGSTONE_FAIL_FULL_GROUP": 2,
+        "MEETINGSTONE_FAIL_PARTYLEADER": 1,
+        "MEETINGSTONE_FAIL_RAID_GROUP": 3
+      }
+    },
+    "MeetingStoneStatus": {
+      "kind": "enum",
+      "underlying": "uint8",
+      "values": {
+        "JOINED_QUEUE": 1,
+        "LEAVE_QUEUE": 0,
+        "LOOKING_FOR_NEW_PARTY_IN_QUEUE": 4,
+        "NONE": 5,
+        "PARTY_MEMBER_LEFT_LFG": 2,
+        "PARTY_MEMBER_REMOVED_PARTY_REMOVED": 3
+      }
+    },
+    "MonsterMove": {
+      "kind": "struct",
+      "fields": [
+        {
+          "name": "spline_point",
+          "type": "Vector3d"
+        },
+        {
+          "name": "spline_id",
+          "type": "uint32"
+        },
+        {
+          "name": "move_type",
+          "type": "MonsterMoveType"
+        }
+      ]
+    },
+    "MonsterMoveType": {
+      "kind": "enum",
+      "underlying": "uint8",
+      "values": {
+        "FACING_ANGLE": 4,
+        "FACING_SPOT": 2,
+        "FACING_TARGET": 3,
+        "NORMAL": 0,
+        "STOP": 1
+      }
+    },
+    "MountResult": {
+      "kind": "enum",
+      "underlying": "uint32",
+      "values": {
+        "ALREADY_MOUNTED": 2,
+        "FORCED_DISMOUNT": 9,
+        "INVALID_MOUNTEE": 0,
+        "LOOTING": 6,
+        "NOT_MOUNTABLE": 3,
+        "NOT_YOUR_PET": 4,
+        "OK": 10,
+        "OTHER": 5,
+        "RACE_CANT_MOUNT": 7,
+        "SHAPESHIFTED": 8,
+        "TOO_FAR_AWAY": 1
+      }
+    },
+    "MovementBlock": {
+      "kind": "struct",
+      "fields": [
+        {
+          "name": "update_flag",
+          "type": "UpdateFlag"
+        }
+      ]
+    },
+    "MovementFlags": {
+      "kind": "flags",
+      "underlying": "uint32",
+      "values": {
+        "BACKWARD": 2,
+        "CAN_FLY": 8388608,
+        "FALLINGFAR": 16384,
+        "FIXED_Z": 2048,
+        "FLYING": 16777216,
+        "FORWARD": 1,
+        "HOVER": 1073741824,
+        "JUMPING": 8192,
+        "LEVITATING": 1024,
+        "NONE": 0,
+        "ONTRANSPORT": 33554432,
+        "ON_TRANSPORT": 512,
+        "PITCH_DOWN": 128,
+        "PITCH_UP": 64,
+        "ROOT": 4096,
+        "SAFE_FALL": 536870912,
+        "SPLINE_ELEVATION": 67108864,
+        "SPLINE_ENABLED": 4194304,
+        "STRAFE_LEFT": 4,
+        "STRAFE_RIGHT": 8,
+        "SWIMMING": 2097152,
+        "TURN_LEFT": 16,
+        "TURN_RIGHT": 32,
+        "WALK_MODE": 256,
+        "WATERWALKING": 268435456
+      }
+    },
+    "MovementInfo": {
+      "kind": "struct",
+      "fields": [
+        {
+          "name": "flags",
+          "type": "MovementFlags"
+        },
+        {
+          "name": "timestamp",
+          "type": "uint32"
+        },
+        {
+          "name": "position",
+          "type": "Vector3d"
+        },
+        {
+          "name": "orientation",
+          "type": "float"
+        },
+        {
+          "name": "fall_time",
+          "type": "float"
+        }
+      ]
+    },
+    "NewItemChatAlert": {
+      "kind": "enum",
+      "underlying": "uint32",
+      "values": {
+        "DO_NOT_SHOW": 0,
+        "SHOW": 1
+      }
+    },
+    "NewItemCreationType": {
+      "kind": "enum",
+      "underlying": "uint32",
+      "values": {
+        "CREATED": 1,
+        "RECEIVED": 0
+      }
+    },
+    "NewItemSource": {
+      "kind": "enum",
+      "underlying": "uint32",
+      "values": {
+        "FROM_NPC": 1,
+        "LOOTED": 0
+      }
+    },
+    "NpcTextUpdate": {
+      "kind": "struct",
+      "fields": [
+        {
+          "name": "probability",
+          "type": "float"
+        },
+        {
+          "name": "texts",
+          "type": "CString",
+          "array": {
+            "size": 2
+          }
+        },
+        {
+          "name": "language",
+          "type": "Language"
+        },
+        {
+          "name": "emotes",
+          "type": "NpcTextUpdateEmote",
+          "array": {
+            "size": 3
+          }
+        }
+      ]
+    },
+    "NpcTextUpdateEmote": {
+      "kind": "struct",
+      "fields": [
+        {
+          "name": "delay",
+          "type": "uint32"
+        },
+        {
+          "name": "emote",
+          "type": "uint32"
+        }
+      ]
+    },
+    "Object": {
+      "kind": "struct",
+      "fields": [
+        {
+          "name": "update_type",
+          "type": "UpdateType"
+        }
+      ]
+    },
+    "ObjectType": {
+      "kind": "enum",
+      "underlying": "uint8",
+      "values": {
+        "CONTAINER": 2,
+        "CORPSE": 7,
+        "DYNAMIC_OBJECT": 6,
+        "GAME_OBJECT": 5,
+        "ITEM": 1,
+        "OBJECT": 0,
+        "PLAYER": 4,
+        "UNIT": 3
+      }
+    },
+    "OceanType": {
+      "kind": "enum",
+      "underlying": "uint8",
+      "values": {
+        "FIRE": 0,
+        "SLIME": 2,
+        "WATER": 3
+      }
+    },
+    "PackedGuid": {
+      "kind": "external",
+      "include": "protocol/types/PackedGuid.h"
+    },
+    "PageTextMaterial": {
+      "kind": "enum",
+      "underlying": "uint8",
+      "values": {
+        "BRONZE": 5,
+        "MARBLE": 3,
+        "NONE": 0,
+        "PARCHMENT": 1,
+        "SILVER": 4,
+        "STONE": 2,
+        "VALENTINE": 6
+      }
+    },
+    "PartyOperation": {
+      "kind": "enum",
+      "underlying": "uint8",
+      "values": {
+        "INVITE": 0,
+        "LEAVE": 2
+      }
+    },
+    "PartyResult": {
+      "kind": "enum",
+      "underlying": "uint8",
+      "values": {
+        "ALREADY_IN_GROUP": 4,
+        "BAD_PLAYER_NAME": 1,
+        "GROUP_FULL": 3,
+        "IGNORING_YOU": 8,
+        "NOT_IN_GROUP": 5,
+        "NOT_LEADER": 6,
+        "PLAYER_WRONG_FACTION": 7,
+        "SUCCESS": 0,
+        "TARGET_NOT_IN_GROUP": 2
+      }
+    },
+    "PetCommandState": {
+      "kind": "enum",
+      "underlying": "uint8",
+      "values": {
+        "ATTACK": 2,
+        "DISMISS": 3,
+        "FOLLOW": 1,
+        "STAY": 0
+      }
+    },
+    "PetEnabled": {
+      "kind": "enum",
+      "underlying": "uint8",
+      "values": {
+        "DISABLED": 0,
+        "ENABLED": 8
+      }
+    },
+    "PetFeedback": {
+      "kind": "enum",
+      "underlying": "uint8",
+      "values": {
+        "CANT_ATTACK_TARGET": 3,
+        "NOTHING_TO_ATTACK": 2,
+        "NO_PATH_TO": 4,
+        "PET_DEAD": 1
+      }
+    },
+    "PetReactState": {
+      "kind": "enum",
+      "underlying": "uint8",
+      "values": {
+        "AGGRESSIVE": 2,
+        "DEFENSIVE": 1,
+        "PASSIVE": 0
+      }
+    },
+    "PetSpellCooldown": {
+      "kind": "struct",
+      "fields": [
+        {
+          "name": "spell",
+          "type": "Spell16"
+        },
+        {
+          "name": "spell_category",
+          "type": "uint16"
+        },
+        {
+          "name": "cooldown",
+          "type": "Milliseconds"
+        },
+        {
+          "name": "category_cooldown",
+          "type": "Milliseconds"
+        }
+      ]
+    },
+    "PetTalkReason": {
+      "kind": "enum",
+      "underlying": "uint32",
+      "values": {
+        "ATTACK": 1,
+        "SPECIAL_SPELL": 0
+      }
+    },
+    "PetTameFailureReason": {
+      "kind": "enum",
+      "underlying": "uint8",
+      "values": {
+        "ANOTHER_SUMMON_ACTIVE": 5,
+        "CREATURE_ALREADY_OWNED": 3,
+        "DEAD": 10,
+        "INTERNAL_ERROR": 8,
+        "INVALID_CREATURE": 1,
+        "NOT_DEAD": 11,
+        "NOT_TAMEABLE": 4,
+        "NO_PET_AVAILABLE": 7,
+        "TOO_HIGH_LEVEL": 9,
+        "TOO_MANY": 2,
+        "UNITS_CANT_TAME": 6,
+        "UNKNOWN_ERROR": 12
+      }
+    },
+    "PetitionResult": {
+      "kind": "enum",
+      "underlying": "uint32",
+      "values": {
+        "ALREADY_IN_GUILD": 2,
+        "ALREADY_SIGNED": 1,
+        "CANT_SIGN_OWN": 3,
+        "NEED_MORE": 4,
+        "NOT_SERVER": 5,
+        "OK": 0
+      }
+    },
+    "PetitionShowlist": {
+      "kind": "struct",
+      "fields": [
+        {
+          "name": "index",
+          "type": "uint32"
+        },
+        {
+          "name": "charter_entry",
+          "type": "uint32"
+        },
+        {
+          "name": "charter_display_id",
+          "type": "uint32"
+        },
+        {
+          "name": "guild_charter_cost",
+          "type": "uint32"
+        },
+        {
+          "name": "unknown1",
+          "type": "uint32"
+        }
+      ]
+    },
+    "PetitionSignature": {
+      "kind": "struct",
+      "fields": [
+        {
+          "name": "signer",
+          "type": "uint64"
+        },
+        {
+          "name": "unknown1",
+          "type": "uint32"
+        }
+      ]
+    },
+    "PlayerChatTag": {
+      "kind": "enum",
+      "underlying": "uint8",
+      "values": {
+        "AFK": 1,
+        "DND": 2,
+        "GM": 3,
+        "NONE": 0
+      }
+    },
+    "Power": {
+      "kind": "enum",
+      "underlying": "uint8",
+      "values": {
+        "ENERGY": 3,
+        "FOCUS": 2,
+        "HAPPINESS": 4,
+        "HEALTH": 254,
+        "MANA": 0,
+        "RAGE": 1
+      }
+    },
+    "PrefixedString32": {
+      "kind": "string",
+      "encoding": "prefixed_null_terminated",
+      "length_type": "uint32"
+    },
+    "PvpFlags": {
+      "kind": "flags",
+      "underlying": "uint16",
+      "values": {
+        "ATTACK_PVPING_PLAYERS": 4096,
+        "PVP_FLAGGED": 2048
+      }
+    },
+    "PvpRank": {
+      "kind": "enum",
+      "underlying": "uint8",
+      "values": {
+        "DISHONORED": 4,
+        "EXILED": 3,
+        "FACTION_LEADER": 19,
+        "NO_RANK": 0,
+        "OUTLAW": 2,
+        "PARIAH": 1,
+        "RANK1": 5,
+        "RANK10": 14,
+        "RANK11": 15,
+        "RANK12": 16,
+        "RANK13": 17,
+        "RANK14": 18,
+        "RANK2": 6,
+        "RANK3": 7,
+        "RANK4": 8,
+        "RANK5": 9,
+        "RANK6": 10,
+        "RANK7": 11,
+        "RANK8": 12,
+        "RANK9": 13
+      }
+    },
+    "QuestCompletable": {
+      "kind": "enum",
+      "underlying": "uint32",
+      "values": {
+        "COMPLETEABLE": 3,
+        "NOT_COMPLETABLE": 0
+      }
+    },
+    "QuestDetailsEmote": {
+      "kind": "struct",
+      "fields": [
+        {
+          "name": "emote",
+          "type": "uint32"
+        },
+        {
+          "name": "emote_delay",
+          "type": "Milliseconds"
+        }
+      ]
+    },
+    "QuestFailedReason": {
+      "kind": "enum",
+      "underlying": "uint32",
+      "values": {
+        "DONT_HAVE_REQ": 0,
+        "QUEST_ALREADY_ON": 13,
+        "QUEST_FAILED_DUPLICATE_ITEM": 17,
+        "QUEST_FAILED_INVENTORY_FULL": 4,
+        "QUEST_FAILED_LOW_LEVEL": 1,
+        "QUEST_FAILED_MISSING_ITEMS": 20,
+        "QUEST_FAILED_NOT_ENOUGH_MONEY": 22,
+        "QUEST_FAILED_REQS": 2,
+        "QUEST_FAILED_WRONG_RACE": 6,
+        "QUEST_ONLY_ONE_TIMED": 12
+      }
+    },
+    "QuestGiverStatus": {
+      "kind": "enum",
+      "underlying": "uint8",
+      "values": {
+        "AVAILABLE": 5,
+        "CHAT": 2,
+        "INCOMPLETE": 3,
+        "NONE": 0,
+        "REWARD2": 7,
+        "REWARD_OLD": 6,
+        "REWARD_REP": 4,
+        "UNAVAILABLE": 1
+      }
+    },
+    "QuestItem": {
+      "kind": "struct",
+      "fields": [
+        {
+          "name": "quest_id",
+          "type": "uint32"
+        },
+        {
+          "name": "quest_icon",
+          "type": "uint32"
+        },
+        {
+          "name": "level",
+          "type": "Level32"
+        },
+        {
+          "name": "title",
+          "type": "CString"
+        }
+      ]
+    },
+    "QuestItemRequirement": {
+      "kind": "struct",
+      "fields": [
+        {
+          "name": "item",
+          "type": "Item"
+        },
+        {
+          "name": "item_count",
+          "type": "uint32"
+        },
+        {
+          "name": "item_display_id",
+          "type": "uint32"
+        }
+      ]
+    },
+    "QuestItemReward": {
+      "kind": "struct",
+      "fields": [
+        {
+          "name": "item",
+          "type": "Item"
+        },
+        {
+          "name": "item_count",
+          "type": "uint32"
+        }
+      ]
+    },
+    "QuestObjective": {
+      "kind": "struct",
+      "fields": [
+        {
+          "name": "creature_id",
+          "type": "uint32"
+        },
+        {
+          "name": "kill_count",
+          "type": "uint32"
+        },
+        {
+          "name": "required_item_id",
+          "type": "uint32"
+        },
+        {
+          "name": "required_item_count",
+          "type": "uint32"
+        }
+      ]
+    },
+    "QuestPartyMessage": {
+      "kind": "enum",
+      "underlying": "uint8",
+      "values": {
+        "ACCEPT_QUEST": 2,
+        "BUSY": 5,
+        "CANT_TAKE_QUEST": 1,
+        "DECLINE_QUEST": 3,
+        "FINISH_QUEST": 8,
+        "HAVE_QUEST": 7,
+        "LOG_FULL": 6,
+        "SHARING_QUEST": 0,
+        "TOO_FAR": 4
+      }
+    },
+    "Race": {
+      "kind": "enum",
+      "underlying": "uint8",
+      "values": {
+        "DWARF": 3,
+        "GNOME": 7,
+        "GOBLIN": 9,
+        "HUMAN": 1,
+        "NIGHT_ELF": 4,
+        "ORC": 2,
+        "TAUREN": 6,
+        "TROLL": 8,
+        "UNDEAD": 5
+      }
+    },
+    "RaidGroupError": {
+      "kind": "enum",
+      "underlying": "uint32",
+      "values": {
+        "FULL": 2,
+        "REQUIRED": 1
+      }
+    },
+    "RaidInfo": {
+      "kind": "struct",
+      "fields": [
+        {
+          "name": "map",
+          "type": "Map"
+        },
+        {
+          "name": "reset_time",
+          "type": "uint32"
+        },
+        {
+          "name": "instance_id",
+          "type": "uint32"
+        }
+      ]
+    },
+    "RaidInstanceMessage": {
+      "kind": "enum",
+      "underlying": "uint32",
+      "values": {
+        "WARNING_HOURS": 1,
+        "WARNING_MIN": 2,
+        "WARNING_MIN_SOON": 3,
+        "WELCOME": 4
+      }
+    },
+    "RaidTargetIndex": {
+      "kind": "enum",
+      "underlying": "uint8",
+      "values": {
+        "REQUEST_ICONS": 255,
+        "UNKNOWN0": 0,
+        "UNKNOWN1": 1,
+        "UNKNOWN2": 2,
+        "UNKNOWN3": 3,
+        "UNKNOWN4": 4,
+        "UNKNOWN5": 5,
+        "UNKNOWN6": 6,
+        "UNKNOWN7": 7,
+        "UNKNOWN8": 8
+      }
+    },
+    "RaidTargetUpdate": {
+      "kind": "struct",
+      "fields": [
+        {
+          "name": "index",
+          "type": "RaidTargetIndex"
+        },
+        {
+          "name": "guid",
+          "type": "uint64"
+        }
+      ]
+    },
+    "RaidTargetUpdateType": {
+      "kind": "enum",
+      "underlying": "uint8",
+      "values": {
+        "FULL": 1,
+        "PARTIAL": 0
+      }
+    },
+    "ReputationFlags": {
+      "kind": "flags",
+      "underlying": "uint8",
+      "values": {
+        "ENABLE_AT_WAR": 2,
+        "FACTION_INACTIVE": 32,
+        "FORCE_AT_PEACE": 16,
+        "FORCE_HIDE_IN_CLIENT": 8,
+        "HIDE_IN_CLIENT": 4,
+        "VISIBLE_TO_CLIENT": 1
+      }
+    },
+    "RollVote": {
+      "kind": "enum",
+      "underlying": "uint8",
+      "values": {
+        "GREED": 2,
+        "NEED": 1,
+        "PASS": 0
+      }
+    },
+    "Scalp": {
+      "kind": "enum",
+      "underlying": "uint8",
+      "values": {
+        "BALD": 1,
+        "HAIR": 0
+      }
+    },
+    "SelectionType": {
+      "kind": "enum",
+      "underlying": "uint8",
+      "values": {
+        "BASE_SKIN": 0,
+        "FACE": 1,
+        "FACIAL_HAIR": 2,
+        "HAIR": 3,
+        "UNDERWEAR": 4
+      }
+    },
+    "SellItemResult": {
+      "kind": "enum",
+      "underlying": "uint8",
+      "values": {
+        "CANT_FIND_ITEM": 1,
+        "CANT_FIND_VENDOR": 3,
+        "CANT_SELL_ITEM": 2,
+        "ONLY_EMPTY_BAG": 6,
+        "UNK": 5,
+        "YOU_DONT_OWN_THAT_ITEM": 4
+      }
+    },
+    "ServerCategory": {
+      "kind": "enum",
+      "underlying": "uint8",
+      "values": {
+        "FIVE": 5,
+        "ONE": 1,
+        "THREE": 3,
+        "TWO": 2
+      }
+    },
+    "ServerMessageType": {
+      "kind": "enum",
+      "underlying": "uint32",
+      "values": {
+        "CUSTOM": 3,
+        "RESTART_CANCELLED": 5,
+        "RESTART_TIME": 2,
+        "SHUTDOWN_CANCELLED": 4,
+        "SHUTDOWN_TIME": 1
+      }
+    },
+    "ServerRegion": {
+      "kind": "enum",
+      "underlying": "uint8",
+      "values": {
+        "CHINA": 5,
+        "EUROPE": 3,
+        "KOREA": 2,
+        "QA_SERVER": 101,
+        "TAIWAN": 4,
+        "TEST_SERVER": 99,
+        "UNITED_STATES": 1
+      }
+    },
+    "SheathState": {
+      "kind": "enum",
+      "underlying": "uint8",
+      "values": {
+        "MELEE": 1,
+        "RANGED": 2,
+        "UNARMED": 0
+      }
+    },
+    "SheatheType": {
+      "kind": "enum",
+      "underlying": "uint8",
+      "values": {
+        "HIP_WEAPON_LEFT": 5,
+        "HIP_WEAPON_RIGHT": 6,
+        "LARGE_WEAPON_LEFT": 3,
+        "LARGE_WEAPON_RIGHT": 4,
+        "MAIN_HAND": 1,
+        "NONE": 0,
+        "OFF_HAND": 2,
+        "SHIELD": 7
+      }
+    },
+    "SimpleSpellCastResult": {
+      "kind": "enum",
+      "underlying": "uint8",
+      "values": {
+        "FAILURE": 2,
+        "SUCCESS": 0
+      }
+    },
+    "SizeClass": {
+      "kind": "enum",
+      "underlying": "int8",
+      "values": {
+        "COLOSSAL": 4,
+        "GIANT": 3,
+        "LARGE": 2,
+        "MEDIUM": 1,
+        "NONE": -1,
+        "SMALL": 0
+      }
+    },
+    "Skill": {
+      "kind": "enum",
+      "underlying": "uint16",
+      "values": {
+        "AFFLICTION": 355,
+        "ALCHEMY": 171,
+        "ARCANE": 237,
+        "ARMS": 26,
+        "ASSASSINATION": 253,
+        "AXES": 44,
+        "BALANCE": 574,
+        "BEAST_MASTERY": 50,
+        "BEAST_TRAINING": 261,
+        "BLACKSMITHING": 164,
+        "BOWS": 45,
+        "CLOTH": 415,
+        "COMBAT": 38,
+        "COOKING": 185,
+        "CROSSBOWS": 226,
+        "DAGGERS": 173,
+        "DEFENSE": 95,
+        "DEMONOLOGY": 354,
+        "DESTRUCTION": 593,
+        "DISCIPLINE": 613,
+        "DUAL_WIELD": 118,
+        "ELEMENTAL_COMBAT": 375,
+        "ENCHANTING": 333,
+        "ENGINEERING": 202,
+        "ENHANCEMENT": 373,
+        "FERAL_COMBAT": 134,
+        "FIRE": 8,
+        "FIRST_AID": 129,
+        "FISHING": 356,
+        "FIST_WEAPONS": 473,
+        "FROST": 6,
+        "FURY": 256,
+        "GENERIC_DND": 183,
+        "GUNS": 46,
+        "HERBALISM": 182,
+        "HOLY": 56,
+        "HOLY2": 594,
+        "LANGUAGE_COMMON": 98,
+        "LANGUAGE_DARNASSIAN": 113,
+        "LANGUAGE_DEMON_TONGUE": 139,
+        "LANGUAGE_DRACONIC": 138,
+        "LANGUAGE_DWARVEN": 111,
+        "LANGUAGE_GNOMISH": 313,
+        "LANGUAGE_GUTTERSPEAK": 673,
+        "LANGUAGE_OLD_TONGUE": 141,
+        "LANGUAGE_ORCISH": 109,
+        "LANGUAGE_TAURAHE": 115,
+        "LANGUAGE_THALASSIAN": 137,
+        "LANGUAGE_TITAN": 140,
+        "LANGUAGE_TROLL": 315,
+        "LEATHER": 414,
+        "LEATHERWORKING": 165,
+        "LOCKPICKING": 633,
+        "MACES": 54,
+        "MAIL": 413,
+        "MARKSMANSHIP": 163,
+        "MINING": 186,
+        "NONE": 0,
+        "ORC_RACIAL": 125,
+        "PET_BAT": 653,
+        "PET_BEAR": 210,
+        "PET_BOAR": 211,
+        "PET_CARRION_BIRD": 213,
+        "PET_CAT": 209,
+        "PET_CRAB": 214,
+        "PET_CROCILISK": 212,
+        "PET_DOOMGUARD": 207,
+        "PET_EVENT_RC": 758,
+        "PET_FELHUNTER": 189,
+        "PET_GORILLA": 215,
+        "PET_HYENA": 654,
+        "PET_IMP": 188,
+        "PET_INFERNAL": 206,
+        "PET_OWL": 655,
+        "PET_RAPTOR": 217,
+        "PET_SCORPID": 236,
+        "PET_SPIDER": 203,
+        "PET_SUCCUBUS": 205,
+        "PET_TALENTS": 270,
+        "PET_TALLSTRIDER": 218,
+        "PET_TURTLE": 251,
+        "PET_VOIDWALKER": 204,
+        "PET_WIND_SERPENT": 656,
+        "PET_WOLF": 208,
+        "PLATE_MAIL": 293,
+        "POISONS": 40,
+        "POLEARMS": 229,
+        "PROTECTION": 257,
+        "PROTECTION2": 267,
+        "RACIAL_DWARVEN": 101,
+        "RACIAL_GNOME": 753,
+        "RACIAL_HUMAN": 754,
+        "RACIAL_NIGHT_ELF": 126,
+        "RACIAL_TAUREN": 124,
+        "RACIAL_TROLL": 733,
+        "RACIAL_UNDED": 220,
+        "RESTORATION": 374,
+        "RESTORATION2": 573,
+        "RETRIBUTION": 184,
+        "RIDING": 762,
+        "RIDING_HORSE": 148,
+        "RIDING_KODO": 713,
+        "RIDING_MECHANOSTRIDER": 553,
+        "RIDING_RAM": 152,
+        "RIDING_RAPTOR": 533,
+        "RIDING_TIGER": 150,
+        "RIDING_UNDEAD_HORSE": 554,
+        "RIDING_WOLF": 149,
+        "SHADOW": 78,
+        "SHIELD": 433,
+        "SKINNING": 393,
+        "STAVES": 136,
+        "SUBTLETY": 39,
+        "SURVIVAL": 51,
+        "SURVIVAL2": 142,
+        "SWIMMING": 155,
+        "SWORDS": 43,
+        "TAILORING": 197,
+        "THROWN": 176,
+        "TWO_HANDED_AXES": 172,
+        "TWO_HANDED_MACES": 160,
+        "TWO_HANDED_SWORDS": 55,
+        "UNARMED": 162,
+        "WANDS": 228
+      }
+    },
+    "SkillCategory": {
+      "kind": "enum",
+      "underlying": "uint8",
+      "values": {
+        "ARMOR": 8,
+        "ATTRIBUTE": 5,
+        "CLASS": 7,
+        "GENERIC": 12,
+        "LANGUAGE": 10,
+        "PRIMARY_PROFESSION": 11,
+        "SECONDARY_PROFESSION": 9,
+        "WEAPON": 6
+      }
+    },
+    "SkillInfo": {
+      "kind": "struct",
+      "fields": [
+        {
+          "name": "skill",
+          "type": "Skill"
+        },
+        {
+          "name": "skill_step",
+          "type": "uint16"
+        },
+        {
+          "name": "minimum",
+          "type": "uint16"
+        },
+        {
+          "name": "maximum",
+          "type": "uint16"
+        },
+        {
+          "name": "permanent_bonus",
+          "type": "uint16"
+        },
+        {
+          "name": "temporary_bonus",
+          "type": "uint16"
+        }
+      ]
+    },
+    "SoundType": {
+      "kind": "enum",
+      "underlying": "uint8",
+      "values": {
+        "ARMOUR_FOLEY": 19,
+        "DEATH": 16,
+        "DOODADS": 25,
+        "EMOTES": 29,
+        "ERRORS": 12,
+        "FOOTSTEPS": 3,
+        "FOOTSTEPS_2": 20,
+        "NARRATION": 31,
+        "NARRATION_MUSIC": 30,
+        "NPC_COMBAT": 10,
+        "NPC_GREETINGS": 17,
+        "NPC_LOOPS": 27,
+        "OBJECTS": 14,
+        "PICK_UP_PUT_DOWN": 9,
+        "SPELLS": 1,
+        "SPELL_FIZZLE": 26,
+        "TEST": 18,
+        "TRADESKILLS": 23,
+        "UI": 2,
+        "UNUSED": 0,
+        "WATER_CHARACTER": 21,
+        "WATER_LIQUID": 22,
+        "WEAPON_IMPACT": 4,
+        "WEAPON_MISS": 6,
+        "ZONE_AMBIENCE": 50,
+        "ZONE_MUSIC": 28
+      }
+    },
+    "SpellCastResult": {
+      "kind": "enum",
+      "underlying": "uint8",
+      "values": {
+        "AFFECTING_COMBAT": 0,
+        "ALREADY_AT_FULL_HEALTH": 1,
+        "ALREADY_AT_FULL_MANA": 2,
+        "ALREADY_BEING_TAMED": 3,
+        "ALREADY_HAVE_CHARM": 4,
+        "ALREADY_HAVE_SUMMON": 5,
+        "ALREADY_OPEN": 6,
+        "BAD_IMPLICIT_TARGETS": 9,
+        "BAD_TARGETS": 10,
+        "CANT_BE_CHARMED": 11,
+        "CANT_BE_DISENCHANTED": 12,
+        "CANT_BE_PROSPECTED": 13,
+        "CANT_CAST_ON_TAPPED": 14,
+        "CANT_DO_THAT_YET": 18,
+        "CANT_DUEL_WHILE_INVISIBLE": 15,
+        "CANT_DUEL_WHILE_STEALTHED": 16,
+        "CANT_TOO_CLOSE_TO_ENEMY": 17,
+        "CANT_USE_NEW_ITEM": 138,
+        "CASTER_DEAD": 19,
+        "CHARMED": 20,
+        "CHEST_IN_USE": 21,
+        "CONFUSED": 22,
+        "DAMAGE_IMMUNE": 140,
+        "DISENCHANT_WHILE_LOOTING": 130,
+        "DONT_REPORT": 23,
+        "ENCHANT_NOT_EXISTING_ITEM": 39,
+        "EQUIPPED_ITEM": 24,
+        "EQUIPPED_ITEM_CLASS": 25,
+        "EQUIPPED_ITEM_CLASS_MAINHAND": 26,
+        "EQUIPPED_ITEM_CLASS_OFFHAND": 27,
+        "ERROR": 28,
+        "FIZZLE": 29,
+        "FLEEING": 30,
+        "FOOD_LOWLEVEL": 31,
+        "HIGHLEVEL": 32,
+        "IMMUNE": 34,
+        "INTERRUPTED": 35,
+        "INTERRUPTED_COMBAT": 36,
+        "ITEM_ALREADY_ENCHANTED": 37,
+        "ITEM_GONE": 38,
+        "ITEM_NOT_READY": 40,
+        "LEVEL_REQUIREMENT": 41,
+        "LINE_OF_SIGHT": 42,
+        "LOWLEVEL": 43,
+        "MAINHAND_EMPTY": 45,
+        "MIN_SKILL": 144,
+        "MORE_POWERFUL_SPELL_ACTIVE": 7,
+        "MOVING": 46,
+        "NEED_AMMO": 47,
+        "NEED_EXOTIC_AMMO": 49,
+        "NEED_REQUIRES_SOMETHING": 48,
+        "NOPATH": 50,
+        "NOTHING_TO_DISPEL": 78,
+        "NOTHING_TO_STEAL": 79,
+        "NOT_BEHIND": 51,
+        "NOT_FISHABLE": 52,
+        "NOT_HERE": 53,
+        "NOT_INFRONT": 54,
+        "NOT_IN_CONTROL": 55,
+        "NOT_KNOWN": 56,
+        "NOT_MOUNTED": 57,
+        "NOT_ON_TAXI": 58,
+        "NOT_ON_TRANSPORT": 59,
+        "NOT_READY": 60,
+        "NOT_SHAPESHIFT": 61,
+        "NOT_STANDING": 62,
+        "NOT_TRADEABLE": 63,
+        "NOT_TRADING": 64,
+        "NOT_UNSHEATHED": 65,
+        "NOT_WHILE_FATIGUED": 126,
+        "NOT_WHILE_GHOST": 66,
+        "NOT_WHILE_TRADING": 128,
+        "NO_AMMO": 67,
+        "NO_CHAMPION": 69,
+        "NO_CHARGES_REMAIN": 68,
+        "NO_COMBO_POINTS": 70,
+        "NO_DUELING": 71,
+        "NO_EDIBLE_CORPSES": 134,
+        "NO_ENDURANCE": 72,
+        "NO_FISH": 73,
+        "NO_ITEMS_WHILE_SHAPESHIFTED": 74,
+        "NO_MOUNTS_ALLOWED": 75,
+        "NO_PET": 76,
+        "NO_POWER": 77,
+        "ONLY_ABOVEWATER": 80,
+        "ONLY_BATTLEGROUNDS": 135,
+        "ONLY_DAYTIME": 81,
+        "ONLY_INDOORS": 82,
+        "ONLY_MOUNTED": 83,
+        "ONLY_NIGHTTIME": 84,
+        "ONLY_OUTDOORS": 85,
+        "ONLY_SHAPESHIFT": 86,
+        "ONLY_STEALTHED": 87,
+        "ONLY_UNDERWATER": 88,
+        "OUT_OF_RANGE": 89,
+        "PACIFIED": 90,
+        "PLAY_TIME": 142,
+        "POSSESSED": 91,
+        "PREVENTED_BY_MECHANIC": 141,
+        "PROSPECT_WHILE_LOOTING": 131,
+        "REPUTATION": 143,
+        "REQUIRES_AREA": 93,
+        "REQUIRES_SPELL_FOCUS": 94,
+        "ROOTED": 95,
+        "SILENCED": 96,
+        "SKILL_NOT_HIGH_ENOUGH": 44,
+        "SPELL_IN_PROGRESS": 97,
+        "SPELL_LEARNED": 98,
+        "SPELL_UNAVAILABLE": 99,
+        "STUNNED": 100,
+        "TARGETS_DEAD": 101,
+        "TARGET_AFFECTING_COMBAT": 102,
+        "TARGET_AURASTATE": 103,
+        "TARGET_DUELING": 104,
+        "TARGET_ENEMY": 105,
+        "TARGET_ENRAGED": 106,
+        "TARGET_FREEFORALL": 133,
+        "TARGET_FRIENDLY": 107,
+        "TARGET_IN_COMBAT": 108,
+        "TARGET_IS_PLAYER": 109,
+        "TARGET_NOT_DEAD": 110,
+        "TARGET_NOT_GHOST": 136,
+        "TARGET_NOT_IN_INSTANCE": 127,
+        "TARGET_NOT_IN_PARTY": 111,
+        "TARGET_NOT_IN_RAID": 129,
+        "TARGET_NOT_LOOTED": 112,
+        "TARGET_NOT_PLAYER": 113,
+        "TARGET_NO_POCKETS": 114,
+        "TARGET_NO_WEAPONS": 115,
+        "TARGET_UNSKINNABLE": 116,
+        "THIRST_SATIATED": 117,
+        "TOO_CLOSE": 118,
+        "TOO_MANY_OF_ITEM": 119,
+        "TOO_MANY_SKILLS": 137,
+        "TRAINING_POINTS": 121,
+        "TRY_AGAIN": 122,
+        "UNIT_NOT_BEHIND": 123,
+        "UNIT_NOT_INFRONT": 124,
+        "UNKNOWN": 145,
+        "WRONG_PET_FOOD": 125,
+        "WRONG_WEATHER": 139
+      }
+    },
+    "SpellCastTargetFlags": {
+      "kind": "flags",
+      "underlying": "uint16",
+      "values": {
+        "CORPSE": 32768,
+        "DEST_LOCATION": 64,
+        "GAMEOBJECT": 2048,
+        "ITEM": 16,
+        "OBJECT_UNK": 128,
+        "PVP_CORPSE": 512,
+        "SELF": 0,
+        "SOURCE_LOCATION": 32,
+        "STRING": 8192,
+        "TRADE_ITEM": 4096,
+        "UNIT": 2,
+        "UNIT_CORPSE": 1024,
+        "UNIT_UNK": 256,
+        "UNK1": 16384,
+        "UNUSED1": 1,
+        "UNUSED2": 4,
+        "UNUSED3": 8
+      }
+    },
+    "SpellCastTargets": {
+      "kind": "struct",
+      "fields": [
+        {
+          "name": "target_flags",
+          "type": "SpellCastTargetFlags"
+        }
+      ]
+    },
+    "SpellCooldownStatus": {
+      "kind": "struct",
+      "fields": [
+        {
+          "name": "id",
+          "type": "Spell"
+        },
+        {
+          "name": "cooldown_time",
+          "type": "Milliseconds"
+        }
+      ]
+    },
+    "SpellEffect": {
+      "kind": "enum",
+      "underlying": "uint32",
+      "values": {
+        "ACTIVATE_OBJECT": 86,
+        "ADD_COMBO_POINTS": 80,
+        "ADD_EXTRA_ATTACKS": 19,
+        "ADD_FARSIGHT": 72,
+        "ADD_HONOR": 45,
+        "APPLY_AREA_AURA_PARTY": 35,
+        "APPLY_AREA_AURA_PET": 119,
+        "APPLY_AURA": 6,
+        "ATTACK": 78,
+        "ATTACK_ME": 114,
+        "BIND": 11,
+        "BIND_SIGHT": 82,
+        "BLOCK": 23,
+        "CHARGE": 96,
+        "CREATE_HOUSE": 81,
+        "CREATE_ITEM": 24,
+        "DEFENSE": 26,
+        "DESTROY_ALL_TOTEMS": 110,
+        "DETECT": 49,
+        "DISENCHANT": 99,
+        "DISMISS_PET": 102,
+        "DISPEL": 38,
+        "DISPEL_MECHANIC": 108,
+        "DISTRACT": 69,
+        "DODGE": 20,
+        "DUAL_WIELD": 40,
+        "DUEL": 83,
+        "DUMMY": 3,
+        "DURABILITY_DAMAGE": 111,
+        "DURABILITY_DAMAGE_PCT": 115,
+        "ENCHANT_HELD_ITEM": 92,
+        "ENCHANT_ITEM": 53,
+        "ENCHANT_ITEM_TEMPORARY": 54,
+        "ENERGIZE": 30,
+        "ENVIRONMENTAL_DAMAGE": 7,
+        "EVADE": 21,
+        "FEED_PET": 101,
+        "FORCE_CRITICAL_HIT": 51,
+        "GUARANTEE_HIT": 52,
+        "HEAL": 10,
+        "HEALTH_FUNNEL": 65,
+        "HEALTH_LEECH": 9,
+        "HEAL_MAX_HEALTH": 67,
+        "HEAL_MECHANICAL": 75,
+        "INEBRIATE": 100,
+        "INSTAKILL": 1,
+        "INTERRUPT_CAST": 68,
+        "KNOCK_BACK": 98,
+        "LANGUAGE": 39,
+        "LEAP": 29,
+        "LEARN_PET_SPELL": 57,
+        "LEARN_SPELL": 36,
+        "MODIFY_THREAT_PERCENT": 125,
+        "NONE": 0,
+        "NORMALIZED_WEAPON_DMG": 121,
+        "OPEN_LOCK": 33,
+        "OPEN_LOCK_ITEM": 59,
+        "PARRY": 22,
+        "PERSISTENT_AREA_AURA": 27,
+        "PICKPOCKET": 71,
+        "PLAYER_PULL": 124,
+        "PORTAL": 12,
+        "PORTAL_TELEPORT": 4,
+        "POWER_BURN": 62,
+        "POWER_DRAIN": 8,
+        "POWER_FUNNEL": 66,
+        "PROFICIENCY": 60,
+        "PULL": 70,
+        "QUEST_COMPLETE": 16,
+        "REPUTATION": 103,
+        "RESURRECT": 18,
+        "RESURRECT_NEW": 113,
+        "RITUAL_ACTIVATE_PORTAL": 15,
+        "RITUAL_BASE": 13,
+        "RITUAL_SPECIALIZE": 14,
+        "SANCTUARY": 79,
+        "SCHOOL_DAMAGE": 2,
+        "SCRIPT_EFFECT": 77,
+        "SELF_RESURRECT": 94,
+        "SEND_EVENT": 61,
+        "SEND_TAXI": 123,
+        "SKILL": 118,
+        "SKILL_STEP": 44,
+        "SKINNING": 95,
+        "SKIN_PLAYER_CORPSE": 116,
+        "SPAWN": 46,
+        "SPELL_DEFENSE": 37,
+        "SPIRIT_HEAL": 117,
+        "STEALTH": 48,
+        "STUCK": 84,
+        "SUMMON": 28,
+        "SUMMON_CHANGE_ITEM": 34,
+        "SUMMON_CRITTER": 97,
+        "SUMMON_DEAD_PET": 109,
+        "SUMMON_DEMON": 112,
+        "SUMMON_GUARDIAN": 42,
+        "SUMMON_OBJECT_SLOT1": 104,
+        "SUMMON_OBJECT_SLOT2": 105,
+        "SUMMON_OBJECT_SLOT3": 106,
+        "SUMMON_OBJECT_SLOT4": 107,
+        "SUMMON_OBJECT_WILD": 76,
+        "SUMMON_PET": 56,
+        "SUMMON_PHANTASM": 93,
+        "SUMMON_PLAYER": 85,
+        "SUMMON_POSSESSED": 73,
+        "SUMMON_TOTEM": 74,
+        "SUMMON_TOTEM_SLOT1": 87,
+        "SUMMON_TOTEM_SLOT2": 88,
+        "SUMMON_TOTEM_SLOT3": 89,
+        "SUMMON_TOTEM_SLOT4": 90,
+        "SUMMON_WILD": 41,
+        "TAMECREATURE": 55,
+        "TELEPORT_GRAVEYARD": 120,
+        "TELEPORT_UNITS": 5,
+        "TELEPORT_UNITS_FACE_CASTER": 43,
+        "THREAT": 63,
+        "THREAT_ALL": 91,
+        "TRADE_SKILL": 47,
+        "TRANS_DOOR": 50,
+        "TRIGGER_MISSILE": 32,
+        "TRIGGER_SPELL": 64,
+        "UNKNOWN122": 122,
+        "UNKNOWN126": 126,
+        "UNKNOWN127": 127,
+        "WEAPON": 25,
+        "WEAPON_DAMAGE": 58,
+        "WEAPON_DAMAGE_NOSCHOOL": 17,
+        "WEAPON_PERCENT_DAMAGE": 31
+      }
+    },
+    "SpellLog": {
+      "kind": "struct",
+      "fields": [
+        {
+          "name": "effect",
+          "type": "SpellEffect"
+        },
+        {
+          "name": "amount_of_logs",
+          "type": "uint32"
+        }
+      ]
+    },
+    "SpellLogMiss": {
+      "kind": "struct",
+      "fields": [
+        {
+          "name": "target",
+          "type": "uint64"
+        },
+        {
+          "name": "miss_info",
+          "type": "SpellMissInfo"
+        }
+      ]
+    },
+    "SpellMiss": {
+      "kind": "struct",
+      "fields": [
+        {
+          "name": "target",
+          "type": "uint64"
+        },
+        {
+          "name": "miss_info",
+          "type": "SpellMissInfo"
+        }
+      ]
+    },
+    "SpellMissInfo": {
+      "kind": "enum",
+      "underlying": "uint8",
+      "values": {
+        "ABSORB": 10,
+        "BLOCK": 5,
+        "DEFLECT": 9,
+        "DODGE": 3,
+        "EVADE": 6,
+        "IMMUNE": 7,
+        "IMMUNE2": 8,
+        "MISS": 1,
+        "NONE": 0,
+        "PARRY": 4,
+        "REFLECT": 11,
+        "RESIST": 2
+      }
+    },
+    "SpellSchool": {
+      "kind": "enum",
+      "underlying": "uint8",
+      "values": {
+        "ARCANE": 6,
+        "FIRE": 2,
+        "FROST": 4,
+        "HOLY": 1,
+        "NATURE": 3,
+        "NORMAL": 0,
+        "SHADOW": 5
+      }
+    },
+    "SpellTriggerType": {
+      "kind": "enum",
+      "underlying": "uint8",
+      "values": {
+        "CHANCE_ON_HIT": 2,
+        "ON_EQUIP": 1,
+        "ON_USE": 0
+      }
+    },
+    "SplineFlag": {
+      "kind": "flags",
+      "underlying": "uint32",
+      "values": {
+        "CYCLIC": 1048576,
+        "DONE": 1,
+        "ENTER_CYCLE": 2097152,
+        "FALLING": 2,
+        "FINAL_ANGLE": 262144,
+        "FINAL_POINT": 65536,
+        "FINAL_TARGET": 131072,
+        "FLYING": 512,
+        "FROZEN": 4194304,
+        "NONE": 0,
+        "NO_SPLINE": 1024,
+        "RUN_MODE": 256,
+        "UNKNOWN12": 2048,
+        "UNKNOWN13": 4096,
+        "UNKNOWN14": 8192,
+        "UNKNOWN15": 16384,
+        "UNKNOWN16": 32768,
+        "UNKNOWN19": 524288,
+        "UNKNOWN23": 8388608,
+        "UNKNOWN24": 16777216,
+        "UNKNOWN25": 33554432,
+        "UNKNOWN26": 67108864,
+        "UNKNOWN27": 134217728,
+        "UNKNOWN28": 268435456,
+        "UNKNOWN29": 536870912,
+        "UNKNOWN3": 4,
+        "UNKNOWN30": 1073741824,
+        "UNKNOWN31": 2147483648,
+        "UNKNOWN4": 8,
+        "UNKNOWN5": 16,
+        "UNKNOWN6": 32,
+        "UNKNOWN7": 64,
+        "UNKNOWN8": 128
+      }
+    },
+    "StableResult": {
+      "kind": "enum",
+      "underlying": "uint8",
+      "values": {
+        "ERR_MONEY": 1,
+        "ERR_STABLE": 6,
+        "SUCCESS_BUY_SLOT": 10,
+        "SUCCESS_STABLE": 8,
+        "SUCCESS_UNSTABLE": 9
+      }
+    },
+    "StabledPet": {
+      "kind": "struct",
+      "fields": [
+        {
+          "name": "pet_number",
+          "type": "uint32"
+        },
+        {
+          "name": "entry",
+          "type": "uint32"
+        },
+        {
+          "name": "level",
+          "type": "Level32"
+        },
+        {
+          "name": "name",
+          "type": "CString"
+        },
+        {
+          "name": "loyalty",
+          "type": "uint32"
+        },
+        {
+          "name": "slot",
+          "type": "uint8"
+        }
+      ]
+    },
+    "StatusId": {
+      "kind": "enum",
+      "underlying": "uint8",
+      "values": {
+        "IN_PROGRESS": 3,
+        "NONE": 0,
+        "WAIT_JOIN": 2,
+        "WAIT_LEAVE": 4,
+        "WAIT_QUEUE": 1
+      }
+    },
+    "SwingType": {
+      "kind": "enum",
+      "underlying": "uint8",
+      "values": {
+        "HEAVY": 2,
+        "LIGHT": 0,
+        "MEDIUM": 1
+      }
+    },
+    "Talent": {
+      "kind": "enum",
+      "underlying": "uint32",
+      "values": {
+        "ADRENALINE_RUSH": 205,
+        "AFTERMATH": 982,
+        "AGGRESSION": 1122,
+        "AIMED_SHOT": 1345,
+        "AMPLIFY_CURSE": 1061,
+        "ANCESTRAL_HEALING": 581,
+        "ANCESTRAL_KNOWLEDGE": 614,
+        "ANGER_MANAGEMENT": 137,
+        "ARCANE_CONCENTRATION": 75,
+        "ARCANE_FOCUS": 76,
+        "ARCANE_INSTABILITY": 421,
+        "ARCANE_MEDITATION": 1142,
+        "ARCANE_MIND": 77,
+        "ARCANE_POWER": 87,
+        "ARCANE_RESILIENCE": 85,
+        "ARCANE_SUBTLETY": 74,
+        "ARCTIC_REACH": 741,
+        "AXE_SPECIALIZATION": 132,
+        "BANE": 943,
+        "BARRAGE": 1347,
+        "BENEDICTION": 1407,
+        "BESTIAL_DISCIPLINE": 1390,
+        "BESTIAL_SWIFTNESS": 1391,
+        "BESTIAL_WRATH": 1386,
+        "BLACKOUT": 464,
+        "BLADE_FLURRY": 223,
+        "BLAST_WAVE": 32,
+        "BLESSED_RECOVERY": 1636,
+        "BLESSING_OF_KINGS": 1442,
+        "BLESSING_OF_SANCTUARY": 1431,
+        "BLOODTHIRST": 167,
+        "BLOOD_CRAZE": 661,
+        "BLOOD_FRENZY": 800,
+        "BOOMING_VOICE": 158,
+        "BRUTAL_IMPACT": 797,
+        "BURNING_SOUL": 23,
+        "CALL_OF_FLAME": 561,
+        "CALL_OF_THUNDER": 562,
+        "CAMOUFLAGE": 244,
+        "CATACLYSM": 941,
+        "CLEVER_TRAPS": 1306,
+        "COLD_BLOOD": 280,
+        "COLD_SNAP": 69,
+        "COMBUSTION": 36,
+        "CONCUSSION": 563,
+        "CONCUSSION_BLOW": 152,
+        "CONFLAGRATE": 968,
+        "CONSECRATION": 1435,
+        "CONVECTION": 564,
+        "CONVICTION": 1411,
+        "COUNTERATTACK": 1312,
+        "CRITICAL_MASS": 33,
+        "CRUELTY": 157,
+        "CURSE_OF_EXHAUSTION": 1081,
+        "DAGGER_SPECIALIZATION": 182,
+        "DARKNESS": 462,
+        "DARK_PACT": 1022,
+        "DEADLINESS": 1702,
+        "DEATH_WISH": 165,
+        "DEEP_WOUNDS": 121,
+        "DEFIANCE": 144,
+        "DEMONIC_EMBRACE": 1223,
+        "DEMONIC_SACRIFICE": 1281,
+        "DESTRUCTIVE_REACH": 964,
+        "DETERRENCE": 1308,
+        "DEVASTATION": 981,
+        "DIRTY_DEEDS": 265,
+        "DIVINE_FAVOR": 1433,
+        "DIVINE_FURY": 1181,
+        "DIVINE_INTELLECT": 1449,
+        "DIVINE_SPIRIT": 351,
+        "DIVINE_STRENGTH": 1450,
+        "DRUID_FEROCITY": 796,
+        "DRUID_NATURES_SWIFTNESS": 831,
+        "DRUID_THICK_HIDE": 794,
+        "DRUID_VENGEANCE": 792,
+        "EARTHS_GRASP": 572,
+        "EFFICIENCY": 1342,
+        "ELEMENTAL_DEVASTATION": 1645,
+        "ELEMENTAL_FOCUS": 574,
+        "ELEMENTAL_FURY": 565,
+        "ELEMENTAL_MASTERY": 573,
+        "ELEMENTAL_PRECISION": 1649,
+        "ELEMENTAL_WARDING": 1640,
+        "ELEMENTAL_WEAPONS": 611,
+        "ELUSIVENESS": 247,
+        "EMBERSTORM": 966,
+        "ENDURANCE": 204,
+        "ENDURANCE_TRAINING": 1389,
+        "ENHANCING_TOTEMS": 610,
+        "ENRAGE": 155,
+        "ENTRAPMENT": 1304,
+        "EYE_FOR_AN_EYE": 1632,
+        "EYE_OF_THE_STORM": 1642,
+        "FAERIE_FIRE_FERAL": 1162,
+        "FELINE_SWIFTNESS": 807,
+        "FEL_CONCENTRATION": 1001,
+        "FEL_DOMINATION": 1226,
+        "FEL_INTELLECT": 1242,
+        "FEL_STAMINA": 1241,
+        "FERAL_AGGRESSION": 795,
+        "FERAL_CHARGE": 804,
+        "FERAL_INSTINCT": 799,
+        "FIRE_POWER": 35,
+        "FIST_WEAPON_SPECIALIZATION": 183,
+        "FLAME_THROWING": 28,
+        "FORCE_OF_WILL": 1202,
+        "FRENZY": 1397,
+        "FROSTBITE": 38,
+        "FROST_CHANNELING": 66,
+        "FROST_WARDING": 70,
+        "FUROR": 822,
+        "GHOSTLY_STRIKE": 303,
+        "GIFT_OF_NATURE": 828,
+        "GRIM_REACH": 1021,
+        "GUARDIANS_FAVOR": 1425,
+        "GUARDIAN_TOTEMS": 609,
+        "HAWK_EYE": 1352,
+        "HEALING_GRACE": 1646,
+        "HEALING_LIGHT": 1444,
+        "HEALING_WAY": 1648,
+        "HEART_OF_THE_WILD": 808,
+        "HEIGHTENED_SENSES": 1701,
+        "HEMORRHAGE": 681,
+        "HOLY_NOVA": 442,
+        "HOLY_POWER": 1627,
+        "HOLY_REACH": 1635,
+        "HOLY_SHIELD": 1430,
+        "HOLY_SHOCK": 1502,
+        "HOLY_SPECIALIZATION": 401,
+        "HUMANOID_SLAYING": 1301,
+        "HUNTER_DEFLECTION": 1311,
+        "HUNTER_FEROCITY": 1393,
+        "HUNTER_LIGHTNING_REFLEXES": 1303,
+        "HUNTER_THICK_HIDE": 1395,
+        "ICE_BARRIER": 71,
+        "ICE_BLOCK": 72,
+        "ICE_SHARDS": 73,
+        "IGNITE": 34,
+        "ILLUMINATION": 1461,
+        "IMPACT": 30,
+        "IMPALE": 662,
+        "IMPROVED_AMBUSH": 263,
+        "IMPROVED_ARCANE_EXPLOSION": 81,
+        "IMPROVED_ARCANE_MISSILES": 80,
+        "IMPROVED_ARCANE_SHOT": 1346,
+        "IMPROVED_ASPECT_OF_THE_HAWK": 1382,
+        "IMPROVED_ASPECT_OF_THE_MONKEY": 1381,
+        "IMPROVED_BACKSTAB": 202,
+        "IMPROVED_BATTLE_SHOUT": 154,
+        "IMPROVED_BERSERKER_RAGE": 1541,
+        "IMPROVED_BLESSING_OF_MIGHT": 1401,
+        "IMPROVED_BLESSING_OF_WISDOM": 1446,
+        "IMPROVED_BLIZZARD": 63,
+        "IMPROVED_BLOODRAGE": 142,
+        "IMPROVED_CHARGE": 126,
+        "IMPROVED_CLEAVE": 166,
+        "IMPROVED_CONCENTRATION_AURA": 1626,
+        "IMPROVED_CONCUSSIVE_SHOT": 1341,
+        "IMPROVED_CONE_OF_COLD": 64,
+        "IMPROVED_CORRUPTION": 1003,
+        "IMPROVED_COUNTERSPELL": 88,
+        "IMPROVED_CURSE_OF_AGONY": 1284,
+        "IMPROVED_CURSE_OF_EXHAUSTION": 1082,
+        "IMPROVED_CURSE_OF_WEAKNESS": 1006,
+        "IMPROVED_DEMORALIZING_SHOUT": 161,
+        "IMPROVED_DEVOTION_AURA": 1422,
+        "IMPROVED_DISARM": 151,
+        "IMPROVED_DRAIN_LIFE": 1004,
+        "IMPROVED_DRAIN_MANA": 1121,
+        "IMPROVED_DRAIN_SOUL": 1101,
+        "IMPROVED_ENRAGE": 826,
+        "IMPROVED_ENSLAVE_DEMON": 1283,
+        "IMPROVED_ENTANGLING_ROOTS": 787,
+        "IMPROVED_EVISCERATE": 276,
+        "IMPROVED_EXECUTE": 1542,
+        "IMPROVED_EXPOSE_ARMOR": 278,
+        "IMPROVED_EYES_OF_THE_BEAST": 1624,
+        "IMPROVED_FADE": 483,
+        "IMPROVED_FEIGN_DEATH": 1309,
+        "IMPROVED_FIREBALL": 26,
+        "IMPROVED_FIREBOLT": 983,
+        "IMPROVED_FIRESTONE": 1261,
+        "IMPROVED_FIRE_BLAST": 27,
+        "IMPROVED_FIRE_TOTEMS": 567,
+        "IMPROVED_FIRE_WARD": 24,
+        "IMPROVED_FLAMESTRIKE": 31,
+        "IMPROVED_FROSTBOLT": 37,
+        "IMPROVED_FROST_NOVA": 62,
+        "IMPROVED_GHOST_WOLF": 605,
+        "IMPROVED_GOUGE": 203,
+        "IMPROVED_HAMMER_OF_JUSTICE": 1521,
+        "IMPROVED_HAMSTRING": 129,
+        "IMPROVED_HEALING": 408,
+        "IMPROVED_HEALING_TOUCH": 824,
+        "IMPROVED_HEALING_WAVE": 586,
+        "IMPROVED_HEALTHSTONE": 1221,
+        "IMPROVED_HEALTH_FUNNEL": 1224,
+        "IMPROVED_HEROIC_STRIKE": 124,
+        "IMPROVED_HUNTERS_MARK": 1343,
+        "IMPROVED_IMMOLATE": 961,
+        "IMPROVED_IMP": 1222,
+        "IMPROVED_INNER_FIRE": 346,
+        "IMPROVED_INTERCEPT": 1543,
+        "IMPROVED_JUDGEMENT": 1631,
+        "IMPROVED_KICK": 206,
+        "IMPROVED_KIDNEY_SHOT": 279,
+        "IMPROVED_LASH_OF_PAIN": 984,
+        "IMPROVED_LAY_ON_HANDS": 1443,
+        "IMPROVED_LIFE_TAP": 1007,
+        "IMPROVED_LIGHTNING_SHIELD": 607,
+        "IMPROVED_MANA_BURN": 350,
+        "IMPROVED_MANA_SHIELD": 83,
+        "IMPROVED_MARK_OF_THE_WILD": 821,
+        "IMPROVED_MEND_PET": 1385,
+        "IMPROVED_MIND_BLAST": 481,
+        "IMPROVED_MOONFIRE": 763,
+        "IMPROVED_NATURES_GRASP": 921,
+        "IMPROVED_OVERPOWER": 131,
+        "IMPROVED_POISONS": 268,
+        "IMPROVED_POWER_WORD_FORTITUDE": 344,
+        "IMPROVED_POWER_WORD_SHIELD": 343,
+        "IMPROVED_PRAYER_OF_HEALING": 413,
+        "IMPROVED_PSYCHIC_SCREAM": 542,
+        "IMPROVED_REGROWTH": 825,
+        "IMPROVED_REINCARNATION": 589,
+        "IMPROVED_REJUVENATION": 830,
+        "IMPROVED_REND": 127,
+        "IMPROVED_RENEW": 406,
+        "IMPROVED_RETRIBUTION_AURA": 1405,
+        "IMPROVED_REVENGE": 147,
+        "IMPROVED_REVIVE_PET": 1625,
+        "IMPROVED_RIGHTEOUS_FURY": 1501,
+        "IMPROVED_SAP": 262,
+        "IMPROVED_SCORCH": 25,
+        "IMPROVED_SCORPID_STING": 1351,
+        "IMPROVED_SEAL_OF_RIGHTEOUSNESS": 1463,
+        "IMPROVED_SEAL_OF_THE_CRUSADER": 1464,
+        "IMPROVED_SEARING_PAIN": 965,
+        "IMPROVED_SERPENT_STING": 1348,
+        "IMPROVED_SHADOW_BOLT": 944,
+        "IMPROVED_SHADOW_WORD_PAIN": 482,
+        "IMPROVED_SHIELD_BASH": 149,
+        "IMPROVED_SHIELD_BLOCK": 145,
+        "IMPROVED_SHIELD_WALL": 150,
+        "IMPROVED_SHRED": 802,
+        "IMPROVED_SINISTER_STRIKE": 201,
+        "IMPROVED_SLAM": 168,
+        "IMPROVED_SLICE_AND_DICE": 277,
+        "IMPROVED_SPELLSTONE": 1263,
+        "IMPROVED_SPRINT": 222,
+        "IMPROVED_STARFIRE": 784,
+        "IMPROVED_SUCCUBUS": 1243,
+        "IMPROVED_SUNDER_ARMOR": 146,
+        "IMPROVED_TAUNT": 143,
+        "IMPROVED_THORNS": 782,
+        "IMPROVED_THUNDER_CLAP": 128,
+        "IMPROVED_TRANQUILITY": 842,
+        "IMPROVED_VAMPIRIC_EMBRACE": 1638,
+        "IMPROVED_VOIDWALKER": 1225,
+        "IMPROVED_WEAPON_TOTEMS": 1647,
+        "IMPROVED_WING_CLIP": 1305,
+        "IMPROVED_WRATH": 762,
+        "INCINERATE": 1141,
+        "INITIATIVE": 245,
+        "INNER_FOCUS": 348,
+        "INSECT_SWARM": 827,
+        "INSPIRATION": 361,
+        "INTENSITY": 985,
+        "INTIMIDATION": 1387,
+        "IRON_WILL": 141,
+        "KILLER_INSTINCT": 1321,
+        "LASTING_JUDGEMENT": 1465,
+        "LAST_STAND": 153,
+        "LEADER_OF_THE_PACK": 809,
+        "LETHALITY": 269,
+        "LETHAL_SHOTS": 1344,
+        "LIGHTNING_MASTERY": 721,
+        "LIGHTWELL": 1637,
+        "MAGE_WAND_SPECIALIZATION": 78,
+        "MAGIC_ABSORPTION": 1650,
+        "MAGIC_ATTUNEMENT": 82,
+        "MALICE": 270,
+        "MANA_TIDE_TOTEM": 590,
+        "MARTYRDOM": 321,
+        "MASTER_DEMONOLOGIST": 1244,
+        "MASTER_OF_DECEPTION": 241,
+        "MASTER_OF_ELEMENTS": 1639,
+        "MASTER_SUMMONER": 1227,
+        "MEDITATION": 347,
+        "MENTAL_AGILITY": 341,
+        "MENTAL_STRENGTH": 1201,
+        "MIND_FLAY": 501,
+        "MONSTER_SLAYING": 1623,
+        "MOONFURY": 790,
+        "MOONGLOW": 783,
+        "MOONKIN_FORM": 793,
+        "MORTAL_SHOTS": 1349,
+        "MORTAL_STRIKE": 135,
+        "MURDER": 274,
+        "NATURAL_SHAPESHIFTER": 781,
+        "NATURAL_WEAPONS": 791,
+        "NATURES_FOCUS": 823,
+        "NATURES_GRACE": 789,
+        "NATURES_GRASP": 761,
+        "NATURES_GUIDANCE": 583,
+        "NATURES_REACH": 764,
+        "NIGHTFALL": 1002,
+        "OMEN_OF_CLARITY": 788,
+        "OPPORTUNITY": 261,
+        "PALADIN_ANTICIPATION": 1629,
+        "PALADIN_DEFLECTION": 1403,
+        "PALADIN_ONE_HANDED_WEAPON_SPECIALIZATION": 1429,
+        "PALADIN_PRECISION": 1630,
+        "PALADIN_SHIELD_SPECIALIZATION": 1424,
+        "PALADIN_TOUGHNESS": 1423,
+        "PALADIN_TWO_HANDED_WEAPON_SPECIALIZATION": 1410,
+        "PALADIN_VENGEANCE": 1402,
+        "PARRY": 616,
+        "PATHFINDING": 1384,
+        "PERMAFROST": 65,
+        "PIERCING_HOWL": 160,
+        "PIERCING_ICE": 61,
+        "POLEARM_SPECIALIZATION": 134,
+        "POWER_INFUSION": 322,
+        "PREDATORY_STRIKES": 803,
+        "PREMEDITATION": 381,
+        "PREPARATION": 284,
+        "PRESENCE_OF_MIND": 86,
+        "PRIEST_HEALING_FOCUS": 410,
+        "PRIEST_WAND_SPECIALIZATION": 345,
+        "PRIMAL_FURY": 801,
+        "PURIFICATION": 592,
+        "PURSUIT_OF_JUSTICE": 1634,
+        "PYROBLAST": 29,
+        "PYROCLASM": 986,
+        "RANGED_WEAPON_SPECIALIZATION": 1362,
+        "RECKONING": 1426,
+        "REDOUBT": 1421,
+        "REFLECTION": 829,
+        "RELENTLESS_STRIKES": 281,
+        "REMORSELESS_ATTACKS": 272,
+        "REPENTANCE": 1441,
+        "RESTORATIVE_TOTEMS": 588,
+        "REVERBERATION": 575,
+        "RIPOSTE": 301,
+        "ROGUE_DEFLECTION": 187,
+        "ROGUE_DUAL_WIELD_SPECIALIZATION": 221,
+        "ROGUE_LIGHTNING_REFLEXES": 186,
+        "ROGUE_MACE_SPECIALIZATION": 184,
+        "ROGUE_PRECISION": 181,
+        "ROGUE_SWORD_SPECIALIZATION": 242,
+        "RUIN": 967,
+        "RUTHLESSNESS": 273,
+        "SANCTITY_AURA": 1409,
+        "SAVAGE_FURY": 805,
+        "SAVAGE_STRIKES": 1621,
+        "SCATTER_SHOT": 1353,
+        "SEAL_FATE": 283,
+        "SEAL_OF_COMMAND": 1481,
+        "SEARING_LIGHT": 403,
+        "SERRATED_BLADES": 1123,
+        "SETUP": 246,
+        "SHADOWBURN": 963,
+        "SHADOWFORM": 521,
+        "SHADOW_AFFINITY": 466,
+        "SHADOW_FOCUS": 463,
+        "SHADOW_MASTERY": 1042,
+        "SHADOW_REACH": 881,
+        "SHADOW_WEAVING": 461,
+        "SHAMAN_ANTICIPATION": 601,
+        "SHAMAN_FLURRY": 602,
+        "SHAMAN_HEALING_FOCUS": 587,
+        "SHAMAN_NATURES_SWIFTNESS": 591,
+        "SHAMAN_SHIELD_SPECIALIZATION": 612,
+        "SHAMAN_TOUGHNESS": 615,
+        "SHARPENED_CLAWS": 798,
+        "SHATTER": 67,
+        "SHIELD_SLAM": 148,
+        "SILENCE": 541,
+        "SILENT_RESOLVE": 352,
+        "SIPHON_LIFE": 1041,
+        "SLEIGHT_OF_HAND": 1700,
+        "SOUL_LINK": 1282,
+        "SPELL_WARDING": 411,
+        "SPIRITUAL_FOCUS": 1432,
+        "SPIRITUAL_GUIDANCE": 402,
+        "SPIRITUAL_HEALING": 404,
+        "SPIRIT_BOND": 1388,
+        "SPIRIT_OF_REDEMPTION": 1561,
+        "SPIRIT_TAP": 465,
+        "STORMSTRIKE": 901,
+        "STORM_REACH": 1641,
+        "SUBTLETY": 841,
+        "SUPPRESSION": 1005,
+        "SUREFOOTED": 1310,
+        "SURVIVALIST": 1622,
+        "SWEEPING_STRIKES": 133,
+        "SWIFTMEND": 844,
+        "TACTICAL_MASTERY": 641,
+        "THUNDERING_STRIKES": 613,
+        "TIDAL_FOCUS": 593,
+        "TIDAL_MASTERY": 594,
+        "TOTEMIC_FOCUS": 595,
+        "TOTEMIC_MASTERY": 582,
+        "TRANQUIL_SPIRIT": 843,
+        "TRAP_MASTERY": 1322,
+        "TRUESHOT_AURA": 1361,
+        "TWO_HANDED_AXES_AND_MACES": 617,
+        "UNBREAKABLE_WILL": 342,
+        "UNBRIDLED_WRATH": 159,
+        "UNHOLY_POWER": 1262,
+        "UNLEASHED_FURY": 1396,
+        "UNYIELDING_FAITH": 1628,
+        "VAMPIRIC_EMBRACE": 484,
+        "VIGOR": 382,
+        "VILE_POISONS": 682,
+        "VINDICATION": 1633,
+        "WARRIOR_ANTICIPATION": 138,
+        "WARRIOR_DEFLECTION": 130,
+        "WARRIOR_DUAL_WIELD_SPECIALIZATION": 1581,
+        "WARRIOR_FLURRY": 156,
+        "WARRIOR_MACE_SPECIALIZATION": 125,
+        "WARRIOR_ONE_HANDED_WEAPON_SPECIALIZATION": 702,
+        "WARRIOR_SHIELD_SPECIALIZATION": 1601,
+        "WARRIOR_SWORD_SPECIALIZATION": 123,
+        "WARRIOR_TOUGHNESS": 140,
+        "WARRIOR_TWO_HANDED_WEAPON_SPECIALIZATION": 136,
+        "WEAPON_EXPERTISE": 1703,
+        "WEAPON_MASTERY": 1643,
+        "WINTERS_CHILL": 68,
+        "WYVERN_STING": 1325
+      }
+    },
+    "TextEmote": {
+      "kind": "enum",
+      "underlying": "uint32",
+      "values": {
+        "AGREE": 1,
+        "AMAZE": 2,
+        "ANGRY": 3,
+        "APOLOGIZE": 4,
+        "APPLAUD": 5,
+        "ATTACK_MY_TARGET": 307,
+        "BARK": 205,
+        "BASHFUL": 6,
+        "BECKON": 7,
+        "BEG": 8,
+        "BITE": 9,
+        "BLEED": 10,
+        "BLINK": 11,
+        "BLUSH": 12,
+        "BOGGLE": 107,
+        "BONK": 13,
+        "BORED": 14,
+        "BOUNCE": 15,
+        "BOW": 17,
+        "BRB": 16,
+        "BURP": 18,
+        "BYE": 19,
+        "CACKLE": 20,
+        "CALM": 108,
+        "CHARGE": 305,
+        "CHEER": 21,
+        "CHICKEN": 22,
+        "CHUCKLE": 23,
+        "CLAP": 24,
+        "COLD": 109,
+        "COMFORT": 110,
+        "COMMEND": 243,
+        "CONFUSED": 25,
+        "CONGRATULATE": 26,
+        "COUGH": 27,
+        "COWER": 28,
+        "CRACK": 29,
+        "CRINGE": 30,
+        "CRY": 31,
+        "CUDDLE": 111,
+        "CURIOUS": 32,
+        "CURTSEY": 33,
+        "DANCE": 34,
+        "DRINK": 35,
+        "DROOL": 36,
+        "DUCK": 112,
+        "EAT": 37,
+        "EYE": 38,
+        "FART": 39,
+        "FIDGET": 40,
+        "FLEE": 306,
+        "FLEX": 41,
+        "FLIRT": 328,
+        "FLOP": 224,
+        "FOLLOW": 324,
+        "FROWN": 42,
+        "GASP": 43,
+        "GAZE": 44,
+        "GIGGLE": 45,
+        "GLARE": 46,
+        "GLOAT": 47,
+        "GOLF_CLAP": 343,
+        "GREET": 48,
+        "GRIN": 49,
+        "GROAN": 50,
+        "GROVEL": 51,
+        "GROWL": 204,
+        "GUFFAW": 52,
+        "HAIL": 53,
+        "HAPPY": 54,
+        "HEAL_ME": 326,
+        "HELLO": 55,
+        "HELPME": 303,
+        "HUG": 56,
+        "HUNGRY": 57,
+        "INCOMING": 304,
+        "INSULT": 113,
+        "INTRODUCE": 114,
+        "JK": 115,
+        "JOKE": 329,
+        "KISS": 58,
+        "KNEEL": 59,
+        "LAUGH": 60,
+        "LAYDOWN": 61,
+        "LICK": 116,
+        "LISTEN": 117,
+        "LOST": 118,
+        "LOVE": 225,
+        "MASSAGE": 62,
+        "MOAN": 63,
+        "MOCK": 119,
+        "MOO": 226,
+        "MOON": 64,
+        "MOURN": 65,
+        "NO": 66,
+        "NOD": 67,
+        "NOSE_PICK": 68,
+        "OOM": 323,
+        "OPEN_FIRE": 327,
+        "PANIC": 69,
+        "PAT": 364,
+        "PEER": 70,
+        "PITY": 203,
+        "PLEAD": 71,
+        "POINT": 72,
+        "POKE": 73,
+        "PONDER": 120,
+        "POUNCE": 121,
+        "PRAISE": 122,
+        "PRAY": 74,
+        "PURR": 123,
+        "PUZZLE": 124,
+        "RAISE": 125,
+        "RASP": 183,
+        "READY": 126,
+        "ROAR": 75,
+        "ROFL": 76,
+        "RUDE": 77,
+        "SALUTE": 78,
+        "SCARED": 223,
+        "SCRATCH": 79,
+        "SEXY": 80,
+        "SHAKE": 81,
+        "SHIMMY": 127,
+        "SHIVER": 128,
+        "SHOO": 129,
+        "SHOUT": 82,
+        "SHRUG": 83,
+        "SHY": 84,
+        "SIGH": 85,
+        "SIT": 86,
+        "SLAP": 130,
+        "SLEEP": 87,
+        "SMILE": 163,
+        "SMIRK": 131,
+        "SNARL": 88,
+        "SNICKER": 140,
+        "SNIFF": 132,
+        "SNUB": 133,
+        "SOOTHE": 134,
+        "SPIT": 89,
+        "STAND": 141,
+        "STARE": 90,
+        "STINK": 135,
+        "SURPRISED": 91,
+        "SURRENDER": 92,
+        "TALK": 93,
+        "TALK_EX": 94,
+        "TALK_Q": 95,
+        "TAP": 96,
+        "TAUNT": 136,
+        "TEASE": 137,
+        "THANK": 97,
+        "THIRSTY": 138,
+        "THREATEN": 98,
+        "TICKLE": 142,
+        "TIRED": 99,
+        "TRAIN": 264,
+        "VETO": 139,
+        "VICTORY": 100,
+        "VIOLIN": 143,
+        "WAIT": 325,
+        "WAVE": 101,
+        "WELCOME": 102,
+        "WHINE": 103,
+        "WHISTLE": 104,
+        "WINK": 363,
+        "WORK": 105,
+        "YAWN": 106
+      }
+    },
+    "TimerType": {
+      "kind": "enum",
+      "underlying": "uint32",
+      "values": {
+        "BREATH": 1,
+        "ENVIRONMENTAL": 3,
+        "FATIGUE": 0,
+        "FEIGN_DEATH": 2
+      }
+    },
+    "TradeSlot": {
+      "kind": "struct",
+      "fields": [
+        {
+          "name": "trade_slot_number",
+          "type": "uint8"
+        },
+        {
+          "name": "item",
+          "type": "Item"
+        },
+        {
+          "name": "display_id",
+          "type": "uint32"
+        },
+        {
+          "name": "stack_count",
+          "type": "uint32"
+        },
+        {
+          "name": "wrapped",
+          "type": "Bool32"
+        },
+        {
+          "name": "gift_wrapper",
+          "type": "uint64"
+        },
+        {
+          "name": "enchantment",
+          "type": "uint32"
+        },
+        {
+          "name": "item_creator",
+          "type": "uint64"
+        },
+        {
+          "name": "spell_charges",
+          "type": "uint32"
+        },
+        {
+          "name": "item_suffix_factor",
+          "type": "uint32"
+        },
+        {
+          "name": "item_random_properties_id",
+          "type": "uint32"
+        },
+        {
+          "name": "lock_id",
+          "type": "uint32"
+        },
+        {
+          "name": "max_durability",
+          "type": "uint32"
+        },
+        {
+          "name": "durability",
+          "type": "uint32"
+        }
+      ]
+    },
+    "TradeStatus": {
+      "kind": "enum",
+      "underlying": "uint32",
+      "values": {
+        "BACK_TO_TRADE": 7,
+        "BEGIN_TRADE": 1,
+        "BUSY": 0,
+        "BUSY_2": 5,
+        "CLOSE_WINDOW": 12,
+        "IGNORE_YOU": 14,
+        "NOT_ON_TAPLIST": 23,
+        "NO_TARGET": 6,
+        "ONLY_CONJURED": 22,
+        "OPEN_WINDOW": 2,
+        "TARGET_DEAD": 18,
+        "TARGET_LOGOUT": 20,
+        "TARGET_STUNNED": 16,
+        "TARGET_TO_FAR": 10,
+        "TRADE_ACCEPT": 4,
+        "TRADE_CANCELED": 3,
+        "TRADE_COMPLETE": 8,
+        "TRADE_REJECTED": 9,
+        "TRIAL_ACCOUNT": 21,
+        "UNKNOWN_13": 13,
+        "WRONG_FACTION": 11,
+        "YOU_DEAD": 17,
+        "YOU_LOGOUT": 19,
+        "YOU_STUNNED": 15
+      }
+    },
+    "TrainerSpell": {
+      "kind": "struct",
+      "fields": [
+        {
+          "name": "spell",
+          "type": "Spell"
+        },
+        {
+          "name": "state",
+          "type": "TrainerSpellState"
+        },
+        {
+          "name": "spell_cost",
+          "type": "uint32"
+        },
+        {
+          "name": "talent_point_cost",
+          "type": "uint32"
+        },
+        {
+          "name": "first_rank",
+          "type": "uint32"
+        },
+        {
+          "name": "required_level",
+          "type": "uint8"
+        },
+        {
+          "name": "required_skill",
+          "type": "Skill"
+        },
+        {
+          "name": "required_skill_value",
+          "type": "uint32"
+        },
+        {
+          "name": "required_spells",
+          "type": "u32",
+          "array": {
+            "size": 3
+          }
+        }
+      ]
+    },
+    "TrainerSpellState": {
+      "kind": "enum",
+      "underlying": "uint8",
+      "values": {
+        "GRAY": 2,
+        "GREEN": 0,
+        "RED": 1
+      }
+    },
+    "TrainingFailureReason": {
+      "kind": "enum",
+      "underlying": "uint32",
+      "values": {
+        "NOT_ENOUGH_MONEY": 1,
+        "NOT_ENOUGH_SKILL": 2,
+        "UNAVAILABLE": 0
+      }
+    },
+    "TransferAbortReason": {
+      "kind": "enum",
+      "underlying": "uint8",
+      "values": {
+        "IS_FULL": 1,
+        "NONE": 0,
+        "NOT_FOUND": 2,
+        "TOO_MANY_INSTANCES": 3,
+        "ZONE_IS_IN_COMBAT": 5
+      }
+    },
+    "TransportInfo": {
+      "kind": "struct",
+      "fields": [
+        {
+          "name": "guid",
+          "type": "PackedGuid"
+        },
+        {
+          "name": "position",
+          "type": "Vector3d"
+        },
+        {
+          "name": "orientation",
+          "type": "float"
+        },
+        {
+          "name": "timestamp",
+          "type": "uint32"
+        }
+      ]
+    },
+    "UnitStandState": {
+      "kind": "enum",
+      "underlying": "uint8",
+      "values": {
+        "CUSTOM": 9,
+        "DEAD": 7,
+        "KNEEL": 8,
+        "SIT": 1,
+        "SIT_CHAIR": 2,
+        "SIT_HIGH_CHAIR": 6,
+        "SIT_LOW_CHAIR": 4,
+        "SIT_MEDIUM_CHAIR": 5,
+        "SLEEP": 3,
+        "STAND": 0
+      }
+    },
+    "UpdateFlag": {
+      "kind": "flags",
+      "underlying": "uint8",
+      "values": {
+        "ALL": 16,
+        "HAS_POSITION": 64,
+        "HIGH_GUID": 8,
+        "LIVING": 32,
+        "MELEE_ATTACKING": 4,
+        "NONE": 0,
+        "SELF": 1,
+        "TRANSPORT": 2
+      }
+    },
+    "UpdateType": {
+      "kind": "enum",
+      "underlying": "uint8",
+      "values": {
+        "CREATE_OBJECT": 2,
+        "CREATE_OBJECT2": 3,
+        "MOVEMENT": 1,
+        "NEAR_OBJECTS": 5,
+        "OUT_OF_RANGE_OBJECTS": 4,
+        "VALUES": 0
+      }
+    },
+    "UrlInfo": {
+      "kind": "enum",
+      "underlying": "uint8",
+      "values": {
+        "AVAILABLE": 1,
+        "UNAVAILABLE": 0
+      }
+    },
+    "Vector2d": {
+      "kind": "struct",
+      "fields": [
+        {
+          "name": "x",
+          "type": "float"
+        },
+        {
+          "name": "y",
+          "type": "float"
+        }
+      ]
+    },
+    "Vector3d": {
+      "kind": "struct",
+      "fields": [
+        {
+          "name": "x",
+          "type": "float"
+        },
+        {
+          "name": "y",
+          "type": "float"
+        },
+        {
+          "name": "z",
+          "type": "float"
+        }
+      ]
+    },
+    "VisibleItem": {
+      "kind": "struct",
+      "fields": [
+        {
+          "name": "creator",
+          "type": "uint64"
+        },
+        {
+          "name": "item",
+          "type": "Item"
+        },
+        {
+          "name": "enchants",
+          "type": "u32",
+          "array": {
+            "size": 2
+          }
+        },
+        {
+          "name": "padding5",
+          "type": "uint32"
+        },
+        {
+          "name": "padding6",
+          "type": "uint32"
+        },
+        {
+          "name": "padding7",
+          "type": "uint32"
+        },
+        {
+          "name": "padding8",
+          "type": "uint32"
+        },
+        {
+          "name": "padding9",
+          "type": "uint32"
+        },
+        {
+          "name": "random_property_id",
+          "type": "uint32"
+        },
+        {
+          "name": "item_suffix_factor",
+          "type": "uint32"
+        }
+      ]
+    },
+    "WeaponFlags": {
+      "kind": "flags",
+      "underlying": "uint8",
+      "values": {
+        "SHEATHE_WEAPONS_AUTOMATICALLY": 4,
+        "SHEATHE_WEAPONS_AUTOMATICALLY_2": 16,
+        "UNSHEATHE_WEAPONS": 32,
+        "WEAPON_NOT_AFFECTED_BY_ANIMATION": 0
+      }
+    },
+    "WeatherChangeType": {
+      "kind": "enum",
+      "underlying": "uint8",
+      "values": {
+        "INSTANT": 1,
+        "SMOOTH": 0
+      }
+    },
+    "WeatherType": {
+      "kind": "enum",
+      "underlying": "uint32",
+      "values": {
+        "FINE": 0,
+        "RAIN": 1,
+        "SNOW": 2,
+        "STORM": 3
+      }
+    },
+    "WhoPlayer": {
+      "kind": "struct",
+      "fields": [
+        {
+          "name": "name",
+          "type": "CString"
+        },
+        {
+          "name": "guild",
+          "type": "CString"
+        },
+        {
+          "name": "level",
+          "type": "Level32"
+        },
+        {
+          "name": "class",
+          "type": "Class"
+        },
+        {
+          "name": "race",
+          "type": "Race"
+        },
+        {
+          "name": "area",
+          "type": "Area"
+        }
+      ]
+    },
+    "WorldResult": {
+      "kind": "enum",
+      "underlying": "uint8",
+      "values": {
+        "ACCOUNT_CREATE_FAILED": 41,
+        "ACCOUNT_CREATE_IN_PROGRESS": 39,
+        "ACCOUNT_CREATE_SUCCESS": 40,
+        "AUTH_ALREADY_LOGGING_IN": 25,
+        "AUTH_ALREADY_ONLINE": 29,
+        "AUTH_BAD_SERVER_PROOF": 15,
+        "AUTH_BANNED": 28,
+        "AUTH_BILLING_ERROR": 18,
+        "AUTH_BILLING_EXPIRED": 19,
+        "AUTH_DB_BUSY": 31,
+        "AUTH_FAILED": 13,
+        "AUTH_INCORRECT_PASSWORD": 22,
+        "AUTH_LOGIN_SERVER_NOT_FOUND": 26,
+        "AUTH_NO_TIME": 30,
+        "AUTH_OK": 12,
+        "AUTH_PARENTAL_CONTROL": 33,
+        "AUTH_REJECT": 14,
+        "AUTH_SERVER_SHUTTING_DOWN": 24,
+        "AUTH_SESSION_EXPIRED": 23,
+        "AUTH_SUSPENDED": 32,
+        "AUTH_SYSTEM_ERROR": 17,
+        "AUTH_UNAVAILABLE": 16,
+        "AUTH_UNKNOWN_ACCOUNT": 21,
+        "AUTH_VERSION_MISMATCH": 20,
+        "AUTH_WAIT_QUEUE": 27,
+        "CHAR_CREATE_ACCOUNT_LIMIT": 53,
+        "CHAR_CREATE_DISABLED": 50,
+        "CHAR_CREATE_ERROR": 47,
+        "CHAR_CREATE_FAILED": 48,
+        "CHAR_CREATE_IN_PROGRESS": 45,
+        "CHAR_CREATE_NAME_IN_USE": 49,
+        "CHAR_CREATE_ONLY_EXISTING": 55,
+        "CHAR_CREATE_PVP_TEAMS_VIOLATION": 51,
+        "CHAR_CREATE_SERVER_LIMIT": 52,
+        "CHAR_CREATE_SERVER_QUEUE": 54,
+        "CHAR_CREATE_SUCCESS": 46,
+        "CHAR_DELETE_FAILED": 58,
+        "CHAR_DELETE_FAILED_LOCKED_FOR_TRANSFER": 59,
+        "CHAR_DELETE_IN_PROGRESS": 56,
+        "CHAR_DELETE_SUCCESS": 57,
+        "CHAR_LIST_FAILED": 44,
+        "CHAR_LIST_RETRIEVED": 43,
+        "CHAR_LIST_RETRIEVING": 42,
+        "CHAR_LOGIN_DISABLED": 66,
+        "CHAR_LOGIN_DUPLICATE_CHARACTER": 63,
+        "CHAR_LOGIN_FAILED": 65,
+        "CHAR_LOGIN_IN_PROGRESS": 60,
+        "CHAR_LOGIN_LOCKED_FOR_TRANSFER": 68,
+        "CHAR_LOGIN_NO_CHARACTER": 67,
+        "CHAR_LOGIN_NO_INSTANCES": 64,
+        "CHAR_LOGIN_NO_WORLD": 62,
+        "CHAR_LOGIN_SUCCESS": 61,
+        "CHAR_NAME_FAILURE": 81,
+        "CHAR_NAME_INVALID_APOSTROPHE": 76,
+        "CHAR_NAME_INVALID_SPACE": 79,
+        "CHAR_NAME_MIXED_LANGUAGES": 73,
+        "CHAR_NAME_MULTIPLE_APOSTROPHES": 77,
+        "CHAR_NAME_NO_NAME": 69,
+        "CHAR_NAME_ONLY_LETTERS": 72,
+        "CHAR_NAME_PROFANE": 74,
+        "CHAR_NAME_RESERVED": 75,
+        "CHAR_NAME_SUCCESS": 80,
+        "CHAR_NAME_THREE_CONSECUTIVE": 78,
+        "CHAR_NAME_TOO_LONG": 71,
+        "CHAR_NAME_TOO_SHORT": 70,
+        "CSTATUS_AUTHENTICATING": 11,
+        "CSTATUS_CONNECTING": 7,
+        "CSTATUS_NEGOTIATING_SECURITY": 8,
+        "CSTATUS_NEGOTIATION_COMPLETE": 9,
+        "CSTATUS_NEGOTIATION_FAILED": 10,
+        "REALM_LIST_FAILED": 36,
+        "REALM_LIST_INVALID": 37,
+        "REALM_LIST_IN_PROGRESS": 34,
+        "REALM_LIST_REALM_NOT_FOUND": 38,
+        "REALM_LIST_SUCCESS": 35,
+        "RESPONSE_CANCELLED": 2,
+        "RESPONSE_CONNECTED": 5,
+        "RESPONSE_DISCONNECTED": 3,
+        "RESPONSE_FAILED_TO_CONNECT": 4,
+        "RESPONSE_FAILURE": 1,
+        "RESPONSE_SUCCESS": 0,
+        "RESPONSE_VERSION_MISMATCH": 6
+      }
+    },
+    "WorldState": {
+      "kind": "struct",
+      "fields": [
+        {
+          "name": "state",
+          "type": "uint32"
+        },
+        {
+          "name": "value",
+          "type": "uint32"
+        }
+      ]
+    }
+  }
+}

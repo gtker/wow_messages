@@ -1,0 +1,11 @@
+{
+  "name": "Dismountresult",
+  "opcode": "smsg_dismountresult",
+  "direction": "server",
+  "fields": [
+    {
+      "name": "result",
+      "type": "DismountResult"
+    }
+  ]
+}

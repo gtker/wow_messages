@@ -1,0 +1,6 @@
+{
+  "name": "GroupDisband",
+  "opcode": "cmsg_group_disband",
+  "direction": "client",
+  "fields": []
+}

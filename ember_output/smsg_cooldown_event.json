@@ -1,0 +1,15 @@
+{
+  "name": "CooldownEvent",
+  "opcode": "smsg_cooldown_event",
+  "direction": "server",
+  "fields": [
+    {
+      "name": "id",
+      "type": "Spell"
+    },
+    {
+      "name": "guid",
+      "type": "uint64"
+    }
+  ]
+}

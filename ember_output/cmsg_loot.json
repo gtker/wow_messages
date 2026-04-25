@@ -1,0 +1,11 @@
+{
+  "name": "Loot",
+  "opcode": "cmsg_loot",
+  "direction": "client",
+  "fields": [
+    {
+      "name": "guid",
+      "type": "uint64"
+    }
+  ]
+}

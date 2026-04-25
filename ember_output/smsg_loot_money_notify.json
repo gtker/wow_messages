@@ -1,0 +1,11 @@
+{
+  "name": "LootMoneyNotify",
+  "opcode": "smsg_loot_money_notify",
+  "direction": "server",
+  "fields": [
+    {
+      "name": "amount",
+      "type": "uint32"
+    }
+  ]
+}

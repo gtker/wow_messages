@@ -1,0 +1,11 @@
+{
+  "name": "Dblookup",
+  "opcode": "cmsg_dblookup",
+  "direction": "client",
+  "fields": [
+    {
+      "name": "query",
+      "type": "CString"
+    }
+  ]
+}

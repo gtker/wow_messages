@@ -1,0 +1,6 @@
+{
+  "name": "DuelInbounds",
+  "opcode": "smsg_duel_inbounds",
+  "direction": "server",
+  "fields": []
+}

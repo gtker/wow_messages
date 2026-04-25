@@ -1,0 +1,11 @@
+{
+  "name": "UpdateAccountData",
+  "opcode": "cmsg_update_account_data",
+  "direction": "client",
+  "fields": [
+    {
+      "name": "data_type",
+      "type": "AccountDataType"
+    }
+  ]
+}

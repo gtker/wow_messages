@@ -1,0 +1,15 @@
+{
+  "name": "MoveStartSwimServer",
+  "opcode": "msg_move_start_swim_server",
+  "direction": "server",
+  "fields": [
+    {
+      "name": "guid",
+      "type": "PackedGuid"
+    },
+    {
+      "name": "info",
+      "type": "MovementInfo"
+    }
+  ]
+}

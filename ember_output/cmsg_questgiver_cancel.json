@@ -1,0 +1,6 @@
+{
+  "name": "QuestgiverCancel",
+  "opcode": "cmsg_questgiver_cancel",
+  "direction": "client",
+  "fields": []
+}

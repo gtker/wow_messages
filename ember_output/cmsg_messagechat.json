@@ -1,0 +1,19 @@
+{
+  "name": "Messagechat",
+  "opcode": "cmsg_messagechat",
+  "direction": "client",
+  "fields": [
+    {
+      "name": "chat_type",
+      "type": "ChatType"
+    },
+    {
+      "name": "language",
+      "type": "Language"
+    },
+    {
+      "name": "message",
+      "type": "CString"
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "name": "PartyMemberStatsFull",
+  "opcode": "smsg_party_member_stats_full",
+  "direction": "server",
+  "fields": [
+    {
+      "name": "player",
+      "type": "PackedGuid"
+    },
+    {
+      "name": "mask",
+      "type": "GroupUpdateFlags"
+    }
+  ]
+}
