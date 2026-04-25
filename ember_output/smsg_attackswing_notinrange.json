@@ -1,0 +1,6 @@
+{
+  "name": "AttackswingNotinrange",
+  "opcode": "smsg_attackswing_notinrange",
+  "direction": "server",
+  "fields": []
+}

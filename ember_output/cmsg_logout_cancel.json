@@ -1,0 +1,6 @@
+{
+  "name": "LogoutCancel",
+  "opcode": "cmsg_logout_cancel",
+  "direction": "client",
+  "fields": []
+}

@@ -65,6 +65,14 @@ pub(crate) fn intermediate_representation() -> PathBuf {
     workspace_directory().join("intermediate_representation.json")
 }
 
+pub(crate) fn ember_directory() -> PathBuf {
+    workspace_directory().join("ember_output")
+}
+
+pub(crate) fn ember_types() -> PathBuf {
+    ember_directory().join("types.json")
+}
+
 pub(crate) fn opcodes_file(version: MajorWorldVersion) -> PathBuf {
     workspace_directory()
         .join("wow_message_parser")

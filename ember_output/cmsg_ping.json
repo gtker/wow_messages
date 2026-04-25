@@ -1,0 +1,15 @@
+{
+  "name": "Ping",
+  "opcode": "cmsg_ping",
+  "direction": "client",
+  "fields": [
+    {
+      "name": "sequence_id",
+      "type": "uint32"
+    },
+    {
+      "name": "round_time_in_ms",
+      "type": "uint32"
+    }
+  ]
+}

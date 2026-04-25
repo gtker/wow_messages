@@ -1,0 +1,11 @@
+{
+  "name": "ListStabledPetsClient",
+  "opcode": "msg_list_stabled_pets_client",
+  "direction": "server",
+  "fields": [
+    {
+      "name": "npc",
+      "type": "uint64"
+    }
+  ]
+}

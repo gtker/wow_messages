@@ -1,0 +1,15 @@
+{
+  "name": "MoveStopPitchServer",
+  "opcode": "msg_move_stop_pitch_server",
+  "direction": "server",
+  "fields": [
+    {
+      "name": "guid",
+      "type": "PackedGuid"
+    },
+    {
+      "name": "info",
+      "type": "MovementInfo"
+    }
+  ]
+}

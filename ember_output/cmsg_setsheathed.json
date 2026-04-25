@@ -1,0 +1,12 @@
+{
+  "name": "Setsheathed",
+  "opcode": "cmsg_setsheathed",
+  "direction": "client",
+  "fields": [
+    {
+      "name": "sheathed",
+      "type": "SheathState",
+      "as": "uint32"
+    }
+  ]
+}

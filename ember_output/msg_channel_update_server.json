@@ -1,0 +1,11 @@
+{
+  "name": "ChannelUpdateServer",
+  "opcode": "msg_channel_update_server",
+  "direction": "server",
+  "fields": [
+    {
+      "name": "time",
+      "type": "uint32"
+    }
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "name": "UpdateAccountData",
+  "opcode": "cmsg_update_account_data",
+  "direction": "client",
+  "fields": [
+    {
+      "name": "data_type",
+      "type": "AccountDataType",
+      "as": "uint32"
+    },
+    {
+      "name": "compressed_data",
+      "type": "u8",
+      "array": {
+        "until_end": true
+      }
+    }
+  ]
+}

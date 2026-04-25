@@ -1,0 +1,6 @@
+{
+  "name": "MeetingstoneComplete",
+  "opcode": "smsg_meetingstone_complete",
+  "direction": "server",
+  "fields": []
+}

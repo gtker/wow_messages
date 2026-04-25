@@ -1,0 +1,6 @@
+{
+  "name": "CompleteCinematic",
+  "opcode": "cmsg_complete_cinematic",
+  "direction": "client",
+  "fields": []
+}

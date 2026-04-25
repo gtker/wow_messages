@@ -1,0 +1,11 @@
+{
+  "name": "CancelChannelling",
+  "opcode": "cmsg_cancel_channelling",
+  "direction": "client",
+  "fields": [
+    {
+      "name": "id",
+      "type": "Spell"
+    }
+  ]
+}

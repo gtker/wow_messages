@@ -1,0 +1,6 @@
+{
+  "name": "GuildInfo",
+  "opcode": "cmsg_guild_info",
+  "direction": "client",
+  "fields": []
+}

@@ -1,0 +1,6 @@
+{
+  "name": "BeginTrade",
+  "opcode": "cmsg_begin_trade",
+  "direction": "client",
+  "fields": []
+}

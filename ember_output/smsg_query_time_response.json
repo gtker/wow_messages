@@ -1,0 +1,11 @@
+{
+  "name": "QueryTimeResponse",
+  "opcode": "smsg_query_time_response",
+  "direction": "server",
+  "fields": [
+    {
+      "name": "time",
+      "type": "uint32"
+    }
+  ]
+}

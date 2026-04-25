@@ -1,0 +1,15 @@
+{
+  "name": "MoveTimeSkippedServer",
+  "opcode": "msg_move_time_skipped_server",
+  "direction": "server",
+  "fields": [
+    {
+      "name": "player",
+      "type": "PackedGuid"
+    },
+    {
+      "name": "time_skipped",
+      "type": "uint32"
+    }
+  ]
+}

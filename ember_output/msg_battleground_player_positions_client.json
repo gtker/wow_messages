@@ -1,0 +1,6 @@
+{
+  "name": "BattlegroundPlayerPositionsClient",
+  "opcode": "msg_battleground_player_positions_client",
+  "direction": "server",
+  "fields": []
+}

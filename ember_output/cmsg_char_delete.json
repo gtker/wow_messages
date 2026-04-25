@@ -1,0 +1,11 @@
+{
+  "name": "CharDelete",
+  "opcode": "cmsg_char_delete",
+  "direction": "client",
+  "fields": [
+    {
+      "name": "guid",
+      "type": "uint64"
+    }
+  ]
+}

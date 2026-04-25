@@ -1,0 +1,6 @@
+{
+  "name": "AttackswingDeadtarget",
+  "opcode": "smsg_attackswing_deadtarget",
+  "direction": "server",
+  "fields": []
+}

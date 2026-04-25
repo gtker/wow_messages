@@ -1,0 +1,6 @@
+{
+  "name": "QuestgiverQuestAutolaunch",
+  "opcode": "cmsg_questgiver_quest_autolaunch",
+  "direction": "client",
+  "fields": []
+}

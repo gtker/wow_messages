@@ -1,0 +1,11 @@
+{
+  "name": "ShowBank",
+  "opcode": "smsg_show_bank",
+  "direction": "server",
+  "fields": [
+    {
+      "name": "guid",
+      "type": "uint64"
+    }
+  ]
+}

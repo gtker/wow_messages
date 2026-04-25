@@ -1,0 +1,29 @@
+{
+  "name": "RaidTargetUpdateClient",
+  "opcode": "msg_raid_target_update_client",
+  "direction": "server",
+  "fields": [
+    {
+      "name": "target_index",
+      "type": "RaidTargetIndex"
+    },
+    {
+      "type": "if_chain",
+      "branches": [
+        {
+          "when": {
+            "op": "neq",
+            "field": "target_index",
+            "value": "REQUEST_ICONS"
+          },
+          "fields": [
+            {
+              "name": "target",
+              "type": "uint64"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

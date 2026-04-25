@@ -1,0 +1,15 @@
+{
+  "name": "CastSpell",
+  "opcode": "cmsg_cast_spell",
+  "direction": "client",
+  "fields": [
+    {
+      "name": "spell",
+      "type": "Spell"
+    },
+    {
+      "name": "targets",
+      "type": "SpellCastTargets"
+    }
+  ]
+}

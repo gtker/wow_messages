@@ -1,0 +1,21 @@
+{
+  "name": "GuildCommandResult",
+  "opcode": "smsg_guild_command_result",
+  "direction": "server",
+  "fields": [
+    {
+      "name": "command",
+      "type": "GuildCommand",
+      "as": "uint32"
+    },
+    {
+      "name": "string",
+      "type": "CString"
+    },
+    {
+      "name": "result",
+      "type": "GuildCommandResult",
+      "as": "uint32"
+    }
+  ]
+}

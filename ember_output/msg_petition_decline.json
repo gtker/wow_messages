@@ -1,0 +1,11 @@
+{
+  "name": "PetitionDecline",
+  "opcode": "msg_petition_decline",
+  "direction": "server",
+  "fields": [
+    {
+      "name": "petition",
+      "type": "uint64"
+    }
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "name": "PetSpellAutocast",
+  "opcode": "cmsg_pet_spell_autocast",
+  "direction": "client",
+  "fields": [
+    {
+      "name": "guid",
+      "type": "uint64"
+    },
+    {
+      "name": "id",
+      "type": "Spell"
+    },
+    {
+      "name": "autocast_enabled",
+      "type": "Bool"
+    }
+  ]
+}

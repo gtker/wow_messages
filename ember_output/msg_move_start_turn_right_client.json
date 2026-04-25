@@ -1,0 +1,11 @@
+{
+  "name": "MoveStartTurnRightClient",
+  "opcode": "msg_move_start_turn_right_client",
+  "direction": "server",
+  "fields": [
+    {
+      "name": "info",
+      "type": "MovementInfo"
+    }
+  ]
+}

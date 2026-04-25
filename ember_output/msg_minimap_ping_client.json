@@ -1,0 +1,15 @@
+{
+  "name": "MinimapPingClient",
+  "opcode": "msg_minimap_ping_client",
+  "direction": "server",
+  "fields": [
+    {
+      "name": "position_x",
+      "type": "float"
+    },
+    {
+      "name": "position_y",
+      "type": "float"
+    }
+  ]
+}

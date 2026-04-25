@@ -1,0 +1,19 @@
+{
+  "name": "SummonRequest",
+  "opcode": "smsg_summon_request",
+  "direction": "server",
+  "fields": [
+    {
+      "name": "summoner",
+      "type": "uint64"
+    },
+    {
+      "name": "area",
+      "type": "Area"
+    },
+    {
+      "name": "auto_decline_time",
+      "type": "Milliseconds"
+    }
+  ]
+}

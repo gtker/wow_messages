@@ -1,0 +1,15 @@
+{
+  "name": "MoveStartForwardServer",
+  "opcode": "msg_move_start_forward_server",
+  "direction": "server",
+  "fields": [
+    {
+      "name": "guid",
+      "type": "PackedGuid"
+    },
+    {
+      "name": "info",
+      "type": "MovementInfo"
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "name": "UpdateObject",
+  "opcode": "smsg_update_object",
+  "direction": "server",
+  "fields": [
+    {
+      "name": "amount_of_objects",
+      "type": "uint32"
+    },
+    {
+      "name": "has_transport",
+      "type": "uint8"
+    },
+    {
+      "name": "objects",
+      "type": "Object",
+      "array": {
+        "count_field": "amount_of_objects"
+      }
+    }
+  ]
+}

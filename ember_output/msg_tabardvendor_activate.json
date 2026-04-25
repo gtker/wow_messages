@@ -1,0 +1,11 @@
+{
+  "name": "TabardvendorActivate",
+  "opcode": "msg_tabardvendor_activate",
+  "direction": "server",
+  "fields": [
+    {
+      "name": "guid",
+      "type": "uint64"
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "name": "MoveStopPitchClient",
+  "opcode": "msg_move_stop_pitch_client",
+  "direction": "server",
+  "fields": [
+    {
+      "name": "info",
+      "type": "MovementInfo"
+    }
+  ]
+}

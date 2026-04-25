@@ -1,0 +1,11 @@
+{
+  "name": "QuestlogRemoveQuest",
+  "opcode": "cmsg_questlog_remove_quest",
+  "direction": "client",
+  "fields": [
+    {
+      "name": "slot",
+      "type": "uint8"
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "name": "WardenData",
+  "opcode": "smsg_warden_data",
+  "direction": "server",
+  "fields": [
+    {
+      "name": "encrypted_data",
+      "type": "u8",
+      "array": {
+        "until_end": true
+      }
+    }
+  ]
+}

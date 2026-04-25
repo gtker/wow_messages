@@ -1,0 +1,37 @@
+{
+  "name": "CorpseQueryServer",
+  "opcode": "msg_corpse_query_server",
+  "direction": "server",
+  "fields": [
+    {
+      "name": "result",
+      "type": "CorpseQueryResult"
+    },
+    {
+      "type": "if_chain",
+      "branches": [
+        {
+          "when": {
+            "op": "eq",
+            "field": "result",
+            "value": "FOUND"
+          },
+          "fields": [
+            {
+              "name": "map",
+              "type": "Map"
+            },
+            {
+              "name": "position",
+              "type": "Vector3d"
+            },
+            {
+              "name": "corpse_map",
+              "type": "Map"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

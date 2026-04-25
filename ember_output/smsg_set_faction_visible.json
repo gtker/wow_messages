@@ -1,0 +1,11 @@
+{
+  "name": "SetFactionVisible",
+  "opcode": "smsg_set_faction_visible",
+  "direction": "server",
+  "fields": [
+    {
+      "name": "faction",
+      "type": "Faction"
+    }
+  ]
+}

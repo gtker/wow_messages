@@ -1,0 +1,27 @@
+{
+  "name": "Enchantmentlog",
+  "opcode": "smsg_enchantmentlog",
+  "direction": "server",
+  "fields": [
+    {
+      "name": "target",
+      "type": "uint64"
+    },
+    {
+      "name": "caster",
+      "type": "uint64"
+    },
+    {
+      "name": "item",
+      "type": "Item"
+    },
+    {
+      "name": "spell",
+      "type": "Spell"
+    },
+    {
+      "name": "show_affiliation",
+      "type": "Bool"
+    }
+  ]
+}

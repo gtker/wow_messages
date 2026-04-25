@@ -1,0 +1,6 @@
+{
+  "name": "CharEnum",
+  "opcode": "cmsg_char_enum",
+  "direction": "client",
+  "fields": []
+}

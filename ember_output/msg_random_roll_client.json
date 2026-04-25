@@ -1,0 +1,15 @@
+{
+  "name": "RandomRollClient",
+  "opcode": "msg_random_roll_client",
+  "direction": "server",
+  "fields": [
+    {
+      "name": "minimum",
+      "type": "uint32"
+    },
+    {
+      "name": "maximum",
+      "type": "uint32"
+    }
+  ]
+}

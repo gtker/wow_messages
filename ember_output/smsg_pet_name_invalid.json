@@ -1,0 +1,6 @@
+{
+  "name": "PetNameInvalid",
+  "opcode": "smsg_pet_name_invalid",
+  "direction": "server",
+  "fields": []
+}

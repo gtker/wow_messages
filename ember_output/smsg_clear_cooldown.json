@@ -1,0 +1,15 @@
+{
+  "name": "ClearCooldown",
+  "opcode": "smsg_clear_cooldown",
+  "direction": "server",
+  "fields": [
+    {
+      "name": "id",
+      "type": "Spell"
+    },
+    {
+      "name": "target",
+      "type": "uint64"
+    }
+  ]
+}

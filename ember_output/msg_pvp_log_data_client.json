@@ -1,0 +1,6 @@
+{
+  "name": "PvpLogDataClient",
+  "opcode": "msg_pvp_log_data_client",
+  "direction": "server",
+  "fields": []
+}

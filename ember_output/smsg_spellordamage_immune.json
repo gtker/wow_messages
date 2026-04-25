@@ -1,0 +1,23 @@
+{
+  "name": "SpellordamageImmune",
+  "opcode": "smsg_spellordamage_immune",
+  "direction": "server",
+  "fields": [
+    {
+      "name": "caster",
+      "type": "uint64"
+    },
+    {
+      "name": "target",
+      "type": "uint64"
+    },
+    {
+      "name": "id",
+      "type": "Spell"
+    },
+    {
+      "name": "debug_log_format",
+      "type": "Bool"
+    }
+  ]
+}

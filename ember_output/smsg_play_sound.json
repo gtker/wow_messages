@@ -1,0 +1,11 @@
+{
+  "name": "PlaySound",
+  "opcode": "smsg_play_sound",
+  "direction": "server",
+  "fields": [
+    {
+      "name": "sound_id",
+      "type": "uint32"
+    }
+  ]
+}

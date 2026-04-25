@@ -1,0 +1,15 @@
+{
+  "name": "SplineSetSwimBackSpeed",
+  "opcode": "smsg_spline_set_swim_back_speed",
+  "direction": "server",
+  "fields": [
+    {
+      "name": "guid",
+      "type": "PackedGuid"
+    },
+    {
+      "name": "speed",
+      "type": "float"
+    }
+  ]
+}

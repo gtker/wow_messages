@@ -1,0 +1,22 @@
+{
+  "name": "DispelFailed",
+  "opcode": "smsg_dispel_failed",
+  "direction": "server",
+  "fields": [
+    {
+      "name": "caster",
+      "type": "uint64"
+    },
+    {
+      "name": "target",
+      "type": "uint64"
+    },
+    {
+      "name": "spells",
+      "type": "Spell",
+      "array": {
+        "until_end": true
+      }
+    }
+  ]
+}

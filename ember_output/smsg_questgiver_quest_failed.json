@@ -1,0 +1,15 @@
+{
+  "name": "QuestgiverQuestFailed",
+  "opcode": "smsg_questgiver_quest_failed",
+  "direction": "server",
+  "fields": [
+    {
+      "name": "quest_id",
+      "type": "uint32"
+    },
+    {
+      "name": "reason",
+      "type": "QuestFailedReason"
+    }
+  ]
+}

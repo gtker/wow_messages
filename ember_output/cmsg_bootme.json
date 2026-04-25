@@ -1,0 +1,6 @@
+{
+  "name": "Bootme",
+  "opcode": "cmsg_bootme",
+  "direction": "client",
+  "fields": []
+}

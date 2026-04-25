@@ -1,0 +1,11 @@
+{
+  "name": "MoveStopTurnClient",
+  "opcode": "msg_move_stop_turn_client",
+  "direction": "server",
+  "fields": [
+    {
+      "name": "info",
+      "type": "MovementInfo"
+    }
+  ]
+}

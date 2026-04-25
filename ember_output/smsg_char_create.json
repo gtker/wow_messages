@@ -1,0 +1,11 @@
+{
+  "name": "CharCreate",
+  "opcode": "smsg_char_create",
+  "direction": "server",
+  "fields": [
+    {
+      "name": "result",
+      "type": "WorldResult"
+    }
+  ]
+}

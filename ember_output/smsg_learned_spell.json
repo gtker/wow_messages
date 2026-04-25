@@ -1,0 +1,11 @@
+{
+  "name": "LearnedSpell",
+  "opcode": "smsg_learned_spell",
+  "direction": "server",
+  "fields": [
+    {
+      "name": "id",
+      "type": "Spell"
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "name": "GroupList",
+  "opcode": "smsg_group_list",
+  "direction": "server",
+  "fields": [
+    {
+      "name": "group_type",
+      "type": "GroupType"
+    },
+    {
+      "name": "flags",
+      "type": "uint8"
+    },
+    {
+      "name": "amount_of_members",
+      "type": "uint32"
+    },
+    {
+      "name": "members",
+      "type": "GroupListMember",
+      "array": {
+        "count_field": "amount_of_members"
+      }
+    },
+    {
+      "name": "leader",
+      "type": "uint64"
+    }
+  ]
+}

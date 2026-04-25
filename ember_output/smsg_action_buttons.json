@@ -1,0 +1,14 @@
+{
+  "name": "ActionButtons",
+  "opcode": "smsg_action_buttons",
+  "direction": "server",
+  "fields": [
+    {
+      "name": "data",
+      "type": "u32",
+      "array": {
+        "size": 120
+      }
+    }
+  ]
+}

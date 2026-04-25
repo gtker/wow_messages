@@ -1,0 +1,6 @@
+{
+  "name": "MoveWorldportAck",
+  "opcode": "msg_move_worldport_ack",
+  "direction": "server",
+  "fields": []
+}

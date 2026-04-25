@@ -1,0 +1,11 @@
+{
+  "name": "ReclaimCorpse",
+  "opcode": "cmsg_reclaim_corpse",
+  "direction": "client",
+  "fields": [
+    {
+      "name": "guid",
+      "type": "uint64"
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "name": "TransferPending",
+  "opcode": "smsg_transfer_pending",
+  "direction": "server",
+  "fields": [
+    {
+      "name": "map",
+      "type": "Map"
+    }
+  ]
+}

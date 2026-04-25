@@ -1,0 +1,85 @@
+{
+  "name": "SendMailResult",
+  "opcode": "smsg_send_mail_result",
+  "direction": "server",
+  "fields": [
+    {
+      "name": "mail_id",
+      "type": "uint32"
+    },
+    {
+      "name": "action",
+      "type": "MailAction"
+    },
+    {
+      "type": "if_chain",
+      "branches": [
+        {
+          "when": {
+            "op": "eq",
+            "field": "action",
+            "value": "ITEM_TAKEN"
+          },
+          "fields": [
+            {
+              "name": "result",
+              "type": "MailResult"
+            },
+            {
+              "type": "if_chain",
+              "branches": [
+                {
+                  "when": {
+                    "op": "eq",
+                    "field": "result",
+                    "value": "ERR_EQUIP_ERROR"
+                  },
+                  "fields": [
+                    {
+                      "name": "equip_error",
+                      "type": "uint32"
+                    }
+                  ]
+                }
+              ],
+              "else": [
+                {
+                  "name": "item",
+                  "type": "Item"
+                },
+                {
+                  "name": "item_count",
+                  "type": "uint32"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "else": [
+        {
+          "name": "result2",
+          "type": "MailResultTwo"
+        },
+        {
+          "type": "if_chain",
+          "branches": [
+            {
+              "when": {
+                "op": "eq",
+                "field": "result2",
+                "value": "ERR_EQUIP_ERROR"
+              },
+              "fields": [
+                {
+                  "name": "equip_error2",
+                  "type": "uint32"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

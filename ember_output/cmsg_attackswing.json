@@ -1,0 +1,11 @@
+{
+  "name": "Attackswing",
+  "opcode": "cmsg_attackswing",
+  "direction": "client",
+  "fields": [
+    {
+      "name": "guid",
+      "type": "uint64"
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "name": "PlayerSkinned",
+  "opcode": "smsg_player_skinned",
+  "direction": "server",
+  "fields": [
+    {
+      "name": "spirit_released",
+      "type": "Bool"
+    }
+  ]
+}

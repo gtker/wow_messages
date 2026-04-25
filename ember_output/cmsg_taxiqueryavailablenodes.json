@@ -1,0 +1,11 @@
+{
+  "name": "Taxiqueryavailablenodes",
+  "opcode": "cmsg_taxiqueryavailablenodes",
+  "direction": "client",
+  "fields": [
+    {
+      "name": "guid",
+      "type": "uint64"
+    }
+  ]
+}

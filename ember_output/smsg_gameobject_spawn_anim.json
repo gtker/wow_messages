@@ -1,0 +1,11 @@
+{
+  "name": "GameobjectSpawnAnim",
+  "opcode": "smsg_gameobject_spawn_anim",
+  "direction": "server",
+  "fields": [
+    {
+      "name": "guid",
+      "type": "uint64"
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "name": "MountspecialAnim",
+  "opcode": "smsg_mountspecial_anim",
+  "direction": "server",
+  "fields": [
+    {
+      "name": "guid",
+      "type": "uint64"
+    }
+  ]
+}

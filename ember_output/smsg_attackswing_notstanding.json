@@ -1,0 +1,6 @@
+{
+  "name": "AttackswingNotstanding",
+  "opcode": "smsg_attackswing_notstanding",
+  "direction": "server",
+  "fields": []
+}

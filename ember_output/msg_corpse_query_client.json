@@ -1,0 +1,6 @@
+{
+  "name": "CorpseQueryClient",
+  "opcode": "msg_corpse_query_client",
+  "direction": "server",
+  "fields": []
+}

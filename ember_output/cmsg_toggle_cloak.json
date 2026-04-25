@@ -1,0 +1,6 @@
+{
+  "name": "ToggleCloak",
+  "opcode": "cmsg_toggle_cloak",
+  "direction": "client",
+  "fields": []
+}

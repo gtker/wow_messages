@@ -1,0 +1,11 @@
+{
+  "name": "BinderConfirm",
+  "opcode": "smsg_binder_confirm",
+  "direction": "server",
+  "fields": [
+    {
+      "name": "guid",
+      "type": "uint64"
+    }
+  ]
+}

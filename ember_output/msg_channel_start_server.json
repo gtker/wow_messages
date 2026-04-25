@@ -1,0 +1,15 @@
+{
+  "name": "ChannelStartServer",
+  "opcode": "msg_channel_start_server",
+  "direction": "server",
+  "fields": [
+    {
+      "name": "spell",
+      "type": "Spell"
+    },
+    {
+      "name": "duration",
+      "type": "uint32"
+    }
+  ]
+}

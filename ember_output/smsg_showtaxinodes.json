@@ -1,0 +1,26 @@
+{
+  "name": "Showtaxinodes",
+  "opcode": "smsg_showtaxinodes",
+  "direction": "server",
+  "fields": [
+    {
+      "name": "unknown1",
+      "type": "uint32"
+    },
+    {
+      "name": "guid",
+      "type": "uint64"
+    },
+    {
+      "name": "nearest_node",
+      "type": "uint32"
+    },
+    {
+      "name": "nodes",
+      "type": "u32",
+      "array": {
+        "until_end": true
+      }
+    }
+  ]
+}

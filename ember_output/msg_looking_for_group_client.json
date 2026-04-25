@@ -1,0 +1,6 @@
+{
+  "name": "LookingForGroupClient",
+  "opcode": "msg_looking_for_group_client",
+  "direction": "server",
+  "fields": []
+}

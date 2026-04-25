@@ -1,0 +1,52 @@
+{
+  "name": "GmticketCreate",
+  "opcode": "cmsg_gmticket_create",
+  "direction": "client",
+  "fields": [
+    {
+      "name": "category",
+      "type": "GmTicketType"
+    },
+    {
+      "name": "map",
+      "type": "Map"
+    },
+    {
+      "name": "position",
+      "type": "Vector3d"
+    },
+    {
+      "name": "message",
+      "type": "CString"
+    },
+    {
+      "name": "reserved_for_future_use",
+      "type": "CString"
+    },
+    {
+      "type": "if_chain",
+      "branches": [
+        {
+          "when": {
+            "op": "eq",
+            "field": "category",
+            "value": "BEHAVIOR_HARASSMENT"
+          },
+          "fields": [
+            {
+              "name": "chat_data_line_count",
+              "type": "uint32"
+            },
+            {
+              "name": "compressed_chat_data",
+              "type": "u8",
+              "array": {
+                "until_end": true
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

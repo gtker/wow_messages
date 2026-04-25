@@ -1,0 +1,11 @@
+{
+  "name": "MoveStartStrafeLeftClient",
+  "opcode": "msg_move_start_strafe_left_client",
+  "direction": "server",
+  "fields": [
+    {
+      "name": "info",
+      "type": "MovementInfo"
+    }
+  ]
+}

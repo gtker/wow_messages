@@ -1,0 +1,11 @@
+{
+  "name": "Zoneupdate",
+  "opcode": "cmsg_zoneupdate",
+  "direction": "client",
+  "fields": [
+    {
+      "name": "area",
+      "type": "Area"
+    }
+  ]
+}

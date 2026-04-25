@@ -1,0 +1,11 @@
+{
+  "name": "CancelCast",
+  "opcode": "cmsg_cancel_cast",
+  "direction": "client",
+  "fields": [
+    {
+      "name": "id",
+      "type": "Spell"
+    }
+  ]
+}

@@ -1,0 +1,6 @@
+{
+  "name": "QueryTime",
+  "opcode": "cmsg_query_time",
+  "direction": "client",
+  "fields": []
+}

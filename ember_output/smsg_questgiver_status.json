@@ -1,0 +1,16 @@
+{
+  "name": "QuestgiverStatus",
+  "opcode": "smsg_questgiver_status",
+  "direction": "server",
+  "fields": [
+    {
+      "name": "guid",
+      "type": "uint64"
+    },
+    {
+      "name": "status",
+      "type": "QuestGiverStatus",
+      "as": "uint32"
+    }
+  ]
+}

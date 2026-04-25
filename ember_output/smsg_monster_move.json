@@ -1,0 +1,79 @@
+{
+  "name": "MonsterMove",
+  "opcode": "smsg_monster_move",
+  "direction": "server",
+  "fields": [
+    {
+      "name": "guid",
+      "type": "PackedGuid"
+    },
+    {
+      "name": "spline_point",
+      "type": "Vector3d"
+    },
+    {
+      "name": "spline_id",
+      "type": "uint32"
+    },
+    {
+      "name": "move_type",
+      "type": "MonsterMoveType"
+    },
+    {
+      "type": "if_chain",
+      "branches": [
+        {
+          "when": {
+            "op": "eq",
+            "field": "move_type",
+            "value": "FACING_TARGET"
+          },
+          "fields": [
+            {
+              "name": "target",
+              "type": "uint64"
+            }
+          ]
+        },
+        {
+          "when": {
+            "op": "eq",
+            "field": "move_type",
+            "value": "FACING_ANGLE"
+          },
+          "fields": [
+            {
+              "name": "angle",
+              "type": "float"
+            }
+          ]
+        },
+        {
+          "when": {
+            "op": "eq",
+            "field": "move_type",
+            "value": "FACING_SPOT"
+          },
+          "fields": [
+            {
+              "name": "position",
+              "type": "Vector3d"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "spline_flags",
+      "type": "SplineFlag"
+    },
+    {
+      "name": "duration",
+      "type": "uint32"
+    },
+    {
+      "name": "splines",
+      "type": "MonsterMoveSplines"
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "name": "SplineMoveNormalFall",
+  "opcode": "smsg_spline_move_normal_fall",
+  "direction": "server",
+  "fields": [
+    {
+      "name": "guid",
+      "type": "PackedGuid"
+    }
+  ]
+}

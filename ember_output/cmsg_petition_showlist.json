@@ -1,0 +1,11 @@
+{
+  "name": "PetitionShowlist",
+  "opcode": "cmsg_petition_showlist",
+  "direction": "client",
+  "fields": [
+    {
+      "name": "guid",
+      "type": "uint64"
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "name": "MoveStartTurnLeftServer",
+  "opcode": "msg_move_start_turn_left_server",
+  "direction": "server",
+  "fields": [
+    {
+      "name": "guid",
+      "type": "PackedGuid"
+    },
+    {
+      "name": "info",
+      "type": "MovementInfo"
+    }
+  ]
+}

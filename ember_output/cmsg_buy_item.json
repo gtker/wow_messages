@@ -1,0 +1,23 @@
+{
+  "name": "BuyItem",
+  "opcode": "cmsg_buy_item",
+  "direction": "client",
+  "fields": [
+    {
+      "name": "vendor",
+      "type": "uint64"
+    },
+    {
+      "name": "item",
+      "type": "Item"
+    },
+    {
+      "name": "amount",
+      "type": "uint8"
+    },
+    {
+      "name": "unknown1",
+      "type": "uint8"
+    }
+  ]
+}

@@ -1,0 +1,6 @@
+{
+  "name": "IgnoreTrade",
+  "opcode": "cmsg_ignore_trade",
+  "direction": "client",
+  "fields": []
+}

@@ -1,0 +1,11 @@
+{
+  "name": "AcceptTrade",
+  "opcode": "cmsg_accept_trade",
+  "direction": "client",
+  "fields": [
+    {
+      "name": "unknown1",
+      "type": "uint32"
+    }
+  ]
+}

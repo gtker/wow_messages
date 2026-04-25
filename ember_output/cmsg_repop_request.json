@@ -1,0 +1,6 @@
+{
+  "name": "RepopRequest",
+  "opcode": "cmsg_repop_request",
+  "direction": "client",
+  "fields": []
+}
