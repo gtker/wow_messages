@@ -37,7 +37,8 @@
     },
     {
       "name": "auction_quality",
-      "type": "ItemQuality"
+      "type": "ItemQuality",
+      "as": "uint32"
     },
     {
       "name": "usable",

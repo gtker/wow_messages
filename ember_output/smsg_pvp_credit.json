@@ -13,7 +13,8 @@
     },
     {
       "name": "rank",
-      "type": "PvpRank"
+      "type": "PvpRank",
+      "as": "uint32"
     }
   ]
 }

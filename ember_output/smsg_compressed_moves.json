@@ -2,5 +2,13 @@
   "name": "CompressedMoves",
   "opcode": "smsg_compressed_moves",
   "direction": "server",
-  "fields": []
+  "fields": [
+    {
+      "name": "moves",
+      "type": "CompressedMove",
+      "array": {
+        "until_end": true
+      }
+    }
+  ]
 }

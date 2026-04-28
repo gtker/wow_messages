@@ -2,5 +2,13 @@
   "name": "WardenData",
   "opcode": "cmsg_warden_data",
   "direction": "client",
-  "fields": []
+  "fields": [
+    {
+      "name": "encrypted_data",
+      "type": "u8",
+      "array": {
+        "until_end": true
+      }
+    }
+  ]
 }

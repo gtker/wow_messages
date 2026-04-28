@@ -5,7 +5,8 @@
   "fields": [
     {
       "name": "animation_state",
-      "type": "UnitStandState"
+      "type": "UnitStandState",
+      "as": "uint32"
     }
   ]
 }

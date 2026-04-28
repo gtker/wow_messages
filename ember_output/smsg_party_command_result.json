@@ -5,7 +5,8 @@
   "fields": [
     {
       "name": "operation",
-      "type": "PartyOperation"
+      "type": "PartyOperation",
+      "as": "uint32"
     },
     {
       "name": "member",
@@ -13,7 +14,8 @@
     },
     {
       "name": "result",
-      "type": "PartyResult"
+      "type": "PartyResult",
+      "as": "uint32"
     }
   ]
 }

@@ -5,7 +5,8 @@
   "fields": [
     {
       "name": "loot_setting",
-      "type": "GroupLootSetting"
+      "type": "GroupLootSetting",
+      "as": "uint32"
     },
     {
       "name": "loot_master",
@@ -13,7 +14,8 @@
     },
     {
       "name": "loot_threshold",
-      "type": "ItemQuality"
+      "type": "ItemQuality",
+      "as": "uint32"
     }
   ]
 }

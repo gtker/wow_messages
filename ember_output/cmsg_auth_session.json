@@ -25,6 +25,13 @@
       "array": {
         "size": 20
       }
+    },
+    {
+      "name": "addon_info",
+      "type": "AddonInfo",
+      "array": {
+        "until_end": true
+      }
     }
   ]
 }

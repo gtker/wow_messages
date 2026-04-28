@@ -9,7 +9,8 @@
     },
     {
       "name": "status",
-      "type": "QuestGiverStatus"
+      "type": "QuestGiverStatus",
+      "as": "uint32"
     }
   ]
 }

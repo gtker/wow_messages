@@ -2,5 +2,13 @@
   "name": "AddonInfo",
   "opcode": "smsg_addon_info",
   "direction": "server",
-  "fields": []
+  "fields": [
+    {
+      "name": "addons",
+      "type": "Addon",
+      "array": {
+        "until_end": true
+      }
+    }
+  ]
 }

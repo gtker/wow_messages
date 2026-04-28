@@ -5,7 +5,8 @@
   "fields": [
     {
       "name": "skill",
-      "type": "Skill"
+      "type": "Skill",
+      "as": "uint32"
     }
   ]
 }

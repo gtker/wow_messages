@@ -17,15 +17,18 @@
     },
     {
       "name": "race",
-      "type": "Race"
+      "type": "Race",
+      "as": "uint32"
     },
     {
       "name": "gender",
-      "type": "Gender"
+      "type": "Gender",
+      "as": "uint32"
     },
     {
       "name": "class",
-      "type": "Class"
+      "type": "Class",
+      "as": "uint32"
     }
   ]
 }

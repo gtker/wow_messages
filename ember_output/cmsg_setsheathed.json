@@ -5,7 +5,8 @@
   "fields": [
     {
       "name": "sheathed",
-      "type": "SheathState"
+      "type": "SheathState",
+      "as": "uint32"
     }
   ]
 }

@@ -5,7 +5,8 @@
   "fields": [
     {
       "name": "command",
-      "type": "GuildCommand"
+      "type": "GuildCommand",
+      "as": "uint32"
     },
     {
       "name": "string",
@@ -13,7 +14,8 @@
     },
     {
       "name": "result",
-      "type": "GuildCommandResult"
+      "type": "GuildCommandResult",
+      "as": "uint32"
     }
   ]
 }

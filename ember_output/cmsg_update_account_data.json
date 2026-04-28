@@ -5,7 +5,15 @@
   "fields": [
     {
       "name": "data_type",
-      "type": "AccountDataType"
+      "type": "AccountDataType",
+      "as": "uint32"
+    },
+    {
+      "name": "compressed_data",
+      "type": "u8",
+      "array": {
+        "until_end": true
+      }
     }
   ]
 }

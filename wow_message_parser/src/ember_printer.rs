@@ -81,15 +81,26 @@ impl Ty {
                         ArraySize::Variable(size) => ArrayType::Variable {
                             count_field: size.name().to_string(),
                         },
-                        ArraySize::Endless => return,
+                        ArraySize::Endless => ArrayType::Endless {
+                            until_end: true,
+                        },
                     })
                 } else {
                     None
                 };
 
+                let upcast = match d.ty() {
+                    Type::Enum { upcast, .. } |
+                    Type::Flag { upcast, .. } => {
+                        upcast.map(|c| c.ember_str().to_string())
+                    }
+                    _ => None,
+                };
+
                 fields.push(StructField::Field {
                     name: d.name().to_string(),
                     ty: d.ty().ember_str().to_string(),
+                    upcast,
                     array,
                 });
             }
@@ -149,6 +160,7 @@ impl Ty {
 enum ArrayType {
     Fixed { size: i128 },
     Variable { count_field: String },
+    Endless { until_end: bool }
 }
 
 #[derive(Debug, Serialize)]
@@ -158,6 +170,9 @@ enum StructField {
         name: String,
         #[serde(rename = "type")]
         ty: String,
+        #[serde(rename = "as")]
+        #[serde(skip_serializing_if = "Option::is_none")]
+        upcast: Option<String>,
         #[serde(skip_serializing_if = "Option::is_none")]
         array: Option<ArrayType>,
     },

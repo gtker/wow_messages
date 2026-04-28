@@ -1982,7 +1982,8 @@
         },
         {
           "name": "rank",
-          "type": "PvpRank"
+          "type": "PvpRank",
+          "as": "uint32"
         },
         {
           "name": "killing_blows",
@@ -2399,7 +2400,8 @@
         },
         {
           "name": "pet_family",
-          "type": "CreatureFamily"
+          "type": "CreatureFamily",
+          "as": "uint32"
         },
         {
           "name": "equipment",
@@ -3804,7 +3806,8 @@
         },
         {
           "name": "school",
-          "type": "SpellSchool"
+          "type": "SpellSchool",
+          "as": "uint32"
         }
       ]
     },
@@ -4160,7 +4163,8 @@
         },
         {
           "name": "spell_trigger",
-          "type": "SpellTriggerType"
+          "type": "SpellTriggerType",
+          "as": "uint32"
         },
         {
           "name": "spell_charges",
@@ -4185,7 +4189,8 @@
       "fields": [
         {
           "name": "stat_type",
-          "type": "ItemStatType"
+          "type": "ItemStatType",
+          "as": "uint32"
         },
         {
           "name": "value",
@@ -6861,7 +6866,8 @@
         },
         {
           "name": "required_skill",
-          "type": "Skill"
+          "type": "Skill",
+          "as": "uint32"
         },
         {
           "name": "required_skill_value",
@@ -7099,11 +7105,13 @@
         },
         {
           "name": "class",
-          "type": "Class"
+          "type": "Class",
+          "as": "uint32"
         },
         {
           "name": "race",
-          "type": "Race"
+          "type": "Race",
+          "as": "uint32"
         },
         {
           "name": "area",

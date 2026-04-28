@@ -10,6 +10,13 @@
     {
       "name": "target",
       "type": "uint64"
+    },
+    {
+      "name": "spells",
+      "type": "Spell",
+      "array": {
+        "until_end": true
+      }
     }
   ]
 }

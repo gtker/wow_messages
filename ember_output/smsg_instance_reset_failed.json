@@ -5,7 +5,8 @@
   "fields": [
     {
       "name": "reason",
-      "type": "InstanceResetFailedReason"
+      "type": "InstanceResetFailedReason",
+      "as": "uint32"
     },
     {
       "name": "map",

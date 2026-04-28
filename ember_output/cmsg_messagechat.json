@@ -5,7 +5,8 @@
   "fields": [
     {
       "name": "chat_type",
-      "type": "ChatType"
+      "type": "ChatType",
+      "as": "uint32"
     },
     {
       "name": "language",
