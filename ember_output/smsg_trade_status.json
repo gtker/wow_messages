@@ -6,6 +6,72 @@
     {
       "name": "status",
       "type": "TradeStatus"
+    },
+    {
+      "type": "if_chain",
+      "branches": [
+        {
+          "when": {
+            "op": "eq",
+            "field": "status",
+            "value": "BEGIN_TRADE"
+          },
+          "fields": [
+            {
+              "name": "unknown1",
+              "type": "uint64"
+            }
+          ]
+        },
+        {
+          "when": {
+            "op": "eq",
+            "field": "status",
+            "value": "CLOSE_WINDOW"
+          },
+          "fields": [
+            {
+              "name": "inventory_result",
+              "type": "InventoryResult",
+              "as": "uint32"
+            },
+            {
+              "name": "target_error",
+              "type": "Bool"
+            },
+            {
+              "name": "item_limit_category_id",
+              "type": "uint32"
+            }
+          ]
+        },
+        {
+          "when": {
+            "op": "eq",
+            "field": "status",
+            "value": "ONLY_CONJURED"
+          },
+          "fields": [
+            {
+              "name": "slot",
+              "type": "uint8"
+            }
+          ]
+        },
+        {
+          "when": {
+            "op": "eq",
+            "field": "status",
+            "value": "NOT_ON_TAPLIST"
+          },
+          "fields": [
+            {
+              "name": "slot",
+              "type": "uint8"
+            }
+          ]
+        }
+      ]
     }
   ]
 }

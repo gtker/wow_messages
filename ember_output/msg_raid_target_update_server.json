@@ -6,6 +6,40 @@
     {
       "name": "update_type",
       "type": "RaidTargetUpdateType"
+    },
+    {
+      "type": "if_chain",
+      "branches": [
+        {
+          "when": {
+            "op": "eq",
+            "field": "update_type",
+            "value": "FULL"
+          },
+          "fields": [
+            {
+              "name": "raid_targets",
+              "type": "RaidTargetUpdate",
+              "array": {
+                "size": 8
+              }
+            }
+          ]
+        },
+        {
+          "when": {
+            "op": "eq",
+            "field": "update_type",
+            "value": "PARTIAL"
+          },
+          "fields": [
+            {
+              "name": "raid_target",
+              "type": "RaidTargetUpdate"
+            }
+          ]
+        }
+      ]
     }
   ]
 }

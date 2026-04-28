@@ -10,6 +10,84 @@
     {
       "name": "map",
       "type": "Map"
+    },
+    {
+      "type": "if_chain",
+      "branches": [
+        {
+          "when": {
+            "op": "neq",
+            "field": "map",
+            "value": "EASTERN_KINGDOMS"
+          },
+          "fields": [
+            {
+              "name": "bracket",
+              "type": "BattlegroundBracket"
+            },
+            {
+              "name": "client_instance_id",
+              "type": "uint32"
+            },
+            {
+              "name": "status_id",
+              "type": "StatusId"
+            },
+            {
+              "type": "if_chain",
+              "branches": [
+                {
+                  "when": {
+                    "op": "eq",
+                    "field": "status_id",
+                    "value": "WAIT_QUEUE"
+                  },
+                  "fields": [
+                    {
+                      "name": "average_wait_time_in_ms",
+                      "type": "uint32"
+                    },
+                    {
+                      "name": "time_in_queue_in_ms",
+                      "type": "uint32"
+                    }
+                  ]
+                },
+                {
+                  "when": {
+                    "op": "eq",
+                    "field": "status_id",
+                    "value": "WAIT_JOIN"
+                  },
+                  "fields": [
+                    {
+                      "name": "time_to_remove_in_queue_in_ms",
+                      "type": "uint32"
+                    }
+                  ]
+                },
+                {
+                  "when": {
+                    "op": "eq",
+                    "field": "status_id",
+                    "value": "IN_PROGRESS"
+                  },
+                  "fields": [
+                    {
+                      "name": "time_to_bg_autoleave_in_ms",
+                      "type": "uint32"
+                    },
+                    {
+                      "name": "time_to_bg_start_in_ms",
+                      "type": "uint32"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
     }
   ]
 }

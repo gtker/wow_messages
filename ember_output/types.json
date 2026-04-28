@@ -46,8 +46,69 @@
           "type": "InfoBlock"
         },
         {
+          "type": "if_chain",
+          "branches": [
+            {
+              "when": {
+                "op": "eq",
+                "field": "info_block",
+                "value": "AVAILABLE"
+              },
+              "fields": [
+                {
+                  "name": "key_version",
+                  "type": "KeyVersion"
+                },
+                {
+                  "type": "if_chain",
+                  "branches": [
+                    {
+                      "when": {
+                        "op": "neq",
+                        "field": "key_version",
+                        "value": "ZERO"
+                      },
+                      "fields": [
+                        {
+                          "name": "public_key",
+                          "type": "u8",
+                          "array": {
+                            "size": 256
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "name": "update_available_flag",
+                  "type": "uint32"
+                }
+              ]
+            }
+          ]
+        },
+        {
           "name": "url_info",
           "type": "UrlInfo"
+        },
+        {
+          "type": "if_chain",
+          "branches": [
+            {
+              "when": {
+                "op": "eq",
+                "field": "url_info",
+                "value": "AVAILABLE"
+              },
+              "fields": [
+                {
+                  "name": "url",
+                  "type": "CString"
+                }
+              ]
+            }
+          ]
         }
       ]
     },
@@ -1530,6 +1591,142 @@
         {
           "name": "aura_type",
           "type": "AuraType"
+        },
+        {
+          "type": "if_chain",
+          "branches": [
+            {
+              "when": {
+                "op": "eq",
+                "field": "aura_type",
+                "value": "PERIODIC_DAMAGE"
+              },
+              "fields": [
+                {
+                  "name": "damage1",
+                  "type": "uint32"
+                },
+                {
+                  "name": "school",
+                  "type": "SpellSchool"
+                },
+                {
+                  "name": "absorbed",
+                  "type": "uint32"
+                },
+                {
+                  "name": "resisted",
+                  "type": "uint32"
+                }
+              ]
+            },
+            {
+              "when": {
+                "op": "eq",
+                "field": "aura_type",
+                "value": "PERIODIC_DAMAGE_PERCENT"
+              },
+              "fields": [
+                {
+                  "name": "damage1",
+                  "type": "uint32"
+                },
+                {
+                  "name": "school",
+                  "type": "SpellSchool"
+                },
+                {
+                  "name": "absorbed",
+                  "type": "uint32"
+                },
+                {
+                  "name": "resisted",
+                  "type": "uint32"
+                }
+              ]
+            },
+            {
+              "when": {
+                "op": "eq",
+                "field": "aura_type",
+                "value": "PERIODIC_HEAL"
+              },
+              "fields": [
+                {
+                  "name": "damage2",
+                  "type": "uint32"
+                }
+              ]
+            },
+            {
+              "when": {
+                "op": "eq",
+                "field": "aura_type",
+                "value": "OBS_MOD_HEALTH"
+              },
+              "fields": [
+                {
+                  "name": "damage2",
+                  "type": "uint32"
+                }
+              ]
+            },
+            {
+              "when": {
+                "op": "eq",
+                "field": "aura_type",
+                "value": "OBS_MOD_MANA"
+              },
+              "fields": [
+                {
+                  "name": "misc_value1",
+                  "type": "uint32"
+                },
+                {
+                  "name": "damage3",
+                  "type": "uint32"
+                }
+              ]
+            },
+            {
+              "when": {
+                "op": "eq",
+                "field": "aura_type",
+                "value": "PERIODIC_ENERGIZE"
+              },
+              "fields": [
+                {
+                  "name": "misc_value1",
+                  "type": "uint32"
+                },
+                {
+                  "name": "damage3",
+                  "type": "uint32"
+                }
+              ]
+            },
+            {
+              "when": {
+                "op": "eq",
+                "field": "aura_type",
+                "value": "PERIODIC_MANA_LEECH"
+              },
+              "fields": [
+                {
+                  "name": "misc_value2",
+                  "type": "uint32"
+                },
+                {
+                  "name": "damage",
+                  "type": "uint32"
+                },
+                {
+                  "name": "gain_multiplier",
+                  "type": "float"
+                }
+              ]
+            }
+          ]
         }
       ]
     },
@@ -2593,6 +2790,54 @@
         {
           "name": "guid",
           "type": "PackedGuid"
+        },
+        {
+          "type": "if_chain",
+          "branches": [
+            {
+              "when": {
+                "op": "eq",
+                "field": "opcode",
+                "value": "SMSG_SPLINE_SET_RUN_SPEED"
+              },
+              "fields": [
+                {
+                  "name": "speed",
+                  "type": "float"
+                }
+              ]
+            },
+            {
+              "when": {
+                "op": "eq",
+                "field": "opcode",
+                "value": "SMSG_MONSTER_MOVE"
+              },
+              "fields": [
+                {
+                  "name": "monster_move",
+                  "type": "MonsterMove"
+                }
+              ]
+            },
+            {
+              "when": {
+                "op": "eq",
+                "field": "opcode",
+                "value": "SMSG_MONSTER_MOVE_TRANSPORT"
+              },
+              "fields": [
+                {
+                  "name": "transport",
+                  "type": "PackedGuid"
+                },
+                {
+                  "name": "monster_move_transport",
+                  "type": "MonsterMove"
+                }
+              ]
+            }
+          ]
         }
       ]
     },
@@ -3166,6 +3411,33 @@
         {
           "name": "status",
           "type": "FriendStatus"
+        },
+        {
+          "type": "if_chain",
+          "branches": [
+            {
+              "when": {
+                "op": "neq",
+                "field": "status",
+                "value": "OFFLINE"
+              },
+              "fields": [
+                {
+                  "name": "area",
+                  "type": "Area"
+                },
+                {
+                  "name": "level",
+                  "type": "Level32"
+                },
+                {
+                  "name": "class",
+                  "type": "Class",
+                  "as": "uint32"
+                }
+              ]
+            }
+          ]
         }
       ]
     },
@@ -3503,6 +3775,24 @@
         {
           "name": "area",
           "type": "Area"
+        },
+        {
+          "type": "if_chain",
+          "branches": [
+            {
+              "when": {
+                "op": "eq",
+                "field": "status",
+                "value": "OFFLINE"
+              },
+              "fields": [
+                {
+                  "name": "time_offline",
+                  "type": "float"
+                }
+              ]
+            }
+          ]
         },
         {
           "name": "public_note",
@@ -4407,6 +4697,63 @@
           "type": "MailType"
         },
         {
+          "type": "if_chain",
+          "branches": [
+            {
+              "when": {
+                "op": "eq",
+                "field": "message_type",
+                "value": "NORMAL"
+              },
+              "fields": [
+                {
+                  "name": "sender",
+                  "type": "uint64"
+                }
+              ]
+            },
+            {
+              "when": {
+                "op": "eq",
+                "field": "message_type",
+                "value": "CREATURE"
+              },
+              "fields": [
+                {
+                  "name": "sender_id",
+                  "type": "uint32"
+                }
+              ]
+            },
+            {
+              "when": {
+                "op": "eq",
+                "field": "message_type",
+                "value": "GAMEOBJECT"
+              },
+              "fields": [
+                {
+                  "name": "sender_id",
+                  "type": "uint32"
+                }
+              ]
+            },
+            {
+              "when": {
+                "op": "eq",
+                "field": "message_type",
+                "value": "AUCTION"
+              },
+              "fields": [
+                {
+                  "name": "auction_id",
+                  "type": "uint32"
+                }
+              ]
+            }
+          ]
+        },
+        {
           "name": "subject",
           "type": "CString"
         },
@@ -4633,6 +4980,76 @@
         {
           "name": "move_type",
           "type": "MonsterMoveType"
+        },
+        {
+          "type": "if_chain",
+          "branches": [
+            {
+              "when": {
+                "op": "eq",
+                "field": "move_type",
+                "value": "FACING_TARGET"
+              },
+              "fields": [
+                {
+                  "name": "target",
+                  "type": "uint64"
+                }
+              ]
+            },
+            {
+              "when": {
+                "op": "eq",
+                "field": "move_type",
+                "value": "FACING_ANGLE"
+              },
+              "fields": [
+                {
+                  "name": "angle",
+                  "type": "float"
+                }
+              ]
+            },
+            {
+              "when": {
+                "op": "eq",
+                "field": "move_type",
+                "value": "FACING_SPOT"
+              },
+              "fields": [
+                {
+                  "name": "position",
+                  "type": "Vector3d"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "if_chain",
+          "branches": [
+            {
+              "when": {
+                "op": "neq",
+                "field": "move_type",
+                "value": "STOP"
+              },
+              "fields": [
+                {
+                  "name": "spline_flags",
+                  "type": "SplineFlag"
+                },
+                {
+                  "name": "duration",
+                  "type": "uint32"
+                },
+                {
+                  "name": "splines",
+                  "type": "MonsterMoveSplines"
+                }
+              ]
+            }
+          ]
         }
       ]
     },
@@ -4670,6 +5087,334 @@
         {
           "name": "update_flag",
           "type": "UpdateFlag"
+        },
+        {
+          "type": "if_chain",
+          "branches": [
+            {
+              "when": {
+                "op": "has_flag",
+                "field": "update_flag",
+                "value": "LIVING"
+              },
+              "fields": [
+                {
+                  "name": "flags",
+                  "type": "MovementFlags"
+                },
+                {
+                  "name": "timestamp",
+                  "type": "uint32"
+                },
+                {
+                  "name": "living_position",
+                  "type": "Vector3d"
+                },
+                {
+                  "name": "living_orientation",
+                  "type": "float"
+                },
+                {
+                  "type": "if_chain",
+                  "branches": [
+                    {
+                      "when": {
+                        "op": "has_flag",
+                        "field": "flags",
+                        "value": "ON_TRANSPORT"
+                      },
+                      "fields": [
+                        {
+                          "name": "transport_guid",
+                          "type": "PackedGuid"
+                        },
+                        {
+                          "name": "transport_position",
+                          "type": "Vector3d"
+                        },
+                        {
+                          "name": "transport_orientation",
+                          "type": "float"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "if_chain",
+                  "branches": [
+                    {
+                      "when": {
+                        "op": "has_flag",
+                        "field": "flags",
+                        "value": "SWIMMING"
+                      },
+                      "fields": [
+                        {
+                          "name": "pitch",
+                          "type": "float"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "name": "fall_time",
+                  "type": "float"
+                },
+                {
+                  "type": "if_chain",
+                  "branches": [
+                    {
+                      "when": {
+                        "op": "has_flag",
+                        "field": "flags",
+                        "value": "JUMPING"
+                      },
+                      "fields": [
+                        {
+                          "name": "z_speed",
+                          "type": "float"
+                        },
+                        {
+                          "name": "cos_angle",
+                          "type": "float"
+                        },
+                        {
+                          "name": "sin_angle",
+                          "type": "float"
+                        },
+                        {
+                          "name": "xy_speed",
+                          "type": "float"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "if_chain",
+                  "branches": [
+                    {
+                      "when": {
+                        "op": "has_flag",
+                        "field": "flags",
+                        "value": "SPLINE_ELEVATION"
+                      },
+                      "fields": [
+                        {
+                          "name": "spline_elevation",
+                          "type": "float"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "name": "walking_speed",
+                  "type": "float"
+                },
+                {
+                  "name": "running_speed",
+                  "type": "float"
+                },
+                {
+                  "name": "backwards_running_speed",
+                  "type": "float"
+                },
+                {
+                  "name": "swimming_speed",
+                  "type": "float"
+                },
+                {
+                  "name": "backwards_swimming_speed",
+                  "type": "float"
+                },
+                {
+                  "name": "turn_rate",
+                  "type": "float"
+                },
+                {
+                  "type": "if_chain",
+                  "branches": [
+                    {
+                      "when": {
+                        "op": "has_flag",
+                        "field": "flags",
+                        "value": "SPLINE_ENABLED"
+                      },
+                      "fields": [
+                        {
+                          "name": "spline_flags",
+                          "type": "SplineFlag"
+                        },
+                        {
+                          "type": "if_chain",
+                          "branches": [
+                            {
+                              "when": {
+                                "op": "has_flag",
+                                "field": "spline_flags",
+                                "value": "FINAL_ANGLE"
+                              },
+                              "fields": [
+                                {
+                                  "name": "angle",
+                                  "type": "float"
+                                }
+                              ]
+                            },
+                            {
+                              "when": {
+                                "op": "has_flag",
+                                "field": "spline_flags",
+                                "value": "FINAL_TARGET"
+                              },
+                              "fields": [
+                                {
+                                  "name": "target",
+                                  "type": "uint64"
+                                }
+                              ]
+                            },
+                            {
+                              "when": {
+                                "op": "has_flag",
+                                "field": "spline_flags",
+                                "value": "FINAL_POINT"
+                              },
+                              "fields": [
+                                {
+                                  "name": "spline_final_point",
+                                  "type": "Vector3d"
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "name": "time_passed",
+                          "type": "uint32"
+                        },
+                        {
+                          "name": "duration",
+                          "type": "uint32"
+                        },
+                        {
+                          "name": "id",
+                          "type": "uint32"
+                        },
+                        {
+                          "name": "amount_of_nodes",
+                          "type": "uint32"
+                        },
+                        {
+                          "name": "nodes",
+                          "type": "Vector3d",
+                          "array": {
+                            "count_field": "amount_of_nodes"
+                          }
+                        },
+                        {
+                          "name": "final_node",
+                          "type": "Vector3d"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "when": {
+                "op": "has_flag",
+                "field": "update_flag",
+                "value": "HAS_POSITION"
+              },
+              "fields": [
+                {
+                  "name": "position",
+                  "type": "Vector3d"
+                },
+                {
+                  "name": "orientation",
+                  "type": "float"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "if_chain",
+          "branches": [
+            {
+              "when": {
+                "op": "has_flag",
+                "field": "update_flag",
+                "value": "HIGH_GUID"
+              },
+              "fields": [
+                {
+                  "name": "unknown0",
+                  "type": "uint32"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "if_chain",
+          "branches": [
+            {
+              "when": {
+                "op": "has_flag",
+                "field": "update_flag",
+                "value": "ALL"
+              },
+              "fields": [
+                {
+                  "name": "unknown1",
+                  "type": "uint32"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "if_chain",
+          "branches": [
+            {
+              "when": {
+                "op": "has_flag",
+                "field": "update_flag",
+                "value": "MELEE_ATTACKING"
+              },
+              "fields": [
+                {
+                  "name": "guid",
+                  "type": "PackedGuid"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "if_chain",
+          "branches": [
+            {
+              "when": {
+                "op": "has_flag",
+                "field": "update_flag",
+                "value": "TRANSPORT"
+              },
+              "fields": [
+                {
+                  "name": "transport_progress_in_ms",
+                  "type": "uint32"
+                }
+              ]
+            }
+          ]
         }
       ]
     },
@@ -4724,8 +5469,92 @@
           "type": "float"
         },
         {
+          "type": "if_chain",
+          "branches": [
+            {
+              "when": {
+                "op": "has_flag",
+                "field": "flags",
+                "value": "ON_TRANSPORT"
+              },
+              "fields": [
+                {
+                  "name": "transport",
+                  "type": "TransportInfo"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "if_chain",
+          "branches": [
+            {
+              "when": {
+                "op": "has_flag",
+                "field": "flags",
+                "value": "SWIMMING"
+              },
+              "fields": [
+                {
+                  "name": "pitch",
+                  "type": "float"
+                }
+              ]
+            }
+          ]
+        },
+        {
           "name": "fall_time",
           "type": "float"
+        },
+        {
+          "type": "if_chain",
+          "branches": [
+            {
+              "when": {
+                "op": "has_flag",
+                "field": "flags",
+                "value": "JUMPING"
+              },
+              "fields": [
+                {
+                  "name": "z_speed",
+                  "type": "float"
+                },
+                {
+                  "name": "cos_angle",
+                  "type": "float"
+                },
+                {
+                  "name": "sin_angle",
+                  "type": "float"
+                },
+                {
+                  "name": "xy_speed",
+                  "type": "float"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "if_chain",
+          "branches": [
+            {
+              "when": {
+                "op": "has_flag",
+                "field": "flags",
+                "value": "SPLINE_ELEVATION"
+              },
+              "fields": [
+                {
+                  "name": "spline_elevation",
+                  "type": "float"
+                }
+              ]
+            }
+          ]
         }
       ]
     },
@@ -4799,6 +5628,135 @@
         {
           "name": "update_type",
           "type": "UpdateType"
+        },
+        {
+          "type": "if_chain",
+          "branches": [
+            {
+              "when": {
+                "op": "eq",
+                "field": "update_type",
+                "value": "VALUES"
+              },
+              "fields": [
+                {
+                  "name": "guid1",
+                  "type": "PackedGuid"
+                },
+                {
+                  "name": "mask1",
+                  "type": "UpdateMask"
+                }
+              ]
+            },
+            {
+              "when": {
+                "op": "eq",
+                "field": "update_type",
+                "value": "MOVEMENT"
+              },
+              "fields": [
+                {
+                  "name": "guid2",
+                  "type": "PackedGuid"
+                },
+                {
+                  "name": "movement1",
+                  "type": "MovementBlock"
+                }
+              ]
+            },
+            {
+              "when": {
+                "op": "eq",
+                "field": "update_type",
+                "value": "CREATE_OBJECT"
+              },
+              "fields": [
+                {
+                  "name": "guid3",
+                  "type": "PackedGuid"
+                },
+                {
+                  "name": "object_type",
+                  "type": "ObjectType"
+                },
+                {
+                  "name": "movement2",
+                  "type": "MovementBlock"
+                },
+                {
+                  "name": "mask2",
+                  "type": "UpdateMask"
+                }
+              ]
+            },
+            {
+              "when": {
+                "op": "eq",
+                "field": "update_type",
+                "value": "CREATE_OBJECT2"
+              },
+              "fields": [
+                {
+                  "name": "guid3",
+                  "type": "PackedGuid"
+                },
+                {
+                  "name": "object_type",
+                  "type": "ObjectType"
+                },
+                {
+                  "name": "movement2",
+                  "type": "MovementBlock"
+                },
+                {
+                  "name": "mask2",
+                  "type": "UpdateMask"
+                }
+              ]
+            },
+            {
+              "when": {
+                "op": "eq",
+                "field": "update_type",
+                "value": "OUT_OF_RANGE_OBJECTS"
+              },
+              "fields": [
+                {
+                  "name": "count",
+                  "type": "uint32"
+                },
+                {
+                  "name": "guids",
+                  "type": "PackedGuid",
+                  "array": {
+                    "count_field": "count"
+                  }
+                }
+              ]
+            },
+            {
+              "when": {
+                "op": "eq",
+                "field": "update_type",
+                "value": "NEAR_OBJECTS"
+              },
+              "fields": [
+                {
+                  "name": "count",
+                  "type": "uint32"
+                },
+                {
+                  "name": "guids",
+                  "type": "PackedGuid",
+                  "array": {
+                    "count_field": "count"
+                  }
+                }
+              ]
+            }
+          ]
         }
       ]
     },
@@ -5795,6 +6753,171 @@
         {
           "name": "target_flags",
           "type": "SpellCastTargetFlags"
+        },
+        {
+          "type": "if_chain",
+          "branches": [
+            {
+              "when": {
+                "op": "has_flag",
+                "field": "target_flags",
+                "value": "UNIT"
+              },
+              "fields": [
+                {
+                  "name": "unit_target",
+                  "type": "PackedGuid"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "if_chain",
+          "branches": [
+            {
+              "when": {
+                "op": "has_flag",
+                "field": "target_flags",
+                "value": "GAMEOBJECT"
+              },
+              "fields": [
+                {
+                  "name": "gameobject",
+                  "type": "PackedGuid"
+                }
+              ]
+            },
+            {
+              "when": {
+                "op": "has_flag",
+                "field": "target_flags",
+                "value": "OBJECT_UNK"
+              },
+              "fields": [
+                {
+                  "name": "object_unk",
+                  "type": "PackedGuid"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "if_chain",
+          "branches": [
+            {
+              "when": {
+                "op": "has_flag",
+                "field": "target_flags",
+                "value": "ITEM"
+              },
+              "fields": [
+                {
+                  "name": "item",
+                  "type": "PackedGuid"
+                }
+              ]
+            },
+            {
+              "when": {
+                "op": "has_flag",
+                "field": "target_flags",
+                "value": "TRADE_ITEM"
+              },
+              "fields": [
+                {
+                  "name": "trade_item",
+                  "type": "PackedGuid"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "if_chain",
+          "branches": [
+            {
+              "when": {
+                "op": "has_flag",
+                "field": "target_flags",
+                "value": "SOURCE_LOCATION"
+              },
+              "fields": [
+                {
+                  "name": "source",
+                  "type": "Vector3d"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "if_chain",
+          "branches": [
+            {
+              "when": {
+                "op": "has_flag",
+                "field": "target_flags",
+                "value": "DEST_LOCATION"
+              },
+              "fields": [
+                {
+                  "name": "destination",
+                  "type": "Vector3d"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "if_chain",
+          "branches": [
+            {
+              "when": {
+                "op": "has_flag",
+                "field": "target_flags",
+                "value": "STRING"
+              },
+              "fields": [
+                {
+                  "name": "target_string",
+                  "type": "CString"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "if_chain",
+          "branches": [
+            {
+              "when": {
+                "op": "has_flag",
+                "field": "target_flags",
+                "value": "CORPSE"
+              },
+              "fields": [
+                {
+                  "name": "corpse",
+                  "type": "PackedGuid"
+                }
+              ]
+            },
+            {
+              "when": {
+                "op": "has_flag",
+                "field": "target_flags",
+                "value": "PVP_CORPSE"
+              },
+              "fields": [
+                {
+                  "name": "pvp_corpse",
+                  "type": "PackedGuid"
+                }
+              ]
+            }
+          ]
         }
       ]
     },
@@ -5955,6 +7078,623 @@
         {
           "name": "amount_of_logs",
           "type": "uint32"
+        },
+        {
+          "type": "if_chain",
+          "branches": [
+            {
+              "when": {
+                "op": "eq",
+                "field": "effect",
+                "value": "POWER_DRAIN"
+              },
+              "fields": [
+                {
+                  "name": "target1",
+                  "type": "uint64"
+                },
+                {
+                  "name": "amount",
+                  "type": "uint32"
+                },
+                {
+                  "name": "power",
+                  "type": "Power",
+                  "as": "uint32"
+                },
+                {
+                  "name": "multiplier",
+                  "type": "float"
+                }
+              ]
+            },
+            {
+              "when": {
+                "op": "eq",
+                "field": "effect",
+                "value": "HEAL"
+              },
+              "fields": [
+                {
+                  "name": "target2",
+                  "type": "uint64"
+                },
+                {
+                  "name": "heal_amount",
+                  "type": "uint32"
+                },
+                {
+                  "name": "heal_critical",
+                  "type": "uint32"
+                }
+              ]
+            },
+            {
+              "when": {
+                "op": "eq",
+                "field": "effect",
+                "value": "HEAL_MAX_HEALTH"
+              },
+              "fields": [
+                {
+                  "name": "target2",
+                  "type": "uint64"
+                },
+                {
+                  "name": "heal_amount",
+                  "type": "uint32"
+                },
+                {
+                  "name": "heal_critical",
+                  "type": "uint32"
+                }
+              ]
+            },
+            {
+              "when": {
+                "op": "eq",
+                "field": "effect",
+                "value": "ENERGIZE"
+              },
+              "fields": [
+                {
+                  "name": "target3",
+                  "type": "uint64"
+                },
+                {
+                  "name": "energize_amount",
+                  "type": "uint32"
+                },
+                {
+                  "name": "energize_power",
+                  "type": "uint32"
+                }
+              ]
+            },
+            {
+              "when": {
+                "op": "eq",
+                "field": "effect",
+                "value": "ADD_EXTRA_ATTACKS"
+              },
+              "fields": [
+                {
+                  "name": "target4",
+                  "type": "uint64"
+                },
+                {
+                  "name": "extra_attacks",
+                  "type": "uint32"
+                }
+              ]
+            },
+            {
+              "when": {
+                "op": "eq",
+                "field": "effect",
+                "value": "CREATE_ITEM"
+              },
+              "fields": [
+                {
+                  "name": "item",
+                  "type": "Item"
+                }
+              ]
+            },
+            {
+              "when": {
+                "op": "eq",
+                "field": "effect",
+                "value": "INTERRUPT_CAST"
+              },
+              "fields": [
+                {
+                  "name": "target5",
+                  "type": "uint64"
+                },
+                {
+                  "name": "interrupted_spell",
+                  "type": "Spell"
+                }
+              ]
+            },
+            {
+              "when": {
+                "op": "eq",
+                "field": "effect",
+                "value": "DURABILITY_DAMAGE"
+              },
+              "fields": [
+                {
+                  "name": "target6",
+                  "type": "uint64"
+                },
+                {
+                  "name": "item_to_damage",
+                  "type": "Item"
+                },
+                {
+                  "name": "unknown5",
+                  "type": "uint32"
+                }
+              ]
+            },
+            {
+              "when": {
+                "op": "eq",
+                "field": "effect",
+                "value": "FEED_PET"
+              },
+              "fields": [
+                {
+                  "name": "feed_pet_item",
+                  "type": "Item"
+                }
+              ]
+            },
+            {
+              "when": {
+                "op": "eq",
+                "field": "effect",
+                "value": "INSTAKILL"
+              },
+              "fields": [
+                {
+                  "name": "target7",
+                  "type": "uint64"
+                }
+              ]
+            },
+            {
+              "when": {
+                "op": "eq",
+                "field": "effect",
+                "value": "RESURRECT"
+              },
+              "fields": [
+                {
+                  "name": "target7",
+                  "type": "uint64"
+                }
+              ]
+            },
+            {
+              "when": {
+                "op": "eq",
+                "field": "effect",
+                "value": "DISPEL"
+              },
+              "fields": [
+                {
+                  "name": "target7",
+                  "type": "uint64"
+                }
+              ]
+            },
+            {
+              "when": {
+                "op": "eq",
+                "field": "effect",
+                "value": "THREAT"
+              },
+              "fields": [
+                {
+                  "name": "target7",
+                  "type": "uint64"
+                }
+              ]
+            },
+            {
+              "when": {
+                "op": "eq",
+                "field": "effect",
+                "value": "DISTRACT"
+              },
+              "fields": [
+                {
+                  "name": "target7",
+                  "type": "uint64"
+                }
+              ]
+            },
+            {
+              "when": {
+                "op": "eq",
+                "field": "effect",
+                "value": "SANCTUARY"
+              },
+              "fields": [
+                {
+                  "name": "target7",
+                  "type": "uint64"
+                }
+              ]
+            },
+            {
+              "when": {
+                "op": "eq",
+                "field": "effect",
+                "value": "THREAT_ALL"
+              },
+              "fields": [
+                {
+                  "name": "target7",
+                  "type": "uint64"
+                }
+              ]
+            },
+            {
+              "when": {
+                "op": "eq",
+                "field": "effect",
+                "value": "DISPEL_MECHANIC"
+              },
+              "fields": [
+                {
+                  "name": "target7",
+                  "type": "uint64"
+                }
+              ]
+            },
+            {
+              "when": {
+                "op": "eq",
+                "field": "effect",
+                "value": "RESURRECT_NEW"
+              },
+              "fields": [
+                {
+                  "name": "target7",
+                  "type": "uint64"
+                }
+              ]
+            },
+            {
+              "when": {
+                "op": "eq",
+                "field": "effect",
+                "value": "ATTACK_ME"
+              },
+              "fields": [
+                {
+                  "name": "target7",
+                  "type": "uint64"
+                }
+              ]
+            },
+            {
+              "when": {
+                "op": "eq",
+                "field": "effect",
+                "value": "SKIN_PLAYER_CORPSE"
+              },
+              "fields": [
+                {
+                  "name": "target7",
+                  "type": "uint64"
+                }
+              ]
+            },
+            {
+              "when": {
+                "op": "eq",
+                "field": "effect",
+                "value": "MODIFY_THREAT_PERCENT"
+              },
+              "fields": [
+                {
+                  "name": "target7",
+                  "type": "uint64"
+                }
+              ]
+            },
+            {
+              "when": {
+                "op": "eq",
+                "field": "effect",
+                "value": "UNKNOWN126"
+              },
+              "fields": [
+                {
+                  "name": "target7",
+                  "type": "uint64"
+                }
+              ]
+            },
+            {
+              "when": {
+                "op": "eq",
+                "field": "effect",
+                "value": "OPEN_LOCK"
+              },
+              "fields": [
+                {
+                  "name": "target7",
+                  "type": "uint64"
+                }
+              ]
+            },
+            {
+              "when": {
+                "op": "eq",
+                "field": "effect",
+                "value": "OPEN_LOCK_ITEM"
+              },
+              "fields": [
+                {
+                  "name": "target7",
+                  "type": "uint64"
+                }
+              ]
+            },
+            {
+              "when": {
+                "op": "eq",
+                "field": "effect",
+                "value": "DISMISS_PET"
+              },
+              "fields": [
+                {
+                  "name": "target7",
+                  "type": "uint64"
+                }
+              ]
+            },
+            {
+              "when": {
+                "op": "eq",
+                "field": "effect",
+                "value": "TRANS_DOOR"
+              },
+              "fields": [
+                {
+                  "name": "target7",
+                  "type": "uint64"
+                }
+              ]
+            },
+            {
+              "when": {
+                "op": "eq",
+                "field": "effect",
+                "value": "SUMMON"
+              },
+              "fields": [
+                {
+                  "name": "target7",
+                  "type": "uint64"
+                }
+              ]
+            },
+            {
+              "when": {
+                "op": "eq",
+                "field": "effect",
+                "value": "SUMMON_PET"
+              },
+              "fields": [
+                {
+                  "name": "target7",
+                  "type": "uint64"
+                }
+              ]
+            },
+            {
+              "when": {
+                "op": "eq",
+                "field": "effect",
+                "value": "SUMMON_WILD"
+              },
+              "fields": [
+                {
+                  "name": "target7",
+                  "type": "uint64"
+                }
+              ]
+            },
+            {
+              "when": {
+                "op": "eq",
+                "field": "effect",
+                "value": "SUMMON_GUARDIAN"
+              },
+              "fields": [
+                {
+                  "name": "target7",
+                  "type": "uint64"
+                }
+              ]
+            },
+            {
+              "when": {
+                "op": "eq",
+                "field": "effect",
+                "value": "SUMMON_TOTEM_SLOT1"
+              },
+              "fields": [
+                {
+                  "name": "target7",
+                  "type": "uint64"
+                }
+              ]
+            },
+            {
+              "when": {
+                "op": "eq",
+                "field": "effect",
+                "value": "SUMMON_TOTEM_SLOT2"
+              },
+              "fields": [
+                {
+                  "name": "target7",
+                  "type": "uint64"
+                }
+              ]
+            },
+            {
+              "when": {
+                "op": "eq",
+                "field": "effect",
+                "value": "SUMMON_TOTEM_SLOT3"
+              },
+              "fields": [
+                {
+                  "name": "target7",
+                  "type": "uint64"
+                }
+              ]
+            },
+            {
+              "when": {
+                "op": "eq",
+                "field": "effect",
+                "value": "SUMMON_TOTEM_SLOT4"
+              },
+              "fields": [
+                {
+                  "name": "target7",
+                  "type": "uint64"
+                }
+              ]
+            },
+            {
+              "when": {
+                "op": "eq",
+                "field": "effect",
+                "value": "SUMMON_POSSESSED"
+              },
+              "fields": [
+                {
+                  "name": "target7",
+                  "type": "uint64"
+                }
+              ]
+            },
+            {
+              "when": {
+                "op": "eq",
+                "field": "effect",
+                "value": "SUMMON_TOTEM"
+              },
+              "fields": [
+                {
+                  "name": "target7",
+                  "type": "uint64"
+                }
+              ]
+            },
+            {
+              "when": {
+                "op": "eq",
+                "field": "effect",
+                "value": "SUMMON_CRITTER"
+              },
+              "fields": [
+                {
+                  "name": "target7",
+                  "type": "uint64"
+                }
+              ]
+            },
+            {
+              "when": {
+                "op": "eq",
+                "field": "effect",
+                "value": "SUMMON_OBJECT_WILD"
+              },
+              "fields": [
+                {
+                  "name": "target7",
+                  "type": "uint64"
+                }
+              ]
+            },
+            {
+              "when": {
+                "op": "eq",
+                "field": "effect",
+                "value": "SUMMON_OBJECT_SLOT1"
+              },
+              "fields": [
+                {
+                  "name": "target7",
+                  "type": "uint64"
+                }
+              ]
+            },
+            {
+              "when": {
+                "op": "eq",
+                "field": "effect",
+                "value": "SUMMON_OBJECT_SLOT2"
+              },
+              "fields": [
+                {
+                  "name": "target7",
+                  "type": "uint64"
+                }
+              ]
+            },
+            {
+              "when": {
+                "op": "eq",
+                "field": "effect",
+                "value": "SUMMON_OBJECT_SLOT3"
+              },
+              "fields": [
+                {
+                  "name": "target7",
+                  "type": "uint64"
+                }
+              ]
+            },
+            {
+              "when": {
+                "op": "eq",
+                "field": "effect",
+                "value": "SUMMON_OBJECT_SLOT4"
+              },
+              "fields": [
+                {
+                  "name": "target7",
+                  "type": "uint64"
+                }
+              ]
+            },
+            {
+              "when": {
+                "op": "eq",
+                "field": "effect",
+                "value": "SUMMON_DEMON"
+              },
+              "fields": [
+                {
+                  "name": "target7",
+                  "type": "uint64"
+                }
+              ]
+            }
+          ]
         }
       ]
     },

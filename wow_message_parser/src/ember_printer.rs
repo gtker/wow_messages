@@ -4,7 +4,7 @@ use crate::file_utils::{
 use crate::parser::types::array::ArraySize;
 use crate::parser::types::container::{Container, ContainerType};
 use crate::parser::types::definer::Definer;
-use crate::parser::types::if_statement::Equation;
+use crate::parser::types::if_statement::{Equation, IfStatement};
 use crate::parser::types::objects::{Object, Objects};
 use crate::parser::types::struct_member::StructMember;
 use crate::parser::types::tags::ObjectTags;
@@ -16,7 +16,7 @@ use heck::ToPascalCase;
 use serde::Serialize;
 use std::collections::BTreeMap;
 
-#[derive(Debug, Serialize)]
+#[derive(Debug, Serialize, Clone)]
 #[serde(tag = "kind")]
 #[serde(rename_all = "lowercase")]
 enum Ty {
@@ -81,17 +81,14 @@ impl Ty {
                         ArraySize::Variable(size) => ArrayType::Variable {
                             count_field: size.name().to_string(),
                         },
-                        ArraySize::Endless => ArrayType::Endless {
-                            until_end: true,
-                        },
+                        ArraySize::Endless => ArrayType::Endless { until_end: true },
                     })
                 } else {
                     None
                 };
 
                 let upcast = match d.ty() {
-                    Type::Enum { upcast, .. } |
-                    Type::Flag { upcast, .. } => {
+                    Type::Enum { upcast, .. } | Type::Flag { upcast, .. } => {
                         upcast.map(|c| c.ember_str().to_string())
                     }
                     _ => None,
@@ -105,65 +102,80 @@ impl Ty {
                 });
             }
             StructMember::IfStatement(statement) => {
-                if statement.else_ifs().is_empty()
-                    || statement.else_members().is_empty()
-                    || statement.is_elseif_flag()
-                {
-                    return;
-                }
-
-                let when = match statement.equation() {
-                    Equation::Equals { values } => {
-                        if values.len() != 1 {
-                            return;
-                        }
-
-                        Conditional::Eq {
-                            field: statement.variable_name().to_string(),
-                            value: values[0].to_string(),
-                        }
-                    }
-                    Equation::NotEquals { value } => Conditional::Neq {
-                        field: statement.variable_name().to_string(),
-                        value: value.clone(),
-                    },
-                    Equation::BitwiseAnd { values } => {
-                        if values.len() != 1 {
-                            return;
-                        }
-                        Conditional::HasFlag {
-                            field: statement.variable_name().to_string(),
-                            value: values[0].to_string(),
-                        }
-                    }
-                };
-
-                let mut f = Vec::with_capacity(statement.members().len());
-
-                for m in statement.members() {
-                    Self::from_struct_member(m, &mut f);
-                }
-
-                fields.push(StructField::Group {
-                    ty: "group".to_string(),
-                    when,
-                    fields: f,
-                });
+                fields.push(Self::from_if_statement(statement));
             }
             StructMember::OptionalStatement(_) => {}
         }
     }
+
+    fn from_if_statement(statement: &IfStatement) -> StructField {
+        let mut f = Vec::with_capacity(statement.members().len());
+        for m in statement.members() {
+            Self::from_struct_member(m, &mut f);
+        }
+
+        let mut branches = Vec::new();
+        match statement.equation() {
+            Equation::Equals { values } => {
+                for value in values {
+                    branches.push(IfChainBranch {
+                        when: Conditional::Eq {
+                            field: statement.variable_name().to_string(),
+                            value: value.clone(),
+                        },
+                        fields: f.clone(),
+                    })
+                }
+            }
+            Equation::NotEquals { value } => {
+                branches.push(IfChainBranch {
+                    when: Conditional::Neq {
+                        field: statement.variable_name().to_string(),
+                        value: value.clone(),
+                    },
+                    fields: f.clone(),
+                })
+            },
+            Equation::BitwiseAnd { values } => {
+                branches.push(IfChainBranch {
+                    when: Conditional::HasFlag {
+                        field: statement.variable_name().to_string(),
+                        value: values[0].to_string(),
+                    },
+                    fields: f.clone(),
+                })
+            }
+        };
+
+        for elseif in statement.else_ifs() {
+            let StructField::IfChain { branches: mut elseif_branches, .. } = Self::from_if_statement(elseif) else {
+                panic!("not if")   ;
+            };
+            branches.append(&mut elseif_branches);
+        }
+
+        let mut else_members = Vec::with_capacity(statement.else_members().len());
+        for m in statement.else_members() {
+            Self::from_struct_member(m, &mut else_members);
+        }
+
+        StructField::IfChain {
+            ty: "if_chain".to_string(),
+            branches,
+            else_members,
+        }
+    }
 }
 
-#[derive(Debug, Serialize)]
+#[derive(Debug, Serialize, Clone)]
 #[serde(untagged)]
 enum ArrayType {
     Fixed { size: i128 },
     Variable { count_field: String },
-    Endless { until_end: bool }
+    Endless { until_end: bool },
 }
 
-#[derive(Debug, Serialize)]
+#[derive(Debug, Serialize, Clone)]
 #[serde(untagged)]
 enum StructField {
     Field {
@@ -176,15 +188,23 @@ enum StructField {
         #[serde(skip_serializing_if = "Option::is_none")]
         array: Option<ArrayType>,
     },
-    Group {
+    IfChain {
         #[serde(rename = "type")]
         ty: String,
-        when: Conditional,
-        fields: Vec<StructField>,
+        branches: Vec<IfChainBranch>,
+        #[serde(skip_serializing_if = "Vec::is_empty")]
+        #[serde(rename = "else")]
+        else_members: Vec<StructField>,
     },
 }
 
-#[derive(Debug, Serialize)]
+#[derive(Debug, Serialize, Clone)]
+struct IfChainBranch {
+    when: Conditional,
+    fields: Vec<StructField>,
+}
+
+#[derive(Debug, Serialize, Clone)]
 #[serde(tag = "op")]
 #[serde(rename_all = "snake_case")]
 enum Conditional {
@@ -193,7 +213,7 @@ enum Conditional {
     Neq { field: String, value: String },
 }
 
-#[derive(Debug, Serialize)]
+#[derive(Debug, Serialize, Clone)]
 struct Types {
     types: BTreeMap<String, Ty>,
 }
@@ -250,7 +270,7 @@ impl Types {
     }
 }
 
-#[derive(Debug, Serialize)]
+#[derive(Debug, Serialize, Clone)]
 struct Message {
     name: String,
     opcode: String,

@@ -10,6 +10,121 @@
     {
       "name": "action",
       "type": "AuctionCommandAction"
+    },
+    {
+      "type": "if_chain",
+      "branches": [
+        {
+          "when": {
+            "op": "eq",
+            "field": "action",
+            "value": "BID_PLACED"
+          },
+          "fields": [
+            {
+              "name": "result",
+              "type": "AuctionCommandResult"
+            },
+            {
+              "type": "if_chain",
+              "branches": [
+                {
+                  "when": {
+                    "op": "eq",
+                    "field": "result",
+                    "value": "OK"
+                  },
+                  "fields": [
+                    {
+                      "name": "auction_outbid1",
+                      "type": "uint32"
+                    }
+                  ]
+                },
+                {
+                  "when": {
+                    "op": "eq",
+                    "field": "result",
+                    "value": "ERR_INVENTORY"
+                  },
+                  "fields": [
+                    {
+                      "name": "inventory_result",
+                      "type": "InventoryResult"
+                    }
+                  ]
+                },
+                {
+                  "when": {
+                    "op": "eq",
+                    "field": "result",
+                    "value": "ERR_HIGHER_BID"
+                  },
+                  "fields": [
+                    {
+                      "name": "higher_bidder",
+                      "type": "uint64"
+                    },
+                    {
+                      "name": "new_bid",
+                      "type": "uint32"
+                    },
+                    {
+                      "name": "auction_outbid2",
+                      "type": "uint32"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "else": [
+        {
+          "name": "result2",
+          "type": "AuctionCommandResultTwo"
+        },
+        {
+          "type": "if_chain",
+          "branches": [
+            {
+              "when": {
+                "op": "eq",
+                "field": "result2",
+                "value": "ERR_INVENTORY"
+              },
+              "fields": [
+                {
+                  "name": "inventory_result2",
+                  "type": "InventoryResult"
+                }
+              ]
+            },
+            {
+              "when": {
+                "op": "eq",
+                "field": "result2",
+                "value": "ERR_HIGHER_BID"
+              },
+              "fields": [
+                {
+                  "name": "higher_bidder2",
+                  "type": "uint64"
+                },
+                {
+                  "name": "new_bid2",
+                  "type": "uint32"
+                },
+                {
+                  "name": "auction_outbid3",
+                  "type": "uint32"
+                }
+              ]
+            }
+          ]
+        }
+      ]
     }
   ]
 }

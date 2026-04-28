@@ -6,6 +6,50 @@
     {
       "name": "result",
       "type": "InventoryResult"
+    },
+    {
+      "type": "if_chain",
+      "branches": [
+        {
+          "when": {
+            "op": "eq",
+            "field": "result",
+            "value": "CANT_EQUIP_LEVEL_I"
+          },
+          "fields": [
+            {
+              "name": "required_level",
+              "type": "Level32"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "if_chain",
+      "branches": [
+        {
+          "when": {
+            "op": "neq",
+            "field": "result",
+            "value": "OK"
+          },
+          "fields": [
+            {
+              "name": "item1",
+              "type": "uint64"
+            },
+            {
+              "name": "item2",
+              "type": "uint64"
+            },
+            {
+              "name": "bag_type_subclass",
+              "type": "uint8"
+            }
+          ]
+        }
+      ]
     }
   ]
 }

@@ -12,6 +12,24 @@
       "type": "LootMethod"
     },
     {
+      "type": "if_chain",
+      "branches": [
+        {
+          "when": {
+            "op": "eq",
+            "field": "loot_method",
+            "value": "ERROR"
+          },
+          "fields": [
+            {
+              "name": "loot_error",
+              "type": "LootMethodError"
+            }
+          ]
+        }
+      ]
+    },
+    {
       "name": "gold",
       "type": "Gold"
     },

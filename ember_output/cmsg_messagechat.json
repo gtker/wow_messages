@@ -13,6 +13,37 @@
       "type": "Language"
     },
     {
+      "type": "if_chain",
+      "branches": [
+        {
+          "when": {
+            "op": "eq",
+            "field": "chat_type",
+            "value": "WHISPER"
+          },
+          "fields": [
+            {
+              "name": "target_player",
+              "type": "CString"
+            }
+          ]
+        },
+        {
+          "when": {
+            "op": "eq",
+            "field": "chat_type",
+            "value": "CHANNEL"
+          },
+          "fields": [
+            {
+              "name": "channel",
+              "type": "CString"
+            }
+          ]
+        }
+      ]
+    },
+    {
       "name": "message",
       "type": "CString"
     }

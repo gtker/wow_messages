@@ -10,6 +10,370 @@
     {
       "name": "mask",
       "type": "GroupUpdateFlags"
+    },
+    {
+      "type": "if_chain",
+      "branches": [
+        {
+          "when": {
+            "op": "has_flag",
+            "field": "mask",
+            "value": "STATUS"
+          },
+          "fields": [
+            {
+              "name": "status",
+              "type": "GroupMemberOnlineStatus"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "if_chain",
+      "branches": [
+        {
+          "when": {
+            "op": "has_flag",
+            "field": "mask",
+            "value": "CUR_HP"
+          },
+          "fields": [
+            {
+              "name": "current_health",
+              "type": "uint16"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "if_chain",
+      "branches": [
+        {
+          "when": {
+            "op": "has_flag",
+            "field": "mask",
+            "value": "MAX_HP"
+          },
+          "fields": [
+            {
+              "name": "max_health",
+              "type": "uint16"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "if_chain",
+      "branches": [
+        {
+          "when": {
+            "op": "has_flag",
+            "field": "mask",
+            "value": "POWER_TYPE"
+          },
+          "fields": [
+            {
+              "name": "power",
+              "type": "Power"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "if_chain",
+      "branches": [
+        {
+          "when": {
+            "op": "has_flag",
+            "field": "mask",
+            "value": "CUR_POWER"
+          },
+          "fields": [
+            {
+              "name": "current_power",
+              "type": "uint16"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "if_chain",
+      "branches": [
+        {
+          "when": {
+            "op": "has_flag",
+            "field": "mask",
+            "value": "MAX_POWER"
+          },
+          "fields": [
+            {
+              "name": "max_power",
+              "type": "uint16"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "if_chain",
+      "branches": [
+        {
+          "when": {
+            "op": "has_flag",
+            "field": "mask",
+            "value": "LEVEL"
+          },
+          "fields": [
+            {
+              "name": "level",
+              "type": "Level16"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "if_chain",
+      "branches": [
+        {
+          "when": {
+            "op": "has_flag",
+            "field": "mask",
+            "value": "ZONE"
+          },
+          "fields": [
+            {
+              "name": "area",
+              "type": "Area"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "if_chain",
+      "branches": [
+        {
+          "when": {
+            "op": "has_flag",
+            "field": "mask",
+            "value": "POSITION"
+          },
+          "fields": [
+            {
+              "name": "position_x",
+              "type": "uint16"
+            },
+            {
+              "name": "position_y",
+              "type": "uint16"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "if_chain",
+      "branches": [
+        {
+          "when": {
+            "op": "has_flag",
+            "field": "mask",
+            "value": "AURAS"
+          },
+          "fields": [
+            {
+              "name": "auras",
+              "type": "AuraMask"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "if_chain",
+      "branches": [
+        {
+          "when": {
+            "op": "has_flag",
+            "field": "mask",
+            "value": "AURAS_2"
+          },
+          "fields": [
+            {
+              "name": "negative_auras",
+              "type": "AuraMask"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "if_chain",
+      "branches": [
+        {
+          "when": {
+            "op": "has_flag",
+            "field": "mask",
+            "value": "PET_GUID"
+          },
+          "fields": [
+            {
+              "name": "pet",
+              "type": "uint64"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "if_chain",
+      "branches": [
+        {
+          "when": {
+            "op": "has_flag",
+            "field": "mask",
+            "value": "PET_NAME"
+          },
+          "fields": [
+            {
+              "name": "pet_name",
+              "type": "CString"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "if_chain",
+      "branches": [
+        {
+          "when": {
+            "op": "has_flag",
+            "field": "mask",
+            "value": "PET_MODEL_ID"
+          },
+          "fields": [
+            {
+              "name": "pet_display_id",
+              "type": "uint16"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "if_chain",
+      "branches": [
+        {
+          "when": {
+            "op": "has_flag",
+            "field": "mask",
+            "value": "PET_CUR_HP"
+          },
+          "fields": [
+            {
+              "name": "pet_current_health",
+              "type": "uint16"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "if_chain",
+      "branches": [
+        {
+          "when": {
+            "op": "has_flag",
+            "field": "mask",
+            "value": "PET_MAX_HP"
+          },
+          "fields": [
+            {
+              "name": "pet_max_health",
+              "type": "uint16"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "if_chain",
+      "branches": [
+        {
+          "when": {
+            "op": "has_flag",
+            "field": "mask",
+            "value": "PET_POWER_TYPE"
+          },
+          "fields": [
+            {
+              "name": "pet_power_type",
+              "type": "Power"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "if_chain",
+      "branches": [
+        {
+          "when": {
+            "op": "has_flag",
+            "field": "mask",
+            "value": "PET_CUR_POWER"
+          },
+          "fields": [
+            {
+              "name": "pet_current_power",
+              "type": "uint16"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "if_chain",
+      "branches": [
+        {
+          "when": {
+            "op": "has_flag",
+            "field": "mask",
+            "value": "PET_MAX_POWER"
+          },
+          "fields": [
+            {
+              "name": "pet_max_power",
+              "type": "uint16"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "if_chain",
+      "branches": [
+        {
+          "when": {
+            "op": "has_flag",
+            "field": "mask",
+            "value": "PET_AURAS"
+          },
+          "fields": [
+            {
+              "name": "pet_auras",
+              "type": "AuraMask"
+            }
+          ]
+        }
+      ]
     }
   ]
 }

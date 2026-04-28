@@ -6,6 +6,28 @@
     {
       "name": "result",
       "type": "WorldResult"
+    },
+    {
+      "type": "if_chain",
+      "branches": [
+        {
+          "when": {
+            "op": "eq",
+            "field": "result",
+            "value": "RESPONSE_SUCCESS"
+          },
+          "fields": [
+            {
+              "name": "character",
+              "type": "uint64"
+            },
+            {
+              "name": "new_name",
+              "type": "CString"
+            }
+          ]
+        }
+      ]
     }
   ]
 }

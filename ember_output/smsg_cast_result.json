@@ -10,6 +10,76 @@
     {
       "name": "result",
       "type": "SimpleSpellCastResult"
+    },
+    {
+      "type": "if_chain",
+      "branches": [
+        {
+          "when": {
+            "op": "neq",
+            "field": "result",
+            "value": "FAILURE"
+          },
+          "fields": [
+            {
+              "name": "reason",
+              "type": "CastFailureReason"
+            },
+            {
+              "type": "if_chain",
+              "branches": [
+                {
+                  "when": {
+                    "op": "eq",
+                    "field": "reason",
+                    "value": "REQUIRES_SPELL_FOCUS"
+                  },
+                  "fields": [
+                    {
+                      "name": "required_spell_focus",
+                      "type": "uint32"
+                    }
+                  ]
+                },
+                {
+                  "when": {
+                    "op": "eq",
+                    "field": "reason",
+                    "value": "REQUIRES_AREA"
+                  },
+                  "fields": [
+                    {
+                      "name": "area",
+                      "type": "Area"
+                    }
+                  ]
+                },
+                {
+                  "when": {
+                    "op": "eq",
+                    "field": "reason",
+                    "value": "EQUIPPED_ITEM_CLASS"
+                  },
+                  "fields": [
+                    {
+                      "name": "equipped_item_class",
+                      "type": "uint32"
+                    },
+                    {
+                      "name": "equipped_item_subclass_mask",
+                      "type": "uint32"
+                    },
+                    {
+                      "name": "equipped_item_inventory_type_mask",
+                      "type": "uint32"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
     }
   ]
 }

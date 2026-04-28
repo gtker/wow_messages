@@ -8,6 +8,24 @@
       "type": "BattlegroundEndStatus"
     },
     {
+      "type": "if_chain",
+      "branches": [
+        {
+          "when": {
+            "op": "eq",
+            "field": "status",
+            "value": "ENDED"
+          },
+          "fields": [
+            {
+              "name": "winner",
+              "type": "BattlegroundWinner"
+            }
+          ]
+        }
+      ]
+    },
+    {
       "name": "amount_of_players",
       "type": "uint32"
     },

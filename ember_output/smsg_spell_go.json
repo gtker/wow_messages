@@ -44,6 +44,28 @@
     {
       "name": "targets",
       "type": "SpellCastTargets"
+    },
+    {
+      "type": "if_chain",
+      "branches": [
+        {
+          "when": {
+            "op": "has_flag",
+            "field": "flags",
+            "value": "AMMO"
+          },
+          "fields": [
+            {
+              "name": "ammo_display_id",
+              "type": "uint32"
+            },
+            {
+              "name": "ammo_inventory_type",
+              "type": "uint32"
+            }
+          ]
+        }
+      ]
     }
   ]
 }

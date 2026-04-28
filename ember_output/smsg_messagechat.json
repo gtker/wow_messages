@@ -12,6 +12,182 @@
       "type": "Language"
     },
     {
+      "type": "if_chain",
+      "branches": [
+        {
+          "when": {
+            "op": "eq",
+            "field": "chat_type",
+            "value": "MONSTER_WHISPER"
+          },
+          "fields": [
+            {
+              "name": "monster_name",
+              "type": "PrefixedString32"
+            },
+            {
+              "name": "monster",
+              "type": "uint64"
+            }
+          ]
+        },
+        {
+          "when": {
+            "op": "eq",
+            "field": "chat_type",
+            "value": "RAID_BOSS_EMOTE"
+          },
+          "fields": [
+            {
+              "name": "monster_name",
+              "type": "PrefixedString32"
+            },
+            {
+              "name": "monster",
+              "type": "uint64"
+            }
+          ]
+        },
+        {
+          "when": {
+            "op": "eq",
+            "field": "chat_type",
+            "value": "MONSTER_EMOTE"
+          },
+          "fields": [
+            {
+              "name": "monster_name",
+              "type": "PrefixedString32"
+            },
+            {
+              "name": "monster",
+              "type": "uint64"
+            }
+          ]
+        },
+        {
+          "when": {
+            "op": "eq",
+            "field": "chat_type",
+            "value": "SAY"
+          },
+          "fields": [
+            {
+              "name": "speech_bubble_credit",
+              "type": "uint64"
+            },
+            {
+              "name": "chat_credit",
+              "type": "uint64"
+            }
+          ]
+        },
+        {
+          "when": {
+            "op": "eq",
+            "field": "chat_type",
+            "value": "PARTY"
+          },
+          "fields": [
+            {
+              "name": "speech_bubble_credit",
+              "type": "uint64"
+            },
+            {
+              "name": "chat_credit",
+              "type": "uint64"
+            }
+          ]
+        },
+        {
+          "when": {
+            "op": "eq",
+            "field": "chat_type",
+            "value": "YELL"
+          },
+          "fields": [
+            {
+              "name": "speech_bubble_credit",
+              "type": "uint64"
+            },
+            {
+              "name": "chat_credit",
+              "type": "uint64"
+            }
+          ]
+        },
+        {
+          "when": {
+            "op": "eq",
+            "field": "chat_type",
+            "value": "MONSTER_SAY"
+          },
+          "fields": [
+            {
+              "name": "sender1",
+              "type": "uint64"
+            },
+            {
+              "name": "sender_name",
+              "type": "PrefixedString32"
+            },
+            {
+              "name": "target",
+              "type": "uint64"
+            }
+          ]
+        },
+        {
+          "when": {
+            "op": "eq",
+            "field": "chat_type",
+            "value": "MONSTER_YELL"
+          },
+          "fields": [
+            {
+              "name": "sender1",
+              "type": "uint64"
+            },
+            {
+              "name": "sender_name",
+              "type": "PrefixedString32"
+            },
+            {
+              "name": "target",
+              "type": "uint64"
+            }
+          ]
+        },
+        {
+          "when": {
+            "op": "eq",
+            "field": "chat_type",
+            "value": "CHANNEL"
+          },
+          "fields": [
+            {
+              "name": "channel_name",
+              "type": "CString"
+            },
+            {
+              "name": "player_rank",
+              "type": "uint32"
+            },
+            {
+              "name": "player",
+              "type": "uint64"
+            }
+          ]
+        }
+      ],
+      "else": [
+        {
+          "name": "sender2",
+          "type": "uint64"
+        }
+      ]
+    },
+    {
       "name": "message",
       "type": "PrefixedString32"
     },

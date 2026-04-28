@@ -6,6 +6,45 @@
     {
       "name": "result",
       "type": "WorldResult"
+    },
+    {
+      "type": "if_chain",
+      "branches": [
+        {
+          "when": {
+            "op": "eq",
+            "field": "result",
+            "value": "AUTH_OK"
+          },
+          "fields": [
+            {
+              "name": "billing_time",
+              "type": "uint32"
+            },
+            {
+              "name": "billing_flags",
+              "type": "uint8"
+            },
+            {
+              "name": "billing_rested",
+              "type": "uint32"
+            }
+          ]
+        },
+        {
+          "when": {
+            "op": "eq",
+            "field": "result",
+            "value": "AUTH_WAIT_QUEUE"
+          },
+          "fields": [
+            {
+              "name": "queue_position",
+              "type": "uint32"
+            }
+          ]
+        }
+      ]
     }
   ]
 }

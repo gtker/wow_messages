@@ -20,6 +20,50 @@
       "type": "MonsterMoveType"
     },
     {
+      "type": "if_chain",
+      "branches": [
+        {
+          "when": {
+            "op": "eq",
+            "field": "move_type",
+            "value": "FACING_TARGET"
+          },
+          "fields": [
+            {
+              "name": "target",
+              "type": "uint64"
+            }
+          ]
+        },
+        {
+          "when": {
+            "op": "eq",
+            "field": "move_type",
+            "value": "FACING_ANGLE"
+          },
+          "fields": [
+            {
+              "name": "angle",
+              "type": "float"
+            }
+          ]
+        },
+        {
+          "when": {
+            "op": "eq",
+            "field": "move_type",
+            "value": "FACING_SPOT"
+          },
+          "fields": [
+            {
+              "name": "position",
+              "type": "Vector3d"
+            }
+          ]
+        }
+      ]
+    },
+    {
       "name": "spline_flags",
       "type": "SplineFlag"
     },
