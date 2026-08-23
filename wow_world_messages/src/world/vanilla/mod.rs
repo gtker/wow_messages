@@ -422,7 +422,7 @@ pub use crate::shared::cmsg_player_login_vanilla_tbc_wrath::*;
 pub use crate::shared::cmsg_player_logout_vanilla_tbc_wrath::*;
 pub use crate::shared::cmsg_pushquesttoparty_vanilla_tbc_wrath::*;
 pub use crate::shared::cmsg_query_time_vanilla_tbc_wrath::*;
-pub use crate::shared::cmsg_questgiver_accept_quest_vanilla_tbc_wrath::*;
+pub use crate::shared::cmsg_questgiver_accept_quest_vanilla_tbc::*;
 pub use crate::shared::cmsg_questgiver_cancel_vanilla_tbc_wrath::*;
 pub use crate::shared::cmsg_questgiver_choose_reward_vanilla_tbc_wrath::*;
 pub use crate::shared::cmsg_questgiver_complete_quest_vanilla_tbc_wrath::*;
