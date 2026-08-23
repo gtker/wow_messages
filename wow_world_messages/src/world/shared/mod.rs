@@ -440,8 +440,8 @@ pub mod cmsg_player_logout_vanilla_tbc_wrath;
 pub mod cmsg_pushquesttoparty_vanilla_tbc_wrath;
 #[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
 pub mod cmsg_query_time_vanilla_tbc_wrath;
-#[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
-pub mod cmsg_questgiver_accept_quest_vanilla_tbc_wrath;
+#[cfg(any(feature = "vanilla", feature = "tbc"))]
+pub mod cmsg_questgiver_accept_quest_vanilla_tbc;
 #[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
 pub mod cmsg_questgiver_cancel_vanilla_tbc_wrath;
 #[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]

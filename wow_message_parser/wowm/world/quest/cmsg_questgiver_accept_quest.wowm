@@ -1,7 +1,16 @@
-#tag_all versions "1 2 3";
-
 cmsg CMSG_QUESTGIVER_ACCEPT_QUEST = 0x0189 {
     Guid guid;
     u32 quest_id;
+} {
+    versions = "1 2";
+}
+
+/// The 3.3.5a client appends a trailing u32 that AzerothCore reads as `unk1`.
+cmsg CMSG_QUESTGIVER_ACCEPT_QUEST = 0x0189 {
+    Guid guid;
+    u32 quest_id;
+    u32 unk1;
+} {
+    versions = "3.3.5";
 }
 
