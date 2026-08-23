@@ -102,14 +102,16 @@ smsg SMSG_QUEST_QUERY_RESPONSE = 0x005D {
     u32 quest_type;
     u32 suggest_player_amount;
     /// cmangos: shown in quest log as part of quest objective
-    Faction reputation_objective_faction;
+    u32 reputation_objective_faction;
     /// cmangos: shown in quest log as part of quest objective
     u32 reputation_objective_value;
     /// cmangos: RequiredOpositeRepFaction, required faction value with another (oposite) faction (objective). cmangos sets to 0
-    Faction required_opposite_faction;
+    u32 required_opposite_faction;
     /// cmangos: RequiredOpositeRepValue, required faction value with another (oposite) faction (objective). cmangos sets to 0
     u32 required_opposite_reputation_value;
     u32 next_quest_in_chain;
+    /// cmangos: RewardXPDifficulty, used in the client's XP calculation
+    u32 xp_id;
     Gold money_reward;
     /// cmangos: used in XP calculation at client
     Gold max_level_money_reward;

@@ -176,11 +176,12 @@ smsg SMSG_QUEST_QUERY_RESPONSE = 0x005D {
     u32 zone_or_sort;
     u32 quest_type;
     u32 suggest_player_amount;
-    Faction reputation_objective_faction;
+    u32 reputation_objective_faction;
     u32 reputation_objective_value;
-    Faction required_opposite_faction;
+    u32 required_opposite_faction;
     u32 required_opposite_reputation_value;
     u32 next_quest_in_chain;
+    u32 xp_id;
     Gold money_reward;
     Gold max_level_money_reward;
     u32 reward_spell;
@@ -234,11 +235,12 @@ SMSG have a header of 4 bytes.
 | - | 4 / Little | u32 | zone_or_sort |  |
 | - | 4 / Little | u32 | quest_type |  |
 | - | 4 / Little | u32 | suggest_player_amount |  |
-| - | 2 / - | [Faction](faction.md) | reputation_objective_faction | cmangos: shown in quest log as part of quest objective |
+| - | 4 / Little | u32 | reputation_objective_faction | cmangos: shown in quest log as part of quest objective |
 | - | 4 / Little | u32 | reputation_objective_value | cmangos: shown in quest log as part of quest objective |
-| - | 2 / - | [Faction](faction.md) | required_opposite_faction | cmangos: RequiredOpositeRepFaction, required faction value with another (oposite) faction (objective). cmangos sets to 0 |
+| - | 4 / Little | u32 | required_opposite_faction | cmangos: RequiredOpositeRepFaction, required faction value with another (oposite) faction (objective). cmangos sets to 0 |
 | - | 4 / Little | u32 | required_opposite_reputation_value | cmangos: RequiredOpositeRepValue, required faction value with another (oposite) faction (objective). cmangos sets to 0 |
 | - | 4 / Little | u32 | next_quest_in_chain |  |
+| - | 4 / Little | u32 | xp_id | cmangos: RewardXPDifficulty, used in the client's XP calculation |
 | - | 4 / Little | Gold | money_reward |  |
 | - | 4 / Little | Gold | max_level_money_reward | cmangos: used in XP calculation at client |
 | - | 4 / Little | u32 | reward_spell | cmangos: reward spell, this spell will display (icon) (casted if RewSpellCast==0) |
