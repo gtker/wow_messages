@@ -1,6 +1,9 @@
 /// Sent as response to [CMSG_REQUEST_ACCOUNT_DATA]
 smsg SMSG_UPDATE_ACCOUNT_DATA = 0x20C {
+    Guid guid;
     u32 data_type;
+    /// Seconds since unix epoch of the last `CMSG_UPDATE_ACCOUNT_DATA` for this type.
+    u32 unix_time;
     u32 decompressed_size;
     u8[-] compressed_data;
 } {
