@@ -1,17 +1,24 @@
 use std::io::{Read, Write};
 
+use crate::Guid;
+
 /// Sent as response to [`CMSG_REQUEST_ACCOUNT_DATA`](crate::vanilla::CMSG_REQUEST_ACCOUNT_DATA)
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/login_logout/smsg_update_account_data.wowm:2`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/login_logout/smsg_update_account_data.wowm#L2):
 /// ```text
 /// smsg SMSG_UPDATE_ACCOUNT_DATA = 0x020C {
+///     Guid guid;
 ///     u32 data_type;
+///     u32 unix_time;
 ///     u32 decompressed_size;
 ///     u8[-] compressed_data;
 /// }
 /// ```
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct SMSG_UPDATE_ACCOUNT_DATA {
+    pub guid: Guid,
     pub data_type: u32,
+    /// Seconds since unix epoch of the last `CMSG_UPDATE_ACCOUNT_DATA` for this type.
+    pub unix_time: u32,
     pub decompressed_size: u32,
     pub compressed_data: Vec<u8>,
 }
@@ -19,12 +26,18 @@ pub struct SMSG_UPDATE_ACCOUNT_DATA {
 impl crate::private::Sealed for SMSG_UPDATE_ACCOUNT_DATA {}
 impl SMSG_UPDATE_ACCOUNT_DATA {
     fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
-        if !(8..=65543).contains(&body_size) {
+        if !(20..=65555).contains(&body_size) {
             return Err(crate::errors::ParseErrorKind::InvalidSize);
         }
 
+        // guid: Guid
+        let guid = crate::util::read_guid(&mut r)?;
+
         // data_type: u32
         let data_type = crate::util::read_u32_le(&mut r)?;
+
+        // unix_time: u32
+        let unix_time = crate::util::read_u32_le(&mut r)?;
 
         // decompressed_size: u32
         let decompressed_size = crate::util::read_u32_le(&mut r)?;
@@ -32,7 +45,9 @@ impl SMSG_UPDATE_ACCOUNT_DATA {
         // compressed_data: u8[-]
         let compressed_data = {
             let mut current_size = {
-                4 // data_type: u32
+                8 // guid: Guid
+                + 4 // data_type: u32
+                + 4 // unix_time: u32
                 + 4 // decompressed_size: u32
             };
             let mut compressed_data = Vec::with_capacity(body_size as usize - current_size);
@@ -44,7 +59,9 @@ impl SMSG_UPDATE_ACCOUNT_DATA {
         };
 
         Ok(Self {
+            guid,
             data_type,
+            unix_time,
             decompressed_size,
             compressed_data,
         })
@@ -69,7 +86,9 @@ impl crate::Message for SMSG_UPDATE_ACCOUNT_DATA {
 
         writeln!(s, "test SMSG_UPDATE_ACCOUNT_DATA {{").unwrap();
         // Members
+        writeln!(s, "    guid = {};", self.guid.guid()).unwrap();
         writeln!(s, "    data_type = {};", self.data_type).unwrap();
+        writeln!(s, "    unix_time = {};", self.unix_time).unwrap();
         writeln!(s, "    decompressed_size = {};", self.decompressed_size).unwrap();
         writeln!(s, "    compressed_data = [").unwrap();
         for v in self.compressed_data.as_slice() {
@@ -87,7 +106,9 @@ impl crate::Message for SMSG_UPDATE_ACCOUNT_DATA {
         self.write_into_vec(&mut bytes).unwrap();
         let mut bytes = bytes.into_iter();
 
+        crate::util::write_bytes(&mut s, &mut bytes, 8, "guid", "    ");
         crate::util::write_bytes(&mut s, &mut bytes, 4, "data_type", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "unix_time", "    ");
         crate::util::write_bytes(&mut s, &mut bytes, 4, "decompressed_size", "    ");
         crate::util::write_bytes(&mut s, &mut bytes, self.compressed_data.len(), "compressed_data", "    ");
 
@@ -104,8 +125,14 @@ impl crate::Message for SMSG_UPDATE_ACCOUNT_DATA {
     }
 
     fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
+        // guid: Guid
+        w.write_all(&self.guid.guid().to_le_bytes())?;
+
         // data_type: u32
         w.write_all(&self.data_type.to_le_bytes())?;
+
+        // unix_time: u32
+        w.write_all(&self.unix_time.to_le_bytes())?;
 
         // decompressed_size: u32
         w.write_all(&self.decompressed_size.to_le_bytes())?;
@@ -132,7 +159,9 @@ impl crate::wrath::ServerMessage for SMSG_UPDATE_ACCOUNT_DATA {}
 
 impl SMSG_UPDATE_ACCOUNT_DATA {
     pub(crate) fn size(&self) -> usize {
-        4 // data_type: u32
+        8 // guid: Guid
+        + 4 // data_type: u32
+        + 4 // unix_time: u32
         + 4 // decompressed_size: u32
         + self.compressed_data.len() * core::mem::size_of::<u8>() // compressed_data: u8[-]
     }
