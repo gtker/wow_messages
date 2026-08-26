@@ -44,4 +44,5 @@ The basic type is `u8`, a 1 byte (8 bit) integer.
 
 Used in:
 * [SMSG_LOOT_RESPONSE](smsg_loot_response.md)
+* [SMSG_LOOT_RESPONSE](smsg_loot_response.md)
 

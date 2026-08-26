@@ -40,8 +40,8 @@ pub mod guild_rights_tbc_wrath;
 pub mod initial_spell_vanilla_tbc;
 #[cfg(any(feature = "tbc", feature = "wrath"))]
 pub mod list_inventory_item_tbc_wrath;
-#[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
-pub mod loot_item_vanilla_tbc_wrath;
+#[cfg(any(feature = "vanilla", feature = "tbc"))]
+pub mod loot_item_vanilla_tbc;
 #[cfg(any(feature = "tbc", feature = "wrath"))]
 pub mod mail_item_tbc_wrath;
 #[cfg(any(feature = "tbc", feature = "wrath"))]
@@ -880,8 +880,8 @@ pub mod smsg_loot_money_notify_vanilla_tbc;
 pub mod smsg_loot_release_response_vanilla_tbc_wrath;
 #[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
 pub mod smsg_loot_removed_vanilla_tbc_wrath;
-#[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
-pub mod smsg_loot_response_vanilla_tbc_wrath;
+#[cfg(any(feature = "vanilla", feature = "tbc"))]
+pub mod smsg_loot_response_vanilla_tbc;
 #[cfg(any(feature = "tbc", feature = "wrath"))]
 pub mod smsg_loot_roll_tbc_wrath;
 #[cfg(any(feature = "tbc", feature = "wrath"))]
