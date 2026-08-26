@@ -9,7 +9,7 @@ use crate::wrath::ExperienceAwardType;
 ///     Guid target;
 ///     u32 total_exp;
 ///     ExperienceAwardType exp_type;
-///     if (exp_type == NON_KILL) {
+///     if (exp_type == KILL) {
 ///         u32 experience_without_rested;
 ///         f32 exp_group_bonus;
 ///     }
@@ -41,19 +41,19 @@ impl SMSG_LOG_XPGAIN {
         let exp_type = crate::util::read_u8_le(&mut r)?.try_into()?;
 
         let exp_type_if = match exp_type {
-            ExperienceAwardType::Kill => SMSG_LOG_XPGAIN_ExperienceAwardType::Kill,
-            ExperienceAwardType::NonKill => {
+            ExperienceAwardType::Kill => {
                 // experience_without_rested: u32
                 let experience_without_rested = crate::util::read_u32_le(&mut r)?;
 
                 // exp_group_bonus: f32
                 let exp_group_bonus = crate::util::read_f32_le(&mut r)?;
 
-                SMSG_LOG_XPGAIN_ExperienceAwardType::NonKill {
+                SMSG_LOG_XPGAIN_ExperienceAwardType::Kill {
                     exp_group_bonus,
                     experience_without_rested,
                 }
             }
+            ExperienceAwardType::NonKill => SMSG_LOG_XPGAIN_ExperienceAwardType::NonKill,
         };
 
         // exp_includes_recruit_a_friend_bonus: Bool
@@ -77,65 +77,6 @@ impl crate::Message for SMSG_LOG_XPGAIN {
         "SMSG_LOG_XPGAIN"
     }
 
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        use std::fmt::Write;
-        use crate::traits::Message;
-
-        let mut s = String::new();
-
-        writeln!(s, "test SMSG_LOG_XPGAIN {{").unwrap();
-        // Members
-        writeln!(s, "    target = {};", self.target.guid()).unwrap();
-        writeln!(s, "    total_exp = {};", self.total_exp).unwrap();
-        writeln!(s, "    exp_type = {};", ExperienceAwardType::try_from(self.exp_type.as_int()).unwrap().as_test_case_value()).unwrap();
-        match &self.exp_type {
-            crate::wrath::SMSG_LOG_XPGAIN_ExperienceAwardType::NonKill {
-                exp_group_bonus,
-                experience_without_rested,
-            } => {
-                writeln!(s, "    experience_without_rested = {};", experience_without_rested).unwrap();
-                writeln!(s, "    exp_group_bonus = {};", if exp_group_bonus.to_string().contains('.') { exp_group_bonus.to_string() } else { format!("{}.0", exp_group_bonus) }).unwrap();
-            }
-            _ => {}
-        }
-
-        writeln!(s, "    exp_includes_recruit_a_friend_bonus = {};", if self.exp_includes_recruit_a_friend_bonus { "TRUE" } else { "FALSE" }).unwrap();
-
-        writeln!(s, "}} [").unwrap();
-
-        let [a, b] = (u16::try_from(self.size() + 2).unwrap()).to_be_bytes();
-        writeln!(s, "    {a:#04X}, {b:#04X}, /* size */").unwrap();
-        let [a, b] = 464_u16.to_le_bytes();
-        writeln!(s, "    {a:#04X}, {b:#04X}, /* opcode */").unwrap();
-        let mut bytes: Vec<u8> = Vec::new();
-        self.write_into_vec(&mut bytes).unwrap();
-        let mut bytes = bytes.into_iter();
-
-        crate::util::write_bytes(&mut s, &mut bytes, 8, "target", "    ");
-        crate::util::write_bytes(&mut s, &mut bytes, 4, "total_exp", "    ");
-        crate::util::write_bytes(&mut s, &mut bytes, 1, "exp_type", "    ");
-        match &self.exp_type {
-            crate::wrath::SMSG_LOG_XPGAIN_ExperienceAwardType::NonKill {
-                exp_group_bonus,
-                experience_without_rested,
-            } => {
-                crate::util::write_bytes(&mut s, &mut bytes, 4, "experience_without_rested", "    ");
-                crate::util::write_bytes(&mut s, &mut bytes, 4, "exp_group_bonus", "    ");
-            }
-            _ => {}
-        }
-
-        crate::util::write_bytes(&mut s, &mut bytes, 1, "exp_includes_recruit_a_friend_bonus", "    ");
-
-
-        writeln!(s, "] {{").unwrap();
-        writeln!(s, "    versions = \"{}\";", std::env::var("WOWM_TEST_CASE_WORLD_VERSION").unwrap_or("3.3.5".to_string())).unwrap();
-        writeln!(s, "}}\n").unwrap();
-
-        Some(s)
-    }
-
     fn size_without_header(&self) -> u32 {
         self.size() as u32
     }
@@ -151,7 +92,7 @@ impl crate::Message for SMSG_LOG_XPGAIN {
         w.write_all(&(self.exp_type.as_int().to_le_bytes()))?;
 
         match &self.exp_type {
-            SMSG_LOG_XPGAIN_ExperienceAwardType::NonKill {
+            SMSG_LOG_XPGAIN_ExperienceAwardType::Kill {
                 exp_group_bonus,
                 experience_without_rested,
             } => {
@@ -191,25 +132,25 @@ impl SMSG_LOG_XPGAIN {
 
 #[derive(Debug, Clone, Copy, PartialEq, PartialOrd)]
 pub enum SMSG_LOG_XPGAIN_ExperienceAwardType {
-    Kill,
-    NonKill {
+    Kill {
         exp_group_bonus: f32,
         experience_without_rested: u32,
     },
+    NonKill,
 }
 
 impl Default for SMSG_LOG_XPGAIN_ExperienceAwardType {
     fn default() -> Self {
         // First enumerator without any fields
-        Self::Kill
+        Self::NonKill
     }
 }
 
 impl SMSG_LOG_XPGAIN_ExperienceAwardType {
     pub(crate) const fn as_int(&self) -> u8 {
         match self {
-            Self::Kill => 0,
-            Self::NonKill { .. } => 1,
+            Self::Kill { .. } => 0,
+            Self::NonKill => 1,
         }
     }
 
@@ -218,8 +159,8 @@ impl SMSG_LOG_XPGAIN_ExperienceAwardType {
 impl std::fmt::Display for SMSG_LOG_XPGAIN_ExperienceAwardType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match self {
-            Self::Kill => f.write_str("Kill"),
-            Self::NonKill{ .. } => f.write_str("NonKill"),
+            Self::Kill{ .. } => f.write_str("Kill"),
+            Self::NonKill => f.write_str("NonKill"),
         }
     }
 }
@@ -227,7 +168,7 @@ impl std::fmt::Display for SMSG_LOG_XPGAIN_ExperienceAwardType {
 impl SMSG_LOG_XPGAIN_ExperienceAwardType {
     pub(crate) const fn size(&self) -> usize {
         match self {
-            Self::NonKill {
+            Self::Kill {
                 ..
             } => {
                 1
@@ -239,3 +180,92 @@ impl SMSG_LOG_XPGAIN_ExperienceAwardType {
     }
 }
 
+#[cfg(test)]
+mod test {
+    #![allow(clippy::missing_const_for_fn)]
+    use super::SMSG_LOG_XPGAIN;
+    use super::*;
+    use super::super::*;
+    use crate::wrath::opcodes::ServerOpcodeMessage;
+    use crate::Guid;
+    use crate::wrath::{ClientMessage, ServerMessage};
+
+    const HEADER_SIZE: usize = 2 + 2;
+    const RAW0: [u8; 26] = [ 0x00, 0x18, 0xD0, 0x01, 0x01, 0x00, 0x00, 0x00, 0x00,
+         0x00, 0x00, 0x00, 0x32, 0x00, 0x00, 0x00, 0x00, 0x32, 0x00, 0x00, 0x00,
+         0x00, 0x00, 0x80, 0x3F, 0x00, ];
+
+    pub(crate) fn expected0() -> SMSG_LOG_XPGAIN {
+        SMSG_LOG_XPGAIN {
+            target: Guid::new(0x1),
+            total_exp: 0x32,
+            exp_type: SMSG_LOG_XPGAIN_ExperienceAwardType::Kill {
+                exp_group_bonus: 1_f32,
+                experience_without_rested: 0x32,
+            },
+            exp_includes_recruit_a_friend_bonus: false,
+        }
+
+    }
+
+    // Generated from `wow_message_parser/wowm/world/exp/smsg_log_xpgain.wowm` line 35.
+    #[cfg(feature = "sync")]
+    #[cfg_attr(feature = "sync", test)]
+    fn smsg_log_xpgain0() {
+        let expected = expected0();
+        let t = ServerOpcodeMessage::read_unencrypted(&mut std::io::Cursor::new(&RAW0)).unwrap();
+        let t = match t {
+            ServerOpcodeMessage::SMSG_LOG_XPGAIN(t) => t,
+            opcode => panic!("incorrect opcode. Expected SMSG_LOG_XPGAIN, got {opcode:#?}"),
+        };
+
+        assert_eq!(t.as_ref(), &expected);
+        assert_eq!(t.size() + HEADER_SIZE, RAW0.len());
+
+        let mut dest = Vec::with_capacity(RAW0.len());
+        expected.write_unencrypted_server(&mut std::io::Cursor::new(&mut dest)).unwrap();
+
+        assert_eq!(dest, RAW0);
+    }
+
+    // Generated from `wow_message_parser/wowm/world/exp/smsg_log_xpgain.wowm` line 35.
+    #[cfg(feature = "tokio")]
+    #[cfg_attr(feature = "tokio", tokio::test)]
+    async fn tokio_smsg_log_xpgain0() {
+        let expected = expected0();
+        let t = ServerOpcodeMessage::tokio_read_unencrypted(&mut std::io::Cursor::new(&RAW0)).await.unwrap();
+        let t = match t {
+            ServerOpcodeMessage::SMSG_LOG_XPGAIN(t) => t,
+            opcode => panic!("incorrect opcode. Expected SMSG_LOG_XPGAIN, got {opcode:#?}"),
+        };
+
+        assert_eq!(t.as_ref(), &expected);
+        assert_eq!(t.size() + HEADER_SIZE, RAW0.len());
+
+        let mut dest = Vec::with_capacity(RAW0.len());
+        expected.tokio_write_unencrypted_server(&mut std::io::Cursor::new(&mut dest)).await.unwrap();
+
+        assert_eq!(dest, RAW0);
+    }
+
+    // Generated from `wow_message_parser/wowm/world/exp/smsg_log_xpgain.wowm` line 35.
+    #[cfg(feature = "async-std")]
+    #[cfg_attr(feature = "async-std", async_std::test)]
+    async fn astd_smsg_log_xpgain0() {
+        let expected = expected0();
+        let t = ServerOpcodeMessage::astd_read_unencrypted(&mut async_std::io::Cursor::new(&RAW0)).await.unwrap();
+        let t = match t {
+            ServerOpcodeMessage::SMSG_LOG_XPGAIN(t) => t,
+            opcode => panic!("incorrect opcode. Expected SMSG_LOG_XPGAIN, got {opcode:#?}"),
+        };
+
+        assert_eq!(t.as_ref(), &expected);
+        assert_eq!(t.size() + HEADER_SIZE, RAW0.len());
+
+        let mut dest = Vec::with_capacity(RAW0.len());
+        expected.astd_write_unencrypted_server(&mut async_std::io::Cursor::new(&mut dest)).await.unwrap();
+
+        assert_eq!(dest, RAW0);
+    }
+
+}

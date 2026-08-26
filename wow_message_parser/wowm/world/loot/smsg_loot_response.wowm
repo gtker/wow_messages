@@ -67,7 +67,52 @@ struct LootItem {
     Item item;
     LootSlotType ty;
 } {
-    versions = "1 2 3";
+    versions = "1 2";
+}
+
+struct LootItem {
+    u8 index;
+    Item item;
+    u32 count;
+    u32 display_id;
+    u32 random_suffix;
+    i32 random_property;
+    LootSlotType ty;
+} {
+    versions = "3.3.5";
+}
+
+test SMSG_LOOT_RESPONSE {
+    guid = 1;
+    loot_method = CORPSE;
+    gold = 0;
+    items = [
+        {
+            index = 0;
+            item = 117;
+            count = 1;
+            display_id = 0;
+            random_suffix = 0;
+            random_property = 0;
+            ty = TYPE_ALLOW_LOOT;
+        },
+    ];
+} [
+    0x00, 0x26, /* size */
+    0x60, 0x01, /* opcode */
+    0x01, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, /* guid */
+    0x01, /* loot_method: CORPSE */
+    0x00, 0x00, 0x00, 0x00, /* gold */
+    0x01, /* amount_of_items */
+    0x00, /* index */
+    0x75, 0x00, 0x00, 0x00, /* item */
+    0x01, 0x00, 0x00, 0x00, /* count */
+    0x00, 0x00, 0x00, 0x00, /* display_id */
+    0x00, 0x00, 0x00, 0x00, /* random_suffix */
+    0x00, 0x00, 0x00, 0x00, /* random_property */
+    0x00, /* ty: TYPE_ALLOW_LOOT */
+] {
+    versions = "3.3.5";
 }
 
 smsg SMSG_LOOT_RESPONSE = 0x0160 {
@@ -80,5 +125,18 @@ smsg SMSG_LOOT_RESPONSE = 0x0160 {
     u8 amount_of_items;
     LootItem[amount_of_items] items;
 } {
-    versions = "1 2 3";
+    versions = "1 2";
+}
+
+smsg SMSG_LOOT_RESPONSE = 0x0160 {
+    Guid guid;
+    LootMethod loot_method;
+    if (loot_method == ERROR) {
+        LootMethodError loot_error;
+    }
+    Gold gold;
+    u8 amount_of_items;
+    LootItem[amount_of_items] items;
+} {
+    versions = "3.3.5";
 }

@@ -52,7 +52,7 @@ smsg SMSG_LOG_XPGAIN = 0x01D0 {
     Guid target;
     u32 total_exp;
     ExperienceAwardType exp_type;
-    if (exp_type == NON_KILL) {
+    if (exp_type == KILL) {
         u32 experience_without_rested;
         f32 exp_group_bonus;
     }
@@ -78,7 +78,7 @@ SMSG have a header of 4 bytes.
 | - | 4 / Little | u32 | total_exp |  |
 | - | 1 / - | [ExperienceAwardType](experienceawardtype.md) | exp_type |  |
 
-If exp_type is equal to `NON_KILL`:
+If exp_type is equal to `KILL`:
 
 | Offset | Size / Endianness | Type | Name | Comment |
 | ------ | ----------------- | ---- | ---- | ------- |
@@ -86,3 +86,17 @@ If exp_type is equal to `NON_KILL`:
 | - | 4 / Little | f32 | exp_group_bonus | mangoszero sets to 1 and comments: 1 - none 0 - 100% group bonus output |
 | - | 1 / - | Bool | exp_includes_recruit_a_friend_bonus |  |
 
+### Examples
+
+#### Example 1
+
+```c
+0, 24, // size
+208, 1, // opcode (464)
+1, 0, 0, 0, 0, 0, 0, 0, // target: Guid
+50, 0, 0, 0, // total_exp: u32
+0, // exp_type: ExperienceAwardType KILL (0)
+50, 0, 0, 0, // experience_without_rested: u32
+0, 0, 128, 63, // exp_group_bonus: f32
+0, // exp_includes_recruit_a_friend_bonus: Bool
+```

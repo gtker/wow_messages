@@ -22,12 +22,32 @@ smsg SMSG_LOG_XPGAIN = 0x01D0 {
     Guid target;
     u32 total_exp;
     ExperienceAwardType exp_type; 
-    if (exp_type == NON_KILL) {
+    if (exp_type == KILL) {
         u32 experience_without_rested;
         /// mangoszero sets to 1 and comments: 1 - none 0 - 100% group bonus output
         f32 exp_group_bonus;
     }
     Bool exp_includes_recruit_a_friend_bonus;
 } {
+    versions = "3.3.5";
+}
+
+test SMSG_LOG_XPGAIN {
+    target = 1;
+    total_exp = 50;
+    exp_type = KILL;
+    experience_without_rested = 50;
+    exp_group_bonus = 1.0;
+    exp_includes_recruit_a_friend_bonus = FALSE;
+} [
+    0x00, 0x18, /* size */
+    0xD0, 0x01, /* opcode */
+    0x01, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, /* target */
+    0x32, 0x00, 0x00, 0x00, /* total_exp */
+    0x00, /* exp_type: KILL */
+    0x32, 0x00, 0x00, 0x00, /* experience_without_rested */
+    0x00, 0x00, 0x80, 0x3F, /* exp_group_bonus */
+    0x00, /* exp_includes_recruit_a_friend_bonus */
+] {
     versions = "3.3.5";
 }
