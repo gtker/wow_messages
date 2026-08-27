@@ -5,7 +5,7 @@ use crate::wrath::{
 };
 use std::time::Duration;
 
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/spell/smsg_initial_spells.wowm:43`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/spell/smsg_initial_spells.wowm#L43):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/spell/smsg_initial_spells.wowm:54`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/spell/smsg_initial_spells.wowm#L54):
 /// ```text
 /// smsg SMSG_INITIAL_SPELLS = 0x012A {
 ///     u8 unknown1;
@@ -26,7 +26,7 @@ pub struct SMSG_INITIAL_SPELLS {
 impl crate::private::Sealed for SMSG_INITIAL_SPELLS {}
 impl SMSG_INITIAL_SPELLS {
     fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
-        if !(5..=1310725).contains(&body_size) {
+        if !(5..=1441797).contains(&body_size) {
             return Err(crate::errors::ParseErrorKind::InvalidSize);
         }
 
@@ -137,7 +137,7 @@ impl crate::Message for SMSG_INITIAL_SPELLS {
             writeln!(s, "    /* cooldowns: CooldownSpell[cooldown_count] start */").unwrap();
             for (i, v) in self.cooldowns.iter().enumerate() {
                 writeln!(s, "    /* cooldowns: CooldownSpell[cooldown_count] {i} start */").unwrap();
-                crate::util::write_bytes(&mut s, &mut bytes, 2, "spell_id", "        ");
+                crate::util::write_bytes(&mut s, &mut bytes, 4, "spell_id", "        ");
                 crate::util::write_bytes(&mut s, &mut bytes, 2, "item_id", "        ");
                 crate::util::write_bytes(&mut s, &mut bytes, 2, "spell_category", "        ");
                 crate::util::write_bytes(&mut s, &mut bytes, 4, "cooldown", "        ");
@@ -197,7 +197,7 @@ impl SMSG_INITIAL_SPELLS {
         + 2 // spell_count: u16
         + self.initial_spells.len() * 6 // initial_spells: InitialSpell[spell_count]
         + 2 // cooldown_count: u16
-        + self.cooldowns.len() * 14 // cooldowns: CooldownSpell[cooldown_count]
+        + self.cooldowns.len() * 16 // cooldowns: CooldownSpell[cooldown_count]
     }
 }
 

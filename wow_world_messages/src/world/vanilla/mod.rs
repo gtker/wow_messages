@@ -113,7 +113,7 @@ pub(crate) mod character_gear;
 pub use character_gear::*;
 pub(crate) mod compressed_move;
 pub use compressed_move::*;
-pub use crate::shared::cooldown_spell_vanilla_tbc_wrath::*;
+pub use crate::shared::cooldown_spell_vanilla_tbc::*;
 pub use crate::shared::damage_info_vanilla_tbc::*;
 pub use crate::shared::faction_initializer_vanilla_tbc::*;
 pub(crate) mod faction_standing;

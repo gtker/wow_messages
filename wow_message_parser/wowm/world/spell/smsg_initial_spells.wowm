@@ -6,7 +6,18 @@ struct CooldownSpell {
     Milliseconds cooldown;
     Milliseconds category_cooldown;
 } {
-    versions = "1 2 3";
+    versions = "1 2";
+}
+
+struct CooldownSpell {
+    u32 spell_id;
+    /// cast item id
+    u16 item_id;
+    u16 spell_category;
+    Milliseconds cooldown;
+    Milliseconds category_cooldown;
+} {
+    versions = "3.3.5";
 }
 
 struct InitialSpell {
@@ -390,4 +401,3 @@ test SMSG_INITIAL_SPELLS {
 ] {
     versions = "1.12";
 }
-

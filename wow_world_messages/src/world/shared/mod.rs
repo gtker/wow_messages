@@ -14,8 +14,8 @@ pub mod bank_tab_tbc_wrath;
 pub mod battleground_player_position_vanilla_tbc_wrath;
 #[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
 pub mod channel_member_vanilla_tbc_wrath;
-#[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
-pub mod cooldown_spell_vanilla_tbc_wrath;
+#[cfg(any(feature = "vanilla", feature = "tbc"))]
+pub mod cooldown_spell_vanilla_tbc;
 #[cfg(any(feature = "vanilla", feature = "tbc"))]
 pub mod damage_info_vanilla_tbc;
 #[cfg(any(feature = "tbc", feature = "wrath"))]
