@@ -152,7 +152,7 @@ pub(crate) mod character;
 pub use character::*;
 pub(crate) mod character_gear;
 pub use character_gear::*;
-pub use crate::shared::cooldown_spell_vanilla_tbc_wrath::*;
+pub use crate::shared::cooldown_spell_vanilla_tbc::*;
 pub use crate::shared::damage_info_vanilla_tbc::*;
 pub use crate::shared::dispelled_spell_tbc_wrath::*;
 pub use crate::shared::faction_initializer_vanilla_tbc::*;

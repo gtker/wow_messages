@@ -1,9 +1,9 @@
 use std::io::{Read, Write};
 
-use crate::shared::cooldown_spell_vanilla_tbc_wrath::CooldownSpell;
+use crate::shared::cooldown_spell_vanilla_tbc::CooldownSpell;
 use crate::shared::initial_spell_vanilla_tbc::InitialSpell;
 
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/spell/smsg_initial_spells.wowm:22`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/spell/smsg_initial_spells.wowm#L22):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/spell/smsg_initial_spells.wowm:33`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/spell/smsg_initial_spells.wowm#L33):
 /// ```text
 /// smsg SMSG_INITIAL_SPELLS = 0x012A {
 ///     u8 unknown1;
@@ -329,7 +329,7 @@ mod test_vanilla {
 
     }
 
-    // Generated from `wow_message_parser/wowm/world/spell/smsg_initial_spells.wowm` line 54.
+    // Generated from `wow_message_parser/wowm/world/spell/smsg_initial_spells.wowm` line 65.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn smsg_initial_spells0() {
@@ -349,7 +349,7 @@ mod test_vanilla {
         assert_eq!(dest, RAW0);
     }
 
-    // Generated from `wow_message_parser/wowm/world/spell/smsg_initial_spells.wowm` line 54.
+    // Generated from `wow_message_parser/wowm/world/spell/smsg_initial_spells.wowm` line 65.
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_smsg_initial_spells0() {
@@ -369,7 +369,7 @@ mod test_vanilla {
         assert_eq!(dest, RAW0);
     }
 
-    // Generated from `wow_message_parser/wowm/world/spell/smsg_initial_spells.wowm` line 54.
+    // Generated from `wow_message_parser/wowm/world/spell/smsg_initial_spells.wowm` line 65.
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_smsg_initial_spells0() {
@@ -587,7 +587,7 @@ mod test_tbc {
 
     }
 
-    // Generated from `wow_message_parser/wowm/world/spell/smsg_initial_spells.wowm` line 54.
+    // Generated from `wow_message_parser/wowm/world/spell/smsg_initial_spells.wowm` line 65.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn smsg_initial_spells0() {
@@ -607,7 +607,7 @@ mod test_tbc {
         assert_eq!(dest, RAW0);
     }
 
-    // Generated from `wow_message_parser/wowm/world/spell/smsg_initial_spells.wowm` line 54.
+    // Generated from `wow_message_parser/wowm/world/spell/smsg_initial_spells.wowm` line 65.
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_smsg_initial_spells0() {
@@ -627,7 +627,7 @@ mod test_tbc {
         assert_eq!(dest, RAW0);
     }
 
-    // Generated from `wow_message_parser/wowm/world/spell/smsg_initial_spells.wowm` line 54.
+    // Generated from `wow_message_parser/wowm/world/spell/smsg_initial_spells.wowm` line 65.
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_smsg_initial_spells0() {
