@@ -1,0 +1,2525 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "version": {
+      "$ref": "#/$defs/schema_version",
+      "description": "Version of schema."
+    },
+    "world": {
+      "$ref": "#/$defs/objects",
+      "description": "Objects used for world messages."
+    },
+    "integer_type_information": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "properties": {
+          "size": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 255
+          },
+          "bits": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 255
+          }
+        },
+        "additionalProperties": false,
+        "required": [
+          "size",
+          "bits"
+        ]
+      },
+      "description": "List of integer sizes used and amount of bits. Will be removed in the future."
+    },
+    "distinct_login_versions_other_than_all": {
+      "type": "array",
+      "items": {
+        "type": "integer",
+        "minimum": 0,
+        "maximum": 255
+      },
+      "description": "List of login versions that have messages, except for all."
+    },
+    "login_version_opcodes": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "integer",
+        "minimum": 0,
+        "maximum": 255
+      },
+      "description": "Map of login opcodes and message names."
+    },
+    "login": {
+      "$ref": "#/$defs/objects",
+      "description": "Objects used for login messages."
+    },
+    "vanilla_update_mask": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/update_mask"
+      },
+      "description": "UpdateMask type definitions for 1.12."
+    },
+    "tbc_update_mask": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/update_mask"
+      },
+      "description": "UpdateMask type definitions for 2.4.3."
+    },
+    "wrath_update_mask": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/update_mask"
+      },
+      "description": "UpdateMask type definitions for 3.3.5."
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "version",
+    "world",
+    "integer_type_information",
+    "distinct_login_versions_other_than_all",
+    "login_version_opcodes",
+    "login",
+    "vanilla_update_mask",
+    "tbc_update_mask",
+    "wrath_update_mask"
+  ],
+  "$defs": {
+    "update_mask": {
+      "type": "object",
+      "properties": {
+        "object_type": {
+          "type": "string",
+          "enum": [
+            "Object",
+            "Item",
+            "Unit",
+            "Player",
+            "Container",
+            "GameObject",
+            "DynamicObject",
+            "Corpse"
+          ]
+        },
+        "name": {
+          "type": "string"
+        },
+        "offset": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 65535
+        },
+        "size": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 65535
+        },
+        "data_type": {
+          "oneOf": [
+            {
+              "type": "object",
+              "properties": {
+                "update_mask_type_tag": {
+                  "const": "Guid",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "update_mask_type_tag"
+              ],
+              "additionalProperties": false
+            },
+            {
+              "type": "object",
+              "properties": {
+                "update_mask_type_tag": {
+                  "const": "Int",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "update_mask_type_tag"
+              ],
+              "additionalProperties": false
+            },
+            {
+              "type": "object",
+              "properties": {
+                "update_mask_type_tag": {
+                  "const": "Float",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "update_mask_type_tag"
+              ],
+              "additionalProperties": false
+            },
+            {
+              "type": "object",
+              "properties": {
+                "content": {
+                  "type": "object",
+                  "properties": {
+                    "first": {
+                      "$ref": "#/$defs/two_short_type"
+                    },
+                    "second": {
+                      "$ref": "#/$defs/two_short_type"
+                    }
+                  },
+                  "additionalProperties": false,
+                  "required": [
+                    "first",
+                    "second"
+                  ]
+                },
+                "update_mask_type_tag": {
+                  "const": "TwoShort",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "update_mask_type_tag",
+                "content"
+              ],
+              "additionalProperties": false
+            },
+            {
+              "type": "object",
+              "properties": {
+                "content": {
+                  "type": "object",
+                  "properties": {
+                    "definer": {
+                      "$ref": "#/$defs/definer"
+                    },
+                    "variable_name": {
+                      "type": "string"
+                    }
+                  },
+                  "additionalProperties": false,
+                  "required": [
+                    "definer",
+                    "variable_name"
+                  ]
+                },
+                "update_mask_type_tag": {
+                  "const": "GuidArrayUsingEnum",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "update_mask_type_tag",
+                "content"
+              ],
+              "additionalProperties": false
+            },
+            {
+              "type": "object",
+              "properties": {
+                "content": {
+                  "type": "object",
+                  "properties": {
+                    "update_mask_struct": {
+                      "$ref": "#/$defs/update_mask_struct"
+                    },
+                    "size": {
+                      "type": "integer",
+                      "minimum": -2147483648,
+                      "maximum": 2147483647
+                    },
+                    "variable_name": {
+                      "type": "string"
+                    }
+                  },
+                  "additionalProperties": false,
+                  "required": [
+                    "update_mask_struct",
+                    "size",
+                    "variable_name"
+                  ]
+                },
+                "update_mask_type_tag": {
+                  "const": "ArrayOfStruct",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "update_mask_type_tag",
+                "content"
+              ],
+              "additionalProperties": false
+            },
+            {
+              "type": "object",
+              "properties": {
+                "content": {
+                  "type": "object",
+                  "properties": {
+                    "first": {
+                      "$ref": "#/$defs/byte_type"
+                    },
+                    "second": {
+                      "$ref": "#/$defs/byte_type"
+                    },
+                    "third": {
+                      "$ref": "#/$defs/byte_type"
+                    },
+                    "fourth": {
+                      "$ref": "#/$defs/byte_type"
+                    }
+                  },
+                  "additionalProperties": false,
+                  "required": [
+                    "first",
+                    "second",
+                    "third",
+                    "fourth"
+                  ]
+                },
+                "update_mask_type_tag": {
+                  "const": "Bytes",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "update_mask_type_tag",
+                "content"
+              ],
+              "additionalProperties": false
+            }
+          ]
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "object_type",
+        "name",
+        "offset",
+        "size",
+        "data_type"
+      ]
+    },
+    "byte_type": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "inner_type": {
+          "oneOf": [
+            {
+              "type": "object",
+              "properties": {
+                "byte_type_tag": {
+                  "const": "Byte",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "byte_type_tag"
+              ],
+              "additionalProperties": false
+            },
+            {
+              "type": "object",
+              "properties": {
+                "byte_type": {
+                  "type": "string"
+                },
+                "byte_type_tag": {
+                  "const": "Definer",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "byte_type_tag",
+                "byte_type"
+              ],
+              "additionalProperties": false
+            }
+          ]
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "name",
+        "inner_type"
+      ]
+    },
+    "two_short_type": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "inner_type": {
+          "oneOf": [
+            {
+              "type": "object",
+              "properties": {
+                "two_short_type_tag": {
+                  "const": "Short",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "two_short_type_tag"
+              ],
+              "additionalProperties": false
+            },
+            {
+              "type": "object",
+              "properties": {
+                "two_short_type": {
+                  "type": "string"
+                },
+                "two_short_type_tag": {
+                  "const": "Definer",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "two_short_type_tag",
+                "two_short_type"
+              ],
+              "additionalProperties": false
+            }
+          ]
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "name",
+        "inner_type"
+      ]
+    },
+    "schema_version": {
+      "type": "object",
+      "properties": {
+        "major": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 4294967295
+        },
+        "minor": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 4294967295
+        },
+        "patch": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 4294967295
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "major",
+        "minor",
+        "patch"
+      ]
+    },
+    "objects": {
+      "type": "object",
+      "properties": {
+        "enums": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/definer"
+          }
+        },
+        "flags": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/definer"
+          }
+        },
+        "structs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/container"
+          }
+        },
+        "messages": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/container"
+          }
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "enums",
+        "flags",
+        "structs",
+        "messages"
+      ]
+    },
+    "definer": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "definer_type": {
+          "$ref": "#/$defs/definer_type"
+        },
+        "objects_used_in": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "object_name": {
+                "type": "string"
+              },
+              "definer_usage": {
+                "$ref": "#/$defs/definer_usage"
+              }
+            },
+            "additionalProperties": false,
+            "required": [
+              "object_name",
+              "definer_usage"
+            ]
+          }
+        },
+        "enumerators": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/enumerator"
+          }
+        },
+        "integer_type": {
+          "$ref": "#/$defs/integer_type"
+        },
+        "tags": {
+          "$ref": "#/$defs/object_tags"
+        },
+        "file_info": {
+          "$ref": "#/$defs/file_info"
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "name",
+        "definer_type",
+        "objects_used_in",
+        "enumerators",
+        "integer_type",
+        "tags",
+        "file_info"
+      ]
+    },
+    "sizes": {
+      "type": "object",
+      "properties": {
+        "constant_sized": {
+          "type": "boolean"
+        },
+        "minimum_size": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 4294967295
+        },
+        "maximum_size": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 4294967295
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "constant_sized",
+        "minimum_size",
+        "maximum_size"
+      ]
+    },
+    "container": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "object_type": {
+          "$ref": "#/$defs/object_type"
+        },
+        "has_manual_size_field": {
+          "type": "boolean"
+        },
+        "manual_size_subtraction": {
+          "anyOf": [
+            {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 65535
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "sizes": {
+          "$ref": "#/$defs/sizes"
+        },
+        "file_info": {
+          "$ref": "#/$defs/file_info"
+        },
+        "only_has_io_error": {
+          "type": "boolean"
+        },
+        "tags": {
+          "$ref": "#/$defs/object_tags"
+        },
+        "members": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/struct_member"
+          }
+        },
+        "tests": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/test_case"
+          }
+        },
+        "optional": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/optional_members"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "prepared_objects": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/prepared_object"
+          },
+          "description": "Is a structured representation of the object where fields that are inside if statements will be put inside the enumerators they are present in. This is used for example when wanting to represent conditionally present fields through e.g. discriminated unions or inheritance."
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "name",
+        "object_type",
+        "has_manual_size_field",
+        "manual_size_subtraction",
+        "sizes",
+        "file_info",
+        "only_has_io_error",
+        "tags",
+        "members",
+        "tests",
+        "optional",
+        "prepared_objects"
+      ]
+    },
+    "prepared_object": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name inside the object. Search through the original object to get type and other information."
+        },
+        "is_elseif_flag": {
+          "type": "boolean"
+        },
+        "enum_part_of_separate_statements": {
+          "type": "boolean"
+        },
+        "enumerators": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "array",
+            "items": {
+              "$ref": "#/$defs/prepared_object"
+            }
+          },
+          "description": "If this is present the field contains other fields."
+        },
+        "definer_type": {
+          "$ref": "#/$defs/definer_type"
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "name",
+        "is_elseif_flag",
+        "enum_part_of_separate_statements"
+      ],
+      "description": "Represents a field in the object, and the fields for each enumerator if it's an enum/flag."
+    },
+    "update_mask_struct": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "sizes": {
+          "$ref": "#/$defs/sizes"
+        },
+        "file_info": {
+          "$ref": "#/$defs/file_info"
+        },
+        "tags": {
+          "$ref": "#/$defs/object_tags"
+        },
+        "members": {
+          "type": "array",
+          "items": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "member": {
+                  "$ref": "#/$defs/definition"
+                },
+                "offset": {
+                  "type": "integer",
+                  "minimum": -2147483648,
+                  "maximum": 2147483647
+                },
+                "size": {
+                  "type": "integer",
+                  "minimum": -2147483648,
+                  "maximum": 2147483647
+                }
+              },
+              "additionalProperties": false,
+              "required": [
+                "member",
+                "offset",
+                "size"
+              ]
+            }
+          }
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "name",
+        "sizes",
+        "file_info",
+        "tags",
+        "members"
+      ]
+    },
+    "floating_point_value": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "number"
+        },
+        "original_string": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "value",
+        "original_string"
+      ]
+    },
+    "test_case_value": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "content": {
+              "$ref": "#/$defs/value"
+            },
+            "test_value_tag": {
+              "const": "Integer",
+              "type": "string"
+            }
+          },
+          "required": [
+            "test_value_tag",
+            "content"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "content": {
+              "type": "boolean"
+            },
+            "test_value_tag": {
+              "const": "Bool",
+              "type": "string"
+            }
+          },
+          "required": [
+            "test_value_tag",
+            "content"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "content": {
+              "type": "number"
+            },
+            "test_value_tag": {
+              "const": "Population",
+              "type": "string"
+            }
+          },
+          "required": [
+            "test_value_tag",
+            "content"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "content": {
+              "$ref": "#/$defs/value"
+            },
+            "test_value_tag": {
+              "const": "DateTime",
+              "type": "string"
+            }
+          },
+          "required": [
+            "test_value_tag",
+            "content"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "content": {
+              "$ref": "#/$defs/value"
+            },
+            "test_value_tag": {
+              "const": "Guid",
+              "type": "string"
+            }
+          },
+          "required": [
+            "test_value_tag",
+            "content"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "content": {
+              "$ref": "#/$defs/floating_point_value"
+            },
+            "test_value_tag": {
+              "const": "FloatingPoint",
+              "type": "string"
+            }
+          },
+          "required": [
+            "test_value_tag",
+            "content"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "content": {
+              "type": "object",
+              "properties": {
+                "values": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "size": {
+                  "$ref": "#/$defs/array_size"
+                }
+              },
+              "additionalProperties": false,
+              "required": [
+                "values",
+                "size"
+              ]
+            },
+            "test_value_tag": {
+              "const": "Array",
+              "type": "string"
+            }
+          },
+          "required": [
+            "test_value_tag",
+            "content"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "content": {
+              "type": "string"
+            },
+            "test_value_tag": {
+              "const": "String",
+              "type": "string"
+            }
+          },
+          "required": [
+            "test_value_tag",
+            "content"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "content": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "test_value_tag": {
+              "const": "Flag",
+              "type": "string"
+            }
+          },
+          "required": [
+            "test_value_tag",
+            "content"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "content": {
+              "$ref": "#/$defs/value"
+            },
+            "test_value_tag": {
+              "const": "Enum",
+              "type": "string"
+            }
+          },
+          "required": [
+            "test_value_tag",
+            "content"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "content": {
+              "type": "object",
+              "properties": {
+                "type_name": {
+                  "type": "string"
+                },
+                "members": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/$defs/test_case_member"
+                  }
+                }
+              },
+              "additionalProperties": false,
+              "required": [
+                "type_name",
+                "members"
+              ]
+            },
+            "test_value_tag": {
+              "const": "SubObject",
+              "type": "string"
+            }
+          },
+          "required": [
+            "test_value_tag",
+            "content"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "content": {
+              "type": "object",
+              "properties": {
+                "type_name": {
+                  "type": "string"
+                },
+                "members": {
+                  "type": "array",
+                  "items": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/$defs/test_case_member"
+                    }
+                  }
+                },
+                "size": {
+                  "$ref": "#/$defs/array_size"
+                }
+              },
+              "additionalProperties": false,
+              "required": [
+                "type_name",
+                "members",
+                "size"
+              ]
+            },
+            "test_value_tag": {
+              "const": "ArrayOfSubObject",
+              "type": "string"
+            }
+          },
+          "required": [
+            "test_value_tag",
+            "content"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "content": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "update_mask_type": {
+                    "type": "string",
+                    "enum": [
+                      "Object",
+                      "Item",
+                      "Unit",
+                      "Player",
+                      "Container",
+                      "GameObject",
+                      "DynamicObject",
+                      "Corpse"
+                    ]
+                  },
+                  "update_mask_name": {
+                    "type": "string"
+                  },
+                  "update_mask_value": {
+                    "type": "string"
+                  }
+                },
+                "additionalProperties": false,
+                "required": [
+                  "update_mask_type",
+                  "update_mask_name",
+                  "update_mask_value"
+                ]
+              }
+            },
+            "test_value_tag": {
+              "const": "UpdateMask",
+              "type": "string"
+            }
+          },
+          "required": [
+            "test_value_tag",
+            "content"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "content": {
+              "$ref": "#/$defs/value"
+            },
+            "test_value_tag": {
+              "const": "IpAddress",
+              "type": "string"
+            }
+          },
+          "required": [
+            "test_value_tag",
+            "content"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "content": {
+              "$ref": "#/$defs/value"
+            },
+            "test_value_tag": {
+              "const": "Seconds",
+              "type": "string"
+            }
+          },
+          "required": [
+            "test_value_tag",
+            "content"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "content": {
+              "$ref": "#/$defs/value"
+            },
+            "test_value_tag": {
+              "const": "Milliseconds",
+              "type": "string"
+            }
+          },
+          "required": [
+            "test_value_tag",
+            "content"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "content": {
+              "$ref": "#/$defs/value"
+            },
+            "test_value_tag": {
+              "const": "Gold",
+              "type": "string"
+            }
+          },
+          "required": [
+            "test_value_tag",
+            "content"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "content": {
+              "$ref": "#/$defs/value"
+            },
+            "test_value_tag": {
+              "const": "Level",
+              "type": "string"
+            }
+          },
+          "required": [
+            "test_value_tag",
+            "content"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "content": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "x": {
+                    "type": "number"
+                  },
+                  "y": {
+                    "type": "number"
+                  },
+                  "z": {
+                    "type": "number"
+                  }
+                },
+                "additionalProperties": false,
+                "required": [
+                  "x",
+                  "y",
+                  "z"
+                ]
+              }
+            },
+            "test_value_tag": {
+              "const": "MonsterMoveSpline",
+              "type": "string"
+            }
+          },
+          "required": [
+            "test_value_tag",
+            "content"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "test_case_member": {
+      "type": "object",
+      "properties": {
+        "variable_name": {
+          "type": "string"
+        },
+        "value": {
+          "$ref": "#/$defs/test_case_value"
+        },
+        "tags": {
+          "$ref": "#/$defs/member_tags"
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "variable_name",
+        "value",
+        "tags"
+      ]
+    },
+    "test_case": {
+      "type": "object",
+      "properties": {
+        "subject": {
+          "type": "string"
+        },
+        "members": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/test_case_member"
+          }
+        },
+        "raw_bytes": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 255
+          }
+        },
+        "tags": {
+          "$ref": "#/$defs/object_tags"
+        },
+        "file_info": {
+          "$ref": "#/$defs/file_info"
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "subject",
+        "members",
+        "raw_bytes",
+        "tags",
+        "file_info"
+      ]
+    },
+    "object_tags": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "$ref": "#/$defs/object_versions"
+        },
+        "comment": {
+          "type": "string",
+          "description": "Explanatory comment for object."
+        },
+        "unimplemented": {
+          "type": "boolean",
+          "description": "Object isn't implemented. Unused."
+        },
+        "compressed": {
+          "type": "boolean",
+          "description": "Object body consists of uint32 with decompressed size followed by compressed bytes of members."
+        },
+        "non_network_type": {
+          "type": "boolean",
+          "description": "Not sent in a network message but used in e.g. a DBC file or otherwise in the client."
+        },
+        "used_in_update_mask": {
+          "type": "boolean",
+          "description": "Object is used by UpdateMask type."
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "version"
+      ]
+    },
+    "member_tags": {
+      "type": "object",
+      "properties": {
+        "comment": {
+          "type": "string",
+          "description": "Explanatory comment for member."
+        },
+        "display": {
+          "type": "string",
+          "description": "Pretty printed string of definer enumerator."
+        },
+        "maximum_length": {
+          "type": "string",
+          "description": "JSON Typedef does not support integers larger than unsigned 32 bit, so this is a string"
+        },
+        "valid_range": {
+          "type": "object",
+          "properties": {
+            "from": {
+              "type": "string"
+            },
+            "to": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": false,
+          "required": [
+            "from",
+            "to"
+          ],
+          "description": "JSON Typedef does not support integers larger than unsigned 32 bit, so this is a string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "object_versions": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "version_type": {
+              "$ref": "#/$defs/login_versions"
+            },
+            "version_type_tag": {
+              "const": "login",
+              "type": "string"
+            }
+          },
+          "required": [
+            "version_type_tag",
+            "version_type"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "version_type": {
+              "$ref": "#/$defs/world_versions"
+            },
+            "version_type_tag": {
+              "const": "world",
+              "type": "string"
+            }
+          },
+          "required": [
+            "version_type_tag",
+            "version_type"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "login_versions": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "versions": {
+              "type": "array",
+              "items": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 255
+              }
+            },
+            "login_version_tag": {
+              "const": "specific",
+              "type": "string"
+            }
+          },
+          "required": [
+            "login_version_tag",
+            "versions"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "login_version_tag": {
+              "const": "all",
+              "type": "string"
+            }
+          },
+          "required": [
+            "login_version_tag"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "world_versions": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "versions": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/world_version"
+              }
+            },
+            "world_version_tag": {
+              "const": "specific",
+              "type": "string"
+            }
+          },
+          "required": [
+            "world_version_tag",
+            "versions"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "world_version_tag": {
+              "const": "all",
+              "type": "string"
+            }
+          },
+          "required": [
+            "world_version_tag"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "world_version": {
+      "type": "object",
+      "properties": {
+        "major": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 255
+        },
+        "minor": {
+          "anyOf": [
+            {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 255
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "patch": {
+          "anyOf": [
+            {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 255
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "build": {
+          "anyOf": [
+            {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 65535
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "major",
+        "minor",
+        "patch",
+        "build"
+      ]
+    },
+    "integer_type": {
+      "type": "string",
+      "enum": [
+        "U8",
+        "I8",
+        "U16",
+        "U32",
+        "U64",
+        "I16",
+        "I32",
+        "I64",
+        "U48"
+      ]
+    },
+    "file_info": {
+      "type": "object",
+      "properties": {
+        "file_name": {
+          "type": "string"
+        },
+        "start_position": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 4294967295
+        },
+        "end_position": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 4294967295
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "file_name",
+        "start_position",
+        "end_position"
+      ],
+      "description": "File information about the original .wowm definition."
+    },
+    "value": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "string",
+          "description": "JSON Typedef does not support integers larger than unsigned 32 bit, so this is a string"
+        },
+        "original_string": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "value",
+        "original_string"
+      ],
+      "description": "Literal integer value."
+    },
+    "definer_type": {
+      "type": "string",
+      "enum": [
+        "Enum",
+        "Flag"
+      ]
+    },
+    "enumerator": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "value": {
+          "$ref": "#/$defs/value"
+        },
+        "tags": {
+          "$ref": "#/$defs/member_tags"
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "name",
+        "value",
+        "tags"
+      ]
+    },
+    "definer_usage": {
+      "type": "string",
+      "enum": [
+        "RegularUse",
+        "InIfStatement"
+      ]
+    },
+    "object_type": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "container_type_tag": {
+              "const": "Struct",
+              "type": "string"
+            }
+          },
+          "required": [
+            "container_type_tag"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "opcode": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 65535
+            },
+            "container_type_tag": {
+              "const": "CLogin",
+              "type": "string"
+            }
+          },
+          "required": [
+            "container_type_tag",
+            "opcode"
+          ],
+          "additionalProperties": false,
+          "description": "Login message sent by the client."
+        },
+        {
+          "type": "object",
+          "properties": {
+            "opcode": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 65535
+            },
+            "container_type_tag": {
+              "const": "SLogin",
+              "type": "string"
+            }
+          },
+          "required": [
+            "container_type_tag",
+            "opcode"
+          ],
+          "additionalProperties": false,
+          "description": "Login message sent by the server."
+        },
+        {
+          "type": "object",
+          "properties": {
+            "opcode": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 65535
+            },
+            "container_type_tag": {
+              "const": "Msg",
+              "type": "string"
+            }
+          },
+          "required": [
+            "container_type_tag",
+            "opcode"
+          ],
+          "additionalProperties": false,
+          "description": "World message sent by either the server or the client."
+        },
+        {
+          "type": "object",
+          "properties": {
+            "opcode": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 65535
+            },
+            "container_type_tag": {
+              "const": "CMsg",
+              "type": "string"
+            }
+          },
+          "required": [
+            "container_type_tag",
+            "opcode"
+          ],
+          "additionalProperties": false,
+          "description": "World message sent by the client."
+        },
+        {
+          "type": "object",
+          "properties": {
+            "opcode": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 65535
+            },
+            "container_type_tag": {
+              "const": "SMsg",
+              "type": "string"
+            }
+          },
+          "required": [
+            "container_type_tag",
+            "opcode"
+          ],
+          "additionalProperties": false,
+          "description": "World message sent by the server."
+        }
+      ]
+    },
+    "struct_member": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "struct_member_content": {
+              "$ref": "#/$defs/definition"
+            },
+            "struct_member_tag": {
+              "const": "Definition",
+              "type": "string"
+            }
+          },
+          "required": [
+            "struct_member_tag",
+            "struct_member_content"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "struct_member_content": {
+              "$ref": "#/$defs/if_statement"
+            },
+            "struct_member_tag": {
+              "const": "IfStatement",
+              "type": "string"
+            }
+          },
+          "required": [
+            "struct_member_tag",
+            "struct_member_content"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "definition": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "data_type": {
+          "$ref": "#/$defs/data_type"
+        },
+        "constant_value": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/value",
+              "description": "This is set if the field is ignored by the client or can only have a single value."
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "size_of_fields_before_size": {
+          "anyOf": [
+            {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 255
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "used_as_size_in": {
+          "anyOf": [
+            {
+              "type": "string",
+              "description": "This is set if the variable is used as the size in an array variable."
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "used_in_if": {
+          "type": "boolean",
+          "description": "This is set if the variable is as the definer in an if statement."
+        },
+        "tags": {
+          "$ref": "#/$defs/member_tags"
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "name",
+        "data_type",
+        "constant_value",
+        "size_of_fields_before_size",
+        "used_as_size_in",
+        "used_in_if",
+        "tags"
+      ]
+    },
+    "array_type": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "integer_type": {
+              "$ref": "#/$defs/integer_type"
+            },
+            "array_type_tag": {
+              "const": "Integer",
+              "type": "string"
+            }
+          },
+          "required": [
+            "array_type_tag",
+            "integer_type"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "struct_data": {
+              "$ref": "#/$defs/container"
+            },
+            "array_type_tag": {
+              "const": "Struct",
+              "type": "string"
+            }
+          },
+          "required": [
+            "array_type_tag",
+            "struct_data"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "array_type_tag": {
+              "const": "CString",
+              "type": "string"
+            }
+          },
+          "required": [
+            "array_type_tag"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "array_type_tag": {
+              "const": "Guid",
+              "type": "string"
+            }
+          },
+          "required": [
+            "array_type_tag"
+          ],
+          "additionalProperties": false,
+          "description": "64-bit integer."
+        },
+        {
+          "type": "object",
+          "properties": {
+            "array_type_tag": {
+              "const": "PackedGuid",
+              "type": "string"
+            }
+          },
+          "required": [
+            "array_type_tag"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "array_type_tag": {
+              "const": "Spell",
+              "type": "string"
+            }
+          },
+          "required": [
+            "array_type_tag"
+          ],
+          "additionalProperties": false,
+          "description": "32-bit integer."
+        }
+      ]
+    },
+    "array_size": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "size": {
+              "type": "string",
+              "description": "Amount of elements in the array. JSON Typedef does not support integers larger than unsigned 32 bit, so this is a string."
+            },
+            "array_size_tag": {
+              "const": "Fixed",
+              "type": "string"
+            }
+          },
+          "required": [
+            "array_size_tag",
+            "size"
+          ],
+          "additionalProperties": false,
+          "description": "Arrays that always have an exact amount of elements."
+        },
+        {
+          "type": "object",
+          "properties": {
+            "size": {
+              "type": "string"
+            },
+            "array_size_tag": {
+              "const": "Variable",
+              "type": "string"
+            }
+          },
+          "required": [
+            "array_size_tag",
+            "size"
+          ],
+          "additionalProperties": false,
+          "description": "Arrays that have a variable amount of elements, determined by the value in a previous variable."
+        },
+        {
+          "type": "object",
+          "properties": {
+            "array_size_tag": {
+              "const": "Endless",
+              "type": "string"
+            }
+          },
+          "required": [
+            "array_size_tag"
+          ],
+          "additionalProperties": false,
+          "description": "Arrays that have a variable amount of elements, determined by if there are still unread bytes remaining."
+        }
+      ]
+    },
+    "data_type": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "integer_type": {
+              "$ref": "#/$defs/integer_type"
+            },
+            "data_type_tag": {
+              "const": "Integer",
+              "type": "string"
+            }
+          },
+          "required": [
+            "data_type_tag",
+            "integer_type"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "integer_type": {
+              "$ref": "#/$defs/integer_type"
+            },
+            "data_type_tag": {
+              "const": "Bool",
+              "type": "string"
+            }
+          },
+          "required": [
+            "data_type_tag",
+            "integer_type"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "data_type_tag": {
+              "const": "Population",
+              "type": "string"
+            }
+          },
+          "required": [
+            "data_type_tag"
+          ],
+          "additionalProperties": false,
+          "description": "32-bit floating point."
+        },
+        {
+          "type": "object",
+          "properties": {
+            "data_type_tag": {
+              "const": "DateTime",
+              "type": "string"
+            }
+          },
+          "required": [
+            "data_type_tag"
+          ],
+          "additionalProperties": false,
+          "description": "32-bit integer."
+        },
+        {
+          "type": "object",
+          "properties": {
+            "data_type_tag": {
+              "const": "PackedGuid",
+              "type": "string"
+            }
+          },
+          "required": [
+            "data_type_tag"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "data_type_tag": {
+              "const": "Guid",
+              "type": "string"
+            }
+          },
+          "required": [
+            "data_type_tag"
+          ],
+          "additionalProperties": false,
+          "description": "64-bit integer."
+        },
+        {
+          "type": "object",
+          "properties": {
+            "data_type_tag": {
+              "const": "NamedGuid",
+              "type": "string"
+            }
+          },
+          "required": [
+            "data_type_tag"
+          ],
+          "additionalProperties": false,
+          "description": "64-bit integer followed by a CString if the value isn't zero."
+        },
+        {
+          "type": "object",
+          "properties": {
+            "data_type_tag": {
+              "const": "FloatingPoint",
+              "type": "string"
+            }
+          },
+          "required": [
+            "data_type_tag"
+          ],
+          "additionalProperties": false,
+          "description": "32-bit floating point."
+        },
+        {
+          "type": "object",
+          "properties": {
+            "data_type_tag": {
+              "const": "CString",
+              "type": "string"
+            }
+          },
+          "required": [
+            "data_type_tag"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "data_type_tag": {
+              "const": "SizedCString",
+              "type": "string"
+            }
+          },
+          "required": [
+            "data_type_tag"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "data_type_tag": {
+              "const": "String",
+              "type": "string"
+            }
+          },
+          "required": [
+            "data_type_tag"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "data_type_tag": {
+              "const": "Spell",
+              "type": "string"
+            }
+          },
+          "required": [
+            "data_type_tag"
+          ],
+          "additionalProperties": false,
+          "description": "32-bit integer."
+        },
+        {
+          "type": "object",
+          "properties": {
+            "data_type_tag": {
+              "const": "Spell16",
+              "type": "string"
+            }
+          },
+          "required": [
+            "data_type_tag"
+          ],
+          "additionalProperties": false,
+          "description": "16-bit integer."
+        },
+        {
+          "type": "object",
+          "properties": {
+            "data_type_tag": {
+              "const": "Item",
+              "type": "string"
+            }
+          },
+          "required": [
+            "data_type_tag"
+          ],
+          "additionalProperties": false,
+          "description": "32-bit integer."
+        },
+        {
+          "type": "object",
+          "properties": {
+            "inner_type": {
+              "$ref": "#/$defs/array_type"
+            },
+            "size": {
+              "$ref": "#/$defs/array_size"
+            },
+            "compressed": {
+              "type": "boolean"
+            },
+            "data_type_tag": {
+              "const": "Array",
+              "type": "string"
+            }
+          },
+          "required": [
+            "data_type_tag",
+            "inner_type",
+            "size",
+            "compressed"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "type_name": {
+              "type": "string"
+            },
+            "integer_type": {
+              "$ref": "#/$defs/integer_type"
+            },
+            "tags": {
+              "$ref": "#/$defs/object_tags"
+            },
+            "upcast": {
+              "type": "boolean"
+            },
+            "data_type_tag": {
+              "const": "Enum",
+              "type": "string"
+            }
+          },
+          "required": [
+            "data_type_tag",
+            "type_name",
+            "integer_type",
+            "tags",
+            "upcast"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "type_name": {
+              "type": "string"
+            },
+            "integer_type": {
+              "$ref": "#/$defs/integer_type"
+            },
+            "tags": {
+              "$ref": "#/$defs/object_tags"
+            },
+            "upcast": {
+              "type": "boolean"
+            },
+            "data_type_tag": {
+              "const": "Flag",
+              "type": "string"
+            }
+          },
+          "required": [
+            "data_type_tag",
+            "type_name",
+            "integer_type",
+            "tags",
+            "upcast"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "struct_data": {
+              "$ref": "#/$defs/container"
+            },
+            "data_type_tag": {
+              "const": "Struct",
+              "type": "string"
+            }
+          },
+          "required": [
+            "data_type_tag",
+            "struct_data"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "data_type_tag": {
+              "const": "UpdateMask",
+              "type": "string"
+            }
+          },
+          "required": [
+            "data_type_tag"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "data_type_tag": {
+              "const": "AuraMask",
+              "type": "string"
+            }
+          },
+          "required": [
+            "data_type_tag"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "data_type_tag": {
+              "const": "MonsterMoveSpline",
+              "type": "string"
+            }
+          },
+          "required": [
+            "data_type_tag"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "data_type_tag": {
+              "const": "AchievementDoneArray",
+              "type": "string"
+            }
+          },
+          "required": [
+            "data_type_tag"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "data_type_tag": {
+              "const": "AchievementInProgressArray",
+              "type": "string"
+            }
+          },
+          "required": [
+            "data_type_tag"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "data_type_tag": {
+              "const": "EnchantMask",
+              "type": "string"
+            }
+          },
+          "required": [
+            "data_type_tag"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "data_type_tag": {
+              "const": "InspectTalentGearMask",
+              "type": "string"
+            }
+          },
+          "required": [
+            "data_type_tag"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "data_type_tag": {
+              "const": "Gold",
+              "type": "string"
+            }
+          },
+          "required": [
+            "data_type_tag"
+          ],
+          "additionalProperties": false,
+          "description": "32-bit integer."
+        },
+        {
+          "type": "object",
+          "properties": {
+            "data_type_tag": {
+              "const": "Level",
+              "type": "string"
+            }
+          },
+          "required": [
+            "data_type_tag"
+          ],
+          "additionalProperties": false,
+          "description": "Level serialized as 8-bit value."
+        },
+        {
+          "type": "object",
+          "properties": {
+            "data_type_tag": {
+              "const": "Level16",
+              "type": "string"
+            }
+          },
+          "required": [
+            "data_type_tag"
+          ],
+          "additionalProperties": false,
+          "description": "Level serialized as 16-bit value."
+        },
+        {
+          "type": "object",
+          "properties": {
+            "data_type_tag": {
+              "const": "Level32",
+              "type": "string"
+            }
+          },
+          "required": [
+            "data_type_tag"
+          ],
+          "additionalProperties": false,
+          "description": "Level serialized as 32-bit value."
+        },
+        {
+          "type": "object",
+          "properties": {
+            "data_type_tag": {
+              "const": "VariableItemRandomProperty",
+              "type": "string"
+            }
+          },
+          "required": [
+            "data_type_tag"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "data_type_tag": {
+              "const": "AddonArray",
+              "type": "string"
+            }
+          },
+          "required": [
+            "data_type_tag"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "data_type_tag": {
+              "const": "IpAddress",
+              "type": "string"
+            }
+          },
+          "required": [
+            "data_type_tag"
+          ],
+          "additionalProperties": false,
+          "description": "32-bit big endian integer."
+        },
+        {
+          "type": "object",
+          "properties": {
+            "data_type_tag": {
+              "const": "Seconds",
+              "type": "string"
+            }
+          },
+          "required": [
+            "data_type_tag"
+          ],
+          "additionalProperties": false,
+          "description": "32-bit integer."
+        },
+        {
+          "type": "object",
+          "properties": {
+            "data_type_tag": {
+              "const": "Milliseconds",
+              "type": "string"
+            }
+          },
+          "required": [
+            "data_type_tag"
+          ],
+          "additionalProperties": false,
+          "description": "32-bit integer."
+        },
+        {
+          "type": "object",
+          "properties": {
+            "data_type_tag": {
+              "const": "CacheMask",
+              "type": "string"
+            }
+          },
+          "required": [
+            "data_type_tag"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "if_statement": {
+      "type": "object",
+      "properties": {
+        "variable_name": {
+          "type": "string"
+        },
+        "definer_type": {
+          "$ref": "#/$defs/definer_type",
+          "description": "Flag or enum. Flag means that more values can be active at the same time. Enum means that only a single can be active at the same time."
+        },
+        "values": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Enumerators that apply to this if statement."
+        },
+        "members": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/struct_member"
+          }
+        },
+        "else_if_statements": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/if_statement"
+          }
+        },
+        "original_type": {
+          "$ref": "#/$defs/data_type",
+          "description": "Original type used in the if statement."
+        },
+        "part_of_separate_if_statement": {
+          "type": "boolean",
+          "description": "The same definer has multiple disconnected if statements in the same body. This is significant since it means that a definer can be more than just one enumerator."
+        },
+        "is_else_if_flag": {
+          "type": "boolean",
+          "description": "Is definer type flag and has else if statements. This is significant since from a normal flag since it means that some bits should not be able to be set at the same time."
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "variable_name",
+        "definer_type",
+        "values",
+        "members",
+        "else_if_statements",
+        "original_type",
+        "part_of_separate_if_statement",
+        "is_else_if_flag"
+      ]
+    },
+    "optional_members": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "members": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/struct_member"
+          }
+        },
+        "prepared_objects": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/prepared_object"
+          },
+          "description": "Is a structured representation of the object where fields that are inside if statements will be put inside the enumerators they are present in. This is used for example when wanting to represent conditionally present fields through e.g. discriminated unions or inheritance."
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "name",
+        "members",
+        "prepared_objects"
+      ]
+    }
+  }
+}

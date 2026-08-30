@@ -1,0 +1,790 @@
+syntax = "proto3";
+
+package wow_messages;
+
+enum DefinerType {
+  DEFINERTYPE_UNSPECIFIED = 0;
+  DEFINERTYPE_ENUM = 1;
+  DEFINERTYPE_FLAG = 2;
+}
+
+enum DefinerUsage {
+  DEFINERUSAGE_UNSPECIFIED = 0;
+  DEFINERUSAGE_REGULARUSE = 1;
+  DEFINERUSAGE_INIFSTATEMENT = 2;
+}
+
+enum IntegerType {
+  INTEGERTYPE_UNSPECIFIED = 0;
+  INTEGERTYPE_U8 = 1;
+  INTEGERTYPE_I8 = 2;
+  INTEGERTYPE_U16 = 3;
+  INTEGERTYPE_U32 = 4;
+  INTEGERTYPE_U64 = 5;
+  INTEGERTYPE_I16 = 6;
+  INTEGERTYPE_I32 = 7;
+  INTEGERTYPE_I64 = 8;
+  INTEGERTYPE_U48 = 9;
+}
+
+enum TestCaseValueUpdateMaskContentItemUpdateMaskTypeEnum {
+  TESTCASEVALUEUPDATEMASKCONTENTITEMUPDATEMASKTYPEENUM_UNSPECIFIED = 0;
+  TESTCASEVALUEUPDATEMASKCONTENTITEMUPDATEMASKTYPEENUM_OBJECT = 1;
+  TESTCASEVALUEUPDATEMASKCONTENTITEMUPDATEMASKTYPEENUM_ITEM = 2;
+  TESTCASEVALUEUPDATEMASKCONTENTITEMUPDATEMASKTYPEENUM_UNIT = 3;
+  TESTCASEVALUEUPDATEMASKCONTENTITEMUPDATEMASKTYPEENUM_PLAYER = 4;
+  TESTCASEVALUEUPDATEMASKCONTENTITEMUPDATEMASKTYPEENUM_CONTAINER = 5;
+  TESTCASEVALUEUPDATEMASKCONTENTITEMUPDATEMASKTYPEENUM_GAMEOBJECT = 6;
+  TESTCASEVALUEUPDATEMASKCONTENTITEMUPDATEMASKTYPEENUM_DYNAMICOBJECT = 7;
+  TESTCASEVALUEUPDATEMASKCONTENTITEMUPDATEMASKTYPEENUM_CORPSE = 8;
+}
+
+enum UpdateMaskObjectTypeEnum {
+  UPDATEMASKOBJECTTYPEENUM_UNSPECIFIED = 0;
+  UPDATEMASKOBJECTTYPEENUM_OBJECT = 1;
+  UPDATEMASKOBJECTTYPEENUM_ITEM = 2;
+  UPDATEMASKOBJECTTYPEENUM_UNIT = 3;
+  UPDATEMASKOBJECTTYPEENUM_PLAYER = 4;
+  UPDATEMASKOBJECTTYPEENUM_CONTAINER = 5;
+  UPDATEMASKOBJECTTYPEENUM_GAMEOBJECT = 6;
+  UPDATEMASKOBJECTTYPEENUM_DYNAMICOBJECT = 7;
+  UPDATEMASKOBJECTTYPEENUM_CORPSE = 8;
+}
+
+message ArraySize {
+  string array_size_tag = 1;
+  oneof kind {
+    ArraySizeFixed fixed = 2;
+    ArraySizeVariable variable = 3;
+    ArraySizeEndless endless = 4;
+  }
+}
+
+message ArraySizeEndless {
+}
+
+message ArraySizeFixed {
+  string size = 1;
+}
+
+message ArraySizeVariable {
+  string size = 1;
+}
+
+message ArrayType {
+  string array_type_tag = 1;
+  oneof kind {
+    ArrayTypeInteger integer = 2;
+    ArrayTypeStruct struct = 3;
+    ArrayTypeCString cstring = 4;
+    ArrayTypeGuid guid = 5;
+    ArrayTypePackedGuid packed_guid = 6;
+    ArrayTypeSpell spell = 7;
+  }
+}
+
+message ArrayTypeCString {
+}
+
+message ArrayTypeGuid {
+}
+
+message ArrayTypeInteger {
+  IntegerType integer_type = 1;
+}
+
+message ArrayTypePackedGuid {
+}
+
+message ArrayTypeSpell {
+}
+
+message ArrayTypeStruct {
+  Container struct_data = 1;
+}
+
+message ByteType {
+  string name = 1;
+  ByteTypeInnerType inner_type = 2;
+}
+
+message ByteTypeInnerType {
+  string byte_type_tag = 1;
+  oneof kind {
+    ByteTypeInnerTypeByte byte = 2;
+    ByteTypeInnerTypeDefiner definer = 3;
+  }
+}
+
+message ByteTypeInnerTypeByte {
+}
+
+message ByteTypeInnerTypeDefiner {
+  string byte_type = 1;
+}
+
+message Container {
+  string name = 1;
+  ObjectType object_type = 2;
+  bool has_manual_size_field = 3;
+  optional uint32 manual_size_subtraction = 4;
+  Sizes sizes = 5;
+  FileInfo file_info = 6;
+  bool only_has_io_error = 7;
+  ObjectTags tags = 8;
+  repeated StructMember members = 9;
+  repeated TestCase tests = 10;
+  OptionalMembers optional_field = 11;
+  repeated PreparedObject prepared_objects = 12;
+}
+
+message DataType {
+  string data_type_tag = 1;
+  oneof kind {
+    DataTypeInteger integer = 2;
+    DataTypeBool bool_field = 3;
+    DataTypePopulation population = 4;
+    DataTypeDateTime date_time = 5;
+    DataTypePackedGuid packed_guid = 6;
+    DataTypeGuid guid = 7;
+    DataTypeNamedGuid named_guid = 8;
+    DataTypeFloatingPoint floating_point = 9;
+    DataTypeCString cstring = 10;
+    DataTypeSizedCString sized_cstring = 11;
+    DataTypeString string_field = 12;
+    DataTypeSpell spell = 13;
+    DataTypeSpell16 spell16 = 14;
+    DataTypeItem item = 15;
+    DataTypeArray array = 16;
+    DataTypeEnum enum_field = 17;
+    DataTypeFlag flag = 18;
+    DataTypeStruct struct = 19;
+    DataTypeUpdateMask update_mask = 20;
+    DataTypeAuraMask aura_mask = 21;
+    DataTypeMonsterMoveSpline monster_move_spline = 22;
+    DataTypeAchievementDoneArray achievement_done_array = 23;
+    DataTypeAchievementInProgressArray achievement_in_progress_array = 24;
+    DataTypeEnchantMask enchant_mask = 25;
+    DataTypeInspectTalentGearMask inspect_talent_gear_mask = 26;
+    DataTypeGold gold = 27;
+    DataTypeLevel level = 28;
+    DataTypeLevel16 level16 = 29;
+    DataTypeLevel32 level32 = 30;
+    DataTypeVariableItemRandomProperty variable_item_random_property = 31;
+    DataTypeAddonArray addon_array = 32;
+    DataTypeIpAddress ip_address = 33;
+    DataTypeSeconds seconds = 34;
+    DataTypeMilliseconds milliseconds = 35;
+    DataTypeCacheMask cache_mask = 36;
+  }
+}
+
+message DataTypeAchievementDoneArray {
+}
+
+message DataTypeAchievementInProgressArray {
+}
+
+message DataTypeAddonArray {
+}
+
+message DataTypeArray {
+  ArrayType inner_type = 1;
+  ArraySize size = 2;
+  bool compressed = 3;
+}
+
+message DataTypeAuraMask {
+}
+
+message DataTypeBool {
+  IntegerType integer_type = 1;
+}
+
+message DataTypeCString {
+}
+
+message DataTypeCacheMask {
+}
+
+message DataTypeDateTime {
+}
+
+message DataTypeEnchantMask {
+}
+
+message DataTypeEnum {
+  string type_name = 1;
+  IntegerType integer_type = 2;
+  ObjectTags tags = 3;
+  bool upcast = 4;
+}
+
+message DataTypeFlag {
+  string type_name = 1;
+  IntegerType integer_type = 2;
+  ObjectTags tags = 3;
+  bool upcast = 4;
+}
+
+message DataTypeFloatingPoint {
+}
+
+message DataTypeGold {
+}
+
+message DataTypeGuid {
+}
+
+message DataTypeInspectTalentGearMask {
+}
+
+message DataTypeInteger {
+  IntegerType integer_type = 1;
+}
+
+message DataTypeIpAddress {
+}
+
+message DataTypeItem {
+}
+
+message DataTypeLevel {
+}
+
+message DataTypeLevel16 {
+}
+
+message DataTypeLevel32 {
+}
+
+message DataTypeMilliseconds {
+}
+
+message DataTypeMonsterMoveSpline {
+}
+
+message DataTypeNamedGuid {
+}
+
+message DataTypePackedGuid {
+}
+
+message DataTypePopulation {
+}
+
+message DataTypeSeconds {
+}
+
+message DataTypeSizedCString {
+}
+
+message DataTypeSpell {
+}
+
+message DataTypeSpell16 {
+}
+
+message DataTypeString {
+}
+
+message DataTypeStruct {
+  Container struct_data = 1;
+}
+
+message DataTypeUpdateMask {
+}
+
+message DataTypeVariableItemRandomProperty {
+}
+
+message Definer {
+  string name = 1;
+  DefinerType definer_type = 2;
+  repeated DefinerObjectsUsedInItem objects_used_in = 3;
+  repeated Enumerator enumerators = 4;
+  IntegerType integer_type = 5;
+  ObjectTags tags = 6;
+  FileInfo file_info = 7;
+}
+
+message DefinerObjectsUsedInItem {
+  string object_name = 1;
+  DefinerUsage definer_usage = 2;
+}
+
+message Definition {
+  string name = 1;
+  DataType data_type = 2;
+  Value constant_value = 3;
+  optional uint32 size_of_fields_before_size = 4;
+  optional string used_as_size_in = 5;
+  bool used_in_if = 6;
+  MemberTags tags = 7;
+}
+
+message Enumerator {
+  string name = 1;
+  Value value = 2;
+  MemberTags tags = 3;
+}
+
+message FileInfo {
+  string file_name = 1;
+  uint32 start_position = 2;
+  uint32 end_position = 3;
+}
+
+message FloatingPointValue {
+  double value = 1;
+  string original_string = 2;
+}
+
+message IfStatement {
+  string variable_name = 1;
+  DefinerType definer_type = 2;
+  repeated string values = 3;
+  repeated StructMember members = 4;
+  repeated IfStatement else_if_statements = 5;
+  DataType original_type = 6;
+  bool part_of_separate_if_statement = 7;
+  bool is_else_if_flag = 8;
+}
+
+message LoginVersions {
+  string login_version_tag = 1;
+  oneof kind {
+    LoginVersionsSpecific specific = 2;
+    LoginVersionsAll all = 3;
+  }
+}
+
+message LoginVersionsAll {
+}
+
+message LoginVersionsSpecific {
+  repeated uint32 versions = 1;
+}
+
+message MemberTags {
+  optional string comment = 1;
+  optional string display = 2;
+  optional string maximum_length = 3;
+  MemberTagsValidRange valid_range = 4;
+}
+
+message MemberTagsValidRange {
+  string from = 1;
+  string to_field = 2;
+}
+
+message ObjectTags {
+  ObjectVersions version = 1;
+  optional string comment = 2;
+  optional bool unimplemented = 3;
+  optional bool compressed = 4;
+  optional bool non_network_type = 5;
+  optional bool used_in_update_mask = 6;
+}
+
+message ObjectType {
+  string container_type_tag = 1;
+  oneof kind {
+    ObjectTypeStruct struct = 2;
+    ObjectTypeCLogin clogin = 3;
+    ObjectTypeSLogin slogin = 4;
+    ObjectTypeMsg msg = 5;
+    ObjectTypeCMsg cmsg = 6;
+    ObjectTypeSMsg smsg = 7;
+  }
+}
+
+message ObjectTypeCLogin {
+  uint32 opcode = 1;
+}
+
+message ObjectTypeCMsg {
+  uint32 opcode = 1;
+}
+
+message ObjectTypeMsg {
+  uint32 opcode = 1;
+}
+
+message ObjectTypeSLogin {
+  uint32 opcode = 1;
+}
+
+message ObjectTypeSMsg {
+  uint32 opcode = 1;
+}
+
+message ObjectTypeStruct {
+}
+
+message ObjectVersions {
+  string version_type_tag = 1;
+  oneof kind {
+    ObjectVersionsLogin login = 2;
+    ObjectVersionsWorld world = 3;
+  }
+}
+
+message ObjectVersionsLogin {
+  LoginVersions version_type = 1;
+}
+
+message ObjectVersionsWorld {
+  WorldVersions version_type = 1;
+}
+
+message Objects {
+  repeated Definer enums = 1;
+  repeated Definer flags = 2;
+  repeated Container structs = 3;
+  repeated Container messages = 4;
+}
+
+message OptionalMembers {
+  string name = 1;
+  repeated StructMember members = 2;
+  repeated PreparedObject prepared_objects = 3;
+}
+
+message PreparedObject {
+  string name = 1;
+  bool is_elseif_flag = 2;
+  bool enum_part_of_separate_statements = 3;
+  map<string, PreparedObjectEnumeratorsValueList> enumerators = 4;
+  DefinerType definer_type = 5;
+}
+
+message PreparedObjectEnumeratorsValueList {
+  repeated PreparedObject items = 1;
+}
+
+message SchemaVersion {
+  uint32 major = 1;
+  uint32 minor = 2;
+  uint32 patch = 3;
+}
+
+message Sizes {
+  bool constant_sized = 1;
+  uint32 minimum_size = 2;
+  uint32 maximum_size = 3;
+}
+
+message StructMember {
+  string struct_member_tag = 1;
+  oneof kind {
+    StructMemberDefinition definition = 2;
+    StructMemberIfStatement if_statement = 3;
+  }
+}
+
+message StructMemberDefinition {
+  Definition struct_member_content = 1;
+}
+
+message StructMemberIfStatement {
+  IfStatement struct_member_content = 1;
+}
+
+message TestCase {
+  string subject = 1;
+  repeated TestCaseMember members = 2;
+  repeated uint32 raw_bytes = 3;
+  ObjectTags tags = 4;
+  FileInfo file_info = 5;
+}
+
+message TestCaseMember {
+  string variable_name = 1;
+  TestCaseValue value = 2;
+  MemberTags tags = 3;
+}
+
+message TestCaseValue {
+  string test_value_tag = 1;
+  oneof kind {
+    TestCaseValueInteger integer = 2;
+    TestCaseValueBool bool_field = 3;
+    TestCaseValuePopulation population = 4;
+    TestCaseValueDateTime date_time = 5;
+    TestCaseValueGuid guid = 6;
+    TestCaseValueFloatingPoint floating_point = 7;
+    TestCaseValueArray array = 8;
+    TestCaseValueString string_field = 9;
+    TestCaseValueFlag flag = 10;
+    TestCaseValueEnum enum_field = 11;
+    TestCaseValueSubObject sub_object = 12;
+    TestCaseValueArrayOfSubObject array_of_sub_object = 13;
+    TestCaseValueUpdateMask update_mask = 14;
+    TestCaseValueIpAddress ip_address = 15;
+    TestCaseValueSeconds seconds = 16;
+    TestCaseValueMilliseconds milliseconds = 17;
+    TestCaseValueGold gold = 18;
+    TestCaseValueLevel level = 19;
+    TestCaseValueMonsterMoveSpline monster_move_spline = 20;
+  }
+}
+
+message TestCaseValueArray {
+  TestCaseValueArrayContent content = 1;
+}
+
+message TestCaseValueArrayContent {
+  repeated string values = 1;
+  ArraySize size = 2;
+}
+
+message TestCaseValueArrayOfSubObject {
+  TestCaseValueArrayOfSubObjectContent content = 1;
+}
+
+message TestCaseValueArrayOfSubObjectContent {
+  string type_name = 1;
+  repeated TestCaseValueArrayOfSubObjectContentMembersItemList members = 2;
+  ArraySize size = 3;
+}
+
+message TestCaseValueArrayOfSubObjectContentMembersItemList {
+  repeated TestCaseMember items = 1;
+}
+
+message TestCaseValueBool {
+  bool content = 1;
+}
+
+message TestCaseValueDateTime {
+  Value content = 1;
+}
+
+message TestCaseValueEnum {
+  Value content = 1;
+}
+
+message TestCaseValueFlag {
+  repeated string content = 1;
+}
+
+message TestCaseValueFloatingPoint {
+  FloatingPointValue content = 1;
+}
+
+message TestCaseValueGold {
+  Value content = 1;
+}
+
+message TestCaseValueGuid {
+  Value content = 1;
+}
+
+message TestCaseValueInteger {
+  Value content = 1;
+}
+
+message TestCaseValueIpAddress {
+  Value content = 1;
+}
+
+message TestCaseValueLevel {
+  Value content = 1;
+}
+
+message TestCaseValueMilliseconds {
+  Value content = 1;
+}
+
+message TestCaseValueMonsterMoveSpline {
+  repeated TestCaseValueMonsterMoveSplineContentItem content = 1;
+}
+
+message TestCaseValueMonsterMoveSplineContentItem {
+  float x = 1;
+  float y = 2;
+  float z = 3;
+}
+
+message TestCaseValuePopulation {
+  float content = 1;
+}
+
+message TestCaseValueSeconds {
+  Value content = 1;
+}
+
+message TestCaseValueString {
+  string content = 1;
+}
+
+message TestCaseValueSubObject {
+  TestCaseValueSubObjectContent content = 1;
+}
+
+message TestCaseValueSubObjectContent {
+  string type_name = 1;
+  repeated TestCaseMember members = 2;
+}
+
+message TestCaseValueUpdateMask {
+  repeated TestCaseValueUpdateMaskContentItem content = 1;
+}
+
+message TestCaseValueUpdateMaskContentItem {
+  TestCaseValueUpdateMaskContentItemUpdateMaskTypeEnum update_mask_type = 1;
+  string update_mask_name = 2;
+  string update_mask_value = 3;
+}
+
+message TwoShortType {
+  string name = 1;
+  TwoShortTypeInnerType inner_type = 2;
+}
+
+message TwoShortTypeInnerType {
+  string two_short_type_tag = 1;
+  oneof kind {
+    TwoShortTypeInnerTypeShort short = 2;
+    TwoShortTypeInnerTypeDefiner definer = 3;
+  }
+}
+
+message TwoShortTypeInnerTypeDefiner {
+  string two_short_type = 1;
+}
+
+message TwoShortTypeInnerTypeShort {
+}
+
+message UpdateMask {
+  UpdateMaskObjectTypeEnum object_type = 1;
+  string name = 2;
+  uint32 offset = 3;
+  uint32 size = 4;
+  UpdateMaskDataType data_type = 5;
+}
+
+message UpdateMaskDataType {
+  string update_mask_type_tag = 1;
+  oneof kind {
+    UpdateMaskDataTypeGuid guid = 2;
+    UpdateMaskDataTypeInt int_field = 3;
+    UpdateMaskDataTypeFloat float_field = 4;
+    UpdateMaskDataTypeTwoShort two_short = 5;
+    UpdateMaskDataTypeGuidArrayUsingEnum guid_array_using_enum = 6;
+    UpdateMaskDataTypeArrayOfStruct array_of_struct = 7;
+    UpdateMaskDataTypeBytes bytes_field = 8;
+  }
+}
+
+message UpdateMaskDataTypeArrayOfStruct {
+  UpdateMaskDataTypeArrayOfStructContent content = 1;
+}
+
+message UpdateMaskDataTypeArrayOfStructContent {
+  UpdateMaskStruct update_mask_struct = 1;
+  int32 size = 2;
+  string variable_name = 3;
+}
+
+message UpdateMaskDataTypeBytes {
+  UpdateMaskDataTypeBytesContent content = 1;
+}
+
+message UpdateMaskDataTypeBytesContent {
+  ByteType first = 1;
+  ByteType second = 2;
+  ByteType third = 3;
+  ByteType fourth = 4;
+}
+
+message UpdateMaskDataTypeFloat {
+}
+
+message UpdateMaskDataTypeGuid {
+}
+
+message UpdateMaskDataTypeGuidArrayUsingEnum {
+  UpdateMaskDataTypeGuidArrayUsingEnumContent content = 1;
+}
+
+message UpdateMaskDataTypeGuidArrayUsingEnumContent {
+  Definer definer = 1;
+  string variable_name = 2;
+}
+
+message UpdateMaskDataTypeInt {
+}
+
+message UpdateMaskDataTypeTwoShort {
+  UpdateMaskDataTypeTwoShortContent content = 1;
+}
+
+message UpdateMaskDataTypeTwoShortContent {
+  TwoShortType first = 1;
+  TwoShortType second = 2;
+}
+
+message UpdateMaskStruct {
+  string name = 1;
+  Sizes sizes = 2;
+  FileInfo file_info = 3;
+  ObjectTags tags = 4;
+  repeated UpdateMaskStructMembersItemList members = 5;
+}
+
+message UpdateMaskStructMembersItemItem {
+  Definition member = 1;
+  int32 offset = 2;
+  int32 size = 3;
+}
+
+message UpdateMaskStructMembersItemList {
+  repeated UpdateMaskStructMembersItemItem items = 1;
+}
+
+message Value {
+  string value = 1;
+  string original_string = 2;
+}
+
+message WorldVersion {
+  uint32 major = 1;
+  optional uint32 minor = 2;
+  optional uint32 patch = 3;
+  optional uint32 build = 4;
+}
+
+message WorldVersions {
+  string world_version_tag = 1;
+  oneof kind {
+    WorldVersionsSpecific specific = 2;
+    WorldVersionsAll all = 3;
+  }
+}
+
+message WorldVersionsAll {
+}
+
+message WorldVersionsSpecific {
+  repeated WorldVersion versions = 1;
+}
+
+message WowMessagesSchema {
+  SchemaVersion version = 1;
+  Objects world = 2;
+  map<string, WowMessagesSchemaIntegerTypeInformationValue> integer_type_information = 3;
+  repeated uint32 distinct_login_versions_other_than_all = 4;
+  map<string, uint32> login_version_opcodes = 5;
+  Objects login = 6;
+  repeated UpdateMask vanilla_update_mask = 7;
+  repeated UpdateMask tbc_update_mask = 8;
+  repeated UpdateMask wrath_update_mask = 9;
+}
+
+message WowMessagesSchemaIntegerTypeInformationValue {
+  uint32 size = 1;
+  uint32 bits = 2;
+}
