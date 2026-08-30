@@ -120,12 +120,7 @@ fn main() {
 }
 
 fn load_and_print_wowm_files() {
-    let mut o = ParsedObjects::empty();
-
-    load_files(&wowm_directory("login"), &mut o);
-    load_files(&wowm_directory("world"), &mut o);
-
-    let o = o.into_objects();
+    let o = parse_objects_in_directory(&wowm_directory());
 
     wireshark_printer::print_wireshark(&o);
 
@@ -259,7 +254,9 @@ fn write_login_opcodes(o: &Objects) {
     }
 }
 
-fn load_files(dir: &Path, components: &mut ParsedObjects) {
+pub(crate) fn parse_objects_in_directory(dir: &Path) -> Objects {
+    let mut components = ParsedObjects::empty();
+
     for file in WalkDir::new(dir).into_iter().filter_map(|a| a.ok()) {
         if !file.file_type().is_file() {
             continue;
@@ -267,6 +264,8 @@ fn load_files(dir: &Path, components: &mut ParsedObjects) {
         let c = parser::parse_file(file.path());
         components.add_vecs(c);
     }
+
+    components.into_objects()
 }
 
 fn should_not_write_object(t: &ObjectTags) -> bool {

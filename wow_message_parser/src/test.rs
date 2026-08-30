@@ -11,7 +11,7 @@ use crate::parser::types::objects::Objects;
 use crate::path_utils::parser_test_directory;
 use crate::rust_printer::writer::Writer;
 use crate::rust_printer::{print_enum, print_flag, print_struct};
-use crate::{load_files, print_message_stats, ParsedObjects};
+use crate::{parse_objects_in_directory, print_message_stats, ParsedObjects};
 use std::fs::read_to_string;
 use std::panic;
 use std::path::Path;
@@ -40,11 +40,7 @@ fn must_err_load(file_name: &str) -> Objects {
 }
 
 fn get_all_impl_items() -> Objects {
-    let mut o = ParsedObjects::empty();
-
-    load_files(Path::new("tests/impl_levels.wowm"), &mut o);
-
-    o.into_objects()
+    parse_objects_in_directory(Path::new("tests/impl_levels.wowm"))
 }
 
 fn tcheck(s: &Writer, name: &str) {
