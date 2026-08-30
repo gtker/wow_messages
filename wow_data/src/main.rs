@@ -26,6 +26,7 @@ mod base_printer;
 mod path_utils;
 mod writer;
 mod file_utils;
+mod ordered_float;
 
 fn main() {
     base_printer::print_base();

@@ -1,9 +1,9 @@
 use crate::base_printer::Expansion;
 use std::collections::HashMap;
-use ordered_float::OrderedFloat;
 use std::cmp::Ordering;
 use std::collections::BTreeSet;
 use std::path::Path;
+
 
 pub mod tbc;
 pub mod vanilla;
@@ -16,6 +16,7 @@ use wow_world_base::shared as shared_base;
 use wow_world_base::tbc as tbc_base;
 use wow_world_base::vanilla as vanilla_base;
 use wow_world_base::wrath as wrath_base;
+use crate::ordered_float::OrderedFloat;
 
 #[derive(Debug, Clone)]
 pub enum FieldOptimization {
@@ -360,7 +361,7 @@ pub enum Value {
     Int64(i64),
     Uint(u32),
     Uint64(u64),
-    Float(OrderedFloat<f32>),
+    Float(OrderedFloat),
 
     VanillaItemClassAndSubClass(vanilla_base::ItemClassAndSubClass),
     TbcItemClassAndSubClass(tbc_base::ItemClassAndSubClass),
