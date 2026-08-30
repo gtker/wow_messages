@@ -1,4 +1,3 @@
-pub mod items;
 
 use super::data::Data;
 use super::Expansion;

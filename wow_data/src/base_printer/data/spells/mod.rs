@@ -6,7 +6,7 @@ use crate::base_printer::data::items::Optimizations;
 use crate::base_printer::data::spells::tbc::tbc;
 use crate::base_printer::data::spells::vanilla::vanilla;
 use crate::base_printer::data::spells::wrath::wrath;
-use crate::base_printer::write::items::GenericThing;
+use crate::base_printer::write::GenericThing;
 use crate::base_printer::Expansion;
 use std::path::Path;
 

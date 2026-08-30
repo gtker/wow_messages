@@ -1,29 +1,32 @@
 use crate::base_printer::data::get_fields;
-use crate::base_printer::data::items::vanilla::assertions;
 use crate::base_printer::data::items::{
     process_extra_flags, Array, ArrayField, ArrayInstance, ArrayInstances, Field, Optimizations,
     Value,
 };
 use crate::base_printer::read_csv_file;
-use crate::base_printer::write::items::GenericThing;
+use crate::base_printer::write::conversions::vanilla_stat_types_to_stats;
+use crate::base_printer::write::GenericThing;
 use serde::Deserialize;
 use std::path::Path;
-use wow_world_base::wrath::Skill;
+use wow_world_base::vanilla::Skill;
+
+pub(crate) fn assertions(items: &[GenericThing]) {
+    let no_name_has_non_ascii_char = items.iter().all(|a| a.name.is_ascii());
+    assert!(no_name_has_non_ascii_char);
+}
 
 #[derive(Deserialize)]
-struct WrathItem {
+struct VanillaItem {
     pub entry: u32,
     pub name: String,
     pub class: i32,
-    pub subclass: i32,
+    pub subclass: u32,
     #[serde(rename = "displayid")]
     pub display_id: u32,
     #[serde(rename = "Quality")]
     pub quality: u32,
     #[serde(rename = "Flags")]
     pub flags: u32,
-    #[serde(rename = "Flags2")]
-    pub flags2: u32,
     #[serde(rename = "BuyCount")]
     pub buy_count: i32,
     #[serde(rename = "BuyPrice")]
@@ -60,8 +63,6 @@ struct WrathItem {
     #[serde(rename = "ContainerSlots")]
     pub container_slots: i32,
 
-    #[serde(rename = "StatsCount")]
-    pub stats_count: i32,
     pub stat_type1: i32,
     pub stat_value1: i32,
     pub stat_type2: i32,
@@ -89,6 +90,15 @@ struct WrathItem {
     pub dmg_min2: f32,
     pub dmg_max2: f32,
     pub dmg_type2: u32,
+    pub dmg_min3: f32,
+    pub dmg_max3: f32,
+    pub dmg_type3: u32,
+    pub dmg_min4: f32,
+    pub dmg_max4: f32,
+    pub dmg_type4: u32,
+    pub dmg_min5: f32,
+    pub dmg_max5: f32,
+    pub dmg_type5: u32,
     pub armor: i32,
     pub holy_res: i32,
     pub fire_res: i32,
@@ -215,52 +225,38 @@ struct WrathItem {
     pub duration: i32,
     #[serde(rename = "ExtraFlags")]
     pub extra_flags: i32,
-
-    #[serde(rename = "unk0")]
-    pub sound_override_sub_class: i32,
-    #[serde(rename = "RandomSuffix")]
-    pub random_suffix: i32,
-    #[serde(rename = "TotemCategory")]
-    pub totem_category: i32,
-    #[serde(rename = "socketColor_1")]
-    pub socket_color_1: u32,
-    #[serde(rename = "socketContent_1")]
-    pub socket_content_1: u32,
-    #[serde(rename = "socketColor_2")]
-    pub socket_color_2: u32,
-    #[serde(rename = "socketContent_2")]
-    pub socket_content_2: u32,
-    #[serde(rename = "socketColor_3")]
-    pub socket_color_3: u32,
-    #[serde(rename = "socketContent_3")]
-    pub socket_content_3: u32,
-    #[serde(rename = "socketBonus")]
-    pub socket_bonus: i32,
-    #[serde(rename = "GemProperties")]
-    pub gem_properties: i32,
-    #[serde(rename = "RequiredDisenchantSkill")]
-    pub required_disenchant_skill: i32,
-    #[serde(rename = "ArmorDamageModifier")]
-    pub armor_damage_modifier: f32,
-
-    #[serde(rename = "ScalingStatDistribution")]
-    pub scaling_stat_distribution: i32,
-    #[serde(rename = "ScalingStatValue")]
-    pub scaling_stat_value: i32,
-    #[serde(rename = "ItemLimitCategory")]
-    pub item_limit_category: i32,
-    #[serde(rename = "HolidayId")]
-    pub holiday_id: i32,
 }
 
-pub fn wrath(dir: &Path) -> (Vec<GenericThing>, Optimizations) {
-    let items = read_csv_file::<WrathItem>(dir, "items");
+pub fn vanilla(dir: &Path) -> (Vec<GenericThing>, Optimizations) {
+    let items = read_csv_file::<VanillaItem>(dir, "items");
+
     let items: Vec<_> = items
         .into_iter()
         .map(|row| {
+            let sub_class = {
+                const CLASS_CONSUMABLE: i32 = 0;
+                const CLASS_TRADE_GOODS: i32 = 7;
+                const CLASS_JUNK: i32 = 15;
+
+                // The game does not recognize consumables other than class 0 and subclass 0,
+                // but the cmangos database uses these for some reason
+                if row.class == CLASS_CONSUMABLE
+                    // The game does not recognize trade goods for greater than 3 (Devices)
+                    // but the cmangos database uses these for some reason
+                    || row.class == CLASS_TRADE_GOODS && row.subclass > 3
+                    // The game does not recognize junk subclasses other than class 15 and subclass 0,
+                    // but the cmangos database uses these for some reason
+                    || row.class == CLASS_JUNK
+                {
+                    0
+                } else {
+                    row.subclass
+                }
+            };
+
             let (required_skill, required_skill_rank) = {
                 let skill = row.required_skill;
-                let (skill, required_skill_level) = if skill == 40 || skill == 242 {
+                let (skill, required_skill_level) = if skill == 242 {
                     // Cmangos weirdly uses a non existent skill
                     (0, 0)
                 } else {
@@ -269,31 +265,48 @@ pub fn wrath(dir: &Path) -> (Vec<GenericThing>, Optimizations) {
                 (Skill::try_from(skill).unwrap(), required_skill_level)
             };
 
+            let stats = vanilla_stat_types_to_stats(
+                row.stat_type1,
+                row.stat_value1,
+                row.stat_type2,
+                row.stat_value2,
+                row.stat_type3,
+                row.stat_value3,
+                row.stat_type4,
+                row.stat_value4,
+                row.stat_type5,
+                row.stat_value5,
+                row.stat_type6,
+                row.stat_value6,
+                row.stat_type7,
+                row.stat_value7,
+                row.stat_type8,
+                row.stat_value8,
+                row.stat_type9,
+                row.stat_value9,
+                row.stat_type10,
+                row.stat_value10,
+            );
+            let class_and_sub_class = wow_world_base::vanilla::ItemClassAndSubClass::try_from(
+                (sub_class as u64) << 32 | row.class as u64,
+            )
+            .unwrap();
+
             let fields = vec![
                 Field::new("entry", Value::Uint(row.entry)),
                 Field::new(
                     "class_and_sub_class",
-                    Value::WrathItemClassAndSubClass(
-                        wow_world_base::wrath::ItemClassAndSubClass::try_from(
-                            (row.subclass as u64) << 32 | row.class as u64,
-                        )
-                        .unwrap(),
-                    ),
-                ),
-                Field::new(
-                    "sound_override_sub_class",
-                    Value::Int(row.sound_override_sub_class),
+                    Value::VanillaItemClassAndSubClass(class_and_sub_class),
                 ),
                 Field::new("name", Value::String(row.name.clone())),
                 Field::new("display_id", Value::Uint(row.display_id)),
                 Field::new(
                     "quality",
-                    Value::WrathItemQuality(row.quality.try_into().unwrap()),
+                    Value::VanillaTbcItemQuality(row.quality.try_into().unwrap()),
                 ),
-                Field::new("flags", Value::WrathItemFlag(row.flags.try_into().unwrap())),
                 Field::new(
-                    "flags2",
-                    Value::WrathItemFlag2(row.flags2.try_into().unwrap()),
+                    "flags",
+                    Value::VanillaItemFlag(row.flags.try_into().unwrap()),
                 ),
                 Field::new("buy_count", Value::Int(row.buy_count)),
                 Field::new("buy_price", Value::Gold(row.buy_price.try_into().unwrap())),
@@ -307,17 +320,17 @@ pub fn wrath(dir: &Path) -> (Vec<GenericThing>, Optimizations) {
                 ),
                 Field::new(
                     "allowed_class",
-                    Value::WrathAllowedClass(row.allowed_class.try_into().unwrap()),
+                    Value::VanillaTbcAllowedClass(row.allowed_class.try_into().unwrap()),
                 ),
                 Field::new(
                     "allowed_race",
-                    Value::WrathAllowedRace(row.allowed_race.try_into().unwrap()),
+                    Value::VanillaAllowedRace(row.allowed_race.try_into().unwrap()),
                 ),
                 Field::new("item_level", Value::Int(row.item_level)),
                 Field::new("required_level", Value::Int(row.required_level)),
                 Field::new(
                     "required_skill",
-                    Value::WrathSkill(required_skill.try_into().unwrap()),
+                    Value::VanillaSkill(required_skill.try_into().unwrap()),
                 ),
                 Field::new("required_skill_rank", Value::Int(required_skill_rank)),
                 Field::new("required_spell", Value::Int(row.required_spell)),
@@ -328,7 +341,7 @@ pub fn wrath(dir: &Path) -> (Vec<GenericThing>, Optimizations) {
                 Field::new("required_city_rank", Value::Int(row.required_city_rank)),
                 Field::new(
                     "required_faction",
-                    Value::WrathFaction(row.required_faction.try_into().unwrap()),
+                    Value::VanillaFaction(row.required_faction.try_into().unwrap()),
                 ),
                 Field::new(
                     "required_reputation_rank",
@@ -337,12 +350,13 @@ pub fn wrath(dir: &Path) -> (Vec<GenericThing>, Optimizations) {
                 Field::new("max_count", Value::Int(row.max_count)),
                 Field::new("stackable", Value::Int(row.stackable)),
                 Field::new("container_slots", Value::Int(row.container_slots)),
-                Field::new("stats_count", Value::Int(row.stats_count)),
-                Field::new(
-                    "scaling_stat_distribution",
-                    Value::Int(row.scaling_stat_distribution),
-                ),
-                Field::new("scaling_stat_value", Value::Int(row.scaling_stat_value)),
+                Field::new("mana", Value::Int(stats.mana)),
+                Field::new("health", Value::Int(stats.health)),
+                Field::new("agility", Value::Int(stats.agility)),
+                Field::new("strength", Value::Int(stats.strength)),
+                Field::new("stamina", Value::Int(stats.stamina)),
+                Field::new("intellect", Value::Int(stats.intellect)),
+                Field::new("spirit", Value::Int(stats.spirit)),
                 Field::new("armor", Value::Int(row.armor)),
                 Field::new("holy_res", Value::Int(row.holy_res)),
                 Field::new("fire_res", Value::Int(row.fire_res)),
@@ -358,11 +372,11 @@ pub fn wrath(dir: &Path) -> (Vec<GenericThing>, Optimizations) {
                 Field::new("page_text", Value::Int(row.page_text)),
                 Field::new(
                     "language",
-                    Value::TbcWrathLanguage(row.language.try_into().unwrap()),
+                    Value::VanillaLanguage(row.language.try_into().unwrap()),
                 ),
                 Field::new(
                     "page_text_material",
-                    Value::TbcWrathPageTextMaterial(row.page_text_material.try_into().unwrap()),
+                    Value::VanillaPageTextMaterial(row.page_text_material.try_into().unwrap()),
                 ),
                 Field::new("start_quest", Value::Int(row.start_quest)),
                 Field::new("lock_id", Value::Int(row.lock_id)),
@@ -372,37 +386,23 @@ pub fn wrath(dir: &Path) -> (Vec<GenericThing>, Optimizations) {
                     Value::SheatheType(row.sheathe_type.try_into().unwrap()),
                 ),
                 Field::new("random_property", Value::Int(row.random_property)),
-                Field::new("random_suffix", Value::Int(row.random_suffix)),
                 Field::new("block", Value::Int(row.block)),
                 Field::new(
                     "item_set",
-                    Value::WrathItemSet(row.item_set.try_into().unwrap()),
+                    Value::VanillaItemSet(row.item_set.try_into().unwrap()),
                 ),
                 Field::new("max_durability", Value::Int(row.max_durability)),
-                Field::new("area", Value::WrathArea(row.area.try_into().unwrap())),
-                Field::new("map", Value::WrathMap(row.map.try_into().unwrap())),
+                Field::new("area", Value::VanillaArea(row.area.try_into().unwrap())),
+                Field::new("map", Value::VanillaMap(row.map.try_into().unwrap())),
                 Field::new(
                     "bag_family",
-                    Value::TbcWrathBagFamily(row.bag_family.try_into().unwrap()),
+                    Value::VanillaBagFamily(row.bag_family.try_into().unwrap()),
                 ),
-                Field::new("totem_category", Value::Int(row.totem_category)),
-                Field::new("socket_bonus", Value::Int(row.socket_bonus)),
-                Field::new("gem_properties", Value::Int(row.gem_properties)),
-                Field::new(
-                    "required_disenchant_skill",
-                    Value::Int(row.required_disenchant_skill),
-                ),
-                Field::new(
-                    "armor_damage_modifier",
-                    Value::float(row.armor_damage_modifier),
-                ),
-                Field::new("duration", Value::Int(row.duration)),
-                Field::new("item_limit_category", Value::Int(row.item_limit_category)),
-                Field::new("holiday_id", Value::Int(row.holiday_id)),
                 Field::new("disenchant_id", Value::Int(row.disenchant_id)),
                 Field::new("food_type", Value::Int(row.food_type)),
                 Field::new("min_money_loot", Value::Int(row.min_money_loot)),
                 Field::new("max_money_loot", Value::Int(row.max_money_loot)),
+                Field::new("duration", Value::Int(row.duration)),
                 Field::new(
                     "extra_flags",
                     Value::Int(process_extra_flags(row.entry, row.extra_flags, &row.name)),
@@ -410,49 +410,6 @@ pub fn wrath(dir: &Path) -> (Vec<GenericThing>, Optimizations) {
             ];
 
             let arrays = vec![
-                Array::new(
-                    "sockets",
-                    "ItemSocket",
-                    true,
-                    ArrayInstances::new(vec![
-                        ArrayInstance::default_values(vec![
-                            ArrayField::new(
-                                "color",
-                                "socket_color_1",
-                                Value::Uint(row.socket_color_1),
-                            ),
-                            ArrayField::new(
-                                "content",
-                                "socket_content_1",
-                                Value::Uint(row.socket_content_1),
-                            ),
-                        ]),
-                        ArrayInstance::default_values(vec![
-                            ArrayField::new(
-                                "color",
-                                "socket_color_2",
-                                Value::Uint(row.socket_color_2),
-                            ),
-                            ArrayField::new(
-                                "content",
-                                "socket_content_2",
-                                Value::Uint(row.socket_content_2),
-                            ),
-                        ]),
-                        ArrayInstance::default_values(vec![
-                            ArrayField::new(
-                                "color",
-                                "socket_color_3",
-                                Value::Uint(row.socket_color_3),
-                            ),
-                            ArrayField::new(
-                                "content",
-                                "socket_content_3",
-                                Value::Uint(row.socket_content_3),
-                            ),
-                        ]),
-                    ]),
-                ),
                 Array::new(
                     "damages",
                     "ItemDamageType",
@@ -498,160 +455,63 @@ pub fn wrath(dir: &Path) -> (Vec<GenericThing>, Optimizations) {
                                 ),
                             ],
                         ),
-                    ]),
-                ),
-                Array::new(
-                    "stats",
-                    "ItemStat",
-                    true,
-                    ArrayInstances::new(vec![
                         ArrayInstance::new(
-                            row.stat_value1 == 0,
+                            row.dmg_min3 == 0.0 && row.dmg_max3 == 0.0,
                             vec![
                                 ArrayField::new(
-                                    "stat_type",
-                                    "stat_type1",
-                                    Value::Uint(row.stat_type1.try_into().unwrap()),
+                                    "damage_minimum",
+                                    "dmg_min3",
+                                    Value::float(row.dmg_min3),
                                 ),
                                 ArrayField::new(
-                                    "value",
-                                    "stat_value1",
-                                    Value::Int(row.stat_value1),
+                                    "damage_maximum",
+                                    "dmg_max3",
+                                    Value::float(row.dmg_max3),
+                                ),
+                                ArrayField::new(
+                                    "school",
+                                    "dmg_type3",
+                                    Value::SpellSchool(row.dmg_type3.try_into().unwrap()),
                                 ),
                             ],
                         ),
                         ArrayInstance::new(
-                            row.stat_value2 == 0,
+                            row.dmg_min4 == 0.0 && row.dmg_max4 == 0.0,
                             vec![
                                 ArrayField::new(
-                                    "stat_type",
-                                    "stat_type2",
-                                    Value::Uint(row.stat_type2.try_into().unwrap()),
+                                    "damage_minimum",
+                                    "dmg_min4",
+                                    Value::float(row.dmg_min4),
                                 ),
                                 ArrayField::new(
-                                    "value",
-                                    "stat_value2",
-                                    Value::Int(row.stat_value2),
+                                    "damage_maximum",
+                                    "dmg_max4",
+                                    Value::float(row.dmg_max4),
+                                ),
+                                ArrayField::new(
+                                    "school",
+                                    "dmg_type4",
+                                    Value::SpellSchool(row.dmg_type4.try_into().unwrap()),
                                 ),
                             ],
                         ),
                         ArrayInstance::new(
-                            row.stat_value3 == 0,
+                            row.dmg_min5 == 0.0 && row.dmg_max5 == 0.0,
                             vec![
                                 ArrayField::new(
-                                    "stat_type",
-                                    "stat_type3",
-                                    Value::Uint(row.stat_type3.try_into().unwrap()),
+                                    "damage_minimum",
+                                    "dmg_min5",
+                                    Value::float(row.dmg_min5),
                                 ),
                                 ArrayField::new(
-                                    "value",
-                                    "stat_value3",
-                                    Value::Int(row.stat_value3),
-                                ),
-                            ],
-                        ),
-                        ArrayInstance::new(
-                            row.stat_value4 == 0,
-                            vec![
-                                ArrayField::new(
-                                    "stat_type",
-                                    "stat_type4",
-                                    Value::Uint(row.stat_type4.try_into().unwrap()),
+                                    "damage_maximum",
+                                    "dmg_max5",
+                                    Value::float(row.dmg_max5),
                                 ),
                                 ArrayField::new(
-                                    "value",
-                                    "stat_value4",
-                                    Value::Int(row.stat_value4),
-                                ),
-                            ],
-                        ),
-                        ArrayInstance::new(
-                            row.stat_value5 == 0,
-                            vec![
-                                ArrayField::new(
-                                    "stat_type",
-                                    "stat_type5",
-                                    Value::Uint(row.stat_type5.try_into().unwrap()),
-                                ),
-                                ArrayField::new(
-                                    "value",
-                                    "stat_value5",
-                                    Value::Int(row.stat_value5),
-                                ),
-                            ],
-                        ),
-                        ArrayInstance::new(
-                            row.stat_value6 == 0,
-                            vec![
-                                ArrayField::new(
-                                    "stat_type",
-                                    "stat_type6",
-                                    Value::Uint(row.stat_type6.try_into().unwrap()),
-                                ),
-                                ArrayField::new(
-                                    "value",
-                                    "stat_value6",
-                                    Value::Int(row.stat_value6),
-                                ),
-                            ],
-                        ),
-                        ArrayInstance::new(
-                            row.stat_value7 == 0,
-                            vec![
-                                ArrayField::new(
-                                    "stat_type",
-                                    "stat_type7",
-                                    Value::Uint(row.stat_type7.try_into().unwrap()),
-                                ),
-                                ArrayField::new(
-                                    "value",
-                                    "stat_value7",
-                                    Value::Int(row.stat_value7),
-                                ),
-                            ],
-                        ),
-                        ArrayInstance::new(
-                            row.stat_value8 == 0,
-                            vec![
-                                ArrayField::new(
-                                    "stat_type",
-                                    "stat_type8",
-                                    Value::Uint(row.stat_type8.try_into().unwrap()),
-                                ),
-                                ArrayField::new(
-                                    "value",
-                                    "stat_value8",
-                                    Value::Int(row.stat_value8),
-                                ),
-                            ],
-                        ),
-                        ArrayInstance::new(
-                            row.stat_value9 == 0,
-                            vec![
-                                ArrayField::new(
-                                    "stat_type",
-                                    "stat_type9",
-                                    Value::Uint(row.stat_type9.try_into().unwrap()),
-                                ),
-                                ArrayField::new(
-                                    "value",
-                                    "stat_value9",
-                                    Value::Int(row.stat_value9),
-                                ),
-                            ],
-                        ),
-                        ArrayInstance::new(
-                            row.stat_value10 == 0,
-                            vec![
-                                ArrayField::new(
-                                    "stat_type",
-                                    "stat_type10",
-                                    Value::Uint(row.stat_type10.try_into().unwrap()),
-                                ),
-                                ArrayField::new(
-                                    "value",
-                                    "stat_value10",
-                                    Value::Int(row.stat_value10),
+                                    "school",
+                                    "dmg_type5",
+                                    Value::SpellSchool(row.dmg_type5.try_into().unwrap()),
                                 ),
                             ],
                         ),
@@ -669,7 +529,7 @@ pub fn wrath(dir: &Path) -> (Vec<GenericThing>, Optimizations) {
                                 ArrayField::new(
                                     "spell_trigger",
                                     "spell_trigger_1",
-                                    Value::TbcWrathSpellTriggerType(
+                                    Value::VanillaSpellTriggerType(
                                         row.spell_trigger_1.try_into().unwrap(),
                                     ),
                                 ),
@@ -707,7 +567,7 @@ pub fn wrath(dir: &Path) -> (Vec<GenericThing>, Optimizations) {
                                 ArrayField::new(
                                     "spell_trigger",
                                     "spell_trigger_2",
-                                    Value::TbcWrathSpellTriggerType(
+                                    Value::VanillaSpellTriggerType(
                                         row.spell_trigger_2.try_into().unwrap(),
                                     ),
                                 ),
@@ -745,7 +605,7 @@ pub fn wrath(dir: &Path) -> (Vec<GenericThing>, Optimizations) {
                                 ArrayField::new(
                                     "spell_trigger",
                                     "spell_trigger_3",
-                                    Value::TbcWrathSpellTriggerType(
+                                    Value::VanillaSpellTriggerType(
                                         row.spell_trigger_3.try_into().unwrap(),
                                     ),
                                 ),
@@ -783,7 +643,7 @@ pub fn wrath(dir: &Path) -> (Vec<GenericThing>, Optimizations) {
                                 ArrayField::new(
                                     "spell_trigger",
                                     "spell_trigger_4",
-                                    Value::TbcWrathSpellTriggerType(
+                                    Value::VanillaSpellTriggerType(
                                         row.spell_trigger_4.try_into().unwrap(),
                                     ),
                                 ),
@@ -821,7 +681,7 @@ pub fn wrath(dir: &Path) -> (Vec<GenericThing>, Optimizations) {
                                 ArrayField::new(
                                     "spell_trigger",
                                     "spell_trigger_5",
-                                    Value::TbcWrathSpellTriggerType(
+                                    Value::VanillaSpellTriggerType(
                                         row.spell_trigger_5.try_into().unwrap(),
                                     ),
                                 ),

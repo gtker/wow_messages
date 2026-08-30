@@ -1,4 +1,4 @@
-use crate::base_printer::write::items::Stats;
+use crate::base_printer::write::Stats;
 
 pub(crate) fn vanilla_stat_types_to_stats(
     stat_type1: i32,

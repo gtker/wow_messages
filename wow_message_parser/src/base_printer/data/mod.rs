@@ -1,15 +1,10 @@
 pub(crate) mod area_triggers;
-pub(crate) mod items;
 pub(crate) mod pet_names;
-pub(crate) mod spells;
 
 use super::position::{positions, RawPosition};
 use super::types::{Class, Race};
 use super::{read_csv_file, Expansion};
-use crate::base_printer::data::items::{get_items, Field, Optimizations};
 use crate::base_printer::data::pet_names::{get_pet_name_data, Pet, PetNames};
-use crate::base_printer::data::spells::get_spells;
-use crate::base_printer::write::items::GenericThing;
 use std::collections::HashMap;
 use serde::Deserialize;
 use std::collections::{BTreeMap, BTreeSet};
@@ -26,8 +21,6 @@ pub(crate) struct Data {
     pub actions: HashMap<Combination, BTreeSet<Action>>,
     pub triggers: Vec<Trigger>,
     pub pet_names: BTreeMap<Pet, PetNames>,
-    pub items: (Vec<GenericThing>, Optimizations),
-    pub spells: (Vec<GenericThing>, Optimizations),
 }
 
 impl Data {
@@ -40,13 +33,7 @@ impl Data {
     }
 }
 
-pub(crate) fn get_fields(things: &[GenericThing]) -> &[Field] {
-    &things[0].fields
-}
-
 pub(crate) fn get_data_from_csv_files(expansion: Expansion) -> Data {
-    let spell_thread =
-        std::thread::spawn(move || get_spells(expansion, &expansion.csv_data_directory()));
     let csv_directory = expansion.csv_data_directory();
 
     let combinations = get_combinations(&csv_directory);
@@ -59,9 +46,7 @@ pub(crate) fn get_data_from_csv_files(expansion: Expansion) -> Data {
     let positions = positions();
     let triggers = get_triggers(&csv_directory);
     let pet_names = get_pet_name_data(&csv_directory);
-    let items = get_items(&csv_directory, expansion);
 
-    let spells = spell_thread.join().unwrap();
 
     Data {
         exp_per_level,
@@ -74,8 +59,6 @@ pub(crate) fn get_data_from_csv_files(expansion: Expansion) -> Data {
         actions,
         triggers,
         pet_names,
-        items,
-        spells,
     }
 }
 

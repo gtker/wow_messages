@@ -3,15 +3,14 @@ use crate::base_printer::data::items::{
     Array, ArrayField, ArrayInstance, ArrayInstances, Field, Optimizations, Value,
 };
 use crate::base_printer::read_csv_file;
-use crate::base_printer::write::items::GenericThing;
+use crate::base_printer::write::GenericThing;
 use serde::Deserialize;
 use std::path::Path;
 
 #[derive(Deserialize)]
 #[serde(rename_all = "PascalCase")]
-pub struct VanillaSpell {
+pub(crate) struct TbcSpell {
     id: u32,
-    school: i32,
     category: i32,
     #[serde(rename = "CastUI")]
     cast_ui: i32,
@@ -22,6 +21,8 @@ pub struct VanillaSpell {
     attributes_ex2: u32,
     attributes_ex3: u32,
     attributes_ex4: u32,
+    attributes_ex5: u32,
+    attributes_ex6: u32,
     stances: u32,
     stances_not: u32,
     targets: i32,
@@ -62,14 +63,14 @@ pub struct VanillaSpell {
     reagent6: i32,
     reagent7: i32,
     reagent8: i32,
-    reagent_count1: i32,
-    reagent_count2: i32,
-    reagent_count3: i32,
-    reagent_count4: i32,
-    reagent_count5: i32,
-    reagent_count6: i32,
-    reagent_count7: i32,
-    reagent_count8: i32,
+    reagent_count1: u32,
+    reagent_count2: u32,
+    reagent_count3: u32,
+    reagent_count4: u32,
+    reagent_count5: u32,
+    reagent_count6: u32,
+    reagent_count7: u32,
+    reagent_count8: u32,
     equipped_item_class: i32,
     equipped_item_sub_class_mask: i32,
     equipped_item_inventory_type_mask: i32,
@@ -184,46 +185,86 @@ pub struct VanillaSpell {
     required_aura_vision: i32,
     is_server_side: i32,
     attributes_serverside: i32,
+    facing_caster_flags: i32,
+    caster_aura_state_not: i32,
+    target_aura_state_not: i32,
+    effect_misc_value_b1: i32,
+    effect_misc_value_b2: i32,
+    effect_misc_value_b3: i32,
+
+    #[allow(unused)] // Data is always either null or empty string
+    spell_name9: Option<String>,
+    #[allow(unused)] // Data is always either null or empty string
+    spell_name10: Option<String>,
+    #[allow(unused)] // Data is always either null or empty string
+    spell_name11: Option<String>,
+    #[allow(unused)] // Data is always either null or empty string
+    spell_name12: Option<String>,
+    #[allow(unused)] // Data is always either null or empty string
+    spell_name13: Option<String>,
+    #[allow(unused)] // Data is always either null or empty string
+    spell_name14: Option<String>,
+    #[allow(unused)] // Data is always either null or empty string
+    spell_name15: Option<String>,
+    #[allow(unused)] // Data is always either null or empty string
+    spell_name16: Option<String>,
+
+    #[allow(unused)] // Data is always either null or empty string
+    rank9: Option<String>,
+    #[allow(unused)] // Data is always either null or empty string
+    rank10: Option<String>,
+    #[allow(unused)] // Data is always either null or empty string
+    rank11: Option<String>,
+    #[allow(unused)] // Data is always either null or empty string
+    rank12: Option<String>,
+    #[allow(unused)] // Data is always either null or empty string
+    rank13: Option<String>,
+    #[allow(unused)] // Data is always either null or empty string
+    rank14: Option<String>,
+    #[allow(unused)] // Data is always either null or empty string
+    rank15: Option<String>,
+    #[allow(unused)] // Data is always either null or empty string
+    rank16: Option<String>,
+
+    totem_category1: i32,
+    totem_category2: i32,
+    area_id: i32,
+    school_mask: i32,
 }
 
-pub(crate) fn vanilla(dir: &Path) -> (Vec<GenericThing>, Optimizations) {
-    let spells: Vec<_> = read_csv_file::<VanillaSpell>(dir, "spells")
+pub(crate) fn tbc(dir: &Path) -> (Vec<GenericThing>, Optimizations) {
+    let spells: Vec<_> = read_csv_file::<TbcSpell>(dir, "spells")
         .into_iter()
         .map(|row| {
             let fields = vec![
                 Field::new("entry", Value::Uint(row.id)),
-                Field::new("school", Value::Int(row.school)),
                 Field::new("category", Value::Int(row.category)),
                 Field::new("cast_ui", Value::Int(row.cast_ui)),
                 Field::new("dispel", Value::Int(row.dispel)),
                 Field::new("mechanic", Value::Int(row.mechanic)),
-                Field::new(
-                    "attributes",
-                    Value::VanillaAttributes(row.attributes.try_into().unwrap()),
-                ),
-                Field::new(
-                    "attributes_ex",
-                    Value::VanillaAttributesEx1(row.attributes_ex.try_into().unwrap()),
-                ),
-                Field::new(
-                    "attributes_ex2",
-                    Value::VanillaAttributesEx2(row.attributes_ex2.try_into().unwrap()),
-                ),
-                Field::new(
-                    "attributes_ex3",
-                    Value::VanillaAttributesEx3(row.attributes_ex3.try_into().unwrap()),
-                ),
-                Field::new(
-                    "attributes_ex4",
-                    Value::VanillaAttributesEx4(row.attributes_ex4.try_into().unwrap()),
-                ),
+                Field::new("attributes", Value::Uint(row.attributes)),
+                Field::new("attributes_ex", Value::Uint(row.attributes_ex)),
+                Field::new("attributes_ex2", Value::Uint(row.attributes_ex2)),
+                Field::new("attributes_ex3", Value::Uint(row.attributes_ex3)),
+                Field::new("attributes_ex4", Value::Uint(row.attributes_ex4)),
+                Field::new("attributes_ex5", Value::Uint(row.attributes_ex5)),
+                Field::new("attributes_ex6", Value::Uint(row.attributes_ex6)),
                 Field::new("stances", Value::Uint(row.stances)),
                 Field::new("stances_not", Value::Uint(row.stances_not)),
                 Field::new("targets", Value::Int(row.targets)),
                 Field::new("target_creature_type", Value::Int(row.target_creature_type)),
                 Field::new("requires_spell_focus", Value::Int(row.requires_spell_focus)),
+                Field::new("facing_caster_flags", Value::Int(row.facing_caster_flags)),
                 Field::new("caster_aura_state", Value::Int(row.caster_aura_state)),
                 Field::new("target_aura_state", Value::Int(row.target_aura_state)),
+                Field::new(
+                    "caster_aura_state_not",
+                    Value::Int(row.caster_aura_state_not),
+                ),
+                Field::new(
+                    "target_aura_state_not",
+                    Value::Int(row.target_aura_state_not),
+                ),
                 Field::new("casting_time_index", Value::Int(row.casting_time_index)),
                 Field::new("recovery_time", Value::Int(row.recovery_time)),
                 Field::new(
@@ -286,6 +327,8 @@ pub(crate) fn vanilla(dir: &Path) -> (Vec<GenericThing>, Optimizations) {
                 Field::new("min_faction_id", Value::Int(row.min_faction_id)),
                 Field::new("min_reputation", Value::Int(row.min_reputation)),
                 Field::new("required_aura_vision", Value::Int(row.required_aura_vision)),
+                Field::new("area_id", Value::Int(row.area_id)),
+                Field::new("school_mask", Value::Int(row.school_mask)),
                 Field::new("is_server_side", Value::Int(row.is_server_side)),
                 Field::new(
                     "attributes_serverside",
@@ -306,7 +349,7 @@ pub(crate) fn vanilla(dir: &Path) -> (Vec<GenericThing>, Optimizations) {
                                 ArrayField::new(
                                     "amount",
                                     "reagent_count1",
-                                    Value::Int(row.reagent_count1),
+                                    Value::Uint(row.reagent_count1),
                                 ),
                             ],
                         ),
@@ -317,7 +360,7 @@ pub(crate) fn vanilla(dir: &Path) -> (Vec<GenericThing>, Optimizations) {
                                 ArrayField::new(
                                     "amount",
                                     "reagent_count2",
-                                    Value::Int(row.reagent_count2),
+                                    Value::Uint(row.reagent_count2),
                                 ),
                             ],
                         ),
@@ -328,7 +371,7 @@ pub(crate) fn vanilla(dir: &Path) -> (Vec<GenericThing>, Optimizations) {
                                 ArrayField::new(
                                     "amount",
                                     "reagent_count3",
-                                    Value::Int(row.reagent_count3),
+                                    Value::Uint(row.reagent_count3),
                                 ),
                             ],
                         ),
@@ -339,7 +382,7 @@ pub(crate) fn vanilla(dir: &Path) -> (Vec<GenericThing>, Optimizations) {
                                 ArrayField::new(
                                     "amount",
                                     "reagent_count4",
-                                    Value::Int(row.reagent_count4),
+                                    Value::Uint(row.reagent_count4),
                                 ),
                             ],
                         ),
@@ -350,7 +393,7 @@ pub(crate) fn vanilla(dir: &Path) -> (Vec<GenericThing>, Optimizations) {
                                 ArrayField::new(
                                     "amount",
                                     "reagent_count5",
-                                    Value::Int(row.reagent_count5),
+                                    Value::Uint(row.reagent_count5),
                                 ),
                             ],
                         ),
@@ -361,7 +404,7 @@ pub(crate) fn vanilla(dir: &Path) -> (Vec<GenericThing>, Optimizations) {
                                 ArrayField::new(
                                     "amount",
                                     "reagent_count6",
-                                    Value::Int(row.reagent_count6),
+                                    Value::Uint(row.reagent_count6),
                                 ),
                             ],
                         ),
@@ -372,7 +415,7 @@ pub(crate) fn vanilla(dir: &Path) -> (Vec<GenericThing>, Optimizations) {
                                 ArrayField::new(
                                     "amount",
                                     "reagent_count7",
-                                    Value::Int(row.reagent_count7),
+                                    Value::Uint(row.reagent_count7),
                                 ),
                             ],
                         ),
@@ -383,7 +426,7 @@ pub(crate) fn vanilla(dir: &Path) -> (Vec<GenericThing>, Optimizations) {
                                 ArrayField::new(
                                     "amount",
                                     "reagent_count8",
-                                    Value::Int(row.reagent_count8),
+                                    Value::Uint(row.reagent_count8),
                                 ),
                             ],
                         ),
@@ -414,7 +457,7 @@ pub(crate) fn vanilla(dir: &Path) -> (Vec<GenericThing>, Optimizations) {
                                     Value::float(row.effect_dice_per_level1),
                                 ),
                                 ArrayField::new(
-                                    "real_points_per_level",
+                                    "realm_points_per_level",
                                     "effect_real_points_per_level1",
                                     Value::float(row.effect_real_points_per_level1),
                                 ),
@@ -446,7 +489,7 @@ pub(crate) fn vanilla(dir: &Path) -> (Vec<GenericThing>, Optimizations) {
                                 ArrayField::new(
                                     "apply_aura_name",
                                     "effect_apply_aura_name1",
-                                    Value::VanillaAuraMod(
+                                    Value::TbcAuraMod(
                                         row.effect_apply_aura_name1.try_into().unwrap(),
                                     ),
                                 ),
@@ -476,12 +519,17 @@ pub(crate) fn vanilla(dir: &Path) -> (Vec<GenericThing>, Optimizations) {
                                     Value::Int(row.effect_misc_value1),
                                 ),
                                 ArrayField::new(
+                                    "misc_value_b",
+                                    "effect_misc_value_b1",
+                                    Value::Int(row.effect_misc_value_b1),
+                                ),
+                                ArrayField::new(
                                     "trigger_spell",
                                     "effect_trigger_spell1",
                                     Value::Int(row.effect_trigger_spell1),
                                 ),
                                 ArrayField::new(
-                                    "effect_points_per_combo_point",
+                                    "points_per_combo_point",
                                     "effect_points_per_combo_point1",
                                     Value::float(row.effect_points_per_combo_point1),
                                 ),
@@ -512,7 +560,7 @@ pub(crate) fn vanilla(dir: &Path) -> (Vec<GenericThing>, Optimizations) {
                                     Value::float(row.effect_dice_per_level2),
                                 ),
                                 ArrayField::new(
-                                    "real_points_per_level",
+                                    "realm_points_per_level",
                                     "effect_real_points_per_level2",
                                     Value::float(row.effect_real_points_per_level2),
                                 ),
@@ -544,7 +592,7 @@ pub(crate) fn vanilla(dir: &Path) -> (Vec<GenericThing>, Optimizations) {
                                 ArrayField::new(
                                     "apply_aura_name",
                                     "effect_apply_aura_name2",
-                                    Value::VanillaAuraMod(
+                                    Value::TbcAuraMod(
                                         row.effect_apply_aura_name2.try_into().unwrap(),
                                     ),
                                 ),
@@ -574,12 +622,17 @@ pub(crate) fn vanilla(dir: &Path) -> (Vec<GenericThing>, Optimizations) {
                                     Value::Int(row.effect_misc_value2),
                                 ),
                                 ArrayField::new(
+                                    "misc_value_b",
+                                    "effect_misc_value_b2",
+                                    Value::Int(row.effect_misc_value_b2),
+                                ),
+                                ArrayField::new(
                                     "trigger_spell",
                                     "effect_trigger_spell2",
                                     Value::Int(row.effect_trigger_spell2),
                                 ),
                                 ArrayField::new(
-                                    "effect_points_per_combo_point",
+                                    "points_per_combo_point",
                                     "effect_points_per_combo_point2",
                                     Value::float(row.effect_points_per_combo_point2),
                                 ),
@@ -610,7 +663,7 @@ pub(crate) fn vanilla(dir: &Path) -> (Vec<GenericThing>, Optimizations) {
                                     Value::float(row.effect_dice_per_level3),
                                 ),
                                 ArrayField::new(
-                                    "real_points_per_level",
+                                    "realm_points_per_level",
                                     "effect_real_points_per_level3",
                                     Value::float(row.effect_real_points_per_level3),
                                 ),
@@ -642,7 +695,7 @@ pub(crate) fn vanilla(dir: &Path) -> (Vec<GenericThing>, Optimizations) {
                                 ArrayField::new(
                                     "apply_aura_name",
                                     "effect_apply_aura_name3",
-                                    Value::VanillaAuraMod(
+                                    Value::TbcAuraMod(
                                         row.effect_apply_aura_name3.try_into().unwrap(),
                                     ),
                                 ),
@@ -672,12 +725,17 @@ pub(crate) fn vanilla(dir: &Path) -> (Vec<GenericThing>, Optimizations) {
                                     Value::Int(row.effect_misc_value3),
                                 ),
                                 ArrayField::new(
+                                    "misc_value_b",
+                                    "effect_misc_value_b3",
+                                    Value::Int(row.effect_misc_value_b3),
+                                ),
+                                ArrayField::new(
                                     "trigger_spell",
                                     "effect_trigger_spell3",
                                     Value::Int(row.effect_trigger_spell3),
                                 ),
                                 ArrayField::new(
-                                    "effect_points_per_combo_point",
+                                    "points_per_combo_point",
                                     "effect_points_per_combo_point3",
                                     Value::float(row.effect_points_per_combo_point3),
                                 ),
@@ -704,6 +762,23 @@ pub(crate) fn vanilla(dir: &Path) -> (Vec<GenericThing>, Optimizations) {
                             "totem",
                             "totem2",
                             Value::Int(row.totem2),
+                        )]),
+                    ]),
+                ),
+                Array::new(
+                    "totem_categories",
+                    "TotemCategory",
+                    false,
+                    ArrayInstances::new(vec![
+                        ArrayInstance::default_values(vec![ArrayField::new(
+                            "category",
+                            "totem_category1",
+                            Value::Int(row.totem_category1),
+                        )]),
+                        ArrayInstance::default_values(vec![ArrayField::new(
+                            "category",
+                            "totem_category2",
+                            Value::Int(row.totem_category2),
                         )]),
                     ]),
                 ),

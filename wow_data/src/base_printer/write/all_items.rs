@@ -1,9 +1,9 @@
 use crate::base_printer::data::get_fields;
 use crate::base_printer::data::items::{ArrayInstances, Optimizations};
-use crate::base_printer::write::items::definition::includes;
-use crate::base_printer::write::items::GenericThing;
+use crate::base_printer::write::definition::includes;
+use crate::base_printer::write::GenericThing;
 use crate::base_printer::{Expansion, ImportFrom};
-use crate::rust_printer::writer::Writer;
+use crate::writer::Writer;
 use std::collections::HashMap;
 use std::cmp::Ordering;
 

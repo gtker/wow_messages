@@ -3,17 +3,15 @@ use crate::base_printer::data::items::{
     Array, ArrayField, ArrayInstance, ArrayInstances, Field, Optimizations, Value,
 };
 use crate::base_printer::read_csv_file;
-use crate::base_printer::write::items::GenericThing;
+use crate::base_printer::write::GenericThing;
 use serde::Deserialize;
 use std::path::Path;
 
 #[derive(Deserialize)]
 #[serde(rename_all = "PascalCase")]
-pub(crate) struct TbcSpell {
+pub(crate) struct WrathSpell {
     id: u32,
     category: i32,
-    #[serde(rename = "CastUI")]
-    cast_ui: i32,
     dispel: i32,
     mechanic: i32,
     attributes: u32,
@@ -23,6 +21,7 @@ pub(crate) struct TbcSpell {
     attributes_ex4: u32,
     attributes_ex5: u32,
     attributes_ex6: u32,
+    attributes_ex7: u32,
     stances: u32,
     stances_not: u32,
     targets: i32,
@@ -34,8 +33,8 @@ pub(crate) struct TbcSpell {
     recovery_time: i32,
     category_recovery_time: i32,
     interrupt_flags: i32,
-    aura_interrupt_flags: i32,
-    channel_interrupt_flags: i32,
+    aura_interrupt_flags: u32,
+    channel_interrupt_flags: u32,
     proc_flags: i32,
     proc_chance: i32,
     proc_charges: i32,
@@ -44,7 +43,7 @@ pub(crate) struct TbcSpell {
     spell_level: i32,
     duration_index: i32,
     power_type: u32,
-    mana_cost: i32,
+    mana_cost: u32,
     #[serde(rename = "ManaCostPerlevel")]
     mana_cost_per_level: i32,
     mana_per_second: i32,
@@ -80,12 +79,6 @@ pub(crate) struct TbcSpell {
     effect_die_sides1: i32,
     effect_die_sides2: i32,
     effect_die_sides3: i32,
-    effect_base_dice1: i32,
-    effect_base_dice2: i32,
-    effect_base_dice3: i32,
-    effect_dice_per_level1: f32,
-    effect_dice_per_level2: f32,
-    effect_dice_per_level3: f32,
     effect_real_points_per_level1: f32,
     effect_real_points_per_level2: f32,
     effect_real_points_per_level3: f32,
@@ -122,9 +115,9 @@ pub(crate) struct TbcSpell {
     effect_misc_value1: i32,
     effect_misc_value2: i32,
     effect_misc_value3: i32,
-    effect_trigger_spell1: i32,
-    effect_trigger_spell2: i32,
-    effect_trigger_spell3: i32,
+    effect_trigger_spell1: u32,
+    effect_trigger_spell2: u32,
+    effect_trigger_spell3: u32,
     effect_points_per_combo_point1: f32,
     effect_points_per_combo_point2: f32,
     effect_points_per_combo_point3: f32,
@@ -183,7 +176,7 @@ pub(crate) struct TbcSpell {
     min_faction_id: i32,
     min_reputation: i32,
     required_aura_vision: i32,
-    is_server_side: i32,
+    is_server_side: u32,
     attributes_serverside: i32,
     facing_caster_flags: i32,
     caster_aura_state_not: i32,
@@ -228,18 +221,55 @@ pub(crate) struct TbcSpell {
 
     totem_category1: i32,
     totem_category2: i32,
-    area_id: i32,
+    area_id: u32,
     school_mask: i32,
+
+    stances2: u32,
+    stances_not2: u32,
+    caster_aura_spell: i32,
+    target_aura_spell: i32,
+    exclude_caster_aura_spell: i32,
+    exclude_target_aura_spell: i32,
+    #[serde(rename = "EffectSpellClassMask1_1")]
+    effect_spell_class_mask1_1: u32,
+    #[serde(rename = "EffectSpellClassMask1_2")]
+    effect_spell_class_mask1_2: u32,
+    #[serde(rename = "EffectSpellClassMask1_3")]
+    effect_spell_class_mask1_3: u32,
+    #[serde(rename = "EffectSpellClassMask2_1")]
+    effect_spell_class_mask2_1: u32,
+    #[serde(rename = "EffectSpellClassMask2_2")]
+    effect_spell_class_mask2_2: u32,
+    #[serde(rename = "EffectSpellClassMask2_3")]
+    effect_spell_class_mask2_3: u32,
+    #[serde(rename = "EffectSpellClassMask3_1")]
+    effect_spell_class_mask3_1: u32,
+    #[serde(rename = "EffectSpellClassMask3_2")]
+    effect_spell_class_mask3_2: u32,
+    #[serde(rename = "EffectSpellClassMask3_3")]
+    effect_spell_class_mask3_3: u32,
+    spell_visual2: i32,
+    spell_family_flags2: u32,
+    #[serde(rename = "RuneCostID")]
+    rune_cost_id: u32,
+    #[serde(rename = "SpellMissileID")]
+    spell_missile_id: u32,
+    power_display_id: u32,
+    effect_bonus_coefficient1: f32,
+    effect_bonus_coefficient2: f32,
+    effect_bonus_coefficient3: f32,
+    #[serde(rename = "SpellDescriptionVariableID")]
+    spell_description_variable_id: u32,
+    spell_difficulty_id: u32,
 }
 
-pub(crate) fn tbc(dir: &Path) -> (Vec<GenericThing>, Optimizations) {
-    let spells: Vec<_> = read_csv_file::<TbcSpell>(dir, "spells")
+pub(crate) fn wrath(dir: &Path) -> (Vec<GenericThing>, Optimizations) {
+    let spells: Vec<_> = read_csv_file::<WrathSpell>(dir, "spells")
         .into_iter()
         .map(|row| {
             let fields = vec![
                 Field::new("entry", Value::Uint(row.id)),
                 Field::new("category", Value::Int(row.category)),
-                Field::new("cast_ui", Value::Int(row.cast_ui)),
                 Field::new("dispel", Value::Int(row.dispel)),
                 Field::new("mechanic", Value::Int(row.mechanic)),
                 Field::new("attributes", Value::Uint(row.attributes)),
@@ -249,8 +279,11 @@ pub(crate) fn tbc(dir: &Path) -> (Vec<GenericThing>, Optimizations) {
                 Field::new("attributes_ex4", Value::Uint(row.attributes_ex4)),
                 Field::new("attributes_ex5", Value::Uint(row.attributes_ex5)),
                 Field::new("attributes_ex6", Value::Uint(row.attributes_ex6)),
+                Field::new("attributes_ex7", Value::Uint(row.attributes_ex7)),
                 Field::new("stances", Value::Uint(row.stances)),
+                Field::new("stances2", Value::Uint(row.stances2)),
                 Field::new("stances_not", Value::Uint(row.stances_not)),
+                Field::new("stances_not2", Value::Uint(row.stances_not2)),
                 Field::new("targets", Value::Int(row.targets)),
                 Field::new("target_creature_type", Value::Int(row.target_creature_type)),
                 Field::new("requires_spell_focus", Value::Int(row.requires_spell_focus)),
@@ -265,6 +298,16 @@ pub(crate) fn tbc(dir: &Path) -> (Vec<GenericThing>, Optimizations) {
                     "target_aura_state_not",
                     Value::Int(row.target_aura_state_not),
                 ),
+                Field::new("caster_aura_spell", Value::Int(row.caster_aura_spell)),
+                Field::new("target_aura_spell", Value::Int(row.target_aura_spell)),
+                Field::new(
+                    "exclude_caster_aura_spell",
+                    Value::Int(row.exclude_caster_aura_spell),
+                ),
+                Field::new(
+                    "exclude_target_aura_spell",
+                    Value::Int(row.exclude_target_aura_spell),
+                ),
                 Field::new("casting_time_index", Value::Int(row.casting_time_index)),
                 Field::new("recovery_time", Value::Int(row.recovery_time)),
                 Field::new(
@@ -272,10 +315,13 @@ pub(crate) fn tbc(dir: &Path) -> (Vec<GenericThing>, Optimizations) {
                     Value::Int(row.category_recovery_time),
                 ),
                 Field::new("interrupt_flags", Value::Int(row.interrupt_flags)),
-                Field::new("aura_interrupt_flags", Value::Int(row.aura_interrupt_flags)),
+                Field::new(
+                    "aura_interrupt_flags",
+                    Value::Uint(row.aura_interrupt_flags),
+                ),
                 Field::new(
                     "channel_interrupt_flags",
-                    Value::Int(row.channel_interrupt_flags),
+                    Value::Uint(row.channel_interrupt_flags),
                 ),
                 Field::new("proc_flags", Value::Int(row.proc_flags)),
                 Field::new("proc_chance", Value::Int(row.proc_chance)),
@@ -285,7 +331,10 @@ pub(crate) fn tbc(dir: &Path) -> (Vec<GenericThing>, Optimizations) {
                 Field::new("spell_level", Value::Int(row.spell_level)),
                 Field::new("duration_index", Value::Int(row.duration_index)),
                 Field::new("power_type", Value::Uint(row.power_type)),
-                Field::new("mana_cost", Value::Int(row.mana_cost)),
+                Field::new(
+                    "mana_cost",
+                    Value::Int(i32::from_le_bytes(row.mana_cost.to_le_bytes())),
+                ),
                 Field::new("mana_cost_per_level", Value::Int(row.mana_cost_per_level)),
                 Field::new("mana_per_second", Value::Int(row.mana_per_second)),
                 Field::new(
@@ -306,6 +355,7 @@ pub(crate) fn tbc(dir: &Path) -> (Vec<GenericThing>, Optimizations) {
                     Value::Int(row.equipped_item_inventory_type_mask),
                 ),
                 Field::new("spell_visual", Value::Int(row.spell_visual)),
+                Field::new("spell_visual2", Value::Int(row.spell_visual2)),
                 Field::new("spell_icon_id", Value::Int(row.spell_icon_id)),
                 Field::new("active_icon_id", Value::Int(row.active_icon_id)),
                 Field::new("spell_priority", Value::Int(row.spell_priority)),
@@ -319,7 +369,11 @@ pub(crate) fn tbc(dir: &Path) -> (Vec<GenericThing>, Optimizations) {
                 Field::new("start_recovery_time", Value::Int(row.start_recovery_time)),
                 Field::new("max_target_level", Value::Int(row.max_target_level)),
                 Field::new("spell_family_name", Value::Int(row.spell_family_name)),
-                Field::new("spell_family_flags", Value::Int64(row.spell_family_flags)),
+                Field::new(
+                    "spell_family_flags",
+                    Value::Uint64(u64::from_le_bytes(row.spell_family_flags.to_le_bytes())),
+                ),
+                Field::new("spell_family_flags2", Value::Uint(row.spell_family_flags2)),
                 Field::new("max_affected_targets", Value::Int(row.max_affected_targets)),
                 Field::new("dmg_class", Value::Int(row.dmg_class)),
                 Field::new("prevention_type", Value::Int(row.prevention_type)),
@@ -327,9 +381,20 @@ pub(crate) fn tbc(dir: &Path) -> (Vec<GenericThing>, Optimizations) {
                 Field::new("min_faction_id", Value::Int(row.min_faction_id)),
                 Field::new("min_reputation", Value::Int(row.min_reputation)),
                 Field::new("required_aura_vision", Value::Int(row.required_aura_vision)),
-                Field::new("area_id", Value::Int(row.area_id)),
+                Field::new("area_id", Value::Uint(row.area_id.try_into().unwrap())),
                 Field::new("school_mask", Value::Int(row.school_mask)),
-                Field::new("is_server_side", Value::Int(row.is_server_side)),
+                Field::new("rune_cost_id", Value::Uint(row.rune_cost_id)),
+                Field::new("spell_missile_id", Value::Uint(row.spell_missile_id)),
+                Field::new("power_display_id", Value::Uint(row.power_display_id)),
+                Field::new(
+                    "spell_description_variable_id",
+                    Value::Uint(row.spell_description_variable_id),
+                ),
+                Field::new("spell_difficulty_id", Value::Uint(row.spell_difficulty_id)),
+                Field::new(
+                    "is_server_side",
+                    Value::Uint(row.is_server_side.try_into().unwrap()),
+                ),
                 Field::new(
                     "attributes_serverside",
                     Value::Int(row.attributes_serverside),
@@ -447,17 +512,7 @@ pub(crate) fn tbc(dir: &Path) -> (Vec<GenericThing>, Optimizations) {
                                     Value::Int(row.effect_die_sides1),
                                 ),
                                 ArrayField::new(
-                                    "base_dice",
-                                    "effect_base_dice1",
-                                    Value::Int(row.effect_base_dice1),
-                                ),
-                                ArrayField::new(
-                                    "dice_per_level",
-                                    "effect_dice_per_level1",
-                                    Value::float(row.effect_dice_per_level1),
-                                ),
-                                ArrayField::new(
-                                    "realm_points_per_level",
+                                    "real_points_per_level",
                                     "effect_real_points_per_level1",
                                     Value::float(row.effect_real_points_per_level1),
                                 ),
@@ -467,7 +522,7 @@ pub(crate) fn tbc(dir: &Path) -> (Vec<GenericThing>, Optimizations) {
                                     Value::Int(row.effect_base_points1),
                                 ),
                                 ArrayField::new(
-                                    "mechanic",
+                                    "mechanics",
                                     "effect_mechanic1",
                                     Value::Int(row.effect_mechanic1),
                                 ),
@@ -489,7 +544,7 @@ pub(crate) fn tbc(dir: &Path) -> (Vec<GenericThing>, Optimizations) {
                                 ArrayField::new(
                                     "apply_aura_name",
                                     "effect_apply_aura_name1",
-                                    Value::TbcAuraMod(
+                                    Value::WrathAuraMod(
                                         row.effect_apply_aura_name1.try_into().unwrap(),
                                     ),
                                 ),
@@ -526,7 +581,7 @@ pub(crate) fn tbc(dir: &Path) -> (Vec<GenericThing>, Optimizations) {
                                 ArrayField::new(
                                     "trigger_spell",
                                     "effect_trigger_spell1",
-                                    Value::Int(row.effect_trigger_spell1),
+                                    Value::Uint(row.effect_trigger_spell1),
                                 ),
                                 ArrayField::new(
                                     "points_per_combo_point",
@@ -534,9 +589,29 @@ pub(crate) fn tbc(dir: &Path) -> (Vec<GenericThing>, Optimizations) {
                                     Value::float(row.effect_points_per_combo_point1),
                                 ),
                                 ArrayField::new(
+                                    "spell_class_mask1",
+                                    "effect_spell_class_mask1_1",
+                                    Value::Uint(row.effect_spell_class_mask1_1),
+                                ),
+                                ArrayField::new(
+                                    "spell_class_mask2",
+                                    "effect_spell_class_mask1_2",
+                                    Value::Uint(row.effect_spell_class_mask1_2),
+                                ),
+                                ArrayField::new(
+                                    "spell_class_mask3",
+                                    "effect_spell_class_mask1_3",
+                                    Value::Uint(row.effect_spell_class_mask1_3),
+                                ),
+                                ArrayField::new(
                                     "damage_multiplier",
                                     "dmg_multiplier1",
                                     Value::float(row.dmg_multiplier1),
+                                ),
+                                ArrayField::new(
+                                    "bonus_coefficient",
+                                    "effect_bonus_coefficient1",
+                                    Value::float(row.effect_bonus_coefficient1),
                                 ),
                             ],
                         ),
@@ -550,17 +625,7 @@ pub(crate) fn tbc(dir: &Path) -> (Vec<GenericThing>, Optimizations) {
                                     Value::Int(row.effect_die_sides2),
                                 ),
                                 ArrayField::new(
-                                    "base_dice",
-                                    "effect_base_dice2",
-                                    Value::Int(row.effect_base_dice2),
-                                ),
-                                ArrayField::new(
-                                    "dice_per_level",
-                                    "effect_dice_per_level2",
-                                    Value::float(row.effect_dice_per_level2),
-                                ),
-                                ArrayField::new(
-                                    "realm_points_per_level",
+                                    "real_points_per_level",
                                     "effect_real_points_per_level2",
                                     Value::float(row.effect_real_points_per_level2),
                                 ),
@@ -570,7 +635,7 @@ pub(crate) fn tbc(dir: &Path) -> (Vec<GenericThing>, Optimizations) {
                                     Value::Int(row.effect_base_points2),
                                 ),
                                 ArrayField::new(
-                                    "mechanic",
+                                    "mechanics",
                                     "effect_mechanic2",
                                     Value::Int(row.effect_mechanic2),
                                 ),
@@ -592,7 +657,7 @@ pub(crate) fn tbc(dir: &Path) -> (Vec<GenericThing>, Optimizations) {
                                 ArrayField::new(
                                     "apply_aura_name",
                                     "effect_apply_aura_name2",
-                                    Value::TbcAuraMod(
+                                    Value::WrathAuraMod(
                                         row.effect_apply_aura_name2.try_into().unwrap(),
                                     ),
                                 ),
@@ -629,7 +694,7 @@ pub(crate) fn tbc(dir: &Path) -> (Vec<GenericThing>, Optimizations) {
                                 ArrayField::new(
                                     "trigger_spell",
                                     "effect_trigger_spell2",
-                                    Value::Int(row.effect_trigger_spell2),
+                                    Value::Uint(row.effect_trigger_spell2),
                                 ),
                                 ArrayField::new(
                                     "points_per_combo_point",
@@ -637,9 +702,29 @@ pub(crate) fn tbc(dir: &Path) -> (Vec<GenericThing>, Optimizations) {
                                     Value::float(row.effect_points_per_combo_point2),
                                 ),
                                 ArrayField::new(
+                                    "spell_class_mask1",
+                                    "effect_spell_class_mask2_1",
+                                    Value::Uint(row.effect_spell_class_mask2_1),
+                                ),
+                                ArrayField::new(
+                                    "spell_class_mask2",
+                                    "effect_spell_class_mask2_2",
+                                    Value::Uint(row.effect_spell_class_mask2_2),
+                                ),
+                                ArrayField::new(
+                                    "spell_class_mask3",
+                                    "effect_spell_class_mask2_3",
+                                    Value::Uint(row.effect_spell_class_mask2_3),
+                                ),
+                                ArrayField::new(
                                     "damage_multiplier",
                                     "dmg_multiplier2",
                                     Value::float(row.dmg_multiplier2),
+                                ),
+                                ArrayField::new(
+                                    "bonus_coefficient",
+                                    "effect_bonus_coefficient2",
+                                    Value::float(row.effect_bonus_coefficient2),
                                 ),
                             ],
                         ),
@@ -653,17 +738,7 @@ pub(crate) fn tbc(dir: &Path) -> (Vec<GenericThing>, Optimizations) {
                                     Value::Int(row.effect_die_sides3),
                                 ),
                                 ArrayField::new(
-                                    "base_dice",
-                                    "effect_base_dice3",
-                                    Value::Int(row.effect_base_dice3),
-                                ),
-                                ArrayField::new(
-                                    "dice_per_level",
-                                    "effect_dice_per_level3",
-                                    Value::float(row.effect_dice_per_level3),
-                                ),
-                                ArrayField::new(
-                                    "realm_points_per_level",
+                                    "real_points_per_level",
                                     "effect_real_points_per_level3",
                                     Value::float(row.effect_real_points_per_level3),
                                 ),
@@ -673,7 +748,7 @@ pub(crate) fn tbc(dir: &Path) -> (Vec<GenericThing>, Optimizations) {
                                     Value::Int(row.effect_base_points3),
                                 ),
                                 ArrayField::new(
-                                    "mechanic",
+                                    "mechanics",
                                     "effect_mechanic3",
                                     Value::Int(row.effect_mechanic3),
                                 ),
@@ -695,7 +770,7 @@ pub(crate) fn tbc(dir: &Path) -> (Vec<GenericThing>, Optimizations) {
                                 ArrayField::new(
                                     "apply_aura_name",
                                     "effect_apply_aura_name3",
-                                    Value::TbcAuraMod(
+                                    Value::WrathAuraMod(
                                         row.effect_apply_aura_name3.try_into().unwrap(),
                                     ),
                                 ),
@@ -732,7 +807,7 @@ pub(crate) fn tbc(dir: &Path) -> (Vec<GenericThing>, Optimizations) {
                                 ArrayField::new(
                                     "trigger_spell",
                                     "effect_trigger_spell3",
-                                    Value::Int(row.effect_trigger_spell3),
+                                    Value::Uint(row.effect_trigger_spell3),
                                 ),
                                 ArrayField::new(
                                     "points_per_combo_point",
@@ -740,9 +815,29 @@ pub(crate) fn tbc(dir: &Path) -> (Vec<GenericThing>, Optimizations) {
                                     Value::float(row.effect_points_per_combo_point3),
                                 ),
                                 ArrayField::new(
+                                    "spell_class_mask1",
+                                    "effect_spell_class_mask3_1",
+                                    Value::Uint(row.effect_spell_class_mask3_1),
+                                ),
+                                ArrayField::new(
+                                    "spell_class_mask2",
+                                    "effect_spell_class_mask3_2",
+                                    Value::Uint(row.effect_spell_class_mask3_2),
+                                ),
+                                ArrayField::new(
+                                    "spell_class_mask3",
+                                    "effect_spell_class_mask3_3",
+                                    Value::Uint(row.effect_spell_class_mask3_3),
+                                ),
+                                ArrayField::new(
                                     "damage_multiplier",
                                     "dmg_multiplier3",
                                     Value::float(row.dmg_multiplier3),
+                                ),
+                                ArrayField::new(
+                                    "bonus_coefficient",
+                                    "effect_bonus_coefficient3",
+                                    Value::float(row.effect_bonus_coefficient3),
                                 ),
                             ],
                         ),

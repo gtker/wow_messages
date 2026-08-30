@@ -1,3 +1,4 @@
 [alias]
 gen = "run --package wow_message_parser --release"
 overwrite = "test -p wow_message_parser -F overwrite-tests"
+write-data = "run --package wow_data --release"

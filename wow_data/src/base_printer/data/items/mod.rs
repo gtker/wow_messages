@@ -9,7 +9,7 @@ pub mod tbc;
 pub mod vanilla;
 pub mod wrath;
 
-use crate::base_printer::write::items::GenericThing;
+use crate::base_printer::write::GenericThing;
 
 use crate::float_format;
 use wow_world_base::shared as shared_base;

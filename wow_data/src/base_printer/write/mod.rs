@@ -16,14 +16,14 @@ pub(crate) struct Stats {
     pub mana: i32,
 }
 
-use crate::base_printer::write::items::all_items::{all_items, lookup_type};
-use crate::base_printer::write::items::constructor::constructor;
-use crate::base_printer::write::items::definition::{definition, includes};
+use crate::base_printer::write::all_items::{all_items, lookup_type};
+use crate::base_printer::write::constructor::constructor;
+use crate::base_printer::write::definition::{definition, includes};
 use crate::base_printer::{Expansion, ImportFrom};
 use crate::file_utils::{
     overwrite_autogenerate_if_not_same_contents, overwrite_if_not_same_contents,
 };
-use crate::rust_printer::writer::Writer;
+use crate::writer::Writer;
 use std::collections::HashMap;
 use std::path::Path;
 
@@ -423,7 +423,7 @@ fn print_arrays(arrays: &Arrays, sorted: &mut BTreeSet<String>) {
 
 #[cfg(test)]
 mod test {
-    use crate::base_printer::write::items::ConstNamer;
+    use crate::base_printer::write::ConstNamer;
 
     #[test]
     fn namer() {

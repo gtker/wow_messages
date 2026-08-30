@@ -1,8 +1,17 @@
 use crate::base_printer::data::items::{Array, Field, FieldOptimization, Optimizations};
 use crate::base_printer::{Expansion, ImportFrom};
-use crate::rust_printer::print_serde_derive;
-use crate::rust_printer::writer::Writer;
+use crate::writer::Writer;
 use std::collections::BTreeSet;
+
+pub(crate) fn print_serde_derive(s: &mut Writer, should_derive: bool, transparent: bool) {
+    if should_derive {
+        s.wln("#[cfg_attr(feature = \"serde\", derive(serde::Deserialize, serde::Serialize))]");
+
+        if transparent {
+            s.wln("#[cfg_attr(feature = \"serde\", serde(transparent))]");
+        }
+    }
+}
 
 pub(crate) fn definition(
     s: &mut Writer,

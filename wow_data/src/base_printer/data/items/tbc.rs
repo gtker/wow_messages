@@ -1,26 +1,21 @@
 use crate::base_printer::data::get_fields;
+use crate::base_printer::data::items::vanilla::assertions;
 use crate::base_printer::data::items::{
     process_extra_flags, Array, ArrayField, ArrayInstance, ArrayInstances, Field, Optimizations,
     Value,
 };
 use crate::base_printer::read_csv_file;
-use crate::base_printer::write::items::conversions::vanilla_stat_types_to_stats;
-use crate::base_printer::write::items::GenericThing;
+use crate::base_printer::write::GenericThing;
 use serde::Deserialize;
 use std::path::Path;
-use wow_world_base::vanilla::Skill;
-
-pub(crate) fn assertions(items: &[GenericThing]) {
-    let no_name_has_non_ascii_char = items.iter().all(|a| a.name.is_ascii());
-    assert!(no_name_has_non_ascii_char);
-}
+use wow_world_base::tbc::Skill;
 
 #[derive(Deserialize)]
-struct VanillaItem {
+struct TbcItem {
     pub entry: u32,
     pub name: String,
     pub class: i32,
-    pub subclass: u32,
+    pub subclass: i32,
     #[serde(rename = "displayid")]
     pub display_id: u32,
     #[serde(rename = "Quality")]
@@ -225,78 +220,65 @@ struct VanillaItem {
     pub duration: i32,
     #[serde(rename = "ExtraFlags")]
     pub extra_flags: i32,
+
+    #[serde(rename = "unk0")]
+    pub sound_override_sub_class: i32,
+    #[serde(rename = "RandomSuffix")]
+    pub random_suffix: i32,
+    #[serde(rename = "TotemCategory")]
+    pub totem_category: i32,
+    #[serde(rename = "socketColor_1")]
+    pub socket_color_1: u32,
+    #[serde(rename = "socketContent_1")]
+    pub socket_content_1: u32,
+    #[serde(rename = "socketColor_2")]
+    pub socket_color_2: u32,
+    #[serde(rename = "socketContent_2")]
+    pub socket_content_2: u32,
+    #[serde(rename = "socketColor_3")]
+    pub socket_color_3: u32,
+    #[serde(rename = "socketContent_3")]
+    pub socket_content_3: u32,
+    #[serde(rename = "socketBonus")]
+    pub socket_bonus: i32,
+    #[serde(rename = "GemProperties")]
+    pub gem_properties: i32,
+    #[serde(rename = "RequiredDisenchantSkill")]
+    pub required_disenchant_skill: i32,
+    #[serde(rename = "ArmorDamageModifier")]
+    pub armor_damage_modifier: f32,
 }
 
-pub fn vanilla(dir: &Path) -> (Vec<GenericThing>, Optimizations) {
-    let items = read_csv_file::<VanillaItem>(dir, "items");
+pub fn tbc(dir: &Path) -> (Vec<GenericThing>, Optimizations) {
+    let items = read_csv_file::<TbcItem>(dir, "items");
 
     let items: Vec<_> = items
         .into_iter()
         .map(|row| {
-            let sub_class = {
-                const CLASS_CONSUMABLE: i32 = 0;
-                const CLASS_TRADE_GOODS: i32 = 7;
-                const CLASS_JUNK: i32 = 15;
-
-                // The game does not recognize consumables other than class 0 and subclass 0,
-                // but the cmangos database uses these for some reason
-                if row.class == CLASS_CONSUMABLE
-                    // The game does not recognize trade goods for greater than 3 (Devices)
-                    // but the cmangos database uses these for some reason
-                    || row.class == CLASS_TRADE_GOODS && row.subclass > 3
-                    // The game does not recognize junk subclasses other than class 15 and subclass 0,
-                    // but the cmangos database uses these for some reason
-                    || row.class == CLASS_JUNK
-                {
-                    0
-                } else {
-                    row.subclass
-                }
-            };
-
             let (required_skill, required_skill_rank) = {
-                let skill = row.required_skill;
-                let (skill, required_skill_level) = if skill == 242 {
+                let (skill, required_skill_level) = if row.required_skill == 242 {
                     // Cmangos weirdly uses a non existent skill
                     (0, 0)
                 } else {
-                    (skill, row.required_skill_rank)
+                    (row.required_skill, row.required_skill_rank)
                 };
                 (Skill::try_from(skill).unwrap(), required_skill_level)
             };
-
-            let stats = vanilla_stat_types_to_stats(
-                row.stat_type1,
-                row.stat_value1,
-                row.stat_type2,
-                row.stat_value2,
-                row.stat_type3,
-                row.stat_value3,
-                row.stat_type4,
-                row.stat_value4,
-                row.stat_type5,
-                row.stat_value5,
-                row.stat_type6,
-                row.stat_value6,
-                row.stat_type7,
-                row.stat_value7,
-                row.stat_type8,
-                row.stat_value8,
-                row.stat_type9,
-                row.stat_value9,
-                row.stat_type10,
-                row.stat_value10,
-            );
-            let class_and_sub_class = wow_world_base::vanilla::ItemClassAndSubClass::try_from(
-                (sub_class as u64) << 32 | row.class as u64,
-            )
-            .unwrap();
 
             let fields = vec![
                 Field::new("entry", Value::Uint(row.entry)),
                 Field::new(
                     "class_and_sub_class",
-                    Value::VanillaItemClassAndSubClass(class_and_sub_class),
+                    Value::TbcItemClassAndSubClass(
+                        wow_world_base::tbc::ItemClassAndSubClass::try_from(
+                            (row.subclass as u64) << 32 | row.class as u64,
+                        )
+                        .unwrap(),
+                    ),
+                ),
+                Field::new(
+                    "sound_override_sub_class",
+                    Value::Int(row.sound_override_sub_class),
                 ),
                 Field::new("name", Value::String(row.name.clone())),
                 Field::new("display_id", Value::Uint(row.display_id)),
@@ -304,10 +286,7 @@ pub fn vanilla(dir: &Path) -> (Vec<GenericThing>, Optimizations) {
                     "quality",
                     Value::VanillaTbcItemQuality(row.quality.try_into().unwrap()),
                 ),
-                Field::new(
-                    "flags",
-                    Value::VanillaItemFlag(row.flags.try_into().unwrap()),
-                ),
+                Field::new("flags", Value::TbcItemFlag(row.flags.try_into().unwrap())),
                 Field::new("buy_count", Value::Int(row.buy_count)),
                 Field::new("buy_price", Value::Gold(row.buy_price.try_into().unwrap())),
                 Field::new(
@@ -324,14 +303,11 @@ pub fn vanilla(dir: &Path) -> (Vec<GenericThing>, Optimizations) {
                 ),
                 Field::new(
                     "allowed_race",
-                    Value::VanillaAllowedRace(row.allowed_race.try_into().unwrap()),
+                    Value::TbcAllowedRace(row.allowed_race.try_into().unwrap()),
                 ),
                 Field::new("item_level", Value::Int(row.item_level)),
                 Field::new("required_level", Value::Int(row.required_level)),
-                Field::new(
-                    "required_skill",
-                    Value::VanillaSkill(required_skill.try_into().unwrap()),
-                ),
+                Field::new("required_skill", Value::TbcSkill(required_skill)),
                 Field::new("required_skill_rank", Value::Int(required_skill_rank)),
                 Field::new("required_spell", Value::Int(row.required_spell)),
                 Field::new(
@@ -341,7 +317,7 @@ pub fn vanilla(dir: &Path) -> (Vec<GenericThing>, Optimizations) {
                 Field::new("required_city_rank", Value::Int(row.required_city_rank)),
                 Field::new(
                     "required_faction",
-                    Value::VanillaFaction(row.required_faction.try_into().unwrap()),
+                    Value::TbcFaction(row.required_faction.try_into().unwrap()),
                 ),
                 Field::new(
                     "required_reputation_rank",
@@ -350,13 +326,6 @@ pub fn vanilla(dir: &Path) -> (Vec<GenericThing>, Optimizations) {
                 Field::new("max_count", Value::Int(row.max_count)),
                 Field::new("stackable", Value::Int(row.stackable)),
                 Field::new("container_slots", Value::Int(row.container_slots)),
-                Field::new("mana", Value::Int(stats.mana)),
-                Field::new("health", Value::Int(stats.health)),
-                Field::new("agility", Value::Int(stats.agility)),
-                Field::new("strength", Value::Int(stats.strength)),
-                Field::new("stamina", Value::Int(stats.stamina)),
-                Field::new("intellect", Value::Int(stats.intellect)),
-                Field::new("spirit", Value::Int(stats.spirit)),
                 Field::new("armor", Value::Int(row.armor)),
                 Field::new("holy_res", Value::Int(row.holy_res)),
                 Field::new("fire_res", Value::Int(row.fire_res)),
@@ -372,11 +341,11 @@ pub fn vanilla(dir: &Path) -> (Vec<GenericThing>, Optimizations) {
                 Field::new("page_text", Value::Int(row.page_text)),
                 Field::new(
                     "language",
-                    Value::VanillaLanguage(row.language.try_into().unwrap()),
+                    Value::TbcWrathLanguage(row.language.try_into().unwrap()),
                 ),
                 Field::new(
                     "page_text_material",
-                    Value::VanillaPageTextMaterial(row.page_text_material.try_into().unwrap()),
+                    Value::TbcWrathPageTextMaterial(row.page_text_material.try_into().unwrap()),
                 ),
                 Field::new("start_quest", Value::Int(row.start_quest)),
                 Field::new("lock_id", Value::Int(row.lock_id)),
@@ -386,17 +355,29 @@ pub fn vanilla(dir: &Path) -> (Vec<GenericThing>, Optimizations) {
                     Value::SheatheType(row.sheathe_type.try_into().unwrap()),
                 ),
                 Field::new("random_property", Value::Int(row.random_property)),
+                Field::new("random_suffix", Value::Int(row.random_suffix)),
                 Field::new("block", Value::Int(row.block)),
                 Field::new(
                     "item_set",
-                    Value::VanillaItemSet(row.item_set.try_into().unwrap()),
+                    Value::TbcItemSet(row.item_set.try_into().unwrap()),
                 ),
                 Field::new("max_durability", Value::Int(row.max_durability)),
-                Field::new("area", Value::VanillaArea(row.area.try_into().unwrap())),
-                Field::new("map", Value::VanillaMap(row.map.try_into().unwrap())),
+                Field::new("area", Value::TbcArea(row.area.try_into().unwrap())),
+                Field::new("map", Value::TbcMap(row.map.try_into().unwrap())),
                 Field::new(
                     "bag_family",
-                    Value::VanillaBagFamily(row.bag_family.try_into().unwrap()),
+                    Value::TbcWrathBagFamily(row.bag_family.try_into().unwrap()),
+                ),
+                Field::new("totem_category", Value::Int(row.totem_category)),
+                Field::new("socket_bonus", Value::Int(row.socket_bonus)),
+                Field::new("gem_properties", Value::Int(row.gem_properties)),
+                Field::new(
+                    "required_disenchant_skill",
+                    Value::Int(row.required_disenchant_skill),
+                ),
+                Field::new(
+                    "armor_damage_modifier",
+                    Value::float(row.armor_damage_modifier),
                 ),
                 Field::new("disenchant_id", Value::Int(row.disenchant_id)),
                 Field::new("food_type", Value::Int(row.food_type)),
@@ -410,6 +391,49 @@ pub fn vanilla(dir: &Path) -> (Vec<GenericThing>, Optimizations) {
             ];
 
             let arrays = vec![
+                Array::new(
+                    "sockets",
+                    "ItemSocket",
+                    true,
+                    ArrayInstances::new(vec![
+                        ArrayInstance::default_values(vec![
+                            ArrayField::new(
+                                "color",
+                                "socket_color_1",
+                                Value::Uint(row.socket_color_1),
+                            ),
+                            ArrayField::new(
+                                "content",
+                                "socket_content_1",
+                                Value::Uint(row.socket_content_1),
+                            ),
+                        ]),
+                        ArrayInstance::default_values(vec![
+                            ArrayField::new(
+                                "color",
+                                "socket_color_2",
+                                Value::Uint(row.socket_color_2),
+                            ),
+                            ArrayField::new(
+                                "content",
+                                "socket_content_2",
+                                Value::Uint(row.socket_content_2),
+                            ),
+                        ]),
+                        ArrayInstance::default_values(vec![
+                            ArrayField::new(
+                                "color",
+                                "socket_color_3",
+                                Value::Uint(row.socket_color_3),
+                            ),
+                            ArrayField::new(
+                                "content",
+                                "socket_content_3",
+                                Value::Uint(row.socket_content_3),
+                            ),
+                        ]),
+                    ]),
+                ),
                 Array::new(
                     "damages",
                     "ItemDamageType",
@@ -518,6 +542,163 @@ pub fn vanilla(dir: &Path) -> (Vec<GenericThing>, Optimizations) {
                     ]),
                 ),
                 Array::new(
+                    "stats",
+                    "ItemStat",
+                    true,
+                    ArrayInstances::new(vec![
+                        ArrayInstance::new(
+                            row.stat_value1 == 0,
+                            vec![
+                                ArrayField::new(
+                                    "stat_type",
+                                    "stat_type1",
+                                    Value::Uint(row.stat_type1.try_into().unwrap()),
+                                ),
+                                ArrayField::new(
+                                    "value",
+                                    "stat_value1",
+                                    Value::Int(row.stat_value1),
+                                ),
+                            ],
+                        ),
+                        ArrayInstance::new(
+                            row.stat_value2 == 0,
+                            vec![
+                                ArrayField::new(
+                                    "stat_type",
+                                    "stat_type2",
+                                    Value::Uint(row.stat_type2.try_into().unwrap()),
+                                ),
+                                ArrayField::new(
+                                    "value",
+                                    "stat_value2",
+                                    Value::Int(row.stat_value2),
+                                ),
+                            ],
+                        ),
+                        ArrayInstance::new(
+                            row.stat_value3 == 0,
+                            vec![
+                                ArrayField::new(
+                                    "stat_type",
+                                    "stat_type3",
+                                    Value::Uint(row.stat_type3.try_into().unwrap()),
+                                ),
+                                ArrayField::new(
+                                    "value",
+                                    "stat_value3",
+                                    Value::Int(row.stat_value3),
+                                ),
+                            ],
+                        ),
+                        ArrayInstance::new(
+                            row.stat_value4 == 0,
+                            vec![
+                                ArrayField::new(
+                                    "stat_type",
+                                    "stat_type4",
+                                    Value::Uint(row.stat_type4.try_into().unwrap()),
+                                ),
+                                ArrayField::new(
+                                    "value",
+                                    "stat_value4",
+                                    Value::Int(row.stat_value4),
+                                ),
+                            ],
+                        ),
+                        ArrayInstance::new(
+                            row.stat_value5 == 0,
+                            vec![
+                                ArrayField::new(
+                                    "stat_type",
+                                    "stat_type5",
+                                    Value::Uint(row.stat_type5.try_into().unwrap()),
+                                ),
+                                ArrayField::new(
+                                    "value",
+                                    "stat_value5",
+                                    Value::Int(row.stat_value5),
+                                ),
+                            ],
+                        ),
+                        ArrayInstance::new(
+                            row.stat_value6 == 0,
+                            vec![
+                                ArrayField::new(
+                                    "stat_type",
+                                    "stat_type6",
+                                    Value::Uint(row.stat_type6.try_into().unwrap()),
+                                ),
+                                ArrayField::new(
+                                    "value",
+                                    "stat_value6",
+                                    Value::Int(row.stat_value6),
+                                ),
+                            ],
+                        ),
+                        ArrayInstance::new(
+                            row.stat_value7 == 0,
+                            vec![
+                                ArrayField::new(
+                                    "stat_type",
+                                    "stat_type7",
+                                    Value::Uint(row.stat_type7.try_into().unwrap()),
+                                ),
+                                ArrayField::new(
+                                    "value",
+                                    "stat_value7",
+                                    Value::Int(row.stat_value7),
+                                ),
+                            ],
+                        ),
+                        ArrayInstance::new(
+                            row.stat_value8 == 0,
+                            vec![
+                                ArrayField::new(
+                                    "stat_type",
+                                    "stat_type8",
+                                    Value::Uint(row.stat_type8.try_into().unwrap()),
+                                ),
+                                ArrayField::new(
+                                    "value",
+                                    "stat_value8",
+                                    Value::Int(row.stat_value8),
+                                ),
+                            ],
+                        ),
+                        ArrayInstance::new(
+                            row.stat_value9 == 0,
+                            vec![
+                                ArrayField::new(
+                                    "stat_type",
+                                    "stat_type9",
+                                    Value::Uint(row.stat_type9.try_into().unwrap()),
+                                ),
+                                ArrayField::new(
+                                    "value",
+                                    "stat_value9",
+                                    Value::Int(row.stat_value9),
+                                ),
+                            ],
+                        ),
+                        ArrayInstance::new(
+                            row.stat_value10 == 0,
+                            vec![
+                                ArrayField::new(
+                                    "stat_type",
+                                    "stat_type10",
+                                    Value::Uint(row.stat_type10.try_into().unwrap()),
+                                ),
+                                ArrayField::new(
+                                    "value",
+                                    "stat_value10",
+                                    Value::Int(row.stat_value10),
+                                ),
+                            ],
+                        ),
+                    ]),
+                ),
+                Array::new(
                     "spells",
                     "Spells",
                     false,
@@ -529,7 +710,7 @@ pub fn vanilla(dir: &Path) -> (Vec<GenericThing>, Optimizations) {
                                 ArrayField::new(
                                     "spell_trigger",
                                     "spell_trigger_1",
-                                    Value::VanillaSpellTriggerType(
+                                    Value::TbcWrathSpellTriggerType(
                                         row.spell_trigger_1.try_into().unwrap(),
                                     ),
                                 ),
@@ -567,7 +748,7 @@ pub fn vanilla(dir: &Path) -> (Vec<GenericThing>, Optimizations) {
                                 ArrayField::new(
                                     "spell_trigger",
                                     "spell_trigger_2",
-                                    Value::VanillaSpellTriggerType(
+                                    Value::TbcWrathSpellTriggerType(
                                         row.spell_trigger_2.try_into().unwrap(),
                                     ),
                                 ),
@@ -605,7 +786,7 @@ pub fn vanilla(dir: &Path) -> (Vec<GenericThing>, Optimizations) {
                                 ArrayField::new(
                                     "spell_trigger",
                                     "spell_trigger_3",
-                                    Value::VanillaSpellTriggerType(
+                                    Value::TbcWrathSpellTriggerType(
                                         row.spell_trigger_3.try_into().unwrap(),
                                     ),
                                 ),
@@ -643,7 +824,7 @@ pub fn vanilla(dir: &Path) -> (Vec<GenericThing>, Optimizations) {
                                 ArrayField::new(
                                     "spell_trigger",
                                     "spell_trigger_4",
-                                    Value::VanillaSpellTriggerType(
+                                    Value::TbcWrathSpellTriggerType(
                                         row.spell_trigger_4.try_into().unwrap(),
                                     ),
                                 ),
@@ -681,7 +862,7 @@ pub fn vanilla(dir: &Path) -> (Vec<GenericThing>, Optimizations) {
                                 ArrayField::new(
                                     "spell_trigger",
                                     "spell_trigger_5",
-                                    Value::VanillaSpellTriggerType(
+                                    Value::TbcWrathSpellTriggerType(
                                         row.spell_trigger_5.try_into().unwrap(),
                                     ),
                                 ),
