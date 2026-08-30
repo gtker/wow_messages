@@ -14,6 +14,15 @@ use crate::wireshark_printer::{
 use crate::{Container, ObjectTags};
 use std::fmt::UpperHex;
 
+fn print_compression_prelude(s: &mut Writer) {
+    s.wln("ptvcursor_add(ptv, hf_woww_decompressed_size, 4, ENC_LITTLE_ENDIAN);");
+    s.wln("compressed_tvb = tvb_child_uncompress_zlib(ptvcursor_tvbuff(ptv), ptvcursor_tvbuff(ptv), ptvcursor_current_offset(ptv), offset_packet_end - ptvcursor_current_offset(ptv));");
+    s.open_curly("if (compressed_tvb != NULL)");
+
+    s.wln("ptvcursor_t* old_ptv = ptv;");
+    s.wln("ptv = ptvcursor_new(pinfo->pool, tree, compressed_tvb, 0);");
+}
+
 pub(crate) fn print_parser(
     wireshark_messages: &[&Container],
     all_relevant_messages: &[&Container],
@@ -35,12 +44,7 @@ pub(crate) fn print_parser(
         let inside_compressed_message = e.tags().compressed();
 
         if inside_compressed_message {
-            s.wln("ptvcursor_add(ptv, hf_woww_decompressed_size, 4, ENC_LITTLE_ENDIAN);");
-            s.wln("compressed_tvb = tvb_uncompress(ptvcursor_tvbuff(ptv), ptvcursor_current_offset(ptv), offset_packet_end - ptvcursor_current_offset(ptv));");
-            s.open_curly("if (compressed_tvb != NULL)");
-
-            s.wln("ptvcursor_t* old_ptv = ptv;");
-            s.wln("ptv = ptvcursor_new(wmem_packet_scope(), tree, compressed_tvb, 0);");
+            print_compression_prelude(&mut s);
         }
 
         let versions = all_relevant_messages
@@ -150,7 +154,7 @@ fn print_variables(mut v: Vec<String>) -> Writer {
     v.dedup();
 
     for name in v {
-        s.wln(format!("    guint32 {name} = 0;"));
+        s.wln(format!("    uint32_t {name} = 0;"));
     }
 
     s
@@ -456,13 +460,7 @@ fn print_definition(
         }
         Type::Array(array) => {
             if array.compressed() {
-                s.wln("ptvcursor_add(ptv, hf_woww_decompressed_size, 4, ENC_LITTLE_ENDIAN);");
-
-                s.wln("compressed_tvb = tvb_uncompress(ptvcursor_tvbuff(ptv), ptvcursor_current_offset(ptv), offset_packet_end - ptvcursor_current_offset(ptv));");
-                s.open_curly("if (compressed_tvb != NULL)");
-
-                s.wln("ptvcursor_t* old_ptv = ptv;");
-                s.wln("ptv = ptvcursor_new(wmem_packet_scope(), tree, compressed_tvb, 0);");
+                print_compression_prelude(s);
             }
 
             let len = match array.size() {
@@ -486,14 +484,14 @@ fn print_definition(
                 let iteration_variable = match array.size() {
                     ArraySize::Fixed(_) | ArraySize::Variable(_) => {
                         s.open_curly(format!(
-                            "for (guint32 i{depth} = 0; i{depth} < {len}; ++i{depth})"
+                            "for (uint32_t i{depth} = 0; i{depth} < {len}; ++i{depth})"
                         ));
 
                         Some(format!("i{depth}"))
                     }
                     ArraySize::Endless => {
                         let packet_end = if array.compressed() || inside_compressed_message {
-                            s.wln("gint compression_end = tvb_reported_length(compressed_tvb);");
+                            s.wln("unsigned compression_end = tvb_reported_length(compressed_tvb);");
                             "compression_end"
                         } else {
                             "offset_packet_end"
