@@ -117,7 +117,9 @@ fn print_read_array(
 
                 s.wln("let mut decoder = &mut flate2::read::ZlibDecoder::new(r);");
                 // TODO: I want to know if this fails, should this be a separate error mode?
-                s.wln("decoder.read_to_end(&mut buf).unwrap();");
+                s.body(format!("if {name}_decompressed_size != 0"), |s| {
+                    s.wln("decoder.read_to_end(&mut buf).unwrap();");
+                });
                 s.wln("let mut r = &buf[..];");
                 s.newline();
             }

@@ -309,9 +309,11 @@ fn print_container_example_member(
 
                 let mut decoded_bytes = Vec::new();
                 let mut decoder = flate2::read::ZlibDecoder::new(bytes.as_slice());
-                decoder
-                    .read_to_end(&mut decoded_bytes)
-                    .expect("Failed to decode ZLib compressed field.");
+                if bytes.len() != 0 {
+                    decoder
+                        .read_to_end(&mut decoded_bytes)
+                        .expect("Failed to decode ZLib compressed field.");
+                }
 
                 print_container_example_definition(
                     s,

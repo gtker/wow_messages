@@ -63,7 +63,9 @@ impl CMSG_AUTH_SESSION {
 
             let mut buf = Vec::with_capacity(addon_info_decompressed_size as usize);
             let mut decoder = &mut flate2::read::ZlibDecoder::new(r);
-            decoder.read_to_end(&mut buf).unwrap();
+            if addon_info_decompressed_size != 0 {
+                decoder.read_to_end(&mut buf).unwrap();
+            }
             let mut r = &buf[..];
 
             let mut current_size = {
