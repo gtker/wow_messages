@@ -2569,7 +2569,7 @@
         },
         {
           "name": "map",
-          "type": "Map"
+          "type": "uint32"
         },
         {
           "name": "position",
@@ -6184,7 +6184,7 @@
       "fields": [
         {
           "name": "map",
-          "type": "Map"
+          "type": "uint32"
         },
         {
           "name": "reset_time",

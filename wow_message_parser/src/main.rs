@@ -79,6 +79,7 @@ const SKIP_STR: &str = "skip_codegen";
 const LOGIN_VERSIONS: &str = "login_versions";
 const RUST_BASE_TYPE: &str = "rust_base_type";
 const ZERO_IS_ALWAYS_VALID: &str = "zero_is_always_valid";
+const FROM_DBC_FILE: &str = "from_dbc_file";
 const NON_NETWORK_TYPE: &str = "non_network_type";
 const USED_IN_UPDATE_MASK: &str = "used_in_update_mask";
 const VALID_RANGE: &str = "valid_range";

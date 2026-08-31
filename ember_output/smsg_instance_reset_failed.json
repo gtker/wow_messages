@@ -10,7 +10,7 @@
     },
     {
       "name": "map",
-      "type": "Map"
+      "type": "uint32"
     }
   ]
 }

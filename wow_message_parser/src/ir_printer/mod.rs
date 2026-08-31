@@ -168,6 +168,8 @@ pub(crate) struct IrTags {
     #[serde(skip_serializing_if = "Option::is_none")]
     used_in_update_mask: Option<bool>,
     #[serde(skip_serializing_if = "Option::is_none")]
+    from_dbc_file: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
     maximum_length: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
     valid_range: Option<IrValidRange>,
@@ -203,6 +205,12 @@ impl IrTags {
             None
         };
 
+        let from_dbc_file = if let Some(file) = tags.from_dbc_file() {
+            Some(file.clone())
+        } else {
+            None
+        };
+
         let version = Some(match tags.all_versions() {
             AllVersions::Login(l) => {
                 let versions = IrLoginVersion::from_login_versions(l);
@@ -222,6 +230,7 @@ impl IrTags {
             unimplemented,
             non_network_type,
             used_in_update_mask,
+            from_dbc_file,
             maximum_length: None,
             valid_range: None,
         }
@@ -238,6 +247,7 @@ impl IrTags {
             unimplemented: None,
             non_network_type: None,
             used_in_update_mask: None,
+            from_dbc_file: None,
             maximum_length: tags.maximum_length().map(|a| a.to_string()),
             valid_range: tags.valid_range().map(|(from, to)| IrValidRange {
                 from: from.to_string(),

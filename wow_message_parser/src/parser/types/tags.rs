@@ -21,6 +21,7 @@ pub(crate) struct ObjectTags {
     unimplemented: bool,
     rust_base_ty: bool,
     zero_is_always_valid: bool,
+    from_dbc_file: Option<String>,
     non_network_type: bool,
     used_in_update_mask: bool,
 }
@@ -35,6 +36,7 @@ impl ObjectTags {
         unimplemented: bool,
         rust_base_ty: bool,
         zero_is_always_valid: bool,
+        from_dbc_file: Option<String>,
         non_network_type: bool,
         used_in_update_mask: bool,
     ) -> Self {
@@ -72,6 +74,7 @@ impl ObjectTags {
             unimplemented,
             rust_base_ty,
             zero_is_always_valid,
+            from_dbc_file,
             non_network_type,
             used_in_update_mask,
         }
@@ -92,7 +95,7 @@ impl ObjectTags {
         };
 
         Self::from_parsed(
-            v.0, None, false, false, false, false, false, false, false, false,
+            v.0, None, false, false, false, false, false, false, None, false, false,
         )
     }
 
@@ -111,6 +114,7 @@ impl ObjectTags {
             false,
             false,
             false,
+            None,
             false,
             false,
         )
@@ -264,6 +268,10 @@ impl ObjectTags {
     }
     pub(crate) fn zero_is_always_valid(&self) -> bool {
         self.zero_is_always_valid
+    }
+
+    pub(crate) fn from_dbc_file(&self) -> Option<&String> {
+        self.from_dbc_file.as_ref()
     }
 
     pub(crate) fn used_in_update_mask(&self) -> bool {

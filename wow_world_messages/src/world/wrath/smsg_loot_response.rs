@@ -26,6 +26,7 @@ pub struct SMSG_LOOT_RESPONSE {
     pub gold: Gold,
     pub items: Vec<LootItem>,
 }
+
 impl crate::private::Sealed for SMSG_LOOT_RESPONSE {}
 impl SMSG_LOOT_RESPONSE {
     fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
@@ -312,3 +313,4 @@ mod test {
     }
 
 }
+

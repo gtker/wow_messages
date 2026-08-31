@@ -7,9 +7,9 @@ use crate::file_info::FileInfo;
 use crate::parser::types::tags::{MemberTags, TagString};
 use crate::parser::types::version::{AllVersions, LoginVersion, WorldVersion};
 use crate::{
-    ObjectTags, COMMENT, COMPRESSED, DISPLAY, LOGIN_VERSIONS, MAXIMUM_LENGTH, NON_NETWORK_TYPE,
-    PASTE_VERSIONS, RUST_BASE_TYPE, SKIP_STR, TEST_STR, UNIMPLEMENTED, USED_IN_UPDATE_MASK,
-    VALID_RANGE, VERSIONS, ZERO_IS_ALWAYS_VALID,
+    ObjectTags, COMMENT, COMPRESSED, DISPLAY, FROM_DBC_FILE, LOGIN_VERSIONS, MAXIMUM_LENGTH,
+    NON_NETWORK_TYPE, PASTE_VERSIONS, RUST_BASE_TYPE, SKIP_STR, TEST_STR, UNIMPLEMENTED,
+    USED_IN_UPDATE_MASK, VALID_RANGE, VERSIONS, ZERO_IS_ALWAYS_VALID,
 };
 
 #[derive(Debug, Eq, PartialEq, Clone, Default)]
@@ -26,6 +26,7 @@ pub(crate) struct ParsedTags {
     unimplemented: BoolTag,
     rust_base_ty: BoolTag,
     zero_is_always_valid: BoolTag,
+    from_dbc_file: Option<String>,
     non_network_type: BoolTag,
     used_in_update_mask: BoolTag,
     valid_range: Option<(i128, i128)>,
@@ -50,6 +51,9 @@ impl ParsedTags {
 
         if let Some(v) = t.display {
             self.display = Some(v);
+        }
+        if let Some(v) = t.from_dbc_file {
+            self.from_dbc_file = Some(v);
         }
 
         self.paste_versions.append(&mut t.paste_versions);
@@ -123,6 +127,7 @@ impl ParsedTags {
             self.rust_base_ty
                 .into_bool_with_default(rust_base_type_default),
             self.zero_is_always_valid.into_bool(),
+            self.from_dbc_file,
             self.non_network_type.into_bool(),
             self.used_in_update_mask.into_bool(),
         )
@@ -247,6 +252,8 @@ impl ParsedTags {
             self.rust_base_ty.insert(value);
         } else if key == ZERO_IS_ALWAYS_VALID {
             self.zero_is_always_valid.insert(value);
+        } else if key == FROM_DBC_FILE {
+            self.from_dbc_file = Some(value.to_string());
         } else if key == NON_NETWORK_TYPE {
             self.non_network_type.insert(value);
         } else if key == USED_IN_UPDATE_MASK {

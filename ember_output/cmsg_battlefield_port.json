@@ -5,7 +5,7 @@
   "fields": [
     {
       "name": "map",
-      "type": "Map"
+      "type": "uint32"
     },
     {
       "name": "action",

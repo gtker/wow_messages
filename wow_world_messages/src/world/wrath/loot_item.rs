@@ -24,6 +24,7 @@ pub struct LootItem {
     pub random_property: i32,
     pub ty: LootSlotType,
 }
+
 impl LootItem {
     pub(crate) fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
         // index: u8
@@ -86,3 +87,4 @@ impl LootItem {
     }
 
 }
+

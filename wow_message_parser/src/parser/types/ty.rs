@@ -123,7 +123,13 @@ impl Type {
     pub(crate) fn ember_str(&self) -> String {
         match self {
             Type::Array(s) => s.ember_str(),
-            Type::Enum { e, .. } | Type::Flag { e, .. } => e.name().to_string(),
+            Type::Enum { e, .. } | Type::Flag { e, .. } => {
+                if e.tags().from_dbc_file().is_some() {
+                    e.ty().ember_str().to_string()
+                } else {
+                    e.name().to_string()
+                }
+            }
             Type::Struct { e } => e.name().to_string(),
 
             _ => self.to_parsed_type().ember_str(),

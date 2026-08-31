@@ -237,12 +237,27 @@ smsg SMSG_TEST = 0x00 {
 }
 ```
 
+## For Definers
+
 ### `zero_is_always_valid`
 
 Used on `flag`s when a zero value implicitly also means that any specific enumerator is valid.
 
 For example on `AllowedRace`, a 0 value means that all races are allowed, but a 0xFFFFFFFF value also means that all
 races are allowed.
+
+### `is_dbc_data`
+
+Used on definers if these are in some way extracted from DBC data that theoretically could be changed.
+For example clients ship with a certain DBC but the DBC values aren't necessarily hardcoded.
+
+```rust,ignore
+enum Map : u8 {
+    VASHJIR = 0;
+} {
+    is_dbc_data = "true";
+}
+```
 
 ## For Definer Enumerators
 

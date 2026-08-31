@@ -3832,7 +3832,6 @@ impl ClientOpcodeMessage {
             Self::CMSG_QUESTGIVER_HELLO(c) => crate::Message::to_test_case_string(c),
             Self::CMSG_QUESTGIVER_QUERY_QUEST(c) => crate::Message::to_test_case_string(c.as_ref()),
             Self::CMSG_QUESTGIVER_QUEST_AUTOLAUNCH => crate::Message::to_test_case_string(&CMSG_QUESTGIVER_QUEST_AUTOLAUNCH{}),
-            Self::CMSG_QUESTGIVER_ACCEPT_QUEST(c) => crate::Message::to_test_case_string(c.as_ref()),
             Self::CMSG_QUESTGIVER_COMPLETE_QUEST(c) => crate::Message::to_test_case_string(c.as_ref()),
             Self::CMSG_QUESTGIVER_REQUEST_REWARD(c) => crate::Message::to_test_case_string(c.as_ref()),
             Self::CMSG_QUESTGIVER_CHOOSE_REWARD(c) => crate::Message::to_test_case_string(c.as_ref()),

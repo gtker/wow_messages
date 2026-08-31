@@ -134,6 +134,7 @@ enum Map : u32 {
     }
 } {
     rust_base_type = "true";
+    from_dbc_file = "Map.dbc";
     versions = "1.12";
 }
 
@@ -389,6 +390,7 @@ enum Map : u32 {
     }
 } {
     rust_base_type = "true";
+    from_dbc_file = "Map.dbc";
     versions = "2.4.3";
 }
 
@@ -801,6 +803,7 @@ enum Map : u32 {
     }
 } {
     rust_base_type = "true";
+    from_dbc_file = "Map.dbc";
     versions = "3.3.5";
 }
 

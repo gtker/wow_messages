@@ -203,7 +203,7 @@ mod test {
                 exp_group_bonus: 1_f32,
                 experience_without_rested: 0x32,
             },
-            exp_includes_recruit_a_friend_bonus: false,
+            exp_includes_recruit_a_friend_bonus: false, 
         }
 
     }
@@ -269,3 +269,4 @@ mod test {
     }
 
 }
+
