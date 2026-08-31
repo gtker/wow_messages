@@ -714,6 +714,12 @@
             "description": "Object is used by UpdateMask type."
           },
           "type": "boolean"
+        },
+        "from_dbc_file": {
+          "metadata": {
+            "description": ""
+          },
+          "type": "string"
         }
       }
     },
