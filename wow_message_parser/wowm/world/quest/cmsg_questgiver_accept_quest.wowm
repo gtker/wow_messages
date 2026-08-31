@@ -5,7 +5,6 @@ cmsg CMSG_QUESTGIVER_ACCEPT_QUEST = 0x0189 {
     versions = "1 2";
 }
 
-/// The 3.3.5a client appends a trailing u32 that AzerothCore reads as `unk1`.
 cmsg CMSG_QUESTGIVER_ACCEPT_QUEST = 0x0189 {
     Guid guid;
     u32 quest_id;
@@ -14,3 +13,16 @@ cmsg CMSG_QUESTGIVER_ACCEPT_QUEST = 0x0189 {
     versions = "3.3.5";
 }
 
+test CMSG_QUESTGIVER_ACCEPT_QUEST {
+    guid = 0x1122334455667788;
+    quest_id = 0x12345678;
+    unk1 = 0xCAFEBABE;
+} [
+    0x00, 0x14, /* size */
+    0x89, 0x01, 0x00, 0x00, /* opcode */
+    0x88, 0x77, 0x66, 0x55, 0x44, 0x33, 0x22, 0x11, /* guid */
+    0x78, 0x56, 0x34, 0x12, /* quest_id */
+    0xBE, 0xBA, 0xFE, 0xCA, /* unk1 */
+] {
+    versions = "3.3.5";
+}

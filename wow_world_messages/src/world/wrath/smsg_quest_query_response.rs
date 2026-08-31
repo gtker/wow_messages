@@ -3,7 +3,7 @@ use std::io::{Read, Write};
 use crate::shared::gold_vanilla_tbc_wrath::Gold;
 use crate::shared::level_vanilla_tbc_wrath::Level;
 use crate::wrath::{
-    QuestItemRequirement, QuestItemReward, QuestObjective, Vector2d,
+    Faction, QuestItemRequirement, QuestItemReward, QuestObjective, Vector2d,
 };
 
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/quest/smsg_quest_query_response.wowm:93`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/quest/smsg_quest_query_response.wowm#L93):
@@ -16,9 +16,9 @@ use crate::wrath::{
 ///     u32 zone_or_sort;
 ///     u32 quest_type;
 ///     u32 suggest_player_amount;
-///     u32 reputation_objective_faction;
+///     (u32)Faction reputation_objective_faction;
 ///     u32 reputation_objective_value;
-///     u32 required_opposite_faction;
+///     (u32)Faction required_opposite_faction;
 ///     u32 required_opposite_reputation_value;
 ///     u32 next_quest_in_chain;
 ///     u32 xp_id;
@@ -66,11 +66,11 @@ pub struct SMSG_QUEST_QUERY_RESPONSE {
     pub quest_type: u32,
     pub suggest_player_amount: u32,
     /// cmangos: shown in quest log as part of quest objective
-    pub reputation_objective_faction: u32,
+    pub reputation_objective_faction: Faction,
     /// cmangos: shown in quest log as part of quest objective
     pub reputation_objective_value: u32,
     /// cmangos: RequiredOpositeRepFaction, required faction value with another (oposite) faction (objective). cmangos sets to 0
-    pub required_opposite_faction: u32,
+    pub required_opposite_faction: Faction,
     /// cmangos: RequiredOpositeRepValue, required faction value with another (oposite) faction (objective). cmangos sets to 0
     pub required_opposite_reputation_value: u32,
     pub next_quest_in_chain: u32,
@@ -140,14 +140,14 @@ impl SMSG_QUEST_QUERY_RESPONSE {
         // suggest_player_amount: u32
         let suggest_player_amount = crate::util::read_u32_le(&mut r)?;
 
-        // reputation_objective_faction: u32
-        let reputation_objective_faction = crate::util::read_u32_le(&mut r)?;
+        // reputation_objective_faction: Faction
+        let reputation_objective_faction = (crate::util::read_u32_le(&mut r)? as u16).try_into()?;
 
         // reputation_objective_value: u32
         let reputation_objective_value = crate::util::read_u32_le(&mut r)?;
 
-        // required_opposite_faction: u32
-        let required_opposite_faction = crate::util::read_u32_le(&mut r)?;
+        // required_opposite_faction: Faction
+        let required_opposite_faction = (crate::util::read_u32_le(&mut r)? as u16).try_into()?;
 
         // required_opposite_reputation_value: u32
         let required_opposite_reputation_value = crate::util::read_u32_le(&mut r)?;
@@ -381,9 +381,9 @@ impl crate::Message for SMSG_QUEST_QUERY_RESPONSE {
         writeln!(s, "    zone_or_sort = {};", self.zone_or_sort).unwrap();
         writeln!(s, "    quest_type = {};", self.quest_type).unwrap();
         writeln!(s, "    suggest_player_amount = {};", self.suggest_player_amount).unwrap();
-        writeln!(s, "    reputation_objective_faction = {};", self.reputation_objective_faction).unwrap();
+        writeln!(s, "    reputation_objective_faction = {};", self.reputation_objective_faction.as_test_case_value()).unwrap();
         writeln!(s, "    reputation_objective_value = {};", self.reputation_objective_value).unwrap();
-        writeln!(s, "    required_opposite_faction = {};", self.required_opposite_faction).unwrap();
+        writeln!(s, "    required_opposite_faction = {};", self.required_opposite_faction.as_test_case_value()).unwrap();
         writeln!(s, "    required_opposite_reputation_value = {};", self.required_opposite_reputation_value).unwrap();
         writeln!(s, "    next_quest_in_chain = {};", self.next_quest_in_chain).unwrap();
         writeln!(s, "    xp_id = {};", self.xp_id).unwrap();
@@ -615,14 +615,14 @@ impl crate::Message for SMSG_QUEST_QUERY_RESPONSE {
         // suggest_player_amount: u32
         w.write_all(&self.suggest_player_amount.to_le_bytes())?;
 
-        // reputation_objective_faction: u32
-        w.write_all(&self.reputation_objective_faction.to_le_bytes())?;
+        // reputation_objective_faction: Faction
+        w.write_all(&u32::from(self.reputation_objective_faction.as_int()).to_le_bytes())?;
 
         // reputation_objective_value: u32
         w.write_all(&self.reputation_objective_value.to_le_bytes())?;
 
-        // required_opposite_faction: u32
-        w.write_all(&self.required_opposite_faction.to_le_bytes())?;
+        // required_opposite_faction: Faction
+        w.write_all(&u32::from(self.required_opposite_faction.as_int()).to_le_bytes())?;
 
         // required_opposite_reputation_value: u32
         w.write_all(&self.required_opposite_reputation_value.to_le_bytes())?;
@@ -778,9 +778,9 @@ impl SMSG_QUEST_QUERY_RESPONSE {
         + 4 // zone_or_sort: u32
         + 4 // quest_type: u32
         + 4 // suggest_player_amount: u32
-        + 4 // reputation_objective_faction: u32
+        + 4 // reputation_objective_faction: Faction
         + 4 // reputation_objective_value: u32
-        + 4 // required_opposite_faction: u32
+        + 4 // required_opposite_faction: Faction
         + 4 // required_opposite_reputation_value: u32
         + 4 // next_quest_in_chain: u32
         + 4 // xp_id: u32

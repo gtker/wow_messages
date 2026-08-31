@@ -2,8 +2,7 @@ use std::io::{Read, Write};
 
 use crate::Guid;
 
-/// The 3.3.5a client appends a trailing u32 that AzerothCore reads as `unk1`.
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/quest/cmsg_questgiver_accept_quest.wowm:9`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/quest/cmsg_questgiver_accept_quest.wowm#L9):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/quest/cmsg_questgiver_accept_quest.wowm:8`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/quest/cmsg_questgiver_accept_quest.wowm#L8):
 /// ```text
 /// cmsg CMSG_QUESTGIVER_ACCEPT_QUEST = 0x0189 {
 ///     Guid guid;
@@ -51,41 +50,6 @@ impl crate::Message for CMSG_QUESTGIVER_ACCEPT_QUEST {
         "CMSG_QUESTGIVER_ACCEPT_QUEST"
     }
 
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        use std::fmt::Write;
-        use crate::traits::Message;
-
-        let mut s = String::new();
-
-        writeln!(s, "test CMSG_QUESTGIVER_ACCEPT_QUEST {{").unwrap();
-        // Members
-        writeln!(s, "    guid = {};", self.guid.guid()).unwrap();
-        writeln!(s, "    quest_id = {};", self.quest_id).unwrap();
-        writeln!(s, "    unk1 = {};", self.unk1).unwrap();
-
-        writeln!(s, "}} [").unwrap();
-
-        let [a, b] = 20_u16.to_be_bytes();
-        writeln!(s, "    {a:#04X}, {b:#04X}, /* size */").unwrap();
-        let [a, b, c, d] = 393_u32.to_le_bytes();
-        writeln!(s, "    {a:#04X}, {b:#04X}, {c:#04X}, {d:#04X}, /* opcode */").unwrap();
-        let mut bytes: Vec<u8> = Vec::new();
-        self.write_into_vec(&mut bytes).unwrap();
-        let mut bytes = bytes.into_iter();
-
-        crate::util::write_bytes(&mut s, &mut bytes, 8, "guid", "    ");
-        crate::util::write_bytes(&mut s, &mut bytes, 4, "quest_id", "    ");
-        crate::util::write_bytes(&mut s, &mut bytes, 4, "unk1", "    ");
-
-
-        writeln!(s, "] {{").unwrap();
-        writeln!(s, "    versions = \"{}\";", std::env::var("WOWM_TEST_CASE_WORLD_VERSION").unwrap_or("3.3.5".to_string())).unwrap();
-        writeln!(s, "}}\n").unwrap();
-
-        Some(s)
-    }
-
     fn size_without_header(&self) -> u32 {
         16
     }
@@ -111,4 +75,90 @@ impl crate::Message for CMSG_QUESTGIVER_ACCEPT_QUEST {
 
 #[cfg(feature = "wrath")]
 impl crate::wrath::ClientMessage for CMSG_QUESTGIVER_ACCEPT_QUEST {}
+
+#[cfg(test)]
+mod test {
+    #![allow(clippy::missing_const_for_fn)]
+    use super::CMSG_QUESTGIVER_ACCEPT_QUEST;
+    use super::*;
+    use super::super::*;
+    use crate::wrath::opcodes::ClientOpcodeMessage;
+    use crate::Guid;
+    use crate::wrath::{ClientMessage, ServerMessage};
+
+    const HEADER_SIZE: usize = 2 + 4;
+    const RAW0: [u8; 22] = [ 0x00, 0x14, 0x89, 0x01, 0x00, 0x00, 0x88, 0x77, 0x66,
+         0x55, 0x44, 0x33, 0x22, 0x11, 0x78, 0x56, 0x34, 0x12, 0xBE, 0xBA, 0xFE,
+         0xCA, ];
+
+    pub(crate) fn expected0() -> CMSG_QUESTGIVER_ACCEPT_QUEST {
+        CMSG_QUESTGIVER_ACCEPT_QUEST {
+            guid: Guid::new(0x1122334455667788),
+            quest_id: 0x12345678,
+            unk1: 0xCAFEBABE,
+        }
+
+    }
+
+    // Generated from `wow_message_parser/wowm/world/quest/cmsg_questgiver_accept_quest.wowm` line 16.
+    #[cfg(feature = "sync")]
+    #[cfg_attr(feature = "sync", test)]
+    fn cmsg_questgiver_accept_quest0() {
+        let expected = expected0();
+        let t = ClientOpcodeMessage::read_unencrypted(&mut std::io::Cursor::new(&RAW0)).unwrap();
+        let t = match t {
+            ClientOpcodeMessage::CMSG_QUESTGIVER_ACCEPT_QUEST(t) => t,
+            opcode => panic!("incorrect opcode. Expected CMSG_QUESTGIVER_ACCEPT_QUEST, got {opcode:#?}"),
+        };
+
+        assert_eq!(t.as_ref(), &expected);
+        assert_eq!(16 + HEADER_SIZE, RAW0.len());
+
+        let mut dest = Vec::with_capacity(RAW0.len());
+        expected.write_unencrypted_client(&mut std::io::Cursor::new(&mut dest)).unwrap();
+
+        assert_eq!(dest, RAW0);
+    }
+
+    // Generated from `wow_message_parser/wowm/world/quest/cmsg_questgiver_accept_quest.wowm` line 16.
+    #[cfg(feature = "tokio")]
+    #[cfg_attr(feature = "tokio", tokio::test)]
+    async fn tokio_cmsg_questgiver_accept_quest0() {
+        let expected = expected0();
+        let t = ClientOpcodeMessage::tokio_read_unencrypted(&mut std::io::Cursor::new(&RAW0)).await.unwrap();
+        let t = match t {
+            ClientOpcodeMessage::CMSG_QUESTGIVER_ACCEPT_QUEST(t) => t,
+            opcode => panic!("incorrect opcode. Expected CMSG_QUESTGIVER_ACCEPT_QUEST, got {opcode:#?}"),
+        };
+
+        assert_eq!(t.as_ref(), &expected);
+        assert_eq!(16 + HEADER_SIZE, RAW0.len());
+
+        let mut dest = Vec::with_capacity(RAW0.len());
+        expected.tokio_write_unencrypted_client(&mut std::io::Cursor::new(&mut dest)).await.unwrap();
+
+        assert_eq!(dest, RAW0);
+    }
+
+    // Generated from `wow_message_parser/wowm/world/quest/cmsg_questgiver_accept_quest.wowm` line 16.
+    #[cfg(feature = "async-std")]
+    #[cfg_attr(feature = "async-std", async_std::test)]
+    async fn astd_cmsg_questgiver_accept_quest0() {
+        let expected = expected0();
+        let t = ClientOpcodeMessage::astd_read_unencrypted(&mut async_std::io::Cursor::new(&RAW0)).await.unwrap();
+        let t = match t {
+            ClientOpcodeMessage::CMSG_QUESTGIVER_ACCEPT_QUEST(t) => t,
+            opcode => panic!("incorrect opcode. Expected CMSG_QUESTGIVER_ACCEPT_QUEST, got {opcode:#?}"),
+        };
+
+        assert_eq!(t.as_ref(), &expected);
+        assert_eq!(16 + HEADER_SIZE, RAW0.len());
+
+        let mut dest = Vec::with_capacity(RAW0.len());
+        expected.astd_write_unencrypted_client(&mut async_std::io::Cursor::new(&mut dest)).await.unwrap();
+
+        assert_eq!(dest, RAW0);
+    }
+
+}
 
