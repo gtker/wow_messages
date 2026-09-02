@@ -83,7 +83,6 @@ impl MovementInfo {
             backwards_running_speed,
             backwards_swimming_speed,
             flight_speed,
-            orientation: self.orientation,
             pitch_rate,
             position: self.position,
             running_speed,

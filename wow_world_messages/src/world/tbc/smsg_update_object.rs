@@ -3,10 +3,10 @@ use std::io::{Read, Write};
 use crate::Guid;
 use crate::tbc::{
     MovementBlock, MovementFlags, Object, ObjectType, SplineFlag, TransportInfo, 
-    UpdateFlag, UpdateMask, UpdateType, Vector3d,
+    UpdateFlag, UpdateMask, UpdateType, Vector3d, Vector4d,
 };
 
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/gameobject/smsg_update_object_2_4_3.wowm:115`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/gameobject/smsg_update_object_2_4_3.wowm#L115):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/gameobject/smsg_update_object_2_4_3.wowm:113`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/gameobject/smsg_update_object_2_4_3.wowm#L113):
 /// ```text
 /// smsg SMSG_UPDATE_OBJECT = 0x00A9 {
 ///     u32 amount_of_objects;
@@ -107,7 +107,6 @@ impl crate::Message for SMSG_UPDATE_OBJECT {
                                 fall_time,
                                 flags,
                                 flying_speed,
-                                living_orientation,
                                 living_position,
                                 running_speed,
                                 swimming_speed,
@@ -118,29 +117,29 @@ impl crate::Message for SMSG_UPDATE_OBJECT {
                                 writeln!(s, "                flags = {};", MovementFlags::new(flags.as_int()).as_test_case_value()).unwrap();
                                 writeln!(s, "                extra_flags = {};", extra_flags).unwrap();
                                 writeln!(s, "                timestamp = {};", timestamp).unwrap();
-                                // living_position: Vector3d
+                                // living_position: Vector4d
                                 writeln!(s, "                living_position = {{").unwrap();
                                 // Members
                                 writeln!(s, "                    x = {};", if living_position.x.to_string().contains('.') { living_position.x.to_string() } else { format!("{}.0", living_position.x) }).unwrap();
                                 writeln!(s, "                    y = {};", if living_position.y.to_string().contains('.') { living_position.y.to_string() } else { format!("{}.0", living_position.y) }).unwrap();
                                 writeln!(s, "                    z = {};", if living_position.z.to_string().contains('.') { living_position.z.to_string() } else { format!("{}.0", living_position.z) }).unwrap();
+                                writeln!(s, "                    orientation = {};", if living_position.orientation.to_string().contains('.') { living_position.orientation.to_string() } else { format!("{}.0", living_position.orientation) }).unwrap();
 
                                 writeln!(s, "                }};").unwrap();
-                                writeln!(s, "                living_orientation = {};", if living_orientation.to_string().contains('.') { living_orientation.to_string() } else { format!("{}.0", living_orientation) }).unwrap();
                                 if let Some(if_statement) = &flags.get_on_transport() {
                                     // transport: TransportInfo
                                     writeln!(s, "                transport = {{").unwrap();
                                     // Members
                                     writeln!(s, "                    guid = {};", if_statement.transport.guid.guid()).unwrap();
-                                    // position: Vector3d
+                                    // position: Vector4d
                                     writeln!(s, "                    position = {{").unwrap();
                                     // Members
                                     writeln!(s, "                        x = {};", if if_statement.transport.position.x.to_string().contains('.') { if_statement.transport.position.x.to_string() } else { format!("{}.0", if_statement.transport.position.x) }).unwrap();
                                     writeln!(s, "                        y = {};", if if_statement.transport.position.y.to_string().contains('.') { if_statement.transport.position.y.to_string() } else { format!("{}.0", if_statement.transport.position.y) }).unwrap();
                                     writeln!(s, "                        z = {};", if if_statement.transport.position.z.to_string().contains('.') { if_statement.transport.position.z.to_string() } else { format!("{}.0", if_statement.transport.position.z) }).unwrap();
+                                    writeln!(s, "                        orientation = {};", if if_statement.transport.position.orientation.to_string().contains('.') { if_statement.transport.position.orientation.to_string() } else { format!("{}.0", if_statement.transport.position.orientation) }).unwrap();
 
                                     writeln!(s, "                    }};").unwrap();
-                                    writeln!(s, "                    orientation = {};", if if_statement.transport.orientation.to_string().contains('.') { if_statement.transport.orientation.to_string() } else { format!("{}.0", if_statement.transport.orientation) }).unwrap();
                                     writeln!(s, "                    timestamp = {};", if_statement.transport.timestamp).unwrap();
 
                                     writeln!(s, "                }};").unwrap();
@@ -237,18 +236,17 @@ impl crate::Message for SMSG_UPDATE_OBJECT {
 
                             }
                             crate::tbc::MovementBlock_UpdateFlag_Living::HasPosition {
-                                orientation,
                                 position,
                             } => {
-                                // position: Vector3d
+                                // position: Vector4d
                                 writeln!(s, "                position = {{").unwrap();
                                 // Members
                                 writeln!(s, "                    x = {};", if position.x.to_string().contains('.') { position.x.to_string() } else { format!("{}.0", position.x) }).unwrap();
                                 writeln!(s, "                    y = {};", if position.y.to_string().contains('.') { position.y.to_string() } else { format!("{}.0", position.y) }).unwrap();
                                 writeln!(s, "                    z = {};", if position.z.to_string().contains('.') { position.z.to_string() } else { format!("{}.0", position.z) }).unwrap();
+                                writeln!(s, "                    orientation = {};", if position.orientation.to_string().contains('.') { position.orientation.to_string() } else { format!("{}.0", position.orientation) }).unwrap();
 
                                 writeln!(s, "                }};").unwrap();
-                                writeln!(s, "                orientation = {};", if orientation.to_string().contains('.') { orientation.to_string() } else { format!("{}.0", orientation) }).unwrap();
                             }
                         }
                     }
@@ -295,7 +293,6 @@ impl crate::Message for SMSG_UPDATE_OBJECT {
                                 fall_time,
                                 flags,
                                 flying_speed,
-                                living_orientation,
                                 living_position,
                                 running_speed,
                                 swimming_speed,
@@ -306,29 +303,29 @@ impl crate::Message for SMSG_UPDATE_OBJECT {
                                 writeln!(s, "                flags = {};", MovementFlags::new(flags.as_int()).as_test_case_value()).unwrap();
                                 writeln!(s, "                extra_flags = {};", extra_flags).unwrap();
                                 writeln!(s, "                timestamp = {};", timestamp).unwrap();
-                                // living_position: Vector3d
+                                // living_position: Vector4d
                                 writeln!(s, "                living_position = {{").unwrap();
                                 // Members
                                 writeln!(s, "                    x = {};", if living_position.x.to_string().contains('.') { living_position.x.to_string() } else { format!("{}.0", living_position.x) }).unwrap();
                                 writeln!(s, "                    y = {};", if living_position.y.to_string().contains('.') { living_position.y.to_string() } else { format!("{}.0", living_position.y) }).unwrap();
                                 writeln!(s, "                    z = {};", if living_position.z.to_string().contains('.') { living_position.z.to_string() } else { format!("{}.0", living_position.z) }).unwrap();
+                                writeln!(s, "                    orientation = {};", if living_position.orientation.to_string().contains('.') { living_position.orientation.to_string() } else { format!("{}.0", living_position.orientation) }).unwrap();
 
                                 writeln!(s, "                }};").unwrap();
-                                writeln!(s, "                living_orientation = {};", if living_orientation.to_string().contains('.') { living_orientation.to_string() } else { format!("{}.0", living_orientation) }).unwrap();
                                 if let Some(if_statement) = &flags.get_on_transport() {
                                     // transport: TransportInfo
                                     writeln!(s, "                transport = {{").unwrap();
                                     // Members
                                     writeln!(s, "                    guid = {};", if_statement.transport.guid.guid()).unwrap();
-                                    // position: Vector3d
+                                    // position: Vector4d
                                     writeln!(s, "                    position = {{").unwrap();
                                     // Members
                                     writeln!(s, "                        x = {};", if if_statement.transport.position.x.to_string().contains('.') { if_statement.transport.position.x.to_string() } else { format!("{}.0", if_statement.transport.position.x) }).unwrap();
                                     writeln!(s, "                        y = {};", if if_statement.transport.position.y.to_string().contains('.') { if_statement.transport.position.y.to_string() } else { format!("{}.0", if_statement.transport.position.y) }).unwrap();
                                     writeln!(s, "                        z = {};", if if_statement.transport.position.z.to_string().contains('.') { if_statement.transport.position.z.to_string() } else { format!("{}.0", if_statement.transport.position.z) }).unwrap();
+                                    writeln!(s, "                        orientation = {};", if if_statement.transport.position.orientation.to_string().contains('.') { if_statement.transport.position.orientation.to_string() } else { format!("{}.0", if_statement.transport.position.orientation) }).unwrap();
 
                                     writeln!(s, "                    }};").unwrap();
-                                    writeln!(s, "                    orientation = {};", if if_statement.transport.orientation.to_string().contains('.') { if_statement.transport.orientation.to_string() } else { format!("{}.0", if_statement.transport.orientation) }).unwrap();
                                     writeln!(s, "                    timestamp = {};", if_statement.transport.timestamp).unwrap();
 
                                     writeln!(s, "                }};").unwrap();
@@ -425,18 +422,17 @@ impl crate::Message for SMSG_UPDATE_OBJECT {
 
                             }
                             crate::tbc::MovementBlock_UpdateFlag_Living::HasPosition {
-                                orientation,
                                 position,
                             } => {
-                                // position: Vector3d
+                                // position: Vector4d
                                 writeln!(s, "                position = {{").unwrap();
                                 // Members
                                 writeln!(s, "                    x = {};", if position.x.to_string().contains('.') { position.x.to_string() } else { format!("{}.0", position.x) }).unwrap();
                                 writeln!(s, "                    y = {};", if position.y.to_string().contains('.') { position.y.to_string() } else { format!("{}.0", position.y) }).unwrap();
                                 writeln!(s, "                    z = {};", if position.z.to_string().contains('.') { position.z.to_string() } else { format!("{}.0", position.z) }).unwrap();
+                                writeln!(s, "                    orientation = {};", if position.orientation.to_string().contains('.') { position.orientation.to_string() } else { format!("{}.0", position.orientation) }).unwrap();
 
                                 writeln!(s, "                }};").unwrap();
-                                writeln!(s, "                orientation = {};", if orientation.to_string().contains('.') { orientation.to_string() } else { format!("{}.0", orientation) }).unwrap();
                             }
                         }
                     }
@@ -484,7 +480,6 @@ impl crate::Message for SMSG_UPDATE_OBJECT {
                                 fall_time,
                                 flags,
                                 flying_speed,
-                                living_orientation,
                                 living_position,
                                 running_speed,
                                 swimming_speed,
@@ -495,29 +490,29 @@ impl crate::Message for SMSG_UPDATE_OBJECT {
                                 writeln!(s, "                flags = {};", MovementFlags::new(flags.as_int()).as_test_case_value()).unwrap();
                                 writeln!(s, "                extra_flags = {};", extra_flags).unwrap();
                                 writeln!(s, "                timestamp = {};", timestamp).unwrap();
-                                // living_position: Vector3d
+                                // living_position: Vector4d
                                 writeln!(s, "                living_position = {{").unwrap();
                                 // Members
                                 writeln!(s, "                    x = {};", if living_position.x.to_string().contains('.') { living_position.x.to_string() } else { format!("{}.0", living_position.x) }).unwrap();
                                 writeln!(s, "                    y = {};", if living_position.y.to_string().contains('.') { living_position.y.to_string() } else { format!("{}.0", living_position.y) }).unwrap();
                                 writeln!(s, "                    z = {};", if living_position.z.to_string().contains('.') { living_position.z.to_string() } else { format!("{}.0", living_position.z) }).unwrap();
+                                writeln!(s, "                    orientation = {};", if living_position.orientation.to_string().contains('.') { living_position.orientation.to_string() } else { format!("{}.0", living_position.orientation) }).unwrap();
 
                                 writeln!(s, "                }};").unwrap();
-                                writeln!(s, "                living_orientation = {};", if living_orientation.to_string().contains('.') { living_orientation.to_string() } else { format!("{}.0", living_orientation) }).unwrap();
                                 if let Some(if_statement) = &flags.get_on_transport() {
                                     // transport: TransportInfo
                                     writeln!(s, "                transport = {{").unwrap();
                                     // Members
                                     writeln!(s, "                    guid = {};", if_statement.transport.guid.guid()).unwrap();
-                                    // position: Vector3d
+                                    // position: Vector4d
                                     writeln!(s, "                    position = {{").unwrap();
                                     // Members
                                     writeln!(s, "                        x = {};", if if_statement.transport.position.x.to_string().contains('.') { if_statement.transport.position.x.to_string() } else { format!("{}.0", if_statement.transport.position.x) }).unwrap();
                                     writeln!(s, "                        y = {};", if if_statement.transport.position.y.to_string().contains('.') { if_statement.transport.position.y.to_string() } else { format!("{}.0", if_statement.transport.position.y) }).unwrap();
                                     writeln!(s, "                        z = {};", if if_statement.transport.position.z.to_string().contains('.') { if_statement.transport.position.z.to_string() } else { format!("{}.0", if_statement.transport.position.z) }).unwrap();
+                                    writeln!(s, "                        orientation = {};", if if_statement.transport.position.orientation.to_string().contains('.') { if_statement.transport.position.orientation.to_string() } else { format!("{}.0", if_statement.transport.position.orientation) }).unwrap();
 
                                     writeln!(s, "                    }};").unwrap();
-                                    writeln!(s, "                    orientation = {};", if if_statement.transport.orientation.to_string().contains('.') { if_statement.transport.orientation.to_string() } else { format!("{}.0", if_statement.transport.orientation) }).unwrap();
                                     writeln!(s, "                    timestamp = {};", if_statement.transport.timestamp).unwrap();
 
                                     writeln!(s, "                }};").unwrap();
@@ -614,18 +609,17 @@ impl crate::Message for SMSG_UPDATE_OBJECT {
 
                             }
                             crate::tbc::MovementBlock_UpdateFlag_Living::HasPosition {
-                                orientation,
                                 position,
                             } => {
-                                // position: Vector3d
+                                // position: Vector4d
                                 writeln!(s, "                position = {{").unwrap();
                                 // Members
                                 writeln!(s, "                    x = {};", if position.x.to_string().contains('.') { position.x.to_string() } else { format!("{}.0", position.x) }).unwrap();
                                 writeln!(s, "                    y = {};", if position.y.to_string().contains('.') { position.y.to_string() } else { format!("{}.0", position.y) }).unwrap();
                                 writeln!(s, "                    z = {};", if position.z.to_string().contains('.') { position.z.to_string() } else { format!("{}.0", position.z) }).unwrap();
+                                writeln!(s, "                    orientation = {};", if position.orientation.to_string().contains('.') { position.orientation.to_string() } else { format!("{}.0", position.orientation) }).unwrap();
 
                                 writeln!(s, "                }};").unwrap();
-                                writeln!(s, "                orientation = {};", if orientation.to_string().contains('.') { orientation.to_string() } else { format!("{}.0", orientation) }).unwrap();
                             }
                         }
                     }
@@ -720,7 +714,6 @@ impl crate::Message for SMSG_UPDATE_OBJECT {
                                     fall_time,
                                     flags,
                                     flying_speed,
-                                    living_orientation,
                                     living_position,
                                     running_speed,
                                     swimming_speed,
@@ -731,21 +724,21 @@ impl crate::Message for SMSG_UPDATE_OBJECT {
                                     crate::util::write_bytes(&mut s, &mut bytes, 4, "flags", "            ");
                                     crate::util::write_bytes(&mut s, &mut bytes, 1, "extra_flags", "            ");
                                     crate::util::write_bytes(&mut s, &mut bytes, 4, "timestamp", "            ");
-                                    writeln!(s, "    /* living_position: Vector3d start */").unwrap();
+                                    writeln!(s, "    /* living_position: Vector4d start */").unwrap();
                                     crate::util::write_bytes(&mut s, &mut bytes, 4, "x", "                ");
                                     crate::util::write_bytes(&mut s, &mut bytes, 4, "y", "                ");
                                     crate::util::write_bytes(&mut s, &mut bytes, 4, "z", "                ");
-                                    writeln!(s, "    /* living_position: Vector3d end */").unwrap();
-                                    crate::util::write_bytes(&mut s, &mut bytes, 4, "living_orientation", "            ");
+                                    crate::util::write_bytes(&mut s, &mut bytes, 4, "orientation", "                ");
+                                    writeln!(s, "    /* living_position: Vector4d end */").unwrap();
                                     if let Some(if_statement) = &flags.get_on_transport() {
                                         writeln!(s, "    /* transport: TransportInfo start */").unwrap();
                                         crate::util::write_bytes(&mut s, &mut bytes, crate::util::packed_guid_size(&if_statement.transport.guid), "guid", "                ");
-                                        writeln!(s, "    /* position: Vector3d start */").unwrap();
+                                        writeln!(s, "    /* position: Vector4d start */").unwrap();
                                         crate::util::write_bytes(&mut s, &mut bytes, 4, "x", "                    ");
                                         crate::util::write_bytes(&mut s, &mut bytes, 4, "y", "                    ");
                                         crate::util::write_bytes(&mut s, &mut bytes, 4, "z", "                    ");
-                                        writeln!(s, "    /* position: Vector3d end */").unwrap();
-                                        crate::util::write_bytes(&mut s, &mut bytes, 4, "orientation", "                ");
+                                        crate::util::write_bytes(&mut s, &mut bytes, 4, "orientation", "                    ");
+                                        writeln!(s, "    /* position: Vector4d end */").unwrap();
                                         crate::util::write_bytes(&mut s, &mut bytes, 4, "timestamp", "                ");
                                         writeln!(s, "    /* transport: TransportInfo end */").unwrap();
                                     }
@@ -835,15 +828,14 @@ impl crate::Message for SMSG_UPDATE_OBJECT {
 
                                 }
                                 crate::tbc::MovementBlock_UpdateFlag_Living::HasPosition {
-                                    orientation,
                                     position,
                                 } => {
-                                    writeln!(s, "    /* position: Vector3d start */").unwrap();
+                                    writeln!(s, "    /* position: Vector4d start */").unwrap();
                                     crate::util::write_bytes(&mut s, &mut bytes, 4, "x", "                ");
                                     crate::util::write_bytes(&mut s, &mut bytes, 4, "y", "                ");
                                     crate::util::write_bytes(&mut s, &mut bytes, 4, "z", "                ");
-                                    writeln!(s, "    /* position: Vector3d end */").unwrap();
-                                    crate::util::write_bytes(&mut s, &mut bytes, 4, "orientation", "            ");
+                                    crate::util::write_bytes(&mut s, &mut bytes, 4, "orientation", "                ");
+                                    writeln!(s, "    /* position: Vector4d end */").unwrap();
                                 }
                             }
                         }
@@ -887,7 +879,6 @@ impl crate::Message for SMSG_UPDATE_OBJECT {
                                     fall_time,
                                     flags,
                                     flying_speed,
-                                    living_orientation,
                                     living_position,
                                     running_speed,
                                     swimming_speed,
@@ -898,21 +889,21 @@ impl crate::Message for SMSG_UPDATE_OBJECT {
                                     crate::util::write_bytes(&mut s, &mut bytes, 4, "flags", "            ");
                                     crate::util::write_bytes(&mut s, &mut bytes, 1, "extra_flags", "            ");
                                     crate::util::write_bytes(&mut s, &mut bytes, 4, "timestamp", "            ");
-                                    writeln!(s, "    /* living_position: Vector3d start */").unwrap();
+                                    writeln!(s, "    /* living_position: Vector4d start */").unwrap();
                                     crate::util::write_bytes(&mut s, &mut bytes, 4, "x", "                ");
                                     crate::util::write_bytes(&mut s, &mut bytes, 4, "y", "                ");
                                     crate::util::write_bytes(&mut s, &mut bytes, 4, "z", "                ");
-                                    writeln!(s, "    /* living_position: Vector3d end */").unwrap();
-                                    crate::util::write_bytes(&mut s, &mut bytes, 4, "living_orientation", "            ");
+                                    crate::util::write_bytes(&mut s, &mut bytes, 4, "orientation", "                ");
+                                    writeln!(s, "    /* living_position: Vector4d end */").unwrap();
                                     if let Some(if_statement) = &flags.get_on_transport() {
                                         writeln!(s, "    /* transport: TransportInfo start */").unwrap();
                                         crate::util::write_bytes(&mut s, &mut bytes, crate::util::packed_guid_size(&if_statement.transport.guid), "guid", "                ");
-                                        writeln!(s, "    /* position: Vector3d start */").unwrap();
+                                        writeln!(s, "    /* position: Vector4d start */").unwrap();
                                         crate::util::write_bytes(&mut s, &mut bytes, 4, "x", "                    ");
                                         crate::util::write_bytes(&mut s, &mut bytes, 4, "y", "                    ");
                                         crate::util::write_bytes(&mut s, &mut bytes, 4, "z", "                    ");
-                                        writeln!(s, "    /* position: Vector3d end */").unwrap();
-                                        crate::util::write_bytes(&mut s, &mut bytes, 4, "orientation", "                ");
+                                        crate::util::write_bytes(&mut s, &mut bytes, 4, "orientation", "                    ");
+                                        writeln!(s, "    /* position: Vector4d end */").unwrap();
                                         crate::util::write_bytes(&mut s, &mut bytes, 4, "timestamp", "                ");
                                         writeln!(s, "    /* transport: TransportInfo end */").unwrap();
                                     }
@@ -1002,15 +993,14 @@ impl crate::Message for SMSG_UPDATE_OBJECT {
 
                                 }
                                 crate::tbc::MovementBlock_UpdateFlag_Living::HasPosition {
-                                    orientation,
                                     position,
                                 } => {
-                                    writeln!(s, "    /* position: Vector3d start */").unwrap();
+                                    writeln!(s, "    /* position: Vector4d start */").unwrap();
                                     crate::util::write_bytes(&mut s, &mut bytes, 4, "x", "                ");
                                     crate::util::write_bytes(&mut s, &mut bytes, 4, "y", "                ");
                                     crate::util::write_bytes(&mut s, &mut bytes, 4, "z", "                ");
-                                    writeln!(s, "    /* position: Vector3d end */").unwrap();
-                                    crate::util::write_bytes(&mut s, &mut bytes, 4, "orientation", "            ");
+                                    crate::util::write_bytes(&mut s, &mut bytes, 4, "orientation", "                ");
+                                    writeln!(s, "    /* position: Vector4d end */").unwrap();
                                 }
                             }
                         }
@@ -1055,7 +1045,6 @@ impl crate::Message for SMSG_UPDATE_OBJECT {
                                     fall_time,
                                     flags,
                                     flying_speed,
-                                    living_orientation,
                                     living_position,
                                     running_speed,
                                     swimming_speed,
@@ -1066,21 +1055,21 @@ impl crate::Message for SMSG_UPDATE_OBJECT {
                                     crate::util::write_bytes(&mut s, &mut bytes, 4, "flags", "            ");
                                     crate::util::write_bytes(&mut s, &mut bytes, 1, "extra_flags", "            ");
                                     crate::util::write_bytes(&mut s, &mut bytes, 4, "timestamp", "            ");
-                                    writeln!(s, "    /* living_position: Vector3d start */").unwrap();
+                                    writeln!(s, "    /* living_position: Vector4d start */").unwrap();
                                     crate::util::write_bytes(&mut s, &mut bytes, 4, "x", "                ");
                                     crate::util::write_bytes(&mut s, &mut bytes, 4, "y", "                ");
                                     crate::util::write_bytes(&mut s, &mut bytes, 4, "z", "                ");
-                                    writeln!(s, "    /* living_position: Vector3d end */").unwrap();
-                                    crate::util::write_bytes(&mut s, &mut bytes, 4, "living_orientation", "            ");
+                                    crate::util::write_bytes(&mut s, &mut bytes, 4, "orientation", "                ");
+                                    writeln!(s, "    /* living_position: Vector4d end */").unwrap();
                                     if let Some(if_statement) = &flags.get_on_transport() {
                                         writeln!(s, "    /* transport: TransportInfo start */").unwrap();
                                         crate::util::write_bytes(&mut s, &mut bytes, crate::util::packed_guid_size(&if_statement.transport.guid), "guid", "                ");
-                                        writeln!(s, "    /* position: Vector3d start */").unwrap();
+                                        writeln!(s, "    /* position: Vector4d start */").unwrap();
                                         crate::util::write_bytes(&mut s, &mut bytes, 4, "x", "                    ");
                                         crate::util::write_bytes(&mut s, &mut bytes, 4, "y", "                    ");
                                         crate::util::write_bytes(&mut s, &mut bytes, 4, "z", "                    ");
-                                        writeln!(s, "    /* position: Vector3d end */").unwrap();
-                                        crate::util::write_bytes(&mut s, &mut bytes, 4, "orientation", "                ");
+                                        crate::util::write_bytes(&mut s, &mut bytes, 4, "orientation", "                    ");
+                                        writeln!(s, "    /* position: Vector4d end */").unwrap();
                                         crate::util::write_bytes(&mut s, &mut bytes, 4, "timestamp", "                ");
                                         writeln!(s, "    /* transport: TransportInfo end */").unwrap();
                                     }
@@ -1170,15 +1159,14 @@ impl crate::Message for SMSG_UPDATE_OBJECT {
 
                                 }
                                 crate::tbc::MovementBlock_UpdateFlag_Living::HasPosition {
-                                    orientation,
                                     position,
                                 } => {
-                                    writeln!(s, "    /* position: Vector3d start */").unwrap();
+                                    writeln!(s, "    /* position: Vector4d start */").unwrap();
                                     crate::util::write_bytes(&mut s, &mut bytes, 4, "x", "                ");
                                     crate::util::write_bytes(&mut s, &mut bytes, 4, "y", "                ");
                                     crate::util::write_bytes(&mut s, &mut bytes, 4, "z", "                ");
-                                    writeln!(s, "    /* position: Vector3d end */").unwrap();
-                                    crate::util::write_bytes(&mut s, &mut bytes, 4, "orientation", "            ");
+                                    crate::util::write_bytes(&mut s, &mut bytes, 4, "orientation", "                ");
+                                    writeln!(s, "    /* position: Vector4d end */").unwrap();
                                 }
                             }
                         }

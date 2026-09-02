@@ -3,8 +3,7 @@
 /// The positions and orientations do not matter since they can be overwritten in the [SMSG_UPDATE_OBJECT], but the map determines which map the client loads and this is not changeable in [SMSG_UPDATE_OBJECT].
 smsg SMSG_LOGIN_VERIFY_WORLD = 0x236 {
     Map map;
-    Vector3d position;
-    f32 orientation;
+    Vector4d position;
 } {
     paste_versions = "1.12 2.4.3 3.3.5";
 }
@@ -15,8 +14,8 @@ test SMSG_LOGIN_VERIFY_WORLD {
         x = -8949.95;
         y = -132.493;
         z = 83.5312;
+        orientation = 0.0;
     };
-    orientation = 0.0;
 } [
     0x00, 0x16, /* size */
     0x36, 0x02, /* opcode */
@@ -24,7 +23,7 @@ test SMSG_LOGIN_VERIFY_WORLD {
     0xcd, 0xd7, 0x0b, 0xc6, /* position.x */
     0x35, 0x7e, 0x04, 0xc3, /* position.y */
     0xf9, 0x0f, 0xa7, 0x42, /* position.z */
-    0x00, 0x00, 0x00, 0x00, /* orientation */
+    0x00, 0x00, 0x00, 0x00, /* position.orientation */
 ] {
     versions = "1.12";
 }

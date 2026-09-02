@@ -2,7 +2,7 @@ use std::io::{Read, Write};
 
 use crate::vanilla::Object;
 
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/gameobject/smsg_update_object.wowm:180`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/gameobject/smsg_update_object.wowm#L180):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/gameobject/smsg_update_object.wowm:178`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/gameobject/smsg_update_object.wowm#L178):
 /// ```text
 /// smsg SMSG_UPDATE_OBJECT = 0x00A9 {
 ///     u32 amount_of_objects;
@@ -138,11 +138,11 @@ mod test {
                                 fall_time: 0_f32,
                                 flags: MovementBlock_MovementFlags::empty()
                                     ,
-                                living_orientation: 0_f32,
-                                living_position: Vector3d {
+                                living_position: Vector4d {
                                     x: -8949.95_f32,
                                     y: -132.493_f32,
                                     z: 83.5312_f32,
+                                    orientation: 0_f32,
                                 },
                                 running_speed: 7_f32,
                                 swimming_speed: 0_f32,
@@ -163,7 +163,7 @@ mod test {
 
     }
 
-    // Generated from `wow_message_parser/wowm/world/gameobject/smsg_update_object.wowm` line 187.
+    // Generated from `wow_message_parser/wowm/world/gameobject/smsg_update_object.wowm` line 185.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn smsg_update_object0() {
@@ -183,7 +183,7 @@ mod test {
         assert_eq!(dest, RAW0);
     }
 
-    // Generated from `wow_message_parser/wowm/world/gameobject/smsg_update_object.wowm` line 187.
+    // Generated from `wow_message_parser/wowm/world/gameobject/smsg_update_object.wowm` line 185.
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_smsg_update_object0() {
@@ -203,7 +203,7 @@ mod test {
         assert_eq!(dest, RAW0);
     }
 
-    // Generated from `wow_message_parser/wowm/world/gameobject/smsg_update_object.wowm` line 187.
+    // Generated from `wow_message_parser/wowm/world/gameobject/smsg_update_object.wowm` line 185.
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_smsg_update_object0() {
@@ -262,11 +262,11 @@ mod test {
                                 fall_time: 0_f32,
                                 flags: MovementBlock_MovementFlags::empty()
                                     ,
-                                living_orientation: 0_f32,
-                                living_position: Vector3d {
+                                living_position: Vector4d {
                                     x: -8949.95_f32,
                                     y: -132.493_f32,
                                     z: 83.5312_f32,
+                                    orientation: 0_f32,
                                 },
                                 running_speed: 7_f32,
                                 swimming_speed: 0_f32,
@@ -287,7 +287,7 @@ mod test {
 
     }
 
-    // Generated from `wow_message_parser/wowm/world/gameobject/smsg_update_object.wowm` line 252.
+    // Generated from `wow_message_parser/wowm/world/gameobject/smsg_update_object.wowm` line 250.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn smsg_update_object1() {
@@ -307,7 +307,7 @@ mod test {
         assert_eq!(dest, RAW1);
     }
 
-    // Generated from `wow_message_parser/wowm/world/gameobject/smsg_update_object.wowm` line 252.
+    // Generated from `wow_message_parser/wowm/world/gameobject/smsg_update_object.wowm` line 250.
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_smsg_update_object1() {
@@ -327,7 +327,7 @@ mod test {
         assert_eq!(dest, RAW1);
     }
 
-    // Generated from `wow_message_parser/wowm/world/gameobject/smsg_update_object.wowm` line 252.
+    // Generated from `wow_message_parser/wowm/world/gameobject/smsg_update_object.wowm` line 250.
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_smsg_update_object1() {

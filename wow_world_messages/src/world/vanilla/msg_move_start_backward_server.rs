@@ -99,12 +99,12 @@ mod test {
                     .set_backward()
                     ,
                 timestamp: 0x25B5710,
-                position: Vector3d {
+                position: Vector4d {
                     x: -8937.364_f32,
                     y: -122.47741_f32,
                     z: 82.52683_f32,
+                    orientation: 4.5757346_f32,
                 },
-                orientation: 4.5757346_f32,
                 fall_time: 0_f32,
             },
         }

@@ -1,22 +1,20 @@
 use std::io::{Read, Write};
 
 use crate::tbc::{
-    Map, Vector3d,
+    Map, Vector4d,
 };
 
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/movement/smsg/smsg_new_world.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/movement/smsg/smsg_new_world.wowm#L1):
 /// ```text
 /// smsg SMSG_NEW_WORLD = 0x003E {
 ///     Map map;
-///     Vector3d position;
-///     f32 orientation;
+///     Vector4d position;
 /// }
 /// ```
 #[derive(Debug, Clone, Copy, PartialEq, PartialOrd, Default)]
 pub struct SMSG_NEW_WORLD {
     pub map: Map,
-    pub position: Vector3d,
-    pub orientation: f32,
+    pub position: Vector4d,
 }
 
 impl crate::private::Sealed for SMSG_NEW_WORLD {}
@@ -29,16 +27,12 @@ impl SMSG_NEW_WORLD {
         // map: Map
         let map = crate::util::read_u32_le(&mut r)?.try_into()?;
 
-        // position: Vector3d
-        let position = crate::util::vanilla_tbc_wrath_vector3d_read(&mut r)?;
-
-        // orientation: f32
-        let orientation = crate::util::read_f32_le(&mut r)?;
+        // position: Vector4d
+        let position = crate::util::vanilla_tbc_wrath_vector4d_read(&mut r)?;
 
         Ok(Self {
             map,
             position,
-            orientation,
         })
     }
 
@@ -62,15 +56,15 @@ impl crate::Message for SMSG_NEW_WORLD {
         writeln!(s, "test SMSG_NEW_WORLD {{").unwrap();
         // Members
         writeln!(s, "    map = {};", self.map.as_test_case_value()).unwrap();
-        // position: Vector3d
+        // position: Vector4d
         writeln!(s, "    position = {{").unwrap();
         // Members
         writeln!(s, "        x = {};", if self.position.x.to_string().contains('.') { self.position.x.to_string() } else { format!("{}.0", self.position.x) }).unwrap();
         writeln!(s, "        y = {};", if self.position.y.to_string().contains('.') { self.position.y.to_string() } else { format!("{}.0", self.position.y) }).unwrap();
         writeln!(s, "        z = {};", if self.position.z.to_string().contains('.') { self.position.z.to_string() } else { format!("{}.0", self.position.z) }).unwrap();
+        writeln!(s, "        orientation = {};", if self.position.orientation.to_string().contains('.') { self.position.orientation.to_string() } else { format!("{}.0", self.position.orientation) }).unwrap();
 
         writeln!(s, "    }};").unwrap();
-        writeln!(s, "    orientation = {};", if self.orientation.to_string().contains('.') { self.orientation.to_string() } else { format!("{}.0", self.orientation) }).unwrap();
 
         writeln!(s, "}} [").unwrap();
 
@@ -83,12 +77,12 @@ impl crate::Message for SMSG_NEW_WORLD {
         let mut bytes = bytes.into_iter();
 
         crate::util::write_bytes(&mut s, &mut bytes, 4, "map", "    ");
-        writeln!(s, "    /* position: Vector3d start */").unwrap();
+        writeln!(s, "    /* position: Vector4d start */").unwrap();
         crate::util::write_bytes(&mut s, &mut bytes, 4, "x", "        ");
         crate::util::write_bytes(&mut s, &mut bytes, 4, "y", "        ");
         crate::util::write_bytes(&mut s, &mut bytes, 4, "z", "        ");
-        writeln!(s, "    /* position: Vector3d end */").unwrap();
-        crate::util::write_bytes(&mut s, &mut bytes, 4, "orientation", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "orientation", "        ");
+        writeln!(s, "    /* position: Vector4d end */").unwrap();
 
 
         writeln!(s, "] {{").unwrap();
@@ -106,11 +100,8 @@ impl crate::Message for SMSG_NEW_WORLD {
         // map: Map
         w.write_all(&(self.map.as_int().to_le_bytes()))?;
 
-        // position: Vector3d
-        crate::util::vanilla_tbc_wrath_vector3d_write_into_vec(&self.position, &mut w)?;
-
-        // orientation: f32
-        w.write_all(&self.orientation.to_le_bytes())?;
+        // position: Vector4d
+        crate::util::vanilla_tbc_wrath_vector4d_write_into_vec(&self.position, &mut w)?;
 
         Ok(())
     }

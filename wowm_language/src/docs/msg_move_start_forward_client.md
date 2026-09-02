@@ -36,10 +36,10 @@ CMSG have a header of 6 bytes.
 181, 0, 0, 0, // opcode (181)
 1, 0, 0, 0, // MovementInfo.flags: MovementFlags  FORWARD (1)
 99, 42, 122, 1, // MovementInfo.timestamp: u32
-115, 186, 11, 198, // Vector3d.x: f32
-24, 227, 238, 194, // Vector3d.y: f32
-148, 168, 165, 66, // Vector3d.z: f32
-44, 231, 248, 62, // MovementInfo.orientation: f32
+115, 186, 11, 198, // Vector4d.x: f32
+24, 227, 238, 194, // Vector4d.y: f32
+148, 168, 165, 66, // Vector4d.z: f32
+44, 231, 248, 62, // Vector4d.orientation: f32
 133, 3, 0, 0, // MovementInfo.fall_time: f32
 ```
 ## Client Version 2.4.3

@@ -2,7 +2,7 @@ use std::io::{Read, Write};
 
 use crate::Guid;
 use crate::vanilla::{
-    MovementFlags, MovementInfo, TransportInfo, Vector3d,
+    MovementFlags, MovementInfo, TransportInfo, Vector4d,
 };
 
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/movement/msg/msg_move_start_pitch_up.wowm:20`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/movement/msg/msg_move_start_pitch_up.wowm#L20):
@@ -62,29 +62,29 @@ impl crate::Message for MSG_MOVE_START_PITCH_UP_Server {
         // Members
         writeln!(s, "        flags = {};", MovementFlags::new(self.info.flags.as_int()).as_test_case_value()).unwrap();
         writeln!(s, "        timestamp = {};", self.info.timestamp).unwrap();
-        // position: Vector3d
+        // position: Vector4d
         writeln!(s, "        position = {{").unwrap();
         // Members
         writeln!(s, "            x = {};", if self.info.position.x.to_string().contains('.') { self.info.position.x.to_string() } else { format!("{}.0", self.info.position.x) }).unwrap();
         writeln!(s, "            y = {};", if self.info.position.y.to_string().contains('.') { self.info.position.y.to_string() } else { format!("{}.0", self.info.position.y) }).unwrap();
         writeln!(s, "            z = {};", if self.info.position.z.to_string().contains('.') { self.info.position.z.to_string() } else { format!("{}.0", self.info.position.z) }).unwrap();
+        writeln!(s, "            orientation = {};", if self.info.position.orientation.to_string().contains('.') { self.info.position.orientation.to_string() } else { format!("{}.0", self.info.position.orientation) }).unwrap();
 
         writeln!(s, "        }};").unwrap();
-        writeln!(s, "        orientation = {};", if self.info.orientation.to_string().contains('.') { self.info.orientation.to_string() } else { format!("{}.0", self.info.orientation) }).unwrap();
         if let Some(if_statement) = &self.info.flags.get_on_transport() {
             // transport: TransportInfo
             writeln!(s, "        transport = {{").unwrap();
             // Members
             writeln!(s, "            guid = {};", if_statement.transport.guid.guid()).unwrap();
-            // position: Vector3d
+            // position: Vector4d
             writeln!(s, "            position = {{").unwrap();
             // Members
             writeln!(s, "                x = {};", if if_statement.transport.position.x.to_string().contains('.') { if_statement.transport.position.x.to_string() } else { format!("{}.0", if_statement.transport.position.x) }).unwrap();
             writeln!(s, "                y = {};", if if_statement.transport.position.y.to_string().contains('.') { if_statement.transport.position.y.to_string() } else { format!("{}.0", if_statement.transport.position.y) }).unwrap();
             writeln!(s, "                z = {};", if if_statement.transport.position.z.to_string().contains('.') { if_statement.transport.position.z.to_string() } else { format!("{}.0", if_statement.transport.position.z) }).unwrap();
+            writeln!(s, "                orientation = {};", if if_statement.transport.position.orientation.to_string().contains('.') { if_statement.transport.position.orientation.to_string() } else { format!("{}.0", if_statement.transport.position.orientation) }).unwrap();
 
             writeln!(s, "            }};").unwrap();
-            writeln!(s, "            orientation = {};", if if_statement.transport.orientation.to_string().contains('.') { if_statement.transport.orientation.to_string() } else { format!("{}.0", if_statement.transport.orientation) }).unwrap();
             writeln!(s, "            timestamp = {};", if_statement.transport.timestamp).unwrap();
 
             writeln!(s, "        }};").unwrap();
@@ -123,21 +123,21 @@ impl crate::Message for MSG_MOVE_START_PITCH_UP_Server {
         writeln!(s, "    /* info: MovementInfo start */").unwrap();
         crate::util::write_bytes(&mut s, &mut bytes, 4, "flags", "        ");
         crate::util::write_bytes(&mut s, &mut bytes, 4, "timestamp", "        ");
-        writeln!(s, "    /* position: Vector3d start */").unwrap();
+        writeln!(s, "    /* position: Vector4d start */").unwrap();
         crate::util::write_bytes(&mut s, &mut bytes, 4, "x", "            ");
         crate::util::write_bytes(&mut s, &mut bytes, 4, "y", "            ");
         crate::util::write_bytes(&mut s, &mut bytes, 4, "z", "            ");
-        writeln!(s, "    /* position: Vector3d end */").unwrap();
-        crate::util::write_bytes(&mut s, &mut bytes, 4, "orientation", "        ");
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "orientation", "            ");
+        writeln!(s, "    /* position: Vector4d end */").unwrap();
         if let Some(if_statement) = &self.info.flags.get_on_transport() {
             writeln!(s, "    /* transport: TransportInfo start */").unwrap();
             crate::util::write_bytes(&mut s, &mut bytes, crate::util::packed_guid_size(&if_statement.transport.guid), "guid", "            ");
-            writeln!(s, "    /* position: Vector3d start */").unwrap();
+            writeln!(s, "    /* position: Vector4d start */").unwrap();
             crate::util::write_bytes(&mut s, &mut bytes, 4, "x", "                ");
             crate::util::write_bytes(&mut s, &mut bytes, 4, "y", "                ");
             crate::util::write_bytes(&mut s, &mut bytes, 4, "z", "                ");
-            writeln!(s, "    /* position: Vector3d end */").unwrap();
-            crate::util::write_bytes(&mut s, &mut bytes, 4, "orientation", "            ");
+            crate::util::write_bytes(&mut s, &mut bytes, 4, "orientation", "                ");
+            writeln!(s, "    /* position: Vector4d end */").unwrap();
             crate::util::write_bytes(&mut s, &mut bytes, 4, "timestamp", "            ");
             writeln!(s, "    /* transport: TransportInfo end */").unwrap();
         }

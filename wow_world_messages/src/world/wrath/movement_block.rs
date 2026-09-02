@@ -2,7 +2,7 @@ use std::io::{Read, Write};
 
 use crate::Guid;
 use crate::wrath::{
-    MovementFlags, SplineFlag, TransportInfo, UpdateFlag, Vector3d,
+    MovementFlags, SplineFlag, TransportInfo, UpdateFlag, Vector3d, Vector4d,
 };
 
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/gameobject/smsg_update_object_3_3_5.wowm:72`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/gameobject/smsg_update_object_3_3_5.wowm#L72):
@@ -12,8 +12,7 @@ use crate::wrath::{
 ///     if (update_flag & LIVING) {
 ///         MovementFlags flags;
 ///         u32 timestamp;
-///         Vector3d position;
-///         f32 orientation;
+///         Vector4d position;
 ///         if (flags & ON_TRANSPORT_AND_INTERPOLATED_MOVEMENT) {
 ///             TransportInfo transport_info;
 ///             u32 transport_time;
@@ -76,13 +75,10 @@ use crate::wrath::{
 ///     else if (update_flag & POSITION) {
 ///         PackedGuid transport_guid;
 ///         Vector3d position1;
-///         Vector3d transport_offset;
-///         f32 orientation1;
-///         f32 corpse_orientation;
+///         Vector4d transport_offset;
 ///     }
 ///     else if (update_flag & HAS_POSITION) {
-///         Vector3d position2;
-///         f32 orientation2;
+///         Vector4d position2;
 ///     }
 ///     if (update_flag & HIGH_GUID) {
 ///         u32 unknown0;
@@ -124,7 +120,6 @@ impl MovementBlock {
                     fall_time,
                     flags,
                     flight_speed,
-                    orientation,
                     pitch_rate,
                     position,
                     running_speed,
@@ -140,11 +135,8 @@ impl MovementBlock {
                     // timestamp: u32
                     w.write_all(&timestamp.to_le_bytes())?;
 
-                    // position: Vector3d
-                    crate::util::vanilla_tbc_wrath_vector3d_write_into_vec(&position, &mut w)?;
-
-                    // orientation: f32
-                    w.write_all(&orientation.to_le_bytes())?;
+                    // position: Vector4d
+                    crate::util::vanilla_tbc_wrath_vector4d_write_into_vec(&position, &mut w)?;
 
                     if let Some(if_statement) = &flags.on_transport_and_interpolated_movement {
                         match if_statement {
@@ -315,8 +307,6 @@ impl MovementBlock {
 
                 }
                 MovementBlock_UpdateFlag_Living::Position {
-                    corpse_orientation,
-                    orientation1,
                     position1,
                     transport_guid,
                     transport_offset,
@@ -327,25 +317,15 @@ impl MovementBlock {
                     // position1: Vector3d
                     crate::util::vanilla_tbc_wrath_vector3d_write_into_vec(&position1, &mut w)?;
 
-                    // transport_offset: Vector3d
-                    crate::util::vanilla_tbc_wrath_vector3d_write_into_vec(&transport_offset, &mut w)?;
-
-                    // orientation1: f32
-                    w.write_all(&orientation1.to_le_bytes())?;
-
-                    // corpse_orientation: f32
-                    w.write_all(&corpse_orientation.to_le_bytes())?;
+                    // transport_offset: Vector4d
+                    crate::util::vanilla_tbc_wrath_vector4d_write_into_vec(&transport_offset, &mut w)?;
 
                 }
                 MovementBlock_UpdateFlag_Living::HasPosition {
-                    orientation2,
                     position2,
                 } => {
-                    // position2: Vector3d
-                    crate::util::vanilla_tbc_wrath_vector3d_write_into_vec(&position2, &mut w)?;
-
-                    // orientation2: f32
-                    w.write_all(&orientation2.to_le_bytes())?;
+                    // position2: Vector4d
+                    crate::util::vanilla_tbc_wrath_vector4d_write_into_vec(&position2, &mut w)?;
 
                 }
             }
@@ -410,11 +390,8 @@ impl MovementBlock {
             // timestamp: u32
             let timestamp = crate::util::read_u32_le(&mut r)?;
 
-            // position: Vector3d
-            let position = crate::util::vanilla_tbc_wrath_vector3d_read(&mut r)?;
-
-            // orientation: f32
-            let orientation = crate::util::read_f32_le(&mut r)?;
+            // position: Vector4d
+            let position = crate::util::vanilla_tbc_wrath_vector4d_read(&mut r)?;
 
             let flags_on_transport_and_interpolated_movement = if flags.is_on_transport_and_interpolated_movement() {
                 // transport_info: TransportInfo
@@ -650,7 +627,6 @@ impl MovementBlock {
                 fall_time,
                 flags,
                 flight_speed,
-                orientation,
                 pitch_rate,
                 position,
                 running_speed,
@@ -667,32 +643,20 @@ impl MovementBlock {
             // position1: Vector3d
             let position1 = crate::util::vanilla_tbc_wrath_vector3d_read(&mut r)?;
 
-            // transport_offset: Vector3d
-            let transport_offset = crate::util::vanilla_tbc_wrath_vector3d_read(&mut r)?;
-
-            // orientation1: f32
-            let orientation1 = crate::util::read_f32_le(&mut r)?;
-
-            // corpse_orientation: f32
-            let corpse_orientation = crate::util::read_f32_le(&mut r)?;
+            // transport_offset: Vector4d
+            let transport_offset = crate::util::vanilla_tbc_wrath_vector4d_read(&mut r)?;
 
             Some(MovementBlock_UpdateFlag_Living::Position {
-                corpse_orientation,
-                orientation1,
                 position1,
                 transport_guid,
                 transport_offset,
             })
         }
         else if update_flag.is_has_position() {
-            // position2: Vector3d
-            let position2 = crate::util::vanilla_tbc_wrath_vector3d_read(&mut r)?;
-
-            // orientation2: f32
-            let orientation2 = crate::util::read_f32_le(&mut r)?;
+            // position2: Vector4d
+            let position2 = crate::util::vanilla_tbc_wrath_vector4d_read(&mut r)?;
 
             Some(MovementBlock_UpdateFlag_Living::HasPosition {
-                orientation2,
                 position2,
             })
         }
@@ -2888,9 +2852,8 @@ pub enum MovementBlock_UpdateFlag_Living {
         fall_time: f32,
         flags: MovementBlock_MovementFlags,
         flight_speed: f32,
-        orientation: f32,
         pitch_rate: f32,
-        position: Vector3d,
+        position: Vector4d,
         running_speed: f32,
         swimming_speed: f32,
         timestamp: u32,
@@ -2898,15 +2861,12 @@ pub enum MovementBlock_UpdateFlag_Living {
         walking_speed: f32,
     },
     Position {
-        corpse_orientation: f32,
-        orientation1: f32,
         position1: Vector3d,
         transport_guid: Guid,
-        transport_offset: Vector3d,
+        transport_offset: Vector4d,
     },
     HasPosition {
-        orientation2: f32,
-        position2: Vector3d,
+        position2: Vector4d,
     },
 }
 
@@ -2945,9 +2905,8 @@ impl MovementBlock_UpdateFlag_Living {
                 + 4 // fall_time: f32
                 + flags.size() // flags: MovementBlock_MovementFlags
                 + 4 // flight_speed: f32
-                + 4 // orientation: f32
                 + 4 // pitch_rate: f32
-                + 12 // position: Vector3d
+                + 16 // position: Vector4d
                 + 4 // running_speed: f32
                 + 4 // swimming_speed: f32
                 + 4 // timestamp: u32
@@ -2959,18 +2918,15 @@ impl MovementBlock_UpdateFlag_Living {
                 ..
             } => {
                 // Not an actual enum sent over the wire
-                4 // corpse_orientation: f32
-                + 4 // orientation1: f32
-                + 12 // position1: Vector3d
+                12 // position1: Vector3d
                 + crate::util::packed_guid_size(&transport_guid) // transport_guid: PackedGuid
-                + 12 // transport_offset: Vector3d
+                + 16 // transport_offset: Vector4d
             }
             Self::HasPosition {
                 ..
             } => {
                 // Not an actual enum sent over the wire
-                4 // orientation2: f32
-                + 12 // position2: Vector3d
+                16 // position2: Vector4d
             }
         }
     }

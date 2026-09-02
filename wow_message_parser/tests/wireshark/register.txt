@@ -2398,12 +2398,6 @@
                 NULL, HFILL
             }
         },
-        { &hf_woww_living_orientation,
-            { "Living Orientation", "woww.living.orientation",
-                FT_FLOAT, BASE_NONE, NULL, 0,
-                NULL, HFILL
-            }
-        },
         { &hf_woww_location_name,
             { "Location Name", "woww.location.name",
                 FT_STRINGZ, BASE_NONE, NULL, 0,
@@ -4471,12 +4465,6 @@
         { &hf_woww_transport_guid,
             { "Transport Guid", "woww.transport.guid",
                 FT_UINT64, BASE_HEX_DEC, NULL, 0,
-                NULL, HFILL
-            }
-        },
-        { &hf_woww_transport_orientation,
-            { "Transport Orientation", "woww.transport.orientation",
-                FT_FLOAT, BASE_NONE, NULL, 0,
                 NULL, HFILL
             }
         },

@@ -88,12 +88,12 @@ mod test {
                     .set_strafe_left()
                     ,
                 timestamp: 0x179D29F,
-                position: Vector3d {
+                position: Vector4d {
                     x: -8944.482_f32,
                     y: -136.26949_f32,
                     z: 83.74637_f32,
+                    orientation: 0.38010955_f32,
                 },
-                orientation: 0.38010955_f32,
                 fall_time: 0.000000000000000000000000000000000000000001254_f32,
             },
         }

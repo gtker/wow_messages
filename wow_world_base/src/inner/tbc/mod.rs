@@ -225,3 +225,4 @@ pub use crate::shared::item_spells_tbc_wrath::*;
 pub use crate::shared::item_stat_tbc_wrath::*;
 pub use crate::shared::vector2d_vanilla_tbc_wrath::*;
 pub use crate::shared::vector3d_vanilla_tbc_wrath::*;
+pub use crate::shared::vector4d_vanilla_tbc_wrath::*;

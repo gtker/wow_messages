@@ -19,8 +19,7 @@ struct MovementBlock {
         MovementFlags flags;
         u8 extra_flags;
         u32 timestamp;
-        Vector3d living_position;
-        f32 living_orientation;
+        Vector4d living_position;
         if (flags & ON_TRANSPORT) {
             TransportInfo transport;
         }
@@ -69,8 +68,7 @@ struct MovementBlock {
         }
     }
     else if (update_flag & HAS_POSITION) {
-        Vector3d position;
-        f32 orientation;
+        Vector4d position;
     }
     if (update_flag & HIGH_GUID) {
         /// vmangos statically sets to 0

@@ -9,11 +9,7 @@
     },
     {
       "name": "position",
-      "type": "Vector3d"
-    },
-    {
-      "name": "orientation",
-      "type": "float"
+      "type": "Vector4d"
     }
   ]
 }

@@ -1,6 +1,6 @@
 use std::io::{Read, Write};
 
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/vector.wowm:4`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/vector.wowm#L4):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/vector.wowm:11`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/vector.wowm#L11):
 /// ```text
 /// struct Vector3d {
 ///     f32 x;

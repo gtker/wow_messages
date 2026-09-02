@@ -39,10 +39,10 @@ SMSG have a header of 4 bytes.
 1, 5, // guid: PackedGuid
 1, 0, 0, 0, // MovementInfo.flags: MovementFlags  FORWARD (1)
 70, 49, 122, 1, // MovementInfo.timestamp: u32
-25, 199, 11, 198, // Vector3d.x: f32
-254, 110, 224, 194, // Vector3d.y: f32
-26, 245, 165, 66, // Vector3d.z: f32
-3, 81, 36, 64, // MovementInfo.orientation: f32
+25, 199, 11, 198, // Vector4d.x: f32
+254, 110, 224, 194, // Vector4d.y: f32
+26, 245, 165, 66, // Vector4d.z: f32
+3, 81, 36, 64, // Vector4d.orientation: f32
 133, 3, 0, 0, // MovementInfo.fall_time: f32
 ```
 ## Client Version 2.4.3

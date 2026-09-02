@@ -285,3 +285,5 @@ pub mod item_stat_tbc_wrath;
 pub mod vector2d_vanilla_tbc_wrath;
 #[cfg(any(feature = "shared", feature = "vanilla", feature = "tbc", feature = "wrath"))]
 pub mod vector3d_vanilla_tbc_wrath;
+#[cfg(any(feature = "shared", feature = "vanilla", feature = "tbc", feature = "wrath"))]
+pub mod vector4d_vanilla_tbc_wrath;

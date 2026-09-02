@@ -3,10 +3,10 @@ use std::io::{Read, Write};
 use crate::Guid;
 use crate::tbc::{
     MovementBlock, MovementFlags, ObjectType, SplineFlag, TransportInfo, UpdateFlag, 
-    UpdateMask, UpdateType, Vector3d,
+    UpdateMask, UpdateType, Vector3d, Vector4d,
 };
 
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/gameobject/smsg_update_object_2_4_3.wowm:92`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/gameobject/smsg_update_object_2_4_3.wowm#L92):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/gameobject/smsg_update_object_2_4_3.wowm:90`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/gameobject/smsg_update_object_2_4_3.wowm#L90):
 /// ```text
 /// struct Object {
 ///     UpdateType update_type;

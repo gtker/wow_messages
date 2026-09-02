@@ -11,12 +11,10 @@ struct MovementBlock {
     if (update_flag & LIVING) {
         MovementFlags flags;
         u32 timestamp;
-        Vector3d living_position;
-        f32 living_orientation;
+        Vector4d living_position;
         if (flags & ON_TRANSPORT) {
             PackedGuid transport_guid;
-            Vector3d transport_position;
-            f32 transport_orientation;
+            Vector4d transport_position;
         }
         if (flags & SWIMMING) {
             f32 pitch;
@@ -57,8 +55,7 @@ struct MovementBlock {
         }
     }
     else if (update_flag & HAS_POSITION) {
-        Vector3d position;
-        f32 orientation;
+        Vector4d position;
     }
     if (update_flag & HIGH_GUID) {
         u32 unknown0;
@@ -90,8 +87,7 @@ struct MovementBlock {
         MovementFlags flags;
         u8 extra_flags;
         u32 timestamp;
-        Vector3d living_position;
-        f32 living_orientation;
+        Vector4d living_position;
         if (flags & ON_TRANSPORT) {
             TransportInfo transport;
         }
@@ -139,8 +135,7 @@ struct MovementBlock {
         }
     }
     else if (update_flag & HAS_POSITION) {
-        Vector3d position;
-        f32 orientation;
+        Vector4d position;
     }
     if (update_flag & HIGH_GUID) {
         u32 unknown0;
@@ -172,8 +167,7 @@ struct MovementBlock {
     if (update_flag & LIVING) {
         MovementFlags flags;
         u32 timestamp;
-        Vector3d position;
-        f32 orientation;
+        Vector4d position;
         if (flags & ON_TRANSPORT_AND_INTERPOLATED_MOVEMENT) {
             TransportInfo transport_info;
             u32 transport_time;
@@ -236,13 +230,10 @@ struct MovementBlock {
     else if (update_flag & POSITION) {
         PackedGuid transport_guid;
         Vector3d position1;
-        Vector3d transport_offset;
-        f32 orientation1;
-        f32 corpse_orientation;
+        Vector4d transport_offset;
     }
     else if (update_flag & HAS_POSITION) {
-        Vector3d position2;
-        f32 orientation2;
+        Vector4d position2;
     }
     if (update_flag & HIGH_GUID) {
         u32 unknown0;

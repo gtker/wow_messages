@@ -22,7 +22,6 @@ impl MovementInfo {
                 .get_on_transport()
                 .map(|t| MovementBlock_MovementFlags_OnTransport {
                     transport_guid: t.transport.guid,
-                    transport_orientation: t.transport.orientation,
                     transport_position: t.transport.position,
                 });
 
@@ -48,7 +47,6 @@ impl MovementInfo {
         });
 
         MovementBlock_UpdateFlag_Living::Living {
-            living_orientation: self.orientation,
             living_position: self.position,
             timestamp: self.timestamp,
             fall_time: self.fall_time,

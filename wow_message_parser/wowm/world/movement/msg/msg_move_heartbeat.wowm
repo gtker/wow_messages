@@ -12,8 +12,8 @@ test MSG_MOVE_HEARTBEAT_Client {
             x = -8945.774;
             y = -112.21678;
             z = 82.978714;
+            orientation = 2.5674446;
         };
-        orientation = 2.5674446;
         fall_time = 0.000000000000000000000000000000000000000001263;
     };
 } [
@@ -24,7 +24,7 @@ test MSG_MOVE_HEARTBEAT_Client {
   0x19, 0xc7, 0x0b, 0xc6, /* position.x */
   0xfe, 0x6e, 0xe0, 0xc2, /* position.y */
   0x1a, 0xf5, 0xa5, 0x42, /* position.z */
-  0x03, 0x51, 0x24, 0x40, /* orientation */
+  0x03, 0x51, 0x24, 0x40, /* position.orientation */
   0x85, 0x03, 0x00, 0x00, /* fall_time */
 ] {
     versions = "1.12";
@@ -59,8 +59,8 @@ test MSG_MOVE_HEARTBEAT_Server {
             x = -8945.774;
             y = -112.21678;
             z = 82.978714;
+            orientation = 2.5674446;
         };
-        orientation = 2.5674446;
         fall_time = 0.000000000000000000000000000000000000000001263;
     };
 } [
@@ -72,7 +72,7 @@ test MSG_MOVE_HEARTBEAT_Server {
   0x19, 0xc7, 0x0b, 0xc6, /* position.x */
   0xfe, 0x6e, 0xe0, 0xc2, /* position.y */
   0x1a, 0xf5, 0xa5, 0x42, /* position.z */
-  0x03, 0x51, 0x24, 0x40, /* orientation */
+  0x03, 0x51, 0x24, 0x40, /* position.orientation */
   0x85, 0x03, 0x00, 0x00, /* fall_time */
 ] {
     versions = "1.12";

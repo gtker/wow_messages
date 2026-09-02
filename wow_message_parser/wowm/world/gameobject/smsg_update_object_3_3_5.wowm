@@ -76,8 +76,7 @@ struct MovementBlock {
            but the if statement later requires access to flags. */
         MovementFlags flags;
         u32 timestamp;
-        Vector3d position;
-        f32 orientation;
+        Vector4d position;
         if (flags & ON_TRANSPORT_AND_INTERPOLATED_MOVEMENT) {
             TransportInfo transport_info;
             u32 transport_time;
@@ -142,13 +141,10 @@ struct MovementBlock {
     else if (update_flag & POSITION) {
         PackedGuid transport_guid;
         Vector3d position1;
-        Vector3d transport_offset;
-        f32 orientation1;
-        f32 corpse_orientation;
+        Vector4d transport_offset;
     }
     else if (update_flag & HAS_POSITION) {
-        Vector3d position2;
-        f32 orientation2;
+        Vector4d position2;
     }
     if (update_flag & HIGH_GUID) {
         /// vmangos statically sets to 0
@@ -215,8 +211,8 @@ test SMSG_UPDATE_OBJECT {
                     x = -8949.95;
                     y = -132.493;
                     z = 83.5312;
+                    orientation = 0.0;
                 };
-                orientation = 0.0;
                 fall_time = 0;
                 walking_speed = 1.0;
                 running_speed = 70.0;

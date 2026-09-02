@@ -2,7 +2,7 @@ use std::io::{Read, Write};
 
 use crate::Guid;
 use crate::tbc::{
-    MovementFlags, TransportInfo, Vector3d,
+    MovementFlags, TransportInfo, Vector4d,
 };
 
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/movement/common_movement_2_4_3.wowm:32`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/movement/common_movement_2_4_3.wowm#L32):
@@ -11,8 +11,7 @@ use crate::tbc::{
 ///     MovementFlags flags;
 ///     u8 extra_flags;
 ///     u32 timestamp;
-///     Vector3d position;
-///     f32 orientation;
+///     Vector4d position;
 ///     if (flags & ON_TRANSPORT) {
 ///         TransportInfo transport;
 ///     }
@@ -39,8 +38,7 @@ pub struct MovementInfo {
     pub flags: MovementInfo_MovementFlags,
     pub extra_flags: u8,
     pub timestamp: u32,
-    pub position: Vector3d,
-    pub orientation: f32,
+    pub position: Vector4d,
     pub fall_time: f32,
 }
 
@@ -55,11 +53,8 @@ impl MovementInfo {
         // timestamp: u32
         w.write_all(&self.timestamp.to_le_bytes())?;
 
-        // position: Vector3d
-        crate::util::vanilla_tbc_wrath_vector3d_write_into_vec(&self.position, &mut w)?;
-
-        // orientation: f32
-        w.write_all(&self.orientation.to_le_bytes())?;
+        // position: Vector4d
+        crate::util::vanilla_tbc_wrath_vector4d_write_into_vec(&self.position, &mut w)?;
 
         if let Some(if_statement) = &self.flags.on_transport {
             // transport: TransportInfo
@@ -125,11 +120,8 @@ impl MovementInfo {
         // timestamp: u32
         let timestamp = crate::util::read_u32_le(&mut r)?;
 
-        // position: Vector3d
-        let position = crate::util::vanilla_tbc_wrath_vector3d_read(&mut r)?;
-
-        // orientation: f32
-        let orientation = crate::util::read_f32_le(&mut r)?;
+        // position: Vector4d
+        let position = crate::util::vanilla_tbc_wrath_vector4d_read(&mut r)?;
 
         let flags_on_transport = if flags.is_on_transport() {
             // transport: TransportInfo
@@ -215,7 +207,6 @@ impl MovementInfo {
             extra_flags,
             timestamp,
             position,
-            orientation,
             fall_time,
         })
     }
@@ -227,8 +218,7 @@ impl MovementInfo {
         self.flags.size() // flags: MovementInfo_MovementFlags
         + 1 // extra_flags: u8
         + 4 // timestamp: u32
-        + 12 // position: Vector3d
-        + 4 // orientation: f32
+        + 16 // position: Vector4d
         + 4 // fall_time: f32
     }
 }

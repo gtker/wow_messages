@@ -12,8 +12,8 @@ test MSG_MOVE_START_STRAFE_LEFT_Client {
             x = -8944.482;
             y = -136.26949;
             z = 83.74637;
+            orientation = 0.38010955;
         };
-        orientation = 0.38010955;
         fall_time = 0.000000000000000000000000000000000000000001254;
     };
 } [
@@ -24,7 +24,7 @@ test MSG_MOVE_START_STRAFE_LEFT_Client {
   0xee, 0xc1, 0x0b, 0xc6, /* position.x */
   0xfd, 0x44, 0x08, 0xc3, /* position.y */
   0x24, 0x7e, 0xa7, 0x42, /* position.z */
-  0xb8, 0x9d, 0xc2, 0x3e, /* orientation */
+  0xb8, 0x9d, 0xc2, 0x3e, /* position.orientation */
   0x7f, 0x03, 0x00, 0x00, /* fall_time */
 ] {
     versions = "1.12";
@@ -59,8 +59,8 @@ test MSG_MOVE_START_STRAFE_LEFT_Server {
             x = -8944.482;
             y = -136.26949;
             z = 83.74637;
+            orientation = 0.38010955;
         };
-        orientation = 0.38010955;
         fall_time = 0.000000000000000000000000000000000000000001254;
     };
 } [
@@ -72,7 +72,7 @@ test MSG_MOVE_START_STRAFE_LEFT_Server {
   0xee, 0xc1, 0x0b, 0xc6, /* position.x */
   0xfd, 0x44, 0x08, 0xc3, /* position.y */
   0x24, 0x7e, 0xa7, 0x42, /* position.z */
-  0xb8, 0x9d, 0xc2, 0x3e, /* orientation */
+  0xb8, 0x9d, 0xc2, 0x3e, /* position.orientation */
   0x7f, 0x03, 0x00, 0x00, /* fall_time */
 ] {
     versions = "1.12";

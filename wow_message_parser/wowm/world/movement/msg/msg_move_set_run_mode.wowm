@@ -12,8 +12,8 @@ test MSG_MOVE_SET_RUN_MODE_Client {
             x = -8942.333;
             y = -129.51941;
             z = 83.59702;
+            orientation = 6.095481;
         };
-        orientation = 6.095481;
         fall_time = 0.0;
     };
 } [
@@ -24,7 +24,7 @@ test MSG_MOVE_SET_RUN_MODE_Client {
   0x55, 0xb9, 0x0b, 0xc6, /* position.x */
   0xf8, 0x84, 0x01, 0xc3, /* position.y */
   0xad, 0x31, 0xa7, 0x42, /* position.z */
-  0x2e, 0x0e, 0xc3, 0x40, /* orientation */
+  0x2e, 0x0e, 0xc3, 0x40, /* position.orientation */
   0x00, 0x00, 0x00, 0x00, /* fall_time */
 ] {
     versions = "1.12";
@@ -66,8 +66,8 @@ test MSG_MOVE_SET_RUN_MODE_Server {
             x = -8942.333;
             y = -129.51941;
             z = 83.59702;
+            orientation = 6.095481;
         };
-        orientation = 6.095481;
         fall_time = 0.0;
     };
 } [
@@ -79,7 +79,7 @@ test MSG_MOVE_SET_RUN_MODE_Server {
   0x55, 0xb9, 0x0b, 0xc6, /* position.x */
   0xf8, 0x84, 0x01, 0xc3, /* position.y */
   0xad, 0x31, 0xa7, 0x42, /* position.z */
-  0x2e, 0x0e, 0xc3, 0x40, /* orientation */
+  0x2e, 0x0e, 0xc3, 0x40, /* position.orientation */
   0x00, 0x00, 0x00, 0x00, /* fall_time */
 ] {
     versions = "1.12";

@@ -5108,11 +5108,7 @@
                 },
                 {
                   "name": "living_position",
-                  "type": "Vector3d"
-                },
-                {
-                  "name": "living_orientation",
-                  "type": "float"
+                  "type": "Vector4d"
                 },
                 {
                   "type": "if_chain",
@@ -5130,11 +5126,7 @@
                         },
                         {
                           "name": "transport_position",
-                          "type": "Vector3d"
-                        },
-                        {
-                          "name": "transport_orientation",
-                          "type": "float"
+                          "type": "Vector4d"
                         }
                       ]
                     }
@@ -5334,11 +5326,7 @@
               "fields": [
                 {
                   "name": "position",
-                  "type": "Vector3d"
-                },
-                {
-                  "name": "orientation",
-                  "type": "float"
+                  "type": "Vector4d"
                 }
               ]
             }
@@ -5462,11 +5450,7 @@
         },
         {
           "name": "position",
-          "type": "Vector3d"
-        },
-        {
-          "name": "orientation",
-          "type": "float"
+          "type": "Vector4d"
         },
         {
           "type": "if_chain",
@@ -8660,11 +8644,7 @@
         },
         {
           "name": "position",
-          "type": "Vector3d"
-        },
-        {
-          "name": "orientation",
-          "type": "float"
+          "type": "Vector4d"
         },
         {
           "name": "timestamp",
@@ -8748,6 +8728,27 @@
         },
         {
           "name": "z",
+          "type": "float"
+        }
+      ]
+    },
+    "Vector4d": {
+      "kind": "struct",
+      "fields": [
+        {
+          "name": "x",
+          "type": "float"
+        },
+        {
+          "name": "y",
+          "type": "float"
+        },
+        {
+          "name": "z",
+          "type": "float"
+        },
+        {
+          "name": "orientation",
           "type": "float"
         }
       ]

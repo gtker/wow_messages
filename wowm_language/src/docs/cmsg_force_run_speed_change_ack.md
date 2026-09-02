@@ -50,10 +50,10 @@ Client responds to having movement speed set to 7 in Northshire Abbey.
 0, 0, 0, 0, // counter: u32
 0, 0, 0, 0, // MovementInfo.flags: MovementFlags  NONE (0)
 64, 23, 246, 1, // MovementInfo.timestamp: u32
-203, 171, 11, 198, // Vector3d.x: f32
-7, 134, 248, 194, // Vector3d.y: f32
-142, 209, 165, 66, // Vector3d.z: f32
-237, 153, 127, 64, // MovementInfo.orientation: f32
+203, 171, 11, 198, // Vector4d.x: f32
+7, 134, 248, 194, // Vector4d.y: f32
+142, 209, 165, 66, // Vector4d.z: f32
+237, 153, 127, 64, // Vector4d.orientation: f32
 57, 3, 0, 0, // MovementInfo.fall_time: f32
 0, 0, 224, 64, // new_speed: f32
 ```

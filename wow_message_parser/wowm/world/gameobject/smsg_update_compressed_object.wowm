@@ -33,8 +33,8 @@ test SMSG_COMPRESSED_UPDATE_OBJECT {
                     x = 0.0;
                     y = 0.0;
                     z = 0.0;
+                    orientation = 4.0249395;
                 };
-                orientation = 4.0249395;
                 unknown1 = 1;
                 transport_progress_in_ms = 386273;
             };
@@ -62,8 +62,8 @@ test SMSG_COMPRESSED_UPDATE_OBJECT {
                     x = 0.0;
                     y = 0.0;
                     z = 0.0;
+                    orientation = 1.5709158;
                 };
-                orientation = 1.5709158;
                 unknown1 = 1;
                 transport_progress_in_ms = 386273;
             };
@@ -91,8 +91,8 @@ test SMSG_COMPRESSED_UPDATE_OBJECT {
                     x = 0.0;
                     y = 0.0;
                     z = 0.0;
+                    orientation = 4.5152526;
                 };
-                orientation = 4.5152526;
                 unknown1 = 1;
                 transport_progress_in_ms = 386273;
             };
@@ -120,8 +120,8 @@ test SMSG_COMPRESSED_UPDATE_OBJECT {
                     x = 0.0;
                     y = 0.0;
                     z = 0.0;
+                    orientation = 1.4187208;
                 };
-                orientation = 1.4187208;
                 unknown1 = 1;
                 transport_progress_in_ms = 386273;
             };

@@ -86,12 +86,12 @@ mod test {
                 flags: MovementInfo_MovementFlags::empty()
                     ,
                 timestamp: 0x179D9A5,
-                position: Vector3d {
+                position: Vector4d {
                     x: -8933.419_f32,
                     y: -130.95886_f32,
                     z: 82.98231_f32,
+                    orientation: 0.0855852_f32,
                 },
-                orientation: 0.0855852_f32,
                 fall_time: 0.000000000000000000000000000000000000000001263_f32,
             },
         }

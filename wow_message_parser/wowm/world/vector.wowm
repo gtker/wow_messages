@@ -1,6 +1,13 @@
 #tag_all versions "*";
 #tag_all rust_base_type "true";
 
+struct Vector4d {
+    f32 x;
+    f32 y;
+    f32 z;
+    f32 orientation;
+}
+
 struct Vector3d {
     f32 x;
     f32 y;

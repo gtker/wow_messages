@@ -87,12 +87,10 @@ struct MovementBlock {
            but the if statement later requires access to flags. */
         MovementFlags flags;
         u32 timestamp;
-        Vector3d living_position;
-        f32 living_orientation;
+        Vector4d living_position;
         if (flags & ON_TRANSPORT) {
             PackedGuid transport_guid;
-            Vector3d transport_position;
-            f32 transport_orientation;
+            Vector4d transport_position;
         }
         if (flags & SWIMMING) {
             f32 pitch;
@@ -131,12 +129,12 @@ struct MovementBlock {
             u32 id;
             u32 amount_of_nodes;
             Vector3d[amount_of_nodes] nodes;
-            Vector3d final_node;
+            Vector3d final_node
+;
         }
     }
     else if (update_flag & HAS_POSITION) {
-        Vector3d position;
-        f32 orientation;
+        Vector4d position;
     }
     if (update_flag & HIGH_GUID) {
         /// vmangos statically sets to 0
@@ -199,8 +197,8 @@ test SMSG_UPDATE_OBJECT {
                     x = -8949.95;
                     y = -132.493;
                     z = 83.5312;
+                    orientation = 0.0;
                 };
-                living_orientation = 0.0;
                 fall_time = 0;
                 walking_speed = 1.0;
                 running_speed = 7.0;
@@ -232,7 +230,7 @@ test SMSG_UPDATE_OBJECT {
     0xcd, 0xd7, 0x0b, 0xc6, /* living_position.x */
     0x35, 0x7e, 0x04, 0xc3, /* living_position.y */
     0xf9, 0x0f, 0xa7, 0x42, /* living_position.z */
-    0x00, 0x00, 0x00, 0x00, /* living_orientation */
+    0x00, 0x00, 0x00, 0x00, /* living_position.orientation */
     0x00, 0x00, 0x00, 0x00, /* fall_time */
     0x00, 0x00, 0x80, 0x3f, /* walking_speed */
     0x00, 0x00, 0xe0, 0x40, /* running_speed */
@@ -264,8 +262,8 @@ test SMSG_UPDATE_OBJECT {
                     x = -8949.95;
                     y = -132.493;
                     z = 83.5312;
+                    orientation = 0.0;
                 };
-                living_orientation = 0.0;
                 fall_time = 0;
                 walking_speed = 1.0;
                 running_speed = 7.0;
@@ -303,7 +301,7 @@ test SMSG_UPDATE_OBJECT {
     0xcd, 0xd7, 0x0b, 0xc6, /* living_position.x */
     0x35, 0x7e, 0x04, 0xc3, /* living_position.y */
     0xf9, 0x0f, 0xa7, 0x42, /* living_position.z */
-    0x00, 0x00, 0x00, 0x00, /* living_orientation */
+    0x00, 0x00, 0x00, 0x00, /* living_position.orientation */
     0x00, 0x00, 0x00, 0x00, /* fall_time */
     0x00, 0x00, 0x80, 0x3f, /* walking_speed */
     0x00, 0x00, 0xe0, 0x40, /* running_speed */

@@ -4,7 +4,7 @@ use std::io::{Read, Write};
 use crate::Guid;
 use crate::wrath::{
     MovementBlock, MovementFlags, Object, ObjectType, SplineFlag, TransportInfo, 
-    UpdateFlag, UpdateMask, UpdateType, Vector3d,
+    UpdateFlag, UpdateMask, UpdateType, Vector3d, Vector4d,
 };
 
 /// Compressed version of [`SMSG_UPDATE_OBJECT`](crate::wrath::SMSG_UPDATE_OBJECT). Has the same fields when uncompressed
@@ -108,7 +108,6 @@ impl crate::Message for SMSG_COMPRESSED_UPDATE_OBJECT {
                                 fall_time,
                                 flags,
                                 flight_speed,
-                                orientation,
                                 pitch_rate,
                                 position,
                                 running_speed,
@@ -119,15 +118,15 @@ impl crate::Message for SMSG_COMPRESSED_UPDATE_OBJECT {
                             } => {
                                 writeln!(s, "                flags = {};", MovementFlags::new(flags.as_int()).as_test_case_value()).unwrap();
                                 writeln!(s, "                timestamp = {};", timestamp).unwrap();
-                                // position: Vector3d
+                                // position: Vector4d
                                 writeln!(s, "                position = {{").unwrap();
                                 // Members
                                 writeln!(s, "                    x = {};", if position.x.to_string().contains('.') { position.x.to_string() } else { format!("{}.0", position.x) }).unwrap();
                                 writeln!(s, "                    y = {};", if position.y.to_string().contains('.') { position.y.to_string() } else { format!("{}.0", position.y) }).unwrap();
                                 writeln!(s, "                    z = {};", if position.z.to_string().contains('.') { position.z.to_string() } else { format!("{}.0", position.z) }).unwrap();
+                                writeln!(s, "                    orientation = {};", if position.orientation.to_string().contains('.') { position.orientation.to_string() } else { format!("{}.0", position.orientation) }).unwrap();
 
                                 writeln!(s, "                }};").unwrap();
-                                writeln!(s, "                orientation = {};", if orientation.to_string().contains('.') { orientation.to_string() } else { format!("{}.0", orientation) }).unwrap();
                                 if let Some(if_statement) = &flags.get_on_transport_and_interpolated_movement() {
                                     match if_statement {
                                         crate::wrath::MovementBlock_MovementFlags_OnTransportAndInterpolatedMovement::OnTransportAndInterpolatedMovement {
@@ -138,15 +137,15 @@ impl crate::Message for SMSG_COMPRESSED_UPDATE_OBJECT {
                                             writeln!(s, "                transport_info = {{").unwrap();
                                             // Members
                                             writeln!(s, "                    guid = {};", transport_info.guid.guid()).unwrap();
-                                            // position: Vector3d
+                                            // position: Vector4d
                                             writeln!(s, "                    position = {{").unwrap();
                                             // Members
                                             writeln!(s, "                        x = {};", if transport_info.position.x.to_string().contains('.') { transport_info.position.x.to_string() } else { format!("{}.0", transport_info.position.x) }).unwrap();
                                             writeln!(s, "                        y = {};", if transport_info.position.y.to_string().contains('.') { transport_info.position.y.to_string() } else { format!("{}.0", transport_info.position.y) }).unwrap();
                                             writeln!(s, "                        z = {};", if transport_info.position.z.to_string().contains('.') { transport_info.position.z.to_string() } else { format!("{}.0", transport_info.position.z) }).unwrap();
+                                            writeln!(s, "                        orientation = {};", if transport_info.position.orientation.to_string().contains('.') { transport_info.position.orientation.to_string() } else { format!("{}.0", transport_info.position.orientation) }).unwrap();
 
                                             writeln!(s, "                    }};").unwrap();
-                                            writeln!(s, "                    orientation = {};", if transport_info.orientation.to_string().contains('.') { transport_info.orientation.to_string() } else { format!("{}.0", transport_info.orientation) }).unwrap();
                                             writeln!(s, "                    timestamp = {};", transport_info.timestamp).unwrap();
                                             writeln!(s, "                    seat = {};", transport_info.seat).unwrap();
 
@@ -160,15 +159,15 @@ impl crate::Message for SMSG_COMPRESSED_UPDATE_OBJECT {
                                             writeln!(s, "                transport = {{").unwrap();
                                             // Members
                                             writeln!(s, "                    guid = {};", transport.guid.guid()).unwrap();
-                                            // position: Vector3d
+                                            // position: Vector4d
                                             writeln!(s, "                    position = {{").unwrap();
                                             // Members
                                             writeln!(s, "                        x = {};", if transport.position.x.to_string().contains('.') { transport.position.x.to_string() } else { format!("{}.0", transport.position.x) }).unwrap();
                                             writeln!(s, "                        y = {};", if transport.position.y.to_string().contains('.') { transport.position.y.to_string() } else { format!("{}.0", transport.position.y) }).unwrap();
                                             writeln!(s, "                        z = {};", if transport.position.z.to_string().contains('.') { transport.position.z.to_string() } else { format!("{}.0", transport.position.z) }).unwrap();
+                                            writeln!(s, "                        orientation = {};", if transport.position.orientation.to_string().contains('.') { transport.position.orientation.to_string() } else { format!("{}.0", transport.position.orientation) }).unwrap();
 
                                             writeln!(s, "                    }};").unwrap();
-                                            writeln!(s, "                    orientation = {};", if transport.orientation.to_string().contains('.') { transport.orientation.to_string() } else { format!("{}.0", transport.orientation) }).unwrap();
                                             writeln!(s, "                    timestamp = {};", transport.timestamp).unwrap();
                                             writeln!(s, "                    seat = {};", transport.seat).unwrap();
 
@@ -279,8 +278,6 @@ impl crate::Message for SMSG_COMPRESSED_UPDATE_OBJECT {
 
                             }
                             crate::wrath::MovementBlock_UpdateFlag_Living::Position {
-                                corpse_orientation,
-                                orientation1,
                                 position1,
                                 transport_guid,
                                 transport_offset,
@@ -294,30 +291,28 @@ impl crate::Message for SMSG_COMPRESSED_UPDATE_OBJECT {
                                 writeln!(s, "                    z = {};", if position1.z.to_string().contains('.') { position1.z.to_string() } else { format!("{}.0", position1.z) }).unwrap();
 
                                 writeln!(s, "                }};").unwrap();
-                                // transport_offset: Vector3d
+                                // transport_offset: Vector4d
                                 writeln!(s, "                transport_offset = {{").unwrap();
                                 // Members
                                 writeln!(s, "                    x = {};", if transport_offset.x.to_string().contains('.') { transport_offset.x.to_string() } else { format!("{}.0", transport_offset.x) }).unwrap();
                                 writeln!(s, "                    y = {};", if transport_offset.y.to_string().contains('.') { transport_offset.y.to_string() } else { format!("{}.0", transport_offset.y) }).unwrap();
                                 writeln!(s, "                    z = {};", if transport_offset.z.to_string().contains('.') { transport_offset.z.to_string() } else { format!("{}.0", transport_offset.z) }).unwrap();
+                                writeln!(s, "                    orientation = {};", if transport_offset.orientation.to_string().contains('.') { transport_offset.orientation.to_string() } else { format!("{}.0", transport_offset.orientation) }).unwrap();
 
                                 writeln!(s, "                }};").unwrap();
-                                writeln!(s, "                orientation1 = {};", if orientation1.to_string().contains('.') { orientation1.to_string() } else { format!("{}.0", orientation1) }).unwrap();
-                                writeln!(s, "                corpse_orientation = {};", if corpse_orientation.to_string().contains('.') { corpse_orientation.to_string() } else { format!("{}.0", corpse_orientation) }).unwrap();
                             }
                             crate::wrath::MovementBlock_UpdateFlag_Living::HasPosition {
-                                orientation2,
                                 position2,
                             } => {
-                                // position2: Vector3d
+                                // position2: Vector4d
                                 writeln!(s, "                position2 = {{").unwrap();
                                 // Members
                                 writeln!(s, "                    x = {};", if position2.x.to_string().contains('.') { position2.x.to_string() } else { format!("{}.0", position2.x) }).unwrap();
                                 writeln!(s, "                    y = {};", if position2.y.to_string().contains('.') { position2.y.to_string() } else { format!("{}.0", position2.y) }).unwrap();
                                 writeln!(s, "                    z = {};", if position2.z.to_string().contains('.') { position2.z.to_string() } else { format!("{}.0", position2.z) }).unwrap();
+                                writeln!(s, "                    orientation = {};", if position2.orientation.to_string().contains('.') { position2.orientation.to_string() } else { format!("{}.0", position2.orientation) }).unwrap();
 
                                 writeln!(s, "                }};").unwrap();
-                                writeln!(s, "                orientation2 = {};", if orientation2.to_string().contains('.') { orientation2.to_string() } else { format!("{}.0", orientation2) }).unwrap();
                             }
                         }
                     }
@@ -371,7 +366,6 @@ impl crate::Message for SMSG_COMPRESSED_UPDATE_OBJECT {
                                 fall_time,
                                 flags,
                                 flight_speed,
-                                orientation,
                                 pitch_rate,
                                 position,
                                 running_speed,
@@ -382,15 +376,15 @@ impl crate::Message for SMSG_COMPRESSED_UPDATE_OBJECT {
                             } => {
                                 writeln!(s, "                flags = {};", MovementFlags::new(flags.as_int()).as_test_case_value()).unwrap();
                                 writeln!(s, "                timestamp = {};", timestamp).unwrap();
-                                // position: Vector3d
+                                // position: Vector4d
                                 writeln!(s, "                position = {{").unwrap();
                                 // Members
                                 writeln!(s, "                    x = {};", if position.x.to_string().contains('.') { position.x.to_string() } else { format!("{}.0", position.x) }).unwrap();
                                 writeln!(s, "                    y = {};", if position.y.to_string().contains('.') { position.y.to_string() } else { format!("{}.0", position.y) }).unwrap();
                                 writeln!(s, "                    z = {};", if position.z.to_string().contains('.') { position.z.to_string() } else { format!("{}.0", position.z) }).unwrap();
+                                writeln!(s, "                    orientation = {};", if position.orientation.to_string().contains('.') { position.orientation.to_string() } else { format!("{}.0", position.orientation) }).unwrap();
 
                                 writeln!(s, "                }};").unwrap();
-                                writeln!(s, "                orientation = {};", if orientation.to_string().contains('.') { orientation.to_string() } else { format!("{}.0", orientation) }).unwrap();
                                 if let Some(if_statement) = &flags.get_on_transport_and_interpolated_movement() {
                                     match if_statement {
                                         crate::wrath::MovementBlock_MovementFlags_OnTransportAndInterpolatedMovement::OnTransportAndInterpolatedMovement {
@@ -401,15 +395,15 @@ impl crate::Message for SMSG_COMPRESSED_UPDATE_OBJECT {
                                             writeln!(s, "                transport_info = {{").unwrap();
                                             // Members
                                             writeln!(s, "                    guid = {};", transport_info.guid.guid()).unwrap();
-                                            // position: Vector3d
+                                            // position: Vector4d
                                             writeln!(s, "                    position = {{").unwrap();
                                             // Members
                                             writeln!(s, "                        x = {};", if transport_info.position.x.to_string().contains('.') { transport_info.position.x.to_string() } else { format!("{}.0", transport_info.position.x) }).unwrap();
                                             writeln!(s, "                        y = {};", if transport_info.position.y.to_string().contains('.') { transport_info.position.y.to_string() } else { format!("{}.0", transport_info.position.y) }).unwrap();
                                             writeln!(s, "                        z = {};", if transport_info.position.z.to_string().contains('.') { transport_info.position.z.to_string() } else { format!("{}.0", transport_info.position.z) }).unwrap();
+                                            writeln!(s, "                        orientation = {};", if transport_info.position.orientation.to_string().contains('.') { transport_info.position.orientation.to_string() } else { format!("{}.0", transport_info.position.orientation) }).unwrap();
 
                                             writeln!(s, "                    }};").unwrap();
-                                            writeln!(s, "                    orientation = {};", if transport_info.orientation.to_string().contains('.') { transport_info.orientation.to_string() } else { format!("{}.0", transport_info.orientation) }).unwrap();
                                             writeln!(s, "                    timestamp = {};", transport_info.timestamp).unwrap();
                                             writeln!(s, "                    seat = {};", transport_info.seat).unwrap();
 
@@ -423,15 +417,15 @@ impl crate::Message for SMSG_COMPRESSED_UPDATE_OBJECT {
                                             writeln!(s, "                transport = {{").unwrap();
                                             // Members
                                             writeln!(s, "                    guid = {};", transport.guid.guid()).unwrap();
-                                            // position: Vector3d
+                                            // position: Vector4d
                                             writeln!(s, "                    position = {{").unwrap();
                                             // Members
                                             writeln!(s, "                        x = {};", if transport.position.x.to_string().contains('.') { transport.position.x.to_string() } else { format!("{}.0", transport.position.x) }).unwrap();
                                             writeln!(s, "                        y = {};", if transport.position.y.to_string().contains('.') { transport.position.y.to_string() } else { format!("{}.0", transport.position.y) }).unwrap();
                                             writeln!(s, "                        z = {};", if transport.position.z.to_string().contains('.') { transport.position.z.to_string() } else { format!("{}.0", transport.position.z) }).unwrap();
+                                            writeln!(s, "                        orientation = {};", if transport.position.orientation.to_string().contains('.') { transport.position.orientation.to_string() } else { format!("{}.0", transport.position.orientation) }).unwrap();
 
                                             writeln!(s, "                    }};").unwrap();
-                                            writeln!(s, "                    orientation = {};", if transport.orientation.to_string().contains('.') { transport.orientation.to_string() } else { format!("{}.0", transport.orientation) }).unwrap();
                                             writeln!(s, "                    timestamp = {};", transport.timestamp).unwrap();
                                             writeln!(s, "                    seat = {};", transport.seat).unwrap();
 
@@ -542,8 +536,6 @@ impl crate::Message for SMSG_COMPRESSED_UPDATE_OBJECT {
 
                             }
                             crate::wrath::MovementBlock_UpdateFlag_Living::Position {
-                                corpse_orientation,
-                                orientation1,
                                 position1,
                                 transport_guid,
                                 transport_offset,
@@ -557,30 +549,28 @@ impl crate::Message for SMSG_COMPRESSED_UPDATE_OBJECT {
                                 writeln!(s, "                    z = {};", if position1.z.to_string().contains('.') { position1.z.to_string() } else { format!("{}.0", position1.z) }).unwrap();
 
                                 writeln!(s, "                }};").unwrap();
-                                // transport_offset: Vector3d
+                                // transport_offset: Vector4d
                                 writeln!(s, "                transport_offset = {{").unwrap();
                                 // Members
                                 writeln!(s, "                    x = {};", if transport_offset.x.to_string().contains('.') { transport_offset.x.to_string() } else { format!("{}.0", transport_offset.x) }).unwrap();
                                 writeln!(s, "                    y = {};", if transport_offset.y.to_string().contains('.') { transport_offset.y.to_string() } else { format!("{}.0", transport_offset.y) }).unwrap();
                                 writeln!(s, "                    z = {};", if transport_offset.z.to_string().contains('.') { transport_offset.z.to_string() } else { format!("{}.0", transport_offset.z) }).unwrap();
+                                writeln!(s, "                    orientation = {};", if transport_offset.orientation.to_string().contains('.') { transport_offset.orientation.to_string() } else { format!("{}.0", transport_offset.orientation) }).unwrap();
 
                                 writeln!(s, "                }};").unwrap();
-                                writeln!(s, "                orientation1 = {};", if orientation1.to_string().contains('.') { orientation1.to_string() } else { format!("{}.0", orientation1) }).unwrap();
-                                writeln!(s, "                corpse_orientation = {};", if corpse_orientation.to_string().contains('.') { corpse_orientation.to_string() } else { format!("{}.0", corpse_orientation) }).unwrap();
                             }
                             crate::wrath::MovementBlock_UpdateFlag_Living::HasPosition {
-                                orientation2,
                                 position2,
                             } => {
-                                // position2: Vector3d
+                                // position2: Vector4d
                                 writeln!(s, "                position2 = {{").unwrap();
                                 // Members
                                 writeln!(s, "                    x = {};", if position2.x.to_string().contains('.') { position2.x.to_string() } else { format!("{}.0", position2.x) }).unwrap();
                                 writeln!(s, "                    y = {};", if position2.y.to_string().contains('.') { position2.y.to_string() } else { format!("{}.0", position2.y) }).unwrap();
                                 writeln!(s, "                    z = {};", if position2.z.to_string().contains('.') { position2.z.to_string() } else { format!("{}.0", position2.z) }).unwrap();
+                                writeln!(s, "                    orientation = {};", if position2.orientation.to_string().contains('.') { position2.orientation.to_string() } else { format!("{}.0", position2.orientation) }).unwrap();
 
                                 writeln!(s, "                }};").unwrap();
-                                writeln!(s, "                orientation2 = {};", if orientation2.to_string().contains('.') { orientation2.to_string() } else { format!("{}.0", orientation2) }).unwrap();
                             }
                         }
                     }
@@ -635,7 +625,6 @@ impl crate::Message for SMSG_COMPRESSED_UPDATE_OBJECT {
                                 fall_time,
                                 flags,
                                 flight_speed,
-                                orientation,
                                 pitch_rate,
                                 position,
                                 running_speed,
@@ -646,15 +635,15 @@ impl crate::Message for SMSG_COMPRESSED_UPDATE_OBJECT {
                             } => {
                                 writeln!(s, "                flags = {};", MovementFlags::new(flags.as_int()).as_test_case_value()).unwrap();
                                 writeln!(s, "                timestamp = {};", timestamp).unwrap();
-                                // position: Vector3d
+                                // position: Vector4d
                                 writeln!(s, "                position = {{").unwrap();
                                 // Members
                                 writeln!(s, "                    x = {};", if position.x.to_string().contains('.') { position.x.to_string() } else { format!("{}.0", position.x) }).unwrap();
                                 writeln!(s, "                    y = {};", if position.y.to_string().contains('.') { position.y.to_string() } else { format!("{}.0", position.y) }).unwrap();
                                 writeln!(s, "                    z = {};", if position.z.to_string().contains('.') { position.z.to_string() } else { format!("{}.0", position.z) }).unwrap();
+                                writeln!(s, "                    orientation = {};", if position.orientation.to_string().contains('.') { position.orientation.to_string() } else { format!("{}.0", position.orientation) }).unwrap();
 
                                 writeln!(s, "                }};").unwrap();
-                                writeln!(s, "                orientation = {};", if orientation.to_string().contains('.') { orientation.to_string() } else { format!("{}.0", orientation) }).unwrap();
                                 if let Some(if_statement) = &flags.get_on_transport_and_interpolated_movement() {
                                     match if_statement {
                                         crate::wrath::MovementBlock_MovementFlags_OnTransportAndInterpolatedMovement::OnTransportAndInterpolatedMovement {
@@ -665,15 +654,15 @@ impl crate::Message for SMSG_COMPRESSED_UPDATE_OBJECT {
                                             writeln!(s, "                transport_info = {{").unwrap();
                                             // Members
                                             writeln!(s, "                    guid = {};", transport_info.guid.guid()).unwrap();
-                                            // position: Vector3d
+                                            // position: Vector4d
                                             writeln!(s, "                    position = {{").unwrap();
                                             // Members
                                             writeln!(s, "                        x = {};", if transport_info.position.x.to_string().contains('.') { transport_info.position.x.to_string() } else { format!("{}.0", transport_info.position.x) }).unwrap();
                                             writeln!(s, "                        y = {};", if transport_info.position.y.to_string().contains('.') { transport_info.position.y.to_string() } else { format!("{}.0", transport_info.position.y) }).unwrap();
                                             writeln!(s, "                        z = {};", if transport_info.position.z.to_string().contains('.') { transport_info.position.z.to_string() } else { format!("{}.0", transport_info.position.z) }).unwrap();
+                                            writeln!(s, "                        orientation = {};", if transport_info.position.orientation.to_string().contains('.') { transport_info.position.orientation.to_string() } else { format!("{}.0", transport_info.position.orientation) }).unwrap();
 
                                             writeln!(s, "                    }};").unwrap();
-                                            writeln!(s, "                    orientation = {};", if transport_info.orientation.to_string().contains('.') { transport_info.orientation.to_string() } else { format!("{}.0", transport_info.orientation) }).unwrap();
                                             writeln!(s, "                    timestamp = {};", transport_info.timestamp).unwrap();
                                             writeln!(s, "                    seat = {};", transport_info.seat).unwrap();
 
@@ -687,15 +676,15 @@ impl crate::Message for SMSG_COMPRESSED_UPDATE_OBJECT {
                                             writeln!(s, "                transport = {{").unwrap();
                                             // Members
                                             writeln!(s, "                    guid = {};", transport.guid.guid()).unwrap();
-                                            // position: Vector3d
+                                            // position: Vector4d
                                             writeln!(s, "                    position = {{").unwrap();
                                             // Members
                                             writeln!(s, "                        x = {};", if transport.position.x.to_string().contains('.') { transport.position.x.to_string() } else { format!("{}.0", transport.position.x) }).unwrap();
                                             writeln!(s, "                        y = {};", if transport.position.y.to_string().contains('.') { transport.position.y.to_string() } else { format!("{}.0", transport.position.y) }).unwrap();
                                             writeln!(s, "                        z = {};", if transport.position.z.to_string().contains('.') { transport.position.z.to_string() } else { format!("{}.0", transport.position.z) }).unwrap();
+                                            writeln!(s, "                        orientation = {};", if transport.position.orientation.to_string().contains('.') { transport.position.orientation.to_string() } else { format!("{}.0", transport.position.orientation) }).unwrap();
 
                                             writeln!(s, "                    }};").unwrap();
-                                            writeln!(s, "                    orientation = {};", if transport.orientation.to_string().contains('.') { transport.orientation.to_string() } else { format!("{}.0", transport.orientation) }).unwrap();
                                             writeln!(s, "                    timestamp = {};", transport.timestamp).unwrap();
                                             writeln!(s, "                    seat = {};", transport.seat).unwrap();
 
@@ -806,8 +795,6 @@ impl crate::Message for SMSG_COMPRESSED_UPDATE_OBJECT {
 
                             }
                             crate::wrath::MovementBlock_UpdateFlag_Living::Position {
-                                corpse_orientation,
-                                orientation1,
                                 position1,
                                 transport_guid,
                                 transport_offset,
@@ -821,30 +808,28 @@ impl crate::Message for SMSG_COMPRESSED_UPDATE_OBJECT {
                                 writeln!(s, "                    z = {};", if position1.z.to_string().contains('.') { position1.z.to_string() } else { format!("{}.0", position1.z) }).unwrap();
 
                                 writeln!(s, "                }};").unwrap();
-                                // transport_offset: Vector3d
+                                // transport_offset: Vector4d
                                 writeln!(s, "                transport_offset = {{").unwrap();
                                 // Members
                                 writeln!(s, "                    x = {};", if transport_offset.x.to_string().contains('.') { transport_offset.x.to_string() } else { format!("{}.0", transport_offset.x) }).unwrap();
                                 writeln!(s, "                    y = {};", if transport_offset.y.to_string().contains('.') { transport_offset.y.to_string() } else { format!("{}.0", transport_offset.y) }).unwrap();
                                 writeln!(s, "                    z = {};", if transport_offset.z.to_string().contains('.') { transport_offset.z.to_string() } else { format!("{}.0", transport_offset.z) }).unwrap();
+                                writeln!(s, "                    orientation = {};", if transport_offset.orientation.to_string().contains('.') { transport_offset.orientation.to_string() } else { format!("{}.0", transport_offset.orientation) }).unwrap();
 
                                 writeln!(s, "                }};").unwrap();
-                                writeln!(s, "                orientation1 = {};", if orientation1.to_string().contains('.') { orientation1.to_string() } else { format!("{}.0", orientation1) }).unwrap();
-                                writeln!(s, "                corpse_orientation = {};", if corpse_orientation.to_string().contains('.') { corpse_orientation.to_string() } else { format!("{}.0", corpse_orientation) }).unwrap();
                             }
                             crate::wrath::MovementBlock_UpdateFlag_Living::HasPosition {
-                                orientation2,
                                 position2,
                             } => {
-                                // position2: Vector3d
+                                // position2: Vector4d
                                 writeln!(s, "                position2 = {{").unwrap();
                                 // Members
                                 writeln!(s, "                    x = {};", if position2.x.to_string().contains('.') { position2.x.to_string() } else { format!("{}.0", position2.x) }).unwrap();
                                 writeln!(s, "                    y = {};", if position2.y.to_string().contains('.') { position2.y.to_string() } else { format!("{}.0", position2.y) }).unwrap();
                                 writeln!(s, "                    z = {};", if position2.z.to_string().contains('.') { position2.z.to_string() } else { format!("{}.0", position2.z) }).unwrap();
+                                writeln!(s, "                    orientation = {};", if position2.orientation.to_string().contains('.') { position2.orientation.to_string() } else { format!("{}.0", position2.orientation) }).unwrap();
 
                                 writeln!(s, "                }};").unwrap();
-                                writeln!(s, "                orientation2 = {};", if orientation2.to_string().contains('.') { orientation2.to_string() } else { format!("{}.0", orientation2) }).unwrap();
                             }
                         }
                     }

@@ -25,8 +25,8 @@ test MSG_MOVE_START_BACKWARD_Client {
             x = -8937.364;
             y = -122.47741;
             z = 82.52683;
+            orientation = 4.5757346;
         };
-        orientation = 4.5757346;
         fall_time = 0.0;
     };
 } [
@@ -37,7 +37,7 @@ test MSG_MOVE_START_BACKWARD_Client {
   0x75, 0xa5, 0x0b, 0xc6, /* position.x */
   0x6f, 0xf4, 0xf4, 0xc2, /* position.y */
   0xbd, 0x0d, 0xa5, 0x42, /* position.z */
-  0x6b, 0x6c, 0x92, 0x40, /* orientation */
+  0x6b, 0x6c, 0x92, 0x40, /* position.orientation */
   0x00, 0x00, 0x00, 0x00, /* fall_time */
 ] {
     versions = "1.12";
@@ -66,8 +66,8 @@ test MSG_MOVE_START_BACKWARD_Server {
             x = -8937.364;
             y = -122.47741;
             z = 82.52683;
+            orientation = 4.5757346;
         };
-        orientation = 4.5757346;
         fall_time = 0.0;
     };
 } [
@@ -79,7 +79,7 @@ test MSG_MOVE_START_BACKWARD_Server {
   0x75, 0xa5, 0x0b, 0xc6, /* position.x */
   0x6f, 0xf4, 0xf4, 0xc2, /* position.y */
   0xbd, 0x0d, 0xa5, 0x42, /* position.z */
-  0x6b, 0x6c, 0x92, 0x40, /* orientation */
+  0x6b, 0x6c, 0x92, 0x40, /* position.orientation */
   0x00, 0x00, 0x00, 0x00, /* fall_time */
 ] {
     versions = "1.12";

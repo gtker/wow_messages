@@ -1,7 +1,7 @@
 use std::io::{Read, Write};
 
 use crate::vanilla::{
-    Map, Vector3d,
+    Map, Vector4d,
 };
 
 /// Message to the client that is has successfully logged into the world and that it should load the map and coordinates.
@@ -10,15 +10,13 @@ use crate::vanilla::{
 /// ```text
 /// smsg SMSG_LOGIN_VERIFY_WORLD = 0x0236 {
 ///     Map map;
-///     Vector3d position;
-///     f32 orientation;
+///     Vector4d position;
 /// }
 /// ```
 #[derive(Debug, Clone, Copy, PartialEq, PartialOrd, Default)]
 pub struct SMSG_LOGIN_VERIFY_WORLD {
     pub map: Map,
-    pub position: Vector3d,
-    pub orientation: f32,
+    pub position: Vector4d,
 }
 
 impl crate::private::Sealed for SMSG_LOGIN_VERIFY_WORLD {}
@@ -31,16 +29,12 @@ impl SMSG_LOGIN_VERIFY_WORLD {
         // map: Map
         let map = crate::util::read_u32_le(&mut r)?.try_into()?;
 
-        // position: Vector3d
-        let position = crate::util::vanilla_tbc_wrath_vector3d_read(&mut r)?;
-
-        // orientation: f32
-        let orientation = crate::util::read_f32_le(&mut r)?;
+        // position: Vector4d
+        let position = crate::util::vanilla_tbc_wrath_vector4d_read(&mut r)?;
 
         Ok(Self {
             map,
             position,
-            orientation,
         })
     }
 
@@ -62,11 +56,8 @@ impl crate::Message for SMSG_LOGIN_VERIFY_WORLD {
         // map: Map
         w.write_all(&(self.map.as_int().to_le_bytes()))?;
 
-        // position: Vector3d
-        crate::util::vanilla_tbc_wrath_vector3d_write_into_vec(&self.position, &mut w)?;
-
-        // orientation: f32
-        w.write_all(&self.orientation.to_le_bytes())?;
+        // position: Vector4d
+        crate::util::vanilla_tbc_wrath_vector4d_write_into_vec(&self.position, &mut w)?;
 
         Ok(())
     }
@@ -97,17 +88,17 @@ mod test {
     pub(crate) fn expected0() -> SMSG_LOGIN_VERIFY_WORLD {
         SMSG_LOGIN_VERIFY_WORLD {
             map: Map::EasternKingdoms,
-            position: Vector3d {
+            position: Vector4d {
                 x: -8949.95_f32,
                 y: -132.493_f32,
                 z: 83.5312_f32,
+                orientation: 0_f32,
             },
-            orientation: 0_f32,
         }
 
     }
 
-    // Generated from `wow_message_parser/wowm/world/character_screen/smsg_login_verify_world.wowm` line 12.
+    // Generated from `wow_message_parser/wowm/world/character_screen/smsg_login_verify_world.wowm` line 11.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn smsg_login_verify_world0() {
@@ -127,7 +118,7 @@ mod test {
         assert_eq!(dest, RAW0);
     }
 
-    // Generated from `wow_message_parser/wowm/world/character_screen/smsg_login_verify_world.wowm` line 12.
+    // Generated from `wow_message_parser/wowm/world/character_screen/smsg_login_verify_world.wowm` line 11.
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_smsg_login_verify_world0() {
@@ -147,7 +138,7 @@ mod test {
         assert_eq!(dest, RAW0);
     }
 
-    // Generated from `wow_message_parser/wowm/world/character_screen/smsg_login_verify_world.wowm` line 12.
+    // Generated from `wow_message_parser/wowm/world/character_screen/smsg_login_verify_world.wowm` line 11.
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_smsg_login_verify_world0() {

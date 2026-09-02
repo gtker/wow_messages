@@ -2,7 +2,7 @@ use std::io::{Read, Write};
 
 use crate::Guid;
 use crate::wrath::{
-    MovementFlags, MovementInfo, TransportInfo, Vector3d,
+    MovementFlags, MovementInfo, TransportInfo, Vector4d,
 };
 
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/movement/cmsg/cmsg_force_flight_speed_change_ack.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/movement/cmsg/cmsg_force_flight_speed_change_ack.wowm#L1):
@@ -75,15 +75,15 @@ impl crate::Message for CMSG_FORCE_FLIGHT_SPEED_CHANGE_ACK {
         // Members
         writeln!(s, "        flags = {};", MovementFlags::new(self.info.flags.as_int()).as_test_case_value()).unwrap();
         writeln!(s, "        timestamp = {};", self.info.timestamp).unwrap();
-        // position: Vector3d
+        // position: Vector4d
         writeln!(s, "        position = {{").unwrap();
         // Members
         writeln!(s, "            x = {};", if self.info.position.x.to_string().contains('.') { self.info.position.x.to_string() } else { format!("{}.0", self.info.position.x) }).unwrap();
         writeln!(s, "            y = {};", if self.info.position.y.to_string().contains('.') { self.info.position.y.to_string() } else { format!("{}.0", self.info.position.y) }).unwrap();
         writeln!(s, "            z = {};", if self.info.position.z.to_string().contains('.') { self.info.position.z.to_string() } else { format!("{}.0", self.info.position.z) }).unwrap();
+        writeln!(s, "            orientation = {};", if self.info.position.orientation.to_string().contains('.') { self.info.position.orientation.to_string() } else { format!("{}.0", self.info.position.orientation) }).unwrap();
 
         writeln!(s, "        }};").unwrap();
-        writeln!(s, "        orientation = {};", if self.info.orientation.to_string().contains('.') { self.info.orientation.to_string() } else { format!("{}.0", self.info.orientation) }).unwrap();
         if let Some(if_statement) = &self.info.flags.get_on_transport_and_interpolated_movement() {
             match if_statement {
                 crate::wrath::MovementInfo_MovementFlags_OnTransportAndInterpolatedMovement::OnTransportAndInterpolatedMovement {
@@ -94,15 +94,15 @@ impl crate::Message for CMSG_FORCE_FLIGHT_SPEED_CHANGE_ACK {
                     writeln!(s, "        transport_info = {{").unwrap();
                     // Members
                     writeln!(s, "            guid = {};", transport_info.guid.guid()).unwrap();
-                    // position: Vector3d
+                    // position: Vector4d
                     writeln!(s, "            position = {{").unwrap();
                     // Members
                     writeln!(s, "                x = {};", if transport_info.position.x.to_string().contains('.') { transport_info.position.x.to_string() } else { format!("{}.0", transport_info.position.x) }).unwrap();
                     writeln!(s, "                y = {};", if transport_info.position.y.to_string().contains('.') { transport_info.position.y.to_string() } else { format!("{}.0", transport_info.position.y) }).unwrap();
                     writeln!(s, "                z = {};", if transport_info.position.z.to_string().contains('.') { transport_info.position.z.to_string() } else { format!("{}.0", transport_info.position.z) }).unwrap();
+                    writeln!(s, "                orientation = {};", if transport_info.position.orientation.to_string().contains('.') { transport_info.position.orientation.to_string() } else { format!("{}.0", transport_info.position.orientation) }).unwrap();
 
                     writeln!(s, "            }};").unwrap();
-                    writeln!(s, "            orientation = {};", if transport_info.orientation.to_string().contains('.') { transport_info.orientation.to_string() } else { format!("{}.0", transport_info.orientation) }).unwrap();
                     writeln!(s, "            timestamp = {};", transport_info.timestamp).unwrap();
                     writeln!(s, "            seat = {};", transport_info.seat).unwrap();
 
@@ -116,15 +116,15 @@ impl crate::Message for CMSG_FORCE_FLIGHT_SPEED_CHANGE_ACK {
                     writeln!(s, "        transport = {{").unwrap();
                     // Members
                     writeln!(s, "            guid = {};", transport.guid.guid()).unwrap();
-                    // position: Vector3d
+                    // position: Vector4d
                     writeln!(s, "            position = {{").unwrap();
                     // Members
                     writeln!(s, "                x = {};", if transport.position.x.to_string().contains('.') { transport.position.x.to_string() } else { format!("{}.0", transport.position.x) }).unwrap();
                     writeln!(s, "                y = {};", if transport.position.y.to_string().contains('.') { transport.position.y.to_string() } else { format!("{}.0", transport.position.y) }).unwrap();
                     writeln!(s, "                z = {};", if transport.position.z.to_string().contains('.') { transport.position.z.to_string() } else { format!("{}.0", transport.position.z) }).unwrap();
+                    writeln!(s, "                orientation = {};", if transport.position.orientation.to_string().contains('.') { transport.position.orientation.to_string() } else { format!("{}.0", transport.position.orientation) }).unwrap();
 
                     writeln!(s, "            }};").unwrap();
-                    writeln!(s, "            orientation = {};", if transport.orientation.to_string().contains('.') { transport.orientation.to_string() } else { format!("{}.0", transport.orientation) }).unwrap();
                     writeln!(s, "            timestamp = {};", transport.timestamp).unwrap();
                     writeln!(s, "            seat = {};", transport.seat).unwrap();
 
@@ -184,12 +184,12 @@ impl crate::Message for CMSG_FORCE_FLIGHT_SPEED_CHANGE_ACK {
         writeln!(s, "    /* info: MovementInfo start */").unwrap();
         crate::util::write_bytes(&mut s, &mut bytes, 6, "flags", "        ");
         crate::util::write_bytes(&mut s, &mut bytes, 4, "timestamp", "        ");
-        writeln!(s, "    /* position: Vector3d start */").unwrap();
+        writeln!(s, "    /* position: Vector4d start */").unwrap();
         crate::util::write_bytes(&mut s, &mut bytes, 4, "x", "            ");
         crate::util::write_bytes(&mut s, &mut bytes, 4, "y", "            ");
         crate::util::write_bytes(&mut s, &mut bytes, 4, "z", "            ");
-        writeln!(s, "    /* position: Vector3d end */").unwrap();
-        crate::util::write_bytes(&mut s, &mut bytes, 4, "orientation", "        ");
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "orientation", "            ");
+        writeln!(s, "    /* position: Vector4d end */").unwrap();
         if let Some(if_statement) = &self.info.flags.get_on_transport_and_interpolated_movement() {
             match if_statement {
                 crate::wrath::MovementInfo_MovementFlags_OnTransportAndInterpolatedMovement::OnTransportAndInterpolatedMovement {
@@ -198,12 +198,12 @@ impl crate::Message for CMSG_FORCE_FLIGHT_SPEED_CHANGE_ACK {
                 } => {
                     writeln!(s, "    /* transport_info: TransportInfo start */").unwrap();
                     crate::util::write_bytes(&mut s, &mut bytes, crate::util::packed_guid_size(&transport_info.guid), "guid", "            ");
-                    writeln!(s, "    /* position: Vector3d start */").unwrap();
+                    writeln!(s, "    /* position: Vector4d start */").unwrap();
                     crate::util::write_bytes(&mut s, &mut bytes, 4, "x", "                ");
                     crate::util::write_bytes(&mut s, &mut bytes, 4, "y", "                ");
                     crate::util::write_bytes(&mut s, &mut bytes, 4, "z", "                ");
-                    writeln!(s, "    /* position: Vector3d end */").unwrap();
-                    crate::util::write_bytes(&mut s, &mut bytes, 4, "orientation", "            ");
+                    crate::util::write_bytes(&mut s, &mut bytes, 4, "orientation", "                ");
+                    writeln!(s, "    /* position: Vector4d end */").unwrap();
                     crate::util::write_bytes(&mut s, &mut bytes, 4, "timestamp", "            ");
                     crate::util::write_bytes(&mut s, &mut bytes, 1, "seat", "            ");
                     writeln!(s, "    /* transport_info: TransportInfo end */").unwrap();
@@ -214,12 +214,12 @@ impl crate::Message for CMSG_FORCE_FLIGHT_SPEED_CHANGE_ACK {
                 } => {
                     writeln!(s, "    /* transport: TransportInfo start */").unwrap();
                     crate::util::write_bytes(&mut s, &mut bytes, crate::util::packed_guid_size(&transport.guid), "guid", "            ");
-                    writeln!(s, "    /* position: Vector3d start */").unwrap();
+                    writeln!(s, "    /* position: Vector4d start */").unwrap();
                     crate::util::write_bytes(&mut s, &mut bytes, 4, "x", "                ");
                     crate::util::write_bytes(&mut s, &mut bytes, 4, "y", "                ");
                     crate::util::write_bytes(&mut s, &mut bytes, 4, "z", "                ");
-                    writeln!(s, "    /* position: Vector3d end */").unwrap();
-                    crate::util::write_bytes(&mut s, &mut bytes, 4, "orientation", "            ");
+                    crate::util::write_bytes(&mut s, &mut bytes, 4, "orientation", "                ");
+                    writeln!(s, "    /* position: Vector4d end */").unwrap();
                     crate::util::write_bytes(&mut s, &mut bytes, 4, "timestamp", "            ");
                     crate::util::write_bytes(&mut s, &mut bytes, 1, "seat", "            ");
                     writeln!(s, "    /* transport: TransportInfo end */").unwrap();

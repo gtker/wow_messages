@@ -1,19 +1,17 @@
 use std::io::{Read, Write};
 
-use wow_world_base::shared::vector3d_vanilla_tbc_wrath::Vector3d;
+use wow_world_base::shared::vector4d_vanilla_tbc_wrath::Vector4d;
 
 /// There does not appear to be a CMSG version of this MSG.
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/movement/msg/msg_move_teleport_cheat.wowm:2`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/movement/msg/msg_move_teleport_cheat.wowm#L2):
 /// ```text
 /// smsg MSG_MOVE_TELEPORT_CHEAT_Server = 0x00C6 {
-///     Vector3d position;
-///     f32 orientation;
+///     Vector4d position;
 /// }
 /// ```
 #[derive(Debug, Clone, Copy, PartialEq, PartialOrd, Default)]
 pub struct MSG_MOVE_TELEPORT_CHEAT_Server {
-    pub position: Vector3d,
-    pub orientation: f32,
+    pub position: Vector4d,
 }
 
 impl crate::private::Sealed for MSG_MOVE_TELEPORT_CHEAT_Server {}
@@ -23,15 +21,11 @@ impl MSG_MOVE_TELEPORT_CHEAT_Server {
             return Err(crate::errors::ParseErrorKind::InvalidSize);
         }
 
-        // position: Vector3d
-        let position = crate::util::vanilla_tbc_wrath_vector3d_read(&mut r)?;
-
-        // orientation: f32
-        let orientation = crate::util::read_f32_le(&mut r)?;
+        // position: Vector4d
+        let position = crate::util::vanilla_tbc_wrath_vector4d_read(&mut r)?;
 
         Ok(Self {
             position,
-            orientation,
         })
     }
 
@@ -54,15 +48,15 @@ impl crate::Message for MSG_MOVE_TELEPORT_CHEAT_Server {
 
         writeln!(s, "test MSG_MOVE_TELEPORT_CHEAT_Server {{").unwrap();
         // Members
-        // position: Vector3d
+        // position: Vector4d
         writeln!(s, "    position = {{").unwrap();
         // Members
         writeln!(s, "        x = {};", if self.position.x.to_string().contains('.') { self.position.x.to_string() } else { format!("{}.0", self.position.x) }).unwrap();
         writeln!(s, "        y = {};", if self.position.y.to_string().contains('.') { self.position.y.to_string() } else { format!("{}.0", self.position.y) }).unwrap();
         writeln!(s, "        z = {};", if self.position.z.to_string().contains('.') { self.position.z.to_string() } else { format!("{}.0", self.position.z) }).unwrap();
+        writeln!(s, "        orientation = {};", if self.position.orientation.to_string().contains('.') { self.position.orientation.to_string() } else { format!("{}.0", self.position.orientation) }).unwrap();
 
         writeln!(s, "    }};").unwrap();
-        writeln!(s, "    orientation = {};", if self.orientation.to_string().contains('.') { self.orientation.to_string() } else { format!("{}.0", self.orientation) }).unwrap();
 
         writeln!(s, "}} [").unwrap();
 
@@ -74,12 +68,12 @@ impl crate::Message for MSG_MOVE_TELEPORT_CHEAT_Server {
         self.write_into_vec(&mut bytes).unwrap();
         let mut bytes = bytes.into_iter();
 
-        writeln!(s, "    /* position: Vector3d start */").unwrap();
+        writeln!(s, "    /* position: Vector4d start */").unwrap();
         crate::util::write_bytes(&mut s, &mut bytes, 4, "x", "        ");
         crate::util::write_bytes(&mut s, &mut bytes, 4, "y", "        ");
         crate::util::write_bytes(&mut s, &mut bytes, 4, "z", "        ");
-        writeln!(s, "    /* position: Vector3d end */").unwrap();
-        crate::util::write_bytes(&mut s, &mut bytes, 4, "orientation", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "orientation", "        ");
+        writeln!(s, "    /* position: Vector4d end */").unwrap();
 
 
         writeln!(s, "] {{").unwrap();
@@ -94,11 +88,8 @@ impl crate::Message for MSG_MOVE_TELEPORT_CHEAT_Server {
     }
 
     fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
-        // position: Vector3d
-        crate::util::vanilla_tbc_wrath_vector3d_write_into_vec(&self.position, &mut w)?;
-
-        // orientation: f32
-        w.write_all(&self.orientation.to_le_bytes())?;
+        // position: Vector4d
+        crate::util::vanilla_tbc_wrath_vector4d_write_into_vec(&self.position, &mut w)?;
 
         Ok(())
     }

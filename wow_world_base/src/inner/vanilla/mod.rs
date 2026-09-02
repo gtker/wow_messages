@@ -278,3 +278,4 @@ pub(crate) mod item_stat;
 pub use item_stat::*;
 pub use crate::shared::vector2d_vanilla_tbc_wrath::*;
 pub use crate::shared::vector3d_vanilla_tbc_wrath::*;
+pub use crate::shared::vector4d_vanilla_tbc_wrath::*;

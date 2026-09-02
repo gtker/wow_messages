@@ -33,8 +33,7 @@ struct MovementInfo {
     MovementFlags flags;
     u8 extra_flags;
     u32 timestamp;
-    Vector3d position;
-    f32 orientation;
+    Vector4d position;
     if (flags & ON_TRANSPORT) {
         TransportInfo transport;
     }

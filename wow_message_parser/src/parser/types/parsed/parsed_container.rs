@@ -167,7 +167,11 @@ impl ParsedContainer {
             }
         }
 
-        panic!("unable to find field: '{field_name}'")
+        panic!(
+            "unable to find field: '{field_name}' in '{}' at {:?}",
+            self.name,
+            self.file_info.path()
+        )
     }
 
     pub(crate) fn name(&self) -> &str {

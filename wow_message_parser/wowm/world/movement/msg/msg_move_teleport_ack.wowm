@@ -43,8 +43,8 @@ test MSG_MOVE_TELEPORT_ACK_Server {
             x = 4320.0;
             y = -2650.0;
             z = 0.0;
-    };
-        orientation = 0.0;
+            orientation = 0.0;
+        };
         fall_time = 0.0;
     };
 } [
@@ -55,12 +55,12 @@ test MSG_MOVE_TELEPORT_ACK_Server {
     /* info: MovementInfo start */
         0x00, 0x00, 0x00, 0x00, /* flags */
         0x00, 0x00, 0x00, 0x00, /* timestamp */
-    /* position: Vector3d start */
+    /* position: Vector4d start */
             0x00, 0x00, 0x87, 0x45, /* x */
             0x00, 0xA0, 0x25, 0xC5, /* y */
             0x00, 0x00, 0x00, 0x00, /* z */
-    /* position: Vector3d end */
-        0x00, 0x00, 0x00, 0x00, /* orientation */
+            0x00, 0x00, 0x00, 0x00, /* orientation */
+    /* position: Vector4d end */
         0x00, 0x00, 0x00, 0x00, /* fall_time */
     /* info: MovementInfo end */
 ] {

@@ -1453,6 +1453,7 @@
 - [Vector2dUnsigned](docs/vector2dunsigned.md)
 - [Vector2d](docs/vector2d.md)
 - [Vector3d](docs/vector3d.md)
+- [Vector4d](docs/vector4d.md)
 - [VisibleItem](docs/visibleitem.md)
 - [WhoPlayer](docs/whoplayer.md)
 - [WorldState](docs/worldstate.md)

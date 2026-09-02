@@ -140,12 +140,12 @@ async fn handle(mut stream: TcpStream, users: Arc<Mutex<HashMap<String, SrpServe
 
     SMSG_LOGIN_VERIFY_WORLD {
         map: Map::EasternKingdoms,
-        position: Vector3d {
+        position: Vector4d {
             x: 200.0,
             y: 200.0,
             z: 200.0,
+            orientation: 0.0,
         },
-        orientation: 0.0,
     }
     .tokio_write_encrypted_server(&mut stream, encryption.encrypter())
     .await
@@ -181,11 +181,11 @@ async fn handle(mut stream: TcpStream, users: Arc<Mutex<HashMap<String, SrpServe
             flags: MovementBlock_MovementFlags::empty(),
             flight_speed: 0.0,
             backwards_flight_speed: 0.0,
-            orientation: 0.0,
-            position: Vector3d {
+            position: Vector4d {
                 x: -8949.95,
                 y: -132.493,
                 z: 83.5312,
+                orientation: 0.0,
             },
             pitch_rate: 0.0,
             running_speed: 7.0,

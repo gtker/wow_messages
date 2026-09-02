@@ -2,8 +2,7 @@
 
 struct TransportInfo {
     PackedGuid guid;
-    Vector3d position;
-    f32 orientation;
+    Vector4d position;
     u32 timestamp;
     u8 seat;
 }
@@ -79,8 +78,7 @@ flag MovementFlags : u48 {
 struct MovementInfo {
     MovementFlags flags;
     u32 timestamp;
-    Vector3d position;
-    f32 orientation;
+    Vector4d position;
     if (flags & ON_TRANSPORT_AND_INTERPOLATED_MOVEMENT) {
         TransportInfo transport_info;
         u32 transport_time;

@@ -235,6 +235,7 @@ pub use trainer_spell::*;
 pub use crate::shared::transport_info_vanilla_tbc::*;
 pub use wow_world_base::shared::vector2d_vanilla_tbc_wrath::*;
 pub use wow_world_base::shared::vector3d_vanilla_tbc_wrath::*;
+pub use wow_world_base::shared::vector4d_vanilla_tbc_wrath::*;
 pub(crate) mod visible_item;
 pub use visible_item::*;
 pub(crate) mod who_player;

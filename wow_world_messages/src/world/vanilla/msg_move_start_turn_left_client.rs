@@ -87,12 +87,12 @@ mod test {
                     .set_turn_left()
                     ,
                 timestamp: 0x179BEFB,
-                position: Vector3d {
+                position: Vector4d {
                     x: -8949.95_f32,
                     y: -132.493_f32,
                     z: 83.5312_f32,
+                    orientation: 0_f32,
                 },
-                orientation: 0_f32,
                 fall_time: 0_f32,
             },
         }

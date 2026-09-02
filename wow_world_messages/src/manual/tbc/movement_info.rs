@@ -52,7 +52,6 @@ impl MovementInfo {
         });
 
         MovementBlock_UpdateFlag_Living::Living {
-            living_orientation: self.orientation,
             living_position: self.position,
             timestamp: self.timestamp,
             extra_flags: self.extra_flags,

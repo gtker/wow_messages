@@ -2,8 +2,7 @@
 cmsg CMSG_WORLD_TELEPORT = 0x08 {
     Milliseconds time;
     Map map;
-    Vector3d position;
-    f32 orientation;
+    Vector4d position;
 } {
     paste_versions = "1.12 2.4.3";
 }
@@ -15,8 +14,8 @@ test CMSG_WORLD_TELEPORT {
         x = 1.0;
         y = 2.0;
         z = 3.0;
+        orientation = 4.0;
     };
-    orientation = 4.0;
 } [
     0x00, 0x1c, /* Size: 28 */
     0x08, 0x00, 0x00, 0x00, /* Opcode */
@@ -25,7 +24,7 @@ test CMSG_WORLD_TELEPORT {
     0x00, 0x00, 0x80, 0x3F, /* position_x: 1.0 */
     0x00, 0x00, 0x00, 0x40, /* position_y: 2.0 */
     0x00, 0x00, 0x40, 0x40, /* position_z: 3.0 */
-    0x00, 0x00, 0x80, 0x40, /* orientation: 4.0 */
+    0x00, 0x00, 0x80, 0x40, /* position.orientation: 4.0 */
 ] {
     versions = "1.12";
 }
@@ -38,8 +37,8 @@ test CMSG_WORLD_TELEPORT {
         x = 452.0;
         y = 6454.0;
         z = 2536.0;
+        orientation = 3.1415927;
     };
-    orientation = 3.1415927;
 } [
   0x00, 0x1C, /* size */
   0x08, 0x00, 0x00, 0x00, /* opcode */
@@ -48,7 +47,7 @@ test CMSG_WORLD_TELEPORT {
   0x00, 0x00, 0xe2, 0x43, /* position.x */
   0x00, 0xb0, 0xc9, 0x45, /* position.y */
   0x00, 0x80, 0x1e, 0x45, /* position.z */
-  0xdb, 0x0f, 0x49, 0x40 /* orientation */
+  0xdb, 0x0f, 0x49, 0x40  /* position.orientation */
 ] {
     versions = "1.12";
 }

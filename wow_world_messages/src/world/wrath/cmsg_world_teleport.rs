@@ -1,7 +1,7 @@
 use std::io::{Read, Write};
 
 use crate::wrath::{
-    Map, Vector3d,
+    Map, Vector4d,
 };
 use std::time::Duration;
 
@@ -13,8 +13,7 @@ use std::time::Duration;
 ///     Milliseconds time;
 ///     Map map;
 ///     u64 unknown;
-///     Vector3d position;
-///     f32 orientation;
+///     Vector4d position;
 /// }
 /// ```
 #[derive(Debug, Clone, Copy, PartialEq, PartialOrd, Default)]
@@ -22,8 +21,7 @@ pub struct CMSG_WORLD_TELEPORT {
     pub time: Duration,
     pub map: Map,
     pub unknown: u64,
-    pub position: Vector3d,
-    pub orientation: f32,
+    pub position: Vector4d,
 }
 
 impl crate::private::Sealed for CMSG_WORLD_TELEPORT {}
@@ -42,18 +40,14 @@ impl CMSG_WORLD_TELEPORT {
         // unknown: u64
         let unknown = crate::util::read_u64_le(&mut r)?;
 
-        // position: Vector3d
-        let position = crate::util::vanilla_tbc_wrath_vector3d_read(&mut r)?;
-
-        // orientation: f32
-        let orientation = crate::util::read_f32_le(&mut r)?;
+        // position: Vector4d
+        let position = crate::util::vanilla_tbc_wrath_vector4d_read(&mut r)?;
 
         Ok(Self {
             time,
             map,
             unknown,
             position,
-            orientation,
         })
     }
 
@@ -81,11 +75,8 @@ impl crate::Message for CMSG_WORLD_TELEPORT {
         // unknown: u64
         w.write_all(&self.unknown.to_le_bytes())?;
 
-        // position: Vector3d
-        crate::util::vanilla_tbc_wrath_vector3d_write_into_vec(&self.position, &mut w)?;
-
-        // orientation: f32
-        w.write_all(&self.orientation.to_le_bytes())?;
+        // position: Vector4d
+        crate::util::vanilla_tbc_wrath_vector4d_write_into_vec(&self.position, &mut w)?;
 
         Ok(())
     }
@@ -119,17 +110,17 @@ mod test {
             time: Duration::from_millis(0xDEADBEEF),
             map: Map::Kalimdor,
             unknown: 0x0,
-            position: Vector3d {
+            position: Vector4d {
                 x: 1_f32,
                 y: 2_f32,
                 z: 3_f32,
+                orientation: 4_f32,
             },
-            orientation: 4_f32,
         }
 
     }
 
-    // Generated from `wow_message_parser/wowm/world/movement/cmsg/cmsg_world_teleport_3_3_5.wowm` line 13.
+    // Generated from `wow_message_parser/wowm/world/movement/cmsg/cmsg_world_teleport_3_3_5.wowm` line 12.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn cmsg_world_teleport0() {
@@ -149,7 +140,7 @@ mod test {
         assert_eq!(dest, RAW0);
     }
 
-    // Generated from `wow_message_parser/wowm/world/movement/cmsg/cmsg_world_teleport_3_3_5.wowm` line 13.
+    // Generated from `wow_message_parser/wowm/world/movement/cmsg/cmsg_world_teleport_3_3_5.wowm` line 12.
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_cmsg_world_teleport0() {
@@ -169,7 +160,7 @@ mod test {
         assert_eq!(dest, RAW0);
     }
 
-    // Generated from `wow_message_parser/wowm/world/movement/cmsg/cmsg_world_teleport_3_3_5.wowm` line 13.
+    // Generated from `wow_message_parser/wowm/world/movement/cmsg/cmsg_world_teleport_3_3_5.wowm` line 12.
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_cmsg_world_teleport0() {
@@ -199,17 +190,17 @@ mod test {
             time: Duration::from_millis(0x2093D9A),
             map: Map::BlackwingLair,
             unknown: 0x0,
-            position: Vector3d {
+            position: Vector4d {
                 x: 452_f32,
                 y: 6454_f32,
                 z: 2536_f32,
+                orientation: 3.1415927_f32,
             },
-            orientation: 3.1415927_f32,
         }
 
     }
 
-    // Generated from `wow_message_parser/wowm/world/movement/cmsg/cmsg_world_teleport_3_3_5.wowm` line 37.
+    // Generated from `wow_message_parser/wowm/world/movement/cmsg/cmsg_world_teleport_3_3_5.wowm` line 36.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn cmsg_world_teleport1() {
@@ -229,7 +220,7 @@ mod test {
         assert_eq!(dest, RAW1);
     }
 
-    // Generated from `wow_message_parser/wowm/world/movement/cmsg/cmsg_world_teleport_3_3_5.wowm` line 37.
+    // Generated from `wow_message_parser/wowm/world/movement/cmsg/cmsg_world_teleport_3_3_5.wowm` line 36.
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_cmsg_world_teleport1() {
@@ -249,7 +240,7 @@ mod test {
         assert_eq!(dest, RAW1);
     }
 
-    // Generated from `wow_message_parser/wowm/world/movement/cmsg/cmsg_world_teleport_3_3_5.wowm` line 37.
+    // Generated from `wow_message_parser/wowm/world/movement/cmsg/cmsg_world_teleport_3_3_5.wowm` line 36.
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_cmsg_world_teleport1() {
