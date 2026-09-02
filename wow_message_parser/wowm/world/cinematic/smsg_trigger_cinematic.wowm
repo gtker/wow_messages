@@ -1,5 +1,5 @@
 enum CinematicSequenceId : u32 {
-    GOBLIN = 0;
+    PALANTIR_OF_AZORA = 1;
     UNDEAD = 2;
     ORC = 21;
     DWARF = 41;
@@ -8,6 +8,7 @@ enum CinematicSequenceId : u32 {
     GNOME = 101;
     TROLL = 121;
     TAUREN = 141;
+    SCRY_CAM = 161;
 } {
     versions = "1.12";
 }
