@@ -84,10 +84,14 @@ impl CMSG_AUTH_SESSION {
         let addon_info = {
             let addon_info_decompressed_size = crate::util::read_u32_le(&mut r)?;
 
+            if u64::from(addon_info_decompressed_size) > crate::errors::MAX_ALLOCATION_SIZE_WRATH {
+                return Err(crate::errors::ParseErrorKind::AllocationTooLargeError(u64::from(addon_info_decompressed_size)));
+            }
+
             let mut buf = Vec::with_capacity(addon_info_decompressed_size as usize);
             let mut decoder = &mut flate2::read::ZlibDecoder::new(r);
             if addon_info_decompressed_size != 0 {
-                decoder.read_to_end(&mut buf).unwrap();
+                decoder.read_to_end(&mut buf)?;
             }
             let mut r = &buf[..];
 
