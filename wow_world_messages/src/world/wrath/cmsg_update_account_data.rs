@@ -37,10 +37,14 @@ impl CMSG_UPDATE_ACCOUNT_DATA {
         let compressed_data = {
             let compressed_data_decompressed_size = crate::util::read_u32_le(&mut r)?;
 
+            if u64::from(compressed_data_decompressed_size) > crate::errors::MAX_ALLOCATION_SIZE_WRATH {
+                return Err(crate::errors::ParseErrorKind::AllocationTooLargeError(u64::from(compressed_data_decompressed_size)));
+            }
+
             let mut buf = Vec::with_capacity(compressed_data_decompressed_size as usize);
             let mut decoder = &mut flate2::read::ZlibDecoder::new(r);
             if compressed_data_decompressed_size != 0 {
-                decoder.read_to_end(&mut buf).unwrap();
+                decoder.read_to_end(&mut buf)?;
             }
             let mut r = &buf[..];
 

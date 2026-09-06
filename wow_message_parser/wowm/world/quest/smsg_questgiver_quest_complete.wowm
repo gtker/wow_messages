@@ -29,17 +29,11 @@ smsg SMSG_QUESTGIVER_QUEST_COMPLETE = 0x0191 {
 
 smsg SMSG_QUESTGIVER_QUEST_COMPLETE = 0x0191 {
     u32 quest_id;
-    /// cmangos/vmangos/mangoszero: set to 0x03
-    u32 unknown;
     u32 experience_reward;
     Gold money_reward;
     u32 honor_reward;
     u32 talent_reward;
     u32 arena_point_reward;
-    u32 amount_of_item_rewards {
-        valid_range = "0 5";
-    }
-    QuestItemReward[amount_of_item_rewards] item_rewards;
 } {
     versions = "3.3.5";
 }

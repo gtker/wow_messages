@@ -13,7 +13,7 @@ use crate::wrath::{
 ///     u32 quest_id;
 ///     CString title;
 ///     CString offer_reward_text;
-///     Bool32 auto_finish;
+///     u8 auto_finish;
 ///     u32 flags1;
 ///     u32 suggested_players;
 ///     u32 amount_of_emotes;
@@ -44,7 +44,7 @@ pub struct SMSG_QUESTGIVER_OFFER_REWARD {
     pub quest_id: u32,
     pub title: String,
     pub offer_reward_text: String,
-    pub auto_finish: bool,
+    pub auto_finish: u8,
     pub flags1: u32,
     pub suggested_players: u32,
     pub emotes: Vec<NpcTextUpdateEmote>,
@@ -74,7 +74,7 @@ pub struct SMSG_QUESTGIVER_OFFER_REWARD {
 impl crate::private::Sealed for SMSG_QUESTGIVER_OFFER_REWARD {}
 impl SMSG_QUESTGIVER_OFFER_REWARD {
     fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
-        if !(142..=16777215).contains(&body_size) {
+        if !(139..=16777215).contains(&body_size) {
             return Err(crate::errors::ParseErrorKind::InvalidSize);
         }
 
@@ -96,8 +96,8 @@ impl SMSG_QUESTGIVER_OFFER_REWARD {
             String::from_utf8(offer_reward_text)?
         };
 
-        // auto_finish: Bool32
-        let auto_finish = crate::util::read_bool_u32(&mut r)?;
+        // auto_finish: u8
+        let auto_finish = crate::util::read_u8_le(&mut r)?;
 
         // flags1: u32
         let flags1 = crate::util::read_u32_le(&mut r)?;
@@ -270,7 +270,7 @@ impl crate::Message for SMSG_QUESTGIVER_OFFER_REWARD {
         writeln!(s, "    quest_id = {};", self.quest_id).unwrap();
         writeln!(s, "    title = \"{}\";", self.title).unwrap();
         writeln!(s, "    offer_reward_text = \"{}\";", self.offer_reward_text).unwrap();
-        writeln!(s, "    auto_finish = {};", if self.auto_finish { "TRUE" } else { "FALSE" }).unwrap();
+        writeln!(s, "    auto_finish = {};", self.auto_finish).unwrap();
         writeln!(s, "    flags1 = {};", self.flags1).unwrap();
         writeln!(s, "    suggested_players = {};", self.suggested_players).unwrap();
         writeln!(s, "    amount_of_emotes = {};", self.emotes.len()).unwrap();
@@ -349,7 +349,7 @@ impl crate::Message for SMSG_QUESTGIVER_OFFER_REWARD {
         crate::util::write_bytes(&mut s, &mut bytes, 4, "quest_id", "    ");
         crate::util::write_bytes(&mut s, &mut bytes, self.title.len() + 1, "title", "    ");
         crate::util::write_bytes(&mut s, &mut bytes, self.offer_reward_text.len() + 1, "offer_reward_text", "    ");
-        crate::util::write_bytes(&mut s, &mut bytes, 4, "auto_finish", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, 1, "auto_finish", "    ");
         crate::util::write_bytes(&mut s, &mut bytes, 4, "flags1", "    ");
         crate::util::write_bytes(&mut s, &mut bytes, 4, "suggested_players", "    ");
         crate::util::write_bytes(&mut s, &mut bytes, 4, "amount_of_emotes", "    ");
@@ -447,8 +447,8 @@ impl crate::Message for SMSG_QUESTGIVER_OFFER_REWARD {
         // Null terminator
         w.write_all(&[0])?;
 
-        // auto_finish: Bool32
-        w.write_all(u32::from(self.auto_finish).to_le_bytes().as_slice())?;
+        // auto_finish: u8
+        w.write_all(&self.auto_finish.to_le_bytes())?;
 
         // flags1: u32
         w.write_all(&self.flags1.to_le_bytes())?;
@@ -546,7 +546,7 @@ impl SMSG_QUESTGIVER_OFFER_REWARD {
         + 4 // quest_id: u32
         + self.title.len() + 1 // title: CString
         + self.offer_reward_text.len() + 1 // offer_reward_text: CString
-        + 4 // auto_finish: Bool32
+        + 1 // auto_finish: u8
         + 4 // flags1: u32
         + 4 // suggested_players: u32
         + 4 // amount_of_emotes: u32

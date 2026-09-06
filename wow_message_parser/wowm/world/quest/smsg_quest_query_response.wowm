@@ -94,10 +94,10 @@ smsg SMSG_QUEST_QUERY_RESPONSE = 0x005D {
     u32 quest_id;
     /// Accepted values: 0, 1 or 2. 0==IsAutoComplete() (skip objectives/details)
     u32 quest_method;
-    Level32 quest_level;
+    u32 quest_level;
     /// min required level to obtain (added for 3.3).
     /// Assumed allowed (database) range is -1 to 255 (still using uint32, since negative value would not be of any known use for client)
-    Level32 minimum_quest_level;
+    u32 minimum_quest_level;
     u32 zone_or_sort;
     u32 quest_type;
     u32 suggest_player_amount;

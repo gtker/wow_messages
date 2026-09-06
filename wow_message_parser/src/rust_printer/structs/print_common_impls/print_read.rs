@@ -111,14 +111,30 @@ fn print_read_array(
                 ));
                 s.newline();
 
+                if e.tags().contains_wrath() {
+                    s.bodyn(
+                        format!(
+                            "if u64::from({name}_decompressed_size) > crate::errors::MAX_ALLOCATION_SIZE_WRATH"
+                        ),
+                        |s| {
+                            s.wln(format!(
+                                "return Err(crate::errors::ParseErrorKind::AllocationTooLargeError(u64::from({name}_decompressed_size)));"
+                            ));
+                        },
+                    );
+                }
+
                 s.wln(format!(
                     "let mut buf = Vec::with_capacity({name}_decompressed_size as usize);"
                 ));
 
                 s.wln("let mut decoder = &mut flate2::read::ZlibDecoder::new(r);");
-                // TODO: I want to know if this fails, should this be a separate error mode?
                 s.body(format!("if {name}_decompressed_size != 0"), |s| {
-                    s.wln("decoder.read_to_end(&mut buf).unwrap();");
+                    if e.tags().contains_wrath() {
+                        s.wln("decoder.read_to_end(&mut buf)?;");
+                    } else {
+                        s.wln("decoder.read_to_end(&mut buf).unwrap();");
+                    }
                 });
                 s.wln("let mut r = &buf[..];");
                 s.newline();
@@ -858,12 +874,23 @@ pub(crate) fn print_read(
         // Fully compressed messages always start with a u32 containing the decompressed size.
         // We don't care about that, so we just ignore it.
         s.wln("let decompressed_size = crate::util::read_u32_le(r)?;;");
+        if e.tags().contains_wrath() {
+            s.bodyn(
+                "if u64::from(decompressed_size) > crate::errors::MAX_ALLOCATION_SIZE_WRATH",
+                |s| {
+                    s.wln("return Err(crate::errors::ParseErrorKind::AllocationTooLargeError(u64::from(decompressed_size)));" );
+                },
+            );
+        }
         s.wln("let decompressed_buffer = vec![0; decompressed_size as usize];");
         s.wln("let mut r = &mut flate2::read::ZlibDecoder::new_with_buf(r, decompressed_buffer);");
 
         s.wln("let mut buf = Vec::with_capacity(decompressed_size as usize);");
-        // TODO: I want to know if this fails, should this be a separate error mode?
-        s.wln("r.read_to_end(&mut buf).unwrap();");
+        if e.tags().contains_wrath() {
+            s.wln("r.read_to_end(&mut buf)?;");
+        } else {
+            s.wln("r.read_to_end(&mut buf).unwrap();");
+        }
         s.wln("let mut r = &buf[..];");
         s.newline();
     }

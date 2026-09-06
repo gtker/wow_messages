@@ -26,10 +26,14 @@ impl SMSG_COMPRESSED_MOVES {
         }
 
         let decompressed_size = crate::util::read_u32_le(r)?;;
+        if u64::from(decompressed_size) > crate::errors::MAX_ALLOCATION_SIZE_WRATH {
+            return Err(crate::errors::ParseErrorKind::AllocationTooLargeError(u64::from(decompressed_size)));
+        }
+
         let decompressed_buffer = vec![0; decompressed_size as usize];
         let mut r = &mut flate2::read::ZlibDecoder::new_with_buf(r, decompressed_buffer);
         let mut buf = Vec::with_capacity(decompressed_size as usize);
-        r.read_to_end(&mut buf).unwrap();
+        r.read_to_end(&mut buf)?;
         let mut r = &buf[..];
 
         // size: u32
