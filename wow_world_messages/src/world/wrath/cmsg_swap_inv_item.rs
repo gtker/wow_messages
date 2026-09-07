@@ -22,11 +22,11 @@ impl CMSG_SWAP_INV_ITEM {
             return Err(crate::errors::ParseErrorKind::InvalidSize);
         }
 
-        // source_slot: ItemSlot
-        let source_slot = crate::util::read_u8_le(&mut r)?.try_into()?;
-
         // destination_slot: ItemSlot
         let destination_slot = crate::util::read_u8_le(&mut r)?.try_into()?;
+
+        // source_slot: ItemSlot
+        let source_slot = crate::util::read_u8_le(&mut r)?.try_into()?;
 
         Ok(Self {
             source_slot,
@@ -52,7 +52,6 @@ impl crate::Message for CMSG_SWAP_INV_ITEM {
         let mut s = String::new();
 
         writeln!(s, "test CMSG_SWAP_INV_ITEM {{").unwrap();
-        // Members
         writeln!(s, "    source_slot = {};", self.source_slot.as_test_case_value()).unwrap();
         writeln!(s, "    destination_slot = {};", self.destination_slot.as_test_case_value()).unwrap();
 
@@ -66,9 +65,8 @@ impl crate::Message for CMSG_SWAP_INV_ITEM {
         self.write_into_vec(&mut bytes).unwrap();
         let mut bytes = bytes.into_iter();
 
-        crate::util::write_bytes(&mut s, &mut bytes, 1, "source_slot", "    ");
         crate::util::write_bytes(&mut s, &mut bytes, 1, "destination_slot", "    ");
-
+        crate::util::write_bytes(&mut s, &mut bytes, 1, "source_slot", "    ");
 
         writeln!(s, "] {{").unwrap();
         writeln!(s, "    versions = \"{}\";", std::env::var("WOWM_TEST_CASE_WORLD_VERSION").unwrap_or("3.3.5".to_string())).unwrap();
@@ -82,11 +80,11 @@ impl crate::Message for CMSG_SWAP_INV_ITEM {
     }
 
     fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
-        // source_slot: ItemSlot
-        w.write_all(&(self.source_slot.as_int().to_le_bytes()))?;
-
         // destination_slot: ItemSlot
         w.write_all(&(self.destination_slot.as_int().to_le_bytes()))?;
+
+        // source_slot: ItemSlot
+        w.write_all(&(self.source_slot.as_int().to_le_bytes()))?;
 
         Ok(())
     }
@@ -100,3 +98,35 @@ impl crate::Message for CMSG_SWAP_INV_ITEM {
 #[cfg(feature = "wrath")]
 impl crate::wrath::ClientMessage for CMSG_SWAP_INV_ITEM {}
 
+#[cfg(all(test, feature = "sync"))]
+mod test {
+    use super::CMSG_SWAP_INV_ITEM;
+    use crate::wrath::opcodes::ClientOpcodeMessage;
+    use crate::wrath::{ClientMessage, ItemSlot};
+
+    const RAW: [u8; 8] = [0x00, 0x06, 0x0D, 0x01, 0x00, 0x00, 0x18, 0x17];
+
+    #[test]
+    fn reads_and_writes_destination_before_source() {
+        let expected = CMSG_SWAP_INV_ITEM {
+            source_slot: ItemSlot::Inventory0,
+            destination_slot: ItemSlot::Inventory1,
+        };
+
+        let parsed = ClientOpcodeMessage::read_unencrypted(&mut std::io::Cursor::new(RAW))
+            .unwrap();
+        let parsed = match parsed {
+            ClientOpcodeMessage::CMSG_SWAP_INV_ITEM(message) => message,
+            opcode => panic!("incorrect opcode: {opcode:#?}"),
+        };
+
+        assert_eq!(parsed, expected);
+
+        let mut encoded = Vec::with_capacity(RAW.len());
+        expected
+            .write_unencrypted_client(&mut std::io::Cursor::new(&mut encoded))
+            .unwrap();
+
+        assert_eq!(encoded, RAW);
+    }
+}
