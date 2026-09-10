@@ -5,14 +5,14 @@ use crate::wrath::ItemSlot;
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/item/cmsg_swap_inv_item.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/item/cmsg_swap_inv_item.wowm#L1):
 /// ```text
 /// cmsg CMSG_SWAP_INV_ITEM = 0x010D {
-///     ItemSlot source_slot;
 ///     ItemSlot destination_slot;
+///     ItemSlot source_slot;
 /// }
 /// ```
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct CMSG_SWAP_INV_ITEM {
-    pub source_slot: ItemSlot,
     pub destination_slot: ItemSlot,
+    pub source_slot: ItemSlot,
 }
 
 impl crate::private::Sealed for CMSG_SWAP_INV_ITEM {}
@@ -29,8 +29,8 @@ impl CMSG_SWAP_INV_ITEM {
         let source_slot = crate::util::read_u8_le(&mut r)?.try_into()?;
 
         Ok(Self {
-            source_slot,
             destination_slot,
+            source_slot,
         })
     }
 
@@ -52,8 +52,9 @@ impl crate::Message for CMSG_SWAP_INV_ITEM {
         let mut s = String::new();
 
         writeln!(s, "test CMSG_SWAP_INV_ITEM {{").unwrap();
-        writeln!(s, "    source_slot = {};", self.source_slot.as_test_case_value()).unwrap();
+        // Members
         writeln!(s, "    destination_slot = {};", self.destination_slot.as_test_case_value()).unwrap();
+        writeln!(s, "    source_slot = {};", self.source_slot.as_test_case_value()).unwrap();
 
         writeln!(s, "}} [").unwrap();
 
@@ -67,6 +68,7 @@ impl crate::Message for CMSG_SWAP_INV_ITEM {
 
         crate::util::write_bytes(&mut s, &mut bytes, 1, "destination_slot", "    ");
         crate::util::write_bytes(&mut s, &mut bytes, 1, "source_slot", "    ");
+
 
         writeln!(s, "] {{").unwrap();
         writeln!(s, "    versions = \"{}\";", std::env::var("WOWM_TEST_CASE_WORLD_VERSION").unwrap_or("3.3.5".to_string())).unwrap();
@@ -109,8 +111,8 @@ mod test {
     #[test]
     fn reads_and_writes_destination_before_source() {
         let expected = CMSG_SWAP_INV_ITEM {
-            source_slot: ItemSlot::Inventory0,
             destination_slot: ItemSlot::Inventory1,
+            source_slot: ItemSlot::Inventory0,
         };
 
         let parsed = ClientOpcodeMessage::read_unencrypted(&mut std::io::Cursor::new(RAW))

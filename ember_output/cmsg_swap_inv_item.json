@@ -4,11 +4,11 @@
   "direction": "client",
   "fields": [
     {
-      "name": "source_slot",
+      "name": "destination_slot",
       "type": "ItemSlot"
     },
     {
-      "name": "destination_slot",
+      "name": "source_slot",
       "type": "ItemSlot"
     }
   ]
