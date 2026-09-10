@@ -5,14 +5,14 @@ use crate::tbc::ItemSlot;
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/item/cmsg_swap_inv_item.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/item/cmsg_swap_inv_item.wowm#L1):
 /// ```text
 /// cmsg CMSG_SWAP_INV_ITEM = 0x010D {
-///     ItemSlot source_slot;
 ///     ItemSlot destination_slot;
+///     ItemSlot source_slot;
 /// }
 /// ```
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct CMSG_SWAP_INV_ITEM {
-    pub source_slot: ItemSlot,
     pub destination_slot: ItemSlot,
+    pub source_slot: ItemSlot,
 }
 
 impl crate::private::Sealed for CMSG_SWAP_INV_ITEM {}
@@ -22,15 +22,15 @@ impl CMSG_SWAP_INV_ITEM {
             return Err(crate::errors::ParseErrorKind::InvalidSize);
         }
 
-        // source_slot: ItemSlot
-        let source_slot = crate::util::read_u8_le(&mut r)?.try_into()?;
-
         // destination_slot: ItemSlot
         let destination_slot = crate::util::read_u8_le(&mut r)?.try_into()?;
 
+        // source_slot: ItemSlot
+        let source_slot = crate::util::read_u8_le(&mut r)?.try_into()?;
+
         Ok(Self {
-            source_slot,
             destination_slot,
+            source_slot,
         })
     }
 
@@ -53,8 +53,8 @@ impl crate::Message for CMSG_SWAP_INV_ITEM {
 
         writeln!(s, "test CMSG_SWAP_INV_ITEM {{").unwrap();
         // Members
-        writeln!(s, "    source_slot = {};", self.source_slot.as_test_case_value()).unwrap();
         writeln!(s, "    destination_slot = {};", self.destination_slot.as_test_case_value()).unwrap();
+        writeln!(s, "    source_slot = {};", self.source_slot.as_test_case_value()).unwrap();
 
         writeln!(s, "}} [").unwrap();
 
@@ -66,8 +66,8 @@ impl crate::Message for CMSG_SWAP_INV_ITEM {
         self.write_into_vec(&mut bytes).unwrap();
         let mut bytes = bytes.into_iter();
 
-        crate::util::write_bytes(&mut s, &mut bytes, 1, "source_slot", "    ");
         crate::util::write_bytes(&mut s, &mut bytes, 1, "destination_slot", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, 1, "source_slot", "    ");
 
 
         writeln!(s, "] {{").unwrap();
@@ -82,11 +82,11 @@ impl crate::Message for CMSG_SWAP_INV_ITEM {
     }
 
     fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
-        // source_slot: ItemSlot
-        w.write_all(&(self.source_slot.as_int().to_le_bytes()))?;
-
         // destination_slot: ItemSlot
         w.write_all(&(self.destination_slot.as_int().to_le_bytes()))?;
+
+        // source_slot: ItemSlot
+        w.write_all(&(self.source_slot.as_int().to_le_bytes()))?;
 
         Ok(())
     }

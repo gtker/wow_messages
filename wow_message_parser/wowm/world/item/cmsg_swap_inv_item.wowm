@@ -1,6 +1,6 @@
 cmsg CMSG_SWAP_INV_ITEM = 0x010D {
-    ItemSlot source_slot;
     ItemSlot destination_slot;
+    ItemSlot source_slot;
 } {
     paste_versions = "1.12 2.4.3 3.3.5";
 }

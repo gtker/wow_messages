@@ -125,7 +125,7 @@ smsg SMSG_QUESTGIVER_OFFER_REWARD = 0x018D {
     u32 quest_id;
     CString title;
     CString offer_reward_text;
-    u8 auto_finish;
+    Bool auto_finish;
     u32 flags1;
     u32 suggested_players;
     u32 amount_of_emotes;
@@ -169,7 +169,7 @@ SMSG have a header of 4 bytes.
 | - | 4 / Little | u32 | quest_id |  |
 | - | - / - | CString | title |  |
 | - | - / - | CString | offer_reward_text |  |
-| - | 1 / - | u8 | auto_finish |  |
+| - | 1 / - | Bool | auto_finish |  |
 | - | 4 / Little | u32 | flags1 |  |
 | - | 4 / Little | u32 | suggested_players |  |
 | - | 4 / Little | u32 | amount_of_emotes |  |

@@ -53,7 +53,7 @@ smsg SMSG_QUESTGIVER_OFFER_REWARD = 0x018D {
     u32 quest_id;
     CString title;
     CString offer_reward_text;
-    u8 auto_finish;
+    Bool auto_finish;
     u32 flags1;
     u32 suggested_players;
     u32 amount_of_emotes {
