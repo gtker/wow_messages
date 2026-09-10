@@ -2,7 +2,7 @@ use std::io::{Read, Write};
 
 use crate::wrath::ItemSlot;
 
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/item/cmsg_swap_inv_item.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/item/cmsg_swap_inv_item.wowm#L1):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/item/cmsg_swap_inv_item.wowm:15`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/item/cmsg_swap_inv_item.wowm#L15):
 /// ```text
 /// cmsg CMSG_SWAP_INV_ITEM = 0x010D {
 ///     ItemSlot destination_slot;
