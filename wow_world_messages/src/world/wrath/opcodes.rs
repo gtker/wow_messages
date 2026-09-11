@@ -3792,7 +3792,6 @@ impl ClientOpcodeMessage {
             Self::CMSG_AUTOSTORE_LOOT_ITEM(c) => crate::Message::to_test_case_string(c),
             Self::CMSG_AUTOSTORE_BAG_ITEM(c) => crate::Message::to_test_case_string(c),
             Self::CMSG_SWAP_ITEM(c) => crate::Message::to_test_case_string(c),
-            Self::CMSG_SWAP_INV_ITEM(c) => crate::Message::to_test_case_string(c),
             Self::CMSG_SPLIT_ITEM(c) => crate::Message::to_test_case_string(c),
             Self::CMSG_AUTOEQUIP_ITEM_SLOT(c) => crate::Message::to_test_case_string(c.as_ref()),
             Self::CMSG_DESTROYITEM(c) => crate::Message::to_test_case_string(c),

@@ -432,3 +432,15 @@ enum ItemSlot : u8 {
 } {
      versions = "3.3.5";
 }
+
+test CMSG_SWAP_INV_ITEM {
+    destination_slot = INVENTORY_1;
+    source_slot = INVENTORY_0;
+} [
+    0x00, 0x06, /* size */
+    0x0D, 0x01, 0x00, 0x00, /* opcode */
+    0x18, /* destination_slot */
+    0x17, /* source_slot */
+] {
+    versions = "3.3.5";
+}
