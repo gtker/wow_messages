@@ -11,7 +11,7 @@ use crate::parser::types::objects::Objects;
 use crate::path_utils::parser_test_directory;
 use crate::rust_printer::writer::Writer;
 use crate::rust_printer::{print_enum, print_flag, print_struct};
-use crate::{parse_objects_in_directory, print_message_stats, ParsedObjects};
+use crate::{parse_objects_in_directory, print_message_stats};
 use std::fs::read_to_string;
 use std::panic;
 use std::path::Path;
