@@ -31,6 +31,7 @@ use types::parsed::parsed_test_case::{ParsedTestCase, ParsedTestCaseMember, Pars
 pub mod stats;
 pub mod types;
 pub mod utility;
+pub mod new_parser;
 
 #[derive(Parser)]
 #[grammar = "auth.pest"]
