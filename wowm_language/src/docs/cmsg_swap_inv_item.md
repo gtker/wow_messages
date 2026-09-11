@@ -87,3 +87,13 @@ CMSG have a header of 6 bytes.
 | 0x06 | 1 / - | [ItemSlot](itemslot.md) | destination_slot |  |
 | 0x07 | 1 / - | [ItemSlot](itemslot.md) | source_slot |  |
 
+### Examples
+
+#### Example 1
+
+```c
+0, 6, // size
+13, 1, 0, 0, // opcode (269)
+24, // destination_slot: ItemSlot INVENTORY_1 (24)
+23, // source_slot: ItemSlot INVENTORY_0 (23)
+```
