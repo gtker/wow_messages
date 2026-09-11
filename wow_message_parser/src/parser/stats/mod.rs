@@ -175,6 +175,10 @@ fn get_data_for(version: MajorWorldVersion, data: &[Data], o: &Objects) -> Vec<D
 }
 
 fn print_missing_definitions(data: &[Data], version: MajorWorldVersion) {
+    if !data.iter().any(|a| a.needs_work()) {
+        return;
+    }
+
     println!(
         "{} Messages without definition:",
         version.as_version_string(),
@@ -204,21 +208,28 @@ fn stats_for(version: MajorWorldVersion, data: &[Data]) {
         }
     }
 
-    println!(
-        "{} Messages with definition: {} / {} ({}%) ({} left, {} without implementation excluded with reason)",
-        version.as_version_string(),
-        definition_sum,
-        data.len(),
-        (definition_sum as f32 / data.len() as f32) * 100.0_f32,
-        data.len() - (definition_sum + reason_sum),
-        reason_sum,
-    );
-    println!(
-        "    with tests: {} / {} ({}%)",
-        test_sum,
-        data.len(),
-        (test_sum as f32 / data.len() as f32) * 100.0_f32
-    );
+    let version = version.as_version_string();
+    if definition_sum == data.len() {
+        println!(
+            "{version} Messages with tests: {} / {} ({}%)",
+            test_sum,
+            data.len(),
+            (test_sum as f32 / data.len() as f32) * 100.0_f32
+        );
+    } else {
+        println!(
+            "{version} Messages with definition: {definition_sum} / {} ({}%) ({} left, {reason_sum} without implementation excluded with reason)",
+            data.len(),
+            (definition_sum as f32 / data.len() as f32) * 100.0_f32,
+            data.len() - (definition_sum + reason_sum),
+        );
+        println!(
+            "    with tests: {} / {} ({}%)",
+            test_sum,
+            data.len(),
+            (test_sum as f32 / data.len() as f32) * 100.0_f32
+        );
+    }
 }
 
 fn get_real_name(s: &str) -> String {
