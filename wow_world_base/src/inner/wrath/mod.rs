@@ -68,6 +68,8 @@ pub use client_movement_data::*;
 pub use crate::shared::commentator_enable_option_tbc_wrath::*;
 pub use crate::shared::complain_result_window_tbc_wrath::*;
 pub use crate::shared::complaint_status_tbc_wrath::*;
+pub(crate) mod container_slot;
+pub use container_slot::*;
 pub use crate::shared::corpse_query_result_vanilla_tbc_wrath::*;
 pub(crate) mod creature_family;
 pub use creature_family::*;

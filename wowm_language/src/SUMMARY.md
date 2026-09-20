@@ -118,6 +118,7 @@
 - [ComplainResultWindow](docs/complainresultwindow.md)
 - [ComplaintStatus](docs/complaintstatus.md)
 - [CompressedMoveOpcode](docs/compressedmoveopcode.md)
+- [ContainerSlot](docs/containerslot.md)
 - [CorpseQueryResult](docs/corpsequeryresult.md)
 - [CreatureFamily](docs/creaturefamily.md)
 - [DeclinedNames](docs/declinednames.md)

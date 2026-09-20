@@ -300,7 +300,11 @@ pub(crate) const FIELDS: &[UpdateMaskMember] = &[
         "SLOT_1",
         0x0042,
         72,
-        UpdateMaskDataType::Guid,
+        UpdateMaskDataType::GuidArrayUsingEnum {
+            name: "ContainerSlot",
+            variable_name: "container_slot",
+            import_location: "crate::wrath",
+        },
     ),
     UpdateMaskMember::new(
         UpdateMaskObjectType::Unit,

@@ -214,5 +214,89 @@ mod test {
         assert_eq!(dest, RAW0);
     }
 
-}
+    const RAW1: [u8; 65] = [ 0x00, 0x3F, 0xA9, 0x00, 0x01, 0x00, 0x00, 0x00, 0x00,
+         0x03, 0x34, 0x12, 0x05, 0x07, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+         0x0D, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x03, 0x00, 0x00,
+         0x34, 0x12, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x07, 0x00, 0x00, 0x00,
+         0x24, 0x00, 0x00, 0x00, 0x00, 0x01, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+         0x00, 0x02, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, ];
 
+    pub(crate) fn expected1() -> SMSG_UPDATE_OBJECT {
+        SMSG_UPDATE_OBJECT {
+            objects: vec![
+                Object::Values {
+                    guid1: Guid::new(0x1234),
+                    mask1: UpdateMask::Container(UpdateContainer::builder()
+                        .set_object_guid(Guid::new(0x1234))
+                        .set_container_num_slots(36)
+                        .set_container_slot_1(crate::wrath::ContainerSlot::try_from(0).unwrap(), Guid::new(0x100))
+                        .set_container_slot_1(crate::wrath::ContainerSlot::try_from(35).unwrap(), Guid::new(0x200))
+                        .finalize()
+                    ),
+                }
+,            ],
+        }
+
+    }
+
+    // Generated from `wow_message_parser/wowm/world/gameobject/smsg_update_object_3_3_5.wowm` line 290.
+    #[cfg(feature = "sync")]
+    #[cfg_attr(feature = "sync", test)]
+    fn smsg_update_object1() {
+        let expected = expected1();
+        let t = ServerOpcodeMessage::read_unencrypted(&mut std::io::Cursor::new(&RAW1)).unwrap();
+        let t = match t {
+            ServerOpcodeMessage::SMSG_UPDATE_OBJECT(t) => t,
+            opcode => panic!("incorrect opcode. Expected SMSG_UPDATE_OBJECT, got {opcode:#?}"),
+        };
+
+        assert_eq!(t.as_ref(), &expected);
+        assert_eq!(t.size() + HEADER_SIZE, RAW1.len());
+
+        let mut dest = Vec::with_capacity(RAW1.len());
+        expected.write_unencrypted_server(&mut std::io::Cursor::new(&mut dest)).unwrap();
+
+        assert_eq!(dest, RAW1);
+    }
+
+    // Generated from `wow_message_parser/wowm/world/gameobject/smsg_update_object_3_3_5.wowm` line 290.
+    #[cfg(feature = "tokio")]
+    #[cfg_attr(feature = "tokio", tokio::test)]
+    async fn tokio_smsg_update_object1() {
+        let expected = expected1();
+        let t = ServerOpcodeMessage::tokio_read_unencrypted(&mut std::io::Cursor::new(&RAW1)).await.unwrap();
+        let t = match t {
+            ServerOpcodeMessage::SMSG_UPDATE_OBJECT(t) => t,
+            opcode => panic!("incorrect opcode. Expected SMSG_UPDATE_OBJECT, got {opcode:#?}"),
+        };
+
+        assert_eq!(t.as_ref(), &expected);
+        assert_eq!(t.size() + HEADER_SIZE, RAW1.len());
+
+        let mut dest = Vec::with_capacity(RAW1.len());
+        expected.tokio_write_unencrypted_server(&mut std::io::Cursor::new(&mut dest)).await.unwrap();
+
+        assert_eq!(dest, RAW1);
+    }
+
+    // Generated from `wow_message_parser/wowm/world/gameobject/smsg_update_object_3_3_5.wowm` line 290.
+    #[cfg(feature = "async-std")]
+    #[cfg_attr(feature = "async-std", async_std::test)]
+    async fn astd_smsg_update_object1() {
+        let expected = expected1();
+        let t = ServerOpcodeMessage::astd_read_unencrypted(&mut async_std::io::Cursor::new(&RAW1)).await.unwrap();
+        let t = match t {
+            ServerOpcodeMessage::SMSG_UPDATE_OBJECT(t) => t,
+            opcode => panic!("incorrect opcode. Expected SMSG_UPDATE_OBJECT, got {opcode:#?}"),
+        };
+
+        assert_eq!(t.as_ref(), &expected);
+        assert_eq!(t.size() + HEADER_SIZE, RAW1.len());
+
+        let mut dest = Vec::with_capacity(RAW1.len());
+        expected.astd_write_unencrypted_server(&mut async_std::io::Cursor::new(&mut dest)).await.unwrap();
+
+        assert_eq!(dest, RAW1);
+    }
+
+}
