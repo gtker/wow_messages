@@ -423,8 +423,9 @@ impl UpdateContainerBuilder {
         self
     }
 
-    pub fn set_container_slot_1(mut self, v: Guid) -> Self {
-        self.set_guid(66, v);
+    pub fn set_container_slot_1(mut self, container_slot: crate::wrath::ContainerSlot, item: Guid) -> Self {
+        let offset = 66 + container_slot.as_int() as u16 * 2;
+        self.set_guid(offset, item);
         self
     }
 
@@ -3055,12 +3056,14 @@ impl UpdateContainer {
         self.get_int(64)
     }
 
-    pub fn set_container_slot_1(&mut self, v: Guid) {
-        self.set_guid(66, v);
+    pub fn set_container_slot_1(&mut self, container_slot: crate::wrath::ContainerSlot, item: Guid) {
+        let offset = 66 + container_slot.as_int() as u16 * 2;
+        self.set_guid(offset, item);
     }
 
-    pub fn container_slot_1(&self) -> Option<Guid> {
-        self.get_guid(66)
+    pub fn container_slot_1(&self, container_slot: crate::wrath::ContainerSlot) -> Option<Guid> {
+        let offset = 66 + container_slot.as_int() as u16 * 2;
+        self.get_guid(offset)
     }
 
     pub fn set_object_created_by(&mut self, v: Guid) {

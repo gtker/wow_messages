@@ -657,9 +657,17 @@ fn print_value(
 
                 let fields = version.as_major_world().update_mask();
 
+                let field_name = if f.ty() == UpdateMaskObjectType::Container
+                    && f.name().starts_with("SLOT_")
+                    && f.name()[5..].parse::<u8>().is_ok_and(|slot| (1..=36).contains(&slot))
+                {
+                    "SLOT_1"
+                } else {
+                    f.name()
+                };
                 let field = fields
                     .iter()
-                    .find(|a| a.object_ty() == f.ty() && a.name() == f.name())
+                    .find(|a| a.object_ty() == f.ty() && a.name() == field_name)
                     .unwrap()
                     .clone();
 
@@ -669,7 +677,7 @@ fn print_value(
                             ".set_{ty}_{field}(Guid::new({value}))",
                             value = f.value(),
                             ty = f.ty().to_string().to_lowercase(),
-                            field = f.name().to_lowercase(),
+                            field = field.name().to_lowercase(),
                         ));
                     }
                     UpdateMaskDataType::Bytes(a_ty, b_ty, c_ty, d_ty) => {
@@ -690,12 +698,30 @@ fn print_value(
                         s.wln(format!(
                             ".set_{ty}_{field}({a}.unwrap(), {b}.unwrap(), {c}.unwrap(), {d}.unwrap())",
                             ty = field.object_ty().to_string().to_lowercase(),
-                            field = f.name().to_lowercase(),
+                            field = field.name().to_lowercase(),
                             a = a,
                             b = b,
                             c = c,
                             d = d
                         ))
+                    }
+                    UpdateMaskDataType::GuidArrayUsingEnum {
+                        name,
+                        import_location,
+                        ..
+                    } => {
+                        let slot = f
+                            .name()
+                            .strip_prefix("SLOT_")
+                            .and_then(|slot| slot.parse::<u8>().ok())
+                            .unwrap_or(1)
+                            - 1;
+                        s.wln(format!(
+                            ".set_{ty}_{field}({import_location}::{name}::try_from({slot}).unwrap(), Guid::new({value}))",
+                            ty = field.object_ty().to_string().to_lowercase(),
+                            field = field.name().to_lowercase(),
+                            value = f.value(),
+                        ));
                     }
                     _ => s.wln(format!(
                         ".set_{ty}_{field}({value})",

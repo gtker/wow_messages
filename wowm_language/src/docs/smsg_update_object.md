@@ -222,3 +222,35 @@ SMSG have a header of 4 bytes.
 // [0].Object.mask2: UpdateMask
 // objects: Object[amount_of_objects]
 ```
+#### Example 2
+
+##### Comment
+
+A container update carries all 36 typed item GUID slots. The first and
+
+last slots exercise both ends of the Wrath EContainerFields range.
+
+```c
+0, 63, // size
+169, 0, // opcode (169)
+1, 0, 0, 0, // amount_of_objects: u32
+0, // [0].Object.update_type: UpdateType VALUES (0)
+3, 52, 18, // [0].Object.guid1: PackedGuid
+// UpdateMask
+5, // amount_of_blocks
+0, 0, 0, 7, // Block 0
+0, 0, 0, 0, // Block 1
+13, 0, 0, 0, // Block 2
+0, 0, 0, 0, // Block 3
+0, 3, 0, 0, // Block 4
+52, 18, 0, 0, // Item
+0, 0, 0, 0, // Item
+7, 0, 0, 0, // Item
+36, 0, 0, 0, // Item
+0, 1, 0, 0, // Item
+0, 0, 0, 0, // Item
+0, 2, 0, 0, // Item
+0, 0, 0, 0, // Item
+// [0].Object.mask1: UpdateMask
+// objects: Object[amount_of_objects]
+```
