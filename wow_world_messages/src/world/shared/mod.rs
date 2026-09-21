@@ -490,8 +490,8 @@ pub mod cmsg_reset_instances_vanilla_tbc_wrath;
 pub mod cmsg_resurrect_response_vanilla_tbc_wrath;
 #[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
 pub mod cmsg_self_res_vanilla_tbc_wrath;
-#[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
-pub mod cmsg_sell_item_vanilla_tbc_wrath;
+#[cfg(any(feature = "vanilla", feature = "tbc"))]
+pub mod cmsg_sell_item_vanilla_tbc;
 #[cfg(any(feature = "tbc", feature = "wrath"))]
 pub mod cmsg_send_mail_tbc_wrath;
 #[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]

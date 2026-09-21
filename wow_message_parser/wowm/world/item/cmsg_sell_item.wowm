@@ -1,8 +1,29 @@
-#tag_all versions "1 2 3";
-
 cmsg CMSG_SELL_ITEM = 0x01A0 {
     Guid vendor;
     Guid item;
     u8 amount;
+} {
+    versions = "1 2";
 }
 
+cmsg CMSG_SELL_ITEM = 0x01A0 {
+    Guid vendor;
+    Guid item;
+    u32 amount;
+} {
+    versions = "3.3.5";
+}
+
+test CMSG_SELL_ITEM {
+    vendor = 100;
+    item = 200;
+    amount = 3;
+} [
+    0x00, 0x18, /* size */
+    0xA0, 0x01, 0x00, 0x00, /* opcode */
+    0x64, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, /* vendor */
+    0xC8, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, /* item */
+    0x03, 0x00, 0x00, 0x00, /* amount */
+] {
+    versions = "3.3.5";
+}
