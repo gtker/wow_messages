@@ -3840,7 +3840,6 @@ impl ClientOpcodeMessage {
             Self::CMSG_QUEST_CONFIRM_ACCEPT(c) => crate::Message::to_test_case_string(c),
             Self::CMSG_PUSHQUESTTOPARTY(c) => crate::Message::to_test_case_string(c),
             Self::CMSG_LIST_INVENTORY(c) => crate::Message::to_test_case_string(c),
-            Self::CMSG_SELL_ITEM(c) => crate::Message::to_test_case_string(c.as_ref()),
             Self::CMSG_BUY_ITEM(c) => crate::Message::to_test_case_string(c.as_ref()),
             Self::CMSG_BUY_ITEM_IN_SLOT(c) => crate::Message::to_test_case_string(c.as_ref()),
             Self::CMSG_TAXINODE_STATUS_QUERY(c) => crate::Message::to_test_case_string(c),

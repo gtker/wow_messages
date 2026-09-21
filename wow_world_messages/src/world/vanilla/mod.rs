@@ -448,7 +448,7 @@ pub use crate::shared::cmsg_request_raid_info_vanilla_tbc_wrath::*;
 pub use crate::shared::cmsg_reset_instances_vanilla_tbc_wrath::*;
 pub use crate::shared::cmsg_resurrect_response_vanilla_tbc_wrath::*;
 pub use crate::shared::cmsg_self_res_vanilla_tbc_wrath::*;
-pub use crate::shared::cmsg_sell_item_vanilla_tbc_wrath::*;
+pub use crate::shared::cmsg_sell_item_vanilla_tbc::*;
 pub(crate) mod cmsg_send_mail;
 pub use cmsg_send_mail::*;
 pub use crate::shared::cmsg_setsheathed_vanilla_tbc_wrath::*;
