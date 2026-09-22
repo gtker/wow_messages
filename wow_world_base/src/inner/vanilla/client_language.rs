@@ -15,9 +15,10 @@
 ///     SPANISH_LATIN_AMERICA = 7;
 /// }
 /// ```
-#[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
+#[derive(Debug, Default, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 #[cfg_attr(feature = "serde", derive(serde::Deserialize, serde::Serialize))]
 pub enum ClientLanguage {
+    #[default]
     English,
     Korean,
     French,
@@ -88,12 +89,6 @@ impl ClientLanguage {
 }
 
 const NAME: &str = "ClientLanguage";
-
-impl Default for ClientLanguage {
-    fn default() -> Self {
-        Self::English
-    }
-}
 
 impl std::fmt::Display for ClientLanguage {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {

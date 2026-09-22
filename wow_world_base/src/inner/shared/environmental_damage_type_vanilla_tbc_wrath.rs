@@ -9,9 +9,10 @@
 ///     FIRE = 5;
 /// }
 /// ```
-#[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
+#[derive(Debug, Default, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 #[cfg_attr(feature = "serde", derive(serde::Deserialize, serde::Serialize))]
 pub enum EnvironmentalDamageType {
+    #[default]
     Exhausted,
     Drowning,
     Fall,
@@ -72,12 +73,6 @@ impl EnvironmentalDamageType {
 }
 
 const NAME: &str = "EnvironmentalDamageType";
-
-impl Default for EnvironmentalDamageType {
-    fn default() -> Self {
-        Self::Exhausted
-    }
-}
 
 impl std::fmt::Display for EnvironmentalDamageType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {

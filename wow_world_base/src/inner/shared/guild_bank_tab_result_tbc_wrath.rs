@@ -5,9 +5,10 @@
 ///     PRESENT = 1;
 /// }
 /// ```
-#[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
+#[derive(Debug, Default, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 #[cfg_attr(feature = "serde", derive(serde::Deserialize, serde::Serialize))]
 pub enum GuildBankTabResult {
+    #[default]
     NotPresent,
     Present,
 }
@@ -48,12 +49,6 @@ impl GuildBankTabResult {
 }
 
 const NAME: &str = "GuildBankTabResult";
-
-impl Default for GuildBankTabResult {
-    fn default() -> Self {
-        Self::NotPresent
-    }
-}
 
 impl std::fmt::Display for GuildBankTabResult {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {

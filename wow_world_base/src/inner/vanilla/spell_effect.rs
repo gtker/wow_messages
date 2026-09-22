@@ -131,9 +131,10 @@
 ///     UNKNOWN127 = 127;
 /// }
 /// ```
-#[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
+#[derive(Debug, Default, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 #[cfg_attr(feature = "serde", derive(serde::Deserialize, serde::Serialize))]
 pub enum SpellEffect {
+    #[default]
     None,
     Instakill,
     SchoolDamage,
@@ -804,12 +805,6 @@ impl SpellEffect {
 }
 
 const NAME: &str = "SpellEffect";
-
-impl Default for SpellEffect {
-    fn default() -> Self {
-        Self::None
-    }
-}
 
 impl std::fmt::Display for SpellEffect {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {

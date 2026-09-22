@@ -10,9 +10,10 @@
 ///     TICKET_DELETED = 9;
 /// }
 /// ```
-#[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
+#[derive(Debug, Default, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 #[cfg_attr(feature = "serde", derive(serde::Deserialize, serde::Serialize))]
 pub enum GmTicketResponse {
+    #[default]
     NotExist,
     AlreadyExist,
     CreateSuccess,
@@ -78,12 +79,6 @@ impl GmTicketResponse {
 }
 
 const NAME: &str = "GmTicketResponse";
-
-impl Default for GmTicketResponse {
-    fn default() -> Self {
-        Self::NotExist
-    }
-}
 
 impl std::fmt::Display for GmTicketResponse {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {

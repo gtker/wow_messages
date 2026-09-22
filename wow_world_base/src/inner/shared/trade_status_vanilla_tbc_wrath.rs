@@ -27,9 +27,10 @@
 ///     NOT_ON_TAPLIST = 23;
 /// }
 /// ```
-#[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
+#[derive(Debug, Default, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 #[cfg_attr(feature = "serde", derive(serde::Deserialize, serde::Serialize))]
 pub enum TradeStatus {
+    #[default]
     Busy,
     BeginTrade,
     OpenWindow,
@@ -180,12 +181,6 @@ impl TradeStatus {
 }
 
 const NAME: &str = "TradeStatus";
-
-impl Default for TradeStatus {
-    fn default() -> Self {
-        Self::Busy
-    }
-}
 
 impl std::fmt::Display for TradeStatus {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {

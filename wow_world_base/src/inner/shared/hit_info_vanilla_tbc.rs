@@ -18,9 +18,10 @@
 ///     SWING_NO_HIT_SOUND = 0x00080000;
 /// }
 /// ```
-#[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
+#[derive(Debug, Default, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 #[cfg_attr(feature = "serde", derive(serde::Deserialize, serde::Serialize))]
 pub enum HitInfo {
+    #[default]
     NormalSwing,
     /// req correct packet structure
     Unk1,
@@ -133,12 +134,6 @@ impl HitInfo {
 }
 
 const NAME: &str = "HitInfo";
-
-impl Default for HitInfo {
-    fn default() -> Self {
-        Self::NormalSwing
-    }
-}
 
 impl std::fmt::Display for HitInfo {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {

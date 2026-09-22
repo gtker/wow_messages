@@ -5,9 +5,10 @@
 ///     ENTER_BATTLE = 1;
 /// }
 /// ```
-#[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
+#[derive(Debug, Default, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 #[cfg_attr(feature = "serde", derive(serde::Deserialize, serde::Serialize))]
 pub enum BattlefieldPortAction {
+    #[default]
     LeaveQueue,
     EnterBattle,
 }
@@ -48,12 +49,6 @@ impl BattlefieldPortAction {
 }
 
 const NAME: &str = "BattlefieldPortAction";
-
-impl Default for BattlefieldPortAction {
-    fn default() -> Self {
-        Self::LeaveQueue
-    }
-}
 
 impl std::fmt::Display for BattlefieldPortAction {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {

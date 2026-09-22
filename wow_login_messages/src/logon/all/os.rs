@@ -5,8 +5,9 @@
 ///     MAC_OS_X = "\0OSX";
 /// }
 /// ```
-#[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
+#[derive(Debug, Default, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum Os {
+    #[default]
     Windows,
     MacOsX,
 }
@@ -36,12 +37,6 @@ impl Os {
 }
 
 const NAME: &str = "Os";
-
-impl Default for Os {
-    fn default() -> Self {
-        Self::Windows
-    }
-}
 
 impl std::fmt::Display for Os {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {

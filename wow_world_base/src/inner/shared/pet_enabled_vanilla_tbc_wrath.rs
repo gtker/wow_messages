@@ -5,9 +5,10 @@
 ///     DISABLED = 0x0;
 /// }
 /// ```
-#[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
+#[derive(Debug, Default, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 #[cfg_attr(feature = "serde", derive(serde::Deserialize, serde::Serialize))]
 pub enum PetEnabled {
+    #[default]
     Enabled,
     Disabled,
 }
@@ -48,12 +49,6 @@ impl PetEnabled {
 }
 
 const NAME: &str = "PetEnabled";
-
-impl Default for PetEnabled {
-    fn default() -> Self {
-        Self::Enabled
-    }
-}
 
 impl std::fmt::Display for PetEnabled {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {

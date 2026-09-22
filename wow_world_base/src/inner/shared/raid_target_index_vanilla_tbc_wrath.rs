@@ -13,9 +13,10 @@
 ///     REQUEST_ICONS = 0xFF;
 /// }
 /// ```
-#[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
+#[derive(Debug, Default, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 #[cfg_attr(feature = "serde", derive(serde::Deserialize, serde::Serialize))]
 pub enum RaidTargetIndex {
+    #[default]
     Unknown0,
     Unknown1,
     Unknown2,
@@ -96,12 +97,6 @@ impl RaidTargetIndex {
 }
 
 const NAME: &str = "RaidTargetIndex";
-
-impl Default for RaidTargetIndex {
-    fn default() -> Self {
-        Self::Unknown0
-    }
-}
 
 impl std::fmt::Display for RaidTargetIndex {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {

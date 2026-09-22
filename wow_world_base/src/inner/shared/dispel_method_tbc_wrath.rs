@@ -5,9 +5,10 @@
 ///     CLEANSED = 1;
 /// }
 /// ```
-#[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
+#[derive(Debug, Default, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 #[cfg_attr(feature = "serde", derive(serde::Deserialize, serde::Serialize))]
 pub enum DispelMethod {
+    #[default]
     Dispelled,
     Cleansed,
 }
@@ -48,12 +49,6 @@ impl DispelMethod {
 }
 
 const NAME: &str = "DispelMethod";
-
-impl Default for DispelMethod {
-    fn default() -> Self {
-        Self::Dispelled
-    }
-}
 
 impl std::fmt::Display for DispelMethod {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {

@@ -13,10 +13,11 @@
 ///     GENERIC = 12;
 /// }
 /// ```
-#[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
+#[derive(Debug, Default, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 #[cfg_attr(feature = "serde", derive(serde::Deserialize, serde::Serialize))]
 pub enum SkillCategory {
     /// Not used for anything in Vanilla and TBC, only used for `Pet - Exotic Spirit Beast` in Wrath.
+    #[default]
     Attribute,
     Weapon,
     Class,
@@ -87,12 +88,6 @@ impl SkillCategory {
 }
 
 const NAME: &str = "SkillCategory";
-
-impl Default for SkillCategory {
-    fn default() -> Self {
-        Self::Attribute
-    }
-}
 
 impl std::fmt::Display for SkillCategory {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {

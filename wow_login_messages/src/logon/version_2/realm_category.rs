@@ -8,8 +8,9 @@
 ///     FIVE = 0x5;
 /// }
 /// ```
-#[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
+#[derive(Debug, Default, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum RealmCategory {
+    #[default]
     Default,
     One,
     Two,
@@ -51,12 +52,6 @@ impl RealmCategory {
 }
 
 const NAME: &str = "RealmCategory";
-
-impl Default for RealmCategory {
-    fn default() -> Self {
-        Self::Default
-    }
-}
 
 impl std::fmt::Display for RealmCategory {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {

@@ -107,9 +107,10 @@
 ///     CHAR_NAME_DECLENSION_DOESNT_MATCH_BASE_NAME = 0x67;
 /// }
 /// ```
-#[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
+#[derive(Debug, Default, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 #[cfg_attr(feature = "serde", derive(serde::Deserialize, serde::Serialize))]
 pub enum WorldResult {
+    #[default]
     ResponseSuccess,
     ResponseFailure,
     ResponseCancelled,
@@ -660,12 +661,6 @@ impl WorldResult {
 }
 
 const NAME: &str = "WorldResult";
-
-impl Default for WorldResult {
-    fn default() -> Self {
-        Self::ResponseSuccess
-    }
-}
 
 impl std::fmt::Display for WorldResult {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {

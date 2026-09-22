@@ -5,9 +5,10 @@
 ///     RAID = 1;
 /// }
 /// ```
-#[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
+#[derive(Debug, Default, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 #[cfg_attr(feature = "serde", derive(serde::Deserialize, serde::Serialize))]
 pub enum GroupType {
+    #[default]
     Normal,
     Raid,
 }
@@ -48,12 +49,6 @@ impl GroupType {
 }
 
 const NAME: &str = "GroupType";
-
-impl Default for GroupType {
-    fn default() -> Self {
-        Self::Normal
-    }
-}
 
 impl std::fmt::Display for GroupType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {

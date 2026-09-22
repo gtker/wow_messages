@@ -5,9 +5,10 @@
 ///     BANK = 1;
 /// }
 /// ```
-#[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
+#[derive(Debug, Default, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 #[cfg_attr(feature = "serde", derive(serde::Deserialize, serde::Serialize))]
 pub enum BankSwapSource {
+    #[default]
     Inventory,
     Bank,
 }
@@ -48,12 +49,6 @@ impl BankSwapSource {
 }
 
 const NAME: &str = "BankSwapSource";
-
-impl Default for BankSwapSource {
-    fn default() -> Self {
-        Self::Inventory
-    }
-}
 
 impl std::fmt::Display for BankSwapSource {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {

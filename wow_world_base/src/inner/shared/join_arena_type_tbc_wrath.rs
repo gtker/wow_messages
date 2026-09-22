@@ -6,9 +6,10 @@
 ///     FIVE_VS_FIVE = 2;
 /// }
 /// ```
-#[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
+#[derive(Debug, Default, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 #[cfg_attr(feature = "serde", derive(serde::Deserialize, serde::Serialize))]
 pub enum JoinArenaType {
+    #[default]
     TwoVsTwo,
     ThreeVsThree,
     FiveVsFive,
@@ -54,12 +55,6 @@ impl JoinArenaType {
 }
 
 const NAME: &str = "JoinArenaType";
-
-impl Default for JoinArenaType {
-    fn default() -> Self {
-        Self::TwoVsTwo
-    }
-}
 
 impl std::fmt::Display for JoinArenaType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {

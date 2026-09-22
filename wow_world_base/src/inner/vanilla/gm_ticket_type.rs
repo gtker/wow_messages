@@ -14,9 +14,10 @@
 ///     CHARACTER = 10;
 /// }
 /// ```
-#[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
+#[derive(Debug, Default, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 #[cfg_attr(feature = "serde", derive(serde::Deserialize, serde::Serialize))]
 pub enum GmTicketType {
+    #[default]
     Stuck,
     BehaviorHarassment,
     Guild,
@@ -97,12 +98,6 @@ impl GmTicketType {
 }
 
 const NAME: &str = "GmTicketType";
-
-impl Default for GmTicketType {
-    fn default() -> Self {
-        Self::Stuck
-    }
-}
 
 impl std::fmt::Display for GmTicketType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {

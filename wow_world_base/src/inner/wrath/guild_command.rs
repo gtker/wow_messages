@@ -11,9 +11,10 @@
 ///     OFFICER_NOTE_CHANGED = 0x14;
 /// }
 /// ```
-#[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
+#[derive(Debug, Default, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 #[cfg_attr(feature = "serde", derive(serde::Deserialize, serde::Serialize))]
 pub enum GuildCommand {
+    #[default]
     Create,
     Invite,
     Quit,
@@ -84,12 +85,6 @@ impl GuildCommand {
 }
 
 const NAME: &str = "GuildCommand";
-
-impl Default for GuildCommand {
-    fn default() -> Self {
-        Self::Create
-    }
-}
 
 impl std::fmt::Display for GuildCommand {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {

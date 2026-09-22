@@ -12,9 +12,10 @@
 ///     GOBLIN = 9;
 /// }
 /// ```
-#[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
+#[derive(Debug, Default, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 #[cfg_attr(feature = "serde", derive(serde::Deserialize, serde::Serialize))]
 pub enum Race {
+    #[default]
     Human,
     Orc,
     Dwarf,
@@ -90,12 +91,6 @@ impl Race {
 }
 
 const NAME: &str = "Race";
-
-impl Default for Race {
-    fn default() -> Self {
-        Self::Human
-    }
-}
 
 impl std::fmt::Display for Race {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {

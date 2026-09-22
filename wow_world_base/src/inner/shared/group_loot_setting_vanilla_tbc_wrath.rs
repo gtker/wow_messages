@@ -8,9 +8,10 @@
 ///     NEED_BEFORE_GREED = 4;
 /// }
 /// ```
-#[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
+#[derive(Debug, Default, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 #[cfg_attr(feature = "serde", derive(serde::Deserialize, serde::Serialize))]
 pub enum GroupLootSetting {
+    #[default]
     FreeForAll,
     RoundRobin,
     MasterLoot,
@@ -66,12 +67,6 @@ impl GroupLootSetting {
 }
 
 const NAME: &str = "GroupLootSetting";
-
-impl Default for GroupLootSetting {
-    fn default() -> Self {
-        Self::FreeForAll
-    }
-}
 
 impl std::fmt::Display for GroupLootSetting {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {

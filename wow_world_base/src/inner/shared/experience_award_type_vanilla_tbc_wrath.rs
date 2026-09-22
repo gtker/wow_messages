@@ -5,9 +5,10 @@
 ///     NON_KILL = 1;
 /// }
 /// ```
-#[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
+#[derive(Debug, Default, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 #[cfg_attr(feature = "serde", derive(serde::Deserialize, serde::Serialize))]
 pub enum ExperienceAwardType {
+    #[default]
     Kill,
     NonKill,
 }
@@ -48,12 +49,6 @@ impl ExperienceAwardType {
 }
 
 const NAME: &str = "ExperienceAwardType";
-
-impl Default for ExperienceAwardType {
-    fn default() -> Self {
-        Self::Kill
-    }
-}
 
 impl std::fmt::Display for ExperienceAwardType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {

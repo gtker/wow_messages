@@ -11,9 +11,10 @@
 ///     CORPSE = 7;
 /// }
 /// ```
-#[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
+#[derive(Debug, Default, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 #[cfg_attr(feature = "serde", derive(serde::Deserialize, serde::Serialize))]
 pub enum ObjectType {
+    #[default]
     Object,
     Item,
     Container,
@@ -84,12 +85,6 @@ impl ObjectType {
 }
 
 const NAME: &str = "ObjectType";
-
-impl Default for ObjectType {
-    fn default() -> Self {
-        Self::Object
-    }
-}
 
 impl std::fmt::Display for ObjectType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {

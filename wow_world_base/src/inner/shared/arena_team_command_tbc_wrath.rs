@@ -7,9 +7,10 @@
 ///     TEAM_FOUNDER_S = 0x0E;
 /// }
 /// ```
-#[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
+#[derive(Debug, Default, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 #[cfg_attr(feature = "serde", derive(serde::Deserialize, serde::Serialize))]
 pub enum ArenaTeamCommand {
+    #[default]
     TeamCreateS,
     TeamInviteSs,
     TeamQuitS,
@@ -60,12 +61,6 @@ impl ArenaTeamCommand {
 }
 
 const NAME: &str = "ArenaTeamCommand";
-
-impl Default for ArenaTeamCommand {
-    fn default() -> Self {
-        Self::TeamCreateS
-    }
-}
 
 impl std::fmt::Display for ArenaTeamCommand {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {

@@ -6,9 +6,10 @@
 ///     SURVEY = 3;
 /// }
 /// ```
-#[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
+#[derive(Debug, Default, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 #[cfg_attr(feature = "serde", derive(serde::Deserialize, serde::Serialize))]
 pub enum GmTicketStatusResponse {
+    #[default]
     Updated,
     Closed,
     Survey,
@@ -54,12 +55,6 @@ impl GmTicketStatusResponse {
 }
 
 const NAME: &str = "GmTicketStatusResponse";
-
-impl Default for GmTicketStatusResponse {
-    fn default() -> Self {
-        Self::Updated
-    }
-}
 
 impl std::fmt::Display for GmTicketStatusResponse {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {

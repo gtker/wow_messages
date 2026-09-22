@@ -5,9 +5,10 @@
 ///     NO_TEXT = 1;
 /// }
 /// ```
-#[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
+#[derive(Debug, Default, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 #[cfg_attr(feature = "serde", derive(serde::Deserialize, serde::Serialize))]
 pub enum ItemTextQuery {
+    #[default]
     HasText,
     NoText,
 }
@@ -48,12 +49,6 @@ impl ItemTextQuery {
 }
 
 const NAME: &str = "ItemTextQuery";
-
-impl Default for ItemTextQuery {
-    fn default() -> Self {
-        Self::HasText
-    }
-}
 
 impl std::fmt::Display for ItemTextQuery {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {

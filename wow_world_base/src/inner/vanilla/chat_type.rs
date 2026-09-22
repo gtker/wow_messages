@@ -38,9 +38,10 @@
 ///     BATTLEGROUND_LEADER = 0x5D;
 /// }
 /// ```
-#[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
+#[derive(Debug, Default, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 #[cfg_attr(feature = "serde", derive(serde::Deserialize, serde::Serialize))]
 pub enum ChatType {
+    #[default]
     Say,
     Party,
     Raid,
@@ -246,12 +247,6 @@ impl ChatType {
 }
 
 const NAME: &str = "ChatType";
-
-impl Default for ChatType {
-    fn default() -> Self {
-        Self::Say
-    }
-}
 
 impl std::fmt::Display for ChatType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {

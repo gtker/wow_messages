@@ -28,8 +28,6 @@ fn print_enum_inner(e: &Definer, o: &Objects, visibility_override: bool) -> Writ
     s.wln(format!("const NAME: &str = \"{}\";", e.name()));
     s.newline();
 
-    print_default(&mut s, e);
-
     print_display(&mut s, e);
 
     print_try_from(&mut s, e);
@@ -41,7 +39,7 @@ fn declaration(s: &mut Writer, e: &Definer, o: &Objects, common_visibility_overr
     print_docc_description_and_comment(s, e.tags(), o, e.tags());
     print_wowm_definition("enum", s, e);
 
-    s.wln("#[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]");
+    s.wln("#[derive(Debug, Default, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]");
     print_serde_derive(s, e.tags().is_in_base(), false);
     let visibility = match e.only_used_in_if() && !common_visibility_override && !e.tags().shared()
     {
@@ -49,8 +47,12 @@ fn declaration(s: &mut Writer, e: &Definer, o: &Objects, common_visibility_overr
         false => "pub",
     };
     s.new_enum(visibility, e.name(), |s| {
-        for field in e.fields() {
+        for (i, field) in e.fields().iter().enumerate() {
             print_member_docc_description_and_comment(s, field.tags(), o, e.tags());
+
+            if i == 0 {
+                s.wln("#[default]");
+            }
 
             s.wln(format!("{},", field.rust_name()));
         }
@@ -151,14 +153,6 @@ fn testcase_string(s: &mut Writer, e: &Definer) {
                     s.wln(format!("Self::{rust} => \"{field}\","));
                 }
             });
-        });
-    });
-}
-
-fn print_default(s: &mut Writer, e: &Definer) {
-    s.impl_for("Default", e.name(), |s| {
-        s.body("fn default() -> Self", |s| {
-            s.wln(format!("Self::{}", e.fields()[0].rust_name()));
         });
     });
 }

@@ -5,8 +5,9 @@
 ///     PIN = 0x1;
 /// }
 /// ```
-#[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
+#[derive(Debug, Default, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub(crate) enum SecurityFlag {
+    #[default]
     None,
     Pin,
 }
@@ -36,12 +37,6 @@ impl SecurityFlag {
 }
 
 const NAME: &str = "SecurityFlag";
-
-impl Default for SecurityFlag {
-    fn default() -> Self {
-        Self::None
-    }
-}
 
 impl std::fmt::Display for SecurityFlag {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {

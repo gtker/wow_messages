@@ -17,9 +17,10 @@
 ///     RANDOM = 32;
 /// }
 /// ```
-#[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
+#[derive(Debug, Default, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 #[cfg_attr(feature = "serde", derive(serde::Deserialize, serde::Serialize))]
 pub enum BattlegroundType {
+    #[default]
     None,
     AlteracValley,
     WarsongGulch,
@@ -120,12 +121,6 @@ impl BattlegroundType {
 }
 
 const NAME: &str = "BattlegroundType";
-
-impl Default for BattlegroundType {
-    fn default() -> Self {
-        Self::None
-    }
-}
 
 impl std::fmt::Display for BattlegroundType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {

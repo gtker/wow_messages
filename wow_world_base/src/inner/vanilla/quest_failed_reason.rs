@@ -13,10 +13,11 @@
 ///     QUEST_FAILED_NOT_ENOUGH_MONEY = 22;
 /// }
 /// ```
-#[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
+#[derive(Debug, Default, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 #[cfg_attr(feature = "serde", derive(serde::Deserialize, serde::Serialize))]
 pub enum QuestFailedReason {
     /// this is default case
+    #[default]
     DontHaveReq,
     /// You are not high enough level for that quest.
     QuestFailedLowLevel,
@@ -106,12 +107,6 @@ impl QuestFailedReason {
 }
 
 const NAME: &str = "QuestFailedReason";
-
-impl Default for QuestFailedReason {
-    fn default() -> Self {
-        Self::DontHaveReq
-    }
-}
 
 impl std::fmt::Display for QuestFailedReason {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {

@@ -14,10 +14,11 @@
 ///     OK = 10;
 /// }
 /// ```
-#[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
+#[derive(Debug, Default, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 #[cfg_attr(feature = "serde", derive(serde::Deserialize, serde::Serialize))]
 pub enum MountResult {
     /// You can't mount that unit!
+    #[default]
     InvalidMountee,
     /// That mount is too far away!
     TooFarAway,
@@ -113,12 +114,6 @@ impl MountResult {
 }
 
 const NAME: &str = "MountResult";
-
-impl Default for MountResult {
-    fn default() -> Self {
-        Self::InvalidMountee
-    }
-}
 
 impl std::fmt::Display for MountResult {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {

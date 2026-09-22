@@ -23,9 +23,10 @@
 ///     FACTION_LEADER = 19;
 /// }
 /// ```
-#[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
+#[derive(Debug, Default, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 #[cfg_attr(feature = "serde", derive(serde::Deserialize, serde::Serialize))]
 pub enum PvpRank {
+    #[default]
     NoRank,
     Pariah,
     Outlaw,
@@ -184,12 +185,6 @@ impl PvpRank {
 }
 
 const NAME: &str = "PvpRank";
-
-impl Default for PvpRank {
-    fn default() -> Self {
-        Self::NoRank
-    }
-}
 
 impl std::fmt::Display for PvpRank {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {

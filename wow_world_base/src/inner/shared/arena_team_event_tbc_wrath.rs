@@ -9,10 +9,11 @@
 ///     DISBANDED = 8;
 /// }
 /// ```
-#[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
+#[derive(Debug, Default, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 #[cfg_attr(feature = "serde", derive(serde::Deserialize, serde::Serialize))]
 pub enum ArenaTeamEvent {
     /// player name + arena team name
+    #[default]
     Join,
     /// player name + arena team name
     Leave,
@@ -78,12 +79,6 @@ impl ArenaTeamEvent {
 }
 
 const NAME: &str = "ArenaTeamEvent";
-
-impl Default for ArenaTeamEvent {
-    fn default() -> Self {
-        Self::Join
-    }
-}
 
 impl std::fmt::Display for ArenaTeamEvent {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {

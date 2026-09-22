@@ -6,9 +6,10 @@
 ///     USER_SQUELCHED = 2;
 /// }
 /// ```
-#[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
+#[derive(Debug, Default, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 #[cfg_attr(feature = "serde", derive(serde::Deserialize, serde::Serialize))]
 pub enum ChatRestrictionType {
+    #[default]
     ChatRestricted,
     ChatThrottled,
     UserSquelched,
@@ -54,12 +55,6 @@ impl ChatRestrictionType {
 }
 
 const NAME: &str = "ChatRestrictionType";
-
-impl Default for ChatRestrictionType {
-    fn default() -> Self {
-        Self::ChatRestricted
-    }
-}
 
 impl std::fmt::Display for ChatRestrictionType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {

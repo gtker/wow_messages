@@ -5,9 +5,10 @@
 ///     CLEANSE = 1;
 /// }
 /// ```
-#[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
+#[derive(Debug, Default, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 #[cfg_attr(feature = "serde", derive(serde::Deserialize, serde::Serialize))]
 pub enum SpellStealAction {
+    #[default]
     Steal,
     Cleanse,
 }
@@ -48,12 +49,6 @@ impl SpellStealAction {
 }
 
 const NAME: &str = "SpellStealAction";
-
-impl Default for SpellStealAction {
-    fn default() -> Self {
-        Self::Steal
-    }
-}
 
 impl std::fmt::Display for SpellStealAction {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {

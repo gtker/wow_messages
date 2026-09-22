@@ -13,9 +13,10 @@
 ///     KEYS = 9;
 /// }
 /// ```
-#[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
+#[derive(Debug, Default, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 #[cfg_attr(feature = "serde", derive(serde::Deserialize, serde::Serialize))]
 pub enum BagFamily {
+    #[default]
     None,
     Arrows,
     Bullets,
@@ -96,12 +97,6 @@ impl BagFamily {
 }
 
 const NAME: &str = "BagFamily";
-
-impl Default for BagFamily {
-    fn default() -> Self {
-        Self::None
-    }
-}
 
 impl std::fmt::Display for BagFamily {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {

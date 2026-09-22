@@ -77,9 +77,10 @@
 ///     JUNK = 0x000000000000000F;
 /// }
 /// ```
-#[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
+#[derive(Debug, Default, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 #[cfg_attr(feature = "serde", derive(serde::Deserialize, serde::Serialize))]
 pub enum ItemClassAndSubClass {
+    #[default]
     Consumable,
     CheeseOrBreadObsolete,
     LiquidObsolete,
@@ -465,12 +466,6 @@ impl ItemClassAndSubClass {
 }
 
 const NAME: &str = "ItemClassAndSubClass";
-
-impl Default for ItemClassAndSubClass {
-    fn default() -> Self {
-        Self::Consumable
-    }
-}
 
 impl std::fmt::Display for ItemClassAndSubClass {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {

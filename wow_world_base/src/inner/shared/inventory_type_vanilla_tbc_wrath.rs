@@ -32,9 +32,10 @@
 ///     RELIC = 28;
 /// }
 /// ```
-#[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
+#[derive(Debug, Default, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 #[cfg_attr(feature = "serde", derive(serde::Deserialize, serde::Serialize))]
 pub enum InventoryType {
+    #[default]
     NonEquip,
     Head,
     Neck,
@@ -210,12 +211,6 @@ impl InventoryType {
 }
 
 const NAME: &str = "InventoryType";
-
-impl Default for InventoryType {
-    fn default() -> Self {
-        Self::NonEquip
-    }
-}
 
 impl std::fmt::Display for InventoryType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {

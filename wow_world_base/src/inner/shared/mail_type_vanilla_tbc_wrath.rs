@@ -8,9 +8,10 @@
 ///     ITEM = 5;
 /// }
 /// ```
-#[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
+#[derive(Debug, Default, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 #[cfg_attr(feature = "serde", derive(serde::Deserialize, serde::Serialize))]
 pub enum MailType {
+    #[default]
     Normal,
     Auction,
     /// client send CMSG_CREATURE_QUERY on this mailmessagetype
@@ -69,12 +70,6 @@ impl MailType {
 }
 
 const NAME: &str = "MailType";
-
-impl Default for MailType {
-    fn default() -> Self {
-        Self::Normal
-    }
-}
 
 impl std::fmt::Display for MailType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {

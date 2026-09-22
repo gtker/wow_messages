@@ -5,9 +5,10 @@
 ///     THE_BURNING_CRUSADE = 1;
 /// }
 /// ```
-#[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
+#[derive(Debug, Default, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 #[cfg_attr(feature = "serde", derive(serde::Deserialize, serde::Serialize))]
 pub enum Expansion {
+    #[default]
     Vanilla,
     TheBurningCrusade,
 }
@@ -48,12 +49,6 @@ impl Expansion {
 }
 
 const NAME: &str = "Expansion";
-
-impl Default for Expansion {
-    fn default() -> Self {
-        Self::Vanilla
-    }
-}
 
 impl std::fmt::Display for Expansion {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {

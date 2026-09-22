@@ -10,9 +10,10 @@
 ///     GOBLIN = 7;
 /// }
 /// ```
-#[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
+#[derive(Debug, Default, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 #[cfg_attr(feature = "serde", derive(serde::Deserialize, serde::Serialize))]
 pub enum AuctionHouse {
+    #[default]
     Stormwind,
     Alliance,
     Darnassus,
@@ -78,12 +79,6 @@ impl AuctionHouse {
 }
 
 const NAME: &str = "AuctionHouse";
-
-impl Default for AuctionHouse {
-    fn default() -> Self {
-        Self::Stormwind
-    }
-}
 
 impl std::fmt::Display for AuctionHouse {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {

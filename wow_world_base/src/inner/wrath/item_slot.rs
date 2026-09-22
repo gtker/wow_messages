@@ -153,9 +153,10 @@
 ///     CURRENCY_TOKEN_32 = 149;
 /// }
 /// ```
-#[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
+#[derive(Debug, Default, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 #[cfg_attr(feature = "serde", derive(serde::Deserialize, serde::Serialize))]
 pub enum ItemSlot {
+    #[default]
     Head,
     Neck,
     Shoulders,
@@ -936,12 +937,6 @@ impl ItemSlot {
 }
 
 const NAME: &str = "ItemSlot";
-
-impl Default for ItemSlot {
-    fn default() -> Self {
-        Self::Head
-    }
-}
 
 impl std::fmt::Display for ItemSlot {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {

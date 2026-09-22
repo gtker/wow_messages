@@ -19,9 +19,10 @@
 ///     MAP_NOT_ALLOWED = 0x10;
 /// }
 /// ```
-#[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
+#[derive(Debug, Default, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 #[cfg_attr(feature = "serde", derive(serde::Deserialize, serde::Serialize))]
 pub enum TransferAbortReason {
+    #[default]
     None,
     ErrorX,
     /// Transfer Aborted: instance is full
@@ -146,12 +147,6 @@ impl TransferAbortReason {
 }
 
 const NAME: &str = "TransferAbortReason";
-
-impl Default for TransferAbortReason {
-    fn default() -> Self {
-        Self::None
-    }
-}
 
 impl std::fmt::Display for TransferAbortReason {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {

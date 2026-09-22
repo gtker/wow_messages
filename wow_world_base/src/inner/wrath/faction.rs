@@ -405,9 +405,10 @@
 ///     CTF_FLAG_HORDE_2 = 1160;
 /// }
 /// ```
-#[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
+#[derive(Debug, Default, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 #[cfg_attr(feature = "serde", derive(serde::Deserialize, serde::Serialize))]
 pub enum Faction {
+    #[default]
     None,
     PlayerHuman,
     PlayerOrc,
@@ -2448,12 +2449,6 @@ impl Faction {
 }
 
 const NAME: &str = "Faction";
-
-impl Default for Faction {
-    fn default() -> Self {
-        Self::None
-    }
-}
 
 impl std::fmt::Display for Faction {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {

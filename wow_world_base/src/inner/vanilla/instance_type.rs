@@ -13,9 +13,10 @@
 ///     BATTLEGROUND2 = 0x05;
 /// }
 /// ```
-#[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
+#[derive(Debug, Default, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 #[cfg_attr(feature = "serde", derive(serde::Deserialize, serde::Serialize))]
 pub enum InstanceType {
+    #[default]
     Normal,
     GroupInstance,
     RaidInstance,
@@ -76,12 +77,6 @@ impl InstanceType {
 }
 
 const NAME: &str = "InstanceType";
-
-impl Default for InstanceType {
-    fn default() -> Self {
-        Self::Normal
-    }
-}
 
 impl std::fmt::Display for InstanceType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {

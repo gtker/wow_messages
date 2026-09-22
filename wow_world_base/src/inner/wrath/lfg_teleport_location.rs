@@ -5,9 +5,10 @@
 ///     OUT = 1;
 /// }
 /// ```
-#[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
+#[derive(Debug, Default, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 #[cfg_attr(feature = "serde", derive(serde::Deserialize, serde::Serialize))]
 pub enum LfgTeleportLocation {
+    #[default]
     In,
     Out,
 }
@@ -48,12 +49,6 @@ impl LfgTeleportLocation {
 }
 
 const NAME: &str = "LfgTeleportLocation";
-
-impl Default for LfgTeleportLocation {
-    fn default() -> Self {
-        Self::In
-    }
-}
 
 impl std::fmt::Display for LfgTeleportLocation {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {

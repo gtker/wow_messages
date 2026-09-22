@@ -138,9 +138,10 @@
 ///     THE_RUBY_SANCTUM = 724;
 /// }
 /// ```
-#[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
+#[derive(Debug, Default, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 #[cfg_attr(feature = "serde", derive(serde::Deserialize, serde::Serialize))]
 pub enum Map {
+    #[default]
     EasternKingdoms,
     Kalimdor,
     Testing,
@@ -847,12 +848,6 @@ impl Map {
 }
 
 const NAME: &str = "Map";
-
-impl Default for Map {
-    fn default() -> Self {
-        Self::EasternKingdoms
-    }
-}
 
 impl std::fmt::Display for Map {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {

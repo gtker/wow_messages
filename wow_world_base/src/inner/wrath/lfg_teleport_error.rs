@@ -9,9 +9,10 @@
 ///     COMBAT = 8;
 /// }
 /// ```
-#[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
+#[derive(Debug, Default, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 #[cfg_attr(feature = "serde", derive(serde::Deserialize, serde::Serialize))]
 pub enum LfgTeleportError {
+    #[default]
     PlayerDead,
     Falling,
     InVehicle,
@@ -73,12 +74,6 @@ impl LfgTeleportError {
 }
 
 const NAME: &str = "LfgTeleportError";
-
-impl Default for LfgTeleportError {
-    fn default() -> Self {
-        Self::PlayerDead
-    }
-}
 
 impl std::fmt::Display for LfgTeleportError {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {

@@ -19,9 +19,10 @@
 ///     MISC = 15;
 /// }
 /// ```
-#[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
+#[derive(Debug, Default, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 #[cfg_attr(feature = "serde", derive(serde::Deserialize, serde::Serialize))]
 pub enum ItemClass {
+    #[default]
     Consumable,
     Container,
     Weapon,
@@ -132,12 +133,6 @@ impl ItemClass {
 }
 
 const NAME: &str = "ItemClass";
-
-impl Default for ItemClass {
-    fn default() -> Self {
-        Self::Consumable
-    }
-}
 
 impl std::fmt::Display for ItemClass {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {

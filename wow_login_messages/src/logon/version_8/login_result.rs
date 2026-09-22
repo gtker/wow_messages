@@ -20,8 +20,9 @@
 ///     FAIL_LOCKED_ENFORCED = 0x10;
 /// }
 /// ```
-#[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
+#[derive(Debug, Default, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum LoginResult {
+    #[default]
     Success,
     FailUnknown0,
     FailUnknown1,
@@ -111,12 +112,6 @@ impl LoginResult {
 }
 
 const NAME: &str = "LoginResult";
-
-impl Default for LoginResult {
-    fn default() -> Self {
-        Self::Success
-    }
-}
 
 impl std::fmt::Display for LoginResult {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {

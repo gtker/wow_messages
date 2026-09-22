@@ -6,9 +6,10 @@
 ///     NONE = 2;
 /// }
 /// ```
-#[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
+#[derive(Debug, Default, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 #[cfg_attr(feature = "serde", derive(serde::Deserialize, serde::Serialize))]
 pub enum Gender {
+    #[default]
     Male,
     Female,
     /// Apparently used by hunter and warlock pets.
@@ -55,12 +56,6 @@ impl Gender {
 }
 
 const NAME: &str = "Gender";
-
-impl Default for Gender {
-    fn default() -> Self {
-        Self::Male
-    }
-}
 
 impl std::fmt::Display for Gender {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {

@@ -16,9 +16,10 @@
 ///     UNKNOWN_ERROR = 13;
 /// }
 /// ```
-#[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
+#[derive(Debug, Default, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 #[cfg_attr(feature = "serde", derive(serde::Deserialize, serde::Serialize))]
 pub enum PetTameFailureReason {
+    #[default]
     InvalidCreature,
     TooMany,
     CreatureAlreadyOwned,
@@ -117,12 +118,6 @@ impl PetTameFailureReason {
 }
 
 const NAME: &str = "PetTameFailureReason";
-
-impl Default for PetTameFailureReason {
-    fn default() -> Self {
-        Self::InvalidCreature
-    }
-}
 
 impl std::fmt::Display for PetTameFailureReason {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {

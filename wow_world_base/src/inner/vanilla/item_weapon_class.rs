@@ -9,9 +9,10 @@
 ///     WEAPON = 1;
 /// }
 /// ```
-#[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
+#[derive(Debug, Default, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 #[cfg_attr(feature = "serde", derive(serde::Deserialize, serde::Serialize))]
 pub enum ItemWeaponClass {
+    #[default]
     Item,
     Weapon,
 }
@@ -52,12 +53,6 @@ impl ItemWeaponClass {
 }
 
 const NAME: &str = "ItemWeaponClass";
-
-impl Default for ItemWeaponClass {
-    fn default() -> Self {
-        Self::Item
-    }
-}
 
 impl std::fmt::Display for ItemWeaponClass {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {

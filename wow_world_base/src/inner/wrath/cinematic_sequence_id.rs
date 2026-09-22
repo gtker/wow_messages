@@ -18,9 +18,10 @@
 ///     DEATH_KNIGHT = 165;
 /// }
 /// ```
-#[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
+#[derive(Debug, Default, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 #[cfg_attr(feature = "serde", derive(serde::Deserialize, serde::Serialize))]
 pub enum CinematicSequenceId {
+    #[default]
     Goblin,
     PalantirOfAzora,
     Undead,
@@ -126,12 +127,6 @@ impl CinematicSequenceId {
 }
 
 const NAME: &str = "CinematicSequenceId";
-
-impl Default for CinematicSequenceId {
-    fn default() -> Self {
-        Self::Goblin
-    }
-}
 
 impl std::fmt::Display for CinematicSequenceId {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {

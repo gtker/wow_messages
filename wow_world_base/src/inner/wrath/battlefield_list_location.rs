@@ -5,10 +5,11 @@
 ///     UI = 1;
 /// }
 /// ```
-#[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
+#[derive(Debug, Default, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 #[cfg_attr(feature = "serde", derive(serde::Deserialize, serde::Serialize))]
 pub enum BattlefieldListLocation {
     /// lua: ShowBattlefieldList
+    #[default]
     Battlemaster,
     /// lua: RequestBattlegroundInstanceInfo
     Ui,
@@ -50,12 +51,6 @@ impl BattlefieldListLocation {
 }
 
 const NAME: &str = "BattlefieldListLocation";
-
-impl Default for BattlefieldListLocation {
-    fn default() -> Self {
-        Self::Battlemaster
-    }
-}
 
 impl std::fmt::Display for BattlefieldListLocation {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {

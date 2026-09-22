@@ -71,9 +71,10 @@
 ///     LOOT_CANT_LOOT_THAT_NOW = 66;
 /// }
 /// ```
-#[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
+#[derive(Debug, Default, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 #[cfg_attr(feature = "serde", derive(serde::Deserialize, serde::Serialize))]
 pub enum InventoryResult {
+    #[default]
     Ok,
     CantEquipLevelI,
     CantEquipSkill,
@@ -439,12 +440,6 @@ impl InventoryResult {
 }
 
 const NAME: &str = "InventoryResult";
-
-impl Default for InventoryResult {
-    fn default() -> Self {
-        Self::Ok
-    }
-}
 
 impl std::fmt::Display for InventoryResult {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {

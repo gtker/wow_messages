@@ -11,9 +11,10 @@
 ///     REFRESH_FRAMES = 7;
 /// }
 /// ```
-#[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
+#[derive(Debug, Default, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 #[cfg_attr(feature = "serde", derive(serde::Deserialize, serde::Serialize))]
 pub enum EncounterFrame {
+    #[default]
     Engage,
     Disengage,
     UpdatePriority,
@@ -85,12 +86,6 @@ impl EncounterFrame {
 }
 
 const NAME: &str = "EncounterFrame";
-
-impl Default for EncounterFrame {
-    fn default() -> Self {
-        Self::Engage
-    }
-}
 
 impl std::fmt::Display for EncounterFrame {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {

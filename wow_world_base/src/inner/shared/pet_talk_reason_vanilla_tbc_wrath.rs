@@ -5,9 +5,10 @@
 ///     ATTACK = 1;
 /// }
 /// ```
-#[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
+#[derive(Debug, Default, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 #[cfg_attr(feature = "serde", derive(serde::Deserialize, serde::Serialize))]
 pub enum PetTalkReason {
+    #[default]
     SpecialSpell,
     Attack,
 }
@@ -48,12 +49,6 @@ impl PetTalkReason {
 }
 
 const NAME: &str = "PetTalkReason";
-
-impl Default for PetTalkReason {
-    fn default() -> Self {
-        Self::SpecialSpell
-    }
-}
 
 impl std::fmt::Display for PetTalkReason {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {

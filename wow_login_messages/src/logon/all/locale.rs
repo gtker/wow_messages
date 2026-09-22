@@ -17,8 +17,9 @@
 ///     EN_CN = "enCN";
 /// }
 /// ```
-#[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
+#[derive(Debug, Default, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum Locale {
+    #[default]
     EnGb,
     EnUs,
     EsMx,
@@ -96,12 +97,6 @@ impl Locale {
 }
 
 const NAME: &str = "Locale";
-
-impl Default for Locale {
-    fn default() -> Self {
-        Self::EnGb
-    }
-}
 
 impl std::fmt::Display for Locale {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {

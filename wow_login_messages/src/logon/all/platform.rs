@@ -5,8 +5,9 @@
 ///     POWER_PC = "\0PPC";
 /// }
 /// ```
-#[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
+#[derive(Debug, Default, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum Platform {
+    #[default]
     X86,
     PowerPc,
 }
@@ -36,12 +37,6 @@ impl Platform {
 }
 
 const NAME: &str = "Platform";
-
-impl Default for Platform {
-    fn default() -> Self {
-        Self::X86
-    }
-}
 
 impl std::fmt::Display for Platform {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {

@@ -33,9 +33,10 @@
 ///     ZONE_AMBIENCE = 0x32;
 /// }
 /// ```
-#[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
+#[derive(Debug, Default, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 #[cfg_attr(feature = "serde", derive(serde::Deserialize, serde::Serialize))]
 pub enum SoundType {
+    #[default]
     Unused,
     Spells,
     Ui,
@@ -196,12 +197,6 @@ impl SoundType {
 }
 
 const NAME: &str = "SoundType";
-
-impl Default for SoundType {
-    fn default() -> Self {
-        Self::Unused
-    }
-}
 
 impl std::fmt::Display for SoundType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {

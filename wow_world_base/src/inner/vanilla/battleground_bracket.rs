@@ -9,10 +9,11 @@
 ///     SIXTY = 5;
 /// }
 /// ```
-#[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
+#[derive(Debug, Default, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 #[cfg_attr(feature = "serde", derive(serde::Deserialize, serde::Serialize))]
 pub enum BattlegroundBracket {
     /// 10-19
+    #[default]
     Tens,
     /// 20-29
     Twenties,
@@ -78,12 +79,6 @@ impl BattlegroundBracket {
 }
 
 const NAME: &str = "BattlegroundBracket";
-
-impl Default for BattlegroundBracket {
-    fn default() -> Self {
-        Self::Tens
-    }
-}
 
 impl std::fmt::Display for BattlegroundBracket {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {

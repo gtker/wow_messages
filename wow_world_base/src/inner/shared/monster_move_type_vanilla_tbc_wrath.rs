@@ -8,9 +8,10 @@
 ///     FACING_ANGLE = 4;
 /// }
 /// ```
-#[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
+#[derive(Debug, Default, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 #[cfg_attr(feature = "serde", derive(serde::Deserialize, serde::Serialize))]
 pub enum MonsterMoveType {
+    #[default]
     Normal,
     Stop,
     FacingSpot,
@@ -66,12 +67,6 @@ impl MonsterMoveType {
 }
 
 const NAME: &str = "MonsterMoveType";
-
-impl Default for MonsterMoveType {
-    fn default() -> Self {
-        Self::Normal
-    }
-}
 
 impl std::fmt::Display for MonsterMoveType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {

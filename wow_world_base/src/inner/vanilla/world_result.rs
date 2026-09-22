@@ -85,10 +85,11 @@
 ///     CHAR_NAME_FAILURE = 0x51;
 /// }
 /// ```
-#[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
+#[derive(Debug, Default, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 #[cfg_attr(feature = "serde", derive(serde::Deserialize, serde::Serialize))]
 pub enum WorldResult {
     /// Shows `Success` with `Okay` button.
+    #[default]
     ResponseSuccess,
     /// Shows `Failure` with `Okay` button.
     ResponseFailure,
@@ -604,12 +605,6 @@ impl WorldResult {
 }
 
 const NAME: &str = "WorldResult";
-
-impl Default for WorldResult {
-    fn default() -> Self {
-        Self::ResponseSuccess
-    }
-}
 
 impl std::fmt::Display for WorldResult {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {

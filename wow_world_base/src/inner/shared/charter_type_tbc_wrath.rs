@@ -5,9 +5,10 @@
 ///     ARENA = 1;
 /// }
 /// ```
-#[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
+#[derive(Debug, Default, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 #[cfg_attr(feature = "serde", derive(serde::Deserialize, serde::Serialize))]
 pub enum CharterType {
+    #[default]
     Guild,
     Arena,
 }
@@ -48,12 +49,6 @@ impl CharterType {
 }
 
 const NAME: &str = "CharterType";
-
-impl Default for CharterType {
-    fn default() -> Self {
-        Self::Guild
-    }
-}
 
 impl std::fmt::Display for CharterType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {

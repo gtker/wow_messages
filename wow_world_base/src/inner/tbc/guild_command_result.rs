@@ -22,10 +22,11 @@
 ///     GUILD_UNK20 = 0x14;
 /// }
 /// ```
-#[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
+#[derive(Debug, Default, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 #[cfg_attr(feature = "serde", derive(serde::Deserialize, serde::Serialize))]
 pub enum GuildCommandResult {
     /// no message/error
+    #[default]
     PlayerNoMoreInGuild,
     GuildInternal,
     AlreadyInGuild,
@@ -154,12 +155,6 @@ impl GuildCommandResult {
 }
 
 const NAME: &str = "GuildCommandResult";
-
-impl Default for GuildCommandResult {
-    fn default() -> Self {
-        Self::PlayerNoMoreInGuild
-    }
-}
 
 impl std::fmt::Display for GuildCommandResult {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {

@@ -5,9 +5,10 @@
 ///     CHAT = 1;
 /// }
 /// ```
-#[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
+#[derive(Debug, Default, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 #[cfg_attr(feature = "serde", derive(serde::Deserialize, serde::Serialize))]
 pub enum SpamType {
+    #[default]
     Mail,
     Chat,
 }
@@ -48,12 +49,6 @@ impl SpamType {
 }
 
 const NAME: &str = "SpamType";
-
-impl Default for SpamType {
-    fn default() -> Self {
-        Self::Mail
-    }
-}
 
 impl std::fmt::Display for SpamType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {

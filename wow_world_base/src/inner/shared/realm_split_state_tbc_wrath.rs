@@ -6,9 +6,10 @@
 ///     SPLIT_PENDING = 2;
 /// }
 /// ```
-#[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
+#[derive(Debug, Default, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 #[cfg_attr(feature = "serde", derive(serde::Deserialize, serde::Serialize))]
 pub enum RealmSplitState {
+    #[default]
     Normal,
     Split,
     SplitPending,
@@ -54,12 +55,6 @@ impl RealmSplitState {
 }
 
 const NAME: &str = "RealmSplitState";
-
-impl Default for RealmSplitState {
-    fn default() -> Self {
-        Self::Normal
-    }
-}
 
 impl std::fmt::Display for RealmSplitState {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {

@@ -13,10 +13,11 @@
 ///     FINISH_QUEST = 8;
 /// }
 /// ```
-#[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
+#[derive(Debug, Default, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 #[cfg_attr(feature = "serde", derive(serde::Deserialize, serde::Serialize))]
 pub enum QuestPartyMessage {
     /// ERR_QUEST_PUSH_SUCCESS_S
+    #[default]
     SharingQuest,
     /// ERR_QUEST_PUSH_INVALID_S
     CantTakeQuest,
@@ -100,12 +101,6 @@ impl QuestPartyMessage {
 }
 
 const NAME: &str = "QuestPartyMessage";
-
-impl Default for QuestPartyMessage {
-    fn default() -> Self {
-        Self::SharingQuest
-    }
-}
 
 impl std::fmt::Display for QuestPartyMessage {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {

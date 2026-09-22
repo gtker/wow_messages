@@ -5,9 +5,10 @@
 ///     NOT_PRESENT = 0;
 /// }
 /// ```
-#[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
+#[derive(Debug, Default, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 #[cfg_attr(feature = "serde", derive(serde::Deserialize, serde::Serialize))]
 pub enum PetQueryDisabledNames {
+    #[default]
     Present,
     NotPresent,
 }
@@ -48,12 +49,6 @@ impl PetQueryDisabledNames {
 }
 
 const NAME: &str = "PetQueryDisabledNames";
-
-impl Default for PetQueryDisabledNames {
-    fn default() -> Self {
-        Self::Present
-    }
-}
 
 impl std::fmt::Display for PetQueryDisabledNames {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {

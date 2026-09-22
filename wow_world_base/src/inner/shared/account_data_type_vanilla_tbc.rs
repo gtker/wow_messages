@@ -12,9 +12,10 @@
 ///     NUM_ACCOUNT_DATA_TYPES = 8;
 /// }
 /// ```
-#[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
+#[derive(Debug, Default, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 #[cfg_attr(feature = "serde", derive(serde::Deserialize, serde::Serialize))]
 pub enum AccountDataType {
+    #[default]
     GlobalConfigCache,
     PerCharacterConfigCache,
     GlobalBindingsCache,
@@ -90,12 +91,6 @@ impl AccountDataType {
 }
 
 const NAME: &str = "AccountDataType";
-
-impl Default for AccountDataType {
-    fn default() -> Self {
-        Self::GlobalConfigCache
-    }
-}
 
 impl std::fmt::Display for AccountDataType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {

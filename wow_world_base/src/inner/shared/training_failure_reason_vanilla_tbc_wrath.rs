@@ -7,10 +7,11 @@
 ///     NOT_ENOUGH_SKILL = 2;
 /// }
 /// ```
-#[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
+#[derive(Debug, Default, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 #[cfg_attr(feature = "serde", derive(serde::Deserialize, serde::Serialize))]
 pub enum TrainingFailureReason {
     /// Trainer service %d unavailable.
+    #[default]
     Unavailable,
     /// Not enough money for trainer service %d.
     NotEnoughMoney,
@@ -58,12 +59,6 @@ impl TrainingFailureReason {
 }
 
 const NAME: &str = "TrainingFailureReason";
-
-impl Default for TrainingFailureReason {
-    fn default() -> Self {
-        Self::Unavailable
-    }
-}
 
 impl std::fmt::Display for TrainingFailureReason {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {

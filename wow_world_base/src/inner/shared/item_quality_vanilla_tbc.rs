@@ -10,9 +10,10 @@
 ///     ARTIFACT = 6;
 /// }
 /// ```
-#[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
+#[derive(Debug, Default, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 #[cfg_attr(feature = "serde", derive(serde::Deserialize, serde::Serialize))]
 pub enum ItemQuality {
+    #[default]
     Poor,
     Normal,
     Uncommon,
@@ -78,12 +79,6 @@ impl ItemQuality {
 }
 
 const NAME: &str = "ItemQuality";
-
-impl Default for ItemQuality {
-    fn default() -> Self {
-        Self::Poor
-    }
-}
 
 impl std::fmt::Display for ItemQuality {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {

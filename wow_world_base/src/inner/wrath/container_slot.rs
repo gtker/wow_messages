@@ -40,9 +40,10 @@
 ///     SLOT_35 = 35;
 /// }
 /// ```
-#[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
+#[derive(Debug, Default, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 #[cfg_attr(feature = "serde", derive(serde::Deserialize, serde::Serialize))]
 pub enum ContainerSlot {
+    #[default]
     Slot0,
     Slot1,
     Slot2,
@@ -253,12 +254,6 @@ impl ContainerSlot {
 }
 
 const NAME: &str = "ContainerSlot";
-
-impl Default for ContainerSlot {
-    fn default() -> Self {
-        Self::Slot0
-    }
-}
 
 impl std::fmt::Display for ContainerSlot {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {

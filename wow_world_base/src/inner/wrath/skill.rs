@@ -154,9 +154,10 @@
 ///     PET_EXOTIC_SPIRIT_BEAST = 788;
 /// }
 /// ```
-#[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
+#[derive(Debug, Default, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 #[cfg_attr(feature = "serde", derive(serde::Deserialize, serde::Serialize))]
 pub enum Skill {
+    #[default]
     None,
     Frost,
     Fire,
@@ -942,12 +943,6 @@ impl Skill {
 }
 
 const NAME: &str = "Skill";
-
-impl Default for Skill {
-    fn default() -> Self {
-        Self::None
-    }
-}
 
 impl std::fmt::Display for Skill {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {

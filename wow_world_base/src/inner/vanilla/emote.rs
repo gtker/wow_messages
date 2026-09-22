@@ -120,9 +120,10 @@
 ///     STATE_EAT_NO_SHEATHE = 423;
 /// }
 /// ```
-#[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
+#[derive(Debug, Default, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 #[cfg_attr(feature = "serde", derive(serde::Deserialize, serde::Serialize))]
 pub enum Emote {
+    #[default]
     OneshotNone,
     OneshotTalk,
     OneshotBow,
@@ -738,12 +739,6 @@ impl Emote {
 }
 
 const NAME: &str = "Emote";
-
-impl Default for Emote {
-    fn default() -> Self {
-        Self::OneshotNone
-    }
-}
 
 impl std::fmt::Display for Emote {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {

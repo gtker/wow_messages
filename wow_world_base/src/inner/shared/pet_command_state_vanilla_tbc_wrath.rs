@@ -7,9 +7,10 @@
 ///     DISMISS = 3;
 /// }
 /// ```
-#[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
+#[derive(Debug, Default, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 #[cfg_attr(feature = "serde", derive(serde::Deserialize, serde::Serialize))]
 pub enum PetCommandState {
+    #[default]
     Stay,
     Follow,
     Attack,
@@ -60,12 +61,6 @@ impl PetCommandState {
 }
 
 const NAME: &str = "PetCommandState";
-
-impl Default for PetCommandState {
-    fn default() -> Self {
-        Self::Stay
-    }
-}
 
 impl std::fmt::Display for PetCommandState {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {

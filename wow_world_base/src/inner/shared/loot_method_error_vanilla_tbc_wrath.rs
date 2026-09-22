@@ -16,10 +16,11 @@
 ///     NOT_WHILE_SHAPESHIFTED = 16;
 /// }
 /// ```
-#[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
+#[derive(Debug, Default, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 #[cfg_attr(feature = "serde", derive(serde::Deserialize, serde::Serialize))]
 pub enum LootMethodError {
     /// You don't have permission to loot that corpse.
+    #[default]
     DidntKill,
     /// You are too far away to loot that corpse.
     TooFar,
@@ -127,12 +128,6 @@ impl LootMethodError {
 }
 
 const NAME: &str = "LootMethodError";
-
-impl Default for LootMethodError {
-    fn default() -> Self {
-        Self::DidntKill
-    }
-}
 
 impl std::fmt::Display for LootMethodError {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {

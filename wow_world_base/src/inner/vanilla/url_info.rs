@@ -5,9 +5,10 @@
 ///     AVAILABLE = 1;
 /// }
 /// ```
-#[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
+#[derive(Debug, Default, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 #[cfg_attr(feature = "serde", derive(serde::Deserialize, serde::Serialize))]
 pub enum UrlInfo {
+    #[default]
     Unavailable,
     Available,
 }
@@ -48,12 +49,6 @@ impl UrlInfo {
 }
 
 const NAME: &str = "UrlInfo";
-
-impl Default for UrlInfo {
-    fn default() -> Self {
-        Self::Unavailable
-    }
-}
 
 impl std::fmt::Display for UrlInfo {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {

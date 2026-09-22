@@ -18,9 +18,10 @@
 ///     ARENA_TEAM_TOO_MANY_MEMBERS_S = 0x16;
 /// }
 /// ```
-#[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
+#[derive(Debug, Default, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 #[cfg_attr(feature = "serde", derive(serde::Deserialize, serde::Serialize))]
 pub enum ArenaTeamCommandError {
+    #[default]
     ArenaTeamInternal,
     AlreadyInArenaTeam,
     AlreadyInArenaTeamS,
@@ -127,12 +128,6 @@ impl ArenaTeamCommandError {
 }
 
 const NAME: &str = "ArenaTeamCommandError";
-
-impl Default for ArenaTeamCommandError {
-    fn default() -> Self {
-        Self::ArenaTeamInternal
-    }
-}
 
 impl std::fmt::Display for ArenaTeamCommandError {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {

@@ -5,9 +5,10 @@
 ///     FULL = 1;
 /// }
 /// ```
-#[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
+#[derive(Debug, Default, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 #[cfg_attr(feature = "serde", derive(serde::Deserialize, serde::Serialize))]
 pub enum LfgListUpdateType {
+    #[default]
     Partial,
     Full,
 }
@@ -48,12 +49,6 @@ impl LfgListUpdateType {
 }
 
 const NAME: &str = "LfgListUpdateType";
-
-impl Default for LfgListUpdateType {
-    fn default() -> Self {
-        Self::Partial
-    }
-}
 
 impl std::fmt::Display for LfgListUpdateType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {

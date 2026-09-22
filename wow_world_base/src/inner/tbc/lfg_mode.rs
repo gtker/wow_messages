@@ -5,9 +5,10 @@
 ///     LOOKING_FOR_MORE = 1;
 /// }
 /// ```
-#[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
+#[derive(Debug, Default, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 #[cfg_attr(feature = "serde", derive(serde::Deserialize, serde::Serialize))]
 pub enum LfgMode {
+    #[default]
     LookingForGroup,
     LookingForMore,
 }
@@ -48,12 +49,6 @@ impl LfgMode {
 }
 
 const NAME: &str = "LfgMode";
-
-impl Default for LfgMode {
-    fn default() -> Self {
-        Self::LookingForGroup
-    }
-}
 
 impl std::fmt::Display for LfgMode {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {

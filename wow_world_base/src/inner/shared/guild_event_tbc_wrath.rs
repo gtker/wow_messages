@@ -23,9 +23,10 @@
 ///     GUILD_BANK_TEXT_CHANGED = 0x13;
 /// }
 /// ```
-#[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
+#[derive(Debug, Default, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 #[cfg_attr(feature = "serde", derive(serde::Deserialize, serde::Serialize))]
 pub enum GuildEvent {
+    #[default]
     Promotion,
     Demotion,
     Motd,
@@ -166,12 +167,6 @@ impl GuildEvent {
 }
 
 const NAME: &str = "GuildEvent";
-
-impl Default for GuildEvent {
-    fn default() -> Self {
-        Self::Promotion
-    }
-}
 
 impl std::fmt::Display for GuildEvent {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {

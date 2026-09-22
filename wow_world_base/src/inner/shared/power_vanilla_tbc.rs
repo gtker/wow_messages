@@ -9,10 +9,11 @@
 ///     HEALTH = 0xFE;
 /// }
 /// ```
-#[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
+#[derive(Debug, Default, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 #[cfg_attr(feature = "serde", derive(serde::Deserialize, serde::Serialize))]
 pub enum Power {
     /// mangoszero: The most common one, mobs usually have this or rage
+    #[default]
     Mana,
     /// mangoszero: This is what warriors use to cast their spells
     Rage,
@@ -79,12 +80,6 @@ impl Power {
 }
 
 const NAME: &str = "Power";
-
-impl Default for Power {
-    fn default() -> Self {
-        Self::Mana
-    }
-}
 
 impl std::fmt::Display for Power {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {

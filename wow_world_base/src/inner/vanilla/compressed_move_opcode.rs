@@ -9,9 +9,10 @@
 ///     SMSG_SPLINE_MOVE_SET_WALK_MODE = 0x030E;
 /// }
 /// ```
-#[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
+#[derive(Debug, Default, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 #[cfg_attr(feature = "serde", derive(serde::Deserialize, serde::Serialize))]
 pub enum CompressedMoveOpcode {
+    #[default]
     SmsgMonsterMove,
     SmsgMonsterMoveTransport,
     SmsgSplineSetRunSpeed,
@@ -72,12 +73,6 @@ impl CompressedMoveOpcode {
 }
 
 const NAME: &str = "CompressedMoveOpcode";
-
-impl Default for CompressedMoveOpcode {
-    fn default() -> Self {
-        Self::SmsgMonsterMove
-    }
-}
 
 impl std::fmt::Display for CompressedMoveOpcode {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {

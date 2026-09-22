@@ -197,9 +197,10 @@
 ///     USE_NORMAL_MOVEMENT_SPEED = 191;
 /// }
 /// ```
-#[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
+#[derive(Debug, Default, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 #[cfg_attr(feature = "serde", derive(serde::Deserialize, serde::Serialize))]
 pub enum AuraMod {
+    #[default]
     None,
     BindSight,
     ModPossess,
@@ -1190,12 +1191,6 @@ impl AuraMod {
 }
 
 const NAME: &str = "AuraMod";
-
-impl Default for AuraMod {
-    fn default() -> Self {
-        Self::None
-    }
-}
 
 impl std::fmt::Display for AuraMod {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {

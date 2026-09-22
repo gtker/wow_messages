@@ -13,9 +13,10 @@
 ///     CUSTOM = 9;
 /// }
 /// ```
-#[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
+#[derive(Debug, Default, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 #[cfg_attr(feature = "serde", derive(serde::Deserialize, serde::Serialize))]
 pub enum UnitStandState {
+    #[default]
     Stand,
     Sit,
     SitChair,
@@ -98,12 +99,6 @@ impl UnitStandState {
 }
 
 const NAME: &str = "UnitStandState";
-
-impl Default for UnitStandState {
-    fn default() -> Self {
-        Self::Stand
-    }
-}
 
 impl std::fmt::Display for UnitStandState {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {

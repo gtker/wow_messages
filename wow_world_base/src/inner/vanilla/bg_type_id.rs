@@ -8,10 +8,11 @@
 ///     REMOVE_FROM_QUEUE = 0xFFFFFFFE;
 /// }
 /// ```
-#[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
+#[derive(Debug, Default, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 #[cfg_attr(feature = "serde", derive(serde::Deserialize, serde::Serialize))]
 pub enum BgTypeId {
     /// Your group has joined a battleground queue, but you are not eligible
+    #[default]
     NotEligible,
     /// Your group has joined the queue for AV
     QueuedForAv,
@@ -71,12 +72,6 @@ impl BgTypeId {
 }
 
 const NAME: &str = "BgTypeId";
-
-impl Default for BgTypeId {
-    fn default() -> Self {
-        Self::NotEligible
-    }
-}
 
 impl std::fmt::Display for BgTypeId {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {

@@ -5,9 +5,10 @@
 ///     ASSISTANT = 1;
 /// }
 /// ```
-#[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
+#[derive(Debug, Default, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 #[cfg_attr(feature = "serde", derive(serde::Deserialize, serde::Serialize))]
 pub enum PartyRole {
+    #[default]
     MainTank,
     Assistant,
 }
@@ -48,12 +49,6 @@ impl PartyRole {
 }
 
 const NAME: &str = "PartyRole";
-
-impl Default for PartyRole {
-    fn default() -> Self {
-        Self::MainTank
-    }
-}
 
 impl std::fmt::Display for PartyRole {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {

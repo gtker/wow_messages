@@ -12,10 +12,11 @@
 ///     INTERNAL_BAG_ERROR = 9;
 /// }
 /// ```
-#[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
+#[derive(Debug, Default, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 #[cfg_attr(feature = "serde", derive(serde::Deserialize, serde::Serialize))]
 pub enum SellItemResult {
     /// The item was not found.
+    #[default]
     ErrCantFindItem,
     /// The merchant doesn't want that item.
     ErrCantSellItem,
@@ -99,12 +100,6 @@ impl SellItemResult {
 }
 
 const NAME: &str = "SellItemResult";
-
-impl Default for SellItemResult {
-    fn default() -> Self {
-        Self::ErrCantFindItem
-    }
-}
 
 impl std::fmt::Display for SellItemResult {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {

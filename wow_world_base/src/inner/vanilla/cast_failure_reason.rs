@@ -149,10 +149,11 @@
 ///     UNKNOWN = 0x91;
 /// }
 /// ```
-#[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
+#[derive(Debug, Default, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 #[cfg_attr(feature = "serde", derive(serde::Deserialize, serde::Serialize))]
 pub enum CastFailureReason {
     /// You are in combat
+    #[default]
     AffectingCombat,
     /// You are already at full Health.
     AlreadyAtFullHealth,
@@ -1058,12 +1059,6 @@ impl CastFailureReason {
 }
 
 const NAME: &str = "CastFailureReason";
-
-impl Default for CastFailureReason {
-    fn default() -> Self {
-        Self::AffectingCombat
-    }
-}
 
 impl std::fmt::Display for CastFailureReason {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {

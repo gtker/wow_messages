@@ -15,9 +15,10 @@
 ///     MSG_DIFFERENT_SERVER_DAILY = 11;
 /// }
 /// ```
-#[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
+#[derive(Debug, Default, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 #[cfg_attr(feature = "serde", derive(serde::Deserialize, serde::Serialize))]
 pub enum QuestPartyMessage {
+    #[default]
     MsgSharingQuest,
     MsgCantTakeQuest,
     MsgAcceptQuest,
@@ -108,12 +109,6 @@ impl QuestPartyMessage {
 }
 
 const NAME: &str = "QuestPartyMessage";
-
-impl Default for QuestPartyMessage {
-    fn default() -> Self {
-        Self::MsgSharingQuest
-    }
-}
 
 impl std::fmt::Display for QuestPartyMessage {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {

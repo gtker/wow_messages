@@ -12,9 +12,10 @@
 ///     UNDERWEAR = 0x04;
 /// }
 /// ```
-#[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
+#[derive(Debug, Default, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 #[cfg_attr(feature = "serde", derive(serde::Deserialize, serde::Serialize))]
 pub enum SelectionType {
+    #[default]
     BaseSkin,
     Face,
     FacialHair,
@@ -70,12 +71,6 @@ impl SelectionType {
 }
 
 const NAME: &str = "SelectionType";
-
-impl Default for SelectionType {
-    fn default() -> Self {
-        Self::BaseSkin
-    }
-}
 
 impl std::fmt::Display for SelectionType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {

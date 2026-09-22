@@ -8,10 +8,11 @@
 ///     WAIT_LEAVE = 4;
 /// }
 /// ```
-#[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
+#[derive(Debug, Default, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 #[cfg_attr(feature = "serde", derive(serde::Deserialize, serde::Serialize))]
 pub enum StatusId {
     /// first status, should mean bg is not instance
+    #[default]
     None,
     /// means bg is empty and waiting for queue
     WaitQueue,
@@ -71,12 +72,6 @@ impl StatusId {
 }
 
 const NAME: &str = "StatusId";
-
-impl Default for StatusId {
-    fn default() -> Self {
-        Self::None
-    }
-}
 
 impl std::fmt::Display for StatusId {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {

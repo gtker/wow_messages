@@ -16,9 +16,10 @@
 ///     DECLENSION_DOESNT_MATCH_BASE_NAME = 16;
 /// }
 /// ```
-#[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
+#[derive(Debug, Default, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 #[cfg_attr(feature = "serde", derive(serde::Deserialize, serde::Serialize))]
 pub enum PetNameInvalidReason {
+    #[default]
     Invalid,
     NoName,
     TooShort,
@@ -114,12 +115,6 @@ impl PetNameInvalidReason {
 }
 
 const NAME: &str = "PetNameInvalidReason";
-
-impl Default for PetNameInvalidReason {
-    fn default() -> Self {
-        Self::Invalid
-    }
-}
 
 impl std::fmt::Display for PetNameInvalidReason {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {

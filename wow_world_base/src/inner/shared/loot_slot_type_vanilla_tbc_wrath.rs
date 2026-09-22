@@ -8,10 +8,11 @@
 ///     TYPE_OWNER = 4;
 /// }
 /// ```
-#[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
+#[derive(Debug, Default, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 #[cfg_attr(feature = "serde", derive(serde::Deserialize, serde::Serialize))]
 pub enum LootSlotType {
     /// player can loot the item.
+    #[default]
     TypeAllowLoot,
     /// roll is ongoing. player cannot loot.
     TypeRollOngoing,
@@ -71,12 +72,6 @@ impl LootSlotType {
 }
 
 const NAME: &str = "LootSlotType";
-
-impl Default for LootSlotType {
-    fn default() -> Self {
-        Self::TypeAllowLoot
-    }
-}
 
 impl std::fmt::Display for LootSlotType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {

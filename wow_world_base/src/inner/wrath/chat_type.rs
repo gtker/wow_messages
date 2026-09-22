@@ -55,9 +55,10 @@
 ///     PARTY_LEADER = 0x33;
 /// }
 /// ```
-#[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
+#[derive(Debug, Default, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 #[cfg_attr(feature = "serde", derive(serde::Deserialize, serde::Serialize))]
 pub enum ChatType {
+    #[default]
     System,
     Say,
     Party,
@@ -348,12 +349,6 @@ impl ChatType {
 }
 
 const NAME: &str = "ChatType";
-
-impl Default for ChatType {
-    fn default() -> Self {
-        Self::System
-    }
-}
 
 impl std::fmt::Display for ChatType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {

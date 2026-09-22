@@ -1647,9 +1647,10 @@
 ///     THE_DEAD_SCAR3 = 4140;
 /// }
 /// ```
-#[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
+#[derive(Debug, Default, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 #[cfg_attr(feature = "serde", derive(serde::Deserialize, serde::Serialize))]
 pub enum Area {
+    #[default]
     None,
     DunMorogh,
     Longshore,
@@ -9900,12 +9901,6 @@ impl Area {
 }
 
 const NAME: &str = "Area";
-
-impl Default for Area {
-    fn default() -> Self {
-        Self::None
-    }
-}
 
 impl std::fmt::Display for Area {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {

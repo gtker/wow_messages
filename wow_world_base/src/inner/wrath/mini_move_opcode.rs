@@ -7,9 +7,10 @@
 ///     SMSG_MOVE_SET_HOVER = 0xF4;
 /// }
 /// ```
-#[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
+#[derive(Debug, Default, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 #[cfg_attr(feature = "serde", derive(serde::Deserialize, serde::Serialize))]
 pub enum MiniMoveOpcode {
+    #[default]
     SmsgForceMoveRoot,
     SmsgMoveFeatherFall,
     SmsgMoveWaterWalk,
@@ -60,12 +61,6 @@ impl MiniMoveOpcode {
 }
 
 const NAME: &str = "MiniMoveOpcode";
-
-impl Default for MiniMoveOpcode {
-    fn default() -> Self {
-        Self::SmsgForceMoveRoot
-    }
-}
 
 impl std::fmt::Display for MiniMoveOpcode {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
