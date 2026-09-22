@@ -824,7 +824,7 @@ Fields that all containers have:
 | Name | Offset | Size | Type |
 |------|--------|------|------|
 |`CONTAINER_NUM_SLOTS`| 0x0040 | 1 | INT |
-|`CONTAINER_SLOT_1`| 0x0042 | 72 | CUSTOM |
+|`CONTAINER_SLOT`| 0x0042 | 72 | CUSTOM |
 
 
 Fields that all units have:
