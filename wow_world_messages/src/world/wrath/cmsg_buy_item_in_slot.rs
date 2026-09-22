@@ -10,7 +10,7 @@ use crate::Guid;
 ///     u32 vendor_slot;
 ///     Guid bag;
 ///     u8 bag_slot;
-///     u8 amount;
+///     u32 amount;
 /// }
 /// ```
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
@@ -21,13 +21,13 @@ pub struct CMSG_BUY_ITEM_IN_SLOT {
     pub vendor_slot: u32,
     pub bag: Guid,
     pub bag_slot: u8,
-    pub amount: u8,
+    pub amount: u32,
 }
 
 impl crate::private::Sealed for CMSG_BUY_ITEM_IN_SLOT {}
 impl CMSG_BUY_ITEM_IN_SLOT {
     fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
-        if body_size != 26 {
+        if body_size != 29 {
             return Err(crate::errors::ParseErrorKind::InvalidSize);
         }
 
@@ -46,8 +46,8 @@ impl CMSG_BUY_ITEM_IN_SLOT {
         // bag_slot: u8
         let bag_slot = crate::util::read_u8_le(&mut r)?;
 
-        // amount: u8
-        let amount = crate::util::read_u8_le(&mut r)?;
+        // amount: u32
+        let amount = crate::util::read_u32_le(&mut r)?;
 
         Ok(Self {
             vendor,
@@ -69,49 +69,8 @@ impl crate::Message for CMSG_BUY_ITEM_IN_SLOT {
         "CMSG_BUY_ITEM_IN_SLOT"
     }
 
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        use std::fmt::Write;
-        use crate::traits::Message;
-
-        let mut s = String::new();
-
-        writeln!(s, "test CMSG_BUY_ITEM_IN_SLOT {{").unwrap();
-        // Members
-        writeln!(s, "    vendor = {};", self.vendor.guid()).unwrap();
-        writeln!(s, "    item = {};", self.item).unwrap();
-        writeln!(s, "    vendor_slot = {};", self.vendor_slot).unwrap();
-        writeln!(s, "    bag = {};", self.bag.guid()).unwrap();
-        writeln!(s, "    bag_slot = {};", self.bag_slot).unwrap();
-        writeln!(s, "    amount = {};", self.amount).unwrap();
-
-        writeln!(s, "}} [").unwrap();
-
-        let [a, b] = 30_u16.to_be_bytes();
-        writeln!(s, "    {a:#04X}, {b:#04X}, /* size */").unwrap();
-        let [a, b, c, d] = 419_u32.to_le_bytes();
-        writeln!(s, "    {a:#04X}, {b:#04X}, {c:#04X}, {d:#04X}, /* opcode */").unwrap();
-        let mut bytes: Vec<u8> = Vec::new();
-        self.write_into_vec(&mut bytes).unwrap();
-        let mut bytes = bytes.into_iter();
-
-        crate::util::write_bytes(&mut s, &mut bytes, 8, "vendor", "    ");
-        crate::util::write_bytes(&mut s, &mut bytes, 4, "item", "    ");
-        crate::util::write_bytes(&mut s, &mut bytes, 4, "vendor_slot", "    ");
-        crate::util::write_bytes(&mut s, &mut bytes, 8, "bag", "    ");
-        crate::util::write_bytes(&mut s, &mut bytes, 1, "bag_slot", "    ");
-        crate::util::write_bytes(&mut s, &mut bytes, 1, "amount", "    ");
-
-
-        writeln!(s, "] {{").unwrap();
-        writeln!(s, "    versions = \"{}\";", std::env::var("WOWM_TEST_CASE_WORLD_VERSION").unwrap_or("3.3.5".to_string())).unwrap();
-        writeln!(s, "}}\n").unwrap();
-
-        Some(s)
-    }
-
     fn size_without_header(&self) -> u32 {
-        26
+        29
     }
 
     fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
@@ -130,7 +89,7 @@ impl crate::Message for CMSG_BUY_ITEM_IN_SLOT {
         // bag_slot: u8
         w.write_all(&self.bag_slot.to_le_bytes())?;
 
-        // amount: u8
+        // amount: u32
         w.write_all(&self.amount.to_le_bytes())?;
 
         Ok(())
@@ -144,4 +103,94 @@ impl crate::Message for CMSG_BUY_ITEM_IN_SLOT {
 
 #[cfg(feature = "wrath")]
 impl crate::wrath::ClientMessage for CMSG_BUY_ITEM_IN_SLOT {}
+
+#[cfg(test)]
+mod test {
+    #![allow(clippy::missing_const_for_fn)]
+    use super::CMSG_BUY_ITEM_IN_SLOT;
+    use super::*;
+    use super::super::*;
+    use crate::wrath::opcodes::ClientOpcodeMessage;
+    use crate::Guid;
+    use crate::wrath::{ClientMessage, ServerMessage};
+
+    const HEADER_SIZE: usize = 2 + 4;
+    const RAW0: [u8; 35] = [ 0x00, 0x21, 0xA3, 0x01, 0x00, 0x00, 0x64, 0x00, 0x00,
+         0x00, 0x00, 0x00, 0x00, 0x00, 0xC8, 0x00, 0x00, 0x00, 0x01, 0x00, 0x00,
+         0x00, 0x2C, 0x01, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x07, 0x03, 0x00,
+         0x00, 0x00, ];
+
+    pub(crate) fn expected0() -> CMSG_BUY_ITEM_IN_SLOT {
+        CMSG_BUY_ITEM_IN_SLOT {
+            vendor: Guid::new(0x64),
+            item: 0xC8,
+            vendor_slot: 0x1,
+            bag: Guid::new(0x12C),
+            bag_slot: 0x7,
+            amount: 0x3,
+        }
+
+    }
+
+    // Generated from `wow_message_parser/wowm/world/item/cmsg_buy_item_in_slot.wowm` line 23.
+    #[cfg(feature = "sync")]
+    #[cfg_attr(feature = "sync", test)]
+    fn cmsg_buy_item_in_slot0() {
+        let expected = expected0();
+        let t = ClientOpcodeMessage::read_unencrypted(&mut std::io::Cursor::new(&RAW0)).unwrap();
+        let t = match t {
+            ClientOpcodeMessage::CMSG_BUY_ITEM_IN_SLOT(t) => t,
+            opcode => panic!("incorrect opcode. Expected CMSG_BUY_ITEM_IN_SLOT, got {opcode:#?}"),
+        };
+
+        assert_eq!(t.as_ref(), &expected);
+        assert_eq!(29 + HEADER_SIZE, RAW0.len());
+
+        let mut dest = Vec::with_capacity(RAW0.len());
+        expected.write_unencrypted_client(&mut std::io::Cursor::new(&mut dest)).unwrap();
+
+        assert_eq!(dest, RAW0);
+    }
+
+    // Generated from `wow_message_parser/wowm/world/item/cmsg_buy_item_in_slot.wowm` line 23.
+    #[cfg(feature = "tokio")]
+    #[cfg_attr(feature = "tokio", tokio::test)]
+    async fn tokio_cmsg_buy_item_in_slot0() {
+        let expected = expected0();
+        let t = ClientOpcodeMessage::tokio_read_unencrypted(&mut std::io::Cursor::new(&RAW0)).await.unwrap();
+        let t = match t {
+            ClientOpcodeMessage::CMSG_BUY_ITEM_IN_SLOT(t) => t,
+            opcode => panic!("incorrect opcode. Expected CMSG_BUY_ITEM_IN_SLOT, got {opcode:#?}"),
+        };
+
+        assert_eq!(t.as_ref(), &expected);
+        assert_eq!(29 + HEADER_SIZE, RAW0.len());
+
+        let mut dest = Vec::with_capacity(RAW0.len());
+        expected.tokio_write_unencrypted_client(&mut std::io::Cursor::new(&mut dest)).await.unwrap();
+
+        assert_eq!(dest, RAW0);
+    }
+
+    // Generated from `wow_message_parser/wowm/world/item/cmsg_buy_item_in_slot.wowm` line 23.
+    #[cfg(feature = "async-std")]
+    #[cfg_attr(feature = "async-std", async_std::test)]
+    async fn astd_cmsg_buy_item_in_slot0() {
+        let expected = expected0();
+        let t = ClientOpcodeMessage::astd_read_unencrypted(&mut async_std::io::Cursor::new(&RAW0)).await.unwrap();
+        let t = match t {
+            ClientOpcodeMessage::CMSG_BUY_ITEM_IN_SLOT(t) => t,
+            opcode => panic!("incorrect opcode. Expected CMSG_BUY_ITEM_IN_SLOT, got {opcode:#?}"),
+        };
+
+        assert_eq!(t.as_ref(), &expected);
+        assert_eq!(29 + HEADER_SIZE, RAW0.len());
+
+        let mut dest = Vec::with_capacity(RAW0.len());
+        expected.astd_write_unencrypted_client(&mut async_std::io::Cursor::new(&mut dest)).await.unwrap();
+
+        assert_eq!(dest, RAW0);
+    }
+
+}
 

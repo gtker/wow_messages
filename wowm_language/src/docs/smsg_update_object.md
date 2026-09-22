@@ -238,7 +238,7 @@ last slots exercise both ends of the Wrath EContainerFields range.
 3, 52, 18, // [0].Object.guid1: PackedGuid
 // UpdateMask
 5, // amount_of_blocks
-0, 0, 0, 7, // Block 0
+7, 0, 0, 0, // Block 0
 0, 0, 0, 0, // Block 1
 13, 0, 0, 0, // Block 2
 0, 0, 0, 0, // Block 3

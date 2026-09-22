@@ -12,7 +12,26 @@ cmsg CMSG_BUY_ITEM = 0x01A2 {
     Guid vendor;
     Item item;
     u32 slot;
-    u8 amount;
+    u32 amount;
+    u8 unknown1;
 } {
+    versions = "3.3.5";
+}
+
+test CMSG_BUY_ITEM {
+    vendor = 100;
+    item = 200;
+    slot = 1;
+    amount = 3;
+    unknown1 = 0;
+} [
+    0x00, 0x19, /* size */
+    0xA2, 0x01, 0x00, 0x00, /* opcode */
+    0x64, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, /* vendor */
+    0xC8, 0x00, 0x00, 0x00, /* item */
+    0x01, 0x00, 0x00, 0x00, /* slot */
+    0x03, 0x00, 0x00, 0x00, /* amount */
+    0x00, /* unknown1 */
+] {
     versions = "3.3.5";
 }
