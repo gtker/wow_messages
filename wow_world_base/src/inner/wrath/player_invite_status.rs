@@ -57,10 +57,10 @@ impl Default for PlayerInviteStatus {
 
 impl std::fmt::Display for PlayerInviteStatus {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
-            Self::AlreadyInGroup => f.write_str("AlreadyInGroup"),
-            Self::NotInGroup => f.write_str("NotInGroup"),
-        }
+        f.write_str(match self {
+            Self::AlreadyInGroup => "AlreadyInGroup",
+            Self::NotInGroup => "NotInGroup",
+        })
     }
 }
 

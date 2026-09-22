@@ -57,10 +57,10 @@ impl Default for ArenaFaction {
 
 impl std::fmt::Display for ArenaFaction {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
-            Self::Horde => f.write_str("Horde"),
-            Self::Alliance => f.write_str("Alliance"),
-        }
+        f.write_str(match self {
+            Self::Horde => "Horde",
+            Self::Alliance => "Alliance",
+        })
     }
 }
 

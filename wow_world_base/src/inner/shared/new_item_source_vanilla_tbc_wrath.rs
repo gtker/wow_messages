@@ -57,10 +57,10 @@ impl Default for NewItemSource {
 
 impl std::fmt::Display for NewItemSource {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
-            Self::Looted => f.write_str("Looted"),
-            Self::FromNpc => f.write_str("FromNpc"),
-        }
+        f.write_str(match self {
+            Self::Looted => "Looted",
+            Self::FromNpc => "FromNpc",
+        })
     }
 }
 

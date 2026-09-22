@@ -69,12 +69,12 @@ impl Default for BarberShopResult {
 
 impl std::fmt::Display for BarberShopResult {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
-            Self::Ok => f.write_str("Ok"),
-            Self::NotEnoughMoney => f.write_str("NotEnoughMoney"),
-            Self::MustBeSeatedInBarberChair => f.write_str("MustBeSeatedInBarberChair"),
-            Self::NotEnoughMoney2 => f.write_str("NotEnoughMoney2"),
-        }
+        f.write_str(match self {
+            Self::Ok => "Ok",
+            Self::NotEnoughMoney => "NotEnoughMoney",
+            Self::MustBeSeatedInBarberChair => "MustBeSeatedInBarberChair",
+            Self::NotEnoughMoney2 => "NotEnoughMoney2",
+        })
     }
 }
 

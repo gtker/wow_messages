@@ -69,12 +69,12 @@ impl Default for BuyBankSlotResult {
 
 impl std::fmt::Display for BuyBankSlotResult {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
-            Self::FailedTooMany => f.write_str("FailedTooMany"),
-            Self::InsufficientFunds => f.write_str("InsufficientFunds"),
-            Self::NotBanker => f.write_str("NotBanker"),
-            Self::Ok => f.write_str("Ok"),
-        }
+        f.write_str(match self {
+            Self::FailedTooMany => "FailedTooMany",
+            Self::InsufficientFunds => "InsufficientFunds",
+            Self::NotBanker => "NotBanker",
+            Self::Ok => "Ok",
+        })
     }
 }
 

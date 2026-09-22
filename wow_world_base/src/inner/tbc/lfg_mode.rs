@@ -57,10 +57,10 @@ impl Default for LfgMode {
 
 impl std::fmt::Display for LfgMode {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
-            Self::LookingForGroup => f.write_str("LookingForGroup"),
-            Self::LookingForMore => f.write_str("LookingForMore"),
-        }
+        f.write_str(match self {
+            Self::LookingForGroup => "LookingForGroup",
+            Self::LookingForMore => "LookingForMore",
+        })
     }
 }
 

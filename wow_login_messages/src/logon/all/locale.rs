@@ -105,22 +105,22 @@ impl Default for Locale {
 
 impl std::fmt::Display for Locale {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
-            Self::EnGb => f.write_str("EnGb"),
-            Self::EnUs => f.write_str("EnUs"),
-            Self::EsMx => f.write_str("EsMx"),
-            Self::PtBr => f.write_str("PtBr"),
-            Self::FrFr => f.write_str("FrFr"),
-            Self::DeDe => f.write_str("DeDe"),
-            Self::EsEs => f.write_str("EsEs"),
-            Self::PtPt => f.write_str("PtPt"),
-            Self::ItIt => f.write_str("ItIt"),
-            Self::RuRu => f.write_str("RuRu"),
-            Self::KoKr => f.write_str("KoKr"),
-            Self::ZhTw => f.write_str("ZhTw"),
-            Self::EnTw => f.write_str("EnTw"),
-            Self::EnCn => f.write_str("EnCn"),
-        }
+        f.write_str(match self {
+            Self::EnGb => "EnGb",
+            Self::EnUs => "EnUs",
+            Self::EsMx => "EsMx",
+            Self::PtBr => "PtBr",
+            Self::FrFr => "FrFr",
+            Self::DeDe => "DeDe",
+            Self::EsEs => "EsEs",
+            Self::PtPt => "PtPt",
+            Self::ItIt => "ItIt",
+            Self::RuRu => "RuRu",
+            Self::KoKr => "KoKr",
+            Self::ZhTw => "ZhTw",
+            Self::EnTw => "EnTw",
+            Self::EnCn => "EnCn",
+        })
     }
 }
 

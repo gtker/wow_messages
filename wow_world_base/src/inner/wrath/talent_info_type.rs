@@ -57,10 +57,10 @@ impl Default for TalentInfoType {
 
 impl std::fmt::Display for TalentInfoType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
-            Self::Player => f.write_str("Player"),
-            Self::Pet => f.write_str("Pet"),
-        }
+        f.write_str(match self {
+            Self::Player => "Player",
+            Self::Pet => "Pet",
+        })
     }
 }
 

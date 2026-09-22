@@ -122,19 +122,19 @@ impl Default for MountResult {
 
 impl std::fmt::Display for MountResult {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
-            Self::InvalidMountee => f.write_str("InvalidMountee"),
-            Self::TooFarAway => f.write_str("TooFarAway"),
-            Self::AlreadyMounted => f.write_str("AlreadyMounted"),
-            Self::NotMountable => f.write_str("NotMountable"),
-            Self::NotYourPet => f.write_str("NotYourPet"),
-            Self::Other => f.write_str("Other"),
-            Self::Looting => f.write_str("Looting"),
-            Self::RaceCantMount => f.write_str("RaceCantMount"),
-            Self::Shapeshifted => f.write_str("Shapeshifted"),
-            Self::ForcedDismount => f.write_str("ForcedDismount"),
-            Self::Ok => f.write_str("Ok"),
-        }
+        f.write_str(match self {
+            Self::InvalidMountee => "InvalidMountee",
+            Self::TooFarAway => "TooFarAway",
+            Self::AlreadyMounted => "AlreadyMounted",
+            Self::NotMountable => "NotMountable",
+            Self::NotYourPet => "NotYourPet",
+            Self::Other => "Other",
+            Self::Looting => "Looting",
+            Self::RaceCantMount => "RaceCantMount",
+            Self::Shapeshifted => "Shapeshifted",
+            Self::ForcedDismount => "ForcedDismount",
+            Self::Ok => "Ok",
+        })
     }
 }
 

@@ -75,13 +75,13 @@ impl Default for GroupLootSetting {
 
 impl std::fmt::Display for GroupLootSetting {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
-            Self::FreeForAll => f.write_str("FreeForAll"),
-            Self::RoundRobin => f.write_str("RoundRobin"),
-            Self::MasterLoot => f.write_str("MasterLoot"),
-            Self::GroupLoot => f.write_str("GroupLoot"),
-            Self::NeedBeforeGreed => f.write_str("NeedBeforeGreed"),
-        }
+        f.write_str(match self {
+            Self::FreeForAll => "FreeForAll",
+            Self::RoundRobin => "RoundRobin",
+            Self::MasterLoot => "MasterLoot",
+            Self::GroupLoot => "GroupLoot",
+            Self::NeedBeforeGreed => "NeedBeforeGreed",
+        })
     }
 }
 

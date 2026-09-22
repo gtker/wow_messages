@@ -57,10 +57,10 @@ impl Default for SpamType {
 
 impl std::fmt::Display for SpamType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
-            Self::Mail => f.write_str("Mail"),
-            Self::Chat => f.write_str("Chat"),
-        }
+        f.write_str(match self {
+            Self::Mail => "Mail",
+            Self::Chat => "Chat",
+        })
     }
 }
 

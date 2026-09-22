@@ -57,10 +57,10 @@ impl Default for QuestCompletable {
 
 impl std::fmt::Display for QuestCompletable {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
-            Self::NotCompletable => f.write_str("NotCompletable"),
-            Self::Completeable => f.write_str("Completeable"),
-        }
+        f.write_str(match self {
+            Self::NotCompletable => "NotCompletable",
+            Self::Completeable => "Completeable",
+        })
     }
 }
 

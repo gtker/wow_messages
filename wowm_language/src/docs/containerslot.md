@@ -91,3 +91,4 @@ The basic type is `u8`, a 1 byte (8 bit) integer.
 | `SLOT_35` | 35 (0x23) |  |
 
 Used in:
+

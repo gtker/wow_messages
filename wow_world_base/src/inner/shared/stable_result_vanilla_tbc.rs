@@ -80,13 +80,13 @@ impl Default for StableResult {
 
 impl std::fmt::Display for StableResult {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
-            Self::ErrMoney => f.write_str("ErrMoney"),
-            Self::ErrStable => f.write_str("ErrStable"),
-            Self::SuccessStable => f.write_str("SuccessStable"),
-            Self::SuccessUnstable => f.write_str("SuccessUnstable"),
-            Self::SuccessBuySlot => f.write_str("SuccessBuySlot"),
-        }
+        f.write_str(match self {
+            Self::ErrMoney => "ErrMoney",
+            Self::ErrStable => "ErrStable",
+            Self::SuccessStable => "SuccessStable",
+            Self::SuccessUnstable => "SuccessUnstable",
+            Self::SuccessBuySlot => "SuccessBuySlot",
+        })
     }
 }
 

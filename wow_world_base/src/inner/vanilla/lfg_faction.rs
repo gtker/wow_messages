@@ -67,11 +67,11 @@ impl Default for LfgFaction {
 
 impl std::fmt::Display for LfgFaction {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
-            Self::Neutral => f.write_str("Neutral"),
-            Self::Horde => f.write_str("Horde"),
-            Self::Alliance => f.write_str("Alliance"),
-        }
+        f.write_str(match self {
+            Self::Neutral => "Neutral",
+            Self::Horde => "Horde",
+            Self::Alliance => "Alliance",
+        })
     }
 }
 

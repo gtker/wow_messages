@@ -64,11 +64,11 @@ impl Default for SheathState {
 
 impl std::fmt::Display for SheathState {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
-            Self::Unarmed => f.write_str("Unarmed"),
-            Self::Melee => f.write_str("Melee"),
-            Self::Ranged => f.write_str("Ranged"),
-        }
+        f.write_str(match self {
+            Self::Unarmed => "Unarmed",
+            Self::Melee => "Melee",
+            Self::Ranged => "Ranged",
+        })
     }
 }
 

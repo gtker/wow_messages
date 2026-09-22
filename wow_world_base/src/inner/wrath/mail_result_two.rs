@@ -130,22 +130,22 @@ impl Default for MailResultTwo {
 
 impl std::fmt::Display for MailResultTwo {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
-            Self::Ok => f.write_str("Ok"),
-            Self::ErrEquipError => f.write_str("ErrEquipError"),
-            Self::ErrCannotSendToSelf => f.write_str("ErrCannotSendToSelf"),
-            Self::ErrNotEnoughMoney => f.write_str("ErrNotEnoughMoney"),
-            Self::ErrRecipientNotFound => f.write_str("ErrRecipientNotFound"),
-            Self::ErrNotYourTeam => f.write_str("ErrNotYourTeam"),
-            Self::ErrInternalError => f.write_str("ErrInternalError"),
-            Self::ErrDisabledForTrialAcc => f.write_str("ErrDisabledForTrialAcc"),
-            Self::ErrRecipientCapReached => f.write_str("ErrRecipientCapReached"),
-            Self::ErrCantSendWrappedCod => f.write_str("ErrCantSendWrappedCod"),
-            Self::ErrMailAndChatSuspended => f.write_str("ErrMailAndChatSuspended"),
-            Self::ErrTooManyAttachments => f.write_str("ErrTooManyAttachments"),
-            Self::ErrMailAttachmentInvalid => f.write_str("ErrMailAttachmentInvalid"),
-            Self::ErrItemHasExpired => f.write_str("ErrItemHasExpired"),
-        }
+        f.write_str(match self {
+            Self::Ok => "Ok",
+            Self::ErrEquipError => "ErrEquipError",
+            Self::ErrCannotSendToSelf => "ErrCannotSendToSelf",
+            Self::ErrNotEnoughMoney => "ErrNotEnoughMoney",
+            Self::ErrRecipientNotFound => "ErrRecipientNotFound",
+            Self::ErrNotYourTeam => "ErrNotYourTeam",
+            Self::ErrInternalError => "ErrInternalError",
+            Self::ErrDisabledForTrialAcc => "ErrDisabledForTrialAcc",
+            Self::ErrRecipientCapReached => "ErrRecipientCapReached",
+            Self::ErrCantSendWrappedCod => "ErrCantSendWrappedCod",
+            Self::ErrMailAndChatSuspended => "ErrMailAndChatSuspended",
+            Self::ErrTooManyAttachments => "ErrTooManyAttachments",
+            Self::ErrMailAttachmentInvalid => "ErrMailAttachmentInvalid",
+            Self::ErrItemHasExpired => "ErrItemHasExpired",
+        })
     }
 }
 

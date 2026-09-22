@@ -189,32 +189,32 @@ impl Default for CreatureFamily {
 
 impl std::fmt::Display for CreatureFamily {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
-            Self::None => f.write_str("None"),
-            Self::Wolf => f.write_str("Wolf"),
-            Self::Cat => f.write_str("Cat"),
-            Self::Spider => f.write_str("Spider"),
-            Self::Bear => f.write_str("Bear"),
-            Self::Boar => f.write_str("Boar"),
-            Self::Crocolisk => f.write_str("Crocolisk"),
-            Self::CarrionBird => f.write_str("CarrionBird"),
-            Self::Crab => f.write_str("Crab"),
-            Self::Gorilla => f.write_str("Gorilla"),
-            Self::Raptor => f.write_str("Raptor"),
-            Self::Tallstrider => f.write_str("Tallstrider"),
-            Self::Felhunter => f.write_str("Felhunter"),
-            Self::Voidwalker => f.write_str("Voidwalker"),
-            Self::Succubus => f.write_str("Succubus"),
-            Self::Doomguard => f.write_str("Doomguard"),
-            Self::Scorpid => f.write_str("Scorpid"),
-            Self::Turtle => f.write_str("Turtle"),
-            Self::Imp => f.write_str("Imp"),
-            Self::Bat => f.write_str("Bat"),
-            Self::Hyena => f.write_str("Hyena"),
-            Self::Owl => f.write_str("Owl"),
-            Self::WindSerpent => f.write_str("WindSerpent"),
-            Self::RemoteControl => f.write_str("RemoteControl"),
-        }
+        f.write_str(match self {
+            Self::None => "None",
+            Self::Wolf => "Wolf",
+            Self::Cat => "Cat",
+            Self::Spider => "Spider",
+            Self::Bear => "Bear",
+            Self::Boar => "Boar",
+            Self::Crocolisk => "Crocolisk",
+            Self::CarrionBird => "CarrionBird",
+            Self::Crab => "Crab",
+            Self::Gorilla => "Gorilla",
+            Self::Raptor => "Raptor",
+            Self::Tallstrider => "Tallstrider",
+            Self::Felhunter => "Felhunter",
+            Self::Voidwalker => "Voidwalker",
+            Self::Succubus => "Succubus",
+            Self::Doomguard => "Doomguard",
+            Self::Scorpid => "Scorpid",
+            Self::Turtle => "Turtle",
+            Self::Imp => "Imp",
+            Self::Bat => "Bat",
+            Self::Hyena => "Hyena",
+            Self::Owl => "Owl",
+            Self::WindSerpent => "WindSerpent",
+            Self::RemoteControl => "RemoteControl",
+        })
     }
 }
 

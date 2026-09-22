@@ -57,10 +57,10 @@ impl Default for TitleEarnStatus {
 
 impl std::fmt::Display for TitleEarnStatus {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
-            Self::Lost => f.write_str("Lost"),
-            Self::Earned => f.write_str("Earned"),
-        }
+        f.write_str(match self {
+            Self::Lost => "Lost",
+            Self::Earned => "Earned",
+        })
     }
 }
 

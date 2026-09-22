@@ -80,13 +80,13 @@ impl Default for AiReaction {
 
 impl std::fmt::Display for AiReaction {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
-            Self::Alert => f.write_str("Alert"),
-            Self::Friendly => f.write_str("Friendly"),
-            Self::Hostile => f.write_str("Hostile"),
-            Self::Afraid => f.write_str("Afraid"),
-            Self::Destroy => f.write_str("Destroy"),
-        }
+        f.write_str(match self {
+            Self::Alert => "Alert",
+            Self::Friendly => "Friendly",
+            Self::Hostile => "Hostile",
+            Self::Afraid => "Afraid",
+            Self::Destroy => "Destroy",
+        })
     }
 }
 

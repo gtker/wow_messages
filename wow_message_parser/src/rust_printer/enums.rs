@@ -168,19 +168,23 @@ fn print_display(s: &mut Writer, e: &Definer) {
         s.body(
             "fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result",
             |s| {
-                s.body("match self", |s| {
-                    for field in e.fields() {
-                        let display = match field.tags().display() {
-                            None => field.rust_name(),
-                            Some(v) => v,
-                        };
-                        s.wln(format!(
-                            r#"Self::{name} => f.write_str("{display}"),"#,
-                            name = field.rust_name(),
-                            display = display,
-                        ));
-                    }
-                });
+                s.body_closing_with(
+                    "f.write_str(match self",
+                    |s| {
+                        for field in e.fields() {
+                            let display = match field.tags().display() {
+                                None => field.rust_name(),
+                                Some(v) => v,
+                            };
+                            s.wln(format!(
+                                r#"Self::{name} => "{display}","#,
+                                name = field.rust_name(),
+                                display = display,
+                            ));
+                        }
+                    },
+                    ")",
+                );
             },
         );
     });

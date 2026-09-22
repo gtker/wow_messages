@@ -99,17 +99,17 @@ impl Default for AccountDataType {
 
 impl std::fmt::Display for AccountDataType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
-            Self::GlobalConfigCache => f.write_str("GlobalConfigCache"),
-            Self::PerCharacterConfigCache => f.write_str("PerCharacterConfigCache"),
-            Self::GlobalBindingsCache => f.write_str("GlobalBindingsCache"),
-            Self::PerCharacterBindingsCache => f.write_str("PerCharacterBindingsCache"),
-            Self::GlobalMacrosCache => f.write_str("GlobalMacrosCache"),
-            Self::PerCharacterMacrosCache => f.write_str("PerCharacterMacrosCache"),
-            Self::PerCharacterLayoutCache => f.write_str("PerCharacterLayoutCache"),
-            Self::PerCharacterChatCache => f.write_str("PerCharacterChatCache"),
-            Self::NumAccountDataTypes => f.write_str("NumAccountDataTypes"),
-        }
+        f.write_str(match self {
+            Self::GlobalConfigCache => "GlobalConfigCache",
+            Self::PerCharacterConfigCache => "PerCharacterConfigCache",
+            Self::GlobalBindingsCache => "GlobalBindingsCache",
+            Self::PerCharacterBindingsCache => "PerCharacterBindingsCache",
+            Self::GlobalMacrosCache => "GlobalMacrosCache",
+            Self::PerCharacterMacrosCache => "PerCharacterMacrosCache",
+            Self::PerCharacterLayoutCache => "PerCharacterLayoutCache",
+            Self::PerCharacterChatCache => "PerCharacterChatCache",
+            Self::NumAccountDataTypes => "NumAccountDataTypes",
+        })
     }
 }
 

@@ -85,14 +85,14 @@ impl Default for SizeClass {
 
 impl std::fmt::Display for SizeClass {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
-            Self::None => f.write_str("None"),
-            Self::Small => f.write_str("Small"),
-            Self::Medium => f.write_str("Medium"),
-            Self::Large => f.write_str("Large"),
-            Self::Giant => f.write_str("Giant"),
-            Self::Colossal => f.write_str("Colossal"),
-        }
+        f.write_str(match self {
+            Self::None => "None",
+            Self::Small => "Small",
+            Self::Medium => "Medium",
+            Self::Large => "Large",
+            Self::Giant => "Giant",
+            Self::Colossal => "Colossal",
+        })
     }
 }
 

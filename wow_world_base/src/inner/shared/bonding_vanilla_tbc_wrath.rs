@@ -82,14 +82,14 @@ impl Default for Bonding {
 
 impl std::fmt::Display for Bonding {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
-            Self::NoBind => f.write_str("NoBind"),
-            Self::PickUp => f.write_str("Binds when picked up"),
-            Self::Equip => f.write_str("Binds when equipped"),
-            Self::Use => f.write_str("Binds on use"),
-            Self::QuestItem => f.write_str("Quest Item"),
-            Self::QuestItem1 => f.write_str("Quest Item"),
-        }
+        f.write_str(match self {
+            Self::NoBind => "NoBind",
+            Self::PickUp => "Binds when picked up",
+            Self::Equip => "Binds when equipped",
+            Self::Use => "Binds on use",
+            Self::QuestItem => "Quest Item",
+            Self::QuestItem1 => "Quest Item",
+        })
     }
 }
 

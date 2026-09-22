@@ -117,20 +117,20 @@ impl Default for WeatherType {
 
 impl std::fmt::Display for WeatherType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
-            Self::Fine => f.write_str("Fine"),
-            Self::LightRain => f.write_str("LightRain"),
-            Self::MediumRain => f.write_str("MediumRain"),
-            Self::HeavyRain => f.write_str("HeavyRain"),
-            Self::LightSnow => f.write_str("LightSnow"),
-            Self::MediumSnow => f.write_str("MediumSnow"),
-            Self::HeavySnow => f.write_str("HeavySnow"),
-            Self::LightSandstorm => f.write_str("LightSandstorm"),
-            Self::MediumSandstorm => f.write_str("MediumSandstorm"),
-            Self::HeavySandstorm => f.write_str("HeavySandstorm"),
-            Self::Thunders => f.write_str("Thunders"),
-            Self::Blackrain => f.write_str("Blackrain"),
-        }
+        f.write_str(match self {
+            Self::Fine => "Fine",
+            Self::LightRain => "LightRain",
+            Self::MediumRain => "MediumRain",
+            Self::HeavyRain => "HeavyRain",
+            Self::LightSnow => "LightSnow",
+            Self::MediumSnow => "MediumSnow",
+            Self::HeavySnow => "HeavySnow",
+            Self::LightSandstorm => "LightSandstorm",
+            Self::MediumSandstorm => "MediumSandstorm",
+            Self::HeavySandstorm => "HeavySandstorm",
+            Self::Thunders => "Thunders",
+            Self::Blackrain => "Blackrain",
+        })
     }
 }
 

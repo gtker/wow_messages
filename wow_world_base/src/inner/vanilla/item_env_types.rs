@@ -67,11 +67,11 @@ impl Default for ItemEnvTypes {
 
 impl std::fmt::Display for ItemEnvTypes {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
-            Self::Shield => f.write_str("Shield"),
-            Self::MetalWeapon => f.write_str("MetalWeapon"),
-            Self::WoodWeapon => f.write_str("WoodWeapon"),
-        }
+        f.write_str(match self {
+            Self::Shield => "Shield",
+            Self::MetalWeapon => "MetalWeapon",
+            Self::WoodWeapon => "WoodWeapon",
+        })
     }
 }
 

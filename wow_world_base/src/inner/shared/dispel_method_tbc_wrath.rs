@@ -57,10 +57,10 @@ impl Default for DispelMethod {
 
 impl std::fmt::Display for DispelMethod {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
-            Self::Dispelled => f.write_str("Dispelled"),
-            Self::Cleansed => f.write_str("Cleansed"),
-        }
+        f.write_str(match self {
+            Self::Dispelled => "Dispelled",
+            Self::Cleansed => "Cleansed",
+        })
     }
 }
 

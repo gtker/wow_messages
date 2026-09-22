@@ -65,11 +65,11 @@ impl Default for AddonType {
 
 impl std::fmt::Display for AddonType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
-            Self::Banned => f.write_str("Banned"),
-            Self::Enabled => f.write_str("Enabled"),
-            Self::Blizzard => f.write_str("Blizzard"),
-        }
+        f.write_str(match self {
+            Self::Banned => "Banned",
+            Self::Enabled => "Enabled",
+            Self::Blizzard => "Blizzard",
+        })
     }
 }
 

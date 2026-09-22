@@ -75,13 +75,13 @@ impl Default for ServerMessageType {
 
 impl std::fmt::Display for ServerMessageType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
-            Self::ShutdownTime => f.write_str("ShutdownTime"),
-            Self::RestartTime => f.write_str("RestartTime"),
-            Self::Custom => f.write_str("Custom"),
-            Self::ShutdownCancelled => f.write_str("ShutdownCancelled"),
-            Self::RestartCancelled => f.write_str("RestartCancelled"),
-        }
+        f.write_str(match self {
+            Self::ShutdownTime => "ShutdownTime",
+            Self::RestartTime => "RestartTime",
+            Self::Custom => "Custom",
+            Self::ShutdownCancelled => "ShutdownCancelled",
+            Self::RestartCancelled => "RestartCancelled",
+        })
     }
 }
 

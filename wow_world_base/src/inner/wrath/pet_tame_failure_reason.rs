@@ -126,21 +126,21 @@ impl Default for PetTameFailureReason {
 
 impl std::fmt::Display for PetTameFailureReason {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
-            Self::InvalidCreature => f.write_str("InvalidCreature"),
-            Self::TooMany => f.write_str("TooMany"),
-            Self::CreatureAlreadyOwned => f.write_str("CreatureAlreadyOwned"),
-            Self::NotTameable => f.write_str("NotTameable"),
-            Self::AnotherSummonActive => f.write_str("AnotherSummonActive"),
-            Self::UnitsCantTame => f.write_str("UnitsCantTame"),
-            Self::NoPetAvailable => f.write_str("NoPetAvailable"),
-            Self::InternaLerror => f.write_str("InternaLerror"),
-            Self::TooHighLevel => f.write_str("TooHighLevel"),
-            Self::Dead => f.write_str("Dead"),
-            Self::NotDead => f.write_str("NotDead"),
-            Self::CantControlExotic => f.write_str("CantControlExotic"),
-            Self::UnknownError => f.write_str("UnknownError"),
-        }
+        f.write_str(match self {
+            Self::InvalidCreature => "InvalidCreature",
+            Self::TooMany => "TooMany",
+            Self::CreatureAlreadyOwned => "CreatureAlreadyOwned",
+            Self::NotTameable => "NotTameable",
+            Self::AnotherSummonActive => "AnotherSummonActive",
+            Self::UnitsCantTame => "UnitsCantTame",
+            Self::NoPetAvailable => "NoPetAvailable",
+            Self::InternaLerror => "InternaLerror",
+            Self::TooHighLevel => "TooHighLevel",
+            Self::Dead => "Dead",
+            Self::NotDead => "NotDead",
+            Self::CantControlExotic => "CantControlExotic",
+            Self::UnknownError => "UnknownError",
+        })
     }
 }
 

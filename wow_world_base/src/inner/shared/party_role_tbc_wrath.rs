@@ -57,10 +57,10 @@ impl Default for PartyRole {
 
 impl std::fmt::Display for PartyRole {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
-            Self::MainTank => f.write_str("MainTank"),
-            Self::Assistant => f.write_str("Assistant"),
-        }
+        f.write_str(match self {
+            Self::MainTank => "MainTank",
+            Self::Assistant => "Assistant",
+        })
     }
 }
 

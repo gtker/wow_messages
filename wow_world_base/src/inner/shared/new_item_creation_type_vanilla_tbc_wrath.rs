@@ -57,10 +57,10 @@ impl Default for NewItemCreationType {
 
 impl std::fmt::Display for NewItemCreationType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
-            Self::Received => f.write_str("Received"),
-            Self::Created => f.write_str("Created"),
-        }
+        f.write_str(match self {
+            Self::Received => "Received",
+            Self::Created => "Created",
+        })
     }
 }
 

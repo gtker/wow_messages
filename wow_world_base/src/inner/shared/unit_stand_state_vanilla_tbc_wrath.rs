@@ -107,18 +107,18 @@ impl Default for UnitStandState {
 
 impl std::fmt::Display for UnitStandState {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
-            Self::Stand => f.write_str("Stand"),
-            Self::Sit => f.write_str("Sit"),
-            Self::SitChair => f.write_str("SitChair"),
-            Self::Sleep => f.write_str("Sleep"),
-            Self::SitLowChair => f.write_str("SitLowChair"),
-            Self::SitMediumChair => f.write_str("SitMediumChair"),
-            Self::SitHighChair => f.write_str("SitHighChair"),
-            Self::Dead => f.write_str("Dead"),
-            Self::Kneel => f.write_str("Kneel"),
-            Self::Custom => f.write_str("Custom"),
-        }
+        f.write_str(match self {
+            Self::Stand => "Stand",
+            Self::Sit => "Sit",
+            Self::SitChair => "SitChair",
+            Self::Sleep => "Sleep",
+            Self::SitLowChair => "SitLowChair",
+            Self::SitMediumChair => "SitMediumChair",
+            Self::SitHighChair => "SitHighChair",
+            Self::Dead => "Dead",
+            Self::Kneel => "Kneel",
+            Self::Custom => "Custom",
+        })
     }
 }
 

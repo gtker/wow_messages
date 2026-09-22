@@ -153,26 +153,26 @@ impl Default for Language {
 
 impl std::fmt::Display for Language {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
-            Self::Universal => f.write_str("Universal"),
-            Self::Orcish => f.write_str("Orcish"),
-            Self::Darnassian => f.write_str("Darnassian"),
-            Self::Taurahe => f.write_str("Taurahe"),
-            Self::Dwarvish => f.write_str("Dwarvish"),
-            Self::Common => f.write_str("Common"),
-            Self::Demonic => f.write_str("Demonic"),
-            Self::Titan => f.write_str("Titan"),
-            Self::Thalassian => f.write_str("Thalassian"),
-            Self::Draconic => f.write_str("Draconic"),
-            Self::Kalimag => f.write_str("Kalimag"),
-            Self::Gnomish => f.write_str("Gnomish"),
-            Self::Troll => f.write_str("Troll"),
-            Self::Gutterspeak => f.write_str("Gutterspeak"),
-            Self::Draenei => f.write_str("Draenei"),
-            Self::Zombie => f.write_str("Zombie"),
-            Self::GnomishBinary => f.write_str("GnomishBinary"),
-            Self::GoblinBinary => f.write_str("GoblinBinary"),
-        }
+        f.write_str(match self {
+            Self::Universal => "Universal",
+            Self::Orcish => "Orcish",
+            Self::Darnassian => "Darnassian",
+            Self::Taurahe => "Taurahe",
+            Self::Dwarvish => "Dwarvish",
+            Self::Common => "Common",
+            Self::Demonic => "Demonic",
+            Self::Titan => "Titan",
+            Self::Thalassian => "Thalassian",
+            Self::Draconic => "Draconic",
+            Self::Kalimag => "Kalimag",
+            Self::Gnomish => "Gnomish",
+            Self::Troll => "Troll",
+            Self::Gutterspeak => "Gutterspeak",
+            Self::Draenei => "Draenei",
+            Self::Zombie => "Zombie",
+            Self::GnomishBinary => "GnomishBinary",
+            Self::GoblinBinary => "GoblinBinary",
+        })
     }
 }
 

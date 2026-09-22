@@ -57,10 +57,10 @@ impl Default for GuildMemberStatus {
 
 impl std::fmt::Display for GuildMemberStatus {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
-            Self::Offline => f.write_str("Offline"),
-            Self::Online => f.write_str("Online"),
-        }
+        f.write_str(match self {
+            Self::Offline => "Offline",
+            Self::Online => "Online",
+        })
     }
 }
 

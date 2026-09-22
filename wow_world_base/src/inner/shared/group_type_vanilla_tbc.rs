@@ -57,10 +57,10 @@ impl Default for GroupType {
 
 impl std::fmt::Display for GroupType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
-            Self::Normal => f.write_str("Normal"),
-            Self::Raid => f.write_str("Raid"),
-        }
+        f.write_str(match self {
+            Self::Normal => "Normal",
+            Self::Raid => "Raid",
+        })
     }
 }
 

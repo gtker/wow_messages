@@ -184,31 +184,31 @@ impl Default for GuildCommandResult {
 
 impl std::fmt::Display for GuildCommandResult {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
-            Self::PlayerNoMoreInGuild => f.write_str("PlayerNoMoreInGuild"),
-            Self::GuildInternal => f.write_str("GuildInternal"),
-            Self::AlreadyInGuild => f.write_str("AlreadyInGuild"),
-            Self::AlreadyInGuildS => f.write_str("AlreadyInGuildS"),
-            Self::InvitedToGuild => f.write_str("InvitedToGuild"),
-            Self::AlreadyInvitedToGuildS => f.write_str("AlreadyInvitedToGuildS"),
-            Self::GuildNameInvalid => f.write_str("GuildNameInvalid"),
-            Self::GuildNameExistsS => f.write_str("GuildNameExistsS"),
-            Self::GuildLeaderLeaveOrPermissions => f.write_str("GuildLeaderLeaveOrPermissions"),
-            Self::GuildPlayerNotInGuild => f.write_str("GuildPlayerNotInGuild"),
-            Self::GuildPlayerNotInGuildS => f.write_str("GuildPlayerNotInGuildS"),
-            Self::GuildPlayerNotFoundS => f.write_str("GuildPlayerNotFoundS"),
-            Self::GuildNotAllied => f.write_str("GuildNotAllied"),
-            Self::GuildRankTooHighS => f.write_str("GuildRankTooHighS"),
-            Self::GuildRankTooLowS => f.write_str("GuildRankTooLowS"),
-            Self::GuildRanksLocked => f.write_str("GuildRanksLocked"),
-            Self::GuildRankInUse => f.write_str("GuildRankInUse"),
-            Self::GuildIgnoringYouS => f.write_str("GuildIgnoringYouS"),
-            Self::GuildUnk1 => f.write_str("GuildUnk1"),
-            Self::GuildWithdrawLimit => f.write_str("GuildWithdrawLimit"),
-            Self::GuildNotEnoughMoney => f.write_str("GuildNotEnoughMoney"),
-            Self::GuildBankFull => f.write_str("GuildBankFull"),
-            Self::GuildItemNotFound => f.write_str("GuildItemNotFound"),
-        }
+        f.write_str(match self {
+            Self::PlayerNoMoreInGuild => "PlayerNoMoreInGuild",
+            Self::GuildInternal => "GuildInternal",
+            Self::AlreadyInGuild => "AlreadyInGuild",
+            Self::AlreadyInGuildS => "AlreadyInGuildS",
+            Self::InvitedToGuild => "InvitedToGuild",
+            Self::AlreadyInvitedToGuildS => "AlreadyInvitedToGuildS",
+            Self::GuildNameInvalid => "GuildNameInvalid",
+            Self::GuildNameExistsS => "GuildNameExistsS",
+            Self::GuildLeaderLeaveOrPermissions => "GuildLeaderLeaveOrPermissions",
+            Self::GuildPlayerNotInGuild => "GuildPlayerNotInGuild",
+            Self::GuildPlayerNotInGuildS => "GuildPlayerNotInGuildS",
+            Self::GuildPlayerNotFoundS => "GuildPlayerNotFoundS",
+            Self::GuildNotAllied => "GuildNotAllied",
+            Self::GuildRankTooHighS => "GuildRankTooHighS",
+            Self::GuildRankTooLowS => "GuildRankTooLowS",
+            Self::GuildRanksLocked => "GuildRanksLocked",
+            Self::GuildRankInUse => "GuildRankInUse",
+            Self::GuildIgnoringYouS => "GuildIgnoringYouS",
+            Self::GuildUnk1 => "GuildUnk1",
+            Self::GuildWithdrawLimit => "GuildWithdrawLimit",
+            Self::GuildNotEnoughMoney => "GuildNotEnoughMoney",
+            Self::GuildBankFull => "GuildBankFull",
+            Self::GuildItemNotFound => "GuildItemNotFound",
+        })
     }
 }
 

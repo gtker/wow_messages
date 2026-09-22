@@ -129,22 +129,22 @@ impl Default for LfgUpdateType {
 
 impl std::fmt::Display for LfgUpdateType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
-            Self::Default => f.write_str("Default"),
-            Self::LeaderLeave => f.write_str("LeaderLeave"),
-            Self::RolecheckAborted => f.write_str("RolecheckAborted"),
-            Self::Join => f.write_str("Join"),
-            Self::RolecheckFailed => f.write_str("RolecheckFailed"),
-            Self::Leave => f.write_str("Leave"),
-            Self::ProposalFailed => f.write_str("ProposalFailed"),
-            Self::ProposalDeclined => f.write_str("ProposalDeclined"),
-            Self::GroupFound => f.write_str("GroupFound"),
-            Self::AddedToQueue => f.write_str("AddedToQueue"),
-            Self::ProposalBegin => f.write_str("ProposalBegin"),
-            Self::Status => f.write_str("Status"),
-            Self::GroupMemberOffline => f.write_str("GroupMemberOffline"),
-            Self::GroupDisband => f.write_str("GroupDisband"),
-        }
+        f.write_str(match self {
+            Self::Default => "Default",
+            Self::LeaderLeave => "LeaderLeave",
+            Self::RolecheckAborted => "RolecheckAborted",
+            Self::Join => "Join",
+            Self::RolecheckFailed => "RolecheckFailed",
+            Self::Leave => "Leave",
+            Self::ProposalFailed => "ProposalFailed",
+            Self::ProposalDeclined => "ProposalDeclined",
+            Self::GroupFound => "GroupFound",
+            Self::AddedToQueue => "AddedToQueue",
+            Self::ProposalBegin => "ProposalBegin",
+            Self::Status => "Status",
+            Self::GroupMemberOffline => "GroupMemberOffline",
+            Self::GroupDisband => "GroupDisband",
+        })
     }
 }
 

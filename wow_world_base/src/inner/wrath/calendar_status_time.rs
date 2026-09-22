@@ -57,10 +57,10 @@ impl Default for CalendarStatusTime {
 
 impl std::fmt::Display for CalendarStatusTime {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
-            Self::NotPresent => f.write_str("NotPresent"),
-            Self::Present => f.write_str("Present"),
-        }
+        f.write_str(match self {
+            Self::NotPresent => "NotPresent",
+            Self::Present => "Present",
+        })
     }
 }
 

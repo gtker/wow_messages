@@ -69,12 +69,12 @@ impl Default for WeatherType {
 
 impl std::fmt::Display for WeatherType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
-            Self::Fine => f.write_str("Fine"),
-            Self::Rain => f.write_str("Rain"),
-            Self::Snow => f.write_str("Snow"),
-            Self::Storm => f.write_str("Storm"),
-        }
+        f.write_str(match self {
+            Self::Fine => "Fine",
+            Self::Rain => "Rain",
+            Self::Snow => "Snow",
+            Self::Storm => "Storm",
+        })
     }
 }
 

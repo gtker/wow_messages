@@ -153,26 +153,26 @@ impl Default for Race {
 
 impl std::fmt::Display for Race {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
-            Self::Human => f.write_str("Human"),
-            Self::Orc => f.write_str("Orc"),
-            Self::Dwarf => f.write_str("Dwarf"),
-            Self::NightElf => f.write_str("NightElf"),
-            Self::Undead => f.write_str("Undead"),
-            Self::Tauren => f.write_str("Tauren"),
-            Self::Gnome => f.write_str("Gnome"),
-            Self::Troll => f.write_str("Troll"),
-            Self::Goblin => f.write_str("Goblin"),
-            Self::BloodElf => f.write_str("BloodElf"),
-            Self::Draenei => f.write_str("Draenei"),
-            Self::FelOrc => f.write_str("FelOrc"),
-            Self::Naga => f.write_str("Naga"),
-            Self::Broken => f.write_str("Broken"),
-            Self::Skeleton => f.write_str("Skeleton"),
-            Self::Vrykul => f.write_str("Vrykul"),
-            Self::Tuskarr => f.write_str("Tuskarr"),
-            Self::ForestTroll => f.write_str("ForestTroll"),
-        }
+        f.write_str(match self {
+            Self::Human => "Human",
+            Self::Orc => "Orc",
+            Self::Dwarf => "Dwarf",
+            Self::NightElf => "NightElf",
+            Self::Undead => "Undead",
+            Self::Tauren => "Tauren",
+            Self::Gnome => "Gnome",
+            Self::Troll => "Troll",
+            Self::Goblin => "Goblin",
+            Self::BloodElf => "BloodElf",
+            Self::Draenei => "Draenei",
+            Self::FelOrc => "FelOrc",
+            Self::Naga => "Naga",
+            Self::Broken => "Broken",
+            Self::Skeleton => "Skeleton",
+            Self::Vrykul => "Vrykul",
+            Self::Tuskarr => "Tuskarr",
+            Self::ForestTroll => "ForestTroll",
+        })
     }
 }
 

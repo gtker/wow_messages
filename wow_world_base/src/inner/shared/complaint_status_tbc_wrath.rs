@@ -63,11 +63,11 @@ impl Default for ComplaintStatus {
 
 impl std::fmt::Display for ComplaintStatus {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
-            Self::Disabled => f.write_str("Disabled"),
-            Self::EnabledWithoutAutoIgnore => f.write_str("EnabledWithoutAutoIgnore"),
-            Self::EnabledWithAutoIgnore => f.write_str("EnabledWithAutoIgnore"),
-        }
+        f.write_str(match self {
+            Self::Disabled => "Disabled",
+            Self::EnabledWithoutAutoIgnore => "EnabledWithoutAutoIgnore",
+            Self::EnabledWithAutoIgnore => "EnabledWithAutoIgnore",
+        })
     }
 }
 

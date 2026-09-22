@@ -72,14 +72,14 @@ impl Default for ProtocolVersion {
 
 impl std::fmt::Display for ProtocolVersion {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
-            Self::Two => f.write_str("Two"),
-            Self::Three => f.write_str("Three"),
-            Self::Five => f.write_str("Five"),
-            Self::Six => f.write_str("Six"),
-            Self::Seven => f.write_str("Seven"),
-            Self::Eight => f.write_str("Eight"),
-        }
+        f.write_str(match self {
+            Self::Two => "Two",
+            Self::Three => "Three",
+            Self::Five => "Five",
+            Self::Six => "Six",
+            Self::Seven => "Seven",
+            Self::Eight => "Eight",
+        })
     }
 }
 

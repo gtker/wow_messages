@@ -63,11 +63,11 @@ impl Default for BattlegroundWinner {
 
 impl std::fmt::Display for BattlegroundWinner {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
-            Self::Horde => f.write_str("Horde"),
-            Self::Alliance => f.write_str("Alliance"),
-            Self::None => f.write_str("None"),
-        }
+        f.write_str(match self {
+            Self::Horde => "Horde",
+            Self::Alliance => "Alliance",
+            Self::None => "None",
+        })
     }
 }
 

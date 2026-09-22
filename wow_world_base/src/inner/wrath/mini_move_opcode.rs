@@ -69,12 +69,12 @@ impl Default for MiniMoveOpcode {
 
 impl std::fmt::Display for MiniMoveOpcode {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
-            Self::SmsgForceMoveRoot => f.write_str("SmsgForceMoveRoot"),
-            Self::SmsgMoveFeatherFall => f.write_str("SmsgMoveFeatherFall"),
-            Self::SmsgMoveWaterWalk => f.write_str("SmsgMoveWaterWalk"),
-            Self::SmsgMoveSetHover => f.write_str("SmsgMoveSetHover"),
-        }
+        f.write_str(match self {
+            Self::SmsgForceMoveRoot => "SmsgForceMoveRoot",
+            Self::SmsgMoveFeatherFall => "SmsgMoveFeatherFall",
+            Self::SmsgMoveWaterWalk => "SmsgMoveWaterWalk",
+            Self::SmsgMoveSetHover => "SmsgMoveSetHover",
+        })
     }
 }
 

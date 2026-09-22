@@ -79,13 +79,13 @@ impl Default for RaidInstanceMessage {
 
 impl std::fmt::Display for RaidInstanceMessage {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
-            Self::WarningHours => f.write_str("WarningHours"),
-            Self::WarningMin => f.write_str("WarningMin"),
-            Self::WarningMinSoon => f.write_str("WarningMinSoon"),
-            Self::Welcome => f.write_str("Welcome"),
-            Self::Expired => f.write_str("Expired"),
-        }
+        f.write_str(match self {
+            Self::WarningHours => "WarningHours",
+            Self::WarningMin => "WarningMin",
+            Self::WarningMinSoon => "WarningMinSoon",
+            Self::Welcome => "Welcome",
+            Self::Expired => "Expired",
+        })
     }
 }
 

@@ -97,16 +97,16 @@ impl Default for ClientLanguage {
 
 impl std::fmt::Display for ClientLanguage {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
-            Self::English => f.write_str("English"),
-            Self::Korean => f.write_str("Korean"),
-            Self::French => f.write_str("French"),
-            Self::German => f.write_str("German"),
-            Self::Chinese => f.write_str("Chinese"),
-            Self::Taiwanese => f.write_str("Taiwanese"),
-            Self::SpanishSpain => f.write_str("SpanishSpain"),
-            Self::SpanishLatinAmerica => f.write_str("SpanishLatinAmerica"),
-        }
+        f.write_str(match self {
+            Self::English => "English",
+            Self::Korean => "Korean",
+            Self::French => "French",
+            Self::German => "German",
+            Self::Chinese => "Chinese",
+            Self::Taiwanese => "Taiwanese",
+            Self::SpanishSpain => "SpanishSpain",
+            Self::SpanishLatinAmerica => "SpanishLatinAmerica",
+        })
     }
 }
 

@@ -117,20 +117,20 @@ impl Default for BuybackSlot {
 
 impl std::fmt::Display for BuybackSlot {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
-            Self::Slot1 => f.write_str("Slot1"),
-            Self::Slot2 => f.write_str("Slot2"),
-            Self::Slot3 => f.write_str("Slot3"),
-            Self::Slot4 => f.write_str("Slot4"),
-            Self::Slot5 => f.write_str("Slot5"),
-            Self::Slot6 => f.write_str("Slot6"),
-            Self::Slot7 => f.write_str("Slot7"),
-            Self::Slot8 => f.write_str("Slot8"),
-            Self::Slot9 => f.write_str("Slot9"),
-            Self::Slot10 => f.write_str("Slot10"),
-            Self::Slot11 => f.write_str("Slot11"),
-            Self::Slot12 => f.write_str("Slot12"),
-        }
+        f.write_str(match self {
+            Self::Slot1 => "Slot1",
+            Self::Slot2 => "Slot2",
+            Self::Slot3 => "Slot3",
+            Self::Slot4 => "Slot4",
+            Self::Slot5 => "Slot5",
+            Self::Slot6 => "Slot6",
+            Self::Slot7 => "Slot7",
+            Self::Slot8 => "Slot8",
+            Self::Slot9 => "Slot9",
+            Self::Slot10 => "Slot10",
+            Self::Slot11 => "Slot11",
+            Self::Slot12 => "Slot12",
+        })
     }
 }
 

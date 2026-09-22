@@ -57,10 +57,10 @@ impl Default for RandomBg {
 
 impl std::fmt::Display for RandomBg {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
-            Self::NotRandom => f.write_str("NotRandom"),
-            Self::Random => f.write_str("Random"),
-        }
+        f.write_str(match self {
+            Self::NotRandom => "NotRandom",
+            Self::Random => "Random",
+        })
     }
 }
 

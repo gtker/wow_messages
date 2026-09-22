@@ -105,18 +105,18 @@ impl Default for CalendarStatus {
 
 impl std::fmt::Display for CalendarStatus {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
-            Self::Invited => f.write_str("Invited"),
-            Self::Accepted => f.write_str("Accepted"),
-            Self::Declined => f.write_str("Declined"),
-            Self::Confirmed => f.write_str("Confirmed"),
-            Self::Out => f.write_str("Out"),
-            Self::Standby => f.write_str("Standby"),
-            Self::SignedUp => f.write_str("SignedUp"),
-            Self::NotSignedUp => f.write_str("NotSignedUp"),
-            Self::Tentative => f.write_str("Tentative"),
-            Self::Removed => f.write_str("Removed"),
-        }
+        f.write_str(match self {
+            Self::Invited => "Invited",
+            Self::Accepted => "Accepted",
+            Self::Declined => "Declined",
+            Self::Confirmed => "Confirmed",
+            Self::Out => "Out",
+            Self::Standby => "Standby",
+            Self::SignedUp => "SignedUp",
+            Self::NotSignedUp => "NotSignedUp",
+            Self::Tentative => "Tentative",
+            Self::Removed => "Removed",
+        })
     }
 }
 

@@ -63,11 +63,11 @@ impl Default for CalendarModeratorRank {
 
 impl std::fmt::Display for CalendarModeratorRank {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
-            Self::Player => f.write_str("Player"),
-            Self::Moderator => f.write_str("Moderator"),
-            Self::Owner => f.write_str("Owner"),
-        }
+        f.write_str(match self {
+            Self::Player => "Player",
+            Self::Moderator => "Moderator",
+            Self::Owner => "Owner",
+        })
     }
 }
 

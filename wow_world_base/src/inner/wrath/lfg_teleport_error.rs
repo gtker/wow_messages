@@ -82,14 +82,14 @@ impl Default for LfgTeleportError {
 
 impl std::fmt::Display for LfgTeleportError {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
-            Self::PlayerDead => f.write_str("PlayerDead"),
-            Self::Falling => f.write_str("Falling"),
-            Self::InVehicle => f.write_str("InVehicle"),
-            Self::Fatigue => f.write_str("Fatigue"),
-            Self::InvalidLocation => f.write_str("InvalidLocation"),
-            Self::Combat => f.write_str("Combat"),
-        }
+        f.write_str(match self {
+            Self::PlayerDead => "PlayerDead",
+            Self::Falling => "Falling",
+            Self::InVehicle => "InVehicle",
+            Self::Fatigue => "Fatigue",
+            Self::InvalidLocation => "InvalidLocation",
+            Self::Combat => "Combat",
+        })
     }
 }
 

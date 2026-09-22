@@ -67,11 +67,11 @@ impl Default for TrainingFailureReason {
 
 impl std::fmt::Display for TrainingFailureReason {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
-            Self::Unavailable => f.write_str("Unavailable"),
-            Self::NotEnoughMoney => f.write_str("NotEnoughMoney"),
-            Self::NotEnoughSkill => f.write_str("NotEnoughSkill"),
-        }
+        f.write_str(match self {
+            Self::Unavailable => "Unavailable",
+            Self::NotEnoughMoney => "NotEnoughMoney",
+            Self::NotEnoughSkill => "NotEnoughSkill",
+        })
     }
 }
 

@@ -81,14 +81,14 @@ impl Default for MailAction {
 
 impl std::fmt::Display for MailAction {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
-            Self::Send => f.write_str("Send"),
-            Self::MoneyTaken => f.write_str("MoneyTaken"),
-            Self::ItemTaken => f.write_str("ItemTaken"),
-            Self::ReturnedToSender => f.write_str("ReturnedToSender"),
-            Self::Deleted => f.write_str("Deleted"),
-            Self::MadePermanent => f.write_str("MadePermanent"),
-        }
+        f.write_str(match self {
+            Self::Send => "Send",
+            Self::MoneyTaken => "MoneyTaken",
+            Self::ItemTaken => "ItemTaken",
+            Self::ReturnedToSender => "ReturnedToSender",
+            Self::Deleted => "Deleted",
+            Self::MadePermanent => "MadePermanent",
+        })
     }
 }
 

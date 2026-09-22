@@ -136,21 +136,21 @@ impl Default for LootMethodError {
 
 impl std::fmt::Display for LootMethodError {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
-            Self::DidntKill => f.write_str("DidntKill"),
-            Self::TooFar => f.write_str("TooFar"),
-            Self::BadFacing => f.write_str("BadFacing"),
-            Self::Locked => f.write_str("Locked"),
-            Self::Notstanding => f.write_str("Notstanding"),
-            Self::Stunned => f.write_str("Stunned"),
-            Self::PlayerNotFound => f.write_str("PlayerNotFound"),
-            Self::PlayTimeExceeded => f.write_str("PlayTimeExceeded"),
-            Self::MasterInvFull => f.write_str("MasterInvFull"),
-            Self::MasterUniqueItem => f.write_str("MasterUniqueItem"),
-            Self::MasterOther => f.write_str("MasterOther"),
-            Self::AlreadyPickpocketed => f.write_str("AlreadyPickpocketed"),
-            Self::NotWhileShapeshifted => f.write_str("NotWhileShapeshifted"),
-        }
+        f.write_str(match self {
+            Self::DidntKill => "DidntKill",
+            Self::TooFar => "TooFar",
+            Self::BadFacing => "BadFacing",
+            Self::Locked => "Locked",
+            Self::Notstanding => "Notstanding",
+            Self::Stunned => "Stunned",
+            Self::PlayerNotFound => "PlayerNotFound",
+            Self::PlayTimeExceeded => "PlayTimeExceeded",
+            Self::MasterInvFull => "MasterInvFull",
+            Self::MasterUniqueItem => "MasterUniqueItem",
+            Self::MasterOther => "MasterOther",
+            Self::AlreadyPickpocketed => "AlreadyPickpocketed",
+            Self::NotWhileShapeshifted => "NotWhileShapeshifted",
+        })
     }
 }
 

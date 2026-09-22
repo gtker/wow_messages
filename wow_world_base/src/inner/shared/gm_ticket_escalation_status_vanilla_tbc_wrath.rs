@@ -66,11 +66,11 @@ impl Default for GmTicketEscalationStatus {
 
 impl std::fmt::Display for GmTicketEscalationStatus {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
-            Self::GmticketAssignedtogmStatusNotAssigned => f.write_str("GmticketAssignedtogmStatusNotAssigned"),
-            Self::GmticketAssignedtogmStatusAssigned => f.write_str("GmticketAssignedtogmStatusAssigned"),
-            Self::GmticketAssignedtogmStatusEscalated => f.write_str("GmticketAssignedtogmStatusEscalated"),
-        }
+        f.write_str(match self {
+            Self::GmticketAssignedtogmStatusNotAssigned => "GmticketAssignedtogmStatusNotAssigned",
+            Self::GmticketAssignedtogmStatusAssigned => "GmticketAssignedtogmStatusAssigned",
+            Self::GmticketAssignedtogmStatusEscalated => "GmticketAssignedtogmStatusEscalated",
+        })
     }
 }
 

@@ -73,12 +73,12 @@ impl Default for ServerCategory {
 
 impl std::fmt::Display for ServerCategory {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
-            Self::One => f.write_str("One"),
-            Self::Two => f.write_str("Two"),
-            Self::Three => f.write_str("Three"),
-            Self::Five => f.write_str("Five"),
-        }
+        f.write_str(match self {
+            Self::One => "One",
+            Self::Two => "Two",
+            Self::Three => "Three",
+            Self::Five => "Five",
+        })
     }
 }
 

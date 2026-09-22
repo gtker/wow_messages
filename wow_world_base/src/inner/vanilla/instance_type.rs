@@ -85,14 +85,14 @@ impl Default for InstanceType {
 
 impl std::fmt::Display for InstanceType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
-            Self::Normal => f.write_str("Normal"),
-            Self::GroupInstance => f.write_str("GroupInstance"),
-            Self::RaidInstance => f.write_str("RaidInstance"),
-            Self::Battleground => f.write_str("Battleground"),
-            Self::WorldZone => f.write_str("WorldZone"),
-            Self::Battleground2 => f.write_str("Battleground2"),
-        }
+        f.write_str(match self {
+            Self::Normal => "Normal",
+            Self::GroupInstance => "GroupInstance",
+            Self::RaidInstance => "RaidInstance",
+            Self::Battleground => "Battleground",
+            Self::WorldZone => "WorldZone",
+            Self::Battleground2 => "Battleground2",
+        })
     }
 }
 

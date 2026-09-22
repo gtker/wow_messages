@@ -63,11 +63,11 @@ impl Default for CommentatorEnableOption {
 
 impl std::fmt::Display for CommentatorEnableOption {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
-            Self::Disable => f.write_str("Disable"),
-            Self::Enable => f.write_str("Enable"),
-            Self::Toggle => f.write_str("Toggle"),
-        }
+        f.write_str(match self {
+            Self::Disable => "Disable",
+            Self::Enable => "Enable",
+            Self::Toggle => "Toggle",
+        })
     }
 }
 

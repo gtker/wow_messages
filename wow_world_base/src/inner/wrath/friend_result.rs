@@ -147,25 +147,25 @@ impl Default for FriendResult {
 
 impl std::fmt::Display for FriendResult {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
-            Self::DbError => f.write_str("DbError"),
-            Self::ListFull => f.write_str("ListFull"),
-            Self::Online => f.write_str("Online"),
-            Self::Offline => f.write_str("Offline"),
-            Self::NotFound => f.write_str("NotFound"),
-            Self::Removed => f.write_str("Removed"),
-            Self::AddedOnline => f.write_str("AddedOnline"),
-            Self::AddedOffline => f.write_str("AddedOffline"),
-            Self::Already => f.write_str("Already"),
-            Self::SelfX => f.write_str("SelfX"),
-            Self::Enemy => f.write_str("Enemy"),
-            Self::IgnoreFull => f.write_str("IgnoreFull"),
-            Self::IgnoreSelf => f.write_str("IgnoreSelf"),
-            Self::IgnoreNotFound => f.write_str("IgnoreNotFound"),
-            Self::IgnoreAlready => f.write_str("IgnoreAlready"),
-            Self::IgnoreAdded => f.write_str("IgnoreAdded"),
-            Self::IgnoreRemoved => f.write_str("IgnoreRemoved"),
-        }
+        f.write_str(match self {
+            Self::DbError => "DbError",
+            Self::ListFull => "ListFull",
+            Self::Online => "Online",
+            Self::Offline => "Offline",
+            Self::NotFound => "NotFound",
+            Self::Removed => "Removed",
+            Self::AddedOnline => "AddedOnline",
+            Self::AddedOffline => "AddedOffline",
+            Self::Already => "Already",
+            Self::SelfX => "SelfX",
+            Self::Enemy => "Enemy",
+            Self::IgnoreFull => "IgnoreFull",
+            Self::IgnoreSelf => "IgnoreSelf",
+            Self::IgnoreNotFound => "IgnoreNotFound",
+            Self::IgnoreAlready => "IgnoreAlready",
+            Self::IgnoreAdded => "IgnoreAdded",
+            Self::IgnoreRemoved => "IgnoreRemoved",
+        })
     }
 }
 

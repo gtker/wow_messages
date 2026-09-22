@@ -63,11 +63,11 @@ impl Default for SimpleEnum {
 
 impl std::fmt::Display for SimpleEnum {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
-            Self::Zero => f.write_str("Zero"),
-            Self::One => f.write_str("One"),
-            Self::Two => f.write_str("Two"),
-        }
+        f.write_str(match self {
+            Self::Zero => "Zero",
+            Self::One => "One",
+            Self::Two => "Two",
+        })
     }
 }
 

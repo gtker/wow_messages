@@ -93,16 +93,16 @@ impl Default for Power {
 
 impl std::fmt::Display for Power {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
-            Self::Mana => f.write_str("Mana"),
-            Self::Rage => f.write_str("Rage"),
-            Self::Focus => f.write_str("Focus"),
-            Self::Energy => f.write_str("Energy"),
-            Self::Happiness => f.write_str("Happiness"),
-            Self::Rune => f.write_str("Rune"),
-            Self::RunicPower => f.write_str("RunicPower"),
-            Self::Health => f.write_str("Health"),
-        }
+        f.write_str(match self {
+            Self::Mana => "Mana",
+            Self::Rage => "Rage",
+            Self::Focus => "Focus",
+            Self::Energy => "Energy",
+            Self::Happiness => "Happiness",
+            Self::Rune => "Rune",
+            Self::RunicPower => "RunicPower",
+            Self::Health => "Health",
+        })
     }
 }
 

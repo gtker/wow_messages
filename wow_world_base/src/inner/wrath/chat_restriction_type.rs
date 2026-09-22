@@ -69,12 +69,12 @@ impl Default for ChatRestrictionType {
 
 impl std::fmt::Display for ChatRestrictionType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
-            Self::ChatRestricted => f.write_str("ChatRestricted"),
-            Self::ChatThrottled => f.write_str("ChatThrottled"),
-            Self::UserSquelched => f.write_str("UserSquelched"),
-            Self::YellRestricted => f.write_str("YellRestricted"),
-        }
+        f.write_str(match self {
+            Self::ChatRestricted => "ChatRestricted",
+            Self::ChatThrottled => "ChatThrottled",
+            Self::UserSquelched => "UserSquelched",
+            Self::YellRestricted => "YellRestricted",
+        })
     }
 }
 

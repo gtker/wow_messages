@@ -129,22 +129,22 @@ impl Default for BattlegroundType {
 
 impl std::fmt::Display for BattlegroundType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
-            Self::None => f.write_str("None"),
-            Self::AlteracValley => f.write_str("AlteracValley"),
-            Self::WarsongGulch => f.write_str("WarsongGulch"),
-            Self::ArathiBasin => f.write_str("ArathiBasin"),
-            Self::NagrandArena => f.write_str("NagrandArena"),
-            Self::BladesEdgeArena => f.write_str("BladesEdgeArena"),
-            Self::Arena => f.write_str("Arena"),
-            Self::EyeOfTheStorm => f.write_str("EyeOfTheStorm"),
-            Self::RuinsOfLordaeron => f.write_str("RuinsOfLordaeron"),
-            Self::StrandOfTheAncient => f.write_str("StrandOfTheAncient"),
-            Self::DalaranSewers => f.write_str("DalaranSewers"),
-            Self::RingOfValor => f.write_str("RingOfValor"),
-            Self::IsleOfConquest => f.write_str("IsleOfConquest"),
-            Self::Random => f.write_str("Random"),
-        }
+        f.write_str(match self {
+            Self::None => "None",
+            Self::AlteracValley => "AlteracValley",
+            Self::WarsongGulch => "WarsongGulch",
+            Self::ArathiBasin => "ArathiBasin",
+            Self::NagrandArena => "NagrandArena",
+            Self::BladesEdgeArena => "BladesEdgeArena",
+            Self::Arena => "Arena",
+            Self::EyeOfTheStorm => "EyeOfTheStorm",
+            Self::RuinsOfLordaeron => "RuinsOfLordaeron",
+            Self::StrandOfTheAncient => "StrandOfTheAncient",
+            Self::DalaranSewers => "DalaranSewers",
+            Self::RingOfValor => "RingOfValor",
+            Self::IsleOfConquest => "IsleOfConquest",
+            Self::Random => "Random",
+        })
     }
 }
 

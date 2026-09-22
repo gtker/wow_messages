@@ -57,10 +57,10 @@ impl Default for DuelWinnerReason {
 
 impl std::fmt::Display for DuelWinnerReason {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
-            Self::Won => f.write_str("Won"),
-            Self::Fled => f.write_str("Fled"),
-        }
+        f.write_str(match self {
+            Self::Won => "Won",
+            Self::Fled => "Fled",
+        })
     }
 }
 

@@ -63,11 +63,11 @@ impl Default for GmTicketStatusResponse {
 
 impl std::fmt::Display for GmTicketStatusResponse {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
-            Self::Updated => f.write_str("Updated"),
-            Self::Closed => f.write_str("Closed"),
-            Self::Survey => f.write_str("Survey"),
-        }
+        f.write_str(match self {
+            Self::Updated => "Updated",
+            Self::Closed => "Closed",
+            Self::Survey => "Survey",
+        })
     }
 }
 

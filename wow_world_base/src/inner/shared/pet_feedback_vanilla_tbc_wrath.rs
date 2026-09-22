@@ -69,12 +69,12 @@ impl Default for PetFeedback {
 
 impl std::fmt::Display for PetFeedback {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
-            Self::PetDead => f.write_str("PetDead"),
-            Self::NothingToAttack => f.write_str("NothingToAttack"),
-            Self::CantAttackTarget => f.write_str("CantAttackTarget"),
-            Self::NoPathTo => f.write_str("NoPathTo"),
-        }
+        f.write_str(match self {
+            Self::PetDead => "PetDead",
+            Self::NothingToAttack => "NothingToAttack",
+            Self::CantAttackTarget => "CantAttackTarget",
+            Self::NoPathTo => "NoPathTo",
+        })
     }
 }
 

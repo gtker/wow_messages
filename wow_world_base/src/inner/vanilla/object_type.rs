@@ -93,16 +93,16 @@ impl Default for ObjectType {
 
 impl std::fmt::Display for ObjectType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
-            Self::Object => f.write_str("Object"),
-            Self::Item => f.write_str("Item"),
-            Self::Container => f.write_str("Container"),
-            Self::Unit => f.write_str("Unit"),
-            Self::Player => f.write_str("Player"),
-            Self::GameObject => f.write_str("GameObject"),
-            Self::DynamicObject => f.write_str("DynamicObject"),
-            Self::Corpse => f.write_str("Corpse"),
-        }
+        f.write_str(match self {
+            Self::Object => "Object",
+            Self::Item => "Item",
+            Self::Container => "Container",
+            Self::Unit => "Unit",
+            Self::Player => "Player",
+            Self::GameObject => "GameObject",
+            Self::DynamicObject => "DynamicObject",
+            Self::Corpse => "Corpse",
+        })
     }
 }
 

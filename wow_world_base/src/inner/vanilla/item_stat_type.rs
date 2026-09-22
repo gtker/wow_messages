@@ -87,15 +87,15 @@ impl Default for ItemStatType {
 
 impl std::fmt::Display for ItemStatType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
-            Self::Mana => f.write_str("Mana"),
-            Self::Health => f.write_str("Health"),
-            Self::Agility => f.write_str("Agility"),
-            Self::Strength => f.write_str("Strength"),
-            Self::Intellect => f.write_str("Intellect"),
-            Self::Spirit => f.write_str("Spirit"),
-            Self::Stamina => f.write_str("Stamina"),
-        }
+        f.write_str(match self {
+            Self::Mana => "Mana",
+            Self::Health => "Health",
+            Self::Agility => "Agility",
+            Self::Strength => "Strength",
+            Self::Intellect => "Intellect",
+            Self::Spirit => "Spirit",
+            Self::Stamina => "Stamina",
+        })
     }
 }
 

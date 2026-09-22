@@ -87,15 +87,15 @@ impl Default for GmTicketResponse {
 
 impl std::fmt::Display for GmTicketResponse {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
-            Self::NotExist => f.write_str("NotExist"),
-            Self::AlreadyExist => f.write_str("AlreadyExist"),
-            Self::CreateSuccess => f.write_str("CreateSuccess"),
-            Self::CreateError => f.write_str("CreateError"),
-            Self::UpdateSuccess => f.write_str("UpdateSuccess"),
-            Self::UpdateError => f.write_str("UpdateError"),
-            Self::TicketDeleted => f.write_str("TicketDeleted"),
-        }
+        f.write_str(match self {
+            Self::NotExist => "NotExist",
+            Self::AlreadyExist => "AlreadyExist",
+            Self::CreateSuccess => "CreateSuccess",
+            Self::CreateError => "CreateError",
+            Self::UpdateSuccess => "UpdateSuccess",
+            Self::UpdateError => "UpdateError",
+            Self::TicketDeleted => "TicketDeleted",
+        })
     }
 }
 

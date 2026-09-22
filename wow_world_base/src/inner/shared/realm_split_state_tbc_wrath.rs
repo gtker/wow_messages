@@ -63,11 +63,11 @@ impl Default for RealmSplitState {
 
 impl std::fmt::Display for RealmSplitState {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
-            Self::Normal => f.write_str("Normal"),
-            Self::Split => f.write_str("Split"),
-            Self::SplitPending => f.write_str("SplitPending"),
-        }
+        f.write_str(match self {
+            Self::Normal => "Normal",
+            Self::Split => "Split",
+            Self::SplitPending => "SplitPending",
+        })
     }
 }
 

@@ -57,10 +57,10 @@ impl Default for AchievementNameLinkType {
 
 impl std::fmt::Display for AchievementNameLinkType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
-            Self::Normal => f.write_str("Normal"),
-            Self::Clickable => f.write_str("Clickable"),
-        }
+        f.write_str(match self {
+            Self::Normal => "Normal",
+            Self::Clickable => "Clickable",
+        })
     }
 }
 

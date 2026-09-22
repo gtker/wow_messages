@@ -57,10 +57,10 @@ impl Default for RaidGroupError {
 
 impl std::fmt::Display for RaidGroupError {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
-            Self::Required => f.write_str("Required"),
-            Self::Full => f.write_str("Full"),
-        }
+        f.write_str(match self {
+            Self::Required => "Required",
+            Self::Full => "Full",
+        })
     }
 }
 

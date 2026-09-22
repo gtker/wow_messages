@@ -81,14 +81,14 @@ impl Default for LfgType {
 
 impl std::fmt::Display for LfgType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
-            Self::None => f.write_str("None"),
-            Self::Dungeon => f.write_str("Dungeon"),
-            Self::Raid => f.write_str("Raid"),
-            Self::Zone => f.write_str("Zone"),
-            Self::Heroic => f.write_str("Heroic"),
-            Self::Random => f.write_str("Random"),
-        }
+        f.write_str(match self {
+            Self::None => "None",
+            Self::Dungeon => "Dungeon",
+            Self::Raid => "Raid",
+            Self::Zone => "Zone",
+            Self::Heroic => "Heroic",
+            Self::Random => "Random",
+        })
     }
 }
 

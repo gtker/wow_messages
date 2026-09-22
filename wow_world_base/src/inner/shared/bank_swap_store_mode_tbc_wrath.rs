@@ -57,10 +57,10 @@ impl Default for BankSwapStoreMode {
 
 impl std::fmt::Display for BankSwapStoreMode {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
-            Self::Manual => f.write_str("Manual"),
-            Self::Automatic => f.write_str("Automatic"),
-        }
+        f.write_str(match self {
+            Self::Manual => "Manual",
+            Self::Automatic => "Automatic",
+        })
     }
 }
 

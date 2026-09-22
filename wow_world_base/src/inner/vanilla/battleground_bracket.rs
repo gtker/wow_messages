@@ -87,14 +87,14 @@ impl Default for BattlegroundBracket {
 
 impl std::fmt::Display for BattlegroundBracket {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
-            Self::Tens => f.write_str("Tens"),
-            Self::Twenties => f.write_str("Twenties"),
-            Self::Thirties => f.write_str("Thirties"),
-            Self::Forties => f.write_str("Forties"),
-            Self::Fifties => f.write_str("Fifties"),
-            Self::Sixty => f.write_str("Sixty"),
-        }
+        f.write_str(match self {
+            Self::Tens => "Tens",
+            Self::Twenties => "Twenties",
+            Self::Thirties => "Thirties",
+            Self::Forties => "Forties",
+            Self::Fifties => "Fifties",
+            Self::Sixty => "Sixty",
+        })
     }
 }
 

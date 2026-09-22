@@ -63,11 +63,11 @@ impl Default for JoinArenaType {
 
 impl std::fmt::Display for JoinArenaType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
-            Self::TwoVsTwo => f.write_str("TwoVsTwo"),
-            Self::ThreeVsThree => f.write_str("ThreeVsThree"),
-            Self::FiveVsFive => f.write_str("FiveVsFive"),
-        }
+        f.write_str(match self {
+            Self::TwoVsTwo => "TwoVsTwo",
+            Self::ThreeVsThree => "ThreeVsThree",
+            Self::FiveVsFive => "FiveVsFive",
+        })
     }
 }
 

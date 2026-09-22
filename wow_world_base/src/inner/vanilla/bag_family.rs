@@ -105,18 +105,18 @@ impl Default for BagFamily {
 
 impl std::fmt::Display for BagFamily {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
-            Self::None => f.write_str("None"),
-            Self::Arrows => f.write_str("Arrows"),
-            Self::Bullets => f.write_str("Bullets"),
-            Self::SoulShards => f.write_str("SoulShards"),
-            Self::Unknown4 => f.write_str("Unknown4"),
-            Self::Unknown5 => f.write_str("Unknown5"),
-            Self::Herbs => f.write_str("Herbs"),
-            Self::EnchantingSupplies => f.write_str("EnchantingSupplies"),
-            Self::EngineeringSupplies => f.write_str("EngineeringSupplies"),
-            Self::Keys => f.write_str("Keys"),
-        }
+        f.write_str(match self {
+            Self::None => "None",
+            Self::Arrows => "Arrows",
+            Self::Bullets => "Bullets",
+            Self::SoulShards => "SoulShards",
+            Self::Unknown4 => "Unknown4",
+            Self::Unknown5 => "Unknown5",
+            Self::Herbs => "Herbs",
+            Self::EnchantingSupplies => "EnchantingSupplies",
+            Self::EngineeringSupplies => "EngineeringSupplies",
+            Self::Keys => "Keys",
+        })
     }
 }
 

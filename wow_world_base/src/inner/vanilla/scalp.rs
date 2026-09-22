@@ -61,10 +61,10 @@ impl Default for Scalp {
 
 impl std::fmt::Display for Scalp {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
-            Self::Hair => f.write_str("Hair"),
-            Self::Bald => f.write_str("Bald"),
-        }
+        f.write_str(match self {
+            Self::Hair => "Hair",
+            Self::Bald => "Bald",
+        })
     }
 }
 

@@ -57,10 +57,10 @@ impl Default for BankSwapSource {
 
 impl std::fmt::Display for BankSwapSource {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
-            Self::Inventory => f.write_str("Inventory"),
-            Self::Bank => f.write_str("Bank"),
-        }
+        f.write_str(match self {
+            Self::Inventory => "Inventory",
+            Self::Bank => "Bank",
+        })
     }
 }
 

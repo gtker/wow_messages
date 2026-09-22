@@ -57,10 +57,10 @@ impl Default for SpellStealAction {
 
 impl std::fmt::Display for SpellStealAction {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
-            Self::Steal => f.write_str("Steal"),
-            Self::Cleanse => f.write_str("Cleanse"),
-        }
+        f.write_str(match self {
+            Self::Steal => "Steal",
+            Self::Cleanse => "Cleanse",
+        })
     }
 }
 

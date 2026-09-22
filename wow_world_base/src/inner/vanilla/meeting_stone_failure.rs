@@ -63,11 +63,11 @@ impl Default for MeetingStoneFailure {
 
 impl std::fmt::Display for MeetingStoneFailure {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
-            Self::MeetingstoneFailPartyleader => f.write_str("MeetingstoneFailPartyleader"),
-            Self::MeetingstoneFailFullGroup => f.write_str("MeetingstoneFailFullGroup"),
-            Self::MeetingstoneFailRaidGroup => f.write_str("MeetingstoneFailRaidGroup"),
-        }
+        f.write_str(match self {
+            Self::MeetingstoneFailPartyleader => "MeetingstoneFailPartyleader",
+            Self::MeetingstoneFailFullGroup => "MeetingstoneFailFullGroup",
+            Self::MeetingstoneFailRaidGroup => "MeetingstoneFailRaidGroup",
+        })
     }
 }
 

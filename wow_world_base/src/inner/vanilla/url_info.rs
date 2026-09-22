@@ -57,10 +57,10 @@ impl Default for UrlInfo {
 
 impl std::fmt::Display for UrlInfo {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
-            Self::Unavailable => f.write_str("Unavailable"),
-            Self::Available => f.write_str("Available"),
-        }
+        f.write_str(match self {
+            Self::Unavailable => "Unavailable",
+            Self::Available => "Available",
+        })
     }
 }
 

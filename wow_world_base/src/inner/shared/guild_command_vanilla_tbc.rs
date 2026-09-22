@@ -83,14 +83,14 @@ impl Default for GuildCommand {
 
 impl std::fmt::Display for GuildCommand {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
-            Self::Create => f.write_str("Create"),
-            Self::Invite => f.write_str("Invite"),
-            Self::Quit => f.write_str("Quit"),
-            Self::Founder => f.write_str("Founder"),
-            Self::Unknown19 => f.write_str("Unknown19"),
-            Self::Unknown20 => f.write_str("Unknown20"),
-        }
+        f.write_str(match self {
+            Self::Create => "Create",
+            Self::Invite => "Invite",
+            Self::Quit => "Quit",
+            Self::Founder => "Founder",
+            Self::Unknown19 => "Unknown19",
+            Self::Unknown20 => "Unknown20",
+        })
     }
 }
 

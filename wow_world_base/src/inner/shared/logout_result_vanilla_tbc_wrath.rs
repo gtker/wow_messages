@@ -70,12 +70,12 @@ impl Default for LogoutResult {
 
 impl std::fmt::Display for LogoutResult {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
-            Self::Success => f.write_str("Success"),
-            Self::FailureInCombat => f.write_str("FailureInCombat"),
-            Self::FailureFrozenByGm => f.write_str("FailureFrozenByGm"),
-            Self::FailureJumpingOrFalling => f.write_str("FailureJumpingOrFalling"),
-        }
+        f.write_str(match self {
+            Self::Success => "Success",
+            Self::FailureInCombat => "FailureInCombat",
+            Self::FailureFrozenByGm => "FailureFrozenByGm",
+            Self::FailureJumpingOrFalling => "FailureJumpingOrFalling",
+        })
     }
 }
 

@@ -63,11 +63,11 @@ impl Default for ActionBarBehavior {
 
 impl std::fmt::Display for ActionBarBehavior {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
-            Self::Initial => f.write_str("Initial"),
-            Self::Set => f.write_str("Set"),
-            Self::Clear => f.write_str("Clear"),
-        }
+        f.write_str(match self {
+            Self::Initial => "Initial",
+            Self::Set => "Set",
+            Self::Clear => "Clear",
+        })
     }
 }
 

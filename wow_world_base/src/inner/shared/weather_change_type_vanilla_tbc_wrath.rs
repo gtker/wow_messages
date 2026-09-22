@@ -57,10 +57,10 @@ impl Default for WeatherChangeType {
 
 impl std::fmt::Display for WeatherChangeType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
-            Self::Smooth => f.write_str("Smooth"),
-            Self::Instant => f.write_str("Instant"),
-        }
+        f.write_str(match self {
+            Self::Smooth => "Smooth",
+            Self::Instant => "Instant",
+        })
     }
 }
 

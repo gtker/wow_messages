@@ -57,10 +57,10 @@ impl Default for PetTalkReason {
 
 impl std::fmt::Display for PetTalkReason {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
-            Self::SpecialSpell => f.write_str("SpecialSpell"),
-            Self::Attack => f.write_str("Attack"),
-        }
+        f.write_str(match self {
+            Self::SpecialSpell => "SpecialSpell",
+            Self::Attack => "Attack",
+        })
     }
 }
 

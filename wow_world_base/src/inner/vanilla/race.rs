@@ -99,17 +99,17 @@ impl Default for Race {
 
 impl std::fmt::Display for Race {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
-            Self::Human => f.write_str("Human"),
-            Self::Orc => f.write_str("Orc"),
-            Self::Dwarf => f.write_str("Dwarf"),
-            Self::NightElf => f.write_str("NightElf"),
-            Self::Undead => f.write_str("Undead"),
-            Self::Tauren => f.write_str("Tauren"),
-            Self::Gnome => f.write_str("Gnome"),
-            Self::Troll => f.write_str("Troll"),
-            Self::Goblin => f.write_str("Goblin"),
-        }
+        f.write_str(match self {
+            Self::Human => "Human",
+            Self::Orc => "Orc",
+            Self::Dwarf => "Dwarf",
+            Self::NightElf => "NightElf",
+            Self::Undead => "Undead",
+            Self::Tauren => "Tauren",
+            Self::Gnome => "Gnome",
+            Self::Troll => "Troll",
+            Self::Goblin => "Goblin",
+        })
     }
 }
 

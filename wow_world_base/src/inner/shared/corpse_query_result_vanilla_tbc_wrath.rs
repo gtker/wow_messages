@@ -57,10 +57,10 @@ impl Default for CorpseQueryResult {
 
 impl std::fmt::Display for CorpseQueryResult {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
-            Self::NotFound => f.write_str("NotFound"),
-            Self::Found => f.write_str("Found"),
-        }
+        f.write_str(match self {
+            Self::NotFound => "NotFound",
+            Self::Found => "Found",
+        })
     }
 }
 

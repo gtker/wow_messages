@@ -59,10 +59,10 @@ impl Default for BattlefieldListLocation {
 
 impl std::fmt::Display for BattlefieldListLocation {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
-            Self::Battlemaster => f.write_str("Battlemaster"),
-            Self::Ui => f.write_str("Ui"),
-        }
+        f.write_str(match self {
+            Self::Battlemaster => "Battlemaster",
+            Self::Ui => "Ui",
+        })
     }
 }
 

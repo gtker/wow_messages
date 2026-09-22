@@ -61,10 +61,10 @@ impl Default for AttackHand {
 
 impl std::fmt::Display for AttackHand {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
-            Self::MainHand => f.write_str("MainHand"),
-            Self::OffHand => f.write_str("OffHand"),
-        }
+        f.write_str(match self {
+            Self::MainHand => "MainHand",
+            Self::OffHand => "OffHand",
+        })
     }
 }
 

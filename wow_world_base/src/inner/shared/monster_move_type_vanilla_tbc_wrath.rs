@@ -75,13 +75,13 @@ impl Default for MonsterMoveType {
 
 impl std::fmt::Display for MonsterMoveType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
-            Self::Normal => f.write_str("Normal"),
-            Self::Stop => f.write_str("Stop"),
-            Self::FacingSpot => f.write_str("FacingSpot"),
-            Self::FacingTarget => f.write_str("FacingTarget"),
-            Self::FacingAngle => f.write_str("FacingAngle"),
-        }
+        f.write_str(match self {
+            Self::Normal => "Normal",
+            Self::Stop => "Stop",
+            Self::FacingSpot => "FacingSpot",
+            Self::FacingTarget => "FacingTarget",
+            Self::FacingAngle => "FacingAngle",
+        })
     }
 }
 

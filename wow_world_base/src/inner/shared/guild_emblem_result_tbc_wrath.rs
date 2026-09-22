@@ -81,14 +81,14 @@ impl Default for GuildEmblemResult {
 
 impl std::fmt::Display for GuildEmblemResult {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
-            Self::Success => f.write_str("Success"),
-            Self::InvalidTabardColors => f.write_str("InvalidTabardColors"),
-            Self::NoGuild => f.write_str("NoGuild"),
-            Self::NotGuildMaster => f.write_str("NotGuildMaster"),
-            Self::NotEnoughMoney => f.write_str("NotEnoughMoney"),
-            Self::InvalidVendor => f.write_str("InvalidVendor"),
-        }
+        f.write_str(match self {
+            Self::Success => "Success",
+            Self::InvalidTabardColors => "InvalidTabardColors",
+            Self::NoGuild => "NoGuild",
+            Self::NotGuildMaster => "NotGuildMaster",
+            Self::NotEnoughMoney => "NotEnoughMoney",
+            Self::InvalidVendor => "InvalidVendor",
+        })
     }
 }
 

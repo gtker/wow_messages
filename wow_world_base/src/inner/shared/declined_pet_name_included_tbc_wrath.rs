@@ -57,10 +57,10 @@ impl Default for DeclinedPetNameIncluded {
 
 impl std::fmt::Display for DeclinedPetNameIncluded {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
-            Self::NotIncluded => f.write_str("NotIncluded"),
-            Self::Included => f.write_str("Included"),
-        }
+        f.write_str(match self {
+            Self::NotIncluded => "NotIncluded",
+            Self::Included => "Included",
+        })
     }
 }
 

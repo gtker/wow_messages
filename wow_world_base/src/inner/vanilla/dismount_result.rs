@@ -57,10 +57,10 @@ impl Default for DismountResult {
 
 impl std::fmt::Display for DismountResult {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
-            Self::NotMounted => f.write_str("NotMounted"),
-            Self::Ok => f.write_str("Ok"),
-        }
+        f.write_str(match self {
+            Self::NotMounted => "NotMounted",
+            Self::Ok => "Ok",
+        })
     }
 }
 

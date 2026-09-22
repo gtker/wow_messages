@@ -45,10 +45,10 @@ impl Default for SecurityFlag {
 
 impl std::fmt::Display for SecurityFlag {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
-            Self::None => f.write_str("None"),
-            Self::Pin => f.write_str("Pin"),
-        }
+        f.write_str(match self {
+            Self::None => "None",
+            Self::Pin => "Pin",
+        })
     }
 }
 

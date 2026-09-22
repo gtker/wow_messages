@@ -72,12 +72,12 @@ impl Default for InstanceResetFailedReason {
 
 impl std::fmt::Display for InstanceResetFailedReason {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
-            Self::General => f.write_str("General"),
-            Self::Offline => f.write_str("Offline"),
-            Self::Zoning => f.write_str("Zoning"),
-            Self::Silently => f.write_str("Silently"),
-        }
+        f.write_str(match self {
+            Self::General => "General",
+            Self::Offline => "Offline",
+            Self::Zoning => "Zoning",
+            Self::Silently => "Silently",
+        })
     }
 }
 

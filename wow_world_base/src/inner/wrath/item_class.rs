@@ -147,25 +147,25 @@ impl Default for ItemClass {
 
 impl std::fmt::Display for ItemClass {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
-            Self::Consumable => f.write_str("Consumable"),
-            Self::Container => f.write_str("Container"),
-            Self::Weapon => f.write_str("Weapon"),
-            Self::Gem => f.write_str("Gem"),
-            Self::Armor => f.write_str("Armor"),
-            Self::Reagent => f.write_str("Reagent"),
-            Self::Projectile => f.write_str("Projectile"),
-            Self::TradeGoods => f.write_str("TradeGoods"),
-            Self::Generic => f.write_str("Generic"),
-            Self::Recipe => f.write_str("Recipe"),
-            Self::Money => f.write_str("Money"),
-            Self::Quiver => f.write_str("Quiver"),
-            Self::Quest => f.write_str("Quest"),
-            Self::Key => f.write_str("Key"),
-            Self::Permanent => f.write_str("Permanent"),
-            Self::Misc => f.write_str("Misc"),
-            Self::Glyph => f.write_str("Glyph"),
-        }
+        f.write_str(match self {
+            Self::Consumable => "Consumable",
+            Self::Container => "Container",
+            Self::Weapon => "Weapon",
+            Self::Gem => "Gem",
+            Self::Armor => "Armor",
+            Self::Reagent => "Reagent",
+            Self::Projectile => "Projectile",
+            Self::TradeGoods => "TradeGoods",
+            Self::Generic => "Generic",
+            Self::Recipe => "Recipe",
+            Self::Money => "Money",
+            Self::Quiver => "Quiver",
+            Self::Quest => "Quest",
+            Self::Key => "Key",
+            Self::Permanent => "Permanent",
+            Self::Misc => "Misc",
+            Self::Glyph => "Glyph",
+        })
     }
 }
 

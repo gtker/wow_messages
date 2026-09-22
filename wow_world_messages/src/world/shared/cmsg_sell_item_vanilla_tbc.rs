@@ -113,3 +113,4 @@ impl crate::vanilla::ClientMessage for CMSG_SELL_ITEM {}
 
 #[cfg(feature = "tbc")]
 impl crate::tbc::ClientMessage for CMSG_SELL_ITEM {}
+

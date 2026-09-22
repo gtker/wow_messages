@@ -80,13 +80,13 @@ impl Default for BgTypeId {
 
 impl std::fmt::Display for BgTypeId {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
-            Self::NotEligible => f.write_str("NotEligible"),
-            Self::QueuedForAv => f.write_str("QueuedForAv"),
-            Self::QueuedForWsg => f.write_str("QueuedForWsg"),
-            Self::QueuedForAb => f.write_str("QueuedForAb"),
-            Self::RemoveFromQueue => f.write_str("RemoveFromQueue"),
-        }
+        f.write_str(match self {
+            Self::NotEligible => "NotEligible",
+            Self::QueuedForAv => "QueuedForAv",
+            Self::QueuedForWsg => "QueuedForWsg",
+            Self::QueuedForAb => "QueuedForAb",
+            Self::RemoveFromQueue => "RemoveFromQueue",
+        })
     }
 }
 

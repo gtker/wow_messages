@@ -67,11 +67,11 @@ impl Default for EmoteSpecProc {
 
 impl std::fmt::Display for EmoteSpecProc {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
-            Self::NoLoop => f.write_str("NoLoop"),
-            Self::Loop => f.write_str("Loop"),
-            Self::LoopWithSound => f.write_str("LoopWithSound"),
-        }
+        f.write_str(match self {
+            Self::NoLoop => "NoLoop",
+            Self::Loop => "Loop",
+            Self::LoopWithSound => "LoopWithSound",
+        })
     }
 }
 

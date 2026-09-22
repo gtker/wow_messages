@@ -57,10 +57,10 @@ impl Default for ComplainResultWindow {
 
 impl std::fmt::Display for ComplainResultWindow {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
-            Self::DoNotShow => f.write_str("DoNotShow"),
-            Self::Show => f.write_str("Show"),
-        }
+        f.write_str(match self {
+            Self::DoNotShow => "DoNotShow",
+            Self::Show => "Show",
+        })
     }
 }
 

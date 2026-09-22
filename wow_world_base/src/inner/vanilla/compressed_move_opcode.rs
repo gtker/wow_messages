@@ -81,14 +81,14 @@ impl Default for CompressedMoveOpcode {
 
 impl std::fmt::Display for CompressedMoveOpcode {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
-            Self::SmsgMonsterMove => f.write_str("SmsgMonsterMove"),
-            Self::SmsgMonsterMoveTransport => f.write_str("SmsgMonsterMoveTransport"),
-            Self::SmsgSplineSetRunSpeed => f.write_str("SmsgSplineSetRunSpeed"),
-            Self::SmsgSplineMoveUnroot => f.write_str("SmsgSplineMoveUnroot"),
-            Self::SmsgSplineMoveSetRunMode => f.write_str("SmsgSplineMoveSetRunMode"),
-            Self::SmsgSplineMoveSetWalkMode => f.write_str("SmsgSplineMoveSetWalkMode"),
-        }
+        f.write_str(match self {
+            Self::SmsgMonsterMove => "SmsgMonsterMove",
+            Self::SmsgMonsterMoveTransport => "SmsgMonsterMoveTransport",
+            Self::SmsgSplineSetRunSpeed => "SmsgSplineSetRunSpeed",
+            Self::SmsgSplineMoveUnroot => "SmsgSplineMoveUnroot",
+            Self::SmsgSplineMoveSetRunMode => "SmsgSplineMoveSetRunMode",
+            Self::SmsgSplineMoveSetWalkMode => "SmsgSplineMoveSetWalkMode",
+        })
     }
 }
 

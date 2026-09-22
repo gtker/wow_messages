@@ -129,22 +129,22 @@ impl Default for CinematicSequenceId {
 
 impl std::fmt::Display for CinematicSequenceId {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
-            Self::Goblin => f.write_str("Goblin"),
-            Self::PalantirOfAzora => f.write_str("PalantirOfAzora"),
-            Self::Undead => f.write_str("Undead"),
-            Self::Orc => f.write_str("Orc"),
-            Self::Dwarf => f.write_str("Dwarf"),
-            Self::NightElf => f.write_str("NightElf"),
-            Self::Human => f.write_str("Human"),
-            Self::Gnome => f.write_str("Gnome"),
-            Self::Troll => f.write_str("Troll"),
-            Self::Tauren => f.write_str("Tauren"),
-            Self::ScryCam => f.write_str("ScryCam"),
-            Self::BloodElf => f.write_str("BloodElf"),
-            Self::Draenei => f.write_str("Draenei"),
-            Self::SunwellFiveMan => f.write_str("SunwellFiveMan"),
-        }
+        f.write_str(match self {
+            Self::Goblin => "Goblin",
+            Self::PalantirOfAzora => "PalantirOfAzora",
+            Self::Undead => "Undead",
+            Self::Orc => "Orc",
+            Self::Dwarf => "Dwarf",
+            Self::NightElf => "NightElf",
+            Self::Human => "Human",
+            Self::Gnome => "Gnome",
+            Self::Troll => "Troll",
+            Self::Tauren => "Tauren",
+            Self::ScryCam => "ScryCam",
+            Self::BloodElf => "BloodElf",
+            Self::Draenei => "Draenei",
+            Self::SunwellFiveMan => "SunwellFiveMan",
+        })
     }
 }
 

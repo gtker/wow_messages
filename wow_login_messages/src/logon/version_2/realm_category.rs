@@ -60,13 +60,13 @@ impl Default for RealmCategory {
 
 impl std::fmt::Display for RealmCategory {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
-            Self::Default => f.write_str("Default"),
-            Self::One => f.write_str("One"),
-            Self::Two => f.write_str("Two"),
-            Self::Three => f.write_str("Three"),
-            Self::Five => f.write_str("Five"),
-        }
+        f.write_str(match self {
+            Self::Default => "Default",
+            Self::One => "One",
+            Self::Two => "Two",
+            Self::Three => "Three",
+            Self::Five => "Five",
+        })
     }
 }
 

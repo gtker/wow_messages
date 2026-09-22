@@ -108,17 +108,17 @@ impl Default for SellItemResult {
 
 impl std::fmt::Display for SellItemResult {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
-            Self::ErrCantFindItem => f.write_str("ErrCantFindItem"),
-            Self::ErrCantSellItem => f.write_str("ErrCantSellItem"),
-            Self::ErrCantFindVendor => f.write_str("ErrCantFindVendor"),
-            Self::ErrYouDontOwnThatItem => f.write_str("ErrYouDontOwnThatItem"),
-            Self::ErrUnk => f.write_str("ErrUnk"),
-            Self::ErrOnlyEmptyBag => f.write_str("ErrOnlyEmptyBag"),
-            Self::ErrCantSellToThisMerchant => f.write_str("ErrCantSellToThisMerchant"),
-            Self::ErrMustRepairItemDurabilityToUse => f.write_str("ErrMustRepairItemDurabilityToUse"),
-            Self::InternalBagError => f.write_str("InternalBagError"),
-        }
+        f.write_str(match self {
+            Self::ErrCantFindItem => "ErrCantFindItem",
+            Self::ErrCantSellItem => "ErrCantSellItem",
+            Self::ErrCantFindVendor => "ErrCantFindVendor",
+            Self::ErrYouDontOwnThatItem => "ErrYouDontOwnThatItem",
+            Self::ErrUnk => "ErrUnk",
+            Self::ErrOnlyEmptyBag => "ErrOnlyEmptyBag",
+            Self::ErrCantSellToThisMerchant => "ErrCantSellToThisMerchant",
+            Self::ErrMustRepairItemDurabilityToUse => "ErrMustRepairItemDurabilityToUse",
+            Self::InternalBagError => "InternalBagError",
+        })
     }
 }
 

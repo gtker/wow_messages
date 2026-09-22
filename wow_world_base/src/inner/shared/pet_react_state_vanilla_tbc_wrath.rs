@@ -63,11 +63,11 @@ impl Default for PetReactState {
 
 impl std::fmt::Display for PetReactState {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
-            Self::Passive => f.write_str("Passive"),
-            Self::Defensive => f.write_str("Defensive"),
-            Self::Aggressive => f.write_str("Aggressive"),
-        }
+        f.write_str(match self {
+            Self::Passive => "Passive",
+            Self::Defensive => "Defensive",
+            Self::Aggressive => "Aggressive",
+        })
     }
 }
 

@@ -70,12 +70,12 @@ impl Default for TimerType {
 
 impl std::fmt::Display for TimerType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
-            Self::Fatigue => f.write_str("Fatigue"),
-            Self::Breath => f.write_str("Breath"),
-            Self::FeignDeath => f.write_str("FeignDeath"),
-            Self::Environmental => f.write_str("Environmental"),
-        }
+        f.write_str(match self {
+            Self::Fatigue => "Fatigue",
+            Self::Breath => "Breath",
+            Self::FeignDeath => "FeignDeath",
+            Self::Environmental => "Environmental",
+        })
     }
 }
 

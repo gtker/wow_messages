@@ -57,10 +57,10 @@ impl Default for LfgTeleportLocation {
 
 impl std::fmt::Display for LfgTeleportLocation {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
-            Self::In => f.write_str("In"),
-            Self::Out => f.write_str("Out"),
-        }
+        f.write_str(match self {
+            Self::In => "In",
+            Self::Out => "Out",
+        })
     }
 }
 

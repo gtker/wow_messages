@@ -193,28 +193,28 @@ impl Default for PvpRank {
 
 impl std::fmt::Display for PvpRank {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
-            Self::NoRank => f.write_str("NoRank"),
-            Self::Pariah => f.write_str("Pariah"),
-            Self::Outlaw => f.write_str("Outlaw"),
-            Self::Exiled => f.write_str("Exiled"),
-            Self::Dishonored => f.write_str("Dishonored"),
-            Self::Rank1 => f.write_str("Rank1"),
-            Self::Rank2 => f.write_str("Rank2"),
-            Self::Rank3 => f.write_str("Rank3"),
-            Self::Rank4 => f.write_str("Rank4"),
-            Self::Rank5 => f.write_str("Rank5"),
-            Self::Rank6 => f.write_str("Rank6"),
-            Self::Rank7 => f.write_str("Rank7"),
-            Self::Rank8 => f.write_str("Rank8"),
-            Self::Rank9 => f.write_str("Rank9"),
-            Self::Rank10 => f.write_str("Rank10"),
-            Self::Rank11 => f.write_str("Rank11"),
-            Self::Rank12 => f.write_str("Rank12"),
-            Self::Rank13 => f.write_str("Rank13"),
-            Self::Rank14 => f.write_str("Rank14"),
-            Self::FactionLeader => f.write_str("FactionLeader"),
-        }
+        f.write_str(match self {
+            Self::NoRank => "NoRank",
+            Self::Pariah => "Pariah",
+            Self::Outlaw => "Outlaw",
+            Self::Exiled => "Exiled",
+            Self::Dishonored => "Dishonored",
+            Self::Rank1 => "Rank1",
+            Self::Rank2 => "Rank2",
+            Self::Rank3 => "Rank3",
+            Self::Rank4 => "Rank4",
+            Self::Rank5 => "Rank5",
+            Self::Rank6 => "Rank6",
+            Self::Rank7 => "Rank7",
+            Self::Rank8 => "Rank8",
+            Self::Rank9 => "Rank9",
+            Self::Rank10 => "Rank10",
+            Self::Rank11 => "Rank11",
+            Self::Rank12 => "Rank12",
+            Self::Rank13 => "Rank13",
+            Self::Rank14 => "Rank14",
+            Self::FactionLeader => "FactionLeader",
+        })
     }
 }
 

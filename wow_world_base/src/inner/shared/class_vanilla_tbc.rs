@@ -99,17 +99,17 @@ impl Default for Class {
 
 impl std::fmt::Display for Class {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
-            Self::Warrior => f.write_str("Warrior"),
-            Self::Paladin => f.write_str("Paladin"),
-            Self::Hunter => f.write_str("Hunter"),
-            Self::Rogue => f.write_str("Rogue"),
-            Self::Priest => f.write_str("Priest"),
-            Self::Shaman => f.write_str("Shaman"),
-            Self::Mage => f.write_str("Mage"),
-            Self::Warlock => f.write_str("Warlock"),
-            Self::Druid => f.write_str("Druid"),
-        }
+        f.write_str(match self {
+            Self::Warrior => "Warrior",
+            Self::Paladin => "Paladin",
+            Self::Hunter => "Hunter",
+            Self::Rogue => "Rogue",
+            Self::Priest => "Priest",
+            Self::Shaman => "Shaman",
+            Self::Mage => "Mage",
+            Self::Warlock => "Warlock",
+            Self::Druid => "Druid",
+        })
     }
 }
 

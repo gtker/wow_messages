@@ -99,17 +99,17 @@ impl Default for BuyResult {
 
 impl std::fmt::Display for BuyResult {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
-            Self::CantFindItem => f.write_str("CantFindItem"),
-            Self::ItemAlreadySold => f.write_str("ItemAlreadySold"),
-            Self::NotEnoughMoney => f.write_str("NotEnoughMoney"),
-            Self::SellerDontLikeYou => f.write_str("SellerDontLikeYou"),
-            Self::DistanceTooFar => f.write_str("DistanceTooFar"),
-            Self::ItemSoldOut => f.write_str("ItemSoldOut"),
-            Self::CantCarryMore => f.write_str("CantCarryMore"),
-            Self::RankRequire => f.write_str("RankRequire"),
-            Self::ReputationRequire => f.write_str("ReputationRequire"),
-        }
+        f.write_str(match self {
+            Self::CantFindItem => "CantFindItem",
+            Self::ItemAlreadySold => "ItemAlreadySold",
+            Self::NotEnoughMoney => "NotEnoughMoney",
+            Self::SellerDontLikeYou => "SellerDontLikeYou",
+            Self::DistanceTooFar => "DistanceTooFar",
+            Self::ItemSoldOut => "ItemSoldOut",
+            Self::CantCarryMore => "CantCarryMore",
+            Self::RankRequire => "RankRequire",
+            Self::ReputationRequire => "ReputationRequire",
+        })
     }
 }
 

@@ -57,10 +57,10 @@ impl Default for LfgJoinStatus {
 
 impl std::fmt::Display for LfgJoinStatus {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
-            Self::NotJoined => f.write_str("NotJoined"),
-            Self::Joined => f.write_str("Joined"),
-        }
+        f.write_str(match self {
+            Self::NotJoined => "NotJoined",
+            Self::Joined => "Joined",
+        })
     }
 }
 

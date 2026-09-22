@@ -80,13 +80,13 @@ impl Default for LootSlotType {
 
 impl std::fmt::Display for LootSlotType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
-            Self::TypeAllowLoot => f.write_str("TypeAllowLoot"),
-            Self::TypeRollOngoing => f.write_str("TypeRollOngoing"),
-            Self::TypeMaster => f.write_str("TypeMaster"),
-            Self::TypeLocked => f.write_str("TypeLocked"),
-            Self::TypeOwner => f.write_str("TypeOwner"),
-        }
+        f.write_str(match self {
+            Self::TypeAllowLoot => "TypeAllowLoot",
+            Self::TypeRollOngoing => "TypeRollOngoing",
+            Self::TypeMaster => "TypeMaster",
+            Self::TypeLocked => "TypeLocked",
+            Self::TypeOwner => "TypeOwner",
+        })
     }
 }
 

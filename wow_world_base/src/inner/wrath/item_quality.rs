@@ -93,16 +93,16 @@ impl Default for ItemQuality {
 
 impl std::fmt::Display for ItemQuality {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
-            Self::Poor => f.write_str("Poor"),
-            Self::Normal => f.write_str("Normal"),
-            Self::Uncommon => f.write_str("Uncommon"),
-            Self::Rare => f.write_str("Rare"),
-            Self::Epic => f.write_str("Epic"),
-            Self::Legendary => f.write_str("Legendary"),
-            Self::Artifact => f.write_str("Artifact"),
-            Self::Heirloom => f.write_str("Heirloom"),
-        }
+        f.write_str(match self {
+            Self::Poor => "Poor",
+            Self::Normal => "Normal",
+            Self::Uncommon => "Uncommon",
+            Self::Rare => "Rare",
+            Self::Epic => "Epic",
+            Self::Legendary => "Legendary",
+            Self::Artifact => "Artifact",
+            Self::Heirloom => "Heirloom",
+        })
     }
 }
 

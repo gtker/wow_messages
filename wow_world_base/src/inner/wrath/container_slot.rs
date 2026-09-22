@@ -80,6 +80,7 @@ pub enum ContainerSlot {
     Slot34,
     Slot35,
 }
+
 impl ContainerSlot {
     pub const fn as_int(&self) -> u8 {
         match self {
@@ -261,44 +262,44 @@ impl Default for ContainerSlot {
 
 impl std::fmt::Display for ContainerSlot {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
-            Self::Slot0 => f.write_str("Slot0"),
-            Self::Slot1 => f.write_str("Slot1"),
-            Self::Slot2 => f.write_str("Slot2"),
-            Self::Slot3 => f.write_str("Slot3"),
-            Self::Slot4 => f.write_str("Slot4"),
-            Self::Slot5 => f.write_str("Slot5"),
-            Self::Slot6 => f.write_str("Slot6"),
-            Self::Slot7 => f.write_str("Slot7"),
-            Self::Slot8 => f.write_str("Slot8"),
-            Self::Slot9 => f.write_str("Slot9"),
-            Self::Slot10 => f.write_str("Slot10"),
-            Self::Slot11 => f.write_str("Slot11"),
-            Self::Slot12 => f.write_str("Slot12"),
-            Self::Slot13 => f.write_str("Slot13"),
-            Self::Slot14 => f.write_str("Slot14"),
-            Self::Slot15 => f.write_str("Slot15"),
-            Self::Slot16 => f.write_str("Slot16"),
-            Self::Slot17 => f.write_str("Slot17"),
-            Self::Slot18 => f.write_str("Slot18"),
-            Self::Slot19 => f.write_str("Slot19"),
-            Self::Slot20 => f.write_str("Slot20"),
-            Self::Slot21 => f.write_str("Slot21"),
-            Self::Slot22 => f.write_str("Slot22"),
-            Self::Slot23 => f.write_str("Slot23"),
-            Self::Slot24 => f.write_str("Slot24"),
-            Self::Slot25 => f.write_str("Slot25"),
-            Self::Slot26 => f.write_str("Slot26"),
-            Self::Slot27 => f.write_str("Slot27"),
-            Self::Slot28 => f.write_str("Slot28"),
-            Self::Slot29 => f.write_str("Slot29"),
-            Self::Slot30 => f.write_str("Slot30"),
-            Self::Slot31 => f.write_str("Slot31"),
-            Self::Slot32 => f.write_str("Slot32"),
-            Self::Slot33 => f.write_str("Slot33"),
-            Self::Slot34 => f.write_str("Slot34"),
-            Self::Slot35 => f.write_str("Slot35"),
-        }
+        f.write_str(match self {
+            Self::Slot0 => "Slot0",
+            Self::Slot1 => "Slot1",
+            Self::Slot2 => "Slot2",
+            Self::Slot3 => "Slot3",
+            Self::Slot4 => "Slot4",
+            Self::Slot5 => "Slot5",
+            Self::Slot6 => "Slot6",
+            Self::Slot7 => "Slot7",
+            Self::Slot8 => "Slot8",
+            Self::Slot9 => "Slot9",
+            Self::Slot10 => "Slot10",
+            Self::Slot11 => "Slot11",
+            Self::Slot12 => "Slot12",
+            Self::Slot13 => "Slot13",
+            Self::Slot14 => "Slot14",
+            Self::Slot15 => "Slot15",
+            Self::Slot16 => "Slot16",
+            Self::Slot17 => "Slot17",
+            Self::Slot18 => "Slot18",
+            Self::Slot19 => "Slot19",
+            Self::Slot20 => "Slot20",
+            Self::Slot21 => "Slot21",
+            Self::Slot22 => "Slot22",
+            Self::Slot23 => "Slot23",
+            Self::Slot24 => "Slot24",
+            Self::Slot25 => "Slot25",
+            Self::Slot26 => "Slot26",
+            Self::Slot27 => "Slot27",
+            Self::Slot28 => "Slot28",
+            Self::Slot29 => "Slot29",
+            Self::Slot30 => "Slot30",
+            Self::Slot31 => "Slot31",
+            Self::Slot32 => "Slot32",
+            Self::Slot33 => "Slot33",
+            Self::Slot34 => "Slot34",
+            Self::Slot35 => "Slot35",
+        })
     }
 }
 
@@ -379,3 +380,4 @@ impl TryFrom<usize> for ContainerSlot {
             .try_into()
     }
 }
+

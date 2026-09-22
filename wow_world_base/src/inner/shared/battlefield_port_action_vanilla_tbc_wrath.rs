@@ -57,10 +57,10 @@ impl Default for BattlefieldPortAction {
 
 impl std::fmt::Display for BattlefieldPortAction {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
-            Self::LeaveQueue => f.write_str("LeaveQueue"),
-            Self::EnterBattle => f.write_str("EnterBattle"),
-        }
+        f.write_str(match self {
+            Self::LeaveQueue => "LeaveQueue",
+            Self::EnterBattle => "EnterBattle",
+        })
     }
 }
 

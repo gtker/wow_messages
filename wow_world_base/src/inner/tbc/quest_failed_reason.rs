@@ -129,20 +129,20 @@ impl Default for QuestFailedReason {
 
 impl std::fmt::Display for QuestFailedReason {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
-            Self::DontHaveReq => f.write_str("DontHaveReq"),
-            Self::QuestFailedLowLevel => f.write_str("QuestFailedLowLevel"),
-            Self::QuestFailedWrongRace => f.write_str("QuestFailedWrongRace"),
-            Self::QuestAlreadyDone => f.write_str("QuestAlreadyDone"),
-            Self::QuestOnlyOneTimed => f.write_str("QuestOnlyOneTimed"),
-            Self::QuestAlreadyOn => f.write_str("QuestAlreadyOn"),
-            Self::QuestFailedExpansion => f.write_str("QuestFailedExpansion"),
-            Self::QuestAlreadyOn2 => f.write_str("QuestAlreadyOn2"),
-            Self::QuestFailedMissingItems => f.write_str("QuestFailedMissingItems"),
-            Self::QuestFailedNotEnoughMoney => f.write_str("QuestFailedNotEnoughMoney"),
-            Self::DailyQuestsRemaining => f.write_str("DailyQuestsRemaining"),
-            Self::QuestFailedCais => f.write_str("QuestFailedCais"),
-        }
+        f.write_str(match self {
+            Self::DontHaveReq => "DontHaveReq",
+            Self::QuestFailedLowLevel => "QuestFailedLowLevel",
+            Self::QuestFailedWrongRace => "QuestFailedWrongRace",
+            Self::QuestAlreadyDone => "QuestAlreadyDone",
+            Self::QuestOnlyOneTimed => "QuestOnlyOneTimed",
+            Self::QuestAlreadyOn => "QuestAlreadyOn",
+            Self::QuestFailedExpansion => "QuestFailedExpansion",
+            Self::QuestAlreadyOn2 => "QuestAlreadyOn2",
+            Self::QuestFailedMissingItems => "QuestFailedMissingItems",
+            Self::QuestFailedNotEnoughMoney => "QuestFailedNotEnoughMoney",
+            Self::DailyQuestsRemaining => "DailyQuestsRemaining",
+            Self::QuestFailedCais => "QuestFailedCais",
+        })
     }
 }
 

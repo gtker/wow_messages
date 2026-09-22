@@ -61,10 +61,10 @@ impl Default for ItemWeaponClass {
 
 impl std::fmt::Display for ItemWeaponClass {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
-            Self::Item => f.write_str("Item"),
-            Self::Weapon => f.write_str("Weapon"),
-        }
+        f.write_str(match self {
+            Self::Item => "Item",
+            Self::Weapon => "Weapon",
+        })
     }
 }
 

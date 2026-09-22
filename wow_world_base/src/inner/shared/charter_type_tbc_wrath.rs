@@ -57,10 +57,10 @@ impl Default for CharterType {
 
 impl std::fmt::Display for CharterType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
-            Self::Guild => f.write_str("Guild"),
-            Self::Arena => f.write_str("Arena"),
-        }
+        f.write_str(match self {
+            Self::Guild => "Guild",
+            Self::Arena => "Arena",
+        })
     }
 }
 

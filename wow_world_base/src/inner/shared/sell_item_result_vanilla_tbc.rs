@@ -86,14 +86,14 @@ impl Default for SellItemResult {
 
 impl std::fmt::Display for SellItemResult {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
-            Self::CantFindItem => f.write_str("CantFindItem"),
-            Self::CantSellItem => f.write_str("CantSellItem"),
-            Self::CantFindVendor => f.write_str("CantFindVendor"),
-            Self::YouDontOwnThatItem => f.write_str("YouDontOwnThatItem"),
-            Self::Unk => f.write_str("Unk"),
-            Self::OnlyEmptyBag => f.write_str("OnlyEmptyBag"),
-        }
+        f.write_str(match self {
+            Self::CantFindItem => "CantFindItem",
+            Self::CantSellItem => "CantSellItem",
+            Self::CantFindVendor => "CantFindVendor",
+            Self::YouDontOwnThatItem => "YouDontOwnThatItem",
+            Self::Unk => "Unk",
+            Self::OnlyEmptyBag => "OnlyEmptyBag",
+        })
     }
 }
 

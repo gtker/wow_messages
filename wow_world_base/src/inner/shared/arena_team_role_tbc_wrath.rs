@@ -57,10 +57,10 @@ impl Default for ArenaTeamRole {
 
 impl std::fmt::Display for ArenaTeamRole {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
-            Self::Captain => f.write_str("Captain"),
-            Self::Member => f.write_str("Member"),
-        }
+        f.write_str(match self {
+            Self::Captain => "Captain",
+            Self::Member => "Member",
+        })
     }
 }
 

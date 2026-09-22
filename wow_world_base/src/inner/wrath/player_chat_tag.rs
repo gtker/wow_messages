@@ -81,14 +81,14 @@ impl Default for PlayerChatTag {
 
 impl std::fmt::Display for PlayerChatTag {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
-            Self::None => f.write_str("None"),
-            Self::Afk => f.write_str("Afk"),
-            Self::Dnd => f.write_str("Dnd"),
-            Self::Gm => f.write_str("Gm"),
-            Self::Commentator => f.write_str("Commentator"),
-            Self::Developer => f.write_str("Developer"),
-        }
+        f.write_str(match self {
+            Self::None => "None",
+            Self::Afk => "Afk",
+            Self::Dnd => "Dnd",
+            Self::Gm => "Gm",
+            Self::Commentator => "Commentator",
+            Self::Developer => "Developer",
+        })
     }
 }
 

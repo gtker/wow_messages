@@ -57,10 +57,10 @@ impl Default for LogFormat {
 
 impl std::fmt::Display for LogFormat {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
-            Self::Default => f.write_str("Default"),
-            Self::Debug => f.write_str("Debug"),
-        }
+        f.write_str(match self {
+            Self::Default => "Default",
+            Self::Debug => "Debug",
+        })
     }
 }
 

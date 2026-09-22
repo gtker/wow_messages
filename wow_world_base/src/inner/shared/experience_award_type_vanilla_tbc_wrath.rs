@@ -57,10 +57,10 @@ impl Default for ExperienceAwardType {
 
 impl std::fmt::Display for ExperienceAwardType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
-            Self::Kill => f.write_str("Kill"),
-            Self::NonKill => f.write_str("NonKill"),
-        }
+        f.write_str(match self {
+            Self::Kill => "Kill",
+            Self::NonKill => "NonKill",
+        })
     }
 }
 

@@ -57,10 +57,10 @@ impl Default for PetQueryDisabledNames {
 
 impl std::fmt::Display for PetQueryDisabledNames {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
-            Self::Present => f.write_str("Present"),
-            Self::NotPresent => f.write_str("NotPresent"),
-        }
+        f.write_str(match self {
+            Self::Present => "Present",
+            Self::NotPresent => "NotPresent",
+        })
     }
 }
 

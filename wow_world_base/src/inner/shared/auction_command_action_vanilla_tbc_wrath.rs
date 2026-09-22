@@ -66,11 +66,11 @@ impl Default for AuctionCommandAction {
 
 impl std::fmt::Display for AuctionCommandAction {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
-            Self::Started => f.write_str("Started"),
-            Self::Removed => f.write_str("Removed"),
-            Self::BidPlaced => f.write_str("BidPlaced"),
-        }
+        f.write_str(match self {
+            Self::Started => "Started",
+            Self::Removed => "Removed",
+            Self::BidPlaced => "BidPlaced",
+        })
     }
 }
 

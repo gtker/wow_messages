@@ -55,12 +55,12 @@ impl Default for RealmType {
 
 impl std::fmt::Display for RealmType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
-            Self::PlayerVsEnvironment => f.write_str("PlayerVsEnvironment"),
-            Self::PlayerVsPlayer => f.write_str("PlayerVsPlayer"),
-            Self::Roleplaying => f.write_str("Roleplaying"),
-            Self::RoleplayingPlayerVsPlayer => f.write_str("RoleplayingPlayerVsPlayer"),
-        }
+        f.write_str(match self {
+            Self::PlayerVsEnvironment => "PlayerVsEnvironment",
+            Self::PlayerVsPlayer => "PlayerVsPlayer",
+            Self::Roleplaying => "Roleplaying",
+            Self::RoleplayingPlayerVsPlayer => "RoleplayingPlayerVsPlayer",
+        })
     }
 }
 

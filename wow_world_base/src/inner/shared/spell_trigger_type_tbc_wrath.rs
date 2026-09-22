@@ -90,15 +90,15 @@ impl Default for SpellTriggerType {
 
 impl std::fmt::Display for SpellTriggerType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
-            Self::OnUse => f.write_str("OnUse"),
-            Self::OnEquip => f.write_str("OnEquip"),
-            Self::ChanceOnHit => f.write_str("ChanceOnHit"),
-            Self::ServerSideScript => f.write_str("ServerSideScript"),
-            Self::Soulstone => f.write_str("Soulstone"),
-            Self::NoEquipCooldown => f.write_str("NoEquipCooldown"),
-            Self::LearnSpellId => f.write_str("LearnSpellId"),
-        }
+        f.write_str(match self {
+            Self::OnUse => "OnUse",
+            Self::OnEquip => "OnEquip",
+            Self::ChanceOnHit => "ChanceOnHit",
+            Self::ServerSideScript => "ServerSideScript",
+            Self::Soulstone => "Soulstone",
+            Self::NoEquipCooldown => "NoEquipCooldown",
+            Self::LearnSpellId => "LearnSpellId",
+        })
     }
 }
 

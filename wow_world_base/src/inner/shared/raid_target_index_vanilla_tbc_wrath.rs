@@ -105,18 +105,18 @@ impl Default for RaidTargetIndex {
 
 impl std::fmt::Display for RaidTargetIndex {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
-            Self::Unknown0 => f.write_str("Unknown0"),
-            Self::Unknown1 => f.write_str("Unknown1"),
-            Self::Unknown2 => f.write_str("Unknown2"),
-            Self::Unknown3 => f.write_str("Unknown3"),
-            Self::Unknown4 => f.write_str("Unknown4"),
-            Self::Unknown5 => f.write_str("Unknown5"),
-            Self::Unknown6 => f.write_str("Unknown6"),
-            Self::Unknown7 => f.write_str("Unknown7"),
-            Self::Unknown8 => f.write_str("Unknown8"),
-            Self::RequestIcons => f.write_str("RequestIcons"),
-        }
+        f.write_str(match self {
+            Self::Unknown0 => "Unknown0",
+            Self::Unknown1 => "Unknown1",
+            Self::Unknown2 => "Unknown2",
+            Self::Unknown3 => "Unknown3",
+            Self::Unknown4 => "Unknown4",
+            Self::Unknown5 => "Unknown5",
+            Self::Unknown6 => "Unknown6",
+            Self::Unknown7 => "Unknown7",
+            Self::Unknown8 => "Unknown8",
+            Self::RequestIcons => "RequestIcons",
+        })
     }
 }
 

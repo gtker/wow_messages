@@ -63,11 +63,11 @@ impl Default for TrainerSpellState {
 
 impl std::fmt::Display for TrainerSpellState {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
-            Self::Green => f.write_str("Green"),
-            Self::Red => f.write_str("Red"),
-            Self::Gray => f.write_str("Gray"),
-        }
+        f.write_str(match self {
+            Self::Green => "Green",
+            Self::Red => "Red",
+            Self::Gray => "Gray",
+        })
     }
 }
 

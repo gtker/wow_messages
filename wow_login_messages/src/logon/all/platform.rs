@@ -45,10 +45,10 @@ impl Default for Platform {
 
 impl std::fmt::Display for Platform {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
-            Self::X86 => f.write_str("X86"),
-            Self::PowerPc => f.write_str("PowerPc"),
-        }
+        f.write_str(match self {
+            Self::X86 => "X86",
+            Self::PowerPc => "PowerPc",
+        })
     }
 }
 

@@ -69,12 +69,12 @@ impl Default for ArenaType {
 
 impl std::fmt::Display for ArenaType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
-            Self::NotArena => f.write_str("NotArena"),
-            Self::TwoVsTwo => f.write_str("TwoVsTwo"),
-            Self::ThreeVsThree => f.write_str("ThreeVsThree"),
-            Self::FiveVsFive => f.write_str("FiveVsFive"),
-        }
+        f.write_str(match self {
+            Self::NotArena => "NotArena",
+            Self::TwoVsTwo => "TwoVsTwo",
+            Self::ThreeVsThree => "ThreeVsThree",
+            Self::FiveVsFive => "FiveVsFive",
+        })
     }
 }
 

@@ -64,11 +64,11 @@ impl Default for Gender {
 
 impl std::fmt::Display for Gender {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
-            Self::Male => f.write_str("Male"),
-            Self::Female => f.write_str("Female"),
-            Self::None => f.write_str("None"),
-        }
+        f.write_str(match self {
+            Self::Male => "Male",
+            Self::Female => "Female",
+            Self::None => "None",
+        })
     }
 }
 

@@ -94,16 +94,16 @@ impl Default for EncounterFrame {
 
 impl std::fmt::Display for EncounterFrame {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
-            Self::Engage => f.write_str("Engage"),
-            Self::Disengage => f.write_str("Disengage"),
-            Self::UpdatePriority => f.write_str("UpdatePriority"),
-            Self::AddTimer => f.write_str("AddTimer"),
-            Self::EnableObjective => f.write_str("EnableObjective"),
-            Self::UpdateObjective => f.write_str("UpdateObjective"),
-            Self::DisableObjective => f.write_str("DisableObjective"),
-            Self::RefreshFrames => f.write_str("RefreshFrames"),
-        }
+        f.write_str(match self {
+            Self::Engage => "Engage",
+            Self::Disengage => "Disengage",
+            Self::UpdatePriority => "UpdatePriority",
+            Self::AddTimer => "AddTimer",
+            Self::EnableObjective => "EnableObjective",
+            Self::UpdateObjective => "UpdateObjective",
+            Self::DisableObjective => "DisableObjective",
+            Self::RefreshFrames => "RefreshFrames",
+        })
     }
 }
 

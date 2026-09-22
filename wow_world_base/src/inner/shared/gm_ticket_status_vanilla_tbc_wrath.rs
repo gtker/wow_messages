@@ -63,11 +63,11 @@ impl Default for GmTicketStatus {
 
 impl std::fmt::Display for GmTicketStatus {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
-            Self::DbError => f.write_str("DbError"),
-            Self::HasText => f.write_str("HasText"),
-            Self::Default => f.write_str("Default"),
-        }
+        f.write_str(match self {
+            Self::DbError => "DbError",
+            Self::HasText => "HasText",
+            Self::Default => "Default",
+        })
     }
 }
 

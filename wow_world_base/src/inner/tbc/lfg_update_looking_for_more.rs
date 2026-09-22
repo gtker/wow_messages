@@ -57,10 +57,10 @@ impl Default for LfgUpdateLookingForMore {
 
 impl std::fmt::Display for LfgUpdateLookingForMore {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
-            Self::NotLookingForMore => f.write_str("NotLookingForMore"),
-            Self::LookingForMore => f.write_str("LookingForMore"),
-        }
+        f.write_str(match self {
+            Self::NotLookingForMore => "NotLookingForMore",
+            Self::LookingForMore => "LookingForMore",
+        })
     }
 }
 

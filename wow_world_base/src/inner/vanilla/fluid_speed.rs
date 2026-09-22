@@ -67,11 +67,11 @@ impl Default for FluidSpeed {
 
 impl std::fmt::Display for FluidSpeed {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
-            Self::Still => f.write_str("Still"),
-            Self::Slow => f.write_str("Slow"),
-            Self::Rapid => f.write_str("Rapid"),
-        }
+        f.write_str(match self {
+            Self::Still => "Still",
+            Self::Slow => "Slow",
+            Self::Rapid => "Rapid",
+        })
     }
 }
 

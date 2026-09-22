@@ -79,13 +79,13 @@ impl Default for SelectionType {
 
 impl std::fmt::Display for SelectionType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
-            Self::BaseSkin => f.write_str("BaseSkin"),
-            Self::Face => f.write_str("Face"),
-            Self::FacialHair => f.write_str("FacialHair"),
-            Self::Hair => f.write_str("Hair"),
-            Self::Underwear => f.write_str("Underwear"),
-        }
+        f.write_str(match self {
+            Self::BaseSkin => "BaseSkin",
+            Self::Face => "Face",
+            Self::FacialHair => "FacialHair",
+            Self::Hair => "Hair",
+            Self::Underwear => "Underwear",
+        })
     }
 }
 

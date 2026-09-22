@@ -117,20 +117,20 @@ impl Default for TransferAbortReason {
 
 impl std::fmt::Display for TransferAbortReason {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
-            Self::None => f.write_str("None"),
-            Self::IsFull => f.write_str("IsFull"),
-            Self::NotFound => f.write_str("NotFound"),
-            Self::TooManyInstances => f.write_str("TooManyInstances"),
-            Self::ZoneIsInCombat => f.write_str("ZoneIsInCombat"),
-            Self::InsufficientExpansionLevel => f.write_str("InsufficientExpansionLevel"),
-            Self::DifficultyNotAvailable => f.write_str("DifficultyNotAvailable"),
-            Self::MissingDifficulty => f.write_str("MissingDifficulty"),
-            Self::ZoneInCombat => f.write_str("ZoneInCombat"),
-            Self::InstanceIsFull => f.write_str("InstanceIsFull"),
-            Self::NotAllowed => f.write_str("NotAllowed"),
-            Self::HasBind => f.write_str("HasBind"),
-        }
+        f.write_str(match self {
+            Self::None => "None",
+            Self::IsFull => "IsFull",
+            Self::NotFound => "NotFound",
+            Self::TooManyInstances => "TooManyInstances",
+            Self::ZoneIsInCombat => "ZoneIsInCombat",
+            Self::InsufficientExpansionLevel => "InsufficientExpansionLevel",
+            Self::DifficultyNotAvailable => "DifficultyNotAvailable",
+            Self::MissingDifficulty => "MissingDifficulty",
+            Self::ZoneInCombat => "ZoneInCombat",
+            Self::InstanceIsFull => "InstanceIsFull",
+            Self::NotAllowed => "NotAllowed",
+            Self::HasBind => "HasBind",
+        })
     }
 }
 

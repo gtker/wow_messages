@@ -78,13 +78,13 @@ impl Default for MailType {
 
 impl std::fmt::Display for MailType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
-            Self::Normal => f.write_str("Normal"),
-            Self::Auction => f.write_str("Auction"),
-            Self::Creature => f.write_str("Creature"),
-            Self::Gameobject => f.write_str("Gameobject"),
-            Self::Item => f.write_str("Item"),
-        }
+        f.write_str(match self {
+            Self::Normal => "Normal",
+            Self::Auction => "Auction",
+            Self::Creature => "Creature",
+            Self::Gameobject => "Gameobject",
+            Self::Item => "Item",
+        })
     }
 }
 

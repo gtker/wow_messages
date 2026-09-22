@@ -57,10 +57,10 @@ impl Default for SimpleSpellCastResult {
 
 impl std::fmt::Display for SimpleSpellCastResult {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
-            Self::Success => f.write_str("Success"),
-            Self::Failure => f.write_str("Failure"),
-        }
+        f.write_str(match self {
+            Self::Success => "Success",
+            Self::Failure => "Failure",
+        })
     }
 }
 

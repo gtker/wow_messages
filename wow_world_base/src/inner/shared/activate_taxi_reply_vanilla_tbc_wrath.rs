@@ -123,21 +123,21 @@ impl Default for ActivateTaxiReply {
 
 impl std::fmt::Display for ActivateTaxiReply {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
-            Self::Ok => f.write_str("Ok"),
-            Self::UnspecifiedServerError => f.write_str("UnspecifiedServerError"),
-            Self::NoSuchPath => f.write_str("NoSuchPath"),
-            Self::NotEnoughMoney => f.write_str("NotEnoughMoney"),
-            Self::TooFarAway => f.write_str("TooFarAway"),
-            Self::NoVendorNearby => f.write_str("NoVendorNearby"),
-            Self::NotVisited => f.write_str("NotVisited"),
-            Self::PlayerBusy => f.write_str("PlayerBusy"),
-            Self::PlayerAlreadyMounted => f.write_str("PlayerAlreadyMounted"),
-            Self::PlayerShapeShifted => f.write_str("PlayerShapeShifted"),
-            Self::PlayerMoving => f.write_str("PlayerMoving"),
-            Self::SameNode => f.write_str("SameNode"),
-            Self::NotStanding => f.write_str("NotStanding"),
-        }
+        f.write_str(match self {
+            Self::Ok => "Ok",
+            Self::UnspecifiedServerError => "UnspecifiedServerError",
+            Self::NoSuchPath => "NoSuchPath",
+            Self::NotEnoughMoney => "NotEnoughMoney",
+            Self::TooFarAway => "TooFarAway",
+            Self::NoVendorNearby => "NoVendorNearby",
+            Self::NotVisited => "NotVisited",
+            Self::PlayerBusy => "PlayerBusy",
+            Self::PlayerAlreadyMounted => "PlayerAlreadyMounted",
+            Self::PlayerShapeShifted => "PlayerShapeShifted",
+            Self::PlayerMoving => "PlayerMoving",
+            Self::SameNode => "SameNode",
+            Self::NotStanding => "NotStanding",
+        })
     }
 }
 

@@ -69,12 +69,12 @@ impl Default for RaidDifficulty {
 
 impl std::fmt::Display for RaidDifficulty {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
-            Self::TenManNormal => f.write_str("TenManNormal"),
-            Self::TwentyFiveManNormal => f.write_str("TwentyFiveManNormal"),
-            Self::TenManHeroic => f.write_str("TenManHeroic"),
-            Self::TwentyFiveManHeroic => f.write_str("TwentyFiveManHeroic"),
-        }
+        f.write_str(match self {
+            Self::TenManNormal => "TenManNormal",
+            Self::TwentyFiveManNormal => "TwentyFiveManNormal",
+            Self::TenManHeroic => "TenManHeroic",
+            Self::TwentyFiveManHeroic => "TwentyFiveManHeroic",
+        })
     }
 }
 
