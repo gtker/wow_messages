@@ -138,6 +138,20 @@
                 }
               }
             },
+            "IntArrayUsingEnum": {
+              "properties": {
+                "content": {
+                  "properties": {
+                    "definer": {
+                      "ref": "definer"
+                    },
+                    "variable_name": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            },
             "ArrayOfStruct": {
               "properties": {
                 "content": {

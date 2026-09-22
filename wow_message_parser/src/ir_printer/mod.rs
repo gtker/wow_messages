@@ -20,7 +20,8 @@ use crate::parser::types::ty::Type;
 use crate::parser::types::version::{AllVersions, LoginVersion, MajorWorldVersion, WorldVersion};
 use crate::parser::types::IntegerType;
 use crate::path_utils::intermediate_representation;
-use crate::rust_printer::{tbc_fields, vanilla_fields, wrath_fields};
+use crate::rust_printer::fields as update_mask_fields;
+use crate::rust_printer::{tbc_fields, vanilla_fields};
 
 #[derive(Serialize, Clone, Debug)]
 struct IrFileInfo {
@@ -451,7 +452,7 @@ impl IrObjects {
                 MajorWorldVersion::BurningCrusade,
             ),
             wrath_update_mask: IrUpdateMaskMember::new_array(
-                wrath_fields::FIELDS,
+                &update_mask_fields(o, MajorWorldVersion::Wrath),
                 o,
                 MajorWorldVersion::Wrath,
             ),

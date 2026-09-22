@@ -16,6 +16,7 @@ use crate::parser::types::parsed::parsed_struct_member::{
     ParsedStructMember, ParsedStructMemberDefinition,
 };
 use crate::parser::types::parsed::parsed_test_case::ParsedTestCase;
+use crate::parser::types::parsed::parsed_update_mask::ParsedUpdateMaskField;
 use crate::rust_printer::rust_view::create_rust_object;
 use crate::{Container, ObjectTags, Objects, CONTAINER_SELF_SIZE_FIELD};
 
@@ -27,6 +28,7 @@ pub(crate) fn object_new(
     structs: Vec<ParsedContainer>,
     messages: Vec<ParsedContainer>,
     tests: Vec<ParsedTestCase>,
+    update_mask_fields: Vec<ParsedUpdateMaskField>,
 ) -> Objects {
     let containers = [structs.as_slice(), messages.as_slice()].concat();
     let enums = parsed_definer_to_definer(enums, &containers);
@@ -48,6 +50,7 @@ pub(crate) fn object_new(
         structs,
         messages,
         tests,
+        update_mask_fields,
     };
 
     o.sort_members();

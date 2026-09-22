@@ -2115,13 +2115,15 @@ impl UpdatePlayerBuilder {
         self
     }
 
-    pub fn set_player_buyback_price_1(mut self, v: i32) -> Self {
-        self.set_int(1201, v);
+    pub fn set_player_buyback_price(mut self, buyback_slot: crate::wrath::BuybackSlot, v: i32) -> Self {
+        let offset = 1201 + buyback_slot.as_int() as u16 - 74;
+        self.set_int(offset, v);
         self
     }
 
-    pub fn set_player_buyback_timestamp_1(mut self, v: i32) -> Self {
-        self.set_int(1213, v);
+    pub fn set_player_buyback_timestamp(mut self, buyback_slot: crate::wrath::BuybackSlot, v: i32) -> Self {
+        let offset = 1213 + buyback_slot.as_int() as u16 - 74;
+        self.set_int(offset, v);
         self
     }
 
@@ -5766,20 +5768,24 @@ impl UpdatePlayer {
         self.get_int(1200)
     }
 
-    pub fn set_player_buyback_price_1(&mut self, v: i32) {
-        self.set_int(1201, v);
+    pub fn set_player_buyback_price(&mut self, buyback_slot: crate::wrath::BuybackSlot, v: i32) {
+        let offset = 1201 + buyback_slot.as_int() as u16 - 74;
+        self.set_int(offset, v);
     }
 
-    pub fn player_buyback_price_1(&self) -> Option<i32> {
-        self.get_int(1201)
+    pub fn player_buyback_price(&self, buyback_slot: crate::wrath::BuybackSlot) -> Option<i32> {
+        let offset = 1201 + buyback_slot.as_int() as u16 - 74;
+        self.get_int(offset)
     }
 
-    pub fn set_player_buyback_timestamp_1(&mut self, v: i32) {
-        self.set_int(1213, v);
+    pub fn set_player_buyback_timestamp(&mut self, buyback_slot: crate::wrath::BuybackSlot, v: i32) {
+        let offset = 1213 + buyback_slot.as_int() as u16 - 74;
+        self.set_int(offset, v);
     }
 
-    pub fn player_buyback_timestamp_1(&self) -> Option<i32> {
-        self.get_int(1213)
+    pub fn player_buyback_timestamp(&self, buyback_slot: crate::wrath::BuybackSlot) -> Option<i32> {
+        let offset = 1213 + buyback_slot.as_int() as u16 - 74;
+        self.get_int(offset)
     }
 
     pub fn set_player_kills(&mut self, a: u16, b: u16) {
