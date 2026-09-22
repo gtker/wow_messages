@@ -166,8 +166,8 @@ pub mod cmsg_bootme_vanilla_tbc_wrath;
 pub mod cmsg_bug_vanilla_tbc_wrath;
 #[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
 pub mod cmsg_busy_trade_vanilla_tbc_wrath;
-#[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
-pub mod cmsg_buyback_item_vanilla_tbc_wrath;
+#[cfg(any(feature = "vanilla", feature = "tbc"))]
+pub mod cmsg_buyback_item_vanilla_tbc;
 #[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
 pub mod cmsg_buy_bank_slot_vanilla_tbc_wrath;
 #[cfg(any(feature = "vanilla", feature = "tbc"))]

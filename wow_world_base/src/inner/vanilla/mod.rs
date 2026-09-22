@@ -38,7 +38,7 @@ pub use bg_type_id::*;
 pub use crate::shared::bonding_vanilla_tbc_wrath::*;
 pub use crate::shared::buy_bank_slot_result_vanilla_tbc_wrath::*;
 pub use crate::shared::buy_result_vanilla_tbc_wrath::*;
-pub use crate::shared::buyback_slot_vanilla_tbc_wrath::*;
+pub use crate::shared::buyback_slot_vanilla_tbc::*;
 pub(crate) mod cast_failure_reason;
 pub use cast_failure_reason::*;
 pub(crate) mod chat_notify;
