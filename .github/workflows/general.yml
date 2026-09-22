@@ -13,6 +13,7 @@ jobs:
       - uses: actions/checkout@v4
       - uses: dtolnay/rust-toolchain@stable
       - run: |
+          set -ex
           cargo gen
           git diff-files --quiet || exit 1
       - run: cargo check --all-features --workspace
