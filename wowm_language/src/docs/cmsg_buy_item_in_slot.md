@@ -47,7 +47,7 @@ cmsg CMSG_BUY_ITEM_IN_SLOT = 0x01A3 {
     u32 vendor_slot;
     Guid bag;
     u8 bag_slot;
-    u8 amount;
+    u32 amount;
 }
 ```
 ### Header
@@ -70,5 +70,19 @@ CMSG have a header of 6 bytes.
 | 0x12 | 4 / Little | u32 | vendor_slot | arcemu: VLack: 3.1.2 This is the slot's number on the vendor's panel, starts from 1 |
 | 0x16 | 8 / Little | [Guid](../types/packed-guid.md) | bag |  |
 | 0x1E | 1 / - | u8 | bag_slot |  |
-| 0x1F | 1 / - | u8 | amount |  |
+| 0x1F | 4 / Little | u32 | amount |  |
 
+### Examples
+
+#### Example 1
+
+```c
+0, 33, // size
+163, 1, 0, 0, // opcode (419)
+100, 0, 0, 0, 0, 0, 0, 0, // vendor: Guid
+200, 0, 0, 0, // item: Item
+1, 0, 0, 0, // vendor_slot: u32
+44, 1, 0, 0, 0, 0, 0, 0, // bag: Guid
+7, // bag_slot: u8
+3, 0, 0, 0, // amount: u32
+```

@@ -43,7 +43,8 @@ cmsg CMSG_BUY_ITEM = 0x01A2 {
     Guid vendor;
     Item item;
     u32 slot;
-    u8 amount;
+    u32 amount;
+    u8 unknown1;
 }
 ```
 ### Header
@@ -64,5 +65,19 @@ CMSG have a header of 6 bytes.
 | 0x06 | 8 / Little | [Guid](../types/packed-guid.md) | vendor |  |
 | 0x0E | 4 / Little | Item | item |  |
 | 0x12 | 4 / Little | u32 | slot |  |
-| 0x16 | 1 / - | u8 | amount |  |
+| 0x16 | 4 / Little | u32 | amount |  |
+| 0x1A | 1 / - | u8 | unknown1 |  |
 
+### Examples
+
+#### Example 1
+
+```c
+0, 25, // size
+162, 1, 0, 0, // opcode (418)
+100, 0, 0, 0, 0, 0, 0, 0, // vendor: Guid
+200, 0, 0, 0, // item: Item
+1, 0, 0, 0, // slot: u32
+3, 0, 0, 0, // amount: u32
+0, // unknown1: u8
+```
