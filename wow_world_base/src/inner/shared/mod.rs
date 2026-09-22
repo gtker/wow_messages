@@ -49,8 +49,8 @@ pub mod bonding_vanilla_tbc_wrath;
 pub mod buy_bank_slot_result_vanilla_tbc_wrath;
 #[cfg(any(feature = "shared", feature = "vanilla", feature = "tbc", feature = "wrath"))]
 pub mod buy_result_vanilla_tbc_wrath;
-#[cfg(any(feature = "shared", feature = "vanilla", feature = "tbc", feature = "wrath"))]
-pub mod buyback_slot_vanilla_tbc_wrath;
+#[cfg(any(feature = "shared", feature = "vanilla", feature = "tbc"))]
+pub mod buyback_slot_vanilla_tbc;
 #[cfg(any(feature = "shared", feature = "tbc", feature = "wrath"))]
 pub mod charter_type_tbc_wrath;
 #[cfg(any(feature = "shared", feature = "tbc", feature = "wrath"))]

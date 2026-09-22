@@ -1,5 +1,3 @@
-#tag_all versions "1.8 1.9 1.10 1.11 1.12 2 3";
-
 enum BuybackSlot : u32 {
     SLOT1 = 69;
     SLOT2 = 70;
@@ -14,10 +12,61 @@ enum BuybackSlot : u32 {
     SLOT11 = 79;
     SLOT12 = 80;
     SLOT13 = 81;
+} {
+    versions = "1.8 1.9 1.10 1.11 1.12 2";
+}
+
+enum BuybackSlot : u32 {
+    SLOT1 = 74;
+    SLOT2 = 75;
+    SLOT3 = 76;
+    SLOT4 = 77;
+    SLOT5 = 78;
+    SLOT6 = 79;
+    SLOT7 = 80;
+    SLOT8 = 81;
+    SLOT9 = 82;
+    SLOT10 = 83;
+    SLOT11 = 84;
+    SLOT12 = 85;
+} {
+    versions = "3";
 }
 
 cmsg CMSG_BUYBACK_ITEM = 0x0290 {
     Guid guid;
     BuybackSlot slot;
+} {
+    versions = "1.8 1.9 1.10 1.11 1.12 2";
 }
 
+cmsg CMSG_BUYBACK_ITEM = 0x0290 {
+    Guid guid;
+    BuybackSlot slot;
+} {
+    versions = "3";
+}
+
+test CMSG_BUYBACK_ITEM {
+    guid = 100;
+    slot = SLOT1;
+} [
+    0x00, 0x10, /* size */
+    0x90, 0x02, 0x00, 0x00, /* opcode */
+    0x64, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, /* guid */
+    0x4A, 0x00, 0x00, 0x00, /* slot */
+] {
+    versions = "3.3.5";
+}
+
+test CMSG_BUYBACK_ITEM {
+    guid = 100;
+    slot = SLOT12;
+} [
+    0x00, 0x10, /* size */
+    0x90, 0x02, 0x00, 0x00, /* opcode */
+    0x64, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, /* guid */
+    0x55, 0x00, 0x00, 0x00, /* slot */
+] {
+    versions = "3.3.5";
+}

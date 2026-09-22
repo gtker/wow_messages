@@ -3916,7 +3916,6 @@ impl ClientOpcodeMessage {
             Self::CMSG_AUTOBANK_ITEM(c) => crate::Message::to_test_case_string(c),
             Self::CMSG_GROUP_RAID_CONVERT => crate::Message::to_test_case_string(&CMSG_GROUP_RAID_CONVERT{}),
             Self::CMSG_GROUP_ASSISTANT_LEADER(c) => crate::Message::to_test_case_string(c.as_ref()),
-            Self::CMSG_BUYBACK_ITEM(c) => crate::Message::to_test_case_string(c.as_ref()),
             Self::CMSG_SET_SAVED_INSTANCE_EXTEND(c) => crate::Message::to_test_case_string(c),
             Self::CMSG_LFG_GET_STATUS => crate::Message::to_test_case_string(&CMSG_LFG_GET_STATUS{}),
             Self::CMSG_GMTICKETSYSTEM_TOGGLE => crate::Message::to_test_case_string(&CMSG_GMTICKETSYSTEM_TOGGLE{}),
