@@ -1,0 +1,4 @@
+#tag_all versions "3.3.5";
+
+update_mask Player BUYBACK_PRICE indexed_by BuybackSlot at 0x04B1;
+update_mask Player BUYBACK_TIMESTAMP indexed_by BuybackSlot at 0x04BD;

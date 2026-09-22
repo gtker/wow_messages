@@ -2005,20 +2005,6 @@ pub(crate) const FIELDS: &[UpdateMaskMember] = &[
     ),
     UpdateMaskMember::new(
         UpdateMaskObjectType::Player,
-        "BUYBACK_PRICE_1",
-        0x04B1,
-        12,
-        UpdateMaskDataType::Int,
-    ),
-    UpdateMaskMember::new(
-        UpdateMaskObjectType::Player,
-        "BUYBACK_TIMESTAMP_1",
-        0x04bd,
-        12,
-        UpdateMaskDataType::Int,
-    ),
-    UpdateMaskMember::new(
-        UpdateMaskObjectType::Player,
         "KILLS",
         0x04c9,
         1,

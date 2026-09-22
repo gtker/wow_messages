@@ -8,9 +8,12 @@ use crate::error_printer::{
 use crate::file_utils::write_string_to_file;
 use crate::parser::parse_file;
 use crate::parser::types::objects::Objects;
+use crate::parser::types::version::MajorWorldVersion;
 use crate::path_utils::parser_test_directory;
 use crate::rust_printer::writer::Writer;
-use crate::rust_printer::{print_enum, print_flag, print_struct};
+use crate::rust_printer::UpdateMaskDataType;
+use crate::rust_printer::UpdateMaskObjectType;
+use crate::rust_printer::{fields as update_mask_fields, print_enum, print_flag, print_struct};
 use crate::{parse_objects_in_directory, print_message_stats};
 use std::fs::read_to_string;
 use std::panic;
@@ -59,6 +62,35 @@ fn check(s: &Writer, name: &str) {
 
 fn overwrite(s: &Writer, name: &str) {
     write_string_to_file(s.inner(), Path::new(&format!("tests/{name}.txt")));
+}
+
+#[test]
+fn declarative_update_mask_field() {
+    let o = parse_file(Path::new("tests/update_mask.wowm")).into_objects();
+    let field = update_mask_fields(&o, MajorWorldVersion::Wrath)
+        .into_iter()
+        .find(|field| field.name() == "BUYBACK_PRICE")
+        .unwrap();
+
+    assert_eq!(field.object_ty(), UpdateMaskObjectType::Player);
+    assert_eq!(field.offset(), 0x04B1);
+    assert_eq!(field.size(), 3);
+    assert!(matches!(
+        field.ty(),
+        UpdateMaskDataType::IntArrayUsingEnum {
+            name: "BuybackSlot",
+            variable_name: "buyback_slot",
+            index_offset: 74,
+            ..
+        }
+    ));
+}
+
+#[test]
+#[should_panic(expected = "index enum values are not contiguous")]
+fn noncontiguous_declarative_update_mask_field() {
+    let o = parse_file(Path::new("tests/must_err/noncontiguous_update_mask.wowm")).into_objects();
+    let _ = update_mask_fields(&o, MajorWorldVersion::Wrath);
 }
 
 #[test]

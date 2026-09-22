@@ -1,10 +1,16 @@
+use std::fmt::{Display, Formatter};
+
+use heck::ToSnakeCase;
+use serde::Serialize;
+
 use crate::file_utils::overwrite_if_not_same_contents;
+use crate::parser::types::definer::Definer;
+use crate::parser::types::objects::Objects;
+use crate::parser::types::parsed::parsed_update_mask::ParsedUpdateMaskField;
 use crate::parser::types::version::MajorWorldVersion;
 use crate::parser::types::IntegerType;
 use crate::path_utils::{update_mask_index_location, update_mask_location};
 use crate::rust_printer::writer::Writer;
-use serde::Serialize;
-use std::fmt::{Display, Formatter};
 
 pub mod tbc_fields;
 pub mod vanilla_fields;
@@ -225,16 +231,44 @@ fn print_specific_update_mask_indices(fields: &[UpdateMaskMember]) -> Writer {
     s
 }
 
-pub(crate) fn print_update_mask() {
+pub(crate) fn print_update_mask(objects: &Objects) {
     for version in MajorWorldVersion::versions() {
-        let fields = version.update_mask();
+        let fields = fields(objects, *version);
 
-        let s = print_specific_update_mask(fields, *version);
+        let s = print_specific_update_mask(&fields, *version);
         overwrite_if_not_same_contents(s.inner(), &update_mask_location(*version));
 
-        let s = print_specific_update_mask_indices(fields);
+        let s = print_specific_update_mask_indices(&fields);
         overwrite_if_not_same_contents(s.inner(), &update_mask_index_location(*version));
     }
+}
+
+pub(crate) fn fields(objects: &Objects, version: MajorWorldVersion) -> Vec<UpdateMaskMember> {
+    let mut fields = version.update_mask().to_vec();
+
+    for field in objects.update_mask_fields(version) {
+        let index = objects.get_world_enum(field.index_type(), version);
+        let field = UpdateMaskMember::from_parsed(field, index, version);
+        let insertion_index = fields
+            .iter()
+            .enumerate()
+            .find(|(_, existing)| {
+                existing.object_ty() == field.object_ty() && existing.offset() > field.offset()
+            })
+            .map(|(index, _)| index)
+            .or_else(|| {
+                fields
+                    .iter()
+                    .enumerate()
+                    .rev()
+                    .find(|(_, existing)| existing.object_ty() == field.object_ty())
+                    .map(|(index, _)| index + 1)
+            })
+            .unwrap_or(fields.len());
+        fields.insert(insertion_index, field);
+    }
+
+    fields
 }
 
 fn print_getter(s: &mut Writer, m: &UpdateMaskMember) {
@@ -256,6 +290,18 @@ fn print_getter(s: &mut Writer, m: &UpdateMaskMember) {
         } => {
             s.open_curly(format!(
                 "pub fn {}_{}(&self, {variable_name}: {import_location}::{name}) -> Option<Guid>",
+                m.object_ty.to_string().to_lowercase(),
+                m.name.to_lowercase(),
+            ));
+        }
+        UpdateMaskDataType::IntArrayUsingEnum {
+            name,
+            variable_name,
+            import_location,
+            ..
+        } => {
+            s.open_curly(format!(
+                "pub fn {}_{}(&self, {variable_name}: {import_location}::{name}) -> Option<i32>",
                 m.object_ty.to_string().to_lowercase(),
                 m.name.to_lowercase(),
             ));
@@ -342,6 +388,16 @@ fn print_getter(s: &mut Writer, m: &UpdateMaskMember) {
             ));
             s.wln("self.get_guid(offset)");
         }
+        UpdateMaskDataType::IntArrayUsingEnum {
+            variable_name,
+            index_offset,
+            ..
+        } => {
+            s.wln(format!(
+                "let offset = {offset} + {variable_name}.as_int() as u16 - {index_offset};"
+            ));
+            s.wln("self.get_int(offset)");
+        }
     }
 
     s.closing_curly_newline(); // pub(crate) fn get_
@@ -378,6 +434,16 @@ fn print_setter_internals(s: &mut Writer, m: &UpdateMaskMember) {
                 "let offset = {offset} + {variable_name}.as_int() as u16 * 2;",
             ));
             s.wln("self.set_guid(offset, item);");
+        }
+        UpdateMaskDataType::IntArrayUsingEnum {
+            variable_name,
+            index_offset,
+            ..
+        } => {
+            s.wln(format!(
+                "let offset = {offset} + {variable_name}.as_int() as u16 - {index_offset};"
+            ));
+            s.wln("self.set_int(offset, v);");
         }
         UpdateMaskDataType::Int => {
             s.wln(format!("self.set_int({offset}, v);"));
@@ -595,6 +661,12 @@ pub(crate) enum UpdateMaskDataType {
         variable_name: &'static str,
         import_location: &'static str,
     },
+    IntArrayUsingEnum {
+        name: &'static str,
+        variable_name: &'static str,
+        import_location: &'static str,
+        index_offset: i32,
+    },
 }
 
 impl UpdateMaskDataType {
@@ -639,6 +711,7 @@ impl UpdateMaskDataType {
                 import_location,
                 ..
             } => format!("{import_location}::{name}"),
+            UpdateMaskDataType::IntArrayUsingEnum { .. } => INT_TYPE.to_string(),
         }
     }
 
@@ -680,6 +753,14 @@ impl UpdateMaskDataType {
                 } => {
                     return format!("{variable_name}: {import_location}::{name}, item: Guid");
                 }
+                UpdateMaskDataType::IntArrayUsingEnum {
+                    name,
+                    variable_name,
+                    import_location,
+                    ..
+                } => {
+                    return format!("{variable_name}: {import_location}::{name}, v: {INT_TYPE}");
+                }
             }
         )
     }
@@ -695,6 +776,73 @@ pub(crate) struct UpdateMaskMember {
 }
 
 impl UpdateMaskMember {
+    fn from_parsed(
+        field: &ParsedUpdateMaskField,
+        index: &Definer,
+        version: MajorWorldVersion,
+    ) -> Self {
+        let values = index
+            .fields()
+            .iter()
+            .map(|field| field.value().int())
+            .collect::<Vec<_>>();
+        let Some(index_offset) = values.iter().copied().min() else {
+            panic!(
+                "indexed update-mask field '{}' has empty index enum",
+                field.name()
+            );
+        };
+        let Some(index_end) = values.iter().copied().max() else {
+            unreachable!("index enum was checked as non-empty");
+        };
+        let expected_size = index_end - index_offset + 1;
+        if expected_size != values.len() as i128 {
+            panic!(
+                "indexed update-mask field '{}' index enum values are not contiguous",
+                field.name()
+            );
+        }
+
+        let object_type = match field.object_type() {
+            "Object" => UpdateMaskObjectType::Object,
+            "Item" => UpdateMaskObjectType::Item,
+            "Unit" => UpdateMaskObjectType::Unit,
+            "Player" => UpdateMaskObjectType::Player,
+            "Container" => UpdateMaskObjectType::Container,
+            "GameObject" => UpdateMaskObjectType::GameObject,
+            "DynamicObject" => UpdateMaskObjectType::DynamicObject,
+            "Corpse" => UpdateMaskObjectType::Corpse,
+            object_type => panic!("unknown update-mask object type '{object_type}'"),
+        };
+
+        let leak = |value: String| -> &'static str { Box::leak(value.into_boxed_str()) };
+        let index_offset = i32::try_from(index_offset).unwrap_or_else(|_| {
+            panic!(
+                "indexed update-mask field '{}' index offset does not fit in i32: {index_offset}",
+                field.name()
+            )
+        });
+        let size = i32::try_from(expected_size).unwrap_or_else(|_| {
+            panic!(
+                "indexed update-mask field '{}' size does not fit in i32: {expected_size}",
+                field.name()
+            )
+        });
+
+        Self::new(
+            object_type,
+            leak(field.name().to_owned()),
+            field.offset(),
+            size,
+            UpdateMaskDataType::IntArrayUsingEnum {
+                name: leak(field.index_type().to_owned()),
+                variable_name: leak(field.index_type().to_snake_case()),
+                import_location: leak(format!("crate::{}", version.module_name())),
+                index_offset,
+            },
+        )
+    }
+
     const fn new(
         ty: UpdateMaskObjectType,
         s: &'static str,

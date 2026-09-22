@@ -82,6 +82,8 @@ container = { container_keyword ~ identifier ~ ("=" ~ value)? ~ "{" ~
                         container_members ~
                         "}" ~ object_key_values? }
 
+update_mask = { "update_mask" ~ identifier ~ identifier ~ "indexed_by" ~ identifier ~ "at" ~ value ~ ";" ~ object_key_values? }
+
 test_items = {(basic_test_item | complex_test_item)*}
 multiple_values = { (value ~ ("|" ~ value)*) }
 sub_object = { "{" ~ basic_test_item* ~ "}" }
@@ -97,6 +99,6 @@ test = {"test" ~ identifier ~ "{" ~
         ~ "]" ~
         object_key_values? }
 
-statements = { (definer | container | test | descriptive_comment)+ }
+statements = { (definer | container | update_mask | test | descriptive_comment)+ }
 
 file = { SOI ~ commands ~ statements ~ EOI }

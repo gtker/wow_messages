@@ -1,9 +1,11 @@
 use crate::file_utils::overwrite_if_not_same_contents;
 use crate::path_utils::update_mask_doc_file;
 use crate::rust_printer::writer::Writer;
+use crate::parser::types::objects::Objects;
+use crate::parser::types::version::MajorWorldVersion;
+use crate::rust_printer::fields as update_mask_fields;
 use crate::rust_printer::{
-    tbc_fields, vanilla_fields, wrath_fields, UpdateMaskDataType, UpdateMaskMember,
-    UpdateMaskObjectType,
+    tbc_fields, vanilla_fields, UpdateMaskDataType, UpdateMaskMember, UpdateMaskObjectType,
 };
 use std::fs::read_to_string;
 
@@ -24,6 +26,7 @@ fn print_specific_update_mask_doc(fields: &[UpdateMaskMember], s: &mut Writer) {
                     UpdateMaskDataType::Bytes(_, _, _, _) => "BYTES",
                     UpdateMaskDataType::TwoShort(_, _) => "TWO_SHORT",
                     UpdateMaskDataType::GuidArrayUsingEnum { .. }
+                    | UpdateMaskDataType::IntArrayUsingEnum { .. }
                     | UpdateMaskDataType::ArrayOfStruct { .. } => "CUSTOM",
                 };
 
@@ -43,7 +46,7 @@ fn print_specific_update_mask_doc(fields: &[UpdateMaskMember], s: &mut Writer) {
     }
 }
 
-pub(crate) fn print_update_mask_docs() {
+pub(crate) fn print_update_mask_docs(objects: &Objects) {
     const LOOKUP_TABLE: &str = "## Lookup Table";
     let contents = read_to_string(update_mask_doc_file()).unwrap();
 
@@ -73,7 +76,8 @@ pub(crate) fn print_update_mask_docs() {
     s.wln("Taken from [ArcEmu](https://github.com/arcemu/arcemu/blob/1cb2b5248d050cb6fe413d7c42dd1817994b6366/src/world/Game/Entities/Update/UpdateFields.h#L26) with some modifications.");
     s.newline();
 
-    print_specific_update_mask_doc(wrath_fields::FIELDS, &mut s);
+    let fields = update_mask_fields(objects, MajorWorldVersion::Wrath);
+    print_specific_update_mask_doc(&fields, &mut s);
 
     overwrite_if_not_same_contents(s.inner(), &update_mask_doc_file());
 }

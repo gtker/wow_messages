@@ -49,6 +49,14 @@ impl IrUpdateMaskMember {
                     definer: definer_to_ir(o.get_world_enum(name, version)),
                     variable_name,
                 },
+                UpdateMaskDataType::IntArrayUsingEnum {
+                    name,
+                    variable_name,
+                    ..
+                } => IrUpdateMaskType::IntArrayUsingEnum {
+                    definer: definer_to_ir(o.get_world_enum(name, version)),
+                    variable_name,
+                },
                 UpdateMaskDataType::ArrayOfStruct {
                     name,
                     variable_name,
@@ -93,6 +101,10 @@ pub(crate) enum IrUpdateMaskType {
         fourth: ByteType,
     },
     GuidArrayUsingEnum {
+        definer: IrDefiner,
+        variable_name: &'static str,
+    },
+    IntArrayUsingEnum {
         definer: IrDefiner,
         variable_name: &'static str,
     },

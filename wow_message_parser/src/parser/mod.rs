@@ -27,6 +27,7 @@ use types::container::ContainerType;
 use types::parsed::parsed_container::ParsedContainer;
 use types::parsed::parsed_definer::ParsedDefiner;
 use types::parsed::parsed_test_case::{ParsedTestCase, ParsedTestCaseMember, ParsedTestValue};
+use types::parsed::parsed_update_mask::ParsedUpdateMaskField;
 
 pub mod stats;
 pub mod types;
@@ -112,6 +113,7 @@ fn parse_statements(statements: &mut Pairs<Rule>, tags: &ParsedTags, path: &Path
     let mut structs = Vec::new();
     let mut messages = Vec::new();
     let mut tests = Vec::new();
+    let mut update_mask_fields = Vec::new();
     let mut descriptive_comments = Vec::new();
 
     for statement in statements {
@@ -183,11 +185,57 @@ fn parse_statements(statements: &mut Pairs<Rule>, tags: &ParsedTags, path: &Path
 
                 descriptive_comments.clear();
             }
-            _ => unreachable!("statements should only have definers or containers"),
+            Rule::update_mask => {
+                let mut statement = statement.into_inner();
+                parse_update_mask(
+                    &mut statement,
+                    tags,
+                    file_info,
+                    &mut update_mask_fields,
+                );
+
+                descriptive_comments.clear();
+            }
+            _ => unreachable!("statements should only have definers, containers, update masks, or tests"),
         }
     }
 
-    ParsedObjects::new(enums, flags, structs, messages, tests)
+    ParsedObjects::new(
+        enums,
+        flags,
+        structs,
+        messages,
+        tests,
+        update_mask_fields,
+    )
+}
+
+fn parse_update_mask(
+    t: &mut Pairs<Rule>,
+    tags: &ParsedTags,
+    file_info: FileInfo,
+    fields: &mut Vec<ParsedUpdateMaskField>,
+) {
+    let object_type = t.next().unwrap().as_str().to_owned();
+    let name = t.next().unwrap().as_str().to_owned();
+    let index_type = t.next().unwrap().as_str().to_owned();
+    let offset = parse_value(t.next().unwrap().as_str()).unwrap();
+
+    let mut extra_kvs = t.find(|a| a.as_rule() == Rule::object_key_values);
+    let field_tags = parse_object_key_values(&mut extra_kvs, tags, &name, &file_info);
+    let object_tags = field_tags.into_tags(&name, &file_info, false);
+
+    let offset = i32::try_from(offset).unwrap_or_else(|_| {
+        panic!("update mask field '{name}' offset does not fit in i32: {offset}")
+    });
+
+    fields.push(ParsedUpdateMaskField::new(
+        object_type,
+        name,
+        index_type,
+        offset,
+        object_tags,
+    ));
 }
 
 fn parse_test_values(
