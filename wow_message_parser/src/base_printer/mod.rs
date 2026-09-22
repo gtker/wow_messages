@@ -69,7 +69,11 @@ pub(crate) fn print_base() {
     let sqlite_dir = if let Ok(p) = std::env::var("WOWM_SQLITE_DB_PATH") {
         PathBuf::from(p)
     } else {
-        PathBuf::from("../wow_db_sqlite")
+        let sqlite_dir = PathBuf::from("../wow_db_sqlite");
+        if !sqlite_dir.exists() {
+            return;
+        }
+        sqlite_dir
     };
 
     if !sqlite_dir.exists() {
