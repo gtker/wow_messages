@@ -297,7 +297,7 @@ pub(crate) const FIELDS: &[UpdateMaskMember] = &[
     ),
     UpdateMaskMember::new(
         UpdateMaskObjectType::Container,
-        "SLOT_1",
+        "SLOT",
         0x0042,
         72,
         UpdateMaskDataType::GuidArrayUsingEnum {

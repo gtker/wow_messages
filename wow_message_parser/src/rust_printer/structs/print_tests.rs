@@ -661,7 +661,7 @@ fn print_value(
                     && f.name().starts_with("SLOT_")
                     && f.name()[5..].parse::<u8>().is_ok_and(|slot| (1..=36).contains(&slot))
                 {
-                    "SLOT_1"
+                    "SLOT"
                 } else {
                     f.name()
                 };

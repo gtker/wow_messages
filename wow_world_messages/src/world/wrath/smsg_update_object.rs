@@ -229,8 +229,8 @@ mod test {
                     mask1: UpdateMask::Container(UpdateContainer::builder()
                         .set_object_guid(Guid::new(0x1234))
                         .set_container_num_slots(36)
-                        .set_container_slot_1(crate::wrath::ContainerSlot::try_from(0).unwrap(), Guid::new(0x100))
-                        .set_container_slot_1(crate::wrath::ContainerSlot::try_from(35).unwrap(), Guid::new(0x200))
+                        .set_container_slot(crate::wrath::ContainerSlot::try_from(0).unwrap(), Guid::new(0x100))
+                        .set_container_slot(crate::wrath::ContainerSlot::try_from(35).unwrap(), Guid::new(0x200))
                         .finalize()
                     ),
                 }
