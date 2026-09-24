@@ -2015,6 +2015,7 @@ pub(crate) const FIELDS: &[UpdateMaskMember] = &[
             variable_name: "buyback_slot",
             import_location: "crate::wrath",
             index_origin: 74,
+            size: 1,
         },
     ),
     UpdateMaskMember::new(
@@ -2028,6 +2029,7 @@ pub(crate) const FIELDS: &[UpdateMaskMember] = &[
             variable_name: "buyback_slot",
             import_location: "crate::wrath",
             index_origin: 74,
+            size: 1,
         },
     ),
     UpdateMaskMember::new(
