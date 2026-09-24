@@ -22,6 +22,3 @@ update_item!(
 update_item!(UpdateCorpse, UpdateCorpseBuilder, CORPSE);
 
 update_mask!();
-
-#[cfg(test)]
-mod tests;

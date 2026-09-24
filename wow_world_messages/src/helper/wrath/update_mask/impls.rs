@@ -2116,13 +2116,13 @@ impl UpdatePlayerBuilder {
     }
 
     pub fn set_player_buyback_price(mut self, buyback_slot: crate::wrath::BuybackSlot, v: u32) -> Self {
-        let offset = 1201 + buyback_slot.as_int() as u16 - 74;
+        let offset = 1201 + (buyback_slot.as_int() as u16 - 74) * 1u16;
         self.set_int(offset, v as i32);
         self
     }
 
     pub fn set_player_buyback_timestamp(mut self, buyback_slot: crate::wrath::BuybackSlot, v: u32) -> Self {
-        let offset = 1213 + buyback_slot.as_int() as u16 - 74;
+        let offset = 1213 + (buyback_slot.as_int() as u16 - 74) * 1u16;
         self.set_int(offset, v as i32);
         self
     }
@@ -5769,22 +5769,22 @@ impl UpdatePlayer {
     }
 
     pub fn set_player_buyback_price(&mut self, buyback_slot: crate::wrath::BuybackSlot, v: u32) {
-        let offset = 1201 + buyback_slot.as_int() as u16 - 74;
+        let offset = 1201 + (buyback_slot.as_int() as u16 - 74) * 1u16;
         self.set_int(offset, v as i32);
     }
 
     pub fn player_buyback_price(&self, buyback_slot: crate::wrath::BuybackSlot) -> Option<u32> {
-        let offset = 1201 + buyback_slot.as_int() as u16 - 74;
+        let offset = 1201 + (buyback_slot.as_int() as u16 - 74) * 1u16;
         self.get_int(offset).map(|value| value as u32)
     }
 
     pub fn set_player_buyback_timestamp(&mut self, buyback_slot: crate::wrath::BuybackSlot, v: u32) {
-        let offset = 1213 + buyback_slot.as_int() as u16 - 74;
+        let offset = 1213 + (buyback_slot.as_int() as u16 - 74) * 1u16;
         self.set_int(offset, v as i32);
     }
 
     pub fn player_buyback_timestamp(&self, buyback_slot: crate::wrath::BuybackSlot) -> Option<u32> {
-        let offset = 1213 + buyback_slot.as_int() as u16 - 74;
+        let offset = 1213 + (buyback_slot.as_int() as u16 - 74) * 1u16;
         self.get_int(offset).map(|value| value as u32)
     }
 

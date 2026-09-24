@@ -153,6 +153,9 @@
                     },
                     "index_origin": {
                       "type": "uint32"
+                    },
+                    "size": {
+                      "type": "int32"
                     }
                   }
                 }

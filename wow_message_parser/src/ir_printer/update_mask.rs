@@ -55,12 +55,14 @@ impl IrUpdateMaskMember {
                     name,
                     variable_name,
                     index_origin,
+                    size,
                     ..
                 } => IrUpdateMaskType::ArrayOfInteger {
                     integer_type: super::IrIntegerType::from_integer_type(&integer_type),
                     definer: definer_to_ir(o.get_world_enum(name, version)),
                     variable_name,
                     index_origin,
+                    size,
                 },
                 UpdateMaskDataType::ArrayOfStruct {
                     name,
@@ -114,6 +116,7 @@ pub(crate) enum IrUpdateMaskType {
         definer: IrDefiner,
         variable_name: &'static str,
         index_origin: u32,
+        size: i32,
     },
     ArrayOfStruct {
         variable_name: &'static str,

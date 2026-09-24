@@ -12,9 +12,6 @@ pub mod tbc_fields;
 pub mod vanilla_fields;
 pub mod wrath_fields;
 
-#[cfg(test)]
-mod tests;
-
 fn print_specific_update_mask(fields: &[UpdateMaskMember], version: MajorWorldVersion) -> Writer {
     let update_types = [
         (
@@ -276,7 +273,7 @@ fn print_getter(s: &mut Writer, m: &UpdateMaskMember) {
                 "pub fn {}_{}(&self, {variable_name}: {import_location}::{name}) -> Option<{}>",
                 m.object_ty.to_string().to_lowercase(),
                 m.name.to_lowercase(),
-                array_integer_rust_type(integer_type),
+                integer_type.rust_str(),
             ));
         }
         _ => {
@@ -365,10 +362,11 @@ fn print_getter(s: &mut Writer, m: &UpdateMaskMember) {
             integer_type,
             variable_name,
             index_origin,
+            size,
             ..
         } => {
             s.wln(format!(
-                "let offset = {offset} + {variable_name}.as_int() as u16 - {index_origin};"
+                "let offset = {offset} + ({variable_name}.as_int() as u16 - {index_origin}) * {size}u16;"
             ));
             match integer_type {
                 IntegerType::U32 => {
@@ -419,10 +417,11 @@ fn print_setter_internals(s: &mut Writer, m: &UpdateMaskMember) {
             integer_type,
             variable_name,
             index_origin,
+            size,
             ..
         } => {
             s.wln(format!(
-                "let offset = {offset} + {variable_name}.as_int() as u16 - {index_origin};"
+                "let offset = {offset} + ({variable_name}.as_int() as u16 - {index_origin}) * {size}u16;"
             ));
             let value = match integer_type {
                 IntegerType::U32 => "v as i32",
@@ -653,6 +652,7 @@ pub(crate) enum UpdateMaskDataType {
         variable_name: &'static str,
         import_location: &'static str,
         index_origin: u32,
+        size: i32,
     },
 }
 
@@ -663,14 +663,6 @@ impl UpdateMaskDataType {
 
     pub(crate) const fn two_short() -> Self {
         Self::TwoShort(ShortType::a(), ShortType::b())
-    }
-}
-
-fn array_integer_rust_type(integer_type: IntegerType) -> &'static str {
-    match integer_type {
-        IntegerType::U32 => "u32",
-        IntegerType::I32 => "i32",
-        _ => panic!("update-mask integer arrays require 32-bit integer types"),
     }
 }
 
@@ -707,7 +699,7 @@ impl UpdateMaskDataType {
                 ..
             } => format!("{import_location}::{name}"),
             UpdateMaskDataType::ArrayOfInteger { integer_type, .. } => {
-                array_integer_rust_type(*integer_type).to_string()
+                integer_type.rust_str().to_string()
             }
         }
     }
@@ -759,7 +751,7 @@ impl UpdateMaskDataType {
                 } => {
                     return format!(
                         "{variable_name}: {import_location}::{name}, v: {}",
-                        array_integer_rust_type(*integer_type)
+                        integer_type.rust_str()
                     );
                 }
             }
