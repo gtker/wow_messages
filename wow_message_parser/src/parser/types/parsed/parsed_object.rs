@@ -2,7 +2,6 @@ use crate::parser::types::if_statement::DefinerUsage;
 use crate::parser::types::parsed::parsed_container::ParsedContainer;
 use crate::parser::types::parsed::parsed_definer::ParsedDefiner;
 use crate::parser::types::parsed::parsed_test_case::ParsedTestCase;
-use crate::parser::types::parsed::parsed_update_mask::ParsedUpdateMaskField;
 use crate::Objects;
 use std::collections::BTreeSet;
 
@@ -13,7 +12,6 @@ pub(crate) struct ParsedObjects {
     structs: Vec<ParsedContainer>,
     messages: Vec<ParsedContainer>,
     tests: Vec<ParsedTestCase>,
-    update_mask_fields: Vec<ParsedUpdateMaskField>,
 }
 
 impl ParsedObjects {
@@ -24,7 +22,6 @@ impl ParsedObjects {
             structs: vec![],
             messages: vec![],
             tests: vec![],
-            update_mask_fields: vec![],
         }
     }
 
@@ -34,7 +31,6 @@ impl ParsedObjects {
         structs: Vec<ParsedContainer>,
         messages: Vec<ParsedContainer>,
         tests: Vec<ParsedTestCase>,
-        update_mask_fields: Vec<ParsedUpdateMaskField>,
     ) -> Self {
         Self {
             enums,
@@ -42,7 +38,6 @@ impl ParsedObjects {
             structs,
             messages,
             tests,
-            update_mask_fields,
         }
     }
 
@@ -52,7 +47,6 @@ impl ParsedObjects {
         self.structs.append(&mut c.structs);
         self.messages.append(&mut c.messages);
         self.tests.append(&mut c.tests);
-        self.update_mask_fields.append(&mut c.update_mask_fields);
     }
 
     pub(crate) fn into_objects(self) -> Objects {
@@ -62,7 +56,6 @@ impl ParsedObjects {
             self.structs,
             self.messages,
             self.tests,
-            self.update_mask_fields,
         )
     }
 }

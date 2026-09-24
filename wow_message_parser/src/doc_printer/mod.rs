@@ -22,7 +22,7 @@ use std::fs::read_to_string;
 use std::path::PathBuf;
 
 pub(crate) fn print_docs(o: &Objects) {
-    print_update_mask_docs(o);
+    print_update_mask_docs();
 
     print_docs_summary_and_objects(o);
 
