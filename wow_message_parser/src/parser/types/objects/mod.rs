@@ -6,7 +6,6 @@ use crate::parser::types::objects::conversion::object_new;
 use crate::parser::types::parsed::parsed_container::ParsedContainer;
 use crate::parser::types::parsed::parsed_definer::ParsedDefiner;
 use crate::parser::types::parsed::parsed_test_case::ParsedTestCase;
-use crate::parser::types::parsed::parsed_update_mask::ParsedUpdateMaskField;
 use crate::parser::types::tags::ObjectTags;
 use crate::parser::types::test_case::TestCase;
 use crate::parser::types::version::{AllRustVersions, LoginVersion, MajorWorldVersion};
@@ -20,7 +19,6 @@ pub(crate) struct Objects {
     structs: Vec<Container>,
     messages: Vec<Container>,
     tests: Vec<TestCase>,
-    update_mask_fields: Vec<ParsedUpdateMaskField>,
 }
 
 impl Objects {
@@ -30,16 +28,8 @@ impl Objects {
         structs: Vec<ParsedContainer>,
         messages: Vec<ParsedContainer>,
         tests: Vec<ParsedTestCase>,
-        update_mask_fields: Vec<ParsedUpdateMaskField>,
     ) -> Self {
-        object_new(
-            enums,
-            flags,
-            structs,
-            messages,
-            tests,
-            update_mask_fields,
-        )
+        object_new(enums, flags, structs, messages, tests)
     }
 
     pub(crate) fn get_tags_of_object_fallible(
@@ -237,16 +227,6 @@ impl Objects {
                 ))
             })
             .collect()
-    }
-
-    pub(crate) fn update_mask_fields(
-        &self,
-        version: MajorWorldVersion,
-    ) -> impl Iterator<Item = &ParsedUpdateMaskField> {
-        let tags = ObjectTags::new_with_world_versions(&[version]);
-        self.update_mask_fields
-            .iter()
-            .filter(move |field| field.tags().fulfills_all(&tags))
     }
 
     pub(crate) fn get_world_enum(&self, name: &str, version: MajorWorldVersion) -> &Definer {

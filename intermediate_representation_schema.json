@@ -138,15 +138,21 @@
                 }
               }
             },
-            "IntArrayUsingEnum": {
+            "ArrayOfInteger": {
               "properties": {
                 "content": {
                   "properties": {
+                    "integer_type": {
+                      "ref": "integer_type"
+                    },
                     "definer": {
                       "ref": "definer"
                     },
                     "variable_name": {
                       "type": "string"
+                    },
+                    "index_origin": {
+                      "type": "uint32"
                     }
                   }
                 }

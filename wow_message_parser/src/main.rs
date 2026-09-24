@@ -137,7 +137,7 @@ fn load_and_print_wowm_files() {
 
     write_ember_schema(&o);
 
-    print_update_mask(&o);
+    print_update_mask();
 
     print_expected();
 

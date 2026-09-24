@@ -1,3 +1,5 @@
+use serde::Serialize;
+
 use crate::ir_printer::container::{container_to_update_mask_ir, IrUpdateMaskStruct};
 use crate::ir_printer::definer::{definer_to_ir, IrDefiner};
 use crate::parser::types::objects::Objects;
@@ -5,7 +7,6 @@ use crate::parser::types::version::MajorWorldVersion;
 use crate::rust_printer::{
     ByteType, ShortType, UpdateMaskDataType, UpdateMaskMember, UpdateMaskObjectType,
 };
-use serde::Serialize;
 
 #[derive(Serialize, Debug)]
 pub(crate) struct IrUpdateMaskMember {
@@ -49,13 +50,17 @@ impl IrUpdateMaskMember {
                     definer: definer_to_ir(o.get_world_enum(name, version)),
                     variable_name,
                 },
-                UpdateMaskDataType::IntArrayUsingEnum {
+                UpdateMaskDataType::ArrayOfInteger {
+                    integer_type,
                     name,
                     variable_name,
+                    index_origin,
                     ..
-                } => IrUpdateMaskType::IntArrayUsingEnum {
+                } => IrUpdateMaskType::ArrayOfInteger {
+                    integer_type: super::IrIntegerType::from_integer_type(&integer_type),
                     definer: definer_to_ir(o.get_world_enum(name, version)),
                     variable_name,
+                    index_origin,
                 },
                 UpdateMaskDataType::ArrayOfStruct {
                     name,
@@ -104,9 +109,11 @@ pub(crate) enum IrUpdateMaskType {
         definer: IrDefiner,
         variable_name: &'static str,
     },
-    IntArrayUsingEnum {
+    ArrayOfInteger {
+        integer_type: super::IrIntegerType,
         definer: IrDefiner,
         variable_name: &'static str,
+        index_origin: u32,
     },
     ArrayOfStruct {
         variable_name: &'static str,

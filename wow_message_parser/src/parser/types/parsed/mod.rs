@@ -8,4 +8,3 @@ pub(crate) mod parsed_struct_member;
 pub(crate) mod parsed_tags;
 pub(crate) mod parsed_test_case;
 pub(crate) mod parsed_ty;
-pub(crate) mod parsed_update_mask;
