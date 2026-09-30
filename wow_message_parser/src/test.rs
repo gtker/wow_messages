@@ -1,9 +1,13 @@
+use std::fs::read_to_string;
+use std::panic;
+use std::path::Path;
+
 use crate::error_printer::{
-    BOTH_LOGIN_AND_WORLD_VERSIONS, COMPLEX_NOT_FOUND, DUPLICATE_DEFINER_VALUES,
-    DUPLICATE_FIELD_NAMES, ENUM_HAS_BITWISE_AND, FLAG_HAS_EQUALS, INCORRECT_OPCODE_FOR_MESSAGE,
-    INVALID_DEFINER_VALUE, INVALID_INTEGER_TYPE, INVALID_SELF_SIZE, MESSAGE_NOT_IN_INDEX,
-    MISSING_ENUMERATOR, NON_MATCHING_IF_VARIABLES, NO_VERSIONS, OPCODE_HAS_INCORRECT_NAME,
-    OVERLAPPING_VERSIONS, RECURSIVE_TYPE, UNSUPPORTED_UPCAST,
+    BOTH_LOGIN_AND_WORLD_VERSIONS, COMPLEX_NOT_FOUND, DUPLICATE_DEFINER_VALUES, DUPLICATE_FIELD_NAMES, ENUM_HAS_BITWISE_AND, FLAG_HAS_EQUALS,
+    INCORRECT_OPCODE_FOR_MESSAGE, INVALID_DEFINER_VALUE, INVALID_INTEGER_TYPE, INVALID_SELF_SIZE,
+    MESSAGE_NOT_IN_INDEX, MISSING_ENUMERATOR, NON_MATCHING_IF_VARIABLES, NO_VERSIONS,
+    OPCODE_HAS_INCORRECT_NAME, OVERLAPPING_VERSIONS, RECURSIVE_TYPE, UNSUPPORTED_UPCAST,
+    UNSUPPORTED_WRATH_SPLINE_LAYOUT,
 };
 use crate::file_utils::write_string_to_file;
 use crate::parser::parse_file;
@@ -12,9 +16,6 @@ use crate::path_utils::parser_test_directory;
 use crate::rust_printer::writer::Writer;
 use crate::rust_printer::{print_enum, print_flag, print_struct};
 use crate::{parse_objects_in_directory, print_message_stats};
-use std::fs::read_to_string;
-use std::panic;
-use std::path::Path;
 
 fn should_panic<F: FnOnce() -> R + panic::UnwindSafe, R>(f: F, error_code: i32) {
     let prev_hook = panic::take_hook();
@@ -487,6 +488,16 @@ fn invalid_integer_type() {
             print_message_stats(&o);
         },
         INVALID_INTEGER_TYPE,
+    );
+}
+
+#[test]
+fn unsupported_wrath_spline_layout() {
+    should_panic(
+        || {
+            let _ = must_err_load("unsupported_wrath_spline_layout.wowm");
+        },
+        UNSUPPORTED_WRATH_SPLINE_LAYOUT,
     );
 }
 

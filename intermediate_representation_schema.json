@@ -662,6 +662,25 @@
               }
             }
           }
+        },
+        "FullMonsterMoveSpline": {
+          "properties": {
+            "content": {
+              "elements": {
+                "properties": {
+                  "x": {
+                    "type": "float32"
+                  },
+                  "y": {
+                    "type": "float32"
+                  },
+                  "z": {
+                    "type": "float32"
+                  }
+                }
+              }
+            }
+          }
         }
       }
     },
@@ -1244,6 +1263,9 @@
           "properties": {}
         },
         "MonsterMoveSpline": {
+          "properties": {}
+        },
+        "FullMonsterMoveSpline": {
           "properties": {}
         },
         "AchievementDoneArray": {

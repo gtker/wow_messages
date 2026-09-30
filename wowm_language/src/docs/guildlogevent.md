@@ -39,8 +39,8 @@ is equal to `DEMOTION`:
 
 | Offset | Size / Endianness | Type | Name | Comment |
 | ------ | ----------------- | ---- | ---- | ------- |
-| 0x11 | 1 / - | u8 | new_rank |  |
-| 0x12 | 4 / Little | u32 | unix_time |  |
+| 0x09 | 1 / - | u8 | new_rank |  |
+| - | 4 / Little | u32 | unix_time |  |
 
 
 Used in:

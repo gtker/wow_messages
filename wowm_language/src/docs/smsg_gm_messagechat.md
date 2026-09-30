@@ -81,7 +81,7 @@ is equal to `BG_SYSTEM_HORDE`:
 
 | Offset | Size / Endianness | Type | Name | Comment |
 | ------ | ----------------- | ---- | ---- | ------- |
-| - | - / - | [NamedGuid](../types/packed-guid.md) | target2 |  |
+| 0x09 | - / - | [NamedGuid](../types/packed-guid.md) | target2 |  |
 | - | - / - | SizedCString | message2 |  |
 | - | 1 / - | [PlayerChatTag](playerchattag.md) | chat_tag2 |  |
 
@@ -89,14 +89,14 @@ Else If chat_type is equal to `CHANNEL`:
 
 | Offset | Size / Endianness | Type | Name | Comment |
 | ------ | ----------------- | ---- | ---- | ------- |
-| - | - / - | CString | channel_name |  |
+| 0x09 | - / - | CString | channel_name |  |
 | - | 8 / Little | [Guid](../types/packed-guid.md) | target4 |  |
 | - | - / - | SizedCString | message3 |  |
 | - | 1 / - | [PlayerChatTag](playerchattag.md) | chat_tag3 |  |
 
 Else: 
-| - | 8 / Little | [Guid](../types/packed-guid.md) | target5 |  |
-| - | - / - | SizedCString | message4 |  |
+| 0x09 | 8 / Little | [Guid](../types/packed-guid.md) | target5 |  |
+| 0x11 | - / - | SizedCString | message4 |  |
 | - | 1 / - | [PlayerChatTag](playerchattag.md) | chat_tag4 |  |
 | - | - / - | SizedCString | sender_name |  |
 

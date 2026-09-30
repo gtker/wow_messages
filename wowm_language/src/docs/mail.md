@@ -56,14 +56,14 @@ is equal to `GAMEOBJECT`:
 
 | Offset | Size / Endianness | Type | Name | Comment |
 | ------ | ----------------- | ---- | ---- | ------- |
-| 0x0D | 4 / Little | u32 | sender_id |  |
+| 0x05 | 4 / Little | u32 | sender_id |  |
 
 Else If message_type is equal to `AUCTION`:
 
 | Offset | Size / Endianness | Type | Name | Comment |
 | ------ | ----------------- | ---- | ---- | ------- |
-| 0x11 | 4 / Little | u32 | auction_id |  |
-| 0x15 | - / - | CString | subject |  |
+| 0x05 | 4 / Little | u32 | auction_id |  |
+| - | - / - | CString | subject |  |
 | - | 4 / Little | u32 | item_text_id |  |
 | - | 4 / Little | u32 | unknown1 | cmangos/vmangos/mangoszero: set to 0 |
 | - | 4 / Little | u32 | stationery | cmangos/vmangos/mangoszero: stationery (Stationery.dbc) |
@@ -140,28 +140,28 @@ is equal to `GAMEOBJECT`:
 
 | Offset | Size / Endianness | Type | Name | Comment |
 | ------ | ----------------- | ---- | ---- | ------- |
-| 0x0F | 4 / Little | u32 | sender_id |  |
+| 0x07 | 4 / Little | u32 | sender_id |  |
 
 Else If message_type is equal to `AUCTION`:
 
 | Offset | Size / Endianness | Type | Name | Comment |
 | ------ | ----------------- | ---- | ---- | ------- |
-| 0x13 | 4 / Little | u32 | auction_id |  |
+| 0x07 | 4 / Little | u32 | auction_id |  |
 
 Else If message_type is equal to `ITEM`:
 
 | Offset | Size / Endianness | Type | Name | Comment |
 | ------ | ----------------- | ---- | ---- | ------- |
-| 0x17 | 4 / Little | Item | item |  |
-| 0x1B | 4 / Little | Gold | cash_on_delivery |  |
-| 0x1F | 4 / Little | u32 | item_text_id |  |
-| 0x23 | 4 / Little | u32 | unknown |  |
-| 0x27 | 4 / Little | u32 | stationery |  |
-| 0x2B | 4 / Little | Gold | money |  |
-| 0x2F | 4 / Little | u32 | flags |  |
-| 0x33 | 4 / Little | f32 | expiration_time |  |
-| 0x37 | 4 / Little | u32 | mail_template_id | cmangos/vmangos/mangoszero: mail template (MailTemplate.dbc) |
-| 0x3B | - / - | CString | subject |  |
+| 0x07 | 4 / Little | Item | item |  |
+| - | 4 / Little | Gold | cash_on_delivery |  |
+| - | 4 / Little | u32 | item_text_id |  |
+| - | 4 / Little | u32 | unknown |  |
+| - | 4 / Little | u32 | stationery |  |
+| - | 4 / Little | Gold | money |  |
+| - | 4 / Little | u32 | flags |  |
+| - | 4 / Little | f32 | expiration_time |  |
+| - | 4 / Little | u32 | mail_template_id | cmangos/vmangos/mangoszero: mail template (MailTemplate.dbc) |
+| - | - / - | CString | subject |  |
 | - | 1 / - | u8 | amount_of_items |  |
 | - | ? / - | [MailListItem](maillistitem.md)[amount_of_items] | items |  |
 
@@ -224,27 +224,27 @@ is equal to `GAMEOBJECT`:
 
 | Offset | Size / Endianness | Type | Name | Comment |
 | ------ | ----------------- | ---- | ---- | ------- |
-| 0x0F | 4 / Little | u32 | sender_id |  |
+| 0x07 | 4 / Little | u32 | sender_id |  |
 
 Else If message_type is equal to `AUCTION`:
 
 | Offset | Size / Endianness | Type | Name | Comment |
 | ------ | ----------------- | ---- | ---- | ------- |
-| 0x13 | 4 / Little | u32 | auction_id |  |
+| 0x07 | 4 / Little | u32 | auction_id |  |
 
 Else If message_type is equal to `ITEM`:
 
 | Offset | Size / Endianness | Type | Name | Comment |
 | ------ | ----------------- | ---- | ---- | ------- |
-| 0x17 | 4 / Little | Item | item |  |
-| 0x1B | 4 / Little | Gold | cash_on_delivery |  |
-| 0x1F | 4 / Little | u32 | unknown |  |
-| 0x23 | 4 / Little | u32 | stationery |  |
-| 0x27 | 4 / Little | Gold | money |  |
-| 0x2B | 4 / Little | u32 | flags |  |
-| 0x2F | 4 / Little | f32 | expiration_time |  |
-| 0x33 | 4 / Little | u32 | mail_template_id | cmangos/vmangos/mangoszero: mail template (MailTemplate.dbc) |
-| 0x37 | - / - | CString | subject |  |
+| 0x07 | 4 / Little | Item | item |  |
+| - | 4 / Little | Gold | cash_on_delivery |  |
+| - | 4 / Little | u32 | unknown |  |
+| - | 4 / Little | u32 | stationery |  |
+| - | 4 / Little | Gold | money |  |
+| - | 4 / Little | u32 | flags |  |
+| - | 4 / Little | f32 | expiration_time |  |
+| - | 4 / Little | u32 | mail_template_id | cmangos/vmangos/mangoszero: mail template (MailTemplate.dbc) |
+| - | - / - | CString | subject |  |
 | - | - / - | CString | message |  |
 | - | 1 / - | u8 | amount_of_items |  |
 | - | ? / - | [MailListItem](maillistitem.md)[amount_of_items] | items |  |

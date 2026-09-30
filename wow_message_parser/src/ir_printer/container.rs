@@ -1,3 +1,7 @@
+use std::collections::BTreeMap;
+
+use serde::Serialize;
+
 use crate::ir_printer::definer::IrDefinerType;
 use crate::ir_printer::{IrFileInfo, IrIntegerType, IrTags};
 use crate::parser::types::array::{Array, ArraySize, ArrayType};
@@ -17,8 +21,6 @@ use crate::rust_printer::rust_view::rust_optional::RustOptional;
 use crate::rust_printer::rust_view::rust_type::RustType;
 use crate::rust_printer::UpdateMaskObjectType;
 use crate::Objects;
-use serde::Serialize;
-use std::collections::BTreeMap;
 
 pub(crate) fn containers_to_ir(containers: &[Container], o: &Objects) -> Vec<IrContainer> {
     containers.iter().map(|a| container_to_ir(a, o)).collect()
@@ -458,6 +460,7 @@ pub(crate) enum IrType {
     UpdateMask,
     AuraMask,
     MonsterMoveSpline,
+    FullMonsterMoveSpline,
     AchievementDoneArray,
     AchievementInProgressArray,
     EnchantMask,
@@ -532,6 +535,7 @@ impl IrType {
             Type::AchievementDoneArray => Self::AchievementDoneArray,
             Type::AchievementInProgressArray => Self::AchievementInProgressArray,
             Type::MonsterMoveSplines => Self::MonsterMoveSpline,
+            Type::FullMonsterMoveSpline => Self::FullMonsterMoveSpline,
             Type::EnchantMask => Self::EnchantMask,
             Type::InspectTalentGearMask => Self::InspectTalentGearMask,
             Type::Gold => Self::Gold,
@@ -750,6 +754,7 @@ pub(crate) enum IrTestValue {
         size: IrArraySize,
     },
     MonsterMoveSpline(Vec<TestVector3d>),
+    FullMonsterMoveSpline(Vec<TestVector3d>),
     UpdateMask(Vec<IrTestUpdateMaskValue>),
     IpAddress(IrIntegerEnumValue),
     Seconds(IrIntegerEnumValue),
@@ -819,6 +824,7 @@ impl IrTestValue {
             TestValue::Gold(i) => Self::Gold(IrIntegerEnumValue::from_container_value(i)),
             TestValue::Level(i) => Self::Level(IrIntegerEnumValue::from_container_value(i)),
             TestValue::MonsterMoveSpline(v) => Self::MonsterMoveSpline(v.clone()),
+            TestValue::FullMonsterMoveSpline(v) => Self::FullMonsterMoveSpline(v.clone()),
             TestValue::StringArray { values, size } => Self::Array {
                 values: values.clone(),
                 size: IrArraySize::from_array_size(size.clone()),

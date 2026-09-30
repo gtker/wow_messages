@@ -321,6 +321,16 @@ impl ParsedContainer {
             return false;
         }
 
+        // Wrath spline decoding can reject advertised point counts before allocation.
+        if self.tags().contains_wrath()
+            && self
+                .all_definitions()
+                .iter()
+                .any(|definition| matches!(definition.ty(), ParsedType::MonsterMoveSpline))
+        {
+            return false;
+        }
+
         for t in self.get_types_needing_import() {
             if let Some(d) = get_definer(definers, t.as_str(), self.tags()) {
                 if d.definer_ty() == DefinerType::Enum {

@@ -176,13 +176,13 @@ Else If target_flags contains `UNIT_MINIPET`:
 
 | Offset | Size / Endianness | Type | Name | Comment |
 | ------ | ----------------- | ---- | ---- | ------- |
-| - | - / - | [PackedGuid](../types/packed-guid.md) | unit_minipet |  |
+| 0x04 | - / - | [PackedGuid](../types/packed-guid.md) | unit_minipet |  |
 
 Else If target_flags contains `UNIT_ENEMY`:
 
 | Offset | Size / Endianness | Type | Name | Comment |
 | ------ | ----------------- | ---- | ---- | ------- |
-| - | - / - | [PackedGuid](../types/packed-guid.md) | unit_enemy |  |
+| 0x04 | - / - | [PackedGuid](../types/packed-guid.md) | unit_enemy |  |
 
 If target_flags contains `GAMEOBJECT`:
 
@@ -302,25 +302,25 @@ Else If target_flags contains `UNIT_MINIPET`:
 
 | Offset | Size / Endianness | Type | Name | Comment |
 | ------ | ----------------- | ---- | ---- | ------- |
-| - | - / - | [PackedGuid](../types/packed-guid.md) | minipet_target |  |
+| 0x04 | - / - | [PackedGuid](../types/packed-guid.md) | minipet_target |  |
 
 Else If target_flags contains `GAMEOBJECT`:
 
 | Offset | Size / Endianness | Type | Name | Comment |
 | ------ | ----------------- | ---- | ---- | ------- |
-| - | - / - | [PackedGuid](../types/packed-guid.md) | gameobject_target |  |
+| 0x04 | - / - | [PackedGuid](../types/packed-guid.md) | gameobject_target |  |
 
 Else If target_flags contains `CORPSE_ENEMY`:
 
 | Offset | Size / Endianness | Type | Name | Comment |
 | ------ | ----------------- | ---- | ---- | ------- |
-| - | - / - | [PackedGuid](../types/packed-guid.md) | enemy_corpse_target |  |
+| 0x04 | - / - | [PackedGuid](../types/packed-guid.md) | enemy_corpse_target |  |
 
 Else If target_flags contains `CORPSE_ALLY`:
 
 | Offset | Size / Endianness | Type | Name | Comment |
 | ------ | ----------------- | ---- | ---- | ------- |
-| - | - / - | [PackedGuid](../types/packed-guid.md) | ally_corpse_target |  |
+| 0x04 | - / - | [PackedGuid](../types/packed-guid.md) | ally_corpse_target |  |
 
 If target_flags contains `ITEM`:
 

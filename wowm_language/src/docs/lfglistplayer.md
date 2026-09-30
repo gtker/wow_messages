@@ -101,7 +101,7 @@ If flags contains `COMMENT`:
 
 | Offset | Size / Endianness | Type | Name | Comment |
 | ------ | ----------------- | ---- | ---- | ------- |
-| 0x62 | - / - | CString | comment |  |
+| - | - / - | CString | comment |  |
 
 If flags contains `GROUP_LEADER`:
 

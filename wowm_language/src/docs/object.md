@@ -47,7 +47,7 @@ Else If update_type is equal to `MOVEMENT`:
 
 | Offset | Size / Endianness | Type | Name | Comment |
 | ------ | ----------------- | ---- | ---- | ------- |
-| - | - / - | [PackedGuid](../types/packed-guid.md) | guid2 |  |
+| 0x01 | - / - | [PackedGuid](../types/packed-guid.md) | guid2 |  |
 | - | - / - | [MovementBlock](movementblock.md) | movement1 |  |
 
 Else If update_type is equal to `CREATE_OBJECT` **or** 
@@ -55,7 +55,7 @@ is equal to `CREATE_OBJECT2`:
 
 | Offset | Size / Endianness | Type | Name | Comment |
 | ------ | ----------------- | ---- | ---- | ------- |
-| - | - / - | [PackedGuid](../types/packed-guid.md) | guid3 |  |
+| 0x01 | - / - | [PackedGuid](../types/packed-guid.md) | guid3 |  |
 | - | 1 / - | [ObjectType](objecttype.md) | object_type |  |
 | - | - / - | [MovementBlock](movementblock.md) | movement2 |  |
 | - | - / - | [UpdateMask](../types/update-mask.md) | mask2 |  |
@@ -65,8 +65,8 @@ is equal to `NEAR_OBJECTS`:
 
 | Offset | Size / Endianness | Type | Name | Comment |
 | ------ | ----------------- | ---- | ---- | ------- |
-| - | 4 / Little | u32 | count |  |
-| - | ? / - | [PackedGuid](../types/packed-guid.md)[count] | guids |  |
+| 0x01 | 4 / Little | u32 | count |  |
+| 0x05 | ? / - | [PackedGuid](../types/packed-guid.md)[count] | guids |  |
 
 
 Used in:
@@ -120,7 +120,7 @@ Else If update_type is equal to `MOVEMENT`:
 
 | Offset | Size / Endianness | Type | Name | Comment |
 | ------ | ----------------- | ---- | ---- | ------- |
-| - | - / - | [PackedGuid](../types/packed-guid.md) | guid2 |  |
+| 0x01 | - / - | [PackedGuid](../types/packed-guid.md) | guid2 |  |
 | - | - / - | [MovementBlock](movementblock.md) | movement1 |  |
 
 Else If update_type is equal to `CREATE_OBJECT` **or** 
@@ -128,7 +128,7 @@ is equal to `CREATE_OBJECT2`:
 
 | Offset | Size / Endianness | Type | Name | Comment |
 | ------ | ----------------- | ---- | ---- | ------- |
-| - | - / - | [PackedGuid](../types/packed-guid.md) | guid3 |  |
+| 0x01 | - / - | [PackedGuid](../types/packed-guid.md) | guid3 |  |
 | - | 1 / - | [ObjectType](objecttype.md) | object_type |  |
 | - | - / - | [MovementBlock](movementblock.md) | movement2 |  |
 | - | - / - | [UpdateMask](../types/update-mask.md) | mask2 |  |
@@ -138,8 +138,8 @@ is equal to `NEAR_OBJECTS`:
 
 | Offset | Size / Endianness | Type | Name | Comment |
 | ------ | ----------------- | ---- | ---- | ------- |
-| - | 4 / Little | u32 | count |  |
-| - | ? / - | [PackedGuid](../types/packed-guid.md)[count] | guids |  |
+| 0x01 | 4 / Little | u32 | count |  |
+| 0x05 | ? / - | [PackedGuid](../types/packed-guid.md)[count] | guids |  |
 
 
 Used in:
@@ -193,7 +193,7 @@ Else If update_type is equal to `MOVEMENT`:
 
 | Offset | Size / Endianness | Type | Name | Comment |
 | ------ | ----------------- | ---- | ---- | ------- |
-| - | - / - | [PackedGuid](../types/packed-guid.md) | guid2 |  |
+| 0x01 | - / - | [PackedGuid](../types/packed-guid.md) | guid2 |  |
 | - | - / - | [MovementBlock](movementblock.md) | movement1 |  |
 
 Else If update_type is equal to `CREATE_OBJECT` **or** 
@@ -201,7 +201,7 @@ is equal to `CREATE_OBJECT2`:
 
 | Offset | Size / Endianness | Type | Name | Comment |
 | ------ | ----------------- | ---- | ---- | ------- |
-| - | - / - | [PackedGuid](../types/packed-guid.md) | guid3 |  |
+| 0x01 | - / - | [PackedGuid](../types/packed-guid.md) | guid3 |  |
 | - | 1 / - | [ObjectType](objecttype.md) | object_type |  |
 | - | - / - | [MovementBlock](movementblock.md) | movement2 |  |
 | - | - / - | [UpdateMask](../types/update-mask.md) | mask2 |  |
@@ -211,8 +211,8 @@ is equal to `NEAR_OBJECTS`:
 
 | Offset | Size / Endianness | Type | Name | Comment |
 | ------ | ----------------- | ---- | ---- | ------- |
-| - | 4 / Little | u32 | count |  |
-| - | ? / - | [PackedGuid](../types/packed-guid.md)[count] | guids |  |
+| 0x01 | 4 / Little | u32 | count |  |
+| 0x05 | ? / - | [PackedGuid](../types/packed-guid.md)[count] | guids |  |
 
 
 Used in:

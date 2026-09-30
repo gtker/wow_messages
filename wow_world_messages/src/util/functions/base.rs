@@ -70,6 +70,12 @@ pub fn read_u8_le<R: Read>(r: &mut R) -> Result<u8, std::io::Error> {
     Ok(u8::from_le_bytes(v))
 }
 
+pub fn read_i8_le<R: Read>(r: &mut R) -> Result<i8, std::io::Error> {
+    let mut v = [0_u8; 1];
+    r.read_exact(&mut v)?;
+    Ok(i8::from_le_bytes(v))
+}
+
 pub fn read_u16_le<R: Read>(r: &mut R) -> Result<u16, std::io::Error> {
     let mut v = [0_u8; 2];
     r.read_exact(&mut v)?;

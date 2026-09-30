@@ -1,10 +1,12 @@
+use std::process::exit;
+
+use writer::ErrorWriter;
+
 use crate::file_info::FileInfo;
 use crate::parser::types::version::{AllVersions, MajorWorldVersion, WorldVersion};
 use crate::parser::types::IntegerType;
 use crate::path_utils::opcodes_file;
 use crate::{ObjectTags, CONTAINER_SELF_SIZE_FIELD};
-use std::process::exit;
-use writer::ErrorWriter;
 
 mod writer;
 
@@ -30,6 +32,7 @@ pub(crate) const TYPE_IS_UPCAST_TO_SAME: i32 = 20;
 pub(crate) const FLAG_WITH_SIGNED_TYPE: i32 = 21;
 pub(crate) const DEFINER_WITH_INVALID_VALUE: i32 = 22;
 pub(crate) const VERSION_TAGS_OVERLAP: i32 = 23;
+pub(crate) const UNSUPPORTED_WRATH_SPLINE_LAYOUT: i32 = 24;
 
 fn wowm_exit(s: ErrorWriter, code: i32) -> ! {
     #[cfg(not(test))]
@@ -249,6 +252,16 @@ pub(crate) fn non_matching_if_statement_variables(
     s.fileinfo(file_info, format!("Type '{ty_name}' has if statement with variable '{first_variable_name}' and '{second_variable_name}'. Wowm currently only allows or (||) expressions with the same variable'"));
 
     wowm_exit(s, NON_MATCHING_IF_VARIABLES);
+}
+
+pub(crate) fn unsupported_wrath_spline_layout(file_info: &FileInfo) -> ! {
+    let mut s = ErrorWriter::new("Unsupported Wrath monster move spline layout");
+    s.fileinfo(
+        file_info,
+        "The FLYING || CATMULLROM spline choice requires one FullMonsterMoveSpline field in the if branch and one MonsterMoveSplines field in the else branch, without else-if branches.",
+    );
+
+    wowm_exit(s, UNSUPPORTED_WRATH_SPLINE_LAYOUT)
 }
 
 pub(crate) fn unsupported_upcast(

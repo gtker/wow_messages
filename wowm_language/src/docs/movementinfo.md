@@ -341,7 +341,7 @@ Else If flags contains `ON_TRANSPORT`:
 
 | Offset | Size / Endianness | Type | Name | Comment |
 | ------ | ----------------- | ---- | ---- | ------- |
-| - | - / - | [TransportInfo](transportinfo.md) | transport |  |
+| 0x1A | - / - | [TransportInfo](transportinfo.md) | transport |  |
 
 If flags contains `SWIMMING`:
 

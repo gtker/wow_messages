@@ -41,9 +41,7 @@ pub(crate) fn print_size_of_ty_rust_view(s: &mut Writer, m: &RustMember, prefix:
             }
         }
 
-        RustType::MonsterMoveSpline => {
-            format!("crate::util::monster_move_spline_size({prefix}{name}.as_slice())",)
-        }
+        RustType::MonsterMoveSpline(encoding) => encoding.size_expression(prefix, name),
         RustType::PackedGuid => {
             format!("crate::util::packed_guid_size(&{prefix}{name})",)
         }

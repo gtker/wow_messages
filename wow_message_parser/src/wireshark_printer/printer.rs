@@ -1,3 +1,5 @@
+use std::fmt::UpperHex;
+
 use crate::parser::types::array::{ArraySize, ArrayType};
 use crate::parser::types::definer::Definer;
 use crate::parser::types::if_statement::{Equation, IfStatement};
@@ -12,7 +14,6 @@ use crate::wireshark_printer::{
     name_to_hf, pretty_name, server_to_client_name, ui_name,
 };
 use crate::{Container, ObjectTags};
-use std::fmt::UpperHex;
 
 fn print_compression_prelude(s: &mut Writer) {
     s.wln("ptvcursor_add(ptv, hf_woww_decompressed_size, 4, ENC_LITTLE_ENDIAN);");
@@ -491,7 +492,9 @@ fn print_definition(
                     }
                     ArraySize::Endless => {
                         let packet_end = if array.compressed() || inside_compressed_message {
-                            s.wln("unsigned compression_end = tvb_reported_length(compressed_tvb);");
+                            s.wln(
+                                "unsigned compression_end = tvb_reported_length(compressed_tvb);",
+                            );
                             "compression_end"
                         } else {
                             "offset_packet_end"
@@ -559,7 +562,7 @@ fn print_definition(
         Type::UpdateMask { .. } => {
             s.wln("add_update_mask(ptv, pinfo);");
         }
-        Type::MonsterMoveSplines => {
+        Type::MonsterMoveSplines | Type::FullMonsterMoveSpline => {
             s.wln("add_monster_move_spline(ptv);");
         }
         Type::AchievementInProgressArray | Type::AchievementDoneArray => {

@@ -44,21 +44,21 @@ Else If move_type is equal to `FACING_ANGLE`:
 
 | Offset | Size / Endianness | Type | Name | Comment |
 | ------ | ----------------- | ---- | ---- | ------- |
-| 0x19 | 4 / Little | f32 | angle |  |
+| 0x11 | 4 / Little | f32 | angle |  |
 
 Else If move_type is equal to `FACING_SPOT`:
 
 | Offset | Size / Endianness | Type | Name | Comment |
 | ------ | ----------------- | ---- | ---- | ------- |
-| 0x1D | 12 / - | [Vector3d](vector3d.md) | position |  |
+| 0x11 | 12 / - | [Vector3d](vector3d.md) | position |  |
 
 If move_type is not equal to `STOP`:
 
 | Offset | Size / Endianness | Type | Name | Comment |
 | ------ | ----------------- | ---- | ---- | ------- |
-| 0x29 | 4 / - | [SplineFlag](splineflag.md) | spline_flags |  |
-| 0x2D | 4 / Little | u32 | duration |  |
-| 0x31 | - / - | [MonsterMoveSpline](../types/monster-move-spline.md) | splines |  |
+| - | 4 / - | [SplineFlag](splineflag.md) | spline_flags |  |
+| - | 4 / Little | u32 | duration |  |
+| - | - / - | [MonsterMoveSpline](../types/monster-move-spline.md) | splines |  |
 
 
 Used in:

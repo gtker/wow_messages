@@ -211,6 +211,8 @@ pub use crate::shared::mail_list_item_enchant_tbc_wrath::*;
 pub(crate) mod mini_move_message;
 pub use mini_move_message::*;
 pub use crate::shared::money_log_item_tbc_wrath::*;
+pub(crate) mod monster_move_data;
+pub use monster_move_data::*;
 pub(crate) mod movement_block;
 pub use movement_block::*;
 pub(crate) mod movement_info;

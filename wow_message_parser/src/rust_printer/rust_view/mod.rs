@@ -1,3 +1,9 @@
+use rust_enumerator::RustEnumerator;
+use rust_member::RustMember;
+use rust_object::RustObject;
+use rust_optional::RustOptional;
+use rust_type::{MonsterMoveSplineEncoding, MonsterMoveSplineLayout, RustType};
+
 use crate::parser::types::definer::Definer;
 use crate::parser::types::if_statement::{Equation, IfStatement};
 use crate::parser::types::parsed::parsed_container::ParsedContainer;
@@ -9,11 +15,6 @@ use crate::rust_printer::{
     field_name_to_rust_name, get_new_flag_type_name, get_new_type_name, get_optional_type_name,
     DefinerType,
 };
-use rust_enumerator::RustEnumerator;
-use rust_member::RustMember;
-use rust_object::RustObject;
-use rust_optional::RustOptional;
-use rust_type::RustType;
 
 pub(crate) mod rust_definer;
 pub(crate) mod rust_enumerator;
@@ -277,15 +278,42 @@ pub(crate) fn create_struct_member(
             current_scope.push(create_struct_member_definition(e, containers, definers, d));
         }
         StructMember::IfStatement(statement) => {
-            create_if_statement(
-                statement,
-                struct_ty_name,
-                tags,
-                containers,
-                definers,
-                e,
-                current_scope,
-            );
+            if tags.contains_wrath() {
+                match MonsterMoveSplineLayout::from_if_statement(statement) {
+                    Ok(Some(layout)) => {
+                        let mut member = create_struct_member_definition(
+                            e,
+                            containers,
+                            definers,
+                            layout.linear(),
+                        );
+                        member.ty = RustType::MonsterMoveSpline(
+                            MonsterMoveSplineEncoding::from_layout(&layout),
+                        );
+                        current_scope.push(member);
+                    }
+                    Ok(None) => create_if_statement(
+                        statement,
+                        struct_ty_name,
+                        tags,
+                        containers,
+                        definers,
+                        e,
+                        current_scope,
+                    ),
+                    Err(_) => crate::error_printer::unsupported_wrath_spline_layout(&e.file_info),
+                }
+            } else {
+                create_if_statement(
+                    statement,
+                    struct_ty_name,
+                    tags,
+                    containers,
+                    definers,
+                    e,
+                    current_scope,
+                );
+            }
         }
         StructMember::OptionalStatement(option) => {
             let mut members = Vec::new();
@@ -404,7 +432,12 @@ fn create_struct_member_definition(
         Type::SizedCString => RustType::SizedCString,
         Type::AchievementDoneArray => RustType::AchievementDoneArray,
         Type::AchievementInProgressArray => RustType::AchievementInProgressArray,
-        Type::MonsterMoveSplines => RustType::MonsterMoveSpline,
+        Type::MonsterMoveSplines => RustType::MonsterMoveSpline(if e.tags().contains_wrath() {
+            MonsterMoveSplineEncoding::Linear
+        } else {
+            MonsterMoveSplineEncoding::Legacy
+        }),
+        Type::FullMonsterMoveSpline => RustType::MonsterMoveSpline(MonsterMoveSplineEncoding::Full),
         Type::EnchantMask => RustType::EnchantMask,
         Type::InspectTalentGearMask => RustType::InspectTalentGearMask,
         Type::Gold => RustType::Gold,

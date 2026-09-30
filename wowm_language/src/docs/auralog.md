@@ -52,23 +52,23 @@ is equal to `OBS_MOD_HEALTH`:
 
 | Offset | Size / Endianness | Type | Name | Comment |
 | ------ | ----------------- | ---- | ---- | ------- |
-| 0x11 | 4 / Little | u32 | damage2 |  |
+| 0x04 | 4 / Little | u32 | damage2 |  |
 
 Else If aura_type is equal to `OBS_MOD_MANA` **or** 
 is equal to `PERIODIC_ENERGIZE`:
 
 | Offset | Size / Endianness | Type | Name | Comment |
 | ------ | ----------------- | ---- | ---- | ------- |
-| 0x15 | 4 / Little | u32 | misc_value1 | vmangos: A miscvalue that is dependent on what the aura will do, this is usually decided by the AuraType, ie: with AuraType::SPELL_AURA_MOD_BASE_RESISTANCE_PCT this value could be SpellSchoolMask::SPELL_SCHOOL_MASK_NORMAL which would tell the aura that it should change armor.  If Modifier::m_auraname would have been AuraType::SPELL_AURA_MOUNTED then m_miscvalue would have decided which model the mount should have |
-| 0x19 | 4 / Little | u32 | damage3 |  |
+| 0x04 | 4 / Little | u32 | misc_value1 | vmangos: A miscvalue that is dependent on what the aura will do, this is usually decided by the AuraType, ie: with AuraType::SPELL_AURA_MOD_BASE_RESISTANCE_PCT this value could be SpellSchoolMask::SPELL_SCHOOL_MASK_NORMAL which would tell the aura that it should change armor.  If Modifier::m_auraname would have been AuraType::SPELL_AURA_MOUNTED then m_miscvalue would have decided which model the mount should have |
+| 0x08 | 4 / Little | u32 | damage3 |  |
 
 Else If aura_type is equal to `PERIODIC_MANA_LEECH`:
 
 | Offset | Size / Endianness | Type | Name | Comment |
 | ------ | ----------------- | ---- | ---- | ------- |
-| 0x1D | 4 / Little | u32 | misc_value2 | vmangos: A miscvalue that is dependent on what the aura will do, this is usually decided by the AuraType, ie: with AuraType::SPELL_AURA_MOD_BASE_RESISTANCE_PCT this value could be SpellSchoolMask::SPELL_SCHOOL_MASK_NORMAL which would tell the aura that it should change armor.  If Modifier::m_auraname would have been AuraType::SPELL_AURA_MOUNTED then m_miscvalue would have decided which model the mount should have |
-| 0x21 | 4 / Little | u32 | damage |  |
-| 0x25 | 4 / Little | f32 | gain_multiplier |  |
+| 0x04 | 4 / Little | u32 | misc_value2 | vmangos: A miscvalue that is dependent on what the aura will do, this is usually decided by the AuraType, ie: with AuraType::SPELL_AURA_MOD_BASE_RESISTANCE_PCT this value could be SpellSchoolMask::SPELL_SCHOOL_MASK_NORMAL which would tell the aura that it should change armor.  If Modifier::m_auraname would have been AuraType::SPELL_AURA_MOUNTED then m_miscvalue would have decided which model the mount should have |
+| 0x08 | 4 / Little | u32 | damage |  |
+| 0x0C | 4 / Little | f32 | gain_multiplier |  |
 
 
 Used in:
@@ -126,23 +126,23 @@ is equal to `OBS_MOD_HEALTH`:
 
 | Offset | Size / Endianness | Type | Name | Comment |
 | ------ | ----------------- | ---- | ---- | ------- |
-| 0x11 | 4 / Little | u32 | damage2 |  |
+| 0x04 | 4 / Little | u32 | damage2 |  |
 
 Else If aura_type is equal to `OBS_MOD_MANA` **or** 
 is equal to `PERIODIC_ENERGIZE`:
 
 | Offset | Size / Endianness | Type | Name | Comment |
 | ------ | ----------------- | ---- | ---- | ------- |
-| 0x15 | 4 / Little | u32 | misc_value1 | vmangos: A miscvalue that is dependent on what the aura will do, this is usually decided by the AuraType, ie: with AuraType::SPELL_AURA_MOD_BASE_RESISTANCE_PCT this value could be SpellSchoolMask::SPELL_SCHOOL_MASK_NORMAL which would tell the aura that it should change armor.  If Modifier::m_auraname would have been AuraType::SPELL_AURA_MOUNTED then m_miscvalue would have decided which model the mount should have |
-| 0x19 | 4 / Little | u32 | damage3 |  |
+| 0x04 | 4 / Little | u32 | misc_value1 | vmangos: A miscvalue that is dependent on what the aura will do, this is usually decided by the AuraType, ie: with AuraType::SPELL_AURA_MOD_BASE_RESISTANCE_PCT this value could be SpellSchoolMask::SPELL_SCHOOL_MASK_NORMAL which would tell the aura that it should change armor.  If Modifier::m_auraname would have been AuraType::SPELL_AURA_MOUNTED then m_miscvalue would have decided which model the mount should have |
+| 0x08 | 4 / Little | u32 | damage3 |  |
 
 Else If aura_type is equal to `PERIODIC_MANA_LEECH`:
 
 | Offset | Size / Endianness | Type | Name | Comment |
 | ------ | ----------------- | ---- | ---- | ------- |
-| 0x1D | 4 / Little | u32 | misc_value2 | vmangos: A miscvalue that is dependent on what the aura will do, this is usually decided by the AuraType, ie: with AuraType::SPELL_AURA_MOD_BASE_RESISTANCE_PCT this value could be SpellSchoolMask::SPELL_SCHOOL_MASK_NORMAL which would tell the aura that it should change armor.  If Modifier::m_auraname would have been AuraType::SPELL_AURA_MOUNTED then m_miscvalue would have decided which model the mount should have |
-| 0x21 | 4 / Little | u32 | damage |  |
-| 0x25 | 4 / Little | f32 | gain_multiplier |  |
+| 0x04 | 4 / Little | u32 | misc_value2 | vmangos: A miscvalue that is dependent on what the aura will do, this is usually decided by the AuraType, ie: with AuraType::SPELL_AURA_MOD_BASE_RESISTANCE_PCT this value could be SpellSchoolMask::SPELL_SCHOOL_MASK_NORMAL which would tell the aura that it should change armor.  If Modifier::m_auraname would have been AuraType::SPELL_AURA_MOUNTED then m_miscvalue would have decided which model the mount should have |
+| 0x08 | 4 / Little | u32 | damage |  |
+| 0x0C | 4 / Little | f32 | gain_multiplier |  |
 
 
 Used in:
@@ -207,26 +207,26 @@ is equal to `OBS_MOD_HEALTH`:
 
 | Offset | Size / Endianness | Type | Name | Comment |
 | ------ | ----------------- | ---- | ---- | ------- |
-| 0x16 | 4 / Little | u32 | damage2 |  |
-| 0x1A | 4 / Little | u32 | over_damage |  |
-| 0x1E | 4 / Little | u32 | absorb2 |  |
-| 0x22 | 1 / - | Bool | critical2 | new 3.1.2 critical tick |
+| 0x04 | 4 / Little | u32 | damage2 |  |
+| 0x08 | 4 / Little | u32 | over_damage |  |
+| 0x0C | 4 / Little | u32 | absorb2 |  |
+| 0x10 | 1 / - | Bool | critical2 | new 3.1.2 critical tick |
 
 Else If aura_type is equal to `OBS_MOD_POWER` **or** 
 is equal to `PERIODIC_ENERGIZE`:
 
 | Offset | Size / Endianness | Type | Name | Comment |
 | ------ | ----------------- | ---- | ---- | ------- |
-| 0x23 | 4 / Little | u32 | misc_value1 | vmangos: A miscvalue that is dependent on what the aura will do, this is usually decided by the AuraType, ie: with AuraType::SPELL_AURA_MOD_BASE_RESISTANCE_PCT this value could be SpellSchoolMask::SPELL_SCHOOL_MASK_NORMAL which would tell the aura that it should change armor.  If Modifier::m_auraname would have been AuraType::SPELL_AURA_MOUNTED then m_miscvalue would have decided which model the mount should have |
-| 0x27 | 4 / Little | u32 | damage3 |  |
+| 0x04 | 4 / Little | u32 | misc_value1 | vmangos: A miscvalue that is dependent on what the aura will do, this is usually decided by the AuraType, ie: with AuraType::SPELL_AURA_MOD_BASE_RESISTANCE_PCT this value could be SpellSchoolMask::SPELL_SCHOOL_MASK_NORMAL which would tell the aura that it should change armor.  If Modifier::m_auraname would have been AuraType::SPELL_AURA_MOUNTED then m_miscvalue would have decided which model the mount should have |
+| 0x08 | 4 / Little | u32 | damage3 |  |
 
 Else If aura_type is equal to `PERIODIC_MANA_LEECH`:
 
 | Offset | Size / Endianness | Type | Name | Comment |
 | ------ | ----------------- | ---- | ---- | ------- |
-| 0x2B | 4 / Little | u32 | misc_value2 | vmangos: A miscvalue that is dependent on what the aura will do, this is usually decided by the AuraType, ie: with AuraType::SPELL_AURA_MOD_BASE_RESISTANCE_PCT this value could be SpellSchoolMask::SPELL_SCHOOL_MASK_NORMAL which would tell the aura that it should change armor.  If Modifier::m_auraname would have been AuraType::SPELL_AURA_MOUNTED then m_miscvalue would have decided which model the mount should have |
-| 0x2F | 4 / Little | u32 | damage4 |  |
-| 0x33 | 4 / Little | f32 | gain_multiplier |  |
+| 0x04 | 4 / Little | u32 | misc_value2 | vmangos: A miscvalue that is dependent on what the aura will do, this is usually decided by the AuraType, ie: with AuraType::SPELL_AURA_MOD_BASE_RESISTANCE_PCT this value could be SpellSchoolMask::SPELL_SCHOOL_MASK_NORMAL which would tell the aura that it should change armor.  If Modifier::m_auraname would have been AuraType::SPELL_AURA_MOUNTED then m_miscvalue would have decided which model the mount should have |
+| 0x08 | 4 / Little | u32 | damage4 |  |
+| 0x0C | 4 / Little | f32 | gain_multiplier |  |
 
 
 Used in:

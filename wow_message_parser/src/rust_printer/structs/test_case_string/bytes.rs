@@ -282,29 +282,14 @@ fn print_bytes_definition(
             }
         }
 
+        Type::FullMonsterMoveSpline => {
+            s.wln(format!("crate::util::write_bytes(&mut s, &mut bytes, 4, \"{name}_length\", {prefix_text});"));
+            print_smooth_spline_bytes(s, name, &var_name, &prefix_text);
+        }
+
         Type::MonsterMoveSplines => {
             s.wln(format!("crate::util::write_bytes(&mut s, &mut bytes, 4, \"{name}_length\", {prefix_text});"));
-            s.open_curly(format!("if !{var_name}.is_empty()"));
-            wln(s, format!("    /* {name}: {ty_name} start */"));
-
-            s.wln(format!("let mut v = {var_name}.iter();"));
-            s.wln("let _ = v.next().unwrap();");
-            s.wln(format!(
-                "crate::util::write_bytes(&mut s, &mut bytes, 4, \"{name}_x\", {prefix_text});"
-            ));
-            s.wln(format!(
-                "crate::util::write_bytes(&mut s, &mut bytes, 4, \"{name}_y\", {prefix_text});"
-            ));
-            s.wln(format!(
-                "crate::util::write_bytes(&mut s, &mut bytes, 4, \"{name}_z\", {prefix_text});"
-            ));
-
-            s.bodyn("for v in v", |s| {
-                s.wln(format!("crate::util::write_bytes(&mut s, &mut bytes, 4, \"{name}_packed\", {prefix_text});"));
-            });
-
-            wln(s, format!("    /* {name}: {ty_name} end */"));
-            s.closing_curly(); // if !is empty
+            print_linear_spline_bytes(s, name, &ty_name, &var_name, &prefix_text);
         }
 
         Type::CacheMask
@@ -323,4 +308,39 @@ fn print_bytes_definition(
             ));
         }
     }
+}
+
+fn print_linear_spline_bytes(
+    s: &mut Writer,
+    name: &str,
+    ty_name: &str,
+    var_name: &str,
+    prefix_text: &str,
+) {
+    s.open_curly(format!("if !{var_name}.is_empty()"));
+    wln(s, format!("    /* {name}: {ty_name} start */"));
+    s.wln(format!("let mut v = {var_name}.iter();"));
+    s.wln("let _ = v.next().unwrap();");
+    for axis in ["x", "y", "z"] {
+        s.wln(format!(
+            "crate::util::write_bytes(&mut s, &mut bytes, 4, \"{name}_{axis}\", {prefix_text});"
+        ));
+    }
+    s.bodyn("for v in v", |s| {
+        s.wln(format!(
+            "crate::util::write_bytes(&mut s, &mut bytes, 4, \"{name}_packed\", {prefix_text});"
+        ));
+    });
+    wln(s, format!("    /* {name}: {ty_name} end */"));
+    s.closing_curly();
+}
+
+fn print_smooth_spline_bytes(s: &mut Writer, name: &str, var_name: &str, prefix_text: &str) {
+    s.bodyn(format!("for v in {var_name}.iter()"), |s| {
+        for axis in ["x", "y", "z"] {
+            s.wln(format!(
+                "crate::util::write_bytes(&mut s, &mut bytes, 4, \"{name}_{axis}\", {prefix_text});"
+            ));
+        }
+    });
 }

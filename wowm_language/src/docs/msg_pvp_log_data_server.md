@@ -37,6 +37,6 @@ If status is equal to `ENDED`:
 | Offset | Size / Endianness | Type | Name | Comment |
 | ------ | ----------------- | ---- | ---- | ------- |
 | 0x05 | 1 / - | [BattlegroundWinner](battlegroundwinner.md) | winner |  |
-| 0x06 | 4 / Little | u32 | amount_of_players | vmangos: Client has a hard limit to 80. If we go beyond (but it should not happen ?!), WoW Error (happening !) |
-| 0x0A | ? / - | [BattlegroundPlayer](battlegroundplayer.md)[amount_of_players] | players |  |
+| - | 4 / Little | u32 | amount_of_players | vmangos: Client has a hard limit to 80. If we go beyond (but it should not happen ?!), WoW Error (happening !) |
+| - | ? / - | [BattlegroundPlayer](battlegroundplayer.md)[amount_of_players] | players |  |
 

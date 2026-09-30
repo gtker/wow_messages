@@ -1,3 +1,5 @@
+use std::convert::TryInto;
+
 use crate::error_printer::{complex_not_found, recursive_type, unsupported_upcast};
 use crate::file_info::FileInfo;
 use crate::parser::types::definer::Definer;
@@ -22,7 +24,6 @@ use crate::{
     MONSTER_MOVE_SPLINE_SMALLEST_ALLOWED, SIZED_CSTRING_LARGEST_ALLOWED,
     SIZED_CSTRING_SMALLEST_ALLOWED, STRING_LARGEST_POSSIBLE, STRING_SMALLEST_POSSIBLE,
 };
-use std::convert::TryInto;
 
 #[derive(Debug, Eq, PartialEq, Clone)]
 pub(crate) enum ParsedType {
@@ -44,6 +45,7 @@ pub(crate) enum ParsedType {
     UpdateMask,
     AuraMask,
     MonsterMoveSpline,
+    FullMonsterMoveSpline,
     AchievementDoneArray,
     AchievementInProgressArray,
     EnchantMask,
@@ -73,6 +75,7 @@ impl ParsedType {
             ParsedType::Array(a) => a.str(),
             ParsedType::Identifier { s, .. } => s.clone(),
             ParsedType::FloatingPoint => Type::F32_NAME.to_string(),
+            ParsedType::FullMonsterMoveSpline => Type::FULL_MONSTER_MOVE_SPLINE_NAME.to_string(),
             ParsedType::PackedGuid => Type::PACKED_GUID_NAME.to_string(),
             ParsedType::Guid => Type::GUID_NAME.to_string(),
             ParsedType::UpdateMask => Type::UPDATE_MASK_NAME.to_string(),
@@ -117,7 +120,9 @@ impl ParsedType {
             ParsedType::AchievementInProgressArray => {
                 Type::ACHIEVEMENT_IN_PROGRESS_ARRAY_RUST_NAME.to_string()
             }
-            ParsedType::MonsterMoveSpline => Type::MONSTER_MOVE_SPLINES_RUST_NAME.to_string(),
+            ParsedType::MonsterMoveSpline | ParsedType::FullMonsterMoveSpline => {
+                Type::MONSTER_MOVE_SPLINES_RUST_NAME.to_string()
+            }
             ParsedType::AddonArray => Type::ADDON_ARRAY_RUST_NAME.to_string(),
             ParsedType::IpAddress => Type::IP_ADDRESS_RUST_NAME.to_string(),
             ParsedType::Bool(_) => Type::BOOLS_RUST_NAME.to_string(),
@@ -144,6 +149,7 @@ impl ParsedType {
             ParsedType::Array(a) => a.str(),
             ParsedType::Identifier { s, .. } => s.clone(),
             ParsedType::FloatingPoint => "float".to_string(),
+            ParsedType::FullMonsterMoveSpline => Type::FULL_MONSTER_MOVE_SPLINE_NAME.to_string(),
             ParsedType::PackedGuid => Type::PACKED_GUID_NAME.to_string(),
             ParsedType::Guid => "uint64".to_string(),
             ParsedType::UpdateMask => Type::UPDATE_MASK_NAME.to_string(),
@@ -201,7 +207,7 @@ impl ParsedType {
             ParsedType::AchievementDoneArray | ParsedType::AchievementInProgressArray => {
                 (0, usize::MAX.try_into().unwrap())
             }
-            ParsedType::MonsterMoveSpline => (
+            ParsedType::MonsterMoveSpline | ParsedType::FullMonsterMoveSpline => (
                 MONSTER_MOVE_SPLINE_SMALLEST_ALLOWED.into(),
                 MONSTER_MOVE_SPLINE_LARGEST_ALLOWED,
             ),
@@ -387,6 +393,7 @@ impl ParsedType {
             Type::DATE_TIME_NAME => Self::DateTime,
             Type::STRING_NAME => Self::String,
             Type::MONSTER_MOVE_SPLINES_NAME => Self::MonsterMoveSpline,
+            Type::FULL_MONSTER_MOVE_SPLINE_NAME => Self::FullMonsterMoveSpline,
             Type::ACHIEVEMENT_DONE_ARRAY_NAME => Self::AchievementDoneArray,
             Type::ACHIEVEMENT_IN_PROGRESS_ARRAY_NAME => Self::AchievementInProgressArray,
             Type::ENCHANT_MASK_NAME => Self::EnchantMask,

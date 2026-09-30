@@ -58,27 +58,27 @@ Else If result is equal to `REQUIRES_AREA`:
 
 | Offset | Size / Endianness | Type | Name | Comment |
 | ------ | ----------------- | ---- | ---- | ------- |
-| 0x0E | 4 / - | [Area](area.md) | area |  |
+| 0x0A | 4 / - | [Area](area.md) | area |  |
 
 Else If result is equal to `TOTEMS`:
 
 | Offset | Size / Endianness | Type | Name | Comment |
 | ------ | ----------------- | ---- | ---- | ------- |
-| 0x12 | 8 / - | u32[2] | totems |  |
+| 0x0A | 8 / - | u32[2] | totems |  |
 
 Else If result is equal to `TOTEM_CATEGORY`:
 
 | Offset | Size / Endianness | Type | Name | Comment |
 | ------ | ----------------- | ---- | ---- | ------- |
-| 0x1A | 8 / - | u32[2] | totem_categories |  |
+| 0x0A | 8 / - | u32[2] | totem_categories |  |
 
 Else If result is equal to `EQUIPPED_ITEM_CLASS`:
 
 | Offset | Size / Endianness | Type | Name | Comment |
 | ------ | ----------------- | ---- | ---- | ------- |
-| 0x22 | 4 / Little | u32 | item_class |  |
-| 0x26 | 4 / Little | u32 | item_sub_class |  |
-| 0x2A | 4 / Little | u32 | item_inventory_type |  |
+| 0x0A | 4 / Little | u32 | item_class |  |
+| 0x0E | 4 / Little | u32 | item_sub_class |  |
+| 0x12 | 4 / Little | u32 | item_inventory_type |  |
 
 ## Client Version 3.3.5
 

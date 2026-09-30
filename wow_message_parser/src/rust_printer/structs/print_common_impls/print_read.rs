@@ -1,5 +1,5 @@
 use crate::parser::types::array::{Array, ArraySize, ArrayType};
-use crate::parser::types::container::Container;
+use crate::parser::types::container::{Container, ContainerType};
 use crate::parser::types::if_statement::{Equation, IfStatement};
 use crate::parser::types::objects::Objects;
 use crate::parser::types::sizes::{GUID_SIZE, SPELL_SIZE};
@@ -9,10 +9,11 @@ use crate::parser::types::IntegerType;
 use crate::rust_printer::base_structs::base_struct_read_name;
 use crate::rust_printer::get_optional_type_name;
 use crate::rust_printer::rust_view::rust_definer::RustDefiner;
-use crate::rust_printer::rust_view::rust_type::RustType;
-use crate::rust_printer::structs::print_common_impls::print_size::{
-    print_rust_members_sizes, print_size_of_ty_rust_view,
+use crate::rust_printer::rust_view::rust_type::{
+    MonsterMoveSplineEncoding, MonsterMoveSplineLayout, RustType,
 };
+use crate::rust_printer::structs::print_common_impls::print_size::print_size_of_ty_rust_view;
+use crate::rust_printer::structs::uses_wrath_monster_move_spline_encoding;
 use crate::rust_printer::writer::Writer;
 use crate::rust_printer::{get_new_flag_type_name, DefinerType};
 use crate::{MAX_ALLOCATION_SIZE, MAX_ALLOCATION_SIZE_WRATH, UTILITY_PATH};
@@ -305,6 +306,42 @@ fn print_size_before_variable(s: &mut Writer, e: &Container, variable_name: &str
     });
 }
 
+fn print_size_for_optional(s: &mut Writer, e: &Container) {
+    s.body_closing_with_semicolon("let current_size =", |s| {
+        let members = e.rust_object().members();
+        if members.is_empty() {
+            s.wln("0");
+        }
+
+        for (i, m) in members.iter().enumerate() {
+            if i == 0 {
+                s.w("");
+            } else {
+                s.w("+ ");
+            }
+
+            // Read discriminators are still raw enums, before conditional payload wrappers exist.
+            if uses_wrath_monster_move_spline_encoding(e) {
+                match m.ty() {
+                    RustType::Enum {
+                        is_simple, int_ty, ..
+                    }
+                    | RustType::Flag {
+                        is_simple, int_ty, ..
+                    } if !is_simple => {
+                        s.w_no_indent(int_ty.size().to_string());
+                        s.wln_no_indent(m.size_comment());
+                        continue;
+                    }
+                    _ => {}
+                }
+            }
+
+            print_size_of_ty_rust_view(s, m, "");
+        }
+    });
+}
+
 fn print_read_definition(
     s: &mut Writer,
     e: &Container,
@@ -471,6 +508,17 @@ fn print_read_definition(
             ));
         }
 
+        Type::FullMonsterMoveSpline => {
+            s.wln_no_indent(format!(
+                "crate::util::read_wrath_monster_move_spline(&mut r, true){postfix}?;"
+            ));
+        }
+
+        Type::MonsterMoveSplines if e.tags().contains_wrath() => {
+            s.wln_no_indent(format!(
+                "crate::util::read_wrath_monster_move_spline(&mut r, false){postfix}?;",
+            ));
+        }
         Type::MonsterMoveSplines => {
             s.wln_no_indent(format!(
                 "crate::util::read_monster_move_spline(&mut r){postfix}?;",
@@ -534,6 +582,24 @@ fn print_read_if_statement_flag(
     prefix: &str,
     postfix: &str,
 ) {
+    if e.tags().contains_wrath() {
+        match MonsterMoveSplineLayout::from_if_statement(statement) {
+            Ok(Some(layout)) => {
+                let encoding = MonsterMoveSplineEncoding::from_layout(&layout);
+                if let Some(condition) = encoding.condition_expression("", "is_") {
+                    s.wln(format!(
+                        "let {name} = crate::util::read_wrath_monster_move_spline(&mut r, {condition})?;",
+                        name = layout.linear().name(),
+                    ));
+                    s.newline();
+                    return;
+                }
+            }
+            Ok(None) => {}
+            Err(_) => crate::error_printer::unsupported_wrath_spline_layout(e.file_info()),
+        }
+    }
+
     s.open_curly(format!(
         "let {var_name}_{enumerator_name} = if {var_name}.is_{enumerator_name}()",
         var_name = statement.variable_name(),
@@ -735,13 +801,7 @@ fn print_read_field(
         },
         StructMember::OptionalStatement(optional) => {
             s.wln(format!("// optional {}", optional.name()));
-            s.body_closing_with_semicolon("let current_size =", |s| {
-                if e.rust_object().members().is_empty() {
-                    s.wln("0");
-                }
-
-                print_rust_members_sizes(s, e.rust_object().members(), None, "");
-            });
+            print_size_for_optional(s, e);
 
             s.body_else_with_closing(
                 format!(
@@ -897,6 +957,18 @@ pub(crate) fn print_read(
 
     for field in e.members() {
         print_read_field(s, e, o, field, prefix, postfix, "let ");
+    }
+
+    if e.tags().contains_wrath()
+        && matches!(
+            e.container_type(),
+            ContainerType::Msg(_) | ContainerType::CMsg(_) | ContainerType::SMsg(_)
+        )
+        && uses_wrath_monster_move_spline_encoding(e)
+    {
+        s.bodyn("if !r.is_empty()", |s| {
+            s.wln("return Err(crate::errors::ParseErrorKind::InvalidSize);");
+        });
     }
 
     let rust_definers = e.rust_object().rust_definers_in_global_scope();

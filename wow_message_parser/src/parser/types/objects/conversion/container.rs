@@ -102,6 +102,7 @@ fn parsed_type_to_type(
         ParsedType::AchievementDoneArray => Type::AchievementDoneArray,
         ParsedType::AchievementInProgressArray => Type::AchievementInProgressArray,
         ParsedType::MonsterMoveSpline => Type::MonsterMoveSplines,
+        ParsedType::FullMonsterMoveSpline => Type::FullMonsterMoveSpline,
         ParsedType::EnchantMask => Type::EnchantMask,
         ParsedType::InspectTalentGearMask => Type::InspectTalentGearMask,
         ParsedType::Gold => Type::Gold,
@@ -534,7 +535,7 @@ fn convert_parsed_test_case_value_to_test_case_value(
                     ParsedArrayType::PackedGuid => "Guid",
                     ParsedArrayType::Spell => "u32",
                 },
-                ParsedType::MonsterMoveSpline => {
+                ParsedType::MonsterMoveSpline | ParsedType::FullMonsterMoveSpline => {
                     let mut v = Vec::new();
 
                     for multiple in array {
@@ -557,7 +558,11 @@ fn convert_parsed_test_case_value_to_test_case_value(
                         v.push(TestVector3d { x, y, z })
                     }
 
-                    return TestValue::MonsterMoveSpline(v);
+                    return match ty {
+                        ParsedType::MonsterMoveSpline => TestValue::MonsterMoveSpline(v),
+                        ParsedType::FullMonsterMoveSpline => TestValue::FullMonsterMoveSpline(v),
+                        _ => unreachable!(),
+                    };
                 }
                 _ => unimplemented!(),
             };
@@ -718,6 +723,7 @@ fn convert_parsed_test_case_value_to_test_case_value(
         | ParsedType::EnchantMask
         | ParsedType::InspectTalentGearMask
         | ParsedType::MonsterMoveSpline
+        | ParsedType::FullMonsterMoveSpline
         | ParsedType::AchievementDoneArray
         | ParsedType::AchievementInProgressArray
         | ParsedType::UpdateMask
