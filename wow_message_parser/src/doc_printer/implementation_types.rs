@@ -26,9 +26,20 @@ fn print_implementation_type(table: &mut WriterTable<3>, ty: &Type) {
             let c_type = i.c_str();
             let (min, max) = (i.smallest_value(), i.largest_value());
 
+            let signedness = match i {
+                IntegerType::U8
+                | IntegerType::U16
+                | IntegerType::U32
+                | IntegerType::U48
+                | IntegerType::U64 => "Unsigned",
+                IntegerType::I8 | IntegerType::I16 | IntegerType::I32 | IntegerType::I64 => {
+                    "Signed"
+                }
+            };
+
             table.add_row([
                 name,
-                format!("Unsigned {bits} bit integer. Min value {min}, max value {max}."),
+                format!("{signedness} {bits} bit integer. Min value {min}, max value {max}."),
                 format!("`{c_type}`"),
             ]);
         }

@@ -92,7 +92,13 @@ impl IntegerType {
     }
 
     pub(crate) fn largest_value(&self) -> i128 {
-        2_i128.pow(8 * self.size() as u32)
+        match self {
+            IntegerType::I8 => i8::MAX.into(),
+            IntegerType::I16 => i16::MAX.into(),
+            IntegerType::I32 => i32::MAX.into(),
+            IntegerType::I64 => i64::MAX.into(),
+            _ => 2_i128.pow(8 * self.size() as u32),
+        }
     }
 
     pub(crate) fn is_signed(&self) -> bool {
