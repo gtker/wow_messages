@@ -6,7 +6,7 @@ pub(crate) use opcodes::print_login_opcodes;
 pub(crate) use opcodes::print_world_opcodes;
 pub(crate) use structs::print_struct;
 
-mod base_structs;
+pub(crate) mod base_structs;
 mod enums;
 mod expected;
 mod flags;

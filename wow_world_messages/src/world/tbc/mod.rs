@@ -4,6 +4,8 @@ pub use crate::manual::tbc::*;
 pub use crate::helper::tbc::*;
 pub use crate::traits::tbc::*;
 
+pub(crate) mod aura_mask;
+pub use aura_mask::*;
 pub use wow_world_base::shared::account_data_type_vanilla_tbc::*;
 pub use wow_world_base::shared::activate_taxi_reply_vanilla_tbc_wrath::*;
 pub use wow_world_base::shared::ai_reaction_vanilla_tbc_wrath::*;

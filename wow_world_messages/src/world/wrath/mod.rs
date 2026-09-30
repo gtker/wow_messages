@@ -4,6 +4,14 @@ pub use crate::manual::wrath::*;
 pub use crate::helper::wrath::*;
 pub use crate::traits::wrath::*;
 
+pub(crate) mod aura_mask;
+pub use aura_mask::*;
+pub(crate) mod cache_mask;
+pub use cache_mask::*;
+pub(crate) mod enchant_mask;
+pub use enchant_mask::*;
+pub(crate) mod inspect_talent_gear_mask;
+pub use inspect_talent_gear_mask::*;
 pub use wow_world_base::shared::activate_taxi_reply_vanilla_tbc_wrath::*;
 pub use wow_world_base::shared::ai_reaction_vanilla_tbc_wrath::*;
 pub use wow_world_base::shared::arena_faction_tbc_wrath::*;

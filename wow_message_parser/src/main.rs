@@ -24,7 +24,6 @@
 
 use std::fmt::Write;
 use std::path::Path;
-
 use walkdir::WalkDir;
 
 use parser::types::objects::Objects;
@@ -38,8 +37,11 @@ use crate::ir_printer::write_intermediate_representation;
 use crate::parser::stats::print_message_stats;
 use crate::parser::types::objects::Object;
 use crate::parser::types::sizes::PACKED_GUID_MAX_SIZE;
-use crate::parser::types::version::AllRustVersions;
+use crate::parser::types::version::{AllRustVersions, MajorWorldVersion};
+use crate::parser::types::IntegerType;
 use crate::path_utils::{get_login_version_file_path, wowm_directory};
+use crate::rust_printer::base_structs::{base_struct_read_name, base_struct_write_name};
+use crate::rust_printer::writer::Writer;
 use crate::rust_printer::{
     print_enum, print_enum_for_base, print_expected, print_flag, print_login_opcodes,
     print_opcode_to_name, print_read_write_base_structs, print_update_mask, print_world_opcodes,
@@ -127,7 +129,9 @@ fn load_and_print_wowm_files() {
 
     wireshark_printer::print_wireshark(&o);
 
-    print_main_types(&o);
+    let n = print_custom_types(&o);
+
+    print_main_types(&o, n);
 
     write_login_opcodes(&o);
 
@@ -148,9 +152,228 @@ fn load_and_print_wowm_files() {
     print_message_stats(&o);
 }
 
-fn print_main_types(o: &Objects) {
+enum AuraMaskMember {
+    Integer(IntegerType),
+    Struct(Container),
+}
+
+struct MaskType {
+    name: String,
+    capacity: u32,
+    member: AuraMaskMember,
+    access_function_name: String,
+}
+
+fn print_custom_types(o: &Objects) -> ModFiles {
     let mut n = ModFiles::new();
 
+    let vanilla_types = [MaskType {
+        name: "AuraMask".to_string(),
+        capacity: 32,
+        member: AuraMaskMember::Integer(IntegerType::U16),
+        access_function_name: "auras".to_string(),
+    }];
+    let tbc_types = [MaskType {
+        name: "AuraMask".to_string(),
+        capacity: 64,
+        member: AuraMaskMember::Struct(
+            o.get_world_struct("Aura", MajorWorldVersion::BurningCrusade)
+                .clone(),
+        ),
+        access_function_name: "auras".to_string(),
+    }];
+    let wrath_types = [
+        MaskType {
+            name: "AuraMask".to_string(),
+            capacity: 64,
+            member: AuraMaskMember::Struct(
+                o.get_world_struct("Aura", MajorWorldVersion::Wrath).clone(),
+            ),
+            access_function_name: "auras".to_string(),
+        },
+        MaskType {
+            name: "CacheMask".to_string(),
+            capacity: 32,
+            member: AuraMaskMember::Integer(IntegerType::U32),
+            access_function_name: "data".to_string(),
+        },
+        MaskType {
+            name: "EnchantMask".to_string(),
+            capacity: 16,
+            member: AuraMaskMember::Integer(IntegerType::U16),
+            access_function_name: "enchants".to_string(),
+        },
+        MaskType {
+            name: "InspectTalentGearMask".to_string(),
+            capacity: 32,
+            member: AuraMaskMember::Struct(
+                o.get_world_struct("InspectTalentGear", MajorWorldVersion::Wrath)
+                    .clone(),
+            ),
+            access_function_name: "enchants".to_string(),
+        },
+    ];
+
+    let all_types = [
+        (vanilla_types.as_ref(), MajorWorldVersion::Vanilla),
+        (tbc_types.as_ref(), MajorWorldVersion::BurningCrusade),
+        (wrath_types.as_ref(), MajorWorldVersion::Wrath),
+    ];
+
+    for (types, version) in all_types {
+        for t in types {
+            let mut s = Writer::new();
+
+            print_custom_type(&mut s, &t, version);
+            let versions = &[version];
+            n.add_world_module(&t.name, versions, s.inner());
+        }
+    }
+
+    n
+}
+
+fn print_custom_type(s: &mut Writer, t: &MaskType, version: MajorWorldVersion) {
+    let name = &t.name;
+    let ty_name = match &t.member {
+        AuraMaskMember::Integer(i) => i.rust_str().to_string(),
+        AuraMaskMember::Struct(c) => {
+            format!("crate::{}::{}", version.module_name(), c.name())
+        }
+    };
+    let can_derive_default = t.capacity <= 32;
+    let default_text = if !can_derive_default { "" } else { "Default, " };
+
+    s.wln(format!(
+        "#[derive(Debug, Hash, {default_text}Copy, Clone, Ord, PartialOrd, Eq, PartialEq)]",
+    ));
+    s.body(format!("pub struct {name}"), |s| {
+        s.wln(format!("inners: [Option<{ty_name}>; Self::MAX_CAPACITY],"));
+    });
+    s.newline();
+
+    s.body(format!("impl {name}"), |s| {
+        s.wln(format!("const MAX_CAPACITY: usize = {};", t.capacity));
+        s.newline();
+
+        let bit_pattern_type = format!("u{}", t.capacity);
+        s.body(
+            "pub(crate) fn read(mut r: impl std::io::Read) -> Result<Self, std::io::Error>",
+            |s| {
+                s.wln("let mut inners = [None; Self::MAX_CAPACITY];");
+                s.wln(format!(
+                    "let bit_pattern: {bit_pattern_type} = crate::util::read_{bit_pattern_type}_le(&mut r)?;"
+                ));
+                s.newline();
+
+                s.body("for (i, inner) in inners.iter_mut().enumerate()", |s| {
+                    s.body("if (bit_pattern & (1 << i)) != 0", |s| match &t.member {
+                        AuraMaskMember::Integer(i) => {
+                            s.wln(format!(
+                                "*inner = Some(crate::util::read_{}_le(&mut r)?);",
+                                i.rust_str()
+                            ));
+                        }
+                        AuraMaskMember::Struct(c) => {
+                            if c.tags().is_in_base() {
+                                s.wln(format!("*inner = Some(crate::util::{}(&mut r)?);", base_struct_read_name(c)))
+                            } else {
+                                s.wln(format!("*inner = Some({ty_name}::read(&mut r)?);"))
+                            }
+                        }
+                    });
+                });
+                s.newline();
+
+                s.wln("Ok(Self { inners })")
+            },
+        );
+        s.newline();
+
+
+        let access_function_name = &t.access_function_name;
+        s.body("pub(crate) fn write_into_vec(&self, mut v: impl std::io::Write) -> Result<(), std::io::Error>", |s| {
+            s.wln(format!("let mut bit_pattern: {bit_pattern_type} = 0;"));
+            s.body(format!("for (i, &b) in self.{access_function_name}().iter().enumerate()"), |s| {
+                s.body("if b.is_some()", |s| {
+                    s.wln("bit_pattern |= 1 << i;")
+                });
+            });
+            s.newline();
+
+            s.wln("std::io::Write::write_all(&mut v, bit_pattern.to_le_bytes().as_slice())?;");
+            s.newline();
+
+            s.body(format!("for &i in self.{access_function_name}()"), |s| {
+                s.body("if let Some(b) = i", |s| {
+                    match &t.member {
+                        AuraMaskMember::Integer(_) => {
+                            s.wln("std::io::Write::write_all(&mut v, b.to_le_bytes().as_slice())?;")
+                        }
+                        AuraMaskMember::Struct(c) => {
+                            if c.tags().is_in_base() {
+                                s.wln(format!("crate::util::{}(&b, &mut v)?;", base_struct_write_name(c)));
+                            } else {
+                                s.wln("b.write_into_vec(&mut v)?;")
+
+                            }
+                        }
+                    }
+                });
+            });
+            s.newline();
+
+            s.wln("Ok(())");
+        });
+        s.newline();
+
+        s.body(format!("pub const fn {access_function_name}(&self) -> &[Option<{ty_name}>]"), |s| {
+            s.wln("self.inners.as_slice()")
+        });
+        s.newline();
+
+        s.body(format!("pub const fn {access_function_name}_mut(&mut self) -> &mut [Option<{ty_name}>]"), |s| {
+            s.wln("self.inners.as_mut_slice()")
+        });
+        s.newline();
+
+        s.body("pub(crate) const fn size(&self) -> usize", |s| {
+            s.wln(format!("const MASK_VARIABLE_SIZE: usize = core::mem::size_of::<{bit_pattern_type}>();"));
+            let ty_size = match &t.member {
+                AuraMaskMember::Integer(i) => i.size().to_string(),
+                AuraMaskMember::Struct(c) => if c.is_constant_sized() {
+                    c.sizes().maximum().to_string()
+                } else {
+                    "i.size()".to_string()
+                },
+            };
+            s.wln("let mut auras = 0;");
+            s.wln("let mut index = 0;");
+            s.body("while index < self.inners.len()", |s| {
+                s.body("if let Some(i) = self.inners[index]", |s| {
+                    s.wln(format!("auras += {ty_size};"));
+                });
+                s.wln("index += 1;");
+            });
+            s.newline();
+
+            s.wln("MASK_VARIABLE_SIZE + auras");
+        });
+    });
+
+    if !can_derive_default {
+        s.newline();
+        s.body(format!("impl Default for {}", t.name), |s| {
+            s.body("fn default() -> Self", |s| {
+                s.body(t.name.as_str(), |s| {
+                    s.wln("inners: [None; Self::MAX_CAPACITY],");
+                })
+            });
+        });
+    }
+}
+
+fn print_main_types(o: &Objects, mut n: ModFiles) {
     for e in o.all_objects() {
         if should_not_write_object(e.tags()) {
             continue;
