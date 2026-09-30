@@ -366,7 +366,13 @@ fn print_value(
     e: &Container,
     version: Version,
 ) {
-    let member = TestCase::get_member(t, m.name());
+    let member = TestCase::try_get_member(t, m.name())
+        .or_else(|| {
+            m.ty()
+                .test_case_alias()
+                .and_then(|name| TestCase::try_get_member(t, name))
+        })
+        .unwrap_or_else(|| TestCase::get_member(t, m.name()));
     let should_print_name = !m.is_single_rust_definer();
 
     if should_print_name {
@@ -377,7 +383,13 @@ fn print_value(
 
     match member.value() {
         TestValue::Number(i) => {
-            s.wln_no_indent(format!("{:#X},", i.value()));
+            let value = match m.ty() {
+                RustType::Integer(integer) if integer.is_signed() && i.value() < 0 => {
+                    i.value().to_string()
+                }
+                _ => format!("{:#X}", i.value()),
+            };
+            s.wln_no_indent(format!("{value},"));
         }
         TestValue::Seconds(i) => {
             s.wln_no_indent(format!("Duration::from_secs({:#X}),", i.value()));
@@ -482,7 +494,7 @@ fn print_value(
             s.dec_indent();
             s.wln("],");
         }
-        TestValue::MonsterMoveSpline(values) => {
+        TestValue::MonsterMoveSpline(values) | TestValue::FullMonsterMoveSpline(values) => {
             s.wln_no_indent("vec![");
             s.inc_indent();
 
@@ -659,7 +671,9 @@ fn print_value(
 
                 let field_name = if f.ty() == UpdateMaskObjectType::Container
                     && f.name().starts_with("SLOT_")
-                    && f.name()[5..].parse::<u8>().is_ok_and(|slot| (1..=36).contains(&slot))
+                    && f.name()[5..]
+                        .parse::<u8>()
+                        .is_ok_and(|slot| (1..=36).contains(&slot))
                 {
                     "SLOT"
                 } else {

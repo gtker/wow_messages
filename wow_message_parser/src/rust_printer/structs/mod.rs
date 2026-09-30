@@ -12,11 +12,14 @@ use crate::rust_printer::{
 };
 use crate::wowm_printer::get_struct_wowm_definition;
 
+mod monster_move_spline;
 pub(crate) mod print_common_impls;
 mod print_new_types;
 mod print_optional;
 mod print_tests;
 mod test_case_string;
+
+pub(crate) use monster_move_spline::uses_wrath_monster_move_spline_encoding;
 
 pub(crate) fn print_struct(e: &Container, o: &Objects) -> Writer {
     let mut s = Writer::new();
@@ -98,7 +101,7 @@ fn print_declaration(s: &mut Writer, e: &Container, o: &Objects) {
     print_struct_wowm_definition(s, e);
 
     if let Some(rd) = e.single_rust_definer() {
-        print_new_enum_declaration(s, &rd, e.name());
+        print_new_enum_declaration(s, &rd, e.name(), false);
     } else {
         print_derives(s, &e.rust_object().all_members(), false);
         print_serde_derive(s, e.tags().is_in_base(), false);
@@ -163,7 +166,7 @@ fn can_derive_ord(members: &[&RustMember]) -> bool {
     members.iter().all(|a| {
         !matches!(
             a.ty(),
-            RustType::Floating | RustType::Population | RustType::MonsterMoveSpline
+            RustType::Floating | RustType::Population | RustType::MonsterMoveSpline(_)
         ) && can_derive_ord(&a.all_members_without_self())
     })
 }
@@ -194,7 +197,7 @@ fn can_derive_copy(members: &[&RustMember]) -> bool {
             RustType::AddonArray
             | RustType::AchievementInProgressArray
             | RustType::AchievementDoneArray
-            | RustType::MonsterMoveSpline
+            | RustType::MonsterMoveSpline(_)
             | RustType::UpdateMask { .. }
             | RustType::String
             | RustType::CString

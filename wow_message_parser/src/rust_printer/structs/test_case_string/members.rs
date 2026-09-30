@@ -349,7 +349,7 @@ fn print_member_definition(
             test_case_string::wln(s, format!("{prefix}];"));
         }
 
-        Type::MonsterMoveSplines => {
+        Type::MonsterMoveSplines | Type::FullMonsterMoveSpline => {
             test_case_string::wln(s, format!("{prefix}{name} = ["));
 
             s.bodyn(format!("for v in {var_name}.as_slice()"), |s| {

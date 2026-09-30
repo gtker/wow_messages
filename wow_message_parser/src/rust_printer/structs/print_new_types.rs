@@ -13,11 +13,20 @@ pub(crate) fn print_new_types(s: &mut Writer, e: &Container) {
     for rd in e.rust_object().get_rust_definers() {
         match rd.definer_type() {
             DefinerType::Enum => {
+                let contains_wrath_spline = rd.all_members().iter().any(|member| {
+                    matches!(
+                        member.ty(),
+                        RustType::MonsterMoveSpline(encoding) if encoding.is_wrath()
+                    )
+                });
+                let derive_default = contains_wrath_spline
+                    && !rd.is_single_rust_definer()
+                    && rd.enumerators().iter().any(|a| !a.has_members_in_struct());
                 if !rd.is_single_rust_definer() {
-                    print_new_enum_declaration(s, &rd, rd.ty_name());
+                    print_new_enum_declaration(s, &rd, rd.ty_name(), derive_default);
                 }
 
-                if !rd.is_elseif() {
+                if !rd.is_elseif() && !derive_default {
                     print_default_for_new_enum(s, &rd);
                 }
 
@@ -351,10 +360,30 @@ fn print_types_for_new_flag(s: &mut Writer, rd: &RustDefiner) {
     }
 }
 
-pub(crate) fn print_new_enum_declaration(s: &mut Writer, rd: &RustDefiner, ty_name: &str) {
+pub(crate) fn print_new_enum_declaration(
+    s: &mut Writer,
+    rd: &RustDefiner,
+    ty_name: &str,
+    derive_default: bool,
+) {
     print_derives(s, &rd.all_members(), true);
+    if derive_default {
+        s.wln("#[derive(Default)]");
+    }
+    let default_enumerator = derive_default
+        .then(|| {
+            rd.enumerators()
+                .iter()
+                .find(|enumerator| !enumerator.has_members_in_struct())
+                .or_else(|| rd.enumerators().first())
+                .map(|enumerator| enumerator.rust_name())
+        })
+        .flatten();
     s.new_enum("pub", ty_name, |s| {
         for enumerator in rd.enumerators() {
+            if default_enumerator == Some(enumerator.rust_name()) {
+                s.wln("#[default]");
+            }
             s.w(enumerator.rust_name());
 
             if !enumerator.has_members_in_struct() {

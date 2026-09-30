@@ -40,9 +40,9 @@ If loot_method is equal to `ERROR`:
 | Offset | Size / Endianness | Type | Name | Comment |
 | ------ | ----------------- | ---- | ---- | ------- |
 | 0x0D | 1 / - | [LootMethodError](lootmethoderror.md) | loot_error |  |
-| 0x0E | 4 / Little | Gold | gold |  |
-| 0x12 | 1 / - | u8 | amount_of_items |  |
-| 0x13 | ? / - | [LootItem](lootitem.md)[amount_of_items] | items |  |
+| - | 4 / Little | Gold | gold |  |
+| - | 1 / - | u8 | amount_of_items |  |
+| - | ? / - | [LootItem](lootitem.md)[amount_of_items] | items |  |
 
 ## Client Version 3.3.5
 

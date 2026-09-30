@@ -1,3 +1,10 @@
+use std::cmp::Ordering;
+use std::collections::{BTreeMap, BTreeSet};
+use std::mem::size_of;
+
+use wow_world_base::shared::{DateTime, Guid};
+use wow_world_base::vanilla::Vector3d;
+
 use crate::file_info::FileInfo;
 use crate::file_utils::{
     get_base_internal_shared_path, get_base_shared_path, get_import_path, get_world_shared_path,
@@ -17,11 +24,6 @@ use crate::rust_printer::{
     DefinerType, LOGIN_CLIENT_MESSAGE_ENUM_NAME, LOGIN_SERVER_MESSAGE_ENUM_NAME,
     WORLD_CLIENT_MESSAGE_ENUM_NAME, WORLD_SERVER_MESSAGE_ENUM_NAME,
 };
-use std::cmp::Ordering;
-use std::collections::{BTreeMap, BTreeSet};
-use std::mem::size_of;
-use wow_world_base::shared::{DateTime, Guid};
-use wow_world_base::vanilla::Vector3d;
 
 #[derive(Debug, Clone, Copy, Eq, PartialEq, Ord, PartialOrd)]
 pub(crate) enum ContainerType {
@@ -164,7 +166,9 @@ impl Container {
 
                 Type::CString | Type::SizedCString | Type::String => size_of::<String>(),
 
-                Type::MonsterMoveSplines => size_of::<Vec<Vector3d>>(),
+                Type::MonsterMoveSplines | Type::FullMonsterMoveSpline => {
+                    size_of::<Vec<Vector3d>>()
+                }
                 Type::AuraMask => size_of::<[Option<u16>; 32]>(),
                 Type::EnchantMask => size_of::<[Option<u16>; 32]>(),
 
@@ -630,6 +634,13 @@ impl Container {
             let name = a.ty().rust_str();
 
             let (prefix, ty) = match a.ty() {
+                // Wrath spline helpers expose their points as Vec<Vector3d>.
+                Type::FullMonsterMoveSpline => {
+                    (get_import_path(version), "Vector3d".to_string())
+                }
+                Type::MonsterMoveSplines if self.tags().contains_wrath() => {
+                    (get_import_path(version), "Vector3d".to_string())
+                }
                 Type::MonsterMoveSplines
                 | Type::CString
                 | Type::SizedCString
@@ -909,7 +920,8 @@ impl Container {
                         | Type::AddonArray
                         | Type::Struct { .. }
                         | Type::UpdateMask { .. }
-                        | Type::MonsterMoveSplines => {
+                        | Type::MonsterMoveSplines
+                        | Type::FullMonsterMoveSpline => {
                             unreachable!("invalid update mask struct member")
                         }
                     }

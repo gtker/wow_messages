@@ -1,0 +1,17 @@
+#tag_all versions "3.3.5";
+
+flag SplineFlag : u32 {
+    PARABOLIC = 0x00000800;
+    FLYING = 0x00002000;
+    CATMULLROM = 0x00040000;
+}
+
+struct UnsupportedSplineLayout {
+    SplineFlag movement_flags;
+    if (movement_flags & FLYING || movement_flags & CATMULLROM || movement_flags & PARABOLIC) {
+        FullMonsterMoveSpline full_splines;
+        u8 extra;
+    } else {
+        MonsterMoveSplines splines;
+    }
+}

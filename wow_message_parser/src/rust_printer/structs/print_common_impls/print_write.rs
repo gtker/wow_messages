@@ -6,6 +6,9 @@ use crate::parser::types::struct_member::{StructMember, StructMemberDefinition};
 use crate::parser::types::ty::Type;
 use crate::parser::types::{ContainerValue, IntegerType};
 use crate::rust_printer::base_structs::base_struct_write_name;
+use crate::rust_printer::rust_view::rust_type::{
+    MonsterMoveSplineEncoding, MonsterMoveSplineLayout,
+};
 use crate::rust_printer::writer::Writer;
 use crate::rust_printer::DefinerType;
 
@@ -297,6 +300,17 @@ pub(crate) fn print_write_definition(
             ));
         }
 
+        Type::FullMonsterMoveSpline => {
+            s.wln(format!(
+                "crate::util::write_wrath_monster_move_spline({variable}.as_slice(), true, &mut w){postfix}?;"
+            ));
+        }
+
+        Type::MonsterMoveSplines if e.tags().contains_wrath() => {
+            s.wln(format!(
+                "crate::util::write_wrath_monster_move_spline({variable}.as_slice(), false, &mut w){postfix}?;",
+            ));
+        }
         Type::MonsterMoveSplines => {
             s.wln(format!(
                 "crate::util::write_monster_move_spline({variable}.as_slice(), &mut w){postfix}?;",
@@ -350,6 +364,24 @@ fn print_write_flag_if_statement(
     prefix: &str,
     postfix: &str,
 ) {
+    if e.tags().contains_wrath() {
+        match MonsterMoveSplineLayout::from_if_statement(statement) {
+            Ok(Some(layout)) => {
+                let encoding = MonsterMoveSplineEncoding::from_layout(&layout);
+                if let Some(condition) = encoding.condition_expression("self.", "get_") {
+                    s.wln(format!(
+                        "crate::util::write_wrath_monster_move_spline(self.{name}.as_slice(), {condition}, &mut w)?;",
+                        name = layout.linear().name(),
+                    ));
+                    s.newline();
+                    return;
+                }
+            }
+            Ok(None) => {}
+            Err(_) => crate::error_printer::unsupported_wrath_spline_layout(e.file_info()),
+        }
+    }
+
     s.open_curly(format!(
         "if let Some(if_statement) = &{variable_prefix}{variable}.{variant}",
         variable = statement.variable_name(),

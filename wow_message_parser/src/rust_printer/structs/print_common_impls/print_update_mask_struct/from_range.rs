@@ -100,6 +100,7 @@ pub(crate) fn create_from_range(s: &mut Writer, words: &[Vec<UpdateMaskMember>])
                     | Type::Struct { .. }
                     | Type::UpdateMask { .. }
                     | Type::MonsterMoveSplines
+                    | Type::FullMonsterMoveSpline
                     | Type::AuraMask
                     | Type::AchievementDoneArray
                     | Type::AchievementInProgressArray
@@ -163,6 +164,7 @@ pub(crate) fn create_from_range(s: &mut Writer, words: &[Vec<UpdateMaskMember>])
                         | Type::Struct { .. }
                         | Type::UpdateMask { .. }
                         | Type::MonsterMoveSplines
+                        | Type::FullMonsterMoveSpline
                         | Type::AuraMask
                         | Type::AchievementDoneArray
                         | Type::AchievementInProgressArray

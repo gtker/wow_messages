@@ -46,7 +46,7 @@ Else If chat_type is equal to `CHANNEL`:
 
 | Offset | Size / Endianness | Type | Name | Comment |
 | ------ | ----------------- | ---- | ---- | ------- |
-| - | - / - | CString | channel |  |
+| 0x0E | - / - | CString | channel |  |
 | - | - / - | CString | message |  |
 
 ### Examples
@@ -110,7 +110,7 @@ Else If chat_type is equal to `CHANNEL`:
 
 | Offset | Size / Endianness | Type | Name | Comment |
 | ------ | ----------------- | ---- | ---- | ------- |
-| - | - / - | CString | channel |  |
+| 0x0E | - / - | CString | channel |  |
 | - | - / - | CString | message |  |
 
 ## Client Version 3.3.5
@@ -159,6 +159,6 @@ Else If chat_type is equal to `CHANNEL`:
 
 | Offset | Size / Endianness | Type | Name | Comment |
 | ------ | ----------------- | ---- | ---- | ------- |
-| - | - / - | CString | channel |  |
+| 0x0E | - / - | CString | channel |  |
 | - | - / - | CString | message |  |
 

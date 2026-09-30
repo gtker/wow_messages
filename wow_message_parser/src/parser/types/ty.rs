@@ -35,6 +35,7 @@ pub(crate) enum Type {
         max_size: i128,
     },
     MonsterMoveSplines,
+    FullMonsterMoveSpline,
     AuraMask,
     AchievementDoneArray,
     AchievementInProgressArray,
@@ -76,6 +77,7 @@ impl Type {
     pub(crate) const SIZED_C_STRING_NAME: &'static str = "SizedCString";
     pub(crate) const STRING_NAME: &'static str = "String";
     pub(crate) const MONSTER_MOVE_SPLINES_NAME: &'static str = "MonsterMoveSplines";
+    pub(crate) const FULL_MONSTER_MOVE_SPLINE_NAME: &'static str = "FullMonsterMoveSpline";
     pub(crate) const ACHIEVEMENT_DONE_ARRAY_NAME: &'static str = "AchievementDoneArray";
     pub(crate) const ACHIEVEMENT_IN_PROGRESS_ARRAY_NAME: &'static str =
         "AchievementInProgressArray";
@@ -150,6 +152,7 @@ impl Type {
             Type::String => ParsedType::String,
             Type::UpdateMask { .. } => ParsedType::UpdateMask,
             Type::MonsterMoveSplines => ParsedType::MonsterMoveSpline,
+            Type::FullMonsterMoveSpline => ParsedType::FullMonsterMoveSpline,
             Type::AuraMask => ParsedType::AuraMask,
             Type::AchievementDoneArray => ParsedType::AchievementDoneArray,
             Type::AchievementInProgressArray => ParsedType::AchievementInProgressArray,
@@ -297,6 +300,7 @@ impl Type {
             | Type::EnchantMask
             | Type::InspectTalentGearMask
             | Type::MonsterMoveSplines
+            | Type::FullMonsterMoveSpline
             | Type::SizedCString
             | Type::AchievementDoneArray
             | Type::AchievementInProgressArray

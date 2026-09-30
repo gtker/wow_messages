@@ -103,14 +103,14 @@ Else If status_id is equal to `WAIT_JOIN`:
 
 | Offset | Size / Endianness | Type | Name | Comment |
 | ------ | ----------------- | ---- | ---- | ------- |
-| 0x1E | 4 / Little | u32 | time_to_remove_in_queue_in_ms |  |
+| 0x16 | 4 / Little | u32 | time_to_remove_in_queue_in_ms |  |
 
 Else If status_id is equal to `IN_PROGRESS`:
 
 | Offset | Size / Endianness | Type | Name | Comment |
 | ------ | ----------------- | ---- | ---- | ------- |
-| 0x22 | 4 / Little | u32 | time_to_bg_autoleave_in_ms |  |
-| 0x26 | 4 / Little | u32 | time_to_bg_start_in_ms |  |
+| 0x16 | 4 / Little | u32 | time_to_bg_autoleave_in_ms |  |
+| 0x1A | 4 / Little | u32 | time_to_bg_start_in_ms |  |
 
 ## Client Version 3.3.5
 

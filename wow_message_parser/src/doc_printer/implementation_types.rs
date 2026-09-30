@@ -1,3 +1,6 @@
+use std::collections::BTreeSet;
+use std::path::Path;
+
 use crate::file_utils::overwrite_autogenerate_if_insert_between_not_same;
 use crate::parser::types::container::Container;
 use crate::parser::types::objects::Objects;
@@ -5,8 +8,6 @@ use crate::parser::types::ty::Type;
 use crate::parser::types::IntegerType;
 use crate::path_utils::{doc_impl_login_path, doc_impl_world_path, doc_lang_spec_path};
 use crate::rust_printer::writer::{Writer, WriterTable};
-use std::collections::BTreeSet;
-use std::path::Path;
 
 fn print_implementation_type(table: &mut WriterTable<3>, ty: &Type) {
     let name = format!("`{}`", ty.str());
@@ -26,17 +27,7 @@ fn print_implementation_type(table: &mut WriterTable<3>, ty: &Type) {
             let c_type = i.c_str();
             let (min, max) = (i.smallest_value(), i.largest_value());
 
-            let signedness = match i {
-                IntegerType::U8
-                | IntegerType::U16
-                | IntegerType::U32
-                | IntegerType::U48
-                | IntegerType::U64 => "Unsigned",
-                IntegerType::I8 | IntegerType::I16 | IntegerType::I32 | IntegerType::I64 => {
-                    "Signed"
-                }
-            };
-
+            let signedness = if i.is_signed() { "Signed" } else { "Unsigned" };
             table.add_row([
                 name,
                 format!("{signedness} {bits} bit integer. Min value {min}, max value {max}."),
@@ -114,10 +105,14 @@ fn print_implementation_type(table: &mut WriterTable<3>, ty: &Type) {
                 "-",
             ]);
         }
-        Type::MonsterMoveSplines => {
+        Type::MonsterMoveSplines | Type::FullMonsterMoveSpline => {
             table.add_row([
                 name.as_ref(),
-                "Array of positions. See [MonsterMoveSpline](../types/monster-move-spline).",
+                if matches!(ty, Type::FullMonsterMoveSpline) {
+                    "Array of full positions. See [FullMonsterMoveSpline](../types/full-monster-move-spline)."
+                } else {
+                    "Array of positions. See [MonsterMoveSpline](../types/monster-move-spline)."
+                },
                 "-",
             ]);
         }

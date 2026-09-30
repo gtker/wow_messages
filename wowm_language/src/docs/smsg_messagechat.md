@@ -72,28 +72,28 @@ is equal to `YELL`:
 
 | Offset | Size / Endianness | Type | Name | Comment |
 | ------ | ----------------- | ---- | ---- | ------- |
-| - | 8 / Little | [Guid](../types/packed-guid.md) | speech_bubble_credit | This character will have the speech bubble above their head.<br/>0 value credits same as `chat_credit`. Invalid value credits no one.<br/>cmangos/vmangos/mangoszero: `chat_credit` and `speech_bubble_credit` are the same |
-| - | 8 / Little | [Guid](../types/packed-guid.md) | chat_credit | This character will be appear to say this in the chat box.<br/>0 value credits no name.<br/>cmangos/vmangos/mangoszero: `chat_credit` and `speech_bubble_credit` are the same |
+| 0x09 | 8 / Little | [Guid](../types/packed-guid.md) | speech_bubble_credit | This character will have the speech bubble above their head.<br/>0 value credits same as `chat_credit`. Invalid value credits no one.<br/>cmangos/vmangos/mangoszero: `chat_credit` and `speech_bubble_credit` are the same |
+| 0x11 | 8 / Little | [Guid](../types/packed-guid.md) | chat_credit | This character will be appear to say this in the chat box.<br/>0 value credits no name.<br/>cmangos/vmangos/mangoszero: `chat_credit` and `speech_bubble_credit` are the same |
 
 Else If chat_type is equal to `MONSTER_SAY` **or** 
 is equal to `MONSTER_YELL`:
 
 | Offset | Size / Endianness | Type | Name | Comment |
 | ------ | ----------------- | ---- | ---- | ------- |
-| - | 8 / Little | [Guid](../types/packed-guid.md) | sender1 |  |
-| - | - / - | SizedCString | sender_name |  |
+| 0x09 | 8 / Little | [Guid](../types/packed-guid.md) | sender1 |  |
+| 0x11 | - / - | SizedCString | sender_name |  |
 | - | 8 / Little | [Guid](../types/packed-guid.md) | target |  |
 
 Else If chat_type is equal to `CHANNEL`:
 
 | Offset | Size / Endianness | Type | Name | Comment |
 | ------ | ----------------- | ---- | ---- | ------- |
-| - | - / - | CString | channel_name |  |
+| 0x09 | - / - | CString | channel_name |  |
 | - | 4 / Little | u32 | player_rank |  |
 | - | 8 / Little | [Guid](../types/packed-guid.md) | player |  |
 
 Else: 
-| - | 8 / Little | [Guid](../types/packed-guid.md) | sender2 |  |
+| 0x09 | 8 / Little | [Guid](../types/packed-guid.md) | sender2 |  |
 | - | - / - | SizedCString | message |  |
 | - | 1 / - | [PlayerChatTag](playerchattag.md) | tag |  |
 
@@ -184,17 +184,17 @@ is equal to `BG_SYSTEM_HORDE`:
 
 | Offset | Size / Endianness | Type | Name | Comment |
 | ------ | ----------------- | ---- | ---- | ------- |
-| - | - / - | [NamedGuid](../types/packed-guid.md) | target2 |  |
+| 0x09 | - / - | [NamedGuid](../types/packed-guid.md) | target2 |  |
 
 Else If chat_type is equal to `CHANNEL`:
 
 | Offset | Size / Endianness | Type | Name | Comment |
 | ------ | ----------------- | ---- | ---- | ------- |
-| - | - / - | CString | channel_name |  |
+| 0x09 | - / - | CString | channel_name |  |
 | - | 8 / Little | [Guid](../types/packed-guid.md) | target4 |  |
 
 Else: 
-| - | 8 / Little | [Guid](../types/packed-guid.md) | target5 |  |
+| 0x09 | 8 / Little | [Guid](../types/packed-guid.md) | target5 |  |
 | - | - / - | SizedCString | message |  |
 | - | 1 / - | [PlayerChatTag](playerchattag.md) | tag |  |
 

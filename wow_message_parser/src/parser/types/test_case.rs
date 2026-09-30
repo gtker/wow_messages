@@ -1,10 +1,11 @@
+use serde::Serialize;
+
 use crate::file_info::FileInfo;
 use crate::parser::types::array::ArraySize;
 use crate::parser::types::tags::{MemberTags, ObjectTags};
 use crate::parser::types::ContainerValue;
 use crate::rust_printer::UpdateMaskObjectType;
 use crate::Container;
-use serde::Serialize;
 
 #[derive(Clone, Debug, Serialize)]
 pub(crate) struct TestVector3d {
@@ -158,6 +159,7 @@ pub(crate) enum TestValue {
         size: ArraySize,
     },
     MonsterMoveSpline(Vec<TestVector3d>),
+    FullMonsterMoveSpline(Vec<TestVector3d>),
     UpdateMask(Vec<TestUpdateMaskValue>),
     IpAddress(ContainerValue),
     Seconds(ContainerValue),

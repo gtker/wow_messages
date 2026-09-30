@@ -53,7 +53,7 @@ Else If result is equal to `AUTH_WAIT_QUEUE`:
 
 | Offset | Size / Endianness | Type | Name | Comment |
 | ------ | ----------------- | ---- | ---- | ------- |
-| 0x0E | 4 / Little | u32 | queue_position |  |
+| 0x05 | 4 / Little | u32 | queue_position |  |
 
 ### Examples
 
@@ -149,7 +149,7 @@ Else If result is equal to `AUTH_WAIT_QUEUE`:
 
 | Offset | Size / Endianness | Type | Name | Comment |
 | ------ | ----------------- | ---- | ---- | ------- |
-| 0x0F | 4 / Little | u32 | queue_position |  |
+| 0x05 | 4 / Little | u32 | queue_position |  |
 
 ## Client Version 3.3.5
 

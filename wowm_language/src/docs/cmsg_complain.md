@@ -53,11 +53,11 @@ Else If complaint_type is equal to `CHAT`:
 
 | Offset | Size / Endianness | Type | Name | Comment |
 | ------ | ----------------- | ---- | ---- | ------- |
-| 0x1B | 4 / Little | u32 | language |  |
-| 0x1F | 4 / Little | u32 | message_type |  |
-| 0x23 | 4 / Little | u32 | channel_id |  |
-| 0x27 | 4 / Little | u32 | time |  |
-| 0x2B | - / - | CString | description |  |
+| 0x0F | 4 / Little | u32 | language |  |
+| 0x13 | 4 / Little | u32 | message_type |  |
+| 0x17 | 4 / Little | u32 | channel_id |  |
+| 0x1B | 4 / Little | u32 | time |  |
+| 0x1F | - / - | CString | description |  |
 
 ## Client Version 3.3.5
 
@@ -112,9 +112,9 @@ Else If complaint_type is equal to `CHAT`:
 
 | Offset | Size / Endianness | Type | Name | Comment |
 | ------ | ----------------- | ---- | ---- | ------- |
-| 0x1B | 4 / Little | u32 | language |  |
-| 0x1F | 4 / Little | u32 | message_type |  |
-| 0x23 | 4 / Little | u32 | channel_id |  |
-| 0x27 | 4 / Little | u32 | time |  |
-| 0x2B | - / - | CString | description |  |
+| 0x0F | 4 / Little | u32 | language |  |
+| 0x13 | 4 / Little | u32 | message_type |  |
+| 0x17 | 4 / Little | u32 | channel_id |  |
+| 0x1B | 4 / Little | u32 | time |  |
+| 0x1F | - / - | CString | description |  |
 

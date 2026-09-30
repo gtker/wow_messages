@@ -147,7 +147,7 @@ If result is equal to `SUCCESS`:
 | 0x1E | 2 / Little | u16 | unknown |  |
 
 Else: 
-| 0x20 | 2 / Little | u16 | padding |  |
+| 0x02 | 2 / Little | u16 | padding |  |
 
 ### Examples
 

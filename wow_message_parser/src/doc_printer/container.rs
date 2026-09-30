@@ -1,3 +1,9 @@
+use std::collections::HashMap;
+use std::convert::TryInto;
+use std::fmt::Write;
+use std::io::Read;
+use std::slice::Iter;
+
 use crate::parser::types::array::{Array, ArraySize, ArrayType};
 use crate::parser::types::if_statement::{Equation, IfStatement};
 use crate::parser::types::sizes::SPELL_SIZE;
@@ -7,11 +13,6 @@ use crate::parser::types::IntegerType;
 use crate::rust_printer::writer::Writer;
 use crate::wowm_printer::get_struct_wowm_definition;
 use crate::{doc_printer, Container, ContainerType, DefinerType, ObjectTags, Objects};
-use std::collections::HashMap;
-use std::convert::TryInto;
-use std::fmt::Write;
-use std::io::Read;
-use std::slice::Iter;
 
 pub(crate) fn print_docs_for_container(e: &Container, o: &Objects, print_header: bool) -> Writer {
     let mut s = Writer::new();
@@ -120,6 +121,32 @@ fn print_container_example_array(
                 }
             }
         }
+    }
+}
+
+fn print_monster_move_spline_example(s: &mut Writer, bytes: &mut Iter<u8>, packed_offsets: bool) {
+    let mut count_bytes = [0; 4];
+    for byte in &mut count_bytes {
+        let Some(value) = bytes.next() else {
+            return;
+        };
+        *byte = *value;
+    }
+    let count = u32::from_le_bytes(count_bytes);
+    for byte in count_bytes {
+        s.w(format!("{byte}, "));
+    }
+    s.wln_no_indent("// spline count");
+
+    for index in 0..count {
+        let packed = packed_offsets && index != 0;
+        let size = if packed { 4 } else { 12 };
+        s.bytes(bytes.take(size));
+        s.wln_no_indent(if packed {
+            "// packed spline offset"
+        } else {
+            "// spline point"
+        });
     }
 }
 
@@ -266,7 +293,10 @@ fn print_container_example_definition(
             s.w(format!("{b}, "));
         }
         Type::MonsterMoveSplines => {
-            unimplemented!("monster move spline doc printer")
+            print_monster_move_spline_example(s, bytes, tags.contains_wrath());
+        }
+        Type::FullMonsterMoveSpline => {
+            print_monster_move_spline_example(s, bytes, false);
         }
         Type::AchievementDoneArray | Type::AchievementInProgressArray => {
             unimplemented!("-1 delimited achievement arrays")
@@ -369,8 +399,15 @@ fn print_container_example_member(
                             }
                         }
                     }
-                    Equation::NotEquals { .. } => {
-                        unimplemented!("examples for not equals")
+                    Equation::NotEquals { value } => {
+                        let excluded_value = definer_ty
+                            .fields()
+                            .iter()
+                            .find(|field| value == field.name())
+                            .unwrap()
+                            .value()
+                            .int();
+                        set = enum_value != excluded_value;
                     }
                 }
                 set
@@ -525,15 +562,19 @@ fn print_container_if_statement(
 
     print_container_item_header(s);
 
+    // Branches are alternatives, so offsets start from the same preceding field.
+    let branch_start = *offset;
+    let mut branch_offset = branch_start;
     for m in statement.members() {
-        print_container_field(s, m, offset, tags, o);
+        print_container_field(s, m, &mut branch_offset, tags, o);
     }
 
     if !statement.else_ifs().is_empty() {
         for elseif in statement.else_ifs() {
             s.newline();
             s.w("Else ");
-            print_container_if_statement(s, elseif, offset, tags, o);
+            let mut elseif_offset = branch_start;
+            print_container_if_statement(s, elseif, &mut elseif_offset, tags, o);
         }
     }
 
@@ -541,10 +582,13 @@ fn print_container_if_statement(
         s.newline();
         s.wln("Else: ");
 
+        let mut else_offset = branch_start;
         for m in statement.else_members() {
-            print_container_field(s, m, offset, tags, o);
+            print_container_field(s, m, &mut else_offset, tags, o);
         }
     }
+
+    *offset = None;
 }
 
 fn print_container_field(
@@ -615,6 +659,9 @@ fn print_container_field(
                 }
                 Type::MonsterMoveSplines => {
                     "[MonsterMoveSpline](../types/monster-move-spline.md)".to_string()
+                }
+                Type::FullMonsterMoveSpline => {
+                    "[FullMonsterMoveSpline](../types/full-monster-move-spline.md)".to_string()
                 }
                 Type::CacheMask => "[CacheMask](../types/cache-mask.md)".to_string(),
                 Type::Spell

@@ -229,7 +229,10 @@ impl WiresharkType {
             },
             Type::IpAddress => Self::Integer(IntegerType::U32),
             Type::Population => Self::Float,
-            Type::MonsterMoveSplines | Type::AuraMask | Type::UpdateMask { .. } => return None,
+            Type::MonsterMoveSplines
+            | Type::FullMonsterMoveSpline
+            | Type::AuraMask
+            | Type::UpdateMask { .. } => return None,
             Type::AchievementDoneArray | Type::AchievementInProgressArray => {
                 unreachable!("achievement arrays are only in 3.3.5")
             }
