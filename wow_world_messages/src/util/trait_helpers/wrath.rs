@@ -6,6 +6,8 @@ pub(crate) const MAXIMUM_SIZE_LENGTH: u32 = 3;
 pub(crate) const MINIMUM_SERVER_HEADER_LENGTH: u16 = 4;
 pub(crate) const MAXIMUM_SERVER_HEADER_LENGTH: u16 = 5;
 
+pub(crate) const SERVER_OPCODE_LENGTH: u32 = 2;
+
 pub(crate) const LARGE_MESSAGE_THRESHOLD: u32 = 0x7FFF;
 
 pub(crate) fn wrath_get_unencrypted_server(
@@ -13,7 +15,8 @@ pub(crate) fn wrath_get_unencrypted_server(
     opcode: u16,
     size: u32,
 ) -> io::Result<()> {
-    if size > LARGE_MESSAGE_THRESHOLD {
+    // The size field counts the opcode but not itself.
+    if size.saturating_sub(MINIMUM_SIZE_LENGTH) > LARGE_MESSAGE_THRESHOLD {
         let size = (size.saturating_sub(MAXIMUM_SIZE_LENGTH)).to_be_bytes();
         let opcode = opcode.to_le_bytes();
 
@@ -46,7 +49,7 @@ pub(crate) fn wrath_get_encrypted_server(
     size: u32,
     e: &mut wow_srp::wrath_header::ServerEncrypterHalf,
 ) -> io::Result<()> {
-    let size_length = if size > LARGE_MESSAGE_THRESHOLD {
+    let size_length = if size.saturating_sub(MINIMUM_SIZE_LENGTH) > LARGE_MESSAGE_THRESHOLD {
         MAXIMUM_SIZE_LENGTH
     } else {
         MINIMUM_SIZE_LENGTH

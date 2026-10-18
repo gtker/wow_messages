@@ -8706,7 +8706,7 @@ impl ServerOpcodeMessage {
         r.read_exact(&mut header)?;
 
         let (size, opcode) = if header[0] & 0x80 != 0 {
-            let size = u32::from_be_bytes([0x00, header[0] & 0x7F, header[1], header[2]]).saturating_sub(3);
+            let size = u32::from_be_bytes([0x00, header[0] & 0x7F, header[1], header[2]]).saturating_sub(2);
 
             let mut last_byte = [0_u8; 1];
             r.read_exact(&mut last_byte)?;
@@ -8730,7 +8730,7 @@ impl ServerOpcodeMessage {
         d.decrypt(&mut header);
 
         let (body_size, opcode) = if header[0] & 0x80 != 0 {
-            let size = u32::from_be_bytes([0x00, header[0] & 0x7F, header[1], header[2]]).saturating_sub(3);
+            let size = u32::from_be_bytes([0x00, header[0] & 0x7F, header[1], header[2]]).saturating_sub(2);
 
             let mut last_byte = [0_u8; 1];
             r.read_exact(&mut last_byte)?;
@@ -8755,7 +8755,7 @@ impl ServerOpcodeMessage {
         r.read_exact(&mut header).await?;
 
         let (size, opcode) = if header[0] & 0x80 != 0 {
-            let size = u32::from_be_bytes([0x00, header[0] & 0x7F, header[1], header[2]]).saturating_sub(3);
+            let size = u32::from_be_bytes([0x00, header[0] & 0x7F, header[1], header[2]]).saturating_sub(2);
 
             let mut last_byte = [0_u8; 1];
             r.read_exact(&mut last_byte).await?;
@@ -8779,7 +8779,7 @@ impl ServerOpcodeMessage {
         d.decrypt(&mut header);
 
         let (body_size, opcode) = if header[0] & 0x80 != 0 {
-            let size = u32::from_be_bytes([0x00, header[0] & 0x7F, header[1], header[2]]).saturating_sub(3);
+            let size = u32::from_be_bytes([0x00, header[0] & 0x7F, header[1], header[2]]).saturating_sub(2);
 
             let mut last_byte = [0_u8; 1];
             r.read_exact(&mut last_byte).await?;
@@ -8804,7 +8804,7 @@ impl ServerOpcodeMessage {
         r.read_exact(&mut header).await?;
 
         let (size, opcode) = if header[0] & 0x80 != 0 {
-            let size = u32::from_be_bytes([0x00, header[0] & 0x7F, header[1], header[2]]).saturating_sub(3);
+            let size = u32::from_be_bytes([0x00, header[0] & 0x7F, header[1], header[2]]).saturating_sub(2);
 
             let mut last_byte = [0_u8; 1];
             r.read_exact(&mut last_byte).await?;
@@ -8828,7 +8828,7 @@ impl ServerOpcodeMessage {
         d.decrypt(&mut header);
 
         let (body_size, opcode) = if header[0] & 0x80 != 0 {
-            let size = u32::from_be_bytes([0x00, header[0] & 0x7F, header[1], header[2]]).saturating_sub(3);
+            let size = u32::from_be_bytes([0x00, header[0] & 0x7F, header[1], header[2]]).saturating_sub(2);
 
             let mut last_byte = [0_u8; 1];
             r.read_exact(&mut last_byte).await?;

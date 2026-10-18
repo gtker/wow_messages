@@ -3,7 +3,7 @@ use crate::util::{wrath_get_encrypted_client, wrath_get_encrypted_server};
 use crate::util::{wrath_get_unencrypted_client, wrath_get_unencrypted_server};
 use crate::util::{
     CLIENT_HEADER_LENGTH, LARGE_MESSAGE_THRESHOLD, MAXIMUM_SERVER_HEADER_LENGTH,
-    MINIMUM_SERVER_HEADER_LENGTH,
+    MINIMUM_SERVER_HEADER_LENGTH, SERVER_OPCODE_LENGTH,
 };
 use crate::Message;
 #[cfg(any(feature = "tokio", feature = "async-std"))]
@@ -19,7 +19,7 @@ pub trait ServerMessage: Message + crate::traits::private::Sealed {
     /// since the size field does not include the size of the size field.
     fn server_size(&self) -> u32 {
         let size = self.size_without_header();
-        if size > LARGE_MESSAGE_THRESHOLD {
+        if size + SERVER_OPCODE_LENGTH > LARGE_MESSAGE_THRESHOLD {
             size + MAXIMUM_SERVER_HEADER_LENGTH as u32
         } else {
             size + MINIMUM_SERVER_HEADER_LENGTH as u32
@@ -262,5 +262,29 @@ pub trait ClientMessage: Message + crate::traits::private::Sealed {
 
             w.write_all(&v).await
         })
+    }
+}
+
+#[cfg(all(test, feature = "sync"))]
+mod test {
+    use crate::wrath::opcodes::ServerOpcodeMessage;
+    use crate::wrath::{ServerMessage, SMSG_WARDEN_DATA};
+
+    #[test]
+    fn large_server_message_header() {
+        let m = SMSG_WARDEN_DATA {
+            encrypted_data: vec![0xAB; 0x7FFE],
+        };
+
+        let mut v = Vec::new();
+        m.write_unencrypted_server(&mut v).unwrap();
+        assert_eq!(v[..5], [0x80, 0x80, 0x00, 0xE6, 0x02]);
+
+        match ServerOpcodeMessage::read_unencrypted(v.as_slice()).unwrap() {
+            ServerOpcodeMessage::SMSG_WARDEN_DATA(r) => {
+                assert_eq!(r.encrypted_data, m.encrypted_data)
+            }
+            _ => panic!("wrong opcode"),
+        }
     }
 }
