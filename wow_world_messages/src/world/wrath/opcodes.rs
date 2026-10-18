@@ -72,7 +72,7 @@ pub enum ClientOpcodeMessage {
     CMSG_DEL_IGNORE(CMSG_DEL_IGNORE),
     CMSG_GROUP_INVITE(Box<CMSG_GROUP_INVITE>),
     CMSG_GROUP_CANCEL,
-    CMSG_GROUP_ACCEPT,
+    CMSG_GROUP_ACCEPT(CMSG_GROUP_ACCEPT),
     CMSG_GROUP_DECLINE,
     CMSG_GROUP_UNINVITE(Box<CMSG_GROUP_UNINVITE>),
     CMSG_GROUP_UNINVITE_GUID(Box<CMSG_GROUP_UNINVITE_GUID>),
@@ -520,7 +520,7 @@ impl ClientOpcodeMessage {
             0x006D => Ok(Self::CMSG_DEL_IGNORE(<CMSG_DEL_IGNORE as crate::Message>::read_body::<crate::traits::private::Internal>(&mut r, body_size).map_err(|a| a.opcode_convert())?)),
             0x006E => Ok(Self::CMSG_GROUP_INVITE(Box::new(<CMSG_GROUP_INVITE as crate::Message>::read_body::<crate::traits::private::Internal>(&mut r, body_size).map_err(|a| a.opcode_convert())?))),
             0x0070 => crate::util::assert_empty(body_size, opcode, "CMSG_GROUP_CANCEL").map(|_| Self::CMSG_GROUP_CANCEL),
-            0x0072 => crate::util::assert_empty(body_size, opcode, "CMSG_GROUP_ACCEPT").map(|_| Self::CMSG_GROUP_ACCEPT),
+            0x0072 => Ok(Self::CMSG_GROUP_ACCEPT(<CMSG_GROUP_ACCEPT as crate::Message>::read_body::<crate::traits::private::Internal>(&mut r, body_size).map_err(|a| a.opcode_convert())?)),
             0x0073 => crate::util::assert_empty(body_size, opcode, "CMSG_GROUP_DECLINE").map(|_| Self::CMSG_GROUP_DECLINE),
             0x0075 => Ok(Self::CMSG_GROUP_UNINVITE(Box::new(<CMSG_GROUP_UNINVITE as crate::Message>::read_body::<crate::traits::private::Internal>(&mut r, body_size).map_err(|a| a.opcode_convert())?))),
             0x0076 => Ok(Self::CMSG_GROUP_UNINVITE_GUID(Box::new(<CMSG_GROUP_UNINVITE_GUID as crate::Message>::read_body::<crate::traits::private::Internal>(&mut r, body_size).map_err(|a| a.opcode_convert())?))),
@@ -1036,7 +1036,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_DEL_IGNORE(c) => c.write_encrypted_client(w, e),
             Self::CMSG_GROUP_INVITE(c) => c.write_encrypted_client(w, e),
             Self::CMSG_GROUP_CANCEL => CMSG_GROUP_CANCEL{}.write_encrypted_client(w, e),
-            Self::CMSG_GROUP_ACCEPT => CMSG_GROUP_ACCEPT{}.write_encrypted_client(w, e),
+            Self::CMSG_GROUP_ACCEPT(c) => c.write_encrypted_client(w, e),
             Self::CMSG_GROUP_DECLINE => CMSG_GROUP_DECLINE{}.write_encrypted_client(w, e),
             Self::CMSG_GROUP_UNINVITE(c) => c.write_encrypted_client(w, e),
             Self::CMSG_GROUP_UNINVITE_GUID(c) => c.write_encrypted_client(w, e),
@@ -1485,7 +1485,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_DEL_IGNORE(c) => c.write_unencrypted_client(w),
             Self::CMSG_GROUP_INVITE(c) => c.write_unencrypted_client(w),
             Self::CMSG_GROUP_CANCEL => CMSG_GROUP_CANCEL{}.write_unencrypted_client(w),
-            Self::CMSG_GROUP_ACCEPT => CMSG_GROUP_ACCEPT{}.write_unencrypted_client(w),
+            Self::CMSG_GROUP_ACCEPT(c) => c.write_unencrypted_client(w),
             Self::CMSG_GROUP_DECLINE => CMSG_GROUP_DECLINE{}.write_unencrypted_client(w),
             Self::CMSG_GROUP_UNINVITE(c) => c.write_unencrypted_client(w),
             Self::CMSG_GROUP_UNINVITE_GUID(c) => c.write_unencrypted_client(w),
@@ -1934,7 +1934,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_DEL_IGNORE(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_GROUP_INVITE(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_GROUP_CANCEL => CMSG_GROUP_CANCEL{}.tokio_write_encrypted_client(w, e).await,
-            Self::CMSG_GROUP_ACCEPT => CMSG_GROUP_ACCEPT{}.tokio_write_encrypted_client(w, e).await,
+            Self::CMSG_GROUP_ACCEPT(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_GROUP_DECLINE => CMSG_GROUP_DECLINE{}.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_GROUP_UNINVITE(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_GROUP_UNINVITE_GUID(c) => c.tokio_write_encrypted_client(w, e).await,
@@ -2383,7 +2383,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_DEL_IGNORE(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_GROUP_INVITE(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_GROUP_CANCEL => CMSG_GROUP_CANCEL{}.tokio_write_unencrypted_client(w).await,
-            Self::CMSG_GROUP_ACCEPT => CMSG_GROUP_ACCEPT{}.tokio_write_unencrypted_client(w).await,
+            Self::CMSG_GROUP_ACCEPT(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_GROUP_DECLINE => CMSG_GROUP_DECLINE{}.tokio_write_unencrypted_client(w).await,
             Self::CMSG_GROUP_UNINVITE(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_GROUP_UNINVITE_GUID(c) => c.tokio_write_unencrypted_client(w).await,
@@ -2832,7 +2832,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_DEL_IGNORE(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_GROUP_INVITE(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_GROUP_CANCEL => CMSG_GROUP_CANCEL{}.astd_write_encrypted_client(w, e).await,
-            Self::CMSG_GROUP_ACCEPT => CMSG_GROUP_ACCEPT{}.astd_write_encrypted_client(w, e).await,
+            Self::CMSG_GROUP_ACCEPT(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_GROUP_DECLINE => CMSG_GROUP_DECLINE{}.astd_write_encrypted_client(w, e).await,
             Self::CMSG_GROUP_UNINVITE(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_GROUP_UNINVITE_GUID(c) => c.astd_write_encrypted_client(w, e).await,
@@ -3281,7 +3281,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_DEL_IGNORE(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_GROUP_INVITE(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_GROUP_CANCEL => CMSG_GROUP_CANCEL{}.astd_write_unencrypted_client(w).await,
-            Self::CMSG_GROUP_ACCEPT => CMSG_GROUP_ACCEPT{}.astd_write_unencrypted_client(w).await,
+            Self::CMSG_GROUP_ACCEPT(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_GROUP_DECLINE => CMSG_GROUP_DECLINE{}.astd_write_unencrypted_client(w).await,
             Self::CMSG_GROUP_UNINVITE(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_GROUP_UNINVITE_GUID(c) => c.astd_write_unencrypted_client(w).await,
@@ -3731,7 +3731,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_DEL_IGNORE(c) => crate::Message::to_test_case_string(c),
             Self::CMSG_GROUP_INVITE(c) => crate::Message::to_test_case_string(c.as_ref()),
             Self::CMSG_GROUP_CANCEL => crate::Message::to_test_case_string(&CMSG_GROUP_CANCEL{}),
-            Self::CMSG_GROUP_ACCEPT => crate::Message::to_test_case_string(&CMSG_GROUP_ACCEPT{}),
+            Self::CMSG_GROUP_ACCEPT(c) => crate::Message::to_test_case_string(c),
             Self::CMSG_GROUP_DECLINE => crate::Message::to_test_case_string(&CMSG_GROUP_DECLINE{}),
             Self::CMSG_GROUP_UNINVITE(c) => crate::Message::to_test_case_string(c.as_ref()),
             Self::CMSG_GROUP_UNINVITE_GUID(c) => crate::Message::to_test_case_string(c.as_ref()),
@@ -4156,7 +4156,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_DEL_IGNORE(_) => "CMSG_DEL_IGNORE",
             Self::CMSG_GROUP_INVITE(_) => "CMSG_GROUP_INVITE",
             Self::CMSG_GROUP_CANCEL => "CMSG_GROUP_CANCEL",
-            Self::CMSG_GROUP_ACCEPT => "CMSG_GROUP_ACCEPT",
+            Self::CMSG_GROUP_ACCEPT(_) => "CMSG_GROUP_ACCEPT",
             Self::CMSG_GROUP_DECLINE => "CMSG_GROUP_DECLINE",
             Self::CMSG_GROUP_UNINVITE(_) => "CMSG_GROUP_UNINVITE",
             Self::CMSG_GROUP_UNINVITE_GUID(_) => "CMSG_GROUP_UNINVITE_GUID",
@@ -4607,7 +4607,7 @@ impl std::fmt::Display for ClientOpcodeMessage {
             ClientOpcodeMessage::CMSG_DEL_IGNORE(_) => "CMSG_DEL_IGNORE",
             ClientOpcodeMessage::CMSG_GROUP_INVITE(_) => "CMSG_GROUP_INVITE",
             ClientOpcodeMessage::CMSG_GROUP_CANCEL => "CMSG_GROUP_CANCEL",
-            ClientOpcodeMessage::CMSG_GROUP_ACCEPT => "CMSG_GROUP_ACCEPT",
+            ClientOpcodeMessage::CMSG_GROUP_ACCEPT(_) => "CMSG_GROUP_ACCEPT",
             ClientOpcodeMessage::CMSG_GROUP_DECLINE => "CMSG_GROUP_DECLINE",
             ClientOpcodeMessage::CMSG_GROUP_UNINVITE(_) => "CMSG_GROUP_UNINVITE",
             ClientOpcodeMessage::CMSG_GROUP_UNINVITE_GUID(_) => "CMSG_GROUP_UNINVITE_GUID",
@@ -5365,8 +5365,8 @@ impl From<CMSG_GROUP_CANCEL> for ClientOpcodeMessage {
 }
 
 impl From<CMSG_GROUP_ACCEPT> for ClientOpcodeMessage {
-    fn from(_: CMSG_GROUP_ACCEPT) -> Self {
-        Self::CMSG_GROUP_ACCEPT
+    fn from(c: CMSG_GROUP_ACCEPT) -> Self {
+        Self::CMSG_GROUP_ACCEPT(c)
     }
 }
 

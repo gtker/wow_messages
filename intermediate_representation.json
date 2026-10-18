@@ -303495,10 +303495,26 @@
         },
         "sizes": {
           "constant_sized": true,
-          "minimum_size": 0,
-          "maximum_size": 0
+          "minimum_size": 4,
+          "maximum_size": 4
         },
-        "members": [],
+        "members": [
+          {
+            "struct_member_tag": "Definition",
+            "struct_member_content": {
+              "name": "unknown1",
+              "data_type": {
+                "data_type_tag": "Integer",
+                "integer_type": "U32"
+              },
+              "constant_value": null,
+              "used_as_size_in": null,
+              "size_of_fields_before_size": null,
+              "used_in_if": false,
+              "tags": {}
+            }
+          }
+        ],
         "tags": {
           "version": {
             "version_type_tag": "world",
@@ -303519,12 +303535,18 @@
         "file_info": {
           "file_name": "wow_message_parser/wowm/world/social/cmsg_group_accept.wowm",
           "start_position": 5,
-          "end_position": 7
+          "end_position": 9
         },
         "only_has_io_error": true,
         "has_manual_size_field": false,
         "manual_size_subtraction": null,
-        "prepared_objects": [],
+        "prepared_objects": [
+          {
+            "name": "unknown1",
+            "is_elseif_flag": false,
+            "enum_part_of_separate_statements": false
+          }
+        ],
         "optional": null
       },
       {

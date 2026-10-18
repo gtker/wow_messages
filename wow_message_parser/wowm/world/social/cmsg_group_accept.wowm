@@ -2,6 +2,8 @@ cmsg CMSG_GROUP_ACCEPT = 0x72 { } {
     versions = "1 2";
 }
 
-cmsg CMSG_GROUP_ACCEPT = 0x72 { } {
+cmsg CMSG_GROUP_ACCEPT = 0x72 {
+    u32 unknown1;
+} {
     versions = "3.3.5";
 }

@@ -3,20 +3,26 @@ use std::io::{Read, Write};
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/social/cmsg_group_accept.wowm:5`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/social/cmsg_group_accept.wowm#L5):
 /// ```text
 /// cmsg CMSG_GROUP_ACCEPT = 0x0072 {
+///     u32 unknown1;
 /// }
 /// ```
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct CMSG_GROUP_ACCEPT {
+    pub unknown1: u32,
 }
 
 impl crate::private::Sealed for CMSG_GROUP_ACCEPT {}
 impl CMSG_GROUP_ACCEPT {
     fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
-        if body_size != 0 {
+        if body_size != 4 {
             return Err(crate::errors::ParseErrorKind::InvalidSize);
         }
 
+        // unknown1: u32
+        let unknown1 = crate::util::read_u32_le(&mut r)?;
+
         Ok(Self {
+            unknown1,
         })
     }
 
@@ -39,10 +45,11 @@ impl crate::Message for CMSG_GROUP_ACCEPT {
 
         writeln!(s, "test CMSG_GROUP_ACCEPT {{").unwrap();
         // Members
+        writeln!(s, "    unknown1 = {};", self.unknown1).unwrap();
 
         writeln!(s, "}} [").unwrap();
 
-        let [a, b] = 4_u16.to_be_bytes();
+        let [a, b] = 8_u16.to_be_bytes();
         writeln!(s, "    {a:#04X}, {b:#04X}, /* size */").unwrap();
         let [a, b, c, d] = 114_u32.to_le_bytes();
         writeln!(s, "    {a:#04X}, {b:#04X}, {c:#04X}, {d:#04X}, /* opcode */").unwrap();
@@ -50,6 +57,7 @@ impl crate::Message for CMSG_GROUP_ACCEPT {
         self.write_into_vec(&mut bytes).unwrap();
         let mut bytes = bytes.into_iter();
 
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "unknown1", "    ");
 
 
         writeln!(s, "] {{").unwrap();
@@ -60,10 +68,13 @@ impl crate::Message for CMSG_GROUP_ACCEPT {
     }
 
     fn size_without_header(&self) -> u32 {
-        0
+        4
     }
 
     fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
+        // unknown1: u32
+        w.write_all(&self.unknown1.to_le_bytes())?;
+
         Ok(())
     }
 
