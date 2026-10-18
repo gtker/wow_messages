@@ -236,7 +236,7 @@ fn world_common_impls_read_write(
         s.newline();
 
         s.body("let (size, opcode) = if header[0] & 0x80 != 0", |s| {
-            s.wln("let size = u32::from_be_bytes([0x00, header[0] & 0x7F, header[1], header[2]]).saturating_sub(3);");
+            s.wln("let size = u32::from_be_bytes([0x00, header[0] & 0x7F, header[1], header[2]]).saturating_sub(2);");
             s.newline();
 
             s.wln("let mut last_byte = [0_u8; 1];");
@@ -306,7 +306,7 @@ fn world_common_impls_read_write(
         s.newline();
 
         s.body("let (body_size, opcode) = if header[0] & 0x80 != 0", |s| {
-            s.wln("let size = u32::from_be_bytes([0x00, header[0] & 0x7F, header[1], header[2]]).saturating_sub(3);");
+            s.wln("let size = u32::from_be_bytes([0x00, header[0] & 0x7F, header[1], header[2]]).saturating_sub(2);");
             s.newline();
 
             s.wln("let mut last_byte = [0_u8; 1];");
