@@ -1,8 +1,6 @@
 use std::io::{Read, Write};
 
-use crate::wrath::{
-    AuraType, SpellSchool,
-};
+use crate::wrath::AuraType;
 
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/spell/smsg_periodicauralog.wowm:956`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/spell/smsg_periodicauralog.wowm#L956):
 /// ```text
@@ -12,7 +10,7 @@ use crate::wrath::{
 ///         || aura_type == PERIODIC_DAMAGE_PERCENT) {
 ///         u32 damage1;
 ///         u32 overkill_damage;
-///         SpellSchool school;
+///         u32 school_mask;
 ///         u32 absorb1;
 ///         u32 resisted;
 ///         Bool critical1;
@@ -47,7 +45,7 @@ pub enum AuraLog {
         damage1: u32,
         overkill_damage: u32,
         resisted: u32,
-        school: SpellSchool,
+        school_mask: u32,
     },
     Dummy,
     ModConfuse,
@@ -160,7 +158,7 @@ pub enum AuraLog {
         damage1: u32,
         overkill_damage: u32,
         resisted: u32,
-        school: SpellSchool,
+        school_mask: u32,
     },
     Unknown90,
     ModDetectRange,
@@ -403,7 +401,7 @@ impl AuraLog {
                 damage1,
                 overkill_damage,
                 resisted,
-                school,
+                school_mask,
             } => {
                 // damage1: u32
                 w.write_all(&damage1.to_le_bytes())?;
@@ -411,8 +409,8 @@ impl AuraLog {
                 // overkill_damage: u32
                 w.write_all(&overkill_damage.to_le_bytes())?;
 
-                // school: SpellSchool
-                w.write_all(&(school.as_int().to_le_bytes()))?;
+                // school_mask: u32
+                w.write_all(&school_mask.to_le_bytes())?;
 
                 // absorb1: u32
                 w.write_all(&absorb1.to_le_bytes())?;
@@ -505,7 +503,7 @@ impl AuraLog {
                 damage1,
                 overkill_damage,
                 resisted,
-                school,
+                school_mask,
             } => {
                 // damage1: u32
                 w.write_all(&damage1.to_le_bytes())?;
@@ -513,8 +511,8 @@ impl AuraLog {
                 // overkill_damage: u32
                 w.write_all(&overkill_damage.to_le_bytes())?;
 
-                // school: SpellSchool
-                w.write_all(&(school.as_int().to_le_bytes()))?;
+                // school_mask: u32
+                w.write_all(&school_mask.to_le_bytes())?;
 
                 // absorb1: u32
                 w.write_all(&absorb1.to_le_bytes())?;
@@ -549,8 +547,8 @@ impl AuraLog {
                 // overkill_damage: u32
                 let overkill_damage = crate::util::read_u32_le(&mut r)?;
 
-                // school: SpellSchool
-                let school = crate::util::read_u8_le(&mut r)?.try_into()?;
+                // school_mask: u32
+                let school_mask = crate::util::read_u32_le(&mut r)?;
 
                 // absorb1: u32
                 let absorb1 = crate::util::read_u32_le(&mut r)?;
@@ -567,7 +565,7 @@ impl AuraLog {
                     damage1,
                     overkill_damage,
                     resisted,
-                    school,
+                    school_mask,
                 }
             }
             AuraType::Dummy => AuraLog::Dummy,
@@ -737,8 +735,8 @@ impl AuraLog {
                 // overkill_damage: u32
                 let overkill_damage = crate::util::read_u32_le(&mut r)?;
 
-                // school: SpellSchool
-                let school = crate::util::read_u8_le(&mut r)?.try_into()?;
+                // school_mask: u32
+                let school_mask = crate::util::read_u32_le(&mut r)?;
 
                 // absorb1: u32
                 let absorb1 = crate::util::read_u32_le(&mut r)?;
@@ -755,7 +753,7 @@ impl AuraLog {
                     damage1,
                     overkill_damage,
                     resisted,
-                    school,
+                    school_mask,
                 }
             }
             AuraType::Unknown90 => AuraLog::Unknown90,
@@ -1004,7 +1002,7 @@ impl AuraLog {
                 + 4 // damage1: u32
                 + 4 // overkill_damage: u32
                 + 4 // resisted: u32
-                + 1 // school: SpellSchool
+                + 4 // school_mask: u32
             }
             Self::PeriodicHeal {
                 ..
@@ -1055,7 +1053,7 @@ impl AuraLog {
                 + 4 // damage1: u32
                 + 4 // overkill_damage: u32
                 + 4 // resisted: u32
-                + 1 // school: SpellSchool
+                + 4 // school_mask: u32
             }
             _ => 4,
         }) // aura_type: AuraLog

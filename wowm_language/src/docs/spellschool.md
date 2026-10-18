@@ -33,7 +33,6 @@ The basic type is `u8`, a 1 byte (8 bit) integer.
 Used in:
 * [AuraLog](auralog.md)
 * [AuraLog](auralog.md)
-* [AuraLog](auralog.md)
 * [ItemDamageType](itemdamagetype.md)
 * [SMSG_SPELLDAMAGESHIELD](smsg_spelldamageshield.md)
 * [SMSG_SPELLDAMAGESHIELD](smsg_spelldamageshield.md)

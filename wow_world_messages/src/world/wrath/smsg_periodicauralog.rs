@@ -2,7 +2,7 @@ use std::io::{Read, Write};
 
 use crate::Guid;
 use crate::wrath::{
-    AuraLog, AuraType, SpellSchool,
+    AuraLog, AuraType,
 };
 
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/spell/smsg_periodicauralog.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/spell/smsg_periodicauralog.wowm#L1):
@@ -100,11 +100,11 @@ impl crate::Message for SMSG_PERIODICAURALOG {
                     damage1,
                     overkill_damage,
                     resisted,
-                    school,
+                    school_mask,
                 } => {
                     writeln!(s, "            damage1 = {};", damage1).unwrap();
                     writeln!(s, "            overkill_damage = {};", overkill_damage).unwrap();
-                    writeln!(s, "            school = {};", school.as_test_case_value()).unwrap();
+                    writeln!(s, "            school_mask = {};", school_mask).unwrap();
                     writeln!(s, "            absorb1 = {};", absorb1).unwrap();
                     writeln!(s, "            resisted = {};", resisted).unwrap();
                     writeln!(s, "            critical1 = {};", if *critical1 { "TRUE" } else { "FALSE" }).unwrap();
@@ -160,11 +160,11 @@ impl crate::Message for SMSG_PERIODICAURALOG {
                     damage1,
                     overkill_damage,
                     resisted,
-                    school,
+                    school_mask,
                 } => {
                     writeln!(s, "            damage1 = {};", damage1).unwrap();
                     writeln!(s, "            overkill_damage = {};", overkill_damage).unwrap();
-                    writeln!(s, "            school = {};", school.as_test_case_value()).unwrap();
+                    writeln!(s, "            school_mask = {};", school_mask).unwrap();
                     writeln!(s, "            absorb1 = {};", absorb1).unwrap();
                     writeln!(s, "            resisted = {};", resisted).unwrap();
                     writeln!(s, "            critical1 = {};", if *critical1 { "TRUE" } else { "FALSE" }).unwrap();
@@ -203,11 +203,11 @@ impl crate::Message for SMSG_PERIODICAURALOG {
                         damage1,
                         overkill_damage,
                         resisted,
-                        school,
+                        school_mask,
                     } => {
                         crate::util::write_bytes(&mut s, &mut bytes, 4, "damage1", "        ");
                         crate::util::write_bytes(&mut s, &mut bytes, 4, "overkill_damage", "        ");
-                        crate::util::write_bytes(&mut s, &mut bytes, 1, "school", "        ");
+                        crate::util::write_bytes(&mut s, &mut bytes, 4, "school_mask", "        ");
                         crate::util::write_bytes(&mut s, &mut bytes, 4, "absorb1", "        ");
                         crate::util::write_bytes(&mut s, &mut bytes, 4, "resisted", "        ");
                         crate::util::write_bytes(&mut s, &mut bytes, 1, "critical1", "        ");
@@ -263,11 +263,11 @@ impl crate::Message for SMSG_PERIODICAURALOG {
                         damage1,
                         overkill_damage,
                         resisted,
-                        school,
+                        school_mask,
                     } => {
                         crate::util::write_bytes(&mut s, &mut bytes, 4, "damage1", "        ");
                         crate::util::write_bytes(&mut s, &mut bytes, 4, "overkill_damage", "        ");
-                        crate::util::write_bytes(&mut s, &mut bytes, 1, "school", "        ");
+                        crate::util::write_bytes(&mut s, &mut bytes, 4, "school_mask", "        ");
                         crate::util::write_bytes(&mut s, &mut bytes, 4, "absorb1", "        ");
                         crate::util::write_bytes(&mut s, &mut bytes, 4, "resisted", "        ");
                         crate::util::write_bytes(&mut s, &mut bytes, 1, "critical1", "        ");

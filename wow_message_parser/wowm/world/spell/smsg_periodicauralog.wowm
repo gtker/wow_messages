@@ -960,7 +960,7 @@ struct AuraLog {
     {
         u32 damage1;
         u32 overkill_damage;
-        SpellSchool school;
+        u32 school_mask;
         u32 absorb1;
         /// vmangos: Sent as int32
         u32 resisted;
