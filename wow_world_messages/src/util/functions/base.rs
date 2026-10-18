@@ -39,7 +39,12 @@ pub fn read_bool_u8<R: Read>(r: &mut R) -> Result<bool, std::io::Error> {
     Ok(match v {
         0 => false,
         1 => true,
-        v => panic!("invalid integer for bool: {v}"),
+        v => {
+            return Err(std::io::Error::new(
+                std::io::ErrorKind::InvalidData,
+                format!("invalid integer for bool: {v}"),
+            ))
+        }
     })
 }
 
@@ -50,7 +55,12 @@ pub fn read_bool_u16<R: Read>(r: &mut R) -> Result<bool, std::io::Error> {
     Ok(match v {
         0 => false,
         1 => true,
-        v => panic!("invalid integer for bool: {v}"),
+        v => {
+            return Err(std::io::Error::new(
+                std::io::ErrorKind::InvalidData,
+                format!("invalid integer for bool: {v}"),
+            ))
+        }
     })
 }
 
@@ -60,7 +70,12 @@ pub fn read_bool_u32<R: Read>(r: &mut R) -> Result<bool, std::io::Error> {
     Ok(match v {
         0 => false,
         1 => true,
-        v => panic!("invalid integer for bool: {v}"),
+        v => {
+            return Err(std::io::Error::new(
+                std::io::ErrorKind::InvalidData,
+                format!("invalid integer for bool: {v}"),
+            ))
+        }
     })
 }
 

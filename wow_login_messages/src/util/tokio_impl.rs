@@ -38,7 +38,12 @@ pub async fn tokio_read_bool_u8<R: AsyncReadExt + Unpin + Unpin>(
     Ok(match v {
         0 => false,
         1 => true,
-        v => panic!("invalid integer for bool: {v}"),
+        v => {
+            return Err(std::io::Error::new(
+                std::io::ErrorKind::InvalidData,
+                format!("invalid integer for bool: {v}"),
+            ))
+        }
     })
 }
 

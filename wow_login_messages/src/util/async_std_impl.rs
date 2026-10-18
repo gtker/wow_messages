@@ -38,7 +38,12 @@ pub async fn astd_read_bool_u8<R: ReadExt + Unpin + Unpin>(
     Ok(match v {
         0 => false,
         1 => true,
-        v => panic!("invalid integer for bool: {v}"),
+        v => {
+            return Err(std::io::Error::new(
+                std::io::ErrorKind::InvalidData,
+                format!("invalid integer for bool: {v}"),
+            ))
+        }
     })
 }
 
@@ -88,4 +93,3 @@ pub async fn astd_read_i32_le<R: ReadExt + Unpin>(mut r: R) -> Result<i32, std::
     r.read_exact(&mut v).await?;
     Ok(i32::from_le_bytes(v))
 }
-

@@ -48,7 +48,10 @@ pub fn read_bool_u8<R: Read>(r: &mut R) -> Result<bool, std::io::Error> {
     Ok(match v {
         0 => false,
         1 => true,
-        v => panic!("invalid integer for bool: {v}"),
+        v => return Err(std::io::Error::new(
+            std::io::ErrorKind::InvalidData,
+            format!("invalid integer for bool: {v}")
+        )),
     })
 }
 
@@ -100,4 +103,3 @@ pub fn read_i32_le<R: Read>(r: &mut R) -> Result<i32, std::io::Error> {
     r.read_exact(&mut v)?;
     Ok(i32::from_le_bytes(v))
 }
-
