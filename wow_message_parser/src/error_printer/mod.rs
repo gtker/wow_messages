@@ -1,10 +1,12 @@
+use std::process::exit;
+
+use writer::ErrorWriter;
+
 use crate::file_info::FileInfo;
 use crate::parser::types::version::{AllVersions, MajorWorldVersion, WorldVersion};
 use crate::parser::types::IntegerType;
 use crate::path_utils::opcodes_file;
 use crate::{ObjectTags, CONTAINER_SELF_SIZE_FIELD};
-use std::process::exit;
-use writer::ErrorWriter;
 
 mod writer;
 
@@ -30,6 +32,7 @@ pub(crate) const TYPE_IS_UPCAST_TO_SAME: i32 = 20;
 pub(crate) const FLAG_WITH_SIGNED_TYPE: i32 = 21;
 pub(crate) const DEFINER_WITH_INVALID_VALUE: i32 = 22;
 pub(crate) const VERSION_TAGS_OVERLAP: i32 = 23;
+pub(crate) const OPTIONAL_IN_FLAG_IF_ELSE_PAYLOAD: i32 = 24;
 
 fn wowm_exit(s: ErrorWriter, code: i32) -> ! {
     #[cfg(not(test))]
@@ -461,6 +464,16 @@ pub(crate) fn definer_with_invalid_value(
     );
 
     wowm_exit(s, DEFINER_WITH_INVALID_VALUE)
+}
+
+pub(crate) fn optional_in_flag_if_else_payload(file_info: &FileInfo) -> ! {
+    let mut s = ErrorWriter::new("Optional blocks in flag if/else payloads are unsupported.");
+    s.fileinfo(
+        file_info,
+        "Move optional blocks outside flag if/else payload branches.",
+    );
+
+    wowm_exit(s, OPTIONAL_IN_FLAG_IF_ELSE_PAYLOAD)
 }
 
 pub(crate) fn version_tags_overlap(

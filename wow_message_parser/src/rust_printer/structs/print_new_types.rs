@@ -17,7 +17,7 @@ pub(crate) fn print_new_types(s: &mut Writer, e: &Container) {
                     print_new_enum_declaration(s, &rd, rd.ty_name());
                 }
 
-                if !rd.is_elseif() {
+                if !rd.is_elseif() && rd.has_wire_discriminant() {
                     print_default_for_new_enum(s, &rd);
                 }
 
@@ -444,18 +444,28 @@ pub(crate) fn print_size_for_new_enum_inner(s: &mut Writer, re: &RustDefiner) {
                 s.open_curly(format!("Self::{name} =>"));
             }
 
-            if re.is_elseif() {
-                s.wln("// Not an actual enum sent over the wire");
-            } else {
+            if re.has_wire_discriminant() {
                 s.wln(format!("{}", re.int_ty().size()));
+            } else {
+                s.wln("// Not an actual enum sent over the wire");
             }
 
-            print_rust_members_sizes(s, enumerator.members(), Some(re.is_elseif()), "");
+            print_rust_members_sizes(
+                s,
+                enumerator.members(),
+                Some(re.has_wire_discriminant()),
+                "",
+            );
             s.closing_curly();
         }
 
         if re.enumerators().iter().any(|a| !a.has_members()) {
-            s.wln(format!("_ => {},", re.int_ty().size()));
+            let size = if re.has_wire_discriminant() {
+                re.int_ty().size()
+            } else {
+                0
+            };
+            s.wln(format!("_ => {size},"));
         }
     });
 }

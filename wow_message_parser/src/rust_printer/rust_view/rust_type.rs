@@ -1,10 +1,11 @@
+use std::fmt::{Display, Formatter};
+
 use crate::parser::types::array::{Array, ArraySize, ArrayType};
 use crate::parser::types::sizes::Sizes;
 use crate::parser::types::ty::Type;
 use crate::parser::types::IntegerType;
 use crate::rust_printer::rust_view::rust_enumerator::RustEnumerator;
 use crate::rust_printer::rust_view::rust_object::RustObject;
-use std::fmt::{Display, Formatter};
 
 #[derive(Debug, Clone)]
 pub(crate) enum RustType {
@@ -33,6 +34,7 @@ pub(crate) enum RustType {
         int_ty: IntegerType,
         is_simple: bool,
         is_elseif: bool,
+        has_wire_discriminant: bool,
         separate_if_statements: bool,
         is_single_rust_definer: bool,
     },
@@ -76,9 +78,31 @@ impl RustType {
             RustType::Enum {
                 int_ty,
                 enumerators,
+                is_elseif,
+                has_wire_discriminant,
                 ..
+            } => {
+                let mut size = None;
+
+                for enumerator in enumerators {
+                    let i = enumerator.is_constant()?;
+                    if !*has_wire_discriminant && !*is_elseif && size.is_some_and(|size| size != i)
+                    {
+                        return None;
+                    }
+                    size = Some(size.map_or(i, |size: i128| size.max(i)));
+                }
+
+                Some(
+                    size.unwrap_or(0)
+                        + if *has_wire_discriminant || *is_elseif {
+                            int_ty.sizes().is_constant().unwrap()
+                        } else {
+                            0
+                        },
+                )
             }
-            | RustType::Flag {
+            RustType::Flag {
                 int_ty,
                 enumerators,
                 ..

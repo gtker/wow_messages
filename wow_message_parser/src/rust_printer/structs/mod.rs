@@ -182,6 +182,16 @@ fn can_derive_default(members: &[&RustMember]) -> bool {
             }
         } else if let RustType::IpAddress = m.ty() {
             return false;
+        } else if matches!(
+            m.ty(),
+            RustType::Enum {
+                is_elseif: false,
+                has_wire_discriminant: false,
+                ..
+            }
+        ) {
+            // Conditional payload default depends on selector flags.
+            return false;
         }
     }
 

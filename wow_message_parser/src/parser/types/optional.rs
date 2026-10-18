@@ -24,4 +24,8 @@ impl OptionalStatement {
     pub(crate) fn members(&self) -> &[StructMember] {
         &self.members
     }
+
+    pub(crate) fn members_mut(&mut self) -> &mut [StructMember] {
+        &mut self.members
+    }
 }

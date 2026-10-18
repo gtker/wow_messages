@@ -1,3 +1,5 @@
+use std::collections::HashSet;
+
 use crate::error_printer::non_matching_if_statement_variables;
 use crate::file_info::FileInfo;
 use crate::parser::types::parsed::parsed_if_statement::Condition;
@@ -21,6 +23,7 @@ pub(crate) struct IfStatement {
     else_statement_members: Vec<StructMember>,
     original_ty: Type,
     separate_if_statement: bool,
+    flag_else_payload_name: Option<String>,
 }
 
 impl Eq for IfStatement {}
@@ -50,6 +53,7 @@ impl IfStatement {
             else_statement_members,
             original_ty,
             separate_if_statement: separate_if_statement && is_enum,
+            flag_else_payload_name: None,
         }
     }
 
@@ -64,6 +68,93 @@ impl IfStatement {
 
     pub(crate) fn flag_get_enumerator_rust_name(&self) -> String {
         field_name_to_rust_name(&self.flag_get_enumerator())
+    }
+
+    pub(crate) fn has_optional_members(&self) -> bool {
+        fn contains_optional(members: &[StructMember]) -> bool {
+            members.iter().any(|member| match member {
+                StructMember::Definition(_) => false,
+                StructMember::IfStatement(statement) => statement.has_optional_members(),
+                StructMember::OptionalStatement(_) => true,
+            })
+        }
+
+        contains_optional(self.members())
+            || self.else_ifs().iter().any(Self::has_optional_members)
+            || contains_optional(self.else_members())
+    }
+
+    pub(crate) fn flag_else_payload_name(&self) -> Option<String> {
+        self.flag_else_payload_name.clone()
+    }
+
+    fn flag_else_payload_name_candidate(&self) -> Option<String> {
+        if !matches!(self.equation(), Equation::BitwiseAnd { .. })
+            || !self.else_ifs().is_empty()
+            || self.else_members().is_empty()
+        {
+            return None;
+        }
+
+        let definitions = self.all_definitions();
+        if definitions.is_empty() {
+            return None;
+        }
+
+        let suffix = definitions
+            .iter()
+            .map(|definition| definition.name())
+            .collect::<Vec<_>>()
+            .join("_");
+
+        Some(format!("{}_{}_payload", self.variable_name(), suffix))
+    }
+
+    fn legacy_flag_condition_local_name(&self) -> Option<String> {
+        if self.flag_else_payload_name_candidate().is_some() {
+            return None;
+        }
+
+        match self.equation() {
+            Equation::BitwiseAnd { .. } => Some(format!(
+                "{}_{}",
+                self.variable_name(),
+                self.flag_get_enumerator().to_lowercase()
+            )),
+            Equation::Equals { .. } | Equation::NotEquals { .. } => None,
+        }
+    }
+
+    fn assign_flag_else_payload_name(&mut self, used_names: &mut HashSet<String>) {
+        if let Some(base_name) = self.flag_else_payload_name_candidate() {
+            // The reader also binds this payload to `{name}_if`.
+            let mut name = base_name.clone();
+            let mut suffix = 1;
+            while used_names.contains(&name) || used_names.contains(&format!("{name}_if")) {
+                name = format!("{base_name}_{suffix}");
+                suffix += 1;
+            }
+            used_names.insert(format!("{name}_if"));
+            used_names.insert(name.clone());
+            self.flag_else_payload_name = Some(name);
+        }
+
+        assign_member_payload_names(&mut self.members, used_names);
+        for else_if in &mut self.else_ifs {
+            else_if.assign_flag_else_payload_name(used_names);
+        }
+        assign_member_payload_names(&mut self.else_statement_members, used_names);
+    }
+
+    fn collect_used_names(&self, names: &mut HashSet<String>) {
+        if let Some(name) = self.legacy_flag_condition_local_name() {
+            names.insert(name);
+        }
+        collect_member_used_names(&self.members, names);
+        for else_if in &self.else_ifs {
+            else_if.collect_used_names(names);
+        }
+        collect_member_used_names(&self.else_statement_members, names);
     }
 
     pub(crate) fn is_elseif_flag(&self) -> bool {
@@ -146,6 +237,41 @@ impl IfStatement {
 
     pub(crate) fn part_of_separate_if_statement(&self) -> bool {
         self.separate_if_statement
+    }
+}
+
+pub(crate) fn assign_flag_else_payload_names(members: &mut [StructMember]) {
+    let mut used_names = HashSet::new();
+    collect_member_used_names(members, &mut used_names);
+    assign_member_payload_names(members, &mut used_names);
+}
+
+fn collect_member_used_names(members: &[StructMember], names: &mut HashSet<String>) {
+    for member in members {
+        match member {
+            StructMember::Definition(definition) => {
+                names.insert(definition.name().to_string());
+            }
+            StructMember::IfStatement(statement) => statement.collect_used_names(names),
+            StructMember::OptionalStatement(optional) => {
+                names.insert(optional.name().to_string());
+                collect_member_used_names(optional.members(), names);
+            }
+        }
+    }
+}
+
+fn assign_member_payload_names(members: &mut [StructMember], used_names: &mut HashSet<String>) {
+    for member in members {
+        match member {
+            StructMember::Definition(_) => {}
+            StructMember::IfStatement(statement) => {
+                statement.assign_flag_else_payload_name(used_names);
+            }
+            StructMember::OptionalStatement(optional) => {
+                assign_member_payload_names(optional.members_mut(), used_names);
+            }
+        }
     }
 }
 

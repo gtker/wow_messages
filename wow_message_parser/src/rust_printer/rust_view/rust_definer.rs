@@ -13,6 +13,7 @@ pub(crate) struct RustDefiner<'a> {
     int_ty: IntegerType,
     is_simple: bool,
     is_elseif: bool,
+    has_wire_discriminant: bool,
     original_ty_name: &'a str,
     has_separate_if_statements: bool,
     is_single_rust_definer: bool,
@@ -70,6 +71,9 @@ impl<'a> RustDefiner<'a> {
 
     pub(crate) fn is_elseif(&self) -> bool {
         self.is_elseif
+    }
+    pub(crate) fn has_wire_discriminant(&self) -> bool {
+        self.has_wire_discriminant
     }
     pub(crate) fn original_ty_name(&self) -> &str {
         self.original_ty_name
@@ -131,6 +135,7 @@ impl<'a> RustDefiner<'a> {
         int_ty: IntegerType,
         is_simple: bool,
         is_elseif: bool,
+        has_wire_discriminant: bool,
         original_ty_name: &'a str,
         has_separate_if_statements: bool,
         is_single_rust_definer: bool,
@@ -143,6 +148,7 @@ impl<'a> RustDefiner<'a> {
             int_ty,
             is_simple,
             is_elseif,
+            has_wire_discriminant,
             original_ty_name,
             has_separate_if_statements,
             is_single_rust_definer,

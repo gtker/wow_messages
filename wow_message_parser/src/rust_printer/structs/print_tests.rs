@@ -2,7 +2,9 @@ use crate::file_utils::{get_import_path, major_version_to_string};
 use crate::float_format;
 use crate::parser::types::array::ArraySize;
 use crate::parser::types::container::{Container, ContainerType};
+use crate::parser::types::if_statement::{Equation, IfStatement};
 use crate::parser::types::objects::Objects;
+use crate::parser::types::struct_member::StructMember;
 use crate::parser::types::test_case::{TestCase, TestCaseMember, TestValue};
 use crate::parser::types::version::Version;
 use crate::parser::utility::parse_value;
@@ -359,6 +361,101 @@ pub(crate) fn get_enumerator<'a>(
     None
 }
 
+fn find_flag_else_payload_statement<'a>(
+    members: &'a [StructMember],
+    payload_name: &str,
+) -> Option<&'a IfStatement> {
+    fn find_statement<'a>(
+        statement: &'a IfStatement,
+        payload_name: &str,
+    ) -> Option<&'a IfStatement> {
+        if statement.flag_else_payload_name().as_deref() == Some(payload_name) {
+            return Some(statement);
+        }
+
+        for member in statement.members().iter().chain(statement.else_members()) {
+            if let Some(found) = find_member(member, payload_name) {
+                return Some(found);
+            }
+        }
+        for elseif in statement.else_ifs() {
+            if let Some(found) = find_statement(elseif, payload_name) {
+                return Some(found);
+            }
+        }
+
+        None
+    }
+
+    fn find_member<'a>(member: &'a StructMember, payload_name: &str) -> Option<&'a IfStatement> {
+        match member {
+            StructMember::Definition(_) => None,
+            StructMember::IfStatement(statement) => find_statement(statement, payload_name),
+            StructMember::OptionalStatement(optional) => {
+                find_flag_else_payload_statement(optional.members(), payload_name)
+            }
+        }
+    }
+
+    members
+        .iter()
+        .find_map(|member| find_member(member, payload_name))
+}
+
+fn print_flag_else_payload_value(
+    s: &mut Writer,
+    member: &RustMember,
+    test_members: &[TestCaseMember],
+    e: &Container,
+    version: Version,
+) {
+    let statement = find_flag_else_payload_statement(e.members(), member.name()).unwrap();
+    let rd = e
+        .rust_object()
+        .rust_definer_with_variable_name_and_enumerator(
+            statement.variable_name(),
+            &statement.flag_get_enumerator(),
+        );
+    let raw_flags = match TestCase::get_member(test_members, statement.variable_name()).value() {
+        TestValue::Flag(flags) => flags.iter().fold(0, |value, flag| {
+            value | rd.get_enumerator(flag).value().int()
+        }),
+        TestValue::Number(value) => value.value(),
+        _ => unreachable!("flag test value has invalid type"),
+    };
+    let selected = match statement.equation() {
+        Equation::BitwiseAnd { values } => values.iter().any(|name| {
+            let value = rd.get_enumerator(name).value().int();
+            if value == 0 {
+                raw_flags == 0
+            } else {
+                raw_flags & value != 0
+            }
+        }),
+        Equation::Equals { .. } | Equation::NotEquals { .. } => unreachable!(),
+    };
+    let payload_type = e.rust_object().get_rust_definer(&member.ty().str());
+    let variant = payload_type.get_enumerator(if selected { "selected" } else { "fallback" });
+
+    s.w(format!("{}: ", member.name()));
+    s.w(format!(
+        "{}::{}",
+        member.ty().rust_str(),
+        variant.rust_name()
+    ));
+    if variant.members_in_struct().is_empty() {
+        s.wln_no_indent(",");
+        return;
+    }
+
+    s.wln_no_indent(" {");
+    s.inc_indent();
+    for field in variant.members_in_struct() {
+        print_value(s, field, test_members, e, version);
+    }
+    s.closing_curly_with(",");
+}
+
 fn print_value(
     s: &mut Writer,
     m: &RustMember,
@@ -366,6 +463,18 @@ fn print_value(
     e: &Container,
     version: Version,
 ) {
+    if matches!(
+        m.ty(),
+        RustType::Enum {
+            is_elseif: false,
+            has_wire_discriminant: false,
+            ..
+        }
+    ) {
+        print_flag_else_payload_value(s, m, t, e, version);
+        return;
+    }
+
     let member = TestCase::get_member(t, m.name());
     let should_print_name = !m.is_single_rust_definer();
 
@@ -659,7 +768,9 @@ fn print_value(
 
                 let field_name = if f.ty() == UpdateMaskObjectType::Container
                     && f.name().starts_with("SLOT_")
-                    && f.name()[5..].parse::<u8>().is_ok_and(|slot| (1..=36).contains(&slot))
+                    && f.name()[5..]
+                        .parse::<u8>()
+                        .is_ok_and(|slot| (1..=36).contains(&slot))
                 {
                     "SLOT"
                 } else {

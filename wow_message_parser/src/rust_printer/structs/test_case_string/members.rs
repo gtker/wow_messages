@@ -70,6 +70,36 @@ pub(crate) fn print_if_statement_flag(
     prefix: &str,
     print_function: impl Fn(&mut Writer, &Container, &StructMember, &str, &str),
 ) {
+    if let Some(payload_name) = statement.flag_else_payload_name() {
+        let payload_ty_name = format!("{}_{}", e.name(), payload_name);
+        let rd = e.rust_object().get_rust_definer(&payload_ty_name);
+
+        s.open_curly(format!("match &{variable_prefix}{payload_name}"));
+        for (variant_name, members) in [
+            ("selected", statement.members()),
+            ("fallback", statement.else_members()),
+        ] {
+            let enumerator = rd.get_enumerator(variant_name);
+            if enumerator.has_members_in_struct() {
+                s.open_curly(format!("{}::{}", rd.ty_name(), enumerator.rust_name()));
+                for member in enumerator.members_in_struct() {
+                    s.wln(format!("{},", member.name()));
+                }
+                s.closing_curly_with(" => {");
+                s.inc_indent();
+            } else {
+                s.open_curly(format!("{}::{} =>", rd.ty_name(), enumerator.rust_name()));
+            }
+
+            for member in members {
+                print_function(s, e, member, "", prefix);
+            }
+            s.closing_curly();
+        }
+        s.closing_curly_newline();
+        return;
+    }
+
     s.open_curly(format!(
         "if let Some(if_statement) = &{variable_prefix}{variable}.get_{variant}()",
         variable = statement.variable_name(),

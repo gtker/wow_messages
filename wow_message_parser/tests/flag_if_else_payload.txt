@@ -1,0 +1,716 @@
+use std::io::{Read, Write};
+
+use crate::vanilla::ConditionalPayloadFlag;
+
+/// Auto generated from the original `wowm` in file [`wow_message_parser/tests/flag_if_else_payload.wowm:27`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/tests/flag_if_else_payload.wowm#L27):
+/// ```text
+/// smsg FlagIfElsePayload = 0x0000 {
+///     ConditionalPayloadFlag flags;
+///     if (flags & FIRST
+///         || flags & SECOND) {
+///         u32 selected;
+///     }
+///     else {
+///         u16 fallback;
+///     }
+///     if (flags & UNRELATED) {
+///         u8 unrelated;
+///     }
+/// }
+/// ```
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord)]
+pub struct FlagIfElsePayload {
+    pub flags: FlagIfElsePayload_ConditionalPayloadFlag,
+    pub flags_selected_fallback_payload: FlagIfElsePayload_flags_selected_fallback_payload,
+}
+
+impl crate::private::Sealed for FlagIfElsePayload {}
+impl FlagIfElsePayload {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
+        if !(3..=6).contains(&body_size) {
+            return Err(crate::errors::ParseErrorKind::InvalidSize);
+        }
+
+        // flags: ConditionalPayloadFlag
+        let flags = ConditionalPayloadFlag::new(crate::util::read_u8_le(&mut r)?);
+
+        let flags_selected_fallback_payload_if = if (flags.as_int() & ConditionalPayloadFlag::FIRST) != 0 || (flags.as_int() & ConditionalPayloadFlag::SECOND) != 0 {
+            // selected: u32
+            let selected = crate::util::read_u32_le(&mut r)?;
+
+            FlagIfElsePayload_flags_selected_fallback_payload::Selected {
+                selected,
+            }
+        }
+        else {
+            // fallback: u16
+            let fallback = crate::util::read_u16_le(&mut r)?;
+
+            FlagIfElsePayload_flags_selected_fallback_payload::Fallback {
+                fallback,
+            }
+        };
+
+        let flags_unrelated = if flags.is_unrelated() {
+            // unrelated: u8
+            let unrelated = crate::util::read_u8_le(&mut r)?;
+
+            Some(FlagIfElsePayload_ConditionalPayloadFlag_Unrelated {
+                unrelated,
+            })
+        }
+        else {
+            None
+        };
+
+        let flags = FlagIfElsePayload_ConditionalPayloadFlag {
+            inner: flags.as_int(),
+            unrelated: flags_unrelated,
+        };
+
+        Ok(Self {
+            flags,
+            flags_selected_fallback_payload: flags_selected_fallback_payload_if,
+        })
+    }
+
+}
+
+impl crate::Message for FlagIfElsePayload {
+    const OPCODE: u32 = 0x0000;
+
+    #[cfg(feature = "print-testcase")]
+    fn message_name(&self) -> &'static str {
+        "FlagIfElsePayload"
+    }
+
+    fn size_without_header(&self) -> u32 {
+        self.size() as u32
+    }
+
+    fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
+        // flags: ConditionalPayloadFlag
+        w.write_all(&(self.flags.as_int().to_le_bytes()))?;
+
+        match ((self.flags.as_int() & ConditionalPayloadFlag::FIRST) != 0 || (self.flags.as_int() & ConditionalPayloadFlag::SECOND) != 0, &self.flags_selected_fallback_payload) {
+            (true, FlagIfElsePayload_flags_selected_fallback_payload::Selected {
+                selected,
+            }) => {
+                // selected: u32
+                w.write_all(&selected.to_le_bytes())?;
+
+            }
+            (false, FlagIfElsePayload_flags_selected_fallback_payload::Fallback {
+                fallback,
+            }) => {
+                // fallback: u16
+                w.write_all(&fallback.to_le_bytes())?;
+
+            }
+            _ => return Err(std::io::Error::new(std::io::ErrorKind::InvalidData, "flag conditional payload does not match flag bits")),
+        }
+
+        if let Some(if_statement) = &self.flags.unrelated {
+            // unrelated: u8
+            w.write_all(&if_statement.unrelated.to_le_bytes())?;
+
+        }
+
+        Ok(())
+    }
+
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size).map_err(|a| crate::errors::ParseError::new(0, "FlagIfElsePayload", body_size, a))
+    }
+
+}
+
+#[cfg(feature = "vanilla")]
+impl crate::vanilla::ServerMessage for FlagIfElsePayload {}
+
+impl FlagIfElsePayload {
+    pub(crate) const fn size(&self) -> usize {
+        self.flags.size() // flags: FlagIfElsePayload_ConditionalPayloadFlag
+        + self.flags_selected_fallback_payload.size() // flags_selected_fallback_payload: FlagIfElsePayload_flags_selected_fallback_payload
+    }
+}
+
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
+pub struct FlagIfElsePayload_ConditionalPayloadFlag {
+    inner: u8,
+    unrelated: Option<FlagIfElsePayload_ConditionalPayloadFlag_Unrelated>,
+}
+
+impl FlagIfElsePayload_ConditionalPayloadFlag {
+    pub const fn new(inner: u8, unrelated: Option<FlagIfElsePayload_ConditionalPayloadFlag_Unrelated>,) -> Self {
+        Self {
+            inner,
+            unrelated, 
+        }
+    }
+
+    pub const fn empty() -> Self {
+        Self {
+            inner: 0,
+            unrelated: None,
+        }
+    }
+
+    pub const fn is_empty(&self) -> bool {
+        self.inner == 0
+        && self.unrelated.is_none()
+    }
+
+    pub const fn new_first() -> Self {
+        Self {
+            inner: ConditionalPayloadFlag::FIRST,
+            unrelated: None,
+        }
+    }
+
+    #[allow(clippy::missing_const_for_fn)] // false positive
+    pub fn set_first(mut self) -> Self {
+        self.inner |= ConditionalPayloadFlag::FIRST;
+        self
+    }
+
+    pub const fn get_first(&self) -> bool {
+        (self.inner & ConditionalPayloadFlag::FIRST) != 0
+    }
+
+    #[allow(clippy::missing_const_for_fn)] // false positive
+    pub fn clear_first(mut self) -> Self {
+        self.inner &= ConditionalPayloadFlag::FIRST.reverse_bits();
+        self
+    }
+
+    pub const fn new_second() -> Self {
+        Self {
+            inner: ConditionalPayloadFlag::SECOND,
+            unrelated: None,
+        }
+    }
+
+    #[allow(clippy::missing_const_for_fn)] // false positive
+    pub fn set_second(mut self) -> Self {
+        self.inner |= ConditionalPayloadFlag::SECOND;
+        self
+    }
+
+    pub const fn get_second(&self) -> bool {
+        (self.inner & ConditionalPayloadFlag::SECOND) != 0
+    }
+
+    #[allow(clippy::missing_const_for_fn)] // false positive
+    pub fn clear_second(mut self) -> Self {
+        self.inner &= ConditionalPayloadFlag::SECOND.reverse_bits();
+        self
+    }
+
+    pub const fn new_unrelated(unrelated: FlagIfElsePayload_ConditionalPayloadFlag_Unrelated) -> Self {
+        Self {
+            inner: ConditionalPayloadFlag::UNRELATED,
+            unrelated: Some(unrelated),
+        }
+    }
+
+    #[allow(clippy::missing_const_for_fn)] // false positive
+    pub fn set_unrelated(mut self, unrelated: FlagIfElsePayload_ConditionalPayloadFlag_Unrelated) -> Self {
+        self.inner |= ConditionalPayloadFlag::UNRELATED;
+        self.unrelated = Some(unrelated);
+        self
+    }
+
+    pub const fn get_unrelated(&self) -> Option<&FlagIfElsePayload_ConditionalPayloadFlag_Unrelated> {
+        self.unrelated.as_ref()
+    }
+
+    #[allow(clippy::missing_const_for_fn)] // false positive
+    pub fn clear_unrelated(mut self) -> Self {
+        self.inner &= ConditionalPayloadFlag::UNRELATED.reverse_bits();
+        self.unrelated = None;
+        self
+    }
+
+    pub const fn new_selected_fallback_payload_if() -> Self {
+        Self {
+            inner: ConditionalPayloadFlag::SELECTED_FALLBACK_PAYLOAD_IF,
+            unrelated: None,
+        }
+    }
+
+    #[allow(clippy::missing_const_for_fn)] // false positive
+    pub fn set_selected_fallback_payload_if(mut self) -> Self {
+        self.inner |= ConditionalPayloadFlag::SELECTED_FALLBACK_PAYLOAD_IF;
+        self
+    }
+
+    pub const fn get_selected_fallback_payload_if(&self) -> bool {
+        (self.inner & ConditionalPayloadFlag::SELECTED_FALLBACK_PAYLOAD_IF) != 0
+    }
+
+    #[allow(clippy::missing_const_for_fn)] // false positive
+    pub fn clear_selected_fallback_payload_if(mut self) -> Self {
+        self.inner &= ConditionalPayloadFlag::SELECTED_FALLBACK_PAYLOAD_IF.reverse_bits();
+        self
+    }
+
+    pub(crate) const fn as_int(&self) -> u8 {
+        self.inner
+    }
+
+}
+impl FlagIfElsePayload_ConditionalPayloadFlag {
+    pub(crate) const fn size(&self) -> usize {
+        1 // inner
+        + {
+            if let Some(s) = &self.unrelated {
+                1
+            } else {
+                0
+            }
+        }
+    }
+}
+
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
+pub struct FlagIfElsePayload_ConditionalPayloadFlag_Unrelated {
+    pub unrelated: u8,
+}
+
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord)]
+pub enum FlagIfElsePayload_flags_selected_fallback_payload {
+    Selected {
+        selected: u32,
+    },
+    Fallback {
+        fallback: u16,
+    },
+}
+
+impl FlagIfElsePayload_flags_selected_fallback_payload {
+    pub(crate) const fn as_int(&self) -> u8 {
+        match self {
+            Self::Selected { .. } => 0,
+            Self::Fallback { .. } => 1,
+        }
+    }
+
+}
+
+impl std::fmt::Display for FlagIfElsePayload_flags_selected_fallback_payload {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        match self {
+            Self::Selected{ .. } => f.write_str("Selected"),
+            Self::Fallback{ .. } => f.write_str("Fallback"),
+        }
+    }
+}
+
+impl FlagIfElsePayload_flags_selected_fallback_payload {
+    pub(crate) const fn size(&self) -> usize {
+        match self {
+            Self::Selected {
+                ..
+            } => {
+                // Not an actual enum sent over the wire
+                4 // selected: u32
+            }
+            Self::Fallback {
+                ..
+            } => {
+                // Not an actual enum sent over the wire
+                2 // fallback: u16
+            }
+        }
+    }
+}
+
+#[cfg(test)]
+mod test {
+    #![allow(clippy::missing_const_for_fn)]
+    use super::FlagIfElsePayload;
+    use super::*;
+    use super::super::*;
+    use crate::vanilla::opcodes::ServerOpcodeMessage;
+    use crate::vanilla::{ClientMessage, ServerMessage};
+
+    const HEADER_SIZE: usize = 2 + 2;
+    const RAW0: [u8; 7] = [ 0x00, 0x07, 0x00, 0x00, 0x00, 0xEF, 0xBE, ];
+
+    pub(crate) fn expected0() -> FlagIfElsePayload {
+        FlagIfElsePayload {
+            flags: FlagIfElsePayload_ConditionalPayloadFlag::empty()
+                ,
+            flags_selected_fallback_payload:             FlagIfElsePayload_flags_selected_fallback_payload::Fallback {
+                fallback: 0xBEEF,
+            },
+        }
+
+    }
+
+    // Generated from `wow_message_parser/tests/flag_if_else_payload.wowm` line 138.
+    #[cfg(feature = "sync")]
+    #[cfg_attr(feature = "sync", test)]
+    fn flagifelsepayload0() {
+        let expected = expected0();
+        let t = ServerOpcodeMessage::read_unencrypted(&mut std::io::Cursor::new(&RAW0)).unwrap();
+        let t = match t {
+            ServerOpcodeMessage::FlagIfElsePayload(t) => t,
+            opcode => panic!("incorrect opcode. Expected FlagIfElsePayload, got {opcode:#?}"),
+        };
+
+        assert_eq!(&t, &expected);
+        assert_eq!(t.size() + HEADER_SIZE, RAW0.len());
+
+        let mut dest = Vec::with_capacity(RAW0.len());
+        expected.write_unencrypted_server(&mut std::io::Cursor::new(&mut dest)).unwrap();
+
+        assert_eq!(dest, RAW0);
+    }
+
+    // Generated from `wow_message_parser/tests/flag_if_else_payload.wowm` line 138.
+    #[cfg(feature = "tokio")]
+    #[cfg_attr(feature = "tokio", tokio::test)]
+    async fn tokio_flagifelsepayload0() {
+        let expected = expected0();
+        let t = ServerOpcodeMessage::tokio_read_unencrypted(&mut std::io::Cursor::new(&RAW0)).await.unwrap();
+        let t = match t {
+            ServerOpcodeMessage::FlagIfElsePayload(t) => t,
+            opcode => panic!("incorrect opcode. Expected FlagIfElsePayload, got {opcode:#?}"),
+        };
+
+        assert_eq!(&t, &expected);
+        assert_eq!(t.size() + HEADER_SIZE, RAW0.len());
+
+        let mut dest = Vec::with_capacity(RAW0.len());
+        expected.tokio_write_unencrypted_server(&mut std::io::Cursor::new(&mut dest)).await.unwrap();
+
+        assert_eq!(dest, RAW0);
+    }
+
+    // Generated from `wow_message_parser/tests/flag_if_else_payload.wowm` line 138.
+    #[cfg(feature = "async-std")]
+    #[cfg_attr(feature = "async-std", async_std::test)]
+    async fn astd_flagifelsepayload0() {
+        let expected = expected0();
+        let t = ServerOpcodeMessage::astd_read_unencrypted(&mut async_std::io::Cursor::new(&RAW0)).await.unwrap();
+        let t = match t {
+            ServerOpcodeMessage::FlagIfElsePayload(t) => t,
+            opcode => panic!("incorrect opcode. Expected FlagIfElsePayload, got {opcode:#?}"),
+        };
+
+        assert_eq!(&t, &expected);
+        assert_eq!(t.size() + HEADER_SIZE, RAW0.len());
+
+        let mut dest = Vec::with_capacity(RAW0.len());
+        expected.astd_write_unencrypted_server(&mut async_std::io::Cursor::new(&mut dest)).await.unwrap();
+
+        assert_eq!(dest, RAW0);
+    }
+
+    const RAW1: [u8; 9] = [ 0x00, 0x09, 0x00, 0x00, 0x01, 0x44, 0x33, 0x22, 0x11, ];
+
+    pub(crate) fn expected1() -> FlagIfElsePayload {
+        FlagIfElsePayload {
+            flags: FlagIfElsePayload_ConditionalPayloadFlag::empty()
+                .set_first()
+                ,
+            flags_selected_fallback_payload:             FlagIfElsePayload_flags_selected_fallback_payload::Selected {
+                selected: 0x11223344,
+            },
+        }
+
+    }
+
+    // Generated from `wow_message_parser/tests/flag_if_else_payload.wowm` line 150.
+    #[cfg(feature = "sync")]
+    #[cfg_attr(feature = "sync", test)]
+    fn flagifelsepayload1() {
+        let expected = expected1();
+        let t = ServerOpcodeMessage::read_unencrypted(&mut std::io::Cursor::new(&RAW1)).unwrap();
+        let t = match t {
+            ServerOpcodeMessage::FlagIfElsePayload(t) => t,
+            opcode => panic!("incorrect opcode. Expected FlagIfElsePayload, got {opcode:#?}"),
+        };
+
+        assert_eq!(&t, &expected);
+        assert_eq!(t.size() + HEADER_SIZE, RAW1.len());
+
+        let mut dest = Vec::with_capacity(RAW1.len());
+        expected.write_unencrypted_server(&mut std::io::Cursor::new(&mut dest)).unwrap();
+
+        assert_eq!(dest, RAW1);
+    }
+
+    // Generated from `wow_message_parser/tests/flag_if_else_payload.wowm` line 150.
+    #[cfg(feature = "tokio")]
+    #[cfg_attr(feature = "tokio", tokio::test)]
+    async fn tokio_flagifelsepayload1() {
+        let expected = expected1();
+        let t = ServerOpcodeMessage::tokio_read_unencrypted(&mut std::io::Cursor::new(&RAW1)).await.unwrap();
+        let t = match t {
+            ServerOpcodeMessage::FlagIfElsePayload(t) => t,
+            opcode => panic!("incorrect opcode. Expected FlagIfElsePayload, got {opcode:#?}"),
+        };
+
+        assert_eq!(&t, &expected);
+        assert_eq!(t.size() + HEADER_SIZE, RAW1.len());
+
+        let mut dest = Vec::with_capacity(RAW1.len());
+        expected.tokio_write_unencrypted_server(&mut std::io::Cursor::new(&mut dest)).await.unwrap();
+
+        assert_eq!(dest, RAW1);
+    }
+
+    // Generated from `wow_message_parser/tests/flag_if_else_payload.wowm` line 150.
+    #[cfg(feature = "async-std")]
+    #[cfg_attr(feature = "async-std", async_std::test)]
+    async fn astd_flagifelsepayload1() {
+        let expected = expected1();
+        let t = ServerOpcodeMessage::astd_read_unencrypted(&mut async_std::io::Cursor::new(&RAW1)).await.unwrap();
+        let t = match t {
+            ServerOpcodeMessage::FlagIfElsePayload(t) => t,
+            opcode => panic!("incorrect opcode. Expected FlagIfElsePayload, got {opcode:#?}"),
+        };
+
+        assert_eq!(&t, &expected);
+        assert_eq!(t.size() + HEADER_SIZE, RAW1.len());
+
+        let mut dest = Vec::with_capacity(RAW1.len());
+        expected.astd_write_unencrypted_server(&mut async_std::io::Cursor::new(&mut dest)).await.unwrap();
+
+        assert_eq!(dest, RAW1);
+    }
+
+    const RAW2: [u8; 9] = [ 0x00, 0x09, 0x00, 0x00, 0x02, 0x88, 0x77, 0x66, 0x55, ];
+
+    pub(crate) fn expected2() -> FlagIfElsePayload {
+        FlagIfElsePayload {
+            flags: FlagIfElsePayload_ConditionalPayloadFlag::empty()
+                .set_second()
+                ,
+            flags_selected_fallback_payload:             FlagIfElsePayload_flags_selected_fallback_payload::Selected {
+                selected: 0x55667788,
+            },
+        }
+
+    }
+
+    // Generated from `wow_message_parser/tests/flag_if_else_payload.wowm` line 162.
+    #[cfg(feature = "sync")]
+    #[cfg_attr(feature = "sync", test)]
+    fn flagifelsepayload2() {
+        let expected = expected2();
+        let t = ServerOpcodeMessage::read_unencrypted(&mut std::io::Cursor::new(&RAW2)).unwrap();
+        let t = match t {
+            ServerOpcodeMessage::FlagIfElsePayload(t) => t,
+            opcode => panic!("incorrect opcode. Expected FlagIfElsePayload, got {opcode:#?}"),
+        };
+
+        assert_eq!(&t, &expected);
+        assert_eq!(t.size() + HEADER_SIZE, RAW2.len());
+
+        let mut dest = Vec::with_capacity(RAW2.len());
+        expected.write_unencrypted_server(&mut std::io::Cursor::new(&mut dest)).unwrap();
+
+        assert_eq!(dest, RAW2);
+    }
+
+    // Generated from `wow_message_parser/tests/flag_if_else_payload.wowm` line 162.
+    #[cfg(feature = "tokio")]
+    #[cfg_attr(feature = "tokio", tokio::test)]
+    async fn tokio_flagifelsepayload2() {
+        let expected = expected2();
+        let t = ServerOpcodeMessage::tokio_read_unencrypted(&mut std::io::Cursor::new(&RAW2)).await.unwrap();
+        let t = match t {
+            ServerOpcodeMessage::FlagIfElsePayload(t) => t,
+            opcode => panic!("incorrect opcode. Expected FlagIfElsePayload, got {opcode:#?}"),
+        };
+
+        assert_eq!(&t, &expected);
+        assert_eq!(t.size() + HEADER_SIZE, RAW2.len());
+
+        let mut dest = Vec::with_capacity(RAW2.len());
+        expected.tokio_write_unencrypted_server(&mut std::io::Cursor::new(&mut dest)).await.unwrap();
+
+        assert_eq!(dest, RAW2);
+    }
+
+    // Generated from `wow_message_parser/tests/flag_if_else_payload.wowm` line 162.
+    #[cfg(feature = "async-std")]
+    #[cfg_attr(feature = "async-std", async_std::test)]
+    async fn astd_flagifelsepayload2() {
+        let expected = expected2();
+        let t = ServerOpcodeMessage::astd_read_unencrypted(&mut async_std::io::Cursor::new(&RAW2)).await.unwrap();
+        let t = match t {
+            ServerOpcodeMessage::FlagIfElsePayload(t) => t,
+            opcode => panic!("incorrect opcode. Expected FlagIfElsePayload, got {opcode:#?}"),
+        };
+
+        assert_eq!(&t, &expected);
+        assert_eq!(t.size() + HEADER_SIZE, RAW2.len());
+
+        let mut dest = Vec::with_capacity(RAW2.len());
+        expected.astd_write_unencrypted_server(&mut async_std::io::Cursor::new(&mut dest)).await.unwrap();
+
+        assert_eq!(dest, RAW2);
+    }
+
+    const RAW3: [u8; 10] = [ 0x00, 0x0A, 0x00, 0x00, 0x07, 0xDD, 0xCC, 0xBB, 0xAA,
+         0x11, ];
+
+    pub(crate) fn expected3() -> FlagIfElsePayload {
+        FlagIfElsePayload {
+            flags: FlagIfElsePayload_ConditionalPayloadFlag::empty()
+                .set_first()
+                .set_second()
+                .set_unrelated(FlagIfElsePayload_ConditionalPayloadFlag_Unrelated {
+                    unrelated: 0x11,
+                })
+                ,
+            flags_selected_fallback_payload:             FlagIfElsePayload_flags_selected_fallback_payload::Selected {
+                selected: 0xAABBCCDD,
+            },
+        }
+
+    }
+
+    // Generated from `wow_message_parser/tests/flag_if_else_payload.wowm` line 174.
+    #[cfg(feature = "sync")]
+    #[cfg_attr(feature = "sync", test)]
+    fn flagifelsepayload3() {
+        let expected = expected3();
+        let t = ServerOpcodeMessage::read_unencrypted(&mut std::io::Cursor::new(&RAW3)).unwrap();
+        let t = match t {
+            ServerOpcodeMessage::FlagIfElsePayload(t) => t,
+            opcode => panic!("incorrect opcode. Expected FlagIfElsePayload, got {opcode:#?}"),
+        };
+
+        assert_eq!(&t, &expected);
+        assert_eq!(t.size() + HEADER_SIZE, RAW3.len());
+
+        let mut dest = Vec::with_capacity(RAW3.len());
+        expected.write_unencrypted_server(&mut std::io::Cursor::new(&mut dest)).unwrap();
+
+        assert_eq!(dest, RAW3);
+    }
+
+    // Generated from `wow_message_parser/tests/flag_if_else_payload.wowm` line 174.
+    #[cfg(feature = "tokio")]
+    #[cfg_attr(feature = "tokio", tokio::test)]
+    async fn tokio_flagifelsepayload3() {
+        let expected = expected3();
+        let t = ServerOpcodeMessage::tokio_read_unencrypted(&mut std::io::Cursor::new(&RAW3)).await.unwrap();
+        let t = match t {
+            ServerOpcodeMessage::FlagIfElsePayload(t) => t,
+            opcode => panic!("incorrect opcode. Expected FlagIfElsePayload, got {opcode:#?}"),
+        };
+
+        assert_eq!(&t, &expected);
+        assert_eq!(t.size() + HEADER_SIZE, RAW3.len());
+
+        let mut dest = Vec::with_capacity(RAW3.len());
+        expected.tokio_write_unencrypted_server(&mut std::io::Cursor::new(&mut dest)).await.unwrap();
+
+        assert_eq!(dest, RAW3);
+    }
+
+    // Generated from `wow_message_parser/tests/flag_if_else_payload.wowm` line 174.
+    #[cfg(feature = "async-std")]
+    #[cfg_attr(feature = "async-std", async_std::test)]
+    async fn astd_flagifelsepayload3() {
+        let expected = expected3();
+        let t = ServerOpcodeMessage::astd_read_unencrypted(&mut async_std::io::Cursor::new(&RAW3)).await.unwrap();
+        let t = match t {
+            ServerOpcodeMessage::FlagIfElsePayload(t) => t,
+            opcode => panic!("incorrect opcode. Expected FlagIfElsePayload, got {opcode:#?}"),
+        };
+
+        assert_eq!(&t, &expected);
+        assert_eq!(t.size() + HEADER_SIZE, RAW3.len());
+
+        let mut dest = Vec::with_capacity(RAW3.len());
+        expected.astd_write_unencrypted_server(&mut async_std::io::Cursor::new(&mut dest)).await.unwrap();
+
+        assert_eq!(dest, RAW3);
+    }
+
+    const RAW4: [u8; 8] = [ 0x00, 0x08, 0x00, 0x00, 0x04, 0x34, 0x12, 0x22, ];
+
+    pub(crate) fn expected4() -> FlagIfElsePayload {
+        FlagIfElsePayload {
+            flags: FlagIfElsePayload_ConditionalPayloadFlag::empty()
+                .set_unrelated(FlagIfElsePayload_ConditionalPayloadFlag_Unrelated {
+                    unrelated: 0x22,
+                })
+                ,
+            flags_selected_fallback_payload:             FlagIfElsePayload_flags_selected_fallback_payload::Fallback {
+                fallback: 0x1234,
+            },
+        }
+
+    }
+
+    // Generated from `wow_message_parser/tests/flag_if_else_payload.wowm` line 188.
+    #[cfg(feature = "sync")]
+    #[cfg_attr(feature = "sync", test)]
+    fn flagifelsepayload4() {
+        let expected = expected4();
+        let t = ServerOpcodeMessage::read_unencrypted(&mut std::io::Cursor::new(&RAW4)).unwrap();
+        let t = match t {
+            ServerOpcodeMessage::FlagIfElsePayload(t) => t,
+            opcode => panic!("incorrect opcode. Expected FlagIfElsePayload, got {opcode:#?}"),
+        };
+
+        assert_eq!(&t, &expected);
+        assert_eq!(t.size() + HEADER_SIZE, RAW4.len());
+
+        let mut dest = Vec::with_capacity(RAW4.len());
+        expected.write_unencrypted_server(&mut std::io::Cursor::new(&mut dest)).unwrap();
+
+        assert_eq!(dest, RAW4);
+    }
+
+    // Generated from `wow_message_parser/tests/flag_if_else_payload.wowm` line 188.
+    #[cfg(feature = "tokio")]
+    #[cfg_attr(feature = "tokio", tokio::test)]
+    async fn tokio_flagifelsepayload4() {
+        let expected = expected4();
+        let t = ServerOpcodeMessage::tokio_read_unencrypted(&mut std::io::Cursor::new(&RAW4)).await.unwrap();
+        let t = match t {
+            ServerOpcodeMessage::FlagIfElsePayload(t) => t,
+            opcode => panic!("incorrect opcode. Expected FlagIfElsePayload, got {opcode:#?}"),
+        };
+
+        assert_eq!(&t, &expected);
+        assert_eq!(t.size() + HEADER_SIZE, RAW4.len());
+
+        let mut dest = Vec::with_capacity(RAW4.len());
+        expected.tokio_write_unencrypted_server(&mut std::io::Cursor::new(&mut dest)).await.unwrap();
+
+        assert_eq!(dest, RAW4);
+    }
+
+    // Generated from `wow_message_parser/tests/flag_if_else_payload.wowm` line 188.
+    #[cfg(feature = "async-std")]
+    #[cfg_attr(feature = "async-std", async_std::test)]
+    async fn astd_flagifelsepayload4() {
+        let expected = expected4();
+        let t = ServerOpcodeMessage::astd_read_unencrypted(&mut async_std::io::Cursor::new(&RAW4)).await.unwrap();
+        let t = match t {
+            ServerOpcodeMessage::FlagIfElsePayload(t) => t,
+            opcode => panic!("incorrect opcode. Expected FlagIfElsePayload, got {opcode:#?}"),
+        };
+
+        assert_eq!(&t, &expected);
+        assert_eq!(t.size() + HEADER_SIZE, RAW4.len());
+
+        let mut dest = Vec::with_capacity(RAW4.len());
+        expected.astd_write_unencrypted_server(&mut async_std::io::Cursor::new(&mut dest)).await.unwrap();
+
+        assert_eq!(dest, RAW4);
+    }
+
+}
+

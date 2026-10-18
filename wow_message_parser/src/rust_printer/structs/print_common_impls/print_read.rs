@@ -1,3 +1,4 @@
+use super::flag_condition_expression;
 use crate::parser::types::array::{Array, ArraySize, ArrayType};
 use crate::parser::types::container::Container;
 use crate::parser::types::if_statement::{Equation, IfStatement};
@@ -9,6 +10,8 @@ use crate::parser::types::IntegerType;
 use crate::rust_printer::base_structs::base_struct_read_name;
 use crate::rust_printer::get_optional_type_name;
 use crate::rust_printer::rust_view::rust_definer::RustDefiner;
+use crate::rust_printer::rust_view::rust_enumerator::RustEnumerator;
+use crate::rust_printer::rust_view::rust_object::RustObject;
 use crate::rust_printer::rust_view::rust_type::RustType;
 use crate::rust_printer::structs::print_common_impls::print_size::{
     print_rust_members_sizes, print_size_of_ty_rust_view,
@@ -534,6 +537,11 @@ fn print_read_if_statement_flag(
     prefix: &str,
     postfix: &str,
 ) {
+    if let Some(payload_name) = statement.flag_else_payload_name() {
+        print_read_flag_else_payload(s, e, o, statement, &payload_name, prefix, postfix);
+        return;
+    }
+
     s.open_curly(format!(
         "let {var_name}_{enumerator_name} = if {var_name}.is_{enumerator_name}()",
         var_name = statement.variable_name(),
@@ -621,6 +629,56 @@ fn print_read_if_statement_flag(
     s.open_curly("else");
     s.wln("None");
     s.closing_curly_with(";"); // else
+    s.newline();
+}
+
+fn print_read_flag_else_payload(
+    s: &mut Writer,
+    e: &Container,
+    o: &Objects,
+    statement: &IfStatement,
+    payload_name: &str,
+    prefix: &str,
+    postfix: &str,
+) {
+    let payload_ty_name = format!("{}_{}", e.name(), payload_name);
+    let rd = e.rust_object().get_rust_definer(&payload_ty_name);
+    let condition = flag_condition_expression(e, statement, statement.variable_name());
+
+    let selected = rd.get_enumerator("selected");
+    let fallback = rd.get_enumerator("fallback");
+
+    s.open_curly(format!("let {payload_name}_if = if {condition}"));
+    for member in statement.members() {
+        print_read_field(s, e, o, member, prefix, postfix, "let ");
+    }
+    print_read_final_flag_for_enumerator(s, selected);
+    if selected.has_members_in_struct() {
+        s.open_curly(format!("{}::{}", rd.ty_name(), selected.rust_name()));
+        for member in selected.members_in_struct() {
+            s.wln(member.struct_initialization_string());
+        }
+        s.closing_curly();
+    } else {
+        s.wln(format!("{}::{}", rd.ty_name(), selected.rust_name()));
+    }
+    s.closing_curly();
+
+    s.open_curly("else");
+    for member in statement.else_members() {
+        print_read_field(s, e, o, member, prefix, postfix, "let ");
+    }
+    print_read_final_flag_for_enumerator(s, fallback);
+    if fallback.has_members_in_struct() {
+        s.open_curly(format!("{}::{}", rd.ty_name(), fallback.rust_name()));
+        for member in fallback.members_in_struct() {
+            s.wln(member.struct_initialization_string());
+        }
+        s.closing_curly();
+    } else {
+        s.wln(format!("{}::{}", rd.ty_name(), fallback.rust_name()));
+    }
+    s.closing_curly_with(";");
     s.newline();
 }
 
@@ -776,6 +834,15 @@ fn print_read_field(
             s.newline();
         }
     }
+}
+
+fn print_read_final_flag_for_enumerator(s: &mut Writer, enumerator: &RustEnumerator) {
+    let rds = enumerator
+        .members_in_struct()
+        .iter()
+        .filter_map(|member| RustObject::get_rust_definer_from_ty(member))
+        .collect::<Vec<_>>();
+    print_read_final_flag(s, &rds);
 }
 
 fn print_read_final_flag(s: &mut Writer, rds: &[RustDefiner]) {

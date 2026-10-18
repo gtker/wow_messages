@@ -4,6 +4,7 @@ use crate::error_printer::{
 use crate::file_info::FileInfo;
 use crate::parser::types::container::ContainerType;
 use crate::parser::types::definer::Definer;
+use crate::parser::types::if_statement::assign_flag_else_payload_names;
 use crate::parser::types::objects::conversion::container::{
     check_if_statement_operators, verify_and_set_members,
 };
@@ -73,7 +74,7 @@ pub(crate) fn parsed_container_to_container(
     let size_of_fields_before_size =
         size_of_fields_before(&p.name, &p, containers, definers, &p.members, &p.file_info);
 
-    let members = container::parsed_members_to_members(
+    let mut members = container::parsed_members_to_members(
         &p,
         p.members.clone(),
         containers,
@@ -81,6 +82,7 @@ pub(crate) fn parsed_container_to_container(
         p.tags(),
         size_of_fields_before_size,
     );
+    assign_flag_else_payload_names(&mut members);
 
     let rust_object_view = create_rust_object(&p, &members, containers, definers);
 

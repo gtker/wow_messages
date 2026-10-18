@@ -1,0 +1,200 @@
+#tag_all test "true";
+
+flag ConditionalPayloadFlag : u8 {
+    NONE = 0;
+    FIRST = 1;
+    SECOND = 2;
+    UNRELATED = 4;
+    SELECTED_FALLBACK_PAYLOAD_IF = 8;
+} {
+    versions = "1.12";
+}
+
+flag OuterPayloadFlag : u8 {
+    MAIN = 1;
+    OTHER = 2;
+} {
+    versions = "1.12";
+}
+
+flag InnerPayloadFlag : u8 {
+    ALPHA = 1;
+    BETA = 2;
+} {
+    versions = "1.12";
+}
+
+smsg FlagIfElsePayload = 0x00 {
+    ConditionalPayloadFlag flags;
+    if (flags & FIRST || flags & SECOND) {
+        u32 selected;
+    } else {
+        u16 fallback;
+    }
+    if (flags & UNRELATED) {
+        u8 unrelated;
+    }
+} {
+    versions = "1.12";
+}
+
+smsg FlagIfElseEmptyPayload = 0x01 {
+    ConditionalPayloadFlag flags;
+    if (flags & FIRST) {
+    } else {
+        u16 fallback;
+    }
+} {
+    versions = "1.12";
+}
+
+smsg FlagIfElseNestedPayload = 0x02 {
+    OuterPayloadFlag outer_flags;
+    if (outer_flags & MAIN) {
+        InnerPayloadFlag inner_flags;
+        if (inner_flags & ALPHA || inner_flags & BETA) {
+            u32 selected;
+        } else {
+            u16 fallback;
+        }
+    }
+} {
+    versions = "1.12";
+}
+
+smsg FlagIfElseZeroPredicatePayload = 0x03 {
+    ConditionalPayloadFlag flags;
+    if (flags & NONE) {
+        u8 selected;
+    } else {
+        u16 fallback;
+    }
+} {
+    versions = "1.12";
+}
+
+test FlagIfElseZeroPredicatePayload {
+    flags = NONE;
+    selected = 0xAA;
+} [
+    0x00, 0x06, /* size */
+    0x03, 0x00, /* opcode */
+    0x00, /* flags */
+    0xAA, /* selected */
+] {
+    versions = "1.12";
+}
+
+test FlagIfElseZeroPredicatePayload {
+    flags = UNRELATED;
+    fallback = 0x1234;
+} [
+    0x00, 0x07, /* size */
+    0x03, 0x00, /* opcode */
+    0x04, /* flags */
+    0x34, 0x12, /* fallback */
+] {
+    versions = "1.12";
+}
+
+smsg FlagIfElseNameCollisionPayload = 0x04 {
+    ConditionalPayloadFlag flags;
+    if (flags & FIRST || flags & SECOND) {
+        u32 selected;
+    } else {
+        u16 fallback;
+    }
+    u8 flags_selected_fallback_payload;
+} {
+    versions = "1.12";
+}
+
+smsg FlagIfElseReadLocalCollisionPayload = 0x05 {
+    ConditionalPayloadFlag flags;
+    if (flags & FIRST || flags & SECOND) {
+        u32 selected;
+    } else {
+        u16 fallback;
+    }
+    u8 flags_selected_fallback_payload_if;
+} {
+    versions = "1.12";
+}
+
+smsg FlagIfElseLegacyLocalCollisionPayload = 0x06 {
+    ConditionalPayloadFlag flags;
+    if (flags & FIRST || flags & SECOND) {
+        u32 selected;
+    } else {
+        u16 fallback;
+    }
+    if (flags & SELECTED_FALLBACK_PAYLOAD_IF) {
+        u8 legacy_selected;
+    }
+} {
+    versions = "1.12";
+}
+
+test FlagIfElsePayload {
+    flags = NONE;
+    fallback = 0xBEEF;
+} [
+    0x00, 0x07, /* size */
+    0x00, 0x00, /* opcode */
+    0x00, /* flags */
+    0xEF, 0xBE, /* fallback */
+] {
+    versions = "1.12";
+}
+
+test FlagIfElsePayload {
+    flags = FIRST;
+    selected = 0x11223344;
+} [
+    0x00, 0x09, /* size */
+    0x00, 0x00, /* opcode */
+    0x01, /* flags */
+    0x44, 0x33, 0x22, 0x11, /* selected */
+] {
+    versions = "1.12";
+}
+
+test FlagIfElsePayload {
+    flags = SECOND;
+    selected = 0x55667788;
+} [
+    0x00, 0x09, /* size */
+    0x00, 0x00, /* opcode */
+    0x02, /* flags */
+    0x88, 0x77, 0x66, 0x55, /* selected */
+] {
+    versions = "1.12";
+}
+
+test FlagIfElsePayload {
+    flags = FIRST | SECOND | UNRELATED;
+    selected = 0xAABBCCDD;
+    unrelated = 0x11;
+} [
+    0x00, 0x0A, /* size */
+    0x00, 0x00, /* opcode */
+    0x07, /* flags */
+    0xDD, 0xCC, 0xBB, 0xAA, /* selected */
+    0x11, /* unrelated */
+] {
+    versions = "1.12";
+}
+
+test FlagIfElsePayload {
+    flags = UNRELATED;
+    fallback = 0x1234;
+    unrelated = 0x22;
+} [
+    0x00, 0x08, /* size */
+    0x00, 0x00, /* opcode */
+    0x04, /* flags */
+    0x34, 0x12, /* fallback */
+    0x22, /* unrelated */
+] {
+    versions = "1.12";
+}

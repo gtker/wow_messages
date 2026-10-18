@@ -1,5 +1,6 @@
 use crate::file_utils::get_import_path;
 use crate::parser::types::container::{Container, ContainerType};
+use crate::parser::types::if_statement::{Equation, IfStatement};
 use crate::parser::types::objects::Objects;
 use crate::parser::types::sizes::Sizes;
 use crate::parser::types::ty::Type;
@@ -19,6 +20,38 @@ pub mod print_read;
 pub(crate) mod print_size;
 mod print_update_mask_struct;
 pub mod print_write;
+
+pub(crate) fn flag_condition_expression(
+    e: &Container,
+    statement: &IfStatement,
+    variable: &str,
+) -> String {
+    let first_enumerator = statement.flag_get_enumerator();
+    let rd = e
+        .rust_object()
+        .rust_definer_with_variable_name_and_enumerator(
+            statement.variable_name(),
+            &first_enumerator,
+        );
+    let values = match statement.equation() {
+        Equation::BitwiseAnd { values } => values,
+        Equation::Equals { .. } | Equation::NotEquals { .. } => unreachable!(),
+    };
+
+    values
+        .iter()
+        .map(|name| {
+            let enumerator = rd.get_enumerator(name);
+            let constant = format!("{}::{name}", rd.original_ty_name());
+            if enumerator.value().int() == 0 {
+                format!("({variable}.as_int() == {constant})")
+            } else {
+                format!("({variable}.as_int() & {constant}) != 0")
+            }
+        })
+        .collect::<Vec<_>>()
+        .join(" || ")
+}
 
 pub(crate) fn print_common_impls(s: &mut Writer, e: &Container, o: &Objects) {
     print_world_message_headers_and_constants(s, e);

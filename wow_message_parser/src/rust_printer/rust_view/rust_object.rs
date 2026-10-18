@@ -76,6 +76,7 @@ impl RustObject {
             is_simple,
             definer_type,
             is_elseif,
+            has_wire_discriminant,
             has_separate_if_statements,
             is_single_rust_definer,
         ) = match m.ty() {
@@ -86,9 +87,9 @@ impl RustObject {
                 int_ty,
                 is_simple,
                 is_elseif,
+                has_wire_discriminant,
                 separate_if_statements,
                 is_single_rust_definer,
-                ..
             } => (
                 ty_name,
                 original_ty_name,
@@ -97,6 +98,7 @@ impl RustObject {
                 is_simple,
                 DefinerType::Enum,
                 is_elseif,
+                *has_wire_discriminant,
                 separate_if_statements,
                 is_single_rust_definer,
             ),
@@ -115,6 +117,7 @@ impl RustObject {
                 is_simple,
                 DefinerType::Flag,
                 is_elseif,
+                true,
                 &false,
                 &false,
             ),
@@ -129,6 +132,7 @@ impl RustObject {
             *int_ty,
             *is_simple,
             *is_elseif,
+            has_wire_discriminant,
             original_ty_name.as_str(),
             *has_separate_if_statements,
             *is_single_rust_definer,
@@ -147,7 +151,10 @@ impl RustObject {
         v
     }
 
-    pub(crate) fn rust_definers_in_enumerator(&self, enumerator_name: &str) -> Vec<RustDefiner<'_>> {
+    pub(crate) fn rust_definers_in_enumerator(
+        &self,
+        enumerator_name: &str,
+    ) -> Vec<RustDefiner<'_>> {
         let mut v = Vec::new();
 
         fn inner<'a>(m: &'a RustMember, enumerator_name: &str, v: &mut Vec<RustDefiner<'a>>) {

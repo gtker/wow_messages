@@ -1,9 +1,13 @@
+use std::fs::read_to_string;
+use std::panic;
+use std::path::Path;
+
 use crate::error_printer::{
     BOTH_LOGIN_AND_WORLD_VERSIONS, COMPLEX_NOT_FOUND, DUPLICATE_DEFINER_VALUES,
     DUPLICATE_FIELD_NAMES, ENUM_HAS_BITWISE_AND, FLAG_HAS_EQUALS, INCORRECT_OPCODE_FOR_MESSAGE,
     INVALID_DEFINER_VALUE, INVALID_INTEGER_TYPE, INVALID_SELF_SIZE, MESSAGE_NOT_IN_INDEX,
     MISSING_ENUMERATOR, NON_MATCHING_IF_VARIABLES, NO_VERSIONS, OPCODE_HAS_INCORRECT_NAME,
-    OVERLAPPING_VERSIONS, RECURSIVE_TYPE, UNSUPPORTED_UPCAST,
+    OPTIONAL_IN_FLAG_IF_ELSE_PAYLOAD, OVERLAPPING_VERSIONS, RECURSIVE_TYPE, UNSUPPORTED_UPCAST,
 };
 use crate::file_utils::write_string_to_file;
 use crate::parser::parse_file;
@@ -12,9 +16,6 @@ use crate::path_utils::parser_test_directory;
 use crate::rust_printer::writer::Writer;
 use crate::rust_printer::{print_enum, print_flag, print_struct};
 use crate::{parse_objects_in_directory, print_message_stats};
-use std::fs::read_to_string;
-use std::panic;
-use std::path::Path;
 
 fn should_panic<F: FnOnce() -> R + panic::UnwindSafe, R>(f: F, error_code: i32) {
     let prev_hook = panic::take_hook();
@@ -219,6 +220,150 @@ fn simple_if_flag() {
     let s = print_struct(d, &o);
 
     tcheck(&s, "simple_if_flag");
+}
+
+#[test]
+fn flag_if_else_payload_rejects_optional_members() {
+    should_panic(
+        || {
+            must_err_load("optional_in_flag_if_else_payload.wowm");
+        },
+        OPTIONAL_IN_FLAG_IF_ELSE_PAYLOAD,
+    );
+}
+
+#[test]
+fn flag_if_else_payload() {
+    let objects = parse_objects_in_directory(Path::new("tests/flag_if_else_payload.wowm"));
+    let container = objects
+        .all_containers()
+        .find(|container| container.name() == "FlagIfElsePayload")
+        .unwrap();
+    let output = print_struct(container, &objects);
+
+    tcheck(&output, "flag_if_else_payload");
+}
+
+#[test]
+fn flag_if_else_payload_supports_empty_and_variable_size_variants() {
+    let objects = parse_objects_in_directory(Path::new("tests/flag_if_else_payload.wowm"));
+    let empty_payload = objects
+        .all_containers()
+        .find(|container| container.name() == "FlagIfElseEmptyPayload")
+        .unwrap();
+    let empty_output = print_struct(empty_payload, &objects);
+    assert!(empty_output
+        .inner()
+        .contains("FlagIfElseEmptyPayload_flags_fallback_payload::Selected"));
+    assert!(!empty_output
+        .inner()
+        .contains("FlagIfElseEmptyPayload_flags_fallback_payload::Selected {"));
+
+    let nested_payload = objects
+        .all_containers()
+        .find(|container| container.name() == "FlagIfElseNestedPayload")
+        .unwrap();
+    let outer_flags = nested_payload
+        .rust_object()
+        .members()
+        .iter()
+        .find(|member| member.name() == "outer_flags")
+        .unwrap();
+    assert!(outer_flags.is_constant().is_none(), "{outer_flags:#?}");
+
+    let nested_output = print_struct(nested_payload, &objects);
+    assert!(
+        nested_output
+            .inner()
+            .contains("inner_flags_selected_fallback_payload.size()"),
+        "{}",
+        nested_output.inner()
+    );
+}
+
+#[test]
+fn flag_if_else_zero_predicate_selects_only_zero_raw_flags() {
+    let objects = parse_objects_in_directory(Path::new("tests/flag_if_else_payload.wowm"));
+    let container = objects
+        .all_containers()
+        .find(|container| container.name() == "FlagIfElseZeroPredicatePayload")
+        .unwrap();
+    let output = print_struct(container, &objects);
+    let payload_type = "FlagIfElseZeroPredicatePayload_flags_selected_fallback_payload";
+
+    assert!(output
+        .inner()
+        .contains("(flags.as_int() == ConditionalPayloadFlag::NONE)"));
+
+    let cases = output
+        .inner()
+        .split("pub(crate) fn expected0()")
+        .nth(1)
+        .unwrap();
+    let zero_flags = cases.split("pub(crate) fn expected1()").next().unwrap();
+    let unrelated_flags = cases.split("pub(crate) fn expected1()").nth(1).unwrap();
+    assert!(zero_flags.contains(&format!("{payload_type}::Selected")));
+    assert!(unrelated_flags.contains(&format!("{payload_type}::Fallback")));
+}
+
+#[test]
+fn flag_if_else_payload_avoids_field_name_collisions() {
+    let objects = parse_objects_in_directory(Path::new("tests/flag_if_else_payload.wowm"));
+    let container = objects
+        .all_containers()
+        .find(|container| container.name() == "FlagIfElseNameCollisionPayload")
+        .unwrap();
+    let members = container.rust_object().members();
+    let mut names = std::collections::HashSet::new();
+    assert!(members.iter().all(|member| names.insert(member.name())));
+
+    let output = print_struct(container, &objects);
+    assert!(output
+        .inner()
+        .contains("pub flags_selected_fallback_payload: u8,"));
+    assert!(output
+        .inner()
+        .contains("pub flags_selected_fallback_payload_1:"));
+}
+
+#[test]
+fn flag_if_else_payload_avoids_read_local_collisions() {
+    let objects = parse_objects_in_directory(Path::new("tests/flag_if_else_payload.wowm"));
+    let container = objects
+        .all_containers()
+        .find(|container| container.name() == "FlagIfElseReadLocalCollisionPayload")
+        .unwrap();
+    let output = print_struct(container, &objects);
+
+    assert!(output
+        .inner()
+        .contains("pub flags_selected_fallback_payload_if: u8,"));
+    assert!(output
+        .inner()
+        .contains("pub flags_selected_fallback_payload_1:"));
+    assert!(output
+        .inner()
+        .contains("let flags_selected_fallback_payload_1_if = if"));
+}
+
+#[test]
+fn flag_if_else_payload_avoids_legacy_read_local_collisions() {
+    let objects = parse_objects_in_directory(Path::new("tests/flag_if_else_payload.wowm"));
+    let container = objects
+        .all_containers()
+        .find(|container| container.name() == "FlagIfElseLegacyLocalCollisionPayload")
+        .unwrap();
+    let output = print_struct(container, &objects);
+
+    assert!(output.inner().contains(
+        "let flags_selected_fallback_payload_if = if flags.is_selected_fallback_payload_if()"
+    ));
+    assert!(output
+        .inner()
+        .contains("let flags_selected_fallback_payload_1_if = if"));
+    assert!(output
+        .inner()
+        .contains("pub flags_selected_fallback_payload_1:"));
 }
 
 #[test]

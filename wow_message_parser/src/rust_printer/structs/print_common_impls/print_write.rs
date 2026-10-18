@@ -1,3 +1,4 @@
+use super::flag_condition_expression;
 use crate::parser::types::array::{Array, ArraySize, ArrayType};
 use crate::parser::types::container::Container;
 use crate::parser::types::if_statement::{Equation, IfStatement};
@@ -350,6 +351,20 @@ fn print_write_flag_if_statement(
     prefix: &str,
     postfix: &str,
 ) {
+    if let Some(payload_name) = statement.flag_else_payload_name() {
+        print_write_flag_else_payload(
+            s,
+            e,
+            o,
+            variable_prefix,
+            statement,
+            &payload_name,
+            prefix,
+            postfix,
+        );
+        return;
+    }
+
     s.open_curly(format!(
         "if let Some(if_statement) = &{variable_prefix}{variable}.{variant}",
         variable = statement.variable_name(),
@@ -392,6 +407,67 @@ fn print_write_flag_if_statement(
     }
 
     s.closing_curly_newline(); // if let Some(s)
+}
+
+fn print_write_flag_else_payload(
+    s: &mut Writer,
+    e: &Container,
+    o: &Objects,
+    variable_prefix: &str,
+    statement: &IfStatement,
+    payload_name: &str,
+    prefix: &str,
+    postfix: &str,
+) {
+    let payload_ty_name = format!("{}_{}", e.name(), payload_name);
+    let rd = e.rust_object().get_rust_definer(&payload_ty_name);
+    let flag = format!("{variable_prefix}{}", statement.variable_name());
+    let payload = format!("{variable_prefix}{payload_name}");
+    let condition = flag_condition_expression(e, statement, &flag);
+
+    s.open_curly(format!("match ({condition}, &{payload})"));
+    for (variant_name, members) in [
+        ("selected", statement.members()),
+        ("fallback", statement.else_members()),
+    ] {
+        let enumerator = rd.get_enumerator(variant_name);
+        let branch_condition = if variant_name == "selected" {
+            "true"
+        } else {
+            "false"
+        };
+        let fields = enumerator
+            .members_in_struct()
+            .iter()
+            .map(|member| member.name().to_string())
+            .collect::<Vec<_>>();
+
+        if fields.is_empty() {
+            s.open_curly(format!(
+                "({branch_condition}, {}::{}) =>",
+                rd.ty_name(),
+                enumerator.rust_name()
+            ));
+        } else {
+            s.open_curly(format!(
+                "({branch_condition}, {}::{}",
+                rd.ty_name(),
+                enumerator.rust_name()
+            ));
+            for field in fields {
+                s.wln(format!("{field},"));
+            }
+            s.closing_curly_with(") => {");
+            s.inc_indent();
+        }
+        for member in members {
+            print_write_field(s, e, o, member, "", prefix, postfix);
+        }
+        s.closing_curly();
+    }
+
+    s.wln("_ => return Err(std::io::Error::new(std::io::ErrorKind::InvalidData, \"flag conditional payload does not match flag bits\")),");
+    s.closing_curly_newline();
 }
 
 pub(crate) fn print_write_field(

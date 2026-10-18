@@ -1,4 +1,11 @@
-use crate::parser::types::definer::Definer;
+use rust_enumerator::RustEnumerator;
+use rust_member::RustMember;
+use rust_object::RustObject;
+use rust_optional::RustOptional;
+use rust_type::RustType;
+
+use crate::error_printer::optional_in_flag_if_else_payload;
+use crate::parser::types::definer::{Definer, DefinerValue};
 use crate::parser::types::if_statement::{Equation, IfStatement};
 use crate::parser::types::parsed::parsed_container::ParsedContainer;
 use crate::parser::types::parsed::parsed_struct_member::ParsedStructMember;
@@ -9,11 +16,6 @@ use crate::rust_printer::{
     field_name_to_rust_name, get_new_flag_type_name, get_new_type_name, get_optional_type_name,
     DefinerType,
 };
-use rust_enumerator::RustEnumerator;
-use rust_member::RustMember;
-use rust_object::RustObject;
-use rust_optional::RustOptional;
-use rust_type::RustType;
 
 pub(crate) mod rust_definer;
 pub(crate) mod rust_enumerator;
@@ -96,6 +98,7 @@ fn create_else_if_flag(
             int_ty: flag_int_ty,
             is_simple: false,
             is_elseif: true,
+            has_wire_discriminant: false,
             separate_if_statements: false,
             is_single_rust_definer: false,
         },
@@ -130,8 +133,13 @@ pub(crate) fn create_if_statement(
     containers: &[ParsedContainer],
     definers: &[Definer],
     e: &ParsedContainer,
-    current_scope: &mut [RustMember],
+    current_scope: &mut Vec<RustMember>,
 ) {
+    let flag_else_payload_name = statement.flag_else_payload_name();
+    if flag_else_payload_name.is_some() && statement.has_optional_members() {
+        optional_in_flag_if_else_payload(&e.file_info);
+    }
+
     let mut reversed = false;
     let mut main_enumerators = Vec::new();
 
@@ -179,6 +187,51 @@ pub(crate) fn create_if_statement(
         );
 
         else_enumerator_originals.push(m.clone());
+    }
+
+    if let Some(payload_name) = flag_else_payload_name {
+        let int_ty = match find_subject(current_scope, statement).ty() {
+            RustType::Flag { int_ty, .. } => *int_ty,
+            _ => unreachable!(),
+        };
+        let payload_ty_name = get_new_type_name(struct_ty_name, &payload_name);
+        let selected = RustEnumerator::new(
+            "selected".to_string(),
+            field_name_to_rust_name("selected"),
+            DefinerValue::from_str("0", &payload_ty_name, "selected", &e.file_info),
+            main_enumerator_members,
+            true,
+            main_enumerator_originals,
+            false,
+        );
+        let fallback = RustEnumerator::new(
+            "fallback".to_string(),
+            field_name_to_rust_name("fallback"),
+            DefinerValue::from_str("1", &payload_ty_name, "fallback", &e.file_info),
+            else_enumerator_members,
+            true,
+            else_enumerator_originals,
+            false,
+        );
+
+        current_scope.push(RustMember::new(
+            payload_name.clone(),
+            RustType::Enum {
+                ty_name: payload_name.clone(),
+                original_ty_name: payload_name,
+                enumerators: vec![selected, fallback],
+                int_ty,
+                is_simple: false,
+                is_elseif: false,
+                separate_if_statements: false,
+                is_single_rust_definer: false,
+                has_wire_discriminant: false,
+            },
+            struct_ty_name.to_string(),
+            true,
+            MemberTags::new(),
+        ));
+        return;
     }
 
     let subject = find_subject(current_scope, statement);
@@ -371,6 +424,7 @@ fn create_struct_member_definition(
                     int_ty,
                     is_simple: true,
                     is_elseif: false,
+                    has_wire_discriminant: true,
                     separate_if_statements: e
                         .enum_type_used_in_separate_if_statements(definer.name()),
                     is_single_rust_definer: false,

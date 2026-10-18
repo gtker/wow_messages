@@ -9,12 +9,12 @@ use crate::rust_printer::writer::Writer;
 pub(crate) fn print_rust_members_sizes(
     s: &mut Writer,
     members: &[RustMember],
-    is_elseif: Option<bool>,
+    has_wire_discriminant: Option<bool>,
     prefix: &str,
 ) {
     for (i, m) in members.iter().enumerate() {
-        let is_elseif = if let Some(b) = is_elseif { b } else { true };
-        if i == 0 && is_elseif {
+        let has_wire_discriminant = has_wire_discriminant.unwrap_or(false);
+        if i == 0 && !has_wire_discriminant {
             s.w("");
         } else {
             s.w("+ ");

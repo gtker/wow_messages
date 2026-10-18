@@ -1,0 +1,19 @@
+flag OptionalPayloadFlag : u8 {
+    FIRST = 1;
+    SECOND = 2;
+} {
+    versions = "1.12";
+}
+
+struct OptionalFlagPayload {
+    OptionalPayloadFlag flags;
+    if (flags & FIRST || flags & SECOND) {
+        optional selected {
+            u8 value;
+        }
+    } else {
+        u16 fallback;
+    }
+} {
+    versions = "1.12";
+}
