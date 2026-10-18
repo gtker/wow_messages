@@ -162965,14 +162965,6 @@
             "definer_usage": "RegularUse"
           },
           {
-            "object_name": "SMSG_SPELL_GO",
-            "definer_usage": "RegularUse"
-          },
-          {
-            "object_name": "SMSG_SPELL_START",
-            "definer_usage": "RegularUse"
-          },
-          {
             "object_name": "SpellLog",
             "definer_usage": "RegularUse"
           }
@@ -516425,28 +516417,10 @@
                 {
                   "struct_member_tag": "Definition",
                   "struct_member_content": {
-                    "name": "power",
+                    "name": "power_left",
                     "data_type": {
-                      "data_type_tag": "Enum",
-                      "type_name": "Power",
-                      "integer_type": "U32",
-                      "tags": {
-                        "version": {
-                          "version_type_tag": "world",
-                          "version_type": {
-                            "world_version_tag": "specific",
-                            "versions": [
-                              {
-                                "major": 3,
-                                "minor": null,
-                                "patch": null,
-                                "build": null
-                              }
-                            ]
-                          }
-                        }
-                      },
-                      "upcast": true
+                      "data_type_tag": "Integer",
+                      "integer_type": "U32"
                     },
                     "constant_value": null,
                     "used_as_size_in": null,
@@ -516682,10 +516656,9 @@
               ],
               "POWER_LEFT_SELF": [
                 {
-                  "name": "power",
+                  "name": "power_left",
                   "is_elseif_flag": false,
-                  "enum_part_of_separate_statements": false,
-                  "definer_type": "Enum"
+                  "enum_part_of_separate_statements": false
                 }
               ],
               "UNKNOWN_23": [
@@ -520841,28 +520814,10 @@
                 {
                   "struct_member_tag": "Definition",
                   "struct_member_content": {
-                    "name": "power",
+                    "name": "power_left",
                     "data_type": {
-                      "data_type_tag": "Enum",
-                      "type_name": "Power",
-                      "integer_type": "U32",
-                      "tags": {
-                        "version": {
-                          "version_type_tag": "world",
-                          "version_type": {
-                            "world_version_tag": "specific",
-                            "versions": [
-                              {
-                                "major": 3,
-                                "minor": null,
-                                "patch": null,
-                                "build": null
-                              }
-                            ]
-                          }
-                        }
-                      },
-                      "upcast": true
+                      "data_type_tag": "Integer",
+                      "integer_type": "U32"
                     },
                     "constant_value": null,
                     "used_as_size_in": null,
@@ -521325,10 +521280,9 @@
               ],
               "POWER_UPDATE": [
                 {
-                  "name": "power",
+                  "name": "power_left",
                   "is_elseif_flag": false,
-                  "enum_part_of_separate_statements": false,
-                  "definer_type": "Enum"
+                  "enum_part_of_separate_statements": false
                 }
               ],
               "RUNE_UPDATE": [

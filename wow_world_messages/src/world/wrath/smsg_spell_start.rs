@@ -2,7 +2,7 @@ use std::io::{Read, Write};
 
 use crate::Guid;
 use crate::wrath::{
-    CastFlags, Power, SpellCastTargetFlags, SpellCastTargets, Vector3d,
+    CastFlags, SpellCastTargetFlags, SpellCastTargets, Vector3d,
 };
 
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/spell/smsg_spell_start.wowm:34`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/spell/smsg_spell_start.wowm#L34):
@@ -16,7 +16,7 @@ use crate::wrath::{
 ///     u32 timer;
 ///     SpellCastTargets targets;
 ///     if (flags & POWER_LEFT_SELF) {
-///         (u32)Power power;
+///         u32 power_left;
 ///     }
 ///     if (flags & AMMO) {
 ///         u32 ammo_display_id;
@@ -69,11 +69,11 @@ impl SMSG_SPELL_START {
         let targets = SpellCastTargets::read(&mut r)?;
 
         let flags_power_left_self = if flags.is_power_left_self() {
-            // power: Power
-            let power = (crate::util::read_u32_le(&mut r)? as u8).try_into()?;
+            // power_left: u32
+            let power_left = crate::util::read_u32_le(&mut r)?;
 
             Some(SMSG_SPELL_START_CastFlags_PowerLeftSelf {
-                power,
+                power_left,
             })
         }
         else {
@@ -233,7 +233,7 @@ impl crate::Message for SMSG_SPELL_START {
 
         writeln!(s, "    }};").unwrap();
         if let Some(if_statement) = &self.flags.get_power_left_self() {
-            writeln!(s, "    power = {};", if_statement.power.as_test_case_value()).unwrap();
+            writeln!(s, "    power_left = {};", if_statement.power_left).unwrap();
         }
 
         if let Some(if_statement) = &self.flags.get_ammo() {
@@ -332,7 +332,7 @@ impl crate::Message for SMSG_SPELL_START {
 
         writeln!(s, "    /* targets: SpellCastTargets end */").unwrap();
         if let Some(if_statement) = &self.flags.get_power_left_self() {
-            crate::util::write_bytes(&mut s, &mut bytes, 4, "power", "    ");
+            crate::util::write_bytes(&mut s, &mut bytes, 4, "power_left", "    ");
         }
 
         if let Some(if_statement) = &self.flags.get_ammo() {
@@ -381,8 +381,8 @@ impl crate::Message for SMSG_SPELL_START {
         self.targets.write_into_vec(&mut w)?;
 
         if let Some(if_statement) = &self.flags.power_left_self {
-            // power: Power
-            w.write_all(&u32::from(if_statement.power.as_int()).to_le_bytes())?;
+            // power_left: u32
+            w.write_all(&if_statement.power_left.to_le_bytes())?;
 
         }
 
@@ -1308,7 +1308,7 @@ pub struct SMSG_SPELL_START_CastFlags_Ammo {
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct SMSG_SPELL_START_CastFlags_PowerLeftSelf {
-    pub power: Power,
+    pub power_left: u32,
 }
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]

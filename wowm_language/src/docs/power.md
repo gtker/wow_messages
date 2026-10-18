@@ -74,7 +74,5 @@ Used in:
 * [SMSG_PARTY_MEMBER_STATS_FULL](smsg_party_member_stats_full.md)
 * [SMSG_POWER_UPDATE](smsg_power_update.md)
 * [SMSG_SPELLENERGIZELOG](smsg_spellenergizelog.md)
-* [SMSG_SPELL_GO](smsg_spell_go.md)
-* [SMSG_SPELL_START](smsg_spell_start.md)
 * [SpellLog](spelllog.md)
 

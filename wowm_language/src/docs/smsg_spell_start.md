@@ -113,7 +113,7 @@ smsg SMSG_SPELL_START = 0x0131 {
     u32 timer;
     SpellCastTargets targets;
     if (flags & POWER_LEFT_SELF) {
-        (u32)Power power;
+        u32 power_left;
     }
     if (flags & AMMO) {
         u32 ammo_display_id;
@@ -152,7 +152,7 @@ If flags contains `POWER_LEFT_SELF`:
 
 | Offset | Size / Endianness | Type | Name | Comment |
 | ------ | ----------------- | ---- | ---- | ------- |
-| - | 4 / - | [Power](power.md) | power |  |
+| - | 4 / Little | u32 | power_left |  |
 
 If flags contains `AMMO`:
 

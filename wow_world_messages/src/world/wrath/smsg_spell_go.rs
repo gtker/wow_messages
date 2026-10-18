@@ -2,8 +2,8 @@ use std::io::{Read, Write};
 
 use crate::Guid;
 use crate::wrath::{
-    GameobjectCastFlags, Power, SpellCastTargetFlags, SpellCastTargets, SpellMiss, 
-    SpellMissInfo, Vector3d,
+    GameobjectCastFlags, SpellCastTargetFlags, SpellCastTargets, SpellMiss, SpellMissInfo, 
+    Vector3d,
 };
 
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/spell/smsg_spell_go.wowm:47`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/spell/smsg_spell_go.wowm#L47):
@@ -21,7 +21,7 @@ use crate::wrath::{
 ///     SpellMiss[amount_of_misses] misses;
 ///     SpellCastTargets targets;
 ///     if (flags & POWER_UPDATE) {
-///         (u32)Power power;
+///         u32 power_left;
 ///     }
 ///     if (flags & RUNE_UPDATE) {
 ///         u8 rune_mask_initial;
@@ -112,11 +112,11 @@ impl SMSG_SPELL_GO {
         let targets = SpellCastTargets::read(&mut r)?;
 
         let flags_power_update = if flags.is_power_update() {
-            // power: Power
-            let power = (crate::util::read_u32_le(&mut r)? as u8).try_into()?;
+            // power_left: u32
+            let power_left = crate::util::read_u32_le(&mut r)?;
 
             Some(SMSG_SPELL_GO_GameobjectCastFlags_PowerUpdate {
-                power,
+                power_left,
             })
         }
         else {
@@ -359,7 +359,7 @@ impl crate::Message for SMSG_SPELL_GO {
 
         writeln!(s, "    }};").unwrap();
         if let Some(if_statement) = &self.flags.get_power_update() {
-            writeln!(s, "    power = {};", if_statement.power.as_test_case_value()).unwrap();
+            writeln!(s, "    power_left = {};", if_statement.power_left).unwrap();
         }
 
         if let Some(if_statement) = &self.flags.get_rune_update() {
@@ -505,7 +505,7 @@ impl crate::Message for SMSG_SPELL_GO {
 
         writeln!(s, "    /* targets: SpellCastTargets end */").unwrap();
         if let Some(if_statement) = &self.flags.get_power_update() {
-            crate::util::write_bytes(&mut s, &mut bytes, 4, "power", "    ");
+            crate::util::write_bytes(&mut s, &mut bytes, 4, "power_left", "    ");
         }
 
         if let Some(if_statement) = &self.flags.get_rune_update() {
@@ -585,8 +585,8 @@ impl crate::Message for SMSG_SPELL_GO {
         self.targets.write_into_vec(&mut w)?;
 
         if let Some(if_statement) = &self.flags.power_update {
-            // power: Power
-            w.write_all(&u32::from(if_statement.power.as_int()).to_le_bytes())?;
+            // power_left: u32
+            w.write_all(&if_statement.power_left.to_le_bytes())?;
 
         }
 
@@ -1321,7 +1321,7 @@ pub struct SMSG_SPELL_GO_GameobjectCastFlags_DestLocation {
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct SMSG_SPELL_GO_GameobjectCastFlags_PowerUpdate {
-    pub power: Power,
+    pub power_left: u32,
 }
 
 #[derive(Debug, Clone, Copy, PartialEq, PartialOrd, Default)]

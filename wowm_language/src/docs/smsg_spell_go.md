@@ -129,7 +129,7 @@ smsg SMSG_SPELL_GO = 0x0132 {
     SpellMiss[amount_of_misses] misses;
     SpellCastTargets targets;
     if (flags & POWER_UPDATE) {
-        (u32)Power power;
+        u32 power_left;
     }
     if (flags & RUNE_UPDATE) {
         u8 rune_mask_initial;
@@ -184,7 +184,7 @@ If flags contains `POWER_UPDATE`:
 
 | Offset | Size / Endianness | Type | Name | Comment |
 | ------ | ----------------- | ---- | ---- | ------- |
-| - | 4 / - | [Power](power.md) | power |  |
+| - | 4 / Little | u32 | power_left |  |
 
 If flags contains `RUNE_UPDATE`:
 
