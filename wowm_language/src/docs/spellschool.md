@@ -40,5 +40,4 @@ Used in:
 * [SMSG_SPELLDAMAGESHIELD](smsg_spelldamageshield.md)
 * [SMSG_SPELLNONMELEEDAMAGELOG](smsg_spellnonmeleedamagelog.md)
 * [SMSG_SPELLNONMELEEDAMAGELOG](smsg_spellnonmeleedamagelog.md)
-* [SMSG_SPELLNONMELEEDAMAGELOG](smsg_spellnonmeleedamagelog.md)
 

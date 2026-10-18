@@ -24,7 +24,7 @@ smsg SMSG_SPELLNONMELEEDAMAGELOG = 0x0250 {
     Spell spell;
     u32 damage;
     u32 overkill;
-    SpellSchool school;
+    u8 school_mask;
     u32 absorbed_damage;
     /// cmangos/mangoszero/vmangos: sent as int32
     u32 resisted;

@@ -620752,40 +620752,10 @@
           {
             "struct_member_tag": "Definition",
             "struct_member_content": {
-              "name": "school",
+              "name": "school_mask",
               "data_type": {
-                "data_type_tag": "Enum",
-                "type_name": "SpellSchool",
-                "integer_type": "U8",
-                "tags": {
-                  "version": {
-                    "version_type_tag": "world",
-                    "version_type": {
-                      "world_version_tag": "specific",
-                      "versions": [
-                        {
-                          "major": 1,
-                          "minor": null,
-                          "patch": null,
-                          "build": null
-                        },
-                        {
-                          "major": 2,
-                          "minor": null,
-                          "patch": null,
-                          "build": null
-                        },
-                        {
-                          "major": 3,
-                          "minor": null,
-                          "patch": null,
-                          "build": null
-                        }
-                      ]
-                    }
-                  }
-                },
-                "upcast": false
+                "data_type_tag": "Integer",
+                "integer_type": "U8"
               },
               "constant_value": null,
               "used_as_size_in": null,
@@ -620946,7 +620916,7 @@
           "start_position": 21,
           "end_position": 40
         },
-        "only_has_io_error": false,
+        "only_has_io_error": true,
         "has_manual_size_field": false,
         "manual_size_subtraction": null,
         "prepared_objects": [
@@ -620976,10 +620946,9 @@
             "enum_part_of_separate_statements": false
           },
           {
-            "name": "school",
+            "name": "school_mask",
             "is_elseif_flag": false,
-            "enum_part_of_separate_statements": false,
-            "definer_type": "Enum"
+            "enum_part_of_separate_statements": false
           },
           {
             "name": "absorbed_damage",

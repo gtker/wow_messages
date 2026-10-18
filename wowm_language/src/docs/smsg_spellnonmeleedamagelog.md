@@ -110,7 +110,7 @@ smsg SMSG_SPELLNONMELEEDAMAGELOG = 0x0250 {
     Spell spell;
     u32 damage;
     u32 overkill;
-    SpellSchool school;
+    u8 school_mask;
     u32 absorbed_damage;
     u32 resisted;
     Bool periodic_log;
@@ -140,7 +140,7 @@ SMSG have a header of 4 bytes.
 | - | 4 / Little | Spell | spell |  |
 | - | 4 / Little | u32 | damage |  |
 | - | 4 / Little | u32 | overkill |  |
-| - | 1 / - | [SpellSchool](spellschool.md) | school |  |
+| - | 1 / - | u8 | school_mask |  |
 | - | 4 / Little | u32 | absorbed_damage |  |
 | - | 4 / Little | u32 | resisted | cmangos/mangoszero/vmangos: sent as int32 |
 | - | 1 / - | Bool | periodic_log | cmangos/mangoszero/vmangos: if 1, then client show spell name (example: %s's ranged shot hit %s for %u school or %s suffers %u school damage from %s's spell_name |

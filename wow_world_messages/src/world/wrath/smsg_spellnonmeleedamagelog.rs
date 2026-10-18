@@ -1,9 +1,7 @@
 use std::io::{Read, Write};
 
 use crate::Guid;
-use crate::wrath::{
-    HitInfo, SpellSchool,
-};
+use crate::wrath::HitInfo;
 
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/spell/smsg_spellnonmeleedamagelog.wowm:21`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/spell/smsg_spellnonmeleedamagelog.wowm#L21):
 /// ```text
@@ -13,7 +11,7 @@ use crate::wrath::{
 ///     Spell spell;
 ///     u32 damage;
 ///     u32 overkill;
-///     SpellSchool school;
+///     u8 school_mask;
 ///     u32 absorbed_damage;
 ///     u32 resisted;
 ///     Bool periodic_log;
@@ -30,7 +28,7 @@ pub struct SMSG_SPELLNONMELEEDAMAGELOG {
     pub spell: u32,
     pub damage: u32,
     pub overkill: u32,
-    pub school: SpellSchool,
+    pub school_mask: u8,
     pub absorbed_damage: u32,
     /// cmangos/mangoszero/vmangos: sent as int32
     pub resisted: u32,
@@ -65,8 +63,8 @@ impl SMSG_SPELLNONMELEEDAMAGELOG {
         // overkill: u32
         let overkill = crate::util::read_u32_le(&mut r)?;
 
-        // school: SpellSchool
-        let school = crate::util::read_u8_le(&mut r)?.try_into()?;
+        // school_mask: u8
+        let school_mask = crate::util::read_u8_le(&mut r)?;
 
         // absorbed_damage: u32
         let absorbed_damage = crate::util::read_u32_le(&mut r)?;
@@ -95,7 +93,7 @@ impl SMSG_SPELLNONMELEEDAMAGELOG {
             spell,
             damage,
             overkill,
-            school,
+            school_mask,
             absorbed_damage,
             resisted,
             periodic_log,
@@ -130,7 +128,7 @@ impl crate::Message for SMSG_SPELLNONMELEEDAMAGELOG {
         writeln!(s, "    spell = {};", self.spell).unwrap();
         writeln!(s, "    damage = {};", self.damage).unwrap();
         writeln!(s, "    overkill = {};", self.overkill).unwrap();
-        writeln!(s, "    school = {};", self.school.as_test_case_value()).unwrap();
+        writeln!(s, "    school_mask = {};", self.school_mask).unwrap();
         writeln!(s, "    absorbed_damage = {};", self.absorbed_damage).unwrap();
         writeln!(s, "    resisted = {};", self.resisted).unwrap();
         writeln!(s, "    periodic_log = {};", if self.periodic_log { "TRUE" } else { "FALSE" }).unwrap();
@@ -154,7 +152,7 @@ impl crate::Message for SMSG_SPELLNONMELEEDAMAGELOG {
         crate::util::write_bytes(&mut s, &mut bytes, 4, "spell", "    ");
         crate::util::write_bytes(&mut s, &mut bytes, 4, "damage", "    ");
         crate::util::write_bytes(&mut s, &mut bytes, 4, "overkill", "    ");
-        crate::util::write_bytes(&mut s, &mut bytes, 1, "school", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, 1, "school_mask", "    ");
         crate::util::write_bytes(&mut s, &mut bytes, 4, "absorbed_damage", "    ");
         crate::util::write_bytes(&mut s, &mut bytes, 4, "resisted", "    ");
         crate::util::write_bytes(&mut s, &mut bytes, 1, "periodic_log", "    ");
@@ -191,8 +189,8 @@ impl crate::Message for SMSG_SPELLNONMELEEDAMAGELOG {
         // overkill: u32
         w.write_all(&self.overkill.to_le_bytes())?;
 
-        // school: SpellSchool
-        w.write_all(&(self.school.as_int().to_le_bytes()))?;
+        // school_mask: u8
+        w.write_all(&self.school_mask.to_le_bytes())?;
 
         // absorbed_damage: u32
         w.write_all(&self.absorbed_damage.to_le_bytes())?;
@@ -234,7 +232,7 @@ impl SMSG_SPELLNONMELEEDAMAGELOG {
         + 4 // spell: Spell
         + 4 // damage: u32
         + 4 // overkill: u32
-        + 1 // school: SpellSchool
+        + 1 // school_mask: u8
         + 4 // absorbed_damage: u32
         + 4 // resisted: u32
         + 1 // periodic_log: Bool
