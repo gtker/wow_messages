@@ -928,6 +928,7 @@
 - [Mail](docs/mail.md)
 - [MiniMoveMessage](docs/minimovemessage.md)
 - [MoneyLogItem](docs/moneylogitem.md)
+- [MonsterMoveDataVariant](docs/monstermovedatavariant.md)
 - [MonsterMove](docs/monstermove.md)
 - [MovementBlock](docs/movementblock.md)
 - [MovementInfo](docs/movementinfo.md)

@@ -3,6 +3,7 @@ use crate::parser::types::container::Container;
 use crate::parser::types::if_statement::{Equation, IfStatement};
 use crate::parser::types::struct_member::{StructMember, StructMemberDefinition};
 use crate::parser::types::ty::Type;
+use crate::rust_printer::rust_view::conditional_union::ConditionalUnion;
 use crate::rust_printer::structs::test_case_string;
 use crate::rust_printer::writer::Writer;
 use crate::rust_printer::DefinerType;
@@ -10,11 +11,39 @@ use crate::rust_printer::DefinerType;
 pub(crate) fn print_members(s: &mut Writer, e: &Container, variable_prefix: &str, prefix: &str) {
     s.wln("// Members");
 
+    if let Some(union) = e.rust_object().conditional_union() {
+        print_conditional_union_members(s, e, union, variable_prefix, prefix);
+        s.newline();
+        return;
+    }
+
     for m in e.members() {
         print_struct_member(s, e, m, variable_prefix, prefix);
     }
 
     s.newline();
+}
+
+fn print_conditional_union_members(
+    s: &mut Writer,
+    e: &Container,
+    union: &ConditionalUnion,
+    variable_prefix: &str,
+    prefix: &str,
+) {
+    let variable = variable_prefix.strip_suffix('.').unwrap_or(variable_prefix);
+    s.open_curly(format!("match {variable}"));
+    for (branch, members) in [
+        (union.linear(), union.linear_members()),
+        (union.full(), union.full_members()),
+    ] {
+        s.open_curly(format!("{}::{}(data) =>", e.name(), branch.variant_name()));
+        for member in union.common_members().iter().chain(members) {
+            print_struct_member(s, e, member, "data.", prefix);
+        }
+        s.closing_curly_with(",");
+    }
+    s.closing_curly();
 }
 
 fn print_struct_member(

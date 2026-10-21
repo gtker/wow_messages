@@ -29,6 +29,7 @@ Used in:
 * [Character](character.md)
 * [MSG_CORPSE_QUERY_Server](msg_corpse_query_server.md)
 * [MonsterMove](monstermove.md)
+* [MonsterMoveDataVariant](monstermovedatavariant.md)
 * [MovementBlock](movementblock.md)
 * [SMSG_BINDPOINTUPDATE](smsg_bindpointupdate.md)
 * [SMSG_DEATH_RELEASE_LOC](smsg_death_release_loc.md)

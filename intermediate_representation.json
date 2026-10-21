@@ -46133,15 +46133,11 @@
         },
         "objects_used_in": [
           {
+            "object_name": "MonsterMoveDataVariant",
+            "definer_usage": "InIfStatement"
+          },
+          {
             "object_name": "MovementBlock",
-            "definer_usage": "InIfStatement"
-          },
-          {
-            "object_name": "SMSG_MONSTER_MOVE",
-            "definer_usage": "InIfStatement"
-          },
-          {
-            "object_name": "SMSG_MONSTER_MOVE_TRANSPORT",
             "definer_usage": "InIfStatement"
           }
         ],
@@ -230078,6 +230074,503 @@
           },
           {
             "name": "timestamp",
+            "is_elseif_flag": false,
+            "enum_part_of_separate_statements": false
+          }
+        ],
+        "optional": null
+      },
+      {
+        "name": "MonsterMoveDataVariant",
+        "object_type": {
+          "container_type_tag": "Struct"
+        },
+        "sizes": {
+          "constant_sized": false,
+          "minimum_size": 12,
+          "maximum_size": 4294967295
+        },
+        "members": [
+          {
+            "struct_member_tag": "Definition",
+            "struct_member_content": {
+              "name": "spline_flags",
+              "data_type": {
+                "data_type_tag": "Flag",
+                "type_name": "SplineFlag",
+                "integer_type": "U32",
+                "tags": {
+                  "version": {
+                    "version_type_tag": "world",
+                    "version_type": {
+                      "world_version_tag": "specific",
+                      "versions": [
+                        {
+                          "major": 3,
+                          "minor": 3,
+                          "patch": 5,
+                          "build": null
+                        }
+                      ]
+                    }
+                  }
+                },
+                "upcast": false
+              },
+              "constant_value": null,
+              "used_as_size_in": null,
+              "size_of_fields_before_size": null,
+              "used_in_if": true,
+              "tags": {
+                "comment": "DONE, final-facing, and animation-ID bits are omitted from wire flags."
+              }
+            }
+          },
+          {
+            "struct_member_tag": "IfStatement",
+            "struct_member_content": {
+              "variable_name": "spline_flags",
+              "values": [
+                "ANIMATION"
+              ],
+              "members": [
+                {
+                  "struct_member_tag": "Definition",
+                  "struct_member_content": {
+                    "name": "animation_id",
+                    "data_type": {
+                      "data_type_tag": "Integer",
+                      "integer_type": "U8"
+                    },
+                    "constant_value": null,
+                    "used_as_size_in": null,
+                    "size_of_fields_before_size": null,
+                    "used_in_if": false,
+                    "tags": {}
+                  }
+                },
+                {
+                  "struct_member_tag": "Definition",
+                  "struct_member_content": {
+                    "name": "animation_start_time",
+                    "data_type": {
+                      "data_type_tag": "Integer",
+                      "integer_type": "U32"
+                    },
+                    "constant_value": null,
+                    "used_as_size_in": null,
+                    "size_of_fields_before_size": null,
+                    "used_in_if": false,
+                    "tags": {}
+                  }
+                }
+              ],
+              "else_if_statements": [],
+              "original_type": {
+                "data_type_tag": "Flag",
+                "type_name": "SplineFlag",
+                "integer_type": "U32",
+                "tags": {
+                  "version": {
+                    "version_type_tag": "world",
+                    "version_type": {
+                      "world_version_tag": "specific",
+                      "versions": [
+                        {
+                          "major": 3,
+                          "minor": 3,
+                          "patch": 5,
+                          "build": null
+                        }
+                      ]
+                    }
+                  }
+                },
+                "upcast": false
+              },
+              "definer_type": "Flag",
+              "part_of_separate_if_statement": false,
+              "is_else_if_flag": false
+            }
+          },
+          {
+            "struct_member_tag": "Definition",
+            "struct_member_content": {
+              "name": "duration",
+              "data_type": {
+                "data_type_tag": "Integer",
+                "integer_type": "U32"
+              },
+              "constant_value": null,
+              "used_as_size_in": null,
+              "size_of_fields_before_size": null,
+              "used_in_if": false,
+              "tags": {}
+            }
+          },
+          {
+            "struct_member_tag": "IfStatement",
+            "struct_member_content": {
+              "variable_name": "spline_flags",
+              "values": [
+                "PARABOLIC"
+              ],
+              "members": [
+                {
+                  "struct_member_tag": "Definition",
+                  "struct_member_content": {
+                    "name": "vertical_acceleration",
+                    "data_type": {
+                      "data_type_tag": "FloatingPoint"
+                    },
+                    "constant_value": null,
+                    "used_as_size_in": null,
+                    "size_of_fields_before_size": null,
+                    "used_in_if": false,
+                    "tags": {}
+                  }
+                },
+                {
+                  "struct_member_tag": "Definition",
+                  "struct_member_content": {
+                    "name": "effect_start_time",
+                    "data_type": {
+                      "data_type_tag": "Integer",
+                      "integer_type": "U32"
+                    },
+                    "constant_value": null,
+                    "used_as_size_in": null,
+                    "size_of_fields_before_size": null,
+                    "used_in_if": false,
+                    "tags": {}
+                  }
+                }
+              ],
+              "else_if_statements": [],
+              "original_type": {
+                "data_type_tag": "Flag",
+                "type_name": "SplineFlag",
+                "integer_type": "U32",
+                "tags": {
+                  "version": {
+                    "version_type_tag": "world",
+                    "version_type": {
+                      "world_version_tag": "specific",
+                      "versions": [
+                        {
+                          "major": 3,
+                          "minor": 3,
+                          "patch": 5,
+                          "build": null
+                        }
+                      ]
+                    }
+                  }
+                },
+                "upcast": false
+              },
+              "definer_type": "Flag",
+              "part_of_separate_if_statement": false,
+              "is_else_if_flag": false
+            }
+          },
+          {
+            "struct_member_tag": "IfStatement",
+            "struct_member_content": {
+              "variable_name": "spline_flags",
+              "values": [
+                "FLYING",
+                "CATMULLROM"
+              ],
+              "members": [
+                {
+                  "struct_member_tag": "Definition",
+                  "struct_member_content": {
+                    "name": "full_spline_count",
+                    "data_type": {
+                      "data_type_tag": "Integer",
+                      "integer_type": "U32"
+                    },
+                    "constant_value": null,
+                    "used_as_size_in": "full_splines",
+                    "size_of_fields_before_size": null,
+                    "used_in_if": false,
+                    "tags": {}
+                  }
+                },
+                {
+                  "struct_member_tag": "Definition",
+                  "struct_member_content": {
+                    "name": "full_splines",
+                    "data_type": {
+                      "data_type_tag": "Array",
+                      "inner_type": {
+                        "array_type_tag": "Struct",
+                        "struct_data": {
+                          "name": "Vector3d",
+                          "object_type": {
+                            "container_type_tag": "Struct"
+                          },
+                          "sizes": {
+                            "constant_sized": true,
+                            "minimum_size": 12,
+                            "maximum_size": 12
+                          },
+                          "members": [
+                            {
+                              "struct_member_tag": "Definition",
+                              "struct_member_content": {
+                                "name": "x",
+                                "data_type": {
+                                  "data_type_tag": "FloatingPoint"
+                                },
+                                "constant_value": null,
+                                "used_as_size_in": null,
+                                "size_of_fields_before_size": null,
+                                "used_in_if": false,
+                                "tags": {}
+                              }
+                            },
+                            {
+                              "struct_member_tag": "Definition",
+                              "struct_member_content": {
+                                "name": "y",
+                                "data_type": {
+                                  "data_type_tag": "FloatingPoint"
+                                },
+                                "constant_value": null,
+                                "used_as_size_in": null,
+                                "size_of_fields_before_size": null,
+                                "used_in_if": false,
+                                "tags": {}
+                              }
+                            },
+                            {
+                              "struct_member_tag": "Definition",
+                              "struct_member_content": {
+                                "name": "z",
+                                "data_type": {
+                                  "data_type_tag": "FloatingPoint"
+                                },
+                                "constant_value": null,
+                                "used_as_size_in": null,
+                                "size_of_fields_before_size": null,
+                                "used_in_if": false,
+                                "tags": {}
+                              }
+                            }
+                          ],
+                          "tags": {
+                            "version": {
+                              "version_type_tag": "world",
+                              "version_type": {
+                                "world_version_tag": "all"
+                              }
+                            }
+                          },
+                          "tests": [],
+                          "file_info": {
+                            "file_name": "wow_message_parser/wowm/world/vector.wowm",
+                            "start_position": 11,
+                            "end_position": 17
+                          },
+                          "only_has_io_error": true,
+                          "has_manual_size_field": false,
+                          "manual_size_subtraction": null,
+                          "prepared_objects": [
+                            {
+                              "name": "x",
+                              "is_elseif_flag": false,
+                              "enum_part_of_separate_statements": false
+                            },
+                            {
+                              "name": "y",
+                              "is_elseif_flag": false,
+                              "enum_part_of_separate_statements": false
+                            },
+                            {
+                              "name": "z",
+                              "is_elseif_flag": false,
+                              "enum_part_of_separate_statements": false
+                            }
+                          ],
+                          "optional": null
+                        }
+                      },
+                      "size": {
+                        "array_size_tag": "Variable",
+                        "size": "full_spline_count"
+                      },
+                      "compressed": false
+                    },
+                    "constant_value": null,
+                    "used_as_size_in": null,
+                    "size_of_fields_before_size": null,
+                    "used_in_if": false,
+                    "tags": {}
+                  }
+                }
+              ],
+              "else_if_statements": [
+                {
+                  "variable_name": "spline_flags",
+                  "values": [
+                    "NONE",
+                    "DONE",
+                    "FALLING",
+                    "NO_SPLINE",
+                    "PARABOLIC",
+                    "WALK_MODE",
+                    "ORIENTATION_FIXED",
+                    "FINAL_POINT",
+                    "FINAL_TARGET",
+                    "FINAL_ANGLE",
+                    "CYCLIC",
+                    "ENTER_CYCLE",
+                    "ANIMATION",
+                    "FROZEN",
+                    "TRANSPORT_ENTER",
+                    "TRANSPORT_EXIT",
+                    "UNKNOWN7",
+                    "UNKNOWN8",
+                    "ORIENTATION_INVERSED",
+                    "UNKNOWN10",
+                    "UNKNOWN11",
+                    "UNKNOWN12",
+                    "UNKNOWN13"
+                  ],
+                  "members": [
+                    {
+                      "struct_member_tag": "Definition",
+                      "struct_member_content": {
+                        "name": "splines",
+                        "data_type": {
+                          "data_type_tag": "MonsterMoveSpline"
+                        },
+                        "constant_value": null,
+                        "used_as_size_in": null,
+                        "size_of_fields_before_size": null,
+                        "used_in_if": false,
+                        "tags": {}
+                      }
+                    }
+                  ],
+                  "else_if_statements": [],
+                  "original_type": {
+                    "data_type_tag": "Flag",
+                    "type_name": "SplineFlag",
+                    "integer_type": "U32",
+                    "tags": {
+                      "version": {
+                        "version_type_tag": "world",
+                        "version_type": {
+                          "world_version_tag": "specific",
+                          "versions": [
+                            {
+                              "major": 3,
+                              "minor": 3,
+                              "patch": 5,
+                              "build": null
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    "upcast": false
+                  },
+                  "definer_type": "Flag",
+                  "part_of_separate_if_statement": false,
+                  "is_else_if_flag": false
+                }
+              ],
+              "original_type": {
+                "data_type_tag": "Flag",
+                "type_name": "SplineFlag",
+                "integer_type": "U32",
+                "tags": {
+                  "version": {
+                    "version_type_tag": "world",
+                    "version_type": {
+                      "world_version_tag": "specific",
+                      "versions": [
+                        {
+                          "major": 3,
+                          "minor": 3,
+                          "patch": 5,
+                          "build": null
+                        }
+                      ]
+                    }
+                  }
+                },
+                "upcast": false
+              },
+              "definer_type": "Flag",
+              "part_of_separate_if_statement": false,
+              "is_else_if_flag": false
+            }
+          }
+        ],
+        "tags": {
+          "version": {
+            "version_type_tag": "world",
+            "version_type": {
+              "world_version_tag": "specific",
+              "versions": [
+                {
+                  "major": 3,
+                  "minor": 3,
+                  "patch": 5,
+                  "build": null
+                }
+              ]
+            }
+          }
+        },
+        "tests": [],
+        "file_info": {
+          "file_name": "wow_message_parser/wowm/world/movement/smsg/smsg_monster_move.wowm",
+          "start_position": 31,
+          "end_position": 51
+        },
+        "only_has_io_error": false,
+        "has_manual_size_field": false,
+        "manual_size_subtraction": null,
+        "prepared_objects": [
+          {
+            "name": "spline_flags",
+            "enumerators": {
+              "ANIMATION": [
+                {
+                  "name": "animation_id",
+                  "is_elseif_flag": false,
+                  "enum_part_of_separate_statements": false
+                },
+                {
+                  "name": "animation_start_time",
+                  "is_elseif_flag": false,
+                  "enum_part_of_separate_statements": false
+                }
+              ],
+              "PARABOLIC": [
+                {
+                  "name": "effect_start_time",
+                  "is_elseif_flag": false,
+                  "enum_part_of_separate_statements": false
+                },
+                {
+                  "name": "vertical_acceleration",
+                  "is_elseif_flag": false,
+                  "enum_part_of_separate_statements": false
+                }
+              ]
+            },
+            "is_elseif_flag": false,
+            "enum_part_of_separate_statements": false,
+            "definer_type": "Flag"
+          },
+          {
+            "name": "duration",
             "is_elseif_flag": false,
             "enum_part_of_separate_statements": false
           }
@@ -450996,7 +451489,7 @@
         },
         "sizes": {
           "constant_sized": false,
-          "minimum_size": 31,
+          "minimum_size": 19,
           "maximum_size": 4294967295
         },
         "members": [
@@ -451276,7 +451769,7 @@
                     "upcast": false
                   },
                   "definer_type": "Enum",
-                  "part_of_separate_if_statement": false,
+                  "part_of_separate_if_statement": true,
                   "is_else_if_flag": false
                 },
                 {
@@ -451426,7 +451919,7 @@
                     "upcast": false
                   },
                   "definer_type": "Enum",
-                  "part_of_separate_if_statement": false,
+                  "part_of_separate_if_statement": true,
                   "is_else_if_flag": false
                 }
               ],
@@ -451465,73 +451958,524 @@
                 "upcast": false
               },
               "definer_type": "Enum",
-              "part_of_separate_if_statement": false,
+              "part_of_separate_if_statement": true,
               "is_else_if_flag": false
-            }
-          },
-          {
-            "struct_member_tag": "Definition",
-            "struct_member_content": {
-              "name": "spline_flags",
-              "data_type": {
-                "data_type_tag": "Flag",
-                "type_name": "SplineFlag",
-                "integer_type": "U32",
-                "tags": {
-                  "version": {
-                    "version_type_tag": "world",
-                    "version_type": {
-                      "world_version_tag": "specific",
-                      "versions": [
-                        {
-                          "major": 3,
-                          "minor": 3,
-                          "patch": 5,
-                          "build": null
-                        }
-                      ]
-                    }
-                  }
-                },
-                "upcast": false
-              },
-              "constant_value": null,
-              "used_as_size_in": null,
-              "size_of_fields_before_size": null,
-              "used_in_if": true,
-              "tags": {}
             }
           },
           {
             "struct_member_tag": "IfStatement",
             "struct_member_content": {
-              "variable_name": "spline_flags",
+              "variable_name": "move_type",
               "values": [
-                "ENTER_CYCLE"
+                "NORMAL",
+                "FACING_SPOT",
+                "FACING_TARGET",
+                "FACING_ANGLE"
               ],
               "members": [
                 {
                   "struct_member_tag": "Definition",
                   "struct_member_content": {
-                    "name": "animation_id",
+                    "name": "movement",
                     "data_type": {
-                      "data_type_tag": "Integer",
-                      "integer_type": "U32"
-                    },
-                    "constant_value": null,
-                    "used_as_size_in": null,
-                    "size_of_fields_before_size": null,
-                    "used_in_if": false,
-                    "tags": {}
-                  }
-                },
-                {
-                  "struct_member_tag": "Definition",
-                  "struct_member_content": {
-                    "name": "animation_start_time",
-                    "data_type": {
-                      "data_type_tag": "Integer",
-                      "integer_type": "U32"
+                      "data_type_tag": "Struct",
+                      "struct_data": {
+                        "name": "MonsterMoveDataVariant",
+                        "object_type": {
+                          "container_type_tag": "Struct"
+                        },
+                        "sizes": {
+                          "constant_sized": false,
+                          "minimum_size": 12,
+                          "maximum_size": 4294967295
+                        },
+                        "members": [
+                          {
+                            "struct_member_tag": "Definition",
+                            "struct_member_content": {
+                              "name": "spline_flags",
+                              "data_type": {
+                                "data_type_tag": "Flag",
+                                "type_name": "SplineFlag",
+                                "integer_type": "U32",
+                                "tags": {
+                                  "version": {
+                                    "version_type_tag": "world",
+                                    "version_type": {
+                                      "world_version_tag": "specific",
+                                      "versions": [
+                                        {
+                                          "major": 3,
+                                          "minor": 3,
+                                          "patch": 5,
+                                          "build": null
+                                        }
+                                      ]
+                                    }
+                                  }
+                                },
+                                "upcast": false
+                              },
+                              "constant_value": null,
+                              "used_as_size_in": null,
+                              "size_of_fields_before_size": null,
+                              "used_in_if": true,
+                              "tags": {
+                                "comment": "DONE, final-facing, and animation-ID bits are omitted from wire flags."
+                              }
+                            }
+                          },
+                          {
+                            "struct_member_tag": "IfStatement",
+                            "struct_member_content": {
+                              "variable_name": "spline_flags",
+                              "values": [
+                                "ANIMATION"
+                              ],
+                              "members": [
+                                {
+                                  "struct_member_tag": "Definition",
+                                  "struct_member_content": {
+                                    "name": "animation_id",
+                                    "data_type": {
+                                      "data_type_tag": "Integer",
+                                      "integer_type": "U8"
+                                    },
+                                    "constant_value": null,
+                                    "used_as_size_in": null,
+                                    "size_of_fields_before_size": null,
+                                    "used_in_if": false,
+                                    "tags": {}
+                                  }
+                                },
+                                {
+                                  "struct_member_tag": "Definition",
+                                  "struct_member_content": {
+                                    "name": "animation_start_time",
+                                    "data_type": {
+                                      "data_type_tag": "Integer",
+                                      "integer_type": "U32"
+                                    },
+                                    "constant_value": null,
+                                    "used_as_size_in": null,
+                                    "size_of_fields_before_size": null,
+                                    "used_in_if": false,
+                                    "tags": {}
+                                  }
+                                }
+                              ],
+                              "else_if_statements": [],
+                              "original_type": {
+                                "data_type_tag": "Flag",
+                                "type_name": "SplineFlag",
+                                "integer_type": "U32",
+                                "tags": {
+                                  "version": {
+                                    "version_type_tag": "world",
+                                    "version_type": {
+                                      "world_version_tag": "specific",
+                                      "versions": [
+                                        {
+                                          "major": 3,
+                                          "minor": 3,
+                                          "patch": 5,
+                                          "build": null
+                                        }
+                                      ]
+                                    }
+                                  }
+                                },
+                                "upcast": false
+                              },
+                              "definer_type": "Flag",
+                              "part_of_separate_if_statement": false,
+                              "is_else_if_flag": false
+                            }
+                          },
+                          {
+                            "struct_member_tag": "Definition",
+                            "struct_member_content": {
+                              "name": "duration",
+                              "data_type": {
+                                "data_type_tag": "Integer",
+                                "integer_type": "U32"
+                              },
+                              "constant_value": null,
+                              "used_as_size_in": null,
+                              "size_of_fields_before_size": null,
+                              "used_in_if": false,
+                              "tags": {}
+                            }
+                          },
+                          {
+                            "struct_member_tag": "IfStatement",
+                            "struct_member_content": {
+                              "variable_name": "spline_flags",
+                              "values": [
+                                "PARABOLIC"
+                              ],
+                              "members": [
+                                {
+                                  "struct_member_tag": "Definition",
+                                  "struct_member_content": {
+                                    "name": "vertical_acceleration",
+                                    "data_type": {
+                                      "data_type_tag": "FloatingPoint"
+                                    },
+                                    "constant_value": null,
+                                    "used_as_size_in": null,
+                                    "size_of_fields_before_size": null,
+                                    "used_in_if": false,
+                                    "tags": {}
+                                  }
+                                },
+                                {
+                                  "struct_member_tag": "Definition",
+                                  "struct_member_content": {
+                                    "name": "effect_start_time",
+                                    "data_type": {
+                                      "data_type_tag": "Integer",
+                                      "integer_type": "U32"
+                                    },
+                                    "constant_value": null,
+                                    "used_as_size_in": null,
+                                    "size_of_fields_before_size": null,
+                                    "used_in_if": false,
+                                    "tags": {}
+                                  }
+                                }
+                              ],
+                              "else_if_statements": [],
+                              "original_type": {
+                                "data_type_tag": "Flag",
+                                "type_name": "SplineFlag",
+                                "integer_type": "U32",
+                                "tags": {
+                                  "version": {
+                                    "version_type_tag": "world",
+                                    "version_type": {
+                                      "world_version_tag": "specific",
+                                      "versions": [
+                                        {
+                                          "major": 3,
+                                          "minor": 3,
+                                          "patch": 5,
+                                          "build": null
+                                        }
+                                      ]
+                                    }
+                                  }
+                                },
+                                "upcast": false
+                              },
+                              "definer_type": "Flag",
+                              "part_of_separate_if_statement": false,
+                              "is_else_if_flag": false
+                            }
+                          },
+                          {
+                            "struct_member_tag": "IfStatement",
+                            "struct_member_content": {
+                              "variable_name": "spline_flags",
+                              "values": [
+                                "FLYING",
+                                "CATMULLROM"
+                              ],
+                              "members": [
+                                {
+                                  "struct_member_tag": "Definition",
+                                  "struct_member_content": {
+                                    "name": "full_spline_count",
+                                    "data_type": {
+                                      "data_type_tag": "Integer",
+                                      "integer_type": "U32"
+                                    },
+                                    "constant_value": null,
+                                    "used_as_size_in": "full_splines",
+                                    "size_of_fields_before_size": null,
+                                    "used_in_if": false,
+                                    "tags": {}
+                                  }
+                                },
+                                {
+                                  "struct_member_tag": "Definition",
+                                  "struct_member_content": {
+                                    "name": "full_splines",
+                                    "data_type": {
+                                      "data_type_tag": "Array",
+                                      "inner_type": {
+                                        "array_type_tag": "Struct",
+                                        "struct_data": {
+                                          "name": "Vector3d",
+                                          "object_type": {
+                                            "container_type_tag": "Struct"
+                                          },
+                                          "sizes": {
+                                            "constant_sized": true,
+                                            "minimum_size": 12,
+                                            "maximum_size": 12
+                                          },
+                                          "members": [
+                                            {
+                                              "struct_member_tag": "Definition",
+                                              "struct_member_content": {
+                                                "name": "x",
+                                                "data_type": {
+                                                  "data_type_tag": "FloatingPoint"
+                                                },
+                                                "constant_value": null,
+                                                "used_as_size_in": null,
+                                                "size_of_fields_before_size": null,
+                                                "used_in_if": false,
+                                                "tags": {}
+                                              }
+                                            },
+                                            {
+                                              "struct_member_tag": "Definition",
+                                              "struct_member_content": {
+                                                "name": "y",
+                                                "data_type": {
+                                                  "data_type_tag": "FloatingPoint"
+                                                },
+                                                "constant_value": null,
+                                                "used_as_size_in": null,
+                                                "size_of_fields_before_size": null,
+                                                "used_in_if": false,
+                                                "tags": {}
+                                              }
+                                            },
+                                            {
+                                              "struct_member_tag": "Definition",
+                                              "struct_member_content": {
+                                                "name": "z",
+                                                "data_type": {
+                                                  "data_type_tag": "FloatingPoint"
+                                                },
+                                                "constant_value": null,
+                                                "used_as_size_in": null,
+                                                "size_of_fields_before_size": null,
+                                                "used_in_if": false,
+                                                "tags": {}
+                                              }
+                                            }
+                                          ],
+                                          "tags": {
+                                            "version": {
+                                              "version_type_tag": "world",
+                                              "version_type": {
+                                                "world_version_tag": "all"
+                                              }
+                                            }
+                                          },
+                                          "tests": [],
+                                          "file_info": {
+                                            "file_name": "wow_message_parser/wowm/world/vector.wowm",
+                                            "start_position": 11,
+                                            "end_position": 17
+                                          },
+                                          "only_has_io_error": true,
+                                          "has_manual_size_field": false,
+                                          "manual_size_subtraction": null,
+                                          "prepared_objects": [
+                                            {
+                                              "name": "x",
+                                              "is_elseif_flag": false,
+                                              "enum_part_of_separate_statements": false
+                                            },
+                                            {
+                                              "name": "y",
+                                              "is_elseif_flag": false,
+                                              "enum_part_of_separate_statements": false
+                                            },
+                                            {
+                                              "name": "z",
+                                              "is_elseif_flag": false,
+                                              "enum_part_of_separate_statements": false
+                                            }
+                                          ],
+                                          "optional": null
+                                        }
+                                      },
+                                      "size": {
+                                        "array_size_tag": "Variable",
+                                        "size": "full_spline_count"
+                                      },
+                                      "compressed": false
+                                    },
+                                    "constant_value": null,
+                                    "used_as_size_in": null,
+                                    "size_of_fields_before_size": null,
+                                    "used_in_if": false,
+                                    "tags": {}
+                                  }
+                                }
+                              ],
+                              "else_if_statements": [
+                                {
+                                  "variable_name": "spline_flags",
+                                  "values": [
+                                    "NONE",
+                                    "DONE",
+                                    "FALLING",
+                                    "NO_SPLINE",
+                                    "PARABOLIC",
+                                    "WALK_MODE",
+                                    "ORIENTATION_FIXED",
+                                    "FINAL_POINT",
+                                    "FINAL_TARGET",
+                                    "FINAL_ANGLE",
+                                    "CYCLIC",
+                                    "ENTER_CYCLE",
+                                    "ANIMATION",
+                                    "FROZEN",
+                                    "TRANSPORT_ENTER",
+                                    "TRANSPORT_EXIT",
+                                    "UNKNOWN7",
+                                    "UNKNOWN8",
+                                    "ORIENTATION_INVERSED",
+                                    "UNKNOWN10",
+                                    "UNKNOWN11",
+                                    "UNKNOWN12",
+                                    "UNKNOWN13"
+                                  ],
+                                  "members": [
+                                    {
+                                      "struct_member_tag": "Definition",
+                                      "struct_member_content": {
+                                        "name": "splines",
+                                        "data_type": {
+                                          "data_type_tag": "MonsterMoveSpline"
+                                        },
+                                        "constant_value": null,
+                                        "used_as_size_in": null,
+                                        "size_of_fields_before_size": null,
+                                        "used_in_if": false,
+                                        "tags": {}
+                                      }
+                                    }
+                                  ],
+                                  "else_if_statements": [],
+                                  "original_type": {
+                                    "data_type_tag": "Flag",
+                                    "type_name": "SplineFlag",
+                                    "integer_type": "U32",
+                                    "tags": {
+                                      "version": {
+                                        "version_type_tag": "world",
+                                        "version_type": {
+                                          "world_version_tag": "specific",
+                                          "versions": [
+                                            {
+                                              "major": 3,
+                                              "minor": 3,
+                                              "patch": 5,
+                                              "build": null
+                                            }
+                                          ]
+                                        }
+                                      }
+                                    },
+                                    "upcast": false
+                                  },
+                                  "definer_type": "Flag",
+                                  "part_of_separate_if_statement": false,
+                                  "is_else_if_flag": false
+                                }
+                              ],
+                              "original_type": {
+                                "data_type_tag": "Flag",
+                                "type_name": "SplineFlag",
+                                "integer_type": "U32",
+                                "tags": {
+                                  "version": {
+                                    "version_type_tag": "world",
+                                    "version_type": {
+                                      "world_version_tag": "specific",
+                                      "versions": [
+                                        {
+                                          "major": 3,
+                                          "minor": 3,
+                                          "patch": 5,
+                                          "build": null
+                                        }
+                                      ]
+                                    }
+                                  }
+                                },
+                                "upcast": false
+                              },
+                              "definer_type": "Flag",
+                              "part_of_separate_if_statement": false,
+                              "is_else_if_flag": false
+                            }
+                          }
+                        ],
+                        "tags": {
+                          "version": {
+                            "version_type_tag": "world",
+                            "version_type": {
+                              "world_version_tag": "specific",
+                              "versions": [
+                                {
+                                  "major": 3,
+                                  "minor": 3,
+                                  "patch": 5,
+                                  "build": null
+                                }
+                              ]
+                            }
+                          }
+                        },
+                        "tests": [],
+                        "file_info": {
+                          "file_name": "wow_message_parser/wowm/world/movement/smsg/smsg_monster_move.wowm",
+                          "start_position": 31,
+                          "end_position": 51
+                        },
+                        "only_has_io_error": false,
+                        "has_manual_size_field": false,
+                        "manual_size_subtraction": null,
+                        "prepared_objects": [
+                          {
+                            "name": "spline_flags",
+                            "enumerators": {
+                              "ANIMATION": [
+                                {
+                                  "name": "animation_id",
+                                  "is_elseif_flag": false,
+                                  "enum_part_of_separate_statements": false
+                                },
+                                {
+                                  "name": "animation_start_time",
+                                  "is_elseif_flag": false,
+                                  "enum_part_of_separate_statements": false
+                                }
+                              ],
+                              "PARABOLIC": [
+                                {
+                                  "name": "effect_start_time",
+                                  "is_elseif_flag": false,
+                                  "enum_part_of_separate_statements": false
+                                },
+                                {
+                                  "name": "vertical_acceleration",
+                                  "is_elseif_flag": false,
+                                  "enum_part_of_separate_statements": false
+                                }
+                              ]
+                            },
+                            "is_elseif_flag": false,
+                            "enum_part_of_separate_statements": false,
+                            "definer_type": "Flag"
+                          },
+                          {
+                            "name": "duration",
+                            "is_elseif_flag": false,
+                            "enum_part_of_separate_statements": false
+                          }
+                        ],
+                        "optional": null
+                      }
                     },
                     "constant_value": null,
                     "used_as_size_in": null,
@@ -451543,9 +452487,9 @@
               ],
               "else_if_statements": [],
               "original_type": {
-                "data_type_tag": "Flag",
-                "type_name": "SplineFlag",
-                "integer_type": "U32",
+                "data_type_tag": "Enum",
+                "type_name": "MonsterMoveType",
+                "integer_type": "U8",
                 "tags": {
                   "version": {
                     "version_type_tag": "world",
@@ -451553,9 +452497,21 @@
                       "world_version_tag": "specific",
                       "versions": [
                         {
+                          "major": 1,
+                          "minor": 12,
+                          "patch": null,
+                          "build": null
+                        },
+                        {
+                          "major": 2,
+                          "minor": null,
+                          "patch": null,
+                          "build": null
+                        },
+                        {
                           "major": 3,
-                          "minor": 3,
-                          "patch": 5,
+                          "minor": null,
+                          "patch": null,
                           "build": null
                         }
                       ]
@@ -451564,104 +452520,9 @@
                 },
                 "upcast": false
               },
-              "definer_type": "Flag",
-              "part_of_separate_if_statement": false,
+              "definer_type": "Enum",
+              "part_of_separate_if_statement": true,
               "is_else_if_flag": false
-            }
-          },
-          {
-            "struct_member_tag": "Definition",
-            "struct_member_content": {
-              "name": "duration",
-              "data_type": {
-                "data_type_tag": "Integer",
-                "integer_type": "U32"
-              },
-              "constant_value": null,
-              "used_as_size_in": null,
-              "size_of_fields_before_size": null,
-              "used_in_if": false,
-              "tags": {}
-            }
-          },
-          {
-            "struct_member_tag": "IfStatement",
-            "struct_member_content": {
-              "variable_name": "spline_flags",
-              "values": [
-                "PARABOLIC"
-              ],
-              "members": [
-                {
-                  "struct_member_tag": "Definition",
-                  "struct_member_content": {
-                    "name": "vertical_acceleration",
-                    "data_type": {
-                      "data_type_tag": "FloatingPoint"
-                    },
-                    "constant_value": null,
-                    "used_as_size_in": null,
-                    "size_of_fields_before_size": null,
-                    "used_in_if": false,
-                    "tags": {}
-                  }
-                },
-                {
-                  "struct_member_tag": "Definition",
-                  "struct_member_content": {
-                    "name": "effect_start_time",
-                    "data_type": {
-                      "data_type_tag": "Integer",
-                      "integer_type": "U32"
-                    },
-                    "constant_value": null,
-                    "used_as_size_in": null,
-                    "size_of_fields_before_size": null,
-                    "used_in_if": false,
-                    "tags": {}
-                  }
-                }
-              ],
-              "else_if_statements": [],
-              "original_type": {
-                "data_type_tag": "Flag",
-                "type_name": "SplineFlag",
-                "integer_type": "U32",
-                "tags": {
-                  "version": {
-                    "version_type_tag": "world",
-                    "version_type": {
-                      "world_version_tag": "specific",
-                      "versions": [
-                        {
-                          "major": 3,
-                          "minor": 3,
-                          "patch": 5,
-                          "build": null
-                        }
-                      ]
-                    }
-                  }
-                },
-                "upcast": false
-              },
-              "definer_type": "Flag",
-              "part_of_separate_if_statement": false,
-              "is_else_if_flag": false
-            }
-          },
-          {
-            "struct_member_tag": "Definition",
-            "struct_member_content": {
-              "name": "splines",
-              "data_type": {
-                "data_type_tag": "MonsterMoveSpline"
-              },
-              "constant_value": null,
-              "used_as_size_in": null,
-              "size_of_fields_before_size": null,
-              "used_in_if": false,
-              "tags": {}
             }
           }
         ],
@@ -451681,11 +452542,1184 @@
             }
           }
         },
-        "tests": [],
+        "tests": [
+          {
+            "subject": "SMSG_MONSTER_MOVE",
+            "members": [
+              {
+                "variable_name": "guid",
+                "value": {
+                  "test_value_tag": "Guid",
+                  "content": {
+                    "value": "0",
+                    "original_string": "0"
+                  }
+                },
+                "tags": {}
+              },
+              {
+                "variable_name": "unknown",
+                "value": {
+                  "test_value_tag": "Integer",
+                  "content": {
+                    "value": "0",
+                    "original_string": "0"
+                  }
+                },
+                "tags": {}
+              },
+              {
+                "variable_name": "spline_point",
+                "value": {
+                  "test_value_tag": "SubObject",
+                  "content": {
+                    "type_name": "Vector3d",
+                    "members": [
+                      {
+                        "variable_name": "x",
+                        "value": {
+                          "test_value_tag": "FloatingPoint",
+                          "content": {
+                            "value": 0.0,
+                            "original_string": "0.0"
+                          }
+                        },
+                        "tags": {}
+                      },
+                      {
+                        "variable_name": "y",
+                        "value": {
+                          "test_value_tag": "FloatingPoint",
+                          "content": {
+                            "value": 0.0,
+                            "original_string": "0.0"
+                          }
+                        },
+                        "tags": {}
+                      },
+                      {
+                        "variable_name": "z",
+                        "value": {
+                          "test_value_tag": "FloatingPoint",
+                          "content": {
+                            "value": 0.0,
+                            "original_string": "0.0"
+                          }
+                        },
+                        "tags": {}
+                      }
+                    ]
+                  }
+                },
+                "tags": {}
+              },
+              {
+                "variable_name": "spline_id",
+                "value": {
+                  "test_value_tag": "Integer",
+                  "content": {
+                    "value": "0",
+                    "original_string": "0"
+                  }
+                },
+                "tags": {}
+              },
+              {
+                "variable_name": "move_type",
+                "value": {
+                  "test_value_tag": "Enum",
+                  "content": {
+                    "value": "1",
+                    "original_string": "STOP"
+                  }
+                },
+                "tags": {}
+              }
+            ],
+            "raw_bytes": [
+              0,
+              21,
+              221,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              1
+            ],
+            "tags": {
+              "version": {
+                "version_type_tag": "world",
+                "version_type": {
+                  "world_version_tag": "specific",
+                  "versions": [
+                    {
+                      "major": 3,
+                      "minor": 3,
+                      "patch": 5,
+                      "build": null
+                    }
+                  ]
+                }
+              }
+            },
+            "file_info": {
+              "file_name": "wow_message_parser/wowm/world/movement/smsg/smsg_monster_move.wowm",
+              "start_position": 74,
+              "end_position": 94
+            }
+          },
+          {
+            "subject": "SMSG_MONSTER_MOVE",
+            "members": [
+              {
+                "variable_name": "guid",
+                "value": {
+                  "test_value_tag": "Guid",
+                  "content": {
+                    "value": "0",
+                    "original_string": "0"
+                  }
+                },
+                "tags": {}
+              },
+              {
+                "variable_name": "unknown",
+                "value": {
+                  "test_value_tag": "Integer",
+                  "content": {
+                    "value": "0",
+                    "original_string": "0"
+                  }
+                },
+                "tags": {}
+              },
+              {
+                "variable_name": "spline_point",
+                "value": {
+                  "test_value_tag": "SubObject",
+                  "content": {
+                    "type_name": "Vector3d",
+                    "members": [
+                      {
+                        "variable_name": "x",
+                        "value": {
+                          "test_value_tag": "FloatingPoint",
+                          "content": {
+                            "value": 0.0,
+                            "original_string": "0.0"
+                          }
+                        },
+                        "tags": {}
+                      },
+                      {
+                        "variable_name": "y",
+                        "value": {
+                          "test_value_tag": "FloatingPoint",
+                          "content": {
+                            "value": 0.0,
+                            "original_string": "0.0"
+                          }
+                        },
+                        "tags": {}
+                      },
+                      {
+                        "variable_name": "z",
+                        "value": {
+                          "test_value_tag": "FloatingPoint",
+                          "content": {
+                            "value": 0.0,
+                            "original_string": "0.0"
+                          }
+                        },
+                        "tags": {}
+                      }
+                    ]
+                  }
+                },
+                "tags": {}
+              },
+              {
+                "variable_name": "spline_id",
+                "value": {
+                  "test_value_tag": "Integer",
+                  "content": {
+                    "value": "0",
+                    "original_string": "0"
+                  }
+                },
+                "tags": {}
+              },
+              {
+                "variable_name": "move_type",
+                "value": {
+                  "test_value_tag": "Enum",
+                  "content": {
+                    "value": "0",
+                    "original_string": "NORMAL"
+                  }
+                },
+                "tags": {}
+              },
+              {
+                "variable_name": "movement",
+                "value": {
+                  "test_value_tag": "SubObject",
+                  "content": {
+                    "type_name": "MonsterMoveDataVariant",
+                    "members": [
+                      {
+                        "variable_name": "spline_flags",
+                        "value": {
+                          "test_value_tag": "Flag",
+                          "content": [
+                            "NONE"
+                          ]
+                        },
+                        "tags": {}
+                      },
+                      {
+                        "variable_name": "duration",
+                        "value": {
+                          "test_value_tag": "Integer",
+                          "content": {
+                            "value": "287454020",
+                            "original_string": "0x11223344"
+                          }
+                        },
+                        "tags": {}
+                      },
+                      {
+                        "variable_name": "splines",
+                        "value": {
+                          "test_value_tag": "MonsterMoveSpline",
+                          "content": [
+                            {
+                              "x": 1.0,
+                              "y": -2.0,
+                              "z": 3.5
+                            },
+                            {
+                              "x": -0.25,
+                              "y": 0.25,
+                              "z": -1.0
+                            }
+                          ]
+                        },
+                        "tags": {}
+                      }
+                    ]
+                  }
+                },
+                "tags": {}
+              }
+            ],
+            "raw_bytes": [
+              0,
+              49,
+              221,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              68,
+              51,
+              34,
+              17,
+              2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              128,
+              63,
+              0,
+              0,
+              0,
+              192,
+              0,
+              0,
+              96,
+              64,
+              255,
+              15,
+              0,
+              255
+            ],
+            "tags": {
+              "version": {
+                "version_type_tag": "world",
+                "version_type": {
+                  "world_version_tag": "specific",
+                  "versions": [
+                    {
+                      "major": 3,
+                      "minor": 3,
+                      "patch": 5,
+                      "build": null
+                    }
+                  ]
+                }
+              }
+            },
+            "file_info": {
+              "file_name": "wow_message_parser/wowm/world/movement/smsg/smsg_monster_move.wowm",
+              "start_position": 96,
+              "end_position": 137
+            }
+          },
+          {
+            "subject": "SMSG_MONSTER_MOVE",
+            "members": [
+              {
+                "variable_name": "guid",
+                "value": {
+                  "test_value_tag": "Guid",
+                  "content": {
+                    "value": "0",
+                    "original_string": "0"
+                  }
+                },
+                "tags": {}
+              },
+              {
+                "variable_name": "unknown",
+                "value": {
+                  "test_value_tag": "Integer",
+                  "content": {
+                    "value": "0",
+                    "original_string": "0"
+                  }
+                },
+                "tags": {}
+              },
+              {
+                "variable_name": "spline_point",
+                "value": {
+                  "test_value_tag": "SubObject",
+                  "content": {
+                    "type_name": "Vector3d",
+                    "members": [
+                      {
+                        "variable_name": "x",
+                        "value": {
+                          "test_value_tag": "FloatingPoint",
+                          "content": {
+                            "value": 0.0,
+                            "original_string": "0.0"
+                          }
+                        },
+                        "tags": {}
+                      },
+                      {
+                        "variable_name": "y",
+                        "value": {
+                          "test_value_tag": "FloatingPoint",
+                          "content": {
+                            "value": 0.0,
+                            "original_string": "0.0"
+                          }
+                        },
+                        "tags": {}
+                      },
+                      {
+                        "variable_name": "z",
+                        "value": {
+                          "test_value_tag": "FloatingPoint",
+                          "content": {
+                            "value": 0.0,
+                            "original_string": "0.0"
+                          }
+                        },
+                        "tags": {}
+                      }
+                    ]
+                  }
+                },
+                "tags": {}
+              },
+              {
+                "variable_name": "spline_id",
+                "value": {
+                  "test_value_tag": "Integer",
+                  "content": {
+                    "value": "0",
+                    "original_string": "0"
+                  }
+                },
+                "tags": {}
+              },
+              {
+                "variable_name": "move_type",
+                "value": {
+                  "test_value_tag": "Enum",
+                  "content": {
+                    "value": "0",
+                    "original_string": "NORMAL"
+                  }
+                },
+                "tags": {}
+              },
+              {
+                "variable_name": "movement",
+                "value": {
+                  "test_value_tag": "SubObject",
+                  "content": {
+                    "type_name": "MonsterMoveDataVariant",
+                    "members": [
+                      {
+                        "variable_name": "spline_flags",
+                        "value": {
+                          "test_value_tag": "Flag",
+                          "content": [
+                            "FLYING"
+                          ]
+                        },
+                        "tags": {}
+                      },
+                      {
+                        "variable_name": "duration",
+                        "value": {
+                          "test_value_tag": "Integer",
+                          "content": {
+                            "value": "1432778632",
+                            "original_string": "0x55667788"
+                          }
+                        },
+                        "tags": {}
+                      },
+                      {
+                        "variable_name": "full_splines",
+                        "value": {
+                          "test_value_tag": "ArrayOfSubObject",
+                          "content": {
+                            "type_name": "Vector3d",
+                            "members": [
+                              [
+                                {
+                                  "variable_name": "x",
+                                  "value": {
+                                    "test_value_tag": "FloatingPoint",
+                                    "content": {
+                                      "value": 1.0,
+                                      "original_string": "1.0"
+                                    }
+                                  },
+                                  "tags": {}
+                                },
+                                {
+                                  "variable_name": "y",
+                                  "value": {
+                                    "test_value_tag": "FloatingPoint",
+                                    "content": {
+                                      "value": -2.0,
+                                      "original_string": "-2.0"
+                                    }
+                                  },
+                                  "tags": {}
+                                },
+                                {
+                                  "variable_name": "z",
+                                  "value": {
+                                    "test_value_tag": "FloatingPoint",
+                                    "content": {
+                                      "value": 0.5,
+                                      "original_string": "0.5"
+                                    }
+                                  },
+                                  "tags": {}
+                                }
+                              ],
+                              [
+                                {
+                                  "variable_name": "x",
+                                  "value": {
+                                    "test_value_tag": "FloatingPoint",
+                                    "content": {
+                                      "value": -4.0,
+                                      "original_string": "-4.0"
+                                    }
+                                  },
+                                  "tags": {}
+                                },
+                                {
+                                  "variable_name": "y",
+                                  "value": {
+                                    "test_value_tag": "FloatingPoint",
+                                    "content": {
+                                      "value": 8.25,
+                                      "original_string": "8.25"
+                                    }
+                                  },
+                                  "tags": {}
+                                },
+                                {
+                                  "variable_name": "z",
+                                  "value": {
+                                    "test_value_tag": "FloatingPoint",
+                                    "content": {
+                                      "value": 9.5,
+                                      "original_string": "9.5"
+                                    }
+                                  },
+                                  "tags": {}
+                                }
+                              ]
+                            ],
+                            "size": {
+                              "array_size_tag": "Variable",
+                              "size": "full_spline_count"
+                            }
+                          }
+                        },
+                        "tags": {}
+                      }
+                    ]
+                  }
+                },
+                "tags": {}
+              }
+            ],
+            "raw_bytes": [
+              0,
+              57,
+              221,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              32,
+              0,
+              0,
+              136,
+              119,
+              102,
+              85,
+              2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              128,
+              63,
+              0,
+              0,
+              0,
+              192,
+              0,
+              0,
+              0,
+              63,
+              0,
+              0,
+              128,
+              192,
+              0,
+              0,
+              4,
+              65,
+              0,
+              0,
+              24,
+              65
+            ],
+            "tags": {
+              "version": {
+                "version_type_tag": "world",
+                "version_type": {
+                  "world_version_tag": "specific",
+                  "versions": [
+                    {
+                      "major": 3,
+                      "minor": 3,
+                      "patch": 5,
+                      "build": null
+                    }
+                  ]
+                }
+              }
+            },
+            "file_info": {
+              "file_name": "wow_message_parser/wowm/world/movement/smsg/smsg_monster_move.wowm",
+              "start_position": 139,
+              "end_position": 180
+            }
+          },
+          {
+            "subject": "SMSG_MONSTER_MOVE",
+            "members": [
+              {
+                "variable_name": "guid",
+                "value": {
+                  "test_value_tag": "Guid",
+                  "content": {
+                    "value": "0",
+                    "original_string": "0"
+                  }
+                },
+                "tags": {}
+              },
+              {
+                "variable_name": "unknown",
+                "value": {
+                  "test_value_tag": "Integer",
+                  "content": {
+                    "value": "0",
+                    "original_string": "0"
+                  }
+                },
+                "tags": {}
+              },
+              {
+                "variable_name": "spline_point",
+                "value": {
+                  "test_value_tag": "SubObject",
+                  "content": {
+                    "type_name": "Vector3d",
+                    "members": [
+                      {
+                        "variable_name": "x",
+                        "value": {
+                          "test_value_tag": "FloatingPoint",
+                          "content": {
+                            "value": 0.0,
+                            "original_string": "0.0"
+                          }
+                        },
+                        "tags": {}
+                      },
+                      {
+                        "variable_name": "y",
+                        "value": {
+                          "test_value_tag": "FloatingPoint",
+                          "content": {
+                            "value": 0.0,
+                            "original_string": "0.0"
+                          }
+                        },
+                        "tags": {}
+                      },
+                      {
+                        "variable_name": "z",
+                        "value": {
+                          "test_value_tag": "FloatingPoint",
+                          "content": {
+                            "value": 0.0,
+                            "original_string": "0.0"
+                          }
+                        },
+                        "tags": {}
+                      }
+                    ]
+                  }
+                },
+                "tags": {}
+              },
+              {
+                "variable_name": "spline_id",
+                "value": {
+                  "test_value_tag": "Integer",
+                  "content": {
+                    "value": "0",
+                    "original_string": "0"
+                  }
+                },
+                "tags": {}
+              },
+              {
+                "variable_name": "move_type",
+                "value": {
+                  "test_value_tag": "Enum",
+                  "content": {
+                    "value": "0",
+                    "original_string": "NORMAL"
+                  }
+                },
+                "tags": {}
+              },
+              {
+                "variable_name": "movement",
+                "value": {
+                  "test_value_tag": "SubObject",
+                  "content": {
+                    "type_name": "MonsterMoveDataVariant",
+                    "members": [
+                      {
+                        "variable_name": "spline_flags",
+                        "value": {
+                          "test_value_tag": "Flag",
+                          "content": [
+                            "CATMULLROM"
+                          ]
+                        },
+                        "tags": {}
+                      },
+                      {
+                        "variable_name": "duration",
+                        "value": {
+                          "test_value_tag": "Integer",
+                          "content": {
+                            "value": "16909060",
+                            "original_string": "0x01020304"
+                          }
+                        },
+                        "tags": {}
+                      },
+                      {
+                        "variable_name": "full_splines",
+                        "value": {
+                          "test_value_tag": "ArrayOfSubObject",
+                          "content": {
+                            "type_name": "Vector3d",
+                            "members": [
+                              [
+                                {
+                                  "variable_name": "x",
+                                  "value": {
+                                    "test_value_tag": "FloatingPoint",
+                                    "content": {
+                                      "value": 0.5,
+                                      "original_string": "0.5"
+                                    }
+                                  },
+                                  "tags": {}
+                                },
+                                {
+                                  "variable_name": "y",
+                                  "value": {
+                                    "test_value_tag": "FloatingPoint",
+                                    "content": {
+                                      "value": 2.0,
+                                      "original_string": "2.0"
+                                    }
+                                  },
+                                  "tags": {}
+                                },
+                                {
+                                  "variable_name": "z",
+                                  "value": {
+                                    "test_value_tag": "FloatingPoint",
+                                    "content": {
+                                      "value": -3.5,
+                                      "original_string": "-3.5"
+                                    }
+                                  },
+                                  "tags": {}
+                                }
+                              ]
+                            ],
+                            "size": {
+                              "array_size_tag": "Variable",
+                              "size": "full_spline_count"
+                            }
+                          }
+                        },
+                        "tags": {}
+                      }
+                    ]
+                  }
+                },
+                "tags": {}
+              }
+            ],
+            "raw_bytes": [
+              0,
+              45,
+              221,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              4,
+              0,
+              4,
+              3,
+              2,
+              1,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              63,
+              0,
+              0,
+              0,
+              64,
+              0,
+              0,
+              96,
+              192
+            ],
+            "tags": {
+              "version": {
+                "version_type_tag": "world",
+                "version_type": {
+                  "world_version_tag": "specific",
+                  "versions": [
+                    {
+                      "major": 3,
+                      "minor": 3,
+                      "patch": 5,
+                      "build": null
+                    }
+                  ]
+                }
+              }
+            },
+            "file_info": {
+              "file_name": "wow_message_parser/wowm/world/movement/smsg/smsg_monster_move.wowm",
+              "start_position": 182,
+              "end_position": 217
+            }
+          },
+          {
+            "subject": "SMSG_MONSTER_MOVE",
+            "members": [
+              {
+                "variable_name": "guid",
+                "value": {
+                  "test_value_tag": "Guid",
+                  "content": {
+                    "value": "0",
+                    "original_string": "0"
+                  }
+                },
+                "tags": {}
+              },
+              {
+                "variable_name": "unknown",
+                "value": {
+                  "test_value_tag": "Integer",
+                  "content": {
+                    "value": "0",
+                    "original_string": "0"
+                  }
+                },
+                "tags": {}
+              },
+              {
+                "variable_name": "spline_point",
+                "value": {
+                  "test_value_tag": "SubObject",
+                  "content": {
+                    "type_name": "Vector3d",
+                    "members": [
+                      {
+                        "variable_name": "x",
+                        "value": {
+                          "test_value_tag": "FloatingPoint",
+                          "content": {
+                            "value": 0.0,
+                            "original_string": "0.0"
+                          }
+                        },
+                        "tags": {}
+                      },
+                      {
+                        "variable_name": "y",
+                        "value": {
+                          "test_value_tag": "FloatingPoint",
+                          "content": {
+                            "value": 0.0,
+                            "original_string": "0.0"
+                          }
+                        },
+                        "tags": {}
+                      },
+                      {
+                        "variable_name": "z",
+                        "value": {
+                          "test_value_tag": "FloatingPoint",
+                          "content": {
+                            "value": 0.0,
+                            "original_string": "0.0"
+                          }
+                        },
+                        "tags": {}
+                      }
+                    ]
+                  }
+                },
+                "tags": {}
+              },
+              {
+                "variable_name": "spline_id",
+                "value": {
+                  "test_value_tag": "Integer",
+                  "content": {
+                    "value": "0",
+                    "original_string": "0"
+                  }
+                },
+                "tags": {}
+              },
+              {
+                "variable_name": "move_type",
+                "value": {
+                  "test_value_tag": "Enum",
+                  "content": {
+                    "value": "0",
+                    "original_string": "NORMAL"
+                  }
+                },
+                "tags": {}
+              },
+              {
+                "variable_name": "movement",
+                "value": {
+                  "test_value_tag": "SubObject",
+                  "content": {
+                    "type_name": "MonsterMoveDataVariant",
+                    "members": [
+                      {
+                        "variable_name": "spline_flags",
+                        "value": {
+                          "test_value_tag": "Flag",
+                          "content": [
+                            "ANIMATION",
+                            "PARABOLIC"
+                          ]
+                        },
+                        "tags": {}
+                      },
+                      {
+                        "variable_name": "animation_id",
+                        "value": {
+                          "test_value_tag": "Integer",
+                          "content": {
+                            "value": "9",
+                            "original_string": "9"
+                          }
+                        },
+                        "tags": {}
+                      },
+                      {
+                        "variable_name": "animation_start_time",
+                        "value": {
+                          "test_value_tag": "Integer",
+                          "content": {
+                            "value": "287454020",
+                            "original_string": "0x11223344"
+                          }
+                        },
+                        "tags": {}
+                      },
+                      {
+                        "variable_name": "duration",
+                        "value": {
+                          "test_value_tag": "Integer",
+                          "content": {
+                            "value": "1432778632",
+                            "original_string": "0x55667788"
+                          }
+                        },
+                        "tags": {}
+                      },
+                      {
+                        "variable_name": "vertical_acceleration",
+                        "value": {
+                          "test_value_tag": "FloatingPoint",
+                          "content": {
+                            "value": 1.5,
+                            "original_string": "1.5"
+                          }
+                        },
+                        "tags": {}
+                      },
+                      {
+                        "variable_name": "effect_start_time",
+                        "value": {
+                          "test_value_tag": "Integer",
+                          "content": {
+                            "value": "2578103244",
+                            "original_string": "0x99AABBCC"
+                          }
+                        },
+                        "tags": {}
+                      },
+                      {
+                        "variable_name": "splines",
+                        "value": {
+                          "test_value_tag": "MonsterMoveSpline",
+                          "content": [
+                            {
+                              "x": 0.25,
+                              "y": -0.5,
+                              "z": 1.0
+                            }
+                          ]
+                        },
+                        "tags": {}
+                      }
+                    ]
+                  }
+                },
+                "tags": {}
+              }
+            ],
+            "raw_bytes": [
+              0,
+              58,
+              221,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              8,
+              32,
+              0,
+              9,
+              68,
+              51,
+              34,
+              17,
+              136,
+              119,
+              102,
+              85,
+              0,
+              0,
+              192,
+              63,
+              204,
+              187,
+              170,
+              153,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              128,
+              62,
+              0,
+              0,
+              0,
+              191,
+              0,
+              0,
+              128,
+              63
+            ],
+            "tags": {
+              "version": {
+                "version_type_tag": "world",
+                "version_type": {
+                  "world_version_tag": "specific",
+                  "versions": [
+                    {
+                      "major": 3,
+                      "minor": 3,
+                      "patch": 5,
+                      "build": null
+                    }
+                  ]
+                }
+              }
+            },
+            "file_info": {
+              "file_name": "wow_message_parser/wowm/world/movement/smsg/smsg_monster_move.wowm",
+              "start_position": 219,
+              "end_position": 262
+            }
+          }
+        ],
         "file_info": {
           "file_name": "wow_message_parser/wowm/world/movement/smsg/smsg_monster_move.wowm",
-          "start_position": 31,
-          "end_position": 59
+          "start_position": 53,
+          "end_position": 72
         },
         "only_has_io_error": false,
         "has_manual_size_field": false,
@@ -451719,9 +453753,19 @@
                   "name": "angle",
                   "is_elseif_flag": false,
                   "enum_part_of_separate_statements": false
+                },
+                {
+                  "name": "movement",
+                  "is_elseif_flag": false,
+                  "enum_part_of_separate_statements": false
                 }
               ],
               "FACING_SPOT": [
+                {
+                  "name": "movement",
+                  "is_elseif_flag": false,
+                  "enum_part_of_separate_statements": false
+                },
                 {
                   "name": "position",
                   "is_elseif_flag": false,
@@ -451730,57 +453774,27 @@
               ],
               "FACING_TARGET": [
                 {
+                  "name": "movement",
+                  "is_elseif_flag": false,
+                  "enum_part_of_separate_statements": false
+                },
+                {
                   "name": "target",
                   "is_elseif_flag": false,
                   "enum_part_of_separate_statements": false
                 }
-              ]
-            },
-            "is_elseif_flag": false,
-            "enum_part_of_separate_statements": false,
-            "definer_type": "Enum"
-          },
-          {
-            "name": "spline_flags",
-            "enumerators": {
-              "ENTER_CYCLE": [
-                {
-                  "name": "animation_id",
-                  "is_elseif_flag": false,
-                  "enum_part_of_separate_statements": false
-                },
-                {
-                  "name": "animation_start_time",
-                  "is_elseif_flag": false,
-                  "enum_part_of_separate_statements": false
-                }
               ],
-              "PARABOLIC": [
+              "NORMAL": [
                 {
-                  "name": "effect_start_time",
-                  "is_elseif_flag": false,
-                  "enum_part_of_separate_statements": false
-                },
-                {
-                  "name": "vertical_acceleration",
+                  "name": "movement",
                   "is_elseif_flag": false,
                   "enum_part_of_separate_statements": false
                 }
               ]
             },
             "is_elseif_flag": false,
-            "enum_part_of_separate_statements": false,
-            "definer_type": "Flag"
-          },
-          {
-            "name": "duration",
-            "is_elseif_flag": false,
-            "enum_part_of_separate_statements": false
-          },
-          {
-            "name": "splines",
-            "is_elseif_flag": false,
-            "enum_part_of_separate_statements": false
+            "enum_part_of_separate_statements": true,
+            "definer_type": "Enum"
           }
         ],
         "optional": null
@@ -642369,7 +644383,7 @@
         },
         "sizes": {
           "constant_sized": false,
-          "minimum_size": 32,
+          "minimum_size": 21,
           "maximum_size": 4294967295
         },
         "members": [
@@ -642399,6 +644413,23 @@
               "size_of_fields_before_size": null,
               "used_in_if": false,
               "tags": {}
+            }
+          },
+          {
+            "struct_member_tag": "Definition",
+            "struct_member_content": {
+              "name": "transport_seat",
+              "data_type": {
+                "data_type_tag": "Integer",
+                "integer_type": "I8"
+              },
+              "constant_value": null,
+              "used_as_size_in": null,
+              "size_of_fields_before_size": null,
+              "used_in_if": false,
+              "tags": {
+                "comment": "Signed transport seat."
+              }
             }
           },
           {
@@ -642663,7 +644694,7 @@
                     "upcast": false
                   },
                   "definer_type": "Enum",
-                  "part_of_separate_if_statement": false,
+                  "part_of_separate_if_statement": true,
                   "is_else_if_flag": false
                 },
                 {
@@ -642813,7 +644844,7 @@
                     "upcast": false
                   },
                   "definer_type": "Enum",
-                  "part_of_separate_if_statement": false,
+                  "part_of_separate_if_statement": true,
                   "is_else_if_flag": false
                 }
               ],
@@ -642852,73 +644883,524 @@
                 "upcast": false
               },
               "definer_type": "Enum",
-              "part_of_separate_if_statement": false,
+              "part_of_separate_if_statement": true,
               "is_else_if_flag": false
-            }
-          },
-          {
-            "struct_member_tag": "Definition",
-            "struct_member_content": {
-              "name": "spline_flags",
-              "data_type": {
-                "data_type_tag": "Flag",
-                "type_name": "SplineFlag",
-                "integer_type": "U32",
-                "tags": {
-                  "version": {
-                    "version_type_tag": "world",
-                    "version_type": {
-                      "world_version_tag": "specific",
-                      "versions": [
-                        {
-                          "major": 3,
-                          "minor": 3,
-                          "patch": 5,
-                          "build": null
-                        }
-                      ]
-                    }
-                  }
-                },
-                "upcast": false
-              },
-              "constant_value": null,
-              "used_as_size_in": null,
-              "size_of_fields_before_size": null,
-              "used_in_if": true,
-              "tags": {}
             }
           },
           {
             "struct_member_tag": "IfStatement",
             "struct_member_content": {
-              "variable_name": "spline_flags",
+              "variable_name": "move_type",
               "values": [
-                "ENTER_CYCLE"
+                "NORMAL",
+                "FACING_SPOT",
+                "FACING_TARGET",
+                "FACING_ANGLE"
               ],
               "members": [
                 {
                   "struct_member_tag": "Definition",
                   "struct_member_content": {
-                    "name": "animation_id",
+                    "name": "movement",
                     "data_type": {
-                      "data_type_tag": "Integer",
-                      "integer_type": "U32"
-                    },
-                    "constant_value": null,
-                    "used_as_size_in": null,
-                    "size_of_fields_before_size": null,
-                    "used_in_if": false,
-                    "tags": {}
-                  }
-                },
-                {
-                  "struct_member_tag": "Definition",
-                  "struct_member_content": {
-                    "name": "animation_start_time",
-                    "data_type": {
-                      "data_type_tag": "Integer",
-                      "integer_type": "U32"
+                      "data_type_tag": "Struct",
+                      "struct_data": {
+                        "name": "MonsterMoveDataVariant",
+                        "object_type": {
+                          "container_type_tag": "Struct"
+                        },
+                        "sizes": {
+                          "constant_sized": false,
+                          "minimum_size": 12,
+                          "maximum_size": 4294967295
+                        },
+                        "members": [
+                          {
+                            "struct_member_tag": "Definition",
+                            "struct_member_content": {
+                              "name": "spline_flags",
+                              "data_type": {
+                                "data_type_tag": "Flag",
+                                "type_name": "SplineFlag",
+                                "integer_type": "U32",
+                                "tags": {
+                                  "version": {
+                                    "version_type_tag": "world",
+                                    "version_type": {
+                                      "world_version_tag": "specific",
+                                      "versions": [
+                                        {
+                                          "major": 3,
+                                          "minor": 3,
+                                          "patch": 5,
+                                          "build": null
+                                        }
+                                      ]
+                                    }
+                                  }
+                                },
+                                "upcast": false
+                              },
+                              "constant_value": null,
+                              "used_as_size_in": null,
+                              "size_of_fields_before_size": null,
+                              "used_in_if": true,
+                              "tags": {
+                                "comment": "DONE, final-facing, and animation-ID bits are omitted from wire flags."
+                              }
+                            }
+                          },
+                          {
+                            "struct_member_tag": "IfStatement",
+                            "struct_member_content": {
+                              "variable_name": "spline_flags",
+                              "values": [
+                                "ANIMATION"
+                              ],
+                              "members": [
+                                {
+                                  "struct_member_tag": "Definition",
+                                  "struct_member_content": {
+                                    "name": "animation_id",
+                                    "data_type": {
+                                      "data_type_tag": "Integer",
+                                      "integer_type": "U8"
+                                    },
+                                    "constant_value": null,
+                                    "used_as_size_in": null,
+                                    "size_of_fields_before_size": null,
+                                    "used_in_if": false,
+                                    "tags": {}
+                                  }
+                                },
+                                {
+                                  "struct_member_tag": "Definition",
+                                  "struct_member_content": {
+                                    "name": "animation_start_time",
+                                    "data_type": {
+                                      "data_type_tag": "Integer",
+                                      "integer_type": "U32"
+                                    },
+                                    "constant_value": null,
+                                    "used_as_size_in": null,
+                                    "size_of_fields_before_size": null,
+                                    "used_in_if": false,
+                                    "tags": {}
+                                  }
+                                }
+                              ],
+                              "else_if_statements": [],
+                              "original_type": {
+                                "data_type_tag": "Flag",
+                                "type_name": "SplineFlag",
+                                "integer_type": "U32",
+                                "tags": {
+                                  "version": {
+                                    "version_type_tag": "world",
+                                    "version_type": {
+                                      "world_version_tag": "specific",
+                                      "versions": [
+                                        {
+                                          "major": 3,
+                                          "minor": 3,
+                                          "patch": 5,
+                                          "build": null
+                                        }
+                                      ]
+                                    }
+                                  }
+                                },
+                                "upcast": false
+                              },
+                              "definer_type": "Flag",
+                              "part_of_separate_if_statement": false,
+                              "is_else_if_flag": false
+                            }
+                          },
+                          {
+                            "struct_member_tag": "Definition",
+                            "struct_member_content": {
+                              "name": "duration",
+                              "data_type": {
+                                "data_type_tag": "Integer",
+                                "integer_type": "U32"
+                              },
+                              "constant_value": null,
+                              "used_as_size_in": null,
+                              "size_of_fields_before_size": null,
+                              "used_in_if": false,
+                              "tags": {}
+                            }
+                          },
+                          {
+                            "struct_member_tag": "IfStatement",
+                            "struct_member_content": {
+                              "variable_name": "spline_flags",
+                              "values": [
+                                "PARABOLIC"
+                              ],
+                              "members": [
+                                {
+                                  "struct_member_tag": "Definition",
+                                  "struct_member_content": {
+                                    "name": "vertical_acceleration",
+                                    "data_type": {
+                                      "data_type_tag": "FloatingPoint"
+                                    },
+                                    "constant_value": null,
+                                    "used_as_size_in": null,
+                                    "size_of_fields_before_size": null,
+                                    "used_in_if": false,
+                                    "tags": {}
+                                  }
+                                },
+                                {
+                                  "struct_member_tag": "Definition",
+                                  "struct_member_content": {
+                                    "name": "effect_start_time",
+                                    "data_type": {
+                                      "data_type_tag": "Integer",
+                                      "integer_type": "U32"
+                                    },
+                                    "constant_value": null,
+                                    "used_as_size_in": null,
+                                    "size_of_fields_before_size": null,
+                                    "used_in_if": false,
+                                    "tags": {}
+                                  }
+                                }
+                              ],
+                              "else_if_statements": [],
+                              "original_type": {
+                                "data_type_tag": "Flag",
+                                "type_name": "SplineFlag",
+                                "integer_type": "U32",
+                                "tags": {
+                                  "version": {
+                                    "version_type_tag": "world",
+                                    "version_type": {
+                                      "world_version_tag": "specific",
+                                      "versions": [
+                                        {
+                                          "major": 3,
+                                          "minor": 3,
+                                          "patch": 5,
+                                          "build": null
+                                        }
+                                      ]
+                                    }
+                                  }
+                                },
+                                "upcast": false
+                              },
+                              "definer_type": "Flag",
+                              "part_of_separate_if_statement": false,
+                              "is_else_if_flag": false
+                            }
+                          },
+                          {
+                            "struct_member_tag": "IfStatement",
+                            "struct_member_content": {
+                              "variable_name": "spline_flags",
+                              "values": [
+                                "FLYING",
+                                "CATMULLROM"
+                              ],
+                              "members": [
+                                {
+                                  "struct_member_tag": "Definition",
+                                  "struct_member_content": {
+                                    "name": "full_spline_count",
+                                    "data_type": {
+                                      "data_type_tag": "Integer",
+                                      "integer_type": "U32"
+                                    },
+                                    "constant_value": null,
+                                    "used_as_size_in": "full_splines",
+                                    "size_of_fields_before_size": null,
+                                    "used_in_if": false,
+                                    "tags": {}
+                                  }
+                                },
+                                {
+                                  "struct_member_tag": "Definition",
+                                  "struct_member_content": {
+                                    "name": "full_splines",
+                                    "data_type": {
+                                      "data_type_tag": "Array",
+                                      "inner_type": {
+                                        "array_type_tag": "Struct",
+                                        "struct_data": {
+                                          "name": "Vector3d",
+                                          "object_type": {
+                                            "container_type_tag": "Struct"
+                                          },
+                                          "sizes": {
+                                            "constant_sized": true,
+                                            "minimum_size": 12,
+                                            "maximum_size": 12
+                                          },
+                                          "members": [
+                                            {
+                                              "struct_member_tag": "Definition",
+                                              "struct_member_content": {
+                                                "name": "x",
+                                                "data_type": {
+                                                  "data_type_tag": "FloatingPoint"
+                                                },
+                                                "constant_value": null,
+                                                "used_as_size_in": null,
+                                                "size_of_fields_before_size": null,
+                                                "used_in_if": false,
+                                                "tags": {}
+                                              }
+                                            },
+                                            {
+                                              "struct_member_tag": "Definition",
+                                              "struct_member_content": {
+                                                "name": "y",
+                                                "data_type": {
+                                                  "data_type_tag": "FloatingPoint"
+                                                },
+                                                "constant_value": null,
+                                                "used_as_size_in": null,
+                                                "size_of_fields_before_size": null,
+                                                "used_in_if": false,
+                                                "tags": {}
+                                              }
+                                            },
+                                            {
+                                              "struct_member_tag": "Definition",
+                                              "struct_member_content": {
+                                                "name": "z",
+                                                "data_type": {
+                                                  "data_type_tag": "FloatingPoint"
+                                                },
+                                                "constant_value": null,
+                                                "used_as_size_in": null,
+                                                "size_of_fields_before_size": null,
+                                                "used_in_if": false,
+                                                "tags": {}
+                                              }
+                                            }
+                                          ],
+                                          "tags": {
+                                            "version": {
+                                              "version_type_tag": "world",
+                                              "version_type": {
+                                                "world_version_tag": "all"
+                                              }
+                                            }
+                                          },
+                                          "tests": [],
+                                          "file_info": {
+                                            "file_name": "wow_message_parser/wowm/world/vector.wowm",
+                                            "start_position": 11,
+                                            "end_position": 17
+                                          },
+                                          "only_has_io_error": true,
+                                          "has_manual_size_field": false,
+                                          "manual_size_subtraction": null,
+                                          "prepared_objects": [
+                                            {
+                                              "name": "x",
+                                              "is_elseif_flag": false,
+                                              "enum_part_of_separate_statements": false
+                                            },
+                                            {
+                                              "name": "y",
+                                              "is_elseif_flag": false,
+                                              "enum_part_of_separate_statements": false
+                                            },
+                                            {
+                                              "name": "z",
+                                              "is_elseif_flag": false,
+                                              "enum_part_of_separate_statements": false
+                                            }
+                                          ],
+                                          "optional": null
+                                        }
+                                      },
+                                      "size": {
+                                        "array_size_tag": "Variable",
+                                        "size": "full_spline_count"
+                                      },
+                                      "compressed": false
+                                    },
+                                    "constant_value": null,
+                                    "used_as_size_in": null,
+                                    "size_of_fields_before_size": null,
+                                    "used_in_if": false,
+                                    "tags": {}
+                                  }
+                                }
+                              ],
+                              "else_if_statements": [
+                                {
+                                  "variable_name": "spline_flags",
+                                  "values": [
+                                    "NONE",
+                                    "DONE",
+                                    "FALLING",
+                                    "NO_SPLINE",
+                                    "PARABOLIC",
+                                    "WALK_MODE",
+                                    "ORIENTATION_FIXED",
+                                    "FINAL_POINT",
+                                    "FINAL_TARGET",
+                                    "FINAL_ANGLE",
+                                    "CYCLIC",
+                                    "ENTER_CYCLE",
+                                    "ANIMATION",
+                                    "FROZEN",
+                                    "TRANSPORT_ENTER",
+                                    "TRANSPORT_EXIT",
+                                    "UNKNOWN7",
+                                    "UNKNOWN8",
+                                    "ORIENTATION_INVERSED",
+                                    "UNKNOWN10",
+                                    "UNKNOWN11",
+                                    "UNKNOWN12",
+                                    "UNKNOWN13"
+                                  ],
+                                  "members": [
+                                    {
+                                      "struct_member_tag": "Definition",
+                                      "struct_member_content": {
+                                        "name": "splines",
+                                        "data_type": {
+                                          "data_type_tag": "MonsterMoveSpline"
+                                        },
+                                        "constant_value": null,
+                                        "used_as_size_in": null,
+                                        "size_of_fields_before_size": null,
+                                        "used_in_if": false,
+                                        "tags": {}
+                                      }
+                                    }
+                                  ],
+                                  "else_if_statements": [],
+                                  "original_type": {
+                                    "data_type_tag": "Flag",
+                                    "type_name": "SplineFlag",
+                                    "integer_type": "U32",
+                                    "tags": {
+                                      "version": {
+                                        "version_type_tag": "world",
+                                        "version_type": {
+                                          "world_version_tag": "specific",
+                                          "versions": [
+                                            {
+                                              "major": 3,
+                                              "minor": 3,
+                                              "patch": 5,
+                                              "build": null
+                                            }
+                                          ]
+                                        }
+                                      }
+                                    },
+                                    "upcast": false
+                                  },
+                                  "definer_type": "Flag",
+                                  "part_of_separate_if_statement": false,
+                                  "is_else_if_flag": false
+                                }
+                              ],
+                              "original_type": {
+                                "data_type_tag": "Flag",
+                                "type_name": "SplineFlag",
+                                "integer_type": "U32",
+                                "tags": {
+                                  "version": {
+                                    "version_type_tag": "world",
+                                    "version_type": {
+                                      "world_version_tag": "specific",
+                                      "versions": [
+                                        {
+                                          "major": 3,
+                                          "minor": 3,
+                                          "patch": 5,
+                                          "build": null
+                                        }
+                                      ]
+                                    }
+                                  }
+                                },
+                                "upcast": false
+                              },
+                              "definer_type": "Flag",
+                              "part_of_separate_if_statement": false,
+                              "is_else_if_flag": false
+                            }
+                          }
+                        ],
+                        "tags": {
+                          "version": {
+                            "version_type_tag": "world",
+                            "version_type": {
+                              "world_version_tag": "specific",
+                              "versions": [
+                                {
+                                  "major": 3,
+                                  "minor": 3,
+                                  "patch": 5,
+                                  "build": null
+                                }
+                              ]
+                            }
+                          }
+                        },
+                        "tests": [],
+                        "file_info": {
+                          "file_name": "wow_message_parser/wowm/world/movement/smsg/smsg_monster_move.wowm",
+                          "start_position": 31,
+                          "end_position": 51
+                        },
+                        "only_has_io_error": false,
+                        "has_manual_size_field": false,
+                        "manual_size_subtraction": null,
+                        "prepared_objects": [
+                          {
+                            "name": "spline_flags",
+                            "enumerators": {
+                              "ANIMATION": [
+                                {
+                                  "name": "animation_id",
+                                  "is_elseif_flag": false,
+                                  "enum_part_of_separate_statements": false
+                                },
+                                {
+                                  "name": "animation_start_time",
+                                  "is_elseif_flag": false,
+                                  "enum_part_of_separate_statements": false
+                                }
+                              ],
+                              "PARABOLIC": [
+                                {
+                                  "name": "effect_start_time",
+                                  "is_elseif_flag": false,
+                                  "enum_part_of_separate_statements": false
+                                },
+                                {
+                                  "name": "vertical_acceleration",
+                                  "is_elseif_flag": false,
+                                  "enum_part_of_separate_statements": false
+                                }
+                              ]
+                            },
+                            "is_elseif_flag": false,
+                            "enum_part_of_separate_statements": false,
+                            "definer_type": "Flag"
+                          },
+                          {
+                            "name": "duration",
+                            "is_elseif_flag": false,
+                            "enum_part_of_separate_statements": false
+                          }
+                        ],
+                        "optional": null
+                      }
                     },
                     "constant_value": null,
                     "used_as_size_in": null,
@@ -642930,9 +645412,9 @@
               ],
               "else_if_statements": [],
               "original_type": {
-                "data_type_tag": "Flag",
-                "type_name": "SplineFlag",
-                "integer_type": "U32",
+                "data_type_tag": "Enum",
+                "type_name": "MonsterMoveType",
+                "integer_type": "U8",
                 "tags": {
                   "version": {
                     "version_type_tag": "world",
@@ -642940,9 +645422,21 @@
                       "world_version_tag": "specific",
                       "versions": [
                         {
+                          "major": 1,
+                          "minor": 12,
+                          "patch": null,
+                          "build": null
+                        },
+                        {
+                          "major": 2,
+                          "minor": null,
+                          "patch": null,
+                          "build": null
+                        },
+                        {
                           "major": 3,
-                          "minor": 3,
-                          "patch": 5,
+                          "minor": null,
+                          "patch": null,
                           "build": null
                         }
                       ]
@@ -642951,104 +645445,9 @@
                 },
                 "upcast": false
               },
-              "definer_type": "Flag",
-              "part_of_separate_if_statement": false,
+              "definer_type": "Enum",
+              "part_of_separate_if_statement": true,
               "is_else_if_flag": false
-            }
-          },
-          {
-            "struct_member_tag": "Definition",
-            "struct_member_content": {
-              "name": "duration",
-              "data_type": {
-                "data_type_tag": "Integer",
-                "integer_type": "U32"
-              },
-              "constant_value": null,
-              "used_as_size_in": null,
-              "size_of_fields_before_size": null,
-              "used_in_if": false,
-              "tags": {}
-            }
-          },
-          {
-            "struct_member_tag": "IfStatement",
-            "struct_member_content": {
-              "variable_name": "spline_flags",
-              "values": [
-                "PARABOLIC"
-              ],
-              "members": [
-                {
-                  "struct_member_tag": "Definition",
-                  "struct_member_content": {
-                    "name": "vertical_acceleration",
-                    "data_type": {
-                      "data_type_tag": "FloatingPoint"
-                    },
-                    "constant_value": null,
-                    "used_as_size_in": null,
-                    "size_of_fields_before_size": null,
-                    "used_in_if": false,
-                    "tags": {}
-                  }
-                },
-                {
-                  "struct_member_tag": "Definition",
-                  "struct_member_content": {
-                    "name": "effect_start_time",
-                    "data_type": {
-                      "data_type_tag": "Integer",
-                      "integer_type": "U32"
-                    },
-                    "constant_value": null,
-                    "used_as_size_in": null,
-                    "size_of_fields_before_size": null,
-                    "used_in_if": false,
-                    "tags": {}
-                  }
-                }
-              ],
-              "else_if_statements": [],
-              "original_type": {
-                "data_type_tag": "Flag",
-                "type_name": "SplineFlag",
-                "integer_type": "U32",
-                "tags": {
-                  "version": {
-                    "version_type_tag": "world",
-                    "version_type": {
-                      "world_version_tag": "specific",
-                      "versions": [
-                        {
-                          "major": 3,
-                          "minor": 3,
-                          "patch": 5,
-                          "build": null
-                        }
-                      ]
-                    }
-                  }
-                },
-                "upcast": false
-              },
-              "definer_type": "Flag",
-              "part_of_separate_if_statement": false,
-              "is_else_if_flag": false
-            }
-          },
-          {
-            "struct_member_tag": "Definition",
-            "struct_member_content": {
-              "name": "splines",
-              "data_type": {
-                "data_type_tag": "MonsterMoveSpline"
-              },
-              "constant_value": null,
-              "used_as_size_in": null,
-              "size_of_fields_before_size": null,
-              "used_in_if": false,
-              "tags": {}
             }
           }
         ],
@@ -643068,11 +645467,177 @@
             }
           }
         },
-        "tests": [],
+        "tests": [
+          {
+            "subject": "SMSG_MONSTER_MOVE_TRANSPORT",
+            "members": [
+              {
+                "variable_name": "guid",
+                "value": {
+                  "test_value_tag": "Guid",
+                  "content": {
+                    "value": "0",
+                    "original_string": "0"
+                  }
+                },
+                "tags": {}
+              },
+              {
+                "variable_name": "transport",
+                "value": {
+                  "test_value_tag": "Guid",
+                  "content": {
+                    "value": "1",
+                    "original_string": "1"
+                  }
+                },
+                "tags": {}
+              },
+              {
+                "variable_name": "transport_seat",
+                "value": {
+                  "test_value_tag": "Integer",
+                  "content": {
+                    "value": "-7",
+                    "original_string": "-7"
+                  }
+                },
+                "tags": {}
+              },
+              {
+                "variable_name": "unknown",
+                "value": {
+                  "test_value_tag": "Integer",
+                  "content": {
+                    "value": "171",
+                    "original_string": "0xAB"
+                  }
+                },
+                "tags": {}
+              },
+              {
+                "variable_name": "spline_point",
+                "value": {
+                  "test_value_tag": "SubObject",
+                  "content": {
+                    "type_name": "Vector3d",
+                    "members": [
+                      {
+                        "variable_name": "x",
+                        "value": {
+                          "test_value_tag": "FloatingPoint",
+                          "content": {
+                            "value": 0.0,
+                            "original_string": "0.0"
+                          }
+                        },
+                        "tags": {}
+                      },
+                      {
+                        "variable_name": "y",
+                        "value": {
+                          "test_value_tag": "FloatingPoint",
+                          "content": {
+                            "value": 0.0,
+                            "original_string": "0.0"
+                          }
+                        },
+                        "tags": {}
+                      },
+                      {
+                        "variable_name": "z",
+                        "value": {
+                          "test_value_tag": "FloatingPoint",
+                          "content": {
+                            "value": 0.0,
+                            "original_string": "0.0"
+                          }
+                        },
+                        "tags": {}
+                      }
+                    ]
+                  }
+                },
+                "tags": {}
+              },
+              {
+                "variable_name": "spline_id",
+                "value": {
+                  "test_value_tag": "Integer",
+                  "content": {
+                    "value": "0",
+                    "original_string": "0"
+                  }
+                },
+                "tags": {}
+              },
+              {
+                "variable_name": "move_type",
+                "value": {
+                  "test_value_tag": "Enum",
+                  "content": {
+                    "value": "1",
+                    "original_string": "STOP"
+                  }
+                },
+                "tags": {}
+              }
+            ],
+            "raw_bytes": [
+              0,
+              24,
+              174,
+              2,
+              0,
+              1,
+              1,
+              249,
+              171,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              1
+            ],
+            "tags": {
+              "version": {
+                "version_type_tag": "world",
+                "version_type": {
+                  "world_version_tag": "specific",
+                  "versions": [
+                    {
+                      "major": 3,
+                      "minor": 3,
+                      "patch": 5,
+                      "build": null
+                    }
+                  ]
+                }
+              }
+            },
+            "file_info": {
+              "file_name": "wow_message_parser/wowm/world/movement/smsg/smsg_monster_move_transport.wowm",
+              "start_position": 45,
+              "end_position": 69
+            }
+          }
+        ],
         "file_info": {
           "file_name": "wow_message_parser/wowm/world/movement/smsg/smsg_monster_move_transport.wowm",
           "start_position": 21,
-          "end_position": 49
+          "end_position": 43
         },
         "only_has_io_error": false,
         "has_manual_size_field": false,
@@ -643085,6 +645650,11 @@
           },
           {
             "name": "transport",
+            "is_elseif_flag": false,
+            "enum_part_of_separate_statements": false
+          },
+          {
+            "name": "transport_seat",
             "is_elseif_flag": false,
             "enum_part_of_separate_statements": false
           },
@@ -643111,9 +645681,19 @@
                   "name": "angle",
                   "is_elseif_flag": false,
                   "enum_part_of_separate_statements": false
+                },
+                {
+                  "name": "movement",
+                  "is_elseif_flag": false,
+                  "enum_part_of_separate_statements": false
                 }
               ],
               "FACING_SPOT": [
+                {
+                  "name": "movement",
+                  "is_elseif_flag": false,
+                  "enum_part_of_separate_statements": false
+                },
                 {
                   "name": "position",
                   "is_elseif_flag": false,
@@ -643122,57 +645702,27 @@
               ],
               "FACING_TARGET": [
                 {
+                  "name": "movement",
+                  "is_elseif_flag": false,
+                  "enum_part_of_separate_statements": false
+                },
+                {
                   "name": "target",
                   "is_elseif_flag": false,
                   "enum_part_of_separate_statements": false
                 }
-              ]
-            },
-            "is_elseif_flag": false,
-            "enum_part_of_separate_statements": false,
-            "definer_type": "Enum"
-          },
-          {
-            "name": "spline_flags",
-            "enumerators": {
-              "ENTER_CYCLE": [
-                {
-                  "name": "animation_id",
-                  "is_elseif_flag": false,
-                  "enum_part_of_separate_statements": false
-                },
-                {
-                  "name": "animation_start_time",
-                  "is_elseif_flag": false,
-                  "enum_part_of_separate_statements": false
-                }
               ],
-              "PARABOLIC": [
+              "NORMAL": [
                 {
-                  "name": "effect_start_time",
-                  "is_elseif_flag": false,
-                  "enum_part_of_separate_statements": false
-                },
-                {
-                  "name": "vertical_acceleration",
+                  "name": "movement",
                   "is_elseif_flag": false,
                   "enum_part_of_separate_statements": false
                 }
               ]
             },
             "is_elseif_flag": false,
-            "enum_part_of_separate_statements": false,
-            "definer_type": "Flag"
-          },
-          {
-            "name": "duration",
-            "is_elseif_flag": false,
-            "enum_part_of_separate_statements": false
-          },
-          {
-            "name": "splines",
-            "is_elseif_flag": false,
-            "enum_part_of_separate_statements": false
+            "enum_part_of_separate_statements": true,
+            "definer_type": "Enum"
           }
         ],
         "optional": null

@@ -6,6 +6,7 @@ use crate::parser::types::struct_member::{StructMember, StructMemberDefinition};
 use crate::parser::types::ty::Type;
 use crate::parser::types::{ContainerValue, IntegerType};
 use crate::rust_printer::base_structs::base_struct_write_name;
+use crate::rust_printer::rust_view::conditional_union::ConditionalUnion;
 use crate::rust_printer::writer::Writer;
 use crate::rust_printer::DefinerType;
 
@@ -98,6 +99,7 @@ pub(crate) fn print_write_field_integer(
     verified_value: &Option<ContainerValue>,
     size_of_fields_before_size: Option<i128>,
     is_manual_size_field: bool,
+    checked_array_size: bool,
     postfix: &str,
 ) {
     let basic_type = int_type.rust_str();
@@ -111,9 +113,15 @@ pub(crate) fn print_write_field_integer(
             name = variable_name.to_uppercase(),
         ));
     } else if let Some(array) = used_as_size_in {
-        s.wln(format!(
-            "w.write_all(&({variable_prefix}{array}.len() as {basic_type}).to_le_bytes()){postfix}?;",
-        ));
+        if checked_array_size {
+            s.wln(format!(
+                "w.write_all(&{basic_type}::try_from({variable_prefix}{array}.len()).map_err(|_| std::io::Error::new(std::io::ErrorKind::InvalidInput, \"array length exceeds {basic_type}\"))?.to_le_bytes()){postfix}?;",
+            ));
+        } else {
+            s.wln(format!(
+                "w.write_all(&({variable_prefix}{array}.len() as {basic_type}).to_le_bytes()){postfix}?;",
+            ));
+        }
     } else {
         s.wln(format!("w.write_all(&{variable}.to_le_bytes()){postfix}?;",));
     }
@@ -127,6 +135,11 @@ pub(crate) fn print_write(
     postfix: &str,
     variable_prefix: &str,
 ) {
+    if let Some(union) = e.rust_object().conditional_union() {
+        print_write_conditional_union(s, e, o, union, prefix, postfix);
+        return;
+    }
+
     // For fully compressed messages, replace the writer with a ZLibDecoder.
     if e.tags().compressed() {
         // Fully compressed messages include the decompressed size as a u32 at the start of the packet.
@@ -140,6 +153,56 @@ pub(crate) fn print_write(
     for field in e.members() {
         print_write_field(s, e, o, field, variable_prefix, prefix, postfix);
     }
+}
+
+fn print_write_conditional_union(
+    s: &mut Writer,
+    e: &Container,
+    o: &Objects,
+    union: &ConditionalUnion,
+    prefix: &str,
+    postfix: &str,
+) {
+    let full_condition =
+        union.full_condition_expression(&format!("data.{}", union.selector_name()));
+    let (linear_mismatch, full_mismatch) = if union.full_when_condition() {
+        (full_condition.clone(), format!("!({full_condition})"))
+    } else {
+        (format!("!({full_condition})"), full_condition)
+    };
+
+    s.open_curly("match self");
+    for (branch, mismatch, members) in [
+        (union.linear(), linear_mismatch, union.linear_members()),
+        (union.full(), full_mismatch, union.full_members()),
+    ] {
+        s.open_curly(format!("Self::{}(data) =>", branch.variant_name()));
+        s.bodyn(format!("if {mismatch}"), |s| {
+            s.wln(format!(
+                "return Err(std::io::Error::new(std::io::ErrorKind::InvalidInput, \"spline flags do not match {} movement data\"));",
+                branch.variant_name().to_lowercase()
+            ));
+        });
+
+        for member in union.common_members().iter().chain(members) {
+            let is_wrath_spline_flag_selector = e.tags().contains_wrath()
+                && union.selector_type_name() == "SplineFlag"
+                && matches!(member, StructMember::Definition(definition) if definition.name() == union.selector_name());
+            if is_wrath_spline_flag_selector {
+                // Wrath monster-move facing and DONE data are represented outside spline flags.
+                if let StructMember::Definition(definition) = member {
+                    s.wln(format!(
+                        "w.write_all(&crate::util::wrath_monster_move_spline_flags_for_wire(data.{}.as_int()).to_le_bytes()){postfix}?;",
+                        definition.name(),
+                    ));
+                    continue;
+                }
+            }
+            print_write_field(s, e, o, member, "data.", prefix, postfix);
+        }
+        s.closing_curly_with(",");
+    }
+    s.closing_curly();
 }
 
 pub(crate) fn print_write_definition(
@@ -176,6 +239,7 @@ pub(crate) fn print_write_definition(
                 d.value(),
                 d.size_of_fields_before_size(),
                 d.is_manual_size_field(),
+                e.rust_object().conditional_union().is_some(),
                 postfix,
             );
         }
@@ -298,8 +362,13 @@ pub(crate) fn print_write_definition(
         }
 
         Type::MonsterMoveSplines => {
+            let write_function = if e.tags().contains_wrath() {
+                "write_wrath_monster_move_spline"
+            } else {
+                "write_monster_move_spline"
+            };
             s.wln(format!(
-                "crate::util::write_monster_move_spline({variable}.as_slice(), &mut w){postfix}?;",
+                "crate::util::{write_function}({variable}.as_slice(), &mut w){postfix}?;",
             ));
         }
         Type::AchievementDoneArray => {

@@ -164,9 +164,19 @@ pub(crate) fn definition(s: &mut Writer, v: &[&Container], ty: &str, version: Ve
     });
 }
 
-fn world_common_impls_read_opcodes(s: &mut Writer, v: &[&Container], size: &str, error_ty: &str) {
+fn world_common_impls_read_opcodes(
+    s: &mut Writer,
+    v: &[&Container],
+    size: &str,
+    error_ty: &str,
+    reject_trailing_body_bytes: bool,
+) {
     s.bodyn(format!("fn read_opcodes(opcode: {size}, body_size: u32, mut r: &[u8]) -> Result<Self, {error_ty}>"), |s| {
-        s.open_curly("match opcode");
+        if reject_trailing_body_bytes {
+            s.open_curly("let message = match opcode");
+        } else {
+            s.open_curly("match opcode");
+        }
 
         for &e in v {
             let opcode = match e.container_type() {
@@ -203,7 +213,19 @@ fn world_common_impls_read_opcodes(s: &mut Writer, v: &[&Container], size: &str,
         };
         s.wln(format!("_ => Err({error_ty}::Opcode{{ {opcode_text}, name: opcode_to_name({opcode_to_name_text}), size: body_size }}),"));
 
-        s.closing_curly(); // match opcode
+        if reject_trailing_body_bytes {
+            s.closing_curly_with("?;"); // match opcode
+            s.newline();
+
+            s.open_curly("if !r.is_empty()");
+            s.wln(format!(
+                "return Err({error_ty}::Parse(crate::errors::ParseError::new(opcode.into(), opcode_to_name(opcode.into()).unwrap_or(\"unknown\"), body_size, crate::errors::ParseErrorKind::InvalidSize)));"
+            ));
+            s.closing_curly();
+            s.wln("Ok(message)");
+        } else {
+            s.closing_curly(); // match opcode
+        }
     });
 }
 
@@ -387,7 +409,13 @@ pub(crate) fn common_impls_world(
         _ => unreachable!("not a world type: '{:#?}'", container_type),
     };
     s.bodyn(format!("impl {ty}OpcodeMessage"), |s| {
-        world_common_impls_read_opcodes(s, v, size, EXPECTED_OPCODE_ERROR);
+        world_common_impls_read_opcodes(
+            s,
+            v,
+            size,
+            EXPECTED_OPCODE_ERROR,
+            version == MajorWorldVersion::Wrath && ty == "Server",
+        );
 
         for it in ImplType::types() {
             world_common_impls_read_write(

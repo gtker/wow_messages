@@ -13,3 +13,6 @@ pub(crate) use shared::*;
 mod wrath;
 #[cfg(feature = "wrath")]
 pub(crate) use wrath::*;
+
+#[cfg(all(test, feature = "wrath"))]
+mod tests;

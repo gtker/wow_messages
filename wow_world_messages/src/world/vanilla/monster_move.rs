@@ -204,7 +204,7 @@ impl MonsterMove {
                 move_type_if_duration = crate::util::read_u32_le(&mut r)?;
 
                 // splines: MonsterMoveSplines
-                move_type_if_splines = crate::util::read_monster_move_spline(&mut r)?;
+                move_type_if_splines = crate::util::read_monster_move_spline(&mut r, crate::errors::MAX_ALLOCATION_SIZE)?;
 
             }
             MonsterMoveType::Stop => {}
@@ -216,7 +216,7 @@ impl MonsterMove {
                 move_type_if_duration = crate::util::read_u32_le(&mut r)?;
 
                 // splines: MonsterMoveSplines
-                move_type_if_splines = crate::util::read_monster_move_spline(&mut r)?;
+                move_type_if_splines = crate::util::read_monster_move_spline(&mut r, crate::errors::MAX_ALLOCATION_SIZE)?;
 
             }
             MonsterMoveType::FacingTarget => {
@@ -227,7 +227,7 @@ impl MonsterMove {
                 move_type_if_duration = crate::util::read_u32_le(&mut r)?;
 
                 // splines: MonsterMoveSplines
-                move_type_if_splines = crate::util::read_monster_move_spline(&mut r)?;
+                move_type_if_splines = crate::util::read_monster_move_spline(&mut r, crate::errors::MAX_ALLOCATION_SIZE)?;
 
             }
             MonsterMoveType::FacingAngle => {
@@ -238,7 +238,7 @@ impl MonsterMove {
                 move_type_if_duration = crate::util::read_u32_le(&mut r)?;
 
                 // splines: MonsterMoveSplines
-                move_type_if_splines = crate::util::read_monster_move_spline(&mut r)?;
+                move_type_if_splines = crate::util::read_monster_move_spline(&mut r, crate::errors::MAX_ALLOCATION_SIZE)?;
 
             }
         };

@@ -2,6 +2,7 @@ use crate::parser::types::array::{ArraySize, ArrayType};
 use crate::parser::types::container::{Container, ContainerType};
 use crate::parser::types::struct_member::{StructMember, StructMemberDefinition};
 use crate::parser::types::ty::Type;
+use crate::rust_printer::rust_view::conditional_union::ConditionalUnion;
 use crate::rust_printer::structs::test_case_string;
 use crate::rust_printer::structs::test_case_string::members::{
     print_if_statement_enum, print_if_statement_flag,
@@ -82,11 +83,38 @@ fn print_bytes_members(s: &mut Writer, e: &Container) {
         wlna(s, "    {:#04X}, /* opcode */ ", "bytes.next().unwrap()");
     }
 
-    for m in e.members() {
-        print_bytes_struct_member(s, e, m, "self.", "    ");
+    if let Some(union) = e.rust_object().conditional_union() {
+        print_conditional_union_bytes(s, e, union, "self", "    ");
+    } else {
+        for m in e.members() {
+            print_bytes_struct_member(s, e, m, "self.", "    ");
+        }
     }
 
     s.newline();
+}
+
+fn print_conditional_union_bytes(
+    s: &mut Writer,
+    e: &Container,
+    union: &ConditionalUnion,
+    value: &str,
+    prefix: &str,
+) {
+    wln(s, format!("    /* {} start */", e.name()));
+    s.open_curly(format!("match &{value}"));
+    for (branch, members) in [
+        (union.linear(), union.linear_members()),
+        (union.full(), union.full_members()),
+    ] {
+        s.open_curly(format!("{}::{}(data) =>", e.name(), branch.variant_name()));
+        for member in union.common_members().iter().chain(members) {
+            print_bytes_struct_member(s, e, member, "data.", prefix);
+        }
+        s.closing_curly_with(",");
+    }
+    s.closing_curly();
+    wln(s, format!("    /* {} end */", e.name()));
 }
 
 fn print_bytes_struct_member(
@@ -205,14 +233,18 @@ fn print_bytes_definition(
         }
 
         Type::Struct { e } => {
-            wln(s, format!("    /* {name}: {ty_name} start */"));
-            let variable_prefix = format!("{var_name}.");
-            let prefix = format!("{prefix}    ");
+            if let Some(union) = e.rust_object().conditional_union() {
+                print_conditional_union_bytes(s, e, union, &var_name, prefix);
+            } else {
+                wln(s, format!("    /* {name}: {ty_name} start */"));
+                let variable_prefix = format!("{var_name}.");
+                let prefix = format!("{prefix}    ");
 
-            for m in e.members() {
-                print_bytes_struct_member(s, e, m, &variable_prefix, &prefix);
+                for m in e.members() {
+                    print_bytes_struct_member(s, e, m, &variable_prefix, &prefix);
+                }
+                wln(s, format!("    /* {name}: {ty_name} end */"));
             }
-            wln(s, format!("    /* {name}: {ty_name} end */"));
         }
 
         Type::Array(array) => {

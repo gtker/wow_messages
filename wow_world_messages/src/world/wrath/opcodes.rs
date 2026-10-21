@@ -8176,7 +8176,7 @@ pub enum ServerOpcodeMessage {
 
 impl ServerOpcodeMessage {
     fn read_opcodes(opcode: u16, body_size: u32, mut r: &[u8]) -> Result<Self, crate::errors::ExpectedOpcodeError> {
-        match opcode {
+        let message = match opcode {
             0x00B5 => Ok(Self::MSG_MOVE_START_FORWARD(Box::new(<MSG_MOVE_START_FORWARD as crate::Message>::read_body::<crate::traits::private::Internal>(&mut r, body_size).map_err(|a| a.opcode_convert())?))),
             0x00B6 => Ok(Self::MSG_MOVE_START_BACKWARD(Box::new(<MSG_MOVE_START_BACKWARD as crate::Message>::read_body::<crate::traits::private::Internal>(&mut r, body_size).map_err(|a| a.opcode_convert())?))),
             0x00B7 => Ok(Self::MSG_MOVE_STOP(Box::new(<MSG_MOVE_STOP as crate::Message>::read_body::<crate::traits::private::Internal>(&mut r, body_size).map_err(|a| a.opcode_convert())?))),
@@ -8697,7 +8697,12 @@ impl ServerOpcodeMessage {
             0x0516 => Ok(Self::SMSG_MOVE_SET_COLLISION_HGT(Box::new(<SMSG_MOVE_SET_COLLISION_HGT as crate::Message>::read_body::<crate::traits::private::Internal>(&mut r, body_size).map_err(|a| a.opcode_convert())?))),
             0x051E => Ok(Self::SMSG_MULTIPLE_MOVES(Box::new(<SMSG_MULTIPLE_MOVES as crate::Message>::read_body::<crate::traits::private::Internal>(&mut r, body_size).map_err(|a| a.opcode_convert())?))),
             _ => Err(crate::errors::ExpectedOpcodeError::Opcode{ opcode: opcode.into(), name: opcode_to_name(opcode.into()), size: body_size }),
+        }?;
+
+        if !r.is_empty() {
+            return Err(crate::errors::ExpectedOpcodeError::Parse(crate::errors::ParseError::new(opcode.into(), opcode_to_name(opcode.into()).unwrap_or("unknown"), body_size, crate::errors::ParseErrorKind::InvalidSize)));
         }
+        Ok(message)
     }
 
     #[cfg(feature = "sync")]
@@ -12086,7 +12091,6 @@ impl ServerOpcodeMessage {
             Self::SMSG_GAMEOBJECT_CUSTOM_ANIM(c) => crate::Message::to_test_case_string(c.as_ref()),
             Self::MSG_MOVE_TELEPORT_CHEAT(c) => crate::Message::to_test_case_string(c.as_ref()),
             Self::MSG_MOVE_TELEPORT_ACK(c) => crate::Message::to_test_case_string(c.as_ref()),
-            Self::SMSG_MONSTER_MOVE(c) => crate::Message::to_test_case_string(c.as_ref()),
             Self::SMSG_MOVE_WATER_WALK(c) => crate::Message::to_test_case_string(c.as_ref()),
             Self::SMSG_MOVE_LAND_WALK(c) => crate::Message::to_test_case_string(c.as_ref()),
             Self::SMSG_FORCE_RUN_SPEED_CHANGE(c) => crate::Message::to_test_case_string(c.as_ref()),
@@ -12286,7 +12290,6 @@ impl ServerOpcodeMessage {
             Self::SMSG_CHAT_PLAYER_NOT_FOUND(c) => crate::Message::to_test_case_string(c.as_ref()),
             Self::MSG_TALENT_WIPE_CONFIRM(c) => crate::Message::to_test_case_string(c.as_ref()),
             Self::SMSG_SUMMON_REQUEST(c) => crate::Message::to_test_case_string(c.as_ref()),
-            Self::SMSG_MONSTER_MOVE_TRANSPORT(c) => crate::Message::to_test_case_string(c.as_ref()),
             Self::SMSG_PET_BROKEN => crate::Message::to_test_case_string(&SMSG_PET_BROKEN{}),
             Self::MSG_MOVE_FEATHER_FALL(c) => crate::Message::to_test_case_string(c.as_ref()),
             Self::SMSG_FEIGN_DEATH_RESISTED => crate::Message::to_test_case_string(&SMSG_FEIGN_DEATH_RESISTED{}),

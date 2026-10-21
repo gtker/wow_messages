@@ -1,10 +1,11 @@
+use std::fmt::{Display, Formatter};
+
 use crate::parser::types::array::{Array, ArraySize, ArrayType};
 use crate::parser::types::sizes::Sizes;
 use crate::parser::types::ty::Type;
 use crate::parser::types::IntegerType;
 use crate::rust_printer::rust_view::rust_enumerator::RustEnumerator;
 use crate::rust_printer::rust_view::rust_object::RustObject;
-use std::fmt::{Display, Formatter};
 
 #[derive(Debug, Clone)]
 pub(crate) enum RustType {
@@ -235,7 +236,8 @@ impl RustType {
             }
 
             RustType::Struct { object, .. } => object
-                .members_in_struct()
+                .all_members()
+                .iter()
                 .all(|a| a.ty().size_is_const_fn()),
 
             RustType::Enum {

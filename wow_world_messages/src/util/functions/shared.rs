@@ -1,7 +1,11 @@
-use crate::errors::{ExpectedOpcodeError, ParseError};
-use crate::util::{read_i32_le, read_u32_le, read_u8_le};
 use std::io::{Read, Write};
+
 use wow_world_base::shared::vector3d_vanilla_tbc_wrath::Vector3d;
+
+use crate::errors::{ExpectedOpcodeError, ParseError};
+#[cfg(any(feature = "vanilla", feature = "tbc"))]
+use crate::util::{read_i32_le, read_u32_le};
+use crate::util::read_u8_le;
 
 #[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
 #[derive(Debug, Clone, Copy, Ord, PartialOrd, Eq, PartialEq, Hash)]
@@ -57,6 +61,7 @@ pub(crate) fn write_addon_array(
     Ok(())
 }
 
+#[cfg(any(feature = "vanilla", feature = "tbc"))]
 pub(crate) fn vector3d_to_packed(v: &Vector3d) -> i32 {
     let mut packed = 0;
 
@@ -67,33 +72,45 @@ pub(crate) fn vector3d_to_packed(v: &Vector3d) -> i32 {
     packed
 }
 
-pub(crate) const fn packed_to_vector3d(p: i32) -> Vector3d {
-    let x = ((p & 0x7FF) / 4) as f32;
-    let y = (((p >> 11) & 0x7FF) / 4) as f32;
-    let z = (((p >> 22) & 0x3FF) / 4) as f32;
+#[cfg(any(feature = "vanilla", feature = "tbc"))]
+pub(crate) const fn packed_to_vector3d(packed: i32) -> Vector3d {
+    let x = ((packed & 0x7FF) / 4) as f32;
+    let y = (((packed >> 11) & 0x7FF) / 4) as f32;
+    let z = (((packed >> 22) & 0x3FF) / 4) as f32;
 
     Vector3d { x, y, z }
 }
 
+/// Reads packed linear spline data: destination first, then signed midpoint offsets.
+#[cfg(any(feature = "vanilla", feature = "tbc"))]
 pub(crate) fn read_monster_move_spline(
-    mut r: &mut impl Read,
+    r: &mut impl Read,
+    max_allocation_size: u64,
 ) -> Result<Vec<Vector3d>, crate::errors::ParseErrorKind> {
-    let amount_of_splines = read_u32_le(&mut r)?;
-    let mut splines = Vec::with_capacity(amount_of_splines.try_into().unwrap());
+    let amount_of_splines = read_u32_le(&mut *r)?;
+    let allocation_size = u64::from(amount_of_splines) * core::mem::size_of::<Vector3d>() as u64;
+    if allocation_size > max_allocation_size {
+        return Err(crate::errors::ParseErrorKind::AllocationTooLargeError(
+            allocation_size,
+        ));
+    }
+
+    let capacity = usize::try_from(amount_of_splines)
+        .map_err(|_| crate::errors::ParseErrorKind::AllocationTooLargeError(allocation_size))?;
+    let mut splines = Vec::with_capacity(capacity);
 
     for i in 0..amount_of_splines {
         if i == 0 {
-            let vec = vanilla_tbc_wrath_vector3d_read(&mut r)?;
-            splines.push(vec);
+            splines.push(vanilla_tbc_wrath_vector3d_read(&mut *r)?);
         } else {
-            let packed = read_i32_le(&mut r)?;
-            splines.push(packed_to_vector3d(packed));
+            splines.push(packed_to_vector3d(read_i32_le(&mut *r)?));
         }
     }
 
     Ok(splines)
 }
 
+#[cfg(any(feature = "vanilla", feature = "tbc"))]
 pub(crate) fn write_monster_move_spline(
     splines: &[Vector3d],
     mut v: impl Write,

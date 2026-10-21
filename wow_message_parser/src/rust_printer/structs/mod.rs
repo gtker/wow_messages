@@ -13,6 +13,7 @@ use crate::rust_printer::{
 use crate::wowm_printer::get_struct_wowm_definition;
 
 pub(crate) mod print_common_impls;
+mod print_conditional_union;
 mod print_new_types;
 mod print_optional;
 mod print_tests;
@@ -97,7 +98,9 @@ fn print_declaration(s: &mut Writer, e: &Container, o: &Objects) {
 
     print_struct_wowm_definition(s, e);
 
-    if let Some(rd) = e.single_rust_definer() {
+    if let Some(union) = e.rust_object().conditional_union() {
+        print_conditional_union::print_declaration(s, e, o, union);
+    } else if let Some(rd) = e.single_rust_definer() {
         print_new_enum_declaration(s, &rd, e.name());
     } else {
         print_derives(s, &e.rust_object().all_members(), false);

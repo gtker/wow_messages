@@ -1,24 +1,36 @@
 # `MonsterMoveSpline`
 
-Array of splines used in `SMSG_MONSTER_MOVE` for Vanilla/TBC/Wrath.
-Consists of a `u32` with the amount of splines, followed by the first spline as a `Vector3d` (x, y, z as floats) and then the remaining splines as packed `u32`s.
+Packed linear spline payload used by `SMSG_MONSTER_MOVE` for Vanilla/TBC/Wrath. The wire layout is a `u32` point count, followed by the destination as a full `Vector3d`, then one packed `u32` for each remaining point.
 
-A C function for converting to and from the packed `u32`s would be:
+Each packed component is a signed 11/11/10-bit integer in quarter units. For a linear spline, each interior point is encoded as the midpoint of start and destination minus that point:
+
+```text
+packed_offset = (start + destination) / 2 - interior_point
+```
+
+The in-memory `Vec<Vector3d>` representation stores destination first, followed by these signed offsets. Encoding truncates components toward zero to the nearest quarter unit. Decoding must sign-extend each component before multiplying by `0.25`.
+
 ```c
 uint32_t to_packed_vector3d(float x, float y, float z)
 {
     uint32_t packed = 0;
-    packed |= ((uint32_t)(x / 0.25f) & 0x7FF);
-    packed |= ((uint32_t)(y / 0.25f) & 0x7FF) << 11;
-    packed |= ((uint32_t)(z / 0.25f) & 0x3FF) << 22;
+    packed |= ((int32_t)(x / 0.25f) & 0x7FF);
+    packed |= ((int32_t)(y / 0.25f) & 0x7FF) << 11;
+    packed |= ((int32_t)(z / 0.25f) & 0x3FF) << 22;
     return packed;
 }
 
-Vector3d from_packed(uint32_t p)
+int32_t sign_extend(uint32_t value, uint32_t bits)
 {
-    float x = (float)((p & 0x7FF) / 4);
-    float y = (float)(((p >> 11) & 0x7FF) / 4);
-    float z = (float)(((p >> 22) & 0x3FF) / 4);
+    uint32_t sign = 1u << (bits - 1);
+    return (value & sign) ? (int32_t)value - (1 << bits) : (int32_t)value;
+}
+
+Vector3d from_packed(uint32_t packed)
+{
+    float x = (float)sign_extend(packed & 0x7FF, 11) * 0.25f;
+    float y = (float)sign_extend((packed >> 11) & 0x7FF, 11) * 0.25f;
+    float z = (float)sign_extend((packed >> 22) & 0x3FF, 10) * 0.25f;
 
     return Vector3d { x, y, z };
 }

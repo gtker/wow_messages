@@ -1,4 +1,5 @@
 use crate::parser::types::sizes::Sizes;
+use crate::rust_printer::rust_view::conditional_union::ConditionalUnion;
 use crate::rust_printer::rust_view::rust_definer::RustDefiner;
 use crate::rust_printer::rust_view::rust_member::RustMember;
 use crate::rust_printer::rust_view::rust_optional::RustOptional;
@@ -11,6 +12,7 @@ pub(crate) struct RustObject {
     members: Vec<RustMember>,
     optional: Option<RustOptional>,
     sizes: Sizes,
+    conditional_union: Option<Box<ConditionalUnion>>,
 }
 
 impl RustObject {
@@ -23,6 +25,11 @@ impl RustObject {
 
         if let Some(optional) = self.optional() {
             v.append(&mut optional.all_members());
+        }
+
+        if let Some(union) = self.conditional_union() {
+            v.extend(union.linear().object().all_members());
+            v.extend(union.full().object().all_members());
         }
 
         v
@@ -47,6 +54,9 @@ impl RustObject {
     }
     pub(crate) fn sizes(&self) -> Sizes {
         self.sizes
+    }
+    pub(crate) fn conditional_union(&self) -> Option<&ConditionalUnion> {
+        self.conditional_union.as_deref()
     }
 
     pub(crate) fn single_rust_definer(&self) -> Option<RustDefiner<'_>> {
@@ -147,7 +157,10 @@ impl RustObject {
         v
     }
 
-    pub(crate) fn rust_definers_in_enumerator(&self, enumerator_name: &str) -> Vec<RustDefiner<'_>> {
+    pub(crate) fn rust_definers_in_enumerator(
+        &self,
+        enumerator_name: &str,
+    ) -> Vec<RustDefiner<'_>> {
         let mut v = Vec::new();
 
         fn inner<'a>(m: &'a RustMember, enumerator_name: &str, v: &mut Vec<RustDefiner<'a>>) {
@@ -349,12 +362,14 @@ impl RustObject {
         members: Vec<RustMember>,
         optional: Option<RustOptional>,
         sizes: Sizes,
+        conditional_union: Option<ConditionalUnion>,
     ) -> Self {
         Self {
             name,
             members,
             optional,
             sizes,
+            conditional_union: conditional_union.map(Box::new),
         }
     }
 }

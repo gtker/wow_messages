@@ -3,7 +3,7 @@ use crate::parser::types::container::Container;
 use crate::rust_printer::rust_view::rust_definer::RustDefiner;
 use crate::rust_printer::rust_view::rust_type::RustType;
 use crate::rust_printer::structs::print_common_impls::print_size::{
-    print_rust_members_sizes, variable_size,
+    print_rust_members_sizes, print_size_uncompressed_rust_view, variable_size,
 };
 use crate::rust_printer::structs::print_derives;
 use crate::rust_printer::writer::Writer;
@@ -43,6 +43,11 @@ pub(crate) fn print_new_types(s: &mut Writer, e: &Container) {
                 print_types_for_new_flag(s, &rd);
             }
         }
+    }
+
+    if let Some(union) = e.rust_object().conditional_union() {
+        print_size_uncompressed_rust_view(s, union.linear().object(), "self.", "size");
+        print_size_uncompressed_rust_view(s, union.full().object(), "self.", "size");
     }
 }
 

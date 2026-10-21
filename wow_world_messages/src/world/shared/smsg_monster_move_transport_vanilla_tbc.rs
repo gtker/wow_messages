@@ -97,7 +97,7 @@ impl SMSG_MONSTER_MOVE_TRANSPORT {
         let duration = crate::util::read_u32_le(&mut r)?;
 
         // splines: MonsterMoveSplines
-        let splines = crate::util::read_monster_move_spline(&mut r)?;
+        let splines = crate::util::read_monster_move_spline(&mut r, crate::errors::MAX_ALLOCATION_SIZE)?;
 
         Ok(Self {
             guid,

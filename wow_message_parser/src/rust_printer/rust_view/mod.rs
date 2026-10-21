@@ -1,7 +1,16 @@
+use conditional_union::ConditionalUnion;
+use rust_enumerator::RustEnumerator;
+use rust_member::RustMember;
+use rust_object::RustObject;
+use rust_optional::RustOptional;
+use rust_type::RustType;
+
+use crate::parser::types::array::{ArraySize, ArrayType};
 use crate::parser::types::definer::Definer;
 use crate::parser::types::if_statement::{Equation, IfStatement};
 use crate::parser::types::parsed::parsed_container::ParsedContainer;
 use crate::parser::types::parsed::parsed_struct_member::ParsedStructMember;
+use crate::parser::types::sizes::Sizes;
 use crate::parser::types::struct_member::{StructMember, StructMemberDefinition};
 use crate::parser::types::tags::{MemberTags, ObjectTags};
 use crate::parser::types::ty::Type;
@@ -9,12 +18,8 @@ use crate::rust_printer::{
     field_name_to_rust_name, get_new_flag_type_name, get_new_type_name, get_optional_type_name,
     DefinerType,
 };
-use rust_enumerator::RustEnumerator;
-use rust_member::RustMember;
-use rust_object::RustObject;
-use rust_optional::RustOptional;
-use rust_type::RustType;
 
+pub(crate) mod conditional_union;
 pub(crate) mod rust_definer;
 pub(crate) mod rust_enumerator;
 pub(crate) mod rust_member;
@@ -445,18 +450,238 @@ fn create_struct_member_definition(
     RustMember::new(name, ty, d.ty().str(), in_rust_type, d.tags().clone())
 }
 
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+enum MovementSplineBranchKind {
+    Linear,
+    Full,
+}
+
+struct ConditionalUnionCandidate<'a> {
+    statement_index: usize,
+    statement: &'a IfStatement,
+    selector_type_name: String,
+    condition_flags: Vec<String>,
+    full_when_condition: bool,
+}
+
+fn movement_spline_branch_kind(members: &[StructMember]) -> Option<MovementSplineBranchKind> {
+    let definitions: Vec<_> = members
+        .iter()
+        .map(|member| match member {
+            StructMember::Definition(definition) => Some(definition),
+            StructMember::IfStatement(_) | StructMember::OptionalStatement(_) => None,
+        })
+        .collect::<Option<_>>()?;
+
+    if definitions.len() == 1 && matches!(definitions[0].ty(), Type::MonsterMoveSplines) {
+        return Some(MovementSplineBranchKind::Linear);
+    }
+
+    let arrays: Vec<_> = definitions
+        .iter()
+        .filter_map(|definition| match definition.ty() {
+            Type::Array(array)
+                if matches!(array.size(), ArraySize::Variable(_))
+                    && matches!(array.ty(), ArrayType::Struct(_)) =>
+            {
+                Some(*definition)
+            }
+            _ => None,
+        })
+        .collect();
+
+    let [array_definition] = arrays.as_slice() else {
+        return None;
+    };
+    let Type::Array(array) = array_definition.ty() else {
+        return None;
+    };
+    let ArraySize::Variable(_) = array.size() else {
+        return None;
+    };
+
+    if definitions.iter().all(|definition| {
+        std::ptr::eq(*definition, *array_definition)
+            || definition.used_as_size_in().as_deref() == Some(array_definition.name())
+    }) {
+        Some(MovementSplineBranchKind::Full)
+    } else {
+        None
+    }
+}
+
+fn conditional_union_candidate<'a>(
+    members: &'a [StructMember],
+) -> Option<ConditionalUnionCandidate<'a>> {
+    let (statement_index, statement) = match members.last()? {
+        StructMember::IfStatement(statement) => (members.len() - 1, statement),
+        StructMember::Definition(_) | StructMember::OptionalStatement(_) => return None,
+    };
+
+    if statement.definer_type() != DefinerType::Flag
+        || statement.else_ifs().len() != 0
+        || !matches!(statement.equation(), Equation::BitwiseAnd { values } if !values.is_empty())
+    {
+        return None;
+    }
+
+    let full_when_condition = match (
+        movement_spline_branch_kind(statement.members())?,
+        movement_spline_branch_kind(statement.else_members())?,
+    ) {
+        (MovementSplineBranchKind::Full, MovementSplineBranchKind::Linear) => true,
+        (MovementSplineBranchKind::Linear, MovementSplineBranchKind::Full) => false,
+        _ => return None,
+    };
+
+    let Equation::BitwiseAnd { values } = statement.equation() else {
+        return None;
+    };
+
+    let selector_type_name = members[..statement_index]
+        .iter()
+        .find_map(|member| match member {
+            StructMember::Definition(definition)
+                if definition.name() == statement.variable_name() =>
+            {
+                match definition.ty() {
+                    Type::Flag { e, .. } => Some(e.name().to_string()),
+                    _ => None,
+                }
+            }
+            StructMember::Definition(_)
+            | StructMember::IfStatement(_)
+            | StructMember::OptionalStatement(_) => None,
+        })?;
+
+    Some(ConditionalUnionCandidate {
+        statement_index,
+        statement,
+        selector_type_name,
+        condition_flags: values.clone(),
+        full_when_condition,
+    })
+}
+
+fn create_union_record_object(
+    record_name: String,
+    owner_name: &str,
+    members: &[StructMember],
+    e: &ParsedContainer,
+    containers: &[ParsedContainer],
+    definers: &[Definer],
+) -> RustObject {
+    let mut rust_members = Vec::new();
+    let mut optional = None;
+
+    for member in members {
+        create_struct_member(
+            member,
+            owner_name,
+            e.tags(),
+            e,
+            containers,
+            definers,
+            &mut rust_members,
+            &mut optional,
+        );
+    }
+
+    for member in &mut rust_members {
+        set_simple_objects_name(member, owner_name);
+    }
+
+    RustObject::new(
+        record_name,
+        rust_members,
+        optional,
+        Sizes::exact(0, usize::MAX as i128),
+        None,
+    )
+}
+
+fn create_conditional_union(
+    candidate: &ConditionalUnionCandidate<'_>,
+    members: &[StructMember],
+    e: &ParsedContainer,
+    containers: &[ParsedContainer],
+    definers: &[Definer],
+) -> ConditionalUnion {
+    let common_members = members[..candidate.statement_index].to_vec();
+    let linear_members = if movement_spline_branch_kind(candidate.statement.members())
+        == Some(MovementSplineBranchKind::Linear)
+    {
+        candidate.statement.members().to_vec()
+    } else {
+        candidate.statement.else_members().to_vec()
+    };
+    let full_members = if candidate.full_when_condition {
+        candidate.statement.members().to_vec()
+    } else {
+        candidate.statement.else_members().to_vec()
+    };
+
+    let base_name = e
+        .name()
+        .strip_suffix("Variant")
+        .filter(|name| !name.is_empty())
+        .map(str::to_string)
+        .unwrap_or_else(|| format!("{}Data", e.name()));
+    let full_record_name = format!("Full{base_name}");
+    let linear_record_name = base_name;
+
+    let linear_object = create_union_record_object(
+        linear_record_name.clone(),
+        e.name(),
+        &[common_members.clone(), linear_members.clone()].concat(),
+        e,
+        containers,
+        definers,
+    );
+    let full_object = create_union_record_object(
+        full_record_name.clone(),
+        e.name(),
+        &[common_members.clone(), full_members.clone()].concat(),
+        e,
+        containers,
+        definers,
+    );
+
+    ConditionalUnion::new(
+        candidate.statement.variable_name().to_string(),
+        candidate.selector_type_name.clone(),
+        candidate.condition_flags.clone(),
+        candidate.full_when_condition,
+        common_members,
+        linear_members,
+        full_members,
+        linear_record_name,
+        linear_object,
+        full_record_name,
+        full_object,
+    )
+}
+
 pub(crate) fn create_rust_object(
     e: &ParsedContainer,
     members: &[StructMember],
     containers: &[ParsedContainer],
     definers: &[Definer],
 ) -> RustObject {
+    let candidate = conditional_union_candidate(members);
     let mut v = Vec::new();
     let mut optional = None;
 
-    for m in members {
+    for (index, member) in members.iter().enumerate() {
+        if candidate
+            .as_ref()
+            .is_some_and(|candidate| candidate.statement_index == index)
+        {
+            continue;
+        }
+
         create_struct_member(
-            m,
+            member,
             e.name(),
             e.tags(),
             e,
@@ -471,11 +696,16 @@ pub(crate) fn create_rust_object(
         set_simple_objects_name(m, e.name());
     }
 
+    let conditional_union = candidate
+        .as_ref()
+        .map(|candidate| create_conditional_union(candidate, members, e, containers, definers));
+
     let mut r = RustObject::new(
         e.name().to_string(),
         v,
         optional,
         e.create_sizes(containers, definers),
+        conditional_union,
     );
 
     if r.single_rust_definer().is_none() {

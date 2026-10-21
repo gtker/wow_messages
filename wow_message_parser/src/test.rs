@@ -1,3 +1,7 @@
+use std::fs::read_to_string;
+use std::panic;
+use std::path::Path;
+
 use crate::error_printer::{
     BOTH_LOGIN_AND_WORLD_VERSIONS, COMPLEX_NOT_FOUND, DUPLICATE_DEFINER_VALUES,
     DUPLICATE_FIELD_NAMES, ENUM_HAS_BITWISE_AND, FLAG_HAS_EQUALS, INCORRECT_OPCODE_FOR_MESSAGE,
@@ -12,9 +16,6 @@ use crate::path_utils::parser_test_directory;
 use crate::rust_printer::writer::Writer;
 use crate::rust_printer::{print_enum, print_flag, print_struct};
 use crate::{parse_objects_in_directory, print_message_stats};
-use std::fs::read_to_string;
-use std::panic;
-use std::path::Path;
 
 fn should_panic<F: FnOnce() -> R + panic::UnwindSafe, R>(f: F, error_code: i32) {
     let prev_hook = panic::take_hook();
@@ -180,6 +181,61 @@ fn arrays() {
     let s = print_struct(d, &o);
 
     tcheck(&s, "arrays");
+}
+
+#[test]
+fn conditional_union_generates_complete_records_and_codecs() {
+    let objects = parse_objects_in_directory(Path::new("tests/conditional_union.wowm"));
+    let container = objects
+        .all_containers()
+        .find(|container| container.name() == "ConditionalUnionDataVariant")
+        .unwrap();
+    let generated = print_struct(container, &objects);
+    let generated = generated.inner();
+
+    assert!(generated.contains("pub struct ConditionalUnionData {"));
+    assert!(generated.contains("pub struct FullConditionalUnionData {"));
+    assert!(generated.contains("pub enum ConditionalUnionDataVariant {"));
+    assert!(generated.contains("Linear(ConditionalUnionData)"));
+    assert!(generated.contains("Full(FullConditionalUnionData)"));
+    assert!(generated.contains(
+        "(flags.as_int() & ConditionalUnionFlag::FULL_PATH) != 0 || (flags.as_int() & ConditionalUnionFlag::SECOND_FULL_PATH) != 0"
+    ));
+    assert!(generated.contains("spline flags do not match linear movement data"));
+    assert!(generated.contains("Self::Linear(data) => data.size()"));
+    assert!(generated.contains("Self::Full(data) => data.size()"));
+    assert!(generated.contains("u32::try_from(data.full_points.len())"));
+    assert!(generated.contains("array length exceeds u32"));
+    assert!(generated.contains("match self"));
+    let allocation_guard = generated
+        .find("let allocation_size = u64::from(point_count) * 12;")
+        .unwrap();
+    let vector_capacity = generated
+        .find("let mut full_points = Vec::with_capacity(point_count as usize);")
+        .unwrap();
+    assert!(allocation_guard < vector_capacity);
+
+    let wrath_objects = parse_objects_in_directory(Path::new("wowm"));
+    let wrath_movement = wrath_objects
+        .all_containers()
+        .find(|container| container.name() == "MonsterMoveDataVariant")
+        .unwrap();
+    let generated_wrath_movement = print_struct(wrath_movement, &wrath_objects);
+    assert!(generated_wrath_movement.inner().contains(
+        "w.write_all(&crate::util::wrath_monster_move_spline_flags_for_wire(data.spline_flags.as_int()).to_le_bytes())?;"
+    ));
+
+    let message = objects
+        .all_containers()
+        .find(|container| container.name() == "SMSG_CONDITIONAL_UNION")
+        .unwrap();
+    let generated_message = print_struct(message, &objects);
+    assert!(generated_message
+        .inner()
+        .contains("ConditionalUnionDataVariant::Linear(data) =>"));
+    assert!(generated_message
+        .inner()
+        .contains("ConditionalUnionDataVariant::Full(data) =>"));
 }
 
 #[test]

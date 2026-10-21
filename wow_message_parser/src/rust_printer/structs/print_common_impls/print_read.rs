@@ -8,6 +8,7 @@ use crate::parser::types::ty::Type;
 use crate::parser::types::IntegerType;
 use crate::rust_printer::base_structs::base_struct_read_name;
 use crate::rust_printer::get_optional_type_name;
+use crate::rust_printer::rust_view::conditional_union::{ConditionalUnion, ConditionalUnionBranch};
 use crate::rust_printer::rust_view::rust_definer::RustDefiner;
 use crate::rust_printer::rust_view::rust_type::RustType;
 use crate::rust_printer::structs::print_common_impls::print_size::{
@@ -65,10 +66,8 @@ fn print_read_array(
         ArraySize::Variable(m) => {
             let length = m.name();
 
-            s.wln(format!(
-                "let mut {name} = Vec::with_capacity({length} as usize);",
-            ));
             let object_min_size = array.ty().sizes().minimum();
+            let check_before_reserving = e.rust_object().conditional_union().is_some();
 
             let (max_size, max_alloc_size) = if e.tags().contains_wrath() {
                 ("MAX_ALLOCATION_SIZE_WRATH", MAX_ALLOCATION_SIZE_WRATH)
@@ -76,11 +75,17 @@ fn print_read_array(
                 ("MAX_ALLOCATION_SIZE", MAX_ALLOCATION_SIZE)
             };
 
-            if e.tags().has_world_version()
-                && m.manual_size_field_max_value() * object_min_size > max_alloc_size
-            {
-                s.newline();
+            let needs_allocation_guard = e.tags().has_world_version()
+                && m.manual_size_field_max_value() * object_min_size > max_alloc_size;
+            let capacity = format!("let mut {name} = Vec::with_capacity({length} as usize);");
+            if !check_before_reserving {
+                s.wln(&capacity);
+                if needs_allocation_guard {
+                    s.newline();
+                }
+            }
 
+            if needs_allocation_guard {
                 let length = if m.manual_size_field_integer_size() < 8 {
                     format!("u64::from({length})")
                 } else {
@@ -100,6 +105,12 @@ fn print_read_array(
                 });
             }
 
+            if check_before_reserving {
+                if needs_allocation_guard {
+                    s.newline();
+                }
+                s.wln(capacity);
+            }
             s.body(format!("for _ in 0..{length}", length = m.name()), |s| {
                 print_array_ty(s, array, d, prefix, postfix, false, None);
             });
@@ -472,8 +483,16 @@ fn print_read_definition(
         }
 
         Type::MonsterMoveSplines => {
+            let (read_function, max_allocation_size) = if e.tags().contains_wrath() {
+                (
+                    "read_wrath_monster_move_spline",
+                    "MAX_ALLOCATION_SIZE_WRATH",
+                )
+            } else {
+                ("read_monster_move_spline", "MAX_ALLOCATION_SIZE")
+            };
             s.wln_no_indent(format!(
-                "crate::util::read_monster_move_spline(&mut r){postfix}?;",
+                "crate::util::{read_function}(&mut r, crate::errors::{max_allocation_size}){postfix}?;",
             ));
         }
         Type::AchievementDoneArray => {
@@ -845,6 +864,58 @@ fn print_read_final_enums(s: &mut Writer, rds: &[RustDefiner]) {
     }
 }
 
+fn print_read_conditional_union(
+    s: &mut Writer,
+    e: &Container,
+    o: &Objects,
+    union: &ConditionalUnion,
+    prefix: &str,
+    postfix: &str,
+) {
+    for member in union.common_members() {
+        print_read_field(s, e, o, member, prefix, postfix, "let ");
+    }
+
+    let full_condition = union.full_condition_expression(union.selector_name());
+    let full_condition = if union.full_when_condition() {
+        full_condition
+    } else {
+        format!("!({full_condition})")
+    };
+    s.wln(format!("let conditional_union_is_full = {full_condition};"));
+    print_read_final_flag(s, &e.rust_object().rust_definers_in_global_scope());
+
+    s.body_else_with_closing(
+        "let movement = if conditional_union_is_full",
+        ";",
+        |s| {
+            for member in union.full_members() {
+                print_read_field(s, e, o, member, prefix, postfix, "let ");
+            }
+            print_conditional_union_variant(s, union.full());
+        },
+        |s| {
+            for member in union.linear_members() {
+                print_read_field(s, e, o, member, prefix, postfix, "let ");
+            }
+            print_conditional_union_variant(s, union.linear());
+        },
+    );
+    s.wln("Ok(movement)");
+}
+
+fn print_conditional_union_variant(s: &mut Writer, branch: &ConditionalUnionBranch) {
+    s.body_closing_with(
+        format!("Self::{}({}", branch.variant_name(), branch.record_name()),
+        |s| {
+            for member in branch.object().members_in_struct() {
+                s.wln(format!("{},", member.name()));
+            }
+        },
+        ")",
+    );
+}
+
 pub(crate) fn print_read(
     s: &mut Writer,
     e: &Container,
@@ -853,6 +924,11 @@ pub(crate) fn print_read(
     postfix: &str,
     object_create_overwrite: Option<&str>,
 ) {
+    if let Some(union) = e.rust_object().conditional_union() {
+        print_read_conditional_union(s, e, o, union, prefix, postfix);
+        return;
+    }
+
     if e.all_definitions()
         .iter()
         .any(|a| matches!(a.ty(), Type::AddonArray))

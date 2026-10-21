@@ -21,6 +21,8 @@ smsg SMSG_MONSTER_MOVE_TRANSPORT = 0x02AE {
 smsg SMSG_MONSTER_MOVE_TRANSPORT = 0x02AE {
     PackedGuid guid;
     PackedGuid transport;
+    /// Signed transport seat.
+    i8 transport_seat;
     /// cmangos-wotlk sets to 0
     u8 unknown;
     Vector3d spline_point;
@@ -33,18 +35,36 @@ smsg SMSG_MONSTER_MOVE_TRANSPORT = 0x02AE {
     } else if (move_type == FACING_SPOT) {
         Vector3d position;
     }
-    SplineFlag spline_flags;
-    if (spline_flags & ENTER_CYCLE) {
-        u32 animation_id;
-        u32 animation_start_time;
+    if (move_type != STOP) {
+        MonsterMoveDataVariant movement;
     }
-    u32 duration;
-    if (spline_flags & PARABOLIC) {
-        f32 vertical_acceleration;
-        u32 effect_start_time;
-    }
-    MonsterMoveSplines splines;
 } {
+    versions = "3.3.5";
+}
+
+test SMSG_MONSTER_MOVE_TRANSPORT {
+    guid = 0;
+    transport = 1;
+    transport_seat = -7;
+    unknown = 0xAB;
+    spline_point = {
+        x = 0.0;
+        y = 0.0;
+        z = 0.0;
+    };
+    spline_id = 0;
+    move_type = STOP;
+} [
+    0x00, 0x18, /* size */
+    0xAE, 0x02, /* opcode */
+    0x00, /* guid */
+    0x01, 0x01, /* transport: packed guid 1 */
+    0xF9, /* transport_seat: -7 */
+    0xAB, /* unknown */
+    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, /* spline_point */
+    0x00, 0x00, 0x00, 0x00, /* spline_id */
+    0x01, /* move_type: STOP */
+] {
     versions = "3.3.5";
 }
 

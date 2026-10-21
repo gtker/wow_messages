@@ -1,5 +1,6 @@
-use crate::errors::{ParseErrorKind, MAX_ALLOCATION_SIZE_WRATH};
 use std::io::Read;
+
+use crate::errors::{ParseErrorKind, MAX_ALLOCATION_SIZE_WRATH};
 
 pub fn read_c_string_to_vec<R: Read>(r: &mut R) -> Result<Vec<u8>, std::io::Error> {
     const CSTRING_LARGEST_ALLOWED: usize = 256;
@@ -83,6 +84,10 @@ pub fn read_u8_le<R: Read>(r: &mut R) -> Result<u8, std::io::Error> {
     let mut v = [0_u8; 1];
     r.read_exact(&mut v)?;
     Ok(u8::from_le_bytes(v))
+}
+
+pub fn read_i8_le<R: Read>(r: &mut R) -> Result<i8, std::io::Error> {
+    Ok(read_u8_le(r)? as i8)
 }
 
 pub fn read_u16_le<R: Read>(r: &mut R) -> Result<u16, std::io::Error> {

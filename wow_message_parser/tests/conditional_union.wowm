@@ -1,0 +1,33 @@
+flag ConditionalUnionFlag : u8 {
+    FULL_PATH = 0x01;
+    SECOND_FULL_PATH = 0x02;
+} {
+    versions = "3.3.5";
+}
+
+struct ConditionalUnionPoint {
+    f32 x;
+    f32 y;
+    f32 z;
+} {
+    versions = "3.3.5";
+}
+
+struct ConditionalUnionDataVariant {
+    ConditionalUnionFlag flags;
+    u32 duration;
+    if (flags & FULL_PATH || flags & SECOND_FULL_PATH) {
+        u32 point_count;
+        ConditionalUnionPoint[point_count] full_points;
+    } else {
+        MonsterMoveSplines packed_points;
+    }
+} {
+    versions = "3.3.5";
+}
+
+smsg SMSG_CONDITIONAL_UNION = 0x0555 {
+    ConditionalUnionDataVariant movement;
+} {
+    versions = "3.3.5";
+}

@@ -7,6 +7,7 @@ use crate::parser::types::test_case::{TestCase, TestCaseMember, TestValue};
 use crate::parser::types::version::Version;
 use crate::parser::utility::parse_value;
 use crate::rust_printer::opcodes::get_enumerator_name;
+use crate::rust_printer::rust_view::conditional_union::ConditionalUnion;
 use crate::rust_printer::rust_view::rust_enumerator::RustEnumerator;
 use crate::rust_printer::rust_view::rust_member::RustMember;
 use crate::rust_printer::rust_view::rust_type::RustType;
@@ -359,6 +360,47 @@ pub(crate) fn get_enumerator<'a>(
     None
 }
 
+fn print_conditional_union_value(
+    s: &mut Writer,
+    e: &Container,
+    union: &ConditionalUnion,
+    members: &[TestCaseMember],
+    version: Version,
+) {
+    let selector = TestCase::get_member(members, union.selector_name());
+    let condition_matches = match selector.value() {
+        TestValue::Flag(flags) => union
+            .condition_flags()
+            .iter()
+            .any(|condition| flags.contains(condition)),
+        _ => false,
+    };
+    let is_full = if union.full_when_condition() {
+        condition_matches
+    } else {
+        !condition_matches
+    };
+    let branch = if is_full {
+        union.full()
+    } else {
+        union.linear()
+    };
+
+    s.wln_no_indent(format!(
+        "{}::{}({} {{",
+        e.name(),
+        branch.variant_name(),
+        branch.record_name()
+    ));
+    s.inc_indent();
+
+    for member in branch.object().members_in_struct() {
+        print_value(s, member, members, e, version);
+    }
+
+    s.closing_curly_with("),");
+}
+
 fn print_value(
     s: &mut Writer,
     m: &RustMember,
@@ -377,7 +419,12 @@ fn print_value(
 
     match member.value() {
         TestValue::Number(i) => {
-            s.wln_no_indent(format!("{:#X},", i.value()));
+            let value = i.value();
+            if value < 0 {
+                s.wln_no_indent(format!("{value},"));
+            } else {
+                s.wln_no_indent(format!("{value:#X},"));
+            }
         }
         TestValue::Seconds(i) => {
             s.wln_no_indent(format!("Duration::from_secs({:#X}),", i.value()));
@@ -561,10 +608,15 @@ fn print_value(
             s.dec_indent();
         }
         TestValue::SubObject { c, members } => {
+            let t = members.as_slice();
+            if let Some(union) = c.rust_object().conditional_union() {
+                print_conditional_union_value(s, c, union, t, version);
+                return;
+            }
+
             s.wln_no_indent(format!("{} {{", c.name()));
             s.inc_indent();
 
-            let t = members.as_slice();
             for m in c.rust_object().members_in_struct() {
                 print_value(s, m, t, c, version);
             }
@@ -659,7 +711,9 @@ fn print_value(
 
                 let field_name = if f.ty() == UpdateMaskObjectType::Container
                     && f.name().starts_with("SLOT_")
-                    && f.name()[5..].parse::<u8>().is_ok_and(|slot| (1..=36).contains(&slot))
+                    && f.name()[5..]
+                        .parse::<u8>()
+                        .is_ok_and(|slot| (1..=36).contains(&slot))
                 {
                     "SLOT"
                 } else {

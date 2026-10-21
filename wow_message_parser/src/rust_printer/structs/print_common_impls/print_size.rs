@@ -175,6 +175,22 @@ pub(crate) fn print_size_of_ty_rust_view(s: &mut Writer, m: &RustMember, prefix:
 pub(crate) fn print_size_rust_view(s: &mut Writer, c: &Container, prefix: &str) {
     let r = c.rust_object();
 
+    if let Some(union) = r.conditional_union() {
+        variable_size(s, c.name(), "size", false, |s| {
+            s.body("match self", |s| {
+                s.wln(format!(
+                    "Self::{}(data) => data.size(),",
+                    union.linear().variant_name()
+                ));
+                s.wln(format!(
+                    "Self::{}(data) => data.size(),",
+                    union.full().variant_name()
+                ));
+            });
+        });
+        return;
+    }
+
     if !r.constant_sized() {
         if c.tags().compressed() {
             variable_size(s, r.name(), "size", false, |s| {

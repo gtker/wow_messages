@@ -1,3 +1,9 @@
+use std::collections::HashMap;
+use std::convert::TryInto;
+use std::fmt::Write;
+use std::io::Read;
+use std::slice::Iter;
+
 use crate::parser::types::array::{Array, ArraySize, ArrayType};
 use crate::parser::types::if_statement::{Equation, IfStatement};
 use crate::parser::types::sizes::SPELL_SIZE;
@@ -7,11 +13,6 @@ use crate::parser::types::IntegerType;
 use crate::rust_printer::writer::Writer;
 use crate::wowm_printer::get_struct_wowm_definition;
 use crate::{doc_printer, Container, ContainerType, DefinerType, ObjectTags, Objects};
-use std::collections::HashMap;
-use std::convert::TryInto;
-use std::fmt::Write;
-use std::io::Read;
-use std::slice::Iter;
 
 pub(crate) fn print_docs_for_container(e: &Container, o: &Objects, print_header: bool) -> Writer {
     let mut s = Writer::new();
@@ -266,7 +267,27 @@ fn print_container_example_definition(
             s.w(format!("{b}, "));
         }
         Type::MonsterMoveSplines => {
-            unimplemented!("monster move spline doc printer")
+            let count_bytes = [
+                *bytes.next().unwrap(),
+                *bytes.next().unwrap(),
+                *bytes.next().unwrap(),
+                *bytes.next().unwrap(),
+            ];
+            let count = u32::from_le_bytes(count_bytes);
+            for byte in count_bytes {
+                s.w(format!("{byte}, "));
+            }
+            s.wln(format!("{comment} count: {count}"));
+
+            if count != 0 {
+                s.bytes(bytes.take(12));
+                s.wln_no_indent("// destination");
+            }
+
+            for _ in 1..count {
+                s.bytes(bytes.take(4));
+                s.wln_no_indent("// signed packed midpoint offset");
+            }
         }
         Type::AchievementDoneArray | Type::AchievementInProgressArray => {
             unimplemented!("-1 delimited achievement arrays")
@@ -369,8 +390,16 @@ fn print_container_example_member(
                             }
                         }
                     }
-                    Equation::NotEquals { .. } => {
-                        unimplemented!("examples for not equals")
+                    Equation::NotEquals { value } => {
+                        let eq_value = definer_ty
+                            .fields()
+                            .iter()
+                            .find(|a| value == a.name())
+                            .unwrap()
+                            .value()
+                            .int();
+
+                        set = eq_value != enum_value;
                     }
                 }
                 set
