@@ -174904,6 +174904,10 @@
             "definer_usage": "InIfStatement"
           },
           {
+            "object_name": "SMSG_SPELL_FAILED_OTHER",
+            "definer_usage": "RegularUse"
+          },
+          {
             "object_name": "SMSG_SPELL_FAILURE",
             "definer_usage": "RegularUse"
           }
@@ -521587,9 +521591,9 @@
           "opcode": 307
         },
         "sizes": {
-          "constant_sized": true,
-          "minimum_size": 14,
-          "maximum_size": 14
+          "constant_sized": false,
+          "minimum_size": 7,
+          "maximum_size": 15
         },
         "members": [
           {
@@ -521597,7 +521601,7 @@
             "struct_member_content": {
               "name": "guid",
               "data_type": {
-                "data_type_tag": "Guid"
+                "data_type_tag": "PackedGuid"
               },
               "constant_value": null,
               "used_as_size_in": null,
@@ -521685,7 +521689,92 @@
             }
           }
         },
-        "tests": [],
+        "tests": [
+          {
+            "subject": "SMSG_SPELL_FAILURE",
+            "members": [
+              {
+                "variable_name": "guid",
+                "value": {
+                  "test_value_tag": "Guid",
+                  "content": {
+                    "value": "1",
+                    "original_string": "1"
+                  }
+                },
+                "tags": {}
+              },
+              {
+                "variable_name": "extra_casts",
+                "value": {
+                  "test_value_tag": "Integer",
+                  "content": {
+                    "value": "0",
+                    "original_string": "0"
+                  }
+                },
+                "tags": {}
+              },
+              {
+                "variable_name": "spell",
+                "value": {
+                  "test_value_tag": "Integer",
+                  "content": {
+                    "value": "133",
+                    "original_string": "133"
+                  }
+                },
+                "tags": {}
+              },
+              {
+                "variable_name": "result",
+                "value": {
+                  "test_value_tag": "Enum",
+                  "content": {
+                    "value": "40",
+                    "original_string": "INTERRUPTED"
+                  }
+                },
+                "tags": {}
+              }
+            ],
+            "raw_bytes": [
+              0,
+              10,
+              51,
+              1,
+              1,
+              1,
+              0,
+              133,
+              0,
+              0,
+              0,
+              40
+            ],
+            "tags": {
+              "version": {
+                "version_type_tag": "world",
+                "version_type": {
+                  "world_version_tag": "specific",
+                  "versions": [
+                    {
+                      "major": 3,
+                      "minor": 3,
+                      "patch": 5,
+                      "build": null
+                    }
+                  ]
+                }
+              }
+            },
+            "file_info": {
+              "file_name": "wow_message_parser/wowm/world/spell/smsg_spell_failure.wowm",
+              "start_position": 18,
+              "end_position": 32
+            }
+          }
+        ],
         "file_info": {
           "file_name": "wow_message_parser/wowm/world/spell/smsg_spell_failure.wowm",
           "start_position": 9,
@@ -640670,12 +640759,6 @@
                   "minor": null,
                   "patch": null,
                   "build": null
-                },
-                {
-                  "major": 3,
-                  "minor": null,
-                  "patch": null,
-                  "build": null
                 }
               ]
             }
@@ -640700,6 +640783,230 @@
             "name": "id",
             "is_elseif_flag": false,
             "enum_part_of_separate_statements": false
+          }
+        ],
+        "optional": null
+      },
+      {
+        "name": "SMSG_SPELL_FAILED_OTHER",
+        "object_type": {
+          "container_type_tag": "SMsg",
+          "opcode": 678
+        },
+        "sizes": {
+          "constant_sized": false,
+          "minimum_size": 7,
+          "maximum_size": 15
+        },
+        "members": [
+          {
+            "struct_member_tag": "Definition",
+            "struct_member_content": {
+              "name": "caster",
+              "data_type": {
+                "data_type_tag": "PackedGuid"
+              },
+              "constant_value": null,
+              "used_as_size_in": null,
+              "size_of_fields_before_size": null,
+              "used_in_if": false,
+              "tags": {}
+            }
+          },
+          {
+            "struct_member_tag": "Definition",
+            "struct_member_content": {
+              "name": "extra_casts",
+              "data_type": {
+                "data_type_tag": "Integer",
+                "integer_type": "U8"
+              },
+              "constant_value": null,
+              "used_as_size_in": null,
+              "size_of_fields_before_size": null,
+              "used_in_if": false,
+              "tags": {}
+            }
+          },
+          {
+            "struct_member_tag": "Definition",
+            "struct_member_content": {
+              "name": "id",
+              "data_type": {
+                "data_type_tag": "Spell"
+              },
+              "constant_value": null,
+              "used_as_size_in": null,
+              "size_of_fields_before_size": null,
+              "used_in_if": false,
+              "tags": {}
+            }
+          },
+          {
+            "struct_member_tag": "Definition",
+            "struct_member_content": {
+              "name": "result",
+              "data_type": {
+                "data_type_tag": "Enum",
+                "type_name": "SpellCastResult",
+                "integer_type": "U8",
+                "tags": {
+                  "version": {
+                    "version_type_tag": "world",
+                    "version_type": {
+                      "world_version_tag": "specific",
+                      "versions": [
+                        {
+                          "major": 3,
+                          "minor": 3,
+                          "patch": 5,
+                          "build": null
+                        }
+                      ]
+                    }
+                  }
+                },
+                "upcast": false
+              },
+              "constant_value": null,
+              "used_as_size_in": null,
+              "size_of_fields_before_size": null,
+              "used_in_if": false,
+              "tags": {}
+            }
+          }
+        ],
+        "tags": {
+          "version": {
+            "version_type_tag": "world",
+            "version_type": {
+              "world_version_tag": "specific",
+              "versions": [
+                {
+                  "major": 3,
+                  "minor": 3,
+                  "patch": 5,
+                  "build": null
+                }
+              ]
+            }
+          }
+        },
+        "tests": [
+          {
+            "subject": "SMSG_SPELL_FAILED_OTHER",
+            "members": [
+              {
+                "variable_name": "caster",
+                "value": {
+                  "test_value_tag": "Guid",
+                  "content": {
+                    "value": "1",
+                    "original_string": "1"
+                  }
+                },
+                "tags": {}
+              },
+              {
+                "variable_name": "extra_casts",
+                "value": {
+                  "test_value_tag": "Integer",
+                  "content": {
+                    "value": "0",
+                    "original_string": "0"
+                  }
+                },
+                "tags": {}
+              },
+              {
+                "variable_name": "id",
+                "value": {
+                  "test_value_tag": "Integer",
+                  "content": {
+                    "value": "133",
+                    "original_string": "133"
+                  }
+                },
+                "tags": {}
+              },
+              {
+                "variable_name": "result",
+                "value": {
+                  "test_value_tag": "Enum",
+                  "content": {
+                    "value": "40",
+                    "original_string": "INTERRUPTED"
+                  }
+                },
+                "tags": {}
+              }
+            ],
+            "raw_bytes": [
+              0,
+              10,
+              166,
+              2,
+              1,
+              1,
+              0,
+              133,
+              0,
+              0,
+              0,
+              40
+            ],
+            "tags": {
+              "version": {
+                "version_type_tag": "world",
+                "version_type": {
+                  "world_version_tag": "specific",
+                  "versions": [
+                    {
+                      "major": 3,
+                      "minor": 3,
+                      "patch": 5,
+                      "build": null
+                    }
+                  ]
+                }
+              }
+            },
+            "file_info": {
+              "file_name": "wow_message_parser/wowm/world/spell/smsg_spell_failed_other.wowm",
+              "start_position": 17,
+              "end_position": 31
+            }
+          }
+        ],
+        "file_info": {
+          "file_name": "wow_message_parser/wowm/world/spell/smsg_spell_failed_other.wowm",
+          "start_position": 8,
+          "end_position": 15
+        },
+        "only_has_io_error": false,
+        "has_manual_size_field": false,
+        "manual_size_subtraction": null,
+        "prepared_objects": [
+          {
+            "name": "caster",
+            "is_elseif_flag": false,
+            "enum_part_of_separate_statements": false
+          },
+          {
+            "name": "extra_casts",
+            "is_elseif_flag": false,
+            "enum_part_of_separate_statements": false
+          },
+          {
+            "name": "id",
+            "is_elseif_flag": false,
+            "enum_part_of_separate_statements": false
+          },
+          {
+            "name": "result",
+            "is_elseif_flag": false,
+            "enum_part_of_separate_statements": false,
+            "definer_type": "Enum"
           }
         ],
         "optional": null

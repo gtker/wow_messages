@@ -1036,8 +1036,8 @@ pub mod smsg_spellsteallog_tbc_wrath;
 pub mod smsg_spell_cooldown_tbc_wrath;
 #[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
 pub mod smsg_spell_delayed_vanilla_tbc_wrath;
-#[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
-pub mod smsg_spell_failed_other_vanilla_tbc_wrath;
+#[cfg(any(feature = "vanilla", feature = "tbc"))]
+pub mod smsg_spell_failed_other_vanilla_tbc;
 #[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
 pub mod smsg_spell_update_chain_targets_vanilla_tbc_wrath;
 #[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]

@@ -2,5 +2,30 @@ smsg SMSG_SPELL_FAILED_OTHER = 0x02A6 {
     Guid caster;
     Spell id;
 } {
-    versions = "1 2 3";
+    versions = "1 2";
+}
+
+smsg SMSG_SPELL_FAILED_OTHER = 0x02A6 {
+    PackedGuid caster;
+    u8 extra_casts;
+    Spell id;
+    SpellCastResult result;
+} {
+    versions = "3.3.5";
+}
+
+test SMSG_SPELL_FAILED_OTHER {
+    caster = 1;
+    extra_casts = 0;
+    id = 133;
+    result = INTERRUPTED;
+} [
+    0x00, 0x0A, /* size */
+    0xA6, 0x02, /* opcode */
+    0x01, 0x01, /* caster */
+    0x00, /* extra_casts */
+    0x85, 0x00, 0x00, 0x00, /* id */
+    0x28, /* result */
+] {
+    versions = "3.3.5";
 }

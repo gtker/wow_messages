@@ -7,10 +7,26 @@ smsg SMSG_SPELL_FAILURE = 0x0133 {
 }
 
 smsg SMSG_SPELL_FAILURE = 0x0133 {
-    Guid guid;
+    PackedGuid guid;
     u8 extra_casts;
     Spell spell;
     SpellCastResult result;
 } {
     paste_versions = "3.3.5";
+}
+
+test SMSG_SPELL_FAILURE {
+    guid = 1;
+    extra_casts = 0;
+    spell = 133;
+    result = INTERRUPTED;
+} [
+    0x00, 0x0A, /* size */
+    0x33, 0x01, /* opcode */
+    0x01, 0x01, /* guid */
+    0x00, /* extra_casts */
+    0x85, 0x00, 0x00, 0x00, /* spell */
+    0x28, /* result */
+] {
+    versions = "3.3.5";
 }
