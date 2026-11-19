@@ -1056,5 +1056,6 @@ The basic type is `u8`, a 1 byte (8 bit) integer.
 Used in:
 * [SMSG_CAST_FAILED](smsg_cast_failed.md)
 * [SMSG_PET_CAST_FAILED](smsg_pet_cast_failed.md)
+* [SMSG_SPELL_FAILED_OTHER](smsg_spell_failed_other.md)
 * [SMSG_SPELL_FAILURE](smsg_spell_failure.md)
 

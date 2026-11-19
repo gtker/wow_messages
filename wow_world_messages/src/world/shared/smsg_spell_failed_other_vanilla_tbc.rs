@@ -71,7 +71,7 @@ impl crate::Message for SMSG_SPELL_FAILED_OTHER {
 
 
         writeln!(s, "] {{").unwrap();
-        writeln!(s, "    versions = \"{}\";", std::env::var("WOWM_TEST_CASE_WORLD_VERSION").unwrap_or("1 2 3".to_string())).unwrap();
+        writeln!(s, "    versions = \"{}\";", std::env::var("WOWM_TEST_CASE_WORLD_VERSION").unwrap_or("1 2".to_string())).unwrap();
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
@@ -102,7 +102,4 @@ impl crate::vanilla::ServerMessage for SMSG_SPELL_FAILED_OTHER {}
 
 #[cfg(feature = "tbc")]
 impl crate::tbc::ServerMessage for SMSG_SPELL_FAILED_OTHER {}
-
-#[cfg(feature = "wrath")]
-impl crate::wrath::ServerMessage for SMSG_SPELL_FAILED_OTHER {}
 

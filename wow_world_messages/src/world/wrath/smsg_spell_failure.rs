@@ -6,7 +6,7 @@ use crate::wrath::SpellCastResult;
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/spell/smsg_spell_failure.wowm:9`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/spell/smsg_spell_failure.wowm#L9):
 /// ```text
 /// smsg SMSG_SPELL_FAILURE = 0x0133 {
-///     Guid guid;
+///     PackedGuid guid;
 ///     u8 extra_casts;
 ///     Spell spell;
 ///     SpellCastResult result;
@@ -23,12 +23,12 @@ pub struct SMSG_SPELL_FAILURE {
 impl crate::private::Sealed for SMSG_SPELL_FAILURE {}
 impl SMSG_SPELL_FAILURE {
     fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
-        if body_size != 14 {
+        if !(7..=15).contains(&body_size) {
             return Err(crate::errors::ParseErrorKind::InvalidSize);
         }
 
-        // guid: Guid
-        let guid = crate::util::read_guid(&mut r)?;
+        // guid: PackedGuid
+        let guid = crate::util::read_packed_guid(&mut r)?;
 
         // extra_casts: u8
         let extra_casts = crate::util::read_u8_le(&mut r)?;
@@ -57,50 +57,13 @@ impl crate::Message for SMSG_SPELL_FAILURE {
         "SMSG_SPELL_FAILURE"
     }
 
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        use std::fmt::Write;
-        use crate::traits::Message;
-
-        let mut s = String::new();
-
-        writeln!(s, "test SMSG_SPELL_FAILURE {{").unwrap();
-        // Members
-        writeln!(s, "    guid = {};", self.guid.guid()).unwrap();
-        writeln!(s, "    extra_casts = {};", self.extra_casts).unwrap();
-        writeln!(s, "    spell = {};", self.spell).unwrap();
-        writeln!(s, "    result = {};", self.result.as_test_case_value()).unwrap();
-
-        writeln!(s, "}} [").unwrap();
-
-        let [a, b] = 16_u16.to_be_bytes();
-        writeln!(s, "    {a:#04X}, {b:#04X}, /* size */").unwrap();
-        let [a, b] = 307_u16.to_le_bytes();
-        writeln!(s, "    {a:#04X}, {b:#04X}, /* opcode */").unwrap();
-        let mut bytes: Vec<u8> = Vec::new();
-        self.write_into_vec(&mut bytes).unwrap();
-        let mut bytes = bytes.into_iter();
-
-        crate::util::write_bytes(&mut s, &mut bytes, 8, "guid", "    ");
-        crate::util::write_bytes(&mut s, &mut bytes, 1, "extra_casts", "    ");
-        crate::util::write_bytes(&mut s, &mut bytes, 4, "spell", "    ");
-        crate::util::write_bytes(&mut s, &mut bytes, 1, "result", "    ");
-
-
-        writeln!(s, "] {{").unwrap();
-        writeln!(s, "    versions = \"{}\";", std::env::var("WOWM_TEST_CASE_WORLD_VERSION").unwrap_or("3.3.5".to_string())).unwrap();
-        writeln!(s, "}}\n").unwrap();
-
-        Some(s)
-    }
-
     fn size_without_header(&self) -> u32 {
-        14
+        self.size() as u32
     }
 
     fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
-        // guid: Guid
-        w.write_all(&self.guid.guid().to_le_bytes())?;
+        // guid: PackedGuid
+        crate::util::write_packed_guid(&self.guid, &mut w)?;
 
         // extra_casts: u8
         w.write_all(&self.extra_casts.to_le_bytes())?;
@@ -122,4 +85,99 @@ impl crate::Message for SMSG_SPELL_FAILURE {
 
 #[cfg(feature = "wrath")]
 impl crate::wrath::ServerMessage for SMSG_SPELL_FAILURE {}
+
+impl SMSG_SPELL_FAILURE {
+    pub(crate) const fn size(&self) -> usize {
+        crate::util::packed_guid_size(&self.guid) // guid: PackedGuid
+        + 1 // extra_casts: u8
+        + 4 // spell: Spell
+        + 1 // result: SpellCastResult
+    }
+}
+
+#[cfg(test)]
+mod test {
+    #![allow(clippy::missing_const_for_fn)]
+    use super::SMSG_SPELL_FAILURE;
+    use super::*;
+    use super::super::*;
+    use crate::wrath::opcodes::ServerOpcodeMessage;
+    use crate::Guid;
+    use crate::wrath::{ClientMessage, ServerMessage};
+
+    const HEADER_SIZE: usize = 2 + 2;
+    const RAW0: [u8; 12] = [ 0x00, 0x0A, 0x33, 0x01, 0x01, 0x01, 0x00, 0x85, 0x00,
+         0x00, 0x00, 0x28, ];
+
+    pub(crate) fn expected0() -> SMSG_SPELL_FAILURE {
+        SMSG_SPELL_FAILURE {
+            guid: Guid::new(0x1),
+            extra_casts: 0x0,
+            spell: 0x85,
+            result: SpellCastResult::Interrupted,
+        }
+
+    }
+
+    // Generated from `wow_message_parser/wowm/world/spell/smsg_spell_failure.wowm` line 18.
+    #[cfg(feature = "sync")]
+    #[cfg_attr(feature = "sync", test)]
+    fn smsg_spell_failure0() {
+        let expected = expected0();
+        let t = ServerOpcodeMessage::read_unencrypted(&mut std::io::Cursor::new(&RAW0)).unwrap();
+        let t = match t {
+            ServerOpcodeMessage::SMSG_SPELL_FAILURE(t) => t,
+            opcode => panic!("incorrect opcode. Expected SMSG_SPELL_FAILURE, got {opcode:#?}"),
+        };
+
+        assert_eq!(t.as_ref(), &expected);
+        assert_eq!(t.size() + HEADER_SIZE, RAW0.len());
+
+        let mut dest = Vec::with_capacity(RAW0.len());
+        expected.write_unencrypted_server(&mut std::io::Cursor::new(&mut dest)).unwrap();
+
+        assert_eq!(dest, RAW0);
+    }
+
+    // Generated from `wow_message_parser/wowm/world/spell/smsg_spell_failure.wowm` line 18.
+    #[cfg(feature = "tokio")]
+    #[cfg_attr(feature = "tokio", tokio::test)]
+    async fn tokio_smsg_spell_failure0() {
+        let expected = expected0();
+        let t = ServerOpcodeMessage::tokio_read_unencrypted(&mut std::io::Cursor::new(&RAW0)).await.unwrap();
+        let t = match t {
+            ServerOpcodeMessage::SMSG_SPELL_FAILURE(t) => t,
+            opcode => panic!("incorrect opcode. Expected SMSG_SPELL_FAILURE, got {opcode:#?}"),
+        };
+
+        assert_eq!(t.as_ref(), &expected);
+        assert_eq!(t.size() + HEADER_SIZE, RAW0.len());
+
+        let mut dest = Vec::with_capacity(RAW0.len());
+        expected.tokio_write_unencrypted_server(&mut std::io::Cursor::new(&mut dest)).await.unwrap();
+
+        assert_eq!(dest, RAW0);
+    }
+
+    // Generated from `wow_message_parser/wowm/world/spell/smsg_spell_failure.wowm` line 18.
+    #[cfg(feature = "async-std")]
+    #[cfg_attr(feature = "async-std", async_std::test)]
+    async fn astd_smsg_spell_failure0() {
+        let expected = expected0();
+        let t = ServerOpcodeMessage::astd_read_unencrypted(&mut async_std::io::Cursor::new(&RAW0)).await.unwrap();
+        let t = match t {
+            ServerOpcodeMessage::SMSG_SPELL_FAILURE(t) => t,
+            opcode => panic!("incorrect opcode. Expected SMSG_SPELL_FAILURE, got {opcode:#?}"),
+        };
+
+        assert_eq!(t.as_ref(), &expected);
+        assert_eq!(t.size() + HEADER_SIZE, RAW0.len());
+
+        let mut dest = Vec::with_capacity(RAW0.len());
+        expected.astd_write_unencrypted_server(&mut async_std::io::Cursor::new(&mut dest)).await.unwrap();
+
+        assert_eq!(dest, RAW0);
+    }
+
+}
 
